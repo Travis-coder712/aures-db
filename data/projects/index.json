@@ -1,0 +1,110 @@
+[
+  {
+    "id": "collie-battery",
+    "name": "Collie Battery",
+    "technology": "bess",
+    "status": "development",
+    "capacity_mw": 560.0,
+    "storage_mwh": 2240.0,
+    "state": "WA",
+    "current_developer": "Synergy",
+    "data_confidence": "medium"
+  },
+  {
+    "id": "coopers-gap-wind",
+    "name": "Coopers Gap Wind Farm",
+    "technology": "wind",
+    "status": "operating",
+    "capacity_mw": 453.0,
+    "state": "QLD",
+    "current_developer": "AGL Energy",
+    "data_confidence": "good"
+  },
+  {
+    "id": "eraring-battery",
+    "name": "Eraring Battery",
+    "technology": "bess",
+    "status": "construction",
+    "capacity_mw": 460.0,
+    "storage_mwh": 1840.0,
+    "state": "NSW",
+    "current_developer": "Origin Energy",
+    "data_confidence": "medium"
+  },
+  {
+    "id": "golden-plains-wind",
+    "name": "Golden Plains Wind Farm",
+    "technology": "wind",
+    "status": "construction",
+    "capacity_mw": 1300.0,
+    "state": "VIC",
+    "current_developer": "Amplitude Energy / TagEnergy",
+    "data_confidence": "good"
+  },
+  {
+    "id": "hornsdale-power-reserve",
+    "name": "Hornsdale Power Reserve",
+    "technology": "bess",
+    "status": "operating",
+    "capacity_mw": 194.0,
+    "storage_mwh": 194.0,
+    "state": "SA",
+    "current_developer": "Neoen",
+    "data_confidence": "high"
+  },
+  {
+    "id": "new-england-solar",
+    "name": "New England Solar Farm",
+    "technology": "hybrid",
+    "status": "operating",
+    "capacity_mw": 720.0,
+    "storage_mwh": 400.0,
+    "state": "NSW",
+    "current_developer": "UPC\\AC Renewables (now Verdant)",
+    "rez": "New England REZ",
+    "data_confidence": "good"
+  },
+  {
+    "id": "stockyard-hill-wind",
+    "name": "Stockyard Hill Wind Farm",
+    "technology": "wind",
+    "status": "operating",
+    "capacity_mw": 530.0,
+    "state": "VIC",
+    "current_developer": "Goldwind Australia",
+    "data_confidence": "good"
+  },
+  {
+    "id": "victorian-big-battery",
+    "name": "Victorian Big Battery",
+    "technology": "bess",
+    "status": "operating",
+    "capacity_mw": 300.0,
+    "storage_mwh": 450.0,
+    "state": "VIC",
+    "current_developer": "Neoen",
+    "data_confidence": "high"
+  },
+  {
+    "id": "waratah-super-battery",
+    "name": "Waratah Super Battery",
+    "technology": "bess",
+    "status": "operating",
+    "capacity_mw": 850.0,
+    "storage_mwh": 1680.0,
+    "state": "NSW",
+    "current_developer": "Akaysha Energy (BlackRock)",
+    "data_confidence": "high"
+  },
+  {
+    "id": "yanco-delta",
+    "name": "Yanco Delta Solar Farm",
+    "technology": "solar",
+    "status": "development",
+    "capacity_mw": 1000.0,
+    "state": "NSW",
+    "current_developer": "Origin Energy",
+    "rez": "South-West REZ",
+    "data_confidence": "good"
+  }
+]

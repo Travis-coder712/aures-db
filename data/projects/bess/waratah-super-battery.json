@@ -1,0 +1,95 @@
+{
+  "id": "waratah-super-battery",
+  "name": "Waratah Super Battery",
+  "technology": "bess",
+  "status": "operating",
+  "capacity_mw": 850.0,
+  "storage_mwh": 1680.0,
+  "state": "NSW",
+  "lga": "Lake Macquarie",
+  "current_developer": "Akaysha Energy (BlackRock)",
+  "current_operator": "Akaysha Energy",
+  "cod_current": "2024-11",
+  "cod_original": "2025",
+  "connection_status": "Connected",
+  "connection_nsp": "Transgrid",
+  "grid_forming": false,
+  "has_sips": true,
+  "has_syncon": false,
+  "has_statcom": false,
+  "has_harmonic_filter": false,
+  "notable": "Australia's largest battery at 850MW/1,680MWh. Provides SIPS services following Eraring coal closure. Delivered ahead of schedule.",
+  "data_confidence": "high",
+  "last_updated": "2025-03-01",
+  "last_verified": "2025-03-01",
+  "coordinates": {
+    "lat": -33.07,
+    "lng": 151.52
+  },
+  "timeline": [
+    {
+      "date": "2022-11-01",
+      "date_precision": "month",
+      "event_type": "conceived",
+      "title": "NSW Government announces tender winner",
+      "sources": [
+        {
+          "title": "NSW Government",
+          "url": "https://www.nsw.gov.au/"
+        }
+      ]
+    },
+    {
+      "date": "2023-06-01",
+      "date_precision": "month",
+      "event_type": "construction_start",
+      "title": "Construction commenced",
+      "sources": [
+        {
+          "title": "RenewEconomy",
+          "url": "https://reneweconomy.com.au/",
+          "source_tier": 2
+        }
+      ]
+    },
+    {
+      "date": "2024-11-01",
+      "date_precision": "month",
+      "event_type": "cod",
+      "title": "Full commercial operations \u2014 850 MW",
+      "detail": "Commissioned as Australia's largest battery and one of the largest in the world",
+      "sources": [
+        {
+          "title": "AEMO Generation Information",
+          "url": "https://aemo.com.au"
+        }
+      ]
+    }
+  ],
+  "ownership_history": [
+    {
+      "period": "2022-present",
+      "owner": "Akaysha Energy (BlackRock)",
+      "role": "Developer & Operator"
+    }
+  ],
+  "cod_history": [],
+  "suppliers": [
+    {
+      "role": "bess_oem",
+      "supplier": "Tesla",
+      "model": "Megapack 2XL",
+      "grid_forming": false
+    }
+  ],
+  "offtakes": [],
+  "scheme_contracts": [],
+  "cost_sources": [],
+  "stakeholder_issues": [],
+  "sources": [
+    {
+      "title": "AEMO Generation Information",
+      "url": "https://aemo.com.au"
+    }
+  ]
+}

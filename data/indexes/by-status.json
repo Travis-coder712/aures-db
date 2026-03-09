@@ -1,0 +1,18 @@
+{
+  "development": [
+    "collie-battery",
+    "yanco-delta"
+  ],
+  "operating": [
+    "coopers-gap-wind",
+    "hornsdale-power-reserve",
+    "new-england-solar",
+    "stockyard-hill-wind",
+    "victorian-big-battery",
+    "waratah-super-battery"
+  ],
+  "construction": [
+    "eraring-battery",
+    "golden-plains-wind"
+  ]
+}

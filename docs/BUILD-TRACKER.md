@@ -2,7 +2,7 @@
 
 > **Last Updated:** 2026-03-10
 > **Current Phase:** Phase 1 — Foundation
-> **Current Task:** Project scaffolding and setup
+> **Status:** Core frontend complete, data pipeline built, deployed to GitHub Pages
 
 ---
 
@@ -10,11 +10,12 @@
 
 | Phase | Status | Progress |
 |-------|--------|----------|
-| Phase 1: Foundation | 🟡 In Progress | ██░░░░░░░░ 15% |
-| Phase 2: CIS/LTESA/REZ | ⬜ Not Started | ░░░░░░░░░░ 0% |
-| Phase 3: Performance | ⬜ Not Started | ░░░░░░░░░░ 0% |
-| Phase 4: Intelligence | ⬜ Not Started | ░░░░░░░░░░ 0% |
-| Phase 5: Data Enrichment | ⬜ Ongoing | ░░░░░░░░░░ 0% |
+| Phase 1: Foundation | In Progress | 85% |
+| Phase 2: CIS/LTESA/REZ | Not Started | 0% |
+| Phase 2.5: Map + NEM Summary | Not Started | 0% |
+| Phase 3: Performance | Not Started | 0% |
+| Phase 4: Intelligence | Not Started | 0% |
+| Phase 5: Data Enrichment | Ongoing | 0% |
 
 ---
 
@@ -23,26 +24,27 @@
 ### Completed
 - [x] Create GitHub repo (travis-coder712/aures-db)
 - [x] Clone and set up directory structure
-- [x] Create project documentation (PROJECT-PLAN.md, SESSION-GUIDE.md, BUILD-TRACKER.md)
-- [x] Create plain English overview
-- [x] Create vibecoding notes
-- [ ] ...continuing below
+- [x] Create project documentation (5 docs)
+- [x] Set up React 19 + Vite 6 + TypeScript + Tailwind 4 + PWA
+- [x] Build mobile-first layout (bottom nav + desktop sidebar)
+- [x] Build Home dashboard page (stats, tech browse, pipeline status, featured projects)
+- [x] Build Project list page with filters (technology, status, state)
+- [x] Build Project detail page with tabs (Overview, Timeline, Technical, Sources)
+- [x] Build universal search (Fuse.js fuzzy search)
+- [x] Build 404 page
+- [x] Deploy to GitHub Pages via GitHub Actions
+- [x] Build Guides feature (7 guides readable in-app with markdown rendering)
+- [x] Create SQLite database schema (15 tables: projects, timeline_events, sources, ownership, COD history, suppliers, offtakes, schemes, multi-source values, audit log, AEMO data, import metadata)
+- [x] Seed database with 10 exemplar projects
+- [x] Build JSON export pipeline (SQLite → static JSON: project index, per-project detail, indexes by tech/state/status/developer, stats, metadata)
+- [x] Fix source URLs to link to specific pages (AEMO Gen Info page, specific RenewEconomy articles, EnergyCo access scheme pages, NSW Planning Portal project pages)
+- [x] Enrich Coopers Gap with full timeline (FID, first generation, turbine tower felling, repairs, final turbine installation, COD)
 
-### In Progress
-- [ ] Set up React + Vite + TypeScript + Tailwind + PWA
-- [ ] Create SQLite database schema
-
-### Not Started
-- [ ] Build Python AEMO Generation Information importer
-- [ ] Build JSON export pipeline
-- [ ] Build Home dashboard page
-- [ ] Build Project list page with filters
-- [ ] Build Project detail page with tabs (Overview, Timeline, Technical, Sources)
-- [ ] Build universal search (Fuse.js)
-- [ ] Build mobile bottom navigation
-- [ ] Build desktop sidebar navigation
-- [ ] Populate 10 exemplar projects with full multi-source data
-- [ ] Deploy to GitHub Pages
+### Remaining
+- [ ] Build Python AEMO Generation Information importer (download + parse the Excel file)
+- [ ] Enrich remaining 9 exemplar projects to Coopers Gap level of depth
+- [ ] Wire frontend to load from /data/*.json instead of hardcoded TypeScript
+- [ ] PWA icons (192px, 512px)
 - [ ] Test PWA installation on iPhone
 
 ### Blockers
@@ -50,70 +52,92 @@
 
 ---
 
-## What To Build Next (For Claude)
+## Data Population Progress
 
-When resuming, the next tasks in order are:
+### Exemplar Projects (10 loaded)
 
-1. **If frontend not yet scaffolded:** Set up Vite + React + TypeScript + Tailwind + vite-plugin-pwa in /frontend
-2. **If schema not created:** Create SQLite schema in /database/schema.sql
-3. **If AEMO importer not built:** Build Python script to parse AEMO Generation Information Excel
-4. **If export not built:** Build JSON export from SQLite to /data/
-5. **If screens not built:** Build Home, ProjectList, ProjectDetail pages
-6. **If exemplars not populated:** Research and create full JSON for 10 exemplar projects
-7. **If not deployed:** Set up GitHub Pages deployment via GitHub Actions
+| # | Project | Tech | State | Data Depth |
+|---|---------|------|-------|-----------|
+| 1 | Yanco Delta Solar Farm | Solar | NSW | Good (6 timeline events, ownership change, COD drift, cost sources) |
+| 2 | Golden Plains Wind Farm | Wind | VIC | Basic (3 events, Vestas OEM) |
+| 3 | Victorian Big Battery | BESS | VIC | Good (5 events incl. Megapack fire, Tesla OEM) |
+| 4 | Hornsdale Power Reserve | BESS | SA | Good (4 events, 3 phases, Tesla OEM) |
+| 5 | Waratah Super Battery | BESS | NSW | Good (3 events, Tesla OEM, SIPS) |
+| 6 | Stockyard Hill Wind Farm | Wind | VIC | Basic (3 events, Goldwind OEM, Origin PPA) |
+| 7 | Coopers Gap Wind Farm | Wind | QLD | **Enriched** (7 events incl. FID, first gen, tower felling, repairs, final turbine, COD drift, GE EPC, specific source articles) |
+| 8 | New England Solar Farm | Hybrid | NSW | Basic (3 events) |
+| 9 | Eraring Battery | BESS | NSW | Basic (2 events, COD drift) |
+| 10 | Collie Battery | BESS | WA | Basic (1 event) |
+
+### CIS Rounds (Phase 2)
+Pilot NSW, Pilot SA-VIC, Tender 1-8 — all pending
+
+### LTESA Rounds (Phase 2)
+Round 1-6 — all pending
 
 ---
 
-## Data Population Progress
+## Architecture Built
 
-### Exemplar Projects (Phase 1 Target: 10)
-| # | Project | Technology | Status |
-|---|---------|-----------|--------|
-| 1 | Yanco Delta Wind Farm | Wind + BESS | ⬜ Not Started |
-| 2 | Golden Plains Wind Farm | Wind | ⬜ Not Started |
-| 3 | Victorian Big Battery | BESS | ⬜ Not Started |
-| 4 | Hornsdale Power Reserve | BESS | ⬜ Not Started |
-| 5 | Eraring Battery | BESS | ⬜ Not Started |
-| 6 | Waratah Super Battery | BESS | ⬜ Not Started |
-| 7 | Stockyard Hill Wind Farm | Wind | ⬜ Not Started |
-| 8 | Coopers Gap Wind Farm | Wind | ⬜ Not Started |
-| 9 | New England Solar Farm | Solar | ⬜ Not Started |
-| 10 | Collie Battery | BESS | ⬜ Not Started |
+```
+Layer 0: DATA PIPELINE (Python)  ✅ BUILT
+  pipeline/db.py              — Database connection helper
+  pipeline/exporters/         — JSON export from SQLite
+  pipeline/importers/         — (AEMO importer next)
+  pipeline/requirements.txt   — openpyxl, requests, pandas
 
-### CIS Rounds (Phase 2)
-| Round | Projects | Status |
-|-------|----------|--------|
-| Pilot NSW | 6 | ⬜ |
-| Pilot SA-VIC | 6 | ⬜ |
-| Tender 1 | 19 | ⬜ |
-| Tender 2 | 4 | ⬜ |
-| Tender 3 | 16 | ⬜ |
-| Tender 4 | 20 | ⬜ |
+Layer 1: SQLite DATABASE  ✅ BUILT
+  database/schema.sql         — 15 tables, full schema
+  database/aures.db           — Working database with 10 projects
+  database/seeds/             — Exemplar project seed script
 
-### LTESA Rounds (Phase 2)
-| Round | Projects | Status |
-|-------|----------|--------|
-| Round 1 | 4 | ⬜ |
-| Round 2 | 6 | ⬜ |
-| Round 3 | 5 | ⬜ |
-| Round 4 | 2 | ⬜ |
-| Round 5 | 3 | ⬜ |
-| Round 6 | 6 | ⬜ |
+Layer 2: STATIC JSON  ✅ BUILT
+  data/projects/index.json    — All project summaries
+  data/projects/{tech}/{id}.json — Full project detail per project
+  data/indexes/by-*.json      — Indexes by tech, state, status, developer
+  data/metadata/stats.json    — Quick stats for dashboard
+  data/metadata/last-export.json — Export timestamp
+
+Layer 3: PWA FRONTEND  ✅ BUILT & DEPLOYED
+  React 19 + TypeScript + Vite 6 + Tailwind 4
+  7 pages: Home, ProjectList, ProjectDetail, Search, Guides, GuideReader, NotFound
+  Mobile bottom nav + desktop sidebar
+  PWA with service worker (vite-plugin-pwa)
+  Live at: https://travis-coder712.github.io/aures-db/
+```
 
 ---
 
 ## Session Log
 
 ### Session 1 — 2026-03-10
-- **What happened:** Comprehensive design session. Explored data sources, architecture options, and feasibility. Decided on three-layer hybrid architecture (Python pipeline + SQLite + PWA).
-- **Key decisions:**
-  - React + Vite + Tailwind + PWA on GitHub Pages
-  - SQLite for data management, JSON for PWA consumption
-  - Multi-source intelligence model (show all sources, don't hide conflicts)
-  - Confidence rating system for data points
-  - Project timeline as core differentiating feature
-  - Performance league tables for Wind, Solar, BESS
-  - Watchlist with risk scoring for CIS/LTESA/REZ projects
-- **Data sources confirmed:** AEMO, DCCEEW, ASL, EnergyCo, AFR, RenewEconomy, WattClarity, Modo Energy, OpenElectricity, Global Energy Monitor, CEC, PV Magazine, Energy Storage News
-- **Exemplar designed:** Yanco Delta Wind Farm with full timeline model
-- **Started building:** Repo created, directory structure, documentation
+- Comprehensive design session (8 messages)
+- Explored data sources, architecture, feasibility
+- Decided on three-layer hybrid architecture
+- Key decisions: multi-source intelligence, confidence ratings, timeline as core feature
+- Created repo and documentation
+
+### Session 2 — 2026-03-10
+- Built entire Phase 1 frontend scaffold
+- Created Layout, all pages, shared components
+- Loaded 10 exemplar projects with real data
+- Deployed to GitHub Pages successfully
+- Added Guides to the PWA (7 guides with markdown rendering)
+- Added Maps & NEM Summary roadmap guides
+
+### Session 3 — 2026-03-10
+- Built SQLite database schema (15 tables)
+- Built seed script for 10 exemplar projects
+- Built JSON export pipeline (SQLite → static JSON)
+- Fixed source URLs to link to specific pages (not generic homepages)
+- Enriched Coopers Gap with full construction timeline (FID, turbine issues, tower felling, COD drift)
+
+---
+
+## What To Build Next
+
+1. **AEMO Generation Information importer** — Download and parse the AEMO Excel file to populate the database backbone
+2. **Enrich exemplar projects** — Bring all 10 projects up to the Coopers Gap level of depth (specific source articles, full timelines, all key events)
+3. **Wire frontend to JSON data** — Switch from hardcoded TypeScript sample data to fetching from /data/*.json
+4. **PWA icons** — Generate proper 192px and 512px icons
+5. **Phase 2** — CIS/LTESA round structure
