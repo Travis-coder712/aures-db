@@ -1,0 +1,130 @@
+import { useState, useMemo, useRef, useEffect } from 'react'
+import Fuse from 'fuse.js'
+import { SAMPLE_PROJECTS } from '../data/sample-projects'
+import ProjectCard from '../components/common/ProjectCard'
+
+const fuse = new Fuse(SAMPLE_PROJECTS, {
+  keys: [
+    { name: 'name', weight: 3 },
+    { name: 'current_developer', weight: 2 },
+    { name: 'current_operator', weight: 2 },
+    { name: 'state', weight: 1.5 },
+    { name: 'rez', weight: 1.5 },
+    { name: 'technology', weight: 1 },
+    { name: 'notable', weight: 1 },
+    { name: 'suppliers.supplier', weight: 1.5 },
+    { name: 'offtakes.party', weight: 1 },
+    { name: 'ownership_history.owner', weight: 1.5 },
+  ],
+  threshold: 0.3,
+  includeScore: true,
+})
+
+export default function Search() {
+  const [query, setQuery] = useState('')
+  const inputRef = useRef<HTMLInputElement>(null)
+
+  useEffect(() => {
+    inputRef.current?.focus()
+  }, [])
+
+  const results = useMemo(() => {
+    if (!query.trim()) return []
+    return fuse.search(query).map((r) => ({
+      id: r.item.id,
+      name: r.item.name,
+      technology: r.item.technology,
+      status: r.item.status,
+      capacity_mw: r.item.capacity_mw,
+      storage_mwh: r.item.storage_mwh,
+      state: r.item.state,
+      current_developer: r.item.current_developer,
+      rez: r.item.rez,
+      data_confidence: r.item.data_confidence,
+    }))
+  }, [query])
+
+  const suggestions = [
+    'Yanco Delta', 'Golden Plains', 'Neoen', 'Tesla', 'Origin',
+    'NSW', 'VIC', 'BESS', 'wind', 'Hornsdale',
+  ]
+
+  return (
+    <div className="px-4 lg:px-8 py-6 max-w-3xl mx-auto">
+      <h1 className="text-xl font-bold text-[var(--color-text)] mb-4">Search</h1>
+
+      {/* Search Input */}
+      <div className="relative mb-6">
+        <svg
+          className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-[var(--color-text-muted)]"
+          fill="none"
+          viewBox="0 0 24 24"
+          strokeWidth={1.5}
+          stroke="currentColor"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
+          />
+        </svg>
+        <input
+          ref={inputRef}
+          type="text"
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          placeholder="Search projects, developers, OEMs, states..."
+          className="w-full bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl pl-10 pr-4 py-3 text-sm text-[var(--color-text)] placeholder:text-[var(--color-text-muted)] focus:outline-none focus:border-[var(--color-primary)] transition-colors"
+        />
+        {query && (
+          <button
+            onClick={() => setQuery('')}
+            className="absolute right-3 top-1/2 -translate-y-1/2 text-[var(--color-text-muted)] hover:text-[var(--color-text)]"
+          >
+            ×
+          </button>
+        )}
+      </div>
+
+      {/* Results or suggestions */}
+      {query.trim() ? (
+        <>
+          <p className="text-xs text-[var(--color-text-muted)] mb-4">
+            {results.length} result{results.length !== 1 ? 's' : ''} for "{query}"
+          </p>
+          <div className="space-y-3">
+            {results.map((project) => (
+              <ProjectCard key={project.id} project={project} />
+            ))}
+          </div>
+          {results.length === 0 && (
+            <div className="text-center py-12">
+              <span className="text-4xl mb-3 block">🔍</span>
+              <p className="text-sm text-[var(--color-text-muted)]">
+                No projects found for "{query}"
+              </p>
+              <p className="text-xs text-[var(--color-text-muted)]/60 mt-1">
+                Try searching by project name, developer, OEM, or state
+              </p>
+            </div>
+          )}
+        </>
+      ) : (
+        <div>
+          <p className="text-xs text-[var(--color-text-muted)] mb-3">Try searching for:</p>
+          <div className="flex flex-wrap gap-2">
+            {suggestions.map((s) => (
+              <button
+                key={s}
+                onClick={() => setQuery(s)}
+                className="text-xs px-3 py-1.5 rounded-full bg-[var(--color-bg-card)] border border-[var(--color-border)] text-[var(--color-text-muted)] hover:text-[var(--color-text)] hover:border-[var(--color-primary)]/30 transition-colors"
+              >
+                {s}
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  )
+}

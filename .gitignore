@@ -1,0 +1,28 @@
+# Dependencies
+node_modules/
+
+# Build output
+frontend/dist/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+*.sw?
+
+# Env files
+.env
+.env.local
+.env.*.local
+
+# Database (will be large)
+database/*.db
+database/*.sqlite
+
+# Python
+__pycache__/
+*.pyc
+.venv/
