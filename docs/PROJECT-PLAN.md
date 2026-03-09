@@ -107,6 +107,37 @@ Tasks:
 6. [ ] Link CIS/LTESA/REZ projects back to master project records
 7. [ ] Education hub: CIS explainer, LTESA explainer, REZ explainer
 
+### Phase 2.5: Interactive Map + NEM Summary
+**Goal: Spatial intelligence and fleet-wide dashboard**
+
+Tasks:
+1. [ ] **Interactive Map** (Leaflet.js):
+   - Zoomable map of Australia with state-level entry view
+   - REZ boundaries as shaded GeoJSON polygons (NSW, VIC, QLD, SA, TAS)
+   - Existing transmission network overlay (500kV, 330kV, 275kV backbone)
+   - Interconnectors (VNI, QNI, Basslink, Heywood, Murraylink)
+   - Planned transmission upgrades with construction status:
+     - HumeLink, VNI West, Sydney Ring, Marinus Link, CopperString 2.0
+     - Energy Connect, Central-West Orana REZ transmission, New England REZ transmission
+   - Show which projects depend on each transmission upgrade
+   - Every tracked project plotted by location (color = tech, size = capacity)
+   - Click project → summary card with link to full detail
+   - Filter controls: toggle layers, filter by tech/status/developer/capacity
+2. [ ] **NEM Summary Dashboard**:
+   - Installed capacity by technology (Wind, Solar, BESS, Pumped Hydro, Hybrid)
+   - Operating vs under construction vs planned breakdown
+   - Under construction pipeline grouped by expected COD quarter
+   - Projects expected to reach COD in the next 12 months
+   - Every summary number is clickable → drill down to project list
+   - "How to check if a project is on time" guide section:
+     - AEMO Commissioning and Testing Register
+     - Generator Performance Standards (GPS) status
+     - AEMO Connections Scorecard progress
+     - CIS/LTESA milestone deadlines
+     - Developer track record analysis
+     - Supply chain indicators (OEM orders, EPC confirmation)
+   - Charts via Recharts, data from pre-computed JSON exports
+
 ### Phase 3: Performance Analytics (~2-3 weeks)
 **Goal: Operational performance league tables and AEMO data pipeline**
 

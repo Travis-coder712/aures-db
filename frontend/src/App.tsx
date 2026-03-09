@@ -4,6 +4,8 @@ import Home from './pages/Home'
 import ProjectList from './pages/ProjectList'
 import ProjectDetail from './pages/ProjectDetail'
 import Search from './pages/Search'
+import Guides from './pages/Guides'
+import GuideReader from './pages/GuideReader'
 import NotFound from './pages/NotFound'
 
 function App() {
@@ -14,6 +16,8 @@ function App() {
         <Route path="projects" element={<ProjectList />} />
         <Route path="projects/:id" element={<ProjectDetail />} />
         <Route path="search" element={<Search />} />
+        <Route path="guides" element={<Guides />} />
+        <Route path="guides/:id" element={<GuideReader />} />
         {/* Phase 2 routes */}
         {/* <Route path="cis" element={<CISRounds />} /> */}
         {/* <Route path="cis/:roundId" element={<CISRoundDetail />} /> */}

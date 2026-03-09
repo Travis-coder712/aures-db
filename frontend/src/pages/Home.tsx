@@ -182,6 +182,44 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Guides */}
+      <section className="mb-8">
+        <div className="flex items-center justify-between mb-4">
+          <h2 className="text-lg font-semibold text-[var(--color-text)]">
+            Guides & Documentation
+          </h2>
+          <Link
+            to="/guides"
+            className="text-xs text-[var(--color-primary)] hover:underline"
+          >
+            View all →
+          </Link>
+        </div>
+        <Link
+          to="/guides"
+          className="flex items-center gap-4 bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl p-4 hover:border-[var(--color-primary)]/30 transition-all"
+        >
+          <span className="text-3xl">📖</span>
+          <div className="flex-1 min-w-0">
+            <h3 className="text-sm font-semibold text-[var(--color-text)] mb-0.5">
+              Read the AURES Guides
+            </h3>
+            <p className="text-xs text-[var(--color-text-muted)] leading-relaxed">
+              Project plan, architecture, plain-English overview, build progress, and how this was built.
+            </p>
+          </div>
+          <svg
+            className="w-5 h-5 text-[var(--color-text-muted)] flex-shrink-0"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={2}
+            stroke="currentColor"
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+          </svg>
+        </Link>
+      </section>
+
       {/* Coming Soon */}
       <section className="mb-8">
         <h2 className="text-lg font-semibold text-[var(--color-text)] mb-4">
