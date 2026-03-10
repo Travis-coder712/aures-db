@@ -237,20 +237,11 @@ export default function Home() {
           Coming Soon
         </h2>
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-3">
-          {[
-            { icon: '🛡️', title: 'CIS Round Tracker', desc: 'Track all CIS tender rounds, winners, and project progress' },
-            { icon: '📈', title: 'Performance League', desc: 'Capacity factor rankings for wind, solar, and BESS projects >150MW' },
-            { icon: '👁️', title: 'Project Watchlist', desc: 'Monitor COD deadlines, risk scores, and zombie project detection' },
-          ].map((item) => (
-            <div
-              key={item.title}
-              className="bg-[var(--color-bg-card)] border border-[var(--color-border)] border-dashed rounded-xl p-4 opacity-60"
-            >
-              <span className="text-lg">{item.icon}</span>
-              <h3 className="text-sm font-semibold text-[var(--color-text)] mt-2">{item.title}</h3>
-              <p className="text-xs text-[var(--color-text-muted)] mt-1">{item.desc}</p>
-            </div>
-          ))}
+          <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] border-dashed rounded-xl p-4 opacity-60">
+            <span className="text-lg">👁️</span>
+            <h3 className="text-sm font-semibold text-[var(--color-text)] mt-2">Project Watchlist</h3>
+            <p className="text-xs text-[var(--color-text-muted)] mt-1">Monitor COD deadlines, risk scores, and zombie project detection</p>
+          </div>
         </div>
       </section>
 

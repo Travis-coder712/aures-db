@@ -5,7 +5,7 @@
  * In production (GitHub Pages), they're served as static files.
  * In development (Vite dev server), they're served from the public/ directory.
  */
-import type { ProjectSummary, Project, Technology, ProjectStatus, State } from './types'
+import type { ProjectSummary, Project, Technology, ProjectStatus, State, LeagueTable, LeagueTableIndex, LeagueTechnology } from './types'
 
 const BASE = import.meta.env.BASE_URL + 'data'
 
@@ -94,6 +94,34 @@ export async function fetchProjectById(id: string): Promise<Project | null> {
   const summary = await findProjectSummary(id)
   if (!summary) return null
   return fetchProject(summary.technology, id)
+}
+
+// ============================================================
+// Performance / League Table Fetchers
+// ============================================================
+
+let leagueIndexCache: LeagueTableIndex | null = null
+
+export async function fetchLeagueTableIndex(): Promise<LeagueTableIndex | null> {
+  if (leagueIndexCache) return leagueIndexCache
+  try {
+    const resp = await fetch(`${BASE}/performance/league-tables/index.json`)
+    if (!resp.ok) return null
+    leagueIndexCache = (await resp.json()) as LeagueTableIndex
+    return leagueIndexCache
+  } catch {
+    return null
+  }
+}
+
+export async function fetchLeagueTable(tech: LeagueTechnology, year: number): Promise<LeagueTable | null> {
+  try {
+    const resp = await fetch(`${BASE}/performance/league-tables/${tech}-${year}.json`)
+    if (!resp.ok) return null
+    return (await resp.json()) as LeagueTable
+  } catch {
+    return null
+  }
 }
 
 /**

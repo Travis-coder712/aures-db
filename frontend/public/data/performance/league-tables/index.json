@@ -1,0 +1,28 @@
+{
+  "available_years": [
+    2025
+  ],
+  "technologies": [
+    "bess",
+    "solar",
+    "wind"
+  ],
+  "tables": [
+    {
+      "year": 2025,
+      "technology": "bess",
+      "count": 62
+    },
+    {
+      "year": 2025,
+      "technology": "solar",
+      "count": 80
+    },
+    {
+      "year": 2025,
+      "technology": "wind",
+      "count": 82
+    }
+  ],
+  "last_updated": "2026-03-10T23:59:05.861185"
+}

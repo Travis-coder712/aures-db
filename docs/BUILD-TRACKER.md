@@ -1,8 +1,8 @@
 # AURES Database — Build Tracker
 
-> **Last Updated:** 2026-03-10
-> **Current Phase:** Phase 2.5 — NEM Dashboard + REZ Tracking
-> **Status:** Phase 1 + Phase 2 + Phase 2.5 complete. 1,067 projects live. NEM Fleet Dashboard with charts. 18 REZ zones tracked across 5 states.
+> **Last Updated:** 2026-03-11
+> **Current Phase:** Phase 3 — Performance Analytics
+> **Status:** Phases 1-3 complete. 1,067 projects, 224 with performance data. League tables for wind (82), solar (80), BESS (62). OpenElectricity API integrated.
 
 ---
 
@@ -13,7 +13,7 @@
 | Phase 1: Foundation | ✅ Complete | 95% |
 | Phase 2: CIS/LTESA/REZ | ✅ Complete | 100% |
 | Phase 2.5: NEM Dashboard + REZ | ✅ Complete | 100% |
-| Phase 3: Performance | Preview Built | 10% |
+| Phase 3: Performance | ✅ Complete | 100% |
 | Phase 4: Intelligence | Not Started | 0% |
 | Phase 5: Data Enrichment | Ongoing | 5% |
 
@@ -107,6 +107,38 @@
 
 ---
 
+## Phase 3: Performance Analytics — ✅ COMPLETE
+
+### Data Pipeline
+- [x] Database schema: `performance_annual` + `league_table_entries` tables (migration 003)
+- [x] OpenElectricity API importer (`import_openelectricity.py`) — live API + `--sample` mode
+- [x] League table processor (`compute_league_tables.py`) — rankings, percentiles, quartiles, composite scores
+- [x] JSON export additions — league table JSONs, quartile benchmarks
+- [x] OpenElectricity API key obtained and stored (Community plan)
+
+### Frontend
+- [x] Performance page (`/performance`) — sortable league tables with tech tabs (Wind/Solar/BESS)
+- [x] Fleet summary cards (projects ranked, avg CF, avg Rev/MW, avg curtailment)
+- [x] Year dropdown + state filter pills
+- [x] BESS-specific columns (Spread, Util%, Cycles)
+- [x] Quartile distribution chart (Recharts)
+- [x] Color-coded metrics (CF%, curtailment) and quartile badges (Q1-Q4)
+- [x] `usePerformanceData.ts` hooks (useLeagueTableIndex, useLeagueTable, useFilteredLeagueTable)
+- [x] League table types in `types.ts` (LeagueTableEntry, LeagueTable, LeagueTableIndex)
+
+### Navigation
+- [x] Desktop sidebar: 8 items (Home, Dashboard, Projects, Performance, Schemes, REZ, Guides, Search)
+- [x] Mobile bottom nav: 5 items (Home, Projects, Perf, REZ, Search)
+- [x] Performance moved from "Coming Soon" to live nav; only Watchlist remains in Coming Soon
+- [x] Home page "Coming Soon" section updated (removed CIS + Performance, only Watchlist remains)
+
+### Data Seeded
+- [x] 224 operating projects with sample performance data (2025)
+- [x] Wind: 82 ranked, Solar: 80 ranked, BESS: 62 ranked
+- [x] 8 guides (added "Using AURES on Your Phone" PWA guide)
+
+---
+
 ## Data Population Progress
 
 ### Database: 1,067 Projects
@@ -143,10 +175,12 @@ Layer 0: DATA PIPELINE (Python)  ✅ BUILT
   pipeline/db.py                    — Database connection helper
   pipeline/exporters/export_json.py — SQLite → JSON export
   pipeline/importers/import_aemo_gen_info.py — AEMO Excel importer
-  pipeline/requirements.txt         — openpyxl, requests, pandas
+  pipeline/importers/import_openelectricity.py — OpenElectricity API importer
+  pipeline/processors/compute_league_tables.py — League table ranking engine
+  pipeline/requirements.txt         — openpyxl, requests, pandas, openelectricity
 
 Layer 1: SQLite DATABASE  ✅ BUILT
-  database/schema.sql               — 15 tables, full schema
+  database/schema.sql               — 17 tables, full schema (incl. performance_annual, league_table_entries)
   database/aures.db                 — 1,067 projects
   database/seeds/                   — Exemplar project seed script
 
@@ -156,6 +190,8 @@ Layer 2: STATIC JSON  ✅ BUILT
   projects/index.json               — 1,067 project summaries (303KB)
   projects/{tech}/{id}.json         — Individual project detail
   indexes/by-*.json                 — Indexes by tech, state, status, developer
+  performance/league-tables/*.json  — League table rankings by tech+year
+  performance/quartile-benchmarks/  — Quartile stats per metric
   metadata/stats.json               — Quick stats for dashboard
 
 Layer 3: PWA FRONTEND  ✅ BUILT & DEPLOYED
@@ -163,7 +199,7 @@ Layer 3: PWA FRONTEND  ✅ BUILT & DEPLOYED
   Async data loading (dataService.ts + useProjectData hooks)
   Fuse.js search across 1,067 projects
   Performance charts (recharts) for operating assets
-  12 pages: Home, Dashboard, ProjectList, ProjectDetail, Search, Guides, GuideReader, SchemesOverview, SchemeRoundDetail, REZList, REZDetail, NotFound
+  13 pages: Home, Dashboard, ProjectList, ProjectDetail, Performance, Search, Guides, GuideReader, SchemesOverview, SchemeRoundDetail, REZList, REZDetail, NotFound
   Mobile bottom nav + desktop sidebar
   PWA with service worker (vite-plugin-pwa)
   Live at: https://travis-coder712.github.io/aures-db/
@@ -245,11 +281,25 @@ Layer 3: PWA FRONTEND  ✅ BUILT & DEPLOYED
 - Map view deferred (99% of projects lack coordinates)
 - Phase 2.5 declared complete
 
+### Session 7 — 2026-03-11
+- Built Phase 3: Performance Analytics (full pipeline + frontend)
+- Created `performance_annual` + `league_table_entries` database tables
+- Built OpenElectricity API importer with `--sample` mode for dev
+- Built league table processor (rankings, percentiles, quartiles, composite scores)
+- Extended JSON exporter with performance data output
+- Built Performance page with sortable league tables, tech tabs, state filters
+- Wind (82), Solar (80), BESS (62) projects ranked with sample data
+- Updated navigation: Performance in sidebar (8 items) + mobile nav (5 items, "Perf" replaces "Schemes")
+- Added "Using AURES on Your Phone" guide (PWA installation + update instructions)
+- Obtained and stored OpenElectricity API key (Community plan)
+- Updated Home page: removed completed items from "Coming Soon"
+
 ---
 
 ## What To Build Next
 
-1. **Map view** — Plot projects on an Australian map (needs coordinate data sourcing)
-2. **Data enrichment** — Enrich remaining 9 exemplar projects to Coopers Gap depth (Phase 5)
-3. **REZ–project linking** — Add `rez` field to projects in master DB for better REZ detail pages
-4. **Performance dashboards** — Operating asset metrics (Phase 3)
+1. **Real performance data** — Run importer with OpenElectricity API key to replace sample data
+2. **Map view** — Plot projects on an Australian map (needs coordinate data sourcing)
+3. **Data enrichment** — Enrich remaining 9 exemplar projects to Coopers Gap depth (Phase 5)
+4. **REZ–project linking** — Add `rez` field to projects in master DB for better REZ detail pages
+5. **Watchlist** — COD deadline monitoring, risk scores, zombie project detection (Phase 4)

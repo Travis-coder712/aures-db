@@ -78,6 +78,7 @@ const NAV_ITEMS = [
   { path: '/', label: 'Home', icon: HomeIcon },
   { path: '/dashboard', label: 'Dashboard', icon: ChartIcon },
   { path: '/projects', label: 'Projects', icon: DatabaseIcon },
+  { path: '/performance', label: 'Performance', icon: TrendingIcon },
   { path: '/schemes', label: 'Schemes', icon: ShieldIcon },
   { path: '/rez', label: 'REZ', icon: MapIcon },
   { path: '/guides', label: 'Guides', icon: BookIcon },
@@ -88,7 +89,7 @@ const NAV_ITEMS = [
 const MOBILE_NAV_ITEMS = [
   { path: '/', label: 'Home', icon: HomeIcon },
   { path: '/projects', label: 'Projects', icon: DatabaseIcon },
-  { path: '/schemes', label: 'Schemes', icon: ShieldIcon },
+  { path: '/performance', label: 'Perf', icon: TrendingIcon },
   { path: '/rez', label: 'REZ', icon: MapIcon },
   { path: '/search', label: 'Search', icon: SearchIcon },
 ]
@@ -198,6 +199,5 @@ export default function Layout() {
 
 // Future nav items (greyed out)
 const FUTURE_ITEMS = [
-  { label: 'Performance', icon: TrendingIcon },
   { label: 'Watchlist', icon: EyeIcon },
 ]

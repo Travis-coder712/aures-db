@@ -253,7 +253,10 @@ def export_all(db_path=DB_PATH):
     write_json(os.path.join(DATA_DIR, 'metadata', 'stats.json'), stats)
     print(f"  metadata/stats.json")
 
-    # 5. Export metadata
+    # 5. Performance / League Tables
+    export_performance_data(conn)
+
+    # 6. Export metadata
     write_json(os.path.join(DATA_DIR, 'metadata', 'last-export.json'), {
         'exported_at': datetime.now().isoformat(),
         'project_count': len(summaries),
@@ -263,6 +266,123 @@ def export_all(db_path=DB_PATH):
 
     conn.close()
     print("\nExport complete!")
+
+
+def export_performance_data(conn):
+    """Export league tables and performance data to JSON."""
+    perf_dir = os.path.join(DATA_DIR, 'performance')
+
+    # Check what years/techs have league data
+    rows = conn.execute("""
+        SELECT DISTINCT year, technology, COUNT(*) as count
+        FROM league_table_entries
+        GROUP BY year, technology
+        ORDER BY year, technology
+    """).fetchall()
+
+    if not rows:
+        print("  performance/ (no league table data)")
+        return
+
+    available = [{'year': r['year'], 'technology': r['technology'], 'count': r['count']} for r in rows]
+    years = sorted(set(r['year'] for r in rows))
+    technologies = sorted(set(r['technology'] for r in rows))
+
+    # League table index
+    write_json(os.path.join(perf_dir, 'league-tables', 'index.json'), {
+        'available_years': years,
+        'technologies': technologies,
+        'tables': available,
+        'last_updated': datetime.now().isoformat(),
+    })
+
+    # Per-tech-year league tables
+    for year in years:
+        for tech in technologies:
+            entries = conn.execute("""
+                SELECT
+                    lt.project_id, lt.rank_composite, lt.quartile, lt.composite_score,
+                    lt.rank_capacity_factor, lt.rank_revenue_per_mw, lt.rank_curtailment,
+                    lt.percentile_capacity_factor, lt.percentile_revenue_per_mw,
+                    p.name, p.technology, p.capacity_mw, p.storage_mwh, p.state,
+                    pa.energy_mwh, pa.capacity_factor_pct, pa.curtailment_pct,
+                    pa.energy_price_received, pa.revenue_aud, pa.revenue_per_mw,
+                    pa.market_value_aud,
+                    pa.energy_charged_mwh, pa.energy_discharged_mwh,
+                    pa.avg_charge_price, pa.avg_discharge_price,
+                    pa.utilisation_pct, pa.cycles
+                FROM league_table_entries lt
+                JOIN projects p ON lt.project_id = p.id
+                LEFT JOIN performance_annual pa ON lt.project_id = pa.project_id AND lt.year = pa.year
+                WHERE lt.year = ? AND lt.technology = ?
+                ORDER BY lt.rank_composite ASC
+            """, (year, tech)).fetchall()
+
+            if not entries:
+                continue
+
+            projects_list = []
+            for e in entries:
+                entry = clean_none_values(dict(e))
+                projects_list.append(entry)
+
+            # Compute fleet averages
+            cf_vals = [e['capacity_factor_pct'] for e in entries if e['capacity_factor_pct']]
+            rev_vals = [e['revenue_per_mw'] for e in entries if e['revenue_per_mw']]
+            curt_vals = [e['curtailment_pct'] for e in entries if e['curtailment_pct']]
+
+            fleet_avg = {
+                'capacity_factor_pct': round(sum(cf_vals) / len(cf_vals), 2) if cf_vals else None,
+                'revenue_per_mw': round(sum(rev_vals) / len(rev_vals), 0) if rev_vals else None,
+                'curtailment_pct': round(sum(curt_vals) / len(curt_vals), 2) if curt_vals else None,
+                'count': len(entries),
+            }
+
+            write_json(os.path.join(perf_dir, 'league-tables', f'{tech}-{year}.json'), {
+                'year': year,
+                'technology': tech,
+                'fleet_avg': clean_none_values(fleet_avg),
+                'projects': projects_list,
+            })
+
+    # Quartile benchmarks per tech per year
+    for year in years:
+        for tech in technologies:
+            entries = conn.execute("""
+                SELECT pa.capacity_factor_pct, pa.revenue_per_mw, pa.curtailment_pct,
+                       lt.quartile
+                FROM league_table_entries lt
+                JOIN performance_annual pa ON lt.project_id = pa.project_id AND lt.year = pa.year
+                WHERE lt.year = ? AND lt.technology = ?
+                ORDER BY pa.capacity_factor_pct DESC
+            """, (year, tech)).fetchall()
+
+            if not entries:
+                continue
+
+            cf_vals = sorted([e['capacity_factor_pct'] for e in entries if e['capacity_factor_pct']])
+            rev_vals = sorted([e['revenue_per_mw'] for e in entries if e['revenue_per_mw']])
+
+            def quartiles(vals):
+                n = len(vals)
+                if n < 4:
+                    return {'q1': vals[0] if vals else 0, 'median': vals[n//2] if vals else 0, 'q3': vals[-1] if vals else 0}
+                return {
+                    'q1': vals[n // 4],
+                    'median': vals[n // 2],
+                    'q3': vals[3 * n // 4],
+                }
+
+            write_json(os.path.join(perf_dir, 'quartile-benchmarks', f'{tech}-{year}.json'), {
+                'year': year,
+                'technology': tech,
+                'benchmarks': {
+                    'capacity_factor': quartiles(cf_vals),
+                    'revenue_per_mw': quartiles(rev_vals),
+                }
+            })
+
+    print(f"  performance/ (league tables for {len(years)} years, {len(technologies)} techs)")
 
 
 if __name__ == '__main__':

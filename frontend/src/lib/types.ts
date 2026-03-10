@@ -220,6 +220,73 @@ export interface REZ {
   sources: SourceReference[]
 }
 
+// League Table types (Phase 3)
+export type LeagueTechnology = 'wind' | 'solar' | 'bess'
+
+export interface LeagueTableEntry {
+  project_id: string
+  name: string
+  technology: Technology
+  capacity_mw: number
+  storage_mwh?: number | null
+  state: State
+
+  // Performance metrics
+  energy_mwh?: number
+  capacity_factor_pct?: number
+  curtailment_pct?: number
+  energy_price_received?: number
+  revenue_aud?: number
+  revenue_per_mw?: number
+  market_value_aud?: number
+
+  // BESS metrics
+  energy_charged_mwh?: number
+  energy_discharged_mwh?: number
+  avg_charge_price?: number
+  avg_discharge_price?: number
+  utilisation_pct?: number
+  cycles?: number
+
+  // Rankings
+  rank_composite: number
+  rank_capacity_factor?: number
+  rank_revenue_per_mw?: number
+  rank_curtailment?: number
+  quartile: 1 | 2 | 3 | 4
+  composite_score: number
+  percentile_capacity_factor?: number
+  percentile_revenue_per_mw?: number
+}
+
+export interface LeagueTable {
+  year: number
+  technology: LeagueTechnology
+  fleet_avg: {
+    capacity_factor_pct?: number
+    revenue_per_mw?: number
+    curtailment_pct?: number
+    count: number
+  }
+  projects: LeagueTableEntry[]
+}
+
+export interface LeagueTableIndex {
+  available_years: number[]
+  technologies: LeagueTechnology[]
+  tables: { year: number; technology: string; count: number }[]
+  last_updated: string
+}
+
+export interface QuartileBenchmarks {
+  year: number
+  technology: LeagueTechnology
+  benchmarks: {
+    capacity_factor: { q1: number; median: number; q3: number }
+    revenue_per_mw: { q1: number; median: number; q3: number }
+  }
+}
+
 // Technology display helpers
 export const TECHNOLOGY_CONFIG: Record<Technology, { label: string; color: string; icon: string }> = {
   wind: { label: 'Wind', color: '#3b82f6', icon: '💨' },

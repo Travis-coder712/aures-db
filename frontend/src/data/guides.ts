@@ -822,6 +822,75 @@ The NEM summary answers the question everyone in the industry asks: "What's actu
 
 For investors, it shows the supply pipeline. For policy analysts, it shows whether targets are being met. For developers, it shows the competitive landscape. For anyone following the energy transition, it shows real progress (or lack thereof).`,
   },
+  {
+    id: 'using-aures',
+    title: 'Using AURES on Your Phone',
+    description: 'How to install the PWA, update to the latest version, and troubleshoot common issues.',
+    icon: '📱',
+    category: 'about',
+    readingTime: '3 min read',
+    content: `# Using AURES on Your Phone
+
+## Installing the PWA
+
+AURES is a Progressive Web App (PWA). You can install it on your phone for quick access:
+
+### iPhone (Safari)
+1. Open **https://travis-coder712.github.io/aures-db/** in Safari
+2. Tap the **Share** button (square with arrow)
+3. Scroll down and tap **Add to Home Screen**
+4. Tap **Add** in the top right
+
+### Android (Chrome)
+1. Open **https://travis-coder712.github.io/aures-db/** in Chrome
+2. Tap the **three-dot menu** in the top right
+3. Tap **Add to Home Screen** or **Install App**
+4. Confirm the installation
+
+---
+
+## Updating to the Latest Version
+
+AURES uses a service worker to cache the app for offline use. This means your phone may show an older version even after updates are deployed. Here's how to force an update:
+
+### Quick Fix — Hard Refresh
+1. Open AURES in your phone's browser (not the installed PWA)
+2. Pull down to refresh, or use the browser's reload button
+3. The service worker will check for updates in the background
+4. Close and reopen the app — the new version should load
+
+### If That Doesn't Work — Clear Cache
+**iPhone:**
+1. Go to **Settings > Safari > Advanced > Website Data**
+2. Find **travis-coder712.github.io** and swipe to delete
+3. Reopen AURES in Safari
+
+**Android:**
+1. Go to **Settings > Apps > Chrome** (or your browser)
+2. Tap **Storage > Clear Cache**
+3. Reopen AURES
+
+### Nuclear Option — Reinstall the PWA
+1. Delete the AURES app from your home screen
+2. Open the URL fresh in your browser
+3. Reinstall using the steps above
+
+---
+
+## Troubleshooting
+
+**App shows old data or missing pages:**
+This is almost always a service worker cache issue. Follow the update steps above.
+
+**App won't install:**
+Make sure you're using Safari on iPhone or Chrome on Android. Other browsers may not support PWA installation.
+
+**Pages load slowly:**
+The first load fetches ~300KB of project data. Subsequent loads are cached and should be instant. If you're on a slow connection, give it a moment.
+
+**Charts don't render:**
+Make sure JavaScript is enabled in your browser settings. Some content blockers can interfere with chart rendering.`,
+  },
 ]
 
 export const GUIDE_CATEGORIES = {

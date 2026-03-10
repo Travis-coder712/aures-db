@@ -11,6 +11,7 @@ import SchemeRoundDetail from './pages/SchemeRoundDetail'
 import Dashboard from './pages/Dashboard'
 import REZList from './pages/REZList'
 import REZDetail from './pages/REZDetail'
+import Performance from './pages/Performance'
 import NotFound from './pages/NotFound'
 
 function App() {
@@ -30,9 +31,10 @@ function App() {
         <Route path="dashboard" element={<Dashboard />} />
         <Route path="rez" element={<REZList />} />
         <Route path="rez/:id" element={<REZDetail />} />
+        {/* Phase 3: Performance */}
+        <Route path="performance" element={<Performance />} />
         {/* Future routes */}
         {/* <Route path="watchlist" element={<Watchlist />} /> */}
-        {/* <Route path="performance" element={<Performance />} /> */}
         {/* <Route path="developers" element={<DeveloperList />} /> */}
         <Route path="*" element={<NotFound />} />
       </Route>
