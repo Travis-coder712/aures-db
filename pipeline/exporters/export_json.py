@@ -20,7 +20,8 @@ from datetime import datetime
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 from db import get_connection, DB_PATH
 
-DATA_DIR = os.path.join(os.path.dirname(__file__), '..', '..', 'data')
+# Export to frontend/public/data/ so Vite serves it in dev and includes it in build
+DATA_DIR = os.path.join(os.path.dirname(__file__), '..', '..', 'frontend', 'public', 'data')
 
 
 def ensure_dir(path):

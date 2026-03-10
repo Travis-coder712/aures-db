@@ -1,6 +1,6 @@
 import { useState, useMemo } from 'react'
 import { useSearchParams } from 'react-router-dom'
-import { PROJECT_SUMMARIES } from '../data/sample-projects'
+import { useProjectIndex } from '../hooks/useProjectData'
 import { TECHNOLOGY_CONFIG, STATUS_CONFIG, type Technology, type ProjectStatus, type State } from '../lib/types'
 import ProjectCard from '../components/common/ProjectCard'
 
@@ -10,13 +10,14 @@ export default function ProjectList() {
   const [searchParams, setSearchParams] = useSearchParams()
   const [sortBy, setSortBy] = useState<SortKey>('capacity_mw')
   const [sortDesc, setSortDesc] = useState(true)
+  const { projects: allProjects, loading } = useProjectIndex()
 
   const techFilter = searchParams.get('tech') as Technology | null
   const statusFilter = searchParams.get('status') as ProjectStatus | null
   const stateFilter = searchParams.get('state') as State | null
 
   const filtered = useMemo(() => {
-    let result = [...PROJECT_SUMMARIES]
+    let result = [...allProjects]
 
     if (techFilter) result = result.filter((p) => p.technology === techFilter)
     if (statusFilter) result = result.filter((p) => p.status === statusFilter)
@@ -34,16 +35,25 @@ export default function ProjectList() {
         case 'state':
           cmp = a.state.localeCompare(b.state)
           break
-        case 'status':
+        case 'status': {
           const statusOrder = { operating: 0, commissioning: 1, construction: 2, development: 3, withdrawn: 4 }
           cmp = statusOrder[a.status] - statusOrder[b.status]
           break
+        }
       }
       return sortDesc ? -cmp : cmp
     })
 
     return result
-  }, [techFilter, statusFilter, stateFilter, sortBy, sortDesc])
+  }, [allProjects, techFilter, statusFilter, stateFilter, sortBy, sortDesc])
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center min-h-[60dvh]">
+        <div className="text-sm text-[var(--color-text-muted)] animate-pulse">Loading projects...</div>
+      </div>
+    )
+  }
 
   const totalCapacity = filtered.reduce((sum, p) => sum + p.capacity_mw, 0)
   const activeFilters = [techFilter, statusFilter, stateFilter].filter(Boolean).length

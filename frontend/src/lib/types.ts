@@ -140,6 +140,29 @@ export interface Project {
   aemo_gen_info_id?: string
 }
 
+// Performance data (Phase 3 preview — sample data)
+export interface AnnualPerformance {
+  year: number
+  // Wind/Solar/Hybrid
+  energy_price_received?: number  // $/MWh volume-weighted average
+  curtailment_pct?: number        // % of potential generation curtailed
+  capacity_factor_pct?: number    // % capacity utilisation
+  // BESS
+  avg_charge_price?: number       // $/MWh
+  avg_discharge_price?: number    // $/MWh
+  utilisation_pct?: number        // % of hours actively cycling
+  cycles?: number                 // charge/discharge cycles
+}
+
+export interface ProjectPerformance {
+  project_id: string
+  ytd_price?: number              // $/MWh year-to-date (wind/solar)
+  ytd_charge_price?: number       // $/MWh year-to-date (BESS)
+  ytd_discharge_price?: number    // $/MWh year-to-date (BESS)
+  ytd_period: string              // e.g. "Jan–Mar 2026"
+  annual: AnnualPerformance[]
+}
+
 // Summary type for list views (lightweight)
 export interface ProjectSummary {
   id: string

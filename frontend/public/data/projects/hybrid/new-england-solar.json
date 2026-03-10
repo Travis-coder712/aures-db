@@ -1,0 +1,89 @@
+{
+  "id": "new-england-solar",
+  "name": "New England Solar Farm",
+  "technology": "hybrid",
+  "status": "operating",
+  "capacity_mw": 720.0,
+  "storage_mwh": 400.0,
+  "state": "NSW",
+  "rez": "New England REZ",
+  "lga": "Uralla Shire",
+  "current_developer": "UPC\\AC Renewables (now Verdant)",
+  "current_operator": "UPC\\AC Renewables",
+  "cod_current": "2023-12",
+  "cod_original": "2022",
+  "connection_status": "Connected",
+  "connection_nsp": "TransGrid",
+  "grid_forming": false,
+  "has_sips": false,
+  "has_syncon": false,
+  "has_statcom": false,
+  "has_harmonic_filter": false,
+  "notable": "One of Australia's largest hybrid (solar + BESS) facilities. Located in the New England REZ.",
+  "data_confidence": "good",
+  "last_updated": "2025-03-01",
+  "last_verified": "2025-03-01",
+  "coordinates": {
+    "lat": -30.55,
+    "lng": 151.65
+  },
+  "timeline": [
+    {
+      "date": "2019-01-01",
+      "date_precision": "year",
+      "event_type": "construction_start",
+      "title": "Construction commenced",
+      "sources": [
+        {
+          "title": "RenewEconomy",
+          "url": "https://reneweconomy.com.au/",
+          "source_tier": 2
+        }
+      ]
+    },
+    {
+      "date": "2022-06-01",
+      "date_precision": "month",
+      "event_type": "cod",
+      "title": "Stage 1 solar operational \u2014 400 MW",
+      "sources": [
+        {
+          "title": "AEMO Generation Information",
+          "url": "https://aemo.com.au"
+        }
+      ]
+    },
+    {
+      "date": "2023-12-01",
+      "date_precision": "month",
+      "event_type": "cod",
+      "title": "Stage 2 with BESS \u2014 720 MW total",
+      "detail": "Includes 50MW/400MWh battery. One of Australia's first large-scale hybrid facilities.",
+      "sources": [
+        {
+          "title": "AEMO Generation Information",
+          "url": "https://aemo.com.au"
+        }
+      ]
+    }
+  ],
+  "ownership_history": [
+    {
+      "period": "2019-present",
+      "owner": "UPC\\AC Renewables",
+      "role": "Developer & Operator"
+    }
+  ],
+  "cod_history": [],
+  "suppliers": [],
+  "offtakes": [],
+  "scheme_contracts": [],
+  "cost_sources": [],
+  "stakeholder_issues": [],
+  "sources": [
+    {
+      "title": "AEMO Generation Information",
+      "url": "https://aemo.com.au"
+    }
+  ]
+}

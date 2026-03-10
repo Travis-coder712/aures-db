@@ -1,23 +1,23 @@
 import { Link } from 'react-router-dom'
-import { SAMPLE_PROJECTS, getQuickStats } from '../data/sample-projects'
+import { useProjectIndex, useStats } from '../hooks/useProjectData'
 import { TECHNOLOGY_CONFIG, STATUS_CONFIG } from '../lib/types'
 import ProjectCard from '../components/common/ProjectCard'
 import StatCard from '../components/common/StatCard'
 
 export default function Home() {
-  const stats = getQuickStats()
-  const recentProjects = SAMPLE_PROJECTS.slice(0, 4).map((p) => ({
-    id: p.id,
-    name: p.name,
-    technology: p.technology,
-    status: p.status,
-    capacity_mw: p.capacity_mw,
-    storage_mwh: p.storage_mwh,
-    state: p.state,
-    current_developer: p.current_developer,
-    rez: p.rez,
-    data_confidence: p.data_confidence,
-  }))
+  const { stats, loading: statsLoading } = useStats()
+  const { projects, loading: projectsLoading } = useProjectIndex()
+
+  // Featured: pick enriched projects first (high/good confidence), then by capacity
+  const featured = [...projects]
+    .sort((a, b) => {
+      const confOrder = { high: 0, good: 1, medium: 2, low: 3, unverified: 4 }
+      const ca = confOrder[a.data_confidence] ?? 4
+      const cb = confOrder[b.data_confidence] ?? 4
+      if (ca !== cb) return ca - cb
+      return b.capacity_mw - a.capacity_mw
+    })
+    .slice(0, 4)
 
   return (
     <div className="px-4 lg:px-8 py-6 max-w-7xl mx-auto">
@@ -34,31 +34,39 @@ export default function Home() {
 
       {/* Quick Stats */}
       <section className="mb-8">
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
-          <StatCard
-            label="Projects Tracked"
-            value={stats.total}
-            sublabel={`${stats.states.length} states`}
-          />
-          <StatCard
-            label="Total Capacity"
-            value={`${(stats.totalCapacity / 1000).toFixed(1)} GW`}
-            sublabel="Generation + storage"
-            color="var(--color-primary)"
-          />
-          <StatCard
-            label="Storage"
-            value={`${(stats.totalStorage / 1000).toFixed(1)} GWh`}
-            sublabel="BESS + pumped hydro"
-            color="var(--color-bess)"
-          />
-          <StatCard
-            label="Operating"
-            value={stats.operating}
-            sublabel={`${stats.construction} in construction`}
-            color="var(--color-operating)"
-          />
-        </div>
+        {statsLoading || !stats ? (
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
+            {[1, 2, 3, 4].map((i) => (
+              <div key={i} className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl p-4 animate-pulse h-20" />
+            ))}
+          </div>
+        ) : (
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
+            <StatCard
+              label="Projects Tracked"
+              value={stats.total}
+              sublabel={`${Object.keys(stats.by_state).length} states`}
+            />
+            <StatCard
+              label="Total Capacity"
+              value={`${(stats.total_capacity_mw / 1000).toFixed(0)} GW`}
+              sublabel="Generation + storage"
+              color="var(--color-primary)"
+            />
+            <StatCard
+              label="Storage"
+              value={`${(stats.total_storage_mwh / 1000).toFixed(0)} GWh`}
+              sublabel="BESS + pumped hydro"
+              color="var(--color-bess)"
+            />
+            <StatCard
+              label="Operating"
+              value={stats.by_status?.operating?.count ?? 0}
+              sublabel={`${stats.by_status?.construction?.count ?? 0} in construction`}
+              color="var(--color-operating)"
+            />
+          </div>
+        )}
       </section>
 
       {/* Browse by Technology */}
@@ -77,10 +85,9 @@ export default function Home() {
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
           {(['wind', 'solar', 'bess', 'hybrid'] as const).map((tech) => {
             const config = TECHNOLOGY_CONFIG[tech]
-            const count = SAMPLE_PROJECTS.filter((p) => p.technology === tech).length
-            const capacity = SAMPLE_PROJECTS
-              .filter((p) => p.technology === tech)
-              .reduce((sum, p) => sum + p.capacity_mw, 0)
+            const techStats = stats?.by_technology?.[tech]
+            const count = techStats?.count ?? 0
+            const capacity = techStats?.capacity_mw ?? 0
             return (
               <Link
                 key={tech}
@@ -99,7 +106,7 @@ export default function Home() {
                 <p className="text-[11px] text-[var(--color-text-muted)]">
                   {capacity >= 1000
                     ? `${(capacity / 1000).toFixed(1)} GW`
-                    : `${capacity} MW`
+                    : `${Math.round(capacity)} MW`
                   } capacity
                 </p>
               </Link>
@@ -116,7 +123,7 @@ export default function Home() {
         <div className="grid grid-cols-2 lg:grid-cols-5 gap-2">
           {(['operating', 'commissioning', 'construction', 'development', 'withdrawn'] as const).map((status) => {
             const config = STATUS_CONFIG[status]
-            const count = SAMPLE_PROJECTS.filter((p) => p.status === status).length
+            const count = stats?.by_status?.[status]?.count ?? 0
             return (
               <Link
                 key={status}
@@ -152,11 +159,15 @@ export default function Home() {
             View all →
           </Link>
         </div>
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
-          {recentProjects.map((project) => (
-            <ProjectCard key={project.id} project={project} />
-          ))}
-        </div>
+        {projectsLoading ? (
+          <div className="animate-pulse text-sm text-[var(--color-text-muted)]">Loading...</div>
+        ) : (
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
+            {featured.map((project) => (
+              <ProjectCard key={project.id} project={project} />
+            ))}
+          </div>
+        )}
       </section>
 
       {/* Data Sources */}

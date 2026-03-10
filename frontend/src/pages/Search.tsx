@@ -1,52 +1,42 @@
 import { useState, useMemo, useRef, useEffect } from 'react'
 import Fuse from 'fuse.js'
-import { SAMPLE_PROJECTS } from '../data/sample-projects'
+import { useProjectIndex } from '../hooks/useProjectData'
 import ProjectCard from '../components/common/ProjectCard'
 
-const fuse = new Fuse(SAMPLE_PROJECTS, {
+const FUSE_OPTIONS = {
   keys: [
     { name: 'name', weight: 3 },
     { name: 'current_developer', weight: 2 },
-    { name: 'current_operator', weight: 2 },
     { name: 'state', weight: 1.5 },
     { name: 'rez', weight: 1.5 },
     { name: 'technology', weight: 1 },
-    { name: 'notable', weight: 1 },
-    { name: 'suppliers.supplier', weight: 1.5 },
-    { name: 'offtakes.party', weight: 1 },
-    { name: 'ownership_history.owner', weight: 1.5 },
   ],
   threshold: 0.3,
   includeScore: true,
-})
+}
 
 export default function Search() {
   const [query, setQuery] = useState('')
   const inputRef = useRef<HTMLInputElement>(null)
+  const { projects, loading } = useProjectIndex()
 
   useEffect(() => {
     inputRef.current?.focus()
   }, [])
 
+  const fuse = useMemo(() => {
+    if (projects.length === 0) return null
+    return new Fuse(projects, FUSE_OPTIONS)
+  }, [projects])
+
   const results = useMemo(() => {
-    if (!query.trim()) return []
-    return fuse.search(query).map((r) => ({
-      id: r.item.id,
-      name: r.item.name,
-      technology: r.item.technology,
-      status: r.item.status,
-      capacity_mw: r.item.capacity_mw,
-      storage_mwh: r.item.storage_mwh,
-      state: r.item.state,
-      current_developer: r.item.current_developer,
-      rez: r.item.rez,
-      data_confidence: r.item.data_confidence,
-    }))
-  }, [query])
+    if (!query.trim() || !fuse) return []
+    return fuse.search(query, { limit: 50 }).map((r) => r.item)
+  }, [query, fuse])
 
   const suggestions = [
-    'Yanco Delta', 'Golden Plains', 'Neoen', 'Tesla', 'Origin',
-    'NSW', 'VIC', 'BESS', 'wind', 'Hornsdale',
+    'Golden Plains', 'Hornsdale', 'Origin', 'Tesla',
+    'NSW', 'VIC', 'QLD', 'BESS', 'wind', 'solar',
   ]
 
   return (
@@ -73,8 +63,9 @@ export default function Search() {
           type="text"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          placeholder="Search projects, developers, OEMs, states..."
-          className="w-full bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl pl-10 pr-4 py-3 text-sm text-[var(--color-text)] placeholder:text-[var(--color-text-muted)] focus:outline-none focus:border-[var(--color-primary)] transition-colors"
+          placeholder={loading ? 'Loading projects...' : `Search ${projects.length} projects...`}
+          disabled={loading}
+          className="w-full bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl pl-10 pr-4 py-3 text-sm text-[var(--color-text)] placeholder:text-[var(--color-text-muted)] focus:outline-none focus:border-[var(--color-primary)] transition-colors disabled:opacity-50"
         />
         {query && (
           <button
@@ -87,10 +78,15 @@ export default function Search() {
       </div>
 
       {/* Results or suggestions */}
-      {query.trim() ? (
+      {loading ? (
+        <div className="text-center py-12">
+          <div className="text-sm text-[var(--color-text-muted)] animate-pulse">Loading project data...</div>
+        </div>
+      ) : query.trim() ? (
         <>
           <p className="text-xs text-[var(--color-text-muted)] mb-4">
             {results.length} result{results.length !== 1 ? 's' : ''} for "{query}"
+            {results.length === 50 && ' (showing first 50)'}
           </p>
           <div className="space-y-3">
             {results.map((project) => (
@@ -104,7 +100,7 @@ export default function Search() {
                 No projects found for "{query}"
               </p>
               <p className="text-xs text-[var(--color-text-muted)]/60 mt-1">
-                Try searching by project name, developer, OEM, or state
+                Try searching by project name, developer, state, or technology
               </p>
             </div>
           )}

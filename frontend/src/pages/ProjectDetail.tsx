@@ -1,18 +1,26 @@
 import { useParams, Link } from 'react-router-dom'
 import { useState } from 'react'
-import { SAMPLE_PROJECTS } from '../data/sample-projects'
-import { TECHNOLOGY_CONFIG } from '../lib/types'
+import { TECHNOLOGY_CONFIG, type Project } from '../lib/types'
+import { useProject } from '../hooks/useProjectData'
 import TechBadge from '../components/common/TechBadge'
 import StatusBadge from '../components/common/StatusBadge'
 import ConfidenceDots from '../components/common/ConfidenceDots'
+import PerformanceTab from '../components/charts/PerformanceTab'
 
-type Tab = 'overview' | 'timeline' | 'technical' | 'sources'
+type Tab = 'overview' | 'timeline' | 'technical' | 'performance' | 'sources'
 
 export default function ProjectDetail() {
   const { id } = useParams<{ id: string }>()
   const [activeTab, setActiveTab] = useState<Tab>('overview')
+  const { project, loading } = useProject(id)
 
-  const project = SAMPLE_PROJECTS.find((p) => p.id === id)
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center min-h-[60dvh]">
+        <div className="text-sm text-[var(--color-text-muted)] animate-pulse">Loading project...</div>
+      </div>
+    )
+  }
 
   if (!project) {
     return (
@@ -28,10 +36,12 @@ export default function ProjectDetail() {
 
   const techConfig = TECHNOLOGY_CONFIG[project.technology]
 
+  const isOperating = project.status === 'operating' || project.status === 'commissioning'
   const tabs: { key: Tab; label: string }[] = [
     { key: 'overview', label: 'Overview' },
     { key: 'timeline', label: 'Timeline' },
     { key: 'technical', label: 'Technical' },
+    ...(isOperating ? [{ key: 'performance' as Tab, label: 'Performance' }] : []),
     { key: 'sources', label: 'Sources' },
   ]
 
@@ -92,6 +102,7 @@ export default function ProjectDetail() {
       {activeTab === 'overview' && <OverviewTab project={project} />}
       {activeTab === 'timeline' && <TimelineTab project={project} />}
       {activeTab === 'technical' && <TechnicalTab project={project} />}
+      {activeTab === 'performance' && <PerformanceTab project={project} />}
       {activeTab === 'sources' && <SourcesTab project={project} />}
     </div>
   )
@@ -122,7 +133,7 @@ function SectionTitle({ children }: { children: React.ReactNode }) {
 // Overview Tab
 // ============================================================
 
-function OverviewTab({ project }: { project: (typeof SAMPLE_PROJECTS)[0] }) {
+function OverviewTab({ project }: { project: Project }) {
   return (
     <div className="space-y-6">
       {/* Notable */}
@@ -253,7 +264,7 @@ function DetailRow({ label, value, highlight }: { label: string; value: string; 
 // Timeline Tab
 // ============================================================
 
-function TimelineTab({ project }: { project: (typeof SAMPLE_PROJECTS)[0] }) {
+function TimelineTab({ project }: { project: Project }) {
   const sorted = [...project.timeline].sort(
     (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
   )
@@ -359,7 +370,7 @@ function formatDate(date: string, precision: string): string {
 // Technical Tab
 // ============================================================
 
-function TechnicalTab({ project }: { project: (typeof SAMPLE_PROJECTS)[0] }) {
+function TechnicalTab({ project }: { project: Project }) {
   return (
     <div className="space-y-6">
       {/* Suppliers */}
@@ -485,7 +496,7 @@ function TechnicalTab({ project }: { project: (typeof SAMPLE_PROJECTS)[0] }) {
 // Sources Tab
 // ============================================================
 
-function SourcesTab({ project }: { project: (typeof SAMPLE_PROJECTS)[0] }) {
+function SourcesTab({ project }: { project: Project }) {
   return (
     <div className="space-y-6">
       <section>
