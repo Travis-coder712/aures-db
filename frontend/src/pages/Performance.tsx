@@ -16,6 +16,7 @@ const TECH_TABS: { label: string; value: LeagueTechnology }[] = [
   { label: 'Wind', value: 'wind' },
   { label: 'Solar', value: 'solar' },
   { label: 'BESS', value: 'bess' },
+  { label: 'Hydro', value: 'pumped_hydro' },
 ]
 
 const STATE_TABS: { label: string; value: State | 'ALL' }[] = [
@@ -42,7 +43,7 @@ const QUARTILE_LABELS: Record<number, string> = {
   4: 'Q4 — Bottom 25%',
 }
 
-type SortField = 'rank' | 'capacity' | 'cf' | 'price' | 'rev' | 'curtailment' | 'spread' | 'util' | 'cycles'
+type SortField = 'rank' | 'capacity' | 'cf' | 'price' | 'rev' | 'curtailment' | 'spread' | 'util' | 'cycles' | 'discharged' | 'charged'
 type SortDir = 'asc' | 'desc'
 
 export default function Performance() {
@@ -72,6 +73,8 @@ export default function Performance() {
         case 'spread': return (p.avg_discharge_price ?? 0) - (p.avg_charge_price ?? 0)
         case 'util': return p.utilisation_pct ?? 0
         case 'cycles': return p.cycles ?? 0
+        case 'discharged': return p.energy_discharged_mwh ?? 0
+        case 'charged': return p.energy_charged_mwh ?? 0
         default: return p.rank_composite
       }
     }
@@ -204,9 +207,9 @@ export default function Performance() {
             value={String(filtered?.projects.length ?? table.fleet_avg.count)}
             color="var(--color-primary)"
           />
-          {tech !== 'bess' && table.fleet_avg.capacity_factor_pct != null && (
+          {table.fleet_avg.capacity_factor_pct != null && (
             <StatCard
-              label="Avg Capacity Factor"
+              label={tech === 'bess' ? 'Avg Utilisation' : 'Avg Capacity Factor'}
               value={`${table.fleet_avg.capacity_factor_pct.toFixed(1)}%`}
               color="#22c55e"
             />
@@ -270,19 +273,20 @@ export default function Performance() {
                   <th className="px-2 py-2 text-left">Project</th>
                   <th className="px-2 py-2 text-left w-12">State</th>
                   <SortHeader field="capacity" label="MW" />
-                  {tech !== 'bess' ? (
+                  {tech === 'bess' ? (
+                    <>
+                      <SortHeader field="discharged" label="Disch." />
+                      <SortHeader field="charged" label="Chg." />
+                      <SortHeader field="spread" label="Spread" />
+                      <SortHeader field="cycles" label="Cycles" />
+                      <SortHeader field="rev" label="Rev/MW" />
+                    </>
+                  ) : (
                     <>
                       <SortHeader field="cf" label="CF%" />
                       <SortHeader field="price" label="$/MWh" />
                       <SortHeader field="rev" label="Rev/MW" />
                       <SortHeader field="curtailment" label="Curt%" />
-                    </>
-                  ) : (
-                    <>
-                      <SortHeader field="spread" label="Spread" />
-                      <SortHeader field="util" label="Util%" />
-                      <SortHeader field="cycles" label="Cycles" />
-                      <SortHeader field="rev" label="Rev/MW" />
                     </>
                   )}
                   <th className="px-2 py-2 text-left w-12">Q</th>
@@ -369,7 +373,25 @@ function LeagueRow({ entry, tech }: { entry: LeagueTableEntry; tech: LeagueTechn
           ? `${(entry.capacity_mw / 1000).toFixed(1)}G`
           : entry.capacity_mw}
       </td>
-      {tech !== 'bess' ? (
+      {tech === 'bess' ? (
+        <>
+          <td className="px-2 py-2 text-[var(--color-text)]">
+            {entry.energy_discharged_mwh ? fmtGWh(entry.energy_discharged_mwh) : '—'}
+          </td>
+          <td className="px-2 py-2 text-[var(--color-text)]">
+            {entry.energy_charged_mwh ? fmtGWh(entry.energy_charged_mwh) : '—'}
+          </td>
+          <td className="px-2 py-2 text-[var(--color-text)]">
+            {spread > 0 ? `$${spread.toFixed(0)}` : '—'}
+          </td>
+          <td className="px-2 py-2 text-[var(--color-text)]">
+            {entry.cycles?.toFixed(0) ?? '—'}
+          </td>
+          <td className="px-2 py-2 text-[var(--color-text)]">
+            ${entry.revenue_per_mw ? (entry.revenue_per_mw / 1000).toFixed(0) + 'k' : '—'}
+          </td>
+        </>
+      ) : (
         <>
           <td className="px-2 py-2">
             <span style={{ color: cfColor(entry.capacity_factor_pct) }}>
@@ -386,21 +408,6 @@ function LeagueRow({ entry, tech }: { entry: LeagueTableEntry; tech: LeagueTechn
             <span style={{ color: curtColor(entry.curtailment_pct) }}>
               {entry.curtailment_pct?.toFixed(1) ?? '—'}
             </span>
-          </td>
-        </>
-      ) : (
-        <>
-          <td className="px-2 py-2 text-[var(--color-text)]">
-            ${spread.toFixed(0)}
-          </td>
-          <td className="px-2 py-2 text-[var(--color-text)]">
-            {entry.utilisation_pct?.toFixed(0) ?? '—'}%
-          </td>
-          <td className="px-2 py-2 text-[var(--color-text)]">
-            {entry.cycles?.toFixed(0) ?? '—'}
-          </td>
-          <td className="px-2 py-2 text-[var(--color-text)]">
-            ${entry.revenue_per_mw ? (entry.revenue_per_mw / 1000).toFixed(0) + 'k' : '—'}
           </td>
         </>
       )}
@@ -426,6 +433,11 @@ function StatCard({ label, value, color }: { label: string; value: string; color
       <p className="text-lg font-bold" style={{ color }}>{value}</p>
     </div>
   )
+}
+
+function fmtGWh(mwh: number): string {
+  if (mwh >= 1000) return `${(mwh / 1000).toFixed(1)} GWh`
+  return `${Math.round(mwh)} MWh`
 }
 
 function cfColor(cf?: number): string {

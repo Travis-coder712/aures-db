@@ -221,7 +221,7 @@ export interface REZ {
 }
 
 // League Table types (Phase 3)
-export type LeagueTechnology = 'wind' | 'solar' | 'bess'
+export type LeagueTechnology = 'wind' | 'solar' | 'bess' | 'pumped_hydro'
 
 export interface LeagueTableEntry {
   project_id: string

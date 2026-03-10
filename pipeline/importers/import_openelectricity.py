@@ -127,17 +127,25 @@ def import_from_api(conn, year: int):
     for pid, fcode in mapping.items():
         code_to_projects.setdefault(fcode, []).append(pid)
 
-    # Pre-build unit_code -> facility_code lookup for fast result parsing
+    # Pre-build unit_code -> (facility_code, fueltech_id) lookup
     unit_lookup = {}
     for f in oe_facilities:
         for u in f.get('units', []):
-            unit_lookup[u['code']] = f['code']
+            unit_lookup[u['code']] = {
+                'facility': f['code'],
+                'fueltech': u.get('fueltech_id', ''),
+            }
 
     total_batches = (len(facility_codes) + BATCH_SIZE - 1) // BATCH_SIZE
     print(f"\nFetching data for {len(facility_codes)} unique facilities in {total_batches} batches...")
 
-    # Collect all results: facility_code -> {energy_mwh, market_value_aud}
+    # Collect results: facility_code -> {energy, market_value, charge_energy, charge_value, discharge_energy, discharge_value}
     facility_results = {}
+    EMPTY_RESULT = lambda: {
+        'energy_mwh': 0, 'market_value_aud': 0,
+        'charge_energy_mwh': 0, 'charge_value_aud': 0,
+        'discharge_energy_mwh': 0, 'discharge_value_aud': 0,
+    }
 
     for i in range(0, len(facility_codes), BATCH_SIZE):
         batch = facility_codes[i:i + BATCH_SIZE]
@@ -152,7 +160,7 @@ def import_from_api(conn, year: int):
                 "date_end": f"{year}-12-31",
             })
 
-            # Parse results
+            # Parse results — split by unit fueltech for BESS charge/discharge
             for series in data.get('data', []):
                 metric = series.get('metric')
                 for result in series.get('results', []):
@@ -163,17 +171,35 @@ def import_from_api(conn, year: int):
                     if value is None:
                         continue
 
-                    fcode = unit_lookup.get(unit_code)
-                    if not fcode:
+                    info = unit_lookup.get(unit_code)
+                    if not info:
                         continue
 
-                    if fcode not in facility_results:
-                        facility_results[fcode] = {'energy_mwh': 0, 'market_value_aud': 0}
+                    fcode = info['facility']
+                    fueltech = info['fueltech']
 
+                    if fcode not in facility_results:
+                        facility_results[fcode] = EMPTY_RESULT()
+
+                    r = facility_results[fcode]
+
+                    # Accumulate totals
                     if metric == 'energy':
-                        facility_results[fcode]['energy_mwh'] += value
+                        r['energy_mwh'] += value
                     elif metric == 'market_value':
-                        facility_results[fcode]['market_value_aud'] += value
+                        r['market_value_aud'] += value
+
+                    # Track BESS charge/discharge separately
+                    if fueltech == 'battery_discharging':
+                        if metric == 'energy':
+                            r['discharge_energy_mwh'] += abs(value)
+                        elif metric == 'market_value':
+                            r['discharge_value_aud'] += value
+                    elif fueltech == 'battery_charging':
+                        if metric == 'energy':
+                            r['charge_energy_mwh'] += abs(value)
+                        elif metric == 'market_value':
+                            r['charge_value_aud'] += abs(value)
 
             print(f"  Batch {batch_num}/{total_batches}: OK ({len(batch)} facilities)")
             time.sleep(0.5)  # Be polite to the API
@@ -214,8 +240,29 @@ def import_from_api(conn, year: int):
                 'market_value_aud': round(market_value, 0),
             }
 
-            # Curtailment not available from this API — leave NULL for now
-            # BESS charge/discharge breakdown not available at annual level
+            # BESS: derive charge/discharge metrics from separate unit data
+            if tech == 'bess':
+                discharged = raw.get('discharge_energy_mwh', 0)
+                charged = raw.get('charge_energy_mwh', 0)
+                discharge_val = raw.get('discharge_value_aud', 0)
+                charge_val = raw.get('charge_value_aud', 0)
+
+                if discharged > 0 and charged > 0:
+                    avg_discharge_price = discharge_val / discharged
+                    avg_charge_price = charge_val / charged
+                    cycles = discharged / storage_mwh if storage_mwh else None
+                    # Utilisation: % of hours the battery was discharging
+                    # Approximate: discharged MWh / (capacity_mw * 8760) * 100
+                    util = (discharged / (capacity_mw * hours_in_year)) * 100
+
+                    metrics.update({
+                        'energy_discharged_mwh': round(discharged, 1),
+                        'energy_charged_mwh': round(charged, 1),
+                        'avg_discharge_price': round(avg_discharge_price, 2),
+                        'avg_charge_price': round(avg_charge_price, 2),
+                        'utilisation_pct': round(min(util, 100), 2),
+                        'cycles': round(cycles, 1) if cycles else None,
+                    })
 
             upsert_performance(conn, pid, year, metrics, 'openelectricity')
             imported += 1

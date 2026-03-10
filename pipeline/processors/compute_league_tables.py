@@ -29,8 +29,8 @@ TECH_GROUPS = {
     'wind': 'wind',
     'solar': 'solar',
     'bess': 'bess',
-    'hybrid': 'solar',      # Hybrids compete in solar league
-    'pumped_hydro': 'bess',  # Pumped hydro in storage league
+    'hybrid': 'solar',           # Hybrids compete in solar league
+    'pumped_hydro': 'pumped_hydro',  # Pumped hydro gets its own league
 }
 
 
@@ -41,7 +41,7 @@ TECH_GROUPS = {
 def compute_league_tables(conn, year: int, tech_filter: str = None):
     """Compute league table rankings for a given year."""
 
-    techs_to_process = [tech_filter] if tech_filter else ['wind', 'solar', 'bess']
+    techs_to_process = [tech_filter] if tech_filter else ['wind', 'solar', 'bess', 'pumped_hydro']
     total_ranked = 0
 
     for tech in techs_to_process:
@@ -67,11 +67,9 @@ def compute_league_tables(conn, year: int, tech_filter: str = None):
 
 def get_tech_projects(conn, tech: str, year: int):
     """Get projects with performance data for a technology and year."""
-    # Include hybrids in solar, pumped_hydro in bess
+    # Include hybrids in solar league
     if tech == 'solar':
         tech_clause = "p.technology IN ('solar', 'hybrid')"
-    elif tech == 'bess':
-        tech_clause = "p.technology IN ('bess', 'pumped_hydro')"
     else:
         tech_clause = f"p.technology = '{tech}'"
 
@@ -206,7 +204,7 @@ def update_project_scores(conn, ranked):
 def main():
     parser = argparse.ArgumentParser(description='Compute league table rankings')
     parser.add_argument('--year', type=int, default=2025, help='Year to process')
-    parser.add_argument('--tech', type=str, choices=['wind', 'solar', 'bess'], help='Process single technology')
+    parser.add_argument('--tech', type=str, choices=['wind', 'solar', 'bess', 'pumped_hydro'], help='Process single technology')
     args = parser.parse_args()
 
     conn = get_connection()
