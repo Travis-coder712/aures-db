@@ -1,6 +1,5 @@
 import { useMemo } from 'react'
 import { REZ_ZONES, REZ_BY_STATE } from '../data/rez-zones'
-import type { REZZone } from '../data/rez-zones'
 import type { State } from '../lib/types'
 import { useProjectIndex } from './useProjectData'
 

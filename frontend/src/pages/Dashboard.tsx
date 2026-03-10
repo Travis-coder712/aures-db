@@ -8,11 +8,9 @@ import {
   Tooltip,
   Legend,
   ResponsiveContainer,
-  Cell,
 } from 'recharts'
 import { useNEMStats } from '../hooks/useNEMStats'
 import { TECHNOLOGY_CONFIG } from '../lib/types'
-import type { Technology } from '../lib/types'
 
 const STATUS_COLORS = {
   operating: '#22c55e',
@@ -111,7 +109,7 @@ export default function Dashboard() {
                   color: '#f1f5f9',
                   fontSize: 13,
                 }}
-                formatter={(value: number) => `${value.toFixed(1)} GW`}
+                formatter={(value) => `${Number(value).toFixed(1)} GW`}
               />
               <Legend
                 wrapperStyle={{ fontSize: 12, color: '#9ca3af' }}
@@ -177,7 +175,7 @@ export default function Dashboard() {
                   color: '#f1f5f9',
                   fontSize: 13,
                 }}
-                formatter={(value: number) => `${value.toFixed(1)} GW`}
+                formatter={(value) => `${Number(value).toFixed(1)} GW`}
               />
               <Legend wrapperStyle={{ fontSize: 12, color: '#9ca3af' }} />
               <Bar

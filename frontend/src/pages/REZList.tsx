@@ -17,7 +17,6 @@ const STATUS_COLORS: Record<REZZone['status'], string> = {
   declared: '#22c55e',
   'in-flight': '#84cc16',
   draft: '#f59e0b',
-  approved: '#3b82f6',
   candidate: '#8b5cf6',
   planning: '#6b7280',
 }
@@ -26,7 +25,6 @@ const STATUS_LABELS: Record<REZZone['status'], string> = {
   declared: 'Declared',
   'in-flight': 'In-Flight',
   draft: 'Draft',
-  approved: 'Approved',
   candidate: 'Candidate',
   planning: 'Planning',
 }
@@ -59,7 +57,6 @@ export default function REZList() {
       {/* Summary Stats */}
       <section className="grid grid-cols-2 lg:grid-cols-5 gap-3">
         {(['NSW', 'VIC', 'QLD', 'SA', 'TAS'] as State[]).map((state) => {
-          const stateZones = zones.filter((z) => stateFilter === 'ALL' ? z.state === state : true)
           const count = stateFilter === 'ALL'
             ? zones.filter((z) => z.state === state).length
             : stateFilter === state ? zones.length : 0
