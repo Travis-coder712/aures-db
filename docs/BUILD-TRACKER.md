@@ -2,7 +2,7 @@
 
 > **Last Updated:** 2026-03-10
 > **Current Phase:** Phase 2 — CIS/LTESA/REZ
-> **Status:** Phase 1 complete. 1,067 projects live. Scheme round tracking: 95 projects across 15 rounds (9 CIS + 6 LTESA).
+> **Status:** Phase 1 + Phase 2 complete. 1,067 projects live. 95 scheme projects across 15 rounds (9 CIS + 6 LTESA), 85 linked to master DB.
 
 ---
 
@@ -11,7 +11,7 @@
 | Phase | Status | Progress |
 |-------|--------|----------|
 | Phase 1: Foundation | ✅ Complete | 95% |
-| Phase 2: CIS/LTESA/REZ | In Progress | 85% |
+| Phase 2: CIS/LTESA/REZ | ✅ Complete | 100% |
 | Phase 2.5: Map + NEM Summary | Not Started | 0% |
 | Phase 3: Performance | Preview Built | 10% |
 | Phase 4: Intelligence | Not Started | 0% |
@@ -50,7 +50,7 @@
 
 ---
 
-## Phase 2: CIS/LTESA/REZ — IN PROGRESS
+## Phase 2: CIS/LTESA/REZ — ✅ COMPLETE
 
 ### CIS Rounds — Data Seeded
 - [x] Pilot NSW (Nov 2023) — 6 projects, 1,075 MW
@@ -78,9 +78,9 @@
 - [x] Pending round state ("Results not yet announced")
 - [x] Education section: CIS + LTESA explainers on overview page
 - [x] Nav updated: Schemes in sidebar + mobile bottom nav
-- [ ] CIS/LTESA comparison views
-- [ ] Link scheme projects back to master project records (project_id field)
-- [ ] CIS Tender 1 individual project list (19 projects — currently aggregate only)
+- [x] CIS/LTESA comparison table (scope, capacity, storage, contract types, capacity share bar)
+- [x] Link scheme projects to master project records (85 of 95 linked via project_id)
+- [x] CIS Tender 1 individual project list (all 19 projects)
 
 ---
 
@@ -205,12 +205,17 @@ Layer 3: PWA FRONTEND  ✅ BUILT & DEPLOYED
 - Matched 66 of 91 scheme projects to master 1,067-project database (25 unmatched — mostly WEM or new)
 - Phase 2 now ~85% complete
 
+### Session 5c — 2026-03-10 (continued)
+- Added project_id fields to 85 of 95 scheme projects (linking to master 1,067-project DB)
+- 10 unlinked: 4 WEM projects (not in NEM data), 4 VPP portfolios (distributed), 1 Springfield BESS (new), 1 Punchs Creek (size mismatch)
+- Fixed BUILD-TRACKER checkboxes for comparison table and CIS Tender 1 project list (completed in 5b)
+- Phase 2 declared complete at 100%
+
 ---
 
 ## What To Build Next
 
-1. **Scheme ↔ project linking** — Add `project_id` to the 66 matched scheme projects (pipeline enhancement)
-2. **REZ tracking** — Renewable Energy Zones (Phase 2.5)
-3. **Map view** — Plot 1,067 projects on an Australian map (Phase 2.5)
-4. **NEM summary dashboard** — Live grid statistics (Phase 2.5)
-5. **Data enrichment** — Enrich remaining 9 exemplar projects to Coopers Gap depth (Phase 5)
+1. **REZ tracking** — Renewable Energy Zones (Phase 2.5)
+2. **Map view** — Plot 1,067 projects on an Australian map (Phase 2.5)
+3. **NEM summary dashboard** — Live grid statistics (Phase 2.5)
+4. **Data enrichment** — Enrich remaining 9 exemplar projects to Coopers Gap depth (Phase 5)
