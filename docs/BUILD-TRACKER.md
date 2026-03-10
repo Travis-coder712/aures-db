@@ -2,7 +2,7 @@
 
 > **Last Updated:** 2026-03-10
 > **Current Phase:** Phase 2 — CIS/LTESA/REZ
-> **Status:** Phase 1 complete. 1,067 projects live. Scheme round tracking built — 9 CIS rounds + 6 LTESA rounds.
+> **Status:** Phase 1 complete. 1,067 projects live. Scheme round tracking: 95 projects across 15 rounds (9 CIS + 6 LTESA).
 
 ---
 
@@ -11,7 +11,7 @@
 | Phase | Status | Progress |
 |-------|--------|----------|
 | Phase 1: Foundation | ✅ Complete | 95% |
-| Phase 2: CIS/LTESA/REZ | In Progress | 50% |
+| Phase 2: CIS/LTESA/REZ | In Progress | 85% |
 | Phase 2.5: Map + NEM Summary | Not Started | 0% |
 | Phase 3: Performance | Preview Built | 10% |
 | Phase 4: Intelligence | Not Started | 0% |
@@ -195,14 +195,22 @@ Layer 3: PWA FRONTEND  ✅ BUILT & DEPLOYED
 - Added routes: `/schemes`, `/schemes/:scheme/:roundId`
 - CIS accent: amber (#f59e0b), LTESA accent: purple (#8b5cf6)
 - Verified all page states: overview, detail with projects, pending rounds
-- Phase 2 now ~50% complete
+
+### Session 5b — 2026-03-10 (continued)
+- Added CIS Tender 1 complete project list (all 19 projects from RenewEconomy/DCCEEW)
+- Added LTESA Rounds 1-5 project lists: R1 (4 projects), R2 (4), R3 (5), R4 (2), R5 (3)
+- Updated round metadata: R1 (1,445 MW/400 MWh), R2 (1,075 MW/2,790 MWh), R4 (317 MW/372 MWh), R5 (1,025 MW/13,790 MWh)
+- Built CIS vs LTESA comparison table on overview page (capacity share bar, contract types, combined totals)
+- 95 projects now tracked across 15 rounds (71 CIS + 24 LTESA)
+- Matched 66 of 91 scheme projects to master 1,067-project database (25 unmatched — mostly WEM or new)
+- Phase 2 now ~85% complete
 
 ---
 
 ## What To Build Next
 
-1. **CIS Tender 1 project list** — Research and add the 19 individual projects
-2. **LTESA Rounds 1-5 project lists** — Add individual project data for older rounds
-3. **Scheme ↔ project linking** — Connect scheme projects to master 1,067-project database via project_id
-4. **CIS/LTESA comparison views** — Side-by-side round comparison
-5. **REZ tracking** — Renewable Energy Zones (Phase 2.5)
+1. **Scheme ↔ project linking** — Add `project_id` to the 66 matched scheme projects (pipeline enhancement)
+2. **REZ tracking** — Renewable Energy Zones (Phase 2.5)
+3. **Map view** — Plot 1,067 projects on an Australian map (Phase 2.5)
+4. **NEM summary dashboard** — Live grid statistics (Phase 2.5)
+5. **Data enrichment** — Enrich remaining 9 exemplar projects to Coopers Gap depth (Phase 5)

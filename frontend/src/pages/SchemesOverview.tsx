@@ -152,6 +152,104 @@ export default function SchemesOverview() {
         />
       </div>
 
+      {/* Comparison Table */}
+      <section className="mb-8">
+        <h2 className="text-lg font-semibold text-[var(--color-text)] mb-4 flex items-center gap-2">
+          <span className="text-xl">⚖️</span>
+          CIS vs LTESA Comparison
+        </h2>
+        <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl overflow-hidden">
+          <table className="w-full text-sm">
+            <thead>
+              <tr className="border-b border-[var(--color-border)]">
+                <th className="text-left py-3 px-4 text-[var(--color-text-muted)] text-xs font-medium"></th>
+                <th className="text-right py-3 px-4 text-xs font-semibold" style={{ color: '#f59e0b' }}>CIS</th>
+                <th className="text-right py-3 px-4 text-xs font-semibold" style={{ color: '#8b5cf6' }}>LTESA</th>
+                <th className="text-right py-3 px-4 text-[var(--color-text-muted)] text-xs font-medium">Combined</th>
+              </tr>
+            </thead>
+            <tbody className="text-[var(--color-text)]">
+              <tr className="border-b border-[var(--color-border)]/50">
+                <td className="py-2.5 px-4 text-xs text-[var(--color-text-muted)]">Scope</td>
+                <td className="py-2.5 px-4 text-right text-xs">Federal (NEM + WEM)</td>
+                <td className="py-2.5 px-4 text-right text-xs">NSW only</td>
+                <td className="py-2.5 px-4 text-right text-xs text-[var(--color-text-muted)]">—</td>
+              </tr>
+              <tr className="border-b border-[var(--color-border)]/50">
+                <td className="py-2.5 px-4 text-xs text-[var(--color-text-muted)]">Rounds</td>
+                <td className="py-2.5 px-4 text-right font-medium">{cisRounds.length}</td>
+                <td className="py-2.5 px-4 text-right font-medium">{ltesaRounds.length}</td>
+                <td className="py-2.5 px-4 text-right font-medium text-[var(--color-text-muted)]">{cisRounds.length + ltesaRounds.length}</td>
+              </tr>
+              <tr className="border-b border-[var(--color-border)]/50">
+                <td className="py-2.5 px-4 text-xs text-[var(--color-text-muted)]">Projects</td>
+                <td className="py-2.5 px-4 text-right font-medium">{cisTotalProjects}</td>
+                <td className="py-2.5 px-4 text-right font-medium">{ltesaTotalProjects}</td>
+                <td className="py-2.5 px-4 text-right font-bold text-[var(--color-primary)]">{cisTotalProjects + ltesaTotalProjects}</td>
+              </tr>
+              <tr className="border-b border-[var(--color-border)]/50">
+                <td className="py-2.5 px-4 text-xs text-[var(--color-text-muted)]">Capacity</td>
+                <td className="py-2.5 px-4 text-right font-medium" style={{ color: '#f59e0b' }}>
+                  {(cisTotalMW / 1000).toFixed(1)} GW
+                </td>
+                <td className="py-2.5 px-4 text-right font-medium" style={{ color: '#8b5cf6' }}>
+                  {(ltesaTotalMW / 1000).toFixed(1)} GW
+                </td>
+                <td className="py-2.5 px-4 text-right font-bold text-[var(--color-primary)]">
+                  {((cisTotalMW + ltesaTotalMW) / 1000).toFixed(1)} GW
+                </td>
+              </tr>
+              <tr className="border-b border-[var(--color-border)]/50">
+                <td className="py-2.5 px-4 text-xs text-[var(--color-text-muted)]">Storage</td>
+                <td className="py-2.5 px-4 text-right font-medium" style={{ color: '#f59e0b' }}>
+                  {(cisTotalMWh / 1000).toFixed(1)} GWh
+                </td>
+                <td className="py-2.5 px-4 text-right font-medium" style={{ color: '#8b5cf6' }}>
+                  {(ltesaTotalMWh / 1000).toFixed(1)} GWh
+                </td>
+                <td className="py-2.5 px-4 text-right font-bold text-[var(--color-primary)]">
+                  {((cisTotalMWh + ltesaTotalMWh) / 1000).toFixed(1)} GWh
+                </td>
+              </tr>
+              <tr>
+                <td className="py-2.5 px-4 text-xs text-[var(--color-text-muted)]">Contract type</td>
+                <td className="py-2.5 px-4 text-right text-xs">CfD (up to 15yr)</td>
+                <td className="py-2.5 px-4 text-right text-xs">CfD gen (20yr) / LDS (14-40yr)</td>
+                <td className="py-2.5 px-4 text-right text-xs text-[var(--color-text-muted)]">—</td>
+              </tr>
+            </tbody>
+          </table>
+          {/* Visual bar comparison */}
+          <div className="px-4 py-3 border-t border-[var(--color-border)]">
+            <p className="text-[10px] text-[var(--color-text-muted)] mb-2 uppercase tracking-wider font-medium">Capacity share</p>
+            <div className="flex h-4 rounded-full overflow-hidden">
+              <div
+                className="transition-all"
+                style={{
+                  width: `${(cisTotalMW / (cisTotalMW + ltesaTotalMW) * 100).toFixed(0)}%`,
+                  backgroundColor: '#f59e0b',
+                }}
+              />
+              <div
+                className="transition-all"
+                style={{
+                  width: `${(ltesaTotalMW / (cisTotalMW + ltesaTotalMW) * 100).toFixed(0)}%`,
+                  backgroundColor: '#8b5cf6',
+                }}
+              />
+            </div>
+            <div className="flex justify-between mt-1">
+              <span className="text-[10px]" style={{ color: '#f59e0b' }}>
+                CIS {(cisTotalMW / (cisTotalMW + ltesaTotalMW) * 100).toFixed(0)}%
+              </span>
+              <span className="text-[10px]" style={{ color: '#8b5cf6' }}>
+                LTESA {(ltesaTotalMW / (cisTotalMW + ltesaTotalMW) * 100).toFixed(0)}%
+              </span>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* CIS Rounds */}
       <section className="mb-8">
         <h2 className="text-lg font-semibold text-[var(--color-text)] mb-4 flex items-center gap-2">

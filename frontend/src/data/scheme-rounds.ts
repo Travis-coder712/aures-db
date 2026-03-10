@@ -178,6 +178,32 @@ export interface SchemeProject {
 }
 
 export const CIS_PROJECTS: Record<string, SchemeProject[]> = {
+  'cis-tender-1-nem-gen': [
+    // NSW (7 projects, ~3.7 GW)
+    { name: 'Valley of the Winds', developer: 'ACEN Australia', technology: 'wind', capacity_mw: 936, state: 'NSW' },
+    { name: 'Sandy Creek Solar Farm', developer: 'Lightsource bp', technology: 'solar', capacity_mw: 700, state: 'NSW' },
+    { name: 'Spicers Creek Wind Farm', developer: 'Squadron Energy', technology: 'wind', capacity_mw: 700, state: 'NSW' },
+    { name: 'Junction Rivers', developer: 'Windlab', technology: 'hybrid', capacity_mw: 585, storage_mwh: 800, state: 'NSW' },
+    { name: 'Goulburn River Solar Farm', developer: 'Lightsource bp', technology: 'solar', capacity_mw: 450, state: 'NSW' },
+    { name: 'Thunderbolt Wind Farm', developer: 'Neoen', technology: 'wind', capacity_mw: 230, state: 'NSW' },
+    { name: 'Glanmire Solar Farm', developer: 'Elgin Energy', technology: 'hybrid', capacity_mw: 60, storage_mwh: 104, state: 'NSW' },
+    // VIC (6 projects, ~1.6 GW)
+    { name: 'Kentbruck Wind Farm', developer: 'Neoen', technology: 'wind', capacity_mw: 600, state: 'VIC' },
+    { name: 'West Mokoan Solar Farm', developer: 'Lightsource bp', technology: 'hybrid', capacity_mw: 300, storage_mwh: 560, state: 'VIC' },
+    { name: 'Barwon Solar Farm', developer: 'Elgin Energy', technology: 'hybrid', capacity_mw: 250, storage_mwh: 500, state: 'VIC' },
+    { name: 'Campbells Forest Solar Farm', developer: 'Risen Energy', technology: 'solar', capacity_mw: 205, state: 'VIC' },
+    { name: 'Elaine Solar Farm', developer: 'Elgin Energy', technology: 'hybrid', capacity_mw: 125, storage_mwh: 250, state: 'VIC' },
+    { name: 'Barnawartha Solar Farm', developer: 'Gentari', technology: 'hybrid', capacity_mw: 64, storage_mwh: 139, state: 'VIC' },
+    // SA (2 projects)
+    { name: 'Goyder North Wind Farm', developer: 'Neoen', technology: 'wind', capacity_mw: 300, state: 'SA' },
+    { name: 'Palmer Wind Farm', developer: 'Tilt Renewables', technology: 'wind', capacity_mw: 274, state: 'SA' },
+    // QLD (3 projects)
+    { name: 'Hopeland Solar Farm', developer: 'ACS', technology: 'solar', capacity_mw: 250, state: 'QLD' },
+    { name: 'Majors Creek Solar Power Station', developer: 'Edify Energy', technology: 'hybrid', capacity_mw: 150, storage_mwh: 600, state: 'QLD' },
+    { name: 'Ganymirra Solar Power Station', developer: 'Edify Energy', technology: 'hybrid', capacity_mw: 150, storage_mwh: 600, state: 'QLD' },
+    // VIC — 19th project
+    { name: 'Mokoan Solar Farm', developer: 'European Energy Australia', technology: 'solar', capacity_mw: 46, state: 'VIC' },
+  ],
   'cis-pilot-nsw': [
     { name: 'Orana REZ Battery', developer: 'Akaysha Energy', technology: 'bess', capacity_mw: 460, storage_mwh: 920, state: 'NSW', location: 'Wellington' },
     { name: 'Liddell Battery', developer: 'AGL Energy', technology: 'bess', capacity_mw: 250, storage_mwh: 500, state: 'NSW', location: 'Muswellbrook' },
@@ -252,27 +278,29 @@ export const LTESA_ROUNDS: LTESARound[] = [
     name: 'LTESA Round 1 — Generation + LDS',
     type: 'mixed',
     announced_date: '2023-05-03',
-    total_capacity_mw: 1395,
-    total_storage_mwh: 0,
+    total_capacity_mw: 1445,
+    total_storage_mwh: 400,
     num_projects: 4,
     project_ids: [],
-    description: 'First LTESA round under the NSW Electricity Infrastructure Roadmap. Selected projects representing 1,395 MW of renewable generation and one long-duration battery. Strike prices ~40% lower than LCOE, amongst the lowest in any Australian tender.',
+    description: 'First LTESA round under the NSW Electricity Infrastructure Roadmap. Four projects worth $2.5B delivering 1.4 GW of generation plus Australia\'s first long-duration chemical battery. Strike prices ~40% below LCOE — amongst the lowest in any Australian tender.',
     sources: [
       { title: 'ASL — Tender Round 1', url: 'https://asl.org.au/en/tenders/tender-round-1', source_tier: 1 },
+      { title: 'First round puts NSW one-third to 12GW goal', url: 'https://www.nsw.gov.au/media-releases/first-round-of-renewable-energy-projects-puts-nsw-one-third-of-way-to-12-gigawatt-renewable-energy-goal', date: '2023-05-01', source_tier: 1 },
     ],
   },
   {
     id: 'ltesa-round-2',
     name: 'LTESA Round 2 — Firming',
     type: 'firming',
-    announced_date: '2023-11-01',
-    total_capacity_mw: 0,
-    total_storage_mwh: 0,
-    num_projects: 0,
+    announced_date: '2023-11-22',
+    total_capacity_mw: 1075,
+    total_storage_mwh: 2790,
+    num_projects: 4,
     project_ids: [],
-    description: 'Firming-focused tender to complement generation contracted in Round 1. Focused on dispatchable capacity to support NSW grid reliability.',
+    description: 'Firming-focused tender delivering 1,075 MW of dispatchable capacity including three BESS projects and one virtual power plant portfolio. Capacity to supply 8% of NSW summer peak demand. $1.8B total investment supporting ~400 jobs. All projects operational by December 2025.',
     sources: [
-      { title: 'NSW Roadmap tenders delivering real progress (ASL)', url: 'https://asl.org.au/en/news/media-release/231219-nsw-roadmap-tenders-delivering-real-progress-to-transforming-our-energy-system', date: '2023-12-19', source_tier: 1 },
+      { title: 'NSW tender for firming capacity exceeds expectations (ASL)', url: 'https://aemoservices.com.au/en/news/media-release/231122-nsw-tender-for-firming-capacity-exceeds-expectations', date: '2023-11-22', source_tier: 1 },
+      { title: '2,800 MWh battery projects win NSW firming tender (Energy Storage News)', url: 'https://www.energy-storage.news/2800mwh-of-battery-storage-projects-win-new-south-wales-firming-infrastructure-tender/', date: '2023-11-22', source_tier: 2 },
     ],
   },
   {
@@ -294,25 +322,29 @@ export const LTESA_ROUNDS: LTESARound[] = [
     name: 'LTESA Round 4 — Generation',
     type: 'generation',
     announced_date: '2024-07-01',
-    total_capacity_mw: 0,
-    total_storage_mwh: 0,
-    num_projects: 0,
+    total_capacity_mw: 317,
+    total_storage_mwh: 372,
+    num_projects: 2,
     project_ids: [],
-    description: 'Generation-focused round targeting additional wind and solar capacity for NSW.',
-    sources: [],
+    description: 'Two projects covering 33% of the 1,150 MW target — only bids demonstrating sufficient merit for NSW customers were awarded. Includes one solar+BESS hybrid and one wind farm. Operational before 2028. 630+ jobs over lifetime.',
+    sources: [
+      { title: 'ASL — Tender Round 4 Generation', url: 'https://aemoservices.com.au/en/tenders/tender-round-4-generation-infrastructure', source_tier: 1 },
+      { title: 'Maryvale solar and storage lands NSW tender support (PV Magazine)', url: 'https://www.pv-magazine-australia.com/2024/07/01/maryvale-solar-and-storage-project-lands-support-in-nsw-tender-round/', date: '2024-07-01', source_tier: 2 },
+    ],
   },
   {
     id: 'ltesa-round-5',
     name: 'LTESA Round 5 — Long Duration Storage',
     type: 'lds',
     announced_date: '2025-02-27',
-    total_capacity_mw: 1000,
-    total_storage_mwh: 13000,
+    total_capacity_mw: 1025,
+    total_storage_mwh: 13790,
     num_projects: 3,
     project_ids: [],
-    description: 'Largest long-duration storage tender to date at time of announcement. All successful projects can dispatch continuously for at least 8 hours. Included Phoenix Pumped Hydro (~15 hours discharge). Over 1 GW and 13 GWh awarded.',
+    description: 'Largest long-duration storage tender to date. Two batteries and the first-ever pumped hydro LTESA (Phoenix, 800 MW / 12 GWh, 15h discharge). Combined 1.03 GW / 13.79 GWh — exceeding the 1 GW target. Contributes 40% toward the 2030 2 GW LDS minimum objective.',
     sources: [
       { title: 'ASL NSW Long Duration Storage tender awards more than 1GW and 13GWh', url: 'https://asl.org.au/news/media-release/250227-asl-nsw-long-duration-storage-tender-awards-more-than-1gw-and-13gwh', date: '2025-02-27', source_tier: 1 },
+      { title: 'Two BESS, one pumped hydro project awarded in NSW (ESS News)', url: 'https://www.ess-news.com/2025/02/27/two-bess-one-pumped-hydro-project-awarded-in-nsw-long-duration-storage-tender/', date: '2025-02-27', source_tier: 2 },
     ],
   },
   {
@@ -333,6 +365,34 @@ export const LTESA_ROUNDS: LTESARound[] = [
 ]
 
 export const LTESA_PROJECTS: Record<string, SchemeProject[]> = {
+  'ltesa-round-1': [
+    { name: 'New England Solar Farm', developer: 'ACEN Australia', technology: 'solar', capacity_mw: 720, state: 'NSW', location: 'New England REZ' },
+    { name: 'Stubbo Solar Farm', developer: 'ACEN Australia', technology: 'solar', capacity_mw: 400, state: 'NSW', location: 'Central West Orana REZ' },
+    { name: 'Coppabella Wind Farm', developer: 'Goldwind Australia', technology: 'wind', capacity_mw: 275, state: 'NSW', location: 'Southern Tablelands' },
+    { name: 'Limondale BESS', developer: 'RWE Renewables Australia', technology: 'bess', capacity_mw: 50, storage_mwh: 400, state: 'NSW', location: 'South West REZ' },
+  ],
+  'ltesa-round-2': [
+    { name: 'Liddell BESS', developer: 'AGL', technology: 'bess', capacity_mw: 500, storage_mwh: 1000, state: 'NSW', location: 'Muswellbrook' },
+    { name: 'Orana BESS', developer: 'Akaysha Energy', technology: 'bess', capacity_mw: 415, storage_mwh: 1660, state: 'NSW', location: 'Central West Orana REZ' },
+    { name: 'Enel X VPP Portfolio', developer: 'Enel X Australia', technology: 'vpp', capacity_mw: 95, state: 'NSW' },
+    { name: 'Smithfield BESS', developer: 'Iberdrola', technology: 'bess', capacity_mw: 65, storage_mwh: 130, state: 'NSW', location: 'Smithfield' },
+  ],
+  'ltesa-round-3': [
+    { name: 'Uungula Wind Farm', developer: 'Squadron Energy', technology: 'wind', capacity_mw: 400, state: 'NSW', location: 'Central West Orana REZ' },
+    { name: 'Culcairn Solar Farm', developer: 'Neoen', technology: 'solar', capacity_mw: 350, state: 'NSW', location: 'South West Slopes' },
+    { name: 'Richmond Valley BESS', developer: 'Ark Energy', technology: 'bess', capacity_mw: 275, storage_mwh: 2200, state: 'NSW', location: 'Richmond Valley' },
+    { name: 'Silver City Energy Storage Centre', developer: 'Hydrostor', technology: 'bess', capacity_mw: 200, storage_mwh: 1600, state: 'NSW', location: 'Broken Hill' },
+    { name: 'Goulburn River BESS', developer: 'Lightsource bp', technology: 'bess', capacity_mw: 49, storage_mwh: 392, state: 'NSW', location: 'Goulburn River' },
+  ],
+  'ltesa-round-4': [
+    { name: 'Maryvale Solar + BESS', developer: 'Unknown', technology: 'hybrid', capacity_mw: 172, storage_mwh: 372, state: 'NSW' },
+    { name: 'Flyers Creek Wind Farm', developer: 'Unknown', technology: 'wind', capacity_mw: 145, state: 'NSW' },
+  ],
+  'ltesa-round-5': [
+    { name: 'Phoenix Pumped Hydro', developer: 'ACEN Australia', technology: 'pumped_hydro', capacity_mw: 800, storage_mwh: 11990, state: 'NSW', location: 'Lake Burrendong, Central West Orana REZ' },
+    { name: 'Stoney Creek BESS', developer: 'Enervest Utility', technology: 'bess', capacity_mw: 125, storage_mwh: 1000, state: 'NSW', location: 'Narrabri, New England REZ' },
+    { name: 'Griffith BESS', developer: 'Eku Energy', technology: 'bess', capacity_mw: 100, storage_mwh: 800, state: 'NSW', location: 'Yoogali, Riverina' },
+  ],
   'ltesa-round-6': [
     { name: 'Great Western Battery', developer: 'Neoen Australia', technology: 'bess', capacity_mw: 330, storage_mwh: 3500, state: 'NSW' },
     { name: 'Bowmans Creek BESS', developer: 'Ark Energy', technology: 'bess', capacity_mw: 250, storage_mwh: 2414, state: 'NSW' },
