@@ -1,8 +1,8 @@
 # AURES Database — Build Tracker
 
 > **Last Updated:** 2026-03-10
-> **Current Phase:** Phase 2 — CIS/LTESA/REZ
-> **Status:** Phase 1 + Phase 2 complete. 1,067 projects live. 95 scheme projects across 15 rounds (9 CIS + 6 LTESA), 85 linked to master DB.
+> **Current Phase:** Phase 2.5 — NEM Dashboard + REZ Tracking
+> **Status:** Phase 1 + Phase 2 + Phase 2.5 complete. 1,067 projects live. NEM Fleet Dashboard with charts. 18 REZ zones tracked across 5 states.
 
 ---
 
@@ -12,7 +12,7 @@
 |-------|--------|----------|
 | Phase 1: Foundation | ✅ Complete | 95% |
 | Phase 2: CIS/LTESA/REZ | ✅ Complete | 100% |
-| Phase 2.5: Map + NEM Summary | Not Started | 0% |
+| Phase 2.5: NEM Dashboard + REZ | ✅ Complete | 100% |
 | Phase 3: Performance | Preview Built | 10% |
 | Phase 4: Intelligence | Not Started | 0% |
 | Phase 5: Data Enrichment | Ongoing | 5% |
@@ -84,6 +84,29 @@
 
 ---
 
+## Phase 2.5: NEM Dashboard + REZ Tracking — ✅ COMPLETE
+
+### NEM Fleet Dashboard (`/dashboard`)
+- [x] Fleet stats cards (Operating 37 GW, Construction 18.4 GW, Development 328.4 GW, Storage 674 GWh)
+- [x] Capacity by Technology stacked bar chart (Recharts — wind/solar/BESS/hybrid/pumped hydro)
+- [x] Capacity by State horizontal bar chart (Recharts — NSW/QLD/VIC/SA/TAS/WA)
+- [x] Construction Pipeline project list (60 projects, linked to detail pages)
+- [x] `useNEMStats.ts` hook — client-side cross-tab aggregation from project index
+
+### REZ Tracking (`/rez`, `/rez/:id`)
+- [x] Curated 18 REZ zones across 5 states (NSW 5, VIC 5, QLD 4, SA 3, TAS 1)
+- [x] REZ list page with state filter tabs, state summary cards, zone card grid
+- [x] REZ detail page with stats, description, transmission info, project list, sources
+- [x] `rez-zones.ts` data file with zone metadata, descriptions, sources
+- [x] `useREZData.ts` hooks (useREZList, useREZDetail with project matching)
+
+### Navigation
+- [x] Desktop sidebar: Home, Dashboard, Projects, Schemes, REZ, Guides, Search (7 items)
+- [x] Mobile bottom nav: Home, Projects, Schemes, REZ, Search (5 items)
+- [x] Dashboard + Guides desktop-only; Performance + Watchlist in "Coming Soon"
+
+---
+
 ## Data Population Progress
 
 ### Database: 1,067 Projects
@@ -140,7 +163,7 @@ Layer 3: PWA FRONTEND  ✅ BUILT & DEPLOYED
   Async data loading (dataService.ts + useProjectData hooks)
   Fuse.js search across 1,067 projects
   Performance charts (recharts) for operating assets
-  9 pages: Home, ProjectList, ProjectDetail, Search, Guides, GuideReader, SchemesOverview, SchemeRoundDetail, NotFound
+  12 pages: Home, Dashboard, ProjectList, ProjectDetail, Search, Guides, GuideReader, SchemesOverview, SchemeRoundDetail, REZList, REZDetail, NotFound
   Mobile bottom nav + desktop sidebar
   PWA with service worker (vite-plugin-pwa)
   Live at: https://travis-coder712.github.io/aures-db/
@@ -211,11 +234,22 @@ Layer 3: PWA FRONTEND  ✅ BUILT & DEPLOYED
 - Fixed BUILD-TRACKER checkboxes for comparison table and CIS Tender 1 project list (completed in 5b)
 - Phase 2 declared complete at 100%
 
+### Session 6 — 2026-03-10
+- Built NEM Fleet Dashboard (`/dashboard`) with 4 fleet stat cards + 2 Recharts stacked bar charts + construction pipeline
+- Created `useNEMStats.ts` hook for client-side cross-tab aggregation from 1,067 projects
+- Researched and curated 18 REZ zones across 5 states (NSW 5, VIC 5, QLD 4, SA 3, TAS 1)
+- Built `rez-zones.ts` data file with zone metadata, descriptions, transmission info, sources
+- Built REZ list page (`/rez`) with state filters, summary cards, zone grid
+- Built REZ detail page (`/rez/:id`) with stats, description, project matching, sources
+- Updated navigation: 7-item desktop sidebar, 5-item mobile bottom nav
+- Map view deferred (99% of projects lack coordinates)
+- Phase 2.5 declared complete
+
 ---
 
 ## What To Build Next
 
-1. **REZ tracking** — Renewable Energy Zones (Phase 2.5)
-2. **Map view** — Plot 1,067 projects on an Australian map (Phase 2.5)
-3. **NEM summary dashboard** — Live grid statistics (Phase 2.5)
-4. **Data enrichment** — Enrich remaining 9 exemplar projects to Coopers Gap depth (Phase 5)
+1. **Map view** — Plot projects on an Australian map (needs coordinate data sourcing)
+2. **Data enrichment** — Enrich remaining 9 exemplar projects to Coopers Gap depth (Phase 5)
+3. **REZ–project linking** — Add `rez` field to projects in master DB for better REZ detail pages
+4. **Performance dashboards** — Operating asset metrics (Phase 3)

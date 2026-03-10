@@ -8,6 +8,9 @@ import Guides from './pages/Guides'
 import GuideReader from './pages/GuideReader'
 import SchemesOverview from './pages/SchemesOverview'
 import SchemeRoundDetail from './pages/SchemeRoundDetail'
+import Dashboard from './pages/Dashboard'
+import REZList from './pages/REZList'
+import REZDetail from './pages/REZDetail'
 import NotFound from './pages/NotFound'
 
 function App() {
@@ -23,8 +26,11 @@ function App() {
         {/* Phase 2: Schemes */}
         <Route path="schemes" element={<SchemesOverview />} />
         <Route path="schemes/:scheme/:roundId" element={<SchemeRoundDetail />} />
+        {/* Phase 2.5: Dashboard + REZ */}
+        <Route path="dashboard" element={<Dashboard />} />
+        <Route path="rez" element={<REZList />} />
+        <Route path="rez/:id" element={<REZDetail />} />
         {/* Future routes */}
-        {/* <Route path="rez" element={<REZList />} /> */}
         {/* <Route path="watchlist" element={<Watchlist />} /> */}
         {/* <Route path="performance" element={<Performance />} /> */}
         {/* <Route path="developers" element={<DeveloperList />} /> */}
