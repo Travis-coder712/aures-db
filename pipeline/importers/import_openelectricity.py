@@ -6,21 +6,22 @@ and computes annual performance metrics for each project.
 
 Usage:
     # With API key (set OPENELECTRICITY_API_KEY env var):
-    python3 pipeline/importers/import_openelectricity.py --year 2025
+    python3 pipeline/importers/import_openelectricity.py --year 2024
 
     # Generate sample data for frontend development:
     python3 pipeline/importers/import_openelectricity.py --year 2025 --sample
-
-Requirements:
-    pip install openelectricity
-    (or: uv add openelectricity)
 """
 
 import os
 import sys
 import argparse
 import random
+import json
+import time
 from datetime import datetime
+from difflib import SequenceMatcher
+from urllib.request import Request, urlopen
+from urllib.parse import urlencode, quote
 
 # Add parent to path so we can import db.py
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
@@ -30,22 +31,53 @@ from db import get_connection
 # Configuration
 # ============================================================
 
+API_BASE = "https://api.openelectricity.org.au/v4"
+BATCH_SIZE = 20  # Facilities per API call (keeps URL length reasonable)
+
 # Technology mappings for sample data generation
 TECH_CF_RANGES = {
-    'wind': (0.25, 0.45),       # Typical AU wind capacity factors
-    'solar': (0.18, 0.32),      # Typical AU solar capacity factors
-    'bess': (0.05, 0.20),       # BESS utilisation (discharge hours / total hours)
-    'hybrid': (0.20, 0.38),     # Hybrid combines solar+BESS
+    'wind': (0.25, 0.45),
+    'solar': (0.18, 0.32),
+    'bess': (0.05, 0.20),
+    'hybrid': (0.20, 0.38),
     'pumped_hydro': (0.08, 0.25),
 }
 
 TECH_PRICE_RANGES = {
-    'wind': (45, 95),           # $/MWh volume-weighted average
+    'wind': (45, 95),
     'solar': (30, 75),
-    'bess': (80, 250),          # Discharge price
+    'bess': (80, 250),
     'hybrid': (40, 85),
     'pumped_hydro': (70, 200),
 }
+
+
+# ============================================================
+# HTTP Helpers
+# ============================================================
+
+def api_get(path, api_key, params=None):
+    """Make an authenticated GET request to the OpenElectricity API."""
+    url = f"{API_BASE}{path}"
+    if params:
+        # Handle repeated params (e.g., facility_code=A&facility_code=B)
+        parts = []
+        for k, v in params.items():
+            if isinstance(v, list):
+                for item in v:
+                    parts.append(f"{quote(k)}={quote(str(item))}")
+            else:
+                parts.append(f"{quote(k)}={quote(str(v))}")
+        url += "?" + "&".join(parts)
+
+    req = Request(url, headers={
+        "Authorization": f"Bearer {api_key}",
+        "User-Agent": "AURES-Pipeline/1.0",
+        "Accept": "application/json",
+    })
+    resp = urlopen(req, timeout=30)
+    return json.loads(resp.read().decode())
+
 
 # ============================================================
 # OpenElectricity API Import
@@ -53,80 +85,223 @@ TECH_PRICE_RANGES = {
 
 def import_from_api(conn, year: int):
     """Import performance data from the OpenElectricity API."""
-    try:
-        from openelectricity import OEClient, DataMetric
-        from openelectricity.types import UnitFueltechType, UnitStatusType
-    except ImportError:
-        print("ERROR: openelectricity package not installed.")
-        print("Install with: pip install openelectricity")
-        sys.exit(1)
-
     api_key = os.environ.get('OPENELECTRICITY_API_KEY')
     if not api_key:
         print("ERROR: OPENELECTRICITY_API_KEY environment variable not set.")
         print("Sign up at https://platform.openelectricity.org.au/sign-up")
         sys.exit(1)
 
-    # Get our operating projects with DUIDs
+    # Check quota
+    me = api_get("/me", api_key)
+    remaining = me.get('data', {}).get('meta', {}).get('remaining', 0)
+    print(f"API quota remaining: {remaining} requests")
+    if remaining < 15:
+        print("WARNING: Low API quota. Consider waiting for reset.")
+        sys.exit(1)
+
+    # Step 1: Get our operating projects
     projects = get_operating_projects(conn)
     if not projects:
         print("No operating projects found in database.")
         return
+    projects_by_id = {p['id']: p for p in projects}
+    print(f"Found {len(projects)} operating projects.")
 
-    print(f"Found {len(projects)} operating projects to fetch data for.")
+    # Step 2: Fetch all NEM operating facilities from API
+    print("Fetching facility list from OpenElectricity...")
+    facilities_data = api_get("/facilities/", api_key, {
+        "status_id": "operating",
+        "network_id": "NEM",
+    })
+    oe_facilities = facilities_data.get('data', [])
+    print(f"  {len(oe_facilities)} NEM operating facilities from API.")
 
-    # Build DUID -> project_id mapping from aemo_generation_info
-    duid_map = build_duid_map(conn)
-    print(f"Mapped {len(duid_map)} DUIDs to projects.")
+    # Step 3: Build project -> facility_code mapping
+    mapping = build_project_facility_map(conn, projects, oe_facilities)
+    print(f"Matched {len(mapping)} projects to OE facilities.")
 
-    # Fetch facility data from OpenElectricity
-    client = OEClient(api_key=api_key)
+    # Step 4: Fetch energy + market_value in batches
+    facility_codes = list(set(mapping.values()))
+    # Reverse map: facility_code -> [project_ids]
+    code_to_projects = {}
+    for pid, fcode in mapping.items():
+        code_to_projects.setdefault(fcode, []).append(pid)
 
-    # Get list of facilities from the API
-    facilities = client.get_facilities(
-        network_id=["NEM"],
-        status_id=[UnitStatusType.OPERATING],
-    )
+    # Pre-build unit_code -> facility_code lookup for fast result parsing
+    unit_lookup = {}
+    for f in oe_facilities:
+        for u in f.get('units', []):
+            unit_lookup[u['code']] = f['code']
 
-    # Match API facilities to our projects via station_name
-    matched = match_facilities(facilities, projects, duid_map)
-    print(f"Matched {len(matched)} facilities to AURES projects.")
+    total_batches = (len(facility_codes) + BATCH_SIZE - 1) // BATCH_SIZE
+    print(f"\nFetching data for {len(facility_codes)} unique facilities in {total_batches} batches...")
 
-    # Fetch energy data for matched facilities
-    date_start = datetime(year, 1, 1)
-    date_end = datetime(year, 12, 31)
+    # Collect all results: facility_code -> {energy_mwh, market_value_aud}
+    facility_results = {}
 
-    imported = 0
-    for facility_code, project_id in matched.items():
+    for i in range(0, len(facility_codes), BATCH_SIZE):
+        batch = facility_codes[i:i + BATCH_SIZE]
+        batch_num = i // BATCH_SIZE + 1
+
         try:
-            data = client.get_facility_data(
-                facility_code=facility_code,
-                metrics=[DataMetric.ENERGY],
-                interval="1M",
-                date_start=date_start,
-                date_end=date_end,
-            )
+            data = api_get("/data/facilities/NEM", api_key, {
+                "facility_code": batch,
+                "metrics": ["energy", "market_value"],
+                "interval": "1y",
+                "date_start": f"{year}-01-01",
+                "date_end": f"{year}-12-31",
+            })
 
-            # Sum monthly energy to annual
-            annual_energy = sum_annual_energy(data)
-            if annual_energy is None:
-                continue
+            # Parse results
+            for series in data.get('data', []):
+                metric = series.get('metric')
+                for result in series.get('results', []):
+                    unit_code = result.get('columns', {}).get('unit_code', '')
+                    values = result.get('data', [])
+                    value = values[0][1] if values and len(values[0]) > 1 else None
 
-            project = next((p for p in projects if p['id'] == project_id), None)
+                    if value is None:
+                        continue
+
+                    fcode = unit_lookup.get(unit_code)
+                    if not fcode:
+                        continue
+
+                    if fcode not in facility_results:
+                        facility_results[fcode] = {'energy_mwh': 0, 'market_value_aud': 0}
+
+                    if metric == 'energy':
+                        facility_results[fcode]['energy_mwh'] += value
+                    elif metric == 'market_value':
+                        facility_results[fcode]['market_value_aud'] += value
+
+            print(f"  Batch {batch_num}/{total_batches}: OK ({len(batch)} facilities)")
+            time.sleep(0.5)  # Be polite to the API
+
+        except Exception as e:
+            print(f"  Batch {batch_num}/{total_batches}: FAILED - {e}")
+
+    # Step 5: Compute metrics and upsert
+    imported = 0
+    skipped = 0
+    for fcode, raw in facility_results.items():
+        energy = raw['energy_mwh']
+        market_value = raw['market_value_aud']
+
+        if energy <= 0:
+            continue
+
+        for pid in code_to_projects.get(fcode, []):
+            project = projects_by_id.get(pid)
             if not project:
                 continue
 
-            # Compute metrics
-            metrics = compute_metrics(project, annual_energy, year)
-            upsert_performance(conn, project_id, year, metrics, 'openelectricity')
+            capacity_mw = project['capacity_mw']
+            tech = project['technology']
+            storage_mwh = project.get('storage_mwh')
+            hours_in_year = 8760
+
+            cf = (energy / (capacity_mw * hours_in_year)) * 100
+            price_received = market_value / energy if energy > 0 else 0
+            revenue_per_mw = market_value / capacity_mw if capacity_mw > 0 else 0
+
+            metrics = {
+                'energy_mwh': round(energy, 1),
+                'capacity_factor_pct': round(min(cf, 100), 2),
+                'energy_price_received': round(price_received, 2),
+                'revenue_aud': round(market_value, 0),
+                'revenue_per_mw': round(revenue_per_mw, 0),
+                'market_value_aud': round(market_value, 0),
+            }
+
+            # Curtailment not available from this API — leave NULL for now
+            # BESS charge/discharge breakdown not available at annual level
+
+            upsert_performance(conn, pid, year, metrics, 'openelectricity')
             imported += 1
 
-        except Exception as e:
-            print(f"  Warning: Failed to fetch {facility_code}: {e}")
-
     conn.commit()
-    print(f"Imported performance data for {imported} projects (year {year}).")
+    print(f"\nImported real performance data for {imported} projects (year {year}).")
+    print(f"Facilities with data: {len(facility_results)}, Skipped (no energy): {skipped}")
 
+
+def build_project_facility_map(conn, projects, oe_facilities):
+    """Match AURES projects to OpenElectricity facility codes.
+
+    Strategy: 1) DUID match via aemo_generation_info, 2) Name fuzzy match.
+    Returns: dict of project_id -> facility_code
+    """
+    # Build OE unit_code -> facility_code index
+    oe_unit_to_facility = {}
+    for f in oe_facilities:
+        for u in f.get('units', []):
+            oe_unit_to_facility[u['code']] = f['code']
+
+    # Build OE name -> facility_code index (normalized)
+    oe_by_name = {}
+    for f in oe_facilities:
+        n = _normalize_name(f['name'])
+        oe_by_name[n] = f['code']
+
+    # Get our DUIDs
+    duids = conn.execute("""
+        SELECT duid, project_id FROM aemo_generation_info
+        WHERE project_id IS NOT NULL AND duid IS NOT NULL
+    """).fetchall()
+    project_duids = {}
+    for d in duids:
+        project_duids.setdefault(d['project_id'], []).append(d['duid'])
+
+    matched = {}
+    for p in projects:
+        pid = p['id']
+        tech = p['technology']
+        if tech not in ('wind', 'solar', 'bess', 'hybrid', 'pumped_hydro'):
+            continue
+
+        oe_code = None
+
+        # Strategy 1: DUID match
+        for duid in project_duids.get(pid, []):
+            if duid in oe_unit_to_facility:
+                oe_code = oe_unit_to_facility[duid]
+                break
+
+        # Strategy 2: Name match
+        if not oe_code:
+            pn = _normalize_name(p['name'])
+            if pn in oe_by_name:
+                oe_code = oe_by_name[pn]
+            else:
+                best_score = 0
+                best_code = None
+                for n, code in oe_by_name.items():
+                    score = SequenceMatcher(None, pn, n).ratio()
+                    if score > best_score:
+                        best_score = score
+                        best_code = code
+                if best_score >= 0.7:
+                    oe_code = best_code
+
+        if oe_code:
+            matched[pid] = oe_code
+
+    return matched
+
+
+def _normalize_name(name):
+    """Normalize a facility/project name for matching."""
+    n = name.lower()
+    for suffix in [' wind farm', ' solar farm', ' solar plant', ' solar park',
+                   ' bess', ' battery', ' energy storage system']:
+        n = n.replace(suffix, '')
+    n = n.replace(' stage ', ' ').replace(' phase ', ' ').replace('_', ' ')
+    return n.strip()
+
+
+# ============================================================
+# Sample Data Generation (for frontend development)
+# ============================================================
 
 def get_operating_projects(conn):
     """Get all operating projects from the database."""
@@ -134,73 +309,11 @@ def get_operating_projects(conn):
         SELECT id, name, technology, capacity_mw, storage_mwh, state
         FROM projects
         WHERE status = 'operating'
-        AND capacity_mw >= 30
+        AND capacity_mw >= 5
         ORDER BY capacity_mw DESC
     """).fetchall()
     return [dict(r) for r in rows]
 
-
-def build_duid_map(conn):
-    """Build a mapping of DUID -> project_id from aemo_generation_info."""
-    rows = conn.execute("""
-        SELECT duid, project_id, station_name
-        FROM aemo_generation_info
-        WHERE project_id IS NOT NULL AND duid IS NOT NULL
-    """).fetchall()
-    return {r['duid']: {'project_id': r['project_id'], 'station_name': r['station_name']} for r in rows}
-
-
-def match_facilities(facilities, projects, duid_map):
-    """Match OpenElectricity facilities to our projects."""
-    matched = {}
-    project_names = {p['name'].lower(): p['id'] for p in projects}
-
-    # Try matching by station name
-    if hasattr(facilities, 'data'):
-        for facility in facilities.data:
-            code = getattr(facility, 'code', None)
-            name = getattr(facility, 'name', '').lower()
-            if code and name:
-                # Try exact name match
-                for pname, pid in project_names.items():
-                    if name in pname or pname in name:
-                        matched[code] = pid
-                        break
-
-    return matched
-
-
-def sum_annual_energy(data):
-    """Sum monthly energy data to annual total in MWh."""
-    try:
-        total = 0
-        if hasattr(data, 'data'):
-            for series in data.data:
-                if hasattr(series, 'results'):
-                    for result in series.results:
-                        if result.value is not None:
-                            total += result.value
-        return total if total > 0 else None
-    except Exception:
-        return None
-
-
-def compute_metrics(project, annual_energy_mwh, year):
-    """Compute derived performance metrics."""
-    capacity_mw = project['capacity_mw']
-    hours_in_year = 8760
-
-    capacity_factor = (annual_energy_mwh / (capacity_mw * hours_in_year)) * 100
-
-    return {
-        'energy_mwh': annual_energy_mwh,
-        'capacity_factor_pct': round(capacity_factor, 2),
-    }
-
-
-# ============================================================
-# Sample Data Generation (for frontend development)
-# ============================================================
 
 def generate_sample_data(conn, year: int):
     """Generate realistic sample performance data for all operating projects."""
@@ -333,7 +446,7 @@ def upsert_performance(conn, project_id: str, year: int, metrics: dict, source: 
 
 def main():
     parser = argparse.ArgumentParser(description='Import performance data from OpenElectricity API')
-    parser.add_argument('--year', type=int, default=2025, help='Year to import (default: 2025)')
+    parser.add_argument('--year', type=int, default=2024, help='Year to import (default: 2024)')
     parser.add_argument('--sample', action='store_true', help='Generate sample data instead of API import')
     args = parser.parse_args()
 
