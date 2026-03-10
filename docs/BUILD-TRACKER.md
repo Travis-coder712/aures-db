@@ -1,8 +1,8 @@
 # AURES Database — Build Tracker
 
 > **Last Updated:** 2026-03-11
-> **Current Phase:** Phase 3 — Performance Analytics
-> **Status:** Phases 1-3 complete. 1,067 projects, 224 with performance data. League tables for wind (82), solar (80), BESS (62). OpenElectricity API integrated.
+> **Current Phase:** Between Phase 3 and Phase 4
+> **Status:** Phases 1-3 complete. 1,067 projects, 224 with real performance data from OpenElectricity API. League tables for wind (82), solar (80), BESS (28), pumped hydro (34). 473 timeline events auto-populated. 3 duplicate projects to resolve.
 
 ---
 
@@ -14,8 +14,9 @@
 | Phase 2: CIS/LTESA/REZ | ✅ Complete | 100% |
 | Phase 2.5: NEM Dashboard + REZ | ✅ Complete | 100% |
 | Phase 3: Performance | ✅ Complete | 100% |
+| Phase 3.5: Data Quality + Enrichment | 🔄 In Progress | 30% |
 | Phase 4: Intelligence | Not Started | 0% |
-| Phase 5: Data Enrichment | Ongoing | 5% |
+| Phase 5: Data Enrichment | Ongoing | 10% |
 
 ---
 
@@ -114,28 +115,106 @@
 - [x] OpenElectricity API importer (`import_openelectricity.py`) — live API + `--sample` mode
 - [x] League table processor (`compute_league_tables.py`) — rankings, percentiles, quartiles, composite scores
 - [x] JSON export additions — league table JSONs, quartile benchmarks
-- [x] OpenElectricity API key obtained and stored (Community plan)
+- [x] OpenElectricity API key obtained and stored (Community plan, 500 req/day)
+- [x] **Real 2024 data imported** — replaced sample data with AEMO market data via OpenElectricity API
+- [x] **BESS charge/discharge interpolation** — derived from separate battery_charging/battery_discharging unit data
+- [x] **Pumped hydro separated from BESS** — now its own league table category
+
+### Facility Metadata Harvest (zero extra API calls)
+- [x] `harvest_facility_metadata.py` — extracts dates + coordinates from facilities response
+- [x] 441 timeline events auto-created (225 COD, 223 energisation, construction starts, planning approvals)
+- [x] 218 projects got coordinates filled (was 6)
+- [x] 200 projects got verified COD dates from AEMO registration
+- [x] `data_source` column added to timeline_events (migration 004) — tracks 'manual' vs 'openelectricity'
 
 ### Frontend
-- [x] Performance page (`/performance`) — sortable league tables with tech tabs (Wind/Solar/BESS)
-- [x] Fleet summary cards (projects ranked, avg CF, avg Rev/MW, avg curtailment)
-- [x] Year dropdown + state filter pills
-- [x] BESS-specific columns (Spread, Util%, Cycles)
+- [x] Performance page (`/performance`) — sortable league tables with **4 tech tabs** (Wind / Solar / BESS / Hydro)
+- [x] Fleet summary cards (projects ranked, avg CF/utilisation, avg Rev/MW, avg curtailment)
+- [x] Year dropdown + state filter pills (2024 + 2025)
+- [x] BESS-specific columns: Discharged, Charged, Spread, Cycles, Rev/MW
+- [x] Hydro tab uses wind/solar columns (CF%, $/MWh, Rev/MW, Curt%)
+- [x] **Data source badges** — green "AEMO data via OpenElectricity" for real data, amber "Sample data" for estimates
 - [x] Quartile distribution chart (Recharts)
 - [x] Color-coded metrics (CF%, curtailment) and quartile badges (Q1-Q4)
+- [x] Mobile Dashboard shortcut button on Home page (lg:hidden)
 - [x] `usePerformanceData.ts` hooks (useLeagueTableIndex, useLeagueTable, useFilteredLeagueTable)
-- [x] League table types in `types.ts` (LeagueTableEntry, LeagueTable, LeagueTableIndex)
+- [x] League table types in `types.ts` (LeagueTableEntry, LeagueTable, LeagueTableIndex, LeagueTechnology includes pumped_hydro)
 
 ### Navigation
 - [x] Desktop sidebar: 8 items (Home, Dashboard, Projects, Performance, Schemes, REZ, Guides, Search)
-- [x] Mobile bottom nav: 5 items (Home, Projects, Perf, REZ, Search)
+- [x] Mobile bottom nav: 5 items (Home, Projects, Perf, REZ, Search) + Dashboard shortcut on Home
 - [x] Performance moved from "Coming Soon" to live nav; only Watchlist remains in Coming Soon
-- [x] Home page "Coming Soon" section updated (removed CIS + Performance, only Watchlist remains)
 
-### Data Seeded
-- [x] 224 operating projects with sample performance data (2025)
-- [x] Wind: 82 ranked, Solar: 80 ranked, BESS: 62 ranked
-- [x] 8 guides (added "Using AURES on Your Phone" PWA guide)
+### Performance Data Summary
+
+**2024 — Real AEMO Data (via OpenElectricity)**
+| Technology | Projects | Avg CF | Avg Rev/MW | Avg $/MWh |
+|-----------|----------|--------|------------|-----------|
+| Wind | 82 | 30.3% | $210k | $77 |
+| Solar | 75 | 20.6% | $97k | $52 |
+| BESS | 17 | 6.8% util | $173k | $220 |
+| Pumped Hydro | 33 | 28.4% | $180k | $143 |
+
+**2025 — Sample Data (projected estimates)**
+| Technology | Projects | Avg CF | Avg Rev/MW |
+|-----------|----------|--------|------------|
+| Wind | 82 | 36.1% | $211k |
+| Solar | 80 | 21.5% | $97k |
+| BESS | 28 | 12.2% | $173k |
+| Pumped Hydro | 34 | 16.7% | $180k |
+
+---
+
+## Phase 3.5: Data Quality + Enrichment — 🔄 IN PROGRESS
+
+### Known Issues
+
+#### Duplicate Projects (3 pairs)
+| Duplicate | Keep | Remove | Reason |
+|-----------|------|--------|--------|
+| `coopers-gap-wind-farm` vs `coopers-gap-wind` | `coopers-gap-wind-farm` (has DUIDs) | `coopers-gap-wind` (manual seed) | AEMO-linked has real data |
+| `stockyard-hill-wind-farm` vs `stockyard-hill-wind` | `stockyard-hill-wind-farm` (has DUIDs) | `stockyard-hill-wind` (manual seed) | AEMO-linked has real data |
+| `new-england-solar-farm` vs `new-england-solar` | `new-england-solar-farm` (has DUIDs) | `new-england-solar` (manual seed, listed as hybrid) | AEMO-linked; separate BESS entry exists |
+
+**Root cause:** Manual exemplar seeds from Phase 1 created IDs like `coopers-gap-wind`, then the AEMO importer created `coopers-gap-wind-farm` from AEMO data. Both entries persist.
+
+#### Data Completeness by Status
+| Status | Projects | Has COD | Has Developer | Has Coords | Has Timeline |
+|--------|----------|---------|---------------|------------|-------------|
+| Operating | 224 | 224 ✅ | 224 ✅ | 224 ✅ | 224 ✅ |
+| Construction | 49 | 49 | 49 | 2 ❌ | 2 ❌ |
+| Commissioning | 11 | 11 | 11 | 0 ❌ | 0 ❌ |
+| Development | 783 | 329 | 783 | 2 ❌ | 2 ❌ |
+
+**Key gap:** Construction and development projects have almost no coordinates, timeline events, or enrichment beyond AEMO registration data.
+
+#### REZ Access Rights — Sparse
+Only 2 projects currently have REZ assignments:
+- Yanco Delta Solar Farm — SW REZ (manual seed)
+- New England Solar Farm — New England REZ (manual seed)
+
+NSW EII has awarded REZ access rights to dozens of projects across Central-West Orana, New England, South-West, and Hunter-Central Coast REZs. This data needs to be populated.
+
+### Enrichment Priorities
+
+**Tier 1 — Critical Projects (Construction, >200 MW)**
+49 construction projects totalling 15.2 GW. Top 10:
+1. Snowy 2.0 (2,200 MW pumped hydro, NSW)
+2. Golden Plains Wind Farm (1,300 MW, VIC)
+3. Golden Plains Wind Farm West (557 MW, VIC)
+4. Supernode BESS (520 MW, QLD)
+5. Liddell BESS (500 MW, NSW)
+6. Wambo Wind Farm (500 MW, QLD)
+7. Eraring Battery (460 MW, NSW)
+8. Goulburn River Solar Farm (450 MW, NSW)
+9. Orana BESS (415 MW, NSW)
+10. Uungula Wind Farm (414 MW, NSW)
+
+**Tier 2 — Large Development Projects (>500 MW)**
+Largest development projects by capacity — most likely to proceed.
+
+**Tier 3 — Projects with CIS/LTESA Contracts**
+Projects that have won scheme contracts are confirmed to proceed. Cross-reference with scheme_contracts table.
 
 ---
 
@@ -151,6 +230,12 @@
 | Hybrid | 110 | 45.3 GW |
 | Pumped Hydro | 61 | 29.1 GW |
 
+### Timeline Events: 473 Total
+| Source | Count |
+|--------|-------|
+| OpenElectricity (auto) | 441 |
+| Manual (seed data) | 32 |
+
 ### Enriched Exemplar Projects (10)
 
 | # | Project | Tech | State | Data Depth |
@@ -160,9 +245,9 @@
 | 3 | Victorian Big Battery | BESS | VIC | Good (5 events incl. Megapack fire, Tesla OEM) |
 | 4 | Hornsdale Power Reserve | BESS | SA | Good (4 events, 3 phases, Tesla OEM) |
 | 5 | Waratah Super Battery | BESS | NSW | Good (3 events, Tesla OEM, SIPS) |
-| 6 | Stockyard Hill Wind Farm | Wind | VIC | Basic (3 events, Goldwind OEM, Origin PPA) |
-| 7 | Coopers Gap Wind Farm | Wind | QLD | **Enriched** (7 events, FID, tower felling, repairs, COD drift) |
-| 8 | New England Solar Farm | Hybrid | NSW | Basic (3 events) |
+| 6 | Stockyard Hill Wind Farm | Wind | VIC | Basic (3 events, Goldwind OEM, Origin PPA) — **DUPLICATE: merge with AEMO entry** |
+| 7 | Coopers Gap Wind Farm | Wind | QLD | **Enriched** (7 events, FID, tower felling, repairs) — **DUPLICATE: merge with AEMO entry** |
+| 8 | New England Solar Farm | Hybrid | NSW | Basic (3 events) — **DUPLICATE: merge with AEMO entry** |
 | 9 | Eraring Battery | BESS | NSW | Basic (2 events, COD drift) |
 | 10 | Collie Battery | BESS | WA | Basic (1 event) |
 
@@ -173,24 +258,25 @@
 ```
 Layer 0: DATA PIPELINE (Python)  ✅ BUILT
   pipeline/db.py                    — Database connection helper
-  pipeline/exporters/export_json.py — SQLite → JSON export
+  pipeline/exporters/export_json.py — SQLite → JSON export (incl. performance data_source)
   pipeline/importers/import_aemo_gen_info.py — AEMO Excel importer
-  pipeline/importers/import_openelectricity.py — OpenElectricity API importer
-  pipeline/processors/compute_league_tables.py — League table ranking engine
-  pipeline/requirements.txt         — openpyxl, requests, pandas, openelectricity
+  pipeline/importers/import_openelectricity.py — OpenElectricity API importer (energy, market_value, BESS charge/discharge)
+  pipeline/importers/harvest_facility_metadata.py — Facility metadata harvester (dates, coordinates, timeline events)
+  pipeline/processors/compute_league_tables.py — League table ranking engine (4 tech categories)
+  pipeline/requirements.txt         — openpyxl (AEMO only; OpenElectricity uses stdlib urllib)
 
 Layer 1: SQLite DATABASE  ✅ BUILT
   database/schema.sql               — 17 tables, full schema (incl. performance_annual, league_table_entries)
-  database/aures.db                 — 1,067 projects
+  database/aures.db                 — 1,067 projects, 473 timeline events
   database/seeds/                   — Exemplar project seed script
+  database/migrations/              — 003_performance_tables.sql, 004_timeline_data_source.sql
 
 Layer 2: STATIC JSON  ✅ BUILT
   frontend/public/data/             — Served by Vite dev server
-  data/                             — Source-of-truth export
   projects/index.json               — 1,067 project summaries (303KB)
-  projects/{tech}/{id}.json         — Individual project detail
+  projects/{tech}/{id}.json         — Individual project detail (with timeline, coordinates, COD)
   indexes/by-*.json                 — Indexes by tech, state, status, developer
-  performance/league-tables/*.json  — League table rankings by tech+year
+  performance/league-tables/*.json  — League table rankings by tech+year (8 files + index)
   performance/quartile-benchmarks/  — Quartile stats per metric
   metadata/stats.json               — Quick stats for dashboard
 
@@ -198,12 +284,18 @@ Layer 3: PWA FRONTEND  ✅ BUILT & DEPLOYED
   React 19 + TypeScript + Vite 6 + Tailwind 4
   Async data loading (dataService.ts + useProjectData hooks)
   Fuse.js search across 1,067 projects
-  Performance charts (recharts) for operating assets
+  Performance league tables with data source badges
   13 pages: Home, Dashboard, ProjectList, ProjectDetail, Performance, Search, Guides, GuideReader, SchemesOverview, SchemeRoundDetail, REZList, REZDetail, NotFound
-  Mobile bottom nav + desktop sidebar
+  Mobile bottom nav + desktop sidebar + Dashboard shortcut
   PWA with service worker (vite-plugin-pwa)
   Live at: https://travis-coder712.github.io/aures-db/
 ```
+
+### OpenElectricity API Usage
+- **Plan:** Community (free), 500 requests/rolling 24h
+- **Per import run:** ~18 requests (1 `/me` + 1 `/facilities/` + ~11 data batches + ~5 market data)
+- **Metadata harvest:** 2 requests (1 `/me` + 1 `/facilities/`, reuses same data)
+- **Headroom:** Can run full import twice daily with room to spare
 
 ---
 
@@ -227,7 +319,7 @@ Layer 3: PWA FRONTEND  ✅ BUILT & DEPLOYED
 ### Session 3 — 2026-03-10
 - Built SQLite database schema (15 tables)
 - Built seed script for 10 exemplar projects
-- Built JSON export pipeline (SQLite → static JSON)
+- Built JSON export pipeline (SQLite → JSON)
 - Fixed source URLs to link to specific pages
 - Enriched Coopers Gap with full construction timeline
 
@@ -294,12 +386,34 @@ Layer 3: PWA FRONTEND  ✅ BUILT & DEPLOYED
 - Obtained and stored OpenElectricity API key (Community plan)
 - Updated Home page: removed completed items from "Coming Soon"
 
+### Session 8 — 2026-03-11
+- **Real API data**: Replaced sample 2024 data with real AEMO market data via OpenElectricity API (207 projects)
+- **BESS charge/discharge**: Derived charge price, discharge price, spread, cycles from separate battery unit data
+- **Pumped hydro separated**: Split from BESS into own category (34 projects, new Hydro tab)
+- **BESS columns enhanced**: Discharged, Charged, Spread, Cycles, Rev/MW
+- **Metadata harvest**: Built `harvest_facility_metadata.py` — 441 timeline events auto-created, 218 coordinates filled, 200 COD dates set
+- **Data source badges**: Green "AEMO data via OpenElectricity" / amber "Sample data" on Performance page
+- **Mobile Dashboard shortcut**: Added NEM Dashboard button to Home page (mobile only)
+- **Data provenance**: `data_source` field added to league table JSON and timeline_events table
+- **Docs update**: Updated all guidance documents for post-Phase 3 state
+
 ---
 
 ## What To Build Next
 
-1. **Real performance data** — Run importer with OpenElectricity API key to replace sample data
-2. **Map view** — Plot projects on an Australian map (needs coordinate data sourcing)
-3. **Data enrichment** — Enrich remaining 9 exemplar projects to Coopers Gap depth (Phase 5)
-4. **REZ–project linking** — Add `rez` field to projects in master DB for better REZ detail pages
-5. **Watchlist** — COD deadline monitoring, risk scores, zombie project detection (Phase 4)
+### Immediate (Phase 3.5 — Data Quality)
+1. **Fix 3 duplicate projects** — Merge manual seeds with AEMO-linked entries, preserve timeline events
+2. **Populate NSW REZ access rights** — Research EII tender results for CWO, New England, SW, Hunter REZs
+3. **Enrich top construction projects** — Add timeline events, coordinates, developer info for 49 construction projects
+
+### Short Term (Phase 4 — Intelligence Layer)
+4. **Confidence ratings** — Implement 4-tier system (HIGH/GOOD/MEDIUM/LOW) based on data completeness
+5. **Developer profiles** — Aggregate portfolio views by developer (Origin, AGL, Neoen, etc.)
+6. **COD drift tracking** — Visualise how expected COD dates shift over time
+7. **Operations-to-development mapping** — Show nearby operating performance for proposed projects
+
+### Medium Term
+8. **Monthly performance data** — Change interval from annual to monthly for sparklines/seasonal patterns
+9. **Web research agents** — Systematic enrichment of critical projects from RenewEconomy, AFR, AEMO
+10. **Map view** — All 224+ operating projects now have coordinates; map is feasible
+11. **Emissions data** — Add `emissions` metric to OpenElectricity data fetch (0 extra API calls)

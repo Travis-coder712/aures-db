@@ -81,27 +81,39 @@ By researching actual data sources before designing the system, the architecture
 
 ## What's Left To Do
 
-### Immediate (This Session / Next Session)
-- [ ] Scaffold the React + Vite + Tailwind + PWA frontend
-- [ ] Implement the SQLite database schema
-- [ ] Build the AEMO Generation Information importer
-- [ ] Build the first 3 frontend screens
-- [ ] Create the Yanco Delta exemplar project
+### ✅ Completed (Phases 1-3)
+- [x] Scaffold the React + Vite + Tailwind + PWA frontend
+- [x] Implement the SQLite database schema
+- [x] Build the AEMO Generation Information importer (1,057 projects)
+- [x] Build all core frontend screens (13 pages)
+- [x] Create 10 exemplar projects (Yanco Delta, Coopers Gap, etc.)
+- [x] All CIS and LTESA rounds populated (15 rounds, 95 projects)
+- [x] REZ views (18 zones across 5 states)
+- [x] NEM Dashboard with fleet stats and charts
+- [x] League tables (Wind, Solar, BESS, Hydro) with real OpenElectricity API data
+- [x] Auto-populated 441 timeline events + 218 coordinates from AEMO data
 
-### Medium Term (Weeks 2-6)
-- [ ] All CIS and LTESA rounds populated
-- [ ] REZ views
-- [ ] Watchlist dashboard
-- [ ] AEMO SCADA data pipeline
-- [ ] League tables (Wind, Solar, BESS)
-- [ ] Education hub
+### Immediate (Phase 3.5 — Data Quality)
+- [ ] Fix 3 duplicate projects (Coopers Gap, Stockyard Hill, New England Solar)
+- [ ] Populate NSW REZ access rights (CWO, New England, SW, Hunter REZs)
+- [ ] Enrich top construction projects (49 projects, 15.2 GW)
+- [ ] Research and classify critical development projects
 
-### Long Term (Weeks 7+)
-- [ ] Multi-source intelligence panels
-- [ ] Developer and OEM profiles
-- [ ] Operations → development mapping
-- [ ] Full data enrichment across 100+ projects
-- [ ] Monthly performance data refresh automation
+### Medium Term (Phase 4 — Intelligence)
+- [ ] Confidence rating system (HIGH/GOOD/MEDIUM/LOW)
+- [ ] Developer profiles (portfolio aggregation)
+- [ ] COD drift tracking and visualisation
+- [ ] Operations-to-development mapping
+- [ ] Zombie project detection
+- [ ] Watchlist with risk scoring
+
+### Long Term (Phase 5 — Enrichment)
+- [ ] Monthly performance data (sparklines, seasonal patterns)
+- [ ] Automated web research for project enrichment
+- [ ] OEM profiles (Vestas, Goldwind, Tesla, Fluence, etc.)
+- [ ] Map view (coordinates now available for 224 operating projects)
+- [ ] Emissions data integration
+- [ ] Monthly AEMO data refresh automation
 
 ---
 
