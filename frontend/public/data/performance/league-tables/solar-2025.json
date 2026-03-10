@@ -1,6 +1,7 @@
 {
   "year": 2025,
   "technology": "solar",
+  "data_source": "sample",
   "fleet_avg": {
     "capacity_factor_pct": 25.97,
     "revenue_per_mw": 123219.0,
@@ -28,7 +29,8 @@
       "energy_price_received": 69.33,
       "revenue_aud": 15088420.0,
       "revenue_per_mw": 201179.0,
-      "market_value_aud": 15088420.0
+      "market_value_aud": 15088420.0,
+      "data_source": "sample"
     },
     {
       "project_id": "yarranlea-solar-farm",
@@ -50,7 +52,8 @@
       "energy_price_received": 70.92,
       "revenue_aud": 21013850.0,
       "revenue_per_mw": 204018.0,
-      "market_value_aud": 21013850.0
+      "market_value_aud": 21013850.0,
+      "data_source": "sample"
     },
     {
       "project_id": "yatpool-solar-farm",
@@ -72,7 +75,8 @@
       "energy_price_received": 72.76,
       "revenue_aud": 15019621.0,
       "revenue_per_mw": 185427.0,
-      "market_value_aud": 15019621.0
+      "market_value_aud": 15019621.0,
+      "data_source": "sample"
     },
     {
       "project_id": "darlington-point-solar-farm",
@@ -94,7 +98,8 @@
       "energy_price_received": 70.31,
       "revenue_aud": 51072168.0,
       "revenue_per_mw": 185717.0,
-      "market_value_aud": 51072168.0
+      "market_value_aud": 51072168.0,
+      "data_source": "sample"
     },
     {
       "project_id": "western-downs-green-power-hub-pl",
@@ -116,7 +121,8 @@
       "energy_price_received": 73.21,
       "revenue_aud": 88752832.0,
       "revenue_per_mw": 221882.0,
-      "market_value_aud": 88752832.0
+      "market_value_aud": 88752832.0,
+      "data_source": "sample"
     },
     {
       "project_id": "bomen-solar-farm",
@@ -138,7 +144,8 @@
       "energy_price_received": 69.02,
       "revenue_aud": 19151794.0,
       "revenue_per_mw": 191518.0,
-      "market_value_aud": 19151794.0
+      "market_value_aud": 19151794.0,
+      "data_source": "sample"
     },
     {
       "project_id": "tailem-bend-solar",
@@ -160,7 +167,8 @@
       "energy_price_received": 74.64,
       "revenue_aud": 20444776.0,
       "revenue_per_mw": 215208.0,
-      "market_value_aud": 20444776.0
+      "market_value_aud": 20444776.0,
+      "data_source": "sample"
     },
     {
       "project_id": "emerald-solar-park",
@@ -182,7 +190,8 @@
       "energy_price_received": 59.91,
       "revenue_aud": 11865396.0,
       "revenue_per_mw": 164797.0,
-      "market_value_aud": 11865396.0
+      "market_value_aud": 11865396.0,
+      "data_source": "sample"
     },
     {
       "project_id": "glenrowan-west-solar-farm",
@@ -204,7 +213,8 @@
       "energy_price_received": 65.48,
       "revenue_aud": 18249266.0,
       "revenue_per_mw": 165902.0,
-      "market_value_aud": 18249266.0
+      "market_value_aud": 18249266.0,
+      "data_source": "sample"
     },
     {
       "project_id": "childers-solar-farm",
@@ -226,7 +236,8 @@
       "energy_price_received": 66.09,
       "revenue_aud": 9740131.0,
       "revenue_per_mw": 173931.0,
-      "market_value_aud": 9740131.0
+      "market_value_aud": 9740131.0,
+      "data_source": "sample"
     },
     {
       "project_id": "kiamal-solar-farm-stage-1",
@@ -248,7 +259,8 @@
       "energy_price_received": 56.46,
       "revenue_aud": 30557603.0,
       "revenue_per_mw": 152788.0,
-      "market_value_aud": 30557603.0
+      "market_value_aud": 30557603.0,
+      "data_source": "sample"
     },
     {
       "project_id": "nyngan-solar-plant",
@@ -270,7 +282,8 @@
       "energy_price_received": 61.7,
       "revenue_aud": 16168556.0,
       "revenue_per_mw": 156976.0,
-      "market_value_aud": 16168556.0
+      "market_value_aud": 16168556.0,
+      "data_source": "sample"
     },
     {
       "project_id": "metz-solar-farm",
@@ -292,7 +305,8 @@
       "energy_price_received": 71.3,
       "revenue_aud": 19282513.0,
       "revenue_per_mw": 167674.0,
-      "market_value_aud": 19282513.0
+      "market_value_aud": 19282513.0,
+      "data_source": "sample"
     },
     {
       "project_id": "bungala-one-solar-farm",
@@ -314,7 +328,8 @@
       "energy_price_received": 73.68,
       "revenue_aud": 20028694.0,
       "revenue_per_mw": 182079.0,
-      "market_value_aud": 20028694.0
+      "market_value_aud": 20028694.0,
+      "data_source": "sample"
     },
     {
       "project_id": "girgarre-solar-farm",
@@ -336,7 +351,8 @@
       "energy_price_received": 46.19,
       "revenue_aud": 9493611.0,
       "revenue_per_mw": 124916.0,
-      "market_value_aud": 9493611.0
+      "market_value_aud": 9493611.0,
+      "data_source": "sample"
     },
     {
       "project_id": "suntop-solar-farm",
@@ -358,7 +374,8 @@
       "energy_price_received": 59.34,
       "revenue_aud": 21352914.0,
       "revenue_per_mw": 142353.0,
-      "market_value_aud": 21352914.0
+      "market_value_aud": 21352914.0,
+      "data_source": "sample"
     },
     {
       "project_id": "edenvale-solar-park",
@@ -380,7 +397,8 @@
       "energy_price_received": 43.03,
       "revenue_aud": 21433819.0,
       "revenue_per_mw": 119077.0,
-      "market_value_aud": 21433819.0
+      "market_value_aud": 21433819.0,
+      "data_source": "sample"
     },
     {
       "project_id": "goonumbla-solar-farm",
@@ -402,7 +420,8 @@
       "energy_price_received": 73.78,
       "revenue_aud": 11024619.0,
       "revenue_per_mw": 158059.0,
-      "market_value_aud": 11024619.0
+      "market_value_aud": 11024619.0,
+      "data_source": "sample"
     },
     {
       "project_id": "clare-solar-farm",
@@ -424,7 +443,8 @@
       "energy_price_received": 67.05,
       "revenue_aud": 18009759.0,
       "revenue_per_mw": 180098.0,
-      "market_value_aud": 18009759.0
+      "market_value_aud": 18009759.0,
+      "data_source": "sample"
     },
     {
       "project_id": "winton-solar-farm",
@@ -446,7 +466,8 @@
       "energy_price_received": 49.69,
       "revenue_aud": 11648188.0,
       "revenue_per_mw": 137038.0,
-      "market_value_aud": 11648188.0
+      "market_value_aud": 11648188.0,
+      "data_source": "sample"
     },
     {
       "project_id": "hamilton-solar-farm",
@@ -468,7 +489,8 @@
       "energy_price_received": 48.22,
       "revenue_aud": 7758955.0,
       "revenue_per_mw": 138553.0,
-      "market_value_aud": 7758955.0
+      "market_value_aud": 7758955.0,
+      "data_source": "sample"
     },
     {
       "project_id": "limondale-solar-farm-2",
@@ -490,7 +512,8 @@
       "energy_price_received": 46.89,
       "revenue_aud": 5158223.0,
       "revenue_per_mw": 120519.0,
-      "market_value_aud": 5158223.0
+      "market_value_aud": 5158223.0,
+      "data_source": "sample"
     },
     {
       "project_id": "culcairn-solar-farm",
@@ -512,7 +535,8 @@
       "energy_price_received": 63.6,
       "revenue_aud": 55507701.0,
       "revenue_per_mw": 158593.0,
-      "market_value_aud": 55507701.0
+      "market_value_aud": 55507701.0,
+      "data_source": "sample"
     },
     {
       "project_id": "new-england-solar",
@@ -535,7 +559,8 @@
       "energy_price_received": 45.42,
       "revenue_aud": 90977809.0,
       "revenue_per_mw": 126358.0,
-      "market_value_aud": 90977809.0
+      "market_value_aud": 90977809.0,
+      "data_source": "sample"
     },
     {
       "project_id": "wollar-solar-farm",
@@ -557,7 +582,8 @@
       "energy_price_received": 36.36,
       "revenue_aud": 27798998.0,
       "revenue_per_mw": 99282.0,
-      "market_value_aud": 27798998.0
+      "market_value_aud": 27798998.0,
+      "data_source": "sample"
     },
     {
       "project_id": "whitsunday-solar-farm",
@@ -579,7 +605,8 @@
       "energy_price_received": 57.03,
       "revenue_aud": 8202593.0,
       "revenue_per_mw": 146475.0,
-      "market_value_aud": 8202593.0
+      "market_value_aud": 8202593.0,
+      "data_source": "sample"
     },
     {
       "project_id": "moura-solar-farm",
@@ -601,7 +628,8 @@
       "energy_price_received": 46.66,
       "revenue_aud": 10244494.0,
       "revenue_per_mw": 124933.0,
-      "market_value_aud": 10244494.0
+      "market_value_aud": 10244494.0,
+      "data_source": "sample"
     },
     {
       "project_id": "mokoan-solar-farm",
@@ -623,7 +651,8 @@
       "energy_price_received": 51.99,
       "revenue_aud": 5605837.0,
       "revenue_per_mw": 121866.0,
-      "market_value_aud": 5605837.0
+      "market_value_aud": 5605837.0,
+      "data_source": "sample"
     },
     {
       "project_id": "jemalong-solar",
@@ -645,7 +674,8 @@
       "energy_price_received": 46.85,
       "revenue_aud": 5804856.0,
       "revenue_per_mw": 116097.0,
-      "market_value_aud": 5804856.0
+      "market_value_aud": 5804856.0,
+      "data_source": "sample"
     },
     {
       "project_id": "kidston-solar-project-phase-one",
@@ -667,7 +697,8 @@
       "energy_price_received": 41.67,
       "revenue_aud": 5677158.0,
       "revenue_per_mw": 113543.0,
-      "market_value_aud": 5677158.0
+      "market_value_aud": 5677158.0,
+      "data_source": "sample"
     },
     {
       "project_id": "wellington-north-solar-farm-lightsource",
@@ -689,7 +720,8 @@
       "energy_price_received": 57.41,
       "revenue_aud": 43275748.0,
       "revenue_per_mw": 131139.0,
-      "market_value_aud": 43275748.0
+      "market_value_aud": 43275748.0,
+      "data_source": "sample"
     },
     {
       "project_id": "wemen-solar-farm",
@@ -711,7 +743,8 @@
       "energy_price_received": 43.01,
       "revenue_aud": 10425051.0,
       "revenue_per_mw": 118466.0,
-      "market_value_aud": 10425051.0
+      "market_value_aud": 10425051.0,
+      "data_source": "sample"
     },
     {
       "project_id": "manildra-solar-farm",
@@ -733,7 +766,8 @@
       "energy_price_received": 44.18,
       "revenue_aud": 4988537.0,
       "revenue_per_mw": 106821.0,
-      "market_value_aud": 4988537.0
+      "market_value_aud": 4988537.0,
+      "data_source": "sample"
     },
     {
       "project_id": "new-england-solar-farm",
@@ -755,7 +789,8 @@
       "energy_price_received": 59.35,
       "revenue_aud": 91277836.0,
       "revenue_per_mw": 126775.0,
-      "market_value_aud": 91277836.0
+      "market_value_aud": 91277836.0,
+      "data_source": "sample"
     },
     {
       "project_id": "walla-walla-solar-farm",
@@ -777,7 +812,8 @@
       "energy_price_received": 54.19,
       "revenue_aud": 36356490.0,
       "revenue_per_mw": 121188.0,
-      "market_value_aud": 36356490.0
+      "market_value_aud": 36356490.0,
+      "data_source": "sample"
     },
     {
       "project_id": "kingaroy-solar-farm",
@@ -799,7 +835,8 @@
       "energy_price_received": 58.36,
       "revenue_aud": 5535107.0,
       "revenue_per_mw": 138378.0,
-      "market_value_aud": 5535107.0
+      "market_value_aud": 5535107.0,
+      "data_source": "sample"
     },
     {
       "project_id": "nevertire-solar-farm",
@@ -821,7 +858,8 @@
       "energy_price_received": 56.86,
       "revenue_aud": 13649944.0,
       "revenue_per_mw": 129999.0,
-      "market_value_aud": 13649944.0
+      "market_value_aud": 13649944.0,
+      "data_source": "sample"
     },
     {
       "project_id": "collinsville-pv",
@@ -843,7 +881,8 @@
       "energy_price_received": 70.49,
       "revenue_aud": 5807241.0,
       "revenue_per_mw": 142474.0,
-      "market_value_aud": 5807241.0
+      "market_value_aud": 5807241.0,
+      "data_source": "sample"
     },
     {
       "project_id": "gunnedah-solar-farm",
@@ -865,7 +904,8 @@
       "energy_price_received": 40.34,
       "revenue_aud": 11112615.0,
       "revenue_per_mw": 101024.0,
-      "market_value_aud": 11112615.0
+      "market_value_aud": 11112615.0,
+      "data_source": "sample"
     },
     {
       "project_id": "glenrowan-solar-farm",
@@ -887,7 +927,8 @@
       "energy_price_received": 51.24,
       "revenue_aud": 11880939.0,
       "revenue_per_mw": 116480.0,
-      "market_value_aud": 11880939.0
+      "market_value_aud": 11880939.0,
+      "data_source": "sample"
     },
     {
       "project_id": "sebastopol-solar-farm",
@@ -909,7 +950,8 @@
       "energy_price_received": 54.31,
       "revenue_aud": 11419614.0,
       "revenue_per_mw": 126885.0,
-      "market_value_aud": 11419614.0
+      "market_value_aud": 11419614.0,
+      "data_source": "sample"
     },
     {
       "project_id": "warwick-solar-farm",
@@ -931,7 +973,8 @@
       "energy_price_received": 31.79,
       "revenue_aud": 5666849.0,
       "revenue_per_mw": 88545.0,
-      "market_value_aud": 5666849.0
+      "market_value_aud": 5666849.0,
+      "data_source": "sample"
     },
     {
       "project_id": "hayman-solar-farm",
@@ -953,7 +996,8 @@
       "energy_price_received": 46.8,
       "revenue_aud": 5647739.0,
       "revenue_per_mw": 112955.0,
-      "market_value_aud": 5647739.0
+      "market_value_aud": 5647739.0,
+      "data_source": "sample"
     },
     {
       "project_id": "bluegrass-solar-farm",
@@ -975,7 +1019,8 @@
       "energy_price_received": 66.02,
       "revenue_aud": 20722163.0,
       "revenue_per_mw": 140015.0,
-      "market_value_aud": 20722163.0
+      "market_value_aud": 20722163.0,
+      "data_source": "sample"
     },
     {
       "project_id": "haughton-solar-farm-stage-1",
@@ -997,7 +1042,8 @@
       "energy_price_received": 63.16,
       "revenue_aud": 13921908.0,
       "revenue_per_mw": 139219.0,
-      "market_value_aud": 13921908.0
+      "market_value_aud": 13921908.0,
+      "data_source": "sample"
     },
     {
       "project_id": "sunraysia-solar-farm",
@@ -1019,7 +1065,8 @@
       "energy_price_received": 71.97,
       "revenue_aud": 27492061.0,
       "revenue_per_mw": 137460.0,
-      "market_value_aud": 27492061.0
+      "market_value_aud": 27492061.0,
+      "data_source": "sample"
     },
     {
       "project_id": "wellington-solar-farm",
@@ -1041,7 +1088,8 @@
       "energy_price_received": 66.99,
       "revenue_aud": 22152397.0,
       "revenue_per_mw": 130308.0,
-      "market_value_aud": 22152397.0
+      "market_value_aud": 22152397.0,
+      "data_source": "sample"
     },
     {
       "project_id": "lilyvale-solar-farm",
@@ -1063,7 +1111,8 @@
       "energy_price_received": 53.63,
       "revenue_aud": 10546108.0,
       "revenue_per_mw": 105461.0,
-      "market_value_aud": 10546108.0
+      "market_value_aud": 10546108.0,
+      "data_source": "sample"
     },
     {
       "project_id": "columboola-solar-farm",
@@ -1085,7 +1134,8 @@
       "energy_price_received": 36.68,
       "revenue_aud": 15736592.0,
       "revenue_per_mw": 97139.0,
-      "market_value_aud": 15736592.0
+      "market_value_aud": 15736592.0,
+      "data_source": "sample"
     },
     {
       "project_id": "bannerton-solar-park",
@@ -1107,7 +1157,8 @@
       "energy_price_received": 44.92,
       "revenue_aud": 9084797.0,
       "revenue_per_mw": 90848.0,
-      "market_value_aud": 9084797.0
+      "market_value_aud": 9084797.0,
+      "data_source": "sample"
     },
     {
       "project_id": "gannawarra-solar-farm",
@@ -1129,7 +1180,8 @@
       "energy_price_received": 35.27,
       "revenue_aud": 4187192.0,
       "revenue_per_mw": 83744.0,
-      "market_value_aud": 4187192.0
+      "market_value_aud": 4187192.0,
+      "data_source": "sample"
     },
     {
       "project_id": "rugby-run-solar-farm",
@@ -1151,7 +1203,8 @@
       "energy_price_received": 62.27,
       "revenue_aud": 8310199.0,
       "revenue_per_mw": 127849.0,
-      "market_value_aud": 8310199.0
+      "market_value_aud": 8310199.0,
+      "data_source": "sample"
     },
     {
       "project_id": "west-wyalong-solar-farm",
@@ -1173,7 +1226,8 @@
       "energy_price_received": 34.51,
       "revenue_aud": 7405695.0,
       "revenue_per_mw": 82286.0,
-      "market_value_aud": 7405695.0
+      "market_value_aud": 7405695.0,
+      "data_source": "sample"
     },
     {
       "project_id": "stubbo-solar-farm",
@@ -1195,7 +1249,8 @@
       "energy_price_received": 72.93,
       "revenue_aud": 48102167.0,
       "revenue_per_mw": 120255.0,
-      "market_value_aud": 48102167.0
+      "market_value_aud": 48102167.0,
+      "data_source": "sample"
     },
     {
       "project_id": "woolooga-solar-farm",
@@ -1217,7 +1272,8 @@
       "energy_price_received": 51.41,
       "revenue_aud": 18019688.0,
       "revenue_per_mw": 102385.0,
-      "market_value_aud": 18019688.0
+      "market_value_aud": 18019688.0,
+      "data_source": "sample"
     },
     {
       "project_id": "coleambally-solar-farm",
@@ -1239,7 +1295,8 @@
       "energy_price_received": 69.12,
       "revenue_aud": 19513696.0,
       "revenue_per_mw": 130091.0,
-      "market_value_aud": 19513696.0
+      "market_value_aud": 19513696.0,
+      "data_source": "sample"
     },
     {
       "project_id": "finley-solar-farm",
@@ -1261,7 +1318,8 @@
       "energy_price_received": 69.31,
       "revenue_aud": 15604508.0,
       "revenue_per_mw": 117327.0,
-      "market_value_aud": 15604508.0
+      "market_value_aud": 15604508.0,
+      "data_source": "sample"
     },
     {
       "project_id": "clermont-solar-farm",
@@ -1283,7 +1341,8 @@
       "energy_price_received": 59.2,
       "revenue_aud": 9010873.0,
       "revenue_per_mw": 120145.0,
-      "market_value_aud": 9010873.0
+      "market_value_aud": 9010873.0,
+      "data_source": "sample"
     },
     {
       "project_id": "kerang-solar-plant",
@@ -1305,7 +1364,8 @@
       "energy_price_received": 30.34,
       "revenue_aud": 1929308.0,
       "revenue_per_mw": 64310.0,
-      "market_value_aud": 1929308.0
+      "market_value_aud": 1929308.0,
+      "data_source": "sample"
     },
     {
       "project_id": "parkes-solar-farm",
@@ -1327,7 +1387,8 @@
       "energy_price_received": 37.15,
       "revenue_aud": 3923063.0,
       "revenue_per_mw": 79254.0,
-      "market_value_aud": 3923063.0
+      "market_value_aud": 3923063.0,
+      "data_source": "sample"
     },
     {
       "project_id": "broken-hill-solar-plant",
@@ -1349,7 +1410,8 @@
       "energy_price_received": 33.3,
       "revenue_aud": 3517156.0,
       "revenue_per_mw": 66361.0,
-      "market_value_aud": 3517156.0
+      "market_value_aud": 3517156.0,
+      "data_source": "sample"
     },
     {
       "project_id": "oakey-2-solar-farm",
@@ -1371,7 +1433,8 @@
       "energy_price_received": 51.23,
       "revenue_aud": 5421869.0,
       "revenue_per_mw": 98579.0,
-      "market_value_aud": 5421869.0
+      "market_value_aud": 5421869.0,
+      "data_source": "sample"
     },
     {
       "project_id": "sun-metals-corporation-solar-farm",
@@ -1393,7 +1456,8 @@
       "energy_price_received": 41.45,
       "revenue_aud": 9907440.0,
       "revenue_per_mw": 81543.0,
-      "market_value_aud": 9907440.0
+      "market_value_aud": 9907440.0,
+      "data_source": "sample"
     },
     {
       "project_id": "avonlie-solar-farm",
@@ -1415,7 +1479,8 @@
       "energy_price_received": 69.82,
       "revenue_aud": 28633748.0,
       "revenue_per_mw": 116872.0,
-      "market_value_aud": 28633748.0
+      "market_value_aud": 28633748.0,
+      "data_source": "sample"
     },
     {
       "project_id": "moree-solar-farm",
@@ -1437,7 +1502,8 @@
       "energy_price_received": 61.43,
       "revenue_aud": 6313602.0,
       "revenue_per_mw": 112743.0,
-      "market_value_aud": 6313602.0
+      "market_value_aud": 6313602.0,
+      "data_source": "sample"
     },
     {
       "project_id": "daydream-solar-farm",
@@ -1459,7 +1525,8 @@
       "energy_price_received": 31.23,
       "revenue_aud": 10752993.0,
       "revenue_per_mw": 71687.0,
-      "market_value_aud": 10752993.0
+      "market_value_aud": 10752993.0,
+      "data_source": "sample"
     },
     {
       "project_id": "aldoga-solar-farm",
@@ -1481,7 +1548,8 @@
       "energy_price_received": 53.9,
       "revenue_aud": 41950447.0,
       "revenue_per_mw": 108399.0,
-      "market_value_aud": 41950447.0
+      "market_value_aud": 41950447.0,
+      "data_source": "sample"
     },
     {
       "project_id": "corowa-solar-farm",
@@ -1503,7 +1571,8 @@
       "energy_price_received": 67.42,
       "revenue_aud": 3398265.0,
       "revenue_per_mw": 113275.0,
-      "market_value_aud": 3398265.0
+      "market_value_aud": 3398265.0,
+      "data_source": "sample"
     },
     {
       "project_id": "limondale-solar-farm-1",
@@ -1525,7 +1594,8 @@
       "energy_price_received": 57.57,
       "revenue_aud": 30699944.0,
       "revenue_per_mw": 100327.0,
-      "market_value_aud": 30699944.0
+      "market_value_aud": 30699944.0,
+      "data_source": "sample"
     },
     {
       "project_id": "beryl-solar-farm",
@@ -1547,7 +1617,8 @@
       "energy_price_received": 48.55,
       "revenue_aud": 7859576.0,
       "revenue_per_mw": 90340.0,
-      "market_value_aud": 7859576.0
+      "market_value_aud": 7859576.0,
+      "data_source": "sample"
     },
     {
       "project_id": "hillston-sun-farm",
@@ -1569,7 +1640,8 @@
       "energy_price_received": 36.87,
       "revenue_aud": 5636032.0,
       "revenue_per_mw": 66306.0,
-      "market_value_aud": 5636032.0
+      "market_value_aud": 5636032.0,
+      "data_source": "sample"
     },
     {
       "project_id": "ross-river-solar-farm",
@@ -1591,7 +1663,8 @@
       "energy_price_received": 58.6,
       "revenue_aud": 12408789.0,
       "revenue_per_mw": 106972.0,
-      "market_value_aud": 12408789.0
+      "market_value_aud": 12408789.0,
+      "data_source": "sample"
     },
     {
       "project_id": "karadoc-solar-farm",
@@ -1613,7 +1686,8 @@
       "energy_price_received": 57.92,
       "revenue_aud": 8572722.0,
       "revenue_per_mw": 95252.0,
-      "market_value_aud": 8572722.0
+      "market_value_aud": 8572722.0,
+      "data_source": "sample"
     },
     {
       "project_id": "port-augusta-renewable-energy-park-solar",
@@ -1635,7 +1709,8 @@
       "energy_price_received": 31.52,
       "revenue_aud": 6645175.0,
       "revenue_per_mw": 62104.0,
-      "market_value_aud": 6645175.0
+      "market_value_aud": 6645175.0,
+      "data_source": "sample"
     },
     {
       "project_id": "darling-downs-solar-farm",
@@ -1657,7 +1732,8 @@
       "energy_price_received": 47.33,
       "revenue_aud": 10002196.0,
       "revenue_per_mw": 90929.0,
-      "market_value_aud": 10002196.0
+      "market_value_aud": 10002196.0,
+      "data_source": "sample"
     },
     {
       "project_id": "junee-solar-farm",
@@ -1679,7 +1755,8 @@
       "energy_price_received": 44.3,
       "revenue_aud": 2230227.0,
       "revenue_per_mw": 74341.0,
-      "market_value_aud": 2230227.0
+      "market_value_aud": 2230227.0,
+      "data_source": "sample"
     },
     {
       "project_id": "numurkah-solar-farm",
@@ -1701,7 +1778,8 @@
       "energy_price_received": 32.57,
       "revenue_aud": 6677478.0,
       "revenue_per_mw": 52168.0,
-      "market_value_aud": 6677478.0
+      "market_value_aud": 6677478.0,
+      "data_source": "sample"
     },
     {
       "project_id": "bungala-two-solar-farm",
@@ -1723,7 +1801,8 @@
       "energy_price_received": 49.93,
       "revenue_aud": 10039125.0,
       "revenue_per_mw": 91265.0,
-      "market_value_aud": 10039125.0
+      "market_value_aud": 10039125.0,
+      "data_source": "sample"
     },
     {
       "project_id": "wyalong-solar-farm",
@@ -1745,7 +1824,8 @@
       "energy_price_received": 35.43,
       "revenue_aud": 3505219.0,
       "revenue_per_mw": 66136.0,
-      "market_value_aud": 3505219.0
+      "market_value_aud": 3505219.0,
+      "data_source": "sample"
     },
     {
       "project_id": "molong-solar-farm",
@@ -1767,7 +1847,8 @@
       "energy_price_received": 41.54,
       "revenue_aud": 1975469.0,
       "revenue_per_mw": 65849.0,
-      "market_value_aud": 1975469.0
+      "market_value_aud": 1975469.0,
+      "data_source": "sample"
     }
   ]
 }

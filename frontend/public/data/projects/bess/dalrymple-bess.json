@@ -7,6 +7,7 @@
   "storage_mwh": 9.0,
   "state": "SA",
   "current_developer": "ElectraNet",
+  "cod_current": "2018-06-05",
   "grid_forming": false,
   "has_sips": false,
   "has_syncon": false,
@@ -17,7 +18,28 @@
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "1553",
-  "timeline": [],
+  "coordinates": {
+    "lat": -34.888446,
+    "lng": 137.758114
+  },
+  "timeline": [
+    {
+      "date": "2018-06-05",
+      "date_precision": "day",
+      "event_type": "cod",
+      "title": "Commercial operations commenced",
+      "detail": "Commencement date from AEMO registration via OpenElectricity.",
+      "sources": []
+    },
+    {
+      "date": "2018-07-05",
+      "date_precision": "day",
+      "event_type": "energisation",
+      "title": "First generation recorded",
+      "detail": "First market dispatch data recorded in AEMO systems.",
+      "sources": []
+    }
+  ],
   "ownership_history": [],
   "cod_history": [],
   "suppliers": [],

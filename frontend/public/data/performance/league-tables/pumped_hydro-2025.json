@@ -1,6 +1,7 @@
 {
   "year": 2025,
   "technology": "pumped_hydro",
+  "data_source": "sample",
   "fleet_avg": {
     "capacity_factor_pct": 16.66,
     "revenue_per_mw": 180446.0,
@@ -28,7 +29,8 @@
       "energy_price_received": 176.44,
       "revenue_aud": 11195089.0,
       "revenue_per_mw": 339245.0,
-      "market_value_aud": 11195089.0
+      "market_value_aud": 11195089.0,
+      "data_source": "sample"
     },
     {
       "project_id": "tribute",
@@ -50,7 +52,8 @@
       "energy_price_received": 143.39,
       "revenue_aud": 24279918.0,
       "revenue_per_mw": 263912.0,
-      "market_value_aud": 24279918.0
+      "market_value_aud": 24279918.0,
+      "data_source": "sample"
     },
     {
       "project_id": "kareeya",
@@ -72,7 +75,8 @@
       "energy_price_received": 108.09,
       "revenue_aud": 19636527.0,
       "revenue_per_mw": 227275.0,
-      "market_value_aud": 19636527.0
+      "market_value_aud": 19636527.0,
+      "data_source": "sample"
     },
     {
       "project_id": "cethana",
@@ -94,7 +98,8 @@
       "energy_price_received": 121.25,
       "revenue_aud": 21697795.0,
       "revenue_per_mw": 216978.0,
-      "market_value_aud": 21697795.0
+      "market_value_aud": 21697795.0,
+      "data_source": "sample"
     },
     {
       "project_id": "dartmouth",
@@ -116,7 +121,8 @@
       "energy_price_received": 75.23,
       "revenue_aud": 30407924.0,
       "revenue_per_mw": 164367.0,
-      "market_value_aud": 30407924.0
+      "market_value_aud": 30407924.0,
+      "data_source": "sample"
     },
     {
       "project_id": "murray-1",
@@ -138,7 +144,8 @@
       "energy_price_received": 190.76,
       "revenue_aud": 278490274.0,
       "revenue_per_mw": 293148.0,
-      "market_value_aud": 278490274.0
+      "market_value_aud": 278490274.0,
+      "data_source": "sample"
     },
     {
       "project_id": "fisher",
@@ -160,7 +167,8 @@
       "energy_price_received": 151.86,
       "revenue_aud": 12573301.0,
       "revenue_per_mw": 273333.0,
-      "market_value_aud": 12573301.0
+      "market_value_aud": 12573301.0,
+      "data_source": "sample"
     },
     {
       "project_id": "john-butters",
@@ -182,7 +190,8 @@
       "energy_price_received": 115.71,
       "revenue_aud": 29441443.0,
       "revenue_per_mw": 204454.0,
-      "market_value_aud": 29441443.0
+      "market_value_aud": 29441443.0,
+      "data_source": "sample"
     },
     {
       "project_id": "devils-gate",
@@ -204,7 +213,8 @@
       "energy_price_received": 114.59,
       "revenue_aud": 13950331.0,
       "revenue_per_mw": 208214.0,
-      "market_value_aud": 13950331.0
+      "market_value_aud": 13950331.0,
+      "data_source": "sample"
     },
     {
       "project_id": "blowering",
@@ -226,7 +236,8 @@
       "energy_price_received": 165.11,
       "revenue_aud": 23147853.0,
       "revenue_per_mw": 289348.0,
-      "market_value_aud": 23147853.0
+      "market_value_aud": 23147853.0,
+      "data_source": "sample"
     },
     {
       "project_id": "eildon",
@@ -248,7 +259,8 @@
       "energy_price_received": 143.84,
       "revenue_aud": 29917337.0,
       "revenue_per_mw": 249311.0,
-      "market_value_aud": 29917337.0
+      "market_value_aud": 29917337.0,
+      "data_source": "sample"
     },
     {
       "project_id": "reece",
@@ -270,7 +282,8 @@
       "energy_price_received": 71.93,
       "revenue_aud": 33096640.0,
       "revenue_per_mw": 139062.0,
-      "market_value_aud": 33096640.0
+      "market_value_aud": 33096640.0,
+      "data_source": "sample"
     },
     {
       "project_id": "tungatinah",
@@ -292,7 +305,8 @@
       "energy_price_received": 84.73,
       "revenue_aud": 24328642.0,
       "revenue_per_mw": 171328.0,
-      "market_value_aud": 24328642.0
+      "market_value_aud": 24328642.0,
+      "data_source": "sample"
     },
     {
       "project_id": "lake-echo",
@@ -314,7 +328,8 @@
       "energy_price_received": 85.39,
       "revenue_aud": 5339627.0,
       "revenue_per_mw": 157048.0,
-      "market_value_aud": 5339627.0
+      "market_value_aud": 5339627.0,
+      "data_source": "sample"
     },
     {
       "project_id": "barron-gorge",
@@ -336,7 +351,8 @@
       "energy_price_received": 180.08,
       "revenue_aud": 17155017.0,
       "revenue_per_mw": 259925.0,
-      "market_value_aud": 17155017.0
+      "market_value_aud": 17155017.0,
+      "data_source": "sample"
     },
     {
       "project_id": "poatina",
@@ -358,7 +374,8 @@
       "energy_price_received": 105.57,
       "revenue_aud": 69171066.0,
       "revenue_per_mw": 185944.0,
-      "market_value_aud": 69171066.0
+      "market_value_aud": 69171066.0,
+      "data_source": "sample"
     },
     {
       "project_id": "shoalhaven",
@@ -381,7 +398,8 @@
       "energy_price_received": 192.36,
       "revenue_aud": 67371569.0,
       "revenue_per_mw": 272759.0,
-      "market_value_aud": 67371569.0
+      "market_value_aud": 67371569.0,
+      "data_source": "sample"
     },
     {
       "project_id": "mackintosh",
@@ -403,7 +421,8 @@
       "energy_price_received": 182.85,
       "revenue_aud": 16184096.0,
       "revenue_per_mw": 181844.0,
-      "market_value_aud": 16184096.0
+      "market_value_aud": 16184096.0,
+      "data_source": "sample"
     },
     {
       "project_id": "upper-tumut",
@@ -425,7 +444,8 @@
       "energy_price_received": 126.23,
       "revenue_aud": 96979809.0,
       "revenue_per_mw": 145834.0,
-      "market_value_aud": 96979809.0
+      "market_value_aud": 96979809.0,
+      "data_source": "sample"
     },
     {
       "project_id": "wivenhoe",
@@ -448,7 +468,8 @@
       "energy_price_received": 94.46,
       "revenue_aud": 83745558.0,
       "revenue_per_mw": 146922.0,
-      "market_value_aud": 83745558.0
+      "market_value_aud": 83745558.0,
+      "data_source": "sample"
     },
     {
       "project_id": "catagunya-liapootah-wayatinah",
@@ -470,7 +491,8 @@
       "energy_price_received": 187.69,
       "revenue_aud": 39247663.0,
       "revenue_per_mw": 206567.0,
-      "market_value_aud": 39247663.0
+      "market_value_aud": 39247663.0,
+      "data_source": "sample"
     },
     {
       "project_id": "bastyan",
@@ -492,7 +514,8 @@
       "energy_price_received": 139.92,
       "revenue_aud": 14329529.0,
       "revenue_per_mw": 162836.0,
-      "market_value_aud": 14329529.0
+      "market_value_aud": 14329529.0,
+      "data_source": "sample"
     },
     {
       "project_id": "guthega",
@@ -514,7 +537,8 @@
       "energy_price_received": 142.78,
       "revenue_aud": 11512907.0,
       "revenue_per_mw": 143911.0,
-      "market_value_aud": 11512907.0
+      "market_value_aud": 11512907.0,
+      "data_source": "sample"
     },
     {
       "project_id": "murray-2",
@@ -536,7 +560,8 @@
       "energy_price_received": 72.34,
       "revenue_aud": 78157759.0,
       "revenue_per_mw": 125052.0,
-      "market_value_aud": 78157759.0
+      "market_value_aud": 78157759.0,
+      "data_source": "sample"
     },
     {
       "project_id": "bogong-mackay",
@@ -558,7 +583,8 @@
       "energy_price_received": 74.91,
       "revenue_aud": 32346978.0,
       "revenue_per_mw": 107823.0,
-      "market_value_aud": 32346978.0
+      "market_value_aud": 32346978.0,
+      "data_source": "sample"
     },
     {
       "project_id": "gordon",
@@ -580,7 +606,8 @@
       "energy_price_received": 179.15,
       "revenue_aud": 79864419.0,
       "revenue_per_mw": 177476.0,
-      "market_value_aud": 79864419.0
+      "market_value_aud": 79864419.0,
+      "data_source": "sample"
     },
     {
       "project_id": "west-kiewa",
@@ -602,7 +629,8 @@
       "energy_price_received": 79.61,
       "revenue_aud": 9017047.0,
       "revenue_per_mw": 132604.0,
-      "market_value_aud": 9017047.0
+      "market_value_aud": 9017047.0,
+      "data_source": "sample"
     },
     {
       "project_id": "meadowbank",
@@ -624,7 +652,8 @@
       "energy_price_received": 111.13,
       "revenue_aud": 4721060.0,
       "revenue_per_mw": 107297.0,
-      "market_value_aud": 4721060.0
+      "market_value_aud": 4721060.0,
+      "data_source": "sample"
     },
     {
       "project_id": "repulse",
@@ -646,7 +675,8 @@
       "energy_price_received": 121.0,
       "revenue_aud": 3470031.0,
       "revenue_per_mw": 102060.0,
-      "market_value_aud": 3470031.0
+      "market_value_aud": 3470031.0,
+      "data_source": "sample"
     },
     {
       "project_id": "lemonthyme-wilmot",
@@ -668,7 +698,8 @@
       "energy_price_received": 150.76,
       "revenue_aud": 11863761.0,
       "revenue_per_mw": 136365.0,
-      "market_value_aud": 11863761.0
+      "market_value_aud": 11863761.0,
+      "data_source": "sample"
     },
     {
       "project_id": "trevallyn",
@@ -690,7 +721,8 @@
       "energy_price_received": 154.1,
       "revenue_aud": 13283969.0,
       "revenue_per_mw": 124149.0,
-      "market_value_aud": 13283969.0
+      "market_value_aud": 13283969.0,
+      "data_source": "sample"
     },
     {
       "project_id": "burrinjuck",
@@ -712,7 +744,8 @@
       "energy_price_received": 78.83,
       "revenue_aud": 2721066.0,
       "revenue_per_mw": 80031.0,
-      "market_value_aud": 2721066.0
+      "market_value_aud": 2721066.0,
+      "data_source": "sample"
     },
     {
       "project_id": "tarraleah",
@@ -734,7 +767,8 @@
       "energy_price_received": 74.63,
       "revenue_aud": 5458170.0,
       "revenue_per_mw": 58066.0,
-      "market_value_aud": 5458170.0
+      "market_value_aud": 5458170.0,
+      "data_source": "sample"
     },
     {
       "project_id": "tumut-3",
@@ -756,7 +790,8 @@
       "energy_price_received": 96.35,
       "revenue_aud": 145188331.0,
       "revenue_per_mw": 80660.0,
-      "market_value_aud": 145188331.0
+      "market_value_aud": 145188331.0,
+      "data_source": "sample"
     }
   ]
 }

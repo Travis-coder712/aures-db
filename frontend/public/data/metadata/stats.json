@@ -3,16 +3,6 @@
   "total_capacity_mw": 383789.9600000001,
   "total_storage_mwh": 674002.5100000001,
   "by_technology": {
-    "bess": {
-      "count": 432,
-      "capacity_mw": 129337.9,
-      "storage_mwh": 297226.66
-    },
-    "pumped_hydro": {
-      "count": 61,
-      "capacity_mw": 28835.4,
-      "storage_mwh": 300132.0
-    },
     "solar": {
       "count": 229,
       "capacity_mw": 50842.07,
@@ -23,10 +13,20 @@
       "capacity_mw": 45257.32,
       "storage_mwh": 76083.85
     },
+    "pumped_hydro": {
+      "count": 61,
+      "capacity_mw": 28835.4,
+      "storage_mwh": 300132.0
+    },
     "wind": {
       "count": 235,
       "capacity_mw": 129517.26999999997,
       "storage_mwh": 0
+    },
+    "bess": {
+      "count": 432,
+      "capacity_mw": 129337.9,
+      "storage_mwh": 297226.66
     }
   },
   "by_status": {
@@ -38,47 +38,47 @@
       "count": 49,
       "capacity_mw": 15192.8
     },
-    "commissioning": {
-      "count": 11,
-      "capacity_mw": 3180.2
-    },
     "development": {
       "count": 783,
       "capacity_mw": 328438.5800000001
+    },
+    "commissioning": {
+      "count": 11,
+      "capacity_mw": 3180.2
     }
   },
   "by_state": {
-    "QLD": {
-      "count": 310,
-      "capacity_mw": 124234.61
+    "TAS": {
+      "count": 50,
+      "capacity_mw": 13974.4
     },
     "NSW": {
       "count": 365,
       "capacity_mw": 132210.22
     },
-    "WA": {
-      "count": 1,
-      "capacity_mw": 560.0
-    },
     "SA": {
       "count": 122,
       "capacity_mw": 25668.76
     },
+    "QLD": {
+      "count": 310,
+      "capacity_mw": 124234.61
+    },
+    "WA": {
+      "count": 1,
+      "capacity_mw": 560.0
+    },
     "VIC": {
       "count": 219,
       "capacity_mw": 87141.96999999999
-    },
-    "TAS": {
-      "count": 50,
-      "capacity_mw": 13974.4
     }
   },
   "states": [
-    "QLD",
+    "TAS",
     "NSW",
-    "WA",
     "SA",
-    "VIC",
-    "TAS"
+    "QLD",
+    "WA",
+    "VIC"
   ]
 }

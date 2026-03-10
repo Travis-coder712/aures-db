@@ -7,6 +7,7 @@
   "storage_mwh": 60.28,
   "state": "NSW",
   "current_developer": "MACQGEN",
+  "cod_current": "2023-11-30",
   "grid_forming": false,
   "has_sips": false,
   "has_syncon": false,
@@ -17,7 +18,28 @@
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "2172",
-  "timeline": [],
+  "coordinates": {
+    "lat": -31.9863,
+    "lng": 141.4204
+  },
+  "timeline": [
+    {
+      "date": "2023-11-30",
+      "date_precision": "day",
+      "event_type": "cod",
+      "title": "Commercial operations commenced",
+      "detail": "Commencement date from AEMO registration via OpenElectricity.",
+      "sources": []
+    },
+    {
+      "date": "2023-12-01",
+      "date_precision": "day",
+      "event_type": "energisation",
+      "title": "First generation recorded",
+      "detail": "First market dispatch data recorded in AEMO systems.",
+      "sources": []
+    }
+  ],
   "ownership_history": [],
   "cod_history": [],
   "suppliers": [],

@@ -17,7 +17,28 @@
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "1712",
-  "timeline": [],
+  "coordinates": {
+    "lat": -35.746481,
+    "lng": 146.961838
+  },
+  "timeline": [
+    {
+      "date": "2024-10-21",
+      "date_precision": "day",
+      "event_type": "energisation",
+      "title": "First generation recorded",
+      "detail": "First market dispatch data recorded in AEMO systems.",
+      "sources": []
+    },
+    {
+      "date": "2024-11-25",
+      "date_precision": "day",
+      "event_type": "cod",
+      "title": "Commercial operations commenced",
+      "detail": "Commencement date from AEMO registration via OpenElectricity.",
+      "sources": []
+    }
+  ],
   "ownership_history": [],
   "cod_history": [],
   "suppliers": [],

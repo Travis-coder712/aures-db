@@ -7,6 +7,7 @@
   "storage_mwh": 800.8,
   "state": "VIC",
   "current_developer": "Equis Energy (Australia) Projects (MREH A3 AssetCo) Pty Ltd (ACN 669 645 514) as The Trustee for Equis Energy (Australia) MREH A3 Asset Trust (ABN 47 920 042 214)",
+  "cod_current": "2025-09-11",
   "grid_forming": false,
   "has_sips": false,
   "has_syncon": false,
@@ -17,7 +18,28 @@
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "3102",
-  "timeline": [],
+  "coordinates": {
+    "lat": -37.663819,
+    "lng": 144.726859
+  },
+  "timeline": [
+    {
+      "date": "2025-09-11",
+      "date_precision": "day",
+      "event_type": "cod",
+      "title": "Commercial operations commenced",
+      "detail": "Commencement date from AEMO registration via OpenElectricity.",
+      "sources": []
+    },
+    {
+      "date": "2025-09-12",
+      "date_precision": "day",
+      "event_type": "energisation",
+      "title": "First generation recorded",
+      "detail": "First market dispatch data recorded in AEMO systems.",
+      "sources": []
+    }
+  ],
   "ownership_history": [],
   "cod_history": [],
   "suppliers": [],

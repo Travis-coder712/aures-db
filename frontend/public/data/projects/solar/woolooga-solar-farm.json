@@ -6,6 +6,7 @@
   "capacity_mw": 176.0,
   "state": "QLD",
   "current_developer": "Woolooga Fund Pty Ltd",
+  "cod_current": "2022-05-23",
   "grid_forming": false,
   "has_sips": false,
   "has_syncon": false,
@@ -16,7 +17,28 @@
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "1672",
-  "timeline": [],
+  "coordinates": {
+    "lat": -26.084522,
+    "lng": 152.441226
+  },
+  "timeline": [
+    {
+      "date": "2022-05-23",
+      "date_precision": "day",
+      "event_type": "cod",
+      "title": "Commercial operations commenced",
+      "detail": "Commencement date from AEMO registration via OpenElectricity.",
+      "sources": []
+    },
+    {
+      "date": "2022-05-24",
+      "date_precision": "day",
+      "event_type": "energisation",
+      "title": "First generation recorded",
+      "detail": "First market dispatch data recorded in AEMO systems.",
+      "sources": []
+    }
+  ],
   "ownership_history": [],
   "cod_history": [],
   "suppliers": [],

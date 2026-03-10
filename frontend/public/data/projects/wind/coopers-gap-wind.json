@@ -40,6 +40,14 @@
       ]
     },
     {
+      "date": "2019-06-24",
+      "date_precision": "day",
+      "event_type": "energisation",
+      "title": "First generation recorded",
+      "detail": "First market dispatch data recorded in AEMO systems.",
+      "sources": []
+    },
+    {
       "date": "2021-10-01",
       "date_precision": "month",
       "event_type": "cod",

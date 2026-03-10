@@ -310,7 +310,8 @@ def export_performance_data(conn):
                     pa.market_value_aud,
                     pa.energy_charged_mwh, pa.energy_discharged_mwh,
                     pa.avg_charge_price, pa.avg_discharge_price,
-                    pa.utilisation_pct, pa.cycles
+                    pa.utilisation_pct, pa.cycles,
+                    pa.data_source
                 FROM league_table_entries lt
                 JOIN projects p ON lt.project_id = p.id
                 LEFT JOIN performance_annual pa ON lt.project_id = pa.project_id AND lt.year = pa.year
@@ -338,9 +339,14 @@ def export_performance_data(conn):
                 'count': len(entries),
             }
 
+            # Determine data source for this year/tech
+            sources = set(e.get('data_source') for e in projects_list if e.get('data_source'))
+            data_source = list(sources)[0] if len(sources) == 1 else 'mixed'
+
             write_json(os.path.join(perf_dir, 'league-tables', f'{tech}-{year}.json'), {
                 'year': year,
                 'technology': tech,
+                'data_source': data_source,
                 'fleet_avg': clean_none_values(fleet_avg),
                 'projects': projects_list,
             })

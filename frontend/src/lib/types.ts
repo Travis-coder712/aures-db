@@ -248,6 +248,9 @@ export interface LeagueTableEntry {
   utilisation_pct?: number
   cycles?: number
 
+  // Data provenance
+  data_source?: 'openelectricity' | 'sample'
+
   // Rankings
   rank_composite: number
   rank_capacity_factor?: number
@@ -262,6 +265,7 @@ export interface LeagueTableEntry {
 export interface LeagueTable {
   year: number
   technology: LeagueTechnology
+  data_source?: 'openelectricity' | 'sample' | 'mixed'
   fleet_avg: {
     capacity_factor_pct?: number
     revenue_per_mw?: number

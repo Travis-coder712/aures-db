@@ -1,6 +1,7 @@
 {
   "year": 2025,
   "technology": "bess",
+  "data_source": "sample",
   "fleet_avg": {
     "capacity_factor_pct": 12.2,
     "revenue_per_mw": 173474.0,
@@ -35,7 +36,8 @@
       "avg_charge_price": 49.93,
       "avg_discharge_price": 202.04,
       "utilisation_pct": 31.85,
-      "cycles": 385.3
+      "cycles": 385.3,
+      "data_source": "sample"
     },
     {
       "project_id": "ulinda-park-bess",
@@ -64,7 +66,8 @@
       "avg_charge_price": 41.74,
       "avg_discharge_price": 214.99,
       "utilisation_pct": 42.59,
-      "cycles": 363.3
+      "cycles": 363.3,
+      "data_source": "sample"
     },
     {
       "project_id": "mannum-bess",
@@ -93,7 +96,8 @@
       "avg_charge_price": 52.05,
       "avg_discharge_price": 199.01,
       "utilisation_pct": 43.18,
-      "cycles": 269.0
+      "cycles": 269.0,
+      "data_source": "sample"
     },
     {
       "project_id": "hazelwood-battery-energy-storage-system-hbess",
@@ -122,7 +126,8 @@
       "avg_charge_price": 59.43,
       "avg_discharge_price": 93.36,
       "utilisation_pct": 53.54,
-      "cycles": 437.2
+      "cycles": 437.2,
+      "data_source": "sample"
     },
     {
       "project_id": "rangebank-bess",
@@ -151,7 +156,8 @@
       "avg_charge_price": 27.93,
       "avg_discharge_price": 177.41,
       "utilisation_pct": 28.61,
-      "cycles": 278.9
+      "cycles": 278.9,
+      "data_source": "sample"
     },
     {
       "project_id": "riverina-energy-storage-system-1",
@@ -180,7 +186,8 @@
       "avg_charge_price": 35.45,
       "avg_discharge_price": 169.55,
       "utilisation_pct": 22.26,
-      "cycles": 448.3
+      "cycles": 448.3,
+      "data_source": "sample"
     },
     {
       "project_id": "chinchilla-bess",
@@ -209,7 +216,8 @@
       "avg_charge_price": 26.81,
       "avg_discharge_price": 218.89,
       "utilisation_pct": 50.67,
-      "cycles": 247.3
+      "cycles": 247.3,
+      "data_source": "sample"
     },
     {
       "project_id": "waratah-super-battery",
@@ -238,7 +246,8 @@
       "avg_charge_price": 42.63,
       "avg_discharge_price": 160.34,
       "utilisation_pct": 41.21,
-      "cycles": 233.7
+      "cycles": 233.7,
+      "data_source": "sample"
     },
     {
       "project_id": "wallgrove-grid-battery-project",
@@ -267,7 +276,8 @@
       "avg_charge_price": 23.48,
       "avg_discharge_price": 115.53,
       "utilisation_pct": 23.56,
-      "cycles": 371.0
+      "cycles": 371.0,
+      "data_source": "sample"
     },
     {
       "project_id": "wandoan-south-bess",
@@ -296,7 +306,8 @@
       "avg_charge_price": 50.72,
       "avg_discharge_price": 229.95,
       "utilisation_pct": 34.75,
-      "cycles": 483.6
+      "cycles": 483.6,
+      "data_source": "sample"
     },
     {
       "project_id": "melbourne-renewable-energy-hub-connection-a2",
@@ -325,7 +336,8 @@
       "avg_charge_price": 51.39,
       "avg_discharge_price": 199.42,
       "utilisation_pct": 39.82,
-      "cycles": 291.5
+      "cycles": 291.5,
+      "data_source": "sample"
     },
     {
       "project_id": "dalrymple-bess",
@@ -354,7 +366,8 @@
       "avg_charge_price": 58.82,
       "avg_discharge_price": 150.6,
       "utilisation_pct": 41.25,
-      "cycles": 296.4
+      "cycles": 296.4,
+      "data_source": "sample"
     },
     {
       "project_id": "broken-hill-bess",
@@ -383,7 +396,8 @@
       "avg_charge_price": 25.95,
       "avg_discharge_price": 143.1,
       "utilisation_pct": 46.75,
-      "cycles": 235.1
+      "cycles": 235.1,
+      "data_source": "sample"
     },
     {
       "project_id": "blyth-bess",
@@ -412,7 +426,8 @@
       "avg_charge_price": 41.25,
       "avg_discharge_price": 128.28,
       "utilisation_pct": 53.61,
-      "cycles": 343.8
+      "cycles": 343.8,
+      "data_source": "sample"
     },
     {
       "project_id": "melbourne-renewable-energy-hub-connection-a1",
@@ -441,7 +456,8 @@
       "avg_charge_price": 27.1,
       "avg_discharge_price": 127.81,
       "utilisation_pct": 22.87,
-      "cycles": 400.4
+      "cycles": 400.4,
+      "data_source": "sample"
     },
     {
       "project_id": "hornsdale-power-reserve-unit-1",
@@ -470,7 +486,8 @@
       "avg_charge_price": 58.66,
       "avg_discharge_price": 210.11,
       "utilisation_pct": 20.81,
-      "cycles": 377.1
+      "cycles": 377.1,
+      "data_source": "sample"
     },
     {
       "project_id": "latrobe-valley-bess",
@@ -499,7 +516,8 @@
       "avg_charge_price": 30.91,
       "avg_discharge_price": 231.1,
       "utilisation_pct": 16.76,
-      "cycles": 488.9
+      "cycles": 488.9,
+      "data_source": "sample"
     },
     {
       "project_id": "hornsdale-power-reserve",
@@ -528,7 +546,8 @@
       "avg_charge_price": 52.67,
       "avg_discharge_price": 134.67,
       "utilisation_pct": 50.05,
-      "cycles": 378.6
+      "cycles": 378.6,
+      "data_source": "sample"
     },
     {
       "project_id": "ballarat-energy-storage-system",
@@ -557,7 +576,8 @@
       "avg_charge_price": 53.59,
       "avg_discharge_price": 87.31,
       "utilisation_pct": 27.04,
-      "cycles": 271.3
+      "cycles": 271.3,
+      "data_source": "sample"
     },
     {
       "project_id": "riverina-energy-storage-system-2",
@@ -586,7 +606,8 @@
       "avg_charge_price": 34.46,
       "avg_discharge_price": 156.82,
       "utilisation_pct": 47.14,
-      "cycles": 362.1
+      "cycles": 362.1,
+      "data_source": "sample"
     },
     {
       "project_id": "victorian-big-battery",
@@ -615,7 +636,8 @@
       "avg_charge_price": 54.87,
       "avg_discharge_price": 129.88,
       "utilisation_pct": 23.55,
-      "cycles": 328.5
+      "cycles": 328.5,
+      "data_source": "sample"
     },
     {
       "project_id": "melbourne-renewable-energy-hub-connection-a3",
@@ -644,7 +666,8 @@
       "avg_charge_price": 30.01,
       "avg_discharge_price": 215.26,
       "utilisation_pct": 15.73,
-      "cycles": 267.1
+      "cycles": 267.1,
+      "data_source": "sample"
     },
     {
       "project_id": "capital-battery",
@@ -673,7 +696,8 @@
       "avg_charge_price": 56.0,
       "avg_discharge_price": 134.1,
       "utilisation_pct": 35.4,
-      "cycles": 229.8
+      "cycles": 229.8,
+      "data_source": "sample"
     },
     {
       "project_id": "bouldercombe-battery-project",
@@ -702,7 +726,8 @@
       "avg_charge_price": 30.79,
       "avg_discharge_price": 105.74,
       "utilisation_pct": 25.66,
-      "cycles": 363.1
+      "cycles": 363.1,
+      "data_source": "sample"
     },
     {
       "project_id": "smithfield-bess",
@@ -731,7 +756,8 @@
       "avg_charge_price": 30.23,
       "avg_discharge_price": 95.75,
       "utilisation_pct": 44.83,
-      "cycles": 226.1
+      "cycles": 226.1,
+      "data_source": "sample"
     },
     {
       "project_id": "greenbank-bess",
@@ -760,7 +786,8 @@
       "avg_charge_price": 45.93,
       "avg_discharge_price": 97.73,
       "utilisation_pct": 46.31,
-      "cycles": 254.9
+      "cycles": 254.9,
+      "data_source": "sample"
     },
     {
       "project_id": "eraring-big-battery",
@@ -789,7 +816,8 @@
       "avg_charge_price": 47.77,
       "avg_discharge_price": 237.49,
       "utilisation_pct": 16.42,
-      "cycles": 216.8
+      "cycles": 216.8,
+      "data_source": "sample"
     },
     {
       "project_id": "torrens-island-bess",
@@ -818,7 +846,8 @@
       "avg_charge_price": 54.58,
       "avg_discharge_price": 118.34,
       "utilisation_pct": 29.74,
-      "cycles": 208.1
+      "cycles": 208.1,
+      "data_source": "sample"
     }
   ]
 }

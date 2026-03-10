@@ -6,6 +6,7 @@
   "capacity_mw": 420.0,
   "state": "VIC",
   "current_developer": "Macarthur Wind Farm Pty Ltd and Meridian Wind Macarthur Pty Ltd",
+  "cod_current": "2012-09-27",
   "grid_forming": false,
   "has_sips": false,
   "has_syncon": false,
@@ -16,7 +17,28 @@
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "1128",
-  "timeline": [],
+  "coordinates": {
+    "lat": -38.043483,
+    "lng": 142.179081
+  },
+  "timeline": [
+    {
+      "date": "2012-09-27",
+      "date_precision": "day",
+      "event_type": "cod",
+      "title": "Commercial operations commenced",
+      "detail": "Commencement date from AEMO registration via OpenElectricity.",
+      "sources": []
+    },
+    {
+      "date": "2012-09-27",
+      "date_precision": "day",
+      "event_type": "energisation",
+      "title": "First generation recorded",
+      "detail": "First market dispatch data recorded in AEMO systems.",
+      "sources": []
+    }
+  ],
   "ownership_history": [],
   "cod_history": [],
   "suppliers": [],

@@ -6,6 +6,7 @@
   "capacity_mw": 201.0,
   "state": "SA",
   "current_developer": "Goyder Wind Farm 1A Pty Ltd as trustee for Goyder Wind Farm 1A Trust",
+  "cod_current": "2024-04-04",
   "grid_forming": false,
   "has_sips": false,
   "has_syncon": false,
@@ -16,7 +17,28 @@
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "1964",
-  "timeline": [],
+  "coordinates": {
+    "lat": -33.682196,
+    "lng": 138.936249
+  },
+  "timeline": [
+    {
+      "date": "2024-04-04",
+      "date_precision": "day",
+      "event_type": "cod",
+      "title": "Commercial operations commenced",
+      "detail": "Commencement date from AEMO registration via OpenElectricity.",
+      "sources": []
+    },
+    {
+      "date": "2024-04-04",
+      "date_precision": "day",
+      "event_type": "energisation",
+      "title": "First generation recorded",
+      "detail": "First market dispatch data recorded in AEMO systems.",
+      "sources": []
+    }
+  ],
   "ownership_history": [],
   "cod_history": [],
   "suppliers": [],

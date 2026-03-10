@@ -169,6 +169,21 @@ export default function Performance() {
           Operational performance rankings across {table?.fleet_avg.count ?? '...'} projects.
           Ranked by capacity factor, revenue, and curtailment.
         </p>
+        {table && (
+          <div className="mt-2">
+            {table.data_source === 'openelectricity' ? (
+              <span className="inline-flex items-center gap-1.5 text-[11px] font-medium px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+                AEMO data via OpenElectricity
+              </span>
+            ) : table.data_source === 'sample' ? (
+              <span className="inline-flex items-center gap-1.5 text-[11px] font-medium px-2 py-0.5 rounded-full bg-amber-500/10 text-amber-400 border border-amber-500/20">
+                <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
+                Sample data — projected estimates
+              </span>
+            ) : null}
+          </div>
+        )}
       </section>
 
       {/* Technology Tabs */}

@@ -86,6 +86,7 @@ CREATE TABLE IF NOT EXISTS timeline_events (
     )),
     title           TEXT NOT NULL,
     detail          TEXT,
+    data_source     TEXT DEFAULT 'manual',       -- 'manual', 'openelectricity', 'aemo'
 
     created_at      TEXT NOT NULL DEFAULT (datetime('now'))
 );

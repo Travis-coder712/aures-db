@@ -1,6 +1,7 @@
 {
   "year": 2024,
   "technology": "wind",
+  "data_source": "openelectricity",
   "fleet_avg": {
     "capacity_factor_pct": 30.26,
     "revenue_per_mw": 209952.0,
@@ -26,7 +27,8 @@
       "energy_price_received": 73.83,
       "revenue_aud": 73155613.0,
       "revenue_per_mw": 359487.0,
-      "market_value_aud": 73155613.0
+      "market_value_aud": 73155613.0,
+      "data_source": "openelectricity"
     },
     {
       "project_id": "murra-warra-wind-farm-stage-1",
@@ -47,7 +49,8 @@
       "energy_price_received": 73.83,
       "revenue_aud": 73155613.0,
       "revenue_per_mw": 324128.0,
-      "market_value_aud": 73155613.0
+      "market_value_aud": 73155613.0,
+      "data_source": "openelectricity"
     },
     {
       "project_id": "bango-973-wind-farm",
@@ -68,7 +71,8 @@
       "energy_price_received": 117.53,
       "revenue_aud": 67071980.0,
       "revenue_per_mw": 432722.0,
-      "market_value_aud": 67071980.0
+      "market_value_aud": 67071980.0,
+      "data_source": "openelectricity"
     },
     {
       "project_id": "lincoln-gap-wind-farm-stage-1",
@@ -89,7 +93,8 @@
       "energy_price_received": 79.93,
       "revenue_aud": 46814128.0,
       "revenue_per_mw": 371541.0,
-      "market_value_aud": 46814128.0
+      "market_value_aud": 46814128.0,
+      "data_source": "openelectricity"
     },
     {
       "project_id": "bango-999-wind-farm",
@@ -110,7 +115,8 @@
       "energy_price_received": 117.53,
       "revenue_aud": 67071980.0,
       "revenue_per_mw": 817951.0,
-      "market_value_aud": 67071980.0
+      "market_value_aud": 67071980.0,
+      "data_source": "openelectricity"
     },
     {
       "project_id": "lincoln-gap-wind-farm-stage-2",
@@ -131,7 +137,8 @@
       "energy_price_received": 79.93,
       "revenue_aud": 46814128.0,
       "revenue_per_mw": 550754.0,
-      "market_value_aud": 46814128.0
+      "market_value_aud": 46814128.0,
+      "data_source": "openelectricity"
     },
     {
       "project_id": "dulacca-wind-farm",
@@ -152,7 +159,8 @@
       "energy_price_received": 109.93,
       "revenue_aud": 63402355.0,
       "revenue_per_mw": 366509.0,
-      "market_value_aud": 63402355.0
+      "market_value_aud": 63402355.0,
+      "data_source": "openelectricity"
     },
     {
       "project_id": "coopers-gap-wind",
@@ -173,7 +181,8 @@
       "energy_price_received": 110.33,
       "revenue_aud": 140494490.0,
       "revenue_per_mw": 310142.0,
-      "market_value_aud": 140494490.0
+      "market_value_aud": 140494490.0,
+      "data_source": "openelectricity"
     },
     {
       "project_id": "coopers-gap-wind-farm",
@@ -194,7 +203,8 @@
       "energy_price_received": 110.33,
       "revenue_aud": 140494490.0,
       "revenue_per_mw": 310142.0,
-      "market_value_aud": 140494490.0
+      "market_value_aud": 140494490.0,
+      "data_source": "openelectricity"
     },
     {
       "project_id": "kennedy-energy-park-phase-1-wind",
@@ -215,7 +225,8 @@
       "energy_price_received": 100.26,
       "revenue_aud": 18830309.0,
       "revenue_per_mw": 434880.0,
-      "market_value_aud": 18830309.0
+      "market_value_aud": 18830309.0,
+      "data_source": "openelectricity"
     },
     {
       "project_id": "silverton-wind-farm",
@@ -236,7 +247,8 @@
       "energy_price_received": 134.63,
       "revenue_aud": 74028877.0,
       "revenue_per_mw": 370144.0,
-      "market_value_aud": 74028877.0
+      "market_value_aud": 74028877.0,
+      "data_source": "openelectricity"
     },
     {
       "project_id": "port-augusta-renewable-energy-park-wind",
@@ -257,7 +269,8 @@
       "energy_price_received": 64.84,
       "revenue_aud": 47432061.0,
       "revenue_per_mw": 225867.0,
-      "market_value_aud": 47432061.0
+      "market_value_aud": 47432061.0,
+      "data_source": "openelectricity"
     },
     {
       "project_id": "musselroe-wind-farm",
@@ -278,7 +291,8 @@
       "energy_price_received": 73.88,
       "revenue_aud": 41594938.0,
       "revenue_per_mw": 247589.0,
-      "market_value_aud": 41594938.0
+      "market_value_aud": 41594938.0,
+      "data_source": "openelectricity"
     },
     {
       "project_id": "cattle-hill-wind-farm",
@@ -299,7 +313,8 @@
       "energy_price_received": 78.01,
       "revenue_aud": 36909446.0,
       "revenue_per_mw": 256316.0,
-      "market_value_aud": 36909446.0
+      "market_value_aud": 36909446.0,
+      "data_source": "openelectricity"
     },
     {
       "project_id": "sapphire-wind-farm",
@@ -320,7 +335,8 @@
       "energy_price_received": 119.78,
       "revenue_aud": 83088749.0,
       "revenue_per_mw": 307736.0,
-      "market_value_aud": 83088749.0
+      "market_value_aud": 83088749.0,
+      "data_source": "openelectricity"
     },
     {
       "project_id": "woolnorth-studland-bay-bluff-point",
@@ -341,7 +357,8 @@
       "energy_price_received": 73.09,
       "revenue_aud": 33692535.0,
       "revenue_per_mw": 244149.0,
-      "market_value_aud": 33692535.0
+      "market_value_aud": 33692535.0,
+      "data_source": "openelectricity"
     },
     {
       "project_id": "granville-harbour-wind-farm",
@@ -362,7 +379,8 @@
       "energy_price_received": 70.2,
       "revenue_aud": 26537937.0,
       "revenue_per_mw": 239081.0,
-      "market_value_aud": 26537937.0
+      "market_value_aud": 26537937.0,
+      "data_source": "openelectricity"
     },
     {
       "project_id": "hornsdale-wind-farm-stage-1",
@@ -383,7 +401,8 @@
       "energy_price_received": 57.6,
       "revenue_aud": 20755170.0,
       "revenue_per_mw": 207552.0,
-      "market_value_aud": 20755170.0
+      "market_value_aud": 20755170.0,
+      "data_source": "openelectricity"
     },
     {
       "project_id": "gullen-range-wind-farm-2",
@@ -404,7 +423,8 @@
       "energy_price_received": 98.38,
       "revenue_aud": 31620451.0,
       "revenue_per_mw": 285718.0,
-      "market_value_aud": 31620451.0
+      "market_value_aud": 31620451.0,
+      "data_source": "openelectricity"
     },
     {
       "project_id": "white-rock-wind-farm-stage-1",
@@ -425,7 +445,8 @@
       "energy_price_received": 121.87,
       "revenue_aud": 52873816.0,
       "revenue_per_mw": 306515.0,
-      "market_value_aud": 52873816.0
+      "market_value_aud": 52873816.0,
+      "data_source": "openelectricity"
     },
     {
       "project_id": "gunning-wind-farm",
@@ -446,7 +467,8 @@
       "energy_price_received": 93.13,
       "revenue_aud": 13757537.0,
       "revenue_per_mw": 295861.0,
-      "market_value_aud": 13757537.0
+      "market_value_aud": 13757537.0,
+      "data_source": "openelectricity"
     },
     {
       "project_id": "boco-rock-wind-farm",
@@ -467,7 +489,8 @@
       "energy_price_received": 113.69,
       "revenue_aud": 34476994.0,
       "revenue_per_mw": 305106.0,
-      "market_value_aud": 34476994.0
+      "market_value_aud": 34476994.0,
+      "data_source": "openelectricity"
     },
     {
       "project_id": "mount-emerald",
@@ -488,7 +511,8 @@
       "energy_price_received": 104.49,
       "revenue_aud": 48051585.0,
       "revenue_per_mw": 269650.0,
-      "market_value_aud": 48051585.0
+      "market_value_aud": 48051585.0,
+      "data_source": "openelectricity"
     },
     {
       "project_id": "stockyard-hill-wind-farm",
@@ -509,7 +533,8 @@
       "energy_price_received": 44.87,
       "revenue_aud": 72413469.0,
       "revenue_per_mw": 141709.0,
-      "market_value_aud": 72413469.0
+      "market_value_aud": 72413469.0,
+      "data_source": "openelectricity"
     },
     {
       "project_id": "kaban-wind-farm",
@@ -530,7 +555,8 @@
       "energy_price_received": 104.15,
       "revenue_aud": 41164672.0,
       "revenue_per_mw": 270820.0,
-      "market_value_aud": 41164672.0
+      "market_value_aud": 41164672.0,
+      "data_source": "openelectricity"
     },
     {
       "project_id": "hornsdale-wind-farm-stage-2",
@@ -551,7 +577,8 @@
       "energy_price_received": 55.0,
       "revenue_aud": 18931831.0,
       "revenue_per_mw": 189318.0,
-      "market_value_aud": 18931831.0
+      "market_value_aud": 18931831.0,
+      "data_source": "openelectricity"
     },
     {
       "project_id": "cullerin-range-wind-farm",
@@ -572,7 +599,8 @@
       "energy_price_received": 117.08,
       "revenue_aud": 10461756.0,
       "revenue_per_mw": 348725.0,
-      "market_value_aud": 10461756.0
+      "market_value_aud": 10461756.0,
+      "data_source": "openelectricity"
     },
     {
       "project_id": "rye-park-wind-farm",
@@ -593,7 +621,8 @@
       "energy_price_received": 98.98,
       "revenue_aud": 94477815.0,
       "revenue_per_mw": 246036.0,
-      "market_value_aud": 94477815.0
+      "market_value_aud": 94477815.0,
+      "data_source": "openelectricity"
     },
     {
       "project_id": "hornsdale-wind-farm-stage-3",
@@ -614,7 +643,8 @@
       "energy_price_received": 53.97,
       "revenue_aud": 19796759.0,
       "revenue_per_mw": 181622.0,
-      "market_value_aud": 19796759.0
+      "market_value_aud": 19796759.0,
+      "data_source": "openelectricity"
     },
     {
       "project_id": "kiata-wind-farm",
@@ -635,7 +665,8 @@
       "energy_price_received": 72.52,
       "revenue_aud": 7620215.0,
       "revenue_per_mw": 245813.0,
-      "market_value_aud": 7620215.0
+      "market_value_aud": 7620215.0,
+      "data_source": "openelectricity"
     },
     {
       "project_id": "stockyard-hill-wind",
@@ -656,7 +687,8 @@
       "energy_price_received": 44.87,
       "revenue_aud": 72413469.0,
       "revenue_per_mw": 136629.0,
-      "market_value_aud": 72413469.0
+      "market_value_aud": 72413469.0,
+      "data_source": "openelectricity"
     },
     {
       "project_id": "gullen-range-wind-farm",
@@ -677,7 +709,8 @@
       "energy_price_received": 89.93,
       "revenue_aud": 39021214.0,
       "revenue_per_mw": 235778.0,
-      "market_value_aud": 39021214.0
+      "market_value_aud": 39021214.0,
+      "data_source": "openelectricity"
     },
     {
       "project_id": "snowtown-wind-farm",
@@ -698,7 +731,8 @@
       "energy_price_received": 75.71,
       "revenue_aud": 22626523.0,
       "revenue_per_mw": 229245.0,
-      "market_value_aud": 22626523.0
+      "market_value_aud": 22626523.0,
+      "data_source": "openelectricity"
     },
     {
       "project_id": "waubra",
@@ -719,7 +753,8 @@
       "energy_price_received": 56.63,
       "revenue_aud": 32267893.0,
       "revenue_per_mw": 168062.0,
-      "market_value_aud": 32267893.0
+      "market_value_aud": 32267893.0,
+      "data_source": "openelectricity"
     },
     {
       "project_id": "woodlawn-wind-farm",
@@ -740,7 +775,8 @@
       "energy_price_received": 122.57,
       "revenue_aud": 15489709.0,
       "revenue_per_mw": 320698.0,
-      "market_value_aud": 15489709.0
+      "market_value_aud": 15489709.0,
+      "data_source": "openelectricity"
     },
     {
       "project_id": "cherry-tree-wind-farm",
@@ -761,7 +797,8 @@
       "energy_price_received": 76.78,
       "revenue_aud": 13413204.0,
       "revenue_per_mw": 232868.0,
-      "market_value_aud": 13413204.0
+      "market_value_aud": 13413204.0,
+      "data_source": "openelectricity"
     },
     {
       "project_id": "berrybank-wind-farm",
@@ -782,7 +819,8 @@
       "energy_price_received": 54.73,
       "revenue_aud": 42018009.0,
       "revenue_per_mw": 149477.0,
-      "market_value_aud": 42018009.0
+      "market_value_aud": 42018009.0,
+      "data_source": "openelectricity"
     },
     {
       "project_id": "taralga-wind-farm",
@@ -803,7 +841,8 @@
       "energy_price_received": 107.02,
       "revenue_aud": 28899470.0,
       "revenue_per_mw": 270594.0,
-      "market_value_aud": 28899470.0
+      "market_value_aud": 28899470.0,
+      "data_source": "openelectricity"
     },
     {
       "project_id": "bald-hills-wind-farm",
@@ -824,7 +863,8 @@
       "energy_price_received": 57.56,
       "revenue_aud": 18392238.0,
       "revenue_per_mw": 173512.0,
-      "market_value_aud": 18392238.0
+      "market_value_aud": 18392238.0,
+      "data_source": "openelectricity"
     },
     {
       "project_id": "dundonnell-wind-farm",
@@ -845,7 +885,8 @@
       "energy_price_received": 52.68,
       "revenue_aud": 46796425.0,
       "revenue_per_mw": 139275.0,
-      "market_value_aud": 46796425.0
+      "market_value_aud": 46796425.0,
+      "data_source": "openelectricity"
     },
     {
       "project_id": "bodangora-wind-farm",
@@ -866,7 +907,8 @@
       "energy_price_received": 112.29,
       "revenue_aud": 29645638.0,
       "revenue_per_mw": 266358.0,
-      "market_value_aud": 29645638.0
+      "market_value_aud": 29645638.0,
+      "data_source": "openelectricity"
     },
     {
       "project_id": "capital-wind-farm",
@@ -887,7 +929,8 @@
       "energy_price_received": 136.35,
       "revenue_aud": 40146386.0,
       "revenue_per_mw": 285333.0,
-      "market_value_aud": 40146386.0
+      "market_value_aud": 40146386.0,
+      "data_source": "openelectricity"
     },
     {
       "project_id": "willogoleche-wind-farm",
@@ -908,7 +951,8 @@
       "energy_price_received": 59.43,
       "revenue_aud": 20065848.0,
       "revenue_per_mw": 167551.0,
-      "market_value_aud": 20065848.0
+      "market_value_aud": 20065848.0,
+      "data_source": "openelectricity"
     },
     {
       "project_id": "portland-wind-farm",
@@ -929,7 +973,8 @@
       "energy_price_received": 59.22,
       "revenue_aud": 24336614.0,
       "revenue_per_mw": 160426.0,
-      "market_value_aud": 24336614.0
+      "market_value_aud": 24336614.0,
+      "data_source": "openelectricity"
     },
     {
       "project_id": "clements-gap-wind-farm",
@@ -950,7 +995,8 @@
       "energy_price_received": 59.45,
       "revenue_aud": 10205183.0,
       "revenue_per_mw": 179038.0,
-      "market_value_aud": 10205183.0
+      "market_value_aud": 10205183.0,
+      "data_source": "openelectricity"
     },
     {
       "project_id": "crudine-ridge-wind-farm",
@@ -971,7 +1017,8 @@
       "energy_price_received": 115.15,
       "revenue_aud": 34289454.0,
       "revenue_per_mw": 248474.0,
-      "market_value_aud": 34289454.0
+      "market_value_aud": 34289454.0,
+      "data_source": "openelectricity"
     },
     {
       "project_id": "crowlands-wind-farm",
@@ -992,7 +1039,8 @@
       "energy_price_received": 50.2,
       "revenue_aud": 12379163.0,
       "revenue_per_mw": 154836.0,
-      "market_value_aud": 12379163.0
+      "market_value_aud": 12379163.0,
+      "data_source": "openelectricity"
     },
     {
       "project_id": "collector",
@@ -1013,7 +1061,8 @@
       "energy_price_received": 90.83,
       "revenue_aud": 42813058.0,
       "revenue_per_mw": 195493.0,
-      "market_value_aud": 42813058.0
+      "market_value_aud": 42813058.0,
+      "data_source": "openelectricity"
     },
     {
       "project_id": "waterloo-wind-farm",
@@ -1034,7 +1083,8 @@
       "energy_price_received": 53.78,
       "revenue_aud": 18791735.0,
       "revenue_per_mw": 143668.0,
-      "market_value_aud": 18791735.0
+      "market_value_aud": 18791735.0,
+      "data_source": "openelectricity"
     },
     {
       "project_id": "bulgana-green-power-hub-wind-farm",
@@ -1055,7 +1105,8 @@
       "energy_price_received": 61.11,
       "revenue_aud": 29595336.0,
       "revenue_per_mw": 144791.0,
-      "market_value_aud": 29595336.0
+      "market_value_aud": 29595336.0,
+      "data_source": "openelectricity"
     },
     {
       "project_id": "hallett-4-north-brown-hill",
@@ -1076,7 +1127,8 @@
       "energy_price_received": 70.36,
       "revenue_aud": 22865941.0,
       "revenue_per_mw": 172834.0,
-      "market_value_aud": 22865941.0
+      "market_value_aud": 22865941.0,
+      "data_source": "openelectricity"
     },
     {
       "project_id": "moorabool-wind-farm",
@@ -1097,7 +1149,8 @@
       "energy_price_received": 46.41,
       "revenue_aud": 35491832.0,
       "revenue_per_mw": 116367.0,
-      "market_value_aud": 35491832.0
+      "market_value_aud": 35491832.0,
+      "data_source": "openelectricity"
     },
     {
       "project_id": "mortlake-south-wind-farm",
@@ -1118,7 +1171,8 @@
       "energy_price_received": 61.71,
       "revenue_aud": 21220792.0,
       "revenue_per_mw": 138698.0,
-      "market_value_aud": 21220792.0
+      "market_value_aud": 21220792.0,
+      "data_source": "openelectricity"
     },
     {
       "project_id": "hallett-stage-2-hallett-hill",
@@ -1139,7 +1193,8 @@
       "energy_price_received": 68.24,
       "revenue_aud": 12135218.0,
       "revenue_per_mw": 170919.0,
-      "market_value_aud": 12135218.0
+      "market_value_aud": 12135218.0,
+      "data_source": "openelectricity"
     },
     {
       "project_id": "cathedral-rocks",
@@ -1160,7 +1215,8 @@
       "energy_price_received": 77.55,
       "revenue_aud": 11471633.0,
       "revenue_per_mw": 173813.0,
-      "market_value_aud": 11471633.0
+      "market_value_aud": 11471633.0,
+      "data_source": "openelectricity"
     },
     {
       "project_id": "flyers-creek-wind-farm",
@@ -1181,7 +1237,8 @@
       "energy_price_received": 116.74,
       "revenue_aud": 26806650.0,
       "revenue_per_mw": 191476.0,
-      "market_value_aud": 26806650.0
+      "market_value_aud": 26806650.0,
+      "data_source": "openelectricity"
     },
     {
       "project_id": "mt-gellibrand-wind-farm",
@@ -1202,7 +1259,8 @@
       "energy_price_received": 61.42,
       "revenue_aud": 18139825.0,
       "revenue_per_mw": 137423.0,
-      "market_value_aud": 18139825.0
+      "market_value_aud": 18139825.0,
+      "data_source": "openelectricity"
     },
     {
       "project_id": "mt-millar-wind-farm",
@@ -1223,7 +1281,8 @@
       "energy_price_received": 96.68,
       "revenue_aud": 13444906.0,
       "revenue_per_mw": 192070.0,
-      "market_value_aud": 13444906.0
+      "market_value_aud": 13444906.0,
+      "data_source": "openelectricity"
     },
     {
       "project_id": "wattle-point",
@@ -1244,7 +1303,8 @@
       "energy_price_received": 66.19,
       "revenue_aud": 13025955.0,
       "revenue_per_mw": 143142.0,
-      "market_value_aud": 13025955.0
+      "market_value_aud": 13025955.0,
+      "data_source": "openelectricity"
     },
     {
       "project_id": "salt-creek-wind-farm",
@@ -1265,7 +1325,8 @@
       "energy_price_received": 74.11,
       "revenue_aud": 8666161.0,
       "revenue_per_mw": 160484.0,
-      "market_value_aud": 8666161.0
+      "market_value_aud": 8666161.0,
+      "data_source": "openelectricity"
     },
     {
       "project_id": "yendon-wind-farm",
@@ -1286,7 +1347,8 @@
       "energy_price_received": 63.62,
       "revenue_aud": 18609997.0,
       "revenue_per_mw": 131056.0,
-      "market_value_aud": 18609997.0
+      "market_value_aud": 18609997.0,
+      "data_source": "openelectricity"
     },
     {
       "project_id": "lake-bonney-2-wind-farm",
@@ -1307,7 +1369,8 @@
       "energy_price_received": 66.64,
       "revenue_aud": 20113819.0,
       "revenue_per_mw": 126502.0,
-      "market_value_aud": 20113819.0
+      "market_value_aud": 20113819.0,
+      "data_source": "openelectricity"
     },
     {
       "project_id": "ararat-wind-farm",
@@ -1328,7 +1391,8 @@
       "energy_price_received": 45.85,
       "revenue_aud": 20658052.0,
       "revenue_per_mw": 86075.0,
-      "market_value_aud": 20658052.0
+      "market_value_aud": 20658052.0,
+      "data_source": "openelectricity"
     },
     {
       "project_id": "yambuk",
@@ -1349,7 +1413,8 @@
       "energy_price_received": 48.74,
       "revenue_aud": 3736981.0,
       "revenue_per_mw": 124566.0,
-      "market_value_aud": 3736981.0
+      "market_value_aud": 3736981.0,
+      "data_source": "openelectricity"
     },
     {
       "project_id": "snowtown-s2-wind-farm",
@@ -1370,7 +1435,8 @@
       "energy_price_received": 53.62,
       "revenue_aud": 22714171.0,
       "revenue_per_mw": 84127.0,
-      "market_value_aud": 22714171.0
+      "market_value_aud": 22714171.0,
+      "data_source": "openelectricity"
     },
     {
       "project_id": "macarthur-wind-farm",
@@ -1391,7 +1457,8 @@
       "energy_price_received": 48.24,
       "revenue_aud": 23674228.0,
       "revenue_per_mw": 56367.0,
-      "market_value_aud": 23674228.0
+      "market_value_aud": 23674228.0,
+      "data_source": "openelectricity"
     },
     {
       "project_id": "hallett-stage-1-brown-hill",
@@ -1412,7 +1479,8 @@
       "energy_price_received": 70.66,
       "revenue_aud": 16414216.0,
       "revenue_per_mw": 123415.0,
-      "market_value_aud": 16414216.0
+      "market_value_aud": 16414216.0,
+      "data_source": "openelectricity"
     },
     {
       "project_id": "mt-mercer-wind-farm",
@@ -1433,7 +1501,8 @@
       "energy_price_received": 67.99,
       "revenue_aud": 15900012.0,
       "revenue_per_mw": 121189.0,
-      "market_value_aud": 15900012.0
+      "market_value_aud": 15900012.0,
+      "data_source": "openelectricity"
     },
     {
       "project_id": "starfish-hill",
@@ -1454,7 +1523,8 @@
       "energy_price_received": 63.57,
       "revenue_aud": 4689798.0,
       "revenue_per_mw": 135936.0,
-      "market_value_aud": 4689798.0
+      "market_value_aud": 4689798.0,
+      "data_source": "openelectricity"
     },
     {
       "project_id": "challicum-hills",
@@ -1475,7 +1545,8 @@
       "energy_price_received": 48.77,
       "revenue_aud": 5754940.0,
       "revenue_per_mw": 109618.0,
-      "market_value_aud": 5754940.0
+      "market_value_aud": 5754940.0,
+      "data_source": "openelectricity"
     },
     {
       "project_id": "elaine-wind-farm",
@@ -1496,7 +1567,8 @@
       "energy_price_received": 58.13,
       "revenue_aud": 9570102.0,
       "revenue_per_mw": 116709.0,
-      "market_value_aud": 9570102.0
+      "market_value_aud": 9570102.0,
+      "data_source": "openelectricity"
     },
     {
       "project_id": "canunda",
@@ -1517,7 +1589,8 @@
       "energy_price_received": 70.81,
       "revenue_aud": 6252494.0,
       "revenue_per_mw": 135924.0,
-      "market_value_aud": 6252494.0
+      "market_value_aud": 6252494.0,
+      "data_source": "openelectricity"
     },
     {
       "project_id": "oaklands-hill-wind-farm",
@@ -1538,7 +1611,8 @@
       "energy_price_received": 53.69,
       "revenue_aud": 7527164.0,
       "revenue_per_mw": 110694.0,
-      "market_value_aud": 7527164.0
+      "market_value_aud": 7527164.0,
+      "data_source": "openelectricity"
     },
     {
       "project_id": "goyder-south-wind-farm-1a",
@@ -1559,7 +1633,8 @@
       "energy_price_received": 54.96,
       "revenue_aud": 8097232.0,
       "revenue_per_mw": 40285.0,
-      "market_value_aud": 8097232.0
+      "market_value_aud": 8097232.0,
+      "data_source": "openelectricity"
     },
     {
       "project_id": "crookwell-2-wind-farm",
@@ -1580,7 +1655,8 @@
       "energy_price_received": 88.19,
       "revenue_aud": 11369357.0,
       "revenue_per_mw": 124938.0,
-      "market_value_aud": 11369357.0
+      "market_value_aud": 11369357.0,
+      "data_source": "openelectricity"
     },
     {
       "project_id": "goyder-south-wind-farm-1b",
@@ -1601,7 +1677,8 @@
       "energy_price_received": 54.96,
       "revenue_aud": 8097232.0,
       "revenue_per_mw": 39790.0,
-      "market_value_aud": 8097232.0
+      "market_value_aud": 8097232.0,
+      "data_source": "openelectricity"
     },
     {
       "project_id": "ryan-corner-wind-farm",
@@ -1622,7 +1699,8 @@
       "energy_price_received": 31.44,
       "revenue_aud": 4600801.0,
       "revenue_per_mw": 22443.0,
-      "market_value_aud": 4600801.0
+      "market_value_aud": 4600801.0,
+      "data_source": "openelectricity"
     },
     {
       "project_id": "hallett-5-the-bluff-wf",
@@ -1643,7 +1721,8 @@
       "energy_price_received": 62.83,
       "revenue_aud": 6292228.0,
       "revenue_per_mw": 118721.0,
-      "market_value_aud": 6292228.0
+      "market_value_aud": 6292228.0,
+      "data_source": "openelectricity"
     },
     {
       "project_id": "lake-bonney-3-wind-farm",
@@ -1664,7 +1743,8 @@
       "energy_price_received": 77.94,
       "revenue_aud": 5120247.0,
       "revenue_per_mw": 131288.0,
-      "market_value_aud": 5120247.0
+      "market_value_aud": 5120247.0,
+      "data_source": "openelectricity"
     },
     {
       "project_id": "lake-bonney-1-wind-farm",
@@ -1685,7 +1765,8 @@
       "energy_price_received": 65.03,
       "revenue_aud": 8739387.0,
       "revenue_per_mw": 108564.0,
-      "market_value_aud": 8739387.0
+      "market_value_aud": 8739387.0,
+      "data_source": "openelectricity"
     },
     {
       "project_id": "hawkesdale-wind-farm",
@@ -1706,7 +1787,8 @@
       "energy_price_received": 40.25,
       "revenue_aud": 4826943.0,
       "revenue_per_mw": 53932.0,
-      "market_value_aud": 4826943.0
+      "market_value_aud": 4826943.0,
+      "data_source": "openelectricity"
     },
     {
       "project_id": "crookwell-3-wind-farm",
@@ -1727,7 +1809,8 @@
       "energy_price_received": 97.23,
       "revenue_aud": 2855828.0,
       "revenue_per_mw": 50997.0,
-      "market_value_aud": 2855828.0
+      "market_value_aud": 2855828.0,
+      "data_source": "openelectricity"
     }
   ]
 }

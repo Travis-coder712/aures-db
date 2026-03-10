@@ -6,6 +6,7 @@
   "capacity_mw": 66.0,
   "state": "QLD",
   "current_developer": "CleanCo Queensland Limited",
+  "cod_current": "1962-12-31",
   "grid_forming": false,
   "has_sips": false,
   "has_syncon": false,
@@ -16,7 +17,28 @@
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "1012",
-  "timeline": [],
+  "coordinates": {
+    "lat": -16.85077,
+    "lng": 145.647049
+  },
+  "timeline": [
+    {
+      "date": "1962-12-31",
+      "date_precision": "year",
+      "event_type": "cod",
+      "title": "Commercial operations commenced",
+      "detail": "Commencement date from AEMO registration via OpenElectricity.",
+      "sources": []
+    },
+    {
+      "date": "1998-12-08",
+      "date_precision": "day",
+      "event_type": "energisation",
+      "title": "First generation recorded",
+      "detail": "First market dispatch data recorded in AEMO systems.",
+      "sources": []
+    }
+  ],
   "ownership_history": [],
   "cod_history": [],
   "suppliers": [],
