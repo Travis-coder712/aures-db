@@ -6,6 +6,8 @@ import ProjectDetail from './pages/ProjectDetail'
 import Search from './pages/Search'
 import Guides from './pages/Guides'
 import GuideReader from './pages/GuideReader'
+import SchemesOverview from './pages/SchemesOverview'
+import SchemeRoundDetail from './pages/SchemeRoundDetail'
 import NotFound from './pages/NotFound'
 
 function App() {
@@ -18,22 +20,14 @@ function App() {
         <Route path="search" element={<Search />} />
         <Route path="guides" element={<Guides />} />
         <Route path="guides/:id" element={<GuideReader />} />
-        {/* Phase 2 routes */}
-        {/* <Route path="cis" element={<CISRounds />} /> */}
-        {/* <Route path="cis/:roundId" element={<CISRoundDetail />} /> */}
-        {/* <Route path="ltesa" element={<LTESARounds />} /> */}
+        {/* Phase 2: Schemes */}
+        <Route path="schemes" element={<SchemesOverview />} />
+        <Route path="schemes/:scheme/:roundId" element={<SchemeRoundDetail />} />
+        {/* Future routes */}
         {/* <Route path="rez" element={<REZList />} /> */}
         {/* <Route path="watchlist" element={<Watchlist />} /> */}
-        {/* Phase 3 routes */}
         {/* <Route path="performance" element={<Performance />} /> */}
-        {/* <Route path="performance/wind" element={<WindLeague />} /> */}
-        {/* <Route path="performance/solar" element={<SolarLeague />} /> */}
-        {/* <Route path="performance/bess" element={<BESSLeague />} /> */}
-        {/* Phase 4 routes */}
         {/* <Route path="developers" element={<DeveloperList />} /> */}
-        {/* <Route path="developers/:id" element={<DeveloperProfile />} /> */}
-        {/* <Route path="oems" element={<OEMList />} /> */}
-        {/* <Route path="learn" element={<EducationHub />} /> */}
         <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>
