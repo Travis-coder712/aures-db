@@ -20,6 +20,8 @@ Thumbs.db
 
 # Database (will be large)
 database/*.db
+database/*.db-shm
+database/*.db-wal
 database/*.sqlite
 
 # Python
