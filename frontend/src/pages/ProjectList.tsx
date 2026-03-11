@@ -1,7 +1,7 @@
 import { useState, useMemo } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { useProjectIndex } from '../hooks/useProjectData'
-import { TECHNOLOGY_CONFIG, STATUS_CONFIG, type Technology, type ProjectStatus, type State } from '../lib/types'
+import { TECHNOLOGY_CONFIG, STATUS_CONFIG, CONFIDENCE_CONFIG, type Technology, type ProjectStatus, type State, type Confidence } from '../lib/types'
 import ProjectCard from '../components/common/ProjectCard'
 
 type SortKey = 'name' | 'capacity_mw' | 'state' | 'status'
@@ -15,6 +15,7 @@ export default function ProjectList() {
   const techFilter = searchParams.get('tech') as Technology | null
   const statusFilter = searchParams.get('status') as ProjectStatus | null
   const stateFilter = searchParams.get('state') as State | null
+  const confidenceFilter = searchParams.get('confidence') as Confidence | null
 
   const filtered = useMemo(() => {
     let result = [...allProjects]
@@ -22,6 +23,7 @@ export default function ProjectList() {
     if (techFilter) result = result.filter((p) => p.technology === techFilter)
     if (statusFilter) result = result.filter((p) => p.status === statusFilter)
     if (stateFilter) result = result.filter((p) => p.state === stateFilter)
+    if (confidenceFilter) result = result.filter((p) => p.data_confidence === confidenceFilter)
 
     result.sort((a, b) => {
       let cmp = 0
@@ -45,7 +47,7 @@ export default function ProjectList() {
     })
 
     return result
-  }, [allProjects, techFilter, statusFilter, stateFilter, sortBy, sortDesc])
+  }, [allProjects, techFilter, statusFilter, stateFilter, confidenceFilter, sortBy, sortDesc])
 
   if (loading) {
     return (
@@ -56,7 +58,7 @@ export default function ProjectList() {
   }
 
   const totalCapacity = filtered.reduce((sum, p) => sum + p.capacity_mw, 0)
-  const activeFilters = [techFilter, statusFilter, stateFilter].filter(Boolean).length
+  const activeFilters = [techFilter, statusFilter, stateFilter, confidenceFilter].filter(Boolean).length
 
   function clearFilters() {
     setSearchParams({})
@@ -166,6 +168,36 @@ export default function ProjectList() {
                 }`}
               >
                 {state}
+              </button>
+            )
+          })}
+        </div>
+
+        {/* Confidence */}
+        <div className="flex items-center gap-2 flex-wrap">
+          <span className="text-[10px] font-semibold uppercase tracking-wider text-[var(--color-text-muted)] w-12">
+            Data
+          </span>
+          {(['high', 'good', 'medium', 'low'] as const).map((conf) => {
+            const config = CONFIDENCE_CONFIG[conf]
+            const isActive = confidenceFilter === conf
+            return (
+              <button
+                key={conf}
+                onClick={() => toggleFilter('confidence', conf)}
+                className={`text-xs px-2.5 py-1 rounded-full border transition-colors ${
+                  isActive
+                    ? 'border-transparent font-medium'
+                    : 'border-[var(--color-border)] text-[var(--color-text-muted)] hover:border-[var(--color-text-muted)]'
+                }`}
+                style={
+                  isActive
+                    ? { backgroundColor: `${config.color}20`, color: config.color }
+                    : undefined
+                }
+              >
+                <span className="font-mono text-[10px] mr-1" style={{ color: isActive ? config.color : undefined }}>{config.dots}</span>
+                {config.label.replace(' Confidence', '')}
               </button>
             )
           })}

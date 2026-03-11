@@ -11,7 +11,7 @@ import {
   ResponsiveContainer,
 } from 'recharts'
 import { useNEMStats } from '../hooks/useNEMStats'
-import { TECHNOLOGY_CONFIG } from '../lib/types'
+import { TECHNOLOGY_CONFIG, CONFIDENCE_CONFIG } from '../lib/types'
 import type { Technology } from '../lib/types'
 
 const OFFSHORE_EXCLUDE: Technology[] = ['offshore_wind']
@@ -232,6 +232,49 @@ export default function Dashboard() {
               />
             </BarChart>
           </ResponsiveContainer>
+        </div>
+      </section>
+
+      {/* Data Quality */}
+      <section className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl p-5">
+        <h2 className="text-lg font-semibold text-[var(--color-text)] mb-4">
+          Data Quality
+        </h2>
+        <div className="space-y-2.5">
+          {stats.by_confidence.map((item) => {
+            const config = CONFIDENCE_CONFIG[item.tier]
+            const barWidth = stats.total_projects > 0 ? (item.count / stats.total_projects) * 100 : 0
+            return (
+              <Link
+                key={item.tier}
+                to={`/projects?confidence=${item.tier}`}
+                className="flex items-center gap-3 group"
+              >
+                <span
+                  className="text-xs font-mono w-10 text-right"
+                  style={{ color: config.color }}
+                >
+                  {config.dots}
+                </span>
+                <span className="text-xs text-[var(--color-text-muted)] w-16 group-hover:text-[var(--color-text)] transition-colors">
+                  {config.label.replace(' Confidence', '')}
+                </span>
+                <div className="flex-1 h-5 bg-[var(--color-bg-elevated)] rounded-full overflow-hidden">
+                  <div
+                    className="h-full rounded-full transition-all"
+                    style={{
+                      width: `${barWidth}%`,
+                      backgroundColor: `${config.color}40`,
+                      minWidth: item.count > 0 ? '2px' : '0',
+                    }}
+                  />
+                </div>
+                <span className="text-xs text-[var(--color-text-muted)] w-20 text-right tabular-nums">
+                  {item.count} <span className="text-[10px]">({item.pct}%)</span>
+                </span>
+              </Link>
+            )
+          })}
         </div>
       </section>
 

@@ -1,5 +1,5 @@
 import { useMemo } from 'react'
-import type { ProjectSummary, Technology, ProjectStatus, State } from '../lib/types'
+import type { ProjectSummary, Technology, ProjectStatus, State, Confidence } from '../lib/types'
 import { useProjectIndex } from './useProjectData'
 
 export interface TechStatusBreakdown {
@@ -29,6 +29,12 @@ export interface PipelineProject {
   developer?: string
 }
 
+export interface ConfidenceBreakdown {
+  tier: Confidence
+  count: number
+  pct: number
+}
+
 export interface NEMStats {
   operating_gw: number
   construction_gw: number
@@ -37,6 +43,7 @@ export interface NEMStats {
   total_projects: number
   by_technology: TechStatusBreakdown[]
   by_state: StateStatusBreakdown[]
+  by_confidence: ConfidenceBreakdown[]
   pipeline: PipelineProject[]
 }
 
@@ -122,6 +129,13 @@ export function useNEMStats(excludeTechs?: Technology[]) {
       }
     })
 
+    // By confidence
+    const CONF_ORDER: Confidence[] = ['high', 'good', 'medium', 'low']
+    const by_confidence: ConfidenceBreakdown[] = CONF_ORDER.map((tier) => {
+      const count = base.filter((p) => p.data_confidence === tier).length
+      return { tier, count, pct: base.length ? Math.round((count / base.length) * 100) : 0 }
+    })
+
     // Construction pipeline
     const pipeline: PipelineProject[] = base
       .filter((p) => p.status === 'construction' || p.status === 'commissioning')
@@ -144,6 +158,7 @@ export function useNEMStats(excludeTechs?: Technology[]) {
       total_projects: base.length,
       by_technology,
       by_state,
+      by_confidence,
       pipeline,
     }
   }, [projects, excludeKey])
