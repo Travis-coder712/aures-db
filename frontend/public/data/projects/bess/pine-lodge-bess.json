@@ -6,21 +6,37 @@
   "capacity_mw": 250.0,
   "storage_mwh": 550.0,
   "state": "VIC",
-  "current_developer": "ENERGY STORAGE PROJECT NO 6 PTY LTD",
+  "current_developer": "Valent Energy (Gaw Capital / BW ESS)",
   "cod_current": "2026-10",
   "grid_forming": false,
   "has_sips": false,
   "has_syncon": false,
   "has_statcom": false,
   "has_harmonic_filter": false,
-  "data_confidence": "low",
+  "notable": "Terminal station energised Dec 2025. Late-stage construction/commissioning.",
+  "data_confidence": "high",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "1997",
-  "timeline": [],
+  "timeline": [
+    {
+      "date": "2025-12-01",
+      "date_precision": "month",
+      "event_type": "notable",
+      "title": "AusNet terminal station energised",
+      "sources": []
+    }
+  ],
   "ownership_history": [],
   "cod_history": [],
-  "suppliers": [],
+  "suppliers": [
+    {
+      "role": "bop",
+      "supplier": "ACLE Services",
+      "grid_forming": false,
+      "source_url": "https://www.acle.com.au/our-projects-2/"
+    }
+  ],
   "offtakes": [],
   "scheme_contracts": [],
   "cost_sources": [],
@@ -31,6 +47,16 @@
       "url": "https://aemo.com.au/energy-systems/electricity/national-electricity-market-nem/nem-forecasting-and-planning/forecasting-and-planning-data/generation-information",
       "date": "2026-01-30",
       "source_tier": 1
+    },
+    {
+      "title": "Pine Lodge BESS \u2014 Official",
+      "url": "https://pinelodgebess.com.au/",
+      "source_tier": 2
+    },
+    {
+      "title": "AusNet \u2014 Pine Lodge Terminal Station",
+      "url": "https://www.ecogeneration.com.au/pine-lodge-terminal-station-big-battery-rollout",
+      "source_tier": 2
     }
   ]
 }

@@ -16,7 +16,16 @@
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "1613",
-  "timeline": [],
+  "timeline": [
+    {
+      "date": "2024-05-01",
+      "date_precision": "month",
+      "event_type": "notable",
+      "title": "Feasibility licence secured",
+      "detail": "586 sq km area in Gippsland declared area. Up to 150 turbines, 2.2 GW. Environmental assessments expected to conclude 2026.",
+      "sources": []
+    }
+  ],
   "ownership_history": [],
   "cod_history": [],
   "suppliers": [],
@@ -30,6 +39,11 @@
       "url": "https://aemo.com.au/energy-systems/electricity/national-electricity-market-nem/nem-forecasting-and-planning/forecasting-and-planning-data/generation-information",
       "date": "2026-01-30",
       "source_tier": 1
+    },
+    {
+      "title": "Star of the South \u2014 Project Overview",
+      "url": "https://www.starofthesouth.com.au/project-overview",
+      "source_tier": 2
     }
   ]
 }

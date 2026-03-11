@@ -3,9 +3,9 @@
   "technology": "wind",
   "data_source": "openelectricity",
   "fleet_avg": {
-    "capacity_factor_pct": 30.26,
-    "revenue_per_mw": 209952.0,
-    "count": 82
+    "capacity_factor_pct": 30.16,
+    "revenue_per_mw": 209552.0,
+    "count": 80
   },
   "projects": [
     {
@@ -160,28 +160,6 @@
       "revenue_aud": 63402355.0,
       "revenue_per_mw": 366509.0,
       "market_value_aud": 63402355.0,
-      "data_source": "openelectricity"
-    },
-    {
-      "project_id": "coopers-gap-wind",
-      "rank_composite": 8,
-      "quartile": 1,
-      "composite_score": 79.8,
-      "rank_capacity_factor": 30,
-      "rank_revenue_per_mw": 12,
-      "rank_curtailment": 3,
-      "percentile_capacity_factor": 64.2,
-      "percentile_revenue_per_mw": 86.4,
-      "name": "Coopers Gap Wind Farm",
-      "technology": "wind",
-      "capacity_mw": 453.0,
-      "state": "QLD",
-      "energy_mwh": 1273385.9,
-      "capacity_factor_pct": 32.09,
-      "energy_price_received": 110.33,
-      "revenue_aud": 140494490.0,
-      "revenue_per_mw": 310142.0,
-      "market_value_aud": 140494490.0,
       "data_source": "openelectricity"
     },
     {
@@ -529,10 +507,10 @@
       "capacity_mw": 511.0,
       "state": "VIC",
       "energy_mwh": 1614012.2,
-      "capacity_factor_pct": 36.06,
+      "capacity_factor_pct": 34.76,
       "energy_price_received": 44.87,
       "revenue_aud": 72413469.0,
-      "revenue_per_mw": 141709.0,
+      "revenue_per_mw": 136629.0,
       "market_value_aud": 72413469.0,
       "data_source": "openelectricity"
     },
@@ -666,28 +644,6 @@
       "revenue_aud": 7620215.0,
       "revenue_per_mw": 245813.0,
       "market_value_aud": 7620215.0,
-      "data_source": "openelectricity"
-    },
-    {
-      "project_id": "stockyard-hill-wind",
-      "rank_composite": 31,
-      "quartile": 2,
-      "composite_score": 61.5,
-      "rank_capacity_factor": 21,
-      "rank_revenue_per_mw": 59,
-      "rank_curtailment": 1,
-      "percentile_capacity_factor": 75.3,
-      "percentile_revenue_per_mw": 28.4,
-      "name": "Stockyard Hill Wind Farm",
-      "technology": "wind",
-      "capacity_mw": 530.0,
-      "state": "VIC",
-      "energy_mwh": 1614012.2,
-      "capacity_factor_pct": 34.76,
-      "energy_price_received": 44.87,
-      "revenue_aud": 72413469.0,
-      "revenue_per_mw": 136629.0,
-      "market_value_aud": 72413469.0,
       "data_source": "openelectricity"
     },
     {

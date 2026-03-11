@@ -3,9 +3,9 @@
   "technology": "solar",
   "data_source": "openelectricity",
   "fleet_avg": {
-    "capacity_factor_pct": 20.81,
-    "revenue_per_mw": 96611.0,
-    "count": 75
+    "capacity_factor_pct": 20.92,
+    "revenue_per_mw": 96713.0,
+    "count": 74
   },
   "projects": [
     {
@@ -955,29 +955,6 @@
       "data_source": "openelectricity"
     },
     {
-      "project_id": "new-england-solar",
-      "rank_composite": 44,
-      "quartile": 3,
-      "composite_score": 45.4,
-      "rank_capacity_factor": 67,
-      "rank_revenue_per_mw": 36,
-      "rank_curtailment": 1,
-      "percentile_capacity_factor": 10.8,
-      "percentile_revenue_per_mw": 52.7,
-      "name": "New England Solar Farm",
-      "technology": "hybrid",
-      "capacity_mw": 720.0,
-      "storage_mwh": 400.0,
-      "state": "NSW",
-      "energy_mwh": 783507.3,
-      "capacity_factor_pct": 12.42,
-      "energy_price_received": 81.84,
-      "revenue_aud": 64119835.0,
-      "revenue_per_mw": 89055.0,
-      "market_value_aud": 64119835.0,
-      "data_source": "openelectricity"
-    },
-    {
       "project_id": "glenrowan-solar-farm",
       "rank_composite": 45,
       "quartile": 3,
@@ -1010,7 +987,7 @@
       "percentile_capacity_factor": 9.5,
       "percentile_revenue_per_mw": 51.4,
       "name": "New England Solar Farm",
-      "technology": "solar",
+      "technology": "hybrid",
       "capacity_mw": 720.0,
       "state": "NSW",
       "energy_mwh": 783507.3,

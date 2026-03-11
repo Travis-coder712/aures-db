@@ -6,7 +6,7 @@
   "capacity_mw": 1300.0,
   "state": "VIC",
   "lga": "Golden Plains Shire",
-  "current_developer": "Amplitude Energy / TagEnergy",
+  "current_developer": "TagEnergy / Ingka Group",
   "cod_current": "2026 (Stage 1)",
   "cod_original": "2025",
   "connection_status": "In progress",
@@ -16,8 +16,8 @@
   "has_syncon": false,
   "has_statcom": false,
   "has_harmonic_filter": false,
-  "notable": "At 1,300MW across two stages, this will be one of the largest wind farms in the Southern Hemisphere when complete. Uses 228 Vestas turbines.",
-  "data_confidence": "good",
+  "notable": "Largest wind farm in Southern Hemisphere. 215 turbines across two stages. Stage 1 first power delivered Q1 2025.",
+  "data_confidence": "high",
   "last_updated": "2025-03-01",
   "last_verified": "2025-03-01",
   "coordinates": {
@@ -38,6 +38,14 @@
       ]
     },
     {
+      "date": "2018-10-01",
+      "date_precision": "month",
+      "event_type": "planning_approved",
+      "title": "EES assessment concluded / planning permit",
+      "detail": "Victorian Minister for Planning granted permit",
+      "sources": []
+    },
+    {
       "date": "2020-09-01",
       "date_precision": "month",
       "event_type": "planning_approved",
@@ -49,6 +57,22 @@
           "url": "https://www.planning.vic.gov.au/"
         }
       ]
+    },
+    {
+      "date": "2022-11-01",
+      "date_precision": "month",
+      "event_type": "notable",
+      "title": "Stage 1 financial close",
+      "detail": "A$3 billion commitment including Stage 2 development",
+      "sources": []
+    },
+    {
+      "date": "2023-01-01",
+      "date_precision": "month",
+      "event_type": "construction_start",
+      "title": "Stage 1 construction commenced",
+      "detail": "122 Vestas V162-6.2 MW turbines",
+      "sources": []
     },
     {
       "date": "2023-06-01",
@@ -63,6 +87,22 @@
           "source_tier": 2
         }
       ]
+    },
+    {
+      "date": "2024-06-01",
+      "date_precision": "month",
+      "event_type": "notable",
+      "title": "Stage 2 financial close",
+      "detail": "Vestas EPC for 93 turbines / 577 MW Stage 2 West",
+      "sources": []
+    },
+    {
+      "date": "2025-03-01",
+      "date_precision": "month",
+      "event_type": "energisation",
+      "title": "Stage 1 first power delivered",
+      "detail": "First turbines energised in Q1 2025",
+      "sources": []
     }
   ],
   "ownership_history": [
@@ -95,6 +135,12 @@
       "supplier": "Vestas",
       "model": "V162-6.2 MW",
       "grid_forming": false
+    },
+    {
+      "role": "epc",
+      "supplier": "Vestas (EPC for Stage 1 and Stage 2)",
+      "grid_forming": false,
+      "source_url": "https://tag-en.com/3-billion-victorian-wind-farm-secures-equity-investor-and-epc-contractor/"
     }
   ],
   "offtakes": [],
@@ -105,6 +151,26 @@
     {
       "title": "AEMO Generation Information",
       "url": "https://aemo.com.au"
+    },
+    {
+      "title": "Golden Plains Wind Farm \u2014 Official",
+      "url": "https://goldenplainswindfarm.com.au/about-golden-plains-wind-farm/",
+      "source_tier": 2
+    },
+    {
+      "title": "TagEnergy \u2014 Stage 2 Financial Close",
+      "url": "https://tag-en.com/construction-to-begin-as-golden-plains-wind-farm-stage-2-reaches-financial-close/",
+      "source_tier": 2
+    },
+    {
+      "title": "Vestas \u2014 577 MW Stage 2 Order",
+      "url": "https://www.vestas.com/en/media/company-news/2024/vestas-receives-577-mw-order-in-australia-for-second-st-c4003383",
+      "source_tier": 2
+    },
+    {
+      "title": "EnergyAustralia \u2014 PPA",
+      "url": "https://www.energyaustralia.com.au/about-us/media/news/energyaustralia-take-significant-share-energy-golden-plains-wind-farm-stage-2",
+      "source_tier": 2
     }
   ]
 }

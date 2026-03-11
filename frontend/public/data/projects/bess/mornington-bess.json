@@ -6,21 +6,63 @@
   "capacity_mw": 240.0,
   "storage_mwh": 480.0,
   "state": "VIC",
-  "current_developer": "Mornington BESS Project Pty Ltd as Trustee of Mornington BESS Project Trust",
+  "current_developer": "Valent Energy (Gaw Capital / BW ESS)",
   "cod_current": "2026-02",
   "grid_forming": false,
   "has_sips": false,
   "has_syncon": false,
   "has_statcom": false,
   "has_harmonic_filter": false,
-  "data_confidence": "low",
+  "notable": "CATL batteries + Power Electronics inverters. Construction completed Oct 2025. Commissioning underway.",
+  "data_confidence": "high",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "1945",
-  "timeline": [],
+  "timeline": [
+    {
+      "date": "2022-01-01",
+      "date_precision": "month",
+      "event_type": "planning_approved",
+      "title": "Victoria Minister for Planning approval",
+      "sources": []
+    },
+    {
+      "date": "2024-10-01",
+      "date_precision": "month",
+      "event_type": "construction_start",
+      "title": "Construction commenced",
+      "detail": "CATL batteries; ACLE Services BoP",
+      "sources": []
+    },
+    {
+      "date": "2025-10-01",
+      "date_precision": "month",
+      "event_type": "notable",
+      "title": "Construction completed; commissioning underway",
+      "sources": []
+    }
+  ],
   "ownership_history": [],
   "cod_history": [],
-  "suppliers": [],
+  "suppliers": [
+    {
+      "role": "bess_oem",
+      "supplier": "CATL",
+      "grid_forming": false,
+      "source_url": "https://morningtonbess.com.au/"
+    },
+    {
+      "role": "inverter",
+      "supplier": "Power Electronics (inverters)",
+      "grid_forming": false
+    },
+    {
+      "role": "bop",
+      "supplier": "ACLE Services",
+      "grid_forming": false,
+      "source_url": "https://www.acle.com.au/our-projects-2/"
+    }
+  ],
   "offtakes": [],
   "scheme_contracts": [],
   "cost_sources": [],
@@ -31,6 +73,21 @@
       "url": "https://aemo.com.au/energy-systems/electricity/national-electricity-market-nem/nem-forecasting-and-planning/forecasting-and-planning-data/generation-information",
       "date": "2026-01-30",
       "source_tier": 1
+    },
+    {
+      "title": "Mornington BESS \u2014 Official",
+      "url": "https://morningtonbess.com.au/",
+      "source_tier": 2
+    },
+    {
+      "title": "AusNet \u2014 Mornington BESS",
+      "url": "https://www.ausnetservices.com.au/projects-and-innovation/battery-storage/mornington-battery-energy-storage-system",
+      "source_tier": 2
+    },
+    {
+      "title": "RenewablesNow \u2014 Commissioning",
+      "url": "https://renewablesnow.com/news/valents-240-mw-mornington-battery-enters-commissioning-in-victoria-1283358/",
+      "source_tier": 2
     }
   ]
 }

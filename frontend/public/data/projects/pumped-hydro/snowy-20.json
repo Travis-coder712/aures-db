@@ -7,20 +7,73 @@
   "storage_mwh": 58330.0,
   "state": "NSW",
   "current_developer": "Snowy Hydro Ltd",
+  "current_operator": "Snowy Hydro Ltd",
   "cod_current": "2028-12",
   "grid_forming": false,
   "has_sips": false,
   "has_syncon": false,
   "has_statcom": false,
   "has_harmonic_filter": false,
-  "data_confidence": "low",
+  "notable": "Largest committed renewable energy project in Australia. Serial cost blowouts from A$2B to A$12B+. ~70% complete.",
+  "data_confidence": "high",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "1752",
-  "timeline": [],
+  "coordinates": {
+    "lat": -35.8833,
+    "lng": 148.5
+  },
+  "timeline": [
+    {
+      "date": "2017-03-01",
+      "date_precision": "month",
+      "event_type": "conceived",
+      "title": "Announced by PM Turnbull",
+      "detail": "Snowy 2.0 pumped hydro expansion announced by Prime Minister Malcolm Turnbull",
+      "sources": []
+    },
+    {
+      "date": "2018-12-12",
+      "date_precision": "day",
+      "event_type": "notable",
+      "title": "FID \u2014 Board approval",
+      "detail": "Snowy Hydro board approved final investment decision",
+      "sources": []
+    },
+    {
+      "date": "2019-02-01",
+      "date_precision": "month",
+      "event_type": "planning_approved",
+      "title": "NSW planning approval (exploratory works)",
+      "sources": []
+    },
+    {
+      "date": "2019-04-01",
+      "date_precision": "month",
+      "event_type": "construction_start",
+      "title": "EPC contract executed with Future Generation JV",
+      "detail": "A$5.11 billion EPC contract with Webuild/Clough/Lane JV",
+      "sources": []
+    }
+  ],
   "ownership_history": [],
   "cod_history": [],
-  "suppliers": [],
+  "suppliers": [
+    {
+      "role": "epc",
+      "supplier": "Future Generation Joint Venture (Webuild/Clough/Lane)",
+      "grid_forming": false,
+      "source_url": "https://www.futuregenerationjv.com.au/about-us"
+    },
+    {
+      "role": "hydro_oem",
+      "supplier": "Voith Hydro",
+      "model": "Reversible Francis pump-turbine",
+      "quantity": 6,
+      "grid_forming": false,
+      "source_url": "https://www.power-technology.com/projects/snowy-2-0-hydropower-project/"
+    }
+  ],
   "offtakes": [],
   "scheme_contracts": [],
   "cost_sources": [],
@@ -31,6 +84,31 @@
       "url": "https://aemo.com.au/energy-systems/electricity/national-electricity-market-nem/nem-forecasting-and-planning/forecasting-and-planning-data/generation-information",
       "date": "2026-01-30",
       "source_tier": 1
+    },
+    {
+      "title": "Snowy Hydro \u2014 Snowy 2.0 Progress",
+      "url": "https://www.snowyhydro.com.au/snowy-20/progress/",
+      "source_tier": 2
+    },
+    {
+      "title": "Webuild \u2014 Snowy 2.0",
+      "url": "https://www.webuildgroup.com/en/projects/dams-hydroelectric-plants/snowy-2-0/",
+      "source_tier": 2
+    },
+    {
+      "title": "Future Generation JV",
+      "url": "https://www.futuregenerationjv.com.au/about-us",
+      "source_tier": 2
+    },
+    {
+      "title": "RenewEconomy \u2014 Snowy 2.0 cost blowout",
+      "url": "https://reneweconomy.com.au/snowy-2-0-pumped-hydro-fiasco-faces-another-major-cost-blowout-analysts-expect-more-delays/",
+      "source_tier": 2
+    },
+    {
+      "title": "Infrastructure Pipeline \u2014 Snowy 2.0",
+      "url": "https://infrastructurepipeline.org/project/snowy-2-0",
+      "source_tier": 2
     }
   ]
 }

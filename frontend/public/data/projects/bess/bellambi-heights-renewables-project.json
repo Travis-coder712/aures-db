@@ -6,6 +6,7 @@
   "capacity_mw": 408.0,
   "storage_mwh": 570.0,
   "state": "NSW",
+  "rez": "nsw-central-west-orana",
   "current_developer": "Vena Energy",
   "cod_current": "2027-07",
   "grid_forming": false,
@@ -13,11 +14,37 @@
   "has_syncon": false,
   "has_statcom": false,
   "has_harmonic_filter": false,
-  "data_confidence": "low",
+  "notable": "CWO REZ location. Originally 500 MW Gulgong Solar, scaled down to BESS-only. Two stages of 204 MW each.",
+  "data_confidence": "high",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "1580",
-  "timeline": [],
+  "timeline": [
+    {
+      "date": "2024-05-02",
+      "date_precision": "day",
+      "event_type": "planning_approved",
+      "title": "NSW Ministerial consent",
+      "detail": "Approved for 408 MW / 816 MWh BESS",
+      "sources": []
+    },
+    {
+      "date": "2025-03-01",
+      "date_precision": "month",
+      "event_type": "construction_start",
+      "title": "Stage 1 construction commenced",
+      "detail": "204 MW / 408 MWh",
+      "sources": []
+    },
+    {
+      "date": "2025-12-01",
+      "date_precision": "month",
+      "event_type": "notable",
+      "title": "Stage 2 construction commenced",
+      "detail": "204 MW / 408 MWh",
+      "sources": []
+    }
+  ],
   "ownership_history": [],
   "cod_history": [],
   "suppliers": [],
@@ -31,6 +58,21 @@
       "url": "https://aemo.com.au/energy-systems/electricity/national-electricity-market-nem/nem-forecasting-and-planning/forecasting-and-planning-data/generation-information",
       "date": "2026-01-30",
       "source_tier": 1
+    },
+    {
+      "title": "Vena Energy \u2014 Bellambi Heights",
+      "url": "https://www.venaenergy.com.au/all_projects/bellambi-heights-bess/",
+      "source_tier": 2
+    },
+    {
+      "title": "NSW Planning Portal \u2014 Bellambi Heights",
+      "url": "https://www.planningportal.nsw.gov.au/major-projects/projects/bellambi-heights-battery-energy-storage-system",
+      "source_tier": 2
+    },
+    {
+      "title": "RenewEconomy \u2014 Vena BESS-only pivot",
+      "url": "https://reneweconomy.com.au/singapores-vena-ditches-huge-big-solar-plans-opts-for-big-battery-only-in-central-nsw/",
+      "source_tier": 2
     }
   ]
 }

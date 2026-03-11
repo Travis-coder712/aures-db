@@ -2,25 +2,62 @@
   "id": "brendale-bess",
   "name": "Brendale BESS",
   "technology": "bess",
-  "status": "construction",
+  "status": "operating",
   "capacity_mw": 205.0,
   "storage_mwh": 409.92,
   "state": "QLD",
-  "current_developer": "Brendale Battery ProjectCo Pty Lt",
+  "current_developer": "Akaysha Energy (BlackRock)",
   "cod_current": "2026-06",
   "grid_forming": false,
   "has_sips": false,
   "has_syncon": false,
   "has_statcom": false,
   "has_harmonic_filter": false,
-  "data_confidence": "low",
+  "notable": "Tesla Megapack 2 grid-forming. A$200M. Completed 5 months early (Jan 2026). Gunvor offtake.",
+  "data_confidence": "high",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "2526",
-  "timeline": [],
+  "timeline": [
+    {
+      "date": "2023-12-01",
+      "date_precision": "month",
+      "event_type": "notable",
+      "title": "FID reached",
+      "sources": []
+    },
+    {
+      "date": "2024-08-08",
+      "date_precision": "day",
+      "event_type": "construction_start",
+      "title": "Sod turned; construction commenced",
+      "sources": []
+    },
+    {
+      "date": "2026-01-01",
+      "date_precision": "month",
+      "event_type": "cod",
+      "title": "Fully operational \u2014 5 months early",
+      "detail": "Akaysha Brendale BESS operational Jan 2026",
+      "sources": []
+    }
+  ],
   "ownership_history": [],
   "cod_history": [],
-  "suppliers": [],
+  "suppliers": [
+    {
+      "role": "bess_oem",
+      "supplier": "Tesla",
+      "model": "Megapack 2",
+      "grid_forming": false,
+      "source_url": "https://akayshaenergy.com/news/sod-turned-on-akaysha-energys-200m-brendale-bess"
+    },
+    {
+      "role": "bop",
+      "supplier": "Consolidated Power Projects (CPP)",
+      "grid_forming": false
+    }
+  ],
   "offtakes": [],
   "scheme_contracts": [],
   "cost_sources": [],
@@ -31,6 +68,16 @@
       "url": "https://aemo.com.au/energy-systems/electricity/national-electricity-market-nem/nem-forecasting-and-planning/forecasting-and-planning-data/generation-information",
       "date": "2026-01-30",
       "source_tier": 1
+    },
+    {
+      "title": "Akaysha \u2014 Brendale Ground-breaking",
+      "url": "https://akayshaenergy.com/news/sod-turned-on-akaysha-energys-200m-brendale-bess",
+      "source_tier": 2
+    },
+    {
+      "title": "Akaysha \u2014 Gunvor Offtake",
+      "url": "https://akayshaenergy.com/news/akaysha-energy-gunvor-group-sign-offtake-agreement",
+      "source_tier": 2
     }
   ]
 }

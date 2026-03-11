@@ -5,23 +5,72 @@
   "status": "construction",
   "capacity_mw": 414.0,
   "state": "NSW",
-  "current_developer": "Uungula Wind Farm Pty Ltd",
+  "rez": "nsw-central-west-orana",
+  "current_developer": "Squadron Energy (Tattarang)",
   "cod_current": "2028-02",
   "grid_forming": false,
   "has_sips": false,
   "has_syncon": false,
   "has_statcom": false,
   "has_harmonic_filter": false,
-  "data_confidence": "low",
+  "notable": "Largest wind farm in NSW. 69 GE Vernova Cypress turbines. Part of A$2.75B GE Vernova alliance. NSW LTESA Round 3.",
+  "data_confidence": "high",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "1283",
-  "timeline": [],
+  "timeline": [
+    {
+      "date": "2021-05-07",
+      "date_precision": "day",
+      "event_type": "planning_approved",
+      "title": "NSW SSD consent granted",
+      "detail": "SSD-6687 consent by NSW DPHI",
+      "sources": []
+    },
+    {
+      "date": "2024-01-01",
+      "date_precision": "month",
+      "event_type": "notable",
+      "title": "FID and financial close",
+      "detail": "Part of A$2.75B GE Vernova strategic alliance",
+      "sources": []
+    },
+    {
+      "date": "2024-01-01",
+      "date_precision": "month",
+      "event_type": "construction_start",
+      "title": "Earthworks commenced",
+      "detail": "69 GE Vernova 6.0-164 turbines",
+      "sources": []
+    }
+  ],
   "ownership_history": [],
   "cod_history": [],
-  "suppliers": [],
+  "suppliers": [
+    {
+      "role": "wind_oem",
+      "supplier": "GE Vernova",
+      "model": "6.0-164 Cypress",
+      "quantity": 69,
+      "grid_forming": false,
+      "source_url": "https://www.gevernova.com/news/press-releases/ge-vernova-announces-1point4-gw-of-onshore-wind-projects-with-squadron-energy-australia"
+    },
+    {
+      "role": "epc",
+      "supplier": "GE Vernova + NACAP + CCP (consortium)",
+      "grid_forming": false
+    }
+  ],
   "offtakes": [],
-  "scheme_contracts": [],
+  "scheme_contracts": [
+    {
+      "scheme": "NSW LTESA",
+      "round": "Round 3",
+      "capacity_mw": 414.0,
+      "contract_type": "ltesa",
+      "source_url": "https://aemoservices.com.au/en/tenders/tender-round-3-generation-and-long-duration-storage"
+    }
+  ],
   "cost_sources": [],
   "stakeholder_issues": [],
   "sources": [
@@ -30,6 +79,26 @@
       "url": "https://aemo.com.au/energy-systems/electricity/national-electricity-market-nem/nem-forecasting-and-planning/forecasting-and-planning-data/generation-information",
       "date": "2026-01-30",
       "source_tier": 1
+    },
+    {
+      "title": "Squadron Energy \u2014 Uungula",
+      "url": "https://squadronenergy.com/our-projects/uungula-wind-farm/",
+      "source_tier": 2
+    },
+    {
+      "title": "Squadron Energy \u2014 Construction Start",
+      "url": "https://squadronenergy.com/news/squadron-energy-starts-work-on-largest-nsw-wind-farm-commits-to-14gw-renewable-energy-pipeline-powering-six-million-homes/",
+      "source_tier": 2
+    },
+    {
+      "title": "GE Vernova \u2014 1.4 GW Agreement",
+      "url": "https://www.gevernova.com/news/press-releases/ge-vernova-announces-1point4-gw-of-onshore-wind-projects-with-squadron-energy-australia",
+      "source_tier": 2
+    },
+    {
+      "title": "NSW Planning Portal \u2014 SSD-6687",
+      "url": "https://www.planningportal.nsw.gov.au/major-projects/projects/uungula-wind-farm",
+      "source_tier": 2
     }
   ]
 }

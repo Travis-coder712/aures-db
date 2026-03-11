@@ -6,21 +6,45 @@
   "capacity_mw": 200.0,
   "storage_mwh": 400.0,
   "state": "SA",
-  "current_developer": "Engie",
+  "current_developer": "ENGIE",
   "cod_current": "2027-07",
   "grid_forming": false,
   "has_sips": false,
   "has_syncon": false,
   "has_statcom": false,
   "has_harmonic_filter": false,
-  "data_confidence": "low",
+  "notable": "Sungrow PowerTitan 2.0. Grid-forming. Elecnor delivery partner.",
+  "data_confidence": "high",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "3008",
-  "timeline": [],
+  "timeline": [
+    {
+      "date": "2025-12-01",
+      "date_precision": "month",
+      "event_type": "construction_start",
+      "title": "Construction commenced",
+      "detail": "Sungrow PowerTitan 2.0 + Elecnor delivery",
+      "sources": []
+    }
+  ],
   "ownership_history": [],
   "cod_history": [],
-  "suppliers": [],
+  "suppliers": [
+    {
+      "role": "bess_oem",
+      "supplier": "Sungrow",
+      "model": "PowerTitan 2.0",
+      "grid_forming": false,
+      "source_url": "https://solarquarter.com/2025/12/10/sungrow-begins-construction-of-200-mw-400-mwh-pelican-point-battery-energy-storage-system-to-strengthen-south-australias-grid/"
+    },
+    {
+      "role": "bop",
+      "supplier": "Elecnor",
+      "grid_forming": false,
+      "source_url": "https://www.power-technology.com/news/construction-engies-pelican-point-bess/"
+    }
+  ],
   "offtakes": [],
   "scheme_contracts": [],
   "cost_sources": [],
@@ -31,6 +55,16 @@
       "url": "https://aemo.com.au/energy-systems/electricity/national-electricity-market-nem/nem-forecasting-and-planning/forecasting-and-planning-data/generation-information",
       "date": "2026-01-30",
       "source_tier": 1
+    },
+    {
+      "title": "ENGIE \u2014 Pelican Point BESS",
+      "url": "https://engie.com.au/about-us/our-generation-activities/battery-storage/pelican-point-battery-energy-storage-system",
+      "source_tier": 2
+    },
+    {
+      "title": "Power Technology \u2014 Pelican Point",
+      "url": "https://www.power-technology.com/news/construction-engies-pelican-point-bess/",
+      "source_tier": 2
     }
   ]
 }

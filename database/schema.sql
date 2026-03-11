@@ -168,7 +168,7 @@ CREATE TABLE IF NOT EXISTS suppliers (
     id              INTEGER PRIMARY KEY AUTOINCREMENT,
     project_id      TEXT NOT NULL REFERENCES projects(id) ON DELETE CASCADE,
     role            TEXT NOT NULL CHECK(role IN (
-        'wind_oem','bess_oem','inverter','bop','epc','syncon','statcom','harmonic_filter'
+        'wind_oem','bess_oem','hydro_oem','inverter','bop','epc','syncon','statcom','harmonic_filter'
     )),
     supplier        TEXT NOT NULL,
     model           TEXT,
@@ -207,8 +207,8 @@ CREATE INDEX IF NOT EXISTS idx_offtakes_project ON offtakes(project_id);
 CREATE TABLE IF NOT EXISTS scheme_contracts (
     id              INTEGER PRIMARY KEY AUTOINCREMENT,
     project_id      TEXT NOT NULL REFERENCES projects(id) ON DELETE CASCADE,
-    scheme          TEXT NOT NULL CHECK(scheme IN ('CIS','LTESA')),
-    round           TEXT NOT NULL,
+    scheme          TEXT NOT NULL,
+    round           TEXT DEFAULT '',
     capacity_mw     REAL,
     storage_mwh     REAL,
     contract_type   TEXT,

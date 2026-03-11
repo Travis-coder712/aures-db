@@ -6,21 +6,46 @@
   "capacity_mw": 150.0,
   "storage_mwh": 300.12,
   "state": "NSW",
-  "current_developer": "Equis Energy (Australia) Projects (Ngumi 4) Pty Ltd as trustee for the Equis Energy (Australia) Ngumi 4 Asset Trust ABN: 80 353 224 86",
+  "current_developer": "Equis Australia",
   "cod_current": "2026-12",
   "grid_forming": false,
   "has_sips": false,
   "has_syncon": false,
   "has_statcom": false,
   "has_harmonic_filter": false,
-  "data_confidence": "low",
+  "notable": "Tesla Megapack. Merchant operation via Tesla Autobidder with minimum revenue guarantee.",
+  "data_confidence": "high",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "2647",
-  "timeline": [],
+  "timeline": [
+    {
+      "date": "2024-06-28",
+      "date_precision": "day",
+      "event_type": "planning_approved",
+      "title": "NSW Development Consent granted",
+      "detail": "Combined A1+A2 consent",
+      "sources": []
+    },
+    {
+      "date": "2025-03-01",
+      "date_precision": "month",
+      "event_type": "construction_start",
+      "title": "Construction commenced",
+      "detail": "Part of Calala A1+A2 build",
+      "sources": []
+    }
+  ],
   "ownership_history": [],
   "cod_history": [],
-  "suppliers": [],
+  "suppliers": [
+    {
+      "role": "bess_oem",
+      "supplier": "Tesla",
+      "model": "Megapack",
+      "grid_forming": false
+    }
+  ],
   "offtakes": [],
   "scheme_contracts": [],
   "cost_sources": [],
@@ -31,6 +56,11 @@
       "url": "https://aemo.com.au/energy-systems/electricity/national-electricity-market-nem/nem-forecasting-and-planning/forecasting-and-planning-data/generation-information",
       "date": "2026-01-30",
       "source_tier": 1
+    },
+    {
+      "title": "Equis \u2014 Calala BESS",
+      "url": "https://equis.engagementhub.com.au/calala-bess",
+      "source_tier": 2
     }
   ]
 }

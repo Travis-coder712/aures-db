@@ -13,14 +13,49 @@
   "has_syncon": false,
   "has_statcom": false,
   "has_harmonic_filter": false,
-  "data_confidence": "low",
+  "notable": "24-hour storage capacity. A$14-18B estimated cost. Exploratory works phase. Survived QLD government change.",
+  "data_confidence": "high",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "1921",
-  "timeline": [],
+  "coordinates": {
+    "lat": -26.5067,
+    "lng": 152.6167
+  },
+  "timeline": [
+    {
+      "date": "2023-10-01",
+      "date_precision": "month",
+      "event_type": "planning_approved",
+      "title": "Declared coordinated project (QLD)",
+      "detail": "Queensland Coordinator-General declaration",
+      "sources": []
+    },
+    {
+      "date": "2025-12-18",
+      "date_precision": "day",
+      "event_type": "notable",
+      "title": "Commonwealth EPBC approval for exploratory works",
+      "detail": "~70 strict environmental conditions",
+      "sources": []
+    }
+  ],
   "ownership_history": [],
   "cod_history": [],
-  "suppliers": [],
+  "suppliers": [
+    {
+      "role": "epc",
+      "supplier": "AFRY-Aurecon JV (design services)",
+      "grid_forming": false,
+      "source_url": "https://qldhydro.com.au/projects/borumba/"
+    },
+    {
+      "role": "epc",
+      "supplier": "Water2Wire JV (GHD/Mott MacDonald/Stantec) \u2014 dam design",
+      "grid_forming": false,
+      "source_url": "https://qldhydro.com.au/projects/borumba/"
+    }
+  ],
   "offtakes": [],
   "scheme_contracts": [],
   "cost_sources": [],
@@ -31,6 +66,26 @@
       "url": "https://aemo.com.au/energy-systems/electricity/national-electricity-market-nem/nem-forecasting-and-planning/forecasting-and-planning-data/generation-information",
       "date": "2026-01-30",
       "source_tier": 1
+    },
+    {
+      "title": "Queensland Hydro \u2014 Borumba",
+      "url": "https://qldhydro.com.au/projects/borumba/",
+      "source_tier": 2
+    },
+    {
+      "title": "Queensland Hydro \u2014 Commonwealth Approval",
+      "url": "https://qldhydro.com.au/commonwealth-approval-for-exploratory-works-on-borumba-pumped-hydro-project/",
+      "source_tier": 2
+    },
+    {
+      "title": "RenewEconomy \u2014 Federal green tick for Borumba",
+      "url": "https://reneweconomy.com.au/huge-queensland-pumped-hydro-project-gets-federal-green-tick-to-begin-stage-one-works/",
+      "source_tier": 2
+    },
+    {
+      "title": "Infrastructure Pipeline \u2014 Borumba",
+      "url": "https://infrastructurepipeline.org/project/borumba-dam-pumped-storage-hydro",
+      "source_tier": 2
     }
   ]
 }

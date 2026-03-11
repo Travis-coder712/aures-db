@@ -6,17 +6,35 @@
   "capacity_mw": 2040.0,
   "storage_mwh": 28000.0,
   "state": "QLD",
-  "current_developer": "Mount Rawdon Pty Ltd",
+  "current_developer": "Mt Rawdon Pumped Hydro Pty Ltd (Evolution Mining / ICA Partners)",
   "grid_forming": false,
   "has_sips": false,
   "has_syncon": false,
   "has_statcom": false,
   "has_harmonic_filter": false,
-  "data_confidence": "low",
+  "notable": "Former gold mine repurposed. CleanCo QLD committed to invest. EIS phase. A$3.3B estimated.",
+  "data_confidence": "high",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "2274",
-  "timeline": [],
+  "timeline": [
+    {
+      "date": "2022-10-01",
+      "date_precision": "month",
+      "event_type": "planning_approved",
+      "title": "Declared coordinated project (QLD)",
+      "detail": "Queensland Coordinator-General declaration",
+      "sources": []
+    },
+    {
+      "date": "2024-05-01",
+      "date_precision": "month",
+      "event_type": "notable",
+      "title": "EIS submitted",
+      "detail": "Draft Environmental Impact Statement readied for public review",
+      "sources": []
+    }
+  ],
   "ownership_history": [],
   "cod_history": [],
   "suppliers": [],
@@ -30,6 +48,21 @@
       "url": "https://aemo.com.au/energy-systems/electricity/national-electricity-market-nem/nem-forecasting-and-planning/forecasting-and-planning-data/generation-information",
       "date": "2026-01-30",
       "source_tier": 1
+    },
+    {
+      "title": "Mt Rawdon Pumped Hydro \u2014 Project",
+      "url": "https://mtrawdonhydro.com.au/",
+      "source_tier": 2
+    },
+    {
+      "title": "Evolution Mining \u2014 Case Study",
+      "url": "https://evolutionmining.com.au/case-study/mro-pumped-hydro/",
+      "source_tier": 2
+    },
+    {
+      "title": "CleanCo Queensland \u2014 Mt Rawdon",
+      "url": "https://cleancoqueensland.com.au/mountrawdonannouncement/",
+      "source_tier": 2
     }
   ]
 }

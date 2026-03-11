@@ -6,6 +6,7 @@
   "capacity_mw": 1007.0,
   "storage_mwh": 1238.4,
   "state": "NSW",
+  "rez": "nsw-south-west",
   "current_developer": "Spark Renewables Pty Ltd",
   "cod_current": "2029-12",
   "grid_forming": false,
@@ -17,7 +18,16 @@
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "1924",
-  "timeline": [],
+  "timeline": [
+    {
+      "date": "2025-04-23",
+      "date_precision": "day",
+      "event_type": "rez_access",
+      "title": "SW REZ access rights granted",
+      "detail": "EnergyCo South West REZ access rights awarded \u2014 4 projects, 3.56 GW total",
+      "sources": []
+    }
+  ],
   "ownership_history": [],
   "cod_history": [],
   "suppliers": [],
@@ -30,6 +40,11 @@
       "title": "AEMO Generation Information Jan 2026",
       "url": "https://aemo.com.au/energy-systems/electricity/national-electricity-market-nem/nem-forecasting-and-planning/forecasting-and-planning-data/generation-information",
       "date": "2026-01-30",
+      "source_tier": 1
+    },
+    {
+      "title": "EnergyCo \u2014 SW REZ Access Rights Holders",
+      "url": "https://www.energyco.nsw.gov.au/news/south-west-rez-access-rights-holders-announced",
       "source_tier": 1
     }
   ]

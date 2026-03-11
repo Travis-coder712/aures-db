@@ -3,10 +3,10 @@
   "technology": "solar",
   "data_source": "sample",
   "fleet_avg": {
-    "capacity_factor_pct": 25.97,
-    "revenue_per_mw": 123219.0,
-    "curtailment_pct": 4.95,
-    "count": 80
+    "capacity_factor_pct": 25.99,
+    "revenue_per_mw": 123174.0,
+    "curtailment_pct": 4.97,
+    "count": 79
   },
   "projects": [
     {
@@ -539,30 +539,6 @@
       "data_source": "sample"
     },
     {
-      "project_id": "new-england-solar",
-      "rank_composite": 24,
-      "quartile": 2,
-      "composite_score": 64.1,
-      "rank_capacity_factor": 7,
-      "rank_revenue_per_mw": 34,
-      "rank_curtailment": 65,
-      "percentile_capacity_factor": 92.4,
-      "percentile_revenue_per_mw": 58.2,
-      "name": "New England Solar Farm",
-      "technology": "hybrid",
-      "capacity_mw": 720.0,
-      "storage_mwh": 400.0,
-      "state": "NSW",
-      "energy_mwh": 2002955.2,
-      "capacity_factor_pct": 31.76,
-      "curtailment_pct": 7.75,
-      "energy_price_received": 45.42,
-      "revenue_aud": 90977809.0,
-      "revenue_per_mw": 126358.0,
-      "market_value_aud": 90977809.0,
-      "data_source": "sample"
-    },
-    {
       "project_id": "wollar-solar-farm",
       "rank_composite": 25,
       "quartile": 2,
@@ -780,16 +756,16 @@
       "percentile_capacity_factor": 41.8,
       "percentile_revenue_per_mw": 59.5,
       "name": "New England Solar Farm",
-      "technology": "solar",
+      "technology": "hybrid",
       "capacity_mw": 720.0,
       "state": "NSW",
-      "energy_mwh": 1537842.9,
-      "capacity_factor_pct": 24.38,
-      "curtailment_pct": 2.99,
-      "energy_price_received": 59.35,
-      "revenue_aud": 91277836.0,
-      "revenue_per_mw": 126775.0,
-      "market_value_aud": 91277836.0,
+      "energy_mwh": 2002955.2,
+      "capacity_factor_pct": 31.76,
+      "curtailment_pct": 7.75,
+      "energy_price_received": 45.42,
+      "revenue_aud": 90977809.0,
+      "revenue_per_mw": 126358.0,
+      "market_value_aud": 90977809.0,
       "data_source": "sample"
     },
     {

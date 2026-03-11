@@ -6,21 +6,44 @@
   "capacity_mw": 204.0,
   "storage_mwh": 408.0,
   "state": "SA",
-  "current_developer": "TBSOL",
+  "current_developer": "Vena Energy",
   "cod_current": "2027-04",
   "grid_forming": false,
   "has_sips": false,
   "has_syncon": false,
   "has_statcom": false,
   "has_harmonic_filter": false,
-  "data_confidence": "low",
+  "notable": "Canadian Solar e-STORAGE SolBank 3.0. ~100 battery containers. CPP BoP.",
+  "data_confidence": "high",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "2436",
-  "timeline": [],
+  "timeline": [
+    {
+      "date": "2025-12-01",
+      "date_precision": "month",
+      "event_type": "construction_start",
+      "title": "Construction commenced",
+      "detail": "Canadian Solar e-STORAGE turnkey; CPP BoP",
+      "sources": []
+    }
+  ],
   "ownership_history": [],
   "cod_history": [],
-  "suppliers": [],
+  "suppliers": [
+    {
+      "role": "bess_oem",
+      "supplier": "Canadian Solar e-STORAGE",
+      "model": "SolBank 3.0",
+      "grid_forming": false,
+      "source_url": "https://www.pv-magazine-australia.com/press-releases/e-storage-to-deliver-408-mwh-battery-for-vena-energy-in-south-australia/"
+    },
+    {
+      "role": "bop",
+      "supplier": "Consolidated Power Projects (CPP)",
+      "grid_forming": false
+    }
+  ],
   "offtakes": [],
   "scheme_contracts": [],
   "cost_sources": [],
@@ -31,6 +54,11 @@
       "url": "https://aemo.com.au/energy-systems/electricity/national-electricity-market-nem/nem-forecasting-and-planning/forecasting-and-planning-data/generation-information",
       "date": "2026-01-30",
       "source_tier": 1
+    },
+    {
+      "title": "Vena Energy \u2014 Tailem Bend 3",
+      "url": "https://www.energy-storage.news/vena-energy-builds-408mwh-bess-at-third-phase-of-south-australia-renewable-energy-project/",
+      "source_tier": 2
     }
   ]
 }

@@ -5,23 +5,71 @@
   "status": "construction",
   "capacity_mw": 247.0,
   "state": "SA",
-  "current_developer": "Georgetown Hills Renewable Energy Pty Ltd as trustee for the Georgetown Hills Renewable Energy Trust",
+  "current_developer": "Aula Energy",
   "cod_current": "2029-01",
   "grid_forming": false,
   "has_sips": false,
   "has_syncon": false,
   "has_statcom": false,
   "has_harmonic_filter": false,
-  "data_confidence": "low",
+  "notable": "42 GE Vernova 6.1 MW turbines. A$900M. CIS Tender 4 winner. Financial close late 2025.",
+  "data_confidence": "high",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "1040",
-  "timeline": [],
+  "timeline": [
+    {
+      "date": "2025-02-01",
+      "date_precision": "month",
+      "event_type": "notable",
+      "title": "ECI phase commenced",
+      "sources": []
+    },
+    {
+      "date": "2025-12-01",
+      "date_precision": "month",
+      "event_type": "notable",
+      "title": "Financial close \u2014 A$900M",
+      "detail": "Aula Energy secured financial close",
+      "sources": []
+    },
+    {
+      "date": "2026-01-01",
+      "date_precision": "month",
+      "event_type": "construction_start",
+      "title": "Construction commenced",
+      "detail": "42 GE Vernova turbines",
+      "sources": []
+    }
+  ],
   "ownership_history": [],
   "cod_history": [],
-  "suppliers": [],
+  "suppliers": [
+    {
+      "role": "wind_oem",
+      "supplier": "GE Vernova",
+      "model": "6.1 MW-158m",
+      "quantity": 42,
+      "grid_forming": false,
+      "source_url": "https://www.gevernova.com/news/press-releases/ge-vernova-signs-agreement-supply-turbines-australian"
+    },
+    {
+      "role": "bop",
+      "supplier": "DT Infrastructure",
+      "grid_forming": false,
+      "source_url": "https://www.insideconstruction.com.au/news/latest-news/dt-infrastructure-wins-contract-to-deliver-carmodys-hill-wind-farm"
+    }
+  ],
   "offtakes": [],
-  "scheme_contracts": [],
+  "scheme_contracts": [
+    {
+      "scheme": "CIS",
+      "round": "Tender 4",
+      "capacity_mw": 256.0,
+      "contract_type": "cis",
+      "source_url": "https://www.dcceew.gov.au/energy/renewable/capacity-investment-scheme/closed-cis-tenders"
+    }
+  ],
   "cost_sources": [],
   "stakeholder_issues": [],
   "sources": [
@@ -30,6 +78,21 @@
       "url": "https://aemo.com.au/energy-systems/electricity/national-electricity-market-nem/nem-forecasting-and-planning/forecasting-and-planning-data/generation-information",
       "date": "2026-01-30",
       "source_tier": 1
+    },
+    {
+      "title": "Carmody's Hill \u2014 Financial Close",
+      "url": "https://carmodyshillwindfarm.com/news/aula-energy-secures-financial-close-for-carmodys-hill-wind-farm-construction-to-start-early-2026",
+      "source_tier": 2
+    },
+    {
+      "title": "GE Vernova \u2014 Turbine Supply",
+      "url": "https://www.gevernova.com/news/press-releases/ge-vernova-signs-agreement-supply-turbines-australian",
+      "source_tier": 2
+    },
+    {
+      "title": "DT Infrastructure \u2014 Contract",
+      "url": "https://www.insideconstruction.com.au/news/latest-news/dt-infrastructure-wins-contract-to-deliver-carmodys-hill-wind-farm",
+      "source_tier": 2
     }
   ]
 }

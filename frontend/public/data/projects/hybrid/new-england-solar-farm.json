@@ -1,43 +1,37 @@
 {
-  "id": "stockyard-hill-wind-farm",
-  "name": "Stockyard Hill Wind Farm",
-  "technology": "wind",
+  "id": "new-england-solar-farm",
+  "name": "New England Solar Farm",
+  "technology": "hybrid",
   "status": "operating",
-  "capacity_mw": 511.0,
-  "state": "VIC",
-  "current_developer": "Goldwind Australia",
-  "cod_current": "2021-07-07",
+  "capacity_mw": 720.0,
+  "state": "NSW",
+  "rez": "nsw-new-england",
+  "current_developer": "ACEN Australia (formerly UPC/AC Renewables)",
+  "cod_current": "2028-10",
   "grid_forming": false,
   "has_sips": false,
   "has_syncon": false,
   "has_statcom": false,
   "has_harmonic_filter": false,
-  "performance_score": 79.8,
+  "performance_score": 53.7,
   "data_confidence": "low",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
-  "aemo_gen_info_id": "1187",
+  "aemo_gen_info_id": "1854",
   "coordinates": {
-    "lat": -37.53568,
-    "lng": 143.252548
+    "lat": -30.627323,
+    "lng": 151.556425
   },
   "timeline": [
     {
-      "date": "2010-01-01",
-      "date_precision": "year",
-      "event_type": "conceived",
-      "title": "Project originally conceived",
-      "sources": []
-    },
-    {
-      "date": "2018-01-01",
+      "date": "2019-01-01",
       "date_precision": "year",
       "event_type": "construction_start",
       "title": "Construction commenced",
       "sources": []
     },
     {
-      "date": "2021-07-07",
+      "date": "2022-12-19",
       "date_precision": "day",
       "event_type": "cod",
       "title": "Commercial operations commenced",
@@ -45,18 +39,25 @@
       "sources": []
     },
     {
-      "date": "2021-07-08",
+      "date": "2022-12-20",
       "date_precision": "day",
       "event_type": "energisation",
       "title": "First generation recorded",
       "detail": "First market dispatch data recorded in AEMO systems.",
       "sources": []
+    },
+    {
+      "date": "2023-12-01",
+      "date_precision": "month",
+      "event_type": "expansion",
+      "title": "Stage 2 with BESS \u2014 720 MW total",
+      "sources": []
     }
   ],
   "ownership_history": [
     {
-      "period": "2018-present",
-      "owner": "Goldwind Australia",
+      "period": "2019-present",
+      "owner": "UPC\\AC Renewables",
       "role": "Developer & Operator"
     }
   ],

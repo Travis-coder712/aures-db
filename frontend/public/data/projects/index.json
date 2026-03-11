@@ -603,7 +603,8 @@
     "storage_mwh": 570.0,
     "state": "NSW",
     "current_developer": "Vena Energy",
-    "data_confidence": "low"
+    "rez": "nsw-central-west-orana",
+    "data_confidence": "high"
   },
   {
     "id": "bellbay-wind-farm",
@@ -765,6 +766,7 @@
     "capacity_mw": 600.0,
     "state": "NSW",
     "current_developer": "ACEN RENEWABLES",
+    "rez": "nsw-central-west-orana",
     "data_confidence": "low"
   },
   {
@@ -1082,7 +1084,7 @@
     "storage_mwh": 48000.0,
     "state": "QLD",
     "current_developer": "Queensland Hydro",
-    "data_confidence": "low"
+    "data_confidence": "high"
   },
   {
     "id": "boulder-creek-wind-farm",
@@ -1091,8 +1093,8 @@
     "status": "construction",
     "capacity_mw": 228.0,
     "state": "QLD",
-    "current_developer": "Boulder Creek Wind Farm Pty Ltd as trustee for BCWF Unit Trust ABN and BCWF 2 Pty Limited",
-    "data_confidence": "low"
+    "current_developer": "Aula Energy / CS Energy (50:50 JV)",
+    "data_confidence": "high"
   },
   {
     "id": "bouldercombe-battery-project",
@@ -1234,12 +1236,12 @@
     "id": "brendale-bess",
     "name": "Brendale BESS",
     "technology": "bess",
-    "status": "construction",
+    "status": "operating",
     "capacity_mw": 205.0,
     "storage_mwh": 409.92,
     "state": "QLD",
-    "current_developer": "Brendale Battery ProjectCo Pty Lt",
-    "data_confidence": "low"
+    "current_developer": "Akaysha Energy (BlackRock)",
+    "data_confidence": "high"
   },
   {
     "id": "brewongle-solar-farm",
@@ -1334,8 +1336,9 @@
     "capacity_mw": 300.0,
     "storage_mwh": 600.0,
     "state": "NSW",
-    "current_developer": "WEBESS01 ProjectCo Pty Ltd as trustee for the WEBESS01 Project Trust",
-    "data_confidence": "low"
+    "current_developer": "Ampyr Australia (AGP Singapore)",
+    "rez": "nsw-central-west-orana",
+    "data_confidence": "high"
   },
   {
     "id": "bulabul-bess-2",
@@ -1367,6 +1370,7 @@
     "capacity_mw": 276.0,
     "state": "NSW",
     "current_developer": "Bullawah Wind Farm Stage 2 Pty Ltd",
+    "rez": "nsw-south-west",
     "data_confidence": "low"
   },
   {
@@ -1377,6 +1381,7 @@
     "capacity_mw": 312.0,
     "state": "NSW",
     "current_developer": "Bullawah Wind Farm Pty Ltd",
+    "rez": "nsw-south-west",
     "data_confidence": "low"
   },
   {
@@ -1684,8 +1689,8 @@
     "capacity_mw": 100.0,
     "storage_mwh": 199.92,
     "state": "NSW",
-    "current_developer": "Equis Energy (Australia) Projects (Ngumi 4) Pty Ltd as trustee for the Equis Energy (Australia) Ngumi 4 Holding Trust (ABN 14 157 167 633)",
-    "data_confidence": "low"
+    "current_developer": "Equis Australia",
+    "data_confidence": "high"
   },
   {
     "id": "calala-bess-a2",
@@ -1695,8 +1700,8 @@
     "capacity_mw": 150.0,
     "storage_mwh": 300.12,
     "state": "NSW",
-    "current_developer": "Equis Energy (Australia) Projects (Ngumi 4) Pty Ltd as trustee for the Equis Energy (Australia) Ngumi 4 Asset Trust ABN: 80 353 224 86",
-    "data_confidence": "low"
+    "current_developer": "Equis Australia",
+    "data_confidence": "high"
   },
   {
     "id": "callide-energy-hub-kci",
@@ -1885,8 +1890,8 @@
     "status": "construction",
     "capacity_mw": 247.0,
     "state": "SA",
-    "current_developer": "Georgetown Hills Renewable Energy Pty Ltd as trustee for the Georgetown Hills Renewable Energy Trust",
-    "data_confidence": "low"
+    "current_developer": "Aula Energy",
+    "data_confidence": "high"
   },
   {
     "id": "carwarp-hybrid",
@@ -2111,8 +2116,8 @@
     "capacity_mw": 60.0,
     "storage_mwh": 120.0,
     "state": "SA",
-    "current_developer": "Pacific Hydro Clements Gap Pty Ltd",
-    "data_confidence": "low"
+    "current_developer": "Pacific Blue (SPIC China)",
+    "data_confidence": "high"
   },
   {
     "id": "clements-gap-wind-farm",
@@ -2155,6 +2160,7 @@
     "capacity_mw": 700.0,
     "state": "NSW",
     "current_developer": "pacificp_NR",
+    "rez": "nsw-central-west-orana",
     "data_confidence": "low"
   },
   {
@@ -2386,24 +2392,13 @@
     "data_confidence": "low"
   },
   {
-    "id": "coopers-gap-wind",
-    "name": "Coopers Gap Wind Farm",
-    "technology": "wind",
-    "status": "operating",
-    "capacity_mw": 453.0,
-    "state": "QLD",
-    "current_developer": "AGL Energy",
-    "performance_score": 70.1,
-    "data_confidence": "good"
-  },
-  {
     "id": "coopers-gap-wind-farm",
     "name": "Coopers Gap Wind Farm",
     "technology": "wind",
     "status": "operating",
     "capacity_mw": 453.0,
     "state": "QLD",
-    "current_developer": "PARF Company 6 Pty Limited",
+    "current_developer": "AGL Energy",
     "performance_score": 60.0,
     "data_confidence": "low"
   },
@@ -2884,6 +2879,7 @@
     "storage_mwh": 1238.4,
     "state": "NSW",
     "current_developer": "Spark Renewables Pty Ltd",
+    "rez": "nsw-south-west",
     "data_confidence": "low"
   },
   {
@@ -3145,8 +3141,8 @@
     "capacity_mw": 311.0,
     "storage_mwh": 1248.72,
     "state": "VIC",
-    "current_developer": "Elaine ProjectCo Pty Ltd",
-    "data_confidence": "low"
+    "current_developer": "Akaysha Energy (BlackRock)",
+    "data_confidence": "high"
   },
   {
     "id": "elaine-solar-farm-and-bess",
@@ -3231,7 +3227,7 @@
     "storage_mwh": 1840.0,
     "state": "NSW",
     "current_developer": "Origin Energy",
-    "data_confidence": "medium"
+    "data_confidence": "high"
   },
   {
     "id": "eraring-big-battery",
@@ -3785,8 +3781,8 @@
     "capacity_mw": 250.0,
     "storage_mwh": 499.52,
     "state": "VIC",
-    "current_developer": "FRV SA Pty Ltd",
-    "data_confidence": "low"
+    "current_developer": "FRV Australia (Abdul Latif Jameel / OMERS)",
+    "data_confidence": "high"
   },
   {
     "id": "goat-hill-pumped-hydro",
@@ -3838,8 +3834,8 @@
     "status": "construction",
     "capacity_mw": 1300.0,
     "state": "VIC",
-    "current_developer": "Amplitude Energy / TagEnergy",
-    "data_confidence": "good"
+    "current_developer": "TagEnergy / Ingka Group",
+    "data_confidence": "high"
   },
   {
     "id": "golden-plains-wind-farm-east",
@@ -3858,8 +3854,8 @@
     "status": "construction",
     "capacity_mw": 557.0,
     "state": "VIC",
-    "current_developer": "Golden Plains WF2 Unit Trust",
-    "data_confidence": "low"
+    "current_developer": "TagEnergy / Ingka Group",
+    "data_confidence": "high"
   },
   {
     "id": "goodnight-hybrid-facility-solar-and-bess",
@@ -5395,8 +5391,8 @@
     "capacity_mw": 250.0,
     "storage_mwh": 900.0,
     "state": "QLD",
-    "current_developer": "Genex Power Ltd",
-    "data_confidence": "low"
+    "current_developer": "Genex Power",
+    "data_confidence": "high"
   },
   {
     "id": "kidston-solar-project-phase-one",
@@ -5704,8 +5700,8 @@
     "capacity_mw": 500.0,
     "storage_mwh": 1000.0,
     "state": "NSW",
-    "current_developer": "MACQGEN",
-    "data_confidence": "low"
+    "current_developer": "AGL Energy",
+    "data_confidence": "high"
   },
   {
     "id": "lilyvale-bess-kci",
@@ -5748,8 +5744,8 @@
     "capacity_mw": 50.0,
     "storage_mwh": 400.0,
     "state": "NSW",
-    "current_developer": "LIMONDALE BATTERY PTY. LTD",
-    "data_confidence": "low"
+    "current_developer": "RWE Renewables Australia",
+    "data_confidence": "high"
   },
   {
     "id": "limondale-solar-farm-1",
@@ -5865,6 +5861,7 @@
     "capacity_mw": 1338.0,
     "state": "NSW",
     "current_developer": "Liverpool Range Wind Farm Pty Ltd",
+    "rez": "nsw-central-west-orana",
     "data_confidence": "low"
   },
   {
@@ -5896,8 +5893,8 @@
     "status": "construction",
     "capacity_mw": 285.0,
     "state": "QLD",
-    "current_developer": "CS ENERGY",
-    "data_confidence": "low"
+    "current_developer": "CS Energy",
+    "data_confidence": "high"
   },
   {
     "id": "lovely-banks-renewable-energy-hub-kci",
@@ -6714,8 +6711,8 @@
     "capacity_mw": 240.0,
     "storage_mwh": 480.0,
     "state": "VIC",
-    "current_developer": "Mornington BESS Project Pty Ltd as Trustee of Mornington BESS Project Trust",
-    "data_confidence": "low"
+    "current_developer": "Valent Energy (Gaw Capital / BW ESS)",
+    "data_confidence": "high"
   },
   {
     "id": "mornington-bess-2",
@@ -6736,8 +6733,8 @@
     "capacity_mw": 300.0,
     "storage_mwh": 650.0,
     "state": "VIC",
-    "current_developer": "BORAL",
-    "data_confidence": "low"
+    "current_developer": "Origin Energy",
+    "data_confidence": "high"
   },
   {
     "id": "mortlake-energy-hub",
@@ -6974,8 +6971,8 @@
     "capacity_mw": 2040.0,
     "storage_mwh": 28000.0,
     "state": "QLD",
-    "current_developer": "Mount Rawdon Pty Ltd",
-    "data_confidence": "low"
+    "current_developer": "Mt Rawdon Pumped Hydro Pty Ltd (Evolution Mining / ICA Partners)",
+    "data_confidence": "high"
   },
   {
     "id": "mt-view-wind-farm-kci",
@@ -7191,26 +7188,14 @@
     "data_confidence": "low"
   },
   {
-    "id": "new-england-solar",
+    "id": "new-england-solar-farm",
     "name": "New England Solar Farm",
     "technology": "hybrid",
     "status": "operating",
     "capacity_mw": 720.0,
-    "storage_mwh": 400.0,
     "state": "NSW",
-    "current_developer": "UPC\\AC Renewables (now Verdant)",
-    "rez": "New England REZ",
-    "performance_score": 64.1,
-    "data_confidence": "good"
-  },
-  {
-    "id": "new-england-solar-farm",
-    "name": "New England Solar Farm",
-    "technology": "solar",
-    "status": "operating",
-    "capacity_mw": 720.0,
-    "state": "NSW",
-    "current_developer": "ACEN AUSTRALIA",
+    "current_developer": "ACEN Australia (formerly UPC/AC Renewables)",
+    "rez": "nsw-new-england",
     "performance_score": 53.7,
     "data_confidence": "low"
   },
@@ -7222,8 +7207,9 @@
     "capacity_mw": 200.0,
     "storage_mwh": 200.0,
     "state": "NSW",
-    "current_developer": "ACEN RENEWABLES",
-    "data_confidence": "low"
+    "current_developer": "ACEN Australia / Marubeni (50:50)",
+    "rez": "nsw-new-england",
+    "data_confidence": "high"
   },
   {
     "id": "nine-mile-energy-park-stage-1-bess",
@@ -7516,8 +7502,9 @@
     "capacity_mw": 415.0,
     "storage_mwh": 1662.08,
     "state": "NSW",
-    "current_developer": "Wellington Battery ProjectCo Pty Ltd",
-    "data_confidence": "low"
+    "current_developer": "Akaysha Energy (BlackRock)",
+    "rez": "nsw-central-west-orana",
+    "data_confidence": "high"
   },
   {
     "id": "orange-grove-sun-farm",
@@ -7740,8 +7727,8 @@
     "capacity_mw": 200.0,
     "storage_mwh": 400.0,
     "state": "SA",
-    "current_developer": "Engie",
-    "data_confidence": "low"
+    "current_developer": "ENGIE",
+    "data_confidence": "high"
   },
   {
     "id": "peninsula-solar-farm-and-bess",
@@ -7804,8 +7791,8 @@
     "capacity_mw": 250.0,
     "storage_mwh": 550.0,
     "state": "VIC",
-    "current_developer": "ENERGY STORAGE PROJECT NO 6 PTY LTD",
-    "data_confidence": "low"
+    "current_developer": "Valent Energy (Gaw Capital / BW ESS)",
+    "data_confidence": "high"
   },
   {
     "id": "pinecrest-battery-energy-storage-system",
@@ -7996,6 +7983,7 @@
     "capacity_mw": 500.0,
     "state": "NSW",
     "current_developer": "Pottinger Renewables P/L",
+    "rez": "nsw-south-west",
     "data_confidence": "low"
   },
   {
@@ -8006,6 +7994,7 @@
     "capacity_mw": 300.0,
     "state": "NSW",
     "current_developer": "Pottinger Renewables P/L",
+    "rez": "nsw-south-west",
     "data_confidence": "low"
   },
   {
@@ -8016,6 +8005,7 @@
     "capacity_mw": 1300.0,
     "state": "NSW",
     "current_developer": "Pottinger Renewables P/L",
+    "rez": "nsw-south-west",
     "data_confidence": "low"
   },
   {
@@ -8638,6 +8628,7 @@
     "capacity_mw": 750.0,
     "state": "NSW",
     "current_developer": "Edify Energy Pty Ltd",
+    "rez": "nsw-central-west-orana",
     "data_confidence": "low"
   },
   {
@@ -8648,6 +8639,7 @@
     "capacity_mw": 700.0,
     "state": "NSW",
     "current_developer": "Sandy Creek Solar Fund Pty Ltd",
+    "rez": "nsw-central-west-orana",
     "data_confidence": "low"
   },
   {
@@ -8854,7 +8846,7 @@
     "storage_mwh": 58330.0,
     "state": "NSW",
     "current_developer": "Snowy Hydro Ltd",
-    "data_confidence": "low"
+    "data_confidence": "high"
   },
   {
     "id": "solar-river-solar-and-bess-project",
@@ -8968,6 +8960,7 @@
     "capacity_mw": 702.0,
     "state": "NSW",
     "current_developer": "Squadron Energy Services Pty Ltd",
+    "rez": "nsw-central-west-orana",
     "data_confidence": "low"
   },
   {
@@ -9044,24 +9037,13 @@
     "data_confidence": "low"
   },
   {
-    "id": "stockyard-hill-wind",
-    "name": "Stockyard Hill Wind Farm",
-    "technology": "wind",
-    "status": "operating",
-    "capacity_mw": 530.0,
-    "state": "VIC",
-    "current_developer": "Goldwind Australia",
-    "performance_score": 26.4,
-    "data_confidence": "good"
-  },
-  {
     "id": "stockyard-hill-wind-farm",
     "name": "Stockyard Hill Wind Farm",
     "technology": "wind",
     "status": "operating",
     "capacity_mw": 511.0,
     "state": "VIC",
-    "current_developer": "Stockyard Hill Wind Farm Pty Ltd",
+    "current_developer": "Goldwind Australia",
     "performance_score": 79.8,
     "data_confidence": "low"
   },
@@ -9178,8 +9160,8 @@
     "capacity_mw": 240.0,
     "storage_mwh": 532.7,
     "state": "SA",
-    "current_developer": "CI Summerfield BESS Pty Ltd (ACN 656 223 773) as trustee for the CI Summerfield BESS Trust",
-    "data_confidence": "low"
+    "current_developer": "Copenhagen Infrastructure Partners (CIP)",
+    "data_confidence": "high"
   },
   {
     "id": "summerfield-north",
@@ -9316,8 +9298,8 @@
     "capacity_mw": 520.0,
     "storage_mwh": 1238.04,
     "state": "QLD",
-    "current_developer": "Supernode Operations Pty Ltd as the trustee for Supernode BESS 1 Project Trust",
-    "data_confidence": "low"
+    "current_developer": "Quinbrook Infrastructure Partners",
+    "data_confidence": "high"
   },
   {
     "id": "supernode-bess-stage-3",
@@ -9469,8 +9451,8 @@
     "capacity_mw": 204.0,
     "storage_mwh": 408.0,
     "state": "SA",
-    "current_developer": "TBSOL",
-    "data_confidence": "low"
+    "current_developer": "Vena Energy",
+    "data_confidence": "high"
   },
   {
     "id": "talbingo-bess",
@@ -9513,6 +9495,7 @@
     "storage_mwh": 1000.0,
     "state": "NSW",
     "current_developer": "Enel Green Power Australia Pty Ltd",
+    "rez": "nsw-central-west-orana",
     "data_confidence": "low"
   },
   {
@@ -9586,8 +9569,8 @@
     "capacity_mw": 300.0,
     "storage_mwh": 600.0,
     "state": "QLD",
-    "current_developer": "Stanwell Corporation Limited",
-    "data_confidence": "low"
+    "current_developer": "Stanwell Corporation",
+    "data_confidence": "high"
   },
   {
     "id": "tarong-west-wind-farm-ironleaf",
@@ -10207,8 +10190,9 @@
     "status": "construction",
     "capacity_mw": 414.0,
     "state": "NSW",
-    "current_developer": "Uungula Wind Farm Pty Ltd",
-    "data_confidence": "low"
+    "current_developer": "Squadron Energy (Tattarang)",
+    "rez": "nsw-central-west-orana",
+    "data_confidence": "high"
   },
   {
     "id": "vales-point-bess",
@@ -10239,6 +10223,7 @@
     "capacity_mw": 919.0,
     "state": "NSW",
     "current_developer": "ACEN Renewables",
+    "rez": "nsw-central-west-orana",
     "data_confidence": "low"
   },
   {
@@ -10366,8 +10351,8 @@
     "status": "construction",
     "capacity_mw": 500.0,
     "state": "QLD",
-    "current_developer": "Cubico Sustainable Investments Australia Pty Ltd",
-    "data_confidence": "low"
+    "current_developer": "Cubico Sustainable Investments / Stanwell Corporation (50:50 JV)",
+    "data_confidence": "high"
   },
   {
     "id": "wamuran-bess-kci",
@@ -10806,8 +10791,8 @@
     "capacity_mw": 250.0,
     "storage_mwh": 500.0,
     "state": "NSW",
-    "current_developer": "Eku Energy Projects (Australia) Trust",
-    "data_confidence": "low"
+    "current_developer": "Eku Energy (Macquarie / BCIM)",
+    "data_confidence": "high"
   },
   {
     "id": "willogoleche-wind-farm",
@@ -11062,8 +11047,8 @@
     "capacity_mw": 222.0,
     "storage_mwh": 593.28,
     "state": "QLD",
-    "current_developer": "Woolooga BESS Fund Pty Limited as trustee for the Woolooga BESS Trust",
-    "data_confidence": "low"
+    "current_developer": "Lightsource bp",
+    "data_confidence": "high"
   },
   {
     "id": "woolooga-bess-kci",
@@ -11115,8 +11100,8 @@
     "capacity_mw": 350.0,
     "storage_mwh": 1400.0,
     "state": "VIC",
-    "current_developer": "EnergyAustralia Holdings Limited",
-    "data_confidence": "low"
+    "current_developer": "EnergyAustralia",
+    "data_confidence": "high"
   },
   {
     "id": "wooroora-station-wind-farm",
@@ -11253,7 +11238,7 @@
     "capacity_mw": 1000.0,
     "state": "NSW",
     "current_developer": "Origin Energy",
-    "rez": "South-West REZ",
+    "rez": "nsw-south-west",
     "data_confidence": "good"
   },
   {
@@ -11264,6 +11249,7 @@
     "capacity_mw": 1460.0,
     "state": "NSW",
     "current_developer": "Yanco Delta Wind Farm Pty Ltd",
+    "rez": "nsw-south-west",
     "data_confidence": "low"
   },
   {

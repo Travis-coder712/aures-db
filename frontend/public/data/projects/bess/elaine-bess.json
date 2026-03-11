@@ -6,21 +6,51 @@
   "capacity_mw": 311.0,
   "storage_mwh": 1248.72,
   "state": "VIC",
-  "current_developer": "Elaine ProjectCo Pty Ltd",
+  "current_developer": "Akaysha Energy (BlackRock)",
   "cod_current": "2027-12",
   "grid_forming": false,
   "has_sips": false,
   "has_syncon": false,
   "has_statcom": false,
   "has_harmonic_filter": false,
-  "data_confidence": "low",
+  "notable": "Tesla Megapack. A$460M financing. 15-year virtual toll with Snowy Hydro for 220 MW.",
+  "data_confidence": "high",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "2527",
-  "timeline": [],
+  "timeline": [
+    {
+      "date": "2025-10-01",
+      "date_precision": "month",
+      "event_type": "construction_start",
+      "title": "Construction commenced",
+      "sources": []
+    },
+    {
+      "date": "2025-11-01",
+      "date_precision": "month",
+      "event_type": "notable",
+      "title": "Financial close \u2014 A$460M",
+      "detail": "BNP Paribas, CIBC, CBA, ING, Mizuho, MUFG, SMBC, SocGen",
+      "sources": []
+    }
+  ],
   "ownership_history": [],
   "cod_history": [],
-  "suppliers": [],
+  "suppliers": [
+    {
+      "role": "bess_oem",
+      "supplier": "Tesla",
+      "model": "Megapack",
+      "grid_forming": false,
+      "source_url": "https://akayshaenergy.com/news/akaysha-closes-a-460m-construction-financing-and-commences-construction-on-elaine-bess"
+    },
+    {
+      "role": "bop",
+      "supplier": "Consolidated Power Projects (CPP)",
+      "grid_forming": false
+    }
+  ],
   "offtakes": [],
   "scheme_contracts": [],
   "cost_sources": [],
@@ -31,6 +61,16 @@
       "url": "https://aemo.com.au/energy-systems/electricity/national-electricity-market-nem/nem-forecasting-and-planning/forecasting-and-planning-data/generation-information",
       "date": "2026-01-30",
       "source_tier": 1
+    },
+    {
+      "title": "Akaysha \u2014 Elaine Financing",
+      "url": "https://akayshaenergy.com/news/akaysha-closes-a-460m-construction-financing-and-commences-construction-on-elaine-bess",
+      "source_tier": 2
+    },
+    {
+      "title": "Energy-Storage.News \u2014 Elaine A$460M",
+      "url": "https://www.energy-storage.news/akaysha-energy-bags-au460-million-for-1244mwh-bess-in-victoria-australia/",
+      "source_tier": 2
     }
   ]
 }
