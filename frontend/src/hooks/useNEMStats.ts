@@ -34,6 +34,7 @@ export interface NEMStats {
   construction_gw: number
   development_gw: number
   total_storage_gwh: number
+  total_projects: number
   by_technology: TechStatusBreakdown[]
   by_state: StateStatusBreakdown[]
   pipeline: PipelineProject[]
@@ -63,24 +64,35 @@ function sumStorage(projects: ProjectSummary[]): number {
   return projects.reduce((sum, p) => sum + (p.storage_mwh ?? 0), 0)
 }
 
-export function useNEMStats() {
+export function useNEMStats(excludeTechs?: Technology[]) {
   const { projects, loading, error } = useProjectIndex()
+  const excludeKey = excludeTechs ? excludeTechs.sort().join(',') : ''
 
   const stats = useMemo<NEMStats | null>(() => {
     if (!projects.length) return null
 
+    // Apply technology exclusion filter
+    const base = excludeTechs?.length
+      ? projects.filter((p) => !excludeTechs.includes(p.technology))
+      : projects
+
     // Filter out withdrawn
-    const active = projects.filter((p) => ACTIVE_STATUSES.includes(p.status))
+    const active = base.filter((p) => ACTIVE_STATUSES.includes(p.status))
 
     // Headline stats
-    const operating_gw = sumCapacity(projects, 'operating') / 1000
+    const operating_gw = sumCapacity(base, 'operating') / 1000
     const construction_gw =
-      (sumCapacity(projects, 'construction') + sumCapacity(projects, 'commissioning')) / 1000
-    const development_gw = sumCapacity(projects, 'development') / 1000
-    const total_storage_gwh = sumStorage(projects) / 1000
+      (sumCapacity(base, 'construction') + sumCapacity(base, 'commissioning')) / 1000
+    const development_gw = sumCapacity(base, 'development') / 1000
+    const total_storage_gwh = sumStorage(base) / 1000
+
+    // Filter tech order
+    const techOrder = excludeTechs?.length
+      ? TECH_ORDER.filter((t) => !excludeTechs.includes(t))
+      : TECH_ORDER
 
     // By technology
-    const by_technology: TechStatusBreakdown[] = TECH_ORDER.map((tech) => {
+    const by_technology: TechStatusBreakdown[] = techOrder.map((tech) => {
       const techProjects = active.filter((p) => p.technology === tech)
       return {
         technology: tech,
@@ -111,7 +123,7 @@ export function useNEMStats() {
     })
 
     // Construction pipeline
-    const pipeline: PipelineProject[] = projects
+    const pipeline: PipelineProject[] = base
       .filter((p) => p.status === 'construction' || p.status === 'commissioning')
       .sort((a, b) => b.capacity_mw - a.capacity_mw)
       .map((p) => ({
@@ -129,11 +141,12 @@ export function useNEMStats() {
       construction_gw,
       development_gw,
       total_storage_gwh,
+      total_projects: base.length,
       by_technology,
       by_state,
       pipeline,
     }
-  }, [projects])
+  }, [projects, excludeKey])
 
   return { stats, loading, error }
 }

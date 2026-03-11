@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import {
   BarChart,
@@ -11,6 +12,9 @@ import {
 } from 'recharts'
 import { useNEMStats } from '../hooks/useNEMStats'
 import { TECHNOLOGY_CONFIG } from '../lib/types'
+import type { Technology } from '../lib/types'
+
+const OFFSHORE_EXCLUDE: Technology[] = ['offshore_wind']
 
 const STATUS_COLORS = {
   operating: '#22c55e',
@@ -19,7 +23,8 @@ const STATUS_COLORS = {
 }
 
 export default function Dashboard() {
-  const { stats, loading } = useNEMStats()
+  const [excludeOffshore, setExcludeOffshore] = useState(true)
+  const { stats, loading } = useNEMStats(excludeOffshore ? OFFSHORE_EXCLUDE : undefined)
 
   if (loading || !stats) {
     return (
@@ -41,13 +46,41 @@ export default function Dashboard() {
     <div className="px-4 lg:px-8 py-6 max-w-7xl mx-auto space-y-8">
       {/* Header */}
       <section>
-        <h1 className="text-2xl lg:text-3xl font-bold text-[var(--color-text)] mb-2">
-          NEM Fleet Dashboard
-        </h1>
-        <p className="text-sm text-[var(--color-text-muted)]">
-          Capacity overview across Australia's National Electricity Market and WEM.
-          {' '}{(stats.operating_gw + stats.construction_gw + stats.development_gw).toFixed(0)} GW tracked across 1,067 projects.
-        </p>
+        <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 mb-2">
+          <div>
+            <h1 className="text-2xl lg:text-3xl font-bold text-[var(--color-text)] mb-1">
+              NEM Fleet Dashboard
+            </h1>
+            <p className="text-sm text-[var(--color-text-muted)]">
+              Capacity overview across Australia's National Electricity Market and WEM.
+              {' '}{(stats.operating_gw + stats.construction_gw + stats.development_gw).toFixed(0)} GW tracked across {stats.total_projects.toLocaleString()} projects.
+              {excludeOffshore && (
+                <span className="text-sky-400/70"> Excl. offshore wind.</span>
+              )}
+            </p>
+          </div>
+          <button
+            onClick={() => setExcludeOffshore((prev) => !prev)}
+            className={`flex-shrink-0 inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-medium transition-all cursor-pointer ${
+              excludeOffshore
+                ? 'bg-[var(--color-bg-elevated)] text-[var(--color-text-muted)] border border-[var(--color-border)]'
+                : 'bg-sky-500/15 text-sky-400 border border-sky-500/30'
+            }`}
+            title={excludeOffshore ? 'Show offshore wind in charts' : 'Hide offshore wind from charts'}
+          >
+            <span className="text-sm">🌊</span>
+            <span>Offshore Wind</span>
+            <span
+              className={`px-1.5 py-0.5 rounded text-[10px] font-bold ${
+                excludeOffshore
+                  ? 'bg-white/5 text-[var(--color-text-muted)]'
+                  : 'bg-sky-500/20 text-sky-300'
+              }`}
+            >
+              {excludeOffshore ? 'OFF' : 'ON'}
+            </span>
+          </button>
+        </div>
       </section>
 
       {/* Headline Stats */}
