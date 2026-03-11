@@ -650,6 +650,78 @@ Steps:
 
 ---
 
+### Step 4.5: Performance Metrics Deep Dive (Methodology Guide)
+
+**Goal:** A dedicated methodology page/modal accessible from Performance page via a prominent info button, providing a thorough explanation of how capacity factor, curtailment, and all other metrics are calculated, where the data comes from, and what the limitations are.
+
+**Current state:**
+- 11 compact metric tooltips already exist in Performance.tsx (hover/click popups, ~2-3 lines each)
+- "About This Data" section at bottom of Performance page (3 brief paragraphs)
+- These are good for quick reference but don't explain the full data pipeline or edge cases
+
+**What's needed:** A deeper explainer covering:
+
+#### Capacity Factor — Deep Dive
+- **Definition:** Ratio of actual generation to theoretical maximum at nameplate capacity
+- **Formula:** `CF = Energy_MWh / (Capacity_MW × Hours_in_Period) × 100`
+- **Data source:** AEMO 5-minute dispatch intervals (SCADA data), aggregated to annual totals via OpenElectricity API
+- **Capacity used:** Nameplate (registered) capacity from AEMO Generation Information, NOT maximum output or de-rated capacity
+- **Hours in period:** Full year = 8,760 hours (8,784 in leap year); for YTD data, actual hours elapsed to date
+- **What affects CF:** Wind resource quality, solar irradiance, plant age/degradation, planned outages, unplanned outages, curtailment, connection constraints
+- **Typical ranges:** Wind 25-45%, Solar 18-28%, Pumped Hydro 5-35% (depends on dispatch strategy)
+- **Caveats:** CF doesn't distinguish between voluntary curtailment (negative prices) and forced curtailment (constraints). A low CF could mean bad wind or smart market behaviour.
+- **Hybrid projects:** May have combined CF for co-located generation; AEMO tracks DUIDs separately but OpenElectricity may aggregate
+
+#### Curtailment — Deep Dive
+- **Definition:** Estimated percentage of potential generation that was NOT dispatched, despite available resource (wind/sun)
+- **Why it's estimated:** AEMO doesn't publish a single "curtailment" number per facility. True curtailment requires comparing:
+  - Actual dispatch vs available capacity (from SCADA)
+  - Constraint equations that bound output
+  - Semi-scheduled generator UIGF (Unconstrained Intermittent Generation Forecast) vs actual
+- **Our method:** Derived from dispatch data patterns — comparing expected output (resource availability × capacity) vs actual output. This is an approximation.
+- **Types of curtailment:**
+  - **Economic** — Generator self-curtails during negative prices (voluntary, rational)
+  - **Network constraints** — AEMO directs reduced output due to transmission limits
+  - **System security** — AEMO directs reduction for grid stability (frequency, inertia)
+  - **Connection limits** — Runback schemes at connection point
+- **Data source:** AEMO NEMWEB dispatch data, processed by OpenElectricity. Future improvement: use NEMWEB constraint equation data directly for precise curtailment.
+- **Limitation:** Currently indicative only. Under-reports economic curtailment, may over-report for plants with genuine low output.
+
+#### Revenue & Pricing
+- **Market value:** Total wholesale energy revenue from NEM spot market ($)
+- **Excludes:** LGC (Large-scale Generation Certificate) revenue, PPA contract premiums, FCAS/ancillary services, capacity payments
+- **Real-world revenue** for most projects is 30-60% higher than wholesale market value alone (LGCs add $30-50/MWh for eligible projects)
+- **Price received ($/MWh):** Volume-weighted average spot price at time of dispatch — reflects the generator's price exposure profile
+
+#### BESS-Specific Metrics
+- **Charge/discharge data:** AEMO registers battery units as two separate DUIDs (charging unit + discharging unit). OpenElectricity tracks both.
+- **Round-trip efficiency:** Typically 85-90% for lithium-ion. Visible as discharged < charged energy.
+- **Cycles:** Full equivalent cycles (total discharged ÷ storage capacity). Most BESS do 1-2 cycles/day.
+- **Revenue model:** Primarily arbitrage (charge low, discharge high) + FCAS. Our data captures arbitrage only.
+
+#### Data Pipeline
+- **Source:** OpenElectricity API → AEMO NEMWEB dispatch & settlement data
+- **Frequency:** Annual aggregation (sum of 5-minute intervals). Monthly available but not yet imported.
+- **Coverage:** All NEM-registered facilities. WEM (Western Australia) NOT covered.
+- **Latency:** ~2-3 days behind real-time (settlement data lag)
+- **API plan:** Community (free), 500 requests/day
+
+**Implementation approach:** Full-page guide at `/guides/performance-methodology` (reuse existing Guides infrastructure) OR a slide-out panel/modal triggered by info button on Performance page.
+
+Steps:
+- [ ] Write methodology content (structured markdown or TSX)
+- [ ] Decide format: new Guide page vs. modal/drawer on Performance page
+- [ ] Add prominent "How is this calculated?" button near Performance page header
+- [ ] Link from existing metric tooltips to relevant section of deep dive
+- [ ] Include worked examples (e.g., "Coopers Gap Wind: 1,000 MW × 8,760h = 8,760,000 MWh max → actual 2,890,000 MWh → CF = 33%")
+
+**Files to modify:**
+- NEW: Guide content (either `frontend/public/guides/performance-methodology.md` or inline in TSX)
+- MODIFY: `frontend/src/pages/Performance.tsx` — add info button linking to deep dive
+- POSSIBLY MODIFY: `frontend/src/pages/Guides.tsx` — if adding as a new guide
+
+---
+
 ### Implementation Order
 
 | # | Task | Est. Lines | Dependencies | Priority |
@@ -662,13 +734,14 @@ Steps:
 | 4.3b | Map filters + clustering | ~150 | 4.3 | MEDIUM |
 | 4.4 | COD drift harvester | ~150 | None | LOW (sparse data) |
 | 4.4b | COD drift visualisation | ~200 | 4.4 | LOW |
-| 4.5 | Navigation update (final) | ~50 | 4.2b, 4.3 | After all pages |
-| 4.6 | Build verify + push | — | All | Last |
+| 4.5 | Metrics methodology deep dive | ~300 | None | MEDIUM |
+| 4.6 | Navigation update (final) | ~50 | 4.2b, 4.3 | After all pages |
+| 4.7 | Build verify + push | — | All | Last |
 
 **Recommended session plan:**
-- **Session 11:** Steps 4.1 + 4.1b (confidence) + 4.2 (developer export) — pipeline work
+- **Session 11:** Steps 4.1 + 4.1b (confidence) + 4.2 (developer export) — pipeline work ✅ DONE
 - **Session 12:** Steps 4.2b (developer pages) + 4.3 (map view) — main frontend
-- **Session 13:** Steps 4.4 (COD drift) + 4.5 (nav) + 4.6 (verify/push) — finish + polish
+- **Session 13:** Steps 4.4 (COD drift) + 4.5 (methodology) + 4.6 (nav) + 4.7 (verify/push) — finish + polish
 
 ---
 
