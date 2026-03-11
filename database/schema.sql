@@ -17,7 +17,7 @@ PRAGMA foreign_keys = ON;
 CREATE TABLE IF NOT EXISTS projects (
     id                  TEXT PRIMARY KEY,       -- slug, e.g. 'yanco-delta'
     name                TEXT NOT NULL,
-    technology          TEXT NOT NULL CHECK(technology IN ('wind','solar','bess','hybrid','pumped_hydro','gas')),
+    technology          TEXT NOT NULL CHECK(technology IN ('wind','solar','bess','hybrid','pumped_hydro','offshore_wind','gas')),
     status              TEXT NOT NULL CHECK(status IN ('operating','commissioning','construction','development','withdrawn')),
     capacity_mw         REAL NOT NULL,
     storage_mwh         REAL,                   -- NULL for non-storage

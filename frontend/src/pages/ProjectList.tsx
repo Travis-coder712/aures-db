@@ -95,7 +95,7 @@ export default function ProjectList() {
           <span className="text-[10px] font-semibold uppercase tracking-wider text-[var(--color-text-muted)] w-12">
             Tech
           </span>
-          {(['wind', 'solar', 'bess', 'hybrid'] as const).map((tech) => {
+          {(['wind', 'solar', 'bess', 'hybrid', 'offshore_wind', 'pumped_hydro'] as const).map((tech) => {
             const config = TECHNOLOGY_CONFIG[tech]
             const isActive = techFilter === tech
             return (

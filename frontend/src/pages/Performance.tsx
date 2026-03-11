@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useCallback } from 'react'
 import { Link } from 'react-router-dom'
 import {
   BarChart,
@@ -11,6 +11,135 @@ import {
 } from 'recharts'
 import { useLeagueTableIndex, useLeagueTable, useFilteredLeagueTable } from '../hooks/usePerformanceData'
 import type { LeagueTechnology, LeagueTableEntry, State } from '../lib/types'
+
+// ============================================================
+// Info Tooltip Definitions
+// ============================================================
+
+const InfoIcon = () => (
+  <svg className="w-3 h-3 inline-block ml-0.5 opacity-50 hover:opacity-100 transition-opacity" viewBox="0 0 16 16" fill="currentColor">
+    <circle cx="8" cy="8" r="7" fill="none" stroke="currentColor" strokeWidth="1.5" />
+    <text x="8" y="12" textAnchor="middle" fontSize="10" fontWeight="bold">i</text>
+  </svg>
+)
+
+interface MetricInfo {
+  label: string
+  description: string
+  formula?: string
+  source: string
+}
+
+const METRIC_INFO: Record<string, MetricInfo> = {
+  capacity_factor: {
+    label: 'Capacity Factor (CF%)',
+    description: 'The ratio of actual energy output to the theoretical maximum output if the plant ran at full capacity 24/7. Higher is better — top wind farms achieve 35-50%, solar 20-30%.',
+    formula: 'CF = (Energy MWh) / (Capacity MW × Hours in Period) × 100',
+    source: 'Calculated from AEMO dispatch data via OpenElectricity API.',
+  },
+  revenue_per_mw: {
+    label: 'Revenue per MW (Rev/MW)',
+    description: 'Total market revenue divided by nameplate capacity. Measures the earning efficiency of each MW installed. Influenced by both output and price captured.',
+    formula: 'Rev/MW = Market Value ($) / Capacity (MW)',
+    source: 'Market value from AEMO settlement data via OpenElectricity API.',
+  },
+  price_received: {
+    label: 'Price Received ($/MWh)',
+    description: 'The average wholesale price received for energy generated, weighted by dispatch interval volume. Varies by time-of-day generation profile.',
+    formula: '$/MWh = Market Value ($) / Energy Generated (MWh)',
+    source: 'Derived from AEMO dispatch and settlement data via OpenElectricity API.',
+  },
+  curtailment: {
+    label: 'Curtailment (%)',
+    description: 'The estimated percentage of potential generation that was curtailed (turned down or off) due to network constraints, negative prices, or AEMO directions. Lower is better.',
+    formula: 'Estimated from dispatch data patterns and AEMO constraint equations.',
+    source: 'Estimated from AEMO dispatch data. Currently indicative only — precise curtailment data requires NEMWEB constraint analysis.',
+  },
+  spread: {
+    label: 'Price Spread ($/MWh)',
+    description: 'The difference between average discharge (selling) price and average charge (buying) price. The core profit driver for BESS — higher spreads mean better arbitrage returns.',
+    formula: 'Spread = Avg Discharge Price - Avg Charge Price',
+    source: 'Derived from AEMO battery unit dispatch data via OpenElectricity API.',
+  },
+  cycles: {
+    label: 'Annual Cycles',
+    description: 'The number of full charge-discharge cycles completed per year. One cycle = fully discharging the battery storage capacity once. Indicates utilisation intensity.',
+    formula: 'Cycles = Total Energy Discharged (MWh) / Storage Capacity (MWh)',
+    source: 'Calculated from AEMO dispatch data via OpenElectricity API.',
+  },
+  utilisation: {
+    label: 'Utilisation (%)',
+    description: 'The percentage of time the battery was actively discharging energy to the grid. Higher utilisation generally means more revenue opportunities captured.',
+    formula: 'Utilisation = Energy Discharged / (Capacity MW × Hours in Period) × 100',
+    source: 'Approximated from AEMO battery unit dispatch data via OpenElectricity API.',
+  },
+  discharged: {
+    label: 'Energy Discharged',
+    description: 'Total energy exported to the grid from the battery during the period. Battery units are tracked separately as charging and discharging in AEMO systems.',
+    source: 'AEMO battery discharging unit data via OpenElectricity API.',
+  },
+  charged: {
+    label: 'Energy Charged',
+    description: 'Total energy imported from the grid to charge the battery during the period. Typically 10-15% higher than discharged energy due to round-trip efficiency losses.',
+    source: 'AEMO battery charging unit data via OpenElectricity API.',
+  },
+  composite_rank: {
+    label: 'Composite Ranking',
+    description: 'Overall performance ranking combining multiple metrics. For wind/solar: 40% capacity factor + 40% revenue/MW + 20% curtailment (inverted). For BESS: 30% revenue + 30% utilisation + 20% spread + 20% cycles.',
+    source: 'Calculated by AURES from underlying AEMO metrics.',
+  },
+  quartile: {
+    label: 'Performance Quartile',
+    description: 'Projects are divided into four equal groups based on composite score. Q1 (top 25%) are the best performers, Q4 (bottom 25%) are the lowest ranked.',
+    source: 'Calculated by AURES from composite performance scores.',
+  },
+}
+
+function InfoTooltip({ metricKey }: { metricKey: string }) {
+  const [show, setShow] = useState(false)
+  const info = METRIC_INFO[metricKey]
+  if (!info) return null
+
+  return (
+    <span className="relative inline-block">
+      <button
+        onClick={(e) => { e.stopPropagation(); setShow(!show) }}
+        onMouseEnter={() => setShow(true)}
+        onMouseLeave={() => setShow(false)}
+        className="appearance-none border-none bg-transparent cursor-help p-0 leading-none"
+        aria-label={`Info: ${info.label}`}
+      >
+        <InfoIcon />
+      </button>
+      {show && (
+        <div
+          className="absolute z-50 w-72 p-3 rounded-xl shadow-xl text-left
+            bg-[var(--color-bg-elevated)] border border-[var(--color-border)]
+            bottom-full left-1/2 -translate-x-1/2 mb-2"
+          onClick={(e) => e.stopPropagation()}
+        >
+          <p className="text-[11px] font-semibold text-[var(--color-text)] mb-1">{info.label}</p>
+          <p className="text-[10px] text-[var(--color-text-muted)] mb-2 leading-relaxed">{info.description}</p>
+          {info.formula && (
+            <p className="text-[10px] text-[var(--color-primary)] font-mono mb-1.5 bg-[var(--color-bg-card)] rounded px-1.5 py-1">
+              {info.formula}
+            </p>
+          )}
+          <p className="text-[9px] text-[var(--color-text-muted)] italic border-t border-[var(--color-border)] pt-1.5 mt-1">
+            📡 {info.source}
+          </p>
+          <div className="absolute top-full left-1/2 -translate-x-1/2 -mt-px">
+            <div className="w-2 h-2 bg-[var(--color-bg-elevated)] border-r border-b border-[var(--color-border)] rotate-45 -translate-y-1" />
+          </div>
+        </div>
+      )}
+    </span>
+  )
+}
+
+// ============================================================
+// Constants
+// ============================================================
 
 const TECH_TABS: { label: string; value: LeagueTechnology }[] = [
   { label: 'Wind', value: 'wind' },
@@ -46,16 +175,32 @@ const QUARTILE_LABELS: Record<number, string> = {
 type SortField = 'rank' | 'capacity' | 'cf' | 'price' | 'rev' | 'curtailment' | 'spread' | 'util' | 'cycles' | 'discharged' | 'charged'
 type SortDir = 'asc' | 'desc'
 
+// ============================================================
+// Main Component
+// ============================================================
+
 export default function Performance() {
   const { index, loading: indexLoading } = useLeagueTableIndex()
   const [tech, setTech] = useState<LeagueTechnology>('wind')
-  const [year, setYear] = useState<number>(2025)
+  // Default to latest available year
+  const latestYear = index?.available_years?.[index.available_years.length - 1] ?? 2025
+  const [year, setYear] = useState<number>(latestYear)
   const [stateFilter, setStateFilter] = useState<State | 'ALL'>('ALL')
   const [sortField, setSortField] = useState<SortField>('rank')
   const [sortDir, setSortDir] = useState<SortDir>('asc')
 
+  // Sync year when index loads
+  const [yearInitialized, setYearInitialized] = useState(false)
+  if (index && !yearInitialized) {
+    const latest = index.available_years[index.available_years.length - 1]
+    if (latest && latest !== year) setYear(latest)
+    setYearInitialized(true)
+  }
+
   const { table, loading: tableLoading } = useLeagueTable(tech, year)
   const filtered = useFilteredLeagueTable(table, stateFilter)
+
+  const isYTD = table?.data_source === 'openelectricity_ytd'
 
   // Sort
   const sorted = useMemo(() => {
@@ -87,21 +232,22 @@ export default function Performance() {
     return projects
   }, [filtered, sortField, sortDir])
 
-  const handleSort = (field: SortField) => {
+  const handleSort = useCallback((field: SortField) => {
     if (sortField === field) {
       setSortDir(sortDir === 'asc' ? 'desc' : 'asc')
     } else {
       setSortField(field)
       setSortDir(field === 'rank' ? 'asc' : 'desc')
     }
-  }
+  }, [sortField, sortDir])
 
-  const SortHeader = ({ field, label, className }: { field: SortField; label: string; className?: string }) => (
+  const SortHeader = ({ field, label, className, infoKey }: { field: SortField; label: string; className?: string; infoKey?: string }) => (
     <th
       className={`px-2 py-2 text-left cursor-pointer hover:text-[var(--color-text)] select-none ${className ?? ''}`}
       onClick={() => handleSort(field)}
     >
       {label}
+      {infoKey && <InfoTooltip metricKey={infoKey} />}
       {sortField === field && (
         <span className="ml-0.5 text-[10px]">{sortDir === 'asc' ? '▲' : '▼'}</span>
       )}
@@ -111,7 +257,7 @@ export default function Performance() {
   // Quartile distribution for chart
   const quartileData = useMemo(() => {
     if (!filtered?.projects) return []
-    const counts = { 1: 0, 2: 0, 3: 0, 4: 0 }
+    const counts: Record<number, number> = { 1: 0, 2: 0, 3: 0, 4: 0 }
     for (const p of filtered.projects) {
       counts[p.quartile] = (counts[p.quartile] || 0) + 1
     }
@@ -151,7 +297,7 @@ export default function Performance() {
           <p className="text-4xl mb-3">📊</p>
           <p className="text-sm text-[var(--color-text-muted)] mb-2">No performance data loaded yet.</p>
           <p className="text-xs text-[var(--color-text-muted)]">
-            Run: python3 pipeline/importers/import_openelectricity.py --year 2025 --sample
+            Run: python3 pipeline/importers/import_openelectricity.py --year 2025
           </p>
         </div>
       </div>
@@ -168,10 +314,11 @@ export default function Performance() {
         <p className="text-sm text-[var(--color-text-muted)]">
           Operational performance rankings across {table?.fleet_avg.count ?? '...'} projects.
           Ranked by capacity factor, revenue, and curtailment.
+          <InfoTooltip metricKey="composite_rank" />
         </p>
         {table && (
-          <div className="mt-2">
-            {table.data_source === 'openelectricity' ? (
+          <div className="mt-2 flex flex-wrap items-center gap-2">
+            {(table.data_source === 'openelectricity' || table.data_source === 'openelectricity_ytd') ? (
               <span className="inline-flex items-center gap-1.5 text-[11px] font-medium px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
                 AEMO data via OpenElectricity
@@ -182,6 +329,12 @@ export default function Performance() {
                 Sample data — projected estimates
               </span>
             ) : null}
+            {isYTD && (
+              <span className="inline-flex items-center gap-1.5 text-[11px] font-medium px-2 py-0.5 rounded-full bg-blue-500/10 text-blue-400 border border-blue-500/20">
+                <span className="w-1.5 h-1.5 rounded-full bg-blue-400" />
+                Year to Date (Jan–Feb)
+              </span>
+            )}
           </div>
         )}
       </section>
@@ -208,8 +361,10 @@ export default function Performance() {
           onChange={(e) => setYear(Number(e.target.value))}
           className="ml-auto px-3 py-2 rounded-lg text-sm bg-[var(--color-bg-card)] text-[var(--color-text)] border border-[var(--color-border)]"
         >
-          {index.available_years.map((y) => (
-            <option key={y} value={y}>{y}</option>
+          {[...index.available_years].reverse().map((y) => (
+            <option key={y} value={y}>
+              {y}{y === new Date().getFullYear() ? ' (YTD)' : ''}
+            </option>
           ))}
         </select>
       </div>
@@ -227,13 +382,15 @@ export default function Performance() {
               label={tech === 'bess' ? 'Avg Utilisation' : 'Avg Capacity Factor'}
               value={`${table.fleet_avg.capacity_factor_pct.toFixed(1)}%`}
               color="#22c55e"
+              infoKey={tech === 'bess' ? 'utilisation' : 'capacity_factor'}
             />
           )}
           {table.fleet_avg.revenue_per_mw != null && (
             <StatCard
-              label="Avg Revenue/MW"
+              label={isYTD ? 'Avg Rev/MW (YTD)' : 'Avg Revenue/MW'}
               value={`$${(table.fleet_avg.revenue_per_mw / 1000).toFixed(0)}k`}
               color="#3b82f6"
+              infoKey="revenue_per_mw"
             />
           )}
           {tech !== 'bess' && table.fleet_avg.curtailment_pct != null && (
@@ -241,6 +398,7 @@ export default function Performance() {
               label="Avg Curtailment"
               value={`${table.fleet_avg.curtailment_pct.toFixed(1)}%`}
               color="#f59e0b"
+              infoKey="curtailment"
             />
           )}
         </section>
@@ -284,27 +442,29 @@ export default function Performance() {
             <table className="w-full text-xs">
               <thead>
                 <tr className="text-[var(--color-text-muted)] border-b border-[var(--color-border)]">
-                  <SortHeader field="rank" label="#" className="w-10" />
+                  <SortHeader field="rank" label="#" className="w-10" infoKey="composite_rank" />
                   <th className="px-2 py-2 text-left">Project</th>
                   <th className="px-2 py-2 text-left w-12">State</th>
                   <SortHeader field="capacity" label="MW" />
                   {tech === 'bess' ? (
                     <>
-                      <SortHeader field="discharged" label="Disch." />
-                      <SortHeader field="charged" label="Chg." />
-                      <SortHeader field="spread" label="Spread" />
-                      <SortHeader field="cycles" label="Cycles" />
-                      <SortHeader field="rev" label="Rev/MW" />
+                      <SortHeader field="discharged" label="Disch." infoKey="discharged" />
+                      <SortHeader field="charged" label="Chg." infoKey="charged" />
+                      <SortHeader field="spread" label="Spread" infoKey="spread" />
+                      <SortHeader field="cycles" label="Cycles" infoKey="cycles" />
+                      <SortHeader field="rev" label="Rev/MW" infoKey="revenue_per_mw" />
                     </>
                   ) : (
                     <>
-                      <SortHeader field="cf" label="CF%" />
-                      <SortHeader field="price" label="$/MWh" />
-                      <SortHeader field="rev" label="Rev/MW" />
-                      <SortHeader field="curtailment" label="Curt%" />
+                      <SortHeader field="cf" label="CF%" infoKey="capacity_factor" />
+                      <SortHeader field="price" label="$/MWh" infoKey="price_received" />
+                      <SortHeader field="rev" label="Rev/MW" infoKey="revenue_per_mw" />
+                      <SortHeader field="curtailment" label="Curt%" infoKey="curtailment" />
                     </>
                   )}
-                  <th className="px-2 py-2 text-left w-12">Q</th>
+                  <th className="px-2 py-2 text-left w-12">
+                    Q<InfoTooltip metricKey="quartile" />
+                  </th>
                 </tr>
               </thead>
               <tbody>
@@ -360,6 +520,27 @@ export default function Performance() {
           </div>
         </section>
       )}
+
+      {/* Data Methodology */}
+      <section className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl p-5">
+        <h2 className="text-sm font-semibold text-[var(--color-text)] mb-2">
+          About This Data
+        </h2>
+        <div className="space-y-2 text-[10px] text-[var(--color-text-muted)] leading-relaxed">
+          <p>
+            Performance data is sourced from <strong className="text-[var(--color-text)]">AEMO dispatch and settlement records</strong> via the <a href="https://openelectricity.org.au" target="_blank" rel="noopener noreferrer" className="text-[var(--color-primary)] hover:underline">OpenElectricity API</a>.
+            This covers all NEM-registered generation and storage facilities.
+          </p>
+          <p>
+            <strong className="text-[var(--color-text)]">Capacity factor</strong> is calculated using nameplate capacity and actual energy output.
+            <strong className="text-[var(--color-text)]"> Revenue</strong> reflects wholesale market value only — it excludes LGC revenue, contract premiums, and ancillary services.
+            <strong className="text-[var(--color-text)]"> Curtailment</strong> is estimated and may not capture all constraint types.
+          </p>
+          <p>
+            Rankings use a composite score: wind/solar weight CF (40%), revenue/MW (40%), and curtailment (20%). BESS weights revenue (30%), utilisation (30%), spread (20%), and cycles (20%).
+          </p>
+        </div>
+      </section>
     </div>
   )
 }
@@ -441,10 +622,13 @@ function LeagueRow({ entry, tech }: { entry: LeagueTableEntry; tech: LeagueTechn
   )
 }
 
-function StatCard({ label, value, color }: { label: string; value: string; color: string }) {
+function StatCard({ label, value, color, infoKey }: { label: string; value: string; color: string; infoKey?: string }) {
   return (
     <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl p-3">
-      <p className="text-[10px] uppercase tracking-wider text-[var(--color-text-muted)]">{label}</p>
+      <p className="text-[10px] uppercase tracking-wider text-[var(--color-text-muted)]">
+        {label}
+        {infoKey && <InfoTooltip metricKey={infoKey} />}
+      </p>
       <p className="text-lg font-bold" style={{ color }}>{value}</p>
     </div>
   )

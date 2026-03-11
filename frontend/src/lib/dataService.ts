@@ -39,9 +39,18 @@ export async function fetchProjectIndex(): Promise<ProjectSummary[]> {
   return projectIndexCache
 }
 
+// Map technology to folder name (underscores → hyphens for filesystem)
+function techFolder(technology: Technology): string {
+  const map: Partial<Record<Technology, string>> = {
+    pumped_hydro: 'pumped-hydro',
+    offshore_wind: 'offshore-wind',
+  }
+  return map[technology] ?? technology
+}
+
 export async function fetchProject(technology: Technology, id: string): Promise<Project | null> {
   try {
-    const resp = await fetch(`${BASE}/projects/${technology}/${id}.json`)
+    const resp = await fetch(`${BASE}/projects/${techFolder(technology)}/${id}.json`)
     if (!resp.ok) return null
     return (await resp.json()) as Project
   } catch {

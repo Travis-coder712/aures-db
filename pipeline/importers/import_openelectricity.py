@@ -5,8 +5,12 @@ Fetches facility-level energy and market value data from the OpenElectricity API
 and computes annual performance metrics for each project.
 
 Usage:
-    # With API key (set OPENELECTRICITY_API_KEY env var):
+    # Import a full year (set OPENELECTRICITY_API_KEY env var):
     python3 pipeline/importers/import_openelectricity.py --year 2024
+    python3 pipeline/importers/import_openelectricity.py --year 2025
+
+    # Import year-to-date for current year:
+    python3 pipeline/importers/import_openelectricity.py --year 2026 --ytd
 
     # Generate sample data for frontend development:
     python3 pipeline/importers/import_openelectricity.py --year 2025 --sample
@@ -18,7 +22,7 @@ import argparse
 import random
 import json
 import time
-from datetime import datetime
+from datetime import datetime, date
 from difflib import SequenceMatcher
 from urllib.request import Request, urlopen
 from urllib.parse import urlencode, quote
@@ -83,8 +87,14 @@ def api_get(path, api_key, params=None):
 # OpenElectricity API Import
 # ============================================================
 
-def import_from_api(conn, year: int):
-    """Import performance data from the OpenElectricity API."""
+def import_from_api(conn, year: int, ytd: bool = False):
+    """Import performance data from the OpenElectricity API.
+
+    Args:
+        conn: SQLite connection
+        year: Year to import
+        ytd: If True, import year-to-date (partial year) and adjust CF calculation
+    """
     api_key = os.environ.get('OPENELECTRICITY_API_KEY')
     if not api_key:
         print("ERROR: OPENELECTRICITY_API_KEY environment variable not set.")
@@ -98,6 +108,37 @@ def import_from_api(conn, year: int):
     if remaining < 15:
         print("WARNING: Low API quota. Consider waiting for reset.")
         sys.exit(1)
+
+    # Determine date range
+    date_start = f"{year}-01-01"
+    if ytd:
+        # Use end of last complete month for YTD
+        today = date.today()
+        if today.year > year:
+            # Year is complete — just import full year
+            date_end = f"{year}-12-31"
+            ytd = False
+            print(f"Note: {year} is complete — importing full year data.")
+        elif today.month == 1:
+            print(f"No complete months yet for {year}.")
+            return
+        else:
+            # End of last complete month
+            last_month = today.month - 1
+            import calendar
+            last_day = calendar.monthrange(year, last_month)[1]
+            date_end = f"{year}-{last_month:02d}-{last_day:02d}"
+            # Calculate hours elapsed for CF adjustment
+            from datetime import timedelta
+            start_dt = date(year, 1, 1)
+            end_dt = date(year, last_month, last_day)
+            hours_elapsed = (end_dt - start_dt + timedelta(days=1)).days * 24
+            print(f"YTD mode: {date_start} to {date_end} ({hours_elapsed} hours)")
+    else:
+        date_end = f"{year}-12-31"
+
+    # For full year CF calculation
+    hours_in_period = hours_elapsed if ytd else 8760
 
     # Step 1: Get our operating projects
     projects = get_operating_projects(conn)
@@ -156,8 +197,8 @@ def import_from_api(conn, year: int):
                 "facility_code": batch,
                 "metrics": ["energy", "market_value"],
                 "interval": "1y",
-                "date_start": f"{year}-01-01",
-                "date_end": f"{year}-12-31",
+                "date_start": date_start,
+                "date_end": date_end,
             })
 
             # Parse results — split by unit fueltech for BESS charge/discharge
@@ -225,9 +266,8 @@ def import_from_api(conn, year: int):
             capacity_mw = project['capacity_mw']
             tech = project['technology']
             storage_mwh = project.get('storage_mwh')
-            hours_in_year = 8760
 
-            cf = (energy / (capacity_mw * hours_in_year)) * 100
+            cf = (energy / (capacity_mw * hours_in_period)) * 100
             price_received = market_value / energy if energy > 0 else 0
             revenue_per_mw = market_value / capacity_mw if capacity_mw > 0 else 0
 
@@ -252,8 +292,8 @@ def import_from_api(conn, year: int):
                     avg_charge_price = charge_val / charged
                     cycles = discharged / storage_mwh if storage_mwh else None
                     # Utilisation: % of hours the battery was discharging
-                    # Approximate: discharged MWh / (capacity_mw * 8760) * 100
-                    util = (discharged / (capacity_mw * hours_in_year)) * 100
+                    # Approximate: discharged MWh / (capacity_mw * hours_in_period) * 100
+                    util = (discharged / (capacity_mw * hours_in_period)) * 100
 
                     metrics.update({
                         'energy_discharged_mwh': round(discharged, 1),
@@ -264,11 +304,13 @@ def import_from_api(conn, year: int):
                         'cycles': round(cycles, 1) if cycles else None,
                     })
 
-            upsert_performance(conn, pid, year, metrics, 'openelectricity')
+            source = 'openelectricity_ytd' if ytd else 'openelectricity'
+            upsert_performance(conn, pid, year, metrics, source)
             imported += 1
 
     conn.commit()
-    print(f"\nImported real performance data for {imported} projects (year {year}).")
+    mode = f"YTD (to {date_end})" if ytd else f"full year"
+    print(f"\nImported real performance data for {imported} projects ({year} {mode}).")
     print(f"Facilities with data: {len(facility_results)}, Skipped (no energy): {skipped}")
 
 
@@ -495,6 +537,7 @@ def main():
     parser = argparse.ArgumentParser(description='Import performance data from OpenElectricity API')
     parser.add_argument('--year', type=int, default=2024, help='Year to import (default: 2024)')
     parser.add_argument('--sample', action='store_true', help='Generate sample data instead of API import')
+    parser.add_argument('--ytd', action='store_true', help='Import year-to-date (partial year) data')
     args = parser.parse_args()
 
     conn = get_connection()
@@ -502,7 +545,7 @@ def main():
     if args.sample:
         generate_sample_data(conn, args.year)
     else:
-        import_from_api(conn, args.year)
+        import_from_api(conn, args.year, ytd=args.ytd)
 
     conn.close()
 

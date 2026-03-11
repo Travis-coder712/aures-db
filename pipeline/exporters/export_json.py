@@ -185,7 +185,8 @@ def export_all(db_path=DB_PATH):
     # 2. Full project detail files
     tech_map = {
         'wind': 'wind', 'solar': 'solar', 'bess': 'bess',
-        'hybrid': 'hybrid', 'pumped_hydro': 'pumped-hydro', 'gas': 'gas'
+        'hybrid': 'hybrid', 'pumped_hydro': 'pumped-hydro',
+        'offshore_wind': 'offshore-wind', 'gas': 'gas'
     }
     for pid in project_ids:
         project = fetch_full_project(conn, pid)

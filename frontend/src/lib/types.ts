@@ -2,7 +2,7 @@
 // AURES Core Type Definitions
 // ============================================================
 
-export type Technology = 'wind' | 'solar' | 'bess' | 'hybrid' | 'pumped_hydro' | 'gas'
+export type Technology = 'wind' | 'solar' | 'bess' | 'hybrid' | 'pumped_hydro' | 'offshore_wind' | 'gas'
 export type ProjectStatus = 'operating' | 'commissioning' | 'construction' | 'development' | 'withdrawn'
 export type State = 'NSW' | 'VIC' | 'QLD' | 'SA' | 'WA' | 'TAS' | 'NT' | 'ACT'
 export type Confidence = 'high' | 'good' | 'medium' | 'low' | 'unverified'
@@ -249,7 +249,7 @@ export interface LeagueTableEntry {
   cycles?: number
 
   // Data provenance
-  data_source?: 'openelectricity' | 'sample'
+  data_source?: 'openelectricity' | 'openelectricity_ytd' | 'sample'
 
   // Rankings
   rank_composite: number
@@ -265,7 +265,7 @@ export interface LeagueTableEntry {
 export interface LeagueTable {
   year: number
   technology: LeagueTechnology
-  data_source?: 'openelectricity' | 'sample' | 'mixed'
+  data_source?: 'openelectricity' | 'openelectricity_ytd' | 'sample' | 'mixed'
   fleet_avg: {
     capacity_factor_pct?: number
     revenue_per_mw?: number
@@ -298,6 +298,7 @@ export const TECHNOLOGY_CONFIG: Record<Technology, { label: string; color: strin
   bess: { label: 'BESS', color: '#8b5cf6', icon: '🔋' },
   hybrid: { label: 'Hybrid', color: '#06b6d4', icon: '⚡' },
   pumped_hydro: { label: 'Pumped Hydro', color: '#14b8a6', icon: '💧' },
+  offshore_wind: { label: 'Offshore Wind', color: '#0ea5e9', icon: '🌊' },
   gas: { label: 'Gas', color: '#ef4444', icon: '🔥' },
 }
 

@@ -39,13 +39,14 @@ export interface NEMStats {
   pipeline: PipelineProject[]
 }
 
-const TECH_ORDER: Technology[] = ['wind', 'solar', 'bess', 'hybrid', 'pumped_hydro']
+const TECH_ORDER: Technology[] = ['wind', 'solar', 'bess', 'hybrid', 'offshore_wind', 'pumped_hydro']
 const TECH_LABELS: Record<Technology, string> = {
   wind: 'Wind',
   solar: 'Solar',
   bess: 'BESS',
   hybrid: 'Hybrid',
   pumped_hydro: 'Pumped Hydro',
+  offshore_wind: 'Offshore Wind',
   gas: 'Gas',
 }
 

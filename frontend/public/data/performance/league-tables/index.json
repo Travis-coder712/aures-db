@@ -1,7 +1,8 @@
 {
   "available_years": [
     2024,
-    2025
+    2025,
+    2026
   ],
   "technologies": [
     "bess",
@@ -38,18 +39,38 @@
     {
       "year": 2025,
       "technology": "pumped_hydro",
-      "count": 34
+      "count": 33
     },
     {
       "year": 2025,
       "technology": "solar",
-      "count": 80
+      "count": 79
     },
     {
       "year": 2025,
       "technology": "wind",
-      "count": 82
+      "count": 80
+    },
+    {
+      "year": 2026,
+      "technology": "bess",
+      "count": 29
+    },
+    {
+      "year": 2026,
+      "technology": "pumped_hydro",
+      "count": 33
+    },
+    {
+      "year": 2026,
+      "technology": "solar",
+      "count": 79
+    },
+    {
+      "year": 2026,
+      "technology": "wind",
+      "count": 80
     }
   ],
-  "last_updated": "2026-03-11T17:48:30.715574"
+  "last_updated": "2026-03-11T22:23:08.492622"
 }

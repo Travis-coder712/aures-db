@@ -99,8 +99,8 @@ export default function Home() {
             View all →
           </Link>
         </div>
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
-          {(['wind', 'solar', 'bess', 'hybrid'] as const).map((tech) => {
+        <div className="grid grid-cols-2 lg:grid-cols-3 gap-3">
+          {(['wind', 'solar', 'bess', 'hybrid', 'offshore_wind', 'pumped_hydro'] as const).map((tech) => {
             const config = TECHNOLOGY_CONFIG[tech]
             const techStats = stats?.by_technology?.[tech]
             const count = techStats?.count ?? 0
