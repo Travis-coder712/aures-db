@@ -13,10 +13,11 @@
   "has_statcom": false,
   "has_harmonic_filter": false,
   "notable": "Stage 2 of Golden Plains. 93 Vestas V162-6.2 MW turbines. Financial close June 2024.",
-  "data_confidence": "high",
+  "data_confidence": "good",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "1990",
+  "confidence_score": 53,
   "coordinates": {
     "lat": -37.9,
     "lng": 143.7

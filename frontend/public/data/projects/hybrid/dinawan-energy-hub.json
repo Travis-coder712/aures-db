@@ -15,10 +15,11 @@
   "has_statcom": false,
   "has_harmonic_filter": false,
   "notable": "Hybrid wind+solar+BESS. Access rights: 707 MW wind + 300 MW solar + 300 MW/1,200 MWh BESS. Full vision ~2.5 GW. Adjacent to Transgrid Dinawan Substation. CIP holds option for minority interest. CIS Tender winner.",
-  "data_confidence": "high",
+  "data_confidence": "medium",
   "last_updated": "2026-03-11",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "1924",
+  "confidence_score": 40,
   "timeline": [
     {
       "date": "2025-04-23",

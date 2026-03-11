@@ -14,10 +14,11 @@
   "has_statcom": false,
   "has_harmonic_filter": false,
   "notable": "First pumped hydro registered in NEM in ~40 years. Former Kidston Gold Mine site. 8-hour storage.",
-  "data_confidence": "high",
+  "data_confidence": "good",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "1352",
+  "confidence_score": 64,
   "coordinates": {
     "lat": -18.8714,
     "lng": 144.1647

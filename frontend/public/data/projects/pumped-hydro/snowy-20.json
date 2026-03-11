@@ -15,10 +15,11 @@
   "has_statcom": false,
   "has_harmonic_filter": false,
   "notable": "Largest committed renewable energy project in Australia. Serial cost blowouts from A$2B to A$12B+. ~70% complete.",
-  "data_confidence": "high",
+  "data_confidence": "good",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "1752",
+  "confidence_score": 64,
   "coordinates": {
     "lat": -35.8833,
     "lng": 148.5

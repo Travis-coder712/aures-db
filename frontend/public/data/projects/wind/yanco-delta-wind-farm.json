@@ -14,10 +14,11 @@
   "has_statcom": false,
   "has_harmonic_filter": false,
   "notable": "1.5 GW wind (208 turbines, 270m tip) + 800 MWh BESS. 33,000 ha site 10 km NW of Jerilderie in SW REZ. ~$4B project. 1,460 MW transmission access secured. FID target mid-FY2027.",
-  "data_confidence": "high",
+  "data_confidence": "medium",
   "last_updated": "2026-03-11",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "2266",
+  "confidence_score": 35,
   "timeline": [
     {
       "date": "2025-04-23",

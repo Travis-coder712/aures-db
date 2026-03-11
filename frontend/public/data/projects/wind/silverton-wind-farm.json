@@ -13,10 +13,11 @@
   "has_statcom": false,
   "has_harmonic_filter": false,
   "performance_score": 41.3,
-  "data_confidence": "low",
+  "data_confidence": "medium",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "1178",
+  "confidence_score": 43,
   "coordinates": {
     "lat": -31.86095,
     "lng": 141.296349

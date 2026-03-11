@@ -13,10 +13,11 @@
   "has_statcom": false,
   "has_harmonic_filter": false,
   "notable": "Effectively shelved. 2 GW floating wind off Eden NSW south coast. Equinor pulled out 2024-2025. Oceanex lacks capital to proceed alone. Estimated $10B project.",
-  "data_confidence": "high",
+  "data_confidence": "medium",
   "last_updated": "2026-03-11",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "2026",
+  "confidence_score": 30,
   "timeline": [
     {
       "date": "2025-08-01",

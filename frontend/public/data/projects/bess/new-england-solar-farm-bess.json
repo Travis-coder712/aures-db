@@ -15,10 +15,11 @@
   "has_statcom": false,
   "has_harmonic_filter": false,
   "notable": "Energy Vault B-VAULT (first Australian project). Siemens grid-forming inverters. 20-year NSW LTESA.",
-  "data_confidence": "high",
+  "data_confidence": "good",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "1893",
+  "confidence_score": 55,
   "coordinates": {
     "lat": -30.6,
     "lng": 151.6

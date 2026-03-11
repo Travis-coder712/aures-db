@@ -15,10 +15,11 @@
   "has_statcom": false,
   "has_harmonic_filter": false,
   "notable": "CWO REZ location. Originally 500 MW Gulgong Solar, scaled down to BESS-only. Two stages of 204 MW each.",
-  "data_confidence": "high",
+  "data_confidence": "good",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "1580",
+  "confidence_score": 61,
   "coordinates": {
     "lat": -34.37,
     "lng": 150.84

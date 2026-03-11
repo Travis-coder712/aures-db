@@ -14,10 +14,11 @@
   "has_statcom": false,
   "has_harmonic_filter": false,
   "notable": "Sungrow PowerTitan 2.0. Grid-forming. Elecnor delivery partner.",
-  "data_confidence": "high",
+  "data_confidence": "good",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "3008",
+  "confidence_score": 55,
   "coordinates": {
     "lat": -34.77,
     "lng": 138.53

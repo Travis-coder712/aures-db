@@ -177,6 +177,7 @@ export interface ProjectSummary {
   development_score?: number
   performance_score?: number
   data_confidence: Confidence
+  confidence_score?: number
 }
 
 // CIS/LTESA types

@@ -13,10 +13,11 @@
   "has_statcom": false,
   "has_harmonic_filter": false,
   "notable": "Equinor/Oceanex withdrew Jun 2024. Illawarra zone declared Jun 2024 but no feasibility licences awarded. Zone now open for R&D licences only (Jan 2026).",
-  "data_confidence": "high",
+  "data_confidence": "medium",
   "last_updated": "2026-03-11",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "2024",
+  "confidence_score": 33,
   "timeline": [
     {
       "date": "2024-06-01",

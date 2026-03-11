@@ -14,10 +14,11 @@
   "has_statcom": false,
   "has_harmonic_filter": false,
   "notable": "Australia's first 8-hour BESS. 144 Tesla Megapacks. 14-year NSW LTESA. Beon Energy BoP.",
-  "data_confidence": "high",
+  "data_confidence": "good",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "2223",
+  "confidence_score": 54,
   "timeline": [
     {
       "date": "2023-05-01",

@@ -14,10 +14,11 @@
   "has_statcom": false,
   "has_harmonic_filter": false,
   "notable": "Hithium 5 MWh containers (128 units). INTEC EPC. CIS Tender 1 winner.",
-  "data_confidence": "high",
+  "data_confidence": "good",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "1961",
+  "confidence_score": 55,
   "coordinates": {
     "lat": -26.06,
     "lng": 152.32

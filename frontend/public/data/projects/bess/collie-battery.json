@@ -18,9 +18,10 @@
   "has_statcom": false,
   "has_harmonic_filter": false,
   "notable": "WA's flagship battery project. At 560MW/2,240MWh it's the largest planned battery in the WEM. 4-hour duration.",
-  "data_confidence": "medium",
+  "data_confidence": "good",
   "last_updated": "2025-03-01",
   "last_verified": "2025-03-01",
+  "confidence_score": 53,
   "coordinates": {
     "lat": -33.36,
     "lng": 116.15

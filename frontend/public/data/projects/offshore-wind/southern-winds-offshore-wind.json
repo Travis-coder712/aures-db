@@ -12,10 +12,11 @@
   "has_statcom": false,
   "has_harmonic_filter": false,
   "notable": "Cancelled mid-2025. BlueFloat ceased all global operations after parent Quantum Capital determined offshore wind no longer viable. 1,155 MW proposed 8-20 km off coast between Cape Douglas SA and Nelson VIC.",
-  "data_confidence": "high",
+  "data_confidence": "medium",
   "last_updated": "2026-03-11",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "2039",
+  "confidence_score": 28,
   "timeline": [
     {
       "date": "2025-07-01",

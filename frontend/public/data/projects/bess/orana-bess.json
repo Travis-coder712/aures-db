@@ -15,10 +15,11 @@
   "has_statcom": false,
   "has_harmonic_filter": false,
   "notable": "Tesla Megapack. A$650M debt financing (largest BESS financing globally at time). NSW LTESA + CIS double winner.",
-  "data_confidence": "high",
+  "data_confidence": "good",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "2015",
+  "confidence_score": 61,
   "coordinates": {
     "lat": -32.54,
     "lng": 148.95

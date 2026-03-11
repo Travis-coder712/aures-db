@@ -14,10 +14,11 @@
   "has_statcom": false,
   "has_harmonic_filter": false,
   "notable": "Tesla Megapack. Merchant operation via Tesla Autobidder with minimum revenue guarantee.",
-  "data_confidence": "high",
+  "data_confidence": "medium",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "2647",
+  "confidence_score": 43,
   "timeline": [
     {
       "date": "2024-06-28",

@@ -13,10 +13,11 @@
   "has_statcom": false,
   "has_harmonic_filter": false,
   "notable": "46 Vestas V162-6.2 turbines. A$1.3B total. Acquired from CIP Aug 2024. QLD Energy & Jobs Plan.",
-  "data_confidence": "high",
+  "data_confidence": "good",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "2002",
+  "confidence_score": 59,
   "coordinates": {
     "lat": -22.0,
     "lng": 149.2

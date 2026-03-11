@@ -18,10 +18,11 @@
   "has_statcom": false,
   "has_harmonic_filter": false,
   "notable": "One of the largest solar projects in Australia at 1GW. Key asset in Origin Energy's 4GW renewables target for 2030. Full allocation in SW REZ.",
-  "data_confidence": "good",
+  "data_confidence": "high",
   "last_updated": "2025-04-15",
   "last_verified": "2025-04-15",
   "aemo_gen_info_id": "YANCOSF1",
+  "confidence_score": 75,
   "coordinates": {
     "lat": -34.55,
     "lng": 146.39
