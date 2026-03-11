@@ -15,7 +15,7 @@
 | Phase 2.5: NEM Dashboard + REZ | ✅ Complete | 100% |
 | Phase 3: Performance | ✅ Complete | 100% |
 | Phase 3.5: Data Quality + Enrichment | ✅ Complete | 100% |
-| Phase 4: Intelligence | In Progress | 15% |
+| Phase 4: Intelligence | In Progress | 25% |
 | Phase 5: Data Enrichment | Ongoing | 25% |
 
 ---
@@ -473,9 +473,9 @@ Steps:
 - [x] Add `confidence_score` INTEGER column to projects table (migration 005) — store raw numeric score
 - [x] Run processor — Distribution: 4 high, 30 good, 260 medium, 770 low
 - [x] Update JSON export to include `confidence_score` in project index + detail
-- [ ] Frontend: show ConfidenceDots on ProjectList cards + ProjectDetail header
-- [ ] Frontend: add confidence filter to ProjectList page (filter by tier)
-- [ ] Frontend: show confidence breakdown stats on Dashboard (% high/good/medium/low)
+- [x] Frontend: ConfidenceDots already on ProjectList cards + ProjectDetail header (pre-existing)
+- [x] Frontend: confidence filter on ProjectList — "Data" row with High/Good/Medium/Low pills
+- [x] Frontend: "Data Quality" section on Dashboard — horizontal bars with counts, %, links to filtered list
 
 **Files to modify:**
 - NEW: `pipeline/processors/compute_confidence.py`
