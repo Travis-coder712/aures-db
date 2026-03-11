@@ -1,8 +1,8 @@
 # AURES Database — Build Tracker
 
 > **Last Updated:** 2026-03-12
-> **Current Phase:** Phase 3.5 complete, ready for Phase 4
-> **Status:** Phases 1-3.5 complete. 1,064 projects (incl. 22 offshore wind). Real 2024+2025 performance data + 2026 YTD from OpenElectricity API. 593 timeline events. 250 projects with coordinates. Offshore wind fully enriched. REZ access rights populated (CWO 10 projects, SW 4 projects). Info tooltips on Performance page.
+> **Current Phase:** Phase 4 — Intelligence Layer (in progress)
+> **Status:** Phases 1-3.5 complete. 1,064 projects (incl. 22 offshore wind). Real 2024+2025 performance data + 2026 YTD from OpenElectricity API. 593 timeline events. 250 projects with coordinates. Offshore wind toggle on Dashboard. Phase 4 plan: confidence ratings, developer profiles, map view, COD drift.
 
 ---
 
@@ -15,7 +15,7 @@
 | Phase 2.5: NEM Dashboard + REZ | ✅ Complete | 100% |
 | Phase 3: Performance | ✅ Complete | 100% |
 | Phase 3.5: Data Quality + Enrichment | ✅ Complete | 100% |
-| Phase 4: Intelligence | Not Started | 0% |
+| Phase 4: Intelligence | In Progress | 0% |
 | Phase 5: Data Enrichment | Ongoing | 25% |
 
 ---
@@ -411,17 +411,274 @@ Layer 3: PWA FRONTEND  ✅ BUILT & DEPLOYED
 
 ---
 
-## What To Build Next
+## Phase 4: Intelligence Layer — IN PROGRESS
 
-### Short Term (Phase 4 — Intelligence Layer)
-1. **Confidence ratings** — Implement 4-tier system (HIGH/GOOD/MEDIUM/LOW) based on data completeness
-2. **Developer profiles** — Aggregate portfolio views by developer (Origin, AGL, Neoen, etc.)
-3. **COD drift tracking** — Visualise how expected COD dates shift over time
-4. **Map view** — 250 projects now have coordinates; map is feasible
+### Overview
+Phase 4 adds intelligence on top of the existing 1,064-project database: auto-computed confidence ratings, developer portfolio pages, COD drift analytics, and a map view. All four features build on data already in the DB — no new external API calls needed.
 
-### Medium Term
-5. **Monthly performance data** — Change interval from annual to monthly for sparklines/seasonal patterns
-6. **Emissions data** — Add `emissions` metric to OpenElectricity data fetch (0 extra API calls)
-7. **Watchlist feature** — User-defined project watchlists with change notifications
-8. **New England REZ access rights** — Populate when declared (~Q2 2026)
-9. **Operations-to-development mapping** — Show nearby operating performance for proposed projects
+### Current State (Pre-Implementation)
+- `data_confidence` column exists in `projects` table (values: high/good/medium/low/unverified)
+- Current distribution: 52 high, 1 good, 8 medium, 1,003 low — most set manually, needs auto-computation
+- `ConfidenceDots.tsx` component already exists (4-dot visual with colors)
+- `by-developer.json` index already exported (718 distinct developers)
+- `cod_history` table exists but sparse (10 records across 5 projects)
+- 250 projects have lat/lon coordinates; exported as `coordinates: { lat, lng }` in JSON
+- No mapping library installed yet
+
+---
+
+### Step 4.1: Auto-Computed Confidence Ratings
+
+**Goal:** Replace manual confidence assignments with a scoring algorithm that evaluates data completeness per project.
+
+**New file:** `pipeline/processors/compute_confidence.py` (~150 lines)
+
+Scoring algorithm (points → tier):
+| Signal | Points | Max |
+|--------|--------|-----|
+| Timeline events | 3 per event | 15 |
+| Coordinates present | 10 | 10 |
+| Performance data (any year) | 10 | 10 |
+| COD history (2+ entries) | 10 | 10 |
+| Ownership history exists | 5 | 5 |
+| Notable description (>50 chars) | 10 | 10 |
+| High-tier sources (tier 1-2) | 5 per source | 15 |
+| Has current_developer | 5 | 5 |
+| Has storage_mwh (for BESS/hybrid) | 5 | 5 |
+| Has OEM/turbine model | 5 | 5 |
+
+Tier mapping:
+- **HIGH** (75-100): Deeply enriched, multiple sources
+- **GOOD** (50-74): Good coverage, most fields populated
+- **MEDIUM** (25-49): Basic data plus some enrichment
+- **LOW** (0-24): Minimal data (AEMO import only)
+
+Steps:
+- [x] Schema: `data_confidence` column already exists
+- [ ] Build `compute_confidence.py` — query all data signals per project, compute score, update `data_confidence`
+- [ ] Add `confidence_score` INTEGER column to projects table (migration 005) — store raw numeric score
+- [ ] Run processor: `python3 pipeline/processors/compute_confidence.py`
+- [ ] Update JSON export to include `confidence_score` in project index
+- [ ] Frontend: show ConfidenceDots on ProjectList cards + ProjectDetail header
+- [ ] Frontend: add confidence filter to ProjectList page (filter by tier)
+- [ ] Frontend: show confidence breakdown stats on Dashboard (% high/good/medium/low)
+
+**Files to modify:**
+- NEW: `pipeline/processors/compute_confidence.py`
+- NEW: `database/migrations/005_confidence_score.sql`
+- MODIFY: `pipeline/exporters/export_json.py` — export confidence_score
+- MODIFY: `frontend/src/lib/types.ts` — add confidence_score to ProjectSummary
+- MODIFY: `frontend/src/pages/ProjectList.tsx` — confidence filter + dots on cards
+- MODIFY: `frontend/src/pages/ProjectDetail.tsx` — confidence dots in header
+
+---
+
+### Step 4.2: Developer Portfolio Pages
+
+**Goal:** New `/developers` list page + `/developers/:name` detail page showing portfolio aggregation per developer.
+
+**Data available:**
+- 718 distinct developers in `current_developer` column
+- `by-developer.json` already maps developer → project IDs
+- Top developers: Hydro-Electric Corp (22), Edify Energy (16), Neoen (11), X-Elio (11), ARK Energy (10)
+
+**New export:** `pipeline/exporters/export_json.py` → add `export_developer_profiles()`:
+
+Output: `frontend/public/data/indexes/developer-profiles.json`
+```json
+{
+  "developers": [
+    {
+      "slug": "neoen-australia",
+      "name": "Neoen Australia",
+      "project_count": 11,
+      "total_capacity_mw": 2450,
+      "total_storage_mwh": 1200,
+      "by_technology": { "wind": 3, "solar": 4, "bess": 4 },
+      "by_status": { "operating": 5, "construction": 3, "development": 3 },
+      "states": ["NSW", "VIC", "SA"],
+      "avg_confidence": "good",
+      "project_ids": ["hornsdale-power-reserve", ...]
+    }
+  ],
+  "total_developers": 718
+}
+```
+
+**Frontend pages:**
+- `/developers` — searchable list, sorted by total capacity, cards with tech breakdown
+- `/developers/:slug` — full portfolio: stats cards, project list, tech mix chart, state breakdown
+
+Steps:
+- [ ] Add `export_developer_profiles()` to `export_json.py`
+- [ ] Create slug generation (lowercase, hyphenated, deduplicated)
+- [ ] Run export, verify JSON output
+- [ ] NEW: `frontend/src/hooks/useDeveloperData.ts` — fetch and filter developer profiles
+- [ ] NEW: `frontend/src/pages/DeveloperList.tsx` — searchable developer grid (~300 lines)
+- [ ] NEW: `frontend/src/pages/DeveloperDetail.tsx` — portfolio page with charts (~400 lines)
+- [ ] Add routes: `/developers`, `/developers/:slug`
+- [ ] Add "Developers" to navigation (desktop sidebar after Performance, mobile: replace or add)
+
+**Files to modify:**
+- MODIFY: `pipeline/exporters/export_json.py` — add developer profile export
+- NEW: `frontend/src/hooks/useDeveloperData.ts`
+- NEW: `frontend/src/pages/DeveloperList.tsx`
+- NEW: `frontend/src/pages/DeveloperDetail.tsx`
+- MODIFY: `frontend/src/lib/dataService.ts` — add fetchDeveloperProfiles, fetchDeveloperDetail
+- MODIFY: `frontend/src/App.tsx` — add routes
+- MODIFY: `frontend/src/components/Layout.tsx` — add to nav
+
+---
+
+### Step 4.3: Map View
+
+**Goal:** Interactive map showing 250+ geolocated projects with clustering, tech-colored markers, and click-to-detail.
+
+**Library:** Leaflet + React-Leaflet (open-source, no API key, OSM tiles)
+- `npm install leaflet react-leaflet`
+- `npm install -D @types/leaflet`
+
+**Data:** Project index already includes coordinates. Create a filtered coordinates index for faster map loading:
+
+Output: `frontend/public/data/indexes/by-coordinates.json`
+```json
+[
+  {
+    "id": "golden-plains-wind",
+    "name": "Golden Plains Wind Farm",
+    "technology": "wind",
+    "status": "construction",
+    "capacity_mw": 1300,
+    "state": "VIC",
+    "lat": -37.78,
+    "lng": 143.94
+  }
+]
+```
+
+**Frontend page:** `/map` (~350 lines)
+- Full-viewport map (mobile: full screen minus nav; desktop: full minus sidebar)
+- Marker clustering (react-leaflet-cluster or manual)
+- Tech-colored markers using TECHNOLOGY_CONFIG colors
+- Click marker → popup with name, tech, capacity, status, link to detail
+- Filter panel: technology pills + status pills (overlay on map)
+- REZ zone boundaries (stretch goal — GeoJSON overlays)
+- Australia-centered default view: `[-25.5, 134]` zoom 4
+
+Steps:
+- [ ] `npm install leaflet react-leaflet @types/leaflet` in frontend/
+- [ ] Add coordinates index export to `export_json.py`
+- [ ] Run export, verify JSON
+- [ ] NEW: `frontend/src/pages/MapView.tsx` — Leaflet map with markers + filters
+- [ ] NEW: `frontend/src/hooks/useMapData.ts` — fetch coordinates index
+- [ ] Import Leaflet CSS in `main.tsx` or `index.css`
+- [ ] Add route: `/map`
+- [ ] Add "Map" to navigation (desktop sidebar, mobile nav)
+- [ ] Test mobile responsiveness (touch zoom, popup sizing)
+
+**Files to modify:**
+- MODIFY: `pipeline/exporters/export_json.py` — add coordinates index export
+- MODIFY: `frontend/package.json` — add leaflet + react-leaflet
+- NEW: `frontend/src/pages/MapView.tsx`
+- NEW: `frontend/src/hooks/useMapData.ts`
+- MODIFY: `frontend/src/lib/dataService.ts` — add fetchMapData
+- MODIFY: `frontend/src/App.tsx` — add route
+- MODIFY: `frontend/src/components/Layout.tsx` — add to nav
+- MODIFY: `frontend/src/index.css` or `main.tsx` — Leaflet CSS import
+
+---
+
+### Step 4.4: COD Drift Analytics
+
+**Goal:** Visualise COD drift patterns — which projects are delayed, by how much, and trends by technology.
+
+**Current data limitations:**
+- Only 10 `cod_history` records across 5 projects (very sparse)
+- `cod_original` and `cod_current` columns exist on most projects but many are NULL
+- Timeline events with type `cod_change` could be mined
+
+**Approach:** Two-part — (A) harvest more COD data from existing DB, (B) build drift visualisation.
+
+**(A) COD Data Harvester:** `pipeline/processors/harvest_cod_drift.py` (~150 lines)
+- Parse `cod_original` and `cod_current` from all projects with both fields
+- Calculate drift_months = difference between original and current
+- Create summary stats by technology and year
+- Export: `frontend/public/data/indexes/cod-drift.json`
+```json
+{
+  "projects_with_drift": 120,
+  "avg_drift_months": { "wind": 8.2, "solar": 5.1, "bess": 3.7 },
+  "by_project": [
+    { "id": "...", "name": "...", "technology": "wind", "original": "2024", "current": "2026", "drift_months": 24 }
+  ]
+}
+```
+
+**(B) Frontend:** Add COD drift section to Dashboard or as sub-tab on Performance page
+- Bar chart: average drift by technology
+- Scatter plot: project capacity vs drift months
+- Top 10 most delayed projects list
+- Could also add drift indicator on ProjectDetail (already partially shown)
+
+Steps:
+- [ ] Build `harvest_cod_drift.py` — parse cod_original/cod_current, compute drift
+- [ ] Add drift export to `export_json.py`
+- [ ] Run export, verify JSON
+- [ ] Frontend: COD drift chart component (Recharts bar + scatter)
+- [ ] Integrate into Dashboard or Performance page as a new section/tab
+- [ ] Add drift badge to ProjectDetail header (e.g., "⏳ 18 months delayed")
+
+**Files to modify:**
+- NEW: `pipeline/processors/harvest_cod_drift.py`
+- MODIFY: `pipeline/exporters/export_json.py` — add drift export
+- NEW or MODIFY: Frontend component for drift charts
+- MODIFY: `frontend/src/pages/ProjectDetail.tsx` — drift badge
+
+---
+
+### Implementation Order
+
+| # | Task | Est. Lines | Dependencies | Priority |
+|---|------|-----------|--------------|----------|
+| 4.1 | Confidence scoring pipeline | ~150 | None | HIGH |
+| 4.1b | Confidence UI (filters, dots) | ~100 | 4.1 | HIGH |
+| 4.2 | Developer profile export | ~100 | None | HIGH |
+| 4.2b | Developer list + detail pages | ~700 | 4.2 | HIGH |
+| 4.3 | Map view (Leaflet) | ~400 | None | MEDIUM |
+| 4.3b | Map filters + clustering | ~150 | 4.3 | MEDIUM |
+| 4.4 | COD drift harvester | ~150 | None | LOW (sparse data) |
+| 4.4b | COD drift visualisation | ~200 | 4.4 | LOW |
+| 4.5 | Navigation update (final) | ~50 | 4.2b, 4.3 | After all pages |
+| 4.6 | Build verify + push | — | All | Last |
+
+**Recommended session plan:**
+- **Session 11:** Steps 4.1 + 4.1b (confidence) + 4.2 (developer export) — pipeline work
+- **Session 12:** Steps 4.2b (developer pages) + 4.3 (map view) — main frontend
+- **Session 13:** Steps 4.4 (COD drift) + 4.5 (nav) + 4.6 (verify/push) — finish + polish
+
+---
+
+### Verification Checklist
+- [ ] `python3 pipeline/processors/compute_confidence.py` updates all 1,064 projects
+- [ ] `python3 pipeline/exporters/export_json.py` exports developer-profiles.json + by-coordinates.json + cod-drift.json
+- [ ] `npx tsc -b && npx vite build` passes clean
+- [ ] `/developers` renders searchable developer grid
+- [ ] `/developers/:slug` renders portfolio with charts
+- [ ] `/map` renders Leaflet map with 250+ markers, clustering, tech colors
+- [ ] ProjectList shows confidence dots, filterable by tier
+- [ ] ProjectDetail shows confidence score + drift badge
+- [ ] Desktop sidebar: 10 items (Home, Dashboard, Projects, Performance, Developers, Map, Schemes, REZ, Guides, Search)
+- [ ] Mobile bottom nav: 5 items (Home, Projects, Map, REZ, Search) — or reconfigure for best UX
+- [ ] No console errors on any page
+
+---
+
+## What To Build After Phase 4
+
+### Medium Term (Phase 5+)
+1. **Monthly performance data** — Change interval from annual to monthly for sparklines/seasonal patterns
+2. **Emissions data** — Add `emissions` metric to OpenElectricity data fetch (0 extra API calls)
+3. **Watchlist feature** — User-defined project watchlists with change notifications
+4. **New England REZ access rights** — Populate when declared (~Q2 2026)
+5. **Operations-to-development mapping** — Show nearby operating performance for proposed projects
+6. **REZ zone GeoJSON overlays** — Show REZ boundaries on map view
