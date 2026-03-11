@@ -15,7 +15,7 @@
 | Phase 2.5: NEM Dashboard + REZ | ✅ Complete | 100% |
 | Phase 3: Performance | ✅ Complete | 100% |
 | Phase 3.5: Data Quality + Enrichment | ✅ Complete | 100% |
-| Phase 4: Intelligence | In Progress | 0% |
+| Phase 4: Intelligence | In Progress | 15% |
 | Phase 5: Data Enrichment | Ongoing | 25% |
 
 ---
@@ -409,6 +409,20 @@ Layer 3: PWA FRONTEND  ✅ BUILT & DEPLOYED
 - **Duplicate resolution**: Blue Mackerel North has 2 AEMO entries flagged; original 3 duplicates already resolved
 - **Phase 3.5 declared complete**
 
+### Session 11 — 2026-03-12
+- **Offshore wind toggle**: Added toggle to NEM Dashboard that excludes offshore_wind from all charts + headline stats (defaults to OFF)
+  - `useNEMStats` now accepts `excludeTechs` filter, added `total_projects` to stats
+  - Pill-shaped toggle button with 🌊 icon, ON/OFF indicator, sky-blue accent when active
+  - Fixed hardcoded "1,067 projects" to dynamic count
+- **Phase 4 plan written**: Detailed implementation plan for confidence, developer profiles, map view, COD drift stored in BUILD-TRACKER
+- **Phase 4.1 started — Confidence scoring**:
+  - Built `compute_confidence.py` processor — evaluates 10+ data completeness signals per project
+  - Added `confidence_score` column (migration 005)
+  - Scored all 1,064 projects: 4 high (Eraring Battery, Golden Plains, VBB, Yanco Delta), 30 good, 260 medium, 770 low
+  - Exported confidence_score in project index + detail JSON
+  - Frontend type updated (`confidence_score` in ProjectSummary)
+  - **Remaining**: ConfidenceDots on cards, confidence filter on ProjectList, confidence stats on Dashboard
+
 ---
 
 ## Phase 4: Intelligence Layer — IN PROGRESS
@@ -455,10 +469,10 @@ Tier mapping:
 
 Steps:
 - [x] Schema: `data_confidence` column already exists
-- [ ] Build `compute_confidence.py` — query all data signals per project, compute score, update `data_confidence`
-- [ ] Add `confidence_score` INTEGER column to projects table (migration 005) — store raw numeric score
-- [ ] Run processor: `python3 pipeline/processors/compute_confidence.py`
-- [ ] Update JSON export to include `confidence_score` in project index
+- [x] Build `compute_confidence.py` — query all data signals per project, compute score, update `data_confidence`
+- [x] Add `confidence_score` INTEGER column to projects table (migration 005) — store raw numeric score
+- [x] Run processor — Distribution: 4 high, 30 good, 260 medium, 770 low
+- [x] Update JSON export to include `confidence_score` in project index + detail
 - [ ] Frontend: show ConfidenceDots on ProjectList cards + ProjectDetail header
 - [ ] Frontend: add confidence filter to ProjectList page (filter by tier)
 - [ ] Frontend: show confidence breakdown stats on Dashboard (% high/good/medium/low)
