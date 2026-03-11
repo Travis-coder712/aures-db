@@ -170,7 +170,7 @@
     "hollow-tree-wind-farm",
     "stockyard-hill-wind-farm"
   ],
-  "Nexsphere Pty Ltd": [
+  "Nexsphere (formerly Brookvale Energy)": [
     "bass-offshore-wind-energy-project"
   ],
   "Hydro-Electric Corporation": [
@@ -315,10 +315,8 @@
     "south-burnett-bess",
     "willavale-solar-farm"
   ],
-  "Arup Australia Pty Ltd": [
-    "blue-mackerel-north-off-shore-wind-farm"
-  ],
-  "Blue Mackerel North": [
+  "JERA Nex bp (50:50 JV JERA Co. / bp, via Parkwind)": [
+    "blue-mackerel-north-off-shore-wind-farm",
     "blue-mackerel-north-offshore-wind-farm"
   ],
   "Blyth Battery P/L as trustee for Blyth Battery Trust": [
@@ -570,7 +568,7 @@
   "Canunda Power Pty Ltd": [
     "canunda"
   ],
-  "NeuGen Technology P/L": [
+  "Unknown (Shelved)": [
     "cape-winds-offshore-wind-farm"
   ],
   "Capital Wind Farm 2 Pty Ltd": [
@@ -651,7 +649,6 @@
     "clarke-creek-wind-farm-stage-2",
     "jeremiah-wind-farm",
     "koorakee-wind-farm",
-    "spicers-creek-wind-farm",
     "uungula-bess"
   ],
   "Pacific Blue (SPIC China)": [
@@ -868,7 +865,7 @@
     "devlins-bridge-battery-storage",
     "devlins-wind-farm"
   ],
-  "Spark Renewables Pty Ltd": [
+  "Spark Renewables (Tenaga Nasional Berhad subsidiary)": [
     "dinawan-energy-hub"
   ],
   "ESCO Pacific": [
@@ -891,6 +888,7 @@
   ],
   "Tilt Renewables": [
     "dundonnell-wind-farm",
+    "liverpool-range-wind-farm",
     "snowtown-north-solar-farm",
     "snowtown-north-solar-farm-bess"
   ],
@@ -919,7 +917,7 @@
   "Terang ESS Pty Ltd as trustee for the TESS Project Trust": [
     "east-terang-bess-kci"
   ],
-  "Eastern Rise OWP Project Pty Ltd": [
+  "BlueFloat Energy / Origin Energy (CANCELLED)": [
     "eastern-rise-offshore-wind"
   ],
   "Bridge Energy Pty Ltd": [
@@ -929,11 +927,8 @@
     "edderton-hybrid-faciility-solar",
     "edderton-hybrid-facility-bess"
   ],
-  "OceanEx Energy": [
-    "eden-offshore-wind-farm",
-    "illawarra-offshore-wind-farm",
-    "novocastrian-offshore-wind-farm",
-    "ulladulla-offshore-wind-farm"
+  "Oceanex Energy (Equinor withdrew)": [
+    "eden-offshore-wind-farm"
   ],
   "Edenvale Solar Park Pty Ltd": [
     "edenvale-solar-park"
@@ -1050,8 +1045,9 @@
   "Gillenbah BESS Development Pty Ltd": [
     "gillenbah-bess-kci"
   ],
-  "Gippsland Dawn OWP Project Pty Ltd": [
-    "gippsland-dawn-offshore-wind-project"
+  "BlueFloat Energy / Energy Estate (CANCELLED)": [
+    "gippsland-dawn-offshore-wind-project",
+    "southern-winds-offshore-wind"
   ],
   "Giragarre Solar Farm Pty Ltd as trustee for Giragarre Solar Farm Trust": [
     "girgarre-solar-farm"
@@ -1149,10 +1145,8 @@
   "Granville Harbour Operations Pty Ltd as trustee for Granville Harbour Operations Trust": [
     "granville-harbour-wind-farm"
   ],
-  "GIG Australian Offshore Wind Energy Holdings Pty Ltd": [
-    "great-eastern-offshore-wind-kci"
-  ],
-  "Greater Southern Offshore Wind Farm Project Co Pty Ltd": [
+  "Corio Generation (Macquarie Green Investment Group)": [
+    "great-eastern-offshore-wind-kci",
     "greater-southern-offshore-wind-kci"
   ],
   "Solquartz Holdings Pty Ltd": [
@@ -1358,6 +1352,9 @@
   "brightnightpower_NR": [
     "ilford-green-energy-hub"
   ],
+  "Equinor / Oceanex Energy (WITHDRAWN)": [
+    "illawarra-offshore-wind-farm"
+  ],
   "Inverell BESS Development Pty Ltd": [
     "inverell-battery-energy-storage-system"
   ],
@@ -1536,9 +1533,6 @@
   ],
   "Clean Technology Partners": [
     "little-river-solar-farm-kci"
-  ],
-  "Liverpool Range Wind Farm Pty Ltd": [
-    "liverpool-range-wind-farm"
   ],
   "Stanwell Lockyer Project Co Pty Ltd": [
     "lockyer-valley-energy-project"
@@ -1837,6 +1831,9 @@
   "NPSF Renewables Pty Ltd": [
     "nottingham-park-solar-farm-kci"
   ],
+  "Equinor / Oceanex Energy (LICENCE DECLINED)": [
+    "novocastrian-offshore-wind-farm"
+  ],
   "Numurkah Solar Farm Pty Ltd": [
     "numurkah-solar-farm"
   ],
@@ -1853,7 +1850,7 @@
   "Overland Sun Farm Holdings Pty Ltd": [
     "orange-grove-sun-farm"
   ],
-  "orsted_nr": [
+  "\u00d8rsted Offshore Australia 1 Pty Ltd": [
     "orsted-gippsland-a-and-b-windfarm",
     "orsted-gippsland-c-windfarm"
   ],
@@ -2057,7 +2054,7 @@
   "SWF1 Operations Holdings Pty Ltd as trustee for SWF1 Hold Trust": [
     "sapphire-wind-farm"
   ],
-  "BayWa r.e. Australia Offshore Wind Projects 3 Pty Ltd": [
+  "BayWa r.e. Australia (AEMO-registered developer)": [
     "seaspray-off-shore-wind-farm"
   ],
   "Sebastopol Asset Co Pty Ltd ATF Sebastopol Asset Trust": [
@@ -2088,13 +2085,14 @@
     "south-nanango-bess",
     "wamuran-bess-kci"
   ],
-  "South Pacific OWP Project Pty Ltd": [
+  "BlueFloat Energy / Energy Estate (LIKELY CANCELLED)": [
     "south-pacific-offshore-wind-project"
   ],
-  "Southern Winds OWP Project Pty Ltd": [
-    "southern-winds-offshore-wind"
+  "Squadron Energy (Tattarang)": [
+    "spicers-creek-wind-farm",
+    "uungula-wind-farm"
   ],
-  "Alinta Energy Retail Sales Pty Ltd": [
+  "Alinta Energy / JERA Nex (Parkwind)": [
     "spinifex-offshore-wind-farm"
   ],
   "progresspower_nr": [
@@ -2103,7 +2101,7 @@
   "Stanwell Corporation Limited": [
     "stanwell-bess"
   ],
-  "Star of the South Wind Farm Pty Ltd as trustee for the Star of the South Trust": [
+  "Southerly Ten (Copenhagen Infrastructure Partners / Cbus Super)": [
     "star-of-the-south-wind-farm"
   ],
   "Stoney Creek BESS Pty Ltd": [
@@ -2280,6 +2278,9 @@
   "Ulinda Park ProjectCo Pty Ltd": [
     "ulinda-park-bess"
   ],
+  "OceanEx Energy": [
+    "ulladulla-offshore-wind-farm"
+  ],
   "European Energy S/A": [
     "upper-calliope-solar-farm-side-a"
   ],
@@ -2288,9 +2289,6 @@
   ],
   "Upper Hunter Energy Park Pty Ltd": [
     "upper-hunter-energy-park-wind"
-  ],
-  "Squadron Energy (Tattarang)": [
-    "uungula-wind-farm"
   ],
   "Delta Power and Energy (Vales Point) Pty Ltd trading as Delta Electricity": [
     "vales-point-bess"
@@ -2486,7 +2484,7 @@
   "Acenergy Pty Ltd": [
     "yanco-bess"
   ],
-  "Yanco Delta Wind Farm Pty Ltd": [
+  "Origin Energy (acquired from Virya Energy)": [
     "yanco-delta-wind-farm"
   ],
   "Yarranlea Solar Pty Ltd": [

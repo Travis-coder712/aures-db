@@ -494,8 +494,8 @@
     "status": "development",
     "capacity_mw": 500.0,
     "state": "TAS",
-    "current_developer": "Nexsphere Pty Ltd",
-    "data_confidence": "low"
+    "current_developer": "Nexsphere (formerly Brookvale Energy)",
+    "data_confidence": "medium"
   },
   {
     "id": "bastyan",
@@ -756,6 +756,7 @@
     "storage_mwh": 600.0,
     "state": "NSW",
     "current_developer": "ACEN RENEWABLES",
+    "rez": "nsw-central-west-orana",
     "data_confidence": "low"
   },
   {
@@ -889,11 +890,11 @@
   {
     "id": "blue-mackerel-north-off-shore-wind-farm",
     "name": "Blue Mackerel North Off Shore Wind Farm",
-    "technology": "wind",
+    "technology": "offshore_wind",
     "status": "development",
     "capacity_mw": 1819.0,
     "state": "VIC",
-    "current_developer": "Arup Australia Pty Ltd",
+    "current_developer": "JERA Nex bp (50:50 JV JERA Co. / bp, via Parkwind)",
     "data_confidence": "low"
   },
   {
@@ -903,8 +904,8 @@
     "status": "development",
     "capacity_mw": 1005.0,
     "state": "VIC",
-    "current_developer": "Blue Mackerel North",
-    "data_confidence": "low"
+    "current_developer": "JERA Nex bp (50:50 JV JERA Co. / bp, via Parkwind)",
+    "data_confidence": "high"
   },
   {
     "id": "bluegrass-solar-farm",
@@ -1805,8 +1806,8 @@
     "status": "development",
     "capacity_mw": 2000.0,
     "state": "VIC",
-    "current_developer": "NeuGen Technology P/L",
-    "data_confidence": "low"
+    "current_developer": "Unknown (Shelved)",
+    "data_confidence": "medium"
   },
   {
     "id": "capital-2-wind-farm",
@@ -2151,6 +2152,7 @@
     "storage_mwh": 800.73,
     "state": "NSW",
     "current_developer": "Pacific Partnerships",
+    "rez": "nsw-central-west-orana",
     "data_confidence": "low"
   },
   {
@@ -2716,7 +2718,7 @@
   {
     "id": "deal-1-west-off-shore-wind-farm",
     "name": "Deal 1 (West) Off Shore Wind Farm",
-    "technology": "wind",
+    "technology": "offshore_wind",
     "status": "development",
     "capacity_mw": 2970.0,
     "state": "VIC",
@@ -2726,7 +2728,7 @@
   {
     "id": "deal-2-east-off-shore-wind-farm",
     "name": "Deal 2 (East) Off Shore Wind Farm",
-    "technology": "wind",
+    "technology": "offshore_wind",
     "status": "development",
     "capacity_mw": 2968.0,
     "state": "VIC",
@@ -2879,9 +2881,9 @@
     "capacity_mw": 1007.0,
     "storage_mwh": 1238.4,
     "state": "NSW",
-    "current_developer": "Spark Renewables Pty Ltd",
+    "current_developer": "Spark Renewables (Tenaga Nasional Berhad subsidiary)",
     "rez": "nsw-south-west",
-    "data_confidence": "low"
+    "data_confidence": "high"
   },
   {
     "id": "dingo-solar-farm",
@@ -3048,8 +3050,8 @@
     "status": "development",
     "capacity_mw": 1725.0,
     "state": "NSW",
-    "current_developer": "Eastern Rise OWP Project Pty Ltd",
-    "data_confidence": "low"
+    "current_developer": "BlueFloat Energy / Origin Energy (CANCELLED)",
+    "data_confidence": "high"
   },
   {
     "id": "ebor-bess",
@@ -3088,8 +3090,8 @@
     "status": "development",
     "capacity_mw": 2000.0,
     "state": "NSW",
-    "current_developer": "OceanEx Energy",
-    "data_confidence": "low"
+    "current_developer": "Oceanex Energy (Equinor withdrew)",
+    "data_confidence": "high"
   },
   {
     "id": "edenvale-solar-park",
@@ -3621,8 +3623,8 @@
     "status": "development",
     "capacity_mw": 2100.0,
     "state": "VIC",
-    "current_developer": "Gippsland Dawn OWP Project Pty Ltd",
-    "data_confidence": "low"
+    "current_developer": "BlueFloat Energy / Energy Estate (CANCELLED)",
+    "data_confidence": "high"
   },
   {
     "id": "girgarre-solar-farm",
@@ -4057,8 +4059,8 @@
     "status": "development",
     "capacity_mw": 2508.0,
     "state": "VIC",
-    "current_developer": "GIG Australian Offshore Wind Energy Holdings Pty Ltd",
-    "data_confidence": "low"
+    "current_developer": "Corio Generation (Macquarie Green Investment Group)",
+    "data_confidence": "high"
   },
   {
     "id": "great-lakes-battery",
@@ -4089,8 +4091,8 @@
     "status": "development",
     "capacity_mw": 1500.0,
     "state": "VIC",
-    "current_developer": "Greater Southern Offshore Wind Farm Project Co Pty Ltd",
-    "data_confidence": "low"
+    "current_developer": "Corio Generation (Macquarie Green Investment Group)",
+    "data_confidence": "medium"
   },
   {
     "id": "green-poly-bess-project-kci",
@@ -4935,7 +4937,7 @@
     "capacity_mw": 1400.0,
     "state": "NSW",
     "current_developer": "Energy Estate",
-    "data_confidence": "low"
+    "data_confidence": "medium"
   },
   {
     "id": "ilford-green-energy-hub",
@@ -4955,8 +4957,8 @@
     "status": "development",
     "capacity_mw": 2000.0,
     "state": "NSW",
-    "current_developer": "OceanEx Energy",
-    "data_confidence": "low"
+    "current_developer": "Equinor / Oceanex Energy (WITHDRAWN)",
+    "data_confidence": "high"
   },
   {
     "id": "inverell-battery-energy-storage-system",
@@ -5861,9 +5863,9 @@
     "status": "development",
     "capacity_mw": 1338.0,
     "state": "NSW",
-    "current_developer": "Liverpool Range Wind Farm Pty Ltd",
+    "current_developer": "Tilt Renewables",
     "rez": "nsw-central-west-orana",
-    "data_confidence": "low"
+    "data_confidence": "medium"
   },
   {
     "id": "lockyer-valley-energy-project",
@@ -7386,8 +7388,8 @@
     "status": "development",
     "capacity_mw": 2000.0,
     "state": "NSW",
-    "current_developer": "OceanEx Energy",
-    "data_confidence": "low"
+    "current_developer": "Equinor / Oceanex Energy (LICENCE DECLINED)",
+    "data_confidence": "high"
   },
   {
     "id": "nowingi-solar-farm-edify-kci",
@@ -7520,22 +7522,22 @@
   {
     "id": "orsted-gippsland-a-and-b-windfarm",
     "name": "Orsted Gippsland A and B Windfarm",
-    "technology": "wind",
+    "technology": "offshore_wind",
     "status": "development",
     "capacity_mw": 2820.0,
     "state": "VIC",
-    "current_developer": "orsted_nr",
-    "data_confidence": "low"
+    "current_developer": "\u00d8rsted Offshore Australia 1 Pty Ltd",
+    "data_confidence": "high"
   },
   {
     "id": "orsted-gippsland-c-windfarm",
     "name": "Orsted Gippsland C Windfarm",
-    "technology": "wind",
+    "technology": "offshore_wind",
     "status": "development",
     "capacity_mw": 2820.0,
     "state": "VIC",
-    "current_developer": "orsted_nr",
-    "data_confidence": "low"
+    "current_developer": "\u00d8rsted Offshore Australia 1 Pty Ltd",
+    "data_confidence": "high"
   },
   {
     "id": "osborne-bess",
@@ -8652,6 +8654,7 @@
     "storage_mwh": 1400.0,
     "state": "NSW",
     "current_developer": "Lightsource Development Services Australia Pty Ltd",
+    "rez": "nsw-central-west-orana",
     "data_confidence": "low"
   },
   {
@@ -8689,11 +8692,11 @@
   {
     "id": "seaspray-off-shore-wind-farm",
     "name": "Seaspray Off Shore Wind Farm",
-    "technology": "wind",
+    "technology": "offshore_wind",
     "status": "development",
     "capacity_mw": 3000.0,
     "state": "VIC",
-    "current_developer": "BayWa r.e. Australia Offshore Wind Projects 3 Pty Ltd",
+    "current_developer": "BayWa r.e. Australia (AEMO-registered developer)",
     "data_confidence": "low"
   },
   {
@@ -8920,8 +8923,8 @@
     "status": "development",
     "capacity_mw": 1600.0,
     "state": "NSW",
-    "current_developer": "South Pacific OWP Project Pty Ltd",
-    "data_confidence": "low"
+    "current_developer": "BlueFloat Energy / Energy Estate (LIKELY CANCELLED)",
+    "data_confidence": "medium"
   },
   {
     "id": "southern-winds-offshore-wind",
@@ -8930,8 +8933,8 @@
     "status": "development",
     "capacity_mw": 1155.0,
     "state": "VIC",
-    "current_developer": "Southern Winds OWP Project Pty Ltd",
-    "data_confidence": "low"
+    "current_developer": "BlueFloat Energy / Energy Estate (CANCELLED)",
+    "data_confidence": "high"
   },
   {
     "id": "specimen-hill-bess-storage-kci",
@@ -8960,9 +8963,9 @@
     "status": "development",
     "capacity_mw": 702.0,
     "state": "NSW",
-    "current_developer": "Squadron Energy Services Pty Ltd",
+    "current_developer": "Squadron Energy (Tattarang)",
     "rez": "nsw-central-west-orana",
-    "data_confidence": "low"
+    "data_confidence": "medium"
   },
   {
     "id": "spinifex-offshore-wind-farm",
@@ -8971,8 +8974,8 @@
     "status": "development",
     "capacity_mw": 1200.0,
     "state": "VIC",
-    "current_developer": "Alinta Energy Retail Sales Pty Ltd",
-    "data_confidence": "low"
+    "current_developer": "Alinta Energy / JERA Nex (Parkwind)",
+    "data_confidence": "high"
   },
   {
     "id": "springlands-wind-farm",
@@ -9023,8 +9026,8 @@
     "status": "development",
     "capacity_mw": 2205.0,
     "state": "VIC",
-    "current_developer": "Star of the South Wind Farm Pty Ltd as trustee for the Star of the South Trust",
-    "data_confidence": "low"
+    "current_developer": "Southerly Ten (Copenhagen Infrastructure Partners / Cbus Super)",
+    "data_confidence": "high"
   },
   {
     "id": "starfish-hill",
@@ -11249,9 +11252,9 @@
     "status": "development",
     "capacity_mw": 1460.0,
     "state": "NSW",
-    "current_developer": "Yanco Delta Wind Farm Pty Ltd",
+    "current_developer": "Origin Energy (acquired from Virya Energy)",
     "rez": "nsw-south-west",
-    "data_confidence": "low"
+    "data_confidence": "high"
   },
   {
     "id": "yanco-solar-farm",

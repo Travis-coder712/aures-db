@@ -1,8 +1,8 @@
 # AURES Database — Build Tracker
 
-> **Last Updated:** 2026-03-11
-> **Current Phase:** Between Phase 3 and Phase 4
-> **Status:** Phases 1-3 complete. 1,067 projects, 224 with real performance data from OpenElectricity API. League tables for wind (82), solar (80), BESS (28), pumped hydro (34). 473 timeline events auto-populated. 3 duplicate projects to resolve.
+> **Last Updated:** 2026-03-12
+> **Current Phase:** Phase 3.5 complete, ready for Phase 4
+> **Status:** Phases 1-3.5 complete. 1,064 projects (incl. 22 offshore wind). Real 2024+2025 performance data + 2026 YTD from OpenElectricity API. 593 timeline events. 250 projects with coordinates. Offshore wind fully enriched. REZ access rights populated (CWO 10 projects, SW 4 projects). Info tooltips on Performance page.
 
 ---
 
@@ -14,9 +14,9 @@
 | Phase 2: CIS/LTESA/REZ | ✅ Complete | 100% |
 | Phase 2.5: NEM Dashboard + REZ | ✅ Complete | 100% |
 | Phase 3: Performance | ✅ Complete | 100% |
-| Phase 3.5: Data Quality + Enrichment | 🔄 In Progress | 30% |
+| Phase 3.5: Data Quality + Enrichment | ✅ Complete | 100% |
 | Phase 4: Intelligence | Not Started | 0% |
-| Phase 5: Data Enrichment | Ongoing | 10% |
+| Phase 5: Data Enrichment | Ongoing | 25% |
 
 ---
 
@@ -155,86 +155,69 @@
 | BESS | 17 | 6.8% util | $173k | $220 |
 | Pumped Hydro | 33 | 28.4% | $180k | $143 |
 
-**2025 — Sample Data (projected estimates)**
-| Technology | Projects | Avg CF | Avg Rev/MW |
-|-----------|----------|--------|------------|
-| Wind | 82 | 36.1% | $211k |
-| Solar | 80 | 21.5% | $97k |
-| BESS | 28 | 12.2% | $173k |
-| Pumped Hydro | 34 | 16.7% | $180k |
+**2025 — Real AEMO Data (via OpenElectricity)**
+| Technology | Projects | Data Source |
+|-----------|----------|-------------|
+| Wind | 82 | OpenElectricity API |
+| Solar | 80 | OpenElectricity API |
+| BESS | 28 | OpenElectricity API |
+| Pumped Hydro | 34 | OpenElectricity API |
+
+**2026 — Year-to-Date (Jan-Feb, via OpenElectricity)**
+| Technology | Projects | Data Source |
+|-----------|----------|-------------|
+| All techs | 221 | OpenElectricity API (YTD) |
 
 ---
 
-## Phase 3.5: Data Quality + Enrichment — 🔄 IN PROGRESS
+## Phase 3.5: Data Quality + Enrichment — ✅ COMPLETE
 
-### Known Issues
+### Completed
+- [x] **3 duplicate projects resolved** — Manual seeds removed, AEMO-linked entries retained
+- [x] **Offshore wind separated** — 22 projects reclassified from `wind` to `offshore_wind` (new tech category with 🌊 icon)
+- [x] **Real 2025 data imported** — Replaced all sample/dummy 2025 data with real OpenElectricity API data
+- [x] **2026 YTD data imported** — Jan-Feb 2026 data with adjusted CF calculation for partial year
+- [x] **Info tooltips added** — 11 metric definitions with formulas, sources, methodology section on Performance page
+- [x] **YTD badge support** — Blue "Year to Date" badge for 2026 data, auto-selects latest year
+- [x] **Offshore wind enrichment** — All 22 projects enriched with developer, status, timeline events, data confidence
+  - 6 active (Star of the South, Blue Mackerel, Ørsted x2, Great Eastern, Spinifex)
+  - 7 cancelled/failed (Gippsland Dawn, Cape Winds, Southern Winds, Eastern Rise, Illawarra, Novocastrian, Hunter CC)
+  - 9 early-stage/uncertain (Bass, Eden, South Pacific, Ulladulla, Seaspray, Deal 1/2, Greater Southern)
+- [x] **NSW REZ access rights populated** — CWO (10 projects, 7.15 GW), SW (4 projects, 3.56 GW)
+- [x] **Construction project coordinates** — 21 additional projects geolocated (250 total with coords)
+- [x] **Key development projects enriched** — Yanco Delta, Dinawan, Liverpool Range, Spicers Creek
+- [x] **~35 projects enriched** (Session 8) — Pumped hydro, BESS, wind construction projects
+- [x] **Home page updated** — 6 tech cards (wind, solar, BESS, hybrid, offshore wind, pumped hydro)
+- [x] **Performance page updated** — 5+ tech tabs, info tooltips, data source badges
 
-#### Duplicate Projects (3 pairs)
-| Duplicate | Keep | Remove | Reason |
-|-----------|------|--------|--------|
-| `coopers-gap-wind-farm` vs `coopers-gap-wind` | `coopers-gap-wind-farm` (has DUIDs) | `coopers-gap-wind` (manual seed) | AEMO-linked has real data |
-| `stockyard-hill-wind-farm` vs `stockyard-hill-wind` | `stockyard-hill-wind-farm` (has DUIDs) | `stockyard-hill-wind` (manual seed) | AEMO-linked has real data |
-| `new-england-solar-farm` vs `new-england-solar` | `new-england-solar-farm` (has DUIDs) | `new-england-solar` (manual seed, listed as hybrid) | AEMO-linked; separate BESS entry exists |
-
-**Root cause:** Manual exemplar seeds from Phase 1 created IDs like `coopers-gap-wind`, then the AEMO importer created `coopers-gap-wind-farm` from AEMO data. Both entries persist.
-
-#### Data Completeness by Status
-| Status | Projects | Has COD | Has Developer | Has Coords | Has Timeline |
-|--------|----------|---------|---------------|------------|-------------|
-| Operating | 224 | 224 ✅ | 224 ✅ | 224 ✅ | 224 ✅ |
-| Construction | 49 | 49 | 49 | 2 ❌ | 2 ❌ |
-| Commissioning | 11 | 11 | 11 | 0 ❌ | 0 ❌ |
-| Development | 783 | 329 | 783 | 2 ❌ | 2 ❌ |
-
-**Key gap:** Construction and development projects have almost no coordinates, timeline events, or enrichment beyond AEMO registration data.
-
-#### REZ Access Rights — Sparse
-Only 2 projects currently have REZ assignments:
-- Yanco Delta Solar Farm — SW REZ (manual seed)
-- New England Solar Farm — New England REZ (manual seed)
-
-NSW EII has awarded REZ access rights to dozens of projects across Central-West Orana, New England, South-West, and Hunter-Central Coast REZs. This data needs to be populated.
-
-### Enrichment Priorities
-
-**Tier 1 — Critical Projects (Construction, >200 MW)**
-49 construction projects totalling 15.2 GW. Top 10:
-1. Snowy 2.0 (2,200 MW pumped hydro, NSW)
-2. Golden Plains Wind Farm (1,300 MW, VIC)
-3. Golden Plains Wind Farm West (557 MW, VIC)
-4. Supernode BESS (520 MW, QLD)
-5. Liddell BESS (500 MW, NSW)
-6. Wambo Wind Farm (500 MW, QLD)
-7. Eraring Battery (460 MW, NSW)
-8. Goulburn River Solar Farm (450 MW, NSW)
-9. Orana BESS (415 MW, NSW)
-10. Uungula Wind Farm (414 MW, NSW)
-
-**Tier 2 — Large Development Projects (>500 MW)**
-Largest development projects by capacity — most likely to proceed.
-
-**Tier 3 — Projects with CIS/LTESA Contracts**
-Projects that have won scheme contracts are confirmed to proceed. Cross-reference with scheme_contracts table.
+### Remaining Known Issues
+- Blue Mackerel North has 2 AEMO entries (1,005 MW and 1,819 MW) — possible duplicate
+- New England REZ access scheme not yet declared (expected Q2 2026)
+- Hunter-Central Coast REZ has no access scheme yet
 
 ---
 
 ## Data Population Progress
 
-### Database: 1,067 Projects
+### Database: 1,064 Projects
 
-| Technology | Count | Capacity |
-|-----------|-------|----------|
-| BESS | 432 | 129.3 GW |
-| Wind | 235 | 129.5 GW |
-| Solar | 229 | 50.8 GW |
-| Hybrid | 110 | 45.3 GW |
-| Pumped Hydro | 61 | 29.1 GW |
+| Technology | Count |
+|-----------|-------|
+| BESS | 432 |
+| Wind | 211 |
+| Solar | 228 |
+| Hybrid | 110 |
+| Pumped Hydro | 61 |
+| Offshore Wind | 22 |
 
-### Timeline Events: 473 Total
+### Timeline Events: 593 Total
 | Source | Count |
 |--------|-------|
 | OpenElectricity (auto) | 441 |
-| Manual (seed data) | 32 |
+| Manual (enrichment) | 152 |
+
+### Coordinates: 250 Projects Geolocated
+### Notable Descriptions: 66 Projects
 
 ### Enriched Exemplar Projects (10)
 
@@ -245,9 +228,9 @@ Projects that have won scheme contracts are confirmed to proceed. Cross-referenc
 | 3 | Victorian Big Battery | BESS | VIC | Good (5 events incl. Megapack fire, Tesla OEM) |
 | 4 | Hornsdale Power Reserve | BESS | SA | Good (4 events, 3 phases, Tesla OEM) |
 | 5 | Waratah Super Battery | BESS | NSW | Good (3 events, Tesla OEM, SIPS) |
-| 6 | Stockyard Hill Wind Farm | Wind | VIC | Basic (3 events, Goldwind OEM, Origin PPA) — **DUPLICATE: merge with AEMO entry** |
-| 7 | Coopers Gap Wind Farm | Wind | QLD | **Enriched** (7 events, FID, tower felling, repairs) — **DUPLICATE: merge with AEMO entry** |
-| 8 | New England Solar Farm | Hybrid | NSW | Basic (3 events) — **DUPLICATE: merge with AEMO entry** |
+| 6 | Stockyard Hill Wind Farm | Wind | VIC | Basic (3 events, Goldwind OEM, Origin PPA) — ✅ duplicate resolved |
+| 7 | Coopers Gap Wind Farm | Wind | QLD | **Enriched** (7 events, FID, tower felling, repairs) — ✅ duplicate resolved |
+| 8 | New England Solar Farm | Hybrid | NSW | Basic (3 events) — ✅ duplicate resolved |
 | 9 | Eraring Battery | BESS | NSW | Basic (2 events, COD drift) |
 | 10 | Collie Battery | BESS | WA | Basic (1 event) |
 
@@ -263,18 +246,20 @@ Layer 0: DATA PIPELINE (Python)  ✅ BUILT
   pipeline/importers/import_openelectricity.py — OpenElectricity API importer (energy, market_value, BESS charge/discharge)
   pipeline/importers/harvest_facility_metadata.py — Facility metadata harvester (dates, coordinates, timeline events)
   pipeline/processors/compute_league_tables.py — League table ranking engine (4 tech categories)
+  pipeline/enrichers/enrich_phase35.py — Phase 3.5 enrichment (35 construction/dev projects)
+  pipeline/enrichers/enrich_mopup.py   — Mop-up enrichment (offshore wind, REZ access, coords)
   pipeline/requirements.txt         — openpyxl (AEMO only; OpenElectricity uses stdlib urllib)
 
 Layer 1: SQLite DATABASE  ✅ BUILT
   database/schema.sql               — 17 tables, full schema (incl. performance_annual, league_table_entries)
-  database/aures.db                 — 1,067 projects, 473 timeline events
+  database/aures.db                 — 1,064 projects (incl. 22 offshore wind), 593 timeline events
   database/seeds/                   — Exemplar project seed script
   database/migrations/              — 003_performance_tables.sql, 004_timeline_data_source.sql
 
 Layer 2: STATIC JSON  ✅ BUILT
   frontend/public/data/             — Served by Vite dev server
-  projects/index.json               — 1,067 project summaries (303KB)
-  projects/{tech}/{id}.json         — Individual project detail (with timeline, coordinates, COD)
+  projects/index.json               — 1,064 project summaries
+  projects/{tech}/{id}.json         — Individual project detail (7 tech folders incl. offshore-wind)
   indexes/by-*.json                 — Indexes by tech, state, status, developer
   performance/league-tables/*.json  — League table rankings by tech+year (8 files + index)
   performance/quartile-benchmarks/  — Quartile stats per metric
@@ -283,8 +268,9 @@ Layer 2: STATIC JSON  ✅ BUILT
 Layer 3: PWA FRONTEND  ✅ BUILT & DEPLOYED
   React 19 + TypeScript + Vite 6 + Tailwind 4
   Async data loading (dataService.ts + useProjectData hooks)
-  Fuse.js search across 1,067 projects
-  Performance league tables with data source badges
+  Fuse.js search across 1,064 projects
+  Performance league tables with info tooltips + data source badges
+  6 technology categories: wind, solar, BESS, hybrid, offshore wind, pumped hydro
   13 pages: Home, Dashboard, ProjectList, ProjectDetail, Performance, Search, Guides, GuideReader, SchemesOverview, SchemeRoundDetail, REZList, REZDetail, NotFound
   Mobile bottom nav + desktop sidebar + Dashboard shortcut
   PWA with service worker (vite-plugin-pwa)
@@ -397,23 +383,45 @@ Layer 3: PWA FRONTEND  ✅ BUILT & DEPLOYED
 - **Data provenance**: `data_source` field added to league table JSON and timeline_events table
 - **Docs update**: Updated all guidance documents for post-Phase 3 state
 
+### Session 9 — 2026-03-11/12
+- **Real 2025 performance data**: Replaced all sample/dummy 2025 data with real OpenElectricity API data (220 projects)
+- **2026 YTD data**: Imported Jan-Feb 2026 performance data (221 projects) with adjusted CF calculation for partial year
+- **YTD import support**: Added `--ytd` flag to `import_openelectricity.py` with hours-elapsed denominator
+- **Info tooltips**: 11 metric definitions (CF, Rev/MW, $/MWh, curtailment, spread, cycles, etc.) with formulas and data sources
+- **"About This Data" section**: Methodology explanation at bottom of Performance page
+- **Offshore wind separation**: New `offshore_wind` technology type (🌊 sky-blue), 22 projects reclassified
+- **Home page 6 cards**: Wind, Solar, BESS, Hybrid, Offshore Wind, Pumped Hydro in 2×3 grid
+- **Performance YTD badge**: Blue "Year to Date (Jan-Feb)" badge for current year data
+- **Year dropdown**: Defaults to latest year, shows "(YTD)" suffix for current year
+
+### Session 10 — 2026-03-12
+- **Offshore wind enrichment**: All 22 projects enriched with developer, status, notable info, timeline events, data confidence
+  - Researched all Gippsland feasibility licences (12 awarded, 3 surrendered, 9 active)
+  - Identified 7 cancelled/failed projects (Gippsland Dawn, Cape Winds, Southern Winds, Eastern Rise, Illawarra, Novocastrian, Hunter CC)
+  - Star of the South most advanced (EIS lodged Dec 2025), Blue Mackerel first management plan approved
+  - Ørsted still active (not withdrawn from Australia — contrary to initial assumption)
+- **NSW REZ access rights**: CWO (10 projects, 7.15 GW, May 2025) and SW (4 projects, 3.56 GW, Apr 2025)
+  - 16 REZ access rights events added to timeline
+  - 3 BESS projects missing REZ assignment fixed (Birriwa, Cobbora, Sandy Creek)
+  - New England and Hunter-Central Coast REZs not yet awarding access rights
+- **Construction coordinates**: 21 additional projects geolocated (250 total with coordinates)
+- **Key dev projects enriched**: Yanco Delta (Origin, $4B), Dinawan (Spark/TNB), Liverpool Range (Tilt), Spicers Creek (Squadron)
+- **Duplicate resolution**: Blue Mackerel North has 2 AEMO entries flagged; original 3 duplicates already resolved
+- **Phase 3.5 declared complete**
+
 ---
 
 ## What To Build Next
 
-### Immediate (Phase 3.5 — Data Quality)
-1. **Fix 3 duplicate projects** — Merge manual seeds with AEMO-linked entries, preserve timeline events
-2. **Populate NSW REZ access rights** — Research EII tender results for CWO, New England, SW, Hunter REZs
-3. **Enrich top construction projects** — Add timeline events, coordinates, developer info for 49 construction projects
-
 ### Short Term (Phase 4 — Intelligence Layer)
-4. **Confidence ratings** — Implement 4-tier system (HIGH/GOOD/MEDIUM/LOW) based on data completeness
-5. **Developer profiles** — Aggregate portfolio views by developer (Origin, AGL, Neoen, etc.)
-6. **COD drift tracking** — Visualise how expected COD dates shift over time
-7. **Operations-to-development mapping** — Show nearby operating performance for proposed projects
+1. **Confidence ratings** — Implement 4-tier system (HIGH/GOOD/MEDIUM/LOW) based on data completeness
+2. **Developer profiles** — Aggregate portfolio views by developer (Origin, AGL, Neoen, etc.)
+3. **COD drift tracking** — Visualise how expected COD dates shift over time
+4. **Map view** — 250 projects now have coordinates; map is feasible
 
 ### Medium Term
-8. **Monthly performance data** — Change interval from annual to monthly for sparklines/seasonal patterns
-9. **Web research agents** — Systematic enrichment of critical projects from RenewEconomy, AFR, AEMO
-10. **Map view** — All 224+ operating projects now have coordinates; map is feasible
-11. **Emissions data** — Add `emissions` metric to OpenElectricity data fetch (0 extra API calls)
+5. **Monthly performance data** — Change interval from annual to monthly for sparklines/seasonal patterns
+6. **Emissions data** — Add `emissions` metric to OpenElectricity data fetch (0 extra API calls)
+7. **Watchlist feature** — User-defined project watchlists with change notifications
+8. **New England REZ access rights** — Populate when declared (~Q2 2026)
+9. **Operations-to-development mapping** — Show nearby operating performance for proposed projects

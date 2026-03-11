@@ -11,11 +11,29 @@
   "has_syncon": false,
   "has_statcom": false,
   "has_harmonic_filter": false,
-  "data_confidence": "low",
-  "last_updated": "2026-03-10",
+  "notable": "Did not receive Hunter zone feasibility licence. Originally 1.4 GW expanded to 1.65 GW. BlueFloat split from project early 2023. Energy Estate developing independently. Hunter zone has zero active licences.",
+  "data_confidence": "medium",
+  "last_updated": "2026-03-11",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "2029",
-  "timeline": [],
+  "timeline": [
+    {
+      "date": "2022-10-01",
+      "date_precision": "month",
+      "event_type": "notable",
+      "title": "Capacity expanded to 1.65 GW",
+      "detail": "Project expanded from 1,400 MW to 1,650 MW",
+      "sources": []
+    },
+    {
+      "date": "2025-02-01",
+      "date_precision": "month",
+      "event_type": "notable",
+      "title": "Not selected for Hunter zone licence",
+      "detail": "Only Novocastrian selected; all other applicants unsuccessful",
+      "sources": []
+    }
+  ],
   "ownership_history": [],
   "cod_history": [],
   "suppliers": [],
