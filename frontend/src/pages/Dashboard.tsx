@@ -90,7 +90,8 @@ export default function Dashboard() {
     const con = filtered.filter((p) => p.status === 'construction' || p.status === 'commissioning')
     const dev = filtered.filter((p) => p.status === 'development')
     const stageCounts: Record<DevelopmentStage, number> = {
-      planning_approved: dev.filter((p) => p.development_stage === 'planning_approved').length,
+      epbc_approved: dev.filter((p) => p.development_stage === 'epbc_approved').length,
+      epbc_submitted: dev.filter((p) => p.development_stage === 'epbc_submitted').length,
       planning_submitted: dev.filter((p) => p.development_stage === 'planning_submitted').length,
       early_stage: dev.filter((p) => p.development_stage === 'early_stage' || !p.development_stage).length,
     }
@@ -330,7 +331,7 @@ export default function Dashboard() {
         >
           {hs.development_count > 0 && (
             <div className="flex gap-2 mt-1.5 flex-wrap">
-              {(['planning_approved', 'planning_submitted', 'early_stage'] as DevelopmentStage[]).map((stage) => {
+              {(['epbc_approved', 'epbc_submitted', 'planning_submitted', 'early_stage'] as DevelopmentStage[]).map((stage) => {
                 const count = hs.stageCounts[stage]
                 if (count === 0) return null
                 const cfg = DEVELOPMENT_STAGE_CONFIG[stage]

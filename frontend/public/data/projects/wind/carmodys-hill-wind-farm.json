@@ -8,18 +8,27 @@
   "current_developer": "Aula Energy",
   "cod_current": "2029-01-01",
   "cod_original": "2029-01-01",
-  "grid_forming": false,
-  "has_sips": false,
-  "has_syncon": false,
-  "has_statcom": false,
-  "has_harmonic_filter": false,
+  "grid_forming": true,
+  "has_sips": true,
+  "has_syncon": true,
+  "has_statcom": true,
+  "has_harmonic_filter": true,
   "notable": "42 GE Vernova 6.1 MW turbines. A$900M. CIS Tender 4 winner. Financial close late 2025.",
   "data_confidence": "medium",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "1040",
-  "confidence_score": 46,
+  "confidence_score": "46",
+  "development_stage": "epbc_approved",
   "timeline": [
+    {
+      "date": "2020",
+      "date_precision": "year",
+      "event_type": "planning_submitted",
+      "title": "EPBC Referral 2020/8790",
+      "detail": "Carmody's Hill Wind Farm \u2014 Not Controlled Action",
+      "sources": []
+    },
     {
       "date": "2025-02-01",
       "date_precision": "month",
@@ -103,6 +112,12 @@
       "title": "DT Infrastructure \u2014 Contract",
       "url": "https://www.insideconstruction.com.au/news/latest-news/dt-infrastructure-wins-contract-to-deliver-carmodys-hill-wind-farm",
       "source_tier": 2
+    },
+    {
+      "title": "EPBC Referral 2020/8790",
+      "url": "https://epbcpublicportal.environment.gov.au/all-referrals/#!/referral/2020-8790",
+      "date": "2026-03-12",
+      "source_tier": 1
     }
   ]
 }

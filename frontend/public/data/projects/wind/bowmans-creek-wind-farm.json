@@ -6,18 +6,27 @@
   "capacity_mw": 347.0,
   "state": "NSW",
   "current_developer": "ARK Energy Corporation Pty Ltd",
-  "grid_forming": false,
-  "has_sips": false,
-  "has_syncon": false,
-  "has_statcom": false,
-  "has_harmonic_filter": false,
+  "grid_forming": true,
+  "has_sips": true,
+  "has_syncon": true,
+  "has_statcom": true,
+  "has_harmonic_filter": true,
   "data_confidence": "low",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "2005",
-  "confidence_score": 15,
-  "development_stage": "planning_submitted",
-  "timeline": [],
+  "confidence_score": "15",
+  "development_stage": "epbc_approved",
+  "timeline": [
+    {
+      "date": "2025",
+      "date_precision": "year",
+      "event_type": "planning_submitted",
+      "title": "EPBC Referral 2024/10013",
+      "detail": "Bowmans Creek Wind Farm Stage 2 \u2014 Referral Decision",
+      "sources": []
+    }
+  ],
   "ownership_history": [],
   "cod_history": [],
   "suppliers": [],
@@ -30,6 +39,12 @@
       "title": "AEMO Generation Information Jan 2026",
       "url": "https://aemo.com.au/energy-systems/electricity/national-electricity-market-nem/nem-forecasting-and-planning/forecasting-and-planning-data/generation-information",
       "date": "2026-01-30",
+      "source_tier": 1
+    },
+    {
+      "title": "EPBC Referral 2024/10013",
+      "url": "https://epbcpublicportal.environment.gov.au/all-referrals/#!/referral/2024-10013",
+      "date": "2026-03-12",
       "source_tier": 1
     }
   ]

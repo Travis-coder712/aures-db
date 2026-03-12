@@ -8,22 +8,31 @@
   "current_developer": "Acciona Energy Australia Global Pty Ltd",
   "cod_current": "2025-09-29",
   "cod_original": "2025-09-29",
-  "grid_forming": false,
-  "has_sips": false,
-  "has_syncon": false,
-  "has_statcom": false,
-  "has_harmonic_filter": false,
+  "grid_forming": true,
+  "has_sips": true,
+  "has_syncon": true,
+  "has_statcom": true,
+  "has_harmonic_filter": true,
   "performance_score": 66.9,
   "data_confidence": "medium",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "1509",
-  "confidence_score": 43,
+  "confidence_score": "43",
+  "development_stage": "epbc_approved",
   "coordinates": {
     "lat": -23.839544,
     "lng": 151.0849
   },
   "timeline": [
+    {
+      "date": "2020",
+      "date_precision": "year",
+      "event_type": "planning_submitted",
+      "title": "EPBC Referral 2020/8773",
+      "detail": "Aldoga Solar Farm Project \u2014 Post-Approval",
+      "sources": []
+    },
     {
       "date": "2025-03-21",
       "date_precision": "day",
@@ -61,6 +70,12 @@
       "title": "AEMO Generation Information Jan 2026",
       "url": "https://aemo.com.au/energy-systems/electricity/national-electricity-market-nem/nem-forecasting-and-planning/forecasting-and-planning-data/generation-information",
       "date": "2026-01-30",
+      "source_tier": 1
+    },
+    {
+      "title": "EPBC Referral 2020/8773",
+      "url": "https://epbcpublicportal.environment.gov.au/all-referrals/#!/referral/2020-8773",
+      "date": "2026-03-12",
       "source_tier": 1
     }
   ]

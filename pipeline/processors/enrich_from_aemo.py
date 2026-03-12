@@ -58,14 +58,12 @@ def classify_development_stages(conn, dry_run=False):
         if pid not in aemo_statuses or priority.get(status, -1) > priority.get(aemo_statuses[pid], -1):
             aemo_statuses[pid] = status
 
-    counts = {'planning_approved': 0, 'planning_submitted': 0, 'early_stage': 0}
+    counts = {'planning_submitted': 0, 'early_stage': 0}
 
     for proj in dev_projects:
         pid = proj['id']
 
-        if pid in planning_approved_ids:
-            stage = 'planning_approved'
-        elif pid in planning_submitted_ids:
+        if pid in planning_approved_ids or pid in planning_submitted_ids:
             stage = 'planning_submitted'
         elif aemo_statuses.get(pid) in ('Publicly Announced', 'Committed', 'Committed*'):
             stage = 'planning_submitted'
@@ -80,7 +78,6 @@ def classify_development_stages(conn, dry_run=False):
                 (stage, pid)
             )
 
-    print(f"  Planning Approved: {counts['planning_approved']}")
     print(f"  Planning Submitted: {counts['planning_submitted']}")
     print(f"  Early Stage: {counts['early_stage']}")
     return counts

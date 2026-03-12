@@ -6,7 +6,7 @@ export type Technology = 'wind' | 'solar' | 'bess' | 'hybrid' | 'pumped_hydro' |
 export type ProjectStatus = 'operating' | 'commissioning' | 'construction' | 'development' | 'withdrawn'
 export type State = 'NSW' | 'VIC' | 'QLD' | 'SA' | 'WA' | 'TAS' | 'NT' | 'ACT'
 export type Confidence = 'high' | 'good' | 'medium' | 'low' | 'unverified'
-export type DevelopmentStage = 'planning_approved' | 'planning_submitted' | 'early_stage'
+export type DevelopmentStage = 'epbc_approved' | 'epbc_submitted' | 'planning_submitted' | 'early_stage'
 
 export type TimelineEventType =
   | 'conceived' | 'planning_submitted' | 'planning_approved' | 'planning_rejected'
@@ -378,7 +378,8 @@ export const CONFIDENCE_CONFIG: Record<Confidence, { label: string; dots: string
 }
 
 export const DEVELOPMENT_STAGE_CONFIG: Record<DevelopmentStage, { label: string; color: string; icon: string }> = {
-  planning_approved: { label: 'Planning Approved', color: '#22c55e', icon: '✓' },
+  epbc_approved: { label: 'EPBC Approved', color: '#22c55e', icon: '✓' },
+  epbc_submitted: { label: 'EPBC Submitted', color: '#10b981', icon: '◐' },
   planning_submitted: { label: 'Planning Submitted', color: '#f59e0b', icon: '◐' },
   early_stage: { label: 'Early Stage', color: '#6b7280', icon: '○' },
 }

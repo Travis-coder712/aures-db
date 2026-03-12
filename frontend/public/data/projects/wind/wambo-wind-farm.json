@@ -8,22 +8,31 @@
   "current_developer": "Cubico Sustainable Investments / Stanwell Corporation (50:50 JV)",
   "cod_current": "2025-02-28",
   "cod_original": "2025-02-28",
-  "grid_forming": false,
-  "has_sips": false,
-  "has_syncon": false,
-  "has_statcom": false,
-  "has_harmonic_filter": false,
+  "grid_forming": true,
+  "has_sips": true,
+  "has_syncon": true,
+  "has_statcom": true,
+  "has_harmonic_filter": true,
   "notable": "83 Vestas V162-6.2 turbines. First turbines energised May 2025. A$650M finance package.",
   "data_confidence": "good",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "2287",
-  "confidence_score": 62,
+  "confidence_score": "62",
+  "development_stage": "epbc_approved",
   "coordinates": {
     "lat": -26.648,
     "lng": 151.306
   },
   "timeline": [
+    {
+      "date": "2020",
+      "date_precision": "year",
+      "event_type": "planning_submitted",
+      "title": "EPBC Referral 2020/8727",
+      "detail": "Wambo Wind Farm \u2014 Post-Approval",
+      "sources": []
+    },
     {
       "date": "2020-10-01",
       "date_precision": "month",
@@ -134,6 +143,12 @@
       "title": "Stanwell \u2014 First Turbines Power Up",
       "url": "https://www.stanwell.com/info-hub/article/wambos-first-turbines-power-up-western-downs",
       "source_tier": 2
+    },
+    {
+      "title": "EPBC Referral 2020/8727",
+      "url": "https://epbcpublicportal.environment.gov.au/all-referrals/#!/referral/2020-8727",
+      "date": "2026-03-12",
+      "source_tier": 1
     }
   ]
 }

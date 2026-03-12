@@ -49,7 +49,7 @@ CREATE TABLE IF NOT EXISTS projects (
     performance_score   REAL,
 
     -- Development sub-stage (for development status projects)
-    development_stage   TEXT CHECK(development_stage IN ('planning_approved','planning_submitted','early_stage')),
+    development_stage   TEXT CHECK(development_stage IN ('epbc_approved','epbc_submitted','planning_submitted','early_stage')),
 
     -- Notable
     notable             TEXT,

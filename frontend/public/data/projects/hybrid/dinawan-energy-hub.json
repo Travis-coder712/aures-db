@@ -10,19 +10,27 @@
   "current_developer": "Spark Renewables (Tenaga Nasional Berhad subsidiary)",
   "cod_current": "2029-12-01",
   "cod_original": "2029-12-01",
-  "grid_forming": false,
-  "has_sips": false,
-  "has_syncon": false,
-  "has_statcom": false,
-  "has_harmonic_filter": false,
+  "grid_forming": true,
+  "has_sips": true,
+  "has_syncon": true,
+  "has_statcom": true,
+  "has_harmonic_filter": true,
   "notable": "Hybrid wind+solar+BESS. Access rights: 707 MW wind + 300 MW solar + 300 MW/1,200 MWh BESS. Full vision ~2.5 GW. Adjacent to Transgrid Dinawan Substation. CIP holds option for minority interest. CIS Tender winner.",
   "data_confidence": "medium",
   "last_updated": "2026-03-11",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "1924",
-  "confidence_score": 40,
-  "development_stage": "planning_submitted",
+  "confidence_score": "40",
+  "development_stage": "epbc_submitted",
   "timeline": [
+    {
+      "date": "2023",
+      "date_precision": "year",
+      "event_type": "planning_submitted",
+      "title": "EPBC Referral 2023/09516",
+      "detail": "Dinawan Solar Farm \u2014 Assessment",
+      "sources": []
+    },
     {
       "date": "2025-04-23",
       "date_precision": "day",
@@ -57,6 +65,12 @@
     {
       "title": "EnergyCo \u2014 SW REZ Access Rights Holders",
       "url": "https://www.energyco.nsw.gov.au/news/south-west-rez-access-rights-holders-announced",
+      "source_tier": 1
+    },
+    {
+      "title": "EPBC Referral 2023/09516",
+      "url": "https://epbcpublicportal.environment.gov.au/all-referrals/#!/referral/2023-09516",
+      "date": "2026-03-12",
       "source_tier": 1
     }
   ]

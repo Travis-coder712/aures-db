@@ -8,22 +8,31 @@
   "current_developer": "Dulacca Energy Project Co Pty Ltd",
   "cod_current": "2023-04-12",
   "cod_original": "2023-04-12",
-  "grid_forming": false,
-  "has_sips": false,
-  "has_syncon": false,
-  "has_statcom": false,
-  "has_harmonic_filter": false,
+  "grid_forming": true,
+  "has_sips": true,
+  "has_syncon": true,
+  "has_statcom": true,
+  "has_harmonic_filter": true,
   "performance_score": 80.0,
   "data_confidence": "medium",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "1706",
-  "confidence_score": 43,
+  "confidence_score": "43",
+  "development_stage": "epbc_approved",
   "coordinates": {
     "lat": -26.637485,
     "lng": 149.870186
   },
   "timeline": [
+    {
+      "date": "2020",
+      "date_precision": "year",
+      "event_type": "planning_submitted",
+      "title": "EPBC Referral 2019/8607",
+      "detail": "Dulacca Solar Farm \u2014 Not Controlled Action",
+      "sources": []
+    },
     {
       "date": "2023-04-12",
       "date_precision": "day",
@@ -53,6 +62,12 @@
       "title": "AEMO Generation Information Jan 2026",
       "url": "https://aemo.com.au/energy-systems/electricity/national-electricity-market-nem/nem-forecasting-and-planning/forecasting-and-planning-data/generation-information",
       "date": "2026-01-30",
+      "source_tier": 1
+    },
+    {
+      "title": "EPBC Referral 2019/8607",
+      "url": "https://epbcpublicportal.environment.gov.au/all-referrals/#!/referral/2019-8607",
+      "date": "2026-03-12",
       "source_tier": 1
     }
   ]

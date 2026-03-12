@@ -252,7 +252,7 @@ export default function ProjectList() {
             <span className="text-[10px] font-semibold uppercase tracking-wider text-[var(--color-text-muted)] w-12">
               Stage
             </span>
-            {(['planning_approved', 'planning_submitted', 'early_stage'] as const).map((stage) => {
+            {(['epbc_approved', 'epbc_submitted', 'planning_submitted', 'early_stage'] as const).map((stage) => {
               const config = DEVELOPMENT_STAGE_CONFIG[stage]
               const isActive = isFilterActive('stage', stage)
               return (
