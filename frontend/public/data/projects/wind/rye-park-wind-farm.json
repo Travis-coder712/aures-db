@@ -61,7 +61,14 @@
   "ownership_history": [],
   "cod_history": [],
   "suppliers": [],
-  "offtakes": [],
+  "offtakes": [
+    {
+      "party": "AGL Energy",
+      "type": "PPA",
+      "term_years": 15,
+      "source_url": "https://reneweconomy.com.au/rye-park-wind-farm/"
+    }
+  ],
   "scheme_contracts": [],
   "cost_sources": [],
   "stakeholder_issues": [],

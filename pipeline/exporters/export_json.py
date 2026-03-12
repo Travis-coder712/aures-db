@@ -268,7 +268,19 @@ def export_all(db_path=DB_PATH):
     # 8. COD drift data
     export_cod_drift(conn)
 
-    # 9. Export metadata
+    # 9. OEM profiles
+    export_oem_profiles(conn)
+
+    # 10. Contractor profiles
+    export_contractor_profiles(conn)
+
+    # 11. Offtaker profiles
+    export_offtaker_profiles(conn)
+
+    # 12. Data sources status
+    export_data_sources(conn)
+
+    # 13. Export metadata
     write_json(os.path.join(DATA_DIR, 'metadata', 'last-export.json'), {
         'exported_at': datetime.now().isoformat(),
         'project_count': len(summaries),
@@ -573,11 +585,373 @@ def export_developer_profiles(conn, summaries):
     # Sort by total capacity descending
     developers.sort(key=lambda d: d['total_capacity_mw'], reverse=True)
 
+    # --- Grouped developers ---
+    config_path = os.path.join(os.path.dirname(__file__), '..', 'config', 'developer_groups.json')
+    grouped_developers = []
+    top_developers = []
+    if os.path.exists(config_path):
+        with open(config_path) as f:
+            groups_config = json.load(f)
+
+        # Build a mapping: original name → group canonical
+        name_to_group = {}
+        for g in groups_config.get('groups', []):
+            for member in g['members']:
+                name_to_group[member] = g['canonical']
+
+        # Build a name → developer profile lookup
+        dev_by_name = {d['name']: d for d in developers}
+
+        # Aggregate grouped profiles
+        seen_group_slugs = {}
+        group_map = defaultdict(lambda: {
+            'members': [], 'projects': [], 'by_tech': defaultdict(int),
+            'by_status': defaultdict(int), 'states': set(), 'total_mw': 0,
+            'total_mwh': 0, 'confidence_counts': defaultdict(int),
+        })
+
+        assigned_names = set()
+        for g in groups_config.get('groups', []):
+            canonical = g['canonical']
+            for member in g['members']:
+                if member in dev_projects:
+                    assigned_names.add(member)
+                    gd = group_map[canonical]
+                    gd['members'].append(member)
+                    for p in dev_projects[member]:
+                        gd['projects'].append(p)
+                        gd['by_tech'][p['technology']] += 1
+                        gd['by_status'][p['status']] += 1
+                        gd['states'].add(p['state'])
+                        gd['total_mw'] += p.get('capacity_mw', 0)
+                        gd['total_mwh'] += (p.get('storage_mwh', 0) or 0)
+                        gd['confidence_counts'][p.get('data_confidence', 'low')] += 1
+
+        for canonical, gd in group_map.items():
+            if not gd['projects']:
+                continue
+            slug = make_slug(canonical)
+            if slug in seen_group_slugs:
+                slug = f"{slug}-{len([k for k in seen_group_slugs if k.startswith(slug)]) + 1}"
+            seen_group_slugs[slug] = canonical
+
+            avg_confidence = max(gd['confidence_counts'], key=gd['confidence_counts'].get)
+            grouped_developers.append({
+                'slug': slug,
+                'name': canonical,
+                'aliases': sorted(gd['members']),
+                'project_count': len(gd['projects']),
+                'total_capacity_mw': round(gd['total_mw'], 1),
+                'total_storage_mwh': round(gd['total_mwh'], 1),
+                'by_technology': dict(gd['by_tech']),
+                'by_status': dict(gd['by_status']),
+                'states': sorted(gd['states']),
+                'avg_confidence': avg_confidence,
+                'project_ids': [p['id'] for p in sorted(gd['projects'], key=lambda x: x.get('capacity_mw', 0), reverse=True)],
+            })
+
+        # Add ungrouped developers as single-member groups
+        for dev in developers:
+            if dev['name'] not in assigned_names:
+                grouped_developers.append({
+                    **dev,
+                    'aliases': [],
+                })
+
+        grouped_developers.sort(key=lambda d: d['total_capacity_mw'], reverse=True)
+
+        # Top developers by project count (for quick buttons)
+        top_developers = sorted(grouped_developers, key=lambda d: d['project_count'], reverse=True)[:10]
+        top_developers = [{'slug': d['slug'], 'name': d['name'], 'project_count': d['project_count']} for d in top_developers]
+
     write_json(os.path.join(DATA_DIR, 'indexes', 'developer-profiles.json'), {
         'developers': developers,
         'total_developers': len(developers),
+        'grouped_developers': grouped_developers,
+        'total_grouped': len(grouped_developers),
+        'top_developers': top_developers,
     })
-    print(f"  indexes/developer-profiles.json ({len(developers)} developers)")
+    grouped_count = len([g for g in grouped_developers if g.get('aliases')])
+    print(f"  indexes/developer-profiles.json ({len(developers)} developers, {len(grouped_developers)} grouped ({grouped_count} with aliases))")
+
+
+def export_oem_profiles(conn):
+    """Export OEM (equipment supplier) profiles to JSON."""
+    rows = conn.execute("""
+        SELECT s.supplier, s.role, s.model, s.project_id,
+               p.technology, p.status, p.state, p.capacity_mw
+        FROM suppliers s
+        JOIN projects p ON s.project_id = p.id
+        WHERE s.role IN ('wind_oem', 'bess_oem', 'hydro_oem', 'inverter')
+    """).fetchall()
+
+    # Group by supplier name
+    oem_data = defaultdict(list)
+    for r in rows:
+        oem_data[r['supplier']].append(dict(r))
+
+    seen_slugs = {}
+    oems = []
+    for name, records in oem_data.items():
+        slug = make_slug(name)
+        if slug in seen_slugs:
+            slug = f"{slug}-{len([k for k in seen_slugs if k.startswith(slug)]) + 1}"
+        seen_slugs[slug] = name
+
+        by_tech = defaultdict(int)
+        by_status = defaultdict(int)
+        states = set()
+        roles = set()
+        models = set()
+        total_mw = 0
+        project_ids = set()
+
+        for r in records:
+            by_tech[r['technology']] += 1
+            by_status[r['status']] += 1
+            states.add(r['state'])
+            roles.add(r['role'])
+            if r['model']:
+                models.add(r['model'])
+            total_mw += r['capacity_mw'] or 0
+            project_ids.add(r['project_id'])
+
+        oems.append({
+            'slug': slug,
+            'name': name,
+            'project_count': len(project_ids),
+            'total_capacity_mw': round(total_mw, 1),
+            'roles': sorted(roles),
+            'models': sorted(models),
+            'by_technology': dict(by_tech),
+            'by_status': dict(by_status),
+            'states': sorted(states),
+            'project_ids': sorted(project_ids),
+        })
+
+    oems.sort(key=lambda o: o['total_capacity_mw'], reverse=True)
+
+    write_json(os.path.join(DATA_DIR, 'indexes', 'oem-profiles.json'), {
+        'oems': oems,
+        'total': len(oems),
+    })
+    print(f"  indexes/oem-profiles.json ({len(oems)} OEMs)")
+
+
+def export_contractor_profiles(conn):
+    """Export contractor (EPC/BoP) profiles to JSON."""
+    rows = conn.execute("""
+        SELECT s.supplier, s.role, s.project_id,
+               p.technology, p.status, p.state, p.capacity_mw
+        FROM suppliers s
+        JOIN projects p ON s.project_id = p.id
+        WHERE s.role IN ('epc', 'bop')
+    """).fetchall()
+
+    # Group by supplier name
+    contractor_data = defaultdict(list)
+    for r in rows:
+        contractor_data[r['supplier']].append(dict(r))
+
+    seen_slugs = {}
+    contractors = []
+    for name, records in contractor_data.items():
+        slug = make_slug(name)
+        if slug in seen_slugs:
+            slug = f"{slug}-{len([k for k in seen_slugs if k.startswith(slug)]) + 1}"
+        seen_slugs[slug] = name
+
+        by_tech = defaultdict(int)
+        by_status = defaultdict(int)
+        states = set()
+        roles = set()
+        total_mw = 0
+        project_ids = set()
+
+        for r in records:
+            by_tech[r['technology']] += 1
+            by_status[r['status']] += 1
+            states.add(r['state'])
+            roles.add(r['role'])
+            total_mw += r['capacity_mw'] or 0
+            project_ids.add(r['project_id'])
+
+        contractors.append({
+            'slug': slug,
+            'name': name,
+            'project_count': len(project_ids),
+            'total_capacity_mw': round(total_mw, 1),
+            'roles': sorted(roles),
+            'by_technology': dict(by_tech),
+            'by_status': dict(by_status),
+            'states': sorted(states),
+            'project_ids': sorted(project_ids),
+        })
+
+    contractors.sort(key=lambda c: c['total_capacity_mw'], reverse=True)
+
+    write_json(os.path.join(DATA_DIR, 'indexes', 'contractor-profiles.json'), {
+        'contractors': contractors,
+        'total': len(contractors),
+    })
+    print(f"  indexes/contractor-profiles.json ({len(contractors)} contractors)")
+
+
+def export_offtaker_profiles(conn):
+    """Export offtaker profiles to JSON."""
+    rows = conn.execute("""
+        SELECT o.party, o.type, o.project_id, o.term_years, o.capacity_mw,
+               p.technology, p.status, p.state, p.capacity_mw as project_capacity_mw
+        FROM offtakes o
+        JOIN projects p ON o.project_id = p.id
+    """).fetchall()
+
+    if not rows:
+        print("  indexes/offtaker-profiles.json (0 offtakers — skipped)")
+        return
+
+    # Group by party name
+    offtaker_data = defaultdict(list)
+    for r in rows:
+        offtaker_data[r['party']].append(dict(r))
+
+    seen_slugs = {}
+    offtakers = []
+    for name, records in offtaker_data.items():
+        slug = make_slug(name)
+        if slug in seen_slugs:
+            slug = f"{slug}-{len([k for k in seen_slugs if k.startswith(slug)]) + 1}"
+        seen_slugs[slug] = name
+
+        by_tech = defaultdict(int)
+        by_status = defaultdict(int)
+        states = set()
+        types = set()
+        total_mw = 0
+        project_ids = set()
+
+        for r in records:
+            by_tech[r['technology']] += 1
+            by_status[r['status']] += 1
+            states.add(r['state'])
+            types.add(r['type'])
+            total_mw += r['project_capacity_mw'] or 0
+            project_ids.add(r['project_id'])
+
+        offtakers.append({
+            'slug': slug,
+            'name': name,
+            'project_count': len(project_ids),
+            'total_capacity_mw': round(total_mw, 1),
+            'types': sorted(types),
+            'by_technology': dict(by_tech),
+            'by_status': dict(by_status),
+            'states': sorted(states),
+            'project_ids': sorted(project_ids),
+        })
+
+    offtakers.sort(key=lambda o: o['total_capacity_mw'], reverse=True)
+
+    write_json(os.path.join(DATA_DIR, 'indexes', 'offtaker-profiles.json'), {
+        'offtakers': offtakers,
+        'total': len(offtakers),
+    })
+    print(f"  indexes/offtaker-profiles.json ({len(offtakers)} offtakers)")
+
+
+def export_data_sources(conn):
+    """Export data source status and metadata for the Data Sources page."""
+    # Known data sources with metadata
+    SOURCE_META = [
+        {
+            'id': 'aemo_generation_info',
+            'name': 'AEMO Generation Information',
+            'description': 'Monthly Excel from AEMO with all NEM registered and proposed generators, capacities, and status.',
+            'url': 'https://www.aemo.com.au/energy-systems/electricity/national-electricity-market-nem/nem-forecasting-and-planning/forecasting-and-planning-data/generation-information',
+            'frequency': 'monthly',
+            'script': 'import_aemo_gen_info.py',
+        },
+        {
+            'id': 'openelectricity_performance',
+            'name': 'OpenElectricity Performance',
+            'description': 'Annual energy output, capacity factor, revenue, and curtailment data from the OpenElectricity API.',
+            'url': 'https://openelectricity.org.au',
+            'frequency': 'monthly',
+            'script': 'import_openelectricity.py',
+        },
+        {
+            'id': 'openelectricity_metadata',
+            'name': 'OpenElectricity Facility Metadata',
+            'description': 'Facility coordinates, commencement dates, and unit details from the OpenElectricity API.',
+            'url': 'https://openelectricity.org.au',
+            'frequency': 'quarterly',
+            'script': 'harvest_facility_metadata.py',
+        },
+        {
+            'id': 'epbc_referrals',
+            'name': 'EPBC Referrals',
+            'description': 'Environmental planning referrals from the DCCEEW EPBC Act referrals database.',
+            'url': 'https://epbcnotices.environment.gov.au/',
+            'frequency': 'monthly',
+            'script': 'import_epbc.py',
+        },
+        {
+            'id': 'offtake_research',
+            'name': 'Offtake / PPA Research',
+            'description': 'Power purchase agreements and offtake contracts sourced from public announcements and news.',
+            'url': '',
+            'frequency': 'monthly',
+            'script': 'research_offtakes.py',
+        },
+        {
+            'id': 'web_research',
+            'name': 'Web Research',
+            'description': 'Project details scraped from RenewEconomy and other renewable energy news sources.',
+            'url': 'https://reneweconomy.com.au',
+            'frequency': 'ad_hoc',
+            'script': 'web_research.py',
+        },
+    ]
+
+    # Get latest run for each source from import_runs
+    runs = conn.execute("""
+        SELECT source, started_at, completed_at, status, records_imported, records_updated, records_new, error_message
+        FROM import_runs
+        WHERE id IN (SELECT MAX(id) FROM import_runs GROUP BY source)
+        ORDER BY source
+    """).fetchall()
+    run_map = {r['source']: dict(r) for r in runs}
+
+    sources = []
+    for meta in SOURCE_META:
+        run = run_map.get(meta['id'], {})
+        sources.append({
+            **meta,
+            'last_run': run.get('completed_at') or run.get('started_at'),
+            'last_status': run.get('status', 'never'),
+            'records_imported': run.get('records_imported', 0),
+            'records_updated': run.get('records_updated', 0),
+            'records_new': run.get('records_new', 0),
+            'error': run.get('error_message'),
+        })
+
+    # Database stats
+    total_projects = conn.execute("SELECT COUNT(*) FROM projects").fetchone()[0]
+    total_offtakes = conn.execute("SELECT COUNT(*) FROM offtakes").fetchone()[0]
+    total_suppliers = conn.execute("SELECT COUNT(DISTINCT supplier) FROM suppliers").fetchone()[0]
+    operating = conn.execute("SELECT COUNT(*) FROM projects WHERE status = 'operating'").fetchone()[0]
+
+    write_json(os.path.join(DATA_DIR, 'metadata', 'data-sources.json'), {
+        'sources': sources,
+        'database_stats': {
+            'total_projects': total_projects,
+            'total_offtakes': total_offtakes,
+            'total_oems_contractors': total_suppliers,
+            'operating_projects': operating,
+        },
+        'exported_at': datetime.now().isoformat(),
+    })
+    print(f"  metadata/data-sources.json ({len(sources)} sources)")
 
 
 if __name__ == '__main__':

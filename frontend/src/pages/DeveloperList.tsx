@@ -1,7 +1,7 @@
 import { useState, useMemo } from 'react'
-import { Link, useSearchParams } from 'react-router-dom'
+import { Link, useSearchParams, useNavigate } from 'react-router-dom'
 import { useDeveloperIndex } from '../hooks/useDeveloperData'
-import { TECHNOLOGY_CONFIG, type Technology, type State } from '../lib/types'
+import { TECHNOLOGY_CONFIG, type Technology, type State, type DeveloperProfile } from '../lib/types'
 
 type SortKey = 'capacity' | 'projects' | 'name'
 
@@ -11,17 +11,28 @@ export default function DeveloperList() {
   const [sortBy, setSortBy] = useState<SortKey>('capacity')
   const [sortDesc, setSortDesc] = useState(true)
   const { data, loading } = useDeveloperIndex()
+  const navigate = useNavigate()
 
   const stateFilter = searchParams.get('state') as State | null
   const techFilter = searchParams.get('tech') as Technology | null
+  const grouped = searchParams.get('grouped') === '1'
+
+  const sourceList = useMemo(() => {
+    if (!data) return []
+    return grouped && data.grouped_developers?.length
+      ? data.grouped_developers
+      : data.developers
+  }, [data, grouped])
 
   const filtered = useMemo(() => {
-    if (!data) return []
-    let result = [...data.developers]
+    let result = [...sourceList]
 
     if (query) {
       const q = query.toLowerCase()
-      result = result.filter((d) => d.name.toLowerCase().includes(q))
+      result = result.filter((d) =>
+        d.name.toLowerCase().includes(q) ||
+        d.aliases?.some((a) => a.toLowerCase().includes(q))
+      )
     }
     if (stateFilter) {
       result = result.filter((d) => d.states.includes(stateFilter))
@@ -47,7 +58,7 @@ export default function DeveloperList() {
     })
 
     return result
-  }, [data, query, stateFilter, techFilter, sortBy, sortDesc])
+  }, [sourceList, query, stateFilter, techFilter, sortBy, sortDesc])
 
   if (loading) {
     return (
@@ -67,9 +78,18 @@ export default function DeveloperList() {
     setSearchParams(searchParams)
   }
 
-  const activeFilters = [stateFilter, techFilter].filter(Boolean).length
+  function toggleGrouped() {
+    if (grouped) {
+      searchParams.delete('grouped')
+    } else {
+      searchParams.set('grouped', '1')
+    }
+    setSearchParams(searchParams)
+  }
 
+  const activeFilters = [stateFilter, techFilter].filter(Boolean).length
   const totalCapacity = filtered.reduce((s, d) => s + d.total_capacity_mw, 0)
+  const topDevs = data?.top_developers ?? []
 
   return (
     <div className="px-4 lg:px-8 py-6 max-w-7xl mx-auto">
@@ -79,7 +99,7 @@ export default function DeveloperList() {
           Developers
         </h1>
         <p className="text-sm text-[var(--color-text-muted)]">
-          {filtered.length} developer{filtered.length !== 1 ? 's' : ''} ·{' '}
+          {filtered.length} {grouped ? 'group' : 'developer'}{filtered.length !== 1 ? 's' : ''} ·{' '}
           {totalCapacity >= 1000
             ? `${(totalCapacity / 1000).toFixed(1)} GW`
             : `${Math.round(totalCapacity)} MW`
@@ -87,15 +107,66 @@ export default function DeveloperList() {
         </p>
       </div>
 
-      {/* Search */}
-      <div className="mb-4">
+      {/* Top 10 Quick Buttons */}
+      {topDevs.length > 0 && (
+        <div className="mb-4">
+          <div className="flex items-center gap-2 flex-wrap">
+            <span className="text-[10px] font-semibold uppercase tracking-wider text-[var(--color-text-muted)] w-12">
+              Top
+            </span>
+            {topDevs.map((dev) => (
+              <Link
+                key={dev.slug}
+                to={`/developers/${dev.slug}`}
+                className="text-xs px-2.5 py-1 rounded-full border border-[var(--color-border)] text-[var(--color-text-muted)] hover:border-[var(--color-primary)]/40 hover:text-[var(--color-primary)] transition-colors"
+              >
+                {dev.name} <span className="opacity-60">{dev.project_count}</span>
+              </Link>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* Search + Dropdown + Grouping Toggle */}
+      <div className="mb-4 flex items-center gap-3 flex-wrap">
         <input
           type="text"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           placeholder="Search developers..."
-          className="w-full max-w-md px-3 py-2 rounded-lg bg-[var(--color-bg-elevated)] border border-[var(--color-border)] text-sm text-[var(--color-text)] placeholder:text-[var(--color-text-muted)]/50 focus:outline-none focus:border-[var(--color-primary)]/50"
+          className="flex-1 min-w-[200px] max-w-md px-3 py-2 rounded-lg bg-[var(--color-bg-elevated)] border border-[var(--color-border)] text-sm text-[var(--color-text)] placeholder:text-[var(--color-text-muted)]/50 focus:outline-none focus:border-[var(--color-primary)]/50"
         />
+        <select
+          value=""
+          onChange={(e) => {
+            if (e.target.value) navigate(`/developers/${e.target.value}`)
+          }}
+          className="px-3 py-2 rounded-lg bg-[var(--color-bg-elevated)] border border-[var(--color-border)] text-sm text-[var(--color-text)] focus:outline-none focus:border-[var(--color-primary)]/50 max-w-[220px]"
+        >
+          <option value="">Jump to developer...</option>
+          {sourceList
+            .sort((a, b) => a.name.localeCompare(b.name))
+            .map((d) => (
+              <option key={d.slug} value={d.slug}>
+                {d.name} ({d.project_count})
+              </option>
+            ))}
+        </select>
+        {data?.grouped_developers && data.grouped_developers.length > 0 && (
+          <button
+            onClick={toggleGrouped}
+            className={`text-xs px-3 py-2 rounded-lg border transition-colors ${
+              grouped
+                ? 'border-[var(--color-primary)]/40 bg-[var(--color-primary)]/10 text-[var(--color-primary)] font-medium'
+                : 'border-[var(--color-border)] text-[var(--color-text-muted)] hover:border-[var(--color-text-muted)]'
+            }`}
+          >
+            Group variants
+            <span className="ml-1.5 opacity-70">
+              {grouped ? data.total_grouped : data.total_developers}
+            </span>
+          </button>
+        )}
       </div>
 
       {/* Filter Chips */}
@@ -195,7 +266,7 @@ export default function DeveloperList() {
       {/* Developer Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
         {filtered.map((dev) => (
-          <DeveloperCard key={dev.slug} developer={dev} />
+          <DeveloperCard key={dev.slug} developer={dev} grouped={grouped} />
         ))}
       </div>
 
@@ -214,9 +285,11 @@ export default function DeveloperList() {
   )
 }
 
-function DeveloperCard({ developer }: { developer: { slug: string; name: string; project_count: number; total_capacity_mw: number; total_storage_mwh: number; by_technology: Partial<Record<Technology, number>>; states: string[] } }) {
+function DeveloperCard({ developer, grouped }: { developer: DeveloperProfile; grouped: boolean }) {
   const techs = Object.entries(developer.by_technology)
-    .sort(([, a], [, b]) => b - a)
+    .sort(([, a], [, b]) => (b as number) - (a as number))
+
+  const aliasCount = developer.aliases?.length ?? 0
 
   return (
     <Link
@@ -224,9 +297,16 @@ function DeveloperCard({ developer }: { developer: { slug: string; name: string;
       className="block bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl p-4 hover:border-[var(--color-primary)]/30 transition-all hover:bg-[var(--color-bg-card)]/80 active:scale-[0.99]"
     >
       <div className="flex items-start justify-between gap-2 mb-2">
-        <h3 className="text-sm font-semibold text-[var(--color-text)] leading-tight">
-          {developer.name}
-        </h3>
+        <div className="flex items-center gap-2 min-w-0">
+          <h3 className="text-sm font-semibold text-[var(--color-text)] leading-tight truncate">
+            {developer.name}
+          </h3>
+          {grouped && aliasCount > 1 && (
+            <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-[var(--color-bg-elevated)] text-[var(--color-text-muted)] flex-shrink-0">
+              {aliasCount} names
+            </span>
+          )}
+        </div>
         <span className="text-xs text-[var(--color-text-muted)] flex-shrink-0">
           {developer.project_count} project{developer.project_count !== 1 ? 's' : ''}
         </span>

@@ -40,8 +40,9 @@ Every battery that uses Tesla Megapacks? Done.
 What did Origin Energy buy this year? Done.
 Which projects won CIS funding in Tender 3? Done.
 What's in the South West REZ? Done.
+Who are the offtakers for operating wind farms? Done.
 
-It's the same underlying data, but you can slice it a dozen different ways.
+It's the same underlying data, but you can slice it a dozen different ways — by project, developer, OEM, contractor, offtaker, REZ, scheme, or location on the map.
 
 ### Track how projects evolve over time
 
@@ -133,16 +134,19 @@ Designed mobile-first as a Progressive Web App. Install it on your iPhone and us
 **Level 1: DATABASE** — "What projects exist?"
 Comprehensive project records for every significant renewable energy project in Australia (NEM + WEM). Filterable by technology, state, developer, OEM, status, REZ, CIS/LTESA round.
 
-**Level 2: HISTORY** — "How has this project evolved?"
+**Level 2: PROFILES** — "Who are the players?"
+Developer profiles (718 developers, grouped into ~104 parent companies). OEM profiles (17 equipment manufacturers). EPC contractor profiles (20 contractors). Offtaker profiles (19 offtakers with 48 PPA/offtake agreements tracked).
+
+**Level 3: HISTORY** — "How has this project evolved?"
 Full lifecycle timeline for each project. Ownership changes with transaction values. COD drift tracking. Milestone progression.
 
-**Level 3: ANALYSIS** — "How are existing projects performing?"
+**Level 4: ANALYSIS** — "How are existing projects performing?"
 Operational performance league tables. Capacity factors, revenue, curtailment, loss factors. Best and worst performers by technology and state. BESS revenue breakdown (arbitrage vs FCAS).
 
-**Level 4: INTELLIGENCE** — "Will planned projects succeed?"
+**Level 5: INTELLIGENCE** — "Will planned projects succeed?"
 Watchlist risk scoring for CIS/LTESA/REZ winners. Development readiness assessment. Operations-to-development mapping. Top quartile benchmarking (new vs existing).
 
-**Level 5: INSIGHT** — "What should we be watching?"
+**Level 6: INSIGHT** — "What should we be watching?"
 Multi-source analysis of contested topics. Lessons from operational reality. Market share trends and competitive dynamics. Critical milestones in the next 6 months.`,
   },
   {
@@ -889,7 +893,31 @@ Make sure you're using Safari on iPhone or Chrome on Android. Other browsers may
 The first load fetches ~300KB of project data. Subsequent loads are cached and should be instant. If you're on a slow connection, give it a moment.
 
 **Charts don't render:**
-Make sure JavaScript is enabled in your browser settings. Some content blockers can interfere with chart rendering.`,
+Make sure JavaScript is enabled in your browser settings. Some content blockers can interfere with chart rendering.
+
+---
+
+## Navigating on Mobile
+
+AURES has a bottom navigation bar with quick access to the 5 most-used pages: Home, Projects, Performance, REZ, and Search.
+
+To access all pages (Developers, OEMs, Contractors, Offtakers, Dashboard, Map, Schemes, Guides), tap the **hamburger menu** (three lines) in the top-left corner. This opens the full navigation sidebar.
+
+---
+
+## Key Pages
+
+**Developers** — Browse 718 developers. Use the "Group variants" toggle to merge SPV/legal entities under their parent companies (~104 groups). Top-10 buttons give quick access to the biggest developers (ACEN, AGL, Hydro Tasmania, etc.).
+
+**OEMs** — 17 equipment manufacturers (Vestas, Goldwind, Tesla, etc.). See which turbines or batteries are used in which projects.
+
+**Contractors** — 20 EPC contractors. See who is building what.
+
+**Offtakers & PPAs** — 19 offtakers with 48 tracked power purchase agreements. Filter by PPA type (corporate PPA, government PPA, tolling, etc.).
+
+**Performance** — League tables ranking operating projects by capacity factor, revenue, and curtailment. Compare wind farms, solar farms, and batteries side by side.
+
+**Data Sources** — Shows where AURES data comes from and when each source was last updated.`,
   },
   {
     id: 'performance-methodology',

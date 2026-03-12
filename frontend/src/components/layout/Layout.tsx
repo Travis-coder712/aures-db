@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react'
 import { Outlet, NavLink, useLocation } from 'react-router-dom'
 
 // Inline SVG icon components (keeping dependencies minimal)
@@ -90,12 +91,64 @@ function EyeIcon({ className }: { className?: string }) {
   )
 }
 
+function WrenchIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M11.42 15.17l-5.454 5.455a2.12 2.12 0 01-3-3l5.454-5.454a7.5 7.5 0 019.067-9.067l-3.53 3.53a3 3 0 004.243 4.243l3.53-3.53a7.5 7.5 0 01-9.067 9.067h-.001z" />
+    </svg>
+  )
+}
+
+function BuildingIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M6.75 21v-3.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21M3 3h12m-.75 4.5H21m-3.75 3.75h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008z" />
+    </svg>
+  )
+}
+
+function MenuIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+    </svg>
+  )
+}
+
+function XIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+    </svg>
+  )
+}
+
+function CogIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.324.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 011.37.49l1.296 2.247a1.125 1.125 0 01-.26 1.431l-1.003.827c-.293.24-.438.613-.431.992a6.759 6.759 0 010 .255c-.007.378.138.75.43.99l1.005.828c.424.35.534.954.26 1.43l-1.298 2.247a1.125 1.125 0 01-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.57 6.57 0 01-.22.128c-.331.183-.581.495-.644.869l-.213 1.28c-.09.543-.56.941-1.11.941h-2.594c-.55 0-1.02-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 01-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 01-1.369-.49l-1.297-2.247a1.125 1.125 0 01.26-1.431l1.004-.827c.292-.24.437-.613.43-.992a6.932 6.932 0 010-.255c.007-.378-.138-.75-.43-.99l-1.004-.828a1.125 1.125 0 01-.26-1.43l1.297-2.247a1.125 1.125 0 011.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.087.22-.128.332-.183.582-.495.644-.869l.214-1.281z" />
+      <path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+    </svg>
+  )
+}
+
+function DocumentIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+    </svg>
+  )
+}
+
 const NAV_ITEMS = [
   { path: '/', label: 'Home', icon: HomeIcon },
   { path: '/dashboard', label: 'Dashboard', icon: ChartIcon },
   { path: '/projects', label: 'Projects', icon: DatabaseIcon },
   { path: '/performance', label: 'Performance', icon: TrendingIcon },
   { path: '/developers', label: 'Developers', icon: UsersIcon },
+  { path: '/oems', label: 'OEMs', icon: WrenchIcon },
+  { path: '/contractors', label: 'Contractors', icon: BuildingIcon },
+  { path: '/offtakers', label: 'Offtakers', icon: DocumentIcon },
   { path: '/map', label: 'Map', icon: GlobeIcon },
   { path: '/schemes', label: 'Schemes', icon: ShieldIcon },
   { path: '/rez', label: 'REZ', icon: MapIcon },
@@ -114,6 +167,27 @@ const MOBILE_NAV_ITEMS = [
 
 export default function Layout() {
   const location = useLocation()
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+
+  // Close menu on route change
+  useEffect(() => {
+    setMobileMenuOpen(false)
+  }, [location.pathname])
+
+  // Close menu on ESC
+  useEffect(() => {
+    const handleEsc = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setMobileMenuOpen(false)
+    }
+    if (mobileMenuOpen) {
+      document.addEventListener('keydown', handleEsc)
+      document.body.style.overflow = 'hidden'
+    }
+    return () => {
+      document.removeEventListener('keydown', handleEsc)
+      document.body.style.overflow = ''
+    }
+  }, [mobileMenuOpen])
 
   return (
     <div className="min-h-dvh flex flex-col lg:flex-row">
@@ -162,15 +236,106 @@ export default function Layout() {
           ))}
         </nav>
         <div className="px-4 py-3 border-t border-[var(--color-border)]">
+          <NavLink
+            to="/data-sources"
+            className={({ isActive }) =>
+              `flex items-center gap-2 px-2 py-1.5 rounded-lg text-[10px] font-medium transition-colors mb-1 ${
+                isActive
+                  ? 'text-[var(--color-primary)]'
+                  : 'text-[var(--color-text-muted)]/50 hover:text-[var(--color-text-muted)]'
+              }`
+            }
+          >
+            <CogIcon className="w-3.5 h-3.5" />
+            Data Sources & Status
+          </NavLink>
           <p className="text-[10px] text-[var(--color-text-muted)]/50 text-center">
             Data updated regularly from AEMO, AFR, RenewEconomy & more
           </p>
         </div>
       </aside>
 
+      {/* Mobile Menu Overlay */}
+      {mobileMenuOpen && (
+        <div className="lg:hidden fixed inset-0 z-50">
+          {/* Backdrop */}
+          <div
+            className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+            onClick={() => setMobileMenuOpen(false)}
+          />
+          {/* Slide-out panel */}
+          <aside className="absolute inset-y-0 left-0 w-72 bg-[var(--color-bg-card)] border-r border-[var(--color-border)] flex flex-col animate-slide-in">
+            <div className="flex items-center justify-between px-4 h-14 border-b border-[var(--color-border)]">
+              <div className="flex items-center gap-2">
+                <span className="text-xl">⚡</span>
+                <h1 className="text-base font-bold text-[var(--color-text)] tracking-tight">AURES</h1>
+              </div>
+              <button
+                onClick={() => setMobileMenuOpen(false)}
+                className="p-2 rounded-lg text-[var(--color-text-muted)] hover:text-[var(--color-text)] hover:bg-white/5"
+              >
+                <XIcon className="w-5 h-5" />
+              </button>
+            </div>
+            <nav className="flex-1 px-3 py-4 space-y-1 overflow-y-auto">
+              {NAV_ITEMS.map((item) => (
+                <NavLink
+                  key={item.path}
+                  to={item.path}
+                  end={item.path === '/'}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className={({ isActive }) =>
+                    `flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${
+                      isActive
+                        ? 'bg-[var(--color-primary)]/10 text-[var(--color-primary)]'
+                        : 'text-[var(--color-text-muted)] hover:text-[var(--color-text)] hover:bg-white/5'
+                    }`
+                  }
+                >
+                  <item.icon className="w-5 h-5" />
+                  {item.label}
+                </NavLink>
+              ))}
+
+              <div className="pt-4 pb-2 px-3">
+                <p className="text-[10px] font-semibold uppercase tracking-wider text-[var(--color-text-muted)]/60">
+                  Coming Soon
+                </p>
+              </div>
+              {FUTURE_ITEMS.map((item) => (
+                <div
+                  key={item.label}
+                  className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-[var(--color-text-muted)]/40 cursor-not-allowed"
+                >
+                  <item.icon className="w-5 h-5" />
+                  {item.label}
+                  <span className="ml-auto text-[9px] bg-[var(--color-bg-elevated)] px-1.5 py-0.5 rounded-full">Soon</span>
+                </div>
+              ))}
+            </nav>
+            <div className="px-4 py-3 border-t border-[var(--color-border)]">
+              <NavLink
+                to="/data-sources"
+                onClick={() => setMobileMenuOpen(false)}
+                className="flex items-center gap-2 px-2 py-1.5 rounded-lg text-[10px] font-medium text-[var(--color-text-muted)]/50 hover:text-[var(--color-text-muted)]"
+              >
+                <CogIcon className="w-3.5 h-3.5" />
+                Data Sources & Status
+              </NavLink>
+            </div>
+          </aside>
+        </div>
+      )}
+
       {/* Mobile Header */}
       <header className="lg:hidden flex items-center justify-between px-4 h-14 bg-[var(--color-bg-card)] border-b border-[var(--color-border)] sticky top-0 z-40">
         <div className="flex items-center gap-2">
+          <button
+            onClick={() => setMobileMenuOpen(true)}
+            className="p-1.5 -ml-1.5 rounded-lg text-[var(--color-text-muted)] hover:text-[var(--color-text)] hover:bg-white/5"
+          >
+            <MenuIcon className="w-5 h-5" />
+          </button>
           <span className="text-xl">⚡</span>
           <h1 className="text-base font-bold text-[var(--color-text)] tracking-tight">AURES</h1>
         </div>

@@ -66,7 +66,13 @@
   ],
   "cod_history": [],
   "suppliers": [],
-  "offtakes": [],
+  "offtakes": [
+    {
+      "party": "AGL Energy",
+      "type": "PPA",
+      "source_url": "https://reneweconomy.com.au/coopers-gap-wind-farm/"
+    }
+  ],
   "scheme_contracts": [],
   "cost_sources": [],
   "stakeholder_issues": [],

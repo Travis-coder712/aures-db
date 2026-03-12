@@ -105,7 +105,13 @@
       "grid_forming": false
     }
   ],
-  "offtakes": [],
+  "offtakes": [
+    {
+      "party": "Shell Energy",
+      "type": "PPA",
+      "source_url": "https://reneweconomy.com.au/wambo-wind-farm/"
+    }
+  ],
   "scheme_contracts": [
     {
       "scheme": "QLD RE&H Jobs Fund",

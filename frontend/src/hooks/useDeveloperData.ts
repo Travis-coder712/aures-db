@@ -28,7 +28,10 @@ export function useDeveloper(slug: string | undefined) {
 
   const developer = useMemo<DeveloperProfile | null>(() => {
     if (!data || !slug) return null
-    return data.developers.find((d) => d.slug === slug) ?? null
+    // Search both ungrouped and grouped lists
+    return data.developers.find((d) => d.slug === slug)
+      ?? data.grouped_developers?.find((d) => d.slug === slug)
+      ?? null
   }, [data, slug])
 
   return { developer, loading, error }

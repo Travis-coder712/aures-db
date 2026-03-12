@@ -44,7 +44,13 @@
   "ownership_history": [],
   "cod_history": [],
   "suppliers": [],
-  "offtakes": [],
+  "offtakes": [
+    {
+      "party": "EnergyAustralia",
+      "type": "PPA",
+      "source_url": "https://reneweconomy.com.au/limondale-solar-farm/"
+    }
+  ],
   "scheme_contracts": [],
   "cost_sources": [],
   "stakeholder_issues": [],

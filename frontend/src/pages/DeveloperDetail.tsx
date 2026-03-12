@@ -104,6 +104,18 @@ export default function DeveloperDetail() {
         <p className="text-sm text-[var(--color-text-muted)]">
           {developer.project_count} projects across {developer.states.join(', ')}
         </p>
+        {developer.aliases && developer.aliases.length > 1 && (
+          <div className="mt-2 flex flex-wrap gap-1.5">
+            {developer.aliases.map((alias) => (
+              <span
+                key={alias}
+                className="text-[10px] px-2 py-0.5 rounded-full bg-[var(--color-bg-elevated)] text-[var(--color-text-muted)] border border-[var(--color-border)]"
+              >
+                {alias}
+              </span>
+            ))}
+          </div>
+        )}
       </section>
 
       {/* Stat Cards */}

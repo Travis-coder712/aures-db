@@ -93,7 +93,13 @@
       "grid_forming": false
     }
   ],
-  "offtakes": [],
+  "offtakes": [
+    {
+      "party": "NSW Government (EII)",
+      "type": "government_ppa",
+      "source_url": "https://reneweconomy.com.au/waratah-super-battery/"
+    }
+  ],
   "scheme_contracts": [],
   "cost_sources": [],
   "stakeholder_issues": [],

@@ -193,7 +193,7 @@ CREATE TABLE IF NOT EXISTS offtakes (
     id              INTEGER PRIMARY KEY AUTOINCREMENT,
     project_id      TEXT NOT NULL REFERENCES projects(id) ON DELETE CASCADE,
     party           TEXT NOT NULL,
-    type            TEXT NOT NULL CHECK(type IN ('PPA','CIS','LTESA','SIPS','FCAS','other')),
+    type            TEXT NOT NULL CHECK(type IN ('PPA','corporate_ppa','government_ppa','tolling','merchant','CIS','LTESA','SIPS','FCAS','other')),
     term_years      INTEGER,
     capacity_mw     REAL,
     source_url      TEXT,

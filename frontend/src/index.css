@@ -44,6 +44,12 @@ body {
 
 .safe-bottom { padding-bottom: env(safe-area-inset-bottom); }
 
+@keyframes slide-in-left {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(0); }
+}
+.animate-slide-in { animation: slide-in-left 0.2s ease-out; }
+
 /* Leaflet dark theme popup overrides */
 .leaflet-popup-content-wrapper {
   background-color: #1e293b !important;

@@ -44,7 +44,20 @@
   "ownership_history": [],
   "cod_history": [],
   "suppliers": [],
-  "offtakes": [],
+  "offtakes": [
+    {
+      "party": "CBA (Commonwealth Bank)",
+      "type": "corporate_ppa",
+      "term_years": 12,
+      "source_url": "https://reneweconomy.com.au/commonwealth-bank-signs-ppa-for-sapphire-wind-farm/"
+    },
+    {
+      "party": "ACT Government",
+      "type": "government_ppa",
+      "term_years": 20,
+      "source_url": "https://www.environment.act.gov.au/energy/cleaner-energy/renewable-energy-target"
+    }
+  ],
   "scheme_contracts": [],
   "cost_sources": [],
   "stakeholder_issues": [],

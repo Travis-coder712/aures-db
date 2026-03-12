@@ -1,0 +1,95 @@
+{
+  "sources": [
+    {
+      "id": "aemo_generation_info",
+      "name": "AEMO Generation Information",
+      "description": "Monthly Excel from AEMO with all NEM registered and proposed generators, capacities, and status.",
+      "url": "https://www.aemo.com.au/energy-systems/electricity/national-electricity-market-nem/nem-forecasting-and-planning/forecasting-and-planning-data/generation-information",
+      "frequency": "monthly",
+      "script": "import_aemo_gen_info.py",
+      "last_run": "2026-03-10 02:35:13",
+      "last_status": "completed",
+      "records_imported": 1060,
+      "records_updated": 1,
+      "records_new": 1057,
+      "error": null
+    },
+    {
+      "id": "openelectricity_performance",
+      "name": "OpenElectricity Performance",
+      "description": "Annual energy output, capacity factor, revenue, and curtailment data from the OpenElectricity API.",
+      "url": "https://openelectricity.org.au",
+      "frequency": "monthly",
+      "script": "import_openelectricity.py",
+      "last_run": null,
+      "last_status": "never",
+      "records_imported": 0,
+      "records_updated": 0,
+      "records_new": 0,
+      "error": null
+    },
+    {
+      "id": "openelectricity_metadata",
+      "name": "OpenElectricity Facility Metadata",
+      "description": "Facility coordinates, commencement dates, and unit details from the OpenElectricity API.",
+      "url": "https://openelectricity.org.au",
+      "frequency": "quarterly",
+      "script": "harvest_facility_metadata.py",
+      "last_run": null,
+      "last_status": "never",
+      "records_imported": 0,
+      "records_updated": 0,
+      "records_new": 0,
+      "error": null
+    },
+    {
+      "id": "epbc_referrals",
+      "name": "EPBC Referrals",
+      "description": "Environmental planning referrals from the DCCEEW EPBC Act referrals database.",
+      "url": "https://epbcnotices.environment.gov.au/",
+      "frequency": "monthly",
+      "script": "import_epbc.py",
+      "last_run": null,
+      "last_status": "never",
+      "records_imported": 0,
+      "records_updated": 0,
+      "records_new": 0,
+      "error": null
+    },
+    {
+      "id": "offtake_research",
+      "name": "Offtake / PPA Research",
+      "description": "Power purchase agreements and offtake contracts sourced from public announcements and news.",
+      "url": "",
+      "frequency": "monthly",
+      "script": "research_offtakes.py",
+      "last_run": null,
+      "last_status": "never",
+      "records_imported": 0,
+      "records_updated": 0,
+      "records_new": 0,
+      "error": null
+    },
+    {
+      "id": "web_research",
+      "name": "Web Research",
+      "description": "Project details scraped from RenewEconomy and other renewable energy news sources.",
+      "url": "https://reneweconomy.com.au",
+      "frequency": "ad_hoc",
+      "script": "web_research.py",
+      "last_run": null,
+      "last_status": "never",
+      "records_imported": 0,
+      "records_updated": 0,
+      "records_new": 0,
+      "error": null
+    }
+  ],
+  "database_stats": {
+    "total_projects": 1064,
+    "total_offtakes": 49,
+    "total_oems_contractors": 38,
+    "operating_projects": 222
+  },
+  "exported_at": "2026-03-12T23:37:56.268111"
+}

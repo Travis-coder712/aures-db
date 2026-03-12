@@ -130,7 +130,13 @@
       "grid_forming": false
     }
   ],
-  "offtakes": [],
+  "offtakes": [
+    {
+      "party": "AEMO (system services)",
+      "type": "tolling",
+      "source_url": "https://reneweconomy.com.au/victorian-big-battery/"
+    }
+  ],
   "scheme_contracts": [],
   "cost_sources": [],
   "stakeholder_issues": [

@@ -1,0 +1,440 @@
+{
+  "contractors": [
+    {
+      "slug": "future-generation-joint-venture-webuild-clough-lane",
+      "name": "Future Generation Joint Venture (Webuild/Clough/Lane)",
+      "project_count": 1,
+      "total_capacity_mw": 2200.0,
+      "roles": [
+        "epc"
+      ],
+      "by_technology": {
+        "pumped_hydro": 1
+      },
+      "by_status": {
+        "construction": 1
+      },
+      "states": [
+        "NSW"
+      ],
+      "project_ids": [
+        "snowy-20"
+      ]
+    },
+    {
+      "slug": "afry-aurecon-jv-design-services",
+      "name": "AFRY-Aurecon JV (design services)",
+      "project_count": 1,
+      "total_capacity_mw": 2000.0,
+      "roles": [
+        "epc"
+      ],
+      "by_technology": {
+        "pumped_hydro": 1
+      },
+      "by_status": {
+        "development": 1
+      },
+      "states": [
+        "QLD"
+      ],
+      "project_ids": [
+        "borumba"
+      ]
+    },
+    {
+      "slug": "water2wire-jv-ghd-mott-macdonald-stantec-dam-design",
+      "name": "Water2Wire JV (GHD/Mott MacDonald/Stantec) \u2014 dam design",
+      "project_count": 1,
+      "total_capacity_mw": 2000.0,
+      "roles": [
+        "epc"
+      ],
+      "by_technology": {
+        "pumped_hydro": 1
+      },
+      "by_status": {
+        "development": 1
+      },
+      "states": [
+        "QLD"
+      ],
+      "project_ids": [
+        "borumba"
+      ]
+    },
+    {
+      "slug": "consolidated-power-projects-cpp",
+      "name": "Consolidated Power Projects (CPP)",
+      "project_count": 6,
+      "total_capacity_mw": 1485.0,
+      "roles": [
+        "bop"
+      ],
+      "by_technology": {
+        "bess": 6
+      },
+      "by_status": {
+        "construction": 5,
+        "operating": 1
+      },
+      "states": [
+        "NSW",
+        "QLD",
+        "SA",
+        "VIC"
+      ],
+      "project_ids": [
+        "brendale-bess",
+        "calala-bess-a1",
+        "elaine-bess",
+        "orana-bess",
+        "tailem-bend-stage-3",
+        "williamsdale-bess"
+      ]
+    },
+    {
+      "slug": "vestas-epc-for-stage-1-and-stage-2",
+      "name": "Vestas (EPC for Stage 1 and Stage 2)",
+      "project_count": 1,
+      "total_capacity_mw": 1300.0,
+      "roles": [
+        "epc"
+      ],
+      "by_technology": {
+        "wind": 1
+      },
+      "by_status": {
+        "construction": 1
+      },
+      "states": [
+        "VIC"
+      ],
+      "project_ids": [
+        "golden-plains-wind"
+      ]
+    },
+    {
+      "slug": "vestas-epc",
+      "name": "Vestas (EPC)",
+      "project_count": 2,
+      "total_capacity_mw": 1057.0,
+      "roles": [
+        "epc"
+      ],
+      "by_technology": {
+        "wind": 2
+      },
+      "by_status": {
+        "construction": 2
+      },
+      "states": [
+        "QLD",
+        "VIC"
+      ],
+      "project_ids": [
+        "golden-plains-wind-farm-west",
+        "wambo-wind-farm"
+      ]
+    },
+    {
+      "slug": "zenviron",
+      "name": "Zenviron",
+      "project_count": 2,
+      "total_capacity_mw": 635.0,
+      "roles": [
+        "bop"
+      ],
+      "by_technology": {
+        "wind": 1,
+        "bess": 1
+      },
+      "by_status": {
+        "construction": 2
+      },
+      "states": [
+        "QLD",
+        "VIC"
+      ],
+      "project_ids": [
+        "lotus-creek-wind-farm",
+        "wooreen-energy-storage-system"
+      ]
+    },
+    {
+      "slug": "nuenergy-infrastructure",
+      "name": "NuEnergy Infrastructure",
+      "project_count": 1,
+      "total_capacity_mw": 520.0,
+      "roles": [
+        "bop"
+      ],
+      "by_technology": {
+        "bess": 1
+      },
+      "by_status": {
+        "construction": 1
+      },
+      "states": [
+        "QLD"
+      ],
+      "project_ids": [
+        "supernode-bess"
+      ]
+    },
+    {
+      "slug": "acle-services",
+      "name": "ACLE Services",
+      "project_count": 2,
+      "total_capacity_mw": 490.0,
+      "roles": [
+        "bop"
+      ],
+      "by_technology": {
+        "bess": 2
+      },
+      "by_status": {
+        "construction": 2
+      },
+      "states": [
+        "VIC"
+      ],
+      "project_ids": [
+        "mornington-bess",
+        "pine-lodge-bess"
+      ]
+    },
+    {
+      "slug": "enerven-sa-power-networks",
+      "name": "Enerven (SA Power Networks)",
+      "project_count": 1,
+      "total_capacity_mw": 460.0,
+      "roles": [
+        "bop"
+      ],
+      "by_technology": {
+        "bess": 1
+      },
+      "by_status": {
+        "construction": 1
+      },
+      "states": [
+        "NSW"
+      ],
+      "project_ids": [
+        "eraring-battery"
+      ]
+    },
+    {
+      "slug": "ge-vernova-nacap-ccp-consortium",
+      "name": "GE Vernova + NACAP + CCP (consortium)",
+      "project_count": 1,
+      "total_capacity_mw": 414.0,
+      "roles": [
+        "epc"
+      ],
+      "by_technology": {
+        "wind": 1
+      },
+      "by_status": {
+        "construction": 1
+      },
+      "states": [
+        "NSW"
+      ],
+      "project_ids": [
+        "uungula-wind-farm"
+      ]
+    },
+    {
+      "slug": "yurika-qld-govt-owned",
+      "name": "Yurika (QLD Govt-owned)",
+      "project_count": 1,
+      "total_capacity_mw": 300.0,
+      "roles": [
+        "epc"
+      ],
+      "by_technology": {
+        "bess": 1
+      },
+      "by_status": {
+        "construction": 1
+      },
+      "states": [
+        "QLD"
+      ],
+      "project_ids": [
+        "tarong-bess-stanwell"
+      ]
+    },
+    {
+      "slug": "mcconnell-dowell-john-holland-jv",
+      "name": "McConnell Dowell / John Holland JV",
+      "project_count": 1,
+      "total_capacity_mw": 250.0,
+      "roles": [
+        "epc"
+      ],
+      "by_technology": {
+        "pumped_hydro": 1
+      },
+      "by_status": {
+        "construction": 1
+      },
+      "states": [
+        "QLD"
+      ],
+      "project_ids": [
+        "kidston-pumped-storage-hydro-project-250mw"
+      ]
+    },
+    {
+      "slug": "samsung-c-t-turnkey-epc",
+      "name": "Samsung C&T (turnkey EPC)",
+      "project_count": 1,
+      "total_capacity_mw": 250.0,
+      "roles": [
+        "epc"
+      ],
+      "by_technology": {
+        "bess": 1
+      },
+      "by_status": {
+        "construction": 1
+      },
+      "states": [
+        "VIC"
+      ],
+      "project_ids": [
+        "gnarwarre-bess-facility"
+      ]
+    },
+    {
+      "slug": "dt-infrastructure",
+      "name": "DT Infrastructure",
+      "project_count": 1,
+      "total_capacity_mw": 247.0,
+      "roles": [
+        "bop"
+      ],
+      "by_technology": {
+        "wind": 1
+      },
+      "by_status": {
+        "construction": 1
+      },
+      "states": [
+        "SA"
+      ],
+      "project_ids": [
+        "carmodys-hill-wind-farm"
+      ]
+    },
+    {
+      "slug": "dt-infrastructure-gamuda",
+      "name": "DT Infrastructure / Gamuda",
+      "project_count": 1,
+      "total_capacity_mw": 228.0,
+      "roles": [
+        "bop"
+      ],
+      "by_technology": {
+        "wind": 1
+      },
+      "by_status": {
+        "construction": 1
+      },
+      "states": [
+        "QLD"
+      ],
+      "project_ids": [
+        "boulder-creek-wind-farm"
+      ]
+    },
+    {
+      "slug": "intec-energy-solutions",
+      "name": "INTEC Energy Solutions",
+      "project_count": 1,
+      "total_capacity_mw": 222.0,
+      "roles": [
+        "epc"
+      ],
+      "by_technology": {
+        "bess": 1
+      },
+      "by_status": {
+        "construction": 1
+      },
+      "states": [
+        "QLD"
+      ],
+      "project_ids": [
+        "woolooga-bess"
+      ]
+    },
+    {
+      "slug": "elecnor",
+      "name": "Elecnor",
+      "project_count": 1,
+      "total_capacity_mw": 200.0,
+      "roles": [
+        "bop"
+      ],
+      "by_technology": {
+        "bess": 1
+      },
+      "by_status": {
+        "construction": 1
+      },
+      "states": [
+        "SA"
+      ],
+      "project_ids": [
+        "pelican-point-bess"
+      ]
+    },
+    {
+      "slug": "enzen-australia",
+      "name": "Enzen Australia",
+      "project_count": 1,
+      "total_capacity_mw": 60.0,
+      "roles": [
+        "epc"
+      ],
+      "by_technology": {
+        "bess": 1
+      },
+      "by_status": {
+        "construction": 1
+      },
+      "states": [
+        "SA"
+      ],
+      "project_ids": [
+        "clements-gap-bess"
+      ]
+    },
+    {
+      "slug": "beon-energy-solutions",
+      "name": "Beon Energy Solutions",
+      "project_count": 1,
+      "total_capacity_mw": 50.0,
+      "roles": [
+        "bop"
+      ],
+      "by_technology": {
+        "bess": 1
+      },
+      "by_status": {
+        "construction": 1
+      },
+      "states": [
+        "NSW"
+      ],
+      "project_ids": [
+        "limondale-bess"
+      ]
+    }
+  ],
+  "total": 20
+}

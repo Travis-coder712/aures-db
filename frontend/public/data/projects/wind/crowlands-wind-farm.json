@@ -44,7 +44,14 @@
   "ownership_history": [],
   "cod_history": [],
   "suppliers": [],
-  "offtakes": [],
+  "offtakes": [
+    {
+      "party": "NAB (National Australia Bank)",
+      "type": "corporate_ppa",
+      "term_years": 10,
+      "source_url": "https://reneweconomy.com.au/crowlands-wind-farm/"
+    }
+  ],
   "scheme_contracts": [],
   "cost_sources": [],
   "stakeholder_issues": [],

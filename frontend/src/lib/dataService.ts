@@ -5,7 +5,7 @@
  * In production (GitHub Pages), they're served as static files.
  * In development (Vite dev server), they're served from the public/ directory.
  */
-import type { ProjectSummary, Project, Technology, ProjectStatus, State, LeagueTable, LeagueTableIndex, LeagueTechnology, DeveloperIndex, MapProject, CODDriftData } from './types'
+import type { ProjectSummary, Project, Technology, ProjectStatus, State, LeagueTable, LeagueTableIndex, LeagueTechnology, DeveloperIndex, OEMIndex, ContractorIndex, OfftakerIndex, MapProject, CODDriftData, DataSourcesIndex } from './types'
 
 const BASE = import.meta.env.BASE_URL + 'data'
 
@@ -148,6 +148,48 @@ export async function fetchDeveloperIndex(): Promise<DeveloperIndex> {
 }
 
 // ============================================================
+// OEM Profiles
+// ============================================================
+
+let oemIndexCache: OEMIndex | null = null
+
+export async function fetchOEMIndex(): Promise<OEMIndex> {
+  if (oemIndexCache) return oemIndexCache
+  const resp = await fetch(`${BASE}/indexes/oem-profiles.json`)
+  if (!resp.ok) throw new Error(`Failed to load OEM profiles: ${resp.status}`)
+  oemIndexCache = (await resp.json()) as OEMIndex
+  return oemIndexCache
+}
+
+// ============================================================
+// Contractor Profiles
+// ============================================================
+
+let contractorIndexCache: ContractorIndex | null = null
+
+export async function fetchContractorIndex(): Promise<ContractorIndex> {
+  if (contractorIndexCache) return contractorIndexCache
+  const resp = await fetch(`${BASE}/indexes/contractor-profiles.json`)
+  if (!resp.ok) throw new Error(`Failed to load contractor profiles: ${resp.status}`)
+  contractorIndexCache = (await resp.json()) as ContractorIndex
+  return contractorIndexCache
+}
+
+// ============================================================
+// Offtaker Data
+// ============================================================
+
+let offtakerIndexCache: OfftakerIndex | null = null
+
+export async function fetchOfftakerIndex(): Promise<OfftakerIndex> {
+  if (offtakerIndexCache) return offtakerIndexCache
+  const resp = await fetch(`${BASE}/indexes/offtaker-profiles.json`)
+  if (!resp.ok) throw new Error(`Failed to load offtaker profiles: ${resp.status}`)
+  offtakerIndexCache = (await resp.json()) as OfftakerIndex
+  return offtakerIndexCache
+}
+
+// ============================================================
 // Map Data
 // ============================================================
 
@@ -220,4 +262,22 @@ export function computeStatsFromIndex(projects: ProjectSummary[]): QuickStats {
   }
 
   return stats
+}
+
+// ============================================================
+// Data Sources Status
+// ============================================================
+
+let dataSourcesCache: DataSourcesIndex | null = null
+
+export async function fetchDataSources(): Promise<DataSourcesIndex | null> {
+  if (dataSourcesCache) return dataSourcesCache
+  try {
+    const resp = await fetch(`${BASE}/metadata/data-sources.json`)
+    if (!resp.ok) return null
+    dataSourcesCache = (await resp.json()) as DataSourcesIndex
+    return dataSourcesCache
+  } catch {
+    return null
+  }
 }

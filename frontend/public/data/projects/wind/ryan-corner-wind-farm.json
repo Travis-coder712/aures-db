@@ -53,7 +53,13 @@
   "ownership_history": [],
   "cod_history": [],
   "suppliers": [],
-  "offtakes": [],
+  "offtakes": [
+    {
+      "party": "Alinta Energy",
+      "type": "PPA",
+      "source_url": "https://reneweconomy.com.au/ryan-corner-wind-farm/"
+    }
+  ],
   "scheme_contracts": [],
   "cost_sources": [],
   "stakeholder_issues": [],

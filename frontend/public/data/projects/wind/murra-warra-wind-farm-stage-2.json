@@ -44,7 +44,13 @@
   "ownership_history": [],
   "cod_history": [],
   "suppliers": [],
-  "offtakes": [],
+  "offtakes": [
+    {
+      "party": "Telstra",
+      "type": "corporate_ppa",
+      "source_url": "https://reneweconomy.com.au/murra-warra-wind-farm/"
+    }
+  ],
   "scheme_contracts": [],
   "cost_sources": [],
   "stakeholder_issues": [],

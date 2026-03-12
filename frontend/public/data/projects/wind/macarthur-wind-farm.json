@@ -44,7 +44,13 @@
   "ownership_history": [],
   "cod_history": [],
   "suppliers": [],
-  "offtakes": [],
+  "offtakes": [
+    {
+      "party": "AGL Energy",
+      "type": "PPA",
+      "source_url": "https://www.agl.com.au/about-agl/how-we-source-energy/macarthur-wind-farm"
+    }
+  ],
   "scheme_contracts": [],
   "cost_sources": [],
   "stakeholder_issues": [],

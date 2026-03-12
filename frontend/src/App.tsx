@@ -14,7 +14,14 @@ import REZDetail from './pages/REZDetail'
 import Performance from './pages/Performance'
 import DeveloperList from './pages/DeveloperList'
 import DeveloperDetail from './pages/DeveloperDetail'
+import OEMList from './pages/OEMList'
+import OEMDetail from './pages/OEMDetail'
+import ContractorList from './pages/ContractorList'
+import ContractorDetail from './pages/ContractorDetail'
+import OfftakerList from './pages/OfftakerList'
+import OfftakerDetail from './pages/OfftakerDetail'
 import MapView from './pages/MapView'
+import DataSources from './pages/DataSources'
 import NotFound from './pages/NotFound'
 
 function App() {
@@ -39,8 +46,18 @@ function App() {
         {/* Phase 4: Developers */}
         <Route path="developers" element={<DeveloperList />} />
         <Route path="developers/:slug" element={<DeveloperDetail />} />
+        {/* Phase 5: OEMs + Contractors */}
+        <Route path="oems" element={<OEMList />} />
+        <Route path="oems/:slug" element={<OEMDetail />} />
+        <Route path="contractors" element={<ContractorList />} />
+        <Route path="contractors/:slug" element={<ContractorDetail />} />
+        {/* Phase 5: Offtakers */}
+        <Route path="offtakers" element={<OfftakerList />} />
+        <Route path="offtakers/:slug" element={<OfftakerDetail />} />
         {/* Phase 4: Map */}
         <Route path="map" element={<MapView />} />
+        {/* Admin */}
+        <Route path="data-sources" element={<DataSources />} />
         {/* Future routes */}
         {/* <Route path="watchlist" element={<Watchlist />} /> */}
         <Route path="*" element={<NotFound />} />

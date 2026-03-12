@@ -297,10 +297,94 @@ export interface QuartileBenchmarks {
   }
 }
 
+// OEM & Contractor profile types (Phase 5)
+export type OEMRole = 'wind_oem' | 'bess_oem' | 'hydro_oem' | 'inverter'
+export type ContractorRole = 'epc' | 'bop'
+
+export interface OEMProfile {
+  slug: string
+  name: string
+  project_count: number
+  total_capacity_mw: number
+  roles: OEMRole[]
+  models: string[]
+  by_technology: Partial<Record<Technology, number>>
+  by_status: Partial<Record<ProjectStatus, number>>
+  states: State[]
+  project_ids: string[]
+}
+
+export interface OEMIndex {
+  oems: OEMProfile[]
+  total: number
+}
+
+export interface ContractorProfile {
+  slug: string
+  name: string
+  project_count: number
+  total_capacity_mw: number
+  roles: ContractorRole[]
+  by_technology: Partial<Record<Technology, number>>
+  by_status: Partial<Record<ProjectStatus, number>>
+  states: State[]
+  project_ids: string[]
+}
+
+export interface ContractorIndex {
+  contractors: ContractorProfile[]
+  total: number
+}
+
+export type OfftakeType = 'PPA' | 'corporate_ppa' | 'government_ppa' | 'tolling' | 'merchant' | 'CIS' | 'LTESA' | 'SIPS' | 'FCAS' | 'other'
+
+export interface OfftakerProfile {
+  slug: string
+  name: string
+  project_count: number
+  total_capacity_mw: number
+  types: OfftakeType[]
+  by_technology: Partial<Record<Technology, number>>
+  by_status: Partial<Record<ProjectStatus, number>>
+  states: State[]
+  project_ids: string[]
+}
+
+export interface OfftakerIndex {
+  offtakers: OfftakerProfile[]
+  total: number
+}
+
+export const OFFTAKE_TYPE_CONFIG: Record<OfftakeType, { label: string; color: string }> = {
+  PPA: { label: 'PPA', color: '#3b82f6' },
+  corporate_ppa: { label: 'Corporate PPA', color: '#8b5cf6' },
+  government_ppa: { label: 'Government PPA', color: '#22c55e' },
+  tolling: { label: 'Tolling', color: '#f59e0b' },
+  merchant: { label: 'Merchant', color: '#6b7280' },
+  CIS: { label: 'CIS', color: '#14b8a6' },
+  LTESA: { label: 'LTESA', color: '#06b6d4' },
+  SIPS: { label: 'SIPS', color: '#ec4899' },
+  FCAS: { label: 'FCAS', color: '#f97316' },
+  other: { label: 'Other', color: '#6b7280' },
+}
+
+export const OEM_ROLE_CONFIG: Record<OEMRole, { label: string; color: string }> = {
+  wind_oem: { label: 'Wind OEM', color: '#3b82f6' },
+  bess_oem: { label: 'BESS OEM', color: '#8b5cf6' },
+  hydro_oem: { label: 'Hydro OEM', color: '#14b8a6' },
+  inverter: { label: 'Inverter', color: '#f59e0b' },
+}
+
+export const CONTRACTOR_ROLE_CONFIG: Record<ContractorRole, { label: string; color: string }> = {
+  epc: { label: 'EPC', color: '#ef4444' },
+  bop: { label: 'BoP', color: '#f97316' },
+}
+
 // Developer profile types (Phase 4)
 export interface DeveloperProfile {
   slug: string
   name: string
+  aliases?: string[]
   project_count: number
   total_capacity_mw: number
   total_storage_mwh: number
@@ -314,6 +398,9 @@ export interface DeveloperProfile {
 export interface DeveloperIndex {
   developers: DeveloperProfile[]
   total_developers: number
+  grouped_developers: DeveloperProfile[]
+  total_grouped: number
+  top_developers: { slug: string; name: string; project_count: number }[]
 }
 
 // Map data types (Phase 4)
@@ -382,4 +469,33 @@ export const DEVELOPMENT_STAGE_CONFIG: Record<DevelopmentStage, { label: string;
   epbc_submitted: { label: 'EPBC Submitted', color: '#10b981', icon: '◐' },
   planning_submitted: { label: 'AEMO Announced', color: '#f59e0b', icon: '◐' },
   early_stage: { label: 'Early Stage', color: '#6b7280', icon: '○' },
+}
+
+// Data Sources (admin/status page)
+export type DataSourceFrequency = 'monthly' | 'quarterly' | 'ad_hoc'
+
+export interface DataSourceInfo {
+  id: string
+  name: string
+  description: string
+  url: string
+  frequency: DataSourceFrequency
+  script: string
+  last_run: string | null
+  last_status: 'completed' | 'failed' | 'running' | 'never'
+  records_imported: number
+  records_updated: number
+  records_new: number
+  error: string | null
+}
+
+export interface DataSourcesIndex {
+  sources: DataSourceInfo[]
+  database_stats: {
+    total_projects: number
+    total_offtakes: number
+    total_oems_contractors: number
+    operating_projects: number
+  }
+  exported_at: string
 }
