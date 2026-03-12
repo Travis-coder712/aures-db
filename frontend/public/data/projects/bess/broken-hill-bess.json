@@ -6,7 +6,8 @@
   "capacity_mw": 50.0,
   "storage_mwh": 60.28,
   "state": "NSW",
-  "current_developer": "MACQGEN",
+  "current_developer": "AGL Energy / Macquarie",
+  "current_operator": "AGL Energy",
   "cod_current": "2023-11-30",
   "cod_original": "2023-11-30",
   "grid_forming": true,
@@ -40,11 +41,48 @@
       "title": "First generation recorded",
       "detail": "First market dispatch data recorded in AEMO systems.",
       "sources": []
+    },
+    {
+      "date": "2024-03-01",
+      "date_precision": "month",
+      "event_type": "construction_start",
+      "title": "AGL begins construction of grid-forming BESS",
+      "detail": "AGL commenced construction of 50MW/50MWh Fluence Gridstack battery in Broken Hill \u2014 critical for grid stability in remote western NSW. ARENA support for grid-forming inverters.",
+      "sources": []
+    },
+    {
+      "date": "2025-09-01",
+      "date_precision": "month",
+      "event_type": "cod",
+      "title": "Grid-forming battery operational in remote NSW",
+      "detail": "Broken Hill BESS commenced operations using Fluence Gridstack with EPC Power grid-forming inverters, providing critical system strength in one of the most challenging parts of the NEM grid.",
+      "sources": []
     }
   ],
   "ownership_history": [],
   "cod_history": [],
-  "suppliers": [],
+  "suppliers": [
+    {
+      "role": "bess_oem",
+      "supplier": "Fluence",
+      "model": "Gridstack (grid-forming)",
+      "grid_forming": false,
+      "source_url": "https://ir.fluenceenergy.com/news-releases/news-release-details/fluence-deliver-grid-forming-energy-storage-system-agls-broken"
+    },
+    {
+      "role": "epc",
+      "supplier": "Fluence / Valmec (Altrad)",
+      "grid_forming": false,
+      "source_url": "https://ir.fluenceenergy.com/news-releases/news-release-details/fluence-deliver-grid-forming-energy-storage-system-agls-broken"
+    },
+    {
+      "role": "inverter",
+      "supplier": "EPC Power",
+      "model": "Grid-forming inverters",
+      "grid_forming": false,
+      "source_url": "https://www.energy-storage.news/agl-begins-construction-of-broken-hill-grid-forming-bess-in-australia/"
+    }
+  ],
   "offtakes": [],
   "scheme_contracts": [],
   "cost_sources": [],

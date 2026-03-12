@@ -31,7 +31,21 @@
   ],
   "ownership_history": [],
   "cod_history": [],
-  "suppliers": [],
+  "suppliers": [
+    {
+      "role": "bess_oem",
+      "supplier": "CATL",
+      "model": "Liquid-cooled LFP",
+      "grid_forming": false,
+      "source_url": "https://www.doosangridtech.com/press-release/tailembend"
+    },
+    {
+      "role": "epc",
+      "supplier": "Doosan GridTech",
+      "grid_forming": false,
+      "source_url": "https://www.doosangridtech.com/press-release/tailembend"
+    }
+  ],
   "offtakes": [],
   "scheme_contracts": [],
   "cost_sources": [],

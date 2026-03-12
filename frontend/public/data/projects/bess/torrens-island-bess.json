@@ -6,7 +6,8 @@
   "capacity_mw": 250.0,
   "storage_mwh": 249.61,
   "state": "SA",
-  "current_developer": "TIPSCO",
+  "current_developer": "AGL Energy",
+  "current_operator": "AGL Energy",
   "cod_current": "2023-04-25",
   "cod_original": "2023-04-25",
   "grid_forming": true,
@@ -20,6 +21,9 @@
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "1866",
   "confidence_score": "48",
+  "capex_aud_m": 180.0,
+  "capex_source": "AGL/energy-storage.news",
+  "capex_year": 2021,
   "coordinates": {
     "lat": -34.805831,
     "lng": 138.524192
@@ -40,11 +44,66 @@
       "title": "First generation recorded",
       "detail": "First market dispatch data recorded in AEMO systems.",
       "sources": []
+    },
+    {
+      "date": "2023-08-01",
+      "date_precision": "month",
+      "event_type": "cod",
+      "title": "Commercial operations begin",
+      "detail": "AGL's 250MW/250MWh Torrens Island BESS reached COD after 18-month build by Wartsila, becoming SA's largest battery at the time.",
+      "sources": []
+    },
+    {
+      "date": "2025-11-11",
+      "date_precision": "day",
+      "event_type": "stakeholder_issue",
+      "title": "First AEMO minimum system load direction",
+      "detail": "AEMO directed Torrens Island BESS to charge under minimum system load protocols \u2014 first time a BESS was subject to MSL directions in the NEM.",
+      "sources": []
+    },
+    {
+      "date": "2025-11-12",
+      "date_precision": "day",
+      "event_type": "stakeholder_issue",
+      "title": "Second consecutive AEMO MSL direction",
+      "detail": "AEMO directed the battery for a second consecutive day, preventing charging during optimal pricing windows.",
+      "sources": []
+    },
+    {
+      "date": "2025-11-15",
+      "date_precision": "day",
+      "event_type": "stakeholder_issue",
+      "title": "Third AEMO MSL direction in one week",
+      "detail": "Third MSL direction issued within same week, establishing pattern of grid-security interventions overriding battery economics.",
+      "sources": []
     }
   ],
   "ownership_history": [],
   "cod_history": [],
-  "suppliers": [],
+  "suppliers": [
+    {
+      "role": "bess_oem",
+      "supplier": "Wartsila",
+      "model": "Quantum (CATL LFP cells)",
+      "quantity": 218,
+      "grid_forming": false,
+      "source_url": "https://www.energy-storage.news/agl-wartsila-complete-250mw-torrens-island-bess-project-in-south-australia/"
+    },
+    {
+      "role": "epc",
+      "supplier": "Wartsila",
+      "grid_forming": false,
+      "source_url": "https://www.energy-storage.news/agl-wartsila-complete-250mw-torrens-island-bess-project-in-south-australia/"
+    },
+    {
+      "role": "inverter",
+      "supplier": "SMA",
+      "model": "Sunny Central Storage 3600 UP-XT",
+      "quantity": 109,
+      "grid_forming": false,
+      "source_url": "https://www.sma-australia.com.au/success-stories/torrens-island-battery-energy-storage-system"
+    }
+  ],
   "offtakes": [
     {
       "party": "SA Government",

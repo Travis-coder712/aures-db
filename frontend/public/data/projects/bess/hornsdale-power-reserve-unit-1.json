@@ -6,7 +6,8 @@
   "capacity_mw": 150.0,
   "storage_mwh": 117.0,
   "state": "SA",
-  "current_developer": "Hornsdale Power Reserve Pty Ltd",
+  "current_developer": "Neoen",
+  "current_operator": "Neoen",
   "cod_current": "2017-11-23",
   "cod_original": "2017-11-23",
   "grid_forming": true,
@@ -20,6 +21,9 @@
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "1610",
   "confidence_score": "48",
+  "capex_aud_m": 89.0,
+  "capex_source": "RenewEconomy",
+  "capex_year": 2017,
   "coordinates": {
     "lat": -33.085519,
     "lng": 138.521914
@@ -44,7 +48,15 @@
   ],
   "ownership_history": [],
   "cod_history": [],
-  "suppliers": [],
+  "suppliers": [
+    {
+      "role": "bess_oem",
+      "supplier": "Tesla",
+      "model": "Powerpack",
+      "grid_forming": false,
+      "source_url": "https://hornsdalepowerreserve.com.au/"
+    }
+  ],
   "offtakes": [],
   "scheme_contracts": [],
   "cost_sources": [],

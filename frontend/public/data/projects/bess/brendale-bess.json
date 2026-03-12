@@ -7,6 +7,7 @@
   "storage_mwh": 409.92,
   "state": "QLD",
   "current_developer": "Akaysha Energy (BlackRock)",
+  "current_operator": "Akaysha Energy",
   "cod_current": "2026-06-30",
   "cod_original": "2026-06-30",
   "grid_forming": true,
@@ -21,12 +22,23 @@
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "2526",
   "confidence_score": "61",
+  "capex_aud_m": 300.0,
+  "capex_source": "Akaysha estimate",
+  "capex_year": 2023,
   "timeline": [
     {
       "date": "2023-12-01",
       "date_precision": "month",
       "event_type": "notable",
       "title": "FID reached",
+      "sources": []
+    },
+    {
+      "date": "2024-06-01",
+      "date_precision": "month",
+      "event_type": "construction_start",
+      "title": "Construction begins at Brendale, QLD",
+      "detail": "Akaysha Energy broke ground on 205MW/410MWh battery using Tesla Megapack 2 units in suburban Brisbane.",
       "sources": []
     },
     {
@@ -42,6 +54,14 @@
       "event_type": "cod",
       "title": "Fully operational \u2014 5 months early",
       "detail": "Akaysha Brendale BESS operational Jan 2026",
+      "sources": []
+    },
+    {
+      "date": "2026-01-01",
+      "date_precision": "month",
+      "event_type": "cod",
+      "title": "Commercial operations \u2014 5 months ahead of schedule",
+      "detail": "Brendale BESS commenced commercial operations approximately 5 months ahead of schedule, making it Akaysha's second operational project after Waratah.",
       "sources": []
     },
     {

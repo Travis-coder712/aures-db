@@ -19,6 +19,9 @@
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "1966",
   "confidence_score": "22",
+  "capex_aud_m": 244.0,
+  "capex_source": "ARENA",
+  "capex_year": 2022,
   "timeline": [
     {
       "date": "2026-03-12",
@@ -31,7 +34,21 @@
   ],
   "ownership_history": [],
   "cod_history": [],
-  "suppliers": [],
+  "suppliers": [
+    {
+      "role": "bess_oem",
+      "supplier": "Tesla",
+      "model": "Megapack",
+      "grid_forming": false,
+      "source_url": "https://neoen.com/en/news/2025/neoen-delivers-western-downs-battery-stage-2-and-launches-stage-3-in-queensland-australia/"
+    },
+    {
+      "role": "epc",
+      "supplier": "UGL (CIMIC Group)",
+      "grid_forming": false,
+      "source_url": "https://www.ugllimited.com/news/2025/western-downs-battery-stage-1-is-operating"
+    }
+  ],
   "offtakes": [
     {
       "party": "CleanCo Queensland",

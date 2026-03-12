@@ -1,6 +1,45 @@
 {
   "contractors": [
     {
+      "slug": "consolidated-power-projects-cpp",
+      "name": "Consolidated Power Projects (CPP)",
+      "project_count": 13,
+      "total_capacity_mw": 3066.0,
+      "roles": [
+        "bop",
+        "epc"
+      ],
+      "by_technology": {
+        "bess": 13
+      },
+      "by_status": {
+        "construction": 5,
+        "operating": 7,
+        "commissioning": 1
+      },
+      "states": [
+        "NSW",
+        "QLD",
+        "SA",
+        "VIC"
+      ],
+      "project_ids": [
+        "bouldercombe-battery-project",
+        "brendale-bess",
+        "calala-bess-a1",
+        "dalrymple-bess",
+        "elaine-bess",
+        "greenbank-bess",
+        "koorangie-energy-storage-system",
+        "orana-bess",
+        "tailem-bend-stage-3",
+        "templers-bess",
+        "ulinda-park-bess",
+        "waratah-super-battery",
+        "williamsdale-bess"
+      ]
+    },
+    {
       "slug": "future-generation-joint-venture-webuild-clough-lane",
       "name": "Future Generation Joint Venture (Webuild/Clough/Lane)",
       "project_count": 1,
@@ -64,36 +103,6 @@
       ]
     },
     {
-      "slug": "consolidated-power-projects-cpp",
-      "name": "Consolidated Power Projects (CPP)",
-      "project_count": 6,
-      "total_capacity_mw": 1485.0,
-      "roles": [
-        "bop"
-      ],
-      "by_technology": {
-        "bess": 6
-      },
-      "by_status": {
-        "construction": 5,
-        "operating": 1
-      },
-      "states": [
-        "NSW",
-        "QLD",
-        "SA",
-        "VIC"
-      ],
-      "project_ids": [
-        "brendale-bess",
-        "calala-bess-a1",
-        "elaine-bess",
-        "orana-bess",
-        "tailem-bend-stage-3",
-        "williamsdale-bess"
-      ]
-    },
-    {
       "slug": "vestas-epc-for-stage-1-and-stage-2",
       "name": "Vestas (EPC for Stage 1 and Stage 2)",
       "project_count": 1,
@@ -138,6 +147,27 @@
       ]
     },
     {
+      "slug": "enerven",
+      "name": "Enerven",
+      "project_count": 1,
+      "total_capacity_mw": 700.0,
+      "roles": [
+        "epc"
+      ],
+      "by_technology": {
+        "bess": 1
+      },
+      "by_status": {
+        "operating": 1
+      },
+      "states": [
+        "NSW"
+      ],
+      "project_ids": [
+        "eraring-big-battery"
+      ]
+    },
+    {
       "slug": "zenviron",
       "name": "Zenviron",
       "project_count": 2,
@@ -162,6 +192,55 @@
       ]
     },
     {
+      "slug": "samsung-c-t-genus-plus-jv",
+      "name": "Samsung C&T / Genus Plus JV",
+      "project_count": 3,
+      "total_capacity_mw": 600.0,
+      "roles": [
+        "epc"
+      ],
+      "by_technology": {
+        "bess": 3
+      },
+      "by_status": {
+        "operating": 3
+      },
+      "states": [
+        "VIC"
+      ],
+      "project_ids": [
+        "melbourne-renewable-energy-hub-connection-a1",
+        "melbourne-renewable-energy-hub-connection-a2",
+        "melbourne-renewable-energy-hub-connection-a3"
+      ]
+    },
+    {
+      "slug": "acle-services",
+      "name": "ACLE Services",
+      "project_count": 3,
+      "total_capacity_mw": 555.0,
+      "roles": [
+        "bop",
+        "epc"
+      ],
+      "by_technology": {
+        "bess": 3
+      },
+      "by_status": {
+        "construction": 2,
+        "operating": 1
+      },
+      "states": [
+        "NSW",
+        "VIC"
+      ],
+      "project_ids": [
+        "mornington-bess",
+        "pine-lodge-bess",
+        "smithfield-bess"
+      ]
+    },
+    {
       "slug": "nuenergy-infrastructure",
       "name": "NuEnergy Infrastructure",
       "project_count": 1,
@@ -183,25 +262,24 @@
       ]
     },
     {
-      "slug": "acle-services",
-      "name": "ACLE Services",
-      "project_count": 2,
-      "total_capacity_mw": 490.0,
+      "slug": "ugl-cimic-group",
+      "name": "UGL (CIMIC Group)",
+      "project_count": 1,
+      "total_capacity_mw": 510.0,
       "roles": [
-        "bop"
+        "epc"
       ],
       "by_technology": {
-        "bess": 2
+        "bess": 1
       },
       "by_status": {
-        "construction": 2
+        "commissioning": 1
       },
       "states": [
-        "VIC"
+        "QLD"
       ],
       "project_ids": [
-        "mornington-bess",
-        "pine-lodge-bess"
+        "western-downs-battery-stage-1-and-2"
       ]
     },
     {
@@ -310,6 +388,48 @@
       ]
     },
     {
+      "slug": "wartsila",
+      "name": "Wartsila",
+      "project_count": 1,
+      "total_capacity_mw": 250.0,
+      "roles": [
+        "epc"
+      ],
+      "by_technology": {
+        "bess": 1
+      },
+      "by_status": {
+        "operating": 1
+      },
+      "states": [
+        "SA"
+      ],
+      "project_ids": [
+        "torrens-island-bess"
+      ]
+    },
+    {
+      "slug": "acle-services-acenergy",
+      "name": "ACLE Services / ACEnergy",
+      "project_count": 1,
+      "total_capacity_mw": 250.0,
+      "roles": [
+        "epc"
+      ],
+      "by_technology": {
+        "bess": 1
+      },
+      "by_status": {
+        "construction": 1
+      },
+      "states": [
+        "VIC"
+      ],
+      "project_ids": [
+        "pine-lodge-bess"
+      ]
+    },
+    {
       "slug": "dt-infrastructure",
       "name": "DT Infrastructure",
       "project_count": 1,
@@ -394,6 +514,241 @@
       ]
     },
     {
+      "slug": "nhoa-energy-elecnor-jv",
+      "name": "NHOA Energy / Elecnor JV",
+      "project_count": 1,
+      "total_capacity_mw": 200.0,
+      "roles": [
+        "epc"
+      ],
+      "by_technology": {
+        "bess": 1
+      },
+      "by_status": {
+        "operating": 1
+      },
+      "states": [
+        "SA"
+      ],
+      "project_ids": [
+        "blyth-bess"
+      ]
+    },
+    {
+      "slug": "fluence-zenviron",
+      "name": "Fluence / Zenviron",
+      "project_count": 1,
+      "total_capacity_mw": 200.0,
+      "roles": [
+        "epc"
+      ],
+      "by_technology": {
+        "bess": 1
+      },
+      "by_status": {
+        "operating": 1
+      },
+      "states": [
+        "VIC"
+      ],
+      "project_ids": [
+        "latrobe-valley-bess"
+      ]
+    },
+    {
+      "slug": "rje-global-symal-jv",
+      "name": "RJE Global / Symal JV",
+      "project_count": 1,
+      "total_capacity_mw": 200.0,
+      "roles": [
+        "epc"
+      ],
+      "by_technology": {
+        "bess": 1
+      },
+      "by_status": {
+        "operating": 1
+      },
+      "states": [
+        "VIC"
+      ],
+      "project_ids": [
+        "rangebank-bess"
+      ]
+    },
+    {
+      "slug": "fluence",
+      "name": "Fluence",
+      "project_count": 1,
+      "total_capacity_mw": 150.0,
+      "roles": [
+        "epc"
+      ],
+      "by_technology": {
+        "bess": 1
+      },
+      "by_status": {
+        "operating": 1
+      },
+      "states": [
+        "VIC"
+      ],
+      "project_ids": [
+        "hazelwood-battery-energy-storage-system-hbess"
+      ]
+    },
+    {
+      "slug": "doosan-gridtech",
+      "name": "Doosan GridTech",
+      "project_count": 2,
+      "total_capacity_mw": 141.5,
+      "roles": [
+        "epc"
+      ],
+      "by_technology": {
+        "bess": 2
+      },
+      "by_status": {
+        "operating": 1,
+        "commissioning": 1
+      },
+      "states": [
+        "QLD",
+        "SA"
+      ],
+      "project_ids": [
+        "tailem-bend-battery-project",
+        "wandoan-south-bess"
+      ]
+    },
+    {
+      "slug": "edify-energy",
+      "name": "Edify Energy",
+      "project_count": 2,
+      "total_capacity_mw": 125.0,
+      "roles": [
+        "epc"
+      ],
+      "by_technology": {
+        "bess": 2
+      },
+      "by_status": {
+        "operating": 2
+      },
+      "states": [
+        "NSW"
+      ],
+      "project_ids": [
+        "riverina-energy-storage-system-1",
+        "riverina-energy-storage-system-2"
+      ]
+    },
+    {
+      "slug": "doosan-gridtech-provecta",
+      "name": "Doosan GridTech / Provecta",
+      "project_count": 1,
+      "total_capacity_mw": 100.0,
+      "roles": [
+        "epc"
+      ],
+      "by_technology": {
+        "bess": 1
+      },
+      "by_status": {
+        "operating": 1
+      },
+      "states": [
+        "NSW"
+      ],
+      "project_ids": [
+        "capital-battery"
+      ]
+    },
+    {
+      "slug": "downer",
+      "name": "Downer",
+      "project_count": 1,
+      "total_capacity_mw": 100.0,
+      "roles": [
+        "epc"
+      ],
+      "by_technology": {
+        "bess": 1
+      },
+      "by_status": {
+        "operating": 1
+      },
+      "states": [
+        "QLD"
+      ],
+      "project_ids": [
+        "chinchilla-bess"
+      ]
+    },
+    {
+      "slug": "canadian-solar-e-storage-cpp",
+      "name": "Canadian Solar e-STORAGE / CPP",
+      "project_count": 1,
+      "total_capacity_mw": 100.0,
+      "roles": [
+        "epc"
+      ],
+      "by_technology": {
+        "bess": 1
+      },
+      "by_status": {
+        "operating": 1
+      },
+      "states": [
+        "SA"
+      ],
+      "project_ids": [
+        "mannum-bess"
+      ]
+    },
+    {
+      "slug": "zenviron-wartsila",
+      "name": "Zenviron / Wartsila",
+      "project_count": 1,
+      "total_capacity_mw": 100.0,
+      "roles": [
+        "epc"
+      ],
+      "by_technology": {
+        "bess": 1
+      },
+      "by_status": {
+        "construction": 1
+      },
+      "states": [
+        "VIC"
+      ],
+      "project_ids": [
+        "bennetts-creek-bess"
+      ]
+    },
+    {
+      "slug": "canadian-solar-tec-c",
+      "name": "Canadian Solar / TEC-C",
+      "project_count": 1,
+      "total_capacity_mw": 100.0,
+      "roles": [
+        "epc"
+      ],
+      "by_technology": {
+        "bess": 1
+      },
+      "by_status": {
+        "construction": 1
+      },
+      "states": [
+        "VIC"
+      ],
+      "project_ids": [
+        "terang-bess"
+      ]
+    },
+    {
       "slug": "enzen-australia",
       "name": "Enzen Australia",
       "project_count": 1,
@@ -434,7 +789,70 @@
       "project_ids": [
         "limondale-bess"
       ]
+    },
+    {
+      "slug": "fluence-valmec-altrad",
+      "name": "Fluence / Valmec (Altrad)",
+      "project_count": 1,
+      "total_capacity_mw": 50.0,
+      "roles": [
+        "epc"
+      ],
+      "by_technology": {
+        "bess": 1
+      },
+      "by_status": {
+        "operating": 1
+      },
+      "states": [
+        "NSW"
+      ],
+      "project_ids": [
+        "broken-hill-bess"
+      ]
+    },
+    {
+      "slug": "tesla",
+      "name": "Tesla",
+      "project_count": 1,
+      "total_capacity_mw": 50.0,
+      "roles": [
+        "epc"
+      ],
+      "by_technology": {
+        "bess": 1
+      },
+      "by_status": {
+        "operating": 1
+      },
+      "states": [
+        "NSW"
+      ],
+      "project_ids": [
+        "wallgrove-grid-battery-project"
+      ]
+    },
+    {
+      "slug": "spotless-sustainability-services",
+      "name": "Spotless Sustainability Services",
+      "project_count": 1,
+      "total_capacity_mw": 30.0,
+      "roles": [
+        "epc"
+      ],
+      "by_technology": {
+        "bess": 1
+      },
+      "by_status": {
+        "operating": 1
+      },
+      "states": [
+        "VIC"
+      ],
+      "project_ids": [
+        "ballarat-energy-storage-system"
+      ]
     }
   ],
-  "total": 20
+  "total": 39
 }

@@ -39,9 +39,9 @@ def fetch_project_summary(conn, project_id):
     """Fetch lightweight summary for list views."""
     row = conn.execute("""
         SELECT id, name, technology, status, capacity_mw, storage_mwh,
-               state, current_developer, rez, development_score,
+               state, current_developer, current_operator, rez, development_score,
                performance_score, data_confidence, confidence_score,
-               development_stage
+               development_stage, capex_aud_m, capex_year, notable
         FROM projects WHERE id = ?
     """, (project_id,)).fetchone()
     if not row:
@@ -280,7 +280,10 @@ def export_all(db_path=DB_PATH):
     # 12. Data sources status
     export_data_sources(conn)
 
-    # 13. Export metadata
+    # 13. BESS capex analytics
+    export_bess_capex(conn)
+
+    # 14. Export metadata
     write_json(os.path.join(DATA_DIR, 'metadata', 'last-export.json'), {
         'exported_at': datetime.now().isoformat(),
         'project_count': len(summaries),
@@ -857,6 +860,80 @@ def export_offtaker_profiles(conn):
         'total': len(offtakers),
     })
     print(f"  indexes/offtaker-profiles.json ({len(offtakers)} offtakers)")
+
+
+def export_bess_capex(conn):
+    """Export BESS capex analytics data for cost trend analysis."""
+    rows = conn.execute("""
+        SELECT p.id, p.name, p.status, p.capacity_mw, p.storage_mwh,
+               p.capex_aud_m, p.capex_year, p.capex_source, p.state,
+               p.current_developer, p.current_operator,
+               s.supplier as bess_oem, s.model as bess_model
+        FROM projects p
+        LEFT JOIN suppliers s ON s.project_id = p.id AND s.role = 'bess_oem'
+        WHERE p.technology = 'bess'
+        AND p.status IN ('operating', 'construction', 'commissioning')
+        AND p.capex_aud_m IS NOT NULL
+        AND p.capacity_mw > 0
+        ORDER BY p.capex_year, p.capacity_mw DESC
+    """).fetchall()
+
+    projects = []
+    for r in rows:
+        d = dict(r)
+        mw = d['capacity_mw'] or 0
+        mwh = d['storage_mwh'] or 0
+        capex = d['capex_aud_m'] or 0
+
+        d['capex_per_mw'] = round(capex / mw, 2) if mw > 0 else None
+        d['capex_per_mwh'] = round(capex / mwh, 2) if mwh > 0 else None
+        d['duration_hours'] = round(mwh / mw, 1) if mw > 0 and mwh > 0 else None
+        projects.append(clean_none_values(d))
+
+    # Summary stats by year
+    by_year = defaultdict(list)
+    for p in projects:
+        if p.get('capex_year'):
+            by_year[p['capex_year']].append(p)
+
+    year_summary = {}
+    for year, ps in sorted(by_year.items()):
+        mw_costs = [p['capex_per_mw'] for p in ps if p.get('capex_per_mw')]
+        mwh_costs = [p['capex_per_mwh'] for p in ps if p.get('capex_per_mwh')]
+        year_summary[str(year)] = {
+            'count': len(ps),
+            'total_mw': round(sum(p.get('capacity_mw', 0) for p in ps), 1),
+            'total_capex_m': round(sum(p.get('capex_aud_m', 0) for p in ps), 1),
+            'avg_capex_per_mw': round(sum(mw_costs) / len(mw_costs), 2) if mw_costs else None,
+            'avg_capex_per_mwh': round(sum(mwh_costs) / len(mwh_costs), 2) if mwh_costs else None,
+        }
+
+    # Summary by OEM
+    by_oem = defaultdict(list)
+    for p in projects:
+        oem = p.get('bess_oem', 'Unknown')
+        by_oem[oem].append(p)
+
+    oem_summary = {}
+    for oem, ps in sorted(by_oem.items(), key=lambda x: -len(x[1])):
+        mw_costs = [p['capex_per_mw'] for p in ps if p.get('capex_per_mw')]
+        mwh_costs = [p['capex_per_mwh'] for p in ps if p.get('capex_per_mwh')]
+        oem_summary[oem] = {
+            'count': len(ps),
+            'total_mw': round(sum(p.get('capacity_mw', 0) for p in ps), 1),
+            'avg_capex_per_mw': round(sum(mw_costs) / len(mw_costs), 2) if mw_costs else None,
+            'avg_capex_per_mwh': round(sum(mwh_costs) / len(mwh_costs), 2) if mwh_costs else None,
+        }
+
+    result = {
+        'projects': projects,
+        'by_year': year_summary,
+        'by_oem': oem_summary,
+        'exported_at': datetime.now().isoformat(),
+    }
+
+    write_json(os.path.join(DATA_DIR, 'analytics', 'bess-capex.json'), result)
+    print(f"  analytics/bess-capex.json ({len(projects)} projects with capex data)")
 
 
 def export_data_sources(conn):

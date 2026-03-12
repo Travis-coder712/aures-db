@@ -24,6 +24,9 @@
   "last_updated": "2025-03-01",
   "last_verified": "2025-03-01",
   "confidence_score": "70",
+  "capex_aud_m": 160.0,
+  "capex_source": "RenewEconomy ($89m original + $71m expansion)",
+  "capex_year": 2017,
   "coordinates": {
     "lat": -33.07,
     "lng": 138.52
@@ -65,6 +68,30 @@
       ]
     },
     {
+      "date": "2017-12-01",
+      "date_precision": "day",
+      "event_type": "cod",
+      "title": "World's largest lithium-ion battery connected to grid",
+      "detail": "Completed within Elon Musk's 100 days or it's free bet. 100MW/129MWh connected to SA grid.",
+      "sources": []
+    },
+    {
+      "date": "2017-12-14",
+      "date_precision": "day",
+      "event_type": "notable",
+      "title": "First major grid response \u2014 Loy Yang A trip",
+      "detail": "HPR injected 7.3MW within milliseconds when Loy Yang A unit 3 tripped (560MW loss), responding faster than any conventional generator.",
+      "sources": []
+    },
+    {
+      "date": "2018-06-01",
+      "date_precision": "month",
+      "event_type": "notable",
+      "title": "Captures 55% of SA FCAS market, cuts prices 91%",
+      "detail": "After six months HPR provided 55% of SA frequency control services and reduced FCAS costs from $470/MWh to $40/MWh.",
+      "sources": []
+    },
+    {
       "date": "2020-09-01",
       "date_precision": "month",
       "event_type": "expansion",
@@ -75,6 +102,22 @@
           "url": "https://arena.gov.au/"
         }
       ]
+    },
+    {
+      "date": "2020-09-01",
+      "date_precision": "month",
+      "event_type": "expansion",
+      "title": "Phase 2 expansion to 150MW/194MWh completed",
+      "detail": "A$82M expansion added 50MW/64.5MWh, enabling advanced grid services including synthetic inertia trials.",
+      "sources": []
+    },
+    {
+      "date": "2022-07-01",
+      "date_precision": "month",
+      "event_type": "notable",
+      "title": "World-first: AEMO approves battery inertia services",
+      "detail": "AEMO approved HPR to deliver 2,000 MWs equivalent inertia via Virtual Machine Mode \u2014 roughly 15% of SA's predicted inertia shortfall.",
+      "sources": []
     },
     {
       "date": "2024-03-01",

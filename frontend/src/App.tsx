@@ -22,6 +22,7 @@ import OfftakerList from './pages/OfftakerList'
 import OfftakerDetail from './pages/OfftakerDetail'
 import MapView from './pages/MapView'
 import DataSources from './pages/DataSources'
+import BESSCapex from './pages/BESSCapex'
 import NotFound from './pages/NotFound'
 
 function App() {
@@ -56,6 +57,8 @@ function App() {
         <Route path="offtakers/:slug" element={<OfftakerDetail />} />
         {/* Phase 4: Map */}
         <Route path="map" element={<MapView />} />
+        {/* Analytics */}
+        <Route path="analytics/bess-capex" element={<BESSCapex />} />
         {/* Admin */}
         <Route path="data-sources" element={<DataSources />} />
         {/* Future routes */}

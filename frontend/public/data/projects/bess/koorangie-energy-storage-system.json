@@ -6,7 +6,8 @@
   "capacity_mw": 185.0,
   "storage_mwh": 370.0,
   "state": "VIC",
-  "current_developer": "Shell Energy",
+  "current_developer": "Edify Energy (Sosteneo)",
+  "current_operator": "Edify Energy",
   "cod_current": "2025-06-24",
   "cod_original": "2025-06-24",
   "grid_forming": true,
@@ -20,6 +21,9 @@
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "2173",
   "confidence_score": "48",
+  "capex_aud_m": 400.0,
+  "capex_source": "Shell Energy/Edify",
+  "capex_year": 2023,
   "coordinates": {
     "lat": -35.735367,
     "lng": 143.754813
@@ -42,6 +46,22 @@
       "sources": []
     },
     {
+      "date": "2025-07-01",
+      "date_precision": "month",
+      "event_type": "cod",
+      "title": "Full commercial operations commence",
+      "detail": "185MW/370MWh grid-forming BESS with 100 Tesla Megapacks in Virtual Machine Mode entered full operations.",
+      "sources": []
+    },
+    {
+      "date": "2025-07-01",
+      "date_precision": "month",
+      "event_type": "notable",
+      "title": "20-year AEMO system strength agreement activated",
+      "detail": "Began delivering 125MW of system strength services under 20-year System Support Agreement with AEMO in Murray River REZ.",
+      "sources": []
+    },
+    {
       "date": "2026-03-12",
       "date_precision": "day",
       "event_type": "cod_change",
@@ -52,7 +72,22 @@
   ],
   "ownership_history": [],
   "cod_history": [],
-  "suppliers": [],
+  "suppliers": [
+    {
+      "role": "bess_oem",
+      "supplier": "Tesla",
+      "model": "Megapack (grid-forming)",
+      "quantity": 100,
+      "grid_forming": false,
+      "source_url": "https://edifyenergy.com/project/koorangie-energy-storage-system/"
+    },
+    {
+      "role": "epc",
+      "supplier": "Consolidated Power Projects (CPP)",
+      "grid_forming": false,
+      "source_url": "https://edifyenergy.com/project/koorangie-energy-storage-system/"
+    }
+  ],
   "offtakes": [],
   "scheme_contracts": [],
   "cost_sources": [],

@@ -31,7 +31,21 @@
   ],
   "ownership_history": [],
   "cod_history": [],
-  "suppliers": [],
+  "suppliers": [
+    {
+      "role": "bess_oem",
+      "supplier": "Sungrow",
+      "model": "LFP battery system",
+      "grid_forming": false,
+      "source_url": "https://www.energy-storage.news/commissioning-begins-on-south-australias-second-largest-bess/"
+    },
+    {
+      "role": "epc",
+      "supplier": "Consolidated Power Projects (CPP)",
+      "grid_forming": false,
+      "source_url": "https://www.zenenergy.com.au/templers-battery/"
+    }
+  ],
   "offtakes": [],
   "scheme_contracts": [],
   "cost_sources": [],

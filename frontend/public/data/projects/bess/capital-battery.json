@@ -6,7 +6,8 @@
   "capacity_mw": 100.0,
   "storage_mwh": 199.98,
   "state": "NSW",
-  "current_developer": "Capital Battery Pty Ltd",
+  "current_developer": "Neoen",
+  "current_operator": "Neoen",
   "cod_current": "2023-07-24",
   "cod_original": "2023-07-24",
   "grid_forming": true,
@@ -20,11 +21,22 @@
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "1890",
   "confidence_score": "48",
+  "capex_aud_m": 100.0,
+  "capex_source": "CEFC estimate (debt $71m)",
+  "capex_year": 2022,
   "coordinates": {
     "lat": -35.339434,
     "lng": 149.216065
   },
   "timeline": [
+    {
+      "date": "2023-01-01",
+      "date_precision": "month",
+      "event_type": "construction_start",
+      "title": "Construction begins in ACT",
+      "detail": "Neoen commenced construction of 100MW/200MWh battery using Doosan GridTech systems near Canberra. Provecta as delivery partner.",
+      "sources": []
+    },
     {
       "date": "2023-07-24",
       "date_precision": "day",
@@ -40,11 +52,42 @@
       "title": "First generation recorded",
       "detail": "First market dispatch data recorded in AEMO systems.",
       "sources": []
+    },
+    {
+      "date": "2024-06-01",
+      "date_precision": "month",
+      "event_type": "stakeholder_issue",
+      "title": "Extended commissioning delays due to connection issues",
+      "detail": "Capital Battery experienced ~12 months of commissioning delays caused by grid connection issues. Neoen reported seeking damages from relevant parties.",
+      "sources": []
+    },
+    {
+      "date": "2025-06-01",
+      "date_precision": "month",
+      "event_type": "cod",
+      "title": "Commercial operations finally commence",
+      "detail": "Capital Battery entered commercial operations after nearly a year of commissioning delays. ACT's first large-scale battery storage.",
+      "sources": []
     }
   ],
   "ownership_history": [],
   "cod_history": [],
-  "suppliers": [],
+  "suppliers": [
+    {
+      "role": "bess_oem",
+      "supplier": "Doosan GridTech",
+      "model": "Doosan BESS",
+      "quantity": 627,
+      "grid_forming": false,
+      "source_url": "https://capitalbattery.com.au/our-battery/"
+    },
+    {
+      "role": "epc",
+      "supplier": "Doosan GridTech / Provecta",
+      "grid_forming": false,
+      "source_url": "https://provecta.com.au/project/capital-bess/"
+    }
+  ],
   "offtakes": [],
   "scheme_contracts": [],
   "cost_sources": [],

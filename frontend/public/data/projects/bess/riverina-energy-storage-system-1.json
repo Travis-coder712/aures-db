@@ -6,7 +6,8 @@
   "capacity_mw": 60.0,
   "storage_mwh": 120.0,
   "state": "NSW",
-  "current_developer": "Shell New Energies Australia Pty Ltd",
+  "current_developer": "Edify Energy / Federation Asset Management",
+  "current_operator": "Edify Energy",
   "cod_current": "2023-06-01",
   "cod_original": "2023-06-01",
   "grid_forming": true,
@@ -26,6 +27,14 @@
   },
   "timeline": [
     {
+      "date": "2023-03-01",
+      "date_precision": "month",
+      "event_type": "cod",
+      "title": "Commercial operations commence",
+      "detail": "Edify Energy's 60MW/120MWh RESS 1 entered commercial operations using Tesla Megapack grid-forming units.",
+      "sources": []
+    },
+    {
       "date": "2023-06-01",
       "date_precision": "day",
       "event_type": "cod",
@@ -40,11 +49,33 @@
       "title": "First generation recorded",
       "detail": "First market dispatch data recorded in AEMO systems.",
       "sources": []
+    },
+    {
+      "date": "2025-06-01",
+      "date_precision": "month",
+      "event_type": "ownership_change",
+      "title": "Federation Asset Management acquires majority stake",
+      "detail": "Federation Asset Management acquired majority interest in the Riverina battery projects from Edify Energy.",
+      "sources": []
     }
   ],
   "ownership_history": [],
   "cod_history": [],
-  "suppliers": [],
+  "suppliers": [
+    {
+      "role": "bess_oem",
+      "supplier": "Tesla",
+      "model": "Megapack (grid-forming)",
+      "grid_forming": false,
+      "source_url": "https://shellenergy.com.au/energy-insights/the-riverina-energy-storage-system-1-reaches-operational-milestone/"
+    },
+    {
+      "role": "epc",
+      "supplier": "Edify Energy",
+      "grid_forming": false,
+      "source_url": "https://edifyenergy.com/project/riverina-darlington-point/"
+    }
+  ],
   "offtakes": [],
   "scheme_contracts": [],
   "cost_sources": [],

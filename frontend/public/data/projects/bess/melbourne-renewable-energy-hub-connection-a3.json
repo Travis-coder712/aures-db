@@ -6,7 +6,8 @@
   "capacity_mw": 200.0,
   "storage_mwh": 800.8,
   "state": "VIC",
-  "current_developer": "Equis Energy (Australia) Projects (MREH A3 AssetCo) Pty Ltd (ACN 669 645 514) as The Trustee for Equis Energy (Australia) MREH A3 Asset Trust (ABN 47 920 042 214)",
+  "current_developer": "Equis Energy / SEC Victoria",
+  "current_operator": "Equis Energy",
   "cod_current": "2025-09-11",
   "cod_original": "2025-09-11",
   "grid_forming": true,
@@ -20,6 +21,9 @@
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "3102",
   "confidence_score": "48",
+  "capex_aud_m": 367.0,
+  "capex_source": "SEC Victoria (1/3 of $1.1B total)",
+  "capex_year": 2023,
   "coordinates": {
     "lat": -37.663819,
     "lng": 144.726859
@@ -44,7 +48,21 @@
   ],
   "ownership_history": [],
   "cod_history": [],
-  "suppliers": [],
+  "suppliers": [
+    {
+      "role": "bess_oem",
+      "supplier": "Tesla",
+      "model": "Megapack",
+      "grid_forming": false,
+      "source_url": "https://www.secvictoria.com.au/investments/melbourne-renewable-energy-hub"
+    },
+    {
+      "role": "epc",
+      "supplier": "Samsung C&T / Genus Plus JV",
+      "grid_forming": false,
+      "source_url": "https://www.secvictoria.com.au/investments/melbourne-renewable-energy-hub"
+    }
+  ],
   "offtakes": [],
   "scheme_contracts": [],
   "cost_sources": [],

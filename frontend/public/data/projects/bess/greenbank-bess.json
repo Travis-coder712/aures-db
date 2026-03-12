@@ -6,7 +6,8 @@
   "capacity_mw": 200.0,
   "storage_mwh": 400.0,
   "state": "QLD",
-  "current_developer": "CSE BESS Pty Ltd",
+  "current_developer": "CS Energy",
+  "current_operator": "CS Energy",
   "cod_current": "2025-02-10",
   "cod_original": "2025-02-10",
   "grid_forming": true,
@@ -20,6 +21,9 @@
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "2170",
   "confidence_score": "48",
+  "capex_aud_m": 300.0,
+  "capex_source": "energy-storage.news",
+  "capex_year": 2023,
   "coordinates": {
     "lat": -27.733562,
     "lng": 152.955042
@@ -40,11 +44,34 @@
       "title": "First generation recorded",
       "detail": "First market dispatch data recorded in AEMO systems.",
       "sources": []
+    },
+    {
+      "date": "2025-06-01",
+      "date_precision": "month",
+      "event_type": "cod",
+      "title": "Commercial operations begin",
+      "detail": "CS Energy's 200MW/400MWh Greenbank Battery (108 Tesla Megapack 2XL units) commenced commercial operations in Brisbane suburb.",
+      "sources": []
     }
   ],
   "ownership_history": [],
   "cod_history": [],
-  "suppliers": [],
+  "suppliers": [
+    {
+      "role": "bess_oem",
+      "supplier": "Tesla",
+      "model": "Megapack 2XL",
+      "quantity": 108,
+      "grid_forming": false,
+      "source_url": "https://www.csenergy.com.au/what-we-do/firming-and-storage/greenbank-battery"
+    },
+    {
+      "role": "epc",
+      "supplier": "Consolidated Power Projects (CPP)",
+      "grid_forming": false,
+      "source_url": "https://www.conpower.com.au/project/greenbank-tesla/"
+    }
+  ],
   "offtakes": [],
   "scheme_contracts": [],
   "cost_sources": [],

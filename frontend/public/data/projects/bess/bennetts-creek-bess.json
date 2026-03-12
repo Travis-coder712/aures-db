@@ -31,7 +31,21 @@
   ],
   "ownership_history": [],
   "cod_history": [],
-  "suppliers": [],
+  "suppliers": [
+    {
+      "role": "bess_oem",
+      "supplier": "Wartsila",
+      "model": "Quantum",
+      "grid_forming": false,
+      "source_url": "https://www.wartsila.com/media/news/22-12-2025-wartsila-marks-its-tenth-australian-project-with-energy-storage-system-for-flow-power-3699688"
+    },
+    {
+      "role": "epc",
+      "supplier": "Zenviron / Wartsila",
+      "grid_forming": false,
+      "source_url": "https://www.wartsila.com/media/news/22-12-2025-wartsila-marks-its-tenth-australian-project-with-energy-storage-system-for-flow-power-3699688"
+    }
+  ],
   "offtakes": [],
   "scheme_contracts": [],
   "cost_sources": [],

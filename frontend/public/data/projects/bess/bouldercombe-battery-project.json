@@ -6,7 +6,8 @@
   "capacity_mw": 50.0,
   "storage_mwh": 100.0,
   "state": "QLD",
-  "current_developer": "Genex Power Limited",
+  "current_developer": "Genex Power",
+  "current_operator": "Genex Power",
   "cod_current": "2023-08-08",
   "cod_original": "2023-08-08",
   "grid_forming": true,
@@ -20,17 +21,36 @@
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "1873",
   "confidence_score": "48",
+  "capex_aud_m": 100.0,
+  "capex_source": "Genex Power",
+  "capex_year": 2022,
   "coordinates": {
     "lat": -23.563443,
     "lng": 150.459658
   },
   "timeline": [
     {
+      "date": "2023-06-01",
+      "date_precision": "month",
+      "event_type": "stakeholder_issue",
+      "title": "Fire during commissioning \u2014 grid-side, not Megapack",
+      "detail": "A fire occurred during commissioning but investigation confirmed it ignited on the grid infrastructure side (HV transformer area), not within any Tesla Megapack unit.",
+      "sources": []
+    },
+    {
       "date": "2023-08-08",
       "date_precision": "day",
       "event_type": "cod",
       "title": "Commercial operations commenced",
       "detail": "Commencement date from AEMO registration via OpenElectricity.",
+      "sources": []
+    },
+    {
+      "date": "2023-10-01",
+      "date_precision": "month",
+      "event_type": "cod",
+      "title": "Commercial operations \u2014 delivered on budget despite fire",
+      "detail": "Genex's 50MW/100MWh Bouldercombe Battery (40 Tesla Megapacks) entered commercial operations, delivered on budget despite the commissioning fire.",
       "sources": []
     },
     {
@@ -44,7 +64,22 @@
   ],
   "ownership_history": [],
   "cod_history": [],
-  "suppliers": [],
+  "suppliers": [
+    {
+      "role": "bess_oem",
+      "supplier": "Tesla",
+      "model": "Megapack",
+      "quantity": 40,
+      "grid_forming": false,
+      "source_url": "https://genexpower.com.au/bouldercombe-battery-project/"
+    },
+    {
+      "role": "epc",
+      "supplier": "Consolidated Power Projects (CPP)",
+      "grid_forming": false,
+      "source_url": "https://genexpower.com.au/bouldercombe-battery-project/"
+    }
+  ],
   "offtakes": [],
   "scheme_contracts": [],
   "cost_sources": [],

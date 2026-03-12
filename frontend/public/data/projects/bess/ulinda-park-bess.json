@@ -6,7 +6,8 @@
   "capacity_mw": 155.0,
   "storage_mwh": 297.96,
   "state": "QLD",
-  "current_developer": "Ulinda Park ProjectCo Pty Ltd",
+  "current_developer": "Akaysha Energy (BlackRock)",
+  "current_operator": "Akaysha Energy",
   "cod_current": "2026-01-13",
   "cod_original": "2026-01-13",
   "grid_forming": true,
@@ -26,6 +27,14 @@
   },
   "timeline": [
     {
+      "date": "2024-01-01",
+      "date_precision": "month",
+      "event_type": "construction_start",
+      "title": "Construction begins",
+      "detail": "Akaysha Energy commenced construction of 155MW/298MWh BESS using Powin battery systems and EKS Energy power conversion at Condamine, QLD.",
+      "sources": []
+    },
+    {
       "date": "2025-06-17",
       "date_precision": "day",
       "event_type": "cod",
@@ -42,6 +51,14 @@
       "sources": []
     },
     {
+      "date": "2025-09-01",
+      "date_precision": "month",
+      "event_type": "cod",
+      "title": "Phase 1 goes online",
+      "detail": "Ulinda Park Phase 1 commenced operations. Akaysha/Powin/EKS celebrated GPS approval milestone. Powin bankruptcy (June 2025) creates long-term warranty concerns.",
+      "sources": []
+    },
+    {
       "date": "2026-03-12",
       "date_precision": "day",
       "event_type": "cod_change",
@@ -52,7 +69,28 @@
   ],
   "ownership_history": [],
   "cod_history": [],
-  "suppliers": [],
+  "suppliers": [
+    {
+      "role": "bess_oem",
+      "supplier": "Powin",
+      "model": "Powin BESS",
+      "grid_forming": false,
+      "source_url": "https://powin.com/press-release/akaysha-powin-and-eks-energy-celebrate-gps-approval-for-ulinda-park/"
+    },
+    {
+      "role": "inverter",
+      "supplier": "Eks Energy (Powin)",
+      "model": "Power conversion system",
+      "grid_forming": false,
+      "source_url": "https://powin.com/press-release/akaysha-powin-and-eks-energy-celebrate-gps-approval-for-ulinda-park/"
+    },
+    {
+      "role": "epc",
+      "supplier": "Consolidated Power Projects (CPP)",
+      "grid_forming": false,
+      "source_url": "https://akayshaenergy.com/projects/ulinda-park-bess"
+    }
+  ],
   "offtakes": [],
   "scheme_contracts": [],
   "cost_sources": [],

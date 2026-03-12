@@ -394,10 +394,13 @@
     "capacity_mw": 30.0,
     "storage_mwh": 30.09,
     "state": "VIC",
-    "current_developer": "Ausnet Transmission Group Pty Ltd",
+    "current_developer": "AusNet Services",
+    "current_operator": "AusNet Services",
     "performance_score": 13.4,
     "data_confidence": "medium",
-    "confidence_score": "48"
+    "confidence_score": "48",
+    "capex_aud_m": 32.0,
+    "capex_year": 2017
   },
   {
     "id": "banana-range-wind-farm",
@@ -581,7 +584,8 @@
     "current_developer": "Nexsphere (formerly Brookvale Energy)",
     "data_confidence": "medium",
     "confidence_score": "31",
-    "development_stage": "planning_submitted"
+    "development_stage": "planning_submitted",
+    "notable": "Proposed 500 MW (scaled to 1.5 GW) bottom-fixed off NE Tasmania in Bass Strait. Equinor withdrew early 2025. Failed to obtain feasibility licence Apr 2025. Nexsphere seeking new partners."
   },
   {
     "id": "bastyan",
@@ -708,7 +712,8 @@
     "current_developer": "Vena Energy",
     "rez": "nsw-central-west-orana",
     "data_confidence": "good",
-    "confidence_score": "61"
+    "confidence_score": "61",
+    "notable": "CWO REZ location. Originally 500 MW Gulgong Solar, scaled down to BESS-only. Two stages of 204 MW each."
   },
   {
     "id": "bellbay-wind-farm",
@@ -1048,7 +1053,8 @@
     "current_developer": "JERA Nex bp (50:50 JV JERA Co. / bp, via Parkwind)",
     "data_confidence": "medium",
     "confidence_score": "25",
-    "development_stage": "planning_submitted"
+    "development_stage": "planning_submitted",
+    "notable": "Likely duplicate AEMO entry for Blue Mackerel North project. See blue-mackerel-north-offshore-wind-farm for primary record."
   },
   {
     "id": "blue-mackerel-north-offshore-wind-farm",
@@ -1060,7 +1066,8 @@
     "current_developer": "JERA Nex bp (50:50 JV JERA Co. / bp, via Parkwind)",
     "data_confidence": "medium",
     "confidence_score": "28",
-    "development_stage": "planning_submitted"
+    "development_stage": "planning_submitted",
+    "notable": "First offshore wind management plan approved in Australia (Feb 2025). Major Project Status Dec 2025. EPBC referral Feb 2026. ~70 turbines (15-23 MW each) in 163 km2, ~10 km off Gippsland coast. Target 1 GW by 2032."
   },
   {
     "id": "bluegrass-solar-farm",
@@ -1082,10 +1089,13 @@
     "capacity_mw": 200.0,
     "storage_mwh": 400.0,
     "state": "SA",
-    "current_developer": "Blyth Battery P/L as trustee for Blyth Battery Trust",
+    "current_developer": "Neoen",
+    "current_operator": "Neoen",
     "performance_score": 55.8,
     "data_confidence": "medium",
-    "confidence_score": "48"
+    "confidence_score": "48",
+    "capex_aud_m": 338.0,
+    "capex_year": 2023
   },
   {
     "id": "boags-creek-solar-power-station",
@@ -1269,7 +1279,8 @@
     "current_developer": "Queensland Hydro",
     "data_confidence": "good",
     "confidence_score": "58",
-    "development_stage": "epbc_submitted"
+    "development_stage": "epbc_submitted",
+    "notable": "24-hour storage capacity. A$14-18B estimated cost. Exploratory works phase. Survived QLD government change."
   },
   {
     "id": "boulder-creek-wind-farm",
@@ -1281,7 +1292,8 @@
     "current_developer": "Aula Energy / CS Energy (50:50 JV)",
     "data_confidence": "medium",
     "confidence_score": "49",
-    "development_stage": "epbc_approved"
+    "development_stage": "epbc_approved",
+    "notable": "38 GE Vernova Cypress turbines (Stage 1). First split-scope project-financed wind farm in Australia. A$740M."
   },
   {
     "id": "bouldercombe-battery-project",
@@ -1291,10 +1303,13 @@
     "capacity_mw": 50.0,
     "storage_mwh": 100.0,
     "state": "QLD",
-    "current_developer": "Genex Power Limited",
+    "current_developer": "Genex Power",
+    "current_operator": "Genex Power",
     "performance_score": 29.7,
     "data_confidence": "medium",
-    "confidence_score": "48"
+    "confidence_score": "48",
+    "capex_aud_m": 100.0,
+    "capex_year": 2022
   },
   {
     "id": "bouldercombe-battery-project-stage-2-kci",
@@ -1453,9 +1468,13 @@
     "storage_mwh": 409.92,
     "state": "QLD",
     "current_developer": "Akaysha Energy (BlackRock)",
+    "current_operator": "Akaysha Energy",
     "performance_score": 37.6,
     "data_confidence": "good",
-    "confidence_score": "61"
+    "confidence_score": "61",
+    "capex_aud_m": 300.0,
+    "capex_year": 2023,
+    "notable": "Tesla Megapack 2 grid-forming. A$200M. Completed 5 months early (Jan 2026). Gunvor offtake."
   },
   {
     "id": "brewongle-solar-farm",
@@ -1527,7 +1546,8 @@
     "capacity_mw": 50.0,
     "storage_mwh": 60.28,
     "state": "NSW",
-    "current_developer": "MACQGEN",
+    "current_developer": "AGL Energy / Macquarie",
+    "current_operator": "AGL Energy",
     "performance_score": 33.2,
     "data_confidence": "medium",
     "confidence_score": "48"
@@ -1568,7 +1588,8 @@
     "current_developer": "Ampyr Australia (AGP Singapore)",
     "rez": "nsw-central-west-orana",
     "data_confidence": "medium",
-    "confidence_score": "48"
+    "confidence_score": "48",
+    "notable": "Fluence Gridstack. First Nations 5% equity (Wambal Bila). A$340M. InCommodities A$450M deal."
   },
   {
     "id": "bulabul-bess-2",
@@ -1980,7 +2001,8 @@
     "state": "NSW",
     "current_developer": "Equis Australia",
     "data_confidence": "good",
-    "confidence_score": "51"
+    "confidence_score": "51",
+    "notable": "Tesla Megapack. First merchant BESS debt financing in NSW. SmartestEnergy 100% offtake."
   },
   {
     "id": "calala-bess-a2",
@@ -1992,7 +2014,8 @@
     "state": "NSW",
     "current_developer": "Equis Australia",
     "data_confidence": "medium",
-    "confidence_score": "43"
+    "confidence_score": "43",
+    "notable": "Tesla Megapack. Merchant operation via Tesla Autobidder with minimum revenue guarantee."
   },
   {
     "id": "callide-energy-hub-kci",
@@ -2115,7 +2138,8 @@
     "current_developer": "Unknown (Shelved)",
     "data_confidence": "medium",
     "confidence_score": "25",
-    "development_stage": "planning_submitted"
+    "development_stage": "planning_submitted",
+    "notable": "Shelved/failed proposal. Proposed for Discovery Bay area between Portland VIC and Nelson. Superseded by Spinifex project which holds active Southern Ocean feasibility licence."
   },
   {
     "id": "capital-2-wind-farm",
@@ -2137,10 +2161,13 @@
     "capacity_mw": 100.0,
     "storage_mwh": 199.98,
     "state": "NSW",
-    "current_developer": "Capital Battery Pty Ltd",
+    "current_developer": "Neoen",
+    "current_operator": "Neoen",
     "performance_score": 42.5,
     "data_confidence": "medium",
-    "confidence_score": "48"
+    "confidence_score": "48",
+    "capex_aud_m": 100.0,
+    "capex_year": 2022
   },
   {
     "id": "capital-wind-farm",
@@ -2215,7 +2242,8 @@
     "current_developer": "Aula Energy",
     "data_confidence": "medium",
     "confidence_score": "46",
-    "development_stage": "epbc_approved"
+    "development_stage": "epbc_approved",
+    "notable": "42 GE Vernova 6.1 MW turbines. A$900M. CIS Tender 4 winner. Financial close late 2025."
   },
   {
     "id": "carwarp-hybrid",
@@ -2388,10 +2416,13 @@
     "capacity_mw": 100.0,
     "storage_mwh": 200.0,
     "state": "QLD",
-    "current_developer": "CSE BESS Pty Ltd",
+    "current_developer": "CS Energy",
+    "current_operator": "CS Energy",
     "performance_score": 26.3,
     "data_confidence": "medium",
-    "confidence_score": "48"
+    "confidence_score": "48",
+    "capex_aud_m": 200.0,
+    "capex_year": 2023
   },
   {
     "id": "chinchilla-solar-farm",
@@ -2475,7 +2506,8 @@
     "state": "SA",
     "current_developer": "Pacific Blue (SPIC China)",
     "data_confidence": "medium",
-    "confidence_score": "48"
+    "confidence_score": "48",
+    "notable": "Trina Storage + SMA inverters. Enzen EPC. CIS Tender 1 winner. >A$100M."
   },
   {
     "id": "clements-gap-wind-farm",
@@ -2591,7 +2623,8 @@
     "current_developer": "Synergy",
     "data_confidence": "good",
     "confidence_score": "53",
-    "development_stage": "early_stage"
+    "development_stage": "early_stage",
+    "notable": "WA's flagship battery project. At 560MW/2,240MWh it's the largest planned battery in the WEM. 4-hour duration."
   },
   {
     "id": "collinsville-bess-kci",
@@ -3005,7 +3038,9 @@
     "current_developer": "ElectraNet",
     "performance_score": 27.6,
     "data_confidence": "medium",
-    "confidence_score": "48"
+    "confidence_score": "48",
+    "capex_aud_m": 30.0,
+    "capex_year": 2017
   },
   {
     "id": "dalvui-bess",
@@ -3177,7 +3212,8 @@
     "current_developer": "BayWa r.e. Australia Offshore Wind Projects 1 Pty Ltd",
     "data_confidence": "medium",
     "confidence_score": "25",
-    "development_stage": "planning_submitted"
+    "development_stage": "planning_submitted",
+    "notable": "AEMO Generation Information entry only \u2014 no public project documentation found. BayWa r.e. Australia is registered developer."
   },
   {
     "id": "deal-2-east-off-shore-wind-farm",
@@ -3189,7 +3225,8 @@
     "current_developer": "BayWa r.e. Australia Offshore Wind Projects 2 Pty Ltd",
     "data_confidence": "medium",
     "confidence_score": "25",
-    "development_stage": "planning_submitted"
+    "development_stage": "planning_submitted",
+    "notable": "AEMO Generation Information entry only \u2014 no public project documentation found. BayWa r.e. Australia is registered developer."
   },
   {
     "id": "deargee-solar-and-bess",
@@ -3366,7 +3403,8 @@
     "rez": "nsw-south-west",
     "data_confidence": "medium",
     "confidence_score": "40",
-    "development_stage": "epbc_submitted"
+    "development_stage": "epbc_submitted",
+    "notable": "Hybrid wind+solar+BESS. Access rights: 707 MW wind + 300 MW solar + 300 MW/1,200 MWh BESS. Full vision ~2.5 GW. Adjacent to Transgrid Dinawan Substation. CIP holds option for minority interest. CIS Tender winner."
   },
   {
     "id": "dingo-solar-farm",
@@ -3565,7 +3603,8 @@
     "current_developer": "BlueFloat Energy / Origin Energy (CANCELLED)",
     "data_confidence": "medium",
     "confidence_score": "28",
-    "development_stage": "epbc_submitted"
+    "development_stage": "epbc_submitted",
+    "notable": "Failed to secure feasibility licence. 1,725 MW floating wind 25-45 km off Hunter coast. Lost to Novocastrian in Hunter zone assessment. BlueFloat subsequently ceased all operations mid-2025."
   },
   {
     "id": "ebor-bess",
@@ -3613,7 +3652,8 @@
     "current_developer": "Oceanex Energy (Equinor withdrew)",
     "data_confidence": "medium",
     "confidence_score": "30",
-    "development_stage": "epbc_approved"
+    "development_stage": "epbc_approved",
+    "notable": "Effectively shelved. 2 GW floating wind off Eden NSW south coast. Equinor pulled out 2024-2025. Oceanex lacks capital to proceed alone. Estimated $10B project."
   },
   {
     "id": "edenvale-solar-park",
@@ -3676,7 +3716,8 @@
     "current_developer": "Akaysha Energy (BlackRock)",
     "data_confidence": "good",
     "confidence_score": "58",
-    "development_stage": "epbc_submitted"
+    "development_stage": "epbc_submitted",
+    "notable": "Tesla Megapack. A$460M financing. 15-year virtual toll with Snowy Hydro for 220 MW."
   },
   {
     "id": "elaine-solar-farm-and-bess",
@@ -3774,7 +3815,10 @@
     "state": "NSW",
     "current_developer": "Origin Energy",
     "data_confidence": "high",
-    "confidence_score": "85"
+    "confidence_score": "85",
+    "capex_aud_m": 850.0,
+    "capex_year": 2024,
+    "notable": "Australia's largest battery. Stage 1 (460 MW/1,770 MWh) operational Jan 2026. Wartsila GridSolv Quantum. 4-stage build to 700 MW/3,160 MWh."
   },
   {
     "id": "eraring-big-battery",
@@ -3784,10 +3828,13 @@
     "capacity_mw": 700.0,
     "storage_mwh": 1390.0,
     "state": "NSW",
-    "current_developer": "Origin Energy Electricity Limited",
+    "current_developer": "Origin Energy",
+    "current_operator": "Origin Energy",
     "performance_score": 47.2,
     "data_confidence": "medium",
-    "confidence_score": "48"
+    "confidence_score": "48",
+    "capex_aud_m": 600.0,
+    "capex_year": 2023
   },
   {
     "id": "euleilah-solar-farm-and-bess-kci",
@@ -4235,7 +4282,8 @@
     "current_developer": "BlueFloat Energy / Energy Estate (CANCELLED)",
     "data_confidence": "medium",
     "confidence_score": "33",
-    "development_stage": "planning_submitted"
+    "development_stage": "planning_submitted",
+    "notable": "Project abandoned Jul 2025. BlueFloat surrendered feasibility licence FL-07 after parent Quantum Capital Group ceased all global offshore wind operations. Had received Major Project Status Nov 2024."
   },
   {
     "id": "girgarre-solar-farm",
@@ -4422,7 +4470,8 @@
     "state": "VIC",
     "current_developer": "FRV Australia (Abdul Latif Jameel / OMERS)",
     "data_confidence": "medium",
-    "confidence_score": "48"
+    "confidence_score": "48",
+    "notable": "Hithium cells + SMA inverters. Samsung C&T EPC. ARENA A$15M grid-forming grant."
   },
   {
     "id": "goat-hill-pumped-hydro",
@@ -4485,7 +4534,8 @@
     "current_developer": "TagEnergy / Ingka Group",
     "data_confidence": "high",
     "confidence_score": "80",
-    "development_stage": "epbc_approved"
+    "development_stage": "epbc_approved",
+    "notable": "Largest wind farm in Southern Hemisphere. 215 turbines across two stages. Stage 1 first power delivered Q1 2025."
   },
   {
     "id": "golden-plains-wind-farm-east",
@@ -4507,7 +4557,8 @@
     "state": "VIC",
     "current_developer": "TagEnergy / Ingka Group",
     "data_confidence": "good",
-    "confidence_score": "53"
+    "confidence_score": "53",
+    "notable": "Stage 2 of Golden Plains. 93 Vestas V162-6.2 MW turbines. Financial close June 2024."
   },
   {
     "id": "goodnight-hybrid-facility-solar-and-bess",
@@ -4740,7 +4791,8 @@
     "current_developer": "Corio Generation (Macquarie Green Investment Group)",
     "data_confidence": "medium",
     "confidence_score": "25",
-    "development_stage": "planning_submitted"
+    "development_stage": "planning_submitted",
+    "notable": "Active feasibility licence. 2.5 GW bottom-fixed, ~22 km off Wellington Shire coast. Feasibility licence Jul 2024. Community engagement events Mar 2025. Part of Corio 4 GW Australian pipeline."
   },
   {
     "id": "great-lakes-battery",
@@ -4778,7 +4830,8 @@
     "current_developer": "Corio Generation (Macquarie Green Investment Group)",
     "data_confidence": "medium",
     "confidence_score": "28",
-    "development_stage": "planning_submitted"
+    "development_stage": "planning_submitted",
+    "notable": "1.5 GW fixed-bottom off Gippsland Bass Coast, ~45 km from coast. Did NOT receive Gippsland feasibility licence \u2014 declared zone does not extend to Bass Coast. Status uncertain."
   },
   {
     "id": "green-poly-bess-project-kci",
@@ -4800,10 +4853,13 @@
     "capacity_mw": 200.0,
     "storage_mwh": 400.0,
     "state": "QLD",
-    "current_developer": "CSE BESS Pty Ltd",
+    "current_developer": "CS Energy",
+    "current_operator": "CS Energy",
     "performance_score": 28.8,
     "data_confidence": "medium",
-    "confidence_score": "48"
+    "confidence_score": "48",
+    "capex_aud_m": 300.0,
+    "capex_year": 2023
   },
   {
     "id": "gregadoo-solar-farm",
@@ -5398,7 +5454,8 @@
     "capacity_mw": 150.0,
     "storage_mwh": 162.0,
     "state": "VIC",
-    "current_developer": "Hazelwood BESS Project Co Pty Ltd as trustee for the HBESS Asset Trust",
+    "current_developer": "ENGIE",
+    "current_operator": "ENGIE",
     "performance_score": 16.0,
     "data_confidence": "medium",
     "confidence_score": "48"
@@ -5610,9 +5667,13 @@
     "storage_mwh": 194.0,
     "state": "SA",
     "current_developer": "Neoen",
+    "current_operator": "Neoen",
     "performance_score": 41.3,
     "data_confidence": "good",
-    "confidence_score": "70"
+    "confidence_score": "70",
+    "capex_aud_m": 160.0,
+    "capex_year": 2017,
+    "notable": "The battery that started it all. Born from Elon Musk's famous Twitter bet. Has earned tens of millions in FCAS revenue."
   },
   {
     "id": "hornsdale-power-reserve-unit-1",
@@ -5622,10 +5683,13 @@
     "capacity_mw": 150.0,
     "storage_mwh": 117.0,
     "state": "SA",
-    "current_developer": "Hornsdale Power Reserve Pty Ltd",
+    "current_developer": "Neoen",
+    "current_operator": "Neoen",
     "performance_score": 48.2,
     "data_confidence": "medium",
-    "confidence_score": "48"
+    "confidence_score": "48",
+    "capex_aud_m": 89.0,
+    "capex_year": 2017
   },
   {
     "id": "hornsdale-wind-farm-stage-1",
@@ -5762,7 +5826,8 @@
     "current_developer": "Energy Estate",
     "data_confidence": "medium",
     "confidence_score": "31",
-    "development_stage": "epbc_submitted"
+    "development_stage": "epbc_submitted",
+    "notable": "Did not receive Hunter zone feasibility licence. Originally 1.4 GW expanded to 1.65 GW. BlueFloat split from project early 2023. Energy Estate developing independently. Hunter zone has zero active licences."
   },
   {
     "id": "ilford-green-energy-hub",
@@ -5787,7 +5852,8 @@
     "current_developer": "Equinor / Oceanex Energy (WITHDRAWN)",
     "data_confidence": "medium",
     "confidence_score": "33",
-    "development_stage": "planning_submitted"
+    "development_stage": "planning_submitted",
+    "notable": "Equinor/Oceanex withdrew Jun 2024. Illawarra zone declared Jun 2024 but no feasibility licences awarded. Zone now open for R&D licences only (Jan 2026)."
   },
   {
     "id": "inverell-battery-energy-storage-system",
@@ -6295,7 +6361,8 @@
     "state": "QLD",
     "current_developer": "Genex Power",
     "data_confidence": "good",
-    "confidence_score": "64"
+    "confidence_score": "64",
+    "notable": "First pumped hydro registered in NEM in ~40 years. Former Kidston Gold Mine site. 8-hour storage."
   },
   {
     "id": "kidston-solar-project-phase-one",
@@ -6440,10 +6507,13 @@
     "capacity_mw": 185.0,
     "storage_mwh": 370.0,
     "state": "VIC",
-    "current_developer": "Shell Energy",
+    "current_developer": "Edify Energy (Sosteneo)",
+    "current_operator": "Edify Energy",
     "performance_score": 21.5,
     "data_confidence": "medium",
-    "confidence_score": "48"
+    "confidence_score": "48",
+    "capex_aud_m": 400.0,
+    "capex_year": 2023
   },
   {
     "id": "koyuga-nanneella-wind-farm",
@@ -6490,10 +6560,13 @@
     "capacity_mw": 200.0,
     "storage_mwh": 195.8,
     "state": "VIC",
-    "current_developer": "Tilt Renewables Australia Pty Ltd",
+    "current_developer": "Tilt Renewables (Mercury NZ)",
+    "current_operator": "Tilt Renewables",
     "performance_score": 17.0,
     "data_confidence": "medium",
-    "confidence_score": "48"
+    "confidence_score": "48",
+    "capex_aud_m": 150.0,
+    "capex_year": 2023
   },
   {
     "id": "lake-bonney-1-wind-farm",
@@ -6652,7 +6725,10 @@
     "state": "NSW",
     "current_developer": "AGL Energy",
     "data_confidence": "good",
-    "confidence_score": "64"
+    "confidence_score": "64",
+    "capex_aud_m": 750.0,
+    "capex_year": 2023,
+    "notable": "Fluence Gridstack with grid-forming inverters. A$750M. ARENA A$35M grant. NSW LTESA Round 2."
   },
   {
     "id": "lilyvale-bess-kci",
@@ -6702,7 +6778,8 @@
     "state": "NSW",
     "current_developer": "RWE Renewables Australia",
     "data_confidence": "good",
-    "confidence_score": "54"
+    "confidence_score": "54",
+    "notable": "Australia's first 8-hour BESS. 144 Tesla Megapacks. 14-year NSW LTESA. Beon Energy BoP."
   },
   {
     "id": "limondale-solar-farm-1",
@@ -6837,7 +6914,8 @@
     "rez": "nsw-central-west-orana",
     "data_confidence": "medium",
     "confidence_score": "33",
-    "development_stage": "epbc_approved"
+    "development_stage": "epbc_approved",
+    "notable": "1,332 MW wind in CWO REZ. Largest single wind access rights allocation in CWO REZ tender."
   },
   {
     "id": "lockyer-valley-energy-project",
@@ -6875,7 +6953,8 @@
     "current_developer": "CS Energy",
     "data_confidence": "good",
     "confidence_score": "59",
-    "development_stage": "epbc_approved"
+    "development_stage": "epbc_approved",
+    "notable": "46 Vestas V162-6.2 turbines. A$1.3B total. Acquired from CIP Aug 2024. QLD Energy & Jobs Plan."
   },
   {
     "id": "lovely-banks-renewable-energy-hub-kci",
@@ -7111,7 +7190,8 @@
     "capacity_mw": 100.0,
     "storage_mwh": 200.0,
     "state": "SA",
-    "current_developer": "Mannum Stage 2 Battery SubCo Pty Ltd as Trustee for The Mannum Stage 2 Battery Unit Trust",
+    "current_developer": "Epic Energy",
+    "current_operator": "Epic Energy",
     "performance_score": 56.6,
     "data_confidence": "medium",
     "confidence_score": "48",
@@ -7360,10 +7440,13 @@
     "capacity_mw": 200.0,
     "storage_mwh": 399.84,
     "state": "VIC",
-    "current_developer": "Equis Energy (Australia) Projects (MREH A1 AssetCo) Pty Ltd (ACN 669 645 461) as The Trustee for Equis Energy (Australia) MREH A1 Asset Trust (ABN 92 607 537 147)",
+    "current_developer": "Equis Energy / SEC Victoria",
+    "current_operator": "Equis Energy",
     "performance_score": 25.5,
     "data_confidence": "medium",
-    "confidence_score": "48"
+    "confidence_score": "48",
+    "capex_aud_m": 367.0,
+    "capex_year": 2023
   },
   {
     "id": "melbourne-renewable-energy-hub-connection-a2",
@@ -7373,10 +7456,13 @@
     "capacity_mw": 200.0,
     "storage_mwh": 399.84,
     "state": "VIC",
-    "current_developer": "Equis Energy (Australia) Projects (MREH A2 AssetCo) Pty Ltd (ACN 669 645 489) as The Trustee for Equis Energy (Australia) MREH A2 Asset Trust (ABN 34 770 707 887)",
+    "current_developer": "Equis Energy / SEC Victoria",
+    "current_operator": "Equis Energy",
     "performance_score": 24.6,
     "data_confidence": "medium",
-    "confidence_score": "48"
+    "confidence_score": "48",
+    "capex_aud_m": 367.0,
+    "capex_year": 2023
   },
   {
     "id": "melbourne-renewable-energy-hub-connection-a3",
@@ -7386,10 +7472,13 @@
     "capacity_mw": 200.0,
     "storage_mwh": 800.8,
     "state": "VIC",
-    "current_developer": "Equis Energy (Australia) Projects (MREH A3 AssetCo) Pty Ltd (ACN 669 645 514) as The Trustee for Equis Energy (Australia) MREH A3 Asset Trust (ABN 47 920 042 214)",
+    "current_developer": "Equis Energy / SEC Victoria",
+    "current_operator": "Equis Energy",
     "performance_score": 41.6,
     "data_confidence": "medium",
-    "confidence_score": "48"
+    "confidence_score": "48",
+    "capex_aud_m": 367.0,
+    "capex_year": 2023
   },
   {
     "id": "merino-solar-farm",
@@ -7834,7 +7923,8 @@
     "state": "VIC",
     "current_developer": "Valent Energy (Gaw Capital / BW ESS)",
     "data_confidence": "good",
-    "confidence_score": "51"
+    "confidence_score": "51",
+    "notable": "CATL batteries + Power Electronics inverters. Construction completed Oct 2025. Commissioning underway."
   },
   {
     "id": "mornington-bess-2",
@@ -7860,7 +7950,8 @@
     "current_developer": "Origin Energy",
     "data_confidence": "good",
     "confidence_score": "58",
-    "development_stage": "epbc_approved"
+    "development_stage": "epbc_approved",
+    "notable": "Fluence Gridstack with SMA grid-forming inverters. A$400M. ARENA A$24M grant."
   },
   {
     "id": "mortlake-energy-hub",
@@ -8137,7 +8228,8 @@
     "current_developer": "Mt Rawdon Pumped Hydro Pty Ltd (Evolution Mining / ICA Partners)",
     "data_confidence": "medium",
     "confidence_score": "46",
-    "development_stage": "epbc_submitted"
+    "development_stage": "epbc_submitted",
+    "notable": "Former gold mine repurposed. CleanCo QLD committed to invest. EIS phase. A$3.3B estimated."
   },
   {
     "id": "mt-view-wind-farm-kci",
@@ -8411,7 +8503,8 @@
     "current_developer": "ACEN Australia / Marubeni (50:50)",
     "rez": "nsw-new-england",
     "data_confidence": "good",
-    "confidence_score": "55"
+    "confidence_score": "55",
+    "notable": "Energy Vault B-VAULT (first Australian project). Siemens grid-forming inverters. 20-year NSW LTESA."
   },
   {
     "id": "nine-mile-energy-park-stage-1-bess",
@@ -8622,7 +8715,8 @@
     "current_developer": "Equinor / Oceanex Energy (LICENCE DECLINED)",
     "data_confidence": "medium",
     "confidence_score": "30",
-    "development_stage": "planning_submitted"
+    "development_stage": "planning_submitted",
+    "notable": "Feasibility licence offered Feb 2025 but declined Aug 2025. Only project selected from 8 applicants in Hunter zone. Equinor cited global offshore wind challenges. Hunter zone now has zero active licences."
   },
   {
     "id": "nowingi-solar-farm-edify-kci",
@@ -8758,7 +8852,10 @@
     "rez": "nsw-central-west-orana",
     "data_confidence": "good",
     "confidence_score": "61",
-    "development_stage": "epbc_submitted"
+    "development_stage": "epbc_submitted",
+    "capex_aud_m": 900.0,
+    "capex_year": 2024,
+    "notable": "Tesla Megapack. A$650M debt financing (largest BESS financing globally at time). NSW LTESA + CIS double winner."
   },
   {
     "id": "orange-grove-sun-farm",
@@ -8782,7 +8879,8 @@
     "current_developer": "\u00d8rsted Offshore Australia 1 Pty Ltd",
     "data_confidence": "medium",
     "confidence_score": "25",
-    "development_stage": "planning_submitted"
+    "development_stage": "planning_submitted",
+    "notable": "Active feasibility licence. 2.8 GW in 700 km2, 56-100 km off Gippsland coast. OIR management plan approved Mar 2025. Geotechnical surveys underway. Part of 4.8 GW Gippsland cluster with Gippsland 02. Target early 2030s."
   },
   {
     "id": "orsted-gippsland-c-windfarm",
@@ -8794,7 +8892,8 @@
     "current_developer": "\u00d8rsted Offshore Australia 1 Pty Ltd",
     "data_confidence": "medium",
     "confidence_score": "25",
-    "development_stage": "planning_submitted"
+    "development_stage": "planning_submitted",
+    "notable": "Active feasibility licence. Up to 2 GW in 490 km2, 56-100 km off Gippsland coast. Joint management plan approved Mar 2025 alongside Gippsland 01."
   },
   {
     "id": "osborne-bess",
@@ -9021,7 +9120,8 @@
     "state": "SA",
     "current_developer": "ENGIE",
     "data_confidence": "good",
-    "confidence_score": "55"
+    "confidence_score": "55",
+    "notable": "Sungrow PowerTitan 2.0. Grid-forming. Elecnor delivery partner."
   },
   {
     "id": "peninsula-solar-farm-and-bess",
@@ -9096,7 +9196,8 @@
     "state": "VIC",
     "current_developer": "Valent Energy (Gaw Capital / BW ESS)",
     "data_confidence": "medium",
-    "confidence_score": "45"
+    "confidence_score": "45",
+    "notable": "Terminal station energised Dec 2025. Late-stage construction/commissioning."
   },
   {
     "id": "pinecrest-battery-energy-storage-system",
@@ -9566,10 +9667,13 @@
     "capacity_mw": 200.0,
     "storage_mwh": 400.0,
     "state": "VIC",
-    "current_developer": "Cranbourne BESS Project Co Pty Ltd",
+    "current_developer": "Eku Energy (Macquarie/Shell)",
+    "current_operator": "Shell Energy",
     "performance_score": 22.4,
     "data_confidence": "medium",
-    "confidence_score": "48"
+    "confidence_score": "48",
+    "capex_aud_m": 200.0,
+    "capex_year": 2023
   },
   {
     "id": "ravenswood-solar-farm-bess",
@@ -9714,7 +9818,8 @@
     "capacity_mw": 60.0,
     "storage_mwh": 120.0,
     "state": "NSW",
-    "current_developer": "Shell New Energies Australia Pty Ltd",
+    "current_developer": "Edify Energy / Federation Asset Management",
+    "current_operator": "Edify Energy",
     "performance_score": 45.9,
     "data_confidence": "medium",
     "confidence_score": "48"
@@ -9727,7 +9832,8 @@
     "capacity_mw": 65.0,
     "storage_mwh": 130.0,
     "state": "NSW",
-    "current_developer": "RESS 2 Pty Ltd",
+    "current_developer": "Edify Energy / Federation Asset Management",
+    "current_operator": "Edify Energy",
     "performance_score": 36.2,
     "data_confidence": "medium",
     "confidence_score": "48"
@@ -10156,7 +10262,8 @@
     "current_developer": "BayWa r.e. Australia (AEMO-registered developer)",
     "data_confidence": "medium",
     "confidence_score": "25",
-    "development_stage": "planning_submitted"
+    "development_stage": "planning_submitted",
+    "notable": "AEMO registration only \u2014 limited public record. May relate to Aurora Green (Iberdrola, 3 GW in Gippsland zone near Seaspray, feasibility licence Jul 2024)."
   },
   {
     "id": "sebastopol-solar-farm",
@@ -10254,7 +10361,8 @@
     "capacity_mw": 65.0,
     "storage_mwh": 129.96,
     "state": "NSW",
-    "current_developer": "Smithfield BESS Pty Limited",
+    "current_developer": "Iberdrola",
+    "current_operator": "Iberdrola",
     "performance_score": 50.0,
     "data_confidence": "medium",
     "confidence_score": "48"
@@ -10330,8 +10438,10 @@
     "storage_mwh": 58330.0,
     "state": "NSW",
     "current_developer": "Snowy Hydro Ltd",
+    "current_operator": "Snowy Hydro Ltd",
     "data_confidence": "good",
-    "confidence_score": "64"
+    "confidence_score": "64",
+    "notable": "Largest committed renewable energy project in Australia. Serial cost blowouts from A$2B to A$12B+. ~70% complete."
   },
   {
     "id": "solar-river-solar-and-bess-project",
@@ -10419,7 +10529,8 @@
     "current_developer": "BlueFloat Energy / Energy Estate (LIKELY CANCELLED)",
     "data_confidence": "medium",
     "confidence_score": "30",
-    "development_stage": "epbc_submitted"
+    "development_stage": "epbc_submitted",
+    "notable": "1,600 MW floating wind off NSW. BlueFloat ceased all global operations mid-2025 after parent Quantum Capital Group wound down offshore wind."
   },
   {
     "id": "southern-winds-offshore-wind",
@@ -10431,7 +10542,8 @@
     "current_developer": "BlueFloat Energy / Energy Estate (CANCELLED)",
     "data_confidence": "medium",
     "confidence_score": "28",
-    "development_stage": "epbc_submitted"
+    "development_stage": "epbc_submitted",
+    "notable": "Cancelled mid-2025. BlueFloat ceased all global operations after parent Quantum Capital determined offshore wind no longer viable. 1,155 MW proposed 8-20 km off coast between Cape Douglas SA and Nelson VIC."
   },
   {
     "id": "specimen-hill-bess-storage-kci",
@@ -10468,7 +10580,8 @@
     "rez": "nsw-central-west-orana",
     "data_confidence": "medium",
     "confidence_score": "33",
-    "development_stage": "epbc_approved"
+    "development_stage": "epbc_approved",
+    "notable": "700 MW wind in CWO REZ. Squadron Energy is Tattarang (Andrew Forrest) subsidiary."
   },
   {
     "id": "spinifex-offshore-wind-farm",
@@ -10480,7 +10593,8 @@
     "current_developer": "Alinta Energy / JERA Nex (Parkwind)",
     "data_confidence": "medium",
     "confidence_score": "25",
-    "development_stage": "planning_submitted"
+    "development_stage": "planning_submitted",
+    "notable": "Most advanced Southern Ocean project. First feasibility licence in Southern Ocean zone (Feb 2025). 1.2 GW bottom-fixed, 15-20 km off Warrnambool/Port Fairy. ARENA funding."
   },
   {
     "id": "springlands-wind-farm",
@@ -10542,7 +10656,8 @@
     "current_developer": "Southerly Ten (Copenhagen Infrastructure Partners / Cbus Super)",
     "data_confidence": "medium",
     "confidence_score": "35",
-    "development_stage": "epbc_submitted"
+    "development_stage": "epbc_submitted",
+    "notable": "Most advanced Australian offshore wind project. Feasibility licence FL-01 granted May 2024 for 586 km2 area 10+ km off Gippsland coast. EIS lodged Dec 2025 under EPBC Act. Targeting first power ~2030. Estimated A$8-10B."
   },
   {
     "id": "starfish-hill",
@@ -10705,7 +10820,8 @@
     "current_developer": "Copenhagen Infrastructure Partners (CIP)",
     "data_confidence": "medium",
     "confidence_score": "48",
-    "development_stage": "epbc_submitted"
+    "development_stage": "epbc_submitted",
+    "notable": "Canadian Solar e-STORAGE SolBank 3.0. 4-hour duration (240 MW / 960 MWh). 10-yr Origin offtake."
   },
   {
     "id": "summerfield-north",
@@ -10865,7 +10981,10 @@
     "state": "QLD",
     "current_developer": "Quinbrook Infrastructure Partners",
     "data_confidence": "good",
-    "confidence_score": "61"
+    "confidence_score": "61",
+    "capex_aud_m": 722.0,
+    "capex_year": 2024,
+    "notable": "Stage 1 commercial ops Feb 2026. A$1.4B+ for 3 stages. 12-yr Origin tolling. GE Vernova + CATL cells."
   },
   {
     "id": "supernode-bess-stage-3",
@@ -11041,7 +11160,8 @@
     "state": "SA",
     "current_developer": "Vena Energy",
     "data_confidence": "good",
-    "confidence_score": "50"
+    "confidence_score": "50",
+    "notable": "Canadian Solar e-STORAGE SolBank 3.0. ~100 battery containers. CPP BoP."
   },
   {
     "id": "talbingo-bess",
@@ -11179,7 +11299,8 @@
     "state": "QLD",
     "current_developer": "Stanwell Corporation",
     "data_confidence": "good",
-    "confidence_score": "58"
+    "confidence_score": "58",
+    "notable": "164x Tesla Megapack 2XL. A$514M. Commercial ops Feb 2026. Yurika EPC."
   },
   {
     "id": "tarong-west-wind-farm-ironleaf",
@@ -11591,10 +11712,13 @@
     "capacity_mw": 250.0,
     "storage_mwh": 249.61,
     "state": "SA",
-    "current_developer": "TIPSCO",
+    "current_developer": "AGL Energy",
+    "current_operator": "AGL Energy",
     "performance_score": 52.7,
     "data_confidence": "medium",
-    "confidence_score": "48"
+    "confidence_score": "48",
+    "capex_aud_m": 180.0,
+    "capex_year": 2021
   },
   {
     "id": "trafalgar-east-hybrid-facility-stage-2",
@@ -11805,7 +11929,8 @@
     "capacity_mw": 155.0,
     "storage_mwh": 297.96,
     "state": "QLD",
-    "current_developer": "Ulinda Park ProjectCo Pty Ltd",
+    "current_developer": "Akaysha Energy (BlackRock)",
+    "current_operator": "Akaysha Energy",
     "performance_score": 29.6,
     "data_confidence": "medium",
     "confidence_score": "48"
@@ -11833,7 +11958,8 @@
     "current_developer": "OceanEx Energy",
     "data_confidence": "medium",
     "confidence_score": "27",
-    "development_stage": "planning_submitted"
+    "development_stage": "planning_submitted",
+    "notable": "Proposed 2 GW off Ulladulla NSW coast. Oceanex Energy developer. Equinor partnership dissolved. Very early stage \u2014 limited public documentation."
   },
   {
     "id": "upper-calliope-solar-farm-side-a",
@@ -11906,7 +12032,8 @@
     "current_developer": "Squadron Energy (Tattarang)",
     "rez": "nsw-central-west-orana",
     "data_confidence": "good",
-    "confidence_score": "56"
+    "confidence_score": "56",
+    "notable": "Largest wind farm in NSW. 69 GE Vernova Cypress turbines. Part of A$2.75B GE Vernova alliance. NSW LTESA Round 3."
   },
   {
     "id": "vales-point-bess",
@@ -11966,10 +12093,14 @@
     "capacity_mw": 300.0,
     "storage_mwh": 450.0,
     "state": "VIC",
-    "current_developer": "Neoen",
+    "current_developer": "HMC Capital (ex-Neoen)",
+    "current_operator": "HMC Capital",
     "performance_score": 11.7,
     "data_confidence": "high",
-    "confidence_score": "80"
+    "confidence_score": "80",
+    "capex_aud_m": 300.0,
+    "capex_year": 2020,
+    "notable": "Largest battery in Victoria at commissioning. Experienced a notable Tesla Megapack fire during testing in July 2021."
   },
   {
     "id": "wagga-north-bess-ib-vogt-kci",
@@ -12075,12 +12206,14 @@
     "technology": "bess",
     "status": "operating",
     "capacity_mw": 50.0,
-    "storage_mwh": 2700.0,
+    "storage_mwh": 75.0,
     "state": "NSW",
     "current_developer": "TransGrid",
     "performance_score": 41.0,
     "data_confidence": "medium",
-    "confidence_score": "48"
+    "confidence_score": "48",
+    "capex_aud_m": 62.0,
+    "capex_year": 2020
   },
   {
     "id": "wambo-wind-farm",
@@ -12092,7 +12225,8 @@
     "current_developer": "Cubico Sustainable Investments / Stanwell Corporation (50:50 JV)",
     "data_confidence": "good",
     "confidence_score": "62",
-    "development_stage": "epbc_approved"
+    "development_stage": "epbc_approved",
+    "notable": "83 Vestas V162-6.2 turbines. First turbines energised May 2025. A$650M finance package."
   },
   {
     "id": "wamuran-bess-kci",
@@ -12127,10 +12261,13 @@
     "capacity_mw": 100.0,
     "storage_mwh": 150.0,
     "state": "QLD",
-    "current_developer": "Vena Evergy",
+    "current_developer": "Vena Energy",
+    "current_operator": "Vena Energy",
     "performance_score": 26.0,
     "data_confidence": "medium",
-    "confidence_score": "48"
+    "confidence_score": "48",
+    "capex_aud_m": 100.0,
+    "capex_year": 2020
   },
   {
     "id": "wandoan-south-solar-stage-1",
@@ -12163,9 +12300,13 @@
     "storage_mwh": 1680.0,
     "state": "NSW",
     "current_developer": "Akaysha Energy (BlackRock)",
+    "current_operator": "Akaysha Energy",
     "performance_score": 11.9,
     "data_confidence": "good",
-    "confidence_score": "67"
+    "confidence_score": "67",
+    "capex_aud_m": 1000.0,
+    "capex_year": 2022,
+    "notable": "Operating at 350MW (41% capacity) due to catastrophic transformer failure Oct 2025. Replacement transformer delivery Q3 2026, full 850MW targeted end of 2026. SIPS contract ~$705M over 5 years. OEM Powin filed Chapter 11 bankruptcy June 2025."
   },
   {
     "id": "warracknabeal-wind-farm",
@@ -12425,7 +12566,9 @@
     "state": "QLD",
     "current_developer": "Western Downs BESS Pty Ltd as trustee for Western Downs BESS Trust",
     "data_confidence": "low",
-    "confidence_score": "22"
+    "confidence_score": "22",
+    "capex_aud_m": 244.0,
+    "capex_year": 2022
   },
   {
     "id": "western-downs-green-power-hub-pl",
@@ -12597,7 +12740,8 @@
     "state": "NSW",
     "current_developer": "Eku Energy (Macquarie / BCIM)",
     "data_confidence": "good",
-    "confidence_score": "58"
+    "confidence_score": "58",
+    "notable": "Tesla Megapack. A$400M. ACT Big Canberra Battery. 50% revenue to ACT Government. Grid-forming."
   },
   {
     "id": "willogoleche-wind-farm",
@@ -12895,7 +13039,8 @@
     "state": "QLD",
     "current_developer": "Lightsource bp",
     "data_confidence": "good",
-    "confidence_score": "55"
+    "confidence_score": "55",
+    "notable": "Hithium 5 MWh containers (128 units). INTEC EPC. CIS Tender 1 winner."
   },
   {
     "id": "woolooga-bess-kci",
@@ -12957,7 +13102,10 @@
     "state": "VIC",
     "current_developer": "EnergyAustralia",
     "data_confidence": "good",
-    "confidence_score": "61"
+    "confidence_score": "61",
+    "capex_aud_m": 700.0,
+    "capex_year": 2024,
+    "notable": "Wartsila Quantum High Energy. A$700M. CIS Round 1 winner. Replaces Yallourn coal (retires mid-2028)."
   },
   {
     "id": "wooroora-station-wind-farm",
@@ -13118,7 +13266,8 @@
     "rez": "nsw-south-west",
     "data_confidence": "high",
     "confidence_score": "75",
-    "development_stage": "planning_submitted"
+    "development_stage": "planning_submitted",
+    "notable": "One of the largest solar projects in Australia at 1GW. Key asset in Origin Energy's 4GW renewables target for 2030. Full allocation in SW REZ."
   },
   {
     "id": "yanco-delta-wind-farm",
@@ -13131,7 +13280,8 @@
     "rez": "nsw-south-west",
     "data_confidence": "medium",
     "confidence_score": "35",
-    "development_stage": "epbc_approved"
+    "development_stage": "epbc_approved",
+    "notable": "1.5 GW wind (208 turbines, 270m tip) + 800 MWh BESS. 33,000 ha site 10 km NW of Jerilderie in SW REZ. ~$4B project. 1,460 MW transmission access secured. FID target mid-FY2027."
   },
   {
     "id": "yanco-solar-farm",

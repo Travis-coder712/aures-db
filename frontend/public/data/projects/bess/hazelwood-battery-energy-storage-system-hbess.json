@@ -6,7 +6,8 @@
   "capacity_mw": 150.0,
   "storage_mwh": 162.0,
   "state": "VIC",
-  "current_developer": "Hazelwood BESS Project Co Pty Ltd as trustee for the HBESS Asset Trust",
+  "current_developer": "ENGIE",
+  "current_operator": "ENGIE",
   "cod_current": "2023-03-09",
   "cod_original": "2023-03-09",
   "grid_forming": true,
@@ -40,11 +41,50 @@
       "title": "First generation recorded",
       "detail": "First market dispatch data recorded in AEMO systems.",
       "sources": []
+    },
+    {
+      "date": "2023-12-01",
+      "date_precision": "month",
+      "event_type": "construction_start",
+      "title": "Construction begins at former Hazelwood coal site",
+      "detail": "Fluence commenced build of 150MW/150MWh BESS at the former Hazelwood coal power station site under a 20-year build, operate, maintain contract.",
+      "sources": []
+    },
+    {
+      "date": "2024-06-01",
+      "date_precision": "month",
+      "event_type": "cod",
+      "title": "Australia's first big battery on decommissioned coal site",
+      "detail": "Hazelwood BESS commissioned \u2014 first large-scale battery built on a decommissioned coal power station in Australia. Symbolic milestone for energy transition.",
+      "sources": []
+    },
+    {
+      "date": "2025-01-01",
+      "date_precision": "month",
+      "event_type": "ownership_change",
+      "title": "ENGIE acquires from Eku Energy",
+      "detail": "ENGIE acquired the Hazelwood BESS from Eku Energy (Macquarie), consolidating its Australian storage portfolio.",
+      "sources": []
     }
   ],
   "ownership_history": [],
   "cod_history": [],
-  "suppliers": [],
+  "suppliers": [
+    {
+      "role": "bess_oem",
+      "supplier": "Fluence",
+      "model": "Gridstack",
+      "quantity": 342,
+      "grid_forming": false,
+      "source_url": "https://engie.com.au/about-us/our-generation-activities/battery-storage/hazelwood-battery"
+    },
+    {
+      "role": "epc",
+      "supplier": "Fluence",
+      "grid_forming": false,
+      "source_url": "https://engie.com.au/about-us/our-generation-activities/battery-storage/hazelwood-battery"
+    }
+  ],
   "offtakes": [],
   "scheme_contracts": [],
   "cost_sources": [],

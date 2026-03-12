@@ -4,7 +4,7 @@
   "technology": "bess",
   "status": "operating",
   "capacity_mw": 50.0,
-  "storage_mwh": 2700.0,
+  "storage_mwh": 75.0,
   "state": "NSW",
   "current_developer": "TransGrid",
   "cod_current": "2021-10-28",
@@ -20,6 +20,9 @@
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "1874",
   "confidence_score": "48",
+  "capex_aud_m": 62.0,
+  "capex_source": "ARENA",
+  "capex_year": 2020,
   "coordinates": {
     "lat": -33.817476,
     "lng": 150.827276
@@ -40,11 +43,42 @@
       "title": "First generation recorded",
       "detail": "First market dispatch data recorded in AEMO systems.",
       "sources": []
+    },
+    {
+      "date": "2022-12-01",
+      "date_precision": "month",
+      "event_type": "cod",
+      "title": "Full operational status reached",
+      "detail": "A$61.9M battery became fully operational as NSW's first big battery.",
+      "sources": []
+    },
+    {
+      "date": "2022-12-01",
+      "date_precision": "month",
+      "event_type": "notable",
+      "title": "Third Tesla battery worldwide to demonstrate synthetic inertia",
+      "detail": "Wallgrove became the third Tesla grid-scale battery worldwide to demonstrate synthetic inertia via Virtual Machine Mode.",
+      "sources": []
     }
   ],
   "ownership_history": [],
   "cod_history": [],
-  "suppliers": [],
+  "suppliers": [
+    {
+      "role": "bess_oem",
+      "supplier": "Tesla",
+      "model": "Megapack (Virtual Machine Mode)",
+      "quantity": 36,
+      "grid_forming": false,
+      "source_url": "https://arena.gov.au/projects/transgrid-wallgrove-battery/"
+    },
+    {
+      "role": "epc",
+      "supplier": "Tesla",
+      "grid_forming": false,
+      "source_url": "https://arena.gov.au/projects/transgrid-wallgrove-battery/"
+    }
+  ],
   "offtakes": [],
   "scheme_contracts": [],
   "cost_sources": [],

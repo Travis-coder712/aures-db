@@ -489,6 +489,48 @@ export interface DataSourceInfo {
   error: string | null
 }
 
+// BESS Capex Analytics
+export interface BESSCapexProject {
+  id: string
+  name: string
+  status: string
+  capacity_mw: number
+  storage_mwh: number
+  capex_aud_m: number
+  capex_year: number
+  capex_source: string
+  state: string
+  current_developer: string
+  current_operator: string
+  bess_oem: string
+  bess_model: string
+  capex_per_mw: number
+  capex_per_mwh: number
+  duration_hours: number
+}
+
+export interface BESSCapexYearSummary {
+  count: number
+  total_mw: number
+  total_capex_m: number
+  avg_capex_per_mw: number | null
+  avg_capex_per_mwh: number | null
+}
+
+export interface BESSCapexOEMSummary {
+  count: number
+  total_mw: number
+  avg_capex_per_mw: number | null
+  avg_capex_per_mwh: number | null
+}
+
+export interface BESSCapexData {
+  projects: BESSCapexProject[]
+  by_year: Record<string, BESSCapexYearSummary>
+  by_oem: Record<string, BESSCapexOEMSummary>
+  exported_at: string
+}
+
 export interface DataSourcesIndex {
   sources: DataSourceInfo[]
   database_stats: {

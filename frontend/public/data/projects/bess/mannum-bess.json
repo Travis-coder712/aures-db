@@ -6,7 +6,8 @@
   "capacity_mw": 100.0,
   "storage_mwh": 200.0,
   "state": "SA",
-  "current_developer": "Mannum Stage 2 Battery SubCo Pty Ltd as Trustee for The Mannum Stage 2 Battery Unit Trust",
+  "current_developer": "Epic Energy",
+  "current_operator": "Epic Energy",
   "cod_current": "2026-01-08",
   "cod_original": "2026-01-08",
   "grid_forming": true,
@@ -35,6 +36,14 @@
       "sources": []
     },
     {
+      "date": "2024-06-01",
+      "date_precision": "month",
+      "event_type": "construction_start",
+      "title": "Construction begins",
+      "detail": "Epic Energy commenced construction of 100MW/220MWh BESS using Canadian Solar e-STORAGE SolBank systems in SA.",
+      "sources": []
+    },
+    {
       "date": "2025-05-12",
       "date_precision": "day",
       "event_type": "cod",
@@ -51,6 +60,14 @@
       "sources": []
     },
     {
+      "date": "2025-06-01",
+      "date_precision": "month",
+      "event_type": "cod",
+      "title": "Commercial operations commence",
+      "detail": "Mannum BESS achieved commercial operation at 100MW/220MWh \u2014 Epic Energy's first battery storage project.",
+      "sources": []
+    },
+    {
       "date": "2026-03-12",
       "date_precision": "day",
       "event_type": "cod_change",
@@ -61,7 +78,21 @@
   ],
   "ownership_history": [],
   "cod_history": [],
-  "suppliers": [],
+  "suppliers": [
+    {
+      "role": "bess_oem",
+      "supplier": "Canadian Solar e-STORAGE",
+      "model": "SolBank (LFP)",
+      "grid_forming": false,
+      "source_url": "https://epicenergy.com.au/mannum-battery-energy-storage-system/"
+    },
+    {
+      "role": "epc",
+      "supplier": "Canadian Solar e-STORAGE / CPP",
+      "grid_forming": false,
+      "source_url": "https://epicenergy.com.au/mannum-battery-energy-storage-system/"
+    }
+  ],
   "offtakes": [],
   "scheme_contracts": [],
   "cost_sources": [],

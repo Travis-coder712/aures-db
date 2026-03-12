@@ -5,7 +5,7 @@
  * In production (GitHub Pages), they're served as static files.
  * In development (Vite dev server), they're served from the public/ directory.
  */
-import type { ProjectSummary, Project, Technology, ProjectStatus, State, LeagueTable, LeagueTableIndex, LeagueTechnology, DeveloperIndex, OEMIndex, ContractorIndex, OfftakerIndex, MapProject, CODDriftData, DataSourcesIndex } from './types'
+import type { ProjectSummary, Project, Technology, ProjectStatus, State, LeagueTable, LeagueTableIndex, LeagueTechnology, DeveloperIndex, OEMIndex, ContractorIndex, OfftakerIndex, MapProject, CODDriftData, DataSourcesIndex, BESSCapexData } from './types'
 
 const BASE = import.meta.env.BASE_URL + 'data'
 
@@ -269,6 +269,20 @@ export function computeStatsFromIndex(projects: ProjectSummary[]): QuickStats {
 // ============================================================
 
 let dataSourcesCache: DataSourcesIndex | null = null
+
+let bessCapexCache: BESSCapexData | null = null
+
+export async function fetchBESSCapex(): Promise<BESSCapexData | null> {
+  if (bessCapexCache) return bessCapexCache
+  try {
+    const resp = await fetch(`${BASE}/analytics/bess-capex.json`)
+    if (!resp.ok) return null
+    bessCapexCache = (await resp.json()) as BESSCapexData
+    return bessCapexCache
+  } catch {
+    return null
+  }
+}
 
 export async function fetchDataSources(): Promise<DataSourcesIndex | null> {
   if (dataSourcesCache) return dataSourcesCache

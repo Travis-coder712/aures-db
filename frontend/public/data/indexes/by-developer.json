@@ -118,9 +118,8 @@
     "baldon-wind-farm-stage-2",
     "baldon-wind-farm-stage-2-bess"
   ],
-  "Ausnet Transmission Group Pty Ltd": [
-    "ballarat-energy-storage-system",
-    "thomastown-bess"
+  "AusNet Services": [
+    "ballarat-energy-storage-system"
   ],
   "Orange Creek Energy Pty Ltd": [
     "banana-range-wind-farm"
@@ -222,7 +221,8 @@
     "tailem-bend-solar",
     "tailem-bend-battery-project",
     "tailem-bend-stage-2-solar-project",
-    "tailem-bend-stage-3"
+    "tailem-bend-stage-3",
+    "wandoan-south-bess"
   ],
   "The Trustee for Equis Wind (Australia) LHWF2 Asset Trust": [
     "bellbay-wind-farm"
@@ -319,8 +319,11 @@
     "blue-mackerel-north-off-shore-wind-farm",
     "blue-mackerel-north-offshore-wind-farm"
   ],
-  "Blyth Battery P/L as trustee for Blyth Battery Trust": [
-    "blyth-bess"
+  "Neoen": [
+    "blyth-bess",
+    "capital-battery",
+    "hornsdale-power-reserve",
+    "hornsdale-power-reserve-unit-1"
   ],
   "Edify Energy Pty Ltd": [
     "boags-creek-solar-power-station",
@@ -345,7 +348,6 @@
     "dalvui-bess",
     "hargaves-bess",
     "hargaves-wind-farm",
-    "latrobe-valley-bess",
     "nonowie-wind-farm",
     "palmer-wind-farm",
     "rye-park-wind-farm"
@@ -393,8 +395,12 @@
   "Aula Energy / CS Energy (50:50 JV)": [
     "boulder-creek-wind-farm"
   ],
-  "Genex Power Limited": [
+  "Genex Power": [
     "bouldercombe-battery-project",
+    "jemalong-solar",
+    "kidston-pumped-storage-hydro-project-250mw"
+  ],
+  "Genex Power Limited": [
     "bouldercombe-battery-project-stage-2-kci",
     "bulli-creek-battery",
     "bulli-creek-solar-farm",
@@ -439,6 +445,7 @@
     "brendale-bess",
     "elaine-bess",
     "orana-bess",
+    "ulinda-park-bess",
     "waratah-super-battery"
   ],
   "Brinkworth Solar Farm Pty Ltd": [
@@ -448,7 +455,7 @@
     "broadsound-solar-farm",
     "broadsoundbess"
   ],
-  "MACQGEN": [
+  "AGL Energy / Macquarie": [
     "broken-hill-bess"
   ],
   "PARF Company 6 Pty Limited": [
@@ -574,9 +581,6 @@
   "Capital Wind Farm 2 Pty Ltd": [
     "capital-2-wind-farm"
   ],
-  "Capital Battery Pty Ltd": [
-    "capital-battery"
-  ],
   "Renewable Power Ventures Pty Ltd": [
     "capital-wind-farm"
   ],
@@ -628,9 +632,10 @@
   "Childers Solar Pty Ltd as trustee for the Childers Solar Trust": [
     "childers-solar-farm"
   ],
-  "CSE BESS Pty Ltd": [
+  "CS Energy": [
     "chinchilla-bess",
-    "greenbank-bess"
+    "greenbank-bess",
+    "lotus-creek-wind-farm"
   ],
   "First Solar Australia Pty Ltd": [
     "chinchilla-solar-farm"
@@ -729,7 +734,8 @@
   ],
   "AGL Energy": [
     "coopers-gap-wind-farm",
-    "liddell-bess"
+    "liddell-bess",
+    "torrens-island-bess"
   ],
   "Coppabella Wind Farm Pty Ltd": [
     "coppabella-wind-farm"
@@ -955,15 +961,13 @@
   ],
   "Origin Energy": [
     "eraring-battery",
+    "eraring-big-battery",
     "morgan-long-duration-energy-storage-kci",
     "mortlake-battery",
     "shoalhaven-expansion",
     "yanco-delta",
     "yanco-solar-farm",
     "yarrabee-solar-power-project"
-  ],
-  "Origin Energy Electricity Limited": [
-    "eraring-big-battery"
   ],
   "Euleilah Development Pty Ltd": [
     "euleilah-solar-farm-and-bess-kci"
@@ -1011,8 +1015,7 @@
     "fulham-solar-farm-and-bess"
   ],
   "Shell New Energies Australia Pty Ltd": [
-    "gangarri-solar-farm",
-    "riverina-energy-storage-system-1"
+    "gangarri-solar-farm"
   ],
   "Gannawarra Solar Farm Pty Ltd": [
     "gannawarra-solar-farm"
@@ -1262,8 +1265,10 @@
   "International Power (Australia) Pty Ltd": [
     "hazelwood-bess-kci"
   ],
-  "Hazelwood BESS Project Co Pty Ltd as trustee for the HBESS Asset Trust": [
-    "hazelwood-battery-energy-storage-system-hbess"
+  "ENGIE": [
+    "hazelwood-battery-energy-storage-system-hbess",
+    "pelican-point-bess",
+    "silverleaf-solar-farm-kci"
   ],
   "Hazelwood East BESS": [
     "hazelwood-east-bess-kci"
@@ -1312,13 +1317,6 @@
   "Hopeland Solar Farm Pty Ltd as trustee for the Hopeland Solar Farm Trust": [
     "hopeland-solar-farm"
   ],
-  "Neoen": [
-    "hornsdale-power-reserve",
-    "victorian-big-battery"
-  ],
-  "Hornsdale Power Reserve Pty Ltd": [
-    "hornsdale-power-reserve-unit-1"
-  ],
   "HWF 1 Pty Ltd": [
     "hornsdale-wind-farm-stage-1"
   ],
@@ -1366,10 +1364,6 @@
   ],
   "J Pierce Road BESS Pty Ltd": [
     "j-pierce-road-bess"
-  ],
-  "Genex Power": [
-    "jemalong-solar",
-    "kidston-pumped-storage-hydro-project-250mw"
   ],
   "BESS Atlantic": [
     "jindera-bess-storage-kci"
@@ -1471,7 +1465,7 @@
   "Equis Energy (Australia) Projects (Ngumi 6) Pty Ltd as trustee for the Equis Energy (Australia) Ngumi 6 Asset Trust": [
     "koolunga-battery-energy-storage-system"
   ],
-  "Shell Energy": [
+  "Edify Energy (Sosteneo)": [
     "koorangie-energy-storage-system"
   ],
   "FERA Australia Pty Ltd": [
@@ -1483,6 +1477,9 @@
   ],
   "LOYYANGA": [
     "lya-bess"
+  ],
+  "Tilt Renewables (Mercury NZ)": [
+    "latrobe-valley-bess"
   ],
   "Lake Bonney Wind Power Pty Ltd": [
     "lake-bonney-1-wind-farm",
@@ -1537,9 +1534,6 @@
   "Stanwell Lockyer Project Co Pty Ltd": [
     "lockyer-valley-energy-project"
   ],
-  "CS Energy": [
-    "lotus-creek-wind-farm"
-  ],
   "Syncline Energy Pty Ltd": [
     "lovely-banks-renewable-energy-hub-kci"
   ],
@@ -1586,7 +1580,7 @@
   "Manildra Prop Pty Ltd as trustee for the Manildra Asset Trust": [
     "manildra-solar-farm"
   ],
-  "Mannum Stage 2 Battery SubCo Pty Ltd as Trustee for The Mannum Stage 2 Battery Unit Trust": [
+  "Epic Energy": [
     "mannum-bess"
   ],
   "Biscon Energy Australia Pty Ltd": [
@@ -1636,13 +1630,9 @@
   "MREH Pty Ltd as trustee for MREH Asset Trust": [
     "melbourne-renewable-energy-hub-side-b"
   ],
-  "Equis Energy (Australia) Projects (MREH A1 AssetCo) Pty Ltd (ACN 669 645 461) as The Trustee for Equis Energy (Australia) MREH A1 Asset Trust (ABN 92 607 537 147)": [
-    "melbourne-renewable-energy-hub-connection-a1"
-  ],
-  "Equis Energy (Australia) Projects (MREH A2 AssetCo) Pty Ltd (ACN 669 645 489) as The Trustee for Equis Energy (Australia) MREH A2 Asset Trust (ABN 34 770 707 887)": [
-    "melbourne-renewable-energy-hub-connection-a2"
-  ],
-  "Equis Energy (Australia) Projects (MREH A3 AssetCo) Pty Ltd (ACN 669 645 514) as The Trustee for Equis Energy (Australia) MREH A3 Asset Trust (ABN 47 920 042 214)": [
+  "Equis Energy / SEC Victoria": [
+    "melbourne-renewable-energy-hub-connection-a1",
+    "melbourne-renewable-energy-hub-connection-a2",
     "melbourne-renewable-energy-hub-connection-a3"
   ],
   "Merino Solar Farm Pty Ltd as trustee for Merino Solar Farm Trust": [
@@ -1892,10 +1882,6 @@
   "Parkes Solar Farm Pty Ltd": [
     "parkes-solar-farm"
   ],
-  "ENGIE": [
-    "pelican-point-bess",
-    "silverleaf-solar-farm-kci"
-  ],
   "ACEN Phoenix Pty Ltd": [
     "phoenix-pumped-hydro-project"
   ],
@@ -1977,7 +1963,7 @@
   "EEW Eco Energy World Ltd": [
     "raglan-solar-farm"
   ],
-  "Cranbourne BESS Project Co Pty Ltd": [
+  "Eku Energy (Macquarie/Shell)": [
     "rangebank-bess"
   ],
   "NEMMCO": [
@@ -2002,7 +1988,8 @@
   "Pacific Partnerships Pty Ltd": [
     "river-parks-battery-energy-storage-system"
   ],
-  "RESS 2 Pty Ltd": [
+  "Edify Energy / Federation Asset Management": [
+    "riverina-energy-storage-system-1",
     "riverina-energy-storage-system-2"
   ],
   "ACEN Robbins Island PTY LTD": [
@@ -2069,7 +2056,7 @@
   "PARF Company 8 Pty Ltd as trustee for the Silverton Project Trust": [
     "silverton-wind-farm"
   ],
-  "Smithfield BESS Pty Limited": [
+  "Iberdrola": [
     "smithfield-bess"
   ],
   "Snowtown Wind Farm Stage 2 Pty Ltd": [
@@ -2242,6 +2229,9 @@
   "Theodore SF Pty Ltd as trustee for Theodore SF Trust": [
     "theodore-solar-farm"
   ],
+  "Ausnet Transmission Group Pty Ltd": [
+    "thomastown-bess"
+  ],
   "European Energy Australia P/L": [
     "ticoba-bess",
     "ticoba-solar-farm",
@@ -2260,9 +2250,6 @@
   "AGL": [
     "tomago-bess"
   ],
-  "TIPSCO": [
-    "torrens-island-bess"
-  ],
   "Trafalgar Renewables Pty Ltd": [
     "trafalgar-east-hybrid-facility-stage-2"
   ],
@@ -2274,9 +2261,6 @@
   ],
   "Australian Solar Enterprises Pty Ltd": [
     "tumuruu-one"
-  ],
-  "Ulinda Park ProjectCo Pty Ltd": [
-    "ulinda-park-bess"
   ],
   "OceanEx Energy": [
     "ulladulla-offshore-wind-farm"
@@ -2298,6 +2282,9 @@
   ],
   "Vast Solar 1 Pty Ltd": [
     "vast-solar-1"
+  ],
+  "HMC Capital (ex-Neoen)": [
+    "victorian-big-battery"
   ],
   "Wagga Wagga Operationsco Pty Ltd as trustree for Wagga Wagga Operations Trust": [
     "wagga-north-solar-farm"
@@ -2324,7 +2311,6 @@
     "wandoan-solar-farm"
   ],
   "Vena Evergy": [
-    "wandoan-south-bess",
     "wandoan-south-solar-stage-1"
   ],
   "WestWind Energy Pty Ltd": [

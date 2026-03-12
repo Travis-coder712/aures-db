@@ -6,7 +6,8 @@
   "capacity_mw": 65.0,
   "storage_mwh": 129.96,
   "state": "NSW",
-  "current_developer": "Smithfield BESS Pty Limited",
+  "current_developer": "Iberdrola",
+  "current_operator": "Iberdrola",
   "cod_current": "2025-11-19",
   "cod_original": "2025-11-19",
   "grid_forming": true,
@@ -25,6 +26,14 @@
     "lng": 150.947448
   },
   "timeline": [
+    {
+      "date": "2024-06-01",
+      "date_precision": "month",
+      "event_type": "cod",
+      "title": "Iberdrola opens 130MWh battery in western Sydney",
+      "detail": "Iberdrola Australia's 65MW/130MWh Smithfield BESS commenced operations. OEM not publicly disclosed. ACLE Services as BoP contractor.",
+      "sources": []
+    },
     {
       "date": "2025-09-07",
       "date_precision": "day",
@@ -52,7 +61,21 @@
   ],
   "ownership_history": [],
   "cod_history": [],
-  "suppliers": [],
+  "suppliers": [
+    {
+      "role": "bess_oem",
+      "supplier": "Unknown",
+      "model": "Lithium-ion (2hr)",
+      "grid_forming": false,
+      "source_url": "https://www.energy-storage.news/iberdrola-australia-opens-130mwh-battery-storage-system-in-western-sydney/"
+    },
+    {
+      "role": "epc",
+      "supplier": "ACLE Services",
+      "grid_forming": false,
+      "source_url": "https://www.energy-storage.news/iberdrola-australia-opens-130mwh-battery-storage-system-in-western-sydney/"
+    }
+  ],
   "offtakes": [],
   "scheme_contracts": [],
   "cost_sources": [],

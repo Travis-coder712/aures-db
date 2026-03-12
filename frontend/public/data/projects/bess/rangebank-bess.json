@@ -6,7 +6,8 @@
   "capacity_mw": 200.0,
   "storage_mwh": 400.0,
   "state": "VIC",
-  "current_developer": "Cranbourne BESS Project Co Pty Ltd",
+  "current_developer": "Eku Energy (Macquarie/Shell)",
+  "current_operator": "Shell Energy",
   "cod_current": "2024-07-31",
   "cod_original": "2024-07-31",
   "grid_forming": true,
@@ -20,11 +21,22 @@
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "2460",
   "confidence_score": "48",
+  "capex_aud_m": 200.0,
+  "capex_source": "Power Technology estimate",
+  "capex_year": 2023,
   "coordinates": {
     "lat": -38.0852,
     "lng": 145.259434
   },
   "timeline": [
+    {
+      "date": "2023-06-01",
+      "date_precision": "month",
+      "event_type": "construction_start",
+      "title": "Construction begins",
+      "detail": "Eku Energy (Macquarie/Shell) commenced construction of 200MW/400MWh BESS using 640 Fluence Gridstack Cubes near Cranbourne, VIC.",
+      "sources": []
+    },
     {
       "date": "2024-07-31",
       "date_precision": "month",
@@ -40,11 +52,34 @@
       "title": "First generation recorded",
       "detail": "First market dispatch data recorded in AEMO systems.",
       "sources": []
+    },
+    {
+      "date": "2024-12-01",
+      "date_precision": "month",
+      "event_type": "cod",
+      "title": "Victoria's second-largest BESS enters commercial operations",
+      "detail": "Rangebank BESS commenced operations, featuring Fluence Gridstack with 640 Cubes. Shell Energy holds long-term offtake agreement.",
+      "sources": []
     }
   ],
   "ownership_history": [],
   "cod_history": [],
-  "suppliers": [],
+  "suppliers": [
+    {
+      "role": "bess_oem",
+      "supplier": "Fluence",
+      "model": "Gridstack",
+      "quantity": 640,
+      "grid_forming": false,
+      "source_url": "https://www.ekuenergy.com/what-we-do/projects/rangebank-battery-energy-storage-system"
+    },
+    {
+      "role": "epc",
+      "supplier": "RJE Global / Symal JV",
+      "grid_forming": false,
+      "source_url": "https://symal.com.au/projects/rangebank-battery-energy-storage-system/"
+    }
+  ],
   "offtakes": [],
   "scheme_contracts": [],
   "cost_sources": [],

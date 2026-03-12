@@ -20,6 +20,9 @@
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "1553",
   "confidence_score": "48",
+  "capex_aud_m": 30.0,
+  "capex_source": "ARENA/ESCRI-SA",
+  "capex_year": 2017,
   "coordinates": {
     "lat": -34.888446,
     "lng": 137.758114
@@ -40,11 +43,56 @@
       "title": "First generation recorded",
       "detail": "First market dispatch data recorded in AEMO systems.",
       "sources": []
+    },
+    {
+      "date": "2018-12-01",
+      "date_precision": "month",
+      "event_type": "cod",
+      "title": "South Australia's second big battery commissioned",
+      "detail": "ElectraNet's 30MW/8MWh Dalrymple BESS (Samsung SDI cells, ABB inverters, CPP EPC) commenced operations under the ESCRI-SA project, funded by ARENA.",
+      "sources": []
+    },
+    {
+      "date": "2023-12-01",
+      "date_precision": "month",
+      "event_type": "notable",
+      "title": "Battery repays ARENA grant after windfall revenue",
+      "detail": "Dalrymple BESS generated sufficient revenue to fully repay its ARENA grant, driven by high FCAS prices and energy arbitrage during SA grid stress events.",
+      "sources": []
+    },
+    {
+      "date": "2023-12-01",
+      "date_precision": "month",
+      "event_type": "notable",
+      "title": "Five-year anniversary \u2014 strong operational track record",
+      "detail": "ElectraNet celebrated 5-year anniversary of Dalrymple battery, highlighting consistent reliability and revenue performance.",
+      "sources": []
     }
   ],
   "ownership_history": [],
   "cod_history": [],
-  "suppliers": [],
+  "suppliers": [
+    {
+      "role": "bess_oem",
+      "supplier": "Samsung SDI",
+      "model": "Lithium-ion modules",
+      "grid_forming": false,
+      "source_url": "https://www.escri-sa.com.au/about/"
+    },
+    {
+      "role": "epc",
+      "supplier": "Consolidated Power Projects (CPP)",
+      "grid_forming": false,
+      "source_url": "https://www.escri-sa.com.au/about/"
+    },
+    {
+      "role": "inverter",
+      "supplier": "ABB",
+      "model": "Inverters + controller",
+      "grid_forming": false,
+      "source_url": "https://www.escri-sa.com.au/about/"
+    }
+  ],
   "offtakes": [],
   "scheme_contracts": [],
   "cost_sources": [],

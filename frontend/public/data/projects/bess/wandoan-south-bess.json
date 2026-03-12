@@ -6,7 +6,8 @@
   "capacity_mw": 100.0,
   "storage_mwh": 150.0,
   "state": "QLD",
-  "current_developer": "Vena Evergy",
+  "current_developer": "Vena Energy",
+  "current_operator": "Vena Energy",
   "cod_current": "2021-09-08",
   "cod_original": "2021-09-08",
   "grid_forming": true,
@@ -20,11 +21,22 @@
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "1762",
   "confidence_score": "48",
+  "capex_aud_m": 100.0,
+  "capex_source": "Vena Energy/Doosan",
+  "capex_year": 2020,
   "coordinates": {
     "lat": -26.263986,
     "lng": 149.772871
   },
   "timeline": [
+    {
+      "date": "2020-12-01",
+      "date_precision": "month",
+      "event_type": "fid",
+      "title": "Financial close achieved, Doosan GridTech named as EPC",
+      "detail": "Vena Energy achieved financial close on 100MW/150MWh BESS. Doosan GridTech selected as EPC with Samsung SDI cells. Housed in enclosed building rather than outdoor containers.",
+      "sources": []
+    },
     {
       "date": "2021-09-08",
       "date_precision": "day",
@@ -40,11 +52,33 @@
       "title": "First generation recorded",
       "detail": "First market dispatch data recorded in AEMO systems.",
       "sources": []
+    },
+    {
+      "date": "2023-04-01",
+      "date_precision": "month",
+      "event_type": "cod",
+      "title": "Queensland's largest battery begins commercial operations",
+      "detail": "Wandoan South BESS commenced commercial operations, the first utility-scale storage project at that scale in QLD.",
+      "sources": []
     }
   ],
   "ownership_history": [],
   "cod_history": [],
-  "suppliers": [],
+  "suppliers": [
+    {
+      "role": "bess_oem",
+      "supplier": "Samsung SDI",
+      "model": "Lithium-ion LFP (500k+ cells)",
+      "grid_forming": false,
+      "source_url": "https://www.doosangridtech.com/wandoan-south-bess"
+    },
+    {
+      "role": "epc",
+      "supplier": "Doosan GridTech",
+      "grid_forming": false,
+      "source_url": "https://www.doosangridtech.com/wandoan-south-bess"
+    }
+  ],
   "offtakes": [],
   "scheme_contracts": [],
   "cost_sources": [],

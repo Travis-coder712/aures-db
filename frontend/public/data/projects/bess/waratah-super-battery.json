@@ -19,62 +19,83 @@
   "has_statcom": true,
   "has_harmonic_filter": true,
   "performance_score": 11.9,
-  "notable": "Australia's largest battery at 850MW/1,680MWh. Provides SIPS services following Eraring coal closure. Delivered ahead of schedule.",
+  "notable": "Operating at 350MW (41% capacity) due to catastrophic transformer failure Oct 2025. Replacement transformer delivery Q3 2026, full 850MW targeted end of 2026. SIPS contract ~$705M over 5 years. OEM Powin filed Chapter 11 bankruptcy June 2025.",
   "data_confidence": "good",
   "last_updated": "2025-03-01",
   "last_verified": "2025-03-01",
   "aemo_gen_info_id": "2220",
   "confidence_score": "67",
+  "capex_aud_m": 1000.0,
+  "capex_source": "CEFC / energy-storage.news",
+  "capex_year": 2022,
   "coordinates": {
     "lat": -33.07,
     "lng": 151.52
   },
   "timeline": [
     {
-      "date": "2022-11-01",
+      "date": "2022-06-01",
       "date_precision": "month",
-      "event_type": "conceived",
-      "title": "NSW Government announces tender winner",
-      "sources": [
-        {
-          "title": "NSW Government",
-          "url": "https://www.nsw.gov.au/"
-        }
-      ]
-    },
-    {
-      "date": "2023-06-01",
-      "date_precision": "month",
-      "event_type": "construction_start",
-      "title": "Construction commenced",
-      "sources": [
-        {
-          "title": "RenewEconomy",
-          "url": "https://reneweconomy.com.au/",
-          "source_tier": 2
-        }
-      ]
-    },
-    {
-      "date": "2024-09-03",
-      "date_precision": "day",
-      "event_type": "energisation",
-      "title": "First generation recorded",
-      "detail": "First market dispatch data recorded in AEMO systems.",
+      "event_type": "fid",
+      "title": "Akaysha Energy selected for NSW SIPS battery",
+      "detail": "Akaysha (BlackRock) selected by NSW govt to build 850MW/1,680MWh battery at Eraring site. SIPS contract worth ~$705M over 5 years via Transgrid.",
       "sources": []
     },
     {
-      "date": "2024-11-01",
+      "date": "2023-01-01",
+      "date_precision": "month",
+      "event_type": "construction_start",
+      "title": "Construction begins",
+      "detail": "Powin selected as battery OEM (2,592 Centipede Energy Segments), EKS Energy for 288 power conversion systems, CPP as EPC, Wilson Transformer for three 350MVA transformers.",
+      "sources": []
+    },
+    {
+      "date": "2025-06-09",
+      "date_precision": "day",
+      "event_type": "stakeholder_issue",
+      "title": "Battery OEM Powin files Chapter 11 bankruptcy",
+      "detail": "Powin filed for Chapter 11 in US Bankruptcy Court with >M debt. Causes include tariffs on Chinese imports and IRA uncertainty. Assets sold to FlexGen Aug 2025. Long-term warranty implications for Waratah.",
+      "sources": []
+    },
+    {
+      "date": "2025-08-01",
       "date_precision": "month",
       "event_type": "cod",
-      "title": "Full commercial operations \u2014 850 MW",
-      "detail": "Commissioned as Australia's largest battery and one of the largest in the world",
-      "sources": [
-        {
-          "title": "AEMO Generation Information",
-          "url": "https://aemo.com.au"
-        }
-      ]
+      "title": "Partial COD at 350MW (41% capacity)",
+      "detail": "First 350MW/700MWh commenced operations under SIPS obligations using one of three transformers (HVT1). Battery registered as NEM largest single DUID.",
+      "sources": []
+    },
+    {
+      "date": "2025-10-18",
+      "date_precision": "day",
+      "event_type": "stakeholder_issue",
+      "title": "Catastrophic transformer failure (HVT3)",
+      "detail": "Wilson Transformer HVT3 suffered catastrophic internal fault 4 hours before completing final Hold Point 5 testing. Overpressure event ruptured tank wall. Transformer beyond repair. HVT2 also de-energised as precaution. Battery capped at 350MW. Estimated loss AU-80M.",
+      "sources": []
+    },
+    {
+      "date": "2025-11-20",
+      "date_precision": "day",
+      "event_type": "stakeholder_issue",
+      "title": "Full plant shutdown for transformer remediation",
+      "detail": "Full balance-of-plant shutdown 20 Nov to 2 Dec 2025 for HVT2 inspection and remediation works.",
+      "sources": []
+    },
+    {
+      "date": "2026-02-01",
+      "date_precision": "month",
+      "event_type": "notable",
+      "title": "Replacement transformer manufacturing underway",
+      "detail": "Wilson Transformer manufacturing replacement HVT3. Design review completed by CPP and independent consultants. Delivery to site targeted Q3 2026.",
+      "sources": []
+    },
+    {
+      "date": "2026-12-01",
+      "date_precision": "quarter",
+      "event_type": "notable",
+      "title": "Full 850MW operations targeted end of 2026",
+      "detail": "All three transformers operational targeted for end of 2026 pending HVT3 replacement delivery (Q3 2026) and HVT2 remediation completion.",
+      "sources": []
     }
   ],
   "ownership_history": [
@@ -88,9 +109,24 @@
   "suppliers": [
     {
       "role": "bess_oem",
-      "supplier": "Tesla",
-      "model": "Megapack 2XL",
+      "supplier": "Powin",
+      "model": "Centipede Energy Segment",
+      "quantity": 2592,
       "grid_forming": false
+    },
+    {
+      "role": "inverter",
+      "supplier": "EKS Energy (Hitachi)",
+      "model": "Power conversion system",
+      "quantity": 288,
+      "grid_forming": false,
+      "source_url": "https://powin.com/wp-content/uploads/2024/02/Waratah-Super-Battery_Case-Study-5.pdf"
+    },
+    {
+      "role": "epc",
+      "supplier": "Consolidated Power Projects (CPP)",
+      "grid_forming": false,
+      "source_url": "https://akayshaenergy.com/projects/waratah-super-battery"
     }
   ],
   "offtakes": [
@@ -100,7 +136,16 @@
       "source_url": "https://reneweconomy.com.au/waratah-super-battery/"
     }
   ],
-  "scheme_contracts": [],
+  "scheme_contracts": [
+    {
+      "scheme": "NSW SIPS",
+      "round": "",
+      "capacity_mw": 850.0,
+      "storage_mwh": 1680.0,
+      "contract_type": "SIPS service (~$705M/5yr via Transgrid)",
+      "source_url": "https://www.aer.gov.au/industry/registers/determinations/waratah-super-battery-sips-battery-service"
+    }
+  ],
   "cost_sources": [],
   "stakeholder_issues": [],
   "sources": [

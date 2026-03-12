@@ -45,6 +45,19 @@
       "supplier": "ACLE Services",
       "grid_forming": false,
       "source_url": "https://www.acle.com.au/our-projects-2/"
+    },
+    {
+      "role": "bess_oem",
+      "supplier": "CATL",
+      "model": "CATL BESS system",
+      "grid_forming": false,
+      "source_url": "https://acenergy.com.au/acenergy-and-catl-partner-on-3-gwh-utility-scale-bess-portfolio/"
+    },
+    {
+      "role": "epc",
+      "supplier": "ACLE Services / ACEnergy",
+      "grid_forming": false,
+      "source_url": "https://acenergy.com.au/portfolio/pine-lodge-bess/"
     }
   ],
   "offtakes": [],

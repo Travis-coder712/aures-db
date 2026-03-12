@@ -31,7 +31,21 @@
   ],
   "ownership_history": [],
   "cod_history": [],
-  "suppliers": [],
+  "suppliers": [
+    {
+      "role": "bess_oem",
+      "supplier": "Canadian Solar e-STORAGE",
+      "model": "SolBank 3.0",
+      "grid_forming": false,
+      "source_url": "https://www.energy-storage.news/canadian-solar-supplying-bess-for-frv-australias-first-standalone-storage-project/"
+    },
+    {
+      "role": "epc",
+      "supplier": "Canadian Solar / TEC-C",
+      "grid_forming": false,
+      "source_url": "https://frv.com/en/frv-australia-reaches-financial-close-for-the-100mw-200mwh-terang-large-scale-battery-project/"
+    }
+  ],
   "offtakes": [],
   "scheme_contracts": [],
   "cost_sources": [],
