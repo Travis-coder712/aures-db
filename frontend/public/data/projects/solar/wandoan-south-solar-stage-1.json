@@ -6,7 +6,8 @@
   "capacity_mw": 125.0,
   "state": "QLD",
   "current_developer": "Vena Evergy",
-  "cod_current": "2023-08",
+  "cod_current": "2023-08-31",
+  "cod_original": "2023-08-31",
   "grid_forming": false,
   "has_sips": false,
   "has_syncon": false,
@@ -17,7 +18,16 @@
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "1455",
   "confidence_score": 17,
-  "timeline": [],
+  "timeline": [
+    {
+      "date": "2026-03-12",
+      "date_precision": "day",
+      "event_type": "cod_change",
+      "title": "COD estimate updated",
+      "detail": "COD changed from 2023-08 to 2023-08-31 (source: AEMO Generation Information)",
+      "sources": []
+    }
+  ],
   "ownership_history": [],
   "cod_history": [],
   "suppliers": [],

@@ -40,7 +40,8 @@ def fetch_project_summary(conn, project_id):
     row = conn.execute("""
         SELECT id, name, technology, status, capacity_mw, storage_mwh,
                state, current_developer, rez, development_score,
-               performance_score, data_confidence, confidence_score
+               performance_score, data_confidence, confidence_score,
+               development_stage
         FROM projects WHERE id = ?
     """, (project_id,)).fetchone()
     if not row:

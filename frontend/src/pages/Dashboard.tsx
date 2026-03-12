@@ -12,8 +12,8 @@ import {
 } from 'recharts'
 import { useProjectIndex } from '../hooks/useProjectData'
 import { useCODDrift } from '../hooks/useCODDrift'
-import { TECHNOLOGY_CONFIG, STATUS_CONFIG, CONFIDENCE_CONFIG } from '../lib/types'
-import type { Technology, ProjectStatus, State, Confidence } from '../lib/types'
+import { TECHNOLOGY_CONFIG, STATUS_CONFIG, CONFIDENCE_CONFIG, DEVELOPMENT_STAGE_CONFIG } from '../lib/types'
+import type { Technology, ProjectStatus, State, Confidence, DevelopmentStage } from '../lib/types'
 
 const STATUS_COLORS: Record<string, string> = {
   operating: '#22c55e',
@@ -89,11 +89,18 @@ export default function Dashboard() {
     const op = filtered.filter((p) => p.status === 'operating')
     const con = filtered.filter((p) => p.status === 'construction' || p.status === 'commissioning')
     const dev = filtered.filter((p) => p.status === 'development')
+    const stageCounts: Record<DevelopmentStage, number> = {
+      planning_approved: dev.filter((p) => p.development_stage === 'planning_approved').length,
+      planning_submitted: dev.filter((p) => p.development_stage === 'planning_submitted').length,
+      early_stage: dev.filter((p) => p.development_stage === 'early_stage' || !p.development_stage).length,
+    }
     return {
       operating_gw: op.reduce((s, p) => s + p.capacity_mw, 0) / 1000,
       construction_gw: con.reduce((s, p) => s + p.capacity_mw, 0) / 1000,
       construction_count: con.length,
       development_gw: dev.reduce((s, p) => s + p.capacity_mw, 0) / 1000,
+      development_count: dev.length,
+      stageCounts,
       storage_gwh: filtered.reduce((s, p) => s + (p.storage_mwh ?? 0), 0) / 1000,
       total: filtered.length,
     }
@@ -319,7 +326,28 @@ export default function Dashboard() {
           label="In Development"
           value={`${hs.development_gw.toFixed(1)} GW`}
           color={STATUS_COLORS.development}
-        />
+          sublabel={`${hs.development_count} projects`}
+        >
+          {hs.development_count > 0 && (
+            <div className="flex gap-2 mt-1.5 flex-wrap">
+              {(['planning_approved', 'planning_submitted', 'early_stage'] as DevelopmentStage[]).map((stage) => {
+                const count = hs.stageCounts[stage]
+                if (count === 0) return null
+                const cfg = DEVELOPMENT_STAGE_CONFIG[stage]
+                return (
+                  <Link
+                    key={stage}
+                    to={`/projects?status=development&stage=${stage}`}
+                    className="text-[10px] hover:underline"
+                    style={{ color: cfg.color }}
+                  >
+                    {cfg.icon} {count} {cfg.label.toLowerCase()}
+                  </Link>
+                )
+              })}
+            </div>
+          )}
+        </FleetCard>
         <FleetCard
           label="Total Storage"
           value={`${hs.storage_gwh.toFixed(0)} GWh`}
@@ -590,11 +618,13 @@ function FleetCard({
   value,
   color,
   sublabel,
+  children,
 }: {
   label: string
   value: string | number
   color?: string
   sublabel?: string
+  children?: React.ReactNode
 }) {
   return (
     <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl p-4">
@@ -607,6 +637,7 @@ function FleetCard({
       {sublabel && (
         <p className="text-[10px] text-[var(--color-text-muted)] mt-0.5">{sublabel}</p>
       )}
+      {children}
     </div>
   )
 }

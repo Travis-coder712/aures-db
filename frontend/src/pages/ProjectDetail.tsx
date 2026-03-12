@@ -1,6 +1,6 @@
 import { useParams, Link } from 'react-router-dom'
 import { useState } from 'react'
-import { TECHNOLOGY_CONFIG, type Project } from '../lib/types'
+import { TECHNOLOGY_CONFIG, DEVELOPMENT_STAGE_CONFIG, type Project } from '../lib/types'
 import { useProject } from '../hooks/useProjectData'
 import TechBadge from '../components/common/TechBadge'
 import StatusBadge from '../components/common/StatusBadge'
@@ -65,6 +65,17 @@ export default function ProjectDetail() {
             <div className="flex items-center gap-2 flex-wrap">
               <TechBadge technology={project.technology} />
               <StatusBadge status={project.status} />
+              {project.development_stage && DEVELOPMENT_STAGE_CONFIG[project.development_stage] && (
+                <span
+                  className="text-[10px] font-medium px-2 py-0.5 rounded-full"
+                  style={{
+                    backgroundColor: `${DEVELOPMENT_STAGE_CONFIG[project.development_stage].color}20`,
+                    color: DEVELOPMENT_STAGE_CONFIG[project.development_stage].color,
+                  }}
+                >
+                  {DEVELOPMENT_STAGE_CONFIG[project.development_stage].icon} {DEVELOPMENT_STAGE_CONFIG[project.development_stage].label}
+                </span>
+              )}
               <ConfidenceDots confidence={project.data_confidence} showLabel />
             </div>
           </div>

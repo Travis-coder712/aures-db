@@ -6,6 +6,7 @@ export type Technology = 'wind' | 'solar' | 'bess' | 'hybrid' | 'pumped_hydro' |
 export type ProjectStatus = 'operating' | 'commissioning' | 'construction' | 'development' | 'withdrawn'
 export type State = 'NSW' | 'VIC' | 'QLD' | 'SA' | 'WA' | 'TAS' | 'NT' | 'ACT'
 export type Confidence = 'high' | 'good' | 'medium' | 'low' | 'unverified'
+export type DevelopmentStage = 'planning_approved' | 'planning_submitted' | 'early_stage'
 
 export type TimelineEventType =
   | 'conceived' | 'planning_submitted' | 'planning_approved' | 'planning_rejected'
@@ -128,6 +129,9 @@ export interface Project {
   development_score?: number
   performance_score?: number
 
+  // Development sub-stage
+  development_stage?: DevelopmentStage
+
   // Notable
   notable?: string
   stakeholder_issues?: string[]
@@ -178,6 +182,7 @@ export interface ProjectSummary {
   performance_score?: number
   data_confidence: Confidence
   confidence_score?: number
+  development_stage?: DevelopmentStage
 }
 
 // CIS/LTESA types
@@ -370,4 +375,10 @@ export const CONFIDENCE_CONFIG: Record<Confidence, { label: string; dots: string
   medium: { label: 'Medium Confidence', dots: '●●○○', color: '#f59e0b' },
   low: { label: 'Low Confidence', dots: '●○○○', color: '#ef4444' },
   unverified: { label: 'Unverified', dots: '○○○○', color: '#6b7280' },
+}
+
+export const DEVELOPMENT_STAGE_CONFIG: Record<DevelopmentStage, { label: string; color: string; icon: string }> = {
+  planning_approved: { label: 'Planning Approved', color: '#22c55e', icon: '✓' },
+  planning_submitted: { label: 'Planning Submitted', color: '#f59e0b', icon: '◐' },
+  early_stage: { label: 'Early Stage', color: '#6b7280', icon: '○' },
 }

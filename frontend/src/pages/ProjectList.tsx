@@ -1,7 +1,7 @@
 import { useState, useMemo } from 'react'
 import { useSearchParams, useNavigate } from 'react-router-dom'
 import { useProjectIndex } from '../hooks/useProjectData'
-import { TECHNOLOGY_CONFIG, STATUS_CONFIG, CONFIDENCE_CONFIG, type Technology, type ProjectStatus, type State, type Confidence } from '../lib/types'
+import { TECHNOLOGY_CONFIG, STATUS_CONFIG, CONFIDENCE_CONFIG, DEVELOPMENT_STAGE_CONFIG, type Technology, type ProjectStatus, type State, type Confidence, type DevelopmentStage } from '../lib/types'
 import ProjectCard from '../components/common/ProjectCard'
 
 type SortKey = 'name' | 'capacity_mw' | 'state' | 'status'
@@ -23,7 +23,10 @@ export default function ProjectList() {
   const statusFilters = parseMulti<ProjectStatus>(searchParams.get('status'))
   const stateFilters = parseMulti<State>(searchParams.get('state'))
   const confidenceFilter = searchParams.get('confidence') as Confidence | null
+  const stageFilters = parseMulti<DevelopmentStage>(searchParams.get('stage'))
   const fromDashboard = searchParams.get('from') === 'dashboard'
+
+  const showStageFilter = statusFilters.includes('development') || (!statusFilters.length && !techFilters.length && !stateFilters.length)
 
   const filtered = useMemo(() => {
     let result = [...allProjects]
@@ -32,6 +35,7 @@ export default function ProjectList() {
     if (statusFilters.length) result = result.filter((p) => statusFilters.includes(p.status))
     if (stateFilters.length) result = result.filter((p) => stateFilters.includes(p.state))
     if (confidenceFilter) result = result.filter((p) => p.data_confidence === confidenceFilter)
+    if (stageFilters.length) result = result.filter((p) => p.development_stage && stageFilters.includes(p.development_stage))
 
     result.sort((a, b) => {
       let cmp = 0
@@ -55,7 +59,7 @@ export default function ProjectList() {
     })
 
     return result
-  }, [allProjects, techFilters.join(','), statusFilters.join(','), stateFilters.join(','), confidenceFilter, sortBy, sortDesc])
+  }, [allProjects, techFilters.join(','), statusFilters.join(','), stateFilters.join(','), confidenceFilter, stageFilters.join(','), sortBy, sortDesc])
 
   if (loading) {
     return (
@@ -66,7 +70,7 @@ export default function ProjectList() {
   }
 
   const totalCapacity = filtered.reduce((sum, p) => sum + p.capacity_mw, 0)
-  const activeFilters = [techFilters.length > 0, statusFilters.length > 0, stateFilters.length > 0, confidenceFilter].filter(Boolean).length
+  const activeFilters = [techFilters.length > 0, statusFilters.length > 0, stateFilters.length > 0, confidenceFilter, stageFilters.length > 0].filter(Boolean).length
 
   function clearFilters() {
     setSearchParams({})
@@ -241,6 +245,38 @@ export default function ProjectList() {
             )
           })}
         </div>
+
+        {/* Development Stage (only when development status is shown) */}
+        {showStageFilter && (
+          <div className="flex items-center gap-2 flex-wrap">
+            <span className="text-[10px] font-semibold uppercase tracking-wider text-[var(--color-text-muted)] w-12">
+              Stage
+            </span>
+            {(['planning_approved', 'planning_submitted', 'early_stage'] as const).map((stage) => {
+              const config = DEVELOPMENT_STAGE_CONFIG[stage]
+              const isActive = isFilterActive('stage', stage)
+              return (
+                <button
+                  key={stage}
+                  onClick={() => toggleFilter('stage', stage)}
+                  className={`text-xs px-2.5 py-1 rounded-full border transition-colors ${
+                    isActive
+                      ? 'border-transparent font-medium'
+                      : 'border-[var(--color-border)] text-[var(--color-text-muted)] hover:border-[var(--color-text-muted)]'
+                  }`}
+                  style={
+                    isActive
+                      ? { backgroundColor: `${config.color}20`, color: config.color }
+                      : undefined
+                  }
+                >
+                  <span className="mr-1">{config.icon}</span>
+                  {config.label}
+                </button>
+              )
+            })}
+          </div>
+        )}
 
         {/* Active filters / clear */}
         {activeFilters > 0 && (

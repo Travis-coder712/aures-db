@@ -6,7 +6,8 @@
   "capacity_mw": 152.0,
   "state": "NSW",
   "current_developer": "Marulan Solar Farm Pty Ltd",
-  "cod_current": "2027-12",
+  "cod_current": "2027-12-02",
+  "cod_original": "2027-12-02",
   "grid_forming": false,
   "has_sips": false,
   "has_syncon": false,
@@ -17,7 +18,17 @@
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "2690",
   "confidence_score": 17,
-  "timeline": [],
+  "development_stage": "early_stage",
+  "timeline": [
+    {
+      "date": "2026-03-12",
+      "date_precision": "day",
+      "event_type": "cod_change",
+      "title": "COD estimate updated",
+      "detail": "COD changed from 2027-12 to 2027-12-02 (source: AEMO Generation Information)",
+      "sources": []
+    }
+  ],
   "ownership_history": [],
   "cod_history": [],
   "suppliers": [],

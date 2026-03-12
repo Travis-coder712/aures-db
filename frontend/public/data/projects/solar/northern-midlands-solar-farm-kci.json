@@ -6,7 +6,8 @@
   "capacity_mw": 310.0,
   "state": "TAS",
   "current_developer": "Northern Midlands Solar Farm Tas Pty Ltd (ACN 684 471 627) as trustee for the Northern Midlands Solar Farm Unit Trust (ABN 26 279 618 811)",
-  "cod_current": "2027-10",
+  "cod_current": "2027-10-31",
+  "cod_original": "2027-10-31",
   "grid_forming": false,
   "has_sips": false,
   "has_syncon": false,
@@ -17,7 +18,17 @@
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "2389",
   "confidence_score": 17,
-  "timeline": [],
+  "development_stage": "early_stage",
+  "timeline": [
+    {
+      "date": "2026-03-12",
+      "date_precision": "day",
+      "event_type": "cod_change",
+      "title": "COD estimate updated",
+      "detail": "COD changed from 2027-10 to 2027-10-31 (source: AEMO Generation Information)",
+      "sources": []
+    }
+  ],
   "ownership_history": [],
   "cod_history": [],
   "suppliers": [],

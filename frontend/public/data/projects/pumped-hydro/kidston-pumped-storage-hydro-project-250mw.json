@@ -7,7 +7,8 @@
   "storage_mwh": 900.0,
   "state": "QLD",
   "current_developer": "Genex Power",
-  "cod_current": "2027-01",
+  "cod_current": "2027-01-01",
+  "cod_original": "2027-01-01",
   "grid_forming": false,
   "has_sips": false,
   "has_syncon": false,
@@ -54,6 +55,14 @@
       "event_type": "notable",
       "title": "Registered in NEM",
       "detail": "First pumped hydro registered in NEM in ~40 years",
+      "sources": []
+    },
+    {
+      "date": "2026-03-12",
+      "date_precision": "day",
+      "event_type": "cod_change",
+      "title": "COD estimate updated",
+      "detail": "COD changed from 2027-01 to 2027-01-01 (source: AEMO Generation Information)",
       "sources": []
     }
   ],

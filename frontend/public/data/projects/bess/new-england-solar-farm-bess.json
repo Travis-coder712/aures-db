@@ -8,7 +8,8 @@
   "state": "NSW",
   "rez": "nsw-new-england",
   "current_developer": "ACEN Australia / Marubeni (50:50)",
-  "cod_current": "2026-06",
+  "cod_current": "2026-06-30",
+  "cod_original": "2026-06-30",
   "grid_forming": false,
   "has_sips": false,
   "has_syncon": false,
@@ -31,6 +32,14 @@
       "event_type": "construction_start",
       "title": "Phase 1 construction commenced (50 MW / 100 MWh)",
       "detail": "Energy Vault B-VAULT deployment",
+      "sources": []
+    },
+    {
+      "date": "2026-03-12",
+      "date_precision": "day",
+      "event_type": "cod_change",
+      "title": "COD estimate updated",
+      "detail": "COD changed from 2026-06 to 2026-06-30 (source: AEMO Generation Information)",
       "sources": []
     }
   ],

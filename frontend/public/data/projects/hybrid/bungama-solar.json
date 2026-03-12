@@ -7,7 +7,8 @@
   "storage_mwh": 300.0,
   "state": "SA",
   "current_developer": "Bungama Project (Solar) Operations Pty Ltd",
-  "cod_current": "2028-08",
+  "cod_current": "2028-08-31",
+  "cod_original": "2028-08-31",
   "grid_forming": false,
   "has_sips": false,
   "has_syncon": false,
@@ -22,7 +23,16 @@
     "lat": -32.85,
     "lng": 138.15
   },
-  "timeline": [],
+  "timeline": [
+    {
+      "date": "2026-03-12",
+      "date_precision": "day",
+      "event_type": "cod_change",
+      "title": "COD estimate updated",
+      "detail": "COD changed from 2028-08 to 2028-08-31 (source: AEMO Generation Information)",
+      "sources": []
+    }
+  ],
   "ownership_history": [],
   "cod_history": [],
   "suppliers": [],

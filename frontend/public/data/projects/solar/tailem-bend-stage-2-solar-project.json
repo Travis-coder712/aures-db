@@ -6,7 +6,8 @@
   "capacity_mw": 87.0,
   "state": "SA",
   "current_developer": "Vena Energy",
-  "cod_current": "2023-09",
+  "cod_current": "2023-09-15",
+  "cod_original": "2023-09-15",
   "grid_forming": false,
   "has_sips": false,
   "has_syncon": false,
@@ -17,7 +18,16 @@
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "1575",
   "confidence_score": 17,
-  "timeline": [],
+  "timeline": [
+    {
+      "date": "2026-03-12",
+      "date_precision": "day",
+      "event_type": "cod_change",
+      "title": "COD estimate updated",
+      "detail": "COD changed from 2023-09 to 2023-09-15 (source: AEMO Generation Information)",
+      "sources": []
+    }
+  ],
   "ownership_history": [],
   "cod_history": [],
   "suppliers": [],

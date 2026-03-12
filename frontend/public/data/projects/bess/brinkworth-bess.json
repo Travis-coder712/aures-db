@@ -7,7 +7,8 @@
   "storage_mwh": 999.92,
   "state": "SA",
   "current_developer": "Brinkworth Solar Farm Pty Ltd",
-  "cod_current": "2029-04",
+  "cod_current": "2029-04-10",
+  "cod_original": "2029-04-10",
   "grid_forming": false,
   "has_sips": false,
   "has_syncon": false,
@@ -18,7 +19,17 @@
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "2652",
   "confidence_score": 22,
-  "timeline": [],
+  "development_stage": "planning_submitted",
+  "timeline": [
+    {
+      "date": "2026-03-12",
+      "date_precision": "day",
+      "event_type": "cod_change",
+      "title": "COD estimate updated",
+      "detail": "COD changed from 2029-04 to 2029-04-10 (source: AEMO Generation Information)",
+      "sources": []
+    }
+  ],
   "ownership_history": [],
   "cod_history": [],
   "suppliers": [],

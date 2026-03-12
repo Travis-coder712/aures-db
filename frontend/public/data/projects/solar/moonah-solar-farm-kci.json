@@ -6,7 +6,8 @@
   "capacity_mw": 150.0,
   "state": "VIC",
   "current_developer": "Venn Energy Pty Ltd / Moonah Solar Project Pty Ltd",
-  "cod_current": "2029-12",
+  "cod_current": "2029-12-26",
+  "cod_original": "2029-12-26",
   "grid_forming": false,
   "has_sips": false,
   "has_syncon": false,
@@ -17,7 +18,17 @@
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "2364",
   "confidence_score": 17,
-  "timeline": [],
+  "development_stage": "planning_submitted",
+  "timeline": [
+    {
+      "date": "2026-03-12",
+      "date_precision": "day",
+      "event_type": "cod_change",
+      "title": "COD estimate updated",
+      "detail": "COD changed from 2029-12 to 2029-12-26 (source: AEMO Generation Information)",
+      "sources": []
+    }
+  ],
   "ownership_history": [],
   "cod_history": [],
   "suppliers": [],

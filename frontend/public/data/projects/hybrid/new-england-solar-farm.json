@@ -7,7 +7,8 @@
   "state": "NSW",
   "rez": "nsw-new-england",
   "current_developer": "ACEN Australia (formerly UPC/AC Renewables)",
-  "cod_current": "2028-10",
+  "cod_current": "2028-10-31",
+  "cod_original": "2028-10-31",
   "grid_forming": false,
   "has_sips": false,
   "has_syncon": false,
@@ -52,6 +53,14 @@
       "date_precision": "month",
       "event_type": "expansion",
       "title": "Stage 2 with BESS \u2014 720 MW total",
+      "sources": []
+    },
+    {
+      "date": "2026-03-12",
+      "date_precision": "day",
+      "event_type": "cod_change",
+      "title": "COD estimate updated",
+      "detail": "COD changed from 2028-10 to 2028-10-31 (source: AEMO Generation Information)",
       "sources": []
     }
   ],

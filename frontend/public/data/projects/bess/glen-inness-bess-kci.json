@@ -7,7 +7,8 @@
   "storage_mwh": 200.2,
   "state": "NSW",
   "current_developer": "FIrm Power P/L",
-  "cod_current": "2030-12",
+  "cod_current": "2030-12-21",
+  "cod_original": "2030-12-21",
   "grid_forming": false,
   "has_sips": false,
   "has_syncon": false,
@@ -18,7 +19,17 @@
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "2714",
   "confidence_score": 22,
-  "timeline": [],
+  "development_stage": "planning_submitted",
+  "timeline": [
+    {
+      "date": "2026-03-12",
+      "date_precision": "day",
+      "event_type": "cod_change",
+      "title": "COD estimate updated",
+      "detail": "COD changed from 2030-12 to 2030-12-21 (source: AEMO Generation Information)",
+      "sources": []
+    }
+  ],
   "ownership_history": [],
   "cod_history": [],
   "suppliers": [],

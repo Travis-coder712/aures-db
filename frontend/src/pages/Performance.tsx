@@ -186,6 +186,7 @@ export default function Performance() {
   const latestYear = index?.available_years?.[index.available_years.length - 1] ?? 2025
   const [year, setYear] = useState<number>(latestYear)
   const [stateFilter, setStateFilter] = useState<State | 'ALL'>('ALL')
+  const [showUpdatePanel, setShowUpdatePanel] = useState(false)
   const [sortField, setSortField] = useState<SortField>('rank')
   const [sortDir, setSortDir] = useState<SortDir>('asc')
 
@@ -326,14 +327,33 @@ export default function Performance() {
           </svg>
           How are these metrics calculated?
         </Link>
-        {table && (
+        {(table || index) && (
           <div className="mt-2 flex flex-wrap items-center gap-2">
-            {(table.data_source === 'openelectricity' || table.data_source === 'openelectricity_ytd') ? (
+            {/* Data freshness badge */}
+            {index?.last_updated && (() => {
+              const days = Math.floor((Date.now() - new Date(index.last_updated).getTime()) / 86400000)
+              const color = days < 7 ? 'emerald' : days < 30 ? 'amber' : 'red'
+              return (
+                <span className={`inline-flex items-center gap-1.5 text-[11px] font-medium px-2 py-0.5 rounded-full bg-${color}-500/10 text-${color}-400 border border-${color}-500/20`}
+                  style={{
+                    backgroundColor: color === 'emerald' ? 'rgb(16 185 129 / 0.1)' : color === 'amber' ? 'rgb(245 158 11 / 0.1)' : 'rgb(239 68 68 / 0.1)',
+                    color: color === 'emerald' ? 'rgb(52 211 153)' : color === 'amber' ? 'rgb(251 191 36)' : 'rgb(248 113 113)',
+                    borderColor: color === 'emerald' ? 'rgb(16 185 129 / 0.2)' : color === 'amber' ? 'rgb(245 158 11 / 0.2)' : 'rgb(239 68 68 / 0.2)',
+                  }}
+                >
+                  <span className="w-1.5 h-1.5 rounded-full" style={{
+                    backgroundColor: color === 'emerald' ? 'rgb(52 211 153)' : color === 'amber' ? 'rgb(251 191 36)' : 'rgb(248 113 113)',
+                  }} />
+                  Updated {days === 0 ? 'today' : days === 1 ? 'yesterday' : `${days} days ago`}
+                </span>
+              )
+            })()}
+            {table && (table.data_source === 'openelectricity' || table.data_source === 'openelectricity_ytd') ? (
               <span className="inline-flex items-center gap-1.5 text-[11px] font-medium px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
                 AEMO data via OpenElectricity
               </span>
-            ) : table.data_source === 'sample' ? (
+            ) : table?.data_source === 'sample' ? (
               <span className="inline-flex items-center gap-1.5 text-[11px] font-medium px-2 py-0.5 rounded-full bg-amber-500/10 text-amber-400 border border-amber-500/20">
                 <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
                 Sample data — projected estimates
@@ -550,6 +570,54 @@ export default function Performance() {
             Rankings use a composite score: wind/solar weight CF (40%), revenue/MW (40%), and curtailment (20%). BESS weights revenue (30%), utilisation (30%), spread (20%), and cycles (20%).
           </p>
         </div>
+      </section>
+
+      {/* Update Data Panel */}
+      <section className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl overflow-hidden">
+        <button
+          onClick={() => setShowUpdatePanel(!showUpdatePanel)}
+          className="w-full flex items-center justify-between px-5 py-3 text-left hover:bg-white/5 transition-colors"
+        >
+          <span className="text-sm font-semibold text-[var(--color-text)]">
+            {showUpdatePanel ? '▾' : '▸'} Update Performance Data
+          </span>
+          {index?.last_updated && (() => {
+            const days = Math.floor((Date.now() - new Date(index.last_updated).getTime()) / 86400000)
+            return days > 30 ? (
+              <span className="text-[10px] font-medium px-2 py-0.5 rounded-full" style={{ backgroundColor: 'rgb(239 68 68 / 0.1)', color: 'rgb(248 113 113)' }}>
+                Data may be outdated
+              </span>
+            ) : null
+          })()}
+        </button>
+        {showUpdatePanel && (
+          <div className="px-5 pb-4 space-y-3 text-[11px] text-[var(--color-text-muted)] leading-relaxed border-t border-[var(--color-border)]">
+            <p className="pt-3">
+              Run these commands in your terminal to refresh performance data from OpenElectricity:
+            </p>
+            <pre className="bg-[var(--color-bg)] rounded-lg p-3 text-[10px] font-mono overflow-x-auto select-all">
+{`cd ~/aures-db
+
+# Import latest data for each year
+python3 pipeline/importers/import_openelectricity.py --year 2024
+python3 pipeline/importers/import_openelectricity.py --year 2025
+python3 pipeline/importers/import_openelectricity.py --year 2026 --ytd
+
+# Recompute league table rankings
+python3 pipeline/processors/compute_league_tables.py --year 2024
+python3 pipeline/processors/compute_league_tables.py --year 2025
+python3 pipeline/processors/compute_league_tables.py --year 2026
+
+# Export to JSON and rebuild
+python3 pipeline/exporters/export_json.py
+cd frontend && npm run build`}
+            </pre>
+            <p>
+              Requires <code className="bg-[var(--color-bg)] px-1 py-0.5 rounded text-[var(--color-primary)]">OPENELECTRICITY_API_KEY</code> in your environment.
+              Community plan allows 500 requests/day.
+            </p>
+          </div>
+        )}
       </section>
     </div>
   )

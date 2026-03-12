@@ -6,7 +6,8 @@
   "capacity_mw": 80.0,
   "state": "QLD",
   "current_developer": "TotalEnergies Renewables Australia Pty Ltd",
-  "cod_current": "2029-10",
+  "cod_current": "2029-10-07",
+  "cod_original": "2029-10-07",
   "grid_forming": false,
   "has_sips": false,
   "has_syncon": false,
@@ -17,7 +18,17 @@
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "2728",
   "confidence_score": 17,
-  "timeline": [],
+  "development_stage": "planning_submitted",
+  "timeline": [
+    {
+      "date": "2026-03-12",
+      "date_precision": "day",
+      "event_type": "cod_change",
+      "title": "COD estimate updated",
+      "detail": "COD changed from 2029-10 to 2029-10-07 (source: AEMO Generation Information)",
+      "sources": []
+    }
+  ],
   "ownership_history": [],
   "cod_history": [],
   "suppliers": [],

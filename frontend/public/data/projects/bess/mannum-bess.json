@@ -7,7 +7,8 @@
   "storage_mwh": 200.0,
   "state": "SA",
   "current_developer": "Mannum Stage 2 Battery SubCo Pty Ltd as Trustee for The Mannum Stage 2 Battery Unit Trust",
-  "cod_current": "2026-01",
+  "cod_current": "2026-01-08",
+  "cod_original": "2026-01-08",
   "grid_forming": false,
   "has_sips": false,
   "has_syncon": false,
@@ -38,6 +39,14 @@
       "event_type": "energisation",
       "title": "First generation recorded",
       "detail": "First market dispatch data recorded in AEMO systems.",
+      "sources": []
+    },
+    {
+      "date": "2026-03-12",
+      "date_precision": "day",
+      "event_type": "cod_change",
+      "title": "COD estimate updated",
+      "detail": "COD changed from 2026-01 to 2026-01-08 (source: AEMO Generation Information)",
       "sources": []
     }
   ],

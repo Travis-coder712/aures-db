@@ -1,0 +1,197 @@
+{
+  "project_name": "Coopers Gap Wind Farm",
+  "project_id": "coopers-gap-wind-farm",
+  "researched_at": "2026-03-12T21:36:03.731658",
+  "articles": [
+    {
+      "url": "https://reneweconomy.com.au/windlab-receive-10-million-milestone-success-payment-respect-coopers-gap-wind-farm-18855/",
+      "title": "Windlab to receive $10 million milestone success payment in respect of the Coopers Gap Wind Farm",
+      "source": "RenewEconomy",
+      "date": "2017-08-24",
+      "mentions": {
+        "ownership_mentions": [
+          {
+            "match": "acquired by AGL in 2010.",
+            "captured": "AGL in 2010",
+            "context": "lab undertook many of the early stage development activities for the project before the project was acquired by AGL in 2010. Since that time Windlab has continued to play a role, supporting AGL in the completion of the proje"
+          }
+        ],
+        "cost_mentions": [
+          {
+            "match": "$10 million",
+            "captured": "10",
+            "context": "Home \u00bb Renewables \u00bb Windlab to receive $10 million milestone success payment in respect of the Coopers Gap Wind Farm Windlab to receive $10 million mi"
+          },
+          {
+            "match": "$10 million",
+            "captured": "10",
+            "context": "ve $10 million milestone success payment in respect of the Coopers Gap Wind Farm Windlab to receive $10 million milestone success payment in respect of the Coopers Gap Wind Farm Windlab Aug 24, 2017 Share on Fac"
+          },
+          {
+            "match": "$10 million",
+            "captured": "10",
+            "context": "lab Limited advises that it has become entitled to receive a milestone success payment of just over $10 million in respect of the Coopers Gap Wind Farm in South East Queensland operated by AGL Energy Limited (AG"
+          },
+          {
+            "match": "$10million",
+            "captured": "10",
+            "context": "Coopers Gap Windlab will receive a final milestone success payment for the project of a little over $10million. Share this: Share on Facebook (Opens in new window) Facebook Share on X (Opens in new window) X Sh"
+          }
+        ],
+        "construction_mentions": [
+          {
+            "match": "financial close",
+            "captured": null,
+            "context": "ngratulates AGL Energy Limited (AGL) and the Powering Australian Renewables Fund (PARF) on reaching financial close which is a significant milestone for the project partners. Windlab\u2019s WindScape Institute originally"
+          },
+          {
+            "match": "financial close",
+            "captured": null,
+            "context": "iding wind monitoring, analysis and assessment services. \u201cWe are delighted to see Coopers Gap reach financial close. Whilst continued market uncertainty has resulted in the project taking longer to complete than ini"
+          }
+        ]
+      }
+    },
+    {
+      "url": "https://reneweconomy.com.au/agl-encourages-community-say-coopers-gap-wind-farm-14429/",
+      "title": "AGL encourages community to have their say on Coopers Gap Wind Farm",
+      "source": "RenewEconomy",
+      "date": "2016-09-21",
+      "mentions": {}
+    },
+    {
+      "url": "https://reneweconomy.com.au/australias-biggest-wind-farm-at-coopers-gap-to-undergo-major-repairs-16117/",
+      "title": "Australia\u2019s biggest wind farm at Coopers Gap to undergo major repairs",
+      "source": "RenewEconomy",
+      "date": "2020-11-04",
+      "mentions": {
+        "cost_mentions": [
+          {
+            "match": "$850 million",
+            "captured": "850",
+            "context": "undergo major repairs after faults were found in its commissioning process. AGL, which operates the $850 million project and is a joint owner through the Powering Australia Renewables Fund, said in a statement th"
+          }
+        ]
+      }
+    },
+    {
+      "url": "https://reneweconomy.com.au/ashurst-advises-general-electric-on-australias-largest-wind-farm-at-coopers-gap-10582/",
+      "title": "Ashurst advises General Electric on Australia\u2019s largest wind farm at Coopers Gap",
+      "source": "RenewEconomy",
+      "date": "2017-08-21",
+      "mentions": {}
+    },
+    {
+      "url": "https://reneweconomy.com.au/new-1-5-gigawatt-wind-project-backed-by-local-farmers-and-with-big-battery-in-tow-hits-epbc-queue/",
+      "title": "New 1.5 gigawatt wind project, backed by local farmers and with big battery in tow, hits EPBC queue",
+      "source": "RenewEconomy",
+      "date": "2025-12-03",
+      "mentions": {
+        "planning_mentions": [
+          {
+            "match": "planning approval",
+            "captured": null,
+            "context": "han Meering West and four others the same size (although only one, Origin Energy\u2019s Yanco Delta, has planning approval), according to RenewMap. Until 2019, the 420 megawatt (MW) Macarthur wind farm was the largest in A"
+          }
+        ],
+        "cost_mentions": [
+          {
+            "match": "$2.1 million",
+            "captured": "2.1",
+            "context": "6km and 10km will be offered a $50 monthly discount off their electricity bill, and it\u2019s pitching a $2.1 million annual community benefits scheme to the Gannawarra and Loddon Shire. Where it may struggle is with"
+          }
+        ]
+      }
+    }
+  ],
+  "extracted": {
+    "cod_mentions": [],
+    "ppa_mentions": [],
+    "planning_mentions": [
+      {
+        "match": "planning approval",
+        "captured": null,
+        "context": "han Meering West and four others the same size (although only one, Origin Energy\u2019s Yanco Delta, has planning approval), according to RenewMap. Until 2019, the 420 megawatt (MW) Macarthur wind farm was the largest in A",
+        "source_url": "https://reneweconomy.com.au/new-1-5-gigawatt-wind-project-backed-by-local-farmers-and-with-big-battery-in-tow-hits-epbc-queue/",
+        "article_date": "2025-12-03"
+      }
+    ],
+    "ownership_mentions": [
+      {
+        "match": "acquired by AGL in 2010.",
+        "captured": "AGL in 2010",
+        "context": "lab undertook many of the early stage development activities for the project before the project was acquired by AGL in 2010. Since that time Windlab has continued to play a role, supporting AGL in the completion of the proje",
+        "source_url": "https://reneweconomy.com.au/windlab-receive-10-million-milestone-success-payment-respect-coopers-gap-wind-farm-18855/",
+        "article_date": "2017-08-24"
+      }
+    ],
+    "cost_mentions": [
+      {
+        "match": "$10 million",
+        "captured": "10",
+        "context": "Home \u00bb Renewables \u00bb Windlab to receive $10 million milestone success payment in respect of the Coopers Gap Wind Farm Windlab to receive $10 million mi",
+        "source_url": "https://reneweconomy.com.au/windlab-receive-10-million-milestone-success-payment-respect-coopers-gap-wind-farm-18855/",
+        "article_date": "2017-08-24"
+      },
+      {
+        "match": "$10 million",
+        "captured": "10",
+        "context": "ve $10 million milestone success payment in respect of the Coopers Gap Wind Farm Windlab to receive $10 million milestone success payment in respect of the Coopers Gap Wind Farm Windlab Aug 24, 2017 Share on Fac",
+        "source_url": "https://reneweconomy.com.au/windlab-receive-10-million-milestone-success-payment-respect-coopers-gap-wind-farm-18855/",
+        "article_date": "2017-08-24"
+      },
+      {
+        "match": "$10 million",
+        "captured": "10",
+        "context": "lab Limited advises that it has become entitled to receive a milestone success payment of just over $10 million in respect of the Coopers Gap Wind Farm in South East Queensland operated by AGL Energy Limited (AG",
+        "source_url": "https://reneweconomy.com.au/windlab-receive-10-million-milestone-success-payment-respect-coopers-gap-wind-farm-18855/",
+        "article_date": "2017-08-24"
+      },
+      {
+        "match": "$10million",
+        "captured": "10",
+        "context": "Coopers Gap Windlab will receive a final milestone success payment for the project of a little over $10million. Share this: Share on Facebook (Opens in new window) Facebook Share on X (Opens in new window) X Sh",
+        "source_url": "https://reneweconomy.com.au/windlab-receive-10-million-milestone-success-payment-respect-coopers-gap-wind-farm-18855/",
+        "article_date": "2017-08-24"
+      },
+      {
+        "match": "$850 million",
+        "captured": "850",
+        "context": "undergo major repairs after faults were found in its commissioning process. AGL, which operates the $850 million project and is a joint owner through the Powering Australia Renewables Fund, said in a statement th",
+        "source_url": "https://reneweconomy.com.au/australias-biggest-wind-farm-at-coopers-gap-to-undergo-major-repairs-16117/",
+        "article_date": "2020-11-04"
+      },
+      {
+        "match": "$2.1 million",
+        "captured": "2.1",
+        "context": "6km and 10km will be offered a $50 monthly discount off their electricity bill, and it\u2019s pitching a $2.1 million annual community benefits scheme to the Gannawarra and Loddon Shire. Where it may struggle is with",
+        "source_url": "https://reneweconomy.com.au/new-1-5-gigawatt-wind-project-backed-by-local-farmers-and-with-big-battery-in-tow-hits-epbc-queue/",
+        "article_date": "2025-12-03"
+      }
+    ],
+    "construction_mentions": [
+      {
+        "match": "financial close",
+        "captured": null,
+        "context": "ngratulates AGL Energy Limited (AGL) and the Powering Australian Renewables Fund (PARF) on reaching financial close which is a significant milestone for the project partners. Windlab\u2019s WindScape Institute originally",
+        "source_url": "https://reneweconomy.com.au/windlab-receive-10-million-milestone-success-payment-respect-coopers-gap-wind-farm-18855/",
+        "article_date": "2017-08-24"
+      },
+      {
+        "match": "financial close",
+        "captured": null,
+        "context": "iding wind monitoring, analysis and assessment services. \u201cWe are delighted to see Coopers Gap reach financial close. Whilst continued market uncertainty has resulted in the project taking longer to complete than ini",
+        "source_url": "https://reneweconomy.com.au/windlab-receive-10-million-milestone-success-payment-respect-coopers-gap-wind-farm-18855/",
+        "article_date": "2017-08-24"
+      }
+    ]
+  },
+  "summary": {
+    "articles_found": 5,
+    "has_cod_info": false,
+    "has_ppa_info": false,
+    "has_planning_info": true,
+    "has_ownership_info": true,
+    "has_cost_info": true
+  }
+}

@@ -6,7 +6,8 @@
   "capacity_mw": 500.0,
   "state": "QLD",
   "current_developer": "Cubico Sustainable Investments / Stanwell Corporation (50:50 JV)",
-  "cod_current": "2025-02",
+  "cod_current": "2025-02-28",
+  "cod_original": "2025-02-28",
   "grid_forming": false,
   "has_sips": false,
   "has_syncon": false,
@@ -67,6 +68,14 @@
       "event_type": "energisation",
       "title": "First turbines energised",
       "detail": "First turbines power up on Western Downs",
+      "sources": []
+    },
+    {
+      "date": "2026-03-12",
+      "date_precision": "day",
+      "event_type": "cod_change",
+      "title": "COD estimate updated",
+      "detail": "COD changed from 2025-02 to 2025-02-28 (source: AEMO Generation Information)",
       "sources": []
     }
   ],
