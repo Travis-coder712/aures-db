@@ -1,8 +1,8 @@
 # AURES Database — Build Tracker
 
 > **Last Updated:** 2026-03-12
-> **Current Phase:** Phase 4 — Intelligence Layer (in progress)
-> **Status:** Phases 1-3.5 complete. 1,064 projects (incl. 22 offshore wind). Real 2024+2025 performance data + 2026 YTD from OpenElectricity API. 593 timeline events. 250 projects with coordinates. Offshore wind toggle on Dashboard. Phase 4 plan: confidence ratings, developer profiles, map view, COD drift.
+> **Current Phase:** Phase 4 — Intelligence Layer (near complete)
+> **Status:** Phases 1-4 near complete. 1,064 projects (incl. 22 offshore wind). Real 2024+2025 performance data + 2026 YTD from OpenElectricity API. 593 timeline events. 250 projects with coordinates. Phase 4 delivered: confidence scoring, 718 developer profiles, interactive Leaflet map, COD drift tracker. Remaining: methodology deep dive (4.5), final nav polish (4.6), build+push (4.7).
 
 ---
 
@@ -15,7 +15,7 @@
 | Phase 2.5: NEM Dashboard + REZ | ✅ Complete | 100% |
 | Phase 3: Performance | ✅ Complete | 100% |
 | Phase 3.5: Data Quality + Enrichment | ✅ Complete | 100% |
-| Phase 4: Intelligence | In Progress | 25% |
+| Phase 4: Intelligence | In Progress | 90% |
 | Phase 5: Data Enrichment | Ongoing | 25% |
 
 ---
@@ -261,17 +261,20 @@ Layer 2: STATIC JSON  ✅ BUILT
   projects/index.json               — 1,064 project summaries
   projects/{tech}/{id}.json         — Individual project detail (7 tech folders incl. offshore-wind)
   indexes/by-*.json                 — Indexes by tech, state, status, developer
+  indexes/developer-profiles.json   — 718 developer profiles with slugs, capacity, tech/status breakdown
+  indexes/by-coordinates.json       — 250 geolocated projects (lightweight map data)
+  indexes/cod-drift.json            — COD drift data (7 projects with drift + 5 with history)
   performance/league-tables/*.json  — League table rankings by tech+year (8 files + index)
   performance/quartile-benchmarks/  — Quartile stats per metric
   metadata/stats.json               — Quick stats for dashboard
 
 Layer 3: PWA FRONTEND  ✅ BUILT & DEPLOYED
-  React 19 + TypeScript + Vite 6 + Tailwind 4
+  React 19 + TypeScript + Vite 6 + Tailwind 4 + Leaflet
   Async data loading (dataService.ts + useProjectData hooks)
   Fuse.js search across 1,064 projects
   Performance league tables with info tooltips + data source badges
   6 technology categories: wind, solar, BESS, hybrid, offshore wind, pumped hydro
-  13 pages: Home, Dashboard, ProjectList, ProjectDetail, Performance, Search, Guides, GuideReader, SchemesOverview, SchemeRoundDetail, REZList, REZDetail, NotFound
+  16 pages: Home, Dashboard, ProjectList, ProjectDetail, Performance, DeveloperList, DeveloperDetail, MapView, Search, Guides, GuideReader, SchemesOverview, SchemeRoundDetail, REZList, REZDetail, NotFound
   Mobile bottom nav + desktop sidebar + Dashboard shortcut
   PWA with service worker (vite-plugin-pwa)
   Live at: https://travis-coder712.github.io/aures-db/
@@ -423,6 +426,26 @@ Layer 3: PWA FRONTEND  ✅ BUILT & DEPLOYED
   - Frontend type updated (`confidence_score` in ProjectSummary)
   - **Remaining**: ConfidenceDots on cards, confidence filter on ProjectList, confidence stats on Dashboard
 
+### Session 12 — 2026-03-12
+- **Step 4.2 completed — Developer Portfolio Pages**:
+  - Built `export_developer_profiles()` in export_json.py — 718 developers with slugs, tech/status/state breakdown
+  - Built `DeveloperList.tsx` — searchable grid with text search, tech/state filter pills, sort options, URL-based filter state
+  - Built `DeveloperDetail.tsx` — portfolio page with stat cards, Recharts BarChart tech mix, pipeline status bars, project list
+  - Built `useDeveloperData.ts` hooks + DeveloperProfile/DeveloperIndex types
+  - Added routes `/developers` + `/developers/:slug`, UsersIcon in nav
+- **Step 4.3 completed — Map View (Leaflet)**:
+  - Built `export_coordinates_index()` — 250 projects to `by-coordinates.json`
+  - Built `MapView.tsx` — CARTO dark tiles, CircleMarkers sized by capacity (4-10px), tech-colored
+  - Filter overlay: 6 tech pills + 3 status pills + project count
+  - Built `useMapData.ts` hook + MapProject type, GlobeIcon in nav
+- **Step 4.4 completed — COD Drift Analytics**:
+  - Built `export_cod_drift()` — 7 projects with drift data from cod_original/cod_current parsing
+  - Added COD Drift Tracker section to Dashboard with drift badges (amber delays, green ahead)
+  - Added drift badge to ProjectDetail COD MetricBox
+  - Built `useCODDrift.ts` hook + CODDriftProject/CODDriftData types
+- **Navigation**: Desktop sidebar now 10 items; mobile bottom nav unchanged (5 items)
+- **Build**: `npx tsc -b && npx vite build` passed clean
+
 ---
 
 ## Phase 4: Intelligence Layer — IN PROGRESS
@@ -524,14 +547,14 @@ Output: `frontend/public/data/indexes/developer-profiles.json`
 - `/developers/:slug` — full portfolio: stats cards, project list, tech mix chart, state breakdown
 
 Steps:
-- [ ] Add `export_developer_profiles()` to `export_json.py`
-- [ ] Create slug generation (lowercase, hyphenated, deduplicated)
-- [ ] Run export, verify JSON output
-- [ ] NEW: `frontend/src/hooks/useDeveloperData.ts` — fetch and filter developer profiles
-- [ ] NEW: `frontend/src/pages/DeveloperList.tsx` — searchable developer grid (~300 lines)
-- [ ] NEW: `frontend/src/pages/DeveloperDetail.tsx` — portfolio page with charts (~400 lines)
-- [ ] Add routes: `/developers`, `/developers/:slug`
-- [ ] Add "Developers" to navigation (desktop sidebar after Performance, mobile: replace or add)
+- [x] Add `export_developer_profiles()` to `export_json.py`
+- [x] Create slug generation (lowercase, hyphenated, deduplicated)
+- [x] Run export, verify JSON output — 718 developers exported
+- [x] NEW: `frontend/src/hooks/useDeveloperData.ts` — fetch and filter developer profiles
+- [x] NEW: `frontend/src/pages/DeveloperList.tsx` — searchable developer grid with tech/state filters
+- [x] NEW: `frontend/src/pages/DeveloperDetail.tsx` — portfolio page with Recharts tech mix chart, pipeline status bars
+- [x] Add routes: `/developers`, `/developers/:slug`
+- [x] Add "Developers" to navigation (desktop sidebar with UsersIcon)
 
 **Files to modify:**
 - MODIFY: `pipeline/exporters/export_json.py` — add developer profile export
@@ -580,14 +603,14 @@ Output: `frontend/public/data/indexes/by-coordinates.json`
 - Australia-centered default view: `[-25.5, 134]` zoom 4
 
 Steps:
-- [ ] `npm install leaflet react-leaflet @types/leaflet` in frontend/
-- [ ] Add coordinates index export to `export_json.py`
-- [ ] Run export, verify JSON
-- [ ] NEW: `frontend/src/pages/MapView.tsx` — Leaflet map with markers + filters
-- [ ] NEW: `frontend/src/hooks/useMapData.ts` — fetch coordinates index
-- [ ] Import Leaflet CSS in `main.tsx` or `index.css`
-- [ ] Add route: `/map`
-- [ ] Add "Map" to navigation (desktop sidebar, mobile nav)
+- [x] `npm install leaflet react-leaflet @types/leaflet` in frontend/
+- [x] Add coordinates index export to `export_json.py` — `export_coordinates_index()` (250 projects)
+- [x] Run export, verify JSON — `by-coordinates.json` generated
+- [x] NEW: `frontend/src/pages/MapView.tsx` — Leaflet map with CARTO dark tiles, CircleMarkers sized by capacity, tech-colored
+- [x] NEW: `frontend/src/hooks/useMapData.ts` — fetch coordinates index
+- [x] Import Leaflet CSS in `index.css` + dark popup overrides
+- [x] Add route: `/map`
+- [x] Add "Map" to navigation (desktop sidebar with GlobeIcon)
 - [ ] Test mobile responsiveness (touch zoom, popup sizing)
 
 **Files to modify:**
@@ -635,12 +658,10 @@ Steps:
 - Could also add drift indicator on ProjectDetail (already partially shown)
 
 Steps:
-- [ ] Build `harvest_cod_drift.py` — parse cod_original/cod_current, compute drift
-- [ ] Add drift export to `export_json.py`
-- [ ] Run export, verify JSON
-- [ ] Frontend: COD drift chart component (Recharts bar + scatter)
-- [ ] Integrate into Dashboard or Performance page as a new section/tab
-- [ ] Add drift badge to ProjectDetail header (e.g., "⏳ 18 months delayed")
+- [x] Build drift export in `export_json.py` — `export_cod_drift()` parses cod_original/cod_current, computes drift_months, includes cod_history
+- [x] Run export, verify JSON — 7 projects with drift, 5 with history (data is sparse — only 7 projects have both cod_original + cod_current)
+- [x] Frontend: COD Drift Tracker section on Dashboard — project list with drift badges (amber delayed, green ahead)
+- [x] Add drift badge to ProjectDetail COD MetricBox (e.g., "+12 mo" amber pill)
 
 **Files to modify:**
 - NEW: `pipeline/processors/harvest_cod_drift.py`
@@ -740,23 +761,23 @@ Steps:
 
 **Recommended session plan:**
 - **Session 11:** Steps 4.1 + 4.1b (confidence) + 4.2 (developer export) — pipeline work ✅ DONE
-- **Session 12:** Steps 4.2b (developer pages) + 4.3 (map view) — main frontend
-- **Session 13:** Steps 4.4 (COD drift) + 4.5 (methodology) + 4.6 (nav) + 4.7 (verify/push) — finish + polish
+- **Session 12:** Steps 4.2b + 4.3 + 4.4 (developer pages, map, COD drift) ✅ DONE
+- **Session 13:** Steps 4.5 (methodology) + 4.6 (nav polish) + 4.7 (verify/push) — finish + polish
 
 ---
 
 ### Verification Checklist
-- [ ] `python3 pipeline/processors/compute_confidence.py` updates all 1,064 projects
-- [ ] `python3 pipeline/exporters/export_json.py` exports developer-profiles.json + by-coordinates.json + cod-drift.json
-- [ ] `npx tsc -b && npx vite build` passes clean
-- [ ] `/developers` renders searchable developer grid
-- [ ] `/developers/:slug` renders portfolio with charts
-- [ ] `/map` renders Leaflet map with 250+ markers, clustering, tech colors
-- [ ] ProjectList shows confidence dots, filterable by tier
-- [ ] ProjectDetail shows confidence score + drift badge
-- [ ] Desktop sidebar: 10 items (Home, Dashboard, Projects, Performance, Developers, Map, Schemes, REZ, Guides, Search)
-- [ ] Mobile bottom nav: 5 items (Home, Projects, Map, REZ, Search) — or reconfigure for best UX
-- [ ] No console errors on any page
+- [x] `python3 pipeline/processors/compute_confidence.py` updates all 1,064 projects
+- [x] `python3 pipeline/exporters/export_json.py` exports developer-profiles.json + by-coordinates.json + cod-drift.json
+- [x] `npx tsc -b && npx vite build` passes clean
+- [x] `/developers` renders searchable developer grid
+- [x] `/developers/:slug` renders portfolio with charts
+- [x] `/map` renders Leaflet map with 250+ markers, tech colors, filter overlay
+- [x] ProjectList shows confidence dots, filterable by tier
+- [x] ProjectDetail shows confidence score + drift badge
+- [x] Desktop sidebar: 10 items (Home, Dashboard, Projects, Performance, Developers, Map, Schemes, REZ, Guides, Search)
+- [x] Mobile bottom nav: 5 items (Home, Projects, Perf, REZ, Search)
+- [ ] No console errors on any page (not yet verified on all pages)
 
 ---
 

@@ -316,6 +316,16 @@ export default function Performance() {
           Ranked by capacity factor, revenue, and curtailment.
           <InfoTooltip metricKey="composite_rank" />
         </p>
+        <Link
+          to="/guides/performance-methodology"
+          className="inline-flex items-center gap-1.5 mt-2 text-xs text-[var(--color-primary)] hover:underline"
+        >
+          <svg className="w-3.5 h-3.5" viewBox="0 0 16 16" fill="currentColor">
+            <circle cx="8" cy="8" r="7" fill="none" stroke="currentColor" strokeWidth="1.5" />
+            <text x="8" y="12" textAnchor="middle" fontSize="10" fontWeight="bold">i</text>
+          </svg>
+          How are these metrics calculated?
+        </Link>
         {table && (
           <div className="mt-2 flex flex-wrap items-center gap-2">
             {(table.data_source === 'openelectricity' || table.data_source === 'openelectricity_ytd') ? (

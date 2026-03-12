@@ -5,7 +5,7 @@
  * In production (GitHub Pages), they're served as static files.
  * In development (Vite dev server), they're served from the public/ directory.
  */
-import type { ProjectSummary, Project, Technology, ProjectStatus, State, LeagueTable, LeagueTableIndex, LeagueTechnology } from './types'
+import type { ProjectSummary, Project, Technology, ProjectStatus, State, LeagueTable, LeagueTableIndex, LeagueTechnology, DeveloperIndex, MapProject, CODDriftData } from './types'
 
 const BASE = import.meta.env.BASE_URL + 'data'
 
@@ -128,6 +128,52 @@ export async function fetchLeagueTable(tech: LeagueTechnology, year: number): Pr
     const resp = await fetch(`${BASE}/performance/league-tables/${tech}-${year}.json`)
     if (!resp.ok) return null
     return (await resp.json()) as LeagueTable
+  } catch {
+    return null
+  }
+}
+
+// ============================================================
+// Developer Profiles
+// ============================================================
+
+let developerIndexCache: DeveloperIndex | null = null
+
+export async function fetchDeveloperIndex(): Promise<DeveloperIndex> {
+  if (developerIndexCache) return developerIndexCache
+  const resp = await fetch(`${BASE}/indexes/developer-profiles.json`)
+  if (!resp.ok) throw new Error(`Failed to load developer profiles: ${resp.status}`)
+  developerIndexCache = (await resp.json()) as DeveloperIndex
+  return developerIndexCache
+}
+
+// ============================================================
+// Map Data
+// ============================================================
+
+let mapDataCache: MapProject[] | null = null
+
+export async function fetchMapData(): Promise<MapProject[]> {
+  if (mapDataCache) return mapDataCache
+  const resp = await fetch(`${BASE}/indexes/by-coordinates.json`)
+  if (!resp.ok) throw new Error(`Failed to load map data: ${resp.status}`)
+  mapDataCache = (await resp.json()) as MapProject[]
+  return mapDataCache
+}
+
+// ============================================================
+// COD Drift Data
+// ============================================================
+
+let codDriftCache: CODDriftData | null = null
+
+export async function fetchCODDrift(): Promise<CODDriftData | null> {
+  if (codDriftCache) return codDriftCache
+  try {
+    const resp = await fetch(`${BASE}/indexes/cod-drift.json`)
+    if (!resp.ok) return null
+    codDriftCache = (await resp.json()) as CODDriftData
+    return codDriftCache
   } catch {
     return null
   }

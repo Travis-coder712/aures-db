@@ -77,7 +77,11 @@ export default function ProjectDetail() {
             <MetricBox label="Storage" value={`${project.storage_mwh} MWh`} />
           )}
           <MetricBox label="State" value={project.state} />
-          <MetricBox label="COD" value={project.cod_current || 'TBD'} />
+          <MetricBox
+            label="COD"
+            value={project.cod_current || 'TBD'}
+            badge={getCODDriftBadge(project)}
+          />
         </div>
       </header>
 
@@ -112,13 +116,31 @@ export default function ProjectDetail() {
 // Sub-components
 // ============================================================
 
-function MetricBox({ label, value }: { label: string; value: string }) {
+function MetricBox({ label, value, badge }: { label: string; value: string; badge?: { text: string; color: string } | null }) {
   return (
     <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-lg px-3 py-2">
       <p className="text-[10px] font-medium text-[var(--color-text-muted)] uppercase tracking-wider">{label}</p>
-      <p className="text-sm font-bold text-[var(--color-text)]">{value}</p>
+      <div className="flex items-center gap-2">
+        <p className="text-sm font-bold text-[var(--color-text)]">{value}</p>
+        {badge && (
+          <span className="text-[10px] font-medium px-1.5 py-0.5 rounded" style={{ backgroundColor: `${badge.color}20`, color: badge.color }}>
+            {badge.text}
+          </span>
+        )}
+      </div>
     </div>
   )
+}
+
+function getCODDriftBadge(project: Project): { text: string; color: string } | null {
+  if (!project.cod_original || !project.cod_current) return null
+  const origMatch = project.cod_original.match(/(\d{4})/)
+  const currMatch = project.cod_current.match(/(\d{4})/)
+  if (!origMatch || !currMatch) return null
+  const drift = (parseInt(currMatch[1]) - parseInt(origMatch[1])) * 12
+  if (drift === 0) return null
+  if (drift > 0) return { text: `+${drift} mo`, color: '#f59e0b' }
+  return { text: `${drift} mo`, color: '#22c55e' }
 }
 
 function SectionTitle({ children }: { children: React.ReactNode }) {

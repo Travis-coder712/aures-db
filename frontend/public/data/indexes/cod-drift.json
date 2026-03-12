@@ -1,0 +1,149 @@
+{
+  "projects_with_drift": 7,
+  "avg_drift_months": {
+    "solar": 24.0,
+    "wind": 12.0,
+    "bess": 2.4
+  },
+  "by_project": [
+    {
+      "id": "yanco-delta",
+      "name": "Yanco Delta Solar Farm",
+      "technology": "solar",
+      "status": "development",
+      "capacity_mw": 1000.0,
+      "state": "NSW",
+      "original": "2026",
+      "current": "2028",
+      "drift_months": 24
+    },
+    {
+      "id": "golden-plains-wind",
+      "name": "Golden Plains Wind Farm",
+      "technology": "wind",
+      "status": "construction",
+      "capacity_mw": 1300.0,
+      "state": "VIC",
+      "original": "2025",
+      "current": "2026 (Stage 1)",
+      "drift_months": 12
+    },
+    {
+      "id": "victorian-big-battery",
+      "name": "Victorian Big Battery",
+      "technology": "bess",
+      "status": "operating",
+      "capacity_mw": 300.0,
+      "state": "VIC",
+      "original": "Q3 2021",
+      "current": "2022-01",
+      "drift_months": 12
+    },
+    {
+      "id": "waratah-super-battery",
+      "name": "Waratah Super Battery",
+      "technology": "bess",
+      "status": "operating",
+      "capacity_mw": 850.0,
+      "state": "NSW",
+      "original": "2025",
+      "current": "2024-11",
+      "drift_months": -12
+    },
+    {
+      "id": "eraring-battery",
+      "name": "Eraring Battery",
+      "technology": "bess",
+      "status": "construction",
+      "capacity_mw": 460.0,
+      "state": "NSW",
+      "original": "2025",
+      "current": "2026",
+      "drift_months": 12
+    },
+    {
+      "id": "hornsdale-power-reserve",
+      "name": "Hornsdale Power Reserve",
+      "technology": "bess",
+      "status": "operating",
+      "capacity_mw": 194.0,
+      "state": "SA",
+      "original": "2017-12",
+      "current": "2017-12 (Phase 1)",
+      "drift_months": 0
+    },
+    {
+      "id": "collie-battery",
+      "name": "Collie Battery",
+      "technology": "bess",
+      "status": "development",
+      "capacity_mw": 560.0,
+      "state": "WA",
+      "original": "2027",
+      "current": "2027",
+      "drift_months": 0
+    }
+  ],
+  "cod_histories": {
+    "collie-battery": [
+      {
+        "date": "2023-06-01",
+        "estimate": "2027",
+        "source": "WA Government"
+      }
+    ],
+    "eraring-battery": [
+      {
+        "date": "2023-06-01",
+        "estimate": "2025",
+        "source": "Origin"
+      },
+      {
+        "date": "2024-06-01",
+        "estimate": "2026",
+        "source": "Origin"
+      }
+    ],
+    "golden-plains-wind": [
+      {
+        "date": "2021-01-01",
+        "estimate": "2025 (Stage 1)",
+        "source": "AEMO Gen Info"
+      },
+      {
+        "date": "2023-01-01",
+        "estimate": "2026 (Stage 1)",
+        "source": "AEMO Gen Info"
+      }
+    ],
+    "victorian-big-battery": [
+      {
+        "date": "2021-01-01",
+        "estimate": "Q3 2021",
+        "source": "Neoen"
+      },
+      {
+        "date": "2021-08-01",
+        "estimate": "Q4 2021",
+        "source": "Neoen (post-fire revised)"
+      }
+    ],
+    "yanco-delta": [
+      {
+        "date": "2022-01-01",
+        "estimate": "2026",
+        "source": "AEMO Gen Info"
+      },
+      {
+        "date": "2023-06-01",
+        "estimate": "2027",
+        "source": "AEMO Gen Info"
+      },
+      {
+        "date": "2024-06-01",
+        "estimate": "2028",
+        "source": "Origin Energy announcement"
+      }
+    ]
+  }
+}

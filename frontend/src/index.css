@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "leaflet/dist/leaflet.css";
 
 :root {
   --color-primary: #0ea5e9;
@@ -42,6 +43,18 @@ body {
 ::-webkit-scrollbar-thumb { background: var(--color-bg-elevated); border-radius: 3px; }
 
 .safe-bottom { padding-bottom: env(safe-area-inset-bottom); }
+
+/* Leaflet dark theme popup overrides */
+.leaflet-popup-content-wrapper {
+  background-color: #1e293b !important;
+  border: 1px solid #334155 !important;
+  border-radius: 0.75rem !important;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4) !important;
+}
+.leaflet-popup-tip { background-color: #1e293b !important; }
+.leaflet-popup-content { margin: 10px 14px !important; }
+.leaflet-popup-close-button { color: #94a3b8 !important; }
+.leaflet-popup-close-button:hover { color: #f1f5f9 !important; }
 
 /* Guide content markdown rendering */
 .guide-content {

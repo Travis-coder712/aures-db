@@ -292,6 +292,59 @@ export interface QuartileBenchmarks {
   }
 }
 
+// Developer profile types (Phase 4)
+export interface DeveloperProfile {
+  slug: string
+  name: string
+  project_count: number
+  total_capacity_mw: number
+  total_storage_mwh: number
+  by_technology: Partial<Record<Technology, number>>
+  by_status: Partial<Record<ProjectStatus, number>>
+  states: State[]
+  avg_confidence: Confidence
+  project_ids: string[]
+}
+
+export interface DeveloperIndex {
+  developers: DeveloperProfile[]
+  total_developers: number
+}
+
+// Map data types (Phase 4)
+export interface MapProject {
+  id: string
+  name: string
+  technology: Technology
+  status: ProjectStatus
+  capacity_mw: number
+  storage_mwh?: number | null
+  state: State
+  lat: number
+  lng: number
+  developer?: string
+}
+
+// COD Drift types (Phase 4)
+export interface CODDriftProject {
+  id: string
+  name: string
+  technology: Technology
+  status: ProjectStatus
+  capacity_mw: number
+  state: State
+  original: string
+  current: string
+  drift_months: number
+}
+
+export interface CODDriftData {
+  projects_with_drift: number
+  avg_drift_months: Partial<Record<Technology, number>>
+  by_project: CODDriftProject[]
+  cod_histories: Record<string, { date: string; estimate: string; source?: string }[]>
+}
+
 // Technology display helpers
 export const TECHNOLOGY_CONFIG: Record<Technology, { label: string; color: string; icon: string }> = {
   wind: { label: 'Wind', color: '#3b82f6', icon: '💨' },

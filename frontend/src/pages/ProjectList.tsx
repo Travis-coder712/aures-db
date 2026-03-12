@@ -1,28 +1,36 @@
 import { useState, useMemo } from 'react'
-import { useSearchParams } from 'react-router-dom'
+import { useSearchParams, useNavigate } from 'react-router-dom'
 import { useProjectIndex } from '../hooks/useProjectData'
 import { TECHNOLOGY_CONFIG, STATUS_CONFIG, CONFIDENCE_CONFIG, type Technology, type ProjectStatus, type State, type Confidence } from '../lib/types'
 import ProjectCard from '../components/common/ProjectCard'
 
 type SortKey = 'name' | 'capacity_mw' | 'state' | 'status'
 
+function parseMulti<T extends string>(raw: string | null): T[] {
+  if (!raw) return []
+  return raw.split(',').filter(Boolean) as T[]
+}
+
 export default function ProjectList() {
   const [searchParams, setSearchParams] = useSearchParams()
+  const navigate = useNavigate()
   const [sortBy, setSortBy] = useState<SortKey>('capacity_mw')
   const [sortDesc, setSortDesc] = useState(true)
   const { projects: allProjects, loading } = useProjectIndex()
 
-  const techFilter = searchParams.get('tech') as Technology | null
-  const statusFilter = searchParams.get('status') as ProjectStatus | null
-  const stateFilter = searchParams.get('state') as State | null
+  // Multi-value filter support (comma-separated)
+  const techFilters = parseMulti<Technology>(searchParams.get('tech'))
+  const statusFilters = parseMulti<ProjectStatus>(searchParams.get('status'))
+  const stateFilters = parseMulti<State>(searchParams.get('state'))
   const confidenceFilter = searchParams.get('confidence') as Confidence | null
+  const fromDashboard = searchParams.get('from') === 'dashboard'
 
   const filtered = useMemo(() => {
     let result = [...allProjects]
 
-    if (techFilter) result = result.filter((p) => p.technology === techFilter)
-    if (statusFilter) result = result.filter((p) => p.status === statusFilter)
-    if (stateFilter) result = result.filter((p) => p.state === stateFilter)
+    if (techFilters.length) result = result.filter((p) => techFilters.includes(p.technology))
+    if (statusFilters.length) result = result.filter((p) => statusFilters.includes(p.status))
+    if (stateFilters.length) result = result.filter((p) => stateFilters.includes(p.state))
     if (confidenceFilter) result = result.filter((p) => p.data_confidence === confidenceFilter)
 
     result.sort((a, b) => {
@@ -47,7 +55,7 @@ export default function ProjectList() {
     })
 
     return result
-  }, [allProjects, techFilter, statusFilter, stateFilter, confidenceFilter, sortBy, sortDesc])
+  }, [allProjects, techFilters.join(','), statusFilters.join(','), stateFilters.join(','), confidenceFilter, sortBy, sortDesc])
 
   if (loading) {
     return (
@@ -58,24 +66,49 @@ export default function ProjectList() {
   }
 
   const totalCapacity = filtered.reduce((sum, p) => sum + p.capacity_mw, 0)
-  const activeFilters = [techFilter, statusFilter, stateFilter, confidenceFilter].filter(Boolean).length
+  const activeFilters = [techFilters.length > 0, statusFilters.length > 0, stateFilters.length > 0, confidenceFilter].filter(Boolean).length
 
   function clearFilters() {
     setSearchParams({})
   }
 
   function toggleFilter(key: string, value: string) {
-    const current = searchParams.get(key)
-    if (current === value) {
-      searchParams.delete(key)
+    const sp = new URLSearchParams(searchParams)
+    // Remove 'from' when user changes filters
+    sp.delete('from')
+    const current = sp.get(key) || ''
+    const values = current ? current.split(',').filter(Boolean) : []
+    const idx = values.indexOf(value)
+    if (idx >= 0) {
+      values.splice(idx, 1)
     } else {
-      searchParams.set(key, value)
+      values.push(value)
     }
-    setSearchParams(searchParams)
+    if (values.length > 0) {
+      sp.set(key, values.join(','))
+    } else {
+      sp.delete(key)
+    }
+    setSearchParams(sp)
+  }
+
+  function isFilterActive(key: string, value: string): boolean {
+    const raw = searchParams.get(key) || ''
+    return raw.split(',').includes(value)
   }
 
   return (
     <div className="px-4 lg:px-8 py-6 max-w-7xl mx-auto">
+      {/* Back to Dashboard */}
+      {fromDashboard && (
+        <button
+          onClick={() => navigate(-1)}
+          className="inline-flex items-center gap-1.5 text-sm text-[var(--color-primary)] hover:underline mb-4"
+        >
+          ← Back to Dashboard
+        </button>
+      )}
+
       {/* Header */}
       <div className="mb-6">
         <h1 className="text-xl lg:text-2xl font-bold text-[var(--color-text)] mb-1">
@@ -99,7 +132,7 @@ export default function ProjectList() {
           </span>
           {(['wind', 'solar', 'bess', 'hybrid', 'offshore_wind', 'pumped_hydro'] as const).map((tech) => {
             const config = TECHNOLOGY_CONFIG[tech]
-            const isActive = techFilter === tech
+            const isActive = isFilterActive('tech', tech)
             return (
               <button
                 key={tech}
@@ -126,9 +159,9 @@ export default function ProjectList() {
           <span className="text-[10px] font-semibold uppercase tracking-wider text-[var(--color-text-muted)] w-12">
             Status
           </span>
-          {(['operating', 'construction', 'development'] as const).map((status) => {
+          {(['operating', 'commissioning', 'construction', 'development'] as const).map((status) => {
             const config = STATUS_CONFIG[status]
-            const isActive = statusFilter === status
+            const isActive = isFilterActive('status', status)
             return (
               <button
                 key={status}
@@ -156,7 +189,7 @@ export default function ProjectList() {
             State
           </span>
           {(['NSW', 'VIC', 'QLD', 'SA', 'WA', 'TAS'] as const).map((state) => {
-            const isActive = stateFilter === state
+            const isActive = isFilterActive('state', state)
             return (
               <button
                 key={state}
@@ -184,7 +217,13 @@ export default function ProjectList() {
             return (
               <button
                 key={conf}
-                onClick={() => toggleFilter('confidence', conf)}
+                onClick={() => {
+                  const sp = new URLSearchParams(searchParams)
+                  sp.delete('from')
+                  if (isActive) sp.delete('confidence')
+                  else sp.set('confidence', conf)
+                  setSearchParams(sp)
+                }}
                 className={`text-xs px-2.5 py-1 rounded-full border transition-colors ${
                   isActive
                     ? 'border-transparent font-medium'

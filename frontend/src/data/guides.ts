@@ -891,6 +891,208 @@ The first load fetches ~300KB of project data. Subsequent loads are cached and s
 **Charts don't render:**
 Make sure JavaScript is enabled in your browser settings. Some content blockers can interfere with chart rendering.`,
   },
+  {
+    id: 'performance-methodology',
+    title: 'Performance Metrics Deep Dive',
+    description: 'How capacity factor, curtailment, revenue, and BESS metrics are calculated — data sources, formulas, limitations, and caveats.',
+    icon: '🔬',
+    category: 'technical',
+    readingTime: '10 min read',
+    content: `# Performance Metrics — Deep Dive
+
+This guide explains exactly how every metric on the Performance League Tables page is calculated, where the data comes from, and what the limitations are.
+
+---
+
+## Data Pipeline Overview
+
+All performance data flows through this pipeline:
+
+**AEMO NEMWEB** (5-minute dispatch intervals) → **OpenElectricity API** (aggregation & enrichment) → **AURES Python pipeline** (import, compute rankings) → **Static JSON** (served to your browser)
+
+- **Source:** OpenElectricity API, which aggregates AEMO's 5-minute dispatch and settlement data
+- **Frequency:** Annual aggregation (sum of ~105,000 five-minute intervals per year). Monthly data available but not yet imported.
+- **Coverage:** All NEM-registered facilities. WEM (Western Australia) is **not** covered — WA projects appear in the database but without performance data.
+- **Latency:** Settlement data lags real-time by 2-3 days
+- **API plan:** Community (free), 500 requests/day
+
+---
+
+## Capacity Factor (CF%)
+
+### What it measures
+The ratio of actual energy output to the theoretical maximum if the plant ran at full nameplate capacity 24/7. It answers: "How hard is this plant working relative to what it could theoretically do?"
+
+### Formula
+\`CF = (Energy_MWh) / (Capacity_MW x 8,760) x 100\`
+
+- **Energy_MWh:** Total metered energy dispatched to the grid over the year, from AEMO SCADA data
+- **Capacity_MW:** Nameplate (registered) capacity from AEMO Generation Information — NOT maximum output or de-rated capacity
+- **8,760:** Hours in a standard year (8,784 in a leap year). For YTD data, actual hours elapsed to date.
+
+### What affects capacity factor
+- **Resource quality:** Wind speed, solar irradiance at the site
+- **Plant age:** Degradation of solar panels (0.3-0.5%/year) or turbine wear
+- **Planned outages:** Scheduled maintenance windows
+- **Unplanned outages:** Equipment failures, grid faults
+- **Curtailment:** Output forced below capacity due to grid constraints or negative prices
+- **Connection constraints:** Runback schemes limiting output at the connection point
+
+### Typical ranges
+| Technology | Poor | Average | Good | Excellent |
+|-----------|------|---------|------|-----------|
+| Wind | <25% | 25-32% | 32-40% | >40% |
+| Solar | <18% | 18-22% | 22-26% | >26% |
+| Pumped Hydro | 5-15% | 15-25% | 25-35% | n/a |
+
+### Important caveats
+- CF does **not** distinguish between voluntary curtailment (negative prices — a smart economic decision) and forced curtailment (constraints — a problem). A low CF could mean bad wind or smart market behaviour.
+- **Hybrid projects** may have combined CF for co-located generation. AEMO tracks DUIDs separately but OpenElectricity may aggregate wind+solar at the same site.
+- Comparing CF across technologies is meaningless — a 25% wind CF and 25% solar CF reflect very different realities.
+
+---
+
+## Curtailment (%)
+
+### What it measures
+The estimated percentage of potential generation that was NOT dispatched, despite available resource (wind/sun). It answers: "How much power was left on the table?"
+
+### Why it's estimated (not exact)
+AEMO does not publish a single "curtailment" number per facility. True curtailment requires comparing:
+- Actual dispatch vs available capacity (from SCADA)
+- Constraint equations that bound output
+- Semi-scheduled generator UIGF (Unconstrained Intermittent Generation Forecast) vs actual
+
+### Our method
+Derived from dispatch data patterns — comparing expected output (resource availability x capacity) vs actual output. This is an **approximation**.
+
+### Types of curtailment
+1. **Economic curtailment** — Generator self-curtails during negative prices (voluntary, rational). Under-reported by our method.
+2. **Network constraints** — AEMO directs reduced output due to transmission limits
+3. **System security** — AEMO directs reduction for grid stability (frequency, inertia)
+4. **Connection limits** — Runback schemes at the connection point cap output below nameplate
+
+### Limitations
+- Currently **indicative only**
+- Under-reports economic curtailment (choosing not to generate)
+- May over-report for plants with genuinely low output (old panels, poor siting)
+- Future improvement: use NEMWEB constraint equation data directly for precise curtailment
+
+---
+
+## Revenue & Pricing
+
+### Market Value ($)
+Total wholesale energy revenue from the NEM spot market. This is the sum of energy dispatched x spot price at each 5-minute interval.
+
+**What it excludes:**
+- LGC (Large-scale Generation Certificate) revenue — worth $30-50/MWh for eligible projects
+- PPA contract premiums or floors
+- FCAS/ancillary services revenue
+- Capacity payments (future CIS payments)
+
+**Real-world revenue** for most renewable projects is 30-60% higher than the wholesale market value shown here.
+
+### Price Received ($/MWh)
+Volume-weighted average spot price at time of dispatch. Reflects the generator's price exposure profile.
+
+\`$/MWh = Market Value ($) / Energy Generated (MWh)\`
+
+A solar farm dispatching at midday will receive lower prices than a battery dispatching at evening peak. This metric reveals those differences.
+
+### Revenue per MW (Rev/MW)
+Total market revenue divided by nameplate capacity.
+
+\`Rev/MW = Market Value ($) / Capacity (MW)\`
+
+This is the key efficiency metric — it captures both how much a plant generates AND when it generates (price capture). Two wind farms with identical capacity factors can have very different Rev/MW if one is in a high-price state.
+
+---
+
+## BESS-Specific Metrics
+
+Battery storage has fundamentally different metrics from generators.
+
+### Charge / Discharge Energy
+AEMO registers each battery as **two separate DUIDs** — a charging unit and a discharging unit. OpenElectricity tracks both. Discharged energy is always less than charged energy due to round-trip efficiency losses (typically 85-90% for lithium-ion).
+
+### Price Spread ($/MWh)
+\`Spread = Avg Discharge Price - Avg Charge Price\`
+
+The core profit driver for BESS. A battery charges when prices are low (e.g. $20/MWh midday solar glut) and discharges when prices are high (e.g. $150/MWh evening peak). Higher spreads mean better arbitrage returns.
+
+### Annual Cycles
+\`Cycles = Total Energy Discharged (MWh) / Storage Capacity (MWh)\`
+
+One cycle = fully discharging the battery's entire storage capacity once. Most NEM batteries do 1-2 full equivalent cycles per day. Higher cycles mean more throughput but also more wear on the battery.
+
+### Utilisation (%)
+\`Utilisation = Energy Discharged / (Capacity MW x Hours in Period) x 100\`
+
+Percentage of time the battery was actively discharging. Note this only counts discharge — a battery spending 4 hours charging and 4 hours discharging has ~17% utilisation by this measure.
+
+### What BESS revenue data misses
+Our data captures **arbitrage revenue only** (buy low, sell high in the spot market). It does NOT include:
+- **FCAS revenue** — batteries earn significant income from frequency regulation services, sometimes exceeding arbitrage revenue
+- **Network support payments** — contracted grid stability services
+- **Cap contract premiums** — financial hedging products
+
+For many batteries, FCAS is 30-50% of total revenue. Our league tables therefore represent a floor, not the complete picture.
+
+---
+
+## Composite Rankings
+
+### How projects are ranked
+Each project receives a composite score (0-100) based on weighted metrics:
+
+**Wind & Solar:**
+| Metric | Weight |
+|--------|--------|
+| Capacity Factor | 40% |
+| Revenue per MW | 40% |
+| Curtailment (inverted) | 20% |
+
+**BESS:**
+| Metric | Weight |
+|--------|--------|
+| Revenue per MW | 30% |
+| Utilisation | 30% |
+| Price Spread | 20% |
+| Cycles | 20% |
+
+### Quartiles
+Projects are divided into four equal groups based on composite score:
+- **Q1** (green) — Top 25% performers
+- **Q2** (blue) — Above median
+- **Q3** (amber) — Below median
+- **Q4** (red) — Bottom 25%
+
+### Percentile rankings
+Each metric also has a percentile ranking (0-100th percentile) showing where a project sits relative to all peers of the same technology.
+
+---
+
+## Known Limitations
+
+1. **WEM not covered** — Western Australian projects (Collie Battery, etc.) have no performance data
+2. **FCAS revenue excluded** — Especially impacts BESS rankings
+3. **Curtailment is estimated** — Indicative, not precise
+4. **Hybrid attribution** — Co-located wind+solar may have combined metrics
+5. **New projects penalised** — Projects that started mid-year will show lower annual totals (CF is annualised to compensate, but revenue is not)
+6. **Sample data fallback** — If real data is unavailable for a technology/year, projected estimates (marked with amber badge) are shown instead
+
+---
+
+## Want to verify our numbers?
+
+The underlying data is publicly available:
+- **OpenElectricity:** [openelectricity.org.au](https://openelectricity.org.au) — free facility-level data explorer
+- **AEMO NEMWEB:** [nemweb.com.au](https://nemweb.com.au) — raw 5-minute dispatch files
+- **AEMO Generation Information:** Published quarterly with registered capacities
+
+If you spot a discrepancy, it's likely due to capacity differences (registered vs maximum), time period alignment, or DUID mapping. We welcome corrections.`,
+  },
 ]
 
 export const GUIDE_CATEGORIES = {

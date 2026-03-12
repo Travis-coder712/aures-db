@@ -13,6 +13,7 @@ Produces:
 """
 import json
 import os
+import re
 import sys
 from collections import defaultdict
 from datetime import datetime
@@ -257,7 +258,16 @@ def export_all(db_path=DB_PATH):
     # 5. Performance / League Tables
     export_performance_data(conn)
 
-    # 6. Export metadata
+    # 6. Developer profiles
+    export_developer_profiles(conn, summaries)
+
+    # 7. Coordinates index (for map view)
+    export_coordinates_index(conn)
+
+    # 8. COD drift data
+    export_cod_drift(conn)
+
+    # 9. Export metadata
     write_json(os.path.join(DATA_DIR, 'metadata', 'last-export.json'), {
         'exported_at': datetime.now().isoformat(),
         'project_count': len(summaries),
@@ -390,6 +400,183 @@ def export_performance_data(conn):
             })
 
     print(f"  performance/ (league tables for {len(years)} years, {len(technologies)} techs)")
+
+
+def export_coordinates_index(conn):
+    """Export lightweight coordinates index for the map view."""
+    rows = conn.execute("""
+        SELECT id, name, technology, status, capacity_mw, storage_mwh,
+               state, latitude, longitude, current_developer
+        FROM projects
+        WHERE latitude IS NOT NULL AND longitude IS NOT NULL
+        ORDER BY capacity_mw DESC
+    """).fetchall()
+
+    features = []
+    for r in rows:
+        features.append(clean_none_values({
+            'id': r['id'],
+            'name': r['name'],
+            'technology': r['technology'],
+            'status': r['status'],
+            'capacity_mw': r['capacity_mw'],
+            'storage_mwh': r['storage_mwh'],
+            'state': r['state'],
+            'lat': r['latitude'],
+            'lng': r['longitude'],
+            'developer': r['current_developer'],
+        }))
+
+    write_json(os.path.join(DATA_DIR, 'indexes', 'by-coordinates.json'), features)
+    print(f"  indexes/by-coordinates.json ({len(features)} geolocated projects)")
+
+
+def parse_cod_year(s):
+    """Extract a year (int) from a COD string like '2026', 'Q3 2021', '2026 (Stage 1)', '2024-11'."""
+    if not s:
+        return None
+    import re as _re
+    m = _re.search(r'(\d{4})', s)
+    return int(m.group(1)) if m else None
+
+
+def export_cod_drift(conn):
+    """Export COD drift data for projects with both original and current COD."""
+    rows = conn.execute("""
+        SELECT id, name, technology, status, capacity_mw, state,
+               cod_original, cod_current
+        FROM projects
+        WHERE cod_original IS NOT NULL AND cod_current IS NOT NULL
+              AND cod_original != '' AND cod_current != ''
+    """).fetchall()
+
+    by_project = []
+    tech_drift = defaultdict(list)
+
+    for r in rows:
+        orig_year = parse_cod_year(r['cod_original'])
+        curr_year = parse_cod_year(r['cod_current'])
+        if orig_year and curr_year:
+            drift_months = (curr_year - orig_year) * 12
+            entry = {
+                'id': r['id'],
+                'name': r['name'],
+                'technology': r['technology'],
+                'status': r['status'],
+                'capacity_mw': r['capacity_mw'],
+                'state': r['state'],
+                'original': r['cod_original'],
+                'current': r['cod_current'],
+                'drift_months': drift_months,
+            }
+            by_project.append(entry)
+            tech_drift[r['technology']].append(drift_months)
+
+    # Also include cod_history data for richer drift timelines
+    history_rows = conn.execute("""
+        SELECT ch.project_id, ch.date, ch.estimate, ch.source,
+               p.name, p.technology, p.capacity_mw, p.state
+        FROM cod_history ch
+        JOIN projects p ON ch.project_id = p.id
+        ORDER BY ch.project_id, ch.date
+    """).fetchall()
+
+    cod_histories = defaultdict(list)
+    for r in history_rows:
+        cod_histories[r['project_id']].append({
+            'date': r['date'],
+            'estimate': r['estimate'],
+            'source': r['source'],
+        })
+
+    # Compute average drift by technology
+    avg_drift = {}
+    for tech, drifts in tech_drift.items():
+        avg_drift[tech] = round(sum(drifts) / len(drifts), 1) if drifts else 0
+
+    by_project.sort(key=lambda x: abs(x['drift_months']), reverse=True)
+
+    result = {
+        'projects_with_drift': len(by_project),
+        'avg_drift_months': avg_drift,
+        'by_project': by_project,
+        'cod_histories': {pid: entries for pid, entries in cod_histories.items()},
+    }
+
+    write_json(os.path.join(DATA_DIR, 'indexes', 'cod-drift.json'), result)
+    print(f"  indexes/cod-drift.json ({len(by_project)} projects with drift, {len(cod_histories)} with history)")
+
+
+def make_slug(name):
+    """Convert developer name to URL-safe slug."""
+    s = name.lower().strip()
+    # Remove common suffixes
+    for suffix in [' pty ltd', ' pty. ltd.', ' ltd', ' inc', ' llc', ' corp']:
+        if s.endswith(suffix):
+            s = s[:-len(suffix)]
+    s = re.sub(r'[^a-z0-9]+', '-', s)
+    s = s.strip('-')
+    return s
+
+
+def export_developer_profiles(conn, summaries):
+    """Export developer portfolio profiles to JSON."""
+    # Group projects by developer
+    dev_projects = defaultdict(list)
+    for s in summaries:
+        dev = s.get('current_developer')
+        if dev:
+            dev_projects[dev].append(s)
+
+    # Build profiles
+    seen_slugs = {}
+    developers = []
+    for name, projects in dev_projects.items():
+        slug = make_slug(name)
+        # Deduplicate slugs
+        if slug in seen_slugs:
+            slug = f"{slug}-{len([k for k in seen_slugs if k.startswith(slug)]) + 1}"
+        seen_slugs[slug] = name
+
+        by_tech = defaultdict(int)
+        by_status = defaultdict(int)
+        states = set()
+        confidence_counts = defaultdict(int)
+        total_mw = 0
+        total_mwh = 0
+
+        for p in projects:
+            by_tech[p['technology']] += 1
+            by_status[p['status']] += 1
+            states.add(p['state'])
+            confidence_counts[p.get('data_confidence', 'low')] += 1
+            total_mw += p.get('capacity_mw', 0)
+            total_mwh += p.get('storage_mwh', 0) or 0
+
+        # Average confidence: pick the tier with highest count
+        avg_confidence = max(confidence_counts, key=confidence_counts.get)
+
+        developers.append({
+            'slug': slug,
+            'name': name,
+            'project_count': len(projects),
+            'total_capacity_mw': round(total_mw, 1),
+            'total_storage_mwh': round(total_mwh, 1),
+            'by_technology': dict(by_tech),
+            'by_status': dict(by_status),
+            'states': sorted(states),
+            'avg_confidence': avg_confidence,
+            'project_ids': [p['id'] for p in sorted(projects, key=lambda x: x.get('capacity_mw', 0), reverse=True)],
+        })
+
+    # Sort by total capacity descending
+    developers.sort(key=lambda d: d['total_capacity_mw'], reverse=True)
+
+    write_json(os.path.join(DATA_DIR, 'indexes', 'developer-profiles.json'), {
+        'developers': developers,
+        'total_developers': len(developers),
+    })
+    print(f"  indexes/developer-profiles.json ({len(developers)} developers)")
 
 
 if __name__ == '__main__':

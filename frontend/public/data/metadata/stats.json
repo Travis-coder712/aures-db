@@ -3,35 +3,35 @@
   "total_capacity_mw": 382086.9600000001,
   "total_storage_mwh": 673602.5100000001,
   "by_technology": {
-    "hybrid": {
-      "count": 110,
-      "capacity_mw": 45257.32,
-      "storage_mwh": 75683.85
-    },
-    "wind": {
-      "count": 211,
-      "capacity_mw": 85239.26999999997,
-      "storage_mwh": 0
-    },
-    "offshore_wind": {
-      "count": 22,
-      "capacity_mw": 43295.0,
-      "storage_mwh": 0
+    "bess": {
+      "count": 432,
+      "capacity_mw": 129337.9,
+      "storage_mwh": 297226.66
     },
     "solar": {
       "count": 228,
       "capacity_mw": 50122.07,
       "storage_mwh": 560.0
     },
+    "offshore_wind": {
+      "count": 22,
+      "capacity_mw": 43295.0,
+      "storage_mwh": 0
+    },
+    "hybrid": {
+      "count": 110,
+      "capacity_mw": 45257.32,
+      "storage_mwh": 75683.85
+    },
     "pumped_hydro": {
       "count": 61,
       "capacity_mw": 28835.4,
       "storage_mwh": 300132.0
     },
-    "bess": {
-      "count": 432,
-      "capacity_mw": 129337.9,
-      "storage_mwh": 297226.66
+    "wind": {
+      "count": 211,
+      "capacity_mw": 85239.26999999997,
+      "storage_mwh": 0
     }
   },
   "by_status": {
@@ -53,6 +53,14 @@
     }
   },
   "by_state": {
+    "NSW": {
+      "count": 364,
+      "capacity_mw": 131490.22
+    },
+    "SA": {
+      "count": 122,
+      "capacity_mw": 25668.76
+    },
     "WA": {
       "count": 1,
       "capacity_mw": 560.0
@@ -61,29 +69,21 @@
       "count": 50,
       "capacity_mw": 13974.4
     },
-    "SA": {
-      "count": 122,
-      "capacity_mw": 25668.76
+    "VIC": {
+      "count": 218,
+      "capacity_mw": 86611.96999999999
     },
     "QLD": {
       "count": 309,
       "capacity_mw": 123781.61
-    },
-    "NSW": {
-      "count": 364,
-      "capacity_mw": 131490.22
-    },
-    "VIC": {
-      "count": 218,
-      "capacity_mw": 86611.96999999999
     }
   },
   "states": [
+    "NSW",
+    "SA",
     "WA",
     "TAS",
-    "SA",
-    "QLD",
-    "NSW",
-    "VIC"
+    "VIC",
+    "QLD"
   ]
 }
