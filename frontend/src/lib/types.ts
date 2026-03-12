@@ -380,6 +380,6 @@ export const CONFIDENCE_CONFIG: Record<Confidence, { label: string; dots: string
 export const DEVELOPMENT_STAGE_CONFIG: Record<DevelopmentStage, { label: string; color: string; icon: string }> = {
   epbc_approved: { label: 'EPBC Approved', color: '#22c55e', icon: '✓' },
   epbc_submitted: { label: 'EPBC Submitted', color: '#10b981', icon: '◐' },
-  planning_submitted: { label: 'Planning Submitted', color: '#f59e0b', icon: '◐' },
+  planning_submitted: { label: 'AEMO Announced', color: '#f59e0b', icon: '◐' },
   early_stage: { label: 'Early Stage', color: '#6b7280', icon: '○' },
 }
