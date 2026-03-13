@@ -6,6 +6,7 @@
   "capacity_mw": 281.1,
   "state": "VIC",
   "current_developer": "Berrbank Development Pty ltd",
+  "current_operator": "GPG Australia",
   "cod_current": "2021-02-15",
   "cod_original": "2021-02-15",
   "grid_forming": false,
@@ -14,6 +15,7 @@
   "has_statcom": false,
   "has_harmonic_filter": false,
   "performance_score": 41.3,
+  "notable": "Stage 1: 43x Vestas V136-4.2MW (180.6MW). Stage 2: 37x Vestas V136-4.2MW (100.5MW). Owned by GPG/Naturgy.",
   "data_confidence": "medium",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
@@ -44,7 +46,14 @@
   ],
   "ownership_history": [],
   "cod_history": [],
-  "suppliers": [],
+  "suppliers": [
+    {
+      "role": "wind_oem",
+      "supplier": "Vestas",
+      "model": "V136-4.2 MW",
+      "grid_forming": false
+    }
+  ],
   "offtakes": [
     {
       "party": "Shell Energy",

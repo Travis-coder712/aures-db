@@ -6,6 +6,7 @@
   "capacity_mw": 113.0,
   "state": "NSW",
   "current_developer": "Tilt Renewables Australia Pty Ltd",
+  "current_operator": "Squadron Energy",
   "cod_current": "2014-08-28",
   "cod_original": "2014-08-28",
   "grid_forming": false,
@@ -53,7 +54,14 @@
   ],
   "ownership_history": [],
   "cod_history": [],
-  "suppliers": [],
+  "suppliers": [
+    {
+      "role": "wind_oem",
+      "supplier": "Goldwind",
+      "model": "GW100/2500",
+      "grid_forming": false
+    }
+  ],
   "offtakes": [],
   "scheme_contracts": [],
   "cost_sources": [],

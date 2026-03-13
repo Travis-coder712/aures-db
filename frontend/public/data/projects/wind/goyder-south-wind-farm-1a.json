@@ -3,9 +3,10 @@
   "name": "Goyder South Wind Farm 1A",
   "technology": "wind",
   "status": "operating",
-  "capacity_mw": 201.0,
+  "capacity_mw": 209.0,
   "state": "SA",
   "current_developer": "Goyder Wind Farm 1A Pty Ltd as trustee for Goyder Wind Farm 1A Trust",
+  "current_operator": "Brookfield",
   "cod_current": "2024-04-04",
   "cod_original": "2024-04-04",
   "grid_forming": false,
@@ -14,6 +15,7 @@
   "has_statcom": false,
   "has_harmonic_filter": false,
   "performance_score": 90.6,
+  "notable": "38x GE Cypress 5.5-158. PPAs: ACT Govt 100MW (14yr) + Flow Power 40MW (10yr). Inaugurated 2024, Neoen sold to Brookfield.",
   "data_confidence": "medium",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
@@ -44,12 +46,27 @@
   ],
   "ownership_history": [],
   "cod_history": [],
-  "suppliers": [],
+  "suppliers": [
+    {
+      "role": "wind_oem",
+      "supplier": "GE Vernova",
+      "model": "Cypress 5.5-158",
+      "grid_forming": false
+    }
+  ],
   "offtakes": [
     {
       "party": "ActewAGL",
       "type": "PPA",
       "source_url": "https://reneweconomy.com.au/goyder-south-wind-farm/"
+    },
+    {
+      "party": "ACT Government",
+      "type": "government_ppa"
+    },
+    {
+      "party": "Flow Power",
+      "type": "PPA"
     }
   ],
   "scheme_contracts": [],

@@ -6,6 +6,7 @@
   "capacity_mw": 132.0,
   "state": "VIC",
   "current_developer": "ACCIONA Energy",
+  "current_operator": "ACCIONA",
   "cod_current": "2018-06-21",
   "cod_original": "2018-06-21",
   "grid_forming": false,
@@ -44,7 +45,14 @@
   ],
   "ownership_history": [],
   "cod_history": [],
-  "suppliers": [],
+  "suppliers": [
+    {
+      "role": "wind_oem",
+      "supplier": "Vestas",
+      "model": "V126-3.3 MW",
+      "grid_forming": false
+    }
+  ],
   "offtakes": [],
   "scheme_contracts": [],
   "cost_sources": [],

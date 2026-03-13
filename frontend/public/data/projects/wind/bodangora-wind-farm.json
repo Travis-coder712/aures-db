@@ -6,6 +6,7 @@
   "capacity_mw": 111.3,
   "state": "NSW",
   "current_developer": "Bodangora Wind Farm Pty Ltd",
+  "current_operator": "Squadron Energy",
   "cod_current": "2018-08-07",
   "cod_original": "2018-08-07",
   "grid_forming": false,
@@ -44,7 +45,14 @@
   ],
   "ownership_history": [],
   "cod_history": [],
-  "suppliers": [],
+  "suppliers": [
+    {
+      "role": "wind_oem",
+      "supplier": "Goldwind",
+      "model": "GW121/2500",
+      "grid_forming": false
+    }
+  ],
   "offtakes": [],
   "scheme_contracts": [],
   "cost_sources": [],

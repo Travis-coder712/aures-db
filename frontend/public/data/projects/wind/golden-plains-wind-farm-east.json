@@ -3,7 +3,7 @@
   "name": "Golden Plains Wind Farm East",
   "technology": "wind",
   "status": "commissioning",
-  "capacity_mw": 733.0,
+  "capacity_mw": 756.0,
   "state": "VIC",
   "current_developer": "Golden Plains WF1 Pty Ltd as trustee for the Golden Plains WF1 Unit Trust",
   "cod_current": "2025-12-31",
@@ -13,6 +13,7 @@
   "has_syncon": false,
   "has_statcom": false,
   "has_harmonic_filter": false,
+  "notable": "Stage 1 of Australias largest wind farm. 122x Vestas V162-6.2MW. Snowy Hydro 40% + Equinix 20% PPAs. A$2B. TagEnergy/IKEA.",
   "data_confidence": "low",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
@@ -31,8 +32,24 @@
   ],
   "ownership_history": [],
   "cod_history": [],
-  "suppliers": [],
-  "offtakes": [],
+  "suppliers": [
+    {
+      "role": "wind_oem",
+      "supplier": "Vestas",
+      "model": "V162-6.2 MW EnVentus",
+      "grid_forming": false
+    }
+  ],
+  "offtakes": [
+    {
+      "party": "Snowy Hydro",
+      "type": "PPA"
+    },
+    {
+      "party": "Equinix",
+      "type": "corporate_ppa"
+    }
+  ],
   "scheme_contracts": [],
   "cost_sources": [],
   "stakeholder_issues": [],

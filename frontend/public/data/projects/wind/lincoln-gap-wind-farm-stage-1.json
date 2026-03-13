@@ -6,6 +6,7 @@
   "capacity_mw": 126.0,
   "state": "SA",
   "current_developer": "Lincoln Gap Wind Farm Pty Ltd",
+  "current_operator": "RATCH-Australia",
   "cod_current": "2019-04-30",
   "cod_original": "2019-04-30",
   "grid_forming": false,
@@ -14,6 +15,7 @@
   "has_statcom": false,
   "has_harmonic_filter": false,
   "performance_score": 84.6,
+  "notable": "35x Senvion 3.6M140 EBC. Snowy Hydro offtake. Owned by RATCH-Australia (acquired Dec 2022 from Nexif).",
   "data_confidence": "medium",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
@@ -44,8 +46,20 @@
   ],
   "ownership_history": [],
   "cod_history": [],
-  "suppliers": [],
-  "offtakes": [],
+  "suppliers": [
+    {
+      "role": "wind_oem",
+      "supplier": "Senvion",
+      "model": "3.6M140 EBC",
+      "grid_forming": false
+    }
+  ],
+  "offtakes": [
+    {
+      "party": "Snowy Hydro",
+      "type": "PPA"
+    }
+  ],
   "scheme_contracts": [],
   "cost_sources": [],
   "stakeholder_issues": [],

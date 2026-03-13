@@ -6,6 +6,7 @@
   "capacity_mw": 119.76,
   "state": "SA",
   "current_developer": "Willogoleche Power Pty Ltd",
+  "current_operator": "Engie",
   "cod_current": "2018-08-29",
   "cod_original": "2018-08-29",
   "grid_forming": false,
@@ -53,7 +54,14 @@
   ],
   "ownership_history": [],
   "cod_history": [],
-  "suppliers": [],
+  "suppliers": [
+    {
+      "role": "wind_oem",
+      "supplier": "Siemens Gamesa",
+      "model": "SWT-3.4-108",
+      "grid_forming": false
+    }
+  ],
   "offtakes": [],
   "scheme_contracts": [],
   "cost_sources": [],

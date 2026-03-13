@@ -6,6 +6,7 @@
   "capacity_mw": 240.0,
   "state": "VIC",
   "current_developer": "Ararat Wind Farm Pty Ltd",
+  "current_operator": "Iberdrola Australia",
   "cod_current": "2016-08-18",
   "cod_original": "2016-08-18",
   "grid_forming": false,
@@ -14,6 +15,7 @@
   "has_statcom": false,
   "has_harmonic_filter": false,
   "performance_score": 38.5,
+  "notable": "ACT Govt 20yr PPA. Infigen developed, now Iberdrola Australia.",
   "data_confidence": "medium",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
@@ -44,7 +46,14 @@
   ],
   "ownership_history": [],
   "cod_history": [],
-  "suppliers": [],
+  "suppliers": [
+    {
+      "role": "wind_oem",
+      "supplier": "GE Vernova",
+      "model": "GE 2.5-120",
+      "grid_forming": false
+    }
+  ],
   "offtakes": [
     {
       "party": "ACT Government",

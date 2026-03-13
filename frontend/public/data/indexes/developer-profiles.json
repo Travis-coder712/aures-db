@@ -519,7 +519,7 @@
       "slug": "tilt-renewables-australia",
       "name": "Tilt Renewables Australia Pty Ltd",
       "project_count": 7,
-      "total_capacity_mw": 2736.0,
+      "total_capacity_mw": 2748.0,
       "total_storage_mwh": 1100.0,
       "by_technology": {
         "wind": 5,
@@ -725,7 +725,7 @@
       "slug": "squadron-energy-services",
       "name": "Squadron Energy Services Pty Ltd",
       "project_count": 5,
-      "total_capacity_mw": 2123.0,
+      "total_capacity_mw": 2134.0,
       "total_storage_mwh": 400.0,
       "by_technology": {
         "wind": 4,
@@ -1096,6 +1096,27 @@
       ]
     },
     {
+      "slug": "tagenergy-ingka-group",
+      "name": "TagEnergy / Ingka Group",
+      "project_count": 2,
+      "total_capacity_mw": 1877.0,
+      "total_storage_mwh": 0,
+      "by_technology": {
+        "wind": 2
+      },
+      "by_status": {
+        "construction": 2
+      },
+      "states": [
+        "VIC"
+      ],
+      "avg_confidence": "high",
+      "project_ids": [
+        "golden-plains-wind",
+        "golden-plains-wind-farm-west"
+      ]
+    },
+    {
       "slug": "agl-energy-limited",
       "name": "AGL Energy Limited",
       "project_count": 5,
@@ -1121,27 +1142,6 @@
         "muswellbrook-pumped-hydro",
         "barn-hill-bess",
         "yadnarie-solar-farm"
-      ]
-    },
-    {
-      "slug": "tagenergy-ingka-group",
-      "name": "TagEnergy / Ingka Group",
-      "project_count": 2,
-      "total_capacity_mw": 1857.0,
-      "total_storage_mwh": 0,
-      "by_technology": {
-        "wind": 2
-      },
-      "by_status": {
-        "construction": 2
-      },
-      "states": [
-        "VIC"
-      ],
-      "avg_confidence": "high",
-      "project_ids": [
-        "golden-plains-wind",
-        "golden-plains-wind-farm-west"
       ]
     },
     {
@@ -1685,6 +1685,30 @@
       ]
     },
     {
+      "slug": "goldwind-australia",
+      "name": "Goldwind Australia",
+      "project_count": 3,
+      "total_capacity_mw": 1411.0,
+      "total_storage_mwh": 0,
+      "by_technology": {
+        "wind": 3
+      },
+      "by_status": {
+        "development": 2,
+        "operating": 1
+      },
+      "states": [
+        "TAS",
+        "VIC"
+      ],
+      "avg_confidence": "low",
+      "project_ids": [
+        "stockyard-hill-wind-farm",
+        "bashan-1-wind-farm",
+        "hollow-tree-wind-farm"
+      ]
+    },
+    {
       "slug": "bid-energy-partners",
       "name": "Bid Energy Partners Pty Ltd",
       "project_count": 2,
@@ -1703,30 +1727,6 @@
       "project_ids": [
         "kias-bess",
         "derringullen-energy-storage-system"
-      ]
-    },
-    {
-      "slug": "goldwind-australia",
-      "name": "Goldwind Australia",
-      "project_count": 3,
-      "total_capacity_mw": 1392.0,
-      "total_storage_mwh": 0,
-      "by_technology": {
-        "wind": 3
-      },
-      "by_status": {
-        "development": 2,
-        "operating": 1
-      },
-      "states": [
-        "TAS",
-        "VIC"
-      ],
-      "avg_confidence": "low",
-      "project_ids": [
-        "stockyard-hill-wind-farm",
-        "bashan-1-wind-farm",
-        "hollow-tree-wind-farm"
       ]
     },
     {
@@ -1774,7 +1774,7 @@
       "slug": "ratch-australia",
       "name": "Ratch Australia",
       "project_count": 6,
-      "total_capacity_mw": 1353.5,
+      "total_capacity_mw": 1355.8,
       "total_storage_mwh": 350.0,
       "by_technology": {
         "wind": 4,
@@ -2661,6 +2661,26 @@
       ]
     },
     {
+      "slug": "macintyre-windfarm-pty-ltd-and-arc-energy-macintyre",
+      "name": "Macintyre Windfarm Pty Ltd and Arc Energy Macintyre Pty Ltd",
+      "project_count": 1,
+      "total_capacity_mw": 923.0,
+      "total_storage_mwh": 0,
+      "by_technology": {
+        "wind": 1
+      },
+      "by_status": {
+        "commissioning": 1
+      },
+      "states": [
+        "QLD"
+      ],
+      "avg_confidence": "low",
+      "project_ids": [
+        "macintyre-wind-farm"
+      ]
+    },
+    {
       "slug": "global-power-generation-australia",
       "name": "Global Power Generation Australia Pty Ltd",
       "project_count": 3,
@@ -2724,26 +2744,6 @@
       "avg_confidence": "low",
       "project_ids": [
         "oven-mountain-pumped-storage"
-      ]
-    },
-    {
-      "slug": "macintyre-windfarm-pty-ltd-and-arc-energy-macintyre",
-      "name": "Macintyre Windfarm Pty Ltd and Arc Energy Macintyre Pty Ltd",
-      "project_count": 1,
-      "total_capacity_mw": 890.0,
-      "total_storage_mwh": 0,
-      "by_technology": {
-        "wind": 1
-      },
-      "by_status": {
-        "commissioning": 1
-      },
-      "states": [
-        "QLD"
-      ],
-      "avg_confidence": "low",
-      "project_ids": [
-        "macintyre-wind-farm"
       ]
     },
     {
@@ -3331,6 +3331,26 @@
       ]
     },
     {
+      "slug": "golden-plains-wf1-pty-ltd-as-trustee-for-the-golden-plains-wf1-unit-trust",
+      "name": "Golden Plains WF1 Pty Ltd as trustee for the Golden Plains WF1 Unit Trust",
+      "project_count": 1,
+      "total_capacity_mw": 756.0,
+      "total_storage_mwh": 0,
+      "by_technology": {
+        "wind": 1
+      },
+      "by_status": {
+        "commissioning": 1
+      },
+      "states": [
+        "VIC"
+      ],
+      "avg_confidence": "low",
+      "project_ids": [
+        "golden-plains-wind-farm-east"
+      ]
+    },
+    {
       "slug": "ci-qld-phes",
       "name": "CI QLD PHES PTY LTD",
       "project_count": 1,
@@ -3430,26 +3450,6 @@
       "avg_confidence": "low",
       "project_ids": [
         "mt-view-wind-farm-kci"
-      ]
-    },
-    {
-      "slug": "golden-plains-wf1-pty-ltd-as-trustee-for-the-golden-plains-wf1-unit-trust",
-      "name": "Golden Plains WF1 Pty Ltd as trustee for the Golden Plains WF1 Unit Trust",
-      "project_count": 1,
-      "total_capacity_mw": 733.0,
-      "total_storage_mwh": 0,
-      "by_technology": {
-        "wind": 1
-      },
-      "by_status": {
-        "commissioning": 1
-      },
-      "states": [
-        "VIC"
-      ],
-      "avg_confidence": "low",
-      "project_ids": [
-        "golden-plains-wind-farm-east"
       ]
     },
     {
@@ -4362,29 +4362,6 @@
       ]
     },
     {
-      "slug": "storenergy",
-      "name": "Storenergy",
-      "project_count": 2,
-      "total_capacity_mw": 504.4,
-      "total_storage_mwh": 1200.0,
-      "by_technology": {
-        "wind": 1,
-        "bess": 1
-      },
-      "by_status": {
-        "operating": 1,
-        "development": 1
-      },
-      "states": [
-        "VIC"
-      ],
-      "avg_confidence": "medium",
-      "project_ids": [
-        "moorabool-bess",
-        "bulgana-green-power-hub-wind-farm"
-      ]
-    },
-    {
       "slug": "acciona-energy-5",
       "name": "Acciona Energy",
       "project_count": 2,
@@ -4934,6 +4911,29 @@
       "avg_confidence": "low",
       "project_ids": [
         "portland-wind-farm-kci"
+      ]
+    },
+    {
+      "slug": "storenergy",
+      "name": "Storenergy",
+      "project_count": 2,
+      "total_capacity_mw": 494.0,
+      "total_storage_mwh": 1200.0,
+      "by_technology": {
+        "wind": 1,
+        "bess": 1
+      },
+      "by_status": {
+        "operating": 1,
+        "development": 1
+      },
+      "states": [
+        "VIC"
+      ],
+      "avg_confidence": "medium",
+      "project_ids": [
+        "moorabool-bess",
+        "bulgana-green-power-hub-wind-farm"
       ]
     },
     {
@@ -8460,6 +8460,27 @@
       ]
     },
     {
+      "slug": "bwf-nominees-pty-ltd-as-trustee-for-the-bwf-trust",
+      "name": "BWF Nominees Pty Ltd as trustee for the BWF Trust",
+      "project_count": 2,
+      "total_capacity_mw": 243.8,
+      "total_storage_mwh": 0,
+      "by_technology": {
+        "wind": 2
+      },
+      "by_status": {
+        "operating": 2
+      },
+      "states": [
+        "NSW"
+      ],
+      "avg_confidence": "medium",
+      "project_ids": [
+        "bango-973-wind-farm",
+        "bango-999-wind-farm"
+      ]
+    },
+    {
       "slug": "ararat-wind-farm",
       "name": "Ararat Wind Farm Pty Ltd",
       "project_count": 1,
@@ -8557,27 +8578,6 @@
       "avg_confidence": "low",
       "project_ids": [
         "warrenheip-bess"
-      ]
-    },
-    {
-      "slug": "bwf-nominees-pty-ltd-as-trustee-for-the-bwf-trust",
-      "name": "BWF Nominees Pty Ltd as trustee for the BWF Trust",
-      "project_count": 2,
-      "total_capacity_mw": 237.0,
-      "total_storage_mwh": 0,
-      "by_technology": {
-        "wind": 2
-      },
-      "by_status": {
-        "operating": 2
-      },
-      "states": [
-        "NSW"
-      ],
-      "avg_confidence": "medium",
-      "project_ids": [
-        "bango-973-wind-farm",
-        "bango-999-wind-farm"
       ]
     },
     {
@@ -8862,6 +8862,26 @@
       ]
     },
     {
+      "slug": "ryan-corner-development",
+      "name": "Ryan Corner Development Pty Ltd",
+      "project_count": 1,
+      "total_capacity_mw": 218.0,
+      "total_storage_mwh": 0,
+      "by_technology": {
+        "wind": 1
+      },
+      "by_status": {
+        "operating": 1
+      },
+      "states": [
+        "VIC"
+      ],
+      "avg_confidence": "medium",
+      "project_ids": [
+        "ryan-corner-wind-farm"
+      ]
+    },
+    {
       "slug": "vestas-nr",
       "name": "vestas_NR",
       "project_count": 1,
@@ -8945,7 +8965,7 @@
       "slug": "lincoln-gap-wind-farm",
       "name": "Lincoln Gap Wind Farm Pty Ltd",
       "project_count": 2,
-      "total_capacity_mw": 211.0,
+      "total_capacity_mw": 212.0,
       "total_storage_mwh": 0,
       "by_technology": {
         "wind": 2
@@ -8983,6 +9003,46 @@
       ]
     },
     {
+      "slug": "goyder-wind-farm-1a-pty-ltd-as-trustee-for-goyder-wind-farm-1a-trust",
+      "name": "Goyder Wind Farm 1A Pty Ltd as trustee for Goyder Wind Farm 1A Trust",
+      "project_count": 1,
+      "total_capacity_mw": 209.0,
+      "total_storage_mwh": 0,
+      "by_technology": {
+        "wind": 1
+      },
+      "by_status": {
+        "operating": 1
+      },
+      "states": [
+        "SA"
+      ],
+      "avg_confidence": "medium",
+      "project_ids": [
+        "goyder-south-wind-farm-1a"
+      ]
+    },
+    {
+      "slug": "murra-warra-ii-project-co-pty-ltd-as-trustee-for-the-murra-warra-ii-project-trust",
+      "name": "Murra Warra II Project Co Pty Ltd as Trustee for the Murra Warra II Project Trust",
+      "project_count": 1,
+      "total_capacity_mw": 209.0,
+      "total_storage_mwh": 0,
+      "by_technology": {
+        "wind": 1
+      },
+      "by_status": {
+        "operating": 1
+      },
+      "states": [
+        "VIC"
+      ],
+      "avg_confidence": "medium",
+      "project_ids": [
+        "murra-warra-wind-farm-stage-2"
+      ]
+    },
+    {
       "slug": "risen-energy-australia",
       "name": "Risen Energy Australia",
       "project_count": 1,
@@ -9003,26 +9063,6 @@
       ]
     },
     {
-      "slug": "ryan-corner-development",
-      "name": "Ryan Corner Development Pty Ltd",
-      "project_count": 1,
-      "total_capacity_mw": 205.0,
-      "total_storage_mwh": 0,
-      "by_technology": {
-        "wind": 1
-      },
-      "by_status": {
-        "operating": 1
-      },
-      "states": [
-        "VIC"
-      ],
-      "avg_confidence": "medium",
-      "project_ids": [
-        "ryan-corner-wind-farm"
-      ]
-    },
-    {
       "slug": "goyder-wind-farm-1b-pty-ltd-as-trustee-for-goyder-wind-farm-1b-trust",
       "name": "Goyder Wind Farm 1B Pty Ltd as trustee for Goyder Wind Farm 1B Trust",
       "project_count": 1,
@@ -9040,46 +9080,6 @@
       "avg_confidence": "medium",
       "project_ids": [
         "goyder-south-wind-farm-1b"
-      ]
-    },
-    {
-      "slug": "murra-warra-ii-project-co-pty-ltd-as-trustee-for-the-murra-warra-ii-project-trust",
-      "name": "Murra Warra II Project Co Pty Ltd as Trustee for the Murra Warra II Project Trust",
-      "project_count": 1,
-      "total_capacity_mw": 203.5,
-      "total_storage_mwh": 0,
-      "by_technology": {
-        "wind": 1
-      },
-      "by_status": {
-        "operating": 1
-      },
-      "states": [
-        "VIC"
-      ],
-      "avg_confidence": "medium",
-      "project_ids": [
-        "murra-warra-wind-farm-stage-2"
-      ]
-    },
-    {
-      "slug": "goyder-wind-farm-1a-pty-ltd-as-trustee-for-goyder-wind-farm-1a-trust",
-      "name": "Goyder Wind Farm 1A Pty Ltd as trustee for Goyder Wind Farm 1A Trust",
-      "project_count": 1,
-      "total_capacity_mw": 201.0,
-      "total_storage_mwh": 0,
-      "by_technology": {
-        "wind": 1
-      },
-      "by_status": {
-        "operating": 1
-      },
-      "states": [
-        "SA"
-      ],
-      "avg_confidence": "medium",
-      "project_ids": [
-        "goyder-south-wind-farm-1a"
       ]
     },
     {
@@ -9863,6 +9863,26 @@
       ]
     },
     {
+      "slug": "dulacca-energy-project-co",
+      "name": "Dulacca Energy Project Co Pty Ltd",
+      "project_count": 1,
+      "total_capacity_mw": 180.6,
+      "total_storage_mwh": 0,
+      "by_technology": {
+        "wind": 1
+      },
+      "by_status": {
+        "operating": 1
+      },
+      "states": [
+        "QLD"
+      ],
+      "avg_confidence": "medium",
+      "project_ids": [
+        "dulacca-wind-farm"
+      ]
+    },
+    {
       "slug": "edenvale-solar-park",
       "name": "Edenvale Solar Park Pty Ltd",
       "project_count": 1,
@@ -9943,6 +9963,26 @@
       ]
     },
     {
+      "slug": "cecep-wind-power-australia",
+      "name": "CECEP Wind Power Australia Pty Ltd",
+      "project_count": 1,
+      "total_capacity_mw": 175.0,
+      "total_storage_mwh": 0,
+      "by_technology": {
+        "wind": 1
+      },
+      "by_status": {
+        "operating": 1
+      },
+      "states": [
+        "NSW"
+      ],
+      "avg_confidence": "medium",
+      "project_ids": [
+        "white-rock-wind-farm-stage-1"
+      ]
+    },
+    {
       "slug": "delburn-wind-farm",
       "name": "Delburn Wind Farm Pty Ltd",
       "project_count": 1,
@@ -9960,46 +10000,6 @@
       "avg_confidence": "low",
       "project_ids": [
         "delburn-wind-farm"
-      ]
-    },
-    {
-      "slug": "dulacca-energy-project-co",
-      "name": "Dulacca Energy Project Co Pty Ltd",
-      "project_count": 1,
-      "total_capacity_mw": 173.0,
-      "total_storage_mwh": 0,
-      "by_technology": {
-        "wind": 1
-      },
-      "by_status": {
-        "operating": 1
-      },
-      "states": [
-        "QLD"
-      ],
-      "avg_confidence": "medium",
-      "project_ids": [
-        "dulacca-wind-farm"
-      ]
-    },
-    {
-      "slug": "cecep-wind-power-australia",
-      "name": "CECEP Wind Power Australia Pty Ltd",
-      "project_count": 1,
-      "total_capacity_mw": 172.5,
-      "total_storage_mwh": 0,
-      "by_technology": {
-        "wind": 1
-      },
-      "by_status": {
-        "operating": 1
-      },
-      "states": [
-        "NSW"
-      ],
-      "avg_confidence": "medium",
-      "project_ids": [
-        "white-rock-wind-farm-stage-1"
       ]
     },
     {
@@ -10143,6 +10143,26 @@
       ]
     },
     {
+      "slug": "mortlake-south-wind-farm",
+      "name": "Mortlake South Wind Farm Pty Ltd",
+      "project_count": 1,
+      "total_capacity_mw": 157.5,
+      "total_storage_mwh": 0,
+      "by_technology": {
+        "wind": 1
+      },
+      "by_status": {
+        "operating": 1
+      },
+      "states": [
+        "VIC"
+      ],
+      "avg_confidence": "medium",
+      "project_ids": [
+        "mortlake-south-wind-farm"
+      ]
+    },
+    {
       "slug": "parf-company-6-pty-limited",
       "name": "PARF Company 6 Pty Limited",
       "project_count": 2,
@@ -10161,26 +10181,6 @@
       "project_ids": [
         "nyngan-solar-plant",
         "broken-hill-solar-plant"
-      ]
-    },
-    {
-      "slug": "mortlake-south-wind-farm",
-      "name": "Mortlake South Wind Farm Pty Ltd",
-      "project_count": 1,
-      "total_capacity_mw": 153.0,
-      "total_storage_mwh": 0,
-      "by_technology": {
-        "wind": 1
-      },
-      "by_status": {
-        "operating": 1
-      },
-      "states": [
-        "VIC"
-      ],
-      "avg_confidence": "medium",
-      "project_ids": [
-        "mortlake-south-wind-farm"
       ]
     },
     {
@@ -10544,6 +10544,26 @@
       ]
     },
     {
+      "slug": "flyers-creek-wind-farm",
+      "name": "Flyers Creek Wind Farm Pty Ltd",
+      "project_count": 1,
+      "total_capacity_mw": 145.5,
+      "total_storage_mwh": 0,
+      "by_technology": {
+        "wind": 1
+      },
+      "by_status": {
+        "operating": 1
+      },
+      "states": [
+        "NSW"
+      ],
+      "avg_confidence": "medium",
+      "project_ids": [
+        "flyers-creek-wind-farm"
+      ]
+    },
+    {
       "slug": "eew-eco-energy-world",
       "name": "EEW ECO ENERGY WORLD PTY LTD",
       "project_count": 1,
@@ -10681,26 +10701,6 @@
       "avg_confidence": "medium",
       "project_ids": [
         "capital-wind-farm"
-      ]
-    },
-    {
-      "slug": "flyers-creek-wind-farm",
-      "name": "Flyers Creek Wind Farm Pty Ltd",
-      "project_count": 1,
-      "total_capacity_mw": 140.0,
-      "total_storage_mwh": 0,
-      "by_technology": {
-        "wind": 1
-      },
-      "by_status": {
-        "operating": 1
-      },
-      "states": [
-        "NSW"
-      ],
-      "avg_confidence": "medium",
-      "project_ids": [
-        "flyers-creek-wind-farm"
       ]
     },
     {
@@ -15079,7 +15079,7 @@
         "TagEnergy Australia Pty Ltd"
       ],
       "project_count": 13,
-      "total_capacity_mw": 6473.0,
+      "total_capacity_mw": 6493.0,
       "total_storage_mwh": 11778.3,
       "by_technology": {
         "bess": 7,
@@ -15269,7 +15269,7 @@
         "Tilt Renewables DevCo Pty Ltd as the trustee for Development Hold Trust"
       ],
       "project_count": 12,
-      "total_capacity_mw": 5264.0,
+      "total_capacity_mw": 5276.0,
       "total_storage_mwh": 1300.0,
       "by_technology": {
         "wind": 7,
@@ -15311,7 +15311,7 @@
         "Squadron Energy Services Pty Ltd"
       ],
       "project_count": 9,
-      "total_capacity_mw": 5239.0,
+      "total_capacity_mw": 5250.0,
       "total_storage_mwh": 400.0,
       "by_technology": {
         "wind": 8,
@@ -16528,6 +16528,37 @@
       ]
     },
     {
+      "slug": "goldwind",
+      "name": "Goldwind",
+      "aliases": [
+        "Goldwind Australia",
+        "goldwindaustralia_NR"
+      ],
+      "project_count": 4,
+      "total_capacity_mw": 1911.0,
+      "total_storage_mwh": 500.0,
+      "by_technology": {
+        "wind": 3,
+        "bess": 1
+      },
+      "by_status": {
+        "development": 3,
+        "operating": 1
+      },
+      "states": [
+        "NSW",
+        "TAS",
+        "VIC"
+      ],
+      "avg_confidence": "low",
+      "project_ids": [
+        "stockyard-hill-wind-farm",
+        "gullen-range-battery-energy-system",
+        "bashan-1-wind-farm",
+        "hollow-tree-wind-farm"
+      ]
+    },
+    {
       "slug": "elgin-energy",
       "name": "Elgin Energy",
       "aliases": [
@@ -16609,37 +16640,6 @@
         "regentville-bess"
       ],
       "aliases": []
-    },
-    {
-      "slug": "goldwind",
-      "name": "Goldwind",
-      "aliases": [
-        "Goldwind Australia",
-        "goldwindaustralia_NR"
-      ],
-      "project_count": 4,
-      "total_capacity_mw": 1892.0,
-      "total_storage_mwh": 500.0,
-      "by_technology": {
-        "wind": 3,
-        "bess": 1
-      },
-      "by_status": {
-        "development": 3,
-        "operating": 1
-      },
-      "states": [
-        "NSW",
-        "TAS",
-        "VIC"
-      ],
-      "avg_confidence": "low",
-      "project_ids": [
-        "stockyard-hill-wind-farm",
-        "gullen-range-battery-energy-system",
-        "bashan-1-wind-farm",
-        "hollow-tree-wind-farm"
-      ]
     },
     {
       "slug": "released-energy",
@@ -16814,7 +16814,7 @@
         "Ratch-Australia Corporation"
       ],
       "project_count": 8,
-      "total_capacity_mw": 1653.5,
+      "total_capacity_mw": 1655.8,
       "total_storage_mwh": 1000.0,
       "by_technology": {
         "wind": 4,
@@ -17756,6 +17756,27 @@
       ]
     },
     {
+      "slug": "macintyre-windfarm-pty-ltd-and-arc-energy-macintyre",
+      "name": "Macintyre Windfarm Pty Ltd and Arc Energy Macintyre Pty Ltd",
+      "project_count": 1,
+      "total_capacity_mw": 923.0,
+      "total_storage_mwh": 0,
+      "by_technology": {
+        "wind": 1
+      },
+      "by_status": {
+        "commissioning": 1
+      },
+      "states": [
+        "QLD"
+      ],
+      "avg_confidence": "low",
+      "project_ids": [
+        "macintyre-wind-farm"
+      ],
+      "aliases": []
+    },
+    {
       "slug": "western-downs-green-power-hub",
       "name": "Western Downs Green Power Hub Pty Ltd",
       "aliases": [
@@ -17850,27 +17871,6 @@
       "avg_confidence": "low",
       "project_ids": [
         "oven-mountain-pumped-storage"
-      ],
-      "aliases": []
-    },
-    {
-      "slug": "macintyre-windfarm-pty-ltd-and-arc-energy-macintyre",
-      "name": "Macintyre Windfarm Pty Ltd and Arc Energy Macintyre Pty Ltd",
-      "project_count": 1,
-      "total_capacity_mw": 890.0,
-      "total_storage_mwh": 0,
-      "by_technology": {
-        "wind": 1
-      },
-      "by_status": {
-        "commissioning": 1
-      },
-      "states": [
-        "QLD"
-      ],
-      "avg_confidence": "low",
-      "project_ids": [
-        "macintyre-wind-farm"
       ],
       "aliases": []
     },
@@ -18331,6 +18331,27 @@
       ]
     },
     {
+      "slug": "golden-plains-wf1-pty-ltd-as-trustee-for-the-golden-plains-wf1-unit-trust",
+      "name": "Golden Plains WF1 Pty Ltd as trustee for the Golden Plains WF1 Unit Trust",
+      "project_count": 1,
+      "total_capacity_mw": 756.0,
+      "total_storage_mwh": 0,
+      "by_technology": {
+        "wind": 1
+      },
+      "by_status": {
+        "commissioning": 1
+      },
+      "states": [
+        "VIC"
+      ],
+      "avg_confidence": "low",
+      "project_ids": [
+        "golden-plains-wind-farm-east"
+      ],
+      "aliases": []
+    },
+    {
       "slug": "ci-qld-phes",
       "name": "CI QLD PHES PTY LTD",
       "project_count": 1,
@@ -18390,27 +18411,6 @@
       "avg_confidence": "low",
       "project_ids": [
         "mt-view-wind-farm-kci"
-      ],
-      "aliases": []
-    },
-    {
-      "slug": "golden-plains-wf1-pty-ltd-as-trustee-for-the-golden-plains-wf1-unit-trust",
-      "name": "Golden Plains WF1 Pty Ltd as trustee for the Golden Plains WF1 Unit Trust",
-      "project_count": 1,
-      "total_capacity_mw": 733.0,
-      "total_storage_mwh": 0,
-      "by_technology": {
-        "wind": 1
-      },
-      "by_status": {
-        "commissioning": 1
-      },
-      "states": [
-        "VIC"
-      ],
-      "avg_confidence": "low",
-      "project_ids": [
-        "golden-plains-wind-farm-east"
       ],
       "aliases": []
     },
@@ -19224,30 +19224,6 @@
       ]
     },
     {
-      "slug": "storenergy",
-      "name": "Storenergy",
-      "project_count": 2,
-      "total_capacity_mw": 504.4,
-      "total_storage_mwh": 1200.0,
-      "by_technology": {
-        "wind": 1,
-        "bess": 1
-      },
-      "by_status": {
-        "operating": 1,
-        "development": 1
-      },
-      "states": [
-        "VIC"
-      ],
-      "avg_confidence": "medium",
-      "project_ids": [
-        "moorabool-bess",
-        "bulgana-green-power-hub-wind-farm"
-      ],
-      "aliases": []
-    },
-    {
       "slug": "mint-renewables",
       "name": "Mint Renewables",
       "aliases": [
@@ -19636,6 +19612,30 @@
       "aliases": []
     },
     {
+      "slug": "storenergy",
+      "name": "Storenergy",
+      "project_count": 2,
+      "total_capacity_mw": 494.0,
+      "total_storage_mwh": 1200.0,
+      "by_technology": {
+        "wind": 1,
+        "bess": 1
+      },
+      "by_status": {
+        "operating": 1,
+        "development": 1
+      },
+      "states": [
+        "VIC"
+      ],
+      "avg_confidence": "medium",
+      "project_ids": [
+        "moorabool-bess",
+        "bulgana-green-power-hub-wind-farm"
+      ],
+      "aliases": []
+    },
+    {
       "slug": "greenpulse-solar-farm-and-bess-as-trustee-for-greenpulse-solar-farm-bess-unit-trust",
       "name": "Greenpulse solar farm and BESS as trustee for Greenpulse Solar Farm & Bess Unit Trust",
       "project_count": 2,
@@ -19666,7 +19666,7 @@
         "Lincoln Gap Wind Farm Pty Ltd"
       ],
       "project_count": 3,
-      "total_capacity_mw": 489.0,
+      "total_capacity_mw": 490.0,
       "total_storage_mwh": 0,
       "by_technology": {
         "wind": 3
@@ -20011,7 +20011,7 @@
         "Murra Warra Project Co Pty Ltd"
       ],
       "project_count": 2,
-      "total_capacity_mw": 429.2,
+      "total_capacity_mw": 434.7,
       "total_storage_mwh": 0,
       "by_technology": {
         "wind": 2
@@ -20113,6 +20113,31 @@
       "aliases": []
     },
     {
+      "slug": "goyder-wind-farm-1a-pty-ltd-as-trustee-for-goyder-wind-farm-1a-trust",
+      "name": "Goyder Wind Farm 1A Pty Ltd as trustee for Goyder Wind Farm 1A Trust",
+      "aliases": [
+        "Goyder Wind Farm 1A Pty Ltd as trustee for Goyder Wind Farm 1A Trust",
+        "Goyder Wind Farm 1B Pty Ltd as trustee for Goyder Wind Farm 1B Trust"
+      ],
+      "project_count": 2,
+      "total_capacity_mw": 412.5,
+      "total_storage_mwh": 0,
+      "by_technology": {
+        "wind": 2
+      },
+      "by_status": {
+        "operating": 2
+      },
+      "states": [
+        "SA"
+      ],
+      "avg_confidence": "medium",
+      "project_ids": [
+        "goyder-south-wind-farm-1a",
+        "goyder-south-wind-farm-1b"
+      ]
+    },
+    {
       "slug": "wurdong-projectco",
       "name": "Wurdong ProjectCo Pty Ltd",
       "project_count": 1,
@@ -20132,31 +20157,6 @@
         "wurdong-bess"
       ],
       "aliases": []
-    },
-    {
-      "slug": "goyder-wind-farm-1a-pty-ltd-as-trustee-for-goyder-wind-farm-1a-trust",
-      "name": "Goyder Wind Farm 1A Pty Ltd as trustee for Goyder Wind Farm 1A Trust",
-      "aliases": [
-        "Goyder Wind Farm 1A Pty Ltd as trustee for Goyder Wind Farm 1A Trust",
-        "Goyder Wind Farm 1B Pty Ltd as trustee for Goyder Wind Farm 1B Trust"
-      ],
-      "project_count": 2,
-      "total_capacity_mw": 404.5,
-      "total_storage_mwh": 0,
-      "by_technology": {
-        "wind": 2
-      },
-      "by_status": {
-        "operating": 2
-      },
-      "states": [
-        "SA"
-      ],
-      "avg_confidence": "medium",
-      "project_ids": [
-        "goyder-south-wind-farm-1b",
-        "goyder-south-wind-farm-1a"
-      ]
     },
     {
       "slug": "mallee-wind",
@@ -22100,6 +22100,28 @@
       "aliases": []
     },
     {
+      "slug": "bwf-nominees-pty-ltd-as-trustee-for-the-bwf-trust",
+      "name": "BWF Nominees Pty Ltd as trustee for the BWF Trust",
+      "project_count": 2,
+      "total_capacity_mw": 243.8,
+      "total_storage_mwh": 0,
+      "by_technology": {
+        "wind": 2
+      },
+      "by_status": {
+        "operating": 2
+      },
+      "states": [
+        "NSW"
+      ],
+      "avg_confidence": "medium",
+      "project_ids": [
+        "bango-973-wind-farm",
+        "bango-999-wind-farm"
+      ],
+      "aliases": []
+    },
+    {
       "slug": "ee-solar-9-pty-ltd-as-trustee-for-the-ee-solar-9-trust",
       "name": "EE Solar 9 Pty Ltd as trustee for the EE Solar 9 Trust",
       "aliases": [
@@ -22188,28 +22210,6 @@
       "avg_confidence": "low",
       "project_ids": [
         "theodore-bess"
-      ],
-      "aliases": []
-    },
-    {
-      "slug": "bwf-nominees-pty-ltd-as-trustee-for-the-bwf-trust",
-      "name": "BWF Nominees Pty Ltd as trustee for the BWF Trust",
-      "project_count": 2,
-      "total_capacity_mw": 237.0,
-      "total_storage_mwh": 0,
-      "by_technology": {
-        "wind": 2
-      },
-      "by_status": {
-        "operating": 2
-      },
-      "states": [
-        "NSW"
-      ],
-      "avg_confidence": "medium",
-      "project_ids": [
-        "bango-973-wind-farm",
-        "bango-999-wind-farm"
       ],
       "aliases": []
     },
@@ -22409,6 +22409,27 @@
       "aliases": []
     },
     {
+      "slug": "ryan-corner-development",
+      "name": "Ryan Corner Development Pty Ltd",
+      "project_count": 1,
+      "total_capacity_mw": 218.0,
+      "total_storage_mwh": 0,
+      "by_technology": {
+        "wind": 1
+      },
+      "by_status": {
+        "operating": 1
+      },
+      "states": [
+        "VIC"
+      ],
+      "avg_confidence": "medium",
+      "project_ids": [
+        "ryan-corner-wind-farm"
+      ],
+      "aliases": []
+    },
+    {
       "slug": "vestas",
       "name": "Vestas",
       "aliases": [
@@ -22512,27 +22533,6 @@
       "avg_confidence": "low",
       "project_ids": [
         "nottingham-park-solar-farm-kci"
-      ],
-      "aliases": []
-    },
-    {
-      "slug": "ryan-corner-development",
-      "name": "Ryan Corner Development Pty Ltd",
-      "project_count": 1,
-      "total_capacity_mw": 205.0,
-      "total_storage_mwh": 0,
-      "by_technology": {
-        "wind": 1
-      },
-      "by_status": {
-        "operating": 1
-      },
-      "states": [
-        "VIC"
-      ],
-      "avg_confidence": "medium",
-      "project_ids": [
-        "ryan-corner-wind-farm"
       ],
       "aliases": []
     },
@@ -23066,6 +23066,27 @@
       "aliases": []
     },
     {
+      "slug": "dulacca-energy-project-co",
+      "name": "Dulacca Energy Project Co Pty Ltd",
+      "project_count": 1,
+      "total_capacity_mw": 180.6,
+      "total_storage_mwh": 0,
+      "by_technology": {
+        "wind": 1
+      },
+      "by_status": {
+        "operating": 1
+      },
+      "states": [
+        "QLD"
+      ],
+      "avg_confidence": "medium",
+      "project_ids": [
+        "dulacca-wind-farm"
+      ],
+      "aliases": []
+    },
+    {
       "slug": "edenvale-solar-park",
       "name": "Edenvale Solar Park Pty Ltd",
       "project_count": 1,
@@ -23150,6 +23171,27 @@
       "aliases": []
     },
     {
+      "slug": "cecep-wind-power-australia",
+      "name": "CECEP Wind Power Australia Pty Ltd",
+      "project_count": 1,
+      "total_capacity_mw": 175.0,
+      "total_storage_mwh": 0,
+      "by_technology": {
+        "wind": 1
+      },
+      "by_status": {
+        "operating": 1
+      },
+      "states": [
+        "NSW"
+      ],
+      "avg_confidence": "medium",
+      "project_ids": [
+        "white-rock-wind-farm-stage-1"
+      ],
+      "aliases": []
+    },
+    {
       "slug": "delburn-wind-farm",
       "name": "Delburn Wind Farm Pty Ltd",
       "project_count": 1,
@@ -23167,48 +23209,6 @@
       "avg_confidence": "low",
       "project_ids": [
         "delburn-wind-farm"
-      ],
-      "aliases": []
-    },
-    {
-      "slug": "dulacca-energy-project-co",
-      "name": "Dulacca Energy Project Co Pty Ltd",
-      "project_count": 1,
-      "total_capacity_mw": 173.0,
-      "total_storage_mwh": 0,
-      "by_technology": {
-        "wind": 1
-      },
-      "by_status": {
-        "operating": 1
-      },
-      "states": [
-        "QLD"
-      ],
-      "avg_confidence": "medium",
-      "project_ids": [
-        "dulacca-wind-farm"
-      ],
-      "aliases": []
-    },
-    {
-      "slug": "cecep-wind-power-australia",
-      "name": "CECEP Wind Power Australia Pty Ltd",
-      "project_count": 1,
-      "total_capacity_mw": 172.5,
-      "total_storage_mwh": 0,
-      "by_technology": {
-        "wind": 1
-      },
-      "by_status": {
-        "operating": 1
-      },
-      "states": [
-        "NSW"
-      ],
-      "avg_confidence": "medium",
-      "project_ids": [
-        "white-rock-wind-farm-stage-1"
       ],
       "aliases": []
     },
@@ -23367,7 +23367,7 @@
       "slug": "mortlake-south-wind-farm",
       "name": "Mortlake South Wind Farm Pty Ltd",
       "project_count": 1,
-      "total_capacity_mw": 153.0,
+      "total_capacity_mw": 157.5,
       "total_storage_mwh": 0,
       "by_technology": {
         "wind": 1
@@ -23639,6 +23639,27 @@
       "aliases": []
     },
     {
+      "slug": "flyers-creek-wind-farm",
+      "name": "Flyers Creek Wind Farm Pty Ltd",
+      "project_count": 1,
+      "total_capacity_mw": 145.5,
+      "total_storage_mwh": 0,
+      "by_technology": {
+        "wind": 1
+      },
+      "by_status": {
+        "operating": 1
+      },
+      "states": [
+        "NSW"
+      ],
+      "avg_confidence": "medium",
+      "project_ids": [
+        "flyers-creek-wind-farm"
+      ],
+      "aliases": []
+    },
+    {
       "slug": "buckland-renewable-group",
       "name": "Buckland Renewable Group Pty Ltd",
       "project_count": 1,
@@ -23761,27 +23782,6 @@
       "avg_confidence": "medium",
       "project_ids": [
         "capital-wind-farm"
-      ],
-      "aliases": []
-    },
-    {
-      "slug": "flyers-creek-wind-farm",
-      "name": "Flyers Creek Wind Farm Pty Ltd",
-      "project_count": 1,
-      "total_capacity_mw": 140.0,
-      "total_storage_mwh": 0,
-      "by_technology": {
-        "wind": 1
-      },
-      "by_status": {
-        "operating": 1
-      },
-      "states": [
-        "NSW"
-      ],
-      "avg_confidence": "medium",
-      "project_ids": [
-        "flyers-creek-wind-farm"
       ],
       "aliases": []
     },

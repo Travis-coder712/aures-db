@@ -6,6 +6,7 @@
   "capacity_mw": 138.0,
   "state": "NSW",
   "current_developer": "CRWF Nominees Pty Ltd as trustee of the CRWF Trust",
+  "current_operator": "Squadron Energy",
   "cod_current": "2020-12-01",
   "cod_original": "2020-12-01",
   "grid_forming": false,
@@ -14,6 +15,7 @@
   "has_statcom": false,
   "has_harmonic_filter": false,
   "performance_score": 62.5,
+  "notable": "37x Goldwind GW140-3.57S. CWP Renewables/Squadron Energy. COD 2021.",
   "data_confidence": "medium",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
@@ -53,7 +55,14 @@
   ],
   "ownership_history": [],
   "cod_history": [],
-  "suppliers": [],
+  "suppliers": [
+    {
+      "role": "wind_oem",
+      "supplier": "Goldwind",
+      "model": "GW140-3.57S",
+      "grid_forming": false
+    }
+  ],
   "offtakes": [],
   "scheme_contracts": [],
   "cost_sources": [],

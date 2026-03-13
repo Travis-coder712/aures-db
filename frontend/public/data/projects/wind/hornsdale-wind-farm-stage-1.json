@@ -6,6 +6,7 @@
   "capacity_mw": 100.0,
   "state": "SA",
   "current_developer": "HWF 1 Pty Ltd",
+  "current_operator": "Neoen",
   "cod_current": "2016-06-23",
   "cod_original": "2016-06-23",
   "grid_forming": false,
@@ -53,7 +54,14 @@
   ],
   "ownership_history": [],
   "cod_history": [],
-  "suppliers": [],
+  "suppliers": [
+    {
+      "role": "wind_oem",
+      "supplier": "Siemens Gamesa",
+      "model": "SWT-3.2-113",
+      "grid_forming": false
+    }
+  ],
   "offtakes": [
     {
       "party": "ACT Government",

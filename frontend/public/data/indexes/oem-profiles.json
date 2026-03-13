@@ -1,6 +1,135 @@
 {
   "oems": [
     {
+      "slug": "vestas",
+      "name": "Vestas",
+      "project_count": 32,
+      "total_capacity_mw": 8113.4,
+      "total_storage_mwh": 0,
+      "roles": [
+        "wind_oem"
+      ],
+      "models": [
+        "V112-3.0 MW",
+        "V117-3.3 MW",
+        "V117-3.45 MW",
+        "V117-3.6 MW",
+        "V117-4.2 MW",
+        "V126-3.3 MW",
+        "V126-3.45 MW",
+        "V126-3.6 MW",
+        "V136-3.45 MW (3.6MW optimised)",
+        "V136-4.2 MW",
+        "V150-4.2 MW",
+        "V162-6.0 MW EnVentus",
+        "V162-6.2 MW",
+        "V162-6.2 MW EnVentus",
+        "V66-1.75 MW",
+        "V66-1.75 MW / V90-3.0 MW",
+        "V90-3.0 MW"
+      ],
+      "by_technology": {
+        "wind": 32
+      },
+      "by_status": {
+        "construction": 4,
+        "operating": 27,
+        "commissioning": 1
+      },
+      "by_state": {
+        "VIC": 13,
+        "QLD": 5,
+        "NSW": 4,
+        "SA": 6,
+        "TAS": 4
+      },
+      "states": [
+        "NSW",
+        "QLD",
+        "SA",
+        "TAS",
+        "VIC"
+      ],
+      "project_ids": [
+        "berrybank-wind-farm",
+        "bulgana-green-power-hub-wind-farm",
+        "cattle-hill-wind-farm",
+        "cherry-tree-wind-farm",
+        "collector",
+        "dulacca-wind-farm",
+        "dundonnell-wind-farm",
+        "golden-plains-wind",
+        "golden-plains-wind-farm-east",
+        "golden-plains-wind-farm-west",
+        "granville-harbour-wind-farm",
+        "hawkesdale-wind-farm",
+        "kaban-wind-farm",
+        "lake-bonney-1-wind-farm",
+        "lake-bonney-2-wind-farm",
+        "lake-bonney-3-wind-farm",
+        "lincoln-gap-wind-farm-stage-2",
+        "lotus-creek-wind-farm",
+        "macarthur-wind-farm",
+        "mount-emerald",
+        "mt-gellibrand-wind-farm",
+        "musselroe-wind-farm",
+        "port-augusta-renewable-energy-park-wind",
+        "ryan-corner-wind-farm",
+        "rye-park-wind-farm",
+        "salt-creek-wind-farm",
+        "sapphire-wind-farm",
+        "taralga-wind-farm",
+        "wambo-wind-farm",
+        "waterloo-wind-farm",
+        "woolnorth-studland-bay-bluff-point",
+        "yendon-wind-farm"
+      ],
+      "status_detail": {
+        "construction": {
+          "count": 4,
+          "capacity_mw": 2662.0,
+          "storage_mwh": 0
+        },
+        "operating": {
+          "count": 27,
+          "capacity_mw": 4695.4,
+          "storage_mwh": 0
+        },
+        "commissioning": {
+          "count": 1,
+          "capacity_mw": 756.0,
+          "storage_mwh": 0
+        }
+      },
+      "state_detail": {
+        "VIC": {
+          "count": 13,
+          "capacity_mw": 4557.2,
+          "storage_mwh": 0
+        },
+        "QLD": {
+          "count": 5,
+          "capacity_mw": 1298.1,
+          "storage_mwh": 0
+        },
+        "NSW": {
+          "count": 4,
+          "capacity_mw": 991.8,
+          "storage_mwh": 0
+        },
+        "SA": {
+          "count": 6,
+          "capacity_mw": 705.3,
+          "storage_mwh": 0
+        },
+        "TAS": {
+          "count": 4,
+          "capacity_mw": 561.0,
+          "storage_mwh": 0
+        }
+      }
+    },
+    {
       "slug": "tesla",
       "name": "Tesla",
       "project_count": 22,
@@ -103,53 +232,90 @@
       }
     },
     {
-      "slug": "vestas",
-      "name": "Vestas",
-      "project_count": 4,
-      "total_capacity_mw": 2642.0,
-      "total_storage_mwh": 0,
+      "slug": "ge-vernova",
+      "name": "GE Vernova",
+      "project_count": 12,
+      "total_capacity_mw": 3112.8,
+      "total_storage_mwh": 1238.0,
       "roles": [
+        "inverter",
         "wind_oem"
       ],
       "models": [
-        "V162-6.2 MW"
+        "6 MW-164m Cypress",
+        "6.0-164 Cypress",
+        "6.1 MW-158m",
+        "Cypress 5.3-158",
+        "Cypress 5.5-158",
+        "GE 2.5-120",
+        "GE 3.6-137 / GE 3.8-130",
+        "GE 3.8-137"
       ],
       "by_technology": {
-        "wind": 4
+        "wind": 11,
+        "bess": 1
       },
       "by_status": {
-        "construction": 4
+        "construction": 4,
+        "operating": 8
       },
       "by_state": {
-        "VIC": 2,
-        "QLD": 2
+        "NSW": 4,
+        "SA": 3,
+        "QLD": 3,
+        "VIC": 2
       },
       "states": [
+        "NSW",
         "QLD",
+        "SA",
         "VIC"
       ],
       "project_ids": [
-        "golden-plains-wind",
-        "golden-plains-wind-farm-west",
-        "lotus-creek-wind-farm",
-        "wambo-wind-farm"
+        "ararat-wind-farm",
+        "bango-973-wind-farm",
+        "bango-999-wind-farm",
+        "boulder-creek-wind-farm",
+        "carmodys-hill-wind-farm",
+        "coopers-gap-wind-farm",
+        "flyers-creek-wind-farm",
+        "goyder-south-wind-farm-1a",
+        "goyder-south-wind-farm-1b",
+        "murra-warra-wind-farm-stage-2",
+        "supernode-bess",
+        "uungula-wind-farm"
       ],
       "status_detail": {
         "construction": {
           "count": 4,
-          "capacity_mw": 2642.0,
+          "capacity_mw": 1409.0,
+          "storage_mwh": 1238.0
+        },
+        "operating": {
+          "count": 8,
+          "capacity_mw": 1703.8,
           "storage_mwh": 0
         }
       },
       "state_detail": {
-        "VIC": {
-          "count": 2,
-          "capacity_mw": 1857.0,
+        "NSW": {
+          "count": 4,
+          "capacity_mw": 803.3,
+          "storage_mwh": 0
+        },
+        "SA": {
+          "count": 3,
+          "capacity_mw": 659.5,
           "storage_mwh": 0
         },
         "QLD": {
+          "count": 3,
+          "capacity_mw": 1201.0,
+          "storage_mwh": 1238.0
+        },
+        "VIC": {
           "count": 2,
-          "capacity_mw": 785.0,
+          "capacity_mw": 449.0,
           "storage_mwh": 0
         }
       }
@@ -263,6 +429,83 @@
       }
     },
     {
+      "slug": "goldwind",
+      "name": "Goldwind",
+      "project_count": 10,
+      "total_capacity_mw": 2189.5,
+      "total_storage_mwh": 0,
+      "roles": [
+        "wind_oem"
+      ],
+      "models": [
+        "GW100/2500",
+        "GW100/2500 + GW82/1500",
+        "GW121/2500",
+        "GW121/2500 PMDD",
+        "GW136/3000",
+        "GW140-3.57S",
+        "~4.5 MW"
+      ],
+      "by_technology": {
+        "wind": 10
+      },
+      "by_status": {
+        "operating": 9,
+        "commissioning": 1
+      },
+      "by_state": {
+        "VIC": 2,
+        "NSW": 7,
+        "QLD": 1
+      },
+      "states": [
+        "NSW",
+        "QLD",
+        "VIC"
+      ],
+      "project_ids": [
+        "boco-rock-wind-farm",
+        "bodangora-wind-farm",
+        "clarke-creek-wind-farm",
+        "crookwell-2-wind-farm",
+        "crudine-ridge-wind-farm",
+        "gullen-range-wind-farm",
+        "gullen-range-wind-farm-2",
+        "moorabool-wind-farm",
+        "stockyard-hill-wind-farm",
+        "white-rock-wind-farm-stage-1"
+      ],
+      "status_detail": {
+        "operating": {
+          "count": 9,
+          "capacity_mw": 1739.5,
+          "storage_mwh": 0
+        },
+        "commissioning": {
+          "count": 1,
+          "capacity_mw": 450.0,
+          "storage_mwh": 0
+        }
+      },
+      "state_detail": {
+        "VIC": {
+          "count": 2,
+          "capacity_mw": 835.0,
+          "storage_mwh": 0
+        },
+        "NSW": {
+          "count": 7,
+          "capacity_mw": 904.5,
+          "storage_mwh": 0
+        },
+        "QLD": {
+          "count": 1,
+          "capacity_mw": 450.0,
+          "storage_mwh": 0
+        }
+      }
+    },
+    {
       "slug": "wartsila",
       "name": "Wartsila",
       "project_count": 5,
@@ -329,69 +572,6 @@
           "count": 1,
           "capacity_mw": 250.0,
           "storage_mwh": 249.6
-        }
-      }
-    },
-    {
-      "slug": "ge-vernova",
-      "name": "GE Vernova",
-      "project_count": 4,
-      "total_capacity_mw": 1409.0,
-      "total_storage_mwh": 1238.0,
-      "roles": [
-        "inverter",
-        "wind_oem"
-      ],
-      "models": [
-        "6 MW-164m Cypress",
-        "6.0-164 Cypress",
-        "6.1 MW-158m"
-      ],
-      "by_technology": {
-        "wind": 3,
-        "bess": 1
-      },
-      "by_status": {
-        "construction": 4
-      },
-      "by_state": {
-        "NSW": 1,
-        "SA": 1,
-        "QLD": 2
-      },
-      "states": [
-        "NSW",
-        "QLD",
-        "SA"
-      ],
-      "project_ids": [
-        "boulder-creek-wind-farm",
-        "carmodys-hill-wind-farm",
-        "supernode-bess",
-        "uungula-wind-farm"
-      ],
-      "status_detail": {
-        "construction": {
-          "count": 4,
-          "capacity_mw": 1409.0,
-          "storage_mwh": 1238.0
-        }
-      },
-      "state_detail": {
-        "NSW": {
-          "count": 1,
-          "capacity_mw": 414.0,
-          "storage_mwh": 0
-        },
-        "SA": {
-          "count": 1,
-          "capacity_mw": 247.0,
-          "storage_mwh": 0
-        },
-        "QLD": {
-          "count": 2,
-          "capacity_mw": 748.0,
-          "storage_mwh": 1238.0
         }
       }
     },
@@ -470,6 +650,63 @@
       }
     },
     {
+      "slug": "nordex",
+      "name": "Nordex",
+      "project_count": 2,
+      "total_capacity_mw": 1080.5,
+      "total_storage_mwh": 0,
+      "roles": [
+        "wind_oem"
+      ],
+      "models": [
+        "N149/5.X",
+        "N163/5.7 MW Delta4000"
+      ],
+      "by_technology": {
+        "wind": 2
+      },
+      "by_status": {
+        "operating": 1,
+        "commissioning": 1
+      },
+      "by_state": {
+        "VIC": 1,
+        "QLD": 1
+      },
+      "states": [
+        "QLD",
+        "VIC"
+      ],
+      "project_ids": [
+        "macintyre-wind-farm",
+        "mortlake-south-wind-farm"
+      ],
+      "status_detail": {
+        "operating": {
+          "count": 1,
+          "capacity_mw": 157.5,
+          "storage_mwh": 0
+        },
+        "commissioning": {
+          "count": 1,
+          "capacity_mw": 923.0,
+          "storage_mwh": 0
+        }
+      },
+      "state_detail": {
+        "VIC": {
+          "count": 1,
+          "capacity_mw": 157.5,
+          "storage_mwh": 0
+        },
+        "QLD": {
+          "count": 1,
+          "capacity_mw": 923.0,
+          "storage_mwh": 0
+        }
+      }
+    },
+    {
       "slug": "powin",
       "name": "Powin",
       "project_count": 2,
@@ -521,6 +758,55 @@
       }
     },
     {
+      "slug": "siemens-gamesa",
+      "name": "Siemens Gamesa",
+      "project_count": 5,
+      "total_capacity_mw": 968.8,
+      "total_storage_mwh": 0,
+      "roles": [
+        "wind_oem"
+      ],
+      "models": [
+        "SWT-3.0-113",
+        "SWT-3.2-113",
+        "SWT-3.4-108",
+        "SWT-DD-130 3.6MW"
+      ],
+      "by_technology": {
+        "wind": 6
+      },
+      "by_status": {
+        "operating": 6
+      },
+      "by_state": {
+        "SA": 6
+      },
+      "states": [
+        "SA"
+      ],
+      "project_ids": [
+        "hornsdale-wind-farm-stage-1",
+        "hornsdale-wind-farm-stage-2",
+        "hornsdale-wind-farm-stage-3",
+        "snowtown-s2-wind-farm",
+        "willogoleche-wind-farm"
+      ],
+      "status_detail": {
+        "operating": {
+          "count": 6,
+          "capacity_mw": 968.8,
+          "storage_mwh": 0
+        }
+      },
+      "state_detail": {
+        "SA": {
+          "count": 6,
+          "capacity_mw": 968.8,
+          "storage_mwh": 0
+        }
+      }
+    },
+    {
       "slug": "eks-energy-hitachi",
       "name": "EKS Energy (Hitachi)",
       "project_count": 1,
@@ -559,6 +845,124 @@
           "count": 1,
           "capacity_mw": 850.0,
           "storage_mwh": 1680.0
+        }
+      }
+    },
+    {
+      "slug": "senvion",
+      "name": "Senvion",
+      "project_count": 5,
+      "total_capacity_mw": 740.6,
+      "total_storage_mwh": 0,
+      "roles": [
+        "wind_oem"
+      ],
+      "models": [
+        "3.6M140 EBC",
+        "3.7M class",
+        "REpower MM82/MM92 2.05 MW",
+        "REpower MM92 2.05 MW"
+      ],
+      "by_technology": {
+        "wind": 5
+      },
+      "by_status": {
+        "operating": 5
+      },
+      "by_state": {
+        "VIC": 4,
+        "SA": 1
+      },
+      "states": [
+        "SA",
+        "VIC"
+      ],
+      "project_ids": [
+        "bald-hills-wind-farm",
+        "lincoln-gap-wind-farm-stage-1",
+        "mt-mercer-wind-farm",
+        "murra-warra-wind-farm-stage-1",
+        "portland-wind-farm"
+      ],
+      "status_detail": {
+        "operating": {
+          "count": 5,
+          "capacity_mw": 740.6,
+          "storage_mwh": 0
+        }
+      },
+      "state_detail": {
+        "VIC": {
+          "count": 4,
+          "capacity_mw": 614.6,
+          "storage_mwh": 0
+        },
+        "SA": {
+          "count": 1,
+          "capacity_mw": 126.0,
+          "storage_mwh": 0
+        }
+      }
+    },
+    {
+      "slug": "suzlon",
+      "name": "Suzlon",
+      "project_count": 7,
+      "total_capacity_mw": 696.7,
+      "total_storage_mwh": 0,
+      "roles": [
+        "wind_oem"
+      ],
+      "models": [
+        "S88-2.1 MW"
+      ],
+      "by_technology": {
+        "wind": 7
+      },
+      "by_status": {
+        "operating": 7
+      },
+      "by_state": {
+        "SA": 5,
+        "NSW": 1,
+        "VIC": 1
+      },
+      "states": [
+        "NSW",
+        "SA",
+        "VIC"
+      ],
+      "project_ids": [
+        "capital-wind-farm",
+        "hallett-4-north-brown-hill",
+        "hallett-5-the-bluff-wf",
+        "hallett-stage-1-brown-hill",
+        "hallett-stage-2-hallett-hill",
+        "oaklands-hill-wind-farm",
+        "snowtown-wind-farm"
+      ],
+      "status_detail": {
+        "operating": {
+          "count": 7,
+          "capacity_mw": 696.7,
+          "storage_mwh": 0
+        }
+      },
+      "state_detail": {
+        "SA": {
+          "count": 5,
+          "capacity_mw": 488.0,
+          "storage_mwh": 0
+        },
+        "NSW": {
+          "count": 1,
+          "capacity_mw": 140.7,
+          "storage_mwh": 0
+        },
+        "VIC": {
+          "count": 1,
+          "capacity_mw": 68.0,
+          "storage_mwh": 0
         }
       }
     },
@@ -1058,6 +1462,90 @@
       }
     },
     {
+      "slug": "siemens",
+      "name": "Siemens",
+      "project_count": 1,
+      "total_capacity_mw": 200.0,
+      "total_storage_mwh": 0,
+      "roles": [
+        "wind_oem"
+      ],
+      "models": [
+        "SWT-3.4-108"
+      ],
+      "by_technology": {
+        "wind": 1
+      },
+      "by_status": {
+        "operating": 1
+      },
+      "by_state": {
+        "NSW": 1
+      },
+      "states": [
+        "NSW"
+      ],
+      "project_ids": [
+        "silverton-wind-farm"
+      ],
+      "status_detail": {
+        "operating": {
+          "count": 1,
+          "capacity_mw": 200.0,
+          "storage_mwh": 0
+        }
+      },
+      "state_detail": {
+        "NSW": {
+          "count": 1,
+          "capacity_mw": 200.0,
+          "storage_mwh": 0
+        }
+      }
+    },
+    {
+      "slug": "acciona-windpower",
+      "name": "Acciona Windpower",
+      "project_count": 1,
+      "total_capacity_mw": 192.0,
+      "total_storage_mwh": 0,
+      "roles": [
+        "wind_oem"
+      ],
+      "models": [
+        "AW-1500/77"
+      ],
+      "by_technology": {
+        "wind": 1
+      },
+      "by_status": {
+        "operating": 1
+      },
+      "by_state": {
+        "VIC": 1
+      },
+      "states": [
+        "VIC"
+      ],
+      "project_ids": [
+        "waubra"
+      ],
+      "status_detail": {
+        "operating": {
+          "count": 1,
+          "capacity_mw": 192.0,
+          "storage_mwh": 0
+        }
+      },
+      "state_detail": {
+        "VIC": {
+          "count": 1,
+          "capacity_mw": 192.0,
+          "storage_mwh": 0
+        }
+      }
+    },
+    {
       "slug": "eks-energy-powin",
       "name": "Eks Energy (Powin)",
       "project_count": 1,
@@ -1359,5 +1847,5 @@
       }
     }
   ],
-  "total": 27
+  "total": 34
 }

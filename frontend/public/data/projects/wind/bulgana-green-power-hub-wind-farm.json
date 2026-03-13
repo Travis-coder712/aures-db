@@ -3,9 +3,10 @@
   "name": "Bulgana Green Power Hub - Wind Farm",
   "technology": "wind",
   "status": "operating",
-  "capacity_mw": 204.4,
+  "capacity_mw": 194.0,
   "state": "VIC",
   "current_developer": "Storenergy",
+  "current_operator": "Neoen",
   "cod_current": "2020-05-13",
   "cod_original": "2020-05-13",
   "grid_forming": false,
@@ -14,6 +15,7 @@
   "has_statcom": false,
   "has_harmonic_filter": false,
   "performance_score": 31.6,
+  "notable": "56 turbines. Neoen project with 15yr Victorian Govt support agreement. Nectar Farms 10yr PPA (collapsed). 20MW/34MWh BESS co-located.",
   "data_confidence": "medium",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
@@ -44,7 +46,14 @@
   ],
   "ownership_history": [],
   "cod_history": [],
-  "suppliers": [],
+  "suppliers": [
+    {
+      "role": "wind_oem",
+      "supplier": "Vestas",
+      "model": "V126-3.45 MW",
+      "grid_forming": false
+    }
+  ],
   "offtakes": [
     {
       "party": "Nectar Farms",

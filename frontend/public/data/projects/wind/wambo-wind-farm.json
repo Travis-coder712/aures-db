@@ -13,7 +13,7 @@
   "has_syncon": false,
   "has_statcom": false,
   "has_harmonic_filter": false,
-  "notable": "83 Vestas V162-6.2 turbines. First turbines energised May 2025. A$650M finance package.",
+  "notable": "97x Vestas V150-4.2MW. Vestas EPC. Shell Energy PPA. Owned by Squadron Energy.",
   "data_confidence": "good",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
@@ -111,6 +111,10 @@
       "party": "Shell Energy",
       "type": "PPA",
       "source_url": "https://reneweconomy.com.au/wambo-wind-farm/"
+    },
+    {
+      "party": "Shell Energy",
+      "type": "PPA"
     }
   ],
   "scheme_contracts": [

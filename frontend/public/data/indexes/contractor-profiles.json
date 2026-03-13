@@ -103,6 +103,34 @@
       ]
     },
     {
+      "slug": "zenviron",
+      "name": "Zenviron",
+      "project_count": 4,
+      "total_capacity_mw": 1367.0,
+      "roles": [
+        "bop"
+      ],
+      "by_technology": {
+        "wind": 3,
+        "bess": 1
+      },
+      "by_status": {
+        "construction": 2,
+        "operating": 2
+      },
+      "states": [
+        "NSW",
+        "QLD",
+        "VIC"
+      ],
+      "project_ids": [
+        "dundonnell-wind-farm",
+        "lotus-creek-wind-farm",
+        "rye-park-wind-farm",
+        "wooreen-energy-storage-system"
+      ]
+    },
+    {
       "slug": "vestas-epc-for-stage-1-and-stage-2",
       "name": "Vestas (EPC for Stage 1 and Stage 2)",
       "project_count": 1,
@@ -127,7 +155,7 @@
       "slug": "vestas-epc",
       "name": "Vestas (EPC)",
       "project_count": 2,
-      "total_capacity_mw": 1057.0,
+      "total_capacity_mw": 1077.0,
       "roles": [
         "epc"
       ],
@@ -192,30 +220,6 @@
       ]
     },
     {
-      "slug": "zenviron",
-      "name": "Zenviron",
-      "project_count": 2,
-      "total_capacity_mw": 635.0,
-      "roles": [
-        "bop"
-      ],
-      "by_technology": {
-        "wind": 1,
-        "bess": 1
-      },
-      "by_status": {
-        "construction": 2
-      },
-      "states": [
-        "QLD",
-        "VIC"
-      ],
-      "project_ids": [
-        "lotus-creek-wind-farm",
-        "wooreen-energy-storage-system"
-      ]
-    },
-    {
       "slug": "samsung-c-t-genus-plus-jv",
       "name": "Samsung C&T / Genus Plus JV",
       "project_count": 3,
@@ -262,6 +266,27 @@
         "mornington-bess",
         "pine-lodge-bess",
         "smithfield-bess"
+      ]
+    },
+    {
+      "slug": "snc-lavalin-wbho-jv",
+      "name": "SNC-Lavalin / WBHO JV",
+      "project_count": 1,
+      "total_capacity_mw": 530.0,
+      "roles": [
+        "bop"
+      ],
+      "by_technology": {
+        "wind": 1
+      },
+      "by_status": {
+        "operating": 1
+      },
+      "states": [
+        "VIC"
+      ],
+      "project_ids": [
+        "stockyard-hill-wind-farm"
       ]
     },
     {
@@ -328,6 +353,48 @@
       ]
     },
     {
+      "slug": "catcon",
+      "name": "CATCON",
+      "project_count": 1,
+      "total_capacity_mw": 453.0,
+      "roles": [
+        "epc"
+      ],
+      "by_technology": {
+        "wind": 1
+      },
+      "by_status": {
+        "operating": 1
+      },
+      "states": [
+        "QLD"
+      ],
+      "project_ids": [
+        "coopers-gap-wind-farm"
+      ]
+    },
+    {
+      "slug": "vestas",
+      "name": "Vestas",
+      "project_count": 1,
+      "total_capacity_mw": 420.0,
+      "roles": [
+        "epc"
+      ],
+      "by_technology": {
+        "wind": 1
+      },
+      "by_status": {
+        "operating": 1
+      },
+      "states": [
+        "VIC"
+      ],
+      "project_ids": [
+        "macarthur-wind-farm"
+      ]
+    },
+    {
       "slug": "ge-vernova-nacap-ccp-consortium",
       "name": "GE Vernova + NACAP + CCP (consortium)",
       "project_count": 1,
@@ -346,6 +413,31 @@
       ],
       "project_ids": [
         "uungula-wind-farm"
+      ]
+    },
+    {
+      "slug": "elecnor",
+      "name": "Elecnor",
+      "project_count": 2,
+      "total_capacity_mw": 410.0,
+      "roles": [
+        "bop",
+        "epc"
+      ],
+      "by_technology": {
+        "bess": 1,
+        "wind": 1
+      },
+      "by_status": {
+        "construction": 1,
+        "operating": 1
+      },
+      "states": [
+        "SA"
+      ],
+      "project_ids": [
+        "pelican-point-bess",
+        "port-augusta-renewable-energy-park-wind"
       ]
     },
     {
@@ -517,24 +609,24 @@
       ]
     },
     {
-      "slug": "elecnor",
-      "name": "Elecnor",
+      "slug": "decmil-rje-jv",
+      "name": "Decmil/RJE JV",
       "project_count": 1,
-      "total_capacity_mw": 200.0,
+      "total_capacity_mw": 218.0,
       "roles": [
         "bop"
       ],
       "by_technology": {
-        "bess": 1
+        "wind": 1
       },
       "by_status": {
-        "construction": 1
+        "operating": 1
       },
       "states": [
-        "SA"
+        "VIC"
       ],
       "project_ids": [
-        "pelican-point-bess"
+        "ryan-corner-wind-farm"
       ]
     },
     {
@@ -598,6 +690,48 @@
       ],
       "project_ids": [
         "rangebank-bess"
+      ]
+    },
+    {
+      "slug": "res",
+      "name": "RES",
+      "project_count": 1,
+      "total_capacity_mw": 180.6,
+      "roles": [
+        "epc"
+      ],
+      "by_technology": {
+        "wind": 1
+      },
+      "by_status": {
+        "operating": 1
+      },
+      "states": [
+        "QLD"
+      ],
+      "project_ids": [
+        "dulacca-wind-farm"
+      ]
+    },
+    {
+      "slug": "fulton-hogan",
+      "name": "Fulton Hogan",
+      "project_count": 1,
+      "total_capacity_mw": 175.0,
+      "roles": [
+        "bop"
+      ],
+      "by_technology": {
+        "wind": 1
+      },
+      "by_status": {
+        "operating": 1
+      },
+      "states": [
+        "NSW"
+      ],
+      "project_ids": [
+        "white-rock-wind-farm-stage-1"
       ]
     },
     {
@@ -857,5 +991,5 @@
       ]
     }
   ],
-  "total": 39
+  "total": 45
 }

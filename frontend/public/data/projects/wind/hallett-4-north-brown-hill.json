@@ -6,6 +6,7 @@
   "capacity_mw": 132.3,
   "state": "SA",
   "current_developer": "Brown Hill North Pty Ltd",
+  "current_operator": "AGL Energy",
   "cod_current": "2010-08-14",
   "cod_original": "2010-08-14",
   "grid_forming": false,
@@ -44,7 +45,14 @@
   ],
   "ownership_history": [],
   "cod_history": [],
-  "suppliers": [],
+  "suppliers": [
+    {
+      "role": "wind_oem",
+      "supplier": "Suzlon",
+      "model": "S88-2.1 MW",
+      "grid_forming": false
+    }
+  ],
   "offtakes": [],
   "scheme_contracts": [],
   "cost_sources": [],

@@ -6,6 +6,7 @@
   "capacity_mw": 54.0,
   "state": "VIC",
   "current_developer": "Salt Creek Wind Farm Pty Ltd",
+  "current_operator": "Tilt Renewables",
   "cod_current": "2018-06-06",
   "cod_original": "2018-06-06",
   "grid_forming": false,
@@ -53,7 +54,14 @@
   ],
   "ownership_history": [],
   "cod_history": [],
-  "suppliers": [],
+  "suppliers": [
+    {
+      "role": "wind_oem",
+      "supplier": "Vestas",
+      "model": "V126-3.6 MW",
+      "grid_forming": false
+    }
+  ],
   "offtakes": [],
   "scheme_contracts": [],
   "cost_sources": [],

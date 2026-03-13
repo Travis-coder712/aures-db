@@ -6,6 +6,7 @@
   "capacity_mw": 420.0,
   "state": "VIC",
   "current_developer": "Macarthur Wind Farm Pty Ltd and Meridian Wind Macarthur Pty Ltd",
+  "current_operator": "AGL Energy",
   "cod_current": "2012-09-27",
   "cod_original": "2012-09-27",
   "grid_forming": false,
@@ -14,6 +15,7 @@
   "has_statcom": false,
   "has_harmonic_filter": false,
   "performance_score": 21.0,
+  "notable": "Was largest wind farm in southern hemisphere at commissioning (2013). 140x Vestas V112-3.0MW. ~A$1B cost.",
   "data_confidence": "medium",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
@@ -44,12 +46,28 @@
   ],
   "ownership_history": [],
   "cod_history": [],
-  "suppliers": [],
+  "suppliers": [
+    {
+      "role": "wind_oem",
+      "supplier": "Vestas",
+      "model": "V112-3.0 MW",
+      "grid_forming": false
+    },
+    {
+      "role": "epc",
+      "supplier": "Vestas",
+      "grid_forming": false
+    }
+  ],
   "offtakes": [
     {
       "party": "AGL Energy",
       "type": "PPA",
       "source_url": "https://www.agl.com.au/about-agl/how-we-source-energy/macarthur-wind-farm"
+    },
+    {
+      "party": "AGL Energy",
+      "type": "PPA"
     }
   ],
   "scheme_contracts": [],

@@ -6,6 +6,7 @@
   "capacity_mw": 225.7,
   "state": "VIC",
   "current_developer": "Murra Warra Project Co Pty Ltd",
+  "current_operator": "Squadron Energy",
   "cod_current": "2019-04-08",
   "cod_original": "2019-04-08",
   "grid_forming": false,
@@ -14,6 +15,7 @@
   "has_statcom": false,
   "has_harmonic_filter": false,
   "performance_score": 83.8,
+  "notable": "61x Senvion 3.7MW (3XM class). Telstra PPA + ANZ/Coca-Cola Amatil/UniMelb consortium + Monash Uni. Bearing failure issues.",
   "data_confidence": "medium",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
@@ -44,12 +46,23 @@
   ],
   "ownership_history": [],
   "cod_history": [],
-  "suppliers": [],
+  "suppliers": [
+    {
+      "role": "wind_oem",
+      "supplier": "Senvion",
+      "model": "3.7M class",
+      "grid_forming": false
+    }
+  ],
   "offtakes": [
     {
       "party": "Telstra",
       "type": "corporate_ppa",
       "source_url": "https://reneweconomy.com.au/murra-warra-wind-farm/"
+    },
+    {
+      "party": "Telstra",
+      "type": "corporate_ppa"
     }
   ],
   "scheme_contracts": [],

@@ -6,6 +6,7 @@
   "capacity_mw": 219.0,
   "state": "NSW",
   "current_developer": "Ratch Australia",
+  "current_operator": "Squadron Energy",
   "cod_current": "2020-11-12",
   "cod_original": "2020-11-12",
   "grid_forming": false,
@@ -14,6 +15,7 @@
   "has_statcom": false,
   "has_harmonic_filter": false,
   "performance_score": 49.1,
+  "notable": "40x Vestas V117-3.3MW. Origin Energy PPA. CWP Renewables developed, Squadron Energy now owns.",
   "data_confidence": "medium",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
@@ -53,7 +55,14 @@
   ],
   "ownership_history": [],
   "cod_history": [],
-  "suppliers": [],
+  "suppliers": [
+    {
+      "role": "wind_oem",
+      "supplier": "Vestas",
+      "model": "V117-3.3 MW",
+      "grid_forming": false
+    }
+  ],
   "offtakes": [
     {
       "party": "Origin Energy",

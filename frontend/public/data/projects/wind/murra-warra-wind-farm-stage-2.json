@@ -3,9 +3,10 @@
   "name": "Murra Warra Wind Farm - stage 2",
   "technology": "wind",
   "status": "operating",
-  "capacity_mw": 203.5,
+  "capacity_mw": 209.0,
   "state": "VIC",
   "current_developer": "Murra Warra II Project Co Pty Ltd as Trustee for the Murra Warra II Project Trust",
+  "current_operator": "Squadron Energy",
   "cod_current": "2019-04-08",
   "cod_original": "2019-04-08",
   "grid_forming": false,
@@ -14,6 +15,7 @@
   "has_statcom": false,
   "has_harmonic_filter": false,
   "performance_score": 87.6,
+  "notable": "38x GE Cypress 5.5-158. Telstra corporate PPA + Snowy Hydro offtake. Senvion bearing failures required staged maintenance (2024).",
   "data_confidence": "medium",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
@@ -44,12 +46,23 @@
   ],
   "ownership_history": [],
   "cod_history": [],
-  "suppliers": [],
+  "suppliers": [
+    {
+      "role": "wind_oem",
+      "supplier": "GE Vernova",
+      "model": "Cypress 5.5-158",
+      "grid_forming": false
+    }
+  ],
   "offtakes": [
     {
       "party": "Telstra",
       "type": "corporate_ppa",
       "source_url": "https://reneweconomy.com.au/murra-warra-wind-farm/"
+    },
+    {
+      "party": "Snowy Hydro",
+      "type": "PPA"
     }
   ],
   "scheme_contracts": [],

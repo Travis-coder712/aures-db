@@ -6,6 +6,7 @@
   "capacity_mw": 89.5,
   "state": "VIC",
   "current_developer": "Hawkesdale Asset Pty Ltd as trustee for Hawkesdale Asset Trust",
+  "current_operator": "GPG Australia",
   "cod_current": "2024-06-16",
   "cod_original": "2024-06-16",
   "grid_forming": false,
@@ -53,7 +54,14 @@
   ],
   "ownership_history": [],
   "cod_history": [],
-  "suppliers": [],
+  "suppliers": [
+    {
+      "role": "wind_oem",
+      "supplier": "Vestas",
+      "model": "V150-4.2 MW",
+      "grid_forming": false
+    }
+  ],
   "offtakes": [],
   "scheme_contracts": [],
   "cost_sources": [],

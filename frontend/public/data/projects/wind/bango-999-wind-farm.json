@@ -3,9 +3,10 @@
   "name": "Bango 999 Wind Farm",
   "technology": "wind",
   "status": "operating",
-  "capacity_mw": 82.0,
+  "capacity_mw": 84.8,
   "state": "NSW",
   "current_developer": "BWF Nominees Pty Ltd as trustee for the BWF Trust",
+  "current_operator": "Squadron Energy",
   "cod_current": "2021-01-13",
   "cod_original": "2021-01-13",
   "grid_forming": false,
@@ -14,6 +15,7 @@
   "has_statcom": false,
   "has_harmonic_filter": false,
   "performance_score": 85.1,
+  "notable": "First deployment of GE Cypress 5.3-158 turbines globally. 16 turbines. Woolworths PPA for ~108 NSW supermarkets.",
   "data_confidence": "medium",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
@@ -44,8 +46,20 @@
   ],
   "ownership_history": [],
   "cod_history": [],
-  "suppliers": [],
-  "offtakes": [],
+  "suppliers": [
+    {
+      "role": "wind_oem",
+      "supplier": "GE Vernova",
+      "model": "Cypress 5.3-158",
+      "grid_forming": false
+    }
+  ],
+  "offtakes": [
+    {
+      "party": "Woolworths",
+      "type": "corporate_ppa"
+    }
+  ],
   "scheme_contracts": [],
   "cost_sources": [],
   "stakeholder_issues": [],

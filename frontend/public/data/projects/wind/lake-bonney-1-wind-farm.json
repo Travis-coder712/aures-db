@@ -6,6 +6,7 @@
   "capacity_mw": 80.5,
   "state": "SA",
   "current_developer": "Lake Bonney Wind Power Pty Ltd",
+  "current_operator": "Iberdrola Australia",
   "cod_current": "2009-06-30",
   "cod_original": "2009-06-30",
   "grid_forming": false,
@@ -53,7 +54,14 @@
   ],
   "ownership_history": [],
   "cod_history": [],
-  "suppliers": [],
+  "suppliers": [
+    {
+      "role": "wind_oem",
+      "supplier": "Vestas",
+      "model": "V66-1.75 MW",
+      "grid_forming": false
+    }
+  ],
   "offtakes": [],
   "scheme_contracts": [],
   "cost_sources": [],

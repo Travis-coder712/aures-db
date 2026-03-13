@@ -6,6 +6,7 @@
   "capacity_mw": 305.0,
   "state": "VIC",
   "current_developer": "Moorabool Wind Farm Interface Company Pty Ltd",
+  "current_operator": "Goldwind Australia",
   "cod_current": "2020-11-18",
   "cod_original": "2020-11-18",
   "grid_forming": false,
@@ -14,6 +15,7 @@
   "has_statcom": false,
   "has_harmonic_filter": false,
   "performance_score": 27.8,
+  "notable": "107x Goldwind GW136/3.0MW across North (50) and South (57) stages. 312MW total, developed by Goldwind Australia.",
   "data_confidence": "medium",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
@@ -44,7 +46,14 @@
   ],
   "ownership_history": [],
   "cod_history": [],
-  "suppliers": [],
+  "suppliers": [
+    {
+      "role": "wind_oem",
+      "supplier": "Goldwind",
+      "model": "GW136/3000",
+      "grid_forming": false
+    }
+  ],
   "offtakes": [
     {
       "party": "EnergyAustralia",

@@ -6,6 +6,7 @@
   "capacity_mw": 138.0,
   "state": "TAS",
   "current_developer": "Woolnorth Wind Farm Finance Pty Ltd",
+  "current_operator": "Hydro Tasmania",
   "cod_current": "2001-12-31",
   "cod_original": "2001-12-31",
   "grid_forming": false,
@@ -44,7 +45,14 @@
   ],
   "ownership_history": [],
   "cod_history": [],
-  "suppliers": [],
+  "suppliers": [
+    {
+      "role": "wind_oem",
+      "supplier": "Vestas",
+      "model": "V66-1.75 MW / V90-3.0 MW",
+      "grid_forming": false
+    }
+  ],
   "offtakes": [],
   "scheme_contracts": [],
   "cost_sources": [],

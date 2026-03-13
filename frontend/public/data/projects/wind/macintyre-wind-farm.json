@@ -3,7 +3,7 @@
   "name": "MacIntyre Wind Farm",
   "technology": "wind",
   "status": "commissioning",
-  "capacity_mw": 890.0,
+  "capacity_mw": 923.0,
   "state": "QLD",
   "current_developer": "Macintyre Windfarm Pty Ltd and Arc Energy Macintyre Pty Ltd",
   "cod_current": "2025-11-30",
@@ -13,6 +13,7 @@
   "has_syncon": false,
   "has_statcom": false,
   "has_harmonic_filter": false,
+  "notable": "Largest onshore wind farm in southern hemisphere. 162x Nordex N163/5.7MW. A$1.96B. CleanCo 400MW PPA + Stanwell + Ark/Telstra.",
   "data_confidence": "low",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
@@ -40,12 +41,27 @@
   ],
   "ownership_history": [],
   "cod_history": [],
-  "suppliers": [],
+  "suppliers": [
+    {
+      "role": "wind_oem",
+      "supplier": "Nordex",
+      "model": "N163/5.7 MW Delta4000",
+      "grid_forming": false
+    }
+  ],
   "offtakes": [
     {
       "party": "CleanCo Queensland",
       "type": "government_ppa",
       "source_url": "https://reneweconomy.com.au/macintyre-wind-farm/"
+    },
+    {
+      "party": "CleanCo Queensland",
+      "type": "government_ppa"
+    },
+    {
+      "party": "Stanwell Corporation",
+      "type": "PPA"
     }
   ],
   "scheme_contracts": [],

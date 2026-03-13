@@ -125,6 +125,17 @@
     "developer": "Snowy Hydro Ltd"
   },
   {
+    "id": "golden-plains-wind-farm-west",
+    "name": "Golden Plains Wind Farm West",
+    "technology": "wind",
+    "status": "construction",
+    "capacity_mw": 577.0,
+    "state": "VIC",
+    "lat": -37.9,
+    "lng": 143.7,
+    "developer": "TagEnergy / Ingka Group"
+  },
+  {
     "id": "wivenhoe",
     "name": "Wivenhoe",
     "technology": "pumped_hydro",
@@ -149,15 +160,15 @@
     "developer": "Synergy"
   },
   {
-    "id": "golden-plains-wind-farm-west",
-    "name": "Golden Plains Wind Farm West",
+    "id": "stockyard-hill-wind-farm",
+    "name": "Stockyard Hill Wind Farm",
     "technology": "wind",
-    "status": "construction",
-    "capacity_mw": 557.0,
+    "status": "operating",
+    "capacity_mw": 530.0,
     "state": "VIC",
-    "lat": -37.9,
-    "lng": 143.7,
-    "developer": "TagEnergy / Ingka Group"
+    "lat": -37.53568,
+    "lng": 143.252548,
+    "developer": "Goldwind Australia"
   },
   {
     "id": "supernode-bess",
@@ -170,17 +181,6 @@
     "lat": -27.3167,
     "lng": 152.95,
     "developer": "Quinbrook Infrastructure Partners"
-  },
-  {
-    "id": "stockyard-hill-wind-farm",
-    "name": "Stockyard Hill Wind Farm",
-    "technology": "wind",
-    "status": "operating",
-    "capacity_mw": 511.0,
-    "state": "VIC",
-    "lat": -37.53568,
-    "lng": 143.252548,
-    "developer": "Goldwind Australia"
   },
   {
     "id": "liddell-bess",
@@ -320,6 +320,17 @@
     "developer": "Western Downs Green Power Hub Pty Ltd"
   },
   {
+    "id": "rye-park-wind-farm",
+    "name": "Rye Park Wind Farm",
+    "technology": "wind",
+    "status": "operating",
+    "capacity_mw": 396.0,
+    "state": "NSW",
+    "lat": -34.63317,
+    "lng": 148.95364,
+    "developer": "Tilt Renewables Australia Pty Ltd"
+  },
+  {
     "id": "aldoga-solar-farm",
     "name": "Aldoga Solar Farm",
     "technology": "solar",
@@ -329,17 +340,6 @@
     "lat": -23.839544,
     "lng": 151.0849,
     "developer": "Acciona Energy Australia Global Pty Ltd"
-  },
-  {
-    "id": "rye-park-wind-farm",
-    "name": "Rye Park Wind Farm",
-    "technology": "wind",
-    "status": "operating",
-    "capacity_mw": 384.0,
-    "state": "NSW",
-    "lat": -34.63317,
-    "lng": 148.95364,
-    "developer": "Tilt Renewables Australia Pty Ltd"
   },
   {
     "id": "poatina",
@@ -716,6 +716,17 @@
     "developer": "Ratch Australia"
   },
   {
+    "id": "ryan-corner-wind-farm",
+    "name": "Ryan Corner Wind Farm",
+    "technology": "wind",
+    "status": "operating",
+    "capacity_mw": 218.0,
+    "state": "VIC",
+    "lat": -38.271156,
+    "lng": 142.14003,
+    "developer": "Ryan Corner Development Pty Ltd"
+  },
+  {
     "id": "port-augusta-renewable-energy-park-wind",
     "name": "Port Augusta Renewable Energy Park - Wind",
     "technology": "wind",
@@ -727,26 +738,26 @@
     "developer": "PAREP 1 Pty Ltd"
   },
   {
-    "id": "ryan-corner-wind-farm",
-    "name": "Ryan Corner Wind Farm",
+    "id": "goyder-south-wind-farm-1a",
+    "name": "Goyder South Wind Farm 1A",
     "technology": "wind",
     "status": "operating",
-    "capacity_mw": 205.0,
-    "state": "VIC",
-    "lat": -38.271156,
-    "lng": 142.14003,
-    "developer": "Ryan Corner Development Pty Ltd"
+    "capacity_mw": 209.0,
+    "state": "SA",
+    "lat": -33.682196,
+    "lng": 138.936249,
+    "developer": "Goyder Wind Farm 1A Pty Ltd as trustee for Goyder Wind Farm 1A Trust"
   },
   {
-    "id": "bulgana-green-power-hub-wind-farm",
-    "name": "Bulgana Green Power Hub - Wind Farm",
+    "id": "murra-warra-wind-farm-stage-2",
+    "name": "Murra Warra Wind Farm - stage 2",
     "technology": "wind",
     "status": "operating",
-    "capacity_mw": 204.4,
+    "capacity_mw": 209.0,
     "state": "VIC",
-    "lat": -37.039507,
-    "lng": 142.982799,
-    "developer": "Storenergy"
+    "lat": -36.438821,
+    "lng": 142.246003,
+    "developer": "Murra Warra II Project Co Pty Ltd as Trustee for the Murra Warra II Project Trust"
   },
   {
     "id": "tailem-bend-stage-3",
@@ -770,28 +781,6 @@
     "lat": -33.682196,
     "lng": 138.936249,
     "developer": "Goyder Wind Farm 1B Pty Ltd as trustee for Goyder Wind Farm 1B Trust"
-  },
-  {
-    "id": "murra-warra-wind-farm-stage-2",
-    "name": "Murra Warra Wind Farm - stage 2",
-    "technology": "wind",
-    "status": "operating",
-    "capacity_mw": 203.5,
-    "state": "VIC",
-    "lat": -36.438821,
-    "lng": 142.246003,
-    "developer": "Murra Warra II Project Co Pty Ltd as Trustee for the Murra Warra II Project Trust"
-  },
-  {
-    "id": "goyder-south-wind-farm-1a",
-    "name": "Goyder South Wind Farm 1A",
-    "technology": "wind",
-    "status": "operating",
-    "capacity_mw": 201.0,
-    "state": "SA",
-    "lat": -33.682196,
-    "lng": 138.936249,
-    "developer": "Goyder Wind Farm 1A Pty Ltd as trustee for Goyder Wind Farm 1A Trust"
   },
   {
     "id": "blyth-bess",
@@ -947,6 +936,17 @@
     "developer": "Neoen"
   },
   {
+    "id": "bulgana-green-power-hub-wind-farm",
+    "name": "Bulgana Green Power Hub - Wind Farm",
+    "technology": "wind",
+    "status": "operating",
+    "capacity_mw": 194.0,
+    "state": "VIC",
+    "lat": -37.039507,
+    "lng": 142.982799,
+    "developer": "Storenergy"
+  },
+  {
     "id": "waubra",
     "name": "Waubra",
     "technology": "wind",
@@ -992,6 +992,28 @@
     "developer": "Edify Energy (Sosteneo)"
   },
   {
+    "id": "dulacca-wind-farm",
+    "name": "Dulacca Wind Farm",
+    "technology": "wind",
+    "status": "operating",
+    "capacity_mw": 180.6,
+    "state": "QLD",
+    "lat": -26.637485,
+    "lng": 149.870186,
+    "developer": "Dulacca Energy Project Co Pty Ltd"
+  },
+  {
+    "id": "mount-emerald",
+    "name": "Mount Emerald",
+    "technology": "wind",
+    "status": "operating",
+    "capacity_mw": 180.5,
+    "state": "QLD",
+    "lat": -17.133248,
+    "lng": 145.380037,
+    "developer": "Ratch Australia"
+  },
+  {
     "id": "edenvale-solar-park",
     "name": "Edenvale Solar Park.",
     "technology": "solar",
@@ -1001,17 +1023,6 @@
     "lat": -26.947486,
     "lng": 150.578494,
     "developer": "Edenvale Solar Park Pty Ltd"
-  },
-  {
-    "id": "mount-emerald",
-    "name": "Mount Emerald",
-    "technology": "wind",
-    "status": "operating",
-    "capacity_mw": 178.2,
-    "state": "QLD",
-    "lat": -17.133248,
-    "lng": 145.380037,
-    "developer": "Ratch Australia"
   },
   {
     "id": "woolooga-solar-farm",
@@ -1025,22 +1036,11 @@
     "developer": "Woolooga Fund Pty Ltd"
   },
   {
-    "id": "dulacca-wind-farm",
-    "name": "Dulacca Wind Farm",
-    "technology": "wind",
-    "status": "operating",
-    "capacity_mw": 172.99,
-    "state": "QLD",
-    "lat": -26.637485,
-    "lng": 149.870186,
-    "developer": "Dulacca Energy Project Co Pty Ltd"
-  },
-  {
     "id": "white-rock-wind-farm-stage-1",
     "name": "White Rock Wind Farm - Stage 1",
     "technology": "wind",
     "status": "operating",
-    "capacity_mw": 172.5,
+    "capacity_mw": 175.0,
     "state": "NSW",
     "lat": -29.7718,
     "lng": 151.5755,
@@ -1091,6 +1091,17 @@
     "developer": "Luminous Energy"
   },
   {
+    "id": "bango-973-wind-farm",
+    "name": "Bango 973 Wind Farm",
+    "technology": "wind",
+    "status": "operating",
+    "capacity_mw": 159.0,
+    "state": "NSW",
+    "lat": -34.767208,
+    "lng": 148.921499,
+    "developer": "BWF Nominees Pty Ltd as trustee for the BWF Trust"
+  },
+  {
     "id": "lake-bonney-2-wind-farm",
     "name": "Lake Bonney 2 Wind Farm",
     "technology": "wind",
@@ -1102,15 +1113,15 @@
     "developer": "Lake Bonney Wind Power Pty Ltd"
   },
   {
-    "id": "bango-973-wind-farm",
-    "name": "Bango 973 Wind Farm",
+    "id": "mortlake-south-wind-farm",
+    "name": "Mortlake South Wind Farm",
     "technology": "wind",
     "status": "operating",
-    "capacity_mw": 155.0,
-    "state": "NSW",
-    "lat": -34.767208,
-    "lng": 148.921499,
-    "developer": "BWF Nominees Pty Ltd as trustee for the BWF Trust"
+    "capacity_mw": 157.5,
+    "state": "VIC",
+    "lat": -38.147965,
+    "lng": 142.882246,
+    "developer": "Mortlake South Wind Farm Pty Ltd"
   },
   {
     "id": "ulinda-park-bess",
@@ -1123,17 +1134,6 @@
     "lat": -26.92635,
     "lng": 150.717472,
     "developer": "Akaysha Energy (BlackRock)"
-  },
-  {
-    "id": "mortlake-south-wind-farm",
-    "name": "Mortlake South Wind Farm",
-    "technology": "wind",
-    "status": "operating",
-    "capacity_mw": 153.0,
-    "state": "VIC",
-    "lat": -38.147965,
-    "lng": 142.882246,
-    "developer": "Mortlake South Wind Farm Pty Ltd"
   },
   {
     "id": "kaban-wind-farm",
@@ -1226,6 +1226,17 @@
     "developer": "X-Elio Australia Pty Ltd"
   },
   {
+    "id": "flyers-creek-wind-farm",
+    "name": "Flyers Creek Wind Farm",
+    "technology": "wind",
+    "status": "operating",
+    "capacity_mw": 145.5,
+    "state": "NSW",
+    "lat": -33.521475,
+    "lng": 149.045234,
+    "developer": "Flyers Creek Wind Farm Pty Ltd"
+  },
+  {
     "id": "cattle-hill-wind-farm",
     "name": "Cattle Hill Wind Farm",
     "technology": "wind",
@@ -1279,17 +1290,6 @@
     "lat": -35.123534,
     "lng": 149.500249,
     "developer": "Renewable Power Ventures Pty Ltd"
-  },
-  {
-    "id": "flyers-creek-wind-farm",
-    "name": "Flyers Creek Wind Farm",
-    "technology": "wind",
-    "status": "operating",
-    "capacity_mw": 140.0,
-    "state": "NSW",
-    "lat": -33.521475,
-    "lng": 149.045234,
-    "developer": "Flyers Creek Wind Farm Pty Ltd"
   },
   {
     "id": "crudine-ridge-wind-farm",
@@ -1967,6 +1967,17 @@
     "developer": "CleanCo Queensland Limited"
   },
   {
+    "id": "lincoln-gap-wind-farm-stage-2",
+    "name": "Lincoln Gap Wind Farm - Stage 2",
+    "technology": "wind",
+    "status": "operating",
+    "capacity_mw": 86.0,
+    "state": "SA",
+    "lat": -32.546333,
+    "lng": 137.552763,
+    "developer": "Lincoln Gap Wind Farm Pty Ltd"
+  },
+  {
     "id": "hillston-sun-farm",
     "name": "Hillston Sun Farm",
     "technology": "solar",
@@ -1976,17 +1987,6 @@
     "lat": -33.532991,
     "lng": 145.522279,
     "developer": "Hillston Sun Farm Operations Pty Ltd ATF Hillston"
-  },
-  {
-    "id": "lincoln-gap-wind-farm-stage-2",
-    "name": "Lincoln Gap Wind Farm - Stage 2",
-    "technology": "wind",
-    "status": "operating",
-    "capacity_mw": 85.0,
-    "state": "SA",
-    "lat": -32.546333,
-    "lng": 137.552763,
-    "developer": "Lincoln Gap Wind Farm Pty Ltd"
   },
   {
     "id": "winton-solar-farm",
@@ -2004,7 +2004,7 @@
     "name": "Bango 999 Wind Farm",
     "technology": "wind",
     "status": "operating",
-    "capacity_mw": 82.0,
+    "capacity_mw": 84.8,
     "state": "NSW",
     "lat": -34.767208,
     "lng": 148.921499,

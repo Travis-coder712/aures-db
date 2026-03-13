@@ -6,6 +6,7 @@
   "capacity_mw": 165.5,
   "state": "NSW",
   "current_developer": "New Gullen Range Wind Farm Pty Ltd",
+  "current_operator": "Ark Energy",
   "cod_current": "2013-12-10",
   "cod_original": "2013-12-10",
   "grid_forming": false,
@@ -14,6 +15,7 @@
   "has_statcom": false,
   "has_harmonic_filter": false,
   "performance_score": 46.8,
+  "notable": "73 Goldwind turbines (56x GW100/2.5MW + 17x GW82/1.5MW). EnergyAustralia PPA. Goldwinds largest overseas project at time.",
   "data_confidence": "medium",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
@@ -53,8 +55,20 @@
   ],
   "ownership_history": [],
   "cod_history": [],
-  "suppliers": [],
-  "offtakes": [],
+  "suppliers": [
+    {
+      "role": "wind_oem",
+      "supplier": "Goldwind",
+      "model": "GW100/2500 + GW82/1500",
+      "grid_forming": false
+    }
+  ],
+  "offtakes": [
+    {
+      "party": "EnergyAustralia",
+      "type": "PPA"
+    }
+  ],
   "scheme_contracts": [],
   "cost_sources": [],
   "stakeholder_issues": [],

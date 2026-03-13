@@ -3,9 +3,10 @@
   "name": "Dulacca Wind Farm",
   "technology": "wind",
   "status": "operating",
-  "capacity_mw": 172.99,
+  "capacity_mw": 180.6,
   "state": "QLD",
   "current_developer": "Dulacca Energy Project Co Pty Ltd",
+  "current_operator": "Octopus Australia",
   "cod_current": "2023-04-12",
   "cod_original": "2023-04-12",
   "grid_forming": false,
@@ -14,6 +15,7 @@
   "has_statcom": false,
   "has_harmonic_filter": false,
   "performance_score": 80.0,
+  "notable": "43x Vestas V150-4.2MW. CleanCo 126MW PPA. RES developed, Octopus acquired. Opened Oct 2023.",
   "data_confidence": "medium",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
@@ -53,8 +55,25 @@
   ],
   "ownership_history": [],
   "cod_history": [],
-  "suppliers": [],
-  "offtakes": [],
+  "suppliers": [
+    {
+      "role": "wind_oem",
+      "supplier": "Vestas",
+      "model": "V150-4.2 MW",
+      "grid_forming": false
+    },
+    {
+      "role": "epc",
+      "supplier": "RES",
+      "grid_forming": false
+    }
+  ],
+  "offtakes": [
+    {
+      "party": "CleanCo Queensland",
+      "type": "government_ppa"
+    }
+  ],
   "scheme_contracts": [],
   "cost_sources": [],
   "stakeholder_issues": [],

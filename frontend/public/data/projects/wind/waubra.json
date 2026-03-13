@@ -6,6 +6,7 @@
   "capacity_mw": 192.0,
   "state": "VIC",
   "current_developer": "Pyrenees Wind Energy Developments",
+  "current_operator": "ACCIONA",
   "cod_current": "2009-06-30",
   "cod_original": "2009-06-30",
   "grid_forming": false,
@@ -14,6 +15,7 @@
   "has_statcom": false,
   "has_harmonic_filter": false,
   "performance_score": 54.7,
+  "notable": "128x Acciona AW-1500/77 (1.5MW). Zen Energy 10yr PPA for 70% of output. Was Australias largest at 2009 commissioning.",
   "data_confidence": "medium",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
@@ -44,8 +46,21 @@
   ],
   "ownership_history": [],
   "cod_history": [],
-  "suppliers": [],
-  "offtakes": [],
+  "suppliers": [
+    {
+      "role": "wind_oem",
+      "supplier": "Acciona Windpower",
+      "model": "AW-1500/77",
+      "grid_forming": false
+    }
+  ],
+  "offtakes": [
+    {
+      "party": "Zen Energy",
+      "type": "PPA",
+      "term_years": 10
+    }
+  ],
   "scheme_contracts": [],
   "cost_sources": [],
   "stakeholder_issues": [],

@@ -6,6 +6,7 @@
   "capacity_mw": 110.67,
   "state": "NSW",
   "current_developer": "BEIJING JINGNENG CLEAN ENERGY (AUSTRALIA) HOLDING PTY LTD",
+  "current_operator": "Goldwind Australia",
   "cod_current": "2020-06-19",
   "cod_original": "2020-06-19",
   "grid_forming": false,
@@ -44,7 +45,14 @@
   ],
   "ownership_history": [],
   "cod_history": [],
-  "suppliers": [],
+  "suppliers": [
+    {
+      "role": "wind_oem",
+      "supplier": "Goldwind",
+      "model": "GW140-3.57S",
+      "grid_forming": false
+    }
+  ],
   "offtakes": [],
   "scheme_contracts": [],
   "cost_sources": [],
