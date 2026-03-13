@@ -135,7 +135,7 @@ Designed mobile-first as a Progressive Web App. Install it on your iPhone and us
 Comprehensive project records for every significant renewable energy project in Australia (NEM + WEM). Filterable by technology, state, developer, OEM, status, REZ, CIS/LTESA round.
 
 **Level 2: PROFILES** — "Who are the players?"
-Developer profiles (718 developers, grouped into ~104 parent companies). OEM profiles (17 equipment manufacturers). EPC contractor profiles (20 contractors). Offtaker profiles (19 offtakers with 48 PPA/offtake agreements tracked).
+Developer profiles (711 developers, grouped into 103 parent companies). OEM profiles (34 equipment manufacturers). EPC contractor profiles (45 contractors). Offtaker profiles (31 offtakers with 85 PPA/offtake agreements tracked).
 
 **Level 3: HISTORY** — "How has this project evolved?"
 Full lifecycle timeline for each project. Ownership changes with transaction values. COD drift tracking. Milestone progression.
@@ -299,11 +299,11 @@ Bottom navigation with tabs on mobile. Progressive disclosure — simple surface
     description: 'Current build status, phase progress, task checklists, and data population tracking.',
     icon: '📊',
     category: 'process',
-    readingTime: '4 min read',
+    readingTime: '8 min read',
     content: `# AURES — Build Tracker
 
-> **Last Updated:** 2026-03-10
-> **Current Phase:** Phase 1 — Foundation
+> **Last Updated:** 2026-03-13
+> **Current Phase:** Phase 3 — Performance Analytics (in progress)
 
 ---
 
@@ -311,77 +311,154 @@ Bottom navigation with tabs on mobile. Progressive disclosure — simple surface
 
 | Phase | Status | Progress |
 |-------|--------|----------|
-| Phase 1: Foundation | In Progress | 70% |
-| Phase 2: CIS/LTESA/REZ | Not Started | 0% |
-| Phase 3: Performance | Not Started | 0% |
-| Phase 4: Intelligence | Not Started | 0% |
-| Phase 5: Data Enrichment | Ongoing | 0% |
+| Phase 1: Foundation | ✅ Complete | 100% |
+| Phase 2: CIS/LTESA/REZ | ✅ Complete | 100% |
+| Phase 2.5: NEM Dashboard | ✅ Complete | 100% |
+| Phase 3: Performance Analytics | 🔧 In Progress | 85% |
+| Phase 4: Confidence & Profiles | ✅ Complete | 100% |
+| Phase 5: Data Enrichment Pipeline | ✅ Complete | 100% |
+| Phase 6: BESS Deep Dive | ✅ Complete | 100% |
+| Phase 7: Timeline & Analytics | ✅ Complete | 100% |
+| Ongoing: Data Quality & Enrichment | 🔄 Continuous | — |
 
 ---
 
-## Phase 1: Foundation — Completed
+## Platform Stats (as of 13 March 2026)
 
-- Created GitHub repo (travis-coder712/aures-db)
-- Set up directory structure
-- Created project documentation (5 guides)
-- Set up React + Vite + TypeScript + Tailwind + PWA
-- Built Home dashboard page
-- Built Project list page with filters (technology, status, state)
-- Built Project detail page with tabs (Overview, Timeline, Technical, Sources)
-- Built universal search (Fuse.js)
-- Built mobile bottom navigation + desktop sidebar
-- Deployed to GitHub Pages
-
-## Phase 1: Remaining
-
-- SQLite database schema
-- Python AEMO Generation Information importer
-- JSON export pipeline
-- Enrich 10 exemplar projects to full depth
-- PWA icons (192px, 512px)
-- Test PWA installation on iPhone
+| Metric | Count |
+|--------|-------|
+| Total projects | 1,064 |
+| Wind farms | 211 |
+| Solar farms | 228 |
+| Battery (BESS) | 432 |
+| Hybrid projects | 110 |
+| Timeline events | 1,366 |
+| OEM/supplier records | 217 |
+| Offtake/PPA agreements | 85 |
+| Projects with timelines | 677 |
+| Frontend pages | 25 |
+| Developers tracked | 711 (grouped into 103 parent companies) |
+| OEM profiles | 34 |
+| Contractor profiles | 45 |
+| Offtaker profiles | 31 |
 
 ---
 
-## Data Population Progress
+## Phase 1: Foundation ✅
 
-### Exemplar Projects (10 loaded)
+- Created GitHub repo + CI/CD (GitHub Actions)
+- React 19 + Vite 6 + TypeScript + Tailwind 4 + PWA
+- SQLite database schema with full relational model
+- Python AEMO Generation Information importer (1,064 projects)
+- JSON export pipeline (SQLite → static JSON)
+- Home dashboard, Project list (filters), Project detail (tabs)
+- Universal search (Fuse.js), mobile bottom nav + desktop sidebar
+- Deployed to GitHub Pages as PWA
 
-| # | Project | Tech | State | Data Depth |
-|---|---------|------|-------|-----------|
-| 1 | Yanco Delta Solar Farm | Solar | NSW | Good (timeline, ownership, COD drift) |
-| 2 | Golden Plains Wind Farm | Wind | VIC | Basic |
-| 3 | Victorian Big Battery | BESS | VIC | Good (timeline, fire incident) |
-| 4 | Hornsdale Power Reserve | BESS | SA | Good (phases, expansion history) |
-| 5 | Waratah Super Battery | BESS | NSW | Basic |
-| 6 | Stockyard Hill Wind Farm | Wind | VIC | Basic (OEM: Goldwind) |
-| 7 | Coopers Gap Wind Farm | Wind | QLD | Basic (OEM: Vestas) |
-| 8 | New England Solar Farm | Hybrid | NSW | Basic |
-| 9 | Eraring Battery | BESS | NSW | Basic |
-| 10 | Collie Battery | BESS | WA | Basic |
+## Phase 2: CIS/LTESA/REZ ✅
 
-### CIS Rounds (Phase 2)
-Pilot NSW, Pilot SA-VIC, Tender 1-8 — all pending
+- CIS Tender 1–8 + Pilot rounds with all awarded projects
+- LTESA Round 1–6 with contract details
+- REZ analysis pages (NSW, VIC, QLD, SA, TAS zones)
+- Scheme overview with round-by-round browsing
+- REZ detail pages with project lists and capacity summaries
 
-### LTESA Rounds (Phase 2)
-Round 1-6 — all pending
+## Phase 2.5: NEM Dashboard ✅
+
+- NEM-wide summary dashboard with technology breakdown
+- Offshore wind toggle and filtering
+- State-level capacity summaries
+
+## Phase 3: Performance Analytics 🔧
+
+### Completed
+- OpenElectricity API integration for capacity factors, revenue, curtailment
+- Performance league tables (wind, solar, BESS) for 2024, 2025, 2026 YTD
+- BESS revenue breakdown (energy arbitrage vs FCAS)
+- BESS capex analytics page with cost curves
+- Volume-weighted price and marginal loss factor tracking
+- OEM market share pie charts (by projects, MW, MWh)
+
+### In Progress / Remaining
+- Wind capacity factor analysis (AEMO registered vs nameplate discrepancy identified)
+- Solar curtailment deep-dive
+- Historical performance trend charts
+
+## Phase 4: Confidence & Profiles ✅
+
+- Auto-computed confidence ratings for all 1,064 projects
+- Confidence filter on project list + breakdown on dashboard
+- Developer profiles with portfolio stats and grouping (711 → 103 parent companies)
+- OEM profiles with market share, technology breakdown, state presence
+- Contractor profiles (45 EPC/BoP contractors)
+- Offtaker profiles (31 offtakers with PPA tracking)
+- Interactive map (Leaflet) with clustered markers
+- COD drift tracking and analysis
+
+## Phase 5: Data Enrichment Pipeline ✅
+
+- EPBC referrals import with 4-tier development stage classification
+- Development stage classification (AEMO Announced → Planning → Approved → Construction → Operating)
+- Data freshness tracking per data source
+- Multi-source enrichment SQL scripts
+- Admin CLI tool for database management
+
+## Phase 6: BESS Deep Dive ✅
+
+- BESS supplier data (OEM, integrator, cell chemistry, inverter)
+- Capex analytics with $/kW and $/kWh cost curves
+- Operational timeline analysis
+- Grid-forming inverter flags for ARENA-confirmed projects
+- SIPS, SynCon, STATCOM, harmonic filter tracking
+
+## Phase 7: Timeline & Analytics ✅
+
+- Project timeline analytics page
+- Multi-select filters across the app
+- Developer grouping refinements
+- Data sources page
 
 ---
 
-## Session Log
+## Recent Data Enrichment Sessions
 
-### Session 1 — 2026-03-10
-- Comprehensive design session over 8 messages
-- Explored data sources, architecture, feasibility
-- Decided on three-layer hybrid architecture
-- Key decisions: multi-source intelligence model, confidence ratings, timeline as core feature
+### Wind Farm Deep Dive — 2026-03-12/13
+- Researched all 90 operating/commissioning/construction wind farms
+- Added 150+ timeline events (planning, FID, construction, energisation, COD)
+- Corrected nameplate capacities for 18 wind farms (AEMO registered vs nameplate)
+- Added OEM data for 74 wind farms (Vestas, GE, Goldwind, Suzlon, Senvion, Nordex, etc.)
+- Added 58 current operator records
+- Added 46 offtake/PPA agreements
+- Added capex data for 8 construction-phase wind farms
+- Added grid infrastructure flags (SynCon at Clarke Creek, Kaban; STATCOM at Stockyard Hill)
 
-### Session 2 — 2026-03-10
-- Built entire Phase 1 frontend scaffold
-- Created Layout, all pages, shared components
-- Loaded 10 exemplar projects with real data
-- Deployed to GitHub Pages successfully
-- Added guides to the PWA`,
+### BESS Deep Dive — 2026-03-11/12
+- BESS supplier enrichment across all operating/construction batteries
+- Grid-forming inverter flags for 10 ARENA-confirmed BESS projects
+- Capex data and cost curve analytics
+- Fixed boolean export bug (all projects incorrectly showing grid flags as Yes)
+
+---
+
+## What's Next
+
+### Near-term
+- Verify remaining wind farm OEM gaps (~16 older/smaller farms)
+- AEMO registered capacity cross-check (download AEMO spreadsheet)
+- Solar farm enrichment pass (OEM, EPC, offtakes)
+- Historical performance trend charts
+
+### Medium-term
+- Pumped hydro project enrichment
+- Gas peaker tracking
+- Transmission project integration
+- AEMO ISP alignment analysis
+
+### Longer-term
+- Real-time SCADA data integration
+- Automated data refresh pipeline
+- Multi-source intelligence panels
+- Operations-to-development mapping`,
   },
   {
     id: 'session-guide',
