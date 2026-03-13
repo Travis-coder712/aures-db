@@ -973,20 +973,41 @@ def export_bess_capex(conn):
 
 
 def export_project_timeline(conn):
-    """Export project first-seen timeline analytics — when projects first appeared."""
+    """Export project timeline analytics — when projects reached COD or key milestones."""
     rows = conn.execute("""
         SELECT p.id, p.name, p.technology, p.status, p.capacity_mw, p.storage_mwh,
-               p.state, p.current_developer, p.first_seen, p.development_stage
+               p.state, p.current_developer, p.first_seen, p.development_stage,
+               p.cod_current, p.cod_original,
+               (SELECT MIN(te.date) FROM timeline_events te
+                WHERE te.project_id = p.id AND te.event_type IN ('planning_submitted','conceived','planning_approved')
+               ) as earliest_event
         FROM projects p
-        ORDER BY p.first_seen NULLS LAST, p.capacity_mw DESC
+        ORDER BY p.cod_current NULLS LAST, p.capacity_mw DESC
     """).fetchall()
 
     projects = []
     for r in rows:
         d = dict(r)
-        # Extract year from first_seen (format: YYYY-MM-DD or YYYY-12-31)
-        if d.get('first_seen'):
-            d['first_seen_year'] = int(d['first_seen'][:4])
+        # Determine the best year to place this project on the timeline:
+        # 1. For operating/commissioning: use COD year (when it actually came online)
+        # 2. For construction/development: use cod_current (expected COD) as the target year
+        # 3. Fallback: earliest timeline event, then first_seen (but NOT if first_seen is 2026-03-12 bulk import)
+        timeline_year = None
+
+        if d.get('cod_current'):
+            timeline_year = int(d['cod_current'][:4])
+        elif d.get('cod_original'):
+            timeline_year = int(d['cod_original'][:4])
+        elif d.get('earliest_event'):
+            timeline_year = int(d['earliest_event'][:4])
+        elif d.get('first_seen'):
+            fs = d['first_seen']
+            # Exclude the bulk import date — not meaningful
+            if fs != '2026-03-12':
+                timeline_year = int(fs[:4])
+
+        if timeline_year:
+            d['first_seen_year'] = timeline_year
         projects.append(clean_none_values(d))
 
     # By year breakdown
@@ -1109,10 +1130,18 @@ def export_data_sources(conn):
         {
             'id': 'web_research',
             'name': 'Web Research',
-            'description': 'Project details scraped from RenewEconomy and other renewable energy news sources.',
+            'description': 'Timeline events and project details from RenewEconomy and other renewable energy news sources.',
             'url': 'https://reneweconomy.com.au',
             'frequency': 'ad_hoc',
             'script': 'web_research.py',
+        },
+        {
+            'id': 'json_export',
+            'name': 'JSON Export',
+            'description': 'Static JSON export of all database tables for the frontend application.',
+            'url': '',
+            'frequency': 'ad_hoc',
+            'script': 'exporters/export_json.py',
         },
     ]
 
@@ -1125,18 +1154,86 @@ def export_data_sources(conn):
     """).fetchall()
     run_map = {r['source']: dict(r) for r in runs}
 
+    # Fallback: detect data presence from actual tables when import_runs has no record
+    # This handles pipelines run manually or via Claude sessions
+    data_evidence = {}
+    try:
+        r = conn.execute("SELECT COUNT(*) as cnt, MAX(created_at) as latest FROM offtakes").fetchone()
+        if r and r['cnt'] > 0:
+            data_evidence['offtake_research'] = {'records': r['cnt'], 'latest': r['latest']}
+    except Exception:
+        pass
+    try:
+        r = conn.execute("SELECT COUNT(*) as cnt, MAX(created_at) as latest FROM performance_annual").fetchone()
+        if r and r['cnt'] > 0:
+            data_evidence['openelectricity_performance'] = {'records': r['cnt'], 'latest': r['latest']}
+    except Exception:
+        pass
+    try:
+        r = conn.execute("""
+            SELECT COUNT(*) as cnt, MAX(created_at) as latest FROM timeline_events
+            WHERE data_source IN ('web_research', 'timeline_enrichment', 'manual')
+        """).fetchone()
+        if r and r['cnt'] > 0:
+            data_evidence['web_research'] = {'records': r['cnt'], 'latest': r['latest']}
+    except Exception:
+        pass
+    try:
+        r = conn.execute("""
+            SELECT COUNT(*) as cnt, MAX(p.updated_at) as latest FROM projects p
+            WHERE p.latitude IS NOT NULL AND p.longitude IS NOT NULL
+        """).fetchone()
+        if r and r['cnt'] > 0:
+            data_evidence['openelectricity_metadata'] = {'records': r['cnt'], 'latest': r['latest']}
+    except Exception:
+        pass
+    try:
+        r = conn.execute("""
+            SELECT COUNT(*) as cnt, MAX(created_at) as latest FROM timeline_events
+            WHERE data_source = 'epbc'
+        """).fetchone()
+        if r and r['cnt'] > 0:
+            data_evidence['epbc_referrals'] = {'records': r['cnt'], 'latest': r['latest']}
+    except Exception:
+        pass
+
+    # JSON export is always "current" since we're running it now
+    data_evidence['json_export'] = {'records': 0, 'latest': datetime.now().isoformat()}
+
     sources = []
     for meta in SOURCE_META:
         run = run_map.get(meta['id'], {})
-        sources.append({
-            **meta,
-            'last_run': run.get('completed_at') or run.get('started_at'),
-            'last_status': run.get('status', 'never'),
-            'records_imported': run.get('records_imported', 0),
-            'records_updated': run.get('records_updated', 0),
-            'records_new': run.get('records_new', 0),
-            'error': run.get('error_message'),
-        })
+        if run:
+            sources.append({
+                **meta,
+                'last_run': run.get('completed_at') or run.get('started_at'),
+                'last_status': run.get('status', 'never'),
+                'records_imported': run.get('records_imported', 0),
+                'records_updated': run.get('records_updated', 0),
+                'records_new': run.get('records_new', 0),
+                'error': run.get('error_message'),
+            })
+        elif meta['id'] in data_evidence:
+            ev = data_evidence[meta['id']]
+            sources.append({
+                **meta,
+                'last_run': ev['latest'],
+                'last_status': 'completed',
+                'records_imported': ev['records'],
+                'records_updated': 0,
+                'records_new': 0,
+                'error': None,
+            })
+        else:
+            sources.append({
+                **meta,
+                'last_run': None,
+                'last_status': 'never',
+                'records_imported': 0,
+                'records_updated': 0,
+                'records_new': 0,
+                'error': None,
+            })
 
     # Database stats
     total_projects = conn.execute("SELECT COUNT(*) FROM projects").fetchone()[0]

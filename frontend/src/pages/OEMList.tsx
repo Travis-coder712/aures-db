@@ -290,8 +290,9 @@ export default function OEMList() {
         ))}
       </div>
 
-      {/* BESS Market Share Charts */}
-      {data && <BESSMarketShare oems={data.oems} stateFilters={stateFilters} statusFilters={statusFilters} />}
+      {/* Market Share Charts */}
+      {data && <BESSMarketShare oems={data.oems} stateFilters={stateFilters} statusFilters={statusFilters} navigate={navigate} />}
+      {data && <WindMarketShare oems={data.oems} stateFilters={stateFilters} statusFilters={statusFilters} navigate={navigate} />}
 
       {/* OEM Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
@@ -398,15 +399,16 @@ function BESSMarketShare({
   oems,
   stateFilters,
   statusFilters,
+  navigate,
 }: {
   oems: OEMProfile[]
   stateFilters: State[]
   statusFilters: ProjectStatus[]
+  navigate: (path: string) => void
 }) {
   const [metric, setMetric] = useState<PieMetric>('projects')
 
   const chartData = useMemo(() => {
-    // Only BESS OEMs
     const bessOems = oems.filter((o) => o.by_technology.bess)
 
     return bessOems.map((oem) => {
@@ -414,43 +416,25 @@ function BESSMarketShare({
       let mw = 0
       let mwh = 0
 
-      // If no filters active, use totals from BESS technology
       if (!stateFilters.length && !statusFilters.length) {
         count = oem.by_technology.bess ?? 0
-        // For unfiltered, we need to approximate from status_detail/state_detail
-        // Use total values as best approximation for BESS subset
         mw = oem.total_capacity_mw
         mwh = oem.total_storage_mwh
       } else {
-        // Apply filters: sum matching status_detail and state_detail
-        // When both filters active, we can't perfectly intersect, so use status as primary
         if (statusFilters.length && !stateFilters.length) {
           for (const s of statusFilters) {
             const d = oem.status_detail[s]
-            if (d) {
-              count += d.count
-              mw += d.capacity_mw
-              mwh += d.storage_mwh
-            }
+            if (d) { count += d.count; mw += d.capacity_mw; mwh += d.storage_mwh }
           }
         } else if (stateFilters.length && !statusFilters.length) {
           for (const s of stateFilters) {
             const d = oem.state_detail[s]
-            if (d) {
-              count += d.count
-              mw += d.capacity_mw
-              mwh += d.storage_mwh
-            }
+            if (d) { count += d.count; mw += d.capacity_mw; mwh += d.storage_mwh }
           }
         } else {
-          // Both filters active — use status as primary (closer approximation)
           for (const s of statusFilters) {
             const d = oem.status_detail[s]
-            if (d) {
-              count += d.count
-              mw += d.capacity_mw
-              mwh += d.storage_mwh
-            }
+            if (d) { count += d.count; mw += d.capacity_mw; mwh += d.storage_mwh }
           }
         }
       }
@@ -461,22 +445,19 @@ function BESSMarketShare({
       .sort((a, b) => b[metric] - a[metric])
   }, [oems, stateFilters.join(','), statusFilters.join(','), metric])
 
-  // Group small slices into "Other"
   const threshold = 0.03
   const total = chartData.reduce((s, d) => s + d[metric], 0)
-  const mainSlices: { name: string; value: number }[] = []
+  const mainSlices: { name: string; value: number; slug?: string }[] = []
   let otherValue = 0
 
   for (const d of chartData) {
     if (d[metric] / total >= threshold) {
-      mainSlices.push({ name: d.name, value: d[metric] })
+      mainSlices.push({ name: d.name, value: d[metric], slug: d.slug })
     } else {
       otherValue += d[metric]
     }
   }
-  if (otherValue > 0) {
-    mainSlices.push({ name: 'Other', value: otherValue })
-  }
+  if (otherValue > 0) mainSlices.push({ name: 'Other', value: otherValue })
 
   const metricLabel = metric === 'projects' ? 'Projects' : metric === 'mw' ? 'MW' : 'MWh'
   const filterDesc = [
@@ -490,12 +471,10 @@ function BESSMarketShare({
     <section className="mb-6 bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl p-5">
       <div className="flex items-center justify-between mb-4 flex-wrap gap-2">
         <div>
-          <h2 className="text-lg font-semibold text-[var(--color-text)]">
-            BESS Market Share
-          </h2>
+          <h2 className="text-lg font-semibold text-[var(--color-text)]">BESS Market Share</h2>
           <p className="text-xs text-[var(--color-text-muted)]">
             {chartData.length} OEMs · {total.toLocaleString()} {metricLabel} total
-            {filterDesc && ` · ${filterDesc}`}
+            {filterDesc && ` · ${filterDesc}`} · Click slices to view projects
           </p>
         </div>
         <div className="flex gap-1">
@@ -531,12 +510,176 @@ function BESSMarketShare({
               paddingAngle={2}
               dataKey="value"
               nameKey="name"
+              cursor="pointer"
               // eslint-disable-next-line @typescript-eslint/no-explicit-any
               label={(props: any) => {
                 const pct = props.percent ?? 0
                 return pct > 0.05 ? `${props.name ?? ''} ${(pct * 100).toFixed(0)}%` : ''
               }}
               labelLine={false}
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+              onClick={(_: any, index: number) => {
+                const slice = mainSlices[index]
+                if (slice?.slug) {
+                  navigate(`/oems/${slice.slug}`)
+                }
+              }}
+            >
+              {mainSlices.map((_, i) => (
+                <Cell key={i} fill={PIE_COLORS[i % PIE_COLORS.length]} />
+              ))}
+            </Pie>
+            <Tooltip
+              contentStyle={{
+                backgroundColor: '#1e293b',
+                border: '1px solid rgba(255,255,255,0.1)',
+                borderRadius: 8,
+                color: '#f1f5f9',
+                fontSize: 13,
+              }}
+              formatter={(value) => `${Number(value).toLocaleString()} ${metricLabel}`}
+            />
+            <Legend
+              wrapperStyle={{ fontSize: 11 }}
+              formatter={(value) => <span style={{ color: '#9ca3af' }}>{value}</span>}
+            />
+          </PieChart>
+        </ResponsiveContainer>
+      </div>
+    </section>
+  )
+}
+
+// ─── Wind Market Share Pie Chart ───
+type WindPieMetric = 'projects' | 'mw'
+
+function WindMarketShare({
+  oems,
+  stateFilters,
+  statusFilters,
+  navigate,
+}: {
+  oems: OEMProfile[]
+  stateFilters: State[]
+  statusFilters: ProjectStatus[]
+  navigate: (path: string) => void
+}) {
+  const [metric, setMetric] = useState<WindPieMetric>('projects')
+
+  const chartData = useMemo(() => {
+    const windOems = oems.filter((o) => o.by_technology.wind)
+
+    return windOems.map((oem) => {
+      let count = 0
+      let mw = 0
+
+      if (!stateFilters.length && !statusFilters.length) {
+        count = oem.by_technology.wind ?? 0
+        mw = oem.total_capacity_mw
+      } else {
+        if (statusFilters.length && !stateFilters.length) {
+          for (const s of statusFilters) {
+            const d = oem.status_detail[s]
+            if (d) { count += d.count; mw += d.capacity_mw }
+          }
+        } else if (stateFilters.length && !statusFilters.length) {
+          for (const s of stateFilters) {
+            const d = oem.state_detail[s]
+            if (d) { count += d.count; mw += d.capacity_mw }
+          }
+        } else {
+          for (const s of statusFilters) {
+            const d = oem.status_detail[s]
+            if (d) { count += d.count; mw += d.capacity_mw }
+          }
+        }
+      }
+
+      return { name: oem.name, slug: oem.slug, projects: count, mw: Math.round(mw) }
+    })
+      .filter((d) => d[metric] > 0)
+      .sort((a, b) => b[metric] - a[metric])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [oems, stateFilters.join(','), statusFilters.join(','), metric])
+
+  const threshold = 0.03
+  const total = chartData.reduce((s, d) => s + d[metric], 0)
+  const mainSlices: { name: string; value: number; slug?: string }[] = []
+  let otherValue = 0
+
+  for (const d of chartData) {
+    if (d[metric] / total >= threshold) {
+      mainSlices.push({ name: d.name, value: d[metric], slug: d.slug })
+    } else {
+      otherValue += d[metric]
+    }
+  }
+  if (otherValue > 0) mainSlices.push({ name: 'Other', value: otherValue })
+
+  const metricLabel = metric === 'projects' ? 'Projects' : 'MW'
+  const filterDesc = [
+    stateFilters.length ? stateFilters.join(', ') : '',
+    statusFilters.length ? statusFilters.join(', ') : '',
+  ].filter(Boolean).join(' · ')
+
+  if (mainSlices.length === 0) return null
+
+  return (
+    <section className="mb-6 bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl p-5">
+      <div className="flex items-center justify-between mb-4 flex-wrap gap-2">
+        <div>
+          <h2 className="text-lg font-semibold text-[var(--color-text)]">Wind OEM Market Share</h2>
+          <p className="text-xs text-[var(--color-text-muted)]">
+            {chartData.length} OEMs · {total >= 1000 ? `${(total / 1000).toFixed(1)} GW` : `${total.toLocaleString()} MW`} total
+            {filterDesc && ` · ${filterDesc}`} · Click slices to view projects
+          </p>
+        </div>
+        <div className="flex gap-1">
+          {([
+            { key: 'projects' as const, label: '# Projects' },
+            { key: 'mw' as const, label: 'MW' },
+          ]).map((opt) => (
+            <button
+              key={opt.key}
+              onClick={() => setMetric(opt.key)}
+              className={`text-xs px-2.5 py-1 rounded-lg border transition-colors ${
+                metric === opt.key
+                  ? 'border-[var(--color-primary)]/40 bg-[var(--color-primary)]/10 text-[var(--color-primary)] font-medium'
+                  : 'border-[var(--color-border)] text-[var(--color-text-muted)] hover:border-[var(--color-text-muted)]'
+              }`}
+            >
+              {opt.label}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <div className="h-72">
+        <ResponsiveContainer width="100%" height="100%">
+          <PieChart>
+            <Pie
+              data={mainSlices}
+              cx="50%"
+              cy="50%"
+              innerRadius={55}
+              outerRadius={100}
+              paddingAngle={2}
+              dataKey="value"
+              nameKey="name"
+              cursor="pointer"
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+              label={(props: any) => {
+                const pct = props.percent ?? 0
+                return pct > 0.05 ? `${props.name ?? ''} ${(pct * 100).toFixed(0)}%` : ''
+              }}
+              labelLine={false}
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+              onClick={(_: any, index: number) => {
+                const slice = mainSlices[index]
+                if (slice?.slug) {
+                  navigate(`/oems/${slice.slug}`)
+                }
+              }}
             >
               {mainSlices.map((_, i) => (
                 <Cell key={i} fill={PIE_COLORS[i % PIE_COLORS.length]} />
