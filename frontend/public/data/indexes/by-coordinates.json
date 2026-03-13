@@ -183,6 +183,17 @@
     "developer": "Quinbrook Infrastructure Partners"
   },
   {
+    "id": "wambo-wind-farm",
+    "name": "Wambo Wind Farm",
+    "technology": "wind",
+    "status": "construction",
+    "capacity_mw": 506.0,
+    "state": "QLD",
+    "lat": -26.648,
+    "lng": 151.306,
+    "developer": "Cubico Sustainable Investments / Stanwell Corporation (50:50 JV)"
+  },
+  {
     "id": "liddell-bess",
     "name": "Liddell BESS",
     "technology": "bess",
@@ -193,17 +204,6 @@
     "lat": -32.3715,
     "lng": 150.978,
     "developer": "AGL Energy"
-  },
-  {
-    "id": "wambo-wind-farm",
-    "name": "Wambo Wind Farm",
-    "technology": "wind",
-    "status": "construction",
-    "capacity_mw": 500.0,
-    "state": "QLD",
-    "lat": -26.648,
-    "lng": 151.306,
-    "developer": "Cubico Sustainable Investments / Stanwell Corporation (50:50 JV)"
   },
   {
     "id": "eraring-battery",

@@ -1365,7 +1365,8 @@
     "data_confidence": "medium",
     "confidence_score": "49",
     "development_stage": "epbc_approved",
-    "notable": "38 GE Vernova Cypress turbines (Stage 1). First split-scope project-financed wind farm in Australia. A$740M.",
+    "capex_aud_m": 740.0,
+    "notable": "38x GE Vernova 6.0-164. Aula/CS Energy 50:50 JV. CS Energy 20yr PPA. RES construction mgmt. A$740M. COD 2027.",
     "first_seen": "2020"
   },
   {
@@ -2355,13 +2356,14 @@
     "name": "Carmodys Hill Wind Farm",
     "technology": "wind",
     "status": "construction",
-    "capacity_mw": 247.0,
+    "capacity_mw": 256.0,
     "state": "SA",
     "current_developer": "Aula Energy",
     "data_confidence": "medium",
     "confidence_score": "46",
     "development_stage": "epbc_approved",
-    "notable": "42 GE Vernova 6.1 MW turbines. A$900M. CIS Tender 4 winner. Financial close late 2025.",
+    "capex_aud_m": 900.0,
+    "notable": "42x GE Vernova 6.1-158. Aula Energy (Macquarie). DT Infrastructure civil. A$900M. COD 2028.",
     "first_seen": "2020"
   },
   {
@@ -2618,6 +2620,7 @@
     "current_developer": "Squadron Energy Services Pty Ltd",
     "data_confidence": "low",
     "confidence_score": "17",
+    "capex_aud_m": 1500.0,
     "notable": "100x Goldwind ~4.5MW. Squadron Energy. Stanwell 348MW 15yr PPA. SynCon installed. A$1B financing Dec 2025.",
     "first_seen": "2026-03-12"
   },
@@ -4795,6 +4798,7 @@
     "current_developer": "Golden Plains WF1 Pty Ltd as trustee for the Golden Plains WF1 Unit Trust",
     "data_confidence": "low",
     "confidence_score": "17",
+    "capex_aud_m": 2000.0,
     "notable": "Stage 1 of Australias largest wind farm. 122x Vestas V162-6.2MW. Snowy Hydro 40% + Equinix 20% PPAs. A$2B. TagEnergy/IKEA.",
     "first_seen": "2026-03-12"
   },
@@ -7359,7 +7363,8 @@
     "data_confidence": "good",
     "confidence_score": "59",
     "development_stage": "epbc_approved",
-    "notable": "55x Vestas V150-4.2MW. Vestas EPC. Nexif/RATCH-Australia. Located near Marlborough, QLD.",
+    "capex_aud_m": 1300.0,
+    "notable": "46x Vestas V162-6.2MW. CS Energy acquired from CIP. Vestas EPC + Zenviron BOP. A$1.3B. COD Q4 2026.",
     "first_seen": "2020"
   },
   {
@@ -7427,6 +7432,8 @@
     "data_confidence": "low",
     "confidence_score": "17",
     "development_stage": "epbc_approved",
+    "capex_aud_m": 1960.0,
+    "capex_year": 2023,
     "notable": "Largest onshore wind farm in southern hemisphere. 162x Nordex N163/5.7MW. A$1.96B. CleanCo 400MW PPA + Stanwell + Ark/Telstra.",
     "first_seen": "2020"
   },
@@ -10676,6 +10683,7 @@
     "data_confidence": "medium",
     "confidence_score": "43",
     "development_stage": "epbc_approved",
+    "capex_aud_m": 700.0,
     "notable": "Largest wind farm in NSW. 66x Vestas V162-6.0MW EnVentus \u2014 among highest capacity onshore turbines in Australia.",
     "first_seen": "2020"
   },
@@ -12727,7 +12735,8 @@
     "rez": "nsw-central-west-orana",
     "data_confidence": "good",
     "confidence_score": "56",
-    "notable": "84x GE 5.5-158 Cypress. GE/NACAP/CCP consortium EPC. Squad Energy. Had significant construction delays.",
+    "capex_aud_m": 820.0,
+    "notable": "69x GE Vernova 6.0-164 (6MW). Squadron Energy. Snowy Hydro 200MW 15yr PPA. A$820M. Part of GE 1.4GW strategic alliance. Central-West Orana REZ.",
     "first_seen": "2021-05-07"
   },
   {
@@ -12925,13 +12934,13 @@
     "name": "Wambo Wind Farm",
     "technology": "wind",
     "status": "construction",
-    "capacity_mw": 500.0,
+    "capacity_mw": 506.0,
     "state": "QLD",
     "current_developer": "Cubico Sustainable Investments / Stanwell Corporation (50:50 JV)",
     "data_confidence": "good",
     "confidence_score": "62",
     "development_stage": "epbc_approved",
-    "notable": "97x Vestas V150-4.2MW. Vestas EPC. Shell Energy PPA. Owned by Squadron Energy.",
+    "notable": "83x Vestas V162-6.2MW (S1:42, S2:41). Cubico/Stanwell 50:50 JV. Stanwell 15yr PPA. A$650M+ finance. S1 late 2025, S2 2026.",
     "first_seen": "2020"
   },
   {

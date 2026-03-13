@@ -4362,6 +4362,26 @@
       ]
     },
     {
+      "slug": "cubico-sustainable-investments-stanwell-corporation-50-50-jv",
+      "name": "Cubico Sustainable Investments / Stanwell Corporation (50:50 JV)",
+      "project_count": 1,
+      "total_capacity_mw": 506.0,
+      "total_storage_mwh": 0,
+      "by_technology": {
+        "wind": 1
+      },
+      "by_status": {
+        "construction": 1
+      },
+      "states": [
+        "QLD"
+      ],
+      "avg_confidence": "good",
+      "project_ids": [
+        "wambo-wind-farm"
+      ]
+    },
+    {
       "slug": "acciona-energy-5",
       "name": "Acciona Energy",
       "project_count": 2,
@@ -4851,26 +4871,6 @@
       "avg_confidence": "low",
       "project_ids": [
         "wallerawang-9-bess"
-      ]
-    },
-    {
-      "slug": "cubico-sustainable-investments-stanwell-corporation-50-50-jv",
-      "name": "Cubico Sustainable Investments / Stanwell Corporation (50:50 JV)",
-      "project_count": 1,
-      "total_capacity_mw": 500.0,
-      "total_storage_mwh": 0,
-      "by_technology": {
-        "wind": 1
-      },
-      "by_status": {
-        "construction": 1
-      },
-      "states": [
-        "QLD"
-      ],
-      "avg_confidence": "good",
-      "project_ids": [
-        "wambo-wind-farm"
       ]
     },
     {
@@ -7879,6 +7879,26 @@
       ]
     },
     {
+      "slug": "aula-energy",
+      "name": "Aula Energy",
+      "project_count": 1,
+      "total_capacity_mw": 256.0,
+      "total_storage_mwh": 0,
+      "by_technology": {
+        "wind": 1
+      },
+      "by_status": {
+        "construction": 1
+      },
+      "states": [
+        "SA"
+      ],
+      "avg_confidence": "medium",
+      "project_ids": [
+        "carmodys-hill-wind-farm"
+      ]
+    },
+    {
       "slug": "metlen-energy-metals",
       "name": "Metlen Energy & Metals",
       "project_count": 1,
@@ -8397,26 +8417,6 @@
       "avg_confidence": "low",
       "project_ids": [
         "ruby-hills-north-wind-farm"
-      ]
-    },
-    {
-      "slug": "aula-energy",
-      "name": "Aula Energy",
-      "project_count": 1,
-      "total_capacity_mw": 247.0,
-      "total_storage_mwh": 0,
-      "by_technology": {
-        "wind": 1
-      },
-      "by_status": {
-        "construction": 1
-      },
-      "states": [
-        "SA"
-      ],
-      "avg_confidence": "medium",
-      "project_ids": [
-        "carmodys-hill-wind-farm"
       ]
     },
     {
@@ -16260,7 +16260,7 @@
         "Stanwell Lockyer Project Co Pty Ltd"
       ],
       "project_count": 4,
-      "total_capacity_mw": 2100.0,
+      "total_capacity_mw": 2106.0,
       "total_storage_mwh": 2600.0,
       "by_technology": {
         "wind": 1,
@@ -19686,6 +19686,32 @@
       ]
     },
     {
+      "slug": "aula-energy",
+      "name": "Aula Energy",
+      "aliases": [
+        "Aula Energy",
+        "Aula Energy / CS Energy (50:50 JV)"
+      ],
+      "project_count": 2,
+      "total_capacity_mw": 484.0,
+      "total_storage_mwh": 0,
+      "by_technology": {
+        "wind": 2
+      },
+      "by_status": {
+        "construction": 2
+      },
+      "states": [
+        "QLD",
+        "SA"
+      ],
+      "avg_confidence": "medium",
+      "project_ids": [
+        "carmodys-hill-wind-farm",
+        "boulder-creek-wind-farm"
+      ]
+    },
+    {
       "slug": "manthos-investments",
       "name": "Manthos Investments Pty Ltd",
       "project_count": 1,
@@ -19751,32 +19777,6 @@
         "broadsoundbess"
       ],
       "aliases": []
-    },
-    {
-      "slug": "aula-energy",
-      "name": "Aula Energy",
-      "aliases": [
-        "Aula Energy",
-        "Aula Energy / CS Energy (50:50 JV)"
-      ],
-      "project_count": 2,
-      "total_capacity_mw": 475.0,
-      "total_storage_mwh": 0,
-      "by_technology": {
-        "wind": 2
-      },
-      "by_status": {
-        "construction": 2
-      },
-      "states": [
-        "QLD",
-        "SA"
-      ],
-      "avg_confidence": "medium",
-      "project_ids": [
-        "carmodys-hill-wind-farm",
-        "boulder-creek-wind-farm"
-      ]
     },
     {
       "slug": "canadian-solar",

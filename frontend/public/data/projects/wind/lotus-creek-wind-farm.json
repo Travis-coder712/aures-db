@@ -13,13 +13,14 @@
   "has_syncon": false,
   "has_statcom": false,
   "has_harmonic_filter": false,
-  "notable": "55x Vestas V150-4.2MW. Vestas EPC. Nexif/RATCH-Australia. Located near Marlborough, QLD.",
+  "notable": "46x Vestas V162-6.2MW. CS Energy acquired from CIP. Vestas EPC + Zenviron BOP. A$1.3B. COD Q4 2026.",
   "data_confidence": "good",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "2002",
   "confidence_score": "59",
   "development_stage": "epbc_approved",
+  "capex_aud_m": 1300.0,
   "first_seen": "2020",
   "coordinates": {
     "lat": -22.0,
@@ -91,7 +92,12 @@
       "source_url": "https://zenviron.com/projects/lotus-creek-wind-farm"
     }
   ],
-  "offtakes": [],
+  "offtakes": [
+    {
+      "party": "CS Energy",
+      "type": "PPA"
+    }
+  ],
   "scheme_contracts": [
     {
       "scheme": "QLD RE&H Jobs Fund",

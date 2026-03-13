@@ -1,10 +1,45 @@
 {
   "offtakers": [
     {
+      "slug": "snowy-hydro",
+      "name": "Snowy Hydro",
+      "project_count": 9,
+      "total_capacity_mw": 3524.0,
+      "types": [
+        "PPA"
+      ],
+      "by_technology": {
+        "hybrid": 1,
+        "solar": 2,
+        "wind": 7
+      },
+      "by_status": {
+        "operating": 8,
+        "commissioning": 1,
+        "construction": 1
+      },
+      "states": [
+        "NSW",
+        "SA",
+        "VIC"
+      ],
+      "project_ids": [
+        "avonlie-solar-farm",
+        "bango-973-wind-farm",
+        "dundonnell-wind-farm",
+        "golden-plains-wind-farm-east",
+        "lincoln-gap-wind-farm-stage-1",
+        "murra-warra-wind-farm-stage-2",
+        "new-england-solar-farm",
+        "stubbo-solar-farm",
+        "uungula-wind-farm"
+      ]
+    },
+    {
       "slug": "shell-energy",
       "name": "Shell Energy",
       "project_count": 4,
-      "total_capacity_mw": 3111.1,
+      "total_capacity_mw": 3123.1,
       "types": [
         "PPA"
       ],
@@ -24,39 +59,6 @@
         "golden-plains-wind",
         "stockyard-hill-wind-farm",
         "wambo-wind-farm"
-      ]
-    },
-    {
-      "slug": "snowy-hydro",
-      "name": "Snowy Hydro",
-      "project_count": 8,
-      "total_capacity_mw": 3110.0,
-      "types": [
-        "PPA"
-      ],
-      "by_technology": {
-        "hybrid": 1,
-        "solar": 2,
-        "wind": 6
-      },
-      "by_status": {
-        "operating": 8,
-        "commissioning": 1
-      },
-      "states": [
-        "NSW",
-        "SA",
-        "VIC"
-      ],
-      "project_ids": [
-        "avonlie-solar-farm",
-        "bango-973-wind-farm",
-        "dundonnell-wind-farm",
-        "golden-plains-wind-farm-east",
-        "lincoln-gap-wind-farm-stage-1",
-        "murra-warra-wind-farm-stage-2",
-        "new-england-solar-farm",
-        "stubbo-solar-farm"
       ]
     },
     {
@@ -114,6 +116,38 @@
       ]
     },
     {
+      "slug": "energyaustralia",
+      "name": "EnergyAustralia",
+      "project_count": 8,
+      "total_capacity_mw": 2466.5,
+      "types": [
+        "PPA"
+      ],
+      "by_technology": {
+        "wind": 4,
+        "solar": 4
+      },
+      "by_status": {
+        "operating": 7,
+        "construction": 1
+      },
+      "states": [
+        "NSW",
+        "SA",
+        "VIC"
+      ],
+      "project_ids": [
+        "culcairn-solar-farm",
+        "golden-plains-wind-farm-west",
+        "gullen-range-wind-farm",
+        "hallett-stage-1-brown-hill",
+        "limondale-solar-farm-1",
+        "moorabool-wind-farm",
+        "walla-walla-solar-farm",
+        "wellington-north-solar-farm-lightsource"
+      ]
+    },
+    {
       "slug": "origin-energy",
       "name": "Origin Energy",
       "project_count": 5,
@@ -142,55 +176,54 @@
       ]
     },
     {
-      "slug": "energyaustralia",
-      "name": "EnergyAustralia",
-      "project_count": 7,
-      "total_capacity_mw": 1889.5,
-      "types": [
-        "PPA"
-      ],
-      "by_technology": {
-        "wind": 3,
-        "solar": 4
-      },
-      "by_status": {
-        "operating": 7
-      },
-      "states": [
-        "NSW",
-        "SA",
-        "VIC"
-      ],
-      "project_ids": [
-        "culcairn-solar-farm",
-        "gullen-range-wind-farm",
-        "hallett-stage-1-brown-hill",
-        "limondale-solar-farm-1",
-        "moorabool-wind-farm",
-        "walla-walla-solar-farm",
-        "wellington-north-solar-farm-lightsource"
-      ]
-    },
-    {
       "slug": "stanwell-corporation",
       "name": "Stanwell Corporation",
-      "project_count": 2,
-      "total_capacity_mw": 1373.0,
+      "project_count": 3,
+      "total_capacity_mw": 1879.0,
       "types": [
         "PPA"
       ],
       "by_technology": {
-        "wind": 2
+        "wind": 3
       },
       "by_status": {
-        "commissioning": 2
+        "commissioning": 2,
+        "construction": 1
       },
       "states": [
         "QLD"
       ],
       "project_ids": [
         "clarke-creek-wind-farm",
-        "macintyre-wind-farm"
+        "macintyre-wind-farm",
+        "wambo-wind-farm"
+      ]
+    },
+    {
+      "slug": "cs-energy",
+      "name": "CS Energy",
+      "project_count": 4,
+      "total_capacity_mw": 1363.0,
+      "types": [
+        "PPA"
+      ],
+      "by_technology": {
+        "solar": 1,
+        "wind": 3
+      },
+      "by_status": {
+        "operating": 1,
+        "commissioning": 1,
+        "construction": 2
+      },
+      "states": [
+        "QLD"
+      ],
+      "project_ids": [
+        "boulder-creek-wind-farm",
+        "clarke-creek-wind-farm",
+        "lotus-creek-wind-farm",
+        "western-downs-green-power-hub-pl"
       ]
     },
     {
@@ -223,27 +256,24 @@
       ]
     },
     {
-      "slug": "cs-energy",
-      "name": "CS Energy",
-      "project_count": 2,
-      "total_capacity_mw": 850.0,
+      "slug": "ark-energy-telstra",
+      "name": "Ark Energy/Telstra",
+      "project_count": 1,
+      "total_capacity_mw": 923.0,
       "types": [
-        "PPA"
+        "corporate_ppa"
       ],
       "by_technology": {
-        "solar": 1,
         "wind": 1
       },
       "by_status": {
-        "operating": 1,
         "commissioning": 1
       },
       "states": [
         "QLD"
       ],
       "project_ids": [
-        "clarke-creek-wind-farm",
-        "western-downs-green-power-hub-pl"
+        "macintyre-wind-farm"
       ]
     },
     {
@@ -695,5 +725,5 @@
       ]
     }
   ],
-  "total": 30
+  "total": 31
 }

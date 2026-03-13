@@ -155,7 +155,7 @@
       "slug": "vestas-epc",
       "name": "Vestas (EPC)",
       "project_count": 2,
-      "total_capacity_mw": 1077.0,
+      "total_capacity_mw": 1083.0,
       "roles": [
         "epc"
       ],
@@ -462,6 +462,27 @@
       ]
     },
     {
+      "slug": "dt-infrastructure",
+      "name": "DT Infrastructure",
+      "project_count": 1,
+      "total_capacity_mw": 256.0,
+      "roles": [
+        "bop"
+      ],
+      "by_technology": {
+        "wind": 1
+      },
+      "by_status": {
+        "construction": 1
+      },
+      "states": [
+        "SA"
+      ],
+      "project_ids": [
+        "carmodys-hill-wind-farm"
+      ]
+    },
+    {
       "slug": "mcconnell-dowell-john-holland-jv",
       "name": "McConnell Dowell / John Holland JV",
       "project_count": 1,
@@ -543,27 +564,6 @@
       ],
       "project_ids": [
         "pine-lodge-bess"
-      ]
-    },
-    {
-      "slug": "dt-infrastructure",
-      "name": "DT Infrastructure",
-      "project_count": 1,
-      "total_capacity_mw": 247.0,
-      "roles": [
-        "bop"
-      ],
-      "by_technology": {
-        "wind": 1
-      },
-      "by_status": {
-        "construction": 1
-      },
-      "states": [
-        "SA"
-      ],
-      "project_ids": [
-        "carmodys-hill-wind-farm"
       ]
     },
     {

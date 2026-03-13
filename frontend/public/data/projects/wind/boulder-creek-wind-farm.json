@@ -13,13 +13,14 @@
   "has_syncon": false,
   "has_statcom": false,
   "has_harmonic_filter": false,
-  "notable": "38 GE Vernova Cypress turbines (Stage 1). First split-scope project-financed wind farm in Australia. A$740M.",
+  "notable": "38x GE Vernova 6.0-164. Aula/CS Energy 50:50 JV. CS Energy 20yr PPA. RES construction mgmt. A$740M. COD 2027.",
   "data_confidence": "medium",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "2003",
   "confidence_score": "49",
   "development_stage": "epbc_approved",
+  "capex_aud_m": 740.0,
   "first_seen": "2020",
   "timeline": [
     {
@@ -86,7 +87,13 @@
       "source_url": "https://dtinfrastructure.com.au/boulder-creek-wind-farm/"
     }
   ],
-  "offtakes": [],
+  "offtakes": [
+    {
+      "party": "CS Energy",
+      "type": "PPA",
+      "term_years": 20
+    }
+  ],
   "scheme_contracts": [
     {
       "scheme": "QLD RE&H Jobs Fund",

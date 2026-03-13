@@ -3,7 +3,7 @@
   "name": "Wambo Wind Farm",
   "technology": "wind",
   "status": "construction",
-  "capacity_mw": 500.0,
+  "capacity_mw": 506.0,
   "state": "QLD",
   "current_developer": "Cubico Sustainable Investments / Stanwell Corporation (50:50 JV)",
   "cod_current": "2025-02-28",
@@ -13,7 +13,7 @@
   "has_syncon": false,
   "has_statcom": false,
   "has_harmonic_filter": false,
-  "notable": "97x Vestas V150-4.2MW. Vestas EPC. Shell Energy PPA. Owned by Squadron Energy.",
+  "notable": "83x Vestas V162-6.2MW (S1:42, S2:41). Cubico/Stanwell 50:50 JV. Stanwell 15yr PPA. A$650M+ finance. S1 late 2025, S2 2026.",
   "data_confidence": "good",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
@@ -115,6 +115,11 @@
     {
       "party": "Shell Energy",
       "type": "PPA"
+    },
+    {
+      "party": "Stanwell Corporation",
+      "type": "PPA",
+      "term_years": 15
     }
   ],
   "scheme_contracts": [

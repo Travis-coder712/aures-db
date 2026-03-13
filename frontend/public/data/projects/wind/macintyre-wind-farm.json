@@ -20,6 +20,8 @@
   "aemo_gen_info_id": "1332",
   "confidence_score": "17",
   "development_stage": "epbc_approved",
+  "capex_aud_m": 1960.0,
+  "capex_year": 2023,
   "first_seen": "2020",
   "timeline": [
     {
@@ -62,6 +64,10 @@
     {
       "party": "Stanwell Corporation",
       "type": "PPA"
+    },
+    {
+      "party": "Ark Energy/Telstra",
+      "type": "corporate_ppa"
     }
   ],
   "scheme_contracts": [],
