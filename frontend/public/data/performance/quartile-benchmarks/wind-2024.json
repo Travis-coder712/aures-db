@@ -4,13 +4,13 @@
   "benchmarks": {
     "capacity_factor": {
       "q1": 23.54,
-      "median": 29.33,
-      "q3": 34.76
+      "median": 28.59,
+      "q3": 33.15
     },
     "revenue_per_mw": {
       "q1": 131288.0,
-      "median": 179038.0,
-      "q3": 270594.0
+      "median": 172834.0,
+      "q3": 248474.0
     }
   }
 }

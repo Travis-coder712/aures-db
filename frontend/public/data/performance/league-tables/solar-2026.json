@@ -3,8 +3,8 @@
   "technology": "solar",
   "data_source": "openelectricity_ytd",
   "fleet_avg": {
-    "capacity_factor_pct": 29.47,
-    "revenue_per_mw": 17351.0,
+    "capacity_factor_pct": 28.56,
+    "revenue_per_mw": 16501.0,
     "count": 79
   },
   "projects": [
@@ -66,12 +66,12 @@
       "technology": "solar",
       "capacity_mw": 107.0,
       "state": "SA",
-      "energy_mwh": 152859.5,
-      "capacity_factor_pct": 100.0,
+      "energy_mwh": 51596.1,
+      "capacity_factor_pct": 28.3,
       "energy_price_received": 70.93,
-      "revenue_aud": 10841666.0,
-      "revenue_per_mw": 101324.0,
-      "market_value_aud": 10841666.0,
+      "revenue_aud": 3659490.0,
+      "revenue_per_mw": 34201.0,
+      "market_value_aud": 3659490.0,
       "data_source": "openelectricity_ytd"
     },
     {

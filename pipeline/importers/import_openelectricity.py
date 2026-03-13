@@ -258,34 +258,46 @@ def import_from_api(conn, year: int, ytd: bool = False):
         if energy <= 0:
             continue
 
-        for pid in code_to_projects.get(fcode, []):
-            project = projects_by_id.get(pid)
-            if not project:
-                continue
+        pids = code_to_projects.get(fcode, [])
+        valid_projects = [(pid, projects_by_id[pid]) for pid in pids if projects_by_id.get(pid)]
+        if not valid_projects:
+            continue
 
+        # When multiple projects share a facility, split energy/revenue proportionally by capacity
+        total_capacity = sum(p['capacity_mw'] for _, p in valid_projects)
+
+        for pid, project in valid_projects:
             capacity_mw = project['capacity_mw']
             tech = project['technology']
             storage_mwh = project.get('storage_mwh')
 
-            cf = (energy / (capacity_mw * hours_in_period)) * 100
-            price_received = market_value / energy if energy > 0 else 0
-            revenue_per_mw = market_value / capacity_mw if capacity_mw > 0 else 0
+            if len(valid_projects) > 1 and total_capacity > 0:
+                share = capacity_mw / total_capacity
+            else:
+                share = 1.0
+
+            project_energy = energy * share
+            project_revenue = market_value * share
+
+            cf = (project_energy / (capacity_mw * hours_in_period)) * 100
+            price_received = project_revenue / project_energy if project_energy > 0 else 0
+            revenue_per_mw = project_revenue / capacity_mw if capacity_mw > 0 else 0
 
             metrics = {
-                'energy_mwh': round(energy, 1),
+                'energy_mwh': round(project_energy, 1),
                 'capacity_factor_pct': round(min(cf, 100), 2),
                 'energy_price_received': round(price_received, 2),
-                'revenue_aud': round(market_value, 0),
+                'revenue_aud': round(project_revenue, 0),
                 'revenue_per_mw': round(revenue_per_mw, 0),
-                'market_value_aud': round(market_value, 0),
+                'market_value_aud': round(project_revenue, 0),
             }
 
             # BESS: derive charge/discharge metrics from separate unit data
             if tech == 'bess':
-                discharged = raw.get('discharge_energy_mwh', 0)
-                charged = raw.get('charge_energy_mwh', 0)
-                discharge_val = raw.get('discharge_value_aud', 0)
-                charge_val = raw.get('charge_value_aud', 0)
+                discharged = raw.get('discharge_energy_mwh', 0) * share
+                charged = raw.get('charge_energy_mwh', 0) * share
+                discharge_val = raw.get('discharge_value_aud', 0) * share
+                charge_val = raw.get('charge_value_aud', 0) * share
 
                 if discharged > 0 and charged > 0:
                     avg_discharge_price = discharge_val / discharged

@@ -3,8 +3,8 @@
   "technology": "pumped_hydro",
   "data_source": "openelectricity",
   "fleet_avg": {
-    "capacity_factor_pct": 29.54,
-    "revenue_per_mw": 303260.0,
+    "capacity_factor_pct": 28.84,
+    "revenue_per_mw": 291591.0,
     "curtailment_pct": 3.71,
     "count": 33
   },
@@ -276,13 +276,13 @@
       "technology": "pumped_hydro",
       "capacity_mw": 625.0,
       "state": "VIC",
-      "energy_mwh": 1451569.6,
-      "capacity_factor_pct": 26.51,
+      "energy_mwh": 576019.7,
+      "capacity_factor_pct": 10.52,
       "curtailment_pct": 5.31,
       "energy_price_received": 191.85,
-      "revenue_aud": 278489680.0,
-      "revenue_per_mw": 445583.0,
-      "market_value_aud": 278489680.0,
+      "revenue_aud": 110511778.0,
+      "revenue_per_mw": 176819.0,
+      "market_value_aud": 110511778.0,
       "data_source": "openelectricity"
     },
     {
@@ -507,13 +507,13 @@
       "technology": "pumped_hydro",
       "capacity_mw": 950.0,
       "state": "VIC",
-      "energy_mwh": 1451569.6,
-      "capacity_factor_pct": 17.44,
+      "energy_mwh": 875549.9,
+      "capacity_factor_pct": 10.52,
       "curtailment_pct": 2.33,
       "energy_price_received": 191.85,
-      "revenue_aud": 278489680.0,
-      "revenue_per_mw": 293147.0,
-      "market_value_aud": 278489680.0,
+      "revenue_aud": 167977902.0,
+      "revenue_per_mw": 176819.0,
+      "market_value_aud": 167977902.0,
       "data_source": "openelectricity"
     },
     {
