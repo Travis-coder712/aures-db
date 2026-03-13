@@ -1,5 +1,5 @@
-import { useState, useEffect, useMemo } from 'react'
-import { Link } from 'react-router-dom'
+import { useState, useEffect, useMemo, useCallback } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import {
   ScatterChart, Scatter, XAxis, YAxis, CartesianGrid, Tooltip,
   ResponsiveContainer, BarChart, Bar, Cell,
@@ -56,26 +56,43 @@ export default function BESSCapex() {
   const [loading, setLoading] = useState(true)
   const [view, setView] = useState<ViewMode>('charts')
   const [metric, setMetric] = useState<CostMetric>('per_mw')
-  const [selectedOEM, setSelectedOEM] = useState<string>('all')
+  const [selectedOEMs, setSelectedOEMs] = useState<string[]>([])
 
   useEffect(() => {
     fetchBESSCapex().then(d => { setData(d); setLoading(false) })
   }, [])
 
+  function toggleOEM(oem: string) {
+    setSelectedOEMs(prev => prev.includes(oem) ? prev.filter(v => v !== oem) : [...prev, oem])
+  }
+
   const filteredProjects = useMemo(() => {
     if (!data) return []
     let projects = data.projects
-    if (selectedOEM !== 'all') {
-      projects = projects.filter(p => p.bess_oem === selectedOEM)
+    if (selectedOEMs.length > 0) {
+      projects = projects.filter(p => selectedOEMs.includes(p.bess_oem))
     }
     return projects
-  }, [data, selectedOEM])
+  }, [data, selectedOEMs])
+
+  const navigate = useNavigate()
 
   const oems = useMemo(() => {
     if (!data) return []
     const uniqueOEMs = [...new Set(data.projects.map(p => p.bess_oem))].filter(Boolean)
     return uniqueOEMs.sort()
   }, [data])
+
+  // Navigate to filtered project list
+  const navigateToProjects = useCallback((ids: string[], title: string) => {
+    const params = new URLSearchParams({
+      ids: ids.join(','),
+      title,
+      from: 'analytics/bess-capex',
+      fromLabel: 'Back to BESS Capex',
+    })
+    navigate(`/projects?${params.toString()}`)
+  }, [navigate])
 
   // Scatter data: x = capex_year, y = $/MW or $/MWh
   const scatterData = useMemo(() => {
@@ -137,7 +154,14 @@ export default function BESSCapex() {
       <div>
         <h1 className="text-2xl font-bold text-[var(--text-primary)]">BESS Capex Analytics</h1>
         <p className="text-sm text-[var(--text-secondary)] mt-1">
-          Capital cost trends for {data.projects.length} grid-scale batteries in operation, construction & commissioning
+          Capital cost trends for{' '}
+          <button
+            onClick={() => navigateToProjects(data.projects.map(p => p.id), 'BESS with Capex Data')}
+            className="text-blue-400 hover:text-blue-300 underline"
+          >
+            {data.projects.length} grid-scale batteries
+          </button>
+          {' '}in operation, construction & commissioning
         </p>
       </div>
 
@@ -175,17 +199,43 @@ export default function BESSCapex() {
           </button>
         </div>
 
-        {/* OEM filter */}
-        <select
-          value={selectedOEM}
-          onChange={e => setSelectedOEM(e.target.value)}
-          className="px-3 py-1.5 text-sm rounded-lg border border-[var(--border)] bg-[var(--bg-secondary)] text-[var(--text-primary)]"
-        >
-          <option value="all">All OEMs</option>
-          {oems.map(oem => (
-            <option key={oem} value={oem}>{oem}</option>
-          ))}
-        </select>
+      </div>
+
+      {/* OEM multi-select chips */}
+      <div className="flex items-center gap-2 flex-wrap">
+        <span className="text-[10px] font-semibold uppercase tracking-wider text-[var(--color-text-muted)] w-12">
+          OEM
+        </span>
+        {oems.map(oem => {
+          const isActive = selectedOEMs.includes(oem)
+          const colour = getOEMColour(oem)
+          return (
+            <button
+              key={oem}
+              onClick={() => toggleOEM(oem)}
+              className={`text-xs px-2.5 py-1 rounded-full border transition-colors ${
+                isActive
+                  ? 'border-transparent font-medium'
+                  : 'border-[var(--color-border)] text-[var(--color-text-muted)] hover:border-[var(--color-text-muted)]'
+              }`}
+              style={
+                isActive
+                  ? { backgroundColor: `${colour}20`, color: colour }
+                  : undefined
+              }
+            >
+              {oem}
+            </button>
+          )
+        })}
+        {selectedOEMs.length > 0 && (
+          <button
+            onClick={() => setSelectedOEMs([])}
+            className="text-xs text-[var(--color-primary)] hover:underline ml-1"
+          >
+            Clear ×
+          </button>
+        )}
       </div>
 
       {view === 'charts' ? (
@@ -228,22 +278,30 @@ export default function BESSCapex() {
                     )
                   }}
                 />
-                <Scatter data={scatterData} shape={
-                  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                  ((props: any) => {
-                    const { cx, cy, payload } = props
-                    return (
-                      <circle
-                        cx={cx} cy={cy}
-                        r={payload.size}
-                        fill={payload.colour}
-                        fillOpacity={0.7}
-                        stroke={payload.colour}
-                        strokeWidth={1}
-                      />
-                    )
-                  }) as any
-                } />
+                <Scatter
+                  data={scatterData}
+                  onClick={(data: any) => {
+                    if (data?.id) navigate(`/projects/bess/${data.id}?from=analytics/bess-capex&fromLabel=Back to BESS Capex`)
+                  }}
+                  cursor="pointer"
+                  shape={
+                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                    ((props: any) => {
+                      const { cx, cy, payload } = props
+                      return (
+                        <circle
+                          cx={cx} cy={cy}
+                          r={payload.size}
+                          fill={payload.colour}
+                          fillOpacity={0.7}
+                          stroke={payload.colour}
+                          strokeWidth={1}
+                          className="hover:fill-opacity-100 transition-opacity"
+                        />
+                      )
+                    }) as any
+                  }
+                />
               </ScatterChart>
             </ResponsiveContainer>
             {/* Legend */}
@@ -253,8 +311,8 @@ export default function BESSCapex() {
               ).map(([oem, colour]) => (
                 <button
                   key={oem}
-                  onClick={() => setSelectedOEM(selectedOEM === oem ? 'all' : oem)}
-                  className={`flex items-center gap-1 text-xs px-2 py-1 rounded-full border ${selectedOEM === oem ? 'border-blue-500 bg-blue-500/20' : 'border-[var(--border)]'}`}
+                  onClick={() => toggleOEM(oem)}
+                  className={`flex items-center gap-1 text-xs px-2 py-1 rounded-full border ${selectedOEMs.includes(oem) ? 'border-blue-500 bg-blue-500/20' : 'border-[var(--border)]'}`}
                 >
                   <span className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: colour }} />
                   <span className="text-[var(--text-secondary)]">{oem}</span>
@@ -287,7 +345,15 @@ export default function BESSCapex() {
                       return `${label} (${yr?.count} projects, ${yr?.total_mw?.toLocaleString()} MW)`
                     }}
                   />
-                  <Bar dataKey={metricKey} fill="#3b82f6" radius={[4, 4, 0, 0]} />
+                  <Bar
+                    dataKey={metricKey} fill="#3b82f6" radius={[4, 4, 0, 0]}
+                    cursor="pointer"
+                    onClick={(data: any) => {
+                      if (!data?.year) return
+                      const yearProjects = filteredProjects.filter(p => String(p.capex_year) === String(data.year))
+                      navigateToProjects(yearProjects.map(p => p.id), `BESS Capex — FID Year ${data.year}`)
+                    }}
+                  />
                 </BarChart>
               </ResponsiveContainer>
             </div>
@@ -314,7 +380,15 @@ export default function BESSCapex() {
                       return `${label} (${o?.count} projects, ${o?.total_mw?.toLocaleString()} MW)`
                     }}
                   />
-                  <Bar dataKey={metricKey} radius={[0, 4, 4, 0]}>
+                  <Bar
+                    dataKey={metricKey} radius={[0, 4, 4, 0]}
+                    cursor="pointer"
+                    onClick={(data: any) => {
+                      if (!data?.oem) return
+                      const oemProjects = filteredProjects.filter(p => p.bess_oem === data.oem)
+                      navigateToProjects(oemProjects.map(p => p.id), `BESS Capex — ${data.oem}`)
+                    }}
+                  >
                     {oemBarData.map((entry, index) => (
                       <Cell key={`cell-${index}`} fill={entry.colour} />
                     ))}

@@ -1,4 +1,4 @@
-import { useParams, Link } from 'react-router-dom'
+import { useParams, Link, useSearchParams, useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import { TECHNOLOGY_CONFIG, DEVELOPMENT_STAGE_CONFIG, type Project } from '../lib/types'
 import { useProject } from '../hooks/useProjectData'
@@ -13,6 +13,10 @@ export default function ProjectDetail() {
   const { id } = useParams<{ id: string }>()
   const [activeTab, setActiveTab] = useState<Tab>('overview')
   const { project, loading } = useProject(id)
+  const [searchParams] = useSearchParams()
+  const navigate = useNavigate()
+  const fromPage = searchParams.get('from')
+  const fromLabel = searchParams.get('fromLabel')
 
   if (loading) {
     return (
@@ -49,9 +53,18 @@ export default function ProjectDetail() {
     <div className="px-4 lg:px-8 py-6 max-w-4xl mx-auto">
       {/* Breadcrumb */}
       <div className="mb-4">
-        <Link to="/projects" className="text-xs text-[var(--color-text-muted)] hover:text-[var(--color-primary)]">
-          ← All Projects
-        </Link>
+        {fromPage ? (
+          <button
+            onClick={() => navigate(-1)}
+            className="text-xs text-[var(--color-text-muted)] hover:text-[var(--color-primary)]"
+          >
+            {fromLabel || `← Back`}
+          </button>
+        ) : (
+          <Link to="/projects" className="text-xs text-[var(--color-text-muted)] hover:text-[var(--color-primary)]">
+            ← All Projects
+          </Link>
+        )}
       </div>
 
       {/* Project Header */}

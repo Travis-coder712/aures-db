@@ -41,7 +41,7 @@ def fetch_project_summary(conn, project_id):
         SELECT id, name, technology, status, capacity_mw, storage_mwh,
                state, current_developer, current_operator, rez, development_score,
                performance_score, data_confidence, confidence_score,
-               development_stage, capex_aud_m, capex_year, notable
+               development_stage, capex_aud_m, capex_year, notable, first_seen
         FROM projects WHERE id = ?
     """, (project_id,)).fetchone()
     if not row:
@@ -283,7 +283,10 @@ def export_all(db_path=DB_PATH):
     # 13. BESS capex analytics
     export_bess_capex(conn)
 
-    # 14. Export metadata
+    # 14. Project timeline analytics
+    export_project_timeline(conn)
+
+    # 15. Export metadata
     write_json(os.path.join(DATA_DIR, 'metadata', 'last-export.json'), {
         'exported_at': datetime.now().isoformat(),
         'project_count': len(summaries),
@@ -934,6 +937,96 @@ def export_bess_capex(conn):
 
     write_json(os.path.join(DATA_DIR, 'analytics', 'bess-capex.json'), result)
     print(f"  analytics/bess-capex.json ({len(projects)} projects with capex data)")
+
+
+def export_project_timeline(conn):
+    """Export project first-seen timeline analytics — when projects first appeared."""
+    rows = conn.execute("""
+        SELECT p.id, p.name, p.technology, p.status, p.capacity_mw, p.storage_mwh,
+               p.state, p.current_developer, p.first_seen, p.development_stage
+        FROM projects p
+        ORDER BY p.first_seen NULLS LAST, p.capacity_mw DESC
+    """).fetchall()
+
+    projects = []
+    for r in rows:
+        d = dict(r)
+        # Extract year from first_seen (format: YYYY-MM-DD or YYYY-12-31)
+        if d.get('first_seen'):
+            d['first_seen_year'] = int(d['first_seen'][:4])
+        projects.append(clean_none_values(d))
+
+    # By year breakdown
+    by_year = defaultdict(list)
+    for p in projects:
+        year = p.get('first_seen_year', 'unknown')
+        by_year[str(year)].append(p)
+
+    year_summary = {}
+    for year, ps in sorted(by_year.items()):
+        year_summary[year] = {
+            'count': len(ps),
+            'total_mw': round(sum(p.get('capacity_mw', 0) for p in ps), 1),
+            'by_technology': {},
+            'by_state': {},
+            'by_status': {},
+        }
+        for tech in set(p.get('technology', 'unknown') for p in ps):
+            tech_ps = [p for p in ps if p.get('technology') == tech]
+            year_summary[year]['by_technology'][tech] = {
+                'count': len(tech_ps),
+                'capacity_mw': round(sum(p.get('capacity_mw', 0) for p in tech_ps), 1),
+            }
+        for state in set(p.get('state', 'unknown') for p in ps):
+            state_ps = [p for p in ps if p.get('state') == state]
+            year_summary[year]['by_state'][state] = {
+                'count': len(state_ps),
+                'capacity_mw': round(sum(p.get('capacity_mw', 0) for p in state_ps), 1),
+            }
+        for status in set(p.get('status', 'unknown') for p in ps):
+            status_ps = [p for p in ps if p.get('status') == status]
+            year_summary[year]['by_status'][status] = {
+                'count': len(status_ps),
+                'capacity_mw': round(sum(p.get('capacity_mw', 0) for p in status_ps), 1),
+            }
+
+    # By technology summary
+    by_tech = defaultdict(list)
+    for p in projects:
+        by_tech[p.get('technology', 'unknown')].append(p)
+
+    tech_summary = {}
+    for tech, ps in sorted(by_tech.items(), key=lambda x: -len(x[1])):
+        tech_summary[tech] = {
+            'count': len(ps),
+            'total_mw': round(sum(p.get('capacity_mw', 0) for p in ps), 1),
+            'with_date': sum(1 for p in ps if p.get('first_seen_year')),
+        }
+
+    # By state summary
+    by_state = defaultdict(list)
+    for p in projects:
+        by_state[p.get('state', 'unknown')].append(p)
+
+    state_summary = {}
+    for state, ps in sorted(by_state.items(), key=lambda x: -len(x[1])):
+        state_summary[state] = {
+            'count': len(ps),
+            'total_mw': round(sum(p.get('capacity_mw', 0) for p in ps), 1),
+        }
+
+    result = {
+        'projects': projects,
+        'by_year': year_summary,
+        'by_technology': tech_summary,
+        'by_state': state_summary,
+        'total_with_date': sum(1 for p in projects if p.get('first_seen_year')),
+        'total_without_date': sum(1 for p in projects if not p.get('first_seen_year')),
+        'exported_at': datetime.now().isoformat(),
+    }
+
+    write_json(os.path.join(DATA_DIR, 'analytics', 'project-timeline.json'), result)
+    print(f"  analytics/project-timeline.json ({len(projects)} projects, {result['total_with_date']} with dates)")
 
 
 def export_data_sources(conn):

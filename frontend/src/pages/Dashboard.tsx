@@ -316,18 +316,21 @@ export default function Dashboard() {
           label="Operating"
           value={`${hs.operating_gw.toFixed(1)} GW`}
           color={STATUS_COLORS.operating}
+          href="/projects?status=operating&from=dashboard&fromLabel=Back to Dashboard"
         />
         <FleetCard
           label="Under Construction"
           value={`${hs.construction_gw.toFixed(1)} GW`}
           color={STATUS_COLORS.construction}
           sublabel={`${hs.construction_count} projects`}
+          href="/projects?status=construction,commissioning&from=dashboard&fromLabel=Back to Dashboard"
         />
         <FleetCard
           label="In Development"
           value={`${hs.development_gw.toFixed(1)} GW`}
           color={STATUS_COLORS.development}
           sublabel={`${hs.development_count} projects`}
+          href="/projects?status=development&from=dashboard&fromLabel=Back to Dashboard"
         >
           {hs.development_count > 0 && (
             <div className="flex gap-2 mt-1.5 flex-wrap">
@@ -620,15 +623,17 @@ function FleetCard({
   color,
   sublabel,
   children,
+  href,
 }: {
   label: string
   value: string | number
   color?: string
   sublabel?: string
   children?: React.ReactNode
+  href?: string
 }) {
-  return (
-    <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl p-4">
+  const content = (
+    <>
       <p className="text-[10px] uppercase tracking-wider text-[var(--color-text-muted)] mb-1">
         {label}
       </p>
@@ -639,6 +644,19 @@ function FleetCard({
         <p className="text-[10px] text-[var(--color-text-muted)] mt-0.5">{sublabel}</p>
       )}
       {children}
+    </>
+  )
+
+  if (href) {
+    return (
+      <Link to={href} className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl p-4 hover:border-[var(--color-primary)] transition-colors block">
+        {content}
+      </Link>
+    )
+  }
+  return (
+    <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl p-4">
+      {content}
     </div>
   )
 }

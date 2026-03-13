@@ -183,6 +183,11 @@ export interface ProjectSummary {
   data_confidence: Confidence
   confidence_score?: number
   development_stage?: DevelopmentStage
+  current_operator?: string
+  capex_aud_m?: number
+  capex_year?: number
+  notable?: string
+  first_seen?: string
 }
 
 // CIS/LTESA types
@@ -528,6 +533,39 @@ export interface BESSCapexData {
   projects: BESSCapexProject[]
   by_year: Record<string, BESSCapexYearSummary>
   by_oem: Record<string, BESSCapexOEMSummary>
+  exported_at: string
+}
+
+// Project Timeline Analytics
+export interface TimelineProject {
+  id: string
+  name: string
+  technology: Technology
+  status: ProjectStatus
+  capacity_mw: number
+  storage_mwh?: number
+  state: State
+  current_developer?: string
+  first_seen?: string
+  first_seen_year?: number
+  development_stage?: DevelopmentStage
+}
+
+export interface TimelineYearBreakdown {
+  count: number
+  total_mw: number
+  by_technology: Record<string, { count: number; capacity_mw: number }>
+  by_state: Record<string, { count: number; capacity_mw: number }>
+  by_status: Record<string, { count: number; capacity_mw: number }>
+}
+
+export interface ProjectTimelineData {
+  projects: TimelineProject[]
+  by_year: Record<string, TimelineYearBreakdown>
+  by_technology: Record<string, { count: number; total_mw: number; with_date: number }>
+  by_state: Record<string, { count: number; total_mw: number }>
+  total_with_date: number
+  total_without_date: number
   exported_at: string
 }
 

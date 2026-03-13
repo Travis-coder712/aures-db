@@ -5,6 +5,11 @@ import { TECHNOLOGY_CONFIG, OFFTAKE_TYPE_CONFIG, STATUS_CONFIG, type Technology,
 
 type SortKey = 'capacity' | 'projects' | 'name'
 
+function parseMulti<T extends string>(raw: string | null): T[] {
+  if (!raw) return []
+  return raw.split(',').filter(Boolean) as T[]
+}
+
 export default function OfftakerList() {
   const [searchParams, setSearchParams] = useSearchParams()
   const [query, setQuery] = useState('')
@@ -13,9 +18,9 @@ export default function OfftakerList() {
   const { data, loading } = useOfftakerIndex()
   const navigate = useNavigate()
 
-  const stateFilter = searchParams.get('state') as State | null
-  const techFilter = searchParams.get('tech') as Technology | null
-  const statusFilter = searchParams.get('status') as ProjectStatus | null
+  const stateFilters = parseMulti<State>(searchParams.get('state'))
+  const techFilters = parseMulti<Technology>(searchParams.get('tech'))
+  const statusFilters = parseMulti<ProjectStatus>(searchParams.get('status'))
 
   const filtered = useMemo(() => {
     if (!data) return []
@@ -25,14 +30,14 @@ export default function OfftakerList() {
       const q = query.toLowerCase()
       result = result.filter((o) => o.name.toLowerCase().includes(q))
     }
-    if (stateFilter) {
-      result = result.filter((o) => o.states.includes(stateFilter))
+    if (stateFilters.length) {
+      result = result.filter((o) => o.states.some((s) => stateFilters.includes(s as State)))
     }
-    if (techFilter) {
-      result = result.filter((o) => o.by_technology[techFilter])
+    if (techFilters.length) {
+      result = result.filter((o) => techFilters.some((t) => o.by_technology[t]))
     }
-    if (statusFilter) {
-      result = result.filter((o) => o.by_status[statusFilter])
+    if (statusFilters.length) {
+      result = result.filter((o) => statusFilters.some((s) => o.by_status[s]))
     }
 
     result.sort((a, b) => {
@@ -52,7 +57,7 @@ export default function OfftakerList() {
     })
 
     return result
-  }, [data, query, stateFilter, techFilter, statusFilter, sortBy, sortDesc])
+  }, [data, query, stateFilters.join(','), techFilters.join(','), statusFilters.join(','), sortBy, sortDesc])
 
   if (loading) {
     return (
@@ -63,16 +68,29 @@ export default function OfftakerList() {
   }
 
   function toggleFilter(key: string, value: string) {
-    const current = searchParams.get(key)
-    if (current === value) {
-      searchParams.delete(key)
+    const sp = new URLSearchParams(searchParams)
+    const current = sp.get(key) || ''
+    const values = current ? current.split(',').filter(Boolean) : []
+    const idx = values.indexOf(value)
+    if (idx >= 0) {
+      values.splice(idx, 1)
     } else {
-      searchParams.set(key, value)
+      values.push(value)
     }
-    setSearchParams(searchParams)
+    if (values.length > 0) {
+      sp.set(key, values.join(','))
+    } else {
+      sp.delete(key)
+    }
+    setSearchParams(sp)
   }
 
-  const activeFilters = [stateFilter, techFilter, statusFilter].filter(Boolean).length
+  function isFilterActive(key: string, value: string): boolean {
+    const raw = searchParams.get(key) || ''
+    return raw.split(',').includes(value)
+  }
+
+  const activeFilters = [stateFilters.length > 0, techFilters.length > 0, statusFilters.length > 0].filter(Boolean).length
   const totalCapacity = filtered.reduce((s, o) => s + o.total_capacity_mw, 0)
 
   return (
@@ -150,7 +168,7 @@ export default function OfftakerList() {
           </span>
           {(['wind', 'solar', 'bess', 'hybrid', 'offshore_wind', 'pumped_hydro'] as const).map((tech) => {
             const config = TECHNOLOGY_CONFIG[tech]
-            const isActive = techFilter === tech
+            const isActive = isFilterActive('tech', tech)
             return (
               <button
                 key={tech}
@@ -178,7 +196,7 @@ export default function OfftakerList() {
             State
           </span>
           {(['NSW', 'VIC', 'QLD', 'SA', 'WA', 'TAS'] as const).map((state) => {
-            const isActive = stateFilter === state
+            const isActive = isFilterActive('state', state)
             return (
               <button
                 key={state}
@@ -202,7 +220,7 @@ export default function OfftakerList() {
           </span>
           {(['operating', 'commissioning', 'construction', 'development'] as const).map((status) => {
             const config = STATUS_CONFIG[status]
-            const isActive = statusFilter === status
+            const isActive = isFilterActive('status', status)
             return (
               <button
                 key={status}

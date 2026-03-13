@@ -24,13 +24,18 @@ export default function ProjectList() {
   const stateFilters = parseMulti<State>(searchParams.get('state'))
   const confidenceFilter = searchParams.get('confidence') as Confidence | null
   const stageFilters = parseMulti<DevelopmentStage>(searchParams.get('stage'))
-  const fromDashboard = searchParams.get('from') === 'dashboard'
+  const fromPage = searchParams.get('from')
+  const fromLabel = searchParams.get('fromLabel')
+  const customTitle = searchParams.get('title')
+  const idFilter = searchParams.get('ids')
+  const idSet = useMemo(() => idFilter ? new Set(idFilter.split(',')) : null, [idFilter])
 
   const showStageFilter = statusFilters.includes('development') || (!statusFilters.length && !techFilters.length && !stateFilters.length)
 
   const filtered = useMemo(() => {
     let result = [...allProjects]
 
+    if (idSet) result = result.filter((p) => idSet.has(p.id))
     if (techFilters.length) result = result.filter((p) => techFilters.includes(p.technology))
     if (statusFilters.length) result = result.filter((p) => statusFilters.includes(p.status))
     if (stateFilters.length) result = result.filter((p) => stateFilters.includes(p.state))
@@ -59,7 +64,7 @@ export default function ProjectList() {
     })
 
     return result
-  }, [allProjects, techFilters.join(','), statusFilters.join(','), stateFilters.join(','), confidenceFilter, stageFilters.join(','), sortBy, sortDesc])
+  }, [allProjects, idSet, techFilters.join(','), statusFilters.join(','), stateFilters.join(','), confidenceFilter, stageFilters.join(','), sortBy, sortDesc])
 
   if (loading) {
     return (
@@ -103,20 +108,20 @@ export default function ProjectList() {
 
   return (
     <div className="px-4 lg:px-8 py-6 max-w-7xl mx-auto">
-      {/* Back to Dashboard */}
-      {fromDashboard && (
+      {/* Back navigation */}
+      {fromPage && (
         <button
           onClick={() => navigate(-1)}
           className="inline-flex items-center gap-1.5 text-sm text-[var(--color-primary)] hover:underline mb-4"
         >
-          ← Back to Dashboard
+          ← {fromLabel || (fromPage === 'dashboard' ? 'Back to Dashboard' : `Back to ${fromPage}`)}
         </button>
       )}
 
       {/* Header */}
       <div className="mb-6">
         <h1 className="text-xl lg:text-2xl font-bold text-[var(--color-text)] mb-1">
-          All Projects
+          {customTitle || 'All Projects'}
         </h1>
         <p className="text-sm text-[var(--color-text-muted)]">
           {filtered.length} project{filtered.length !== 1 ? 's' : ''} ·{' '}

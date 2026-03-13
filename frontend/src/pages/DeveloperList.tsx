@@ -5,6 +5,11 @@ import { TECHNOLOGY_CONFIG, type Technology, type State, type DeveloperProfile }
 
 type SortKey = 'capacity' | 'projects' | 'name'
 
+function parseMulti<T extends string>(raw: string | null): T[] {
+  if (!raw) return []
+  return raw.split(',').filter(Boolean) as T[]
+}
+
 export default function DeveloperList() {
   const [searchParams, setSearchParams] = useSearchParams()
   const [query, setQuery] = useState('')
@@ -13,8 +18,8 @@ export default function DeveloperList() {
   const { data, loading } = useDeveloperIndex()
   const navigate = useNavigate()
 
-  const stateFilter = searchParams.get('state') as State | null
-  const techFilter = searchParams.get('tech') as Technology | null
+  const stateFilters = parseMulti<State>(searchParams.get('state'))
+  const techFilters = parseMulti<Technology>(searchParams.get('tech'))
   const grouped = searchParams.get('grouped') === '1'
 
   const sourceList = useMemo(() => {
@@ -34,11 +39,11 @@ export default function DeveloperList() {
         d.aliases?.some((a) => a.toLowerCase().includes(q))
       )
     }
-    if (stateFilter) {
-      result = result.filter((d) => d.states.includes(stateFilter))
+    if (stateFilters.length) {
+      result = result.filter((d) => d.states.some((s) => stateFilters.includes(s as State)))
     }
-    if (techFilter) {
-      result = result.filter((d) => d.by_technology[techFilter])
+    if (techFilters.length) {
+      result = result.filter((d) => techFilters.some((t) => d.by_technology[t]))
     }
 
     result.sort((a, b) => {
@@ -58,7 +63,7 @@ export default function DeveloperList() {
     })
 
     return result
-  }, [sourceList, query, stateFilter, techFilter, sortBy, sortDesc])
+  }, [sourceList, query, stateFilters.join(','), techFilters.join(','), sortBy, sortDesc])
 
   if (loading) {
     return (
@@ -69,13 +74,26 @@ export default function DeveloperList() {
   }
 
   function toggleFilter(key: string, value: string) {
-    const current = searchParams.get(key)
-    if (current === value) {
-      searchParams.delete(key)
+    const sp = new URLSearchParams(searchParams)
+    const current = sp.get(key) || ''
+    const values = current ? current.split(',').filter(Boolean) : []
+    const idx = values.indexOf(value)
+    if (idx >= 0) {
+      values.splice(idx, 1)
     } else {
-      searchParams.set(key, value)
+      values.push(value)
     }
-    setSearchParams(searchParams)
+    if (values.length > 0) {
+      sp.set(key, values.join(','))
+    } else {
+      sp.delete(key)
+    }
+    setSearchParams(sp)
+  }
+
+  function isFilterActive(key: string, value: string): boolean {
+    const raw = searchParams.get(key) || ''
+    return raw.split(',').includes(value)
   }
 
   function toggleGrouped() {
@@ -87,7 +105,7 @@ export default function DeveloperList() {
     setSearchParams(searchParams)
   }
 
-  const activeFilters = [stateFilter, techFilter].filter(Boolean).length
+  const activeFilters = [stateFilters.length > 0, techFilters.length > 0].filter(Boolean).length
   const totalCapacity = filtered.reduce((s, d) => s + d.total_capacity_mw, 0)
   const topDevs = data?.top_developers ?? []
 
@@ -178,7 +196,7 @@ export default function DeveloperList() {
           </span>
           {(['wind', 'solar', 'bess', 'hybrid', 'offshore_wind', 'pumped_hydro'] as const).map((tech) => {
             const config = TECHNOLOGY_CONFIG[tech]
-            const isActive = techFilter === tech
+            const isActive = isFilterActive('tech', tech)
             return (
               <button
                 key={tech}
@@ -206,7 +224,7 @@ export default function DeveloperList() {
             State
           </span>
           {(['NSW', 'VIC', 'QLD', 'SA', 'WA', 'TAS'] as const).map((state) => {
-            const isActive = stateFilter === state
+            const isActive = isFilterActive('state', state)
             return (
               <button
                 key={state}

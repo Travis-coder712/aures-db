@@ -23,6 +23,7 @@ import OfftakerDetail from './pages/OfftakerDetail'
 import MapView from './pages/MapView'
 import DataSources from './pages/DataSources'
 import BESSCapex from './pages/BESSCapex'
+import ProjectTimeline from './pages/ProjectTimeline'
 import NotFound from './pages/NotFound'
 
 function App() {
@@ -59,6 +60,7 @@ function App() {
         <Route path="map" element={<MapView />} />
         {/* Analytics */}
         <Route path="analytics/bess-capex" element={<BESSCapex />} />
+        <Route path="analytics/project-timeline" element={<ProjectTimeline />} />
         {/* Admin */}
         <Route path="data-sources" element={<DataSources />} />
         {/* Future routes */}

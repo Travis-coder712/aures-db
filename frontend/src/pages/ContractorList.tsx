@@ -5,6 +5,11 @@ import { TECHNOLOGY_CONFIG, CONTRACTOR_ROLE_CONFIG, STATUS_CONFIG, type Technolo
 
 type SortKey = 'capacity' | 'projects' | 'name'
 
+function parseMulti<T extends string>(raw: string | null): T[] {
+  if (!raw) return []
+  return raw.split(',').filter(Boolean) as T[]
+}
+
 export default function ContractorList() {
   const [searchParams, setSearchParams] = useSearchParams()
   const [query, setQuery] = useState('')
@@ -13,9 +18,9 @@ export default function ContractorList() {
   const { data, loading } = useContractorIndex()
   const navigate = useNavigate()
 
-  const stateFilter = searchParams.get('state') as State | null
-  const techFilter = searchParams.get('tech') as Technology | null
-  const statusFilter = searchParams.get('status') as ProjectStatus | null
+  const stateFilters = parseMulti<State>(searchParams.get('state'))
+  const techFilters = parseMulti<Technology>(searchParams.get('tech'))
+  const statusFilters = parseMulti<ProjectStatus>(searchParams.get('status'))
 
   const filtered = useMemo(() => {
     if (!data) return []
@@ -25,14 +30,14 @@ export default function ContractorList() {
       const q = query.toLowerCase()
       result = result.filter((c) => c.name.toLowerCase().includes(q))
     }
-    if (stateFilter) {
-      result = result.filter((c) => c.states.includes(stateFilter))
+    if (stateFilters.length) {
+      result = result.filter((c) => c.states.some((s) => stateFilters.includes(s as State)))
     }
-    if (techFilter) {
-      result = result.filter((c) => c.by_technology[techFilter])
+    if (techFilters.length) {
+      result = result.filter((c) => techFilters.some((t) => c.by_technology[t]))
     }
-    if (statusFilter) {
-      result = result.filter((c) => c.by_status[statusFilter])
+    if (statusFilters.length) {
+      result = result.filter((c) => statusFilters.some((s) => c.by_status[s]))
     }
 
     result.sort((a, b) => {
@@ -52,7 +57,7 @@ export default function ContractorList() {
     })
 
     return result
-  }, [data, query, stateFilter, techFilter, statusFilter, sortBy, sortDesc])
+  }, [data, query, stateFilters.join(','), techFilters.join(','), statusFilters.join(','), sortBy, sortDesc])
 
   if (loading) {
     return (
@@ -63,16 +68,29 @@ export default function ContractorList() {
   }
 
   function toggleFilter(key: string, value: string) {
-    const current = searchParams.get(key)
-    if (current === value) {
-      searchParams.delete(key)
+    const sp = new URLSearchParams(searchParams)
+    const current = sp.get(key) || ''
+    const values = current ? current.split(',').filter(Boolean) : []
+    const idx = values.indexOf(value)
+    if (idx >= 0) {
+      values.splice(idx, 1)
     } else {
-      searchParams.set(key, value)
+      values.push(value)
     }
-    setSearchParams(searchParams)
+    if (values.length > 0) {
+      sp.set(key, values.join(','))
+    } else {
+      sp.delete(key)
+    }
+    setSearchParams(sp)
   }
 
-  const activeFilters = [stateFilter, techFilter, statusFilter].filter(Boolean).length
+  function isFilterActive(key: string, value: string): boolean {
+    const raw = searchParams.get(key) || ''
+    return raw.split(',').includes(value)
+  }
+
+  const activeFilters = [stateFilters.length > 0, techFilters.length > 0, statusFilters.length > 0].filter(Boolean).length
   const totalCapacity = filtered.reduce((s, c) => s + c.total_capacity_mw, 0)
 
   return (
@@ -150,7 +168,7 @@ export default function ContractorList() {
           </span>
           {(['wind', 'solar', 'bess', 'hybrid', 'offshore_wind', 'pumped_hydro'] as const).map((tech) => {
             const config = TECHNOLOGY_CONFIG[tech]
-            const isActive = techFilter === tech
+            const isActive = isFilterActive('tech', tech)
             return (
               <button
                 key={tech}
@@ -178,7 +196,7 @@ export default function ContractorList() {
             State
           </span>
           {(['NSW', 'VIC', 'QLD', 'SA', 'WA', 'TAS'] as const).map((state) => {
-            const isActive = stateFilter === state
+            const isActive = isFilterActive('state', state)
             return (
               <button
                 key={state}
@@ -202,7 +220,7 @@ export default function ContractorList() {
           </span>
           {(['operating', 'commissioning', 'construction', 'development'] as const).map((status) => {
             const config = STATUS_CONFIG[status]
-            const isActive = statusFilter === status
+            const isActive = isFilterActive('status', status)
             return (
               <button
                 key={status}

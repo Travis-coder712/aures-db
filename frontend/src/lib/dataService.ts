@@ -5,7 +5,7 @@
  * In production (GitHub Pages), they're served as static files.
  * In development (Vite dev server), they're served from the public/ directory.
  */
-import type { ProjectSummary, Project, Technology, ProjectStatus, State, LeagueTable, LeagueTableIndex, LeagueTechnology, DeveloperIndex, OEMIndex, ContractorIndex, OfftakerIndex, MapProject, CODDriftData, DataSourcesIndex, BESSCapexData } from './types'
+import type { ProjectSummary, Project, Technology, ProjectStatus, State, LeagueTable, LeagueTableIndex, LeagueTechnology, DeveloperIndex, OEMIndex, ContractorIndex, OfftakerIndex, MapProject, CODDriftData, DataSourcesIndex, BESSCapexData, ProjectTimelineData } from './types'
 
 const BASE = import.meta.env.BASE_URL + 'data'
 
@@ -279,6 +279,19 @@ export async function fetchBESSCapex(): Promise<BESSCapexData | null> {
     if (!resp.ok) return null
     bessCapexCache = (await resp.json()) as BESSCapexData
     return bessCapexCache
+  } catch {
+    return null
+  }
+}
+
+let projectTimelineCache: ProjectTimelineData | null = null
+export async function fetchProjectTimeline(): Promise<ProjectTimelineData | null> {
+  if (projectTimelineCache) return projectTimelineCache
+  try {
+    const resp = await fetch(`${BASE}/analytics/project-timeline.json`)
+    if (!resp.ok) return null
+    projectTimelineCache = (await resp.json()) as ProjectTimelineData
+    return projectTimelineCache
   } catch {
     return null
   }
