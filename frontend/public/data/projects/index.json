@@ -12283,14 +12283,17 @@
     "id": "tomago-bess",
     "name": "Tomago BESS",
     "technology": "bess",
-    "status": "development",
+    "status": "construction",
     "capacity_mw": 500.0,
     "storage_mwh": 2000.36,
     "state": "NSW",
     "current_developer": "AGL",
+    "current_operator": "AGL Energy",
     "data_confidence": "low",
     "confidence_score": "22",
     "development_stage": "epbc_submitted",
+    "capex_aud_m": 800.0,
+    "capex_year": 2025,
     "first_seen": "2023"
   },
   {

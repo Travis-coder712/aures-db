@@ -168,6 +168,30 @@
       ]
     },
     {
+      "slug": "fluence",
+      "name": "Fluence",
+      "project_count": 2,
+      "total_capacity_mw": 650.0,
+      "roles": [
+        "epc"
+      ],
+      "by_technology": {
+        "bess": 2
+      },
+      "by_status": {
+        "operating": 1,
+        "construction": 1
+      },
+      "states": [
+        "NSW",
+        "VIC"
+      ],
+      "project_ids": [
+        "hazelwood-battery-energy-storage-system-hbess",
+        "tomago-bess"
+      ]
+    },
+    {
       "slug": "zenviron",
       "name": "Zenviron",
       "project_count": 2,
@@ -574,27 +598,6 @@
       ],
       "project_ids": [
         "rangebank-bess"
-      ]
-    },
-    {
-      "slug": "fluence",
-      "name": "Fluence",
-      "project_count": 1,
-      "total_capacity_mw": 150.0,
-      "roles": [
-        "epc"
-      ],
-      "by_technology": {
-        "bess": 1
-      },
-      "by_status": {
-        "operating": 1
-      },
-      "states": [
-        "VIC"
-      ],
-      "project_ids": [
-        "hazelwood-battery-energy-storage-system-hbess"
       ]
     },
     {

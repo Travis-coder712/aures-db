@@ -306,17 +306,27 @@ export interface QuartileBenchmarks {
 export type OEMRole = 'wind_oem' | 'bess_oem' | 'hydro_oem' | 'inverter'
 export type ContractorRole = 'epc' | 'bop'
 
+export interface OEMDetailBreakdown {
+  count: number
+  capacity_mw: number
+  storage_mwh: number
+}
+
 export interface OEMProfile {
   slug: string
   name: string
   project_count: number
   total_capacity_mw: number
+  total_storage_mwh: number
   roles: OEMRole[]
   models: string[]
   by_technology: Partial<Record<Technology, number>>
   by_status: Partial<Record<ProjectStatus, number>>
+  by_state: Partial<Record<State, number>>
   states: State[]
   project_ids: string[]
+  status_detail: Partial<Record<ProjectStatus, OEMDetailBreakdown>>
+  state_detail: Partial<Record<State, OEMDetailBreakdown>>
 }
 
 export interface OEMIndex {

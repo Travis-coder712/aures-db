@@ -686,7 +686,7 @@ def export_oem_profiles(conn):
     """Export OEM (equipment supplier) profiles to JSON."""
     rows = conn.execute("""
         SELECT s.supplier, s.role, s.model, s.project_id,
-               p.technology, p.status, p.state, p.capacity_mw
+               p.technology, p.status, p.state, p.capacity_mw, p.storage_mwh
         FROM suppliers s
         JOIN projects p ON s.project_id = p.id
         WHERE s.role IN ('wind_oem', 'bess_oem', 'hydro_oem', 'inverter')
@@ -707,33 +707,65 @@ def export_oem_profiles(conn):
 
         by_tech = defaultdict(int)
         by_status = defaultdict(int)
+        by_state = defaultdict(int)
         states = set()
         roles = set()
         models = set()
         total_mw = 0
+        total_storage_mwh = 0
         project_ids = set()
+
+        # Detailed breakdowns for market share charts
+        status_detail = defaultdict(lambda: {'count': 0, 'capacity_mw': 0, 'storage_mwh': 0})
+        state_detail = defaultdict(lambda: {'count': 0, 'capacity_mw': 0, 'storage_mwh': 0})
 
         for r in records:
             by_tech[r['technology']] += 1
             by_status[r['status']] += 1
+            by_state[r['state']] += 1
             states.add(r['state'])
             roles.add(r['role'])
             if r['model']:
                 models.add(r['model'])
-            total_mw += r['capacity_mw'] or 0
+            cap = r['capacity_mw'] or 0
+            stor = r['storage_mwh'] or 0
+            total_mw += cap
+            total_storage_mwh += stor
             project_ids.add(r['project_id'])
+
+            # Per-status detail
+            status_detail[r['status']]['count'] += 1
+            status_detail[r['status']]['capacity_mw'] += cap
+            status_detail[r['status']]['storage_mwh'] += stor
+
+            # Per-state detail
+            state_detail[r['state']]['count'] += 1
+            state_detail[r['state']]['capacity_mw'] += cap
+            state_detail[r['state']]['storage_mwh'] += stor
+
+        # Round values in detail dicts
+        for v in status_detail.values():
+            v['capacity_mw'] = round(v['capacity_mw'], 1)
+            v['storage_mwh'] = round(v['storage_mwh'], 1)
+        for v in state_detail.values():
+            v['capacity_mw'] = round(v['capacity_mw'], 1)
+            v['storage_mwh'] = round(v['storage_mwh'], 1)
 
         oems.append({
             'slug': slug,
             'name': name,
             'project_count': len(project_ids),
             'total_capacity_mw': round(total_mw, 1),
+            'total_storage_mwh': round(total_storage_mwh, 1),
             'roles': sorted(roles),
             'models': sorted(models),
             'by_technology': dict(by_tech),
             'by_status': dict(by_status),
+            'by_state': dict(by_state),
             'states': sorted(states),
             'project_ids': sorted(project_ids),
+            'status_detail': dict(status_detail),
+            'state_detail': dict(state_detail),
         })
 
     oems.sort(key=lambda o: o['total_capacity_mw'], reverse=True)

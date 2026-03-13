@@ -5,6 +5,7 @@
       "name": "Tesla",
       "project_count": 22,
       "total_capacity_mw": 4245.0,
+      "total_storage_mwh": 9586.8,
       "roles": [
         "bess_oem"
       ],
@@ -24,6 +25,12 @@
         "operating": 14,
         "construction": 7,
         "commissioning": 1
+      },
+      "by_state": {
+        "VIC": 6,
+        "SA": 2,
+        "NSW": 8,
+        "QLD": 6
       },
       "states": [
         "NSW",
@@ -54,13 +61,53 @@
         "wallgrove-grid-battery-project",
         "western-downs-battery-stage-1-and-2",
         "williamsdale-bess"
-      ]
+      ],
+      "status_detail": {
+        "operating": {
+          "count": 14,
+          "capacity_mw": 2159.0,
+          "storage_mwh": 4166.4
+        },
+        "construction": {
+          "count": 7,
+          "capacity_mw": 1576.0,
+          "storage_mwh": 4910.8
+        },
+        "commissioning": {
+          "count": 1,
+          "capacity_mw": 510.0,
+          "storage_mwh": 509.6
+        }
+      },
+      "state_detail": {
+        "VIC": {
+          "count": 6,
+          "capacity_mw": 1396.0,
+          "storage_mwh": 3669.2
+        },
+        "SA": {
+          "count": 2,
+          "capacity_mw": 344.0,
+          "storage_mwh": 311.0
+        },
+        "NSW": {
+          "count": 8,
+          "capacity_mw": 1140.0,
+          "storage_mwh": 3387.1
+        },
+        "QLD": {
+          "count": 6,
+          "capacity_mw": 1365.0,
+          "storage_mwh": 2219.5
+        }
+      }
     },
     {
       "slug": "vestas",
       "name": "Vestas",
       "project_count": 4,
       "total_capacity_mw": 2642.0,
+      "total_storage_mwh": 0,
       "roles": [
         "wind_oem"
       ],
@@ -73,6 +120,10 @@
       "by_status": {
         "construction": 4
       },
+      "by_state": {
+        "VIC": 2,
+        "QLD": 2
+      },
       "states": [
         "QLD",
         "VIC"
@@ -82,13 +133,99 @@
         "golden-plains-wind-farm-west",
         "lotus-creek-wind-farm",
         "wambo-wind-farm"
-      ]
+      ],
+      "status_detail": {
+        "construction": {
+          "count": 4,
+          "capacity_mw": 2642.0,
+          "storage_mwh": 0
+        }
+      },
+      "state_detail": {
+        "VIC": {
+          "count": 2,
+          "capacity_mw": 1857.0,
+          "storage_mwh": 0
+        },
+        "QLD": {
+          "count": 2,
+          "capacity_mw": 785.0,
+          "storage_mwh": 0
+        }
+      }
+    },
+    {
+      "slug": "fluence",
+      "name": "Fluence",
+      "project_count": 9,
+      "total_capacity_mw": 2230.0,
+      "total_storage_mwh": 5098.5,
+      "roles": [
+        "bess_oem"
+      ],
+      "models": [
+        "Advancion",
+        "Gridstack",
+        "Gridstack (grid-forming)",
+        "Gridstack Pro"
+      ],
+      "by_technology": {
+        "bess": 9
+      },
+      "by_status": {
+        "construction": 4,
+        "operating": 5
+      },
+      "by_state": {
+        "NSW": 4,
+        "VIC": 5
+      },
+      "states": [
+        "NSW",
+        "VIC"
+      ],
+      "project_ids": [
+        "ballarat-energy-storage-system",
+        "broken-hill-bess",
+        "bulabul-bess-1",
+        "hazelwood-battery-energy-storage-system-hbess",
+        "latrobe-valley-bess",
+        "liddell-bess",
+        "mortlake-battery",
+        "rangebank-bess",
+        "tomago-bess"
+      ],
+      "status_detail": {
+        "construction": {
+          "count": 4,
+          "capacity_mw": 1600.0,
+          "storage_mwh": 4250.4
+        },
+        "operating": {
+          "count": 5,
+          "capacity_mw": 630.0,
+          "storage_mwh": 848.2
+        }
+      },
+      "state_detail": {
+        "NSW": {
+          "count": 4,
+          "capacity_mw": 1350.0,
+          "storage_mwh": 3660.6
+        },
+        "VIC": {
+          "count": 5,
+          "capacity_mw": 880.0,
+          "storage_mwh": 1437.9
+        }
+      }
     },
     {
       "slug": "voith-hydro",
       "name": "Voith Hydro",
       "project_count": 1,
       "total_capacity_mw": 2200.0,
+      "total_storage_mwh": 58330.0,
       "roles": [
         "hydro_oem"
       ],
@@ -101,18 +238,36 @@
       "by_status": {
         "construction": 1
       },
+      "by_state": {
+        "NSW": 1
+      },
       "states": [
         "NSW"
       ],
       "project_ids": [
         "snowy-20"
-      ]
+      ],
+      "status_detail": {
+        "construction": {
+          "count": 1,
+          "capacity_mw": 2200.0,
+          "storage_mwh": 58330.0
+        }
+      },
+      "state_detail": {
+        "NSW": {
+          "count": 1,
+          "capacity_mw": 2200.0,
+          "storage_mwh": 58330.0
+        }
+      }
     },
     {
       "slug": "wartsila",
       "name": "Wartsila",
       "project_count": 5,
       "total_capacity_mw": 1860.0,
+      "total_storage_mwh": 5102.6,
       "roles": [
         "bess_oem"
       ],
@@ -130,6 +285,11 @@
         "construction": 3,
         "operating": 2
       },
+      "by_state": {
+        "NSW": 2,
+        "VIC": 2,
+        "SA": 1
+      },
       "states": [
         "NSW",
         "SA",
@@ -141,48 +301,43 @@
         "eraring-big-battery",
         "torrens-island-bess",
         "wooreen-energy-storage-system"
-      ]
-    },
-    {
-      "slug": "fluence",
-      "name": "Fluence",
-      "project_count": 8,
-      "total_capacity_mw": 1730.0,
-      "roles": [
-        "bess_oem"
       ],
-      "models": [
-        "Advancion",
-        "Gridstack",
-        "Gridstack (grid-forming)"
-      ],
-      "by_technology": {
-        "bess": 8
+      "status_detail": {
+        "construction": {
+          "count": 3,
+          "capacity_mw": 910.0,
+          "storage_mwh": 3463.0
+        },
+        "operating": {
+          "count": 2,
+          "capacity_mw": 950.0,
+          "storage_mwh": 1639.6
+        }
       },
-      "by_status": {
-        "construction": 3,
-        "operating": 5
-      },
-      "states": [
-        "NSW",
-        "VIC"
-      ],
-      "project_ids": [
-        "ballarat-energy-storage-system",
-        "broken-hill-bess",
-        "bulabul-bess-1",
-        "hazelwood-battery-energy-storage-system-hbess",
-        "latrobe-valley-bess",
-        "liddell-bess",
-        "mortlake-battery",
-        "rangebank-bess"
-      ]
+      "state_detail": {
+        "NSW": {
+          "count": 2,
+          "capacity_mw": 1160.0,
+          "storage_mwh": 3230.0
+        },
+        "VIC": {
+          "count": 2,
+          "capacity_mw": 450.0,
+          "storage_mwh": 1623.0
+        },
+        "SA": {
+          "count": 1,
+          "capacity_mw": 250.0,
+          "storage_mwh": 249.6
+        }
+      }
     },
     {
       "slug": "ge-vernova",
       "name": "GE Vernova",
       "project_count": 4,
       "total_capacity_mw": 1409.0,
+      "total_storage_mwh": 1238.0,
       "roles": [
         "inverter",
         "wind_oem"
@@ -199,6 +354,11 @@
       "by_status": {
         "construction": 4
       },
+      "by_state": {
+        "NSW": 1,
+        "SA": 1,
+        "QLD": 2
+      },
       "states": [
         "NSW",
         "QLD",
@@ -209,13 +369,38 @@
         "carmodys-hill-wind-farm",
         "supernode-bess",
         "uungula-wind-farm"
-      ]
+      ],
+      "status_detail": {
+        "construction": {
+          "count": 4,
+          "capacity_mw": 1409.0,
+          "storage_mwh": 1238.0
+        }
+      },
+      "state_detail": {
+        "NSW": {
+          "count": 1,
+          "capacity_mw": 414.0,
+          "storage_mwh": 0
+        },
+        "SA": {
+          "count": 1,
+          "capacity_mw": 247.0,
+          "storage_mwh": 0
+        },
+        "QLD": {
+          "count": 2,
+          "capacity_mw": 748.0,
+          "storage_mwh": 1238.0
+        }
+      }
     },
     {
       "slug": "catl",
       "name": "CATL",
       "project_count": 5,
       "total_capacity_mw": 1251.5,
+      "total_storage_mwh": 2752.0,
       "roles": [
         "bess_oem"
       ],
@@ -232,6 +417,11 @@
         "operating": 1,
         "commissioning": 1
       },
+      "by_state": {
+        "QLD": 1,
+        "VIC": 2,
+        "SA": 2
+      },
       "states": [
         "QLD",
         "SA",
@@ -243,13 +433,48 @@
         "pine-lodge-bess",
         "supernode-bess",
         "tailem-bend-battery-project"
-      ]
+      ],
+      "status_detail": {
+        "construction": {
+          "count": 3,
+          "capacity_mw": 1010.0,
+          "storage_mwh": 2268.0
+        },
+        "operating": {
+          "count": 1,
+          "capacity_mw": 200.0,
+          "storage_mwh": 400.0
+        },
+        "commissioning": {
+          "count": 1,
+          "capacity_mw": 41.5,
+          "storage_mwh": 84.0
+        }
+      },
+      "state_detail": {
+        "QLD": {
+          "count": 1,
+          "capacity_mw": 520.0,
+          "storage_mwh": 1238.0
+        },
+        "VIC": {
+          "count": 2,
+          "capacity_mw": 490.0,
+          "storage_mwh": 1030.0
+        },
+        "SA": {
+          "count": 2,
+          "capacity_mw": 241.5,
+          "storage_mwh": 484.0
+        }
+      }
     },
     {
       "slug": "powin",
       "name": "Powin",
       "project_count": 2,
       "total_capacity_mw": 1005.0,
+      "total_storage_mwh": 1978.0,
       "roles": [
         "bess_oem"
       ],
@@ -263,6 +488,10 @@
       "by_status": {
         "operating": 2
       },
+      "by_state": {
+        "NSW": 1,
+        "QLD": 1
+      },
       "states": [
         "NSW",
         "QLD"
@@ -270,13 +499,33 @@
       "project_ids": [
         "ulinda-park-bess",
         "waratah-super-battery"
-      ]
+      ],
+      "status_detail": {
+        "operating": {
+          "count": 2,
+          "capacity_mw": 1005.0,
+          "storage_mwh": 1978.0
+        }
+      },
+      "state_detail": {
+        "NSW": {
+          "count": 1,
+          "capacity_mw": 850.0,
+          "storage_mwh": 1680.0
+        },
+        "QLD": {
+          "count": 1,
+          "capacity_mw": 155.0,
+          "storage_mwh": 298.0
+        }
+      }
     },
     {
       "slug": "eks-energy-hitachi",
       "name": "EKS Energy (Hitachi)",
       "project_count": 1,
       "total_capacity_mw": 850.0,
+      "total_storage_mwh": 1680.0,
       "roles": [
         "inverter"
       ],
@@ -289,18 +538,36 @@
       "by_status": {
         "operating": 1
       },
+      "by_state": {
+        "NSW": 1
+      },
       "states": [
         "NSW"
       ],
       "project_ids": [
         "waratah-super-battery"
-      ]
+      ],
+      "status_detail": {
+        "operating": {
+          "count": 1,
+          "capacity_mw": 850.0,
+          "storage_mwh": 1680.0
+        }
+      },
+      "state_detail": {
+        "NSW": {
+          "count": 1,
+          "capacity_mw": 850.0,
+          "storage_mwh": 1680.0
+        }
+      }
     },
     {
       "slug": "canadian-solar-e-storage",
       "name": "Canadian Solar e-STORAGE",
       "project_count": 4,
       "total_capacity_mw": 644.0,
+      "total_storage_mwh": 1340.6,
       "roles": [
         "bess_oem"
       ],
@@ -315,6 +582,10 @@
         "construction": 3,
         "operating": 1
       },
+      "by_state": {
+        "SA": 3,
+        "VIC": 1
+      },
       "states": [
         "SA",
         "VIC"
@@ -324,13 +595,38 @@
         "summerfield-bess",
         "tailem-bend-stage-3",
         "terang-bess"
-      ]
+      ],
+      "status_detail": {
+        "construction": {
+          "count": 3,
+          "capacity_mw": 544.0,
+          "storage_mwh": 1140.6
+        },
+        "operating": {
+          "count": 1,
+          "capacity_mw": 100.0,
+          "storage_mwh": 200.0
+        }
+      },
+      "state_detail": {
+        "SA": {
+          "count": 3,
+          "capacity_mw": 544.0,
+          "storage_mwh": 1140.7
+        },
+        "VIC": {
+          "count": 1,
+          "capacity_mw": 100.0,
+          "storage_mwh": 199.9
+        }
+      }
     },
     {
       "slug": "hithium",
       "name": "Hithium",
       "project_count": 2,
       "total_capacity_mw": 472.0,
+      "total_storage_mwh": 1092.8,
       "roles": [
         "bess_oem"
       ],
@@ -343,6 +639,10 @@
       "by_status": {
         "construction": 2
       },
+      "by_state": {
+        "VIC": 1,
+        "QLD": 1
+      },
       "states": [
         "QLD",
         "VIC"
@@ -350,13 +650,33 @@
       "project_ids": [
         "gnarwarre-bess-facility",
         "woolooga-bess"
-      ]
+      ],
+      "status_detail": {
+        "construction": {
+          "count": 2,
+          "capacity_mw": 472.0,
+          "storage_mwh": 1092.8
+        }
+      },
+      "state_detail": {
+        "VIC": {
+          "count": 1,
+          "capacity_mw": 250.0,
+          "storage_mwh": 499.5
+        },
+        "QLD": {
+          "count": 1,
+          "capacity_mw": 222.0,
+          "storage_mwh": 593.3
+        }
+      }
     },
     {
       "slug": "sungrow",
       "name": "Sungrow",
       "project_count": 2,
       "total_capacity_mw": 311.0,
+      "total_storage_mwh": 691.0,
       "roles": [
         "bess_oem"
       ],
@@ -371,19 +691,42 @@
         "construction": 1,
         "commissioning": 1
       },
+      "by_state": {
+        "SA": 2
+      },
       "states": [
         "SA"
       ],
       "project_ids": [
         "pelican-point-bess",
         "templers-bess"
-      ]
+      ],
+      "status_detail": {
+        "construction": {
+          "count": 1,
+          "capacity_mw": 200.0,
+          "storage_mwh": 400.0
+        },
+        "commissioning": {
+          "count": 1,
+          "capacity_mw": 111.0,
+          "storage_mwh": 291.0
+        }
+      },
+      "state_detail": {
+        "SA": {
+          "count": 2,
+          "capacity_mw": 311.0,
+          "storage_mwh": 691.0
+        }
+      }
     },
     {
       "slug": "sma-solar-inverters",
       "name": "SMA Solar (inverters)",
       "project_count": 2,
       "total_capacity_mw": 310.0,
+      "total_storage_mwh": 619.5,
       "roles": [
         "inverter"
       ],
@@ -394,6 +737,10 @@
       "by_status": {
         "construction": 2
       },
+      "by_state": {
+        "VIC": 1,
+        "SA": 1
+      },
       "states": [
         "SA",
         "VIC"
@@ -401,13 +748,33 @@
       "project_ids": [
         "clements-gap-bess",
         "gnarwarre-bess-facility"
-      ]
+      ],
+      "status_detail": {
+        "construction": {
+          "count": 2,
+          "capacity_mw": 310.0,
+          "storage_mwh": 619.5
+        }
+      },
+      "state_detail": {
+        "VIC": {
+          "count": 1,
+          "capacity_mw": 250.0,
+          "storage_mwh": 499.5
+        },
+        "SA": {
+          "count": 1,
+          "capacity_mw": 60.0,
+          "storage_mwh": 120.0
+        }
+      }
     },
     {
       "slug": "sma-solar-grid-forming-inverters",
       "name": "SMA Solar (grid-forming inverters)",
       "project_count": 1,
       "total_capacity_mw": 300.0,
+      "total_storage_mwh": 650.0,
       "roles": [
         "inverter"
       ],
@@ -418,18 +785,36 @@
       "by_status": {
         "construction": 1
       },
+      "by_state": {
+        "VIC": 1
+      },
       "states": [
         "VIC"
       ],
       "project_ids": [
         "mortlake-battery"
-      ]
+      ],
+      "status_detail": {
+        "construction": {
+          "count": 1,
+          "capacity_mw": 300.0,
+          "storage_mwh": 650.0
+        }
+      },
+      "state_detail": {
+        "VIC": {
+          "count": 1,
+          "capacity_mw": 300.0,
+          "storage_mwh": 650.0
+        }
+      }
     },
     {
       "slug": "andritz-hydro",
       "name": "ANDRITZ Hydro",
       "project_count": 1,
       "total_capacity_mw": 250.0,
+      "total_storage_mwh": 900.0,
       "roles": [
         "hydro_oem"
       ],
@@ -442,18 +827,36 @@
       "by_status": {
         "construction": 1
       },
+      "by_state": {
+        "QLD": 1
+      },
       "states": [
         "QLD"
       ],
       "project_ids": [
         "kidston-pumped-storage-hydro-project-250mw"
-      ]
+      ],
+      "status_detail": {
+        "construction": {
+          "count": 1,
+          "capacity_mw": 250.0,
+          "storage_mwh": 900.0
+        }
+      },
+      "state_detail": {
+        "QLD": {
+          "count": 1,
+          "capacity_mw": 250.0,
+          "storage_mwh": 900.0
+        }
+      }
     },
     {
       "slug": "sma",
       "name": "SMA",
       "project_count": 1,
       "total_capacity_mw": 250.0,
+      "total_storage_mwh": 249.6,
       "roles": [
         "inverter"
       ],
@@ -466,18 +869,36 @@
       "by_status": {
         "operating": 1
       },
+      "by_state": {
+        "SA": 1
+      },
       "states": [
         "SA"
       ],
       "project_ids": [
         "torrens-island-bess"
-      ]
+      ],
+      "status_detail": {
+        "operating": {
+          "count": 1,
+          "capacity_mw": 250.0,
+          "storage_mwh": 249.6
+        }
+      },
+      "state_detail": {
+        "SA": {
+          "count": 1,
+          "capacity_mw": 250.0,
+          "storage_mwh": 249.6
+        }
+      }
     },
     {
       "slug": "power-electronics-inverters",
       "name": "Power Electronics (inverters)",
       "project_count": 1,
       "total_capacity_mw": 240.0,
+      "total_storage_mwh": 480.0,
       "roles": [
         "inverter"
       ],
@@ -488,18 +909,36 @@
       "by_status": {
         "construction": 1
       },
+      "by_state": {
+        "VIC": 1
+      },
       "states": [
         "VIC"
       ],
       "project_ids": [
         "mornington-bess"
-      ]
+      ],
+      "status_detail": {
+        "construction": {
+          "count": 1,
+          "capacity_mw": 240.0,
+          "storage_mwh": 480.0
+        }
+      },
+      "state_detail": {
+        "VIC": {
+          "count": 1,
+          "capacity_mw": 240.0,
+          "storage_mwh": 480.0
+        }
+      }
     },
     {
       "slug": "energy-vault",
       "name": "Energy Vault",
       "project_count": 1,
       "total_capacity_mw": 200.0,
+      "total_storage_mwh": 200.0,
       "roles": [
         "bess_oem"
       ],
@@ -512,18 +951,36 @@
       "by_status": {
         "construction": 1
       },
+      "by_state": {
+        "NSW": 1
+      },
       "states": [
         "NSW"
       ],
       "project_ids": [
         "new-england-solar-farm-bess"
-      ]
+      ],
+      "status_detail": {
+        "construction": {
+          "count": 1,
+          "capacity_mw": 200.0,
+          "storage_mwh": 200.0
+        }
+      },
+      "state_detail": {
+        "NSW": {
+          "count": 1,
+          "capacity_mw": 200.0,
+          "storage_mwh": 200.0
+        }
+      }
     },
     {
       "slug": "siemens-s120-grid-forming-inverters",
       "name": "Siemens (S120 grid-forming inverters)",
       "project_count": 1,
       "total_capacity_mw": 200.0,
+      "total_storage_mwh": 200.0,
       "roles": [
         "inverter"
       ],
@@ -534,18 +991,36 @@
       "by_status": {
         "construction": 1
       },
+      "by_state": {
+        "NSW": 1
+      },
       "states": [
         "NSW"
       ],
       "project_ids": [
         "new-england-solar-farm-bess"
-      ]
+      ],
+      "status_detail": {
+        "construction": {
+          "count": 1,
+          "capacity_mw": 200.0,
+          "storage_mwh": 200.0
+        }
+      },
+      "state_detail": {
+        "NSW": {
+          "count": 1,
+          "capacity_mw": 200.0,
+          "storage_mwh": 200.0
+        }
+      }
     },
     {
       "slug": "power-electronics",
       "name": "Power Electronics",
       "project_count": 1,
       "total_capacity_mw": 200.0,
+      "total_storage_mwh": 400.0,
       "roles": [
         "inverter"
       ],
@@ -558,18 +1033,36 @@
       "by_status": {
         "operating": 1
       },
+      "by_state": {
+        "SA": 1
+      },
       "states": [
         "SA"
       ],
       "project_ids": [
         "blyth-bess"
-      ]
+      ],
+      "status_detail": {
+        "operating": {
+          "count": 1,
+          "capacity_mw": 200.0,
+          "storage_mwh": 400.0
+        }
+      },
+      "state_detail": {
+        "SA": {
+          "count": 1,
+          "capacity_mw": 200.0,
+          "storage_mwh": 400.0
+        }
+      }
     },
     {
       "slug": "eks-energy-powin",
       "name": "Eks Energy (Powin)",
       "project_count": 1,
       "total_capacity_mw": 155.0,
+      "total_storage_mwh": 298.0,
       "roles": [
         "inverter"
       ],
@@ -582,18 +1075,36 @@
       "by_status": {
         "operating": 1
       },
+      "by_state": {
+        "QLD": 1
+      },
       "states": [
         "QLD"
       ],
       "project_ids": [
         "ulinda-park-bess"
-      ]
+      ],
+      "status_detail": {
+        "operating": {
+          "count": 1,
+          "capacity_mw": 155.0,
+          "storage_mwh": 298.0
+        }
+      },
+      "state_detail": {
+        "QLD": {
+          "count": 1,
+          "capacity_mw": 155.0,
+          "storage_mwh": 298.0
+        }
+      }
     },
     {
       "slug": "samsung-sdi",
       "name": "Samsung SDI",
       "project_count": 2,
       "total_capacity_mw": 130.0,
+      "total_storage_mwh": 159.0,
       "roles": [
         "bess_oem"
       ],
@@ -607,6 +1118,10 @@
       "by_status": {
         "operating": 2
       },
+      "by_state": {
+        "QLD": 1,
+        "SA": 1
+      },
       "states": [
         "QLD",
         "SA"
@@ -614,13 +1129,33 @@
       "project_ids": [
         "dalrymple-bess",
         "wandoan-south-bess"
-      ]
+      ],
+      "status_detail": {
+        "operating": {
+          "count": 2,
+          "capacity_mw": 130.0,
+          "storage_mwh": 159.0
+        }
+      },
+      "state_detail": {
+        "QLD": {
+          "count": 1,
+          "capacity_mw": 100.0,
+          "storage_mwh": 150.0
+        },
+        "SA": {
+          "count": 1,
+          "capacity_mw": 30.0,
+          "storage_mwh": 9.0
+        }
+      }
     },
     {
       "slug": "doosan-gridtech",
       "name": "Doosan GridTech",
       "project_count": 1,
       "total_capacity_mw": 100.0,
+      "total_storage_mwh": 200.0,
       "roles": [
         "bess_oem"
       ],
@@ -633,18 +1168,36 @@
       "by_status": {
         "operating": 1
       },
+      "by_state": {
+        "NSW": 1
+      },
       "states": [
         "NSW"
       ],
       "project_ids": [
         "capital-battery"
-      ]
+      ],
+      "status_detail": {
+        "operating": {
+          "count": 1,
+          "capacity_mw": 100.0,
+          "storage_mwh": 200.0
+        }
+      },
+      "state_detail": {
+        "NSW": {
+          "count": 1,
+          "capacity_mw": 100.0,
+          "storage_mwh": 200.0
+        }
+      }
     },
     {
       "slug": "unknown",
       "name": "Unknown",
       "project_count": 1,
       "total_capacity_mw": 65.0,
+      "total_storage_mwh": 130.0,
       "roles": [
         "bess_oem"
       ],
@@ -657,18 +1210,36 @@
       "by_status": {
         "operating": 1
       },
+      "by_state": {
+        "NSW": 1
+      },
       "states": [
         "NSW"
       ],
       "project_ids": [
         "smithfield-bess"
-      ]
+      ],
+      "status_detail": {
+        "operating": {
+          "count": 1,
+          "capacity_mw": 65.0,
+          "storage_mwh": 130.0
+        }
+      },
+      "state_detail": {
+        "NSW": {
+          "count": 1,
+          "capacity_mw": 65.0,
+          "storage_mwh": 130.0
+        }
+      }
     },
     {
       "slug": "trina-storage",
       "name": "Trina Storage",
       "project_count": 1,
       "total_capacity_mw": 60.0,
+      "total_storage_mwh": 120.0,
       "roles": [
         "bess_oem"
       ],
@@ -679,18 +1250,36 @@
       "by_status": {
         "construction": 1
       },
+      "by_state": {
+        "SA": 1
+      },
       "states": [
         "SA"
       ],
       "project_ids": [
         "clements-gap-bess"
-      ]
+      ],
+      "status_detail": {
+        "construction": {
+          "count": 1,
+          "capacity_mw": 60.0,
+          "storage_mwh": 120.0
+        }
+      },
+      "state_detail": {
+        "SA": {
+          "count": 1,
+          "capacity_mw": 60.0,
+          "storage_mwh": 120.0
+        }
+      }
     },
     {
       "slug": "epc-power",
       "name": "EPC Power",
       "project_count": 1,
       "total_capacity_mw": 50.0,
+      "total_storage_mwh": 60.3,
       "roles": [
         "inverter"
       ],
@@ -703,18 +1292,36 @@
       "by_status": {
         "operating": 1
       },
+      "by_state": {
+        "NSW": 1
+      },
       "states": [
         "NSW"
       ],
       "project_ids": [
         "broken-hill-bess"
-      ]
+      ],
+      "status_detail": {
+        "operating": {
+          "count": 1,
+          "capacity_mw": 50.0,
+          "storage_mwh": 60.3
+        }
+      },
+      "state_detail": {
+        "NSW": {
+          "count": 1,
+          "capacity_mw": 50.0,
+          "storage_mwh": 60.3
+        }
+      }
     },
     {
       "slug": "abb",
       "name": "ABB",
       "project_count": 1,
       "total_capacity_mw": 30.0,
+      "total_storage_mwh": 9.0,
       "roles": [
         "inverter"
       ],
@@ -727,12 +1334,29 @@
       "by_status": {
         "operating": 1
       },
+      "by_state": {
+        "SA": 1
+      },
       "states": [
         "SA"
       ],
       "project_ids": [
         "dalrymple-bess"
-      ]
+      ],
+      "status_detail": {
+        "operating": {
+          "count": 1,
+          "capacity_mw": 30.0,
+          "storage_mwh": 9.0
+        }
+      },
+      "state_detail": {
+        "SA": {
+          "count": 1,
+          "capacity_mw": 30.0,
+          "storage_mwh": 9.0
+        }
+      }
     }
   ],
   "total": 27

@@ -1,7 +1,15 @@
 import { useState, useMemo } from 'react'
 import { Link, useSearchParams, useNavigate } from 'react-router-dom'
+import {
+  PieChart,
+  Pie,
+  Cell,
+  Tooltip,
+  ResponsiveContainer,
+  Legend,
+} from 'recharts'
 import { useOEMIndex } from '../hooks/useOEMData'
-import { TECHNOLOGY_CONFIG, OEM_ROLE_CONFIG, STATUS_CONFIG, type Technology, type State, type ProjectStatus, type OEMRole } from '../lib/types'
+import { TECHNOLOGY_CONFIG, OEM_ROLE_CONFIG, STATUS_CONFIG, type Technology, type State, type ProjectStatus, type OEMRole, type OEMProfile } from '../lib/types'
 
 type SortKey = 'capacity' | 'projects' | 'name'
 
@@ -282,6 +290,9 @@ export default function OEMList() {
         ))}
       </div>
 
+      {/* BESS Market Share Charts */}
+      {data && <BESSMarketShare oems={data.oems} stateFilters={stateFilters} statusFilters={statusFilters} />}
+
       {/* OEM Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
         {filtered.map((oem) => (
@@ -371,5 +382,183 @@ function OEMCard({ oem }: { oem: { slug: string; name: string; project_count: nu
         <span className="truncate max-w-[140px]">{oem.states.join(', ')}</span>
       </div>
     </Link>
+  )
+}
+
+// ─── Pie Chart Colours ───
+const PIE_COLORS = [
+  '#3b82f6', '#ef4444', '#22c55e', '#f59e0b', '#8b5cf6',
+  '#ec4899', '#14b8a6', '#f97316', '#06b6d4', '#a855f7',
+  '#64748b', '#84cc16', '#e11d48', '#0ea5e9', '#d946ef',
+]
+
+type PieMetric = 'projects' | 'mw' | 'mwh'
+
+function BESSMarketShare({
+  oems,
+  stateFilters,
+  statusFilters,
+}: {
+  oems: OEMProfile[]
+  stateFilters: State[]
+  statusFilters: ProjectStatus[]
+}) {
+  const [metric, setMetric] = useState<PieMetric>('projects')
+
+  const chartData = useMemo(() => {
+    // Only BESS OEMs
+    const bessOems = oems.filter((o) => o.by_technology.bess)
+
+    return bessOems.map((oem) => {
+      let count = 0
+      let mw = 0
+      let mwh = 0
+
+      // If no filters active, use totals from BESS technology
+      if (!stateFilters.length && !statusFilters.length) {
+        count = oem.by_technology.bess ?? 0
+        // For unfiltered, we need to approximate from status_detail/state_detail
+        // Use total values as best approximation for BESS subset
+        mw = oem.total_capacity_mw
+        mwh = oem.total_storage_mwh
+      } else {
+        // Apply filters: sum matching status_detail and state_detail
+        // When both filters active, we can't perfectly intersect, so use status as primary
+        if (statusFilters.length && !stateFilters.length) {
+          for (const s of statusFilters) {
+            const d = oem.status_detail[s]
+            if (d) {
+              count += d.count
+              mw += d.capacity_mw
+              mwh += d.storage_mwh
+            }
+          }
+        } else if (stateFilters.length && !statusFilters.length) {
+          for (const s of stateFilters) {
+            const d = oem.state_detail[s]
+            if (d) {
+              count += d.count
+              mw += d.capacity_mw
+              mwh += d.storage_mwh
+            }
+          }
+        } else {
+          // Both filters active — use status as primary (closer approximation)
+          for (const s of statusFilters) {
+            const d = oem.status_detail[s]
+            if (d) {
+              count += d.count
+              mw += d.capacity_mw
+              mwh += d.storage_mwh
+            }
+          }
+        }
+      }
+
+      return { name: oem.name, slug: oem.slug, projects: count, mw: Math.round(mw), mwh: Math.round(mwh) }
+    })
+      .filter((d) => d[metric] > 0)
+      .sort((a, b) => b[metric] - a[metric])
+  }, [oems, stateFilters.join(','), statusFilters.join(','), metric])
+
+  // Group small slices into "Other"
+  const threshold = 0.03
+  const total = chartData.reduce((s, d) => s + d[metric], 0)
+  const mainSlices: { name: string; value: number }[] = []
+  let otherValue = 0
+
+  for (const d of chartData) {
+    if (d[metric] / total >= threshold) {
+      mainSlices.push({ name: d.name, value: d[metric] })
+    } else {
+      otherValue += d[metric]
+    }
+  }
+  if (otherValue > 0) {
+    mainSlices.push({ name: 'Other', value: otherValue })
+  }
+
+  const metricLabel = metric === 'projects' ? 'Projects' : metric === 'mw' ? 'MW' : 'MWh'
+  const filterDesc = [
+    stateFilters.length ? stateFilters.join(', ') : '',
+    statusFilters.length ? statusFilters.join(', ') : '',
+  ].filter(Boolean).join(' · ')
+
+  if (mainSlices.length === 0) return null
+
+  return (
+    <section className="mb-6 bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl p-5">
+      <div className="flex items-center justify-between mb-4 flex-wrap gap-2">
+        <div>
+          <h2 className="text-lg font-semibold text-[var(--color-text)]">
+            BESS Market Share
+          </h2>
+          <p className="text-xs text-[var(--color-text-muted)]">
+            {chartData.length} OEMs · {total.toLocaleString()} {metricLabel} total
+            {filterDesc && ` · ${filterDesc}`}
+          </p>
+        </div>
+        <div className="flex gap-1">
+          {([
+            { key: 'projects', label: '# Projects' },
+            { key: 'mw', label: 'MW' },
+            { key: 'mwh', label: 'MWh' },
+          ] as const).map((opt) => (
+            <button
+              key={opt.key}
+              onClick={() => setMetric(opt.key)}
+              className={`text-xs px-2.5 py-1 rounded-lg border transition-colors ${
+                metric === opt.key
+                  ? 'border-[var(--color-primary)]/40 bg-[var(--color-primary)]/10 text-[var(--color-primary)] font-medium'
+                  : 'border-[var(--color-border)] text-[var(--color-text-muted)] hover:border-[var(--color-text-muted)]'
+              }`}
+            >
+              {opt.label}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <div className="h-72">
+        <ResponsiveContainer width="100%" height="100%">
+          <PieChart>
+            <Pie
+              data={mainSlices}
+              cx="50%"
+              cy="50%"
+              innerRadius={55}
+              outerRadius={100}
+              paddingAngle={2}
+              dataKey="value"
+              nameKey="name"
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+              label={(props: any) => {
+                const pct = props.percent ?? 0
+                return pct > 0.05 ? `${props.name ?? ''} ${(pct * 100).toFixed(0)}%` : ''
+              }}
+              labelLine={false}
+            >
+              {mainSlices.map((_, i) => (
+                <Cell key={i} fill={PIE_COLORS[i % PIE_COLORS.length]} />
+              ))}
+            </Pie>
+            <Tooltip
+              contentStyle={{
+                backgroundColor: '#1e293b',
+                border: '1px solid rgba(255,255,255,0.1)',
+                borderRadius: 8,
+                color: '#f1f5f9',
+                fontSize: 13,
+              }}
+              formatter={(value) => `${Number(value).toLocaleString()} ${metricLabel}`}
+            />
+            <Legend
+              wrapperStyle={{ fontSize: 11 }}
+              formatter={(value) => <span style={{ color: '#9ca3af' }}>{value}</span>}
+            />
+          </PieChart>
+        </ResponsiveContainer>
+      </div>
+    </section>
   )
 }
