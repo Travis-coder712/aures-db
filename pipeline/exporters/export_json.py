@@ -57,9 +57,10 @@ def fetch_full_project(conn, project_id):
     project = dict(row)
 
     # Convert boolean integers to actual booleans for JSON
+    # SQLite may return '0'/'1' strings — bool('0') is True, so convert via int first
     for key in ['grid_forming', 'has_sips', 'has_syncon', 'has_statcom', 'has_harmonic_filter']:
-        if key in project:
-            project[key] = bool(project[key])
+        if key in project and project[key] is not None:
+            project[key] = bool(int(project[key]))
 
     # Add coordinates
     if project.get('latitude') and project.get('longitude'):
