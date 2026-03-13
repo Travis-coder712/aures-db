@@ -13,7 +13,7 @@
   "cod_original": "2017-12",
   "connection_status": "Connected",
   "connection_nsp": "ElectraNet",
-  "grid_forming": false,
+  "grid_forming": true,
   "has_sips": false,
   "has_syncon": false,
   "has_statcom": false,
