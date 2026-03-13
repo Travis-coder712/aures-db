@@ -30,11 +30,59 @@
   },
   "timeline": [
     {
+      "date": "2014",
+      "date_precision": "year",
+      "event_type": "ownership_change",
+      "title": "Tilt Renewables acquires project",
+      "detail": "Tilt Renewables acquired development rights from Epuron",
+      "sources": []
+    },
+    {
+      "date": "2017-05",
+      "date_precision": "month",
+      "event_type": "planning_approved",
+      "title": "NSW planning approval",
+      "detail": "Development consent granted for up to 92 turbines",
+      "sources": []
+    },
+    {
       "date": "2020",
       "date_precision": "year",
       "event_type": "planning_submitted",
       "title": "EPBC Referral 2020/8837",
       "detail": "Rye Park Wind Farm \u2014 Controlled Action",
+      "sources": []
+    },
+    {
+      "date": "2021-04",
+      "date_precision": "month",
+      "event_type": "planning_modified",
+      "title": "Modified development consent",
+      "detail": "Updated consent reflecting design changes",
+      "sources": []
+    },
+    {
+      "date": "2021-06",
+      "date_precision": "month",
+      "event_type": "planning_approved",
+      "title": "EPBC federal approval",
+      "detail": "Commonwealth EPBC Act approval received",
+      "sources": []
+    },
+    {
+      "date": "2021-09",
+      "date_precision": "month",
+      "event_type": "equipment_order",
+      "title": "Vestas and Zenviron contracts",
+      "detail": "Vestas contracted for turbine supply/install; Zenviron awarded A$250M BoP contract",
+      "sources": []
+    },
+    {
+      "date": "2021-12-01",
+      "date_precision": "day",
+      "event_type": "construction_start",
+      "title": "Construction commenced",
+      "detail": "Construction began 1 December 2021",
       "sources": []
     },
     {

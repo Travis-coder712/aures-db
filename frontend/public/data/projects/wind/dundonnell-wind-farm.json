@@ -28,6 +28,54 @@
   },
   "timeline": [
     {
+      "date": "2013-01",
+      "date_precision": "month",
+      "event_type": "notable",
+      "title": "EES required",
+      "detail": "Minister for Planning determined Environment Effects Statement required",
+      "sources": []
+    },
+    {
+      "date": "2016-02",
+      "date_precision": "month",
+      "event_type": "planning_approved",
+      "title": "EES assessment completed",
+      "detail": "Minister released assessment under Environment Effects Act 1978",
+      "sources": []
+    },
+    {
+      "date": "2018-09",
+      "date_precision": "month",
+      "event_type": "notable",
+      "title": "VREAS auction winner",
+      "detail": "Selected as one of six winners of Victorian Renewable Energy Auction Scheme",
+      "sources": []
+    },
+    {
+      "date": "2018-10",
+      "date_precision": "month",
+      "event_type": "fid",
+      "title": "Final investment decision",
+      "detail": "Tilt Renewables made final investment decision on the $560M project",
+      "sources": []
+    },
+    {
+      "date": "2018-11",
+      "date_precision": "month",
+      "event_type": "fid",
+      "title": "Financial close",
+      "detail": "Project financing completed",
+      "sources": []
+    },
+    {
+      "date": "2019-01",
+      "date_precision": "month",
+      "event_type": "construction_start",
+      "title": "Construction commenced",
+      "detail": "Construction began for 80 Vestas turbines",
+      "sources": []
+    },
+    {
       "date": "2020-03-10",
       "date_precision": "day",
       "event_type": "cod",

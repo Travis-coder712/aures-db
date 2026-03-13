@@ -27,6 +27,14 @@
   },
   "timeline": [
     {
+      "date": "2017-04",
+      "date_precision": "month",
+      "event_type": "construction_start",
+      "title": "Construction commenced",
+      "detail": "Acciona began construction; Nordex turbine supply",
+      "sources": []
+    },
+    {
       "date": "2018-06-21",
       "date_precision": "day",
       "event_type": "cod",

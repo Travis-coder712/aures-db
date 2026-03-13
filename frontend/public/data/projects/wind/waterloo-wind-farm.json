@@ -27,6 +27,14 @@
   },
   "timeline": [
     {
+      "date": "2009",
+      "date_precision": "year",
+      "event_type": "construction_start",
+      "title": "Stage 1 construction commenced",
+      "detail": "Roaring 40s JV began construction; A$300M Stage 1",
+      "sources": []
+    },
+    {
       "date": "2010-08-19",
       "date_precision": "day",
       "event_type": "cod",
@@ -40,6 +48,14 @@
       "event_type": "energisation",
       "title": "First generation recorded",
       "detail": "First market dispatch data recorded in AEMO systems.",
+      "sources": []
+    },
+    {
+      "date": "2017",
+      "date_precision": "year",
+      "event_type": "expansion",
+      "title": "Stage 2 extension complete",
+      "detail": "6 Vestas V117-3.3 MW turbines added; total 130.8 MW",
       "sources": []
     }
   ],

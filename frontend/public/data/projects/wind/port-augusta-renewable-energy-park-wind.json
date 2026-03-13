@@ -28,6 +28,22 @@
   },
   "timeline": [
     {
+      "date": "2019",
+      "date_precision": "year",
+      "event_type": "fid",
+      "title": "Financial close",
+      "detail": "DP Energy / Iberdrola reached financial close",
+      "sources": []
+    },
+    {
+      "date": "2020",
+      "date_precision": "year",
+      "event_type": "construction_start",
+      "title": "Construction commenced",
+      "detail": "Site works began for 50 Vestas turbines near Port Augusta",
+      "sources": []
+    },
+    {
       "date": "2022-04-19",
       "date_precision": "day",
       "event_type": "cod",

@@ -26,6 +26,22 @@
   },
   "timeline": [
     {
+      "date": "2017-05",
+      "date_precision": "month",
+      "event_type": "ownership_change",
+      "title": "Macquarie Capital acquires from WestWind",
+      "detail": "Macquarie Capital purchased Lal Lal Wind Farms from WestWind Energy",
+      "sources": []
+    },
+    {
+      "date": "2018",
+      "date_precision": "year",
+      "event_type": "construction_start",
+      "title": "Construction commenced",
+      "detail": "Zenviron construction; Vestas V136-3.8 MW turbine supply; RES managing build",
+      "sources": []
+    },
+    {
       "date": "2019-06-18",
       "date_precision": "day",
       "event_type": "cod",

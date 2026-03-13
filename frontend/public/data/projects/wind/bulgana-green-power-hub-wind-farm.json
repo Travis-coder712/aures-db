@@ -28,6 +28,22 @@
   },
   "timeline": [
     {
+      "date": "2018",
+      "date_precision": "year",
+      "event_type": "fid",
+      "title": "Financial close",
+      "detail": "Neoen reached financial close for wind+battery hybrid project",
+      "sources": []
+    },
+    {
+      "date": "2019",
+      "date_precision": "year",
+      "event_type": "construction_start",
+      "title": "Construction commenced",
+      "detail": "Construction began for 56 Vestas turbines + 20 MW/34 MWh battery",
+      "sources": []
+    },
+    {
       "date": "2020-05-13",
       "date_precision": "day",
       "event_type": "cod",

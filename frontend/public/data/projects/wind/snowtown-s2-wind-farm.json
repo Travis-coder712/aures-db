@@ -27,6 +27,14 @@
   },
   "timeline": [
     {
+      "date": "2012-10",
+      "date_precision": "month",
+      "event_type": "construction_start",
+      "title": "Construction commenced",
+      "detail": "Stage 2 construction began for 90 Siemens turbines",
+      "sources": []
+    },
+    {
       "date": "2012-10-02",
       "date_precision": "day",
       "event_type": "cod",

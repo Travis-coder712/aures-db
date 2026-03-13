@@ -37,6 +37,22 @@
       "sources": []
     },
     {
+      "date": "2019",
+      "date_precision": "year",
+      "event_type": "fid",
+      "title": "Financial close \u2014 A$250M",
+      "detail": "CEFC financing; Zenviron/GE consortium A$200M EPC contract",
+      "sources": []
+    },
+    {
+      "date": "2020",
+      "date_precision": "year",
+      "event_type": "construction_start",
+      "title": "Construction commenced",
+      "detail": "37 GE 3.63 MW turbines; 45 km south of Mudgee",
+      "sources": []
+    },
+    {
       "date": "2020-12-01",
       "date_precision": "day",
       "event_type": "cod",
@@ -50,6 +66,14 @@
       "event_type": "energisation",
       "title": "First generation recorded",
       "detail": "First market dispatch data recorded in AEMO systems.",
+      "sources": []
+    },
+    {
+      "date": "2021-02",
+      "date_precision": "month",
+      "event_type": "notable",
+      "title": "BoP completed",
+      "detail": "Balance of plant civil and electrical works finished",
       "sources": []
     }
   ],

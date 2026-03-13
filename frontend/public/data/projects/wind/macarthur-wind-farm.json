@@ -28,6 +28,38 @@
   },
   "timeline": [
     {
+      "date": "2006-10",
+      "date_precision": "month",
+      "event_type": "planning_approved",
+      "title": "Victorian Government approval",
+      "detail": "Planning permit granted by Victorian Government",
+      "sources": []
+    },
+    {
+      "date": "2010-08",
+      "date_precision": "month",
+      "event_type": "equipment_order",
+      "title": "Vestas turbine contract signed",
+      "detail": "Deal for 140 Vestas V112-3.0 MW turbines cemented",
+      "sources": []
+    },
+    {
+      "date": "2010-10",
+      "date_precision": "quarter",
+      "event_type": "construction_start",
+      "title": "Construction commenced",
+      "detail": "Site clearance and civil works began Q4 2010",
+      "sources": []
+    },
+    {
+      "date": "2011-11",
+      "date_precision": "month",
+      "event_type": "notable",
+      "title": "First turbine erected",
+      "detail": "First of 140 turbines physically erected on site",
+      "sources": []
+    },
+    {
       "date": "2012-09-27",
       "date_precision": "day",
       "event_type": "cod",

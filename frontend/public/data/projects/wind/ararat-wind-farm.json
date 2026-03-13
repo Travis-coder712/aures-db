@@ -28,6 +28,30 @@
   },
   "timeline": [
     {
+      "date": "2010",
+      "date_precision": "year",
+      "event_type": "planning_approved",
+      "title": "Victorian planning permit",
+      "detail": "Planning permit granted for wind farm near Ararat",
+      "sources": []
+    },
+    {
+      "date": "2014-10",
+      "date_precision": "month",
+      "event_type": "fid",
+      "title": "Financial close",
+      "detail": "RES Group reached financial close on the A$450M project",
+      "sources": []
+    },
+    {
+      "date": "2014-11",
+      "date_precision": "month",
+      "event_type": "construction_start",
+      "title": "Construction commenced",
+      "detail": "Site works began for 75 GE 3.2 MW turbines",
+      "sources": []
+    },
+    {
       "date": "2016-08-18",
       "date_precision": "day",
       "event_type": "cod",

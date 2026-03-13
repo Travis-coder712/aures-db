@@ -28,6 +28,30 @@
   },
   "timeline": [
     {
+      "date": "2012-07",
+      "date_precision": "month",
+      "event_type": "planning_approved",
+      "title": "NSW planning approval",
+      "detail": "Original planning approval granted",
+      "sources": []
+    },
+    {
+      "date": "2014-10",
+      "date_precision": "month",
+      "event_type": "ownership_change",
+      "title": "Goldwind acquires from Epuron",
+      "detail": "Goldwind Australia acquired development rights",
+      "sources": []
+    },
+    {
+      "date": "2016-04",
+      "date_precision": "month",
+      "event_type": "construction_start",
+      "title": "Construction commenced",
+      "detail": "Construction began for 70 Goldwind GW121/2500 turbines near Glen Innes",
+      "sources": []
+    },
+    {
       "date": "2017-07-07",
       "date_precision": "day",
       "event_type": "cod",

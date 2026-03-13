@@ -27,6 +27,22 @@
   },
   "timeline": [
     {
+      "date": "2004-01",
+      "date_precision": "month",
+      "event_type": "planning_approved",
+      "title": "Planning approval",
+      "detail": "Wakefield Regional Council approved construction",
+      "sources": []
+    },
+    {
+      "date": "2006-04",
+      "date_precision": "month",
+      "event_type": "construction_start",
+      "title": "Stage 1 construction commenced",
+      "detail": "TrustPower began construction",
+      "sources": []
+    },
+    {
       "date": "2008-04-18",
       "date_precision": "day",
       "event_type": "cod",

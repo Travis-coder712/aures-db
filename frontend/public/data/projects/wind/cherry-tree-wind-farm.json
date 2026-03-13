@@ -26,6 +26,14 @@
   },
   "timeline": [
     {
+      "date": "2019",
+      "date_precision": "year",
+      "event_type": "construction_start",
+      "title": "Construction commenced",
+      "detail": "OSMI began construction near Seymour",
+      "sources": []
+    },
+    {
       "date": "2020-05-01",
       "date_precision": "day",
       "event_type": "cod",

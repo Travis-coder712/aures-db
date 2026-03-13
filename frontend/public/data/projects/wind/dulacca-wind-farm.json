@@ -37,6 +37,22 @@
       "sources": []
     },
     {
+      "date": "2021",
+      "date_precision": "year",
+      "event_type": "construction_start",
+      "title": "Construction commenced",
+      "detail": "Construction began for 43 Vestas V150-4.2 MW turbines",
+      "sources": []
+    },
+    {
+      "date": "2021-08",
+      "date_precision": "month",
+      "event_type": "ownership_change",
+      "title": "Octopus acquires from RES",
+      "detail": "Octopus Investments Australia acquired the project from RES",
+      "sources": []
+    },
+    {
       "date": "2023-04-12",
       "date_precision": "day",
       "event_type": "cod",
@@ -50,6 +66,14 @@
       "event_type": "energisation",
       "title": "First generation recorded",
       "detail": "First market dispatch data recorded in AEMO systems.",
+      "sources": []
+    },
+    {
+      "date": "2023-10-18",
+      "date_precision": "day",
+      "event_type": "notable",
+      "title": "Official opening",
+      "detail": "Dulacca Wind Farm officially opened",
       "sources": []
     }
   ],

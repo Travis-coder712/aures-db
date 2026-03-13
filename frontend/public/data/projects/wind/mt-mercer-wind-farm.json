@@ -27,6 +27,22 @@
   },
   "timeline": [
     {
+      "date": "2009",
+      "date_precision": "year",
+      "event_type": "ownership_change",
+      "title": "Meridian Energy acquires project",
+      "detail": "Meridian Energy purchased from WestWind Energy",
+      "sources": []
+    },
+    {
+      "date": "2012",
+      "date_precision": "year",
+      "event_type": "construction_start",
+      "title": "Construction commenced",
+      "detail": "A$260M project; Senvion turbines; Downer EDI A$70M civil/electrical",
+      "sources": []
+    },
+    {
       "date": "2013-11-25",
       "date_precision": "day",
       "event_type": "cod",

@@ -26,6 +26,22 @@
   },
   "timeline": [
     {
+      "date": "2009",
+      "date_precision": "year",
+      "event_type": "construction_start",
+      "title": "Construction commenced",
+      "detail": "Global Power Generation began construction; A$200M project",
+      "sources": []
+    },
+    {
+      "date": "2017",
+      "date_precision": "year",
+      "event_type": "planning_modified",
+      "title": "Turbine modification approved",
+      "detail": "Hub height increased 80\u219295m; rotor diameter 96\u2192130m",
+      "sources": []
+    },
+    {
       "date": "2018-08-14",
       "date_precision": "day",
       "event_type": "energisation",

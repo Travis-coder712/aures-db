@@ -27,11 +27,27 @@
   },
   "timeline": [
     {
+      "date": "2020-10",
+      "date_precision": "month",
+      "event_type": "planning_approved",
+      "title": "NSW planning approval",
+      "detail": "Approved for 16 turbines with max 157m tip height",
+      "sources": []
+    },
+    {
       "date": "2021",
       "date_precision": "year",
       "event_type": "planning_submitted",
       "title": "EPBC Referral 2021/8972",
       "detail": "Crookwell 3 Wind Farm \u2014 Not Controlled Action",
+      "sources": []
+    },
+    {
+      "date": "2022",
+      "date_precision": "year",
+      "event_type": "construction_start",
+      "title": "Construction commenced",
+      "detail": "Global Power Generation began Stage 3 construction",
       "sources": []
     },
     {

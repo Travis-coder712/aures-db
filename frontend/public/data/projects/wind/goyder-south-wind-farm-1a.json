@@ -28,6 +28,22 @@
   },
   "timeline": [
     {
+      "date": "2021",
+      "date_precision": "year",
+      "event_type": "fid",
+      "title": "Financial close",
+      "detail": "Neoen reached financial close for Goyder South Stage 1A",
+      "sources": []
+    },
+    {
+      "date": "2022",
+      "date_precision": "year",
+      "event_type": "construction_start",
+      "title": "Construction commenced",
+      "detail": "Construction began for Vestas turbines",
+      "sources": []
+    },
+    {
       "date": "2024-04-04",
       "date_precision": "day",
       "event_type": "cod",

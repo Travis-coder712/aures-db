@@ -28,6 +28,46 @@
   },
   "timeline": [
     {
+      "date": "2016-12",
+      "date_precision": "month",
+      "event_type": "fid",
+      "title": "Financial close \u2014 A$600M",
+      "detail": "CWP Renewables reached financial closure for A$600M project",
+      "sources": []
+    },
+    {
+      "date": "2017-01",
+      "date_precision": "month",
+      "event_type": "construction_start",
+      "title": "Construction commenced",
+      "detail": "Site works began near Inverell NSW",
+      "sources": []
+    },
+    {
+      "date": "2017-04",
+      "date_precision": "month",
+      "event_type": "notable",
+      "title": "First foundation laid",
+      "detail": "First turbine foundation poured",
+      "sources": []
+    },
+    {
+      "date": "2017-10",
+      "date_precision": "month",
+      "event_type": "equipment_order",
+      "title": "Turbine erection begins",
+      "detail": "Vestas turbine erection commenced on site",
+      "sources": []
+    },
+    {
+      "date": "2017-12",
+      "date_precision": "month",
+      "event_type": "commissioning",
+      "title": "Commissioning begins",
+      "detail": "First turbines enter commissioning phase",
+      "sources": []
+    },
+    {
       "date": "2018-02-01",
       "date_precision": "day",
       "event_type": "cod",

@@ -28,6 +28,14 @@
   },
   "timeline": [
     {
+      "date": "2023",
+      "date_precision": "year",
+      "event_type": "construction_start",
+      "title": "Construction commenced",
+      "detail": "Stage 1B construction began",
+      "sources": []
+    },
+    {
       "date": "2024-04-04",
       "date_precision": "day",
       "event_type": "cod",

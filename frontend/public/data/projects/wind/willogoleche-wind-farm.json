@@ -28,11 +28,35 @@
   },
   "timeline": [
     {
+      "date": "2008",
+      "date_precision": "year",
+      "event_type": "ownership_change",
+      "title": "ENGIE acquires development",
+      "detail": "ENGIE purchased development rights from Wind Prospect",
+      "sources": []
+    },
+    {
       "date": "2011",
       "date_precision": "year",
       "event_type": "planning_submitted",
       "title": "EPBC Referral 2011/5850",
       "detail": "Willogoleche Wind Farm, SA \u2014 Controlled Action",
+      "sources": []
+    },
+    {
+      "date": "2017-08",
+      "date_precision": "month",
+      "event_type": "fid",
+      "title": "Financial close \u2014 A$250M",
+      "detail": "CIC and Natixis underwriting A$250M debt facility",
+      "sources": []
+    },
+    {
+      "date": "2018",
+      "date_precision": "year",
+      "event_type": "construction_start",
+      "title": "Construction commenced",
+      "detail": "First large-scale Australian deployment of GE 3.8 MW onshore turbines",
       "sources": []
     },
     {

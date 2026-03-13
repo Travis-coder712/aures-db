@@ -23,6 +23,14 @@
   "first_seen": "2026-03-12",
   "timeline": [
     {
+      "date": "2023",
+      "date_precision": "year",
+      "event_type": "construction_start",
+      "title": "East section construction began",
+      "detail": "Turbine installation commenced for eastern section",
+      "sources": []
+    },
+    {
       "date": "2026-03-12",
       "date_precision": "day",
       "event_type": "cod_change",

@@ -26,6 +26,30 @@
   },
   "timeline": [
     {
+      "date": "2006-06",
+      "date_precision": "month",
+      "event_type": "notable",
+      "title": "Federal approval refused",
+      "detail": "Environment Minister Ian Campbell refused EPBC approval citing migratory birds",
+      "sources": []
+    },
+    {
+      "date": "2006-12",
+      "date_precision": "month",
+      "event_type": "planning_approved",
+      "title": "Revised federal approval",
+      "detail": "EPBC approval granted after Federal Court challenge and project modifications",
+      "sources": []
+    },
+    {
+      "date": "2012-08",
+      "date_precision": "month",
+      "event_type": "construction_start",
+      "title": "Construction commenced",
+      "detail": "Mitsui commenced construction; VCAT ordered approval of development plans",
+      "sources": []
+    },
+    {
       "date": "2015-02-23",
       "date_precision": "day",
       "event_type": "cod",

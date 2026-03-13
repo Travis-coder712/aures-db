@@ -28,6 +28,38 @@
   },
   "timeline": [
     {
+      "date": "2018-05",
+      "date_precision": "month",
+      "event_type": "planning_approved",
+      "title": "QLD development approval",
+      "detail": "State Development department granted approval for Kaban Green Power Hub",
+      "sources": []
+    },
+    {
+      "date": "2021-05",
+      "date_precision": "month",
+      "event_type": "fid",
+      "title": "Financial close \u2014 A$373M",
+      "detail": "Neoen completed financing; Vestas contracted for EPC",
+      "sources": []
+    },
+    {
+      "date": "2021-06",
+      "date_precision": "month",
+      "event_type": "construction_start",
+      "title": "Construction commenced",
+      "detail": "Civil works began; 21-month construction program",
+      "sources": []
+    },
+    {
+      "date": "2022-01",
+      "date_precision": "month",
+      "event_type": "equipment_order",
+      "title": "Turbine components arrive",
+      "detail": "Vestas V162-5.6 MW components arrive at Port of Cairns",
+      "sources": []
+    },
+    {
       "date": "2022-09-25",
       "date_precision": "day",
       "event_type": "cod",

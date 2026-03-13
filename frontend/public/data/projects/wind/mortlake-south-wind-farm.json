@@ -28,6 +28,38 @@
   },
   "timeline": [
     {
+      "date": "2010-10",
+      "date_precision": "month",
+      "event_type": "planning_approved",
+      "title": "Original planning permit",
+      "detail": "Minister for Planning approved 52 turbines",
+      "sources": []
+    },
+    {
+      "date": "2017-04",
+      "date_precision": "month",
+      "event_type": "planning_modified",
+      "title": "Amended permit \u2014 larger turbines",
+      "detail": "Permit amended for fewer but larger modern turbines",
+      "sources": []
+    },
+    {
+      "date": "2018-09",
+      "date_precision": "month",
+      "event_type": "notable",
+      "title": "VRET auction winner",
+      "detail": "Selected as winner of Victorian Renewable Energy Target reverse auction",
+      "sources": []
+    },
+    {
+      "date": "2019-03-04",
+      "date_precision": "day",
+      "event_type": "construction_start",
+      "title": "Construction commenced",
+      "detail": "A$275M project; 35 Nordex N149/4.5 MW turbines + battery",
+      "sources": []
+    },
+    {
       "date": "2022-10-25",
       "date_precision": "day",
       "event_type": "cod",

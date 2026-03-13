@@ -25,11 +25,43 @@
   "first_seen": "2020",
   "timeline": [
     {
+      "date": "2019",
+      "date_precision": "year",
+      "event_type": "planning_approved",
+      "title": "QLD development approval",
+      "detail": "Queensland Government approved the project",
+      "sources": []
+    },
+    {
       "date": "2020",
       "date_precision": "year",
       "event_type": "planning_submitted",
       "title": "EPBC Referral 2020/8756",
       "detail": "MacIntyre Wind Farm Project \u2014 Post-Approval",
+      "sources": []
+    },
+    {
+      "date": "2021-07",
+      "date_precision": "month",
+      "event_type": "fid",
+      "title": "Financial close \u2014 A$1.96B",
+      "detail": "Acciona reached financial close; largest single-site wind farm in southern hemisphere",
+      "sources": []
+    },
+    {
+      "date": "2021-09",
+      "date_precision": "month",
+      "event_type": "construction_start",
+      "title": "Construction commenced",
+      "detail": "Construction began for 162 GE Cypress 5.7 MW turbines",
+      "sources": []
+    },
+    {
+      "date": "2024",
+      "date_precision": "year",
+      "event_type": "energisation",
+      "title": "First turbines generating",
+      "detail": "Initial turbines connected to Powerlink network",
       "sources": []
     },
     {

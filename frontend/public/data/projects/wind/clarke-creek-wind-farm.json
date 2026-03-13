@@ -23,6 +23,30 @@
   "first_seen": "2026-03-12",
   "timeline": [
     {
+      "date": "2020",
+      "date_precision": "year",
+      "event_type": "planning_approved",
+      "title": "QLD development approval",
+      "detail": "Queensland Government approved the project",
+      "sources": []
+    },
+    {
+      "date": "2021",
+      "date_precision": "year",
+      "event_type": "fid",
+      "title": "Financial close \u2014 A$1.5B",
+      "detail": "Lacour Energy/Squadron Energy reached financial close",
+      "sources": []
+    },
+    {
+      "date": "2022",
+      "date_precision": "year",
+      "event_type": "construction_start",
+      "title": "Construction commenced",
+      "detail": "Construction began for 66 GE Cypress 5.7 MW turbines + 33 GE 3.8 MW",
+      "sources": []
+    },
+    {
       "date": "2026-03-12",
       "date_precision": "day",
       "event_type": "cod_change",

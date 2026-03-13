@@ -44,10 +44,34 @@
       "sources": []
     },
     {
+      "date": "2010-06",
+      "date_precision": "month",
+      "event_type": "planning_approved",
+      "title": "Victorian planning permit granted",
+      "detail": "Minister for Planning approved the project for up to 149 turbines",
+      "sources": []
+    },
+    {
+      "date": "2017-12",
+      "date_precision": "month",
+      "event_type": "ownership_change",
+      "title": "Origin Energy acquires project",
+      "detail": "Origin Energy purchased the development rights from WestWind Energy",
+      "sources": []
+    },
+    {
       "date": "2018-01-01",
       "date_precision": "year",
       "event_type": "construction_start",
       "title": "Construction commenced",
+      "sources": []
+    },
+    {
+      "date": "2018-06",
+      "date_precision": "month",
+      "event_type": "fid",
+      "title": "Financial close \u2014 A$800M+",
+      "detail": "Origin Energy reached financial close with Goldwind as turbine supplier",
       "sources": []
     },
     {
