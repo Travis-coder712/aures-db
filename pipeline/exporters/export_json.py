@@ -1377,122 +1377,262 @@ def _grade(score):
 
 # ---- 1. Scheme Risk -------------------------------------------------------
 
-def export_scheme_risk(conn):
-    """Analyse risk for projects with government scheme contracts."""
-    rows = conn.execute("""
-        SELECT sc.id as contract_id, sc.scheme, sc.round, sc.project_id,
-               p.name, p.status, p.technology, p.capacity_mw,
-               p.cod_current, p.cod_original, p.current_developer,
-               p.storage_mwh
-        FROM scheme_contracts sc
-        JOIN projects p ON p.id = sc.project_id
-    """).fetchall()
+def export_scheme_tracker(conn):
+    """Track milestone progression for CIS and LTESA scheme projects."""
+    from datetime import date as date_type
 
-    # Gather timeline events for FID and construction_start
+    # ---- Hardcoded round metadata (mirrors scheme-rounds.ts) ----
+    ROUNDS = [
+        # CIS Pilots
+        {'id': 'cis-pilot-nsw', 'scheme': 'CIS', 'round': 'CIS Pilot — NSW', 'type': 'dispatchable', 'announced_date': '2023-11-23',
+         'projects': [
+             {'name': 'Orana REZ Battery', 'developer': 'Akaysha Energy', 'technology': 'bess', 'capacity_mw': 460, 'storage_mwh': 920, 'state': 'NSW', 'project_id': 'orana-bess'},
+             {'name': 'Liddell Battery', 'developer': 'AGL Energy', 'technology': 'bess', 'capacity_mw': 250, 'storage_mwh': 500, 'state': 'NSW', 'project_id': 'liddell-bess'},
+             {'name': 'Smithfield Sydney Battery', 'developer': 'Iberdrola Australia', 'technology': 'bess', 'capacity_mw': 235, 'storage_mwh': 470, 'state': 'NSW', 'project_id': 'smithfield-bess'},
+             {'name': 'Enel X VPP 1', 'developer': 'Enel X Australia', 'technology': 'vpp', 'capacity_mw': 43, 'state': 'NSW'},
+             {'name': 'Enel X VPP 2', 'developer': 'Enel X Australia', 'technology': 'vpp', 'capacity_mw': 43, 'state': 'NSW'},
+             {'name': 'Enel X VPP 3', 'developer': 'Enel X Australia', 'technology': 'vpp', 'capacity_mw': 44, 'state': 'NSW'},
+         ]},
+        {'id': 'cis-pilot-sa-vic', 'scheme': 'CIS', 'round': 'CIS Pilot — SA/VIC', 'type': 'dispatchable', 'announced_date': '2024-09-04',
+         'projects': [
+             {'name': 'Wooreen Battery', 'developer': 'EnergyAustralia', 'technology': 'bess', 'capacity_mw': 350, 'storage_mwh': 1400, 'state': 'VIC', 'project_id': 'wooreen-energy-storage-system'},
+             {'name': 'Springfield BESS', 'developer': 'Neoen', 'technology': 'bess', 'capacity_mw': 200, 'storage_mwh': 400, 'state': 'VIC'},
+             {'name': 'Mortlake BESS', 'developer': 'Origin Energy', 'technology': 'bess', 'capacity_mw': 135, 'storage_mwh': 270, 'state': 'VIC', 'project_id': 'mortlake-battery'},
+             {'name': 'Tailem Bend BESS', 'developer': 'Iberdrola', 'technology': 'bess', 'capacity_mw': 200, 'storage_mwh': 560, 'state': 'SA', 'project_id': 'tailem-bend-stage-3'},
+             {'name': 'Clements Gap Battery', 'developer': 'Pacific Blue', 'technology': 'bess', 'capacity_mw': 60, 'storage_mwh': 240, 'state': 'SA', 'project_id': 'clements-gap-bess'},
+             {'name': 'Hallett Battery', 'developer': 'EnergyAustralia', 'technology': 'bess', 'capacity_mw': 50, 'storage_mwh': 756, 'state': 'SA', 'project_id': 'hallett-bess'},
+         ]},
+        # CIS Tenders
+        {'id': 'cis-tender-1-nem-gen', 'scheme': 'CIS', 'round': 'Tender 1 — NEM Generation', 'type': 'generation', 'announced_date': '2024-12-11',
+         'projects': [
+             {'name': 'Valley of the Winds', 'developer': 'ACEN Australia', 'technology': 'wind', 'capacity_mw': 936, 'state': 'NSW', 'project_id': 'valley-of-the-winds'},
+             {'name': 'Sandy Creek Solar Farm', 'developer': 'Lightsource bp', 'technology': 'solar', 'capacity_mw': 700, 'state': 'NSW', 'project_id': 'sandy-creek-solar-farm'},
+             {'name': 'Spicers Creek Wind Farm', 'developer': 'Squadron Energy', 'technology': 'wind', 'capacity_mw': 700, 'state': 'NSW', 'project_id': 'spicers-creek-wind-farm'},
+             {'name': 'Junction Rivers', 'developer': 'Windlab', 'technology': 'hybrid', 'capacity_mw': 585, 'storage_mwh': 800, 'state': 'NSW', 'project_id': 'junction-rivers-wind-and-bess'},
+             {'name': 'Goulburn River Solar Farm', 'developer': 'Lightsource bp', 'technology': 'solar', 'capacity_mw': 450, 'state': 'NSW', 'project_id': 'goulburn-river-solar-farm-and-bess'},
+             {'name': 'Thunderbolt Wind Farm', 'developer': 'Neoen', 'technology': 'wind', 'capacity_mw': 230, 'state': 'NSW', 'project_id': 'thunderbolt-wind-farm'},
+             {'name': 'Glanmire Solar Farm', 'developer': 'Elgin Energy', 'technology': 'hybrid', 'capacity_mw': 60, 'storage_mwh': 104, 'state': 'NSW', 'project_id': 'glanmire-solar-farm'},
+             {'name': 'Kentbruck Wind Farm', 'developer': 'Neoen', 'technology': 'wind', 'capacity_mw': 600, 'state': 'VIC', 'project_id': 'kentbruck-green-power-hub'},
+             {'name': 'West Mokoan Solar Farm', 'developer': 'Lightsource bp', 'technology': 'hybrid', 'capacity_mw': 300, 'storage_mwh': 560, 'state': 'VIC', 'project_id': 'mokoan-solar-farm'},
+             {'name': 'Barwon Solar Farm', 'developer': 'Elgin Energy', 'technology': 'hybrid', 'capacity_mw': 250, 'storage_mwh': 500, 'state': 'VIC', 'project_id': 'barwon-solar-farm-and-bess'},
+             {'name': 'Campbells Forest Solar Farm', 'developer': 'Risen Energy', 'technology': 'solar', 'capacity_mw': 205, 'state': 'VIC', 'project_id': 'campbells-forest-solar-farm'},
+             {'name': 'Elaine Solar Farm', 'developer': 'Elgin Energy', 'technology': 'hybrid', 'capacity_mw': 125, 'storage_mwh': 250, 'state': 'VIC', 'project_id': 'elaine-solar-farm-and-bess'},
+             {'name': 'Barnawartha Solar Farm', 'developer': 'Gentari', 'technology': 'hybrid', 'capacity_mw': 64, 'storage_mwh': 139, 'state': 'VIC', 'project_id': 'barnawartha-solar-and-energy-storage'},
+             {'name': 'Goyder North Wind Farm', 'developer': 'Neoen', 'technology': 'wind', 'capacity_mw': 300, 'state': 'SA', 'project_id': 'goyder-north-wind-farm'},
+             {'name': 'Palmer Wind Farm', 'developer': 'Tilt Renewables', 'technology': 'wind', 'capacity_mw': 274, 'state': 'SA', 'project_id': 'palmer-wind-farm'},
+             {'name': 'Hopeland Solar Farm', 'developer': 'ACS', 'technology': 'solar', 'capacity_mw': 250, 'state': 'QLD', 'project_id': 'hopeland-solar-farm'},
+             {'name': 'Majors Creek Solar Power Station', 'developer': 'Edify Energy', 'technology': 'hybrid', 'capacity_mw': 150, 'storage_mwh': 600, 'state': 'QLD', 'project_id': 'majors-creek-solar-power-station'},
+             {'name': 'Ganymirra Solar Power Station', 'developer': 'Edify Energy', 'technology': 'hybrid', 'capacity_mw': 150, 'storage_mwh': 600, 'state': 'QLD', 'project_id': 'ganymirra-solar-power-station'},
+             {'name': 'Mokoan Solar Farm', 'developer': 'European Energy Australia', 'technology': 'solar', 'capacity_mw': 46, 'state': 'VIC', 'project_id': 'mokoan-solar-farm'},
+         ]},
+        {'id': 'cis-tender-2-wem-disp', 'scheme': 'CIS', 'round': 'Tender 2 — WEM Dispatchable', 'type': 'dispatchable', 'announced_date': '2025-03-20',
+         'projects': [
+             {'name': 'Boddington Giga Battery', 'developer': 'PGS Energy', 'technology': 'bess', 'capacity_mw': 324, 'storage_mwh': 1296, 'state': 'WA'},
+             {'name': 'Merredin Big Battery', 'developer': 'Atmos Renewables', 'technology': 'bess', 'capacity_mw': 100, 'storage_mwh': 400, 'state': 'WA'},
+             {'name': 'Muchea Big Battery', 'developer': 'Neoen', 'technology': 'bess', 'capacity_mw': 150, 'storage_mwh': 600, 'state': 'WA'},
+             {'name': 'Waroona Renewable Energy Project Stage 1', 'developer': 'Frontier Energy', 'technology': 'bess', 'capacity_mw': 80, 'storage_mwh': 299, 'state': 'WA'},
+         ]},
+        {'id': 'cis-tender-3-nem-disp', 'scheme': 'CIS', 'round': 'Tender 3 — NEM Dispatchable', 'type': 'dispatchable', 'announced_date': '2025-09-17',
+         'projects': [
+             {'name': 'Bulabul 2 BESS', 'developer': 'AMPYR Australia', 'technology': 'bess', 'capacity_mw': 100, 'storage_mwh': 406, 'state': 'NSW', 'project_id': 'bulabul-bess-2'},
+             {'name': 'Swallow Tail BESS', 'developer': 'AMPYR Australia', 'technology': 'bess', 'capacity_mw': 300, 'storage_mwh': 1218, 'state': 'NSW', 'project_id': 'swallow-tail-bess'},
+             {'name': 'Calala BESS', 'developer': 'Equis', 'technology': 'bess', 'capacity_mw': 150, 'storage_mwh': 300, 'state': 'NSW', 'project_id': 'calala-bess-a1'},
+             {'name': 'Goulburn River Standalone BESS', 'developer': 'Lightsource bp', 'technology': 'bess', 'capacity_mw': 450, 'storage_mwh': 1370, 'state': 'NSW', 'project_id': 'goulburn-river-bess'},
+             {'name': 'Mount Piper BESS Stage 1', 'developer': 'EnergyAustralia', 'technology': 'bess', 'capacity_mw': 250, 'storage_mwh': 1000, 'state': 'NSW', 'project_id': 'mt-piper-bess'},
+             {'name': 'Deer Park BESS', 'developer': 'Akaysha Energy', 'technology': 'bess', 'capacity_mw': 275, 'storage_mwh': 1100, 'state': 'VIC', 'project_id': 'deer-park-bess-akaysha'},
+             {'name': 'Joel Joel BESS', 'developer': 'ACEnergy', 'technology': 'bess', 'capacity_mw': 250, 'storage_mwh': 1000, 'state': 'VIC', 'project_id': 'joel-joel-bess'},
+             {'name': 'Kiamal BESS', 'developer': 'TotalEnergies', 'technology': 'bess', 'capacity_mw': 220, 'storage_mwh': 810, 'state': 'VIC', 'project_id': 'kiamal-bess'},
+             {'name': 'Little River BESS', 'developer': 'ACEnergy', 'technology': 'bess', 'capacity_mw': 350, 'storage_mwh': 1400, 'state': 'VIC', 'project_id': 'little-river-bess'},
+             {'name': 'Mornington BESS', 'developer': 'Valent Energy', 'technology': 'bess', 'capacity_mw': 240, 'storage_mwh': 587, 'state': 'VIC', 'project_id': 'mornington-bess'},
+             {'name': 'Capricorn BESS', 'developer': 'Potentia Energy', 'technology': 'bess', 'capacity_mw': 300, 'storage_mwh': 1200, 'state': 'QLD', 'project_id': 'capricorn-bess'},
+             {'name': 'Lower Wonga BESS', 'developer': 'Equis', 'technology': 'bess', 'capacity_mw': 200, 'storage_mwh': 800, 'state': 'QLD', 'project_id': 'lower-wonga-bess'},
+             {'name': 'Teebar BESS', 'developer': 'Atmos Renewables', 'technology': 'bess', 'capacity_mw': 400, 'storage_mwh': 1600, 'state': 'QLD', 'project_id': 'teebar-creek-battery-storage-kci'},
+             {'name': 'Ulinda Park Expansion', 'developer': 'Akaysha Energy', 'technology': 'bess', 'capacity_mw': 195, 'storage_mwh': 780, 'state': 'QLD', 'project_id': 'ulinda-park-bess-expansion'},
+             {'name': 'Koolunga BESS', 'developer': 'Equis', 'technology': 'bess', 'capacity_mw': 200, 'storage_mwh': 800, 'state': 'SA', 'project_id': 'koolunga-battery-energy-storage-system'},
+             {'name': 'Reeves Plains BESS', 'developer': 'Alinta Energy', 'technology': 'bess', 'capacity_mw': 250, 'storage_mwh': 1000, 'state': 'SA', 'project_id': 'reeves-plains-power-station-bess'},
+         ]},
+        {'id': 'cis-tender-4-nem-gen', 'scheme': 'CIS', 'round': 'Tender 4 — NEM Generation', 'type': 'generation', 'announced_date': '2025-10-09',
+         'projects': [
+             {'name': 'Bell Bay Wind Farm', 'developer': 'Equis', 'technology': 'wind', 'capacity_mw': 224, 'state': 'TAS', 'project_id': 'bell-bay-wind-farm'},
+             {'name': 'Bendemeer Energy Hub', 'developer': 'Athena Energy Australia', 'technology': 'hybrid', 'capacity_mw': 252, 'storage_mwh': 300, 'state': 'NSW', 'project_id': 'bendemeer-renewable-energy-hub-solar-and-bess'},
+             {'name': 'Bundey BESS and Solar', 'developer': 'Genaspi Energy Group', 'technology': 'hybrid', 'capacity_mw': 240, 'storage_mwh': 1200, 'state': 'SA', 'project_id': 'bundey-bess-and-solar-project'},
+             {'name': "Carmody's Hill Wind Farm", 'developer': 'Aula Energy', 'technology': 'wind', 'capacity_mw': 247, 'state': 'SA', 'project_id': 'carmodys-hill-wind-farm'},
+             {'name': 'Corop Solar Farm and BESS', 'developer': 'BNRG Leeson', 'technology': 'hybrid', 'capacity_mw': 230, 'storage_mwh': 704, 'state': 'VIC', 'project_id': 'corop-solar-farm'},
+             {'name': 'Derby Solar Project', 'developer': 'Sungrow', 'technology': 'hybrid', 'capacity_mw': 95, 'storage_mwh': 210, 'state': 'VIC', 'project_id': 'derby-solar-farm-and-bess'},
+             {'name': 'Dinawan Wind Farm Stage 1', 'developer': 'Spark Renewables', 'technology': 'wind', 'capacity_mw': 357, 'state': 'NSW', 'project_id': 'dinawan-energy-hub'},
+             {'name': 'Gawara Baya', 'developer': 'Windlab', 'technology': 'hybrid', 'capacity_mw': 399, 'storage_mwh': 217, 'state': 'QLD', 'project_id': 'gawara-baya-wind-and-bess'},
+             {'name': "Guthrie's Gap Solar Power Station", 'developer': 'Edify Energy', 'technology': 'hybrid', 'capacity_mw': 300, 'storage_mwh': 1200, 'state': 'QLD', 'project_id': 'guthries-gap-solar-power-station'},
+             {'name': 'Hexham Wind Farm', 'developer': 'AGL', 'technology': 'wind', 'capacity_mw': 600, 'state': 'VIC', 'project_id': 'hexham'},
+             {'name': 'Liverpool Range Wind Stage 1', 'developer': 'Tilt Renewables', 'technology': 'wind', 'capacity_mw': 634, 'state': 'NSW', 'project_id': 'liverpool-range-wind-farm'},
+             {'name': 'Lower Wonga Solar Farm', 'developer': 'Lightsource bp', 'technology': 'solar', 'capacity_mw': 281, 'state': 'QLD', 'project_id': 'lower-wonga-solar-farm-and-bess'},
+             {'name': 'Merino Solar Farm', 'developer': 'EDPR', 'technology': 'hybrid', 'capacity_mw': 450, 'storage_mwh': 1800, 'state': 'NSW', 'project_id': 'merino-solar-farm'},
+             {'name': 'Middlebrook Solar Farm', 'developer': 'TotalEnergies', 'technology': 'hybrid', 'capacity_mw': 363, 'storage_mwh': 813, 'state': 'NSW', 'project_id': 'middlebrook-solar-and-bess'},
+             {'name': 'Moah Creek Wind Farm', 'developer': 'Central Queensland Power', 'technology': 'wind', 'capacity_mw': 360, 'state': 'QLD', 'project_id': 'moah-creek-wind-farm'},
+             {'name': 'Nowingi Solar Power Station', 'developer': 'Edify Energy', 'technology': 'hybrid', 'capacity_mw': 300, 'storage_mwh': 1200, 'state': 'VIC', 'project_id': 'nowingi-solar-farm-edify-kci'},
+             {'name': 'Punchs Creek Solar Farm', 'developer': 'EDPR', 'technology': 'hybrid', 'capacity_mw': 400, 'storage_mwh': 1600, 'state': 'QLD'},
+             {'name': 'Smoky Creek Solar Power Station', 'developer': 'Edify Energy', 'technology': 'hybrid', 'capacity_mw': 300, 'storage_mwh': 1200, 'state': 'QLD', 'project_id': 'smoky-creek-solar-power-station'},
+             {'name': 'Tallawang Solar Hybrid', 'developer': 'Potentia Energy', 'technology': 'hybrid', 'capacity_mw': 500, 'storage_mwh': 1000, 'state': 'NSW', 'project_id': 'tallawang-solar-and-bess'},
+             {'name': 'Willogoleche 2 Wind Farm', 'developer': 'ENGIE / Foresight', 'technology': 'wind', 'capacity_mw': 108, 'state': 'SA', 'project_id': 'willogoleche-wind-farm'},
+         ]},
+        # LTESA Rounds
+        {'id': 'ltesa-round-1', 'scheme': 'LTESA', 'round': 'Round 1 — Generation + LDS', 'type': 'mixed', 'announced_date': '2023-05-03',
+         'projects': [
+             {'name': 'New England Solar Farm', 'developer': 'ACEN Australia', 'technology': 'solar', 'capacity_mw': 720, 'state': 'NSW', 'project_id': 'new-england-solar-farm'},
+             {'name': 'Stubbo Solar Farm', 'developer': 'ACEN Australia', 'technology': 'solar', 'capacity_mw': 400, 'state': 'NSW', 'project_id': 'stubbo-solar-farm'},
+             {'name': 'Coppabella Wind Farm', 'developer': 'Goldwind Australia', 'technology': 'wind', 'capacity_mw': 275, 'state': 'NSW', 'project_id': 'coppabella-wind-farm'},
+             {'name': 'Limondale BESS', 'developer': 'RWE Renewables Australia', 'technology': 'bess', 'capacity_mw': 50, 'storage_mwh': 400, 'state': 'NSW', 'project_id': 'limondale-bess'},
+         ]},
+        {'id': 'ltesa-round-2', 'scheme': 'LTESA', 'round': 'Round 2 — Firming', 'type': 'firming', 'announced_date': '2023-11-22',
+         'projects': [
+             {'name': 'Liddell BESS', 'developer': 'AGL', 'technology': 'bess', 'capacity_mw': 500, 'storage_mwh': 1000, 'state': 'NSW', 'project_id': 'liddell-bess'},
+             {'name': 'Orana BESS', 'developer': 'Akaysha Energy', 'technology': 'bess', 'capacity_mw': 415, 'storage_mwh': 1660, 'state': 'NSW', 'project_id': 'orana-bess'},
+             {'name': 'Enel X VPP Portfolio', 'developer': 'Enel X Australia', 'technology': 'vpp', 'capacity_mw': 95, 'state': 'NSW'},
+             {'name': 'Smithfield BESS', 'developer': 'Iberdrola', 'technology': 'bess', 'capacity_mw': 65, 'storage_mwh': 130, 'state': 'NSW', 'project_id': 'smithfield-bess'},
+         ]},
+        {'id': 'ltesa-round-3', 'scheme': 'LTESA', 'round': 'Round 3 — Generation + LDS', 'type': 'mixed', 'announced_date': '2023-12-19',
+         'projects': [
+             {'name': 'Uungula Wind Farm', 'developer': 'Squadron Energy', 'technology': 'wind', 'capacity_mw': 400, 'state': 'NSW', 'project_id': 'uungula-wind-farm'},
+             {'name': 'Culcairn Solar Farm', 'developer': 'Neoen', 'technology': 'solar', 'capacity_mw': 350, 'state': 'NSW', 'project_id': 'culcairn-solar-farm'},
+             {'name': 'Richmond Valley BESS', 'developer': 'Ark Energy', 'technology': 'bess', 'capacity_mw': 275, 'storage_mwh': 2200, 'state': 'NSW', 'project_id': 'richmond-valley-bess'},
+             {'name': 'Silver City Energy Storage Centre', 'developer': 'Hydrostor', 'technology': 'bess', 'capacity_mw': 200, 'storage_mwh': 1600, 'state': 'NSW', 'project_id': 'silver-city-energy-storage'},
+             {'name': 'Goulburn River BESS', 'developer': 'Lightsource bp', 'technology': 'bess', 'capacity_mw': 49, 'storage_mwh': 392, 'state': 'NSW', 'project_id': 'goulburn-river-bess'},
+         ]},
+        {'id': 'ltesa-round-4', 'scheme': 'LTESA', 'round': 'Round 4 — Generation', 'type': 'generation', 'announced_date': '2024-07-01',
+         'projects': [
+             {'name': 'Maryvale Solar + BESS', 'developer': 'Unknown', 'technology': 'hybrid', 'capacity_mw': 172, 'storage_mwh': 372, 'state': 'NSW', 'project_id': 'maryvale-solar-and-energy-storage-system'},
+             {'name': 'Flyers Creek Wind Farm', 'developer': 'Unknown', 'technology': 'wind', 'capacity_mw': 145, 'state': 'NSW', 'project_id': 'flyers-creek-wind-farm'},
+         ]},
+        {'id': 'ltesa-round-5', 'scheme': 'LTESA', 'round': 'Round 5 — Long Duration Storage', 'type': 'lds', 'announced_date': '2025-02-27',
+         'projects': [
+             {'name': 'Phoenix Pumped Hydro', 'developer': 'ACEN Australia', 'technology': 'pumped_hydro', 'capacity_mw': 800, 'storage_mwh': 11990, 'state': 'NSW', 'project_id': 'phoenix-pumped-hydro-project'},
+             {'name': 'Stoney Creek BESS', 'developer': 'Enervest Utility', 'technology': 'bess', 'capacity_mw': 125, 'storage_mwh': 1000, 'state': 'NSW', 'project_id': 'stoney-creek-bess'},
+             {'name': 'Griffith BESS', 'developer': 'Eku Energy', 'technology': 'bess', 'capacity_mw': 100, 'storage_mwh': 800, 'state': 'NSW', 'project_id': 'griffith-bess'},
+         ]},
+        {'id': 'ltesa-round-6', 'scheme': 'LTESA', 'round': 'Round 6 — Long Duration Storage', 'type': 'lds', 'announced_date': '2026-02-05',
+         'projects': [
+             {'name': 'Great Western Battery', 'developer': 'Neoen Australia', 'technology': 'bess', 'capacity_mw': 330, 'storage_mwh': 3500, 'state': 'NSW', 'project_id': 'great-western-battery-project'},
+             {'name': 'Bowmans Creek BESS', 'developer': 'Ark Energy', 'technology': 'bess', 'capacity_mw': 250, 'storage_mwh': 2414, 'state': 'NSW', 'project_id': 'bowmans-creek-bess'},
+             {'name': 'Bannaby BESS', 'developer': 'BW ESS', 'technology': 'bess', 'capacity_mw': 233, 'storage_mwh': 2676, 'state': 'NSW', 'project_id': 'bannaby-bess'},
+             {'name': 'Armidale East BESS', 'developer': 'Unknown', 'technology': 'bess', 'capacity_mw': 158, 'storage_mwh': 1440, 'state': 'NSW', 'project_id': 'armidale-east-bess'},
+             {'name': 'Ebor BESS', 'developer': 'Energy Vault / Bridge Energy', 'technology': 'bess', 'capacity_mw': 100, 'storage_mwh': 870, 'state': 'NSW', 'project_id': 'ebor-bess'},
+             {'name': 'Kingswood BESS', 'developer': 'Iberdrola Australia', 'technology': 'bess', 'capacity_mw': 100, 'storage_mwh': 1080, 'state': 'NSW', 'project_id': 'kingswood-bess'},
+         ]},
+    ]
+
+    # ---- Build lookup maps from DB ----
+    # Project status from projects table
+    project_rows = conn.execute("SELECT id, status, technology, capacity_mw, current_developer, cod_current FROM projects").fetchall()
+    project_map = {r['id']: dict(r) for r in project_rows}
+
+    # Timeline events for milestone dates
     event_map = defaultdict(dict)
     for ev in conn.execute("""
         SELECT project_id, event_type, date
         FROM timeline_events
-        WHERE event_type IN ('fid', 'construction_start', 'cod', 'planning_approved')
+        WHERE event_type IN ('fid', 'construction_start', 'commissioning', 'cod', 'planning_approved')
     """).fetchall():
         event_map[ev['project_id']][ev['event_type']] = ev['date']
 
-    projects = {}
-    for r in rows:
-        pid = r['project_id']
-        events = event_map.get(pid, {})
-        has_fid = 'fid' in events
-        has_construction = 'construction_start' in events
+    today = date_type.today()
+    total_projects = 0
+    total_mw = 0.0
+    overall_by_stage = defaultdict(lambda: {'count': 0, 'mw': 0.0})
 
-        drift = _months_between(r['cod_original'], r['cod_current']) if r['cod_original'] and r['cod_current'] else 0
-        drift = drift or 0
+    round_outputs = []
 
-        # Risk scoring (0-100)
-        risk_score = 0
-        # No FID yet for non-operating project
-        if not has_fid and r['status'] not in ('operating', 'commissioning'):
-            risk_score += 25
-        # COD drift
-        if drift > 24:
-            risk_score += 30
-        elif drift > 12:
-            risk_score += 20
-        elif drift > 6:
-            risk_score += 10
-        # Still in development
-        if r['status'] == 'development':
-            risk_score += 20
-        elif r['status'] == 'construction':
-            risk_score += 5
-        # Large project premium
-        if r['capacity_mw'] and r['capacity_mw'] > 500:
-            risk_score += 10
-        # No construction start for non-operating
-        if not has_construction and r['status'] not in ('operating', 'commissioning'):
-            risk_score += 15
+    for rnd in ROUNDS:
+        # Skip rounds with no announced date (future tenders)
+        if not rnd['announced_date']:
+            continue
 
-        risk_score = min(risk_score, 100)
+        announced = date_type.fromisoformat(rnd['announced_date'])
+        months_since = (today.year - announced.year) * 12 + (today.month - announced.month)
 
-        entry = {
-            'project_id': pid,
-            'name': r['name'],
-            'scheme': r['scheme'],
-            'round': r['round'],
-            'technology': r['technology'],
-            'status': r['status'],
-            'capacity_mw': r['capacity_mw'],
-            'storage_mwh': r['storage_mwh'],
-            'developer': r['current_developer'],
-            'cod_current': r['cod_current'],
-            'cod_original': r['cod_original'],
-            'cod_drift_months': drift,
-            'has_fid': has_fid,
-            'has_construction_start': has_construction,
-            'risk_score': risk_score,
-            'risk_level': _risk_level(risk_score),
+        by_stage = defaultdict(int)
+        by_state = defaultdict(int)
+        project_list = []
+
+        for sp in rnd['projects']:
+            pid = sp.get('project_id')
+            db_proj = project_map.get(pid) if pid else None
+            events = event_map.get(pid, {}) if pid else {}
+
+            # Determine stage from DB status
+            if db_proj:
+                status = db_proj['status'] or 'development'
+                developer = db_proj['current_developer'] or sp['developer']
+            else:
+                status = 'unknown'
+                developer = sp['developer']
+
+            # Map status to milestone stage
+            stage = status
+            if status in ('planning_approved', 'approved'):
+                stage = 'planning_approved'
+            elif status in ('commissioning',):
+                stage = 'commissioning'
+
+            fid_date = events.get('fid')
+            construction_start = events.get('construction_start')
+            cod_current = db_proj['cod_current'] if db_proj else None
+
+            proj_entry = {
+                'name': sp['name'],
+                'project_id': pid,
+                'developer': developer,
+                'technology': sp['technology'],
+                'capacity_mw': sp['capacity_mw'],
+                'storage_mwh': sp.get('storage_mwh'),
+                'state': sp['state'],
+                'status': status,
+                'stage': stage,
+                'fid_date': fid_date,
+                'construction_start': construction_start,
+                'cod_current': cod_current,
+            }
+
+            project_list.append(proj_entry)
+            by_stage[stage] += 1
+            by_state[sp['state']] += 1
+
+        total_capacity = sum(p['capacity_mw'] for p in project_list)
+        total_storage = sum(p.get('storage_mwh') or 0 for p in project_list)
+
+        round_entry = {
+            'id': rnd['id'],
+            'scheme': rnd['scheme'],
+            'round': rnd['round'],
+            'type': rnd['type'],
+            'announced_date': rnd['announced_date'],
+            'months_since_announced': months_since,
+            'total_capacity_mw': round(total_capacity, 1),
+            'total_storage_mwh': round(total_storage, 1),
+            'num_projects': len(project_list),
+            'by_stage': dict(by_stage),
+            'by_state': dict(by_state),
+            'projects': project_list,
         }
+        round_outputs.append(round_entry)
 
-        # Aggregate per project (may have multiple contracts)
-        if pid not in projects:
-            projects[pid] = entry
-            projects[pid]['schemes'] = [{'scheme': r['scheme'], 'round': r['round']}]
-        else:
-            projects[pid]['schemes'].append({'scheme': r['scheme'], 'round': r['round']})
-            # Take the higher risk
-            if risk_score > projects[pid]['risk_score']:
-                projects[pid]['risk_score'] = risk_score
-                projects[pid]['risk_level'] = _risk_level(risk_score)
-
-    project_list = sorted(projects.values(), key=lambda x: -x['risk_score'])
-
-    # Summary by risk level
-    summary = {'red': 0, 'amber': 0, 'green': 0}
-    for p in project_list:
-        summary[p['risk_level']] += 1
-
-    # Summary by scheme
-    by_scheme = defaultdict(lambda: {'count': 0, 'avg_risk': 0, 'total_mw': 0})
-    for p in project_list:
-        for s in p['schemes']:
-            key = s['scheme']
-            by_scheme[key]['count'] += 1
-            by_scheme[key]['avg_risk'] += p['risk_score']
-            by_scheme[key]['total_mw'] += p['capacity_mw'] or 0
-    for k in by_scheme:
-        if by_scheme[k]['count']:
-            by_scheme[k]['avg_risk'] = round(by_scheme[k]['avg_risk'] / by_scheme[k]['count'], 1)
-        by_scheme[k]['total_mw'] = round(by_scheme[k]['total_mw'], 1)
+        total_projects += len(project_list)
+        total_mw += total_capacity
+        for stage, count in by_stage.items():
+            stage_mw = sum(p['capacity_mw'] for p in project_list if p['stage'] == stage)
+            overall_by_stage[stage]['count'] += count
+            overall_by_stage[stage]['mw'] += stage_mw
 
     output = {
-        'projects': project_list,
-        'summary': summary,
-        'by_scheme': dict(by_scheme),
-        'total_projects': len(project_list),
+        'rounds': round_outputs,
+        'summary': {
+            'total_projects': total_projects,
+            'total_mw': round(total_mw, 1),
+            'by_stage': {k: {'count': v['count'], 'mw': round(v['mw'], 1)} for k, v in overall_by_stage.items()},
+        },
         'exported_at': datetime.now().isoformat(),
     }
-    path = os.path.join(INTEL_DIR, 'scheme-risk.json')
+    path = os.path.join(INTEL_DIR, 'scheme-tracker.json')
     write_json(path, clean_none_values(output))
-    print(f"  analytics/intelligence/scheme-risk.json ({len(project_list)} projects)")
+    print(f"  analytics/intelligence/scheme-tracker.json ({total_projects} projects across {len(round_outputs)} rounds)")
 
 
 # ---- 2. Drift Analysis ----------------------------------------------------
@@ -2340,13 +2480,34 @@ def export_grid_connection(conn):
     print(f"  analytics/intelligence/grid-connection.json ({len(rez_summaries)} REZ zones)")
 
 
+def export_rez_access(conn):
+    """Export REZ access rights data from timeline events."""
+    rows = conn.execute("""
+        SELECT project_id, title, date
+        FROM timeline_events
+        WHERE event_type = 'rez_access'
+        ORDER BY date
+    """).fetchall()
+
+    access_map = {}
+    for r in rows:
+        access_map[r['project_id']] = {
+            'title': r['title'],
+            'date': r['date'],
+        }
+
+    path = os.path.join(DATA_DIR, 'analytics', 'rez-access.json')
+    write_json(path, access_map)
+    print(f"  analytics/rez-access.json ({len(access_map)} projects with REZ access)")
+
+
 # ---- Intelligence Wrapper ---------------------------------------------------
 
 def export_intelligence(conn):
     """Export all intelligence layer JSON files."""
     print("\nIntelligence Layer:")
     ensure_dir(INTEL_DIR)
-    export_scheme_risk(conn)
+    export_scheme_tracker(conn)
     export_drift_analysis(conn)
     export_wind_resource(conn)
     export_dunkelflaute(conn)
@@ -2354,6 +2515,7 @@ def export_intelligence(conn):
     export_developer_scores(conn)
     export_revenue_intel(conn)
     export_grid_connection(conn)
+    export_rez_access(conn)
 
 
 # ---- News Export -----------------------------------------------------------

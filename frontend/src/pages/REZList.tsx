@@ -38,9 +38,30 @@ const STATE_COLORS: Record<string, string> = {
   WA: '#f97316',
 }
 
+const ALL_STATUSES: REZZone['status'][] = ['declared', 'draft', 'in-flight', 'candidate', 'planning']
+
+const STATUS_DESCRIPTIONS: Record<REZZone['status'], string> = {
+  declared: 'Formally gazetted by state government. Transmission procurement underway or complete.',
+  draft: 'Draft REZ order issued. Awaiting formal declaration.',
+  'in-flight': 'REZ development actively underway — transmission built, anchor projects connecting.',
+  candidate: 'Identified in AEMO\'s ISP as a candidate REZ. Formal state declaration pending.',
+  planning: 'Early-stage planning or feasibility assessment.',
+}
+
 export default function REZList() {
   const [stateFilter, setStateFilter] = useState<State | 'ALL'>('ALL')
-  const { zones, totalCapacity, totalZones } = useREZList(stateFilter)
+  const [statusFilter, setStatusFilter] = useState<string[]>([])
+  const { zones: allZones, totalCapacity, totalZones } = useREZList(stateFilter)
+
+  const zones = statusFilter.length > 0
+    ? allZones.filter(z => statusFilter.includes(z.status))
+    : allZones
+
+  function toggleStatus(status: string) {
+    setStatusFilter(prev =>
+      prev.includes(status) ? prev.filter(s => s !== status) : [...prev, status]
+    )
+  }
 
   return (
     <div className="px-4 lg:px-8 py-6 max-w-7xl mx-auto space-y-6">
@@ -93,6 +114,57 @@ export default function REZList() {
           </button>
         ))}
       </div>
+
+      {/* Status Filter */}
+      <div className="flex items-center gap-2 flex-wrap">
+        <span className="text-[10px] font-semibold uppercase tracking-wider text-[var(--color-text-muted)] w-14 shrink-0">
+          Status
+        </span>
+        {ALL_STATUSES.map(status => {
+          const isActive = statusFilter.includes(status)
+          const color = STATUS_COLORS[status]
+          return (
+            <button
+              key={status}
+              onClick={() => toggleStatus(status)}
+              className={`text-xs px-2.5 py-1 rounded-full border transition-colors ${
+                isActive
+                  ? 'border-transparent font-medium'
+                  : 'border-[var(--color-border)] text-[var(--color-text-muted)] hover:border-[var(--color-text-muted)]'
+              }`}
+              style={isActive ? { backgroundColor: `${color}20`, color } : undefined}
+            >
+              {STATUS_LABELS[status]}
+            </button>
+          )
+        })}
+        {statusFilter.length > 0 && (
+          <button
+            onClick={() => setStatusFilter([])}
+            className="text-xs text-blue-400 hover:underline ml-1"
+          >
+            Clear
+          </button>
+        )}
+      </div>
+
+      {/* Status Legend */}
+      <details className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl px-4 py-3">
+        <summary className="text-xs font-medium text-[var(--color-text)] cursor-pointer">What do the REZ statuses mean?</summary>
+        <div className="mt-3 space-y-2">
+          {ALL_STATUSES.map(status => (
+            <div key={status} className="flex items-start gap-2">
+              <span
+                className="text-[10px] px-2 py-0.5 rounded-full mt-0.5 shrink-0 font-medium"
+                style={{ backgroundColor: `${STATUS_COLORS[status]}20`, color: STATUS_COLORS[status] }}
+              >
+                {STATUS_LABELS[status]}
+              </span>
+              <span className="text-xs text-[var(--color-text-muted)]">{STATUS_DESCRIPTIONS[status]}</span>
+            </div>
+          ))}
+        </div>
+      </details>
 
       {/* REZ Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">

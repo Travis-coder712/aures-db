@@ -5,7 +5,7 @@
  * In production (GitHub Pages), they're served as static files.
  * In development (Vite dev server), they're served from the public/ directory.
  */
-import type { ProjectSummary, Project, Technology, ProjectStatus, State, LeagueTable, LeagueTableIndex, LeagueTechnology, DeveloperIndex, OEMIndex, ContractorIndex, OfftakerIndex, MapProject, CODDriftData, DataSourcesIndex, BESSCapexData, ProjectTimelineData, SchemeRiskData, DriftAnalysisData, WindResourceData, DunkelflaunteData, EnergyMixData, DeveloperScoreData, RevenueIntelData, GridConnectionData, NewsData } from './types'
+import type { ProjectSummary, Project, Technology, ProjectStatus, State, LeagueTable, LeagueTableIndex, LeagueTechnology, DeveloperIndex, OEMIndex, ContractorIndex, OfftakerIndex, MapProject, CODDriftData, DataSourcesIndex, BESSCapexData, ProjectTimelineData, SchemeTrackerData, DriftAnalysisData, WindResourceData, DunkelflaunteData, EnergyMixData, DeveloperScoreData, RevenueIntelData, GridConnectionData, NewsData, REZAccessMap } from './types'
 
 const BASE = import.meta.env.BASE_URL + 'data'
 
@@ -313,14 +313,14 @@ export async function fetchDataSources(): Promise<DataSourcesIndex | null> {
 // Intelligence Layer
 // ============================================================
 
-let schemeRiskCache: SchemeRiskData | null = null
-export async function fetchSchemeRisk(): Promise<SchemeRiskData | null> {
-  if (schemeRiskCache) return schemeRiskCache
+let schemeTrackerCache: SchemeTrackerData | null = null
+export async function fetchSchemeTracker(): Promise<SchemeTrackerData | null> {
+  if (schemeTrackerCache) return schemeTrackerCache
   try {
-    const resp = await fetch(`${BASE}/analytics/intelligence/scheme-risk.json`)
+    const resp = await fetch(`${BASE}/analytics/intelligence/scheme-tracker.json`)
     if (!resp.ok) return null
-    schemeRiskCache = (await resp.json()) as SchemeRiskData
-    return schemeRiskCache
+    schemeTrackerCache = (await resp.json()) as SchemeTrackerData
+    return schemeTrackerCache
   } catch { return null }
 }
 
@@ -409,5 +409,20 @@ export async function fetchNews(): Promise<NewsData | null> {
     if (!resp.ok) return null
     newsCache = (await resp.json()) as NewsData
     return newsCache
+  } catch { return null }
+}
+
+// ============================================================
+// REZ Access Rights
+// ============================================================
+
+let rezAccessCache: REZAccessMap | null = null
+export async function fetchREZAccess(): Promise<REZAccessMap | null> {
+  if (rezAccessCache) return rezAccessCache
+  try {
+    const resp = await fetch(`${BASE}/analytics/rez-access.json`)
+    if (!resp.ok) return null
+    rezAccessCache = (await resp.json()) as REZAccessMap
+    return rezAccessCache
   } catch { return null }
 }

@@ -3,9 +3,9 @@ import { useNavigate } from 'react-router-dom'
 const FEATURES = [
   {
     icon: '\u{1F3AF}',
-    title: 'CIS/LTESA Risk Tracker',
-    description: 'Which scheme-funded projects are at risk of not delivering?',
-    route: '/intelligence/scheme-risk',
+    title: 'Scheme Milestone Tracker',
+    description: 'Track CIS and LTESA project progression from development to operation',
+    route: '/intelligence/scheme-tracker',
   },
   {
     icon: '\u{1F4CA}',

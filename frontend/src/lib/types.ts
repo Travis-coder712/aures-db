@@ -594,19 +594,48 @@ export interface DataSourcesIndex {
 // Intelligence Layer Types
 // ============================================================
 
-export interface SchemeRiskProject {
-  project_id: string; name: string; scheme: string; round: string;
-  technology: string; status: string; capacity_mw: number; storage_mwh: number | null;
-  developer: string; cod_current: string | null; cod_original: string | null;
-  has_fid: boolean; has_construction_start: boolean; has_planning_approval: boolean;
-  drift_months: number; risk_score: number; risk_level: 'green' | 'amber' | 'red';
+export type MilestoneStage = 'operating' | 'commissioning' | 'construction' | 'planning_approved' | 'development' | 'unknown'
+
+export interface SchemeTrackerProject {
+  name: string
+  project_id: string | null
+  developer: string
+  technology: string
+  capacity_mw: number
+  storage_mwh: number | null
+  state: string
+  status: string
+  stage: MilestoneStage
+  fid_date: string | null
+  construction_start: string | null
+  cod_current: string | null
 }
-export interface SchemeRiskData {
-  projects: SchemeRiskProject[];
-  summary: { red: number; amber: number; green: number };
-  by_scheme: Record<string, { count: number; avg_risk: number; total_mw: number }>;
-  total_projects: number;
+
+export interface SchemeTrackerRound {
+  id: string
+  scheme: string
+  round: string
+  type: string
+  announced_date: string
+  months_since_announced: number
+  total_capacity_mw: number
+  total_storage_mwh: number
+  num_projects: number
+  by_stage: Record<string, number>
+  by_state: Record<string, number>
+  projects: SchemeTrackerProject[]
 }
+
+export interface SchemeTrackerData {
+  rounds: SchemeTrackerRound[]
+  summary: {
+    total_projects: number
+    total_mw: number
+    by_stage: Record<string, { count: number; mw: number }>
+  }
+}
+
+export type REZAccessMap = Record<string, { title: string; date: string }>
 
 export interface DriftGroup { count: number; mean: number; median: number; p25: number; p75: number }
 export interface DriftProject {

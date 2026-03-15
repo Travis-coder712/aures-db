@@ -25,7 +25,7 @@ import DataSources from './pages/DataSources'
 import BESSCapex from './pages/BESSCapex'
 import ProjectTimeline from './pages/ProjectTimeline'
 import IntelligenceHub from './pages/IntelligenceHub'
-import SchemeRisk from './pages/intelligence/SchemeRisk'
+import SchemeTracker from './pages/intelligence/SchemeTracker'
 import DriftAnalysis from './pages/intelligence/DriftAnalysis'
 import WindResource from './pages/intelligence/WindResource'
 import Dunkelflaute from './pages/intelligence/Dunkelflaute'
@@ -73,7 +73,7 @@ function App() {
         <Route path="analytics/project-timeline" element={<ProjectTimeline />} />
         {/* Intelligence Layer */}
         <Route path="intelligence" element={<IntelligenceHub />} />
-        <Route path="intelligence/scheme-risk" element={<SchemeRisk />} />
+        <Route path="intelligence/scheme-tracker" element={<SchemeTracker />} />
         <Route path="intelligence/drift-analysis" element={<DriftAnalysis />} />
         <Route path="intelligence/wind-resource" element={<WindResource />} />
         <Route path="intelligence/dunkelflaute" element={<Dunkelflaute />} />

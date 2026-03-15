@@ -1,6 +1,9 @@
+import { useState, useEffect } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import { useREZDetail } from '../hooks/useREZData'
 import { TECHNOLOGY_CONFIG } from '../lib/types'
+import type { REZAccessMap } from '../lib/types'
+import { fetchREZAccess } from '../lib/dataService'
 
 const STATUS_COLORS: Record<string, string> = {
   declared: '#22c55e',
@@ -36,9 +39,28 @@ const TX_STATUS_LABELS: Record<string, string> = {
   conceptual: 'Conceptual',
 }
 
+type AccessFilter = 'all' | 'secured' | 'not-secured'
+
 export default function REZDetail() {
   const { id } = useParams<{ id: string }>()
   const { zone, projects, loading } = useREZDetail(id)
+  const [accessMap, setAccessMap] = useState<REZAccessMap | null>(null)
+  const [accessFilter, setAccessFilter] = useState<AccessFilter>('all')
+
+  // NSW declared REZs have access rights
+  const isNSWDeclared = zone?.state === 'NSW' && zone?.status === 'declared'
+
+  useEffect(() => {
+    if (isNSWDeclared) {
+      fetchREZAccess().then(d => setAccessMap(d))
+    }
+  }, [isNSWDeclared])
+
+  const filteredProjects = (() => {
+    if (!accessMap || accessFilter === 'all') return projects
+    if (accessFilter === 'secured') return projects.filter(p => accessMap[p.id])
+    return projects.filter(p => !accessMap[p.id])
+  })()
 
   if (!zone) {
     return (
@@ -140,6 +162,37 @@ export default function REZDetail() {
             </span>
           )}
         </h2>
+
+        {/* Access filter — only for NSW declared REZs */}
+        {isNSWDeclared && accessMap && projects.length > 0 && (
+          <div className="flex items-center gap-2 mb-3 flex-wrap">
+            <span className="text-[10px] font-semibold uppercase tracking-wider text-[var(--color-text-muted)]">
+              Access
+            </span>
+            {([
+              { key: 'all' as AccessFilter, label: 'All' },
+              { key: 'secured' as AccessFilter, label: '✓ Secured' },
+              { key: 'not-secured' as AccessFilter, label: 'Not Secured' },
+            ]).map(opt => (
+              <button
+                key={opt.key}
+                onClick={() => setAccessFilter(opt.key)}
+                className={`text-xs px-2.5 py-1 rounded-full border transition-colors ${
+                  accessFilter === opt.key
+                    ? opt.key === 'secured'
+                      ? 'border-transparent bg-green-500/20 text-green-400 font-medium'
+                      : opt.key === 'not-secured'
+                      ? 'border-transparent bg-gray-500/20 text-gray-400 font-medium'
+                      : 'border-blue-500 bg-blue-500/20 text-blue-400 font-medium'
+                    : 'border-[var(--color-border)] text-[var(--color-text-muted)] hover:border-[var(--color-text-muted)]'
+                }`}
+              >
+                {opt.label}
+              </button>
+            ))}
+          </div>
+        )}
+
         {loading ? (
           <div className="animate-pulse space-y-2">
             {[1, 2, 3].map((i) => (
@@ -157,10 +210,13 @@ export default function REZDetail() {
           </div>
         ) : (
           <div className="space-y-2">
-            {projects
+            {filteredProjects
               .sort((a, b) => b.capacity_mw - a.capacity_mw)
               .map((p) => {
                 const tech = TECHNOLOGY_CONFIG[p.technology]
+                const hasAccess: boolean | null = isNSWDeclared && accessMap
+                  ? (accessMap[p.id] ? true : false)
+                  : null
                 return (
                   <Link
                     key={p.id}
@@ -169,9 +225,21 @@ export default function REZDetail() {
                   >
                     <span className="text-base">{tech?.icon}</span>
                     <div className="flex-1 min-w-0">
-                      <span className="text-sm font-medium text-[var(--color-text)] truncate block group-hover:text-[var(--color-primary)] transition-colors">
-                        {p.name}
-                      </span>
+                      <div className="flex items-center gap-2">
+                        <span className="text-sm font-medium text-[var(--color-text)] truncate group-hover:text-[var(--color-primary)] transition-colors">
+                          {p.name}
+                        </span>
+                        {hasAccess === true && (
+                          <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-green-500/20 text-green-400 font-medium shrink-0">
+                            ✓ REZ Access
+                          </span>
+                        )}
+                        {hasAccess === false && (
+                          <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-gray-500/10 text-[var(--color-text-muted)] shrink-0">
+                            Access not secured
+                          </span>
+                        )}
+                      </div>
                       <span className="text-xs text-[var(--color-text-muted)]">
                         {tech?.label} · {p.status}
                       </span>
@@ -184,6 +252,13 @@ export default function REZDetail() {
                   </Link>
                 )
               })}
+            {filteredProjects.length === 0 && accessFilter !== 'all' && (
+              <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl p-4 text-center">
+                <p className="text-sm text-[var(--color-text-muted)]">
+                  No projects match the selected access filter
+                </p>
+              </div>
+            )}
           </div>
         )}
       </section>
