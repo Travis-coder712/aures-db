@@ -295,6 +295,18 @@ def export_all(db_path=DB_PATH):
     })
     print(f"  metadata/last-export.json")
 
+    # 16. Version file (for update detection in the PWA)
+    pkg_json_path = os.path.join(os.path.dirname(__file__), '..', '..', 'frontend', 'package.json')
+    version = '0.0.0'
+    if os.path.exists(pkg_json_path):
+        with open(pkg_json_path) as f:
+            version = json.load(f).get('version', '0.0.0')
+    write_json(os.path.join(DATA_DIR, 'metadata', 'version.json'), {
+        'version': version,
+        'built_at': datetime.now().isoformat(),
+    })
+    print(f"  metadata/version.json (v{version})")
+
     conn.close()
     print("\nExport complete!")
 

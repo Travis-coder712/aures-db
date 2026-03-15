@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Outlet, NavLink, useLocation } from 'react-router-dom'
+import { useVersion } from '../../hooks/useVersion'
 
 // Inline SVG icon components (keeping dependencies minimal)
 function HomeIcon({ className }: { className?: string }) {
@@ -186,6 +187,7 @@ const MOBILE_NAV_ITEMS = [
 export default function Layout() {
   const location = useLocation()
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const version = useVersion()
 
   // Close menu on route change
   useEffect(() => {
@@ -270,6 +272,17 @@ export default function Layout() {
           <p className="text-[10px] text-[var(--color-text-muted)]/50 text-center">
             Data updated regularly from AEMO, AFR, RenewEconomy & more
           </p>
+          <div className="mt-2 flex items-center justify-center gap-1.5">
+            <span className="text-[9px] text-[var(--color-text-muted)]/40 font-mono">v{version.current}</span>
+            {version.updateAvailable && (
+              <button
+                onClick={() => window.location.reload()}
+                className="text-[9px] font-semibold text-emerald-400 bg-emerald-400/10 px-1.5 py-0.5 rounded-full hover:bg-emerald-400/20 transition-colors animate-pulse"
+              >
+                Update available — tap to refresh
+              </button>
+            )}
+          </div>
         </div>
       </aside>
 
@@ -369,6 +382,21 @@ export default function Layout() {
       <main className="flex-1 lg:ml-64 pb-20 lg:pb-0">
         <Outlet />
       </main>
+
+      {/* Mobile Update Banner */}
+      {version.updateAvailable && (
+        <div className="lg:hidden fixed bottom-18 inset-x-4 z-50">
+          <button
+            onClick={() => window.location.reload()}
+            className="w-full flex items-center justify-center gap-2 py-2 px-4 rounded-xl bg-emerald-500/90 text-white text-xs font-semibold backdrop-blur-lg shadow-lg animate-pulse"
+          >
+            <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182" />
+            </svg>
+            Update available (v{version.latest}) — tap to refresh
+          </button>
+        </div>
+      )}
 
       {/* Mobile Bottom Navigation */}
       <nav className="lg:hidden fixed bottom-0 inset-x-0 bg-[var(--color-bg-card)]/95 backdrop-blur-lg border-t border-[var(--color-border)] safe-bottom z-40">
