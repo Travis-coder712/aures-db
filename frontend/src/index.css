@@ -42,6 +42,7 @@ body {
 ::-webkit-scrollbar-track { background: var(--color-bg); }
 ::-webkit-scrollbar-thumb { background: var(--color-bg-elevated); border-radius: 3px; }
 
+.safe-top { padding-top: env(safe-area-inset-top); }
 .safe-bottom { padding-bottom: env(safe-area-inset-bottom); }
 
 @keyframes slide-in-left {

@@ -359,7 +359,7 @@ export default function Layout() {
       )}
 
       {/* Mobile Header */}
-      <header className="lg:hidden flex items-center justify-between px-4 h-14 bg-[var(--color-bg-card)] border-b border-[var(--color-border)] sticky top-0 z-40">
+      <header className="lg:hidden flex items-center justify-between px-4 h-14 bg-[var(--color-bg-card)] border-b border-[var(--color-border)] sticky top-0 z-40 safe-top">
         <div className="flex items-center gap-2">
           <button
             onClick={() => setMobileMenuOpen(true)}
