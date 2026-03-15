@@ -282,7 +282,7 @@ export default function Layout() {
             Data updated regularly from AEMO, AFR, RenewEconomy & more
           </p>
           <div className="mt-2 flex items-center justify-center gap-1.5">
-            <span className="text-[9px] text-[var(--color-text-muted)]/40 font-mono">v{version.current}</span>
+            <span className="text-[10px] text-[var(--color-text-muted)]/70 font-mono bg-white/5 px-1.5 py-0.5 rounded">v{version.current}</span>
             {version.updateAvailable && (
               <button
                 onClick={() => window.location.reload()}
@@ -379,7 +379,7 @@ export default function Layout() {
           </button>
           <span className="text-xl">⚡</span>
           <h1 className="text-base font-bold text-[var(--color-text)] tracking-tight">AURES</h1>
-          <span className="text-[9px] text-[var(--color-text-muted)]/40 font-mono self-end mb-0.5">v{version.current}</span>
+          <span className="text-[10px] text-[var(--color-text-muted)]/70 font-mono bg-white/5 px-1.5 py-0.5 rounded">v{version.current}</span>
         </div>
         <NavLink
           to="/search"
