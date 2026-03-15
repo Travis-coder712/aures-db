@@ -442,23 +442,28 @@ Bottom navigation with tabs on mobile. Progressive disclosure — simple surface
 
 ## What's Next
 
-### Near-term
-- Verify remaining wind farm OEM gaps (~16 older/smaller farms)
-- AEMO registered capacity cross-check (download AEMO spreadsheet)
-- Solar farm enrichment pass (OEM, EPC, offtakes)
-- Historical performance trend charts
+> **See the full [Strategic Roadmap](/guides/strategic-roadmap) for the complete plan including infrastructure review, UX improvements, 8 new data sources, and 10 intelligence layer features.**
 
-### Medium-term
-- Pumped hydro project enrichment
-- Gas peaker tracking
-- Transmission project integration
-- AEMO ISP alignment analysis
+### Near-term (Months 1-3)
+- Code splitting (React.lazy), error boundaries, icon extraction
+- Cmd+K search modal with cross-entity search
+- Pipeline automation (GitHub Actions cron for AEMO/OE/EPBC)
+- News feed RSS importer (RenewEconomy, PV Magazine)
+- **Intelligence:** CIS/LTESA Risk Tracker, Aggregate Drift Analysis, Developer Execution Scoring
 
-### Longer-term
-- Real-time SCADA data integration
-- Automated data refresh pipeline
-- Multi-source intelligence panels
-- Operations-to-development mapping`,
+### Medium-term (Months 3-6)
+- NSW Planning Portal API integration
+- EIS document extraction (wind speeds, turbine specs)
+- OpenElectricity monthly data + FCAS revenue
+- Global Wind Atlas wind speed integration
+- **Intelligence:** Wind Resource Quality, Energy Mix Tracker, Supply Chain Intelligence
+
+### Longer-term (Months 6-12)
+- Dunkelflaute detection and analysis
+- Market revenue intelligence (BESS arbitrage + FCAS waterfall)
+- Grid connection bottleneck analysis
+- LLM-powered EIS extraction at scale
+- User accounts, watchlist, and push notifications`,
   },
   {
     id: 'session-guide',
@@ -1197,6 +1202,430 @@ The underlying data is publicly available:
 - **AEMO Generation Information:** Published quarterly with registered capacities
 
 If you spot a discrepancy, it's likely due to capacity differences (registered vs maximum), time period alignment, or DUID mapping. We welcome corrections.`,
+  },
+  {
+    id: 'strategic-roadmap',
+    title: 'Strategic Roadmap',
+    description: 'Comprehensive review of infrastructure, UX, data strategy, and the 10-feature intelligence layer plan.',
+    icon: '🗺️',
+    category: 'roadmap',
+    readingTime: '20 min read',
+    content: `# AURES Strategic Roadmap
+
+> **Last Updated:** 2026-03-15
+> **Version:** v1.4.3 | **Projects:** 1,064 | **Pages:** 25 | **Database Tables:** 19
+
+This document is the master plan for AURES. It covers a comprehensive review of the platform's code and infrastructure, UX quality, data enhancement strategy, and the design of 10 intelligence layer features that will transform AURES from a database into an analytical platform.
+
+---
+
+## Part 1: Infrastructure & Code Quality Review
+
+### Current Architecture
+
+| Layer | Technology | Notes |
+|-------|-----------|-------|
+| Frontend | React 19, Vite 7, TypeScript 5.9, Tailwind 4 | 25 pages, 12 hooks, 7 components |
+| Data | SQLite (1 file, 19 tables) | Exported to static JSON for the PWA |
+| Pipeline | Python 3 (16 scripts, ~7,000 lines) | Manual runs, no automation |
+| Deploy | GitHub Actions → GitHub Pages | Push to main triggers build+deploy |
+| PWA | vite-plugin-pwa, StaleWhileRevalidate | 7-day cache, 500 max entries |
+
+### Priority Improvements
+
+#### Tier 1 — High Impact, Low Effort
+
+**Code Splitting (React.lazy)**
+All 25 pages are eagerly imported in App.tsx. Converting to React.lazy with Suspense fallbacks would reduce the initial bundle by ~60%. The MapView page alone pulls in Leaflet (~220KB) even if the user never visits the map.
+
+**Error Boundaries**
+There are no error boundaries anywhere in the app. A single rendering error in any component crashes the entire application. We need a generic ErrorBoundary wrapping the Outlet in Layout.tsx, plus specific boundaries around chart-heavy pages.
+
+**Icon Extraction**
+Layout.tsx contains 16 inline SVG icon components (435 lines total). These should be extracted to a dedicated icons file, reducing Layout.tsx to ~180 lines.
+
+#### Tier 2 — High Impact, Medium Effort
+
+**Data Cache Layer**
+Each hook (useProjectData, useOEMData, etc.) fetches independently. Multiple pages loading the same project index each trigger their own fetch. Replacing with TanStack Query or SWR would eliminate duplicate fetches and provide automatic cache invalidation.
+
+**Testing Framework**
+There are no tests. Adding Vitest + @testing-library/react with initial coverage of dataService.ts utility functions and data processing logic would catch regressions.
+
+**PWA Cache Versioning**
+The current StaleWhileRevalidate strategy works but has no versioned cache-busting. If the data schema changes between deployments, stale cached JSON could cause runtime errors. Adding a version hash to data filenames or a manifest check would fix this.
+
+#### Tier 3 — Medium Impact
+
+**Pipeline Automation**
+All Python import scripts must be run manually. A GitHub Actions cron workflow could automate AEMO imports (monthly), OpenElectricity performance (quarterly), EPBC referrals (monthly), and news feed ingestion (daily).
+
+**Large Page Decomposition**
+Six pages exceed 350 lines, with ProjectTimeline.tsx at 749, Performance.tsx at 733, and OEMList.tsx at 707. These mix data processing, UI rendering, and chart configuration. Extracting sub-components would improve maintainability.
+
+---
+
+## Part 2: UX Assessment
+
+### Current Scores
+
+| Dimension | Score | Key Issue |
+|-----------|-------|-----------|
+| Navigation | 8/10 | No breadcrumbs on detail pages |
+| Search | 6/10 | Hardcoded suggestions, no cross-entity search, no Cmd+K |
+| Mobile | 7/10 | Table overflow on small screens, chart margin issues |
+| Accessibility | 6/10 | Missing ARIA labels on icon buttons, no skip-to-content |
+| Error Handling | 5/10 | No error boundaries, inconsistent loading skeletons |
+| Data Viz | 8/10 | No chart export, no keyboard navigation |
+| Code Quality | 8/10 | Clean TypeScript, but some 700+ line pages |
+| Design System | 7/10 | Good CSS variables, but no light mode, no documented tokens |
+| **Overall** | **7.2/10** | **Solid product, ready for a polish pass** |
+
+### Priority UX Improvements
+
+**1. Error Handling (5/10 → 8/10)**
+- Error boundaries at route level with "Something went wrong. Tap to retry"
+- Centralised Skeleton component with variants (card, table row, chart)
+- Network error states with retry buttons on all data-fetching pages
+
+**2. Search (6/10 → 9/10)**
+- Cmd+K / Ctrl+K keyboard shortcut opening a search modal from any page
+- Dynamic suggestions generated from top projects, developers, OEMs
+- Cross-entity search: results grouped by type (projects, developers, OEMs, contractors)
+- Recent searches persisted in localStorage
+
+**3. Accessibility (6/10 → 8/10)**
+- aria-label on all icon-only buttons (hamburger, search, filter chips)
+- aria-current="page" on active NavLinks
+- Skip-to-content link for keyboard navigation
+- Focus management on route changes
+- Colour-blind safe chart patterns (not just colour-dependent)
+
+**4. Mobile Polish (7/10 → 9/10)**
+- Horizontal scroll indicators on data tables that overflow
+- Breadcrumb navigation visible on tablet+ breakpoints
+- Touch-friendly chart tooltips
+- "X more columns" badge when columns are hidden on small screens
+
+**5. Data Visualization (8/10 → 9/10)**
+- Chart export as PNG/SVG (share button)
+- Download filtered data as CSV
+- Semantic figure + figcaption around all charts
+- Responsive chart sizing using ResponsiveContainer everywhere
+
+---
+
+## Part 3: Data Enhancement Strategy
+
+### Current Data Coverage
+
+| Metric | Count | Coverage |
+|--------|-------|----------|
+| Total projects | 1,064 | — |
+| With timeline events | 677 | 63.6% |
+| With coordinates | 250 | 23.5% |
+| With performance data | 221 | 20.8% |
+| With supplier records | 134 | 12.6% |
+| With offtake/PPA data | 60 | 5.6% |
+
+### 8 New Data Sources
+
+#### 1. NSW Planning Portal API
+**URL:** api.apps1.nsw.gov.au/eplanning/data/v0/OnlineDA
+**Provides:** DA status, lodge date, determination date, conditions of consent, modification applications.
+**Approach:** New importer matching projects by developer name and location. New planning_approvals database table.
+**Priority:** HIGH — NSW has the most projects and the only proper API.
+
+#### 2. Other State Planning Portals
+VIC (planning.vic.gov.au), QLD (planning.statedevelopment.qld.gov.au), SA (plan.sa.gov.au).
+**Approach:** Web scraping (no public APIs). Start with SA PlanSA which has the most structured HTML.
+**Priority:** MEDIUM — Do after NSW is working.
+
+#### 3. EIS Document Mining
+Environmental Impact Statements are typically 500-2000 page PDFs containing wind speed measurements, turbine layouts, noise assessments, grid connection details, and vegetation clearing data.
+**Approach:** Download PDFs from EPBC referral links and NSW Planning Portal. Use pdfplumber for text extraction. Regex patterns for structured fields. For scale, use an LLM API for unstructured extraction.
+**New data:** Wind speed (m/s), hub height (m), rotor diameter (m), number of turbines, noise limits (dBA), grid connection voltage (kV).
+**Priority:** HIGH for wind projects — EIS docs contain data available nowhere else.
+
+#### 4. OEM & Developer Websites
+Vestas, GE Vernova, and Goldwind publish project reference lists. Origin, AGL, Neoen, and other listed developers publish project updates and ASX announcements.
+**Approach:** Per-source scrapers storing raw announcements in a news_items table, auto-linked to projects.
+**Priority:** MEDIUM — good for filling OEM gaps and tracking ownership changes.
+
+#### 5. News Feed Automation
+RenewEconomy (reneweconomy.com.au/feed/), PV Magazine Australia, Energy Storage News all have RSS feeds.
+**Approach:** New importer fetching RSS daily, fuzzy-matching article titles against project names (Fuse.js-style), storing in news_articles table with project linkage.
+**Priority:** HIGH — automates the currently manual web research process.
+
+#### 6. OpenElectricity Monthly/FCAS Data
+Currently we only fetch annual data. The API supports monthly intervals and likely FCAS market data.
+**Approach:** Extend import_openelectricity.py to fetch monthly intervals. Add FCAS revenue metrics for BESS. Budget ~100 req/day for automated imports (out of 500 daily limit).
+**New data:** Monthly capacity factors, seasonal performance patterns, FCAS revenue breakdown for BESS.
+**Priority:** HIGH — enables Dunkelflaute detection and revenue intelligence features.
+
+#### 7. Global Wind Atlas
+**URL:** globalwindatlas.info — provides modeled mean wind speed at 100m/150m hub heights at 250m spatial resolution.
+**Approach:** For each geolocated wind project (currently 250), query the API for modeled wind speed. Store as modeled_wind_speed_100m, modeled_wind_speed_150m columns.
+**Priority:** HIGH — enables the Wind Resource Quality Assessment intelligence feature.
+
+#### 8. AEMO ISP Data
+The Integrated System Plan publishes REZ hosting capacity limits, transmission augmentation timelines, and connection queue data.
+**Approach:** Parse ISP appendix Excel files (published annually). Update rez-zones.ts with ISP-sourced hosting capacity.
+**Priority:** MEDIUM — enables the Grid Connection Bottleneck Analysis feature.
+
+### Keeping Data Up To Date
+
+**Automated (GitHub Actions cron):**
+- AEMO Generation Info: 1st of each month
+- OpenElectricity annual: Quarterly (Jan/Apr/Jul/Oct)
+- OpenElectricity YTD: 15th of each month
+- EPBC referrals: 1st of each month
+- News feeds (RSS): Daily
+
+**Semi-automated (local + Claude):**
+- EIS document mining: Ad hoc when new EIS published
+- Web research: Triggered by news feed matches
+- Planning portal checks: Monthly manual review
+
+**API Rate Limit Management:**
+New api_rate_limits table tracking daily usage per API. OpenElectricity budget: ~100 req/day for automation, 400 for ad-hoc research.
+
+---
+
+## Part 4: The Intelligence Layer — 10 Features
+
+### Feature 1: CIS/LTESA Project Risk Tracker
+
+**What it does:** Analyses projects that won CIS or LTESA scheme contracts to assess delivery risk. Flags projects that haven't reached FID, are experiencing COD drift, or were awarded to already-operating assets. Provides a traffic-light risk score.
+
+**Why it matters:** The CIS and LTESA schemes have awarded contracts to dozens of projects, but many face significant delivery challenges. Some contracts went to projects already in operation or construction — potentially diluting the scheme's intent to incentivise new build. Identifying at-risk projects early enables better policy and investment decisions.
+
+**Key questions it answers:**
+- Which CIS/LTESA projects have reached FID? Which haven't?
+- How many were already operating or in construction when awarded?
+- What is the aggregate COD drift for scheme-funded projects vs the broader pipeline?
+- Which projects are most at risk of missing their contractual deadlines?
+
+**Data sources:** scheme_contracts table, timeline_events (FID milestones), cod_history, performance_annual, web research for contract deadlines.
+
+**UI:** Traffic-light risk table (Green/Amber/Red). Timeline visualisation showing each project's actual progress vs required milestones. Summary KPIs.
+
+---
+
+### Feature 2: COD/FID Drift Analysis (Aggregate)
+
+**What it does:** Extends the existing per-project COD drift tracking into a statistical analysis of delay patterns across the entire fleet. Identifies which factors predict delay — technology type, project size, state, developer.
+
+**Why it matters:** Project delays are systemic in Australian renewables. Understanding the patterns (do larger projects delay more? do certain developers consistently miss timelines? are certain states slower?) enables better project evaluation and planning assumptions.
+
+**Key questions it answers:**
+- What is the median COD drift by technology? (Wind vs Solar vs BESS vs Hybrid)
+- Do bigger projects experience more delay?
+- Which states have the slowest approval-to-operation timelines?
+- Is drift getting worse or better over time?
+- Which developers are "serial delayers"?
+
+**Data sources:** cod_history, timeline_events, projects (technology, capacity_mw, state, developer).
+
+**UI:** Box plot charts by technology. Heat map (state x technology). Scatter plot (capacity vs drift). Developer leaderboard sorted by average drift. Trend line over time.
+
+---
+
+### Feature 3: Wind Resource Quality Assessment
+
+**What it does:** Predicts expected capacity factors for development-stage wind projects based on their location. Uses modeled wind speed data from Global Wind Atlas and a regression model trained on operating wind farms' actual performance.
+
+**Why it matters:** A wind project's long-term viability depends on the quality of the wind resource at its location. By comparing modeled wind speeds against actual capacity factors of operating farms, we can predict whether a proposed project is in a good location — crucial for evaluating CIS/LTESA project viability.
+
+**Key questions it answers:**
+- What capacity factor can we expect from this development-stage wind project?
+- How does this location compare to the best and worst performing wind farms?
+- Are any CIS/LTESA wind projects in poor resource areas?
+- What is the R-squared between modeled wind speed and actual capacity factor?
+
+**Data sources:** Global Wind Atlas API (wind speed at hub height), performance_annual (actual CF for operating farms), project coordinates.
+
+**UI:** Map overlay with wind speed contours. Scatter plot of modeled wind speed vs actual CF. Table of development projects ranked by predicted CF. Resource rating badges (Excellent/Good/Average/Poor).
+
+---
+
+### Feature 4: EIS Document Intelligence
+
+**What it does:** Extracts structured technical specifications from Environmental Impact Statement PDFs. Creates a searchable database of parameters like hub heights, rotor diameters, noise limits, and grid connection details.
+
+**Why it matters:** EIS documents contain the most detailed technical information about a project — data that exists nowhere else publicly. But it is buried in thousand-page PDFs. Extracting and structuring this data unlocks deep technical comparison and due diligence.
+
+**Key questions it answers:**
+- What hub height and rotor diameter is proposed for this wind farm?
+- What were the measured wind speeds at the project site?
+- What are the noise limits and setback requirements?
+- What grid connection voltage and transformer capacity is planned?
+
+**Data sources:** EPBC referral links, NSW Planning Portal attachments, developer websites.
+
+**UI:** New "Technical Specifications" tab on ProjectDetail. Comparison table for competing projects. Searchable parameter database. Source attribution linking back to EIS page numbers.
+
+---
+
+### Feature 5: Dunkelflaute Detection & Analysis
+
+**What it does:** Identifies periods of simultaneous low wind and solar generation across the NEM. Analyses frequency, duration, geographic extent, and models the impact on BESS dispatch and grid reliability.
+
+**Why it matters:** Dunkelflaute events (periods of low wind and low solar simultaneously) are critical stress tests for a renewable-dominated grid. Understanding their frequency and severity helps assess whether the BESS pipeline is sufficient and which wind farms are most affected.
+
+**Key questions it answers:**
+- How often do Dunkelflaute events occur? In which months?
+- When one state has low wind, do neighbouring states also?
+- During the worst Dunkelflaute on record, how much did wind generation drop? Which farms were hit hardest?
+- Given current BESS capacity, how many hours of backup does each state have during a Dunkelflaute?
+
+**Data sources:** OpenElectricity monthly generation data by NEM region, project capacity by state, BESS storage capacity.
+
+**UI:** Calendar heat map (wind+solar combined CF by month by region). Dunkelflaute event timeline. Cross-region correlation matrix. BESS adequacy analysis cards. Historical trend line.
+
+---
+
+### Feature 6: State Energy Mix Transition Tracker
+
+**What it does:** Visualises how each state's electricity generation mix has evolved — the retirement of coal, the growth of wind/solar/BESS, and the path toward decarbonisation. Projects forward based on the committed and development pipeline.
+
+**Why it matters:** Each state is on a different trajectory. Tasmania is nearly 100% renewable. Victoria and NSW are racing to replace coal. Queensland has the largest pipeline. Understanding these trajectories helps assess where investment is heading.
+
+**Key questions it answers:**
+- What percentage of each state's generation is now renewable?
+- When will each state reach 50%, 80%, 100% renewables?
+- Which specific projects are driving the transition in each state?
+- How realistic are the forward projections given historical delivery rates?
+
+**Data sources:** OpenElectricity historical generation by fuel type by NEM region. AURES pipeline by state/technology/status/COD.
+
+**UI:** Stacked area chart per state. Forward projection zone (shaded). Small multiples for state comparison. Key milestone markers (coal closures). Click on future year to see assumed projects.
+
+---
+
+### Feature 7: Developer Execution Scoring
+
+**What it does:** Rates each developer on their track record of delivering projects on time, at stated capacity, and through to operation. Provides an execution reliability score that contextualises the credibility of their development pipeline.
+
+**Why it matters:** A developer with 5 GW in their pipeline but a history of delays and withdrawals is very different from one with 500 MW and a perfect delivery record. Execution scoring adds crucial context to pipeline announcements and scheme contract awards.
+
+**Key questions it answers:**
+- What is this developer's average COD drift?
+- What percentage of their announced projects actually reach operation?
+- How long do they typically take from FID to COD?
+- How credible is their current pipeline given their track record?
+
+**Data sources:** developer-profiles.json, cod_history, timeline_events, projects.status.
+
+**UI:** A-F rating badge on DeveloperDetail. Radar chart (speed, reliability, scale, experience). Developer comparison tool. Pipeline credibility view flagging large pipelines with poor execution scores.
+
+---
+
+### Feature 8: Equipment Supply Chain Intelligence
+
+**What it does:** Tracks OEM market share trends over time, technology evolution (turbine size, BESS chemistry), and lead time intelligence.
+
+**Why it matters:** Understanding which OEMs are winning in the Australian market, how turbine sizes are evolving, and what lead times look like helps developers plan procurement and helps analysts understand technology trends.
+
+**Key questions it answers:**
+- Which wind OEM has gained the most market share in the last 3 years?
+- What is the average turbine capacity installed each year? (showing the trend toward larger turbines)
+- What is the average time from equipment order to COD?
+- Which BESS chemistry (LFP, NMC) is dominating new orders?
+
+**Data sources:** suppliers table, oem-profiles.json, timeline_events (equipment_order dates).
+
+**UI:** Animated market share pie chart (slider by year). Technology evolution line chart (average turbine MW over time). OEM comparison table. Lead time analysis.
+
+---
+
+### Feature 9: Market Revenue Intelligence
+
+**What it does:** Benchmarks project revenue performance, analyses merchant vs contracted revenue exposure, and provides BESS-specific revenue decomposition (energy arbitrage vs FCAS).
+
+**Why it matters:** Understanding actual revenue performance — not just capacity factor — is critical for investment analysis. BESS revenue in particular is complex, with significant FCAS contribution that varies dramatically by market conditions.
+
+**Key questions it answers:**
+- What does a top-quartile wind farm earn per MWh vs the fleet average?
+- What proportion of BESS revenue comes from FCAS vs energy arbitrage?
+- Which projects are fully merchant vs fully contracted? What is the revenue difference?
+- Are revenues trending up or down by technology?
+
+**Data sources:** performance_annual (revenue, price), offtakes (PPA status), OpenElectricity FCAS data.
+
+**UI:** BESS revenue waterfall chart. Revenue heat map (monthly per MW). Merchant exposure analysis. Quartile benchmark cards. Year-over-year trend.
+
+---
+
+### Feature 10: Grid Connection Bottleneck Analysis
+
+**What it does:** Identifies where projects are stuck in the grid connection process, maps queue congestion by REZ and network service provider, and quantifies the systemic impact of connection delays.
+
+**Why it matters:** Grid connection is the single biggest bottleneck in Australian renewable energy development. Projects can wait 3-5 years for a connection agreement. Understanding where the queues are longest and which NSPs are slowest enables better site selection and policy focus.
+
+**Key questions it answers:**
+- Which REZs have the most queued capacity relative to hosting capacity?
+- How long does it take from planning approval to grid connection in each REZ?
+- Which NSP (Transgrid, ElectraNet, AusNet, etc.) processes connections fastest?
+- How much capacity and investment is held up by connection delays?
+
+**Data sources:** projects (connection_status, connection_nsp, rez), AEMO TCPR data, ISP hosting capacity.
+
+**UI:** Map with REZ boundaries coloured by queue congestion. REZ detail cards. Connection journey Gantt chart. NSP comparison table.
+
+---
+
+## Part 5: Phased Implementation Timeline
+
+### Phase A: Near-Term (Months 1-3)
+
+**Weeks 1-4: Code Quality Foundation**
+- React.lazy code splitting for all 25 routes
+- Error boundaries (global + per-route)
+- Extract icons from Layout.tsx
+- Centralised Skeleton component library
+- Add Vitest with initial test coverage
+
+**Weeks 5-8: Search + Pipeline Automation**
+- Cmd+K search modal with dynamic suggestions
+- Cross-entity search (projects + developers + OEMs)
+- GitHub Actions cron workflow for AEMO + OE imports
+- News feed RSS importer (RenewEconomy, PV Magazine)
+- Data freshness indicators on Data Sources page
+
+**Weeks 9-12: Intelligence Layer Phase 1**
+- Feature 1: CIS/LTESA Project Risk Tracker
+- Feature 2: COD/FID Drift Analysis (aggregate)
+- Feature 7: Developer Execution Scoring
+
+### Phase B: Medium-Term (Months 3-6)
+
+**Data Enhancement Sprint**
+- NSW Planning Portal API importer
+- EIS document download + basic text extraction
+- OpenElectricity monthly data import
+- Global Wind Atlas wind speed integration
+- Chart export (PNG/SVG) and CSV download
+
+**Intelligence Layer Phase 2**
+- Feature 3: Wind Resource Quality Assessment
+- Feature 6: State Energy Mix Transition Tracker
+- Feature 8: Equipment Supply Chain Intelligence
+
+### Phase C: Longer-Term (Months 6-12)
+
+**Advanced Intelligence**
+- Feature 5: Dunkelflaute Detection (needs monthly data accumulation)
+- Feature 9: Market Revenue Intelligence (needs FCAS data)
+- Feature 10: Grid Connection Bottleneck Analysis (needs AEMO TCPR data)
+- Feature 4: EIS Document Intelligence at scale (LLM-powered extraction)
+
+**Platform Evolution**
+- Database migration consideration (SQLite → Supabase/Turso for concurrent writes)
+- User accounts + Watchlist feature
+- Push notification alerts for project milestone changes
+- SA PlanSA and VIC planning portal scrapers
+- ASX announcement parser for listed developers`,
   },
 ]
 
