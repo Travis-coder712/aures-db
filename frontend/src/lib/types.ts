@@ -589,3 +589,117 @@ export interface DataSourcesIndex {
   }
   exported_at: string
 }
+
+// ============================================================
+// Intelligence Layer Types
+// ============================================================
+
+export interface SchemeRiskProject {
+  project_id: string; name: string; scheme: string; round: string;
+  technology: string; status: string; capacity_mw: number; storage_mwh: number | null;
+  developer: string; cod_current: string | null; cod_original: string | null;
+  has_fid: boolean; has_construction_start: boolean; has_planning_approval: boolean;
+  drift_months: number; risk_score: number; risk_level: 'green' | 'amber' | 'red';
+}
+export interface SchemeRiskData {
+  projects: SchemeRiskProject[];
+  summary: { red: number; amber: number; green: number };
+  by_scheme: Record<string, { count: number; avg_risk: number; total_mw: number }>;
+  total_projects: number;
+}
+
+export interface DriftGroup { count: number; mean: number; median: number; p25: number; p75: number }
+export interface DriftProject {
+  project_id: string; name: string; technology: string; status: string;
+  state: string; capacity_mw: number; drift_months: number;
+  cod_current: string | null; cod_original: string | null; developer: string;
+}
+export interface DeveloperDrift {
+  developer: string; count: number; mean: number; median: number; p25: number; p75: number; on_time_pct: number;
+}
+export interface DriftYearTrend { year: number; count: number; mean: number; median: number; p25: number; p75: number }
+export interface DriftAnalysisData {
+  projects: DriftProject[];
+  by_technology: Record<string, DriftGroup>;
+  by_state: Record<string, DriftGroup>;
+  by_capacity_band: Record<string, DriftGroup>;
+  developer_ranking: DeveloperDrift[];
+  year_trend: DriftYearTrend[];
+  total_projects: number;
+  overall: DriftGroup;
+}
+
+export interface WindResourceFarm {
+  project_id: string; name: string; state: string; capacity_mw: number;
+  latitude: number; longitude: number; capacity_factor_pct: number;
+  energy_price: number; revenue_per_mw: number; resource_rating: string;
+}
+export interface WindResourceDev {
+  project_id: string; name: string; state: string; capacity_mw: number;
+  latitude: number | null; longitude: number | null;
+  predicted_cf_pct: number; predicted_rating: string; basis: string;
+}
+export interface WindResourceData {
+  operating_farms: WindResourceFarm[];
+  state_benchmarks: Record<string, { count: number; mean: number; median: number; p25: number; p75: number; rating: string }>;
+  rez_benchmarks: Record<string, { count: number; mean: number; median: number; p25: number; p75: number; rating: string }>;
+  development_projects: WindResourceDev[];
+  total_operating: number; total_development: number;
+}
+
+export interface StateYearPerformance {
+  state: string; year: number; wind_cf_pct: number; solar_cf_pct: number;
+  combined_cf_pct: number; wind_mw: number; solar_mw: number;
+}
+export interface DunkelflaunteData {
+  state_year_performance: StateYearPerformance[];
+  lowest_cf_periods: StateYearPerformance[];
+  bess_coverage: Record<string, { bess_count: number; bess_mw: number; bess_mwh: number; peak_demand_mw_est: number; coverage_hours: number; coverage_rating: string }>;
+  bess_pipeline: Record<string, { count: number; mw: number; mwh: number }>;
+  peak_demand_estimates: Record<string, number>;
+}
+
+export interface EnergyMixData {
+  current_mix: Record<string, Record<string, { count: number; mw: number; mwh?: number }>>;
+  state_totals: Record<string, { operating_mw: number; technologies: Record<string, { count: number; mw: number }> }>;
+  pipeline: Array<{ state: string; technology: string; status: string; cod_year: string; count: number; mw: number }>;
+  projection: Record<string, Record<string, number>>;
+}
+
+export interface ScoredDeveloper {
+  developer: string; project_count: number; total_mw: number; technologies: string[];
+  operating: number; withdrawn: number; completion_rate: number;
+  avg_drift_months: number; on_time_pct: number;
+  execution_score: number; grade: string;
+  drift_stats: { count: number; mean: number; median: number };
+}
+export interface DeveloperScoreData {
+  developers: ScoredDeveloper[];
+  industry_averages: { avg_drift_months: number; avg_on_time_pct: number; developer_count: number };
+  grade_distribution: Record<string, number>;
+  total_developers: number;
+}
+
+export interface MetricStats { count: number; mean: number; median: number; p25: number; p75: number }
+export interface TechYearRevenue {
+  technology: string; year: number;
+  revenue_per_mw: MetricStats; energy_price: MetricStats; capacity_factor: MetricStats;
+}
+export interface RevenueIntelData {
+  by_technology_year: TechYearRevenue[];
+  yoy_trends: Record<string, Array<{ year: number; revenue_per_mw: number; energy_price: number; cf: number }>>;
+  technology_comparison_2024: Record<string, { revenue_per_mw: MetricStats; energy_price: MetricStats; capacity_factor: MetricStats }>;
+  offtake_comparison: { year: number; with_offtake: { count: number; revenue_per_mw: MetricStats; energy_price: MetricStats }; without_offtake: { count: number; revenue_per_mw: MetricStats; energy_price: MetricStats } };
+}
+
+export interface REZSummary {
+  rez: string; total_mw: number; operating_mw: number; pipeline_mw: number;
+  project_count: number; congestion_score: number; congestion_level: string;
+  technologies: Record<string, Record<string, { count: number; mw: number }>>;
+}
+export interface GridConnectionData {
+  rez_summaries: REZSummary[];
+  state_summary: Record<string, { rez_count: number; total_mw: number; pipeline_mw: number; rezs: string[] }>;
+  connection_status_overall: Record<string, { count: number; mw: number }>;
+  total_rez_zones: number;
+}

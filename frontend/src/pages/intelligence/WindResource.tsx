@@ -1,0 +1,671 @@
+import { useState, useEffect, useMemo } from 'react'
+import { Link } from 'react-router-dom'
+import {
+  BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip,
+  ResponsiveContainer, ScatterChart, Scatter, Cell,
+  PieChart, Pie,
+} from 'recharts'
+import { fetchWindResource } from '../../lib/dataService'
+import type { WindResourceData, WindResourceFarm } from '../../lib/types'
+
+// ============================================================
+// Icons — defined BEFORE const arrays per project pattern
+// ============================================================
+
+const WindIcon = () => (
+  <svg className="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
+    <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838l-2.727 1.17 1.94.831a1 1 0 00.788 0l7-3a1 1 0 000-1.838l-7-3.001z" />
+    <path d="M3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z" />
+  </svg>
+)
+
+const ChartIcon = () => (
+  <svg className="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
+    <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z" />
+    <path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z" />
+  </svg>
+)
+
+const BoltIcon = () => (
+  <svg className="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
+    <path fillRule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clipRule="evenodd" />
+  </svg>
+)
+
+const PipelineIcon = () => (
+  <svg className="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
+    <path fillRule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clipRule="evenodd" />
+  </svg>
+)
+
+const SortUpIcon = () => (
+  <svg className="w-3 h-3 inline" viewBox="0 0 10 10" fill="currentColor">
+    <path d="M5 2L9 8H1L5 2z" />
+  </svg>
+)
+
+const SortDownIcon = () => (
+  <svg className="w-3 h-3 inline" viewBox="0 0 10 10" fill="currentColor">
+    <path d="M5 8L1 2H9L5 8z" />
+  </svg>
+)
+
+// ============================================================
+// Rating & state colours
+// ============================================================
+
+const RATING_COLOURS: Record<string, string> = {
+  'Excellent': '#10b981',
+  'Good': '#3b82f6',
+  'Average': '#f59e0b',
+  'Below Average': '#ef4444',
+}
+
+const RATING_ORDER = ['Excellent', 'Good', 'Average', 'Below Average'] as const
+
+const STATE_COLOURS: Record<string, string> = {
+  NSW: '#3b82f6',
+  VIC: '#8b5cf6',
+  QLD: '#f59e0b',
+  SA: '#10b981',
+  TAS: '#06b6d4',
+  WA: '#ec4899',
+}
+
+const getRatingColour = (rating: string) => RATING_COLOURS[rating] || '#636e72'
+const getStateColour = (state: string) => STATE_COLOURS[state] || '#636e72'
+
+// ============================================================
+// Helpers
+// ============================================================
+
+const fmtCf = (v: number) => `${v.toFixed(1)}%`
+const fmtPrice = (v: number) => `$${v.toFixed(1)}`
+const fmtRevenue = (v: number) => `$${(v / 1000).toFixed(0)}k`
+const fmtMw = (v: number) => `${v.toLocaleString()} MW`
+
+// ============================================================
+// Sort types
+// ============================================================
+
+type SortField = 'name' | 'state' | 'capacity_mw' | 'capacity_factor_pct' | 'resource_rating' | 'energy_price' | 'revenue_per_mw'
+type SortDir = 'asc' | 'desc'
+
+export default function WindResource() {
+  const [data, setData] = useState<WindResourceData | null>(null)
+  const [loading, setLoading] = useState(true)
+
+  // Filters
+  const [selectedStates, setSelectedStates] = useState<string[]>([])
+  const [selectedRatings, setSelectedRatings] = useState<string[]>([])
+
+  // Table sort
+  const [sortField, setSortField] = useState<SortField>('capacity_factor_pct')
+  const [sortDir, setSortDir] = useState<SortDir>('desc')
+
+  useEffect(() => {
+    fetchWindResource().then(d => { setData(d); setLoading(false) })
+  }, [])
+
+  function toggleState(state: string) {
+    setSelectedStates(prev =>
+      prev.includes(state) ? prev.filter(s => s !== state) : [...prev, state]
+    )
+  }
+
+  function toggleRating(rating: string) {
+    setSelectedRatings(prev =>
+      prev.includes(rating) ? prev.filter(r => r !== rating) : [...prev, rating]
+    )
+  }
+
+  function handleSort(field: SortField) {
+    if (sortField === field) {
+      setSortDir(prev => prev === 'asc' ? 'desc' : 'asc')
+    } else {
+      setSortField(field)
+      setSortDir(field === 'name' || field === 'state' ? 'asc' : 'desc')
+    }
+  }
+
+  // Available states from data
+  const availableStates = useMemo(() => {
+    if (!data) return []
+    const states = new Set(data.operating_farms.map(f => f.state))
+    return [...states].sort()
+  }, [data])
+
+  // Filtered operating farms
+  const filtered = useMemo(() => {
+    if (!data) return []
+    let farms = data.operating_farms
+    if (selectedStates.length > 0) {
+      farms = farms.filter(f => selectedStates.includes(f.state))
+    }
+    if (selectedRatings.length > 0) {
+      farms = farms.filter(f => selectedRatings.includes(f.resource_rating))
+    }
+    return farms
+  }, [data, selectedStates, selectedRatings])
+
+  // Sorted farms for table
+  const sorted = useMemo(() => {
+    const arr = [...filtered]
+    arr.sort((a, b) => {
+      const aVal = a[sortField]
+      const bVal = b[sortField]
+      if (typeof aVal === 'number' && typeof bVal === 'number') {
+        return sortDir === 'asc' ? aVal - bVal : bVal - aVal
+      }
+      const aStr = String(aVal ?? '')
+      const bStr = String(bVal ?? '')
+      return sortDir === 'asc' ? aStr.localeCompare(bStr) : bStr.localeCompare(aStr)
+    })
+    return arr
+  }, [filtered, sortField, sortDir])
+
+  // Summary stats
+  const summary = useMemo(() => {
+    if (!data) return null
+    const farms = data.operating_farms
+    const avgCf = farms.length > 0
+      ? farms.reduce((sum, f) => sum + f.capacity_factor_pct, 0) / farms.length
+      : 0
+
+    // Best state by median CF
+    let bestState = '-'
+    let bestMedian = 0
+    for (const [state, bench] of Object.entries(data.state_benchmarks)) {
+      if (bench.median > bestMedian) {
+        bestMedian = bench.median
+        bestState = state
+      }
+    }
+
+    return {
+      totalOperating: data.total_operating,
+      avgCf,
+      bestState,
+      bestStateMedian: bestMedian,
+      devPipeline: data.total_development,
+    }
+  }, [data])
+
+  // State benchmark bar chart data (horizontal)
+  const stateBenchData = useMemo(() => {
+    if (!data) return []
+    return Object.entries(data.state_benchmarks)
+      .map(([state, bench]) => ({
+        state,
+        median: bench.median,
+        p25: bench.p25,
+        p75: bench.p75,
+        count: bench.count,
+        rating: bench.rating,
+        colour: getRatingColour(bench.rating),
+        // For the whisker range bar
+        rangeBottom: bench.p25,
+        rangeHeight: bench.p75 - bench.p25,
+      }))
+      .sort((a, b) => b.median - a.median)
+  }, [data])
+
+  // Scatter data: capacity vs CF, coloured by state
+  const scatterData = useMemo(() => {
+    return filtered.map(f => ({
+      ...f,
+      x: f.capacity_mw,
+      y: f.capacity_factor_pct,
+      colour: getStateColour(f.state),
+    }))
+  }, [filtered])
+
+  // Rating distribution pie data
+  const pieData = useMemo(() => {
+    if (!data) return []
+    const counts: Record<string, number> = {}
+    for (const r of RATING_ORDER) counts[r] = 0
+    for (const f of data.operating_farms) {
+      counts[f.resource_rating] = (counts[f.resource_rating] || 0) + 1
+    }
+    return RATING_ORDER
+      .map(r => ({ name: r, value: counts[r], fill: RATING_COLOURS[r] }))
+      .filter(d => d.value > 0)
+  }, [data])
+
+  // ---- Render ----
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center h-64">
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500" />
+      </div>
+    )
+  }
+
+  if (!data) {
+    return (
+      <div className="p-6 text-center text-[var(--text-secondary)]">
+        No wind resource data available.
+      </div>
+    )
+  }
+
+  return (
+    <div className="p-4 md:p-6 space-y-6 max-w-7xl mx-auto">
+      {/* Header */}
+      <div>
+        <h1 className="text-2xl font-bold text-[var(--text-primary)]">Wind Resource Quality</h1>
+        <p className="text-sm text-[var(--text-secondary)] mt-1">
+          Capacity factor analysis across {data.total_operating} operating wind farms and {data.total_development} development projects
+        </p>
+      </div>
+
+      {/* Summary cards */}
+      {summary && (
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+          <div className="bg-[var(--bg-secondary)] rounded-xl p-4 border border-[var(--border)]">
+            <div className="flex items-center gap-2 text-[var(--text-secondary)] mb-2">
+              <WindIcon />
+              <span className="text-xs font-medium uppercase tracking-wider">Operating Farms</span>
+            </div>
+            <div className="text-2xl font-bold text-[var(--text-primary)]">{summary.totalOperating}</div>
+            <div className="text-xs text-[var(--text-secondary)]">{filtered.length} shown</div>
+          </div>
+
+          <div className="bg-[var(--bg-secondary)] rounded-xl p-4 border border-[var(--border)]">
+            <div className="flex items-center gap-2 text-[var(--text-secondary)] mb-2">
+              <ChartIcon />
+              <span className="text-xs font-medium uppercase tracking-wider">Avg CF</span>
+            </div>
+            <div className="text-2xl font-bold text-blue-400">{fmtCf(summary.avgCf)}</div>
+            <div className="text-xs text-[var(--text-secondary)]">fleet average</div>
+          </div>
+
+          <div className="bg-[var(--bg-secondary)] rounded-xl p-4 border border-[var(--border)]">
+            <div className="flex items-center gap-2 text-[var(--text-secondary)] mb-2">
+              <BoltIcon />
+              <span className="text-xs font-medium uppercase tracking-wider">Best State</span>
+            </div>
+            <div className="text-2xl font-bold" style={{ color: getStateColour(summary.bestState) }}>
+              {summary.bestState}
+            </div>
+            <div className="text-xs text-[var(--text-secondary)]">median CF {fmtCf(summary.bestStateMedian)}</div>
+          </div>
+
+          <div className="bg-[var(--bg-secondary)] rounded-xl p-4 border border-[var(--border)]">
+            <div className="flex items-center gap-2 text-[var(--text-secondary)] mb-2">
+              <PipelineIcon />
+              <span className="text-xs font-medium uppercase tracking-wider">Dev Pipeline</span>
+            </div>
+            <div className="text-2xl font-bold text-amber-400">{summary.devPipeline}</div>
+            <div className="text-xs text-[var(--text-secondary)]">development projects</div>
+          </div>
+        </div>
+      )}
+
+      {/* Filter chips: State */}
+      <div className="flex flex-wrap items-center gap-2">
+        <span className="text-[10px] font-semibold uppercase tracking-wider text-[var(--color-text-muted)] w-14">
+          State
+        </span>
+        {availableStates.map(state => {
+          const isActive = selectedStates.includes(state)
+          const colour = getStateColour(state)
+          return (
+            <button
+              key={state}
+              onClick={() => toggleState(state)}
+              className={`text-xs px-2.5 py-1 rounded-full border transition-colors ${
+                isActive
+                  ? 'border-transparent font-medium'
+                  : 'border-[var(--color-border)] text-[var(--color-text-muted)] hover:border-[var(--color-text-muted)]'
+              }`}
+              style={isActive ? { backgroundColor: `${colour}33`, color: colour } : undefined}
+            >
+              {state}
+            </button>
+          )
+        })}
+        {selectedStates.length > 0 && (
+          <button onClick={() => setSelectedStates([])} className="text-xs text-[var(--color-primary)] hover:underline ml-1">
+            Clear
+          </button>
+        )}
+      </div>
+
+      {/* Filter chips: Rating */}
+      <div className="flex flex-wrap items-center gap-2">
+        <span className="text-[10px] font-semibold uppercase tracking-wider text-[var(--color-text-muted)] w-14">
+          Rating
+        </span>
+        {RATING_ORDER.map(rating => {
+          const isActive = selectedRatings.includes(rating)
+          const colour = getRatingColour(rating)
+          return (
+            <button
+              key={rating}
+              onClick={() => toggleRating(rating)}
+              className={`text-xs px-2.5 py-1 rounded-full border transition-colors ${
+                isActive
+                  ? 'border-transparent font-medium'
+                  : 'border-[var(--color-border)] text-[var(--color-text-muted)] hover:border-[var(--color-text-muted)]'
+              }`}
+              style={isActive ? { backgroundColor: `${colour}33`, color: colour } : undefined}
+            >
+              {rating}
+            </button>
+          )
+        })}
+        {selectedRatings.length > 0 && (
+          <button onClick={() => setSelectedRatings([])} className="text-xs text-[var(--color-primary)] hover:underline ml-1">
+            Clear
+          </button>
+        )}
+      </div>
+
+      {/* State Benchmarks + Rating Distribution in 2-col */}
+      <div className="grid md:grid-cols-2 gap-6">
+        {/* State benchmarks horizontal bar chart */}
+        <div className="bg-[var(--bg-secondary)] rounded-xl p-4 border border-[var(--border)]">
+          <h2 className="text-lg font-semibold text-[var(--text-primary)] mb-1">State Benchmarks</h2>
+          <p className="text-xs text-[var(--text-secondary)] mb-4">
+            Median capacity factor by state. Error bars show P25-P75 range.
+          </p>
+          <ResponsiveContainer width="100%" height={Math.max(stateBenchData.length * 44, 200)}>
+            <BarChart data={stateBenchData} layout="vertical" margin={{ top: 5, right: 40, bottom: 5, left: 10 }}>
+              <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" horizontal={false} />
+              <XAxis
+                type="number" domain={[0, 50]}
+                tick={{ fill: 'var(--text-secondary)', fontSize: 12 }}
+                tickFormatter={(v) => `${v}%`}
+              />
+              <YAxis
+                type="category" dataKey="state" width={50}
+                tick={{ fill: 'var(--text-secondary)', fontSize: 12 }}
+              />
+              <Tooltip
+                contentStyle={{ backgroundColor: 'var(--bg-primary)', border: '1px solid var(--border)', borderRadius: '8px' }}
+                labelStyle={{ color: 'var(--text-primary)' }}
+                formatter={(value) => [fmtCf(Number(value)), 'Median CF']}
+                labelFormatter={(label) => {
+                  const row = stateBenchData.find(r => r.state === label)
+                  return row
+                    ? `${label} (${row.count} farms) — ${row.rating} — P25: ${fmtCf(row.p25)}, P75: ${fmtCf(row.p75)}`
+                    : String(label)
+                }}
+              />
+              <Bar dataKey="median" radius={[0, 4, 4, 0]}>
+                {stateBenchData.map((entry, index) => (
+                  <Cell key={`bench-${index}`} fill={entry.colour} />
+                ))}
+              </Bar>
+            </BarChart>
+          </ResponsiveContainer>
+          {/* Legend */}
+          <div className="flex flex-wrap justify-center gap-3 mt-2">
+            {RATING_ORDER.map(r => (
+              <div key={r} className="flex items-center gap-1.5 text-xs">
+                <span className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: RATING_COLOURS[r] }} />
+                <span className="text-[var(--text-secondary)]">{r}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Rating distribution pie */}
+        <div className="bg-[var(--bg-secondary)] rounded-xl p-4 border border-[var(--border)]">
+          <h2 className="text-lg font-semibold text-[var(--text-primary)] mb-1">Rating Distribution</h2>
+          <p className="text-xs text-[var(--text-secondary)] mb-4">
+            {data.total_operating} farms by resource quality rating
+          </p>
+          <ResponsiveContainer width="100%" height={280}>
+            <PieChart>
+              <Pie
+                data={pieData}
+                cx="50%"
+                cy="50%"
+                innerRadius={60}
+                outerRadius={100}
+                paddingAngle={2}
+                dataKey="value"
+                stroke="none"
+              >
+                {pieData.map((entry, i) => (
+                  <Cell key={`pie-${i}`} fill={entry.fill} />
+                ))}
+              </Pie>
+              <Tooltip
+                contentStyle={{ backgroundColor: 'var(--bg-primary)', border: '1px solid var(--border)', borderRadius: '8px' }}
+                formatter={(value, _name, props) => {
+                  const pct = ((Number(value) / data.total_operating) * 100).toFixed(0)
+                  return [`${value} farms (${pct}%)`, props.payload.name]
+                }}
+              />
+            </PieChart>
+          </ResponsiveContainer>
+          <div className="flex justify-center gap-4 mt-2">
+            {pieData.map(d => (
+              <div key={d.name} className="flex items-center gap-1.5 text-xs">
+                <span className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: d.fill }} />
+                <span className="text-[var(--text-secondary)]">{d.name}: {d.value}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Scatter plot: Capacity vs CF */}
+      <div className="bg-[var(--bg-secondary)] rounded-xl p-4 border border-[var(--border)]">
+        <h2 className="text-lg font-semibold text-[var(--text-primary)] mb-1">Capacity vs Capacity Factor</h2>
+        <p className="text-xs text-[var(--text-secondary)] mb-4">
+          Each dot is an operating farm. Colour indicates state. Hover for details.
+        </p>
+        <ResponsiveContainer width="100%" height={360}>
+          <ScatterChart margin={{ top: 10, right: 20, bottom: 20, left: 20 }}>
+            <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" />
+            <XAxis
+              dataKey="x" type="number" name="Capacity"
+              tick={{ fill: 'var(--text-secondary)', fontSize: 12 }}
+              label={{ value: 'Capacity (MW)', position: 'insideBottom', offset: -10, fill: 'var(--text-secondary)', fontSize: 12 }}
+            />
+            <YAxis
+              dataKey="y" type="number" name="Capacity Factor"
+              tick={{ fill: 'var(--text-secondary)', fontSize: 12 }}
+              tickFormatter={(v) => `${v}%`}
+              label={{ value: 'Capacity Factor %', angle: -90, position: 'insideLeft', fill: 'var(--text-secondary)', fontSize: 12 }}
+            />
+            <Tooltip
+              content={({ payload }) => {
+                if (!payload?.length) return null
+                const d = payload[0].payload as WindResourceFarm
+                return (
+                  <div className="bg-[var(--bg-primary)] border border-[var(--border)] rounded-lg p-3 shadow-lg text-sm">
+                    <div className="font-semibold text-[var(--text-primary)]">{d.name}</div>
+                    <div className="text-[var(--text-secondary)]">
+                      {d.state} — {fmtMw(d.capacity_mw)}
+                    </div>
+                    <div className="text-[var(--text-secondary)]">
+                      CF: {fmtCf(d.capacity_factor_pct)} — {d.resource_rating}
+                    </div>
+                    <div className="text-[var(--text-secondary)]">
+                      Price: {fmtPrice(d.energy_price)}/MWh — Revenue: {fmtRevenue(d.revenue_per_mw)}/MW
+                    </div>
+                  </div>
+                )
+              }}
+            />
+            <Scatter data={scatterData}>
+              {scatterData.map((entry, index) => (
+                <Cell key={`scatter-${index}`} fill={entry.colour} fillOpacity={0.7} />
+              ))}
+            </Scatter>
+          </ScatterChart>
+        </ResponsiveContainer>
+        {/* State legend */}
+        <div className="flex flex-wrap justify-center gap-3 mt-2">
+          {availableStates.map(state => (
+            <div key={state} className="flex items-center gap-1.5 text-xs">
+              <span className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: getStateColour(state) }} />
+              <span className="text-[var(--text-secondary)]">{state}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Operating farms table */}
+      <div className="bg-[var(--bg-secondary)] rounded-xl border border-[var(--border)] overflow-x-auto">
+        <div className="p-4 border-b border-[var(--border)]">
+          <h2 className="text-lg font-semibold text-[var(--text-primary)]">Operating Wind Farms</h2>
+          <p className="text-xs text-[var(--text-secondary)] mt-1">
+            Showing {sorted.length} of {data.total_operating} farms. Click column headers to sort.
+          </p>
+        </div>
+        <table className="w-full text-sm">
+          <thead>
+            <tr className="border-b border-[var(--border)]">
+              {([
+                ['name', 'Name', 'text-left', ''],
+                ['state', 'State', 'text-left', 'hidden sm:table-cell'],
+                ['capacity_mw', 'Capacity', 'text-right', ''],
+                ['capacity_factor_pct', 'CF %', 'text-right', ''],
+                ['resource_rating', 'Rating', 'text-center', 'hidden sm:table-cell'],
+                ['energy_price', 'Price $/MWh', 'text-right', 'hidden md:table-cell'],
+                ['revenue_per_mw', 'Revenue/MW', 'text-right', 'hidden md:table-cell'],
+              ] as [SortField, string, string, string][]).map(([field, label, align, hide]) => (
+                <th
+                  key={field}
+                  onClick={() => handleSort(field)}
+                  className={`${align} p-3 text-[var(--text-secondary)] font-medium cursor-pointer hover:text-[var(--text-primary)] select-none ${hide}`}
+                >
+                  {label}
+                  {sortField === field && (
+                    <span className="ml-1">
+                      {sortDir === 'desc' ? <SortDownIcon /> : <SortUpIcon />}
+                    </span>
+                  )}
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {sorted.map(farm => (
+              <tr key={farm.project_id} className="border-b border-[var(--border)] hover:bg-[var(--bg-primary)]/50">
+                <td className="p-3">
+                  <Link
+                    to={`/projects/wind/${farm.project_id}?from=intelligence/wind-resource&fromLabel=Back to Wind Resource`}
+                    className="text-[var(--color-primary)] hover:underline font-medium"
+                  >
+                    {farm.name}
+                  </Link>
+                </td>
+                <td className="p-3 hidden sm:table-cell">
+                  <span className="text-xs font-medium px-1.5 py-0.5 rounded" style={{ backgroundColor: `${getStateColour(farm.state)}33`, color: getStateColour(farm.state) }}>
+                    {farm.state}
+                  </span>
+                </td>
+                <td className="p-3 text-right text-[var(--text-primary)]">{fmtMw(farm.capacity_mw)}</td>
+                <td className="p-3 text-right font-mono text-[var(--text-primary)]">{fmtCf(farm.capacity_factor_pct)}</td>
+                <td className="p-3 text-center hidden sm:table-cell">
+                  <span
+                    className="px-2 py-0.5 rounded-full text-xs font-semibold"
+                    style={{
+                      backgroundColor: `${getRatingColour(farm.resource_rating)}33`,
+                      color: getRatingColour(farm.resource_rating),
+                    }}
+                  >
+                    {farm.resource_rating}
+                  </span>
+                </td>
+                <td className="p-3 text-right text-[var(--text-secondary)] hidden md:table-cell">{fmtPrice(farm.energy_price)}</td>
+                <td className="p-3 text-right text-[var(--text-primary)] hidden md:table-cell">{fmtRevenue(farm.revenue_per_mw)}</td>
+              </tr>
+            ))}
+            {sorted.length === 0 && (
+              <tr>
+                <td colSpan={7} className="p-8 text-center text-[var(--text-secondary)]">
+                  No farms match the current filters.
+                </td>
+              </tr>
+            )}
+          </tbody>
+        </table>
+        <div className="px-3 py-2 text-xs text-[var(--text-secondary)] border-t border-[var(--border)]">
+          Showing {sorted.length} of {data.total_operating} operating wind farms
+        </div>
+      </div>
+
+      {/* Development predictions */}
+      <div className="bg-[var(--bg-secondary)] rounded-xl border border-[var(--border)] overflow-x-auto">
+        <div className="p-4 border-b border-[var(--border)]">
+          <h2 className="text-lg font-semibold text-[var(--text-primary)]">Development Pipeline Predictions</h2>
+          <p className="text-xs text-[var(--text-secondary)] mt-1">
+            Predicted capacity factors for {data.total_development} development-stage wind projects
+          </p>
+        </div>
+        <table className="w-full text-sm">
+          <thead>
+            <tr className="border-b border-[var(--border)]">
+              <th className="text-left p-3 text-[var(--text-secondary)] font-medium">Name</th>
+              <th className="text-left p-3 text-[var(--text-secondary)] font-medium hidden sm:table-cell">State</th>
+              <th className="text-right p-3 text-[var(--text-secondary)] font-medium">Capacity</th>
+              <th className="text-right p-3 text-[var(--text-secondary)] font-medium">Predicted CF</th>
+              <th className="text-center p-3 text-[var(--text-secondary)] font-medium hidden sm:table-cell">Rating</th>
+              <th className="text-left p-3 text-[var(--text-secondary)] font-medium hidden md:table-cell">Basis</th>
+            </tr>
+          </thead>
+          <tbody>
+            {data.development_projects.map(proj => (
+              <tr key={proj.project_id} className="border-b border-[var(--border)] hover:bg-[var(--bg-primary)]/50">
+                <td className="p-3">
+                  <Link
+                    to={`/projects/wind/${proj.project_id}?from=intelligence/wind-resource&fromLabel=Back to Wind Resource`}
+                    className="text-[var(--color-primary)] hover:underline font-medium"
+                  >
+                    {proj.name}
+                  </Link>
+                </td>
+                <td className="p-3 hidden sm:table-cell">
+                  <span className="text-xs font-medium px-1.5 py-0.5 rounded" style={{ backgroundColor: `${getStateColour(proj.state)}33`, color: getStateColour(proj.state) }}>
+                    {proj.state}
+                  </span>
+                </td>
+                <td className="p-3 text-right text-[var(--text-primary)]">{fmtMw(proj.capacity_mw)}</td>
+                <td className="p-3 text-right font-mono text-[var(--text-primary)]">{fmtCf(proj.predicted_cf_pct)}</td>
+                <td className="p-3 text-center hidden sm:table-cell">
+                  <span
+                    className="px-2 py-0.5 rounded-full text-xs font-semibold"
+                    style={{
+                      backgroundColor: `${getRatingColour(proj.predicted_rating)}33`,
+                      color: getRatingColour(proj.predicted_rating),
+                    }}
+                  >
+                    {proj.predicted_rating}
+                  </span>
+                </td>
+                <td className="p-3 text-[var(--text-secondary)] text-xs hidden md:table-cell">{proj.basis}</td>
+              </tr>
+            ))}
+            {data.development_projects.length === 0 && (
+              <tr>
+                <td colSpan={6} className="p-8 text-center text-[var(--text-secondary)]">
+                  No development projects available.
+                </td>
+              </tr>
+            )}
+          </tbody>
+        </table>
+        <div className="px-3 py-2 text-xs text-[var(--text-secondary)] border-t border-[var(--border)]">
+          {data.total_development} development projects
+        </div>
+      </div>
+
+      {/* Source note */}
+      <div className="text-xs text-[var(--text-secondary)] italic">
+        Capacity factors derived from AEMO generation data. Resource ratings: Excellent (&gt;35%),
+        Good (30-35%), Average (25-30%), Below Average (&lt;25%). Development predictions based on
+        nearby operating farm performance and REZ benchmarks.
+      </div>
+    </div>
+  )
+}

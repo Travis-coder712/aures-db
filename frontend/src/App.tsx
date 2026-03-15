@@ -24,6 +24,15 @@ import MapView from './pages/MapView'
 import DataSources from './pages/DataSources'
 import BESSCapex from './pages/BESSCapex'
 import ProjectTimeline from './pages/ProjectTimeline'
+import IntelligenceHub from './pages/IntelligenceHub'
+import SchemeRisk from './pages/intelligence/SchemeRisk'
+import DriftAnalysis from './pages/intelligence/DriftAnalysis'
+import WindResource from './pages/intelligence/WindResource'
+import Dunkelflaute from './pages/intelligence/Dunkelflaute'
+import EnergyMix from './pages/intelligence/EnergyMix'
+import DeveloperScores from './pages/intelligence/DeveloperScores'
+import RevenueIntel from './pages/intelligence/RevenueIntel'
+import GridConnection from './pages/intelligence/GridConnection'
 import NotFound from './pages/NotFound'
 
 function App() {
@@ -61,6 +70,16 @@ function App() {
         {/* Analytics */}
         <Route path="analytics/bess-capex" element={<BESSCapex />} />
         <Route path="analytics/project-timeline" element={<ProjectTimeline />} />
+        {/* Intelligence Layer */}
+        <Route path="intelligence" element={<IntelligenceHub />} />
+        <Route path="intelligence/scheme-risk" element={<SchemeRisk />} />
+        <Route path="intelligence/drift-analysis" element={<DriftAnalysis />} />
+        <Route path="intelligence/wind-resource" element={<WindResource />} />
+        <Route path="intelligence/dunkelflaute" element={<Dunkelflaute />} />
+        <Route path="intelligence/energy-mix" element={<EnergyMix />} />
+        <Route path="intelligence/developer-scores" element={<DeveloperScores />} />
+        <Route path="intelligence/revenue" element={<RevenueIntel />} />
+        <Route path="intelligence/grid-connection" element={<GridConnection />} />
         {/* Admin */}
         <Route path="data-sources" element={<DataSources />} />
         {/* Future routes */}

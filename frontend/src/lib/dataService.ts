@@ -5,7 +5,7 @@
  * In production (GitHub Pages), they're served as static files.
  * In development (Vite dev server), they're served from the public/ directory.
  */
-import type { ProjectSummary, Project, Technology, ProjectStatus, State, LeagueTable, LeagueTableIndex, LeagueTechnology, DeveloperIndex, OEMIndex, ContractorIndex, OfftakerIndex, MapProject, CODDriftData, DataSourcesIndex, BESSCapexData, ProjectTimelineData } from './types'
+import type { ProjectSummary, Project, Technology, ProjectStatus, State, LeagueTable, LeagueTableIndex, LeagueTechnology, DeveloperIndex, OEMIndex, ContractorIndex, OfftakerIndex, MapProject, CODDriftData, DataSourcesIndex, BESSCapexData, ProjectTimelineData, SchemeRiskData, DriftAnalysisData, WindResourceData, DunkelflaunteData, EnergyMixData, DeveloperScoreData, RevenueIntelData, GridConnectionData } from './types'
 
 const BASE = import.meta.env.BASE_URL + 'data'
 
@@ -307,4 +307,96 @@ export async function fetchDataSources(): Promise<DataSourcesIndex | null> {
   } catch {
     return null
   }
+}
+
+// ============================================================
+// Intelligence Layer
+// ============================================================
+
+let schemeRiskCache: SchemeRiskData | null = null
+export async function fetchSchemeRisk(): Promise<SchemeRiskData | null> {
+  if (schemeRiskCache) return schemeRiskCache
+  try {
+    const resp = await fetch(`${BASE}/analytics/intelligence/scheme-risk.json`)
+    if (!resp.ok) return null
+    schemeRiskCache = (await resp.json()) as SchemeRiskData
+    return schemeRiskCache
+  } catch { return null }
+}
+
+let driftAnalysisCache: DriftAnalysisData | null = null
+export async function fetchDriftAnalysis(): Promise<DriftAnalysisData | null> {
+  if (driftAnalysisCache) return driftAnalysisCache
+  try {
+    const resp = await fetch(`${BASE}/analytics/intelligence/drift-analysis.json`)
+    if (!resp.ok) return null
+    driftAnalysisCache = (await resp.json()) as DriftAnalysisData
+    return driftAnalysisCache
+  } catch { return null }
+}
+
+let windResourceCache: WindResourceData | null = null
+export async function fetchWindResource(): Promise<WindResourceData | null> {
+  if (windResourceCache) return windResourceCache
+  try {
+    const resp = await fetch(`${BASE}/analytics/intelligence/wind-resource.json`)
+    if (!resp.ok) return null
+    windResourceCache = (await resp.json()) as WindResourceData
+    return windResourceCache
+  } catch { return null }
+}
+
+let dunkelflaunteCache: DunkelflaunteData | null = null
+export async function fetchDunkelflaute(): Promise<DunkelflaunteData | null> {
+  if (dunkelflaunteCache) return dunkelflaunteCache
+  try {
+    const resp = await fetch(`${BASE}/analytics/intelligence/dunkelflaute.json`)
+    if (!resp.ok) return null
+    dunkelflaunteCache = (await resp.json()) as DunkelflaunteData
+    return dunkelflaunteCache
+  } catch { return null }
+}
+
+let energyMixCache: EnergyMixData | null = null
+export async function fetchEnergyMix(): Promise<EnergyMixData | null> {
+  if (energyMixCache) return energyMixCache
+  try {
+    const resp = await fetch(`${BASE}/analytics/intelligence/energy-mix.json`)
+    if (!resp.ok) return null
+    energyMixCache = (await resp.json()) as EnergyMixData
+    return energyMixCache
+  } catch { return null }
+}
+
+let developerScoresCache: DeveloperScoreData | null = null
+export async function fetchDeveloperScores(): Promise<DeveloperScoreData | null> {
+  if (developerScoresCache) return developerScoresCache
+  try {
+    const resp = await fetch(`${BASE}/analytics/intelligence/developer-scores.json`)
+    if (!resp.ok) return null
+    developerScoresCache = (await resp.json()) as DeveloperScoreData
+    return developerScoresCache
+  } catch { return null }
+}
+
+let revenueIntelCache: RevenueIntelData | null = null
+export async function fetchRevenueIntel(): Promise<RevenueIntelData | null> {
+  if (revenueIntelCache) return revenueIntelCache
+  try {
+    const resp = await fetch(`${BASE}/analytics/intelligence/revenue-intel.json`)
+    if (!resp.ok) return null
+    revenueIntelCache = (await resp.json()) as RevenueIntelData
+    return revenueIntelCache
+  } catch { return null }
+}
+
+let gridConnectionCache: GridConnectionData | null = null
+export async function fetchGridConnection(): Promise<GridConnectionData | null> {
+  if (gridConnectionCache) return gridConnectionCache
+  try {
+    const resp = await fetch(`${BASE}/analytics/intelligence/grid-connection.json`)
+    if (!resp.ok) return null
+    gridConnectionCache = (await resp.json()) as GridConnectionData
+    return gridConnectionCache
+  } catch { return null }
 }

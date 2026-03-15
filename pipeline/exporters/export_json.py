@@ -14,6 +14,7 @@ Produces:
 import json
 import os
 import re
+import statistics
 import sys
 from collections import defaultdict
 from datetime import datetime
@@ -286,6 +287,9 @@ def export_all(db_path=DB_PATH):
 
     # 14. Project timeline analytics
     export_project_timeline(conn)
+
+    # 17. Intelligence Layer
+    export_intelligence(conn)
 
     # 15. Export metadata
     write_json(os.path.join(DATA_DIR, 'metadata', 'last-export.json'), {
@@ -1264,6 +1268,1037 @@ def export_data_sources(conn):
         'exported_at': datetime.now().isoformat(),
     })
     print(f"  metadata/data-sources.json ({len(sources)} sources)")
+
+
+# ---------------------------------------------------------------------------
+# Intelligence Layer exports
+# ---------------------------------------------------------------------------
+
+INTEL_DIR = os.path.join(DATA_DIR, 'analytics', 'intelligence')
+
+
+def _months_between(date_a, date_b):
+    """Return months between two date strings. Positive if b > a."""
+    try:
+        da = _parse_date_loose(date_a)
+        db = _parse_date_loose(date_b)
+        if da is None or db is None:
+            return None
+        return round((db - da).days / 30.44)
+    except Exception:
+        return None
+
+
+def _parse_date_loose(s):
+    """Parse various date formats into a datetime, or None."""
+    if not s:
+        return None
+    s = str(s).strip()
+    # Strip parenthetical suffixes like '2026 (Stage 1)' or '2017-12 (Phase 1)'
+    s = re.sub(r'\s*\(.*?\)\s*$', '', s)
+    # Handle 'Q3 2021' style
+    qm = re.match(r'Q(\d)\s*(\d{4})', s)
+    if qm:
+        q, y = int(qm.group(1)), int(qm.group(2))
+        month = (q - 1) * 3 + 2  # middle of quarter
+        return datetime(y, month, 1)
+    for fmt in ('%Y-%m-%d', '%Y-%m', '%Y'):
+        try:
+            return datetime.strptime(s[:10], fmt)
+        except ValueError:
+            continue
+    return None
+
+
+def _capacity_band(mw):
+    """Classify capacity into small/medium/large."""
+    if mw is None:
+        return 'unknown'
+    if mw < 50:
+        return 'small'
+    elif mw < 200:
+        return 'medium'
+    else:
+        return 'large'
+
+
+def _stats_summary(values):
+    """Return dict with count, mean, median, p25, p75 for a list of numbers."""
+    vals = [v for v in values if v is not None]
+    if not vals:
+        return {'count': 0, 'mean': None, 'median': None, 'p25': None, 'p75': None}
+    vals_sorted = sorted(vals)
+    n = len(vals_sorted)
+    return {
+        'count': n,
+        'mean': round(sum(vals) / n, 1),
+        'median': round(statistics.median(vals), 1),
+        'p25': round(vals_sorted[max(0, n // 4 - 1)], 1) if n >= 4 else round(vals_sorted[0], 1),
+        'p75': round(vals_sorted[min(n - 1, 3 * n // 4)], 1) if n >= 4 else round(vals_sorted[-1], 1),
+    }
+
+
+def _risk_level(score):
+    if score >= 60:
+        return 'red'
+    elif score >= 30:
+        return 'amber'
+    return 'green'
+
+
+def _cf_rating(cf):
+    """Rate capacity factor for wind."""
+    if cf is None:
+        return 'Unknown'
+    if cf >= 35:
+        return 'Excellent'
+    elif cf >= 28:
+        return 'Good'
+    elif cf >= 22:
+        return 'Average'
+    return 'Below Average'
+
+
+def _grade(score):
+    """Score 0-100 to letter grade."""
+    if score >= 85:
+        return 'A'
+    elif score >= 70:
+        return 'B'
+    elif score >= 55:
+        return 'C'
+    elif score >= 40:
+        return 'D'
+    return 'F'
+
+
+# ---- 1. Scheme Risk -------------------------------------------------------
+
+def export_scheme_risk(conn):
+    """Analyse risk for projects with government scheme contracts."""
+    rows = conn.execute("""
+        SELECT sc.id as contract_id, sc.scheme, sc.round, sc.project_id,
+               p.name, p.status, p.technology, p.capacity_mw,
+               p.cod_current, p.cod_original, p.current_developer,
+               p.storage_mwh
+        FROM scheme_contracts sc
+        JOIN projects p ON p.id = sc.project_id
+    """).fetchall()
+
+    # Gather timeline events for FID and construction_start
+    event_map = defaultdict(dict)
+    for ev in conn.execute("""
+        SELECT project_id, event_type, date
+        FROM timeline_events
+        WHERE event_type IN ('fid', 'construction_start', 'cod', 'planning_approved')
+    """).fetchall():
+        event_map[ev['project_id']][ev['event_type']] = ev['date']
+
+    projects = {}
+    for r in rows:
+        pid = r['project_id']
+        events = event_map.get(pid, {})
+        has_fid = 'fid' in events
+        has_construction = 'construction_start' in events
+
+        drift = _months_between(r['cod_original'], r['cod_current']) if r['cod_original'] and r['cod_current'] else 0
+        drift = drift or 0
+
+        # Risk scoring (0-100)
+        risk_score = 0
+        # No FID yet for non-operating project
+        if not has_fid and r['status'] not in ('operating', 'commissioning'):
+            risk_score += 25
+        # COD drift
+        if drift > 24:
+            risk_score += 30
+        elif drift > 12:
+            risk_score += 20
+        elif drift > 6:
+            risk_score += 10
+        # Still in development
+        if r['status'] == 'development':
+            risk_score += 20
+        elif r['status'] == 'construction':
+            risk_score += 5
+        # Large project premium
+        if r['capacity_mw'] and r['capacity_mw'] > 500:
+            risk_score += 10
+        # No construction start for non-operating
+        if not has_construction and r['status'] not in ('operating', 'commissioning'):
+            risk_score += 15
+
+        risk_score = min(risk_score, 100)
+
+        entry = {
+            'project_id': pid,
+            'name': r['name'],
+            'scheme': r['scheme'],
+            'round': r['round'],
+            'technology': r['technology'],
+            'status': r['status'],
+            'capacity_mw': r['capacity_mw'],
+            'storage_mwh': r['storage_mwh'],
+            'developer': r['current_developer'],
+            'cod_current': r['cod_current'],
+            'cod_original': r['cod_original'],
+            'cod_drift_months': drift,
+            'has_fid': has_fid,
+            'has_construction_start': has_construction,
+            'risk_score': risk_score,
+            'risk_level': _risk_level(risk_score),
+        }
+
+        # Aggregate per project (may have multiple contracts)
+        if pid not in projects:
+            projects[pid] = entry
+            projects[pid]['schemes'] = [{'scheme': r['scheme'], 'round': r['round']}]
+        else:
+            projects[pid]['schemes'].append({'scheme': r['scheme'], 'round': r['round']})
+            # Take the higher risk
+            if risk_score > projects[pid]['risk_score']:
+                projects[pid]['risk_score'] = risk_score
+                projects[pid]['risk_level'] = _risk_level(risk_score)
+
+    project_list = sorted(projects.values(), key=lambda x: -x['risk_score'])
+
+    # Summary by risk level
+    summary = {'red': 0, 'amber': 0, 'green': 0}
+    for p in project_list:
+        summary[p['risk_level']] += 1
+
+    # Summary by scheme
+    by_scheme = defaultdict(lambda: {'count': 0, 'avg_risk': 0, 'total_mw': 0})
+    for p in project_list:
+        for s in p['schemes']:
+            key = s['scheme']
+            by_scheme[key]['count'] += 1
+            by_scheme[key]['avg_risk'] += p['risk_score']
+            by_scheme[key]['total_mw'] += p['capacity_mw'] or 0
+    for k in by_scheme:
+        if by_scheme[k]['count']:
+            by_scheme[k]['avg_risk'] = round(by_scheme[k]['avg_risk'] / by_scheme[k]['count'], 1)
+        by_scheme[k]['total_mw'] = round(by_scheme[k]['total_mw'], 1)
+
+    output = {
+        'projects': project_list,
+        'summary': summary,
+        'by_scheme': dict(by_scheme),
+        'total_projects': len(project_list),
+        'exported_at': datetime.now().isoformat(),
+    }
+    path = os.path.join(INTEL_DIR, 'scheme-risk.json')
+    write_json(path, clean_none_values(output))
+    print(f"  analytics/intelligence/scheme-risk.json ({len(project_list)} projects)")
+
+
+# ---- 2. Drift Analysis ----------------------------------------------------
+
+def export_drift_analysis(conn):
+    """Comprehensive COD drift analysis across all projects."""
+    rows = conn.execute("""
+        SELECT id, name, technology, status, state, capacity_mw,
+               cod_current, cod_original, current_developer
+        FROM projects
+        WHERE cod_current IS NOT NULL AND cod_original IS NOT NULL
+    """).fetchall()
+
+    projects = []
+    by_tech = defaultdict(list)
+    by_state = defaultdict(list)
+    by_band = defaultdict(list)
+    by_developer = defaultdict(list)
+    by_year = defaultdict(list)
+
+    for r in rows:
+        drift = _months_between(r['cod_original'], r['cod_current'])
+        if drift is None:
+            continue
+
+        entry = {
+            'project_id': r['id'],
+            'name': r['name'],
+            'technology': r['technology'],
+            'status': r['status'],
+            'state': r['state'],
+            'capacity_mw': r['capacity_mw'],
+            'drift_months': drift,
+            'cod_current': r['cod_current'],
+            'cod_original': r['cod_original'],
+            'developer': r['current_developer'],
+        }
+        projects.append(entry)
+
+        by_tech[r['technology']].append(drift)
+        if r['state']:
+            by_state[r['state']].append(drift)
+        by_band[_capacity_band(r['capacity_mw'])].append(drift)
+        if r['current_developer']:
+            by_developer[r['current_developer']].append(drift)
+
+        # Group by cod_original year
+        orig_dt = _parse_date_loose(r['cod_original'])
+        if orig_dt:
+            by_year[orig_dt.year].append(drift)
+
+    # Grouped statistics
+    tech_stats = {k: _stats_summary(v) for k, v in sorted(by_tech.items())}
+    state_stats = {k: _stats_summary(v) for k, v in sorted(by_state.items())}
+    band_stats = {k: _stats_summary(v) for k, v in sorted(by_band.items())}
+
+    # Developer ranking (min 3 projects)
+    dev_ranking = []
+    for dev, drifts in sorted(by_developer.items()):
+        if len(drifts) >= 3:
+            dev_ranking.append({
+                'developer': dev,
+                **_stats_summary(drifts),
+                'on_time_pct': round(100 * sum(1 for d in drifts if d <= 0) / len(drifts), 1),
+            })
+    dev_ranking.sort(key=lambda x: x['median'] if x['median'] is not None else 999)
+
+    # Trend by original COD year
+    year_trend = []
+    for yr in sorted(by_year.keys()):
+        year_trend.append({
+            'year': yr,
+            **_stats_summary(by_year[yr]),
+        })
+
+    output = {
+        'projects': sorted(projects, key=lambda x: -abs(x['drift_months'])),
+        'by_technology': tech_stats,
+        'by_state': state_stats,
+        'by_capacity_band': band_stats,
+        'developer_ranking': dev_ranking,
+        'year_trend': year_trend,
+        'total_projects': len(projects),
+        'overall': _stats_summary([p['drift_months'] for p in projects]),
+        'exported_at': datetime.now().isoformat(),
+    }
+    path = os.path.join(INTEL_DIR, 'drift-analysis.json')
+    write_json(path, clean_none_values(output))
+    print(f"  analytics/intelligence/drift-analysis.json ({len(projects)} projects)")
+
+
+# ---- 3. Wind Resource ------------------------------------------------------
+
+def export_wind_resource(conn):
+    """Wind farm capacity factor benchmarks and resource rating."""
+    # Operating wind farms with 2024 performance
+    operating = conn.execute("""
+        SELECT p.id, p.name, p.state, p.rez, p.capacity_mw,
+               p.latitude, p.longitude,
+               pa.capacity_factor_pct, pa.energy_price_received, pa.revenue_per_mw
+        FROM projects p
+        JOIN performance_annual pa ON pa.project_id = p.id
+        WHERE p.technology = 'wind' AND p.status = 'operating'
+              AND pa.year = 2024 AND pa.capacity_factor_pct IS NOT NULL
+    """).fetchall()
+
+    # State and REZ benchmarks
+    by_state = defaultdict(list)
+    by_rez = defaultdict(list)
+    farms = []
+
+    for r in operating:
+        cf = r['capacity_factor_pct']
+        entry = {
+            'project_id': r['id'],
+            'name': r['name'],
+            'state': r['state'],
+            'rez': r['rez'],
+            'capacity_mw': r['capacity_mw'],
+            'latitude': r['latitude'],
+            'longitude': r['longitude'],
+            'capacity_factor_pct': round(cf, 2) if cf else None,
+            'energy_price': r['energy_price_received'],
+            'revenue_per_mw': r['revenue_per_mw'],
+            'resource_rating': _cf_rating(cf),
+        }
+        farms.append(entry)
+        if r['state']:
+            by_state[r['state']].append(cf)
+        if r['rez']:
+            by_rez[r['rez']].append(cf)
+
+    state_benchmarks = {}
+    for st, cfs in sorted(by_state.items()):
+        state_benchmarks[st] = {
+            **_stats_summary(cfs),
+            'rating': _cf_rating(statistics.median(cfs) if cfs else None),
+        }
+
+    rez_benchmarks = {}
+    for rz, cfs in sorted(by_rez.items()):
+        rez_benchmarks[rz] = {
+            **_stats_summary(cfs),
+            'rating': _cf_rating(statistics.median(cfs) if cfs else None),
+        }
+
+    # Development wind projects — assign predicted CF from state average
+    dev_wind = conn.execute("""
+        SELECT id, name, state, rez, capacity_mw, latitude, longitude
+        FROM projects
+        WHERE technology = 'wind' AND status IN ('development', 'construction')
+    """).fetchall()
+
+    development_projects = []
+    for r in dev_wind:
+        state_avg = None
+        if r['state'] and r['state'] in state_benchmarks:
+            state_avg = state_benchmarks[r['state']]['mean']
+        development_projects.append({
+            'project_id': r['id'],
+            'name': r['name'],
+            'state': r['state'],
+            'rez': r['rez'],
+            'capacity_mw': r['capacity_mw'],
+            'latitude': r['latitude'],
+            'longitude': r['longitude'],
+            'predicted_cf_pct': round(state_avg, 1) if state_avg else None,
+            'predicted_rating': _cf_rating(state_avg),
+            'basis': 'state_average',
+        })
+
+    output = {
+        'operating_farms': sorted(farms, key=lambda x: -(x['capacity_factor_pct'] or 0)),
+        'state_benchmarks': state_benchmarks,
+        'rez_benchmarks': rez_benchmarks,
+        'development_projects': development_projects,
+        'total_operating': len(farms),
+        'total_development': len(development_projects),
+        'exported_at': datetime.now().isoformat(),
+    }
+    path = os.path.join(INTEL_DIR, 'wind-resource.json')
+    write_json(path, clean_none_values(output))
+    print(f"  analytics/intelligence/wind-resource.json ({len(farms)} operating, {len(development_projects)} development)")
+
+
+# ---- 4. Dunkelflaute -------------------------------------------------------
+
+def export_dunkelflaute(conn):
+    """Renewable generation adequacy and BESS coverage analysis by state."""
+    # Wind + solar performance by state and year
+    perf_rows = conn.execute("""
+        SELECT p.state, p.technology, pa.year,
+               SUM(pa.energy_mwh) as total_energy,
+               AVG(pa.capacity_factor_pct) as avg_cf,
+               SUM(p.capacity_mw) as total_mw
+        FROM performance_annual pa
+        JOIN projects p ON p.id = pa.project_id
+        WHERE p.technology IN ('wind', 'solar') AND p.state IS NOT NULL
+              AND pa.capacity_factor_pct IS NOT NULL
+        GROUP BY p.state, p.technology, pa.year
+    """).fetchall()
+
+    # Build state x year x tech matrix
+    matrix = defaultdict(lambda: defaultdict(dict))
+    for r in perf_rows:
+        matrix[r['state']][r['year']][r['technology']] = {
+            'avg_cf_pct': round(r['avg_cf'], 2) if r['avg_cf'] else None,
+            'total_energy_mwh': round(r['total_energy'], 0) if r['total_energy'] else None,
+            'total_mw': round(r['total_mw'], 1) if r['total_mw'] else None,
+        }
+
+    # Combined renewable CF by state/year
+    state_year_combined = []
+    for state in sorted(matrix.keys()):
+        for year in sorted(matrix[state].keys()):
+            wind = matrix[state][year].get('wind', {})
+            solar = matrix[state][year].get('solar', {})
+            wind_cf = wind.get('avg_cf_pct')
+            solar_cf = solar.get('avg_cf_pct')
+            wind_mw = wind.get('total_mw', 0) or 0
+            solar_mw = solar.get('total_mw', 0) or 0
+            total_mw = wind_mw + solar_mw
+
+            # Weighted combined CF
+            combined_cf = None
+            if total_mw > 0:
+                combined_cf = round(
+                    ((wind_cf or 0) * wind_mw + (solar_cf or 0) * solar_mw) / total_mw, 2
+                )
+
+            state_year_combined.append({
+                'state': state,
+                'year': year,
+                'wind_cf_pct': wind_cf,
+                'solar_cf_pct': solar_cf,
+                'combined_cf_pct': combined_cf,
+                'wind_mw': round(wind_mw, 1),
+                'solar_mw': round(solar_mw, 1),
+            })
+
+    # Identify lowest combined CF periods (potential dunkelflaute indicators)
+    sorted_periods = sorted(
+        [p for p in state_year_combined if p['combined_cf_pct'] is not None],
+        key=lambda x: x['combined_cf_pct']
+    )
+    lowest_periods = sorted_periods[:10]
+
+    # BESS coverage by state
+    bess_rows = conn.execute("""
+        SELECT state,
+               SUM(capacity_mw) as total_mw,
+               SUM(storage_mwh) as total_mwh,
+               COUNT(*) as count
+        FROM projects
+        WHERE technology = 'bess' AND status = 'operating' AND state IS NOT NULL
+        GROUP BY state
+    """).fetchall()
+
+    # Peak demand estimates by state (approximate NEM values in MW)
+    peak_demand = {
+        'NSW': 14000, 'VIC': 10000, 'QLD': 10000,
+        'SA': 3500, 'TAS': 1800, 'WA': 4500,
+    }
+
+    bess_coverage = {}
+    for r in bess_rows:
+        state = r['state']
+        total_mwh = r['total_mwh'] or 0
+        total_mw = r['total_mw'] or 0
+        peak = peak_demand.get(state, 5000)
+        coverage_hours = round(total_mwh / peak, 2) if peak > 0 else 0
+        bess_coverage[state] = {
+            'bess_count': r['count'],
+            'bess_mw': round(total_mw, 1),
+            'bess_mwh': round(total_mwh, 1),
+            'peak_demand_mw_est': peak,
+            'coverage_hours': coverage_hours,
+            'coverage_rating': 'Good' if coverage_hours >= 2 else ('Moderate' if coverage_hours >= 1 else 'Low'),
+        }
+
+    # Pipeline BESS
+    pipeline_bess = conn.execute("""
+        SELECT state,
+               SUM(capacity_mw) as total_mw,
+               SUM(storage_mwh) as total_mwh,
+               COUNT(*) as count
+        FROM projects
+        WHERE technology = 'bess' AND status IN ('construction', 'development')
+              AND state IS NOT NULL
+        GROUP BY state
+    """).fetchall()
+
+    bess_pipeline = {}
+    for r in pipeline_bess:
+        bess_pipeline[r['state']] = {
+            'count': r['count'],
+            'mw': round(r['total_mw'] or 0, 1),
+            'mwh': round(r['total_mwh'] or 0, 1),
+        }
+
+    output = {
+        'state_year_performance': state_year_combined,
+        'lowest_cf_periods': lowest_periods,
+        'bess_coverage': bess_coverage,
+        'bess_pipeline': bess_pipeline,
+        'peak_demand_estimates': peak_demand,
+        'exported_at': datetime.now().isoformat(),
+    }
+    path = os.path.join(INTEL_DIR, 'dunkelflaute.json')
+    write_json(path, clean_none_values(output))
+    print(f"  analytics/intelligence/dunkelflaute.json ({len(state_year_combined)} state-year records)")
+
+
+# ---- 5. Energy Mix ----------------------------------------------------------
+
+def export_energy_mix(conn):
+    """Current and projected energy capacity mix by state and technology."""
+    # Operating capacity
+    operating = conn.execute("""
+        SELECT state, technology,
+               COUNT(*) as count,
+               SUM(capacity_mw) as total_mw,
+               SUM(storage_mwh) as total_mwh
+        FROM projects
+        WHERE status = 'operating' AND state IS NOT NULL
+        GROUP BY state, technology
+    """).fetchall()
+
+    current_mix = defaultdict(dict)
+    for r in operating:
+        current_mix[r['state']][r['technology']] = {
+            'count': r['count'],
+            'mw': round(r['total_mw'] or 0, 1),
+            'mwh': round(r['total_mwh'] or 0, 1) if r['total_mwh'] else None,
+        }
+
+    # Pipeline by state x technology x cod year
+    pipeline = conn.execute("""
+        SELECT state, technology, status,
+               SUBSTR(cod_current, 1, 4) as cod_year,
+               COUNT(*) as count,
+               SUM(capacity_mw) as total_mw
+        FROM projects
+        WHERE status IN ('construction', 'development', 'commissioning')
+              AND state IS NOT NULL
+        GROUP BY state, technology, status, cod_year
+    """).fetchall()
+
+    pipeline_data = []
+    for r in pipeline:
+        pipeline_data.append({
+            'state': r['state'],
+            'technology': r['technology'],
+            'status': r['status'],
+            'cod_year': r['cod_year'],
+            'count': r['count'],
+            'mw': round(r['total_mw'] or 0, 1),
+        })
+
+    # Forward projection: cumulative capacity by technology by year
+    all_projects = conn.execute("""
+        SELECT technology, status, capacity_mw,
+               SUBSTR(cod_current, 1, 4) as cod_year
+        FROM projects
+        WHERE capacity_mw IS NOT NULL
+    """).fetchall()
+
+    # Sum operating capacity by tech
+    operating_by_tech = defaultdict(float)
+    future_by_tech_year = defaultdict(lambda: defaultdict(float))
+
+    for r in all_projects:
+        tech = r['technology']
+        mw = r['capacity_mw'] or 0
+        if r['status'] == 'operating':
+            operating_by_tech[tech] += mw
+        elif r['cod_year'] and r['status'] in ('construction', 'commissioning', 'development'):
+            try:
+                yr = int(r['cod_year'])
+                future_by_tech_year[tech][yr] += mw
+            except (ValueError, TypeError):
+                pass
+
+    # Build projection
+    projection = {}
+    current_year = datetime.now().year
+    for tech in sorted(set(list(operating_by_tech.keys()) + list(future_by_tech_year.keys()))):
+        cumulative = round(operating_by_tech.get(tech, 0), 1)
+        yearly = [{'year': 'current', 'cumulative_mw': cumulative}]
+        for yr in range(current_year, current_year + 8):
+            added = future_by_tech_year.get(tech, {}).get(yr, 0)
+            cumulative = round(cumulative + added, 1)
+            yearly.append({'year': yr, 'added_mw': round(added, 1), 'cumulative_mw': cumulative})
+        projection[tech] = yearly
+
+    # State totals
+    state_totals = {}
+    for state in sorted(current_mix.keys()):
+        total_mw = sum(v.get('mw', 0) for v in current_mix[state].values())
+        state_totals[state] = {
+            'operating_mw': round(total_mw, 1),
+            'technologies': dict(current_mix[state]),
+        }
+
+    output = {
+        'current_mix': dict(current_mix),
+        'state_totals': state_totals,
+        'pipeline': pipeline_data,
+        'projection': projection,
+        'exported_at': datetime.now().isoformat(),
+    }
+    path = os.path.join(INTEL_DIR, 'energy-mix.json')
+    write_json(path, clean_none_values(output))
+    print(f"  analytics/intelligence/energy-mix.json ({len(current_mix)} states)")
+
+
+# ---- 6. Developer Scores ---------------------------------------------------
+
+def export_developer_scores(conn):
+    """Developer execution scoring based on delivery track record."""
+    rows = conn.execute("""
+        SELECT id, current_developer, technology, status, capacity_mw,
+               cod_current, cod_original
+        FROM projects
+        WHERE current_developer IS NOT NULL
+    """).fetchall()
+
+    dev_data = defaultdict(lambda: {
+        'projects': [], 'drifts': [], 'statuses': [],
+        'total_mw': 0, 'technologies': set(),
+    })
+
+    for r in rows:
+        dev = r['current_developer']
+        drift = _months_between(r['cod_original'], r['cod_current']) if r['cod_original'] and r['cod_current'] else None
+
+        dev_data[dev]['projects'].append(r['id'])
+        if drift is not None:
+            dev_data[dev]['drifts'].append(drift)
+        dev_data[dev]['statuses'].append(r['status'])
+        dev_data[dev]['total_mw'] += r['capacity_mw'] or 0
+        dev_data[dev]['technologies'].add(r['technology'])
+
+    # Only include developers with 2+ projects
+    developers = []
+    all_drifts = []
+    all_on_time = []
+
+    for dev, data in sorted(dev_data.items()):
+        count = len(data['projects'])
+        if count < 2:
+            continue
+
+        drifts = data['drifts']
+        statuses = data['statuses']
+        operating = sum(1 for s in statuses if s == 'operating')
+        withdrawn = sum(1 for s in statuses if s == 'withdrawn')
+        completion_rate = round(100 * operating / count, 1) if count else 0
+
+        avg_drift = round(sum(drifts) / len(drifts), 1) if drifts else None
+        on_time_pct = round(100 * sum(1 for d in drifts if d <= 0) / len(drifts), 1) if drifts else None
+
+        if avg_drift is not None:
+            all_drifts.append(avg_drift)
+        if on_time_pct is not None:
+            all_on_time.append(on_time_pct)
+
+        # Composite execution score (0-100)
+        # Factors: avg_drift (weight 0.4), on_time_pct (0.3), completion_rate (0.3)
+        score = 50  # base
+        if avg_drift is not None:
+            # 0 drift = +40, 6 months = +20, 12 months = 0, 24+ = -20
+            drift_component = max(0, min(40, 40 - (avg_drift * 40 / 24)))
+            score = drift_component
+        else:
+            drift_component = 20  # neutral if no data
+            score = drift_component
+
+        if on_time_pct is not None:
+            score += on_time_pct * 0.3
+        else:
+            score += 15  # neutral
+
+        score += completion_rate * 0.3
+        score = round(max(0, min(100, score)), 1)
+
+        developers.append({
+            'developer': dev,
+            'project_count': count,
+            'total_mw': round(data['total_mw'], 1),
+            'technologies': sorted(data['technologies']),
+            'operating': operating,
+            'withdrawn': withdrawn,
+            'completion_rate': completion_rate,
+            'avg_drift_months': avg_drift,
+            'on_time_pct': on_time_pct,
+            'execution_score': score,
+            'grade': _grade(score),
+            'drift_stats': _stats_summary(drifts) if drifts else None,
+        })
+
+    developers.sort(key=lambda x: -x['execution_score'])
+
+    # Industry averages
+    industry_avg = {
+        'avg_drift_months': round(sum(all_drifts) / len(all_drifts), 1) if all_drifts else None,
+        'avg_on_time_pct': round(sum(all_on_time) / len(all_on_time), 1) if all_on_time else None,
+        'developer_count': len(developers),
+    }
+
+    # Grade distribution
+    grade_dist = defaultdict(int)
+    for d in developers:
+        grade_dist[d['grade']] += 1
+
+    output = {
+        'developers': developers,
+        'industry_averages': industry_avg,
+        'grade_distribution': dict(grade_dist),
+        'total_developers': len(developers),
+        'exported_at': datetime.now().isoformat(),
+    }
+    path = os.path.join(INTEL_DIR, 'developer-scores.json')
+    write_json(path, clean_none_values(output))
+    print(f"  analytics/intelligence/developer-scores.json ({len(developers)} developers)")
+
+
+# ---- 7. Revenue Intel -------------------------------------------------------
+
+def export_revenue_intel(conn):
+    """Revenue analysis by technology, year, with offtake comparison."""
+    # Revenue metrics by technology and year
+    perf_rows = conn.execute("""
+        SELECT p.id, p.technology, p.name, pa.year,
+               pa.capacity_factor_pct, pa.revenue_per_mw,
+               pa.energy_price_received, pa.revenue_aud,
+               pa.avg_charge_price, pa.avg_discharge_price,
+               pa.utilisation_pct, pa.cycles
+        FROM performance_annual pa
+        JOIN projects p ON p.id = pa.project_id
+        WHERE pa.year IS NOT NULL
+    """).fetchall()
+
+    # Build tech x year groupings
+    by_tech_year = defaultdict(lambda: {
+        'revenue_per_mw': [], 'energy_price': [], 'cf': [],
+        'discharge_price': [], 'charge_price': [], 'spreads': [],
+    })
+
+    for r in perf_rows:
+        key = (r['technology'], r['year'])
+        if r['revenue_per_mw'] is not None:
+            by_tech_year[key]['revenue_per_mw'].append(r['revenue_per_mw'])
+        if r['energy_price_received'] is not None:
+            by_tech_year[key]['energy_price'].append(r['energy_price_received'])
+        if r['capacity_factor_pct'] is not None:
+            by_tech_year[key]['cf'].append(r['capacity_factor_pct'])
+        if r['avg_discharge_price'] is not None:
+            by_tech_year[key]['discharge_price'].append(r['avg_discharge_price'])
+        if r['avg_charge_price'] is not None:
+            by_tech_year[key]['charge_price'].append(r['avg_charge_price'])
+        if r['avg_discharge_price'] is not None and r['avg_charge_price'] is not None:
+            by_tech_year[key]['spreads'].append(r['avg_discharge_price'] - r['avg_charge_price'])
+
+    tech_year_stats = []
+    for (tech, year), data in sorted(by_tech_year.items()):
+        entry = {
+            'technology': tech,
+            'year': year,
+            'revenue_per_mw': _stats_summary(data['revenue_per_mw']),
+            'energy_price': _stats_summary(data['energy_price']),
+            'capacity_factor': _stats_summary(data['cf']),
+        }
+        if data['spreads']:
+            entry['bess_spread'] = _stats_summary(data['spreads'])
+        if data['discharge_price']:
+            entry['discharge_price'] = _stats_summary(data['discharge_price'])
+        if data['charge_price']:
+            entry['charge_price'] = _stats_summary(data['charge_price'])
+        tech_year_stats.append(entry)
+
+    # YoY trends by technology
+    yoy_trends = defaultdict(list)
+    tech_years = defaultdict(dict)
+    for entry in tech_year_stats:
+        tech = entry['technology']
+        yr = entry['year']
+        tech_years[tech][yr] = entry['revenue_per_mw'].get('median')
+
+    for tech, years in sorted(tech_years.items()):
+        sorted_years = sorted(years.keys())
+        for i, yr in enumerate(sorted_years):
+            trend_entry = {'year': yr, 'median_rpm': years[yr]}
+            if i > 0 and years.get(sorted_years[i - 1]) and years[yr]:
+                prev = years[sorted_years[i - 1]]
+                trend_entry['yoy_change_pct'] = round(100 * (years[yr] - prev) / abs(prev), 1) if prev else None
+            yoy_trends[tech].append(trend_entry)
+
+    # Projects with vs without offtakes
+    offtake_projects = set()
+    for row in conn.execute("SELECT DISTINCT project_id FROM offtakes").fetchall():
+        offtake_projects.add(row['project_id'])
+
+    with_offtake = {'revenue_per_mw': [], 'energy_price': []}
+    without_offtake = {'revenue_per_mw': [], 'energy_price': []}
+
+    for r in perf_rows:
+        if r['year'] != 2024:
+            continue
+        target = with_offtake if r['id'] in offtake_projects else without_offtake
+        if r['revenue_per_mw'] is not None:
+            target['revenue_per_mw'].append(r['revenue_per_mw'])
+        if r['energy_price_received'] is not None:
+            target['energy_price'].append(r['energy_price_received'])
+
+    offtake_comparison = {
+        'year': 2024,
+        'with_offtake': {
+            'count': len(with_offtake['revenue_per_mw']),
+            'revenue_per_mw': _stats_summary(with_offtake['revenue_per_mw']),
+            'energy_price': _stats_summary(with_offtake['energy_price']),
+        },
+        'without_offtake': {
+            'count': len(without_offtake['revenue_per_mw']),
+            'revenue_per_mw': _stats_summary(without_offtake['revenue_per_mw']),
+            'energy_price': _stats_summary(without_offtake['energy_price']),
+        },
+    }
+
+    # Technology comparison (latest year with data)
+    tech_comparison = {}
+    for entry in tech_year_stats:
+        if entry['year'] == 2024:
+            tech_comparison[entry['technology']] = {
+                'revenue_per_mw': entry['revenue_per_mw'],
+                'energy_price': entry['energy_price'],
+                'capacity_factor': entry['capacity_factor'],
+            }
+            if 'bess_spread' in entry:
+                tech_comparison[entry['technology']]['bess_spread'] = entry['bess_spread']
+
+    output = {
+        'by_technology_year': tech_year_stats,
+        'yoy_trends': dict(yoy_trends),
+        'technology_comparison_2024': tech_comparison,
+        'offtake_comparison': offtake_comparison,
+        'exported_at': datetime.now().isoformat(),
+    }
+    path = os.path.join(INTEL_DIR, 'revenue-intel.json')
+    write_json(path, clean_none_values(output))
+    print(f"  analytics/intelligence/revenue-intel.json ({len(tech_year_stats)} tech-year records)")
+
+
+# ---- 8. Grid Connection -----------------------------------------------------
+
+def export_grid_connection(conn):
+    """REZ-level grid connection analysis and congestion scoring."""
+    # REZ breakdown
+    rez_rows = conn.execute("""
+        SELECT rez, technology, status,
+               COUNT(*) as count,
+               SUM(capacity_mw) as total_mw,
+               SUM(storage_mwh) as total_mwh
+        FROM projects
+        WHERE rez IS NOT NULL
+        GROUP BY rez, technology, status
+    """).fetchall()
+
+    rez_data = defaultdict(lambda: {
+        'technologies': defaultdict(lambda: defaultdict(lambda: {'count': 0, 'mw': 0})),
+        'total_mw': 0, 'total_count': 0,
+        'operating_mw': 0, 'pipeline_mw': 0,
+    })
+
+    for r in rez_rows:
+        rz = r['rez']
+        mw = r['total_mw'] or 0
+        rez_data[rz]['technologies'][r['technology']][r['status']]['count'] = r['count']
+        rez_data[rz]['technologies'][r['technology']][r['status']]['mw'] = round(mw, 1)
+        rez_data[rz]['total_mw'] += mw
+        rez_data[rz]['total_count'] += r['count']
+        if r['status'] == 'operating':
+            rez_data[rz]['operating_mw'] += mw
+        else:
+            rez_data[rz]['pipeline_mw'] += mw
+
+    # Connection status breakdown
+    conn_status_rows = conn.execute("""
+        SELECT rez, connection_status, COUNT(*) as count, SUM(capacity_mw) as total_mw
+        FROM projects
+        WHERE rez IS NOT NULL AND connection_status IS NOT NULL
+        GROUP BY rez, connection_status
+    """).fetchall()
+
+    conn_status_by_rez = defaultdict(dict)
+    for r in conn_status_rows:
+        conn_status_by_rez[r['rez']][r['connection_status']] = {
+            'count': r['count'],
+            'mw': round(r['total_mw'] or 0, 1),
+        }
+
+    # Build REZ summaries with congestion score
+    rez_summaries = []
+    for rz in sorted(rez_data.keys()):
+        data = rez_data[rz]
+        total_mw = round(data['total_mw'], 1)
+        pipeline_mw = round(data['pipeline_mw'], 1)
+        operating_mw = round(data['operating_mw'], 1)
+
+        # Congestion score: higher = more congested
+        # Based on pipeline-to-operating ratio and total project count
+        if operating_mw > 0:
+            ratio = pipeline_mw / operating_mw
+        else:
+            ratio = pipeline_mw / 100 if pipeline_mw > 0 else 0
+
+        congestion_score = min(100, round(
+            min(50, ratio * 15) +  # pipeline ratio contribution
+            min(30, data['total_count'] * 2) +  # project count contribution
+            min(20, pipeline_mw / 200)  # absolute pipeline size
+        , 1))
+
+        if congestion_score >= 70:
+            congestion_level = 'high'
+        elif congestion_score >= 40:
+            congestion_level = 'moderate'
+        else:
+            congestion_level = 'low'
+
+        # Flatten technologies for JSON
+        tech_breakdown = {}
+        for tech, statuses in data['technologies'].items():
+            tech_breakdown[tech] = {s: dict(v) for s, v in statuses.items()}
+
+        rez_summaries.append({
+            'rez': rz,
+            'total_mw': total_mw,
+            'operating_mw': operating_mw,
+            'pipeline_mw': pipeline_mw,
+            'project_count': data['total_count'],
+            'congestion_score': congestion_score,
+            'congestion_level': congestion_level,
+            'technologies': tech_breakdown,
+            'connection_status': dict(conn_status_by_rez.get(rz, {})),
+        })
+
+    rez_summaries.sort(key=lambda x: -x['congestion_score'])
+
+    # State summary
+    state_rez = defaultdict(lambda: {'rez_count': 0, 'total_mw': 0, 'pipeline_mw': 0, 'rezs': []})
+    for rz_entry in rez_summaries:
+        # Extract state from REZ ID (e.g. 'nsw-central-west-orana' -> 'NSW')
+        rz_id = rz_entry['rez']
+        state = None
+        for st in ['nsw', 'vic', 'qld', 'sa', 'tas', 'wa']:
+            if rz_id.lower().startswith(st):
+                state = st.upper()
+                break
+        if state:
+            state_rez[state]['rez_count'] += 1
+            state_rez[state]['total_mw'] += rz_entry['total_mw']
+            state_rez[state]['pipeline_mw'] += rz_entry['pipeline_mw']
+            state_rez[state]['rezs'].append(rz_entry['rez'])
+
+    for st in state_rez:
+        state_rez[st]['total_mw'] = round(state_rez[st]['total_mw'], 1)
+        state_rez[st]['pipeline_mw'] = round(state_rez[st]['pipeline_mw'], 1)
+
+    # Overall connection status
+    overall_conn = conn.execute("""
+        SELECT connection_status, COUNT(*) as count, SUM(capacity_mw) as total_mw
+        FROM projects
+        WHERE connection_status IS NOT NULL
+        GROUP BY connection_status
+    """).fetchall()
+
+    connection_summary = {}
+    for r in overall_conn:
+        connection_summary[r['connection_status']] = {
+            'count': r['count'],
+            'mw': round(r['total_mw'] or 0, 1),
+        }
+
+    output = {
+        'rez_summaries': rez_summaries,
+        'state_summary': dict(state_rez),
+        'connection_status_overall': connection_summary,
+        'total_rez_zones': len(rez_summaries),
+        'exported_at': datetime.now().isoformat(),
+    }
+    path = os.path.join(INTEL_DIR, 'grid-connection.json')
+    write_json(path, clean_none_values(output))
+    print(f"  analytics/intelligence/grid-connection.json ({len(rez_summaries)} REZ zones)")
+
+
+# ---- Intelligence Wrapper ---------------------------------------------------
+
+def export_intelligence(conn):
+    """Export all intelligence layer JSON files."""
+    print("\nIntelligence Layer:")
+    ensure_dir(INTEL_DIR)
+    export_scheme_risk(conn)
+    export_drift_analysis(conn)
+    export_wind_resource(conn)
+    export_dunkelflaute(conn)
+    export_energy_mix(conn)
+    export_developer_scores(conn)
+    export_revenue_intel(conn)
+    export_grid_connection(conn)
 
 
 if __name__ == '__main__':

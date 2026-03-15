@@ -1,0 +1,686 @@
+{
+  "by_technology_year": [
+    {
+      "technology": "bess",
+      "year": 2024,
+      "revenue_per_mw": {
+        "count": 17,
+        "mean": 117157.1,
+        "median": 87968.0,
+        "p25": 13018.0,
+        "p75": 133216.0
+      },
+      "energy_price": {
+        "count": 17,
+        "mean": 220.0,
+        "median": 152.8,
+        "p25": 122.0,
+        "p75": 280.4
+      },
+      "capacity_factor": {
+        "count": 17,
+        "mean": 6.3,
+        "median": 4.8,
+        "p25": 1.4,
+        "p75": 10.9
+      },
+      "bess_spread": {
+        "count": 16,
+        "mean": 243.8,
+        "median": 240.4,
+        "p25": 186.4,
+        "p75": 375.7
+      },
+      "discharge_price": {
+        "count": 16,
+        "mean": 289.6,
+        "median": 267.1,
+        "p25": 221.6,
+        "p75": 406.0
+      },
+      "charge_price": {
+        "count": 16,
+        "mean": 45.8,
+        "median": 39.1,
+        "p25": 17.7,
+        "p75": 74.9
+      }
+    },
+    {
+      "technology": "bess",
+      "year": 2025,
+      "revenue_per_mw": {
+        "count": 28,
+        "mean": 142659.2,
+        "median": 108301.5,
+        "p25": 22980.0,
+        "p75": 256374.0
+      },
+      "energy_price": {
+        "count": 28,
+        "mean": 204.8,
+        "median": 241.6,
+        "p25": 113.0,
+        "p75": 290.6
+      },
+      "capacity_factor": {
+        "count": 28,
+        "mean": 6.6,
+        "median": 5.4,
+        "p25": 1.9,
+        "p75": 11.2
+      },
+      "bess_spread": {
+        "count": 28,
+        "mean": 154.0,
+        "median": 187.5,
+        "p25": 87.4,
+        "p75": 221.4
+      },
+      "discharge_price": {
+        "count": 28,
+        "mean": 186.6,
+        "median": 220.4,
+        "p25": 102.4,
+        "p75": 254.3
+      },
+      "charge_price": {
+        "count": 28,
+        "mean": 32.6,
+        "median": 28.9,
+        "p25": 15.0,
+        "p75": 45.1
+      }
+    },
+    {
+      "technology": "bess",
+      "year": 2026,
+      "revenue_per_mw": {
+        "count": 29,
+        "mean": 30667.8,
+        "median": 24213.0,
+        "p25": 18030.0,
+        "p75": 41414.0
+      },
+      "energy_price": {
+        "count": 29,
+        "mean": 213.3,
+        "median": 155.8,
+        "p25": 105.9,
+        "p75": 296.6
+      },
+      "capacity_factor": {
+        "count": 29,
+        "mean": 11.4,
+        "median": 11.7,
+        "p25": 6.4,
+        "p75": 14.6
+      },
+      "bess_spread": {
+        "count": 29,
+        "mean": 174.1,
+        "median": 116.2,
+        "p25": 91.7,
+        "p75": 198.9
+      },
+      "discharge_price": {
+        "count": 29,
+        "mean": 194.3,
+        "median": 140.8,
+        "p25": 105.0,
+        "p75": 241.3
+      },
+      "charge_price": {
+        "count": 29,
+        "mean": 20.2,
+        "median": 22.7,
+        "p25": 3.1,
+        "p75": 30.5
+      }
+    },
+    {
+      "technology": "hybrid",
+      "year": 2024,
+      "revenue_per_mw": {
+        "count": 1,
+        "mean": 89055.0,
+        "median": 89055.0,
+        "p25": 89055.0,
+        "p75": 89055.0
+      },
+      "energy_price": {
+        "count": 1,
+        "mean": 81.8,
+        "median": 81.8,
+        "p25": 81.8,
+        "p75": 81.8
+      },
+      "capacity_factor": {
+        "count": 1,
+        "mean": 12.4,
+        "median": 12.4,
+        "p25": 12.4,
+        "p75": 12.4
+      }
+    },
+    {
+      "technology": "hybrid",
+      "year": 2025,
+      "revenue_per_mw": {
+        "count": 1,
+        "mean": 50972.0,
+        "median": 50972.0,
+        "p25": 50972.0,
+        "p75": 50972.0
+      },
+      "energy_price": {
+        "count": 1,
+        "mean": 42.4,
+        "median": 42.4,
+        "p25": 42.4,
+        "p75": 42.4
+      },
+      "capacity_factor": {
+        "count": 1,
+        "mean": 13.7,
+        "median": 13.7,
+        "p25": 13.7,
+        "p75": 13.7
+      }
+    },
+    {
+      "technology": "hybrid",
+      "year": 2026,
+      "revenue_per_mw": {
+        "count": 1,
+        "mean": 13484.0,
+        "median": 13484.0,
+        "p25": 13484.0,
+        "p75": 13484.0
+      },
+      "energy_price": {
+        "count": 1,
+        "mean": 47.7,
+        "median": 47.7,
+        "p25": 47.7,
+        "p75": 47.7
+      },
+      "capacity_factor": {
+        "count": 1,
+        "mean": 20.0,
+        "median": 20.0,
+        "p25": 20.0,
+        "p75": 20.0
+      }
+    },
+    {
+      "technology": "pumped_hydro",
+      "year": 2024,
+      "revenue_per_mw": {
+        "count": 33,
+        "mean": 303552.6,
+        "median": 289790.0,
+        "p25": 228181.0,
+        "p75": 338296.0
+      },
+      "energy_price": {
+        "count": 33,
+        "mean": 142.9,
+        "median": 121.2,
+        "p25": 109.4,
+        "p75": 146.5
+      },
+      "capacity_factor": {
+        "count": 33,
+        "mean": 27.5,
+        "median": 27.6,
+        "p25": 16.8,
+        "p75": 32.5
+      }
+    },
+    {
+      "technology": "pumped_hydro",
+      "year": 2025,
+      "revenue_per_mw": {
+        "count": 33,
+        "mean": 291590.9,
+        "median": 284716.0,
+        "p25": 193416.0,
+        "p75": 321206.0
+      },
+      "energy_price": {
+        "count": 33,
+        "mean": 129.8,
+        "median": 111.9,
+        "p25": 104.5,
+        "p75": 137.5
+      },
+      "capacity_factor": {
+        "count": 33,
+        "mean": 28.8,
+        "median": 27.6,
+        "p25": 18.1,
+        "p75": 35.4
+      }
+    },
+    {
+      "technology": "pumped_hydro",
+      "year": 2026,
+      "revenue_per_mw": {
+        "count": 33,
+        "mean": 36495.3,
+        "median": 28559.0,
+        "p25": 19187.0,
+        "p75": 46872.0
+      },
+      "energy_price": {
+        "count": 33,
+        "mean": 101.2,
+        "median": 94.8,
+        "p25": 79.0,
+        "p75": 104.0
+      },
+      "capacity_factor": {
+        "count": 33,
+        "mean": 27.9,
+        "median": 21.7,
+        "p25": 11.2,
+        "p75": 34.5
+      }
+    },
+    {
+      "technology": "solar",
+      "year": 2024,
+      "revenue_per_mw": {
+        "count": 73,
+        "mean": 92795.3,
+        "median": 87028.0,
+        "p25": 61107.0,
+        "p75": 130867.0
+      },
+      "energy_price": {
+        "count": 73,
+        "mean": 52.0,
+        "median": 52.2,
+        "p25": 33.8,
+        "p75": 69.0
+      },
+      "capacity_factor": {
+        "count": 73,
+        "mean": 20.0,
+        "median": 21.4,
+        "p25": 18.3,
+        "p75": 23.4
+      }
+    },
+    {
+      "technology": "solar",
+      "year": 2025,
+      "revenue_per_mw": {
+        "count": 78,
+        "mean": 61843.8,
+        "median": 58013.0,
+        "p25": 45081.0,
+        "p75": 78323.0
+      },
+      "energy_price": {
+        "count": 78,
+        "mean": 39.0,
+        "median": 39.4,
+        "p25": 23.6,
+        "p75": 47.4
+      },
+      "capacity_factor": {
+        "count": 78,
+        "mean": 19.2,
+        "median": 19.4,
+        "p25": 16.0,
+        "p75": 22.8
+      }
+    },
+    {
+      "technology": "solar",
+      "year": 2026,
+      "revenue_per_mw": {
+        "count": 78,
+        "mean": 16539.5,
+        "median": 16144.0,
+        "p25": 12398.0,
+        "p75": 20641.0
+      },
+      "energy_price": {
+        "count": 78,
+        "mean": 42.0,
+        "median": 40.7,
+        "p25": 35.2,
+        "p75": 49.8
+      },
+      "capacity_factor": {
+        "count": 78,
+        "mean": 28.7,
+        "median": 28.5,
+        "p25": 24.4,
+        "p75": 34.3
+      }
+    },
+    {
+      "technology": "wind",
+      "year": 2024,
+      "revenue_per_mw": {
+        "count": 80,
+        "mean": 188987.6,
+        "median": 171876.5,
+        "p25": 131056.0,
+        "p75": 248474.0
+      },
+      "energy_price": {
+        "count": 80,
+        "mean": 77.2,
+        "median": 70.7,
+        "p25": 57.6,
+        "p75": 98.4
+      },
+      "capacity_factor": {
+        "count": 80,
+        "mean": 27.5,
+        "median": 28.5,
+        "p25": 23.5,
+        "p75": 33.1
+      }
+    },
+    {
+      "technology": "wind",
+      "year": 2025,
+      "revenue_per_mw": {
+        "count": 80,
+        "mean": 174042.1,
+        "median": 156646.0,
+        "p25": 121140.0,
+        "p75": 233454.0
+      },
+      "energy_price": {
+        "count": 80,
+        "mean": 64.9,
+        "median": 65.6,
+        "p25": 48.2,
+        "p75": 78.3
+      },
+      "capacity_factor": {
+        "count": 80,
+        "mean": 30.5,
+        "median": 30.9,
+        "p25": 25.5,
+        "p75": 35.1
+      }
+    },
+    {
+      "technology": "wind",
+      "year": 2026,
+      "revenue_per_mw": {
+        "count": 80,
+        "mean": 30214.3,
+        "median": 28761.0,
+        "p25": 16876.0,
+        "p75": 39866.0
+      },
+      "energy_price": {
+        "count": 80,
+        "mean": 62.2,
+        "median": 57.8,
+        "p25": 42.8,
+        "p75": 70.9
+      },
+      "capacity_factor": {
+        "count": 80,
+        "mean": 33.5,
+        "median": 32.9,
+        "p25": 25.5,
+        "p75": 42.0
+      }
+    }
+  ],
+  "yoy_trends": {
+    "bess": [
+      {
+        "year": 2024,
+        "median_rpm": 87968.0
+      },
+      {
+        "year": 2025,
+        "median_rpm": 108301.5,
+        "yoy_change_pct": 23.1
+      },
+      {
+        "year": 2026,
+        "median_rpm": 24213.0,
+        "yoy_change_pct": -77.6
+      }
+    ],
+    "hybrid": [
+      {
+        "year": 2024,
+        "median_rpm": 89055.0
+      },
+      {
+        "year": 2025,
+        "median_rpm": 50972.0,
+        "yoy_change_pct": -42.8
+      },
+      {
+        "year": 2026,
+        "median_rpm": 13484.0,
+        "yoy_change_pct": -73.5
+      }
+    ],
+    "pumped_hydro": [
+      {
+        "year": 2024,
+        "median_rpm": 289790.0
+      },
+      {
+        "year": 2025,
+        "median_rpm": 284716.0,
+        "yoy_change_pct": -1.8
+      },
+      {
+        "year": 2026,
+        "median_rpm": 28559.0,
+        "yoy_change_pct": -90.0
+      }
+    ],
+    "solar": [
+      {
+        "year": 2024,
+        "median_rpm": 87028.0
+      },
+      {
+        "year": 2025,
+        "median_rpm": 58013.0,
+        "yoy_change_pct": -33.3
+      },
+      {
+        "year": 2026,
+        "median_rpm": 16144.0,
+        "yoy_change_pct": -72.2
+      }
+    ],
+    "wind": [
+      {
+        "year": 2024,
+        "median_rpm": 171876.5
+      },
+      {
+        "year": 2025,
+        "median_rpm": 156646.0,
+        "yoy_change_pct": -8.9
+      },
+      {
+        "year": 2026,
+        "median_rpm": 28761.0,
+        "yoy_change_pct": -81.6
+      }
+    ]
+  },
+  "technology_comparison_2024": {
+    "bess": {
+      "revenue_per_mw": {
+        "count": 17,
+        "mean": 117157.1,
+        "median": 87968.0,
+        "p25": 13018.0,
+        "p75": 133216.0
+      },
+      "energy_price": {
+        "count": 17,
+        "mean": 220.0,
+        "median": 152.8,
+        "p25": 122.0,
+        "p75": 280.4
+      },
+      "capacity_factor": {
+        "count": 17,
+        "mean": 6.3,
+        "median": 4.8,
+        "p25": 1.4,
+        "p75": 10.9
+      },
+      "bess_spread": {
+        "count": 16,
+        "mean": 243.8,
+        "median": 240.4,
+        "p25": 186.4,
+        "p75": 375.7
+      }
+    },
+    "hybrid": {
+      "revenue_per_mw": {
+        "count": 1,
+        "mean": 89055.0,
+        "median": 89055.0,
+        "p25": 89055.0,
+        "p75": 89055.0
+      },
+      "energy_price": {
+        "count": 1,
+        "mean": 81.8,
+        "median": 81.8,
+        "p25": 81.8,
+        "p75": 81.8
+      },
+      "capacity_factor": {
+        "count": 1,
+        "mean": 12.4,
+        "median": 12.4,
+        "p25": 12.4,
+        "p75": 12.4
+      }
+    },
+    "pumped_hydro": {
+      "revenue_per_mw": {
+        "count": 33,
+        "mean": 303552.6,
+        "median": 289790.0,
+        "p25": 228181.0,
+        "p75": 338296.0
+      },
+      "energy_price": {
+        "count": 33,
+        "mean": 142.9,
+        "median": 121.2,
+        "p25": 109.4,
+        "p75": 146.5
+      },
+      "capacity_factor": {
+        "count": 33,
+        "mean": 27.5,
+        "median": 27.6,
+        "p25": 16.8,
+        "p75": 32.5
+      }
+    },
+    "solar": {
+      "revenue_per_mw": {
+        "count": 73,
+        "mean": 92795.3,
+        "median": 87028.0,
+        "p25": 61107.0,
+        "p75": 130867.0
+      },
+      "energy_price": {
+        "count": 73,
+        "mean": 52.0,
+        "median": 52.2,
+        "p25": 33.8,
+        "p75": 69.0
+      },
+      "capacity_factor": {
+        "count": 73,
+        "mean": 20.0,
+        "median": 21.4,
+        "p25": 18.3,
+        "p75": 23.4
+      }
+    },
+    "wind": {
+      "revenue_per_mw": {
+        "count": 80,
+        "mean": 188987.6,
+        "median": 171876.5,
+        "p25": 131056.0,
+        "p75": 248474.0
+      },
+      "energy_price": {
+        "count": 80,
+        "mean": 77.2,
+        "median": 70.7,
+        "p25": 57.6,
+        "p75": 98.4
+      },
+      "capacity_factor": {
+        "count": 80,
+        "mean": 27.5,
+        "median": 28.5,
+        "p25": 23.5,
+        "p75": 33.1
+      }
+    }
+  },
+  "offtake_comparison": {
+    "year": 2024,
+    "with_offtake": {
+      "count": 47,
+      "revenue_per_mw": {
+        "count": 47,
+        "mean": 159702.7,
+        "median": 149477.0,
+        "p25": 89055.0,
+        "p75": 220821.0
+      },
+      "energy_price": {
+        "count": 47,
+        "mean": 93.3,
+        "median": 73.0,
+        "p25": 54.0,
+        "p75": 104.2
+      }
+    },
+    "without_offtake": {
+      "count": 157,
+      "revenue_per_mw": {
+        "count": 157,
+        "mean": 168694.3,
+        "median": 135259.0,
+        "p25": 83702.0,
+        "p75": 244149.0
+      },
+      "energy_price": {
+        "count": 157,
+        "mean": 90.0,
+        "median": 71.0,
+        "p25": 49.8,
+        "p75": 112.3
+      }
+    }
+  },
+  "exported_at": "2026-03-15T22:05:23.112694"
+}
