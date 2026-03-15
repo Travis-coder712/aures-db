@@ -33,6 +33,7 @@ import EnergyMix from './pages/intelligence/EnergyMix'
 import DeveloperScores from './pages/intelligence/DeveloperScores'
 import RevenueIntel from './pages/intelligence/RevenueIntel'
 import GridConnection from './pages/intelligence/GridConnection'
+import News from './pages/News'
 import NotFound from './pages/NotFound'
 
 function App() {
@@ -80,6 +81,8 @@ function App() {
         <Route path="intelligence/developer-scores" element={<DeveloperScores />} />
         <Route path="intelligence/revenue" element={<RevenueIntel />} />
         <Route path="intelligence/grid-connection" element={<GridConnection />} />
+        {/* News */}
+        <Route path="news" element={<News />} />
         {/* Admin */}
         <Route path="data-sources" element={<DataSources />} />
         {/* Future routes */}

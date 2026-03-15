@@ -291,6 +291,9 @@ def export_all(db_path=DB_PATH):
     # 17. Intelligence Layer
     export_intelligence(conn)
 
+    # 18. News articles
+    export_news(conn)
+
     # 15. Export metadata
     write_json(os.path.join(DATA_DIR, 'metadata', 'last-export.json'), {
         'exported_at': datetime.now().isoformat(),
@@ -1790,17 +1793,69 @@ def export_dunkelflaute(conn):
             'mwh': round(r['total_mwh'] or 0, 1),
         }
 
+    # ── Seasonal (monthly) CF analysis ──
+    seasonal_monthly = []
+    try:
+        monthly_rows = conn.execute("""
+            SELECT p.state, p.technology, pm.year, pm.month,
+                   AVG(pm.capacity_factor_pct) as avg_cf,
+                   SUM(p.capacity_mw) as total_mw
+            FROM performance_monthly pm
+            JOIN projects p ON p.id = pm.project_id
+            WHERE p.technology IN ('wind', 'solar') AND p.state IS NOT NULL
+                  AND pm.capacity_factor_pct IS NOT NULL
+                  AND pm.capacity_factor_pct > 0
+                  AND p.state IN ('NSW', 'QLD', 'VIC', 'SA', 'TAS')
+            GROUP BY p.state, p.technology, pm.year, pm.month
+        """).fetchall()
+
+        # Build state x year x month x tech matrix
+        monthly_matrix = defaultdict(lambda: defaultdict(lambda: defaultdict(dict)))
+        for r in monthly_rows:
+            monthly_matrix[r['state']][(r['year'], r['month'])][r['technology']] = {
+                'avg_cf_pct': round(r['avg_cf'], 1) if r['avg_cf'] else None,
+                'total_mw': round(r['total_mw'], 1) if r['total_mw'] else None,
+            }
+
+        for state in sorted(monthly_matrix.keys()):
+            for (year, month), techs in sorted(monthly_matrix[state].items()):
+                wind = techs.get('wind', {})
+                solar = techs.get('solar', {})
+                wind_cf = wind.get('avg_cf_pct') or 0
+                solar_cf = solar.get('avg_cf_pct') or 0
+                wind_mw = wind.get('total_mw') or 0
+                solar_mw = solar.get('total_mw') or 0
+                total_mw = wind_mw + solar_mw
+                combined_cf = None
+                if total_mw > 0:
+                    combined_cf = round(
+                        (wind_cf * wind_mw + solar_cf * solar_mw) / total_mw, 1
+                    )
+                seasonal_monthly.append({
+                    'state': state,
+                    'year': year,
+                    'month': month,
+                    'wind_cf': round(wind_cf, 1),
+                    'solar_cf': round(solar_cf, 1),
+                    'combined_cf': combined_cf,
+                    'wind_mw': round(wind_mw, 0),
+                    'solar_mw': round(solar_mw, 0),
+                })
+    except Exception as e:
+        print(f"    Warning: Could not export seasonal data: {e}")
+
     output = {
         'state_year_performance': state_year_combined,
         'lowest_cf_periods': lowest_periods,
         'bess_coverage': bess_coverage,
         'bess_pipeline': bess_pipeline,
         'peak_demand_estimates': peak_demand,
+        'seasonal_monthly': seasonal_monthly,
         'exported_at': datetime.now().isoformat(),
     }
     path = os.path.join(INTEL_DIR, 'dunkelflaute.json')
     write_json(path, clean_none_values(output))
-    print(f"  analytics/intelligence/dunkelflaute.json ({len(state_year_combined)} state-year records)")
+    print(f"  analytics/intelligence/dunkelflaute.json ({len(state_year_combined)} state-year, {len(seasonal_monthly)} monthly records)")
 
 
 # ---- 5. Energy Mix ----------------------------------------------------------
@@ -2299,6 +2354,57 @@ def export_intelligence(conn):
     export_developer_scores(conn)
     export_revenue_intel(conn)
     export_grid_connection(conn)
+
+
+# ---- News Export -----------------------------------------------------------
+
+def export_news(conn):
+    """Export latest news articles to JSON."""
+    # Check if news_articles table exists
+    table_check = conn.execute(
+        "SELECT name FROM sqlite_master WHERE type='table' AND name='news_articles'"
+    ).fetchone()
+    if not table_check:
+        print("\nNews: skipped (table not created yet — run import_news_rss.py first)")
+        return
+
+    rows = conn.execute("""
+        SELECT title, url, source, published_date, summary, matched_project_ids
+        FROM news_articles
+        ORDER BY published_date DESC
+        LIMIT 100
+    """).fetchall()
+
+    articles = []
+    for r in rows:
+        article = {
+            'title': r['title'],
+            'url': r['url'],
+            'source': r['source'],
+            'published_date': r['published_date'],
+            'summary': r['summary'],
+            'matched_project_ids': json.loads(r['matched_project_ids']) if r['matched_project_ids'] else [],
+        }
+        articles.append(article)
+
+    # Source stats
+    source_counts = {}
+    for a in articles:
+        src = a['source']
+        source_counts[src] = source_counts.get(src, 0) + 1
+
+    output = {
+        'articles': articles,
+        'source_counts': source_counts,
+        'total_articles': len(articles),
+        'exported_at': datetime.now().isoformat(),
+    }
+
+    news_dir = os.path.join(DATA_DIR, 'news')
+    ensure_dir(news_dir)
+    path = os.path.join(news_dir, 'latest.json')
+    write_json(path, output)
+    print(f"\nNews: news/latest.json ({len(articles)} articles)")
 
 
 if __name__ == '__main__':

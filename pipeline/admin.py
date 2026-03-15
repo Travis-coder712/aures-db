@@ -30,6 +30,7 @@ STEPS = [
     ("Confidence Scoring", "processors/compute_confidence.py", [], None),
     ("League Tables", "processors/compute_league_tables.py", [], None),
     ("Offtake Research (seed)", "research/research_offtakes.py", ["--seed"], "offtake_research"),
+    ("News RSS Feed", "importers/import_news_rss.py", [], "news_rss"),
     ("JSON Export", "exporters/export_json.py", [], None),
 ]
 
@@ -40,6 +41,7 @@ FREQUENCY_THRESHOLDS = {
     "openelectricity_metadata": 100,
     "epbc_referrals": 35,
     "offtake_research": 35,
+    "news_rss": 7,
 }
 
 
@@ -163,12 +165,51 @@ def run_all():
     print()
 
 
+def run_auto():
+    """Run only pipeline steps that are due based on frequency thresholds."""
+    print("\n🤖 Auto mode — running only steps that are due...\n")
+    runs = get_status()
+    results = []
+
+    for i, (label, script, step_args, source_id) in enumerate(STEPS):
+        if source_id is None:
+            # Always run processors and export
+            success = run_step(i)
+            results.append((label, success, 'always'))
+            continue
+
+        threshold = FREQUENCY_THRESHOLDS.get(source_id, 999)
+        run = runs.get(source_id)
+        days = days_since(run.get('completed_at') or run.get('started_at')) if run else None
+
+        if days is None or days >= threshold:
+            reason = f"never run" if days is None else f"{days}d since last (threshold: {threshold}d)"
+            print(f"  📋 {label}: DUE — {reason}")
+            success = run_step(i)
+            results.append((label, success, reason))
+        else:
+            print(f"  ⏭️  {label}: skipping — {days}d since last (threshold: {threshold}d)")
+            results.append((label, True, 'skipped'))
+
+    print(f"\n{'='*60}")
+    print("  Auto Pipeline Summary")
+    print(f"{'='*60}")
+    for label, success, reason in results:
+        if reason == 'skipped':
+            print(f"  ⏭️  {label} (skipped — not due)")
+        else:
+            icon = "✅" if success else "❌"
+            print(f"  {icon} {label}")
+    print()
+
+
 def main():
     import argparse
     parser = argparse.ArgumentParser(description="AURES Data Admin")
     parser.add_argument('--status', action='store_true', help='Show status and exit')
     parser.add_argument('--run', type=int, help='Run step N (1-9)')
     parser.add_argument('--all', action='store_true', help='Run all steps')
+    parser.add_argument('--auto', action='store_true', help='Run only steps that are due (for cron/automation)')
     args = parser.parse_args()
 
     if args.status:
@@ -180,6 +221,10 @@ def main():
             run_step(args.run - 1)
         else:
             print(f"Invalid step: {args.run}. Must be 1-{len(STEPS)}")
+        return
+
+    if args.auto:
+        run_auto()
         return
 
     if args.all:

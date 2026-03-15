@@ -1,10 +1,11 @@
 import { useState, useEffect, useMemo } from 'react'
+import { Link } from 'react-router-dom'
 import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip,
   ResponsiveContainer, LineChart, Line, Legend, ReferenceLine, Cell,
 } from 'recharts'
 import { fetchDunkelflaute } from '../../lib/dataService'
-import type { DunkelflaunteData, StateYearPerformance } from '../../lib/types'
+import type { DunkelflaunteData, StateYearPerformance, SeasonalMonthly } from '../../lib/types'
 
 // ============================================================
 // Icons — defined BEFORE const arrays (Vite HMR issue)
@@ -72,7 +73,7 @@ const COVERAGE_COLORS: Record<string, string> = {
 // Helpers
 // ============================================================
 
-function fmtPct(v: number | undefined): string {
+function fmtPct(v: number | undefined | null): string {
   if (v == null) return 'N/A'
   return `${v.toFixed(1)}%`
 }
@@ -103,6 +104,7 @@ export default function Dunkelflaute() {
   const [data, setData] = useState<DunkelflaunteData | null>(null)
   const [loading, setLoading] = useState(true)
   const [selectedYear, setSelectedYear] = useState<number>(2024)
+  const [seasonalState, setSeasonalState] = useState<string>('NSW')
 
   useEffect(() => {
     fetchDunkelflaute().then(d => { setData(d ?? null); setLoading(false) })
@@ -194,6 +196,41 @@ export default function Dunkelflaute() {
     return data.lowest_cf_periods[0]
   }, [data])
 
+  // Seasonal monthly data for selected state — shows monthly CF across years
+  const MONTH_NAMES = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+  const seasonalChartData = useMemo(() => {
+    if (!data?.seasonal_monthly) return []
+    const stateData = data.seasonal_monthly.filter(r => r.state === seasonalState)
+    // Build month-based chart: { month: 'Jan', '2024_wind': 29.4, '2024_solar': 28.1, '2024_combined': 28.7, ... }
+    const byMonth: Record<number, Record<string, number>> = {}
+    for (const r of stateData) {
+      if (!byMonth[r.month]) byMonth[r.month] = {}
+      byMonth[r.month][`${r.year}_wind`] = r.wind_cf
+      byMonth[r.month][`${r.year}_solar`] = r.solar_cf
+      if (r.combined_cf != null) byMonth[r.month][`${r.year}_combined`] = r.combined_cf
+    }
+    return Array.from({ length: 12 }, (_, i) => ({
+      month: MONTH_NAMES[i],
+      monthNum: i + 1,
+      ...byMonth[i + 1],
+    }))
+  }, [data, seasonalState])
+
+  // Identify worst months across all states (dunkelflaute detection)
+  const worstMonths = useMemo(() => {
+    if (!data?.seasonal_monthly) return []
+    return [...data.seasonal_monthly]
+      .filter(r => r.combined_cf != null)
+      .sort((a, b) => (a.combined_cf ?? 99) - (b.combined_cf ?? 99))
+      .slice(0, 10) as SeasonalMonthly[]
+  }, [data])
+
+  // Years available in seasonal data
+  const seasonalYears = useMemo(() => {
+    if (!data?.seasonal_monthly) return []
+    return Array.from(new Set(data.seasonal_monthly.map(r => r.year))).sort()
+  }, [data])
+
   // Avg BESS coverage hours
   const avgCoverage = useMemo(() => {
     if (!data) return 0
@@ -219,7 +256,7 @@ export default function Dunkelflaute() {
     return (
       <div className="px-4 lg:px-8 py-6 max-w-6xl mx-auto">
         <h1 className="text-xl lg:text-2xl font-bold text-[var(--color-text)] mb-4">Dunkelflaute Monitor</h1>
-        <div className="bg-[var(--bg-secondary)] rounded-xl p-8 border border-[var(--border)] text-center">
+        <div className="bg-[var(--color-bg-card)] rounded-xl p-8 border border-[var(--color-border)] text-center">
           <AlertIcon />
           <p className="text-sm text-[var(--color-text-muted)] mt-2">No dunkelflaute data available.</p>
         </div>
@@ -238,7 +275,7 @@ export default function Dunkelflaute() {
       </div>
 
       {/* ── 1. Concept Explainer ── */}
-      <div className="bg-[var(--bg-secondary)] rounded-xl p-4 border border-[var(--border)]">
+      <div className="bg-[var(--color-bg-card)] rounded-xl p-4 border border-[var(--color-border)]">
         <div className="flex items-start gap-3">
           <div className="text-amber-400 mt-0.5"><WindIcon /></div>
           <div>
@@ -255,10 +292,21 @@ export default function Dunkelflaute() {
         </div>
       </div>
 
+      {/* ── Why it matters (collapsible) ── */}
+      <details className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl p-4 mb-6">
+        <summary className="text-sm font-medium text-[var(--color-text)] cursor-pointer">Why does this matter for Australia?</summary>
+        <div className="mt-3 text-xs text-[var(--color-text-muted)] space-y-2">
+          <p>As coal plants retire and the grid becomes more dependent on wind and solar, periods of low renewable output become critical reliability risks. During a Dunkelflaute, the grid must rely on dispatchable generation — primarily gas and batteries.</p>
+          <p>The capacity factor data here shows how severe these low-output periods have been historically. States with lower combined capacity factors during their worst periods are more vulnerable.</p>
+          <p><strong>BESS coverage</strong> shows how many hours of peak demand each state's current battery fleet could sustain. Current coverage is very low (under 1 hour in all states), highlighting the urgency of the large BESS pipeline.</p>
+          <p><strong>The 25% threshold</strong> for combined wind+solar capacity factor is used as a stress indicator — periods below this level represent significant renewable energy drought conditions.</p>
+        </div>
+      </details>
+
       {/* ── 2. Summary Cards ── */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         {/* Lowest CF */}
-        <div className="bg-[var(--bg-secondary)] rounded-xl p-4 border border-[var(--border)]">
+        <div className="bg-[var(--color-bg-card)] rounded-xl p-4 border border-[var(--color-border)]">
           <div className="flex items-center gap-2 text-red-400 mb-2">
             <AlertIcon />
             <span className="text-xs font-medium uppercase tracking-wide">Lowest Combined CF</span>
@@ -276,7 +324,7 @@ export default function Dunkelflaute() {
         </div>
 
         {/* Avg BESS Coverage */}
-        <div className="bg-[var(--bg-secondary)] rounded-xl p-4 border border-[var(--border)]">
+        <div className="bg-[var(--color-bg-card)] rounded-xl p-4 border border-[var(--color-border)]">
           <div className="flex items-center gap-2 text-amber-400 mb-2">
             <BatteryIcon />
             <span className="text-xs font-medium uppercase tracking-wide">Avg BESS Coverage</span>
@@ -288,7 +336,7 @@ export default function Dunkelflaute() {
         </div>
 
         {/* Pipeline */}
-        <div className="bg-[var(--bg-secondary)] rounded-xl p-4 border border-[var(--border)]">
+        <div className="bg-[var(--color-bg-card)] rounded-xl p-4 border border-[var(--color-border)]">
           <div className="flex items-center gap-2 text-emerald-400 mb-2">
             <BoltIcon />
             <span className="text-xs font-medium uppercase tracking-wide">BESS Pipeline</span>
@@ -304,7 +352,7 @@ export default function Dunkelflaute() {
       </div>
 
       {/* ── 3. State Performance by Year ── */}
-      <div className="bg-[var(--bg-secondary)] rounded-xl p-4 border border-[var(--border)]">
+      <div className="bg-[var(--color-bg-card)] rounded-xl p-4 border border-[var(--color-border)]">
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-sm font-semibold text-[var(--color-text)]">State Capacity Factor by Resource</h2>
           <div className="flex gap-1">
@@ -315,7 +363,7 @@ export default function Dunkelflaute() {
                 className={`px-3 py-1 text-xs rounded-lg transition-colors ${
                   selectedYear === y
                     ? 'bg-blue-600 text-white'
-                    : 'bg-[var(--bg-tertiary)] text-[var(--color-text-muted)] hover:text-[var(--color-text)]'
+                    : 'bg-[var(--color-bg-elevated)] text-[var(--color-text-muted)] hover:text-[var(--color-text)]'
                 }`}
               >
                 {y}
@@ -352,7 +400,7 @@ export default function Dunkelflaute() {
       </div>
 
       {/* ── 4. Year Trend by State (Combined CF) ── */}
-      <div className="bg-[var(--bg-secondary)] rounded-xl p-4 border border-[var(--border)]">
+      <div className="bg-[var(--color-bg-card)] rounded-xl p-4 border border-[var(--color-border)]">
         <h2 className="text-sm font-semibold text-[var(--color-text)] mb-4">Combined CF Trend by State</h2>
         <ResponsiveContainer width="100%" height={300}>
           <LineChart data={lineChartData}>
@@ -392,8 +440,188 @@ export default function Dunkelflaute() {
         </p>
       </div>
 
-      {/* ── 5. BESS Coverage ── */}
-      <div className="bg-[var(--bg-secondary)] rounded-xl p-4 border border-[var(--border)]">
+      {/* ── 5. Seasonal Trends ── */}
+      {data.seasonal_monthly && data.seasonal_monthly.length > 0 && (
+        <>
+          <div className="bg-[var(--color-bg-card)] rounded-xl p-4 border border-[var(--color-border)]">
+            <div className="flex items-center justify-between mb-4 flex-wrap gap-2">
+              <h2 className="text-sm font-semibold text-[var(--color-text)]">Seasonal Capacity Factor Trends</h2>
+              <div className="flex gap-1">
+                {STATE_ORDER.map(st => (
+                  <button
+                    key={st}
+                    onClick={() => setSeasonalState(st)}
+                    className={`px-3 py-1 text-xs rounded-lg transition-colors ${
+                      seasonalState === st
+                        ? 'text-white'
+                        : 'bg-[var(--color-bg-elevated)] text-[var(--color-text-muted)] hover:text-[var(--color-text)]'
+                    }`}
+                    style={seasonalState === st ? { backgroundColor: STATE_COLORS[st] } : undefined}
+                  >
+                    {st}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Combined CF by month — overlaying years */}
+            <p className="text-xs text-[var(--color-text-muted)] mb-3">
+              Combined wind+solar capacity factor by month — winter drops reveal Dunkelflaute vulnerability
+            </p>
+            <ResponsiveContainer width="100%" height={300}>
+              <LineChart data={seasonalChartData}>
+                <CartesianGrid strokeDasharray="3 3" {...AXIS_STYLE} />
+                <XAxis dataKey="month" tick={TICK_STYLE} axisLine={AXIS_STYLE} tickLine={false} />
+                <YAxis
+                  tick={TICK_STYLE}
+                  axisLine={AXIS_STYLE}
+                  tickLine={false}
+                  tickFormatter={(v) => `${v}%`}
+                  domain={[0, 'auto']}
+                />
+                <Tooltip
+                  contentStyle={TOOLTIP_STYLE}
+                  formatter={(value) => [`${Number(value).toFixed(1)}%`]}
+                  labelStyle={{ color: 'var(--color-text)', fontWeight: 600 }}
+                />
+                <Legend wrapperStyle={{ fontSize: 12, color: 'var(--color-text-muted)' }} />
+                <ReferenceLine y={25} stroke="#ef4444" strokeDasharray="6 3" label={{ value: '25% stress', fill: '#ef4444', fontSize: 11, position: 'insideTopRight' }} />
+                {seasonalYears.map((yr, i) => (
+                  <Line
+                    key={yr}
+                    type="monotone"
+                    dataKey={`${yr}_combined`}
+                    name={`${yr} Combined`}
+                    stroke={i === 0 ? '#3b82f6' : i === 1 ? '#f59e0b' : '#10b981'}
+                    strokeWidth={2}
+                    dot={{ r: 4 }}
+                    activeDot={{ r: 7 }}
+                    connectNulls
+                  />
+                ))}
+              </LineChart>
+            </ResponsiveContainer>
+
+            {/* Wind vs Solar breakdown */}
+            <div className="mt-6">
+              <p className="text-xs text-[var(--color-text-muted)] mb-3">
+                Wind vs Solar CF breakdown — note solar collapses in winter (Jun–Aug) while wind varies by year
+              </p>
+              <ResponsiveContainer width="100%" height={250}>
+                <LineChart data={seasonalChartData}>
+                  <CartesianGrid strokeDasharray="3 3" {...AXIS_STYLE} />
+                  <XAxis dataKey="month" tick={TICK_STYLE} axisLine={AXIS_STYLE} tickLine={false} />
+                  <YAxis
+                    tick={TICK_STYLE}
+                    axisLine={AXIS_STYLE}
+                    tickLine={false}
+                    tickFormatter={(v) => `${v}%`}
+                    domain={[0, 'auto']}
+                  />
+                  <Tooltip
+                    contentStyle={TOOLTIP_STYLE}
+                    formatter={(value) => [`${Number(value).toFixed(1)}%`]}
+                    labelStyle={{ color: 'var(--color-text)', fontWeight: 600 }}
+                  />
+                  <Legend wrapperStyle={{ fontSize: 12, color: 'var(--color-text-muted)' }} />
+                  {seasonalYears.map((yr, i) => (
+                    <Line
+                      key={`wind-${yr}`}
+                      type="monotone"
+                      dataKey={`${yr}_wind`}
+                      name={`${yr} Wind`}
+                      stroke={i === 0 ? '#3b82f6' : i === 1 ? '#60a5fa' : '#93c5fd'}
+                      strokeWidth={2}
+                      strokeDasharray={i > 0 ? '5 3' : undefined}
+                      dot={{ r: 3 }}
+                      activeDot={{ r: 6 }}
+                      connectNulls
+                    />
+                  ))}
+                  {seasonalYears.map((yr, i) => (
+                    <Line
+                      key={`solar-${yr}`}
+                      type="monotone"
+                      dataKey={`${yr}_solar`}
+                      name={`${yr} Solar`}
+                      stroke={i === 0 ? '#f59e0b' : i === 1 ? '#fbbf24' : '#fcd34d'}
+                      strokeWidth={2}
+                      strokeDasharray={i > 0 ? '5 3' : undefined}
+                      dot={{ r: 3 }}
+                      activeDot={{ r: 6 }}
+                      connectNulls
+                    />
+                  ))}
+                </LineChart>
+              </ResponsiveContainer>
+            </div>
+          </div>
+
+          {/* ── Worst Months Table ── */}
+          <div className="bg-[var(--color-bg-card)] rounded-xl p-4 border border-[var(--color-border)]">
+            <h2 className="text-sm font-semibold text-[var(--color-text)] mb-3">Worst Renewable Months (Dunkelflaute Events)</h2>
+            <p className="text-xs text-[var(--color-text-muted)] mb-3">
+              Months with the lowest combined wind+solar capacity factor — these represent the most severe renewable energy droughts
+            </p>
+            <div className="overflow-x-auto">
+              <table className="w-full text-xs">
+                <thead>
+                  <tr className="border-b border-[var(--color-border)]">
+                    <th className="text-left py-2 px-2 text-[var(--color-text-muted)] font-medium">State</th>
+                    <th className="text-left py-2 px-2 text-[var(--color-text-muted)] font-medium">Period</th>
+                    <th className="text-left py-2 px-2 text-[var(--color-text-muted)] font-medium">Season</th>
+                    <th className="text-right py-2 px-2 text-[var(--color-text-muted)] font-medium">Wind CF</th>
+                    <th className="text-right py-2 px-2 text-[var(--color-text-muted)] font-medium">Solar CF</th>
+                    <th className="text-right py-2 px-2 text-[var(--color-text-muted)] font-medium">Combined CF</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {worstMonths.map((row, i) => {
+                    const season = row.month >= 3 && row.month <= 5 ? 'Autumn' : row.month >= 6 && row.month <= 8 ? 'Winter' : row.month >= 9 && row.month <= 11 ? 'Spring' : 'Summer'
+                    const isStress = (row.combined_cf ?? 99) < 25
+                    const seasonColor = season === 'Winter' ? 'text-blue-400' : season === 'Autumn' ? 'text-amber-400' : season === 'Spring' ? 'text-emerald-400' : 'text-red-400'
+                    return (
+                      <tr
+                        key={`${row.state}-${row.year}-${row.month}`}
+                        className={`border-b border-[var(--color-border)] ${i % 2 === 0 ? 'bg-[var(--color-bg-elevated)]' : ''}`}
+                      >
+                        <td className="py-2 px-2">
+                          <Link to={`/projects?state=${row.state}`} className="text-[var(--color-primary)] hover:underline font-medium">
+                            {row.state}
+                          </Link>
+                        </td>
+                        <td className="py-2 px-2 text-[var(--color-text)]">{MONTH_NAMES[row.month - 1]} {row.year}</td>
+                        <td className="py-2 px-2">
+                          <span className={`font-medium ${seasonColor}`}>{season}</span>
+                        </td>
+                        <td className="text-right py-2 px-2 text-[var(--color-text)]">{fmtPct(row.wind_cf)}</td>
+                        <td className="text-right py-2 px-2 text-[var(--color-text)]">{fmtPct(row.solar_cf)}</td>
+                        <td className="text-right py-2 px-2">
+                          <span className={`font-semibold ${isStress ? 'text-red-400' : 'text-[var(--color-text)]'}`}>
+                            {fmtPct(row.combined_cf)}
+                          </span>
+                        </td>
+                      </tr>
+                    )
+                  })}
+                </tbody>
+              </table>
+            </div>
+            <details className="mt-3">
+              <summary className="text-xs font-medium text-[var(--color-text-muted)] cursor-pointer">How to read seasonal patterns</summary>
+              <div className="mt-2 text-xs text-[var(--color-text-muted)] space-y-1.5">
+                <p><strong className="text-[var(--color-text)]">Winter (Jun–Aug)</strong> is the highest-risk period: solar output drops to 10–15% CF due to shorter days and lower solar angles, while wind is variable. When a weak wind period coincides with the solar trough, a true Dunkelflaute occurs.</p>
+                <p><strong className="text-[var(--color-text)]">Autumn (Mar–May)</strong> shows the transition — solar is declining but wind hasn't yet strengthened. April is often the worst single month for combined CF.</p>
+                <p><strong className="text-[var(--color-text)]">SA and VIC</strong> are particularly vulnerable because their wind resources can simultaneously drop during blocking high-pressure systems, while their solar is among the weakest in winter.</p>
+                <p>A combined CF below 25% for a whole month means the renewable fleet was producing less than a quarter of its potential — requiring gas, hydro, or batteries to fill the gap.</p>
+              </div>
+            </details>
+          </div>
+        </>
+      )}
+
+      {/* ── 6. BESS Coverage ── */}
+      <div className="bg-[var(--color-bg-card)] rounded-xl p-4 border border-[var(--color-border)]">
         <h2 className="text-sm font-semibold text-[var(--color-text)] mb-4">Current BESS Coverage by State</h2>
         <ResponsiveContainer width="100%" height={300}>
           <BarChart data={coverageChartData} barCategoryGap="20%">
@@ -423,7 +651,7 @@ export default function Dunkelflaute() {
         {/* BESS coverage detail cards */}
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-4">
           {coverageChartData.map(entry => (
-            <div key={entry.state} className="bg-[var(--bg-tertiary)] rounded-lg p-3 border border-[var(--border)]">
+            <div key={entry.state} className="bg-[var(--color-bg-elevated)] rounded-lg p-3 border border-[var(--color-border)]">
               <div className="flex items-center justify-between mb-1">
                 <span className="text-xs font-semibold text-[var(--color-text)]">{entry.state}</span>
                 <span
@@ -440,18 +668,21 @@ export default function Dunkelflaute() {
               <p className="text-[10px] text-[var(--color-text-muted)]">
                 Peak demand: {fmtMW(entry.peak_demand)}
               </p>
+              <Link to={`/projects?state=${entry.state}&tech=bess`} className="text-[10px] hover:text-[var(--color-primary)] transition-colors text-[var(--color-text-muted)] mt-1 inline-block">
+                View BESS projects →
+              </Link>
             </div>
           ))}
         </div>
       </div>
 
       {/* ── 6. Vulnerability Table ── */}
-      <div className="bg-[var(--bg-secondary)] rounded-xl p-4 border border-[var(--border)]">
+      <div className="bg-[var(--color-bg-card)] rounded-xl p-4 border border-[var(--color-border)]">
         <h2 className="text-sm font-semibold text-[var(--color-text)] mb-4">Lowest Combined CF Periods</h2>
         <div className="overflow-x-auto">
           <table className="w-full text-xs">
             <thead>
-              <tr className="border-b border-[var(--border)]">
+              <tr className="border-b border-[var(--color-border)]">
                 <th className="text-left py-2 px-2 text-[var(--color-text-muted)] font-medium">State</th>
                 <th className="text-right py-2 px-2 text-[var(--color-text-muted)] font-medium">Year</th>
                 <th className="text-right py-2 px-2 text-[var(--color-text-muted)] font-medium">Wind CF</th>
@@ -467,12 +698,12 @@ export default function Dunkelflaute() {
                 return (
                   <tr
                     key={`${row.state}-${row.year}`}
-                    className={`border-b border-[var(--border)] ${i % 2 === 0 ? 'bg-[var(--bg-tertiary)]' : ''}`}
+                    className={`border-b border-[var(--color-border)] ${i % 2 === 0 ? 'bg-[var(--color-bg-elevated)]' : ''}`}
                   >
                     <td className="py-2 px-2">
-                      <span className="font-medium text-[var(--color-text)]" style={{ color: STATE_COLORS[row.state] }}>
+                      <Link to={`/projects?state=${row.state}`} className="text-[var(--color-primary)] hover:underline font-medium">
                         {row.state}
-                      </span>
+                      </Link>
                     </td>
                     <td className="text-right py-2 px-2 text-[var(--color-text)]">{row.year}</td>
                     <td className="text-right py-2 px-2 text-[var(--color-text)]">{fmtPct(row.wind_cf_pct)}</td>
@@ -496,7 +727,7 @@ export default function Dunkelflaute() {
       </div>
 
       {/* ── 7. Pipeline vs Coverage Comparison ── */}
-      <div className="bg-[var(--bg-secondary)] rounded-xl p-4 border border-[var(--border)]">
+      <div className="bg-[var(--color-bg-card)] rounded-xl p-4 border border-[var(--color-border)]">
         <h2 className="text-sm font-semibold text-[var(--color-text)] mb-4">Pipeline vs Current BESS Coverage</h2>
         <ResponsiveContainer width="100%" height={300}>
           <BarChart data={pipelineData} barCategoryGap="20%">
@@ -524,7 +755,7 @@ export default function Dunkelflaute() {
         {/* Pipeline detail cards */}
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-4">
           {pipelineData.map(entry => (
-            <div key={entry.state} className="bg-[var(--bg-tertiary)] rounded-lg p-3 border border-[var(--border)]">
+            <div key={entry.state} className="bg-[var(--color-bg-elevated)] rounded-lg p-3 border border-[var(--color-border)]">
               <span className="text-xs font-semibold" style={{ color: STATE_COLORS[entry.state] }}>
                 {entry.state}
               </span>
@@ -541,7 +772,7 @@ export default function Dunkelflaute() {
                   <span className="text-[var(--color-text-muted)]">Projects</span>
                   <span className="text-[var(--color-text)]">{entry.pipeline_count}</span>
                 </div>
-                <div className="flex justify-between text-[10px] pt-1 border-t border-[var(--border)]">
+                <div className="flex justify-between text-[10px] pt-1 border-t border-[var(--color-border)]">
                   <span className="text-[var(--color-text-muted)]">Current</span>
                   <span className="text-red-400 font-medium">{fmtHours(entry.current_hours)}</span>
                 </div>

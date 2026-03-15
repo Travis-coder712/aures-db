@@ -1,4 +1,5 @@
 import { useState, useEffect, useMemo } from 'react'
+import { Link } from 'react-router-dom'
 import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip,
   ResponsiveContainer, PieChart, Pie, Cell, Legend,
@@ -86,13 +87,13 @@ function ChartTooltip({ active, payload, label }: {
 }) {
   if (!active || !payload?.length) return null
   return (
-    <div className="bg-[var(--bg-primary)] border border-[var(--border)] rounded-lg p-3 text-sm shadow-lg">
-      <div className="font-medium text-[var(--text-primary)] mb-1">{label}</div>
+    <div className="bg-[var(--color-bg)] border border-[var(--color-border)] rounded-lg p-3 text-sm shadow-lg">
+      <div className="font-medium text-[var(--color-text)] mb-1">{label}</div>
       {payload.map((entry, i) => (
-        <div key={i} className="flex items-center gap-2 text-[var(--text-secondary)]">
+        <div key={i} className="flex items-center gap-2 text-[var(--color-text-muted)]">
           <span className="w-2.5 h-2.5 rounded-full inline-block" style={{ backgroundColor: entry.color }} />
           <span>{formatTech(entry.dataKey ?? entry.name ?? '')}</span>
-          <span className="ml-auto font-medium text-[var(--text-primary)]">
+          <span className="ml-auto font-medium text-[var(--color-text)]">
             {formatMW(entry.value ?? 0)}
           </span>
         </div>
@@ -244,7 +245,7 @@ export default function EnergyMix() {
 
   if (!data || Object.keys(data.current_mix).length === 0) {
     return (
-      <div className="p-6 text-center text-[var(--text-secondary)]">
+      <div className="p-6 text-center text-[var(--color-text-muted)]">
         <BoltIcon />
         <p className="mt-2">No energy mix data available</p>
       </div>
@@ -255,67 +256,78 @@ export default function EnergyMix() {
     <div className="p-4 md:p-6 space-y-6 max-w-7xl mx-auto">
       {/* Header */}
       <div>
-        <h1 className="text-2xl font-bold text-[var(--text-primary)]">Energy Mix Transition</h1>
-        <p className="text-sm text-[var(--text-secondary)] mt-1">
+        <h1 className="text-2xl font-bold text-[var(--color-text)]">Energy Mix Transition</h1>
+        <p className="text-sm text-[var(--color-text-muted)] mt-1">
           Operating capacity and pipeline analysis across NEM states
         </p>
       </div>
 
+      {/* Rationale */}
+      <details className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl p-4 mb-6">
+        <summary className="text-sm font-medium text-[var(--color-text)] cursor-pointer">What does this page show?</summary>
+        <div className="mt-3 text-xs text-[var(--color-text-muted)] space-y-2">
+          <p><strong className="text-[var(--color-text)]">Operating capacity</strong> shows the current generation mix by state, based on commissioned projects in the NEM. This reveals whether renewable deployment is balanced across technologies or concentrated in a single type.</p>
+          <p><strong className="text-[var(--color-text)]">Pipeline data</strong> shows what is expected to come online based on announced COD dates for projects under construction or in development. This provides a forward-looking view of where capacity growth is heading.</p>
+          <p><strong className="text-[var(--color-text)]">State-level detail</strong> allows comparison of how each jurisdiction is progressing toward its renewable energy targets, and whether any states are under- or over-represented in particular technologies.</p>
+          <p>Together, this helps stakeholders understand whether the energy transition is proceeding in a balanced way or whether gaps and risks are emerging in the deployment pipeline.</p>
+        </div>
+      </details>
+
       {/* Summary cards */}
       {summary && (
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-          <div className="bg-[var(--bg-secondary)] rounded-xl p-4 border border-[var(--border)]">
+          <div className="bg-[var(--color-bg-card)] rounded-xl p-4 border border-[var(--color-border)]">
             <div className="flex items-center gap-2 text-blue-400 mb-2">
               <BoltIcon />
               <span className="text-xs font-medium uppercase tracking-wider">NEM Operating</span>
             </div>
-            <div className="text-2xl md:text-3xl font-bold text-[var(--text-primary)]">
+            <div className="text-2xl md:text-3xl font-bold text-[var(--color-text)]">
               {formatMW(summary.totalMW)}
             </div>
-            <div className="text-xs text-[var(--text-secondary)] mt-1">Total operating capacity</div>
+            <div className="text-xs text-[var(--color-text-muted)] mt-1">Total operating capacity</div>
           </div>
 
-          <div className="bg-[var(--bg-secondary)] rounded-xl p-4 border border-[var(--border)]">
+          <div className="bg-[var(--color-bg-card)] rounded-xl p-4 border border-[var(--color-border)]">
             <div className="flex items-center gap-2 text-emerald-400 mb-2">
               <MapIcon />
               <span className="text-xs font-medium uppercase tracking-wider">States</span>
             </div>
-            <div className="text-2xl md:text-3xl font-bold text-[var(--text-primary)]">
+            <div className="text-2xl md:text-3xl font-bold text-[var(--color-text)]">
               {summary.stateCount}
             </div>
-            <div className="text-xs text-[var(--text-secondary)] mt-1">NEM states tracked</div>
+            <div className="text-xs text-[var(--color-text-muted)] mt-1">NEM states tracked</div>
           </div>
 
-          <div className="bg-[var(--bg-secondary)] rounded-xl p-4 border border-[var(--border)]">
+          <div className="bg-[var(--color-bg-card)] rounded-xl p-4 border border-[var(--color-border)]">
             <div className="flex items-center gap-2 text-amber-400 mb-2">
               <TrendIcon />
               <span className="text-xs font-medium uppercase tracking-wider">Pipeline</span>
             </div>
-            <div className="text-2xl md:text-3xl font-bold text-[var(--text-primary)]">
+            <div className="text-2xl md:text-3xl font-bold text-[var(--color-text)]">
               {formatMW(summary.pipelineMW)}
             </div>
-            <div className="text-xs text-[var(--text-secondary)] mt-1">Under construction / development</div>
+            <div className="text-xs text-[var(--color-text-muted)] mt-1">Under construction / development</div>
           </div>
 
-          <div className="bg-[var(--bg-secondary)] rounded-xl p-4 border border-[var(--border)]">
+          <div className="bg-[var(--color-bg-card)] rounded-xl p-4 border border-[var(--color-border)]">
             <div className="flex items-center gap-2 text-purple-400 mb-2">
               <ChipIcon />
               <span className="text-xs font-medium uppercase tracking-wider">Top Tech</span>
             </div>
-            <div className="text-2xl md:text-3xl font-bold text-[var(--text-primary)]">
+            <div className="text-2xl md:text-3xl font-bold text-[var(--color-text)]">
               {formatTech(summary.topTech)}
             </div>
-            <div className="text-xs text-[var(--text-secondary)] mt-1">{formatMW(summary.topTechMW)} deployed</div>
+            <div className="text-xs text-[var(--color-text-muted)] mt-1">{formatMW(summary.topTechMW)} deployed</div>
           </div>
         </div>
       )}
 
       {/* Current mix by state — stacked bar */}
-      <div className="bg-[var(--bg-secondary)] rounded-xl p-4 border border-[var(--border)]">
-        <h2 className="text-lg font-semibold text-[var(--text-primary)] mb-1">
+      <div className="bg-[var(--color-bg-card)] rounded-xl p-4 border border-[var(--color-border)]">
+        <h2 className="text-lg font-semibold text-[var(--color-text)] mb-1">
           Operating Capacity by State
         </h2>
-        <p className="text-xs text-[var(--text-secondary)] mb-4">
+        <p className="text-xs text-[var(--color-text-muted)] mb-4">
           Stacked by technology. Click a state bar to see detailed breakdown.
         </p>
         <ResponsiveContainer width="100%" height={320}>
@@ -329,15 +341,15 @@ export default function EnergyMix() {
               }
             }}
           >
-            <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" />
+            <CartesianGrid strokeDasharray="3 3" stroke="var(--color-border)" />
             <XAxis
               dataKey="state"
-              tick={{ fill: 'var(--text-secondary)', fontSize: 12 }}
+              tick={{ fill: 'var(--color-text-muted)', fontSize: 12 }}
             />
             <YAxis
-              tick={{ fill: 'var(--text-secondary)', fontSize: 12 }}
+              tick={{ fill: 'var(--color-text-muted)', fontSize: 12 }}
               tickFormatter={(v) => v >= 1000 ? `${(v / 1000).toFixed(0)}k` : v}
-              label={{ value: 'MW', angle: -90, position: 'insideLeft', fill: 'var(--text-secondary)', fontSize: 12 }}
+              label={{ value: 'MW', angle: -90, position: 'insideLeft', fill: 'var(--color-text-muted)', fontSize: 12 }}
             />
             <Tooltip content={<ChartTooltip />} />
             <Legend
@@ -360,20 +372,20 @@ export default function EnergyMix() {
       </div>
 
       {/* State comparison table */}
-      <div className="bg-[var(--bg-secondary)] rounded-xl border border-[var(--border)] overflow-x-auto">
-        <div className="p-4 border-b border-[var(--border)]">
-          <h2 className="text-lg font-semibold text-[var(--text-primary)]">State Comparison</h2>
-          <p className="text-xs text-[var(--text-secondary)] mt-0.5">
+      <div className="bg-[var(--color-bg-card)] rounded-xl border border-[var(--color-border)] overflow-x-auto">
+        <div className="p-4 border-b border-[var(--color-border)]">
+          <h2 className="text-lg font-semibold text-[var(--color-text)]">State Comparison</h2>
+          <p className="text-xs text-[var(--color-text-muted)] mt-0.5">
             Operating capacity breakdown by technology per state (MW)
           </p>
         </div>
         <table className="w-full text-sm">
           <thead>
-            <tr className="border-b border-[var(--border)]">
-              <th className="text-left p-3 text-[var(--text-secondary)] font-medium">State</th>
-              <th className="text-right p-3 text-[var(--text-secondary)] font-medium">Total MW</th>
+            <tr className="border-b border-[var(--color-border)]">
+              <th className="text-left p-3 text-[var(--color-text-muted)] font-medium">State</th>
+              <th className="text-right p-3 text-[var(--color-text-muted)] font-medium">Total MW</th>
               {techs.map(tech => (
-                <th key={tech} className="text-right p-3 text-[var(--text-secondary)] font-medium hidden sm:table-cell">
+                <th key={tech} className="text-right p-3 text-[var(--color-text-muted)] font-medium hidden sm:table-cell">
                   <span style={{ color: getTechColour(tech) }}>{formatTech(tech)}</span>
                 </th>
               ))}
@@ -387,20 +399,20 @@ export default function EnergyMix() {
               return (
                 <tr
                   key={state}
-                  className={`border-b border-[var(--border)] cursor-pointer transition-colors ${
-                    isSelected ? 'bg-blue-500/10' : 'hover:bg-[var(--bg-primary)]/50'
+                  className={`border-b border-[var(--color-border)] cursor-pointer transition-colors ${
+                    isSelected ? 'bg-blue-500/10' : 'hover:bg-[var(--color-bg)]/50'
                   }`}
                   onClick={() => setSelectedState(prev => prev === state ? null : state)}
                 >
-                  <td className="p-3 font-medium text-[var(--text-primary)]">
+                  <td className="p-3 font-medium text-[var(--color-text)]">
                     {state}
                     {isSelected && <span className="ml-2 text-xs text-blue-400">Selected</span>}
                   </td>
-                  <td className="p-3 text-right font-semibold text-[var(--text-primary)]">
+                  <td className="p-3 text-right font-semibold text-[var(--color-text)]">
                     {total.operating_mw.toLocaleString()}
                   </td>
                   {techs.map(tech => (
-                    <td key={tech} className="p-3 text-right text-[var(--text-secondary)] hidden sm:table-cell">
+                    <td key={tech} className="p-3 text-right text-[var(--color-text-muted)] hidden sm:table-cell">
                       {mix?.[tech]?.mw ? mix[tech].mw.toLocaleString() : '—'}
                     </td>
                   ))}
@@ -409,9 +421,9 @@ export default function EnergyMix() {
             })}
           </tbody>
           <tfoot>
-            <tr className="border-t-2 border-[var(--border)]">
-              <td className="p-3 font-semibold text-[var(--text-primary)]">NEM Total</td>
-              <td className="p-3 text-right font-bold text-[var(--text-primary)]">
+            <tr className="border-t-2 border-[var(--color-border)]">
+              <td className="p-3 font-semibold text-[var(--color-text)]">NEM Total</td>
+              <td className="p-3 text-right font-bold text-[var(--color-text)]">
                 {Object.values(data.state_totals).reduce((s, t) => s + t.operating_mw, 0).toLocaleString()}
               </td>
               {techs.map(tech => {
@@ -429,14 +441,14 @@ export default function EnergyMix() {
 
       {/* State detail panel */}
       {selectedState && stateDetail && (
-        <div className="bg-[var(--bg-secondary)] rounded-xl p-4 border border-blue-500/30">
+        <div className="bg-[var(--color-bg-card)] rounded-xl p-4 border border-blue-500/30">
           <div className="flex items-center justify-between mb-4">
-            <h2 className="text-lg font-semibold text-[var(--text-primary)]">
+            <h2 className="text-lg font-semibold text-[var(--color-text)]">
               {selectedState} — Detailed Breakdown
             </h2>
             <button
               onClick={() => setSelectedState(null)}
-              className="text-xs text-[var(--text-secondary)] hover:text-[var(--text-primary)] px-2 py-1 rounded border border-[var(--border)]"
+              className="text-xs text-[var(--color-text-muted)] hover:text-[var(--color-text)] px-2 py-1 rounded border border-[var(--color-border)]"
             >
               Close
             </button>
@@ -445,39 +457,39 @@ export default function EnergyMix() {
           <div className="grid md:grid-cols-2 gap-4">
             {/* Tech breakdown */}
             <div>
-              <h3 className="text-sm font-medium text-[var(--text-secondary)] mb-2">Technology Breakdown</h3>
+              <h3 className="text-sm font-medium text-[var(--color-text-muted)] mb-2">Technology Breakdown</h3>
               <div className="space-y-2">
                 {stateDetail.techBreakdown.map(tb => (
                   <div key={tb.tech}>
                     <div className="flex items-center justify-between text-sm mb-0.5">
-                      <span className="text-[var(--text-primary)] font-medium">{formatTech(tb.tech)}</span>
-                      <span className="text-[var(--text-secondary)]">
-                        {tb.mw.toLocaleString()} MW · {tb.count} projects · {tb.pct.toFixed(1)}%
+                      <span className="text-[var(--color-text)] font-medium">{formatTech(tb.tech)}</span>
+                      <span className="text-[var(--color-text-muted)]">
+                        {tb.mw.toLocaleString()} MW · <Link to={`/projects?state=${selectedState}&tech=${tb.tech}`} className="text-[var(--color-primary)] hover:underline">{tb.count} projects</Link> · {tb.pct.toFixed(1)}%
                       </span>
                     </div>
-                    <div className="w-full h-2 bg-[var(--bg-primary)] rounded-full overflow-hidden">
+                    <div className="w-full h-2 bg-[var(--color-bg)] rounded-full overflow-hidden">
                       <div
                         className="h-full rounded-full transition-all"
                         style={{ width: `${tb.pct}%`, backgroundColor: getTechColour(tb.tech) }}
                       />
                     </div>
                     {tb.mwh != null && tb.mwh > 0 && (
-                      <div className="text-xs text-[var(--text-secondary)] mt-0.5">
+                      <div className="text-xs text-[var(--color-text-muted)] mt-0.5">
                         {tb.mwh.toLocaleString()} MWh storage
                       </div>
                     )}
                   </div>
                 ))}
               </div>
-              <div className="mt-3 pt-3 border-t border-[var(--border)] text-sm text-[var(--text-primary)]">
+              <div className="mt-3 pt-3 border-t border-[var(--color-border)] text-sm text-[var(--color-text)]">
                 <span className="font-semibold">{stateDetail.totals.operating_mw.toLocaleString()} MW</span>
-                <span className="text-[var(--text-secondary)]"> total operating capacity</span>
+                <span className="text-[var(--color-text-muted)]"> total operating capacity</span>
               </div>
             </div>
 
             {/* Pipeline for this state */}
             <div>
-              <h3 className="text-sm font-medium text-[var(--text-secondary)] mb-2">Pipeline Projects</h3>
+              <h3 className="text-sm font-medium text-[var(--color-text-muted)] mb-2">Pipeline Projects</h3>
               {stateDetail.pipeline.length > 0 ? (
                 <div className="space-y-1.5 max-h-64 overflow-y-auto">
                   {stateDetail.pipeline
@@ -485,14 +497,14 @@ export default function EnergyMix() {
                     .map((p, i) => (
                     <div
                       key={i}
-                      className="flex items-center justify-between text-sm bg-[var(--bg-primary)] rounded-lg px-3 py-2"
+                      className="flex items-center justify-between text-sm bg-[var(--color-bg)] rounded-lg px-3 py-2"
                     >
                       <div className="flex items-center gap-2">
                         <span
                           className="w-2 h-2 rounded-full"
                           style={{ backgroundColor: getTechColour(p.technology) }}
                         />
-                        <span className="text-[var(--text-primary)]">{formatTech(p.technology)}</span>
+                        <span className="text-[var(--color-text)]">{formatTech(p.technology)}</span>
                         <span className={`text-xs px-1.5 py-0.5 rounded-full ${
                           p.status === 'construction'
                             ? 'bg-blue-500/20 text-blue-400'
@@ -501,18 +513,18 @@ export default function EnergyMix() {
                           {p.status}
                         </span>
                       </div>
-                      <div className="text-right text-[var(--text-secondary)]">
-                        <span className="font-medium text-[var(--text-primary)]">{p.mw.toLocaleString()} MW</span>
+                      <div className="text-right text-[var(--color-text-muted)]">
+                        <span className="font-medium text-[var(--color-text)]">{p.mw.toLocaleString()} MW</span>
                         <span className="ml-2 text-xs">COD {p.cod_year}</span>
                       </div>
                     </div>
                   ))}
                 </div>
               ) : (
-                <p className="text-sm text-[var(--text-secondary)]">No pipeline projects for {selectedState}</p>
+                <p className="text-sm text-[var(--color-text-muted)]">No pipeline projects for {selectedState}</p>
               )}
               {stateDetail.pipeline.length > 0 && (
-                <div className="mt-2 text-xs text-[var(--text-secondary)]">
+                <div className="mt-2 text-xs text-[var(--color-text-muted)]">
                   {stateDetail.pipeline.length} pipeline projects totalling{' '}
                   {formatMW(stateDetail.pipeline.reduce((s, p) => s + p.mw, 0))}
                 </div>
@@ -525,11 +537,11 @@ export default function EnergyMix() {
       {/* Two-column: Pipeline by year + Technology donut */}
       <div className="grid lg:grid-cols-2 gap-4">
         {/* Pipeline by year */}
-        <div className="bg-[var(--bg-secondary)] rounded-xl p-4 border border-[var(--border)]">
-          <h2 className="text-lg font-semibold text-[var(--text-primary)] mb-1">
+        <div className="bg-[var(--color-bg-card)] rounded-xl p-4 border border-[var(--color-border)]">
+          <h2 className="text-lg font-semibold text-[var(--color-text)] mb-1">
             Pipeline by COD Year
           </h2>
-          <p className="text-xs text-[var(--text-secondary)] mb-4">
+          <p className="text-xs text-[var(--color-text-muted)] mb-4">
             Construction and development projects by expected commissioning year
           </p>
           {pipelineByYear.length > 0 ? (
@@ -538,13 +550,13 @@ export default function EnergyMix() {
                 data={pipelineByYear}
                 margin={{ top: 10, right: 10, bottom: 5, left: 10 }}
               >
-                <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" />
+                <CartesianGrid strokeDasharray="3 3" stroke="var(--color-border)" />
                 <XAxis
                   dataKey="year"
-                  tick={{ fill: 'var(--text-secondary)', fontSize: 11 }}
+                  tick={{ fill: 'var(--color-text-muted)', fontSize: 11 }}
                 />
                 <YAxis
-                  tick={{ fill: 'var(--text-secondary)', fontSize: 11 }}
+                  tick={{ fill: 'var(--color-text-muted)', fontSize: 11 }}
                   tickFormatter={(v) => v >= 1000 ? `${(v / 1000).toFixed(0)}k` : v}
                 />
                 <Tooltip content={<ChartTooltip />} />
@@ -565,16 +577,16 @@ export default function EnergyMix() {
               </BarChart>
             </ResponsiveContainer>
           ) : (
-            <p className="text-sm text-[var(--text-secondary)] text-center py-8">No pipeline data available</p>
+            <p className="text-sm text-[var(--color-text-muted)] text-center py-8">No pipeline data available</p>
           )}
         </div>
 
         {/* Technology donut */}
-        <div className="bg-[var(--bg-secondary)] rounded-xl p-4 border border-[var(--border)]">
-          <h2 className="text-lg font-semibold text-[var(--text-primary)] mb-1">
+        <div className="bg-[var(--color-bg-card)] rounded-xl p-4 border border-[var(--color-border)]">
+          <h2 className="text-lg font-semibold text-[var(--color-text)] mb-1">
             National Technology Mix
           </h2>
-          <p className="text-xs text-[var(--text-secondary)] mb-4">
+          <p className="text-xs text-[var(--color-text-muted)] mb-4">
             Share of total operating capacity by technology
           </p>
           {nationalPie.length > 0 ? (
@@ -596,8 +608,8 @@ export default function EnergyMix() {
                   ))}
                 </Pie>
                 <Tooltip
-                  contentStyle={{ backgroundColor: 'var(--bg-primary)', border: '1px solid var(--border)', borderRadius: '8px' }}
-                  labelStyle={{ color: 'var(--text-primary)' }}
+                  contentStyle={{ backgroundColor: 'var(--color-bg)', border: '1px solid var(--color-border)', borderRadius: '8px' }}
+                  labelStyle={{ color: 'var(--color-text)' }}
                   formatter={(value) => [formatMW(Number(value)), 'Capacity']}
                 />
                 <Legend
@@ -610,13 +622,13 @@ export default function EnergyMix() {
               </PieChart>
             </ResponsiveContainer>
           ) : (
-            <p className="text-sm text-[var(--text-secondary)] text-center py-8">No technology data available</p>
+            <p className="text-sm text-[var(--color-text-muted)] text-center py-8">No technology data available</p>
           )}
         </div>
       </div>
 
       {/* Source note */}
-      <div className="text-xs text-[var(--text-secondary)] italic">
+      <div className="text-xs text-[var(--color-text-muted)] italic">
         Data sourced from AEMO generation information, ARENA project tracker, and state planning registers.
         Operating capacity reflects currently commissioned projects across the NEM.
       </div>

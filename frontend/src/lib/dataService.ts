@@ -5,7 +5,7 @@
  * In production (GitHub Pages), they're served as static files.
  * In development (Vite dev server), they're served from the public/ directory.
  */
-import type { ProjectSummary, Project, Technology, ProjectStatus, State, LeagueTable, LeagueTableIndex, LeagueTechnology, DeveloperIndex, OEMIndex, ContractorIndex, OfftakerIndex, MapProject, CODDriftData, DataSourcesIndex, BESSCapexData, ProjectTimelineData, SchemeRiskData, DriftAnalysisData, WindResourceData, DunkelflaunteData, EnergyMixData, DeveloperScoreData, RevenueIntelData, GridConnectionData } from './types'
+import type { ProjectSummary, Project, Technology, ProjectStatus, State, LeagueTable, LeagueTableIndex, LeagueTechnology, DeveloperIndex, OEMIndex, ContractorIndex, OfftakerIndex, MapProject, CODDriftData, DataSourcesIndex, BESSCapexData, ProjectTimelineData, SchemeRiskData, DriftAnalysisData, WindResourceData, DunkelflaunteData, EnergyMixData, DeveloperScoreData, RevenueIntelData, GridConnectionData, NewsData } from './types'
 
 const BASE = import.meta.env.BASE_URL + 'data'
 
@@ -398,5 +398,16 @@ export async function fetchGridConnection(): Promise<GridConnectionData | null> 
     if (!resp.ok) return null
     gridConnectionCache = (await resp.json()) as GridConnectionData
     return gridConnectionCache
+  } catch { return null }
+}
+
+let newsCache: NewsData | null = null
+export async function fetchNews(): Promise<NewsData | null> {
+  if (newsCache) return newsCache
+  try {
+    const resp = await fetch(`${BASE}/news/latest.json`)
+    if (!resp.ok) return null
+    newsCache = (await resp.json()) as NewsData
+    return newsCache
   } catch { return null }
 }

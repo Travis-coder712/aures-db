@@ -1,12 +1,45 @@
+import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { useProjectIndex, useStats } from '../hooks/useProjectData'
+import { fetchNews } from '../lib/dataService'
 import { TECHNOLOGY_CONFIG, STATUS_CONFIG } from '../lib/types'
+import type { NewsArticle } from '../lib/types'
 import ProjectCard from '../components/common/ProjectCard'
 import StatCard from '../components/common/StatCard'
+
+const SOURCE_BADGES: Record<string, { label: string; color: string }> = {
+  'reneweconomy': { label: 'RE', color: 'bg-emerald-500/20 text-emerald-400' },
+  'pv-magazine': { label: 'PV', color: 'bg-amber-500/20 text-amber-400' },
+  'energy-storage-news': { label: 'ES', color: 'bg-blue-500/20 text-blue-400' },
+}
+
+function daysAgo(dateStr: string): string {
+  try {
+    const d = new Date(dateStr + 'T00:00:00')
+    const now = new Date()
+    const diff = Math.floor((now.getTime() - d.getTime()) / (1000 * 60 * 60 * 24))
+    if (diff === 0) return 'Today'
+    if (diff === 1) return 'Yesterday'
+    if (diff < 7) return `${diff}d ago`
+    if (diff < 30) return `${Math.floor(diff / 7)}w ago`
+    return dateStr
+  } catch {
+    return dateStr
+  }
+}
 
 export default function Home() {
   const { stats, loading: statsLoading } = useStats()
   const { projects, loading: projectsLoading } = useProjectIndex()
+  const [latestNews, setLatestNews] = useState<NewsArticle[]>([])
+
+  useEffect(() => {
+    fetchNews().then(data => {
+      if (data?.articles?.length) {
+        setLatestNews(data.articles.slice(0, 4))
+      }
+    })
+  }, [])
 
   // Featured: pick enriched projects first (high/good confidence), then by capacity
   const featured = [...projects]
@@ -186,6 +219,62 @@ export default function Home() {
           </div>
         )}
       </section>
+
+      {/* Latest News */}
+      {latestNews.length > 0 && (
+        <section className="mb-8">
+          <div className="flex items-center justify-between mb-4">
+            <div className="flex items-center gap-2">
+              <h2 className="text-lg font-semibold text-[var(--color-text)]">
+                Latest News
+              </h2>
+              <span className="text-[9px] font-semibold text-emerald-400 bg-emerald-400/10 px-1.5 py-0.5 rounded-full animate-pulse">
+                NEW
+              </span>
+            </div>
+            <Link
+              to="/news"
+              className="text-xs text-[var(--color-primary)] hover:underline"
+            >
+              View all →
+            </Link>
+          </div>
+          <div className="space-y-2">
+            {latestNews.map((article, idx) => {
+              const badge = SOURCE_BADGES[article.source] || { label: '?', color: 'bg-gray-500/20 text-gray-400' }
+              return (
+                <a
+                  key={idx}
+                  href={article.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-start gap-3 bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl p-3 hover:border-[var(--color-primary)]/20 transition-colors group"
+                >
+                  <span className={`flex-shrink-0 w-8 h-8 rounded-lg ${badge.color} flex items-center justify-center font-bold text-[10px] mt-0.5`}>
+                    {badge.label}
+                  </span>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-sm text-[var(--color-text)] group-hover:text-[var(--color-primary)] transition-colors line-clamp-1 font-medium">
+                      {article.title}
+                    </p>
+                    <p className="text-[10px] text-[var(--color-text-muted)] mt-0.5">
+                      {daysAgo(article.published_date)}
+                      {article.matched_project_ids?.length > 0 && (
+                        <span className="ml-2 text-[var(--color-primary)]/60">
+                          • {article.matched_project_ids.length} project{article.matched_project_ids.length !== 1 ? 's' : ''} linked
+                        </span>
+                      )}
+                    </p>
+                  </div>
+                  <svg className="w-4 h-4 text-[var(--color-text-muted)] flex-shrink-0 mt-1 opacity-0 group-hover:opacity-100 transition-opacity" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
+                  </svg>
+                </a>
+              )
+            })}
+          </div>
+        </section>
+      )}
 
       {/* Data Sources */}
       <section className="mb-8">

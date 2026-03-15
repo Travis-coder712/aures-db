@@ -1,9 +1,11 @@
 import { useState, useEffect, useMemo } from 'react'
+import { Link } from 'react-router-dom'
 import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip,
   ResponsiveContainer, LineChart, Line, Legend,
 } from 'recharts'
 import { fetchRevenueIntel } from '../../lib/dataService'
+import ChartWrapper from '../../components/common/ChartWrapper'
 import type { RevenueIntelData, MetricStats } from '../../lib/types'
 
 // ============================================================
@@ -209,7 +211,7 @@ export default function RevenueIntel() {
   }
 
   if (!data) {
-    return <div className="p-6 text-center text-[var(--text-secondary)]">No revenue data available</div>
+    return <div className="p-6 text-center text-[var(--color-text-muted)]">No revenue data available</div>
   }
 
   const offtake = data.offtake_comparison
@@ -218,8 +220,8 @@ export default function RevenueIntel() {
     <div className="p-4 md:p-6 space-y-6 max-w-7xl mx-auto">
       {/* Header */}
       <div>
-        <h1 className="text-2xl font-bold text-[var(--text-primary)]">Revenue Intelligence</h1>
-        <p className="text-sm text-[var(--text-secondary)] mt-1">
+        <h1 className="text-2xl font-bold text-[var(--color-text)]">Revenue Intelligence</h1>
+        <p className="text-sm text-[var(--color-text-muted)] mt-1">
           Revenue and pricing analytics across {data.by_technology_year.length} technology-year combinations
         </p>
       </div>
@@ -227,107 +229,122 @@ export default function RevenueIntel() {
       {/* Year selector */}
       <div className="flex items-center gap-3">
         <span className="text-xs font-semibold uppercase tracking-wider text-[var(--color-text-muted)]">Year</span>
-        <div className="flex rounded-lg overflow-hidden border border-[var(--border)]">
+        <div className="flex rounded-lg overflow-hidden border border-[var(--color-border)]">
           {([2024, 2025] as SelectedYear[]).map(yr => (
             <button
               key={yr}
               onClick={() => setSelectedYear(yr)}
-              className={`px-3 py-1.5 text-sm ${selectedYear === yr ? 'bg-blue-600 text-white' : 'bg-[var(--bg-secondary)] text-[var(--text-secondary)]'}`}
+              className={`px-3 py-1.5 text-sm ${selectedYear === yr ? 'bg-blue-600 text-white' : 'bg-[var(--color-bg-card)] text-[var(--color-text-muted)]'}`}
             >
               {yr}
             </button>
           ))}
         </div>
-        <span className="text-xs text-[var(--text-secondary)]">
+        <span className="text-xs text-[var(--color-text-muted)]">
           2026 excluded (partial year)
         </span>
       </div>
 
+      {/* Rationale */}
+      <details className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl p-4 mb-6">
+        <summary className="text-sm font-medium text-[var(--color-text)] cursor-pointer">How is revenue calculated?</summary>
+        <div className="mt-3 text-xs text-[var(--color-text-muted)] space-y-2">
+          <p><strong>Revenue per MW</strong> = total market value divided by installed capacity. This normalises across different project sizes so you can compare a 50 MW farm against a 500 MW farm on equal footing.</p>
+          <p><strong>Energy price received</strong> = market value divided by energy generated, giving a volume-weighted average price ($/MWh).</p>
+          <p><strong>Data source:</strong> All figures are derived from the OpenElectricity API, which provides NEM settlement data from AEMO dispatch and pricing records.</p>
+          <p><strong>BESS arbitrage</strong> = difference between average discharge price and average charge price. A higher spread indicates better arbitrage opportunities.</p>
+          <p><strong>Statistical presentation:</strong> Values shown are medians with interquartile ranges (P25-P75) to show the spread of outcomes. Medians are used rather than means to reduce the influence of outliers.</p>
+          <p><strong>Why this matters:</strong> These metrics help benchmark project financial performance and compare technologies on a like-for-like basis, informing investment and development decisions.</p>
+        </div>
+      </details>
+
       {/* Summary cards */}
       {summaryCards && (
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-          <div className="bg-[var(--bg-secondary)] rounded-xl p-4 border border-[var(--border)]">
-            <div className="flex items-center gap-2 text-[var(--text-secondary)] mb-2">
+          <div className="bg-[var(--color-bg-card)] rounded-xl p-4 border border-[var(--color-border)]">
+            <div className="flex items-center gap-2 text-[var(--color-text-muted)] mb-2">
               <DollarIcon />
               <span className="text-xs font-medium uppercase tracking-wider">Top Revenue (2024)</span>
             </div>
             <div className="text-xl font-bold" style={{ color: summaryCards.highestColour }}>
               {fmtRevenue(summaryCards.highestRevenue)}
             </div>
-            <div className="text-xs text-[var(--text-secondary)]">{summaryCards.highestTech} median $/MW</div>
+            <div className="text-xs text-[var(--color-text-muted)]">{summaryCards.highestTech} median $/MW</div>
           </div>
 
-          <div className="bg-[var(--bg-secondary)] rounded-xl p-4 border border-[var(--border)]">
-            <div className="flex items-center gap-2 text-[var(--text-secondary)] mb-2">
+          <div className="bg-[var(--color-bg-card)] rounded-xl p-4 border border-[var(--color-border)]">
+            <div className="flex items-center gap-2 text-[var(--color-text-muted)] mb-2">
               <BoltIcon />
               <span className="text-xs font-medium uppercase tracking-wider">BESS Spread</span>
             </div>
             <div className="text-xl font-bold text-emerald-400">
               {fmtPrice(summaryCards.bessSpread)}
             </div>
-            <div className="text-xs text-[var(--text-secondary)]">Median $/MWh (2024)</div>
+            <div className="text-xs text-[var(--color-text-muted)]">Median $/MWh (2024)</div>
           </div>
 
-          <div className="bg-[var(--bg-secondary)] rounded-xl p-4 border border-[var(--border)]">
-            <div className="flex items-center gap-2 text-[var(--text-secondary)] mb-2">
+          <div className="bg-[var(--color-bg-card)] rounded-xl p-4 border border-[var(--color-border)]">
+            <div className="flex items-center gap-2 text-[var(--color-text-muted)] mb-2">
               <TrendIcon />
               <span className="text-xs font-medium uppercase tracking-wider">Solar Price</span>
             </div>
             <div className="text-xl font-bold text-amber-400">
               {fmtPrice(summaryCards.solarPrice)}
             </div>
-            <div className="text-xs text-[var(--text-secondary)]">Median $/MWh (2024)</div>
+            <div className="text-xs text-[var(--color-text-muted)]">Median $/MWh (2024)</div>
           </div>
 
-          <div className="bg-[var(--bg-secondary)] rounded-xl p-4 border border-[var(--border)]">
-            <div className="flex items-center gap-2 text-[var(--text-secondary)] mb-2">
+          <div className="bg-[var(--color-bg-card)] rounded-xl p-4 border border-[var(--color-border)]">
+            <div className="flex items-center gap-2 text-[var(--color-text-muted)] mb-2">
               <ShieldIcon />
               <span className="text-xs font-medium uppercase tracking-wider">Wind Revenue</span>
             </div>
             <div className="text-xl font-bold text-blue-400">
               {fmtRevenue(summaryCards.windRevenue)}
             </div>
-            <div className="text-xs text-[var(--text-secondary)]">Median $/MW (2024)</div>
+            <div className="text-xs text-[var(--color-text-muted)]">Median $/MW (2024)</div>
           </div>
         </div>
       )}
 
       {/* Revenue by Technology bar chart */}
-      <div className="bg-[var(--bg-secondary)] rounded-xl p-4 border border-[var(--border)]">
-        <h2 className="text-lg font-semibold text-[var(--text-primary)] mb-1">
+      <div className="bg-[var(--color-bg-card)] rounded-xl p-4 border border-[var(--color-border)]">
+        <h2 className="text-lg font-semibold text-[var(--color-text)] mb-1">
           Revenue by Technology ({selectedYear})
         </h2>
-        <p className="text-xs text-[var(--text-secondary)] mb-4">
+        <p className="text-xs text-[var(--color-text-muted)] mb-4">
           Median revenue per MW by technology. Bar colour indicates technology.
         </p>
-        <ResponsiveContainer width="100%" height={320}>
-          <BarChart data={revenueBarData} margin={{ top: 5, right: 20, bottom: 5, left: 20 }}>
-            <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" />
-            <XAxis dataKey="label" tick={{ fill: 'var(--text-secondary)', fontSize: 12 }} />
-            <YAxis
-              tick={{ fill: 'var(--text-secondary)', fontSize: 12 }}
-              tickFormatter={(v) => `$${(v / 1000).toFixed(0)}k`}
-            />
-            <Tooltip
-              contentStyle={{ backgroundColor: 'var(--bg-primary)', border: '1px solid var(--border)', borderRadius: '8px' }}
-              labelStyle={{ color: 'var(--text-primary)' }}
-              formatter={(value) => [fmtRevenue(Number(value)), 'Median $/MW']}
-              labelFormatter={(label) => {
-                const row = revenueBarData.find(r => r.label === label)
-                return `${label} (${row?.count ?? 0} projects)`
-              }}
-            />
-            <Bar dataKey="median" radius={[4, 4, 0, 0]}>
-              {revenueBarData.map((entry, i) => (
-                <rect key={i} fill={entry.colour} />
-              ))}
-            </Bar>
-          </BarChart>
-        </ResponsiveContainer>
+        <ChartWrapper title={`Revenue by Technology (${selectedYear})`} data={revenueBarData} csvColumns={['label', 'median', 'p25', 'p75', 'count']}>
+          <ResponsiveContainer width="100%" height={320}>
+            <BarChart data={revenueBarData} margin={{ top: 5, right: 20, bottom: 5, left: 20 }}>
+              <CartesianGrid strokeDasharray="3 3" stroke="var(--color-border)" />
+              <XAxis dataKey="label" tick={{ fill: 'var(--color-text-muted)', fontSize: 12 }} />
+              <YAxis
+                tick={{ fill: 'var(--color-text-muted)', fontSize: 12 }}
+                tickFormatter={(v) => `$${(v / 1000).toFixed(0)}k`}
+              />
+              <Tooltip
+                contentStyle={{ backgroundColor: 'var(--color-bg)', border: '1px solid var(--color-border)', borderRadius: '8px' }}
+                labelStyle={{ color: 'var(--color-text)' }}
+                formatter={(value) => [fmtRevenue(Number(value)), 'Median $/MW']}
+                labelFormatter={(label) => {
+                  const row = revenueBarData.find(r => r.label === label)
+                  return `${label} (${row?.count ?? 0} projects)`
+                }}
+              />
+              <Bar dataKey="median" radius={[4, 4, 0, 0]}>
+                {revenueBarData.map((entry, i) => (
+                  <rect key={i} fill={entry.colour} />
+                ))}
+              </Bar>
+            </BarChart>
+          </ResponsiveContainer>
+        </ChartWrapper>
         {/* Inline legend */}
         <div className="flex flex-wrap gap-3 mt-3 justify-center">
           {revenueBarData.map(r => (
-            <div key={r.tech} className="flex items-center gap-1.5 text-xs text-[var(--text-secondary)]">
+            <div key={r.tech} className="flex items-center gap-1.5 text-xs text-[var(--color-text-muted)]">
               <span className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: r.colour }} />
               {r.label}
             </div>
@@ -338,118 +355,124 @@ export default function RevenueIntel() {
       {/* Two-column: YoY Trends + BESS Arbitrage */}
       <div className="grid md:grid-cols-2 gap-6">
         {/* YoY Revenue Trends */}
-        <div className="bg-[var(--bg-secondary)] rounded-xl p-4 border border-[var(--border)]">
-          <h2 className="text-lg font-semibold text-[var(--text-primary)] mb-1">
+        <div className="bg-[var(--color-bg-card)] rounded-xl p-4 border border-[var(--color-border)]">
+          <h2 className="text-lg font-semibold text-[var(--color-text)] mb-1">
             Year-over-Year Revenue Trends
           </h2>
-          <p className="text-xs text-[var(--text-secondary)] mb-4">
+          <p className="text-xs text-[var(--color-text-muted)] mb-4">
             Median revenue per MW by year. 2026 is partial (YTD).
           </p>
-          <ResponsiveContainer width="100%" height={300}>
-            <LineChart data={yoyLineData} margin={{ top: 5, right: 20, bottom: 5, left: 20 }}>
-              <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" />
-              <XAxis dataKey="year" tick={{ fill: 'var(--text-secondary)', fontSize: 12 }} />
-              <YAxis
-                tick={{ fill: 'var(--text-secondary)', fontSize: 12 }}
-                tickFormatter={(v) => `$${(v / 1000).toFixed(0)}k`}
-              />
-              <Tooltip
-                contentStyle={{ backgroundColor: 'var(--bg-primary)', border: '1px solid var(--border)', borderRadius: '8px' }}
-                labelStyle={{ color: 'var(--text-primary)' }}
-                formatter={(value) => [fmtRevenue(Number(value)), 'Median $/MW']}
-              />
-              <Legend
-                wrapperStyle={{ fontSize: '12px' }}
-                formatter={(value) => TECH_LABELS[value] ?? value}
-              />
-              {TECH_ORDER.map(tech => (
-                <Line
-                  key={tech}
-                  type="monotone"
-                  dataKey={tech}
-                  stroke={TECH_COLOURS[tech]}
-                  strokeWidth={2}
-                  dot={{ fill: TECH_COLOURS[tech], r: 4 }}
-                  connectNulls
+          <ChartWrapper title="YoY Revenue Trends" data={yoyLineData} csvColumns={['year', ...TECH_ORDER]}>
+            <ResponsiveContainer width="100%" height={300}>
+              <LineChart data={yoyLineData} margin={{ top: 5, right: 20, bottom: 5, left: 20 }}>
+                <CartesianGrid strokeDasharray="3 3" stroke="var(--color-border)" />
+                <XAxis dataKey="year" tick={{ fill: 'var(--color-text-muted)', fontSize: 12 }} />
+                <YAxis
+                  tick={{ fill: 'var(--color-text-muted)', fontSize: 12 }}
+                  tickFormatter={(v) => `$${(v / 1000).toFixed(0)}k`}
                 />
-              ))}
-            </LineChart>
-          </ResponsiveContainer>
+                <Tooltip
+                  contentStyle={{ backgroundColor: 'var(--color-bg)', border: '1px solid var(--color-border)', borderRadius: '8px' }}
+                  labelStyle={{ color: 'var(--color-text)' }}
+                  formatter={(value) => [fmtRevenue(Number(value)), 'Median $/MW']}
+                />
+                <Legend
+                  wrapperStyle={{ fontSize: '12px' }}
+                  formatter={(value) => TECH_LABELS[value] ?? value}
+                />
+                {TECH_ORDER.map(tech => (
+                  <Line
+                    key={tech}
+                    type="monotone"
+                    dataKey={tech}
+                    stroke={TECH_COLOURS[tech]}
+                    strokeWidth={2}
+                    dot={{ fill: TECH_COLOURS[tech], r: 4 }}
+                    connectNulls
+                  />
+                ))}
+              </LineChart>
+            </ResponsiveContainer>
+          </ChartWrapper>
         </div>
 
         {/* BESS Arbitrage */}
-        <div className="bg-[var(--bg-secondary)] rounded-xl p-4 border border-[var(--border)]">
-          <h2 className="text-lg font-semibold text-[var(--text-primary)] mb-1">
+        <div className="bg-[var(--color-bg-card)] rounded-xl p-4 border border-[var(--color-border)]">
+          <h2 className="text-lg font-semibold text-[var(--color-text)] mb-1">
             BESS Arbitrage Pricing
           </h2>
-          <p className="text-xs text-[var(--text-secondary)] mb-4">
+          <p className="text-xs text-[var(--color-text-muted)] mb-4">
             Median discharge, charge, and spread prices ($/MWh) for BESS
           </p>
-          <ResponsiveContainer width="100%" height={300}>
-            <BarChart data={bessArbitrageData} margin={{ top: 5, right: 20, bottom: 5, left: 20 }}>
-              <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" />
-              <XAxis dataKey="year" tick={{ fill: 'var(--text-secondary)', fontSize: 12 }} />
-              <YAxis
-                tick={{ fill: 'var(--text-secondary)', fontSize: 12 }}
-                tickFormatter={(v) => `$${v}`}
-              />
-              <Tooltip
-                contentStyle={{ backgroundColor: 'var(--bg-primary)', border: '1px solid var(--border)', borderRadius: '8px' }}
-                labelStyle={{ color: 'var(--text-primary)' }}
-                formatter={(value) => [fmtPrice(Number(value)), '']}
-              />
-              <Legend wrapperStyle={{ fontSize: '12px' }} />
-              <Bar dataKey="discharge" name="Discharge Price" fill="#f97316" radius={[4, 4, 0, 0]} />
-              <Bar dataKey="charge" name="Charge Price" fill="#06b6d4" radius={[4, 4, 0, 0]} />
-              <Bar dataKey="spread" name="Spread" fill="#10b981" radius={[4, 4, 0, 0]} />
-            </BarChart>
-          </ResponsiveContainer>
+          <ChartWrapper title="BESS Arbitrage Pricing" data={bessArbitrageData} csvColumns={['year', 'discharge', 'charge', 'spread']}>
+            <ResponsiveContainer width="100%" height={300}>
+              <BarChart data={bessArbitrageData} margin={{ top: 5, right: 20, bottom: 5, left: 20 }}>
+                <CartesianGrid strokeDasharray="3 3" stroke="var(--color-border)" />
+                <XAxis dataKey="year" tick={{ fill: 'var(--color-text-muted)', fontSize: 12 }} />
+                <YAxis
+                  tick={{ fill: 'var(--color-text-muted)', fontSize: 12 }}
+                  tickFormatter={(v) => `$${v}`}
+                />
+                <Tooltip
+                  contentStyle={{ backgroundColor: 'var(--color-bg)', border: '1px solid var(--color-border)', borderRadius: '8px' }}
+                  labelStyle={{ color: 'var(--color-text)' }}
+                  formatter={(value) => [fmtPrice(Number(value)), '']}
+                />
+                <Legend wrapperStyle={{ fontSize: '12px' }} />
+                <Bar dataKey="discharge" name="Discharge Price" fill="#f97316" radius={[4, 4, 0, 0]} />
+                <Bar dataKey="charge" name="Charge Price" fill="#06b6d4" radius={[4, 4, 0, 0]} />
+                <Bar dataKey="spread" name="Spread" fill="#10b981" radius={[4, 4, 0, 0]} />
+              </BarChart>
+            </ResponsiveContainer>
+          </ChartWrapper>
         </div>
       </div>
 
       {/* Technology Comparison Table */}
-      <div className="bg-[var(--bg-secondary)] rounded-xl border border-[var(--border)] overflow-x-auto">
-        <div className="p-4 border-b border-[var(--border)]">
-          <h2 className="text-lg font-semibold text-[var(--text-primary)]">
+      <div className="bg-[var(--color-bg-card)] rounded-xl border border-[var(--color-border)] overflow-x-auto">
+        <div className="p-4 border-b border-[var(--color-border)]">
+          <h2 className="text-lg font-semibold text-[var(--color-text)]">
             Technology Comparison ({selectedYear})
           </h2>
-          <p className="text-xs text-[var(--text-secondary)] mt-1">
+          <p className="text-xs text-[var(--color-text-muted)] mt-1">
             Median values with interquartile range (P25 - P75)
           </p>
         </div>
         <table className="w-full text-sm">
           <thead>
-            <tr className="border-b border-[var(--border)]">
-              <th className="text-left p-3 text-[var(--text-secondary)] font-medium">Technology</th>
-              <th className="text-right p-3 text-[var(--text-secondary)] font-medium">Projects</th>
-              <th className="text-right p-3 text-[var(--text-secondary)] font-medium">Revenue/MW</th>
-              <th className="text-right p-3 text-[var(--text-secondary)] font-medium hidden sm:table-cell">Rev Range</th>
-              <th className="text-right p-3 text-[var(--text-secondary)] font-medium">Energy Price</th>
-              <th className="text-right p-3 text-[var(--text-secondary)] font-medium hidden sm:table-cell">Price Range</th>
-              <th className="text-right p-3 text-[var(--text-secondary)] font-medium">CF %</th>
-              <th className="text-right p-3 text-[var(--text-secondary)] font-medium hidden md:table-cell">CF Range</th>
+            <tr className="border-b border-[var(--color-border)]">
+              <th className="text-left p-3 text-[var(--color-text-muted)] font-medium">Technology</th>
+              <th className="text-right p-3 text-[var(--color-text-muted)] font-medium">Projects</th>
+              <th className="text-right p-3 text-[var(--color-text-muted)] font-medium">Revenue/MW</th>
+              <th className="text-right p-3 text-[var(--color-text-muted)] font-medium hidden sm:table-cell">Rev Range</th>
+              <th className="text-right p-3 text-[var(--color-text-muted)] font-medium">Energy Price</th>
+              <th className="text-right p-3 text-[var(--color-text-muted)] font-medium hidden sm:table-cell">Price Range</th>
+              <th className="text-right p-3 text-[var(--color-text-muted)] font-medium">CF %</th>
+              <th className="text-right p-3 text-[var(--color-text-muted)] font-medium hidden md:table-cell">CF Range</th>
             </tr>
           </thead>
           <tbody>
             {comparisonRows.map(row => (
-              <tr key={row.tech} className="border-b border-[var(--border)] hover:bg-[var(--bg-primary)]/50">
+              <tr key={row.tech} className="border-b border-[var(--color-border)] hover:bg-[var(--color-bg)]/50">
                 <td className="p-3">
                   <span className="flex items-center gap-2">
                     <span className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: row.colour }} />
-                    <span className="text-[var(--text-primary)] font-medium">{row.label}</span>
+                    <Link to={`/projects?tech=${row.tech}`} className="text-[var(--color-text)] hover:text-[var(--color-primary)] font-medium">
+                      {row.label}
+                    </Link>
                   </span>
                 </td>
-                <td className="p-3 text-right text-[var(--text-secondary)]">{row.count}</td>
-                <td className="p-3 text-right font-medium text-[var(--text-primary)]">{fmtRevenue(row.revMedian)}</td>
-                <td className="p-3 text-right text-[var(--text-secondary)] text-xs hidden sm:table-cell">
+                <td className="p-3 text-right text-[var(--color-text-muted)]">{row.count}</td>
+                <td className="p-3 text-right font-medium text-[var(--color-text)]">{fmtRevenue(row.revMedian)}</td>
+                <td className="p-3 text-right text-[var(--color-text-muted)] text-xs hidden sm:table-cell">
                   {fmtRevenue(row.revP25)} - {fmtRevenue(row.revP75)}
                 </td>
-                <td className="p-3 text-right font-medium text-[var(--text-primary)]">{fmtPrice(row.priceMedian)}</td>
-                <td className="p-3 text-right text-[var(--text-secondary)] text-xs hidden sm:table-cell">
+                <td className="p-3 text-right font-medium text-[var(--color-text)]">{fmtPrice(row.priceMedian)}</td>
+                <td className="p-3 text-right text-[var(--color-text-muted)] text-xs hidden sm:table-cell">
                   {fmtPrice(row.priceP25)} - {fmtPrice(row.priceP75)}
                 </td>
-                <td className="p-3 text-right font-medium text-[var(--text-primary)]">{fmtPct(row.cfMedian)}</td>
-                <td className="p-3 text-right text-[var(--text-secondary)] text-xs hidden md:table-cell">
+                <td className="p-3 text-right font-medium text-[var(--color-text)]">{fmtPct(row.cfMedian)}</td>
+                <td className="p-3 text-right text-[var(--color-text-muted)] text-xs hidden md:table-cell">
                   {fmtPct(row.cfP25)} - {fmtPct(row.cfP75)}
                 </td>
               </tr>
@@ -459,11 +482,11 @@ export default function RevenueIntel() {
       </div>
 
       {/* Offtake Comparison */}
-      <div className="bg-[var(--bg-secondary)] rounded-xl p-4 border border-[var(--border)]">
-        <h2 className="text-lg font-semibold text-[var(--text-primary)] mb-1">
+      <div className="bg-[var(--color-bg-card)] rounded-xl p-4 border border-[var(--color-border)]">
+        <h2 className="text-lg font-semibold text-[var(--color-text)] mb-1">
           Offtake Agreement Impact ({offtake.year})
         </h2>
-        <p className="text-xs text-[var(--text-secondary)] mb-4">
+        <p className="text-xs text-[var(--color-text-muted)] mb-4">
           Revenue comparison for projects with and without offtake agreements
         </p>
         <div className="grid sm:grid-cols-2 gap-4">
@@ -477,20 +500,20 @@ export default function RevenueIntel() {
             </div>
             <div className="space-y-3">
               <div>
-                <div className="text-xs text-[var(--text-secondary)] mb-0.5">Revenue/MW</div>
-                <div className="text-lg font-bold text-[var(--text-primary)]">
+                <div className="text-xs text-[var(--color-text-muted)] mb-0.5">Revenue/MW</div>
+                <div className="text-lg font-bold text-[var(--color-text)]">
                   {fmtRevenue(offtake.with_offtake.revenue_per_mw.median)}
                 </div>
-                <div className="text-xs text-[var(--text-secondary)]">
+                <div className="text-xs text-[var(--color-text-muted)]">
                   IQR: {fmtRevenue(offtake.with_offtake.revenue_per_mw.p25)} - {fmtRevenue(offtake.with_offtake.revenue_per_mw.p75)}
                 </div>
               </div>
               <div>
-                <div className="text-xs text-[var(--text-secondary)] mb-0.5">Energy Price</div>
-                <div className="text-lg font-bold text-[var(--text-primary)]">
+                <div className="text-xs text-[var(--color-text-muted)] mb-0.5">Energy Price</div>
+                <div className="text-lg font-bold text-[var(--color-text)]">
                   {fmtPrice(offtake.with_offtake.energy_price.median)}
                 </div>
-                <div className="text-xs text-[var(--text-secondary)]">
+                <div className="text-xs text-[var(--color-text-muted)]">
                   IQR: {fmtPrice(offtake.with_offtake.energy_price.p25)} - {fmtPrice(offtake.with_offtake.energy_price.p75)}
                 </div>
               </div>
@@ -507,20 +530,20 @@ export default function RevenueIntel() {
             </div>
             <div className="space-y-3">
               <div>
-                <div className="text-xs text-[var(--text-secondary)] mb-0.5">Revenue/MW</div>
-                <div className="text-lg font-bold text-[var(--text-primary)]">
+                <div className="text-xs text-[var(--color-text-muted)] mb-0.5">Revenue/MW</div>
+                <div className="text-lg font-bold text-[var(--color-text)]">
                   {fmtRevenue(offtake.without_offtake.revenue_per_mw.median)}
                 </div>
-                <div className="text-xs text-[var(--text-secondary)]">
+                <div className="text-xs text-[var(--color-text-muted)]">
                   IQR: {fmtRevenue(offtake.without_offtake.revenue_per_mw.p25)} - {fmtRevenue(offtake.without_offtake.revenue_per_mw.p75)}
                 </div>
               </div>
               <div>
-                <div className="text-xs text-[var(--text-secondary)] mb-0.5">Energy Price</div>
-                <div className="text-lg font-bold text-[var(--text-primary)]">
+                <div className="text-xs text-[var(--color-text-muted)] mb-0.5">Energy Price</div>
+                <div className="text-lg font-bold text-[var(--color-text)]">
                   {fmtPrice(offtake.without_offtake.energy_price.median)}
                 </div>
-                <div className="text-xs text-[var(--text-secondary)]">
+                <div className="text-xs text-[var(--color-text-muted)]">
                   IQR: {fmtPrice(offtake.without_offtake.energy_price.p25)} - {fmtPrice(offtake.without_offtake.energy_price.p75)}
                 </div>
               </div>
@@ -530,7 +553,7 @@ export default function RevenueIntel() {
       </div>
 
       {/* Source note */}
-      <div className="text-xs text-[var(--text-secondary)] italic">
+      <div className="text-xs text-[var(--color-text-muted)] italic">
         Revenue figures derived from AEMO dispatch and pricing data. Revenue/MW = annual energy revenue
         divided by registered capacity. 2026 figures are year-to-date and not comparable to full-year values.
       </div>

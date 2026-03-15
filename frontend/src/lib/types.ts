@@ -651,12 +651,18 @@ export interface StateYearPerformance {
   state: string; year: number; wind_cf_pct: number; solar_cf_pct: number;
   combined_cf_pct: number; wind_mw: number; solar_mw: number;
 }
+export interface SeasonalMonthly {
+  state: string; year: number; month: number;
+  wind_cf: number; solar_cf: number; combined_cf: number | null;
+  wind_mw: number; solar_mw: number;
+}
 export interface DunkelflaunteData {
   state_year_performance: StateYearPerformance[];
   lowest_cf_periods: StateYearPerformance[];
   bess_coverage: Record<string, { bess_count: number; bess_mw: number; bess_mwh: number; peak_demand_mw_est: number; coverage_hours: number; coverage_rating: string }>;
   bess_pipeline: Record<string, { count: number; mw: number; mwh: number }>;
   peak_demand_estimates: Record<string, number>;
+  seasonal_monthly?: SeasonalMonthly[];
 }
 
 export interface EnergyMixData {
@@ -702,4 +708,20 @@ export interface GridConnectionData {
   state_summary: Record<string, { rez_count: number; total_mw: number; pipeline_mw: number; rezs: string[] }>;
   connection_status_overall: Record<string, { count: number; mw: number }>;
   total_rez_zones: number;
+}
+
+// News
+export interface NewsArticle {
+  title: string;
+  url: string;
+  source: string;
+  published_date: string;
+  summary: string;
+  matched_project_ids: string[];
+}
+
+export interface NewsData {
+  articles: NewsArticle[];
+  source_counts: Record<string, number>;
+  total_articles: number;
 }

@@ -6,6 +6,7 @@ import {
 } from 'recharts'
 import { fetchSchemeRisk } from '../../lib/dataService'
 import type { SchemeRiskData, SchemeRiskProject } from '../../lib/types'
+import ScrollableTable from '../../components/common/ScrollableTable'
 
 // ============================================================
 // Icons — defined BEFORE const arrays per project pattern
@@ -177,7 +178,7 @@ export default function SchemeRisk() {
 
   if (!data || data.projects.length === 0) {
     return (
-      <div className="p-6 text-center text-[var(--text-secondary)]">
+      <div className="p-6 text-center text-[var(--color-text-muted)]">
         <ShieldIcon />
         <p className="mt-2">No scheme risk data available</p>
       </div>
@@ -188,17 +189,27 @@ export default function SchemeRisk() {
     <div className="p-4 md:p-6 space-y-6 max-w-7xl mx-auto">
       {/* Header */}
       <div>
-        <h1 className="text-2xl font-bold text-[var(--text-primary)]">Scheme Risk Assessment</h1>
-        <p className="text-sm text-[var(--text-secondary)] mt-1">
+        <h1 className="text-2xl font-bold text-[var(--color-text)]">Scheme Risk Assessment</h1>
+        <p className="text-sm text-[var(--color-text-muted)] mt-1">
           Delivery risk tracking across {data.total_projects} projects in government-backed procurement schemes
         </p>
       </div>
 
+      {/* Methodology */}
+      <details className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl p-4 mb-0">
+        <summary className="text-sm font-medium text-[var(--color-text)] cursor-pointer">How is risk calculated?</summary>
+        <div className="mt-3 text-xs text-[var(--color-text-muted)] space-y-2">
+          <p>Each project receives a <strong className="text-[var(--color-text)]">risk score from 0 to 100</strong> based on four weighted factors: FID (Financial Investment Decision) status, construction progress relative to schedule, COD (Commercial Operation Date) drift in months, and developer track record on prior projects.</p>
+          <p><strong className="text-[var(--color-text)]">Traffic light ratings:</strong> <span className="text-green-400 font-semibold">Green (0-20)</span> = low risk, project on track. <span className="text-amber-400 font-semibold">Amber (21-50)</span> = moderate risk, some delays or uncertainty. <span className="text-red-400 font-semibold">Red (51-100)</span> = high risk, significant delays, stalled construction, or no FID.</p>
+          <p>This analysis helps identify which government-funded scheme projects (ARENA, NSW LTESA, CIS, etc.) are most at risk of delay or failure, enabling early intervention and portfolio risk management.</p>
+        </div>
+      </details>
+
       {/* Summary cards */}
       <div className="grid grid-cols-3 gap-3 md:gap-4">
-        <div className="bg-[var(--bg-secondary)] rounded-xl p-4 border border-[var(--border)] text-center">
+        <div className="bg-[var(--color-bg-card)] rounded-xl p-4 border border-[var(--color-border)] text-center">
           <div className="text-3xl md:text-4xl font-bold text-red-500">{data.summary.red}</div>
-          <div className="text-xs md:text-sm text-[var(--text-secondary)] mt-1 font-medium">High Risk</div>
+          <div className="text-xs md:text-sm text-[var(--color-text-muted)] mt-1 font-medium">High Risk</div>
           <div className="w-full h-1 bg-red-500/20 rounded-full mt-2">
             <div
               className="h-full bg-red-500 rounded-full"
@@ -206,9 +217,9 @@ export default function SchemeRisk() {
             />
           </div>
         </div>
-        <div className="bg-[var(--bg-secondary)] rounded-xl p-4 border border-[var(--border)] text-center">
+        <div className="bg-[var(--color-bg-card)] rounded-xl p-4 border border-[var(--color-border)] text-center">
           <div className="text-3xl md:text-4xl font-bold text-amber-500">{data.summary.amber}</div>
-          <div className="text-xs md:text-sm text-[var(--text-secondary)] mt-1 font-medium">Medium Risk</div>
+          <div className="text-xs md:text-sm text-[var(--color-text-muted)] mt-1 font-medium">Medium Risk</div>
           <div className="w-full h-1 bg-amber-500/20 rounded-full mt-2">
             <div
               className="h-full bg-amber-500 rounded-full"
@@ -216,9 +227,9 @@ export default function SchemeRisk() {
             />
           </div>
         </div>
-        <div className="bg-[var(--bg-secondary)] rounded-xl p-4 border border-[var(--border)] text-center">
+        <div className="bg-[var(--color-bg-card)] rounded-xl p-4 border border-[var(--color-border)] text-center">
           <div className="text-3xl md:text-4xl font-bold text-green-500">{data.summary.green}</div>
-          <div className="text-xs md:text-sm text-[var(--text-secondary)] mt-1 font-medium">Low Risk</div>
+          <div className="text-xs md:text-sm text-[var(--color-text-muted)] mt-1 font-medium">Low Risk</div>
           <div className="w-full h-1 bg-green-500/20 rounded-full mt-2">
             <div
               className="h-full bg-green-500 rounded-full"
@@ -229,11 +240,11 @@ export default function SchemeRisk() {
       </div>
 
       {/* Risk by Scheme bar chart */}
-      <div className="bg-[var(--bg-secondary)] rounded-xl p-4 border border-[var(--border)]">
-        <h2 className="text-lg font-semibold text-[var(--text-primary)] mb-1">
+      <div className="bg-[var(--color-bg-card)] rounded-xl p-4 border border-[var(--color-border)]">
+        <h2 className="text-lg font-semibold text-[var(--color-text)] mb-1">
           Average Risk Score by Scheme
         </h2>
-        <p className="text-xs text-[var(--text-secondary)] mb-4">
+        <p className="text-xs text-[var(--color-text-muted)] mb-4">
           Higher score = greater delivery risk. Bar colour indicates average risk level.
         </p>
         <ResponsiveContainer width="100%" height={Math.max(schemeBarData.length * 50, 200)}>
@@ -242,22 +253,22 @@ export default function SchemeRisk() {
             layout="vertical"
             margin={{ top: 5, right: 60, bottom: 5, left: 10 }}
           >
-            <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" />
+            <CartesianGrid strokeDasharray="3 3" stroke="var(--color-border)" />
             <XAxis
               type="number"
               domain={[0, 100]}
-              tick={{ fill: 'var(--text-secondary)', fontSize: 12 }}
-              label={{ value: 'Risk Score', position: 'insideBottom', offset: -5, fill: 'var(--text-secondary)', fontSize: 12 }}
+              tick={{ fill: 'var(--color-text-muted)', fontSize: 12 }}
+              label={{ value: 'Risk Score', position: 'insideBottom', offset: -5, fill: 'var(--color-text-muted)', fontSize: 12 }}
             />
             <YAxis
               type="category"
               dataKey="scheme"
               width={120}
-              tick={{ fill: 'var(--text-secondary)', fontSize: 11 }}
+              tick={{ fill: 'var(--color-text-muted)', fontSize: 11 }}
             />
             <Tooltip
-              contentStyle={{ backgroundColor: 'var(--bg-primary)', border: '1px solid var(--border)', borderRadius: '8px' }}
-              labelStyle={{ color: 'var(--text-primary)' }}
+              contentStyle={{ backgroundColor: 'var(--color-bg)', border: '1px solid var(--color-border)', borderRadius: '8px' }}
+              labelStyle={{ color: 'var(--color-text)' }}
               formatter={(value) => [Number(value).toFixed(1), 'Avg Risk Score']}
               labelFormatter={(label) => {
                 const s = schemeBarData.find(x => x.scheme === label)
@@ -277,7 +288,7 @@ export default function SchemeRisk() {
       <div className="flex flex-col sm:flex-row gap-3">
         {/* Scheme filters */}
         <div className="flex items-center gap-2 flex-wrap">
-          <span className="text-[10px] font-semibold uppercase tracking-wider text-[var(--text-secondary)] w-14">
+          <span className="text-[10px] font-semibold uppercase tracking-wider text-[var(--color-text-muted)] w-14">
             Scheme
           </span>
           {schemes.map(scheme => {
@@ -289,7 +300,7 @@ export default function SchemeRisk() {
                 className={`text-xs px-2.5 py-1 rounded-full border transition-colors ${
                   isActive
                     ? 'border-blue-500 bg-blue-500/20 text-blue-400 font-medium'
-                    : 'border-[var(--border)] text-[var(--text-secondary)] hover:border-[var(--text-secondary)]'
+                    : 'border-[var(--color-border)] text-[var(--color-text-muted)] hover:border-[var(--color-text-muted)]'
                 }`}
               >
                 {scheme}
@@ -300,7 +311,7 @@ export default function SchemeRisk() {
 
         {/* Risk level filters */}
         <div className="flex items-center gap-2 flex-wrap">
-          <span className="text-[10px] font-semibold uppercase tracking-wider text-[var(--text-secondary)] w-14">
+          <span className="text-[10px] font-semibold uppercase tracking-wider text-[var(--color-text-muted)] w-14">
             Risk
           </span>
           {(['red', 'amber', 'green'] as const).map(level => {
@@ -313,7 +324,7 @@ export default function SchemeRisk() {
                 className={`text-xs px-2.5 py-1 rounded-full border transition-colors capitalize ${
                   isActive
                     ? 'border-transparent font-medium'
-                    : 'border-[var(--border)] text-[var(--text-secondary)] hover:border-[var(--text-secondary)]'
+                    : 'border-[var(--color-border)] text-[var(--color-text-muted)] hover:border-[var(--color-text-muted)]'
                 }`}
                 style={
                   isActive
@@ -340,38 +351,39 @@ export default function SchemeRisk() {
       </div>
 
       {/* Project table */}
-      <div className="bg-[var(--bg-secondary)] rounded-xl border border-[var(--border)] overflow-x-auto">
+      <div className="bg-[var(--color-bg-card)] rounded-xl border border-[var(--color-border)]">
+        <ScrollableTable>
         <table className="w-full text-sm">
           <thead>
-            <tr className="border-b border-[var(--border)]">
+            <tr className="border-b border-[var(--color-border)]">
               <th
-                className="text-left p-3 text-[var(--text-secondary)] font-medium cursor-pointer hover:text-[var(--text-primary)]"
+                className="text-left p-3 text-[var(--color-text-muted)] font-medium cursor-pointer hover:text-[var(--color-text)]"
                 onClick={() => handleSort('name')}
               >
                 Project
                 {sortField === 'name' && (sortDir === 'asc' ? <SortAscIcon /> : <SortDescIcon />)}
               </th>
-              <th className="text-left p-3 text-[var(--text-secondary)] font-medium hidden md:table-cell">Scheme</th>
-              <th className="text-left p-3 text-[var(--text-secondary)] font-medium hidden lg:table-cell">Technology</th>
-              <th className="text-left p-3 text-[var(--text-secondary)] font-medium hidden sm:table-cell">Status</th>
+              <th className="text-left p-3 text-[var(--color-text-muted)] font-medium hidden md:table-cell">Scheme</th>
+              <th className="text-left p-3 text-[var(--color-text-muted)] font-medium hidden lg:table-cell">Technology</th>
+              <th className="text-left p-3 text-[var(--color-text-muted)] font-medium hidden sm:table-cell">Status</th>
               <th
-                className="text-right p-3 text-[var(--text-secondary)] font-medium cursor-pointer hover:text-[var(--text-primary)]"
+                className="text-right p-3 text-[var(--color-text-muted)] font-medium cursor-pointer hover:text-[var(--color-text)]"
                 onClick={() => handleSort('capacity_mw')}
               >
                 MW
                 {sortField === 'capacity_mw' && (sortDir === 'asc' ? <SortAscIcon /> : <SortDescIcon />)}
               </th>
               <th
-                className="text-center p-3 text-[var(--text-secondary)] font-medium cursor-pointer hover:text-[var(--text-primary)]"
+                className="text-center p-3 text-[var(--color-text-muted)] font-medium cursor-pointer hover:text-[var(--color-text)]"
                 onClick={() => handleSort('risk_score')}
               >
                 Risk
                 {sortField === 'risk_score' && (sortDir === 'asc' ? <SortAscIcon /> : <SortDescIcon />)}
               </th>
-              <th className="text-center p-3 text-[var(--text-secondary)] font-medium hidden sm:table-cell">Level</th>
-              <th className="text-center p-3 text-[var(--text-secondary)] font-medium hidden md:table-cell">COD</th>
+              <th className="text-center p-3 text-[var(--color-text-muted)] font-medium hidden sm:table-cell">Level</th>
+              <th className="text-center p-3 text-[var(--color-text-muted)] font-medium hidden md:table-cell">COD</th>
               <th
-                className="text-right p-3 text-[var(--text-secondary)] font-medium cursor-pointer hover:text-[var(--text-primary)] hidden sm:table-cell"
+                className="text-right p-3 text-[var(--color-text-muted)] font-medium cursor-pointer hover:text-[var(--color-text)] hidden sm:table-cell"
                 onClick={() => handleSort('drift')}
               >
                 Drift
@@ -383,7 +395,7 @@ export default function SchemeRisk() {
             {filteredProjects.map(p => {
               const drift = getDrift(p)
               return (
-                <tr key={p.project_id} className="border-b border-[var(--border)] hover:bg-[var(--bg-primary)]/50">
+                <tr key={p.project_id} className="border-b border-[var(--color-border)] hover:bg-[var(--color-bg)]/50">
                   <td className="p-3">
                     <Link
                       to={`/projects/${p.technology}/${p.project_id}?from=intelligence/scheme-risk&fromLabel=Back to Scheme Risk`}
@@ -391,10 +403,10 @@ export default function SchemeRisk() {
                     >
                       {p.name}
                     </Link>
-                    <div className="text-xs text-[var(--text-secondary)] md:hidden mt-0.5">{p.scheme}</div>
+                    <div className="text-xs text-[var(--color-text-muted)] md:hidden mt-0.5">{p.scheme}</div>
                   </td>
-                  <td className="p-3 text-[var(--text-secondary)] hidden md:table-cell">{p.scheme}</td>
-                  <td className="p-3 text-[var(--text-secondary)] hidden lg:table-cell">{formatTech(p.technology)}</td>
+                  <td className="p-3 text-[var(--color-text-muted)] hidden md:table-cell">{p.scheme}</td>
+                  <td className="p-3 text-[var(--color-text-muted)] hidden lg:table-cell">{formatTech(p.technology)}</td>
                   <td className="p-3 hidden sm:table-cell">
                     <span className={`px-2 py-0.5 rounded-full text-xs ${
                       p.status === 'operating' ? 'bg-green-500/20 text-green-400' :
@@ -405,7 +417,7 @@ export default function SchemeRisk() {
                       {formatStatus(p.status)}
                     </span>
                   </td>
-                  <td className="p-3 text-right text-[var(--text-primary)]">
+                  <td className="p-3 text-right text-[var(--color-text)]">
                     {p.capacity_mw.toLocaleString()}
                   </td>
                   <td className="p-3 text-center">
@@ -424,7 +436,7 @@ export default function SchemeRisk() {
                       {p.risk_level === 'red' ? 'High' : p.risk_level === 'amber' ? 'Medium' : 'Low'}
                     </span>
                   </td>
-                  <td className="p-3 text-center text-[var(--text-secondary)] hidden md:table-cell">
+                  <td className="p-3 text-center text-[var(--color-text-muted)] hidden md:table-cell">
                     {p.cod_current ? new Date(p.cod_current).getFullYear() : '—'}
                   </td>
                   <td className="p-3 text-right hidden sm:table-cell">
@@ -433,7 +445,7 @@ export default function SchemeRisk() {
                     ) : drift < 0 ? (
                       <span className="text-green-400">{drift}m</span>
                     ) : (
-                      <span className="text-[var(--text-secondary)]">—</span>
+                      <span className="text-[var(--color-text-muted)]">—</span>
                     )}
                   </td>
                 </tr>
@@ -441,8 +453,9 @@ export default function SchemeRisk() {
             })}
           </tbody>
         </table>
+        </ScrollableTable>
         {filteredProjects.length === 0 && (
-          <div className="p-6 text-center text-[var(--text-secondary)]">
+          <div className="p-6 text-center text-[var(--color-text-muted)]">
             No projects match the selected filters
           </div>
         )}
@@ -450,12 +463,12 @@ export default function SchemeRisk() {
 
       {/* Key insights */}
       {insights && (
-        <div className="bg-[var(--bg-secondary)] rounded-xl p-4 border border-[var(--border)]">
-          <h2 className="text-lg font-semibold text-[var(--text-primary)] mb-3">Key Insights</h2>
+        <div className="bg-[var(--color-bg-card)] rounded-xl p-4 border border-[var(--color-border)]">
+          <h2 className="text-lg font-semibold text-[var(--color-text)] mb-3">Key Insights</h2>
           <div className="grid md:grid-cols-3 gap-4 text-sm">
             <div>
-              <div className="text-[var(--text-secondary)] font-medium mb-1">Highest Risk Scheme</div>
-              <p className="text-[var(--text-primary)]">
+              <div className="text-[var(--color-text-muted)] font-medium mb-1">Highest Risk Scheme</div>
+              <p className="text-[var(--color-text)]">
                 <span className="font-semibold" style={{ color: getRiskColour(insights.highest.risk_level) }}>
                   {insights.highest.scheme}
                 </span>{' '}
@@ -464,8 +477,8 @@ export default function SchemeRisk() {
               </p>
             </div>
             <div>
-              <div className="text-[var(--text-secondary)] font-medium mb-1">Lowest Risk Scheme</div>
-              <p className="text-[var(--text-primary)]">
+              <div className="text-[var(--color-text-muted)] font-medium mb-1">Lowest Risk Scheme</div>
+              <p className="text-[var(--color-text)]">
                 <span className="font-semibold" style={{ color: getRiskColour(insights.lowest.risk_level) }}>
                   {insights.lowest.scheme}
                 </span>{' '}
@@ -474,8 +487,8 @@ export default function SchemeRisk() {
               </p>
             </div>
             <div>
-              <div className="text-[var(--text-secondary)] font-medium mb-1">COD Drift</div>
-              <p className="text-[var(--text-primary)]">
+              <div className="text-[var(--color-text-muted)] font-medium mb-1">COD Drift</div>
+              <p className="text-[var(--color-text)]">
                 {insights.driftProjects > 0 ? (
                   <>
                     {insights.driftProjects} of {data.total_projects} projects have experienced COD drift,
@@ -495,7 +508,7 @@ export default function SchemeRisk() {
       )}
 
       {/* Source note */}
-      <div className="text-xs text-[var(--text-secondary)] italic">
+      <div className="text-xs text-[var(--color-text-muted)] italic">
         Risk scores are calculated from COD drift, FID status, construction progress, and planning approvals.
         Data sourced from ARENA, NSW LTESA, CIS disclosures, and developer announcements.
       </div>

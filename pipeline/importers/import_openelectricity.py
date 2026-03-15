@@ -545,17 +545,269 @@ def upsert_performance(conn, project_id: str, year: int, metrics: dict, source: 
 # Main
 # ============================================================
 
+# ============================================================
+# Monthly Import
+# ============================================================
+
+def ensure_monthly_table(conn):
+    """Create the performance_monthly table if it doesn't exist."""
+    conn.execute("""
+        CREATE TABLE IF NOT EXISTS performance_monthly (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            project_id TEXT NOT NULL REFERENCES projects(id),
+            year INTEGER NOT NULL,
+            month INTEGER NOT NULL CHECK(month BETWEEN 1 AND 12),
+            energy_mwh REAL,
+            capacity_factor_pct REAL,
+            energy_price_received REAL,
+            revenue_aud REAL,
+            energy_charged_mwh REAL,
+            energy_discharged_mwh REAL,
+            avg_charge_price REAL,
+            avg_discharge_price REAL,
+            data_source TEXT,
+            import_date TEXT DEFAULT (date('now')),
+            UNIQUE(project_id, year, month)
+        )
+    """)
+    conn.commit()
+
+
+def upsert_performance_monthly(conn, project_id, year, month, metrics, source):
+    """Insert or update a monthly performance record."""
+    existing = conn.execute(
+        "SELECT id FROM performance_monthly WHERE project_id = ? AND year = ? AND month = ?",
+        (project_id, year, month)
+    ).fetchone()
+
+    if existing:
+        sets = ', '.join(f"{k} = ?" for k in metrics.keys())
+        values = list(metrics.values()) + [source, project_id, year, month]
+        conn.execute(
+            f"UPDATE performance_monthly SET {sets}, data_source = ?, import_date = date('now') WHERE project_id = ? AND year = ? AND month = ?",
+            values
+        )
+    else:
+        cols = ['project_id', 'year', 'month'] + list(metrics.keys()) + ['data_source']
+        vals = [project_id, year, month] + list(metrics.values()) + [source]
+        placeholders = ', '.join('?' for _ in cols)
+        col_names = ', '.join(cols)
+        conn.execute(
+            f"INSERT INTO performance_monthly ({col_names}) VALUES ({placeholders})",
+            vals
+        )
+
+
+def import_monthly_from_api(conn, year: int):
+    """Import monthly performance data from the OpenElectricity API.
+
+    Uses interval=1M to get 12 data points per facility per year.
+    """
+    api_key = os.environ.get('OPENELECTRICITY_API_KEY')
+    if not api_key:
+        print("ERROR: OPENELECTRICITY_API_KEY environment variable not set.")
+        sys.exit(1)
+
+    ensure_monthly_table(conn)
+
+    me = api_get("/me", api_key)
+    remaining = me.get('data', {}).get('meta', {}).get('remaining', 0)
+    print(f"API quota remaining: {remaining} requests")
+    if remaining < 15:
+        print("WARNING: Low API quota.")
+        sys.exit(1)
+
+    date_start = f"{year}-01-01"
+    date_end = f"{year}-12-31"
+
+    import calendar
+    hours_per_month = {}
+    for m in range(1, 13):
+        days = calendar.monthrange(year, m)[1]
+        hours_per_month[m] = days * 24
+
+    projects = get_operating_projects(conn)
+    if not projects:
+        print("No operating projects found.")
+        return
+    projects_by_id = {p['id']: p for p in projects}
+    print(f"Found {len(projects)} operating projects for monthly import.")
+
+    # Fetch facility list
+    print("Fetching facility list from OpenElectricity...")
+    facilities_data = api_get("/facilities/", api_key, {
+        "status_id": "operating",
+        "network_id": "NEM",
+    })
+    oe_facilities = facilities_data.get('data', [])
+
+    mapping = build_project_facility_map(conn, projects, oe_facilities)
+    print(f"Matched {len(mapping)} projects to OE facilities.")
+
+    facility_codes = list(set(mapping.values()))
+    code_to_projects = {}
+    for pid, fcode in mapping.items():
+        code_to_projects.setdefault(fcode, []).append(pid)
+
+    unit_lookup = {}
+    for f in oe_facilities:
+        for u in f.get('units', []):
+            unit_lookup[u['code']] = {
+                'facility': f['code'],
+                'fueltech': u.get('fueltech_id', ''),
+            }
+
+    total_batches = (len(facility_codes) + BATCH_SIZE - 1) // BATCH_SIZE
+    print(f"\nFetching monthly data for {len(facility_codes)} facilities in {total_batches} batches...")
+
+    # Collect results: facility_code -> month -> {energy, market_value, etc.}
+    facility_monthly = {}
+    EMPTY_MONTH = lambda: {
+        'energy_mwh': 0, 'market_value_aud': 0,
+        'charge_energy_mwh': 0, 'charge_value_aud': 0,
+        'discharge_energy_mwh': 0, 'discharge_value_aud': 0,
+    }
+
+    for i in range(0, len(facility_codes), BATCH_SIZE):
+        batch = facility_codes[i:i + BATCH_SIZE]
+        batch_num = i // BATCH_SIZE + 1
+
+        try:
+            data = api_get("/data/facilities/NEM", api_key, {
+                "facility_code": batch,
+                "metrics": ["energy", "market_value"],
+                "interval": "1M",
+                "date_start": date_start,
+                "date_end": date_end,
+            })
+
+            for series in data.get('data', []):
+                metric = series.get('metric')
+                for result in series.get('results', []):
+                    unit_code = result.get('columns', {}).get('unit_code', '')
+                    values = result.get('data', [])
+
+                    info = unit_lookup.get(unit_code)
+                    if not info:
+                        continue
+
+                    fcode = info['facility']
+                    fueltech = info['fueltech']
+
+                    if fcode not in facility_monthly:
+                        facility_monthly[fcode] = {}
+
+                    for dp in values:
+                        if len(dp) < 2 or dp[1] is None:
+                            continue
+                        ts, val = dp[0], dp[1]
+                        # Parse month from timestamp
+                        try:
+                            month = int(ts[5:7])
+                        except (ValueError, IndexError):
+                            continue
+
+                        if month not in facility_monthly[fcode]:
+                            facility_monthly[fcode][month] = EMPTY_MONTH()
+
+                        r = facility_monthly[fcode][month]
+                        if metric == 'energy':
+                            r['energy_mwh'] += val
+                        elif metric == 'market_value':
+                            r['market_value_aud'] += val
+
+                        if fueltech == 'battery_discharging':
+                            if metric == 'energy':
+                                r['discharge_energy_mwh'] += abs(val)
+                            elif metric == 'market_value':
+                                r['discharge_value_aud'] += val
+                        elif fueltech == 'battery_charging':
+                            if metric == 'energy':
+                                r['charge_energy_mwh'] += abs(val)
+                            elif metric == 'market_value':
+                                r['charge_value_aud'] += abs(val)
+
+            print(f"  Batch {batch_num}/{total_batches}: OK ({len(batch)} facilities)")
+            time.sleep(0.5)
+
+        except Exception as e:
+            print(f"  Batch {batch_num}/{total_batches}: FAILED - {e}")
+
+    # Compute metrics and upsert monthly
+    imported = 0
+    for fcode, months_data in facility_monthly.items():
+        pids = code_to_projects.get(fcode, [])
+        valid_projects = [(pid, projects_by_id[pid]) for pid in pids if projects_by_id.get(pid)]
+        if not valid_projects:
+            continue
+
+        total_capacity = sum(p['capacity_mw'] for _, p in valid_projects)
+
+        for month, raw in months_data.items():
+            energy = raw['energy_mwh']
+            if energy <= 0:
+                continue
+
+            hours = hours_per_month.get(month, 730)
+
+            for pid, project in valid_projects:
+                capacity_mw = project['capacity_mw']
+                tech = project['technology']
+
+                share = capacity_mw / total_capacity if len(valid_projects) > 1 and total_capacity > 0 else 1.0
+
+                project_energy = energy * share
+                project_revenue = raw['market_value_aud'] * share
+
+                cf = (project_energy / (capacity_mw * hours)) * 100 if capacity_mw > 0 else 0
+                price = project_revenue / project_energy if project_energy > 0 else 0
+
+                metrics = {
+                    'energy_mwh': round(project_energy, 1),
+                    'capacity_factor_pct': round(min(cf, 100), 2),
+                    'energy_price_received': round(price, 2),
+                    'revenue_aud': round(project_revenue, 0),
+                }
+
+                if tech == 'bess':
+                    discharged = raw.get('discharge_energy_mwh', 0) * share
+                    charged = raw.get('charge_energy_mwh', 0) * share
+                    discharge_val = raw.get('discharge_value_aud', 0) * share
+                    charge_val = raw.get('charge_value_aud', 0) * share
+
+                    if discharged > 0 and charged > 0:
+                        metrics.update({
+                            'energy_discharged_mwh': round(discharged, 1),
+                            'energy_charged_mwh': round(charged, 1),
+                            'avg_discharge_price': round(discharge_val / discharged, 2),
+                            'avg_charge_price': round(charge_val / charged, 2),
+                        })
+
+                upsert_performance_monthly(conn, pid, year, month, metrics, 'openelectricity_monthly')
+                imported += 1
+
+    conn.commit()
+    print(f"\nImported monthly performance data: {imported} project-month records for {year}.")
+
+
+# ============================================================
+# Main
+# ============================================================
+
 def main():
     parser = argparse.ArgumentParser(description='Import performance data from OpenElectricity API')
     parser.add_argument('--year', type=int, default=2024, help='Year to import (default: 2024)')
     parser.add_argument('--sample', action='store_true', help='Generate sample data instead of API import')
     parser.add_argument('--ytd', action='store_true', help='Import year-to-date (partial year) data')
+    parser.add_argument('--monthly', action='store_true', help='Import monthly data (12 data points per facility)')
     args = parser.parse_args()
 
     conn = get_connection()
 
     if args.sample:
         generate_sample_data(conn, args.year)
+    elif args.monthly:
+        import_monthly_from_api(conn, args.year)
     else:
         import_from_api(conn, args.year, ytd=args.ytd)
 

@@ -7,6 +7,7 @@ import {
 } from 'recharts'
 import { fetchWindResource } from '../../lib/dataService'
 import type { WindResourceData, WindResourceFarm } from '../../lib/types'
+import ScrollableTable from '../../components/common/ScrollableTable'
 
 // ============================================================
 // Icons — defined BEFORE const arrays per project pattern
@@ -245,7 +246,7 @@ export default function WindResource() {
 
   if (!data) {
     return (
-      <div className="p-6 text-center text-[var(--text-secondary)]">
+      <div className="p-6 text-center text-[var(--color-text-muted)]">
         No wind resource data available.
       </div>
     )
@@ -255,51 +256,61 @@ export default function WindResource() {
     <div className="p-4 md:p-6 space-y-6 max-w-7xl mx-auto">
       {/* Header */}
       <div>
-        <h1 className="text-2xl font-bold text-[var(--text-primary)]">Wind Resource Quality</h1>
-        <p className="text-sm text-[var(--text-secondary)] mt-1">
+        <h1 className="text-2xl font-bold text-[var(--color-text)]">Wind Resource Quality</h1>
+        <p className="text-sm text-[var(--color-text-muted)] mt-1">
           Capacity factor analysis across {data.total_operating} operating wind farms and {data.total_development} development projects
         </p>
       </div>
 
+      {/* Methodology */}
+      <details className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl p-4 mb-0">
+        <summary className="text-sm font-medium text-[var(--color-text)] cursor-pointer">How are ratings calculated?</summary>
+        <div className="mt-3 text-xs text-[var(--color-text-muted)] space-y-2">
+          <p>Each wind farm is rated on its <strong className="text-[var(--color-text)]">capacity factor</strong> -- the ratio of actual generation to theoretical maximum output. Ratings are: <span className="text-emerald-400 font-semibold">Excellent</span> (CF &ge; 40%), <span className="text-blue-400 font-semibold">Good</span> (CF &ge; 30%), <span className="text-amber-400 font-semibold">Average</span> (CF &ge; 20%), and <span className="text-red-400 font-semibold">Below Average</span> (CF &lt; 20%).</p>
+          <p><strong className="text-[var(--color-text)]">Why capacity factor matters:</strong> It measures how effectively a wind farm converts its installed capacity into actual electricity. A 100 MW farm with a 35% CF generates 35 MW on average -- higher CF means more energy per dollar of capital invested.</p>
+          <p><strong className="text-[var(--color-text)]">Key factors affecting CF:</strong> Wind speed and consistency at site, turbine technology and hub height, grid curtailment (forced output reductions), marginal loss factors (transmission losses), and wake effects from nearby turbines.</p>
+        </div>
+      </details>
+
       {/* Summary cards */}
       {summary && (
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-          <div className="bg-[var(--bg-secondary)] rounded-xl p-4 border border-[var(--border)]">
-            <div className="flex items-center gap-2 text-[var(--text-secondary)] mb-2">
+          <div className="bg-[var(--color-bg-card)] rounded-xl p-4 border border-[var(--color-border)]">
+            <div className="flex items-center gap-2 text-[var(--color-text-muted)] mb-2">
               <WindIcon />
               <span className="text-xs font-medium uppercase tracking-wider">Operating Farms</span>
             </div>
-            <div className="text-2xl font-bold text-[var(--text-primary)]">{summary.totalOperating}</div>
-            <div className="text-xs text-[var(--text-secondary)]">{filtered.length} shown</div>
+            <div className="text-2xl font-bold text-[var(--color-text)]">{summary.totalOperating}</div>
+            <div className="text-xs text-[var(--color-text-muted)]">{filtered.length} shown</div>
           </div>
 
-          <div className="bg-[var(--bg-secondary)] rounded-xl p-4 border border-[var(--border)]">
-            <div className="flex items-center gap-2 text-[var(--text-secondary)] mb-2">
+          <div className="bg-[var(--color-bg-card)] rounded-xl p-4 border border-[var(--color-border)]">
+            <div className="flex items-center gap-2 text-[var(--color-text-muted)] mb-2">
               <ChartIcon />
               <span className="text-xs font-medium uppercase tracking-wider">Avg CF</span>
             </div>
             <div className="text-2xl font-bold text-blue-400">{fmtCf(summary.avgCf)}</div>
-            <div className="text-xs text-[var(--text-secondary)]">fleet average</div>
+            <div className="text-xs text-[var(--color-text-muted)]">fleet average</div>
           </div>
 
-          <div className="bg-[var(--bg-secondary)] rounded-xl p-4 border border-[var(--border)]">
-            <div className="flex items-center gap-2 text-[var(--text-secondary)] mb-2">
+          <div className="bg-[var(--color-bg-card)] rounded-xl p-4 border border-[var(--color-border)]">
+            <div className="flex items-center gap-2 text-[var(--color-text-muted)] mb-2">
               <BoltIcon />
               <span className="text-xs font-medium uppercase tracking-wider">Best State</span>
             </div>
             <div className="text-2xl font-bold" style={{ color: getStateColour(summary.bestState) }}>
               {summary.bestState}
             </div>
-            <div className="text-xs text-[var(--text-secondary)]">median CF {fmtCf(summary.bestStateMedian)}</div>
+            <div className="text-xs text-[var(--color-text-muted)]">median CF {fmtCf(summary.bestStateMedian)}</div>
           </div>
 
-          <div className="bg-[var(--bg-secondary)] rounded-xl p-4 border border-[var(--border)]">
-            <div className="flex items-center gap-2 text-[var(--text-secondary)] mb-2">
+          <div className="bg-[var(--color-bg-card)] rounded-xl p-4 border border-[var(--color-border)]">
+            <div className="flex items-center gap-2 text-[var(--color-text-muted)] mb-2">
               <PipelineIcon />
               <span className="text-xs font-medium uppercase tracking-wider">Dev Pipeline</span>
             </div>
             <div className="text-2xl font-bold text-amber-400">{summary.devPipeline}</div>
-            <div className="text-xs text-[var(--text-secondary)]">development projects</div>
+            <div className="text-xs text-[var(--color-text-muted)]">development projects</div>
           </div>
         </div>
       )}
@@ -367,26 +378,26 @@ export default function WindResource() {
       {/* State Benchmarks + Rating Distribution in 2-col */}
       <div className="grid md:grid-cols-2 gap-6">
         {/* State benchmarks horizontal bar chart */}
-        <div className="bg-[var(--bg-secondary)] rounded-xl p-4 border border-[var(--border)]">
-          <h2 className="text-lg font-semibold text-[var(--text-primary)] mb-1">State Benchmarks</h2>
-          <p className="text-xs text-[var(--text-secondary)] mb-4">
+        <div className="bg-[var(--color-bg-card)] rounded-xl p-4 border border-[var(--color-border)]">
+          <h2 className="text-lg font-semibold text-[var(--color-text)] mb-1">State Benchmarks</h2>
+          <p className="text-xs text-[var(--color-text-muted)] mb-4">
             Median capacity factor by state. Error bars show P25-P75 range.
           </p>
           <ResponsiveContainer width="100%" height={Math.max(stateBenchData.length * 44, 200)}>
             <BarChart data={stateBenchData} layout="vertical" margin={{ top: 5, right: 40, bottom: 5, left: 10 }}>
-              <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" horizontal={false} />
+              <CartesianGrid strokeDasharray="3 3" stroke="var(--color-border)" horizontal={false} />
               <XAxis
                 type="number" domain={[0, 50]}
-                tick={{ fill: 'var(--text-secondary)', fontSize: 12 }}
+                tick={{ fill: 'var(--color-text-muted)', fontSize: 12 }}
                 tickFormatter={(v) => `${v}%`}
               />
               <YAxis
                 type="category" dataKey="state" width={50}
-                tick={{ fill: 'var(--text-secondary)', fontSize: 12 }}
+                tick={{ fill: 'var(--color-text-muted)', fontSize: 12 }}
               />
               <Tooltip
-                contentStyle={{ backgroundColor: 'var(--bg-primary)', border: '1px solid var(--border)', borderRadius: '8px' }}
-                labelStyle={{ color: 'var(--text-primary)' }}
+                contentStyle={{ backgroundColor: 'var(--color-bg)', border: '1px solid var(--color-border)', borderRadius: '8px' }}
+                labelStyle={{ color: 'var(--color-text)' }}
                 formatter={(value) => [fmtCf(Number(value)), 'Median CF']}
                 labelFormatter={(label) => {
                   const row = stateBenchData.find(r => r.state === label)
@@ -407,16 +418,16 @@ export default function WindResource() {
             {RATING_ORDER.map(r => (
               <div key={r} className="flex items-center gap-1.5 text-xs">
                 <span className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: RATING_COLOURS[r] }} />
-                <span className="text-[var(--text-secondary)]">{r}</span>
+                <span className="text-[var(--color-text-muted)]">{r}</span>
               </div>
             ))}
           </div>
         </div>
 
         {/* Rating distribution pie */}
-        <div className="bg-[var(--bg-secondary)] rounded-xl p-4 border border-[var(--border)]">
-          <h2 className="text-lg font-semibold text-[var(--text-primary)] mb-1">Rating Distribution</h2>
-          <p className="text-xs text-[var(--text-secondary)] mb-4">
+        <div className="bg-[var(--color-bg-card)] rounded-xl p-4 border border-[var(--color-border)]">
+          <h2 className="text-lg font-semibold text-[var(--color-text)] mb-1">Rating Distribution</h2>
+          <p className="text-xs text-[var(--color-text-muted)] mb-4">
             {data.total_operating} farms by resource quality rating
           </p>
           <ResponsiveContainer width="100%" height={280}>
@@ -436,7 +447,7 @@ export default function WindResource() {
                 ))}
               </Pie>
               <Tooltip
-                contentStyle={{ backgroundColor: 'var(--bg-primary)', border: '1px solid var(--border)', borderRadius: '8px' }}
+                contentStyle={{ backgroundColor: 'var(--color-bg)', border: '1px solid var(--color-border)', borderRadius: '8px' }}
                 formatter={(value, _name, props) => {
                   const pct = ((Number(value) / data.total_operating) * 100).toFixed(0)
                   return [`${value} farms (${pct}%)`, props.payload.name]
@@ -448,7 +459,7 @@ export default function WindResource() {
             {pieData.map(d => (
               <div key={d.name} className="flex items-center gap-1.5 text-xs">
                 <span className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: d.fill }} />
-                <span className="text-[var(--text-secondary)]">{d.name}: {d.value}</span>
+                <span className="text-[var(--color-text-muted)]">{d.name}: {d.value}</span>
               </div>
             ))}
           </div>
@@ -456,39 +467,39 @@ export default function WindResource() {
       </div>
 
       {/* Scatter plot: Capacity vs CF */}
-      <div className="bg-[var(--bg-secondary)] rounded-xl p-4 border border-[var(--border)]">
-        <h2 className="text-lg font-semibold text-[var(--text-primary)] mb-1">Capacity vs Capacity Factor</h2>
-        <p className="text-xs text-[var(--text-secondary)] mb-4">
+      <div className="bg-[var(--color-bg-card)] rounded-xl p-4 border border-[var(--color-border)]">
+        <h2 className="text-lg font-semibold text-[var(--color-text)] mb-1">Capacity vs Capacity Factor</h2>
+        <p className="text-xs text-[var(--color-text-muted)] mb-4">
           Each dot is an operating farm. Colour indicates state. Hover for details.
         </p>
         <ResponsiveContainer width="100%" height={360}>
           <ScatterChart margin={{ top: 10, right: 20, bottom: 20, left: 20 }}>
-            <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" />
+            <CartesianGrid strokeDasharray="3 3" stroke="var(--color-border)" />
             <XAxis
               dataKey="x" type="number" name="Capacity"
-              tick={{ fill: 'var(--text-secondary)', fontSize: 12 }}
-              label={{ value: 'Capacity (MW)', position: 'insideBottom', offset: -10, fill: 'var(--text-secondary)', fontSize: 12 }}
+              tick={{ fill: 'var(--color-text-muted)', fontSize: 12 }}
+              label={{ value: 'Capacity (MW)', position: 'insideBottom', offset: -10, fill: 'var(--color-text-muted)', fontSize: 12 }}
             />
             <YAxis
               dataKey="y" type="number" name="Capacity Factor"
-              tick={{ fill: 'var(--text-secondary)', fontSize: 12 }}
+              tick={{ fill: 'var(--color-text-muted)', fontSize: 12 }}
               tickFormatter={(v) => `${v}%`}
-              label={{ value: 'Capacity Factor %', angle: -90, position: 'insideLeft', fill: 'var(--text-secondary)', fontSize: 12 }}
+              label={{ value: 'Capacity Factor %', angle: -90, position: 'insideLeft', fill: 'var(--color-text-muted)', fontSize: 12 }}
             />
             <Tooltip
               content={({ payload }) => {
                 if (!payload?.length) return null
                 const d = payload[0].payload as WindResourceFarm
                 return (
-                  <div className="bg-[var(--bg-primary)] border border-[var(--border)] rounded-lg p-3 shadow-lg text-sm">
-                    <div className="font-semibold text-[var(--text-primary)]">{d.name}</div>
-                    <div className="text-[var(--text-secondary)]">
+                  <div className="bg-[var(--color-bg)] border border-[var(--color-border)] rounded-lg p-3 shadow-lg text-sm">
+                    <div className="font-semibold text-[var(--color-text)]">{d.name}</div>
+                    <div className="text-[var(--color-text-muted)]">
                       {d.state} — {fmtMw(d.capacity_mw)}
                     </div>
-                    <div className="text-[var(--text-secondary)]">
+                    <div className="text-[var(--color-text-muted)]">
                       CF: {fmtCf(d.capacity_factor_pct)} — {d.resource_rating}
                     </div>
-                    <div className="text-[var(--text-secondary)]">
+                    <div className="text-[var(--color-text-muted)]">
                       Price: {fmtPrice(d.energy_price)}/MWh — Revenue: {fmtRevenue(d.revenue_per_mw)}/MW
                     </div>
                   </div>
@@ -507,23 +518,24 @@ export default function WindResource() {
           {availableStates.map(state => (
             <div key={state} className="flex items-center gap-1.5 text-xs">
               <span className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: getStateColour(state) }} />
-              <span className="text-[var(--text-secondary)]">{state}</span>
+              <span className="text-[var(--color-text-muted)]">{state}</span>
             </div>
           ))}
         </div>
       </div>
 
       {/* Operating farms table */}
-      <div className="bg-[var(--bg-secondary)] rounded-xl border border-[var(--border)] overflow-x-auto">
-        <div className="p-4 border-b border-[var(--border)]">
-          <h2 className="text-lg font-semibold text-[var(--text-primary)]">Operating Wind Farms</h2>
-          <p className="text-xs text-[var(--text-secondary)] mt-1">
+      <div className="bg-[var(--color-bg-card)] rounded-xl border border-[var(--color-border)]">
+        <div className="p-4 border-b border-[var(--color-border)]">
+          <h2 className="text-lg font-semibold text-[var(--color-text)]">Operating Wind Farms</h2>
+          <p className="text-xs text-[var(--color-text-muted)] mt-1">
             Showing {sorted.length} of {data.total_operating} farms. Click column headers to sort.
           </p>
         </div>
+        <ScrollableTable>
         <table className="w-full text-sm">
           <thead>
-            <tr className="border-b border-[var(--border)]">
+            <tr className="border-b border-[var(--color-border)]">
               {([
                 ['name', 'Name', 'text-left', ''],
                 ['state', 'State', 'text-left', 'hidden sm:table-cell'],
@@ -536,7 +548,7 @@ export default function WindResource() {
                 <th
                   key={field}
                   onClick={() => handleSort(field)}
-                  className={`${align} p-3 text-[var(--text-secondary)] font-medium cursor-pointer hover:text-[var(--text-primary)] select-none ${hide}`}
+                  className={`${align} p-3 text-[var(--color-text-muted)] font-medium cursor-pointer hover:text-[var(--color-text)] select-none ${hide}`}
                 >
                   {label}
                   {sortField === field && (
@@ -550,7 +562,7 @@ export default function WindResource() {
           </thead>
           <tbody>
             {sorted.map(farm => (
-              <tr key={farm.project_id} className="border-b border-[var(--border)] hover:bg-[var(--bg-primary)]/50">
+              <tr key={farm.project_id} className="border-b border-[var(--color-border)] hover:bg-[var(--color-bg)]/50">
                 <td className="p-3">
                   <Link
                     to={`/projects/wind/${farm.project_id}?from=intelligence/wind-resource&fromLabel=Back to Wind Resource`}
@@ -564,8 +576,8 @@ export default function WindResource() {
                     {farm.state}
                   </span>
                 </td>
-                <td className="p-3 text-right text-[var(--text-primary)]">{fmtMw(farm.capacity_mw)}</td>
-                <td className="p-3 text-right font-mono text-[var(--text-primary)]">{fmtCf(farm.capacity_factor_pct)}</td>
+                <td className="p-3 text-right text-[var(--color-text)]">{fmtMw(farm.capacity_mw)}</td>
+                <td className="p-3 text-right font-mono text-[var(--color-text)]">{fmtCf(farm.capacity_factor_pct)}</td>
                 <td className="p-3 text-center hidden sm:table-cell">
                   <span
                     className="px-2 py-0.5 rounded-full text-xs font-semibold"
@@ -577,46 +589,48 @@ export default function WindResource() {
                     {farm.resource_rating}
                   </span>
                 </td>
-                <td className="p-3 text-right text-[var(--text-secondary)] hidden md:table-cell">{fmtPrice(farm.energy_price)}</td>
-                <td className="p-3 text-right text-[var(--text-primary)] hidden md:table-cell">{fmtRevenue(farm.revenue_per_mw)}</td>
+                <td className="p-3 text-right text-[var(--color-text-muted)] hidden md:table-cell">{fmtPrice(farm.energy_price)}</td>
+                <td className="p-3 text-right text-[var(--color-text)] hidden md:table-cell">{fmtRevenue(farm.revenue_per_mw)}</td>
               </tr>
             ))}
             {sorted.length === 0 && (
               <tr>
-                <td colSpan={7} className="p-8 text-center text-[var(--text-secondary)]">
+                <td colSpan={7} className="p-8 text-center text-[var(--color-text-muted)]">
                   No farms match the current filters.
                 </td>
               </tr>
             )}
           </tbody>
         </table>
-        <div className="px-3 py-2 text-xs text-[var(--text-secondary)] border-t border-[var(--border)]">
+        </ScrollableTable>
+        <div className="px-3 py-2 text-xs text-[var(--color-text-muted)] border-t border-[var(--color-border)]">
           Showing {sorted.length} of {data.total_operating} operating wind farms
         </div>
       </div>
 
       {/* Development predictions */}
-      <div className="bg-[var(--bg-secondary)] rounded-xl border border-[var(--border)] overflow-x-auto">
-        <div className="p-4 border-b border-[var(--border)]">
-          <h2 className="text-lg font-semibold text-[var(--text-primary)]">Development Pipeline Predictions</h2>
-          <p className="text-xs text-[var(--text-secondary)] mt-1">
+      <div className="bg-[var(--color-bg-card)] rounded-xl border border-[var(--color-border)]">
+        <div className="p-4 border-b border-[var(--color-border)]">
+          <h2 className="text-lg font-semibold text-[var(--color-text)]">Development Pipeline Predictions</h2>
+          <p className="text-xs text-[var(--color-text-muted)] mt-1">
             Predicted capacity factors for {data.total_development} development-stage wind projects
           </p>
         </div>
+        <ScrollableTable>
         <table className="w-full text-sm">
           <thead>
-            <tr className="border-b border-[var(--border)]">
-              <th className="text-left p-3 text-[var(--text-secondary)] font-medium">Name</th>
-              <th className="text-left p-3 text-[var(--text-secondary)] font-medium hidden sm:table-cell">State</th>
-              <th className="text-right p-3 text-[var(--text-secondary)] font-medium">Capacity</th>
-              <th className="text-right p-3 text-[var(--text-secondary)] font-medium">Predicted CF</th>
-              <th className="text-center p-3 text-[var(--text-secondary)] font-medium hidden sm:table-cell">Rating</th>
-              <th className="text-left p-3 text-[var(--text-secondary)] font-medium hidden md:table-cell">Basis</th>
+            <tr className="border-b border-[var(--color-border)]">
+              <th className="text-left p-3 text-[var(--color-text-muted)] font-medium">Name</th>
+              <th className="text-left p-3 text-[var(--color-text-muted)] font-medium hidden sm:table-cell">State</th>
+              <th className="text-right p-3 text-[var(--color-text-muted)] font-medium">Capacity</th>
+              <th className="text-right p-3 text-[var(--color-text-muted)] font-medium">Predicted CF</th>
+              <th className="text-center p-3 text-[var(--color-text-muted)] font-medium hidden sm:table-cell">Rating</th>
+              <th className="text-left p-3 text-[var(--color-text-muted)] font-medium hidden md:table-cell">Basis</th>
             </tr>
           </thead>
           <tbody>
             {data.development_projects.map(proj => (
-              <tr key={proj.project_id} className="border-b border-[var(--border)] hover:bg-[var(--bg-primary)]/50">
+              <tr key={proj.project_id} className="border-b border-[var(--color-border)] hover:bg-[var(--color-bg)]/50">
                 <td className="p-3">
                   <Link
                     to={`/projects/wind/${proj.project_id}?from=intelligence/wind-resource&fromLabel=Back to Wind Resource`}
@@ -630,8 +644,8 @@ export default function WindResource() {
                     {proj.state}
                   </span>
                 </td>
-                <td className="p-3 text-right text-[var(--text-primary)]">{fmtMw(proj.capacity_mw)}</td>
-                <td className="p-3 text-right font-mono text-[var(--text-primary)]">{fmtCf(proj.predicted_cf_pct)}</td>
+                <td className="p-3 text-right text-[var(--color-text)]">{fmtMw(proj.capacity_mw)}</td>
+                <td className="p-3 text-right font-mono text-[var(--color-text)]">{fmtCf(proj.predicted_cf_pct)}</td>
                 <td className="p-3 text-center hidden sm:table-cell">
                   <span
                     className="px-2 py-0.5 rounded-full text-xs font-semibold"
@@ -643,25 +657,26 @@ export default function WindResource() {
                     {proj.predicted_rating}
                   </span>
                 </td>
-                <td className="p-3 text-[var(--text-secondary)] text-xs hidden md:table-cell">{proj.basis}</td>
+                <td className="p-3 text-[var(--color-text-muted)] text-xs hidden md:table-cell">{proj.basis}</td>
               </tr>
             ))}
             {data.development_projects.length === 0 && (
               <tr>
-                <td colSpan={6} className="p-8 text-center text-[var(--text-secondary)]">
+                <td colSpan={6} className="p-8 text-center text-[var(--color-text-muted)]">
                   No development projects available.
                 </td>
               </tr>
             )}
           </tbody>
         </table>
-        <div className="px-3 py-2 text-xs text-[var(--text-secondary)] border-t border-[var(--border)]">
+        </ScrollableTable>
+        <div className="px-3 py-2 text-xs text-[var(--color-text-muted)] border-t border-[var(--color-border)]">
           {data.total_development} development projects
         </div>
       </div>
 
       {/* Source note */}
-      <div className="text-xs text-[var(--text-secondary)] italic">
+      <div className="text-xs text-[var(--color-text-muted)] italic">
         Capacity factors derived from AEMO generation data. Resource ratings: Excellent (&gt;35%),
         Good (30-35%), Average (25-30%), Below Average (&lt;25%). Development predictions based on
         nearby operating farm performance and REZ benchmarks.

@@ -1,10 +1,13 @@
 import { useState, useEffect, useMemo } from 'react'
+import { Link } from 'react-router-dom'
 import {
   ScatterChart, Scatter, XAxis, YAxis, CartesianGrid, Tooltip,
   ResponsiveContainer, BarChart, Bar, Cell, PieChart, Pie,
 } from 'recharts'
 import { fetchDeveloperScores } from '../../lib/dataService'
+import ChartWrapper from '../../components/common/ChartWrapper'
 import type { DeveloperScoreData, ScoredDeveloper } from '../../lib/types'
+import ScrollableTable from '../../components/common/ScrollableTable'
 
 // ============================================================
 // Icons — defined BEFORE const arrays per project pattern
@@ -172,7 +175,7 @@ export default function DeveloperScores() {
 
   if (!data) {
     return (
-      <div className="p-6 text-center text-[var(--text-secondary)]">
+      <div className="p-6 text-center text-[var(--color-text-muted)]">
         No developer score data available.
       </div>
     )
@@ -182,36 +185,52 @@ export default function DeveloperScores() {
     <div className="p-4 md:p-6 space-y-6 max-w-7xl mx-auto">
       {/* Header */}
       <div>
-        <h1 className="text-2xl font-bold text-[var(--text-primary)]">Developer Execution Scores</h1>
-        <p className="text-sm text-[var(--text-secondary)] mt-1">
+        <h1 className="text-2xl font-bold text-[var(--color-text)]">Developer Execution Scores</h1>
+        <p className="text-sm text-[var(--color-text-muted)] mt-1">
           Execution tracking for {data.total_developers} developers based on project delivery,
           schedule drift, and completion rates.
         </p>
       </div>
 
+      {/* Rationale */}
+      <details className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl p-4 mb-6">
+        <summary className="text-sm font-medium text-[var(--color-text)] cursor-pointer">How are execution scores calculated?</summary>
+        <div className="mt-3 text-xs text-[var(--color-text-muted)] space-y-2">
+          <p>Each developer receives an <strong className="text-[var(--color-text)]">execution score from 0 to 100</strong> based on four weighted factors:</p>
+          <ul className="list-disc list-inside space-y-1 ml-2">
+            <li><strong className="text-[var(--color-text)]">On-time delivery rate (40%)</strong> — percentage of projects that reached COD within 6 months of the original target date</li>
+            <li><strong className="text-[var(--color-text)]">Average COD drift (30%)</strong> — mean schedule slippage in months across all projects; lower is better</li>
+            <li><strong className="text-[var(--color-text)]">Project completion rate (20%)</strong> — share of announced projects that have reached operating status</li>
+            <li><strong className="text-[var(--color-text)]">Portfolio diversity (10%)</strong> — breadth of technologies and states in the developer's portfolio</li>
+          </ul>
+          <p>Scores map to letter grades: <strong className="text-[var(--color-text)]">A</strong> ({'\u2265'}80), <strong className="text-[var(--color-text)]">B</strong> ({'\u2265'}65), <strong className="text-[var(--color-text)]">C</strong> ({'\u2265'}50), <strong className="text-[var(--color-text)]">D</strong> ({'\u2265'}35), <strong className="text-[var(--color-text)]">F</strong> ({'<'}35). A minimum of 2 projects is required for scoring.</p>
+          <p>This helps investors and policymakers identify reliable developers with strong track records versus those with higher delivery risk.</p>
+        </div>
+      </details>
+
       {/* Summary cards */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-        <div className="bg-[var(--bg-secondary)] rounded-xl p-4 border border-[var(--border)]">
-          <div className="text-xs text-[var(--text-secondary)] uppercase tracking-wider font-medium">Developers</div>
-          <div className="text-2xl font-bold text-[var(--text-primary)] mt-1">{data.total_developers}</div>
-          <div className="text-xs text-[var(--text-secondary)] mt-0.5">{filtered.length} shown</div>
+        <div className="bg-[var(--color-bg-card)] rounded-xl p-4 border border-[var(--color-border)]">
+          <div className="text-xs text-[var(--color-text-muted)] uppercase tracking-wider font-medium">Developers</div>
+          <div className="text-2xl font-bold text-[var(--color-text)] mt-1">{data.total_developers}</div>
+          <div className="text-xs text-[var(--color-text-muted)] mt-0.5">{filtered.length} shown</div>
         </div>
-        <div className="bg-[var(--bg-secondary)] rounded-xl p-4 border border-[var(--border)]">
-          <div className="text-xs text-[var(--text-secondary)] uppercase tracking-wider font-medium">Avg Drift</div>
-          <div className="text-2xl font-bold text-[var(--text-primary)] mt-1">
+        <div className="bg-[var(--color-bg-card)] rounded-xl p-4 border border-[var(--color-border)]">
+          <div className="text-xs text-[var(--color-text-muted)] uppercase tracking-wider font-medium">Avg Drift</div>
+          <div className="text-2xl font-bold text-[var(--color-text)] mt-1">
             {data.industry_averages.avg_drift_months.toFixed(1)}
           </div>
-          <div className="text-xs text-[var(--text-secondary)] mt-0.5">months (industry)</div>
+          <div className="text-xs text-[var(--color-text-muted)] mt-0.5">months (industry)</div>
         </div>
-        <div className="bg-[var(--bg-secondary)] rounded-xl p-4 border border-[var(--border)]">
-          <div className="text-xs text-[var(--text-secondary)] uppercase tracking-wider font-medium">On-Time %</div>
-          <div className="text-2xl font-bold text-[var(--text-primary)] mt-1">
+        <div className="bg-[var(--color-bg-card)] rounded-xl p-4 border border-[var(--color-border)]">
+          <div className="text-xs text-[var(--color-text-muted)] uppercase tracking-wider font-medium">On-Time %</div>
+          <div className="text-2xl font-bold text-[var(--color-text)] mt-1">
             {data.industry_averages.avg_on_time_pct.toFixed(0)}%
           </div>
-          <div className="text-xs text-[var(--text-secondary)] mt-0.5">industry average</div>
+          <div className="text-xs text-[var(--color-text-muted)] mt-0.5">industry average</div>
         </div>
-        <div className="bg-[var(--bg-secondary)] rounded-xl p-4 border border-[var(--border)]">
-          <div className="text-xs text-[var(--text-secondary)] uppercase tracking-wider font-medium">Grade Split</div>
+        <div className="bg-[var(--color-bg-card)] rounded-xl p-4 border border-[var(--color-border)]">
+          <div className="text-xs text-[var(--color-text-muted)] uppercase tracking-wider font-medium">Grade Split</div>
           <div className="flex items-center gap-1.5 mt-2">
             {GRADE_ORDER.map(g => {
               const count = data.grade_distribution[g] || 0
@@ -233,16 +252,16 @@ export default function DeveloperScores() {
       {/* Controls */}
       <div className="flex flex-wrap gap-3 items-center">
         {/* View toggle */}
-        <div className="flex rounded-lg overflow-hidden border border-[var(--border)]">
+        <div className="flex rounded-lg overflow-hidden border border-[var(--color-border)]">
           <button
             onClick={() => setView('charts')}
-            className={`flex items-center gap-1.5 px-3 py-1.5 text-sm ${view === 'charts' ? 'bg-blue-600 text-white' : 'bg-[var(--bg-secondary)] text-[var(--text-secondary)]'}`}
+            className={`flex items-center gap-1.5 px-3 py-1.5 text-sm ${view === 'charts' ? 'bg-blue-600 text-white' : 'bg-[var(--color-bg-card)] text-[var(--color-text-muted)]'}`}
           >
             <ChartIcon /> Charts
           </button>
           <button
             onClick={() => setView('table')}
-            className={`flex items-center gap-1.5 px-3 py-1.5 text-sm ${view === 'table' ? 'bg-blue-600 text-white' : 'bg-[var(--bg-secondary)] text-[var(--text-secondary)]'}`}
+            className={`flex items-center gap-1.5 px-3 py-1.5 text-sm ${view === 'table' ? 'bg-blue-600 text-white' : 'bg-[var(--color-bg-card)] text-[var(--color-text-muted)]'}`}
           >
             <TableIcon /> Table
           </button>
@@ -250,11 +269,11 @@ export default function DeveloperScores() {
 
         {/* Min projects dropdown */}
         <div className="flex items-center gap-2">
-          <span className="text-xs text-[var(--text-secondary)]">Min projects:</span>
+          <span className="text-xs text-[var(--color-text-muted)]">Min projects:</span>
           <select
             value={minProjects}
             onChange={e => setMinProjects(Number(e.target.value))}
-            className="text-sm bg-[var(--bg-secondary)] border border-[var(--border)] text-[var(--text-primary)] rounded-lg px-2 py-1.5"
+            className="text-sm bg-[var(--color-bg-card)] border border-[var(--color-border)] text-[var(--color-text)] rounded-lg px-2 py-1.5"
           >
             {MIN_PROJECT_OPTIONS.map(n => (
               <option key={n} value={n}>{n}+</option>
@@ -326,121 +345,125 @@ export default function DeveloperScores() {
           {/* Grade distribution + Scatter in 2-col */}
           <div className="grid md:grid-cols-2 gap-6">
             {/* Grade distribution donut */}
-            <div className="bg-[var(--bg-secondary)] rounded-xl p-4 border border-[var(--border)]">
-              <h2 className="text-lg font-semibold text-[var(--text-primary)] mb-1">Grade Distribution</h2>
-              <p className="text-xs text-[var(--text-secondary)] mb-4">
+            <div className="bg-[var(--color-bg-card)] rounded-xl p-4 border border-[var(--color-border)]">
+              <h2 className="text-lg font-semibold text-[var(--color-text)] mb-1">Grade Distribution</h2>
+              <p className="text-xs text-[var(--color-text-muted)] mb-4">
                 {data.total_developers} developers graded A through F
               </p>
-              <ResponsiveContainer width="100%" height={280}>
-                <PieChart>
-                  <Pie
-                    data={pieData}
-                    cx="50%"
-                    cy="50%"
-                    innerRadius={60}
-                    outerRadius={100}
-                    paddingAngle={2}
-                    dataKey="value"
-                    stroke="none"
-                  >
-                    {pieData.map((entry, i) => (
-                      <Cell key={`pie-${i}`} fill={entry.fill} />
-                    ))}
-                  </Pie>
-                  <Tooltip
-                    contentStyle={{ backgroundColor: 'var(--bg-primary)', border: '1px solid var(--border)', borderRadius: '8px' }}
-                    formatter={(value, _name, props) => {
-                      const pct = ((Number(value) / data.total_developers) * 100).toFixed(0)
-                      return [`${value} developers (${pct}%)`, `Grade ${props.payload.name}`]
-                    }}
-                  />
-                </PieChart>
-              </ResponsiveContainer>
+              <ChartWrapper title="Grade Distribution" data={pieData} csvColumns={['name', 'value']}>
+                <ResponsiveContainer width="100%" height={280}>
+                  <PieChart>
+                    <Pie
+                      data={pieData}
+                      cx="50%"
+                      cy="50%"
+                      innerRadius={60}
+                      outerRadius={100}
+                      paddingAngle={2}
+                      dataKey="value"
+                      stroke="none"
+                    >
+                      {pieData.map((entry, i) => (
+                        <Cell key={`pie-${i}`} fill={entry.fill} />
+                      ))}
+                    </Pie>
+                    <Tooltip
+                      contentStyle={{ backgroundColor: 'var(--color-bg)', border: '1px solid var(--color-border)', borderRadius: '8px' }}
+                      formatter={(value, _name, props) => {
+                        const pct = ((Number(value) / data.total_developers) * 100).toFixed(0)
+                        return [`${value} developers (${pct}%)`, `Grade ${props.payload.name}`]
+                      }}
+                    />
+                  </PieChart>
+                </ResponsiveContainer>
+              </ChartWrapper>
               {/* Legend */}
               <div className="flex justify-center gap-4 mt-2">
                 {pieData.map(d => (
                   <div key={d.name} className="flex items-center gap-1.5 text-xs">
                     <span className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: d.fill }} />
-                    <span className="text-[var(--text-secondary)]">{d.name}: {d.value}</span>
+                    <span className="text-[var(--color-text-muted)]">{d.name}: {d.value}</span>
                   </div>
                 ))}
               </div>
             </div>
 
             {/* Scatter: execution_score vs total_mw */}
-            <div className="bg-[var(--bg-secondary)] rounded-xl p-4 border border-[var(--border)]">
-              <h2 className="text-lg font-semibold text-[var(--text-primary)] mb-1">Score vs Portfolio Size</h2>
-              <p className="text-xs text-[var(--text-secondary)] mb-4">
+            <div className="bg-[var(--color-bg-card)] rounded-xl p-4 border border-[var(--color-border)]">
+              <h2 className="text-lg font-semibold text-[var(--color-text)] mb-1">Score vs Portfolio Size</h2>
+              <p className="text-xs text-[var(--color-text-muted)] mb-4">
                 Bubble size = project count. Colour = grade.
               </p>
-              <ResponsiveContainer width="100%" height={280}>
-                <ScatterChart margin={{ top: 10, right: 20, bottom: 20, left: 20 }}>
-                  <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" />
-                  <XAxis
-                    dataKey="x" type="number" name="Total MW"
-                    tick={{ fill: 'var(--text-secondary)', fontSize: 12 }}
-                    label={{ value: 'Total MW', position: 'insideBottom', offset: -10, fill: 'var(--text-secondary)', fontSize: 12 }}
-                  />
-                  <YAxis
-                    dataKey="y" type="number" name="Execution Score"
-                    domain={[0, 100]}
-                    tick={{ fill: 'var(--text-secondary)', fontSize: 12 }}
-                    label={{ value: 'Execution Score', angle: -90, position: 'insideLeft', fill: 'var(--text-secondary)', fontSize: 12 }}
-                  />
-                  <Tooltip
-                    content={({ payload }) => {
-                      if (!payload?.length) return null
-                      const d = payload[0].payload as ScoredDeveloper & { size: number }
-                      return (
-                        <div className="bg-[var(--bg-primary)] border border-[var(--border)] rounded-lg p-3 shadow-lg text-sm">
-                          <div className="font-semibold text-[var(--text-primary)]">{d.developer}</div>
-                          <div className="text-[var(--text-secondary)]">
-                            Grade {d.grade} — Score {d.execution_score}
-                          </div>
-                          <div className="text-[var(--text-secondary)]">
-                            {d.project_count} projects — {d.total_mw.toLocaleString()} MW
-                          </div>
-                          <div className="text-[var(--text-secondary)]">
-                            On-time: {d.on_time_pct.toFixed(0)}% — Drift: {d.avg_drift_months.toFixed(1)}m
-                          </div>
-                          <div className="flex gap-1 mt-1 flex-wrap">
-                            {d.technologies.map(t => (
-                              <span key={t} className="text-[10px] px-1.5 py-0.5 rounded bg-[var(--bg-secondary)] text-[var(--text-secondary)]">
-                                {t}
-                              </span>
-                            ))}
-                          </div>
-                        </div>
-                      )
-                    }}
-                  />
-                  <Scatter
-                    data={scatterData}
-                    shape={
-                      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                      ((props: any) => {
-                        const { cx, cy, payload } = props
+              <ChartWrapper title="Score vs Portfolio Size" data={scatterData} csvColumns={['developer', 'grade', 'execution_score', 'total_mw', 'project_count', 'on_time_pct', 'avg_drift_months']}>
+                <ResponsiveContainer width="100%" height={280}>
+                  <ScatterChart margin={{ top: 10, right: 20, bottom: 20, left: 20 }}>
+                    <CartesianGrid strokeDasharray="3 3" stroke="var(--color-border)" />
+                    <XAxis
+                      dataKey="x" type="number" name="Total MW"
+                      tick={{ fill: 'var(--color-text-muted)', fontSize: 12 }}
+                      label={{ value: 'Total MW', position: 'insideBottom', offset: -10, fill: 'var(--color-text-muted)', fontSize: 12 }}
+                    />
+                    <YAxis
+                      dataKey="y" type="number" name="Execution Score"
+                      domain={[0, 100]}
+                      tick={{ fill: 'var(--color-text-muted)', fontSize: 12 }}
+                      label={{ value: 'Execution Score', angle: -90, position: 'insideLeft', fill: 'var(--color-text-muted)', fontSize: 12 }}
+                    />
+                    <Tooltip
+                      content={({ payload }) => {
+                        if (!payload?.length) return null
+                        const d = payload[0].payload as ScoredDeveloper & { size: number }
                         return (
-                          <circle
-                            cx={cx} cy={cy}
-                            r={payload.size}
-                            fill={payload.colour}
-                            fillOpacity={0.7}
-                            stroke={payload.colour}
-                            strokeWidth={1}
-                          />
+                          <div className="bg-[var(--color-bg)] border border-[var(--color-border)] rounded-lg p-3 shadow-lg text-sm">
+                            <div className="font-semibold text-[var(--color-text)]">{d.developer}</div>
+                            <div className="text-[var(--color-text-muted)]">
+                              Grade {d.grade} — Score {d.execution_score}
+                            </div>
+                            <div className="text-[var(--color-text-muted)]">
+                              {d.project_count} projects — {d.total_mw.toLocaleString()} MW
+                            </div>
+                            <div className="text-[var(--color-text-muted)]">
+                              On-time: {d.on_time_pct.toFixed(0)}% — Drift: {d.avg_drift_months.toFixed(1)}m
+                            </div>
+                            <div className="flex gap-1 mt-1 flex-wrap">
+                              {d.technologies.map(t => (
+                                <span key={t} className="text-[10px] px-1.5 py-0.5 rounded bg-[var(--color-bg-card)] text-[var(--color-text-muted)]">
+                                  {t}
+                                </span>
+                              ))}
+                            </div>
+                          </div>
                         )
-                      }) as any
-                    }
-                  />
-                </ScatterChart>
-              </ResponsiveContainer>
+                      }}
+                    />
+                    <Scatter
+                      data={scatterData}
+                      shape={
+                        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                        ((props: any) => {
+                          const { cx, cy, payload } = props
+                          return (
+                            <circle
+                              cx={cx} cy={cy}
+                              r={payload.size}
+                              fill={payload.colour}
+                              fillOpacity={0.7}
+                              stroke={payload.colour}
+                              strokeWidth={1}
+                            />
+                          )
+                        }) as any
+                      }
+                    />
+                  </ScatterChart>
+                </ResponsiveContainer>
+              </ChartWrapper>
               {/* Legend */}
               <div className="flex justify-center gap-4 mt-2">
                 {GRADE_ORDER.map(g => (
                   <div key={g} className="flex items-center gap-1.5 text-xs">
                     <span className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: GRADE_COLOURS[g] }} />
-                    <span className="text-[var(--text-secondary)]">{g}</span>
+                    <span className="text-[var(--color-text-muted)]">{g}</span>
                   </div>
                 ))}
               </div>
@@ -448,50 +471,53 @@ export default function DeveloperScores() {
           </div>
 
           {/* Horizontal bar chart: Top 30 by execution score */}
-          <div className="bg-[var(--bg-secondary)] rounded-xl p-4 border border-[var(--border)]">
-            <h2 className="text-lg font-semibold text-[var(--text-primary)] mb-1">
+          <div className="bg-[var(--color-bg-card)] rounded-xl p-4 border border-[var(--color-border)]">
+            <h2 className="text-lg font-semibold text-[var(--color-text)] mb-1">
               Top {Math.min(30, filtered.length)} Developers by Execution Score
             </h2>
-            <p className="text-xs text-[var(--text-secondary)] mb-4">
+            <p className="text-xs text-[var(--color-text-muted)] mb-4">
               Coloured by grade. Labels show total MW capacity.
             </p>
-            <ResponsiveContainer width="100%" height={Math.max(barData.length * 28, 200)}>
-              <BarChart data={barData} layout="vertical" margin={{ top: 5, right: 60, bottom: 5, left: 10 }}>
-                <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" horizontal={false} />
-                <XAxis
-                  type="number" domain={[0, 100]}
-                  tick={{ fill: 'var(--text-secondary)', fontSize: 12 }}
-                />
-                <YAxis
-                  type="category" dataKey="developer" width={160}
-                  tick={{ fill: 'var(--text-secondary)', fontSize: 11 }}
-                />
-                <Tooltip
-                  contentStyle={{ backgroundColor: 'var(--bg-primary)', border: '1px solid var(--border)', borderRadius: '8px' }}
-                  labelStyle={{ color: 'var(--text-primary)' }}
-                  formatter={(value) => [Number(value).toFixed(1), 'Execution Score']}
-                  labelFormatter={(label) => {
-                    const dev = barData.find(d => d.developer === label)
-                    return dev
-                      ? `${label} — Grade ${dev.grade} — ${dev.total_mw.toLocaleString()} MW — ${dev.project_count} projects`
-                      : label
-                  }}
-                />
-                <Bar dataKey="execution_score" radius={[0, 4, 4, 0]}>
-                  {barData.map((entry, index) => (
-                    <Cell key={`bar-${index}`} fill={getGradeColour(entry.grade)} />
-                  ))}
-                </Bar>
-              </BarChart>
-            </ResponsiveContainer>
+            <ChartWrapper title="Top Developers by Execution Score" data={barData} csvColumns={['developer', 'grade', 'execution_score', 'project_count', 'total_mw', 'on_time_pct', 'avg_drift_months']}>
+              <ResponsiveContainer width="100%" height={Math.max(barData.length * 28, 200)}>
+                <BarChart data={barData} layout="vertical" margin={{ top: 5, right: 60, bottom: 5, left: 10 }}>
+                  <CartesianGrid strokeDasharray="3 3" stroke="var(--color-border)" horizontal={false} />
+                  <XAxis
+                    type="number" domain={[0, 100]}
+                    tick={{ fill: 'var(--color-text-muted)', fontSize: 12 }}
+                  />
+                  <YAxis
+                    type="category" dataKey="developer" width={160}
+                    tick={{ fill: 'var(--color-text-muted)', fontSize: 11 }}
+                  />
+                  <Tooltip
+                    contentStyle={{ backgroundColor: 'var(--color-bg)', border: '1px solid var(--color-border)', borderRadius: '8px' }}
+                    labelStyle={{ color: 'var(--color-text)' }}
+                    formatter={(value) => [Number(value).toFixed(1), 'Execution Score']}
+                    labelFormatter={(label) => {
+                      const dev = barData.find(d => d.developer === label)
+                      return dev
+                        ? `${label} — Grade ${dev.grade} — ${dev.total_mw.toLocaleString()} MW — ${dev.project_count} projects`
+                        : label
+                    }}
+                  />
+                  <Bar dataKey="execution_score" radius={[0, 4, 4, 0]}>
+                    {barData.map((entry, index) => (
+                      <Cell key={`bar-${index}`} fill={getGradeColour(entry.grade)} />
+                    ))}
+                  </Bar>
+                </BarChart>
+              </ResponsiveContainer>
+            </ChartWrapper>
           </div>
         </div>
       ) : (
         /* Table view */
-        <div className="bg-[var(--bg-secondary)] rounded-xl border border-[var(--border)] overflow-x-auto">
+        <div className="bg-[var(--color-bg-card)] rounded-xl border border-[var(--color-border)]">
+          <ScrollableTable>
           <table className="w-full text-sm">
             <thead>
-              <tr className="border-b border-[var(--border)]">
+              <tr className="border-b border-[var(--color-border)]">
                 {([
                   ['developer', 'Developer', 'text-left', ''],
                   ['grade', 'Grade', 'text-center', 'w-16'],
@@ -505,7 +531,7 @@ export default function DeveloperScores() {
                   <th
                     key={field}
                     onClick={() => handleSort(field)}
-                    className={`${align} p-3 text-[var(--text-secondary)] font-medium cursor-pointer hover:text-[var(--text-primary)] select-none ${hide}`}
+                    className={`${align} p-3 text-[var(--color-text-muted)] font-medium cursor-pointer hover:text-[var(--color-text)] select-none ${hide}`}
                   >
                     {label}
                     {sortField === field && (
@@ -515,13 +541,17 @@ export default function DeveloperScores() {
                     )}
                   </th>
                 ))}
-                <th className="text-left p-3 text-[var(--text-secondary)] font-medium hidden lg:table-cell">Technologies</th>
+                <th className="text-left p-3 text-[var(--color-text-muted)] font-medium hidden lg:table-cell">Technologies</th>
               </tr>
             </thead>
             <tbody>
               {sorted.map(d => (
-                <tr key={d.developer} className="border-b border-[var(--border)] hover:bg-[var(--bg-primary)]/50">
-                  <td className="p-3 text-[var(--text-primary)] font-medium">{d.developer}</td>
+                <tr key={d.developer} className="border-b border-[var(--color-border)] hover:bg-[var(--color-bg)]/50">
+                  <td className="p-3 font-medium">
+                    <Link to={`/developers/${d.developer.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')}`} className="text-[var(--color-primary)] hover:underline font-medium">
+                      {d.developer}
+                    </Link>
+                  </td>
                   <td className="p-3 text-center">
                     <span
                       className="px-2 py-0.5 rounded-full text-xs font-semibold"
@@ -533,9 +563,9 @@ export default function DeveloperScores() {
                       {d.grade}
                     </span>
                   </td>
-                  <td className="p-3 text-right text-[var(--text-primary)] font-mono">{d.execution_score.toFixed(1)}</td>
-                  <td className="p-3 text-right text-[var(--text-secondary)] hidden sm:table-cell">{d.project_count}</td>
-                  <td className="p-3 text-right text-[var(--text-primary)]">{d.total_mw.toLocaleString()}</td>
+                  <td className="p-3 text-right text-[var(--color-text)] font-mono">{d.execution_score.toFixed(1)}</td>
+                  <td className="p-3 text-right text-[var(--color-text-muted)] hidden sm:table-cell">{d.project_count}</td>
+                  <td className="p-3 text-right text-[var(--color-text)]">{d.total_mw.toLocaleString()}</td>
                   <td className="p-3 text-right hidden md:table-cell">
                     <span className={d.on_time_pct >= 70 ? 'text-green-400' : d.on_time_pct >= 40 ? 'text-yellow-400' : 'text-red-400'}>
                       {d.on_time_pct.toFixed(0)}%
@@ -546,7 +576,7 @@ export default function DeveloperScores() {
                       {d.avg_drift_months.toFixed(1)}m
                     </span>
                   </td>
-                  <td className="p-3 text-right hidden lg:table-cell text-[var(--text-secondary)]">
+                  <td className="p-3 text-right hidden lg:table-cell text-[var(--color-text-muted)]">
                     {d.completion_rate.toFixed(0)}%
                   </td>
                   <td className="p-3 hidden lg:table-cell">
@@ -554,7 +584,7 @@ export default function DeveloperScores() {
                       {d.technologies.map(t => (
                         <span
                           key={t}
-                          className="text-[10px] px-1.5 py-0.5 rounded-full bg-[var(--bg-primary)] text-[var(--text-secondary)] border border-[var(--border)]"
+                          className="text-[10px] px-1.5 py-0.5 rounded-full bg-[var(--color-bg)] text-[var(--color-text-muted)] border border-[var(--color-border)]"
                         >
                           {t}
                         </span>
@@ -565,21 +595,22 @@ export default function DeveloperScores() {
               ))}
               {sorted.length === 0 && (
                 <tr>
-                  <td colSpan={9} className="p-8 text-center text-[var(--text-secondary)]">
+                  <td colSpan={9} className="p-8 text-center text-[var(--color-text-muted)]">
                     No developers match the current filters.
                   </td>
                 </tr>
               )}
             </tbody>
           </table>
-          <div className="px-3 py-2 text-xs text-[var(--text-secondary)] border-t border-[var(--border)]">
+          </ScrollableTable>
+          <div className="px-3 py-2 text-xs text-[var(--color-text-muted)] border-t border-[var(--color-border)]">
             Showing {sorted.length} of {data.total_developers} developers
           </div>
         </div>
       )}
 
       {/* Source note */}
-      <div className="text-xs text-[var(--text-secondary)] italic">
+      <div className="text-xs text-[var(--color-text-muted)] italic">
         Execution scores calculated from project delivery outcomes including COD drift, on-time rates,
         completion rates, and portfolio size. Grades: A (80+), B (60-79), C (40-59), D (20-39), F (&lt;20).
       </div>

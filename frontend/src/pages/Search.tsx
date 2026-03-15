@@ -42,6 +42,9 @@ export default function Search() {
   return (
     <div className="px-4 lg:px-8 py-6 max-w-3xl mx-auto">
       <h1 className="text-xl font-bold text-[var(--color-text)] mb-4">Search</h1>
+      <p className="text-xs text-[var(--color-text-muted)] mb-6">
+        Press <kbd className="px-1.5 py-0.5 rounded bg-white/5 border border-[var(--color-border)] font-mono text-[10px]">⌘K</kbd> to search from anywhere
+      </p>
 
       {/* Search Input */}
       <div className="relative mb-6">

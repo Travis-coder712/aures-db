@@ -6,6 +6,7 @@ import TechBadge from '../components/common/TechBadge'
 import StatusBadge from '../components/common/StatusBadge'
 import ConfidenceDots from '../components/common/ConfidenceDots'
 import PerformanceTab from '../components/charts/PerformanceTab'
+import Breadcrumb from '../components/common/Breadcrumb'
 
 type Tab = 'overview' | 'timeline' | 'technical' | 'performance' | 'sources'
 
@@ -52,6 +53,11 @@ export default function ProjectDetail() {
   return (
     <div className="px-4 lg:px-8 py-6 max-w-4xl mx-auto">
       {/* Breadcrumb */}
+      <Breadcrumb items={[
+        { label: 'Projects', path: '/projects' },
+        { label: project.technology?.replace('_', ' ') || 'Project' },
+        { label: project.name }
+      ]} />
       <div className="mb-4">
         {fromPage ? (
           <button

@@ -1,4 +1,5 @@
 import { useState, useEffect, useMemo } from 'react'
+import { Link } from 'react-router-dom'
 import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip,
   ResponsiveContainer, Cell, PieChart, Pie, Legend,
@@ -170,7 +171,7 @@ export default function GridConnection() {
 
   if (!data || data.rez_summaries.length === 0) {
     return (
-      <div className="p-6 text-center text-[var(--text-secondary)]">
+      <div className="p-6 text-center text-[var(--color-text-muted)]">
         <GridIcon />
         <p className="mt-2">No grid connection data available</p>
       </div>
@@ -181,40 +182,51 @@ export default function GridConnection() {
     <div className="p-4 md:p-6 space-y-6 max-w-7xl mx-auto">
       {/* Header */}
       <div>
-        <h1 className="text-2xl font-bold text-[var(--text-primary)]">Grid Connection Analysis</h1>
-        <p className="text-sm text-[var(--text-secondary)] mt-1">
+        <h1 className="text-2xl font-bold text-[var(--color-text)]">Grid Connection Analysis</h1>
+        <p className="text-sm text-[var(--color-text-muted)] mt-1">
           REZ pipeline congestion and connection status across {data.total_rez_zones} Renewable Energy Zones
         </p>
       </div>
 
+      {/* Rationale */}
+      <details className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl p-4 mb-6">
+        <summary className="text-sm font-medium text-[var(--color-text)] cursor-pointer">Understanding REZ congestion</summary>
+        <div className="mt-3 text-xs text-[var(--color-text-muted)] space-y-2">
+          <p><strong>Congestion score (0-10)</strong> indicates how much pipeline capacity is competing for limited grid connection in each Renewable Energy Zone. Higher scores mean more projects competing for limited connection capacity, resulting in higher risk of delays.</p>
+          <p><strong>How it is calculated:</strong> The score is based on the ratio of pipeline MW to existing grid hosting capacity within each REZ. A zone with 5,000 MW of pipeline competing for 1,000 MW of available capacity will score much higher than a zone with headroom.</p>
+          <p><strong>Connection status</strong> shows how many projects have secured grid connection (Connected) versus those still in progress or at the pre-application stage. This breakdown helps gauge how congested the queue actually is.</p>
+          <p><strong>Why this matters:</strong> REZ congestion is a key risk factor for new projects. Heavily congested zones may face multi-year connection delays, increased curtailment risk, and potential requirements for system strength remediation — all of which affect project economics and timelines.</p>
+        </div>
+      </details>
+
       {/* Summary cards */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
-        <div className="bg-[var(--bg-secondary)] rounded-xl p-4 border border-[var(--border)] text-center">
+        <div className="bg-[var(--color-bg-card)] rounded-xl p-4 border border-[var(--color-border)] text-center">
           <div className="text-3xl md:text-4xl font-bold text-blue-400">{data.total_rez_zones}</div>
-          <div className="text-xs md:text-sm text-[var(--text-secondary)] mt-1 font-medium">REZ Zones</div>
+          <div className="text-xs md:text-sm text-[var(--color-text-muted)] mt-1 font-medium">REZ Zones</div>
         </div>
-        <div className="bg-[var(--bg-secondary)] rounded-xl p-4 border border-[var(--border)] text-center">
-          <div className="text-3xl md:text-4xl font-bold text-[var(--text-primary)]">
+        <div className="bg-[var(--color-bg-card)] rounded-xl p-4 border border-[var(--color-border)] text-center">
+          <div className="text-3xl md:text-4xl font-bold text-[var(--color-text)]">
             {(totalOperatingMW + totalPipelineMW).toLocaleString()}
           </div>
-          <div className="text-xs md:text-sm text-[var(--text-secondary)] mt-1 font-medium">Total MW</div>
+          <div className="text-xs md:text-sm text-[var(--color-text-muted)] mt-1 font-medium">Total MW</div>
         </div>
-        <div className="bg-[var(--bg-secondary)] rounded-xl p-4 border border-[var(--border)] text-center">
+        <div className="bg-[var(--color-bg-card)] rounded-xl p-4 border border-[var(--color-border)] text-center">
           <div className="text-3xl md:text-4xl font-bold text-green-400">{totalOperatingMW.toLocaleString()}</div>
-          <div className="text-xs md:text-sm text-[var(--text-secondary)] mt-1 font-medium">Operating MW</div>
+          <div className="text-xs md:text-sm text-[var(--color-text-muted)] mt-1 font-medium">Operating MW</div>
         </div>
-        <div className="bg-[var(--bg-secondary)] rounded-xl p-4 border border-[var(--border)] text-center">
+        <div className="bg-[var(--color-bg-card)] rounded-xl p-4 border border-[var(--color-border)] text-center">
           <div className="text-3xl md:text-4xl font-bold text-amber-400">{totalPipelineMW.toLocaleString()}</div>
-          <div className="text-xs md:text-sm text-[var(--text-secondary)] mt-1 font-medium">Pipeline MW</div>
+          <div className="text-xs md:text-sm text-[var(--color-text-muted)] mt-1 font-medium">Pipeline MW</div>
         </div>
       </div>
 
       {/* Connection status + REZ congestion row */}
       <div className="grid md:grid-cols-5 gap-4">
         {/* Connection Status PieChart */}
-        <div className="md:col-span-2 bg-[var(--bg-secondary)] rounded-xl p-4 border border-[var(--border)]">
-          <h2 className="text-lg font-semibold text-[var(--text-primary)] mb-1">Connection Status</h2>
-          <p className="text-xs text-[var(--text-secondary)] mb-3">
+        <div className="md:col-span-2 bg-[var(--color-bg-card)] rounded-xl p-4 border border-[var(--color-border)]">
+          <h2 className="text-lg font-semibold text-[var(--color-text)] mb-1">Connection Status</h2>
+          <p className="text-xs text-[var(--color-text-muted)] mb-3">
             Overall MW by connection stage
           </p>
           <ResponsiveContainer width="100%" height={240}>
@@ -235,12 +247,12 @@ export default function GridConnection() {
                 ))}
               </Pie>
               <Tooltip
-                contentStyle={{ backgroundColor: 'var(--bg-primary)', border: '1px solid var(--border)', borderRadius: '8px' }}
-                labelStyle={{ color: 'var(--text-primary)' }}
+                contentStyle={{ backgroundColor: 'var(--color-bg)', border: '1px solid var(--color-border)', borderRadius: '8px' }}
+                labelStyle={{ color: 'var(--color-text)' }}
                 formatter={(value) => [`${Number(value).toLocaleString()} MW`, 'Capacity']}
               />
               <Legend
-                formatter={(value) => <span style={{ color: 'var(--text-secondary)', fontSize: 12 }}>{value}</span>}
+                formatter={(value) => <span style={{ color: 'var(--color-text-muted)', fontSize: 12 }}>{value}</span>}
               />
             </PieChart>
           </ResponsiveContainer>
@@ -251,16 +263,16 @@ export default function GridConnection() {
                 <div className="text-sm font-semibold" style={{ color: s.fill }}>
                   {s.count} projects
                 </div>
-                <div className="text-xs text-[var(--text-secondary)]">{s.name}</div>
+                <div className="text-xs text-[var(--color-text-muted)]">{s.name}</div>
               </div>
             ))}
           </div>
         </div>
 
         {/* REZ Congestion horizontal bar */}
-        <div className="md:col-span-3 bg-[var(--bg-secondary)] rounded-xl p-4 border border-[var(--border)]">
-          <h2 className="text-lg font-semibold text-[var(--text-primary)] mb-1">REZ Congestion</h2>
-          <p className="text-xs text-[var(--text-secondary)] mb-3">
+        <div className="md:col-span-3 bg-[var(--color-bg-card)] rounded-xl p-4 border border-[var(--color-border)]">
+          <h2 className="text-lg font-semibold text-[var(--color-text)] mb-1">REZ Congestion</h2>
+          <p className="text-xs text-[var(--color-text-muted)] mb-3">
             Total capacity by REZ zone. Colour indicates congestion level.
           </p>
           <ResponsiveContainer width="100%" height={Math.max(congestionBarData.length * 70, 200)}>
@@ -269,21 +281,21 @@ export default function GridConnection() {
               layout="vertical"
               margin={{ top: 5, right: 60, bottom: 5, left: 10 }}
             >
-              <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" />
+              <CartesianGrid strokeDasharray="3 3" stroke="var(--color-border)" />
               <XAxis
                 type="number"
-                tick={{ fill: 'var(--text-secondary)', fontSize: 12 }}
+                tick={{ fill: 'var(--color-text-muted)', fontSize: 12 }}
                 tickFormatter={(v) => `${(v / 1000).toFixed(0)}k`}
               />
               <YAxis
                 type="category"
                 dataKey="name"
                 width={150}
-                tick={{ fill: 'var(--text-secondary)', fontSize: 11 }}
+                tick={{ fill: 'var(--color-text-muted)', fontSize: 11 }}
               />
               <Tooltip
-                contentStyle={{ backgroundColor: 'var(--bg-primary)', border: '1px solid var(--border)', borderRadius: '8px' }}
-                labelStyle={{ color: 'var(--text-primary)' }}
+                contentStyle={{ backgroundColor: 'var(--color-bg)', border: '1px solid var(--color-border)', borderRadius: '8px' }}
+                labelStyle={{ color: 'var(--color-text)' }}
                 formatter={(value, name) => {
                   const label = name === 'operating_mw' ? 'Operating' : 'Pipeline'
                   return [`${Number(value).toLocaleString()} MW`, label]
@@ -301,7 +313,7 @@ export default function GridConnection() {
               </Bar>
             </BarChart>
           </ResponsiveContainer>
-          <div className="flex gap-4 justify-center mt-2 text-xs text-[var(--text-secondary)]">
+          <div className="flex gap-4 justify-center mt-2 text-xs text-[var(--color-text-muted)]">
             <span className="flex items-center gap-1">
               <span className="inline-block w-3 h-3 rounded" style={{ backgroundColor: '#636e72', opacity: 0.9 }} /> Operating
             </span>
@@ -318,9 +330,9 @@ export default function GridConnection() {
       </div>
 
       {/* Technology Breakdown per REZ — Stacked bar */}
-      <div className="bg-[var(--bg-secondary)] rounded-xl p-4 border border-[var(--border)]">
-        <h2 className="text-lg font-semibold text-[var(--text-primary)] mb-1">Technology Breakdown by REZ</h2>
-        <p className="text-xs text-[var(--text-secondary)] mb-4">
+      <div className="bg-[var(--color-bg-card)] rounded-xl p-4 border border-[var(--color-border)]">
+        <h2 className="text-lg font-semibold text-[var(--color-text)] mb-1">Technology Breakdown by REZ</h2>
+        <p className="text-xs text-[var(--color-text-muted)] mb-4">
           Capacity (MW) by technology within each Renewable Energy Zone
         </p>
         <ResponsiveContainer width="100%" height={Math.max(techStackData.chartData.length * 70, 200)}>
@@ -329,21 +341,21 @@ export default function GridConnection() {
             layout="vertical"
             margin={{ top: 5, right: 60, bottom: 5, left: 10 }}
           >
-            <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" />
+            <CartesianGrid strokeDasharray="3 3" stroke="var(--color-border)" />
             <XAxis
               type="number"
-              tick={{ fill: 'var(--text-secondary)', fontSize: 12 }}
+              tick={{ fill: 'var(--color-text-muted)', fontSize: 12 }}
               tickFormatter={(v) => `${(v / 1000).toFixed(0)}k`}
             />
             <YAxis
               type="category"
               dataKey="name"
               width={150}
-              tick={{ fill: 'var(--text-secondary)', fontSize: 11 }}
+              tick={{ fill: 'var(--color-text-muted)', fontSize: 11 }}
             />
             <Tooltip
-              contentStyle={{ backgroundColor: 'var(--bg-primary)', border: '1px solid var(--border)', borderRadius: '8px' }}
-              labelStyle={{ color: 'var(--text-primary)' }}
+              contentStyle={{ backgroundColor: 'var(--color-bg)', border: '1px solid var(--color-border)', borderRadius: '8px' }}
+              labelStyle={{ color: 'var(--color-text)' }}
               formatter={(value, name) => [`${Number(value).toLocaleString()} MW`, formatTech(String(name))]}
             />
             {techStackData.techs.map(tech => (
@@ -358,7 +370,7 @@ export default function GridConnection() {
             ))}
           </BarChart>
         </ResponsiveContainer>
-        <div className="flex flex-wrap gap-3 justify-center mt-3 text-xs text-[var(--text-secondary)]">
+        <div className="flex flex-wrap gap-3 justify-center mt-3 text-xs text-[var(--color-text-muted)]">
           {techStackData.techs.map(tech => (
             <span key={tech} className="flex items-center gap-1">
               <span className="inline-block w-3 h-3 rounded" style={{ backgroundColor: TECH_COLOURS[tech] || '#636e72' }} />
@@ -370,7 +382,7 @@ export default function GridConnection() {
 
       {/* REZ Detail Cards (expandable) */}
       <div>
-        <h2 className="text-lg font-semibold text-[var(--text-primary)] mb-3">REZ Zone Details</h2>
+        <h2 className="text-lg font-semibold text-[var(--color-text)] mb-3">REZ Zone Details</h2>
         <div className="space-y-3">
           {[...data.rez_summaries]
             .sort((a, b) => b.total_mw - a.total_mw)
@@ -378,11 +390,11 @@ export default function GridConnection() {
               const isExpanded = expandedREZ === rez.rez
               const congestionColour = CONGESTION_COLOURS[rez.congestion_level] || '#636e72'
               return (
-                <div key={rez.rez} className="bg-[var(--bg-secondary)] rounded-xl border border-[var(--border)] overflow-hidden">
+                <div key={rez.rez} className="bg-[var(--color-bg-card)] rounded-xl border border-[var(--color-border)] overflow-hidden">
                   {/* Card header — always visible */}
                   <button
                     onClick={() => setExpandedREZ(isExpanded ? null : rez.rez)}
-                    className="w-full flex items-center justify-between p-4 text-left hover:bg-[var(--bg-primary)]/30 transition-colors"
+                    className="w-full flex items-center justify-between p-4 text-left hover:bg-[var(--color-bg)]/30 transition-colors"
                   >
                     <div className="flex items-center gap-3 min-w-0">
                       <span
@@ -392,10 +404,10 @@ export default function GridConnection() {
                         {rez.congestion_level}
                       </span>
                       <div className="min-w-0">
-                        <div className="font-semibold text-[var(--text-primary)] truncate">
+                        <Link to={`/rez/${rez.rez}`} onClick={(e) => e.stopPropagation()} className="text-[var(--color-primary)] hover:underline font-semibold truncate block">
                           {formatREZName(rez.rez)}
-                        </div>
-                        <div className="text-xs text-[var(--text-secondary)]">
+                        </Link>
+                        <div className="text-xs text-[var(--color-text-muted)]">
                           {rez.project_count} projects &middot; {rez.total_mw.toLocaleString()} MW total
                         </div>
                       </div>
@@ -405,7 +417,7 @@ export default function GridConnection() {
                         <div className="text-sm text-green-400">{rez.operating_mw.toLocaleString()} MW operating</div>
                         <div className="text-sm text-amber-400">{rez.pipeline_mw.toLocaleString()} MW pipeline</div>
                       </div>
-                      <span className="text-[var(--text-secondary)]">
+                      <span className="text-[var(--color-text-muted)]">
                         {isExpanded ? <ChevronUpIcon /> : <ChevronDownIcon />}
                       </span>
                     </div>
@@ -413,16 +425,16 @@ export default function GridConnection() {
 
                   {/* Expanded details */}
                   {isExpanded && (
-                    <div className="border-t border-[var(--border)] p-4 space-y-4">
+                    <div className="border-t border-[var(--color-border)] p-4 space-y-4">
                       {/* Congestion score bar */}
                       <div>
-                        <div className="flex justify-between text-xs text-[var(--text-secondary)] mb-1">
+                        <div className="flex justify-between text-xs text-[var(--color-text-muted)] mb-1">
                           <span>Congestion Score</span>
                           <span className="font-semibold" style={{ color: congestionColour }}>
                             {rez.congestion_score.toFixed(1)} / 10
                           </span>
                         </div>
-                        <div className="w-full h-2 bg-[var(--bg-primary)] rounded-full">
+                        <div className="w-full h-2 bg-[var(--color-bg)] rounded-full">
                           <div
                             className="h-full rounded-full transition-all"
                             style={{
@@ -435,33 +447,33 @@ export default function GridConnection() {
 
                       {/* Technology breakdown table */}
                       <div>
-                        <h3 className="text-sm font-medium text-[var(--text-primary)] mb-2">Technology Breakdown</h3>
+                        <h3 className="text-sm font-medium text-[var(--color-text)] mb-2">Technology Breakdown</h3>
                         <div className="overflow-x-auto">
                           <table className="w-full text-sm">
                             <thead>
-                              <tr className="border-b border-[var(--border)]">
-                                <th className="text-left py-2 pr-4 text-[var(--text-secondary)] font-medium">Technology</th>
-                                <th className="text-left py-2 pr-4 text-[var(--text-secondary)] font-medium">Status</th>
-                                <th className="text-right py-2 pr-4 text-[var(--text-secondary)] font-medium">Projects</th>
-                                <th className="text-right py-2 text-[var(--text-secondary)] font-medium">MW</th>
+                              <tr className="border-b border-[var(--color-border)]">
+                                <th className="text-left py-2 pr-4 text-[var(--color-text-muted)] font-medium">Technology</th>
+                                <th className="text-left py-2 pr-4 text-[var(--color-text-muted)] font-medium">Status</th>
+                                <th className="text-right py-2 pr-4 text-[var(--color-text-muted)] font-medium">Projects</th>
+                                <th className="text-right py-2 text-[var(--color-text-muted)] font-medium">MW</th>
                               </tr>
                             </thead>
                             <tbody>
                               {Object.entries(rez.technologies).map(([tech, statuses]) =>
                                 Object.entries(statuses).map(([status, info]) => (
-                                  <tr key={`${tech}-${status}`} className="border-b border-[var(--border)]/50">
+                                  <tr key={`${tech}-${status}`} className="border-b border-[var(--color-border)]/50">
                                     <td className="py-1.5 pr-4">
                                       <span className="flex items-center gap-1.5">
                                         <span
                                           className="inline-block w-2.5 h-2.5 rounded"
                                           style={{ backgroundColor: TECH_COLOURS[tech] || '#636e72' }}
                                         />
-                                        <span className="text-[var(--text-primary)]">{formatTech(tech)}</span>
+                                        <span className="text-[var(--color-text)]">{formatTech(tech)}</span>
                                       </span>
                                     </td>
-                                    <td className="py-1.5 pr-4 text-[var(--text-secondary)] capitalize">{status}</td>
-                                    <td className="py-1.5 pr-4 text-right text-[var(--text-primary)]">{info.count}</td>
-                                    <td className="py-1.5 text-right text-[var(--text-primary)]">{info.mw.toLocaleString()}</td>
+                                    <td className="py-1.5 pr-4 text-[var(--color-text-muted)] capitalize">{status}</td>
+                                    <td className="py-1.5 pr-4 text-right text-[var(--color-text)]">{info.count}</td>
+                                    <td className="py-1.5 text-right text-[var(--color-text)]">{info.mw.toLocaleString()}</td>
                                   </tr>
                                 ))
                               )}
@@ -478,20 +490,20 @@ export default function GridConnection() {
       </div>
 
       {/* REZ Comparison Table */}
-      <div className="bg-[var(--bg-secondary)] rounded-xl border border-[var(--border)] overflow-x-auto">
-        <div className="p-4 border-b border-[var(--border)]">
-          <h2 className="text-lg font-semibold text-[var(--text-primary)]">REZ Comparison</h2>
+      <div className="bg-[var(--color-bg-card)] rounded-xl border border-[var(--color-border)] overflow-x-auto">
+        <div className="p-4 border-b border-[var(--color-border)]">
+          <h2 className="text-lg font-semibold text-[var(--color-text)]">REZ Comparison</h2>
         </div>
         <table className="w-full text-sm">
           <thead>
-            <tr className="border-b border-[var(--border)]">
-              <th className="text-left p-3 text-[var(--text-secondary)] font-medium">REZ Zone</th>
-              <th className="text-right p-3 text-[var(--text-secondary)] font-medium">Total MW</th>
-              <th className="text-right p-3 text-[var(--text-secondary)] font-medium hidden sm:table-cell">Operating MW</th>
-              <th className="text-right p-3 text-[var(--text-secondary)] font-medium hidden sm:table-cell">Pipeline MW</th>
-              <th className="text-center p-3 text-[var(--text-secondary)] font-medium">Congestion</th>
-              <th className="text-center p-3 text-[var(--text-secondary)] font-medium hidden md:table-cell">Score</th>
-              <th className="text-right p-3 text-[var(--text-secondary)] font-medium">Projects</th>
+            <tr className="border-b border-[var(--color-border)]">
+              <th className="text-left p-3 text-[var(--color-text-muted)] font-medium">REZ Zone</th>
+              <th className="text-right p-3 text-[var(--color-text-muted)] font-medium">Total MW</th>
+              <th className="text-right p-3 text-[var(--color-text-muted)] font-medium hidden sm:table-cell">Operating MW</th>
+              <th className="text-right p-3 text-[var(--color-text-muted)] font-medium hidden sm:table-cell">Pipeline MW</th>
+              <th className="text-center p-3 text-[var(--color-text-muted)] font-medium">Congestion</th>
+              <th className="text-center p-3 text-[var(--color-text-muted)] font-medium hidden md:table-cell">Score</th>
+              <th className="text-right p-3 text-[var(--color-text-muted)] font-medium">Projects</th>
             </tr>
           </thead>
           <tbody>
@@ -500,9 +512,13 @@ export default function GridConnection() {
               .map(rez => {
                 const congestionColour = CONGESTION_COLOURS[rez.congestion_level] || '#636e72'
                 return (
-                  <tr key={rez.rez} className="border-b border-[var(--border)] hover:bg-[var(--bg-primary)]/50">
-                    <td className="p-3 text-[var(--text-primary)] font-medium">{formatREZName(rez.rez)}</td>
-                    <td className="p-3 text-right text-[var(--text-primary)]">{rez.total_mw.toLocaleString()}</td>
+                  <tr key={rez.rez} className="border-b border-[var(--color-border)] hover:bg-[var(--color-bg)]/50">
+                    <td className="p-3">
+                      <Link to={`/rez/${rez.rez}`} className="text-[var(--color-primary)] hover:underline font-medium">
+                        {formatREZName(rez.rez)}
+                      </Link>
+                    </td>
+                    <td className="p-3 text-right text-[var(--color-text)]">{rez.total_mw.toLocaleString()}</td>
                     <td className="p-3 text-right text-green-400 hidden sm:table-cell">{rez.operating_mw.toLocaleString()}</td>
                     <td className="p-3 text-right text-amber-400 hidden sm:table-cell">{rez.pipeline_mw.toLocaleString()}</td>
                     <td className="p-3 text-center">
@@ -518,7 +534,7 @@ export default function GridConnection() {
                         {rez.congestion_score.toFixed(1)}
                       </span>
                     </td>
-                    <td className="p-3 text-right text-[var(--text-primary)]">{rez.project_count}</td>
+                    <td className="p-3 text-right text-[var(--color-text)]">{rez.project_count}</td>
                   </tr>
                 )
               })}
@@ -527,7 +543,7 @@ export default function GridConnection() {
       </div>
 
       {/* Source note */}
-      <div className="text-xs text-[var(--text-secondary)] italic">
+      <div className="text-xs text-[var(--color-text-muted)] italic">
         Grid connection data sourced from AEMO connection registers, REZ access scheme disclosures, and developer announcements.
         Congestion scores reflect pipeline-to-capacity ratios and known curtailment patterns.
       </div>
