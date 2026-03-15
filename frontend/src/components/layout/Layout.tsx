@@ -369,6 +369,7 @@ export default function Layout() {
           </button>
           <span className="text-xl">⚡</span>
           <h1 className="text-base font-bold text-[var(--color-text)] tracking-tight">AURES</h1>
+          <span className="text-[9px] text-[var(--color-text-muted)]/40 font-mono self-end mb-0.5">v{version.current}</span>
         </div>
         <NavLink
           to="/search"
