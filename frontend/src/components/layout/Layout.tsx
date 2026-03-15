@@ -359,7 +359,8 @@ export default function Layout() {
       )}
 
       {/* Mobile Header */}
-      <header className="lg:hidden flex items-center justify-between px-4 h-14 bg-[var(--color-bg-card)] border-b border-[var(--color-border)] sticky top-0 z-40 safe-top">
+      <header className="lg:hidden bg-[var(--color-bg-card)] border-b border-[var(--color-border)] sticky top-0 z-40 safe-top">
+      <div className="flex items-center justify-between px-4 h-14">
         <div className="flex items-center gap-2">
           <button
             onClick={() => setMobileMenuOpen(true)}
@@ -377,6 +378,7 @@ export default function Layout() {
         >
           <SearchIcon className="w-5 h-5" />
         </NavLink>
+      </div>
       </header>
 
       {/* Main Content */}
