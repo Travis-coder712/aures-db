@@ -37,14 +37,14 @@
       "date_precision": "year",
       "event_type": "planning_submitted",
       "title": "EPBC Referral 2020/8756",
-      "detail": "MacIntyre Wind Farm Project \u2014 Post-Approval",
+      "detail": "MacIntyre Wind Farm Project — Post-Approval",
       "sources": []
     },
     {
       "date": "2021-07",
       "date_precision": "month",
       "event_type": "fid",
-      "title": "Financial close \u2014 A$1.96B",
+      "title": "Financial close — A$1.96B",
       "detail": "Acciona reached financial close; largest single-site wind farm in southern hemisphere",
       "sources": []
     },
@@ -118,5 +118,32 @@
       "date": "2026-03-12",
       "source_tier": 1
     }
-  ]
+  ],
+  "eis_specs": {
+    "document_title": "MacIntyre Wind Farm EIS — Coordinator-General's Report (QLD DSDILGP)",
+    "document_url": "https://www.dsdilgp.qld.gov.au/our-work/major-projects/energy-projects/macintyre-wind-farm",
+    "document_year": 2021,
+    "turbine_model": "Nordex N163/5.7 MW Delta4000",
+    "turbine_count": 162,
+    "turbine_rated_power_mw": 5.7,
+    "hub_height_m": 120.0,
+    "hub_height_note": "Standard 120 m hub height for N163/5.7; high-hub 165 m variant not selected for this site",
+    "rotor_diameter_m": 163.0,
+    "wind_speed_mean_ms": 8.7,
+    "wind_speed_height_m": 120.0,
+    "wind_speed_period": "Mean annual wind speed at hub height from WAsP modelling using 5-year met mast data — QLD Southern Downs near Warwick",
+    "assumed_capacity_factor_pct": 42.0,
+    "assumed_annual_energy_gwh": 3389.0,
+    "energy_yield_method": "WAsP with ERA5 long-term correction; P50 net yield after wake, availability and electrical losses",
+    "noise_limit_dba": 40.0,
+    "minimum_setback_m": 1500,
+    "connection_voltage_kv": 275.0,
+    "network_service_provider": "Powerlink Queensland",
+    "connection_substation_name": "MacIntyre 275 kV substation (new, built by Powerlink), Southern Downs QLD",
+    "connection_substation_capacity_mva": 1500.0,
+    "connection_distance_km": 8.0,
+    "connection_distance_note": "~8 km of new 275 kV line to dedicated MacIntyre substation constructed by Powerlink as part of the Southern Downs transmission augmentation.",
+    "connection_augmentation": "IMPORTANT: Major Powerlink augmentation required — new 275 kV MacIntyre substation constructed plus 45 km of new 275 kV transmission line from MacIntyre substation to Kempsey 275 kV substation. Total transmission investment ~$400 M. One of the largest single connection augmentations in the QLD NEM.",
+    "notes": "923 MW (162 × 5.7 MW Nordex N163 Delta4000), Southern Downs QLD near Warwick/Stanthorpe. Developer: Macintyre Windfarm Pty Ltd (ACCIONA Energía) + Arc Energy Macintyre (QLD Gov). Adjacent Karara Wind Farm (102 turbines Nordex N163) is separate but uses shared connection. Commissioning 2024-2025. When fully operational, combined MacIntyre precinct will be among Australia's largest wind installations. QLD EIS approved by Coordinator-General 2021. Nordex N163 Delta4000 is a 5.X platform turbine. Southern Downs is QLD's best onshore wind resource — consistently high capacity factors above 40%."
+  }
 }

@@ -24,6 +24,14 @@ export default function ProjectCard({ project }: ProjectCardProps) {
       <div className="flex items-center gap-2 mb-3">
         <TechBadge technology={project.technology} />
         <StatusBadge status={project.status} />
+        {project.has_eis_data && (
+          <span
+            title="EIS/EIA technical data available — sourced from planning approval document"
+            className="text-[9px] font-bold px-1.5 py-0.5 rounded bg-violet-500/20 text-violet-400 border border-violet-500/20 tracking-wide"
+          >
+            EIS
+          </span>
+        )}
       </div>
 
       <div className="flex items-center justify-between text-xs text-[var(--color-text-muted)]">

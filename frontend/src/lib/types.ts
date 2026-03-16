@@ -255,6 +255,7 @@ export interface ProjectSummary {
   capex_year?: number
   notable?: string
   first_seen?: string
+  has_eis_data?: boolean    // true when eis_specs are populated (planning document sourced)
 }
 
 // CIS/LTESA types
@@ -814,6 +815,7 @@ export interface NewsArticle {
   published_date: string;
   summary: string;
   matched_project_ids: string[];
+  project_data_updated?: string[];  // project IDs whose data was updated based on this article
 }
 
 export interface NewsData {

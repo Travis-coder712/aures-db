@@ -33,7 +33,7 @@
       "date_precision": "year",
       "event_type": "planning_submitted",
       "title": "EPBC Referral 2009/4719",
-      "detail": "Stockyard Hill Wind Farm \u2014 Controlled Action",
+      "detail": "Stockyard Hill Wind Farm — Controlled Action",
       "sources": []
     },
     {
@@ -70,7 +70,7 @@
       "date": "2018-06",
       "date_precision": "month",
       "event_type": "fid",
-      "title": "Financial close \u2014 A$800M+",
+      "title": "Financial close — A$800M+",
       "detail": "Origin Energy reached financial close with Goldwind as turbine supplier",
       "sources": []
     },
@@ -144,5 +144,32 @@
       "date": "2026-03-12",
       "source_tier": 1
     }
-  ]
+  ],
+  "eis_specs": {
+    "document_title": "Stockyard Hill Wind Farm Environment Effects Statement (VIC EES)",
+    "document_url": "https://www.planning.vic.gov.au/schemes-and-amendments/statewide-activities/environment-effects-statements/current-and-completed-ees/stockyard-hill-wind-energy-facility",
+    "document_year": 2016,
+    "turbine_model": "Goldwind GW140-3.57S",
+    "turbine_count": 149,
+    "turbine_rated_power_mw": 3.57,
+    "hub_height_m": 100.0,
+    "hub_height_note": "Standard hub height for GW140 on Western VIC plateau; terrain allows lower hub than coastal sites",
+    "rotor_diameter_m": 140.0,
+    "wind_speed_mean_ms": 8.5,
+    "wind_speed_height_m": 100.0,
+    "wind_speed_period": "Mean annual wind speed at hub height; Skipton/Beaufort plateau, Western Victoria — from met mast and WRF reanalysis",
+    "assumed_capacity_factor_pct": 39.2,
+    "assumed_annual_energy_gwh": 1813.0,
+    "energy_yield_method": "WAsP modelling; P50 net annual energy corrected for wake losses, electrical losses and availability",
+    "noise_limit_dba": 40.0,
+    "minimum_setback_m": 2000,
+    "connection_voltage_kv": 220.0,
+    "network_service_provider": "AusNet Services",
+    "connection_substation_name": "Beaufort 220 kV substation (AusNet Services), Western Victoria",
+    "connection_substation_capacity_mva": 750.0,
+    "connection_distance_km": 12.0,
+    "connection_distance_note": "~12 km of new 220 kV transmission connection to AusNet Services' Beaufort substation, Western Victoria.",
+    "connection_augmentation": "New 220 kV connection required. AusNet upgraded Beaufort substation and installed new transformer bank for 530 MW export capacity. Largest single wind farm connection in Victoria at time of commissioning.",
+    "notes": "530 MW (149 × 3.57 MW Goldwind GW140-3.57S), Western Victoria near Skipton. Original developer: Origin Energy (sold to Goldwind Australia). BOP: SNC-Lavalin / WBHO JV. VIC EES approved 2017. Now operating (2022). Was Australia's largest wind farm at commissioning. Goldwind GW140-3.57S uses direct-drive permanent magnet generator — no gearbox. 40 dBA and 2 km setback per VIC Wind Energy Facilities Incorporated Document."
+  }
 }

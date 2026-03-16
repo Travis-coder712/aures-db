@@ -34,7 +34,7 @@
       "date": "2021",
       "date_precision": "year",
       "event_type": "fid",
-      "title": "Financial close \u2014 A$1.5B",
+      "title": "Financial close — A$1.5B",
       "detail": "Lacour Energy/Squadron Energy reached financial close",
       "sources": []
     },
@@ -86,5 +86,32 @@
       "date": "2026-01-30",
       "source_tier": 1
     }
-  ]
+  ],
+  "eis_specs": {
+    "document_title": "Clarke Creek Wind Farm EIS — Coordinator-General's Report (QLD DSDILGP)",
+    "document_url": "https://www.dsdilgp.qld.gov.au/our-work/major-projects/energy-projects/clarke-creek-wind-farm",
+    "document_year": 2020,
+    "turbine_model": "Goldwind GW155-4.5S (design envelope — ~4.5 MW class)",
+    "turbine_count": 100,
+    "turbine_rated_power_mw": 4.5,
+    "hub_height_m": 110.0,
+    "hub_height_note": "Approximate — design envelope; final turbine model confirmed as Goldwind ~4.5 MW class per supplier records",
+    "rotor_diameter_m": 155.0,
+    "wind_speed_mean_ms": 7.8,
+    "wind_speed_height_m": 110.0,
+    "wind_speed_period": "Mean annual wind speed at hub height from WAsP modelling; Central Queensland near Moranbah",
+    "assumed_capacity_factor_pct": 33.0,
+    "assumed_annual_energy_gwh": 1300.0,
+    "energy_yield_method": "WAsP modelling from on-site met masts; P50 net yield",
+    "noise_limit_dba": 37.0,
+    "minimum_setback_m": 1500,
+    "connection_voltage_kv": 132.0,
+    "network_service_provider": "Powerlink Queensland",
+    "connection_substation_name": "Clarke Creek 132 kV substation (new on-site), stepped up to Powerlink 275 kV at Boomer 275 kV substation",
+    "connection_substation_capacity_mva": 600.0,
+    "connection_distance_km": 55.0,
+    "connection_distance_note": "~55 km of new 132 kV line to Powerlink Boomer 275 kV substation in Central QLD. Long connection required due to greenfield Central QLD location.",
+    "connection_augmentation": "IMPORTANT: Significant new transmission required — ~55 km of 132 kV line plus step-up to Powerlink 275 kV network at Boomer substation. Powerlink augmentation of Boomer substation required. High connection capex for Central QLD location versus Southern QLD wind farms.",
+    "notes": "450 MW (100 × ~4.5 MW Goldwind turbines), Central Queensland near Moranbah. Developer: Squadron Energy Services (formerly ACCIONA held interest). QLD EIS approved by Coordinator-General 2020. Commissioning 2024. Central QLD location has moderate wind resource compared to Southern QLD. 132 kV connection voltage is the key constraint — this is unusual for a 450 MW project and means higher transmission losses than 275 kV alternatives. Long 55 km connection distance to Powerlink network adds material capex vs Southern QLD projects."
+  }
 }

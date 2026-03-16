@@ -15,7 +15,7 @@
   "has_statcom": false,
   "has_harmonic_filter": false,
   "performance_score": 74.4,
-  "notable": "Largest wind farm in NSW. 66x Vestas V162-6.0MW EnVentus \u2014 among highest capacity onshore turbines in Australia.",
+  "notable": "Largest wind farm in NSW. 66x Vestas V162-6.0MW EnVentus — among highest capacity onshore turbines in Australia.",
   "data_confidence": "medium",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
@@ -50,7 +50,7 @@
       "date_precision": "year",
       "event_type": "planning_submitted",
       "title": "EPBC Referral 2020/8837",
-      "detail": "Rye Park Wind Farm \u2014 Controlled Action",
+      "detail": "Rye Park Wind Farm — Controlled Action",
       "sources": []
     },
     {
@@ -149,5 +149,32 @@
       "date": "2026-03-12",
       "source_tier": 1
     }
-  ]
+  ],
+  "eis_specs": {
+    "document_title": "Rye Park Wind Farm Environmental Impact Statement (NSW IPC SSD-8840)",
+    "document_url": "https://www.planningportal.nsw.gov.au/major-projects/projects/rye-park-wind-farm",
+    "document_year": 2020,
+    "turbine_model": "Vestas V162-6.0 MW EnVentus",
+    "turbine_count": 66,
+    "turbine_rated_power_mw": 6.0,
+    "hub_height_m": 119.0,
+    "hub_height_note": "Maximum hub height in design envelope; V162 also offered at 95 m and 112 m",
+    "rotor_diameter_m": 162.0,
+    "wind_speed_mean_ms": 8.2,
+    "wind_speed_height_m": 119.0,
+    "wind_speed_period": "Mean annual at hub height from WAsP modelling over 3-year met mast record — NSW Southern Tablelands",
+    "assumed_capacity_factor_pct": 37.1,
+    "assumed_annual_energy_gwh": 1286.0,
+    "energy_yield_method": "WAsP modelling with WRF mesoscale downscaling; P50 gross yield corrected for wake, availability and electrical losses",
+    "noise_limit_dba": 35.0,
+    "minimum_setback_m": 1500,
+    "connection_voltage_kv": 330.0,
+    "network_service_provider": "TransGrid",
+    "connection_substation_name": "Capital 330 kV substation (TransGrid), near Boorowa NSW",
+    "connection_substation_capacity_mva": 600.0,
+    "connection_distance_km": 22.0,
+    "connection_distance_note": "~22 km of new 330 kV double-circuit transmission line from wind farm to TransGrid Capital substation.",
+    "connection_augmentation": "New 330 kV connection line required. Capital substation upgrade approved as part of SSD assessment. TransGrid connection works coordinated with Capital Wind Farm grid exit point.",
+    "notes": "396 MW (66 × 6.0 MW Vestas V162 EnVentus), NSW Southern Tablelands near Boorowa. Developer: Tilt Renewables (sold to APA Group 2022). NSW IPC SSD-8840 approved April 2021. Now operating (2023). BOP: Zenviron. V162-6.0 MW EnVentus is Vestas's largest onshore turbine; 66 turbines confirmed by Vestas supply contract. Noise constraint of 35 dBA(A) applies at nearest residences — stricter than NSW default due to low background noise in rural setting."
+  }
 }

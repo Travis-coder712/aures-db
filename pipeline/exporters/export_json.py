@@ -47,7 +47,19 @@ def fetch_project_summary(conn, project_id):
     """, (project_id,)).fetchone()
     if not row:
         return None
-    return dict(row)
+    summary = dict(row)
+
+    # Add has_eis_data flag if the eis_technical_specs table exists and has data
+    try:
+        eis_row = conn.execute(
+            "SELECT 1 FROM eis_technical_specs WHERE project_id = ? LIMIT 1", (project_id,)
+        ).fetchone()
+        if eis_row:
+            summary['has_eis_data'] = True
+    except Exception:
+        pass  # Table may not exist in older DB versions
+
+    return summary
 
 
 def fetch_full_project(conn, project_id):

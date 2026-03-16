@@ -175,13 +175,21 @@ export default function News() {
                     </a>
 
                     {/* Meta */}
-                    <div className="flex items-center gap-2 mt-1">
+                    <div className="flex items-center gap-2 mt-1 flex-wrap">
                       <span className={`text-[10px] px-1.5 py-0.5 rounded-full ${srcCfg.color}`}>
                         {srcCfg.label}
                       </span>
                       <span className="text-[10px] text-[var(--color-text-muted)]">
                         {daysAgo(article.published_date)}
                       </span>
+                      {article.project_data_updated && article.project_data_updated.length > 0 && (
+                        <span
+                          title={`Project data updated: ${article.project_data_updated.join(', ')}`}
+                          className="text-[9px] font-semibold px-1.5 py-0.5 rounded-full bg-emerald-500/15 text-emerald-400 border border-emerald-500/20"
+                        >
+                          ✎ Updated {article.project_data_updated.length} project{article.project_data_updated.length > 1 ? 's' : ''}
+                        </span>
+                      )}
                     </div>
 
                     {/* Summary */}

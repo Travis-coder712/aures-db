@@ -587,7 +587,7 @@ function EISSpecsSection({
   return (
     <section>
       {/* Header with source attribution */}
-      <div className="flex items-start justify-between gap-3 mb-3">
+      <div className="flex items-start justify-between gap-3 mb-2">
         <h3 className="text-sm font-semibold text-[var(--color-text)] flex items-center gap-2">
           📄 EIS / EIA Technical Specifications
         </h3>
@@ -608,6 +608,11 @@ function EISSpecsSection({
           </span>
         )}
       </div>
+
+      {/* Disclaimer */}
+      <p className="text-[10px] text-amber-400/70 bg-amber-400/5 border border-amber-400/10 rounded-lg px-3 py-1.5 mb-3 leading-relaxed">
+        ⚠ Specifications sourced from planning approval document (EIS/EIA){specs.document_year ? ` — ${specs.document_year}` : ''}. Technical details reflect the approved design and may differ from the as-built configuration.
+      </p>
 
       <div className="space-y-3">
         {/* ── Wind: Turbine Specifications ────────────────────── */}

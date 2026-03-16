@@ -33,14 +33,14 @@
       "date_precision": "year",
       "event_type": "planning_submitted",
       "title": "EPBC Referral 2008/4237",
-      "detail": "Coopers Gap Wind Farm \u2014 Not Controlled Action",
+      "detail": "Coopers Gap Wind Farm — Not Controlled Action",
       "sources": []
     },
     {
       "date": "2017",
       "date_precision": "year",
       "event_type": "fid",
-      "title": "Financial close \u2014 PARF acquisition",
+      "title": "Financial close — PARF acquisition",
       "detail": "AGL sold project to Powering Australian Renewables Fund; PPA at <$60/MWh bundled for 5 years",
       "sources": []
     },
@@ -148,5 +148,32 @@
       "date": "2026-03-12",
       "source_tier": 1
     }
-  ]
+  ],
+  "eis_specs": {
+    "document_title": "Coopers Gap Wind Farm Coordinator-General's Report (QLD DSDILGP EIS)",
+    "document_url": "https://www.dsdilgp.qld.gov.au/our-work/major-projects/energy-projects/coopers-gap-wind-farm",
+    "document_year": 2016,
+    "turbine_model": "GE Vernova GE 3.6-137 / GE 3.8-130 (mixed fleet)",
+    "turbine_count": 123,
+    "turbine_rated_power_mw": 3.68,
+    "hub_height_m": 127.0,
+    "hub_height_note": "Weighted average; GE 3.6-137 and GE 3.8-130 turbines at 127 m hub height",
+    "rotor_diameter_m": 137.0,
+    "wind_speed_mean_ms": 8.0,
+    "wind_speed_height_m": 127.0,
+    "wind_speed_period": "Mean annual wind speed at hub height; QLD South Burnett highlands — modelled from on-site met mast and BOM reference data",
+    "assumed_capacity_factor_pct": 35.5,
+    "assumed_annual_energy_gwh": 1407.0,
+    "energy_yield_method": "WAsP modelling with mesoscale downscaling; P50 net annual energy yield after array losses and availability",
+    "noise_limit_dba": 37.0,
+    "minimum_setback_m": 1500,
+    "connection_voltage_kv": 275.0,
+    "network_service_provider": "Powerlink Queensland",
+    "connection_substation_name": "Tarong 275 kV substation (Powerlink Queensland)",
+    "connection_substation_capacity_mva": 1200.0,
+    "connection_distance_km": 35.0,
+    "connection_distance_note": "~35 km of new 275 kV single-circuit line from wind farm to Powerlink Tarong substation near Nanango, QLD.",
+    "connection_augmentation": "New 275 kV connection line to Tarong. Powerlink augmented Tarong substation bus and protection systems. QLD transmission investment assessed under RIT-T process.",
+    "notes": "453 MW wind farm, South Burnett region, QLD. Developer: AGL Energy (formerly Arrow Energy/APA). EPC: CATCON. Mixed GE fleet (GE 3.6-137 and GE 3.8-130 turbines). Now operating (2023). Original EIS approved 2016 by QLD Coordinator-General; turbine model updated during procurement. South Burnett highlands provide moderate-to-good wind resource for QLD conditions. EIS was assessed under the State Development and Public Works Organisation Act 1971 (QLD)."
+  }
 }
