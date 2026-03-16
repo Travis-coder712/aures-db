@@ -194,6 +194,12 @@
     "noise_limit_dba": 37.0,
     "minimum_setback_m": 1000,
     "connection_voltage_kv": 132.0,
+    "network_service_provider": "Powerlink Queensland",
+    "connection_substation_name": "Oakey 132 kV substation",
+    "connection_substation_capacity_mva": 240.0,
+    "connection_distance_km": 22.0,
+    "connection_distance_note": "~22 km of new 132 kV transmission line from project to Oakey substation; EIS connection study Section 8",
+    "connection_augmentation": "Oakey 132 kV substation augmentation required. New transformer bay and 132 kV line works. Powerlink augmentation conditions apply.",
     "notes": "Coordinated project declared under QLD State Development and Public Works Organisation Act. Located near Crows Nest, Darling Downs, QLD. Cubico Sustainable Investments / Stanwell Corporation 50:50 JV. Construction commenced late 2024."
   }
 }

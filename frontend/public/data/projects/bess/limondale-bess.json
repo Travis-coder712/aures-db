@@ -132,6 +132,12 @@
     "duration_hours": 8.0,
     "connection_voltage_kv": 330.0,
     "transformer_mva": 50.0,
+    "network_service_provider": "TransGrid",
+    "connection_substation_name": "Darlington Point 330 kV substation (co-located with solar farm)",
+    "connection_substation_capacity_mva": 500.0,
+    "connection_distance_km": 0.3,
+    "connection_distance_note": "Co-located with Limondale Solar Farm — shares existing 330 kV connection substation at Darlington Point. ~300 m internal cable.",
+    "connection_augmentation": "Minimal. Small 50 MW BESS shares solar farm 330 kV connection. New BESS feeder bay only. Very low augmentation cost for this capacity.",
     "notes": "50 MW / 400 MWh (8-hour) long-duration BESS co-located with Limondale Solar Farm, NSW. RWE Renewables Australia. NSW SSD. Notable for 8-hour duration — significantly longer than typical 2-4 hour systems. LFP chemistry for long-cycle life at extended duration. Connection to TransGrid 330 kV network."
   }
 }

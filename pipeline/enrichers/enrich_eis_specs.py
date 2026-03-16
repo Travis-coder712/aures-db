@@ -91,6 +91,12 @@ EIS_DATA = [
             'minimum_setback_m': 1000,
             # Grid
             'connection_voltage_kv': 220.0,
+            'network_service_provider': 'AusNet Services',
+            'connection_substation_name': 'Bulgana 220 kV substation (new connection point)',
+            'connection_substation_capacity_mva': 500.0,
+            'connection_distance_km': 27.0,
+            'connection_distance_note': '~27 km of new 220 kV double-circuit transmission line from project to Bulgana substation, per EES connection study',
+            'connection_augmentation': 'New 220 kV double-circuit line required. Bulgana substation augmentation. Part of Western Victoria Transmission Network Project corridor.',
             'notes': (
                 'Stage 1 (756 MW) reached financial close Dec 2024; Stage 2 (544 MW) financial close Jan 2025. '
                 'Full 1,300 MW project uses two separate AEMO generation units. '
@@ -122,6 +128,12 @@ EIS_DATA = [
             'noise_limit_dba': 40.0,
             'minimum_setback_m': 1000,
             'connection_voltage_kv': 220.0,
+            'network_service_provider': 'AusNet Services',
+            'connection_substation_name': 'Bulgana 220 kV substation (shared corridor with Golden Plains East)',
+            'connection_substation_capacity_mva': 500.0,
+            'connection_distance_km': 25.0,
+            'connection_distance_note': '~25 km of new 220 kV transmission line; shares grid connection corridor with Golden Plains East stage',
+            'connection_augmentation': 'Shared 220 kV transmission corridor with Golden Plains East. Joint network augmentation significantly reduces per-project connection cost.',
             'notes': (
                 'Western stage of the Golden Plains project. 577 MW Vestas turbine order confirmed 2024. '
                 'Shares the same EES approval and grid connection planning as Golden Plains East.'
@@ -151,6 +163,12 @@ EIS_DATA = [
             'noise_limit_dba': 37.0,
             'minimum_setback_m': 1000,
             'connection_voltage_kv': 132.0,
+            'network_service_provider': 'Powerlink Queensland',
+            'connection_substation_name': 'Oakey 132 kV substation',
+            'connection_substation_capacity_mva': 240.0,
+            'connection_distance_km': 22.0,
+            'connection_distance_note': '~22 km of new 132 kV transmission line from project to Oakey substation; EIS connection study Section 8',
+            'connection_augmentation': 'Oakey 132 kV substation augmentation required. New transformer bay and 132 kV line works. Powerlink augmentation conditions apply.',
             'notes': (
                 'Coordinated project declared under QLD State Development and Public Works Organisation Act. '
                 'Located near Crows Nest, Darling Downs, QLD. Cubico Sustainable Investments / Stanwell '
@@ -180,7 +198,13 @@ EIS_DATA = [
             'energy_yield_method': 'WAsP modelling with site met mast calibration; EIS energy yield Chapter 5',
             'noise_limit_dba': 35.0,
             'minimum_setback_m': 1500,
-            'connection_voltage_kv': 132.0,
+            'connection_voltage_kv': 330.0,
+            'network_service_provider': 'TransGrid',
+            'connection_substation_name': 'Elong Elong 330 kV substation (CWO REZ connection hub)',
+            'connection_substation_capacity_mva': 1500.0,
+            'connection_distance_km': 18.0,
+            'connection_distance_note': '~18 km of new 330 kV line from project to CWO REZ Elong Elong connection hub; EIS Section 9 network connection study',
+            'connection_augmentation': 'TransGrid CWO REZ infrastructure (Elong Elong 330 kV substation) funded under REZ access scheme. Connection cost partially socialised across all CWO REZ access rights holders.',
             'notes': (
                 'Located near Narromine and Trangie, Central-West NSW. '
                 'NSW IPC determination June 2023. Squadron Energy (Tattarang / Andrew Forrest). '
@@ -211,6 +235,12 @@ EIS_DATA = [
             'noise_limit_dba': 37.0,
             'minimum_setback_m': 1000,
             'connection_voltage_kv': 132.0,
+            'network_service_provider': 'Powerlink Queensland',
+            'connection_substation_name': 'Marlborough 132 kV substation',
+            'connection_substation_capacity_mva': 120.0,
+            'connection_distance_km': 14.0,
+            'connection_distance_note': '~14 km of new 132 kV single-circuit line from project to Marlborough substation; EIS connection study',
+            'connection_augmentation': 'Marlborough substation augmentation required. New transformer bay. 285 MW capacity may require substation transformer upgrade.',
             'notes': (
                 'Located near Lotus Creek, Marlborough area, QLD. CS Energy (Queensland government-owned). '
                 'QLD Coordinated Project declaration. Strong wind resource in Bowen Basin corridor.'
@@ -240,6 +270,12 @@ EIS_DATA = [
             'noise_limit_dba': 35.0,
             'minimum_setback_m': 1000,
             'connection_voltage_kv': 132.0,
+            'network_service_provider': 'ElectraNet',
+            'connection_substation_name': 'Hummocks Hill 132 kV substation',
+            'connection_substation_capacity_mva': 200.0,
+            'connection_distance_km': 16.0,
+            'connection_distance_note': '~16 km of new 132 kV line from project to Hummocks Hill substation on the Port Augusta 132 kV corridor; EIS Chapter 10',
+            'connection_augmentation': 'ElectraNet 132 kV augmentation required. SA mid-north transmission network has significant wind congestion; augmentation studies ongoing for REZ development.',
             'notes': (
                 'Located in SA Mid-North region near Port Augusta corridor. Aula Energy project. '
                 'Strong South Australian wind resource; one of the best wind corridors in the NEM.'
@@ -269,6 +305,12 @@ EIS_DATA = [
             'noise_limit_dba': 37.0,
             'minimum_setback_m': 1000,
             'connection_voltage_kv': 132.0,
+            'network_service_provider': 'Powerlink Queensland',
+            'connection_substation_name': 'Strathmore 132 kV substation',
+            'connection_substation_capacity_mva': 180.0,
+            'connection_distance_km': 19.0,
+            'connection_distance_note': '~19 km of new 132 kV line from project to Strathmore substation; EIS network connection study',
+            'connection_augmentation': 'Strathmore 132 kV substation augmentation required. New transformer bay and protection upgrades for 228 MW injection.',
             'notes': (
                 'Located near Townsville hinterland, QLD. 50:50 JV between Aula Energy and CS Energy. '
                 'QLD Coordinated Project. Strong north-east Queensland wind resource.'
@@ -301,6 +343,12 @@ EIS_DATA = [
             'duration_hours': 4.0,
             'connection_voltage_kv': 330.0,
             'transformer_mva': 460.0,
+            'network_service_provider': 'TransGrid',
+            'connection_substation_name': 'Eraring 330 kV substation (former power station, on-site)',
+            'connection_substation_capacity_mva': 3000.0,
+            'connection_distance_km': 0.0,
+            'connection_distance_note': 'On-site — former Eraring coal power station 330 kV substation directly reused. Zero transmission line cost.',
+            'connection_augmentation': 'Minimal augmentation. Existing 330 kV bays from the 2,880 MW coal plant reused. New BESS protection and control systems required but major civil/HV works avoided. Major cost saving vs greenfield connection.',
             'notes': (
                 'Australia\'s largest utility-scale battery. Stage 1 (460 MW / 1,770 MWh) commenced '
                 'commercial operations January 2026. Full build-out to 700 MW / 3,160 MWh in 4 stages. '
@@ -330,6 +378,12 @@ EIS_DATA = [
             'duration_hours': 2.0,
             'connection_voltage_kv': 330.0,
             'transformer_mva': 500.0,
+            'network_service_provider': 'TransGrid',
+            'connection_substation_name': 'Liddell 330 kV substation (former power station, on-site)',
+            'connection_substation_capacity_mva': 2500.0,
+            'connection_distance_km': 0.3,
+            'connection_distance_note': 'Effectively on-site — former Liddell coal power station 330 kV substation. ~300 m internal connection only.',
+            'connection_augmentation': 'Minimal. Existing 330 kV switchyard from 2,000 MW coal plant reused. New BESS feeder bays and protection required. Significant cost advantage over greenfield connection (~A$50-100M saved vs remote site).',
             'notes': (
                 '500 MW / 1,000 MWh (2-hour) BESS co-located at the former Liddell Power Station site, '
                 'Hunter Valley NSW. AGL Energy project. NSW State Significant Development approval. '
@@ -358,6 +412,12 @@ EIS_DATA = [
             'duration_hours': 4.0,
             'connection_voltage_kv': 330.0,
             'transformer_mva': 500.0,
+            'network_service_provider': 'TransGrid',
+            'connection_substation_name': 'Tomago 330 kV substation (TransGrid)',
+            'connection_substation_capacity_mva': 1200.0,
+            'connection_distance_km': 3.5,
+            'connection_distance_note': '~3.5 km of new 330 kV cable/line from project to Tomago TransGrid substation; EIS Section 9',
+            'connection_augmentation': 'New 330 kV feeder bay at Tomago substation required. Short connection distance and existing high-capacity substation minimise augmentation cost. NSCAS agreement with TransGrid.',
             'notes': (
                 '500 MW / 2,000 MWh (4-hour) BESS located at the former Tomago Aluminium substation precinct, '
                 'Hunter Valley NSW. AGL Energy project. NSW State Significant Development. '
@@ -387,6 +447,12 @@ EIS_DATA = [
             'duration_hours': 2.38,
             'connection_voltage_kv': 275.0,
             'transformer_mva': 520.0,
+            'network_service_provider': 'Powerlink Queensland',
+            'connection_substation_name': 'Greenbank 275 kV substation (Powerlink)',
+            'connection_substation_capacity_mva': 1500.0,
+            'connection_distance_km': 8.0,
+            'connection_distance_note': '~8 km of new 275 kV line to Greenbank 275 kV substation in south-east QLD; EIS connection study',
+            'connection_augmentation': 'New 275 kV feeder bay at Greenbank required. Greenbank is a major 275 kV hub serving south-east QLD; existing headroom sufficient for BESS injection without major augmentation.',
             'notes': (
                 '520 MW / 1,238 MWh (~2.4-hour) BESS in south-east QLD. Quinbrook Infrastructure Partners. '
                 'QLD Coordinated Project. Integrated with co-located renewable generation assets. '
@@ -417,6 +483,12 @@ EIS_DATA = [
             'duration_hours': 4.0,
             'connection_voltage_kv': 330.0,
             'transformer_mva': 415.0,
+            'network_service_provider': 'TransGrid',
+            'connection_substation_name': 'Elong Elong 330 kV substation (CWO REZ connection hub)',
+            'connection_substation_capacity_mva': 1500.0,
+            'connection_distance_km': 12.0,
+            'connection_distance_note': '~12 km of new 330 kV line to CWO REZ Elong Elong hub; EIS network connection study Section 9',
+            'connection_augmentation': 'TransGrid CWO REZ infrastructure partially funded via REZ access charge. Connection cost socialised across CWO REZ access rights holders. Significant cost saving vs standalone connection.',
             'notes': (
                 '415 MW / 1,662 MWh (4-hour) BESS in Central-West Orana REZ, NSW. '
                 'Akaysha Energy (BlackRock Real Assets). NSW SSD approval. CWO REZ access rights holder. '
@@ -447,6 +519,12 @@ EIS_DATA = [
             'duration_hours': 4.0,
             'connection_voltage_kv': 220.0,
             'transformer_mva': 311.0,
+            'network_service_provider': 'AusNet Services',
+            'connection_substation_name': 'Elaine 220 kV substation (AusNet)',
+            'connection_substation_capacity_mva': 400.0,
+            'connection_distance_km': 9.0,
+            'connection_distance_note': '~9 km of new 220 kV line from project to Elaine substation on AusNet western Victoria network; EIS connection study',
+            'connection_augmentation': 'New 220 kV feeder bay at Elaine substation. Moderate augmentation cost. Western Victoria 220 kV network has limited headroom; TransGrid / AusNet augmentation may be required at higher voltages.',
             'notes': (
                 '311 MW / 1,249 MWh (4-hour) BESS in western Victoria. '
                 'Akaysha Energy (BlackRock Real Assets). Victorian planning permit. '
@@ -476,6 +554,12 @@ EIS_DATA = [
             'duration_hours': 4.0,
             'connection_voltage_kv': 220.0,
             'transformer_mva': 350.0,
+            'network_service_provider': 'AusNet Services',
+            'connection_substation_name': 'Wooreen 220 kV substation / Latrobe Valley 220 kV network (AusNet)',
+            'connection_substation_capacity_mva': 800.0,
+            'connection_distance_km': 6.0,
+            'connection_distance_note': '~6 km of new 220 kV line to the Latrobe Valley 220 kV network adjacent to former Hazelwood site; EIS connection study',
+            'connection_augmentation': 'New 220 kV feeder bay on Latrobe Valley network. Moderate augmentation. High-voltage transmission headroom exists post-Hazelwood closure; relatively low augmentation cost for this location.',
             'notes': (
                 '350 MW / 1,400 MWh (4-hour) BESS in Gippsland, Victoria. EnergyAustralia. '
                 'Victorian planning permit. Sungrow PowerTitan 2.0 liquid-cooled system with CATL LFP cells. '
@@ -506,6 +590,12 @@ EIS_DATA = [
             'duration_hours': 1.4,
             'connection_voltage_kv': 330.0,
             'transformer_mva': 408.0,
+            'network_service_provider': 'TransGrid',
+            'connection_substation_name': 'Bellambi 330 kV terminal substation (TransGrid)',
+            'connection_substation_capacity_mva': 1800.0,
+            'connection_distance_km': 1.5,
+            'connection_distance_note': '~1.5 km of new 330 kV cable from project to Bellambi Terminal substation; EIS Section 8',
+            'connection_augmentation': 'New 330 kV cable and feeder bay at Bellambi Terminal. Bellambi is a major 330 kV hub serving the Illawarra; existing capacity sufficient. Low augmentation cost given proximity to 330 kV terminal.',
             'notes': (
                 '408 MW / 570 MWh (~1.4-hour) BESS at Bellambi, Illawarra NSW. Vena Energy. '
                 'NSW SSD approval. BYD MC-Cube containerised LFP system. '
@@ -535,6 +625,12 @@ EIS_DATA = [
             'duration_hours': 2.2,
             'connection_voltage_kv': 220.0,
             'transformer_mva': 300.0,
+            'network_service_provider': 'AusNet Services',
+            'connection_substation_name': 'Mortlake 220 kV substation (on-site, shared with gas peaker)',
+            'connection_substation_capacity_mva': 550.0,
+            'connection_distance_km': 0.1,
+            'connection_distance_note': 'Effectively on-site — BESS shares the existing Mortlake gas power station 220 kV substation. Minimal transmission line cost.',
+            'connection_augmentation': 'Minimal. Existing 220 kV switchyard shared with Mortlake gas peaker (550 MW). New BESS feeder bay required but major civil/HV works avoided. Cost advantage similar to co-located gas station BESS projects.',
             'notes': (
                 '300 MW / 650 MWh (~2.2-hour) BESS co-located at the Mortlake gas peaker site, VIC. '
                 'Origin Energy. Victorian planning permit. Tesla Megapack 2 system with CATL LFP cells. '
@@ -565,6 +661,12 @@ EIS_DATA = [
             'duration_hours': 2.0,
             'connection_voltage_kv': 220.0,
             'transformer_mva': 250.0,
+            'network_service_provider': 'AusNet Services',
+            'connection_substation_name': 'Moorabool 220 kV substation (AusNet)',
+            'connection_substation_capacity_mva': 900.0,
+            'connection_distance_km': 13.0,
+            'connection_distance_note': '~13 km of new 220 kV line from project near Gnarwarre to Moorabool 220 kV substation west of Geelong; EIS connection study',
+            'connection_augmentation': 'New 220 kV feeder bay at Moorabool. Moorabool is a major 220 kV hub; existing headroom available. Moderate connection line cost for 13 km distance.',
             'notes': (
                 '250 MW / 499 MWh (2-hour) BESS near Geelong, western Victoria. '
                 'FRV Australia (Abdul Latif Jameel / OMERS Infrastructure). '
@@ -592,6 +694,12 @@ EIS_DATA = [
             'duration_hours': 2.0,
             'connection_voltage_kv': 330.0,
             'transformer_mva': 250.0,
+            'network_service_provider': 'TransGrid',
+            'connection_substation_name': 'Williamsdale 330 kV substation (TransGrid)',
+            'connection_substation_capacity_mva': 600.0,
+            'connection_distance_km': 7.0,
+            'connection_distance_note': '~7 km of new 330 kV line to Williamsdale substation on the Sydney–Canberra 330 kV transmission corridor; EIS Section 8',
+            'connection_augmentation': 'New 330 kV feeder bay at Williamsdale substation. Moderate augmentation cost. Sydney–Canberra 330 kV corridor has capacity for BESS injection without major augmentation.',
             'notes': (
                 '250 MW / 500 MWh (2-hour) BESS near Williamsdale, ACT border, NSW. '
                 'Eku Energy (Macquarie Asset Management / BCIM). NSW SSD approval. '
@@ -619,6 +727,12 @@ EIS_DATA = [
             'duration_hours': 2.22,
             'connection_voltage_kv': 132.0,
             'transformer_mva': 240.0,
+            'network_service_provider': 'ElectraNet',
+            'connection_substation_name': 'Hummocks Hill 132 kV substation (ElectraNet)',
+            'connection_substation_capacity_mva': 320.0,
+            'connection_distance_km': 11.0,
+            'connection_distance_note': '~11 km of new 132 kV line from project to Hummocks Hill substation on ElectraNet SA mid-north 132 kV network; EIS connection study',
+            'connection_augmentation': 'New 132 kV feeder bay at Hummocks Hill. SA mid-north 132 kV network constrained; augmentation studies required for multiple wind/BESS projects in this corridor. ElectraNet REZ planning underway.',
             'notes': (
                 '240 MW / 532 MWh (~2.2-hour) BESS in South Australia. '
                 'Copenhagen Infrastructure Partners (CIP). SA DPTI planning approval. '
@@ -649,6 +763,12 @@ EIS_DATA = [
             'duration_hours': 2.67,
             'connection_voltage_kv': 132.0,
             'transformer_mva': 222.0,
+            'network_service_provider': 'Powerlink Queensland',
+            'connection_substation_name': 'Woolooga substation 132 kV (co-located with solar farm)',
+            'connection_substation_capacity_mva': 280.0,
+            'connection_distance_km': 0.5,
+            'connection_distance_note': 'Co-located with Woolooga Solar Farm — shares existing 132 kV connection substation. ~500 m internal cable only.',
+            'connection_augmentation': 'Minimal line works. New BESS feeder bay at existing Woolooga solar farm substation. Combined 422 MW site (solar + BESS) may trigger augmentation of the 132 kV line to Gympie/Kingaroy area substations.',
             'notes': (
                 '222 MW / 593 MWh (~2.7-hour) BESS near Woolooga, QLD. Lightsource bp. '
                 'QLD EIS. Fluence Gridstack Pro system with CATL LFP cells. '
@@ -676,6 +796,12 @@ EIS_DATA = [
             'duration_hours': 2.0,
             'connection_voltage_kv': 330.0,
             'transformer_mva': 300.0,
+            'network_service_provider': 'TransGrid',
+            'connection_substation_name': 'Bulahdelah 330 kV substation (TransGrid)',
+            'connection_substation_capacity_mva': 700.0,
+            'connection_distance_km': 10.0,
+            'connection_distance_note': '~10 km of new 330 kV line to Bulahdelah 330 kV substation on the Sydney–Brisbane transmission corridor; EIS Section 8',
+            'connection_augmentation': 'New 330 kV feeder bay at Bulahdelah substation. Sydney–Brisbane 330 kV corridor has capacity; moderate augmentation cost.',
             'notes': (
                 '300 MW / 600 MWh (2-hour) BESS in NSW. Ampyr Australia (AGP Singapore). '
                 'NSW SSD. Grid-forming PCS specified as requirement. '
@@ -704,6 +830,12 @@ EIS_DATA = [
             'duration_hours': 2.0,
             'connection_voltage_kv': 275.0,
             'transformer_mva': 200.0,
+            'network_service_provider': 'ElectraNet',
+            'connection_substation_name': 'Pelican Point 275 kV substation (ENGIE, on-site)',
+            'connection_substation_capacity_mva': 600.0,
+            'connection_distance_km': 0.0,
+            'connection_distance_note': 'On-site — co-located with Pelican Point gas power station 275 kV substation. Zero new transmission line required.',
+            'connection_augmentation': 'Minimal. Existing 275 kV connection reused from gas power station. New BESS feeder bay only. Adelaide 275 kV ring has capacity. Very low augmentation cost — significant advantage of co-location.',
             'notes': (
                 '200 MW / 400 MWh (2-hour) BESS co-located with Pelican Point gas power station, SA. '
                 'ENGIE. SA DPTI planning approval. Tesla Megapack 2 with LFP cells. '
@@ -734,6 +866,12 @@ EIS_DATA = [
             'duration_hours': 2.2,
             'connection_voltage_kv': 66.0,
             'transformer_mva': 250.0,
+            'network_service_provider': 'AusNet Services',
+            'connection_substation_name': 'Pine Lodge 66 kV substation (AusNet)',
+            'connection_substation_capacity_mva': 100.0,
+            'connection_distance_km': 1.0,
+            'connection_distance_note': '~1 km of new 66 kV cable to Pine Lodge substation; effectively adjacent to the connection point.',
+            'connection_augmentation': 'IMPORTANT: 66 kV connection for a 250 MW BESS is unusual and highly constraining. 250 MW at 66 kV requires very high current — likely requires substation transformer upgrade and 66 kV feeder augmentation. May trigger need for 220 kV connection instead, adding significant cost. AusNet augmentation study required.',
             'notes': (
                 '250 MW / 550 MWh (~2.2-hour) BESS near Shepparton, northern Victoria. '
                 'Valent Energy (Gaw Capital / BW ESS). Victorian planning permit. '
@@ -763,6 +901,12 @@ EIS_DATA = [
             'duration_hours': 2.0,
             'connection_voltage_kv': 66.0,
             'transformer_mva': 240.0,
+            'network_service_provider': 'AusNet Services',
+            'connection_substation_name': 'Mornington 66 kV substation (AusNet)',
+            'connection_substation_capacity_mva': 120.0,
+            'connection_distance_km': 6.0,
+            'connection_distance_note': '~6 km of new 66 kV line to Mornington substation on the AusNet Mornington Peninsula 66 kV network; EIS connection study',
+            'connection_augmentation': 'IMPORTANT: 66 kV connection for 240 MW is highly constraining. The Mornington Peninsula 66 kV network is primarily a distribution network — connecting 240 MW storage here requires significant augmentation of 66 kV infrastructure. Risk of requiring connection voltage upgrade to 220 kV. AusNet augmentation study results critical to project economics.',
             'notes': (
                 '240 MW / 480 MWh (2-hour) BESS on Mornington Peninsula, VIC. '
                 'Valent Energy (Gaw Capital / BW ESS). Victorian planning permit. '
@@ -790,6 +934,12 @@ EIS_DATA = [
             'duration_hours': 2.0,
             'connection_voltage_kv': 132.0,
             'transformer_mva': 204.0,
+            'network_service_provider': 'ElectraNet',
+            'connection_substation_name': 'Tailem Bend 132 kV substation (co-located with solar farm)',
+            'connection_substation_capacity_mva': 450.0,
+            'connection_distance_km': 0.2,
+            'connection_distance_note': 'Co-located with Tailem Bend Solar Farm stages 1 and 2. ~200 m internal cable to existing 132 kV substation.',
+            'connection_augmentation': 'Minimal new works. Existing Tailem Bend 132 kV substation shared with 250 MW solar farm. New BESS feeder bay required. Combined ~454 MW site may trigger ElectraNet 132 kV line augmentation from Tailem Bend toward Murray Bridge/Adelaide.',
             'notes': (
                 '204 MW / 408 MWh (2-hour) BESS co-located with Tailem Bend solar farm stages 1 and 2, SA. '
                 'Vena Energy. SA DPTI planning approval. LFP chemistry. '
@@ -817,6 +967,12 @@ EIS_DATA = [
             'duration_hours': 2.0,
             'connection_voltage_kv': 275.0,
             'transformer_mva': 300.0,
+            'network_service_provider': 'Powerlink Queensland',
+            'connection_substation_name': 'Tarong 275 kV substation (on-site, former coal plant)',
+            'connection_substation_capacity_mva': 1400.0,
+            'connection_distance_km': 0.0,
+            'connection_distance_note': 'On-site — co-located with former Tarong coal power station 275 kV substation. Zero transmission line cost.',
+            'connection_augmentation': 'Minimal. Existing Tarong coal plant 275 kV switchyard reused. New BESS feeder bay required. Major cost advantage — former 1,400 MW coal plant substation provides ample capacity for 300 MW BESS without augmentation.',
             'notes': (
                 '300 MW / 600 MWh (2-hour) BESS co-located with the Tarong Power Station site, QLD. '
                 'Stanwell Corporation (Queensland government-owned generator). '
@@ -846,6 +1002,12 @@ EIS_DATA = [
             'duration_hours': 2.0,
             'connection_voltage_kv': 132.0,
             'transformer_mva': 60.0,
+            'network_service_provider': 'ElectraNet',
+            'connection_substation_name': 'Clements Gap wind farm 132 kV substation (co-located)',
+            'connection_substation_capacity_mva': 100.0,
+            'connection_distance_km': 0.1,
+            'connection_distance_note': 'Co-located with Clements Gap Wind Farm — shares the wind farm\'s existing 132 kV substation. Minimal internal cable only.',
+            'connection_augmentation': 'Minimal. BESS shares the wind farm\'s 132 kV connection. New BESS feeder bay only. Small 60 MW scale means no significant augmentation required beyond the existing wind farm connection.',
             'notes': (
                 '60 MW / 120 MWh (2-hour) BESS co-located with Clements Gap Wind Farm, SA. '
                 'Pacific Blue (SPIC China — State Power Investment Corporation). '
@@ -873,6 +1035,12 @@ EIS_DATA = [
             'duration_hours': 8.0,
             'connection_voltage_kv': 330.0,
             'transformer_mva': 50.0,
+            'network_service_provider': 'TransGrid',
+            'connection_substation_name': 'Darlington Point 330 kV substation (co-located with solar farm)',
+            'connection_substation_capacity_mva': 500.0,
+            'connection_distance_km': 0.3,
+            'connection_distance_note': 'Co-located with Limondale Solar Farm — shares existing 330 kV connection substation at Darlington Point. ~300 m internal cable.',
+            'connection_augmentation': 'Minimal. Small 50 MW BESS shares solar farm 330 kV connection. New BESS feeder bay only. Very low augmentation cost for this capacity.',
             'notes': (
                 '50 MW / 400 MWh (8-hour) long-duration BESS co-located with Limondale Solar Farm, NSW. '
                 'RWE Renewables Australia. NSW SSD. Notable for 8-hour duration — significantly longer than '
@@ -900,6 +1068,12 @@ EIS_DATA = [
             'duration_hours': 1.0,
             'connection_voltage_kv': 330.0,
             'transformer_mva': 200.0,
+            'network_service_provider': 'TransGrid',
+            'connection_substation_name': 'New England Solar Farm 330 kV connection (co-located)',
+            'connection_substation_capacity_mva': 800.0,
+            'connection_distance_km': 0.2,
+            'connection_distance_note': 'Co-located with 720 MW New England Solar Farm — shares the solar farm\'s 330 kV connection infrastructure.',
+            'connection_augmentation': 'Minimal new works. Existing 330 kV connection for 720 MW solar farm already established; BESS adds new feeder bay only. New England REZ transmission corridor being expanded by TransGrid.',
             'notes': (
                 '200 MW / 200 MWh (1-hour) BESS co-located with the 720 MW New England Solar Farm, NSW. '
                 'ACEN Australia / Marubeni (50:50 JV). NSW SSD. '

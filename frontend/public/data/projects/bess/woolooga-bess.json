@@ -109,6 +109,12 @@
     "duration_hours": 2.67,
     "connection_voltage_kv": 132.0,
     "transformer_mva": 222.0,
+    "network_service_provider": "Powerlink Queensland",
+    "connection_substation_name": "Woolooga substation 132 kV (co-located with solar farm)",
+    "connection_substation_capacity_mva": 280.0,
+    "connection_distance_km": 0.5,
+    "connection_distance_note": "Co-located with Woolooga Solar Farm — shares existing 132 kV connection substation. ~500 m internal cable only.",
+    "connection_augmentation": "Minimal line works. New BESS feeder bay at existing Woolooga solar farm substation. Combined 422 MW site (solar + BESS) may trigger augmentation of the 132 kV line to Gympie/Kingaroy area substations.",
     "notes": "222 MW / 593 MWh (~2.7-hour) BESS near Woolooga, QLD. Lightsource bp. QLD EIS. Fluence Gridstack Pro system with CATL LFP cells. Co-located with Lightsource bp's Woolooga Solar Farm. Connection to Powerlink 132 kV network."
   }
 }

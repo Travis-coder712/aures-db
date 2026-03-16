@@ -135,6 +135,14 @@ export interface EISTechnicalSpec {
   connection_voltage_kv?: number
   transformer_mva?: number
 
+  // Network connection point (drives transmission line capex)
+  network_service_provider?: string         // e.g. "TransGrid", "AusNet", "ElectraNet", "Powerlink"
+  connection_substation_name?: string       // e.g. "Eraring 330 kV substation"
+  connection_substation_capacity_mva?: number
+  connection_distance_km?: number           // km from project boundary to connection point
+  connection_distance_note?: string         // e.g. "On-site — former power station substation reused"
+  connection_augmentation?: string          // description of required network augmentation
+
   notes?: string
 }
 

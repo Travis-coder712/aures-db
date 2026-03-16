@@ -149,6 +149,12 @@
     "noise_limit_dba": 35.0,
     "minimum_setback_m": 1000,
     "connection_voltage_kv": 132.0,
+    "network_service_provider": "ElectraNet",
+    "connection_substation_name": "Hummocks Hill 132 kV substation",
+    "connection_substation_capacity_mva": 200.0,
+    "connection_distance_km": 16.0,
+    "connection_distance_note": "~16 km of new 132 kV line from project to Hummocks Hill substation on the Port Augusta 132 kV corridor; EIS Chapter 10",
+    "connection_augmentation": "ElectraNet 132 kV augmentation required. SA mid-north transmission network has significant wind congestion; augmentation studies ongoing for REZ development.",
     "notes": "Located in SA Mid-North region near Port Augusta corridor. Aula Energy project. Strong South Australian wind resource; one of the best wind corridors in the NEM."
   }
 }

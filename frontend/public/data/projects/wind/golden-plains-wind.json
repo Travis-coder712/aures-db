@@ -223,6 +223,12 @@
     "noise_limit_dba": 40.0,
     "minimum_setback_m": 1000,
     "connection_voltage_kv": 220.0,
+    "network_service_provider": "AusNet Services",
+    "connection_substation_name": "Bulgana 220 kV substation (new connection point)",
+    "connection_substation_capacity_mva": 500.0,
+    "connection_distance_km": 27.0,
+    "connection_distance_note": "~27 km of new 220 kV double-circuit transmission line from project to Bulgana substation, per EES connection study",
+    "connection_augmentation": "New 220 kV double-circuit line required. Bulgana substation augmentation. Part of Western Victoria Transmission Network Project corridor.",
     "notes": "Stage 1 (756 MW) reached financial close Dec 2024; Stage 2 (544 MW) financial close Jan 2025. Full 1,300 MW project uses two separate AEMO generation units. EES approved by Victorian Minister for Planning March 2021 with 83 conditions. Vestas V162-6.2 MW confirmed as nominated technology by TagEnergy in 2024 turbine supply announcement."
   }
 }

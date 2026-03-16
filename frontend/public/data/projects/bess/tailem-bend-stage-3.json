@@ -91,6 +91,12 @@
     "duration_hours": 2.0,
     "connection_voltage_kv": 132.0,
     "transformer_mva": 204.0,
+    "network_service_provider": "ElectraNet",
+    "connection_substation_name": "Tailem Bend 132 kV substation (co-located with solar farm)",
+    "connection_substation_capacity_mva": 450.0,
+    "connection_distance_km": 0.2,
+    "connection_distance_note": "Co-located with Tailem Bend Solar Farm stages 1 and 2. ~200 m internal cable to existing 132 kV substation.",
+    "connection_augmentation": "Minimal new works. Existing Tailem Bend 132 kV substation shared with 250 MW solar farm. New BESS feeder bay required. Combined ~454 MW site may trigger ElectraNet 132 kV line augmentation from Tailem Bend toward Murray Bridge/Adelaide.",
     "notes": "204 MW / 408 MWh (2-hour) BESS co-located with Tailem Bend solar farm stages 1 and 2, SA. Vena Energy. SA DPTI planning approval. LFP chemistry. Connection to ElectraNet 132 kV network at Tailem Bend. Stages 1 and 2 solar (250 MW total) already operating at this site."
   }
 }

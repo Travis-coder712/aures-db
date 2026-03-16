@@ -171,6 +171,12 @@
     "duration_hours": 4.0,
     "connection_voltage_kv": 330.0,
     "transformer_mva": 460.0,
+    "network_service_provider": "TransGrid",
+    "connection_substation_name": "Eraring 330 kV substation (former power station, on-site)",
+    "connection_substation_capacity_mva": 3000.0,
+    "connection_distance_km": 0.0,
+    "connection_distance_note": "On-site — former Eraring coal power station 330 kV substation directly reused. Zero transmission line cost.",
+    "connection_augmentation": "Minimal augmentation. Existing 330 kV bays from the 2,880 MW coal plant reused. New BESS protection and control systems required but major civil/HV works avoided. Major cost saving vs greenfield connection.",
     "notes": "Australia's largest utility-scale battery. Stage 1 (460 MW / 1,770 MWh) commenced commercial operations January 2026. Full build-out to 700 MW / 3,160 MWh in 4 stages. Wartsila GridSolv Quantum system is grid-forming capable (voltage-source converter). Located at the former Eraring Power Station site on Lake Macquarie, NSW. Origin Energy owns and operates. Enerven (SA Power Networks) provided balance-of-plant EPC. NSW IPC approved with conditions February 2024."
   }
 }

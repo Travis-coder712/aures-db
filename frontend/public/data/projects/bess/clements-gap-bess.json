@@ -121,6 +121,12 @@
     "duration_hours": 2.0,
     "connection_voltage_kv": 132.0,
     "transformer_mva": 60.0,
+    "network_service_provider": "ElectraNet",
+    "connection_substation_name": "Clements Gap wind farm 132 kV substation (co-located)",
+    "connection_substation_capacity_mva": 100.0,
+    "connection_distance_km": 0.1,
+    "connection_distance_note": "Co-located with Clements Gap Wind Farm — shares the wind farm's existing 132 kV substation. Minimal internal cable only.",
+    "connection_augmentation": "Minimal. BESS shares the wind farm's 132 kV connection. New BESS feeder bay only. Small 60 MW scale means no significant augmentation required beyond the existing wind farm connection.",
     "notes": "60 MW / 120 MWh (2-hour) BESS co-located with Clements Gap Wind Farm, SA. Pacific Blue (SPIC China — State Power Investment Corporation). Chinese state-owned developer and supply chain. SA DPTI planning approval. Connection to ElectraNet 132 kV network at Clements Gap."
   }
 }

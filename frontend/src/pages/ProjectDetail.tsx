@@ -793,19 +793,62 @@ function EISSpecsSection({
         )}
 
         {/* ── Grid Connection (both wind and BESS) ────────────── */}
-        {(specs.connection_voltage_kv || specs.transformer_mva) && (
+        {(specs.connection_voltage_kv || specs.transformer_mva || specs.connection_substation_name) && (
           <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl overflow-hidden">
             <div className="px-4 py-2 bg-green-500/5 border-b border-[var(--color-border)]">
               <p className="text-[10px] font-semibold text-green-400 uppercase tracking-wider">
-                🔌 Grid Connection (EIS)
+                🔌 Grid Connection Point (EIS)
               </p>
             </div>
             <div className="divide-y divide-[var(--color-border)]">
+              {specs.network_service_provider && (
+                <DetailRow label="Network Service Provider" value={specs.network_service_provider} />
+              )}
+              {specs.connection_substation_name && (
+                <DetailRow label="Connection Substation" value={specs.connection_substation_name} />
+              )}
+              {specs.connection_substation_capacity_mva && (
+                <DetailRow
+                  label="Substation Capacity"
+                  value={`${specs.connection_substation_capacity_mva.toLocaleString()} MVA`}
+                />
+              )}
               {specs.connection_voltage_kv && (
                 <DetailRow label="Connection Voltage" value={`${specs.connection_voltage_kv} kV`} />
               )}
               {specs.transformer_mva && (
-                <DetailRow label="Main Transformer" value={`${specs.transformer_mva} MVA`} />
+                <DetailRow label="Project Transformer" value={`${specs.transformer_mva} MVA`} />
+              )}
+              {specs.connection_distance_km !== undefined && (
+                <DetailRow
+                  label="Distance to Substation"
+                  value={
+                    specs.connection_distance_km === 0
+                      ? 'On-site (0 km)'
+                      : `${specs.connection_distance_km} km`
+                  }
+                />
+              )}
+              {specs.connection_distance_note && (
+                <div className="px-4 py-2">
+                  <p className="text-[10px] text-[var(--color-text-muted)]">
+                    ⓘ {specs.connection_distance_note}
+                  </p>
+                </div>
+              )}
+              {specs.connection_augmentation && (
+                <div className="px-4 py-2.5">
+                  <p className="text-[10px] font-medium text-[var(--color-text-muted)] mb-1">
+                    Network Augmentation Required
+                  </p>
+                  <p className={`text-xs leading-relaxed ${
+                    specs.connection_augmentation.startsWith('IMPORTANT')
+                      ? 'text-amber-400'
+                      : 'text-[var(--color-text-muted)]'
+                  }`}>
+                    {specs.connection_augmentation}
+                  </p>
+                </div>
               )}
             </div>
           </div>

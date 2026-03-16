@@ -123,6 +123,12 @@
     "duration_hours": 2.0,
     "connection_voltage_kv": 220.0,
     "transformer_mva": 250.0,
+    "network_service_provider": "AusNet Services",
+    "connection_substation_name": "Moorabool 220 kV substation (AusNet)",
+    "connection_substation_capacity_mva": 900.0,
+    "connection_distance_km": 13.0,
+    "connection_distance_note": "~13 km of new 220 kV line from project near Gnarwarre to Moorabool 220 kV substation west of Geelong; EIS connection study",
+    "connection_augmentation": "New 220 kV feeder bay at Moorabool. Moorabool is a major 220 kV hub; existing headroom available. Moderate connection line cost for 13 km distance.",
     "notes": "250 MW / 499 MWh (2-hour) BESS near Geelong, western Victoria. FRV Australia (Abdul Latif Jameel / OMERS Infrastructure). Victorian planning permit. Sungrow PowerTitan 2.0 with CATL LFP cells. Grid-forming via Sungrow VSG mode. Connection to the 220 kV AusNet network."
   }
 }

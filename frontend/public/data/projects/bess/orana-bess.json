@@ -156,6 +156,12 @@
     "duration_hours": 4.0,
     "connection_voltage_kv": 330.0,
     "transformer_mva": 415.0,
+    "network_service_provider": "TransGrid",
+    "connection_substation_name": "Elong Elong 330 kV substation (CWO REZ connection hub)",
+    "connection_substation_capacity_mva": 1500.0,
+    "connection_distance_km": 12.0,
+    "connection_distance_note": "~12 km of new 330 kV line to CWO REZ Elong Elong hub; EIS network connection study Section 9",
+    "connection_augmentation": "TransGrid CWO REZ infrastructure partially funded via REZ access charge. Connection cost socialised across CWO REZ access rights holders. Significant cost saving vs standalone connection.",
     "notes": "415 MW / 1,662 MWh (4-hour) BESS in Central-West Orana REZ, NSW. Akaysha Energy (BlackRock Real Assets). NSW SSD approval. CWO REZ access rights holder. Powin Stack750 system uses CATL LFP cells. Grid-forming PCS capability specified in EIS. Connection to the 330 kV TransGrid network at the CWO REZ connection point. Part of Akaysha/BlackRock's portfolio of large Australian BESS projects."
   }
 }

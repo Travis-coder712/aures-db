@@ -117,6 +117,12 @@
     "duration_hours": 4.0,
     "connection_voltage_kv": 330.0,
     "transformer_mva": 500.0,
+    "network_service_provider": "TransGrid",
+    "connection_substation_name": "Tomago 330 kV substation (TransGrid)",
+    "connection_substation_capacity_mva": 1200.0,
+    "connection_distance_km": 3.5,
+    "connection_distance_note": "~3.5 km of new 330 kV cable/line from project to Tomago TransGrid substation; EIS Section 9",
+    "connection_augmentation": "New 330 kV feeder bay at Tomago substation required. Short connection distance and existing high-capacity substation minimise augmentation cost. NSCAS agreement with TransGrid.",
     "notes": "500 MW / 2,000 MWh (4-hour) BESS located at the former Tomago Aluminium substation precinct, Hunter Valley NSW. AGL Energy project. NSW State Significant Development. Grid-forming capability required by EIS and Network Support and Control Ancillary Service (NSCAS) agreement with TransGrid. Connection to 330 kV Hunter Valley transmission network."
   }
 }

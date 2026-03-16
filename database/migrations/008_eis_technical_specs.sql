@@ -68,6 +68,14 @@ CREATE TABLE IF NOT EXISTS eis_technical_specs (
     connection_voltage_kv           REAL,           -- connection voltage (kV)
     transformer_mva                 REAL,           -- main transformer rating (MVA)
 
+    -- Network connection point — directly drives transmission line capex
+    network_service_provider        TEXT,           -- NSP, e.g. 'TransGrid', 'AusNet', 'ElectraNet', 'Powerlink'
+    connection_substation_name      TEXT,           -- named substation, e.g. 'Eraring 330 kV substation'
+    connection_substation_capacity_mva REAL,        -- existing substation capacity (MVA), if known
+    connection_distance_km          REAL,           -- km from project boundary to connection point
+    connection_distance_note        TEXT,           -- e.g. 'On-site — former power station substation reused'
+    connection_augmentation         TEXT,           -- any required network augmentation (TEXT description)
+
     -- ── General Notes ────────────────────────────────────────────────────────
     notes                           TEXT,
 

@@ -107,6 +107,12 @@
     "duration_hours": 1.4,
     "connection_voltage_kv": 330.0,
     "transformer_mva": 408.0,
+    "network_service_provider": "TransGrid",
+    "connection_substation_name": "Bellambi 330 kV terminal substation (TransGrid)",
+    "connection_substation_capacity_mva": 1800.0,
+    "connection_distance_km": 1.5,
+    "connection_distance_note": "~1.5 km of new 330 kV cable from project to Bellambi Terminal substation; EIS Section 8",
+    "connection_augmentation": "New 330 kV cable and feeder bay at Bellambi Terminal. Bellambi is a major 330 kV hub serving the Illawarra; existing capacity sufficient. Low augmentation cost given proximity to 330 kV terminal.",
     "notes": "408 MW / 570 MWh (~1.4-hour) BESS at Bellambi, Illawarra NSW. Vena Energy. NSW SSD approval. BYD MC-Cube containerised LFP system. Connection to the 330 kV TransGrid network at Bellambi substation. Co-located with solar generation. Shorter duration reflects merchant arbitrage focus."
   }
 }

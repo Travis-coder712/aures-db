@@ -109,6 +109,12 @@
     "duration_hours": 2.0,
     "connection_voltage_kv": 330.0,
     "transformer_mva": 250.0,
+    "network_service_provider": "TransGrid",
+    "connection_substation_name": "Williamsdale 330 kV substation (TransGrid)",
+    "connection_substation_capacity_mva": 600.0,
+    "connection_distance_km": 7.0,
+    "connection_distance_note": "~7 km of new 330 kV line to Williamsdale substation on the Sydney–Canberra 330 kV transmission corridor; EIS Section 8",
+    "connection_augmentation": "New 330 kV feeder bay at Williamsdale substation. Moderate augmentation cost. Sydney–Canberra 330 kV corridor has capacity for BESS injection without major augmentation.",
     "notes": "250 MW / 500 MWh (2-hour) BESS near Williamsdale, ACT border, NSW. Eku Energy (Macquarie Asset Management / BCIM). NSW SSD approval. Grid-forming PCS specified as requirement in EIS. Connection to TransGrid 330 kV Canberra–Sydney transmission corridor."
   }
 }

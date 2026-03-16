@@ -120,6 +120,12 @@
     "duration_hours": 4.0,
     "connection_voltage_kv": 220.0,
     "transformer_mva": 311.0,
+    "network_service_provider": "AusNet Services",
+    "connection_substation_name": "Elaine 220 kV substation (AusNet)",
+    "connection_substation_capacity_mva": 400.0,
+    "connection_distance_km": 9.0,
+    "connection_distance_note": "~9 km of new 220 kV line from project to Elaine substation on AusNet western Victoria network; EIS connection study",
+    "connection_augmentation": "New 220 kV feeder bay at Elaine substation. Moderate augmentation cost. Western Victoria 220 kV network has limited headroom; TransGrid / AusNet augmentation may be required at higher voltages.",
     "notes": "311 MW / 1,249 MWh (4-hour) BESS in western Victoria. Akaysha Energy (BlackRock Real Assets). Victorian planning permit. Powin Stack750 system with CATL LFP cells; grid-forming PCS capability. Connection to the 220 kV AusNet Services network."
   }
 }

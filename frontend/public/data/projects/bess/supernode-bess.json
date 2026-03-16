@@ -133,6 +133,12 @@
     "duration_hours": 2.38,
     "connection_voltage_kv": 275.0,
     "transformer_mva": 520.0,
+    "network_service_provider": "Powerlink Queensland",
+    "connection_substation_name": "Greenbank 275 kV substation (Powerlink)",
+    "connection_substation_capacity_mva": 1500.0,
+    "connection_distance_km": 8.0,
+    "connection_distance_note": "~8 km of new 275 kV line to Greenbank 275 kV substation in south-east QLD; EIS connection study",
+    "connection_augmentation": "New 275 kV feeder bay at Greenbank required. Greenbank is a major 275 kV hub serving south-east QLD; existing headroom sufficient for BESS injection without major augmentation.",
     "notes": "520 MW / 1,238 MWh (~2.4-hour) BESS in south-east QLD. Quinbrook Infrastructure Partners. QLD Coordinated Project. Integrated with co-located renewable generation assets. Fluence Gridstack Pro system uses CATL LFP cells. Connection to the Powerlink 275 kV network. Part of Quinbrook's broader \"Supernode\" renewable energy hub concept."
   }
 }

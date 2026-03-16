@@ -113,6 +113,12 @@
     "noise_limit_dba": 40.0,
     "minimum_setback_m": 1000,
     "connection_voltage_kv": 220.0,
+    "network_service_provider": "AusNet Services",
+    "connection_substation_name": "Bulgana 220 kV substation (shared corridor with Golden Plains East)",
+    "connection_substation_capacity_mva": 500.0,
+    "connection_distance_km": 25.0,
+    "connection_distance_note": "~25 km of new 220 kV transmission line; shares grid connection corridor with Golden Plains East stage",
+    "connection_augmentation": "Shared 220 kV transmission corridor with Golden Plains East. Joint network augmentation significantly reduces per-project connection cost.",
     "notes": "Western stage of the Golden Plains project. 577 MW Vestas turbine order confirmed 2024. Shares the same EES approval and grid connection planning as Golden Plains East."
   }
 }

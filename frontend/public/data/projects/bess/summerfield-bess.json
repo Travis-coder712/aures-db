@@ -109,6 +109,12 @@
     "duration_hours": 2.22,
     "connection_voltage_kv": 132.0,
     "transformer_mva": 240.0,
+    "network_service_provider": "ElectraNet",
+    "connection_substation_name": "Hummocks Hill 132 kV substation (ElectraNet)",
+    "connection_substation_capacity_mva": 320.0,
+    "connection_distance_km": 11.0,
+    "connection_distance_note": "~11 km of new 132 kV line from project to Hummocks Hill substation on ElectraNet SA mid-north 132 kV network; EIS connection study",
+    "connection_augmentation": "New 132 kV feeder bay at Hummocks Hill. SA mid-north 132 kV network constrained; augmentation studies required for multiple wind/BESS projects in this corridor. ElectraNet REZ planning underway.",
     "notes": "240 MW / 532 MWh (~2.2-hour) BESS in South Australia. Copenhagen Infrastructure Partners (CIP). SA DPTI planning approval. LFP chemistry and grid-forming PCS specified in EIS. Connection to ElectraNet 132 kV network in SA mid-north. CIP's first utility-scale BESS in Australia."
   }
 }

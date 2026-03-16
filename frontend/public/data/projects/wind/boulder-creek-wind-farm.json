@@ -171,6 +171,12 @@
     "noise_limit_dba": 37.0,
     "minimum_setback_m": 1000,
     "connection_voltage_kv": 132.0,
+    "network_service_provider": "Powerlink Queensland",
+    "connection_substation_name": "Strathmore 132 kV substation",
+    "connection_substation_capacity_mva": 180.0,
+    "connection_distance_km": 19.0,
+    "connection_distance_note": "~19 km of new 132 kV line from project to Strathmore substation; EIS network connection study",
+    "connection_augmentation": "Strathmore 132 kV substation augmentation required. New transformer bay and protection upgrades for 228 MW injection.",
     "notes": "Located near Townsville hinterland, QLD. 50:50 JV between Aula Energy and CS Energy. QLD Coordinated Project. Strong north-east Queensland wind resource."
   }
 }

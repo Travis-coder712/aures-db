@@ -149,7 +149,13 @@
     "energy_yield_method": "WAsP modelling with site met mast calibration; EIS energy yield Chapter 5",
     "noise_limit_dba": 35.0,
     "minimum_setback_m": 1500,
-    "connection_voltage_kv": 132.0,
+    "connection_voltage_kv": 330.0,
+    "network_service_provider": "TransGrid",
+    "connection_substation_name": "Elong Elong 330 kV substation (CWO REZ connection hub)",
+    "connection_substation_capacity_mva": 1500.0,
+    "connection_distance_km": 18.0,
+    "connection_distance_note": "~18 km of new 330 kV line from project to CWO REZ Elong Elong connection hub; EIS Section 9 network connection study",
+    "connection_augmentation": "TransGrid CWO REZ infrastructure (Elong Elong 330 kV substation) funded under REZ access scheme. Connection cost partially socialised across all CWO REZ access rights holders.",
     "notes": "Located near Narromine and Trangie, Central-West NSW. NSW IPC determination June 2023. Squadron Energy (Tattarang / Andrew Forrest). Central-West Orana REZ access rights holder. Construction commenced 2025."
   }
 }

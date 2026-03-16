@@ -101,6 +101,12 @@
     "duration_hours": 2.0,
     "connection_voltage_kv": 330.0,
     "transformer_mva": 300.0,
+    "network_service_provider": "TransGrid",
+    "connection_substation_name": "Bulahdelah 330 kV substation (TransGrid)",
+    "connection_substation_capacity_mva": 700.0,
+    "connection_distance_km": 10.0,
+    "connection_distance_note": "~10 km of new 330 kV line to Bulahdelah 330 kV substation on the Sydney–Brisbane transmission corridor; EIS Section 8",
+    "connection_augmentation": "New 330 kV feeder bay at Bulahdelah substation. Sydney–Brisbane 330 kV corridor has capacity; moderate augmentation cost.",
     "notes": "300 MW / 600 MWh (2-hour) BESS in NSW. Ampyr Australia (AGP Singapore). NSW SSD. Grid-forming PCS specified as requirement. Part of Ampyr's growing Australian BESS portfolio."
   }
 }

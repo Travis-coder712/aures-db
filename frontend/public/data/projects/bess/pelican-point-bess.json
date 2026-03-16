@@ -99,6 +99,12 @@
     "duration_hours": 2.0,
     "connection_voltage_kv": 275.0,
     "transformer_mva": 200.0,
+    "network_service_provider": "ElectraNet",
+    "connection_substation_name": "Pelican Point 275 kV substation (ENGIE, on-site)",
+    "connection_substation_capacity_mva": 600.0,
+    "connection_distance_km": 0.0,
+    "connection_distance_note": "On-site — co-located with Pelican Point gas power station 275 kV substation. Zero new transmission line required.",
+    "connection_augmentation": "Minimal. Existing 275 kV connection reused from gas power station. New BESS feeder bay only. Adelaide 275 kV ring has capacity. Very low augmentation cost — significant advantage of co-location.",
     "notes": "200 MW / 400 MWh (2-hour) BESS co-located with Pelican Point gas power station, SA. ENGIE. SA DPTI planning approval. Tesla Megapack 2 with LFP cells. Grid-forming (Tesla Virtual Machine Mode). Connected to ElectraNet 275 kV Adelaide metropolitan network. ENGIE confirmed Tesla Megapack 2 in 2024 announcement."
   }
 }

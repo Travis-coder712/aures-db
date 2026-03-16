@@ -131,6 +131,12 @@
     "duration_hours": 4.0,
     "connection_voltage_kv": 220.0,
     "transformer_mva": 350.0,
+    "network_service_provider": "AusNet Services",
+    "connection_substation_name": "Wooreen 220 kV substation / Latrobe Valley 220 kV network (AusNet)",
+    "connection_substation_capacity_mva": 800.0,
+    "connection_distance_km": 6.0,
+    "connection_distance_note": "~6 km of new 220 kV line to the Latrobe Valley 220 kV network adjacent to former Hazelwood site; EIS connection study",
+    "connection_augmentation": "New 220 kV feeder bay on Latrobe Valley network. Moderate augmentation. High-voltage transmission headroom exists post-Hazelwood closure; relatively low augmentation cost for this location.",
     "notes": "350 MW / 1,400 MWh (4-hour) BESS in Gippsland, Victoria. EnergyAustralia. Victorian planning permit. Sungrow PowerTitan 2.0 liquid-cooled system with CATL LFP cells. Grid-forming capability (Sungrow VSG — Virtual Synchronous Generator mode). Connection to the 220 kV AusNet Latrobe Valley network. Located adjacent to former Hazelwood power station precinct."
   }
 }

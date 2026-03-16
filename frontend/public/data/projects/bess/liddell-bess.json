@@ -145,6 +145,12 @@
     "duration_hours": 2.0,
     "connection_voltage_kv": 330.0,
     "transformer_mva": 500.0,
+    "network_service_provider": "TransGrid",
+    "connection_substation_name": "Liddell 330 kV substation (former power station, on-site)",
+    "connection_substation_capacity_mva": 2500.0,
+    "connection_distance_km": 0.3,
+    "connection_distance_note": "Effectively on-site — former Liddell coal power station 330 kV substation. ~300 m internal connection only.",
+    "connection_augmentation": "Minimal. Existing 330 kV switchyard from 2,000 MW coal plant reused. New BESS feeder bays and protection required. Significant cost advantage over greenfield connection (~A$50-100M saved vs remote site).",
     "notes": "500 MW / 1,000 MWh (2-hour) BESS co-located at the former Liddell Power Station site, Hunter Valley NSW. AGL Energy project. NSW State Significant Development approval. Grid-forming capability specified in EIS as a requirement. LFP chemistry specified in EIS as preferred chemistry for safety and longevity. Connection to the 330 kV Liddell–Murrurundi transmission system."
   }
 }

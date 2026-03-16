@@ -106,6 +106,12 @@
     "duration_hours": 1.0,
     "connection_voltage_kv": 330.0,
     "transformer_mva": 200.0,
+    "network_service_provider": "TransGrid",
+    "connection_substation_name": "New England Solar Farm 330 kV connection (co-located)",
+    "connection_substation_capacity_mva": 800.0,
+    "connection_distance_km": 0.2,
+    "connection_distance_note": "Co-located with 720 MW New England Solar Farm — shares the solar farm's 330 kV connection infrastructure.",
+    "connection_augmentation": "Minimal new works. Existing 330 kV connection for 720 MW solar farm already established; BESS adds new feeder bay only. New England REZ transmission corridor being expanded by TransGrid.",
     "notes": "200 MW / 200 MWh (1-hour) BESS co-located with the 720 MW New England Solar Farm, NSW. ACEN Australia / Marubeni (50:50 JV). NSW SSD. 1-hour duration optimised for peak shifting and FCAS markets. Connection to TransGrid 330 kV New England REZ transmission."
   }
 }

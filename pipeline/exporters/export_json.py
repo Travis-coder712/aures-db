@@ -159,7 +159,10 @@ def fetch_full_project(conn, project_id):
                    inverter_supplier, inverter_model, inverter_country_of_manufacture,
                    inverter_rated_power_kw, inverter_count,
                    pcs_type, round_trip_efficiency_pct, round_trip_efficiency_ac,
-                   duration_hours, connection_voltage_kv, transformer_mva, notes
+                   duration_hours, connection_voltage_kv, transformer_mva,
+                   network_service_provider, connection_substation_name,
+                   connection_substation_capacity_mva, connection_distance_km,
+                   connection_distance_note, connection_augmentation, notes
             FROM eis_technical_specs WHERE project_id = ?
         """, (project_id,)).fetchall()
         specs = [dict(r) for r in rows]

@@ -170,6 +170,12 @@
     "noise_limit_dba": 37.0,
     "minimum_setback_m": 1000,
     "connection_voltage_kv": 132.0,
+    "network_service_provider": "Powerlink Queensland",
+    "connection_substation_name": "Marlborough 132 kV substation",
+    "connection_substation_capacity_mva": 120.0,
+    "connection_distance_km": 14.0,
+    "connection_distance_note": "~14 km of new 132 kV single-circuit line from project to Marlborough substation; EIS connection study",
+    "connection_augmentation": "Marlborough substation augmentation required. New transformer bay. 285 MW capacity may require substation transformer upgrade.",
     "notes": "Located near Lotus Creek, Marlborough area, QLD. CS Energy (Queensland government-owned). QLD Coordinated Project declaration. Strong wind resource in Bowen Basin corridor."
   }
 }
