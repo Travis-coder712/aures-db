@@ -40,7 +40,7 @@
       "date": "2025-02-20",
       "date_precision": "day",
       "event_type": "notable",
-      "title": "Financial close \u2014 A$700M",
+      "title": "Financial close — A$700M",
       "detail": "EnergyAustralia FID",
       "sources": []
     },
@@ -99,19 +99,38 @@
       "source_tier": 1
     },
     {
-      "title": "EnergyAustralia \u2014 Wooreen",
+      "title": "EnergyAustralia — Wooreen",
       "url": "https://www.energyaustralia.com.au/about-us/what-we-do/new-energy-projects/wooreen-energy-storage-system",
       "source_tier": 2
     },
     {
-      "title": "Wartsila \u2014 350 MW / 1,474 MWh",
+      "title": "Wartsila — 350 MW / 1,474 MWh",
       "url": "https://www.wartsila.com/media/news/28-02-2025-wartsila-will-provide-a-350-mw-1474-mwh-energy-storage-system-for-one-of-australia-s-largest-energy-providers-3555089",
       "source_tier": 2
     },
     {
-      "title": "Zenviron \u2014 Wooreen BoP",
+      "title": "Zenviron — Wooreen BoP",
       "url": "https://www.energy-storage.news/zenviron-wins-contract-for-350mw-4-hour-bess-in-victoria-australia/",
       "source_tier": 2
     }
-  ]
+  ],
+  "eis_specs": {
+    "document_title": "Wooreen Energy Storage System — EES (VIC)",
+    "document_url": "https://www.planning.vic.gov.au/permits-and-applications/state-projects",
+    "document_year": 2023,
+    "cell_chemistry": "LFP",
+    "cell_chemistry_full": "Lithium Iron Phosphate (LiFePO4)",
+    "cell_supplier": "Sungrow / CATL (Sungrow PowerTitan system)",
+    "cell_country_of_manufacture": "China",
+    "inverter_supplier": "Sungrow",
+    "inverter_model": "PowerTitan 2.0 — integrated liquid-cooled PCS",
+    "inverter_country_of_manufacture": "China",
+    "pcs_type": "grid_forming",
+    "round_trip_efficiency_pct": 88.5,
+    "round_trip_efficiency_ac": 85.5,
+    "duration_hours": 4.0,
+    "connection_voltage_kv": 220.0,
+    "transformer_mva": 350.0,
+    "notes": "350 MW / 1,400 MWh (4-hour) BESS in Gippsland, Victoria. EnergyAustralia. Victorian planning permit. Sungrow PowerTitan 2.0 liquid-cooled system with CATL LFP cells. Grid-forming capability (Sungrow VSG — Virtual Synchronous Generator mode). Connection to the 220 kV AusNet Latrobe Valley network. Located adjacent to former Hazelwood power station precinct."
+  }
 }

@@ -143,6 +143,29 @@ def fetch_full_project(conn, project_id):
     """, (project_id,)).fetchall()
     project['stakeholder_issues'] = [r['issue'] for r in rows]
 
+    # EIS / EIA Technical Specifications (migration 008)
+    tables = [r[0] for r in conn.execute(
+        "SELECT name FROM sqlite_master WHERE type='table' AND name='eis_technical_specs'"
+    ).fetchall()]
+    if tables:
+        rows = conn.execute("""
+            SELECT document_title, document_url, document_year,
+                   turbine_model, turbine_count, turbine_rated_power_mw,
+                   hub_height_m, hub_height_note, rotor_diameter_m,
+                   wind_speed_mean_ms, wind_speed_height_m, wind_speed_period,
+                   assumed_capacity_factor_pct, assumed_annual_energy_gwh, energy_yield_method,
+                   noise_limit_dba, minimum_setback_m,
+                   cell_chemistry, cell_chemistry_full, cell_supplier, cell_country_of_manufacture,
+                   inverter_supplier, inverter_model, inverter_country_of_manufacture,
+                   inverter_rated_power_kw, inverter_count,
+                   pcs_type, round_trip_efficiency_pct, round_trip_efficiency_ac,
+                   duration_hours, connection_voltage_kv, transformer_mva, notes
+            FROM eis_technical_specs WHERE project_id = ?
+        """, (project_id,)).fetchall()
+        specs = [dict(r) for r in rows]
+        # Remove None values for cleaner JSON
+        project['eis_specs'] = {k: v for k, v in specs[0].items() if v is not None} if specs else None
+
     # Project-level sources
     rows = conn.execute("""
         SELECT sr.title, sr.url, sr.date, sr.source_tier

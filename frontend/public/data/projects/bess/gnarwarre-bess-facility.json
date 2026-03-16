@@ -26,7 +26,7 @@
       "date": "2024-08-04",
       "date_precision": "day",
       "event_type": "notable",
-      "title": "Financial close \u2014 part of A$1.2B FRV portfolio",
+      "title": "Financial close — part of A$1.2B FRV portfolio",
       "detail": "Westpac, UOB, Intesa Sanpaolo, KfW, EDC syndicate",
       "sources": []
     },
@@ -91,19 +91,38 @@
       "source_tier": 1
     },
     {
-      "title": "FRV \u2014 Gnarwarre Financial Close",
+      "title": "FRV — Gnarwarre Financial Close",
       "url": "https://frv.com/en/frv-australia-completes-financial-close-of-the-250mw-500mwh-gnarwarre-battery-project/",
       "source_tier": 2
     },
     {
-      "title": "ARENA \u2014 Gnarwarre BESS",
+      "title": "ARENA — Gnarwarre BESS",
       "url": "https://arena.gov.au/projects/gnarwarre-bess-project/",
       "source_tier": 2
     },
     {
-      "title": "Gnarwarre BESS \u2014 Official",
+      "title": "Gnarwarre BESS — Official",
       "url": "https://gnarwarrebess.com/",
       "source_tier": 2
     }
-  ]
+  ],
+  "eis_specs": {
+    "document_title": "Gnarwarre Battery Energy Storage System — EES/Permit (VIC)",
+    "document_url": "https://www.planning.vic.gov.au/permits-and-applications/state-projects",
+    "document_year": 2023,
+    "cell_chemistry": "LFP",
+    "cell_chemistry_full": "Lithium Iron Phosphate (LiFePO4)",
+    "cell_supplier": "Sungrow / CATL",
+    "cell_country_of_manufacture": "China",
+    "inverter_supplier": "Sungrow",
+    "inverter_model": "PowerTitan 2.0 — integrated PCS",
+    "inverter_country_of_manufacture": "China",
+    "pcs_type": "grid_forming",
+    "round_trip_efficiency_pct": 88.5,
+    "round_trip_efficiency_ac": 85.5,
+    "duration_hours": 2.0,
+    "connection_voltage_kv": 220.0,
+    "transformer_mva": 250.0,
+    "notes": "250 MW / 499 MWh (2-hour) BESS near Geelong, western Victoria. FRV Australia (Abdul Latif Jameel / OMERS Infrastructure). Victorian planning permit. Sungrow PowerTitan 2.0 with CATL LFP cells. Grid-forming via Sungrow VSG mode. Connection to the 220 kV AusNet network."
+  }
 }

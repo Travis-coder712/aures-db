@@ -81,14 +81,31 @@
       "source_tier": 1
     },
     {
-      "title": "Energy Vault \u2014 New England BESS",
+      "title": "Energy Vault — New England BESS",
       "url": "https://www.energyvault.com/projects/new-england-bess",
       "source_tier": 2
     },
     {
-      "title": "ACEN Australia \u2014 New England Solar",
+      "title": "ACEN Australia — New England Solar",
       "url": "https://acenrenewables.com.au/project/new-england-solar/",
       "source_tier": 2
     }
-  ]
+  ],
+  "eis_specs": {
+    "document_title": "New England Solar Farm BESS — SSD EIS (NSW)",
+    "document_url": "https://www.planningportal.nsw.gov.au/major-projects/projects/new-england-solar-farm-battery-energy-storage-system",
+    "document_year": 2023,
+    "cell_chemistry": "LFP",
+    "cell_chemistry_full": "Lithium Iron Phosphate (LiFePO4)",
+    "cell_supplier": "To be confirmed through procurement",
+    "cell_country_of_manufacture": "China / South Korea",
+    "inverter_supplier": "To be confirmed through procurement",
+    "pcs_type": "grid_following",
+    "round_trip_efficiency_pct": 87.5,
+    "round_trip_efficiency_ac": 84.5,
+    "duration_hours": 1.0,
+    "connection_voltage_kv": 330.0,
+    "transformer_mva": 200.0,
+    "notes": "200 MW / 200 MWh (1-hour) BESS co-located with the 720 MW New England Solar Farm, NSW. ACEN Australia / Marubeni (50:50 JV). NSW SSD. 1-hour duration optimised for peak shifting and FCAS markets. Connection to TransGrid 330 kV New England REZ transmission."
+  }
 }

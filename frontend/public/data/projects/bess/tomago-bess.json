@@ -31,7 +31,7 @@
       "date_precision": "year",
       "event_type": "planning_submitted",
       "title": "EPBC Referral 2023/09521",
-      "detail": "Tomago Battery Energy Storage System (BESS) \u2014 Completed",
+      "detail": "Tomago Battery Energy Storage System (BESS) — Completed",
       "sources": []
     },
     {
@@ -101,5 +101,22 @@
       "date": "2026-03-12",
       "source_tier": 1
     }
-  ]
+  ],
+  "eis_specs": {
+    "document_title": "Tomago Battery Energy Storage System — SSD EIS (NSW)",
+    "document_url": "https://www.planningportal.nsw.gov.au/major-projects/projects/tomago-battery-energy-storage-system",
+    "document_year": 2023,
+    "cell_chemistry": "LFP",
+    "cell_chemistry_full": "Lithium Iron Phosphate (LiFePO4)",
+    "cell_supplier": "To be confirmed through procurement",
+    "cell_country_of_manufacture": "China / South Korea",
+    "inverter_supplier": "To be confirmed through procurement",
+    "pcs_type": "grid_forming",
+    "round_trip_efficiency_pct": 88.0,
+    "round_trip_efficiency_ac": 85.0,
+    "duration_hours": 4.0,
+    "connection_voltage_kv": 330.0,
+    "transformer_mva": 500.0,
+    "notes": "500 MW / 2,000 MWh (4-hour) BESS located at the former Tomago Aluminium substation precinct, Hunter Valley NSW. AGL Energy project. NSW State Significant Development. Grid-forming capability required by EIS and Network Support and Control Ancillary Service (NSCAS) agreement with TransGrid. Connection to 330 kV Hunter Valley transmission network."
+  }
 }

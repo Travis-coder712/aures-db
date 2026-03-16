@@ -75,19 +75,38 @@
       "source_tier": 1
     },
     {
-      "title": "Vena Energy \u2014 Bellambi Heights",
+      "title": "Vena Energy — Bellambi Heights",
       "url": "https://www.venaenergy.com.au/all_projects/bellambi-heights-bess/",
       "source_tier": 2
     },
     {
-      "title": "NSW Planning Portal \u2014 Bellambi Heights",
+      "title": "NSW Planning Portal — Bellambi Heights",
       "url": "https://www.planningportal.nsw.gov.au/major-projects/projects/bellambi-heights-battery-energy-storage-system",
       "source_tier": 2
     },
     {
-      "title": "RenewEconomy \u2014 Vena BESS-only pivot",
+      "title": "RenewEconomy — Vena BESS-only pivot",
       "url": "https://reneweconomy.com.au/singapores-vena-ditches-huge-big-solar-plans-opts-for-big-battery-only-in-central-nsw/",
       "source_tier": 2
     }
-  ]
+  ],
+  "eis_specs": {
+    "document_title": "Bellambi Heights Renewables Project — SSD EIS (NSW)",
+    "document_url": "https://www.planningportal.nsw.gov.au/major-projects/projects/bellambi-heights-renewables-project",
+    "document_year": 2023,
+    "cell_chemistry": "LFP",
+    "cell_chemistry_full": "Lithium Iron Phosphate (LiFePO4)",
+    "cell_supplier": "BYD",
+    "cell_country_of_manufacture": "China",
+    "inverter_supplier": "BYD",
+    "inverter_model": "BYD MC-Cube — integrated PCS",
+    "inverter_country_of_manufacture": "China",
+    "pcs_type": "grid_following",
+    "round_trip_efficiency_pct": 88.0,
+    "round_trip_efficiency_ac": 85.0,
+    "duration_hours": 1.4,
+    "connection_voltage_kv": 330.0,
+    "transformer_mva": 408.0,
+    "notes": "408 MW / 570 MWh (~1.4-hour) BESS at Bellambi, Illawarra NSW. Vena Energy. NSW SSD approval. BYD MC-Cube containerised LFP system. Connection to the 330 kV TransGrid network at Bellambi substation. Co-located with solar generation. Shorter duration reflects merchant arbitrage focus."
+  }
 }

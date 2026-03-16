@@ -33,7 +33,7 @@
       "date": "2025-01-01",
       "date_precision": "month",
       "event_type": "notable",
-      "title": "Financial close \u2014 A$722M debt",
+      "title": "Financial close — A$722M debt",
       "detail": "Bank of America, CBA, Deutsche Bank, Mizuho, MUFG consortium",
       "sources": []
     },
@@ -96,24 +96,43 @@
       "source_tier": 1
     },
     {
-      "title": "Quinbrook \u2014 Supernode Stage 1 Ops",
+      "title": "Quinbrook — Supernode Stage 1 Ops",
       "url": "https://www.quinbrook.com/news-insights/supernode-stage-1-commences-commercial-operations/",
       "source_tier": 2
     },
     {
-      "title": "Quinbrook \u2014 Fully Contracts Supernode",
+      "title": "Quinbrook — Fully Contracts Supernode",
       "url": "https://www.quinbrook.com/news-insights/quinbrook-fully-contracts-supernode-battery-storage-project/",
       "source_tier": 2
     },
     {
-      "title": "NuEnergy \u2014 Supernode Partnership",
+      "title": "NuEnergy — Supernode Partnership",
       "url": "https://nuenergy.au/nuenergy-landmark-supernode-battery-storage-project/",
       "source_tier": 2
     },
     {
-      "title": "Energy-Storage.News \u2014 Stage 1",
+      "title": "Energy-Storage.News — Stage 1",
       "url": "https://www.energy-storage.news/quinbrook-powers-up-619mwh-supernode-stage-one-bess-in-queensland-australia/",
       "source_tier": 2
     }
-  ]
+  ],
+  "eis_specs": {
+    "document_title": "Supernode Battery Energy Storage System — EIS (QLD)",
+    "document_url": "https://www.dsdilgp.qld.gov.au/industry/resources-and-energy/coordinated-projects/current-projects/supernode-bess",
+    "document_year": 2023,
+    "cell_chemistry": "LFP",
+    "cell_chemistry_full": "Lithium Iron Phosphate (LiFePO4)",
+    "cell_supplier": "Fluence / CATL (Fluence Gridstack Pro system)",
+    "cell_country_of_manufacture": "China",
+    "inverter_supplier": "Fluence / Siemens",
+    "inverter_model": "Fluence Gridstack Pro — integrated PCS",
+    "inverter_country_of_manufacture": "USA / Germany",
+    "pcs_type": "grid_following",
+    "round_trip_efficiency_pct": 87.5,
+    "round_trip_efficiency_ac": 84.5,
+    "duration_hours": 2.38,
+    "connection_voltage_kv": 275.0,
+    "transformer_mva": 520.0,
+    "notes": "520 MW / 1,238 MWh (~2.4-hour) BESS in south-east QLD. Quinbrook Infrastructure Partners. QLD Coordinated Project. Integrated with co-located renewable generation assets. Fluence Gridstack Pro system uses CATL LFP cells. Connection to the Powerlink 275 kV network. Part of Quinbrook's broader \"Supernode\" renewable energy hub concept."
+  }
 }

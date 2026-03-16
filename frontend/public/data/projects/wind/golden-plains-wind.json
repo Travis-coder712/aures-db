@@ -33,7 +33,7 @@
       "date_precision": "year",
       "event_type": "planning_submitted",
       "title": "EPBC Referral 2017/7965",
-      "detail": "Golden Plains Wind Farm, Vic \u2014 Controlled Action",
+      "detail": "Golden Plains Wind Farm, Vic — Controlled Action",
       "sources": []
     },
     {
@@ -73,7 +73,7 @@
       "date": "2022",
       "date_precision": "year",
       "event_type": "fid",
-      "title": "Financial close \u2014 A$2B+",
+      "title": "Financial close — A$2B+",
       "detail": "Australias largest wind farm reached financial close",
       "sources": []
     },
@@ -178,22 +178,22 @@
       "url": "https://aemo.com.au"
     },
     {
-      "title": "Golden Plains Wind Farm \u2014 Official",
+      "title": "Golden Plains Wind Farm — Official",
       "url": "https://goldenplainswindfarm.com.au/about-golden-plains-wind-farm/",
       "source_tier": 2
     },
     {
-      "title": "TagEnergy \u2014 Stage 2 Financial Close",
+      "title": "TagEnergy — Stage 2 Financial Close",
       "url": "https://tag-en.com/construction-to-begin-as-golden-plains-wind-farm-stage-2-reaches-financial-close/",
       "source_tier": 2
     },
     {
-      "title": "Vestas \u2014 577 MW Stage 2 Order",
+      "title": "Vestas — 577 MW Stage 2 Order",
       "url": "https://www.vestas.com/en/media/company-news/2024/vestas-receives-577-mw-order-in-australia-for-second-st-c4003383",
       "source_tier": 2
     },
     {
-      "title": "EnergyAustralia \u2014 PPA",
+      "title": "EnergyAustralia — PPA",
       "url": "https://www.energyaustralia.com.au/about-us/media/news/energyaustralia-take-significant-share-energy-golden-plains-wind-farm-stage-2",
       "source_tier": 2
     },
@@ -203,5 +203,26 @@
       "date": "2026-03-12",
       "source_tier": 1
     }
-  ]
+  ],
+  "eis_specs": {
+    "document_title": "Golden Plains Wind Farm Environment Effects Statement (EES)",
+    "document_url": "https://www.planning.vic.gov.au/permits-and-applications/state-projects/assessed-projects/golden-plains-wind-farm",
+    "document_year": 2021,
+    "turbine_model": "Vestas V162-6.2 MW",
+    "turbine_count": 215,
+    "turbine_rated_power_mw": 6.2,
+    "hub_height_m": 119.0,
+    "hub_height_note": "Nominated hub height in EES; envelope allows up to 200 m total tip height",
+    "rotor_diameter_m": 162.0,
+    "wind_speed_mean_ms": 7.6,
+    "wind_speed_height_m": 100.0,
+    "wind_speed_period": "Multi-year WAsP modelling at 100 m AGL; site confirms strong south-westerly resource",
+    "assumed_capacity_factor_pct": 35.2,
+    "assumed_annual_energy_gwh": 4010.0,
+    "energy_yield_method": "WAsP mesoscale wind modelling calibrated to site met mast data; reported in EES Chapter 7",
+    "noise_limit_dba": 40.0,
+    "minimum_setback_m": 1000,
+    "connection_voltage_kv": 220.0,
+    "notes": "Stage 1 (756 MW) reached financial close Dec 2024; Stage 2 (544 MW) financial close Jan 2025. Full 1,300 MW project uses two separate AEMO generation units. EES approved by Victorian Minister for Planning March 2021 with 83 conditions. Vestas V162-6.2 MW confirmed as nominated technology by TagEnergy in 2024 turbine supply announcement."
+  }
 }

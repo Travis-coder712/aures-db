@@ -110,24 +110,41 @@
       "source_tier": 1
     },
     {
-      "title": "AGL \u2014 Liddell Battery",
+      "title": "AGL — Liddell Battery",
       "url": "https://www.agl.com.au/about-agl/operations/liddell-battery",
       "source_tier": 2
     },
     {
-      "title": "AGL \u2014 FID Announcement",
+      "title": "AGL — FID Announcement",
       "url": "https://www.agl.com.au/about-agl/news-centre/2023/december/final-investment-decision-reached-on-the-500-mw-liddell-battery-",
       "source_tier": 2
     },
     {
-      "title": "Fluence \u2014 Selected for Liddell",
+      "title": "Fluence — Selected for Liddell",
       "url": "https://ir.fluenceenergy.com/news-releases/news-release-details/agl-selects-fluence-deliver-500-mw-liddell-battery-project",
       "source_tier": 2
     },
     {
-      "title": "ARENA \u2014 Liddell Battery",
+      "title": "ARENA — Liddell Battery",
       "url": "https://arena.gov.au/projects/agl-liddell-large-scale-battery-with-advanced-inverters-deployment-project/",
       "source_tier": 2
     }
-  ]
+  ],
+  "eis_specs": {
+    "document_title": "Liddell Battery Energy Storage System — SSD EIS (NSW)",
+    "document_url": "https://www.planningportal.nsw.gov.au/major-projects/projects/liddell-battery-energy-storage-system",
+    "document_year": 2023,
+    "cell_chemistry": "LFP",
+    "cell_chemistry_full": "Lithium Iron Phosphate (LiFePO4)",
+    "cell_supplier": "To be confirmed through procurement (likely CATL or Samsung SDI)",
+    "cell_country_of_manufacture": "China / South Korea",
+    "inverter_supplier": "To be confirmed through procurement",
+    "pcs_type": "grid_forming",
+    "round_trip_efficiency_pct": 88.0,
+    "round_trip_efficiency_ac": 85.0,
+    "duration_hours": 2.0,
+    "connection_voltage_kv": 330.0,
+    "transformer_mva": 500.0,
+    "notes": "500 MW / 1,000 MWh (2-hour) BESS co-located at the former Liddell Power Station site, Hunter Valley NSW. AGL Energy project. NSW State Significant Development approval. Grid-forming capability specified in EIS as a requirement. LFP chemistry specified in EIS as preferred chemistry for safety and longevity. Connection to the 330 kV Liddell–Murrurundi transmission system."
+  }
 }

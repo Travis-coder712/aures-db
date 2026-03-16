@@ -82,6 +82,62 @@ export interface MultiSourceValue {
   what_this_covers?: string
 }
 
+// ============================================================
+// EIS / EIA Technical Specifications (Part 3, Section 3)
+// ============================================================
+
+export interface EISTechnicalSpec {
+  // Document reference
+  document_title: string
+  document_url?: string
+  document_year?: number
+
+  // Wind farm specs
+  turbine_model?: string
+  turbine_count?: number
+  turbine_rated_power_mw?: number
+  hub_height_m?: number
+  hub_height_note?: string
+  rotor_diameter_m?: number
+
+  // Wind resource (from EIS energy yield assessment)
+  wind_speed_mean_ms?: number
+  wind_speed_height_m?: number
+  wind_speed_period?: string
+
+  // Energy yield
+  assumed_capacity_factor_pct?: number
+  assumed_annual_energy_gwh?: number
+  energy_yield_method?: string
+
+  // Environmental
+  noise_limit_dba?: number
+  minimum_setback_m?: number
+
+  // BESS specs
+  cell_chemistry?: string               // "LFP", "NMC"
+  cell_chemistry_full?: string          // "Lithium Iron Phosphate (LiFePO4)"
+  cell_supplier?: string
+  cell_country_of_manufacture?: string
+
+  inverter_supplier?: string
+  inverter_model?: string
+  inverter_country_of_manufacture?: string
+  inverter_rated_power_kw?: number
+  inverter_count?: number
+
+  pcs_type?: 'grid_forming' | 'grid_following' | 'both'
+  round_trip_efficiency_pct?: number    // DC-DC
+  round_trip_efficiency_ac?: number     // AC-AC
+  duration_hours?: number
+
+  // Grid connection
+  connection_voltage_kv?: number
+  transformer_mva?: number
+
+  notes?: string
+}
+
 export interface Project {
   id: string
   name: string
@@ -135,6 +191,9 @@ export interface Project {
   // Notable
   notable?: string
   stakeholder_issues?: string[]
+
+  // EIS / EIA Technical Specifications (Part 3, Section 3)
+  eis_specs?: EISTechnicalSpec
 
   // Metadata
   sources: SourceReference[]

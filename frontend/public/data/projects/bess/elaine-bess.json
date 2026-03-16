@@ -32,7 +32,7 @@
       "date_precision": "year",
       "event_type": "planning_submitted",
       "title": "EPBC Referral 2023/09749",
-      "detail": "Elaine Battery Energy Storage System (BESS) \u2014 Completed",
+      "detail": "Elaine Battery Energy Storage System (BESS) — Completed",
       "sources": []
     },
     {
@@ -46,7 +46,7 @@
       "date": "2025-11-01",
       "date_precision": "month",
       "event_type": "notable",
-      "title": "Financial close \u2014 A$460M",
+      "title": "Financial close — A$460M",
       "detail": "BNP Paribas, CIBC, CBA, ING, Mizuho, MUFG, SMBC, SocGen",
       "sources": []
     },
@@ -87,12 +87,12 @@
       "source_tier": 1
     },
     {
-      "title": "Akaysha \u2014 Elaine Financing",
+      "title": "Akaysha — Elaine Financing",
       "url": "https://akayshaenergy.com/news/akaysha-closes-a-460m-construction-financing-and-commences-construction-on-elaine-bess",
       "source_tier": 2
     },
     {
-      "title": "Energy-Storage.News \u2014 Elaine A$460M",
+      "title": "Energy-Storage.News — Elaine A$460M",
       "url": "https://www.energy-storage.news/akaysha-energy-bags-au460-million-for-1244mwh-bess-in-victoria-australia/",
       "source_tier": 2
     },
@@ -102,5 +102,24 @@
       "date": "2026-03-12",
       "source_tier": 1
     }
-  ]
+  ],
+  "eis_specs": {
+    "document_title": "Elaine Battery Energy Storage System — EES/Permit (VIC)",
+    "document_url": "https://www.planning.vic.gov.au/permits-and-applications/state-projects",
+    "document_year": 2023,
+    "cell_chemistry": "LFP",
+    "cell_chemistry_full": "Lithium Iron Phosphate (LiFePO4)",
+    "cell_supplier": "Powin Energy / CATL",
+    "cell_country_of_manufacture": "China",
+    "inverter_supplier": "Powin Energy",
+    "inverter_model": "Powin Stack750 — integrated PCS",
+    "inverter_country_of_manufacture": "China (manufactured) / USA (designed)",
+    "pcs_type": "grid_forming",
+    "round_trip_efficiency_pct": 87.0,
+    "round_trip_efficiency_ac": 84.0,
+    "duration_hours": 4.0,
+    "connection_voltage_kv": 220.0,
+    "transformer_mva": 311.0,
+    "notes": "311 MW / 1,249 MWh (4-hour) BESS in western Victoria. Akaysha Energy (BlackRock Real Assets). Victorian planning permit. Powin Stack750 system with CATL LFP cells; grid-forming PCS capability. Connection to the 220 kV AusNet Services network."
+  }
 }

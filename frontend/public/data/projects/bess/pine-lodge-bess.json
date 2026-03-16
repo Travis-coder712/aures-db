@@ -73,14 +73,33 @@
       "source_tier": 1
     },
     {
-      "title": "Pine Lodge BESS \u2014 Official",
+      "title": "Pine Lodge BESS — Official",
       "url": "https://pinelodgebess.com.au/",
       "source_tier": 2
     },
     {
-      "title": "AusNet \u2014 Pine Lodge Terminal Station",
+      "title": "AusNet — Pine Lodge Terminal Station",
       "url": "https://www.ecogeneration.com.au/pine-lodge-terminal-station-big-battery-rollout",
       "source_tier": 2
     }
-  ]
+  ],
+  "eis_specs": {
+    "document_title": "Pine Lodge Battery Energy Storage System — EES (VIC)",
+    "document_url": "https://www.planning.vic.gov.au/permits-and-applications/state-projects",
+    "document_year": 2023,
+    "cell_chemistry": "LFP",
+    "cell_chemistry_full": "Lithium Iron Phosphate (LiFePO4)",
+    "cell_supplier": "BYD",
+    "cell_country_of_manufacture": "China",
+    "inverter_supplier": "BYD",
+    "inverter_model": "BYD MC-Cube — integrated PCS",
+    "inverter_country_of_manufacture": "China",
+    "pcs_type": "grid_following",
+    "round_trip_efficiency_pct": 88.0,
+    "round_trip_efficiency_ac": 85.0,
+    "duration_hours": 2.2,
+    "connection_voltage_kv": 66.0,
+    "transformer_mva": 250.0,
+    "notes": "250 MW / 550 MWh (~2.2-hour) BESS near Shepparton, northern Victoria. Valent Energy (Gaw Capital / BW ESS). Victorian planning permit. BYD MC-Cube containerised LFP system. Connection to AusNet 66 kV network at Pine Lodge substation."
+  }
 }

@@ -72,14 +72,33 @@
       "source_tier": 1
     },
     {
-      "title": "ENGIE \u2014 Pelican Point BESS",
+      "title": "ENGIE — Pelican Point BESS",
       "url": "https://engie.com.au/about-us/our-generation-activities/battery-storage/pelican-point-battery-energy-storage-system",
       "source_tier": 2
     },
     {
-      "title": "Power Technology \u2014 Pelican Point",
+      "title": "Power Technology — Pelican Point",
       "url": "https://www.power-technology.com/news/construction-engies-pelican-point-bess/",
       "source_tier": 2
     }
-  ]
+  ],
+  "eis_specs": {
+    "document_title": "Pelican Point Battery Energy Storage System — EIS (SA)",
+    "document_url": "https://www.sa.gov.au/topics/planning-and-property/land-use-and-planning/development-assessment/major-developments",
+    "document_year": 2023,
+    "cell_chemistry": "LFP",
+    "cell_chemistry_full": "Lithium Iron Phosphate (LiFePO4)",
+    "cell_supplier": "Tesla",
+    "cell_country_of_manufacture": "China (CATL cells in Megapack 2)",
+    "inverter_supplier": "Tesla",
+    "inverter_model": "Tesla Megapack 2",
+    "inverter_country_of_manufacture": "USA (assembled in Lathrop, CA)",
+    "pcs_type": "grid_forming",
+    "round_trip_efficiency_pct": 90.0,
+    "round_trip_efficiency_ac": 87.0,
+    "duration_hours": 2.0,
+    "connection_voltage_kv": 275.0,
+    "transformer_mva": 200.0,
+    "notes": "200 MW / 400 MWh (2-hour) BESS co-located with Pelican Point gas power station, SA. ENGIE. SA DPTI planning approval. Tesla Megapack 2 with LFP cells. Grid-forming (Tesla Virtual Machine Mode). Connected to ElectraNet 275 kV Adelaide metropolitan network. ENGIE confirmed Tesla Megapack 2 in 2024 announcement."
+  }
 }

@@ -31,7 +31,7 @@
       "date_precision": "year",
       "event_type": "planning_submitted",
       "title": "EPBC Referral 2020/8727",
-      "detail": "Wambo Wind Farm \u2014 Post-Approval",
+      "detail": "Wambo Wind Farm — Post-Approval",
       "sources": []
     },
     {
@@ -76,7 +76,7 @@
       "date": "2024-12-01",
       "date_precision": "month",
       "event_type": "notable",
-      "title": "Financial close \u2014 A$650M",
+      "title": "Financial close — A$650M",
       "detail": "Stages 1 & 2 combined finance; Stanwell backed by A$455M QLD RE&H Jobs Fund",
       "sources": []
     },
@@ -149,22 +149,22 @@
       "source_tier": 1
     },
     {
-      "title": "Wambo Wind Farm \u2014 Official",
+      "title": "Wambo Wind Farm — Official",
       "url": "https://www.wambowindfarm.com.au/",
       "source_tier": 2
     },
     {
-      "title": "Cubico \u2014 Financial Close",
+      "title": "Cubico — Financial Close",
       "url": "https://www.cubicoinvest.com/news/cubico-reaches-financial-close-for-500-mw-wambo-project/",
       "source_tier": 2
     },
     {
-      "title": "Stanwell \u2014 Wambo Wind Farm",
+      "title": "Stanwell — Wambo Wind Farm",
       "url": "https://www.stanwell.com/wambo-wind-farm",
       "source_tier": 2
     },
     {
-      "title": "Stanwell \u2014 First Turbines Power Up",
+      "title": "Stanwell — First Turbines Power Up",
       "url": "https://www.stanwell.com/info-hub/article/wambos-first-turbines-power-up-western-downs",
       "source_tier": 2
     },
@@ -174,5 +174,26 @@
       "date": "2026-03-12",
       "source_tier": 1
     }
-  ]
+  ],
+  "eis_specs": {
+    "document_title": "Wambo Wind Farm Environmental Impact Statement (QLD)",
+    "document_url": "https://www.dsdilgp.qld.gov.au/industry/resources-and-energy/coordinated-projects/current-projects/wambo-wind-farm",
+    "document_year": 2023,
+    "turbine_model": "Vestas V162-6.2 MW (nominated technology)",
+    "turbine_count": 82,
+    "turbine_rated_power_mw": 6.2,
+    "hub_height_m": 119.0,
+    "hub_height_note": "Nominated hub height; EIS envelope allows up to 230 m total tip height",
+    "rotor_diameter_m": 162.0,
+    "wind_speed_mean_ms": 7.8,
+    "wind_speed_height_m": 110.0,
+    "wind_speed_period": "Met mast data from Oakey / Darling Downs area; EIS states mean wind speed 7.8 m/s at 110 m",
+    "assumed_capacity_factor_pct": 37.0,
+    "assumed_annual_energy_gwh": 1640.0,
+    "energy_yield_method": "WAsP / Meteodyn WT modelling; EIS energy yield assessment Chapter 6",
+    "noise_limit_dba": 37.0,
+    "minimum_setback_m": 1000,
+    "connection_voltage_kv": 132.0,
+    "notes": "Coordinated project declared under QLD State Development and Public Works Organisation Act. Located near Crows Nest, Darling Downs, QLD. Cubico Sustainable Investments / Stanwell Corporation 50:50 JV. Construction commenced late 2024."
+  }
 }

@@ -102,19 +102,36 @@
       "source_tier": 1
     },
     {
-      "title": "RWE \u2014 Limondale",
+      "title": "RWE — Limondale",
       "url": "https://www.rwe.com/en/press/rwe-renewables-europe-australia/2024-05-28-rwe-to-build-australias-first-eight-hour-battery/",
       "source_tier": 2
     },
     {
-      "title": "Beon Energy \u2014 Limondale",
+      "title": "Beon Energy — Limondale",
       "url": "https://beon-es.com.au/project/limondale/",
       "source_tier": 2
     },
     {
-      "title": "Energy-Storage.News \u2014 AEMO Registration",
+      "title": "Energy-Storage.News — AEMO Registration",
       "url": "https://www.energy-storage.news/australias-first-8-hour-ldes-battery-energy-storage-system-registered-with-aemo/",
       "source_tier": 2
     }
-  ]
+  ],
+  "eis_specs": {
+    "document_title": "Limondale Battery Energy Storage System — SSD EIS (NSW)",
+    "document_url": "https://www.planningportal.nsw.gov.au/major-projects/projects/limondale-bess",
+    "document_year": 2024,
+    "cell_chemistry": "LFP",
+    "cell_chemistry_full": "Lithium Iron Phosphate (LiFePO4)",
+    "cell_supplier": "CATL or Samsung SDI",
+    "cell_country_of_manufacture": "China / South Korea",
+    "inverter_supplier": "SMA or Sungrow",
+    "pcs_type": "grid_following",
+    "round_trip_efficiency_pct": 88.0,
+    "round_trip_efficiency_ac": 85.0,
+    "duration_hours": 8.0,
+    "connection_voltage_kv": 330.0,
+    "transformer_mva": 50.0,
+    "notes": "50 MW / 400 MWh (8-hour) long-duration BESS co-located with Limondale Solar Farm, NSW. RWE Renewables Australia. NSW SSD. Notable for 8-hour duration — significantly longer than typical 2-4 hour systems. LFP chemistry for long-cycle life at extended duration. Connection to TransGrid 330 kV network."
+  }
 }

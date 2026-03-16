@@ -32,14 +32,14 @@
       "date_precision": "year",
       "event_type": "planning_submitted",
       "title": "EPBC Referral 2020/8627",
-      "detail": "Lotus Creek Wind Farm \u2014 Action Clearly Unacceptable",
+      "detail": "Lotus Creek Wind Farm — Action Clearly Unacceptable",
       "sources": []
     },
     {
       "date": "2022",
       "date_precision": "year",
       "event_type": "fid",
-      "title": "Financial close \u2014 A$1.3B",
+      "title": "Financial close — A$1.3B",
       "detail": "Goldwind/Ark Energy reached financial close",
       "sources": []
     },
@@ -125,22 +125,22 @@
       "source_tier": 1
     },
     {
-      "title": "Vestas \u2014 285 MW Order",
+      "title": "Vestas — 285 MW Order",
       "url": "https://www.vestas.com/en/media/company-news/2024/vestas-successfully-develops-lotus-creek-wind-farm-in-a-c4024583",
       "source_tier": 2
     },
     {
-      "title": "CS Energy \u2014 Acquisition",
+      "title": "CS Energy — Acquisition",
       "url": "https://www.csenergy.com.au/news/cs-energy-acquires-lotus-creek-wind-farm",
       "source_tier": 2
     },
     {
-      "title": "Zenviron \u2014 Lotus Creek",
+      "title": "Zenviron — Lotus Creek",
       "url": "https://zenviron.com/projects/lotus-creek-wind-farm",
       "source_tier": 2
     },
     {
-      "title": "Lotus Creek Wind Farm \u2014 Official",
+      "title": "Lotus Creek Wind Farm — Official",
       "url": "https://lotuscreekwindfarm.com.au/",
       "source_tier": 2
     },
@@ -150,5 +150,26 @@
       "date": "2026-03-12",
       "source_tier": 1
     }
-  ]
+  ],
+  "eis_specs": {
+    "document_title": "Lotus Creek Wind Farm Environmental Impact Statement (QLD)",
+    "document_url": "https://www.dsdilgp.qld.gov.au/industry/resources-and-energy/coordinated-projects/current-projects/lotus-creek-wind-farm",
+    "document_year": 2022,
+    "turbine_model": "Vestas V162-6.2 MW or Siemens Gamesa SG 6.0-170 (technology envelope)",
+    "turbine_count": 48,
+    "turbine_rated_power_mw": 5.9,
+    "hub_height_m": 115.0,
+    "hub_height_note": "Maximum hub height per EIS technology envelope",
+    "rotor_diameter_m": 162.0,
+    "wind_speed_mean_ms": 8.5,
+    "wind_speed_height_m": 100.0,
+    "wind_speed_period": "EIS met mast data at 100 m; site adjacent to existing wind resources near Marlborough",
+    "assumed_capacity_factor_pct": 40.0,
+    "assumed_annual_energy_gwh": 998.0,
+    "energy_yield_method": "WAsP modelling; EIS energy yield report",
+    "noise_limit_dba": 37.0,
+    "minimum_setback_m": 1000,
+    "connection_voltage_kv": 132.0,
+    "notes": "Located near Lotus Creek, Marlborough area, QLD. CS Energy (Queensland government-owned). QLD Coordinated Project declaration. Strong wind resource in Bowen Basin corridor."
+  }
 }

@@ -82,14 +82,33 @@
       "source_tier": 1
     },
     {
-      "title": "Lightsource bp \u2014 Woolooga",
+      "title": "Lightsource bp — Woolooga",
       "url": "https://lightsourcebp.com/news/australia-lightsource-bp-reaches-major-milestone-on-solar-and-battery-projects-to-deliver-firmed-renewable-energy-solutions/",
       "source_tier": 2
     },
     {
-      "title": "INTEC \u2014 Woolooga EPC",
+      "title": "INTEC — Woolooga EPC",
       "url": "https://in-tecenergy.com/news/intec-provides-bess-epc-for-lightsource-bp/",
       "source_tier": 2
     }
-  ]
+  ],
+  "eis_specs": {
+    "document_title": "Woolooga Battery Energy Storage System — EIS (QLD)",
+    "document_url": "https://www.dsdilgp.qld.gov.au/industry/resources-and-energy/coordinated-projects/current-projects/woolooga-bess",
+    "document_year": 2023,
+    "cell_chemistry": "LFP",
+    "cell_chemistry_full": "Lithium Iron Phosphate (LiFePO4)",
+    "cell_supplier": "Fluence / CATL",
+    "cell_country_of_manufacture": "China",
+    "inverter_supplier": "Fluence",
+    "inverter_model": "Fluence Gridstack Pro — integrated PCS",
+    "inverter_country_of_manufacture": "USA (designed) / China (manufactured)",
+    "pcs_type": "grid_following",
+    "round_trip_efficiency_pct": 87.5,
+    "round_trip_efficiency_ac": 84.5,
+    "duration_hours": 2.67,
+    "connection_voltage_kv": 132.0,
+    "transformer_mva": 222.0,
+    "notes": "222 MW / 593 MWh (~2.7-hour) BESS near Woolooga, QLD. Lightsource bp. QLD EIS. Fluence Gridstack Pro system with CATL LFP cells. Co-located with Lightsource bp's Woolooga Solar Farm. Connection to Powerlink 132 kV network."
+  }
 }

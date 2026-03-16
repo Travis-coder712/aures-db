@@ -1,6 +1,6 @@
 import { useParams, Link, useSearchParams, useNavigate } from 'react-router-dom'
 import { useState } from 'react'
-import { TECHNOLOGY_CONFIG, DEVELOPMENT_STAGE_CONFIG, type Project } from '../lib/types'
+import { TECHNOLOGY_CONFIG, DEVELOPMENT_STAGE_CONFIG, type Project, type EISTechnicalSpec } from '../lib/types'
 import { useProject } from '../hooks/useProjectData'
 import TechBadge from '../components/common/TechBadge'
 import StatusBadge from '../components/common/StatusBadge'
@@ -425,6 +425,11 @@ function formatDate(date: string, precision: string): string {
 function TechnicalTab({ project }: { project: Project }) {
   return (
     <div className="space-y-6">
+      {/* EIS / EIA Technical Specifications */}
+      {project.eis_specs && (
+        <EISSpecsSection specs={project.eis_specs} technology={project.technology} />
+      )}
+
       {/* Suppliers */}
       <section>
         <SectionTitle>Equipment & Suppliers</SectionTitle>
@@ -541,6 +546,284 @@ function TechnicalTab({ project }: { project: Project }) {
         </section>
       )}
     </div>
+  )
+}
+
+// ============================================================
+// EIS / EIA Technical Specifications Section
+// ============================================================
+
+const PCS_LABELS: Record<string, string> = {
+  grid_forming: 'Grid-Forming (Voltage Source Converter)',
+  grid_following: 'Grid-Following (Current Source Converter)',
+  both: 'Grid-Forming & Grid-Following (mixed)',
+}
+
+function EISSpecsSection({
+  specs,
+  technology,
+}: {
+  specs: EISTechnicalSpec
+  technology: string
+}) {
+  const isWind = technology === 'wind' || technology === 'offshore_wind'
+  const isBESS = technology === 'bess'
+
+  const hasWindData =
+    specs.turbine_model ||
+    specs.hub_height_m ||
+    specs.wind_speed_mean_ms ||
+    specs.assumed_capacity_factor_pct
+
+  const hasBESSData =
+    specs.cell_chemistry ||
+    specs.cell_supplier ||
+    specs.inverter_supplier ||
+    specs.pcs_type ||
+    specs.round_trip_efficiency_pct
+
+  if (!hasWindData && !hasBESSData) return null
+
+  return (
+    <section>
+      {/* Header with source attribution */}
+      <div className="flex items-start justify-between gap-3 mb-3">
+        <h3 className="text-sm font-semibold text-[var(--color-text)] flex items-center gap-2">
+          📄 EIS / EIA Technical Specifications
+        </h3>
+        {specs.document_url ? (
+          <a
+            href={specs.document_url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex-shrink-0 text-[10px] px-2 py-1 rounded-full bg-blue-500/10 text-blue-400 hover:bg-blue-500/20 border border-blue-500/20 transition-colors"
+          >
+            Source: {specs.document_title.replace(/\s*\(.*?\)\s*/g, '').substring(0, 40)}
+            {specs.document_year ? ` (${specs.document_year})` : ''} ↗
+          </a>
+        ) : (
+          <span className="flex-shrink-0 text-[10px] px-2 py-1 rounded-full bg-[var(--color-bg-elevated)] text-[var(--color-text-muted)] border border-[var(--color-border)]">
+            Source: {specs.document_title.substring(0, 40)}
+            {specs.document_year ? ` (${specs.document_year})` : ''}
+          </span>
+        )}
+      </div>
+
+      <div className="space-y-3">
+        {/* ── Wind: Turbine Specifications ────────────────────── */}
+        {isWind && hasWindData && (
+          <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl overflow-hidden">
+            <div className="px-4 py-2 bg-blue-500/5 border-b border-[var(--color-border)]">
+              <p className="text-[10px] font-semibold text-blue-400 uppercase tracking-wider">
+                💨 Turbine Specifications
+              </p>
+            </div>
+            <div className="divide-y divide-[var(--color-border)]">
+              {specs.turbine_model && (
+                <DetailRow label="Turbine Model" value={specs.turbine_model} />
+              )}
+              {specs.turbine_rated_power_mw && (
+                <DetailRow label="Rated Power" value={`${specs.turbine_rated_power_mw} MW per turbine`} />
+              )}
+              {specs.turbine_count && (
+                <DetailRow label="Number of Turbines" value={`${specs.turbine_count} WTGs`} />
+              )}
+              {specs.hub_height_m && (
+                <DetailRow
+                  label="Hub Height"
+                  value={`${specs.hub_height_m} m${specs.hub_height_note ? ' †' : ''}`}
+                />
+              )}
+              {specs.rotor_diameter_m && (
+                <DetailRow label="Rotor Diameter" value={`${specs.rotor_diameter_m} m`} />
+              )}
+              {specs.hub_height_note && (
+                <div className="px-4 py-2">
+                  <p className="text-[10px] text-[var(--color-text-muted)] italic">
+                    † {specs.hub_height_note}
+                  </p>
+                </div>
+              )}
+            </div>
+          </div>
+        )}
+
+        {/* ── Wind: Wind Resource & Energy Yield ──────────────── */}
+        {isWind && (specs.wind_speed_mean_ms || specs.assumed_capacity_factor_pct) && (
+          <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl overflow-hidden">
+            <div className="px-4 py-2 bg-blue-500/5 border-b border-[var(--color-border)]">
+              <p className="text-[10px] font-semibold text-blue-400 uppercase tracking-wider">
+                📊 Wind Resource & Energy Yield (EIS)
+              </p>
+            </div>
+            <div className="divide-y divide-[var(--color-border)]">
+              {specs.wind_speed_mean_ms && (
+                <DetailRow
+                  label="Mean Wind Speed"
+                  value={`${specs.wind_speed_mean_ms} m/s${specs.wind_speed_height_m ? ` at ${specs.wind_speed_height_m} m AGL` : ''}`}
+                />
+              )}
+              {specs.wind_speed_period && (
+                <div className="px-4 py-2">
+                  <p className="text-[10px] text-[var(--color-text-muted)]">
+                    ⓘ {specs.wind_speed_period}
+                  </p>
+                </div>
+              )}
+              {specs.assumed_capacity_factor_pct && (
+                <DetailRow
+                  label="Assumed Capacity Factor"
+                  value={`${specs.assumed_capacity_factor_pct.toFixed(1)}%`}
+                />
+              )}
+              {specs.assumed_annual_energy_gwh && (
+                <DetailRow
+                  label="Assumed Annual Energy"
+                  value={`${specs.assumed_annual_energy_gwh.toLocaleString()} GWh/year`}
+                />
+              )}
+              {specs.energy_yield_method && (
+                <div className="px-4 py-2">
+                  <p className="text-[10px] text-[var(--color-text-muted)]">
+                    ⓘ Method: {specs.energy_yield_method}
+                  </p>
+                </div>
+              )}
+            </div>
+          </div>
+        )}
+
+        {/* ── Wind: Environmental Constraints ─────────────────── */}
+        {isWind && (specs.noise_limit_dba || specs.minimum_setback_m) && (
+          <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl overflow-hidden">
+            <div className="px-4 py-2 bg-blue-500/5 border-b border-[var(--color-border)]">
+              <p className="text-[10px] font-semibold text-blue-400 uppercase tracking-wider">
+                🔇 Environmental Constraints (EIS)
+              </p>
+            </div>
+            <div className="divide-y divide-[var(--color-border)]">
+              {specs.noise_limit_dba && (
+                <DetailRow label="Noise Compliance Limit" value={`${specs.noise_limit_dba} dBA`} />
+              )}
+              {specs.minimum_setback_m && (
+                <DetailRow
+                  label="Minimum Setback (dwellings)"
+                  value={`${specs.minimum_setback_m.toLocaleString()} m`}
+                />
+              )}
+            </div>
+          </div>
+        )}
+
+        {/* ── BESS: Battery Cell Specifications ───────────────── */}
+        {isBESS && hasBESSData && (
+          <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl overflow-hidden">
+            <div className="px-4 py-2 bg-purple-500/5 border-b border-[var(--color-border)]">
+              <p className="text-[10px] font-semibold text-purple-400 uppercase tracking-wider">
+                🔋 Battery Cell Specifications (EIS)
+              </p>
+            </div>
+            <div className="divide-y divide-[var(--color-border)]">
+              {specs.cell_chemistry && (
+                <DetailRow
+                  label="Cell Chemistry"
+                  value={specs.cell_chemistry_full || specs.cell_chemistry}
+                />
+              )}
+              {specs.cell_supplier && (
+                <DetailRow label="Cell Supplier" value={specs.cell_supplier} />
+              )}
+              {specs.cell_country_of_manufacture && (
+                <DetailRow
+                  label="Cell Country of Manufacture"
+                  value={specs.cell_country_of_manufacture}
+                />
+              )}
+            </div>
+          </div>
+        )}
+
+        {/* ── BESS: Inverter / PCS Specifications ─────────────── */}
+        {isBESS && (specs.inverter_supplier || specs.pcs_type || specs.round_trip_efficiency_pct) && (
+          <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl overflow-hidden">
+            <div className="px-4 py-2 bg-purple-500/5 border-b border-[var(--color-border)]">
+              <p className="text-[10px] font-semibold text-purple-400 uppercase tracking-wider">
+                ⚡ Inverter / Power Conversion System (EIS)
+              </p>
+            </div>
+            <div className="divide-y divide-[var(--color-border)]">
+              {specs.inverter_supplier && (
+                <DetailRow label="PCS Supplier" value={specs.inverter_supplier} />
+              )}
+              {specs.inverter_model && (
+                <DetailRow label="PCS Model" value={specs.inverter_model} />
+              )}
+              {specs.inverter_country_of_manufacture && (
+                <DetailRow
+                  label="PCS Country of Manufacture"
+                  value={specs.inverter_country_of_manufacture}
+                />
+              )}
+              {specs.pcs_type && (
+                <DetailRow
+                  label="PCS Type"
+                  value={PCS_LABELS[specs.pcs_type] ?? specs.pcs_type}
+                />
+              )}
+              {specs.round_trip_efficiency_pct && (
+                <DetailRow
+                  label="Round-Trip Efficiency (DC-DC)"
+                  value={`${specs.round_trip_efficiency_pct}%`}
+                />
+              )}
+              {specs.round_trip_efficiency_ac && (
+                <DetailRow
+                  label="Round-Trip Efficiency (AC-AC)"
+                  value={`${specs.round_trip_efficiency_ac}%`}
+                />
+              )}
+              {specs.duration_hours && (
+                <DetailRow
+                  label="Storage Duration"
+                  value={`${specs.duration_hours} hours`}
+                />
+              )}
+            </div>
+          </div>
+        )}
+
+        {/* ── Grid Connection (both wind and BESS) ────────────── */}
+        {(specs.connection_voltage_kv || specs.transformer_mva) && (
+          <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl overflow-hidden">
+            <div className="px-4 py-2 bg-green-500/5 border-b border-[var(--color-border)]">
+              <p className="text-[10px] font-semibold text-green-400 uppercase tracking-wider">
+                🔌 Grid Connection (EIS)
+              </p>
+            </div>
+            <div className="divide-y divide-[var(--color-border)]">
+              {specs.connection_voltage_kv && (
+                <DetailRow label="Connection Voltage" value={`${specs.connection_voltage_kv} kV`} />
+              )}
+              {specs.transformer_mva && (
+                <DetailRow label="Main Transformer" value={`${specs.transformer_mva} MVA`} />
+              )}
+            </div>
+          </div>
+        )}
+
+        {/* ── Notes ───────────────────────────────────────────── */}
+        {specs.notes && (
+          <div className="bg-blue-500/5 border border-blue-500/15 rounded-xl p-4">
+            <p className="text-[10px] font-semibold text-blue-400 uppercase tracking-wider mb-2">
+              ⓘ EIS Notes
+            </p>
+            <p className="text-xs text-[var(--color-text-muted)] leading-relaxed">
+              {specs.notes}
+            </p>
+          </div>
+        )}
+      </div>
+    </section>
   )
 }
 

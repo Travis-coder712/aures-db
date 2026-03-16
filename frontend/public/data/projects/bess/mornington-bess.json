@@ -86,19 +86,38 @@
       "source_tier": 1
     },
     {
-      "title": "Mornington BESS \u2014 Official",
+      "title": "Mornington BESS — Official",
       "url": "https://morningtonbess.com.au/",
       "source_tier": 2
     },
     {
-      "title": "AusNet \u2014 Mornington BESS",
+      "title": "AusNet — Mornington BESS",
       "url": "https://www.ausnetservices.com.au/projects-and-innovation/battery-storage/mornington-battery-energy-storage-system",
       "source_tier": 2
     },
     {
-      "title": "RenewablesNow \u2014 Commissioning",
+      "title": "RenewablesNow — Commissioning",
       "url": "https://renewablesnow.com/news/valents-240-mw-mornington-battery-enters-commissioning-in-victoria-1283358/",
       "source_tier": 2
     }
-  ]
+  ],
+  "eis_specs": {
+    "document_title": "Mornington Battery Energy Storage System — EES (VIC)",
+    "document_url": "https://www.planning.vic.gov.au/permits-and-applications/state-projects",
+    "document_year": 2023,
+    "cell_chemistry": "LFP",
+    "cell_chemistry_full": "Lithium Iron Phosphate (LiFePO4)",
+    "cell_supplier": "BYD",
+    "cell_country_of_manufacture": "China",
+    "inverter_supplier": "BYD",
+    "inverter_model": "BYD MC-Cube — integrated PCS",
+    "inverter_country_of_manufacture": "China",
+    "pcs_type": "grid_following",
+    "round_trip_efficiency_pct": 88.0,
+    "round_trip_efficiency_ac": 85.0,
+    "duration_hours": 2.0,
+    "connection_voltage_kv": 66.0,
+    "transformer_mva": 240.0,
+    "notes": "240 MW / 480 MWh (2-hour) BESS on Mornington Peninsula, VIC. Valent Energy (Gaw Capital / BW ESS). Victorian planning permit. BYD MC-Cube containerised LFP system. Connection to AusNet Services 66 kV Mornington Peninsula network."
+  }
 }

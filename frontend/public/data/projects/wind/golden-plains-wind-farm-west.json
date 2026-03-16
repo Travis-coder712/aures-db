@@ -84,14 +84,35 @@
       "source_tier": 1
     },
     {
-      "title": "TagEnergy \u2014 Stage 2 Financial Close",
+      "title": "TagEnergy — Stage 2 Financial Close",
       "url": "https://tag-en.com/construction-to-begin-as-golden-plains-wind-farm-stage-2-reaches-financial-close/",
       "source_tier": 2
     },
     {
-      "title": "Vestas \u2014 577 MW Stage 2 Order",
+      "title": "Vestas — 577 MW Stage 2 Order",
       "url": "https://www.vestas.com/en/media/company-news/2024/vestas-receives-577-mw-order-in-australia-for-second-st-c4003383",
       "source_tier": 2
     }
-  ]
+  ],
+  "eis_specs": {
+    "document_title": "Golden Plains Wind Farm West Environment Effects Statement (EES)",
+    "document_url": "https://www.planning.vic.gov.au/permits-and-applications/state-projects/assessed-projects/golden-plains-wind-farm",
+    "document_year": 2021,
+    "turbine_model": "Vestas V162-6.2 MW",
+    "turbine_count": 93,
+    "turbine_rated_power_mw": 6.2,
+    "hub_height_m": 119.0,
+    "hub_height_note": "Nominated hub height per EES technology envelope",
+    "rotor_diameter_m": 162.0,
+    "wind_speed_mean_ms": 7.5,
+    "wind_speed_height_m": 100.0,
+    "wind_speed_period": "WAsP modelling at 100 m AGL consistent with Golden Plains East resource area",
+    "assumed_capacity_factor_pct": 34.8,
+    "assumed_annual_energy_gwh": 1760.0,
+    "energy_yield_method": "WAsP mesoscale modelling; EES energy yield assessment",
+    "noise_limit_dba": 40.0,
+    "minimum_setback_m": 1000,
+    "connection_voltage_kv": 220.0,
+    "notes": "Western stage of the Golden Plains project. 577 MW Vestas turbine order confirmed 2024. Shares the same EES approval and grid connection planning as Golden Plains East."
+  }
 }
