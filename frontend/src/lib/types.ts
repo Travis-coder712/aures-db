@@ -257,6 +257,8 @@ export interface ProjectSummary {
   first_seen?: string
   has_eis_data?: boolean    // true when eis_specs are populated (planning document sourced)
   zombie_flag?: 'zombie_stale' | 'zombie_minimal' | null  // stale or minimal-data projects
+  has_scheme_contract?: boolean  // true when project has CIS or LTESA contract
+  user_override?: 'include' | 'exclude'  // manual curation override
 }
 
 // CIS/LTESA types

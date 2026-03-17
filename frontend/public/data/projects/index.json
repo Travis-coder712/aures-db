@@ -200,7 +200,8 @@
     "data_confidence": "low",
     "confidence_score": "20",
     "development_stage": "epbc_submitted",
-    "first_seen": "2025"
+    "first_seen": "2025",
+    "has_scheme_contract": true
   },
   {
     "id": "arundel-bess",
@@ -498,7 +499,8 @@
     "data_confidence": "low",
     "confidence_score": "15",
     "development_stage": "planning_submitted",
-    "zombie_flag": "zombie_minimal"
+    "zombie_flag": "zombie_minimal",
+    "has_scheme_contract": true
   },
   {
     "id": "bannerton-solar-park",
@@ -565,7 +567,8 @@
     "current_developer": "Barnawartha Solar Pty Ltd",
     "data_confidence": "low",
     "confidence_score": "20",
-    "development_stage": "planning_submitted"
+    "development_stage": "planning_submitted",
+    "has_scheme_contract": true
   },
   {
     "id": "baroota-pumped-hydro-project",
@@ -605,7 +608,8 @@
     "data_confidence": "low",
     "confidence_score": "22",
     "development_stage": "planning_submitted",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "has_scheme_contract": true
   },
   {
     "id": "bashan-1-wind-farm",
@@ -808,7 +812,8 @@
     "current_developer": "Athena Energy Australia (Holdings) Pty Ltd",
     "data_confidence": "low",
     "confidence_score": "20",
-    "development_stage": "planning_submitted"
+    "development_stage": "planning_submitted",
+    "has_scheme_contract": true
   },
   {
     "id": "bendemeer-renewable-energy-hub-wind",
@@ -1477,7 +1482,8 @@
     "current_developer": "Ark Energy",
     "data_confidence": "low",
     "confidence_score": "20",
-    "development_stage": "planning_submitted"
+    "development_stage": "planning_submitted",
+    "has_scheme_contract": true
   },
   {
     "id": "bowmans-creek-wind-farm",
@@ -1725,7 +1731,8 @@
     "current_developer": "WEBESS02 ProjectCo Pty Ltd as trustee for the WEBESS02 Project Trust",
     "data_confidence": "low",
     "confidence_score": "20",
-    "development_stage": "planning_submitted"
+    "development_stage": "planning_submitted",
+    "has_scheme_contract": true
   },
   {
     "id": "bulgana-green-power-hub-wind-farm",
@@ -1874,7 +1881,8 @@
     "current_developer": "Genaspi Energy Group Pty Ltd",
     "data_confidence": "low",
     "confidence_score": "20",
-    "development_stage": "planning_submitted"
+    "development_stage": "planning_submitted",
+    "has_scheme_contract": true
   },
   {
     "id": "bungaban-bess",
@@ -2158,7 +2166,8 @@
     "confidence_score": "51",
     "notable": "Tesla Megapack. First merchant BESS debt financing in NSW. SmartestEnergy 100% offtake.",
     "first_seen": "2024-06-28",
-    "has_eis_data": true
+    "has_eis_data": true,
+    "has_scheme_contract": true
   },
   {
     "id": "calala-bess-a2",
@@ -2251,7 +2260,8 @@
     "data_confidence": "low",
     "confidence_score": "15",
     "development_stage": "planning_submitted",
-    "zombie_flag": "zombie_minimal"
+    "zombie_flag": "zombie_minimal",
+    "has_scheme_contract": true
   },
   {
     "id": "camperdown-bess",
@@ -2362,7 +2372,8 @@
     "data_confidence": "low",
     "confidence_score": "22",
     "development_stage": "planning_submitted",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "has_scheme_contract": true
   },
   {
     "id": "capricornia-energy-hub-ceh-phes",
@@ -2418,7 +2429,8 @@
     "capex_aud_m": 900.0,
     "notable": "42x GE Vernova 6.1-158. Aula Energy (Macquarie). DT Infrastructure civil. A$900M. COD 2028.",
     "first_seen": "2020",
-    "has_eis_data": true
+    "has_eis_data": true,
+    "has_scheme_contract": true
   },
   {
     "id": "carwarp-hybrid",
@@ -2710,7 +2722,8 @@
     "confidence_score": "48",
     "notable": "Trina Storage + SMA inverters. Enzen EPC. CIS Tender 1 winner. >A$100M.",
     "first_seen": "2024-02-01",
-    "has_eis_data": true
+    "has_eis_data": true,
+    "has_scheme_contract": true
   },
   {
     "id": "clements-gap-wind-farm",
@@ -3098,7 +3111,8 @@
     "data_confidence": "low",
     "confidence_score": "17",
     "development_stage": "early_stage",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "has_scheme_contract": true
   },
   {
     "id": "corop-bess",
@@ -3124,7 +3138,8 @@
     "data_confidence": "low",
     "confidence_score": "15",
     "development_stage": "planning_submitted",
-    "zombie_flag": "zombie_minimal"
+    "zombie_flag": "zombie_minimal",
+    "has_scheme_contract": true
   },
   {
     "id": "corowa-solar-farm",
@@ -3260,7 +3275,8 @@
     "performance_score": 45.6,
     "data_confidence": "medium",
     "confidence_score": "43",
-    "first_seen": "2025-08-01"
+    "first_seen": "2025-08-01",
+    "has_scheme_contract": true
   },
   {
     "id": "cullerin-range-wind-farm",
@@ -3542,7 +3558,8 @@
     "data_confidence": "low",
     "confidence_score": "22",
     "development_stage": "planning_submitted",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "has_scheme_contract": true
   },
   {
     "id": "delburn-wind-farm",
@@ -3596,7 +3613,8 @@
     "data_confidence": "low",
     "confidence_score": "22",
     "development_stage": "planning_submitted",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "has_scheme_contract": true
   },
   {
     "id": "derringullen-energy-storage-system",
@@ -3678,7 +3696,8 @@
     "confidence_score": "40",
     "development_stage": "epbc_submitted",
     "notable": "Hybrid wind+solar+BESS. Access rights: 707 MW wind + 300 MW solar + 300 MW/1,200 MWh BESS. Full vision ~2.5 GW. Adjacent to Transgrid Dinawan Substation. CIP holds option for minority interest. CIS Tender winner.",
-    "first_seen": "2023"
+    "first_seen": "2023",
+    "has_scheme_contract": true
   },
   {
     "id": "dingo-solar-farm",
@@ -3907,7 +3926,8 @@
     "data_confidence": "low",
     "confidence_score": "15",
     "development_stage": "planning_submitted",
-    "zombie_flag": "zombie_minimal"
+    "zombie_flag": "zombie_minimal",
+    "has_scheme_contract": true
   },
   {
     "id": "edderton-hybrid-faciility-solar",
@@ -4031,7 +4051,8 @@
     "data_confidence": "low",
     "confidence_score": "22",
     "development_stage": "early_stage",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "has_scheme_contract": true
   },
   {
     "id": "elaine-wind-farm",
@@ -4266,7 +4287,8 @@
     "data_confidence": "medium",
     "confidence_score": "43",
     "notable": "38x GE 3.8-137 turbines. Iberdrola Australia developed. Located near Orange, NSW.",
-    "first_seen": "2023-09-19"
+    "first_seen": "2023-09-19",
+    "has_scheme_contract": true
   },
   {
     "id": "forbes-hybrid-project",
@@ -4427,7 +4449,8 @@
     "data_confidence": "low",
     "confidence_score": "22",
     "development_stage": "early_stage",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "has_scheme_contract": true
   },
   {
     "id": "gara-bess",
@@ -4481,7 +4504,8 @@
     "data_confidence": "low",
     "confidence_score": "22",
     "development_stage": "early_stage",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "has_scheme_contract": true
   },
   {
     "id": "geelong-bess",
@@ -4668,7 +4692,8 @@
     "data_confidence": "low",
     "confidence_score": "22",
     "development_stage": "early_stage",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "has_scheme_contract": true
   },
   {
     "id": "glen-inness-bess-kci",
@@ -5018,7 +5043,8 @@
     "data_confidence": "low",
     "confidence_score": "22",
     "development_stage": "epbc_approved",
-    "first_seen": "2022"
+    "first_seen": "2022",
+    "has_scheme_contract": true
   },
   {
     "id": "goulburn-river-solar-farm-and-bess",
@@ -5032,7 +5058,8 @@
     "data_confidence": "medium",
     "confidence_score": "32",
     "notable": "450 MW solar + BESS hybrid near Merriwa, NSW. One of the largest solar-storage combinations in Australia.",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "has_scheme_contract": true
   },
   {
     "id": "gould-creek-bess",
@@ -5099,7 +5126,8 @@
     "data_confidence": "low",
     "confidence_score": "17",
     "development_stage": "early_stage",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "has_scheme_contract": true
   },
   {
     "id": "goyder-south-wind-farm-1a",
@@ -5210,7 +5238,8 @@
     "data_confidence": "low",
     "confidence_score": "22",
     "development_stage": "early_stage",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "has_scheme_contract": true
   },
   {
     "id": "greater-southern-offshore-wind-kci",
@@ -5281,7 +5310,8 @@
     "data_confidence": "low",
     "confidence_score": "22",
     "development_stage": "planning_submitted",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "has_scheme_contract": true
   },
   {
     "id": "gugaa-bess",
@@ -5483,7 +5513,8 @@
     "data_confidence": "low",
     "confidence_score": "22",
     "development_stage": "early_stage",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "has_scheme_contract": true
   },
   {
     "id": "hallett-4-north-brown-hill",
@@ -5526,7 +5557,8 @@
     "confidence_score": "22",
     "development_stage": "epbc_approved",
     "first_seen": "2004",
-    "zombie_flag": "zombie_stale"
+    "zombie_flag": "zombie_stale",
+    "has_scheme_contract": true
   },
   {
     "id": "hallett-stage-1-brown-hill",
@@ -5984,7 +6016,8 @@
     "data_confidence": "low",
     "confidence_score": "22",
     "development_stage": "epbc_submitted",
-    "first_seen": "2022"
+    "first_seen": "2022",
+    "has_scheme_contract": true
   },
   {
     "id": "heywood-bess",
@@ -6118,7 +6151,8 @@
     "data_confidence": "low",
     "confidence_score": "15",
     "development_stage": "epbc_submitted",
-    "first_seen": "2024"
+    "first_seen": "2024",
+    "has_scheme_contract": true
   },
   {
     "id": "hornsdale-power-reserve",
@@ -6490,7 +6524,8 @@
     "data_confidence": "low",
     "confidence_score": "22",
     "development_stage": "early_stage",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "has_scheme_contract": true
   },
   {
     "id": "john-butters",
@@ -6517,7 +6552,8 @@
     "data_confidence": "low",
     "confidence_score": "22",
     "development_stage": "planning_submitted",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "has_scheme_contract": true
   },
   {
     "id": "junee-solar-farm",
@@ -6719,7 +6755,8 @@
     "confidence_score": "17",
     "development_stage": "epbc_submitted",
     "first_seen": "2019",
-    "zombie_flag": "zombie_stale"
+    "zombie_flag": "zombie_stale",
+    "has_scheme_contract": true
   },
   {
     "id": "kerang-bess",
@@ -6801,7 +6838,8 @@
     "data_confidence": "low",
     "confidence_score": "22",
     "development_stage": "planning_submitted",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "has_scheme_contract": true
   },
   {
     "id": "kiamal-solar-farm-stage-1",
@@ -6976,7 +7014,8 @@
     "current_developer": "Iberdrola Australia Development Pty Ltd.",
     "data_confidence": "low",
     "confidence_score": "20",
-    "development_stage": "planning_submitted"
+    "development_stage": "planning_submitted",
+    "has_scheme_contract": true
   },
   {
     "id": "koberinga-solar-farm",
@@ -7003,7 +7042,8 @@
     "data_confidence": "low",
     "confidence_score": "22",
     "development_stage": "planning_submitted",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "has_scheme_contract": true
   },
   {
     "id": "koorakee-wind-farm",
@@ -7283,7 +7323,8 @@
     "capex_year": 2023,
     "notable": "Fluence Gridstack with grid-forming inverters. A$750M. ARENA A$35M grant. NSW LTESA Round 2.",
     "first_seen": "2023-03-01",
-    "has_eis_data": true
+    "has_eis_data": true,
+    "has_scheme_contract": true
   },
   {
     "id": "lilyvale-bess-kci",
@@ -7337,7 +7378,8 @@
     "confidence_score": "54",
     "notable": "Australia's first 8-hour BESS. 144 Tesla Megapacks. 14-year NSW LTESA. Beon Energy BoP.",
     "first_seen": "2023-05-01",
-    "has_eis_data": true
+    "has_eis_data": true,
+    "has_scheme_contract": true
   },
   {
     "id": "limondale-solar-farm-1",
@@ -7459,7 +7501,8 @@
     "data_confidence": "low",
     "confidence_score": "22",
     "development_stage": "early_stage",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "has_scheme_contract": true
   },
   {
     "id": "little-river-solar-farm-kci",
@@ -7488,7 +7531,8 @@
     "development_stage": "epbc_approved",
     "notable": "1,332 MW wind in CWO REZ. Largest single wind access rights allocation in CWO REZ tender.",
     "first_seen": "2005",
-    "zombie_flag": "zombie_stale"
+    "zombie_flag": "zombie_stale",
+    "has_scheme_contract": true
   },
   {
     "id": "lockyer-valley-energy-project",
@@ -7558,7 +7602,8 @@
     "data_confidence": "low",
     "confidence_score": "22",
     "development_stage": "planning_submitted",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "has_scheme_contract": true
   },
   {
     "id": "lower-wonga-solar-farm-and-bess",
@@ -7572,7 +7617,8 @@
     "data_confidence": "low",
     "confidence_score": "22",
     "development_stage": "early_stage",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "has_scheme_contract": true
   },
   {
     "id": "loy-yang-b-power-station-bess-stage-1-kci",
@@ -7727,7 +7773,8 @@
     "data_confidence": "low",
     "confidence_score": "22",
     "development_stage": "early_stage",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "has_scheme_contract": true
   },
   {
     "id": "mallee-wind-farm",
@@ -7916,7 +7963,8 @@
     "data_confidence": "low",
     "confidence_score": "22",
     "development_stage": "early_stage",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "has_scheme_contract": true
   },
   {
     "id": "mavis-hybrid-facility-solar",
@@ -8112,7 +8160,8 @@
     "data_confidence": "low",
     "confidence_score": "15",
     "development_stage": "planning_submitted",
-    "zombie_flag": "zombie_minimal"
+    "zombie_flag": "zombie_minimal",
+    "has_scheme_contract": true
   },
   {
     "id": "merriwa-solar-farm-and-bess",
@@ -8166,7 +8215,8 @@
     "data_confidence": "low",
     "confidence_score": "22",
     "development_stage": "early_stage",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "has_scheme_contract": true
   },
   {
     "id": "midwest-bess",
@@ -8310,7 +8360,8 @@
     "data_confidence": "low",
     "confidence_score": "17",
     "development_stage": "epbc_submitted",
-    "first_seen": "2024"
+    "first_seen": "2024",
+    "has_scheme_contract": true
   },
   {
     "id": "moama-solar-farm",
@@ -8349,7 +8400,8 @@
     "performance_score": 30.5,
     "data_confidence": "medium",
     "confidence_score": "43",
-    "first_seen": "2024-12-16"
+    "first_seen": "2024-12-16",
+    "has_scheme_contract": true
   },
   {
     "id": "mologa-solar-hybrid-pv-bess",
@@ -8577,7 +8629,8 @@
     "confidence_score": "51",
     "notable": "CATL batteries + Power Electronics inverters. Construction completed Oct 2025. Commissioning underway.",
     "first_seen": "2022-01-01",
-    "has_eis_data": true
+    "has_eis_data": true,
+    "has_scheme_contract": true
   },
   {
     "id": "mornington-bess-2",
@@ -8607,7 +8660,8 @@
     "development_stage": "epbc_approved",
     "notable": "Fluence Gridstack with SMA grid-forming inverters. A$400M. ARENA A$24M grant.",
     "first_seen": "2008",
-    "has_eis_data": true
+    "has_eis_data": true,
+    "has_scheme_contract": true
   },
   {
     "id": "mortlake-energy-hub",
@@ -8895,7 +8949,8 @@
     "data_confidence": "low",
     "confidence_score": "22",
     "development_stage": "epbc_submitted",
-    "first_seen": "2023"
+    "first_seen": "2023",
+    "has_scheme_contract": true
   },
   {
     "id": "mt-rawdon-pumped-hydro-energy-storage-project-kci",
@@ -9198,7 +9253,8 @@
     "performance_score": 37.4,
     "data_confidence": "good",
     "confidence_score": "54",
-    "first_seen": "2019-01-01"
+    "first_seen": "2019-01-01",
+    "has_scheme_contract": true
   },
   {
     "id": "new-england-solar-farm-bess",
@@ -9454,7 +9510,8 @@
     "data_confidence": "low",
     "confidence_score": "22",
     "development_stage": "planning_submitted",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "has_scheme_contract": true
   },
   {
     "id": "nowingi-solar-storage-solar",
@@ -9590,7 +9647,8 @@
     "capex_year": 2024,
     "notable": "Tesla Megapack. A$650M debt financing (largest BESS financing globally at time). NSW LTESA + CIS double winner.",
     "first_seen": "2023",
-    "has_eis_data": true
+    "has_eis_data": true,
+    "has_scheme_contract": true
   },
   {
     "id": "orange-grove-sun-farm",
@@ -9773,7 +9831,8 @@
     "data_confidence": "low",
     "confidence_score": "15",
     "development_stage": "planning_submitted",
-    "zombie_flag": "zombie_minimal"
+    "zombie_flag": "zombie_minimal",
+    "has_scheme_contract": true
   },
   {
     "id": "palmerston-bess-akaysha",
@@ -9894,7 +9953,8 @@
     "current_developer": "ACEN Phoenix Pty Ltd",
     "data_confidence": "low",
     "confidence_score": "20",
-    "development_stage": "planning_submitted"
+    "development_stage": "planning_submitted",
+    "has_scheme_contract": true
   },
   {
     "id": "piambong-wind-farm-kci",
@@ -10516,7 +10576,8 @@
     "data_confidence": "low",
     "confidence_score": "22",
     "development_stage": "early_stage",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "has_scheme_contract": true
   },
   {
     "id": "regentville-bess",
@@ -10556,7 +10617,8 @@
     "data_confidence": "low",
     "confidence_score": "22",
     "development_stage": "early_stage",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "has_scheme_contract": true
   },
   {
     "id": "richmond-valley-solar-farm",
@@ -11033,7 +11095,8 @@
     "data_confidence": "medium",
     "confidence_score": "25",
     "development_stage": "epbc_submitted",
-    "first_seen": "2024"
+    "first_seen": "2024",
+    "has_scheme_contract": true
   },
   {
     "id": "sandy-creek-standalone-bess",
@@ -11157,7 +11220,8 @@
     "data_confidence": "low",
     "confidence_score": "22",
     "development_stage": "epbc_submitted",
-    "first_seen": "2023"
+    "first_seen": "2023",
+    "has_scheme_contract": true
   },
   {
     "id": "silverleaf-solar-farm-kci",
@@ -11215,7 +11279,8 @@
     "performance_score": 50.0,
     "data_confidence": "medium",
     "confidence_score": "48",
-    "first_seen": "2024-06-01"
+    "first_seen": "2024-06-01",
+    "has_scheme_contract": true
   },
   {
     "id": "smoky-creek-solar-power-station",
@@ -11229,7 +11294,8 @@
     "data_confidence": "low",
     "confidence_score": "22",
     "development_stage": "early_stage",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "has_scheme_contract": true
   },
   {
     "id": "snowtown-north-solar-farm",
@@ -11450,7 +11516,8 @@
     "confidence_score": "33",
     "development_stage": "epbc_approved",
     "notable": "700 MW wind in CWO REZ. Squadron Energy is Tattarang (Andrew Forrest) subsidiary.",
-    "first_seen": "2022"
+    "first_seen": "2022",
+    "has_scheme_contract": true
   },
   {
     "id": "spinifex-offshore-wind-farm",
@@ -11575,7 +11642,8 @@
     "data_confidence": "low",
     "confidence_score": "22",
     "development_stage": "early_stage",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "has_scheme_contract": true
   },
   {
     "id": "stony-creek-wind-farm",
@@ -11681,7 +11749,8 @@
     "data_confidence": "medium",
     "confidence_score": "43",
     "development_stage": "epbc_submitted",
-    "first_seen": "2022"
+    "first_seen": "2022",
+    "has_scheme_contract": true
   },
   {
     "id": "sturt-solar",
@@ -11996,7 +12065,8 @@
     "current_developer": "STBESS ProjectCo Pty Ltd as trustee for the STBESS Project Trust",
     "data_confidence": "low",
     "confidence_score": "20",
-    "development_stage": "planning_submitted"
+    "development_stage": "planning_submitted",
+    "has_scheme_contract": true
   },
   {
     "id": "swanbank-f-station",
@@ -12078,7 +12148,8 @@
     "confidence_score": "50",
     "notable": "Canadian Solar e-STORAGE SolBank 3.0. ~100 battery containers. CPP BoP.",
     "first_seen": "2025-12-01",
-    "has_eis_data": true
+    "has_eis_data": true,
+    "has_scheme_contract": true
   },
   {
     "id": "talbingo-bess",
@@ -12134,7 +12205,8 @@
     "data_confidence": "medium",
     "confidence_score": "30",
     "development_stage": "planning_submitted",
-    "first_seen": "2025-05-08"
+    "first_seen": "2025-05-08",
+    "has_scheme_contract": true
   },
   {
     "id": "tamworth-bess-project-1-pty-ltd",
@@ -12324,7 +12396,8 @@
     "data_confidence": "low",
     "confidence_score": "22",
     "development_stage": "early_stage",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "has_scheme_contract": true
   },
   {
     "id": "temora-bess",
@@ -12582,7 +12655,8 @@
     "data_confidence": "low",
     "confidence_score": "15",
     "development_stage": "planning_submitted",
-    "zombie_flag": "zombie_minimal"
+    "zombie_flag": "zombie_minimal",
+    "has_scheme_contract": true
   },
   {
     "id": "ticoba-bess",
@@ -12927,7 +13001,8 @@
     "data_confidence": "low",
     "confidence_score": "22",
     "development_stage": "planning_submitted",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "has_scheme_contract": true
   },
   {
     "id": "ulladulla-offshore-wind-farm",
@@ -13022,7 +13097,8 @@
     "capex_aud_m": 820.0,
     "notable": "69x GE Vernova 6.0-164 (6MW). Squadron Energy. Snowy Hydro 200MW 15yr PPA. A$820M. Part of GE 1.4GW strategic alliance. Central-West Orana REZ.",
     "first_seen": "2021-05-07",
-    "has_eis_data": true
+    "has_eis_data": true,
+    "has_scheme_contract": true
   },
   {
     "id": "vales-point-bess",
@@ -13063,7 +13139,8 @@
     "data_confidence": "medium",
     "confidence_score": "25",
     "development_stage": "epbc_submitted",
-    "first_seen": "2020"
+    "first_seen": "2020",
+    "has_scheme_contract": true
   },
   {
     "id": "vast-solar-1",
@@ -13812,7 +13889,8 @@
     "data_confidence": "medium",
     "confidence_score": "43",
     "development_stage": "epbc_approved",
-    "first_seen": "2011"
+    "first_seen": "2011",
+    "has_scheme_contract": true
   },
   {
     "id": "wimmera-plains-bess",
@@ -14188,7 +14266,8 @@
     "capex_year": 2024,
     "notable": "Wartsila Quantum High Energy. A$700M. CIS Round 1 winner. Replaces Yallourn coal (retires mid-2028).",
     "first_seen": "2023-02-01",
-    "has_eis_data": true
+    "has_eis_data": true,
+    "has_scheme_contract": true
   },
   {
     "id": "wooroora-station-wind-farm",

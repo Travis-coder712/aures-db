@@ -152,6 +152,94 @@ export default function SchemeTracker() {
   }
 
   const hasFilters = selectedPrograms.length > 0 || selectedRounds.length > 0 || selectedStates.length > 0
+  const [showMobileFilters, setShowMobileFilters] = useState(false)
+  const filterCount = (selectedPrograms.length > 0 ? 1 : 0) + (selectedRounds.length > 0 ? 1 : 0) + (selectedStates.length > 0 ? 1 : 0)
+
+  function renderSchemeFilters() {
+    return (
+      <div className="space-y-3">
+        {/* Program filter */}
+        <div>
+          <div className="text-[10px] font-semibold uppercase tracking-wider text-[var(--color-text-muted)] mb-1.5">Program</div>
+          <div className="flex items-center gap-1.5 flex-wrap">
+            {allPrograms.map(prog => {
+              const isActive = selectedPrograms.includes(prog)
+              const color = prog === 'CIS' ? '#f59e0b' : '#8b5cf6'
+              return (
+                <button
+                  key={prog}
+                  onClick={() => setSelectedPrograms(toggle(selectedPrograms, prog))}
+                  className={`text-xs px-2.5 py-1 rounded-full border transition-colors ${
+                    isActive
+                      ? 'border-transparent font-medium'
+                      : 'border-[var(--color-border)] text-[var(--color-text-muted)] hover:border-[var(--color-text-muted)]'
+                  }`}
+                  style={isActive ? { backgroundColor: `${color}20`, color } : undefined}
+                >
+                  {prog}
+                </button>
+              )
+            })}
+          </div>
+        </div>
+
+        {/* Round filter */}
+        <div>
+          <div className="text-[10px] font-semibold uppercase tracking-wider text-[var(--color-text-muted)] mb-1.5">Round</div>
+          <div className="flex items-center gap-1.5 flex-wrap">
+            {availableRounds.map(r => {
+              const isActive = selectedRounds.includes(r.id)
+              return (
+                <button
+                  key={r.id}
+                  onClick={() => setSelectedRounds(toggle(selectedRounds, r.id))}
+                  className={`text-xs px-2.5 py-1 rounded-full border transition-colors ${
+                    isActive
+                      ? 'border-blue-500 bg-blue-500/20 text-blue-400 font-medium'
+                      : 'border-[var(--color-border)] text-[var(--color-text-muted)] hover:border-[var(--color-text-muted)]'
+                  }`}
+                >
+                  {r.label}
+                </button>
+              )
+            })}
+          </div>
+        </div>
+
+        {/* State filter */}
+        <div>
+          <div className="text-[10px] font-semibold uppercase tracking-wider text-[var(--color-text-muted)] mb-1.5">State</div>
+          <div className="flex items-center gap-1.5 flex-wrap">
+            {allStates.map(state => {
+              const isActive = selectedStates.includes(state)
+              return (
+                <button
+                  key={state}
+                  onClick={() => setSelectedStates(toggle(selectedStates, state))}
+                  className={`text-xs px-2.5 py-1 rounded-full border transition-colors ${
+                    isActive
+                      ? 'border-blue-500 bg-blue-500/20 text-blue-400 font-medium'
+                      : 'border-[var(--color-border)] text-[var(--color-text-muted)] hover:border-[var(--color-text-muted)]'
+                  }`}
+                >
+                  {state}
+                </button>
+              )
+            })}
+          </div>
+        </div>
+
+        {hasFilters && (
+          <button
+            onClick={() => { setSelectedPrograms([]); setSelectedRounds([]); setSelectedStates([]) }}
+            className="text-xs text-blue-400 hover:underline"
+          >
+            Clear filters
+          </button>
+        )}
+      </div>
+    )
+  }
 
   // ============================================================
   // Render
@@ -183,86 +271,60 @@ export default function SchemeTracker() {
         </p>
       </div>
 
-      {/* Filters */}
-      <div className="space-y-2">
-        {/* Program filter */}
-        <div className="flex items-center gap-2 flex-wrap">
-          <span className="text-[10px] font-semibold uppercase tracking-wider text-[var(--color-text-muted)] w-16 shrink-0">
-            Program
-          </span>
-          {allPrograms.map(prog => {
-            const isActive = selectedPrograms.includes(prog)
-            const color = prog === 'CIS' ? '#f59e0b' : '#8b5cf6'
-            return (
-              <button
-                key={prog}
-                onClick={() => setSelectedPrograms(toggle(selectedPrograms, prog))}
-                className={`text-xs px-2.5 py-1 rounded-full border transition-colors ${
-                  isActive
-                    ? 'border-transparent font-medium'
-                    : 'border-[var(--color-border)] text-[var(--color-text-muted)] hover:border-[var(--color-text-muted)]'
-                }`}
-                style={isActive ? { backgroundColor: `${color}20`, color } : undefined}
-              >
-                {prog}
-              </button>
-            )
-          })}
-        </div>
-
-        {/* Round filter */}
-        <div className="flex items-center gap-2 flex-wrap">
-          <span className="text-[10px] font-semibold uppercase tracking-wider text-[var(--color-text-muted)] w-16 shrink-0">
-            Round
-          </span>
-          {availableRounds.map(r => {
-            const isActive = selectedRounds.includes(r.id)
-            return (
-              <button
-                key={r.id}
-                onClick={() => setSelectedRounds(toggle(selectedRounds, r.id))}
-                className={`text-xs px-2.5 py-1 rounded-full border transition-colors ${
-                  isActive
-                    ? 'border-blue-500 bg-blue-500/20 text-blue-400 font-medium'
-                    : 'border-[var(--color-border)] text-[var(--color-text-muted)] hover:border-[var(--color-text-muted)]'
-                }`}
-              >
-                {r.label}
-              </button>
-            )
-          })}
-        </div>
-
-        {/* State filter */}
-        <div className="flex items-center gap-2 flex-wrap">
-          <span className="text-[10px] font-semibold uppercase tracking-wider text-[var(--color-text-muted)] w-16 shrink-0">
-            State
-          </span>
-          {allStates.map(state => {
-            const isActive = selectedStates.includes(state)
-            return (
-              <button
-                key={state}
-                onClick={() => setSelectedStates(toggle(selectedStates, state))}
-                className={`text-xs px-2.5 py-1 rounded-full border transition-colors ${
-                  isActive
-                    ? 'border-blue-500 bg-blue-500/20 text-blue-400 font-medium'
-                    : 'border-[var(--color-border)] text-[var(--color-text-muted)] hover:border-[var(--color-text-muted)]'
-                }`}
-              >
-                {state}
-              </button>
-            )
-          })}
-          {hasFilters && (
-            <button
-              onClick={() => { setSelectedPrograms([]); setSelectedRounds([]); setSelectedStates([]) }}
-              className="text-xs text-blue-400 hover:underline ml-2"
-            >
-              Clear filters
-            </button>
+      {/* Mobile filter button */}
+      <div className="lg:hidden flex items-center gap-2">
+        <button
+          onClick={() => setShowMobileFilters(true)}
+          className="flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-lg border border-[var(--color-border)] text-[var(--color-text-muted)] hover:text-[var(--color-text)] transition-colors"
+        >
+          <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 6h9.75M10.5 6a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-9.75 0h9.75" />
+          </svg>
+          Filters
+          {filterCount > 0 && (
+            <span className="bg-[var(--color-primary)] text-white text-[9px] w-4 h-4 rounded-full flex items-center justify-center font-bold">
+              {filterCount}
+            </span>
           )}
-        </div>
+        </button>
+        {hasFilters && (
+          <span className="text-[10px] text-[var(--color-text-muted)]">
+            {filteredRounds.length} round{filteredRounds.length !== 1 ? 's' : ''}
+          </span>
+        )}
+      </div>
+
+      {/* Mobile Bottom Sheet */}
+      {showMobileFilters && (
+        <>
+          <div
+            className="lg:hidden fixed inset-0 bg-black/40 z-50 transition-opacity"
+            onClick={() => setShowMobileFilters(false)}
+          />
+          <div className="lg:hidden fixed inset-x-0 bottom-0 z-50 bg-[var(--color-bg)] border-t border-[var(--color-border)] rounded-t-2xl max-h-[70dvh] overflow-y-auto overscroll-contain animate-slide-up">
+            <div className="sticky top-0 bg-[var(--color-bg)] pt-3 pb-2 px-4 border-b border-[var(--color-border)]">
+              <div className="w-10 h-1 rounded-full bg-[var(--color-border)] mx-auto mb-3" />
+              <div className="flex items-center justify-between">
+                <span className="text-sm font-semibold text-[var(--color-text)]">Filters</span>
+                <button
+                  onClick={() => setShowMobileFilters(false)}
+                  className="text-xs text-[var(--color-text-muted)] hover:text-[var(--color-text)]"
+                >
+                  Done
+                </button>
+              </div>
+            </div>
+            <div className="px-4 py-4">
+              {renderSchemeFilters()}
+            </div>
+            <div className="h-6" />
+          </div>
+        </>
+      )}
+
+      {/* Desktop Filters — always visible on lg+ */}
+      <div className="hidden lg:block">
+        {renderSchemeFilters()}
       </div>
 
       {/* Summary cards */}

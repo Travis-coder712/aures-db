@@ -207,6 +207,30 @@ def clean_none_values(obj):
     return obj
 
 
+def _load_scheme_project_ids():
+    """Extract CIS/LTESA project IDs from scheme-rounds.ts."""
+    scheme_rounds_path = os.path.join(
+        os.path.dirname(__file__), '..', '..', 'frontend', 'src', 'data', 'scheme-rounds.ts'
+    )
+    try:
+        with open(scheme_rounds_path, 'r') as f:
+            content = f.read()
+        return set(re.findall(r"project_id:\s*['\"]([^'\"]+)['\"]", content))
+    except FileNotFoundError:
+        print("  WARNING: scheme-rounds.ts not found, skipping scheme flags")
+        return set()
+
+
+def _load_user_overrides():
+    """Load user-overrides.json for manual include/exclude."""
+    overrides_path = os.path.join(DATA_DIR, 'user-overrides.json')
+    try:
+        with open(overrides_path, 'r') as f:
+            return json.load(f)
+    except (FileNotFoundError, json.JSONDecodeError):
+        return {"include": {}, "exclude": {}}
+
+
 def export_all(db_path=DB_PATH):
     conn = get_connection(db_path)
 
@@ -215,11 +239,25 @@ def export_all(db_path=DB_PATH):
 
     print(f"Exporting {len(project_ids)} projects...")
 
+    # Load scheme project IDs and user overrides for enrichment
+    scheme_ids = _load_scheme_project_ids()
+    user_overrides = _load_user_overrides()
+    print(f"  Scheme project IDs: {len(scheme_ids)}")
+    print(f"  User overrides: {len(user_overrides.get('include', {}))} include, {len(user_overrides.get('exclude', {}))} exclude")
+
     # 1. Project summaries index
     summaries = []
     for pid in project_ids:
         summary = fetch_project_summary(conn, pid)
         if summary:
+            # Enrich with scheme contract flag
+            if pid in scheme_ids:
+                summary['has_scheme_contract'] = True
+            # Enrich with user override
+            if pid in user_overrides.get('include', {}):
+                summary['user_override'] = 'include'
+            elif pid in user_overrides.get('exclude', {}):
+                summary['user_override'] = 'exclude'
             summaries.append(clean_none_values(summary))
 
     write_json(os.path.join(DATA_DIR, 'projects', 'index.json'), summaries)
