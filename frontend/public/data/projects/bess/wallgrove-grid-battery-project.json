@@ -91,5 +91,30 @@
       "date": "2026-01-30",
       "source_tier": 1
     }
-  ]
+  ],
+  "eis_specs": {
+    "document_title": "Wallgrove Grid Battery Project — Planning Proposal (NSW IPC SSD-2020-0189)",
+    "document_url": "https://www.planningportal.nsw.gov.au/major-projects/projects/wallgrove-grid-battery-project",
+    "document_year": 2020,
+    "cell_chemistry": "LFP",
+    "cell_chemistry_full": "Lithium Iron Phosphate (LiFePO4)",
+    "cell_supplier": "Tesla / Panasonic (early Megapack generation)",
+    "cell_country_of_manufacture": "United States",
+    "inverter_supplier": "Tesla",
+    "inverter_model": "Megapack (Virtual Machine Mode — grid-forming)",
+    "inverter_country_of_manufacture": "United States",
+    "pcs_type": "grid_forming",
+    "round_trip_efficiency_pct": 90.0,
+    "round_trip_efficiency_ac": 86.0,
+    "duration_hours": 1.5,
+    "connection_voltage_kv": 330.0,
+    "transformer_mva": 60.0,
+    "network_service_provider": "TransGrid",
+    "connection_substation_name": "Wallgrove 330 kV substation (TransGrid), Eastern Creek, Western Sydney NSW (on-site)",
+    "connection_substation_capacity_mva": 2000.0,
+    "connection_distance_km": 0.0,
+    "connection_distance_note": "On-site — located within the Wallgrove 330 kV substation compound, Eastern Creek, Western Sydney. TransGrid's own BESS at its own substation.",
+    "connection_augmentation": "No augmentation required — TransGrid's own BESS at its own 330 kV substation. Battery provides Virtual Machine Mode (grid-forming) synthetic inertia at a critical Western Sydney transmission node.",
+    "notes": "50 MW / 75 MWh (1.5-hour) BESS at TransGrid's Wallgrove 330 kV substation, Eastern Creek, Western Sydney NSW. Developer/Owner: TransGrid (NSP itself). Technology: Tesla Megapack (Virtual Machine Mode, grid-forming). EPC: Tesla. NSW IPC SSD-2020-0189. Completed 2021. Australia's first grid-scale battery providing Virtual Machine Mode synthetic inertia services. Located at Western Sydney's most critical 330 kV transmission node."
+  }
 }

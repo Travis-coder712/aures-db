@@ -58,5 +58,30 @@
       "date": "2026-01-30",
       "source_tier": 1
     }
-  ]
+  ],
+  "eis_specs": {
+    "document_title": "Templers BESS Development Application (SA EPA)",
+    "document_url": "https://www.epa.sa.gov.au/",
+    "document_year": 2022,
+    "cell_chemistry": "LFP",
+    "cell_chemistry_full": "Lithium Iron Phosphate (LiFePO4)",
+    "cell_supplier": "Sungrow (CATL cells integrated)",
+    "cell_country_of_manufacture": "China",
+    "inverter_supplier": "Sungrow Power Supply Co.",
+    "inverter_model": "Sungrow SC3450UD-MV (integrated BESS-PCS)",
+    "inverter_country_of_manufacture": "China",
+    "pcs_type": "grid_following",
+    "round_trip_efficiency_pct": 89.0,
+    "round_trip_efficiency_ac": 85.0,
+    "duration_hours": 2.6,
+    "connection_voltage_kv": 275.0,
+    "transformer_mva": 120.0,
+    "network_service_provider": "ElectraNet",
+    "connection_substation_name": "Templers 275/66 kV substation (ElectraNet), Mid North SA",
+    "connection_substation_capacity_mva": 300.0,
+    "connection_distance_km": 5.0,
+    "connection_distance_note": "~5 km of 66 kV connection to ElectraNet Templers 275/66 kV substation, Mid North SA near Port Wakefield.",
+    "connection_augmentation": "ElectraNet augmentation of Mid North SA 275 kV network. Templers area has existing infrastructure for adjacent wind/solar projects.",
+    "notes": "111 MW / 291 MWh (~2.6-hour) BESS, Templers, Mid North SA (near Port Wakefield). Developer: Tilt Renewables Australia. Technology: Sungrow integrated LFP battery system. EPC: CPP. SA development approval 2022. Commissioning 2025. ~2.6-hour duration — longer than standard 2-hour. ElectraNet 275 kV connection via Templers substation."
+  }
 }

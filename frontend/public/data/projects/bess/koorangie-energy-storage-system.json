@@ -100,5 +100,30 @@
       "date": "2026-01-30",
       "source_tier": 1
     }
-  ]
+  ],
+  "eis_specs": {
+    "document_title": "Koorangie Energy Storage System — Planning Permit Application (VIC DEECA)",
+    "document_url": "https://www.planning.vic.gov.au/",
+    "document_year": 2022,
+    "cell_chemistry": "LFP",
+    "cell_chemistry_full": "Lithium Iron Phosphate (LiFePO4)",
+    "cell_supplier": "CATL / Tesla (Tesla Gigafactory)",
+    "cell_country_of_manufacture": "United States / China",
+    "inverter_supplier": "Tesla",
+    "inverter_model": "Megapack (grid-forming)",
+    "inverter_country_of_manufacture": "United States",
+    "pcs_type": "grid_forming",
+    "round_trip_efficiency_pct": 90.0,
+    "round_trip_efficiency_ac": 86.0,
+    "duration_hours": 2.0,
+    "connection_voltage_kv": 220.0,
+    "transformer_mva": 200.0,
+    "network_service_provider": "AusNet Services",
+    "connection_substation_name": "Koorangie 220/66 kV substation (AusNet Services), Northern Victoria",
+    "connection_substation_capacity_mva": 350.0,
+    "connection_distance_km": 3.0,
+    "connection_distance_note": "~3 km to AusNet Services Koorangie area 220 kV network, Northern Victoria (Murray-Darling Basin region).",
+    "connection_augmentation": "AusNet augmentation of Northern Victoria 220 kV network. Grid-forming Tesla Megapack provides synthetic inertia for Northern Victoria-NSW interconnect.",
+    "notes": "185 MW / 370 MWh (2-hour) BESS, Koorangie area, Northern Victoria (near Kerang). Developer: Energy Australia. Technology: Tesla Megapack (LFP, grid-forming). EPC: CPP. VIC planning approval 2022. Now operating (2024). Grid-forming provides synthetic inertia for Northern VIC network. AusNet 220 kV connection. VIC CIS contract holder."
+  }
 }

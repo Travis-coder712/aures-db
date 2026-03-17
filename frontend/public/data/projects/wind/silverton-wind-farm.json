@@ -33,7 +33,7 @@
       "date_precision": "year",
       "event_type": "planning_submitted",
       "title": "EPBC Referral 2009/4847",
-      "detail": "Development of Silverton Wind Farm \u2014 Not Controlled Action",
+      "detail": "Development of Silverton Wind Farm — Not Controlled Action",
       "sources": []
     },
     {
@@ -106,5 +106,32 @@
       "date": "2026-03-12",
       "source_tier": 1
     }
-  ]
+  ],
+  "eis_specs": {
+    "document_title": "Silverton Wind Farm Environmental Impact Statement (NSW SSD-5703 / EPBC 2013/7036)",
+    "document_url": "https://www.planningportal.nsw.gov.au/major-projects/projects/silverton-wind-farm",
+    "document_year": 2013,
+    "turbine_model": "Siemens SWT-3.4-108",
+    "turbine_count": 58,
+    "turbine_rated_power_mw": 3.45,
+    "hub_height_m": 106.0,
+    "hub_height_note": "SWT-3.4-108 at 106 m hub height — tall tower for remote Far West NSW site",
+    "rotor_diameter_m": 108.0,
+    "wind_speed_mean_ms": 7.8,
+    "wind_speed_height_m": 106.0,
+    "wind_speed_period": "Mean annual wind speed at hub height; Silverton, Far West NSW near Broken Hill — from on-site met mast",
+    "assumed_capacity_factor_pct": 37.0,
+    "assumed_annual_energy_gwh": 648.0,
+    "energy_yield_method": "WAsP modelling; P50 net yield after wake and availability losses",
+    "noise_limit_dba": 35.0,
+    "minimum_setback_m": 1500,
+    "connection_voltage_kv": 220.0,
+    "network_service_provider": "TransGrid",
+    "connection_substation_name": "Broken Hill 220 kV substation (TransGrid / Essential Energy interconnect), Far West NSW",
+    "connection_substation_capacity_mva": 400.0,
+    "connection_distance_km": 20.0,
+    "connection_distance_note": "~20 km of 220 kV to Broken Hill 220 kV substation. Broken Hill is the terminus of the SA-NSW 220 kV interconnect via TransGrid.",
+    "connection_augmentation": "Connection to Broken Hill substation via TransGrid. Broken Hill is remote from main NSW grid, connected via 220 kV to SA. Silverton exports through SA route. Co-located with AGL 53 MW Broken Hill Solar Farm.",
+    "notes": "200 MW (58 x ~3.45 MW Siemens SWT-3.4-108), near Silverton, Far West NSW (near Broken Hill). Developer: AGL Energy. NSW SSD + EPBC approval 2013. Now operating (2019). Far West NSW — connected via 220 kV to Broken Hill and through to SA rather than main NSW grid."
+  }
 }

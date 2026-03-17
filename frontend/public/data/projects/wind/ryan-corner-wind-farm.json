@@ -33,7 +33,7 @@
       "date_precision": "year",
       "event_type": "planning_submitted",
       "title": "EPBC Referral 2005/2142",
-      "detail": "Ryan Corner Wind Farm \u2014 Not Controlled Action",
+      "detail": "Ryan Corner Wind Farm — Not Controlled Action",
       "sources": []
     },
     {
@@ -99,5 +99,32 @@
       "date": "2026-03-12",
       "source_tier": 1
     }
-  ]
+  ],
+  "eis_specs": {
+    "document_title": "Ryan Corner Wind Farm Environment Effects Statement (VIC DEECA EES)",
+    "document_url": "https://www.planning.vic.gov.au/schemes-and-amendments/statewide-activities/environment-effects-statements/current-and-completed-ees/ryan-corner-wind-farm",
+    "document_year": 2020,
+    "turbine_model": "Vestas V150-4.2 MW",
+    "turbine_count": 52,
+    "turbine_rated_power_mw": 4.2,
+    "hub_height_m": 125.0,
+    "hub_height_note": "Standard 125 m hub for V150-4.2 on Western VIC terrain near Hamilton",
+    "rotor_diameter_m": 150.0,
+    "wind_speed_mean_ms": 8.4,
+    "wind_speed_height_m": 125.0,
+    "wind_speed_period": "Mean annual wind speed at hub height; Western Victoria near Hamilton — from on-site met mast and ERA5",
+    "assumed_capacity_factor_pct": 40.0,
+    "assumed_annual_energy_gwh": 763.0,
+    "energy_yield_method": "WAsP with ERA5 long-term correction; P50 net yield",
+    "noise_limit_dba": 40.0,
+    "minimum_setback_m": 2000,
+    "connection_voltage_kv": 220.0,
+    "network_service_provider": "AusNet Services",
+    "connection_substation_name": "Ryan Corner 220 kV substation (new, on-site), near Hamilton, Western Victoria",
+    "connection_substation_capacity_mva": 400.0,
+    "connection_distance_km": 10.0,
+    "connection_distance_note": "~10 km of 220 kV connection to AusNet Services South-West Victoria 220 kV network near Hamilton.",
+    "connection_augmentation": "New 220 kV substation and connection line. AusNet augmented the Hamilton/Portland corridor for Ryan Corner and adjacent projects.",
+    "notes": "218 MW (52 x 4.2 MW Vestas V150), Western Victoria near Hamilton. Developer: Pacific Hydro (PowAR). BOP: Decmil/RJE JV. VIC EES approved 2020. Now operating (2023). SW VIC coastal plains provide excellent wind resource."
+  }
 }

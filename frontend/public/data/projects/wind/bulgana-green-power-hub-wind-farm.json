@@ -87,5 +87,32 @@
       "date": "2026-01-30",
       "source_tier": 1
     }
-  ]
+  ],
+  "eis_specs": {
+    "document_title": "Bulgana Green Power Hub Environment Effects Statement (VIC DELWP EES)",
+    "document_url": "https://www.planning.vic.gov.au/schemes-and-amendments/statewide-activities/environment-effects-statements/current-and-completed-ees/bulgana-green-power-hub",
+    "document_year": 2018,
+    "turbine_model": "Vestas V126-3.45 MW",
+    "turbine_count": 56,
+    "turbine_rated_power_mw": 3.45,
+    "hub_height_m": 97.0,
+    "hub_height_note": "Standard 97 m hub height for V126-3.45 MW on Western VIC plateau",
+    "rotor_diameter_m": 126.0,
+    "wind_speed_mean_ms": 8.3,
+    "wind_speed_height_m": 97.0,
+    "wind_speed_period": "Mean annual wind speed at hub height; Bulgana area near Ararat, Western Victoria",
+    "assumed_capacity_factor_pct": 38.5,
+    "assumed_annual_energy_gwh": 655.0,
+    "energy_yield_method": "WAsP with long-term correction; P50 net yield after wake and availability losses",
+    "noise_limit_dba": 40.0,
+    "minimum_setback_m": 2000,
+    "connection_voltage_kv": 220.0,
+    "network_service_provider": "AusNet Services",
+    "connection_substation_name": "Bulgana 220 kV substation (on-site — wind farm anchors this substation)",
+    "connection_substation_capacity_mva": 1000.0,
+    "connection_distance_km": 1.0,
+    "connection_distance_note": "Essentially on-site — Bulgana Green Power Hub is adjacent to the Bulgana 220 kV substation.",
+    "connection_augmentation": "Minimal — Bulgana substation was purpose-built as part of this project, then expanded for Golden Plains and Berrybank.",
+    "notes": "194 MW (56 x 3.45 MW Vestas V126), near Ararat, Western Victoria. Developer: Vena Energy. VIC EES approved 2018. Now operating. The Bulgana substation created by this project became the anchor connection point for the entire Western Victoria Wind Farm Zone."
+  }
 }

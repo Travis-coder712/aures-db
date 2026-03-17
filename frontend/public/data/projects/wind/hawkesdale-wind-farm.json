@@ -32,7 +32,7 @@
       "date_precision": "year",
       "event_type": "planning_submitted",
       "title": "EPBC Referral 2005/2140",
-      "detail": "Hawkesdale Wind Farm \u2014 Not Controlled Action",
+      "detail": "Hawkesdale Wind Farm — Not Controlled Action",
       "sources": []
     },
     {
@@ -87,5 +87,32 @@
       "date": "2026-03-12",
       "source_tier": 1
     }
-  ]
+  ],
+  "eis_specs": {
+    "document_title": "Hawkesdale Wind Farm Environment Effects Statement (VIC DEECA EES)",
+    "document_url": "https://www.planning.vic.gov.au/schemes-and-amendments/statewide-activities/environment-effects-statements/current-and-completed-ees/hawkesdale-wind-farm",
+    "document_year": 2020,
+    "turbine_model": "Vestas V150-4.2 MW",
+    "turbine_count": 21,
+    "turbine_rated_power_mw": 4.2,
+    "hub_height_m": 125.0,
+    "hub_height_note": "Standard 125 m hub for V150-4.2 on SW VIC coastal plains near Warrnambool",
+    "rotor_diameter_m": 150.0,
+    "wind_speed_mean_ms": 8.0,
+    "wind_speed_height_m": 125.0,
+    "wind_speed_period": "Mean annual wind speed at hub height; Hawkesdale, SW Victoria near Warrnambool",
+    "assumed_capacity_factor_pct": 37.0,
+    "assumed_annual_energy_gwh": 291.0,
+    "energy_yield_method": "WAsP modelling; P50 net yield",
+    "noise_limit_dba": 40.0,
+    "minimum_setback_m": 2000,
+    "connection_voltage_kv": 66.0,
+    "network_service_provider": "AusNet Services",
+    "connection_substation_name": "Hawkesdale 66/22 kV substation (new on-site), SW Victoria",
+    "connection_substation_capacity_mva": 150.0,
+    "connection_distance_km": 8.0,
+    "connection_distance_note": "~8 km of 66 kV line to AusNet Services SW Victoria 66 kV network near Hawkesdale.",
+    "connection_augmentation": "New 66 kV connection to AusNet Services. Modest augmentation for 90 MW project.",
+    "notes": "90 MW (21 x 4.2 MW Vestas V150), near Hawkesdale, SW Victoria near Warrnambool. Developer: Pacific Hydro (PowAR). VIC EES approved 2020. Now operating. SW VIC coastal plains provide good wind resource."
+  }
 }

@@ -79,5 +79,32 @@
       "date": "2026-01-30",
       "source_tier": 1
     }
-  ]
+  ],
+  "eis_specs": {
+    "document_title": "Yendon Wind Farm Environment Effects Statement (VIC DEECA EES)",
+    "document_url": "https://www.planning.vic.gov.au/schemes-and-amendments/statewide-activities/environment-effects-statements/current-and-completed-ees/yendon-wind-farm",
+    "document_year": 2019,
+    "turbine_model": "Vestas V150-4.2 MW",
+    "turbine_count": 34,
+    "turbine_rated_power_mw": 4.2,
+    "hub_height_m": 125.0,
+    "hub_height_note": "Standard 125 m hub for V150-4.2 on Central VIC terrain near Ballarat",
+    "rotor_diameter_m": 150.0,
+    "wind_speed_mean_ms": 7.8,
+    "wind_speed_height_m": 125.0,
+    "wind_speed_period": "Mean annual wind speed at hub height; Yendon/Buninyong area near Ballarat, Central Victoria",
+    "assumed_capacity_factor_pct": 35.5,
+    "assumed_annual_energy_gwh": 442.0,
+    "energy_yield_method": "WAsP modelling; P50 net yield",
+    "noise_limit_dba": 40.0,
+    "minimum_setback_m": 2000,
+    "connection_voltage_kv": 66.0,
+    "network_service_provider": "AusNet Services",
+    "connection_substation_name": "Yendon 66/22 kV substation (new on-site), near Ballarat VIC",
+    "connection_substation_capacity_mva": 200.0,
+    "connection_distance_km": 5.0,
+    "connection_distance_note": "~5 km of 66 kV connection to AusNet Services Ballarat-area 66 kV network.",
+    "connection_augmentation": "AusNet 66 kV network upgrade near Ballarat. 66 kV connection appropriate for 142 MW given local network capacity.",
+    "notes": "142 MW (34 x 4.2 MW Vestas V150), near Yendon/Buninyong, Central Victoria (east of Ballarat). Developer: Pacific Hydro (PowAR). VIC EES approved 2019. Now operating. 66 kV connection reflects existing AusNet infrastructure in the Ballarat area."
+  }
 }

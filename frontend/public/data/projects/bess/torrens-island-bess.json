@@ -59,7 +59,7 @@
       "date_precision": "day",
       "event_type": "stakeholder_issue",
       "title": "First AEMO minimum system load direction",
-      "detail": "AEMO directed Torrens Island BESS to charge under minimum system load protocols \u2014 first time a BESS was subject to MSL directions in the NEM.",
+      "detail": "AEMO directed Torrens Island BESS to charge under minimum system load protocols — first time a BESS was subject to MSL directions in the NEM.",
       "sources": []
     },
     {
@@ -122,5 +122,30 @@
       "date": "2026-01-30",
       "source_tier": 1
     }
-  ]
+  ],
+  "eis_specs": {
+    "document_title": "Torrens Island BESS Development Application (SA EPA)",
+    "document_url": "https://www.epa.sa.gov.au/",
+    "document_year": 2021,
+    "cell_chemistry": "LFP",
+    "cell_chemistry_full": "Lithium Iron Phosphate (LiFePO4)",
+    "cell_supplier": "CATL (explicitly confirmed in supplier records)",
+    "cell_country_of_manufacture": "China",
+    "inverter_supplier": "SMA Solar Technology",
+    "inverter_model": "Sunny Central Storage 3600 UP-XT",
+    "inverter_country_of_manufacture": "Germany",
+    "pcs_type": "grid_following",
+    "round_trip_efficiency_pct": 88.5,
+    "round_trip_efficiency_ac": 84.0,
+    "duration_hours": 1.0,
+    "connection_voltage_kv": 275.0,
+    "transformer_mva": 275.0,
+    "network_service_provider": "ElectraNet",
+    "connection_substation_name": "Torrens Island 275/66 kV substation (former power station, on-site)",
+    "connection_substation_capacity_mva": 1200.0,
+    "connection_distance_km": 0.0,
+    "connection_distance_note": "On-site — at the former Torrens Island Power Station site, Port River, near Adelaide CBD.",
+    "connection_augmentation": "Minimal — former 480 MW gas plant infrastructure reused. ElectraNet Torrens Island 275/66 kV substation retained and adapted. Strategic location close to Adelaide CBD load centre.",
+    "notes": "250 MW / 250 MWh (1-hour) BESS at former Torrens Island Power Station, Port River, Adelaide SA. Developer: AGL Energy. Technology: Wartsila Quantum (CATL LFP cells). Inverter: SMA Sunny Central Storage 3600 UP-XT. EPC: Wartsila. SA development approval 2021. Now operating. Excellent brownfield grid connection at 275 kV. Strategic SA firming near Adelaide."
+  }
 }

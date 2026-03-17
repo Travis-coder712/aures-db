@@ -67,5 +67,30 @@
       "date": "2026-01-30",
       "source_tier": 1
     }
-  ]
+  ],
+  "eis_specs": {
+    "document_title": "Western Downs BESS EIS — Coordinator-General's Report (QLD DSDILGP)",
+    "document_url": "https://www.dsdilgp.qld.gov.au/our-work/major-projects/energy-projects/western-downs-battery-energy-storage-system",
+    "document_year": 2021,
+    "cell_chemistry": "LFP",
+    "cell_chemistry_full": "Lithium Iron Phosphate (LiFePO4)",
+    "cell_supplier": "CATL / Tesla (Tesla Gigafactory)",
+    "cell_country_of_manufacture": "United States / China",
+    "inverter_supplier": "Tesla",
+    "inverter_model": "Megapack",
+    "inverter_country_of_manufacture": "United States",
+    "pcs_type": "grid_forming",
+    "round_trip_efficiency_pct": 90.0,
+    "round_trip_efficiency_ac": 86.0,
+    "duration_hours": 1.0,
+    "connection_voltage_kv": 275.0,
+    "transformer_mva": 560.0,
+    "network_service_provider": "Powerlink Queensland",
+    "connection_substation_name": "Western Downs 275 kV substation (new Powerlink connection point), QLD",
+    "connection_substation_capacity_mva": 1000.0,
+    "connection_distance_km": 5.0,
+    "connection_distance_note": "~5 km of 275 kV connection to new Powerlink Western Downs 275 kV substation, near Chinchilla/Dalby, QLD.",
+    "connection_augmentation": "New Powerlink 275 kV connection in Western Downs. Substation and transmission corridor upgrades to accommodate battery plus multiple adjacent solar/wind projects (QLD CIS portfolio).",
+    "notes": "510 MW / 510 MWh (1-hour) BESS, Western Downs, QLD. Developer: Western Downs BESS (Origin Energy). Technology: Tesla Megapack (LFP, grid-forming). EPC: UGL (CIMIC). QLD EIS approved 2021. Commissioning 2025. Grid-forming provides virtual inertia to QLD grid. QLD LTESA contract holder. Powerlink 275 kV connection in Western Downs renewable energy cluster."
+  }
 }

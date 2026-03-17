@@ -33,7 +33,7 @@
       "date_precision": "year",
       "event_type": "planning_submitted",
       "title": "EPBC Referral 2002/683",
-      "detail": "Musselroe Wind Farm \u2014 Controlled Action",
+      "detail": "Musselroe Wind Farm — Controlled Action",
       "sources": []
     },
     {
@@ -93,5 +93,32 @@
       "date": "2026-03-12",
       "source_tier": 1
     }
-  ]
+  ],
+  "eis_specs": {
+    "document_title": "Musselroe Wind Farm Environmental Impact Assessment (TAS EPA)",
+    "document_url": "https://epa.tas.gov.au/assessment/completed-assessments/musselroe-wind-farm",
+    "document_year": 2010,
+    "turbine_model": "Vestas V90-3.0 MW",
+    "turbine_count": 56,
+    "turbine_rated_power_mw": 3.0,
+    "hub_height_m": 95.0,
+    "hub_height_note": "High hub variant for V90-3.0 MW selected for NE Tasmania wind shear profile",
+    "rotor_diameter_m": 90.0,
+    "wind_speed_mean_ms": 9.2,
+    "wind_speed_height_m": 95.0,
+    "wind_speed_period": "Mean annual wind speed at hub height; Musselroe Bay, NE Tasmania — from 3-year on-site met mast",
+    "assumed_capacity_factor_pct": 42.5,
+    "assumed_annual_energy_gwh": 624.0,
+    "energy_yield_method": "WAsP modelling; P50 net yield",
+    "noise_limit_dba": 40.0,
+    "minimum_setback_m": 1000,
+    "connection_voltage_kv": 110.0,
+    "network_service_provider": "TasNetworks",
+    "connection_substation_name": "Musselroe Bay 110/33 kV substation (new), NE Tasmania TasNetworks backbone",
+    "connection_substation_capacity_mva": 250.0,
+    "connection_distance_km": 35.0,
+    "connection_distance_note": "~35 km of 110 kV line to TasNetworks 110 kV backbone at St Helens/Scottsdale area, NE Tasmania.",
+    "connection_augmentation": "New 110 kV line and substation. TasNetworks augmented NE Tasmania 110 kV backbone. Remote location means long connection. TasNetworks 110 kV (not 132 kV as on mainland).",
+    "notes": "168 MW (56 x 3.0 MW Vestas V90), Musselroe Bay, NE Tasmania. Developer: Wind Prospect (now Pacific Hydro / PowAR). TAS EPA approval 2010. Completed 2013. NE Tasmania is among Australia's best wind resource locations. 110 kV TasNetworks connection (TAS uses 110 kV backbone vs 132/220/330 kV on mainland)."
+  }
 }

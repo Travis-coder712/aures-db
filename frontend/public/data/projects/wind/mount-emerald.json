@@ -78,5 +78,32 @@
       "date": "2026-01-30",
       "source_tier": 1
     }
-  ]
+  ],
+  "eis_specs": {
+    "document_title": "Mount Emerald Wind Farm EIS — Coordinator-General's Report (QLD DSDILGP)",
+    "document_url": "https://www.dsdilgp.qld.gov.au/our-work/major-projects/energy-projects/mount-emerald-wind-farm",
+    "document_year": 2013,
+    "turbine_model": "Vestas V117-3.45 MW",
+    "turbine_count": 52,
+    "turbine_rated_power_mw": 3.47,
+    "hub_height_m": 91.5,
+    "hub_height_note": "Standard 91.5 m hub for V117-3.45 MW on the Atherton Tablelands QLD",
+    "rotor_diameter_m": 117.0,
+    "wind_speed_mean_ms": 8.2,
+    "wind_speed_height_m": 91.5,
+    "wind_speed_period": "Mean annual wind speed at hub height; Mount Emerald, Atherton Tablelands, Far North QLD",
+    "assumed_capacity_factor_pct": 36.5,
+    "assumed_annual_energy_gwh": 578.0,
+    "energy_yield_method": "WAsP modelling; P50 net yield",
+    "noise_limit_dba": 37.0,
+    "minimum_setback_m": 1500,
+    "connection_voltage_kv": 132.0,
+    "network_service_provider": "Powerlink Queensland",
+    "connection_substation_name": "Mount Emerald 132/33 kV substation (new on-site), Powerlink Tablelands 132 kV network, Far North QLD",
+    "connection_substation_capacity_mva": 250.0,
+    "connection_distance_km": 20.0,
+    "connection_distance_note": "~20 km of 132 kV line to Powerlink Tablelands 132 kV network, Far North QLD.",
+    "connection_augmentation": "Powerlink Far North QLD 132 kV network reinforcement. Mount Emerald and adjacent Kaban share connection infrastructure. Both required combined network upgrade.",
+    "notes": "181 MW (52 x 3.45 MW Vestas V117), Mount Emerald, Atherton Tablelands, Far North QLD (near Cairns). Developer: Ratch Australia. QLD EIS approved 2013. Now operating (2018). 132 kV Powerlink connection — constrained by the remote Far North QLD grid. Adjacent to 152 MW Kaban Wind Farm."
+  }
 }
