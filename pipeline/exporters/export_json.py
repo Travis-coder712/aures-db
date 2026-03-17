@@ -42,7 +42,8 @@ def fetch_project_summary(conn, project_id):
         SELECT id, name, technology, status, capacity_mw, storage_mwh,
                state, current_developer, current_operator, rez, development_score,
                performance_score, data_confidence, confidence_score,
-               development_stage, capex_aud_m, capex_year, notable, first_seen
+               development_stage, capex_aud_m, capex_year, notable, first_seen,
+               zombie_flag
         FROM projects WHERE id = ?
     """, (project_id,)).fetchone()
     if not row:
@@ -1491,7 +1492,7 @@ def export_scheme_tracker(conn):
          ]},
         {'id': 'cis-tender-4-nem-gen', 'scheme': 'CIS', 'round': 'Tender 4 — NEM Generation', 'type': 'generation', 'announced_date': '2025-10-09',
          'projects': [
-             {'name': 'Bell Bay Wind Farm', 'developer': 'Equis', 'technology': 'wind', 'capacity_mw': 224, 'state': 'TAS', 'project_id': 'bell-bay-wind-farm'},
+             {'name': 'Bell Bay Wind Farm', 'developer': 'Equis', 'technology': 'wind', 'capacity_mw': 224, 'state': 'TAS', 'project_id': None},
              {'name': 'Bendemeer Energy Hub', 'developer': 'Athena Energy Australia', 'technology': 'hybrid', 'capacity_mw': 252, 'storage_mwh': 300, 'state': 'NSW', 'project_id': 'bendemeer-renewable-energy-hub-solar-and-bess'},
              {'name': 'Bundey BESS and Solar', 'developer': 'Genaspi Energy Group', 'technology': 'hybrid', 'capacity_mw': 240, 'storage_mwh': 1200, 'state': 'SA', 'project_id': 'bundey-bess-and-solar-project'},
              {'name': "Carmody's Hill Wind Farm", 'developer': 'Aula Energy', 'technology': 'wind', 'capacity_mw': 247, 'state': 'SA', 'project_id': 'carmodys-hill-wind-farm'},

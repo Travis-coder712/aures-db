@@ -14,6 +14,7 @@
   "has_syncon": false,
   "has_statcom": false,
   "has_harmonic_filter": false,
+  "notable": "80 MW solar hybrid near Quorn, SA. Located in the northern Flinders Ranges.",
   "data_confidence": "low",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
@@ -21,6 +22,10 @@
   "confidence_score": "22",
   "development_stage": "epbc_submitted",
   "first_seen": "2022",
+  "coordinates": {
+    "lat": -32.35,
+    "lng": 138.04
+  },
   "timeline": [
     {
       "date": "2022",

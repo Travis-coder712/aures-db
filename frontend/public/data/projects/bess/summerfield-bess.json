@@ -22,13 +22,17 @@
   "confidence_score": "48",
   "development_stage": "epbc_submitted",
   "first_seen": "2023",
+  "coordinates": {
+    "lat": -34.16,
+    "lng": 139.45
+  },
   "timeline": [
     {
       "date": "2023",
       "date_precision": "year",
       "event_type": "planning_submitted",
       "title": "EPBC Referral 2023/09475",
-      "detail": "Summerfield BESS Project — Completed",
+      "detail": "Summerfield BESS Project \u2014 Completed",
       "sources": []
     },
     {
@@ -70,32 +74,8 @@
   "scheme_contracts": [],
   "cost_sources": [],
   "stakeholder_issues": [],
-  "sources": [
-    {
-      "title": "AEMO Generation Information Jan 2026",
-      "url": "https://aemo.com.au/energy-systems/electricity/national-electricity-market-nem/nem-forecasting-and-planning/forecasting-and-planning-data/generation-information",
-      "date": "2026-01-30",
-      "source_tier": 1
-    },
-    {
-      "title": "Summerfield Battery — Official",
-      "url": "https://www.summerfieldbattery.com.au/",
-      "source_tier": 2
-    },
-    {
-      "title": "Energy-Storage.News — CIP 960 MWh",
-      "url": "https://www.energy-storage.news/copenhagen-infrastructure-partners-kicks-off-960mwh-south-australia-battery-storage-project/",
-      "source_tier": 2
-    },
-    {
-      "title": "EPBC Referral 2023/09475",
-      "url": "https://epbcpublicportal.environment.gov.au/all-referrals/#!/referral/2023-09475",
-      "date": "2026-03-12",
-      "source_tier": 1
-    }
-  ],
   "eis_specs": {
-    "document_title": "Summerfield Battery Energy Storage System — EIS (SA)",
+    "document_title": "Summerfield Battery Energy Storage System \u2014 EIS (SA)",
     "document_url": "https://www.sa.gov.au/topics/planning-and-property/land-use-and-planning/development-assessment/major-developments",
     "document_year": 2023,
     "cell_chemistry": "LFP",
@@ -116,5 +96,29 @@
     "connection_distance_note": "~11 km of new 132 kV line from project to Hummocks Hill substation on ElectraNet SA mid-north 132 kV network; EIS connection study",
     "connection_augmentation": "New 132 kV feeder bay at Hummocks Hill. SA mid-north 132 kV network constrained; augmentation studies required for multiple wind/BESS projects in this corridor. ElectraNet REZ planning underway.",
     "notes": "240 MW / 532 MWh (~2.2-hour) BESS in South Australia. Copenhagen Infrastructure Partners (CIP). SA DPTI planning approval. LFP chemistry and grid-forming PCS specified in EIS. Connection to ElectraNet 132 kV network in SA mid-north. CIP's first utility-scale BESS in Australia."
-  }
+  },
+  "sources": [
+    {
+      "title": "AEMO Generation Information Jan 2026",
+      "url": "https://aemo.com.au/energy-systems/electricity/national-electricity-market-nem/nem-forecasting-and-planning/forecasting-and-planning-data/generation-information",
+      "date": "2026-01-30",
+      "source_tier": 1
+    },
+    {
+      "title": "Summerfield Battery \u2014 Official",
+      "url": "https://www.summerfieldbattery.com.au/",
+      "source_tier": 2
+    },
+    {
+      "title": "Energy-Storage.News \u2014 CIP 960 MWh",
+      "url": "https://www.energy-storage.news/copenhagen-infrastructure-partners-kicks-off-960mwh-south-australia-battery-storage-project/",
+      "source_tier": 2
+    },
+    {
+      "title": "EPBC Referral 2023/09475",
+      "url": "https://epbcpublicportal.environment.gov.au/all-referrals/#!/referral/2023-09475",
+      "date": "2026-03-12",
+      "source_tier": 1
+    }
+  ]
 }

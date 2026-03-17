@@ -82,31 +82,8 @@
   ],
   "cost_sources": [],
   "stakeholder_issues": [],
-  "sources": [
-    {
-      "title": "AEMO Generation Information Jan 2026",
-      "url": "https://aemo.com.au/energy-systems/electricity/national-electricity-market-nem/nem-forecasting-and-planning/forecasting-and-planning-data/generation-information",
-      "date": "2026-01-30",
-      "source_tier": 1
-    },
-    {
-      "title": "Pacific Blue — Clements Gap Battery",
-      "url": "https://www.pacificblue.com.au/our-energy-production/sites-in-development/clements-gap-battery",
-      "source_tier": 2
-    },
-    {
-      "title": "Energy Magazine — Clements Gap",
-      "url": "https://www.energymagazine.com.au/constuction-of-60mw-clements-gap-bess-underway/",
-      "source_tier": 2
-    },
-    {
-      "title": "RenewEconomy — Clements Gap",
-      "url": "https://reneweconomy.com.au/construction-begins-on-new-big-battery-next-to-one-of-australias-oldest-wind-farms/",
-      "source_tier": 2
-    }
-  ],
   "eis_specs": {
-    "document_title": "Clements Gap Battery Energy Storage System — EIS (SA)",
+    "document_title": "Clements Gap Battery Energy Storage System \u2014 EIS (SA)",
     "document_url": "https://www.sa.gov.au/topics/planning-and-property/land-use-and-planning/development-assessment/major-developments",
     "document_year": 2023,
     "cell_chemistry": "LFP",
@@ -125,8 +102,31 @@
     "connection_substation_name": "Clements Gap wind farm 132 kV substation (co-located)",
     "connection_substation_capacity_mva": 100.0,
     "connection_distance_km": 0.1,
-    "connection_distance_note": "Co-located with Clements Gap Wind Farm — shares the wind farm's existing 132 kV substation. Minimal internal cable only.",
+    "connection_distance_note": "Co-located with Clements Gap Wind Farm \u2014 shares the wind farm's existing 132 kV substation. Minimal internal cable only.",
     "connection_augmentation": "Minimal. BESS shares the wind farm's 132 kV connection. New BESS feeder bay only. Small 60 MW scale means no significant augmentation required beyond the existing wind farm connection.",
-    "notes": "60 MW / 120 MWh (2-hour) BESS co-located with Clements Gap Wind Farm, SA. Pacific Blue (SPIC China — State Power Investment Corporation). Chinese state-owned developer and supply chain. SA DPTI planning approval. Connection to ElectraNet 132 kV network at Clements Gap."
-  }
+    "notes": "60 MW / 120 MWh (2-hour) BESS co-located with Clements Gap Wind Farm, SA. Pacific Blue (SPIC China \u2014 State Power Investment Corporation). Chinese state-owned developer and supply chain. SA DPTI planning approval. Connection to ElectraNet 132 kV network at Clements Gap."
+  },
+  "sources": [
+    {
+      "title": "AEMO Generation Information Jan 2026",
+      "url": "https://aemo.com.au/energy-systems/electricity/national-electricity-market-nem/nem-forecasting-and-planning/forecasting-and-planning-data/generation-information",
+      "date": "2026-01-30",
+      "source_tier": 1
+    },
+    {
+      "title": "Pacific Blue \u2014 Clements Gap Battery",
+      "url": "https://www.pacificblue.com.au/our-energy-production/sites-in-development/clements-gap-battery",
+      "source_tier": 2
+    },
+    {
+      "title": "Energy Magazine \u2014 Clements Gap",
+      "url": "https://www.energymagazine.com.au/constuction-of-60mw-clements-gap-bess-underway/",
+      "source_tier": 2
+    },
+    {
+      "title": "RenewEconomy \u2014 Clements Gap",
+      "url": "https://reneweconomy.com.au/construction-begins-on-new-big-battery-next-to-one-of-australias-oldest-wind-farms/",
+      "source_tier": 2
+    }
+  ]
 }

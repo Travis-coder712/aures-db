@@ -22,13 +22,17 @@
   "development_stage": "epbc_approved",
   "capex_aud_m": 740.0,
   "first_seen": "2020",
+  "coordinates": {
+    "lat": -20.77,
+    "lng": 148.53
+  },
   "timeline": [
     {
       "date": "2020",
       "date_precision": "year",
       "event_type": "planning_submitted",
       "title": "EPBC Referral 2020/8772",
-      "detail": "Boulder Creek Wind Farm — Post-Approval",
+      "detail": "Boulder Creek Wind Farm \u2014 Post-Approval",
       "sources": []
     },
     {
@@ -49,7 +53,7 @@
       "date": "2024-10",
       "date_precision": "month",
       "event_type": "fid",
-      "title": "Financial close — A$740M",
+      "title": "Financial close \u2014 A$740M",
       "detail": "Squadron Energy reached financial close",
       "sources": []
     },
@@ -57,7 +61,7 @@
       "date": "2024-10-01",
       "date_precision": "month",
       "event_type": "notable",
-      "title": "Financial close — A$740M",
+      "title": "Financial close \u2014 A$740M",
       "detail": "Aula Energy and CS Energy 50:50 JV",
       "sources": []
     },
@@ -113,45 +117,6 @@
   ],
   "cost_sources": [],
   "stakeholder_issues": [],
-  "sources": [
-    {
-      "title": "AEMO Generation Information Jan 2026",
-      "url": "https://aemo.com.au/energy-systems/electricity/national-electricity-market-nem/nem-forecasting-and-planning/forecasting-and-planning-data/generation-information",
-      "date": "2026-01-30",
-      "source_tier": 1
-    },
-    {
-      "title": "GE Vernova — Boulder Creek",
-      "url": "https://www.gevernova.com/news/press-releases/ge-vernova-signs-agreement-supply-turbines-228-mw-boulder-creek-wind-farm-australia",
-      "source_tier": 2
-    },
-    {
-      "title": "Aula Energy — Financial Close",
-      "url": "https://www.aulaenergy.com/news/aula-energy-and-cs-energy-to-commence-construction-of-boulder-creek-wind-farm",
-      "source_tier": 2
-    },
-    {
-      "title": "CS Energy — Construction Start",
-      "url": "https://www.csenergy.com.au/news/construction-to-start-on-second-cs-energy-wind-project",
-      "source_tier": 2
-    },
-    {
-      "title": "DT Infrastructure — Boulder Creek",
-      "url": "https://dtinfrastructure.com.au/boulder-creek-wind-farm/",
-      "source_tier": 2
-    },
-    {
-      "title": "Boulder Creek Wind Farm — Official",
-      "url": "https://www.bouldercreekwindfarm.com/",
-      "source_tier": 2
-    },
-    {
-      "title": "EPBC Referral 2020/8772",
-      "url": "https://epbcpublicportal.environment.gov.au/all-referrals/#!/referral/2020-8772",
-      "date": "2026-03-12",
-      "source_tier": 1
-    }
-  ],
   "eis_specs": {
     "document_title": "Boulder Creek Wind Farm Environmental Impact Statement (QLD)",
     "document_url": "https://www.dsdilgp.qld.gov.au/industry/resources-and-energy/coordinated-projects/current-projects/boulder-creek-wind-farm",
@@ -178,5 +143,44 @@
     "connection_distance_note": "~19 km of new 132 kV line from project to Strathmore substation; EIS network connection study",
     "connection_augmentation": "Strathmore 132 kV substation augmentation required. New transformer bay and protection upgrades for 228 MW injection.",
     "notes": "Located near Townsville hinterland, QLD. 50:50 JV between Aula Energy and CS Energy. QLD Coordinated Project. Strong north-east Queensland wind resource."
-  }
+  },
+  "sources": [
+    {
+      "title": "AEMO Generation Information Jan 2026",
+      "url": "https://aemo.com.au/energy-systems/electricity/national-electricity-market-nem/nem-forecasting-and-planning/forecasting-and-planning-data/generation-information",
+      "date": "2026-01-30",
+      "source_tier": 1
+    },
+    {
+      "title": "GE Vernova \u2014 Boulder Creek",
+      "url": "https://www.gevernova.com/news/press-releases/ge-vernova-signs-agreement-supply-turbines-228-mw-boulder-creek-wind-farm-australia",
+      "source_tier": 2
+    },
+    {
+      "title": "Aula Energy \u2014 Financial Close",
+      "url": "https://www.aulaenergy.com/news/aula-energy-and-cs-energy-to-commence-construction-of-boulder-creek-wind-farm",
+      "source_tier": 2
+    },
+    {
+      "title": "CS Energy \u2014 Construction Start",
+      "url": "https://www.csenergy.com.au/news/construction-to-start-on-second-cs-energy-wind-project",
+      "source_tier": 2
+    },
+    {
+      "title": "DT Infrastructure \u2014 Boulder Creek",
+      "url": "https://dtinfrastructure.com.au/boulder-creek-wind-farm/",
+      "source_tier": 2
+    },
+    {
+      "title": "Boulder Creek Wind Farm \u2014 Official",
+      "url": "https://www.bouldercreekwindfarm.com/",
+      "source_tier": 2
+    },
+    {
+      "title": "EPBC Referral 2020/8772",
+      "url": "https://epbcpublicportal.environment.gov.au/all-referrals/#!/referral/2020-8772",
+      "date": "2026-03-12",
+      "source_tier": 1
+    }
+  ]
 }

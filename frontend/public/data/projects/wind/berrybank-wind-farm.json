@@ -80,14 +80,6 @@
   "scheme_contracts": [],
   "cost_sources": [],
   "stakeholder_issues": [],
-  "sources": [
-    {
-      "title": "AEMO Generation Information Jan 2026",
-      "url": "https://aemo.com.au/energy-systems/electricity/national-electricity-market-nem/nem-forecasting-and-planning/forecasting-and-planning-data/generation-information",
-      "date": "2026-01-30",
-      "source_tier": 1
-    }
-  ],
   "eis_specs": {
     "document_title": "Berrybank Wind Farm Environment Effects Statement (VIC DELWP EES)",
     "document_url": "https://www.planning.vic.gov.au/schemes-and-amendments/statewide-activities/environment-effects-statements/current-and-completed-ees/berrybank-wind-farm",
@@ -111,8 +103,16 @@
     "connection_substation_name": "Bulgana 220 kV substation (AusNet Services), near Ararat VIC",
     "connection_substation_capacity_mva": 1000.0,
     "connection_distance_km": 20.0,
-    "connection_distance_note": "~20 km of 220 kV to Bulgana 220 kV substation — same AusNet connection point as Bulgana Green Power Hub and Golden Plains.",
+    "connection_distance_note": "~20 km of 220 kV to Bulgana 220 kV substation \u2014 same AusNet connection point as Bulgana Green Power Hub and Golden Plains.",
     "connection_augmentation": "Bulgana substation augmented by AusNet to accommodate multiple large wind farms in the Western Victoria Wind Farm Zone.",
-    "notes": "281 MW (67 x 4.2 MW Vestas V136), near Rokewood/Inverleigh, Western Victoria. Part of the Western Victoria Wind Farm Zone alongside Golden Plains and Bulgana. VIC EES approved 2019. Now operating. Connects to Bulgana substation — shared 220 kV hub for multiple Western VIC wind farms."
-  }
+    "notes": "281 MW (67 x 4.2 MW Vestas V136), near Rokewood/Inverleigh, Western Victoria. Part of the Western Victoria Wind Farm Zone alongside Golden Plains and Bulgana. VIC EES approved 2019. Now operating. Connects to Bulgana substation \u2014 shared 220 kV hub for multiple Western VIC wind farms."
+  },
+  "sources": [
+    {
+      "title": "AEMO Generation Information Jan 2026",
+      "url": "https://aemo.com.au/energy-systems/electricity/national-electricity-market-nem/nem-forecasting-and-planning/forecasting-and-planning-data/generation-information",
+      "date": "2026-01-30",
+      "source_tier": 1
+    }
+  ]
 }

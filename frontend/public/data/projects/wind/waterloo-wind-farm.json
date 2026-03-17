@@ -73,14 +73,6 @@
   "scheme_contracts": [],
   "cost_sources": [],
   "stakeholder_issues": [],
-  "sources": [
-    {
-      "title": "AEMO Generation Information Jan 2026",
-      "url": "https://aemo.com.au/energy-systems/electricity/national-electricity-market-nem/nem-forecasting-and-planning/forecasting-and-planning-data/generation-information",
-      "date": "2026-01-30",
-      "source_tier": 1
-    }
-  ],
   "eis_specs": {
     "document_title": "Waterloo Wind Farm Environmental Statement (SA EPA / EPBC 2006/2906)",
     "document_url": "https://www.environment.gov.au/epbc/notices/search-notices/2006/2906",
@@ -93,7 +85,7 @@
     "rotor_diameter_m": 90.0,
     "wind_speed_mean_ms": 8.6,
     "wind_speed_height_m": 80.0,
-    "wind_speed_period": "Mean annual wind speed at hub height; Waterloo, Mid North SA near Clare Valley — from on-site met mast",
+    "wind_speed_period": "Mean annual wind speed at hub height; Waterloo, Mid North SA near Clare Valley \u2014 from on-site met mast",
     "assumed_capacity_factor_pct": 39.0,
     "assumed_annual_energy_gwh": 447.0,
     "energy_yield_method": "WAsP modelling; P50 net yield",
@@ -107,5 +99,13 @@
     "connection_distance_note": "~8 km of 66 kV connection to ElectraNet Waterloo 275/66 kV substation, Mid North SA.",
     "connection_augmentation": "New 66 kV connection to ElectraNet. Mid North SA 275 kV network is well-established. Modest augmentation for 131 MW scale.",
     "notes": "131 MW (44 x ~3.0 MW Vestas V90), near Waterloo, Mid North SA (Clare Valley area). Developer: TrustPower (NZ). SA EPA + EPBC approval 2006. Completed 2010. Mid North SA provides excellent wind resource. ElectraNet 275 kV connection."
-  }
+  },
+  "sources": [
+    {
+      "title": "AEMO Generation Information Jan 2026",
+      "url": "https://aemo.com.au/energy-systems/electricity/national-electricity-market-nem/nem-forecasting-and-planning/forecasting-and-planning-data/generation-information",
+      "date": "2026-01-30",
+      "source_tier": 1
+    }
+  ]
 }

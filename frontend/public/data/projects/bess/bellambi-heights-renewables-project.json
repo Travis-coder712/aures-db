@@ -67,31 +67,8 @@
   "scheme_contracts": [],
   "cost_sources": [],
   "stakeholder_issues": [],
-  "sources": [
-    {
-      "title": "AEMO Generation Information Jan 2026",
-      "url": "https://aemo.com.au/energy-systems/electricity/national-electricity-market-nem/nem-forecasting-and-planning/forecasting-and-planning-data/generation-information",
-      "date": "2026-01-30",
-      "source_tier": 1
-    },
-    {
-      "title": "Vena Energy — Bellambi Heights",
-      "url": "https://www.venaenergy.com.au/all_projects/bellambi-heights-bess/",
-      "source_tier": 2
-    },
-    {
-      "title": "NSW Planning Portal — Bellambi Heights",
-      "url": "https://www.planningportal.nsw.gov.au/major-projects/projects/bellambi-heights-battery-energy-storage-system",
-      "source_tier": 2
-    },
-    {
-      "title": "RenewEconomy — Vena BESS-only pivot",
-      "url": "https://reneweconomy.com.au/singapores-vena-ditches-huge-big-solar-plans-opts-for-big-battery-only-in-central-nsw/",
-      "source_tier": 2
-    }
-  ],
   "eis_specs": {
-    "document_title": "Bellambi Heights Renewables Project — SSD EIS (NSW)",
+    "document_title": "Bellambi Heights Renewables Project \u2014 SSD EIS (NSW)",
     "document_url": "https://www.planningportal.nsw.gov.au/major-projects/projects/bellambi-heights-renewables-project",
     "document_year": 2023,
     "cell_chemistry": "LFP",
@@ -99,7 +76,7 @@
     "cell_supplier": "BYD",
     "cell_country_of_manufacture": "China",
     "inverter_supplier": "BYD",
-    "inverter_model": "BYD MC-Cube — integrated PCS",
+    "inverter_model": "BYD MC-Cube \u2014 integrated PCS",
     "inverter_country_of_manufacture": "China",
     "pcs_type": "grid_following",
     "round_trip_efficiency_pct": 88.0,
@@ -114,5 +91,28 @@
     "connection_distance_note": "~1.5 km of new 330 kV cable from project to Bellambi Terminal substation; EIS Section 8",
     "connection_augmentation": "New 330 kV cable and feeder bay at Bellambi Terminal. Bellambi is a major 330 kV hub serving the Illawarra; existing capacity sufficient. Low augmentation cost given proximity to 330 kV terminal.",
     "notes": "408 MW / 570 MWh (~1.4-hour) BESS at Bellambi, Illawarra NSW. Vena Energy. NSW SSD approval. BYD MC-Cube containerised LFP system. Connection to the 330 kV TransGrid network at Bellambi substation. Co-located with solar generation. Shorter duration reflects merchant arbitrage focus."
-  }
+  },
+  "sources": [
+    {
+      "title": "AEMO Generation Information Jan 2026",
+      "url": "https://aemo.com.au/energy-systems/electricity/national-electricity-market-nem/nem-forecasting-and-planning/forecasting-and-planning-data/generation-information",
+      "date": "2026-01-30",
+      "source_tier": 1
+    },
+    {
+      "title": "Vena Energy \u2014 Bellambi Heights",
+      "url": "https://www.venaenergy.com.au/all_projects/bellambi-heights-bess/",
+      "source_tier": 2
+    },
+    {
+      "title": "NSW Planning Portal \u2014 Bellambi Heights",
+      "url": "https://www.planningportal.nsw.gov.au/major-projects/projects/bellambi-heights-battery-energy-storage-system",
+      "source_tier": 2
+    },
+    {
+      "title": "RenewEconomy \u2014 Vena BESS-only pivot",
+      "url": "https://reneweconomy.com.au/singapores-vena-ditches-huge-big-solar-plans-opts-for-big-battery-only-in-central-nsw/",
+      "source_tier": 2
+    }
+  ]
 }

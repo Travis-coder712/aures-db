@@ -281,7 +281,7 @@ export default function BESSCapex() {
                 <Scatter
                   data={scatterData}
                   onClick={(data: any) => {
-                    if (data?.id) navigate(`/projects/bess/${data.id}?from=analytics/bess-capex&fromLabel=Back to BESS Capex`)
+                    if (data?.id) navigate(`/projects/${data.id}?from=analytics/bess-capex&fromLabel=Back to BESS Capex`)
                   }}
                   cursor="pointer"
                   shape={
@@ -452,7 +452,7 @@ export default function BESSCapex() {
                 .map(p => (
                 <tr key={p.id} className="border-b border-[var(--border)] hover:bg-[var(--bg-primary)]/50">
                   <td className="p-3">
-                    <Link to={`/projects/bess/${p.id}`} className="text-blue-400 hover:text-blue-300">
+                    <Link to={`/projects/${p.id}`} className="text-blue-400 hover:text-blue-300">
                       {p.name}
                     </Link>
                   </td>

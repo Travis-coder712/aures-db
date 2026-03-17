@@ -74,26 +74,8 @@
   ],
   "cost_sources": [],
   "stakeholder_issues": [],
-  "sources": [
-    {
-      "title": "AEMO Generation Information Jan 2026",
-      "url": "https://aemo.com.au/energy-systems/electricity/national-electricity-market-nem/nem-forecasting-and-planning/forecasting-and-planning-data/generation-information",
-      "date": "2026-01-30",
-      "source_tier": 1
-    },
-    {
-      "title": "Lightsource bp — Woolooga",
-      "url": "https://lightsourcebp.com/news/australia-lightsource-bp-reaches-major-milestone-on-solar-and-battery-projects-to-deliver-firmed-renewable-energy-solutions/",
-      "source_tier": 2
-    },
-    {
-      "title": "INTEC — Woolooga EPC",
-      "url": "https://in-tecenergy.com/news/intec-provides-bess-epc-for-lightsource-bp/",
-      "source_tier": 2
-    }
-  ],
   "eis_specs": {
-    "document_title": "Woolooga Battery Energy Storage System — EIS (QLD)",
+    "document_title": "Woolooga Battery Energy Storage System \u2014 EIS (QLD)",
     "document_url": "https://www.dsdilgp.qld.gov.au/industry/resources-and-energy/coordinated-projects/current-projects/woolooga-bess",
     "document_year": 2023,
     "cell_chemistry": "LFP",
@@ -101,7 +83,7 @@
     "cell_supplier": "Fluence / CATL",
     "cell_country_of_manufacture": "China",
     "inverter_supplier": "Fluence",
-    "inverter_model": "Fluence Gridstack Pro — integrated PCS",
+    "inverter_model": "Fluence Gridstack Pro \u2014 integrated PCS",
     "inverter_country_of_manufacture": "USA (designed) / China (manufactured)",
     "pcs_type": "grid_following",
     "round_trip_efficiency_pct": 87.5,
@@ -113,8 +95,26 @@
     "connection_substation_name": "Woolooga substation 132 kV (co-located with solar farm)",
     "connection_substation_capacity_mva": 280.0,
     "connection_distance_km": 0.5,
-    "connection_distance_note": "Co-located with Woolooga Solar Farm — shares existing 132 kV connection substation. ~500 m internal cable only.",
+    "connection_distance_note": "Co-located with Woolooga Solar Farm \u2014 shares existing 132 kV connection substation. ~500 m internal cable only.",
     "connection_augmentation": "Minimal line works. New BESS feeder bay at existing Woolooga solar farm substation. Combined 422 MW site (solar + BESS) may trigger augmentation of the 132 kV line to Gympie/Kingaroy area substations.",
     "notes": "222 MW / 593 MWh (~2.7-hour) BESS near Woolooga, QLD. Lightsource bp. QLD EIS. Fluence Gridstack Pro system with CATL LFP cells. Co-located with Lightsource bp's Woolooga Solar Farm. Connection to Powerlink 132 kV network."
-  }
+  },
+  "sources": [
+    {
+      "title": "AEMO Generation Information Jan 2026",
+      "url": "https://aemo.com.au/energy-systems/electricity/national-electricity-market-nem/nem-forecasting-and-planning/forecasting-and-planning-data/generation-information",
+      "date": "2026-01-30",
+      "source_tier": 1
+    },
+    {
+      "title": "Lightsource bp \u2014 Woolooga",
+      "url": "https://lightsourcebp.com/news/australia-lightsource-bp-reaches-major-milestone-on-solar-and-battery-projects-to-deliver-firmed-renewable-energy-solutions/",
+      "source_tier": 2
+    },
+    {
+      "title": "INTEC \u2014 Woolooga EPC",
+      "url": "https://in-tecenergy.com/news/intec-provides-bess-epc-for-lightsource-bp/",
+      "source_tier": 2
+    }
+  ]
 }

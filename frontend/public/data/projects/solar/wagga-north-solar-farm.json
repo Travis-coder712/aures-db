@@ -13,12 +13,17 @@
   "has_syncon": false,
   "has_statcom": false,
   "has_harmonic_filter": false,
+  "notable": "49 MW solar farm north of Wagga Wagga, NSW. Lightsource bp project.",
   "data_confidence": "low",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "1514",
   "confidence_score": "17",
   "first_seen": "2026-03-12",
+  "coordinates": {
+    "lat": -35.06,
+    "lng": 147.37
+  },
   "timeline": [
     {
       "date": "2026-03-12",

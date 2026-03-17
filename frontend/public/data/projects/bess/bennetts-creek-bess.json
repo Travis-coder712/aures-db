@@ -14,12 +14,17 @@
   "has_syncon": false,
   "has_statcom": false,
   "has_harmonic_filter": false,
+  "notable": "110 MW / 220 MWh BESS near Gloucester, NSW. AGL Energy project supporting Hunter Valley grid stability.",
   "data_confidence": "low",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "1956",
   "confidence_score": "22",
   "first_seen": "2026-03-12",
+  "coordinates": {
+    "lat": -32.04,
+    "lng": 151.91
+  },
   "timeline": [
     {
       "date": "2026-03-12",
@@ -51,14 +56,6 @@
   "scheme_contracts": [],
   "cost_sources": [],
   "stakeholder_issues": [],
-  "sources": [
-    {
-      "title": "AEMO Generation Information Jan 2026",
-      "url": "https://aemo.com.au/energy-systems/electricity/national-electricity-market-nem/nem-forecasting-and-planning/forecasting-and-planning-data/generation-information",
-      "date": "2026-01-30",
-      "source_tier": 1
-    }
-  ],
   "eis_specs": {
     "document_title": "Bennetts Creek BESS Planning Permit (VIC DEECA)",
     "document_url": "https://www.planning.vic.gov.au/",
@@ -83,5 +80,13 @@
     "connection_distance_note": "~8 km of 66 kV connection to AusNet Services 66 kV network, Western Victoria.",
     "connection_augmentation": "New 66 kV connection to AusNet Services. Bennetts Creek area in Western VIC has growing renewable cluster requiring AusNet network upgrades.",
     "notes": "100 MW / 223 MWh (~2.2-hour) BESS, Bennetts Creek, Western Victoria. Developer: Tilt Renewables. Technology: Wartsila Quantum (LFP, CATL cells). EPC: Zenviron / Wartsila. VIC planning approval 2022. Under construction 2024. AusNet 66 kV connection. Co-located with adjacent wind farm in Western VIC renewable precinct."
-  }
+  },
+  "sources": [
+    {
+      "title": "AEMO Generation Information Jan 2026",
+      "url": "https://aemo.com.au/energy-systems/electricity/national-electricity-market-nem/nem-forecasting-and-planning/forecasting-and-planning-data/generation-information",
+      "date": "2026-01-30",
+      "source_tier": 1
+    }
+  ]
 }

@@ -667,7 +667,7 @@ function ProjectRow({ project: p }: { project: SchemeTrackerProject }) {
       <td className="p-3">
         {p.project_id ? (
           <Link
-            to={`/projects/${p.technology === 'hybrid' ? 'solar' : p.technology}/${p.project_id}?from=intelligence/scheme-tracker&fromLabel=Back to Scheme Tracker`}
+            to={`/projects/${p.project_id}?from=intelligence/scheme-tracker&fromLabel=Back to Scheme Tracker`}
             className="text-blue-400 hover:text-blue-300 text-xs"
           >
             {p.name}

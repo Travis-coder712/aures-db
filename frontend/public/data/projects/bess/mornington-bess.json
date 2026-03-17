@@ -21,6 +21,10 @@
   "aemo_gen_info_id": "1945",
   "confidence_score": "51",
   "first_seen": "2022-01-01",
+  "coordinates": {
+    "lat": -38.22,
+    "lng": 145.04
+  },
   "timeline": [
     {
       "date": "2022-01-01",
@@ -78,31 +82,8 @@
   "scheme_contracts": [],
   "cost_sources": [],
   "stakeholder_issues": [],
-  "sources": [
-    {
-      "title": "AEMO Generation Information Jan 2026",
-      "url": "https://aemo.com.au/energy-systems/electricity/national-electricity-market-nem/nem-forecasting-and-planning/forecasting-and-planning-data/generation-information",
-      "date": "2026-01-30",
-      "source_tier": 1
-    },
-    {
-      "title": "Mornington BESS — Official",
-      "url": "https://morningtonbess.com.au/",
-      "source_tier": 2
-    },
-    {
-      "title": "AusNet — Mornington BESS",
-      "url": "https://www.ausnetservices.com.au/projects-and-innovation/battery-storage/mornington-battery-energy-storage-system",
-      "source_tier": 2
-    },
-    {
-      "title": "RenewablesNow — Commissioning",
-      "url": "https://renewablesnow.com/news/valents-240-mw-mornington-battery-enters-commissioning-in-victoria-1283358/",
-      "source_tier": 2
-    }
-  ],
   "eis_specs": {
-    "document_title": "Mornington Battery Energy Storage System — EES (VIC)",
+    "document_title": "Mornington Battery Energy Storage System \u2014 EES (VIC)",
     "document_url": "https://www.planning.vic.gov.au/permits-and-applications/state-projects",
     "document_year": 2023,
     "cell_chemistry": "LFP",
@@ -110,7 +91,7 @@
     "cell_supplier": "BYD",
     "cell_country_of_manufacture": "China",
     "inverter_supplier": "BYD",
-    "inverter_model": "BYD MC-Cube — integrated PCS",
+    "inverter_model": "BYD MC-Cube \u2014 integrated PCS",
     "inverter_country_of_manufacture": "China",
     "pcs_type": "grid_following",
     "round_trip_efficiency_pct": 88.0,
@@ -123,7 +104,30 @@
     "connection_substation_capacity_mva": 120.0,
     "connection_distance_km": 6.0,
     "connection_distance_note": "~6 km of new 66 kV line to Mornington substation on the AusNet Mornington Peninsula 66 kV network; EIS connection study",
-    "connection_augmentation": "IMPORTANT: 66 kV connection for 240 MW is highly constraining. The Mornington Peninsula 66 kV network is primarily a distribution network — connecting 240 MW storage here requires significant augmentation of 66 kV infrastructure. Risk of requiring connection voltage upgrade to 220 kV. AusNet augmentation study results critical to project economics.",
+    "connection_augmentation": "IMPORTANT: 66 kV connection for 240 MW is highly constraining. The Mornington Peninsula 66 kV network is primarily a distribution network \u2014 connecting 240 MW storage here requires significant augmentation of 66 kV infrastructure. Risk of requiring connection voltage upgrade to 220 kV. AusNet augmentation study results critical to project economics.",
     "notes": "240 MW / 480 MWh (2-hour) BESS on Mornington Peninsula, VIC. Valent Energy (Gaw Capital / BW ESS). Victorian planning permit. BYD MC-Cube containerised LFP system. Connection to AusNet Services 66 kV Mornington Peninsula network."
-  }
+  },
+  "sources": [
+    {
+      "title": "AEMO Generation Information Jan 2026",
+      "url": "https://aemo.com.au/energy-systems/electricity/national-electricity-market-nem/nem-forecasting-and-planning/forecasting-and-planning-data/generation-information",
+      "date": "2026-01-30",
+      "source_tier": 1
+    },
+    {
+      "title": "Mornington BESS \u2014 Official",
+      "url": "https://morningtonbess.com.au/",
+      "source_tier": 2
+    },
+    {
+      "title": "AusNet \u2014 Mornington BESS",
+      "url": "https://www.ausnetservices.com.au/projects-and-innovation/battery-storage/mornington-battery-energy-storage-system",
+      "source_tier": 2
+    },
+    {
+      "title": "RenewablesNow \u2014 Commissioning",
+      "url": "https://renewablesnow.com/news/valents-240-mw-mornington-battery-enters-commissioning-in-victoria-1283358/",
+      "source_tier": 2
+    }
+  ]
 }

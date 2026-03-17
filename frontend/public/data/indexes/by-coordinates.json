@@ -183,6 +183,18 @@
     "developer": "Quinbrook Infrastructure Partners"
   },
   {
+    "id": "western-downs-battery-stage-1-and-2",
+    "name": "Western Downs Battery - Stage 1 And 2",
+    "technology": "bess",
+    "status": "commissioning",
+    "capacity_mw": 510.0,
+    "storage_mwh": 509.6,
+    "state": "QLD",
+    "lat": -26.75,
+    "lng": 150.63,
+    "developer": "Western Downs BESS Pty Ltd as trustee for Western Downs BESS Trust"
+  },
+  {
     "id": "wambo-wind-farm",
     "name": "Wambo Wind Farm",
     "technology": "wind",
@@ -204,6 +216,18 @@
     "lat": -32.3715,
     "lng": 150.978,
     "developer": "AGL Energy"
+  },
+  {
+    "id": "tomago-bess",
+    "name": "Tomago BESS",
+    "technology": "bess",
+    "status": "construction",
+    "capacity_mw": 500.0,
+    "storage_mwh": 2000.36,
+    "state": "NSW",
+    "lat": -32.865,
+    "lng": 151.612,
+    "developer": "AGL"
   },
   {
     "id": "eraring-battery",
@@ -444,6 +468,18 @@
     "developer": "HMC Capital (ex-Neoen)"
   },
   {
+    "id": "blind-creek-solar-farm-and-battery-energy-storage-system",
+    "name": "Blind Creek Solar Farm and Battery Energy Storage System",
+    "technology": "hybrid",
+    "status": "construction",
+    "capacity_mw": 300.0,
+    "storage_mwh": 486.0,
+    "state": "NSW",
+    "lat": -32.51,
+    "lng": 149.09,
+    "developer": "Ms BCSF Holdings Pty Ltd as trustee for the Blind Creek Solar Farm Trust"
+  },
+  {
     "id": "bogong-mackay",
     "name": "Bogong / Mackay",
     "technology": "pumped_hydro",
@@ -453,6 +489,18 @@
     "lat": -36.805471,
     "lng": 147.227845,
     "developer": "AGL Hydro Partnership"
+  },
+  {
+    "id": "bulabul-bess-1",
+    "name": "Bulabul BESS 1",
+    "technology": "bess",
+    "status": "construction",
+    "capacity_mw": 300.0,
+    "storage_mwh": 600.0,
+    "state": "NSW",
+    "lat": -32.35,
+    "lng": 148.78,
+    "developer": "Ampyr Australia (AGP Singapore)"
   },
   {
     "id": "mortlake-battery",
@@ -579,6 +627,29 @@
     "developer": "Snowtown Wind Farm Stage 2 Pty Ltd"
   },
   {
+    "id": "carmodys-hill-wind-farm",
+    "name": "Carmodys Hill Wind Farm",
+    "technology": "wind",
+    "status": "construction",
+    "capacity_mw": 256.0,
+    "state": "SA",
+    "lat": -33.54,
+    "lng": 138.58,
+    "developer": "Aula Energy"
+  },
+  {
+    "id": "gnarwarre-bess-facility",
+    "name": "Gnarwarre BESS Facility",
+    "technology": "bess",
+    "status": "construction",
+    "capacity_mw": 250.0,
+    "storage_mwh": 499.52,
+    "state": "VIC",
+    "lat": -38.22,
+    "lng": 144.11,
+    "developer": "FRV Australia (Abdul Latif Jameel / OMERS)"
+  },
+  {
     "id": "goorambat-east-solar-farm-engie",
     "name": "Goorambat East Solar Farm (ENGIE)",
     "technology": "solar",
@@ -600,6 +671,18 @@
     "lat": -18.8714,
     "lng": 144.1647,
     "developer": "Genex Power"
+  },
+  {
+    "id": "pine-lodge-bess",
+    "name": "Pine Lodge BESS",
+    "technology": "bess",
+    "status": "construction",
+    "capacity_mw": 250.0,
+    "storage_mwh": 550.0,
+    "state": "VIC",
+    "lat": -36.49,
+    "lng": 145.97,
+    "developer": "Valent Energy (Gaw Capital / BW ESS)"
   },
   {
     "id": "torrens-island-bess",
@@ -660,6 +743,30 @@
     "developer": "Ararat Wind Farm Pty Ltd"
   },
   {
+    "id": "mornington-bess",
+    "name": "Mornington BESS",
+    "technology": "bess",
+    "status": "construction",
+    "capacity_mw": 240.0,
+    "storage_mwh": 480.0,
+    "state": "VIC",
+    "lat": -38.22,
+    "lng": 145.04,
+    "developer": "Valent Energy (Gaw Capital / BW ESS)"
+  },
+  {
+    "id": "summerfield-bess",
+    "name": "Summerfield BESS",
+    "technology": "bess",
+    "status": "construction",
+    "capacity_mw": 240.0,
+    "storage_mwh": 532.7,
+    "state": "SA",
+    "lat": -34.16,
+    "lng": 139.45,
+    "developer": "Copenhagen Infrastructure Partners (CIP)"
+  },
+  {
     "id": "wandoan-south-solar-stage-2",
     "name": "Wandoan South Solar Stage 2",
     "technology": "solar",
@@ -680,6 +787,17 @@
     "lat": -41.723131,
     "lng": 145.136468,
     "developer": "Hydro-Electric Corporation"
+  },
+  {
+    "id": "boulder-creek-wind-farm",
+    "name": "Boulder Creek Wind Farm",
+    "technology": "wind",
+    "status": "construction",
+    "capacity_mw": 228.0,
+    "state": "QLD",
+    "lat": -20.77,
+    "lng": 148.53,
+    "developer": "Aula Energy / CS Energy (50:50 JV)"
   },
   {
     "id": "murra-warra-wind-farm-stage-1",
@@ -1402,6 +1520,17 @@
     "developer": "Lincoln Gap Wind Farm Pty Ltd"
   },
   {
+    "id": "wandoan-south-solar-stage-1",
+    "name": "Wandoan South Solar Stage 1",
+    "technology": "solar",
+    "status": "commissioning",
+    "capacity_mw": 125.0,
+    "state": "QLD",
+    "lat": -26.13,
+    "lng": 149.95,
+    "developer": "Vena Evergy"
+  },
+  {
     "id": "sun-metals-corporation-solar-farm",
     "name": "Sun Metals Corporation Solar Farm",
     "technology": "solar",
@@ -1424,6 +1553,28 @@
     "developer": "AGL Hydro Partnership"
   },
   {
+    "id": "gangarri-solar-farm",
+    "name": "Gangarri Solar Farm",
+    "technology": "solar",
+    "status": "commissioning",
+    "capacity_mw": 120.0,
+    "state": "QLD",
+    "lat": -26.66,
+    "lng": 150.18,
+    "developer": "Shell New Energies Australia Pty Ltd"
+  },
+  {
+    "id": "munna-creek-solar-farm",
+    "name": "Munna Creek Solar Farm",
+    "technology": "solar",
+    "status": "construction",
+    "capacity_mw": 120.0,
+    "state": "QLD",
+    "lat": -25.92,
+    "lng": 151.83,
+    "developer": "Munna Creek Solar Farm Investments Pty Ltd as trustee for the Munna Creek Solar Farm Trust"
+  },
+  {
     "id": "willogoleche-wind-farm",
     "name": "Willogoleche Wind Farm",
     "technology": "wind",
@@ -1433,6 +1584,17 @@
     "lat": -33.393569,
     "lng": 138.84821,
     "developer": "Willogoleche Power Pty Ltd"
+  },
+  {
+    "id": "horsham-solar-farm",
+    "name": "Horsham Solar Farm",
+    "technology": "solar",
+    "status": "construction",
+    "capacity_mw": 118.8,
+    "state": "VIC",
+    "lat": -36.71,
+    "lng": 142.2,
+    "developer": "ESCO SOLAR FARM 7 PTY LTD"
   },
   {
     "id": "ross-river-solar-farm",
@@ -1488,6 +1650,18 @@
     "lat": -41.802,
     "lng": 145.056,
     "developer": "Granville Harbour Operations Pty Ltd as trustee for Granville Harbour Operations Trust"
+  },
+  {
+    "id": "templers-bess",
+    "name": "Templers BESS",
+    "technology": "bess",
+    "status": "commissioning",
+    "capacity_mw": 111.0,
+    "storage_mwh": 291.0,
+    "state": "SA",
+    "lat": -34.55,
+    "lng": 138.51,
+    "developer": "ZEBRE Pty Ltd"
   },
   {
     "id": "gullen-range-wind-farm-2",
@@ -1666,6 +1840,18 @@
     "developer": "Foresight Solar Australia Pty Ltd"
   },
   {
+    "id": "bennetts-creek-bess",
+    "name": "Bennetts Creek BESS",
+    "technology": "bess",
+    "status": "construction",
+    "capacity_mw": 100.0,
+    "storage_mwh": 223.02,
+    "state": "VIC",
+    "lat": -32.04,
+    "lng": 151.91,
+    "developer": "Bennetts Creek Energy Project Pty Ltd in its capacity as Trustee for the Bennetts Creek Energy Project Trust"
+  },
+  {
     "id": "bomen-solar-farm",
     "name": "Bomen Solar Farm",
     "technology": "solar",
@@ -1779,6 +1965,18 @@
     "developer": "Epic Energy"
   },
   {
+    "id": "terang-bess",
+    "name": "Terang BESS",
+    "technology": "bess",
+    "status": "construction",
+    "capacity_mw": 100.0,
+    "storage_mwh": 199.88,
+    "state": "VIC",
+    "lat": -38.24,
+    "lng": 142.92,
+    "developer": "frv_NR"
+  },
+  {
     "id": "wandoan-south-bess",
     "name": "Wandoan South BESS",
     "technology": "bess",
@@ -1811,6 +2009,17 @@
     "lat": -35.28,
     "lng": 139.49,
     "developer": "Vena Energy"
+  },
+  {
+    "id": "gunsynd-solar-farm",
+    "name": "Gunsynd Solar Farm",
+    "technology": "solar",
+    "status": "construction",
+    "capacity_mw": 94.0,
+    "state": "QLD",
+    "lat": -27.55,
+    "lng": 151.1,
+    "developer": "Progressive Renewable Developments Goondiwindi Pty Ltd (ACN 629 560 621) as trustee for the Gunsynd Solar Farm Project Trust"
   },
   {
     "id": "tarraleah",
@@ -1956,6 +2165,17 @@
     "developer": "Hydro-Electric Corporation"
   },
   {
+    "id": "tailem-bend-stage-2-solar-project",
+    "name": "Tailem Bend Stage 2 Solar Project",
+    "technology": "solar",
+    "status": "commissioning",
+    "capacity_mw": 87.0,
+    "state": "SA",
+    "lat": -35.26,
+    "lng": 139.44,
+    "developer": "Vena Energy"
+  },
+  {
     "id": "kareeya",
     "name": "Kareeya",
     "technology": "pumped_hydro",
@@ -2066,6 +2286,18 @@
     "developer": "Snowy Hydro Ltd"
   },
   {
+    "id": "fulham-solar-farm-and-bess",
+    "name": "Fulham Solar Farm And BESS",
+    "technology": "hybrid",
+    "status": "construction",
+    "capacity_mw": 80.0,
+    "storage_mwh": 127.92,
+    "state": "VIC",
+    "lat": -38.13,
+    "lng": 147.01,
+    "developer": "Fulham Solar Farm Pty Ltd (ATF Fulham Solar Farm Trust)"
+  },
+  {
     "id": "guthega",
     "name": "Guthega",
     "technology": "pumped_hydro",
@@ -2077,6 +2309,29 @@
     "developer": "Snowy Hydro Ltd"
   },
   {
+    "id": "lancaster-solar-farm",
+    "name": "Lancaster Solar Farm",
+    "technology": "solar",
+    "status": "construction",
+    "capacity_mw": 80.0,
+    "state": "VIC",
+    "lat": -36.48,
+    "lng": 144.76,
+    "developer": "Lancaster Solar Farm Pty Ltd as trustee for the Lancaster Solar Farm Trust"
+  },
+  {
+    "id": "quorn-park-solar-hybrid",
+    "name": "Quorn Park Solar Hybrid",
+    "technology": "hybrid",
+    "status": "construction",
+    "capacity_mw": 80.0,
+    "storage_mwh": 42.88,
+    "state": "NSW",
+    "lat": -32.35,
+    "lng": 138.04,
+    "developer": "Quorn Park Solar Hybrid Pty Ltd as the trustee for Quorn Park Solar Hybrid Trust"
+  },
+  {
     "id": "crowlands-wind-farm",
     "name": "Crowlands Wind Farm",
     "technology": "wind",
@@ -2086,6 +2341,17 @@
     "lat": -36.97615,
     "lng": 143.097998,
     "developer": "Pacific Hydro Crowlands Pty Ltd"
+  },
+  {
+    "id": "bundaberg-solar-farm",
+    "name": "Bundaberg Solar Farm",
+    "technology": "solar",
+    "status": "construction",
+    "capacity_mw": 78.0,
+    "state": "QLD",
+    "lat": -24.87,
+    "lng": 152.35,
+    "developer": "Bundaberg Development Pty Ltd"
   },
   {
     "id": "girgarre-solar-farm",
@@ -2119,6 +2385,17 @@
     "lat": -25.420275,
     "lng": 152.742028,
     "developer": "Susan River Solar Pty Ltd as trustee for the Susan River Solar Trust"
+  },
+  {
+    "id": "wunghnu-solar-farm",
+    "name": "Wunghnu Solar Farm",
+    "technology": "solar",
+    "status": "commissioning",
+    "capacity_mw": 75.0,
+    "state": "VIC",
+    "lat": -36.15,
+    "lng": 145.68,
+    "developer": "Sun Spot 3 Pty Ltd"
   },
   {
     "id": "emerald-solar-park",
@@ -2512,6 +2789,17 @@
     "developer": "Parkes Solar Farm Pty Ltd"
   },
   {
+    "id": "wagga-north-solar-farm",
+    "name": "Wagga North Solar Farm",
+    "technology": "solar",
+    "status": "commissioning",
+    "capacity_mw": 48.7,
+    "state": "NSW",
+    "lat": -35.06,
+    "lng": 147.37,
+    "developer": "Wagga Wagga Operationsco Pty Ltd as trustree for Wagga Wagga Operations Trust"
+  },
+  {
     "id": "woodlawn-wind-farm",
     "name": "Woodlawn Wind Farm",
     "technology": "wind",
@@ -2609,6 +2897,18 @@
     "lat": -34.775502,
     "lng": 143.508046,
     "developer": "Limondale Sun Farm Pty Ltd"
+  },
+  {
+    "id": "tailem-bend-battery-project",
+    "name": "Tailem Bend Battery Project",
+    "technology": "bess",
+    "status": "commissioning",
+    "capacity_mw": 41.5,
+    "storage_mwh": 84.0,
+    "state": "SA",
+    "lat": -35.26,
+    "lng": 139.44,
+    "developer": "Vena Energy"
   },
   {
     "id": "collinsville-pv",

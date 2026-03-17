@@ -129,14 +129,6 @@
   "scheme_contracts": [],
   "cost_sources": [],
   "stakeholder_issues": [],
-  "sources": [
-    {
-      "title": "AEMO Generation Information Jan 2026",
-      "url": "https://aemo.com.au/energy-systems/electricity/national-electricity-market-nem/nem-forecasting-and-planning/forecasting-and-planning-data/generation-information",
-      "date": "2026-01-30",
-      "source_tier": 1
-    }
-  ],
   "eis_specs": {
     "document_title": "Dundonnell Wind Farm Environment Effects Statement (VIC DELWP EES)",
     "document_url": "https://www.planning.vic.gov.au/schemes-and-amendments/statewide-activities/environment-effects-statements/current-and-completed-ees/dundonnell-wind-farm",
@@ -162,6 +154,14 @@
     "connection_distance_km": 18.0,
     "connection_distance_note": "~18 km of new 220 kV transmission line to Mortlake substation in Western Victoria.",
     "connection_augmentation": "New 220 kV connection to AusNet's South-West Victoria transmission system. AusNet upgraded Mortlake substation bus to accommodate Dundonnell load-flow.",
-    "notes": "336 MW (80 × 4.2 MW Vestas V150), Western Victoria near Mortlake. Developer: Tilt Renewables (sold share to Pacific Hydro / PowAR). VIC EES approved by Victorian Minister for Planning 2019. Now operating (2021). BOP: Zenviron. 80 turbines × 4.2 MW = 336 MW. Western VIC coastal plains — among the best onshore wind resource in Australia. 40 dBA noise limit and 2 km residential setback consistent with VIC Wind Energy Facilities guidelines."
-  }
+    "notes": "336 MW (80 \u00d7 4.2 MW Vestas V150), Western Victoria near Mortlake. Developer: Tilt Renewables (sold share to Pacific Hydro / PowAR). VIC EES approved by Victorian Minister for Planning 2019. Now operating (2021). BOP: Zenviron. 80 turbines \u00d7 4.2 MW = 336 MW. Western VIC coastal plains \u2014 among the best onshore wind resource in Australia. 40 dBA noise limit and 2 km residential setback consistent with VIC Wind Energy Facilities guidelines."
+  },
+  "sources": [
+    {
+      "title": "AEMO Generation Information Jan 2026",
+      "url": "https://aemo.com.au/energy-systems/electricity/national-electricity-market-nem/nem-forecasting-and-planning/forecasting-and-planning-data/generation-information",
+      "date": "2026-01-30",
+      "source_tier": 1
+    }
+  ]
 }

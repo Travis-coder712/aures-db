@@ -76,24 +76,6 @@
   "scheme_contracts": [],
   "cost_sources": [],
   "stakeholder_issues": [],
-  "sources": [
-    {
-      "title": "AEMO Generation Information Jan 2026",
-      "url": "https://aemo.com.au/energy-systems/electricity/national-electricity-market-nem/nem-forecasting-and-planning/forecasting-and-planning-data/generation-information",
-      "date": "2026-01-30",
-      "source_tier": 1
-    },
-    {
-      "title": "TagEnergy — Stage 2 Financial Close",
-      "url": "https://tag-en.com/construction-to-begin-as-golden-plains-wind-farm-stage-2-reaches-financial-close/",
-      "source_tier": 2
-    },
-    {
-      "title": "Vestas — 577 MW Stage 2 Order",
-      "url": "https://www.vestas.com/en/media/company-news/2024/vestas-receives-577-mw-order-in-australia-for-second-st-c4003383",
-      "source_tier": 2
-    }
-  ],
   "eis_specs": {
     "document_title": "Golden Plains Wind Farm West Environment Effects Statement (EES)",
     "document_url": "https://www.planning.vic.gov.au/permits-and-applications/state-projects/assessed-projects/golden-plains-wind-farm",
@@ -120,5 +102,23 @@
     "connection_distance_note": "~25 km of new 220 kV transmission line; shares grid connection corridor with Golden Plains East stage",
     "connection_augmentation": "Shared 220 kV transmission corridor with Golden Plains East. Joint network augmentation significantly reduces per-project connection cost.",
     "notes": "Western stage of the Golden Plains project. 577 MW Vestas turbine order confirmed 2024. Shares the same EES approval and grid connection planning as Golden Plains East."
-  }
+  },
+  "sources": [
+    {
+      "title": "AEMO Generation Information Jan 2026",
+      "url": "https://aemo.com.au/energy-systems/electricity/national-electricity-market-nem/nem-forecasting-and-planning/forecasting-and-planning-data/generation-information",
+      "date": "2026-01-30",
+      "source_tier": 1
+    },
+    {
+      "title": "TagEnergy \u2014 Stage 2 Financial Close",
+      "url": "https://tag-en.com/construction-to-begin-as-golden-plains-wind-farm-stage-2-reaches-financial-close/",
+      "source_tier": 2
+    },
+    {
+      "title": "Vestas \u2014 577 MW Stage 2 Order",
+      "url": "https://www.vestas.com/en/media/company-news/2024/vestas-receives-577-mw-order-in-australia-for-second-st-c4003383",
+      "source_tier": 2
+    }
+  ]
 }

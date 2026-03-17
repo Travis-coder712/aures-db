@@ -73,31 +73,8 @@
   "scheme_contracts": [],
   "cost_sources": [],
   "stakeholder_issues": [],
-  "sources": [
-    {
-      "title": "AEMO Generation Information Jan 2026",
-      "url": "https://aemo.com.au/energy-systems/electricity/national-electricity-market-nem/nem-forecasting-and-planning/forecasting-and-planning-data/generation-information",
-      "date": "2026-01-30",
-      "source_tier": 1
-    },
-    {
-      "title": "Stanwell — Tarong BESS",
-      "url": "https://www.stanwell.com/tarong-battery-energy-storage-system",
-      "source_tier": 2
-    },
-    {
-      "title": "Yurika — Tarong Battery",
-      "url": "https://www.yurika.com.au/mega-boost-for-tarong-battery-project/",
-      "source_tier": 2
-    },
-    {
-      "title": "Energy-Storage.News — Stanwell 600 MWh",
-      "url": "https://www.energy-storage.news/queenslands-stanwell-opens-600mwh-battery-storage-system-in-australia/",
-      "source_tier": 2
-    }
-  ],
   "eis_specs": {
-    "document_title": "Tarong BESS — EIS (QLD Coordinated Project)",
+    "document_title": "Tarong BESS \u2014 EIS (QLD Coordinated Project)",
     "document_url": "https://www.dsdilgp.qld.gov.au/industry/resources-and-energy/coordinated-projects/current-projects/tarong-bess",
     "document_year": 2023,
     "cell_chemistry": "LFP",
@@ -115,8 +92,31 @@
     "connection_substation_name": "Tarong 275 kV substation (on-site, former coal plant)",
     "connection_substation_capacity_mva": 1400.0,
     "connection_distance_km": 0.0,
-    "connection_distance_note": "On-site — co-located with former Tarong coal power station 275 kV substation. Zero transmission line cost.",
-    "connection_augmentation": "Minimal. Existing Tarong coal plant 275 kV switchyard reused. New BESS feeder bay required. Major cost advantage — former 1,400 MW coal plant substation provides ample capacity for 300 MW BESS without augmentation.",
+    "connection_distance_note": "On-site \u2014 co-located with former Tarong coal power station 275 kV substation. Zero transmission line cost.",
+    "connection_augmentation": "Minimal. Existing Tarong coal plant 275 kV switchyard reused. New BESS feeder bay required. Major cost advantage \u2014 former 1,400 MW coal plant substation provides ample capacity for 300 MW BESS without augmentation.",
     "notes": "300 MW / 600 MWh (2-hour) BESS co-located with the Tarong Power Station site, QLD. Stanwell Corporation (Queensland government-owned generator). QLD Coordinated Project. Grid-forming PCS specified. Connection to Powerlink 275 kV network. Part of Stanwell's transition from coal to storage/renewables."
-  }
+  },
+  "sources": [
+    {
+      "title": "AEMO Generation Information Jan 2026",
+      "url": "https://aemo.com.au/energy-systems/electricity/national-electricity-market-nem/nem-forecasting-and-planning/forecasting-and-planning-data/generation-information",
+      "date": "2026-01-30",
+      "source_tier": 1
+    },
+    {
+      "title": "Stanwell \u2014 Tarong BESS",
+      "url": "https://www.stanwell.com/tarong-battery-energy-storage-system",
+      "source_tier": 2
+    },
+    {
+      "title": "Yurika \u2014 Tarong Battery",
+      "url": "https://www.yurika.com.au/mega-boost-for-tarong-battery-project/",
+      "source_tier": 2
+    },
+    {
+      "title": "Energy-Storage.News \u2014 Stanwell 600 MWh",
+      "url": "https://www.energy-storage.news/queenslands-stanwell-opens-600mwh-battery-storage-system-in-australia/",
+      "source_tier": 2
+    }
+  ]
 }

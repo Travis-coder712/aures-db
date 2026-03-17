@@ -32,7 +32,7 @@
       "date_precision": "year",
       "event_type": "planning_submitted",
       "title": "EPBC Referral 2023/09749",
-      "detail": "Elaine Battery Energy Storage System (BESS) — Completed",
+      "detail": "Elaine Battery Energy Storage System (BESS) \u2014 Completed",
       "sources": []
     },
     {
@@ -46,7 +46,7 @@
       "date": "2025-11-01",
       "date_precision": "month",
       "event_type": "notable",
-      "title": "Financial close — A$460M",
+      "title": "Financial close \u2014 A$460M",
       "detail": "BNP Paribas, CIBC, CBA, ING, Mizuho, MUFG, SMBC, SocGen",
       "sources": []
     },
@@ -79,32 +79,8 @@
   "scheme_contracts": [],
   "cost_sources": [],
   "stakeholder_issues": [],
-  "sources": [
-    {
-      "title": "AEMO Generation Information Jan 2026",
-      "url": "https://aemo.com.au/energy-systems/electricity/national-electricity-market-nem/nem-forecasting-and-planning/forecasting-and-planning-data/generation-information",
-      "date": "2026-01-30",
-      "source_tier": 1
-    },
-    {
-      "title": "Akaysha — Elaine Financing",
-      "url": "https://akayshaenergy.com/news/akaysha-closes-a-460m-construction-financing-and-commences-construction-on-elaine-bess",
-      "source_tier": 2
-    },
-    {
-      "title": "Energy-Storage.News — Elaine A$460M",
-      "url": "https://www.energy-storage.news/akaysha-energy-bags-au460-million-for-1244mwh-bess-in-victoria-australia/",
-      "source_tier": 2
-    },
-    {
-      "title": "EPBC Referral 2023/09749",
-      "url": "https://epbcpublicportal.environment.gov.au/all-referrals/#!/referral/2023-09749",
-      "date": "2026-03-12",
-      "source_tier": 1
-    }
-  ],
   "eis_specs": {
-    "document_title": "Elaine Battery Energy Storage System — EES/Permit (VIC)",
+    "document_title": "Elaine Battery Energy Storage System \u2014 EES/Permit (VIC)",
     "document_url": "https://www.planning.vic.gov.au/permits-and-applications/state-projects",
     "document_year": 2023,
     "cell_chemistry": "LFP",
@@ -112,7 +88,7 @@
     "cell_supplier": "Powin Energy / CATL",
     "cell_country_of_manufacture": "China",
     "inverter_supplier": "Powin Energy",
-    "inverter_model": "Powin Stack750 — integrated PCS",
+    "inverter_model": "Powin Stack750 \u2014 integrated PCS",
     "inverter_country_of_manufacture": "China (manufactured) / USA (designed)",
     "pcs_type": "grid_forming",
     "round_trip_efficiency_pct": 87.0,
@@ -127,5 +103,29 @@
     "connection_distance_note": "~9 km of new 220 kV line from project to Elaine substation on AusNet western Victoria network; EIS connection study",
     "connection_augmentation": "New 220 kV feeder bay at Elaine substation. Moderate augmentation cost. Western Victoria 220 kV network has limited headroom; TransGrid / AusNet augmentation may be required at higher voltages.",
     "notes": "311 MW / 1,249 MWh (4-hour) BESS in western Victoria. Akaysha Energy (BlackRock Real Assets). Victorian planning permit. Powin Stack750 system with CATL LFP cells; grid-forming PCS capability. Connection to the 220 kV AusNet Services network."
-  }
+  },
+  "sources": [
+    {
+      "title": "AEMO Generation Information Jan 2026",
+      "url": "https://aemo.com.au/energy-systems/electricity/national-electricity-market-nem/nem-forecasting-and-planning/forecasting-and-planning-data/generation-information",
+      "date": "2026-01-30",
+      "source_tier": 1
+    },
+    {
+      "title": "Akaysha \u2014 Elaine Financing",
+      "url": "https://akayshaenergy.com/news/akaysha-closes-a-460m-construction-financing-and-commences-construction-on-elaine-bess",
+      "source_tier": 2
+    },
+    {
+      "title": "Energy-Storage.News \u2014 Elaine A$460M",
+      "url": "https://www.energy-storage.news/akaysha-energy-bags-au460-million-for-1244mwh-bess-in-victoria-australia/",
+      "source_tier": 2
+    },
+    {
+      "title": "EPBC Referral 2023/09749",
+      "url": "https://epbcpublicportal.environment.gov.au/all-referrals/#!/referral/2023-09749",
+      "date": "2026-03-12",
+      "source_tier": 1
+    }
+  ]
 }

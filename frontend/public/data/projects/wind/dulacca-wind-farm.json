@@ -33,7 +33,7 @@
       "date_precision": "year",
       "event_type": "planning_submitted",
       "title": "EPBC Referral 2019/8607",
-      "detail": "Dulacca Solar Farm — Not Controlled Action",
+      "detail": "Dulacca Solar Farm \u2014 Not Controlled Action",
       "sources": []
     },
     {
@@ -101,22 +101,8 @@
   "scheme_contracts": [],
   "cost_sources": [],
   "stakeholder_issues": [],
-  "sources": [
-    {
-      "title": "AEMO Generation Information Jan 2026",
-      "url": "https://aemo.com.au/energy-systems/electricity/national-electricity-market-nem/nem-forecasting-and-planning/forecasting-and-planning-data/generation-information",
-      "date": "2026-01-30",
-      "source_tier": 1
-    },
-    {
-      "title": "EPBC Referral 2019/8607",
-      "url": "https://epbcpublicportal.environment.gov.au/all-referrals/#!/referral/2019-8607",
-      "date": "2026-03-12",
-      "source_tier": 1
-    }
-  ],
   "eis_specs": {
-    "document_title": "Dulacca Wind Farm EIS — Coordinator-General's Report (QLD DSDILGP)",
+    "document_title": "Dulacca Wind Farm EIS \u2014 Coordinator-General's Report (QLD DSDILGP)",
     "document_url": "https://www.dsdilgp.qld.gov.au/our-work/major-projects/energy-projects/dulacca-wind-farm",
     "document_year": 2019,
     "turbine_model": "Vestas V150-4.2 MW",
@@ -141,5 +127,19 @@
     "connection_distance_note": "~28 km of 132 kV line to Powerlink network in the Wandoan/Western Downs corridor, QLD.",
     "connection_augmentation": "New 132 kV connection to Powerlink grid. Powerlink Western Downs transmission corridor augmented for multiple CIS Round projects.",
     "notes": "181 MW (43 x 4.2 MW Vestas V150), near Dulacca/Miles, Western Downs, QLD. Developer: CWP Energy (now RES). EPC: RES Australia. QLD EIS approved 2019. Now operating. QLD LTESA contract holder (CIS Round 1)."
-  }
+  },
+  "sources": [
+    {
+      "title": "AEMO Generation Information Jan 2026",
+      "url": "https://aemo.com.au/energy-systems/electricity/national-electricity-market-nem/nem-forecasting-and-planning/forecasting-and-planning-data/generation-information",
+      "date": "2026-01-30",
+      "source_tier": 1
+    },
+    {
+      "title": "EPBC Referral 2019/8607",
+      "url": "https://epbcpublicportal.environment.gov.au/all-referrals/#!/referral/2019-8607",
+      "date": "2026-03-12",
+      "source_tier": 1
+    }
+  ]
 }

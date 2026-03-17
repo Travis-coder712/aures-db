@@ -31,7 +31,7 @@
       "date_precision": "year",
       "event_type": "planning_submitted",
       "title": "EPBC Referral 2020/8727",
-      "detail": "Wambo Wind Farm — Post-Approval",
+      "detail": "Wambo Wind Farm \u2014 Post-Approval",
       "sources": []
     },
     {
@@ -76,7 +76,7 @@
       "date": "2024-12-01",
       "date_precision": "month",
       "event_type": "notable",
-      "title": "Financial close — A$650M",
+      "title": "Financial close \u2014 A$650M",
       "detail": "Stages 1 & 2 combined finance; Stanwell backed by A$455M QLD RE&H Jobs Fund",
       "sources": []
     },
@@ -141,40 +141,6 @@
   ],
   "cost_sources": [],
   "stakeholder_issues": [],
-  "sources": [
-    {
-      "title": "AEMO Generation Information Jan 2026",
-      "url": "https://aemo.com.au/energy-systems/electricity/national-electricity-market-nem/nem-forecasting-and-planning/forecasting-and-planning-data/generation-information",
-      "date": "2026-01-30",
-      "source_tier": 1
-    },
-    {
-      "title": "Wambo Wind Farm — Official",
-      "url": "https://www.wambowindfarm.com.au/",
-      "source_tier": 2
-    },
-    {
-      "title": "Cubico — Financial Close",
-      "url": "https://www.cubicoinvest.com/news/cubico-reaches-financial-close-for-500-mw-wambo-project/",
-      "source_tier": 2
-    },
-    {
-      "title": "Stanwell — Wambo Wind Farm",
-      "url": "https://www.stanwell.com/wambo-wind-farm",
-      "source_tier": 2
-    },
-    {
-      "title": "Stanwell — First Turbines Power Up",
-      "url": "https://www.stanwell.com/info-hub/article/wambos-first-turbines-power-up-western-downs",
-      "source_tier": 2
-    },
-    {
-      "title": "EPBC Referral 2020/8727",
-      "url": "https://epbcpublicportal.environment.gov.au/all-referrals/#!/referral/2020-8727",
-      "date": "2026-03-12",
-      "source_tier": 1
-    }
-  ],
   "eis_specs": {
     "document_title": "Wambo Wind Farm Environmental Impact Statement (QLD)",
     "document_url": "https://www.dsdilgp.qld.gov.au/industry/resources-and-energy/coordinated-projects/current-projects/wambo-wind-farm",
@@ -201,5 +167,39 @@
     "connection_distance_note": "~22 km of new 132 kV transmission line from project to Oakey substation; EIS connection study Section 8",
     "connection_augmentation": "Oakey 132 kV substation augmentation required. New transformer bay and 132 kV line works. Powerlink augmentation conditions apply.",
     "notes": "Coordinated project declared under QLD State Development and Public Works Organisation Act. Located near Crows Nest, Darling Downs, QLD. Cubico Sustainable Investments / Stanwell Corporation 50:50 JV. Construction commenced late 2024."
-  }
+  },
+  "sources": [
+    {
+      "title": "AEMO Generation Information Jan 2026",
+      "url": "https://aemo.com.au/energy-systems/electricity/national-electricity-market-nem/nem-forecasting-and-planning/forecasting-and-planning-data/generation-information",
+      "date": "2026-01-30",
+      "source_tier": 1
+    },
+    {
+      "title": "Wambo Wind Farm \u2014 Official",
+      "url": "https://www.wambowindfarm.com.au/",
+      "source_tier": 2
+    },
+    {
+      "title": "Cubico \u2014 Financial Close",
+      "url": "https://www.cubicoinvest.com/news/cubico-reaches-financial-close-for-500-mw-wambo-project/",
+      "source_tier": 2
+    },
+    {
+      "title": "Stanwell \u2014 Wambo Wind Farm",
+      "url": "https://www.stanwell.com/wambo-wind-farm",
+      "source_tier": 2
+    },
+    {
+      "title": "Stanwell \u2014 First Turbines Power Up",
+      "url": "https://www.stanwell.com/info-hub/article/wambos-first-turbines-power-up-western-downs",
+      "source_tier": 2
+    },
+    {
+      "title": "EPBC Referral 2020/8727",
+      "url": "https://epbcpublicportal.environment.gov.au/all-referrals/#!/referral/2020-8727",
+      "date": "2026-03-12",
+      "source_tier": 1
+    }
+  ]
 }

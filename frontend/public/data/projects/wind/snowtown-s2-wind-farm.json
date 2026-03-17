@@ -77,14 +77,6 @@
   "scheme_contracts": [],
   "cost_sources": [],
   "stakeholder_issues": [],
-  "sources": [
-    {
-      "title": "AEMO Generation Information Jan 2026",
-      "url": "https://aemo.com.au/energy-systems/electricity/national-electricity-market-nem/nem-forecasting-and-planning/forecasting-and-planning-data/generation-information",
-      "date": "2026-01-30",
-      "source_tier": 1
-    }
-  ],
   "eis_specs": {
     "document_title": "Snowtown Wind Farm Stage 2 Development Application (SA EPA / EPBC 2010/5707)",
     "document_url": "https://www.environment.gov.au/epbc/notices/search-notices/2010/5707",
@@ -97,7 +89,7 @@
     "rotor_diameter_m": 113.0,
     "wind_speed_mean_ms": 8.8,
     "wind_speed_height_m": 92.0,
-    "wind_speed_period": "Mean annual wind speed at hub height; Snowtown, Mid North SA — from on-site met mast (same data set as Snowtown Stage 1)",
+    "wind_speed_period": "Mean annual wind speed at hub height; Snowtown, Mid North SA \u2014 from on-site met mast (same data set as Snowtown Stage 1)",
     "assumed_capacity_factor_pct": 39.0,
     "assumed_annual_energy_gwh": 923.0,
     "energy_yield_method": "WAsP modelling; P50 net yield",
@@ -111,5 +103,13 @@
     "connection_distance_note": "~5 km of 66 kV connection to ElectraNet Snowtown substation, shared with Snowtown Stage 1.",
     "connection_augmentation": "Snowtown substation expanded to accommodate Stage 2 (270 MW additional to Stage 1 99 MW). Shared connection infrastructure.",
     "notes": "270 MW (90 x 3.0 MW Siemens SWT-3.0-113), near Snowtown, Mid North SA. Developer: Pacific Hydro (PowAR). SA EPA + EPBC approval 2010. Completed 2014. Combined with Snowtown Stage 1 (99 MW) = 369 MW Snowtown complex. SA Mid North has the best concentration of wind resource in SA."
-  }
+  },
+  "sources": [
+    {
+      "title": "AEMO Generation Information Jan 2026",
+      "url": "https://aemo.com.au/energy-systems/electricity/national-electricity-market-nem/nem-forecasting-and-planning/forecasting-and-planning-data/generation-information",
+      "date": "2026-01-30",
+      "source_tier": 1
+    }
+  ]
 }

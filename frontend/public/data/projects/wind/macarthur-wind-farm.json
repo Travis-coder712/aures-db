@@ -105,14 +105,6 @@
   "scheme_contracts": [],
   "cost_sources": [],
   "stakeholder_issues": [],
-  "sources": [
-    {
-      "title": "AEMO Generation Information Jan 2026",
-      "url": "https://aemo.com.au/energy-systems/electricity/national-electricity-market-nem/nem-forecasting-and-planning/forecasting-and-planning-data/generation-information",
-      "date": "2026-01-30",
-      "source_tier": 1
-    }
-  ],
   "eis_specs": {
     "document_title": "Macarthur Wind Farm Environmental Effects Statement (VIC DSE EES)",
     "document_url": "https://www.planning.vic.gov.au/schemes-and-amendments/statewide-activities/environment-effects-statements/current-and-completed-ees/macarthur-wind-farm",
@@ -125,7 +117,7 @@
     "rotor_diameter_m": 112.0,
     "wind_speed_mean_ms": 8.1,
     "wind_speed_height_m": 94.0,
-    "wind_speed_period": "Mean annual wind speed at hub height; Macarthur, Western Victoria near Hamilton — from multi-year on-site met mast",
+    "wind_speed_period": "Mean annual wind speed at hub height; Macarthur, Western Victoria near Hamilton \u2014 from multi-year on-site met mast",
     "assumed_capacity_factor_pct": 36.5,
     "assumed_annual_energy_gwh": 1342.0,
     "energy_yield_method": "WAsP modelling; P50 net yield after wake, availability and electrical losses",
@@ -139,5 +131,13 @@
     "connection_distance_note": "~5 km of 220 kV connection to AusNet Services SW Victoria network near Macarthur/Hamilton.",
     "connection_augmentation": "New 220 kV substation and line. Was the largest wind farm in the Southern Hemisphere at commissioning (2012). AusNet 220 kV required significant augmentation to handle 420 MW export.",
     "notes": "420 MW (140 x 3.0 MW Vestas V112), near Macarthur, Western Victoria. Developer: AGL Energy / Meridian Energy (50:50 JV). EPC: Vestas. VIC EES approved 2009. Completed 2012. Was the largest wind farm in the Southern Hemisphere at commissioning. Groundbreaking project proving feasibility of large-scale onshore wind in Australia."
-  }
+  },
+  "sources": [
+    {
+      "title": "AEMO Generation Information Jan 2026",
+      "url": "https://aemo.com.au/energy-systems/electricity/national-electricity-market-nem/nem-forecasting-and-planning/forecasting-and-planning-data/generation-information",
+      "date": "2026-01-30",
+      "source_tier": 1
+    }
+  ]
 }

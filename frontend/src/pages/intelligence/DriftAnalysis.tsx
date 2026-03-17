@@ -641,7 +641,7 @@ export default function DriftAnalysis() {
                     >
                       <td className="py-2.5 pr-3 max-w-[200px] truncate">
                         <Link
-                          to={`/projects/${p.technology}/${p.project_id}?from=intelligence/drift-analysis&fromLabel=Back to Drift Analysis`}
+                          to={`/projects/${p.project_id}?from=intelligence/drift-analysis&fromLabel=Back to Drift Analysis`}
                           className="text-[var(--color-primary)] hover:underline"
                         >
                           {p.name}

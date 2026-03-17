@@ -56,7 +56,7 @@
       "date_precision": "month",
       "event_type": "cod",
       "title": "Australia's first big battery on decommissioned coal site",
-      "detail": "Hazelwood BESS commissioned — first large-scale battery built on a decommissioned coal power station in Australia. Symbolic milestone for energy transition.",
+      "detail": "Hazelwood BESS commissioned \u2014 first large-scale battery built on a decommissioned coal power station in Australia. Symbolic milestone for energy transition.",
       "sources": []
     },
     {
@@ -90,16 +90,8 @@
   "scheme_contracts": [],
   "cost_sources": [],
   "stakeholder_issues": [],
-  "sources": [
-    {
-      "title": "AEMO Generation Information Jan 2026",
-      "url": "https://aemo.com.au/energy-systems/electricity/national-electricity-market-nem/nem-forecasting-and-planning/forecasting-and-planning-data/generation-information",
-      "date": "2026-01-30",
-      "source_tier": 1
-    }
-  ],
   "eis_specs": {
-    "document_title": "Hazelwood BESS — Referral Assessment (VIC DEECA / EPA Victoria)",
+    "document_title": "Hazelwood BESS \u2014 Referral Assessment (VIC DEECA / EPA Victoria)",
     "document_url": "https://www.epa.vic.gov.au/about-epa/publications/hazelwood-battery-energy-storage-system",
     "document_year": 2021,
     "cell_chemistry": "NMC",
@@ -119,8 +111,16 @@
     "connection_substation_name": "Hazelwood 220/66 kV substation (former power station, on-site)",
     "connection_substation_capacity_mva": 2000.0,
     "connection_distance_km": 0.0,
-    "connection_distance_note": "On-site — former Hazelwood Power Station site, Morwell, VIC. Existing 220 kV / 500 kV substation infrastructure retained and reused.",
-    "connection_augmentation": "Minimal — former 1,600 MW coal station had extensive connection infrastructure at 220 kV and 500 kV. BESS connects at 220 kV bus. AusNet Services decommissioned excess bays; BESS added new feeder bays to existing switchgear.",
-    "notes": "150 MW / 300 MWh (2-hour) BESS at former Hazelwood Power Station site, Morwell, Latrobe Valley, VIC. Developer: ENGIE (which operated Hazelwood coal station until 2017 closure). Technology: Fluence Gridstack Pro (NMC cells, Samsung SDI). VIC planning approval by DEECA under Advisory Committee process. Former 1,600 MW brown coal plant provides exceptional grid connection asset — 220 kV and 500 kV switching infrastructure already in place, eliminating connection capex. Key Latrobe Valley anchor in VIC's transition from coal. Grid-following PCS; no grid-forming capability in EIS specification."
-  }
+    "connection_distance_note": "On-site \u2014 former Hazelwood Power Station site, Morwell, VIC. Existing 220 kV / 500 kV substation infrastructure retained and reused.",
+    "connection_augmentation": "Minimal \u2014 former 1,600 MW coal station had extensive connection infrastructure at 220 kV and 500 kV. BESS connects at 220 kV bus. AusNet Services decommissioned excess bays; BESS added new feeder bays to existing switchgear.",
+    "notes": "150 MW / 300 MWh (2-hour) BESS at former Hazelwood Power Station site, Morwell, Latrobe Valley, VIC. Developer: ENGIE (which operated Hazelwood coal station until 2017 closure). Technology: Fluence Gridstack Pro (NMC cells, Samsung SDI). VIC planning approval by DEECA under Advisory Committee process. Former 1,600 MW brown coal plant provides exceptional grid connection asset \u2014 220 kV and 500 kV switching infrastructure already in place, eliminating connection capex. Key Latrobe Valley anchor in VIC's transition from coal. Grid-following PCS; no grid-forming capability in EIS specification."
+  },
+  "sources": [
+    {
+      "title": "AEMO Generation Information Jan 2026",
+      "url": "https://aemo.com.au/energy-systems/electricity/national-electricity-market-nem/nem-forecasting-and-planning/forecasting-and-planning-data/generation-information",
+      "date": "2026-01-30",
+      "source_tier": 1
+    }
+  ]
 }

@@ -102,36 +102,8 @@
   ],
   "cost_sources": [],
   "stakeholder_issues": [],
-  "sources": [
-    {
-      "title": "AEMO Generation Information Jan 2026",
-      "url": "https://aemo.com.au/energy-systems/electricity/national-electricity-market-nem/nem-forecasting-and-planning/forecasting-and-planning-data/generation-information",
-      "date": "2026-01-30",
-      "source_tier": 1
-    },
-    {
-      "title": "AGL — Liddell Battery",
-      "url": "https://www.agl.com.au/about-agl/operations/liddell-battery",
-      "source_tier": 2
-    },
-    {
-      "title": "AGL — FID Announcement",
-      "url": "https://www.agl.com.au/about-agl/news-centre/2023/december/final-investment-decision-reached-on-the-500-mw-liddell-battery-",
-      "source_tier": 2
-    },
-    {
-      "title": "Fluence — Selected for Liddell",
-      "url": "https://ir.fluenceenergy.com/news-releases/news-release-details/agl-selects-fluence-deliver-500-mw-liddell-battery-project",
-      "source_tier": 2
-    },
-    {
-      "title": "ARENA — Liddell Battery",
-      "url": "https://arena.gov.au/projects/agl-liddell-large-scale-battery-with-advanced-inverters-deployment-project/",
-      "source_tier": 2
-    }
-  ],
   "eis_specs": {
-    "document_title": "Liddell Battery Energy Storage System — SSD EIS (NSW)",
+    "document_title": "Liddell Battery Energy Storage System \u2014 SSD EIS (NSW)",
     "document_url": "https://www.planningportal.nsw.gov.au/major-projects/projects/liddell-battery-energy-storage-system",
     "document_year": 2023,
     "cell_chemistry": "LFP",
@@ -149,8 +121,36 @@
     "connection_substation_name": "Liddell 330 kV substation (former power station, on-site)",
     "connection_substation_capacity_mva": 2500.0,
     "connection_distance_km": 0.3,
-    "connection_distance_note": "Effectively on-site — former Liddell coal power station 330 kV substation. ~300 m internal connection only.",
+    "connection_distance_note": "Effectively on-site \u2014 former Liddell coal power station 330 kV substation. ~300 m internal connection only.",
     "connection_augmentation": "Minimal. Existing 330 kV switchyard from 2,000 MW coal plant reused. New BESS feeder bays and protection required. Significant cost advantage over greenfield connection (~A$50-100M saved vs remote site).",
-    "notes": "500 MW / 1,000 MWh (2-hour) BESS co-located at the former Liddell Power Station site, Hunter Valley NSW. AGL Energy project. NSW State Significant Development approval. Grid-forming capability specified in EIS as a requirement. LFP chemistry specified in EIS as preferred chemistry for safety and longevity. Connection to the 330 kV Liddell–Murrurundi transmission system."
-  }
+    "notes": "500 MW / 1,000 MWh (2-hour) BESS co-located at the former Liddell Power Station site, Hunter Valley NSW. AGL Energy project. NSW State Significant Development approval. Grid-forming capability specified in EIS as a requirement. LFP chemistry specified in EIS as preferred chemistry for safety and longevity. Connection to the 330 kV Liddell\u2013Murrurundi transmission system."
+  },
+  "sources": [
+    {
+      "title": "AEMO Generation Information Jan 2026",
+      "url": "https://aemo.com.au/energy-systems/electricity/national-electricity-market-nem/nem-forecasting-and-planning/forecasting-and-planning-data/generation-information",
+      "date": "2026-01-30",
+      "source_tier": 1
+    },
+    {
+      "title": "AGL \u2014 Liddell Battery",
+      "url": "https://www.agl.com.au/about-agl/operations/liddell-battery",
+      "source_tier": 2
+    },
+    {
+      "title": "AGL \u2014 FID Announcement",
+      "url": "https://www.agl.com.au/about-agl/news-centre/2023/december/final-investment-decision-reached-on-the-500-mw-liddell-battery-",
+      "source_tier": 2
+    },
+    {
+      "title": "Fluence \u2014 Selected for Liddell",
+      "url": "https://ir.fluenceenergy.com/news-releases/news-release-details/agl-selects-fluence-deliver-500-mw-liddell-battery-project",
+      "source_tier": 2
+    },
+    {
+      "title": "ARENA \u2014 Liddell Battery",
+      "url": "https://arena.gov.au/projects/agl-liddell-large-scale-battery-with-advanced-inverters-deployment-project/",
+      "source_tier": 2
+    }
+  ]
 }

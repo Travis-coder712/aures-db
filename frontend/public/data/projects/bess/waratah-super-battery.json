@@ -149,14 +149,8 @@
   ],
   "cost_sources": [],
   "stakeholder_issues": [],
-  "sources": [
-    {
-      "title": "AEMO Generation Information",
-      "url": "https://aemo.com.au"
-    }
-  ],
   "eis_specs": {
-    "document_title": "Waratah Super Battery — State Significant Development Assessment (NSW IPC SSD-2022-0195)",
+    "document_title": "Waratah Super Battery \u2014 State Significant Development Assessment (NSW IPC SSD-2022-0195)",
     "document_url": "https://www.planningportal.nsw.gov.au/major-projects/projects/waratah-super-battery",
     "document_year": 2022,
     "cell_chemistry": "LFP",
@@ -179,5 +173,11 @@
     "connection_distance_note": "~2 km from BESS site to TransGrid Tomago 330 kV substation, Hunter Valley NSW.",
     "connection_augmentation": "TransGrid Tomago substation upgrade for 850 MW BESS. NSW IPC SSD assessment included detailed TransGrid connection feasibility. Critical grid support as Hunter Valley coal plants retire.",
     "notes": "850 MW / 1,680 MWh (2-hour) BESS, Tomago, Hunter Valley NSW. Developer: Akaysha Energy (BlackRock Real Assets). Technology: Powin Centipede Energy Segment (LFP, CATL). Inverter: EKS Energy (Hitachi Energy) PCS. EPC: CPP. NSW IPC SSD-2022-0195. Now operating (2025). One of the largest grid-scale batteries in the world. TransGrid NSP confirmed in project data."
-  }
+  },
+  "sources": [
+    {
+      "title": "AEMO Generation Information",
+      "url": "https://aemo.com.au"
+    }
+  ]
 }

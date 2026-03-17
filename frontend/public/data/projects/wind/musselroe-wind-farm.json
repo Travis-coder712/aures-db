@@ -33,7 +33,7 @@
       "date_precision": "year",
       "event_type": "planning_submitted",
       "title": "EPBC Referral 2002/683",
-      "detail": "Musselroe Wind Farm — Controlled Action",
+      "detail": "Musselroe Wind Farm \u2014 Controlled Action",
       "sources": []
     },
     {
@@ -80,20 +80,6 @@
   "scheme_contracts": [],
   "cost_sources": [],
   "stakeholder_issues": [],
-  "sources": [
-    {
-      "title": "AEMO Generation Information Jan 2026",
-      "url": "https://aemo.com.au/energy-systems/electricity/national-electricity-market-nem/nem-forecasting-and-planning/forecasting-and-planning-data/generation-information",
-      "date": "2026-01-30",
-      "source_tier": 1
-    },
-    {
-      "title": "EPBC Referral 2002/683",
-      "url": "https://epbcpublicportal.environment.gov.au/all-referrals/#!/referral/2002-683",
-      "date": "2026-03-12",
-      "source_tier": 1
-    }
-  ],
   "eis_specs": {
     "document_title": "Musselroe Wind Farm Environmental Impact Assessment (TAS EPA)",
     "document_url": "https://epa.tas.gov.au/assessment/completed-assessments/musselroe-wind-farm",
@@ -106,7 +92,7 @@
     "rotor_diameter_m": 90.0,
     "wind_speed_mean_ms": 9.2,
     "wind_speed_height_m": 95.0,
-    "wind_speed_period": "Mean annual wind speed at hub height; Musselroe Bay, NE Tasmania — from 3-year on-site met mast",
+    "wind_speed_period": "Mean annual wind speed at hub height; Musselroe Bay, NE Tasmania \u2014 from 3-year on-site met mast",
     "assumed_capacity_factor_pct": 42.5,
     "assumed_annual_energy_gwh": 624.0,
     "energy_yield_method": "WAsP modelling; P50 net yield",
@@ -120,5 +106,19 @@
     "connection_distance_note": "~35 km of 110 kV line to TasNetworks 110 kV backbone at St Helens/Scottsdale area, NE Tasmania.",
     "connection_augmentation": "New 110 kV line and substation. TasNetworks augmented NE Tasmania 110 kV backbone. Remote location means long connection. TasNetworks 110 kV (not 132 kV as on mainland).",
     "notes": "168 MW (56 x 3.0 MW Vestas V90), Musselroe Bay, NE Tasmania. Developer: Wind Prospect (now Pacific Hydro / PowAR). TAS EPA approval 2010. Completed 2013. NE Tasmania is among Australia's best wind resource locations. 110 kV TasNetworks connection (TAS uses 110 kV backbone vs 132/220/330 kV on mainland)."
-  }
+  },
+  "sources": [
+    {
+      "title": "AEMO Generation Information Jan 2026",
+      "url": "https://aemo.com.au/energy-systems/electricity/national-electricity-market-nem/nem-forecasting-and-planning/forecasting-and-planning-data/generation-information",
+      "date": "2026-01-30",
+      "source_tier": 1
+    },
+    {
+      "title": "EPBC Referral 2002/683",
+      "url": "https://epbcpublicportal.environment.gov.au/all-referrals/#!/referral/2002-683",
+      "date": "2026-03-12",
+      "source_tier": 1
+    }
+  ]
 }

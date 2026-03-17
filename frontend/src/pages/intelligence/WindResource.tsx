@@ -565,7 +565,7 @@ export default function WindResource() {
               <tr key={farm.project_id} className="border-b border-[var(--color-border)] hover:bg-[var(--color-bg)]/50">
                 <td className="p-3">
                   <Link
-                    to={`/projects/wind/${farm.project_id}?from=intelligence/wind-resource&fromLabel=Back to Wind Resource`}
+                    to={`/projects/${farm.project_id}?from=intelligence/wind-resource&fromLabel=Back to Wind Resource`}
                     className="text-[var(--color-primary)] hover:underline font-medium"
                   >
                     {farm.name}
@@ -633,7 +633,7 @@ export default function WindResource() {
               <tr key={proj.project_id} className="border-b border-[var(--color-border)] hover:bg-[var(--color-bg)]/50">
                 <td className="p-3">
                   <Link
-                    to={`/projects/wind/${proj.project_id}?from=intelligence/wind-resource&fromLabel=Back to Wind Resource`}
+                    to={`/projects/${proj.project_id}?from=intelligence/wind-resource&fromLabel=Back to Wind Resource`}
                     className="text-[var(--color-primary)] hover:underline font-medium"
                   >
                     {proj.name}

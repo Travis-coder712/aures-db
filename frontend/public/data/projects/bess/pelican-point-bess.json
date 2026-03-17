@@ -64,26 +64,8 @@
   "scheme_contracts": [],
   "cost_sources": [],
   "stakeholder_issues": [],
-  "sources": [
-    {
-      "title": "AEMO Generation Information Jan 2026",
-      "url": "https://aemo.com.au/energy-systems/electricity/national-electricity-market-nem/nem-forecasting-and-planning/forecasting-and-planning-data/generation-information",
-      "date": "2026-01-30",
-      "source_tier": 1
-    },
-    {
-      "title": "ENGIE — Pelican Point BESS",
-      "url": "https://engie.com.au/about-us/our-generation-activities/battery-storage/pelican-point-battery-energy-storage-system",
-      "source_tier": 2
-    },
-    {
-      "title": "Power Technology — Pelican Point",
-      "url": "https://www.power-technology.com/news/construction-engies-pelican-point-bess/",
-      "source_tier": 2
-    }
-  ],
   "eis_specs": {
-    "document_title": "Pelican Point Battery Energy Storage System — EIS (SA)",
+    "document_title": "Pelican Point Battery Energy Storage System \u2014 EIS (SA)",
     "document_url": "https://www.sa.gov.au/topics/planning-and-property/land-use-and-planning/development-assessment/major-developments",
     "document_year": 2023,
     "cell_chemistry": "LFP",
@@ -103,8 +85,26 @@
     "connection_substation_name": "Pelican Point 275 kV substation (ENGIE, on-site)",
     "connection_substation_capacity_mva": 600.0,
     "connection_distance_km": 0.0,
-    "connection_distance_note": "On-site — co-located with Pelican Point gas power station 275 kV substation. Zero new transmission line required.",
-    "connection_augmentation": "Minimal. Existing 275 kV connection reused from gas power station. New BESS feeder bay only. Adelaide 275 kV ring has capacity. Very low augmentation cost — significant advantage of co-location.",
+    "connection_distance_note": "On-site \u2014 co-located with Pelican Point gas power station 275 kV substation. Zero new transmission line required.",
+    "connection_augmentation": "Minimal. Existing 275 kV connection reused from gas power station. New BESS feeder bay only. Adelaide 275 kV ring has capacity. Very low augmentation cost \u2014 significant advantage of co-location.",
     "notes": "200 MW / 400 MWh (2-hour) BESS co-located with Pelican Point gas power station, SA. ENGIE. SA DPTI planning approval. Tesla Megapack 2 with LFP cells. Grid-forming (Tesla Virtual Machine Mode). Connected to ElectraNet 275 kV Adelaide metropolitan network. ENGIE confirmed Tesla Megapack 2 in 2024 announcement."
-  }
+  },
+  "sources": [
+    {
+      "title": "AEMO Generation Information Jan 2026",
+      "url": "https://aemo.com.au/energy-systems/electricity/national-electricity-market-nem/nem-forecasting-and-planning/forecasting-and-planning-data/generation-information",
+      "date": "2026-01-30",
+      "source_tier": 1
+    },
+    {
+      "title": "ENGIE \u2014 Pelican Point BESS",
+      "url": "https://engie.com.au/about-us/our-generation-activities/battery-storage/pelican-point-battery-energy-storage-system",
+      "source_tier": 2
+    },
+    {
+      "title": "Power Technology \u2014 Pelican Point",
+      "url": "https://www.power-technology.com/news/construction-engies-pelican-point-bess/",
+      "source_tier": 2
+    }
+  ]
 }

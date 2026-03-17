@@ -14,12 +14,17 @@
   "has_syncon": false,
   "has_statcom": false,
   "has_harmonic_filter": false,
+  "notable": "42 MW / 85 MWh BESS co-located with the Tailem Bend solar complex, SA.",
   "data_confidence": "low",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "1735",
   "confidence_score": "22",
   "first_seen": "2026-03-12",
+  "coordinates": {
+    "lat": -35.26,
+    "lng": 139.44
+  },
   "timeline": [
     {
       "date": "2026-03-12",

@@ -32,14 +32,14 @@
       "date_precision": "year",
       "event_type": "planning_submitted",
       "title": "EPBC Referral 2020/8627",
-      "detail": "Lotus Creek Wind Farm — Action Clearly Unacceptable",
+      "detail": "Lotus Creek Wind Farm \u2014 Action Clearly Unacceptable",
       "sources": []
     },
     {
       "date": "2022",
       "date_precision": "year",
       "event_type": "fid",
-      "title": "Financial close — A$1.3B",
+      "title": "Financial close \u2014 A$1.3B",
       "detail": "Goldwind/Ark Energy reached financial close",
       "sources": []
     },
@@ -117,40 +117,6 @@
   ],
   "cost_sources": [],
   "stakeholder_issues": [],
-  "sources": [
-    {
-      "title": "AEMO Generation Information Jan 2026",
-      "url": "https://aemo.com.au/energy-systems/electricity/national-electricity-market-nem/nem-forecasting-and-planning/forecasting-and-planning-data/generation-information",
-      "date": "2026-01-30",
-      "source_tier": 1
-    },
-    {
-      "title": "Vestas — 285 MW Order",
-      "url": "https://www.vestas.com/en/media/company-news/2024/vestas-successfully-develops-lotus-creek-wind-farm-in-a-c4024583",
-      "source_tier": 2
-    },
-    {
-      "title": "CS Energy — Acquisition",
-      "url": "https://www.csenergy.com.au/news/cs-energy-acquires-lotus-creek-wind-farm",
-      "source_tier": 2
-    },
-    {
-      "title": "Zenviron — Lotus Creek",
-      "url": "https://zenviron.com/projects/lotus-creek-wind-farm",
-      "source_tier": 2
-    },
-    {
-      "title": "Lotus Creek Wind Farm — Official",
-      "url": "https://lotuscreekwindfarm.com.au/",
-      "source_tier": 2
-    },
-    {
-      "title": "EPBC Referral 2020/8627",
-      "url": "https://epbcpublicportal.environment.gov.au/all-referrals/#!/referral/2020-8627",
-      "date": "2026-03-12",
-      "source_tier": 1
-    }
-  ],
   "eis_specs": {
     "document_title": "Lotus Creek Wind Farm Environmental Impact Statement (QLD)",
     "document_url": "https://www.dsdilgp.qld.gov.au/industry/resources-and-energy/coordinated-projects/current-projects/lotus-creek-wind-farm",
@@ -177,5 +143,39 @@
     "connection_distance_note": "~14 km of new 132 kV single-circuit line from project to Marlborough substation; EIS connection study",
     "connection_augmentation": "Marlborough substation augmentation required. New transformer bay. 285 MW capacity may require substation transformer upgrade.",
     "notes": "Located near Lotus Creek, Marlborough area, QLD. CS Energy (Queensland government-owned). QLD Coordinated Project declaration. Strong wind resource in Bowen Basin corridor."
-  }
+  },
+  "sources": [
+    {
+      "title": "AEMO Generation Information Jan 2026",
+      "url": "https://aemo.com.au/energy-systems/electricity/national-electricity-market-nem/nem-forecasting-and-planning/forecasting-and-planning-data/generation-information",
+      "date": "2026-01-30",
+      "source_tier": 1
+    },
+    {
+      "title": "Vestas \u2014 285 MW Order",
+      "url": "https://www.vestas.com/en/media/company-news/2024/vestas-successfully-develops-lotus-creek-wind-farm-in-a-c4024583",
+      "source_tier": 2
+    },
+    {
+      "title": "CS Energy \u2014 Acquisition",
+      "url": "https://www.csenergy.com.au/news/cs-energy-acquires-lotus-creek-wind-farm",
+      "source_tier": 2
+    },
+    {
+      "title": "Zenviron \u2014 Lotus Creek",
+      "url": "https://zenviron.com/projects/lotus-creek-wind-farm",
+      "source_tier": 2
+    },
+    {
+      "title": "Lotus Creek Wind Farm \u2014 Official",
+      "url": "https://lotuscreekwindfarm.com.au/",
+      "source_tier": 2
+    },
+    {
+      "title": "EPBC Referral 2020/8627",
+      "url": "https://epbcpublicportal.environment.gov.au/all-referrals/#!/referral/2020-8627",
+      "date": "2026-03-12",
+      "source_tier": 1
+    }
+  ]
 }

@@ -30,7 +30,7 @@ export function useSearchIndex() {
         id: p.id,
         name: p.name,
         subtitle: `${p.technology} \u00b7 ${p.capacity_mw} MW \u00b7 ${p.state}`,
-        path: `/projects/${p.technology}/${p.id}`,
+        path: `/projects/${p.id}`,
       })
 
       // Extract developers

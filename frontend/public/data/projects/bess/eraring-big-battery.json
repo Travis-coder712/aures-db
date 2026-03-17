@@ -92,16 +92,8 @@
   "scheme_contracts": [],
   "cost_sources": [],
   "stakeholder_issues": [],
-  "sources": [
-    {
-      "title": "AEMO Generation Information Jan 2026",
-      "url": "https://aemo.com.au/energy-systems/electricity/national-electricity-market-nem/nem-forecasting-and-planning/forecasting-and-planning-data/generation-information",
-      "date": "2026-01-30",
-      "source_tier": 1
-    }
-  ],
   "eis_specs": {
-    "document_title": "Eraring Big Battery — State Significant Development Assessment (NSW IPC SSD-2022-0119)",
+    "document_title": "Eraring Big Battery \u2014 State Significant Development Assessment (NSW IPC SSD-2022-0119)",
     "document_url": "https://www.planningportal.nsw.gov.au/major-projects/projects/eraring-big-battery",
     "document_year": 2022,
     "cell_chemistry": "LFP",
@@ -121,8 +113,16 @@
     "connection_substation_name": "Eraring 330 kV substation (TransGrid), Lake Macquarie NSW (on-site, former power station)",
     "connection_substation_capacity_mva": 3000.0,
     "connection_distance_km": 0.0,
-    "connection_distance_note": "On-site — located within the Eraring Power Station compound on Lake Macquarie, NSW. Former 2,880 MW coal plant 330 kV substation reused.",
+    "connection_distance_note": "On-site \u2014 located within the Eraring Power Station compound on Lake Macquarie, NSW. Former 2,880 MW coal plant 330 kV substation reused.",
     "connection_augmentation": "IMPORTANT NOTE: This is a separate battery from the existing eraring-battery (150 MW Tesla Megapack). The Eraring Big Battery (700 MW Wartsila Quantum3) is a different, larger project also at the Eraring site. Both batteries use the same TransGrid 330 kV Eraring substation, eliminating major connection capex.",
     "notes": "700 MW / 1,390 MWh (2-hour) BESS at Eraring Power Station, Lake Macquarie NSW. Developer: Origin Energy. Technology: Wartsila Quantum3 (LFP, CATL). EPC: Enerven. NSW IPC SSD-2022-0119. Now operating. Distinct from the 150 MW eraring-battery (Tesla Megapack). Both batteries exploit the exceptional TransGrid 330 kV infrastructure at this former 2,880 MW coal plant."
-  }
+  },
+  "sources": [
+    {
+      "title": "AEMO Generation Information Jan 2026",
+      "url": "https://aemo.com.au/energy-systems/electricity/national-electricity-market-nem/nem-forecasting-and-planning/forecasting-and-planning-data/generation-information",
+      "date": "2026-01-30",
+      "source_tier": 1
+    }
+  ]
 }

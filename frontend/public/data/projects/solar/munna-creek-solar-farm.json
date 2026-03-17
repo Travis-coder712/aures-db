@@ -13,6 +13,7 @@
   "has_syncon": false,
   "has_statcom": false,
   "has_harmonic_filter": false,
+  "notable": "120 MW solar farm in the Wide Bay region, QLD. Developed by Lightsource bp.",
   "data_confidence": "low",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
@@ -20,6 +21,10 @@
   "confidence_score": "17",
   "development_stage": "epbc_submitted",
   "first_seen": "2023",
+  "coordinates": {
+    "lat": -25.92,
+    "lng": 151.83
+  },
   "timeline": [
     {
       "date": "2023",

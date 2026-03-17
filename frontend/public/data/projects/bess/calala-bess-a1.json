@@ -33,7 +33,7 @@
       "date": "2025-03-01",
       "date_precision": "month",
       "event_type": "notable",
-      "title": "Financial close — A$260M",
+      "title": "Financial close \u2014 A$260M",
       "detail": "Westpac, SocGen, SMBC; first merchant BESS debt in NSW",
       "sources": []
     },
@@ -75,26 +75,8 @@
   "scheme_contracts": [],
   "cost_sources": [],
   "stakeholder_issues": [],
-  "sources": [
-    {
-      "title": "AEMO Generation Information Jan 2026",
-      "url": "https://aemo.com.au/energy-systems/electricity/national-electricity-market-nem/nem-forecasting-and-planning/forecasting-and-planning-data/generation-information",
-      "date": "2026-01-30",
-      "source_tier": 1
-    },
-    {
-      "title": "Equis — Calala BESS",
-      "url": "https://equis.engagementhub.com.au/calala-bess",
-      "source_tier": 2
-    },
-    {
-      "title": "Energy-Storage.News — Merchant BESS",
-      "url": "https://www.energy-storage.news/equis-claims-new-south-wales-first-merchant-bess-debt-financing-for-500mwh-asset/",
-      "source_tier": 2
-    }
-  ],
   "eis_specs": {
-    "document_title": "Calala BESS A1 — State Significant Development Assessment (NSW IPC SSD)",
+    "document_title": "Calala BESS A1 \u2014 State Significant Development Assessment (NSW IPC SSD)",
     "document_url": "https://www.planningportal.nsw.gov.au/major-projects/projects/calala-battery-energy-storage-system",
     "document_year": 2022,
     "cell_chemistry": "LFP",
@@ -117,5 +99,23 @@
     "connection_distance_note": "~8 km of 330 kV connection to TransGrid Tamworth 330 kV substation. Co-located infrastructure with Calala A2.",
     "connection_augmentation": "TransGrid Tamworth 330 kV substation augmentation for New England REZ. Calala A1 and A2 share grid connection infrastructure at Tamworth 330 kV node.",
     "notes": "100 MW / 200 MWh (2-hour) BESS, Calala (Tamworth), NSW. Developer: CWP Energy (now RES). Technology: Tesla Megapack (LFP). BOP: CPP. NSW IPC SSD approval 2022. Under construction 2024. Co-located with Calala A2 (150 MW / 300 MWh). Located within NSW New England REZ."
-  }
+  },
+  "sources": [
+    {
+      "title": "AEMO Generation Information Jan 2026",
+      "url": "https://aemo.com.au/energy-systems/electricity/national-electricity-market-nem/nem-forecasting-and-planning/forecasting-and-planning-data/generation-information",
+      "date": "2026-01-30",
+      "source_tier": 1
+    },
+    {
+      "title": "Equis \u2014 Calala BESS",
+      "url": "https://equis.engagementhub.com.au/calala-bess",
+      "source_tier": 2
+    },
+    {
+      "title": "Energy-Storage.News \u2014 Merchant BESS",
+      "url": "https://www.energy-storage.news/equis-claims-new-south-wales-first-merchant-bess-debt-financing-for-500mwh-asset/",
+      "source_tier": 2
+    }
+  ]
 }

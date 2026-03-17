@@ -72,14 +72,6 @@
   "scheme_contracts": [],
   "cost_sources": [],
   "stakeholder_issues": [],
-  "sources": [
-    {
-      "title": "AEMO Generation Information Jan 2026",
-      "url": "https://aemo.com.au/energy-systems/electricity/national-electricity-market-nem/nem-forecasting-and-planning/forecasting-and-planning-data/generation-information",
-      "date": "2026-01-30",
-      "source_tier": 1
-    }
-  ],
   "eis_specs": {
     "document_title": "Yendon Wind Farm Environment Effects Statement (VIC DEECA EES)",
     "document_url": "https://www.planning.vic.gov.au/schemes-and-amendments/statewide-activities/environment-effects-statements/current-and-completed-ees/yendon-wind-farm",
@@ -106,5 +98,13 @@
     "connection_distance_note": "~5 km of 66 kV connection to AusNet Services Ballarat-area 66 kV network.",
     "connection_augmentation": "AusNet 66 kV network upgrade near Ballarat. 66 kV connection appropriate for 142 MW given local network capacity.",
     "notes": "142 MW (34 x 4.2 MW Vestas V150), near Yendon/Buninyong, Central Victoria (east of Ballarat). Developer: Pacific Hydro (PowAR). VIC EES approved 2019. Now operating. 66 kV connection reflects existing AusNet infrastructure in the Ballarat area."
-  }
+  },
+  "sources": [
+    {
+      "title": "AEMO Generation Information Jan 2026",
+      "url": "https://aemo.com.au/energy-systems/electricity/national-electricity-market-nem/nem-forecasting-and-planning/forecasting-and-planning-data/generation-information",
+      "date": "2026-01-30",
+      "source_tier": 1
+    }
+  ]
 }

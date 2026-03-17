@@ -32,7 +32,7 @@
       "date_precision": "year",
       "event_type": "planning_submitted",
       "title": "EPBC Referral 2005/2140",
-      "detail": "Hawkesdale Wind Farm — Not Controlled Action",
+      "detail": "Hawkesdale Wind Farm \u2014 Not Controlled Action",
       "sources": []
     },
     {
@@ -74,20 +74,6 @@
   "scheme_contracts": [],
   "cost_sources": [],
   "stakeholder_issues": [],
-  "sources": [
-    {
-      "title": "AEMO Generation Information Jan 2026",
-      "url": "https://aemo.com.au/energy-systems/electricity/national-electricity-market-nem/nem-forecasting-and-planning/forecasting-and-planning-data/generation-information",
-      "date": "2026-01-30",
-      "source_tier": 1
-    },
-    {
-      "title": "EPBC Referral 2005/2140",
-      "url": "https://epbcpublicportal.environment.gov.au/all-referrals/#!/referral/2005-2140",
-      "date": "2026-03-12",
-      "source_tier": 1
-    }
-  ],
   "eis_specs": {
     "document_title": "Hawkesdale Wind Farm Environment Effects Statement (VIC DEECA EES)",
     "document_url": "https://www.planning.vic.gov.au/schemes-and-amendments/statewide-activities/environment-effects-statements/current-and-completed-ees/hawkesdale-wind-farm",
@@ -114,5 +100,19 @@
     "connection_distance_note": "~8 km of 66 kV line to AusNet Services SW Victoria 66 kV network near Hawkesdale.",
     "connection_augmentation": "New 66 kV connection to AusNet Services. Modest augmentation for 90 MW project.",
     "notes": "90 MW (21 x 4.2 MW Vestas V150), near Hawkesdale, SW Victoria near Warrnambool. Developer: Pacific Hydro (PowAR). VIC EES approved 2020. Now operating. SW VIC coastal plains provide good wind resource."
-  }
+  },
+  "sources": [
+    {
+      "title": "AEMO Generation Information Jan 2026",
+      "url": "https://aemo.com.au/energy-systems/electricity/national-electricity-market-nem/nem-forecasting-and-planning/forecasting-and-planning-data/generation-information",
+      "date": "2026-01-30",
+      "source_tier": 1
+    },
+    {
+      "title": "EPBC Referral 2005/2140",
+      "url": "https://epbcpublicportal.environment.gov.au/all-referrals/#!/referral/2005-2140",
+      "date": "2026-03-12",
+      "source_tier": 1
+    }
+  ]
 }

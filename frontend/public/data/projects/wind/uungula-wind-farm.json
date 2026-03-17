@@ -39,7 +39,7 @@
       "date": "2023",
       "date_precision": "year",
       "event_type": "fid",
-      "title": "Financial close — A$820M",
+      "title": "Financial close \u2014 A$820M",
       "detail": "Squadron Energy reached financial close",
       "sources": []
     },
@@ -103,34 +103,6 @@
   ],
   "cost_sources": [],
   "stakeholder_issues": [],
-  "sources": [
-    {
-      "title": "AEMO Generation Information Jan 2026",
-      "url": "https://aemo.com.au/energy-systems/electricity/national-electricity-market-nem/nem-forecasting-and-planning/forecasting-and-planning-data/generation-information",
-      "date": "2026-01-30",
-      "source_tier": 1
-    },
-    {
-      "title": "Squadron Energy — Uungula",
-      "url": "https://squadronenergy.com/our-projects/uungula-wind-farm/",
-      "source_tier": 2
-    },
-    {
-      "title": "Squadron Energy — Construction Start",
-      "url": "https://squadronenergy.com/news/squadron-energy-starts-work-on-largest-nsw-wind-farm-commits-to-14gw-renewable-energy-pipeline-powering-six-million-homes/",
-      "source_tier": 2
-    },
-    {
-      "title": "GE Vernova — 1.4 GW Agreement",
-      "url": "https://www.gevernova.com/news/press-releases/ge-vernova-announces-1point4-gw-of-onshore-wind-projects-with-squadron-energy-australia",
-      "source_tier": 2
-    },
-    {
-      "title": "NSW Planning Portal — SSD-6687",
-      "url": "https://www.planningportal.nsw.gov.au/major-projects/projects/uungula-wind-farm",
-      "source_tier": 2
-    }
-  ],
   "eis_specs": {
     "document_title": "Uungula Wind Farm Environmental Impact Statement (NSW SSD)",
     "document_url": "https://www.planningportal.nsw.gov.au/major-projects/projects/uungula-wind-energy-facility",
@@ -157,5 +129,33 @@
     "connection_distance_note": "~18 km of new 330 kV line from project to CWO REZ Elong Elong connection hub; EIS Section 9 network connection study",
     "connection_augmentation": "TransGrid CWO REZ infrastructure (Elong Elong 330 kV substation) funded under REZ access scheme. Connection cost partially socialised across all CWO REZ access rights holders.",
     "notes": "Located near Narromine and Trangie, Central-West NSW. NSW IPC determination June 2023. Squadron Energy (Tattarang / Andrew Forrest). Central-West Orana REZ access rights holder. Construction commenced 2025."
-  }
+  },
+  "sources": [
+    {
+      "title": "AEMO Generation Information Jan 2026",
+      "url": "https://aemo.com.au/energy-systems/electricity/national-electricity-market-nem/nem-forecasting-and-planning/forecasting-and-planning-data/generation-information",
+      "date": "2026-01-30",
+      "source_tier": 1
+    },
+    {
+      "title": "Squadron Energy \u2014 Uungula",
+      "url": "https://squadronenergy.com/our-projects/uungula-wind-farm/",
+      "source_tier": 2
+    },
+    {
+      "title": "Squadron Energy \u2014 Construction Start",
+      "url": "https://squadronenergy.com/news/squadron-energy-starts-work-on-largest-nsw-wind-farm-commits-to-14gw-renewable-energy-pipeline-powering-six-million-homes/",
+      "source_tier": 2
+    },
+    {
+      "title": "GE Vernova \u2014 1.4 GW Agreement",
+      "url": "https://www.gevernova.com/news/press-releases/ge-vernova-announces-1point4-gw-of-onshore-wind-projects-with-squadron-energy-australia",
+      "source_tier": 2
+    },
+    {
+      "title": "NSW Planning Portal \u2014 SSD-6687",
+      "url": "https://www.planningportal.nsw.gov.au/major-projects/projects/uungula-wind-farm",
+      "source_tier": 2
+    }
+  ]
 }

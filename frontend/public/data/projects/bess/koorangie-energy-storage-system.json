@@ -93,16 +93,8 @@
   "scheme_contracts": [],
   "cost_sources": [],
   "stakeholder_issues": [],
-  "sources": [
-    {
-      "title": "AEMO Generation Information Jan 2026",
-      "url": "https://aemo.com.au/energy-systems/electricity/national-electricity-market-nem/nem-forecasting-and-planning/forecasting-and-planning-data/generation-information",
-      "date": "2026-01-30",
-      "source_tier": 1
-    }
-  ],
   "eis_specs": {
-    "document_title": "Koorangie Energy Storage System — Planning Permit Application (VIC DEECA)",
+    "document_title": "Koorangie Energy Storage System \u2014 Planning Permit Application (VIC DEECA)",
     "document_url": "https://www.planning.vic.gov.au/",
     "document_year": 2022,
     "cell_chemistry": "LFP",
@@ -125,5 +117,13 @@
     "connection_distance_note": "~3 km to AusNet Services Koorangie area 220 kV network, Northern Victoria (Murray-Darling Basin region).",
     "connection_augmentation": "AusNet augmentation of Northern Victoria 220 kV network. Grid-forming Tesla Megapack provides synthetic inertia for Northern Victoria-NSW interconnect.",
     "notes": "185 MW / 370 MWh (2-hour) BESS, Koorangie area, Northern Victoria (near Kerang). Developer: Energy Australia. Technology: Tesla Megapack (LFP, grid-forming). EPC: CPP. VIC planning approval 2022. Now operating (2024). Grid-forming provides synthetic inertia for Northern VIC network. AusNet 220 kV connection. VIC CIS contract holder."
-  }
+  },
+  "sources": [
+    {
+      "title": "AEMO Generation Information Jan 2026",
+      "url": "https://aemo.com.au/energy-systems/electricity/national-electricity-market-nem/nem-forecasting-and-planning/forecasting-and-planning-data/generation-information",
+      "date": "2026-01-30",
+      "source_tier": 1
+    }
+  ]
 }

@@ -13,12 +13,17 @@
   "has_syncon": false,
   "has_statcom": false,
   "has_harmonic_filter": false,
+  "notable": "78 MW solar farm near Bundaberg, QLD. Part of the Wide Bay renewable energy corridor.",
   "data_confidence": "low",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "1711",
   "confidence_score": "17",
   "first_seen": "2026-03-12",
+  "coordinates": {
+    "lat": -24.87,
+    "lng": 152.35
+  },
   "timeline": [
     {
       "date": "2026-03-12",

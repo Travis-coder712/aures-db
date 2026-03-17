@@ -14,12 +14,17 @@
   "has_syncon": false,
   "has_statcom": false,
   "has_harmonic_filter": false,
+  "notable": "80 MW solar + BESS near Sale, VIC. Hybrid project in the Gippsland region.",
   "data_confidence": "low",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "1977",
   "confidence_score": "22",
   "first_seen": "2026-03-12",
+  "coordinates": {
+    "lat": -38.13,
+    "lng": 147.01
+  },
   "timeline": [
     {
       "date": "2026-03-12",

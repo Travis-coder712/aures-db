@@ -36,7 +36,7 @@
       "date_precision": "year",
       "event_type": "planning_submitted",
       "title": "EPBC Referral 2023/09512",
-      "detail": "Orana Battery Energy Storage System (BESS) — Completed",
+      "detail": "Orana Battery Energy Storage System (BESS) \u2014 Completed",
       "sources": []
     },
     {
@@ -51,7 +51,7 @@
       "date": "2024-07-01",
       "date_precision": "month",
       "event_type": "notable",
-      "title": "Financial close — A$650M",
+      "title": "Financial close \u2014 A$650M",
       "detail": "Largest BESS financing globally; ANZ, CBA, Westpac led consortium",
       "sources": []
     },
@@ -110,37 +110,8 @@
   ],
   "cost_sources": [],
   "stakeholder_issues": [],
-  "sources": [
-    {
-      "title": "AEMO Generation Information Jan 2026",
-      "url": "https://aemo.com.au/energy-systems/electricity/national-electricity-market-nem/nem-forecasting-and-planning/forecasting-and-planning-data/generation-information",
-      "date": "2026-01-30",
-      "source_tier": 1
-    },
-    {
-      "title": "Akaysha Energy — Orana BESS",
-      "url": "https://akayshaenergy.com/projects/orana-bess",
-      "source_tier": 2
-    },
-    {
-      "title": "Akaysha — $650M Financing",
-      "url": "https://akayshaenergy.com/news/akaysha-energy-secures-largest-bess-financing-globally-at-650-million",
-      "source_tier": 2
-    },
-    {
-      "title": "RenewEconomy — Orana Finance",
-      "url": "https://reneweconomy.com.au/huge-finance-deal-and-off-take-landed-for-one-of-australias-biggest-four-hour-battery-projects/",
-      "source_tier": 2
-    },
-    {
-      "title": "EPBC Referral 2023/09512",
-      "url": "https://epbcpublicportal.environment.gov.au/all-referrals/#!/referral/2023-09512",
-      "date": "2026-03-12",
-      "source_tier": 1
-    }
-  ],
   "eis_specs": {
-    "document_title": "Orana Battery Energy Storage System — SSD EIS (NSW)",
+    "document_title": "Orana Battery Energy Storage System \u2014 SSD EIS (NSW)",
     "document_url": "https://www.planningportal.nsw.gov.au/major-projects/projects/orana-battery-energy-storage-system",
     "document_year": 2023,
     "cell_chemistry": "LFP",
@@ -148,7 +119,7 @@
     "cell_supplier": "Powin Energy / CATL",
     "cell_country_of_manufacture": "China",
     "inverter_supplier": "Powin Energy",
-    "inverter_model": "Powin Stack750 — integrated PCS",
+    "inverter_model": "Powin Stack750 \u2014 integrated PCS",
     "inverter_country_of_manufacture": "China (manufactured) / USA (designed)",
     "pcs_type": "grid_forming",
     "round_trip_efficiency_pct": 87.0,
@@ -163,5 +134,34 @@
     "connection_distance_note": "~12 km of new 330 kV line to CWO REZ Elong Elong hub; EIS network connection study Section 9",
     "connection_augmentation": "TransGrid CWO REZ infrastructure partially funded via REZ access charge. Connection cost socialised across CWO REZ access rights holders. Significant cost saving vs standalone connection.",
     "notes": "415 MW / 1,662 MWh (4-hour) BESS in Central-West Orana REZ, NSW. Akaysha Energy (BlackRock Real Assets). NSW SSD approval. CWO REZ access rights holder. Powin Stack750 system uses CATL LFP cells. Grid-forming PCS capability specified in EIS. Connection to the 330 kV TransGrid network at the CWO REZ connection point. Part of Akaysha/BlackRock's portfolio of large Australian BESS projects."
-  }
+  },
+  "sources": [
+    {
+      "title": "AEMO Generation Information Jan 2026",
+      "url": "https://aemo.com.au/energy-systems/electricity/national-electricity-market-nem/nem-forecasting-and-planning/forecasting-and-planning-data/generation-information",
+      "date": "2026-01-30",
+      "source_tier": 1
+    },
+    {
+      "title": "Akaysha Energy \u2014 Orana BESS",
+      "url": "https://akayshaenergy.com/projects/orana-bess",
+      "source_tier": 2
+    },
+    {
+      "title": "Akaysha \u2014 $650M Financing",
+      "url": "https://akayshaenergy.com/news/akaysha-energy-secures-largest-bess-financing-globally-at-650-million",
+      "source_tier": 2
+    },
+    {
+      "title": "RenewEconomy \u2014 Orana Finance",
+      "url": "https://reneweconomy.com.au/huge-finance-deal-and-off-take-landed-for-one-of-australias-biggest-four-hour-battery-projects/",
+      "source_tier": 2
+    },
+    {
+      "title": "EPBC Referral 2023/09512",
+      "url": "https://epbcpublicportal.environment.gov.au/all-referrals/#!/referral/2023-09512",
+      "date": "2026-03-12",
+      "source_tier": 1
+    }
+  ]
 }

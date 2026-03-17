@@ -1138,6 +1138,8 @@
       "name": "Boulder Creek Wind Farm",
       "state": "QLD",
       "capacity_mw": 228.0,
+      "latitude": -20.77,
+      "longitude": 148.53,
       "predicted_cf_pct": 35.8,
       "predicted_rating": "Excellent",
       "basis": "state_average"
@@ -1239,6 +1241,8 @@
       "name": "Carmodys Hill Wind Farm",
       "state": "SA",
       "capacity_mw": 256.0,
+      "latitude": -33.54,
+      "longitude": 138.58,
       "predicted_cf_pct": 25.7,
       "predicted_rating": "Average",
       "basis": "state_average"
@@ -2178,5 +2182,5 @@
   ],
   "total_operating": 80,
   "total_development": 128,
-  "exported_at": "2026-03-15T22:05:23.097811"
+  "exported_at": "2026-03-17T21:50:10.135793"
 }

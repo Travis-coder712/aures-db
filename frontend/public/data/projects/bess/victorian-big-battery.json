@@ -179,18 +179,8 @@
   "stakeholder_issues": [
     "Megapack fire July 2021"
   ],
-  "sources": [
-    {
-      "title": "AEMO Generation Information",
-      "url": "https://aemo.com.au"
-    },
-    {
-      "title": "Neoen",
-      "url": "https://neoen.com/"
-    }
-  ],
   "eis_specs": {
-    "document_title": "Victorian Big Battery — Planning Permit Application (VIC DEECA fast-track approval)",
+    "document_title": "Victorian Big Battery \u2014 Planning Permit Application (VIC DEECA fast-track approval)",
     "document_url": "https://www.planning.vic.gov.au/",
     "document_year": 2021,
     "cell_chemistry": "LFP",
@@ -210,8 +200,18 @@
     "connection_substation_name": "Moorabool 500/220 kV substation (AusNet Services), Lara near Geelong VIC (on-site)",
     "connection_substation_capacity_mva": 3000.0,
     "connection_distance_km": 0.0,
-    "connection_distance_note": "On-site — located within the Moorabool 500/220 kV substation compound, Lara, near Geelong VIC.",
-    "connection_augmentation": "Minimal — Moorabool is one of the most significant 500 kV substations in the NEM. BESS occupies cleared land within substation perimeter. VIC government fast-tracked via state planning approval.",
+    "connection_distance_note": "On-site \u2014 located within the Moorabool 500/220 kV substation compound, Lara, near Geelong VIC.",
+    "connection_augmentation": "Minimal \u2014 Moorabool is one of the most significant 500 kV substations in the NEM. BESS occupies cleared land within substation perimeter. VIC government fast-tracked via state planning approval.",
     "notes": "300 MW / 450 MWh (1.5-hour) BESS at Moorabool 500/220 kV substation, Lara, near Geelong VIC. Developer: Neoen Australia. Technology: Tesla Megapack (LFP). AusNet Services NSP confirmed. VIC fast-track approval 2021. Completed in under 6 months from approval to energisation. Famous for Megapack unit fire during commissioning (Sep 2021) before entering commercial operation. Key firming capacity for VIC grid during high renewable penetration."
-  }
+  },
+  "sources": [
+    {
+      "title": "AEMO Generation Information",
+      "url": "https://aemo.com.au"
+    },
+    {
+      "title": "Neoen",
+      "url": "https://neoen.com/"
+    }
+  ]
 }

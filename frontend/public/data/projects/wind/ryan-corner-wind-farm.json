@@ -33,7 +33,7 @@
       "date_precision": "year",
       "event_type": "planning_submitted",
       "title": "EPBC Referral 2005/2142",
-      "detail": "Ryan Corner Wind Farm — Not Controlled Action",
+      "detail": "Ryan Corner Wind Farm \u2014 Not Controlled Action",
       "sources": []
     },
     {
@@ -86,20 +86,6 @@
   "scheme_contracts": [],
   "cost_sources": [],
   "stakeholder_issues": [],
-  "sources": [
-    {
-      "title": "AEMO Generation Information Jan 2026",
-      "url": "https://aemo.com.au/energy-systems/electricity/national-electricity-market-nem/nem-forecasting-and-planning/forecasting-and-planning-data/generation-information",
-      "date": "2026-01-30",
-      "source_tier": 1
-    },
-    {
-      "title": "EPBC Referral 2005/2142",
-      "url": "https://epbcpublicportal.environment.gov.au/all-referrals/#!/referral/2005-2142",
-      "date": "2026-03-12",
-      "source_tier": 1
-    }
-  ],
   "eis_specs": {
     "document_title": "Ryan Corner Wind Farm Environment Effects Statement (VIC DEECA EES)",
     "document_url": "https://www.planning.vic.gov.au/schemes-and-amendments/statewide-activities/environment-effects-statements/current-and-completed-ees/ryan-corner-wind-farm",
@@ -112,7 +98,7 @@
     "rotor_diameter_m": 150.0,
     "wind_speed_mean_ms": 8.4,
     "wind_speed_height_m": 125.0,
-    "wind_speed_period": "Mean annual wind speed at hub height; Western Victoria near Hamilton — from on-site met mast and ERA5",
+    "wind_speed_period": "Mean annual wind speed at hub height; Western Victoria near Hamilton \u2014 from on-site met mast and ERA5",
     "assumed_capacity_factor_pct": 40.0,
     "assumed_annual_energy_gwh": 763.0,
     "energy_yield_method": "WAsP with ERA5 long-term correction; P50 net yield",
@@ -126,5 +112,19 @@
     "connection_distance_note": "~10 km of 220 kV connection to AusNet Services South-West Victoria 220 kV network near Hamilton.",
     "connection_augmentation": "New 220 kV substation and connection line. AusNet augmented the Hamilton/Portland corridor for Ryan Corner and adjacent projects.",
     "notes": "218 MW (52 x 4.2 MW Vestas V150), Western Victoria near Hamilton. Developer: Pacific Hydro (PowAR). BOP: Decmil/RJE JV. VIC EES approved 2020. Now operating (2023). SW VIC coastal plains provide excellent wind resource."
-  }
+  },
+  "sources": [
+    {
+      "title": "AEMO Generation Information Jan 2026",
+      "url": "https://aemo.com.au/energy-systems/electricity/national-electricity-market-nem/nem-forecasting-and-planning/forecasting-and-planning-data/generation-information",
+      "date": "2026-01-30",
+      "source_tier": 1
+    },
+    {
+      "title": "EPBC Referral 2005/2142",
+      "url": "https://epbcpublicportal.environment.gov.au/all-referrals/#!/referral/2005-2142",
+      "date": "2026-03-12",
+      "source_tier": 1
+    }
+  ]
 }

@@ -256,6 +256,7 @@ export interface ProjectSummary {
   notable?: string
   first_seen?: string
   has_eis_data?: boolean    // true when eis_specs are populated (planning document sourced)
+  zombie_flag?: 'zombie_stale' | 'zombie_minimal' | null  // stale or minimal-data projects
 }
 
 // CIS/LTESA types

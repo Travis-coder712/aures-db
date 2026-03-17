@@ -14,12 +14,17 @@
   "has_syncon": false,
   "has_statcom": false,
   "has_harmonic_filter": false,
+  "notable": "111 MW / 222 MWh BESS near Mallala, SA. Nexif Energy project.",
   "data_confidence": "low",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "1911",
   "confidence_score": "22",
   "first_seen": "2026-03-12",
+  "coordinates": {
+    "lat": -34.55,
+    "lng": 138.51
+  },
   "timeline": [
     {
       "date": "2026-03-12",
@@ -51,14 +56,6 @@
   "scheme_contracts": [],
   "cost_sources": [],
   "stakeholder_issues": [],
-  "sources": [
-    {
-      "title": "AEMO Generation Information Jan 2026",
-      "url": "https://aemo.com.au/energy-systems/electricity/national-electricity-market-nem/nem-forecasting-and-planning/forecasting-and-planning-data/generation-information",
-      "date": "2026-01-30",
-      "source_tier": 1
-    }
-  ],
   "eis_specs": {
     "document_title": "Templers BESS Development Application (SA EPA)",
     "document_url": "https://www.epa.sa.gov.au/",
@@ -82,6 +79,14 @@
     "connection_distance_km": 5.0,
     "connection_distance_note": "~5 km of 66 kV connection to ElectraNet Templers 275/66 kV substation, Mid North SA near Port Wakefield.",
     "connection_augmentation": "ElectraNet augmentation of Mid North SA 275 kV network. Templers area has existing infrastructure for adjacent wind/solar projects.",
-    "notes": "111 MW / 291 MWh (~2.6-hour) BESS, Templers, Mid North SA (near Port Wakefield). Developer: Tilt Renewables Australia. Technology: Sungrow integrated LFP battery system. EPC: CPP. SA development approval 2022. Commissioning 2025. ~2.6-hour duration — longer than standard 2-hour. ElectraNet 275 kV connection via Templers substation."
-  }
+    "notes": "111 MW / 291 MWh (~2.6-hour) BESS, Templers, Mid North SA (near Port Wakefield). Developer: Tilt Renewables Australia. Technology: Sungrow integrated LFP battery system. EPC: CPP. SA development approval 2022. Commissioning 2025. ~2.6-hour duration \u2014 longer than standard 2-hour. ElectraNet 275 kV connection via Templers substation."
+  },
+  "sources": [
+    {
+      "title": "AEMO Generation Information Jan 2026",
+      "url": "https://aemo.com.au/energy-systems/electricity/national-electricity-market-nem/nem-forecasting-and-planning/forecasting-and-planning-data/generation-information",
+      "date": "2026-01-30",
+      "source_tier": 1
+    }
+  ]
 }

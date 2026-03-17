@@ -32,6 +32,14 @@ export default function ProjectCard({ project }: ProjectCardProps) {
             EIS
           </span>
         )}
+        {project.zombie_flag && (
+          <span
+            title={project.zombie_flag === 'zombie_stale' ? 'Stale project — first tracked before 2020, no significant progress' : 'Minimal data — low confidence, limited public information'}
+            className="text-[9px] font-bold px-1.5 py-0.5 rounded bg-red-500/20 text-red-400 border border-red-500/20 tracking-wide"
+          >
+            {project.zombie_flag === 'zombie_stale' ? 'STALE' : 'LOW DATA'}
+          </span>
+        )}
       </div>
 
       <div className="flex items-center justify-between text-xs text-[var(--color-text-muted)]">

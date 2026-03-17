@@ -61,21 +61,8 @@
   "scheme_contracts": [],
   "cost_sources": [],
   "stakeholder_issues": [],
-  "sources": [
-    {
-      "title": "AEMO Generation Information Jan 2026",
-      "url": "https://aemo.com.au/energy-systems/electricity/national-electricity-market-nem/nem-forecasting-and-planning/forecasting-and-planning-data/generation-information",
-      "date": "2026-01-30",
-      "source_tier": 1
-    },
-    {
-      "title": "Equis — Calala BESS",
-      "url": "https://equis.engagementhub.com.au/calala-bess",
-      "source_tier": 2
-    }
-  ],
   "eis_specs": {
-    "document_title": "Calala BESS A2 — State Significant Development Assessment (NSW IPC SSD)",
+    "document_title": "Calala BESS A2 \u2014 State Significant Development Assessment (NSW IPC SSD)",
     "document_url": "https://www.planningportal.nsw.gov.au/major-projects/projects/calala-battery-energy-storage-system",
     "document_year": 2022,
     "cell_chemistry": "LFP",
@@ -98,5 +85,18 @@
     "connection_distance_note": "~8 km to TransGrid Tamworth 330 kV substation. Shared co-located infrastructure with Calala A1.",
     "connection_augmentation": "Shared connection infrastructure with Calala A1. Combined A1+A2 = 250 MW / 500 MWh at Tamworth 330 kV. TransGrid New England REZ augmentation serves both stages.",
     "notes": "150 MW / 300 MWh (2-hour) BESS, Calala (Tamworth), NSW. Developer: CWP Energy (now RES). Technology: Tesla Megapack (LFP). NSW IPC SSD approval 2022. Under construction 2024. Co-located with Calala A1. Combined Calala complex = 250 MW / 500 MWh."
-  }
+  },
+  "sources": [
+    {
+      "title": "AEMO Generation Information Jan 2026",
+      "url": "https://aemo.com.au/energy-systems/electricity/national-electricity-market-nem/nem-forecasting-and-planning/forecasting-and-planning-data/generation-information",
+      "date": "2026-01-30",
+      "source_tier": 1
+    },
+    {
+      "title": "Equis \u2014 Calala BESS",
+      "url": "https://equis.engagementhub.com.au/calala-bess",
+      "source_tier": 2
+    }
+  ]
 }

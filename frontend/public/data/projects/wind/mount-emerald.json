@@ -71,16 +71,8 @@
   "scheme_contracts": [],
   "cost_sources": [],
   "stakeholder_issues": [],
-  "sources": [
-    {
-      "title": "AEMO Generation Information Jan 2026",
-      "url": "https://aemo.com.au/energy-systems/electricity/national-electricity-market-nem/nem-forecasting-and-planning/forecasting-and-planning-data/generation-information",
-      "date": "2026-01-30",
-      "source_tier": 1
-    }
-  ],
   "eis_specs": {
-    "document_title": "Mount Emerald Wind Farm EIS — Coordinator-General's Report (QLD DSDILGP)",
+    "document_title": "Mount Emerald Wind Farm EIS \u2014 Coordinator-General's Report (QLD DSDILGP)",
     "document_url": "https://www.dsdilgp.qld.gov.au/our-work/major-projects/energy-projects/mount-emerald-wind-farm",
     "document_year": 2013,
     "turbine_model": "Vestas V117-3.45 MW",
@@ -104,6 +96,14 @@
     "connection_distance_km": 20.0,
     "connection_distance_note": "~20 km of 132 kV line to Powerlink Tablelands 132 kV network, Far North QLD.",
     "connection_augmentation": "Powerlink Far North QLD 132 kV network reinforcement. Mount Emerald and adjacent Kaban share connection infrastructure. Both required combined network upgrade.",
-    "notes": "181 MW (52 x 3.45 MW Vestas V117), Mount Emerald, Atherton Tablelands, Far North QLD (near Cairns). Developer: Ratch Australia. QLD EIS approved 2013. Now operating (2018). 132 kV Powerlink connection — constrained by the remote Far North QLD grid. Adjacent to 152 MW Kaban Wind Farm."
-  }
+    "notes": "181 MW (52 x 3.45 MW Vestas V117), Mount Emerald, Atherton Tablelands, Far North QLD (near Cairns). Developer: Ratch Australia. QLD EIS approved 2013. Now operating (2018). 132 kV Powerlink connection \u2014 constrained by the remote Far North QLD grid. Adjacent to 152 MW Kaban Wind Farm."
+  },
+  "sources": [
+    {
+      "title": "AEMO Generation Information Jan 2026",
+      "url": "https://aemo.com.au/energy-systems/electricity/national-electricity-market-nem/nem-forecasting-and-planning/forecasting-and-planning-data/generation-information",
+      "date": "2026-01-30",
+      "source_tier": 1
+    }
+  ]
 }

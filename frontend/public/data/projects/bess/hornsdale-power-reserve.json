@@ -59,7 +59,7 @@
       "date": "2017-12-01",
       "date_precision": "month",
       "event_type": "cod",
-      "title": "Phase 1 operational — 100 MW / 129 MWh",
+      "title": "Phase 1 operational \u2014 100 MW / 129 MWh",
       "detail": "Completed within the 100-day deadline. At the time, the largest lithium-ion battery in the world.",
       "sources": [
         {
@@ -80,7 +80,7 @@
       "date": "2017-12-14",
       "date_precision": "day",
       "event_type": "notable",
-      "title": "First major grid response — Loy Yang A trip",
+      "title": "First major grid response \u2014 Loy Yang A trip",
       "detail": "HPR injected 7.3MW within milliseconds when Loy Yang A unit 3 tripped (560MW loss), responding faster than any conventional generator.",
       "sources": []
     },
@@ -117,7 +117,7 @@
       "date_precision": "month",
       "event_type": "notable",
       "title": "World-first: AEMO approves battery inertia services",
-      "detail": "AEMO approved HPR to deliver 2,000 MWs equivalent inertia via Virtual Machine Mode — roughly 15% of SA's predicted inertia shortfall.",
+      "detail": "AEMO approved HPR to deliver 2,000 MWs equivalent inertia via Virtual Machine Mode \u2014 roughly 15% of SA's predicted inertia shortfall.",
       "sources": []
     },
     {
@@ -153,18 +153,8 @@
   "scheme_contracts": [],
   "cost_sources": [],
   "stakeholder_issues": [],
-  "sources": [
-    {
-      "title": "AEMO Generation Information",
-      "url": "https://aemo.com.au"
-    },
-    {
-      "title": "Neoen",
-      "url": "https://neoen.com/"
-    }
-  ],
   "eis_specs": {
-    "document_title": "Hornsdale Power Reserve — Development Application (SA EPA / EPBC 2017/7791)",
+    "document_title": "Hornsdale Power Reserve \u2014 Development Application (SA EPA / EPBC 2017/7791)",
     "document_url": "https://www.environment.gov.au/epbc/notices/search-notices/epbc-2017-7791",
     "document_year": 2017,
     "cell_chemistry": "LFP",
@@ -184,8 +174,18 @@
     "connection_substation_name": "Hornsdale Wind Farm 275/66 kV substation (on-site, co-located)",
     "connection_substation_capacity_mva": 900.0,
     "connection_distance_km": 0.0,
-    "connection_distance_note": "On-site — co-located with Hornsdale Wind Farm, using the existing 275/66 kV Hornsdale substation infrastructure.",
+    "connection_distance_note": "On-site \u2014 co-located with Hornsdale Wind Farm, using the existing 275/66 kV Hornsdale substation infrastructure.",
     "connection_augmentation": "Minimal augmentation. BESS connected to existing Hornsdale Wind Farm 275/66 kV substation via new dedicated LV/MV feeder bays. ElectraNet assessed additional fault level contribution at Hornsdale 275 kV node.",
-    "notes": "World's largest grid-scale battery at commissioning (2017). Three stages: Stage 1: 100 MW / 129 MWh (2017, Tesla Powerpack 2); Stage 2: +50 MW (2020, Tesla Powerpack 2); Stage 3: +44 MW / +65 MWh (2022, Tesla Megapack). Total 194 MW / 193.5 MWh. Developer: Neoen. SA EPA development approval obtained rapidly (famous Elon Musk bet). Grid-forming capability enabled via Autobidder software upgrade — provides virtual inertia to SA grid. FCAS market leader. Co-located with 315 MW Hornsdale Wind Farm. The original DA was for 100 MW / 129 MWh; expansion stages had separate approvals."
-  }
+    "notes": "World's largest grid-scale battery at commissioning (2017). Three stages: Stage 1: 100 MW / 129 MWh (2017, Tesla Powerpack 2); Stage 2: +50 MW (2020, Tesla Powerpack 2); Stage 3: +44 MW / +65 MWh (2022, Tesla Megapack). Total 194 MW / 193.5 MWh. Developer: Neoen. SA EPA development approval obtained rapidly (famous Elon Musk bet). Grid-forming capability enabled via Autobidder software upgrade \u2014 provides virtual inertia to SA grid. FCAS market leader. Co-located with 315 MW Hornsdale Wind Farm. The original DA was for 100 MW / 129 MWh; expansion stages had separate approvals."
+  },
+  "sources": [
+    {
+      "title": "AEMO Generation Information",
+      "url": "https://aemo.com.au"
+    },
+    {
+      "title": "Neoen",
+      "url": "https://neoen.com/"
+    }
+  ]
 }

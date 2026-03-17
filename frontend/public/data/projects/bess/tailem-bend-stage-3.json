@@ -63,21 +63,8 @@
   "scheme_contracts": [],
   "cost_sources": [],
   "stakeholder_issues": [],
-  "sources": [
-    {
-      "title": "AEMO Generation Information Jan 2026",
-      "url": "https://aemo.com.au/energy-systems/electricity/national-electricity-market-nem/nem-forecasting-and-planning/forecasting-and-planning-data/generation-information",
-      "date": "2026-01-30",
-      "source_tier": 1
-    },
-    {
-      "title": "Vena Energy — Tailem Bend 3",
-      "url": "https://www.energy-storage.news/vena-energy-builds-408mwh-bess-at-third-phase-of-south-australia-renewable-energy-project/",
-      "source_tier": 2
-    }
-  ],
   "eis_specs": {
-    "document_title": "Tailem Bend Stage 3 Battery Energy Storage System — EIS (SA)",
+    "document_title": "Tailem Bend Stage 3 Battery Energy Storage System \u2014 EIS (SA)",
     "document_url": "https://www.sa.gov.au/topics/planning-and-property/land-use-and-planning/development-assessment/major-developments",
     "document_year": 2023,
     "cell_chemistry": "LFP",
@@ -98,5 +85,18 @@
     "connection_distance_note": "Co-located with Tailem Bend Solar Farm stages 1 and 2. ~200 m internal cable to existing 132 kV substation.",
     "connection_augmentation": "Minimal new works. Existing Tailem Bend 132 kV substation shared with 250 MW solar farm. New BESS feeder bay required. Combined ~454 MW site may trigger ElectraNet 132 kV line augmentation from Tailem Bend toward Murray Bridge/Adelaide.",
     "notes": "204 MW / 408 MWh (2-hour) BESS co-located with Tailem Bend solar farm stages 1 and 2, SA. Vena Energy. SA DPTI planning approval. LFP chemistry. Connection to ElectraNet 132 kV network at Tailem Bend. Stages 1 and 2 solar (250 MW total) already operating at this site."
-  }
+  },
+  "sources": [
+    {
+      "title": "AEMO Generation Information Jan 2026",
+      "url": "https://aemo.com.au/energy-systems/electricity/national-electricity-market-nem/nem-forecasting-and-planning/forecasting-and-planning-data/generation-information",
+      "date": "2026-01-30",
+      "source_tier": 1
+    },
+    {
+      "title": "Vena Energy \u2014 Tailem Bend 3",
+      "url": "https://www.energy-storage.news/vena-energy-builds-408mwh-bess-at-third-phase-of-south-australia-renewable-energy-project/",
+      "source_tier": 2
+    }
+  ]
 }

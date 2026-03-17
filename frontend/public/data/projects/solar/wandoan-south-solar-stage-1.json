@@ -13,12 +13,17 @@
   "has_syncon": false,
   "has_statcom": false,
   "has_harmonic_filter": false,
+  "notable": "125 MW Stage 1 of the Wandoan South complex, QLD. Vena Energy development.",
   "data_confidence": "low",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "1455",
   "confidence_score": "17",
   "first_seen": "2026-03-12",
+  "coordinates": {
+    "lat": -26.13,
+    "lng": 149.95
+  },
   "timeline": [
     {
       "date": "2026-03-12",
