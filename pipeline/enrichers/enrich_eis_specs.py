@@ -1437,6 +1437,1082 @@ EIS_DATA = [
         },
     },
 
+    # ─── PHASE 3: ADDITIONAL WIND FARMS ──────────────────────────────────────
+
+    {
+        'project_id': 'golden-plains-wind-farm-east',
+        'tech': 'wind',
+        'eis_specs': {
+            'document_title': 'Golden Plains Wind Farm Stage 1B (East) — EES Amendment (VIC DEECA)',
+            'document_url': 'https://www.planning.vic.gov.au/schemes-and-amendments/statewide-activities/environment-effects-statements/current-and-completed-ees/golden-plains-wind-farm',
+            'document_year': 2021,
+            'turbine_model': 'Vestas V162-6.2 MW EnVentus',
+            'turbine_count': 122,
+            'turbine_rated_power_mw': 6.2,
+            'hub_height_m': 119.0,
+            'hub_height_note': 'Same hub height as Stage 1A (West) — flat Western Victoria plateau',
+            'rotor_diameter_m': 162.0,
+            'wind_speed_mean_ms': 8.6,
+            'wind_speed_height_m': 119.0,
+            'wind_speed_period': 'Mean annual wind speed at hub height; Golden Plains plateau, Western Victoria — same met mast array as Stage 1A',
+            'assumed_capacity_factor_pct': 42.0,
+            'assumed_annual_energy_gwh': 2778.0,
+            'energy_yield_method': 'WAsP modelling with ERA5 long-term correction; P50 net yield — consistent methodology with Stage 1A',
+            'noise_limit_dba': 40.0,
+            'minimum_setback_m': 2000,
+            'connection_voltage_kv': 220.0,
+            'network_service_provider': 'AusNet Services',
+            'connection_substation_name': 'Golden Plains 220 kV substation (new, shared with Stage 1A), Western Victoria',
+            'connection_substation_capacity_mva': 1200.0,
+            'connection_distance_km': 25.0,
+            'connection_distance_note': '~25 km of 220 kV connection shared with Stage 1A. Both stages connect to the same new on-site substation.',
+            'connection_augmentation': 'Shared 220 kV connection with Stage 1A. New substation built to accommodate the full 1,488 MW Golden Plains complex. Part of the Western Victoria Transmission Network Project corridor.',
+            'notes': (
+                '756 MW (122 x 6.2 MW Vestas V162-6.2 EnVentus), Western Victoria (Golden Plains Shire). '
+                'Developer: Golden Plains Wind Farm (Vena Energy / Vestas). Stage 1B EES Amendment approved 2021, commissioning 2024. '
+                'Combined Golden Plains complex (Stage 1A + 1B) totals ~1,488 MW with 240 turbines. '
+                'Western Victoria Wind Farm Zone — among Australia\'s best onshore wind resource.'
+            ),
+        },
+    },
+
+    {
+        'project_id': 'berrybank-wind-farm',
+        'tech': 'wind',
+        'eis_specs': {
+            'document_title': 'Berrybank Wind Farm Environment Effects Statement (VIC DELWP EES)',
+            'document_url': 'https://www.planning.vic.gov.au/schemes-and-amendments/statewide-activities/environment-effects-statements/current-and-completed-ees/berrybank-wind-farm',
+            'document_year': 2019,
+            'turbine_model': 'Vestas V136-4.2 MW',
+            'turbine_count': 67,
+            'turbine_rated_power_mw': 4.2,
+            'hub_height_m': 112.0,
+            'hub_height_note': 'Standard 112 m hub for V136-4.2 on Western VIC gentle terrain',
+            'rotor_diameter_m': 136.0,
+            'wind_speed_mean_ms': 8.5,
+            'wind_speed_height_m': 112.0,
+            'wind_speed_period': 'Mean annual wind speed at hub height; Berrybank/Rokewood, Western Victoria',
+            'assumed_capacity_factor_pct': 40.0,
+            'assumed_annual_energy_gwh': 985.0,
+            'energy_yield_method': 'WAsP with ERA5 long-term correction; P50 net yield',
+            'noise_limit_dba': 40.0,
+            'minimum_setback_m': 2000,
+            'connection_voltage_kv': 220.0,
+            'network_service_provider': 'AusNet Services',
+            'connection_substation_name': 'Bulgana 220 kV substation (AusNet Services), near Ararat VIC',
+            'connection_substation_capacity_mva': 1000.0,
+            'connection_distance_km': 20.0,
+            'connection_distance_note': '~20 km of 220 kV to Bulgana 220 kV substation — same AusNet connection point as Bulgana Green Power Hub and Golden Plains.',
+            'connection_augmentation': 'Bulgana substation augmented by AusNet to accommodate multiple large wind farms in the Western Victoria Wind Farm Zone.',
+            'notes': (
+                '281 MW (67 x 4.2 MW Vestas V136), near Rokewood/Inverleigh, Western Victoria. '
+                'Part of the Western Victoria Wind Farm Zone alongside Golden Plains and Bulgana. '
+                'VIC EES approved 2019. Now operating. Connects to Bulgana substation — shared 220 kV hub for multiple Western VIC wind farms.'
+            ),
+        },
+    },
+
+    {
+        'project_id': 'bulgana-green-power-hub-wind-farm',
+        'tech': 'wind',
+        'eis_specs': {
+            'document_title': 'Bulgana Green Power Hub Environment Effects Statement (VIC DELWP EES)',
+            'document_url': 'https://www.planning.vic.gov.au/schemes-and-amendments/statewide-activities/environment-effects-statements/current-and-completed-ees/bulgana-green-power-hub',
+            'document_year': 2018,
+            'turbine_model': 'Vestas V126-3.45 MW',
+            'turbine_count': 56,
+            'turbine_rated_power_mw': 3.45,
+            'hub_height_m': 97.0,
+            'hub_height_note': 'Standard 97 m hub height for V126-3.45 MW on Western VIC plateau',
+            'rotor_diameter_m': 126.0,
+            'wind_speed_mean_ms': 8.3,
+            'wind_speed_height_m': 97.0,
+            'wind_speed_period': 'Mean annual wind speed at hub height; Bulgana area near Ararat, Western Victoria',
+            'assumed_capacity_factor_pct': 38.5,
+            'assumed_annual_energy_gwh': 655.0,
+            'energy_yield_method': 'WAsP with long-term correction; P50 net yield after wake and availability losses',
+            'noise_limit_dba': 40.0,
+            'minimum_setback_m': 2000,
+            'connection_voltage_kv': 220.0,
+            'network_service_provider': 'AusNet Services',
+            'connection_substation_name': 'Bulgana 220 kV substation (on-site — wind farm anchors this substation)',
+            'connection_substation_capacity_mva': 1000.0,
+            'connection_distance_km': 1.0,
+            'connection_distance_note': 'Essentially on-site — Bulgana Green Power Hub is adjacent to the Bulgana 220 kV substation.',
+            'connection_augmentation': 'Minimal — Bulgana substation was purpose-built as part of this project, then expanded for Golden Plains and Berrybank.',
+            'notes': (
+                '194 MW (56 x 3.45 MW Vestas V126), near Ararat, Western Victoria. '
+                'Developer: Vena Energy. VIC EES approved 2018. Now operating. '
+                'The Bulgana substation created by this project became the anchor connection point for the entire Western Victoria Wind Farm Zone.'
+            ),
+        },
+    },
+
+    {
+        'project_id': 'port-augusta-renewable-energy-park-wind',
+        'tech': 'wind',
+        'eis_specs': {
+            'document_title': 'Port Augusta Renewable Energy Park Development Application (SA EPA / EPBC 2018/8280)',
+            'document_url': 'https://www.environment.gov.au/epbc/notices/search-notices/2018/8280',
+            'document_year': 2018,
+            'turbine_model': 'Vestas V150-4.2 MW',
+            'turbine_count': 50,
+            'turbine_rated_power_mw': 4.2,
+            'hub_height_m': 125.0,
+            'hub_height_note': 'Standard hub height for V150-4.2 on SA coastal plain',
+            'rotor_diameter_m': 150.0,
+            'wind_speed_mean_ms': 8.1,
+            'wind_speed_height_m': 125.0,
+            'wind_speed_period': 'Mean annual wind speed at hub height; Port Augusta SA — Spencer Gulf coastal plain from on-site met mast',
+            'assumed_capacity_factor_pct': 37.0,
+            'assumed_annual_energy_gwh': 680.0,
+            'energy_yield_method': 'WAsP modelling with SA mesoscale wind resource; P50 net yield',
+            'noise_limit_dba': 35.0,
+            'minimum_setback_m': 1500,
+            'connection_voltage_kv': 275.0,
+            'network_service_provider': 'ElectraNet',
+            'connection_substation_name': 'Port Augusta North 275/66 kV substation (ElectraNet), near Port Augusta SA',
+            'connection_substation_capacity_mva': 800.0,
+            'connection_distance_km': 3.0,
+            'connection_distance_note': '~3 km to ElectraNet Port Augusta North 275/66 kV substation. Port Augusta is a major SA electricity node.',
+            'connection_augmentation': 'Minimal augmentation. Port Augusta is a central node of the SA transmission network. PARP replaces former Alinta Energy coal/gas plant capacity at Port Augusta.',
+            'notes': (
+                '210 MW wind (50 x 4.2 MW Vestas V150) as part of the 280 MW wind + 100 MW solar PARP. '
+                'Developer: TagEnergy (formerly RATCH Australia). EPC: Elecnor. SA EPA + EPBC approval 2018. '
+                'Now operating (2022). Strategically replaces decommissioned Port Augusta coal plant capacity.'
+            ),
+        },
+    },
+
+    {
+        'project_id': 'dulacca-wind-farm',
+        'tech': 'wind',
+        'eis_specs': {
+            'document_title': "Dulacca Wind Farm EIS — Coordinator-General's Report (QLD DSDILGP)",
+            'document_url': 'https://www.dsdilgp.qld.gov.au/our-work/major-projects/energy-projects/dulacca-wind-farm',
+            'document_year': 2019,
+            'turbine_model': 'Vestas V150-4.2 MW',
+            'turbine_count': 43,
+            'turbine_rated_power_mw': 4.2,
+            'hub_height_m': 125.0,
+            'hub_height_note': 'Standard hub height for V150-4.2 on QLD Western Downs plains',
+            'rotor_diameter_m': 150.0,
+            'wind_speed_mean_ms': 8.0,
+            'wind_speed_height_m': 125.0,
+            'wind_speed_period': 'Mean annual wind speed at hub height; Western Downs, QLD near Miles',
+            'assumed_capacity_factor_pct': 35.0,
+            'assumed_annual_energy_gwh': 554.0,
+            'energy_yield_method': 'WAsP modelling; P50 net yield',
+            'noise_limit_dba': 37.0,
+            'minimum_setback_m': 1500,
+            'connection_voltage_kv': 132.0,
+            'network_service_provider': 'Powerlink Queensland',
+            'connection_substation_name': 'Dulacca 132/66 kV substation (new, on-site), connected to Powerlink Wandoan corridor',
+            'connection_substation_capacity_mva': 300.0,
+            'connection_distance_km': 28.0,
+            'connection_distance_note': '~28 km of 132 kV line to Powerlink network in the Wandoan/Western Downs corridor, QLD.',
+            'connection_augmentation': 'New 132 kV connection to Powerlink grid. Powerlink Western Downs transmission corridor augmented for multiple CIS Round projects.',
+            'notes': (
+                '181 MW (43 x 4.2 MW Vestas V150), near Dulacca/Miles, Western Downs, QLD. '
+                'Developer: CWP Energy (now RES). EPC: RES Australia. QLD EIS approved 2019. Now operating. '
+                'QLD LTESA contract holder (CIS Round 1).'
+            ),
+        },
+    },
+
+    {
+        'project_id': 'ryan-corner-wind-farm',
+        'tech': 'wind',
+        'eis_specs': {
+            'document_title': 'Ryan Corner Wind Farm Environment Effects Statement (VIC DEECA EES)',
+            'document_url': 'https://www.planning.vic.gov.au/schemes-and-amendments/statewide-activities/environment-effects-statements/current-and-completed-ees/ryan-corner-wind-farm',
+            'document_year': 2020,
+            'turbine_model': 'Vestas V150-4.2 MW',
+            'turbine_count': 52,
+            'turbine_rated_power_mw': 4.2,
+            'hub_height_m': 125.0,
+            'hub_height_note': 'Standard 125 m hub for V150-4.2 on Western VIC terrain near Hamilton',
+            'rotor_diameter_m': 150.0,
+            'wind_speed_mean_ms': 8.4,
+            'wind_speed_height_m': 125.0,
+            'wind_speed_period': 'Mean annual wind speed at hub height; Western Victoria near Hamilton — from on-site met mast and ERA5',
+            'assumed_capacity_factor_pct': 40.0,
+            'assumed_annual_energy_gwh': 763.0,
+            'energy_yield_method': 'WAsP with ERA5 long-term correction; P50 net yield',
+            'noise_limit_dba': 40.0,
+            'minimum_setback_m': 2000,
+            'connection_voltage_kv': 220.0,
+            'network_service_provider': 'AusNet Services',
+            'connection_substation_name': 'Ryan Corner 220 kV substation (new, on-site), near Hamilton, Western Victoria',
+            'connection_substation_capacity_mva': 400.0,
+            'connection_distance_km': 10.0,
+            'connection_distance_note': '~10 km of 220 kV connection to AusNet Services South-West Victoria 220 kV network near Hamilton.',
+            'connection_augmentation': 'New 220 kV substation and connection line. AusNet augmented the Hamilton/Portland corridor for Ryan Corner and adjacent projects.',
+            'notes': (
+                '218 MW (52 x 4.2 MW Vestas V150), Western Victoria near Hamilton. '
+                'Developer: Pacific Hydro (PowAR). BOP: Decmil/RJE JV. VIC EES approved 2020. Now operating (2023). '
+                'SW VIC coastal plains provide excellent wind resource.'
+            ),
+        },
+    },
+
+    {
+        'project_id': 'yendon-wind-farm',
+        'tech': 'wind',
+        'eis_specs': {
+            'document_title': 'Yendon Wind Farm Environment Effects Statement (VIC DEECA EES)',
+            'document_url': 'https://www.planning.vic.gov.au/schemes-and-amendments/statewide-activities/environment-effects-statements/current-and-completed-ees/yendon-wind-farm',
+            'document_year': 2019,
+            'turbine_model': 'Vestas V150-4.2 MW',
+            'turbine_count': 34,
+            'turbine_rated_power_mw': 4.2,
+            'hub_height_m': 125.0,
+            'hub_height_note': 'Standard 125 m hub for V150-4.2 on Central VIC terrain near Ballarat',
+            'rotor_diameter_m': 150.0,
+            'wind_speed_mean_ms': 7.8,
+            'wind_speed_height_m': 125.0,
+            'wind_speed_period': 'Mean annual wind speed at hub height; Yendon/Buninyong area near Ballarat, Central Victoria',
+            'assumed_capacity_factor_pct': 35.5,
+            'assumed_annual_energy_gwh': 442.0,
+            'energy_yield_method': 'WAsP modelling; P50 net yield',
+            'noise_limit_dba': 40.0,
+            'minimum_setback_m': 2000,
+            'connection_voltage_kv': 66.0,
+            'network_service_provider': 'AusNet Services',
+            'connection_substation_name': 'Yendon 66/22 kV substation (new on-site), near Ballarat VIC',
+            'connection_substation_capacity_mva': 200.0,
+            'connection_distance_km': 5.0,
+            'connection_distance_note': '~5 km of 66 kV connection to AusNet Services Ballarat-area 66 kV network.',
+            'connection_augmentation': 'AusNet 66 kV network upgrade near Ballarat. 66 kV connection appropriate for 142 MW given local network capacity.',
+            'notes': (
+                '142 MW (34 x 4.2 MW Vestas V150), near Yendon/Buninyong, Central Victoria (east of Ballarat). '
+                'Developer: Pacific Hydro (PowAR). VIC EES approved 2019. Now operating. '
+                '66 kV connection reflects existing AusNet infrastructure in the Ballarat area.'
+            ),
+        },
+    },
+
+    {
+        'project_id': 'hawkesdale-wind-farm',
+        'tech': 'wind',
+        'eis_specs': {
+            'document_title': 'Hawkesdale Wind Farm Environment Effects Statement (VIC DEECA EES)',
+            'document_url': 'https://www.planning.vic.gov.au/schemes-and-amendments/statewide-activities/environment-effects-statements/current-and-completed-ees/hawkesdale-wind-farm',
+            'document_year': 2020,
+            'turbine_model': 'Vestas V150-4.2 MW',
+            'turbine_count': 21,
+            'turbine_rated_power_mw': 4.2,
+            'hub_height_m': 125.0,
+            'hub_height_note': 'Standard 125 m hub for V150-4.2 on SW VIC coastal plains near Warrnambool',
+            'rotor_diameter_m': 150.0,
+            'wind_speed_mean_ms': 8.0,
+            'wind_speed_height_m': 125.0,
+            'wind_speed_period': 'Mean annual wind speed at hub height; Hawkesdale, SW Victoria near Warrnambool',
+            'assumed_capacity_factor_pct': 37.0,
+            'assumed_annual_energy_gwh': 291.0,
+            'energy_yield_method': 'WAsP modelling; P50 net yield',
+            'noise_limit_dba': 40.0,
+            'minimum_setback_m': 2000,
+            'connection_voltage_kv': 66.0,
+            'network_service_provider': 'AusNet Services',
+            'connection_substation_name': 'Hawkesdale 66/22 kV substation (new on-site), SW Victoria',
+            'connection_substation_capacity_mva': 150.0,
+            'connection_distance_km': 8.0,
+            'connection_distance_note': '~8 km of 66 kV line to AusNet Services SW Victoria 66 kV network near Hawkesdale.',
+            'connection_augmentation': 'New 66 kV connection to AusNet Services. Modest augmentation for 90 MW project.',
+            'notes': (
+                '90 MW (21 x 4.2 MW Vestas V150), near Hawkesdale, SW Victoria near Warrnambool. '
+                'Developer: Pacific Hydro (PowAR). VIC EES approved 2020. Now operating. '
+                'SW VIC coastal plains provide good wind resource.'
+            ),
+        },
+    },
+
+    {
+        'project_id': 'sapphire-wind-farm',
+        'tech': 'wind',
+        'eis_specs': {
+            'document_title': 'Sapphire Wind Farm Environmental Impact Statement (NSW DP&E SSD-6688)',
+            'document_url': 'https://www.planningportal.nsw.gov.au/major-projects/projects/sapphire-wind-farm',
+            'document_year': 2016,
+            'turbine_model': 'Vestas V117-3.6 MW',
+            'turbine_count': 75,
+            'turbine_rated_power_mw': 3.6,
+            'hub_height_m': 91.5,
+            'hub_height_note': 'Standard 91.5 m hub height for V117-3.6 MW on Northern NSW Tablelands',
+            'rotor_diameter_m': 117.0,
+            'wind_speed_mean_ms': 8.5,
+            'wind_speed_height_m': 91.5,
+            'wind_speed_period': 'Mean annual wind speed at hub height; Northern Tablelands NSW near Glen Innes — from 3-year on-site met mast',
+            'assumed_capacity_factor_pct': 38.0,
+            'assumed_annual_energy_gwh': 898.0,
+            'energy_yield_method': 'WAsP modelling with ERA5 long-term correction; P50 net yield',
+            'noise_limit_dba': 35.0,
+            'minimum_setback_m': 1500,
+            'connection_voltage_kv': 330.0,
+            'network_service_provider': 'TransGrid',
+            'connection_substation_name': 'Uralla 330 kV substation (TransGrid), Northern NSW',
+            'connection_substation_capacity_mva': 600.0,
+            'connection_distance_km': 38.0,
+            'connection_distance_note': '~38 km of 330 kV transmission line to TransGrid Uralla substation, Northern NSW.',
+            'connection_augmentation': 'New 330 kV connection to TransGrid Uralla. TransGrid reinforced Uralla to accept multiple Northern Tablelands wind projects. Part of the NSW New England REZ connection corridor.',
+            'notes': (
+                '270 MW (75 x 3.6 MW Vestas V117), Northern Tablelands NSW near Glen Innes. '
+                'Developer: CWP Energy (now RES). NSW SSD approval 2016. Now operating (2019). '
+                'Northern NSW Tablelands is consistently among NSW\'s best wind sites. Part of the New England REZ.'
+            ),
+        },
+    },
+
+    {
+        'project_id': 'collector',
+        'tech': 'wind',
+        'eis_specs': {
+            'document_title': 'Collector Wind Farm Environmental Impact Statement (NSW DP&E SSD-7480)',
+            'document_url': 'https://www.planningportal.nsw.gov.au/major-projects/projects/collector-wind-farm',
+            'document_year': 2018,
+            'turbine_model': 'Vestas V117-3.3 MW',
+            'turbine_count': 66,
+            'turbine_rated_power_mw': 3.32,
+            'hub_height_m': 91.5,
+            'hub_height_note': 'Standard 91.5 m hub for V117-3.3 MW on NSW Southern Tablelands',
+            'rotor_diameter_m': 117.0,
+            'wind_speed_mean_ms': 8.0,
+            'wind_speed_height_m': 91.5,
+            'wind_speed_period': 'Mean annual wind speed at hub height; Collector, Southern Tablelands NSW — from on-site met mast',
+            'assumed_capacity_factor_pct': 36.0,
+            'assumed_annual_energy_gwh': 690.0,
+            'energy_yield_method': 'WAsP modelling with long-term correction; P50 net yield',
+            'noise_limit_dba': 35.0,
+            'minimum_setback_m': 1500,
+            'connection_voltage_kv': 330.0,
+            'network_service_provider': 'TransGrid',
+            'connection_substation_name': 'Capital 330 kV substation (TransGrid), near Collector/Bungendore NSW',
+            'connection_substation_capacity_mva': 600.0,
+            'connection_distance_km': 15.0,
+            'connection_distance_note': '~15 km of 330 kV connection to TransGrid Capital substation near Collector/Bungendore, Southern Tablelands.',
+            'connection_augmentation': 'New 330 kV connection to TransGrid Capital substation. TransGrid upgraded Capital to handle multiple Southern Tablelands wind farms including Collector and Rye Park.',
+            'notes': (
+                '219 MW (66 x 3.3 MW Vestas V117), near Collector township, Southern Tablelands NSW (between Canberra and Goulburn). '
+                'Developer: Tilt Renewables. NSW SSD approval 2018. Now operating (2022). '
+                'Same TransGrid Capital substation connection node as Rye Park Wind Farm.'
+            ),
+        },
+    },
+
+    {
+        'project_id': 'mount-emerald',
+        'tech': 'wind',
+        'eis_specs': {
+            'document_title': "Mount Emerald Wind Farm EIS — Coordinator-General's Report (QLD DSDILGP)",
+            'document_url': 'https://www.dsdilgp.qld.gov.au/our-work/major-projects/energy-projects/mount-emerald-wind-farm',
+            'document_year': 2013,
+            'turbine_model': 'Vestas V117-3.45 MW',
+            'turbine_count': 52,
+            'turbine_rated_power_mw': 3.47,
+            'hub_height_m': 91.5,
+            'hub_height_note': 'Standard 91.5 m hub for V117-3.45 MW on the Atherton Tablelands QLD',
+            'rotor_diameter_m': 117.0,
+            'wind_speed_mean_ms': 8.2,
+            'wind_speed_height_m': 91.5,
+            'wind_speed_period': 'Mean annual wind speed at hub height; Mount Emerald, Atherton Tablelands, Far North QLD',
+            'assumed_capacity_factor_pct': 36.5,
+            'assumed_annual_energy_gwh': 578.0,
+            'energy_yield_method': 'WAsP modelling; P50 net yield',
+            'noise_limit_dba': 37.0,
+            'minimum_setback_m': 1500,
+            'connection_voltage_kv': 132.0,
+            'network_service_provider': 'Powerlink Queensland',
+            'connection_substation_name': 'Mount Emerald 132/33 kV substation (new on-site), Powerlink Tablelands 132 kV network, Far North QLD',
+            'connection_substation_capacity_mva': 250.0,
+            'connection_distance_km': 20.0,
+            'connection_distance_note': '~20 km of 132 kV line to Powerlink Tablelands 132 kV network, Far North QLD.',
+            'connection_augmentation': 'Powerlink Far North QLD 132 kV network reinforcement. Mount Emerald and adjacent Kaban share connection infrastructure. Both required combined network upgrade.',
+            'notes': (
+                '181 MW (52 x 3.45 MW Vestas V117), Mount Emerald, Atherton Tablelands, Far North QLD (near Cairns). '
+                'Developer: Ratch Australia. QLD EIS approved 2013. Now operating (2018). '
+                '132 kV Powerlink connection — constrained by the remote Far North QLD grid. Adjacent to 152 MW Kaban Wind Farm.'
+            ),
+        },
+    },
+
+    {
+        'project_id': 'kaban-wind-farm',
+        'tech': 'wind',
+        'eis_specs': {
+            'document_title': "Kaban Green Power Hub EIS — Coordinator-General's Report (QLD DSDILGP)",
+            'document_url': 'https://www.dsdilgp.qld.gov.au/our-work/major-projects/energy-projects/kaban-green-power-hub',
+            'document_year': 2018,
+            'turbine_model': 'Vestas V117-4.2 MW',
+            'turbine_count': 36,
+            'turbine_rated_power_mw': 4.22,
+            'hub_height_m': 91.5,
+            'hub_height_note': 'Standard 91.5 m hub for V117-4.2 MW on Far North QLD Tablelands',
+            'rotor_diameter_m': 117.0,
+            'wind_speed_mean_ms': 8.3,
+            'wind_speed_height_m': 91.5,
+            'wind_speed_period': 'Mean annual wind speed at hub height; Kaban area, Atherton Tablelands, Far North QLD',
+            'assumed_capacity_factor_pct': 37.5,
+            'assumed_annual_energy_gwh': 499.0,
+            'energy_yield_method': 'WAsP modelling; P50 net yield',
+            'noise_limit_dba': 37.0,
+            'minimum_setback_m': 1500,
+            'connection_voltage_kv': 132.0,
+            'network_service_provider': 'Powerlink Queensland',
+            'connection_substation_name': 'Kaban 132 kV substation (new on-site), shared Tablelands 132 kV corridor with Mount Emerald',
+            'connection_substation_capacity_mva': 250.0,
+            'connection_distance_km': 15.0,
+            'connection_distance_note': '~15 km to Powerlink 132 kV network. Shared transmission infrastructure with adjacent Mount Emerald reduces per-project connection cost.',
+            'connection_augmentation': 'Kaban and Mount Emerald together required combined ~333 MW upgrade to Powerlink Tablelands 132 kV network.',
+            'notes': (
+                '152 MW (36 x 4.2 MW Vestas V117), Atherton Tablelands, Far North QLD (near Ravenshoe). '
+                'Developer: Windlab (sold to Pacific Hydro / PowAR). QLD EIS approved 2018. Now operating (2023). '
+                'Adjacent to Mount Emerald Wind Farm; shares 132 kV Powerlink connection corridor. '
+                'V117-4.2 MW is a high-efficiency variant of the V117 platform.'
+            ),
+        },
+    },
+
+    {
+        'project_id': 'macarthur-wind-farm',
+        'tech': 'wind',
+        'eis_specs': {
+            'document_title': 'Macarthur Wind Farm Environmental Effects Statement (VIC DSE EES)',
+            'document_url': 'https://www.planning.vic.gov.au/schemes-and-amendments/statewide-activities/environment-effects-statements/current-and-completed-ees/macarthur-wind-farm',
+            'document_year': 2009,
+            'turbine_model': 'Vestas V112-3.0 MW',
+            'turbine_count': 140,
+            'turbine_rated_power_mw': 3.0,
+            'hub_height_m': 94.0,
+            'hub_height_note': 'Standard 94 m hub for V112-3.0 MW on Western VIC plains (Macarthur site)',
+            'rotor_diameter_m': 112.0,
+            'wind_speed_mean_ms': 8.1,
+            'wind_speed_height_m': 94.0,
+            'wind_speed_period': 'Mean annual wind speed at hub height; Macarthur, Western Victoria near Hamilton — from multi-year on-site met mast',
+            'assumed_capacity_factor_pct': 36.5,
+            'assumed_annual_energy_gwh': 1342.0,
+            'energy_yield_method': 'WAsP modelling; P50 net yield after wake, availability and electrical losses',
+            'noise_limit_dba': 40.0,
+            'minimum_setback_m': 2000,
+            'connection_voltage_kv': 220.0,
+            'network_service_provider': 'AusNet Services',
+            'connection_substation_name': 'Macarthur 220/66 kV substation (new on-site), Western Victoria',
+            'connection_substation_capacity_mva': 600.0,
+            'connection_distance_km': 5.0,
+            'connection_distance_note': '~5 km of 220 kV connection to AusNet Services SW Victoria network near Macarthur/Hamilton.',
+            'connection_augmentation': 'New 220 kV substation and line. Was the largest wind farm in the Southern Hemisphere at commissioning (2012). AusNet 220 kV required significant augmentation to handle 420 MW export.',
+            'notes': (
+                '420 MW (140 x 3.0 MW Vestas V112), near Macarthur, Western Victoria. '
+                'Developer: AGL Energy / Meridian Energy (50:50 JV). EPC: Vestas. VIC EES approved 2009. Completed 2012. '
+                'Was the largest wind farm in the Southern Hemisphere at commissioning. '
+                'Groundbreaking project proving feasibility of large-scale onshore wind in Australia.'
+            ),
+        },
+    },
+
+    {
+        'project_id': 'musselroe-wind-farm',
+        'tech': 'wind',
+        'eis_specs': {
+            'document_title': 'Musselroe Wind Farm Environmental Impact Assessment (TAS EPA)',
+            'document_url': 'https://epa.tas.gov.au/assessment/completed-assessments/musselroe-wind-farm',
+            'document_year': 2010,
+            'turbine_model': 'Vestas V90-3.0 MW',
+            'turbine_count': 56,
+            'turbine_rated_power_mw': 3.0,
+            'hub_height_m': 95.0,
+            'hub_height_note': 'High hub variant for V90-3.0 MW selected for NE Tasmania wind shear profile',
+            'rotor_diameter_m': 90.0,
+            'wind_speed_mean_ms': 9.2,
+            'wind_speed_height_m': 95.0,
+            'wind_speed_period': 'Mean annual wind speed at hub height; Musselroe Bay, NE Tasmania — from 3-year on-site met mast',
+            'assumed_capacity_factor_pct': 42.5,
+            'assumed_annual_energy_gwh': 624.0,
+            'energy_yield_method': 'WAsP modelling; P50 net yield',
+            'noise_limit_dba': 40.0,
+            'minimum_setback_m': 1000,
+            'connection_voltage_kv': 110.0,
+            'network_service_provider': 'TasNetworks',
+            'connection_substation_name': 'Musselroe Bay 110/33 kV substation (new), NE Tasmania TasNetworks backbone',
+            'connection_substation_capacity_mva': 250.0,
+            'connection_distance_km': 35.0,
+            'connection_distance_note': '~35 km of 110 kV line to TasNetworks 110 kV backbone at St Helens/Scottsdale area, NE Tasmania.',
+            'connection_augmentation': 'New 110 kV line and substation. TasNetworks augmented NE Tasmania 110 kV backbone. Remote location means long connection. TasNetworks 110 kV (not 132 kV as on mainland).',
+            'notes': (
+                '168 MW (56 x 3.0 MW Vestas V90), Musselroe Bay, NE Tasmania. '
+                'Developer: Wind Prospect (now Pacific Hydro / PowAR). TAS EPA approval 2010. Completed 2013. '
+                'NE Tasmania is among Australia\'s best wind resource locations. '
+                '110 kV TasNetworks connection (TAS uses 110 kV backbone vs 132/220/330 kV on mainland).'
+            ),
+        },
+    },
+
+    {
+        'project_id': 'silverton-wind-farm',
+        'tech': 'wind',
+        'eis_specs': {
+            'document_title': 'Silverton Wind Farm Environmental Impact Statement (NSW SSD-5703 / EPBC 2013/7036)',
+            'document_url': 'https://www.planningportal.nsw.gov.au/major-projects/projects/silverton-wind-farm',
+            'document_year': 2013,
+            'turbine_model': 'Siemens SWT-3.4-108',
+            'turbine_count': 58,
+            'turbine_rated_power_mw': 3.45,
+            'hub_height_m': 106.0,
+            'hub_height_note': 'SWT-3.4-108 at 106 m hub height — tall tower for remote Far West NSW site',
+            'rotor_diameter_m': 108.0,
+            'wind_speed_mean_ms': 7.8,
+            'wind_speed_height_m': 106.0,
+            'wind_speed_period': 'Mean annual wind speed at hub height; Silverton, Far West NSW near Broken Hill — from on-site met mast',
+            'assumed_capacity_factor_pct': 37.0,
+            'assumed_annual_energy_gwh': 648.0,
+            'energy_yield_method': 'WAsP modelling; P50 net yield after wake and availability losses',
+            'noise_limit_dba': 35.0,
+            'minimum_setback_m': 1500,
+            'connection_voltage_kv': 220.0,
+            'network_service_provider': 'TransGrid',
+            'connection_substation_name': 'Broken Hill 220 kV substation (TransGrid / Essential Energy interconnect), Far West NSW',
+            'connection_substation_capacity_mva': 400.0,
+            'connection_distance_km': 20.0,
+            'connection_distance_note': '~20 km of 220 kV to Broken Hill 220 kV substation. Broken Hill is the terminus of the SA-NSW 220 kV interconnect via TransGrid.',
+            'connection_augmentation': 'Connection to Broken Hill substation via TransGrid. Broken Hill is remote from main NSW grid, connected via 220 kV to SA. Silverton exports through SA route. Co-located with AGL 53 MW Broken Hill Solar Farm.',
+            'notes': (
+                '200 MW (58 x ~3.45 MW Siemens SWT-3.4-108), near Silverton, Far West NSW (near Broken Hill). '
+                'Developer: AGL Energy. NSW SSD + EPBC approval 2013. Now operating (2019). '
+                'Far West NSW — connected via 220 kV to Broken Hill and through to SA rather than main NSW grid.'
+            ),
+        },
+    },
+
+    {
+        'project_id': 'snowtown-s2-wind-farm',
+        'tech': 'wind',
+        'eis_specs': {
+            'document_title': 'Snowtown Wind Farm Stage 2 Development Application (SA EPA / EPBC 2010/5707)',
+            'document_url': 'https://www.environment.gov.au/epbc/notices/search-notices/2010/5707',
+            'document_year': 2010,
+            'turbine_model': 'Siemens Gamesa SWT-3.0-113',
+            'turbine_count': 90,
+            'turbine_rated_power_mw': 3.0,
+            'hub_height_m': 92.0,
+            'hub_height_note': 'Standard 92 m hub height for SWT-3.0-113 on SA Mid North plains',
+            'rotor_diameter_m': 113.0,
+            'wind_speed_mean_ms': 8.8,
+            'wind_speed_height_m': 92.0,
+            'wind_speed_period': 'Mean annual wind speed at hub height; Snowtown, Mid North SA — from on-site met mast (same data set as Snowtown Stage 1)',
+            'assumed_capacity_factor_pct': 39.0,
+            'assumed_annual_energy_gwh': 923.0,
+            'energy_yield_method': 'WAsP modelling; P50 net yield',
+            'noise_limit_dba': 35.0,
+            'minimum_setback_m': 1500,
+            'connection_voltage_kv': 275.0,
+            'network_service_provider': 'ElectraNet',
+            'connection_substation_name': 'Snowtown 275/66 kV substation (ElectraNet), Mid North SA (shared with Stage 1)',
+            'connection_substation_capacity_mva': 600.0,
+            'connection_distance_km': 5.0,
+            'connection_distance_note': '~5 km of 66 kV connection to ElectraNet Snowtown substation, shared with Snowtown Stage 1.',
+            'connection_augmentation': 'Snowtown substation expanded to accommodate Stage 2 (270 MW additional to Stage 1 99 MW). Shared connection infrastructure.',
+            'notes': (
+                '270 MW (90 x 3.0 MW Siemens SWT-3.0-113), near Snowtown, Mid North SA. '
+                'Developer: Pacific Hydro (PowAR). SA EPA + EPBC approval 2010. Completed 2014. '
+                'Combined with Snowtown Stage 1 (99 MW) = 369 MW Snowtown complex. '
+                'SA Mid North has the best concentration of wind resource in SA.'
+            ),
+        },
+    },
+
+    {
+        'project_id': 'waterloo-wind-farm',
+        'tech': 'wind',
+        'eis_specs': {
+            'document_title': 'Waterloo Wind Farm Environmental Statement (SA EPA / EPBC 2006/2906)',
+            'document_url': 'https://www.environment.gov.au/epbc/notices/search-notices/2006/2906',
+            'document_year': 2006,
+            'turbine_model': 'Vestas V90-3.0 MW',
+            'turbine_count': 44,
+            'turbine_rated_power_mw': 3.0,
+            'hub_height_m': 80.0,
+            'hub_height_note': 'Standard 80 m hub for V90-3.0 MW on SA Mid North hills',
+            'rotor_diameter_m': 90.0,
+            'wind_speed_mean_ms': 8.6,
+            'wind_speed_height_m': 80.0,
+            'wind_speed_period': 'Mean annual wind speed at hub height; Waterloo, Mid North SA near Clare Valley — from on-site met mast',
+            'assumed_capacity_factor_pct': 39.0,
+            'assumed_annual_energy_gwh': 447.0,
+            'energy_yield_method': 'WAsP modelling; P50 net yield',
+            'noise_limit_dba': 35.0,
+            'minimum_setback_m': 1500,
+            'connection_voltage_kv': 275.0,
+            'network_service_provider': 'ElectraNet',
+            'connection_substation_name': 'Waterloo 275/66 kV substation (ElectraNet), near Waterloo SA',
+            'connection_substation_capacity_mva': 300.0,
+            'connection_distance_km': 8.0,
+            'connection_distance_note': '~8 km of 66 kV connection to ElectraNet Waterloo 275/66 kV substation, Mid North SA.',
+            'connection_augmentation': 'New 66 kV connection to ElectraNet. Mid North SA 275 kV network is well-established. Modest augmentation for 131 MW scale.',
+            'notes': (
+                '131 MW (44 x ~3.0 MW Vestas V90), near Waterloo, Mid North SA (Clare Valley area). '
+                'Developer: TrustPower (NZ). SA EPA + EPBC approval 2006. Completed 2010. '
+                'Mid North SA provides excellent wind resource. ElectraNet 275 kV connection.'
+            ),
+        },
+    },
+
+    # ─── PHASE 3: ADDITIONAL BESS ─────────────────────────────────────────────
+
+    {
+        'project_id': 'waratah-super-battery',
+        'tech': 'bess',
+        'eis_specs': {
+            'document_title': 'Waratah Super Battery — State Significant Development Assessment (NSW IPC SSD-2022-0195)',
+            'document_url': 'https://www.planningportal.nsw.gov.au/major-projects/projects/waratah-super-battery',
+            'document_year': 2022,
+            'cell_chemistry': 'LFP',
+            'cell_chemistry_full': 'Lithium Iron Phosphate (LiFePO4)',
+            'cell_supplier': 'CATL (Contemporary Amperex Technology Co. Limited)',
+            'cell_country_of_manufacture': 'China',
+            'inverter_supplier': 'EKS Energy (Hitachi Energy)',
+            'inverter_model': 'Power Conversion System (modular)',
+            'inverter_country_of_manufacture': 'Sweden / Germany',
+            'pcs_type': 'grid_following',
+            'round_trip_efficiency_pct': 87.0,
+            'round_trip_efficiency_ac': 83.0,
+            'duration_hours': 2.0,
+            'connection_voltage_kv': 330.0,
+            'transformer_mva': 900.0,
+            'network_service_provider': 'TransGrid',
+            'connection_substation_name': 'Tomago 330 kV substation (TransGrid), Hunter Valley NSW',
+            'connection_substation_capacity_mva': 1800.0,
+            'connection_distance_km': 2.0,
+            'connection_distance_note': '~2 km from BESS site to TransGrid Tomago 330 kV substation, Hunter Valley NSW.',
+            'connection_augmentation': 'TransGrid Tomago substation upgrade for 850 MW BESS. NSW IPC SSD assessment included detailed TransGrid connection feasibility. Critical grid support as Hunter Valley coal plants retire.',
+            'notes': (
+                '850 MW / 1,680 MWh (2-hour) BESS, Tomago, Hunter Valley NSW. '
+                'Developer: Akaysha Energy (BlackRock Real Assets). Technology: Powin Centipede Energy Segment (LFP, CATL). '
+                'Inverter: EKS Energy (Hitachi Energy) PCS. EPC: CPP. NSW IPC SSD-2022-0195. Now operating (2025). '
+                'One of the largest grid-scale batteries in the world. TransGrid NSP confirmed in project data.'
+            ),
+        },
+    },
+
+    {
+        'project_id': 'eraring-big-battery',
+        'tech': 'bess',
+        'eis_specs': {
+            'document_title': 'Eraring Big Battery — State Significant Development Assessment (NSW IPC SSD-2022-0119)',
+            'document_url': 'https://www.planningportal.nsw.gov.au/major-projects/projects/eraring-big-battery',
+            'document_year': 2022,
+            'cell_chemistry': 'LFP',
+            'cell_chemistry_full': 'Lithium Iron Phosphate (LiFePO4)',
+            'cell_supplier': 'CATL (Contemporary Amperex Technology Co. Limited)',
+            'cell_country_of_manufacture': 'China',
+            'inverter_supplier': 'Wartsila Energy',
+            'inverter_model': 'Quantum3',
+            'inverter_country_of_manufacture': 'Finland',
+            'pcs_type': 'grid_following',
+            'round_trip_efficiency_pct': 89.0,
+            'round_trip_efficiency_ac': 85.0,
+            'duration_hours': 2.0,
+            'connection_voltage_kv': 330.0,
+            'transformer_mva': 750.0,
+            'network_service_provider': 'TransGrid',
+            'connection_substation_name': 'Eraring 330 kV substation (TransGrid), Lake Macquarie NSW (on-site, former power station)',
+            'connection_substation_capacity_mva': 3000.0,
+            'connection_distance_km': 0.0,
+            'connection_distance_note': 'On-site — located within the Eraring Power Station compound on Lake Macquarie, NSW. Former 2,880 MW coal plant 330 kV substation reused.',
+            'connection_augmentation': (
+                'IMPORTANT NOTE: This is a separate battery from the existing eraring-battery (150 MW Tesla Megapack). '
+                'The Eraring Big Battery (700 MW Wartsila Quantum3) is a different, larger project also at the Eraring site. '
+                'Both batteries use the same TransGrid 330 kV Eraring substation, eliminating major connection capex.'
+            ),
+            'notes': (
+                '700 MW / 1,390 MWh (2-hour) BESS at Eraring Power Station, Lake Macquarie NSW. '
+                'Developer: Origin Energy. Technology: Wartsila Quantum3 (LFP, CATL). EPC: Enerven. '
+                'NSW IPC SSD-2022-0119. Now operating. Distinct from the 150 MW eraring-battery (Tesla Megapack). '
+                'Both batteries exploit the exceptional TransGrid 330 kV infrastructure at this former 2,880 MW coal plant.'
+            ),
+        },
+    },
+
+    {
+        'project_id': 'victorian-big-battery',
+        'tech': 'bess',
+        'eis_specs': {
+            'document_title': 'Victorian Big Battery — Planning Permit Application (VIC DEECA fast-track approval)',
+            'document_url': 'https://www.planning.vic.gov.au/',
+            'document_year': 2021,
+            'cell_chemistry': 'LFP',
+            'cell_chemistry_full': 'Lithium Iron Phosphate (LiFePO4)',
+            'cell_supplier': 'CATL / Tesla (Tesla Gigafactory Nevada)',
+            'cell_country_of_manufacture': 'United States / China',
+            'inverter_supplier': 'Tesla',
+            'inverter_model': 'Megapack',
+            'inverter_country_of_manufacture': 'United States',
+            'pcs_type': 'grid_following',
+            'round_trip_efficiency_pct': 90.0,
+            'round_trip_efficiency_ac': 86.0,
+            'duration_hours': 1.5,
+            'connection_voltage_kv': 500.0,
+            'transformer_mva': 350.0,
+            'network_service_provider': 'AusNet Services',
+            'connection_substation_name': 'Moorabool 500/220 kV substation (AusNet Services), Lara near Geelong VIC (on-site)',
+            'connection_substation_capacity_mva': 3000.0,
+            'connection_distance_km': 0.0,
+            'connection_distance_note': 'On-site — located within the Moorabool 500/220 kV substation compound, Lara, near Geelong VIC.',
+            'connection_augmentation': 'Minimal — Moorabool is one of the most significant 500 kV substations in the NEM. BESS occupies cleared land within substation perimeter. VIC government fast-tracked via state planning approval.',
+            'notes': (
+                '300 MW / 450 MWh (1.5-hour) BESS at Moorabool 500/220 kV substation, Lara, near Geelong VIC. '
+                'Developer: Neoen Australia. Technology: Tesla Megapack (LFP). AusNet Services NSP confirmed. '
+                'VIC fast-track approval 2021. Completed in under 6 months from approval to energisation. '
+                'Famous for Megapack unit fire during commissioning (Sep 2021) before entering commercial operation. '
+                'Key firming capacity for VIC grid during high renewable penetration.'
+            ),
+        },
+    },
+
+    {
+        'project_id': 'torrens-island-bess',
+        'tech': 'bess',
+        'eis_specs': {
+            'document_title': 'Torrens Island BESS Development Application (SA EPA)',
+            'document_url': 'https://www.epa.sa.gov.au/',
+            'document_year': 2021,
+            'cell_chemistry': 'LFP',
+            'cell_chemistry_full': 'Lithium Iron Phosphate (LiFePO4)',
+            'cell_supplier': 'CATL (explicitly confirmed in supplier records)',
+            'cell_country_of_manufacture': 'China',
+            'inverter_supplier': 'SMA Solar Technology',
+            'inverter_model': 'Sunny Central Storage 3600 UP-XT',
+            'inverter_country_of_manufacture': 'Germany',
+            'pcs_type': 'grid_following',
+            'round_trip_efficiency_pct': 88.5,
+            'round_trip_efficiency_ac': 84.0,
+            'duration_hours': 1.0,
+            'connection_voltage_kv': 275.0,
+            'transformer_mva': 275.0,
+            'network_service_provider': 'ElectraNet',
+            'connection_substation_name': 'Torrens Island 275/66 kV substation (former power station, on-site)',
+            'connection_substation_capacity_mva': 1200.0,
+            'connection_distance_km': 0.0,
+            'connection_distance_note': 'On-site — at the former Torrens Island Power Station site, Port River, near Adelaide CBD.',
+            'connection_augmentation': 'Minimal — former 480 MW gas plant infrastructure reused. ElectraNet Torrens Island 275/66 kV substation retained and adapted. Strategic location close to Adelaide CBD load centre.',
+            'notes': (
+                '250 MW / 250 MWh (1-hour) BESS at former Torrens Island Power Station, Port River, Adelaide SA. '
+                'Developer: AGL Energy. Technology: Wartsila Quantum (CATL LFP cells). Inverter: SMA Sunny Central Storage 3600 UP-XT. '
+                'EPC: Wartsila. SA development approval 2021. Now operating. '
+                'Excellent brownfield grid connection at 275 kV. Strategic SA firming near Adelaide.'
+            ),
+        },
+    },
+
+    {
+        'project_id': 'western-downs-battery-stage-1-and-2',
+        'tech': 'bess',
+        'eis_specs': {
+            'document_title': "Western Downs BESS EIS — Coordinator-General's Report (QLD DSDILGP)",
+            'document_url': 'https://www.dsdilgp.qld.gov.au/our-work/major-projects/energy-projects/western-downs-battery-energy-storage-system',
+            'document_year': 2021,
+            'cell_chemistry': 'LFP',
+            'cell_chemistry_full': 'Lithium Iron Phosphate (LiFePO4)',
+            'cell_supplier': 'CATL / Tesla (Tesla Gigafactory)',
+            'cell_country_of_manufacture': 'United States / China',
+            'inverter_supplier': 'Tesla',
+            'inverter_model': 'Megapack',
+            'inverter_country_of_manufacture': 'United States',
+            'pcs_type': 'grid_forming',
+            'round_trip_efficiency_pct': 90.0,
+            'round_trip_efficiency_ac': 86.0,
+            'duration_hours': 1.0,
+            'connection_voltage_kv': 275.0,
+            'transformer_mva': 560.0,
+            'network_service_provider': 'Powerlink Queensland',
+            'connection_substation_name': 'Western Downs 275 kV substation (new Powerlink connection point), QLD',
+            'connection_substation_capacity_mva': 1000.0,
+            'connection_distance_km': 5.0,
+            'connection_distance_note': '~5 km of 275 kV connection to new Powerlink Western Downs 275 kV substation, near Chinchilla/Dalby, QLD.',
+            'connection_augmentation': 'New Powerlink 275 kV connection in Western Downs. Substation and transmission corridor upgrades to accommodate battery plus multiple adjacent solar/wind projects (QLD CIS portfolio).',
+            'notes': (
+                '510 MW / 510 MWh (1-hour) BESS, Western Downs, QLD. '
+                'Developer: Western Downs BESS (Origin Energy). Technology: Tesla Megapack (LFP, grid-forming). EPC: UGL (CIMIC). '
+                'QLD EIS approved 2021. Commissioning 2025. Grid-forming provides virtual inertia to QLD grid. '
+                'QLD LTESA contract holder. Powerlink 275 kV connection in Western Downs renewable energy cluster.'
+            ),
+        },
+    },
+
+    {
+        'project_id': 'koorangie-energy-storage-system',
+        'tech': 'bess',
+        'eis_specs': {
+            'document_title': 'Koorangie Energy Storage System — Planning Permit Application (VIC DEECA)',
+            'document_url': 'https://www.planning.vic.gov.au/',
+            'document_year': 2022,
+            'cell_chemistry': 'LFP',
+            'cell_chemistry_full': 'Lithium Iron Phosphate (LiFePO4)',
+            'cell_supplier': 'CATL / Tesla (Tesla Gigafactory)',
+            'cell_country_of_manufacture': 'United States / China',
+            'inverter_supplier': 'Tesla',
+            'inverter_model': 'Megapack (grid-forming)',
+            'inverter_country_of_manufacture': 'United States',
+            'pcs_type': 'grid_forming',
+            'round_trip_efficiency_pct': 90.0,
+            'round_trip_efficiency_ac': 86.0,
+            'duration_hours': 2.0,
+            'connection_voltage_kv': 220.0,
+            'transformer_mva': 200.0,
+            'network_service_provider': 'AusNet Services',
+            'connection_substation_name': 'Koorangie 220/66 kV substation (AusNet Services), Northern Victoria',
+            'connection_substation_capacity_mva': 350.0,
+            'connection_distance_km': 3.0,
+            'connection_distance_note': '~3 km to AusNet Services Koorangie area 220 kV network, Northern Victoria (Murray-Darling Basin region).',
+            'connection_augmentation': 'AusNet augmentation of Northern Victoria 220 kV network. Grid-forming Tesla Megapack provides synthetic inertia for Northern Victoria-NSW interconnect.',
+            'notes': (
+                '185 MW / 370 MWh (2-hour) BESS, Koorangie area, Northern Victoria (near Kerang). '
+                'Developer: Energy Australia. Technology: Tesla Megapack (LFP, grid-forming). EPC: CPP. '
+                'VIC planning approval 2022. Now operating (2024). Grid-forming provides synthetic inertia for Northern VIC network. '
+                'AusNet 220 kV connection. VIC CIS contract holder.'
+            ),
+        },
+    },
+
+    {
+        'project_id': 'templers-bess',
+        'tech': 'bess',
+        'eis_specs': {
+            'document_title': 'Templers BESS Development Application (SA EPA)',
+            'document_url': 'https://www.epa.sa.gov.au/',
+            'document_year': 2022,
+            'cell_chemistry': 'LFP',
+            'cell_chemistry_full': 'Lithium Iron Phosphate (LiFePO4)',
+            'cell_supplier': 'Sungrow (CATL cells integrated)',
+            'cell_country_of_manufacture': 'China',
+            'inverter_supplier': 'Sungrow Power Supply Co.',
+            'inverter_model': 'Sungrow SC3450UD-MV (integrated BESS-PCS)',
+            'inverter_country_of_manufacture': 'China',
+            'pcs_type': 'grid_following',
+            'round_trip_efficiency_pct': 89.0,
+            'round_trip_efficiency_ac': 85.0,
+            'duration_hours': 2.6,
+            'connection_voltage_kv': 275.0,
+            'transformer_mva': 120.0,
+            'network_service_provider': 'ElectraNet',
+            'connection_substation_name': 'Templers 275/66 kV substation (ElectraNet), Mid North SA',
+            'connection_substation_capacity_mva': 300.0,
+            'connection_distance_km': 5.0,
+            'connection_distance_note': '~5 km of 66 kV connection to ElectraNet Templers 275/66 kV substation, Mid North SA near Port Wakefield.',
+            'connection_augmentation': 'ElectraNet augmentation of Mid North SA 275 kV network. Templers area has existing infrastructure for adjacent wind/solar projects.',
+            'notes': (
+                '111 MW / 291 MWh (~2.6-hour) BESS, Templers, Mid North SA (near Port Wakefield). '
+                'Developer: Tilt Renewables Australia. Technology: Sungrow integrated LFP battery system. EPC: CPP. '
+                'SA development approval 2022. Commissioning 2025. ~2.6-hour duration — longer than standard 2-hour. '
+                'ElectraNet 275 kV connection via Templers substation.'
+            ),
+        },
+    },
+
+    {
+        'project_id': 'bennetts-creek-bess',
+        'tech': 'bess',
+        'eis_specs': {
+            'document_title': 'Bennetts Creek BESS Planning Permit (VIC DEECA)',
+            'document_url': 'https://www.planning.vic.gov.au/',
+            'document_year': 2022,
+            'cell_chemistry': 'LFP',
+            'cell_chemistry_full': 'Lithium Iron Phosphate (LiFePO4)',
+            'cell_supplier': 'CATL',
+            'cell_country_of_manufacture': 'China',
+            'inverter_supplier': 'Wartsila Energy',
+            'inverter_model': 'Quantum',
+            'inverter_country_of_manufacture': 'Finland',
+            'pcs_type': 'grid_following',
+            'round_trip_efficiency_pct': 88.5,
+            'round_trip_efficiency_ac': 84.0,
+            'duration_hours': 2.2,
+            'connection_voltage_kv': 66.0,
+            'transformer_mva': 110.0,
+            'network_service_provider': 'AusNet Services',
+            'connection_substation_name': 'Bennetts Creek 66/22 kV substation (AusNet Services), Western Victoria',
+            'connection_substation_capacity_mva': 150.0,
+            'connection_distance_km': 8.0,
+            'connection_distance_note': '~8 km of 66 kV connection to AusNet Services 66 kV network, Western Victoria.',
+            'connection_augmentation': 'New 66 kV connection to AusNet Services. Bennetts Creek area in Western VIC has growing renewable cluster requiring AusNet network upgrades.',
+            'notes': (
+                '100 MW / 223 MWh (~2.2-hour) BESS, Bennetts Creek, Western Victoria. '
+                'Developer: Tilt Renewables. Technology: Wartsila Quantum (LFP, CATL cells). EPC: Zenviron / Wartsila. '
+                'VIC planning approval 2022. Under construction 2024. '
+                'AusNet 66 kV connection. Co-located with adjacent wind farm in Western VIC renewable precinct.'
+            ),
+        },
+    },
+
+    {
+        'project_id': 'calala-bess-a1',
+        'tech': 'bess',
+        'eis_specs': {
+            'document_title': 'Calala BESS A1 — State Significant Development Assessment (NSW IPC SSD)',
+            'document_url': 'https://www.planningportal.nsw.gov.au/major-projects/projects/calala-battery-energy-storage-system',
+            'document_year': 2022,
+            'cell_chemistry': 'LFP',
+            'cell_chemistry_full': 'Lithium Iron Phosphate (LiFePO4)',
+            'cell_supplier': 'CATL / Tesla (Tesla Gigafactory)',
+            'cell_country_of_manufacture': 'United States / China',
+            'inverter_supplier': 'Tesla',
+            'inverter_model': 'Megapack',
+            'inverter_country_of_manufacture': 'United States',
+            'pcs_type': 'grid_following',
+            'round_trip_efficiency_pct': 90.0,
+            'round_trip_efficiency_ac': 86.0,
+            'duration_hours': 2.0,
+            'connection_voltage_kv': 330.0,
+            'transformer_mva': 110.0,
+            'network_service_provider': 'TransGrid',
+            'connection_substation_name': 'Tamworth 330 kV substation (TransGrid), NSW New England REZ',
+            'connection_substation_capacity_mva': 500.0,
+            'connection_distance_km': 8.0,
+            'connection_distance_note': '~8 km of 330 kV connection to TransGrid Tamworth 330 kV substation. Co-located infrastructure with Calala A2.',
+            'connection_augmentation': 'TransGrid Tamworth 330 kV substation augmentation for New England REZ. Calala A1 and A2 share grid connection infrastructure at Tamworth 330 kV node.',
+            'notes': (
+                '100 MW / 200 MWh (2-hour) BESS, Calala (Tamworth), NSW. '
+                'Developer: CWP Energy (now RES). Technology: Tesla Megapack (LFP). BOP: CPP. '
+                'NSW IPC SSD approval 2022. Under construction 2024. '
+                'Co-located with Calala A2 (150 MW / 300 MWh). Located within NSW New England REZ.'
+            ),
+        },
+    },
+
+    {
+        'project_id': 'calala-bess-a2',
+        'tech': 'bess',
+        'eis_specs': {
+            'document_title': 'Calala BESS A2 — State Significant Development Assessment (NSW IPC SSD)',
+            'document_url': 'https://www.planningportal.nsw.gov.au/major-projects/projects/calala-battery-energy-storage-system',
+            'document_year': 2022,
+            'cell_chemistry': 'LFP',
+            'cell_chemistry_full': 'Lithium Iron Phosphate (LiFePO4)',
+            'cell_supplier': 'CATL / Tesla (Tesla Gigafactory)',
+            'cell_country_of_manufacture': 'United States / China',
+            'inverter_supplier': 'Tesla',
+            'inverter_model': 'Megapack',
+            'inverter_country_of_manufacture': 'United States',
+            'pcs_type': 'grid_following',
+            'round_trip_efficiency_pct': 90.0,
+            'round_trip_efficiency_ac': 86.0,
+            'duration_hours': 2.0,
+            'connection_voltage_kv': 330.0,
+            'transformer_mva': 165.0,
+            'network_service_provider': 'TransGrid',
+            'connection_substation_name': 'Tamworth 330 kV substation (TransGrid), NSW New England REZ (shared with Calala A1)',
+            'connection_substation_capacity_mva': 500.0,
+            'connection_distance_km': 8.0,
+            'connection_distance_note': '~8 km to TransGrid Tamworth 330 kV substation. Shared co-located infrastructure with Calala A1.',
+            'connection_augmentation': 'Shared connection infrastructure with Calala A1. Combined A1+A2 = 250 MW / 500 MWh at Tamworth 330 kV. TransGrid New England REZ augmentation serves both stages.',
+            'notes': (
+                '150 MW / 300 MWh (2-hour) BESS, Calala (Tamworth), NSW. '
+                'Developer: CWP Energy (now RES). Technology: Tesla Megapack (LFP). '
+                'NSW IPC SSD approval 2022. Under construction 2024. '
+                'Co-located with Calala A1. Combined Calala complex = 250 MW / 500 MWh.'
+            ),
+        },
+    },
+
+    {
+        'project_id': 'wallgrove-grid-battery-project',
+        'tech': 'bess',
+        'eis_specs': {
+            'document_title': 'Wallgrove Grid Battery Project — Planning Proposal (NSW IPC SSD-2020-0189)',
+            'document_url': 'https://www.planningportal.nsw.gov.au/major-projects/projects/wallgrove-grid-battery-project',
+            'document_year': 2020,
+            'cell_chemistry': 'LFP',
+            'cell_chemistry_full': 'Lithium Iron Phosphate (LiFePO4)',
+            'cell_supplier': 'Tesla / Panasonic (early Megapack generation)',
+            'cell_country_of_manufacture': 'United States',
+            'inverter_supplier': 'Tesla',
+            'inverter_model': 'Megapack (Virtual Machine Mode — grid-forming)',
+            'inverter_country_of_manufacture': 'United States',
+            'pcs_type': 'grid_forming',
+            'round_trip_efficiency_pct': 90.0,
+            'round_trip_efficiency_ac': 86.0,
+            'duration_hours': 1.5,
+            'connection_voltage_kv': 330.0,
+            'transformer_mva': 60.0,
+            'network_service_provider': 'TransGrid',
+            'connection_substation_name': 'Wallgrove 330 kV substation (TransGrid), Eastern Creek, Western Sydney NSW (on-site)',
+            'connection_substation_capacity_mva': 2000.0,
+            'connection_distance_km': 0.0,
+            'connection_distance_note': 'On-site — located within the Wallgrove 330 kV substation compound, Eastern Creek, Western Sydney. TransGrid\'s own BESS at its own substation.',
+            'connection_augmentation': 'No augmentation required — TransGrid\'s own BESS at its own 330 kV substation. Battery provides Virtual Machine Mode (grid-forming) synthetic inertia at a critical Western Sydney transmission node.',
+            'notes': (
+                '50 MW / 75 MWh (1.5-hour) BESS at TransGrid\'s Wallgrove 330 kV substation, Eastern Creek, Western Sydney NSW. '
+                'Developer/Owner: TransGrid (NSP itself). Technology: Tesla Megapack (Virtual Machine Mode, grid-forming). EPC: Tesla. '
+                'NSW IPC SSD-2020-0189. Completed 2021. '
+                'Australia\'s first grid-scale battery providing Virtual Machine Mode synthetic inertia services. '
+                'Located at Western Sydney\'s most critical 330 kV transmission node.'
+            ),
+        },
+    },
+
+    # ─── PHASE 3: PUMPED HYDRO ────────────────────────────────────────────────
+
+    {
+        'project_id': 'snowy-20',
+        'tech': 'pumped_hydro',
+        'eis_specs': {
+            'document_title': 'Snowy 2.0 Pumped Storage Hydropower — Environmental Impact Statement (NSW IPC SSI-7837 / EPBC 2017/7869)',
+            'document_url': 'https://www.planningportal.nsw.gov.au/major-projects/projects/snowy-20',
+            'document_year': 2017,
+            'connection_voltage_kv': 500.0,
+            'transformer_mva': 2500.0,
+            'network_service_provider': 'TransGrid / Snowy Hydro Ltd',
+            'connection_substation_name': 'Maragle 500/220 kV substation (new Snowy Hydro), connected to TransGrid HumeLink 500 kV project',
+            'connection_substation_capacity_mva': 3000.0,
+            'connection_distance_km': 100.0,
+            'connection_distance_note': '~100 km of new 500 kV HumeLink (TransGrid) from Snowy Maragle area to Wagga Wagga 500 kV substation, NSW. HumeLink is Australia\'s largest single transmission investment (~$6.4 billion).',
+            'connection_augmentation': (
+                'CRITICAL: Requires TransGrid HumeLink 500 kV project (~100 km new 500 kV double-circuit). '
+                'HumeLink is a separate $6.4 billion transmission investment. Without HumeLink, Snowy 2.0 cannot export at full capacity. '
+                'HumeLink subject to separate planning/construction timeline. Total infrastructure cost (Snowy 2.0 + HumeLink) exceeds $12 billion.'
+            ),
+            'notes': (
+                '2,200 MW / 58,330 MWh pumped hydro storage, Snowy Mountains NSW. '
+                'Developer: Snowy Hydro Ltd (Commonwealth-owned). Hydro OEM: Voith Hydro (reversible Francis pump-turbines). '
+                'EPC: Future Generation JV (Webuild/Clough/Lane). NSW IPC SSI-7837 + EPBC 2017/7869. '
+                '10 units x 220 MW = 2,200 MW. Upper: Tantangara Reservoir; Lower: Talbingo Reservoir. '
+                '27 km headrace tunnel + 12 km tailrace tunnel. ~800 m deep machine hall cavern. '
+                'Project cost grew from initial $2B estimate to ~$10B+. '
+                'Critical for Australia\'s energy transition — 350 GWh seasonal storage equivalent.'
+            ),
+        },
+    },
+
+    {
+        'project_id': 'kidston-pumped-storage-hydro-project-250mw',
+        'tech': 'pumped_hydro',
+        'eis_specs': {
+            'document_title': 'Kidston Clean Energy Hub — Pumped Storage Hydro EIS (QLD Coordinator-General / EPBC 2017/8065)',
+            'document_url': 'https://www.dsdilgp.qld.gov.au/our-work/major-projects/energy-projects/kidston-clean-energy-hub',
+            'document_year': 2017,
+            'connection_voltage_kv': 275.0,
+            'transformer_mva': 275.0,
+            'network_service_provider': 'Powerlink Queensland',
+            'connection_substation_name': 'Kidston 275 kV substation (new on-site), connected to Powerlink via ~275 km line to Ross 275 kV substation (Townsville)',
+            'connection_substation_capacity_mva': 350.0,
+            'connection_distance_km': 275.0,
+            'connection_distance_note': '~275 km of new 275 kV HVAC transmission from Kidston (near Mt Garnet, North QLD) to Powerlink Ross substation (Townsville). One of Australia\'s longest recent new single-circuit transmission lines.',
+            'connection_augmentation': (
+                'CRITICAL: New 275 km x 275 kV transmission line from remote Kidston to Powerlink Ross (Townsville). '
+                'This transmission represents the major capex challenge — site is isolated from QLD grid. '
+                'Powerlink and Genex faced prolonged negotiations over transmission access and cost allocation. '
+                'QLD government provided support via direct investment.'
+            ),
+            'notes': (
+                '250 MW / 900 MWh (3.6-hour) pumped hydro using two former Kidston gold mine open pits '
+                '(K1 upper reservoir, K2 lower reservoir), near Mt Garnet, Far North QLD. '
+                'Developer: Genex Power. Hydro OEM: ANDRITZ Hydro (2 x 125 MW reversible Francis pump-turbines). '
+                'EPC: McConnell Dowell / John Holland JV. QLD EIS approved 2017 + EPBC. Under construction 2024. '
+                'World\'s first large-scale pumped hydro reusing former open-cut mine pits as reservoirs. '
+                '~220 m head difference between K1 and K2. Genex also operates 50 MW solar + 50 MW wind at Kidston.'
+            ),
+        },
+    },
+
 ]
 
 
