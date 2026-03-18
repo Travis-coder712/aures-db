@@ -249,6 +249,7 @@ export default function GridConnection() {
               <Tooltip
                 contentStyle={{ backgroundColor: 'var(--color-bg)', border: '1px solid var(--color-border)', borderRadius: '8px' }}
                 labelStyle={{ color: 'var(--color-text)' }}
+                itemStyle={{ color: 'var(--color-text)' }}
                 formatter={(value) => [`${Number(value).toLocaleString()} MW`, 'Capacity']}
               />
               <Legend
@@ -296,6 +297,7 @@ export default function GridConnection() {
               <Tooltip
                 contentStyle={{ backgroundColor: 'var(--color-bg)', border: '1px solid var(--color-border)', borderRadius: '8px' }}
                 labelStyle={{ color: 'var(--color-text)' }}
+                itemStyle={{ color: 'var(--color-text)' }}
                 formatter={(value, name) => {
                   const label = name === 'operating_mw' ? 'Operating' : 'Pipeline'
                   return [`${Number(value).toLocaleString()} MW`, label]
@@ -356,6 +358,7 @@ export default function GridConnection() {
             <Tooltip
               contentStyle={{ backgroundColor: 'var(--color-bg)', border: '1px solid var(--color-border)', borderRadius: '8px' }}
               labelStyle={{ color: 'var(--color-text)' }}
+              itemStyle={{ color: 'var(--color-text)' }}
               formatter={(value, name) => [`${Number(value).toLocaleString()} MW`, formatTech(String(name))]}
             />
             {techStackData.techs.map(tech => (

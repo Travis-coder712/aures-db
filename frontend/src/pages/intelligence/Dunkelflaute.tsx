@@ -94,6 +94,7 @@ const TOOLTIP_STYLE = {
   fontSize: 13,
 }
 
+const TOOLTIP_ITEM_STYLE = { color: 'var(--color-text, #f1f5f9)' }
 const TICK_STYLE = { fill: 'var(--color-text-muted, #9ca3af)', fontSize: 12 }
 const AXIS_STYLE = { stroke: 'rgba(255,255,255,0.1)' }
 
@@ -207,6 +208,18 @@ export default function Dunkelflaute() {
     fetchDunkelflaute().then(d => { setData(d ?? null); setLoading(false) })
   }, [])
 
+  // Filter seasonal monthly data to exclude the current (partial) month
+  // Partial months show artificially low CF due to fewer days of generation data
+  const filteredSeasonalMonthly = useMemo(() => {
+    if (!data?.seasonal_monthly) return []
+    const now = new Date()
+    const curYear = now.getFullYear()
+    const curMonth = now.getMonth() + 1
+    return data.seasonal_monthly.filter(r =>
+      !(r.year === curYear && r.month >= curMonth)
+    )
+  }, [data])
+
   // Available years
   const years = useMemo(() => {
     if (!data) return []
@@ -300,8 +313,8 @@ export default function Dunkelflaute() {
 
   // Seasonal monthly data for selected state — shows monthly CF across years (respects techFilter)
   const seasonalChartData = useMemo(() => {
-    if (!data?.seasonal_monthly) return []
-    const stateData = data.seasonal_monthly.filter(r => r.state === seasonalState)
+    if (filteredSeasonalMonthly.length === 0) return []
+    const stateData = filteredSeasonalMonthly.filter(r => r.state === seasonalState)
     const byMonth: Record<number, Record<string, number>> = {}
     for (const r of stateData) {
       if (!byMonth[r.month]) byMonth[r.month] = {}
@@ -313,22 +326,22 @@ export default function Dunkelflaute() {
       monthNum: i + 1,
       ...byMonth[i + 1],
     }))
-  }, [data, seasonalState, techFilter])
+  }, [filteredSeasonalMonthly, seasonalState, techFilter])
 
   // Identify worst months across all states (dunkelflaute detection)
   const worstMonths = useMemo(() => {
-    if (!data?.seasonal_monthly) return []
-    return [...data.seasonal_monthly]
+    if (filteredSeasonalMonthly.length === 0) return []
+    return [...filteredSeasonalMonthly]
       .filter(r => r.combined_cf != null)
       .sort((a, b) => (a.combined_cf ?? 99) - (b.combined_cf ?? 99))
       .slice(0, 10) as SeasonalMonthly[]
-  }, [data])
+  }, [filteredSeasonalMonthly])
 
   // Years available in seasonal data
   const seasonalYears = useMemo(() => {
-    if (!data?.seasonal_monthly) return []
-    return Array.from(new Set(data.seasonal_monthly.map(r => r.year))).sort()
-  }, [data])
+    if (filteredSeasonalMonthly.length === 0) return []
+    return Array.from(new Set(filteredSeasonalMonthly.map(r => r.year))).sort()
+  }, [filteredSeasonalMonthly])
 
   // Avg BESS coverage hours
   const avgCoverage = useMemo(() => {
@@ -342,8 +355,8 @@ export default function Dunkelflaute() {
 
   // Assessment overlay chart: current year vs all historical years for a chosen state (respects techFilter)
   const assessmentChartData = useMemo(() => {
-    if (!data?.seasonal_monthly) return []
-    const stateData = data.seasonal_monthly.filter(r => r.state === assessmentState)
+    if (filteredSeasonalMonthly.length === 0) return []
+    const stateData = filteredSeasonalMonthly.filter(r => r.state === assessmentState)
     const byMonth: Record<number, Record<string, number>> = {}
     for (const r of stateData) {
       if (!byMonth[r.month]) byMonth[r.month] = {}
@@ -355,7 +368,7 @@ export default function Dunkelflaute() {
       monthNum: i + 1,
       ...byMonth[i + 1],
     }))
-  }, [data, assessmentState, techFilter])
+  }, [filteredSeasonalMonthly, assessmentState, techFilter])
 
   // ── Forecast: pattern matching ──
 
@@ -370,9 +383,9 @@ export default function Dunkelflaute() {
 
   // Pattern matching: for each state, compute similarity of currentYear to each historical year (respects techFilter)
   const patternMatchResults = useMemo(() => {
-    if (!data?.seasonal_monthly || historicalYears.length === 0) return []
+    if (filteredSeasonalMonthly.length === 0 || historicalYears.length === 0) return []
 
-    const stateData = data.seasonal_monthly.filter(r => r.state === forecastState && getSeasonalCF(r, techFilter) != null)
+    const stateData = filteredSeasonalMonthly.filter(r => r.state === forecastState && getSeasonalCF(r, techFilter) != null)
     const currentMonths = stateData.filter(r => r.year === currentYear).sort((a, b) => a.month - b.month)
     if (currentMonths.length < 2) return []
 
@@ -403,13 +416,13 @@ export default function Dunkelflaute() {
     })
     .filter((r): r is NonNullable<typeof r> => r != null && r.similarityPct != null)
     .sort((a, b) => (b.similarityPct ?? 0) - (a.similarityPct ?? 0))
-  }, [data, forecastState, currentYear, historicalYears, techFilter])
+  }, [filteredSeasonalMonthly, forecastState, currentYear, historicalYears, techFilter])
 
   // Forecast ranges: use top 3 matching years to project remaining months (respects techFilter)
   const forecastData = useMemo((): { month: string; actual: number | null; optimistic: number | null; pessimistic: number | null; median: number | null; isForecast: boolean }[] => {
-    if (!data?.seasonal_monthly || patternMatchResults.length === 0) return []
+    if (filteredSeasonalMonthly.length === 0 || patternMatchResults.length === 0) return []
 
-    const stateData = data.seasonal_monthly.filter(r => r.state === forecastState && getSeasonalCF(r, techFilter) != null)
+    const stateData = filteredSeasonalMonthly.filter(r => r.state === forecastState && getSeasonalCF(r, techFilter) != null)
     const currentMonths = stateData.filter(r => r.year === currentYear).sort((a, b) => a.month - b.month)
     const lastMonth = currentMonths.length > 0 ? currentMonths[currentMonths.length - 1].month : 0
 
@@ -446,12 +459,12 @@ export default function Dunkelflaute() {
         isForecast: true,
       }
     })
-  }, [data, forecastState, currentYear, patternMatchResults, techFilter])
+  }, [filteredSeasonalMonthly, forecastState, currentYear, patternMatchResults, techFilter])
 
   // Forecast overlay chart data: actual + forecast range (respects techFilter)
   const forecastChartData = useMemo(() => {
-    if (!data?.seasonal_monthly) return []
-    const stateData = data.seasonal_monthly.filter(r => r.state === forecastState && getSeasonalCF(r, techFilter) != null)
+    if (filteredSeasonalMonthly.length === 0) return []
+    const stateData = filteredSeasonalMonthly.filter(r => r.state === forecastState && getSeasonalCF(r, techFilter) != null)
     const currentMonths = stateData.filter(r => r.year === currentYear)
     const lastMonth = currentMonths.length > 0 ? Math.max(...currentMonths.map(r => r.month)) : 0
     const topYears = patternMatchResults.slice(0, 3).map(r => r.year)
@@ -490,7 +503,7 @@ export default function Dunkelflaute() {
         rangeMax: range?.[1],
       }
     })
-  }, [data, forecastState, currentYear, patternMatchResults, techFilter])
+  }, [filteredSeasonalMonthly, forecastState, currentYear, patternMatchResults, techFilter])
 
   // ── Loading ──
   if (loading) {
@@ -740,7 +753,7 @@ export default function Dunkelflaute() {
                 <CartesianGrid strokeDasharray="3 3" {...AXIS_STYLE} />
                 <XAxis dataKey="state" tick={TICK_STYLE} axisLine={AXIS_STYLE} tickLine={false} />
                 <YAxis tick={TICK_STYLE} axisLine={AXIS_STYLE} tickLine={false} tickFormatter={(v) => `${v}%`} domain={[0, 'auto']} />
-                <Tooltip contentStyle={TOOLTIP_STYLE} formatter={(value) => [`${Number(value).toFixed(1)}%`]} labelStyle={{ color: 'var(--color-text)', fontWeight: 600 }} />
+                <Tooltip contentStyle={TOOLTIP_STYLE} itemStyle={TOOLTIP_ITEM_STYLE} formatter={(value) => [`${Number(value).toFixed(1)}%`]} labelStyle={{ color: 'var(--color-text)', fontWeight: 600 }} />
                 <Legend wrapperStyle={{ fontSize: 12, color: 'var(--color-text-muted)' }} />
                 {(techFilter === 'combined' || techFilter === 'wind') && (
                   <Bar dataKey="wind_cf" name="Wind CF" fill={WIND_COLOR} radius={[4, 4, 0, 0]} />
@@ -765,7 +778,7 @@ export default function Dunkelflaute() {
                 <CartesianGrid strokeDasharray="3 3" {...AXIS_STYLE} />
                 <XAxis dataKey="year" tick={TICK_STYLE} axisLine={AXIS_STYLE} tickLine={false} />
                 <YAxis tick={TICK_STYLE} axisLine={AXIS_STYLE} tickLine={false} tickFormatter={(v) => `${v}%`} domain={[0, 'auto']} />
-                <Tooltip contentStyle={TOOLTIP_STYLE} formatter={(value) => [`${Number(value).toFixed(1)}%`]} labelStyle={{ color: 'var(--color-text)', fontWeight: 600 }} />
+                <Tooltip contentStyle={TOOLTIP_STYLE} itemStyle={TOOLTIP_ITEM_STYLE} formatter={(value) => [`${Number(value).toFixed(1)}%`]} labelStyle={{ color: 'var(--color-text)', fontWeight: 600 }} />
                 <Legend wrapperStyle={{ fontSize: 12, color: 'var(--color-text-muted)' }} />
                 {STATE_ORDER.filter(st =>
                   selectedStates.has(st) && lineChartData.some(d => (d as Record<string, unknown>)[st] != null)
@@ -881,7 +894,7 @@ export default function Dunkelflaute() {
                 <CartesianGrid strokeDasharray="3 3" {...AXIS_STYLE} />
                 <XAxis dataKey="month" tick={TICK_STYLE} axisLine={AXIS_STYLE} tickLine={false} />
                 <YAxis tick={TICK_STYLE} axisLine={AXIS_STYLE} tickLine={false} tickFormatter={(v) => `${v}%`} domain={[0, 'auto']} />
-                <Tooltip contentStyle={TOOLTIP_STYLE} formatter={(value) => [`${Number(value).toFixed(1)}%`]} labelStyle={{ color: 'var(--color-text)', fontWeight: 600 }} />
+                <Tooltip contentStyle={TOOLTIP_STYLE} itemStyle={TOOLTIP_ITEM_STYLE} formatter={(value) => [`${Number(value).toFixed(1)}%`]} labelStyle={{ color: 'var(--color-text)', fontWeight: 600 }} />
                 <Legend wrapperStyle={{ fontSize: 12, color: 'var(--color-text-muted)' }} />
                 <ReferenceLine y={25} stroke="#ef4444" strokeDasharray="6 3" label={{ value: '25% stress', fill: '#ef4444', fontSize: 11, position: 'insideTopRight' }} />
                 {seasonalYears.map((yr, i) => (
@@ -1142,7 +1155,7 @@ export default function Dunkelflaute() {
                 <CartesianGrid strokeDasharray="3 3" {...AXIS_STYLE} />
                 <XAxis dataKey="month" tick={TICK_STYLE} axisLine={AXIS_STYLE} tickLine={false} />
                 <YAxis tick={TICK_STYLE} axisLine={AXIS_STYLE} tickLine={false} tickFormatter={(v) => `${v}%`} domain={[0, 'auto']} />
-                <Tooltip contentStyle={TOOLTIP_STYLE} formatter={(value) => [`${Number(value).toFixed(1)}%`]} labelStyle={{ color: 'var(--color-text)', fontWeight: 600 }} />
+                <Tooltip contentStyle={TOOLTIP_STYLE} itemStyle={TOOLTIP_ITEM_STYLE} formatter={(value) => [`${Number(value).toFixed(1)}%`]} labelStyle={{ color: 'var(--color-text)', fontWeight: 600 }} />
                 <Legend wrapperStyle={{ fontSize: 11, color: 'var(--color-text-muted)' }} />
                 <ReferenceLine y={25} stroke="#ef4444" strokeDasharray="6 3" label={{ value: '25% stress', fill: '#ef4444', fontSize: 11, position: 'insideTopRight' }} />
                 {/* Historical years as thin dashed lines */}
@@ -1308,7 +1321,7 @@ export default function Dunkelflaute() {
                   <CartesianGrid strokeDasharray="3 3" {...AXIS_STYLE} />
                   <XAxis dataKey="month" tick={TICK_STYLE} axisLine={AXIS_STYLE} tickLine={false} />
                   <YAxis tick={TICK_STYLE} axisLine={AXIS_STYLE} tickLine={false} tickFormatter={(v) => `${v}%`} domain={[0, 'auto']} />
-                  <Tooltip contentStyle={TOOLTIP_STYLE} formatter={(value) => [value != null ? `${Number(value).toFixed(1)}%` : '—']} labelStyle={{ color: 'var(--color-text)', fontWeight: 600 }} />
+                  <Tooltip contentStyle={TOOLTIP_STYLE} itemStyle={TOOLTIP_ITEM_STYLE} formatter={(value) => [value != null ? `${Number(value).toFixed(1)}%` : '—']} labelStyle={{ color: 'var(--color-text)', fontWeight: 600 }} />
                   <Legend wrapperStyle={{ fontSize: 11, color: 'var(--color-text-muted)' }} />
                   <ReferenceLine y={25} stroke="#ef4444" strokeDasharray="6 3" />
 
@@ -1437,7 +1450,7 @@ export default function Dunkelflaute() {
                 <CartesianGrid strokeDasharray="3 3" {...AXIS_STYLE} />
                 <XAxis dataKey="state" tick={TICK_STYLE} axisLine={AXIS_STYLE} tickLine={false} />
                 <YAxis tick={TICK_STYLE} axisLine={AXIS_STYLE} tickLine={false} tickFormatter={(v) => `${v}h`} domain={[0, 5]} />
-                <Tooltip contentStyle={TOOLTIP_STYLE} formatter={(value) => [`${Number(value).toFixed(2)} hours`]} labelStyle={{ color: 'var(--color-text)', fontWeight: 600 }} />
+                <Tooltip contentStyle={TOOLTIP_STYLE} itemStyle={TOOLTIP_ITEM_STYLE} formatter={(value) => [`${Number(value).toFixed(2)} hours`]} labelStyle={{ color: 'var(--color-text)', fontWeight: 600 }} />
                 <ReferenceLine y={4} stroke="#22c55e" strokeDasharray="6 3" label={{ value: '4h target', fill: '#22c55e', fontSize: 11, position: 'insideTopRight' }} />
                 <Bar dataKey="coverage_hours" name="Coverage Hours" radius={[4, 4, 0, 0]}>
                   {coverageChartData.map((entry, i) => (
@@ -1477,7 +1490,7 @@ export default function Dunkelflaute() {
                 <CartesianGrid strokeDasharray="3 3" {...AXIS_STYLE} />
                 <XAxis dataKey="state" tick={TICK_STYLE} axisLine={AXIS_STYLE} tickLine={false} />
                 <YAxis tick={TICK_STYLE} axisLine={AXIS_STYLE} tickLine={false} tickFormatter={(v) => `${v}h`} domain={[0, 'auto']} />
-                <Tooltip contentStyle={TOOLTIP_STYLE} formatter={(value) => [`${Number(value).toFixed(2)} hours`]} labelStyle={{ color: 'var(--color-text)', fontWeight: 600 }} />
+                <Tooltip contentStyle={TOOLTIP_STYLE} itemStyle={TOOLTIP_ITEM_STYLE} formatter={(value) => [`${Number(value).toFixed(2)} hours`]} labelStyle={{ color: 'var(--color-text)', fontWeight: 600 }} />
                 <Legend wrapperStyle={{ fontSize: 12, color: 'var(--color-text-muted)' }} />
                 <ReferenceLine y={4} stroke="#22c55e" strokeDasharray="6 3" label={{ value: '4h target', fill: '#22c55e', fontSize: 11, position: 'insideTopRight' }} />
                 <Bar dataKey="current_hours" name="Current Coverage" fill="#ef4444" radius={[4, 4, 0, 0]} />

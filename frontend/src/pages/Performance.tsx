@@ -538,6 +538,7 @@ export default function Performance() {
                     color: '#f1f5f9',
                     fontSize: 13,
                   }}
+                  itemStyle={{ color: '#f1f5f9' }}
                   formatter={(value) => `${value} projects`}
                 />
                 <Bar dataKey="count" radius={[4, 4, 0, 0]}>

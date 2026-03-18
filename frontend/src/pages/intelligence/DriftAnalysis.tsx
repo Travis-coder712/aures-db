@@ -73,6 +73,7 @@ const TOOLTIP_STYLE = {
   color: 'var(--color-text, #f1f5f9)',
   fontSize: 13,
 }
+const TOOLTIP_ITEM_STYLE = { color: 'var(--color-text, #f1f5f9)' }
 
 const TICK_STYLE = { fill: 'var(--color-text-muted, #9ca3af)', fontSize: 12 }
 const AXIS_STYLE = { stroke: 'rgba(255,255,255,0.1)' }
@@ -382,6 +383,7 @@ export default function DriftAnalysis() {
                 />
                 <Tooltip
                   contentStyle={TOOLTIP_STYLE}
+                  itemStyle={TOOLTIP_ITEM_STYLE}
                   formatter={(value) => `${Number(value).toFixed(1)} months`}
                 />
                 <Legend wrapperStyle={{ fontSize: 12, color: 'var(--color-text-muted, #9ca3af)' }} />
@@ -414,6 +416,7 @@ export default function DriftAnalysis() {
                 />
                 <Tooltip
                   contentStyle={TOOLTIP_STYLE}
+                  itemStyle={TOOLTIP_ITEM_STYLE}
                   formatter={(value) => `${Number(value).toFixed(1)} months`}
                 />
                 <Legend wrapperStyle={{ fontSize: 12, color: 'var(--color-text-muted, #9ca3af)' }} />
@@ -446,6 +449,7 @@ export default function DriftAnalysis() {
                 />
                 <Tooltip
                   contentStyle={TOOLTIP_STYLE}
+                  itemStyle={TOOLTIP_ITEM_STYLE}
                   formatter={(value) => `${Number(value).toFixed(1)} months`}
                   labelFormatter={(label) => `COD Year: ${label}`}
                 />

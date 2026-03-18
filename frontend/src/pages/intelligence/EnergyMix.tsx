@@ -354,7 +354,7 @@ export default function EnergyMix() {
             <Tooltip content={<ChartTooltip />} />
             <Legend
               formatter={(value) => formatTech(value as string)}
-              wrapperStyle={{ fontSize: 12 }}
+              wrapperStyle={{ fontSize: 12, color: 'var(--color-text-muted)' }}
             />
             {techs.map(tech => (
               <Bar
@@ -562,7 +562,7 @@ export default function EnergyMix() {
                 <Tooltip content={<ChartTooltip />} />
                 <Legend
                   formatter={(value) => formatTech(value as string)}
-                  wrapperStyle={{ fontSize: 11 }}
+                  wrapperStyle={{ fontSize: 11, color: 'var(--color-text-muted)' }}
                 />
                 {pipelineTechs.map(tech => (
                   <Bar
@@ -610,6 +610,7 @@ export default function EnergyMix() {
                 <Tooltip
                   contentStyle={{ backgroundColor: 'var(--color-bg)', border: '1px solid var(--color-border)', borderRadius: '8px' }}
                   labelStyle={{ color: 'var(--color-text)' }}
+                  itemStyle={{ color: 'var(--color-text)' }}
                   formatter={(value) => [formatMW(Number(value)), 'Capacity']}
                 />
                 <Legend

@@ -633,6 +633,7 @@ function AnalyticsTab({ eisData, gridData: _gridData, voltageData, nspData, conn
                 </Pie>
                 <Tooltip
                   contentStyle={{ backgroundColor: 'var(--color-bg)', border: '1px solid var(--color-border)', borderRadius: '8px' }}
+                  itemStyle={{ color: 'var(--color-text)' }}
                   formatter={(value) => [`${Number(value).toLocaleString()} MW`, 'Capacity']}
                 />
                 <Legend formatter={(value) => <span style={{ color: 'var(--color-text-muted)', fontSize: 11 }}>{value}</span>} />
@@ -653,6 +654,7 @@ function AnalyticsTab({ eisData, gridData: _gridData, voltageData, nspData, conn
                 <YAxis tick={{ fill: 'var(--color-text-muted)', fontSize: 11 }} />
                 <Tooltip
                   contentStyle={{ backgroundColor: 'var(--color-bg)', border: '1px solid var(--color-border)', borderRadius: '8px' }}
+                  itemStyle={{ color: 'var(--color-text)' }}
                   formatter={(value) => [`${value} projects`, 'Count']}
                 />
                 <Bar dataKey="count" radius={[4, 4, 0, 0]}>
@@ -678,6 +680,7 @@ function AnalyticsTab({ eisData, gridData: _gridData, voltageData, nspData, conn
               <YAxis type="category" dataKey="name" width={120} tick={{ fill: 'var(--color-text-muted)', fontSize: 11 }} />
               <Tooltip
                 contentStyle={{ backgroundColor: 'var(--color-bg)', border: '1px solid var(--color-border)', borderRadius: '8px' }}
+                itemStyle={{ color: 'var(--color-text)' }}
                 formatter={(value, name) => [
                   name === 'total_mw' ? `${Number(value).toLocaleString()} MW` : `${value} projects`,
                   name === 'total_mw' ? 'Total MW' : 'Projects',

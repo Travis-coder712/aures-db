@@ -368,6 +368,9 @@ def export_all(db_path=DB_PATH):
     # 15b. EIS analytics
     export_eis_analytics(conn)
 
+    # 15c. EIS vs actual comparison
+    export_eis_comparison(conn)
+
     # 17. Intelligence Layer
     export_intelligence(conn)
 
@@ -2668,10 +2671,12 @@ def export_eis_analytics(conn):
 
     wind_projects = []
     bess_projects = []
+    solar_projects = []
 
     # Accumulators for stats
     wind_speeds, hub_heights, rotor_diameters, capacity_factors, wind_conn_dists = [], [], [], [], []
     bess_efficiencies, bess_eff_ac, bess_durations, bess_conn_dists = [], [], [], []
+    solar_capacity_factors, solar_conn_dists = [], []
     chemistry_counts = {}
     pcs_counts = {}
     cell_suppliers = {}
@@ -2747,10 +2752,19 @@ def export_eis_analytics(conn):
                 key = inv.split('(')[0].strip()
                 inverter_suppliers[key] = inverter_suppliers.get(key, 0) + 1
 
+        elif tech == 'solar':
+            proj = {**base,
+                'assumed_capacity_factor_pct': d.get('assumed_capacity_factor_pct'),
+                'assumed_annual_energy_gwh': d.get('assumed_annual_energy_gwh'),
+            }
+            solar_projects.append(clean_none_values(proj))
+            if d.get('assumed_capacity_factor_pct'): solar_capacity_factors.append(d['assumed_capacity_factor_pct'])
+            if d.get('connection_distance_km'): solar_conn_dists.append(d['connection_distance_km'])
+
     def avg(lst):
         return round(sum(lst) / len(lst), 1) if lst else None
 
-    all_conn_dists = wind_conn_dists + bess_conn_dists
+    all_conn_dists = wind_conn_dists + bess_conn_dists + solar_conn_dists
     # Connection voltage breakdown
     voltage_counts = {}
     for r in rows:
@@ -2762,10 +2776,12 @@ def export_eis_analytics(conn):
     result = {
         'wind_projects': wind_projects,
         'bess_projects': bess_projects,
+        'solar_projects': solar_projects,
         'summary': {
             'total_eis': len(rows),
             'wind': len(wind_projects),
             'bess': len(bess_projects),
+            'solar': len(solar_projects),
             'pumped_hydro': sum(1 for r in rows if dict(r)['technology'] == 'pumped_hydro'),
             'wind_stats': {
                 'avg_wind_speed': avg(wind_speeds),
@@ -2793,7 +2809,84 @@ def export_eis_analytics(conn):
     }
 
     write_json(os.path.join(DATA_DIR, 'analytics', 'eis-analytics.json'), result)
-    print(f"  analytics/eis-analytics.json ({len(wind_projects)} wind, {len(bess_projects)} BESS)")
+    print(f"  analytics/eis-analytics.json ({len(wind_projects)} wind, {len(bess_projects)} BESS, {len(solar_projects)} solar)")
+
+
+def export_eis_comparison(conn):
+    """Export EIS predicted vs actual operational performance comparison."""
+    rows = conn.execute("""
+        SELECT e.project_id, p.name, p.technology, p.state, p.capacity_mw,
+               e.assumed_capacity_factor_pct, e.assumed_annual_energy_gwh,
+               pa.year, pa.capacity_factor_pct, pa.energy_mwh
+        FROM eis_technical_specs e
+        JOIN projects p ON e.project_id = p.id
+        JOIN performance_annual pa ON pa.project_id = e.project_id
+        WHERE p.status = 'operating'
+          AND pa.data_source = 'openelectricity'
+          AND pa.capacity_factor_pct IS NOT NULL
+          AND e.assumed_capacity_factor_pct IS NOT NULL
+        ORDER BY p.name, pa.year
+    """).fetchall()
+
+    # Group by project
+    projects = {}
+    for r in rows:
+        d = dict(r)
+        pid = d['project_id']
+        if pid not in projects:
+            projects[pid] = {
+                'id': pid,
+                'name': d['name'],
+                'technology': d['technology'],
+                'state': d['state'],
+                'capacity_mw': d['capacity_mw'],
+                'eis_cf_pct': round(d['assumed_capacity_factor_pct'], 1),
+                'eis_energy_gwh': d['assumed_annual_energy_gwh'],
+                'annual_actuals': [],
+            }
+        projects[pid]['annual_actuals'].append({
+            'year': d['year'],
+            'cf_pct': round(d['capacity_factor_pct'], 1),
+            'energy_mwh': round(d['energy_mwh']) if d['energy_mwh'] else None,
+        })
+
+    # Compute averages and deltas
+    project_list = []
+    total_eis_cf, total_actual_cf = [], []
+    above, below = 0, 0
+    for p in projects.values():
+        actuals_cf = [a['cf_pct'] for a in p['annual_actuals'] if a['cf_pct'] is not None]
+        if not actuals_cf:
+            continue
+        avg_cf = round(sum(actuals_cf) / len(actuals_cf), 1)
+        delta = round(avg_cf - p['eis_cf_pct'], 1)
+        p['avg_actual_cf_pct'] = avg_cf
+        p['cf_delta_pct'] = delta
+        project_list.append(p)
+        total_eis_cf.append(p['eis_cf_pct'])
+        total_actual_cf.append(avg_cf)
+        if delta >= 0:
+            above += 1
+        else:
+            below += 1
+
+    project_list.sort(key=lambda x: x['cf_delta_pct'])
+
+    result = {
+        'projects': project_list,
+        'summary': {
+            'total_matched': len(project_list),
+            'avg_eis_cf': round(sum(total_eis_cf) / len(total_eis_cf), 1) if total_eis_cf else 0,
+            'avg_actual_cf': round(sum(total_actual_cf) / len(total_actual_cf), 1) if total_actual_cf else 0,
+            'avg_delta': round(sum(total_actual_cf) / len(total_actual_cf) - sum(total_eis_cf) / len(total_eis_cf), 1) if total_eis_cf else 0,
+            'projects_above_eis': above,
+            'projects_below_eis': below,
+        },
+        'exported_at': datetime.now().isoformat(),
+    }
+
+    write_json(os.path.join(DATA_DIR, 'analytics', 'eis-comparison.json'), result)
+    print(f"  analytics/eis-comparison.json ({len(project_list)} projects matched)")
 
 
 def export_intelligence(conn):

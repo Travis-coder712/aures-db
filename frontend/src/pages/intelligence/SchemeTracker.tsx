@@ -493,6 +493,7 @@ function OutcomesPieChart({ rounds }: { rounds: SchemeTrackerRound[] }) {
               </Pie>
               <Tooltip
                 contentStyle={{ backgroundColor: 'var(--color-bg)', border: '1px solid var(--color-border)', borderRadius: '8px' }}
+                itemStyle={{ color: 'var(--color-text)' }}
                 formatter={(value, name) => {
                   const d = pieData.find(p => p.name === name)
                   return [`${value} projects (${fmtMW(d?.mw ?? 0)})`, name]

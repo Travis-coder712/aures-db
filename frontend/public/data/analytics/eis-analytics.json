@@ -1709,10 +1709,12 @@
       "transformer_mva": 60.0
     }
   ],
+  "solar_projects": [],
   "summary": {
     "total_eis": 68,
     "wind": 31,
     "bess": 35,
+    "solar": 0,
     "pumped_hydro": 2,
     "wind_stats": {
       "avg_wind_speed": 8.3,
@@ -1787,5 +1789,5 @@
       }
     }
   },
-  "exported_at": "2026-03-18T19:40:30.841338"
+  "exported_at": "2026-03-19T09:01:15.984612"
 }

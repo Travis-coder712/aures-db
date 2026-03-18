@@ -857,11 +857,20 @@ export interface EISBESSProject {
   document_title?: string; document_url?: string; document_year?: number
 }
 
+export interface EISSolarProject {
+  id: string; name: string; state: State; capacity_mw: number; status: string; developer?: string
+  assumed_capacity_factor_pct?: number; assumed_annual_energy_gwh?: number
+  connection_voltage_kv?: number; connection_distance_km?: number
+  connection_substation_name?: string; nsp?: string; connection_augmentation?: string
+  document_title?: string; document_url?: string; document_year?: number
+}
+
 export interface EISAnalyticsData {
   wind_projects: EISWindProject[]
   bess_projects: EISBESSProject[]
+  solar_projects: EISSolarProject[]
   summary: {
-    total_eis: number; wind: number; bess: number; pumped_hydro: number
+    total_eis: number; wind: number; bess: number; solar: number; pumped_hydro: number
     wind_stats: {
       avg_wind_speed: number | null; avg_hub_height: number | null
       avg_rotor_diameter: number | null; avg_capacity_factor: number | null
@@ -880,4 +889,33 @@ export interface EISAnalyticsData {
       voltage_breakdown: Record<string, number>
     }
   }
+}
+
+// EIS vs Actual comparison
+export interface EISComparisonActual { year: number; cf_pct: number; energy_mwh: number | null }
+
+export interface EISComparisonProject {
+  id: string; name: string; technology: string; state: string; capacity_mw: number
+  eis_cf_pct: number; eis_energy_gwh: number | null
+  annual_actuals: EISComparisonActual[]
+  avg_actual_cf_pct: number; cf_delta_pct: number
+}
+
+export interface EISComparisonData {
+  projects: EISComparisonProject[]
+  summary: {
+    total_matched: number; avg_eis_cf: number; avg_actual_cf: number
+    avg_delta: number; projects_above_eis: number; projects_below_eis: number
+  }
+  exported_at: string
+}
+
+// EIS coverage tracking
+export interface EISCoverageEntry {
+  name: string; technology: string; state: string; eis_url?: string; notes?: string
+}
+
+export interface EISCoverageData {
+  available_not_extracted: EISCoverageEntry[]
+  last_updated: string
 }

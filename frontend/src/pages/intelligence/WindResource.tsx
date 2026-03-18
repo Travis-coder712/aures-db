@@ -398,6 +398,7 @@ export default function WindResource() {
               <Tooltip
                 contentStyle={{ backgroundColor: 'var(--color-bg)', border: '1px solid var(--color-border)', borderRadius: '8px' }}
                 labelStyle={{ color: 'var(--color-text)' }}
+                itemStyle={{ color: 'var(--color-text)' }}
                 formatter={(value) => [fmtCf(Number(value)), 'Median CF']}
                 labelFormatter={(label) => {
                   const row = stateBenchData.find(r => r.state === label)
@@ -448,6 +449,7 @@ export default function WindResource() {
               </Pie>
               <Tooltip
                 contentStyle={{ backgroundColor: 'var(--color-bg)', border: '1px solid var(--color-border)', borderRadius: '8px' }}
+                itemStyle={{ color: 'var(--color-text)' }}
                 formatter={(value, _name, props) => {
                   const pct = ((Number(value) / data.total_operating) * 100).toFixed(0)
                   return [`${value} farms (${pct}%)`, props.payload.name]

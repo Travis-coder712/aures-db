@@ -327,6 +327,7 @@ export default function RevenueIntel() {
               <Tooltip
                 contentStyle={{ backgroundColor: 'var(--color-bg)', border: '1px solid var(--color-border)', borderRadius: '8px' }}
                 labelStyle={{ color: 'var(--color-text)' }}
+                itemStyle={{ color: 'var(--color-text)' }}
                 formatter={(value) => [fmtRevenue(Number(value)), 'Median $/MW']}
                 labelFormatter={(label) => {
                   const row = revenueBarData.find(r => r.label === label)
@@ -374,10 +375,11 @@ export default function RevenueIntel() {
                 <Tooltip
                   contentStyle={{ backgroundColor: 'var(--color-bg)', border: '1px solid var(--color-border)', borderRadius: '8px' }}
                   labelStyle={{ color: 'var(--color-text)' }}
+                  itemStyle={{ color: 'var(--color-text)' }}
                   formatter={(value) => [fmtRevenue(Number(value)), 'Median $/MW']}
                 />
                 <Legend
-                  wrapperStyle={{ fontSize: '12px' }}
+                  wrapperStyle={{ fontSize: '12px', color: 'var(--color-text-muted)' }}
                   formatter={(value) => TECH_LABELS[value] ?? value}
                 />
                 {TECH_ORDER.map(tech => (
@@ -416,9 +418,10 @@ export default function RevenueIntel() {
                 <Tooltip
                   contentStyle={{ backgroundColor: 'var(--color-bg)', border: '1px solid var(--color-border)', borderRadius: '8px' }}
                   labelStyle={{ color: 'var(--color-text)' }}
+                  itemStyle={{ color: 'var(--color-text)' }}
                   formatter={(value) => [fmtPrice(Number(value)), '']}
                 />
-                <Legend wrapperStyle={{ fontSize: '12px' }} />
+                <Legend wrapperStyle={{ fontSize: '12px', color: 'var(--color-text-muted)' }} />
                 <Bar dataKey="discharge" name="Discharge Price" fill="#f97316" radius={[4, 4, 0, 0]} />
                 <Bar dataKey="charge" name="Charge Price" fill="#06b6d4" radius={[4, 4, 0, 0]} />
                 <Bar dataKey="spread" name="Spread" fill="#10b981" radius={[4, 4, 0, 0]} />

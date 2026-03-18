@@ -5,7 +5,7 @@
  * In production (GitHub Pages), they're served as static files.
  * In development (Vite dev server), they're served from the public/ directory.
  */
-import type { ProjectSummary, Project, Technology, ProjectStatus, State, LeagueTable, LeagueTableIndex, LeagueTechnology, DeveloperIndex, OEMIndex, ContractorIndex, OfftakerIndex, MapProject, CODDriftData, DataSourcesIndex, BESSCapexData, ProjectTimelineData, SchemeTrackerData, DriftAnalysisData, WindResourceData, DunkelflaunteData, EnergyMixData, DeveloperScoreData, RevenueIntelData, GridConnectionData, NewsData, REZAccessMap, EISAnalyticsData } from './types'
+import type { ProjectSummary, Project, Technology, ProjectStatus, State, LeagueTable, LeagueTableIndex, LeagueTechnology, DeveloperIndex, OEMIndex, ContractorIndex, OfftakerIndex, MapProject, CODDriftData, DataSourcesIndex, BESSCapexData, ProjectTimelineData, SchemeTrackerData, DriftAnalysisData, WindResourceData, DunkelflaunteData, EnergyMixData, DeveloperScoreData, RevenueIntelData, GridConnectionData, NewsData, REZAccessMap, EISAnalyticsData, EISComparisonData, EISCoverageData } from './types'
 
 const BASE = import.meta.env.BASE_URL + 'data'
 
@@ -424,6 +424,28 @@ export async function fetchEISAnalytics(): Promise<EISAnalyticsData | null> {
     if (!resp.ok) return null
     eisAnalyticsCache = (await resp.json()) as EISAnalyticsData
     return eisAnalyticsCache
+  } catch { return null }
+}
+
+let eisComparisonCache: EISComparisonData | null = null
+export async function fetchEISComparison(): Promise<EISComparisonData | null> {
+  if (eisComparisonCache) return eisComparisonCache
+  try {
+    const resp = await fetch(`${BASE}/analytics/eis-comparison.json`)
+    if (!resp.ok) return null
+    eisComparisonCache = (await resp.json()) as EISComparisonData
+    return eisComparisonCache
+  } catch { return null }
+}
+
+let eisCoverageCache: EISCoverageData | null = null
+export async function fetchEISCoverage(): Promise<EISCoverageData | null> {
+  if (eisCoverageCache) return eisCoverageCache
+  try {
+    const resp = await fetch(`${BASE}/analytics/eis-coverage.json`)
+    if (!resp.ok) return null
+    eisCoverageCache = (await resp.json()) as EISCoverageData
+    return eisCoverageCache
   } catch { return null }
 }
 

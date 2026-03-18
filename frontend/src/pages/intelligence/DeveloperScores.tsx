@@ -1,12 +1,12 @@
 import { useState, useEffect, useMemo } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import {
-  ScatterChart, Scatter, XAxis, YAxis, CartesianGrid, Tooltip,
+  ScatterChart, Scatter, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
   ResponsiveContainer, BarChart, Bar, Cell, PieChart, Pie,
 } from 'recharts'
-import { fetchDeveloperScores } from '../../lib/dataService'
+import { fetchDeveloperScores, fetchDeveloperIndex, fetchSchemeTracker } from '../../lib/dataService'
 import ChartWrapper from '../../components/common/ChartWrapper'
-import type { DeveloperScoreData, ScoredDeveloper } from '../../lib/types'
+import type { DeveloperScoreData, ScoredDeveloper, DeveloperIndex, SchemeTrackerData } from '../../lib/types'
 import ScrollableTable from '../../components/common/ScrollableTable'
 
 // ============================================================
@@ -57,6 +57,16 @@ const getGradeColour = (grade: string) => GRADE_COLOURS[grade] || '#636e72'
 const TECH_OPTIONS = ['wind', 'solar', 'bess'] as const
 const MIN_PROJECT_OPTIONS = [1, 2, 3, 5, 10] as const
 
+const STATUS_COLOURS: Record<string, string> = {
+  operating: '#10b981',
+  construction: '#f59e0b',
+  development: '#3b82f6',
+}
+
+function devSlug(name: string): string {
+  return name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')
+}
+
 // ============================================================
 // View type
 // ============================================================
@@ -67,8 +77,11 @@ type SortDir = 'asc' | 'desc'
 
 export default function DeveloperScores() {
   const [data, setData] = useState<DeveloperScoreData | null>(null)
+  const [devIndex, setDevIndex] = useState<DeveloperIndex | null>(null)
+  const [schemeData, setSchemeData] = useState<SchemeTrackerData | null>(null)
   const [loading, setLoading] = useState(true)
   const [view, setView] = useState<ViewMode>('charts')
+  const navigate = useNavigate()
 
   // Filters
   const [selectedGrades, setSelectedGrades] = useState<string[]>([])
@@ -80,7 +93,16 @@ export default function DeveloperScores() {
   const [sortDir, setSortDir] = useState<SortDir>('desc')
 
   useEffect(() => {
-    fetchDeveloperScores().then(d => { setData(d); setLoading(false) })
+    Promise.all([
+      fetchDeveloperScores(),
+      fetchDeveloperIndex(),
+      fetchSchemeTracker(),
+    ]).then(([scores, idx, schemes]) => {
+      setData(scores)
+      setDevIndex(idx)
+      setSchemeData(schemes)
+      setLoading(false)
+    })
   }, [])
 
   function toggleGrade(grade: string) {
@@ -164,6 +186,56 @@ export default function DeveloperScores() {
       colour: getGradeColour(d.grade),
     }))
   }, [filtered])
+
+  // Top 30 by project count (stacked: operating / construction / development)
+  const projectCountBarData = useMemo(() => {
+    if (!devIndex) return []
+    const profileMap = new Map(devIndex.developers.map(p => [p.slug, p]))
+    return [...filtered]
+      .map(d => {
+        const slug = devSlug(d.developer)
+        const profile = profileMap.get(slug)
+        const operating = profile?.by_status?.operating ?? d.operating ?? 0
+        const construction = profile?.by_status?.construction ?? 0
+        const development = profile?.by_status?.development ?? 0
+        const commissioning = profile?.by_status?.commissioning ?? 0
+        return {
+          developer: d.developer,
+          slug,
+          operating: operating + commissioning,
+          construction,
+          development,
+          total: operating + commissioning + construction + development,
+        }
+      })
+      .filter(d => d.total > 0)
+      .sort((a, b) => b.total - a.total)
+      .slice(0, 30)
+      .reverse()
+  }, [filtered, devIndex])
+
+  // Top 30 by LTESA/CIS scheme wins
+  const schemeWinsBarData = useMemo(() => {
+    if (!schemeData) return []
+    const devMap = new Map<string, { developer: string; ltesa: number; cis: number }>()
+    for (const round of schemeData.rounds) {
+      const scheme = round.scheme.toUpperCase()
+      for (const p of round.projects) {
+        if (!p.developer) continue
+        const key = p.developer.toLowerCase()
+        if (!devMap.has(key)) devMap.set(key, { developer: p.developer, ltesa: 0, cis: 0 })
+        const entry = devMap.get(key)!
+        if (scheme.includes('LTESA')) entry.ltesa++
+        else if (scheme.includes('CIS')) entry.cis++
+      }
+    }
+    return [...devMap.values()]
+      .map(d => ({ ...d, slug: devSlug(d.developer), wins: d.ltesa + d.cis }))
+      .filter(d => d.wins > 0)
+      .sort((a, b) => b.wins - a.wins)
+      .slice(0, 30)
+      .reverse()
+  }, [schemeData])
 
   if (loading) {
     return (
@@ -369,6 +441,7 @@ export default function DeveloperScores() {
                     </Pie>
                     <Tooltip
                       contentStyle={{ backgroundColor: 'var(--color-bg)', border: '1px solid var(--color-border)', borderRadius: '8px' }}
+                      itemStyle={{ color: 'var(--color-text)' }}
                       formatter={(value, _name, props) => {
                         const pct = ((Number(value) / data.total_developers) * 100).toFixed(0)
                         return [`${value} developers (${pct}%)`, `Grade ${props.payload.name}`]
@@ -493,6 +566,7 @@ export default function DeveloperScores() {
                   <Tooltip
                     contentStyle={{ backgroundColor: 'var(--color-bg)', border: '1px solid var(--color-border)', borderRadius: '8px' }}
                     labelStyle={{ color: 'var(--color-text)' }}
+                    itemStyle={{ color: 'var(--color-text)' }}
                     formatter={(value) => [Number(value).toFixed(1), 'Execution Score']}
                     labelFormatter={(label) => {
                       const dev = barData.find(d => d.developer === label)
@@ -510,6 +584,118 @@ export default function DeveloperScores() {
               </ResponsiveContainer>
             </ChartWrapper>
           </div>
+
+          {/* Top 30 by project count — stacked bar */}
+          {projectCountBarData.length > 0 && (
+            <div className="bg-[var(--color-bg-card)] rounded-xl p-4 border border-[var(--color-border)]">
+              <h2 className="text-lg font-semibold text-[var(--color-text)] mb-1">
+                Top {Math.min(30, projectCountBarData.length)} Developers by Number of Projects
+              </h2>
+              <p className="text-xs text-[var(--color-text-muted)] mb-4">
+                Stacked by status. Click a bar to view developer profile.
+              </p>
+              <ChartWrapper title="Top Developers by Project Count" data={projectCountBarData} csvColumns={['developer', 'operating', 'construction', 'development', 'total']}>
+                <ResponsiveContainer width="100%" height={Math.max(projectCountBarData.length * 28, 200)}>
+                  <BarChart
+                    data={projectCountBarData}
+                    layout="vertical"
+                    margin={{ top: 5, right: 60, bottom: 5, left: 10 }}
+                  >
+                    <CartesianGrid strokeDasharray="3 3" stroke="var(--color-border)" horizontal={false} />
+                    <XAxis type="number" tick={{ fill: 'var(--color-text-muted)', fontSize: 12 }} />
+                    <YAxis
+                      type="category" dataKey="developer" width={160}
+                      tick={{ fill: 'var(--color-text-muted)', fontSize: 11 }}
+                    />
+                    <Tooltip
+                      contentStyle={{ backgroundColor: 'var(--color-bg)', border: '1px solid var(--color-border)', borderRadius: '8px' }}
+                      labelStyle={{ color: 'var(--color-text)' }}
+                      itemStyle={{ color: 'var(--color-text)' }}
+                      formatter={(value, name) => [value, String(name).charAt(0).toUpperCase() + String(name).slice(1)]}
+                      labelFormatter={(label) => {
+                        const dev = projectCountBarData.find(d => d.developer === label)
+                        return dev ? `${label} — ${dev.total} projects` : String(label)
+                      }}
+                    />
+                    <Legend wrapperStyle={{ fontSize: 12, color: 'var(--color-text-muted)' }} />
+                    <Bar
+                      dataKey="operating" name="Operating" stackId="projects"
+                      fill={STATUS_COLOURS.operating} radius={[0, 0, 0, 0]}
+                      cursor="pointer"
+                      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                      onClick={(d: any) => d?.slug && navigate(`/developers/${d.slug}`)}
+                    />
+                    <Bar
+                      dataKey="construction" name="Construction" stackId="projects"
+                      fill={STATUS_COLOURS.construction} radius={[0, 0, 0, 0]}
+                      cursor="pointer"
+                      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                      onClick={(d: any) => d?.slug && navigate(`/developers/${d.slug}`)}
+                    />
+                    <Bar
+                      dataKey="development" name="Development" stackId="projects"
+                      fill={STATUS_COLOURS.development} radius={[0, 4, 4, 0]}
+                      cursor="pointer"
+                      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                      onClick={(d: any) => d?.slug && navigate(`/developers/${d.slug}`)}
+                    />
+                  </BarChart>
+                </ResponsiveContainer>
+              </ChartWrapper>
+            </div>
+          )}
+
+          {/* Top 30 by LTESA/CIS wins — stacked bar */}
+          {schemeWinsBarData.length > 0 && (
+            <div className="bg-[var(--color-bg-card)] rounded-xl p-4 border border-[var(--color-border)]">
+              <h2 className="text-lg font-semibold text-[var(--color-text)] mb-1">
+                Top {Math.min(30, schemeWinsBarData.length)} Developers by LTESA/CIS Wins
+              </h2>
+              <p className="text-xs text-[var(--color-text-muted)] mb-4">
+                Government scheme contract awards. Click a bar to view developer profile.
+              </p>
+              <ChartWrapper title="Top Developers by Scheme Wins" data={schemeWinsBarData} csvColumns={['developer', 'ltesa', 'cis', 'wins']}>
+                <ResponsiveContainer width="100%" height={Math.max(schemeWinsBarData.length * 28, 200)}>
+                  <BarChart
+                    data={schemeWinsBarData}
+                    layout="vertical"
+                    margin={{ top: 5, right: 60, bottom: 5, left: 10 }}
+                  >
+                    <CartesianGrid strokeDasharray="3 3" stroke="var(--color-border)" horizontal={false} />
+                    <XAxis type="number" tick={{ fill: 'var(--color-text-muted)', fontSize: 12 }} allowDecimals={false} />
+                    <YAxis
+                      type="category" dataKey="developer" width={160}
+                      tick={{ fill: 'var(--color-text-muted)', fontSize: 11 }}
+                    />
+                    <Tooltip
+                      contentStyle={{ backgroundColor: 'var(--color-bg)', border: '1px solid var(--color-border)', borderRadius: '8px' }}
+                      labelStyle={{ color: 'var(--color-text)' }}
+                      itemStyle={{ color: 'var(--color-text)' }}
+                      labelFormatter={(label) => {
+                        const dev = schemeWinsBarData.find(d => d.developer === label)
+                        return dev ? `${label} — ${dev.wins} total wins` : String(label)
+                      }}
+                    />
+                    <Legend wrapperStyle={{ fontSize: 12, color: 'var(--color-text-muted)' }} />
+                    <Bar
+                      dataKey="ltesa" name="LTESA" stackId="schemes"
+                      fill="#8b5cf6" radius={[0, 0, 0, 0]}
+                      cursor="pointer"
+                      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                      onClick={(d: any) => d?.slug && navigate(`/developers/${d.slug}`)}
+                    />
+                    <Bar
+                      dataKey="cis" name="CIS" stackId="schemes"
+                      fill="#f59e0b" radius={[0, 4, 4, 0]}
+                      cursor="pointer"
+                      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                      onClick={(d: any) => d?.slug && navigate(`/developers/${d.slug}`)}
+                    />
+                  </BarChart>
+                </ResponsiveContainer>
+              </ChartWrapper>
+            </div>
+          )}
         </div>
       ) : (
         /* Table view */
@@ -548,7 +734,7 @@ export default function DeveloperScores() {
               {sorted.map(d => (
                 <tr key={d.developer} className="border-b border-[var(--color-border)] hover:bg-[var(--color-bg)]/50">
                   <td className="p-3 font-medium">
-                    <Link to={`/developers/${d.developer.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')}`} className="text-[var(--color-primary)] hover:underline font-medium">
+                    <Link to={`/developers/${devSlug(d.developer)}`} className="text-[var(--color-primary)] hover:underline font-medium">
                       {d.developer}
                     </Link>
                   </td>
