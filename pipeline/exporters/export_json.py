@@ -1807,6 +1807,10 @@ def export_drift_analysis(conn):
         if drift is None:
             continue
 
+        # Only include projects that actually drifted
+        if drift == 0:
+            continue
+
         entry = {
             'project_id': r['id'],
             'name': r['name'],
@@ -1845,7 +1849,7 @@ def export_drift_analysis(conn):
             dev_ranking.append({
                 'developer': dev,
                 **_stats_summary(drifts),
-                'on_time_pct': round(100 * sum(1 for d in drifts if d <= 0) / len(drifts), 1),
+                'on_time_pct': round(100 * sum(1 for d in drifts if abs(d) <= 6) / len(drifts), 1),
             })
     dev_ranking.sort(key=lambda x: x['median'] if x['median'] is not None else 999)
 

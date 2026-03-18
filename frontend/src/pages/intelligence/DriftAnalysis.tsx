@@ -271,7 +271,7 @@ export default function DriftAnalysis() {
         <p className="text-sm text-[var(--color-text-muted)]">
           {hasFilters
             ? `${filteredProjects.length} of ${data.total_projects} projects matching filters`
-            : `${data.total_projects} projects with original and current COD dates`}
+            : `${data.total_projects} projects with COD drift`}
         </p>
       </section>
 
