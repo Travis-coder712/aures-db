@@ -6741,6 +6741,7 @@
     "performance_score": 65.6,
     "data_confidence": "medium",
     "confidence_score": "43",
+    "notable": "CF may be inflated. Hybrid facility (wind 43 MW + solar 15 MW + battery 2 MW) \u2014 OpenElectricity reports 49.5% CF for 2024 but Rystad Energy reports 42.4% AC CF. Discrepancy likely due to energy attribution between co-located DUIDs. Windlab confirms Kennedy ranked #2 in NEM behind Coonooer Bridge (~45%), inconsistent with 49.5%.",
     "first_seen": "2021-07-05"
   },
   {

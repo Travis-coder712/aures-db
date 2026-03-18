@@ -569,6 +569,9 @@ export default function Performance() {
           <p>
             Rankings use a composite score: wind/solar weight CF (40%), revenue/MW (40%), and curtailment (20%). BESS weights revenue (30%), utilisation (30%), spread (20%), and cycles (20%).
           </p>
+          <p>
+            <strong className="text-amber-400">⚠ Hybrid facility note:</strong> Capacity factors for wind or solar components of hybrid facilities (e.g. Kennedy Energy Park) may be inflated due to energy attribution between co-located DUIDs. Where a wind farm is co-located with solar and/or battery, AEMO metering may not perfectly separate generation by source. Cross-reference with third-party sources (Rystad, Windlab) for hybrid sites.
+          </p>
         </div>
       </section>
 
