@@ -152,6 +152,7 @@ export default function EISTechnical() {
   const [data, setData] = useState<EISAnalyticsData | null>(null)
   const [loading, setLoading] = useState(true)
   const [tab, setTab] = useState<TabId>('wind')
+  const [stateFilter, setStateFilter] = useState<string | null>(null)
   const [windSort, setWindSort] = useState<{ col: keyof EISWindProject; dir: 'asc' | 'desc' }>({ col: 'capacity_mw', dir: 'desc' })
   const [bessSort, setBessSort] = useState<{ col: keyof EISBESSProject; dir: 'asc' | 'desc' }>({ col: 'capacity_mw', dir: 'desc' })
 
@@ -159,18 +160,36 @@ export default function EISTechnical() {
     fetchEISAnalytics().then((d) => { setData(d); setLoading(false) })
   }, [])
 
-  // ---- Wind derived data ----
-  const windScatterData = useMemo(() => {
+  // Available states from data
+  const availableStates = useMemo(() => {
     if (!data) return []
-    return data.wind_projects
-      .filter((p) => p.wind_speed_mean_ms != null && p.assumed_capacity_factor_pct != null)
-      .map((p) => ({ ...p }))
+    const states = new Set<string>()
+    data.wind_projects.forEach((p) => states.add(p.state))
+    data.bess_projects.forEach((p) => states.add(p.state))
+    return Array.from(states).sort()
   }, [data])
 
-  const hubHeightData = useMemo(() => {
+  // State-filtered project lists
+  const filteredWindProjects = useMemo(() => {
     if (!data) return []
+    return stateFilter ? data.wind_projects.filter((p) => p.state === stateFilter) : data.wind_projects
+  }, [data, stateFilter])
+
+  const filteredBessProjects = useMemo(() => {
+    if (!data) return []
+    return stateFilter ? data.bess_projects.filter((p) => p.state === stateFilter) : data.bess_projects
+  }, [data, stateFilter])
+
+  // ---- Wind derived data ----
+  const windScatterData = useMemo(() => {
+    return filteredWindProjects
+      .filter((p) => p.wind_speed_mean_ms != null && p.assumed_capacity_factor_pct != null)
+      .map((p) => ({ ...p }))
+  }, [filteredWindProjects])
+
+  const hubHeightData = useMemo(() => {
     const buckets: Record<string, number> = {}
-    data.wind_projects.forEach((p) => {
+    filteredWindProjects.forEach((p) => {
       if (p.hub_height_m != null) {
         const b = `${Math.floor(p.hub_height_m / 10) * 10}–${Math.floor(p.hub_height_m / 10) * 10 + 9}m`
         buckets[b] = (buckets[b] || 0) + 1
@@ -179,12 +198,11 @@ export default function EISTechnical() {
     return Object.entries(buckets)
       .sort(([a], [b]) => parseInt(a) - parseInt(b))
       .map(([range, count]) => ({ range, count }))
-  }, [data])
+  }, [filteredWindProjects])
 
   const rotorDiameterData = useMemo(() => {
-    if (!data) return []
     const buckets: Record<string, number> = {}
-    data.wind_projects.forEach((p) => {
+    filteredWindProjects.forEach((p) => {
       if (p.rotor_diameter_m != null) {
         const b = `${Math.floor(p.rotor_diameter_m / 10) * 10}–${Math.floor(p.rotor_diameter_m / 10) * 10 + 9}m`
         buckets[b] = (buckets[b] || 0) + 1
@@ -193,12 +211,11 @@ export default function EISTechnical() {
     return Object.entries(buckets)
       .sort(([a], [b]) => parseInt(a) - parseInt(b))
       .map(([range, count]) => ({ range, count }))
-  }, [data])
+  }, [filteredWindProjects])
 
   const turbineOEMData = useMemo(() => {
-    if (!data) return []
     const counts: Record<string, number> = {}
-    data.wind_projects.forEach((p) => {
+    filteredWindProjects.forEach((p) => {
       if (p.turbine_model) {
         const brand = p.turbine_model.split(' ')[0] || 'Unknown'
         counts[brand] = (counts[brand] || 0) + 1
@@ -207,56 +224,65 @@ export default function EISTechnical() {
     return Object.entries(counts)
       .sort(([, a], [, b]) => b - a)
       .map(([name, value]) => ({ name, value }))
-  }, [data])
+  }, [filteredWindProjects])
 
   const sortedWindProjects = useMemo(() => {
-    if (!data) return []
-    return [...data.wind_projects].sort((a, b) => {
+    return [...filteredWindProjects].sort((a, b) => {
       const av = a[windSort.col] ?? 0
       const bv = b[windSort.col] ?? 0
       if (typeof av === 'string' && typeof bv === 'string')
         return windSort.dir === 'asc' ? av.localeCompare(bv) : bv.localeCompare(av)
       return windSort.dir === 'asc' ? (av as number) - (bv as number) : (bv as number) - (av as number)
     })
-  }, [data, windSort])
+  }, [filteredWindProjects, windSort])
 
   // ---- BESS derived data ----
   const chemistryData = useMemo(() => {
-    if (!data) return []
-    return Object.entries(data.summary.bess_stats.chemistry_breakdown)
-      .map(([name, value]) => ({ name, value }))
-  }, [data])
+    const counts: Record<string, number> = {}
+    filteredBessProjects.forEach((p) => {
+      if (p.cell_chemistry) counts[p.cell_chemistry] = (counts[p.cell_chemistry] || 0) + 1
+    })
+    return Object.entries(counts).map(([name, value]) => ({ name, value }))
+  }, [filteredBessProjects])
 
   const pcsTypeData = useMemo(() => {
-    if (!data) return []
-    return Object.entries(data.summary.bess_stats.pcs_type_breakdown)
+    const counts: Record<string, number> = {}
+    filteredBessProjects.forEach((p) => {
+      if (p.pcs_type) counts[p.pcs_type] = (counts[p.pcs_type] || 0) + 1
+    })
+    return Object.entries(counts)
       .map(([name, value]) => ({
         name: name === 'grid_forming' ? 'Grid Forming' : name === 'grid_following' ? 'Grid Following' : 'Both',
         value,
         key: name,
       }))
-  }, [data])
+  }, [filteredBessProjects])
 
   const cellSupplierData = useMemo(() => {
-    if (!data) return []
-    return Object.entries(data.summary.bess_stats.top_cell_suppliers)
+    const counts: Record<string, number> = {}
+    filteredBessProjects.forEach((p) => {
+      if (p.cell_supplier) counts[p.cell_supplier] = (counts[p.cell_supplier] || 0) + 1
+    })
+    return Object.entries(counts)
       .sort(([, a], [, b]) => b - a)
       .slice(0, 8)
       .map(([name, count]) => ({ name: name.length > 18 ? name.slice(0, 16) + '…' : name, count, fullName: name }))
-  }, [data])
+  }, [filteredBessProjects])
 
   const inverterSupplierData = useMemo(() => {
-    if (!data) return []
-    return Object.entries(data.summary.bess_stats.top_inverter_suppliers)
+    const counts: Record<string, number> = {}
+    filteredBessProjects.forEach((p) => {
+      if (p.inverter_supplier) counts[p.inverter_supplier] = (counts[p.inverter_supplier] || 0) + 1
+    })
+    return Object.entries(counts)
       .sort(([, a], [, b]) => b - a)
       .slice(0, 8)
       .map(([name, count]) => ({ name: name.length > 18 ? name.slice(0, 16) + '…' : name, count, fullName: name }))
-  }, [data])
+  }, [filteredBessProjects])
 
   const durationData = useMemo(() => {
-    if (!data) return []
     const buckets: Record<string, number> = {}
-    data.bess_projects.forEach((p) => {
+    filteredBessProjects.forEach((p) => {
       if (p.duration_hours != null) {
         const h = p.duration_hours
         const label = h <= 1 ? '≤1h' : h <= 2 ? '1–2h' : h <= 4 ? '2–4h' : h <= 8 ? '4–8h' : '>8h'
@@ -265,11 +291,10 @@ export default function EISTechnical() {
     })
     const order = ['≤1h', '1–2h', '2–4h', '4–8h', '>8h']
     return order.filter((l) => buckets[l]).map((label) => ({ label, count: buckets[label] }))
-  }, [data])
+  }, [filteredBessProjects])
 
   const efficiencyData = useMemo(() => {
-    if (!data) return []
-    return data.bess_projects
+    return filteredBessProjects
       .filter((p) => p.round_trip_efficiency_pct != null || p.round_trip_efficiency_ac != null)
       .map((p) => ({
         name: p.name.length > 25 ? p.name.slice(0, 23) + '…' : p.name,
@@ -278,30 +303,35 @@ export default function EISTechnical() {
         id: p.id,
       }))
       .sort((a, b) => (b.dc ?? b.ac ?? 0) - (a.dc ?? a.ac ?? 0))
-  }, [data])
+  }, [filteredBessProjects])
 
   const sortedBessProjects = useMemo(() => {
-    if (!data) return []
-    return [...data.bess_projects].sort((a, b) => {
+    return [...filteredBessProjects].sort((a, b) => {
       const av = a[bessSort.col] ?? 0
       const bv = b[bessSort.col] ?? 0
       if (typeof av === 'string' && typeof bv === 'string')
         return bessSort.dir === 'asc' ? av.localeCompare(bv) : bv.localeCompare(av)
       return bessSort.dir === 'asc' ? (av as number) - (bv as number) : (bv as number) - (av as number)
     })
-  }, [data, bessSort])
+  }, [filteredBessProjects, bessSort])
 
   // ---- Connection derived data ----
   const voltageData = useMemo(() => {
-    if (!data) return []
-    return Object.entries(data.summary.connection.voltage_breakdown)
+    const allFiltered = [...filteredWindProjects, ...filteredBessProjects]
+    const breakdown: Record<string, number> = {}
+    allFiltered.forEach((p) => {
+      if (p.connection_voltage_kv) {
+        const k = String(p.connection_voltage_kv)
+        breakdown[k] = (breakdown[k] || 0) + 1
+      }
+    })
+    return Object.entries(breakdown)
       .sort(([a], [b]) => parseInt(a) - parseInt(b))
       .map(([voltage, count]) => ({ voltage, count }))
-  }, [data])
+  }, [filteredWindProjects, filteredBessProjects])
 
   const connectionDistanceData = useMemo(() => {
-    if (!data) return []
-    const allProjects = [...data.wind_projects, ...data.bess_projects]
+    const allProjects = [...filteredWindProjects, ...filteredBessProjects]
     return allProjects
       .filter((p) => p.connection_distance_km != null)
       .map((p) => ({
@@ -313,7 +343,7 @@ export default function EISTechnical() {
         id: p.id,
       }))
       .sort((a, b) => b.distance - a.distance)
-  }, [data])
+  }, [filteredWindProjects, filteredBessProjects])
 
   // ---- Wind sort toggle ----
   function toggleWindSort(col: keyof EISWindProject) {
@@ -395,25 +425,62 @@ export default function EISTechnical() {
         <StatCard label="Avg BESS Duration" value={fmt(summary.bess_stats.avg_duration)} unit="hrs" />
       </div>
 
-      {/* Tab bar */}
-      <div className="flex gap-1 overflow-x-auto scrollbar-none border-b border-[var(--color-border)]">
-        {TABS.map((t) => (
+      {/* Tab bar + State filter */}
+      <div className="flex flex-col gap-3">
+        <div className="flex gap-1 overflow-x-auto scrollbar-none border-b border-[var(--color-border)]">
+          {TABS.map((t) => (
+            <button
+              key={t.id}
+              onClick={() => setTab(t.id)}
+              className={`flex items-center gap-1.5 px-4 py-2.5 text-sm font-medium whitespace-nowrap border-b-2 transition-colors ${
+                tab === t.id
+                  ? 'border-[var(--color-primary)] text-[var(--color-primary)]'
+                  : 'border-transparent text-[var(--color-text-muted)] hover:text-[var(--color-text)]'
+              }`}
+            >
+              {t.icon}
+              {t.label}
+              <span className="text-xs opacity-60">
+                ({t.id === 'wind' ? filteredWindProjects.length : t.id === 'bess' ? filteredBessProjects.length : filteredWindProjects.length + filteredBessProjects.length})
+              </span>
+            </button>
+          ))}
+        </div>
+
+        {/* State filter chips */}
+        <div className="flex items-center gap-1.5 flex-wrap">
+          <span className="text-[10px] font-semibold uppercase tracking-wider text-[var(--color-text-muted)] mr-1">
+            State
+          </span>
           <button
-            key={t.id}
-            onClick={() => setTab(t.id)}
-            className={`flex items-center gap-1.5 px-4 py-2.5 text-sm font-medium whitespace-nowrap border-b-2 transition-colors ${
-              tab === t.id
-                ? 'border-[var(--color-primary)] text-[var(--color-primary)]'
-                : 'border-transparent text-[var(--color-text-muted)] hover:text-[var(--color-text)]'
+            onClick={() => setStateFilter(null)}
+            className={`text-[11px] px-2.5 py-1 rounded-full border transition-colors ${
+              !stateFilter
+                ? 'bg-[var(--color-primary)]/20 text-[var(--color-primary)] border-[var(--color-primary)]/30'
+                : 'border-[var(--color-border)] text-[var(--color-text-muted)] hover:border-[var(--color-text-muted)]'
             }`}
           >
-            {t.icon}
-            {t.label}
-            <span className="text-xs opacity-60">
-              ({t.id === 'wind' ? summary.wind : t.id === 'bess' ? summary.bess : summary.total_eis})
-            </span>
+            All
           </button>
-        ))}
+          {availableStates.map((s) => {
+            const isActive = stateFilter === s
+            const colour = getStateColour(s)
+            return (
+              <button
+                key={s}
+                onClick={() => setStateFilter(isActive ? null : s)}
+                className={`text-[11px] px-2.5 py-1 rounded-full border transition-colors ${
+                  isActive
+                    ? 'border-transparent font-medium'
+                    : 'border-[var(--color-border)] text-[var(--color-text-muted)] hover:border-[var(--color-text-muted)]'
+                }`}
+                style={isActive ? { backgroundColor: `${colour}20`, color: colour } : undefined}
+              >
+                {s}
+              </button>
+            )
+          })}
+        </div>
       </div>
 
       {/* ============================================================ */}
@@ -503,7 +570,7 @@ export default function EISTechnical() {
           {/* Wind project table */}
           <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl p-4">
             <h3 className="text-sm font-semibold text-[var(--color-text)] mb-3">
-              Wind Projects with EIS Data ({data.wind_projects.length})
+              Wind Projects with EIS Data ({filteredWindProjects.length})
             </h3>
             <ScrollableTable>
               <table className="w-full text-xs">
@@ -680,7 +747,7 @@ export default function EISTechnical() {
           {/* BESS project table */}
           <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl p-4">
             <h3 className="text-sm font-semibold text-[var(--color-text)] mb-3">
-              BESS Projects with EIS Data ({data.bess_projects.length})
+              BESS Projects with EIS Data ({filteredBessProjects.length})
             </h3>
             <ScrollableTable>
               <table className="w-full text-xs">

@@ -81,39 +81,45 @@ By researching actual data sources before designing the system, the architecture
 
 ## What's Left To Do
 
-### ✅ Completed (Phases 1-3)
+### ✅ Completed (Phases 1-4)
 - [x] Scaffold the React + Vite + Tailwind + PWA frontend
 - [x] Implement the SQLite database schema
 - [x] Build the AEMO Generation Information importer (1,057 projects)
-- [x] Build all core frontend screens (13 pages)
+- [x] Build all core frontend screens (20+ pages)
 - [x] Create 10 exemplar projects (Yanco Delta, Coopers Gap, etc.)
 - [x] All CIS and LTESA rounds populated (15 rounds, 95 projects)
 - [x] REZ views (18 zones across 5 states)
 - [x] NEM Dashboard with fleet stats and charts
 - [x] League tables (Wind, Solar, BESS, Hydro) with real OpenElectricity API data
 - [x] Auto-populated 441 timeline events + 218 coordinates from AEMO data
+- [x] Fix 3 duplicate projects (Coopers Gap, Stockyard Hill, New England Solar)
+- [x] Populate NSW REZ access rights (CWO, SW)
+- [x] Offshore wind enrichment (22 projects)
+- [x] Confidence rating system (AUTO-COMPUTED: 4 high, 30 good, 260 medium, 770 low)
+- [x] Developer profiles (718 developers with portfolio pages)
+- [x] COD drift tracking and visualisation
+- [x] Interactive Leaflet map view (250 projects with tech-coloured markers)
+- [x] Intelligence Hub with 8 analytics pages
+- [x] Climate intelligence (ENSO/IOD/SAM tracking, historical events, pattern matching)
+- [x] Dunkelflaute monitor with tech+state filtering, forecast engine
+- [x] Historical CF data backfilled 2018-2026 (495 monthly records)
+- [x] Transmission infrastructure tracker (curated project data)
+- [x] EIS technical intelligence (fauna/flora, offset analysis)
+- [x] BESS capex analytics
 
-### Immediate (Phase 3.5 — Data Quality)
-- [ ] Fix 3 duplicate projects (Coopers Gap, Stockyard Hill, New England Solar)
-- [ ] Populate NSW REZ access rights (CWO, New England, SW, Hunter REZs)
-- [ ] Enrich top construction projects (49 projects, 15.2 GW)
-- [ ] Research and classify critical development projects
-
-### Medium Term (Phase 4 — Intelligence)
-- [ ] Confidence rating system (HIGH/GOOD/MEDIUM/LOW)
-- [ ] Developer profiles (portfolio aggregation)
-- [ ] COD drift tracking and visualisation
-- [ ] Operations-to-development mapping
-- [ ] Zombie project detection
-- [ ] Watchlist with risk scoring
-
-### Long Term (Phase 5 — Enrichment)
-- [ ] Monthly performance data (sparklines, seasonal patterns)
-- [ ] Automated web research for project enrichment
-- [ ] OEM profiles (Vestas, Goldwind, Tesla, Fluence, etc.)
-- [ ] Map view (coordinates now available for 224 operating projects)
+### Next Up (Phase 5 — Enrichment & Polish)
+- [ ] Navigation redesign (20+ pages need better organisation)
+- [ ] Data cleanup (duplicates, missing coords, developer name normalisation)
+- [ ] Performance methodology deep dive guide
 - [ ] Emissions data integration
-- [ ] Monthly AEMO data refresh automation
+- [ ] Watchlist feature with change notifications
+- [ ] OEM profiles (Vestas, Goldwind, Tesla, Fluence)
+- [ ] Operations-to-development mapping
+- [ ] Automated data refresh (GitHub Actions)
+- [ ] Curtailment heatmap
+- [ ] BESS revenue decomposition (arbitrage + FCAS)
+
+See BUILD-TRACKER.md for the full strategic roadmap and 10 ideas for intelligence layer improvements.
 
 ---
 

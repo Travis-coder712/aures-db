@@ -142,7 +142,7 @@ export default function BESSCapex() {
   }
 
   if (!data) {
-    return <div className="p-6 text-center text-[var(--text-secondary)]">No capex data available</div>
+    return <div className="p-6 text-center text-[var(--color-text-muted)]">No capex data available</div>
   }
 
   const metricLabel = metric === 'per_mw' ? 'A$/MW (M)' : 'A$/MWh (M)'
@@ -152,8 +152,8 @@ export default function BESSCapex() {
     <div className="p-4 md:p-6 space-y-6 max-w-7xl mx-auto">
       {/* Header */}
       <div>
-        <h1 className="text-2xl font-bold text-[var(--text-primary)]">BESS Capex Analytics</h1>
-        <p className="text-sm text-[var(--text-secondary)] mt-1">
+        <h1 className="text-2xl font-bold text-[var(--color-text)]">BESS Capex Analytics</h1>
+        <p className="text-sm text-[var(--color-text-muted)] mt-1">
           Capital cost trends for{' '}
           <button
             onClick={() => navigateToProjects(data.projects.map(p => p.id), 'BESS with Capex Data')}
@@ -168,32 +168,32 @@ export default function BESSCapex() {
       {/* Controls */}
       <div className="flex flex-wrap gap-3 items-center">
         {/* View toggle */}
-        <div className="flex rounded-lg overflow-hidden border border-[var(--border)]">
+        <div className="flex rounded-lg overflow-hidden border border-[var(--color-border)]">
           <button
             onClick={() => setView('charts')}
-            className={`flex items-center gap-1.5 px-3 py-1.5 text-sm ${view === 'charts' ? 'bg-blue-600 text-white' : 'bg-[var(--bg-secondary)] text-[var(--text-secondary)]'}`}
+            className={`flex items-center gap-1.5 px-3 py-1.5 text-sm ${view === 'charts' ? 'bg-blue-600 text-white' : 'bg-[var(--color-bg-card)] text-[var(--color-text-muted)]'}`}
           >
             <ChartIcon /> Charts
           </button>
           <button
             onClick={() => setView('table')}
-            className={`flex items-center gap-1.5 px-3 py-1.5 text-sm ${view === 'table' ? 'bg-blue-600 text-white' : 'bg-[var(--bg-secondary)] text-[var(--text-secondary)]'}`}
+            className={`flex items-center gap-1.5 px-3 py-1.5 text-sm ${view === 'table' ? 'bg-blue-600 text-white' : 'bg-[var(--color-bg-card)] text-[var(--color-text-muted)]'}`}
           >
             <TableIcon /> Table
           </button>
         </div>
 
         {/* Metric toggle */}
-        <div className="flex rounded-lg overflow-hidden border border-[var(--border)]">
+        <div className="flex rounded-lg overflow-hidden border border-[var(--color-border)]">
           <button
             onClick={() => setMetric('per_mw')}
-            className={`px-3 py-1.5 text-sm ${metric === 'per_mw' ? 'bg-blue-600 text-white' : 'bg-[var(--bg-secondary)] text-[var(--text-secondary)]'}`}
+            className={`px-3 py-1.5 text-sm ${metric === 'per_mw' ? 'bg-blue-600 text-white' : 'bg-[var(--color-bg-card)] text-[var(--color-text-muted)]'}`}
           >
             $/MW
           </button>
           <button
             onClick={() => setMetric('per_mwh')}
-            className={`px-3 py-1.5 text-sm ${metric === 'per_mwh' ? 'bg-blue-600 text-white' : 'bg-[var(--bg-secondary)] text-[var(--text-secondary)]'}`}
+            className={`px-3 py-1.5 text-sm ${metric === 'per_mwh' ? 'bg-blue-600 text-white' : 'bg-[var(--color-bg-card)] text-[var(--color-text-muted)]'}`}
           >
             $/MWh
           </button>
@@ -241,39 +241,39 @@ export default function BESSCapex() {
       {view === 'charts' ? (
         <div className="space-y-6">
           {/* Scatter: Cost over time */}
-          <div className="bg-[var(--bg-secondary)] rounded-xl p-4 border border-[var(--border)]">
-            <h2 className="text-lg font-semibold text-[var(--text-primary)] mb-1">
+          <div className="bg-[var(--color-bg-card)] rounded-xl p-4 border border-[var(--color-border)]">
+            <h2 className="text-lg font-semibold text-[var(--color-text)] mb-1">
               Cost per {metric === 'per_mw' ? 'MW' : 'MWh'} Over Time
             </h2>
-            <p className="text-xs text-[var(--text-secondary)] mb-4">
+            <p className="text-xs text-[var(--color-text-muted)] mb-4">
               Bubble size = project capacity. Colour = OEM. Year = FID/announcement year.
             </p>
             <ResponsiveContainer width="100%" height={400}>
               <ScatterChart margin={{ top: 10, right: 20, bottom: 20, left: 20 }}>
-                <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" />
+                <CartesianGrid strokeDasharray="3 3" stroke="var(--color-border)" />
                 <XAxis
                   dataKey="x" type="number" name="Year"
                   domain={[2016, 2025]} tickCount={10}
-                  tick={{ fill: 'var(--text-secondary)', fontSize: 12 }}
-                  label={{ value: 'FID / Announcement Year', position: 'insideBottom', offset: -10, fill: 'var(--text-secondary)', fontSize: 12 }}
+                  tick={{ fill: 'var(--color-text-muted)', fontSize: 12 }}
+                  label={{ value: 'FID / Announcement Year', position: 'insideBottom', offset: -10, fill: 'var(--color-text-muted)', fontSize: 12 }}
                 />
                 <YAxis
                   dataKey="y" type="number" name={metricLabel}
-                  tick={{ fill: 'var(--text-secondary)', fontSize: 12 }}
-                  label={{ value: `${metricLabel}`, angle: -90, position: 'insideLeft', fill: 'var(--text-secondary)', fontSize: 12 }}
+                  tick={{ fill: 'var(--color-text-muted)', fontSize: 12 }}
+                  label={{ value: `${metricLabel}`, angle: -90, position: 'insideLeft', fill: 'var(--color-text-muted)', fontSize: 12 }}
                 />
                 <Tooltip
                   content={({ payload }) => {
                     if (!payload?.length) return null
                     const p = payload[0].payload as BESSCapexProject & { y: number }
                     return (
-                      <div className="bg-[var(--bg-primary)] border border-[var(--border)] rounded-lg p-3 shadow-lg text-sm">
-                        <div className="font-semibold text-[var(--text-primary)]">{p.name}</div>
-                        <div className="text-[var(--text-secondary)]">{p.bess_oem} — {p.bess_model}</div>
-                        <div className="text-[var(--text-secondary)]">{p.capacity_mw} MW / {p.storage_mwh} MWh ({p.duration_hours}h)</div>
-                        <div className="text-[var(--text-secondary)]">Capex: A${p.capex_aud_m}M</div>
+                      <div className="bg-[var(--color-bg)] border border-[var(--color-border)] rounded-lg p-3 shadow-lg text-sm">
+                        <div className="font-semibold text-[var(--color-text)]">{p.name}</div>
+                        <div className="text-[var(--color-text-muted)]">{p.bess_oem} — {p.bess_model}</div>
+                        <div className="text-[var(--color-text-muted)]">{p.capacity_mw} MW / {p.storage_mwh} MWh ({p.duration_hours}h)</div>
+                        <div className="text-[var(--color-text-muted)]">Capex: A${p.capex_aud_m}M</div>
                         <div className="font-medium text-blue-400">${p.capex_per_mw}M/MW &middot; ${p.capex_per_mwh}M/MWh</div>
-                        <div className="text-xs text-[var(--text-secondary)]">{p.current_developer} &middot; {p.state} &middot; {p.status}</div>
+                        <div className="text-xs text-[var(--color-text-muted)]">{p.current_developer} &middot; {p.state} &middot; {p.status}</div>
                       </div>
                     )
                   }}
@@ -312,10 +312,10 @@ export default function BESSCapex() {
                 <button
                   key={oem}
                   onClick={() => toggleOEM(oem)}
-                  className={`flex items-center gap-1 text-xs px-2 py-1 rounded-full border ${selectedOEMs.includes(oem) ? 'border-blue-500 bg-blue-500/20' : 'border-[var(--border)]'}`}
+                  className={`flex items-center gap-1 text-xs px-2 py-1 rounded-full border ${selectedOEMs.includes(oem) ? 'border-blue-500 bg-blue-500/20' : 'border-[var(--color-border)]'}`}
                 >
                   <span className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: colour }} />
-                  <span className="text-[var(--text-secondary)]">{oem}</span>
+                  <span className="text-[var(--color-text-muted)]">{oem}</span>
                 </button>
               ))}
             </div>
@@ -324,21 +324,21 @@ export default function BESSCapex() {
           {/* Two column: Year trend + OEM comparison */}
           <div className="grid md:grid-cols-2 gap-6">
             {/* Year trend */}
-            <div className="bg-[var(--bg-secondary)] rounded-xl p-4 border border-[var(--border)]">
-              <h2 className="text-lg font-semibold text-[var(--text-primary)] mb-1">
+            <div className="bg-[var(--color-bg-card)] rounded-xl p-4 border border-[var(--color-border)]">
+              <h2 className="text-lg font-semibold text-[var(--color-text)] mb-1">
                 Average Cost by Year
               </h2>
-              <p className="text-xs text-[var(--text-secondary)] mb-4">
+              <p className="text-xs text-[var(--color-text-muted)] mb-4">
                 {metric === 'per_mw' ? 'A$M per MW' : 'A$M per MWh'} — averaged across projects with that FID year
               </p>
               <ResponsiveContainer width="100%" height={300}>
                 <BarChart data={yearBarData} margin={{ top: 5, right: 10, bottom: 5, left: 10 }}>
-                  <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" />
-                  <XAxis dataKey="year" tick={{ fill: 'var(--text-secondary)', fontSize: 12 }} />
-                  <YAxis tick={{ fill: 'var(--text-secondary)', fontSize: 12 }} />
+                  <CartesianGrid strokeDasharray="3 3" stroke="var(--color-border)" />
+                  <XAxis dataKey="year" tick={{ fill: 'var(--color-text-muted)', fontSize: 12 }} />
+                  <YAxis tick={{ fill: 'var(--color-text-muted)', fontSize: 12 }} />
                   <Tooltip
-                    contentStyle={{ backgroundColor: 'var(--bg-primary)', border: '1px solid var(--border)', borderRadius: '8px' }}
-                    labelStyle={{ color: 'var(--text-primary)' }}
+                    contentStyle={{ backgroundColor: 'var(--color-bg)', border: '1px solid var(--color-border)', borderRadius: '8px' }}
+                    labelStyle={{ color: 'var(--color-text)' }}
                     formatter={(value) => [`$${Number(value)?.toFixed(2)}M`, metricLabel]}
                     labelFormatter={(label) => {
                       const yr = yearBarData.find(y => y.year === label)
@@ -359,21 +359,21 @@ export default function BESSCapex() {
             </div>
 
             {/* OEM comparison */}
-            <div className="bg-[var(--bg-secondary)] rounded-xl p-4 border border-[var(--border)]">
-              <h2 className="text-lg font-semibold text-[var(--text-primary)] mb-1">
+            <div className="bg-[var(--color-bg-card)] rounded-xl p-4 border border-[var(--color-border)]">
+              <h2 className="text-lg font-semibold text-[var(--color-text)] mb-1">
                 Average Cost by OEM
               </h2>
-              <p className="text-xs text-[var(--text-secondary)] mb-4">
+              <p className="text-xs text-[var(--color-text-muted)] mb-4">
                 {metric === 'per_mw' ? 'A$M per MW' : 'A$M per MWh'} — averaged across each OEM's projects
               </p>
               <ResponsiveContainer width="100%" height={300}>
                 <BarChart data={oemBarData} margin={{ top: 5, right: 10, bottom: 5, left: 10 }} layout="vertical">
-                  <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" />
-                  <XAxis type="number" tick={{ fill: 'var(--text-secondary)', fontSize: 12 }} />
-                  <YAxis type="category" dataKey="oem" width={120} tick={{ fill: 'var(--text-secondary)', fontSize: 11 }} />
+                  <CartesianGrid strokeDasharray="3 3" stroke="var(--color-border)" />
+                  <XAxis type="number" tick={{ fill: 'var(--color-text-muted)', fontSize: 12 }} />
+                  <YAxis type="category" dataKey="oem" width={120} tick={{ fill: 'var(--color-text-muted)', fontSize: 11 }} />
                   <Tooltip
-                    contentStyle={{ backgroundColor: 'var(--bg-primary)', border: '1px solid var(--border)', borderRadius: '8px' }}
-                    labelStyle={{ color: 'var(--text-primary)' }}
+                    contentStyle={{ backgroundColor: 'var(--color-bg)', border: '1px solid var(--color-border)', borderRadius: '8px' }}
+                    labelStyle={{ color: 'var(--color-text)' }}
                     formatter={(value) => [`$${Number(value)?.toFixed(2)}M`, metricLabel]}
                     labelFormatter={(label) => {
                       const o = oemBarData.find(x => x.oem === label)
@@ -399,27 +399,27 @@ export default function BESSCapex() {
           </div>
 
           {/* Key insights card */}
-          <div className="bg-[var(--bg-secondary)] rounded-xl p-4 border border-[var(--border)]">
-            <h2 className="text-lg font-semibold text-[var(--text-primary)] mb-3">Key Observations</h2>
+          <div className="bg-[var(--color-bg-card)] rounded-xl p-4 border border-[var(--color-border)]">
+            <h2 className="text-lg font-semibold text-[var(--color-text)] mb-3">Key Observations</h2>
             <div className="grid md:grid-cols-3 gap-4 text-sm">
               <div>
-                <div className="text-[var(--text-secondary)] font-medium mb-1">Cost Trend</div>
-                <p className="text-[var(--text-primary)]">
+                <div className="text-[var(--color-text-muted)] font-medium mb-1">Cost Trend</div>
+                <p className="text-[var(--color-text)]">
                   $/MWh costs have fallen significantly as storage duration increases — early batteries (2017) were 1-hour systems at
                   &gt;$1M/MWh, while 2024 projects achieve 4-hour duration at ~$0.50M/MWh.
                 </p>
               </div>
               <div>
-                <div className="text-[var(--text-secondary)] font-medium mb-1">OEM Market</div>
-                <p className="text-[var(--text-primary)]">
+                <div className="text-[var(--color-text-muted)] font-medium mb-1">OEM Market</div>
+                <p className="text-[var(--color-text)]">
                   Tesla dominates with {data.by_oem['Tesla']?.count || 0} projects
                   ({data.by_oem['Tesla']?.total_mw?.toLocaleString() || 0} MW).
                   Fluence and Wartsila are key competitors with {data.by_oem['Fluence']?.count || 0} and {data.by_oem['Wartsila']?.count || 0} projects respectively.
                 </p>
               </div>
               <div>
-                <div className="text-[var(--text-secondary)] font-medium mb-1">Duration Shift</div>
-                <p className="text-[var(--text-primary)]">
+                <div className="text-[var(--color-text-muted)] font-medium mb-1">Duration Shift</div>
+                <p className="text-[var(--color-text)]">
                   The market has shifted from 1-hour systems (2017-2020) to 2-hour (2021-2023) and now 4-hour systems (2024+),
                   driven by revenue stacking and grid reliability needs.
                 </p>
@@ -429,47 +429,47 @@ export default function BESSCapex() {
         </div>
       ) : (
         /* Table view */
-        <div className="bg-[var(--bg-secondary)] rounded-xl border border-[var(--border)] overflow-x-auto">
+        <div className="bg-[var(--color-bg-card)] rounded-xl border border-[var(--color-border)] overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
-              <tr className="border-b border-[var(--border)]">
-                <th className="text-left p-3 text-[var(--text-secondary)] font-medium">Project</th>
-                <th className="text-left p-3 text-[var(--text-secondary)] font-medium hidden md:table-cell">Developer</th>
-                <th className="text-right p-3 text-[var(--text-secondary)] font-medium">MW</th>
-                <th className="text-right p-3 text-[var(--text-secondary)] font-medium">MWh</th>
-                <th className="text-right p-3 text-[var(--text-secondary)] font-medium hidden sm:table-cell">Hours</th>
-                <th className="text-left p-3 text-[var(--text-secondary)] font-medium hidden lg:table-cell">OEM</th>
-                <th className="text-right p-3 text-[var(--text-secondary)] font-medium">Capex A$M</th>
-                <th className="text-right p-3 text-[var(--text-secondary)] font-medium">$/MW</th>
-                <th className="text-right p-3 text-[var(--text-secondary)] font-medium">$/MWh</th>
-                <th className="text-center p-3 text-[var(--text-secondary)] font-medium hidden sm:table-cell">Year</th>
-                <th className="text-center p-3 text-[var(--text-secondary)] font-medium hidden md:table-cell">Status</th>
+              <tr className="border-b border-[var(--color-border)]">
+                <th className="text-left p-3 text-[var(--color-text-muted)] font-medium">Project</th>
+                <th className="text-left p-3 text-[var(--color-text-muted)] font-medium hidden md:table-cell">Developer</th>
+                <th className="text-right p-3 text-[var(--color-text-muted)] font-medium">MW</th>
+                <th className="text-right p-3 text-[var(--color-text-muted)] font-medium">MWh</th>
+                <th className="text-right p-3 text-[var(--color-text-muted)] font-medium hidden sm:table-cell">Hours</th>
+                <th className="text-left p-3 text-[var(--color-text-muted)] font-medium hidden lg:table-cell">OEM</th>
+                <th className="text-right p-3 text-[var(--color-text-muted)] font-medium">Capex A$M</th>
+                <th className="text-right p-3 text-[var(--color-text-muted)] font-medium">$/MW</th>
+                <th className="text-right p-3 text-[var(--color-text-muted)] font-medium">$/MWh</th>
+                <th className="text-center p-3 text-[var(--color-text-muted)] font-medium hidden sm:table-cell">Year</th>
+                <th className="text-center p-3 text-[var(--color-text-muted)] font-medium hidden md:table-cell">Status</th>
               </tr>
             </thead>
             <tbody>
               {filteredProjects
                 .sort((a, b) => (a.capex_year || 0) - (b.capex_year || 0))
                 .map(p => (
-                <tr key={p.id} className="border-b border-[var(--border)] hover:bg-[var(--bg-primary)]/50">
+                <tr key={p.id} className="border-b border-[var(--color-border)] hover:bg-[var(--color-bg)]/50">
                   <td className="p-3">
                     <Link to={`/projects/${p.id}`} className="text-blue-400 hover:text-blue-300">
                       {p.name}
                     </Link>
                   </td>
-                  <td className="p-3 text-[var(--text-secondary)] hidden md:table-cell">{p.current_developer}</td>
-                  <td className="p-3 text-right text-[var(--text-primary)]">{p.capacity_mw}</td>
-                  <td className="p-3 text-right text-[var(--text-primary)]">{p.storage_mwh}</td>
-                  <td className="p-3 text-right text-[var(--text-secondary)] hidden sm:table-cell">{p.duration_hours}h</td>
+                  <td className="p-3 text-[var(--color-text-muted)] hidden md:table-cell">{p.current_developer}</td>
+                  <td className="p-3 text-right text-[var(--color-text)]">{p.capacity_mw}</td>
+                  <td className="p-3 text-right text-[var(--color-text)]">{p.storage_mwh}</td>
+                  <td className="p-3 text-right text-[var(--color-text-muted)] hidden sm:table-cell">{p.duration_hours}h</td>
                   <td className="p-3 hidden lg:table-cell">
                     <span className="inline-flex items-center gap-1">
                       <span className="w-2 h-2 rounded-full" style={{ backgroundColor: getOEMColour(p.bess_oem) }} />
-                      <span className="text-[var(--text-primary)]">{p.bess_oem}</span>
+                      <span className="text-[var(--color-text)]">{p.bess_oem}</span>
                     </span>
                   </td>
-                  <td className="p-3 text-right font-medium text-[var(--text-primary)]">${p.capex_aud_m}</td>
-                  <td className="p-3 text-right text-[var(--text-primary)]">${p.capex_per_mw?.toFixed(2)}</td>
-                  <td className="p-3 text-right text-[var(--text-primary)]">${p.capex_per_mwh?.toFixed(2)}</td>
-                  <td className="p-3 text-center text-[var(--text-secondary)] hidden sm:table-cell">{p.capex_year}</td>
+                  <td className="p-3 text-right font-medium text-[var(--color-text)]">${p.capex_aud_m}</td>
+                  <td className="p-3 text-right text-[var(--color-text)]">${p.capex_per_mw?.toFixed(2)}</td>
+                  <td className="p-3 text-right text-[var(--color-text)]">${p.capex_per_mwh?.toFixed(2)}</td>
+                  <td className="p-3 text-center text-[var(--color-text-muted)] hidden sm:table-cell">{p.capex_year}</td>
                   <td className="p-3 text-center hidden md:table-cell">
                     <span className={`px-2 py-0.5 rounded-full text-xs ${
                       p.status === 'operating' ? 'bg-green-500/20 text-green-400' :
@@ -487,7 +487,7 @@ export default function BESSCapex() {
       )}
 
       {/* Source note */}
-      <div className="text-xs text-[var(--text-secondary)] italic">
+      <div className="text-xs text-[var(--color-text-muted)] italic">
         Capex figures sourced from ARENA, developer press releases, CEFC disclosures, and news reporting.
         Some figures are estimates based on partial disclosure (e.g. debt financing only).
         All values in Australian dollars (nominal). Year = FID or announcement year.

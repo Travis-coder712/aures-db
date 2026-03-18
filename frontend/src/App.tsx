@@ -32,7 +32,7 @@ import Dunkelflaute from './pages/intelligence/Dunkelflaute'
 import EnergyMix from './pages/intelligence/EnergyMix'
 import DeveloperScores from './pages/intelligence/DeveloperScores'
 import RevenueIntel from './pages/intelligence/RevenueIntel'
-import GridConnection from './pages/intelligence/GridConnection'
+import TransmissionInfra from './pages/intelligence/TransmissionInfra'
 import EISTechnical from './pages/intelligence/EISTechnical'
 import News from './pages/News'
 import NotFound from './pages/NotFound'
@@ -81,7 +81,7 @@ function App() {
         <Route path="intelligence/energy-mix" element={<EnergyMix />} />
         <Route path="intelligence/developer-scores" element={<DeveloperScores />} />
         <Route path="intelligence/revenue" element={<RevenueIntel />} />
-        <Route path="intelligence/grid-connection" element={<GridConnection />} />
+        <Route path="intelligence/grid-connection" element={<TransmissionInfra />} />
         <Route path="intelligence/eis-technical" element={<EISTechnical />} />
         {/* News */}
         <Route path="news" element={<News />} />

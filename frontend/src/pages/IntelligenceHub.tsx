@@ -45,8 +45,8 @@ const FEATURES = [
   },
   {
     icon: '\u{1F50C}',
-    title: 'Grid Connection',
-    description: 'REZ congestion and connection queue analysis',
+    title: 'Transmission Infrastructure',
+    description: 'Major NEM transmission upgrades, grid connection analytics, and REZ congestion',
     route: '/intelligence/grid-connection',
   },
   {

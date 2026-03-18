@@ -49,18 +49,35 @@ For projects that are already operating, AURES tracks:
 
 You can see league tables — the best-performing wind farms, solar farms, and batteries — and also the worst. And critically, you can see *why* some perform better than others.
 
+### Understand climate and weather risk
+
+AURES includes a climate intelligence layer that tracks how large-scale climate patterns — El Niño/La Niña (ENSO), the Indian Ocean Dipole (IOD), and the Southern Annular Mode (SAM) — affect renewable energy output across Australia.
+
+Using 8 years of historical capacity factor data (2018-2026), the system:
+- **Identifies Dunkelflaute events** — periods when both wind and solar output are simultaneously low
+- **Matches current conditions to historical patterns** — using correlation analysis to find which past years most resemble the current trajectory
+- **Projects remaining months** — showing optimistic, median, and pessimistic capacity factor forecasts based on the most similar historical years
+- **Lets you filter by wind, solar, or combined** and by state — so you can see exactly how your technology and region are tracking
+
 ### Understand whether new projects will succeed
 
-For projects that have won government contracts (CIS or LTESA) but haven't been built yet, AURES provides a "watchlist" that scores each project on how likely it is to actually reach construction. This is based on:
-- Does it have planning approval?
-- Does it have grid access?
-- Does the developer have a track record?
-- Is the technology proven?
-- Are there supply chain risks?
+For projects that have won government contracts (CIS or LTESA) but haven't been built yet, AURES tracks developer confidence scores, COD drift patterns, and pipeline progress. This helps assess which projects will actually reach construction.
+
+### Explore intelligence analytics
+
+An Intelligence Hub provides 8 specialised analytics pages:
+- **Dunkelflaute Monitor** — Wind+solar vulnerability with climate intelligence and BESS adequacy
+- **Transmission Infrastructure** — Major grid projects (HumeLink, VNI West, Marinus Link) with status and dependencies
+- **EIS Technical** — Environmental impact data from development assessments
+- **Revenue Intelligence** — Wholesale market performance and pricing analysis
+- **Energy Mix** — Generation mix trends and technology breakdown
+- **Developer Scores** — Portfolio analysis and delivery track records
+- **Scheme Tracker** — CIS and LTESA milestone monitoring
+- **Wind Resource** — Wind farm performance analysis
 
 ### Learn how the energy system works
 
-An education section (drawing on GridRival's educational content) explains the fundamentals:
+An education section explains the fundamentals:
 - How does Australia's electricity market work?
 - What is a Renewable Energy Zone?
 - What is the Capacity Investment Scheme?
@@ -135,16 +152,19 @@ Level 3: ANALYSIS
   → BESS revenue breakdown (arbitrage vs FCAS)
 
 Level 4: INTELLIGENCE
-  "Will planned projects succeed?"
-  → Watchlist risk scoring for CIS/LTESA/REZ winners
-  → Development readiness assessment
-  → Operations-to-development mapping
-  → Top quartile benchmarking (new vs existing)
+  "Will planned projects succeed? What conditions should we expect?"
+  → Climate intelligence (ENSO/IOD/SAM impact on renewables)
+  → Pattern-matching forecast engine (current year vs historical)
+  → Dunkelflaute monitoring and BESS adequacy assessment
+  → Developer confidence scoring and delivery track records
+  → Transmission infrastructure dependency tracking
+  → Environmental impact analysis (EIS data mining)
 
 Level 5: INSIGHT
   "What should we be watching?"
-  → Multi-source analysis of contested topics
-  → Lessons from operational reality
-  → Market share trends and competitive dynamics
-  → Critical milestones in the next 6 months
+  → Seasonal risk outlook based on climate conditions
+  → Curtailment risk assessment by region
+  → Revenue and pricing trend analysis
+  → Construction pipeline progress and milestone tracking
+  → Critical transmission project timelines
 ```

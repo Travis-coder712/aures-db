@@ -1,8 +1,8 @@
 # AURES Database — Build Tracker
 
-> **Last Updated:** 2026-03-12
-> **Current Phase:** Phase 4 — Intelligence Layer (near complete)
-> **Status:** Phases 1-4 near complete. 1,064 projects (incl. 22 offshore wind). Real 2024+2025 performance data + 2026 YTD from OpenElectricity API. 593 timeline events. 250 projects with coordinates. Phase 4 delivered: confidence scoring, 718 developer profiles, interactive Leaflet map, COD drift tracker. Remaining: methodology deep dive (4.5), final nav polish (4.6), build+push (4.7).
+> **Last Updated:** 2026-03-18
+> **Current Phase:** Phase 5 — Enrichment & Polish
+> **Status:** Phases 1-4 complete. 1,064 projects (incl. 22 offshore wind). Real 2024+2025+2026 performance data from OpenElectricity API. Historical CF data backfilled 2018-2026 (495 monthly records). 593 timeline events. 250 projects with coordinates. Intelligence layer complete: 8 analytics pages, climate intelligence with ENSO/IOD/SAM tracking, pattern-matching forecast engine, Dunkelflaute monitor with tech+state filtering, transmission infrastructure tracker, EIS technical analysis, BESS capex analytics. Version 1.12.0.
 
 ---
 
@@ -15,8 +15,8 @@
 | Phase 2.5: NEM Dashboard + REZ | ✅ Complete | 100% |
 | Phase 3: Performance | ✅ Complete | 100% |
 | Phase 3.5: Data Quality + Enrichment | ✅ Complete | 100% |
-| Phase 4: Intelligence | In Progress | 90% |
-| Phase 5: Data Enrichment | Ongoing | 25% |
+| Phase 4: Intelligence | ✅ Complete | 100% |
+| Phase 5: Data Enrichment & Polish | In Progress | 30% |
 
 ---
 
@@ -448,19 +448,10 @@ Layer 3: PWA FRONTEND  ✅ BUILT & DEPLOYED
 
 ---
 
-## Phase 4: Intelligence Layer — IN PROGRESS
+## Phase 4: Intelligence Layer — ✅ COMPLETE
 
 ### Overview
-Phase 4 adds intelligence on top of the existing 1,064-project database: auto-computed confidence ratings, developer portfolio pages, COD drift analytics, and a map view. All four features build on data already in the DB — no new external API calls needed.
-
-### Current State (Pre-Implementation)
-- `data_confidence` column exists in `projects` table (values: high/good/medium/low/unverified)
-- Current distribution: 52 high, 1 good, 8 medium, 1,003 low — most set manually, needs auto-computation
-- `ConfidenceDots.tsx` component already exists (4-dot visual with colors)
-- `by-developer.json` index already exported (718 distinct developers)
-- `cod_history` table exists but sparse (10 records across 5 projects)
-- 250 projects have lat/lon coordinates; exported as `coordinates: { lat, lng }` in JSON
-- No mapping library installed yet
+Phase 4 added intelligence on top of the existing 1,064-project database: auto-computed confidence ratings, developer portfolio pages, COD drift analytics, map view, plus a full Intelligence Hub with 8 analytics pages including climate intelligence, Dunkelflaute monitoring, transmission infrastructure tracking, and pattern-matching forecasts.
 
 ---
 
@@ -779,14 +770,92 @@ Steps:
 - [x] Mobile bottom nav: 5 items (Home, Projects, Perf, REZ, Search)
 - [ ] No console errors on any page (not yet verified on all pages)
 
+### Session 13 — 2026-03-14/15
+- **Intelligence Hub built**: Central `/intelligence` page with 8 analytics sub-pages
+  - Dunkelflaute Monitor, Wind Resource, Energy Mix, Developer Scores, Revenue Intel, Grid Connection, Scheme Tracker, EIS Technical
+- **Dunkelflaute page — major build**: Tab-based layout with 7 tabs (Overview, State Performance, Seasonal Trends, Climate Drivers, Current Assessment, Forecast, BESS Coverage)
+- **EIS Technical Intelligence page**: Environmental impact analysis with fauna/flora species tracking, offset calculations, EIS document mining
+- **BESS Capex Analytics page**: Capital cost tracking and comparisons
+- **Transmission Infrastructure page**: Replaced basic Grid Connection page with detailed transmission project tracker using curated project data (HumeLink, VNI West, Marinus Link, etc.)
+
+### Session 14 — 2026-03-16/17
+- **Climate intelligence layer**: Built `climate-intelligence.ts` with curated climate data
+  - 3 climate driver profiles (ENSO, IOD, SAM) with phases, thresholds, renewable impact descriptions
+  - 9 historical climate events (2018-2026) linking ENSO/IOD/SAM phases to wind/solar impact
+  - Current conditions assessment with traffic light rating, risks/opportunities
+  - Helper functions: `getClimateEventForYear()`, `getPhaseColor()`, `getImpactArrow()`
+- **Historical data backfill**: Ran OpenElectricity importer for 2018-2023 (annual + monthly), expanding dunkelflaute.json from ~100 to 495 monthly records across 8 years
+- **Pattern-matching forecast engine**: Pearson correlation of current year's CF trajectory vs each historical year, top-3 matching years used to project remaining months with optimistic/pessimistic/median range
+- **Climate Drivers tab**: Expandable cards for ENSO/IOD/SAM with phase descriptions, renewable impact, historical events table
+- **Current Assessment tab**: Climate index gauge cards (ONI, DMI, SAM), traffic light assessment, year overlay chart comparing current year to historical
+- **Forecast tab**: Pattern matching similarity bars with climate labels, forecast overlay chart with shaded range area, month-by-month forecast table
+- **TransmissionInfra.tsx fixes**: Resolved 6 pre-existing TypeScript errors (unused imports, conceptual status indexing)
+
+### Session 15 — 2026-03-18
+- **Tech filter (wind/solar/combined)**: Added toggle across State Performance, Seasonal Trends, Current Assessment, and Forecast tabs
+  - All data memos updated to respect `techFilter` state
+  - Bar chart shows relevant bars per selection; line chart labels update dynamically
+- **State selection**: Multi-state toggle on State Performance tab (line chart + bar chart filter states on/off); single-state selectors on Seasonal, Assessment, Forecast tabs now paired with tech filter
+- **Seasonal chart refactor**: Simplified from two separate charts to single chart that respects tech filter selection
+- **Documentation update**: All guides updated for post-Phase 4 completion, strategic roadmap added
+- **Version 1.12.0**: Committed and pushed
+
 ---
 
-## What To Build After Phase 4
+## Strategic Roadmap
+
+### Navigation Review
+The app has grown from 8 pages to 20+ pages. Navigation needs a design review:
+- **Current desktop sidebar**: 10+ items — approaching information overload
+- **Current mobile bottom nav**: 5 items — some important pages (Intelligence, Developers, Map) are only accessible via links from other pages
+- **Recommended actions**:
+  - Group related items under collapsible sections in desktop sidebar (e.g., "Analytics" grouping Performance + Intelligence sub-pages)
+  - Add an Intelligence entry to mobile bottom nav (replacing or rearranging current items)
+  - Consider a "More" menu pattern for mobile to give access to secondary pages
+  - Review breadcrumbs on intelligence sub-pages for easier back-navigation
+  - Audit all pages for orphaned routes (pages only reachable by direct URL)
+
+### Data Cleanup
+Known data quality issues to address systematically:
+- **Blue Mackerel North duplicate**: 2 AEMO entries (1,005 MW and 1,819 MW) — needs manual resolution
+- **Stale performance data**: Some projects may have outdated 2024 data when 2025/2026 is available — audit needed
+- **Missing coordinates**: 814 of 1,064 projects still lack lat/lon — limits map view usefulness
+- **Sparse COD drift data**: Only 7 projects have both `cod_original` + `cod_current` — need systematic harvest from AEMO commissioning register
+- **Scheme project linking**: 10 of 95 scheme projects remain unlinked to master DB (4 WEM, 4 VPP, 2 other)
+- **Developer name normalisation**: Some developers appear under multiple names (e.g., "Neoen" vs "Neoen Australia") — needs dedup pass
+- **AEMO Generation Information refresh**: Core project list was imported in Session 4 — should be refreshed from latest AEMO publication to capture new registrations
+- **Timeline event dedup**: Some projects have duplicate timeline events from overlapping import runs
+
+### 10 Ideas for Improving the Intelligence Layer
+
+1. **Automated weather correlation**: Pull BOM weather station data (temperature, wind speed, solar irradiance) and correlate with actual CF for each state. Show "CF vs weather" scatter plots to quantify how much weather explains performance variation vs curtailment or outages.
+
+2. **Curtailment heatmap**: Build a month × state heatmap showing estimated curtailment levels. Overlay with constraint equation data from AEMO NEMWEB to show which transmission constraints are driving curtailment. This is the single most valuable insight for developers choosing project locations.
+
+3. **BESS revenue decomposition**: Break BESS revenue into arbitrage, FCAS (frequency control), and cap contract components. Currently only wholesale arbitrage is tracked. Adding FCAS would give a much more realistic picture of BESS economics and explain why some batteries with low utilisation still have strong revenue.
+
+4. **Developer track record scoring**: Rate developers based on historical delivery: % of projects reaching COD on time, average delay, number of abandoned projects, capacity delivered. This creates an empirical "developer risk" metric useful for assessing which pipeline projects will actually get built.
+
+5. **REZ congestion forecasting**: For each REZ, calculate committed + pipeline capacity vs available network hosting capacity. Show which REZs are approaching saturation and where curtailment risk is highest for new entrants. Cross-reference with transmission upgrade timelines.
+
+6. **Price cannibalisation tracker**: Show how the volume-weighted price received by wind/solar has declined as penetration increases (the "duck curve" effect). Track by state and month to show where cannibalisation is worst. This is critical intelligence for project investment decisions.
+
+7. **Seasonal risk dashboard**: Combine climate intelligence (ENSO/IOD/SAM) with historical performance data to produce a rolling 3-month risk outlook: "Based on current La Niña conditions and historical patterns, SA wind CF is expected to be 5-10% above average this quarter." Update monthly.
+
+8. **Construction progress tracker**: For projects under construction, track key milestones (equipment orders, foundation work, first turbine/panel, energisation, COD) against schedule. Flag projects falling behind. Source from AEMO Connections Scorecard + developer announcements.
+
+9. **Offtake/PPA intelligence**: Track known PPA and offtake agreements — who is buying from whom, at what indicative price, for what tenure. This data is scattered across ASX announcements and AFR articles but is extremely valuable for understanding project bankability and market pricing.
+
+10. **Comparative international benchmarking**: Compare Australian wind/solar CF with international equivalents (US EIA, EU WindEurope data). Show where Australia sits globally in renewable performance, highlighting the structural advantages (solar irradiance) and disadvantages (grid constraints, distance) that shape the market.
 
 ### Medium Term (Phase 5+)
-1. **Monthly performance data** — Change interval from annual to monthly for sparklines/seasonal patterns
+1. ~~Monthly performance data~~ ✅ DONE — Historical monthly CF data 2018-2026 now in Dunkelflaute
 2. **Emissions data** — Add `emissions` metric to OpenElectricity data fetch (0 extra API calls)
 3. **Watchlist feature** — User-defined project watchlists with change notifications
 4. **New England REZ access rights** — Populate when declared (~Q2 2026)
 5. **Operations-to-development mapping** — Show nearby operating performance for proposed projects
 6. **REZ zone GeoJSON overlays** — Show REZ boundaries on map view
+7. **OEM profiles** — Vestas, Goldwind, Tesla, Fluence performance comparison pages
+8. **Performance methodology deep dive** — Full guide explaining CF calculation, curtailment estimation, revenue metrics
+9. **Automated data refresh** — GitHub Actions workflow to run pipeline monthly
+10. **Mobile navigation redesign** — Address nav review findings above

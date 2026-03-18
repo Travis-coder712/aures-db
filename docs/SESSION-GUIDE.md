@@ -25,23 +25,26 @@ for the current phase, completed tasks, and next tasks.
 
 ### Quick Resume Prompts by Phase
 
-**Phase 3.5 (Data Quality — CURRENT):**
+**Phase 5 (Enrichment & Polish — CURRENT):**
 ```
 Continue building AURES. Repo at /Users/travishughes/aures-db.
 Read docs/BUILD-TRACKER.md for current progress.
-We're between Phase 3 and 4. Phases 1-3 complete with real OpenElectricity
-API data. 1,067 projects, 224 with real performance data. Need to fix 3
-duplicate projects, populate NSW REZ access rights, and enrich construction
-pipeline data. API key in ~/.zshrc as OPENELECTRICITY_API_KEY.
+Phases 1-4 complete. 1,064 projects, 8 intelligence analytics pages,
+climate intelligence with ENSO/IOD/SAM tracking, pattern-matching
+forecast engine, Dunkelflaute monitor with tech+state filtering,
+transmission infrastructure tracker. Historical CF data 2018-2026.
+API key in ~/.zshrc as OPENELECTRICITY_API_KEY.
+See BUILD-TRACKER.md "Strategic Roadmap" for next priorities.
 ```
 
-**Phase 4 (Intelligence Layer):**
+**Intelligence Layer Enhancement:**
 ```
 Continue building AURES. Repo at /Users/travishughes/aures-db.
 Read docs/BUILD-TRACKER.md for current progress.
-We're in Phase 4 — building multi-source intelligence panels,
-confidence ratings, developer profiles, COD drift tracking, and
-operations-to-development mapping.
+I want to improve the intelligence layer. See the "10 Ideas for
+Improving the Intelligence Layer" section in BUILD-TRACKER.md.
+The Intelligence Hub is at /intelligence with 8 sub-pages.
+Climate intelligence data is in frontend/src/data/climate-intelligence.ts.
 ```
 
 **Data Enrichment (web research for specific projects):**
@@ -51,6 +54,15 @@ Read docs/BUILD-TRACKER.md for current progress.
 I want to add detailed data for [specific projects/areas].
 Please research and populate the project fact sheets.
 The OpenElectricity API key is in ~/.zshrc as OPENELECTRICITY_API_KEY.
+```
+
+**Navigation & UX Review:**
+```
+Continue building AURES. Repo at /Users/travishughes/aures-db.
+Read docs/BUILD-TRACKER.md — see "Navigation Review" section.
+The app has 20+ pages and navigation needs restructuring.
+Desktop sidebar has 10+ items, mobile bottom nav has 5.
+Intelligence sub-pages are only accessible via the Intelligence Hub.
 ```
 
 ---
@@ -72,8 +84,14 @@ cd /Users/travishughes/aures-db/frontend && npx vite build
 # Import real performance data from OpenElectricity API
 cd /Users/travishughes/aures-db && python3 pipeline/importers/import_openelectricity.py --year 2024
 
-# Generate sample data for a year
-cd /Users/travishughes/aures-db && python3 pipeline/importers/import_openelectricity.py --year 2025 --sample
+# Import monthly data for a specific year
+cd /Users/travishughes/aures-db && python3 pipeline/importers/import_openelectricity.py --year 2026 --monthly
+
+# Backfill historical years (annual + monthly)
+for year in 2018 2019 2020 2021 2022 2023; do
+  python3 pipeline/importers/import_openelectricity.py --year $year
+  python3 pipeline/importers/import_openelectricity.py --year $year --monthly
+done
 
 # Harvest facility metadata (dates, coords, timeline events) — 0 extra API calls
 cd /Users/travishughes/aures-db && python3 pipeline/importers/harvest_facility_metadata.py
@@ -105,13 +123,16 @@ curl -s -H "Authorization: Bearer $OPENELECTRICITY_API_KEY" \
 
 | File | What It Contains |
 |------|-----------------|
-| `docs/BUILD-TRACKER.md` | Current progress — what's done, what's next, data quality issues |
+| `docs/BUILD-TRACKER.md` | Current progress — what's done, what's next, strategic roadmap, data quality issues |
 | `docs/PROJECT-PLAN.md` | Full architecture, all phases, data sources, design decisions |
 | `docs/VIBECODING-NOTES.md` | How this was built, what worked, collaboration approach |
 | `docs/PLAIN-ENGLISH-OVERVIEW.md` | Non-technical description of what AURES is and why |
 | `database/schema.sql` | The complete database schema (17 tables) |
-| `pipeline/importers/import_openelectricity.py` | OpenElectricity API importer |
+| `pipeline/importers/import_openelectricity.py` | OpenElectricity API importer (supports `--year`, `--monthly`, `--ytd`) |
 | `pipeline/importers/harvest_facility_metadata.py` | Facility metadata harvester (dates, coords) |
+| `frontend/src/data/climate-intelligence.ts` | Curated climate data (ENSO/IOD/SAM drivers, historical events, current conditions) |
+| `frontend/src/data/transmission-projects.ts` | Curated transmission infrastructure project data |
+| `frontend/src/pages/intelligence/Dunkelflaute.tsx` | Climate intelligence + Dunkelflaute monitor (largest page, ~1500 lines) |
 
 ## Key Patterns / Gotchas
 
@@ -122,3 +143,6 @@ curl -s -H "Authorization: Bearer $OPENELECTRICITY_API_KEY" \
 - **API trailing slash**: `/v4/facilities/` needs trailing slash; `/v4/me` does not
 - **User-Agent required**: Must send `User-Agent: AURES-Pipeline/1.0` — Cloudflare blocks default Python UA
 - **PWA caching**: After deployment, users may need to delete and re-add the PWA to see nav changes
+- **CSS variables**: Use `--color-*` prefix for all theme colours (dark theme default)
+- **Static data files**: Climate and transmission data uses TypeScript data files (`frontend/src/data/`) not JSON — enables type safety and helper functions
+- **Tab pattern**: Intelligence sub-pages use `activeTab` state + button pills for internal tab navigation (see Dunkelflaute.tsx, TransmissionInfra.tsx, EISTechnical.tsx)

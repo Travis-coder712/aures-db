@@ -21,9 +21,9 @@
       "url": "https://openelectricity.org.au",
       "frequency": "monthly",
       "script": "import_openelectricity.py",
-      "last_run": "2026-03-11 07:06:37",
+      "last_run": "2026-03-18 08:31:15",
       "last_status": "completed",
-      "records_imported": 645,
+      "records_imported": 1562,
       "records_updated": 0,
       "records_new": 0,
       "error": null
@@ -91,7 +91,7 @@
       "url": "",
       "frequency": "ad_hoc",
       "script": "exporters/export_json.py",
-      "last_run": "2026-03-18T06:26:32.946148",
+      "last_run": "2026-03-18T19:40:30.815524",
       "last_status": "completed",
       "records_imported": 0,
       "records_updated": 0,
@@ -105,5 +105,5 @@
     "total_oems_contractors": 74,
     "operating_projects": 222
   },
-  "exported_at": "2026-03-18T06:26:32.946501"
+  "exported_at": "2026-03-18T19:40:30.815622"
 }
