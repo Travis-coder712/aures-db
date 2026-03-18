@@ -1,4 +1,4 @@
-import { useMemo } from 'react'
+import { useState, useMemo } from 'react'
 import { Link, useNavigate, useSearchParams } from 'react-router-dom'
 import {
   BarChart,
@@ -14,6 +14,7 @@ import { useProjectIndex } from '../hooks/useProjectData'
 import { useCODDrift } from '../hooks/useCODDrift'
 import { TECHNOLOGY_CONFIG, STATUS_CONFIG, CONFIDENCE_CONFIG, DEVELOPMENT_STAGE_CONFIG } from '../lib/types'
 import type { Technology, ProjectStatus, State, Confidence, DevelopmentStage } from '../lib/types'
+import { isCuratedProject, CURATED_NOTE, CURATED_BENCHMARK } from '../lib/curatedFilter'
 
 const STATUS_COLORS: Record<string, string> = {
   operating: '#22c55e',
@@ -43,6 +44,10 @@ export default function Dashboard() {
   const [searchParams, setSearchParams] = useSearchParams()
   const { projects: allProjects, loading } = useProjectIndex()
   const { data: codDrift } = useCODDrift()
+  const [showCuratedInfo, setShowCuratedInfo] = useState(false)
+
+  // Curated toggle from URL (default: curated)
+  const showFullPipeline = searchParams.get('view') === 'full'
 
   // Filter state from URL
   const selectedTechs = useMemo(() => parseSet<Technology>(searchParams.get('tech')), [searchParams])
@@ -54,6 +59,13 @@ export default function Dashboard() {
     const sp = new URLSearchParams(searchParams)
     if (set.size > 0) sp.set(key, [...set].join(','))
     else sp.delete(key)
+    setSearchParams(sp, { replace: true })
+  }
+
+  function toggleView() {
+    const sp = new URLSearchParams(searchParams)
+    if (showFullPipeline) sp.delete('view')
+    else sp.set('view', 'full')
     setSearchParams(sp, { replace: true })
   }
 
@@ -70,9 +82,20 @@ export default function Dashboard() {
     setSearchParams({}, { replace: true })
   }
 
-  // Filter projects
+  // Curated count (always computed for display)
+  const curatedCount = useMemo(() => {
+    return allProjects.filter((p) => ACTIVE_STATUSES.includes(p.status) && isCuratedProject(p)).length
+  }, [allProjects])
+
+  // EIS project count
+  const eisCount = useMemo(() => {
+    return allProjects.filter((p) => p.has_eis_data).length
+  }, [allProjects])
+
+  // Filter projects — apply curated filter unless full pipeline view
   const filtered = useMemo(() => {
     let result = allProjects.filter((p) => ACTIVE_STATUSES.includes(p.status))
+    if (!showFullPipeline) result = result.filter(isCuratedProject)
     if (selectedTechs.size > 0) result = result.filter((p) => selectedTechs.has(p.technology))
     if (selectedStates.size > 0) result = result.filter((p) => selectedStates.has(p.state))
     if (selectedStatuses.size > 0) {
@@ -82,7 +105,11 @@ export default function Dashboard() {
       })
     }
     return result
-  }, [allProjects, selectedTechs, selectedStates, selectedStatuses])
+  }, [allProjects, showFullPipeline, selectedTechs, selectedStates, selectedStatuses])
+
+  const totalActiveCount = useMemo(() => {
+    return allProjects.filter((p) => ACTIVE_STATUSES.includes(p.status)).length
+  }, [allProjects])
 
   // Headline stats
   const hs = useMemo(() => {
@@ -97,6 +124,7 @@ export default function Dashboard() {
     }
     return {
       operating_gw: op.reduce((s, p) => s + p.capacity_mw, 0) / 1000,
+      operating_count: op.length,
       construction_gw: con.reduce((s, p) => s + p.capacity_mw, 0) / 1000,
       construction_count: con.length,
       development_gw: dev.reduce((s, p) => s + p.capacity_mw, 0) / 1000,
@@ -139,6 +167,7 @@ export default function Dashboard() {
   // Confidence breakdown (tech+state filtered, not status filtered)
   const confData = useMemo(() => {
     let base = allProjects
+    if (!showFullPipeline) base = base.filter(isCuratedProject)
     if (selectedTechs.size > 0) base = base.filter((p) => selectedTechs.has(p.technology))
     if (selectedStates.size > 0) base = base.filter((p) => selectedStates.has(p.state))
     const tiers: Confidence[] = ['high', 'good', 'medium', 'low']
@@ -149,7 +178,7 @@ export default function Dashboard() {
         return { tier, count, pct: base.length ? Math.round((count / base.length) * 100) : 0 }
       }),
     }
-  }, [allProjects, selectedTechs, selectedStates])
+  }, [allProjects, showFullPipeline, selectedTechs, selectedStates])
 
   // Construction pipeline
   const pipeline = useMemo(() => {
@@ -213,14 +242,50 @@ export default function Dashboard() {
         <h1 className="text-2xl lg:text-3xl font-bold text-[var(--color-text)] mb-1">
           NEM Fleet Dashboard
         </h1>
-        <p className="text-sm text-[var(--color-text-muted)]">
-          {hasFilters
-            ? `${hs.total.toLocaleString()} projects matching filters · ${totalGW.toFixed(0)} GW`
-            : `${hs.total.toLocaleString()} projects tracked · ${totalGW.toFixed(0)} GW total capacity`}
-        </p>
+        <div className="flex items-center gap-2 flex-wrap">
+          <p className="text-sm text-[var(--color-text-muted)]">
+            {hasFilters
+              ? `${hs.total.toLocaleString()} projects matching filters · ${totalGW.toFixed(0)} GW`
+              : showFullPipeline
+                ? `${hs.total.toLocaleString()} projects tracked · ${totalGW.toFixed(0)} GW`
+                : <>
+                    <span className="text-[var(--color-text)]">{curatedCount.toLocaleString()} curated</span>
+                    {' '}of {totalActiveCount.toLocaleString()} tracked · {totalGW.toFixed(0)} GW
+                  </>
+            }
+          </p>
+          <button
+            onClick={toggleView}
+            className="text-[11px] px-2 py-0.5 rounded-full border border-[var(--color-border)] text-[var(--color-text-muted)] hover:border-[var(--color-primary)] hover:text-[var(--color-primary)] transition-colors"
+          >
+            {showFullPipeline ? 'Show curated' : 'Show all'}
+          </button>
+          {!showFullPipeline && (
+            <button
+              onClick={() => setShowCuratedInfo(!showCuratedInfo)}
+              className="text-[10px] text-[var(--color-text-muted)] hover:text-[var(--color-primary)] underline decoration-dotted"
+            >
+              What is curated?
+            </button>
+          )}
+          {eisCount > 0 && (
+            <Link
+              to="/intelligence/eis-technical"
+              className="text-[11px] px-2 py-0.5 rounded-full bg-[var(--color-primary)]/10 text-[var(--color-primary)] hover:bg-[var(--color-primary)]/20 transition-colors"
+            >
+              {eisCount} with EIS data
+            </Link>
+          )}
+        </div>
+        {showCuratedInfo && !showFullPipeline && (
+          <div className="mt-2 text-[11px] text-[var(--color-text-muted)] bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-lg p-3 leading-relaxed max-w-2xl">
+            <strong className="text-[var(--color-text)]">Curated</strong> {CURATED_NOTE}
+            <span className="block mt-1 text-[10px] opacity-75">{CURATED_BENCHMARK}</span>
+          </div>
+        )}
       </section>
 
-      {/* Filter Bar */}
+      {/* Filter Bar — horizontal scroll on mobile, wrap on desktop */}
       <section className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl p-4 space-y-2.5">
         <div className="flex items-center justify-between">
           <span className="text-[10px] font-semibold uppercase tracking-wider text-[var(--color-text-muted)]">
@@ -236,77 +301,83 @@ export default function Dashboard() {
           )}
         </div>
 
-        {/* Tech pills */}
-        <div className="flex items-center gap-1.5 flex-wrap">
+        {/* Tech pills — horizontal scroll on mobile */}
+        <div className="flex items-center gap-1.5">
           <span className="text-[10px] font-semibold uppercase tracking-wider text-[var(--color-text-muted)]/60 w-11 flex-shrink-0">
             Tech
           </span>
-          {TECH_ORDER.map((tech) => {
-            const config = TECHNOLOGY_CONFIG[tech]
-            const isActive = selectedTechs.has(tech)
-            return (
-              <button
-                key={tech}
-                onClick={() => toggleTech(tech)}
-                className={`text-[11px] px-2 py-1 rounded-full border transition-colors ${
-                  isActive
-                    ? 'border-transparent font-medium'
-                    : 'border-[var(--color-border)] text-[var(--color-text-muted)] hover:border-[var(--color-text-muted)]'
-                }`}
-                style={isActive ? { backgroundColor: `${config.color}20`, color: config.color } : undefined}
-              >
-                {config.icon} {config.label}
-              </button>
-            )
-          })}
+          <div className="flex items-center gap-1.5 overflow-x-auto lg:flex-wrap scrollbar-none">
+            {TECH_ORDER.map((tech) => {
+              const config = TECHNOLOGY_CONFIG[tech]
+              const isActive = selectedTechs.has(tech)
+              return (
+                <button
+                  key={tech}
+                  onClick={() => toggleTech(tech)}
+                  className={`text-[11px] px-2 py-1 rounded-full border transition-colors whitespace-nowrap flex-shrink-0 ${
+                    isActive
+                      ? 'border-transparent font-medium'
+                      : 'border-[var(--color-border)] text-[var(--color-text-muted)] hover:border-[var(--color-text-muted)]'
+                  }`}
+                  style={isActive ? { backgroundColor: `${config.color}20`, color: config.color } : undefined}
+                >
+                  {config.icon} {config.label}
+                </button>
+              )
+            })}
+          </div>
         </div>
 
-        {/* State pills */}
-        <div className="flex items-center gap-1.5 flex-wrap">
+        {/* State pills — horizontal scroll on mobile */}
+        <div className="flex items-center gap-1.5">
           <span className="text-[10px] font-semibold uppercase tracking-wider text-[var(--color-text-muted)]/60 w-11 flex-shrink-0">
             State
           </span>
-          {STATE_ORDER.map((state) => {
-            const isActive = selectedStates.has(state)
-            return (
-              <button
-                key={state}
-                onClick={() => toggleState(state)}
-                className={`text-[11px] px-2 py-1 rounded-full border transition-colors ${
-                  isActive
-                    ? 'border-transparent bg-[var(--color-primary)]/20 text-[var(--color-primary)] font-medium'
-                    : 'border-[var(--color-border)] text-[var(--color-text-muted)] hover:border-[var(--color-text-muted)]'
-                }`}
-              >
-                {state}
-              </button>
-            )
-          })}
+          <div className="flex items-center gap-1.5 overflow-x-auto lg:flex-wrap scrollbar-none">
+            {STATE_ORDER.map((state) => {
+              const isActive = selectedStates.has(state)
+              return (
+                <button
+                  key={state}
+                  onClick={() => toggleState(state)}
+                  className={`text-[11px] px-2 py-1 rounded-full border transition-colors whitespace-nowrap flex-shrink-0 ${
+                    isActive
+                      ? 'border-transparent bg-[var(--color-primary)]/20 text-[var(--color-primary)] font-medium'
+                      : 'border-[var(--color-border)] text-[var(--color-text-muted)] hover:border-[var(--color-text-muted)]'
+                  }`}
+                >
+                  {state}
+                </button>
+              )
+            })}
+          </div>
         </div>
 
-        {/* Status pills */}
-        <div className="flex items-center gap-1.5 flex-wrap">
+        {/* Status pills — horizontal scroll on mobile */}
+        <div className="flex items-center gap-1.5">
           <span className="text-[10px] font-semibold uppercase tracking-wider text-[var(--color-text-muted)]/60 w-11 flex-shrink-0">
             Status
           </span>
-          {STATUS_ORDER.map((status) => {
-            const config = STATUS_CONFIG[status]
-            const isActive = selectedStatuses.has(status)
-            return (
-              <button
-                key={status}
-                onClick={() => toggleStatus(status)}
-                className={`text-[11px] px-2 py-1 rounded-full border transition-colors ${
-                  isActive
-                    ? 'border-transparent font-medium'
-                    : 'border-[var(--color-border)] text-[var(--color-text-muted)] hover:border-[var(--color-text-muted)]'
-                }`}
-                style={isActive ? { backgroundColor: `${config.color}20`, color: config.color } : undefined}
-              >
-                {config.label}
-              </button>
-            )
-          })}
+          <div className="flex items-center gap-1.5 overflow-x-auto lg:flex-wrap scrollbar-none">
+            {STATUS_ORDER.map((status) => {
+              const config = STATUS_CONFIG[status]
+              const isActive = selectedStatuses.has(status)
+              return (
+                <button
+                  key={status}
+                  onClick={() => toggleStatus(status)}
+                  className={`text-[11px] px-2 py-1 rounded-full border transition-colors whitespace-nowrap flex-shrink-0 ${
+                    isActive
+                      ? 'border-transparent font-medium'
+                      : 'border-[var(--color-border)] text-[var(--color-text-muted)] hover:border-[var(--color-text-muted)]'
+                  }`}
+                  style={isActive ? { backgroundColor: `${config.color}20`, color: config.color } : undefined}
+                >
+                  {config.label}
+                </button>
+              )
+            })}
+          </div>
         </div>
       </section>
 
@@ -316,6 +387,7 @@ export default function Dashboard() {
           label="Operating"
           value={`${hs.operating_gw.toFixed(1)} GW`}
           color={STATUS_COLORS.operating}
+          sublabel={`${hs.operating_count} projects`}
           href="/projects?status=operating&from=dashboard&fromLabel=Back to Dashboard"
         />
         <FleetCard
@@ -325,13 +397,17 @@ export default function Dashboard() {
           sublabel={`${hs.construction_count} projects`}
           href="/projects?status=construction,commissioning&from=dashboard&fromLabel=Back to Dashboard"
         />
-        <FleetCard
-          label="In Development"
-          value={`${hs.development_gw.toFixed(1)} GW`}
-          color={STATUS_COLORS.development}
-          sublabel={`${hs.development_count} projects`}
-          href="/projects?status=development&from=dashboard&fromLabel=Back to Dashboard"
+        <div
+          className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl p-4 hover:border-[var(--color-primary)] transition-colors cursor-pointer"
+          onClick={() => navigate('/projects?status=development&from=dashboard&fromLabel=Back to Dashboard')}
         >
+          <p className="text-[10px] uppercase tracking-wider text-[var(--color-text-muted)] mb-1">
+            In Development
+          </p>
+          <p className="text-xl lg:text-2xl font-bold" style={{ color: STATUS_COLORS.development }}>
+            {hs.development_gw.toFixed(1)} GW
+          </p>
+          <p className="text-[10px] text-[var(--color-text-muted)] mt-0.5">{hs.development_count} projects</p>
           {hs.development_count > 0 && (
             <div className="flex gap-2 mt-1.5 flex-wrap">
               {(['epbc_approved', 'epbc_submitted', 'planning_submitted', 'early_stage'] as DevelopmentStage[]).map((stage) => {
@@ -344,6 +420,7 @@ export default function Dashboard() {
                     to={`/projects?status=development&stage=${stage}`}
                     className="text-[10px] hover:underline"
                     style={{ color: cfg.color }}
+                    onClick={(e) => e.stopPropagation()}
                   >
                     {cfg.icon} {count} {cfg.label.toLowerCase()}
                   </Link>
@@ -351,7 +428,7 @@ export default function Dashboard() {
               })}
             </div>
           )}
-        </FleetCard>
+        </div>
         <FleetCard
           label="Total Storage"
           value={`${hs.storage_gwh.toFixed(0)} GWh`}

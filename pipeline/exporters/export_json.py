@@ -365,6 +365,9 @@ def export_all(db_path=DB_PATH):
     # 14. Project timeline analytics
     export_project_timeline(conn)
 
+    # 15b. EIS analytics
+    export_eis_analytics(conn)
+
     # 17. Intelligence Layer
     export_intelligence(conn)
 
@@ -779,7 +782,10 @@ def export_developer_profiles(conn, summaries):
 
 
 def export_oem_profiles(conn):
-    """Export OEM (equipment supplier) profiles to JSON."""
+    """Export OEM (equipment supplier) profiles to JSON.
+    Merges data from both the suppliers table AND eis_technical_specs
+    to ensure EIS-sourced supplier data appears in market share analytics.
+    """
     rows = conn.execute("""
         SELECT s.supplier, s.role, s.model, s.project_id,
                p.technology, p.status, p.state, p.capacity_mw, p.storage_mwh
@@ -792,6 +798,57 @@ def export_oem_profiles(conn):
     oem_data = defaultdict(list)
     for r in rows:
         oem_data[r['supplier']].append(dict(r))
+
+    # ── Bridge EIS supplier data into OEM profiles ──
+    # Track which project+role combos already exist to avoid double-counting
+    existing_pairs = set()
+    for r in rows:
+        existing_pairs.add((r['project_id'], r['role'], r['supplier']))
+
+    # EIS cell suppliers → bess_oem role
+    eis_cell_rows = conn.execute("""
+        SELECT e.project_id, e.cell_supplier, e.inverter_supplier, e.inverter_model,
+               p.technology, p.status, p.state, p.capacity_mw, p.storage_mwh
+        FROM eis_technical_specs e
+        JOIN projects p ON e.project_id = p.id
+        WHERE e.cell_supplier IS NOT NULL OR e.inverter_supplier IS NOT NULL
+    """).fetchall()
+
+    for r in eis_cell_rows:
+        # Bridge cell supplier as bess_oem
+        if r['cell_supplier']:
+            # Normalise multi-supplier entries (e.g. "CATL / Tesla" → use primary)
+            supplier_name = r['cell_supplier'].strip()
+            if (r['project_id'], 'bess_oem', supplier_name) not in existing_pairs:
+                oem_data[supplier_name].append({
+                    'supplier': supplier_name,
+                    'role': 'bess_oem',
+                    'model': None,
+                    'project_id': r['project_id'],
+                    'technology': r['technology'],
+                    'status': r['status'],
+                    'state': r['state'],
+                    'capacity_mw': r['capacity_mw'],
+                    'storage_mwh': r['storage_mwh'],
+                })
+                existing_pairs.add((r['project_id'], 'bess_oem', supplier_name))
+
+        # Bridge inverter supplier as inverter role
+        if r['inverter_supplier']:
+            supplier_name = r['inverter_supplier'].strip()
+            if (r['project_id'], 'inverter', supplier_name) not in existing_pairs:
+                oem_data[supplier_name].append({
+                    'supplier': supplier_name,
+                    'role': 'inverter',
+                    'model': r['inverter_model'],
+                    'project_id': r['project_id'],
+                    'technology': r['technology'],
+                    'status': r['status'],
+                    'state': r['state'],
+                    'capacity_mw': r['capacity_mw'],
+                    'storage_mwh': r['storage_mwh'],
+                })
+                existing_pairs.add((r['project_id'], 'inverter', supplier_name))
 
     seen_slugs = {}
     oems = []
@@ -1074,12 +1131,17 @@ def export_project_timeline(conn):
         SELECT p.id, p.name, p.technology, p.status, p.capacity_mw, p.storage_mwh,
                p.state, p.current_developer, p.first_seen, p.development_stage,
                p.cod_current, p.cod_original,
+               p.zombie_flag, p.data_confidence, p.confidence_score,
                (SELECT MIN(te.date) FROM timeline_events te
                 WHERE te.project_id = p.id AND te.event_type IN ('planning_submitted','conceived','planning_approved')
                ) as earliest_event
         FROM projects p
         ORDER BY p.cod_current NULLS LAST, p.capacity_mw DESC
     """).fetchall()
+
+    # Load scheme IDs and user overrides for curated filter fields
+    scheme_ids = _load_scheme_project_ids()
+    user_overrides = _load_user_overrides()
 
     projects = []
     for r in rows:
@@ -1104,6 +1166,16 @@ def export_project_timeline(conn):
 
         if timeline_year:
             d['first_seen_year'] = timeline_year
+
+        # Enrich with scheme contract flag and user overrides for curated filtering
+        pid = d.get('id')
+        if pid and pid in scheme_ids:
+            d['has_scheme_contract'] = True
+        if pid and pid in user_overrides.get('include', {}):
+            d['user_override'] = 'include'
+        elif pid and pid in user_overrides.get('exclude', {}):
+            d['user_override'] = 'exclude'
+
         projects.append(clean_none_values(d))
 
     # By year breakdown
@@ -2579,6 +2651,146 @@ def export_rez_access(conn):
 
 
 # ---- Intelligence Wrapper ---------------------------------------------------
+
+def export_eis_analytics(conn):
+    """Export EIS/EIA technical specification analytics across all projects."""
+    rows = conn.execute("""
+        SELECT e.*, p.name, p.technology, p.status, p.capacity_mw, p.storage_mwh,
+               p.state, p.current_developer
+        FROM eis_technical_specs e
+        JOIN projects p ON e.project_id = p.id
+        ORDER BY p.technology, p.capacity_mw DESC
+    """).fetchall()
+
+    wind_projects = []
+    bess_projects = []
+
+    # Accumulators for stats
+    wind_speeds, hub_heights, rotor_diameters, capacity_factors, wind_conn_dists = [], [], [], [], []
+    bess_efficiencies, bess_eff_ac, bess_durations, bess_conn_dists = [], [], [], []
+    chemistry_counts = {}
+    pcs_counts = {}
+    cell_suppliers = {}
+    inverter_suppliers = {}
+
+    for r in rows:
+        d = dict(r)
+        tech = d['technology']
+
+        base = {
+            'id': d['project_id'], 'name': d['name'], 'state': d['state'],
+            'capacity_mw': d['capacity_mw'], 'status': d['status'],
+            'developer': d.get('current_developer'),
+            'connection_voltage_kv': d.get('connection_voltage_kv'),
+            'connection_distance_km': d.get('connection_distance_km'),
+            'connection_substation_name': d.get('connection_substation_name'),
+            'nsp': d.get('network_service_provider'),
+            'connection_augmentation': d.get('connection_augmentation'),
+            'document_title': d.get('document_title'),
+            'document_url': d.get('document_url'),
+            'document_year': d.get('document_year'),
+        }
+
+        if tech == 'wind':
+            proj = {**base,
+                'storage_mwh': d.get('storage_mwh'),
+                'turbine_model': d.get('turbine_model'),
+                'turbine_count': d.get('turbine_count'),
+                'turbine_rated_power_mw': d.get('turbine_rated_power_mw'),
+                'hub_height_m': d.get('hub_height_m'),
+                'rotor_diameter_m': d.get('rotor_diameter_m'),
+                'wind_speed_mean_ms': d.get('wind_speed_mean_ms'),
+                'assumed_capacity_factor_pct': d.get('assumed_capacity_factor_pct'),
+                'assumed_annual_energy_gwh': d.get('assumed_annual_energy_gwh'),
+                'noise_limit_dba': d.get('noise_limit_dba'),
+                'minimum_setback_m': d.get('minimum_setback_m'),
+            }
+            wind_projects.append(clean_none_values(proj))
+            if d.get('wind_speed_mean_ms'): wind_speeds.append(d['wind_speed_mean_ms'])
+            if d.get('hub_height_m'): hub_heights.append(d['hub_height_m'])
+            if d.get('rotor_diameter_m'): rotor_diameters.append(d['rotor_diameter_m'])
+            if d.get('assumed_capacity_factor_pct'): capacity_factors.append(d['assumed_capacity_factor_pct'])
+            if d.get('connection_distance_km'): wind_conn_dists.append(d['connection_distance_km'])
+
+        elif tech == 'bess':
+            proj = {**base,
+                'storage_mwh': d.get('storage_mwh'),
+                'cell_chemistry': d.get('cell_chemistry'),
+                'cell_supplier': d.get('cell_supplier'),
+                'inverter_supplier': d.get('inverter_supplier'),
+                'inverter_model': d.get('inverter_model'),
+                'pcs_type': d.get('pcs_type'),
+                'round_trip_efficiency_pct': d.get('round_trip_efficiency_pct'),
+                'round_trip_efficiency_ac': d.get('round_trip_efficiency_ac'),
+                'duration_hours': d.get('duration_hours'),
+                'transformer_mva': d.get('transformer_mva'),
+            }
+            bess_projects.append(clean_none_values(proj))
+            if d.get('round_trip_efficiency_pct'): bess_efficiencies.append(d['round_trip_efficiency_pct'])
+            if d.get('round_trip_efficiency_ac'): bess_eff_ac.append(d['round_trip_efficiency_ac'])
+            if d.get('duration_hours'): bess_durations.append(d['duration_hours'])
+            if d.get('connection_distance_km'): bess_conn_dists.append(d['connection_distance_km'])
+            chem = d.get('cell_chemistry')
+            if chem: chemistry_counts[chem] = chemistry_counts.get(chem, 0) + 1
+            pcs = d.get('pcs_type')
+            if pcs: pcs_counts[pcs] = pcs_counts.get(pcs, 0) + 1
+            cs = d.get('cell_supplier')
+            if cs:
+                key = cs.split('(')[0].strip()  # Normalize "CATL (Contemporary...)" to "CATL"
+                cell_suppliers[key] = cell_suppliers.get(key, 0) + 1
+            inv = d.get('inverter_supplier')
+            if inv:
+                key = inv.split('(')[0].strip()
+                inverter_suppliers[key] = inverter_suppliers.get(key, 0) + 1
+
+    def avg(lst):
+        return round(sum(lst) / len(lst), 1) if lst else None
+
+    all_conn_dists = wind_conn_dists + bess_conn_dists
+    # Connection voltage breakdown
+    voltage_counts = {}
+    for r in rows:
+        v = dict(r).get('connection_voltage_kv')
+        if v:
+            key = f"{int(v)} kV"
+            voltage_counts[key] = voltage_counts.get(key, 0) + 1
+
+    result = {
+        'wind_projects': wind_projects,
+        'bess_projects': bess_projects,
+        'summary': {
+            'total_eis': len(rows),
+            'wind': len(wind_projects),
+            'bess': len(bess_projects),
+            'pumped_hydro': sum(1 for r in rows if dict(r)['technology'] == 'pumped_hydro'),
+            'wind_stats': {
+                'avg_wind_speed': avg(wind_speeds),
+                'avg_hub_height': avg(hub_heights),
+                'avg_rotor_diameter': avg(rotor_diameters),
+                'avg_capacity_factor': avg(capacity_factors),
+                'avg_connection_distance': avg(wind_conn_dists),
+            },
+            'bess_stats': {
+                'chemistry_breakdown': chemistry_counts,
+                'pcs_type_breakdown': pcs_counts,
+                'avg_efficiency_dc': avg(bess_efficiencies),
+                'avg_efficiency_ac': avg(bess_eff_ac),
+                'avg_duration': avg(bess_durations),
+                'avg_connection_distance': avg(bess_conn_dists),
+                'top_cell_suppliers': dict(sorted(cell_suppliers.items(), key=lambda x: -x[1])),
+                'top_inverter_suppliers': dict(sorted(inverter_suppliers.items(), key=lambda x: -x[1])),
+            },
+            'connection': {
+                'avg_distance': avg(all_conn_dists),
+                'voltage_breakdown': dict(sorted(voltage_counts.items())),
+            },
+        },
+        'exported_at': datetime.now().isoformat(),
+    }
+
+    write_json(os.path.join(DATA_DIR, 'analytics', 'eis-analytics.json'), result)
+    print(f"  analytics/eis-analytics.json ({len(wind_projects)} wind, {len(bess_projects)} BESS)")
+
 
 def export_intelligence(conn):
     """Export all intelligence layer JSON files."""

@@ -630,6 +630,10 @@ export interface TimelineProject {
   first_seen?: string
   first_seen_year?: number
   development_stage?: DevelopmentStage
+  zombie_flag?: 'zombie_stale' | 'zombie_minimal' | null
+  has_scheme_contract?: boolean
+  data_confidence?: Confidence
+  user_override?: 'include' | 'exclude'
 }
 
 export interface TimelineYearBreakdown {
@@ -825,4 +829,55 @@ export interface NewsData {
   articles: NewsArticle[];
   source_counts: Record<string, number>;
   total_articles: number;
+}
+
+// EIS/EIA Technical Analytics
+export interface EISWindProject {
+  id: string; name: string; state: State; capacity_mw: number; status: string; developer?: string
+  storage_mwh?: number
+  turbine_model?: string; turbine_count?: number; turbine_rated_power_mw?: number
+  hub_height_m?: number; rotor_diameter_m?: number
+  wind_speed_mean_ms?: number; assumed_capacity_factor_pct?: number; assumed_annual_energy_gwh?: number
+  noise_limit_dba?: number; minimum_setback_m?: number
+  connection_voltage_kv?: number; connection_distance_km?: number
+  connection_substation_name?: string; nsp?: string; connection_augmentation?: string
+  document_title?: string; document_url?: string; document_year?: number
+}
+
+export interface EISBESSProject {
+  id: string; name: string; state: State; capacity_mw: number; status: string; developer?: string
+  storage_mwh?: number
+  cell_chemistry?: string; cell_supplier?: string
+  inverter_supplier?: string; inverter_model?: string
+  pcs_type?: 'grid_forming' | 'grid_following' | 'both'
+  round_trip_efficiency_pct?: number; round_trip_efficiency_ac?: number
+  duration_hours?: number; transformer_mva?: number
+  connection_voltage_kv?: number; connection_distance_km?: number
+  connection_substation_name?: string; nsp?: string; connection_augmentation?: string
+  document_title?: string; document_url?: string; document_year?: number
+}
+
+export interface EISAnalyticsData {
+  wind_projects: EISWindProject[]
+  bess_projects: EISBESSProject[]
+  summary: {
+    total_eis: number; wind: number; bess: number; pumped_hydro: number
+    wind_stats: {
+      avg_wind_speed: number | null; avg_hub_height: number | null
+      avg_rotor_diameter: number | null; avg_capacity_factor: number | null
+      avg_connection_distance: number | null
+    }
+    bess_stats: {
+      chemistry_breakdown: Record<string, number>
+      pcs_type_breakdown: Record<string, number>
+      avg_efficiency_dc: number | null; avg_efficiency_ac: number | null
+      avg_duration: number | null; avg_connection_distance: number | null
+      top_cell_suppliers: Record<string, number>
+      top_inverter_suppliers: Record<string, number>
+    }
+    connection: {
+      avg_distance: number | null
+      voltage_breakdown: Record<string, number>
+    }
+  }
 }

@@ -4,6 +4,7 @@ import { useProjectIndex } from '../hooks/useProjectData'
 import { TECHNOLOGY_CONFIG, STATUS_CONFIG, CONFIDENCE_CONFIG, DEVELOPMENT_STAGE_CONFIG, type Technology, type ProjectStatus, type State, type Confidence, type DevelopmentStage } from '../lib/types'
 import type { ProjectSummary } from '../lib/types'
 import ProjectCard from '../components/common/ProjectCard'
+import { isCuratedProject } from '../lib/curatedFilter'
 
 type SortKey = 'name' | 'capacity_mw' | 'state' | 'status'
 type PipelineTier = 'curated' | 'extended' | 'onshore' | 'full'
@@ -18,27 +19,6 @@ const PIPELINE_TIERS: { key: PipelineTier; label: string; shortLabel: string }[]
 function parseMulti<T extends string>(raw: string | null): T[] {
   if (!raw) return []
   return raw.split(',').filter(Boolean) as T[]
-}
-
-/** Tier 1: Curated — credible projects only */
-function isCuratedProject(p: ProjectSummary): boolean {
-  // User override takes precedence
-  if (p.user_override === 'include') return true
-  if (p.user_override === 'exclude') return false
-  // Non-development always included
-  if (p.status !== 'development') return true
-  // Offshore wind always excluded from curated
-  if (p.technology === 'offshore_wind') return false
-  // CIS/LTESA scheme projects always included (even if zombie/low confidence)
-  if (p.has_scheme_contract) return true
-  // Zombies excluded
-  if (p.zombie_flag) return false
-  // EPBC approved/submitted included regardless of confidence
-  if (p.development_stage === 'epbc_approved' || p.development_stage === 'epbc_submitted') return true
-  // Medium+ confidence included
-  if (p.data_confidence !== 'low') return true
-  // Low-confidence planning_submitted and early_stage excluded
-  return false
 }
 
 /** Tier 2: Extended — all non-zombie, no offshore */
@@ -85,6 +65,7 @@ export default function ProjectList() {
   const stateFilters = parseMulti<State>(searchParams.get('state'))
   const confidenceFilter = searchParams.get('confidence') as Confidence | null
   const stageFilters = parseMulti<DevelopmentStage>(searchParams.get('stage'))
+  const eisOnly = searchParams.get('eis') === '1'
   const fromPage = searchParams.get('from')
   const fromLabel = searchParams.get('fromLabel')
   const customTitle = searchParams.get('title')
@@ -125,6 +106,7 @@ export default function ProjectList() {
     if (stateFilters.length) result = result.filter((p) => stateFilters.includes(p.state))
     if (confidenceFilter) result = result.filter((p) => p.data_confidence === confidenceFilter)
     if (stageFilters.length) result = result.filter((p) => p.development_stage && stageFilters.includes(p.development_stage))
+    if (eisOnly) result = result.filter((p) => p.has_eis_data)
 
     result.sort((a, b) => {
       let cmp = 0
@@ -148,7 +130,7 @@ export default function ProjectList() {
     })
 
     return result
-  }, [allProjects, idSet, currentTier, techFilters.join(','), statusFilters.join(','), stateFilters.join(','), confidenceFilter, stageFilters.join(','), sortBy, sortDesc])
+  }, [allProjects, idSet, currentTier, techFilters.join(','), statusFilters.join(','), stateFilters.join(','), confidenceFilter, stageFilters.join(','), eisOnly, sortBy, sortDesc])
 
   if (loading) {
     return (
@@ -159,7 +141,7 @@ export default function ProjectList() {
   }
 
   const totalCapacity = filtered.reduce((sum, p) => sum + p.capacity_mw, 0)
-  const activeFilters = [techFilters.length > 0, statusFilters.length > 0, stateFilters.length > 0, confidenceFilter, stageFilters.length > 0].filter(Boolean).length
+  const activeFilters = [techFilters.length > 0, statusFilters.length > 0, stateFilters.length > 0, confidenceFilter, stageFilters.length > 0, eisOnly].filter(Boolean).length
 
   function clearFilters() {
     const sp = new URLSearchParams()
@@ -397,6 +379,28 @@ export default function ProjectList() {
             </div>
           </div>
         )}
+
+        {/* EIS filter */}
+        <div>
+          <div className="text-[10px] font-semibold uppercase tracking-wider text-[var(--color-text-muted)] mb-1.5">Data</div>
+          <div className="flex items-center gap-1.5">
+            <button
+              onClick={() => {
+                const sp = new URLSearchParams(searchParams)
+                if (eisOnly) sp.delete('eis')
+                else sp.set('eis', '1')
+                setSearchParams(sp, { replace: true })
+              }}
+              className={`text-xs px-2.5 py-1 rounded-full border transition-colors whitespace-nowrap ${
+                eisOnly
+                  ? 'bg-[var(--color-primary)]/15 text-[var(--color-primary)] border-[var(--color-primary)]/30 font-medium'
+                  : 'border-[var(--color-border)] text-[var(--color-text-muted)] hover:border-[var(--color-text-muted)]'
+              }`}
+            >
+              Has EIS data
+            </button>
+          </div>
+        </div>
 
         {/* Sort */}
         <div>

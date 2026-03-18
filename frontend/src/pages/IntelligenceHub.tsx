@@ -49,6 +49,12 @@ const FEATURES = [
     description: 'REZ congestion and connection queue analysis',
     route: '/intelligence/grid-connection',
   },
+  {
+    icon: '\u{1F4D1}',
+    title: 'EIS Technical Specs',
+    description: 'Wind resource, BESS chemistry, grid connection data from Environmental Impact Statements',
+    route: '/intelligence/eis-technical',
+  },
 ] as const
 
 export default function IntelligenceHub() {

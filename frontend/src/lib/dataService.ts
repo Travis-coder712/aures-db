@@ -5,7 +5,7 @@
  * In production (GitHub Pages), they're served as static files.
  * In development (Vite dev server), they're served from the public/ directory.
  */
-import type { ProjectSummary, Project, Technology, ProjectStatus, State, LeagueTable, LeagueTableIndex, LeagueTechnology, DeveloperIndex, OEMIndex, ContractorIndex, OfftakerIndex, MapProject, CODDriftData, DataSourcesIndex, BESSCapexData, ProjectTimelineData, SchemeTrackerData, DriftAnalysisData, WindResourceData, DunkelflaunteData, EnergyMixData, DeveloperScoreData, RevenueIntelData, GridConnectionData, NewsData, REZAccessMap } from './types'
+import type { ProjectSummary, Project, Technology, ProjectStatus, State, LeagueTable, LeagueTableIndex, LeagueTechnology, DeveloperIndex, OEMIndex, ContractorIndex, OfftakerIndex, MapProject, CODDriftData, DataSourcesIndex, BESSCapexData, ProjectTimelineData, SchemeTrackerData, DriftAnalysisData, WindResourceData, DunkelflaunteData, EnergyMixData, DeveloperScoreData, RevenueIntelData, GridConnectionData, NewsData, REZAccessMap, EISAnalyticsData } from './types'
 
 const BASE = import.meta.env.BASE_URL + 'data'
 
@@ -409,6 +409,21 @@ export async function fetchNews(): Promise<NewsData | null> {
     if (!resp.ok) return null
     newsCache = (await resp.json()) as NewsData
     return newsCache
+  } catch { return null }
+}
+
+// ============================================================
+// EIS Analytics
+// ============================================================
+
+let eisAnalyticsCache: EISAnalyticsData | null = null
+export async function fetchEISAnalytics(): Promise<EISAnalyticsData | null> {
+  if (eisAnalyticsCache) return eisAnalyticsCache
+  try {
+    const resp = await fetch(`${BASE}/analytics/eis-analytics.json`)
+    if (!resp.ok) return null
+    eisAnalyticsCache = (await resp.json()) as EISAnalyticsData
+    return eisAnalyticsCache
   } catch { return null }
 }
 

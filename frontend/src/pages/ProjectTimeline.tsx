@@ -7,6 +7,7 @@ import {
 import { fetchProjectTimeline } from '../lib/dataService'
 import { TECHNOLOGY_CONFIG, STATUS_CONFIG } from '../lib/types'
 import type { ProjectTimelineData, Technology, State, ProjectStatus } from '../lib/types'
+import { isCuratedProject, CURATED_NOTE, CURATED_BENCHMARK } from '../lib/curatedFilter'
 
 // ============================================================
 // Icons — defined BEFORE const arrays per project pattern
@@ -49,6 +50,10 @@ export default function ProjectTimeline() {
   const [metric, setMetric] = useState<MetricMode>('count')
   const [split, setSplit] = useState<SplitMode>('technology')
 
+  // Curated toggle (default on)
+  const [curatedView, setCuratedView] = useState(true)
+  const [showCuratedInfo, setShowCuratedInfo] = useState(false)
+
   // Multi-select filters
   const [techFilters, setTechFilters] = useState<Technology[]>([])
   const [stateFilters, setStateFilters] = useState<State[]>([])
@@ -75,6 +80,9 @@ export default function ProjectTimeline() {
     if (!data) return { filteredYearData: [], filteredProjects: [], yearRange: [2000, 2026] }
 
     let projects = data.projects.filter(p => p.first_seen_year)
+
+    // Apply curated filter first
+    if (curatedView) projects = projects.filter(isCuratedProject)
 
     if (techFilters.length) projects = projects.filter(p => techFilters.includes(p.technology))
     if (stateFilters.length) projects = projects.filter(p => stateFilters.includes(p.state))
@@ -135,7 +143,7 @@ export default function ProjectTimeline() {
       filteredProjects: projects,
       yearRange: [minYear, maxYear],
     }
-  }, [data, techFilters, stateFilters, statusFilters, split])
+  }, [data, curatedView, techFilters, stateFilters, statusFilters, split])
 
   const navigateToProjects = useCallback((ids: string[], title: string) => {
     const params = new URLSearchParams()
@@ -239,6 +247,43 @@ export default function ProjectTimeline() {
 
       {/* Multi-select Filter Chips */}
       <div className="mb-4 space-y-3">
+        {/* Pipeline view toggle */}
+        <div className="flex items-center gap-2 flex-wrap">
+          <span className="text-[10px] font-semibold uppercase tracking-wider text-[var(--color-text-muted)] w-12">
+            View
+          </span>
+          {(['curated', 'full'] as const).map((v) => {
+            const isActive = v === 'curated' ? curatedView : !curatedView
+            return (
+              <button
+                key={v}
+                onClick={() => setCuratedView(v === 'curated')}
+                className={`text-xs px-2.5 py-1 rounded-full border transition-colors ${
+                  isActive
+                    ? 'border-transparent bg-[var(--color-primary)]/20 text-[var(--color-primary)] font-medium'
+                    : 'border-[var(--color-border)] text-[var(--color-text-muted)] hover:border-[var(--color-text-muted)]'
+                }`}
+              >
+                {v === 'curated' ? 'Curated' : 'Full Pipeline'}
+              </button>
+            )
+          })}
+          {curatedView && (
+            <button
+              onClick={() => setShowCuratedInfo(!showCuratedInfo)}
+              className="text-[10px] text-[var(--color-text-muted)] hover:text-[var(--color-primary)] underline decoration-dotted"
+            >
+              What is curated?
+            </button>
+          )}
+        </div>
+        {showCuratedInfo && curatedView && (
+          <div className="text-[11px] text-[var(--color-text-muted)] bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-lg p-3 leading-relaxed max-w-2xl">
+            <strong className="text-[var(--color-text)]">Curated</strong> {CURATED_NOTE}
+            <span className="block mt-1 text-[10px] opacity-75">{CURATED_BENCHMARK}</span>
+          </div>
+        )}
+
         {/* Technology */}
         <div className="flex items-center gap-2 flex-wrap">
           <span className="text-[10px] font-semibold uppercase tracking-wider text-[var(--color-text-muted)] w-12">
