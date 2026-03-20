@@ -45,9 +45,9 @@ function fmtMW(mw: number): string {
 // Component
 // ============================================================
 
-const TABS = ['overview', 'tracker'] as const
+const TABS = ['overview', 'tracker', 'watchlist'] as const
 type Tab = typeof TABS[number]
-const TAB_LABELS: Record<Tab, string> = { overview: 'Overview', tracker: 'Milestone Tracker' }
+const TAB_LABELS: Record<Tab, string> = { overview: 'Overview', tracker: 'Milestone Tracker', watchlist: 'Key Projects' }
 
 export default function SchemeTracker() {
   const [activeTab, setActiveTab] = useState<Tab>('overview')
@@ -165,6 +165,7 @@ export default function SchemeTracker() {
   const hasFilters = selectedPrograms.length > 0 || selectedRounds.length > 0 || selectedStates.length > 0
   const [showMobileFilters, setShowMobileFilters] = useState(false)
   const [showEssay, setShowEssay] = useState(false)
+  const [pctMode, setPctMode] = useState<'projects' | 'mw'>('projects')
   const filterCount = (selectedPrograms.length > 0 ? 1 : 0) + (selectedRounds.length > 0 ? 1 : 0) + (selectedStates.length > 0 ? 1 : 0)
 
   function renderSchemeFilters() {
@@ -323,6 +324,36 @@ export default function SchemeTracker() {
       ) : activeTab === 'tracker' && data && (
         <>
 
+      {/* Tracker intro + % toggle */}
+      <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl p-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+        <p className="text-xs text-[var(--color-text-muted)] leading-relaxed">
+          Use filters to evaluate the status of each round and click through to relevant projects.
+        </p>
+        <div className="flex items-center gap-1.5 shrink-0">
+          <span className="text-[10px] text-[var(--color-text-muted)] mr-1">Show as</span>
+          <button
+            onClick={() => setPctMode('projects')}
+            className={`text-[10px] px-2.5 py-1 rounded-full border transition-colors ${
+              pctMode === 'projects'
+                ? 'border-blue-500 bg-blue-500/20 text-blue-400 font-medium'
+                : 'border-[var(--color-border)] text-[var(--color-text-muted)] hover:border-[var(--color-text-muted)]'
+            }`}
+          >
+            # Projects
+          </button>
+          <button
+            onClick={() => setPctMode('mw')}
+            className={`text-[10px] px-2.5 py-1 rounded-full border transition-colors ${
+              pctMode === 'mw'
+                ? 'border-blue-500 bg-blue-500/20 text-blue-400 font-medium'
+                : 'border-[var(--color-border)] text-[var(--color-text-muted)] hover:border-[var(--color-text-muted)]'
+            }`}
+          >
+            MW
+          </button>
+        </div>
+      </div>
+
       {/* Mobile filter button */}
       <div className="lg:hidden flex items-center gap-2">
         <button
@@ -385,24 +416,33 @@ export default function SchemeTracker() {
           label="Operating / Commissioning"
           count={(summaryStats.stages['operating']?.count || 0) + (summaryStats.stages['commissioning']?.count || 0)}
           mw={(summaryStats.stages['operating']?.mw || 0) + (summaryStats.stages['commissioning']?.mw || 0)}
+          totalProjects={summaryStats.totalProjects}
+          totalMW={summaryStats.totalMW}
+          pctMode={pctMode}
           color="#22c55e"
         />
         <SummaryCard
           label="Construction"
           count={summaryStats.stages['construction']?.count || 0}
           mw={summaryStats.stages['construction']?.mw || 0}
+          totalProjects={summaryStats.totalProjects}
+          totalMW={summaryStats.totalMW}
+          pctMode={pctMode}
           color="#3b82f6"
         />
         <SummaryCard
           label="Development"
           count={(summaryStats.stages['development']?.count || 0) + (summaryStats.stages['planning_approved']?.count || 0) + (summaryStats.stages['unknown']?.count || 0)}
           mw={(summaryStats.stages['development']?.mw || 0) + (summaryStats.stages['planning_approved']?.mw || 0) + (summaryStats.stages['unknown']?.mw || 0)}
+          totalProjects={summaryStats.totalProjects}
+          totalMW={summaryStats.totalMW}
+          pctMode={pctMode}
           color="#f59e0b"
         />
       </div>
 
       {/* Outcomes Pie Chart */}
-      <OutcomesPieChart rounds={filteredRounds} />
+      <OutcomesPieChart rounds={filteredRounds} pctMode={pctMode} />
 
       {/* Round Progress Cards */}
       <div className="space-y-3">
@@ -447,6 +487,407 @@ export default function SchemeTracker() {
 
         </>
       )}
+
+      {/* Watchlist Tab */}
+      {activeTab === 'watchlist' && (
+        data ? (
+          <KeyProjectsTab rounds={data.rounds} />
+        ) : (
+          <div className="p-6 text-center text-[var(--color-text-muted)]">
+            <p>Loading project data...</p>
+          </div>
+        )
+      )}
+    </div>
+  )
+}
+
+// ============================================================
+// Key Projects (Watchlist) Tab
+// ============================================================
+
+type SchemeFilter = 'all' | 'CIS' | 'LTESA'
+
+interface RoundWatchlist {
+  round: SchemeTrackerRound
+  totalMW: number
+  securedMW: number       // operating + construction
+  atRiskMW: number        // development + other
+  securedPct: number
+  thresholdMW: number     // MW needed to meet threshold
+  gapMW: number           // shortfall to threshold (can be negative = already met)
+  criticalProjects: (SchemeTrackerProject & { cumulativeMW: number; needed: boolean })[]
+  allDevProjects: SchemeTrackerProject[]
+}
+
+function KeyProjectsTab({ rounds }: { rounds: SchemeTrackerRound[] }) {
+  const [schemeFilter, setSchemeFilter] = useState<SchemeFilter>('all')
+  const [threshold, setThreshold] = useState(80)
+  const [minMW, setMinMW] = useState(100)
+  const [collapsedRounds, setCollapsedRounds] = useState<Set<string>>(new Set())
+
+  const filteredRounds = useMemo(() => {
+    if (schemeFilter === 'all') return rounds
+    return rounds.filter(r => r.scheme === schemeFilter)
+  }, [rounds, schemeFilter])
+
+  const watchlistData: RoundWatchlist[] = useMemo(() => {
+    return filteredRounds
+      .filter(r => r.num_projects > 0 && r.total_capacity_mw > 0)
+      .sort((a, b) => a.announced_date.localeCompare(b.announced_date))
+      .map(round => {
+        const securedStages = new Set(['operating', 'commissioning', 'construction'])
+        const securedMW = round.projects
+          .filter(p => securedStages.has(p.stage))
+          .reduce((s, p) => s + p.capacity_mw, 0)
+        const atRiskMW = round.total_capacity_mw - securedMW
+        const securedPct = round.total_capacity_mw > 0 ? (securedMW / round.total_capacity_mw) * 100 : 0
+        const thresholdMW = round.total_capacity_mw * (threshold / 100)
+        const gapMW = thresholdMW - securedMW
+
+        // Get all development/planning projects sorted by size
+        const devProjects = round.projects
+          .filter(p => !securedStages.has(p.stage))
+          .sort((a, b) => b.capacity_mw - a.capacity_mw)
+
+        // Mark which projects are "critical" — needed to bridge the gap
+        let cumulativeMW = 0
+        const criticalProjects = devProjects
+          .filter(p => p.capacity_mw >= minMW)
+          .map(p => {
+            const wasNeeded = cumulativeMW < gapMW
+            cumulativeMW += p.capacity_mw
+            return { ...p, cumulativeMW, needed: wasNeeded && gapMW > 0 }
+          })
+
+        return {
+          round,
+          totalMW: round.total_capacity_mw,
+          securedMW,
+          atRiskMW,
+          securedPct,
+          thresholdMW,
+          gapMW,
+          criticalProjects,
+          allDevProjects: devProjects,
+        }
+      })
+  }, [filteredRounds, threshold, minMW])
+
+  // Summary stats
+  const summary = useMemo(() => {
+    const total = watchlistData.reduce((s, r) => s + r.totalMW, 0)
+    const secured = watchlistData.reduce((s, r) => s + r.securedMW, 0)
+    const critical = watchlistData.reduce((s, r) => s + r.criticalProjects.filter(p => p.needed).length, 0)
+    const roundsMeetingThreshold = watchlistData.filter(r => r.gapMW <= 0).length
+    return { total, secured, critical, roundsMeetingThreshold, totalRounds: watchlistData.length }
+  }, [watchlistData])
+
+  function toggleRoundCollapse(id: string) {
+    setCollapsedRounds(prev => {
+      const next = new Set(prev)
+      if (next.has(id)) next.delete(id)
+      else next.add(id)
+      return next
+    })
+  }
+
+  return (
+    <div className="space-y-5">
+      {/* Controls */}
+      <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl p-4 space-y-4">
+        {/* Scheme filter */}
+        <div className="flex items-center gap-3 flex-wrap">
+          <span className="text-[10px] font-semibold uppercase tracking-wider text-[var(--color-text-muted)]">Scheme</span>
+          {(['all', 'CIS', 'LTESA'] as SchemeFilter[]).map(f => (
+            <button
+              key={f}
+              onClick={() => setSchemeFilter(f)}
+              className={`text-xs px-3 py-1.5 rounded-full border transition-colors ${
+                schemeFilter === f
+                  ? 'border-[var(--color-primary)] bg-[var(--color-primary)]/20 text-[var(--color-primary)] font-medium'
+                  : 'border-[var(--color-border)] text-[var(--color-text-muted)] hover:border-[var(--color-text-muted)]'
+              }`}
+            >
+              {f === 'all' ? 'Both' : f}
+            </button>
+          ))}
+        </div>
+
+        {/* Sliders */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <div className="flex items-center justify-between mb-1.5">
+              <label className="text-[10px] font-semibold uppercase tracking-wider text-[var(--color-text-muted)]">
+                Round success threshold
+              </label>
+              <span className="text-xs font-bold text-[var(--color-primary)]">{threshold}%</span>
+            </div>
+            <input
+              type="range"
+              min={50}
+              max={100}
+              step={5}
+              value={threshold}
+              onChange={e => setThreshold(Number(e.target.value))}
+              className="w-full accent-[var(--color-primary)] h-1.5"
+            />
+            <div className="flex justify-between text-[9px] text-[var(--color-text-muted)] mt-0.5">
+              <span>50%</span><span>75%</span><span>100%</span>
+            </div>
+          </div>
+          <div>
+            <div className="flex items-center justify-between mb-1.5">
+              <label className="text-[10px] font-semibold uppercase tracking-wider text-[var(--color-text-muted)]">
+                Min project size
+              </label>
+              <span className="text-xs font-bold text-[var(--color-primary)]">{minMW} MW</span>
+            </div>
+            <input
+              type="range"
+              min={0}
+              max={500}
+              step={50}
+              value={minMW}
+              onChange={e => setMinMW(Number(e.target.value))}
+              className="w-full accent-[var(--color-primary)] h-1.5"
+            />
+            <div className="flex justify-between text-[9px] text-[var(--color-text-muted)] mt-0.5">
+              <span>0 MW</span><span>250 MW</span><span>500 MW</span>
+            </div>
+          </div>
+        </div>
+
+        <p className="text-[10px] text-[var(--color-text-muted)] leading-relaxed">
+          Shows projects not yet in construction or operation that are needed for each round to reach <strong className="text-[var(--color-text)]">{threshold}%</strong> of
+          its awarded capacity. Projects <strong className="text-[var(--color-text)]">{'\u2265'}{minMW} MW</strong> are shown, sorted by size. Critical projects (needed to bridge the gap) are highlighted.
+        </p>
+      </div>
+
+      {/* Summary cards */}
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+        <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl p-3 text-center">
+          <div className="text-2xl font-bold text-[var(--color-text)]">{summary.roundsMeetingThreshold}/{summary.totalRounds}</div>
+          <div className="text-[10px] text-[var(--color-text-muted)] mt-0.5">Rounds at {threshold}%+</div>
+        </div>
+        <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl p-3 text-center">
+          <div className="text-2xl font-bold text-[#22c55e]">{fmtMW(summary.secured)}</div>
+          <div className="text-[10px] text-[var(--color-text-muted)] mt-0.5">Secured (built/building)</div>
+        </div>
+        <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl p-3 text-center">
+          <div className="text-2xl font-bold text-[#f59e0b]">{fmtMW(summary.total - summary.secured)}</div>
+          <div className="text-[10px] text-[var(--color-text-muted)] mt-0.5">At risk (development)</div>
+        </div>
+        <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl p-3 text-center">
+          <div className="text-2xl font-bold text-[#ef4444]">{summary.critical}</div>
+          <div className="text-[10px] text-[var(--color-text-muted)] mt-0.5">Critical projects</div>
+        </div>
+      </div>
+
+      {/* Round cards */}
+      <div className="space-y-3">
+        {watchlistData.map(wd => {
+          const collapsed = collapsedRounds.has(wd.round.id)
+          const schemeColor = wd.round.scheme === 'CIS' ? '#f59e0b' : '#8b5cf6'
+          const thresholdPct = threshold
+          const gapPositive = wd.gapMW > 0
+
+          return (
+            <div key={wd.round.id} className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl overflow-hidden">
+              {/* Round header */}
+              <button
+                onClick={() => toggleRoundCollapse(wd.round.id)}
+                className="w-full text-left p-4 hover:bg-[var(--color-bg)]/30 transition-colors"
+              >
+                <div className="flex items-start justify-between mb-2">
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center gap-2 mb-0.5">
+                      <span
+                        className="text-[10px] font-semibold px-2 py-0.5 rounded-full shrink-0"
+                        style={{ backgroundColor: `${schemeColor}20`, color: schemeColor }}
+                      >
+                        {wd.round.scheme}
+                      </span>
+                      <h3 className="text-sm font-semibold text-[var(--color-text)] truncate">{wd.round.round}</h3>
+                    </div>
+                    <p className="text-[10px] text-[var(--color-text-muted)]">
+                      {fmtMW(wd.totalMW)} awarded · {wd.round.num_projects} projects · {wd.round.announced_date}
+                    </p>
+                  </div>
+                  <div className="flex items-center gap-2 shrink-0 ml-2">
+                    {/* Status badge */}
+                    <span
+                      className="text-[10px] font-semibold px-2 py-0.5 rounded-full"
+                      style={{
+                        backgroundColor: gapPositive ? '#ef444420' : '#22c55e20',
+                        color: gapPositive ? '#ef4444' : '#22c55e',
+                      }}
+                    >
+                      {gapPositive
+                        ? `${fmtMW(wd.gapMW)} gap`
+                        : `${thresholdPct}% met`}
+                    </span>
+                    <svg
+                      className={`w-4 h-4 text-[var(--color-text-muted)] transition-transform ${collapsed ? '' : 'rotate-180'}`}
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                    >
+                      <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
+                    </svg>
+                  </div>
+                </div>
+
+                {/* Progress bar */}
+                <div className="relative">
+                  <div className="flex h-3 rounded-full overflow-hidden bg-[var(--color-bg)]">
+                    {/* Secured (operating/construction) */}
+                    {wd.securedMW > 0 && (
+                      <div
+                        className="transition-all"
+                        style={{ width: `${wd.securedPct}%`, backgroundColor: '#22c55e' }}
+                        title={`Secured: ${fmtMW(wd.securedMW)} (${wd.securedPct.toFixed(0)}%)`}
+                      />
+                    )}
+                    {/* At risk (development) */}
+                    {wd.atRiskMW > 0 && (
+                      <div
+                        className="transition-all"
+                        style={{ width: `${100 - wd.securedPct}%`, backgroundColor: '#f59e0b40' }}
+                      />
+                    )}
+                  </div>
+                  {/* Threshold marker */}
+                  <div
+                    className="absolute top-0 h-3 border-r-2 border-dashed border-white/60"
+                    style={{ left: `${thresholdPct}%` }}
+                    title={`${thresholdPct}% threshold: ${fmtMW(wd.thresholdMW)}`}
+                  />
+                </div>
+                <div className="flex items-center justify-between mt-1">
+                  <div className="flex items-center gap-3 text-[10px] text-[var(--color-text-muted)]">
+                    <span className="flex items-center gap-1">
+                      <span className="w-2 h-2 rounded-full bg-[#22c55e]" />
+                      Secured {wd.securedPct.toFixed(0)}%
+                    </span>
+                    <span className="flex items-center gap-1">
+                      <span className="w-2 h-2 rounded-full bg-[#f59e0b]/40" />
+                      At risk {(100 - wd.securedPct).toFixed(0)}%
+                    </span>
+                  </div>
+                  <span className="text-[10px] text-[var(--color-text-muted)]">
+                    Threshold: {fmtMW(wd.thresholdMW)}
+                  </span>
+                </div>
+              </button>
+
+              {/* Expanded project list */}
+              {!collapsed && (
+                <div className="border-t border-[var(--color-border)]">
+                  {wd.criticalProjects.length === 0 ? (
+                    <div className="p-4 text-center text-xs text-[var(--color-text-muted)]">
+                      {wd.gapMW <= 0
+                        ? `This round already meets the ${thresholdPct}% threshold with secured projects.`
+                        : `No development projects {'\u2265'} ${minMW} MW found. Try lowering the minimum project size.`}
+                    </div>
+                  ) : (
+                    <div className="divide-y divide-[var(--color-border)]/50">
+                      {wd.criticalProjects.map((p, i) => (
+                        <div
+                          key={`${p.name}-${i}`}
+                          className={`flex items-center gap-3 px-4 py-3 ${
+                            p.needed ? 'bg-red-500/5' : ''
+                          }`}
+                        >
+                          {/* Critical indicator */}
+                          <div className="shrink-0">
+                            {p.needed ? (
+                              <span className="w-6 h-6 rounded-full bg-red-500/20 flex items-center justify-center text-[10px] font-bold text-red-400">
+                                !
+                              </span>
+                            ) : (
+                              <span className="w-6 h-6 rounded-full bg-[var(--color-bg)] flex items-center justify-center text-[10px] text-[var(--color-text-muted)]">
+                                {i + 1}
+                              </span>
+                            )}
+                          </div>
+
+                          {/* Project info */}
+                          <div className="flex-1 min-w-0">
+                            <div className="flex items-center gap-2">
+                              {p.project_id ? (
+                                <Link
+                                  to={`/projects/${p.project_id}?from=intelligence/scheme-tracker&fromLabel=Back to Scheme Intelligence`}
+                                  className="text-xs font-medium text-blue-400 hover:text-blue-300 truncate"
+                                >
+                                  {p.name}
+                                </Link>
+                              ) : (
+                                <span className="text-xs font-medium text-[var(--color-text)] truncate">{p.name}</span>
+                              )}
+                              {p.needed && (
+                                <span className="text-[9px] font-semibold px-1.5 py-0.5 rounded-full bg-red-500/20 text-red-400 shrink-0">
+                                  Critical
+                                </span>
+                              )}
+                            </div>
+                            <div className="flex items-center gap-2 mt-0.5 text-[10px] text-[var(--color-text-muted)]">
+                              <span>{p.developer}</span>
+                              <span>·</span>
+                              <span>{p.state}</span>
+                              <span>·</span>
+                              <span className="px-1.5 py-0 rounded-full border border-[var(--color-border)]">
+                                {formatTech(p.technology)}
+                              </span>
+                              <span>·</span>
+                              <span
+                                className="px-1.5 py-0 rounded-full"
+                                style={{ backgroundColor: `${stageColor(p.stage)}20`, color: stageColor(p.stage) }}
+                              >
+                                {stageLabel(p.stage)}
+                              </span>
+                            </div>
+                          </div>
+
+                          {/* Capacity */}
+                          <div className="shrink-0 text-right">
+                            <div className="text-sm font-bold text-[var(--color-text)]">{p.capacity_mw.toLocaleString()} MW</div>
+                            <div className="text-[9px] text-[var(--color-text-muted)]">
+                              {((p.capacity_mw / wd.totalMW) * 100).toFixed(0)}% of round
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+
+                  {/* Round summary */}
+                  <div className="px-4 py-3 bg-[var(--color-bg)]/50 text-[10px] text-[var(--color-text-muted)] flex items-center justify-between flex-wrap gap-2">
+                    <span>
+                      {wd.criticalProjects.filter(p => p.needed).length} critical project{wd.criticalProjects.filter(p => p.needed).length !== 1 ? 's' : ''} · {wd.allDevProjects.length} total in development
+                    </span>
+                    {gapPositive && wd.criticalProjects.length > 0 && (
+                      <span className="text-amber-400">
+                        {wd.criticalProjects.filter(p => p.needed).reduce((s, p) => s + p.capacity_mw, 0).toLocaleString()} MW needed to close gap
+                      </span>
+                    )}
+                  </div>
+                </div>
+              )}
+            </div>
+          )
+        })}
+      </div>
+
+      {/* Methodology note */}
+      <div className="text-xs text-[var(--color-text-muted)] italic space-y-1">
+        <p>
+          "Secured" = projects in construction, commissioning, or operation.
+          "Critical" = development-stage projects needed (by capacity, largest first) to bridge the gap between secured MW and the {threshold}% threshold.
+        </p>
+        <p>
+          Adjusting the threshold or minimum size changes which projects are flagged. A round showing "met" means its secured capacity already exceeds the threshold.
+        </p>
+      </div>
     </div>
   )
 }
@@ -822,7 +1263,7 @@ function SchemeOverviewTab({ cisRounds, ltesaRounds, loading }: { cisRounds: CIS
 // Outcomes Pie Chart
 // ============================================================
 
-function OutcomesPieChart({ rounds }: { rounds: SchemeTrackerRound[] }) {
+function OutcomesPieChart({ rounds, pctMode }: { rounds: SchemeTrackerRound[]; pctMode: 'projects' | 'mw' }) {
   // Aggregate stages across filtered rounds
   const pieData = useMemo(() => {
     const stages: Record<string, { count: number; mw: number }> = {}
@@ -860,8 +1301,9 @@ function OutcomesPieChart({ rounds }: { rounds: SchemeTrackerRound[] }) {
       .sort((a, b) => a.order - b.order)
   }, [rounds])
 
-  const total = pieData.reduce((s, d) => s + d.count, 0)
-  if (total === 0) return null
+  const totalCount = pieData.reduce((s, d) => s + d.count, 0)
+  const totalMW = pieData.reduce((s, d) => s + d.mw, 0)
+  if (totalCount === 0) return null
 
   // Per-round timeline: how many months since announcement and stage breakdown
   const roundTimeline = useMemo(() => {
@@ -872,18 +1314,22 @@ function OutcomesPieChart({ rounds }: { rounds: SchemeTrackerRound[] }) {
         const operating = (r.by_stage['operating'] || 0) + (r.by_stage['commissioning'] || 0)
         const construction = r.by_stage['construction'] || 0
         const dev = r.num_projects - operating - construction
+        const opMW = r.projects.filter(p => p.stage === 'operating' || p.stage === 'commissioning').reduce((s, p) => s + p.capacity_mw, 0)
+        const conMW = r.projects.filter(p => p.stage === 'construction').reduce((s, p) => s + p.capacity_mw, 0)
+        const devMW = r.total_capacity_mw - opMW - conMW
         return {
           id: r.id,
           label: `${r.scheme} ${r.round}`,
           months: r.months_since_announced,
           total: r.num_projects,
-          operating,
-          construction,
-          dev,
-          progressPct: r.num_projects > 0 ? ((operating + construction) / r.num_projects * 100) : 0,
+          totalMW: r.total_capacity_mw,
+          operating, construction, dev,
+          opMW, conMW, devMW,
         }
       })
   }, [rounds])
+
+  const pieDataKey = pctMode === 'mw' ? 'mw' : 'count'
 
   return (
     <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl p-4">
@@ -896,7 +1342,7 @@ function OutcomesPieChart({ rounds }: { rounds: SchemeTrackerRound[] }) {
             <PieChart>
               <Pie
                 data={pieData}
-                dataKey="count"
+                dataKey={pieDataKey}
                 nameKey="name"
                 cx="50%"
                 cy="50%"
@@ -904,6 +1350,8 @@ function OutcomesPieChart({ rounds }: { rounds: SchemeTrackerRound[] }) {
                 outerRadius={80}
                 paddingAngle={2}
                 strokeWidth={0}
+                label={({ percent }) => `${Math.round((percent ?? 0) * 100)}%`}
+                labelLine={false}
               >
                 {pieData.map((entry, i) => (
                   <Cell key={i} fill={entry.color} />
@@ -914,21 +1362,29 @@ function OutcomesPieChart({ rounds }: { rounds: SchemeTrackerRound[] }) {
                 itemStyle={{ color: 'var(--color-text)' }}
                 formatter={(value, name) => {
                   const d = pieData.find(p => p.name === name)
-                  return [`${value} projects (${fmtMW(d?.mw ?? 0)})`, name]
+                  if (!d) return [value, name]
+                  const pctP = totalCount > 0 ? Math.round(d.count / totalCount * 100) : 0
+                  const pctM = totalMW > 0 ? Math.round(d.mw / totalMW * 100) : 0
+                  return [`${d.count} projects (${fmtMW(d.mw)}) — ${pctMode === 'mw' ? pctM : pctP}%`, name]
                 }}
               />
             </PieChart>
           </ResponsiveContainer>
           {/* Legend */}
           <div className="flex flex-wrap gap-3 justify-center mt-1">
-            {pieData.map(d => (
-              <div key={d.name} className="flex items-center gap-1.5">
-                <span className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: d.color }} />
-                <span className="text-[10px] text-[var(--color-text-muted)]">
-                  {d.name} ({d.count})
-                </span>
-              </div>
-            ))}
+            {pieData.map(d => {
+              const pct = pctMode === 'mw'
+                ? (totalMW > 0 ? Math.round(d.mw / totalMW * 100) : 0)
+                : (totalCount > 0 ? Math.round(d.count / totalCount * 100) : 0)
+              return (
+                <div key={d.name} className="flex items-center gap-1.5">
+                  <span className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: d.color }} />
+                  <span className="text-[10px] text-[var(--color-text-muted)]">
+                    {d.name} ({pctMode === 'mw' ? fmtMW(d.mw) : d.count} · {pct}%)
+                  </span>
+                </div>
+              )
+            })}
           </div>
         </div>
 
@@ -937,37 +1393,58 @@ function OutcomesPieChart({ rounds }: { rounds: SchemeTrackerRound[] }) {
           <p className="text-[10px] uppercase tracking-wider text-[var(--color-text-muted)] font-medium mb-2">
             Round progression timeline
           </p>
-          {roundTimeline.map(r => (
-            <div key={r.id}>
-              <div className="flex items-center justify-between mb-0.5">
-                <span className="text-[10px] text-[var(--color-text)] truncate max-w-[65%]">{r.label}</span>
-                <span className="text-[10px] text-[var(--color-text-muted)]">{r.months}mo ago</span>
+          {roundTimeline.map(r => {
+            const byMW = pctMode === 'mw'
+            const opPct = byMW ? (r.totalMW > 0 ? r.opMW / r.totalMW * 100 : 0) : (r.total > 0 ? r.operating / r.total * 100 : 0)
+            const conPct = byMW ? (r.totalMW > 0 ? r.conMW / r.totalMW * 100 : 0) : (r.total > 0 ? r.construction / r.total * 100 : 0)
+            const devPct = byMW ? (r.totalMW > 0 ? r.devMW / r.totalMW * 100 : 0) : (r.total > 0 ? r.dev / r.total * 100 : 0)
+            const securedPct = Math.round(opPct + conPct)
+            return (
+              <div key={r.id}>
+                <div className="flex items-center justify-between mb-0.5">
+                  <span className="text-[10px] text-[var(--color-text)] truncate max-w-[55%]">{r.label}</span>
+                  <div className="flex items-center gap-2">
+                    <span className="text-[10px] font-medium" style={{ color: securedPct >= 50 ? '#22c55e' : '#f59e0b' }}>
+                      {securedPct}% secured
+                    </span>
+                    <span className="text-[10px] text-[var(--color-text-muted)]">{r.months}mo</span>
+                  </div>
+                </div>
+                <div className="flex h-2 rounded-full overflow-hidden bg-[var(--color-bg)]">
+                  {opPct > 0 && (
+                    <div style={{ width: `${opPct}%`, backgroundColor: '#22c55e' }} />
+                  )}
+                  {conPct > 0 && (
+                    <div style={{ width: `${conPct}%`, backgroundColor: '#3b82f6' }} />
+                  )}
+                  {devPct > 0 && (
+                    <div style={{ width: `${devPct}%`, backgroundColor: '#f59e0b' }} />
+                  )}
+                </div>
               </div>
-              <div className="flex h-2 rounded-full overflow-hidden bg-[var(--color-bg)]">
-                {r.operating > 0 && (
-                  <div style={{ width: `${r.operating / r.total * 100}%`, backgroundColor: '#22c55e' }} />
-                )}
-                {r.construction > 0 && (
-                  <div style={{ width: `${r.construction / r.total * 100}%`, backgroundColor: '#3b82f6' }} />
-                )}
-                {r.dev > 0 && (
-                  <div style={{ width: `${r.dev / r.total * 100}%`, backgroundColor: '#f59e0b' }} />
-                )}
-              </div>
-            </div>
-          ))}
+            )
+          })}
         </div>
       </div>
     </div>
   )
 }
 
-function SummaryCard({ label, count, mw, color }: { label: string; count: number; mw: number; color: string }) {
+function SummaryCard({ label, count, mw, totalProjects, totalMW, pctMode, color }: {
+  label: string; count: number; mw: number; totalProjects: number; totalMW: number; pctMode: 'projects' | 'mw'; color: string
+}) {
+  const pctProjects = totalProjects > 0 ? (count / totalProjects * 100) : 0
+  const pctMW = totalMW > 0 ? (mw / totalMW * 100) : 0
+  const pct = pctMode === 'projects' ? pctProjects : pctMW
+  const primary = pctMode === 'projects' ? count : fmtMW(mw)
+  const secondary = pctMode === 'projects' ? fmtMW(mw) : `${count} projects`
+
   return (
     <div className="bg-[var(--color-bg-card)] rounded-xl p-4 border border-[var(--color-border)] text-center">
-      <div className="text-3xl md:text-4xl font-bold" style={{ color }}>{count}</div>
+      <div className="text-2xl md:text-3xl font-bold" style={{ color }}>{primary}</div>
+      <div className="text-xs font-semibold mt-0.5" style={{ color: `${color}99` }}>{Math.round(pct)}%</div>
       <div className="text-[10px] md:text-xs text-[var(--color-text-muted)] mt-1 font-medium">{label}</div>
-      <div className="text-xs font-semibold mt-1" style={{ color }}>{fmtMW(mw)}</div>
+      <div className="text-[10px] text-[var(--color-text-muted)] mt-0.5">{secondary}</div>
     </div>
   )
 }
@@ -1065,7 +1542,7 @@ function RoundProgressCard({
               className="text-[10px] px-1.5 py-0.5 rounded-full"
               style={{ backgroundColor: `${seg.color}20`, color: seg.color }}
             >
-              {stageLabel(seg.stage)} {seg.count}
+              {stageLabel(seg.stage)} {seg.count} ({Math.round(seg.pct)}%)
             </span>
           ))}
         </div>
