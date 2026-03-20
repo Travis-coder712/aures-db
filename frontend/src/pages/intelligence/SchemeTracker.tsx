@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from 'react'
+import { useState, useEffect, useMemo, useCallback, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from 'recharts'
 import { fetchSchemeTracker } from '../../lib/dataService'
@@ -1206,11 +1206,116 @@ function SchemeAnalysisEssay({ onClose, cisRounds, ltesaRounds }: {
   cisRounds: CISRound[]
   ltesaRounds: LTESARound[]
 }) {
+  const contentRef = useRef<HTMLDivElement>(null)
+
   useEffect(() => {
     function handleKey(e: KeyboardEvent) { if (e.key === 'Escape') onClose() }
     document.addEventListener('keydown', handleKey)
     return () => document.removeEventListener('keydown', handleKey)
   }, [onClose])
+
+  const handleDownloadPDF = useCallback(() => {
+    const content = contentRef.current
+    if (!content) return
+
+    const printWindow = window.open('', '_blank')
+    if (!printWindow) return
+
+    printWindow.document.write(`<!DOCTYPE html><html><head>
+      <title>CIS &amp; LTESA Scheme Analysis — AURES</title>
+      <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; color: #1a1a2e; line-height: 1.6; padding: 40px; max-width: 900px; margin: 0 auto; font-size: 11pt; }
+        h1 { font-size: 22pt; margin-bottom: 4px; color: #0f172a; }
+        h2 { font-size: 15pt; margin-top: 28px; margin-bottom: 12px; color: #1e293b; border-bottom: 2px solid #e2e8f0; padding-bottom: 6px; }
+        h3 { font-size: 12pt; margin-top: 18px; margin-bottom: 8px; color: #334155; }
+        p { margin-bottom: 10px; color: #374151; }
+        .subtitle { font-size: 10pt; color: #64748b; margin-bottom: 24px; }
+        .date { font-size: 9pt; color: #94a3b8; margin-bottom: 20px; }
+        strong { color: #1e293b; }
+        .highlight { background: #f8fafc; border-left: 3px solid #3b82f6; padding: 12px 16px; margin: 14px 0; border-radius: 0 6px 6px 0; }
+        .highlight p { margin-bottom: 0; }
+        ul { padding-left: 20px; margin-bottom: 12px; }
+        li { margin-bottom: 4px; color: #374151; }
+        table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 9pt; }
+        th { background: #f1f5f9; text-align: left; padding: 8px 10px; border: 1px solid #e2e8f0; font-weight: 600; color: #334155; }
+        td { padding: 6px 10px; border: 1px solid #e2e8f0; color: #475569; }
+        tr:nth-child(even) { background: #f8fafc; }
+        .traffic-green { color: #16a34a; font-weight: 600; }
+        .traffic-amber { color: #d97706; font-weight: 600; }
+        .traffic-red { color: #dc2626; font-weight: 600; }
+        .footer { margin-top: 32px; padding-top: 16px; border-top: 1px solid #e2e8f0; font-size: 8pt; color: #94a3b8; }
+        @media print { body { padding: 20px; } }
+      </style>
+    </head><body>`)
+
+    // Convert the React content to clean printable HTML
+    const clone = content.cloneNode(true) as HTMLElement
+
+    // Replace dark-theme classes with print-friendly content
+    clone.querySelectorAll('[class*="text-amber"]').forEach(el => el.classList.add('traffic-amber'))
+    clone.querySelectorAll('[class*="text-green"]').forEach(el => el.classList.add('traffic-green'))
+    clone.querySelectorAll('[class*="text-red"]').forEach(el => el.classList.add('traffic-red'))
+
+    // Strip all Tailwind/CSS-variable classes and use semantic HTML
+    const sections = clone.querySelectorAll('section, div')
+    sections.forEach(s => {
+      const el = s as HTMLElement
+      el.style.cssText = ''
+      el.className = el.className.includes('highlight') ? 'highlight' : ''
+    })
+
+    printWindow.document.write(`
+      <h1>CIS &amp; LTESA: Are Government Schemes Delivering?</h1>
+      <p class="subtitle">A comprehensive analysis of Australia's renewable energy procurement programs</p>
+      <p class="date">Generated from AURES — ${new Date().toLocaleDateString('en-AU', { day: 'numeric', month: 'long', year: 'numeric' })}</p>
+    `)
+
+    // Extract text content section by section from the rendered content
+    const essaySections = content.querySelectorAll('[data-essay-section]')
+    essaySections.forEach(section => {
+      const title = section.getAttribute('data-essay-section')
+      printWindow!.document.write(`<h2>${title}</h2>`)
+
+      // Get all paragraphs, lists, tables, and sub-sections
+      section.querySelectorAll('p, ul, h3, table, [data-highlight]').forEach(el => {
+        if (el.tagName === 'TABLE') {
+          // Rebuild table with traffic light classes
+          const tableClone = el.cloneNode(true) as HTMLTableElement
+          tableClone.querySelectorAll('span').forEach(span => {
+            const color = span.style.color
+            if (color.includes('34a') || color.includes('c55e')) span.className = 'traffic-green'
+            else if (color.includes('97706') || color.includes('9e0b')) span.className = 'traffic-amber'
+            else if (color.includes('2626') || color.includes('4444')) span.className = 'traffic-red'
+            span.style.color = ''
+            span.removeAttribute('style')
+          })
+          printWindow!.document.write(tableClone.outerHTML)
+        } else if ((el as HTMLElement).dataset?.highlight !== undefined) {
+          printWindow!.document.write(`<div class="highlight"><p>${el.textContent}</p></div>`)
+        } else {
+          printWindow!.document.write(`<${el.tagName.toLowerCase()}>${el.innerHTML}</${el.tagName.toLowerCase()}>`)
+        }
+      })
+    })
+
+    // If no data-essay-section tags found, fall back to innerHTML
+    if (essaySections.length === 0) {
+      printWindow.document.write(content.innerHTML)
+    }
+
+    printWindow.document.write(`
+      <div class="footer">
+        <p>Source: AURES — Australian Renewable Energy System (aures-db)</p>
+        <p>Data sourced from AEMO, DCCEEW (CIS), AEMO Services (LTESA), state planning portals, and developer announcements.</p>
+        <p>This analysis is based on publicly available information as of March 2026. Forward-looking statements are based on current data and historical patterns.</p>
+      </div>
+    </body></html>`)
+
+    printWindow.document.close()
+    // Small delay to let styles render, then trigger print
+    setTimeout(() => { printWindow.print() }, 300)
+  }, [])
 
   // Build summary table data from ROUND_INFO and round data
   const summaryRows: SummaryRow[] = useMemo(() => {
@@ -1346,17 +1451,28 @@ function SchemeAnalysisEssay({ onClose, cisRounds, ltesaRounds }: {
             <h2 className="text-lg font-bold text-[var(--color-text)]">CIS &amp; LTESA: Are Government Schemes Delivering?</h2>
             <p className="text-xs text-[var(--color-text-muted)] mt-0.5">A comprehensive analysis of Australia's renewable energy procurement programs</p>
           </div>
-          <button
-            onClick={onClose}
-            className="w-8 h-8 flex items-center justify-center rounded-lg text-[var(--color-text-muted)] hover:text-[var(--color-text)] hover:bg-[var(--color-bg-card)] transition-colors shrink-0 ml-3"
-          >
-            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-            </svg>
-          </button>
+          <div className="flex items-center gap-1 shrink-0 ml-3">
+            <button
+              onClick={handleDownloadPDF}
+              className="w-8 h-8 flex items-center justify-center rounded-lg text-[var(--color-text-muted)] hover:text-[var(--color-text)] hover:bg-[var(--color-bg-card)] transition-colors"
+              title="Download as PDF"
+            >
+              <svg className="w-4.5 h-4.5" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" />
+              </svg>
+            </button>
+            <button
+              onClick={onClose}
+              className="w-8 h-8 flex items-center justify-center rounded-lg text-[var(--color-text-muted)] hover:text-[var(--color-text)] hover:bg-[var(--color-bg-card)] transition-colors"
+            >
+              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
         </div>
 
-        <div className="px-5 py-6 space-y-8">
+        <div ref={contentRef} className="px-5 py-6 space-y-8">
           {/* Section 1: The Policy Vision */}
           <EssaySection title="The Policy Vision">
             <p>
@@ -1599,7 +1715,7 @@ function SchemeAnalysisEssay({ onClose, cisRounds, ltesaRounds }: {
 
 function EssaySection({ title, children }: { title: string; children: React.ReactNode }) {
   return (
-    <section>
+    <section data-essay-section={title}>
       <h3 className="text-base font-bold text-[var(--color-text)] mb-3 pb-2 border-b border-[var(--color-border)]">{title}</h3>
       <div className="space-y-3 text-sm text-[var(--color-text-muted)] leading-relaxed">
         {children}
