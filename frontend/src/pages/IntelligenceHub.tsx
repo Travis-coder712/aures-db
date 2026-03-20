@@ -3,8 +3,8 @@ import { useNavigate } from 'react-router-dom'
 const FEATURES = [
   {
     icon: '\u{1F3AF}',
-    title: 'Scheme Milestone Tracker',
-    description: 'Track CIS and LTESA project progression from development to operation',
+    title: 'CIS / LTESA Scheme Intelligence',
+    description: 'Overview, comparison, and milestone tracking for CIS and LTESA rounds',
     route: '/intelligence/scheme-tracker',
   },
   {

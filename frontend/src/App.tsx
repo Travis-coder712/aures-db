@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, Navigate } from 'react-router-dom'
 import Layout from './components/layout/Layout'
 import Home from './pages/Home'
 import ProjectList from './pages/ProjectList'
@@ -6,7 +6,7 @@ import ProjectDetail from './pages/ProjectDetail'
 import Search from './pages/Search'
 import Guides from './pages/Guides'
 import GuideReader from './pages/GuideReader'
-import SchemesOverview from './pages/SchemesOverview'
+// SchemesOverview merged into SchemeTracker intelligence page
 import SchemeRoundDetail from './pages/SchemeRoundDetail'
 import Dashboard from './pages/Dashboard'
 import REZList from './pages/REZList'
@@ -47,8 +47,8 @@ function App() {
         <Route path="search" element={<Search />} />
         <Route path="guides" element={<Guides />} />
         <Route path="guides/:id" element={<GuideReader />} />
-        {/* Phase 2: Schemes */}
-        <Route path="schemes" element={<SchemesOverview />} />
+        {/* Redirect old /schemes to intelligence page */}
+        <Route path="schemes" element={<Navigate to="/intelligence/scheme-tracker" replace />} />
         <Route path="schemes/:scheme/:roundId" element={<SchemeRoundDetail />} />
         {/* Phase 2.5: Dashboard + REZ */}
         <Route path="dashboard" element={<Dashboard />} />
