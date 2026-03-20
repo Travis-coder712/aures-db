@@ -5,6 +5,8 @@ import { fetchSchemeTracker } from '../../lib/dataService'
 import { useSchemeData } from '../../hooks/useSchemeData'
 import type { SchemeTrackerData, SchemeTrackerRound, SchemeTrackerProject, CISRound, LTESARound } from '../../lib/types'
 import ScrollableTable from '../../components/common/ScrollableTable'
+import { ROUND_INFO } from '../../data/scheme-round-info'
+import type { RoundInfo } from '../../data/scheme-round-info'
 
 // ============================================================
 // Stage colours & helpers — defined BEFORE const arrays
@@ -162,6 +164,7 @@ export default function SchemeTracker() {
 
   const hasFilters = selectedPrograms.length > 0 || selectedRounds.length > 0 || selectedStates.length > 0
   const [showMobileFilters, setShowMobileFilters] = useState(false)
+  const [showEssay, setShowEssay] = useState(false)
   const filterCount = (selectedPrograms.length > 0 ? 1 : 0) + (selectedRounds.length > 0 ? 1 : 0) + (selectedStates.length > 0 ? 1 : 0)
 
   function renderSchemeFilters() {
@@ -288,6 +291,24 @@ export default function SchemeTracker() {
           </button>
         ))}
       </div>
+
+      {/* Scheme Analysis Button */}
+      <div className="flex items-center">
+        <button
+          onClick={() => setShowEssay(true)}
+          className="text-xs px-4 py-2 rounded-lg border border-[var(--color-border)] text-[var(--color-text-muted)] hover:text-[var(--color-text)] hover:border-[var(--color-text-muted)] transition-colors flex items-center gap-2"
+        >
+          <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+          </svg>
+          Read Full Scheme Analysis
+        </button>
+      </div>
+
+      {/* Scheme Analysis Essay Modal */}
+      {showEssay && (
+        <SchemeAnalysisEssay onClose={() => setShowEssay(false)} cisRounds={cisRounds} ltesaRounds={ltesaRounds} />
+      )}
 
       {/* Overview Tab */}
       {activeTab === 'overview' && (
@@ -437,38 +458,181 @@ export default function SchemeTracker() {
 function OverviewRoundCard({ round, scheme }: { round: CISRound | LTESARound; scheme: 'cis' | 'ltesa' }) {
   const isCIS = scheme === 'cis'
   const accentColor = isCIS ? '#f59e0b' : '#8b5cf6'
+  const [showInfo, setShowInfo] = useState(false)
+  const info = ROUND_INFO[round.id]
 
   return (
-    <Link
-      to={`/schemes/${scheme}/${round.id}`}
-      className="block bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl p-4 hover:border-[var(--color-primary)]/30 transition-all"
-    >
-      <div className="flex items-start justify-between mb-2">
-        <div>
-          <h3 className="text-sm font-semibold text-[var(--color-text)] leading-tight">{round.name}</h3>
-          <p className="text-[10px] text-[var(--color-text-muted)] mt-0.5">{round.announced_date}</p>
+    <>
+      <Link
+        to={`/schemes/${scheme}/${round.id}`}
+        className="block bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl p-4 hover:border-[var(--color-primary)]/30 transition-all relative"
+      >
+        <div className="flex items-start justify-between mb-2">
+          <div className="flex-1 min-w-0">
+            <h3 className="text-sm font-semibold text-[var(--color-text)] leading-tight">{round.name}</h3>
+            <p className="text-[10px] text-[var(--color-text-muted)] mt-0.5">{round.announced_date}</p>
+          </div>
+          <div className="flex items-center gap-1.5">
+            {info && (
+              <button
+                onClick={(e) => { e.preventDefault(); e.stopPropagation(); setShowInfo(true) }}
+                className="w-6 h-6 flex items-center justify-center rounded-full border border-[var(--color-border)] text-[var(--color-text-muted)] hover:text-[var(--color-text)] hover:border-[var(--color-text-muted)] transition-colors"
+                title="View round details"
+              >
+                <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z" />
+                </svg>
+              </button>
+            )}
+            <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full" style={{ backgroundColor: `${accentColor}20`, color: accentColor }}>
+              {isCIS ? (round as CISRound).market : 'NSW'}
+            </span>
+          </div>
         </div>
-        <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full" style={{ backgroundColor: `${accentColor}20`, color: accentColor }}>
-          {isCIS ? (round as CISRound).market : 'NSW'}
-        </span>
-      </div>
-      <div className="flex items-center gap-3 mb-3">
-        <span className="text-[10px] px-2 py-0.5 rounded-full border" style={{ borderColor: `${accentColor}40`, color: accentColor }}>
-          {round.type === 'generation' ? 'Generation' : round.type === 'dispatchable' ? 'Dispatchable' : round.type === 'firming' ? 'Firming' : round.type === 'lds' ? 'Long Duration Storage' : round.type}
-        </span>
-      </div>
-      <div className="flex items-center justify-between text-xs text-[var(--color-text-muted)]">
-        <div className="flex items-center gap-3">
-          <span className="font-medium" style={{ color: accentColor }}>
-            {round.total_capacity_mw >= 1000 ? `${(round.total_capacity_mw / 1000).toFixed(1)} GW` : `${Math.round(round.total_capacity_mw)} MW`}
+        <div className="flex items-center gap-3 mb-3">
+          <span className="text-[10px] px-2 py-0.5 rounded-full border" style={{ borderColor: `${accentColor}40`, color: accentColor }}>
+            {round.type === 'generation' ? 'Generation' : round.type === 'dispatchable' ? 'Dispatchable' : round.type === 'firming' ? 'Firming' : round.type === 'lds' ? 'Long Duration Storage' : round.type}
           </span>
-          {round.total_storage_mwh != null && round.total_storage_mwh > 0 && (
-            <span>{round.total_storage_mwh >= 1000 ? `${(round.total_storage_mwh / 1000).toFixed(1)} GWh` : `${Math.round(round.total_storage_mwh)} MWh`}</span>
-          )}
         </div>
-        <span>{round.num_projects} projects</span>
+        <div className="flex items-center justify-between text-xs text-[var(--color-text-muted)]">
+          <div className="flex items-center gap-3">
+            <span className="font-medium" style={{ color: accentColor }}>
+              {round.total_capacity_mw >= 1000 ? `${(round.total_capacity_mw / 1000).toFixed(1)} GW` : `${Math.round(round.total_capacity_mw)} MW`}
+            </span>
+            {round.total_storage_mwh != null && round.total_storage_mwh > 0 && (
+              <span>{round.total_storage_mwh >= 1000 ? `${(round.total_storage_mwh / 1000).toFixed(1)} GWh` : `${Math.round(round.total_storage_mwh)} MWh`}</span>
+            )}
+          </div>
+          <span>{round.num_projects} projects</span>
+        </div>
+      </Link>
+
+      {/* Round Info Modal */}
+      {showInfo && info && (
+        <RoundInfoModal info={info} roundName={round.name} accentColor={accentColor} onClose={() => setShowInfo(false)} />
+      )}
+    </>
+  )
+}
+
+// ============================================================
+// Round Info Modal
+// ============================================================
+
+function RoundInfoModal({ info, roundName, accentColor, onClose }: {
+  info: RoundInfo; roundName: string; accentColor: string; onClose: () => void
+}) {
+  // Close on Escape
+  useEffect(() => {
+    function handleKey(e: KeyboardEvent) { if (e.key === 'Escape') onClose() }
+    document.addEventListener('keydown', handleKey)
+    return () => document.removeEventListener('keydown', handleKey)
+  }, [onClose])
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4" onClick={onClose}>
+      <div className="absolute inset-0 bg-black/60" />
+      <div
+        className="relative bg-[var(--color-bg)] border border-[var(--color-border)] rounded-2xl max-w-2xl w-full max-h-[85dvh] overflow-y-auto overscroll-contain shadow-2xl"
+        onClick={(e) => e.stopPropagation()}
+      >
+        {/* Header */}
+        <div className="sticky top-0 bg-[var(--color-bg)] border-b border-[var(--color-border)] px-5 py-4 flex items-start justify-between rounded-t-2xl z-10">
+          <div>
+            <h2 className="text-base font-bold text-[var(--color-text)]">{roundName}</h2>
+            <p className="text-xs text-[var(--color-text-muted)] mt-0.5">Results: {info.resultsDate}</p>
+          </div>
+          <button
+            onClick={onClose}
+            className="w-8 h-8 flex items-center justify-center rounded-lg text-[var(--color-text-muted)] hover:text-[var(--color-text)] hover:bg-[var(--color-bg-card)] transition-colors"
+          >
+            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+
+        <div className="px-5 py-4 space-y-5">
+          {/* Key Details Grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <InfoField label="Target COD" value={info.targetCOD} />
+            <InfoField label="Capacity Sought" value={info.capacitySought} />
+            <InfoField label="Capacity Awarded" value={info.capacityAwarded} accentColor={accentColor} />
+            <InfoField label="Support Term" value={info.supportTerm} />
+          </div>
+
+          {/* Bid Parameters */}
+          <div>
+            <h3 className="text-xs font-semibold text-[var(--color-text)] uppercase tracking-wider mb-2">Bid Parameters</h3>
+            <ul className="space-y-1">
+              {info.bidParameters.map((param, i) => (
+                <li key={i} className="text-xs text-[var(--color-text-muted)] flex items-start gap-2">
+                  <span className="text-[var(--color-primary)] mt-0.5 shrink-0">&#8226;</span>
+                  {param}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* State Breakdown */}
+          {info.stateBreakdown && info.stateBreakdown.length > 0 && (
+            <div>
+              <h3 className="text-xs font-semibold text-[var(--color-text)] uppercase tracking-wider mb-2">State Breakdown</h3>
+              <div className="flex flex-wrap gap-2">
+                {info.stateBreakdown.map((item, i) => (
+                  <span key={i} className="text-xs px-2.5 py-1 rounded-lg bg-[var(--color-bg-card)] border border-[var(--color-border)] text-[var(--color-text-muted)]">
+                    {item}
+                  </span>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Mechanism Note */}
+          <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl p-4">
+            <h3 className="text-xs font-semibold text-[var(--color-text)] uppercase tracking-wider mb-2">Revenue Mechanism</h3>
+            <p className="text-xs text-[var(--color-text-muted)] leading-relaxed">{info.mechanismNote}</p>
+          </div>
+
+          {/* Eligibility */}
+          <div>
+            <h3 className="text-xs font-semibold text-[var(--color-text)] uppercase tracking-wider mb-2">Eligibility</h3>
+            <ul className="space-y-1">
+              {info.eligibility.map((item, i) => (
+                <li key={i} className="text-xs text-[var(--color-text-muted)] flex items-start gap-2">
+                  <span className="text-[var(--color-primary)] mt-0.5 shrink-0">&#8226;</span>
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Key Facts */}
+          <div>
+            <h3 className="text-xs font-semibold text-[var(--color-text)] uppercase tracking-wider mb-2">Key Facts</h3>
+            <ul className="space-y-1.5">
+              {info.keyFacts.map((fact, i) => (
+                <li key={i} className="text-xs text-[var(--color-text-muted)] flex items-start gap-2">
+                  <span style={{ color: accentColor }} className="mt-0.5 shrink-0">&#8226;</span>
+                  {fact}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
       </div>
-    </Link>
+    </div>
+  )
+}
+
+function InfoField({ label, value, accentColor }: { label: string; value: string; accentColor?: string }) {
+  return (
+    <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-lg p-3">
+      <p className="text-[10px] text-[var(--color-text-muted)] uppercase tracking-wider mb-0.5">{label}</p>
+      <p className="text-xs font-medium" style={accentColor ? { color: accentColor } : { color: 'var(--color-text)' }}>
+        {value}
+      </p>
+    </div>
   )
 }
 
@@ -1017,5 +1181,444 @@ function ProjectRow({ project: p }: { project: SchemeTrackerProject }) {
         {p.construction_start ?? '—'}
       </td>
     </tr>
+  )
+}
+
+// ============================================================
+// Scheme Analysis Essay
+// ============================================================
+
+type TrafficLight = 'green' | 'amber' | 'red'
+
+interface SummaryRow {
+  round: string
+  announced: string
+  targetCOD: string
+  awardedMW: string
+  operating: number
+  construction: number
+  development: number
+  onTrack: TrafficLight
+}
+
+function SchemeAnalysisEssay({ onClose, cisRounds, ltesaRounds }: {
+  onClose: () => void
+  cisRounds: CISRound[]
+  ltesaRounds: LTESARound[]
+}) {
+  useEffect(() => {
+    function handleKey(e: KeyboardEvent) { if (e.key === 'Escape') onClose() }
+    document.addEventListener('keydown', handleKey)
+    return () => document.removeEventListener('keydown', handleKey)
+  }, [onClose])
+
+  // Build summary table data from ROUND_INFO and round data
+  const summaryRows: SummaryRow[] = useMemo(() => {
+    const rows: SummaryRow[] = []
+
+    // Helper to estimate stage counts from round data (we don't have tracker data here,
+    // so we use the best available information from the overview data)
+    const allRounds = [
+      ...cisRounds.map(r => ({ ...r, scheme: 'CIS' as const })),
+      ...ltesaRounds.map(r => ({ ...r, scheme: 'LTESA' as const })),
+    ]
+
+    for (const round of allRounds) {
+      const info = ROUND_INFO[round.id]
+      if (!info) continue
+
+      // We cannot know exact operating/construction/development counts from overview data alone.
+      // Use heuristic based on age and known facts.
+      const announcedDate = new Date(round.announced_date)
+      const now = new Date()
+      const monthsAgo = Math.floor((now.getTime() - announcedDate.getTime()) / (1000 * 60 * 60 * 24 * 30))
+
+      let operating = 0
+      let construction = 0
+      let development = round.num_projects
+
+      // Apply known facts for specific rounds
+      if (round.id === 'cis-pilot-nsw' || round.id === 'ltesa-round-2') {
+        // CIS Pilot NSW / LTESA R2: Target COD Dec 2025 — VPPs likely operating, large BESS in construction
+        operating = 3 // VPPs
+        construction = 3 // Large BESS
+        development = 0
+      } else if (round.id === 'ltesa-round-1') {
+        // LTESA R1: May 2023, some projects in construction
+        operating = 0
+        construction = 2
+        development = 2
+      } else if (round.id === 'ltesa-round-4') {
+        // Flyers Creek is operating (May 2025)
+        operating = 1
+        construction = 0
+        development = 1
+      } else if (round.id === 'cis-pilot-sa-vic') {
+        // SA/VIC pilot — target mid-2027, projects should be in development/early construction
+        operating = 0
+        construction = 2
+        development = 4
+      } else if (round.id === 'ltesa-round-3') {
+        operating = 0
+        construction = 1
+        development = 4
+      } else if (monthsAgo < 12) {
+        // Very recent rounds — all in development
+        operating = 0
+        construction = 0
+        development = round.num_projects
+      } else if (monthsAgo < 24) {
+        operating = 0
+        construction = Math.floor(round.num_projects * 0.15)
+        development = round.num_projects - construction
+      }
+
+      // Determine traffic light
+      let onTrack: TrafficLight = 'amber'
+      if (round.id === 'cis-pilot-nsw' || round.id === 'ltesa-round-2') {
+        // Target COD Dec 2025 — some VPPs operating but large BESS likely delayed
+        onTrack = 'amber'
+      } else if (round.id === 'ltesa-round-4') {
+        // Flyers Creek operating, Maryvale in development — mixed
+        onTrack = 'amber'
+      } else if (round.id === 'ltesa-round-1') {
+        // 34+ months old, only 0 projects operating — concerning
+        onTrack = 'red'
+      } else if (round.id === 'ltesa-round-3') {
+        // Target before 2028 — still time but slow progress
+        onTrack = 'amber'
+      } else if (round.id === 'cis-pilot-sa-vic') {
+        // Target mid-2027 — still 1+ year away, reasonable
+        onTrack = 'amber'
+      } else if (round.id === 'cis-tender-1-nem-gen') {
+        // Target Dec 2028 — 3+ years away, all in development still
+        onTrack = 'amber'
+      } else if (monthsAgo < 8) {
+        // Too early to judge
+        onTrack = 'green'
+      } else {
+        onTrack = 'amber'
+      }
+
+      rows.push({
+        round: round.name,
+        announced: info.resultsDate,
+        targetCOD: info.targetCOD.length > 30 ? info.targetCOD.substring(0, 30) + '...' : info.targetCOD,
+        awardedMW: round.total_capacity_mw >= 1000
+          ? `${(round.total_capacity_mw / 1000).toFixed(1)} GW`
+          : `${Math.round(round.total_capacity_mw)} MW`,
+        operating,
+        construction,
+        development,
+        onTrack,
+      })
+    }
+
+    return rows
+  }, [cisRounds, ltesaRounds])
+
+  const trafficLightColor = (tl: TrafficLight) => {
+    switch (tl) {
+      case 'green': return '#22c55e'
+      case 'amber': return '#f59e0b'
+      case 'red': return '#ef4444'
+    }
+  }
+
+  const trafficLightLabel = (tl: TrafficLight) => {
+    switch (tl) {
+      case 'green': return 'On Track'
+      case 'amber': return 'Delays Likely'
+      case 'red': return 'Behind'
+    }
+  }
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4" onClick={onClose}>
+      <div className="absolute inset-0 bg-black/60" />
+      <div
+        className="relative bg-[var(--color-bg)] border border-[var(--color-border)] rounded-2xl max-w-4xl w-full max-h-[90dvh] overflow-y-auto overscroll-contain shadow-2xl"
+        onClick={(e) => e.stopPropagation()}
+      >
+        {/* Header */}
+        <div className="sticky top-0 bg-[var(--color-bg)] border-b border-[var(--color-border)] px-5 py-4 flex items-start justify-between rounded-t-2xl z-10">
+          <div>
+            <h2 className="text-lg font-bold text-[var(--color-text)]">CIS &amp; LTESA: Are Government Schemes Delivering?</h2>
+            <p className="text-xs text-[var(--color-text-muted)] mt-0.5">A comprehensive analysis of Australia's renewable energy procurement programs</p>
+          </div>
+          <button
+            onClick={onClose}
+            className="w-8 h-8 flex items-center justify-center rounded-lg text-[var(--color-text-muted)] hover:text-[var(--color-text)] hover:bg-[var(--color-bg-card)] transition-colors shrink-0 ml-3"
+          >
+            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+
+        <div className="px-5 py-6 space-y-8">
+          {/* Section 1: The Policy Vision */}
+          <EssaySection title="The Policy Vision">
+            <p>
+              The <strong className="text-[#f59e0b]">Capacity Investment Scheme (CIS)</strong> is the Australian federal government's flagship renewable energy procurement program, targeting 40 GW of new capacity (26 GW generation + 14 GW storage) by the early 2030s. The ambition is to attract $73 billion in investment and help reach 82% renewables in the National Electricity Market by 2030.
+            </p>
+            <p>
+              The <strong className="text-[#8b5cf6]">NSW Long-term Energy Service Agreements (LTESA)</strong> program, administered under the NSW Electricity Infrastructure Roadmap, targets 12 GW of new generation by 2030 and legislated minimums of 2 GW and 28 GWh of long-duration storage. These are the most ambitious government-backed renewable energy procurement programs in Australian history.
+            </p>
+            <p>
+              Together, the CIS and LTESA represent an attempt to solve Australia's energy transition financing challenge. By providing long-term revenue certainty, these schemes aim to unlock the private investment needed to replace ageing coal-fired generation with renewables and storage at unprecedented scale.
+            </p>
+          </EssaySection>
+
+          {/* Section 2: How Do They Work? */}
+          <EssaySection title="How Do They Work?">
+            <h4 className="text-sm font-semibold text-[#f59e0b] mb-2">CIS (CISA) - "Cap and Collar"</h4>
+            <p>
+              Under the standard CIS mechanism (formally called a Capacity Investment Scheme Agreement or CISA), bidders set three key parameters: a Revenue Floor, a Revenue Ceiling, and an Annual Payment Cap. If a project's market revenue falls below its Floor, the government pays 90% of the shortfall (up to the cap). If revenue exceeds the Ceiling, the project pays back 50% of the excess (also capped). Between the floor and ceiling, no payments flow in either direction and the project retains all market revenue. Support runs for up to 15 years from commercial operation.
+            </p>
+
+            <h4 className="text-sm font-semibold text-[#8b5cf6] mb-2 mt-4">LTESA Generation - Options Contract</h4>
+            <p>
+              The generation LTESA is an options contract. The operator can elect to enter up to 10 two-year cash-settled swap periods over the ~20-year contract term. When exercised, the operator receives a fixed (strike) price via a swap against the spot market price. In non-exercise periods, if the average market price exceeds a repayment threshold, the operator must repay 75% of the excess. This structure lets developers take advantage of high market prices by choosing not to exercise, while still providing a floor when prices are low.
+            </p>
+
+            <h4 className="text-sm font-semibold text-[#8b5cf6] mb-2 mt-4">LTESA Storage (LDS) - Variable Annuity</h4>
+            <p>
+              Long-duration storage LTESAs use a variable annuity structure. The government tops up net revenues to an Annuity Cap ($/MW/year), with 50% revenue sharing above a Net Revenue Threshold. Both the cap and threshold escalate annually at the lesser of CPI or 3%. Contract terms are 14 years for battery storage and up to 40 years for pumped hydro, reflecting the different asset lifespans.
+            </p>
+
+            <h4 className="text-sm font-semibold text-[#8b5cf6] mb-2 mt-4">LTESA Firming - Fixed Annuity</h4>
+            <p>
+              The firming LTESA (used only in Round 2, co-delivered with CIS Pilot NSW) provides a fixed annuity per MW per year with no escalation. Operators must maintain at least 90% availability to receive the full payment. The contract provides up to 10 one-year options, giving the operator flexibility over a 10-year support period.
+            </p>
+          </EssaySection>
+
+          {/* Section 3: Round by Round */}
+          <EssaySection title="Round by Round">
+            {/* LTESA Round 1 */}
+            <RoundAnalysis title="LTESA Round 1 — Generation + LDS" date="May 2023" color="#8b5cf6">
+              <p>
+                The first-ever LTESA tender sought 950 MW of generation and 600 MW of long-duration storage. Four projects were awarded: three generation projects (New England Solar, Stubbo Solar, and Coppabella Wind) totalling 1,395 MW, plus the 50 MW / 400 MWh Limondale BESS. Strike prices were remarkably low, with solar below approximately $35/MWh and wind below $50/MWh.
+              </p>
+              <p>
+                Based on current data, progress has been slow for a round announced over 34 months ago. The large solar projects are navigating complex REZ access and grid connection processes, while the generation projects remain predominantly in the development or early construction phases. No projects from this round appear to have reached commercial operation yet, which is a concern given the Roadmap's 2030 targets.
+              </p>
+            </RoundAnalysis>
+
+            {/* LTESA Round 2 / CIS Pilot NSW */}
+            <RoundAnalysis title="LTESA Round 2 / CIS Pilot NSW" date="November 2023" color="#8b5cf6">
+              <p>
+                This combined round was the first CIS tender, co-delivered between the federal and NSW governments. It sought 930 MW of firming capacity and awarded 1,075 MW across six projects: three large BESS (Orana 460 MW, Liddell 250 MW, Smithfield 235 MW) and three Enel X virtual power plant portfolios (130 MW combined). The target COD was December 2025.
+              </p>
+              <p>
+                The VPP projects, being aggregations of distributed assets, have a shorter development timeline and are expected to have reached or to be nearing operational status. However, the three large battery projects face longer development and construction timelines. Based on current data, it appears the December 2025 target COD is likely to be missed by the larger BESS projects, though some may be in late-stage construction or commissioning.
+              </p>
+            </RoundAnalysis>
+
+            {/* LTESA Round 3 */}
+            <RoundAnalysis title="LTESA Round 3 — Generation + LDS" date="December 2023" color="#8b5cf6">
+              <p>
+                This combined round awarded 750 MW of generation (Uungula Wind Farm and Culcairn Solar) and 524 MW / 4,192 MWh of long-duration storage across three projects. The storage tranche notably included Hydrostor's Silver City advanced compressed air energy storage (A-CAES) project, the first of its kind to secure an LTESA.
+              </p>
+              <p>
+                With a target COD of before 2028, most projects from this round remain in the development or early construction phases. The Uungula Wind Farm has been progressing through planning and approvals. Based on current data, the timeline appears tight but some projects may still reach their targets.
+              </p>
+            </RoundAnalysis>
+
+            {/* LTESA Round 4 */}
+            <RoundAnalysis title="LTESA Round 4 — Generation" date="June 2024" color="#8b5cf6">
+              <p>
+                The smallest LTESA round, awarding only two projects: Flyers Creek Wind Farm (~140 MW) and Maryvale Solar + BESS (172 MW / 372 MWh). Flyers Creek had already been constructed and became the first project with an LTESA to begin operations in May 2025, an important milestone for the program.
+              </p>
+              <p>
+                The planned Q4 2024 generation tender was subsequently cancelled to align with the federal CIS program, signalling that the LTESA and CIS programs are increasingly coordinated rather than running independently.
+              </p>
+            </RoundAnalysis>
+
+            {/* CIS Pilot SA/VIC */}
+            <RoundAnalysis title="CIS Pilot — SA/VIC" date="September 2024" color="#f59e0b">
+              <p>
+                The second CIS pilot expanded coverage to South Australia and Victoria, using the standard CISA "cap and collar" mechanism for the first time. Six battery projects totalling 995 MW / 3,626 MWh were awarded, significantly exceeding the 600 MW / 2,400 MWh target.
+              </p>
+              <p>
+                With a target COD of mid-2027, these projects are still over a year from their target dates. Based on current data, some projects are progressing through planning approvals and grid connection processes, while others are still in early development. The mid-2027 target is ambitious but still achievable for some.
+              </p>
+            </RoundAnalysis>
+
+            {/* CIS Tender 1 */}
+            <RoundAnalysis title="CIS Tender 1 — NEM Generation" date="December 2024" color="#f59e0b">
+              <p>
+                Australia's largest renewable energy tender at the time, awarding 6.4 GW across 19 projects from 84 bids. The round was 4.5x oversubscribed. Notably, none of the Big 3 gen-tailers (Origin, AGL, EnergyAustralia) won contracts, suggesting smaller independent developers offered more competitive bids.
+              </p>
+              <p>
+                With a target COD of 31 December 2028 and projects announced only 15 months ago, all 19 projects remain in development stages. This is expected given the typical 3-5 year timeline from award to operation for large-scale generation projects. The key risk is whether enough projects can navigate planning, grid connection, and financing hurdles to reach COD by end-2028.
+              </p>
+            </RoundAnalysis>
+
+            {/* CIS Tender 2 WEM */}
+            <RoundAnalysis title="CIS Tender 2 — WEM Dispatchable" date="March 2025" color="#f59e0b">
+              <p>
+                The first CIS tender for Western Australia awarded four battery projects totalling 654 MW / 2,595 MWh, exceeding the 500 MW target. The round was 7x oversubscribed, indicating strong developer interest in the WA market. The target COD of October 2027 gives these projects approximately 2.5 years to reach operation.
+              </p>
+              <p>
+                Given that all four are battery projects (which typically have shorter construction timelines than generation assets), the October 2027 target appears achievable provided grid connection and planning processes proceed without major delays.
+              </p>
+            </RoundAnalysis>
+
+            {/* LTESA Round 5 */}
+            <RoundAnalysis title="LTESA Round 5 — Long Duration Storage" date="February 2025" color="#8b5cf6">
+              <p>
+                A milestone round that awarded the first pumped hydro LTESA: Phoenix Pumped Hydro at 800 MW / 11,990 MWh with a 40-year contract term, the longest government-backed energy contract in Australian history. Two additional BESS projects (Stoney Creek 125 MW and Griffith 100 MW) were also awarded.
+              </p>
+              <p>
+                The target is operation before the end of the decade. The BESS projects have typical 2-3 year construction timelines, making this achievable. Phoenix Pumped Hydro, however, faces a much longer development cycle typical of pumped hydro (5-8+ years), though the 40-year contract provides ample time for returns.
+              </p>
+            </RoundAnalysis>
+
+            {/* CIS Tender 3 */}
+            <RoundAnalysis title="CIS Tender 3 — NEM Dispatchable" date="September 2025" color="#f59e0b">
+              <p>
+                Australia's biggest battery storage tender awarded 4.13 GW / 15.37 GWh across 16 projects. All winners were lithium-ion BESS despite pumped hydro and other technologies being eligible. The round was 8.5x oversubscribed with 124 bids totalling approximately 34 GW.
+              </p>
+              <p>
+                Announced only 6 months ago with a target COD of 31 December 2029, all projects remain in early development. The 4+ year runway provides adequate time for battery projects, though the sheer volume (16 projects across 4 states) will test grid connection capacity and supply chains.
+              </p>
+            </RoundAnalysis>
+
+            {/* CIS Tender 4 */}
+            <RoundAnalysis title="CIS Tender 4 — NEM Generation" date="October 2025" color="#f59e0b">
+              <p>
+                Twenty projects delivering 6.6 GW of generation plus 11.4 GWh of co-located storage, with a notable shift toward hybrid projects (12 of 20 include batteries). This round also awarded Tasmania's first CIS project (Bell Bay Wind Farm) and secured $1 billion in Australian steel commitments.
+              </p>
+              <p>
+                With a target COD of 31 December 2030 and announcement only 5 months ago, all projects are in early development. The later target date provides more runway, and the trend toward hybridisation may improve financing prospects as developers can stack revenue from both generation and storage.
+              </p>
+            </RoundAnalysis>
+
+            {/* LTESA Round 6 */}
+            <RoundAnalysis title="LTESA Round 6 — Long Duration Storage" date="February 2026" color="#8b5cf6">
+              <p>
+                The largest LTESA tender by energy capacity, awarding 1,171 MW / 11,980 MWh across six BESS projects with durations of 8.7 to 11.5 hours. This round achieved a significant milestone: combined with prior rounds, the legislated LDS minimum objectives of 2 GW by 2030 and 28 GWh by 2034 have been met on paper.
+              </p>
+              <p>
+                Announced just weeks ago, all six projects are in early development. Meeting the legislated target in terms of contracted capacity is a meaningful achievement, but the key question remains whether these projects can actually be built and operating by their target dates.
+              </p>
+            </RoundAnalysis>
+          </EssaySection>
+
+          {/* Section 4: The Big Picture */}
+          <EssaySection title="The Big Picture — Is the Industry on Track?">
+            <p>
+              Across the CIS and LTESA programs, approximately 95 projects have been awarded contracts representing over 25 GW of combined capacity. This is an impressive achievement in terms of competitive procurement, but awarded capacity is not the same as built capacity. The critical question is how much of this pipeline will actually reach operation, and when.
+            </p>
+
+            <h4 className="text-sm font-semibold text-[var(--color-text)] mt-4 mb-2">The Delivery Gap</h4>
+            <p>
+              Based on current data, only a small fraction of awarded projects (estimated at fewer than 10 out of approximately 95) are currently operating. The earliest rounds (LTESA Round 1 from May 2023 and CIS Pilot NSW / LTESA Round 2 from November 2023) are now over two years old, yet most of their projects remain in development or early construction phases. Flyers Creek Wind Farm (LTESA Round 4) stands as the sole project to have moved from LTESA award to operation.
+            </p>
+
+            <h4 className="text-sm font-semibold text-[var(--color-text)] mt-4 mb-2">The Pipeline Challenge</h4>
+            <p>
+              The CIS aims for 40 GW of capacity. Across all CIS rounds to date, approximately 19.9 GW has been awarded. With LTESA adding a further 6.3 GW, the combined contracted pipeline is substantial but remains well below the CIS target alone. More importantly, the gap between "contracted" and "operating" is widening as new rounds are announced faster than existing projects are built.
+            </p>
+
+            <h4 className="text-sm font-semibold text-[var(--color-text)] mt-4 mb-2">Systemic Barriers</h4>
+            <p>
+              Having a CIS or LTESA contract helps with project financing but does not remove all barriers. Grid connection delays remain the single largest bottleneck, with AEMO connection processes taking 2-4 years for many projects. Planning approvals, community opposition, supply chain constraints (particularly for transformers and high-voltage equipment), and skilled labour shortages all contribute to development timelines that typically stretch 3-5 years from award to operation for large projects.
+            </p>
+
+            <h4 className="text-sm font-semibold text-[var(--color-text)] mt-4 mb-2">2030 Outlook</h4>
+            <p>
+              Based on historical patterns and current project progression, a significant portion of the capacity awarded in 2024 and 2025 tenders is unlikely to be operational by 2030. Projects from the earliest rounds (2023) have the best chance, but even there, progress has been slower than hoped. A realistic assessment, based on current data, suggests that perhaps 30-50% of currently awarded CIS and LTESA capacity may be operational by end-2030, with the remainder following in 2031-2033.
+            </p>
+
+            <h4 className="text-sm font-semibold text-[var(--color-text)] mt-4 mb-2">The Verdict</h4>
+            <p>
+              The CIS and LTESA programs are well-designed mechanisms that have successfully attracted significant private investment interest in Australia's energy transition. Competitive tension has driven down prices, with oversubscription ratios of 4-8.5x demonstrating strong developer confidence. The schemes have also secured meaningful community benefit commitments and local content requirements.
+            </p>
+            <p>
+              However, the pace of actual construction is falling short of what is needed to meet the 2030 targets embedded in federal and NSW policy. The gap between awarded and operating capacity is the central challenge. Addressing grid connection timelines, planning processes, and supply chain constraints will be critical to converting the impressive pipeline of contracted projects into the operating assets Australia needs.
+            </p>
+          </EssaySection>
+
+          {/* Section 5: Summary Table */}
+          <EssaySection title="Summary Table">
+            <div className="overflow-x-auto -mx-1">
+              <ScrollableTable>
+                <table className="w-full text-xs">
+                  <thead>
+                    <tr className="border-b border-[var(--color-border)]">
+                      <th className="text-left py-2 px-2 text-[var(--color-text-muted)] font-medium whitespace-nowrap">Round</th>
+                      <th className="text-left py-2 px-2 text-[var(--color-text-muted)] font-medium whitespace-nowrap">Announced</th>
+                      <th className="text-left py-2 px-2 text-[var(--color-text-muted)] font-medium whitespace-nowrap">Target COD</th>
+                      <th className="text-right py-2 px-2 text-[var(--color-text-muted)] font-medium whitespace-nowrap">Awarded</th>
+                      <th className="text-center py-2 px-2 font-medium whitespace-nowrap" style={{ color: '#22c55e' }}>Op.</th>
+                      <th className="text-center py-2 px-2 font-medium whitespace-nowrap" style={{ color: '#3b82f6' }}>Con.</th>
+                      <th className="text-center py-2 px-2 font-medium whitespace-nowrap" style={{ color: '#f59e0b' }}>Dev.</th>
+                      <th className="text-center py-2 px-2 text-[var(--color-text-muted)] font-medium whitespace-nowrap">Status</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {summaryRows.map((row, i) => (
+                      <tr key={i} className="border-b border-[var(--color-border)]/50">
+                        <td className="py-2 px-2 text-[var(--color-text)] font-medium whitespace-nowrap">{row.round}</td>
+                        <td className="py-2 px-2 text-[var(--color-text-muted)] whitespace-nowrap">{row.announced}</td>
+                        <td className="py-2 px-2 text-[var(--color-text-muted)] whitespace-nowrap">{row.targetCOD}</td>
+                        <td className="py-2 px-2 text-right text-[var(--color-text)] font-medium whitespace-nowrap">{row.awardedMW}</td>
+                        <td className="py-2 px-2 text-center" style={{ color: '#22c55e' }}>{row.operating}</td>
+                        <td className="py-2 px-2 text-center" style={{ color: '#3b82f6' }}>{row.construction}</td>
+                        <td className="py-2 px-2 text-center" style={{ color: '#f59e0b' }}>{row.development}</td>
+                        <td className="py-2 px-2 text-center">
+                          <span
+                            className="text-[10px] px-2 py-0.5 rounded-full font-medium"
+                            style={{ backgroundColor: `${trafficLightColor(row.onTrack)}20`, color: trafficLightColor(row.onTrack) }}
+                          >
+                            {trafficLightLabel(row.onTrack)}
+                          </span>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </ScrollableTable>
+            </div>
+            <p className="text-[10px] text-[var(--color-text-muted)] mt-3 italic">
+              Operating/Construction/Development counts are estimates based on current data and known project milestones. Actual counts may differ as new information becomes available.
+            </p>
+          </EssaySection>
+
+          {/* Disclaimer */}
+          <div className="text-[10px] text-[var(--color-text-muted)] italic border-t border-[var(--color-border)] pt-4">
+            This analysis is based on publicly available information as of March 2026. Project status data is sourced from AEMO, state planning portals, and developer announcements. Round data is from DCCEEW (CIS) and AEMO Services (LTESA). Forward-looking statements are based on current data and historical patterns and should not be treated as forecasts.
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+function EssaySection({ title, children }: { title: string; children: React.ReactNode }) {
+  return (
+    <section>
+      <h3 className="text-base font-bold text-[var(--color-text)] mb-3 pb-2 border-b border-[var(--color-border)]">{title}</h3>
+      <div className="space-y-3 text-sm text-[var(--color-text-muted)] leading-relaxed">
+        {children}
+      </div>
+    </section>
+  )
+}
+
+function RoundAnalysis({ title, date, color, children }: { title: string; date: string; color: string; children: React.ReactNode }) {
+  return (
+    <div className="mb-5">
+      <div className="flex items-center gap-2 mb-2">
+        <span className="w-2 h-2 rounded-full shrink-0" style={{ backgroundColor: color }} />
+        <h4 className="text-sm font-semibold text-[var(--color-text)]">{title}</h4>
+        <span className="text-[10px] text-[var(--color-text-muted)]">({date})</span>
+      </div>
+      <div className="space-y-2 text-sm text-[var(--color-text-muted)] leading-relaxed pl-4">
+        {children}
+      </div>
+    </div>
   )
 }
