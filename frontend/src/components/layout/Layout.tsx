@@ -311,7 +311,7 @@ export default function Layout() {
             <span className="text-[10px] text-[var(--color-text-muted)]/70 font-mono bg-white/5 px-1.5 py-0.5 rounded">v{version.current}</span>
             {version.updateAvailable && (
               <button
-                onClick={() => window.location.reload()}
+                onClick={() => version.applyUpdate()}
                 className="text-[9px] font-semibold text-emerald-400 bg-emerald-400/10 px-1.5 py-0.5 rounded-full hover:bg-emerald-400/20 transition-colors animate-pulse"
               >
                 Update available — tap to refresh
@@ -430,7 +430,7 @@ export default function Layout() {
       {version.updateAvailable && (
         <div className="lg:hidden fixed bottom-18 inset-x-4 z-50">
           <button
-            onClick={() => window.location.reload()}
+            onClick={() => version.applyUpdate()}
             className="w-full flex items-center justify-center gap-2 py-2 px-4 rounded-xl bg-emerald-500/90 text-white text-xs font-semibold backdrop-blur-lg shadow-lg animate-pulse"
           >
             <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
