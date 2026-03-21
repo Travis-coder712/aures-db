@@ -8,6 +8,7 @@ import {
 import { fetchEISAnalytics, fetchEISComparison, fetchEISCoverage } from '../../lib/dataService'
 import type { EISAnalyticsData, EISWindProject, EISBESSProject, EISComparisonData, EISComparisonProject, EISCoverageData } from '../../lib/types'
 import ScrollableTable from '../../components/common/ScrollableTable'
+import { FINANCIAL_CLOSE_PROJECTS } from '../../data/financial-close-data'
 
 // ============================================================
 // Icons — defined BEFORE const arrays per project pattern
@@ -91,7 +92,13 @@ const getStatusColour = (s: string) => STATUS_COLOURS[s] || '#636e72'
 // Tabs
 // ============================================================
 
-type TabId = 'wind' | 'bess' | 'solar' | 'comparison' | 'coverage' | 'connection'
+type TabId = 'wind' | 'bess' | 'solar' | 'comparison' | 'coverage' | 'connection' | 'financial_close'
+
+const FCIcon = () => (
+  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
+    <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 18.75a60.07 60.07 0 0115.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 013 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 00-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 01-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 003 15h-.75M15 10.5a3 3 0 11-6 0 3 3 0 016 0zm3 0h.008v.008H18V10.5zm-12 0h.008v.008H6V10.5z" />
+  </svg>
+)
 
 const TABS: { id: TabId; label: string; icon: React.ReactNode }[] = [
   { id: 'wind', label: 'Wind', icon: <WindIcon /> },
@@ -100,6 +107,7 @@ const TABS: { id: TabId; label: string; icon: React.ReactNode }[] = [
   { id: 'comparison', label: 'EIS vs Actual', icon: <CompareIcon /> },
   { id: 'coverage', label: 'Coverage', icon: <CoverageIcon /> },
   { id: 'connection', label: 'Grid Connection', icon: <ConnectionIcon /> },
+  { id: 'financial_close', label: 'Financial Close', icon: <FCIcon /> },
 ]
 
 // ============================================================
@@ -1380,11 +1388,267 @@ export default function EISTechnical() {
         </div>
       )}
 
+      {/* Financial Close Tab */}
+      {tab === 'financial_close' && <FinancialCloseTab />}
+
       {/* Footer */}
       <p className="text-[11px] text-[var(--color-text-muted)]/50 text-center pt-4">
-        Data sourced from Environmental Impact Statements (EIS/EIA) and project planning documents.
-        Technical parameters may change during construction.
+        Data sourced from Environmental Impact Statements (EIS/EIA), project planning documents,
+        developer press releases, and industry publications.
       </p>
+    </div>
+  )
+}
+
+// ============================================================
+// Financial Close Tab
+// ============================================================
+
+const CURRENT_STATUS_COLORS: Record<string, string> = {
+  operating: '#22c55e',
+  commissioning: '#84cc16',
+  construction: '#3b82f6',
+  'pre-construction': '#8b5cf6',
+  approved: '#f59e0b',
+  development: '#ef4444',
+}
+
+function FinancialCloseTab() {
+  const confirmed = FINANCIAL_CLOSE_PROJECTS.filter(p => p.fcStatus !== 'not_reached')
+  const notReached = FINANCIAL_CLOSE_PROJECTS.filter(p => p.fcStatus === 'not_reached')
+  const confirmedMW = confirmed.reduce((s, p) => s + p.capacityMW, 0)
+  const notReachedMW = notReached.reduce((s, p) => s + p.capacityMW, 0)
+  const totalInvestmentM = confirmed.reduce((s, p) => s + (p.fcValueM || 0), 0)
+
+  // FC by year for the stacking chart
+  const fcByYear = useMemo(() => {
+    const years: Record<string, { year: string; count: number; mw: number; investmentM: number; projects: string[] }> = {}
+
+    for (const p of confirmed) {
+      const year = p.fcDate ? new Date(p.fcDate).getFullYear().toString() : p.constructionStartDate ? new Date(p.constructionStartDate).getFullYear().toString() : 'Unknown'
+      if (!years[year]) years[year] = { year, count: 0, mw: 0, investmentM: 0, projects: [] }
+      years[year].count++
+      years[year].mw += p.capacityMW
+      years[year].investmentM += p.fcValueM || 0
+      years[year].projects.push(p.name)
+    }
+
+    return Object.values(years).sort((a, b) => a.year.localeCompare(b.year))
+  }, [])
+
+  // Cumulative MW over time
+  const cumulativeData = useMemo(() => {
+    let cumMW = 0
+    let cumCount = 0
+    return fcByYear.map(y => {
+      cumMW += y.mw
+      cumCount += y.count
+      return { ...y, cumMW, cumCount }
+    })
+  }, [fcByYear])
+
+  // FC by technology
+  const fcByTech = useMemo(() => {
+    const tech: Record<string, { count: number; mw: number }> = {}
+    for (const p of confirmed) {
+      const t = p.technology
+      if (!tech[t]) tech[t] = { count: 0, mw: 0 }
+      tech[t].count++
+      tech[t].mw += p.capacityMW
+    }
+    return Object.entries(tech)
+      .map(([name, v]) => ({ name, ...v }))
+      .sort((a, b) => b.mw - a.mw)
+  }, [])
+
+  const techColors: Record<string, string> = {
+    bess: '#8b5cf6', wind: '#3b82f6', solar: '#f59e0b', hybrid: '#22c55e', pumped_hydro: '#06b6d4', caes: '#ec4899',
+  }
+
+  return (
+    <div className="space-y-6">
+      {/* Summary stats */}
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
+        <StatCard label="FC Confirmed" value={confirmed.length.toString()} unit="projects" />
+        <StatCard label="Confirmed Capacity" value={confirmedMW >= 1000 ? `${(confirmedMW / 1000).toFixed(1)}` : confirmedMW.toString()} unit={confirmedMW >= 1000 ? 'GW' : 'MW'} />
+        <StatCard label="Total Investment" value={totalInvestmentM > 0 ? `$${(totalInvestmentM / 1000).toFixed(1)}B` : '—'} unit="" />
+        <StatCard label="Not Yet FC" value={notReached.length.toString()} unit={`projects (${notReachedMW >= 1000 ? `${(notReachedMW / 1000).toFixed(1)} GW` : `${notReachedMW} MW`})`} />
+      </div>
+
+      {/* FC by Year — bar chart */}
+      <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl p-4">
+        <h3 className="text-xs font-semibold text-[var(--color-text)] mb-1">Financial Close by Year</h3>
+        <p className="text-[10px] text-[var(--color-text-muted)] mb-3">New projects reaching FC each year — MW capacity entering the construction pipeline</p>
+        <ResponsiveContainer width="100%" height={240}>
+          <BarChart data={cumulativeData} margin={{ top: 5, right: 5, bottom: 5, left: 5 }}>
+            <CartesianGrid strokeDasharray="3 3" stroke="var(--color-border)" />
+            <XAxis dataKey="year" tick={{ fill: 'var(--color-text-muted)', fontSize: 10 }} />
+            <YAxis tick={{ fill: 'var(--color-text-muted)', fontSize: 10 }} />
+            <Tooltip content={<ChartTooltip />} />
+            <Bar dataKey="mw" name="New MW reaching FC" fill="#22c55e" radius={[4, 4, 0, 0]} />
+            <Bar dataKey="cumMW" name="Cumulative MW" fill="#3b82f6" radius={[4, 4, 0, 0]} opacity={0.4} />
+          </BarChart>
+        </ResponsiveContainer>
+      </div>
+
+      {/* FC by Technology */}
+      <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl p-4">
+        <h3 className="text-xs font-semibold text-[var(--color-text)] mb-3">FC by Technology</h3>
+        <div className="flex flex-wrap gap-3">
+          {fcByTech.map(t => (
+            <div key={t.name} className="flex items-center gap-2 bg-[var(--color-bg)] border border-[var(--color-border)] rounded-lg px-3 py-2">
+              <span className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: techColors[t.name] || '#636e72' }} />
+              <div>
+                <p className="text-xs font-medium text-[var(--color-text)] capitalize">{t.name === 'bess' ? 'BESS' : t.name === 'caes' ? 'A-CAES' : t.name}</p>
+                <p className="text-[9px] text-[var(--color-text-muted)]">{t.count} projects · {t.mw >= 1000 ? `${(t.mw / 1000).toFixed(1)} GW` : `${t.mw} MW`}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* December 2025 flurry callout */}
+      <div className="bg-[var(--color-primary)]/5 border border-[var(--color-primary)]/20 rounded-xl p-4">
+        <h3 className="text-xs font-bold text-[var(--color-text)] mb-1">The December 2025 FC Flurry</h3>
+        <p className="text-[10px] text-[var(--color-text-muted)] leading-relaxed">
+          Four wind farms reached FC in the final weeks of 2025 — Palmer (288 MW), Carmody's Hill (256 MW),
+          Waddi (108 MW), and Delburn (205 MW) — breaking a year-long wind investment drought.
+          Palmer was the first CIS Tender 1 project to reach FC. Battery projects have consistently led the way,
+          with BESS moving to FC faster than generation projects.
+        </p>
+      </div>
+
+      {/* Confirmed FC projects table */}
+      <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl overflow-hidden">
+        <div className="px-4 py-3 border-b border-[var(--color-border)]">
+          <h3 className="text-xs font-semibold text-[var(--color-text)]">Projects with Confirmed Financial Close</h3>
+          <p className="text-[9px] text-[var(--color-text-muted)]">{confirmed.length} projects · {confirmedMW >= 1000 ? `${(confirmedMW / 1000).toFixed(1)} GW` : `${confirmedMW} MW`}</p>
+        </div>
+        <ScrollableTable>
+          <table className="w-full text-xs">
+            <thead>
+              <tr className="border-b border-[var(--color-border)]">
+                <th className="px-3 py-2 text-left font-medium text-[var(--color-text-muted)]">Project</th>
+                <th className="px-2 py-2 text-left font-medium text-[var(--color-text-muted)]">Developer</th>
+                <th className="px-2 py-2 text-center font-medium text-[var(--color-text-muted)]">Tech</th>
+                <th className="px-2 py-2 text-right font-medium text-[var(--color-text-muted)]">MW</th>
+                <th className="px-2 py-2 text-left font-medium text-[var(--color-text-muted)]">FC Date</th>
+                <th className="px-2 py-2 text-right font-medium text-[var(--color-text-muted)]">Investment</th>
+                <th className="px-2 py-2 text-left font-medium text-[var(--color-text-muted)]">Scheme</th>
+                <th className="px-2 py-2 text-center font-medium text-[var(--color-text-muted)]">Status</th>
+                <th className="px-2 py-2 text-left font-medium text-[var(--color-text-muted)]">COD</th>
+              </tr>
+            </thead>
+            <tbody>
+              {confirmed
+                .sort((a, b) => (b.fcDate || b.constructionStartDate || '').localeCompare(a.fcDate || a.constructionStartDate || ''))
+                .map((p, i) => {
+                  const statusColor = CURRENT_STATUS_COLORS[p.currentStatus] || '#636e72'
+                  return (
+                    <tr key={`${p.name}-${i}`} className="border-b border-[var(--color-border)]/50 hover:bg-[var(--color-bg-elevated)]/50">
+                      <td className="px-3 py-2">
+                        {p.projectId ? (
+                          <Link to={`/projects/${p.projectId}`} className="text-blue-400 hover:text-blue-300 font-medium">
+                            {p.name}
+                          </Link>
+                        ) : (
+                          <span className="text-[var(--color-text)] font-medium">{p.name}</span>
+                        )}
+                      </td>
+                      <td className="px-2 py-2 text-[var(--color-text-muted)] max-w-[120px] truncate">{p.developer}</td>
+                      <td className="px-2 py-2 text-center">
+                        <span className="text-[9px] px-1.5 py-0.5 rounded-full capitalize" style={{ backgroundColor: `${techColors[p.technology] || '#636e72'}20`, color: techColors[p.technology] || '#636e72' }}>
+                          {p.technology === 'bess' ? 'BESS' : p.technology}
+                        </span>
+                      </td>
+                      <td className="px-2 py-2 text-right font-mono text-[var(--color-text)]">{p.capacityMW.toLocaleString()}</td>
+                      <td className="px-2 py-2 text-[var(--color-text-muted)] whitespace-nowrap font-mono">
+                        {p.fcDate ? new Date(p.fcDate).toLocaleDateString('en-AU', { month: 'short', year: 'numeric' }) : '—'}
+                      </td>
+                      <td className="px-2 py-2 text-right text-[var(--color-accent)] font-medium">
+                        {p.fcValueM ? `$${p.fcValueM}M` : '—'}
+                      </td>
+                      <td className="px-2 py-2 text-[var(--color-text-muted)] text-[10px]">{p.round}</td>
+                      <td className="px-2 py-2 text-center">
+                        <span className="text-[9px] font-semibold px-1.5 py-0.5 rounded-full whitespace-nowrap" style={{ backgroundColor: `${statusColor}20`, color: statusColor }}>
+                          {p.currentStatus.replace('-', ' ')}
+                        </span>
+                      </td>
+                      <td className="px-2 py-2 text-[var(--color-text-muted)] whitespace-nowrap font-mono text-[10px]">
+                        {p.expectedCOD ? new Date(p.expectedCOD).toLocaleDateString('en-AU', { month: 'short', year: 'numeric' }) : '—'}
+                      </td>
+                    </tr>
+                  )
+                })}
+            </tbody>
+          </table>
+        </ScrollableTable>
+      </div>
+
+      {/* Not yet reached FC */}
+      <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl overflow-hidden">
+        <div className="px-4 py-3 border-b border-[var(--color-border)]">
+          <h3 className="text-xs font-semibold text-[var(--color-text)]">CIS/LTESA Projects Not Yet at Financial Close</h3>
+          <p className="text-[9px] text-[var(--color-text-muted)]">{notReached.length} projects · {notReachedMW >= 1000 ? `${(notReachedMW / 1000).toFixed(1)} GW` : `${notReachedMW} MW`} still in development</p>
+        </div>
+        <div className="divide-y divide-[var(--color-border)]/50">
+          {notReached
+            .sort((a, b) => b.capacityMW - a.capacityMW)
+            .map((p, i) => {
+              const statusColor = CURRENT_STATUS_COLORS[p.currentStatus] || '#636e72'
+              return (
+                <div key={`${p.name}-${i}`} className="px-4 py-3">
+                  <div className="flex items-start justify-between gap-3">
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center gap-2 flex-wrap">
+                        {p.projectId ? (
+                          <Link to={`/projects/${p.projectId}`} className="text-xs font-medium text-blue-400 hover:text-blue-300">
+                            {p.name}
+                          </Link>
+                        ) : (
+                          <span className="text-xs font-medium text-[var(--color-text)]">{p.name}</span>
+                        )}
+                        <span className="text-[9px] px-1.5 py-0.5 rounded-full capitalize" style={{ backgroundColor: `${techColors[p.technology] || '#636e72'}20`, color: techColors[p.technology] || '#636e72' }}>
+                          {p.technology === 'bess' ? 'BESS' : p.technology}
+                        </span>
+                        <span className="text-[9px] font-semibold px-1.5 py-0.5 rounded-full" style={{ backgroundColor: `${statusColor}20`, color: statusColor }}>
+                          {p.currentStatus}
+                        </span>
+                      </div>
+                      <div className="flex items-center gap-2 text-[10px] text-[var(--color-text-muted)] mt-0.5">
+                        <span>{p.developer}</span>
+                        <span>·</span>
+                        <span>{p.state}</span>
+                        <span>·</span>
+                        <span className="font-semibold">{p.capacityMW} MW</span>
+                        <span>·</span>
+                        <span>{p.round}</span>
+                      </div>
+                      {p.notes && (
+                        <p className="text-[9px] text-[var(--color-text-muted)] mt-1 italic leading-relaxed">{p.notes}</p>
+                      )}
+                    </div>
+                    <span className="text-[9px] font-semibold px-2 py-0.5 rounded-full bg-[#ef4444]/15 text-[#ef4444] shrink-0">
+                      Not FC
+                    </span>
+                  </div>
+                </div>
+              )
+            })}
+        </div>
+      </div>
+
+      {/* Source note */}
+      <div className="text-[10px] text-[var(--color-text-muted)] italic space-y-0.5">
+        <p>
+          Financial close data sourced from developer press releases, RenewEconomy, pv magazine Australia,
+          Energy-Storage.News, ARENA, CEFC announcements, and legal adviser deal announcements. Research date: March 2026.
+        </p>
+        <p>
+          "Effective FC" indicates projects where construction has commenced and EPC contracts signed, even if
+          a formal FC press release was not issued.
+        </p>
+      </div>
     </div>
   )
 }
