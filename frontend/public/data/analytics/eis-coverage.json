@@ -1,24 +1,5 @@
 {
-  "available_not_extracted": [
-    {
-      "name": "Pottinger Energy Park",
-      "technology": "wind/solar/bess",
-      "state": "NSW",
-      "notes": "EIS available on NSW Major Projects portal"
-    },
-    {
-      "name": "Yanco Delta Solar Farm",
-      "technology": "solar",
-      "state": "NSW",
-      "notes": "EIA submitted"
-    },
-    {
-      "name": "Yanco Delta Wind Farm",
-      "technology": "wind",
-      "state": "NSW",
-      "notes": "EIA submitted"
-    }
-  ],
+  "available_not_extracted": [],
   "coverage_gap": [
     {
       "id": "brendale-bess",

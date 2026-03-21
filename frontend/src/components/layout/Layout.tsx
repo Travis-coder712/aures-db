@@ -387,7 +387,7 @@ export default function Layout() {
                 </div>
               ))}
             </nav>
-            <div className="px-4 py-3 border-t border-[var(--color-border)]">
+            <div className="px-4 py-3 border-t border-[var(--color-border)] space-y-2">
               <NavLink
                 to="/data-sources"
                 onClick={() => setMobileMenuOpen(false)}
@@ -396,6 +396,26 @@ export default function Layout() {
                 <CogIcon className="w-3.5 h-3.5" />
                 Data Sources & Status
               </NavLink>
+              <div className="flex items-center justify-center gap-2">
+                <span className="text-[10px] text-[var(--color-text-muted)]/70 font-mono bg-white/5 px-1.5 py-0.5 rounded">v{version.current}</span>
+                <button
+                  onClick={() => version.updateAvailable ? version.applyUpdate() : version.checkNow()}
+                  disabled={version.checking}
+                  className={`text-[9px] font-semibold px-2 py-1 rounded-full transition-colors ${
+                    version.updateAvailable
+                      ? 'text-emerald-400 bg-emerald-400/10 hover:bg-emerald-400/20 animate-pulse'
+                      : version.checking
+                        ? 'text-blue-400 bg-blue-400/10 cursor-wait'
+                        : 'text-[var(--color-text-muted)]/60 bg-white/5 hover:bg-white/10 hover:text-[var(--color-text-muted)]'
+                  }`}
+                >
+                  {version.updateAvailable
+                    ? `Update to v${version.latest}`
+                    : version.checking
+                      ? 'Checking…'
+                      : 'Check for updates'}
+                </button>
+              </div>
             </div>
           </aside>
         </div>
@@ -414,7 +434,23 @@ export default function Layout() {
           </button>
           <span className="text-xl">⚡</span>
           <h1 className="text-base font-bold text-[var(--color-text)] tracking-tight">AURES</h1>
-          <span className="text-[10px] text-[var(--color-text-muted)]/70 font-mono bg-white/5 px-1.5 py-0.5 rounded">v{version.current}</span>
+          <button
+            onClick={() => version.updateAvailable ? version.applyUpdate() : version.checkNow()}
+            disabled={version.checking}
+            className={`text-[10px] font-mono px-1.5 py-0.5 rounded transition-colors ${
+              version.updateAvailable
+                ? 'text-emerald-400 bg-emerald-400/15 animate-pulse font-semibold'
+                : version.checking
+                  ? 'text-blue-400 bg-blue-400/10 cursor-wait'
+                  : 'text-[var(--color-text-muted)]/70 bg-white/5 active:bg-white/10'
+            }`}
+          >
+            {version.updateAvailable
+              ? `v${version.latest} ↑`
+              : version.checking
+                ? '…'
+                : `v${version.current}`}
+          </button>
         </div>
         <button
           onClick={() => setSearchOpen(true)}
