@@ -7,6 +7,8 @@ import type { SchemeTrackerData, SchemeTrackerRound, SchemeTrackerProject, CISRo
 import ScrollableTable from '../../components/common/ScrollableTable'
 import { ROUND_INFO } from '../../data/scheme-round-info'
 import type { RoundInfo } from '../../data/scheme-round-info'
+import { ESG_TRACKER_PROJECTS, ROUND_ESG_SUMMARIES } from '../../data/esg-tracker-data'
+import type { ESGTrackerProject, PublicationStatus, AgreementStatus } from '../../data/esg-tracker-data'
 
 // ============================================================
 // Stage colours & helpers — defined BEFORE const arrays
@@ -45,9 +47,9 @@ function fmtMW(mw: number): string {
 // Component
 // ============================================================
 
-const TABS = ['overview', 'tracker', 'watchlist'] as const
+const TABS = ['overview', 'tracker', 'watchlist', 'esg'] as const
 type Tab = typeof TABS[number]
-const TAB_LABELS: Record<Tab, string> = { overview: 'Overview', tracker: 'Milestone Tracker', watchlist: 'Key Projects' }
+const TAB_LABELS: Record<Tab, string> = { overview: 'Overview', tracker: 'Milestone Tracker', watchlist: 'Key Projects', esg: 'ESG Agreement Proxy' }
 
 export default function SchemeTracker() {
   const [activeTab, setActiveTab] = useState<Tab>('overview')
@@ -497,6 +499,11 @@ export default function SchemeTracker() {
             <p>Loading project data...</p>
           </div>
         )
+      )}
+
+      {/* ESG Agreement Proxy Tab */}
+      {activeTab === 'esg' && (
+        <ESGAgreementProxyTab />
       )}
     </div>
   )
@@ -2211,6 +2218,543 @@ function RoundAnalysis({ title, date, color, children }: { title: string; date: 
       </div>
       <div className="space-y-2 text-sm text-[var(--color-text-muted)] leading-relaxed pl-4">
         {children}
+      </div>
+    </div>
+  )
+}
+
+// ============================================================
+// ESG Agreement Proxy Tab
+// ============================================================
+
+const PUB_STATUS_CONFIG: Record<PublicationStatus, { label: string; color: string; icon: string }> = {
+  published:    { label: 'Published',      color: '#22c55e', icon: '\u2713' },
+  partial:      { label: 'Partial',        color: '#06b6d4', icon: '\u00BD' },
+  fncen_only:   { label: 'FNCEN Only',     color: '#f59e0b', icon: '\u25CB' },
+  not_found:    { label: 'Not Found',      color: '#ef4444', icon: '\u2717' },
+  not_required: { label: 'Not Required',   color: '#636e72', icon: '\u2014' },
+  too_early:    { label: 'Too Early',      color: '#8b5cf6', icon: '\u23F3' },
+  exempt:       { label: 'Exempt',         color: '#636e72', icon: '\u2014' },
+}
+
+const AGR_STATUS_CONFIG: Record<AgreementStatus, { label: string; color: string }> = {
+  executed:        { label: 'Executed',        color: '#22c55e' },
+  likely_executed: { label: 'Likely Executed', color: '#3b82f6' },
+  awarded:         { label: 'Awarded Only',    color: '#f59e0b' },
+  unknown:         { label: 'Unknown',         color: '#636e72' },
+}
+
+function ESGAgreementProxyTab() {
+  const [schemeFilter, setSchemeFilter] = useState<'all' | 'CIS' | 'LTESA'>('all')
+  const [statusFilter, setStatusFilter] = useState<PublicationStatus | 'all'>('all')
+  const [showExplainer, setShowExplainer] = useState(true)
+  const [collapsedRounds, setCollapsedRounds] = useState<Set<string>>(new Set())
+
+  const filteredProjects = useMemo(() => {
+    let projects = ESG_TRACKER_PROJECTS
+    if (schemeFilter !== 'all') projects = projects.filter(p => p.scheme === schemeFilter)
+    if (statusFilter !== 'all') projects = projects.filter(p => p.publicationStatus === statusFilter)
+    return projects
+  }, [schemeFilter, statusFilter])
+
+  // Group by round
+  const roundGroups = useMemo(() => {
+    const groups = new Map<string, { roundId: string; round: string; scheme: 'CIS' | 'LTESA'; announced: string; projects: ESGTrackerProject[] }>()
+    for (const p of filteredProjects) {
+      if (!groups.has(p.roundId)) {
+        groups.set(p.roundId, { roundId: p.roundId, round: p.round, scheme: p.scheme, announced: p.awardAnnouncedDate, projects: [] })
+      }
+      groups.get(p.roundId)!.projects.push(p)
+    }
+    return [...groups.values()].sort((a, b) => a.announced.localeCompare(b.announced))
+  }, [filteredProjects])
+
+  // Summary stats
+  const stats = useMemo(() => {
+    const required = filteredProjects.filter(p => !['not_required', 'exempt', 'too_early'].includes(p.publicationStatus))
+    const published = required.filter(p => p.publicationStatus === 'published')
+    const partial = required.filter(p => p.publicationStatus === 'partial')
+    const fncenOnly = required.filter(p => p.publicationStatus === 'fncen_only')
+    const notFound = required.filter(p => p.publicationStatus === 'not_found')
+    const publishedMW = published.reduce((s, p) => s + p.capacityMW, 0)
+    const notFoundMW = notFound.reduce((s, p) => s + p.capacityMW, 0)
+    const totalRequiredMW = required.reduce((s, p) => s + p.capacityMW, 0)
+    const likelyExecuted = filteredProjects.filter(p => p.agreementStatus === 'executed' || p.agreementStatus === 'likely_executed')
+    const awardedOnly = filteredProjects.filter(p => p.agreementStatus === 'awarded')
+
+    return {
+      total: filteredProjects.length,
+      required: required.length,
+      published: published.length,
+      partial: partial.length,
+      fncenOnly: fncenOnly.length,
+      notFound: notFound.length,
+      publishedMW,
+      notFoundMW,
+      totalRequiredMW,
+      likelyExecuted: likelyExecuted.length,
+      awardedOnly: awardedOnly.length,
+      pubRate: required.length > 0 ? Math.round(((published.length + partial.length) / required.length) * 100) : 0,
+    }
+  }, [filteredProjects])
+
+  // Days since announced helper
+  function daysSince(dateStr: string): number {
+    return Math.floor((Date.now() - new Date(dateStr).getTime()) / (1000 * 60 * 60 * 24))
+  }
+
+  function toggleRound(id: string) {
+    setCollapsedRounds(prev => {
+      const next = new Set(prev)
+      if (next.has(id)) next.delete(id)
+      else next.add(id)
+      return next
+    })
+  }
+
+  return (
+    <div className="space-y-5">
+      {/* Explainer */}
+      {showExplainer && (
+        <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl p-5 relative">
+          <button
+            onClick={() => setShowExplainer(false)}
+            className="absolute top-3 right-3 w-6 h-6 flex items-center justify-center rounded-lg text-[var(--color-text-muted)] hover:text-[var(--color-text)] hover:bg-[var(--color-bg)] transition-colors"
+          >
+            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+
+          <h3 className="text-sm font-bold text-[var(--color-text)] mb-3">Using Published ESG Commitments as a Proxy for CISA Agreements</h3>
+
+          <div className="space-y-3 text-xs text-[var(--color-text-muted)] leading-relaxed">
+            <p>
+              <strong className="text-[var(--color-text)]">The problem:</strong> Projects are <em>awarded</em> a CISA/LTESA before they have <em>agreed</em> (executed) one.
+              Not all awarded projects end up signing with the government. There is no public register of which projects have actually executed their agreements.
+            </p>
+
+            <p>
+              <strong className="text-[var(--color-text)]">The proxy:</strong> From CIS Tender 1 onwards, successful proponents must publicly publish their
+              First Nations and social licence commitments within <strong className="text-[var(--color-primary)]">20 business days</strong> of
+              executing their Capacity Investment Scheme Agreement (CISA). These commitments are contractually binding under
+              Merit Criteria 4 (First Nations Engagement) and 7/8 (Social Licence).
+            </p>
+
+            <p>
+              <strong className="text-[var(--color-text)]">The insight:</strong> If a project was awarded months ago but has no published First Nations
+              or community benefit commitments anywhere — not on the proponent's website, not on the FNCEN tracker, not in ASL summaries —
+              this may indicate the agreement has not been executed. This is especially significant for projects that remain in early development.
+            </p>
+
+            <div className="bg-[var(--color-bg)] border border-[var(--color-border)] rounded-lg p-3 mt-3">
+              <p className="font-semibold text-[var(--color-text)] mb-1.5">Scheme comparison</p>
+              <div className="space-y-1.5">
+                <p>
+                  <strong style={{ color: '#f59e0b' }}>CIS (Federal):</strong> Merit Criteria 4 + 7/8 create binding commitments.
+                  Publication within 20 business days of CISA execution. Applies from Tender 1 (Dec 2024) onwards.
+                  Pilots had no formal requirement. Tender 5+ adds dedicated First Nations criterion and labour disclosure.
+                </p>
+                <p>
+                  <strong style={{ color: '#8b5cf6' }}>LTESA (NSW):</strong> Aboriginal Participation Plans required under
+                  the Electricity Infrastructure Investment Act 2020. Min 1.5% First Nations procurement with 10% stretch goal.
+                  First Nations Guidelines issued by the Minister and incorporated into LTESA tender rules by EnergyCo/Consumer Trustee.
+                </p>
+              </div>
+            </div>
+
+            <div className="bg-[var(--color-bg)] border border-[var(--color-border)] rounded-lg p-3">
+              <p className="font-semibold text-[var(--color-text)] mb-1.5">Data sources cross-referenced</p>
+              <div className="flex flex-wrap gap-2">
+                {[
+                  { label: 'Proponent websites', desc: 'Primary source — hardest to find' },
+                  { label: 'FNCEN tracker', desc: 'First Nations Clean Energy Network' },
+                  { label: 'ASL summaries', desc: 'AEMO Services tender round results' },
+                  { label: 'CEC BPC reports', desc: 'Clean Energy Council Best Practice Charter' },
+                  { label: 'DCCEEW/EnergyCo', desc: 'Government announcements' },
+                ].map(s => (
+                  <span key={s.label} className="text-[10px] px-2 py-1 rounded-lg bg-[var(--color-bg-card)] border border-[var(--color-border)]" title={s.desc}>
+                    {s.label}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {!showExplainer && (
+        <button
+          onClick={() => setShowExplainer(true)}
+          className="text-xs text-blue-400 hover:text-blue-300 hover:underline"
+        >
+          Show explainer
+        </button>
+      )}
+
+      {/* Filters */}
+      <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl p-4 space-y-3">
+        <div className="flex items-center gap-3 flex-wrap">
+          <span className="text-[10px] font-semibold uppercase tracking-wider text-[var(--color-text-muted)]">Scheme</span>
+          {(['all', 'CIS', 'LTESA'] as const).map(f => (
+            <button
+              key={f}
+              onClick={() => setSchemeFilter(f)}
+              className={`text-xs px-3 py-1.5 rounded-full border transition-colors ${
+                schemeFilter === f
+                  ? 'border-[var(--color-primary)] bg-[var(--color-primary)]/20 text-[var(--color-primary)] font-medium'
+                  : 'border-[var(--color-border)] text-[var(--color-text-muted)] hover:border-[var(--color-text-muted)]'
+              }`}
+            >
+              {f === 'all' ? 'Both' : f}
+            </button>
+          ))}
+        </div>
+        <div className="flex items-center gap-2 flex-wrap">
+          <span className="text-[10px] font-semibold uppercase tracking-wider text-[var(--color-text-muted)]">Publication</span>
+          <button
+            onClick={() => setStatusFilter('all')}
+            className={`text-[10px] px-2.5 py-1 rounded-full border transition-colors ${
+              statusFilter === 'all'
+                ? 'border-[var(--color-primary)] bg-[var(--color-primary)]/20 text-[var(--color-primary)] font-medium'
+                : 'border-[var(--color-border)] text-[var(--color-text-muted)] hover:border-[var(--color-text-muted)]'
+            }`}
+          >
+            All
+          </button>
+          {(['published', 'partial', 'fncen_only', 'not_found', 'too_early'] as PublicationStatus[]).map(s => {
+            const cfg = PUB_STATUS_CONFIG[s]
+            return (
+              <button
+                key={s}
+                onClick={() => setStatusFilter(statusFilter === s ? 'all' : s)}
+                className={`text-[10px] px-2.5 py-1 rounded-full border transition-colors ${
+                  statusFilter === s
+                    ? 'font-medium border-transparent'
+                    : 'border-[var(--color-border)] text-[var(--color-text-muted)] hover:border-[var(--color-text-muted)]'
+                }`}
+                style={statusFilter === s ? { backgroundColor: `${cfg.color}20`, color: cfg.color } : undefined}
+              >
+                {cfg.icon} {cfg.label}
+              </button>
+            )
+          })}
+        </div>
+      </div>
+
+      {/* Summary cards */}
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+        <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl p-3 text-center">
+          <div className="text-2xl font-bold" style={{ color: stats.pubRate >= 50 ? '#f59e0b' : '#ef4444' }}>
+            {stats.pubRate}%
+          </div>
+          <div className="text-[10px] text-[var(--color-text-muted)] mt-0.5">Publication rate</div>
+          <div className="text-[9px] text-[var(--color-text-muted)]">(published + partial)</div>
+        </div>
+        <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl p-3 text-center">
+          <div className="text-2xl font-bold text-[#ef4444]">{stats.notFound}</div>
+          <div className="text-[10px] text-[var(--color-text-muted)] mt-0.5">Not found</div>
+          <div className="text-[9px] text-[var(--color-text-muted)]">{fmtMW(stats.notFoundMW)}</div>
+        </div>
+        <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl p-3 text-center">
+          <div className="text-2xl font-bold text-[#22c55e]">{stats.published + stats.partial}</div>
+          <div className="text-[10px] text-[var(--color-text-muted)] mt-0.5">Published / Partial</div>
+          <div className="text-[9px] text-[var(--color-text-muted)]">{fmtMW(stats.publishedMW)}</div>
+        </div>
+        <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl p-3 text-center">
+          <div className="text-2xl font-bold text-[#f59e0b]">{stats.fncenOnly}</div>
+          <div className="text-[10px] text-[var(--color-text-muted)] mt-0.5">FNCEN only</div>
+          <div className="text-[9px] text-[var(--color-text-muted)]">No proponent site</div>
+        </div>
+      </div>
+
+      {/* Agreement status bar */}
+      <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl p-4">
+        <p className="text-[10px] uppercase tracking-wider text-[var(--color-text-muted)] font-medium mb-2">
+          Inferred agreement status across {stats.total} projects
+        </p>
+        <div className="flex h-4 rounded-full overflow-hidden bg-[var(--color-bg)]">
+          {(() => {
+            const executed = filteredProjects.filter(p => p.agreementStatus === 'executed')
+            const likely = filteredProjects.filter(p => p.agreementStatus === 'likely_executed')
+            const awarded = filteredProjects.filter(p => p.agreementStatus === 'awarded')
+            const unk = filteredProjects.filter(p => p.agreementStatus === 'unknown')
+            const total = filteredProjects.length || 1
+            return (
+              <>
+                {executed.length > 0 && <div style={{ width: `${executed.length / total * 100}%`, backgroundColor: '#22c55e' }} title={`Executed: ${executed.length}`} />}
+                {likely.length > 0 && <div style={{ width: `${likely.length / total * 100}%`, backgroundColor: '#3b82f6' }} title={`Likely Executed: ${likely.length}`} />}
+                {awarded.length > 0 && <div style={{ width: `${awarded.length / total * 100}%`, backgroundColor: '#f59e0b' }} title={`Awarded Only: ${awarded.length}`} />}
+                {unk.length > 0 && <div style={{ width: `${unk.length / total * 100}%`, backgroundColor: '#636e72' }} title={`Unknown: ${unk.length}`} />}
+              </>
+            )
+          })()}
+        </div>
+        <div className="flex flex-wrap gap-3 mt-2">
+          {(Object.entries(AGR_STATUS_CONFIG) as [AgreementStatus, { label: string; color: string }][]).map(([key, cfg]) => {
+            const count = filteredProjects.filter(p => p.agreementStatus === key).length
+            if (count === 0) return null
+            return (
+              <div key={key} className="flex items-center gap-1.5">
+                <span className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: cfg.color }} />
+                <span className="text-[10px] text-[var(--color-text-muted)]">{cfg.label} ({count})</span>
+              </div>
+            )
+          })}
+        </div>
+      </div>
+
+      {/* Round-by-round breakdown */}
+      <div className="space-y-3">
+        {roundGroups.map(group => {
+          const collapsed = collapsedRounds.has(group.roundId)
+          const schemeColor = group.scheme === 'CIS' ? '#f59e0b' : '#8b5cf6'
+          const roundSummary = ROUND_ESG_SUMMARIES.find(r => r.roundId === group.roundId)
+          const pubRequired = roundSummary?.publicationRequired ?? false
+          const daysAgo = daysSince(group.announced)
+
+          // Stats for this round
+          const notFound = group.projects.filter(p => p.publicationStatus === 'not_found').length
+
+          return (
+            <div key={group.roundId} className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl overflow-hidden">
+              <button
+                onClick={() => toggleRound(group.roundId)}
+                className="w-full text-left p-4 hover:bg-[var(--color-bg)]/30 transition-colors"
+              >
+                <div className="flex items-start justify-between mb-2">
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center gap-2 mb-0.5">
+                      <span
+                        className="text-[10px] font-semibold px-2 py-0.5 rounded-full shrink-0"
+                        style={{ backgroundColor: `${schemeColor}20`, color: schemeColor }}
+                      >
+                        {group.scheme}
+                      </span>
+                      <h3 className="text-sm font-semibold text-[var(--color-text)] truncate">{group.round}</h3>
+                    </div>
+                    <div className="flex items-center gap-2 text-[10px] text-[var(--color-text-muted)]">
+                      <span>Announced {group.announced}</span>
+                      <span>·</span>
+                      <span>{daysAgo} days ago</span>
+                      <span>·</span>
+                      <span>{group.projects.length} projects</span>
+                      {roundSummary?.totalFNCommitmentM && (
+                        <>
+                          <span>·</span>
+                          <span style={{ color: schemeColor }}>${roundSummary.totalFNCommitmentM}M FN commitments</span>
+                        </>
+                      )}
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-2 shrink-0 ml-2">
+                    {pubRequired ? (
+                      notFound > 0 ? (
+                        <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-[#ef4444]/20 text-[#ef4444]">
+                          {notFound} not published
+                        </span>
+                      ) : (
+                        <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-[#22c55e]/20 text-[#22c55e]">
+                          All published
+                        </span>
+                      )
+                    ) : (
+                      <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-[#636e72]/20 text-[#636e72]">
+                        Not required
+                      </span>
+                    )}
+                    <svg
+                      className={`w-4 h-4 text-[var(--color-text-muted)] transition-transform ${collapsed ? '' : 'rotate-180'}`}
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                    >
+                      <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
+                    </svg>
+                  </div>
+                </div>
+
+                {/* Publication status bar */}
+                {pubRequired && (
+                  <div className="flex h-2 rounded-full overflow-hidden bg-[var(--color-bg)]">
+                    {(['published', 'partial', 'fncen_only', 'not_found', 'too_early', 'exempt'] as PublicationStatus[]).map(status => {
+                      const count = group.projects.filter(p => p.publicationStatus === status).length
+                      if (count === 0) return null
+                      return (
+                        <div
+                          key={status}
+                          style={{ width: `${(count / group.projects.length) * 100}%`, backgroundColor: PUB_STATUS_CONFIG[status].color }}
+                          title={`${PUB_STATUS_CONFIG[status].label}: ${count}`}
+                        />
+                      )
+                    })}
+                  </div>
+                )}
+
+                {/* Merit criteria version */}
+                {roundSummary && (
+                  <p className="text-[9px] text-[var(--color-text-muted)] mt-1.5 italic">
+                    {roundSummary.meritCriteriaVersion}
+                  </p>
+                )}
+              </button>
+
+              {/* Expanded project list */}
+              {!collapsed && (
+                <div className="border-t border-[var(--color-border)] divide-y divide-[var(--color-border)]/50">
+                  {group.projects.map((p, i) => {
+                    const pubCfg = PUB_STATUS_CONFIG[p.publicationStatus]
+                    const agrCfg = AGR_STATUS_CONFIG[p.agreementStatus]
+                    const daysAwarded = daysSince(p.awardAnnouncedDate)
+
+                    return (
+                      <div key={`${p.name}-${i}`} className="px-4 py-3">
+                        <div className="flex items-start justify-between gap-3">
+                          <div className="flex-1 min-w-0">
+                            <div className="flex items-center gap-2 flex-wrap">
+                              {p.projectId ? (
+                                <Link
+                                  to={`/projects/${p.projectId}?from=intelligence/scheme-tracker&fromLabel=Back to Scheme Intelligence`}
+                                  className="text-xs font-medium text-blue-400 hover:text-blue-300 truncate"
+                                >
+                                  {p.name}
+                                </Link>
+                              ) : (
+                                <span className="text-xs font-medium text-[var(--color-text)] truncate">{p.name}</span>
+                              )}
+                              {/* Publication status badge */}
+                              <span
+                                className="text-[9px] font-semibold px-1.5 py-0.5 rounded-full shrink-0"
+                                style={{ backgroundColor: `${pubCfg.color}20`, color: pubCfg.color }}
+                              >
+                                {pubCfg.icon} {pubCfg.label}
+                              </span>
+                              {/* Agreement status */}
+                              <span
+                                className="text-[9px] px-1.5 py-0.5 rounded-full shrink-0"
+                                style={{ backgroundColor: `${agrCfg.color}20`, color: agrCfg.color }}
+                              >
+                                {agrCfg.label}
+                              </span>
+                            </div>
+                            <div className="flex items-center gap-2 mt-0.5 text-[10px] text-[var(--color-text-muted)] flex-wrap">
+                              <span>{p.developer}</span>
+                              <span>·</span>
+                              <span>{p.state}</span>
+                              <span>·</span>
+                              <span>{p.capacityMW.toLocaleString()} MW</span>
+                              <span>·</span>
+                              <span
+                                className="px-1.5 py-0 rounded-full"
+                                style={{ backgroundColor: `${stageColor(p.stage)}20`, color: stageColor(p.stage) }}
+                              >
+                                {stageLabel(p.stage)}
+                              </span>
+                              {daysAwarded > 60 && p.publicationStatus === 'not_found' && pubRequired && (
+                                <>
+                                  <span>·</span>
+                                  <span className="text-[#ef4444] font-medium">{daysAwarded} days since award</span>
+                                </>
+                              )}
+                            </div>
+                            {/* Data source indicators */}
+                            <div className="flex items-center gap-1.5 mt-1">
+                              {p.fncenListed && (
+                                <span className="text-[8px] px-1.5 py-0.5 rounded bg-[var(--color-bg)] border border-[var(--color-border)] text-[var(--color-text-muted)]">
+                                  FNCEN
+                                </span>
+                              )}
+                              {p.cecCharterSignatory && (
+                                <span className="text-[8px] px-1.5 py-0.5 rounded bg-[var(--color-bg)] border border-[var(--color-border)] text-[var(--color-text-muted)]">
+                                  CEC BPC
+                                </span>
+                              )}
+                              {p.aslSummaryData && (
+                                <span className="text-[8px] px-1.5 py-0.5 rounded bg-[var(--color-bg)] border border-[var(--color-border)] text-[var(--color-text-muted)]">
+                                  ASL
+                                </span>
+                              )}
+                              {p.proponentWebsiteUrl && (
+                                <a
+                                  href={p.proponentWebsiteUrl}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="text-[8px] px-1.5 py-0.5 rounded bg-[#22c55e]/10 border border-[#22c55e]/30 text-[#22c55e] hover:underline"
+                                >
+                                  Proponent site
+                                </a>
+                              )}
+                            </div>
+                            {/* Commitment details */}
+                            {p.fnCommitments && p.fnCommitments.length > 0 && (
+                              <div className="mt-1.5 text-[10px] text-[var(--color-text-muted)]">
+                                {p.fnCommitments.map((c, j) => (
+                                  <span key={j} className="inline-block mr-2">
+                                    <span className="text-[var(--color-primary)]">&bull;</span> {c}
+                                  </span>
+                                ))}
+                              </div>
+                            )}
+                            {p.communityBenefitDetails && p.communityBenefitDetails.length > 0 && (
+                              <div className="mt-1 text-[10px] text-[var(--color-text-muted)]">
+                                {p.communityBenefitDetails.map((c, j) => (
+                                  <span key={j} className="inline-block mr-2">
+                                    <span style={{ color: schemeColor }}>&bull;</span> {c}
+                                  </span>
+                                ))}
+                              </div>
+                            )}
+                            {p.notes && (
+                              <p className="text-[9px] text-[var(--color-text-muted)] mt-1 italic">{p.notes}</p>
+                            )}
+                          </div>
+                        </div>
+                      </div>
+                    )
+                  })}
+                </div>
+              )}
+            </div>
+          )
+        })}
+      </div>
+
+      {/* Methodology */}
+      <details className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl p-4">
+        <summary className="text-sm font-medium text-[var(--color-text)] cursor-pointer">Methodology & limitations</summary>
+        <div className="mt-3 text-xs text-[var(--color-text-muted)] space-y-2">
+          <p>
+            This tracker cross-references multiple public data sources to infer whether CIS/LTESA projects have executed
+            their government agreements. The 20-business-day publication rule for First Nations and social licence
+            commitments (applicable from CIS Tender 1 onwards) means that the <em>absence</em> of published commitments
+            can be a signal — though not proof — that a CISA has not been executed.
+          </p>
+          <p><strong className="text-[var(--color-text)]">Limitations:</strong></p>
+          <ul className="list-disc pl-4 space-y-1">
+            <li>Proponent websites may publish commitments in locations not indexed by search engines</li>
+            <li>Some commitments may be published as PDFs within planning documents rather than standalone pages</li>
+            <li>The FNCEN tracker aggregates data from government announcements, not from proponent self-reporting</li>
+            <li>SPV (Special Purpose Vehicle) structures may not have public-facing websites</li>
+            <li>The 20-day rule applies from execution date, not announcement date — execution may occur weeks or months after announcement</li>
+            <li>LTESA requirements differ from CIS: Aboriginal Participation Plans under the EII Act 2020 follow different publication pathways</li>
+          </ul>
+          <p>
+            <strong className="text-[var(--color-text)]">Data freshness:</strong> This tracker is based on research conducted in March 2026.
+            Proponent websites and the FNCEN tracker should be checked for updates.
+          </p>
+        </div>
+      </details>
+
+      {/* Source note */}
+      <div className="text-xs text-[var(--color-text-muted)] italic space-y-0.5">
+        <p>
+          Sources: DCCEEW CIS tender results, ASL tender round summaries, First Nations Clean Energy Network
+          "From Commitment to Delivery" tracker, Clean Energy Council Best Practice Charter reports,
+          proponent/developer websites, NSW EnergyCo First Nations Guidelines.
+        </p>
+        <p>
+          CIS tender guidelines: Merit Criteria 4 (First Nations) and 7/8 (Social Licence) per ASL market briefing notes.
+          LTESA: Electricity Infrastructure Investment Act 2020, s.4(1) First Nations Guidelines.
+        </p>
       </div>
     </div>
   )
