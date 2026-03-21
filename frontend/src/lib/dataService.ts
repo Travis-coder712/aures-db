@@ -469,6 +469,26 @@ export async function fetchEISCoverage(): Promise<EISCoverageData | null> {
   } catch { return null }
 }
 
+export interface EISPdfOpportunity {
+  id: string; name: string; technology: string; state: string; capacity_mw: number
+  data_gaps: string[]; eis_url: string | null; eis_year: number | null; priority: 'high' | 'medium' | 'low'
+  status?: string; reason_eligible?: string
+}
+export interface EISPdfOpportunitiesData {
+  summary: { total_opportunities: number; high_priority: number; medium_priority: number; low_priority: number; existing_projects_with_gaps: number; coverage_gap_candidates: number }
+  opportunities: EISPdfOpportunity[]
+}
+let eisPdfCache: EISPdfOpportunitiesData | null = null
+export async function fetchEISPdfOpportunities(): Promise<EISPdfOpportunitiesData | null> {
+  if (eisPdfCache) return eisPdfCache
+  try {
+    const resp = await fetch(`${BASE}/analytics/eis-pdf-opportunities.json`)
+    if (!resp.ok) return null
+    eisPdfCache = (await resp.json()) as EISPdfOpportunitiesData
+    return eisPdfCache
+  } catch { return null }
+}
+
 // ============================================================
 // REZ Access Rights
 // ============================================================

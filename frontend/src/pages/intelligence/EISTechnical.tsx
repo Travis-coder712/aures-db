@@ -5,7 +5,8 @@ import {
   ResponsiveContainer, ScatterChart, Scatter, Cell, ReferenceLine,
   PieChart, Pie,
 } from 'recharts'
-import { fetchEISAnalytics, fetchEISComparison, fetchEISCoverage } from '../../lib/dataService'
+import { fetchEISAnalytics, fetchEISComparison, fetchEISCoverage, fetchEISPdfOpportunities } from '../../lib/dataService'
+import type { EISPdfOpportunitiesData, EISPdfOpportunity } from '../../lib/dataService'
 import type { EISAnalyticsData, EISWindProject, EISBESSProject, EISSolarProject, EISComparisonData, EISComparisonProject, EISCoverageData } from '../../lib/types'
 import ScrollableTable from '../../components/common/ScrollableTable'
 import { FINANCIAL_CLOSE_PROJECTS } from '../../data/financial-close-data'
@@ -181,6 +182,7 @@ export default function EISTechnical() {
   const [data, setData] = useState<EISAnalyticsData | null>(null)
   const [comparison, setComparison] = useState<EISComparisonData | null>(null)
   const [coverage, setCoverage] = useState<EISCoverageData | null>(null)
+  const [pdfOpps, setPdfOpps] = useState<EISPdfOpportunitiesData | null>(null)
   const [loading, setLoading] = useState(true)
   const [tab, setTab] = useState<TabId>('wind')
   const [stateFilter, setStateFilter] = useState<string | null>(null)
@@ -190,8 +192,8 @@ export default function EISTechnical() {
   const [compSort, setCompSort] = useState<{ col: keyof EISComparisonProject; dir: 'asc' | 'desc' }>({ col: 'cf_delta_pct', dir: 'asc' })
 
   useEffect(() => {
-    Promise.all([fetchEISAnalytics(), fetchEISComparison(), fetchEISCoverage()])
-      .then(([d, comp, cov]) => { setData(d); setComparison(comp); setCoverage(cov); setLoading(false) })
+    Promise.all([fetchEISAnalytics(), fetchEISComparison(), fetchEISCoverage(), fetchEISPdfOpportunities()])
+      .then(([d, comp, cov, pdf]) => { setData(d); setComparison(comp); setCoverage(cov); setPdfOpps(pdf); setLoading(false) })
   }, [])
 
   // Available states from data
@@ -1552,7 +1554,7 @@ export default function EISTechnical() {
       {/* COVERAGE TAB */}
       {/* ============================================================ */}
       {tab === 'coverage' && (
-        <CoverageTab data={data} coverage={coverage} />
+        <CoverageTab data={data} coverage={coverage} pdfOpps={pdfOpps} />
       )}
 
       {/* Financial Close Tab */}
@@ -1585,9 +1587,18 @@ type ExtractedProject = {
 
 type ExtractedSortCol = 'name' | 'technology' | 'state' | 'status' | 'capacity_mw' | 'document_year'
 
-function CoverageTab({ data, coverage }: { data: EISAnalyticsData; coverage: EISCoverageData | null }) {
+function CoverageTab({ data, coverage, pdfOpps }: { data: EISAnalyticsData; coverage: EISCoverageData | null; pdfOpps: EISPdfOpportunitiesData | null }) {
   const [sortCol, setSortCol] = useState<ExtractedSortCol>('name')
   const [sortDir, setSortDir] = useState<'asc' | 'desc'>('asc')
+
+  // Build a lookup map for PDF opportunities by project ID
+  const pdfOppMap = useMemo(() => {
+    const map = new Map<string, EISPdfOpportunity>()
+    if (pdfOpps) {
+      for (const o of pdfOpps.opportunities) map.set(o.id, o)
+    }
+    return map
+  }, [pdfOpps])
 
   const allExtracted: ExtractedProject[] = useMemo(() => {
     const list: ExtractedProject[] = [
@@ -1619,10 +1630,11 @@ function CoverageTab({ data, coverage }: { data: EISAnalyticsData; coverage: EIS
   return (
     <div className="space-y-6">
       {/* Summary cards */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
+      <div className="grid grid-cols-2 lg:grid-cols-5 gap-3">
         <StatCard label="EIS Data Extracted" value={extracted.toString()} unit="projects" />
         <StatCard label="Pending Extraction" value={(coverage?.available_not_extracted.length ?? 0).toString()} unit="projects" />
         <StatCard label="Coverage Gap" value={gapCount.toString()} unit="eligible without EIS" />
+        <StatCard label="PDF Opportunities" value={(pdfOpps?.summary.total_opportunities ?? 0).toString()} unit={`${pdfOpps?.summary.high_priority ?? 0} high priority`} />
         <StatCard
           label="Coverage Rate"
           value={total > 0 ? `${Math.round(extracted / total * 100)}%` : '—'}
@@ -1656,12 +1668,14 @@ function CoverageTab({ data, coverage }: { data: EISAnalyticsData; coverage: EIS
                     {sortCol === col ? (sortDir === 'asc' ? <SortUpIcon /> : <SortDownIcon />) : null}
                   </th>
                 ))}
+                <th className="px-2 py-2 text-center font-medium text-[var(--color-text-muted)]">Data Gaps</th>
                 <th className="px-2 py-2 text-left font-medium text-[var(--color-text-muted)]">Document</th>
               </tr>
             </thead>
             <tbody>
               {allExtracted.map((p) => {
                 const tc = TECH_COLOUR_MAP[p.technology] ?? { bg: '#63727220', fg: '#637272' }
+                const opp = pdfOppMap.get(p.id)
                 return (
                   <tr key={`${p.id}-${p.technology}`} className="border-b border-[var(--color-border)]/50 hover:bg-[var(--color-bg-elevated)]/50">
                     <td className="px-2 py-1.5">
@@ -1680,6 +1694,21 @@ function CoverageTab({ data, coverage }: { data: EISAnalyticsData; coverage: EIS
                     </td>
                     <td className="px-2 py-1.5 text-right font-mono">{fmtInt(p.capacity_mw)}</td>
                     <td className="px-2 py-1.5 text-right font-mono">{p.document_year ?? '—'}</td>
+                    <td className="px-2 py-1.5 text-center">
+                      {opp ? (
+                        <span
+                          className={`inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-[9px] font-semibold ${
+                            opp.priority === 'high' ? 'bg-red-500/15 text-red-400' : opp.priority === 'medium' ? 'bg-amber-500/15 text-amber-400' : 'bg-blue-500/15 text-blue-400'
+                          }`}
+                          title={`Missing: ${opp.data_gaps.join(', ')}`}
+                        >
+                          <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m.75 12l3 3m0 0l3-3m-3 3v-6m-1.5-9H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" /></svg>
+                          {opp.data_gaps.length}
+                        </span>
+                      ) : (
+                        <span className="text-emerald-500 text-[9px]">Complete</span>
+                      )}
+                    </td>
                     <td className="px-2 py-1.5">
                       {p.document_url ? (
                         <a href={p.document_url} target="_blank" rel="noopener noreferrer"
@@ -1743,7 +1772,7 @@ function CoverageTab({ data, coverage }: { data: EISAnalyticsData; coverage: EIS
 
       {/* Coverage Gap — eligible projects without EIS data */}
       {coverage?.coverage_gap && coverage.coverage_gap.length > 0 && (
-        <CoverageGapTable gap={coverage.coverage_gap} />
+        <CoverageGapTable gap={coverage.coverage_gap} pdfOppMap={pdfOppMap} />
       )}
     </div>
   )
@@ -1764,7 +1793,7 @@ const STATUS_COLORS: Record<string, string> = {
 
 type GapSortCol = 'name' | 'technology' | 'state' | 'capacity_mw' | 'status' | 'developer' | 'reason'
 
-function CoverageGapTable({ gap }: { gap: Array<{ id: string; name: string; technology: string; status: string; capacity_mw: number; state: string; developer?: string; reason: string; scheme?: string }> }) {
+function CoverageGapTable({ gap, pdfOppMap }: { gap: Array<{ id: string; name: string; technology: string; status: string; capacity_mw: number; state: string; developer?: string; reason: string; scheme?: string }>; pdfOppMap: Map<string, EISPdfOpportunity> }) {
   const [techFilter, setTechFilter] = useState<string>('all')
   const [statusFilter, setStatusFilter] = useState<string>('all')
   const [sortCol, setSortCol] = useState<GapSortCol>('capacity_mw')
@@ -1866,6 +1895,7 @@ function CoverageGapTable({ gap }: { gap: Array<{ id: string; name: string; tech
                   {sortCol === col ? (sortDir === 'asc' ? <SortUpIcon /> : <SortDownIcon />) : null}
                 </th>
               ))}
+              <th className="px-2 py-2 text-center font-medium text-[var(--color-text-muted)] whitespace-nowrap">EIS PDF</th>
             </tr>
           </thead>
           <tbody>
@@ -1893,6 +1923,21 @@ function CoverageGapTable({ gap }: { gap: Array<{ id: string; name: string; tech
                   <td className="px-2 py-1.5 text-[var(--color-text-muted)] text-[10px]">
                     {p.reason}
                     {p.scheme && <span className="ml-1 text-[var(--color-primary)]">({p.scheme})</span>}
+                  </td>
+                  <td className="px-2 py-1.5 text-center">
+                    {pdfOppMap.has(p.id) ? (
+                      <span
+                        className={`inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded text-[9px] font-semibold ${
+                          pdfOppMap.get(p.id)!.priority === 'high' ? 'bg-red-500/15 text-red-400' : 'bg-amber-500/15 text-amber-400'
+                        }`}
+                        title={`Priority: ${pdfOppMap.get(p.id)!.priority} — EIS PDF may be available for download`}
+                      >
+                        <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m.75 12l3 3m0 0l3-3m-3 3v-6m-1.5-9H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" /></svg>
+                        {pdfOppMap.get(p.id)!.priority}
+                      </span>
+                    ) : (
+                      <span className="text-[var(--color-text-muted)]/30 text-[9px]">—</span>
+                    )}
                   </td>
                 </tr>
               )
