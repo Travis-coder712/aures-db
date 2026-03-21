@@ -2282,6 +2282,25 @@ function ESGAgreementProxyTab() {
     const likelyExecuted = filteredProjects.filter(p => p.agreementStatus === 'executed' || p.agreementStatus === 'likely_executed')
     const awardedOnly = filteredProjects.filter(p => p.agreementStatus === 'awarded')
 
+    // Agreement confidence: combine agreement status + construction/operating stage + publication evidence
+    // "Confirmed" = executed OR likely_executed (in construction/operating) OR has published/partial/fncen_only evidence
+    // "Not confirmed" = awarded only AND no publication evidence AND not in construction/operating
+    const confirmedProjects = filteredProjects.filter(p =>
+      p.agreementStatus === 'executed' ||
+      p.agreementStatus === 'likely_executed' ||
+      ['construction', 'operating', 'commissioning'].includes(p.stage) ||
+      ['published', 'partial'].includes(p.publicationStatus)
+    )
+    const notConfirmedProjects = filteredProjects.filter(p =>
+      p.agreementStatus !== 'executed' &&
+      p.agreementStatus !== 'likely_executed' &&
+      !['construction', 'operating', 'commissioning'].includes(p.stage) &&
+      !['published', 'partial'].includes(p.publicationStatus)
+    )
+    const confirmedMW = confirmedProjects.reduce((s, p) => s + p.capacityMW, 0)
+    const notConfirmedMW = notConfirmedProjects.reduce((s, p) => s + p.capacityMW, 0)
+    const totalMW = filteredProjects.reduce((s, p) => s + p.capacityMW, 0)
+
     return {
       total: filteredProjects.length,
       required: required.length,
@@ -2295,8 +2314,36 @@ function ESGAgreementProxyTab() {
       likelyExecuted: likelyExecuted.length,
       awardedOnly: awardedOnly.length,
       pubRate: required.length > 0 ? Math.round(((published.length + partial.length) / required.length) * 100) : 0,
+      confirmedCount: confirmedProjects.length,
+      confirmedMW,
+      notConfirmedCount: notConfirmedProjects.length,
+      notConfirmedMW,
+      totalMW,
+      confirmRate: filteredProjects.length > 0 ? Math.round((confirmedProjects.length / filteredProjects.length) * 100) : 0,
     }
   }, [filteredProjects])
+
+  // Per-round confidence stats helper
+  function getRoundConfidence(projects: ESGTrackerProject[]) {
+    const confirmed = projects.filter(p =>
+      p.agreementStatus === 'executed' ||
+      p.agreementStatus === 'likely_executed' ||
+      ['construction', 'operating', 'commissioning'].includes(p.stage) ||
+      ['published', 'partial'].includes(p.publicationStatus)
+    )
+    const notConfirmed = projects.filter(p =>
+      p.agreementStatus !== 'executed' &&
+      p.agreementStatus !== 'likely_executed' &&
+      !['construction', 'operating', 'commissioning'].includes(p.stage) &&
+      !['published', 'partial'].includes(p.publicationStatus)
+    )
+    return {
+      confirmedCount: confirmed.length,
+      confirmedMW: confirmed.reduce((s, p) => s + p.capacityMW, 0),
+      notConfirmedCount: notConfirmed.length,
+      notConfirmedMW: notConfirmed.reduce((s, p) => s + p.capacityMW, 0),
+    }
+  }
 
   // Days since announced helper
   function daysSince(dateStr: string): number {
@@ -2442,7 +2489,56 @@ function ESGAgreementProxyTab() {
         </div>
       </div>
 
-      {/* Summary cards */}
+      {/* Agreement Confidence — headline */}
+      <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl p-5">
+        <h3 className="text-sm font-bold text-[var(--color-text)] mb-1">Agreement Confidence Assessment</h3>
+        <p className="text-[10px] text-[var(--color-text-muted)] mb-4 leading-relaxed">
+          Combining construction/operating status, published ESG commitments, FNCEN listings, and ASL data to determine
+          which of the {stats.total} awarded projects ({fmtMW(stats.totalMW)}) we are confident have executed their {schemeFilter === 'all' ? 'CIS/LTESA' : schemeFilter} agreement.
+        </p>
+
+        {/* Confidence bar */}
+        <div className="flex h-5 rounded-full overflow-hidden bg-[var(--color-bg)] mb-3">
+          {stats.confirmedCount > 0 && (
+            <div
+              className="flex items-center justify-center text-[9px] font-bold text-white"
+              style={{ width: `${(stats.confirmedCount / (stats.total || 1)) * 100}%`, backgroundColor: '#22c55e' }}
+            >
+              {stats.confirmRate}%
+            </div>
+          )}
+          {stats.notConfirmedCount > 0 && (
+            <div
+              className="flex items-center justify-center text-[9px] font-bold text-white"
+              style={{ width: `${(stats.notConfirmedCount / (stats.total || 1)) * 100}%`, backgroundColor: '#ef4444' }}
+            >
+              {100 - stats.confirmRate}%
+            </div>
+          )}
+        </div>
+
+        {/* Two-column stat blocks */}
+        <div className="grid grid-cols-2 gap-3">
+          <div className="bg-[#22c55e]/5 border border-[#22c55e]/20 rounded-xl p-4 text-center">
+            <div className="text-3xl font-bold text-[#22c55e]">{stats.confirmedCount}</div>
+            <div className="text-xs font-medium text-[#22c55e] mt-0.5">Confirmed</div>
+            <div className="text-[10px] text-[var(--color-text-muted)] mt-1">{fmtMW(stats.confirmedMW)}</div>
+            <div className="text-[9px] text-[var(--color-text-muted)] mt-0.5 leading-relaxed">
+              Executed, in construction/operating, or published ESG commitments found
+            </div>
+          </div>
+          <div className="bg-[#ef4444]/5 border border-[#ef4444]/20 rounded-xl p-4 text-center">
+            <div className="text-3xl font-bold text-[#ef4444]">{stats.notConfirmedCount}</div>
+            <div className="text-xs font-medium text-[#ef4444] mt-0.5">Not Yet Confirmed</div>
+            <div className="text-[10px] text-[var(--color-text-muted)] mt-1">{fmtMW(stats.notConfirmedMW)}</div>
+            <div className="text-[9px] text-[var(--color-text-muted)] mt-0.5 leading-relaxed">
+              Awarded but no construction activity, no publication, or insufficient evidence
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Publication summary cards */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
         <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl p-3 text-center">
           <div className="text-2xl font-bold" style={{ color: stats.pubRate >= 50 ? '#f59e0b' : '#ef4444' }}>
@@ -2515,6 +2611,8 @@ function ESGAgreementProxyTab() {
 
           // Stats for this round
           const notFound = group.projects.filter(p => p.publicationStatus === 'not_found').length
+          const roundConf = getRoundConfidence(group.projects)
+          const roundTotalMW = group.projects.reduce((s, p) => s + p.capacityMW, 0)
 
           return (
             <div key={group.roundId} className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl overflow-hidden">
@@ -2533,17 +2631,28 @@ function ESGAgreementProxyTab() {
                       </span>
                       <h3 className="text-sm font-semibold text-[var(--color-text)] truncate">{group.round}</h3>
                     </div>
-                    <div className="flex items-center gap-2 text-[10px] text-[var(--color-text-muted)]">
+                    <div className="flex items-center gap-2 text-[10px] text-[var(--color-text-muted)] flex-wrap">
                       <span>Announced {group.announced}</span>
                       <span>·</span>
                       <span>{daysAgo} days ago</span>
                       <span>·</span>
-                      <span>{group.projects.length} projects</span>
+                      <span>{group.projects.length} projects ({fmtMW(roundTotalMW)})</span>
                       {roundSummary?.totalFNCommitmentM && (
                         <>
                           <span>·</span>
                           <span style={{ color: schemeColor }}>${roundSummary.totalFNCommitmentM}M FN commitments</span>
                         </>
+                      )}
+                    </div>
+                    {/* Per-round agreement confidence */}
+                    <div className="flex items-center gap-2 mt-1.5">
+                      <span className="text-[9px] font-semibold px-2 py-0.5 rounded-full bg-[#22c55e]/15 text-[#22c55e]">
+                        {roundConf.confirmedCount} confirmed ({fmtMW(roundConf.confirmedMW)})
+                      </span>
+                      {roundConf.notConfirmedCount > 0 && (
+                        <span className="text-[9px] font-semibold px-2 py-0.5 rounded-full bg-[#ef4444]/15 text-[#ef4444]">
+                          {roundConf.notConfirmedCount} not confirmed ({fmtMW(roundConf.notConfirmedMW)})
+                        </span>
                       )}
                     </div>
                   </div>
