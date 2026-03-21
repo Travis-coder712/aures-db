@@ -478,6 +478,8 @@ export default function EISTechnical() {
     return [...filteredWindProjects, ...filteredBessProjects, ...solar, ...ph]
   }, [filteredWindProjects, filteredBessProjects, filteredSolarProjects, data, stateFilter])
 
+  const [selectedVoltage, setSelectedVoltage] = useState<string | null>(null)
+
   const voltageData = useMemo(() => {
     const breakdown: Record<string, number> = {}
     allConnectionProjects.forEach((p) => {
@@ -490,6 +492,22 @@ export default function EISTechnical() {
       .sort(([a], [b]) => parseInt(a) - parseInt(b))
       .map(([voltage, count]) => ({ voltage, count }))
   }, [allConnectionProjects])
+
+  const voltageProjects = useMemo(() => {
+    if (!selectedVoltage) return []
+    return allConnectionProjects
+      .filter((p) => p.connection_voltage_kv != null && String(p.connection_voltage_kv) === selectedVoltage)
+      .sort((a, b) => b.capacity_mw - a.capacity_mw)
+      .map((p) => ({
+        id: p.id,
+        name: p.name,
+        state: p.state,
+        capacity_mw: p.capacity_mw,
+        type: 'wind_speed_mean_ms' in p ? 'wind' : 'cell_chemistry' in p ? 'bess' : 'head_height_m' in p ? 'pumped hydro' : 'solar',
+        substation: (p as Record<string, unknown>).connection_substation_name as string | undefined,
+        distance_km: (p as Record<string, unknown>).connection_distance_km as number | undefined,
+      }))
+  }, [allConnectionProjects, selectedVoltage])
 
   const connectionDistanceData = useMemo(() => {
     return allConnectionProjects
@@ -1013,20 +1031,65 @@ export default function EISTechnical() {
 
           {/* Voltage breakdown */}
           <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl p-4">
-            <h3 className="text-sm font-semibold text-[var(--color-text)] mb-3">Connection Voltage Distribution</h3>
+            <h3 className="text-sm font-semibold text-[var(--color-text)] mb-1">Connection Voltage Distribution</h3>
+            <p className="text-[10px] text-[var(--color-text-muted)] mb-3">Click a bar to see the projects at that voltage level.</p>
             <ResponsiveContainer width="100%" height={250}>
-              <BarChart data={voltageData} margin={{ top: 5, right: 5, bottom: 5, left: 5 }}>
+              <BarChart data={voltageData} margin={{ top: 5, right: 5, bottom: 5, left: 5 }}
+                onClick={(e) => { if (e?.activeLabel != null) { const label = String(e.activeLabel); setSelectedVoltage(selectedVoltage === label ? null : label) } }}
+                style={{ cursor: 'pointer' }}
+              >
                 <CartesianGrid strokeDasharray="3 3" stroke="var(--color-border)" />
-                <XAxis dataKey="voltage" tick={{ fontSize: 10, fill: 'var(--color-text-muted)' }} />
+                <XAxis dataKey="voltage" tick={{ fontSize: 10, fill: 'var(--color-text-muted)' }} unit=" kV" />
                 <YAxis tick={{ fontSize: 10, fill: 'var(--color-text-muted)' }} allowDecimals={false} />
                 <Tooltip content={<ChartTooltip />} />
                 <Bar dataKey="count" name="Projects" fill="#f59e0b" radius={[4, 4, 0, 0]}>
-                  {voltageData.map((_, i) => (
-                    <Cell key={i} fill={['#3b82f6', '#8b5cf6', '#f59e0b', '#10b981', '#06b6d4', '#ec4899', '#ef4444'][i % 7]} />
+                  {voltageData.map((d, i) => (
+                    <Cell key={i} fill={d.voltage === selectedVoltage ? '#ffffff' : ['#3b82f6', '#8b5cf6', '#f59e0b', '#10b981', '#06b6d4', '#ec4899', '#ef4444'][i % 7]} opacity={selectedVoltage && d.voltage !== selectedVoltage ? 0.3 : 1} />
                   ))}
                 </Bar>
               </BarChart>
             </ResponsiveContainer>
+
+            {/* Voltage drill-down */}
+            {selectedVoltage && voltageProjects.length > 0 && (
+              <div className="mt-3 border-t border-[var(--color-border)] pt-3">
+                <div className="flex items-center justify-between mb-2">
+                  <h4 className="text-xs font-semibold text-[var(--color-text)]">
+                    {selectedVoltage} kV — {voltageProjects.length} project{voltageProjects.length !== 1 ? 's' : ''}
+                  </h4>
+                  <button onClick={() => setSelectedVoltage(null)} className="text-[10px] text-[var(--color-text-muted)] hover:text-[var(--color-text)]">Clear</button>
+                </div>
+                <ScrollableTable>
+                  <table className="w-full text-xs">
+                    <thead>
+                      <tr className="border-b border-[var(--color-border)]">
+                        <th className="px-2 py-1.5 text-left font-medium text-[var(--color-text-muted)]">Project</th>
+                        <th className="px-2 py-1.5 text-center font-medium text-[var(--color-text-muted)]">Tech</th>
+                        <th className="px-2 py-1.5 text-left font-medium text-[var(--color-text-muted)]">State</th>
+                        <th className="px-2 py-1.5 text-right font-medium text-[var(--color-text-muted)]">MW</th>
+                        <th className="px-2 py-1.5 text-left font-medium text-[var(--color-text-muted)]">Substation</th>
+                        <th className="px-2 py-1.5 text-right font-medium text-[var(--color-text-muted)]">Distance</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {voltageProjects.map((p) => {
+                        const tc = TECH_COLOUR_MAP[p.type] ?? { bg: '#63727220', fg: '#637272' }
+                        return (
+                          <tr key={p.id} className="border-b border-[var(--color-border)]/50 hover:bg-[var(--color-bg-elevated)]/50">
+                            <td className="px-2 py-1.5"><Link to={`/projects/${p.id}`} className="text-[var(--color-primary)] hover:underline">{p.name}</Link></td>
+                            <td className="px-2 py-1.5 text-center"><span className="px-1.5 py-0.5 rounded text-[9px] uppercase" style={{ backgroundColor: tc.bg, color: tc.fg }}>{p.type}</span></td>
+                            <td className="px-2 py-1.5" style={{ color: getStateColour(p.state) }}>{p.state}</td>
+                            <td className="px-2 py-1.5 text-right font-mono">{fmtInt(p.capacity_mw)}</td>
+                            <td className="px-2 py-1.5 text-[var(--color-text-muted)] truncate max-w-[200px]">{p.substation || '—'}</td>
+                            <td className="px-2 py-1.5 text-right font-mono">{p.distance_km != null ? `${p.distance_km} km` : '—'}</td>
+                          </tr>
+                        )
+                      })}
+                    </tbody>
+                  </table>
+                </ScrollableTable>
+              </div>
+            )}
           </div>
 
           {/* Connection distance ranked */}
@@ -2102,7 +2165,17 @@ function FinancialCloseTab() {
 // NSP summary sub-component
 // ============================================================
 
+type NSPSortCol = 'name' | 'wind' | 'solar' | 'bess' | 'hydro' | 'total_mw'
+
 function NSPTable({ data }: { data: EISAnalyticsData }) {
+  const [sortCol, setSortCol] = useState<NSPSortCol>('total_mw')
+  const [sortDir, setSortDir] = useState<'asc' | 'desc'>('desc')
+
+  const handleSort = (col: NSPSortCol) => {
+    setSortDir((prev) => (sortCol === col && prev === 'asc' ? 'desc' : 'asc'))
+    setSortCol(col)
+  }
+
   const nspCounts = useMemo(() => {
     const counts: Record<string, { wind: number; bess: number; solar: number; hydro: number; total_mw: number }> = {}
     const addProject = (p: { nsp?: string; capacity_mw: number }, type: 'wind' | 'bess' | 'solar' | 'hydro') => {
@@ -2115,22 +2188,36 @@ function NSPTable({ data }: { data: EISAnalyticsData }) {
     data.bess_projects.forEach((p) => addProject(p, 'bess'))
     ;(data.solar_projects ?? []).forEach((p) => addProject(p, 'solar'))
     ;(data.pumped_hydro_projects ?? []).forEach((p) => addProject(p, 'hydro'))
-    return Object.entries(counts)
-      .sort(([, a], [, b]) => b.total_mw - a.total_mw)
-      .map(([name, v]) => ({ name, ...v }))
-  }, [data])
+    const list = Object.entries(counts).map(([name, v]) => ({ name, ...v }))
+    return list.sort((a, b) => {
+      const av = a[sortCol]
+      const bv = b[sortCol]
+      if (typeof av === 'string' && typeof bv === 'string')
+        return sortDir === 'asc' ? av.localeCompare(bv) : bv.localeCompare(av)
+      return sortDir === 'asc' ? (av as number) - (bv as number) : (bv as number) - (av as number)
+    })
+  }, [data, sortCol, sortDir])
+
+  const thClass = 'px-2 py-2 font-medium text-[var(--color-text-muted)] cursor-pointer hover:text-[var(--color-text)] select-none whitespace-nowrap'
 
   return (
     <ScrollableTable>
       <table className="w-full text-xs">
         <thead>
           <tr className="border-b border-[var(--color-border)]">
-            <th className="px-2 py-2 text-left font-medium text-[var(--color-text-muted)]">NSP</th>
-            <th className="px-2 py-2 text-right font-medium text-[var(--color-text-muted)]">Wind</th>
-            <th className="px-2 py-2 text-right font-medium text-[var(--color-text-muted)]">Solar</th>
-            <th className="px-2 py-2 text-right font-medium text-[var(--color-text-muted)]">BESS</th>
-            <th className="px-2 py-2 text-right font-medium text-[var(--color-text-muted)]">Hydro</th>
-            <th className="px-2 py-2 text-right font-medium text-[var(--color-text-muted)]">Total MW</th>
+            {([
+              ['name', 'NSP', 'text-left'],
+              ['wind', 'Wind', 'text-right'],
+              ['solar', 'Solar', 'text-right'],
+              ['bess', 'BESS', 'text-right'],
+              ['hydro', 'Hydro', 'text-right'],
+              ['total_mw', 'Total MW', 'text-right'],
+            ] as [NSPSortCol, string, string][]).map(([col, label, align]) => (
+              <th key={col} className={`${thClass} ${align}`} onClick={() => handleSort(col)}>
+                {label}{' '}
+                {sortCol === col ? (sortDir === 'asc' ? <SortUpIcon /> : <SortDownIcon />) : null}
+              </th>
+            ))}
           </tr>
         </thead>
         <tbody>
