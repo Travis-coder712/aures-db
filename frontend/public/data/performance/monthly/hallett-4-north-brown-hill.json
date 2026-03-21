@@ -1,0 +1,252 @@
+{
+  "project_id": "hallett-4-north-brown-hill",
+  "name": "Hallett 4 North Brown Hill",
+  "technology": "wind",
+  "capacity_mw": 132.3,
+  "state": "SA",
+  "monthly": [
+    {
+      "year": 2024,
+      "month": 1,
+      "capacity_factor_pct": 28.0,
+      "energy_mwh": 27437.1,
+      "revenue_aud": 2318445.0,
+      "energy_price_received": 84.43,
+      "curtailment_pct": 1.4
+    },
+    {
+      "year": 2024,
+      "month": 2,
+      "capacity_factor_pct": 27.0,
+      "energy_mwh": 24753.7,
+      "revenue_aud": 1917458.0,
+      "energy_price_received": 77.4,
+      "curtailment_pct": 1.8
+    },
+    {
+      "year": 2024,
+      "month": 3,
+      "capacity_factor_pct": 28.9,
+      "energy_mwh": 28354.5,
+      "revenue_aud": 1896335.0,
+      "energy_price_received": 66.82,
+      "curtailment_pct": 0.6
+    },
+    {
+      "year": 2024,
+      "month": 4,
+      "capacity_factor_pct": 18.3,
+      "energy_mwh": 17375.0,
+      "revenue_aud": 1082657.0,
+      "energy_price_received": 62.26,
+      "curtailment_pct": 1.1
+    },
+    {
+      "year": 2024,
+      "month": 5,
+      "capacity_factor_pct": 22.6,
+      "energy_mwh": 22232.0,
+      "revenue_aud": 1265721.0,
+      "energy_price_received": 56.89,
+      "curtailment_pct": 0
+    },
+    {
+      "year": 2024,
+      "month": 6,
+      "capacity_factor_pct": 30.6,
+      "energy_mwh": 29080.0,
+      "revenue_aud": 1950013.0,
+      "energy_price_received": 67.0,
+      "curtailment_pct": 1.7
+    },
+    {
+      "year": 2024,
+      "month": 7,
+      "capacity_factor_pct": 34.6,
+      "energy_mwh": 33996.6,
+      "revenue_aud": 2809263.0,
+      "energy_price_received": 82.57,
+      "curtailment_pct": 0.2
+    },
+    {
+      "year": 2024,
+      "month": 8,
+      "capacity_factor_pct": 37.5,
+      "energy_mwh": 36798.3,
+      "revenue_aud": 2506181.0,
+      "energy_price_received": 68.05,
+      "curtailment_pct": 2.3
+    },
+    {
+      "year": 2024,
+      "month": 9,
+      "capacity_factor_pct": 36.2,
+      "energy_mwh": 34409.0,
+      "revenue_aud": 2051799.0,
+      "energy_price_received": 59.58,
+      "curtailment_pct": 2.7
+    },
+    {
+      "year": 2024,
+      "month": 10,
+      "capacity_factor_pct": 24.4,
+      "energy_mwh": 23967.2,
+      "revenue_aud": 1543540.0,
+      "energy_price_received": 64.35,
+      "curtailment_pct": 2.7
+    },
+    {
+      "year": 2024,
+      "month": 11,
+      "capacity_factor_pct": 25.9,
+      "energy_mwh": 24564.2,
+      "revenue_aud": 1759168.0,
+      "energy_price_received": 71.56,
+      "curtailment_pct": 0.9
+    },
+    {
+      "year": 2024,
+      "month": 12,
+      "capacity_factor_pct": 22.4,
+      "energy_mwh": 22003.3,
+      "revenue_aud": 1765362.0,
+      "energy_price_received": 80.17,
+      "curtailment_pct": 2.8
+    },
+    {
+      "year": 2025,
+      "month": 1,
+      "capacity_factor_pct": 24.0,
+      "energy_mwh": 23637.3,
+      "revenue_aud": 1763430.0,
+      "energy_price_received": 71.31,
+      "curtailment_pct": 3.3
+    },
+    {
+      "year": 2025,
+      "month": 2,
+      "capacity_factor_pct": 28.4,
+      "energy_mwh": 25219.5,
+      "revenue_aud": 1548438.0,
+      "energy_price_received": 58.69,
+      "curtailment_pct": 0
+    },
+    {
+      "year": 2025,
+      "month": 3,
+      "capacity_factor_pct": 28.9,
+      "energy_mwh": 28469.8,
+      "revenue_aud": 1546253.0,
+      "energy_price_received": 51.92,
+      "curtailment_pct": 2.4
+    },
+    {
+      "year": 2025,
+      "month": 4,
+      "capacity_factor_pct": 18.3,
+      "energy_mwh": 17431.6,
+      "revenue_aud": 1015523.0,
+      "energy_price_received": 55.69,
+      "curtailment_pct": 1.0
+    },
+    {
+      "year": 2025,
+      "month": 5,
+      "capacity_factor_pct": 27.1,
+      "energy_mwh": 26631.8,
+      "revenue_aud": 1419664.0,
+      "energy_price_received": 50.96,
+      "curtailment_pct": 2.2
+    },
+    {
+      "year": 2025,
+      "month": 6,
+      "capacity_factor_pct": 31.3,
+      "energy_mwh": 29838.3,
+      "revenue_aud": 2023650.0,
+      "energy_price_received": 64.83,
+      "curtailment_pct": 2.8
+    },
+    {
+      "year": 2025,
+      "month": 7,
+      "capacity_factor_pct": 33.5,
+      "energy_mwh": 32932.8,
+      "revenue_aud": 2211727.0,
+      "energy_price_received": 64.2,
+      "curtailment_pct": 0.8
+    },
+    {
+      "year": 2025,
+      "month": 8,
+      "capacity_factor_pct": 30.5,
+      "energy_mwh": 30026.0,
+      "revenue_aud": 1776091.0,
+      "energy_price_received": 56.54,
+      "curtailment_pct": 1.9
+    },
+    {
+      "year": 2025,
+      "month": 9,
+      "capacity_factor_pct": 31.5,
+      "energy_mwh": 30048.6,
+      "revenue_aud": 1931264.0,
+      "energy_price_received": 61.44,
+      "curtailment_pct": 0.2
+    },
+    {
+      "year": 2025,
+      "month": 10,
+      "capacity_factor_pct": 26.8,
+      "energy_mwh": 26402.2,
+      "revenue_aud": 1459726.0,
+      "energy_price_received": 52.85,
+      "curtailment_pct": 0.4
+    },
+    {
+      "year": 2025,
+      "month": 11,
+      "capacity_factor_pct": 29.1,
+      "energy_mwh": 27670.2,
+      "revenue_aud": 1856559.0,
+      "energy_price_received": 64.14,
+      "curtailment_pct": 1.7
+    },
+    {
+      "year": 2025,
+      "month": 12,
+      "capacity_factor_pct": 28.5,
+      "energy_mwh": 28002.7,
+      "revenue_aud": 2109886.0,
+      "energy_price_received": 72.02,
+      "curtailment_pct": 1.9
+    },
+    {
+      "year": 2026,
+      "month": 1,
+      "capacity_factor_pct": 44.2,
+      "energy_mwh": 28526.3,
+      "revenue_aud": 1748700.0,
+      "energy_price_received": 67.83,
+      "curtailment_pct": 1.8
+    },
+    {
+      "year": 2026,
+      "month": 2,
+      "capacity_factor_pct": 45.3,
+      "energy_mwh": 26393.5,
+      "revenue_aud": 1433489.0,
+      "energy_price_received": 60.09,
+      "curtailment_pct": 2.5
+    },
+    {
+      "year": 2026,
+      "month": 3,
+      "capacity_factor_pct": 17.3,
+      "energy_mwh": 11181.3,
+      "revenue_aud": 572436.0,
+      "energy_price_received": 56.65,
+      "curtailment_pct": 3.5
+    }
+  ]
+}

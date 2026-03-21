@@ -5,7 +5,7 @@
  * In production (GitHub Pages), they're served as static files.
  * In development (Vite dev server), they're served from the public/ directory.
  */
-import type { ProjectSummary, Project, Technology, ProjectStatus, State, LeagueTable, LeagueTableIndex, LeagueTechnology, DeveloperIndex, OEMIndex, ContractorIndex, OfftakerIndex, MapProject, CODDriftData, DataSourcesIndex, BESSCapexData, ProjectTimelineData, SchemeTrackerData, DriftAnalysisData, WindResourceData, DunkelflaunteData, EnergyMixData, DeveloperScoreData, RevenueIntelData, GridConnectionData, NewsData, REZAccessMap, EISAnalyticsData, EISComparisonData, EISCoverageData } from './types'
+import type { ProjectSummary, Project, Technology, ProjectStatus, State, LeagueTable, LeagueTableIndex, LeagueTechnology, DeveloperIndex, OEMIndex, ContractorIndex, OfftakerIndex, MapProject, CODDriftData, DataSourcesIndex, BESSCapexData, ProjectTimelineData, SchemeTrackerData, DriftAnalysisData, WindResourceData, DunkelflaunteData, EnergyMixData, DeveloperScoreData, RevenueIntelData, GridConnectionData, NewsData, REZAccessMap, EISAnalyticsData, EISComparisonData, EISCoverageData, ProjectMonthlyPerformance } from './types'
 
 const BASE = import.meta.env.BASE_URL + 'data'
 
@@ -129,6 +129,26 @@ export async function fetchLeagueTable(tech: LeagueTechnology, year: number): Pr
     if (!resp.ok) return null
     return (await resp.json()) as LeagueTable
   } catch {
+    return null
+  }
+}
+
+// ============================================================
+// Monthly Performance Data
+// ============================================================
+
+const monthlyCache: Record<string, ProjectMonthlyPerformance | null> = {}
+
+export async function fetchMonthlyPerformance(projectId: string): Promise<ProjectMonthlyPerformance | null> {
+  if (projectId in monthlyCache) return monthlyCache[projectId]
+  try {
+    const resp = await fetch(`${BASE}/performance/monthly/${projectId}.json`)
+    if (!resp.ok) { monthlyCache[projectId] = null; return null }
+    const data = (await resp.json()) as ProjectMonthlyPerformance
+    monthlyCache[projectId] = data
+    return data
+  } catch {
+    monthlyCache[projectId] = null
     return null
   }
 }

@@ -1,6 +1,6 @@
 import { useState, useEffect, useMemo } from 'react'
-import { fetchLeagueTableIndex, fetchLeagueTable } from '../lib/dataService'
-import type { LeagueTable, LeagueTableIndex, LeagueTechnology, State } from '../lib/types'
+import { fetchLeagueTableIndex, fetchLeagueTable, fetchMonthlyPerformance } from '../lib/dataService'
+import type { LeagueTable, LeagueTableIndex, LeagueTechnology, State, ProjectMonthlyPerformance } from '../lib/types'
 
 export function useLeagueTableIndex() {
   const [index, setIndex] = useState<LeagueTableIndex | null>(null)
@@ -44,4 +44,18 @@ export function useFilteredLeagueTable(
   }, [table, stateFilter])
 
   return filtered
+}
+
+export function useMonthlyPerformance(projectId: string) {
+  const [data, setData] = useState<ProjectMonthlyPerformance | null>(null)
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    setLoading(true)
+    fetchMonthlyPerformance(projectId)
+      .then((d) => setData(d))
+      .finally(() => setLoading(false))
+  }, [projectId])
+
+  return { data, loading }
 }

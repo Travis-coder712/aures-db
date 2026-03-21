@@ -234,6 +234,34 @@ export interface ProjectPerformance {
   annual: AnnualPerformance[]
 }
 
+// Monthly performance data (per-project, from OpenElectricity)
+export interface MonthlyPerformanceEntry {
+  year: number
+  month: number
+  // Wind/Solar/Hybrid
+  capacity_factor_pct?: number
+  energy_mwh?: number
+  revenue_aud?: number
+  energy_price_received?: number
+  curtailment_pct?: number
+  // BESS / Pumped Hydro
+  energy_discharged_mwh?: number
+  energy_charged_mwh?: number
+  avg_charge_price?: number
+  avg_discharge_price?: number
+  utilisation_pct?: number
+  cycles?: number
+}
+
+export interface ProjectMonthlyPerformance {
+  project_id: string
+  name: string
+  technology: string
+  capacity_mw: number
+  state: string
+  monthly: MonthlyPerformanceEntry[]
+}
+
 // Summary type for list views (lightweight)
 export interface ProjectSummary {
   id: string

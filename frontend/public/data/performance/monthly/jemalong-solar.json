@@ -1,0 +1,252 @@
+{
+  "project_id": "jemalong-solar",
+  "name": "Jemalong Solar",
+  "technology": "solar",
+  "capacity_mw": 50.0,
+  "state": "NSW",
+  "monthly": [
+    {
+      "year": 2024,
+      "month": 1,
+      "capacity_factor_pct": 31.5,
+      "energy_mwh": 11683.5,
+      "revenue_aud": 923706.0,
+      "energy_price_received": 81.32,
+      "curtailment_pct": 2.7
+    },
+    {
+      "year": 2024,
+      "month": 2,
+      "capacity_factor_pct": 36.4,
+      "energy_mwh": 12636.6,
+      "revenue_aud": 979277.0,
+      "energy_price_received": 79.71,
+      "curtailment_pct": 2.4
+    },
+    {
+      "year": 2024,
+      "month": 3,
+      "capacity_factor_pct": 30.5,
+      "energy_mwh": 11327.2,
+      "revenue_aud": 692784.0,
+      "energy_price_received": 62.91,
+      "curtailment_pct": 0.8
+    },
+    {
+      "year": 2024,
+      "month": 4,
+      "capacity_factor_pct": 20.7,
+      "energy_mwh": 7419.1,
+      "revenue_aud": 413081.0,
+      "energy_price_received": 57.27,
+      "curtailment_pct": 1.5
+    },
+    {
+      "year": 2024,
+      "month": 5,
+      "capacity_factor_pct": 19.5,
+      "energy_mwh": 7219.1,
+      "revenue_aud": 387353.0,
+      "energy_price_received": 55.19,
+      "curtailment_pct": 1.6
+    },
+    {
+      "year": 2024,
+      "month": 6,
+      "capacity_factor_pct": 16.8,
+      "energy_mwh": 6031.6,
+      "revenue_aud": 411219.0,
+      "energy_price_received": 70.13,
+      "curtailment_pct": 0.8
+    },
+    {
+      "year": 2024,
+      "month": 7,
+      "capacity_factor_pct": 17.6,
+      "energy_mwh": 6541.7,
+      "revenue_aud": 496162.0,
+      "energy_price_received": 78.02,
+      "curtailment_pct": 0.9
+    },
+    {
+      "year": 2024,
+      "month": 8,
+      "capacity_factor_pct": 21.4,
+      "energy_mwh": 7956.0,
+      "revenue_aud": 511576.0,
+      "energy_price_received": 66.14,
+      "curtailment_pct": 1.1
+    },
+    {
+      "year": 2024,
+      "month": 9,
+      "capacity_factor_pct": 19.2,
+      "energy_mwh": 6899.6,
+      "revenue_aud": 413279.0,
+      "energy_price_received": 61.61,
+      "curtailment_pct": 1.0
+    },
+    {
+      "year": 2024,
+      "month": 10,
+      "capacity_factor_pct": 24.0,
+      "energy_mwh": 8908.7,
+      "revenue_aud": 474762.0,
+      "energy_price_received": 54.82,
+      "curtailment_pct": 0.1
+    },
+    {
+      "year": 2024,
+      "month": 11,
+      "capacity_factor_pct": 30.8,
+      "energy_mwh": 11065.1,
+      "revenue_aud": 823291.0,
+      "energy_price_received": 76.53,
+      "curtailment_pct": 3.0
+    },
+    {
+      "year": 2024,
+      "month": 12,
+      "capacity_factor_pct": 37.5,
+      "energy_mwh": 13895.0,
+      "revenue_aud": 1019776.0,
+      "energy_price_received": 75.49,
+      "curtailment_pct": 3.1
+    },
+    {
+      "year": 2025,
+      "month": 1,
+      "capacity_factor_pct": 27.3,
+      "energy_mwh": 10141.6,
+      "revenue_aud": 589690.0,
+      "energy_price_received": 59.63,
+      "curtailment_pct": 1.2
+    },
+    {
+      "year": 2025,
+      "month": 2,
+      "capacity_factor_pct": 30.1,
+      "energy_mwh": 10108.0,
+      "revenue_aud": 504556.0,
+      "energy_price_received": 51.19,
+      "curtailment_pct": 1.5
+    },
+    {
+      "year": 2025,
+      "month": 3,
+      "capacity_factor_pct": 21.2,
+      "energy_mwh": 7886.8,
+      "revenue_aud": 335214.0,
+      "energy_price_received": 43.59,
+      "curtailment_pct": 2.3
+    },
+    {
+      "year": 2025,
+      "month": 4,
+      "capacity_factor_pct": 20.9,
+      "energy_mwh": 7525.5,
+      "revenue_aud": 307903.0,
+      "energy_price_received": 41.96,
+      "curtailment_pct": 2.2
+    },
+    {
+      "year": 2025,
+      "month": 5,
+      "capacity_factor_pct": 15.1,
+      "energy_mwh": 5608.5,
+      "revenue_aud": 209776.0,
+      "energy_price_received": 38.36,
+      "curtailment_pct": 0.8
+    },
+    {
+      "year": 2025,
+      "month": 6,
+      "capacity_factor_pct": 14.2,
+      "energy_mwh": 5115.3,
+      "revenue_aud": 217980.0,
+      "energy_price_received": 43.7,
+      "curtailment_pct": 1.2
+    },
+    {
+      "year": 2025,
+      "month": 7,
+      "capacity_factor_pct": 13.7,
+      "energy_mwh": 5106.4,
+      "revenue_aud": 264829.0,
+      "energy_price_received": 53.18,
+      "curtailment_pct": 0.2
+    },
+    {
+      "year": 2025,
+      "month": 8,
+      "capacity_factor_pct": 17.6,
+      "energy_mwh": 6564.1,
+      "revenue_aud": 307476.0,
+      "energy_price_received": 48.04,
+      "curtailment_pct": 3.2
+    },
+    {
+      "year": 2025,
+      "month": 9,
+      "capacity_factor_pct": 15.3,
+      "energy_mwh": 5507.9,
+      "revenue_aud": 213005.0,
+      "energy_price_received": 39.66,
+      "curtailment_pct": 1.9
+    },
+    {
+      "year": 2025,
+      "month": 10,
+      "capacity_factor_pct": 16.1,
+      "energy_mwh": 5973.2,
+      "revenue_aud": 274085.0,
+      "energy_price_received": 47.06,
+      "curtailment_pct": 2.7
+    },
+    {
+      "year": 2025,
+      "month": 11,
+      "capacity_factor_pct": 21.2,
+      "energy_mwh": 7639.4,
+      "revenue_aud": 363258.0,
+      "energy_price_received": 48.76,
+      "curtailment_pct": 1.2
+    },
+    {
+      "year": 2025,
+      "month": 12,
+      "capacity_factor_pct": 25.7,
+      "energy_mwh": 9552.9,
+      "revenue_aud": 516784.0,
+      "energy_price_received": 55.48,
+      "curtailment_pct": 1.0
+    },
+    {
+      "year": 2026,
+      "month": 1,
+      "capacity_factor_pct": 32.4,
+      "energy_mwh": 7912.8,
+      "revenue_aud": 448565.0,
+      "energy_price_received": 60.97,
+      "curtailment_pct": 2.7
+    },
+    {
+      "year": 2026,
+      "month": 2,
+      "capacity_factor_pct": 33.4,
+      "energy_mwh": 7353.9,
+      "revenue_aud": 345816.0,
+      "energy_price_received": 50.58,
+      "curtailment_pct": 1.9
+    },
+    {
+      "year": 2026,
+      "month": 3,
+      "capacity_factor_pct": 15.0,
+      "energy_mwh": 3667.4,
+      "revenue_aud": 160762.0,
+      "energy_price_received": 47.15,
+      "curtailment_pct": 3.5
+    }
+  ]
+}

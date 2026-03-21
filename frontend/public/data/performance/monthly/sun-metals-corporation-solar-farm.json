@@ -1,0 +1,252 @@
+{
+  "project_id": "sun-metals-corporation-solar-farm",
+  "name": "Sun Metals Corporation Solar Farm",
+  "technology": "solar",
+  "capacity_mw": 121.5,
+  "state": "QLD",
+  "monthly": [
+    {
+      "year": 2024,
+      "month": 1,
+      "capacity_factor_pct": 22.7,
+      "energy_mwh": 20481.7,
+      "revenue_aud": 830054.0,
+      "energy_price_received": 39.48,
+      "curtailment_pct": 3.5
+    },
+    {
+      "year": 2024,
+      "month": 2,
+      "capacity_factor_pct": 20.2,
+      "energy_mwh": 17014.2,
+      "revenue_aud": 685500.0,
+      "energy_price_received": 39.25,
+      "curtailment_pct": 1.9
+    },
+    {
+      "year": 2024,
+      "month": 3,
+      "capacity_factor_pct": 16.0,
+      "energy_mwh": 14386.5,
+      "revenue_aud": 452002.0,
+      "energy_price_received": 30.61,
+      "curtailment_pct": 1.0
+    },
+    {
+      "year": 2024,
+      "month": 4,
+      "capacity_factor_pct": 15.6,
+      "energy_mwh": 13627.0,
+      "revenue_aud": 420830.0,
+      "energy_price_received": 30.09,
+      "curtailment_pct": 1.5
+    },
+    {
+      "year": 2024,
+      "month": 5,
+      "capacity_factor_pct": 14.2,
+      "energy_mwh": 12830.5,
+      "revenue_aud": 338445.0,
+      "energy_price_received": 25.7,
+      "curtailment_pct": 2.2
+    },
+    {
+      "year": 2024,
+      "month": 6,
+      "capacity_factor_pct": 14.9,
+      "energy_mwh": 12994.2,
+      "revenue_aud": 479605.0,
+      "energy_price_received": 35.96,
+      "curtailment_pct": 2.9
+    },
+    {
+      "year": 2024,
+      "month": 7,
+      "capacity_factor_pct": 17.6,
+      "energy_mwh": 15893.6,
+      "revenue_aud": 529451.0,
+      "energy_price_received": 32.46,
+      "curtailment_pct": 2.8
+    },
+    {
+      "year": 2024,
+      "month": 8,
+      "capacity_factor_pct": 19.5,
+      "energy_mwh": 17607.7,
+      "revenue_aud": 577021.0,
+      "energy_price_received": 31.93,
+      "curtailment_pct": 3.9
+    },
+    {
+      "year": 2024,
+      "month": 9,
+      "capacity_factor_pct": 20.1,
+      "energy_mwh": 17527.3,
+      "revenue_aud": 550389.0,
+      "energy_price_received": 30.59,
+      "curtailment_pct": 0.4
+    },
+    {
+      "year": 2024,
+      "month": 10,
+      "capacity_factor_pct": 21.2,
+      "energy_mwh": 19095.8,
+      "revenue_aud": 648539.0,
+      "energy_price_received": 33.09,
+      "curtailment_pct": 0
+    },
+    {
+      "year": 2024,
+      "month": 11,
+      "capacity_factor_pct": 21.1,
+      "energy_mwh": 18423.6,
+      "revenue_aud": 693007.0,
+      "energy_price_received": 36.65,
+      "curtailment_pct": 2.3
+    },
+    {
+      "year": 2024,
+      "month": 12,
+      "capacity_factor_pct": 23.8,
+      "energy_mwh": 21442.0,
+      "revenue_aud": 840874.0,
+      "energy_price_received": 38.21,
+      "curtailment_pct": 1.1
+    },
+    {
+      "year": 2025,
+      "month": 1,
+      "capacity_factor_pct": 17.8,
+      "energy_mwh": 16076.5,
+      "revenue_aud": 572767.0,
+      "energy_price_received": 34.72,
+      "curtailment_pct": 2.3
+    },
+    {
+      "year": 2025,
+      "month": 2,
+      "capacity_factor_pct": 18.5,
+      "energy_mwh": 15134.0,
+      "revenue_aud": 478531.0,
+      "energy_price_received": 30.82,
+      "curtailment_pct": 0.6
+    },
+    {
+      "year": 2025,
+      "month": 3,
+      "capacity_factor_pct": 15.3,
+      "energy_mwh": 13809.7,
+      "revenue_aud": 391906.0,
+      "energy_price_received": 27.66,
+      "curtailment_pct": 1.2
+    },
+    {
+      "year": 2025,
+      "month": 4,
+      "capacity_factor_pct": 15.5,
+      "energy_mwh": 13596.1,
+      "revenue_aud": 337754.0,
+      "energy_price_received": 24.21,
+      "curtailment_pct": 2.7
+    },
+    {
+      "year": 2025,
+      "month": 5,
+      "capacity_factor_pct": 12.4,
+      "energy_mwh": 11219.5,
+      "revenue_aud": 273469.0,
+      "energy_price_received": 23.75,
+      "curtailment_pct": 0
+    },
+    {
+      "year": 2025,
+      "month": 6,
+      "capacity_factor_pct": 13.7,
+      "energy_mwh": 11961.1,
+      "revenue_aud": 399670.0,
+      "energy_price_received": 32.56,
+      "curtailment_pct": 3.1
+    },
+    {
+      "year": 2025,
+      "month": 7,
+      "capacity_factor_pct": 13.7,
+      "energy_mwh": 12347.1,
+      "revenue_aud": 338270.0,
+      "energy_price_received": 26.7,
+      "curtailment_pct": 3.7
+    },
+    {
+      "year": 2025,
+      "month": 8,
+      "capacity_factor_pct": 14.3,
+      "energy_mwh": 12882.2,
+      "revenue_aud": 362607.0,
+      "energy_price_received": 27.43,
+      "curtailment_pct": 1.2
+    },
+    {
+      "year": 2025,
+      "month": 9,
+      "capacity_factor_pct": 13.3,
+      "energy_mwh": 11667.4,
+      "revenue_aud": 291104.0,
+      "energy_price_received": 24.32,
+      "curtailment_pct": 2.0
+    },
+    {
+      "year": 2025,
+      "month": 10,
+      "capacity_factor_pct": 13.5,
+      "energy_mwh": 12241.3,
+      "revenue_aud": 344362.0,
+      "energy_price_received": 27.42,
+      "curtailment_pct": 0.5
+    },
+    {
+      "year": 2025,
+      "month": 11,
+      "capacity_factor_pct": 15.2,
+      "energy_mwh": 13313.2,
+      "revenue_aud": 412609.0,
+      "energy_price_received": 30.2,
+      "curtailment_pct": 0
+    },
+    {
+      "year": 2025,
+      "month": 12,
+      "capacity_factor_pct": 18.3,
+      "energy_mwh": 16522.6,
+      "revenue_aud": 563673.0,
+      "energy_price_received": 33.25,
+      "curtailment_pct": 2.7
+    },
+    {
+      "year": 2026,
+      "month": 1,
+      "capacity_factor_pct": 25.9,
+      "energy_mwh": 15365.0,
+      "revenue_aud": 605580.0,
+      "energy_price_received": 41.57,
+      "curtailment_pct": 1.0
+    },
+    {
+      "year": 2026,
+      "month": 2,
+      "capacity_factor_pct": 24.7,
+      "energy_mwh": 13197.8,
+      "revenue_aud": 509292.0,
+      "energy_price_received": 40.7,
+      "curtailment_pct": 1.1
+    },
+    {
+      "year": 2026,
+      "month": 3,
+      "capacity_factor_pct": 14.4,
+      "energy_mwh": 8515.9,
+      "revenue_aud": 246235.0,
+      "energy_price_received": 30.5,
+      "curtailment_pct": 2.4
+    }
+  ]
+}

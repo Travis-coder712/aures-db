@@ -1,0 +1,160 @@
+{
+  "project_id": "koorangie-energy-storage-system",
+  "name": "Koorangie Energy Storage System",
+  "technology": "bess",
+  "capacity_mw": 185.0,
+  "state": "VIC",
+  "monthly": [
+    {
+      "year": 2025,
+      "month": 1,
+      "energy_discharged_mwh": 7471.6,
+      "energy_charged_mwh": 9068.6,
+      "avg_charge_price": 37.26,
+      "avg_discharge_price": 392.38,
+      "utilisation_pct": 5.8,
+      "cycles": 20.2
+    },
+    {
+      "year": 2025,
+      "month": 2,
+      "energy_discharged_mwh": 6650.7,
+      "energy_charged_mwh": 8072.2,
+      "avg_charge_price": 32.8,
+      "avg_discharge_price": 369.54,
+      "utilisation_pct": 5.5,
+      "cycles": 18.0
+    },
+    {
+      "year": 2025,
+      "month": 3,
+      "energy_discharged_mwh": 6477.4,
+      "energy_charged_mwh": 7862.0,
+      "avg_charge_price": 32.04,
+      "avg_discharge_price": 353.22,
+      "utilisation_pct": 4.9,
+      "cycles": 17.5
+    },
+    {
+      "year": 2025,
+      "month": 4,
+      "energy_discharged_mwh": 4438.4,
+      "energy_charged_mwh": 5387.1,
+      "avg_charge_price": 32.02,
+      "avg_discharge_price": 292.42,
+      "utilisation_pct": 3.4,
+      "cycles": 12.0
+    },
+    {
+      "year": 2025,
+      "month": 5,
+      "energy_discharged_mwh": 4817.7,
+      "energy_charged_mwh": 5847.4,
+      "avg_charge_price": 32.54,
+      "avg_discharge_price": 329.28,
+      "utilisation_pct": 3.5,
+      "cycles": 13.0
+    },
+    {
+      "year": 2025,
+      "month": 6,
+      "energy_discharged_mwh": 6233.1,
+      "energy_charged_mwh": 7565.3,
+      "avg_charge_price": 33.81,
+      "avg_discharge_price": 303.44,
+      "utilisation_pct": 4.8,
+      "cycles": 16.8
+    },
+    {
+      "year": 2025,
+      "month": 7,
+      "energy_discharged_mwh": 6635.2,
+      "energy_charged_mwh": 8053.5,
+      "avg_charge_price": 34.87,
+      "avg_discharge_price": 311.91,
+      "utilisation_pct": 4.6,
+      "cycles": 17.9
+    },
+    {
+      "year": 2025,
+      "month": 8,
+      "energy_discharged_mwh": 5685.3,
+      "energy_charged_mwh": 6900.6,
+      "avg_charge_price": 36.08,
+      "avg_discharge_price": 337.26,
+      "utilisation_pct": 3.8,
+      "cycles": 15.4
+    },
+    {
+      "year": 2025,
+      "month": 9,
+      "energy_discharged_mwh": 4621.3,
+      "energy_charged_mwh": 5609.1,
+      "avg_charge_price": 29.98,
+      "avg_discharge_price": 319.49,
+      "utilisation_pct": 3.7,
+      "cycles": 12.5
+    },
+    {
+      "year": 2025,
+      "month": 10,
+      "energy_discharged_mwh": 5215.7,
+      "energy_charged_mwh": 6330.5,
+      "avg_charge_price": 34.72,
+      "avg_discharge_price": 277.62,
+      "utilisation_pct": 3.3,
+      "cycles": 14.1
+    },
+    {
+      "year": 2025,
+      "month": 11,
+      "energy_discharged_mwh": 5769.8,
+      "energy_charged_mwh": 7003.0,
+      "avg_charge_price": 33.31,
+      "avg_discharge_price": 305.32,
+      "utilisation_pct": 4.4,
+      "cycles": 15.7
+    },
+    {
+      "year": 2025,
+      "month": 12,
+      "energy_discharged_mwh": 7794.1,
+      "energy_charged_mwh": 9460.1,
+      "avg_charge_price": 31.92,
+      "avg_discharge_price": 388.83,
+      "utilisation_pct": 5.3,
+      "cycles": 21.1
+    },
+    {
+      "year": 2026,
+      "month": 1,
+      "energy_discharged_mwh": 5442.4,
+      "energy_charged_mwh": 6668.6,
+      "avg_charge_price": 5.0,
+      "avg_discharge_price": 110.98,
+      "utilisation_pct": 6.0,
+      "cycles": 14.7
+    },
+    {
+      "year": 2026,
+      "month": 2,
+      "energy_discharged_mwh": 5078.9,
+      "energy_charged_mwh": 6223.1,
+      "avg_charge_price": 5.0,
+      "avg_discharge_price": 120.88,
+      "utilisation_pct": 6.2,
+      "cycles": 13.7
+    },
+    {
+      "year": 2026,
+      "month": 3,
+      "energy_discharged_mwh": 5229.1,
+      "energy_charged_mwh": 6407.1,
+      "avg_charge_price": 5.0,
+      "avg_discharge_price": 125.01,
+      "utilisation_pct": 5.8,
+      "cycles": 14.1
+    }
+  ],
+  "storage_mwh": 370.0
+}

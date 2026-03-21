@@ -1,0 +1,160 @@
+{
+  "project_id": "melbourne-renewable-energy-hub-connection-a3",
+  "name": "Melbourne Renewable Energy Hub Connection A3",
+  "technology": "bess",
+  "capacity_mw": 200.0,
+  "state": "VIC",
+  "monthly": [
+    {
+      "year": 2025,
+      "month": 1,
+      "energy_discharged_mwh": 3007.7,
+      "energy_charged_mwh": 3450.7,
+      "avg_charge_price": 13.36,
+      "avg_discharge_price": 103.34,
+      "utilisation_pct": 1.9,
+      "cycles": 3.8
+    },
+    {
+      "year": 2025,
+      "month": 2,
+      "energy_discharged_mwh": 2733.7,
+      "energy_charged_mwh": 3136.2,
+      "avg_charge_price": 10.44,
+      "avg_discharge_price": 99.29,
+      "utilisation_pct": 2.0,
+      "cycles": 3.4
+    },
+    {
+      "year": 2025,
+      "month": 3,
+      "energy_discharged_mwh": 2707.5,
+      "energy_charged_mwh": 3106.2,
+      "avg_charge_price": 14.34,
+      "avg_discharge_price": 93.3,
+      "utilisation_pct": 1.8,
+      "cycles": 3.4
+    },
+    {
+      "year": 2025,
+      "month": 4,
+      "energy_discharged_mwh": 1889.4,
+      "energy_charged_mwh": 2167.7,
+      "avg_charge_price": 12.99,
+      "avg_discharge_price": 83.46,
+      "utilisation_pct": 1.4,
+      "cycles": 2.4
+    },
+    {
+      "year": 2025,
+      "month": 5,
+      "energy_discharged_mwh": 1868.5,
+      "energy_charged_mwh": 2143.6,
+      "avg_charge_price": 14.7,
+      "avg_discharge_price": 92.9,
+      "utilisation_pct": 1.2,
+      "cycles": 2.4
+    },
+    {
+      "year": 2025,
+      "month": 6,
+      "energy_discharged_mwh": 2290.8,
+      "energy_charged_mwh": 2628.1,
+      "avg_charge_price": 14.83,
+      "avg_discharge_price": 81.91,
+      "utilisation_pct": 1.7,
+      "cycles": 2.9
+    },
+    {
+      "year": 2025,
+      "month": 7,
+      "energy_discharged_mwh": 2304.5,
+      "energy_charged_mwh": 2643.8,
+      "avg_charge_price": 15.8,
+      "avg_discharge_price": 98.88,
+      "utilisation_pct": 1.6,
+      "cycles": 2.9
+    },
+    {
+      "year": 2025,
+      "month": 8,
+      "energy_discharged_mwh": 2526.7,
+      "energy_charged_mwh": 2898.8,
+      "avg_charge_price": 14.58,
+      "avg_discharge_price": 98.12,
+      "utilisation_pct": 1.6,
+      "cycles": 3.2
+    },
+    {
+      "year": 2025,
+      "month": 9,
+      "energy_discharged_mwh": 1668.9,
+      "energy_charged_mwh": 1914.6,
+      "avg_charge_price": 12.97,
+      "avg_discharge_price": 89.6,
+      "utilisation_pct": 1.2,
+      "cycles": 2.1
+    },
+    {
+      "year": 2025,
+      "month": 10,
+      "energy_discharged_mwh": 2156.7,
+      "energy_charged_mwh": 2474.3,
+      "avg_charge_price": 16.6,
+      "avg_discharge_price": 86.97,
+      "utilisation_pct": 1.3,
+      "cycles": 2.7
+    },
+    {
+      "year": 2025,
+      "month": 11,
+      "energy_discharged_mwh": 1775.8,
+      "energy_charged_mwh": 2037.4,
+      "avg_charge_price": 14.43,
+      "avg_discharge_price": 87.17,
+      "utilisation_pct": 1.2,
+      "cycles": 2.2
+    },
+    {
+      "year": 2025,
+      "month": 12,
+      "energy_discharged_mwh": 2964.7,
+      "energy_charged_mwh": 3401.3,
+      "avg_charge_price": 13.27,
+      "avg_discharge_price": 106.86,
+      "utilisation_pct": 1.9,
+      "cycles": 3.7
+    },
+    {
+      "year": 2026,
+      "month": 1,
+      "energy_discharged_mwh": 17866.2,
+      "energy_charged_mwh": 20260.5,
+      "avg_charge_price": 5.0,
+      "avg_discharge_price": 130.03,
+      "utilisation_pct": 16.5,
+      "cycles": 22.3
+    },
+    {
+      "year": 2026,
+      "month": 2,
+      "energy_discharged_mwh": 13866.3,
+      "energy_charged_mwh": 15724.6,
+      "avg_charge_price": 5.0,
+      "avg_discharge_price": 97.28,
+      "utilisation_pct": 13.8,
+      "cycles": 17.3
+    },
+    {
+      "year": 2026,
+      "month": 3,
+      "energy_discharged_mwh": 14751.5,
+      "energy_charged_mwh": 16728.3,
+      "avg_charge_price": 5.0,
+      "avg_discharge_price": 105.45,
+      "utilisation_pct": 15.5,
+      "cycles": 18.4
+    }
+  ],
+  "storage_mwh": 800.8
+}

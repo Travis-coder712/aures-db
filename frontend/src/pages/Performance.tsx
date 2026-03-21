@@ -1,4 +1,4 @@
-import { useState, useMemo, useCallback } from 'react'
+import { useState, useEffect, useMemo, useCallback } from 'react'
 import { Link } from 'react-router-dom'
 import {
   BarChart,
@@ -8,9 +8,13 @@ import {
   CartesianGrid,
   Tooltip,
   ResponsiveContainer,
+  LineChart,
+  Line,
+  Legend,
 } from 'recharts'
 import { useLeagueTableIndex, useLeagueTable, useFilteredLeagueTable } from '../hooks/usePerformanceData'
-import type { LeagueTechnology, LeagueTableEntry, State } from '../lib/types'
+import { fetchMonthlyPerformance } from '../lib/dataService'
+import type { LeagueTechnology, LeagueTableEntry, State, ProjectMonthlyPerformance } from '../lib/types'
 
 // ============================================================
 // Info Tooltip Definitions
@@ -552,6 +556,9 @@ export default function Performance() {
         </section>
       )}
 
+      {/* Fleet Monthly Trends */}
+      {table && <FleetMonthlyTrends projects={sorted} tech={tech} year={year} />}
+
       {/* Data Methodology */}
       <section className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl p-5">
         <h2 className="text-sm font-semibold text-[var(--color-text)] mb-2">
@@ -701,6 +708,114 @@ function LeagueRow({ entry, tech }: { entry: LeagueTableEntry; tech: LeagueTechn
         </span>
       </td>
     </tr>
+  )
+}
+
+// ============================================================
+// Fleet Monthly Trends
+// ============================================================
+
+const MONTH_LABELS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+
+function FleetMonthlyTrends({ projects, tech, year }: { projects: LeagueTableEntry[]; tech: LeagueTechnology; year: number }) {
+  const [monthlyData, setMonthlyData] = useState<ProjectMonthlyPerformance[]>([])
+  const [loading, setLoading] = useState(true)
+
+  // Load monthly data for top 20 projects (to keep it fast)
+  useEffect(() => {
+    setLoading(true)
+    const top = projects.slice(0, 20)
+    Promise.all(top.map(p => fetchMonthlyPerformance(p.project_id)))
+      .then(results => {
+        setMonthlyData(results.filter((r): r is ProjectMonthlyPerformance => r != null))
+      })
+      .finally(() => setLoading(false))
+  }, [projects, tech])
+
+  const chartData = useMemo(() => {
+    if (monthlyData.length === 0) return []
+
+    const isBess = tech === 'bess' || tech === 'pumped_hydro'
+
+    return MONTH_LABELS.map((label, i) => {
+      const month = i + 1
+      let values: number[]
+
+      if (isBess) {
+        values = monthlyData
+          .map(p => {
+            const entry = p.monthly.find(m => m.year === year && m.month === month)
+            if (!entry?.avg_discharge_price || !entry?.avg_charge_price) return undefined
+            return entry.avg_discharge_price - entry.avg_charge_price
+          })
+          .filter((v): v is number => v != null)
+      } else {
+        values = monthlyData
+          .map(p => p.monthly.find(m => m.year === year && m.month === month)?.capacity_factor_pct)
+          .filter((v): v is number => v != null)
+      }
+
+      if (values.length === 0) return null
+
+      const avg = values.reduce((s, v) => s + v, 0) / values.length
+      const sorted = [...values].sort((a, b) => a - b)
+      const q1 = sorted[Math.floor(sorted.length * 0.25)] ?? avg
+      const q3 = sorted[Math.floor(sorted.length * 0.75)] ?? avg
+      const best = sorted[sorted.length - 1]
+      const worst = sorted[0]
+
+      return { month: label, avg: Math.round(avg * 10) / 10, q1: Math.round(q1 * 10) / 10, q3: Math.round(q3 * 10) / 10, best: Math.round(best * 10) / 10, worst: Math.round(worst * 10) / 10, count: values.length }
+    }).filter(Boolean)
+  }, [monthlyData, year, tech])
+
+  if (loading) {
+    return (
+      <section className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl p-5">
+        <div className="h-48 animate-pulse bg-[var(--color-bg-elevated)] rounded" />
+      </section>
+    )
+  }
+
+  if (chartData.length === 0) return null
+
+  const isBess = tech === 'bess' || tech === 'pumped_hydro'
+  const yLabel = isBess ? 'Spread ($/MWh)' : 'CF%'
+  const fmtVal = isBess ? (v: number) => `$${v}` : (v: number) => `${v}%`
+
+  return (
+    <section className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl p-5">
+      <h2 className="text-sm font-semibold text-[var(--color-text)] mb-1">
+        {year} Monthly {isBess ? 'Price Spread' : 'Capacity Factor'} — Fleet Average
+      </h2>
+      <p className="text-[10px] text-[var(--color-text-muted)] mb-3">
+        {isBess ? 'Average discharge–charge spread' : 'Average capacity factor'} across top {monthlyData.length} {tech} projects by month. Shaded area shows Q1–Q3 range.
+      </p>
+      <ResponsiveContainer width="100%" height={220}>
+        <LineChart data={chartData} margin={{ top: 8, right: 8, bottom: 0, left: -8 }}>
+          <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.06)" />
+          <XAxis dataKey="month" tick={{ fill: '#9ca3af', fontSize: 10 }} />
+          <YAxis tick={{ fill: '#9ca3af', fontSize: 10 }} tickFormatter={fmtVal} />
+          <Tooltip
+            contentStyle={{
+              backgroundColor: '#1e293b',
+              border: '1px solid rgba(255,255,255,0.1)',
+              borderRadius: 8,
+              fontSize: 11,
+            }}
+            formatter={(value, name) => [
+              isBess ? `$${value}/MWh` : `${value}%`,
+              name === 'avg' ? 'Fleet Avg' : name === 'q1' ? 'Q1 (25th)' : name === 'q3' ? 'Q3 (75th)' : name === 'best' ? 'Best' : 'Worst',
+            ]}
+          />
+          <Legend wrapperStyle={{ fontSize: 10 }} formatter={(v: string) => v === 'avg' ? `Fleet Avg ${yLabel}` : v === 'q1' ? 'Q1' : v === 'q3' ? 'Q3' : v === 'best' ? 'Best' : 'Worst'} />
+          <Line type="monotone" dataKey="q1" stroke="#22c55e" strokeWidth={1} strokeDasharray="4 2" dot={false} opacity={0.5} />
+          <Line type="monotone" dataKey="q3" stroke="#22c55e" strokeWidth={1} strokeDasharray="4 2" dot={false} opacity={0.5} />
+          <Line type="monotone" dataKey="avg" stroke="#22c55e" strokeWidth={2.5} dot={{ r: 3, fill: '#22c55e' }} />
+          <Line type="monotone" dataKey="best" stroke="#3b82f6" strokeWidth={1} dot={false} opacity={0.4} />
+          <Line type="monotone" dataKey="worst" stroke="#ef4444" strokeWidth={1} dot={false} opacity={0.4} />
+        </LineChart>
+      </ResponsiveContainer>
+    </section>
   )
 }
 

@@ -1,0 +1,252 @@
+{
+  "project_id": "lilyvale-solar-farm",
+  "name": "Lilyvale Solar Farm",
+  "technology": "solar",
+  "capacity_mw": 100.0,
+  "state": "QLD",
+  "monthly": [
+    {
+      "year": 2024,
+      "month": 1,
+      "capacity_factor_pct": 21.3,
+      "energy_mwh": 15803.1,
+      "revenue_aud": 725647.0,
+      "energy_price_received": 44.64,
+      "curtailment_pct": 0
+    },
+    {
+      "year": 2024,
+      "month": 2,
+      "capacity_factor_pct": 21.4,
+      "energy_mwh": 14883.9,
+      "revenue_aud": 747405.0,
+      "energy_price_received": 48.82,
+      "curtailment_pct": 1.8
+    },
+    {
+      "year": 2024,
+      "month": 3,
+      "capacity_factor_pct": 18.8,
+      "energy_mwh": 13971.0,
+      "revenue_aud": 530084.0,
+      "energy_price_received": 36.89,
+      "curtailment_pct": 0.4
+    },
+    {
+      "year": 2024,
+      "month": 4,
+      "capacity_factor_pct": 19.6,
+      "energy_mwh": 14077.7,
+      "revenue_aud": 496870.0,
+      "energy_price_received": 34.31,
+      "curtailment_pct": 1.4
+    },
+    {
+      "year": 2024,
+      "month": 5,
+      "capacity_factor_pct": 13.6,
+      "energy_mwh": 10107.9,
+      "revenue_aud": 380554.0,
+      "energy_price_received": 36.6,
+      "curtailment_pct": 1.7
+    },
+    {
+      "year": 2024,
+      "month": 6,
+      "capacity_factor_pct": 14.8,
+      "energy_mwh": 10651.2,
+      "revenue_aud": 490210.0,
+      "energy_price_received": 44.74,
+      "curtailment_pct": 2.1
+    },
+    {
+      "year": 2024,
+      "month": 7,
+      "capacity_factor_pct": 15.3,
+      "energy_mwh": 11383.8,
+      "revenue_aud": 488755.0,
+      "energy_price_received": 41.74,
+      "curtailment_pct": 0.9
+    },
+    {
+      "year": 2024,
+      "month": 8,
+      "capacity_factor_pct": 17.8,
+      "energy_mwh": 13182.2,
+      "revenue_aud": 531945.0,
+      "energy_price_received": 39.23,
+      "curtailment_pct": 2.6
+    },
+    {
+      "year": 2024,
+      "month": 9,
+      "capacity_factor_pct": 16.5,
+      "energy_mwh": 11869.8,
+      "revenue_aud": 413570.0,
+      "energy_price_received": 33.87,
+      "curtailment_pct": 2.9
+    },
+    {
+      "year": 2024,
+      "month": 10,
+      "capacity_factor_pct": 17.0,
+      "energy_mwh": 12590.8,
+      "revenue_aud": 484725.0,
+      "energy_price_received": 37.43,
+      "curtailment_pct": 2.4
+    },
+    {
+      "year": 2024,
+      "month": 11,
+      "capacity_factor_pct": 25.0,
+      "energy_mwh": 17977.7,
+      "revenue_aud": 689522.0,
+      "energy_price_received": 37.29,
+      "curtailment_pct": 3.0
+    },
+    {
+      "year": 2024,
+      "month": 12,
+      "capacity_factor_pct": 22.0,
+      "energy_mwh": 16353.5,
+      "revenue_aud": 787062.0,
+      "energy_price_received": 46.79,
+      "curtailment_pct": 2.6
+    },
+    {
+      "year": 2025,
+      "month": 1,
+      "capacity_factor_pct": 28.1,
+      "energy_mwh": 20906.6,
+      "revenue_aud": 366910.0,
+      "energy_price_received": 17.35,
+      "curtailment_pct": 0
+    },
+    {
+      "year": 2025,
+      "month": 2,
+      "capacity_factor_pct": 29.2,
+      "energy_mwh": 19656.6,
+      "revenue_aud": 392282.0,
+      "energy_price_received": 19.73,
+      "curtailment_pct": 1.2
+    },
+    {
+      "year": 2025,
+      "month": 3,
+      "capacity_factor_pct": 21.3,
+      "energy_mwh": 15862.4,
+      "revenue_aud": 297301.0,
+      "energy_price_received": 18.53,
+      "curtailment_pct": 2.2
+    },
+    {
+      "year": 2025,
+      "month": 4,
+      "capacity_factor_pct": 26.4,
+      "energy_mwh": 19025.5,
+      "revenue_aud": 296246.0,
+      "energy_price_received": 15.4,
+      "curtailment_pct": 0
+    },
+    {
+      "year": 2025,
+      "month": 5,
+      "capacity_factor_pct": 22.9,
+      "energy_mwh": 17044.2,
+      "revenue_aud": 274409.0,
+      "energy_price_received": 15.92,
+      "curtailment_pct": 3.7
+    },
+    {
+      "year": 2025,
+      "month": 6,
+      "capacity_factor_pct": 19.2,
+      "energy_mwh": 13843.8,
+      "revenue_aud": 256804.0,
+      "energy_price_received": 18.34,
+      "curtailment_pct": 0.9
+    },
+    {
+      "year": 2025,
+      "month": 7,
+      "capacity_factor_pct": 21.4,
+      "energy_mwh": 15901.4,
+      "revenue_aud": 302770.0,
+      "energy_price_received": 18.83,
+      "curtailment_pct": 0.1
+    },
+    {
+      "year": 2025,
+      "month": 8,
+      "capacity_factor_pct": 21.1,
+      "energy_mwh": 15711.8,
+      "revenue_aud": 277143.0,
+      "energy_price_received": 17.44,
+      "curtailment_pct": 1.5
+    },
+    {
+      "year": 2025,
+      "month": 9,
+      "capacity_factor_pct": 22.4,
+      "energy_mwh": 16154.1,
+      "revenue_aud": 263097.0,
+      "energy_price_received": 16.1,
+      "curtailment_pct": 0.3
+    },
+    {
+      "year": 2025,
+      "month": 10,
+      "capacity_factor_pct": 23.0,
+      "energy_mwh": 17141.6,
+      "revenue_aud": 291804.0,
+      "energy_price_received": 16.83,
+      "curtailment_pct": 4.0
+    },
+    {
+      "year": 2025,
+      "month": 11,
+      "capacity_factor_pct": 27.5,
+      "energy_mwh": 19828.2,
+      "revenue_aud": 336105.0,
+      "energy_price_received": 16.76,
+      "curtailment_pct": 4.3
+    },
+    {
+      "year": 2025,
+      "month": 12,
+      "capacity_factor_pct": 26.5,
+      "energy_mwh": 19731.5,
+      "revenue_aud": 466520.0,
+      "energy_price_received": 23.38,
+      "curtailment_pct": 2.8
+    },
+    {
+      "year": 2026,
+      "month": 1,
+      "capacity_factor_pct": 32.3,
+      "energy_mwh": 15774.7,
+      "revenue_aud": 590548.0,
+      "energy_price_received": 38.74,
+      "curtailment_pct": 2.5
+    },
+    {
+      "year": 2026,
+      "month": 2,
+      "capacity_factor_pct": 33.9,
+      "energy_mwh": 14914.3,
+      "revenue_aud": 565572.0,
+      "energy_price_received": 39.24,
+      "curtailment_pct": 2.2
+    },
+    {
+      "year": 2026,
+      "month": 3,
+      "capacity_factor_pct": 16.4,
+      "energy_mwh": 7991.9,
+      "revenue_aud": 265465.0,
+      "energy_price_received": 34.37,
+      "curtailment_pct": 3.6
+    }
+  ]
+}
