@@ -3114,11 +3114,22 @@ function SchemeTimelineTab() {
   }, [])
 
   // Key projects — top 7 by MW that are NOT yet in construction/operating (the ones that will move the dial)
+  // Curated list: 7 projects closest to commencing construction based on developer maturity,
+  // planning status, round vintage, and project readiness — not just largest by MW.
+  const KEY_PROJECT_IDS = [
+    'valley-of-the-winds',            // 936 MW — ACEN, CIS T1 (Dec 2024). Largest development project. ACEN is experienced and well-capitalised.
+    'spicers-creek-wind-farm',         // 700 MW — Squadron Energy, CIS T1. Squadron is one of AU's largest developers with strong track record.
+    'liverpool-range-wind-farm',       // 634 MW — Tilt Renewables, CIS T4. Already well-advanced in planning pre-CIS award. Near-term and likely.
+    'junction-rivers-wind-and-bess',   // 585 MW — CIS T1. Large hybrid wind+BESS, NSW. Progressing through approvals.
+    'kentbruck-green-power-hub',       // 600 MW — CIS T1, VIC. Large wind project with established grid connection pathway.
+    'coppabella-wind-farm',            // 275 MW — LTESA R1 (May 2023). 34+ months since award — oldest development project, should be closest.
+    'goyder-north-wind-farm',          // 300 MW — Neoen, CIS T1. Neoen is tier-1 developer; Goyder South already operating.
+  ]
+
   const keyProjects = useMemo(() => {
-    return ESG_TRACKER_PROJECTS
-      .filter(p => !['construction', 'operating', 'commissioning'].includes(p.stage))
-      .sort((a, b) => b.capacityMW - a.capacityMW)
-      .slice(0, 7)
+    return KEY_PROJECT_IDS
+      .map(id => ESG_TRACKER_PROJECTS.find(p => p.projectId === id))
+      .filter((p): p is ESGTrackerProject => p != null)
   }, [])
 
   return (
@@ -3304,38 +3315,33 @@ function SchemeTimelineTab() {
 
       {/* Key projects that will move the dial */}
       <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl p-5">
-        <h3 className="text-sm font-bold text-[var(--color-text)] mb-1">7 Key Projects That Will Move the Dial</h3>
+        <h3 className="text-sm font-bold text-[var(--color-text)] mb-1">7 Key Projects Closest to Commencing Construction</h3>
         <p className="text-[10px] text-[var(--color-text-muted)] leading-relaxed mb-4">
-          The largest awarded projects still in development. These {keyProjects.length} projects alone represent{' '}
-          <strong className="text-[var(--color-text)]">{fmtMW(keyProjects.reduce((s, p) => s + p.capacityMW, 0))}</strong> of
-          capacity — converting them from development to construction would significantly increase the scheme delivery rate.
+          Curated based on developer track record, planning maturity, and time since award — these are the projects most likely
+          to break through from development to construction in the near term. Together they represent{' '}
+          <strong className="text-[var(--color-text)]">{fmtMW(keyProjects.reduce((s, p) => s + p.capacityMW, 0))}</strong> — converting
+          them would materially shift the CIS/LTESA delivery rate.
         </p>
 
         <div className="space-y-3">
           {keyProjects.map((p, i) => {
             const schemeColor = p.scheme === 'CIS' ? '#f59e0b' : '#8b5cf6'
             const agrCfg = AGR_STATUS_CONFIG[p.agreementStatus]
-            // Estimate next milestone based on stage and round timing
             const roundDate = new Date(p.awardAnnouncedDate)
             const monthsSinceAward = Math.floor((Date.now() - roundDate.getTime()) / (1000 * 60 * 60 * 24 * 30))
-            let nextMilestone = 'Planning & grid connection'
-            let milestoneColor = '#f59e0b'
-            if (monthsSinceAward < 6) {
-              nextMilestone = 'Feasibility & development approvals'
-              milestoneColor = '#6b7280'
-            } else if (monthsSinceAward < 12) {
-              nextMilestone = 'Planning approval & grid connection application'
-              milestoneColor = '#f59e0b'
-            } else if (monthsSinceAward < 18) {
-              nextMilestone = 'Grid connection offer & financial close'
-              milestoneColor = '#f59e0b'
-            } else if (monthsSinceAward < 24) {
-              nextMilestone = 'Financial close & construction start (overdue)'
-              milestoneColor = '#ef4444'
-            } else {
-              nextMilestone = 'Financial close critical — risk of falling behind'
-              milestoneColor = '#ef4444'
+
+            // Project-specific next milestones
+            const milestoneMap: Record<string, { text: string; color: string; rationale: string }> = {
+              'valley-of-the-winds': { text: 'Grid connection offer & financial close', color: '#f59e0b', rationale: 'ACEN well-capitalised via BlackRock. Strong FN partnerships (Yindjibarndi 25% equity model in WA). EPBC submitted.' },
+              'spicers-creek-wind-farm': { text: 'Planning determination & financial close', color: '#f59e0b', rationale: 'Squadron Energy (formerly CWP) has deep development pipeline and recent project completions. Strong grid connection pathway in Central-West Orana REZ.' },
+              'liverpool-range-wind-farm': { text: 'Financial close & construction mobilisation', color: '#22c55e', rationale: 'Tilt Renewables (Powering Australian Renewables fund). Well-advanced planning pre-CIS award. Strong likelihood of near-term construction start.' },
+              'junction-rivers-wind-and-bess': { text: 'Planning approval & grid connection offer', color: '#f59e0b', rationale: 'Large hybrid project (wind + BESS) in NSW New England REZ. Progressing through state planning approvals.' },
+              'kentbruck-green-power-hub': { text: 'Grid connection & financial close', color: '#f59e0b', rationale: 'VIC wind project in the South-West REZ with established grid connection pathway. 600 MW scale provides financing leverage.' },
+              'coppabella-wind-farm': { text: 'Financial close overdue — critical path', color: '#ef4444', rationale: 'LTESA R1 project awarded May 2023. 34+ months in development is concerning. Must progress to financial close to avoid falling behind.' },
+              'goyder-north-wind-farm': { text: 'Grid connection offer (adjacent to Goyder South)', color: '#22c55e', rationale: 'Neoen is tier-1 developer. Goyder South already operating — shared infrastructure and grid connection significantly de-risks this project.' },
             }
+
+            const milestone = milestoneMap[p.projectId || ''] || { text: 'Planning & grid connection', color: '#f59e0b', rationale: '' }
 
             return (
               <div key={p.name} className="bg-[var(--color-bg)] border border-[var(--color-border)] rounded-xl p-4">
@@ -3383,16 +3389,19 @@ function SchemeTimelineTab() {
                   <span className="text-[9px] text-[var(--color-text-muted)]">Next milestone:</span>
                   <span
                     className="text-[9px] font-medium px-2 py-0.5 rounded-full"
-                    style={{ backgroundColor: `${milestoneColor}15`, color: milestoneColor }}
+                    style={{ backgroundColor: `${milestone.color}15`, color: milestone.color }}
                   >
-                    {nextMilestone}
+                    {milestone.text}
                   </span>
                 </div>
+                {milestone.rationale && (
+                  <p className="mt-1.5 text-[9px] text-[var(--color-text-muted)] leading-relaxed italic">
+                    {milestone.rationale}
+                  </p>
+                )}
                 <div className="mt-1 text-[9px] text-[var(--color-text-muted)]">
                   Awarded {monthsSinceAward} months ago · Target COD: {
-                    ROUND_ESG_SUMMARIES.find(r => r.roundId === p.roundId)
-                      ? timelineRounds.find(r => r.id === p.roundId)?.targetCOD || '—'
-                      : '—'
+                    timelineRounds.find(r => r.id === p.roundId)?.targetCOD || '—'
                   }
                 </div>
               </div>
