@@ -887,9 +887,27 @@ export interface EISBESSProject {
 
 export interface EISSolarProject {
   id: string; name: string; state: State; capacity_mw: number; status: string; developer?: string
+  // Panel specifications
+  panel_model?: string; panel_supplier?: string; panel_wattage_w?: number
+  panel_count?: number; panel_type?: string  // mono-PERC, bifacial, HJT, TOPCon
+  // Array configuration
+  tracking_type?: string  // single_axis | fixed_tilt | dual_axis
+  tracking_supplier?: string
+  tilt_angle_deg?: number; azimuth_deg?: number
+  array_area_ha?: number
+  // Inverter specifications
+  inverter_type?: string  // string | central
+  inverter_supplier?: string; inverter_model?: string
+  inverter_count?: number; inverter_rated_power_kw?: number
+  // Performance assumptions
   assumed_capacity_factor_pct?: number; assumed_annual_energy_gwh?: number
+  energy_yield_method?: string  // PVsyst, etc.
+  degradation_rate_pct?: number  // annual panel degradation
+  performance_ratio_pct?: number
+  // Grid connection
   connection_voltage_kv?: number; connection_distance_km?: number
   connection_substation_name?: string; nsp?: string; connection_augmentation?: string
+  // Document reference
   document_title?: string; document_url?: string; document_year?: number
 }
 
@@ -911,6 +929,13 @@ export interface EISAnalyticsData {
       avg_duration: number | null; avg_connection_distance: number | null
       top_cell_suppliers: Record<string, number>
       top_inverter_suppliers: Record<string, number>
+    }
+    solar_stats?: {
+      avg_capacity_factor: number | null
+      avg_connection_distance: number | null
+      avg_panel_count: number | null
+      tracking_sat: number
+      tracking_fixed: number
     }
     connection: {
       avg_distance: number | null
@@ -943,7 +968,15 @@ export interface EISCoverageEntry {
   name: string; technology: string; state: string; eis_url?: string; notes?: string
 }
 
+export interface EISCoverageGapEntry {
+  id: string; name: string; technology: string; status: string; planning_status?: string
+  capacity_mw: number; state: string; developer?: string
+  reason: string  // why eligible: operating, construction, dev/approved, CIS/LTESA
+  scheme?: string
+}
+
 export interface EISCoverageData {
   available_not_extracted: EISCoverageEntry[]
+  coverage_gap: EISCoverageGapEntry[]
   last_updated: string
 }

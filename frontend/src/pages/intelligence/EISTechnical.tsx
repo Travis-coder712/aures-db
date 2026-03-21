@@ -6,7 +6,7 @@ import {
   PieChart, Pie,
 } from 'recharts'
 import { fetchEISAnalytics, fetchEISComparison, fetchEISCoverage } from '../../lib/dataService'
-import type { EISAnalyticsData, EISWindProject, EISBESSProject, EISComparisonData, EISComparisonProject, EISCoverageData } from '../../lib/types'
+import type { EISAnalyticsData, EISWindProject, EISBESSProject, EISSolarProject, EISComparisonData, EISComparisonProject, EISCoverageData } from '../../lib/types'
 import ScrollableTable from '../../components/common/ScrollableTable'
 import { FINANCIAL_CLOSE_PROJECTS } from '../../data/financial-close-data'
 
@@ -186,6 +186,7 @@ export default function EISTechnical() {
   const [stateFilter, setStateFilter] = useState<string | null>(null)
   const [windSort, setWindSort] = useState<{ col: keyof EISWindProject; dir: 'asc' | 'desc' }>({ col: 'capacity_mw', dir: 'desc' })
   const [bessSort, setBessSort] = useState<{ col: keyof EISBESSProject; dir: 'asc' | 'desc' }>({ col: 'capacity_mw', dir: 'desc' })
+  const [solarSort, setSolarSort] = useState<{ col: keyof EISSolarProject; dir: 'asc' | 'desc' }>({ col: 'capacity_mw', dir: 'desc' })
   const [compSort, setCompSort] = useState<{ col: keyof EISComparisonProject; dir: 'asc' | 'desc' }>({ col: 'cf_delta_pct', dir: 'asc' })
 
   useEffect(() => {
@@ -354,6 +355,81 @@ export default function EISTechnical() {
     if (!data?.solar_projects) return []
     return stateFilter ? data.solar_projects.filter((p) => p.state === stateFilter) : data.solar_projects
   }, [data, stateFilter])
+
+  // ---- Solar derived data ----
+  const trackingTypeData = useMemo(() => {
+    const counts: Record<string, number> = {}
+    filteredSolarProjects.forEach((p) => {
+      if (p.tracking_type) {
+        const label = p.tracking_type === 'single_axis' ? 'Single-Axis' : p.tracking_type === 'fixed_tilt' ? 'Fixed Tilt' : p.tracking_type === 'dual_axis' ? 'Dual-Axis' : p.tracking_type
+        counts[label] = (counts[label] || 0) + 1
+      }
+    })
+    return Object.entries(counts).map(([name, value]) => ({ name, value }))
+  }, [filteredSolarProjects])
+
+  const panelTypeData = useMemo(() => {
+    const counts: Record<string, number> = {}
+    filteredSolarProjects.forEach((p) => {
+      if (p.panel_type) counts[p.panel_type] = (counts[p.panel_type] || 0) + 1
+    })
+    return Object.entries(counts).sort(([, a], [, b]) => b - a).map(([name, value]) => ({ name, value }))
+  }, [filteredSolarProjects])
+
+  const solarInverterTypeData = useMemo(() => {
+    const counts: Record<string, number> = {}
+    filteredSolarProjects.forEach((p) => {
+      if (p.inverter_type) {
+        const label = p.inverter_type === 'central' ? 'Central' : p.inverter_type === 'string' ? 'String' : p.inverter_type
+        counts[label] = (counts[label] || 0) + 1
+      }
+    })
+    return Object.entries(counts).sort(([, a], [, b]) => b - a).map(([name, value]) => ({ name, value }))
+  }, [filteredSolarProjects])
+
+  const solarInverterSupplierData = useMemo(() => {
+    const counts: Record<string, number> = {}
+    filteredSolarProjects.forEach((p) => {
+      if (p.inverter_supplier) counts[p.inverter_supplier] = (counts[p.inverter_supplier] || 0) + 1
+    })
+    return Object.entries(counts)
+      .sort(([, a], [, b]) => b - a)
+      .slice(0, 8)
+      .map(([name, count]) => ({ name: name.length > 18 ? name.slice(0, 16) + '…' : name, count, fullName: name }))
+  }, [filteredSolarProjects])
+
+  const trackingSupplierData = useMemo(() => {
+    const counts: Record<string, number> = {}
+    filteredSolarProjects.forEach((p) => {
+      if (p.tracking_supplier) counts[p.tracking_supplier] = (counts[p.tracking_supplier] || 0) + 1
+    })
+    return Object.entries(counts)
+      .sort(([, a], [, b]) => b - a)
+      .slice(0, 8)
+      .map(([name, count]) => ({ name: name.length > 18 ? name.slice(0, 16) + '…' : name, count, fullName: name }))
+  }, [filteredSolarProjects])
+
+  const solarCfData = useMemo(() => {
+    return filteredSolarProjects
+      .filter((p) => p.assumed_capacity_factor_pct != null)
+      .map((p) => ({
+        name: p.name.length > 25 ? p.name.slice(0, 23) + '…' : p.name,
+        cf: p.assumed_capacity_factor_pct,
+        id: p.id,
+        state: p.state,
+      }))
+      .sort((a, b) => (b.cf ?? 0) - (a.cf ?? 0))
+  }, [filteredSolarProjects])
+
+  const sortedSolarProjects = useMemo(() => {
+    return [...filteredSolarProjects].sort((a, b) => {
+      const av = a[solarSort.col] ?? 0
+      const bv = b[solarSort.col] ?? 0
+      if (typeof av === 'string' && typeof bv === 'string')
+        return solarSort.dir === 'asc' ? av.localeCompare(bv) : bv.localeCompare(av)
+      return solarSort.dir === 'asc' ? (av as number) - (bv as number) : (bv as number) - (av as number)
+    })
+  }, [filteredSolarProjects, solarSort])
 
   // ---- Comparison derived data ----
   const comparisonBarData = useMemo(() => {
@@ -1018,41 +1094,189 @@ export default function EISTechnical() {
               </p>
             </div>
           ) : (
-            <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl p-4">
-              <h3 className="text-sm font-semibold text-[var(--color-text)] mb-3">Solar EIS Projects</h3>
-              <ScrollableTable>
-                <table className="w-full text-xs">
-                  <thead>
-                    <tr className="border-b border-[var(--color-border)]">
-                      <th className="px-2 py-2 text-left font-medium text-[var(--color-text-muted)]">Project</th>
-                      <th className="px-2 py-2 text-left font-medium text-[var(--color-text-muted)]">State</th>
-                      <th className="px-2 py-2 text-right font-medium text-[var(--color-text-muted)]">MW</th>
-                      <th className="px-2 py-2 text-right font-medium text-[var(--color-text-muted)]">CF %</th>
-                      <th className="px-2 py-2 text-right font-medium text-[var(--color-text-muted)]">GWh/yr</th>
-                      <th className="px-2 py-2 text-left font-medium text-[var(--color-text-muted)]">Status</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {filteredSolarProjects.map((p) => (
-                      <tr key={p.id} className="border-b border-[var(--color-border)]/50 hover:bg-[var(--color-bg-elevated)]/50">
-                        <td className="px-2 py-1.5">
-                          <Link to={`/projects/${p.id}`} className="text-[var(--color-primary)] hover:underline">{p.name}</Link>
-                        </td>
-                        <td className="px-2 py-1.5" style={{ color: getStateColour(p.state) }}>{p.state}</td>
-                        <td className="px-2 py-1.5 text-right font-mono">{fmtInt(p.capacity_mw)}</td>
-                        <td className="px-2 py-1.5 text-right font-mono">{fmt(p.assumed_capacity_factor_pct)}</td>
-                        <td className="px-2 py-1.5 text-right font-mono">{fmt(p.assumed_annual_energy_gwh)}</td>
-                        <td className="px-2 py-1.5">
-                          <span className="px-1.5 py-0.5 rounded text-[10px]" style={{ backgroundColor: `${getStatusColour(p.status)}20`, color: getStatusColour(p.status) }}>
-                            {p.status}
-                          </span>
-                        </td>
+            <>
+              {/* Solar summary stats */}
+              <div className="grid grid-cols-2 lg:grid-cols-5 gap-3">
+                <StatCard label="Solar Projects" value={filteredSolarProjects.length.toString()} />
+                <StatCard label="Total Capacity" value={fmtInt(filteredSolarProjects.reduce((s, p) => s + p.capacity_mw, 0))} unit="MW" />
+                <StatCard label="Avg Capacity Factor" value={fmt(data.summary.solar_stats?.avg_capacity_factor)} unit="%" />
+                <StatCard label="Single-Axis Tracking" value={(trackingTypeData.find((t) => t.name === 'Single-Axis')?.value ?? 0).toString()} unit={`of ${filteredSolarProjects.length}`} />
+                <StatCard label="Avg Panel Count" value={fmtInt(data.summary.solar_stats?.avg_panel_count)} />
+              </div>
+
+              {/* Charts row 1: Tracking Type pie + Panel Type bar */}
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                {/* Tracking type distribution */}
+                <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl p-4">
+                  <h3 className="text-sm font-semibold text-[var(--color-text)] mb-3">Tracking Type Distribution</h3>
+                  {trackingTypeData.length > 0 ? (
+                    <ResponsiveContainer width="100%" height={200}>
+                      <PieChart>
+                        <Pie data={trackingTypeData} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={70} label={({ name, value }) => `${name} (${value})`}>
+                          {trackingTypeData.map((_, i) => (
+                            <Cell key={i} fill={['#f59e0b', '#3b82f6', '#10b981', '#8b5cf6'][i % 4]} />
+                          ))}
+                        </Pie>
+                        <Tooltip content={<ChartTooltip />} />
+                      </PieChart>
+                    </ResponsiveContainer>
+                  ) : (
+                    <p className="text-xs text-[var(--color-text-muted)] text-center py-8">No tracking data available</p>
+                  )}
+                </div>
+
+                {/* Panel type distribution */}
+                <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl p-4">
+                  <h3 className="text-sm font-semibold text-[var(--color-text)] mb-3">Panel Technology</h3>
+                  {panelTypeData.length > 0 ? (
+                    <ResponsiveContainer width="100%" height={200}>
+                      <BarChart data={panelTypeData} margin={{ left: 10, right: 10, top: 5, bottom: 5 }}>
+                        <CartesianGrid strokeDasharray="3 3" stroke="var(--color-border)" />
+                        <XAxis dataKey="name" tick={{ fontSize: 10, fill: 'var(--color-text-muted)' }} />
+                        <YAxis tick={{ fontSize: 10, fill: 'var(--color-text-muted)' }} />
+                        <Tooltip content={<ChartTooltip />} />
+                        <Bar dataKey="value" name="Projects" fill="#f59e0b" radius={[4, 4, 0, 0]} />
+                      </BarChart>
+                    </ResponsiveContainer>
+                  ) : (
+                    <p className="text-xs text-[var(--color-text-muted)] text-center py-8">No panel type data available</p>
+                  )}
+                </div>
+              </div>
+
+              {/* Charts row 2: Inverter supplier + Tracking supplier */}
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                {/* Inverter type + supplier */}
+                <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl p-4">
+                  <h3 className="text-sm font-semibold text-[var(--color-text)] mb-1">Inverter Configuration</h3>
+                  {solarInverterTypeData.length > 0 && (
+                    <div className="flex items-center gap-3 mb-2">
+                      {solarInverterTypeData.map((t) => (
+                        <span key={t.name} className="text-[10px] text-[var(--color-text-muted)]">
+                          {t.name}: <span className="font-bold text-[var(--color-text)]">{t.value}</span>
+                        </span>
+                      ))}
+                    </div>
+                  )}
+                  {solarInverterSupplierData.length > 0 ? (
+                    <ResponsiveContainer width="100%" height={200}>
+                      <BarChart data={solarInverterSupplierData} layout="vertical" margin={{ left: 80, right: 10, top: 5, bottom: 5 }}>
+                        <CartesianGrid strokeDasharray="3 3" stroke="var(--color-border)" />
+                        <XAxis type="number" tick={{ fontSize: 10, fill: 'var(--color-text-muted)' }} />
+                        <YAxis type="category" dataKey="name" tick={{ fontSize: 10, fill: 'var(--color-text-muted)' }} width={75} />
+                        <Tooltip content={<ChartTooltip />} />
+                        <Bar dataKey="count" name="Projects" fill="#3b82f6" radius={[0, 4, 4, 0]} />
+                      </BarChart>
+                    </ResponsiveContainer>
+                  ) : (
+                    <p className="text-xs text-[var(--color-text-muted)] text-center py-8">No inverter data available</p>
+                  )}
+                </div>
+
+                {/* Tracking supplier */}
+                <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl p-4">
+                  <h3 className="text-sm font-semibold text-[var(--color-text)] mb-3">Tracking Supplier</h3>
+                  {trackingSupplierData.length > 0 ? (
+                    <ResponsiveContainer width="100%" height={200}>
+                      <BarChart data={trackingSupplierData} layout="vertical" margin={{ left: 80, right: 10, top: 5, bottom: 5 }}>
+                        <CartesianGrid strokeDasharray="3 3" stroke="var(--color-border)" />
+                        <XAxis type="number" tick={{ fontSize: 10, fill: 'var(--color-text-muted)' }} />
+                        <YAxis type="category" dataKey="name" tick={{ fontSize: 10, fill: 'var(--color-text-muted)' }} width={75} />
+                        <Tooltip content={<ChartTooltip />} />
+                        <Bar dataKey="count" name="Projects" fill="#10b981" radius={[0, 4, 4, 0]} />
+                      </BarChart>
+                    </ResponsiveContainer>
+                  ) : (
+                    <p className="text-xs text-[var(--color-text-muted)] text-center py-8">No tracking supplier data available</p>
+                  )}
+                </div>
+              </div>
+
+              {/* Capacity factor chart */}
+              {solarCfData.length > 0 && (
+                <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl p-4">
+                  <h3 className="text-sm font-semibold text-[var(--color-text)] mb-3">EIS Assumed Capacity Factor</h3>
+                  <ResponsiveContainer width="100%" height={Math.max(200, solarCfData.length * 28)}>
+                    <BarChart data={solarCfData} layout="vertical" margin={{ left: 140, right: 20, top: 5, bottom: 5 }}>
+                      <CartesianGrid strokeDasharray="3 3" stroke="var(--color-border)" />
+                      <XAxis type="number" domain={[0, 35]} tick={{ fontSize: 10, fill: 'var(--color-text-muted)' }} unit="%" />
+                      <YAxis type="category" dataKey="name" tick={{ fontSize: 10, fill: 'var(--color-text-muted)' }} width={135} />
+                      <Tooltip content={<ChartTooltip />} />
+                      <Bar dataKey="cf" name="Capacity Factor %" fill="#f59e0b" radius={[0, 4, 4, 0]}>
+                        {solarCfData.map((d, i) => (
+                          <Cell key={i} fill={getStateColour(d.state)} />
+                        ))}
+                      </Bar>
+                    </BarChart>
+                  </ResponsiveContainer>
+                </div>
+              )}
+
+              {/* Full project table */}
+              <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl p-4">
+                <h3 className="text-sm font-semibold text-[var(--color-text)] mb-3">
+                  Solar EIS Projects ({filteredSolarProjects.length})
+                </h3>
+                <ScrollableTable>
+                  <table className="w-full text-xs">
+                    <thead>
+                      <tr className="border-b border-[var(--color-border)]">
+                        {([
+                          ['name', 'Project', 'left'],
+                          ['state', 'State', 'left'],
+                          ['capacity_mw', 'MW', 'right'],
+                          ['status', 'Status', 'left'],
+                          ['panel_type', 'Panel Type', 'left'],
+                          ['tracking_type', 'Tracking', 'left'],
+                          ['inverter_type', 'Inverter', 'left'],
+                          ['assumed_capacity_factor_pct', 'CF %', 'right'],
+                          ['assumed_annual_energy_gwh', 'GWh/yr', 'right'],
+                          ['panel_count', 'Panels', 'right'],
+                          ['connection_voltage_kv', 'kV', 'right'],
+                        ] as [keyof EISSolarProject, string, string][]).map(([col, label, align]) => (
+                          <th
+                            key={col}
+                            className={`px-2 py-2 text-${align} font-medium text-[var(--color-text-muted)] cursor-pointer hover:text-[var(--color-text)] select-none whitespace-nowrap`}
+                            onClick={() => setSolarSort((prev) => ({ col, dir: prev.col === col && prev.dir === 'desc' ? 'asc' : 'desc' }))}
+                          >
+                            {label}{' '}
+                            {solarSort.col === col ? (solarSort.dir === 'asc' ? <SortUpIcon /> : <SortDownIcon />) : null}
+                          </th>
+                        ))}
                       </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </ScrollableTable>
-            </div>
+                    </thead>
+                    <tbody>
+                      {sortedSolarProjects.map((p) => (
+                        <tr key={p.id} className="border-b border-[var(--color-border)]/50 hover:bg-[var(--color-bg-elevated)]/50">
+                          <td className="px-2 py-1.5">
+                            <Link to={`/projects/${p.id}`} className="text-[var(--color-primary)] hover:underline whitespace-nowrap">{p.name}</Link>
+                          </td>
+                          <td className="px-2 py-1.5" style={{ color: getStateColour(p.state) }}>{p.state}</td>
+                          <td className="px-2 py-1.5 text-right font-mono">{fmtInt(p.capacity_mw)}</td>
+                          <td className="px-2 py-1.5">
+                            <span className="px-1.5 py-0.5 rounded text-[10px]" style={{ backgroundColor: `${getStatusColour(p.status)}20`, color: getStatusColour(p.status) }}>
+                              {p.status}
+                            </span>
+                          </td>
+                          <td className="px-2 py-1.5 text-[var(--color-text-muted)] whitespace-nowrap">{p.panel_type || '—'}</td>
+                          <td className="px-2 py-1.5 text-[var(--color-text-muted)] whitespace-nowrap">
+                            {p.tracking_type === 'single_axis' ? 'Single-Axis' : p.tracking_type === 'fixed_tilt' ? 'Fixed Tilt' : p.tracking_type || '—'}
+                          </td>
+                          <td className="px-2 py-1.5 text-[var(--color-text-muted)] whitespace-nowrap">
+                            {p.inverter_type === 'central' ? 'Central' : p.inverter_type === 'string' ? 'String' : p.inverter_type || '—'}
+                            {p.inverter_supplier ? ` (${p.inverter_supplier})` : ''}
+                          </td>
+                          <td className="px-2 py-1.5 text-right font-mono">{fmt(p.assumed_capacity_factor_pct)}</td>
+                          <td className="px-2 py-1.5 text-right font-mono">{fmt(p.assumed_annual_energy_gwh)}</td>
+                          <td className="px-2 py-1.5 text-right font-mono">{p.panel_count ? fmtInt(p.panel_count) : '—'}</td>
+                          <td className="px-2 py-1.5 text-right font-mono">{p.connection_voltage_kv ? fmtInt(p.connection_voltage_kv) : '—'}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </ScrollableTable>
+              </div>
+            </>
           )}
         </div>
       )}
@@ -1264,7 +1488,7 @@ export default function EISTechnical() {
       {tab === 'coverage' && (
         <div className="space-y-6">
           {/* Summary cards */}
-          <div className="grid grid-cols-2 lg:grid-cols-3 gap-3">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
             <StatCard
               label="EIS Data Extracted"
               value={(data.wind_projects.length + data.bess_projects.length + (data.solar_projects?.length ?? 0)).toString()}
@@ -1276,9 +1500,18 @@ export default function EISTechnical() {
               unit="projects"
             />
             <StatCard
-              label="Total Identified"
-              value={(data.wind_projects.length + data.bess_projects.length + (data.solar_projects?.length ?? 0) + (coverage?.available_not_extracted.length ?? 0)).toString()}
-              unit="EIS/EIA"
+              label="Coverage Gap"
+              value={(coverage?.coverage_gap?.length ?? 0).toString()}
+              unit="eligible without EIS"
+            />
+            <StatCard
+              label="Coverage Rate"
+              value={(() => {
+                const extracted = data.wind_projects.length + data.bess_projects.length + (data.solar_projects?.length ?? 0)
+                const total = extracted + (coverage?.coverage_gap?.length ?? 0)
+                return total > 0 ? `${Math.round(extracted / total * 100)}%` : '—'
+              })()}
+              unit={`of ${(data.wind_projects.length + data.bess_projects.length + (data.solar_projects?.length ?? 0)) + (coverage?.coverage_gap?.length ?? 0)} eligible`}
             />
           </div>
 
@@ -1385,6 +1618,11 @@ export default function EISTechnical() {
               </ScrollableTable>
             </div>
           )}
+
+          {/* Coverage Gap — eligible projects without EIS data */}
+          {coverage?.coverage_gap && coverage.coverage_gap.length > 0 && (
+            <CoverageGapTable gap={coverage.coverage_gap} />
+          )}
         </div>
       )}
 
@@ -1396,6 +1634,143 @@ export default function EISTechnical() {
         Data sourced from Environmental Impact Statements (EIS/EIA), project planning documents,
         developer press releases, and industry publications.
       </p>
+    </div>
+  )
+}
+
+// ============================================================
+// Coverage Gap Table
+// ============================================================
+
+const TECH_COLORS: Record<string, string> = {
+  wind: '#3b82f6', solar: '#f59e0b', bess: '#10b981',
+}
+
+const STATUS_COLORS: Record<string, string> = {
+  operating: '#22c55e', commissioning: '#84cc16', construction: '#3b82f6',
+  development: '#f59e0b',
+}
+
+function CoverageGapTable({ gap }: { gap: Array<{ id: string; name: string; technology: string; status: string; capacity_mw: number; state: string; developer?: string; reason: string; scheme?: string }> }) {
+  const [techFilter, setTechFilter] = useState<string>('all')
+  const [statusFilter, setStatusFilter] = useState<string>('all')
+
+  const filtered = useMemo(() => {
+    let result = gap
+    if (techFilter !== 'all') result = result.filter(p => p.technology === techFilter)
+    if (statusFilter !== 'all') result = result.filter(p => p.status === statusFilter)
+    return result
+  }, [gap, techFilter, statusFilter])
+
+  // Tech breakdown
+  const techBreakdown = useMemo(() => {
+    const tb: Record<string, { count: number; mw: number }> = {}
+    for (const p of gap) {
+      if (!tb[p.technology]) tb[p.technology] = { count: 0, mw: 0 }
+      tb[p.technology].count++
+      tb[p.technology].mw += p.capacity_mw
+    }
+    return Object.entries(tb).sort((a, b) => b[1].mw - a[1].mw)
+  }, [gap])
+
+  // Status breakdown
+  const statusBreakdown = useMemo(() => {
+    const sb: Record<string, { count: number; mw: number }> = {}
+    for (const p of gap) {
+      if (!sb[p.status]) sb[p.status] = { count: 0, mw: 0 }
+      sb[p.status].count++
+      sb[p.status].mw += p.capacity_mw
+    }
+    return Object.entries(sb).sort((a, b) => b[1].count - a[1].count)
+  }, [gap])
+
+  return (
+    <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl overflow-hidden">
+      <div className="px-4 py-3 border-b border-[var(--color-border)]">
+        <h3 className="text-sm font-semibold text-[var(--color-text)] flex items-center gap-2">
+          <span className="w-2 h-2 rounded-full bg-[#ef4444]" />
+          Coverage Gap — Eligible Projects Without EIS Data
+        </h3>
+        <p className="text-[10px] text-[var(--color-text-muted)] mt-0.5">
+          Projects that are operating, commissioning, in construction, or have planning approval / CIS / LTESA — but no EIS/EIA technical data has been extracted.
+        </p>
+      </div>
+
+      {/* Breakdown badges */}
+      <div className="px-4 py-3 border-b border-[var(--color-border)] flex flex-wrap gap-4">
+        <div className="flex items-center gap-2 flex-wrap">
+          <span className="text-[10px] text-[var(--color-text-muted)] font-semibold uppercase">Tech:</span>
+          <button onClick={() => setTechFilter('all')} className={`text-[10px] px-2 py-0.5 rounded-full ${techFilter === 'all' ? 'bg-white/10 text-[var(--color-text)]' : 'text-[var(--color-text-muted)] hover:text-[var(--color-text)]'}`}>
+            All ({gap.length})
+          </button>
+          {techBreakdown.map(([tech, { count, mw }]) => (
+            <button key={tech} onClick={() => setTechFilter(tech === techFilter ? 'all' : tech)} className={`text-[10px] px-2 py-0.5 rounded-full ${techFilter === tech ? 'bg-white/10 text-[var(--color-text)]' : 'text-[var(--color-text-muted)] hover:text-[var(--color-text)]'}`}>
+              <span className="inline-block w-1.5 h-1.5 rounded-full mr-1" style={{ backgroundColor: TECH_COLORS[tech] || '#6b7280' }} />
+              {tech === 'bess' ? 'BESS' : tech} ({count} · {mw >= 1000 ? `${(mw / 1000).toFixed(1)} GW` : `${Math.round(mw)} MW`})
+            </button>
+          ))}
+        </div>
+        <div className="flex items-center gap-2 flex-wrap">
+          <span className="text-[10px] text-[var(--color-text-muted)] font-semibold uppercase">Status:</span>
+          {statusBreakdown.map(([status, { count }]) => (
+            <button key={status} onClick={() => setStatusFilter(status === statusFilter ? 'all' : status)} className={`text-[10px] px-2 py-0.5 rounded-full ${statusFilter === status ? 'bg-white/10 text-[var(--color-text)]' : 'text-[var(--color-text-muted)] hover:text-[var(--color-text)]'}`}>
+              <span className="inline-block w-1.5 h-1.5 rounded-full mr-1" style={{ backgroundColor: STATUS_COLORS[status] || '#6b7280' }} />
+              {status} ({count})
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* Table */}
+      <ScrollableTable>
+        <table className="w-full text-xs">
+          <thead>
+            <tr className="border-b border-[var(--color-border)]">
+              <th className="px-2 py-2 text-left font-medium text-[var(--color-text-muted)]">Project</th>
+              <th className="px-2 py-2 text-center font-medium text-[var(--color-text-muted)]">Tech</th>
+              <th className="px-2 py-2 text-left font-medium text-[var(--color-text-muted)]">State</th>
+              <th className="px-2 py-2 text-right font-medium text-[var(--color-text-muted)]">MW</th>
+              <th className="px-2 py-2 text-center font-medium text-[var(--color-text-muted)]">Status</th>
+              <th className="px-2 py-2 text-left font-medium text-[var(--color-text-muted)]">Developer</th>
+              <th className="px-2 py-2 text-left font-medium text-[var(--color-text-muted)]">Reason Eligible</th>
+            </tr>
+          </thead>
+          <tbody>
+            {filtered.map((p) => {
+              const techColor = TECH_COLORS[p.technology] || '#6b7280'
+              const statusColor = STATUS_COLORS[p.status] || '#6b7280'
+              return (
+                <tr key={p.id} className="border-b border-[var(--color-border)]/50 hover:bg-[var(--color-bg-elevated)]/50">
+                  <td className="px-2 py-1.5">
+                    <Link to={`/projects/${p.id}`} className="text-[var(--color-primary)] hover:underline font-medium truncate block max-w-[220px]">{p.name}</Link>
+                  </td>
+                  <td className="px-2 py-1.5 text-center">
+                    <span className="px-1.5 py-0.5 rounded text-[9px] uppercase font-semibold" style={{ backgroundColor: `${techColor}20`, color: techColor }}>
+                      {p.technology === 'bess' ? 'BESS' : p.technology}
+                    </span>
+                  </td>
+                  <td className="px-2 py-1.5" style={{ color: getStateColour(p.state) }}>{p.state}</td>
+                  <td className="px-2 py-1.5 text-right font-mono text-[var(--color-text)]">{p.capacity_mw >= 1000 ? `${(p.capacity_mw / 1000).toFixed(1)}G` : Math.round(p.capacity_mw)}</td>
+                  <td className="px-2 py-1.5 text-center">
+                    <span className="px-1.5 py-0.5 rounded text-[9px] font-semibold" style={{ backgroundColor: `${statusColor}20`, color: statusColor }}>
+                      {p.status}
+                    </span>
+                  </td>
+                  <td className="px-2 py-1.5 text-[var(--color-text-muted)] truncate max-w-[140px]">{p.developer || '—'}</td>
+                  <td className="px-2 py-1.5 text-[var(--color-text-muted)] text-[10px]">
+                    {p.reason}
+                    {p.scheme && <span className="ml-1 text-[var(--color-primary)]">({p.scheme})</span>}
+                  </td>
+                </tr>
+              )
+            })}
+          </tbody>
+        </table>
+      </ScrollableTable>
+
+      <div className="px-4 py-2 border-t border-[var(--color-border)] text-[10px] text-[var(--color-text-muted)]">
+        Showing {filtered.length} of {gap.length} projects · {filtered.reduce((s, p) => s + p.capacity_mw, 0) >= 1000 ? `${(filtered.reduce((s, p) => s + p.capacity_mw, 0) / 1000).toFixed(1)} GW` : `${Math.round(filtered.reduce((s, p) => s + p.capacity_mw, 0))} MW`} total capacity
+      </div>
     </div>
   )
 }
