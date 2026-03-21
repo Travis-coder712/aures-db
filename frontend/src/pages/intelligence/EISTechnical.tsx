@@ -1699,16 +1699,31 @@ const STATUS_COLORS: Record<string, string> = {
   development: '#f59e0b',
 }
 
+type GapSortCol = 'name' | 'technology' | 'state' | 'capacity_mw' | 'status' | 'developer' | 'reason'
+
 function CoverageGapTable({ gap }: { gap: Array<{ id: string; name: string; technology: string; status: string; capacity_mw: number; state: string; developer?: string; reason: string; scheme?: string }> }) {
   const [techFilter, setTechFilter] = useState<string>('all')
   const [statusFilter, setStatusFilter] = useState<string>('all')
+  const [sortCol, setSortCol] = useState<GapSortCol>('capacity_mw')
+  const [sortDir, setSortDir] = useState<'asc' | 'desc'>('desc')
+
+  const handleSort = (col: GapSortCol) => {
+    setSortDir((prev) => (sortCol === col && prev === 'asc' ? 'desc' : 'asc'))
+    setSortCol(col)
+  }
 
   const filtered = useMemo(() => {
     let result = gap
     if (techFilter !== 'all') result = result.filter(p => p.technology === techFilter)
     if (statusFilter !== 'all') result = result.filter(p => p.status === statusFilter)
-    return result
-  }, [gap, techFilter, statusFilter])
+    return [...result].sort((a, b) => {
+      const av = a[sortCol] ?? ''
+      const bv = b[sortCol] ?? ''
+      if (typeof av === 'string' && typeof bv === 'string')
+        return sortDir === 'asc' ? av.localeCompare(bv) : bv.localeCompare(av)
+      return sortDir === 'asc' ? (av as number) - (bv as number) : (bv as number) - (av as number)
+    })
+  }, [gap, techFilter, statusFilter, sortCol, sortDir])
 
   // Tech breakdown
   const techBreakdown = useMemo(() => {
@@ -1774,13 +1789,20 @@ function CoverageGapTable({ gap }: { gap: Array<{ id: string; name: string; tech
         <table className="w-full text-xs">
           <thead>
             <tr className="border-b border-[var(--color-border)]">
-              <th className="px-2 py-2 text-left font-medium text-[var(--color-text-muted)]">Project</th>
-              <th className="px-2 py-2 text-center font-medium text-[var(--color-text-muted)]">Tech</th>
-              <th className="px-2 py-2 text-left font-medium text-[var(--color-text-muted)]">State</th>
-              <th className="px-2 py-2 text-right font-medium text-[var(--color-text-muted)]">MW</th>
-              <th className="px-2 py-2 text-center font-medium text-[var(--color-text-muted)]">Status</th>
-              <th className="px-2 py-2 text-left font-medium text-[var(--color-text-muted)]">Developer</th>
-              <th className="px-2 py-2 text-left font-medium text-[var(--color-text-muted)]">Reason Eligible</th>
+              {([
+                ['name', 'Project', 'text-left'],
+                ['technology', 'Tech', 'text-center'],
+                ['state', 'State', 'text-left'],
+                ['capacity_mw', 'MW', 'text-right'],
+                ['status', 'Status', 'text-center'],
+                ['developer', 'Developer', 'text-left'],
+                ['reason', 'Reason Eligible', 'text-left'],
+              ] as [GapSortCol, string, string][]).map(([col, label, align]) => (
+                <th key={col} className={`px-2 py-2 font-medium text-[var(--color-text-muted)] cursor-pointer hover:text-[var(--color-text)] select-none whitespace-nowrap ${align}`} onClick={() => handleSort(col)}>
+                  {label}{' '}
+                  {sortCol === col ? (sortDir === 'asc' ? <SortUpIcon /> : <SortDownIcon />) : null}
+                </th>
+              ))}
             </tr>
           </thead>
           <tbody>
