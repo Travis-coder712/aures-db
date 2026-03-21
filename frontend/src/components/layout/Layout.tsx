@@ -299,15 +299,29 @@ export default function Layout() {
           <p className="text-[10px] text-[var(--color-text-muted)]/50 text-center">
             Data updated regularly from AEMO, AFR, RenewEconomy & more
           </p>
-          <div className="mt-2 flex items-center justify-center gap-1.5">
-            <span className="text-[10px] text-[var(--color-text-muted)]/70 font-mono bg-white/5 px-1.5 py-0.5 rounded">v{version.current}</span>
-            {version.updateAvailable && (
+          <div className="mt-2 flex flex-col items-center gap-1.5">
+            <div className="flex items-center gap-1.5">
+              <span className="text-[10px] text-[var(--color-text-muted)]/70 font-mono bg-white/5 px-1.5 py-0.5 rounded">v{version.current}</span>
               <button
-                onClick={() => version.applyUpdate()}
-                className="text-[9px] font-semibold text-emerald-400 bg-emerald-400/10 px-1.5 py-0.5 rounded-full hover:bg-emerald-400/20 transition-colors animate-pulse"
+                onClick={() => version.updateAvailable ? version.applyUpdate() : version.checkNow()}
+                disabled={version.checking}
+                className={`text-[9px] font-semibold px-1.5 py-0.5 rounded-full transition-colors ${
+                  version.updateAvailable
+                    ? 'text-emerald-400 bg-emerald-400/10 hover:bg-emerald-400/20 animate-pulse'
+                    : version.checking
+                      ? 'text-blue-400 bg-blue-400/10 cursor-wait'
+                      : 'text-[var(--color-text-muted)]/60 bg-white/5 hover:bg-white/10 hover:text-[var(--color-text-muted)]'
+                }`}
               >
-                Update available — tap to refresh
+                {version.updateAvailable
+                  ? `Update to v${version.latest}`
+                  : version.checking
+                    ? 'Checking…'
+                    : 'Check for updates'}
               </button>
+            </div>
+            {version.updateAvailable && (
+              <p className="text-[8px] text-emerald-400/70">Tap to update & refresh</p>
             )}
           </div>
         </div>
