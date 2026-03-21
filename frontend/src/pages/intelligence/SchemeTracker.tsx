@@ -47,9 +47,9 @@ function fmtMW(mw: number): string {
 // Component
 // ============================================================
 
-const TABS = ['overview', 'tracker', 'watchlist', 'esg'] as const
+const TABS = ['overview', 'tracker', 'watchlist', 'esg', 'timeline'] as const
 type Tab = typeof TABS[number]
-const TAB_LABELS: Record<Tab, string> = { overview: 'Overview', tracker: 'Milestone Tracker', watchlist: 'Key Projects', esg: 'ESG Agreement Proxy' }
+const TAB_LABELS: Record<Tab, string> = { overview: 'Overview', tracker: 'Milestone Tracker', watchlist: 'Key Projects', esg: 'ESG Agreement Proxy', timeline: 'CIS/LTESA Timeline' }
 
 export default function SchemeTracker() {
   const [activeTab, setActiveTab] = useState<Tab>('overview')
@@ -504,6 +504,9 @@ export default function SchemeTracker() {
       {/* ESG Agreement Proxy Tab */}
       {activeTab === 'esg' && (
         <ESGAgreementProxyTab />
+      )}
+      {activeTab === 'timeline' && (
+        <SchemeTimelineTab />
       )}
     </div>
   )
@@ -2864,6 +2867,559 @@ function ESGAgreementProxyTab() {
           CIS tender guidelines: Merit Criteria 4 (First Nations) and 7/8 (Social Licence) per ASL market briefing notes.
           LTESA: Electricity Infrastructure Investment Act 2020, s.4(1) First Nations Guidelines.
         </p>
+      </div>
+    </div>
+  )
+}
+
+// ============================================================
+// CIS/LTESA Timeline Tab
+// ============================================================
+
+interface TimelineRound {
+  id: string
+  scheme: 'CIS' | 'LTESA'
+  name: string
+  date: string
+  capacityMW: number
+  storageMWh: number
+  numProjects: number
+  targetCOD: string
+  headline: string
+  insight: string
+  notableWinners: string[]
+  constructionPct: number
+  confirmedPct: number
+  confirmedCount: number
+  confirmedMW: number
+  notConfirmedCount: number
+  notConfirmedMW: number
+  totalMW: number
+}
+
+function SchemeTimelineTab() {
+  // Build timeline data from ESG + round data
+  const timelineRounds = useMemo<TimelineRound[]>(() => {
+    const rounds: TimelineRound[] = [
+      {
+        id: 'ltesa-round-1',
+        scheme: 'LTESA',
+        name: 'LTESA Round 1 — Generation + LDS',
+        date: '2023-05-03',
+        capacityMW: 1445,
+        storageMWh: 400,
+        numProjects: 4,
+        targetCOD: '2027-2028',
+        headline: 'First-ever LTESA tender. Solar strike prices below $35/MWh.',
+        insight: 'Slow progress for a round 34+ months old. Large solar projects navigating complex REZ access and grid connection. No projects operating yet — a concern for 2030 targets.',
+        notableWinners: ['New England Solar Farm (720 MW) — ACEN', 'Stubbo Solar Farm (400 MW) — ACEN', 'Coppabella Wind Farm (275 MW)', 'Limondale BESS (50 MW / 400 MWh)'],
+        constructionPct: 50, confirmedPct: 0, confirmedCount: 0, confirmedMW: 0, notConfirmedCount: 0, notConfirmedMW: 0, totalMW: 1445,
+      },
+      {
+        id: 'cis-pilot-nsw',
+        scheme: 'CIS',
+        name: 'CIS Pilot NSW / LTESA Round 2 — Firming',
+        date: '2023-11-23',
+        capacityMW: 1075,
+        storageMWh: 0,
+        numProjects: 6,
+        targetCOD: 'Dec 2025',
+        headline: 'First-ever CIS round. Co-delivered with NSW Government. Firming focus.',
+        insight: 'VPPs likely operating. Three large BESS (Orana 460 MW, Liddell 250 MW, Smithfield 235 MW) in construction — Dec 2025 target likely missed by larger projects.',
+        notableWinners: ['Orana REZ Battery (460 MW) — Akaysha/BlackRock', 'Liddell Battery (250 MW) — AGL', 'Smithfield Battery (235 MW) — Iberdrola', '3× Enel X VPPs (130 MW)'],
+        constructionPct: 50, confirmedPct: 0, confirmedCount: 0, confirmedMW: 0, notConfirmedCount: 0, notConfirmedMW: 0, totalMW: 1075,
+      },
+      {
+        id: 'ltesa-round-3',
+        scheme: 'LTESA',
+        name: 'LTESA Round 3 — Generation + LDS',
+        date: '2023-12-19',
+        capacityMW: 1274,
+        storageMWh: 4192,
+        numProjects: 5,
+        targetCOD: 'Before 2028',
+        headline: 'First compressed air energy storage (A-CAES) project to secure government contract.',
+        insight: 'Most projects in development or early construction. Uungula Wind Farm progressing through planning. Timeline tight but some may still reach targets.',
+        notableWinners: ['Uungula Wind Farm (400 MW) — Squadron', 'Culcairn Solar (350 MW)', 'Silver City A-CAES (200 MW / 1,600 MWh) — Hydrostor', 'Wallerawang 9 BESS (200 MW / 1,592 MWh)'],
+        constructionPct: 20, confirmedPct: 0, confirmedCount: 0, confirmedMW: 0, notConfirmedCount: 0, notConfirmedMW: 0, totalMW: 1274,
+      },
+      {
+        id: 'ltesa-round-4',
+        scheme: 'LTESA',
+        name: 'LTESA Round 4 — Generation',
+        date: '2024-07-01',
+        capacityMW: 312,
+        storageMWh: 372,
+        numProjects: 2,
+        targetCOD: '2026-2027',
+        headline: 'Flyers Creek becomes first project with an LTESA to begin operations (May 2025).',
+        insight: 'A milestone for the program. Smallest round — only 2 projects. Planned Q4 2024 generation tender cancelled to align with federal CIS, signalling increasing coordination.',
+        notableWinners: ['Flyers Creek Wind Farm (~140 MW) — OPERATING', 'Maryvale Solar + BESS (172 MW / 372 MWh)'],
+        constructionPct: 50, confirmedPct: 0, confirmedCount: 0, confirmedMW: 0, notConfirmedCount: 0, notConfirmedMW: 0, totalMW: 312,
+      },
+      {
+        id: 'cis-pilot-sa-vic',
+        scheme: 'CIS',
+        name: 'CIS Pilot — SA/VIC',
+        date: '2024-09-04',
+        capacityMW: 995,
+        storageMWh: 3626,
+        numProjects: 6,
+        targetCOD: 'Mid-2027',
+        headline: 'First round using the standard CISA "cap and collar" mechanism. Expanded to SA and VIC.',
+        insight: 'All battery projects. Significantly exceeded the 600 MW target. Some in early construction, some still in development. Mid-2027 target ambitious but achievable for some.',
+        notableWinners: ['Tailem Bend BESS (300 MW) — Vena Energy', 'Mortlake BESS (225 MW) — Origin Energy', 'Wooreen BESS (175 MW) — EnergyAustralia', 'Hallett BESS (150 MW) — EnergyAustralia'],
+        constructionPct: 33, confirmedPct: 0, confirmedCount: 0, confirmedMW: 0, notConfirmedCount: 0, notConfirmedMW: 0, totalMW: 995,
+      },
+      {
+        id: 'cis-tender-1-nem-gen',
+        scheme: 'CIS',
+        name: 'CIS Tender 1 — NEM Generation',
+        date: '2024-12-11',
+        capacityMW: 6380,
+        storageMWh: 3500,
+        numProjects: 19,
+        targetCOD: '31 Dec 2028',
+        headline: "Australia's largest renewable energy tender. 19 projects from 84 bids (4.5× oversubscribed). None of the Big 3 gen-tailers won.",
+        insight: 'All 19 projects remain in development — expected given 3-5 year timeline. Key risk: whether enough projects can navigate planning, grid connection, and financing hurdles to reach COD by end-2028.',
+        notableWinners: ['Valley of the Winds (919 MW) — ACEN', 'Sandy Creek Solar (700 MW)', 'Spicers Creek Wind (700 MW) — Squadron', 'Junction Rivers Wind + BESS (585 MW)'],
+        constructionPct: 0, confirmedPct: 0, confirmedCount: 0, confirmedMW: 0, notConfirmedCount: 0, notConfirmedMW: 0, totalMW: 6380,
+      },
+      {
+        id: 'cis-tender-2-wem-disp',
+        scheme: 'CIS',
+        name: 'CIS Tender 2 — WEM Dispatchable',
+        date: '2025-03-20',
+        capacityMW: 654,
+        storageMWh: 2595,
+        numProjects: 4,
+        targetCOD: 'Oct 2027',
+        headline: 'First CIS tender for Western Australia. 7× oversubscribed. All battery projects.',
+        insight: 'Battery projects have shorter construction timelines. Oct 2027 target appears achievable provided grid connection proceeds without major delays.',
+        notableWinners: ['Collie Battery (250 MW) — Synergy', 'Kwinana Battery (204 MW) — Synergy', 'Wandoan South BESS (100 MW)', 'Merredin BESS (100 MW)'],
+        constructionPct: 0, confirmedPct: 0, confirmedCount: 0, confirmedMW: 0, notConfirmedCount: 0, notConfirmedMW: 0, totalMW: 654,
+      },
+      {
+        id: 'ltesa-round-5',
+        scheme: 'LTESA',
+        name: 'LTESA Round 5 — Long Duration Storage',
+        date: '2025-02-27',
+        capacityMW: 1025,
+        storageMWh: 11990,
+        numProjects: 3,
+        targetCOD: 'Before 2030',
+        headline: 'First pumped hydro LTESA: Phoenix at 800 MW with 40-year contract — longest government-backed energy contract in Australian history.',
+        insight: 'BESS projects achievable in 2-3 years. Phoenix Pumped Hydro faces 5-8+ year development cycle typical of pumped hydro — 40-year contract provides ample time.',
+        notableWinners: ['Phoenix Pumped Hydro (800 MW / 11,990 MWh)', 'Stoney Creek BESS (125 MW)', 'Griffith BESS (100 MW)'],
+        constructionPct: 0, confirmedPct: 0, confirmedCount: 0, confirmedMW: 0, notConfirmedCount: 0, notConfirmedMW: 0, totalMW: 1025,
+      },
+      {
+        id: 'cis-tender-3-nem-disp',
+        scheme: 'CIS',
+        name: 'CIS Tender 3 — NEM Dispatchable',
+        date: '2025-09-17',
+        capacityMW: 4130,
+        storageMWh: 15370,
+        numProjects: 16,
+        targetCOD: '31 Dec 2029',
+        headline: "Australia's biggest battery tender. 4.13 GW / 15.37 GWh across 16 projects. 8.5× oversubscribed (124 bids, ~34 GW).",
+        insight: 'All lithium-ion BESS despite pumped hydro being eligible. 4+ year runway provides adequate time, but sheer volume (16 projects across 4 states) will test grid connection and supply chains.',
+        notableWinners: ['Liddell Stage 2 (500 MW) — AGL', 'Eraring BESS (460 MW) — Origin', 'Mortlake Stage 2 (450 MW) — Origin', 'Darlington Point BESS (400 MW)'],
+        constructionPct: 0, confirmedPct: 0, confirmedCount: 0, confirmedMW: 0, notConfirmedCount: 0, notConfirmedMW: 0, totalMW: 4130,
+      },
+      {
+        id: 'cis-tender-4-nem-gen',
+        scheme: 'CIS',
+        name: 'CIS Tender 4 — NEM Generation',
+        date: '2025-10-09',
+        capacityMW: 6600,
+        storageMWh: 11400,
+        numProjects: 20,
+        targetCOD: '31 Dec 2030',
+        headline: '6.6 GW generation + 11.4 GWh co-located storage. 12 of 20 projects are hybrids. Tasmania\'s first CIS project. $1B Australian steel commitments.',
+        insight: 'Later target date provides more runway. Trend toward hybridisation may improve financing as developers stack revenue from generation + storage.',
+        notableWinners: ['Goyder Renewables (1,300 MW) — Neoen', 'MacIntyre Wind (923 MW) — ACCIONA/Ark', 'Bell Bay Wind (450 MW) — TAS first CIS', 'Walla Walla Solar (406 MW)'],
+        constructionPct: 0, confirmedPct: 0, confirmedCount: 0, confirmedMW: 0, notConfirmedCount: 0, notConfirmedMW: 0, totalMW: 6600,
+      },
+      {
+        id: 'ltesa-round-6',
+        scheme: 'LTESA',
+        name: 'LTESA Round 6 — Long Duration Storage',
+        date: '2026-02-05',
+        capacityMW: 1171,
+        storageMWh: 11980,
+        numProjects: 6,
+        targetCOD: 'Before 2030',
+        headline: 'Largest LTESA by energy capacity. Combined with prior rounds, legislated LDS minimums (2 GW by 2030, 28 GWh by 2034) met on paper.',
+        insight: 'All in early development. Meeting legislated targets in contracted capacity is a meaningful achievement, but key question remains whether projects can actually be built by target dates.',
+        notableWinners: ['Waratah Super Battery Stage 2 (850 MW / 8,499 MWh)', 'Lake Lyell BESS (150 MW)', 'Wallerawang 9 Stage 2 (100 MW)'],
+        constructionPct: 0, confirmedPct: 0, confirmedCount: 0, confirmedMW: 0, notConfirmedCount: 0, notConfirmedMW: 0, totalMW: 1171,
+      },
+    ]
+
+    // Populate construction % and confirmed % from ESG data
+    for (const round of rounds) {
+      const roundProjects = ESG_TRACKER_PROJECTS.filter(p => p.roundId === round.id)
+      if (roundProjects.length === 0) continue
+
+      const inConstruction = roundProjects.filter(p => ['construction', 'operating', 'commissioning'].includes(p.stage))
+      round.constructionPct = roundProjects.length > 0 ? Math.round((inConstruction.length / roundProjects.length) * 100) : 0
+
+      const confirmed = roundProjects.filter(p =>
+        p.agreementStatus === 'executed' ||
+        p.agreementStatus === 'likely_executed' ||
+        ['construction', 'operating', 'commissioning'].includes(p.stage) ||
+        ['published', 'partial'].includes(p.publicationStatus)
+      )
+      const notConfirmed = roundProjects.filter(p =>
+        p.agreementStatus !== 'executed' &&
+        p.agreementStatus !== 'likely_executed' &&
+        !['construction', 'operating', 'commissioning'].includes(p.stage) &&
+        !['published', 'partial'].includes(p.publicationStatus)
+      )
+      round.confirmedPct = roundProjects.length > 0 ? Math.round((confirmed.length / roundProjects.length) * 100) : 0
+      round.confirmedCount = confirmed.length
+      round.confirmedMW = confirmed.reduce((s, p) => s + p.capacityMW, 0)
+      round.notConfirmedCount = notConfirmed.length
+      round.notConfirmedMW = notConfirmed.reduce((s, p) => s + p.capacityMW, 0)
+      round.totalMW = roundProjects.reduce((s, p) => s + p.capacityMW, 0)
+    }
+
+    return rounds
+  }, [])
+
+  // Overall stats
+  const overallStats = useMemo(() => {
+    const allProjects = ESG_TRACKER_PROJECTS
+    const total = allProjects.length
+    const totalMW = allProjects.reduce((s, p) => s + p.capacityMW, 0)
+    const inConstruction = allProjects.filter(p => ['construction', 'operating', 'commissioning'].includes(p.stage))
+    const confirmed = allProjects.filter(p =>
+      p.agreementStatus === 'executed' ||
+      p.agreementStatus === 'likely_executed' ||
+      ['construction', 'operating', 'commissioning'].includes(p.stage) ||
+      ['published', 'partial'].includes(p.publicationStatus)
+    )
+
+    return {
+      total,
+      totalMW,
+      constructionCount: inConstruction.length,
+      constructionMW: inConstruction.reduce((s, p) => s + p.capacityMW, 0),
+      constructionPct: Math.round((inConstruction.length / total) * 100),
+      confirmedCount: confirmed.length,
+      confirmedMW: confirmed.reduce((s, p) => s + p.capacityMW, 0),
+      confirmedPct: Math.round((confirmed.length / total) * 100),
+    }
+  }, [])
+
+  // Key projects — top 7 by MW that are NOT yet in construction/operating (the ones that will move the dial)
+  const keyProjects = useMemo(() => {
+    return ESG_TRACKER_PROJECTS
+      .filter(p => !['construction', 'operating', 'commissioning'].includes(p.stage))
+      .sort((a, b) => b.capacityMW - a.capacityMW)
+      .slice(0, 7)
+  }, [])
+
+  return (
+    <div className="space-y-6">
+      {/* Header */}
+      <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl p-5">
+        <h3 className="text-sm font-bold text-[var(--color-text)] mb-2">CIS / LTESA Timeline</h3>
+        <p className="text-xs text-[var(--color-text-muted)] leading-relaxed">
+          How Australia's two most ambitious renewable energy procurement programs evolved across {timelineRounds.length} rounds,
+          awarding {overallStats.total} projects totalling {fmtMW(overallStats.totalMW)} of capacity. This timeline tracks
+          the progression from early pilots to full national tenders, and critically assesses how many awarded projects are
+          translating into real construction activity.
+        </p>
+
+        {/* Headline stats */}
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-4">
+          <div className="bg-[var(--color-bg)] border border-[var(--color-border)] rounded-xl p-3 text-center">
+            <div className="text-2xl font-bold text-[var(--color-text)]">{overallStats.total}</div>
+            <div className="text-[10px] text-[var(--color-text-muted)]">Projects Awarded</div>
+            <div className="text-[9px] text-[var(--color-text-muted)]">{fmtMW(overallStats.totalMW)}</div>
+          </div>
+          <div className="bg-[var(--color-bg)] border border-[var(--color-border)] rounded-xl p-3 text-center">
+            <div className="text-2xl font-bold text-[#3b82f6]">{overallStats.constructionCount}</div>
+            <div className="text-[10px] text-[var(--color-text-muted)]">In Construction/Operating</div>
+            <div className="text-[9px] text-[var(--color-text-muted)]">{fmtMW(overallStats.constructionMW)} ({overallStats.constructionPct}%)</div>
+          </div>
+          <div className="bg-[var(--color-bg)] border border-[var(--color-border)] rounded-xl p-3 text-center">
+            <div className="text-2xl font-bold text-[#22c55e]">{overallStats.confirmedCount}</div>
+            <div className="text-[10px] text-[var(--color-text-muted)]">Confirmed Agreement</div>
+            <div className="text-[9px] text-[var(--color-text-muted)]">{fmtMW(overallStats.confirmedMW)} ({overallStats.confirmedPct}%)</div>
+          </div>
+          <div className="bg-[var(--color-bg)] border border-[var(--color-border)] rounded-xl p-3 text-center">
+            <div className="text-2xl font-bold text-[#f59e0b]">{timelineRounds.length}</div>
+            <div className="text-[10px] text-[var(--color-text-muted)]">Tender Rounds</div>
+            <div className="text-[9px] text-[var(--color-text-muted)]">May 2023 — Feb 2026</div>
+          </div>
+        </div>
+      </div>
+
+      {/* Visual timeline */}
+      <div className="relative">
+        {timelineRounds.map((round, i) => {
+          const schemeColor = round.scheme === 'CIS' ? '#f59e0b' : '#8b5cf6'
+          const dateObj = new Date(round.date)
+          const dateStr = dateObj.toLocaleDateString('en-AU', { month: 'short', year: 'numeric' })
+          const isLast = i === timelineRounds.length - 1
+
+          return (
+            <div key={round.id} className="flex gap-4 pb-0">
+              {/* Timeline spine */}
+              <div className="flex flex-col items-center shrink-0 w-16">
+                <span className="text-[9px] font-mono text-[var(--color-text-muted)] mb-1">{dateStr}</span>
+                <div
+                  className="w-4 h-4 rounded-full border-2 shrink-0"
+                  style={{
+                    borderColor: schemeColor,
+                    backgroundColor: round.constructionPct > 0 ? schemeColor : `${schemeColor}40`,
+                  }}
+                />
+                {!isLast && <div className="w-px flex-1 min-h-[40px] bg-[var(--color-border)]" />}
+              </div>
+
+              {/* Round card */}
+              <div className="flex-1 min-w-0 pb-5">
+                <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl p-4">
+                  {/* Round header */}
+                  <div className="flex items-start justify-between gap-2 mb-2">
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center gap-2 flex-wrap mb-0.5">
+                        <span
+                          className="text-[9px] font-bold px-2 py-0.5 rounded-full shrink-0"
+                          style={{ backgroundColor: `${schemeColor}20`, color: schemeColor }}
+                        >
+                          {round.scheme}
+                        </span>
+                        <h4 className="text-xs font-bold text-[var(--color-text)]">{round.name}</h4>
+                      </div>
+                      <p className="text-[10px] text-[var(--color-text-muted)]">
+                        {round.numProjects} projects · {fmtMW(round.capacityMW)}
+                        {round.storageMWh > 0 ? ` + ${round.storageMWh >= 1000 ? `${(round.storageMWh / 1000).toFixed(1)} GWh` : `${round.storageMWh} MWh`} storage` : ''}
+                        {' '}· Target COD: {round.targetCOD}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Headline insight */}
+                  <p className="text-xs text-[var(--color-text)] leading-relaxed mb-2">
+                    {round.headline}
+                  </p>
+                  <p className="text-[10px] text-[var(--color-text-muted)] leading-relaxed mb-3">
+                    {round.insight}
+                  </p>
+
+                  {/* Progress bars */}
+                  <div className="grid grid-cols-2 gap-3 mb-3">
+                    <div>
+                      <div className="flex items-center justify-between mb-1">
+                        <span className="text-[9px] text-[var(--color-text-muted)]">Construction/Operating</span>
+                        <span className="text-[9px] font-bold" style={{ color: round.constructionPct > 0 ? '#3b82f6' : '#636e72' }}>
+                          {round.constructionPct}%
+                        </span>
+                      </div>
+                      <div className="h-2 rounded-full bg-[var(--color-bg)] overflow-hidden">
+                        <div className="h-full rounded-full bg-[#3b82f6]" style={{ width: `${round.constructionPct}%` }} />
+                      </div>
+                    </div>
+                    <div>
+                      <div className="flex items-center justify-between mb-1">
+                        <span className="text-[9px] text-[var(--color-text-muted)]">Confirmed Agreement</span>
+                        <span className="text-[9px] font-bold" style={{ color: round.confirmedPct > 0 ? '#22c55e' : '#636e72' }}>
+                          {round.confirmedPct}%
+                        </span>
+                      </div>
+                      <div className="h-2 rounded-full bg-[var(--color-bg)] overflow-hidden">
+                        <div className="h-full rounded-full bg-[#22c55e]" style={{ width: `${round.confirmedPct}%` }} />
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Confirmed/not confirmed summary */}
+                  <div className="flex items-center gap-3 text-[9px] mb-3 flex-wrap">
+                    {round.confirmedCount > 0 && (
+                      <span className="px-2 py-0.5 rounded-full bg-[#22c55e]/15 text-[#22c55e] font-semibold">
+                        {round.confirmedCount} confirmed ({fmtMW(round.confirmedMW)})
+                      </span>
+                    )}
+                    {round.notConfirmedCount > 0 && (
+                      <span className="px-2 py-0.5 rounded-full bg-[#ef4444]/15 text-[#ef4444] font-semibold">
+                        {round.notConfirmedCount} not confirmed ({fmtMW(round.notConfirmedMW)})
+                      </span>
+                    )}
+                  </div>
+
+                  {/* Notable winners */}
+                  <div className="bg-[var(--color-bg)] border border-[var(--color-border)] rounded-lg p-3">
+                    <p className="text-[9px] uppercase tracking-wider text-[var(--color-text-muted)] font-semibold mb-1.5">Notable Projects</p>
+                    <div className="space-y-0.5">
+                      {round.notableWinners.map((w, j) => (
+                        <p key={j} className="text-[10px] text-[var(--color-text-muted)] flex items-start gap-1.5">
+                          <span className="w-1 h-1 rounded-full mt-1.5 shrink-0" style={{ backgroundColor: schemeColor }} />
+                          {w}
+                        </p>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )
+        })}
+      </div>
+
+      {/* Cumulative progress summary */}
+      <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl p-5">
+        <h3 className="text-sm font-bold text-[var(--color-text)] mb-3">Cumulative Progress</h3>
+        <div className="space-y-4">
+          <div>
+            <div className="flex items-center justify-between mb-1.5">
+              <span className="text-xs text-[var(--color-text-muted)]">Projects reaching construction/operating phase</span>
+              <span className="text-xs font-bold text-[#3b82f6]">{overallStats.constructionCount} of {overallStats.total} ({overallStats.constructionPct}%)</span>
+            </div>
+            <div className="h-3 rounded-full bg-[var(--color-bg)] overflow-hidden">
+              <div className="h-full rounded-full bg-[#3b82f6]" style={{ width: `${overallStats.constructionPct}%` }} />
+            </div>
+            <p className="text-[9px] text-[var(--color-text-muted)] mt-1">
+              {fmtMW(overallStats.constructionMW)} of {fmtMW(overallStats.totalMW)} awarded capacity is in construction or operating
+            </p>
+          </div>
+          <div>
+            <div className="flex items-center justify-between mb-1.5">
+              <span className="text-xs text-[var(--color-text-muted)]">Projects with confirmed agreement (construction + ESG proxy)</span>
+              <span className="text-xs font-bold text-[#22c55e]">{overallStats.confirmedCount} of {overallStats.total} ({overallStats.confirmedPct}%)</span>
+            </div>
+            <div className="h-3 rounded-full bg-[var(--color-bg)] overflow-hidden">
+              <div className="h-full rounded-full bg-[#22c55e]" style={{ width: `${overallStats.confirmedPct}%` }} />
+            </div>
+            <p className="text-[9px] text-[var(--color-text-muted)] mt-1">
+              {fmtMW(overallStats.confirmedMW)} of {fmtMW(overallStats.totalMW)} — includes projects in construction/operating and those with published ESG commitments
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {/* Key projects that will move the dial */}
+      <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl p-5">
+        <h3 className="text-sm font-bold text-[var(--color-text)] mb-1">7 Key Projects That Will Move the Dial</h3>
+        <p className="text-[10px] text-[var(--color-text-muted)] leading-relaxed mb-4">
+          The largest awarded projects still in development. These {keyProjects.length} projects alone represent{' '}
+          <strong className="text-[var(--color-text)]">{fmtMW(keyProjects.reduce((s, p) => s + p.capacityMW, 0))}</strong> of
+          capacity — converting them from development to construction would significantly increase the scheme delivery rate.
+        </p>
+
+        <div className="space-y-3">
+          {keyProjects.map((p, i) => {
+            const schemeColor = p.scheme === 'CIS' ? '#f59e0b' : '#8b5cf6'
+            const agrCfg = AGR_STATUS_CONFIG[p.agreementStatus]
+            // Estimate next milestone based on stage and round timing
+            const roundDate = new Date(p.awardAnnouncedDate)
+            const monthsSinceAward = Math.floor((Date.now() - roundDate.getTime()) / (1000 * 60 * 60 * 24 * 30))
+            let nextMilestone = 'Planning & grid connection'
+            let milestoneColor = '#f59e0b'
+            if (monthsSinceAward < 6) {
+              nextMilestone = 'Feasibility & development approvals'
+              milestoneColor = '#6b7280'
+            } else if (monthsSinceAward < 12) {
+              nextMilestone = 'Planning approval & grid connection application'
+              milestoneColor = '#f59e0b'
+            } else if (monthsSinceAward < 18) {
+              nextMilestone = 'Grid connection offer & financial close'
+              milestoneColor = '#f59e0b'
+            } else if (monthsSinceAward < 24) {
+              nextMilestone = 'Financial close & construction start (overdue)'
+              milestoneColor = '#ef4444'
+            } else {
+              nextMilestone = 'Financial close critical — risk of falling behind'
+              milestoneColor = '#ef4444'
+            }
+
+            return (
+              <div key={p.name} className="bg-[var(--color-bg)] border border-[var(--color-border)] rounded-xl p-4">
+                <div className="flex items-start justify-between gap-3">
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center gap-2 flex-wrap mb-0.5">
+                      <span className="text-[10px] font-bold" style={{ color: schemeColor }}>#{i + 1}</span>
+                      {p.projectId ? (
+                        <Link
+                          to={`/projects/${p.projectId}?from=intelligence/scheme-tracker&fromLabel=Back to Scheme Intelligence`}
+                          className="text-xs font-bold text-blue-400 hover:text-blue-300"
+                        >
+                          {p.name}
+                        </Link>
+                      ) : (
+                        <span className="text-xs font-bold text-[var(--color-text)]">{p.name}</span>
+                      )}
+                      <span
+                        className="text-[9px] font-semibold px-1.5 py-0.5 rounded-full shrink-0"
+                        style={{ backgroundColor: `${schemeColor}20`, color: schemeColor }}
+                      >
+                        {p.scheme}
+                      </span>
+                    </div>
+                    <div className="flex items-center gap-2 text-[10px] text-[var(--color-text-muted)] flex-wrap">
+                      <span>{p.developer}</span>
+                      <span>·</span>
+                      <span>{p.state}</span>
+                      <span>·</span>
+                      <span className="font-semibold text-[var(--color-text)]">{p.capacityMW.toLocaleString()} MW</span>
+                      <span>·</span>
+                      <span>{p.round}</span>
+                    </div>
+                  </div>
+                  <span
+                    className="text-[9px] font-semibold px-2 py-0.5 rounded-full shrink-0"
+                    style={{ backgroundColor: `${agrCfg.color}15`, color: agrCfg.color }}
+                  >
+                    {agrCfg.label}
+                  </span>
+                </div>
+
+                {/* Next milestone */}
+                <div className="mt-2 flex items-center gap-2">
+                  <span className="text-[9px] text-[var(--color-text-muted)]">Next milestone:</span>
+                  <span
+                    className="text-[9px] font-medium px-2 py-0.5 rounded-full"
+                    style={{ backgroundColor: `${milestoneColor}15`, color: milestoneColor }}
+                  >
+                    {nextMilestone}
+                  </span>
+                </div>
+                <div className="mt-1 text-[9px] text-[var(--color-text-muted)]">
+                  Awarded {monthsSinceAward} months ago · Target COD: {
+                    ROUND_ESG_SUMMARIES.find(r => r.roundId === p.roundId)
+                      ? timelineRounds.find(r => r.id === p.roundId)?.targetCOD || '—'
+                      : '—'
+                  }
+                </div>
+              </div>
+            )
+          })}
+        </div>
+
+        {/* Total impact callout */}
+        <div className="mt-4 bg-[var(--color-primary)]/5 border border-[var(--color-primary)]/20 rounded-xl p-4 text-center">
+          <p className="text-xs text-[var(--color-text)] leading-relaxed">
+            These 7 projects represent <strong>{fmtMW(keyProjects.reduce((s, p) => s + p.capacityMW, 0))}</strong> —
+            if all reached construction, the overall construction rate would jump from{' '}
+            <strong className="text-[#3b82f6]">{overallStats.constructionPct}%</strong> to{' '}
+            <strong className="text-[#22c55e]">
+              {Math.round(((overallStats.constructionCount + 7) / overallStats.total) * 100)}%
+            </strong>{' '}
+            of projects and from{' '}
+            <strong className="text-[#3b82f6]">{fmtMW(overallStats.constructionMW)}</strong> to{' '}
+            <strong className="text-[#22c55e]">{fmtMW(overallStats.constructionMW + keyProjects.reduce((s, p) => s + p.capacityMW, 0))}</strong>.
+          </p>
+        </div>
+      </div>
+
+      {/* Source note */}
+      <div className="text-[10px] text-[var(--color-text-muted)] italic">
+        Timeline data sourced from DCCEEW CIS tender results, AEMO Services LTESA announcements, and the AURES full scheme analysis.
+        Construction status and agreement confidence derived from ESG Agreement Proxy analysis.
       </div>
     </div>
   )
