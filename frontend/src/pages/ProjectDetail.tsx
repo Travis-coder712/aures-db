@@ -7,6 +7,8 @@ import StatusBadge from '../components/common/StatusBadge'
 import ConfidenceDots from '../components/common/ConfidenceDots'
 import PerformanceTab from '../components/charts/PerformanceTab'
 import Breadcrumb from '../components/common/Breadcrumb'
+import { ESG_TRACKER_PROJECTS, ROUND_ESG_SUMMARIES } from '../data/esg-tracker-data'
+import type { ESGTrackerProject, PublicationStatus, AgreementStatus } from '../data/esg-tracker-data'
 
 type Tab = 'overview' | 'timeline' | 'technical' | 'performance' | 'sources'
 
@@ -186,6 +188,8 @@ function SectionTitle({ children }: { children: React.ReactNode }) {
 // ============================================================
 
 function OverviewTab({ project }: { project: Project }) {
+  const esgData = ESG_TRACKER_PROJECTS.find(e => e.projectId === project.id)
+
   return (
     <div className="space-y-6">
       {/* Notable */}
@@ -291,7 +295,214 @@ function OverviewTab({ project }: { project: Project }) {
           </div>
         </section>
       )}
+
+      {/* ESG / First Nations Agreement Proxy */}
+      {esgData && <ESGProjectCard esg={esgData} />}
     </div>
+  )
+}
+
+// ============================================================
+// ESG / First Nations Agreement Proxy Card
+// ============================================================
+
+const ESG_PUB_STATUS: Record<PublicationStatus, { label: string; color: string }> = {
+  published:    { label: 'Published',      color: '#22c55e' },
+  partial:      { label: 'Partial',        color: '#f59e0b' },
+  fncen_only:   { label: 'FNCEN Only',     color: '#3b82f6' },
+  not_found:    { label: 'Not Found',      color: '#ef4444' },
+  not_required: { label: 'Not Required',   color: '#6b7280' },
+  too_early:    { label: 'Too Early',      color: '#8b5cf6' },
+  exempt:       { label: 'Exempt',         color: '#6b7280' },
+}
+
+const ESG_AGR_STATUS: Record<AgreementStatus, { label: string; color: string }> = {
+  executed:       { label: 'Executed',        color: '#22c55e' },
+  likely_executed:{ label: 'Likely Executed', color: '#84cc16' },
+  awarded:        { label: 'Awarded Only',   color: '#f59e0b' },
+  unknown:        { label: 'Unknown',        color: '#6b7280' },
+}
+
+function ESGProjectCard({ esg }: { esg: ESGTrackerProject }) {
+  const pubCfg = ESG_PUB_STATUS[esg.publicationStatus]
+  const agrCfg = ESG_AGR_STATUS[esg.agreementStatus]
+  const roundSummary = ROUND_ESG_SUMMARIES.find(r => r.roundId === esg.roundId)
+
+  return (
+    <section>
+      <SectionTitle>ESG & First Nations Agreement Proxy</SectionTitle>
+
+      {/* Status badges row */}
+      <div className="flex flex-wrap gap-2 mb-3">
+        <span
+          className="text-[10px] font-semibold px-2.5 py-1 rounded-full"
+          style={{ backgroundColor: `${agrCfg.color}15`, color: agrCfg.color, border: `1px solid ${agrCfg.color}30` }}
+        >
+          Agreement: {agrCfg.label}
+        </span>
+        <span
+          className="text-[10px] font-semibold px-2.5 py-1 rounded-full"
+          style={{ backgroundColor: `${pubCfg.color}15`, color: pubCfg.color, border: `1px solid ${pubCfg.color}30` }}
+        >
+          Publication: {pubCfg.label}
+        </span>
+        <span className="text-[10px] font-medium px-2.5 py-1 rounded-full bg-[var(--color-bg-elevated)] text-[var(--color-text-muted)] border border-[var(--color-border)]">
+          {esg.scheme} — {esg.round}
+        </span>
+      </div>
+
+      {/* Main details card */}
+      <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl overflow-hidden">
+        {/* Data sources row */}
+        <div className="px-4 py-2.5 bg-[var(--color-bg-elevated)] border-b border-[var(--color-border)]">
+          <p className="text-[10px] font-semibold text-[var(--color-text-muted)] uppercase tracking-wider mb-1.5">
+            Data Sources
+          </p>
+          <div className="flex flex-wrap gap-1.5">
+            {esg.fncenListed && (
+              <span className="text-[10px] px-2 py-0.5 rounded-full bg-blue-500/10 text-blue-400 border border-blue-500/20">
+                FNCEN Tracker
+              </span>
+            )}
+            {esg.cecCharterSignatory && (
+              <span className="text-[10px] px-2 py-0.5 rounded-full bg-green-500/10 text-green-400 border border-green-500/20">
+                CEC Charter Signatory
+              </span>
+            )}
+            {esg.aslSummaryData && (
+              <span className="text-[10px] px-2 py-0.5 rounded-full bg-purple-500/10 text-purple-400 border border-purple-500/20">
+                ASL Summary
+              </span>
+            )}
+            {esg.proponentWebsiteUrl && (
+              <span className="text-[10px] px-2 py-0.5 rounded-full bg-amber-500/10 text-amber-400 border border-amber-500/20">
+                Proponent Website
+              </span>
+            )}
+            {!esg.fncenListed && !esg.cecCharterSignatory && !esg.aslSummaryData && !esg.proponentWebsiteUrl && (
+              <span className="text-[10px] px-2 py-0.5 rounded-full bg-[var(--color-bg-card)] text-[var(--color-text-muted)] border border-[var(--color-border)]">
+                No public data sources found
+              </span>
+            )}
+          </div>
+        </div>
+
+        <div className="divide-y divide-[var(--color-border)]">
+          {/* First Nations commitment value */}
+          {esg.fnCommitmentValueM != null && (
+            <div className="flex items-center justify-between px-4 py-2.5">
+              <span className="text-xs text-[var(--color-text-muted)]">First Nations Commitment</span>
+              <span className="text-sm font-bold text-[var(--color-accent)]">${esg.fnCommitmentValueM}M</span>
+            </div>
+          )}
+
+          {/* FN equity share */}
+          {esg.fnEquityShare != null && (
+            <div className="flex items-center justify-between px-4 py-2.5">
+              <span className="text-xs text-[var(--color-text-muted)]">First Nations Equity Share</span>
+              <span className="text-sm font-semibold text-[var(--color-text)]">{esg.fnEquityShare}%</span>
+            </div>
+          )}
+
+          {/* FN revenue sharing */}
+          {esg.fnRevenueShare && (
+            <div className="flex items-center justify-between px-4 py-2.5">
+              <span className="text-xs text-[var(--color-text-muted)]">Revenue Sharing Agreement</span>
+              <span className="text-sm font-semibold text-green-400">Yes</span>
+            </div>
+          )}
+
+          {/* Community benefit value */}
+          {esg.communityBenefitValueM != null && (
+            <div className="flex items-center justify-between px-4 py-2.5">
+              <span className="text-xs text-[var(--color-text-muted)]">Community Benefit Fund</span>
+              <span className="text-sm font-bold text-[var(--color-accent)]">${esg.communityBenefitValueM}M</span>
+            </div>
+          )}
+
+          {/* Award date */}
+          <div className="flex items-center justify-between px-4 py-2.5">
+            <span className="text-xs text-[var(--color-text-muted)]">Round Announced</span>
+            <span className="text-sm text-[var(--color-text)]">
+              {new Date(esg.awardAnnouncedDate).toLocaleDateString('en-AU', { day: 'numeric', month: 'short', year: 'numeric' })}
+            </span>
+          </div>
+
+          {/* Publication requirement */}
+          {roundSummary && (
+            <div className="flex items-center justify-between px-4 py-2.5">
+              <span className="text-xs text-[var(--color-text-muted)]">20-Day Publication Required</span>
+              <span className={`text-sm font-semibold ${roundSummary.publicationRequired ? 'text-amber-400' : 'text-[var(--color-text-muted)]'}`}>
+                {roundSummary.publicationRequired ? 'Yes' : 'No'}
+              </span>
+            </div>
+          )}
+        </div>
+      </div>
+
+      {/* First Nations commitments list */}
+      {esg.fnCommitments && esg.fnCommitments.length > 0 && (
+        <div className="mt-3 bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl p-4">
+          <p className="text-[10px] font-semibold text-[var(--color-text-muted)] uppercase tracking-wider mb-2">
+            First Nations Commitments
+          </p>
+          <ul className="space-y-1.5">
+            {esg.fnCommitments.map((c, i) => (
+              <li key={i} className="text-xs text-[var(--color-text)] flex items-start gap-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-blue-400 flex-shrink-0 mt-1" />
+                {c}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+
+      {/* Community benefit details */}
+      {esg.communityBenefitDetails && esg.communityBenefitDetails.length > 0 && (
+        <div className="mt-3 bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl p-4">
+          <p className="text-[10px] font-semibold text-[var(--color-text-muted)] uppercase tracking-wider mb-2">
+            Community Benefit Details
+          </p>
+          <ul className="space-y-1.5">
+            {esg.communityBenefitDetails.map((c, i) => (
+              <li key={i} className="text-xs text-[var(--color-text)] flex items-start gap-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-green-400 flex-shrink-0 mt-1" />
+                {c}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+
+      {/* Proponent website link */}
+      {esg.proponentWebsiteUrl && (
+        <a
+          href={esg.proponentWebsiteUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mt-3 flex items-center gap-2 bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl px-4 py-3 hover:border-[var(--color-primary)]/30 transition-colors"
+        >
+          <span className="text-xs text-[var(--color-primary)]">View published commitments on proponent website ↗</span>
+        </a>
+      )}
+
+      {/* Notes */}
+      {esg.notes && (
+        <div className="mt-3 bg-blue-500/5 border border-blue-500/15 rounded-xl px-4 py-3">
+          <p className="text-xs text-[var(--color-text-muted)] leading-relaxed">
+            {esg.notes}
+          </p>
+        </div>
+      )}
+
+      {/* Link to full ESG tracker */}
+      <Link
+        to="/intelligence/scheme-tracker?tab=esg"
+        className="mt-3 flex items-center justify-center gap-1.5 text-[10px] text-[var(--color-primary)] hover:underline py-2"
+      >
+        View full ESG Agreement Proxy tracker →
+      </Link>
+    </section>
   )
 }
 
