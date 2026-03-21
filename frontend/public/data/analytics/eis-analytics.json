@@ -842,7 +842,7 @@
       "status": "operating",
       "developer": "Origin Energy",
       "connection_voltage_kv": 330.0,
-      "connection_distance_km": 0.0,
+      "connection_distance_km": 0.5,
       "connection_substation_name": "Eraring 330 kV substation (TransGrid), Lake Macquarie NSW (on-site, former power station)",
       "nsp": "TransGrid",
       "connection_augmentation": "IMPORTANT NOTE: This is a separate battery from the existing eraring-battery (150 MW Tesla Megapack). The Eraring Big Battery (700 MW Wartsila Quantum3) is a different, larger project also at the Eraring site. Both batteries use the same TransGrid 330 kV Eraring substation, eliminating major connection capex.",
@@ -970,7 +970,7 @@
       "status": "construction",
       "developer": "Origin Energy",
       "connection_voltage_kv": 330.0,
-      "connection_distance_km": 0.0,
+      "connection_distance_km": 0.5,
       "connection_substation_name": "Eraring 330 kV substation (former power station, on-site)",
       "nsp": "TransGrid",
       "connection_augmentation": "Minimal augmentation. Existing 330 kV bays from the 2,880 MW coal plant reused. New BESS protection and control systems required but major civil/HV works avoided. Major cost saving vs greenfield connection.",
@@ -1151,7 +1151,7 @@
       "status": "construction",
       "developer": "Stanwell Corporation",
       "connection_voltage_kv": 275.0,
-      "connection_distance_km": 0.0,
+      "connection_distance_km": 0.5,
       "connection_substation_name": "Tarong 275 kV substation (on-site, former coal plant)",
       "nsp": "Powerlink Queensland",
       "connection_augmentation": "Minimal. Existing Tarong coal plant 275 kV switchyard reused. New BESS feeder bay required. Major cost advantage \u2014 former 1,400 MW coal plant substation provides ample capacity for 300 MW BESS without augmentation.",
@@ -1176,7 +1176,7 @@
       "status": "operating",
       "developer": "HMC Capital (ex-Neoen)",
       "connection_voltage_kv": 500.0,
-      "connection_distance_km": 0.0,
+      "connection_distance_km": 1.0,
       "connection_substation_name": "Moorabool 500/220 kV substation (AusNet Services), Lara near Geelong VIC (on-site)",
       "nsp": "AusNet Services",
       "connection_augmentation": "Minimal \u2014 Moorabool is one of the most significant 500 kV substations in the NEM. BESS occupies cleared land within substation perimeter. VIC government fast-tracked via state planning approval.",
@@ -1279,7 +1279,7 @@
       "status": "operating",
       "developer": "AGL Energy",
       "connection_voltage_kv": 275.0,
-      "connection_distance_km": 0.0,
+      "connection_distance_km": 0.5,
       "connection_substation_name": "Torrens Island 275/66 kV substation (former power station, on-site)",
       "nsp": "ElectraNet",
       "connection_augmentation": "Minimal \u2014 former 480 MW gas plant infrastructure reused. ElectraNet Torrens Island 275/66 kV substation retained and adapted. Strategic location close to Adelaide CBD load centre.",
@@ -1407,7 +1407,7 @@
       "status": "construction",
       "developer": "ENGIE",
       "connection_voltage_kv": 275.0,
-      "connection_distance_km": 0.0,
+      "connection_distance_km": 0.5,
       "connection_substation_name": "Pelican Point 275 kV substation (ENGIE, on-site)",
       "nsp": "ElectraNet",
       "connection_augmentation": "Minimal. Existing 275 kV connection reused from gas power station. New BESS feeder bay only. Adelaide 275 kV ring has capacity. Very low augmentation cost \u2014 significant advantage of co-location.",
@@ -1458,7 +1458,7 @@
       "status": "operating",
       "developer": "Neoen",
       "connection_voltage_kv": 275.0,
-      "connection_distance_km": 0.0,
+      "connection_distance_km": 0.1,
       "connection_substation_name": "Hornsdale Wind Farm 275/66 kV substation (on-site, co-located)",
       "nsp": "ElectraNet",
       "connection_augmentation": "Minimal augmentation. BESS connected to existing Hornsdale Wind Farm 275/66 kV substation via new dedicated LV/MV feeder bays. ElectraNet assessed additional fault level contribution at Hornsdale 275 kV node.",
@@ -1510,7 +1510,7 @@
       "status": "operating",
       "developer": "ENGIE",
       "connection_voltage_kv": 220.0,
-      "connection_distance_km": 0.0,
+      "connection_distance_km": 0.5,
       "connection_substation_name": "Hazelwood 220/66 kV substation (former power station, on-site)",
       "nsp": "AusNet Services",
       "connection_augmentation": "Minimal \u2014 former 1,600 MW coal station had extensive connection infrastructure at 220 kV and 500 kV. BESS connects at 220 kV bus. AusNet Services decommissioned excess bays; BESS added new feeder bays to existing switchgear.",
@@ -1730,7 +1730,9 @@
       "connection_substation_name": "TransGrid Uralla",
       "nsp": "TransGrid",
       "document_title": "New England Solar Farm EIS",
-      "document_year": 2019
+      "document_year": 2019,
+      "connection_distance_km": 0,
+      "connection_augmentation": "TransGrid 330kV transmission line traverses the site; new 33/330kV onsite substation connects directly"
     },
     {
       "id": "western-downs-green-power-hub-pl",
@@ -1777,7 +1779,9 @@
       "connection_substation_name": "TransGrid Darlington Point 330 kV",
       "nsp": "TransGrid",
       "document_title": "Darlington Point Solar Farm EIS",
-      "document_year": 2018
+      "document_year": 2018,
+      "connection_distance_km": 0,
+      "connection_augmentation": "Site directly adjoins TransGrid Darlington Point 330kV substation"
     },
     {
       "id": "limondale-solar-farm-1",
@@ -1801,7 +1805,9 @@
       "connection_substation_name": "Balranald area (West Murray REZ)",
       "nsp": "TransGrid",
       "document_title": "Limondale Solar Farm EIS",
-      "document_year": 2018
+      "document_year": 2018,
+      "connection_distance_km": 0.5,
+      "connection_augmentation": "220kV underground power line (~500m) to adjacent TransGrid Balranald substation"
     },
     {
       "id": "sunraysia-solar-farm",
@@ -1864,7 +1870,9 @@
       "connection_substation_name": "TransGrid 330 kV line (direct tap)",
       "nsp": "TransGrid",
       "document_title": "Stubbo Solar Farm EIS",
-      "document_year": 2020
+      "document_year": 2020,
+      "connection_distance_km": 0,
+      "connection_augmentation": "TransGrid 330kV transmission line transects the site; new onsite substation"
     },
     {
       "id": "culcairn-solar-farm",
@@ -1879,7 +1887,9 @@
       "connection_substation_name": "TransGrid 330 kV line",
       "nsp": "TransGrid",
       "document_title": "Culcairn Solar Farm EIS",
-      "document_year": 2020
+      "document_year": 2020,
+      "connection_distance_km": 0,
+      "connection_augmentation": "TransGrid 330kV transmission line runs through the project site; new onsite substation"
     },
     {
       "id": "coleambally-solar-farm",
@@ -1899,7 +1909,9 @@
       "connection_substation_name": "TransGrid Coleambally Substation",
       "nsp": "TransGrid",
       "document_title": "Coleambally Solar Farm EIS",
-      "document_year": 2016
+      "document_year": 2016,
+      "connection_distance_km": 0.1,
+      "connection_augmentation": "132kV underground transmission cables (~120m) to existing TransGrid Coleambally substation"
     },
     {
       "id": "bungala-one-solar-farm",
@@ -1920,7 +1932,9 @@
       "connection_substation_name": "ElectraNet 132 kV (new substation)",
       "nsp": "ElectraNet",
       "document_title": "Bungala Solar Farm DA",
-      "document_year": 2016
+      "document_year": 2016,
+      "connection_distance_km": 13.0,
+      "connection_augmentation": "13km of new 132kV overhead line between Davenport substation and new Emeroo substation; new 275kV Bungala substation constructed onsite"
     },
     {
       "id": "finley-solar-farm",
@@ -1942,7 +1956,8 @@
       "connection_substation_name": "TransGrid 132 kV",
       "nsp": "TransGrid",
       "document_title": "Finley Solar Farm EIS",
-      "document_year": 2017
+      "document_year": 2017,
+      "connection_augmentation": "33kV underground cables to adjacent TransGrid Finley 132kV substation"
     },
     {
       "id": "ross-river-solar-farm",
@@ -1961,7 +1976,9 @@
       "connection_substation_name": "Powerlink Ross Substation",
       "nsp": "Powerlink",
       "document_title": "Ross River Solar Farm DA",
-      "document_year": 2017
+      "document_year": 2017,
+      "connection_distance_km": 1.2,
+      "connection_augmentation": "1.2km of 132kV underground transmission cable; new bay at Ross Substation"
     },
     {
       "id": "nyngan-solar-plant",
@@ -2005,7 +2022,10 @@
       "connection_substation_name": "TransGrid Broken Hill",
       "nsp": "TransGrid",
       "document_title": "Broken Hill Solar Plant EIS",
-      "document_year": 2012
+      "document_year": 2012,
+      "connection_voltage_kv": 22,
+      "connection_distance_km": 2.7,
+      "connection_augmentation": "Dual-circuit 22kV overhead line (~2.7km) across Willyama Common to TransGrid 220/22kV Broken Hill substation"
     },
     {
       "id": "moree-solar-farm",
@@ -2025,7 +2045,9 @@
       "inverter_count": 56,
       "nsp": "TransGrid",
       "document_title": "Moree Solar Farm DA",
-      "document_year": 2013
+      "document_year": 2013,
+      "connection_substation_name": "Moree 132/66kV Substation (TransGrid)",
+      "connection_voltage_kv": 132
     },
     {
       "id": "darling-downs-solar-farm",
@@ -2041,7 +2063,10 @@
       "connection_substation_name": "Powerlink Braemar Substation",
       "nsp": "Powerlink",
       "document_title": "Darling Downs Solar Farm DA",
-      "document_year": 2016
+      "document_year": 2016,
+      "connection_voltage_kv": 275,
+      "connection_distance_km": 0.5,
+      "connection_augmentation": "480m of new transmission line connecting to existing Braemar-Darling Downs 275kV line"
     },
     {
       "id": "wellington-solar-farm",
@@ -2059,7 +2084,10 @@
       "connection_substation_name": "TransGrid Wellington Substation",
       "nsp": "TransGrid",
       "document_title": "Wellington Solar Farm EIS",
-      "document_year": 2017
+      "document_year": 2017,
+      "connection_voltage_kv": 330,
+      "connection_distance_km": 2.4,
+      "connection_augmentation": "2.4km 330kV overhead transmission line to TransGrid Wellington 330/132kV substation"
     },
     {
       "id": "goulburn-river-solar-farm-and-bess",
@@ -2077,7 +2105,9 @@
       "connection_substation_name": "TransGrid 500 kV line",
       "nsp": "TransGrid",
       "document_title": "Goulburn River Solar Farm EIS",
-      "document_year": 2022
+      "document_year": 2022,
+      "connection_distance_km": 0,
+      "connection_augmentation": "500kV transmission line cut-in with new 500kV switching station in southeastern corner of project area"
     },
     {
       "id": "emerald-solar-park",
@@ -2096,7 +2126,8 @@
       "connection_voltage_kv": 66,
       "nsp": "Ergon Energy / Powerlink",
       "document_title": "Emerald Solar Park DA",
-      "document_year": 2017
+      "document_year": 2017,
+      "connection_substation_name": "Emerald Zone Substation (Ergon Energy)"
     },
     {
       "id": "clermont-solar-farm",
@@ -2113,7 +2144,9 @@
       "inverter_supplier": "SMA",
       "nsp": "Powerlink",
       "document_title": "Clermont Solar Farm DA",
-      "document_year": 2017
+      "document_year": 2017,
+      "connection_substation_name": "Clermont Substation (Ergon Energy)",
+      "connection_voltage_kv": 66
     },
     {
       "id": "childers-solar-farm",
@@ -2128,7 +2161,8 @@
       "connection_voltage_kv": 66,
       "nsp": "Ergon Energy / Powerlink",
       "document_title": "Childers Solar Farm DA",
-      "document_year": 2018
+      "document_year": 2018,
+      "connection_substation_name": "Childers Substation (Ergon Energy)"
     },
     {
       "id": "haughton-solar-farm-stage-1",
@@ -2144,7 +2178,9 @@
       "connection_substation_name": "Powerlink Ross 275 kV Substation",
       "nsp": "Powerlink",
       "document_title": "Haughton Solar Farm DA",
-      "document_year": 2018
+      "document_year": 2018,
+      "connection_distance_km": 0,
+      "connection_augmentation": "New 33/275kV substation adjacent to existing 275kV Powerlink transmission line"
     },
     {
       "id": "hillston-sun-farm",
@@ -2158,7 +2194,11 @@
       "assumed_annual_energy_gwh": 235,
       "nsp": "TransGrid",
       "document_title": "Hillston Sun Farm DA",
-      "document_year": 2017
+      "document_year": 2017,
+      "connection_substation_name": "Hillston Substation (Essential Energy)",
+      "connection_voltage_kv": 132,
+      "connection_distance_km": 0.5,
+      "connection_augmentation": "New overhead 132kV generation tie line to adjacent Essential Energy 132/33kV Hillston substation"
     },
     {
       "id": "broadsound-solar-farm",
@@ -2188,7 +2228,11 @@
       "tracking_type": "single_axis",
       "nsp": "TransGrid",
       "document_title": "Gunnedah Solar Farm DA",
-      "document_year": 2018
+      "document_year": 2018,
+      "connection_substation_name": "Gunnedah Substation (TransGrid)",
+      "connection_voltage_kv": 132,
+      "connection_distance_km": 1.0,
+      "connection_augmentation": "Tee-in connection from new onsite 132kV substation to existing TransGrid 132kV transmission line"
     },
     {
       "id": "maryvale-solar-farm-and-bess",
@@ -2205,7 +2249,11 @@
       "inverter_count": 61,
       "nsp": "TransGrid",
       "document_title": "Maryvale Solar Farm EIS",
-      "document_year": 2021
+      "document_year": 2021,
+      "connection_substation_name": "Wellington Substation (TransGrid/Essential Energy)",
+      "connection_voltage_kv": 132,
+      "connection_distance_km": 12.0,
+      "connection_augmentation": "Connection via existing Essential Energy 132kV powerline to Wellington substation ~12km south"
     }
   ],
   "summary": {
@@ -2275,15 +2323,16 @@
       }
     },
     "connection": {
-      "avg_distance": 12.2,
+      "avg_distance": 9.7,
       "voltage_breakdown": {
+        "22 kV": 1,
+        "66 kV": 8,
         "110 kV": 2,
-        "132 kV": 12,
-        "220 kV": 16,
-        "275 kV": 13,
-        "330 kV": 18,
-        "500 kV": 2,
-        "66 kV": 5
+        "132 kV": 20,
+        "220 kV": 19,
+        "275 kV": 17,
+        "330 kV": 24,
+        "500 kV": 3
       }
     },
     "solar_stats": {
@@ -2294,5 +2343,60 @@
       "tracking_fixed": 2
     }
   },
-  "exported_at": "2026-03-19T09:01:15.984612"
+  "exported_at": "2026-03-19T09:01:15.984612",
+  "pumped_hydro_projects": [
+    {
+      "id": "snowy-2-0",
+      "name": "Snowy 2.0",
+      "state": "NSW",
+      "capacity_mw": 2000,
+      "storage_mwh": 350000,
+      "storage_hours": 175,
+      "status": "construction",
+      "developer": "Snowy Hydro Limited",
+      "connection_voltage_kv": 330,
+      "connection_distance_km": 10.0,
+      "connection_substation_name": "Maragle 330 kV Switching Station (new, connects into TransGrid Line 64)",
+      "nsp": "TransGrid",
+      "connection_augmentation": "New 330 kV Maragle Switching Station adjacent to existing Line 64. Two new 330 kV double-circuit overhead transmission lines (~10 km) from Lobs Hole cable yard. HumeLink (365 km, 500 kV double-circuit) from Wagga Wagga to Bannaby required for full NEM integration.",
+      "document_title": "Snowy 2.0 Main Works \u2014 Environmental Impact Statement",
+      "document_url": "https://www.planningportal.nsw.gov.au/major-projects/projects/snowy-20-main-works",
+      "document_year": 2019,
+      "upper_reservoir": "Tantangara Reservoir",
+      "lower_reservoir": "Talbingo Reservoir",
+      "head_height_m": 700,
+      "tunnel_length_km": 27,
+      "turbine_type": "Reversible Francis pump-turbine",
+      "turbine_count": 6,
+      "turbine_rated_power_mw": 333,
+      "generation_capacity_mw": 2000,
+      "round_trip_efficiency_pct": 75
+    },
+    {
+      "id": "borumba-pumped-hydro",
+      "name": "Borumba Pumped Hydro Energy Storage",
+      "state": "QLD",
+      "capacity_mw": 2000,
+      "storage_mwh": 48000,
+      "storage_hours": 24,
+      "status": "development",
+      "developer": "Queensland Hydro",
+      "connection_voltage_kv": 500,
+      "connection_distance_km": 90.0,
+      "connection_substation_name": "Woolooga Substation (north, ~90 km) and Halys Substation (south-west, ~106 km)",
+      "nsp": "Powerlink Queensland",
+      "connection_augmentation": "Two new 500 kV transmission lines: Borumba to Woolooga (~90 km) and Borumba to Halys (~106 km). Halys line co-locates with existing Powerlink lines near Tarong Power Station for 26 km.",
+      "document_title": "Borumba Pumped Hydro Energy Storage Project \u2014 Environmental Impact Statement",
+      "document_url": "https://qldhydro.com.au/understanding-the-eis-process/",
+      "document_year": 2024,
+      "upper_reservoir": "New upper reservoir (to be constructed)",
+      "lower_reservoir": "Lake Borumba (existing Borumba Dam, enlarged)",
+      "head_height_m": 330,
+      "turbine_type": "Reversible pump-turbine",
+      "turbine_count": 6,
+      "turbine_rated_power_mw": 333,
+      "generation_capacity_mw": 2000,
+      "round_trip_efficiency_pct": null
+    }
+  ]
 }

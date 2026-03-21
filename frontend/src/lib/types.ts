@@ -911,10 +911,23 @@ export interface EISSolarProject {
   document_title?: string; document_url?: string; document_year?: number
 }
 
+export interface EISPumpedHydroProject {
+  id: string; name: string; state: string; capacity_mw: number; status: string; developer?: string
+  storage_mwh?: number; storage_hours?: number
+  upper_reservoir?: string; lower_reservoir?: string
+  head_height_m?: number; tunnel_length_km?: number
+  turbine_type?: string; turbine_count?: number; turbine_rated_power_mw?: number
+  generation_capacity_mw?: number; round_trip_efficiency_pct?: number | null
+  connection_voltage_kv?: number; connection_distance_km?: number
+  connection_substation_name?: string; nsp?: string; connection_augmentation?: string
+  document_title?: string; document_url?: string; document_year?: number
+}
+
 export interface EISAnalyticsData {
   wind_projects: EISWindProject[]
   bess_projects: EISBESSProject[]
   solar_projects: EISSolarProject[]
+  pumped_hydro_projects?: EISPumpedHydroProject[]
   summary: {
     total_eis: number; wind: number; bess: number; solar: number; pumped_hydro: number
     wind_stats: {

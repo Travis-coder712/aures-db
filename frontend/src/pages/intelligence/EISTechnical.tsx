@@ -472,10 +472,15 @@ export default function EISTechnical() {
   }, [comparison, compSort])
 
   // ---- Connection derived data ----
+  const allConnectionProjects = useMemo(() => {
+    const solar = filteredSolarProjects as Array<{ connection_voltage_kv?: number; connection_distance_km?: number; connection_substation_name?: string; nsp?: string; connection_augmentation?: string; name: string; state: string; capacity_mw: number; id: string }>
+    const ph = (data?.pumped_hydro_projects ?? []).filter((p) => !stateFilter || p.state === stateFilter) as typeof solar
+    return [...filteredWindProjects, ...filteredBessProjects, ...solar, ...ph]
+  }, [filteredWindProjects, filteredBessProjects, filteredSolarProjects, data, stateFilter])
+
   const voltageData = useMemo(() => {
-    const allFiltered = [...filteredWindProjects, ...filteredBessProjects]
     const breakdown: Record<string, number> = {}
-    allFiltered.forEach((p) => {
+    allConnectionProjects.forEach((p) => {
       if (p.connection_voltage_kv) {
         const k = String(p.connection_voltage_kv)
         breakdown[k] = (breakdown[k] || 0) + 1
@@ -484,22 +489,21 @@ export default function EISTechnical() {
     return Object.entries(breakdown)
       .sort(([a], [b]) => parseInt(a) - parseInt(b))
       .map(([voltage, count]) => ({ voltage, count }))
-  }, [filteredWindProjects, filteredBessProjects])
+  }, [allConnectionProjects])
 
   const connectionDistanceData = useMemo(() => {
-    const allProjects = [...filteredWindProjects, ...filteredBessProjects]
-    return allProjects
+    return allConnectionProjects
       .filter((p) => p.connection_distance_km != null)
       .map((p) => ({
         name: p.name,
         distance: p.connection_distance_km!,
         capacity_mw: p.capacity_mw,
         state: p.state,
-        type: 'wind_speed_mean_ms' in p ? 'Wind' : 'BESS',
+        type: 'wind_speed_mean_ms' in p ? 'Wind' : 'cell_chemistry' in p ? 'BESS' : 'head_height_m' in p ? 'Pumped Hydro' : 'Solar',
         id: p.id,
       }))
       .sort((a, b) => b.distance - a.distance)
-  }, [filteredWindProjects, filteredBessProjects])
+  }, [allConnectionProjects])
 
   // ---- Wind sort toggle ----
   function toggleWindSort(col: keyof EISWindProject) {
@@ -614,7 +618,7 @@ export default function EISTechnical() {
                   : t.id === 'bess' ? filteredBessProjects.length
                   : t.id === 'solar' ? filteredSolarProjects.length
                   : t.id === 'comparison' ? (comparison?.projects.length ?? 0)
-                  : t.id === 'coverage' ? (data ? data.wind_projects.length + data.bess_projects.length + (data.solar_projects?.length ?? 0) : 0)
+                  : t.id === 'coverage' ? (data ? data.wind_projects.length + data.bess_projects.length + (data.solar_projects?.length ?? 0) + (data.pumped_hydro_projects?.length ?? 0) : 0)
                   : filteredWindProjects.length + filteredBessProjects.length + filteredSolarProjects.length})
               </span>
             </button>
@@ -1056,18 +1060,17 @@ export default function EISTechnical() {
                 />
                 <Bar dataKey="distance" name="Distance km" radius={[0, 4, 4, 0]}>
                   {connectionDistanceData.map((d, i) => (
-                    <Cell key={i} fill={d.type === 'Wind' ? '#3b82f6' : '#10b981'} />
+                    <Cell key={i} fill={d.type === 'Wind' ? '#3b82f6' : d.type === 'BESS' ? '#10b981' : d.type === 'Solar' ? '#f59e0b' : '#8b5cf6'} />
                   ))}
                 </Bar>
               </BarChart>
             </ResponsiveContainer>
             <div className="flex gap-4 mt-2 justify-center">
-              <span className="flex items-center gap-1 text-[10px] text-[var(--color-text-muted)]">
-                <span className="w-2.5 h-2.5 rounded-full inline-block" style={{ backgroundColor: '#3b82f6' }} /> Wind
-              </span>
-              <span className="flex items-center gap-1 text-[10px] text-[var(--color-text-muted)]">
-                <span className="w-2.5 h-2.5 rounded-full inline-block" style={{ backgroundColor: '#10b981' }} /> BESS
-              </span>
+              {[['Wind', '#3b82f6'], ['BESS', '#10b981'], ['Solar', '#f59e0b'], ['Pumped Hydro', '#8b5cf6']].map(([label, color]) => (
+                <span key={label} className="flex items-center gap-1 text-[10px] text-[var(--color-text-muted)]">
+                  <span className="w-2.5 h-2.5 rounded-full inline-block" style={{ backgroundColor: color }} /> {label}
+                </span>
+              ))}
             </div>
           </div>
 
@@ -1486,144 +1489,7 @@ export default function EISTechnical() {
       {/* COVERAGE TAB */}
       {/* ============================================================ */}
       {tab === 'coverage' && (
-        <div className="space-y-6">
-          {/* Summary cards */}
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
-            <StatCard
-              label="EIS Data Extracted"
-              value={(data.wind_projects.length + data.bess_projects.length + (data.solar_projects?.length ?? 0)).toString()}
-              unit="projects"
-            />
-            <StatCard
-              label="Pending Extraction"
-              value={(coverage?.available_not_extracted.length ?? 0).toString()}
-              unit="projects"
-            />
-            <StatCard
-              label="Coverage Gap"
-              value={(coverage?.coverage_gap?.length ?? 0).toString()}
-              unit="eligible without EIS"
-            />
-            <StatCard
-              label="Coverage Rate"
-              value={(() => {
-                const extracted = data.wind_projects.length + data.bess_projects.length + (data.solar_projects?.length ?? 0)
-                const total = extracted + (coverage?.coverage_gap?.length ?? 0)
-                return total > 0 ? `${Math.round(extracted / total * 100)}%` : '—'
-              })()}
-              unit={`of ${(data.wind_projects.length + data.bess_projects.length + (data.solar_projects?.length ?? 0)) + (coverage?.coverage_gap?.length ?? 0)} eligible`}
-            />
-          </div>
-
-          {/* Extracted projects table */}
-          <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl p-4">
-            <h3 className="text-sm font-semibold text-[var(--color-text)] mb-1 flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-[#10b981]" />
-              EIS Data Extracted
-            </h3>
-            <p className="text-[10px] text-[var(--color-text-muted)] mb-3">
-              Projects with technical parameters extracted from EIS/EIA documents.
-            </p>
-            <ScrollableTable>
-              <table className="w-full text-xs">
-                <thead>
-                  <tr className="border-b border-[var(--color-border)]">
-                    <th className="px-2 py-2 text-left font-medium text-[var(--color-text-muted)]">Project</th>
-                    <th className="px-2 py-2 text-left font-medium text-[var(--color-text-muted)]">Technology</th>
-                    <th className="px-2 py-2 text-left font-medium text-[var(--color-text-muted)]">State</th>
-                    <th className="px-2 py-2 text-right font-medium text-[var(--color-text-muted)]">MW</th>
-                    <th className="px-2 py-2 text-right font-medium text-[var(--color-text-muted)]">Doc Year</th>
-                    <th className="px-2 py-2 text-left font-medium text-[var(--color-text-muted)]">Document</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {[
-                    ...data.wind_projects.map((p) => ({ ...p, technology: 'wind' as const })),
-                    ...data.bess_projects.map((p) => ({ ...p, technology: 'bess' as const })),
-                    ...(data.solar_projects ?? []).map((p) => ({ ...p, technology: 'solar' as const })),
-                  ]
-                    .sort((a, b) => a.name.localeCompare(b.name))
-                    .map((p) => (
-                      <tr key={`${p.id}-${p.technology}`} className="border-b border-[var(--color-border)]/50 hover:bg-[var(--color-bg-elevated)]/50">
-                        <td className="px-2 py-1.5">
-                          <Link to={`/projects/${p.id}`} className="text-[var(--color-primary)] hover:underline">{p.name}</Link>
-                        </td>
-                        <td className="px-2 py-1.5">
-                          <span className="px-1.5 py-0.5 rounded text-[10px] uppercase" style={{
-                            backgroundColor: p.technology === 'wind' ? '#3b82f620' : p.technology === 'bess' ? '#10b98120' : '#f59e0b20',
-                            color: p.technology === 'wind' ? '#3b82f6' : p.technology === 'bess' ? '#10b981' : '#f59e0b',
-                          }}>
-                            {p.technology}
-                          </span>
-                        </td>
-                        <td className="px-2 py-1.5" style={{ color: getStateColour(p.state) }}>{p.state}</td>
-                        <td className="px-2 py-1.5 text-right font-mono">{fmtInt(p.capacity_mw)}</td>
-                        <td className="px-2 py-1.5 text-right font-mono">{p.document_year ?? '—'}</td>
-                        <td className="px-2 py-1.5">
-                          {p.document_url ? (
-                            <a href={p.document_url} target="_blank" rel="noopener noreferrer"
-                              className="text-[var(--color-primary)] hover:underline truncate block max-w-[200px]">
-                              {p.document_title || 'View'}
-                            </a>
-                          ) : (
-                            <span className="text-[var(--color-text-muted)]">{p.document_title || '—'}</span>
-                          )}
-                        </td>
-                      </tr>
-                    ))}
-                </tbody>
-              </table>
-            </ScrollableTable>
-          </div>
-
-          {/* Not yet extracted */}
-          {coverage && coverage.available_not_extracted.length > 0 && (
-            <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl p-4">
-              <h3 className="text-sm font-semibold text-[var(--color-text)] mb-1 flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-[#f59e0b]" />
-                EIS Available — Not Yet Extracted
-              </h3>
-              <p className="text-[10px] text-[var(--color-text-muted)] mb-3">
-                Projects where EIS/EIA documents are known to exist but technical data hasn't been imported yet.
-              </p>
-              <ScrollableTable>
-                <table className="w-full text-xs">
-                  <thead>
-                    <tr className="border-b border-[var(--color-border)]">
-                      <th className="px-2 py-2 text-left font-medium text-[var(--color-text-muted)]">Project</th>
-                      <th className="px-2 py-2 text-left font-medium text-[var(--color-text-muted)]">Technology</th>
-                      <th className="px-2 py-2 text-left font-medium text-[var(--color-text-muted)]">State</th>
-                      <th className="px-2 py-2 text-left font-medium text-[var(--color-text-muted)]">Notes</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {coverage.available_not_extracted.map((p, i) => (
-                      <tr key={i} className="border-b border-[var(--color-border)]/50 hover:bg-[var(--color-bg-elevated)]/50">
-                        <td className="px-2 py-1.5 text-[var(--color-text)]">{p.name}</td>
-                        <td className="px-2 py-1.5 text-[var(--color-text-muted)]">{p.technology}</td>
-                        <td className="px-2 py-1.5" style={{ color: getStateColour(p.state) }}>{p.state}</td>
-                        <td className="px-2 py-1.5 text-[var(--color-text-muted)]">
-                          {p.eis_url ? (
-                            <a href={p.eis_url} target="_blank" rel="noopener noreferrer" className="text-[var(--color-primary)] hover:underline">
-                              {p.notes || 'View EIS'}
-                            </a>
-                          ) : (
-                            p.notes || '—'
-                          )}
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </ScrollableTable>
-            </div>
-          )}
-
-          {/* Coverage Gap — eligible projects without EIS data */}
-          {coverage?.coverage_gap && coverage.coverage_gap.length > 0 && (
-            <CoverageGapTable gap={coverage.coverage_gap} />
-          )}
-        </div>
+        <CoverageTab data={data} coverage={coverage} />
       )}
 
       {/* Financial Close Tab */}
@@ -1634,6 +1500,188 @@ export default function EISTechnical() {
         Data sourced from Environmental Impact Statements (EIS/EIA), project planning documents,
         developer press releases, and industry publications.
       </p>
+    </div>
+  )
+}
+
+// ============================================================
+// Coverage Tab (extracted as component for sort state)
+// ============================================================
+
+const TECH_COLOUR_MAP: Record<string, { bg: string; fg: string }> = {
+  wind: { bg: '#3b82f620', fg: '#3b82f6' },
+  bess: { bg: '#10b98120', fg: '#10b981' },
+  solar: { bg: '#f59e0b20', fg: '#f59e0b' },
+  'pumped hydro': { bg: '#8b5cf620', fg: '#8b5cf6' },
+}
+
+type ExtractedProject = {
+  id: string; name: string; technology: string; state: string; status: string
+  capacity_mw: number; document_year?: number; document_title?: string; document_url?: string
+}
+
+type ExtractedSortCol = 'name' | 'technology' | 'state' | 'status' | 'capacity_mw' | 'document_year'
+
+function CoverageTab({ data, coverage }: { data: EISAnalyticsData; coverage: EISCoverageData | null }) {
+  const [sortCol, setSortCol] = useState<ExtractedSortCol>('name')
+  const [sortDir, setSortDir] = useState<'asc' | 'desc'>('asc')
+
+  const allExtracted: ExtractedProject[] = useMemo(() => {
+    const list: ExtractedProject[] = [
+      ...data.wind_projects.map((p) => ({ id: p.id, name: p.name, technology: 'wind', state: p.state, status: p.status, capacity_mw: p.capacity_mw, document_year: p.document_year, document_title: p.document_title, document_url: p.document_url })),
+      ...data.bess_projects.map((p) => ({ id: p.id, name: p.name, technology: 'bess', state: p.state, status: p.status, capacity_mw: p.capacity_mw, document_year: p.document_year, document_title: p.document_title, document_url: p.document_url })),
+      ...(data.solar_projects ?? []).map((p) => ({ id: p.id, name: p.name, technology: 'solar', state: p.state, status: p.status, capacity_mw: p.capacity_mw, document_year: p.document_year, document_title: p.document_title, document_url: p.document_url })),
+      ...(data.pumped_hydro_projects ?? []).map((p) => ({ id: p.id, name: p.name, technology: 'pumped hydro', state: p.state, status: p.status, capacity_mw: p.capacity_mw, document_year: p.document_year, document_title: p.document_title, document_url: p.document_url })),
+    ]
+    return list.sort((a, b) => {
+      const av = a[sortCol] ?? ''
+      const bv = b[sortCol] ?? ''
+      if (typeof av === 'string' && typeof bv === 'string')
+        return sortDir === 'asc' ? av.localeCompare(bv) : bv.localeCompare(av)
+      return sortDir === 'asc' ? (av as number) - (bv as number) : (bv as number) - (av as number)
+    })
+  }, [data, sortCol, sortDir])
+
+  const handleSort = (col: ExtractedSortCol) => {
+    setSortCol(col)
+    setSortDir((prev) => (sortCol === col && prev === 'asc' ? 'desc' : 'asc'))
+  }
+
+  const extracted = allExtracted.length
+  const gapCount = coverage?.coverage_gap?.length ?? 0
+  const total = extracted + gapCount
+
+  const thClass = 'px-2 py-2 font-medium text-[var(--color-text-muted)] cursor-pointer hover:text-[var(--color-text)] select-none whitespace-nowrap'
+
+  return (
+    <div className="space-y-6">
+      {/* Summary cards */}
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
+        <StatCard label="EIS Data Extracted" value={extracted.toString()} unit="projects" />
+        <StatCard label="Pending Extraction" value={(coverage?.available_not_extracted.length ?? 0).toString()} unit="projects" />
+        <StatCard label="Coverage Gap" value={gapCount.toString()} unit="eligible without EIS" />
+        <StatCard
+          label="Coverage Rate"
+          value={total > 0 ? `${Math.round(extracted / total * 100)}%` : '—'}
+          unit={`of ${total} eligible`}
+        />
+      </div>
+
+      {/* Extracted projects table */}
+      <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl p-4">
+        <h3 className="text-sm font-semibold text-[var(--color-text)] mb-1 flex items-center gap-2">
+          <span className="w-2 h-2 rounded-full bg-[#10b981]" />
+          EIS Data Extracted ({extracted})
+        </h3>
+        <p className="text-[10px] text-[var(--color-text-muted)] mb-3">
+          Projects with technical parameters extracted from EIS/EIA documents. Click any column header to sort.
+        </p>
+        <ScrollableTable>
+          <table className="w-full text-xs">
+            <thead>
+              <tr className="border-b border-[var(--color-border)]">
+                {([
+                  ['name', 'Project', 'text-left'],
+                  ['technology', 'Technology', 'text-left'],
+                  ['state', 'State', 'text-left'],
+                  ['status', 'Status', 'text-left'],
+                  ['capacity_mw', 'MW', 'text-right'],
+                  ['document_year', 'Doc Year', 'text-right'],
+                ] as [ExtractedSortCol, string, string][]).map(([col, label, align]) => (
+                  <th key={col} className={`${thClass} ${align}`} onClick={() => handleSort(col)}>
+                    {label}{' '}
+                    {sortCol === col ? (sortDir === 'asc' ? <SortUpIcon /> : <SortDownIcon />) : null}
+                  </th>
+                ))}
+                <th className="px-2 py-2 text-left font-medium text-[var(--color-text-muted)]">Document</th>
+              </tr>
+            </thead>
+            <tbody>
+              {allExtracted.map((p) => {
+                const tc = TECH_COLOUR_MAP[p.technology] ?? { bg: '#63727220', fg: '#637272' }
+                return (
+                  <tr key={`${p.id}-${p.technology}`} className="border-b border-[var(--color-border)]/50 hover:bg-[var(--color-bg-elevated)]/50">
+                    <td className="px-2 py-1.5">
+                      <Link to={`/projects/${p.id}`} className="text-[var(--color-primary)] hover:underline whitespace-nowrap">{p.name}</Link>
+                    </td>
+                    <td className="px-2 py-1.5">
+                      <span className="px-1.5 py-0.5 rounded text-[10px] uppercase" style={{ backgroundColor: tc.bg, color: tc.fg }}>
+                        {p.technology}
+                      </span>
+                    </td>
+                    <td className="px-2 py-1.5" style={{ color: getStateColour(p.state) }}>{p.state}</td>
+                    <td className="px-2 py-1.5">
+                      <span className="px-1.5 py-0.5 rounded text-[10px]" style={{ backgroundColor: `${getStatusColour(p.status)}20`, color: getStatusColour(p.status) }}>
+                        {p.status}
+                      </span>
+                    </td>
+                    <td className="px-2 py-1.5 text-right font-mono">{fmtInt(p.capacity_mw)}</td>
+                    <td className="px-2 py-1.5 text-right font-mono">{p.document_year ?? '—'}</td>
+                    <td className="px-2 py-1.5">
+                      {p.document_url ? (
+                        <a href={p.document_url} target="_blank" rel="noopener noreferrer"
+                          className="text-[var(--color-primary)] hover:underline truncate block max-w-[200px]">
+                          {p.document_title || 'View'}
+                        </a>
+                      ) : (
+                        <span className="text-[var(--color-text-muted)]">{p.document_title || '—'}</span>
+                      )}
+                    </td>
+                  </tr>
+                )
+              })}
+            </tbody>
+          </table>
+        </ScrollableTable>
+      </div>
+
+      {/* Not yet extracted */}
+      {coverage && coverage.available_not_extracted.length > 0 && (
+        <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl p-4">
+          <h3 className="text-sm font-semibold text-[var(--color-text)] mb-1 flex items-center gap-2">
+            <span className="w-2 h-2 rounded-full bg-[#f59e0b]" />
+            EIS Available — Not Yet Extracted ({coverage.available_not_extracted.length})
+          </h3>
+          <p className="text-[10px] text-[var(--color-text-muted)] mb-3">
+            Projects where EIS/EIA documents are known to exist but technical data hasn&apos;t been imported yet.
+          </p>
+          <ScrollableTable>
+            <table className="w-full text-xs">
+              <thead>
+                <tr className="border-b border-[var(--color-border)]">
+                  <th className="px-2 py-2 text-left font-medium text-[var(--color-text-muted)]">Project</th>
+                  <th className="px-2 py-2 text-left font-medium text-[var(--color-text-muted)]">Technology</th>
+                  <th className="px-2 py-2 text-left font-medium text-[var(--color-text-muted)]">State</th>
+                  <th className="px-2 py-2 text-left font-medium text-[var(--color-text-muted)]">Notes</th>
+                </tr>
+              </thead>
+              <tbody>
+                {coverage.available_not_extracted.map((p, i) => (
+                  <tr key={i} className="border-b border-[var(--color-border)]/50 hover:bg-[var(--color-bg-elevated)]/50">
+                    <td className="px-2 py-1.5 text-[var(--color-text)]">{p.name}</td>
+                    <td className="px-2 py-1.5 text-[var(--color-text-muted)]">{p.technology}</td>
+                    <td className="px-2 py-1.5" style={{ color: getStateColour(p.state) }}>{p.state}</td>
+                    <td className="px-2 py-1.5 text-[var(--color-text-muted)]">
+                      {p.eis_url ? (
+                        <a href={p.eis_url} target="_blank" rel="noopener noreferrer" className="text-[var(--color-primary)] hover:underline">
+                          {p.notes || 'View EIS'}
+                        </a>
+                      ) : (
+                        p.notes || '—'
+                      )}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </ScrollableTable>
+        </div>
+      )}
+
+      {/* Coverage Gap — eligible projects without EIS data */}
+      {coverage?.coverage_gap && coverage.coverage_gap.length > 0 && (
+        <CoverageGapTable gap={coverage.coverage_gap} />
+      )}
     </div>
   )
 }
@@ -2034,15 +2082,17 @@ function FinancialCloseTab() {
 
 function NSPTable({ data }: { data: EISAnalyticsData }) {
   const nspCounts = useMemo(() => {
-    const counts: Record<string, { wind: number; bess: number; total_mw: number }> = {}
-    const addProject = (p: { nsp?: string; capacity_mw: number }, type: 'wind' | 'bess') => {
+    const counts: Record<string, { wind: number; bess: number; solar: number; hydro: number; total_mw: number }> = {}
+    const addProject = (p: { nsp?: string; capacity_mw: number }, type: 'wind' | 'bess' | 'solar' | 'hydro') => {
       if (!p.nsp) return
-      if (!counts[p.nsp]) counts[p.nsp] = { wind: 0, bess: 0, total_mw: 0 }
+      if (!counts[p.nsp]) counts[p.nsp] = { wind: 0, bess: 0, solar: 0, hydro: 0, total_mw: 0 }
       counts[p.nsp][type]++
       counts[p.nsp].total_mw += p.capacity_mw
     }
     data.wind_projects.forEach((p) => addProject(p, 'wind'))
     data.bess_projects.forEach((p) => addProject(p, 'bess'))
+    ;(data.solar_projects ?? []).forEach((p) => addProject(p, 'solar'))
+    ;(data.pumped_hydro_projects ?? []).forEach((p) => addProject(p, 'hydro'))
     return Object.entries(counts)
       .sort(([, a], [, b]) => b.total_mw - a.total_mw)
       .map(([name, v]) => ({ name, ...v }))
@@ -2055,7 +2105,9 @@ function NSPTable({ data }: { data: EISAnalyticsData }) {
           <tr className="border-b border-[var(--color-border)]">
             <th className="px-2 py-2 text-left font-medium text-[var(--color-text-muted)]">NSP</th>
             <th className="px-2 py-2 text-right font-medium text-[var(--color-text-muted)]">Wind</th>
+            <th className="px-2 py-2 text-right font-medium text-[var(--color-text-muted)]">Solar</th>
             <th className="px-2 py-2 text-right font-medium text-[var(--color-text-muted)]">BESS</th>
+            <th className="px-2 py-2 text-right font-medium text-[var(--color-text-muted)]">Hydro</th>
             <th className="px-2 py-2 text-right font-medium text-[var(--color-text-muted)]">Total MW</th>
           </tr>
         </thead>
@@ -2064,7 +2116,9 @@ function NSPTable({ data }: { data: EISAnalyticsData }) {
             <tr key={row.name} className="border-b border-[var(--color-border)]/50 hover:bg-[var(--color-bg-elevated)]/50">
               <td className="px-2 py-1.5 text-[var(--color-text)]">{row.name}</td>
               <td className="px-2 py-1.5 text-right font-mono">{row.wind || '—'}</td>
+              <td className="px-2 py-1.5 text-right font-mono">{row.solar || '—'}</td>
               <td className="px-2 py-1.5 text-right font-mono">{row.bess || '—'}</td>
+              <td className="px-2 py-1.5 text-right font-mono">{row.hydro || '—'}</td>
               <td className="px-2 py-1.5 text-right font-mono">{fmtInt(row.total_mw)}</td>
             </tr>
           ))}
