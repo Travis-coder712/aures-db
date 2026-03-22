@@ -494,38 +494,22 @@ export default function Performance() {
         ))}
 
         {/* Year selector */}
-        <div className="ml-auto flex items-center gap-1 overflow-x-auto">
-          <button
-            onClick={() => setYear('all')}
-            className={`px-2.5 py-1.5 rounded-lg text-xs font-medium transition-colors whitespace-nowrap ${
-              year === 'all'
-                ? 'bg-[var(--color-primary)] text-white'
-                : 'bg-[var(--color-bg-card)] text-[var(--color-text-muted)] hover:text-[var(--color-text)] border border-[var(--color-border)]'
-            }`}
-          >
-            All Years
-          </button>
+        <select
+          value={year === 'all' ? 'all' : String(year)}
+          onChange={(e) => setYear(e.target.value === 'all' ? 'all' : Number(e.target.value))}
+          className="ml-auto px-3 py-2 rounded-lg text-sm bg-[var(--color-bg-card)] text-[var(--color-text)] border border-[var(--color-border)]"
+        >
+          <option value="all">All Years (avg)</option>
           {[...index.available_years].reverse().map((y) => {
             const count = getYearCount(y)
             const isCurrentYear = y === new Date().getFullYear()
             return (
-              <button
-                key={y}
-                onClick={() => setYear(y)}
-                className={`px-2 py-1.5 rounded-lg text-xs font-medium transition-colors whitespace-nowrap ${
-                  year === y
-                    ? 'bg-[var(--color-primary)] text-white'
-                    : 'bg-[var(--color-bg-card)] text-[var(--color-text-muted)] hover:text-[var(--color-text)] border border-[var(--color-border)]'
-                }`}
-              >
-                {y}{isCurrentYear ? ' (YTD)' : ''}
-                <span className={`ml-1 text-[9px] ${year === y ? 'text-white/70' : 'text-[var(--color-text-muted)]/50'}`}>
-                  {count}
-                </span>
-              </button>
+              <option key={y} value={y}>
+                {y}{isCurrentYear ? ' (YTD)' : ''} — {count} projects
+              </option>
             )
           })}
-        </div>
+        </select>
       </div>
 
       {/* Fleet Summary Cards */}
