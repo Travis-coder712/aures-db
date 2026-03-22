@@ -354,8 +354,8 @@ export default function DeveloperList() {
             ))}
           </div>
 
-          {/* Pie Charts */}
-          {data && <DeveloperMarketShare developers={sourceList} navigate={navigate} />}
+          {/* Pie Charts — always use grouped developers for accurate market share */}
+          {data && <DeveloperMarketShare developers={data.grouped_developers?.length ? data.grouped_developers : sourceList} navigate={navigate} />}
 
           {/* Developer Grid */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
