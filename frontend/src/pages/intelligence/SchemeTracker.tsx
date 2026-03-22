@@ -1694,12 +1694,39 @@ function SchemeAnalysisEssay({ onClose, cisRounds, ltesaRounds }: {
   ltesaRounds: LTESARound[]
 }) {
   const contentRef = useRef<HTMLDivElement>(null)
+  const modalRef = useRef<HTMLDivElement>(null)
+
+  // Lock body scroll when modal is open
+  useEffect(() => {
+    const prev = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    return () => { document.body.style.overflow = prev }
+  }, [])
+
+  // Auto-focus the modal so keyboard events target it
+  useEffect(() => {
+    modalRef.current?.focus()
+  }, [])
 
   useEffect(() => {
     function handleKey(e: KeyboardEvent) { if (e.key === 'Escape') onClose() }
     document.addEventListener('keydown', handleKey)
     return () => document.removeEventListener('keydown', handleKey)
   }, [onClose])
+
+  // Capture arrow keys / Page Up/Down to scroll modal instead of page
+  const handleModalKeyDown = useCallback((e: React.KeyboardEvent<HTMLDivElement>) => {
+    const el = modalRef.current
+    if (!el) return
+    const scrollAmount = e.key === 'PageUp' || e.key === 'PageDown' ? 400 : 80
+    if (e.key === 'ArrowDown' || e.key === 'PageDown') {
+      el.scrollTop += scrollAmount
+      e.preventDefault()
+    } else if (e.key === 'ArrowUp' || e.key === 'PageUp') {
+      el.scrollTop -= scrollAmount
+      e.preventDefault()
+    }
+  }, [])
 
   const handleDownloadPDF = useCallback(() => {
     const content = contentRef.current
@@ -1836,10 +1863,10 @@ function SchemeAnalysisEssay({ onClose, cisRounds, ltesaRounds }: {
         construction = 3 // Large BESS
         development = 0
       } else if (round.id === 'ltesa-round-1') {
-        // LTESA R1: May 2023, some projects in construction
-        operating = 0
-        construction = 2
-        development = 2
+        // LTESA R1: May 2023, New England Solar + Stubbo Solar operating, Limondale BESS in construction, Coppabella in development
+        operating = 2
+        construction = 1
+        development = 1
       } else if (round.id === 'ltesa-round-4') {
         // Flyers Creek is operating (May 2025)
         operating = 1
@@ -1854,6 +1881,16 @@ function SchemeAnalysisEssay({ onClose, cisRounds, ltesaRounds }: {
         operating = 0
         construction = 1
         development = 4
+      } else if (round.id === 'cis-tender-3-nem-disp') {
+        // Liddell Stage 2, Eraring BESS, Mortlake Stage 2 — Stage 1 projects are operating/late construction
+        operating = 0
+        construction = 3
+        development = 13
+      } else if (round.id === 'cis-tender-4-nem-gen') {
+        // MacIntyre Wind in construction
+        operating = 0
+        construction = 1
+        development = 19
       } else if (monthsAgo < 12) {
         // Very recent rounds — all in development
         operating = 0
@@ -1874,8 +1911,8 @@ function SchemeAnalysisEssay({ onClose, cisRounds, ltesaRounds }: {
         // Flyers Creek operating, Maryvale in development — mixed
         onTrack = 'amber'
       } else if (round.id === 'ltesa-round-1') {
-        // 34+ months old, only 0 projects operating — concerning
-        onTrack = 'red'
+        // 34+ months old, but 2 projects now operating (New England Solar, Stubbo Solar) — mixed progress
+        onTrack = 'amber'
       } else if (round.id === 'ltesa-round-3') {
         // Target before 2028 — still time but slow progress
         onTrack = 'amber'
@@ -1929,8 +1966,11 @@ function SchemeAnalysisEssay({ onClose, cisRounds, ltesaRounds }: {
     <div className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4" onClick={onClose}>
       <div className="absolute inset-0 bg-black/60" />
       <div
-        className="relative bg-[var(--color-bg)] border border-[var(--color-border)] rounded-2xl max-w-4xl w-full max-h-[90dvh] overflow-y-auto overscroll-contain shadow-2xl"
+        ref={modalRef}
+        tabIndex={-1}
+        className="relative bg-[var(--color-bg)] border border-[var(--color-border)] rounded-2xl max-w-4xl w-full max-h-[90dvh] overflow-y-auto overscroll-contain shadow-2xl outline-none"
         onClick={(e) => e.stopPropagation()}
+        onKeyDown={handleModalKeyDown}
       >
         {/* Header */}
         <div className="sticky top-0 bg-[var(--color-bg)] border-b border-[var(--color-border)] px-5 py-4 flex items-start justify-between rounded-t-2xl z-10">
@@ -2004,7 +2044,7 @@ function SchemeAnalysisEssay({ onClose, cisRounds, ltesaRounds }: {
                 The first-ever LTESA tender sought 950 MW of generation and 600 MW of long-duration storage. Four projects were awarded: three generation projects (New England Solar, Stubbo Solar, and Coppabella Wind) totalling 1,395 MW, plus the 50 MW / 400 MWh Limondale BESS. Strike prices were remarkably low, with solar below approximately $35/MWh and wind below $50/MWh.
               </p>
               <p>
-                Based on current data, progress has been slow for a round announced over 34 months ago. The large solar projects are navigating complex REZ access and grid connection processes, while the generation projects remain predominantly in the development or early construction phases. No projects from this round appear to have reached commercial operation yet, which is a concern given the Roadmap's 2030 targets.
+                Two of the four projects — New England Solar Farm (720 MW) and Stubbo Solar Farm (400 MW), both by ACEN — have reached commercial operation, a significant milestone. Coppabella Wind Farm (275 MW) remains in the development phase after 34+ months, which is a concern. Limondale BESS (50 MW / 400 MWh) is in construction.
               </p>
             </RoundAnalysis>
 
@@ -2084,7 +2124,7 @@ function SchemeAnalysisEssay({ onClose, cisRounds, ltesaRounds }: {
                 Australia's biggest battery storage tender awarded 4.13 GW / 15.37 GWh across 16 projects. All winners were lithium-ion BESS despite pumped hydro and other technologies being eligible. The round was 8.5x oversubscribed with 124 bids totalling approximately 34 GW.
               </p>
               <p>
-                Announced only 6 months ago with a target COD of 31 December 2029, all projects remain in early development. The 4+ year runway provides adequate time for battery projects, though the sheer volume (16 projects across 4 states) will test grid connection capacity and supply chains.
+                Critically, several of the largest winners — Liddell Stage 2 (AGL), Eraring BESS (Origin) and Mortlake Stage 2 (Origin) — already have their Stage 1 projects in operation or late construction from earlier rounds. This significantly de-risks delivery as grid connections, planning approvals and site infrastructure are already in place. The 4+ year runway provides adequate time, though the sheer volume (16 projects across 4 states) will test grid connection capacity and supply chains.
               </p>
             </RoundAnalysis>
 
@@ -2094,14 +2134,14 @@ function SchemeAnalysisEssay({ onClose, cisRounds, ltesaRounds }: {
                 Twenty projects delivering 6.6 GW of generation plus 11.4 GWh of co-located storage, with a notable shift toward hybrid projects (12 of 20 include batteries). This round also awarded Tasmania's first CIS project (Bell Bay Wind Farm) and secured $1 billion in Australian steel commitments.
               </p>
               <p>
-                With a target COD of 31 December 2030 and announcement only 5 months ago, all projects are in early development. The later target date provides more runway, and the trend toward hybridisation may improve financing prospects as developers can stack revenue from both generation and storage.
+                MacIntyre Wind (923 MW, ACCIONA/Ark Energy) is already in construction, providing an early positive signal for this round. With a target COD of 31 December 2030, the later date provides more runway, and the trend toward hybridisation may improve financing prospects as developers can stack revenue from both generation and storage.
               </p>
             </RoundAnalysis>
 
             {/* LTESA Round 6 */}
             <RoundAnalysis title="LTESA Round 6 — Long Duration Storage" date="February 2026" color="#8b5cf6">
               <p>
-                The largest LTESA tender by energy capacity, awarding 1,171 MW / 11,980 MWh across six BESS projects with durations of 8.7 to 11.5 hours. This round achieved a significant milestone: combined with prior rounds, the legislated LDS minimum objectives of 2 GW by 2030 and 28 GWh by 2034 have been met on paper.
+                The largest LTESA tender by energy capacity, awarding 1,171 MW / 11,980 MWh across six BESS projects including Great Western Battery (330 MW, Neoen), Bowmans Creek BESS (250 MW, Ark Energy) and Bannaby BESS (233 MW, Penso Power). Combined with prior rounds, the legislated LDS minimum objectives of 2 GW by 2030 and 28 GWh by 2034 have been met on paper.
               </p>
               <p>
                 Announced just weeks ago, all six projects are in early development. Meeting the legislated target in terms of contracted capacity is a meaningful achievement, but the key question remains whether these projects can actually be built and operating by their target dates.
@@ -2117,7 +2157,7 @@ function SchemeAnalysisEssay({ onClose, cisRounds, ltesaRounds }: {
 
             <h4 className="text-sm font-semibold text-[var(--color-text)] mt-4 mb-2">The Delivery Gap</h4>
             <p>
-              Based on current data, only a small fraction of awarded projects (estimated at fewer than 10 out of approximately 95) are currently operating. The earliest rounds (LTESA Round 1 from May 2023 and CIS Pilot NSW / LTESA Round 2 from November 2023) are now over two years old, yet most of their projects remain in development or early construction phases. Flyers Creek Wind Farm (LTESA Round 4) stands as the sole project to have moved from LTESA award to operation.
+              Based on current data from the AURES Milestone Tracker and ESG Agreement Proxy, a small but growing number of awarded projects have reached operation. New England Solar Farm (720 MW) and Stubbo Solar Farm (400 MW) from LTESA Round 1, and Flyers Creek Wind Farm (~140 MW) from LTESA Round 4, are confirmed operating — demonstrating that the LTESA pathway can deliver. In the CIS Pilot NSW / LTESA Round 2, three VPP portfolios (130 MW) are operating and three large BESS projects (Orana 460 MW, Liddell 250 MW, Smithfield 235 MW) are in construction. However, the majority of the 90+ awarded projects across both programs remain in the development phase.
             </p>
 
             <h4 className="text-sm font-semibold text-[var(--color-text)] mt-4 mb-2">The Pipeline Challenge</h4>
@@ -2130,17 +2170,30 @@ function SchemeAnalysisEssay({ onClose, cisRounds, ltesaRounds }: {
               Having a CIS or LTESA contract helps with project financing but does not remove all barriers. Grid connection delays remain the single largest bottleneck, with AEMO connection processes taking 2-4 years for many projects. Planning approvals, community opposition, supply chain constraints (particularly for transformers and high-voltage equipment), and skilled labour shortages all contribute to development timelines that typically stretch 3-5 years from award to operation for large projects.
             </p>
 
+            <h4 className="text-sm font-semibold text-[var(--color-text)] mt-4 mb-2">ESG Agreement Proxy — What It Tells Us</h4>
+            <p>
+              The AURES ESG Agreement Proxy tracks whether projects have executed their government agreements by monitoring publicly observable indicators: publication of First Nations commitments, FNCEN registration, CEC Charter signatory status, and ASL summary data availability. Projects that are in construction or have published these commitments are classified as &quot;confirmed&quot; — those that have not are flagged as &quot;not confirmed&quot;, suggesting the agreement may not yet be executed or the project may be at risk.
+            </p>
+            <p>
+              Across all rounds, the confirmed agreement rate varies significantly. Earlier rounds (LTESA R1, CIS Pilot NSW) show higher confirmation rates as projects have had time to progress. Later rounds (CIS Tender 1-4, LTESA R5-6) show lower rates, which is expected given their recency. The key watchpoint is rounds that are 12+ months old with low confirmation rates — these may indicate projects struggling to reach financial close.
+            </p>
+
+            <h4 className="text-sm font-semibold text-[var(--color-text)] mt-4 mb-2">Key Projects to Watch</h4>
+            <p>
+              Seven development-stage projects have been identified as closest to commencing construction, based on developer track record, planning maturity, and time since award. These include Valley of the Winds (936 MW, ACEN), Spicers Creek Wind (700 MW, Squadron Energy), Liverpool Range Wind (634 MW, Tilt Renewables), and Goyder North Wind (300 MW, Neoen). Together they represent over 4 GW of capacity — if all progressed to construction, the overall CIS/LTESA construction rate would increase significantly. Liverpool Range and Goyder North are assessed as most likely to commence construction in the near term, while Coppabella Wind Farm (275 MW, LTESA R1) is flagged as overdue at 34+ months in development.
+            </p>
+
             <h4 className="text-sm font-semibold text-[var(--color-text)] mt-4 mb-2">2030 Outlook</h4>
             <p>
-              Based on historical patterns and current project progression, a significant portion of the capacity awarded in 2024 and 2025 tenders is unlikely to be operational by 2030. Projects from the earliest rounds (2023) have the best chance, but even there, progress has been slower than hoped. A realistic assessment, based on current data, suggests that perhaps 30-50% of currently awarded CIS and LTESA capacity may be operational by end-2030, with the remainder following in 2031-2033.
+              Based on historical patterns and the AURES Milestone Tracker data, a significant portion of the capacity awarded in 2024 and 2025 tenders is unlikely to be operational by 2030. Projects from the earliest rounds (2023) have the best chance — LTESA R1 already has 1,120 MW operating and the CIS Pilot NSW has 945 MW in construction. Battery projects from CIS Tender 2 and 3 (WEM and NEM Dispatchable) have shorter construction timelines and may largely deliver on time. The large generation projects from CIS Tender 1 (6.4 GW, target Dec 2028) and CIS Tender 4 (6.6 GW, target Dec 2030) face the greatest delivery risk given their scale and the systemic barriers described above. A realistic assessment suggests that perhaps 35-50% of currently awarded CIS and LTESA capacity may be operational by end-2030, with the remainder following in 2031-2033.
             </p>
 
             <h4 className="text-sm font-semibold text-[var(--color-text)] mt-4 mb-2">The Verdict</h4>
             <p>
-              The CIS and LTESA programs are well-designed mechanisms that have successfully attracted significant private investment interest in Australia's energy transition. Competitive tension has driven down prices, with oversubscription ratios of 4-8.5x demonstrating strong developer confidence. The schemes have also secured meaningful community benefit commitments and local content requirements.
+              The CIS and LTESA programs are well-designed mechanisms that have successfully attracted significant private investment interest in Australia&apos;s energy transition. Competitive tension has driven down prices, with oversubscription ratios of 4-8.5x across tenders demonstrating strong developer confidence. The schemes have also secured meaningful community benefit commitments — the ESG Agreement Proxy shows increasing transparency around First Nations engagement, with many projects publishing Aboriginal Stakeholder Land-use agreements and registering on the FNCEN.
             </p>
             <p>
-              However, the pace of actual construction is falling short of what is needed to meet the 2030 targets embedded in federal and NSW policy. The gap between awarded and operating capacity is the central challenge. Addressing grid connection timelines, planning processes, and supply chain constraints will be critical to converting the impressive pipeline of contracted projects into the operating assets Australia needs.
+              However, the pace of actual construction is falling short of what is needed to meet the 2030 targets. The confirmed agreement rate and construction commencement rate remain key metrics to watch. With 11 rounds now completed and a combined pipeline exceeding 25 GW, the focus must shift from procurement to delivery. Addressing grid connection timelines, planning processes, and supply chain constraints will be critical to converting the impressive pipeline of contracted projects into the operating assets Australia needs.
             </p>
           </EssaySection>
 
@@ -2950,7 +3003,7 @@ function SchemeTimelineTab() {
         numProjects: 4,
         targetCOD: '2027-2028',
         headline: 'First-ever LTESA tender. Solar strike prices below $35/MWh.',
-        insight: 'Slow progress for a round 34+ months old. Large solar projects navigating complex REZ access and grid connection. No projects operating yet — a concern for 2030 targets.',
+        insight: 'New England Solar (720 MW) and Stubbo Solar (400 MW) are now operating — strong progress from ACEN. Coppabella Wind (275 MW) remains in development after 34+ months, a concern. Limondale BESS (50 MW) in construction.',
         notableWinners: ['New England Solar Farm (720 MW) — ACEN', 'Stubbo Solar Farm (400 MW) — ACEN', 'Coppabella Wind Farm (275 MW)', 'Limondale BESS (50 MW / 400 MWh)'],
         constructionPct: 50, confirmedPct: 0, confirmedCount: 0, confirmedMW: 0, notConfirmedCount: 0, notConfirmedMW: 0, totalMW: 1445,
       },
@@ -3062,8 +3115,8 @@ function SchemeTimelineTab() {
         numProjects: 16,
         targetCOD: '31 Dec 2029',
         headline: "Australia's biggest battery tender. 4.13 GW / 15.37 GWh across 16 projects. 8.5× oversubscribed (124 bids, ~34 GW).",
-        insight: 'All lithium-ion BESS despite pumped hydro being eligible. 4+ year runway provides adequate time, but sheer volume (16 projects across 4 states) will test grid connection and supply chains.',
-        notableWinners: ['Liddell Stage 2 (500 MW) — AGL', 'Eraring BESS (460 MW) — Origin', 'Mortlake Stage 2 (450 MW) — Origin', 'Darlington Point BESS (400 MW)'],
+        insight: 'Several key winners already have Stage 1 projects in operation or late construction from earlier rounds — Liddell (AGL), Eraring (Origin) and Mortlake (Origin) are well advanced. This de-risks delivery for their Stage 2 expansions. Sheer volume (16 projects across 4 states) will still test grid connection and supply chains.',
+        notableWinners: ['Liddell Stage 2 (500 MW) — AGL — Stage 1 operating', 'Eraring BESS (460 MW) — Origin — Stage 1 operating', 'Mortlake Stage 2 (450 MW) — Origin — Stage 1 in late construction', 'Darlington Point BESS (400 MW)'],
         constructionPct: 0, confirmedPct: 0, confirmedCount: 0, confirmedMW: 0, notConfirmedCount: 0, notConfirmedMW: 0, totalMW: 4130,
       },
       {
@@ -3076,8 +3129,8 @@ function SchemeTimelineTab() {
         numProjects: 20,
         targetCOD: '31 Dec 2030',
         headline: '6.6 GW generation + 11.4 GWh co-located storage. 12 of 20 projects are hybrids. Tasmania\'s first CIS project. $1B Australian steel commitments.',
-        insight: 'Later target date provides more runway. Trend toward hybridisation may improve financing as developers stack revenue from generation + storage.',
-        notableWinners: ['Goyder Renewables (1,300 MW) — Neoen', 'MacIntyre Wind (923 MW) — ACCIONA/Ark', 'Bell Bay Wind (450 MW) — TAS first CIS', 'Walla Walla Solar (406 MW)'],
+        insight: 'MacIntyre Wind (923 MW) already in construction — a strong early signal for this round. Later target date provides more runway. Trend toward hybridisation (12 of 20 projects) may improve financing as developers stack revenue from generation + storage.',
+        notableWinners: ['Goyder Renewables (1,300 MW) — Neoen', 'MacIntyre Wind (923 MW) — ACCIONA/Ark — in construction', 'Bell Bay Wind (450 MW) — TAS first CIS', 'Walla Walla Solar (406 MW)'],
         constructionPct: 0, confirmedPct: 0, confirmedCount: 0, confirmedMW: 0, notConfirmedCount: 0, notConfirmedMW: 0, totalMW: 6600,
       },
       {
@@ -3091,7 +3144,7 @@ function SchemeTimelineTab() {
         targetCOD: 'Before 2030',
         headline: 'Largest LTESA by energy capacity. Combined with prior rounds, legislated LDS minimums (2 GW by 2030, 28 GWh by 2034) met on paper.',
         insight: 'All in early development. Meeting legislated targets in contracted capacity is a meaningful achievement, but key question remains whether projects can actually be built by target dates.',
-        notableWinners: ['Waratah Super Battery Stage 2 (850 MW / 8,499 MWh)', 'Lake Lyell BESS (150 MW)', 'Wallerawang 9 Stage 2 (100 MW)'],
+        notableWinners: ['Great Western Battery (330 MW) — Neoen', 'Bowmans Creek BESS (250 MW) — Ark Energy', 'Bannaby BESS (233 MW) — Penso Power', 'Kingswood BESS (100 MW) — Iberdrola'],
         constructionPct: 0, confirmedPct: 0, confirmedCount: 0, confirmedMW: 0, notConfirmedCount: 0, notConfirmedMW: 0, totalMW: 1171,
       },
     ]
@@ -3171,11 +3224,41 @@ function SchemeTimelineTab() {
       .filter((p): p is ESGTrackerProject => p != null)
   }, [])
 
+  // Collapsible timeline state — all expanded by default
+  const allRoundIds = useMemo(() => new Set(timelineRounds.map(r => r.id)), [timelineRounds])
+  const [expandedTimelineRounds, setExpandedTimelineRounds] = useState<Set<string>>(() => new Set(timelineRounds.map(r => r.id)))
+  const allExpanded = expandedTimelineRounds.size === timelineRounds.length
+
+  function toggleTimelineRound(id: string) {
+    setExpandedTimelineRounds(prev => {
+      const next = new Set(prev)
+      if (next.has(id)) next.delete(id)
+      else next.add(id)
+      return next
+    })
+  }
+
+  function toggleAllTimelineRounds() {
+    if (allExpanded) {
+      setExpandedTimelineRounds(new Set())
+    } else {
+      setExpandedTimelineRounds(new Set(allRoundIds))
+    }
+  }
+
   return (
     <div className="space-y-6">
       {/* Header */}
       <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl p-5">
-        <h3 className="text-sm font-bold text-[var(--color-text)] mb-2">CIS / LTESA Timeline</h3>
+        <div className="flex items-center justify-between mb-2">
+          <h3 className="text-sm font-bold text-[var(--color-text)]">CIS / LTESA Timeline</h3>
+          <button
+            onClick={toggleAllTimelineRounds}
+            className="text-[10px] px-2.5 py-1 rounded-lg bg-[var(--color-bg)] border border-[var(--color-border)] text-[var(--color-text-muted)] hover:text-[var(--color-text)] hover:border-[var(--color-text-muted)] transition-colors"
+          >
+            {allExpanded ? 'Collapse All' : 'Expand All'}
+          </button>
+        </div>
         <p className="text-xs text-[var(--color-text-muted)] leading-relaxed">
           How Australia's two most ambitious renewable energy procurement programs evolved across {timelineRounds.length} rounds,
           awarding {overallStats.total} projects totalling {fmtMW(overallStats.totalMW)} of capacity. This timeline tracks
@@ -3234,8 +3317,11 @@ function SchemeTimelineTab() {
               {/* Round card */}
               <div className="flex-1 min-w-0 pb-5">
                 <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl p-4">
-                  {/* Round header */}
-                  <div className="flex items-start justify-between gap-2 mb-2">
+                  {/* Clickable round header */}
+                  <div
+                    className="flex items-start justify-between gap-2 cursor-pointer select-none"
+                    onClick={() => toggleTimelineRound(round.id)}
+                  >
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-2 flex-wrap mb-0.5">
                         <span
@@ -3252,88 +3338,100 @@ function SchemeTimelineTab() {
                         {' '}· Target COD: {round.targetCOD}
                       </p>
                     </div>
+                    {/* Chevron indicator */}
+                    <svg
+                      className={`w-4 h-4 text-[var(--color-text-muted)] shrink-0 mt-0.5 transition-transform duration-200 ${expandedTimelineRounds.has(round.id) ? 'rotate-180' : ''}`}
+                      fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor"
+                    >
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                    </svg>
                   </div>
 
-                  {/* Headline insight */}
-                  <p className="text-xs text-[var(--color-text)] leading-relaxed mb-2">
-                    {round.headline}
-                  </p>
-                  <p className="text-[10px] text-[var(--color-text-muted)] leading-relaxed mb-3">
-                    {round.insight}
-                  </p>
+                  {/* Collapsible body */}
+                  {expandedTimelineRounds.has(round.id) && (
+                    <div className="mt-2">
+                      {/* Headline insight */}
+                      <p className="text-xs text-[var(--color-text)] leading-relaxed mb-2">
+                        {round.headline}
+                      </p>
+                      <p className="text-[10px] text-[var(--color-text-muted)] leading-relaxed mb-3">
+                        {round.insight}
+                      </p>
 
-                  {/* Progress bars */}
-                  <div className="grid grid-cols-2 gap-3 mb-3">
-                    <div>
-                      <div className="flex items-center justify-between mb-1">
-                        <span className="text-[9px] text-[var(--color-text-muted)]">Construction/Operating</span>
-                        <span className="text-[9px] font-bold" style={{ color: round.constructionPct > 0 ? '#3b82f6' : '#636e72' }}>
-                          {round.constructionPct}%
-                        </span>
-                      </div>
-                      <div className="h-2 rounded-full bg-[var(--color-bg)] overflow-hidden">
-                        <div className="h-full rounded-full bg-[#3b82f6]" style={{ width: `${round.constructionPct}%` }} />
-                      </div>
-                    </div>
-                    <div>
-                      <div className="flex items-center justify-between mb-1">
-                        <span className="text-[9px] text-[var(--color-text-muted)]">Confirmed Agreement</span>
-                        <span className="text-[9px] font-bold" style={{ color: round.confirmedPct > 0 ? '#22c55e' : '#636e72' }}>
-                          {round.confirmedPct}%
-                        </span>
-                      </div>
-                      <div className="h-2 rounded-full bg-[var(--color-bg)] overflow-hidden">
-                        <div className="h-full rounded-full bg-[#22c55e]" style={{ width: `${round.confirmedPct}%` }} />
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Confirmed/not confirmed summary */}
-                  <div className="flex items-center gap-3 text-[9px] mb-3 flex-wrap">
-                    {round.confirmedCount > 0 && (
-                      <span className="px-2 py-0.5 rounded-full bg-[#22c55e]/15 text-[#22c55e] font-semibold">
-                        {round.confirmedCount} confirmed ({fmtMW(round.confirmedMW)})
-                      </span>
-                    )}
-                    {round.notConfirmedCount > 0 && (
-                      <span className="px-2 py-0.5 rounded-full bg-[#ef4444]/15 text-[#ef4444] font-semibold">
-                        {round.notConfirmedCount} not confirmed ({fmtMW(round.notConfirmedMW)})
-                      </span>
-                    )}
-                  </div>
-
-                  {/* Notable winners */}
-                  <div className="bg-[var(--color-bg)] border border-[var(--color-border)] rounded-lg p-3">
-                    <p className="text-[9px] uppercase tracking-wider text-[var(--color-text-muted)] font-semibold mb-1.5">Notable Projects</p>
-                    <div className="space-y-0.5">
-                      {round.notableWinners.map((w, j) => {
-                        const status = getNotableProjectColor(w, round.id)
-                        return (
-                          <p key={j} className={`text-[10px] flex items-start gap-1.5 ${status.text}`}>
-                            <span className="w-1.5 h-1.5 rounded-full mt-1 shrink-0" style={{ backgroundColor: status.bullet }} />
-                            <span className="flex-1">
-                              {w}
-                              {status.label && (
-                                <span className={`ml-1.5 text-[8px] font-semibold uppercase tracking-wider px-1 py-0.5 rounded ${
-                                  status.label === 'Operating' ? 'bg-emerald-500/15 text-emerald-400' :
-                                  status.label === 'Construction' ? 'bg-blue-500/15 text-blue-400' :
-                                  status.label === 'Confirmed' ? 'bg-emerald-500/10 text-emerald-400/70' :
-                                  'bg-amber-500/10 text-amber-400/70'
-                                }`}>{status.label}</span>
-                              )}
+                      {/* Progress bars */}
+                      <div className="grid grid-cols-2 gap-3 mb-3">
+                        <div>
+                          <div className="flex items-center justify-between mb-1">
+                            <span className="text-[9px] text-[var(--color-text-muted)]">Construction/Operating</span>
+                            <span className="text-[9px] font-bold" style={{ color: round.constructionPct > 0 ? '#3b82f6' : '#636e72' }}>
+                              {round.constructionPct}%
                             </span>
-                          </p>
-                        )
-                      })}
+                          </div>
+                          <div className="h-2 rounded-full bg-[var(--color-bg)] overflow-hidden">
+                            <div className="h-full rounded-full bg-[#3b82f6]" style={{ width: `${round.constructionPct}%` }} />
+                          </div>
+                        </div>
+                        <div>
+                          <div className="flex items-center justify-between mb-1">
+                            <span className="text-[9px] text-[var(--color-text-muted)]">Confirmed Agreement</span>
+                            <span className="text-[9px] font-bold" style={{ color: round.confirmedPct > 0 ? '#22c55e' : '#636e72' }}>
+                              {round.confirmedPct}%
+                            </span>
+                          </div>
+                          <div className="h-2 rounded-full bg-[var(--color-bg)] overflow-hidden">
+                            <div className="h-full rounded-full bg-[#22c55e]" style={{ width: `${round.confirmedPct}%` }} />
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Confirmed/not confirmed summary */}
+                      <div className="flex items-center gap-3 text-[9px] mb-3 flex-wrap">
+                        {round.confirmedCount > 0 && (
+                          <span className="px-2 py-0.5 rounded-full bg-[#22c55e]/15 text-[#22c55e] font-semibold">
+                            {round.confirmedCount} confirmed ({fmtMW(round.confirmedMW)})
+                          </span>
+                        )}
+                        {round.notConfirmedCount > 0 && (
+                          <span className="px-2 py-0.5 rounded-full bg-[#ef4444]/15 text-[#ef4444] font-semibold">
+                            {round.notConfirmedCount} not confirmed ({fmtMW(round.notConfirmedMW)})
+                          </span>
+                        )}
+                      </div>
+
+                      {/* Notable winners */}
+                      <div className="bg-[var(--color-bg)] border border-[var(--color-border)] rounded-lg p-3">
+                        <p className="text-[9px] uppercase tracking-wider text-[var(--color-text-muted)] font-semibold mb-1.5">Notable Projects</p>
+                        <div className="space-y-0.5">
+                          {round.notableWinners.map((w, j) => {
+                            const status = getNotableProjectColor(w, round.id)
+                            return (
+                              <p key={j} className={`text-[10px] flex items-start gap-1.5 ${status.text}`}>
+                                <span className="w-1.5 h-1.5 rounded-full mt-1 shrink-0" style={{ backgroundColor: status.bullet }} />
+                                <span className="flex-1">
+                                  {w}
+                                  {status.label && (
+                                    <span className={`ml-1.5 text-[8px] font-semibold uppercase tracking-wider px-1 py-0.5 rounded ${
+                                      status.label === 'Operating' ? 'bg-emerald-500/15 text-emerald-400' :
+                                      status.label === 'Construction' ? 'bg-blue-500/15 text-blue-400' :
+                                      status.label === 'Confirmed' ? 'bg-emerald-500/10 text-emerald-400/70' :
+                                      'bg-amber-500/10 text-amber-400/70'
+                                    }`}>{status.label}</span>
+                                  )}
+                                </span>
+                              </p>
+                            )
+                          })}
+                        </div>
+                        {/* Legend */}
+                        <div className="flex items-center gap-3 mt-2 pt-2 border-t border-[var(--color-border)]">
+                          <span className="flex items-center gap-1 text-[8px] text-emerald-400"><span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />Operating/Confirmed</span>
+                          <span className="flex items-center gap-1 text-[8px] text-blue-400"><span className="w-1.5 h-1.5 rounded-full bg-blue-500" />Construction</span>
+                          <span className="flex items-center gap-1 text-[8px] text-amber-400"><span className="w-1.5 h-1.5 rounded-full bg-amber-500" />Awarded</span>
+                          <span className="flex items-center gap-1 text-[8px] text-[var(--color-text-muted)]"><span className="w-1.5 h-1.5 rounded-full bg-[#636e72]" />Not confirmed</span>
+                        </div>
+                      </div>
                     </div>
-                    {/* Legend */}
-                    <div className="flex items-center gap-3 mt-2 pt-2 border-t border-[var(--color-border)]">
-                      <span className="flex items-center gap-1 text-[8px] text-emerald-400"><span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />Operating/Confirmed</span>
-                      <span className="flex items-center gap-1 text-[8px] text-blue-400"><span className="w-1.5 h-1.5 rounded-full bg-blue-500" />Construction</span>
-                      <span className="flex items-center gap-1 text-[8px] text-amber-400"><span className="w-1.5 h-1.5 rounded-full bg-amber-500" />Awarded</span>
-                      <span className="flex items-center gap-1 text-[8px] text-[var(--color-text-muted)]"><span className="w-1.5 h-1.5 rounded-full bg-[#636e72]" />Not confirmed</span>
-                    </div>
-                  </div>
+                  )}
                 </div>
               </div>
             </div>
