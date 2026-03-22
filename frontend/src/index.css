@@ -82,6 +82,30 @@ body {
 .leaflet-popup-close-button { color: #94a3b8 !important; }
 .leaflet-popup-close-button:hover { color: #f1f5f9 !important; }
 
+/* Leaflet tooltip dark theme */
+.leaflet-tooltip {
+  background-color: #1e293b !important;
+  border: 1px solid #334155 !important;
+  border-radius: 0.5rem !important;
+  color: #f1f5f9 !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4) !important;
+  padding: 4px 10px !important;
+  font-size: 11px !important;
+  white-space: nowrap !important;
+}
+.leaflet-tooltip-top::before {
+  border-top-color: #1e293b !important;
+}
+.leaflet-tooltip-bottom::before {
+  border-bottom-color: #1e293b !important;
+}
+.leaflet-tooltip-left::before {
+  border-left-color: #1e293b !important;
+}
+.leaflet-tooltip-right::before {
+  border-right-color: #1e293b !important;
+}
+
 /* Guide content markdown rendering */
 .guide-content {
   color: var(--color-text);
