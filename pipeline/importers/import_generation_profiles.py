@@ -297,6 +297,8 @@ def process_generation_response(response_data, target_region=None):
                 hourly_by_fuel[mapped] = {h: [] for h in range(24)}
 
             # Data points are [timestamp_str, value] pairs
+            # NOTE: The API sums 12 × 5-minute dispatch intervals when aggregating
+            # to 1-hour resolution, so we divide by 12 to get average MW.
             for point in series.get('data', []):
                 if not isinstance(point, list) or len(point) < 2:
                     continue
@@ -310,7 +312,7 @@ def process_generation_response(response_data, target_region=None):
                 except (ValueError, IndexError):
                     continue
 
-                hourly_by_fuel[mapped][hour].append(val)
+                hourly_by_fuel[mapped][hour].append(val / 12.0)
 
     return hourly_by_fuel
 
@@ -738,6 +740,7 @@ def main():
     # Build output
     output = {
         'generated_at': datetime.now().isoformat(),
+        'data_source': 'openelectricity' if api_key else 'sample',
         'regions': data,
         'stack_order': STACK_ORDER,
         'colours': STACK_COLOURS,
