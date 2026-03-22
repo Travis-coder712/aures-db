@@ -72,19 +72,26 @@ export default function PerformanceTab({ project }: Props) {
         >
           All Years
         </button>
-        {years.map(y => (
-          <button
-            key={y}
-            onClick={() => setSelectedYear(y)}
-            className={`px-2.5 py-1 rounded-lg text-xs font-medium transition-colors ${
-              selectedYear === y
-                ? 'bg-[var(--color-primary)] text-white'
-                : 'bg-[var(--color-bg-card)] text-[var(--color-text-muted)] hover:text-[var(--color-text)] border border-[var(--color-border)]'
-            }`}
-          >
-            {y}
-          </button>
-        ))}
+        {years.map(y => {
+          const monthCount = data.monthly.filter(m => m.year === y).length
+          const isCurrentYear = y === new Date().getFullYear()
+          return (
+            <button
+              key={y}
+              onClick={() => setSelectedYear(y)}
+              className={`px-2.5 py-1 rounded-lg text-xs font-medium transition-colors ${
+                selectedYear === y
+                  ? 'bg-[var(--color-primary)] text-white'
+                  : 'bg-[var(--color-bg-card)] text-[var(--color-text-muted)] hover:text-[var(--color-text)] border border-[var(--color-border)]'
+              }`}
+            >
+              {y}{isCurrentYear ? '*' : ''}
+              <span className={`ml-1 text-[9px] ${selectedYear === y ? 'text-white/60' : 'text-[var(--color-text-muted)]/40'}`}>
+                {monthCount}m
+              </span>
+            </button>
+          )
+        })}
       </div>
 
       {isBess ? (

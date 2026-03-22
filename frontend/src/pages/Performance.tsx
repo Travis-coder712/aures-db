@@ -13,8 +13,8 @@ import {
   Legend,
 } from 'recharts'
 import { useLeagueTableIndex, useLeagueTable, useFilteredLeagueTable } from '../hooks/usePerformanceData'
-import { fetchMonthlyPerformance } from '../lib/dataService'
-import type { LeagueTechnology, LeagueTableEntry, State, ProjectMonthlyPerformance } from '../lib/types'
+import { fetchMonthlyPerformance, fetchLeagueTable } from '../lib/dataService'
+import type { LeagueTable, LeagueTechnology, LeagueTableEntry, State, ProjectMonthlyPerformance } from '../lib/types'
 
 // ============================================================
 // Info Tooltip Definitions
@@ -188,7 +188,7 @@ export default function Performance() {
   const [tech, setTech] = useState<LeagueTechnology>('wind')
   // Default to latest available year
   const latestYear = index?.available_years?.[index.available_years.length - 1] ?? 2025
-  const [year, setYear] = useState<number>(latestYear)
+  const [year, setYear] = useState<number | 'all'>(latestYear)
   const [stateFilter, setStateFilter] = useState<State | 'ALL'>('ALL')
   const [showUpdatePanel, setShowUpdatePanel] = useState(false)
   const [sortField, setSortField] = useState<SortField>('rank')
@@ -202,10 +202,108 @@ export default function Performance() {
     setYearInitialized(true)
   }
 
-  const { table, loading: tableLoading } = useLeagueTable(tech, year)
+  // For "All Years" mode, load all tables and compute averages
+  const [allYearsTables, setAllYearsTables] = useState<LeagueTable[]>([])
+  const [allYearsLoading, setAllYearsLoading] = useState(false)
+
+  useEffect(() => {
+    if (year !== 'all' || !index) {
+      setAllYearsTables([])
+      return
+    }
+    setAllYearsLoading(true)
+    Promise.all(
+      index.available_years.map(y => fetchLeagueTable(tech, y).catch(() => null))
+    ).then(results => {
+      setAllYearsTables(results.filter((t): t is LeagueTable => t !== null))
+      setAllYearsLoading(false)
+    })
+  }, [year, tech, index])
+
+  const allYearsTable = useMemo<LeagueTable | null>(() => {
+    if (year !== 'all' || allYearsTables.length === 0) return null
+
+    // Aggregate: for each project, average its metrics across years it appears
+    const projectMap = new Map<string, { entries: LeagueTableEntry[]; count: number }>()
+    for (const t of allYearsTables) {
+      for (const p of t.projects) {
+        const existing = projectMap.get(p.project_id)
+        if (existing) {
+          existing.entries.push(p)
+          existing.count++
+        } else {
+          projectMap.set(p.project_id, { entries: [p], count: 1 })
+        }
+      }
+    }
+
+    const avgProjects: LeagueTableEntry[] = []
+    for (const [, { entries }] of projectMap) {
+      const n = entries.length
+      const base = { ...entries[entries.length - 1] } // Use latest entry as template
+      const avg = (vals: (number | undefined | null)[]) => {
+        const valid = vals.filter((v): v is number => v != null)
+        return valid.length > 0 ? valid.reduce((s, v) => s + v, 0) / valid.length : undefined
+      }
+      base.capacity_factor_pct = avg(entries.map(e => e.capacity_factor_pct))
+      base.revenue_per_mw = avg(entries.map(e => e.revenue_per_mw))
+      base.curtailment_pct = avg(entries.map(e => e.curtailment_pct))
+      base.energy_price_received = avg(entries.map(e => e.energy_price_received))
+      base.utilisation_pct = avg(entries.map(e => e.utilisation_pct))
+      base.avg_charge_price = avg(entries.map(e => e.avg_charge_price))
+      base.avg_discharge_price = avg(entries.map(e => e.avg_discharge_price))
+      base.cycles = avg(entries.map(e => e.cycles))
+      base.years_of_data = n
+      avgProjects.push(base)
+    }
+
+    // Re-rank by composite metric
+    const isBess = tech === 'bess' || tech === 'pumped_hydro'
+    avgProjects.sort((a, b) => {
+      if (isBess) {
+        const scoreA = (a.revenue_per_mw ?? 0)
+        const scoreB = (b.revenue_per_mw ?? 0)
+        return scoreB - scoreA
+      }
+      return (b.capacity_factor_pct ?? 0) - (a.capacity_factor_pct ?? 0)
+    })
+    avgProjects.forEach((p, i) => {
+      p.rank_composite = i + 1
+      p.quartile = Math.min(4, Math.floor(i / (avgProjects.length / 4)) + 1) as 1 | 2 | 3 | 4
+    })
+
+    return {
+      year: 0,
+      technology: tech,
+      data_source: 'openelectricity',
+      fleet_avg: {
+        capacity_factor_pct: avg(avgProjects.map(p => p.capacity_factor_pct)),
+        revenue_per_mw: avg(avgProjects.map(p => p.revenue_per_mw)),
+        curtailment_pct: avg(avgProjects.map(p => p.curtailment_pct)),
+        count: avgProjects.length,
+      },
+      projects: avgProjects,
+    } satisfies LeagueTable
+
+    function avg(vals: (number | undefined)[]): number | undefined {
+      const valid = vals.filter((v): v is number => v != null)
+      return valid.length > 0 ? valid.reduce((s, v) => s + v, 0) / valid.length : undefined
+    }
+  }, [allYearsTables, year, tech])
+
+  const singleYearTable = useLeagueTable(tech, typeof year === 'number' ? year : latestYear)
+  const table = year === 'all' ? allYearsTable : singleYearTable.table
+  const tableLoading = year === 'all' ? allYearsLoading : singleYearTable.loading
   const filtered = useFilteredLeagueTable(table, stateFilter)
 
-  const isYTD = table?.data_source === 'openelectricity_ytd'
+  const isYTD = year !== 'all' && table?.data_source === 'openelectricity_ytd'
+
+  // Helper: get project count for a given year+tech from index
+  const getYearCount = useCallback((y: number) => {
+    if (!index) return 0
+    const entry = index.tables.find(t => t.year === y && t.technology === tech)
+    return entry?.count ?? 0
+  }, [index, tech])
 
   // Sort
   const sorted = useMemo(() => {
@@ -369,6 +467,12 @@ export default function Performance() {
                 Year to Date (Jan–Feb)
               </span>
             )}
+            {year === 'all' && (
+              <span className="inline-flex items-center gap-1.5 text-[11px] font-medium px-2 py-0.5 rounded-full bg-purple-500/10 text-purple-400 border border-purple-500/20">
+                <span className="w-1.5 h-1.5 rounded-full bg-purple-400" />
+                All Years Average (2018–2026)
+              </span>
+            )}
           </div>
         )}
       </section>
@@ -389,18 +493,39 @@ export default function Performance() {
           </button>
         ))}
 
-        {/* Year dropdown */}
-        <select
-          value={year}
-          onChange={(e) => setYear(Number(e.target.value))}
-          className="ml-auto px-3 py-2 rounded-lg text-sm bg-[var(--color-bg-card)] text-[var(--color-text)] border border-[var(--color-border)]"
-        >
-          {[...index.available_years].reverse().map((y) => (
-            <option key={y} value={y}>
-              {y}{y === new Date().getFullYear() ? ' (YTD)' : ''}
-            </option>
-          ))}
-        </select>
+        {/* Year selector */}
+        <div className="ml-auto flex items-center gap-1 overflow-x-auto">
+          <button
+            onClick={() => setYear('all')}
+            className={`px-2.5 py-1.5 rounded-lg text-xs font-medium transition-colors whitespace-nowrap ${
+              year === 'all'
+                ? 'bg-[var(--color-primary)] text-white'
+                : 'bg-[var(--color-bg-card)] text-[var(--color-text-muted)] hover:text-[var(--color-text)] border border-[var(--color-border)]'
+            }`}
+          >
+            All Years
+          </button>
+          {[...index.available_years].reverse().map((y) => {
+            const count = getYearCount(y)
+            const isCurrentYear = y === new Date().getFullYear()
+            return (
+              <button
+                key={y}
+                onClick={() => setYear(y)}
+                className={`px-2 py-1.5 rounded-lg text-xs font-medium transition-colors whitespace-nowrap ${
+                  year === y
+                    ? 'bg-[var(--color-primary)] text-white'
+                    : 'bg-[var(--color-bg-card)] text-[var(--color-text-muted)] hover:text-[var(--color-text)] border border-[var(--color-border)]'
+                }`}
+              >
+                {y}{isCurrentYear ? ' (YTD)' : ''}
+                <span className={`ml-1 text-[9px] ${year === y ? 'text-white/70' : 'text-[var(--color-text-muted)]/50'}`}>
+                  {count}
+                </span>
+              </button>
+            )
+          })}
+        </div>
       </div>
 
       {/* Fleet Summary Cards */}
@@ -421,7 +546,7 @@ export default function Performance() {
           )}
           {table.fleet_avg.revenue_per_mw != null && (
             <StatCard
-              label={isYTD ? 'Avg Rev/MW (YTD)' : 'Avg Revenue/MW'}
+              label={year === 'all' ? 'Avg Rev/MW (All)' : isYTD ? 'Avg Rev/MW (YTD)' : 'Avg Revenue/MW'}
               value={`$${(table.fleet_avg.revenue_per_mw / 1000).toFixed(0)}k`}
               color="#3b82f6"
               infoKey="revenue_per_mw"
@@ -496,6 +621,9 @@ export default function Performance() {
                       <SortHeader field="curtailment" label="Curt%" infoKey="curtailment" />
                     </>
                   )}
+                  {year === 'all' && (
+                    <th className="px-2 py-2 text-left w-12 text-[var(--color-text-muted)]">Yrs</th>
+                  )}
                   <th className="px-2 py-2 text-left w-12">
                     Q<InfoTooltip metricKey="quartile" />
                   </th>
@@ -503,7 +631,7 @@ export default function Performance() {
               </thead>
               <tbody>
                 {sorted.map((p) => (
-                  <LeagueRow key={p.project_id} entry={p} tech={tech} />
+                  <LeagueRow key={p.project_id} entry={p} tech={tech} showYears={year === 'all'} />
                 ))}
               </tbody>
             </table>
@@ -634,7 +762,7 @@ cd frontend && npm run build`}
   )
 }
 
-function LeagueRow({ entry, tech }: { entry: LeagueTableEntry; tech: LeagueTechnology }) {
+function LeagueRow({ entry, tech, showYears }: { entry: LeagueTableEntry; tech: LeagueTechnology; showYears?: boolean }) {
   const spread = tech === 'bess'
     ? ((entry.avg_discharge_price ?? 0) - (entry.avg_charge_price ?? 0))
     : 0
@@ -696,6 +824,11 @@ function LeagueRow({ entry, tech }: { entry: LeagueTableEntry; tech: LeagueTechn
           </td>
         </>
       )}
+      {showYears && (
+        <td className="px-2 py-2 text-[var(--color-text-muted)] text-center">
+          {entry.years_of_data ?? '—'}
+        </td>
+      )}
       <td className="px-2 py-2">
         <span
           className="inline-flex items-center justify-center w-5 h-5 rounded text-[10px] font-bold"
@@ -717,7 +850,7 @@ function LeagueRow({ entry, tech }: { entry: LeagueTableEntry; tech: LeagueTechn
 
 const MONTH_LABELS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 
-function FleetMonthlyTrends({ projects, tech, year }: { projects: LeagueTableEntry[]; tech: LeagueTechnology; year: number }) {
+function FleetMonthlyTrends({ projects, tech, year }: { projects: LeagueTableEntry[]; tech: LeagueTechnology; year: number | 'all' }) {
   const [monthlyData, setMonthlyData] = useState<ProjectMonthlyPerformance[]>([])
   const [loading, setLoading] = useState(true)
 
@@ -744,6 +877,12 @@ function FleetMonthlyTrends({ projects, tech, year }: { projects: LeagueTableEnt
       if (isBess) {
         values = monthlyData
           .map(p => {
+            if (year === 'all') {
+              // Average across all years for this month
+              const entries = p.monthly.filter(m => m.month === month && m.avg_discharge_price && m.avg_charge_price)
+              if (entries.length === 0) return undefined
+              return entries.reduce((s, e) => s + (e.avg_discharge_price! - e.avg_charge_price!), 0) / entries.length
+            }
             const entry = p.monthly.find(m => m.year === year && m.month === month)
             if (!entry?.avg_discharge_price || !entry?.avg_charge_price) return undefined
             return entry.avg_discharge_price - entry.avg_charge_price
@@ -751,7 +890,14 @@ function FleetMonthlyTrends({ projects, tech, year }: { projects: LeagueTableEnt
           .filter((v): v is number => v != null)
       } else {
         values = monthlyData
-          .map(p => p.monthly.find(m => m.year === year && m.month === month)?.capacity_factor_pct)
+          .map(p => {
+            if (year === 'all') {
+              const entries = p.monthly.filter(m => m.month === month && m.capacity_factor_pct != null)
+              if (entries.length === 0) return undefined
+              return entries.reduce((s, e) => s + (e.capacity_factor_pct ?? 0), 0) / entries.length
+            }
+            return p.monthly.find(m => m.year === year && m.month === month)?.capacity_factor_pct
+          })
           .filter((v): v is number => v != null)
       }
 
@@ -785,7 +931,7 @@ function FleetMonthlyTrends({ projects, tech, year }: { projects: LeagueTableEnt
   return (
     <section className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl p-5">
       <h2 className="text-sm font-semibold text-[var(--color-text)] mb-1">
-        {year} Monthly {isBess ? 'Price Spread' : 'Capacity Factor'} — Fleet Average
+        {year === 'all' ? 'All Years Average' : year} Monthly {isBess ? 'Price Spread' : 'Capacity Factor'} — Fleet Average
       </h2>
       <p className="text-[10px] text-[var(--color-text-muted)] mb-3">
         {isBess ? 'Average discharge–charge spread' : 'Average capacity factor'} across top {monthlyData.length} {tech} projects by month. Shaded area shows Q1–Q3 range.

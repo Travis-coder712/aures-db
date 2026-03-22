@@ -6,6 +6,546 @@
   "state": "NSW",
   "monthly": [
     {
+      "year": 2019,
+      "month": 1,
+      "capacity_factor_pct": 0.1,
+      "energy_mwh": 7.5,
+      "revenue_aud": 410.0,
+      "energy_price_received": 52.9,
+      "curtailment_pct": 0.4
+    },
+    {
+      "year": 2019,
+      "month": 2,
+      "capacity_factor_pct": 0.1,
+      "energy_mwh": 6.8,
+      "revenue_aud": 356.0,
+      "energy_price_received": 50.91,
+      "curtailment_pct": 1.8
+    },
+    {
+      "year": 2019,
+      "month": 3,
+      "capacity_factor_pct": 0.1,
+      "energy_mwh": 7.5,
+      "revenue_aud": 336.0,
+      "energy_price_received": 43.36,
+      "curtailment_pct": 2.8
+    },
+    {
+      "year": 2019,
+      "month": 4,
+      "capacity_factor_pct": 0.1,
+      "energy_mwh": 7.3,
+      "revenue_aud": 319.0,
+      "energy_price_received": 42.58,
+      "curtailment_pct": 2.0
+    },
+    {
+      "year": 2019,
+      "month": 5,
+      "capacity_factor_pct": 0.1,
+      "energy_mwh": 7.5,
+      "revenue_aud": 275.0,
+      "energy_price_received": 35.45,
+      "curtailment_pct": 4.7
+    },
+    {
+      "year": 2019,
+      "month": 6,
+      "capacity_factor_pct": 0.1,
+      "energy_mwh": 7.3,
+      "revenue_aud": 382.0,
+      "energy_price_received": 50.94,
+      "curtailment_pct": 3.6
+    },
+    {
+      "year": 2019,
+      "month": 7,
+      "capacity_factor_pct": 0.1,
+      "energy_mwh": 7.5,
+      "revenue_aud": 388.0,
+      "energy_price_received": 50.04,
+      "curtailment_pct": 1.8
+    },
+    {
+      "year": 2019,
+      "month": 8,
+      "capacity_factor_pct": 0.1,
+      "energy_mwh": 7.5,
+      "revenue_aud": 332.0,
+      "energy_price_received": 42.8,
+      "curtailment_pct": 0
+    },
+    {
+      "year": 2019,
+      "month": 9,
+      "capacity_factor_pct": 0.1,
+      "energy_mwh": 7.3,
+      "revenue_aud": 280.0,
+      "energy_price_received": 37.28,
+      "curtailment_pct": 0.5
+    },
+    {
+      "year": 2019,
+      "month": 10,
+      "capacity_factor_pct": 0.1,
+      "energy_mwh": 7.5,
+      "revenue_aud": 289.0,
+      "energy_price_received": 37.26,
+      "curtailment_pct": 1.6
+    },
+    {
+      "year": 2019,
+      "month": 11,
+      "capacity_factor_pct": 0.1,
+      "energy_mwh": 7.3,
+      "revenue_aud": 307.0,
+      "energy_price_received": 40.94,
+      "curtailment_pct": 0.9
+    },
+    {
+      "year": 2019,
+      "month": 12,
+      "capacity_factor_pct": 0.1,
+      "energy_mwh": 7.5,
+      "revenue_aud": 403.0,
+      "energy_price_received": 51.96,
+      "curtailment_pct": 1.4
+    },
+    {
+      "year": 2020,
+      "month": 1,
+      "capacity_factor_pct": 15.4,
+      "energy_mwh": 4879.2,
+      "revenue_aud": 370744.0,
+      "energy_price_received": 76.17,
+      "curtailment_pct": 1.5
+    },
+    {
+      "year": 2020,
+      "month": 2,
+      "capacity_factor_pct": 15.3,
+      "energy_mwh": 4550.5,
+      "revenue_aud": 335309.0,
+      "energy_price_received": 73.87,
+      "curtailment_pct": 1.9
+    },
+    {
+      "year": 2020,
+      "month": 3,
+      "capacity_factor_pct": 13.2,
+      "energy_mwh": 4203.5,
+      "revenue_aud": 249328.0,
+      "energy_price_received": 59.46,
+      "curtailment_pct": 0.8
+    },
+    {
+      "year": 2020,
+      "month": 4,
+      "capacity_factor_pct": 10.7,
+      "energy_mwh": 3273.8,
+      "revenue_aud": 185856.0,
+      "energy_price_received": 56.91,
+      "curtailment_pct": 2.2
+    },
+    {
+      "year": 2020,
+      "month": 5,
+      "capacity_factor_pct": 10.7,
+      "energy_mwh": 3405.9,
+      "revenue_aud": 172780.0,
+      "energy_price_received": 50.85,
+      "curtailment_pct": 1.0
+    },
+    {
+      "year": 2020,
+      "month": 6,
+      "capacity_factor_pct": 7.8,
+      "energy_mwh": 2407.3,
+      "revenue_aud": 161670.0,
+      "energy_price_received": 67.32,
+      "curtailment_pct": 2.6
+    },
+    {
+      "year": 2020,
+      "month": 7,
+      "capacity_factor_pct": 9.3,
+      "energy_mwh": 2968.0,
+      "revenue_aud": 198500.0,
+      "energy_price_received": 67.04,
+      "curtailment_pct": 0.9
+    },
+    {
+      "year": 2020,
+      "month": 8,
+      "capacity_factor_pct": 9.9,
+      "energy_mwh": 3155.3,
+      "revenue_aud": 210096.0,
+      "energy_price_received": 66.75,
+      "curtailment_pct": 2.1
+    },
+    {
+      "year": 2020,
+      "month": 9,
+      "capacity_factor_pct": 15.4,
+      "energy_mwh": 4723.3,
+      "revenue_aud": 216817.0,
+      "energy_price_received": 46.02,
+      "curtailment_pct": 1.5
+    },
+    {
+      "year": 2020,
+      "month": 10,
+      "capacity_factor_pct": 15.1,
+      "energy_mwh": 4790.5,
+      "revenue_aud": 241512.0,
+      "energy_price_received": 50.54,
+      "curtailment_pct": 1.4
+    },
+    {
+      "year": 2020,
+      "month": 11,
+      "capacity_factor_pct": 16.4,
+      "energy_mwh": 5032.2,
+      "revenue_aud": 342149.0,
+      "energy_price_received": 68.16,
+      "curtailment_pct": 4.0
+    },
+    {
+      "year": 2020,
+      "month": 12,
+      "capacity_factor_pct": 14.7,
+      "energy_mwh": 4668.2,
+      "revenue_aud": 350263.0,
+      "energy_price_received": 75.21,
+      "curtailment_pct": 0
+    },
+    {
+      "year": 2021,
+      "month": 1,
+      "capacity_factor_pct": 16.2,
+      "energy_mwh": 5163.1,
+      "revenue_aud": 302150.0,
+      "energy_price_received": 57.3,
+      "curtailment_pct": 3.3
+    },
+    {
+      "year": 2021,
+      "month": 2,
+      "capacity_factor_pct": 18.6,
+      "energy_mwh": 5356.4,
+      "revenue_aud": 280467.0,
+      "energy_price_received": 51.27,
+      "curtailment_pct": 3.0
+    },
+    {
+      "year": 2021,
+      "month": 3,
+      "capacity_factor_pct": 14.5,
+      "energy_mwh": 4621.1,
+      "revenue_aud": 211228.0,
+      "energy_price_received": 44.75,
+      "curtailment_pct": 2.5
+    },
+    {
+      "year": 2021,
+      "month": 4,
+      "capacity_factor_pct": 14.7,
+      "energy_mwh": 4534.7,
+      "revenue_aud": 172340.0,
+      "energy_price_received": 37.21,
+      "curtailment_pct": 2.2
+    },
+    {
+      "year": 2021,
+      "month": 5,
+      "capacity_factor_pct": 11.3,
+      "energy_mwh": 3600.5,
+      "revenue_aud": 150661.0,
+      "energy_price_received": 40.97,
+      "curtailment_pct": 2.0
+    },
+    {
+      "year": 2021,
+      "month": 6,
+      "capacity_factor_pct": 8.3,
+      "energy_mwh": 2550.1,
+      "revenue_aud": 130738.0,
+      "energy_price_received": 50.2,
+      "curtailment_pct": 0
+    },
+    {
+      "year": 2021,
+      "month": 7,
+      "capacity_factor_pct": 8.8,
+      "energy_mwh": 2798.2,
+      "revenue_aud": 131835.0,
+      "energy_price_received": 46.13,
+      "curtailment_pct": 2.2
+    },
+    {
+      "year": 2021,
+      "month": 8,
+      "capacity_factor_pct": 13.7,
+      "energy_mwh": 4378.2,
+      "revenue_aud": 218916.0,
+      "energy_price_received": 48.96,
+      "curtailment_pct": 1.1
+    },
+    {
+      "year": 2021,
+      "month": 9,
+      "capacity_factor_pct": 14.7,
+      "energy_mwh": 4538.8,
+      "revenue_aud": 175842.0,
+      "energy_price_received": 37.93,
+      "curtailment_pct": 3.9
+    },
+    {
+      "year": 2021,
+      "month": 10,
+      "capacity_factor_pct": 16.0,
+      "energy_mwh": 5080.2,
+      "revenue_aud": 212488.0,
+      "energy_price_received": 40.95,
+      "curtailment_pct": 2.4
+    },
+    {
+      "year": 2021,
+      "month": 11,
+      "capacity_factor_pct": 12.7,
+      "energy_mwh": 3922.7,
+      "revenue_aud": 177695.0,
+      "energy_price_received": 44.35,
+      "curtailment_pct": 0
+    },
+    {
+      "year": 2021,
+      "month": 12,
+      "capacity_factor_pct": 23.4,
+      "energy_mwh": 7457.2,
+      "revenue_aud": 404275.0,
+      "energy_price_received": 53.08,
+      "curtailment_pct": 3.6
+    },
+    {
+      "year": 2022,
+      "month": 1,
+      "capacity_factor_pct": 18.7,
+      "energy_mwh": 5946.1,
+      "revenue_aud": 839468.0,
+      "energy_price_received": 144.0,
+      "curtailment_pct": 3.0
+    },
+    {
+      "year": 2022,
+      "month": 2,
+      "capacity_factor_pct": 20.2,
+      "energy_mwh": 5800.4,
+      "revenue_aud": 743526.0,
+      "energy_price_received": 130.75,
+      "curtailment_pct": 0.0
+    },
+    {
+      "year": 2022,
+      "month": 3,
+      "capacity_factor_pct": 13.9,
+      "energy_mwh": 4412.6,
+      "revenue_aud": 495654.0,
+      "energy_price_received": 114.57,
+      "curtailment_pct": 0.9
+    },
+    {
+      "year": 2022,
+      "month": 4,
+      "capacity_factor_pct": 12.7,
+      "energy_mwh": 3923.5,
+      "revenue_aud": 398922.0,
+      "energy_price_received": 103.71,
+      "curtailment_pct": 0.5
+    },
+    {
+      "year": 2022,
+      "month": 5,
+      "capacity_factor_pct": 11.4,
+      "energy_mwh": 3615.2,
+      "revenue_aud": 349913.0,
+      "energy_price_received": 98.72,
+      "curtailment_pct": 0.9
+    },
+    {
+      "year": 2022,
+      "month": 6,
+      "capacity_factor_pct": 7.8,
+      "energy_mwh": 2387.8,
+      "revenue_aud": 278278.0,
+      "energy_price_received": 118.87,
+      "curtailment_pct": 1.1
+    },
+    {
+      "year": 2022,
+      "month": 7,
+      "capacity_factor_pct": 11.6,
+      "energy_mwh": 3677.0,
+      "revenue_aud": 416187.0,
+      "energy_price_received": 115.44,
+      "curtailment_pct": 2.3
+    },
+    {
+      "year": 2022,
+      "month": 8,
+      "capacity_factor_pct": 13.2,
+      "energy_mwh": 4206.8,
+      "revenue_aud": 541641.0,
+      "energy_price_received": 131.32,
+      "curtailment_pct": 2.3
+    },
+    {
+      "year": 2022,
+      "month": 9,
+      "capacity_factor_pct": 13.4,
+      "energy_mwh": 4129.4,
+      "revenue_aud": 365369.0,
+      "energy_price_received": 90.25,
+      "curtailment_pct": 1.8
+    },
+    {
+      "year": 2022,
+      "month": 10,
+      "capacity_factor_pct": 15.0,
+      "energy_mwh": 4760.7,
+      "revenue_aud": 536530.0,
+      "energy_price_received": 114.95,
+      "curtailment_pct": 2.9
+    },
+    {
+      "year": 2022,
+      "month": 11,
+      "capacity_factor_pct": 19.4,
+      "energy_mwh": 5962.5,
+      "revenue_aud": 707959.0,
+      "energy_price_received": 121.11,
+      "curtailment_pct": 2.2
+    },
+    {
+      "year": 2022,
+      "month": 12,
+      "capacity_factor_pct": 23.4,
+      "energy_mwh": 7436.7,
+      "revenue_aud": 997111.0,
+      "energy_price_received": 136.76,
+      "curtailment_pct": 2.9
+    },
+    {
+      "year": 2023,
+      "month": 1,
+      "capacity_factor_pct": 20.9,
+      "energy_mwh": 6643.3,
+      "revenue_aud": 424982.0,
+      "energy_price_received": 64.21,
+      "curtailment_pct": 0
+    },
+    {
+      "year": 2023,
+      "month": 2,
+      "capacity_factor_pct": 22.8,
+      "energy_mwh": 6543.9,
+      "revenue_aud": 443739.0,
+      "energy_price_received": 68.07,
+      "curtailment_pct": 0.4
+    },
+    {
+      "year": 2023,
+      "month": 3,
+      "capacity_factor_pct": 15.2,
+      "energy_mwh": 4832.4,
+      "revenue_aud": 257550.0,
+      "energy_price_received": 53.5,
+      "curtailment_pct": 3.2
+    },
+    {
+      "year": 2023,
+      "month": 4,
+      "capacity_factor_pct": 13.7,
+      "energy_mwh": 4214.5,
+      "revenue_aud": 212191.0,
+      "energy_price_received": 50.54,
+      "curtailment_pct": 1.7
+    },
+    {
+      "year": 2023,
+      "month": 5,
+      "capacity_factor_pct": 8.5,
+      "energy_mwh": 2709.7,
+      "revenue_aud": 125058.0,
+      "energy_price_received": 46.33,
+      "curtailment_pct": 0
+    },
+    {
+      "year": 2023,
+      "month": 6,
+      "capacity_factor_pct": 8.2,
+      "energy_mwh": 2518.0,
+      "revenue_aud": 136593.0,
+      "energy_price_received": 54.45,
+      "curtailment_pct": 0
+    },
+    {
+      "year": 2023,
+      "month": 7,
+      "capacity_factor_pct": 9.6,
+      "energy_mwh": 3050.8,
+      "revenue_aud": 170181.0,
+      "energy_price_received": 55.99,
+      "curtailment_pct": 1.5
+    },
+    {
+      "year": 2023,
+      "month": 8,
+      "capacity_factor_pct": 14.7,
+      "energy_mwh": 4681.8,
+      "revenue_aud": 242675.0,
+      "energy_price_received": 52.03,
+      "curtailment_pct": 1.6
+    },
+    {
+      "year": 2023,
+      "month": 9,
+      "capacity_factor_pct": 14.0,
+      "energy_mwh": 4304.4,
+      "revenue_aud": 217585.0,
+      "energy_price_received": 50.74,
+      "curtailment_pct": 3.1
+    },
+    {
+      "year": 2023,
+      "month": 10,
+      "capacity_factor_pct": 16.4,
+      "energy_mwh": 5227.1,
+      "revenue_aud": 288743.0,
+      "energy_price_received": 55.45,
+      "curtailment_pct": 1.5
+    },
+    {
+      "year": 2023,
+      "month": 11,
+      "capacity_factor_pct": 20.4,
+      "energy_mwh": 6295.5,
+      "revenue_aud": 386450.0,
+      "energy_price_received": 61.62,
+      "curtailment_pct": 3.6
+    },
+    {
+      "year": 2023,
+      "month": 12,
+      "capacity_factor_pct": 18.6,
+      "energy_mwh": 5911.6,
+      "revenue_aud": 418673.0,
+      "energy_price_received": 71.09,
+      "curtailment_pct": 2.9
+    },
+    {
       "year": 2024,
       "month": 1,
       "capacity_factor_pct": 21.2,

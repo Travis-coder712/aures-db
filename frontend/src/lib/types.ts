@@ -361,6 +361,9 @@ export interface LeagueTableEntry {
   // Data provenance
   data_source?: 'openelectricity' | 'openelectricity_ytd' | 'sample'
 
+  // All-years mode
+  years_of_data?: number
+
   // Rankings
   rank_composite: number
   rank_capacity_factor?: number
