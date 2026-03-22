@@ -493,6 +493,50 @@ export async function fetchEISPdfOpportunities(): Promise<EISPdfOpportunitiesDat
 // REZ Access Rights
 // ============================================================
 
+// ============================================================
+// Developer Data Quality
+// ============================================================
+
+export interface DevWebsiteProject {
+  name: string; technology: string; capacity_mw: number; status: string
+  in_aures: boolean; aures_id?: string; notes?: string
+}
+export interface DevWebsiteComparison {
+  developer: string; slug: string; website_url: string
+  website_projects: DevWebsiteProject[]; aures_projects: string[]
+  match_count: number; website_only_count: number; aures_only_count: number
+}
+export interface DevJVPartnership {
+  project_id: string; project_name: string; partners: string[]
+  structure: string; source: string
+}
+export interface DevCorrection {
+  project_id: string; project_name: string; current_developer: string
+  suggested_developer: string; reason: string; confidence: 'high' | 'medium' | 'low'
+}
+export interface DevDataQuality {
+  generated: string
+  website_comparison: DevWebsiteComparison[]
+  jv_partnerships: DevJVPartnership[]
+  developer_corrections: DevCorrection[]
+  summary: {
+    developers_audited: number; total_discrepancies: number
+    jv_projects_found: number; spv_corrections_suggested: number
+    high_confidence_corrections: number
+  }
+}
+
+let devDataQualityCache: DevDataQuality | null = null
+export async function fetchDevDataQuality(): Promise<DevDataQuality | null> {
+  if (devDataQualityCache) return devDataQualityCache
+  try {
+    const resp = await fetch(`${BASE}/analytics/developer-data-quality.json`)
+    if (!resp.ok) return null
+    devDataQualityCache = (await resp.json()) as DevDataQuality
+    return devDataQualityCache
+  } catch { return null }
+}
+
 let rezAccessCache: REZAccessMap | null = null
 export async function fetchREZAccess(): Promise<REZAccessMap | null> {
   if (rezAccessCache) return rezAccessCache
