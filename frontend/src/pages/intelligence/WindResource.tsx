@@ -64,6 +64,20 @@ const RATING_COLOURS: Record<string, string> = {
 
 const RATING_ORDER = ['Excellent', 'Good', 'Average', 'Below Average'] as const
 
+const RATING_DESCRIPTIONS: Record<string, { range: string; description: string }> = {
+  'Excellent': { range: 'CF ≥ 35%', description: 'Top-tier wind resource — strong, consistent winds' },
+  'Good': { range: 'CF 28–35%', description: 'Above-average resource — reliable generation' },
+  'Average': { range: 'CF 22–28%', description: 'Moderate wind resource — typical for many sites' },
+  'Below Average': { range: 'CF < 22%', description: 'Weaker resource — lower capacity factors' },
+}
+
+// Dark theme tooltip style (hardcoded, not CSS vars — for Recharts overlay)
+const DARK_TOOLTIP = {
+  contentStyle: { backgroundColor: '#1e293b', border: '1px solid #334155', borderRadius: '8px', color: '#f1f5f9' },
+  labelStyle: { color: '#f1f5f9' },
+  itemStyle: { color: '#f1f5f9' },
+}
+
 const STATE_COLOURS: Record<string, string> = {
   NSW: '#3b82f6',
   VIC: '#8b5cf6',
@@ -103,6 +117,9 @@ export default function WindResource() {
   // Table sort
   const [sortField, setSortField] = useState<SortField>('capacity_factor_pct')
   const [sortDir, setSortDir] = useState<SortDir>('desc')
+
+  // Pie drill-down
+  const [selectedRating, setSelectedRating] = useState<string | null>(null)
 
   useEffect(() => {
     fetchWindResource().then(d => { setData(d); setLoading(false) })
@@ -233,6 +250,14 @@ export default function WindResource() {
       .map(r => ({ name: r, value: counts[r], fill: RATING_COLOURS[r] }))
       .filter(d => d.value > 0)
   }, [data])
+
+  // Projects for the selected pie slice
+  const ratingProjects = useMemo(() => {
+    if (!data || !selectedRating) return []
+    return data.operating_farms
+      .filter(f => f.resource_rating === selectedRating)
+      .sort((a, b) => b.capacity_factor_pct - a.capacity_factor_pct)
+  }, [data, selectedRating])
 
   // ---- Render ----
 
@@ -396,9 +421,7 @@ export default function WindResource() {
                 tick={{ fill: 'var(--color-text-muted)', fontSize: 12 }}
               />
               <Tooltip
-                contentStyle={{ backgroundColor: 'var(--color-bg)', border: '1px solid var(--color-border)', borderRadius: '8px' }}
-                labelStyle={{ color: 'var(--color-text)' }}
-                itemStyle={{ color: 'var(--color-text)' }}
+                {...DARK_TOOLTIP}
                 formatter={(value) => [fmtCf(Number(value)), 'Median CF']}
                 labelFormatter={(label) => {
                   const row = stateBenchData.find(r => r.state === label)
@@ -429,27 +452,37 @@ export default function WindResource() {
         <div className="bg-[var(--color-bg-card)] rounded-xl p-4 border border-[var(--color-border)]">
           <h2 className="text-lg font-semibold text-[var(--color-text)] mb-1">Rating Distribution</h2>
           <p className="text-xs text-[var(--color-text-muted)] mb-4">
-            {data.total_operating} farms by resource quality rating
+            {data.total_operating} farms by resource quality rating. Click a slice to see projects.
           </p>
-          <ResponsiveContainer width="100%" height={280}>
+          <ResponsiveContainer width="100%" height={240}>
             <PieChart>
               <Pie
                 data={pieData}
                 cx="50%"
                 cy="50%"
-                innerRadius={60}
-                outerRadius={100}
+                innerRadius={55}
+                outerRadius={95}
                 paddingAngle={2}
                 dataKey="value"
                 stroke="none"
+                cursor="pointer"
+                onClick={(_, index) => {
+                  const rating = pieData[index]?.name
+                  if (rating) setSelectedRating(selectedRating === rating ? null : rating)
+                }}
               >
                 {pieData.map((entry, i) => (
-                  <Cell key={`pie-${i}`} fill={entry.fill} />
+                  <Cell
+                    key={`pie-${i}`}
+                    fill={entry.fill}
+                    opacity={selectedRating && selectedRating !== entry.name ? 0.3 : 1}
+                    stroke={selectedRating === entry.name ? '#f1f5f9' : 'none'}
+                    strokeWidth={selectedRating === entry.name ? 2 : 0}
+                  />
                 ))}
               </Pie>
               <Tooltip
-                contentStyle={{ backgroundColor: 'var(--color-bg)', border: '1px solid var(--color-border)', borderRadius: '8px' }}
-                itemStyle={{ color: 'var(--color-text)' }}
+                {...DARK_TOOLTIP}
                 formatter={(value, _name, props) => {
                   const pct = ((Number(value) / data.total_operating) * 100).toFixed(0)
                   return [`${value} farms (${pct}%)`, props.payload.name]
@@ -457,16 +490,89 @@ export default function WindResource() {
               />
             </PieChart>
           </ResponsiveContainer>
-          <div className="flex justify-center gap-4 mt-2">
-            {pieData.map(d => (
-              <div key={d.name} className="flex items-center gap-1.5 text-xs">
-                <span className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: d.fill }} />
-                <span className="text-[var(--color-text-muted)]">{d.name}: {d.value}</span>
-              </div>
-            ))}
+          {/* Rating legend with descriptions */}
+          <div className="space-y-1.5 mt-2">
+            {RATING_ORDER.map(r => {
+              const d = pieData.find(p => p.name === r)
+              const desc = RATING_DESCRIPTIONS[r]
+              if (!d) return null
+              return (
+                <button
+                  key={r}
+                  onClick={() => setSelectedRating(selectedRating === r ? null : r)}
+                  className={`w-full flex items-center gap-2 px-2 py-1.5 rounded-lg text-left transition-colors ${
+                    selectedRating === r
+                      ? 'bg-white/10 ring-1 ring-white/20'
+                      : 'hover:bg-white/5'
+                  }`}
+                >
+                  <span className="w-2.5 h-2.5 rounded-full shrink-0" style={{ backgroundColor: RATING_COLOURS[r] }} />
+                  <span className="text-xs text-[var(--color-text)] font-medium min-w-[90px]">{r}</span>
+                  <span className="text-[10px] text-[var(--color-text-muted)] font-mono">{desc.range}</span>
+                  <span className="text-[10px] text-[var(--color-text-muted)] ml-auto">{d.value} farms</span>
+                </button>
+              )
+            })}
           </div>
         </div>
       </div>
+
+      {/* Rating drill-down project list */}
+      {selectedRating && ratingProjects.length > 0 && (
+        <div className="bg-[var(--color-bg-card)] rounded-xl p-4 border border-[var(--color-border)]">
+          <div className="flex items-center justify-between mb-3">
+            <div>
+              <h2 className="text-lg font-semibold text-[var(--color-text)]">
+                <span className="inline-block w-3 h-3 rounded-full mr-2" style={{ backgroundColor: RATING_COLOURS[selectedRating] }} />
+                {selectedRating} Wind Resource — {ratingProjects.length} projects
+              </h2>
+              <p className="text-xs text-[var(--color-text-muted)] mt-0.5">
+                {RATING_DESCRIPTIONS[selectedRating]?.description} ({RATING_DESCRIPTIONS[selectedRating]?.range})
+              </p>
+            </div>
+            <button
+              onClick={() => setSelectedRating(null)}
+              className="text-xs text-[var(--color-text-muted)] hover:text-[var(--color-text)] px-2 py-1 rounded-lg bg-white/5 hover:bg-white/10"
+            >
+              ✕ Close
+            </button>
+          </div>
+          <div className="overflow-x-auto">
+            <table className="w-full text-xs">
+              <thead>
+                <tr className="text-[var(--color-text-muted)] border-b border-[var(--color-border)]">
+                  <th className="px-2 py-2 text-left">#</th>
+                  <th className="px-2 py-2 text-left">Project</th>
+                  <th className="px-2 py-2 text-left">State</th>
+                  <th className="px-2 py-2 text-right">MW</th>
+                  <th className="px-2 py-2 text-right">CF%</th>
+                  <th className="px-2 py-2 text-right">$/MWh</th>
+                  <th className="px-2 py-2 text-right">Rev/MW</th>
+                </tr>
+              </thead>
+              <tbody>
+                {ratingProjects.map((f, i) => (
+                  <tr key={f.project_id} className="border-b border-[var(--color-border)]/30 hover:bg-white/5">
+                    <td className="px-2 py-1.5 text-[var(--color-text-muted)]">{i + 1}</td>
+                    <td className="px-2 py-1.5">
+                      <Link to={`/projects/${f.project_id}`} className="text-[var(--color-text)] hover:text-[var(--color-primary)] font-medium">
+                        {f.name}
+                      </Link>
+                    </td>
+                    <td className="px-2 py-1.5 text-[var(--color-text-muted)]">{f.state}</td>
+                    <td className="px-2 py-1.5 text-right text-[var(--color-text)]">{f.capacity_mw}</td>
+                    <td className="px-2 py-1.5 text-right" style={{ color: getRatingColour(f.resource_rating) }}>
+                      {fmtCf(f.capacity_factor_pct)}
+                    </td>
+                    <td className="px-2 py-1.5 text-right text-[var(--color-text)]">{fmtPrice(f.energy_price)}</td>
+                    <td className="px-2 py-1.5 text-right text-[var(--color-text)]">{fmtRevenue(f.revenue_per_mw)}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      )}
 
       {/* Scatter plot: Capacity vs CF */}
       <div className="bg-[var(--color-bg-card)] rounded-xl p-4 border border-[var(--color-border)]">
@@ -493,15 +599,15 @@ export default function WindResource() {
                 if (!payload?.length) return null
                 const d = payload[0].payload as WindResourceFarm
                 return (
-                  <div className="bg-[var(--color-bg)] border border-[var(--color-border)] rounded-lg p-3 shadow-lg text-sm">
-                    <div className="font-semibold text-[var(--color-text)]">{d.name}</div>
-                    <div className="text-[var(--color-text-muted)]">
+                  <div style={{ backgroundColor: '#1e293b', border: '1px solid #334155', borderRadius: 8, padding: 12, boxShadow: '0 4px 12px rgba(0,0,0,0.4)' }} className="text-sm">
+                    <div style={{ color: '#f1f5f9' }} className="font-semibold">{d.name}</div>
+                    <div style={{ color: '#94a3b8' }}>
                       {d.state} — {fmtMw(d.capacity_mw)}
                     </div>
-                    <div className="text-[var(--color-text-muted)]">
-                      CF: {fmtCf(d.capacity_factor_pct)} — {d.resource_rating}
+                    <div style={{ color: '#94a3b8' }}>
+                      CF: <span style={{ color: getRatingColour(d.resource_rating) }}>{fmtCf(d.capacity_factor_pct)}</span> — {d.resource_rating}
                     </div>
-                    <div className="text-[var(--color-text-muted)]">
+                    <div style={{ color: '#94a3b8' }}>
                       Price: {fmtPrice(d.energy_price)}/MWh — Revenue: {fmtRevenue(d.revenue_per_mw)}/MW
                     </div>
                   </div>
