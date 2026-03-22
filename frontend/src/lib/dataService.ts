@@ -5,7 +5,7 @@
  * In production (GitHub Pages), they're served as static files.
  * In development (Vite dev server), they're served from the public/ directory.
  */
-import type { ProjectSummary, Project, Technology, ProjectStatus, State, LeagueTable, LeagueTableIndex, LeagueTechnology, DeveloperIndex, OEMIndex, ContractorIndex, OfftakerIndex, MapProject, CODDriftData, DataSourcesIndex, BESSCapexData, ProjectTimelineData, SchemeTrackerData, DriftAnalysisData, WindResourceData, DunkelflaunteData, EnergyMixData, DeveloperScoreData, RevenueIntelData, GridConnectionData, NewsData, REZAccessMap, EISAnalyticsData, EISComparisonData, EISCoverageData, ProjectMonthlyPerformance } from './types'
+import type { ProjectSummary, Project, Technology, ProjectStatus, State, LeagueTable, LeagueTableIndex, LeagueTechnology, DeveloperIndex, OEMIndex, ContractorIndex, OfftakerIndex, MapProject, CODDriftData, DataSourcesIndex, BESSCapexData, ProjectTimelineData, SchemeTrackerData, DriftAnalysisData, WindResourceData, DunkelflaunteData, EnergyMixData, DeveloperScoreData, RevenueIntelData, GridConnectionData, NewsData, REZAccessMap, EISAnalyticsData, EISComparisonData, EISCoverageData, ProjectMonthlyPerformance, GenerationProfileData, BatteryWatchData, CoalWatchData } from './types'
 
 const BASE = import.meta.env.BASE_URL + 'data'
 
@@ -388,6 +388,17 @@ export async function fetchEnergyMix(): Promise<EnergyMixData | null> {
   } catch { return null }
 }
 
+let generationProfilesCache: GenerationProfileData | null = null
+export async function fetchGenerationProfiles(): Promise<GenerationProfileData | null> {
+  if (generationProfilesCache) return generationProfilesCache
+  try {
+    const resp = await fetch(`${BASE}/analytics/generation-profiles.json`)
+    if (!resp.ok) return null
+    generationProfilesCache = (await resp.json()) as GenerationProfileData
+    return generationProfilesCache
+  } catch { return null }
+}
+
 let developerScoresCache: DeveloperScoreData | null = null
 export async function fetchDeveloperScores(): Promise<DeveloperScoreData | null> {
   if (developerScoresCache) return developerScoresCache
@@ -534,6 +545,36 @@ export async function fetchDevDataQuality(): Promise<DevDataQuality | null> {
     if (!resp.ok) return null
     devDataQualityCache = (await resp.json()) as DevDataQuality
     return devDataQualityCache
+  } catch { return null }
+}
+
+// ============================================================
+// Battery Watch
+// ============================================================
+
+let batteryWatchCache: BatteryWatchData | null = null
+export async function fetchBatteryWatch(): Promise<BatteryWatchData | null> {
+  if (batteryWatchCache) return batteryWatchCache
+  try {
+    const resp = await fetch(`${BASE}/analytics/battery-watch.json`)
+    if (!resp.ok) return null
+    batteryWatchCache = (await resp.json()) as BatteryWatchData
+    return batteryWatchCache
+  } catch { return null }
+}
+
+// ============================================================
+// Coal Watch
+// ============================================================
+
+let coalWatchCache: CoalWatchData | null = null
+export async function fetchCoalWatch(): Promise<CoalWatchData | null> {
+  if (coalWatchCache) return coalWatchCache
+  try {
+    const resp = await fetch(`${BASE}/analytics/coal-watch.json`)
+    if (!resp.ok) return null
+    coalWatchCache = (await resp.json()) as CoalWatchData
+    return coalWatchCache
   } catch { return null }
 }
 

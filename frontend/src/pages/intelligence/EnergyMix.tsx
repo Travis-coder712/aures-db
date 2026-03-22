@@ -6,6 +6,10 @@ import {
 } from 'recharts'
 import { fetchEnergyMix } from '../../lib/dataService'
 import type { EnergyMixData } from '../../lib/types'
+import EnergyTransitionSimulator from '../../components/intelligence/EnergyTransitionSimulator'
+import GenerationStack from '../../components/intelligence/GenerationStack'
+import BatteryWatch from '../../components/intelligence/BatteryWatch'
+import CoalWatch from '../../components/intelligence/CoalWatch'
 
 // ============================================================
 // Icons — defined BEFORE const arrays per project pattern
@@ -35,6 +39,51 @@ const ChipIcon = () => (
     <path fillRule="evenodd" d="M7 2a1 1 0 012 0v1h2V2a1 1 0 112 0v1h1a2 2 0 012 2v1h1a1 1 0 110 2h-1v2h1a1 1 0 110 2h-1v1a2 2 0 01-2 2h-1v1a1 1 0 11-2 0v-1H9v1a1 1 0 11-2 0v-1H6a2 2 0 01-2-2v-1H3a1 1 0 110-2h1V9H3a1 1 0 010-2h1V6a2 2 0 012-2h1V2zM6 6v8h8V6H6z" clipRule="evenodd" />
   </svg>
 )
+
+const SimulatorIcon = () => (
+  <svg className="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
+    <path fillRule="evenodd" d="M3 3a1 1 0 000 2v8a2 2 0 002 2h2.586l-1.293 1.293a1 1 0 101.414 1.414L10 15.414l2.293 2.293a1 1 0 001.414-1.414L12.414 15H15a2 2 0 002-2V5a1 1 0 100-2H3zm11.707 4.707a1 1 0 00-1.414-1.414L10 9.586 8.707 8.293a1 1 0 00-1.414 0l-2 2a1 1 0 101.414 1.414L8 10.414l1.293 1.293a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+  </svg>
+)
+
+const MixIcon = () => (
+  <svg className="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
+    <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z" />
+    <path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z" />
+  </svg>
+)
+
+const StackIcon = () => (
+  <svg className="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
+    <path d="M2 4a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1H3a1 1 0 01-1-1V4zm5 2a1 1 0 011-1h2a1 1 0 011 1v10a1 1 0 01-1 1H8a1 1 0 01-1-1V6zm5-4a1 1 0 011-1h2a1 1 0 011 1v14a1 1 0 01-1 1h-2a1 1 0 01-1-1V2z" />
+  </svg>
+)
+
+const BatteryIcon = () => (
+  <svg className="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
+    <path d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.381z" />
+  </svg>
+)
+
+const CoalIcon = () => (
+  <svg className="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
+    <path fillRule="evenodd" d="M12 7a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0V8.414l-4.293 4.293a1 1 0 01-1.414 0L8 10.414l-4.293 4.293a1 1 0 01-1.414-1.414l5-5a1 1 0 011.414 0L11 10.586 14.586 7H12z" clipRule="evenodd" />
+  </svg>
+)
+
+// ============================================================
+// Tab types and config — defined AFTER icons
+// ============================================================
+
+type TabId = 'simulator' | 'generation-stack' | 'battery-watch' | 'coal-watch' | 'current-mix'
+
+const TABS: { id: TabId; label: string; icon: React.ReactNode }[] = [
+  { id: 'simulator', label: 'Simulator', icon: <SimulatorIcon /> },
+  { id: 'generation-stack', label: 'Generation Stack', icon: <StackIcon /> },
+  { id: 'battery-watch', label: 'Battery Watch', icon: <BatteryIcon /> },
+  { id: 'coal-watch', label: 'Coal Watch', icon: <CoalIcon /> },
+  { id: 'current-mix', label: 'Current Mix', icon: <MixIcon /> },
+]
 
 // ============================================================
 // Tech colours & helpers
@@ -107,6 +156,7 @@ function ChartTooltip({ active, payload, label }: {
 // ============================================================
 
 export default function EnergyMix() {
+  const [activeTab, setActiveTab] = useState<TabId>('simulator')
   const [data, setData] = useState<EnergyMixData | null>(null)
   const [loading, setLoading] = useState(true)
   const [selectedState, setSelectedState] = useState<string | null>(null)
@@ -235,32 +285,60 @@ export default function EnergyMix() {
   // Render
   // ============================================================
 
-  if (loading) {
-    return (
-      <div className="flex items-center justify-center h-64">
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500" />
-      </div>
-    )
-  }
-
-  if (!data || Object.keys(data.current_mix).length === 0) {
-    return (
-      <div className="p-6 text-center text-[var(--color-text-muted)]">
-        <BoltIcon />
-        <p className="mt-2">No energy mix data available</p>
-      </div>
-    )
-  }
-
   return (
     <div className="p-4 md:p-6 space-y-6 max-w-7xl mx-auto">
       {/* Header */}
       <div>
         <h1 className="text-2xl font-bold text-[var(--color-text)]">Energy Mix Transition</h1>
         <p className="text-sm text-[var(--color-text-muted)] mt-1">
-          Operating capacity and pipeline analysis across NEM states
+          Operating capacity, pipeline analysis, and transition modelling across the NEM
         </p>
       </div>
+
+      {/* Tab navigation */}
+      <div className="flex gap-1 overflow-x-auto pb-1 -mb-3">
+        {TABS.map(tab => (
+          <button
+            key={tab.id}
+            onClick={() => setActiveTab(tab.id)}
+            className={`flex items-center gap-2 px-4 py-2.5 rounded-t-lg text-sm font-medium whitespace-nowrap transition-colors ${
+              activeTab === tab.id
+                ? 'bg-[var(--color-bg-card)] text-[var(--color-text)] border border-b-0 border-[var(--color-border)]'
+                : 'text-[var(--color-text-muted)] hover:text-[var(--color-text)] hover:bg-[var(--color-bg-card)]/50'
+            }`}
+          >
+            {tab.icon}
+            {tab.label}
+          </button>
+        ))}
+      </div>
+
+      {/* ─── Simulator Tab ─── */}
+      {activeTab === 'simulator' && <EnergyTransitionSimulator />}
+
+      {/* ─── Generation Stack Tab ─── */}
+      {activeTab === 'generation-stack' && <GenerationStack />}
+
+      {/* ─── Battery Watch Tab ─── */}
+      {activeTab === 'battery-watch' && <BatteryWatch />}
+
+      {/* ─── Coal Watch Tab ─── */}
+      {activeTab === 'coal-watch' && <CoalWatch />}
+
+      {/* ─── Current Mix Tab ─── */}
+      {activeTab === 'current-mix' && (
+        <>
+          {loading ? (
+            <div className="flex items-center justify-center h-64">
+              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500" />
+            </div>
+          ) : !data || Object.keys(data.current_mix).length === 0 ? (
+            <div className="p-6 text-center text-[var(--color-text-muted)]">
+              <BoltIcon />
+              <p className="mt-2">No energy mix data available</p>
+            </div>
+          ) : (
+            <div className="space-y-6">
 
       {/* Rationale */}
       <details className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl p-4 mb-6">
@@ -633,6 +711,11 @@ export default function EnergyMix() {
         Data sourced from AEMO generation information, ARENA project tracker, and state planning registers.
         Operating capacity reflects currently commissioned projects across the NEM.
       </div>
+
+            </div>
+          )}
+        </>
+      )}
     </div>
   )
 }

@@ -1,0 +1,266 @@
+{
+  "generated_at": "2026-03-22",
+  "nsw_focus": {
+    "total_operating_mw": 1940,
+    "total_operating_mwh": 5310,
+    "total_construction_mw": 3333,
+    "total_construction_mwh": 10050,
+    "projects": [
+      {
+        "name": "Eraring Big Battery",
+        "id": "eraring-big-battery",
+        "developer": "Origin Energy",
+        "capacity_mw": 700,
+        "storage_mwh": 1390,
+        "duration_hours": 2,
+        "status": "operating",
+        "cod": "2025-12-18",
+        "note": "Stage 1 (460 MW) commercial ops Dec 2025. Full 700 MW expected Q1 2027.",
+        "milestone": "Australia's largest battery"
+      },
+      {
+        "name": "Waratah Super Battery",
+        "id": "waratah-super-battery",
+        "developer": "Akaysha Energy (BlackRock)",
+        "capacity_mw": 850,
+        "available_mw": 350,
+        "storage_mwh": 1680,
+        "duration_hours": 2,
+        "status": "operating",
+        "cod": "2024-11-01",
+        "note": "Operating at 350 MW (41%) due to catastrophic transformer failure Oct 2025. Full 850 MW targeted end 2026.",
+        "milestone": "NEM's most powerful battery (when fully operational)"
+      },
+      {
+        "name": "Orana BESS",
+        "id": "orana-bess",
+        "developer": "Akaysha Energy",
+        "capacity_mw": 415,
+        "storage_mwh": 1660,
+        "duration_hours": 4,
+        "status": "operating",
+        "cod": "2025-09-01",
+        "note": "Third-largest battery by storage capacity in the NEM.",
+        "milestone": "Largest 4-hour battery in NSW"
+      },
+      {
+        "name": "Liddell BESS",
+        "id": "liddell-bess",
+        "developer": "AGL Energy",
+        "capacity_mw": 500,
+        "storage_mwh": 1000,
+        "duration_hours": 2,
+        "status": "commissioning",
+        "cod": "2026-06-01",
+        "phases": [
+          { "label": "Phase 1", "mw": 250, "date": "2026-03-01", "status": "commissioned" },
+          { "label": "Phase 2", "mw": 250, "date": "2026-05-01", "status": "commissioning" }
+        ],
+        "note": "Built on former Liddell coal plant site. Phase 1 commissioned, Phase 2 expected May 2026. NSW LTESA Round 2.",
+        "milestone": "Coal-to-battery conversion"
+      },
+      {
+        "name": "Eraring Battery (Stages 2-4)",
+        "id": "eraring-battery",
+        "developer": "Origin Energy",
+        "capacity_mw": 240,
+        "storage_mwh": 1390,
+        "duration_hours": 4.5,
+        "status": "construction",
+        "cod": "2027-03-01",
+        "note": "Expanding Eraring to full 700 MW / 3,160 MWh. Grid-forming capability."
+      },
+      {
+        "name": "Tomago BESS",
+        "id": "tomago-bess",
+        "developer": "AGL Energy",
+        "capacity_mw": 500,
+        "storage_mwh": 2000,
+        "duration_hours": 4,
+        "status": "construction",
+        "cod": "2027-10-31",
+        "note": "A$800M. Near Raymond Terrace in Hunter-Central Coast REZ. EPC: Fluence.",
+        "milestone": "AGL's largest battery"
+      },
+      {
+        "name": "Bellambi Heights Renewables",
+        "id": "bellambi-heights-renewables",
+        "developer": "Squadron Energy",
+        "capacity_mw": 408,
+        "storage_mwh": 816,
+        "duration_hours": 2,
+        "status": "construction",
+        "cod": "2027-06-01"
+      },
+      {
+        "name": "Bulabul BESS 1",
+        "id": "bulabul-bess-1",
+        "developer": "Iberdrola",
+        "capacity_mw": 300,
+        "storage_mwh": 600,
+        "duration_hours": 2,
+        "status": "construction",
+        "cod": "2027-06-01"
+      },
+      {
+        "name": "New England Solar Farm BESS",
+        "id": "new-england-solar-farm-bess",
+        "developer": "UPC/AC Renewables",
+        "capacity_mw": 200,
+        "storage_mwh": 400,
+        "duration_hours": 2,
+        "status": "construction",
+        "cod": "2027-06-01"
+      },
+      {
+        "name": "Capital Battery",
+        "id": "capital-battery",
+        "developer": "Neoen",
+        "capacity_mw": 100,
+        "storage_mwh": 200,
+        "duration_hours": 2,
+        "status": "operating",
+        "cod": "2023-12-01"
+      },
+      {
+        "name": "Smithfield BESS",
+        "id": "smithfield-bess",
+        "developer": "Iberdrola",
+        "capacity_mw": 65,
+        "storage_mwh": 130,
+        "duration_hours": 2,
+        "status": "operating",
+        "cod": "2024-06-01"
+      },
+      {
+        "name": "Riverina ESS 1 & 2",
+        "id": "riverina-ess",
+        "developer": "Edify Energy",
+        "capacity_mw": 125,
+        "storage_mwh": 250,
+        "duration_hours": 2,
+        "status": "operating",
+        "cod": "2024-01-01"
+      },
+      {
+        "name": "Wallgrove Grid Battery",
+        "id": "wallgrove-grid-battery",
+        "developer": "Transgrid",
+        "capacity_mw": 50,
+        "storage_mwh": 75,
+        "duration_hours": 1.5,
+        "status": "operating",
+        "cod": "2023-01-01"
+      },
+      {
+        "name": "Broken Hill BESS",
+        "id": "broken-hill-bess",
+        "developer": "AGL Energy",
+        "capacity_mw": 50,
+        "storage_mwh": 50,
+        "duration_hours": 1,
+        "status": "operating",
+        "cod": "2022-06-01"
+      }
+    ],
+    "timeline_milestones": [
+      { "date": "2022-06-01", "label": "Broken Hill BESS online", "cumulative_mw": 50 },
+      { "date": "2023-01-01", "label": "Wallgrove online", "cumulative_mw": 100 },
+      { "date": "2023-12-01", "label": "Capital Battery online", "cumulative_mw": 200 },
+      { "date": "2024-01-01", "label": "Riverina ESS 1 & 2 online", "cumulative_mw": 325 },
+      { "date": "2024-06-01", "label": "Smithfield BESS online", "cumulative_mw": 390 },
+      { "date": "2024-11-01", "label": "Waratah Super Battery online (850 MW)", "cumulative_mw": 1240 },
+      { "date": "2025-09-01", "label": "Orana BESS online (415 MW)", "cumulative_mw": 1655 },
+      { "date": "2025-10-18", "label": "Waratah transformer failure — reduced to 350 MW", "cumulative_mw": 1155, "event": "setback" },
+      { "date": "2025-12-18", "label": "Eraring Big Battery Stage 1 online (460 MW)", "cumulative_mw": 1615 },
+      { "date": "2026-03-01", "label": "Liddell Phase 1 commissioned (250 MW)", "cumulative_mw": 1865 },
+      { "date": "2026-06-01", "label": "Liddell Phase 2 + full commercial ops (500 MW total)", "cumulative_mw": 2115 },
+      { "date": "2026-09-01", "label": "Waratah full capacity restored (850 MW)", "cumulative_mw": 2615 },
+      { "date": "2027-03-01", "label": "Eraring Stages 2-4 complete (700 MW total)", "cumulative_mw": 2855 },
+      { "date": "2027-06-01", "label": "Bellambi + Bulabul + New England BESS online", "cumulative_mw": 3763 },
+      { "date": "2027-10-31", "label": "Tomago BESS online (500 MW)", "cumulative_mw": 4263 }
+    ]
+  },
+  "nem_wide": {
+    "operating": {
+      "total_mw": 5339,
+      "total_mwh": 11575,
+      "by_state": {
+        "NSW": { "mw": 1940, "mwh": 5310, "projects": 8 },
+        "QLD": { "mw": 810, "mwh": 1620, "projects": 6 },
+        "VIC": { "mw": 1665, "mwh": 3330, "projects": 9 },
+        "SA": { "mw": 924, "mwh": 1315, "projects": 6 },
+        "TAS": { "mw": 0, "mwh": 0, "projects": 0 }
+      }
+    },
+    "construction": {
+      "total_mw": 6980,
+      "total_mwh": 16720,
+      "by_state": {
+        "NSW": { "mw": 3333, "mwh": 10050, "projects": 11 },
+        "QLD": { "mw": 1042, "mwh": 2084, "projects": 3 },
+        "VIC": { "mw": 1901, "mwh": 3802, "projects": 8 },
+        "SA": { "mw": 704, "mwh": 1408, "projects": 4 },
+        "TAS": { "mw": 0, "mwh": 0, "projects": 0 }
+      }
+    },
+    "projected_capacity_mw": [
+      { "date": "2024-01-01", "mw": 2000, "label": "Start of 2024" },
+      { "date": "2025-01-01", "mw": 3500, "label": "Start of 2025" },
+      { "date": "2025-12-31", "mw": 5339, "label": "End of 2025" },
+      { "date": "2026-06-30", "mw": 7500, "label": "Mid 2026" },
+      { "date": "2026-12-31", "mw": 9500, "label": "End of 2026" },
+      { "date": "2027-06-30", "mw": 11500, "label": "Mid 2027" },
+      { "date": "2027-12-31", "mw": 12500, "label": "End of 2027" }
+    ]
+  },
+  "displacement_context": {
+    "nem_evening_peak_demand_mw": 28000,
+    "nem_average_demand_mw": 22000,
+    "battery_share_evening_peak_pct": 20,
+    "battery_share_evening_peak_sa_pct": 40,
+    "negative_price_intervals_pct": 10.6,
+    "solar_curtailment_2025_twh": 3.7,
+    "wind_curtailment_2025_twh": 3.3,
+    "total_curtailment_2025_twh": 7.0,
+    "nsw_gas_generation_avg_mw": 800,
+    "nsw_coal_generation_avg_mw": 5000,
+    "insights": [
+      "Battery storage now meets 20%+ of early evening peak demand NEM-wide",
+      "SA batteries hit 40% share of evening demand — a world record",
+      "Big batteries have overtaken peaking gas generators in NSW and VIC evening peaks",
+      "Over 7 TWh of solar and wind was curtailed in 2025 — batteries can absorb much of this",
+      "10.6% of all NEM dispatch intervals in Q2 2025 were at zero or negative prices",
+      "Battery net revenue reached A$69.5M in Q4 2025, doubling from Q4 2023",
+      "2-hour batteries dominate 2026 builds; 4-hour becomes standard from 2027",
+      "NSW LDES tender contracted 1.17 GW / 12 GWh of 8-10 hour batteries for post-2028",
+      "By end 2027, NEM battery capacity will exceed 12 GW — approaching coal fleet capacity",
+      "Batteries are doing more damage to coal profits than to gas, by suppressing peak prices"
+    ],
+    "key_questions": [
+      {
+        "question": "Will excess solar dissipate?",
+        "answer": "Not in the short term. Solar deployment continues to outpace battery additions. However, 4-hour and 8-hour batteries coming online from 2027 will absorb significantly more midday surplus. The NSW LDES tender alone adds 12 GWh of deep storage."
+      },
+      {
+        "question": "Will grid constraints reduce?",
+        "answer": "Yes. Batteries co-located with solar farms (like New England BESS) and at former power stations (Eraring, Liddell) add demand during the day near congestion points, easing export constraints. However, transmission upgrades are still needed."
+      },
+      {
+        "question": "Will a coal unit be forced out?",
+        "answer": "Very likely. Batteries are suppressing peak prices that coal needs to remain profitable. Origin has already extended Eraring coal closure but may accelerate it as battery revenue grows. AGL's conversion of Liddell from coal to battery is the template. Batteries may do more damage to coal profits than to gas."
+      },
+      {
+        "question": "How much solar can NSW batteries absorb?",
+        "answer": "With 4.3 GW of battery capacity online by end 2027, NSW batteries can absorb roughly 4.3 GW during peak solar hours. NSW currently generates about 5-6 GW of solar (utility + rooftop) midday, with 1-2 GW being curtailed. The battery build-out will substantially reduce but not eliminate curtailment."
+      }
+    ]
+  },
+  "sources": [
+    { "name": "RenewEconomy", "url": "https://reneweconomy.com.au" },
+    { "name": "Open Electricity", "url": "https://openelectricity.org.au" },
+    { "name": "AEMO NEM Data", "url": "https://aemo.com.au" },
+    { "name": "Modo Energy", "url": "https://modoenergy.com" },
+    { "name": "Energy Storage News", "url": "https://www.energy-storage.news" }
+  ]
+}

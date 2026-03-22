@@ -807,6 +807,145 @@ export interface EnergyMixData {
   projection: Record<string, Record<string, number>>;
 }
 
+export interface GenerationSeasonProfile {
+  key: string
+  label: string
+  year: number
+  season: 'summer' | 'autumn' | 'winter' | 'spring'
+  period: string
+  profiles: Record<string, number[]>  // fuel type → 24 hourly values (MW)
+  demand: number[]                     // 24 hourly values (MW)
+  price: number[]                      // 24 hourly values ($/MWh)
+}
+
+export interface GenerationProfileRegion {
+  name: string
+  seasons: GenerationSeasonProfile[]
+}
+
+export interface GenerationProfileData {
+  generated_at: string
+  regions: Record<string, GenerationProfileRegion>
+  stack_order: string[]
+  colours: Record<string, string>
+  labels: Record<string, string>
+}
+
+// ============================================================
+// Battery Watch
+// ============================================================
+
+export interface BatteryWatchPhase {
+  label: string; mw: number; date: string; status: string
+}
+
+export interface BatteryWatchProject {
+  name: string; id: string; developer: string
+  capacity_mw: number; available_mw?: number; storage_mwh: number
+  duration_hours: number; status: string; cod: string
+  phases?: BatteryWatchPhase[]; note?: string; milestone?: string
+}
+
+export interface BatteryWatchMilestone {
+  date: string; label: string; cumulative_mw: number; event?: string
+}
+
+export interface BatteryWatchStateData {
+  mw: number; mwh: number; projects: number
+}
+
+export interface BatteryWatchProjectedPoint {
+  date: string; mw: number; label: string
+}
+
+export interface BatteryWatchKeyQuestion {
+  question: string; answer: string
+}
+
+export interface BatteryWatchData {
+  generated_at: string
+  nsw_focus: {
+    total_operating_mw: number; total_operating_mwh: number
+    total_construction_mw: number; total_construction_mwh: number
+    projects: BatteryWatchProject[]
+    timeline_milestones: BatteryWatchMilestone[]
+  }
+  nem_wide: {
+    operating: { total_mw: number; total_mwh: number; by_state: Record<string, BatteryWatchStateData> }
+    construction: { total_mw: number; total_mwh: number; by_state: Record<string, BatteryWatchStateData> }
+    projected_capacity_mw: BatteryWatchProjectedPoint[]
+  }
+  displacement_context: {
+    nem_evening_peak_demand_mw: number; nem_average_demand_mw: number
+    battery_share_evening_peak_pct: number; battery_share_evening_peak_sa_pct: number
+    negative_price_intervals_pct: number
+    solar_curtailment_2025_twh: number; wind_curtailment_2025_twh: number
+    total_curtailment_2025_twh: number
+    nsw_gas_generation_avg_mw: number; nsw_coal_generation_avg_mw: number
+    insights: string[]
+    key_questions: BatteryWatchKeyQuestion[]
+  }
+  sources: { name: string; url: string }[]
+}
+
+// ============================================================
+// Coal Watch
+// ============================================================
+
+export interface CoalAnnualData {
+  year: number; generation_gwh: number; capacity_factor_pct: number
+  est_revenue_m_aud: number; avg_price_aud_mwh: number; note?: string
+}
+
+export interface CoalSeasonalData {
+  year: number; season: 'summer' | 'autumn' | 'winter' | 'spring'
+  generation_gwh: number; avg_price_aud_mwh: number; note?: string
+}
+
+export interface CoalPlant {
+  name: string; facility_code: string; owner: string
+  capacity_mw: number; units: number; unit_size_mw: number
+  fuel: string; commissioned: number
+  closure_date: string; closure_note: string
+  battery_replacement: string | null
+  duids: string[]
+  annual_data: CoalAnnualData[]
+  seasonal_data: CoalSeasonalData[]
+}
+
+export interface CoalClosureEntry {
+  name: string; state: string; mw: number; owner: string
+  closed?: string; closing?: string
+}
+
+export interface CoalShareEntry { year: number; pct: number }
+
+export interface CoalFleetTotal {
+  year: number; generation_twh: number; est_revenue_b_aud: number
+  avg_price_aud_mwh: number; note?: string
+}
+
+export interface CoalWatchData {
+  generated_at: string; data_source: string; note: string
+  nsw_coal_plants: CoalPlant[]
+  nem_coal_summary: {
+    total_capacity_mw: number; nsw_capacity_mw: number; nsw_share_pct: number
+    coal_share_nem_generation_pct: CoalShareEntry[]
+    closure_timeline: CoalClosureEntry[]
+  }
+  battery_vs_coal_context: {
+    nsw_bess_operating_mw: number; nsw_bess_by_end_2027_mw: number
+    nsw_coal_operating_mw: number
+    bess_as_pct_of_coal_2026: number; bess_as_pct_of_coal_2027: number
+    key_dynamics: string[]
+  }
+  revenue_watch: {
+    note: string; nsw_fleet_total: CoalFleetTotal[]
+  }
+  insights: string[]
+  sources: { name: string; url: string; note?: string }[]
+}
+
 export interface ScoredDeveloper {
   developer: string; project_count: number; total_mw: number; technologies: string[];
   operating: number; withdrawn: number; completion_rate: number;
