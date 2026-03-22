@@ -1856,41 +1856,52 @@ function SchemeAnalysisEssay({ onClose, cisRounds, ltesaRounds }: {
       let construction = 0
       let development = round.num_projects
 
-      // Apply known facts for specific rounds
-      if (round.id === 'cis-pilot-nsw' || round.id === 'ltesa-round-2') {
-        // CIS Pilot NSW / LTESA R2: Target COD Dec 2025 — VPPs likely operating, large BESS in construction
-        operating = 3 // VPPs
-        construction = 3 // Large BESS
-        development = 0
+      // Apply known facts for specific rounds (from ESG tracker data)
+      if (round.id === 'cis-pilot-nsw') {
+        // Smithfield operating, Orana + Liddell in construction, 3 VPPs (status unknown, likely operating)
+        operating = 1
+        construction = 2
+        development = 3
+      } else if (round.id === 'ltesa-round-2') {
+        // LTESA R2 has 4 projects: Smithfield BESS operating, Liddell + Orana in construction, Enel X VPP unknown
+        operating = 1
+        construction = 2
+        development = 1
       } else if (round.id === 'ltesa-round-1') {
-        // LTESA R1: May 2023, New England Solar + Stubbo Solar operating, Limondale BESS in construction, Coppabella in development
+        // New England Solar + Stubbo Solar operating, Limondale BESS in construction, Coppabella in development
         operating = 2
         construction = 1
         development = 1
       } else if (round.id === 'ltesa-round-4') {
-        // Flyers Creek is operating (May 2025)
+        // Flyers Creek operating (May 2025), Maryvale in development
         operating = 1
         construction = 0
         development = 1
       } else if (round.id === 'cis-pilot-sa-vic') {
-        // SA/VIC pilot — target mid-2027, projects should be in development/early construction
+        // 4 in construction (Wooreen, Mortlake, Tailem Bend, Clements Gap), 2 in development (Hallett, Springfield)
+        operating = 0
+        construction = 4
+        development = 2
+      } else if (round.id === 'ltesa-round-3') {
+        // Culcairn Solar operating, Uungula in construction, 3 in development
+        operating = 1
+        construction = 1
+        development = 3
+      } else if (round.id === 'cis-tender-1-nem-gen') {
+        // West Mokoan operating, Goulburn River in construction, 17 in development
+        operating = 1
+        construction = 1
+        development = 17
+      } else if (round.id === 'cis-tender-3-nem-disp') {
+        // Calala BESS + Mornington BESS in construction, 14 in development
         operating = 0
         construction = 2
-        development = 4
-      } else if (round.id === 'ltesa-round-3') {
-        operating = 0
-        construction = 1
-        development = 4
-      } else if (round.id === 'cis-tender-3-nem-disp') {
-        // Liddell Stage 2, Eraring BESS, Mortlake Stage 2 — Stage 1 projects are operating/late construction
-        operating = 0
-        construction = 3
-        development = 13
+        development = 14
       } else if (round.id === 'cis-tender-4-nem-gen') {
-        // MacIntyre Wind in construction
-        operating = 0
+        // Willogoleche 2 operating, Carmody's Hill in construction, 18 in development
+        operating = 1
         construction = 1
-        development = 19
+        development = 18
       } else if (monthsAgo < 12) {
         // Very recent rounds — all in development
         operating = 0
@@ -2054,7 +2065,7 @@ function SchemeAnalysisEssay({ onClose, cisRounds, ltesaRounds }: {
                 This combined round was the first CIS tender, co-delivered between the federal and NSW governments. It sought 930 MW of firming capacity and awarded 1,075 MW across six projects: three large BESS (Orana 460 MW, Liddell 250 MW, Smithfield 235 MW) and three Enel X virtual power plant portfolios (130 MW combined). The target COD was December 2025.
               </p>
               <p>
-                The VPP projects, being aggregations of distributed assets, have a shorter development timeline and are expected to have reached or to be nearing operational status. However, the three large battery projects face longer development and construction timelines. Based on current data, it appears the December 2025 target COD is likely to be missed by the larger BESS projects, though some may be in late-stage construction or commissioning.
+                The Smithfield Sydney Battery (235 MW) has reached commercial operation, and the Orana REZ Battery (460 MW) and Liddell Battery (250 MW) are both in construction. The VPP projects, being aggregations of distributed assets, have shorter development timelines and are expected to be at or nearing operational status. The December 2025 target COD was missed by the larger BESS projects, though they are progressing through construction.
               </p>
             </RoundAnalysis>
 
@@ -2064,7 +2075,7 @@ function SchemeAnalysisEssay({ onClose, cisRounds, ltesaRounds }: {
                 This combined round awarded 750 MW of generation (Uungula Wind Farm and Culcairn Solar) and 524 MW / 4,192 MWh of long-duration storage across three projects. The storage tranche notably included Hydrostor's Silver City advanced compressed air energy storage (A-CAES) project, the first of its kind to secure an LTESA.
               </p>
               <p>
-                With a target COD of before 2028, most projects from this round remain in the development or early construction phases. The Uungula Wind Farm has been progressing through planning and approvals. Based on current data, the timeline appears tight but some projects may still reach their targets.
+                With a target COD of before 2028, Culcairn Solar Farm (350 MW, Neoen) has reached commercial operation — strong progress. Uungula Wind Farm (400 MW, Squadron Energy) is in construction. The three storage projects — Richmond Valley BESS, Silver City A-CAES, and Goulburn River BESS — remain in development. The timeline is tight but achievable for some.
               </p>
             </RoundAnalysis>
 
@@ -2084,7 +2095,7 @@ function SchemeAnalysisEssay({ onClose, cisRounds, ltesaRounds }: {
                 The second CIS pilot expanded coverage to South Australia and Victoria, using the standard CISA "cap and collar" mechanism for the first time. Six battery projects totalling 995 MW / 3,626 MWh were awarded, significantly exceeding the 600 MW / 2,400 MWh target.
               </p>
               <p>
-                With a target COD of mid-2027, these projects are still over a year from their target dates. Based on current data, some projects are progressing through planning approvals and grid connection processes, while others are still in early development. The mid-2027 target is ambitious but still achievable for some.
+                With a target COD of mid-2027, four of the six projects — Wooreen Battery (350 MW), Mortlake BESS (135 MW), Tailem Bend BESS (200 MW) and Clements Gap Battery (60 MW) — are already in construction, which is strong progress. The remaining two (Springfield BESS and Hallett Battery) are in development. The mid-2027 target appears achievable for most projects in this round.
               </p>
             </RoundAnalysis>
 
@@ -2094,7 +2105,7 @@ function SchemeAnalysisEssay({ onClose, cisRounds, ltesaRounds }: {
                 Australia's largest renewable energy tender at the time, awarding 6.4 GW across 19 projects from 84 bids. The round was 4.5x oversubscribed. Notably, none of the Big 3 gen-tailers (Origin, AGL, EnergyAustralia) won contracts, suggesting smaller independent developers offered more competitive bids.
               </p>
               <p>
-                With a target COD of 31 December 2028 and projects announced only 15 months ago, all 19 projects remain in development stages. This is expected given the typical 3-5 year timeline from award to operation for large-scale generation projects. The key risk is whether enough projects can navigate planning, grid connection, and financing hurdles to reach COD by end-2028.
+                With a target COD of 31 December 2028, West Mokoan Solar Farm (300 MW) has already reached operation and Goulburn River Solar Farm (450 MW) is in construction — encouraging progress. The remaining 17 projects are still in development, which is expected given the typical 3-5 year timeline from award to operation for large-scale generation projects. The key risk is whether enough projects can navigate planning, grid connection, and financing hurdles to reach COD by end-2028.
               </p>
             </RoundAnalysis>
 
@@ -2124,7 +2135,7 @@ function SchemeAnalysisEssay({ onClose, cisRounds, ltesaRounds }: {
                 Australia's biggest battery storage tender awarded 4.13 GW / 15.37 GWh across 16 projects. All winners were lithium-ion BESS despite pumped hydro and other technologies being eligible. The round was 8.5x oversubscribed with 124 bids totalling approximately 34 GW.
               </p>
               <p>
-                Critically, several of the largest winners — Liddell Stage 2 (AGL), Eraring BESS (Origin) and Mortlake Stage 2 (Origin) — already have their Stage 1 projects in operation or late construction from earlier rounds. This significantly de-risks delivery as grid connections, planning approvals and site infrastructure are already in place. The 4+ year runway provides adequate time, though the sheer volume (16 projects across 4 states) will test grid connection capacity and supply chains.
+                With a 4+ year runway to the December 2029 target, there is adequate time for battery projects. The largest winners — Goulburn River Standalone BESS (450 MW, Lightsource bp), Teebar BESS (400 MW, Atmos Renewables), and Little River BESS (350 MW, ACEnergy) — are spread across NSW, VIC, QLD and SA. Calala BESS and Mornington BESS are already in construction, providing early positive signals. However, the sheer volume (16 projects across 4 states) will test grid connection capacity and supply chains.
               </p>
             </RoundAnalysis>
 
@@ -2134,7 +2145,7 @@ function SchemeAnalysisEssay({ onClose, cisRounds, ltesaRounds }: {
                 Twenty projects delivering 6.6 GW of generation plus 11.4 GWh of co-located storage, with a notable shift toward hybrid projects (12 of 20 include batteries). This round also awarded Tasmania's first CIS project (Bell Bay Wind Farm) and secured $1 billion in Australian steel commitments.
               </p>
               <p>
-                MacIntyre Wind (923 MW, ACCIONA/Ark Energy) is already in construction, providing an early positive signal for this round. With a target COD of 31 December 2030, the later date provides more runway, and the trend toward hybridisation may improve financing prospects as developers can stack revenue from both generation and storage.
+                Willogoleche 2 Wind Farm (108 MW) is already operating and Carmody's Hill Wind Farm (247 MW) is in construction, providing early positive signals. The largest winners — Liverpool Range Wind Stage 1 (634 MW, Tilt Renewables), Hexham Wind Farm (600 MW, AGL), and Tallawang Solar Hybrid (500 MW, Potentia Energy) — are still in development. With a target COD of 31 December 2030, the later date provides more runway, and the trend toward hybridisation may improve financing prospects.
               </p>
             </RoundAnalysis>
 
@@ -2157,7 +2168,7 @@ function SchemeAnalysisEssay({ onClose, cisRounds, ltesaRounds }: {
 
             <h4 className="text-sm font-semibold text-[var(--color-text)] mt-4 mb-2">The Delivery Gap</h4>
             <p>
-              Based on current data from the AURES Milestone Tracker and ESG Agreement Proxy, a small but growing number of awarded projects have reached operation. New England Solar Farm (720 MW) and Stubbo Solar Farm (400 MW) from LTESA Round 1, and Flyers Creek Wind Farm (~140 MW) from LTESA Round 4, are confirmed operating — demonstrating that the LTESA pathway can deliver. In the CIS Pilot NSW / LTESA Round 2, three VPP portfolios (130 MW) are operating and three large BESS projects (Orana 460 MW, Liddell 250 MW, Smithfield 235 MW) are in construction. However, the majority of the 90+ awarded projects across both programs remain in the development phase.
+              Based on current data from the AURES Milestone Tracker and ESG Agreement Proxy, a small but growing number of awarded projects have reached operation. New England Solar Farm (720 MW) and Stubbo Solar Farm (400 MW) from LTESA Round 1, Culcairn Solar Farm (350 MW) from LTESA Round 3, Flyers Creek Wind Farm (145 MW) from LTESA Round 4, West Mokoan Solar (300 MW) from CIS Tender 1, Smithfield Battery (235 MW) from CIS Pilot NSW, and Willogoleche 2 Wind (108 MW) from CIS Tender 4 are confirmed operating. In the CIS Pilot NSW / LTESA Round 2, two large BESS projects (Orana 460 MW, Liddell 250 MW) are in construction. However, the majority of the 90+ awarded projects across both programs remain in the development phase.
             </p>
 
             <h4 className="text-sm font-semibold text-[var(--color-text)] mt-4 mb-2">The Pipeline Challenge</h4>
@@ -3017,8 +3028,8 @@ function SchemeTimelineTab() {
         numProjects: 6,
         targetCOD: 'Dec 2025',
         headline: 'First-ever CIS round. Co-delivered with NSW Government. Firming focus.',
-        insight: 'VPPs likely operating. Three large BESS (Orana 460 MW, Liddell 250 MW, Smithfield 235 MW) in construction — Dec 2025 target likely missed by larger projects.',
-        notableWinners: ['Orana REZ Battery (460 MW) — Akaysha/BlackRock', 'Liddell Battery (250 MW) — AGL', 'Smithfield Battery (235 MW) — Iberdrola', '3× Enel X VPPs (130 MW)'],
+        insight: 'Smithfield Battery (235 MW) now operating. Two large BESS (Orana 460 MW, Liddell 250 MW) in construction. VPPs likely operating. Dec 2025 target COD missed by larger BESS projects.',
+        notableWinners: ['Orana REZ Battery (460 MW) — Akaysha/BlackRock', 'Liddell Battery (250 MW) — AGL', 'Smithfield Battery (235 MW) — Iberdrola — operating', '3× Enel X VPPs (130 MW)'],
         constructionPct: 50, confirmedPct: 0, confirmedCount: 0, confirmedMW: 0, notConfirmedCount: 0, notConfirmedMW: 0, totalMW: 1075,
       },
       {
@@ -3031,8 +3042,8 @@ function SchemeTimelineTab() {
         numProjects: 5,
         targetCOD: 'Before 2028',
         headline: 'First compressed air energy storage (A-CAES) project to secure government contract.',
-        insight: 'Most projects in development or early construction. Uungula Wind Farm progressing through planning. Timeline tight but some may still reach targets.',
-        notableWinners: ['Uungula Wind Farm (400 MW) — Squadron', 'Culcairn Solar (350 MW)', 'Silver City A-CAES (200 MW / 1,600 MWh) — Hydrostor', 'Wallerawang 9 BESS (200 MW / 1,592 MWh)'],
+        insight: 'Culcairn Solar Farm (350 MW) now operating — good progress. Uungula Wind Farm (400 MW) in construction. Silver City A-CAES is a first-of-kind technology. Timeline tight but achievable for some.',
+        notableWinners: ['Uungula Wind Farm (400 MW) — Squadron', 'Culcairn Solar Farm (350 MW) — Neoen — operating', 'Richmond Valley BESS (275 MW / 2,200 MWh) — Ark Energy', 'Silver City A-CAES (200 MW / 1,600 MWh) — Hydrostor'],
         constructionPct: 20, confirmedPct: 0, confirmedCount: 0, confirmedMW: 0, notConfirmedCount: 0, notConfirmedMW: 0, totalMW: 1274,
       },
       {
@@ -3040,14 +3051,14 @@ function SchemeTimelineTab() {
         scheme: 'LTESA',
         name: 'LTESA Round 4 — Generation',
         date: '2024-07-01',
-        capacityMW: 312,
+        capacityMW: 317,
         storageMWh: 372,
         numProjects: 2,
         targetCOD: '2026-2027',
         headline: 'Flyers Creek becomes first project with an LTESA to begin operations (May 2025).',
         insight: 'A milestone for the program. Smallest round — only 2 projects. Planned Q4 2024 generation tender cancelled to align with federal CIS, signalling increasing coordination.',
-        notableWinners: ['Flyers Creek Wind Farm (~140 MW) — OPERATING', 'Maryvale Solar + BESS (172 MW / 372 MWh)'],
-        constructionPct: 50, confirmedPct: 0, confirmedCount: 0, confirmedMW: 0, notConfirmedCount: 0, notConfirmedMW: 0, totalMW: 312,
+        notableWinners: ['Flyers Creek Wind Farm (145 MW) — OPERATING', 'Maryvale Solar + BESS (172 MW / 372 MWh)'],
+        constructionPct: 50, confirmedPct: 0, confirmedCount: 0, confirmedMW: 0, notConfirmedCount: 0, notConfirmedMW: 0, totalMW: 317,
       },
       {
         id: 'cis-pilot-sa-vic',
@@ -3059,8 +3070,8 @@ function SchemeTimelineTab() {
         numProjects: 6,
         targetCOD: 'Mid-2027',
         headline: 'First round using the standard CISA "cap and collar" mechanism. Expanded to SA and VIC.',
-        insight: 'All battery projects. Significantly exceeded the 600 MW target. Some in early construction, some still in development. Mid-2027 target ambitious but achievable for some.',
-        notableWinners: ['Tailem Bend BESS (300 MW) — Vena Energy', 'Mortlake BESS (225 MW) — Origin Energy', 'Wooreen BESS (175 MW) — EnergyAustralia', 'Hallett BESS (150 MW) — EnergyAustralia'],
+        insight: 'All battery projects. Significantly exceeded the 600 MW target. Four of six projects in construction (Wooreen, Mortlake, Tailem Bend, Clements Gap). Mid-2027 target ambitious but achievable for most.',
+        notableWinners: ['Wooreen Battery (350 MW / 1,400 MWh) — EnergyAustralia', 'Tailem Bend BESS (200 MW / 560 MWh) — Iberdrola', 'Springfield BESS (200 MW / 400 MWh) — Neoen', 'Mortlake BESS (135 MW / 270 MWh) — Origin'],
         constructionPct: 33, confirmedPct: 0, confirmedCount: 0, confirmedMW: 0, notConfirmedCount: 0, notConfirmedMW: 0, totalMW: 995,
       },
       {
@@ -3073,8 +3084,8 @@ function SchemeTimelineTab() {
         numProjects: 19,
         targetCOD: '31 Dec 2028',
         headline: "Australia's largest renewable energy tender. 19 projects from 84 bids (4.5× oversubscribed). None of the Big 3 gen-tailers won.",
-        insight: 'All 19 projects remain in development — expected given 3-5 year timeline. Key risk: whether enough projects can navigate planning, grid connection, and financing hurdles to reach COD by end-2028.',
-        notableWinners: ['Valley of the Winds (919 MW) — ACEN', 'Sandy Creek Solar (700 MW)', 'Spicers Creek Wind (700 MW) — Squadron', 'Junction Rivers Wind + BESS (585 MW)'],
+        insight: 'West Mokoan Solar (300 MW) now operating. Goulburn River Solar (450 MW) in construction. Remaining 17 projects in development — expected given 3-5 year timeline. Key risk: whether enough can navigate planning, grid connection, and financing hurdles to reach COD by end-2028.',
+        notableWinners: ['Valley of the Winds (936 MW) — ACEN', 'Sandy Creek Solar (700 MW) — Lightsource bp', 'Spicers Creek Wind (700 MW) — Squadron', 'Junction Rivers Wind + BESS (585 MW) — Windlab'],
         constructionPct: 0, confirmedPct: 0, confirmedCount: 0, confirmedMW: 0, notConfirmedCount: 0, notConfirmedMW: 0, totalMW: 6380,
       },
       {
@@ -3088,7 +3099,7 @@ function SchemeTimelineTab() {
         targetCOD: 'Oct 2027',
         headline: 'First CIS tender for Western Australia. 7× oversubscribed. All battery projects.',
         insight: 'Battery projects have shorter construction timelines. Oct 2027 target appears achievable provided grid connection proceeds without major delays.',
-        notableWinners: ['Collie Battery (250 MW) — Synergy', 'Kwinana Battery (204 MW) — Synergy', 'Wandoan South BESS (100 MW)', 'Merredin BESS (100 MW)'],
+        notableWinners: ['Boddington Giga Battery (324 MW) — PGS Energy', 'Muchea Big Battery (150 MW) — Neoen', 'Merredin Big Battery (100 MW) — Atmos Renewables', 'Waroona REP Stage 1 (80 MW) — Frontier Energy'],
         constructionPct: 0, confirmedPct: 0, confirmedCount: 0, confirmedMW: 0, notConfirmedCount: 0, notConfirmedMW: 0, totalMW: 654,
       },
       {
@@ -3097,7 +3108,7 @@ function SchemeTimelineTab() {
         name: 'LTESA Round 5 — Long Duration Storage',
         date: '2025-02-27',
         capacityMW: 1025,
-        storageMWh: 11990,
+        storageMWh: 13790,
         numProjects: 3,
         targetCOD: 'Before 2030',
         headline: 'First pumped hydro LTESA: Phoenix at 800 MW with 40-year contract — longest government-backed energy contract in Australian history.',
@@ -3115,8 +3126,8 @@ function SchemeTimelineTab() {
         numProjects: 16,
         targetCOD: '31 Dec 2029',
         headline: "Australia's biggest battery tender. 4.13 GW / 15.37 GWh across 16 projects. 8.5× oversubscribed (124 bids, ~34 GW).",
-        insight: 'Several key winners already have Stage 1 projects in operation or late construction from earlier rounds — Liddell (AGL), Eraring (Origin) and Mortlake (Origin) are well advanced. This de-risks delivery for their Stage 2 expansions. Sheer volume (16 projects across 4 states) will still test grid connection and supply chains.',
-        notableWinners: ['Liddell Stage 2 (500 MW) — AGL — Stage 1 operating', 'Eraring BESS (460 MW) — Origin — Stage 1 operating', 'Mortlake Stage 2 (450 MW) — Origin — Stage 1 in late construction', 'Darlington Point BESS (400 MW)'],
+        insight: 'All lithium-ion BESS despite pumped hydro being eligible. Calala BESS and Mornington BESS already in construction. 4+ year runway provides adequate time, but sheer volume (16 projects across 4 states) will test grid connection and supply chains.',
+        notableWinners: ['Goulburn River Standalone BESS (450 MW) — Lightsource bp', 'Teebar BESS (400 MW) — Atmos Renewables', 'Little River BESS (350 MW) — ACEnergy', 'Swallow Tail BESS (300 MW) — AMPYR'],
         constructionPct: 0, confirmedPct: 0, confirmedCount: 0, confirmedMW: 0, notConfirmedCount: 0, notConfirmedMW: 0, totalMW: 4130,
       },
       {
@@ -3124,14 +3135,14 @@ function SchemeTimelineTab() {
         scheme: 'CIS',
         name: 'CIS Tender 4 — NEM Generation',
         date: '2025-10-09',
-        capacityMW: 6600,
-        storageMWh: 11400,
+        capacityMW: 6640,
+        storageMWh: 11444,
         numProjects: 20,
         targetCOD: '31 Dec 2030',
         headline: '6.6 GW generation + 11.4 GWh co-located storage. 12 of 20 projects are hybrids. Tasmania\'s first CIS project. $1B Australian steel commitments.',
-        insight: 'MacIntyre Wind (923 MW) already in construction — a strong early signal for this round. Later target date provides more runway. Trend toward hybridisation (12 of 20 projects) may improve financing as developers stack revenue from generation + storage.',
-        notableWinners: ['Goyder Renewables (1,300 MW) — Neoen', 'MacIntyre Wind (923 MW) — ACCIONA/Ark — in construction', 'Bell Bay Wind (450 MW) — TAS first CIS', 'Walla Walla Solar (406 MW)'],
-        constructionPct: 0, confirmedPct: 0, confirmedCount: 0, confirmedMW: 0, notConfirmedCount: 0, notConfirmedMW: 0, totalMW: 6600,
+        insight: 'Willogoleche 2 Wind (108 MW) already operating and Carmody\'s Hill Wind (247 MW) in construction — early positive signals. Later target date provides more runway. Trend toward hybridisation (12 of 20 projects) may improve financing as developers stack revenue from generation + storage.',
+        notableWinners: ['Liverpool Range Wind Stage 1 (634 MW) — Tilt Renewables', 'Hexham Wind Farm (600 MW) — AGL', 'Tallawang Solar Hybrid (500 MW) — Potentia Energy', 'Bell Bay Wind (224 MW) — Equis — TAS first CIS'],
+        constructionPct: 0, confirmedPct: 0, confirmedCount: 0, confirmedMW: 0, notConfirmedCount: 0, notConfirmedMW: 0, totalMW: 6640,
       },
       {
         id: 'ltesa-round-6',
