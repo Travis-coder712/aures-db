@@ -80,7 +80,7 @@ NSW_COAL_PLANTS = [
     },
     {
         "name": "Mt Piper Power Station",
-        "facility_code": "MTPIPER",
+        "facility_code": "MP",
         "owner": "EnergyAustralia",
         "capacity_mw": 1400,
         "units": 2,
@@ -90,7 +90,7 @@ NSW_COAL_PLANTS = [
         "closure_date": "2040-12-31",
         "closure_note": "Latest closure among NSW plants (2040). Has had recurring availability issues.",
         "battery_replacement": None,
-        "duids": ["MPP_1", "MPP_2"],
+        "duids": ["MP1", "MP2"],
     },
 ]
 
@@ -134,33 +134,48 @@ def fetch_facility_data(facility_codes, metrics, interval, date_start, date_end)
     return resp.json()
 
 
-def process_facility_response(response_data, metric_name):
+def build_unit_to_facility_map():
+    """Map unit codes (BW01, ER01, VP5, MP1, etc.) to facility codes."""
+    unit_map = {}
+    for plant in NSW_COAL_PLANTS:
+        fc = plant["facility_code"]
+        for duid in plant.get("duids", []):
+            unit_map[duid] = fc
+    return unit_map
+
+
+def process_facility_response(response_data, metric_name, interval_type="1M"):
     """
     Process API response into {facility_code: {period: value}} structure.
-    Handles the OpenElectricity response format: data[0].results[].columns + data[]
+    The API returns data by unit_code (BW01, ER01, etc.) — we sum units
+    back into their parent facility codes.
     """
     result = defaultdict(lambda: defaultdict(float))
+    unit_map = build_unit_to_facility_map()
 
     if not response_data or "data" not in response_data:
         return result
 
-    for series in response_data.get("data", []):
-        results = series.get("results", [series])  # Handle both formats
-        for r in results:
-            columns = r.get("columns", {})
-            facility_code = columns.get("facility_code", "")
-            metric = columns.get("metric", "")
+    for envelope in response_data.get("data", []):
+        env_metric = envelope.get("metric", "")
+        if env_metric != metric_name:
+            continue
 
-            if metric != metric_name:
+        for r in envelope.get("results", []):
+            columns = r.get("columns", {})
+            unit_code = columns.get("unit_code", "")
+
+            # Map unit code to facility code
+            facility_code = unit_map.get(unit_code, "")
+            if not facility_code:
                 continue
 
             for point in r.get("data", []):
                 if len(point) >= 2 and point[1] is not None:
                     timestamp = point[0]
                     value = float(point[1])
-                    # Extract year or year-month from timestamp
                     dt = datetime.fromisoformat(timestamp.replace("Z", "+00:00"))
-                    period_key = dt.strftime("%Y") if "1y" in str(r.get("interval", "")) else dt.strftime("%Y-%m")
+                    period_key = dt.strftime("%Y") if interval_type == "1y" else dt.strftime("%Y-%m")
                     result[facility_code][period_key] += value
 
     return result
@@ -257,10 +272,11 @@ def main():
     # Validate date range (free plan: last 367 days)
     today = datetime.now()
     earliest_allowed = today - timedelta(days=365)
-    start_year = max(args.start_year, earliest_allowed.year)
-    end_year = min(args.end_year, today.year)
+    # Use exact date, not just year, to stay within API limits
+    date_start = max(datetime(args.start_year, 1, 1), earliest_allowed).strftime("%Y-%m-%d")
+    date_end = today.strftime("%Y-%m-%d")
 
-    print(f"Fetching coal generation data for {start_year}-{end_year}")
+    print(f"Fetching coal generation data from {date_start} to {date_end}")
 
     facility_codes = [p["facility_code"] for p in NSW_COAL_PLANTS]
 
@@ -270,12 +286,12 @@ def main():
         facility_codes,
         metrics=["energy", "market_value"],
         interval="1y",
-        date_start=f"{start_year}-01-01",
-        date_end=f"{end_year}-12-31",
+        date_start=date_start,
+        date_end=date_end,
     )
 
-    annual_energy = process_facility_response(annual_response, "energy") if annual_response else {}
-    annual_market_value = process_facility_response(annual_response, "market_value") if annual_response else {}
+    annual_energy = process_facility_response(annual_response, "energy", "1y") if annual_response else {}
+    annual_market_value = process_facility_response(annual_response, "market_value", "1y") if annual_response else {}
 
     # Fetch monthly data for seasonal analysis
     print("\n=== Monthly Data (energy + market_value) ===")
@@ -283,8 +299,8 @@ def main():
         facility_codes,
         metrics=["energy", "market_value"],
         interval="1M",
-        date_start=f"{start_year}-01-01",
-        date_end=f"{end_year}-12-31",
+        date_start=date_start,
+        date_end=date_end,
     )
 
     monthly_energy = process_facility_response(monthly_response, "energy") if monthly_response else {}
