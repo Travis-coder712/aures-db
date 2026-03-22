@@ -2897,6 +2897,45 @@ interface TimelineRound {
   totalMW: number
 }
 
+/** Match a notable winner string to an ESG project and return a status color.
+ *  Green (#22c55e)  = construction / operating / commissioning
+ *  Amber (#f59e0b)  = confirmed agreement but pre-construction
+ *  Muted  (var)      = not confirmed / unknown
+ */
+function getNotableProjectColor(winnerStr: string, roundId: string): { bullet: string; text: string; label: string } {
+  // Extract the project name (everything before the first parenthesis or em-dash)
+  const nameMatch = winnerStr.match(/^([^(—]+)/)
+  if (!nameMatch) return { bullet: '#636e72', text: 'text-[var(--color-text-muted)]', label: '' }
+
+  const searchName = nameMatch[1].trim().toLowerCase()
+
+  // Find matching project in this round
+  const roundProjects = ESG_TRACKER_PROJECTS.filter(p => p.roundId === roundId)
+  const match = roundProjects.find(p => {
+    const pName = p.name.toLowerCase()
+    // Check if either name contains the other, or they share a significant prefix
+    return pName.includes(searchName) || searchName.includes(pName) ||
+      // Also match on first 2+ significant words
+      searchName.split(/\s+/).slice(0, 2).join(' ') === pName.split(/\s+/).slice(0, 2).join(' ')
+  })
+
+  if (!match) return { bullet: '#636e72', text: 'text-[var(--color-text-muted)]', label: '' }
+
+  if (['construction', 'commissioning'].includes(match.stage)) {
+    return { bullet: '#3b82f6', text: 'text-blue-400', label: 'Construction' }
+  }
+  if (match.stage === 'operating') {
+    return { bullet: '#22c55e', text: 'text-emerald-400', label: 'Operating' }
+  }
+  if (match.agreementStatus === 'executed' || match.agreementStatus === 'likely_executed') {
+    return { bullet: '#22c55e', text: 'text-emerald-400/80', label: 'Confirmed' }
+  }
+  if (match.agreementStatus === 'awarded') {
+    return { bullet: '#f59e0b', text: 'text-amber-400/80', label: 'Awarded' }
+  }
+  return { bullet: '#636e72', text: 'text-[var(--color-text-muted)]', label: '' }
+}
+
 function SchemeTimelineTab() {
   // Build timeline data from ESG + round data
   const timelineRounds = useMemo<TimelineRound[]>(() => {
@@ -3267,12 +3306,32 @@ function SchemeTimelineTab() {
                   <div className="bg-[var(--color-bg)] border border-[var(--color-border)] rounded-lg p-3">
                     <p className="text-[9px] uppercase tracking-wider text-[var(--color-text-muted)] font-semibold mb-1.5">Notable Projects</p>
                     <div className="space-y-0.5">
-                      {round.notableWinners.map((w, j) => (
-                        <p key={j} className="text-[10px] text-[var(--color-text-muted)] flex items-start gap-1.5">
-                          <span className="w-1 h-1 rounded-full mt-1.5 shrink-0" style={{ backgroundColor: schemeColor }} />
-                          {w}
-                        </p>
-                      ))}
+                      {round.notableWinners.map((w, j) => {
+                        const status = getNotableProjectColor(w, round.id)
+                        return (
+                          <p key={j} className={`text-[10px] flex items-start gap-1.5 ${status.text}`}>
+                            <span className="w-1.5 h-1.5 rounded-full mt-1 shrink-0" style={{ backgroundColor: status.bullet }} />
+                            <span className="flex-1">
+                              {w}
+                              {status.label && (
+                                <span className={`ml-1.5 text-[8px] font-semibold uppercase tracking-wider px-1 py-0.5 rounded ${
+                                  status.label === 'Operating' ? 'bg-emerald-500/15 text-emerald-400' :
+                                  status.label === 'Construction' ? 'bg-blue-500/15 text-blue-400' :
+                                  status.label === 'Confirmed' ? 'bg-emerald-500/10 text-emerald-400/70' :
+                                  'bg-amber-500/10 text-amber-400/70'
+                                }`}>{status.label}</span>
+                              )}
+                            </span>
+                          </p>
+                        )
+                      })}
+                    </div>
+                    {/* Legend */}
+                    <div className="flex items-center gap-3 mt-2 pt-2 border-t border-[var(--color-border)]">
+                      <span className="flex items-center gap-1 text-[8px] text-emerald-400"><span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />Operating/Confirmed</span>
+                      <span className="flex items-center gap-1 text-[8px] text-blue-400"><span className="w-1.5 h-1.5 rounded-full bg-blue-500" />Construction</span>
+                      <span className="flex items-center gap-1 text-[8px] text-amber-400"><span className="w-1.5 h-1.5 rounded-full bg-amber-500" />Awarded</span>
+                      <span className="flex items-center gap-1 text-[8px] text-[var(--color-text-muted)]"><span className="w-1.5 h-1.5 rounded-full bg-[#636e72]" />Not confirmed</span>
                     </div>
                   </div>
                 </div>
