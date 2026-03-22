@@ -26,7 +26,7 @@ Australia is in the middle of the biggest transformation of its electricity syst
 
 The information exists, but it's scattered across dozens of websites, government databases, news articles, company announcements, and paywalled reports. If you want to know basic things like "what battery projects are being built in NSW?" or "who makes the turbines for that wind farm?" or "has this project been delayed?", you have to piece it together yourself from half a dozen sources.
 
-**AURES fixes this.** It brings together information from 10+ public sources — including AEMO registers, government scheme data, RSS news feeds, OpenElectricity performance data, and AEMO ISP planning documents — into one searchable, browsable database with built-in analytics. It works on your phone, has a powerful cross-entity search (press Cmd+K), and includes an Intelligence Layer with 8 analytical features covering risk scoring, performance benchmarking, and market trends.
+**AURES fixes this.** It brings together information from 10+ public sources — including AEMO registers, government scheme data, RSS news feeds, OpenElectricity performance data, and AEMO ISP planning documents — into one searchable, browsable database with built-in analytics. It works on your phone, has a powerful cross-entity search (press Cmd+K), and includes an Intelligence Layer with 10 analytical features covering risk scoring, performance benchmarking, market trends, EIS document analysis, and developer data quality auditing.
 
 ---
 
@@ -79,7 +79,7 @@ For projects that have won government contracts (CIS or LTESA) but haven't been 
 
 ### Analyse market trends with the Intelligence Layer
 
-AURES includes 8 intelligence features that go beyond raw data:
+AURES includes 10 intelligence features that go beyond raw data:
 - **Scheme Risk Scoring** — traffic-light risk assessment for CIS/LTESA projects
 - **COD Drift Analysis** — delay patterns by technology, state, and developer
 - **Wind Resource Assessment** — capacity factor predictions based on location
@@ -88,6 +88,8 @@ AURES includes 8 intelligence features that go beyond raw data:
 - **Developer Scores** — A-F execution grading based on delivery track record
 - **Revenue Intelligence** — revenue trends and benchmarks by technology
 - **Grid Connection Analysis** — REZ congestion and connection bottleneck mapping
+- **EIS/EIA Technical Intelligence** — 98 projects with extracted technical specs, EIS vs actual performance comparison, coverage gap tracking
+- **Developer Data Quality** — website cross-referencing, SPV correction identification, JV partnership documentation
 
 ### Stay up to date with the News Feed
 
@@ -160,7 +162,7 @@ Full lifecycle timeline for each project. Ownership changes with transaction val
 Operational performance league tables. Capacity factors, revenue, curtailment, loss factors. Best and worst performers by technology and state. BESS revenue breakdown (arbitrage vs FCAS).
 
 **Level 5: INTELLIGENCE** — "What patterns explain performance?"
-8 intelligence features: scheme risk scoring (17 tracked projects), COD drift analysis, wind resource assessment, Dunkelflaute analysis, energy mix tracking, developer execution scoring (A-F grades), revenue intelligence, and grid connection bottleneck analysis.
+10 intelligence features: scheme risk scoring (17 tracked projects), COD drift analysis, wind resource assessment, Dunkelflaute analysis, energy mix tracking, developer execution scoring (A-F grades), revenue intelligence, grid connection bottleneck analysis, EIS/EIA technical intelligence (98 projects), and developer data quality auditing (20 developers cross-referenced).
 
 **Level 6: INSIGHT** — "What should we be watching?"
 News feed integration (RenewEconomy, PV Magazine, Energy Storage News) with fuzzy project matching. Multi-source analysis of contested topics. Market share trends and competitive dynamics.`,
@@ -324,8 +326,8 @@ Bottom navigation with tabs on mobile. Progressive disclosure — simple surface
     readingTime: '8 min read',
     content: `# AURES — Build Tracker
 
-> **Last Updated:** 2026-03-14
-> **Version:** v1.7.0
+> **Last Updated:** 2026-03-22
+> **Version:** v2.1.0
 > **Current Phase:** Phase 3 — Performance Analytics (in progress)
 
 ---
@@ -337,16 +339,18 @@ Bottom navigation with tabs on mobile. Progressive disclosure — simple surface
 | Phase 1: Foundation | ✅ Complete | 100% |
 | Phase 2: CIS/LTESA/REZ | ✅ Complete | 100% |
 | Phase 2.5: NEM Dashboard | ✅ Complete | 100% |
-| Phase 3: Performance Analytics | 🔧 In Progress | 85% |
+| Phase 3: Performance Analytics | 🔧 In Progress | 90% |
 | Phase 4: Confidence & Profiles | ✅ Complete | 100% |
 | Phase 5: Data Enrichment Pipeline | ✅ Complete | 100% |
 | Phase 6: BESS Deep Dive | ✅ Complete | 100% |
 | Phase 7: Timeline & Analytics | ✅ Complete | 100% |
+| Phase 8: EIS/EIA Intelligence | ✅ Complete | 100% |
+| Phase 9: Developer Data Quality | ✅ Complete | 100% |
 | Ongoing: Data Quality & Enrichment | 🔄 Continuous | — |
 
 ---
 
-## Platform Stats (as of 14 March 2026)
+## Platform Stats (as of 22 March 2026)
 
 | Metric | Count |
 |--------|-------|
@@ -359,10 +363,12 @@ Bottom navigation with tabs on mobile. Progressive disclosure — simple surface
 | OEM/supplier records | 217 |
 | Offtake/PPA agreements | 85 |
 | Projects with timelines | 677 |
-| Frontend pages | 25 |
+| Frontend pages | 27 |
 | Developers scored | 152 |
+| Developers audited (data quality) | 20 |
+| EIS projects extracted | 98 |
 | Scheme-risk tracked projects | 17 |
-| Intelligence features | 8 |
+| Intelligence features | 10 |
 | OEM profiles | 34 |
 | Contractor profiles | 45 |
 | Offtaker profiles | 31 |
@@ -403,7 +409,7 @@ Bottom navigation with tabs on mobile. Progressive disclosure — simple surface
 - BESS capex analytics page with cost curves
 - Volume-weighted price and marginal loss factor tracking
 - OEM market share pie charts (by projects, MW, MWh)
-- Intelligence Layer: 8 features (scheme risk, COD drift, wind resource, Dunkelflaute, energy mix, developer scores, revenue intelligence, grid connection)
+- Intelligence Layer: 10 features (scheme risk, COD drift, wind resource, Dunkelflaute, energy mix, developer scores, revenue intelligence, grid connection, EIS/EIA technical intelligence, developer data quality)
 - News Feed: RSS import with project fuzzy-matching
 - OpenElectricity Monthly data import (seasonal analysis)
 - AEMO ISP data import (REZ hosting capacity)
@@ -452,9 +458,44 @@ Bottom navigation with tabs on mobile. Progressive disclosure — simple surface
 - Developer grouping refinements
 - Data sources page
 
+## Phase 8: EIS/EIA Intelligence ✅
+
+- EIS Technical page with 6 tabs (Wind, BESS, Solar, EIS vs Actual, Coverage, Grid Connection)
+- 98 EIS projects extracted across 4 technologies (wind, BESS, solar, pumped hydro)
+- EIS vs Actual CF comparison with 21 operating wind projects and interactive charts
+- Coverage gap tracker with 153 identified projects and sortable tables
+- PDF opportunity flagging system (61 opportunities prioritised by data gap severity)
+- Grid connection analysis: voltage distribution (clickable drill-down), NSP table (sortable), connection distance analysis
+- Connection substation data filled for 22 solar projects
+
+## Phase 9: Developer Data Quality ✅
+
+- Developer market share pie charts (Top Developers by MW/projects, By Technology)
+- Developer Data Quality tab with 3 sub-sections:
+  - Website Comparison: 20 top developer websites cross-referenced against AURES database
+  - SPV Corrections: 610 project developer corrections (51 high confidence) with searchable/sortable/filterable table
+  - Joint Ventures: 4 documented JV partnerships
+- Data quality generator script (pipeline/generators/generate_developer_quality.py)
+- Mobile version check accessibility (tappable header badge + slide-out menu button)
+
 ---
 
 ## Recent Data Enrichment Sessions
+
+### EIS Intelligence & Developer Data Quality — 2026-03-22
+- Built EIS/EIA Technical Intelligence page with 6 tabs: Wind, BESS, Solar, EIS vs Actual, Coverage, Grid Connection
+- Extracted EIS data for 98 projects (33 wind, 36 BESS, 27 solar, 2 pumped hydro) — 100% coverage of available EIS documents
+- Added EIS vs Actual CF comparison for 21 operating wind projects with grouped bar, scatter, and delta charts
+- Built EIS Coverage Gap tracker with sortable tables, PDF opportunity flagging (61 opportunities: 16 high, 37 medium, 8 low priority)
+- Added clickable voltage distribution chart drill-down and sortable NSP table on Grid Connection tab
+- Created Developer Data Quality audit tab on Developers page:
+  - Cross-referenced 20 top developer websites against AURES database (126 discrepancies found)
+  - Identified 610 SPV-to-parent developer corrections (51 high confidence)
+  - Documented 4 joint venture partnerships (Pottinger/AGL+Someva, MacIntyre/Acciona+Ark, Golden Plains/TagEnergy+Ingka, Yanco Delta/Origin+ViRYA)
+- Added developer market share donut pie charts (by MW and project count) and technology breakdown pie chart
+- Made version check button accessible on mobile (tappable header badge + slide-out menu button)
+- Bumped version from v1.7.0 → v2.0.0 → v2.1.0
+- New files: eis-comparison.json, eis-coverage.json, eis-pdf-opportunities.json, developer-data-quality.json, generate_developer_quality.py
 
 ### Wind Farm Deep Dive — 2026-03-12/13
 - Researched all 90 operating/commissioning/construction wind farms
@@ -476,7 +517,7 @@ Bottom navigation with tabs on mobile. Progressive disclosure — simple surface
 
 ## Recently Completed
 
-### Intelligence Layer (8 features)
+### Intelligence Layer (10 features)
 - ✅ Scheme Risk — CIS/LTESA risk scoring with traffic light system (17 tracked projects)
 - ✅ COD Drift Analysis — by technology, state, developer
 - ✅ Wind Resource Assessment — capacity factor analysis
@@ -485,6 +526,8 @@ Bottom navigation with tabs on mobile. Progressive disclosure — simple surface
 - ✅ Developer Scores — execution grading A-F (152 developers scored)
 - ✅ Revenue Intelligence — revenue trends by technology
 - ✅ Grid Connection — REZ congestion analysis
+- ✅ EIS/EIA Technical Intelligence — 98 projects extracted (wind, BESS, solar, pumped hydro), EIS vs actual CF comparison, coverage gap tracking, PDF opportunity flagging
+- ✅ Developer Data Quality — website cross-referencing (20 developers), 610 SPV corrections, 4 JV partnerships, market share pie charts
 
 ### UX Enhancements
 - ✅ Search: Cmd+K modal with cross-entity search (projects, developers, OEMs, contractors, offtakers), fuzzy matching via Fuse.js, recent searches
@@ -510,7 +553,6 @@ Bottom navigation with tabs on mobile. Progressive disclosure — simple surface
 > **See the full [Strategic Roadmap](/guides/strategic-roadmap) for the complete plan.**
 
 ### Remaining Intelligence Features
-- ⏳ EIS Document Intelligence — LLM-powered extraction from Environmental Impact Statements
 - ⏳ Equipment Supply Chain Intelligence — OEM market share trends and lead time tracking
 
 ### Remaining Data Sources
@@ -1272,10 +1314,10 @@ If you spot a discrepancy, it's likely due to capacity differences (registered v
     readingTime: '20 min read',
     content: `# AURES Strategic Roadmap
 
-> **Last Updated:** March 2026
-> **Version:** v1.7.0 | **Projects:** 1,067 | **Intelligence Features:** 8 | **Developers Scored:** 152
+> **Last Updated:** 22 March 2026
+> **Version:** v2.1.0 | **Projects:** 1,067 | **Intelligence Features:** 10 | **Developers Scored:** 152 | **EIS Projects:** 98
 
-This document is the master plan for AURES. It covers a comprehensive review of the platform's code and infrastructure, UX quality, data enhancement strategy, and the design of 10 intelligence layer features that will transform AURES from a database into an analytical platform.
+This document is the master plan for AURES. It covers a comprehensive review of the platform's code and infrastructure, UX quality, data enhancement strategy, and the design of the intelligence layer features that transform AURES from a database into an analytical platform.
 
 ---
 
@@ -1449,7 +1491,7 @@ New api_rate_limits table tracking daily usage per API. OpenElectricity budget: 
 
 ---
 
-## Part 4: The Intelligence Layer — 10 Features (8 Complete, 2 Planned)
+## Part 4: The Intelligence Layer — 10 Features (9 Complete, 1 Planned)
 
 ### Feature 1: CIS/LTESA Project Risk Tracker ✅ COMPLETE
 
@@ -1506,21 +1548,22 @@ New api_rate_limits table tracking daily usage per API. OpenElectricity budget: 
 
 ---
 
-### Feature 4: EIS Document Intelligence ⏳ PLANNED
+### Feature 4: EIS/EIA Technical Intelligence ✅ COMPLETE
 
-**What it does:** Extracts structured technical specifications from Environmental Impact Statement PDFs. Creates a searchable database of parameters like hub heights, rotor diameters, noise limits, and grid connection details.
+**What it does:** Extracts and structures technical specifications from Environmental Impact Statement PDFs across all technologies. Provides EIS vs actual performance comparison for operating projects. Tracks coverage gaps and flags PDF download opportunities for future data extraction.
 
-**Why it matters:** EIS documents contain the most detailed technical information about a project — data that exists nowhere else publicly. But it is buried in thousand-page PDFs. Extracting and structuring this data unlocks deep technical comparison and due diligence.
+**Why it matters:** EIS documents contain the most detailed technical information about a project — data that exists nowhere else publicly. Extracting and structuring this data unlocks deep technical comparison and due diligence. Comparing EIS predictions against actual operational performance reveals systematic optimism bias in environmental approvals.
 
 **Key questions it answers:**
-- What hub height and rotor diameter is proposed for this wind farm?
-- What were the measured wind speeds at the project site?
-- What are the noise limits and setback requirements?
-- What grid connection voltage and transformer capacity is planned?
+- What hub height, rotor diameter, and capacity factor was assumed in this wind farm's EIS?
+- How does the EIS-predicted capacity factor compare to actual operational performance?
+- What grid connection voltage, substation, and distance is planned for each project?
+- Which projects have EIS documents available but data not yet extracted?
+- What is the EIS coverage rate across the project database?
 
-**Data sources:** EPBC referral links, NSW Planning Portal attachments, developer websites.
+**Data sources:** eis_technical_specs table (SQLite), performance_annual (for EIS vs actual comparison), manually curated coverage gap and PDF opportunity data.
 
-**UI:** New "Technical Specifications" tab on ProjectDetail. Comparison table for competing projects. Searchable parameter database. Source attribution linking back to EIS page numbers.
+**UI:** 6-tab page — Wind specs, BESS specs, Solar specs, EIS vs Actual (grouped bar, scatter, delta charts), Coverage (extracted + gap tables with PDF opportunity flags), Grid Connection (voltage distribution with drill-down, NSP table, connection distance analysis). 98 projects extracted (33 wind, 36 BESS, 27 solar, 2 pumped hydro). 21 operating wind projects with EIS vs actual CF comparison showing average -11.4% delta.
 
 ---
 
@@ -1634,23 +1677,29 @@ New api_rate_limits table tracking daily usage per API. OpenElectricity budget: 
 
 ## Part 5: What's Next
 
-### Completed Summary (as of v1.7.0, March 2026)
+### Completed Summary (as of v2.1.0, 22 March 2026)
 
 **Infrastructure:** ✅ Code splitting, error boundaries, icon extraction, pipeline automation (launchd + admin.py --auto)
-**UX:** ✅ Cmd+K search, accessibility, mobile polish, data viz export
-**Data Sources:** ✅ News RSS (3 feeds), OE monthly, AEMO ISP. ⏳ NSW Planning Portal, Global Wind Atlas, FCAS data
-**Intelligence:** ✅ 8 of 10 features complete. ⏳ EIS Document Intelligence, Supply Chain Intelligence
+**UX:** ✅ Cmd+K search, accessibility, mobile polish, data viz export, mobile version check
+**Data Sources:** ✅ News RSS (3 feeds), OE monthly, AEMO ISP, EIS documents (98 projects). ⏳ NSW Planning Portal, Global Wind Atlas, FCAS data
+**Intelligence:** ✅ 10 of 11 features complete. ⏳ Supply Chain Intelligence
+**Developer Quality:** ✅ 20 developer websites audited, 610 SPV corrections, 4 JV partnerships documented
 
 ### Remaining Work
 
-**Intelligence Features (2 remaining)**
-- Feature 4: EIS Document Intelligence — LLM-powered extraction from Environmental Impact Statement PDFs (hub heights, rotor diameters, wind speeds, noise limits)
+**Intelligence Features (1 remaining)**
 - Feature 8: Equipment Supply Chain Intelligence — OEM market share trends over time, technology evolution, lead time tracking
 
 **Data Sources (3 remaining)**
 - NSW Planning Portal API — DA status, determination dates, conditions of consent
 - Global Wind Atlas — modeled wind speed at hub height for every geolocated wind project
 - FCAS revenue data — pending OpenElectricity API support for FCAS market endpoints
+
+**Data Quality Actions (from Developer Audit)**
+- Apply high-confidence SPV corrections (51 projects) to SQLite database
+- Add EDF Renewables to developer data (Dawson Wind 600MW, Banana Range Wind 230MW in development)
+- Update JV developer assignments (Pottinger = Someva/AGL, MacIntyre = Acciona/Ark Energy)
+- Extract EIS data for 61 flagged PDF opportunities (16 high priority)
 
 **Platform Evolution**
 - Testing framework (Vitest + @testing-library/react)
