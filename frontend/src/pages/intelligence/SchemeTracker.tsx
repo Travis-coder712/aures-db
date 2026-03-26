@@ -8,6 +8,7 @@ import ScrollableTable from '../../components/common/ScrollableTable'
 import { ROUND_INFO } from '../../data/scheme-round-info'
 import type { RoundInfo } from '../../data/scheme-round-info'
 import { ESG_TRACKER_PROJECTS, ROUND_ESG_SUMMARIES } from '../../data/esg-tracker-data'
+import { CIS_PROJECTS, LTESA_PROJECTS } from '../../data/scheme-rounds'
 import type { ESGTrackerProject, PublicationStatus, AgreementStatus } from '../../data/esg-tracker-data'
 
 // ============================================================
@@ -47,9 +48,9 @@ function fmtMW(mw: number): string {
 // Component
 // ============================================================
 
-const TABS = ['overview', 'tracker', 'watchlist', 'esg', 'timeline'] as const
+const TABS = ['overview', 'tracker', 'watchlist', 'esg', 'cis-success', 'timeline'] as const
 type Tab = typeof TABS[number]
-const TAB_LABELS: Record<Tab, string> = { overview: 'Overview', tracker: 'Milestone Tracker', watchlist: 'Key Projects', esg: 'ESG Agreement Proxy', timeline: 'CIS/LTESA Timeline' }
+const TAB_LABELS: Record<Tab, string> = { overview: 'Overview', tracker: 'Milestone Tracker', watchlist: 'Key Projects', esg: 'ESG Agreement Proxy', 'cis-success': 'CIS Success', timeline: 'CIS/LTESA Timeline' }
 
 export default function SchemeTracker() {
   const [activeTab, setActiveTab] = useState<Tab>('overview')
@@ -504,6 +505,9 @@ export default function SchemeTracker() {
       {/* ESG Agreement Proxy Tab */}
       {activeTab === 'esg' && (
         <ESGAgreementProxyTab />
+      )}
+      {activeTab === 'cis-success' && (
+        <CISSuccessTab />
       )}
       {activeTab === 'timeline' && (
         <SchemeTimelineTab />
@@ -2998,6 +3002,447 @@ function getNotableProjectColor(winnerStr: string, roundId: string): { bullet: s
     return { bullet: '#f59e0b', text: 'text-amber-400/80', label: 'Awarded' }
   }
   return { bullet: '#636e72', text: 'text-[var(--color-text-muted)]', label: '' }
+}
+
+// ============================================================
+// CIS Success Tab
+// ============================================================
+
+type CISSortCol = 'name' | 'reason' | 'technology' | 'developer' | 'capacityMW' | 'state' | 'round' | 'awardDate' | 'months'
+
+function buildTechLookup(): Record<string, string> {
+  const map: Record<string, string> = {}
+  for (const projects of Object.values(CIS_PROJECTS)) {
+    for (const p of projects) {
+      if (p.project_id) map[p.project_id] = p.technology
+    }
+  }
+  for (const projects of Object.values(LTESA_PROJECTS)) {
+    for (const p of projects) {
+      if (p.project_id) map[p.project_id] = p.technology
+    }
+  }
+  return map
+}
+
+function getConfirmReason(p: ESGTrackerProject): string | null {
+  if (p.stage === 'operating') return 'Operating'
+  if (p.stage === 'construction') return 'Construction'
+  if (p.stage === 'commissioning') return 'Commissioning'
+  if (p.agreementStatus === 'executed') return 'Executed'
+  if (p.agreementStatus === 'likely_executed') return 'Likely Executed'
+  return null
+}
+
+function monthsSinceAward(awardDate: string): number {
+  const award = new Date(awardDate)
+  const now = new Date()
+  return (now.getFullYear() - award.getFullYear()) * 12 + (now.getMonth() - award.getMonth())
+}
+
+function formatAwardDate(d: string): string {
+  const dt = new Date(d)
+  return dt.toLocaleDateString('en-AU', { month: 'short', year: 'numeric' })
+}
+
+function CISSuccessTab() {
+  const [showConfirmed, setShowConfirmed] = useState(false)
+  const [showNotConfirmed, setShowNotConfirmed] = useState(false)
+  const [confirmedSort, setConfirmedSort] = useState<{ col: CISSortCol; dir: 'asc' | 'desc' }>({ col: 'round', dir: 'asc' })
+  const [notConfirmedSort, setNotConfirmedSort] = useState<{ col: CISSortCol; dir: 'asc' | 'desc' }>({ col: 'months', dir: 'desc' })
+  const [threshold, setThreshold] = useState(6)
+
+  const techLookup = useMemo(() => buildTechLookup(), [])
+
+  // Build round name lookup from ROUND_ESG_SUMMARIES
+  const roundNameMap = useMemo(() => {
+    const m: Record<string, string> = {}
+    for (const r of ROUND_ESG_SUMMARIES) m[r.roundId] = r.round
+    return m
+  }, [])
+
+  // Split projects into confirmed / not confirmed
+  const { confirmed, notConfirmed, totalMW, confirmedMW, roundCount } = useMemo(() => {
+    const conf: (ESGTrackerProject & { reason: string })[] = []
+    const notConf: ESGTrackerProject[] = []
+    const rounds = new Set<string>()
+    let totalMW = 0
+    let confirmedMW = 0
+
+    for (const p of ESG_TRACKER_PROJECTS) {
+      rounds.add(p.roundId)
+      totalMW += p.capacityMW
+      const reason = getConfirmReason(p)
+      if (reason) {
+        conf.push({ ...p, reason })
+        confirmedMW += p.capacityMW
+      } else {
+        notConf.push(p)
+      }
+    }
+
+    return { confirmed: conf, notConfirmed: notConf, totalMW, confirmedMW, roundCount: rounds.size }
+  }, [])
+
+  // Sort helpers
+  const sortProjects = useCallback(<T extends ESGTrackerProject & { reason?: string }>(list: T[], sort: { col: CISSortCol; dir: 'asc' | 'desc' }) => {
+    const sorted = [...list]
+    const dir = sort.dir === 'asc' ? 1 : -1
+    sorted.sort((a, b) => {
+      switch (sort.col) {
+        case 'name': return dir * a.name.localeCompare(b.name)
+        case 'reason': return dir * ((a as { reason?: string }).reason ?? '').localeCompare((b as { reason?: string }).reason ?? '')
+        case 'technology': {
+          const ta = (a.projectId ? techLookup[a.projectId] : '') ?? ''
+          const tb = (b.projectId ? techLookup[b.projectId] : '') ?? ''
+          return dir * ta.localeCompare(tb)
+        }
+        case 'developer': return dir * a.developer.localeCompare(b.developer)
+        case 'capacityMW': return dir * (a.capacityMW - b.capacityMW)
+        case 'state': return dir * a.state.localeCompare(b.state)
+        case 'round': return dir * a.round.localeCompare(b.round)
+        case 'awardDate': return dir * a.awardAnnouncedDate.localeCompare(b.awardAnnouncedDate)
+        case 'months': return dir * (monthsSinceAward(a.awardAnnouncedDate) - monthsSinceAward(b.awardAnnouncedDate))
+        default: return 0
+      }
+    })
+    return sorted
+  }, [techLookup])
+
+  const sortedConfirmed = useMemo(() => sortProjects(confirmed, confirmedSort), [confirmed, confirmedSort, sortProjects])
+  const sortedNotConfirmed = useMemo(() => sortProjects(notConfirmed, notConfirmedSort), [notConfirmed, notConfirmedSort, sortProjects])
+
+  // Assumption analyzer groups
+  const analyzerGroups = useMemo(() => {
+    const likelyFailed: ESGTrackerProject[] = []
+    const mayBeNegotiating: ESGTrackerProject[] = []
+
+    for (const p of notConfirmed) {
+      const months = monthsSinceAward(p.awardAnnouncedDate)
+      if (months > threshold) {
+        likelyFailed.push(p)
+      } else {
+        mayBeNegotiating.push(p)
+      }
+    }
+
+    return { likelyFailed, mayBeNegotiating }
+  }, [notConfirmed, threshold])
+
+  // Breakdown helper
+  const getBreakdown = useCallback((projects: ESGTrackerProject[]) => {
+    const byState: Record<string, { count: number; mw: number }> = {}
+    const byTech: Record<string, { count: number; mw: number }> = {}
+    const byRound: Record<string, { count: number; mw: number }> = {}
+
+    for (const p of projects) {
+      // State
+      if (!byState[p.state]) byState[p.state] = { count: 0, mw: 0 }
+      byState[p.state].count++
+      byState[p.state].mw += p.capacityMW
+
+      // Technology
+      const tech = (p.projectId ? techLookup[p.projectId] : null) ?? 'unknown'
+      const techLabel = formatTech(tech)
+      if (!byTech[techLabel]) byTech[techLabel] = { count: 0, mw: 0 }
+      byTech[techLabel].count++
+      byTech[techLabel].mw += p.capacityMW
+
+      // Round
+      const roundName = roundNameMap[p.roundId] ?? p.round
+      if (!byRound[roundName]) byRound[roundName] = { count: 0, mw: 0 }
+      byRound[roundName].count++
+      byRound[roundName].mw += p.capacityMW
+    }
+
+    return { byState, byTech, byRound }
+  }, [techLookup, roundNameMap])
+
+  const toggleConfirmedSort = (col: CISSortCol) => {
+    setConfirmedSort(prev => ({
+      col,
+      dir: prev.col === col && prev.dir === 'asc' ? 'desc' : 'asc',
+    }))
+  }
+
+  const toggleNotConfirmedSort = (col: CISSortCol) => {
+    setNotConfirmedSort(prev => ({
+      col,
+      dir: prev.col === col && prev.dir === 'asc' ? 'desc' : 'asc',
+    }))
+  }
+
+  const SortArrow = ({ col, current }: { col: CISSortCol; current: { col: CISSortCol; dir: 'asc' | 'desc' } }) => (
+    <span className="ml-0.5 text-[10px]">{current.col === col ? (current.dir === 'asc' ? '▲' : '▼') : '⇅'}</span>
+  )
+
+  const BreakdownPills = ({ data }: { data: Record<string, { count: number; mw: number }> }) => (
+    <div className="flex flex-wrap gap-1">
+      {Object.entries(data).sort((a, b) => b[1].mw - a[1].mw).map(([label, { count, mw }]) => (
+        <span key={label} className="inline-flex items-center gap-1 rounded bg-white/5 px-1.5 py-0.5 text-[10px] text-[var(--color-text-muted)]">
+          {label} <span className="font-medium text-[var(--color-text)]">{count}</span> <span className="opacity-60">({fmtMW(mw)})</span>
+        </span>
+      ))}
+    </div>
+  )
+
+  const pctCount = ESG_TRACKER_PROJECTS.length > 0 ? ((confirmed.length / ESG_TRACKER_PROJECTS.length) * 100).toFixed(0) : '0'
+  const pctMW = totalMW > 0 ? ((confirmedMW / totalMW) * 100).toFixed(0) : '0'
+
+  return (
+    <div className="space-y-4">
+      {/* Section A: Summary Stats */}
+      <div className="rounded-lg border border-[var(--color-border)] bg-[var(--color-bg-card)] p-4">
+        <h3 className="text-sm font-semibold text-[var(--color-text)] mb-3">CISA Confirmation Summary</h3>
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
+          <div>
+            <div className="text-[10px] uppercase tracking-wide text-[var(--color-text-muted)]">Total Projects</div>
+            <div className="text-lg font-bold text-[var(--color-text)]">{ESG_TRACKER_PROJECTS.length}</div>
+          </div>
+          <div>
+            <div className="text-[10px] uppercase tracking-wide text-[var(--color-text-muted)]">Rounds</div>
+            <div className="text-lg font-bold text-[var(--color-text)]">{roundCount}</div>
+          </div>
+          <div>
+            <div className="text-[10px] uppercase tracking-wide text-[var(--color-text-muted)]">Confirmed CISA</div>
+            <div className="text-lg font-bold text-emerald-400">{confirmed.length}</div>
+          </div>
+          <div>
+            <div className="text-[10px] uppercase tracking-wide text-[var(--color-text-muted)]">Confirmed MW</div>
+            <div className="text-lg font-bold text-emerald-400">{fmtMW(confirmedMW)}</div>
+            <div className="text-[10px] text-[var(--color-text-muted)]">of {fmtMW(totalMW)} awarded</div>
+          </div>
+          <div>
+            <div className="text-[10px] uppercase tracking-wide text-[var(--color-text-muted)]">% Confirmed (Count)</div>
+            <div className="text-lg font-bold text-[var(--color-text)]">{pctCount}%</div>
+          </div>
+          <div>
+            <div className="text-[10px] uppercase tracking-wide text-[var(--color-text-muted)]">% Confirmed (MW)</div>
+            <div className="text-lg font-bold text-[var(--color-text)]">{pctMW}%</div>
+          </div>
+        </div>
+      </div>
+
+      {/* Section B: Confirmed CISA Table */}
+      <div className="rounded-lg border border-[var(--color-border)] bg-[var(--color-bg-card)]">
+        <button
+          onClick={() => setShowConfirmed(v => !v)}
+          className="w-full flex items-center justify-between p-3 text-left hover:bg-white/5 transition-colors"
+        >
+          <span className="text-sm font-semibold text-emerald-400">
+            Confirmed CISA — {confirmed.length} projects ({fmtMW(confirmedMW)})
+          </span>
+          <span className="text-xs text-[var(--color-text-muted)]">{showConfirmed ? '▲ Collapse' : '▼ Expand'}</span>
+        </button>
+        {showConfirmed && (
+          <ScrollableTable>
+            <table className="w-full text-xs">
+              <thead>
+                <tr className="border-t border-[var(--color-border)] text-[10px] uppercase tracking-wide text-[var(--color-text-muted)]">
+                  <th className="px-2 py-1.5 text-left cursor-pointer" onClick={() => toggleConfirmedSort('name')}>Project<SortArrow col="name" current={confirmedSort} /></th>
+                  <th className="px-2 py-1.5 text-left cursor-pointer" onClick={() => toggleConfirmedSort('reason')}>Reason<SortArrow col="reason" current={confirmedSort} /></th>
+                  <th className="px-2 py-1.5 text-left cursor-pointer" onClick={() => toggleConfirmedSort('technology')}>Tech<SortArrow col="technology" current={confirmedSort} /></th>
+                  <th className="px-2 py-1.5 text-left cursor-pointer" onClick={() => toggleConfirmedSort('developer')}>Developer<SortArrow col="developer" current={confirmedSort} /></th>
+                  <th className="px-2 py-1.5 text-right cursor-pointer" onClick={() => toggleConfirmedSort('capacityMW')}>MW<SortArrow col="capacityMW" current={confirmedSort} /></th>
+                  <th className="px-2 py-1.5 text-left cursor-pointer" onClick={() => toggleConfirmedSort('state')}>State<SortArrow col="state" current={confirmedSort} /></th>
+                  <th className="px-2 py-1.5 text-left cursor-pointer" onClick={() => toggleConfirmedSort('round')}>Round<SortArrow col="round" current={confirmedSort} /></th>
+                  <th className="px-2 py-1.5 text-left cursor-pointer" onClick={() => toggleConfirmedSort('awardDate')}>Awarded<SortArrow col="awardDate" current={confirmedSort} /></th>
+                </tr>
+              </thead>
+              <tbody>
+                {sortedConfirmed.map((p, i) => (
+                  <tr key={i} className="border-t border-[var(--color-border)]/50 hover:bg-white/5">
+                    <td className="px-2 py-1">
+                      {p.projectId ? (
+                        <Link to={`/projects/${p.projectId}`} className="text-blue-400 hover:underline">{p.name}</Link>
+                      ) : (
+                        <span className="text-[var(--color-text)]">{p.name}</span>
+                      )}
+                    </td>
+                    <td className="px-2 py-1 text-emerald-400">{p.reason}</td>
+                    <td className="px-2 py-1 text-[var(--color-text-muted)]">{p.projectId && techLookup[p.projectId] ? formatTech(techLookup[p.projectId]) : 'Unknown'}</td>
+                    <td className="px-2 py-1 text-[var(--color-text-muted)]">{p.developer}</td>
+                    <td className="px-2 py-1 text-right text-[var(--color-text)]">{Math.round(p.capacityMW)}</td>
+                    <td className="px-2 py-1 text-[var(--color-text-muted)]">{p.state}</td>
+                    <td className="px-2 py-1 text-[var(--color-text-muted)] text-[10px]">{roundNameMap[p.roundId] ?? p.round}</td>
+                    <td className="px-2 py-1 text-[var(--color-text-muted)]">{formatAwardDate(p.awardAnnouncedDate)}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </ScrollableTable>
+        )}
+      </div>
+
+      {/* Section C: Not Confirmed Table */}
+      <div className="rounded-lg border border-[var(--color-border)] bg-[var(--color-bg-card)]">
+        <button
+          onClick={() => setShowNotConfirmed(v => !v)}
+          className="w-full flex items-center justify-between p-3 text-left hover:bg-white/5 transition-colors"
+        >
+          <span className="text-sm font-semibold text-amber-400">
+            Not Confirmed — {notConfirmed.length} projects ({fmtMW(notConfirmed.reduce((s, p) => s + p.capacityMW, 0))})
+          </span>
+          <span className="text-xs text-[var(--color-text-muted)]">{showNotConfirmed ? '▲ Collapse' : '▼ Expand'}</span>
+        </button>
+        {showNotConfirmed && (
+          <ScrollableTable>
+            <table className="w-full text-xs">
+              <thead>
+                <tr className="border-t border-[var(--color-border)] text-[10px] uppercase tracking-wide text-[var(--color-text-muted)]">
+                  <th className="px-2 py-1.5 text-left cursor-pointer" onClick={() => toggleNotConfirmedSort('name')}>Project<SortArrow col="name" current={notConfirmedSort} /></th>
+                  <th className="px-2 py-1.5 text-right cursor-pointer" onClick={() => toggleNotConfirmedSort('months')}>Months<SortArrow col="months" current={notConfirmedSort} /></th>
+                  <th className="px-2 py-1.5 text-left cursor-pointer" onClick={() => toggleNotConfirmedSort('technology')}>Tech<SortArrow col="technology" current={notConfirmedSort} /></th>
+                  <th className="px-2 py-1.5 text-left cursor-pointer" onClick={() => toggleNotConfirmedSort('developer')}>Developer<SortArrow col="developer" current={notConfirmedSort} /></th>
+                  <th className="px-2 py-1.5 text-right cursor-pointer" onClick={() => toggleNotConfirmedSort('capacityMW')}>MW<SortArrow col="capacityMW" current={notConfirmedSort} /></th>
+                  <th className="px-2 py-1.5 text-left cursor-pointer" onClick={() => toggleNotConfirmedSort('state')}>State<SortArrow col="state" current={notConfirmedSort} /></th>
+                  <th className="px-2 py-1.5 text-left cursor-pointer" onClick={() => toggleNotConfirmedSort('round')}>Round<SortArrow col="round" current={notConfirmedSort} /></th>
+                  <th className="px-2 py-1.5 text-left cursor-pointer" onClick={() => toggleNotConfirmedSort('awardDate')}>Awarded<SortArrow col="awardDate" current={notConfirmedSort} /></th>
+                </tr>
+              </thead>
+              <tbody>
+                {sortedNotConfirmed.map((p, i) => {
+                  const months = monthsSinceAward(p.awardAnnouncedDate)
+                  const monthColor = months > 12 ? 'text-red-400' : months >= 6 ? 'text-amber-400' : 'text-emerald-400'
+                  return (
+                    <tr key={i} className="border-t border-[var(--color-border)]/50 hover:bg-white/5">
+                      <td className="px-2 py-1">
+                        {p.projectId ? (
+                          <Link to={`/projects/${p.projectId}`} className="text-blue-400 hover:underline">{p.name}</Link>
+                        ) : (
+                          <span className="text-[var(--color-text)]">{p.name}</span>
+                        )}
+                      </td>
+                      <td className={`px-2 py-1 text-right font-medium ${monthColor}`}>{months}</td>
+                      <td className="px-2 py-1 text-[var(--color-text-muted)]">{p.projectId && techLookup[p.projectId] ? formatTech(techLookup[p.projectId]) : 'Unknown'}</td>
+                      <td className="px-2 py-1 text-[var(--color-text-muted)]">{p.developer}</td>
+                      <td className="px-2 py-1 text-right text-[var(--color-text)]">{Math.round(p.capacityMW)}</td>
+                      <td className="px-2 py-1 text-[var(--color-text-muted)]">{p.state}</td>
+                      <td className="px-2 py-1 text-[var(--color-text-muted)] text-[10px]">{roundNameMap[p.roundId] ?? p.round}</td>
+                      <td className="px-2 py-1 text-[var(--color-text-muted)]">{formatAwardDate(p.awardAnnouncedDate)}</td>
+                    </tr>
+                  )
+                })}
+              </tbody>
+            </table>
+          </ScrollableTable>
+        )}
+      </div>
+
+      {/* Section D: CISA Assumption Analyzer */}
+      <div className="rounded-lg border border-[var(--color-border)] bg-[var(--color-bg-card)] p-4 space-y-4">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+          <h3 className="text-sm font-semibold text-[var(--color-text)]">CISA Assumption Analyzer</h3>
+          <div className="flex items-center gap-1">
+            <span className="text-[10px] text-[var(--color-text-muted)] mr-1">Assumed months to execute:</span>
+            {[3, 4, 5, 6].map(m => (
+              <button
+                key={m}
+                onClick={() => setThreshold(m)}
+                className={`px-2 py-0.5 rounded text-xs font-medium transition-colors ${
+                  threshold === m
+                    ? 'bg-blue-500 text-white'
+                    : 'bg-white/5 text-[var(--color-text-muted)] hover:bg-white/10'
+                }`}
+              >
+                {m}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        <p className="text-[10px] text-[var(--color-text-muted)]">
+          If a project was awarded more than {threshold} months ago and has not confirmed a CISA, it is assumed to have likely failed.
+        </p>
+
+        {/* Three group cards */}
+        <div className="grid gap-3 lg:grid-cols-3">
+          {/* Confirmed */}
+          {(() => {
+            const bd = getBreakdown(confirmed)
+            return (
+              <div className="rounded-lg border-l-4 border-[var(--color-border)] bg-white/5 p-3 space-y-2" style={{ borderLeftColor: '#22c55e' }}>
+                <div className="flex items-baseline justify-between">
+                  <span className="text-xs font-semibold" style={{ color: '#22c55e' }}>Confirmed CISA</span>
+                  <span className="text-[10px] text-[var(--color-text-muted)]">{confirmed.length} projects · {fmtMW(confirmedMW)}</span>
+                </div>
+                <div className="space-y-1.5">
+                  <div>
+                    <div className="text-[10px] text-[var(--color-text-muted)] mb-0.5">By State</div>
+                    <BreakdownPills data={bd.byState} />
+                  </div>
+                  <div>
+                    <div className="text-[10px] text-[var(--color-text-muted)] mb-0.5">By Technology</div>
+                    <BreakdownPills data={bd.byTech} />
+                  </div>
+                  <div>
+                    <div className="text-[10px] text-[var(--color-text-muted)] mb-0.5">By Round</div>
+                    <BreakdownPills data={bd.byRound} />
+                  </div>
+                </div>
+              </div>
+            )
+          })()}
+
+          {/* Likely Failed */}
+          {(() => {
+            const bd = getBreakdown(analyzerGroups.likelyFailed)
+            const mw = analyzerGroups.likelyFailed.reduce((s, p) => s + p.capacityMW, 0)
+            return (
+              <div className="rounded-lg border-l-4 border-[var(--color-border)] bg-white/5 p-3 space-y-2" style={{ borderLeftColor: '#ef4444' }}>
+                <div className="flex items-baseline justify-between">
+                  <span className="text-xs font-semibold" style={{ color: '#ef4444' }}>Likely Failed</span>
+                  <span className="text-[10px] text-[var(--color-text-muted)]">{analyzerGroups.likelyFailed.length} projects · {fmtMW(mw)}</span>
+                </div>
+                <div className="space-y-1.5">
+                  <div>
+                    <div className="text-[10px] text-[var(--color-text-muted)] mb-0.5">By State</div>
+                    <BreakdownPills data={bd.byState} />
+                  </div>
+                  <div>
+                    <div className="text-[10px] text-[var(--color-text-muted)] mb-0.5">By Technology</div>
+                    <BreakdownPills data={bd.byTech} />
+                  </div>
+                  <div>
+                    <div className="text-[10px] text-[var(--color-text-muted)] mb-0.5">By Round</div>
+                    <BreakdownPills data={bd.byRound} />
+                  </div>
+                </div>
+              </div>
+            )
+          })()}
+
+          {/* May Be Negotiating */}
+          {(() => {
+            const bd = getBreakdown(analyzerGroups.mayBeNegotiating)
+            const mw = analyzerGroups.mayBeNegotiating.reduce((s, p) => s + p.capacityMW, 0)
+            return (
+              <div className="rounded-lg border-l-4 border-[var(--color-border)] bg-white/5 p-3 space-y-2" style={{ borderLeftColor: '#f59e0b' }}>
+                <div className="flex items-baseline justify-between">
+                  <span className="text-xs font-semibold" style={{ color: '#f59e0b' }}>May Be Negotiating</span>
+                  <span className="text-[10px] text-[var(--color-text-muted)]">{analyzerGroups.mayBeNegotiating.length} projects · {fmtMW(mw)}</span>
+                </div>
+                <div className="space-y-1.5">
+                  <div>
+                    <div className="text-[10px] text-[var(--color-text-muted)] mb-0.5">By State</div>
+                    <BreakdownPills data={bd.byState} />
+                  </div>
+                  <div>
+                    <div className="text-[10px] text-[var(--color-text-muted)] mb-0.5">By Technology</div>
+                    <BreakdownPills data={bd.byTech} />
+                  </div>
+                  <div>
+                    <div className="text-[10px] text-[var(--color-text-muted)] mb-0.5">By Round</div>
+                    <BreakdownPills data={bd.byRound} />
+                  </div>
+                </div>
+              </div>
+            )
+          })()}
+        </div>
+      </div>
+    </div>
+  )
 }
 
 function SchemeTimelineTab() {
