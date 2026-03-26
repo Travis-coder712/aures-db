@@ -326,8 +326,8 @@ Bottom navigation with tabs on mobile. Progressive disclosure — simple surface
     readingTime: '8 min read',
     content: `# AURES — Build Tracker
 
-> **Last Updated:** 2026-03-22
-> **Version:** v2.1.0
+> **Last Updated:** 2026-03-27
+> **Version:** v2.5.1
 > **Current Phase:** Phase 3 — Performance Analytics (in progress)
 
 ---
@@ -482,6 +482,19 @@ Bottom navigation with tabs on mobile. Progressive disclosure — simple surface
 
 ## Recent Data Enrichment Sessions
 
+### CIS Success & Real API Data — 2026-03-27
+- Added CIS Success tab to Scheme Intelligence with confirmed/not-confirmed CISA tracking tables
+- CISA assumption analyzer with configurable month-since-award threshold (3/4/5/6 months)
+- Replaced sample generation profile data with real Open Electricity API data (5 NEM regions, 25 seasonal profiles)
+- Replaced sample coal watch data with real API facility-level data (4 NSW plants: Eraring, Bayswater, Vales Point, Mt Piper)
+- Fixed coal importer: corrected Mt Piper facility code (MTPIPER→MP), unit codes, and unit→facility aggregation
+- Fixed generation profiles importer: divided hourly power values by 12 (API sums 5-min intervals)
+- Full accuracy audit of CIS/LTESA timeline — corrected fabricated project names, wrong capacities, wrong statuses across all 11 rounds
+- Added collapsible timeline events with expand/collapse all
+- Fixed scheme analysis modal scroll and keyboard navigation
+- Enriched scheme analysis essay content with correct per-round project data
+- Fixed developer doughnut chart to use grouped developer data (540 vs 711 ungrouped)
+
 ### EIS Intelligence & Developer Data Quality — 2026-03-22
 - Built EIS/EIA Technical Intelligence page with 6 tabs: Wind, BESS, Solar, EIS vs Actual, Coverage, Grid Connection
 - Extracted EIS data for 98 projects (33 wind, 36 BESS, 27 solar, 2 pumped hydro) — 100% coverage of available EIS documents
@@ -494,7 +507,7 @@ Bottom navigation with tabs on mobile. Progressive disclosure — simple surface
   - Documented 4 joint venture partnerships (Pottinger/AGL+Someva, MacIntyre/Acciona+Ark, Golden Plains/TagEnergy+Ingka, Yanco Delta/Origin+ViRYA)
 - Added developer market share donut pie charts (by MW and project count) and technology breakdown pie chart
 - Made version check button accessible on mobile (tappable header badge + slide-out menu button)
-- Bumped version from v1.7.0 → v2.0.0 → v2.1.0
+- Bumped version from v1.7.0 → v2.0.0 → v2.1.0 → v2.5.1
 - New files: eis-comparison.json, eis-coverage.json, eis-pdf-opportunities.json, developer-data-quality.json, generate_developer_quality.py
 
 ### Wind Farm Deep Dive — 2026-03-12/13
@@ -1315,7 +1328,7 @@ If you spot a discrepancy, it's likely due to capacity differences (registered v
     content: `# AURES Strategic Roadmap
 
 > **Last Updated:** 22 March 2026
-> **Version:** v2.1.0 | **Projects:** 1,067 | **Intelligence Features:** 10 | **Developers Scored:** 152 | **EIS Projects:** 98
+> **Version:** v2.5.1 | **Projects:** 1,067 | **Intelligence Features:** 10 | **Developers Scored:** 152 | **EIS Projects:** 98
 
 This document is the master plan for AURES. It covers a comprehensive review of the platform's code and infrastructure, UX quality, data enhancement strategy, and the design of the intelligence layer features that transform AURES from a database into an analytical platform.
 
@@ -1677,7 +1690,7 @@ New api_rate_limits table tracking daily usage per API. OpenElectricity budget: 
 
 ## Part 5: What's Next
 
-### Completed Summary (as of v2.1.0, 22 March 2026)
+### Completed Summary (as of v2.5.1, 27 March 2026)
 
 **Infrastructure:** ✅ Code splitting, error boundaries, icon extraction, pipeline automation (launchd + admin.py --auto)
 **UX:** ✅ Cmd+K search, accessibility, mobile polish, data viz export, mobile version check
