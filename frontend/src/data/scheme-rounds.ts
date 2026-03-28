@@ -21,7 +21,7 @@ export const CIS_ROUNDS: CISRound[] = [
     total_storage_mwh: 0,
     num_projects: 6,
     project_ids: [],
-    description: 'First CIS pilot round, delivered in partnership with the NSW Government. Selected six battery and virtual power plant projects to deliver 1+ GW of dispatchable capacity.',
+    description: 'First CIS tender, co-delivered between the federal and NSW governments under the NSW Electricity Infrastructure Roadmap (LTESA Round 2). Six battery and virtual power plant projects delivering 1+ GW of dispatchable capacity. Note: DCCEEW Senate Estimates testimony (Dec 2025) excluded these 6 projects from the CIS project count of 63, likely because they were structured under the NSW LTESA firming framework rather than the standard CISA mechanism.',
     key_changes: 'First-ever CIS round. Dispatchable only. NSW state partnership.',
     sources: [
       { title: 'Big boost to reliable renewables in NSW', url: 'https://www.nsw.gov.au/media-releases/big-boost-to-reliable-renewables-nsw', date: '2023-11-23', source_tier: 1 },

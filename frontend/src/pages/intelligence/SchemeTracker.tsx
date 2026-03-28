@@ -1,6 +1,6 @@
 import { useState, useEffect, useMemo, useCallback, useRef } from 'react'
 import { Link } from 'react-router-dom'
-import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from 'recharts'
+import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip, BarChart, Bar, XAxis, YAxis, CartesianGrid, Legend, LineChart, Line, ReferenceLine } from 'recharts'
 import { fetchSchemeTracker } from '../../lib/dataService'
 import { useSchemeData } from '../../hooks/useSchemeData'
 import type { SchemeTrackerData, SchemeTrackerRound, SchemeTrackerProject, CISRound, LTESARound } from '../../lib/types'
@@ -8,7 +8,8 @@ import ScrollableTable from '../../components/common/ScrollableTable'
 import { ROUND_INFO } from '../../data/scheme-round-info'
 import type { RoundInfo } from '../../data/scheme-round-info'
 import { ESG_TRACKER_PROJECTS, ROUND_ESG_SUMMARIES } from '../../data/esg-tracker-data'
-import { CIS_PROJECTS, LTESA_PROJECTS } from '../../data/scheme-rounds'
+import { CIS_PROJECTS, LTESA_PROJECTS, CIS_ROUNDS } from '../../data/scheme-rounds'
+import type { SchemeProject } from '../../data/scheme-rounds'
 import type { ESGTrackerProject, PublicationStatus, AgreementStatus } from '../../data/esg-tracker-data'
 
 // ============================================================
@@ -48,9 +49,9 @@ function fmtMW(mw: number): string {
 // Component
 // ============================================================
 
-const TABS = ['overview', 'tracker', 'watchlist', 'esg', 'cis-success', 'timeline'] as const
+const TABS = ['overview', 'tracker', 'watchlist', 'esg', 'cis-success', 'cis-briefing', 'timeline'] as const
 type Tab = typeof TABS[number]
-const TAB_LABELS: Record<Tab, string> = { overview: 'Overview', tracker: 'Milestone Tracker', watchlist: 'Key Projects', esg: 'ESG Agreement Proxy', 'cis-success': 'CIS Success', timeline: 'CIS/LTESA Timeline' }
+const TAB_LABELS: Record<Tab, string> = { overview: 'Overview', tracker: 'Milestone Tracker', watchlist: 'Key Projects', esg: 'ESG Agreement Proxy', 'cis-success': 'CIS Success', 'cis-briefing': 'CIS Briefing', timeline: 'CIS/LTESA Timeline' }
 
 export default function SchemeTracker() {
   const [activeTab, setActiveTab] = useState<Tab>('overview')
@@ -509,6 +510,7 @@ export default function SchemeTracker() {
       {activeTab === 'cis-success' && (
         <CISSuccessTab />
       )}
+      {activeTab === 'cis-briefing' && <CISBriefingTab />}
       {activeTab === 'timeline' && (
         <SchemeTimelineTab />
       )}
@@ -3262,6 +3264,9 @@ function CISSuccessTab() {
             <p>
               Ms Alison Wiltshire (Branch Head, CIS Delivery &amp; Governance) confirmed <strong>~9 projects had reached financial close</strong> among those with executed CISAs. Mr Brine noted CIS deliberately targets early-stage projects: &ldquo;If they&rsquo;re at financial close, they probably don&rsquo;t need a lot of support from the federal government.&rdquo; Most signed projects expected to reach financial close in calendar year 2026. Upon signing, proponents have <strong>20 days to lodge a project bond</strong>; failure to deliver can result in bond forfeiture and re-tendering.
             </p>
+            <p>
+              <strong>Count reconciliation:</strong> AURES tracks <strong>71 CIS projects</strong> across 6 rounds, but Brine&apos;s testimony cited <strong>63 projects</strong>. The 26 storage projects (Pilot SA/VIC 6 + Tender 2 WEM 4 + Tender 3 NEM 16) match exactly. The gap is: (a) the <strong>6 Pilot NSW projects are excluded</strong> — these were co-delivered under the NSW Electricity Infrastructure Roadmap (LTESA Round 2) using a firming LTESA mechanism rather than the standard CISA, so DCCEEW may not count them as &quot;CIS&quot;; and (b) <strong>2 generation projects</strong> from Tender 1 (19) or Tender 4 (20) appear absent from Brine&apos;s 37 generation count — the reason is not confirmed.
+            </p>
             <div className="mt-2 overflow-x-auto">
               <table className="text-[10px] border-collapse">
                 <thead>
@@ -3623,6 +3628,591 @@ function CISSuccessTab() {
           </ScrollableTable>
         </div>
       )}
+    </div>
+  )
+}
+
+// ============================================================
+// CIS Briefing Tab — Executive briefing with interactive visuals
+// ============================================================
+
+const BRIEFING_TECH_COLORS: Record<string, string> = {
+  bess: '#8b5cf6',
+  solar: '#f59e0b',
+  wind: '#3b82f6',
+  hybrid: '#10b981',
+  vpp: '#6b7280',
+}
+
+function CISBriefingTab() {
+
+  // CIS-only ESG projects
+  const cisProjects = useMemo(() => ESG_TRACKER_PROJECTS.filter(p => p.scheme === 'CIS'), [])
+
+  // Round name lookup
+  const roundNameMap = useMemo(() => {
+    const m: Record<string, string> = {}
+    for (const r of ROUND_ESG_SUMMARIES) m[r.roundId] = r.round
+    return m
+  }, [])
+
+  // All CIS scheme-rounds projects flattened with round info
+  const allCisSchemeProjects = useMemo(() => {
+    const result: (SchemeProject & { roundId: string; roundName: string })[] = []
+    for (const [roundId, projects] of Object.entries(CIS_PROJECTS)) {
+      const round = CIS_ROUNDS.find(r => r.id === roundId)
+      const roundName = round?.name ?? roundId
+      for (const p of projects) {
+        result.push({ ...p, roundId, roundName })
+      }
+    }
+    return result
+  }, [])
+
+  // ---- Section 1 data ----
+  const section1 = useMemo(() => {
+    const conf: (ESGTrackerProject & { reason: string })[] = []
+    const notConf: ESGTrackerProject[] = []
+    let totalMW = 0
+    let confirmedMW = 0
+
+    for (const p of cisProjects) {
+      totalMW += p.capacityMW
+      const reason = getConfirmReason(p)
+      if (reason) {
+        conf.push({ ...p, reason })
+        confirmedMW += p.capacityMW
+      } else {
+        notConf.push(p)
+      }
+    }
+
+    // Per-round breakdown for horizontal bar
+    const roundIds = [...new Set(cisProjects.map(p => p.roundId))]
+    const roundBars = roundIds.map(rid => {
+      const rProjects = cisProjects.filter(p => p.roundId === rid)
+      let operating = 0
+      let negotiating = 0
+      let likelyFailed = 0
+      for (const p of rProjects) {
+        const reason = getConfirmReason(p)
+        if (reason) {
+          operating++
+        } else {
+          const months = monthsSinceAward(p.awardAnnouncedDate)
+          if (months > 6) likelyFailed++
+          else negotiating++
+        }
+      }
+      return {
+        round: roundNameMap[rid]?.replace('CIS ', '') ?? rid,
+        'Confirmed': operating,
+        'May Be Negotiating': negotiating,
+        'Likely Failed': likelyFailed,
+      }
+    })
+
+    // Likely failed / negotiating totals
+    let likelyFailedCount = 0
+    let likelyFailedMW = 0
+    let negotiatingCount = 0
+    let negotiatingMW = 0
+    for (const p of notConf) {
+      const months = monthsSinceAward(p.awardAnnouncedDate)
+      if (months > 6) { likelyFailedCount++; likelyFailedMW += p.capacityMW }
+      else { negotiatingCount++; negotiatingMW += p.capacityMW }
+    }
+
+    // Operating MW (approximate from ESG data)
+    const operatingMW = cisProjects
+      .filter(p => p.stage === 'operating')
+      .reduce((s, p) => s + p.capacityMW, 0)
+
+    return {
+      confirmed: conf,
+      notConfirmed: notConf,
+      totalMW,
+      confirmedMW,
+      roundBars,
+      likelyFailedCount,
+      likelyFailedMW,
+      negotiatingCount,
+      negotiatingMW,
+      operatingMW,
+    }
+  }, [cisProjects, roundNameMap])
+
+  // ---- Section 2 data: Technology mix & hybrids ----
+  const section2 = useMemo(() => {
+    // Technology mix from CIS_PROJECTS
+    const techCounts: Record<string, { count: number; mw: number }> = {}
+    for (const p of allCisSchemeProjects) {
+      const tech = p.technology
+      if (!techCounts[tech]) techCounts[tech] = { count: 0, mw: 0 }
+      techCounts[tech].count++
+      techCounts[tech].mw += p.capacity_mw
+    }
+
+    const techLabels: Record<string, string> = {
+      bess: 'Standalone BESS',
+      solar: 'Standalone Solar',
+      wind: 'Standalone Wind',
+      hybrid: 'Solar+BESS Hybrid',
+      vpp: 'VPP',
+    }
+
+    const pieData = Object.entries(techCounts).map(([tech, d]) => ({
+      name: techLabels[tech] ?? formatTech(tech),
+      value: d.count,
+      mw: d.mw,
+      tech,
+    }))
+
+    // Hybrid projects
+    const hybrids = allCisSchemeProjects.filter(p => p.technology === 'hybrid')
+
+    // Hybrid status from ESG tracker
+    const hybridWithStatus = hybrids.map(h => {
+      const esgMatch = cisProjects.find(ep =>
+        ep.projectId && h.project_id && ep.projectId === h.project_id
+      )
+      return {
+        ...h,
+        stage: esgMatch?.stage ?? 'development',
+      }
+    })
+
+    return { techCounts, pieData, hybrids, hybridWithStatus, totalProjects: allCisSchemeProjects.length }
+  }, [allCisSchemeProjects, cisProjects])
+
+  // ---- Section 3 data: CISA execution timeline + months-since-award ----
+  const section3 = useMemo(() => {
+    // Known CISA execution data points
+    const executionTimeline = [
+      { date: 'Aug 2025', executed: 19, label: 'Senate Estimates' },
+      { date: 'Dec 2025', executed: 22, label: 'Senate Estimates' },
+      { date: 'Feb 2026', executed: 23, label: 'DCCEEW update' },
+    ]
+
+    // Months since award distribution for NOT confirmed projects
+    const buckets = [
+      { range: '0-3', min: 0, max: 3, count: 0, color: '#22c55e' },
+      { range: '3-6', min: 3, max: 6, count: 0, color: '#22c55e' },
+      { range: '6-9', min: 6, max: 9, count: 0, color: '#f59e0b' },
+      { range: '9-12', min: 9, max: 12, count: 0, color: '#f59e0b' },
+      { range: '12-15', min: 12, max: 15, count: 0, color: '#ef4444' },
+      { range: '15+', min: 15, max: 999, count: 0, color: '#ef4444' },
+    ]
+
+    for (const p of section1.notConfirmed) {
+      const months = monthsSinceAward(p.awardAnnouncedDate)
+      for (const b of buckets) {
+        if (months >= b.min && months < b.max) { b.count++; break }
+        if (b.max === 999 && months >= b.min) { b.count++; break }
+      }
+    }
+
+    return { executionTimeline, buckets }
+  }, [section1.notConfirmed])
+
+  // ---- Section 4 data: Pipeline waterfall ----
+  const section4 = useMemo(() => {
+    // Awarded rounds (those with projects)
+    const awardedRounds = CIS_ROUNDS.filter(r => r.num_projects > 0)
+    const totalAwardedMW = awardedRounds.reduce((s, r) => s + r.total_capacity_mw, 0)
+
+    const waterfallData = [
+      ...awardedRounds.map(r => ({
+        name: r.name.replace('CIS ', '').replace('Pilot — ', 'P:').replace('Tender ', 'T').replace(' — NEM Generation', ' Gen').replace(' — NEM Dispatchable', ' Disp').replace(' — WEM Dispatchable', ' WEM'),
+        mw: r.total_capacity_mw,
+        type: 'awarded' as const,
+      })),
+      { name: 'T5/6 WEM\n(target)', mw: 1600, type: 'future' as const },
+      { name: 'T7 NEM Gen\n(target)', mw: 5000, type: 'future' as const },
+      { name: 'T8 NEM Disp\n(target)', mw: 2000, type: 'future' as const },
+    ]
+
+    const totalPipelineMW = totalAwardedMW + 1600 + 5000 + 2000
+
+    return { awardedRounds, totalAwardedMW, waterfallData, totalPipelineMW }
+  }, [])
+
+  // Recharts custom tooltip for bar charts
+  const barTooltipStyle = {
+    backgroundColor: 'var(--color-bg)',
+    border: '1px solid var(--color-border)',
+    borderRadius: '6px',
+    color: 'var(--color-text)',
+    fontSize: '12px',
+    padding: '6px 10px',
+  }
+
+  return (
+    <div className="space-y-6">
+      {/* Header */}
+      <div className="p-4 rounded-lg" style={{ background: 'var(--color-bg)', border: '1px solid var(--color-border)' }}>
+        <h2 className="text-lg font-bold" style={{ color: 'var(--color-text)' }}>CIS Executive Briefing</h2>
+        <p className="text-sm mt-1" style={{ color: 'var(--color-text-muted)' }}>
+          Comprehensive analysis of CIS program delivery as of March 2026. Data sourced from AURES ESG Agreement Proxy, Senate Estimates testimony, and DCCEEW publications.
+        </p>
+      </div>
+
+      {/* ===== SECTION 1: How Many CIS Projects Have Actually Succeeded? ===== */}
+      <div className="p-4 rounded-lg" style={{ background: 'var(--color-bg)', border: '1px solid var(--color-border)', borderLeft: '4px solid #22c55e' }}>
+        <h3 className="text-base font-bold mb-3" style={{ color: 'var(--color-text)' }}>
+          1. How Many CIS Projects Have Actually Succeeded?
+        </h3>
+
+        <div className="text-sm leading-relaxed mb-4" style={{ color: 'var(--color-text-secondary)' }}>
+          <p className="mb-2">
+            Of the 71 projects awarded CIS contracts across 6 rounds since November 2023, only {section1.confirmed.length} ({(section1.confirmed.length / 71 * 100).toFixed(0)}%) show evidence of having executed their CIS agreement (CISA). The federal government has awarded {fmtMW(section1.totalMW)} of new energy capacity, but as of March 2026, the operating capacity from CIS projects stands at approximately {fmtMW(section1.operatingMW)}. The gap between &lsquo;awarded&rsquo; and &lsquo;operating&rsquo; is the central challenge of the CIS program.
+          </p>
+          <p>
+            Senate Estimates testimony (1 December 2025) confirmed that only 22 of 63 projects (DCCEEW&rsquo;s count, which excludes the 6 Pilot NSW projects) had executed CISAs, with just ~9 reaching financial close by February 2026. The Pilot NSW round, co-delivered under the NSW Electricity Infrastructure Roadmap (LTESA Round 2), is excluded from DCCEEW&rsquo;s CIS count of 63 — likely because it uses the LTESA firming mechanism rather than the standard CISA.
+          </p>
+        </div>
+
+        {/* Visual 1: Stacked horizontal bar chart — Round breakdown */}
+        <div className="mb-4">
+          <h4 className="text-sm font-semibold mb-2" style={{ color: 'var(--color-text)' }}>Project Status by Round</h4>
+          <div style={{ width: '100%', height: 280 }}>
+            <ResponsiveContainer>
+              <BarChart data={section1.roundBars} layout="vertical" margin={{ left: 20, right: 20, top: 5, bottom: 5 }}>
+                <CartesianGrid strokeDasharray="3 3" stroke="var(--color-border)" />
+                <XAxis type="number" tick={{ fill: 'var(--color-text-muted)', fontSize: 11 }} />
+                <YAxis type="category" dataKey="round" tick={{ fill: 'var(--color-text-muted)', fontSize: 10 }} width={140} />
+                <Tooltip contentStyle={barTooltipStyle} />
+                <Legend wrapperStyle={{ fontSize: 11, color: 'var(--color-text-muted)' }} />
+                <Bar dataKey="Confirmed" stackId="a" fill="#22c55e" />
+                <Bar dataKey="May Be Negotiating" stackId="a" fill="#f59e0b" />
+                <Bar dataKey="Likely Failed" stackId="a" fill="#ef4444" />
+              </BarChart>
+            </ResponsiveContainer>
+          </div>
+        </div>
+
+        {/* Visual 2: Stat cards */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+          <div className="p-3 rounded-lg text-center" style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid var(--color-border)' }}>
+            <div className="text-2xl font-bold" style={{ color: 'var(--color-text)' }}>71</div>
+            <div className="text-xs" style={{ color: 'var(--color-text-muted)' }}>Total Awarded</div>
+            <div className="text-xs font-medium" style={{ color: 'var(--color-text-secondary)' }}>{fmtMW(section1.totalMW)}</div>
+          </div>
+          <div className="p-3 rounded-lg text-center" style={{ background: 'rgba(34,197,94,0.08)', border: '1px solid #22c55e40' }}>
+            <div className="text-2xl font-bold" style={{ color: '#22c55e' }}>{section1.confirmed.length}</div>
+            <div className="text-xs" style={{ color: 'var(--color-text-muted)' }}>Confirmed</div>
+            <div className="text-xs font-medium" style={{ color: '#22c55e' }}>{fmtMW(section1.confirmedMW)}</div>
+          </div>
+          <div className="p-3 rounded-lg text-center" style={{ background: 'rgba(239,68,68,0.08)', border: '1px solid #ef444440' }}>
+            <div className="text-2xl font-bold" style={{ color: '#ef4444' }}>{section1.likelyFailedCount}</div>
+            <div className="text-xs" style={{ color: 'var(--color-text-muted)' }}>Likely Failed (&gt;6mo)</div>
+            <div className="text-xs font-medium" style={{ color: '#ef4444' }}>{fmtMW(section1.likelyFailedMW)}</div>
+          </div>
+          <div className="p-3 rounded-lg text-center" style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid var(--color-border)' }}>
+            <div className="text-2xl font-bold" style={{ color: 'var(--color-text)' }}>~9</div>
+            <div className="text-xs" style={{ color: 'var(--color-text-muted)' }}>Financial Close</div>
+            <div className="text-xs font-medium" style={{ color: 'var(--color-text-secondary)' }}>of 22 executed (Senate)</div>
+          </div>
+        </div>
+      </div>
+
+      {/* ===== SECTION 2: The Solar Hybrid Question ===== */}
+      <div className="p-4 rounded-lg" style={{ background: 'var(--color-bg)', border: '1px solid var(--color-border)', borderLeft: '4px solid #10b981' }}>
+        <h3 className="text-base font-bold mb-3" style={{ color: 'var(--color-text)' }}>
+          2. The Solar Hybrid Question
+        </h3>
+
+        <div className="text-sm leading-relaxed mb-4" style={{ color: 'var(--color-text-secondary)' }}>
+          <p className="mb-2">
+            Solar-battery hybrids represent {section2.hybrids.length} of {section2.totalProjects} CIS projects ({(section2.hybrids.length / section2.totalProjects * 100).toFixed(0)}%), concentrated in the two generation tenders. Tender 4 (October 2025) is particularly hybrid-heavy: 12 of 20 projects combine solar generation with co-located battery storage. While hybrids offer system benefits (dispatchable solar), they are inherently more complex to develop, finance, and connect than standalone projects.
+          </p>
+          <p className="mb-2">
+            None of the {section2.hybrids.length} hybrid projects are yet in construction or operation as of March 2026. All remain in the development phase. This is a key risk indicator — hybrid projects face dual planning requirements, more complex grid connection agreements, and larger capital expenditure. The earliest hybrid COD targets are December 2028 (Tender 1) and December 2030 (Tender 4).
+          </p>
+          <p>
+            Several projects awarded in the earlier CIS rounds appear to have been already committed or well-advanced before winning their CIS contract. Mokoan Solar Farm (46 MW, European Energy) was in commissioning when Tender 1 results were announced in December 2024. The Pilot NSW BESS projects (Orana, Liddell, Smithfield) were all at or near construction start. This suggests the government can claim &lsquo;CIS success&rsquo; for projects that would likely have proceeded regardless — a pattern less evident in later, larger tenders where the CIS contract is genuinely needed to underwrite project finance.
+          </p>
+        </div>
+
+        {/* Visual 3: Donut chart — Technology Mix */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+          <div>
+            <h4 className="text-sm font-semibold mb-2" style={{ color: 'var(--color-text)' }}>CIS Technology Mix</h4>
+            <div style={{ width: '100%', height: 280 }}>
+              <ResponsiveContainer>
+                <PieChart>
+                  <Pie
+                    data={section2.pieData}
+                    cx="50%"
+                    cy="50%"
+                    innerRadius={60}
+                    outerRadius={100}
+                    dataKey="value"
+                    nameKey="name"
+                    label={({ name, value }) => `${name}: ${value}`}
+                  >
+                    {section2.pieData.map((entry, i) => (
+                      <Cell key={`cell-${i}`} fill={BRIEFING_TECH_COLORS[entry.tech] ?? '#636e72'} />
+                    ))}
+                  </Pie>
+                  <Tooltip
+                    contentStyle={barTooltipStyle}
+                    formatter={(value, name, props) => {
+                      const payload = props?.payload as { mw?: number } | undefined
+                      return [`${value} projects (${fmtMW(payload?.mw ?? 0)})`, name]
+                    }}
+                  />
+                </PieChart>
+              </ResponsiveContainer>
+            </div>
+          </div>
+
+          <div>
+            <h4 className="text-sm font-semibold mb-2" style={{ color: 'var(--color-text)' }}>Technology Breakdown</h4>
+            <div className="space-y-2">
+              {section2.pieData.map(d => (
+                <div key={d.tech} className="flex items-center gap-2">
+                  <div className="w-3 h-3 rounded-sm flex-shrink-0" style={{ backgroundColor: BRIEFING_TECH_COLORS[d.tech] ?? '#636e72' }} />
+                  <span className="text-sm flex-1" style={{ color: 'var(--color-text-secondary)' }}>{d.name}</span>
+                  <span className="text-sm font-medium" style={{ color: 'var(--color-text)' }}>{d.value}</span>
+                  <span className="text-xs" style={{ color: 'var(--color-text-muted)' }}>({fmtMW(d.mw)})</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Visual 4: Hybrid projects table */}
+        <div>
+          <h4 className="text-sm font-semibold mb-2" style={{ color: 'var(--color-text)' }}>All {section2.hybrids.length} Hybrid Projects</h4>
+          <ScrollableTable>
+            <table className="w-full text-xs">
+              <thead>
+                <tr style={{ borderBottom: '1px solid var(--color-border)' }}>
+                  <th className="text-left px-2 py-1.5 font-semibold" style={{ color: 'var(--color-text-muted)' }}>Name</th>
+                  <th className="text-left px-2 py-1.5 font-semibold" style={{ color: 'var(--color-text-muted)' }}>Developer</th>
+                  <th className="text-right px-2 py-1.5 font-semibold" style={{ color: 'var(--color-text-muted)' }}>MW</th>
+                  <th className="text-right px-2 py-1.5 font-semibold" style={{ color: 'var(--color-text-muted)' }}>MWh</th>
+                  <th className="text-left px-2 py-1.5 font-semibold" style={{ color: 'var(--color-text-muted)' }}>State</th>
+                  <th className="text-left px-2 py-1.5 font-semibold" style={{ color: 'var(--color-text-muted)' }}>Round</th>
+                  <th className="text-left px-2 py-1.5 font-semibold" style={{ color: 'var(--color-text-muted)' }}>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                {section2.hybridWithStatus.map((h, i) => (
+                  <tr key={`hybrid-${i}`} style={{ borderBottom: '1px solid var(--color-border)' }}>
+                    <td className="px-2 py-1" style={{ color: 'var(--color-text)' }}>{h.name}</td>
+                    <td className="px-2 py-1" style={{ color: 'var(--color-text-secondary)' }}>{h.developer}</td>
+                    <td className="px-2 py-1 text-right font-medium" style={{ color: 'var(--color-text)' }}>{h.capacity_mw}</td>
+                    <td className="px-2 py-1 text-right" style={{ color: 'var(--color-text-secondary)' }}>{h.storage_mwh ?? '—'}</td>
+                    <td className="px-2 py-1" style={{ color: 'var(--color-text-secondary)' }}>{h.state}</td>
+                    <td className="px-2 py-1" style={{ color: 'var(--color-text-muted)' }}>{h.roundName.replace('CIS ', '')}</td>
+                    <td className="px-2 py-1">
+                      <span className="px-1.5 py-0.5 rounded text-[10px] font-medium" style={{
+                        backgroundColor: stageColor(h.stage) + '20',
+                        color: stageColor(h.stage),
+                      }}>
+                        {stageLabel(h.stage)}
+                      </span>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </ScrollableTable>
+        </div>
+      </div>
+
+      {/* ===== SECTION 3: The Next 6 Months Are Critical ===== */}
+      <div className="p-4 rounded-lg" style={{ background: 'var(--color-bg)', border: '1px solid var(--color-border)', borderLeft: '4px solid #f59e0b' }}>
+        <h3 className="text-base font-bold mb-3" style={{ color: 'var(--color-text)' }}>
+          3. The Next 6 Months Are Critical
+        </h3>
+
+        <div className="text-sm leading-relaxed mb-4" style={{ color: 'var(--color-text-secondary)' }}>
+          <p className="mb-2">
+            The period from April to September 2026 is pivotal for the CIS program. The next Senate Estimates hearings (Budget Estimates, typically May-June 2026) will provide updated CISA execution numbers. AURES will monitor:
+          </p>
+          <ul className="list-disc pl-5 space-y-1 mb-2">
+            <li><strong>CISA execution rate:</strong> From 22 executed (Dec 2025) to 23 (Feb 2026) — only 1 new execution in 2 months. At this pace, significant acceleration is needed.</li>
+            <li><strong>Financial close pipeline:</strong> Only ~9 of 22 executed projects had reached financial close by Feb 2026. This is the true bottleneck — even signed CISAs don&rsquo;t guarantee construction.</li>
+            <li><strong>Tender 1 projects:</strong> Awarded December 2024, now 15+ months old. Projects still without executed CISAs are entering &lsquo;likely failed&rsquo; territory under AURES analysis.</li>
+            <li><strong>Bond forfeiture watch:</strong> Proponents must lodge a project bond within 20 business days of signing. Failure to deliver results in bond forfeiture and re-tendering. No public data yet on any forfeitures.</li>
+          </ul>
+          <p>
+            AURES tracks CIS execution through an ESG Agreement Proxy — monitoring public indicators (First Nations commitments, FNCEN registration, CEC Charter status) as proxies for agreement execution. We supplement this with Senate Estimates testimony, DCCEEW publications, and developer announcements.
+          </p>
+        </div>
+
+        {/* Visual 5: CISA Execution Timeline */}
+        <div className="mb-4">
+          <h4 className="text-sm font-semibold mb-2" style={{ color: 'var(--color-text)' }}>CISA Execution Trajectory</h4>
+          <div style={{ width: '100%', height: 280 }}>
+            <ResponsiveContainer>
+              <LineChart data={section3.executionTimeline} margin={{ left: 10, right: 30, top: 10, bottom: 5 }}>
+                <CartesianGrid strokeDasharray="3 3" stroke="var(--color-border)" />
+                <XAxis dataKey="date" tick={{ fill: 'var(--color-text-muted)', fontSize: 11 }} />
+                <YAxis
+                  tick={{ fill: 'var(--color-text-muted)', fontSize: 11 }}
+                  domain={[0, 75]}
+                  label={{ value: 'Executed CISAs', angle: -90, position: 'insideLeft', style: { fill: 'var(--color-text-muted)', fontSize: 11 } }}
+                />
+                <Tooltip contentStyle={barTooltipStyle} />
+                <ReferenceLine y={71} stroke="#ef4444" strokeDasharray="5 5" label={{ value: 'Target: 71', position: 'right', fill: '#ef4444', fontSize: 11 }} />
+                <Line
+                  type="monotone"
+                  dataKey="executed"
+                  stroke="#3b82f6"
+                  strokeWidth={2}
+                  dot={(props) => {
+                    const { cx, cy, payload } = props as { cx: number; cy: number; payload: { label?: string } }
+                    return (
+                      <g key={`dot-${cx}-${cy}`}>
+                        <circle cx={cx} cy={cy} r={5} fill="#3b82f6" stroke="#fff" strokeWidth={2} />
+                        {payload.label && (
+                          <text x={cx} y={cy - 12} textAnchor="middle" fill="var(--color-text-muted)" fontSize={9}>
+                            {payload.label}
+                          </text>
+                        )}
+                      </g>
+                    )
+                  }}
+                />
+              </LineChart>
+            </ResponsiveContainer>
+          </div>
+        </div>
+
+        {/* Visual 6: Months Since Award distribution */}
+        <div>
+          <h4 className="text-sm font-semibold mb-2" style={{ color: 'var(--color-text)' }}>Months Since Award (Unconfirmed Projects)</h4>
+          <div style={{ width: '100%', height: 250 }}>
+            <ResponsiveContainer>
+              <BarChart data={section3.buckets} margin={{ left: 10, right: 10, top: 5, bottom: 5 }}>
+                <CartesianGrid strokeDasharray="3 3" stroke="var(--color-border)" />
+                <XAxis dataKey="range" tick={{ fill: 'var(--color-text-muted)', fontSize: 11 }} label={{ value: 'Months since award', position: 'insideBottom', offset: -2, style: { fill: 'var(--color-text-muted)', fontSize: 11 } }} />
+                <YAxis tick={{ fill: 'var(--color-text-muted)', fontSize: 11 }} label={{ value: 'Projects', angle: -90, position: 'insideLeft', style: { fill: 'var(--color-text-muted)', fontSize: 11 } }} />
+                <Tooltip contentStyle={barTooltipStyle} formatter={(value) => [`${value} projects`, 'Count']} />
+                <Bar dataKey="count">
+                  {section3.buckets.map((b, i) => (
+                    <Cell key={`bucket-${i}`} fill={b.color} />
+                  ))}
+                </Bar>
+              </BarChart>
+            </ResponsiveContainer>
+          </div>
+        </div>
+      </div>
+
+      {/* ===== SECTION 4: What This Means for Future Rounds ===== */}
+      <div className="p-4 rounded-lg" style={{ background: 'var(--color-bg)', border: '1px solid var(--color-border)', borderLeft: '4px solid #3b82f6' }}>
+        <h3 className="text-base font-bold mb-3" style={{ color: 'var(--color-text)' }}>
+          4. What This Means for Future Rounds
+        </h3>
+
+        <div className="text-sm leading-relaxed mb-4" style={{ color: 'var(--color-text-secondary)' }}>
+          <p className="mb-2">
+            Four additional CIS tenders are in progress or planned:
+          </p>
+          <ul className="list-disc pl-5 space-y-1 mb-2">
+            <li><strong>Tenders 5 &amp; 6 (WEM):</strong> Western Australia generation + storage. Results expected March-April 2026. Targeting 1.6 GW generation + 2.4 GWh storage.</li>
+            <li><strong>Tender 7 (NEM Generation):</strong> Registrations opened October 2025. Targeting ~5 GW. Results expected May 2026.</li>
+            <li><strong>Tender 8 (NEM Dispatchable):</strong> Targeting ~16 GWh. Results expected mid-2026. First time allowing aggregated small batteries.</li>
+          </ul>
+          <p className="mb-2">
+            If all future tenders deliver to target, the total CIS pipeline would approach {fmtMW(section4.totalPipelineMW)} against the 40 GW goal. However, the gap between &lsquo;awarded&rsquo; and &lsquo;delivered&rsquo; raises a critical question: should the government be launching new tenders when existing projects are struggling to execute?
+          </p>
+          <p className="mb-2">
+            The re-tendering cycle for failed projects is not yet established. Under CISA terms, projects that fail to lodge bonds or meet milestones face forfeiture. The re-tendered capacity would then enter future rounds — but the cycle from announcement to failure recognition to re-tendering to new award to new construction could take 3-5 years. If early-round projects begin failing at scale in 2026-2027, the recycled GW may not be operational until 2030-2032, well past the government&rsquo;s targets.
+          </p>
+          <p>
+            The CIS program&rsquo;s credibility now rests less on how many GW it announces and more on how many MW it actually delivers. AURES will continue tracking execution rates, financial close milestones, and Senate Estimates disclosures to provide the most accurate picture of CIS delivery.
+          </p>
+        </div>
+
+        {/* Visual 7: CIS Pipeline Waterfall */}
+        <div className="mb-4">
+          <h4 className="text-sm font-semibold mb-2" style={{ color: 'var(--color-text)' }}>CIS Capacity Pipeline (GW)</h4>
+          <div style={{ width: '100%', height: 300 }}>
+            <ResponsiveContainer>
+              <BarChart data={section4.waterfallData} margin={{ left: 10, right: 20, top: 10, bottom: 30 }}>
+                <CartesianGrid strokeDasharray="3 3" stroke="var(--color-border)" />
+                <XAxis
+                  dataKey="name"
+                  tick={{ fill: 'var(--color-text-muted)', fontSize: 10 }}
+                  interval={0}
+                  angle={-40}
+                  textAnchor="end"
+                  height={70}
+                />
+                <YAxis
+                  tick={{ fill: 'var(--color-text-muted)', fontSize: 11 }}
+                  tickFormatter={(v) => `${(v / 1000).toFixed(1)}`}
+                  label={{ value: 'GW', angle: -90, position: 'insideLeft', style: { fill: 'var(--color-text-muted)', fontSize: 11 } }}
+                />
+                <Tooltip
+                  contentStyle={barTooltipStyle}
+                  formatter={(value) => [fmtMW(value as number), 'Capacity']}
+                />
+                <ReferenceLine y={40000} stroke="#ef4444" strokeDasharray="5 5" label={{ value: '40 GW target', position: 'right', fill: '#ef4444', fontSize: 11 }} />
+                <Bar dataKey="mw">
+                  {section4.waterfallData.map((d, i) => (
+                    <Cell key={`wf-${i}`} fill={d.type === 'awarded' ? '#3b82f6' : '#3b82f680'} />
+                  ))}
+                </Bar>
+              </BarChart>
+            </ResponsiveContainer>
+          </div>
+          <div className="flex gap-4 mt-2 justify-center">
+            <div className="flex items-center gap-1.5">
+              <div className="w-3 h-3 rounded-sm" style={{ backgroundColor: '#3b82f6' }} />
+              <span className="text-xs" style={{ color: 'var(--color-text-muted)' }}>Awarded ({fmtMW(section4.totalAwardedMW)})</span>
+            </div>
+            <div className="flex items-center gap-1.5">
+              <div className="w-3 h-3 rounded-sm" style={{ backgroundColor: '#3b82f680' }} />
+              <span className="text-xs" style={{ color: 'var(--color-text-muted)' }}>Future target (~{fmtMW(8600)})</span>
+            </div>
+            <div className="flex items-center gap-1.5">
+              <div className="w-3 h-1 rounded-sm" style={{ backgroundColor: '#ef4444' }} />
+              <span className="text-xs" style={{ color: 'var(--color-text-muted)' }}>40 GW goal</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Visual 8: Timeline to Delivery table */}
+        <div>
+          <h4 className="text-sm font-semibold mb-2" style={{ color: 'var(--color-text)' }}>Typical Timeline: Award to Operation</h4>
+          <ScrollableTable>
+            <table className="w-full text-xs">
+              <thead>
+                <tr style={{ borderBottom: '1px solid var(--color-border)' }}>
+                  <th className="text-left px-2 py-1.5 font-semibold" style={{ color: 'var(--color-text-muted)' }}>Stage</th>
+                  <th className="text-left px-2 py-1.5 font-semibold" style={{ color: 'var(--color-text-muted)' }}>Typical Duration</th>
+                  <th className="text-left px-2 py-1.5 font-semibold" style={{ color: 'var(--color-text-muted)' }}>Notes</th>
+                </tr>
+              </thead>
+              <tbody>
+                {[
+                  { stage: 'Award \u2192 CISA Execution', duration: '3-12 months', notes: '22 of 71 executed as of Dec 2025' },
+                  { stage: 'CISA \u2192 Financial Close', duration: '6-18 months', notes: '~9 of 22 reached FC by Feb 2026' },
+                  { stage: 'Financial Close \u2192 Construction Start', duration: '3-6 months', notes: 'Grid connection is key blocker' },
+                  { stage: 'Construction \u2192 COD', duration: '12-36 months', notes: 'BESS: 12-18mo, Wind: 24-36mo, Solar: 18-24mo' },
+                  { stage: 'Total: Award \u2192 Operation', duration: '2-6 years', notes: 'Earliest CIS awards (Nov 2023) \u2192 COD 2025-2029' },
+                ].map((row, i) => (
+                  <tr key={`timeline-row-${i}`} style={{
+                    borderBottom: '1px solid var(--color-border)',
+                    ...(i === 4 ? { fontWeight: 600 } : {}),
+                  }}>
+                    <td className="px-2 py-1.5" style={{ color: i === 4 ? 'var(--color-text)' : 'var(--color-text-secondary)' }}>{row.stage}</td>
+                    <td className="px-2 py-1.5 font-medium" style={{ color: i === 4 ? 'var(--color-text)' : 'var(--color-text)' }}>{row.duration}</td>
+                    <td className="px-2 py-1.5" style={{ color: 'var(--color-text-muted)' }}>{row.notes}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </ScrollableTable>
+        </div>
+      </div>
     </div>
   )
 }

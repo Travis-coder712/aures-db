@@ -45,6 +45,7 @@ export const ROUND_INFO: Record<string, RoundInfo> = {
       'Included 3 demand response / VPP projects from Enel X',
       'Projects committed to operational by end 2025',
       'Community benefits: $12.5M total',
+      'DCCEEW Senate Estimates (Dec 2025) excluded these 6 projects from CIS count of 63 — structured under NSW LTESA firming mechanism',
     ],
   },
 

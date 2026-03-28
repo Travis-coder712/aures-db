@@ -404,6 +404,15 @@ export const ESG_TRACKER_PROJECTS: ESGTrackerProject[] = [
     notes: 'In development (COD ~2029). Separate project from operating Mokoan Solar Farm (46 MW). Edify publishes sustainability info but CIS-specific FN commitments not clearly separated.',
   },
   {
+    name: 'Mokoan Solar Farm', projectId: 'mokoan-solar-farm', developer: 'European Energy Australia',
+    scheme: 'CIS', round: 'Tender 1 — NEM Generation', roundId: 'cis-tender-1-nem-gen',
+    capacityMW: 46, state: 'VIC', stage: 'operating',
+    agreementStatus: 'awarded', awardAnnouncedDate: '2024-12-11',
+    publicationStatus: 'not_found',
+    fncenListed: false, cecCharterSignatory: false, aslSummaryData: false,
+    notes: 'Operating (46 MW, commissioned late 2024). Won CIS Tender 1 while still in commissioning. Separate project from West Mokoan Solar Farm (300 MW, Lightsource bp).',
+  },
+  {
     name: 'Barwon Solar Farm', projectId: 'barwon-solar-farm-and-bess', developer: 'Elgin Energy',
     scheme: 'CIS', round: 'Tender 1 — NEM Generation', roundId: 'cis-tender-1-nem-gen',
     capacityMW: 250, state: 'VIC', stage: 'development',
