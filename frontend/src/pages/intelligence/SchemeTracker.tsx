@@ -3223,6 +3223,42 @@ function CISSuccessTab() {
         </div>
       </div>
 
+      {/* Senate Estimates Callout */}
+      <div className="rounded-lg border border-blue-500/30 bg-blue-500/5 p-4">
+        <div className="flex items-start gap-3">
+          <span className="text-lg mt-0.5 shrink-0">🏛️</span>
+          <div className="space-y-2 text-xs text-[var(--color-text-secondary)]">
+            <div className="text-sm font-semibold text-blue-400">Senate Estimates — DCCEEW Contract Status</div>
+            <p>
+              At <strong>Supplementary Budget Estimates</strong> on 1 December 2025, Mr Matthew Brine (Head of Division, Clean Energy Investment &amp; Facilitation, DCCEEW) testified that <strong>63 projects totalling 18.2 GW</strong> had been awarded CIS contracts — 37 generation projects (12.2 GW) and 26 storage projects (6 GW / 22.2 GWh). Of these, only <strong>22 projects (6.5 GW) had executed CISAs</strong>, with 41 still in negotiation.
+            </p>
+            <p>
+              Mr Brine explained that CISAs are 15-year agreements requiring &ldquo;fairly detailed contractual negotiation&rdquo; post-award. Many projects still need environmental/planning approvals, contractor procurement, and in some cases FIRB approval. Several tender rounds only concluded in August 2025, so negotiations were still underway. DCCEEW has since introduced a <strong>time limit</strong> for finalising CISAs, with bonds of up to $4M per project forfeited if milestones are missed.
+            </p>
+            <div className="mt-2 overflow-x-auto">
+              <table className="text-[10px] border-collapse">
+                <thead>
+                  <tr className="text-[var(--color-text-muted)]">
+                    <th className="pr-3 py-0.5 text-left font-medium">Date</th>
+                    <th className="pr-3 py-0.5 text-right font-medium">Executed</th>
+                    <th className="pr-3 py-0.5 text-right font-medium">GW</th>
+                    <th className="py-0.5 text-left font-medium">Source</th>
+                  </tr>
+                </thead>
+                <tbody className="text-[var(--color-text)]">
+                  <tr><td className="pr-3 py-0.5">Aug 2025</td><td className="pr-3 py-0.5 text-right">19</td><td className="pr-3 py-0.5 text-right">5.85</td><td className="py-0.5 text-[var(--color-text-muted)]">DCCEEW website</td></tr>
+                  <tr><td className="pr-3 py-0.5">1 Dec 2025</td><td className="pr-3 py-0.5 text-right">22</td><td className="pr-3 py-0.5 text-right">6.5</td><td className="py-0.5 text-[var(--color-text-muted)]">Senate Estimates (Mr Brine)</td></tr>
+                  <tr><td className="pr-3 py-0.5">5 Feb 2026</td><td className="pr-3 py-0.5 text-right">23</td><td className="pr-3 py-0.5 text-right">7.0</td><td className="py-0.5 text-[var(--color-text-muted)]">Senate debate (Min. Gallagher)</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p className="text-[10px] text-[var(--color-text-muted)] mt-1">
+              Sources: <a href="https://www.aph.gov.au/Parliamentary_Business/Hansard/Hansard_Display?bid=committees/estimate/29007/&sid=0001" target="_blank" rel="noopener" className="text-blue-400/70 hover:underline">Hansard 1/12/25</a> &bull; <a href="https://www.openaustralia.org.au/senate/?id=2026-02-05.130.1&m=100241" target="_blank" rel="noopener" className="text-blue-400/70 hover:underline">Senate 5/2/26</a> &bull; Next: Budget Estimates 25–28 May 2026
+            </p>
+          </div>
+        </div>
+      </div>
+
       {/* Section B: Confirmed CISA Table */}
       <div className="rounded-lg border border-[var(--color-border)] bg-[var(--color-bg-card)]">
         <button
