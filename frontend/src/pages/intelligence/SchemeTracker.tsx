@@ -2066,10 +2066,10 @@ function SchemeAnalysisEssay({ onClose, cisRounds, ltesaRounds }: {
             {/* LTESA Round 2 / CIS Pilot NSW */}
             <RoundAnalysis title="LTESA Round 2 / CIS Pilot NSW" date="November 2023" color="#8b5cf6">
               <p>
-                This combined round was the first CIS tender, co-delivered between the federal and NSW governments. It sought 930 MW of firming capacity and awarded 1,075 MW across six projects: three large BESS (Orana 460 MW, Liddell 250 MW, Smithfield 235 MW) and three Enel X virtual power plant portfolios (130 MW combined). The target COD was December 2025.
+                This combined round was the first CIS tender, co-delivered between the federal and NSW governments. It sought firming capacity and awarded contracts across six projects: three large BESS (Liddell 500 MW, Orana 460 MW, Smithfield 235 MW) and three Enel X virtual power plant portfolios (130 MW combined). The target COD was December 2025.
               </p>
               <p>
-                The Smithfield Sydney Battery (235 MW) has reached commercial operation, and the Orana REZ Battery (460 MW) and Liddell Battery (250 MW) are both in construction. The VPP projects, being aggregations of distributed assets, have shorter development timelines and are expected to be at or nearing operational status. The December 2025 target COD was missed by the larger BESS projects, though they are progressing through construction.
+                The Smithfield Sydney Battery (235 MW) has reached commercial operation, and the Orana REZ Battery (460 MW) and Liddell BESS (500 MW) are both in construction. The VPP projects, being aggregations of distributed assets, have shorter development timelines and are expected to be at or nearing operational status. The December 2025 target COD was missed by the larger BESS projects, though they are progressing through construction.
               </p>
             </RoundAnalysis>
 
@@ -2172,7 +2172,7 @@ function SchemeAnalysisEssay({ onClose, cisRounds, ltesaRounds }: {
 
             <h4 className="text-sm font-semibold text-[var(--color-text)] mt-4 mb-2">The Delivery Gap</h4>
             <p>
-              Based on current data from the AURES Milestone Tracker and ESG Agreement Proxy, a small but growing number of awarded projects have reached operation. New England Solar Farm (720 MW) and Stubbo Solar Farm (400 MW) from LTESA Round 1, Culcairn Solar Farm (350 MW) from LTESA Round 3, Flyers Creek Wind Farm (145 MW) from LTESA Round 4, West Mokoan Solar (300 MW) from CIS Tender 1, Smithfield Battery (235 MW) from CIS Pilot NSW, and Willogoleche 2 Wind (108 MW) from CIS Tender 4 are confirmed operating. In the CIS Pilot NSW / LTESA Round 2, two large BESS projects (Orana 460 MW, Liddell 250 MW) are in construction. However, the majority of the 90+ awarded projects across both programs remain in the development phase.
+              Based on current data from the AURES Milestone Tracker and ESG Agreement Proxy, a small but growing number of awarded projects have reached operation. New England Solar Farm (720 MW) and Stubbo Solar Farm (400 MW) from LTESA Round 1, Culcairn Solar Farm (350 MW) from LTESA Round 3, Flyers Creek Wind Farm (145 MW) from LTESA Round 4, Mokoan Solar Farm (46 MW) from CIS Tender 1, and Smithfield Battery (235 MW) from CIS Pilot NSW are confirmed operating. In the CIS Pilot NSW / LTESA Round 2, two large BESS projects (Orana 460 MW, Liddell 500 MW) are in construction. However, the majority of the 90+ awarded projects across both programs remain in the development phase.
             </p>
 
             <h4 className="text-sm font-semibold text-[var(--color-text)] mt-4 mb-2">The Pipeline Challenge</h4>
@@ -3473,8 +3473,8 @@ function SchemeTimelineTab() {
         numProjects: 6,
         targetCOD: 'Dec 2025',
         headline: 'First-ever CIS round. Co-delivered with NSW Government. Firming focus.',
-        insight: 'Smithfield Battery (235 MW) now operating. Two large BESS (Orana 460 MW, Liddell 250 MW) in construction. VPPs likely operating. Dec 2025 target COD missed by larger BESS projects.',
-        notableWinners: ['Orana REZ Battery (460 MW) — Akaysha/BlackRock', 'Liddell Battery (250 MW) — AGL', 'Smithfield Battery (235 MW) — Iberdrola — operating', '3× Enel X VPPs (130 MW)'],
+        insight: 'Smithfield Battery (235 MW) now operating. Two large BESS (Liddell 500 MW, Orana 460 MW) in construction. VPPs likely operating. Dec 2025 target COD missed by larger BESS projects.',
+        notableWinners: ['Liddell BESS (500 MW) — AGL', 'Orana REZ Battery (460 MW) — Akaysha/BlackRock', 'Smithfield Battery (235 MW) — Iberdrola — operating', '3× Enel X VPPs (130 MW)'],
         constructionPct: 50, confirmedPct: 0, confirmedCount: 0, confirmedMW: 0, notConfirmedCount: 0, notConfirmedMW: 0, totalMW: 1075,
       },
       {

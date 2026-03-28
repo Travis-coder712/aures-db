@@ -1539,7 +1539,7 @@ def export_scheme_tracker(conn):
         {'id': 'cis-pilot-nsw', 'scheme': 'CIS', 'round': 'CIS Pilot — NSW', 'type': 'dispatchable', 'announced_date': '2023-11-23',
          'projects': [
              {'name': 'Orana REZ Battery', 'developer': 'Akaysha Energy', 'technology': 'bess', 'capacity_mw': 460, 'storage_mwh': 920, 'state': 'NSW', 'project_id': 'orana-bess'},
-             {'name': 'Liddell Battery', 'developer': 'AGL Energy', 'technology': 'bess', 'capacity_mw': 250, 'storage_mwh': 500, 'state': 'NSW', 'project_id': 'liddell-bess'},
+             {'name': 'Liddell BESS', 'developer': 'AGL Energy', 'technology': 'bess', 'capacity_mw': 500, 'storage_mwh': 1000, 'state': 'NSW', 'project_id': 'liddell-bess'},
              {'name': 'Smithfield Sydney Battery', 'developer': 'Iberdrola Australia', 'technology': 'bess', 'capacity_mw': 235, 'storage_mwh': 470, 'state': 'NSW', 'project_id': 'smithfield-bess'},
              {'name': 'Enel X VPP 1', 'developer': 'Enel X Australia', 'technology': 'vpp', 'capacity_mw': 43, 'state': 'NSW'},
              {'name': 'Enel X VPP 2', 'developer': 'Enel X Australia', 'technology': 'vpp', 'capacity_mw': 43, 'state': 'NSW'},
@@ -1565,7 +1565,7 @@ def export_scheme_tracker(conn):
              {'name': 'Thunderbolt Wind Farm', 'developer': 'Neoen', 'technology': 'wind', 'capacity_mw': 230, 'state': 'NSW', 'project_id': 'thunderbolt-wind-farm'},
              {'name': 'Glanmire Solar Farm', 'developer': 'Elgin Energy', 'technology': 'hybrid', 'capacity_mw': 60, 'storage_mwh': 104, 'state': 'NSW', 'project_id': 'glanmire-solar-farm'},
              {'name': 'Kentbruck Wind Farm', 'developer': 'Neoen', 'technology': 'wind', 'capacity_mw': 600, 'state': 'VIC', 'project_id': 'kentbruck-green-power-hub'},
-             {'name': 'West Mokoan Solar Farm', 'developer': 'Lightsource bp', 'technology': 'hybrid', 'capacity_mw': 300, 'storage_mwh': 560, 'state': 'VIC', 'project_id': 'mokoan-solar-farm'},
+             {'name': 'West Mokoan Solar Farm', 'developer': 'Lightsource bp', 'technology': 'hybrid', 'capacity_mw': 300, 'storage_mwh': 560, 'state': 'VIC', 'project_id': 'west-mokoan-solar-farm-and-bess'},
              {'name': 'Barwon Solar Farm', 'developer': 'Elgin Energy', 'technology': 'hybrid', 'capacity_mw': 250, 'storage_mwh': 500, 'state': 'VIC', 'project_id': 'barwon-solar-farm-and-bess'},
              {'name': 'Campbells Forest Solar Farm', 'developer': 'Risen Energy', 'technology': 'solar', 'capacity_mw': 205, 'state': 'VIC', 'project_id': 'campbells-forest-solar-farm'},
              {'name': 'Elaine Solar Farm', 'developer': 'Elgin Energy', 'technology': 'hybrid', 'capacity_mw': 125, 'storage_mwh': 250, 'state': 'VIC', 'project_id': 'elaine-solar-farm-and-bess'},
@@ -1624,7 +1624,7 @@ def export_scheme_tracker(conn):
              {'name': 'Punchs Creek Solar Farm', 'developer': 'EDPR', 'technology': 'hybrid', 'capacity_mw': 400, 'storage_mwh': 1600, 'state': 'QLD'},
              {'name': 'Smoky Creek Solar Power Station', 'developer': 'Edify Energy', 'technology': 'hybrid', 'capacity_mw': 300, 'storage_mwh': 1200, 'state': 'QLD', 'project_id': 'smoky-creek-solar-power-station'},
              {'name': 'Tallawang Solar Hybrid', 'developer': 'Potentia Energy', 'technology': 'hybrid', 'capacity_mw': 500, 'storage_mwh': 1000, 'state': 'NSW', 'project_id': 'tallawang-solar-and-bess'},
-             {'name': 'Willogoleche 2 Wind Farm', 'developer': 'ENGIE / Foresight', 'technology': 'wind', 'capacity_mw': 108, 'state': 'SA', 'project_id': 'willogoleche-wind-farm'},
+             {'name': 'Willogoleche 2 Wind Farm', 'developer': 'ENGIE / Foresight', 'technology': 'wind', 'capacity_mw': 108, 'state': 'SA', 'project_id': 'willogoleche-2-wind-farm'},
          ]},
         # LTESA Rounds
         {'id': 'ltesa-round-1', 'scheme': 'LTESA', 'round': 'Round 1 — Generation + LDS', 'type': 'mixed', 'announced_date': '2023-05-03',
@@ -1636,7 +1636,7 @@ def export_scheme_tracker(conn):
          ]},
         {'id': 'ltesa-round-2', 'scheme': 'LTESA', 'round': 'Round 2 — Firming', 'type': 'firming', 'announced_date': '2023-11-22',
          'projects': [
-             {'name': 'Liddell BESS', 'developer': 'AGL', 'technology': 'bess', 'capacity_mw': 500, 'storage_mwh': 1000, 'state': 'NSW', 'project_id': 'liddell-bess'},
+             # Liddell BESS (500 MW) listed under cis-pilot-nsw — single contract under combined round
              {'name': 'Orana BESS', 'developer': 'Akaysha Energy', 'technology': 'bess', 'capacity_mw': 415, 'storage_mwh': 1660, 'state': 'NSW', 'project_id': 'orana-bess'},
              {'name': 'Enel X VPP Portfolio', 'developer': 'Enel X Australia', 'technology': 'vpp', 'capacity_mw': 95, 'state': 'NSW'},
              {'name': 'Smithfield BESS', 'developer': 'Iberdrola', 'technology': 'bess', 'capacity_mw': 65, 'storage_mwh': 130, 'state': 'NSW', 'project_id': 'smithfield-bess'},

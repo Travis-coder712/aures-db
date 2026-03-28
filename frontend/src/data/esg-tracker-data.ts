@@ -221,13 +221,13 @@ export const ESG_TRACKER_PROJECTS: ESGTrackerProject[] = [
     notes: 'Pilot round — no formal FN publication requirement. Construction commenced mid-2024.',
   },
   {
-    name: 'Liddell Battery', projectId: 'liddell-bess', developer: 'AGL Energy',
+    name: 'Liddell BESS', projectId: 'liddell-bess', developer: 'AGL Energy',
     scheme: 'CIS', round: 'CIS Pilot — NSW', roundId: 'cis-pilot-nsw',
-    capacityMW: 250, state: 'NSW', stage: 'construction',
+    capacityMW: 500, state: 'NSW', stage: 'construction',
     agreementStatus: 'executed', awardAnnouncedDate: '2023-11-23',
     publicationStatus: 'not_required',
     fncenListed: false, cecCharterSignatory: true, aslSummaryData: false,
-    notes: 'AGL is CEC Best Practice Charter signatory. Pilot round.',
+    notes: 'AGL is CEC Best Practice Charter signatory. 500 MW total — single contract under combined CIS Pilot/LTESA R2 round.',
   },
   {
     name: 'Smithfield Sydney Battery', projectId: 'smithfield-bess', developer: 'Iberdrola',
@@ -395,13 +395,13 @@ export const ESG_TRACKER_PROJECTS: ESGTrackerProject[] = [
     notes: 'SPV structure. No proponent website with FN commitments found.',
   },
   {
-    name: 'West Mokoan Solar Farm', projectId: 'mokoan-solar-farm', developer: 'Edify Energy',
+    name: 'West Mokoan Solar Farm', projectId: 'west-mokoan-solar-farm-and-bess', developer: 'Edify Energy',
     scheme: 'CIS', round: 'Tender 1 — NEM Generation', roundId: 'cis-tender-1-nem-gen',
-    capacityMW: 300, state: 'VIC', stage: 'operating',
-    agreementStatus: 'executed', awardAnnouncedDate: '2024-12-11',
+    capacityMW: 300, state: 'VIC', stage: 'development',
+    agreementStatus: 'awarded', awardAnnouncedDate: '2024-12-11',
     publicationStatus: 'partial',
     fncenListed: true, cecCharterSignatory: false, aslSummaryData: true,
-    notes: 'Operating — agreement executed. Edify publishes sustainability info but CIS-specific FN commitments not clearly separated.',
+    notes: 'In development (COD ~2029). Separate project from operating Mokoan Solar Farm (46 MW). Edify publishes sustainability info but CIS-specific FN commitments not clearly separated.',
   },
   {
     name: 'Barwon Solar Farm', projectId: 'barwon-solar-farm-and-bess', developer: 'Elgin Energy',
@@ -814,13 +814,13 @@ export const ESG_TRACKER_PROJECTS: ESGTrackerProject[] = [
     fncenListed: true, cecCharterSignatory: false, aslSummaryData: true,
   },
   {
-    name: 'Willogoleche 2 Wind Farm', projectId: 'willogoleche-wind-farm', developer: 'Willogoleche Power',
+    name: 'Willogoleche 2 Wind Farm', projectId: 'willogoleche-2-wind-farm', developer: 'ENGIE / Foresight',
     scheme: 'CIS', round: 'Tender 4 — NEM Generation', roundId: 'cis-tender-4-nem-gen',
-    capacityMW: 108, state: 'SA', stage: 'operating',
+    capacityMW: 108, state: 'SA', stage: 'development',
     agreementStatus: 'executed', awardAnnouncedDate: '2025-10-09',
     publicationStatus: 'not_found',
     fncenListed: true, cecCharterSignatory: false, aslSummaryData: true,
-    notes: 'Operating — agreement executed. No separate FN publication found.',
+    notes: 'In development — separate project from operating Willogoleche Wind Farm. No FN publication found.',
   },
 
   // ────────────────────────────────────────────────
@@ -868,15 +868,7 @@ export const ESG_TRACKER_PROJECTS: ESGTrackerProject[] = [
   // ────────────────────────────────────────────────
   // LTESA Round 2 — Firming (announced 2023-11-22)
   // ────────────────────────────────────────────────
-  {
-    name: 'Liddell BESS', projectId: 'liddell-bess', developer: 'AGL Energy',
-    scheme: 'LTESA', round: 'Round 2 — Firming', roundId: 'ltesa-round-2',
-    capacityMW: 500, state: 'NSW', stage: 'construction',
-    agreementStatus: 'executed', awardAnnouncedDate: '2023-11-22',
-    publicationStatus: 'partial',
-    fncenListed: false, cecCharterSignatory: true, aslSummaryData: true,
-    notes: 'AGL CEC BPC signatory with published sustainability reports. LTESA-specific APP not separately published.',
-  },
+  // Liddell BESS (500 MW) listed under cis-pilot-nsw — single contract under combined round
   {
     name: 'Orana BESS', projectId: 'orana-bess', developer: 'Akaysha Energy (BlackRock)',
     scheme: 'LTESA', round: 'Round 2 — Firming', roundId: 'ltesa-round-2',

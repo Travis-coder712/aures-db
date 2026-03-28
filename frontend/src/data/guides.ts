@@ -1798,6 +1798,200 @@ Once the search modal is open:
 
 On mobile devices, the search modal opens full-screen for easier typing and browsing. Tap any result to navigate directly to that entity's detail page. The back button or swipe gesture returns you to where you were.`,
   },
+  {
+    id: 'data-quality',
+    title: 'Data Quality Audit',
+    description: 'Automated data quality checks, issue taxonomy, and methodology for identifying and resolving data accuracy problems.',
+    icon: '🔬',
+    category: 'technical',
+    readingTime: '10 min read',
+    content: `# Data Quality Audit
+
+> **Last Updated:** 2026-03-27
+> **Script:** \`pipeline/generators/generate_data_quality.py\`
+> **Output:** \`frontend/public/data/analytics/data-quality.json\`
+
+AURES aggregates data from 10+ sources (AEMO, OpenElectricity, CIS/LTESA announcements, developer websites, EIS documents). When the same physical project appears in multiple sources under slightly different names, capacities, or statuses, data quality issues can emerge. This guide documents the automated audit system and the taxonomy of issues it detects.
+
+---
+
+## How to Run the Audit
+
+\`\`\`bash
+cd /path/to/aures-db
+python3 pipeline/generators/generate_data_quality.py
+\`\`\`
+
+The script:
+1. Loads all 1,000+ project JSON files from \`frontend/public/data/projects/\`
+2. Parses scheme entries from \`scheme-rounds.ts\` and \`esg-tracker-data.ts\`
+3. Runs 5 automated checks (see below)
+4. Writes a structured report to \`data-quality.json\`
+5. Prints a summary with high-severity issues to the console
+
+Run it **after every data import or manual edit** to catch regressions.
+
+---
+
+## Issue Taxonomy
+
+### 1. Identity Confusion (similar_names)
+
+**What:** Two distinct projects with similar names that could be mixed up.
+
+**Examples found and fixed:**
+- **Willogoleche Wind Farm** (operating, 120 MW) vs **Willogoleche 2 Wind Farm** (development, 108 MW) — CIS data was incorrectly linked to the operating project
+- **Mokoan Solar Farm** (operating, 46 MW) vs **West Mokoan Solar Farm and BESS** (development, 300 MW) — scheme entry was pointing to the wrong project_id
+
+**Detection:** Fuzzy name matching (SequenceMatcher) with smart filtering to exclude legitimate patterns:
+- Explicit stage/phase numbering (Stage 1 vs Stage 2)
+- Co-located different technologies (Solar + BESS at same site)
+- Directional variants (North vs South)
+- Numbered suffixes (BESS 1 vs BESS 2)
+
+**Resolution:** Verify each flagged pair. If they're genuinely distinct, no action needed. If confused, create separate project files and fix cross-references.
+
+---
+
+### 2. Cross-Reference Mismatch (name_mismatch)
+
+**What:** A scheme entry's \`project_id\` points to a project file whose name doesn't match.
+
+**Examples:**
+- Scheme says "Kentbruck Wind Farm" but project file is "Kentbruck Green Power Hub"
+- Scheme says "Teebar BESS" but project file is "Teebar Creek Battery Storage - KCI"
+
+**Detection:** Name similarity score < 60% between scheme entry name and linked project file name.
+
+**Resolution:** Either the scheme name or project name needs updating, or the project_id is wrong.
+
+---
+
+### 3. Capacity Discrepancy (capacity_mismatch)
+
+**What:** Scheme-contracted capacity differs significantly (>20%) from the project file capacity.
+
+**Important context:** This is often **legitimate** — a scheme may contract for Stage 1 of a larger project, or for partial capacity. The audit distinguishes:
+- **Staged projects:** Flagged as "info" when scheme name contains "Stage" and capacity < total
+- **Non-staged mismatches:** Flagged as "warning" or "high" — these need investigation
+
+**Examples found and fixed:**
+- **Liddell BESS:** Was listed as 250 MW in CIS Pilot and 500 MW in LTESA R2, but it's one project with one 500 MW contract under the combined round
+
+**Resolution:** Verify which capacity is correct. If it's a staged contract, add a note. If it's wrong, fix it.
+
+---
+
+### 4. Status Drift (status_drift)
+
+**What:** A scheme entry's \`stage\` (operating/construction/development) doesn't match the project file's \`status\`.
+
+**Example found and fixed:**
+- **West Mokoan Solar Farm** was listed as \`stage: 'operating'\` in ESG tracker but the project file correctly shows \`status: 'development'\`
+
+**Detection:** Direct comparison of scheme stage vs project status.
+
+**Resolution:** Update the stale status — usually the project file is more current.
+
+---
+
+### 5. Multi-Scheme Duplicate (multi_scheme_duplicate)
+
+**What:** Same \`project_id\` appears in multiple scheme rounds. May indicate double-counting.
+
+**Example found and fixed:**
+- **Liddell BESS** appeared in both CIS Pilot NSW (250 MW) and LTESA Round 2 (500 MW) — these were one combined round, not two separate contracts
+
+**Detection:** Group scheme entries by project_id, flag those appearing 2+ times. Higher severity when capacities differ across rounds.
+
+**Resolution:** Verify whether the project genuinely has multiple contracts or if rounds were double-listed.
+
+---
+
+### 6. Orphaned Reference (orphaned_reference)
+
+**What:** A scheme entry references a \`project_id\` that doesn't exist as a project file.
+
+**Detection:** Check every scheme project_id against the project file index.
+
+**Resolution:** Either create the missing project file or fix the project_id.
+
+---
+
+### 7. Technology Mismatch (technology_mismatch)
+
+**What:** Scheme says one technology but the project file says another.
+
+**Detection:** Direct comparison, allowing hybrid to match solar/bess.
+
+---
+
+### 8. Missing Coordinates & Empty Timelines
+
+**What:** Operating/construction projects without map coordinates or timeline events.
+
+**Detection:** Simple field presence checks for active projects.
+
+---
+
+## Common Root Causes
+
+| Root Cause | How It Manifests |
+|-----------|-----------------|
+| **Name evolution** | Project changes name during development (e.g. "Kentbruck Wind Farm" → "Kentbruck Green Power Hub") |
+| **Source disagreement** | AEMO uses one name/capacity, CIS announcement uses another |
+| **Partial contracting** | Scheme contracts for Stage 1 or partial capacity; project file shows total |
+| **Combined rounds** | CIS Pilot NSW and LTESA R2 were one combined round but modelled as two |
+| **SPV vs parent** | Developer registered as SPV (e.g. "Willogoleche Power Pty Ltd") vs parent ("ENGIE") |
+| **Stale status** | Project progresses but scheme tracker isn't updated |
+
+---
+
+## Audit Results Summary (27 March 2026)
+
+| Metric | Count |
+|--------|-------|
+| Projects scanned | 1,068 |
+| Scheme entries parsed | 187 |
+| Total issues found | 243 |
+| High severity | 62 |
+| Warning | 94 |
+| Info | 87 |
+
+### Issues by Type
+
+| Type | Count | Description |
+|------|-------|-------------|
+| similar_names | 105 | Pairs of projects with similar names — most are legitimate (stages, co-located tech) |
+| multi_scheme_duplicate | 79 | Projects appearing in multiple scheme rounds |
+| capacity_mismatch | 36 | Scheme capacity differs from project file |
+| name_mismatch | 12 | Scheme name significantly different from project file name |
+| missing_coordinates | 9 | Active projects without map coordinates |
+| technology_mismatch | 2 | Scheme and project disagree on technology type |
+
+### Key Issues Resolved This Session
+
+1. **Willogoleche / Willogoleche 2** — Created separate project file for Willogoleche 2 (development, 108 MW). Fixed CIS Tender 4 references to point to new project instead of operating Willogoleche.
+2. **Mokoan / West Mokoan** — Fixed project_id in scheme data: West Mokoan now correctly points to \`west-mokoan-solar-farm-and-bess\` instead of \`mokoan-solar-farm\`. Fixed status from "operating" to "development".
+3. **Liddell BESS** — Consolidated to single 500 MW entry under CIS Pilot NSW. Removed duplicate from LTESA Round 2 (same combined round, one contract).
+
+### Issues Requiring Future Investigation
+
+- **Smithfield Battery (235 MW in CIS Pilot vs 65 MW in project file)** — likely same combined round issue as Liddell
+- **Orana BESS** — appears in both CIS Pilot and LTESA R2, may need same consolidation as Liddell
+- **Hargaves BESS vs Hargraves BESS** (300 MW vs 710 MW) — possible spelling error creating duplicate
+- **Blue Mackerel North Off Shore vs Offshore** — likely duplicate from capitalisation difference
+
+---
+
+## Recommended Workflow
+
+1. **After data import:** Run \`python3 pipeline/generators/generate_data_quality.py\`
+2. **Review high-severity issues** printed to console
+3. **Fix confirmed issues** in the relevant source files (project JSON, scheme-rounds.ts, esg-tracker-data.ts, export_json.py)
+4. **Re-run audit** to verify fixes and check for regressions
+5. **Commit** the updated data-quality.json alongside your fixes`,
+  },
 ]
 
 export const GUIDE_CATEGORIES = {
