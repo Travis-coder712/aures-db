@@ -3230,10 +3230,13 @@ function CISSuccessTab() {
           <div className="space-y-2 text-xs text-[var(--color-text-secondary)]">
             <div className="text-sm font-semibold text-blue-400">Senate Estimates — DCCEEW Contract Status</div>
             <p>
-              At <strong>Supplementary Budget Estimates</strong> on 1 December 2025, Mr Matthew Brine (Head of Division, Clean Energy Investment &amp; Facilitation, DCCEEW) testified that <strong>63 projects totalling 18.2 GW</strong> had been awarded CIS contracts — 37 generation projects (12.2 GW) and 26 storage projects (6 GW / 22.2 GWh). Of these, only <strong>22 projects (6.5 GW) had executed CISAs</strong>, with 41 still in negotiation.
+              At <strong>Supplementary Estimates</strong> (1 Dec 2025), Mr Matthew Brine (Head of Division, Clean Energy Investment &amp; Facilitation, DCCEEW) testified that <strong>63 projects totalling 18.2 GW</strong> had been awarded CIS contracts — 37 generation (12.2 GW) and 26 storage (6 GW / 22.2 GWh). Of these, only <strong>22 projects (6.5 GW) had executed CISAs</strong>, with 41 still in negotiation. CISAs are 15-year agreements requiring detailed contractual negotiation post-award. Many projects still need environmental/planning approvals, contractor procurement, and in some cases FIRB approval.
             </p>
             <p>
-              Mr Brine explained that CISAs are 15-year agreements requiring &ldquo;fairly detailed contractual negotiation&rdquo; post-award. Many projects still need environmental/planning approvals, contractor procurement, and in some cases FIRB approval. Several tender rounds only concluded in August 2025, so negotiations were still underway. DCCEEW has since introduced a <strong>time limit</strong> for finalising CISAs, with bonds of up to $4M per project forfeited if milestones are missed.
+              At <strong>Additional Estimates</strong> (9 Feb 2026), Mr Brine provided further detail on costs and progress. Departmental funding for running the scheme totals <strong>$252.2M</strong> ($200.2M initial + $34.9M for oversubscribed tender assessment + $17.1M for contract management). Tenders were <strong>10&times; oversubscribed</strong> in Tender 1 and 4&ndash;5&times; in subsequent rounds. The underwriting cost (administered side) remains &ldquo;not for publication&rdquo; to maintain competitive tension &mdash; Mr Brine noted if the 40 GW target cost was disclosed, &ldquo;you could just divide that by 40, and that&rsquo;s what people would bid in.&rdquo;
+            </p>
+            <p>
+              Ms Alison Wiltshire (Branch Head, CIS Delivery &amp; Governance) confirmed <strong>~9 projects had reached financial close</strong> among those with executed CISAs. Mr Brine noted CIS deliberately targets early-stage projects: &ldquo;If they&rsquo;re at financial close, they probably don&rsquo;t need a lot of support from the federal government.&rdquo; Most signed projects expected to reach financial close in calendar year 2026. Upon signing, proponents have <strong>20 days to lodge a project bond</strong>; failure to deliver can result in bond forfeiture and re-tendering.
             </p>
             <div className="mt-2 overflow-x-auto">
               <table className="text-[10px] border-collapse">
@@ -3242,18 +3245,20 @@ function CISSuccessTab() {
                     <th className="pr-3 py-0.5 text-left font-medium">Date</th>
                     <th className="pr-3 py-0.5 text-right font-medium">Executed</th>
                     <th className="pr-3 py-0.5 text-right font-medium">GW</th>
+                    <th className="pr-3 py-0.5 text-right font-medium">Fin. Close</th>
                     <th className="py-0.5 text-left font-medium">Source</th>
                   </tr>
                 </thead>
                 <tbody className="text-[var(--color-text)]">
-                  <tr><td className="pr-3 py-0.5">Aug 2025</td><td className="pr-3 py-0.5 text-right">19</td><td className="pr-3 py-0.5 text-right">5.85</td><td className="py-0.5 text-[var(--color-text-muted)]">DCCEEW website</td></tr>
-                  <tr><td className="pr-3 py-0.5">1 Dec 2025</td><td className="pr-3 py-0.5 text-right">22</td><td className="pr-3 py-0.5 text-right">6.5</td><td className="py-0.5 text-[var(--color-text-muted)]">Senate Estimates (Mr Brine)</td></tr>
-                  <tr><td className="pr-3 py-0.5">5 Feb 2026</td><td className="pr-3 py-0.5 text-right">23</td><td className="pr-3 py-0.5 text-right">7.0</td><td className="py-0.5 text-[var(--color-text-muted)]">Senate debate (Min. Gallagher)</td></tr>
+                  <tr><td className="pr-3 py-0.5">Aug 2025</td><td className="pr-3 py-0.5 text-right">19</td><td className="pr-3 py-0.5 text-right">5.85</td><td className="pr-3 py-0.5 text-right">—</td><td className="py-0.5 text-[var(--color-text-muted)]">DCCEEW website</td></tr>
+                  <tr><td className="pr-3 py-0.5">1 Dec 2025</td><td className="pr-3 py-0.5 text-right">22</td><td className="pr-3 py-0.5 text-right">6.5</td><td className="pr-3 py-0.5 text-right">—</td><td className="py-0.5 text-[var(--color-text-muted)]">Supp. Estimates (Mr Brine)</td></tr>
+                  <tr><td className="pr-3 py-0.5">5 Feb 2026</td><td className="pr-3 py-0.5 text-right">23</td><td className="pr-3 py-0.5 text-right">7.0</td><td className="pr-3 py-0.5 text-right">—</td><td className="py-0.5 text-[var(--color-text-muted)]">Senate debate (Min. Gallagher)</td></tr>
+                  <tr><td className="pr-3 py-0.5">9 Feb 2026</td><td className="pr-3 py-0.5 text-right">—</td><td className="pr-3 py-0.5 text-right">—</td><td className="pr-3 py-0.5 text-right">~9</td><td className="py-0.5 text-[var(--color-text-muted)]">Add. Estimates (Ms Wiltshire)</td></tr>
                 </tbody>
               </table>
             </div>
             <p className="text-[10px] text-[var(--color-text-muted)] mt-1">
-              Sources: <a href="https://www.aph.gov.au/Parliamentary_Business/Hansard/Hansard_Display?bid=committees/estimate/29007/&sid=0001" target="_blank" rel="noopener" className="text-blue-400/70 hover:underline">Hansard 1/12/25</a> &bull; <a href="https://www.openaustralia.org.au/senate/?id=2026-02-05.130.1&m=100241" target="_blank" rel="noopener" className="text-blue-400/70 hover:underline">Senate 5/2/26</a> &bull; Next: Budget Estimates 25–28 May 2026
+              Sources: <a href="https://www.aph.gov.au/Parliamentary_Business/Hansard/Hansard_Display?bid=committees/estimate/29007/&sid=0001" target="_blank" rel="noopener" className="text-blue-400/70 hover:underline">Hansard 1/12/25</a> &bull; <a href="https://www.aph.gov.au/Parliamentary_Business/Senate_estimates/ec/2025-26_Additional_Estimates" target="_blank" rel="noopener" className="text-blue-400/70 hover:underline">Hansard 9/2/26</a> &bull; <a href="https://www.openaustralia.org.au/senate/?id=2026-02-05.130.1&m=100241" target="_blank" rel="noopener" className="text-blue-400/70 hover:underline">Senate 5/2/26</a> &bull; Next: Budget Estimates 25–28 May 2026
             </p>
           </div>
         </div>
