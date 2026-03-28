@@ -3045,14 +3045,20 @@ function formatAwardDate(d: string): string {
   return dt.toLocaleDateString('en-AU', { month: 'short', year: 'numeric' })
 }
 
+type CISDetailView = null | 'confirmed' | 'likely-failed' | 'may-be-negotiating'
+
 function CISSuccessTab() {
   const [showConfirmed, setShowConfirmed] = useState(false)
   const [showNotConfirmed, setShowNotConfirmed] = useState(false)
   const [confirmedSort, setConfirmedSort] = useState<{ col: CISSortCol; dir: 'asc' | 'desc' }>({ col: 'round', dir: 'asc' })
   const [notConfirmedSort, setNotConfirmedSort] = useState<{ col: CISSortCol; dir: 'asc' | 'desc' }>({ col: 'months', dir: 'desc' })
   const [threshold, setThreshold] = useState(6)
+  const [detailView, setDetailView] = useState<CISDetailView>(null)
 
   const techLookup = useMemo(() => buildTechLookup(), [])
+
+  // CIS-only projects
+  const cisProjects = useMemo(() => ESG_TRACKER_PROJECTS.filter(p => p.scheme === 'CIS'), [])
 
   // Build round name lookup from ROUND_ESG_SUMMARIES
   const roundNameMap = useMemo(() => {
@@ -3069,7 +3075,7 @@ function CISSuccessTab() {
     let totalMW = 0
     let confirmedMW = 0
 
-    for (const p of ESG_TRACKER_PROJECTS) {
+    for (const p of cisProjects) {
       rounds.add(p.roundId)
       totalMW += p.capacityMW
       const reason = getConfirmReason(p)
@@ -3082,7 +3088,7 @@ function CISSuccessTab() {
     }
 
     return { confirmed: conf, notConfirmed: notConf, totalMW, confirmedMW, roundCount: rounds.size }
-  }, [])
+  }, [cisProjects])
 
   // Sort helpers
   const sortProjects = useCallback(<T extends ESGTrackerProject & { reason?: string }>(list: T[], sort: { col: CISSortCol; dir: 'asc' | 'desc' }) => {
@@ -3186,18 +3192,36 @@ function CISSuccessTab() {
     </div>
   )
 
-  const pctCount = ESG_TRACKER_PROJECTS.length > 0 ? ((confirmed.length / ESG_TRACKER_PROJECTS.length) * 100).toFixed(0) : '0'
+  const pctCount = cisProjects.length > 0 ? ((confirmed.length / cisProjects.length) * 100).toFixed(0) : '0'
   const pctMW = totalMW > 0 ? ((confirmedMW / totalMW) * 100).toFixed(0) : '0'
+
+  // Detail view project list helper
+  const detailViewProjects = useMemo(() => {
+    if (detailView === 'confirmed') return confirmed
+    if (detailView === 'likely-failed') return analyzerGroups.likelyFailed
+    if (detailView === 'may-be-negotiating') return analyzerGroups.mayBeNegotiating
+    return []
+  }, [detailView, confirmed, analyzerGroups])
+
+  const detailViewLabel = detailView === 'confirmed' ? 'Confirmed CISA'
+    : detailView === 'likely-failed' ? 'Likely Failed'
+    : detailView === 'may-be-negotiating' ? 'May Be Negotiating'
+    : ''
+
+  const detailViewColor = detailView === 'confirmed' ? '#22c55e'
+    : detailView === 'likely-failed' ? '#ef4444'
+    : '#f59e0b'
 
   return (
     <div className="space-y-4">
       {/* Section A: Summary Stats */}
       <div className="rounded-lg border border-[var(--color-border)] bg-[var(--color-bg-card)] p-4">
-        <h3 className="text-sm font-semibold text-[var(--color-text)] mb-3">CISA Confirmation Summary</h3>
+        <h3 className="text-sm font-semibold text-[var(--color-text)] mb-3">CIS — CISA Confirmation Summary</h3>
+        <p className="text-[10px] text-[var(--color-text-muted)] mb-3">CIS projects only (excludes LTESA rounds)</p>
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
           <div>
-            <div className="text-[10px] uppercase tracking-wide text-[var(--color-text-muted)]">Total Projects</div>
-            <div className="text-lg font-bold text-[var(--color-text)]">{ESG_TRACKER_PROJECTS.length}</div>
+            <div className="text-[10px] uppercase tracking-wide text-[var(--color-text-muted)]">CIS Projects</div>
+            <div className="text-lg font-bold text-[var(--color-text)]">{cisProjects.length}</div>
           </div>
           <div>
             <div className="text-[10px] uppercase tracking-wide text-[var(--color-text-muted)]">Rounds</div>
@@ -3396,7 +3420,7 @@ function CISSuccessTab() {
           If a project was awarded more than {threshold} months ago and has not confirmed a CISA, it is assumed to have likely failed.
         </p>
 
-        {/* Three group cards */}
+        {/* Three group cards — kept as detailed breakdown */}
         <div className="grid gap-3 lg:grid-cols-3">
           {/* Confirmed */}
           {(() => {
@@ -3482,6 +3506,123 @@ function CISSuccessTab() {
           })()}
         </div>
       </div>
+
+      {/* Section E: Headline Summary Boxes (Timeline-style) */}
+      <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl p-5">
+        <h3 className="text-sm font-bold text-[var(--color-text)] mb-1">CIS Contract Status — At a Glance</h3>
+        <p className="text-[10px] text-[var(--color-text-muted)] mb-4">
+          Based on {threshold}-month assumed execution window. Click any box to view project details.
+        </p>
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+          <div className="bg-[var(--color-bg)] border border-[var(--color-border)] rounded-xl p-3 text-center">
+            <div className="text-2xl font-bold text-[var(--color-text)]">{cisProjects.length}</div>
+            <div className="text-[10px] text-[var(--color-text-muted)]">CIS Projects</div>
+            <div className="text-[9px] text-[var(--color-text-muted)]">{fmtMW(totalMW)}</div>
+          </div>
+          <button
+            onClick={() => setDetailView(detailView === 'confirmed' ? null : 'confirmed')}
+            className={`bg-[var(--color-bg)] border rounded-xl p-3 text-center transition-all hover:bg-white/5 ${detailView === 'confirmed' ? 'border-[#22c55e] ring-1 ring-[#22c55e]/30' : 'border-[var(--color-border)]'}`}
+          >
+            <div className="text-2xl font-bold text-[#22c55e]">{confirmed.length}</div>
+            <div className="text-[10px] text-[var(--color-text-muted)]">Confirmed CISA</div>
+            <div className="text-[9px] text-[var(--color-text-muted)]">{fmtMW(confirmedMW)} ({pctMW}%)</div>
+          </button>
+          <button
+            onClick={() => setDetailView(detailView === 'likely-failed' ? null : 'likely-failed')}
+            className={`bg-[var(--color-bg)] border rounded-xl p-3 text-center transition-all hover:bg-white/5 ${detailView === 'likely-failed' ? 'border-[#ef4444] ring-1 ring-[#ef4444]/30' : 'border-[var(--color-border)]'}`}
+          >
+            <div className="text-2xl font-bold text-[#ef4444]">{analyzerGroups.likelyFailed.length}</div>
+            <div className="text-[10px] text-[var(--color-text-muted)]">Likely Failed</div>
+            <div className="text-[9px] text-[var(--color-text-muted)]">{fmtMW(analyzerGroups.likelyFailed.reduce((s, p) => s + p.capacityMW, 0))} (&gt;{threshold} months)</div>
+          </button>
+          <button
+            onClick={() => setDetailView(detailView === 'may-be-negotiating' ? null : 'may-be-negotiating')}
+            className={`bg-[var(--color-bg)] border rounded-xl p-3 text-center transition-all hover:bg-white/5 ${detailView === 'may-be-negotiating' ? 'border-[#f59e0b] ring-1 ring-[#f59e0b]/30' : 'border-[var(--color-border)]'}`}
+          >
+            <div className="text-2xl font-bold text-[#f59e0b]">{analyzerGroups.mayBeNegotiating.length}</div>
+            <div className="text-[10px] text-[var(--color-text-muted)]">May Be Negotiating</div>
+            <div className="text-[9px] text-[var(--color-text-muted)]">{fmtMW(analyzerGroups.mayBeNegotiating.reduce((s, p) => s + p.capacityMW, 0))} (&le;{threshold} months)</div>
+          </button>
+        </div>
+      </div>
+
+      {/* Section F: Detail View (when a summary box is clicked) */}
+      {detailView && (
+        <div className="rounded-lg border border-[var(--color-border)] bg-[var(--color-bg-card)]">
+          {/* Breadcrumb */}
+          <div className="flex items-center gap-2 px-4 pt-3 pb-1">
+            <button
+              onClick={() => setDetailView(null)}
+              className="text-[10px] text-blue-400 hover:underline"
+            >
+              CIS Success
+            </button>
+            <span className="text-[10px] text-[var(--color-text-muted)]">/</span>
+            <span className="text-[10px] font-medium" style={{ color: detailViewColor }}>{detailViewLabel}</span>
+          </div>
+
+          <div className="px-4 pb-1">
+            <div className="flex items-baseline justify-between">
+              <span className="text-sm font-semibold" style={{ color: detailViewColor }}>
+                {detailViewLabel} — {detailViewProjects.length} projects ({fmtMW(detailViewProjects.reduce((s, p) => s + p.capacityMW, 0))})
+              </span>
+              <button
+                onClick={() => setDetailView(null)}
+                className="text-[10px] text-[var(--color-text-muted)] hover:text-[var(--color-text)]"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+
+          <ScrollableTable>
+            <table className="w-full text-xs">
+              <thead>
+                <tr className="border-t border-[var(--color-border)] text-[10px] uppercase tracking-wide text-[var(--color-text-muted)]">
+                  <th className="px-2 py-1.5 text-left">Project</th>
+                  {detailView === 'confirmed' && <th className="px-2 py-1.5 text-left">Reason</th>}
+                  {detailView !== 'confirmed' && <th className="px-2 py-1.5 text-right">Months</th>}
+                  <th className="px-2 py-1.5 text-left">Tech</th>
+                  <th className="px-2 py-1.5 text-left">Developer</th>
+                  <th className="px-2 py-1.5 text-right">MW</th>
+                  <th className="px-2 py-1.5 text-left">State</th>
+                  <th className="px-2 py-1.5 text-left">Round</th>
+                  <th className="px-2 py-1.5 text-left">Awarded</th>
+                </tr>
+              </thead>
+              <tbody>
+                {detailViewProjects.map((p, i) => {
+                  const months = monthsSinceAward(p.awardAnnouncedDate)
+                  const monthColor = months > 12 ? 'text-red-400' : months >= 6 ? 'text-amber-400' : 'text-emerald-400'
+                  return (
+                    <tr key={i} className="border-t border-[var(--color-border)]/50 hover:bg-white/5">
+                      <td className="px-2 py-1">
+                        {p.projectId ? (
+                          <Link to={`/projects/${p.projectId}`} className="text-blue-400 hover:underline">{p.name}</Link>
+                        ) : (
+                          <span className="text-[var(--color-text)]">{p.name}</span>
+                        )}
+                      </td>
+                      {detailView === 'confirmed' && (
+                        <td className="px-2 py-1 text-emerald-400">{(p as { reason?: string }).reason}</td>
+                      )}
+                      {detailView !== 'confirmed' && (
+                        <td className={`px-2 py-1 text-right font-medium ${monthColor}`}>{months}</td>
+                      )}
+                      <td className="px-2 py-1 text-[var(--color-text-muted)]">{p.projectId && techLookup[p.projectId] ? formatTech(techLookup[p.projectId]) : 'Unknown'}</td>
+                      <td className="px-2 py-1 text-[var(--color-text-muted)]">{p.developer}</td>
+                      <td className="px-2 py-1 text-right text-[var(--color-text)]">{Math.round(p.capacityMW)}</td>
+                      <td className="px-2 py-1 text-[var(--color-text-muted)]">{p.state}</td>
+                      <td className="px-2 py-1 text-[var(--color-text-muted)] text-[10px]">{roundNameMap[p.roundId] ?? p.round}</td>
+                      <td className="px-2 py-1 text-[var(--color-text-muted)]">{formatAwardDate(p.awardAnnouncedDate)}</td>
+                    </tr>
+                  )
+                })}
+              </tbody>
+            </table>
+          </ScrollableTable>
+        </div>
+      )}
     </div>
   )
 }

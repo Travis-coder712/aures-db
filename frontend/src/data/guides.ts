@@ -326,8 +326,8 @@ Bottom navigation with tabs on mobile. Progressive disclosure — simple surface
     readingTime: '8 min read',
     content: `# AURES — Build Tracker
 
-> **Last Updated:** 2026-03-27
-> **Version:** v2.5.1
+> **Last Updated:** 2026-03-29
+> **Version:** v2.6.1
 > **Current Phase:** Phase 3 — Performance Analytics (in progress)
 
 ---
@@ -507,7 +507,7 @@ Bottom navigation with tabs on mobile. Progressive disclosure — simple surface
   - Documented 4 joint venture partnerships (Pottinger/AGL+Someva, MacIntyre/Acciona+Ark, Golden Plains/TagEnergy+Ingka, Yanco Delta/Origin+ViRYA)
 - Added developer market share donut pie charts (by MW and project count) and technology breakdown pie chart
 - Made version check button accessible on mobile (tappable header badge + slide-out menu button)
-- Bumped version from v1.7.0 → v2.0.0 → v2.1.0 → v2.5.1
+- Bumped version from v1.7.0 → v2.0.0 → v2.1.0 → v2.5.1 → v2.6.0 → v2.6.1
 - New files: eis-comparison.json, eis-coverage.json, eis-pdf-opportunities.json, developer-data-quality.json, generate_developer_quality.py
 
 ### Wind Farm Deep Dive — 2026-03-12/13
