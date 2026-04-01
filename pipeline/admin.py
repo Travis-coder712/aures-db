@@ -26,7 +26,7 @@ PIPELINE_DIR = os.path.dirname(os.path.abspath(__file__))
 STEPS = [
     # ── Data Importers ──
     ("AEMO Generation Info", "importers/import_aemo_gen_info.py", [], "aemo_generation_info"),
-    ("OpenElectricity Performance", "importers/import_openelectricity.py", [], "openelectricity_performance"),
+    ("OpenElectricity Performance", "importers/import_openelectricity.py", ["--year", str(datetime.now().year), "--ytd"], "openelectricity_performance"),
     ("OpenElectricity Metadata", "importers/harvest_facility_metadata.py", [], "openelectricity_metadata"),
     ("Coal Generation Monitor", "importers/import_coal_generation.py", [], "coal_generation"),
     ("Generation Profiles", "importers/import_generation_profiles.py", [], "generation_profiles"),
