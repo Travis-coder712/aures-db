@@ -12,6 +12,7 @@ Usage:
 """
 import os
 import sys
+import json
 import subprocess
 from datetime import datetime, timedelta
 
@@ -173,20 +174,76 @@ def run_step(step_index):
 
 
 def run_all():
-    """Run all pipeline steps in order."""
+    """Run all pipeline steps in order and save a run log."""
+    start_time = datetime.now()
     print("\n🚀 Running full pipeline...\n")
     results = []
     for i in range(len(STEPS)):
+        step_start = datetime.now()
         success = run_step(i)
-        results.append((STEPS[i][0], success))
+        step_duration = (datetime.now() - step_start).total_seconds()
+        results.append((STEPS[i][0], success, step_duration))
+
+    end_time = datetime.now()
+    total_duration = (end_time - start_time).total_seconds()
 
     print(f"\n{'='*60}")
     print("  Pipeline Summary")
     print(f"{'='*60}")
-    for label, success in results:
+    for label, success, duration in results:
         icon = "✅" if success else "❌"
-        print(f"  {icon} {label}")
+        print(f"  {icon} {label} ({duration:.0f}s)")
+    print(f"\n  Total time: {total_duration:.0f}s")
     print()
+
+    # Save run log to frontend for display in the app
+    save_pipeline_log(results, start_time, end_time)
+
+
+def save_pipeline_log(results, start_time, end_time):
+    """Save pipeline run summary to JSON for the frontend to display."""
+    log_path = os.path.join(PIPELINE_DIR, '..', 'frontend', 'public', 'data', 'metadata', 'pipeline-log.json')
+
+    # Load existing log (keep last 20 runs)
+    existing_runs = []
+    if os.path.exists(log_path):
+        try:
+            with open(log_path) as f:
+                existing = json.load(f)
+            existing_runs = existing.get('runs', [])
+        except (json.JSONDecodeError, KeyError):
+            pass
+
+    # Build new run entry
+    steps_log = []
+    for label, success, duration in results:
+        steps_log.append({
+            'step': label,
+            'success': success,
+            'duration_seconds': round(duration, 1),
+        })
+
+    succeeded = sum(1 for _, s, _ in results if s)
+    failed = sum(1 for _, s, _ in results if not s)
+
+    new_run = {
+        'started_at': start_time.isoformat(),
+        'completed_at': end_time.isoformat(),
+        'total_seconds': round((end_time - start_time).total_seconds(), 1),
+        'steps_total': len(results),
+        'steps_succeeded': succeeded,
+        'steps_failed': failed,
+        'steps': steps_log,
+    }
+
+    # Prepend and keep last 20
+    existing_runs.insert(0, new_run)
+    existing_runs = existing_runs[:20]
+
+    with open(log_path, 'w') as f:
+        json.dump({'runs': existing_runs}, f, indent=2)
+
+    print(f"  📋 Pipeline log saved to {log_path}")
 
 
 def run_auto():

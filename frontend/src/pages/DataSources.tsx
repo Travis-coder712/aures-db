@@ -2,6 +2,22 @@ import { useState, useEffect } from 'react'
 import { fetchDataSources } from '../lib/dataService'
 import type { DataSourcesIndex, DataSourceInfo } from '../lib/types'
 
+interface PipelineStep {
+  step: string
+  success: boolean
+  duration_seconds: number
+}
+
+interface PipelineRun {
+  started_at: string
+  completed_at: string
+  total_seconds: number
+  steps_total: number
+  steps_succeeded: number
+  steps_failed: number
+  steps: PipelineStep[]
+}
+
 function formatDate(dateStr: string | null): string {
   if (!dateStr) return 'Never'
   const d = new Date(dateStr)
@@ -46,11 +62,19 @@ function formatNumber(n: number): string {
 
 export default function DataSources() {
   const [data, setData] = useState<DataSourcesIndex | null>(null)
+  const [pipelineRuns, setPipelineRuns] = useState<PipelineRun[]>([])
+  const [expandedRun, setExpandedRun] = useState<number | null>(0)
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    fetchDataSources().then((d) => {
+    Promise.all([
+      fetchDataSources(),
+      fetch(`${import.meta.env.BASE_URL}data/metadata/pipeline-log.json`)
+        .then(r => r.ok ? r.json() : { runs: [] })
+        .catch(() => ({ runs: [] })),
+    ]).then(([d, log]) => {
       setData(d)
+      setPipelineRuns(log.runs || [])
       setLoading(false)
     })
   }, [])
@@ -198,12 +222,85 @@ export default function DataSources() {
       <div className="mt-6 bg-[var(--color-bg-card)] rounded-xl border border-[var(--color-border)] p-4">
         <h3 className="text-sm font-semibold text-[var(--color-text)] mb-2">Updating Data</h3>
         <p className="text-xs text-[var(--color-text-muted)] mb-3">
-          Data updates are run locally via the pipeline admin tool. To update all sources:
+          Data updates are run locally via the pipeline admin tool or the AURES Admin app on your desktop.
         </p>
         <code className="block bg-[var(--color-bg)] text-xs text-[var(--color-primary)] px-3 py-2 rounded-lg font-mono">
-          python3 pipeline/admin.py
+          python3 pipeline/admin.py --all
         </code>
       </div>
+
+      {/* Pipeline Run Log */}
+      {pipelineRuns.length > 0 && (
+        <div className="mt-6 bg-[var(--color-bg-card)] rounded-xl border border-[var(--color-border)] overflow-hidden">
+          <div className="px-4 py-3 border-b border-[var(--color-border)]">
+            <h2 className="text-sm font-semibold text-[var(--color-text)]">Pipeline Run Log</h2>
+            <p className="text-xs text-[var(--color-text-muted)] mt-0.5">
+              Last {pipelineRuns.length} pipeline runs from AURES Admin
+            </p>
+          </div>
+          <div className="divide-y divide-[var(--color-border)]/50">
+            {pipelineRuns.map((run, idx) => {
+              const runDate = new Date(run.started_at)
+              const allSuccess = run.steps_failed === 0
+              const isExpanded = expandedRun === idx
+              return (
+                <div key={idx}>
+                  <button
+                    className="w-full px-4 py-3 flex items-center justify-between hover:bg-white/[0.02] transition-colors"
+                    onClick={() => setExpandedRun(isExpanded ? null : idx)}
+                  >
+                    <div className="flex items-center gap-3">
+                      <span
+                        className="w-2.5 h-2.5 rounded-full shrink-0"
+                        style={{ background: allSuccess ? '#22c55e' : '#ef4444' }}
+                      />
+                      <div className="text-left">
+                        <div className="text-sm font-medium text-[var(--color-text)]">
+                          {runDate.toLocaleDateString('en-AU', { day: 'numeric', month: 'short', year: 'numeric' })}
+                          {' '}
+                          <span className="text-[var(--color-text-muted)] font-normal">
+                            {runDate.toLocaleTimeString('en-AU', { hour: '2-digit', minute: '2-digit' })}
+                          </span>
+                        </div>
+                        <div className="text-xs text-[var(--color-text-muted)]">
+                          {run.steps_succeeded}/{run.steps_total} steps passed
+                          {run.steps_failed > 0 && (
+                            <span style={{ color: '#ef4444' }}> ({run.steps_failed} failed)</span>
+                          )}
+                          {' · '}{Math.round(run.total_seconds)}s
+                        </div>
+                      </div>
+                    </div>
+                    <svg
+                      className={`w-4 h-4 text-[var(--color-text-muted)] transition-transform ${isExpanded ? 'rotate-180' : ''}`}
+                      viewBox="0 0 20 20" fill="currentColor"
+                    >
+                      <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
+                    </svg>
+                  </button>
+                  {isExpanded && (
+                    <div className="px-4 pb-3">
+                      <div className="bg-[var(--color-bg)] rounded-lg p-3 space-y-1.5">
+                        {run.steps.map((step, si) => (
+                          <div key={si} className="flex items-center gap-2 text-xs">
+                            <span style={{ color: step.success ? '#22c55e' : '#ef4444' }}>
+                              {step.success ? '✓' : '✗'}
+                            </span>
+                            <span className="text-[var(--color-text)] flex-1">{step.step}</span>
+                            <span className="text-[var(--color-text-muted)] tabular-nums">
+                              {step.duration_seconds.toFixed(0)}s
+                            </span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </div>
+              )
+            })}
+          </div>
+        </div>
+      )}
     </div>
   )
 }
