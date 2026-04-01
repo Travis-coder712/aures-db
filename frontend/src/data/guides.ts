@@ -326,8 +326,8 @@ Bottom navigation with tabs on mobile. Progressive disclosure — simple surface
     readingTime: '8 min read',
     content: `# AURES — Build Tracker
 
-> **Last Updated:** 2026-03-29
-> **Version:** v2.6.1
+> **Last Updated:** 2026-04-01
+> **Version:** v2.8.0
 > **Current Phase:** Phase 3 — Performance Analytics (in progress)
 
 ---
@@ -495,6 +495,26 @@ Bottom navigation with tabs on mobile. Progressive disclosure — simple surface
 - Enriched scheme analysis essay content with correct per-round project data
 - Fixed developer doughnut chart to use grouped developer data (540 vs 711 ungrouped)
 
+### Capacity Watch & CIS Briefing — 2026-04-01 (v2.8.0)
+- Built Capacity Watch: unified BESS/Wind/Solar/All Assets capacity timeline viewer
+- Four technology tabs with step-function area charts showing cumulative capacity from 2022
+- TODAY marker on all timeline charts with white dot and dashed vertical line
+- Multi-state filter (NSW, QLD, VIC, SA, TAS) — stats, charts and project tables update dynamically
+- All Assets stacked area chart combining wind, solar and BESS capacity trajectories
+- Enhanced project tables with COD, developer, source columns and sortable headers
+- Paginated All Projects table (197 projects) for combined view
+- Generated wind-watch.json (80 operating wind farms, 11.7 GW) and solar-watch.json (78 operating, 9.5 GW) from project data
+- State comparison bar charts (operating vs construction) per technology
+- New data pipeline script: generate_watch_data.py
+
+### CIS Executive Briefing & Count Reconciliation — 2026-03-29 (v2.7.0)
+- Added CIS Briefing tab with 4-section executive briefing (success rate, solar hybrid risk, critical 6 months, future rounds)
+- Reconciled CIS project counts: 71 (AURES) vs 63 (Senate Estimates) — 6 Pilot NSW excluded, 2 unexplained
+- Added Mokoan Solar Farm (46 MW, European Energy) to ESG tracker — resolved 70 vs 71 discrepancy
+- Updated Pilot NSW descriptions to note dual LTESA R2/CIS nature and Senate Estimates exclusion
+- Fixed Liddell BESS capacity: 250 MW / 500 MWh → 500 MW / 1000 MWh
+- Created AURES Development Roadmap PDF with 6 implementation plans
+
 ### EIS Intelligence & Developer Data Quality — 2026-03-22
 - Built EIS/EIA Technical Intelligence page with 6 tabs: Wind, BESS, Solar, EIS vs Actual, Coverage, Grid Connection
 - Extracted EIS data for 98 projects (33 wind, 36 BESS, 27 solar, 2 pumped hydro) — 100% coverage of available EIS documents
@@ -507,7 +527,7 @@ Bottom navigation with tabs on mobile. Progressive disclosure — simple surface
   - Documented 4 joint venture partnerships (Pottinger/AGL+Someva, MacIntyre/Acciona+Ark, Golden Plains/TagEnergy+Ingka, Yanco Delta/Origin+ViRYA)
 - Added developer market share donut pie charts (by MW and project count) and technology breakdown pie chart
 - Made version check button accessible on mobile (tappable header badge + slide-out menu button)
-- Bumped version from v1.7.0 → v2.0.0 → v2.1.0 → v2.5.1 → v2.6.0 → v2.6.1
+- Bumped version from v1.7.0 → v2.0.0 → v2.1.0 → v2.5.1 → v2.6.0 → v2.6.1 → v2.7.0 → v2.8.0
 - New files: eis-comparison.json, eis-coverage.json, eis-pdf-opportunities.json, developer-data-quality.json, generate_developer_quality.py
 
 ### Wind Farm Deep Dive — 2026-03-12/13
