@@ -21,16 +21,31 @@ from db import get_connection
 PIPELINE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 # Pipeline steps — each is a (label, script_path, args, source_id_in_db)
+# source_id_in_db = None means it's a processor/generator (always run, no import tracking)
 STEPS = [
+    # ── Data Importers ──
     ("AEMO Generation Info", "importers/import_aemo_gen_info.py", [], "aemo_generation_info"),
     ("OpenElectricity Performance", "importers/import_openelectricity.py", [], "openelectricity_performance"),
     ("OpenElectricity Metadata", "importers/harvest_facility_metadata.py", [], "openelectricity_metadata"),
+    ("Coal Generation Monitor", "importers/import_coal_generation.py", [], "coal_generation"),
+    ("Generation Profiles", "importers/import_generation_profiles.py", [], "generation_profiles"),
     ("EPBC Referrals", "importers/import_epbc.py", [], "epbc_referrals"),
+    ("AEMO ISP / Grid Connection", "importers/import_aemo_isp.py", [], "aemo_isp"),
+    ("News RSS Feed", "importers/import_news_rss.py", [], "news_rss"),
+    ("Offtake Research (seed)", "research/research_offtakes.py", ["--seed"], "offtake_research"),
+
+    # ── Processors ──
     ("AEMO Enrichment", "processors/enrich_from_aemo.py", [], None),
     ("Confidence Scoring", "processors/compute_confidence.py", [], None),
     ("League Tables", "processors/compute_league_tables.py", [], None),
-    ("Offtake Research (seed)", "research/research_offtakes.py", ["--seed"], "offtake_research"),
-    ("News RSS Feed", "importers/import_news_rss.py", [], "news_rss"),
+
+    # ── Generators (analytics JSON) ──
+    ("Data Quality Audit", "generators/generate_data_quality.py", [], None),
+    ("Developer Quality Audit", "generators/generate_developer_quality.py", [], None),
+    ("Monthly Performance", "generators/generate_monthly_performance.py", [], None),
+    ("Wind & Solar Watch", "generate_watch_data.py", [], None),
+
+    # ── Export ──
     ("JSON Export", "exporters/export_json.py", [], None),
 ]
 
@@ -39,7 +54,10 @@ FREQUENCY_THRESHOLDS = {
     "aemo_generation_info": 35,
     "openelectricity_performance": 35,
     "openelectricity_metadata": 100,
+    "coal_generation": 35,
+    "generation_profiles": 35,
     "epbc_referrals": 35,
+    "aemo_isp": 90,
     "offtake_research": 35,
     "news_rss": 7,
 }
@@ -98,26 +116,32 @@ def print_status():
     runs = get_status()
 
     print()
-    print("╔══════════════════════════════════════════════════════════════════╗")
-    print("║                      AURES Data Admin                          ║")
-    print("╠══════════════════════════════════════════════════════════════════╣")
-    print("║  #  Source                        Last Run       Status        ║")
-    print("╠══════════════════════════════════════════════════════════════════╣")
+    print("╔═══════════════════════════════════════════════════════════════════════╗")
+    print("║                      AURES Data Admin  v2.8.0                       ║")
+    print("╠═══════════════════════════════════════════════════════════════════════╣")
+    print("║  #   Source                        Last Run       Status             ║")
+    print("╠═══════════════════════════════════════════════════════════════════════╣")
 
     for i, (label, _, _, source_id) in enumerate(STEPS, 1):
+        if label == "AEMO Enrichment":
+            print("║  ── Processors ──────────────────────────────────────────────────  ║")
+        elif label == "Data Quality Audit":
+            print("║  ── Generators ──────────────────────────────────────────────────  ║")
+        elif label == "JSON Export":
+            print("║  ── Export ──────────────────────────────────────────────────────  ║")
+
         run = runs.get(source_id) if source_id else None
         if source_id:
             icon, status_text = status_icon(source_id, run)
             last_run = run.get('completed_at', run.get('started_at', ''))[:10] if run else 'never'
-            records = run.get('records_imported', 0) if run else 0
-            line = f"║  {i}.  {label:<30s}  {last_run:<13s}  {icon} {status_text:<10s} ║"
+            line = f"║  {i:2d}.  {label:<30s}  {last_run:<13s}  {icon} {status_text:<12s}  ║"
         else:
-            line = f"║  {i}.  {label:<30s}  {'(processor)':<13s}  {'⚙️':2s} {'local':<10s} ║"
+            line = f"║  {i:2d}.  {label:<30s}  {'(processor)':<13s}  {'⚙️':2s} {'local':<12s}  ║"
         print(line)
 
-    print("╠══════════════════════════════════════════════════════════════════╣")
-    print("║  [1-9] Run step  [A] Run all  [S] Status  [Q] Quit            ║")
-    print("╚══════════════════════════════════════════════════════════════════╝")
+    print("╠═══════════════════════════════════════════════════════════════════════╣")
+    print("║  [1-17] Run step  [A] Run all  [S] Status  [Q] Quit               ║")
+    print("╚═══════════════════════════════════════════════════════════════════════╝")
     print()
 
 
