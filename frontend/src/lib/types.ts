@@ -889,6 +889,42 @@ export interface BatteryWatchData {
 }
 
 // ============================================================
+// Capacity Watch (Wind / Solar)
+// ============================================================
+
+export interface CapacityWatchProject {
+  name: string; id: string; developer: string
+  capacity_mw: number; status: string; state: string
+  cod: string; source: string; note?: string
+}
+
+export interface CapacityWatchMilestone {
+  date: string; label: string; cumulative_mw: number; event?: string
+}
+
+export interface CapacityWatchStateData {
+  mw: number; projects: number
+}
+
+export interface CapacityWatchData {
+  generated_at: string
+  technology: string
+  display_name: string
+  colour: string
+  summary: {
+    total_operating_mw: number; total_operating_projects: number
+    total_construction_mw: number; total_construction_projects: number
+    total_development_mw: number; total_development_projects: number
+  }
+  projects: CapacityWatchProject[]
+  timeline_milestones: CapacityWatchMilestone[]
+  by_state: {
+    operating: Record<string, CapacityWatchStateData>
+    construction: Record<string, CapacityWatchStateData>
+  }
+}
+
+// ============================================================
 // Coal Watch
 // ============================================================
 

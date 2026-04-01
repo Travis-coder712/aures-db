@@ -8,7 +8,7 @@ import { fetchEnergyMix } from '../../lib/dataService'
 import type { EnergyMixData } from '../../lib/types'
 import EnergyTransitionSimulator from '../../components/intelligence/EnergyTransitionSimulator'
 import GenerationStack from '../../components/intelligence/GenerationStack'
-import BatteryWatch from '../../components/intelligence/BatteryWatch'
+import CapacityWatch from '../../components/intelligence/CapacityWatch'
 import CoalWatch from '../../components/intelligence/CoalWatch'
 
 // ============================================================
@@ -80,7 +80,7 @@ type TabId = 'simulator' | 'generation-stack' | 'battery-watch' | 'coal-watch' |
 const TABS: { id: TabId; label: string; icon: React.ReactNode }[] = [
   { id: 'simulator', label: 'Simulator', icon: <SimulatorIcon /> },
   { id: 'generation-stack', label: 'Generation Stack', icon: <StackIcon /> },
-  { id: 'battery-watch', label: 'Battery Watch', icon: <BatteryIcon /> },
+  { id: 'battery-watch', label: 'Capacity Watch', icon: <BatteryIcon /> },
   { id: 'coal-watch', label: 'Coal Watch', icon: <CoalIcon /> },
   { id: 'current-mix', label: 'Current Mix', icon: <MixIcon /> },
 ]
@@ -320,7 +320,7 @@ export default function EnergyMix() {
       {activeTab === 'generation-stack' && <GenerationStack />}
 
       {/* ─── Battery Watch Tab ─── */}
-      {activeTab === 'battery-watch' && <BatteryWatch />}
+      {activeTab === 'battery-watch' && <CapacityWatch />}
 
       {/* ─── Coal Watch Tab ─── */}
       {activeTab === 'coal-watch' && <CoalWatch />}

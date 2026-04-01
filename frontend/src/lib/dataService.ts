@@ -5,7 +5,7 @@
  * In production (GitHub Pages), they're served as static files.
  * In development (Vite dev server), they're served from the public/ directory.
  */
-import type { ProjectSummary, Project, Technology, ProjectStatus, State, LeagueTable, LeagueTableIndex, LeagueTechnology, DeveloperIndex, OEMIndex, ContractorIndex, OfftakerIndex, MapProject, CODDriftData, DataSourcesIndex, BESSCapexData, ProjectTimelineData, SchemeTrackerData, DriftAnalysisData, WindResourceData, DunkelflaunteData, EnergyMixData, DeveloperScoreData, RevenueIntelData, GridConnectionData, NewsData, REZAccessMap, EISAnalyticsData, EISComparisonData, EISCoverageData, ProjectMonthlyPerformance, GenerationProfileData, BatteryWatchData, CoalWatchData } from './types'
+import type { ProjectSummary, Project, Technology, ProjectStatus, State, LeagueTable, LeagueTableIndex, LeagueTechnology, DeveloperIndex, OEMIndex, ContractorIndex, OfftakerIndex, MapProject, CODDriftData, DataSourcesIndex, BESSCapexData, ProjectTimelineData, SchemeTrackerData, DriftAnalysisData, WindResourceData, DunkelflaunteData, EnergyMixData, DeveloperScoreData, RevenueIntelData, GridConnectionData, NewsData, REZAccessMap, EISAnalyticsData, EISComparisonData, EISCoverageData, ProjectMonthlyPerformance, GenerationProfileData, BatteryWatchData, CoalWatchData, CapacityWatchData } from './types'
 
 const BASE = import.meta.env.BASE_URL + 'data'
 
@@ -560,6 +560,32 @@ export async function fetchBatteryWatch(): Promise<BatteryWatchData | null> {
     if (!resp.ok) return null
     batteryWatchCache = (await resp.json()) as BatteryWatchData
     return batteryWatchCache
+  } catch { return null }
+}
+
+// ============================================================
+// Capacity Watch (Wind / Solar)
+// ============================================================
+
+let windWatchCache: CapacityWatchData | null = null
+export async function fetchWindWatch(): Promise<CapacityWatchData | null> {
+  if (windWatchCache) return windWatchCache
+  try {
+    const resp = await fetch(`${BASE}/analytics/wind-watch.json`)
+    if (!resp.ok) return null
+    windWatchCache = (await resp.json()) as CapacityWatchData
+    return windWatchCache
+  } catch { return null }
+}
+
+let solarWatchCache: CapacityWatchData | null = null
+export async function fetchSolarWatch(): Promise<CapacityWatchData | null> {
+  if (solarWatchCache) return solarWatchCache
+  try {
+    const resp = await fetch(`${BASE}/analytics/solar-watch.json`)
+    if (!resp.ok) return null
+    solarWatchCache = (await resp.json()) as CapacityWatchData
+    return solarWatchCache
   } catch { return null }
 }
 
