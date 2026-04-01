@@ -18,13 +18,13 @@
   "has_syncon": false,
   "has_statcom": false,
   "has_harmonic_filter": false,
-  "performance_score": 11.9,
+  "performance_score": 25.3,
   "notable": "Operating at 350MW (41% capacity) due to catastrophic transformer failure Oct 2025. Replacement transformer delivery Q3 2026, full 850MW targeted end of 2026. SIPS contract ~$705M over 5 years. OEM Powin filed Chapter 11 bankruptcy June 2025.",
   "data_confidence": "good",
   "last_updated": "2025-03-01",
   "last_verified": "2025-03-01",
   "aemo_gen_info_id": "2220",
-  "confidence_score": "67",
+  "confidence_score": "70",
   "capex_aud_m": 1000.0,
   "capex_source": "CEFC / energy-storage.news",
   "capex_year": 2022,
@@ -48,6 +48,22 @@
       "event_type": "construction_start",
       "title": "Construction begins",
       "detail": "Powin selected as battery OEM (2,592 Centipede Energy Segments), EKS Energy for 288 power conversion systems, CPP as EPC, Wilson Transformer for three 350MVA transformers.",
+      "sources": []
+    },
+    {
+      "date": "2024-09-02",
+      "date_precision": "day",
+      "event_type": "cod",
+      "title": "Commercial operations commenced",
+      "detail": "Commencement date from AEMO registration via OpenElectricity.",
+      "sources": []
+    },
+    {
+      "date": "2024-09-03",
+      "date_precision": "day",
+      "event_type": "energisation",
+      "title": "First generation recorded",
+      "detail": "First market dispatch data recorded in AEMO systems.",
       "sources": []
     },
     {

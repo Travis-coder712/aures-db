@@ -198,7 +198,7 @@
         "SA",
         "VIC"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "morwell-bess",
         "nebo-bess",
@@ -317,7 +317,7 @@
         "SA",
         "TAS"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "great-western-battery-project",
         "tchelery-wind-farm-and-bess",
@@ -620,7 +620,7 @@
         "QLD",
         "VIC"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "sandy-creek-standalone-bess",
         "running-creek-solar-and-bess",
@@ -667,7 +667,7 @@
         "QLD",
         "VIC"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "croydon-hybrid-facility-solar-and-bess",
         "the-central-bess-kci",
@@ -725,7 +725,7 @@
       "slug": "squadron-energy-services",
       "name": "Squadron Energy Services Pty Ltd",
       "project_count": 5,
-      "total_capacity_mw": 2134.0,
+      "total_capacity_mw": 2123.0,
       "total_storage_mwh": 400.0,
       "by_technology": {
         "wind": 4,
@@ -790,7 +790,7 @@
         "NSW",
         "QLD"
       ],
-      "avg_confidence": "medium",
+      "avg_confidence": "good",
       "project_ids": [
         "mt-arthur-pumped-hydro-energy-storage-project-kci",
         "aldoga-solar-farm"
@@ -1067,7 +1067,7 @@
       "states": [
         "NSW"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "baldon-wind-farm-stage-2",
         "baldon-wind-farm-stage-2-bess",
@@ -1185,7 +1185,7 @@
         "SA",
         "VIC"
       ],
-      "avg_confidence": "medium",
+      "avg_confidence": "low",
       "project_ids": [
         "liverpool-range-wind-farm",
         "dundonnell-wind-farm",
@@ -1229,7 +1229,7 @@
       "states": [
         "QLD"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "bungaban-wind-farm",
         "bungaban-bess"
@@ -1413,7 +1413,7 @@
       "states": [
         "VIC"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "connewarren-bess",
         "glenrowan-bess"
@@ -1437,7 +1437,7 @@
         "SA",
         "VIC"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "ben-bullen-wind-farm",
         "yumali-wind-farm",
@@ -1514,7 +1514,7 @@
         "QLD",
         "VIC"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "glenrowan-bess-storage-kci",
         "hazeldean-bess-storage-kci",
@@ -1581,7 +1581,7 @@
       "states": [
         "VIC"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "warracknabeal-wind-farm"
       ]
@@ -1652,7 +1652,7 @@
         "QLD",
         "SA"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "good",
       "project_ids": [
         "miles-solar-project",
         "bellambi-heights-renewables-project",
@@ -1723,7 +1723,7 @@
       "states": [
         "NSW"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "kias-bess",
         "derringullen-energy-storage-system"
@@ -1744,7 +1744,7 @@
       "states": [
         "VIC"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "hexham",
         "willatook"
@@ -1816,7 +1816,7 @@
       "states": [
         "QLD"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "cattle-creek-wind-farm-kci",
         "tully-bess"
@@ -1963,7 +1963,7 @@
         "NSW",
         "QLD"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "kangaroo-valley-bess",
         "blackstone-bess",
@@ -2075,7 +2075,7 @@
       "states": [
         "NSW"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "hanworth-battery"
       ]
@@ -2157,7 +2157,7 @@
       "states": [
         "NSW"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "bookham-wf-and-bess"
       ]
@@ -2178,7 +2178,7 @@
         "QLD",
         "VIC"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "herries-range-wind-farm",
         "tall-tree-wind-farm"
@@ -2246,7 +2246,7 @@
         "NSW",
         "QLD"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "belah-bess",
         "arundel-bess",
@@ -2316,7 +2316,7 @@
         "QLD",
         "VIC"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "goombi-renewable-energy-hub",
         "yabulu-solar-farm",
@@ -2358,7 +2358,7 @@
       "states": [
         "NSW"
       ],
-      "avg_confidence": "medium",
+      "avg_confidence": "good",
       "project_ids": [
         "dinawan-energy-hub"
       ]
@@ -2399,7 +2399,7 @@
       "states": [
         "QLD"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "burdekin-bess",
         "burdekin-solar-farm-kci"
@@ -2440,7 +2440,7 @@
       "states": [
         "QLD"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "halys-bess-1-akaysha",
         "halys-bess-2-akaysha"
@@ -2481,7 +2481,7 @@
       "states": [
         "NSW"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "kiar-bess"
       ]
@@ -2501,7 +2501,7 @@
       "states": [
         "QLD"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "lockyer-valley-energy-project"
       ]
@@ -2543,7 +2543,7 @@
       "states": [
         "NSW"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "merriwa-solar-farm-and-bess"
       ]
@@ -2563,7 +2563,7 @@
       "states": [
         "NSW"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "western-sydney-pumped-hydro-project"
       ]
@@ -2661,26 +2661,6 @@
       ]
     },
     {
-      "slug": "macintyre-windfarm-pty-ltd-and-arc-energy-macintyre",
-      "name": "Macintyre Windfarm Pty Ltd and Arc Energy Macintyre Pty Ltd",
-      "project_count": 1,
-      "total_capacity_mw": 923.0,
-      "total_storage_mwh": 0,
-      "by_technology": {
-        "wind": 1
-      },
-      "by_status": {
-        "commissioning": 1
-      },
-      "states": [
-        "QLD"
-      ],
-      "avg_confidence": "low",
-      "project_ids": [
-        "macintyre-wind-farm"
-      ]
-    },
-    {
       "slug": "global-power-generation-australia",
       "name": "Global Power Generation Australia Pty Ltd",
       "project_count": 3,
@@ -2697,7 +2677,7 @@
         "QLD",
         "VIC"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "colosseum-solar-farm-and-bess",
         "berrybank-bess-storage-kci",
@@ -2747,6 +2727,26 @@
       ]
     },
     {
+      "slug": "macintyre-windfarm-pty-ltd-and-arc-energy-macintyre",
+      "name": "Macintyre Windfarm Pty Ltd and Arc Energy Macintyre Pty Ltd",
+      "project_count": 1,
+      "total_capacity_mw": 890.0,
+      "total_storage_mwh": 0,
+      "by_technology": {
+        "wind": 1
+      },
+      "by_status": {
+        "commissioning": 1
+      },
+      "states": [
+        "QLD"
+      ],
+      "avg_confidence": "good",
+      "project_ids": [
+        "macintyre-wind-farm"
+      ]
+    },
+    {
       "slug": "firmpower-nr",
       "name": "firmpower_NR",
       "project_count": 5,
@@ -2762,7 +2762,7 @@
         "NSW",
         "QLD"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "mount-britton-bess1",
         "mount-britton-bess2",
@@ -2788,7 +2788,7 @@
       "states": [
         "NSW"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "texas-bess",
         "armidale-east-bess",
@@ -2933,7 +2933,7 @@
       "states": [
         "QLD"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "miles-bess-project",
         "wandoan-south-solar-stage-2",
@@ -3099,7 +3099,7 @@
       "states": [
         "QLD"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "punchs-creek-hybrid-stage-3-kci",
         "punchs-creek-hybrid-stage-2-kci"
@@ -3163,7 +3163,7 @@
       "states": [
         "QLD"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "bunkers-hill-wind-farm",
         "bunkers-hill-pumped-hydro"
@@ -3184,7 +3184,7 @@
       "states": [
         "QLD"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "central-queensland-energy-storage-project-stage-1"
       ]
@@ -3206,7 +3206,7 @@
         "NSW",
         "QLD"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "romani-solar-farm",
         "romani-standalone-bess",
@@ -3230,7 +3230,7 @@
       "states": [
         "QLD"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "supernode-bess-stage-3",
         "supernode-bess-stage-4",
@@ -3252,7 +3252,7 @@
       "states": [
         "QLD"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "supernode-north-bess-1",
         "supernode-north-bess-2",
@@ -3276,7 +3276,7 @@
         "NSW",
         "SA"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "tallawang-solar-and-bess",
         "harrogate-bess"
@@ -3298,7 +3298,7 @@
       "states": [
         "NSW"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "richmond-valley-solar-farm",
         "richmond-valley-bess"
@@ -3322,32 +3322,12 @@
         "QLD",
         "SA"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "solar-river-solar-and-bess-project",
         "hookey-creek-hybrid-solar-and-bess-kci",
         "noblevale-bess-kci",
         "wagga-north-bess-kci"
-      ]
-    },
-    {
-      "slug": "golden-plains-wf1-pty-ltd-as-trustee-for-the-golden-plains-wf1-unit-trust",
-      "name": "Golden Plains WF1 Pty Ltd as trustee for the Golden Plains WF1 Unit Trust",
-      "project_count": 1,
-      "total_capacity_mw": 756.0,
-      "total_storage_mwh": 0,
-      "by_technology": {
-        "wind": 1
-      },
-      "by_status": {
-        "commissioning": 1
-      },
-      "states": [
-        "VIC"
-      ],
-      "avg_confidence": "low",
-      "project_ids": [
-        "golden-plains-wind-farm-east"
       ]
     },
     {
@@ -3453,6 +3433,26 @@
       ]
     },
     {
+      "slug": "golden-plains-wf1-pty-ltd-as-trustee-for-the-golden-plains-wf1-unit-trust",
+      "name": "Golden Plains WF1 Pty Ltd as trustee for the Golden Plains WF1 Unit Trust",
+      "project_count": 1,
+      "total_capacity_mw": 733.0,
+      "total_storage_mwh": 0,
+      "by_technology": {
+        "wind": 1
+      },
+      "by_status": {
+        "commissioning": 1
+      },
+      "states": [
+        "VIC"
+      ],
+      "avg_confidence": "medium",
+      "project_ids": [
+        "golden-plains-wind-farm-east"
+      ]
+    },
+    {
       "slug": "winterbournewind",
       "name": "WinterbourneWind Pty Ltd",
       "project_count": 1,
@@ -3509,7 +3509,7 @@
       "states": [
         "NSW"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "bendenine"
       ]
@@ -3589,7 +3589,7 @@
       "states": [
         "NSW"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "cobbora-solar-farm"
       ]
@@ -3671,7 +3671,7 @@
       "states": [
         "NSW"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "narrandera-solar-hybrid-pvbess",
         "peel-valley-solar-hybrid-pvbess"
@@ -3712,7 +3712,7 @@
       "states": [
         "QLD"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "eurimbula-hybrid-facility-battery-storage"
       ]
@@ -3775,7 +3775,7 @@
         "NSW",
         "SA"
       ],
-      "avg_confidence": "medium",
+      "avg_confidence": "good",
       "project_ids": [
         "blyth-bess",
         "hornsdale-power-reserve",
@@ -3930,7 +3930,7 @@
       "states": [
         "VIC"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "kentbruck-green-power-hub"
       ]
@@ -3950,7 +3950,7 @@
       "states": [
         "VIC"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "melbourne-renewable-energy-hub-side-b"
       ]
@@ -3970,7 +3970,7 @@
       "states": [
         "VIC"
       ],
-      "avg_confidence": "medium",
+      "avg_confidence": "good",
       "project_ids": [
         "melbourne-renewable-energy-hub-connection-a1",
         "melbourne-renewable-energy-hub-connection-a2",
@@ -3992,7 +3992,7 @@
       "states": [
         "QLD"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "north-queensland-energy-storage-project-nqesp-stage-1"
       ]
@@ -4060,7 +4060,7 @@
         "SA",
         "VIC"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "mologa-solar-hybrid-pv-bess",
         "emeroo-bess",
@@ -4084,7 +4084,7 @@
       "states": [
         "QLD"
       ],
-      "avg_confidence": "medium",
+      "avg_confidence": "good",
       "project_ids": [
         "lotus-creek-wind-farm",
         "greenbank-bess",
@@ -4106,7 +4106,7 @@
       "states": [
         "NSW"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "junction-rivers-wind-and-bess"
       ]
@@ -4126,7 +4126,7 @@
       "states": [
         "NSW"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "piambong-wind-farm-kci"
       ]
@@ -4190,7 +4190,7 @@
       "states": [
         "SA"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "whyte-yarcowie"
       ]
@@ -4250,7 +4250,7 @@
       "states": [
         "QLD"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "eurimbula-solar-farm"
       ]
@@ -4293,7 +4293,7 @@
         "QLD",
         "VIC"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "karara-bess-kci",
         "mt-gellibrand-wind-farm"
@@ -4315,7 +4315,7 @@
       "states": [
         "NSW"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "wattle-creek-energy-hub-battery-storage",
         "wattle-creek-energy-hub-solar-bess"
@@ -4356,7 +4356,7 @@
       "states": [
         "QLD"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "western-downs-battery-stage-1-and-2"
       ]
@@ -4478,7 +4478,7 @@
       "states": [
         "QLD"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "capricorn-bess"
       ]
@@ -4499,7 +4499,7 @@
       "states": [
         "VIC"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "darnum-bess",
         "rubicon-bess",
@@ -4563,7 +4563,7 @@
       "states": [
         "QLD"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "farmers-creek-energy-park"
       ]
@@ -4646,7 +4646,7 @@
       "states": [
         "NSW"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "ilford-green-energy-hub"
       ]
@@ -4823,12 +4823,12 @@
         "bess": 1
       },
       "by_status": {
-        "construction": 1
+        "development": 1
       },
       "states": [
         "NSW"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "good",
       "project_ids": [
         "tomago-bess"
       ]
@@ -4888,7 +4888,7 @@
       "states": [
         "NSW"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "wellington-a-caes"
       ]
@@ -4930,7 +4930,7 @@
       "states": [
         "VIC"
       ],
-      "avg_confidence": "medium",
+      "avg_confidence": "good",
       "project_ids": [
         "moorabool-bess",
         "bulgana-green-power-hub-wind-farm"
@@ -5061,7 +5061,7 @@
       "states": [
         "QLD"
       ],
-      "avg_confidence": "medium",
+      "avg_confidence": "good",
       "project_ids": [
         "broadsound-solar-farm",
         "broadsoundbess"
@@ -5083,7 +5083,7 @@
         "TAS",
         "VIC"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "george-town-bess-kci",
         "carwarp-hybrid"
@@ -5105,7 +5105,7 @@
         "QLD",
         "VIC"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "deer-park-bess-akaysha",
         "ulinda-park-bess-expansion"
@@ -5131,7 +5131,7 @@
         "SA",
         "VIC"
       ],
-      "avg_confidence": "medium",
+      "avg_confidence": "good",
       "project_ids": [
         "pelican-point-bess",
         "hazelwood-battery-energy-storage-system-hbess",
@@ -5240,7 +5240,7 @@
       "states": [
         "QLD"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "mackenzie-river-solar-farm"
       ]
@@ -5342,7 +5342,7 @@
       "states": [
         "QLD"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "tarong-west-wind-farm-ironleaf"
       ]
@@ -5362,7 +5362,7 @@
       "states": [
         "QLD"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "callide-wind-farm"
       ]
@@ -5382,7 +5382,7 @@
       "states": [
         "NSW"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "hills-of-gold-wind-farm"
       ]
@@ -5402,7 +5402,7 @@
       "states": [
         "VIC"
       ],
-      "avg_confidence": "medium",
+      "avg_confidence": "good",
       "project_ids": [
         "macarthur-wind-farm"
       ]
@@ -5422,7 +5422,7 @@
       "states": [
         "NSW"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "middlebrook-solar-and-bess"
       ]
@@ -5442,7 +5442,7 @@
       "states": [
         "NSW"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "belhaven-renewable-project"
       ]
@@ -5462,7 +5462,7 @@
       "states": [
         "QLD"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "wurdong-bess"
       ]
@@ -5482,7 +5482,7 @@
       "states": [
         "NSW"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "mallee-wind-farm"
       ]
@@ -5522,7 +5522,7 @@
       "states": [
         "VIC"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "baranduda-electrical-energy-reserve"
       ]
@@ -5582,7 +5582,7 @@
       "states": [
         "QLD"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "gawara-baya-wind-and-bess"
       ]
@@ -5602,7 +5602,7 @@
       "states": [
         "NSW"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "gelston-energy-park"
       ]
@@ -5682,7 +5682,7 @@
       "states": [
         "QLD"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "j-pierce-road-bess"
       ]
@@ -5902,7 +5902,7 @@
       "states": [
         "NSW"
       ],
-      "avg_confidence": "medium",
+      "avg_confidence": "good",
       "project_ids": [
         "stubbo-solar-farm"
       ]
@@ -5922,7 +5922,7 @@
       "states": [
         "QLD"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "teebar-creek-battery-storage-kci"
       ]
@@ -5963,7 +5963,7 @@
       "states": [
         "NSW"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "tirranna-bess-kci"
       ]
@@ -6003,7 +6003,7 @@
       "states": [
         "NSW"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "vales-point-bess"
       ]
@@ -6103,7 +6103,7 @@
       "states": [
         "VIC"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "fosterville-sf-and-bess",
         "axedale-sf-and-bess"
@@ -6144,7 +6144,7 @@
       "states": [
         "NSW"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "lake-lyell-pumped-hydro"
       ]
@@ -6165,7 +6165,7 @@
       "states": [
         "SA"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "northern-battery",
         "morgan-solar"
@@ -6206,7 +6206,7 @@
       "states": [
         "QLD"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "mount-hopeful-wind-farm"
       ]
@@ -6226,7 +6226,7 @@
       "states": [
         "NSW"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "sundown-hybrid-facility"
       ]
@@ -6250,7 +6250,7 @@
         "NSW",
         "QLD"
       ],
-      "avg_confidence": "medium",
+      "avg_confidence": "good",
       "project_ids": [
         "kidston-pumped-storage-hydro-project-250mw",
         "bouldercombe-battery-project",
@@ -6315,7 +6315,7 @@
         "NSW",
         "VIC"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "prairie-solar-farm",
         "daroobalgie-solar-farm"
@@ -6416,7 +6416,7 @@
       "states": [
         "QLD"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "woonga-creek-bess"
       ]
@@ -6476,7 +6476,7 @@
       "states": [
         "QLD"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "moah-creek-wind-farm"
       ]
@@ -6599,7 +6599,7 @@
         "SA",
         "VIC"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "north-yarragon-bess-kci",
         "templers-bess"
@@ -6724,7 +6724,7 @@
       "states": [
         "TAS"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "northern-midlands-solar-farm-kci"
       ]
@@ -6744,7 +6744,7 @@
       "states": [
         "VIC"
       ],
-      "avg_confidence": "medium",
+      "avg_confidence": "good",
       "project_ids": [
         "moorabool-wind-farm"
       ]
@@ -6765,7 +6765,7 @@
         "QLD",
         "TAS"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "jackson-north-bess",
         "bell-bay-bess"
@@ -6786,7 +6786,7 @@
       "states": [
         "NSW"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "blind-creek-solar-farm-and-battery-energy-storage-system"
       ]
@@ -6806,7 +6806,7 @@
       "states": [
         "NSW"
       ],
-      "avg_confidence": "medium",
+      "avg_confidence": "good",
       "project_ids": [
         "bulabul-bess-1"
       ]
@@ -6846,7 +6846,7 @@
       "states": [
         "NSW"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "dungowan-3000-mwh-phes"
       ]
@@ -6908,7 +6908,7 @@
       "states": [
         "QLD"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "haughton-bess",
         "haughton-solar-farm-stage-1"
@@ -6949,7 +6949,7 @@
       "states": [
         "VIC"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "heywood-bess"
       ]
@@ -7049,7 +7049,7 @@
       "states": [
         "VIC"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "mornington-bess-2"
       ]
@@ -7069,7 +7069,7 @@
       "states": [
         "VIC"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "mortlake-energy-hub"
       ]
@@ -7089,7 +7089,7 @@
       "states": [
         "QLD"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "mt-fox-bess-arena"
       ]
@@ -7191,7 +7191,7 @@
       "states": [
         "QLD"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "stanwell-bess"
       ]
@@ -7251,7 +7251,7 @@
       "states": [
         "QLD"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "the-block-bess"
       ]
@@ -7271,7 +7271,7 @@
       "states": [
         "VIC"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "thomastown-bess"
       ]
@@ -7291,7 +7291,7 @@
       "states": [
         "VIC"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "tramway-road-bess"
       ]
@@ -7351,7 +7351,7 @@
       "states": [
         "VIC"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "west-mokoan-solar-farm-and-bess"
       ]
@@ -7411,7 +7411,7 @@
       "states": [
         "NSW"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "wongalea-bess"
       ]
@@ -7451,7 +7451,7 @@
       "states": [
         "QLD"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "fraser-coast-hybrid-plant"
       ]
@@ -7511,7 +7511,7 @@
       "states": [
         "NSW"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "paling-yards-wind-farm"
       ]
@@ -7531,7 +7531,7 @@
       "states": [
         "VIC"
       ],
-      "avg_confidence": "medium",
+      "avg_confidence": "good",
       "project_ids": [
         "berrybank-wind-farm"
       ]
@@ -7551,7 +7551,7 @@
       "states": [
         "QLD"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "lower-wonga-solar-farm-and-bess"
       ]
@@ -7571,7 +7571,7 @@
       "states": [
         "SA"
       ],
-      "avg_confidence": "medium",
+      "avg_confidence": "good",
       "project_ids": [
         "bungama-solar"
       ]
@@ -7631,7 +7631,7 @@
       "states": [
         "SA"
       ],
-      "avg_confidence": "medium",
+      "avg_confidence": "good",
       "project_ids": [
         "lake-bonney-2-wind-farm",
         "lake-bonney-1-wind-farm",
@@ -7753,7 +7753,7 @@
       "states": [
         "QLD"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "blackwater-hybrid-system"
       ]
@@ -7773,7 +7773,7 @@
       "states": [
         "VIC"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "cooba-solar-farm-kci"
       ]
@@ -7813,7 +7813,7 @@
       "states": [
         "NSW"
       ],
-      "avg_confidence": "medium",
+      "avg_confidence": "good",
       "project_ids": [
         "sapphire-wind-farm"
       ]
@@ -7873,7 +7873,7 @@
       "states": [
         "NSW"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "coonerang-wind-farm"
       ]
@@ -7893,7 +7893,7 @@
       "states": [
         "SA"
       ],
-      "avg_confidence": "medium",
+      "avg_confidence": "good",
       "project_ids": [
         "carmodys-hill-wind-farm"
       ]
@@ -7953,7 +7953,7 @@
       "states": [
         "SA"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "brinkworth-bess"
       ]
@@ -7973,7 +7973,7 @@
       "states": [
         "NSW"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "comet-park-bess-kci",
         "mangoplah-bess-kci"
@@ -8034,7 +8034,7 @@
       "states": [
         "VIC"
       ],
-      "avg_confidence": "medium",
+      "avg_confidence": "good",
       "project_ids": [
         "gnarwarre-bess-facility"
       ]
@@ -8114,7 +8114,7 @@
       "states": [
         "VIC"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "loy-yang-b-power-station-bess-stage-1-kci"
       ]
@@ -8134,7 +8134,7 @@
       "states": [
         "VIC"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "meadow-creek-bess"
       ]
@@ -8154,7 +8154,7 @@
       "states": [
         "NSW"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "mt-piper-bess"
       ]
@@ -8294,7 +8294,7 @@
       "states": [
         "SA"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "reeves-plains-power-station-bess"
       ]
@@ -8314,7 +8314,7 @@
       "states": [
         "QLD"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "swanbank-f-station"
       ]
@@ -8374,7 +8374,7 @@
       "states": [
         "NSW"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "yanco-bess"
       ]
@@ -8434,7 +8434,7 @@
       "states": [
         "NSW"
       ],
-      "avg_confidence": "medium",
+      "avg_confidence": "good",
       "project_ids": [
         "shoalhaven"
       ]
@@ -8474,7 +8474,7 @@
       "states": [
         "NSW"
       ],
-      "avg_confidence": "medium",
+      "avg_confidence": "good",
       "project_ids": [
         "bango-973-wind-farm",
         "bango-999-wind-farm"
@@ -8495,7 +8495,7 @@
       "states": [
         "VIC"
       ],
-      "avg_confidence": "medium",
+      "avg_confidence": "good",
       "project_ids": [
         "ararat-wind-farm"
       ]
@@ -8535,7 +8535,7 @@
       "states": [
         "SA"
       ],
-      "avg_confidence": "medium",
+      "avg_confidence": "good",
       "project_ids": [
         "summerfield-bess"
       ]
@@ -8555,7 +8555,7 @@
       "states": [
         "QLD"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "theodore-bess"
       ]
@@ -8675,7 +8675,7 @@
       "states": [
         "VIC"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "kerang-battery-plant"
       ]
@@ -8715,7 +8715,7 @@
       "states": [
         "QLD"
       ],
-      "avg_confidence": "medium",
+      "avg_confidence": "good",
       "project_ids": [
         "boulder-creek-wind-farm"
       ]
@@ -8735,7 +8735,7 @@
       "states": [
         "VIC"
       ],
-      "avg_confidence": "medium",
+      "avg_confidence": "good",
       "project_ids": [
         "murra-warra-wind-farm-stage-1"
       ]
@@ -8856,7 +8856,7 @@
       "states": [
         "VIC"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "kiamal-bess"
       ]
@@ -8876,7 +8876,7 @@
       "states": [
         "VIC"
       ],
-      "avg_confidence": "medium",
+      "avg_confidence": "good",
       "project_ids": [
         "ryan-corner-wind-farm"
       ]
@@ -8896,7 +8896,7 @@
       "states": [
         "QLD"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "captains-mountain-wind-farm"
       ]
@@ -8976,7 +8976,7 @@
       "states": [
         "SA"
       ],
-      "avg_confidence": "medium",
+      "avg_confidence": "good",
       "project_ids": [
         "lincoln-gap-wind-farm-stage-1",
         "lincoln-gap-wind-farm-stage-2"
@@ -9017,7 +9017,7 @@
       "states": [
         "SA"
       ],
-      "avg_confidence": "medium",
+      "avg_confidence": "good",
       "project_ids": [
         "goyder-south-wind-farm-1a"
       ]
@@ -9037,7 +9037,7 @@
       "states": [
         "VIC"
       ],
-      "avg_confidence": "medium",
+      "avg_confidence": "good",
       "project_ids": [
         "murra-warra-wind-farm-stage-2"
       ]
@@ -9077,7 +9077,7 @@
       "states": [
         "SA"
       ],
-      "avg_confidence": "medium",
+      "avg_confidence": "good",
       "project_ids": [
         "goyder-south-wind-farm-1b"
       ]
@@ -9177,7 +9177,7 @@
       "states": [
         "NSW"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "burgmanns-bess"
       ]
@@ -9237,7 +9237,7 @@
       "states": [
         "VIC"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "dederang-bess"
       ]
@@ -9337,7 +9337,7 @@
       "states": [
         "QLD"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "kidston-bess"
       ]
@@ -9357,7 +9357,7 @@
       "states": [
         "SA"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "koolunga-battery-energy-storage-system"
       ]
@@ -9397,7 +9397,7 @@
       "states": [
         "VIC"
       ],
-      "avg_confidence": "medium",
+      "avg_confidence": "good",
       "project_ids": [
         "latrobe-valley-bess"
       ]
@@ -9417,7 +9417,7 @@
       "states": [
         "QLD"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "lower-wonga-bess"
       ]
@@ -9517,7 +9517,7 @@
       "states": [
         "VIC"
       ],
-      "avg_confidence": "medium",
+      "avg_confidence": "good",
       "project_ids": [
         "rangebank-bess"
       ]
@@ -9557,7 +9557,7 @@
       "states": [
         "NSW"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "silver-city-energy-storage"
       ]
@@ -9577,7 +9577,7 @@
       "states": [
         "NSW"
       ],
-      "avg_confidence": "medium",
+      "avg_confidence": "good",
       "project_ids": [
         "silverton-wind-farm"
       ]
@@ -9597,7 +9597,7 @@
       "states": [
         "SA"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "south-east-bess-storage-kci"
       ]
@@ -9637,7 +9637,7 @@
       "states": [
         "NSW"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "stubbo-bess"
       ]
@@ -9677,7 +9677,7 @@
       "states": [
         "NSW"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "tilbuster-solar-farm"
       ]
@@ -9717,7 +9717,7 @@
       "states": [
         "NSW"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "wallaby-creek-wind-farm"
       ]
@@ -9737,7 +9737,7 @@
       "states": [
         "QLD"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "yabulu-bess"
       ]
@@ -9777,7 +9777,7 @@
       "states": [
         "VIC"
       ],
-      "avg_confidence": "medium",
+      "avg_confidence": "good",
       "project_ids": [
         "waubra"
       ]
@@ -9857,7 +9857,7 @@
       "states": [
         "VIC"
       ],
-      "avg_confidence": "medium",
+      "avg_confidence": "good",
       "project_ids": [
         "koorangie-energy-storage-system"
       ]
@@ -9877,7 +9877,7 @@
       "states": [
         "QLD"
       ],
-      "avg_confidence": "medium",
+      "avg_confidence": "good",
       "project_ids": [
         "dulacca-wind-farm"
       ]
@@ -9897,7 +9897,7 @@
       "states": [
         "QLD"
       ],
-      "avg_confidence": "medium",
+      "avg_confidence": "good",
       "project_ids": [
         "edenvale-solar-park"
       ]
@@ -9957,7 +9957,7 @@
       "states": [
         "QLD"
       ],
-      "avg_confidence": "medium",
+      "avg_confidence": "good",
       "project_ids": [
         "woolooga-solar-farm"
       ]
@@ -9977,7 +9977,7 @@
       "states": [
         "NSW"
       ],
-      "avg_confidence": "medium",
+      "avg_confidence": "good",
       "project_ids": [
         "white-rock-wind-farm-stage-1"
       ]
@@ -10017,7 +10017,7 @@
       "states": [
         "NSW"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "hampton-park-sess"
       ]
@@ -10037,7 +10037,7 @@
       "states": [
         "NSW"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "maryvale-solar-and-energy-storage-system"
       ]
@@ -10077,7 +10077,7 @@
       "states": [
         "TAS"
       ],
-      "avg_confidence": "medium",
+      "avg_confidence": "good",
       "project_ids": [
         "musselroe-wind-farm"
       ]
@@ -10097,7 +10097,7 @@
       "states": [
         "NSW"
       ],
-      "avg_confidence": "medium",
+      "avg_confidence": "good",
       "project_ids": [
         "gullen-range-wind-farm"
       ]
@@ -10137,7 +10137,7 @@
       "states": [
         "SA"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "summerfield-north"
       ]
@@ -10157,7 +10157,7 @@
       "states": [
         "VIC"
       ],
-      "avg_confidence": "medium",
+      "avg_confidence": "good",
       "project_ids": [
         "mortlake-south-wind-farm"
       ]
@@ -10177,7 +10177,7 @@
       "states": [
         "NSW"
       ],
-      "avg_confidence": "medium",
+      "avg_confidence": "good",
       "project_ids": [
         "nyngan-solar-plant",
         "broken-hill-solar-plant"
@@ -10198,7 +10198,7 @@
       "states": [
         "QLD"
       ],
-      "avg_confidence": "medium",
+      "avg_confidence": "good",
       "project_ids": [
         "kaban-wind-farm"
       ]
@@ -10258,7 +10258,7 @@
       "states": [
         "NSW"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "armidale-bess"
       ]
@@ -10418,7 +10418,7 @@
       "states": [
         "VIC"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "golden-plains-bess"
       ]
@@ -10558,7 +10558,7 @@
       "states": [
         "NSW"
       ],
-      "avg_confidence": "medium",
+      "avg_confidence": "good",
       "project_ids": [
         "flyers-creek-wind-farm"
       ]
@@ -10618,7 +10618,7 @@
       "states": [
         "TAS"
       ],
-      "avg_confidence": "medium",
+      "avg_confidence": "good",
       "project_ids": [
         "cattle-hill-wind-farm"
       ]
@@ -10698,7 +10698,7 @@
       "states": [
         "NSW"
       ],
-      "avg_confidence": "medium",
+      "avg_confidence": "good",
       "project_ids": [
         "capital-wind-farm"
       ]
@@ -10758,7 +10758,7 @@
       "states": [
         "NSW"
       ],
-      "avg_confidence": "medium",
+      "avg_confidence": "good",
       "project_ids": [
         "crudine-ridge-wind-farm"
       ]
@@ -10799,7 +10799,7 @@
         "NSW",
         "VIC"
       ],
-      "avg_confidence": "medium",
+      "avg_confidence": "good",
       "project_ids": [
         "taralga-wind-farm",
         "yambuk"
@@ -10920,7 +10920,7 @@
       "states": [
         "VIC"
       ],
-      "avg_confidence": "medium",
+      "avg_confidence": "good",
       "project_ids": [
         "mt-mercer-wind-farm"
       ]
@@ -10940,7 +10940,7 @@
       "states": [
         "SA"
       ],
-      "avg_confidence": "medium",
+      "avg_confidence": "good",
       "project_ids": [
         "waterloo-wind-farm"
       ]
@@ -11062,7 +11062,7 @@
       "states": [
         "NSW"
       ],
-      "avg_confidence": "medium",
+      "avg_confidence": "good",
       "project_ids": [
         "riverina-energy-storage-system-2",
         "riverina-energy-storage-system-1"
@@ -11083,7 +11083,7 @@
       "states": [
         "NSW"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "stoney-creek-bess"
       ]
@@ -11123,7 +11123,7 @@
       "states": [
         "QLD"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "wandoan-south-solar-stage-1"
       ]
@@ -11203,7 +11203,7 @@
       "states": [
         "VIC"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "normanville-energy-park"
       ]
@@ -11303,7 +11303,7 @@
       "states": [
         "QLD"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "comet-energy-park"
       ]
@@ -11343,7 +11343,7 @@
       "states": [
         "NSW"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "forbes-hybrid-project"
       ]
@@ -11363,7 +11363,7 @@
       "states": [
         "QLD"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "gangarri-solar-farm"
       ]
@@ -11423,7 +11423,7 @@
       "states": [
         "NSW"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "moree-bess"
       ]
@@ -11443,7 +11443,7 @@
       "states": [
         "QLD"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "good",
       "project_ids": [
         "munna-creek-solar-farm"
       ]
@@ -11503,7 +11503,7 @@
       "states": [
         "NSW"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "sunshine-estate-bess"
       ]
@@ -11543,7 +11543,7 @@
       "states": [
         "SA"
       ],
-      "avg_confidence": "medium",
+      "avg_confidence": "good",
       "project_ids": [
         "willogoleche-wind-farm"
       ]
@@ -11563,7 +11563,7 @@
       "states": [
         "VIC"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "good",
       "project_ids": [
         "horsham-solar-farm"
       ]
@@ -11583,7 +11583,7 @@
       "states": [
         "SA"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "carmodys-hill-bess"
       ]
@@ -11643,7 +11643,7 @@
       "states": [
         "VIC"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "springvale-energy-hub"
       ]
@@ -11843,7 +11843,7 @@
       "states": [
         "VIC"
       ],
-      "avg_confidence": "medium",
+      "avg_confidence": "good",
       "project_ids": [
         "bald-hills-wind-farm"
       ]
@@ -11903,7 +11903,7 @@
       "states": [
         "VIC"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "kerang-bess"
       ]
@@ -12023,7 +12023,7 @@
       "states": [
         "VIC"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "bennetts-creek-bess"
       ]
@@ -12043,7 +12043,7 @@
       "states": [
         "NSW"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "beryl-bess"
       ]
@@ -12163,7 +12163,7 @@
       "states": [
         "QLD"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "darling-downs-bess-apa"
       ]
@@ -12183,7 +12183,7 @@
       "states": [
         "NSW"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "deniliquin-east-bess"
       ]
@@ -12283,7 +12283,7 @@
       "states": [
         "SA"
       ],
-      "avg_confidence": "medium",
+      "avg_confidence": "good",
       "project_ids": [
         "hornsdale-wind-farm-stage-1"
       ]
@@ -12363,7 +12363,7 @@
       "states": [
         "SA"
       ],
-      "avg_confidence": "medium",
+      "avg_confidence": "good",
       "project_ids": [
         "mannum-bess"
       ]
@@ -12403,7 +12403,7 @@
       "states": [
         "NSW"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "narrabri-hybrid-project"
       ]
@@ -12443,7 +12443,7 @@
       "states": [
         "NSW"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "panorama-bess"
       ]
@@ -12503,7 +12503,7 @@
       "states": [
         "NSW"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "tamworth-bess-project-1-pty-ltd"
       ]
@@ -12523,7 +12523,7 @@
       "states": [
         "NSW"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "tamworth-bess-project-2-pty-ltd"
       ]
@@ -12563,7 +12563,7 @@
       "states": [
         "VIC"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "terang-bess"
       ]
@@ -12583,7 +12583,7 @@
       "states": [
         "QLD"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "tieri-bess"
       ]
@@ -12643,7 +12643,7 @@
       "states": [
         "SA"
       ],
-      "avg_confidence": "medium",
+      "avg_confidence": "good",
       "project_ids": [
         "snowtown-wind-farm"
       ]
@@ -12683,7 +12683,7 @@
       "states": [
         "QLD"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "ardandra-solar-farm-and-bess"
       ]
@@ -12723,7 +12723,7 @@
       "states": [
         "VIC"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "derby-solar-farm-and-bess"
       ]
@@ -12743,7 +12743,7 @@
       "states": [
         "QLD"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "gunsynd-solar-farm"
       ]
@@ -12763,7 +12763,7 @@
       "states": [
         "NSW"
       ],
-      "avg_confidence": "medium",
+      "avg_confidence": "good",
       "project_ids": [
         "crookwell-2-wind-farm"
       ]
@@ -12943,7 +12943,7 @@
       "states": [
         "NSW"
       ],
-      "avg_confidence": "medium",
+      "avg_confidence": "good",
       "project_ids": [
         "west-wyalong-solar-farm"
       ]
@@ -12963,7 +12963,7 @@
       "states": [
         "VIC"
       ],
-      "avg_confidence": "medium",
+      "avg_confidence": "good",
       "project_ids": [
         "hawkesdale-wind-farm"
       ]
@@ -13083,7 +13083,7 @@
       "states": [
         "QLD"
       ],
-      "avg_confidence": "medium",
+      "avg_confidence": "good",
       "project_ids": [
         "moura-solar-farm"
       ]
@@ -13143,7 +13143,7 @@
       "states": [
         "VIC"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "fulham-solar-farm-and-bess"
       ]
@@ -13163,7 +13163,7 @@
       "states": [
         "VIC"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "lancaster-solar-farm"
       ]
@@ -13223,7 +13223,7 @@
       "states": [
         "NSW"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "good",
       "project_ids": [
         "quorn-park-solar-hybrid"
       ]
@@ -13243,7 +13243,7 @@
       "states": [
         "QLD"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "bundaberg-solar-farm"
       ]
@@ -13343,7 +13343,7 @@
       "states": [
         "VIC"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "cobden-bess"
       ]
@@ -13423,7 +13423,7 @@
       "states": [
         "VIC"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "wunghnu-solar-farm"
       ]
@@ -13483,7 +13483,7 @@
       "states": [
         "VIC"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "heatherton-bess"
       ]
@@ -13543,7 +13543,7 @@
       "states": [
         "NSW"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "gunnedah-bess"
       ]
@@ -13583,7 +13583,7 @@
       "states": [
         "QLD"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "theodore-solar-farm"
       ]
@@ -13663,7 +13663,7 @@
       "states": [
         "SA"
       ],
-      "avg_confidence": "medium",
+      "avg_confidence": "good",
       "project_ids": [
         "cathedral-rocks"
       ]
@@ -13703,7 +13703,7 @@
       "states": [
         "NSW"
       ],
-      "avg_confidence": "medium",
+      "avg_confidence": "good",
       "project_ids": [
         "smithfield-bess"
       ]
@@ -13803,7 +13803,7 @@
       "states": [
         "QLD"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "banksia-solar-farm"
       ]
@@ -13843,7 +13843,7 @@
       "states": [
         "VIC"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "camperdown-bess"
       ]
@@ -13863,7 +13863,7 @@
       "states": [
         "SA"
       ],
-      "avg_confidence": "medium",
+      "avg_confidence": "good",
       "project_ids": [
         "clements-gap-bess"
       ]
@@ -13883,7 +13883,7 @@
       "states": [
         "NSW"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "maison-dieu-solar-farm"
       ]
@@ -13943,7 +13943,7 @@
       "states": [
         "SA"
       ],
-      "avg_confidence": "medium",
+      "avg_confidence": "good",
       "project_ids": [
         "clements-gap-wind-farm"
       ]
@@ -13983,7 +13983,7 @@
       "states": [
         "NSW"
       ],
-      "avg_confidence": "medium",
+      "avg_confidence": "good",
       "project_ids": [
         "crookwell-3-wind-farm"
       ]
@@ -14123,7 +14123,7 @@
       "states": [
         "VIC"
       ],
-      "avg_confidence": "medium",
+      "avg_confidence": "good",
       "project_ids": [
         "salt-creek-wind-farm"
       ]
@@ -14203,7 +14203,7 @@
       "states": [
         "NSW"
       ],
-      "avg_confidence": "medium",
+      "avg_confidence": "good",
       "project_ids": [
         "broken-hill-bess"
       ]
@@ -14243,7 +14243,7 @@
       "states": [
         "SA"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "hallett-bess"
       ]
@@ -14303,7 +14303,7 @@
       "states": [
         "SA"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "reeves-plains-battery-stage-2"
       ]
@@ -14323,7 +14323,7 @@
       "states": [
         "NSW"
       ],
-      "avg_confidence": "medium",
+      "avg_confidence": "good",
       "project_ids": [
         "wallgrove-grid-battery-project"
       ]
@@ -14363,7 +14363,7 @@
       "states": [
         "NSW"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "wagga-north-solar-farm"
       ]
@@ -14503,7 +14503,7 @@
       "states": [
         "QLD"
       ],
-      "avg_confidence": "medium",
+      "avg_confidence": "good",
       "project_ids": [
         "kennedy-energy-park-phase-1-wind"
       ]
@@ -14603,7 +14603,7 @@
       "states": [
         "VIC"
       ],
-      "avg_confidence": "medium",
+      "avg_confidence": "good",
       "project_ids": [
         "ballarat-energy-storage-system"
       ]
@@ -14683,7 +14683,7 @@
       "states": [
         "SA"
       ],
-      "avg_confidence": "medium",
+      "avg_confidence": "good",
       "project_ids": [
         "dalrymple-bess"
       ]
@@ -14945,7 +14945,7 @@
         "QLD",
         "VIC"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "seaspray-off-shore-wind-farm",
         "deal-1-west-off-shore-wind-farm",
@@ -15030,9 +15030,9 @@
         "solar": 2
       },
       "by_status": {
-        "construction": 2,
+        "development": 18,
         "operating": 6,
-        "development": 17
+        "construction": 1
       },
       "states": [
         "NSW",
@@ -15040,7 +15040,7 @@
         "SA",
         "VIC"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "tomago-bess",
         "liddell-bess",
@@ -15097,7 +15097,7 @@
         "SA",
         "VIC"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "golden-plains-wind",
         "morwell-bess",
@@ -15244,7 +15244,7 @@
         "QLD",
         "VIC"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "mt-arthur-pumped-hydro-energy-storage-project-kci",
         "herries-range-wind-farm",
@@ -15311,7 +15311,7 @@
         "Squadron Energy Services Pty Ltd"
       ],
       "project_count": 9,
-      "total_capacity_mw": 5250.0,
+      "total_capacity_mw": 5239.0,
       "total_storage_mwh": 400.0,
       "by_technology": {
         "wind": 8,
@@ -15406,7 +15406,7 @@
         "SA",
         "TAS"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "goyder-north-wind-farm",
         "great-western-battery-project",
@@ -15455,7 +15455,7 @@
         "QLD",
         "VIC"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "sandy-creek-standalone-bess",
         "running-creek-solar-and-bess",
@@ -15656,7 +15656,7 @@
         "QLD",
         "VIC"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "connewarren-bess",
         "waratah-super-battery",
@@ -15737,7 +15737,7 @@
         "SA",
         "VIC"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "spinifex-offshore-wind-farm",
         "ben-bullen-wind-farm",
@@ -15883,7 +15883,7 @@
         "SA",
         "VIC"
       ],
-      "avg_confidence": "medium",
+      "avg_confidence": "good",
       "project_ids": [
         "the-plains",
         "goorambat-east-solar-farm-engie",
@@ -15947,7 +15947,7 @@
         "QLD",
         "VIC"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "avenue-road-bess-kci",
         "belah-bess",
@@ -15986,7 +15986,7 @@
         "QLD",
         "VIC"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "the-block-bess",
         "dunmore-solar-farm",
@@ -16092,7 +16092,7 @@
         "NSW",
         "QLD"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "cattle-creek-wind-farm-kci",
         "theodore-wind-farm",
@@ -16119,7 +16119,7 @@
       "states": [
         "NSW"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "kiar-bess",
         "kias-bess",
@@ -16177,7 +16177,7 @@
         "QLD",
         "VIC"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "texas-bess",
         "armidale-east-bess",
@@ -16216,7 +16216,7 @@
         "NSW",
         "QLD"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "bulli-creek-solar-farm",
         "bulli-creek-battery",
@@ -16326,7 +16326,7 @@
         "NSW",
         "VIC"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "hexham",
         "bendenine",
@@ -16365,7 +16365,7 @@
         "SA",
         "VIC"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "bunkers-hill-wind-farm",
         "haughton-solar-farm-stage-2",
@@ -16514,7 +16514,7 @@
         "QLD",
         "SA"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "miles-solar-project",
         "bellambi-heights-renewables-project",
@@ -16611,7 +16611,7 @@
       "states": [
         "NSW"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "baldon-wind-farm-stage-2",
         "baldon-wind-farm-stage-2-bess",
@@ -16705,7 +16705,7 @@
       "states": [
         "QLD"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "bungaban-wind-farm",
         "bungaban-bess",
@@ -16735,7 +16735,7 @@
         "NSW",
         "VIC"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "merriwa-solar-farm-and-bess",
         "mornington-bess-2",
@@ -16770,7 +16770,7 @@
         "SA",
         "TAS"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "jackson-north-wind-farm",
         "koolunga-battery-energy-storage-system",
@@ -16930,7 +16930,7 @@
         "QLD",
         "VIC"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "glenrowan-bess-storage-kci",
         "hazeldean-bess-storage-kci",
@@ -16975,7 +16975,7 @@
       "states": [
         "VIC"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "warracknabeal-wind-farm"
       ],
@@ -17117,7 +17117,7 @@
         "SA",
         "VIC"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "narrandera-solar-hybrid-pvbess",
         "peel-valley-solar-hybrid-pvbess",
@@ -17169,7 +17169,7 @@
         "QLD",
         "SA"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "capricorn-bess",
         "tallawang-solar-and-bess",
@@ -17218,7 +17218,7 @@
       "states": [
         "QLD"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "eurimbula-hybrid-facility-battery-storage",
         "eurimbula-solar-farm"
@@ -17303,7 +17303,7 @@
       "states": [
         "NSW"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "hanworth-battery"
       ],
@@ -17394,7 +17394,7 @@
       "states": [
         "NSW"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "bookham-wf-and-bess"
       ],
@@ -17424,7 +17424,7 @@
         "SA",
         "VIC"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "solar-river-solar-and-bess-project",
         "north-yarragon-bess-kci",
@@ -17459,7 +17459,7 @@
         "SA",
         "VIC"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "lake-lyell-pumped-hydro",
         "wooreen-energy-storage-system",
@@ -17485,7 +17485,7 @@
       "states": [
         "NSW"
       ],
-      "avg_confidence": "medium",
+      "avg_confidence": "good",
       "project_ids": [
         "dinawan-energy-hub"
       ]
@@ -17510,7 +17510,7 @@
       "states": [
         "QLD"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "farmers-creek-energy-park",
         "east-end-bess"
@@ -17534,7 +17534,7 @@
       "states": [
         "NSW"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "western-sydney-pumped-hydro-project"
       ]
@@ -17576,7 +17576,7 @@
       "states": [
         "QLD"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "burdekin-bess",
         "burdekin-solar-farm-kci"
@@ -17619,7 +17619,7 @@
       "states": [
         "QLD"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "halys-bess-1-akaysha",
         "halys-bess-2-akaysha"
@@ -17756,27 +17756,6 @@
       ]
     },
     {
-      "slug": "macintyre-windfarm-pty-ltd-and-arc-energy-macintyre",
-      "name": "Macintyre Windfarm Pty Ltd and Arc Energy Macintyre Pty Ltd",
-      "project_count": 1,
-      "total_capacity_mw": 923.0,
-      "total_storage_mwh": 0,
-      "by_technology": {
-        "wind": 1
-      },
-      "by_status": {
-        "commissioning": 1
-      },
-      "states": [
-        "QLD"
-      ],
-      "avg_confidence": "low",
-      "project_ids": [
-        "macintyre-wind-farm"
-      ],
-      "aliases": []
-    },
-    {
       "slug": "western-downs-green-power-hub",
       "name": "Western Downs Green Power Hub Pty Ltd",
       "aliases": [
@@ -17797,7 +17776,7 @@
       "states": [
         "QLD"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "western-downs-battery-stage-1-and-2",
         "western-downs-green-power-hub-pl"
@@ -17823,7 +17802,7 @@
         "QLD",
         "VIC"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "colosseum-solar-farm-and-bess",
         "berrybank-bess-storage-kci",
@@ -17871,6 +17850,27 @@
       "avg_confidence": "low",
       "project_ids": [
         "oven-mountain-pumped-storage"
+      ],
+      "aliases": []
+    },
+    {
+      "slug": "macintyre-windfarm-pty-ltd-and-arc-energy-macintyre",
+      "name": "Macintyre Windfarm Pty Ltd and Arc Energy Macintyre Pty Ltd",
+      "project_count": 1,
+      "total_capacity_mw": 890.0,
+      "total_storage_mwh": 0,
+      "by_technology": {
+        "wind": 1
+      },
+      "by_status": {
+        "commissioning": 1
+      },
+      "states": [
+        "QLD"
+      ],
+      "avg_confidence": "good",
+      "project_ids": [
+        "macintyre-wind-farm"
       ],
       "aliases": []
     },
@@ -17998,7 +17998,7 @@
       "states": [
         "QLD"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "miles-bess-project",
         "wandoan-south-solar-stage-2",
@@ -18056,7 +18056,7 @@
       "states": [
         "QLD"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "punchs-creek-hybrid-stage-3-kci",
         "punchs-creek-hybrid-stage-2-kci"
@@ -18251,7 +18251,7 @@
       "states": [
         "QLD"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "central-queensland-energy-storage-project-stage-1"
       ],
@@ -18272,7 +18272,7 @@
       "states": [
         "QLD"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "supernode-bess-stage-3",
         "supernode-bess-stage-4",
@@ -18295,7 +18295,7 @@
       "states": [
         "QLD"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "supernode-north-bess-1",
         "supernode-north-bess-2",
@@ -18329,27 +18329,6 @@
         "river-parks-battery-energy-storage-system",
         "hopeland-bess"
       ]
-    },
-    {
-      "slug": "golden-plains-wf1-pty-ltd-as-trustee-for-the-golden-plains-wf1-unit-trust",
-      "name": "Golden Plains WF1 Pty Ltd as trustee for the Golden Plains WF1 Unit Trust",
-      "project_count": 1,
-      "total_capacity_mw": 756.0,
-      "total_storage_mwh": 0,
-      "by_technology": {
-        "wind": 1
-      },
-      "by_status": {
-        "commissioning": 1
-      },
-      "states": [
-        "VIC"
-      ],
-      "avg_confidence": "low",
-      "project_ids": [
-        "golden-plains-wind-farm-east"
-      ],
-      "aliases": []
     },
     {
       "slug": "ci-qld-phes",
@@ -18411,6 +18390,27 @@
       "avg_confidence": "low",
       "project_ids": [
         "mt-view-wind-farm-kci"
+      ],
+      "aliases": []
+    },
+    {
+      "slug": "golden-plains-wf1-pty-ltd-as-trustee-for-the-golden-plains-wf1-unit-trust",
+      "name": "Golden Plains WF1 Pty Ltd as trustee for the Golden Plains WF1 Unit Trust",
+      "project_count": 1,
+      "total_capacity_mw": 733.0,
+      "total_storage_mwh": 0,
+      "by_technology": {
+        "wind": 1
+      },
+      "by_status": {
+        "commissioning": 1
+      },
+      "states": [
+        "VIC"
+      ],
+      "avg_confidence": "medium",
+      "project_ids": [
+        "golden-plains-wind-farm-east"
       ],
       "aliases": []
     },
@@ -18485,7 +18485,7 @@
         "QLD",
         "VIC"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "teebar-creek-battery-storage-kci",
         "heywood-bess"
@@ -18527,7 +18527,7 @@
       "states": [
         "NSW"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "cobbora-solar-farm"
       ],
@@ -18804,7 +18804,7 @@
       "states": [
         "VIC"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "kentbruck-green-power-hub"
       ],
@@ -18825,7 +18825,7 @@
       "states": [
         "VIC"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "melbourne-renewable-energy-hub-side-b"
       ],
@@ -18846,7 +18846,7 @@
       "states": [
         "VIC"
       ],
-      "avg_confidence": "medium",
+      "avg_confidence": "good",
       "project_ids": [
         "melbourne-renewable-energy-hub-connection-a1",
         "melbourne-renewable-energy-hub-connection-a2",
@@ -18869,7 +18869,7 @@
       "states": [
         "QLD"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "north-queensland-energy-storage-project-nqesp-stage-1"
       ],
@@ -18916,7 +18916,7 @@
       "states": [
         "QLD"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "mt-fox-bess-arena",
         "mt-fox-wind-farm"
@@ -18991,7 +18991,7 @@
       "states": [
         "QLD"
       ],
-      "avg_confidence": "medium",
+      "avg_confidence": "good",
       "project_ids": [
         "lotus-creek-wind-farm",
         "greenbank-bess",
@@ -19014,7 +19014,7 @@
       "states": [
         "NSW"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "junction-rivers-wind-and-bess"
       ],
@@ -19035,7 +19035,7 @@
       "states": [
         "NSW"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "piambong-wind-farm-kci"
       ],
@@ -19106,7 +19106,7 @@
       "states": [
         "SA"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "whyte-yarcowie"
       ],
@@ -19193,7 +19193,7 @@
       "states": [
         "NSW"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "wattle-creek-energy-hub-battery-storage",
         "wattle-creek-energy-hub-solar-bess"
@@ -19244,7 +19244,7 @@
         "NSW",
         "VIC"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "magpie-hill-solar-farm",
         "dederang-bess"
@@ -19372,7 +19372,7 @@
       "states": [
         "NSW"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "ilford-green-energy-hub"
       ],
@@ -19584,7 +19584,7 @@
       "states": [
         "NSW"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "wellington-a-caes"
       ],
@@ -19628,7 +19628,7 @@
       "states": [
         "VIC"
       ],
-      "avg_confidence": "medium",
+      "avg_confidence": "good",
       "project_ids": [
         "moorabool-bess",
         "bulgana-green-power-hub-wind-farm"
@@ -19678,7 +19678,7 @@
       "states": [
         "SA"
       ],
-      "avg_confidence": "medium",
+      "avg_confidence": "good",
       "project_ids": [
         "lincoln-gap-wind-farm-stage-3",
         "lincoln-gap-wind-farm-stage-1",
@@ -19705,7 +19705,7 @@
         "QLD",
         "SA"
       ],
-      "avg_confidence": "medium",
+      "avg_confidence": "good",
       "project_ids": [
         "carmodys-hill-wind-farm",
         "boulder-creek-wind-farm"
@@ -19771,7 +19771,7 @@
       "states": [
         "QLD"
       ],
-      "avg_confidence": "medium",
+      "avg_confidence": "good",
       "project_ids": [
         "broadsound-solar-farm",
         "broadsoundbess"
@@ -19797,7 +19797,7 @@
         "TAS",
         "VIC"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "george-town-bess-kci",
         "carwarp-hybrid"
@@ -19886,7 +19886,7 @@
       "states": [
         "QLD"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "mackenzie-river-solar-farm"
       ],
@@ -19997,7 +19997,7 @@
       "states": [
         "QLD"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "tarong-west-wind-farm-ironleaf"
       ],
@@ -20022,7 +20022,7 @@
       "states": [
         "VIC"
       ],
-      "avg_confidence": "medium",
+      "avg_confidence": "good",
       "project_ids": [
         "murra-warra-wind-farm-stage-1",
         "murra-warra-wind-farm-stage-2"
@@ -20043,7 +20043,7 @@
       "states": [
         "QLD"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "callide-wind-farm"
       ],
@@ -20064,7 +20064,7 @@
       "states": [
         "NSW"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "hills-of-gold-wind-farm"
       ],
@@ -20085,7 +20085,7 @@
       "states": [
         "VIC"
       ],
-      "avg_confidence": "medium",
+      "avg_confidence": "good",
       "project_ids": [
         "macarthur-wind-farm"
       ],
@@ -20106,7 +20106,7 @@
       "states": [
         "NSW"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "middlebrook-solar-and-bess"
       ],
@@ -20131,7 +20131,7 @@
       "states": [
         "SA"
       ],
-      "avg_confidence": "medium",
+      "avg_confidence": "good",
       "project_ids": [
         "goyder-south-wind-farm-1a",
         "goyder-south-wind-farm-1b"
@@ -20152,7 +20152,7 @@
       "states": [
         "QLD"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "wurdong-bess"
       ],
@@ -20173,7 +20173,7 @@
       "states": [
         "NSW"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "mallee-wind-farm"
       ],
@@ -20219,7 +20219,7 @@
       "states": [
         "VIC"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "baranduda-electrical-energy-reserve"
       ],
@@ -20282,7 +20282,7 @@
       "states": [
         "QLD"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "gawara-baya-wind-and-bess"
       ],
@@ -20303,7 +20303,7 @@
       "states": [
         "NSW"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "gelston-energy-park"
       ],
@@ -20366,7 +20366,7 @@
       "states": [
         "QLD"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "j-pierce-road-bess"
       ],
@@ -20619,7 +20619,7 @@
       "states": [
         "NSW"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "tirranna-bess-kci"
       ],
@@ -20661,7 +20661,7 @@
       "states": [
         "NSW"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "vales-point-bess"
       ],
@@ -20746,7 +20746,7 @@
       "states": [
         "SA"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "northern-battery",
         "morgan-solar"
@@ -20789,7 +20789,7 @@
       "states": [
         "QLD"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "mount-hopeful-wind-farm"
       ],
@@ -20814,7 +20814,7 @@
       "states": [
         "SA"
       ],
-      "avg_confidence": "medium",
+      "avg_confidence": "good",
       "project_ids": [
         "snowtown-s2-wind-farm",
         "snowtown-wind-farm"
@@ -20841,7 +20841,7 @@
         "TAS",
         "VIC"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "cimitiere-plains-solar-farm",
         "wunghnu-solar-farm"
@@ -20862,7 +20862,7 @@
       "states": [
         "NSW"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "sundown-hybrid-facility"
       ],
@@ -20888,7 +20888,7 @@
       "states": [
         "NSW"
       ],
-      "avg_confidence": "medium",
+      "avg_confidence": "good",
       "project_ids": [
         "silverton-wind-farm",
         "nyngan-solar-plant",
@@ -21015,7 +21015,7 @@
       "states": [
         "QLD"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "moah-creek-wind-farm"
       ],
@@ -21148,7 +21148,7 @@
         "NSW",
         "VIC"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "kerang-battery-plant",
         "bowning-hybrid-plant"
@@ -21236,7 +21236,7 @@
       "states": [
         "TAS"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "northern-midlands-solar-farm-kci"
       ],
@@ -21287,7 +21287,7 @@
       "states": [
         "VIC"
       ],
-      "avg_confidence": "medium",
+      "avg_confidence": "good",
       "project_ids": [
         "moorabool-wind-farm"
       ],
@@ -21314,7 +21314,7 @@
         "QLD",
         "VIC"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "kiamal-bess",
         "pleasant-hills-solar-farm-kci"
@@ -21335,7 +21335,7 @@
       "states": [
         "NSW"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "blind-creek-solar-farm-and-battery-energy-storage-system"
       ],
@@ -21356,7 +21356,7 @@
       "states": [
         "NSW"
       ],
-      "avg_confidence": "medium",
+      "avg_confidence": "good",
       "project_ids": [
         "bulabul-bess-1"
       ],
@@ -21398,7 +21398,7 @@
       "states": [
         "NSW"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "dungowan-3000-mwh-phes"
       ],
@@ -21461,7 +21461,7 @@
       "states": [
         "VIC"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "mortlake-energy-hub"
       ],
@@ -21524,7 +21524,7 @@
       "states": [
         "VIC"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "thomastown-bess"
       ],
@@ -21566,7 +21566,7 @@
       "states": [
         "VIC"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "west-mokoan-solar-farm-and-bess"
       ],
@@ -21587,7 +21587,7 @@
       "states": [
         "QLD"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "fraser-coast-hybrid-plant"
       ],
@@ -21608,7 +21608,7 @@
       "states": [
         "NSW"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "paling-yards-wind-farm"
       ],
@@ -21629,7 +21629,7 @@
       "states": [
         "VIC"
       ],
-      "avg_confidence": "medium",
+      "avg_confidence": "good",
       "project_ids": [
         "berrybank-wind-farm"
       ],
@@ -21650,7 +21650,7 @@
       "states": [
         "QLD"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "lower-wonga-solar-farm-and-bess"
       ],
@@ -21671,7 +21671,7 @@
       "states": [
         "SA"
       ],
-      "avg_confidence": "medium",
+      "avg_confidence": "good",
       "project_ids": [
         "bungama-solar"
       ],
@@ -21713,7 +21713,7 @@
       "states": [
         "SA"
       ],
-      "avg_confidence": "medium",
+      "avg_confidence": "good",
       "project_ids": [
         "lake-bonney-2-wind-farm",
         "lake-bonney-1-wind-farm",
@@ -21799,7 +21799,7 @@
       "states": [
         "QLD"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "blackwater-hybrid-system"
       ],
@@ -21841,7 +21841,7 @@
       "states": [
         "NSW"
       ],
-      "avg_confidence": "medium",
+      "avg_confidence": "good",
       "project_ids": [
         "sapphire-wind-farm"
       ],
@@ -21862,7 +21862,7 @@
       "states": [
         "NSW"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "coonerang-wind-farm"
       ],
@@ -21904,7 +21904,7 @@
       "states": [
         "SA"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "brinkworth-bess"
       ],
@@ -22009,7 +22009,7 @@
       "states": [
         "VIC"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "meadow-creek-bess"
       ],
@@ -22114,7 +22114,7 @@
       "states": [
         "NSW"
       ],
-      "avg_confidence": "medium",
+      "avg_confidence": "good",
       "project_ids": [
         "bango-973-wind-farm",
         "bango-999-wind-farm"
@@ -22165,7 +22165,7 @@
       "states": [
         "VIC"
       ],
-      "avg_confidence": "medium",
+      "avg_confidence": "good",
       "project_ids": [
         "ararat-wind-farm"
       ],
@@ -22186,7 +22186,7 @@
       "states": [
         "SA"
       ],
-      "avg_confidence": "medium",
+      "avg_confidence": "good",
       "project_ids": [
         "summerfield-bess"
       ],
@@ -22207,7 +22207,7 @@
       "states": [
         "QLD"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "theodore-bess"
       ],
@@ -22423,7 +22423,7 @@
       "states": [
         "VIC"
       ],
-      "avg_confidence": "medium",
+      "avg_confidence": "good",
       "project_ids": [
         "ryan-corner-wind-farm"
       ],
@@ -22447,7 +22447,7 @@
       "states": [
         "QLD"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "captains-mountain-wind-farm"
       ]
@@ -22639,7 +22639,7 @@
       "states": [
         "NSW"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "burgmanns-bess"
       ],
@@ -22765,7 +22765,7 @@
       "states": [
         "VIC"
       ],
-      "avg_confidence": "medium",
+      "avg_confidence": "good",
       "project_ids": [
         "latrobe-valley-bess"
       ],
@@ -22786,7 +22786,7 @@
       "states": [
         "VIC"
       ],
-      "avg_confidence": "medium",
+      "avg_confidence": "good",
       "project_ids": [
         "rangebank-bess"
       ],
@@ -22807,7 +22807,7 @@
       "states": [
         "NSW"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "silver-city-energy-storage"
       ],
@@ -22849,7 +22849,7 @@
       "states": [
         "NSW"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "stubbo-bess"
       ],
@@ -22891,7 +22891,7 @@
       "states": [
         "NSW"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "tilbuster-solar-farm"
       ],
@@ -22933,7 +22933,7 @@
       "states": [
         "QLD"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "yabulu-bess"
       ],
@@ -22975,7 +22975,7 @@
       "states": [
         "VIC"
       ],
-      "avg_confidence": "medium",
+      "avg_confidence": "good",
       "project_ids": [
         "waubra"
       ],
@@ -23059,7 +23059,7 @@
       "states": [
         "VIC"
       ],
-      "avg_confidence": "medium",
+      "avg_confidence": "good",
       "project_ids": [
         "koorangie-energy-storage-system"
       ],
@@ -23080,7 +23080,7 @@
       "states": [
         "QLD"
       ],
-      "avg_confidence": "medium",
+      "avg_confidence": "good",
       "project_ids": [
         "dulacca-wind-farm"
       ],
@@ -23101,7 +23101,7 @@
       "states": [
         "QLD"
       ],
-      "avg_confidence": "medium",
+      "avg_confidence": "good",
       "project_ids": [
         "edenvale-solar-park"
       ],
@@ -23164,7 +23164,7 @@
       "states": [
         "QLD"
       ],
-      "avg_confidence": "medium",
+      "avg_confidence": "good",
       "project_ids": [
         "woolooga-solar-farm"
       ],
@@ -23185,7 +23185,7 @@
       "states": [
         "NSW"
       ],
-      "avg_confidence": "medium",
+      "avg_confidence": "good",
       "project_ids": [
         "white-rock-wind-farm-stage-1"
       ],
@@ -23227,7 +23227,7 @@
       "states": [
         "NSW"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "hampton-park-sess"
       ],
@@ -23248,7 +23248,7 @@
       "states": [
         "NSW"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "maryvale-solar-and-energy-storage-system"
       ],
@@ -23269,7 +23269,7 @@
       "states": [
         "TAS"
       ],
-      "avg_confidence": "medium",
+      "avg_confidence": "good",
       "project_ids": [
         "musselroe-wind-farm"
       ],
@@ -23290,7 +23290,7 @@
       "states": [
         "NSW"
       ],
-      "avg_confidence": "medium",
+      "avg_confidence": "good",
       "project_ids": [
         "gullen-range-wind-farm"
       ],
@@ -23357,7 +23357,7 @@
       "states": [
         "SA"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "summerfield-north"
       ],
@@ -23378,7 +23378,7 @@
       "states": [
         "VIC"
       ],
-      "avg_confidence": "medium",
+      "avg_confidence": "good",
       "project_ids": [
         "mortlake-south-wind-farm"
       ],
@@ -23399,7 +23399,7 @@
       "states": [
         "QLD"
       ],
-      "avg_confidence": "medium",
+      "avg_confidence": "good",
       "project_ids": [
         "kaban-wind-farm"
       ],
@@ -23464,7 +23464,7 @@
       "states": [
         "NSW"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "armidale-bess"
       ],
@@ -23653,7 +23653,7 @@
       "states": [
         "NSW"
       ],
-      "avg_confidence": "medium",
+      "avg_confidence": "good",
       "project_ids": [
         "flyers-creek-wind-farm"
       ],
@@ -23695,7 +23695,7 @@
       "states": [
         "TAS"
       ],
-      "avg_confidence": "medium",
+      "avg_confidence": "good",
       "project_ids": [
         "cattle-hill-wind-farm"
       ],
@@ -23779,7 +23779,7 @@
       "states": [
         "NSW"
       ],
-      "avg_confidence": "medium",
+      "avg_confidence": "good",
       "project_ids": [
         "capital-wind-farm"
       ],
@@ -23842,7 +23842,7 @@
       "states": [
         "NSW"
       ],
-      "avg_confidence": "medium",
+      "avg_confidence": "good",
       "project_ids": [
         "crudine-ridge-wind-farm"
       ],
@@ -23864,7 +23864,7 @@
         "NSW",
         "VIC"
       ],
-      "avg_confidence": "medium",
+      "avg_confidence": "good",
       "project_ids": [
         "taralga-wind-farm",
         "yambuk"
@@ -23972,7 +23972,7 @@
       "states": [
         "VIC"
       ],
-      "avg_confidence": "medium",
+      "avg_confidence": "good",
       "project_ids": [
         "mt-mercer-wind-farm"
       ],
@@ -23993,7 +23993,7 @@
       "states": [
         "SA"
       ],
-      "avg_confidence": "medium",
+      "avg_confidence": "good",
       "project_ids": [
         "waterloo-wind-farm"
       ],
@@ -24121,7 +24121,7 @@
       "states": [
         "NSW"
       ],
-      "avg_confidence": "medium",
+      "avg_confidence": "good",
       "project_ids": [
         "riverina-energy-storage-system-2",
         "riverina-energy-storage-system-1"
@@ -24143,7 +24143,7 @@
       "states": [
         "NSW"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "stoney-creek-bess"
       ],
@@ -24227,7 +24227,7 @@
       "states": [
         "VIC"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "normanville-energy-park"
       ],
@@ -24311,7 +24311,7 @@
       "states": [
         "QLD"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "comet-energy-park"
       ],
@@ -24353,7 +24353,7 @@
       "states": [
         "NSW"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "forbes-hybrid-project"
       ],
@@ -24374,7 +24374,7 @@
       "states": [
         "QLD"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "gangarri-solar-farm"
       ],
@@ -24437,7 +24437,7 @@
       "states": [
         "QLD"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "good",
       "project_ids": [
         "munna-creek-solar-farm"
       ],
@@ -24500,7 +24500,7 @@
       "states": [
         "NSW"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "sunshine-estate-bess"
       ],
@@ -24521,7 +24521,7 @@
       "states": [
         "SA"
       ],
-      "avg_confidence": "medium",
+      "avg_confidence": "good",
       "project_ids": [
         "willogoleche-wind-farm"
       ],
@@ -24542,7 +24542,7 @@
       "states": [
         "SA"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "carmodys-hill-bess"
       ],
@@ -24605,7 +24605,7 @@
       "states": [
         "VIC"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "springvale-energy-hub"
       ],
@@ -24815,7 +24815,7 @@
       "states": [
         "VIC"
       ],
-      "avg_confidence": "medium",
+      "avg_confidence": "good",
       "project_ids": [
         "bald-hills-wind-farm"
       ],
@@ -24878,7 +24878,7 @@
       "states": [
         "VIC"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "kerang-bess"
       ],
@@ -24965,7 +24965,7 @@
       "states": [
         "QLD"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "darling-downs-bess-apa"
       ]
@@ -25027,7 +25027,7 @@
       "states": [
         "VIC"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "bennetts-creek-bess"
       ],
@@ -25153,7 +25153,7 @@
       "states": [
         "NSW"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "deniliquin-east-bess"
       ],
@@ -25237,7 +25237,7 @@
       "states": [
         "SA"
       ],
-      "avg_confidence": "medium",
+      "avg_confidence": "good",
       "project_ids": [
         "hornsdale-wind-farm-stage-1"
       ],
@@ -25300,7 +25300,7 @@
       "states": [
         "SA"
       ],
-      "avg_confidence": "medium",
+      "avg_confidence": "good",
       "project_ids": [
         "mannum-bess"
       ],
@@ -25342,7 +25342,7 @@
       "states": [
         "NSW"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "narrabri-hybrid-project"
       ],
@@ -25384,7 +25384,7 @@
       "states": [
         "NSW"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "panorama-bess"
       ],
@@ -25447,7 +25447,7 @@
       "states": [
         "NSW"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "tamworth-bess-project-1-pty-ltd"
       ],
@@ -25468,7 +25468,7 @@
       "states": [
         "NSW"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "tamworth-bess-project-2-pty-ltd"
       ],
@@ -25552,7 +25552,7 @@
       "states": [
         "QLD"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "ardandra-solar-farm-and-bess"
       ],
@@ -25573,7 +25573,7 @@
       "states": [
         "VIC"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "derby-solar-farm-and-bess"
       ],
@@ -25594,7 +25594,7 @@
       "states": [
         "QLD"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "gunsynd-solar-farm"
       ],
@@ -25615,7 +25615,7 @@
       "states": [
         "NSW"
       ],
-      "avg_confidence": "medium",
+      "avg_confidence": "good",
       "project_ids": [
         "crookwell-2-wind-farm"
       ],
@@ -25699,7 +25699,7 @@
       "states": [
         "NSW"
       ],
-      "avg_confidence": "medium",
+      "avg_confidence": "good",
       "project_ids": [
         "west-wyalong-solar-farm"
       ],
@@ -25720,7 +25720,7 @@
       "states": [
         "VIC"
       ],
-      "avg_confidence": "medium",
+      "avg_confidence": "good",
       "project_ids": [
         "hawkesdale-wind-farm"
       ],
@@ -25846,7 +25846,7 @@
       "states": [
         "QLD"
       ],
-      "avg_confidence": "medium",
+      "avg_confidence": "good",
       "project_ids": [
         "moura-solar-farm"
       ],
@@ -25888,7 +25888,7 @@
       "states": [
         "VIC"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "fulham-solar-farm-and-bess"
       ],
@@ -25909,7 +25909,7 @@
       "states": [
         "VIC"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "lancaster-solar-farm"
       ],
@@ -25951,7 +25951,7 @@
       "states": [
         "NSW"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "good",
       "project_ids": [
         "quorn-park-solar-hybrid"
       ],
@@ -25972,7 +25972,7 @@
       "states": [
         "QLD"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "bundaberg-solar-farm"
       ],
@@ -26077,7 +26077,7 @@
       "states": [
         "VIC"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "cobden-bess"
       ],
@@ -26182,7 +26182,7 @@
       "states": [
         "VIC"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "heatherton-bess"
       ],
@@ -26224,7 +26224,7 @@
       "states": [
         "NSW"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "gunnedah-bess"
       ],
@@ -26266,7 +26266,7 @@
       "states": [
         "QLD"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "theodore-solar-farm"
       ],
@@ -26350,7 +26350,7 @@
       "states": [
         "SA"
       ],
-      "avg_confidence": "medium",
+      "avg_confidence": "good",
       "project_ids": [
         "cathedral-rocks"
       ],
@@ -26392,7 +26392,7 @@
       "states": [
         "NSW"
       ],
-      "avg_confidence": "medium",
+      "avg_confidence": "good",
       "project_ids": [
         "smithfield-bess"
       ],
@@ -26500,7 +26500,7 @@
       "states": [
         "NSW"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "maison-dieu-solar-farm"
       ]
@@ -26541,7 +26541,7 @@
       "states": [
         "VIC"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "camperdown-bess"
       ],
@@ -26562,7 +26562,7 @@
       "states": [
         "SA"
       ],
-      "avg_confidence": "medium",
+      "avg_confidence": "good",
       "project_ids": [
         "clements-gap-bess"
       ],
@@ -26646,7 +26646,7 @@
       "states": [
         "NSW"
       ],
-      "avg_confidence": "medium",
+      "avg_confidence": "good",
       "project_ids": [
         "crookwell-3-wind-farm"
       ],
@@ -26772,7 +26772,7 @@
       "states": [
         "VIC"
       ],
-      "avg_confidence": "medium",
+      "avg_confidence": "good",
       "project_ids": [
         "salt-creek-wind-farm"
       ],
@@ -26835,7 +26835,7 @@
       "states": [
         "NSW"
       ],
-      "avg_confidence": "medium",
+      "avg_confidence": "good",
       "project_ids": [
         "broken-hill-bess"
       ],
@@ -26898,7 +26898,7 @@
       "states": [
         "NSW"
       ],
-      "avg_confidence": "medium",
+      "avg_confidence": "good",
       "project_ids": [
         "wallgrove-grid-battery-project"
       ],
@@ -26940,7 +26940,7 @@
       "states": [
         "NSW"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "wagga-north-solar-farm"
       ],
@@ -27152,7 +27152,7 @@
       "states": [
         "VIC"
       ],
-      "avg_confidence": "medium",
+      "avg_confidence": "good",
       "project_ids": [
         "ballarat-energy-storage-system"
       ],
@@ -27236,7 +27236,7 @@
       "states": [
         "SA"
       ],
-      "avg_confidence": "medium",
+      "avg_confidence": "good",
       "project_ids": [
         "dalrymple-bess"
       ],

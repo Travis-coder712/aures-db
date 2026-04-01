@@ -494,24 +494,6 @@
       "capex_per_mw": 2.0,
       "capex_per_mwh": 0.5,
       "duration_hours": 4.0
-    },
-    {
-      "id": "tomago-bess",
-      "name": "Tomago BESS",
-      "status": "construction",
-      "capacity_mw": 500.0,
-      "storage_mwh": 2000.36,
-      "capex_aud_m": 800.0,
-      "capex_year": 2025,
-      "capex_source": "AGL announcement / Fluence press release",
-      "state": "NSW",
-      "current_developer": "AGL",
-      "current_operator": "AGL Energy",
-      "bess_oem": "Fluence",
-      "bess_model": "Gridstack Pro",
-      "capex_per_mw": 1.6,
-      "capex_per_mwh": 0.4,
-      "duration_hours": 4.0
     }
   ],
   "by_year": {
@@ -556,13 +538,6 @@
       "total_capex_m": 3172.0,
       "avg_capex_per_mw": 1.85,
       "avg_capex_per_mwh": 0.52
-    },
-    "2025": {
-      "count": 1,
-      "total_mw": 500.0,
-      "total_capex_m": 800.0,
-      "avg_capex_per_mw": 1.6,
-      "avg_capex_per_mwh": 0.4
     }
   },
   "by_oem": {
@@ -573,10 +548,10 @@
       "avg_capex_per_mwh": 0.78
     },
     "Fluence": {
-      "count": 5,
-      "total_mw": 1430.0,
-      "avg_capex_per_mw": 1.18,
-      "avg_capex_per_mwh": 0.7
+      "count": 4,
+      "total_mw": 930.0,
+      "avg_capex_per_mw": 1.08,
+      "avg_capex_per_mwh": 0.77
     },
     "Wartsila": {
       "count": 4,
@@ -609,5 +584,5 @@
       "avg_capex_per_mwh": 0.5
     }
   },
-  "exported_at": "2026-03-19T09:01:15.964044"
+  "exported_at": "2026-04-01T23:34:23.197410"
 }

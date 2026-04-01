@@ -221,7 +221,7 @@
     "id": "tomago-bess",
     "name": "Tomago BESS",
     "technology": "bess",
-    "status": "construction",
+    "status": "development",
     "capacity_mw": 500.0,
     "storage_mwh": 2000.36,
     "state": "NSW",
@@ -876,6 +876,18 @@
     "lat": -36.438821,
     "lng": 142.246003,
     "developer": "Murra Warra II Project Co Pty Ltd as Trustee for the Murra Warra II Project Trust"
+  },
+  {
+    "id": "brendale-bess",
+    "name": "Brendale BESS",
+    "technology": "bess",
+    "status": "operating",
+    "capacity_mw": 205.0,
+    "storage_mwh": 409.92,
+    "state": "QLD",
+    "lat": -27.329333,
+    "lng": 152.974384,
+    "developer": "Akaysha Energy (BlackRock)"
   },
   {
     "id": "tailem-bend-stage-3",

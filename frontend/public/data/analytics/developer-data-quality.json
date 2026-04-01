@@ -1,5 +1,5 @@
 {
-  "generated": "2026-03-22",
+  "generated": "2026-04-01",
   "website_comparison": [
     {
       "developer": "AGL Energy",
@@ -47,15 +47,15 @@
         }
       ],
       "aures_projects": [
-        "broken-hill-bess",
-        "yadnarie-solar-farm",
         "madeline-downs-bess",
-        "muswellbrook-pumped-hydro",
+        "yadnarie-solar-farm",
         "coopers-gap-wind-farm",
-        "torrens-island-bess",
-        "liddell-bess",
+        "muswellbrook-pumped-hydro",
+        "barn-hill-bess",
         "woodstock-bess",
-        "barn-hill-bess"
+        "liddell-bess",
+        "torrens-island-bess",
+        "broken-hill-bess"
       ],
       "match_count": 3,
       "website_only_count": 2,
@@ -109,17 +109,17 @@
         }
       ],
       "aures_projects": [
-        "morgan-long-duration-energy-storage-kci",
-        "salisbury-solar-450mw",
-        "eraring-big-battery",
-        "morgan-battery",
-        "salisbury-bess",
         "eraring-battery",
+        "salisbury-bess",
         "skye-ridge-wind-farm",
-        "shoalhaven-expansion",
+        "morgan-battery",
         "mortlake-battery",
-        "yanco-solar-farm",
+        "eraring-big-battery",
+        "morgan-long-duration-energy-storage-kci",
         "yarrabee-solar-power-project",
+        "shoalhaven-expansion",
+        "yanco-solar-farm",
+        "salisbury-solar-450mw",
         "yanco-delta"
       ],
       "match_count": 5,
@@ -188,21 +188,21 @@
         }
       ],
       "aures_projects": [
-        "territory-battery",
-        "blyth-bess",
-        "tchelery-bess",
-        "culcairn-bess",
-        "great-western-battery-project",
         "hornsdale-power-reserve",
-        "hornsdale-power-reserve-unit-1",
         "goyder-north-bess-2",
-        "goyder-bess-stage-2",
-        "mount-hopeful-bess",
+        "culcairn-bess",
         "tchelery-wind-farm-and-bess",
+        "goyder-bess-stage-2",
         "great-lakes-battery",
-        "thunderbolt-wind-farm",
+        "blyth-bess",
         "goyder-bess",
-        "capital-battery"
+        "tchelery-bess",
+        "capital-battery",
+        "thunderbolt-wind-farm",
+        "great-western-battery-project",
+        "mount-hopeful-bess",
+        "hornsdale-power-reserve-unit-1",
+        "territory-battery"
       ],
       "match_count": 6,
       "website_only_count": 1,
@@ -279,17 +279,17 @@
         }
       ],
       "aures_projects": [
-        "snowtown-north-solar-farm",
-        "hargaves-wind-farm",
-        "boco-rock-wind-farm",
-        "dundonnell-wind-farm",
-        "palmer-wind-farm",
-        "liverpool-range-wind-farm",
+        "dalvui-bess",
         "hargaves-bess",
+        "dundonnell-wind-farm",
         "rye-park-wind-farm",
-        "nonowie-wind-farm",
+        "palmer-wind-farm",
+        "boco-rock-wind-farm",
+        "hargaves-wind-farm",
+        "snowtown-north-solar-farm",
         "snowtown-north-solar-farm-bess",
-        "dalvui-bess"
+        "nonowie-wind-farm",
+        "liverpool-range-wind-farm"
       ],
       "match_count": 8,
       "website_only_count": 0,
@@ -343,9 +343,9 @@
         }
       ],
       "aures_projects": [
-        "cathedral-rocks",
         "aldoga-solar-farm",
         "mt-arthur-pumped-hydro-energy-storage-project-kci",
+        "cathedral-rocks",
         "mt-gellibrand-wind-farm",
         "karara-bess-kci"
       ],
@@ -407,11 +407,11 @@
         }
       ],
       "aures_projects": [
-        "nebo-bess-iberdrola-kci",
         "three-rivers-bess",
-        "smithfield-bess",
         "three-rivers-solar-farm",
-        "kingswood-bess"
+        "smithfield-bess",
+        "kingswood-bess",
+        "nebo-bess-iberdrola-kci"
       ],
       "match_count": 5,
       "website_only_count": 1,
@@ -464,9 +464,9 @@
         }
       ],
       "aures_projects": [
-        "hollow-tree-wind-farm",
         "stockyard-hill-wind-farm",
-        "bashan-1-wind-farm"
+        "bashan-1-wind-farm",
+        "hollow-tree-wind-farm"
       ],
       "match_count": 5,
       "website_only_count": 0,
@@ -514,13 +514,13 @@
         "deargee-solar-and-bess",
         "the-central-bess-kci",
         "gara-bess",
-        "pine-lodge-2-bess-kci",
-        "croydon-hybrid-facility-solar-and-bess",
         "little-river-bess",
+        "pine-lodge-2-bess-kci",
         "baroota-pumped-hydro-project",
+        "croydon-hybrid-facility-solar-and-bess",
+        "joel-joel-bess",
         "bridle-track-solar-project",
-        "valley-of-the-winds",
-        "joel-joel-bess"
+        "valley-of-the-winds"
       ],
       "match_count": 4,
       "website_only_count": 0,
@@ -552,13 +552,13 @@
       "aures_projects": [
         "golden-plains-wind-farm-west",
         "talbingo-bess",
-        "raglan-bess",
-        "morwell-bess",
-        "burroway-energy-hub",
-        "golden-plains-bess-2-kci",
         "nebo-bess",
+        "golden-plains-wind",
+        "golden-plains-bess-2-kci",
+        "raglan-bess",
         "kincraig-bess",
-        "golden-plains-wind"
+        "burroway-energy-hub",
+        "morwell-bess"
       ],
       "match_count": 2,
       "website_only_count": 0,
@@ -620,11 +620,11 @@
       ],
       "aures_projects": [
         "koorakee-wind-farm",
-        "uungula-bess",
-        "pikedale-wind-farm-kci",
         "clarke-creek-wind-farm",
-        "jeremiah-wind-farm",
+        "pikedale-wind-farm-kci",
         "gol-gol-wind-farm",
+        "uungula-bess",
+        "jeremiah-wind-farm",
         "clarke-creek-wind-farm-stage-2"
       ],
       "match_count": 5,
@@ -662,14 +662,14 @@
         }
       ],
       "aures_projects": [
-        "running-creek-solar-and-bess",
+        "dangarsleigh-wind",
+        "goorambat-bess-lightsourcebp",
+        "gundary-solar-farm-and-bess",
         "sandy-creek-standalone-bess",
         "goulburn-river-bess",
-        "dangarsleigh-wind",
+        "running-creek-solar-and-bess",
         "woolbrook",
-        "woolooga-bess",
-        "goorambat-bess-lightsourcebp",
-        "gundary-solar-farm-and-bess"
+        "woolooga-bess"
       ],
       "match_count": 3,
       "website_only_count": 0,
@@ -707,21 +707,21 @@
       ],
       "aures_projects": [
         "muskerry-solar-power-station-kci",
-        "callide-power-station-solar-farm",
         "nowingi-solar-farm-edify-kci",
-        "brewongle-solar-farm",
-        "sandy-creek-energy-storage-system",
-        "burroway-bess",
-        "peninsula-solar-farm-and-bess",
         "smoky-creek-solar-power-station",
-        "pioneer-bess-kci",
+        "sandy-creek-energy-storage-system",
+        "brewongle-solar-farm",
         "callide-solar-power-station-bess",
+        "port-augusta-solar-farm-kci",
+        "callide-power-station-solar-farm",
         "ganymirra-solar-power-station",
         "koorangie-bess-stage-2",
-        "guthries-gap-solar-power-station",
         "majors-creek-solar-power-station",
+        "peninsula-solar-farm-and-bess",
+        "burroway-bess",
         "boags-creek-solar-power-station",
-        "port-augusta-solar-farm-kci"
+        "pioneer-bess-kci",
+        "guthries-gap-solar-power-station"
       ],
       "match_count": 3,
       "website_only_count": 0,
@@ -840,10 +840,10 @@
         }
       ],
       "aures_projects": [
-        "glenrowan-bess",
         "orana-bess",
-        "ulinda-park-bess",
+        "glenrowan-bess",
         "connewarren-bess",
+        "ulinda-park-bess",
         "brendale-bess",
         "waratah-super-battery",
         "elaine-bess"
@@ -883,16 +883,16 @@
         }
       ],
       "aures_projects": [
-        "burrendong-wind-farm",
-        "hellyer-wind-farm",
-        "myrtle-creek-bess",
-        "guildford-wind-farm",
-        "bowmans-creek-wind-farm",
-        "specimen-hill-bess-storage-kci",
         "specimen-hill-wind-farm",
+        "myrtle-creek-bess",
+        "bowmans-creek-wind-farm",
+        "guildford-wind-farm",
+        "specimen-hill-bess-storage-kci",
+        "burrendong-wind-farm",
+        "wooroora-station-wind-farm",
         "western-plains-wind-farm",
         "st-patricks-plains-wind-farm",
-        "wooroora-station-wind-farm"
+        "hellyer-wind-farm"
       ],
       "match_count": 2,
       "website_only_count": 1,
@@ -937,9 +937,9 @@
         }
       ],
       "aures_projects": [
-        "armidale-east-bess",
+        "texas-solar-farm",
         "texas-bess",
-        "texas-solar-farm"
+        "armidale-east-bess"
       ],
       "match_count": 4,
       "website_only_count": 0,
@@ -983,9 +983,9 @@
         }
       ],
       "aures_projects": [
-        "clements-gap-bess",
         "clements-gap-wind-farm",
-        "challicum-hills"
+        "challicum-hills",
+        "clements-gap-bess"
       ],
       "match_count": 3,
       "website_only_count": 1,
@@ -997,8 +997,8 @@
       "website_url": "https://cep.energy",
       "website_projects": [],
       "aures_projects": [
-        "lionsgate-battery",
-        "kurri-kurri-battery"
+        "kurri-kurri-battery",
+        "lionsgate-battery"
       ],
       "match_count": 0,
       "website_only_count": 0,

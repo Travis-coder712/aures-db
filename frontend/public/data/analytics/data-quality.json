@@ -1,18 +1,18 @@
 {
-  "generated_at": "2026-03-28T23:24:03.974295",
+  "generated_at": "2026-04-01T23:34:22.413346",
   "summary": {
-    "total_issues": 243,
+    "total_issues": 244,
     "by_severity": {
       "warning": 94,
       "high": 62,
-      "info": 87
+      "info": 88
     },
     "by_type": {
       "similar_names": 105,
       "name_mismatch": 12,
       "capacity_mismatch": 36,
       "technology_mismatch": 2,
-      "multi_scheme_duplicate": 79,
+      "multi_scheme_duplicate": 80,
       "missing_coordinates": 9
     }
   },
@@ -3148,6 +3148,26 @@
         }
       ],
       "message": "'ganymirra-solar-power-station' appears in 2 scheme entries: unknown, Tender 1 \u2014 NEM Generation \u2014 verify not double-counted"
+    },
+    {
+      "type": "multi_scheme_duplicate",
+      "severity": "info",
+      "project_id": "mokoan-solar-farm",
+      "appearances": [
+        {
+          "name": "Mokoan Solar Farm",
+          "round": "unknown",
+          "capacity_mw": 46.0,
+          "source": "scheme-rounds.ts"
+        },
+        {
+          "name": "Mokoan Solar Farm",
+          "round": "Tender 1 \u2014 NEM Generation",
+          "capacity_mw": 46.0,
+          "source": "esg-tracker-data.ts"
+        }
+      ],
+      "message": "'mokoan-solar-farm' appears in 2 scheme entries: unknown, Tender 1 \u2014 NEM Generation \u2014 verify not double-counted"
     },
     {
       "type": "multi_scheme_duplicate",
