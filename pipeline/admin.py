@@ -25,15 +25,17 @@ PIPELINE_DIR = os.path.dirname(os.path.abspath(__file__))
 # source_id_in_db = None means it's a processor/generator (always run, no import tracking)
 STEPS = [
     # ── Data Importers ──
+    # NOTE: OpenElectricity API steps run FIRST — free plan has ~500 req/day.
+    # Generation Profiles is the heaviest consumer, so it runs last among OE steps.
     ("AEMO Generation Info", "importers/import_aemo_gen_info.py", [], "aemo_generation_info"),
     ("OpenElectricity Performance", "importers/import_openelectricity.py", ["--year", str(datetime.now().year), "--ytd"], "openelectricity_performance"),
     ("OpenElectricity Metadata", "importers/harvest_facility_metadata.py", [], "openelectricity_metadata"),
     ("Coal Generation Monitor", "importers/import_coal_generation.py", [], "coal_generation"),
-    ("Generation Profiles", "importers/import_generation_profiles.py", [], "generation_profiles"),
     ("EPBC Referrals", "importers/import_epbc.py", [], "epbc_referrals"),
     ("AEMO ISP / Grid Connection", "importers/import_aemo_isp.py", [], "aemo_isp"),
     ("News RSS Feed", "importers/import_news_rss.py", [], "news_rss"),
     ("Offtake Research (seed)", "research/research_offtakes.py", ["--seed"], "offtake_research"),
+    ("Generation Profiles (heavy API)", "importers/import_generation_profiles.py", [], "generation_profiles"),
 
     # ── Processors ──
     ("AEMO Enrichment", "processors/enrich_from_aemo.py", [], None),
