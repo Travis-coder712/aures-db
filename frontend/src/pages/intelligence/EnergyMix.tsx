@@ -10,6 +10,7 @@ import EnergyTransitionSimulator from '../../components/intelligence/EnergyTrans
 import GenerationStack from '../../components/intelligence/GenerationStack'
 import CapacityWatch from '../../components/intelligence/CapacityWatch'
 import CoalWatch from '../../components/intelligence/CoalWatch'
+import WattClarity from '../../components/intelligence/WattClarity'
 
 // ============================================================
 // Icons — defined BEFORE const arrays per project pattern
@@ -71,17 +72,24 @@ const CoalIcon = () => (
   </svg>
 )
 
+const WattClarityIcon = () => (
+  <svg className="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
+    <path d="M13 17h8m0 0V9m0 8l-8-8-4 4-6-6" stroke="currentColor" fill="none" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+)
+
 // ============================================================
 // Tab types and config — defined AFTER icons
 // ============================================================
 
-type TabId = 'simulator' | 'generation-stack' | 'battery-watch' | 'coal-watch' | 'current-mix'
+type TabId = 'simulator' | 'generation-stack' | 'battery-watch' | 'coal-watch' | 'watt-clarity' | 'current-mix'
 
 const TABS: { id: TabId; label: string; icon: React.ReactNode }[] = [
   { id: 'simulator', label: 'Simulator', icon: <SimulatorIcon /> },
   { id: 'generation-stack', label: 'Generation Stack', icon: <StackIcon /> },
   { id: 'battery-watch', label: 'Capacity Watch', icon: <BatteryIcon /> },
   { id: 'coal-watch', label: 'Coal Watch', icon: <CoalIcon /> },
+  { id: 'watt-clarity', label: 'Watt Clarity', icon: <WattClarityIcon /> },
   { id: 'current-mix', label: 'Current Mix', icon: <MixIcon /> },
 ]
 
@@ -324,6 +332,9 @@ export default function EnergyMix() {
 
       {/* ─── Coal Watch Tab ─── */}
       {activeTab === 'coal-watch' && <CoalWatch />}
+
+      {/* ─── Watt Clarity Tab ─── */}
+      {activeTab === 'watt-clarity' && <WattClarity />}
 
       {/* ─── Current Mix Tab ─── */}
       {activeTab === 'current-mix' && (

@@ -1000,6 +1000,7 @@ export interface MetricStats { count: number; mean: number; median: number; p25:
 export interface TechYearRevenue {
   technology: string; year: number;
   revenue_per_mw: MetricStats; energy_price: MetricStats; capacity_factor: MetricStats;
+  bess_spread?: MetricStats; discharge_price?: MetricStats; charge_price?: MetricStats;
 }
 export interface RevenueIntelData {
   by_technology_year: TechYearRevenue[];
