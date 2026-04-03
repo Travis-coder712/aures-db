@@ -238,6 +238,52 @@ function CapacityTimelineChart({ milestones, colour, techLabel }: {
 }
 
 // ============================================================
+// Milestone Event List (reusable)
+// ============================================================
+
+function MilestoneList({ milestones, colour }: {
+  milestones: { date: string; label: string; cumulative_mw: number; event?: string }[]
+  colour: string
+}) {
+  // Limit display to avoid overwhelming lists — show last 20 milestones
+  const display = milestones.length > 25 ? milestones.slice(-25) : milestones
+  const hiddenCount = milestones.length - display.length
+
+  return (
+    <div className="mt-4 relative ml-3">
+      <div className="absolute left-0 top-0 bottom-0 w-0.5" style={{ background: '#334155' }} />
+      {hiddenCount > 0 && (
+        <div className="relative pl-6 pb-3">
+          <div className="absolute left-0 top-1 w-2.5 h-2.5 rounded-full -translate-x-1" style={{
+            background: '#64748b', border: '2px solid #1e293b',
+          }} />
+          <span className="text-xs" style={{ color: '#64748b' }}>+ {hiddenCount} earlier milestones</span>
+        </div>
+      )}
+      {display.map((m, i) => {
+        const isPast = new Date(m.date) <= new Date()
+        const isSetback = m.event === 'setback'
+        return (
+          <div key={i} className="relative pl-6 pb-3">
+            <div className="absolute left-0 top-1 w-2.5 h-2.5 rounded-full -translate-x-1" style={{
+              background: isSetback ? '#ef4444' : isPast ? colour : '#3b82f6',
+              border: '2px solid #1e293b',
+            }} />
+            <div className="flex items-baseline gap-2 flex-wrap">
+              <span className="text-xs font-mono" style={{ color: isPast ? colour : '#3b82f6', minWidth: 80 }}>
+                {new Date(m.date).toLocaleDateString('en-AU', { day: 'numeric', month: 'short', year: 'numeric' })}
+              </span>
+              <span className="text-xs" style={{ color: isSetback ? '#ef4444' : '#cbd5e1' }}>{m.label}</span>
+              <span className="text-xs font-mono" style={{ color: '#94a3b8' }}>{formatMW(m.cumulative_mw)}</span>
+            </div>
+          </div>
+        )
+      })}
+    </div>
+  )
+}
+
+// ============================================================
 // State Comparison Chart
 // ============================================================
 
@@ -878,42 +924,36 @@ function BESSTabContent({ data, selectedStates }: { data: BatteryWatchData; sele
         ))}
       </div>
 
-      {section === 'timeline' && (
-        <div className="rounded-lg p-4" style={{ background: '#1e293b', border: '1px solid #334155' }}>
-          <h3 className="text-sm font-semibold mb-1" style={{ color: '#f1f5f9' }}>NSW Battery Capacity Timeline</h3>
-          <p className="text-xs mb-4" style={{ color: '#94a3b8' }}>
-            Cumulative operating battery capacity in NSW. The white dot marks today.
-          </p>
-          <CapacityTimelineChart
-            milestones={data.nsw_focus.timeline_milestones}
-            colour="#10b981"
-            techLabel="BESS"
-          />
-          {/* Milestone list */}
-          <div className="mt-4 relative ml-3">
-            <div className="absolute left-0 top-0 bottom-0 w-0.5" style={{ background: '#334155' }} />
-            {data.nsw_focus.timeline_milestones.map((m, i) => {
-              const isPast = new Date(m.date) <= new Date()
-              const isSetback = m.event === 'setback'
-              return (
-                <div key={i} className="relative pl-6 pb-3">
-                  <div className="absolute left-0 top-1 w-2.5 h-2.5 rounded-full -translate-x-1" style={{
-                    background: isSetback ? '#ef4444' : isPast ? '#10b981' : '#3b82f6',
-                    border: '2px solid #1e293b',
-                  }} />
-                  <div className="flex items-baseline gap-2 flex-wrap">
-                    <span className="text-xs font-mono" style={{ color: isPast ? '#10b981' : '#3b82f6', minWidth: 80 }}>
-                      {new Date(m.date).toLocaleDateString('en-AU', { day: 'numeric', month: 'short', year: 'numeric' })}
-                    </span>
-                    <span className="text-xs" style={{ color: isSetback ? '#ef4444' : '#cbd5e1' }}>{m.label}</span>
-                    <span className="text-xs font-mono" style={{ color: '#94a3b8' }}>{formatMW(m.cumulative_mw)}</span>
-                  </div>
-                </div>
-              )
-            })}
+      {section === 'timeline' && (() => {
+        const showNswNote = selectedStates.size < NEM_STATES.length && selectedStates.has('NSW')
+        const noNsw = !selectedStates.has('NSW')
+        return (
+          <div className="rounded-lg p-4" style={{ background: '#1e293b', border: '1px solid #334155' }}>
+            <h3 className="text-sm font-semibold mb-1" style={{ color: '#f1f5f9' }}>
+              BESS Capacity Timeline {selectedStates.size < NEM_STATES.length ? `(NSW project-level detail)` : '(NSW)'}
+            </h3>
+            <p className="text-xs mb-4" style={{ color: '#94a3b8' }}>
+              Cumulative operating battery capacity in NSW. The white dot marks today.
+              {showNswNote && ' BESS timeline data is currently NSW-focused — state filter applies to stats and project tables.'}
+            </p>
+            {noNsw ? (
+              <div className="py-12 text-center">
+                <p className="text-sm" style={{ color: '#94a3b8' }}>BESS timeline data is currently NSW-focused.</p>
+                <p className="text-xs mt-1" style={{ color: '#64748b' }}>Select NSW in the state filter to view the capacity timeline, or use the By State section for NEM-wide breakdown.</p>
+              </div>
+            ) : (
+              <>
+                <CapacityTimelineChart
+                  milestones={data.nsw_focus.timeline_milestones}
+                  colour="#10b981"
+                  techLabel="BESS"
+                />
+                <MilestoneList milestones={data.nsw_focus.timeline_milestones} colour="#10b981" />
+              </>
+            )}
           </div>
-        </div>
-      )}
+        )
+      })()}
 
       {section === 'projects' && (
         <div className="space-y-4">
@@ -1068,6 +1108,7 @@ function TechTabContent({ data, projects, milestones, colour, techLabel, selecte
             {milestones.length > 25 && ' Data points grouped by quarter where dense.'}
           </p>
           <CapacityTimelineChart milestones={milestones} colour={colour} techLabel={techLabel} />
+          <MilestoneList milestones={milestones} colour={colour} />
         </div>
       )}
 
