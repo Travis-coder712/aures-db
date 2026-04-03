@@ -53,7 +53,7 @@ def api_get(path, api_key, params=None):
 
     req = Request(url, headers={
         "Authorization": f"Bearer {api_key}",
-        "User-Agent": "AURES-Pipeline/1.0",
+        "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 AURES/2.8",
         "Accept": "application/json",
     })
     resp = urlopen(req, timeout=30)

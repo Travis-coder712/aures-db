@@ -75,9 +75,9 @@
     {
       "state": "NSW",
       "year": 2026,
-      "wind_cf_pct": 37.68,
-      "solar_cf_pct": 28.35,
-      "combined_cf_pct": 31.85,
+      "wind_cf_pct": 29.46,
+      "solar_cf_pct": 22.84,
+      "combined_cf_pct": 25.32,
       "wind_mw": 2807.1,
       "solar_mw": 4684.8
     },
@@ -156,9 +156,9 @@
     {
       "state": "QLD",
       "year": 2026,
-      "wind_cf_pct": 35.57,
-      "solar_cf_pct": 28.26,
-      "combined_cf_pct": 30.02,
+      "wind_cf_pct": 30.7,
+      "solar_cf_pct": 23.49,
+      "combined_cf_pct": 25.22,
       "wind_mw": 1009.4,
       "solar_mw": 3190.3
     },
@@ -237,9 +237,9 @@
     {
       "state": "SA",
       "year": 2026,
-      "wind_cf_pct": 31.93,
-      "solar_cf_pct": 23.87,
-      "combined_cf_pct": 30.87,
+      "wind_cf_pct": 25.94,
+      "solar_cf_pct": 18.91,
+      "combined_cf_pct": 25.02,
       "wind_mw": 2795.1,
       "solar_mw": 422.0
     },
@@ -310,8 +310,8 @@
     {
       "state": "TAS",
       "year": 2026,
-      "wind_cf_pct": 36.61,
-      "combined_cf_pct": 36.61,
+      "wind_cf_pct": 28.33,
+      "combined_cf_pct": 28.33,
       "wind_mw": 561.0,
       "solar_mw": 0
     },
@@ -390,9 +390,9 @@
     {
       "state": "VIC",
       "year": 2026,
-      "wind_cf_pct": 30.98,
-      "solar_cf_pct": 31.88,
-      "combined_cf_pct": 31.17,
+      "wind_cf_pct": 24.67,
+      "solar_cf_pct": 25.43,
+      "combined_cf_pct": 24.83,
       "wind_mw": 4515.8,
       "solar_mw": 1186.0
     }
@@ -5515,5 +5515,5 @@
       "solar_mw": 1186.0
     }
   ],
-  "exported_at": "2026-04-01T23:34:23.254736"
+  "exported_at": "2026-04-03T13:13:08.046338"
 }
