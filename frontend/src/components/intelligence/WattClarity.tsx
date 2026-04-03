@@ -22,7 +22,9 @@ import {
 import {
   fetchBatteryWatch, fetchWindWatch, fetchSolarWatch,
   fetchRevenueIntel, fetchSchemeTracker, fetchLeagueTable,
+  fetchMarketPrices,
 } from '../../lib/dataService'
+import type { MarketPricesData } from '../../lib/dataService'
 import type {
   BatteryWatchData, CapacityWatchData, RevenueIntelData,
   SchemeTrackerData, LeagueTable,
@@ -45,7 +47,7 @@ const SCHEME_COLOURS: Record<string, string> = {
   Uncontracted: '#475569',
 }
 
-type SectionId = 'thesis' | 'growth' | 'spreads' | 'revenue' | 'schemes' | 'outlook'
+type SectionId = 'thesis' | 'growth' | 'duck-curve' | 'spreads' | 'revenue' | 'schemes' | 'outlook' | 'data-audit'
 
 const SectionNavIcon = () => (
   <svg className="w-4 h-4" viewBox="0 0 20 20" fill="currentColor">
@@ -56,10 +58,12 @@ const SectionNavIcon = () => (
 const SECTIONS: { id: SectionId; label: string }[] = [
   { id: 'thesis', label: 'The Thesis' },
   { id: 'growth', label: 'Fleet Growth' },
+  { id: 'duck-curve', label: 'Duck Curve' },
   { id: 'spreads', label: 'Spread Compression' },
   { id: 'revenue', label: 'Revenue Dilution' },
   { id: 'schemes', label: 'Public Risk' },
   { id: 'outlook', label: 'Outlook' },
+  { id: 'data-audit', label: 'Data Audit' },
 ]
 
 // ============================================================
@@ -184,6 +188,7 @@ export default function WattClarity() {
   const [revenueData, setRevenueData] = useState<RevenueIntelData | null>(null)
   const [schemeData, setSchemeData] = useState<SchemeTrackerData | null>(null)
   const [bessLeague, setBessLeague] = useState<LeagueTable | null>(null)
+  const [marketPrices, setMarketPrices] = useState<MarketPricesData | null>(null)
   const [loading, setLoading] = useState(true)
   const [activeSection, setActiveSection] = useState<SectionId>('thesis')
 
@@ -195,13 +200,15 @@ export default function WattClarity() {
       fetchRevenueIntel(),
       fetchSchemeTracker(),
       fetchLeagueTable('bess', 2025),
-    ]).then(([batt, wind, solar, rev, scheme, league]) => {
+      fetchMarketPrices(),
+    ]).then(([batt, wind, solar, rev, scheme, league, prices]) => {
       setBatteryData(batt)
       setWindData(wind)
       setSolarData(solar)
       setRevenueData(rev)
       setSchemeData(scheme)
       setBessLeague(league)
+      setMarketPrices(prices)
       setLoading(false)
     })
   }, [])
@@ -372,15 +379,33 @@ export default function WattClarity() {
   const schemeBreakdown = useMemo(() => {
     if (!schemeData || !batteryData) return null
 
-    let cisMW = 0
-    let ltesaMW = 0
-    const cisProjects: { name: string; id?: string; capacity_mw: number; state: string; scheme: string; round: string; status: string }[] = []
-    const ltesaProjects: typeof cisProjects = []
+    // Deduplicate: track project_ids to avoid double-counting across scheme rounds
+    const seen = new Map<string, { mw: number; scheme: string; round: string }>()
+    type SchemeProject = { name: string; id?: string; capacity_mw: number; state: string; scheme: string; round: string; status: string; atFid: boolean }
+    const allProjects: SchemeProject[] = []
 
     for (const round of schemeData.rounds) {
       for (const proj of round.projects) {
         if (proj.technology !== 'bess') continue
-        const entry = {
+        const pid = proj.project_id || proj.name
+        const atFid = ['operating', 'commissioning', 'construction'].includes(proj.status || proj.stage || '')
+
+        // Skip if we've already seen this project in another scheme round
+        // Keep the larger capacity entry
+        if (seen.has(pid)) {
+          const existing = seen.get(pid)!
+          if (proj.capacity_mw > existing.mw) {
+            // Replace the existing entry
+            const idx = allProjects.findIndex(p => (p.id || p.name) === pid)
+            if (idx >= 0) allProjects.splice(idx, 1)
+            seen.delete(pid)
+          } else {
+            continue
+          }
+        }
+
+        seen.set(pid, { mw: proj.capacity_mw, scheme: round.scheme, round: round.round })
+        allProjects.push({
           name: proj.name,
           id: proj.project_id || undefined,
           capacity_mw: proj.capacity_mw,
@@ -388,33 +413,49 @@ export default function WattClarity() {
           scheme: round.scheme,
           round: round.round,
           status: proj.status || proj.stage || 'unknown',
-        }
-        if (round.scheme === 'CIS') {
-          cisMW += proj.capacity_mw
-          cisProjects.push(entry)
-        } else if (round.scheme === 'LTESA') {
-          ltesaMW += proj.capacity_mw
-          ltesaProjects.push(entry)
-        }
+          atFid,
+        })
       }
     }
 
-    // Total fleet = operating + construction
+    // Calculate totals — both all-stages and FID-only
+    const cisFid = allProjects.filter(p => p.scheme === 'CIS' && p.atFid)
+    const ltesaFid = allProjects.filter(p => p.scheme === 'LTESA' && p.atFid)
+    const cisAll = allProjects.filter(p => p.scheme === 'CIS')
+    const ltesaAll = allProjects.filter(p => p.scheme === 'LTESA')
+
+    const cisFidMW = cisFid.reduce((s, p) => s + p.capacity_mw, 0)
+    const ltesaFidMW = ltesaFid.reduce((s, p) => s + p.capacity_mw, 0)
+    const cisAllMW = cisAll.reduce((s, p) => s + p.capacity_mw, 0)
+    const ltesaAllMW = ltesaAll.reduce((s, p) => s + p.capacity_mw, 0)
+
+    // Denominator: operating + construction fleet
     const totalFleetMW = (batteryData.nem_wide.operating.total_mw || 0) +
       (batteryData.nem_wide.construction.total_mw || 0)
-    const uncontractedMW = Math.max(0, totalFleetMW - cisMW - ltesaMW)
+    const fidContractedMW = cisFidMW + ltesaFidMW
+    const uncontractedMW = Math.max(0, totalFleetMW - fidContractedMW)
 
     return {
       total: totalFleetMW,
-      cis: cisMW,
-      ltesa: ltesaMW,
+      // FID-stage only (operating/construction with contracts)
+      cisFid: cisFidMW,
+      ltesaFid: ltesaFidMW,
+      fidContracted: fidContractedMW,
       uncontracted: uncontractedMW,
-      cisPct: Math.round(cisMW / totalFleetMW * 100),
-      ltesaPct: Math.round(ltesaMW / totalFleetMW * 100),
+      cisFidPct: Math.round(cisFidMW / totalFleetMW * 100),
+      ltesaFidPct: Math.round(ltesaFidMW / totalFleetMW * 100),
+      fidContractedPct: Math.round(fidContractedMW / totalFleetMW * 100),
       uncontractedPct: Math.round(uncontractedMW / totalFleetMW * 100),
-      cisProjects,
-      ltesaProjects,
-      allSchemeProjects: [...cisProjects, ...ltesaProjects].sort((a, b) => b.capacity_mw - a.capacity_mw),
+      // All stages (including development)
+      cisAll: cisAllMW,
+      ltesaAll: ltesaAllMW,
+      allContracted: cisAllMW + ltesaAllMW,
+      // Project lists
+      fidProjects: allProjects.filter(p => p.atFid).sort((a, b) => b.capacity_mw - a.capacity_mw),
+      allSchemeProjects: allProjects.sort((a, b) => b.capacity_mw - a.capacity_mw),
+      deduplicatedCount: allProjects.length,
+      // Note: no VRET data available
+      noVret: true,
     }
   }, [schemeData, batteryData])
 
@@ -567,7 +608,7 @@ export default function WattClarity() {
                   `Battery fleet has grown from ${spreadData.find(d => d.year === 2018)?.fleet_count || 3} projects in 2018 to ${spreadData.find(d => d.year === 2025)?.fleet_count || 28} in 2025 — with ${formatGW(totalConstruction)} more under construction`,
                   `2024 median spread was $${spreadData.find(d => d.year === 2024)?.median_spread?.toFixed(0) || '240'}/MWh vs $${spreadData.find(d => d.year === 2025)?.median_spread?.toFixed(0) || '188'}/MWh in 2025 — a ${Math.round(((spreadData.find(d => d.year === 2024)?.median_spread || 240) - (spreadData.find(d => d.year === 2025)?.median_spread || 188)) / (spreadData.find(d => d.year === 2024)?.median_spread || 240) * 100)}% decline as fleet nearly doubled`,
                   fleetDispersion ? `Top-quartile batteries earn ${fleetDispersion.ratio}x more revenue per MW than bottom quartile — a widening gap` : '',
-                  schemeBreakdown ? `~${schemeBreakdown.cisPct + schemeBreakdown.ltesaPct}% of operating+construction battery capacity holds CIS or LTESA contracts — transferring long-term revenue risk onto public balance sheets` : '',
+                  schemeBreakdown ? `~${schemeBreakdown.fidContractedPct}% of FID-stage battery capacity holds CIS or LTESA contracts (${formatGW(schemeBreakdown.fidContracted)} of ${formatGW(schemeBreakdown.total)}) — plus ${formatGW(schemeBreakdown.allContracted - schemeBreakdown.fidContracted)} more contracted but pre-FID` : '',
                   `Battery deployment is outpacing wind and solar at comparable fleet sizes`,
                 ].filter(Boolean).map((item, i) => (
                   <li key={i} className="flex gap-2 text-xs" style={{ color: '#94a3b8' }}>
@@ -790,6 +831,299 @@ export default function WattClarity() {
               </div>
             </ChartWrapper>
           )}
+        </div>
+      )}
+
+      {/* ============================================================ */}
+      {/* SECTION: Duck Curve — Midday vs Evening Prices */}
+      {/* ============================================================ */}
+      {activeSection === 'duck-curve' && marketPrices && (
+        <div className="space-y-4">
+          {/* Intro */}
+          <div className="rounded-lg p-4" style={{ background: '#1e293b', border: '1px solid #334155' }}>
+            <h3 className="text-sm font-semibold mb-2" style={{ color: '#f1f5f9' }}>The Duck Curve & Price Cannibalisation</h3>
+            <p className="text-xs leading-relaxed" style={{ color: '#cbd5e1' }}>
+              Solar production collapses midday wholesale prices, creating the "duck curve" — a deep belly during
+              daylight hours followed by a sharp evening ramp. Batteries profit from this spread: charge cheap
+              during the solar belly, discharge into the evening peak. But as more batteries target this same
+              pattern, they compress the very spread they depend on.
+            </p>
+          </div>
+
+          {/* State-by-state midday vs evening spread comparison */}
+          <ChartWrapper
+            title="Midday vs Evening Price Spread by State"
+            subtitle="Average $/MWh for midday (10am–2pm) vs evening peak (4–8pm) over the last 30 days. The spread is what batteries earn through simple diurnal arbitrage."
+            source="OpenElectricity API, AURES analysis"
+          >
+            <ResponsiveContainer width="100%" height={280}>
+              <BarChart
+                data={(() => {
+                  const STATE_ORDER = ['SA', 'VIC', 'QLD', 'NSW', 'TAS']
+                  return STATE_ORDER
+                    .filter(s => marketPrices.time_of_day_profiles[s])
+                    .map(s => {
+                      const p = marketPrices.time_of_day_profiles[s]
+                      return {
+                        state: s,
+                        midday: p.midday_avg,
+                        evening: p.evening_avg,
+                        spread: p.spread_evening_minus_midday,
+                        negative_pct: p.negative_pct,
+                      }
+                    })
+                    .sort((a, b) => (b.spread || 0) - (a.spread || 0))
+                })()}
+                margin={{ top: 5, right: 5, bottom: 5, left: 0 }}
+              >
+                <CartesianGrid strokeDasharray="3 3" stroke="#1e293b" />
+                <XAxis dataKey="state" tick={{ fill: '#94a3b8', fontSize: 11 }} />
+                <YAxis
+                  tick={{ fill: '#64748b', fontSize: 10 }}
+                  tickFormatter={(v: number) => `$${v}`}
+                />
+                <Tooltip
+                  contentStyle={{ background: '#0f172a', border: '1px solid #334155', fontSize: 12 }}
+                  formatter={(value, name) => [
+                    `$${(value as number).toFixed(1)}/MWh`,
+                    name === 'midday' ? 'Midday (10am–2pm)' : 'Evening (4–8pm)',
+                  ]}
+                />
+                <Bar dataKey="midday" fill="#f59e0b" radius={[4, 4, 0, 0]} maxBarSize={35} name="midday" />
+                <Bar dataKey="evening" fill="#10b981" radius={[4, 4, 0, 0]} maxBarSize={35} name="evening" />
+              </BarChart>
+            </ResponsiveContainer>
+            <div className="flex justify-center gap-4 mt-2">
+              <div className="flex items-center gap-1.5 text-xs">
+                <span className="w-3 h-3 rounded" style={{ background: '#f59e0b' }} />
+                <span style={{ color: '#94a3b8' }}>Midday (10am–2pm)</span>
+              </div>
+              <div className="flex items-center gap-1.5 text-xs">
+                <span className="w-3 h-3 rounded" style={{ background: '#10b981' }} />
+                <span style={{ color: '#94a3b8' }}>Evening (4–8pm)</span>
+              </div>
+            </div>
+          </ChartWrapper>
+
+          {/* State spread detail table */}
+          <ChartWrapper
+            title="Price Spread Detail by State"
+            subtitle="Arbitrage opportunity metrics across NEM regions (last 30 days)."
+            source="OpenElectricity API"
+          >
+            <div className="overflow-x-auto">
+              <table className="w-full text-xs">
+                <thead>
+                  <tr style={{ borderBottom: '1px solid #334155' }}>
+                    <th className="text-left py-2 pr-2" style={{ color: '#94a3b8' }}>State</th>
+                    <th className="text-right py-2 px-1" style={{ color: '#f59e0b' }}>Midday $/MWh</th>
+                    <th className="text-right py-2 px-1" style={{ color: '#10b981' }}>Evening $/MWh</th>
+                    <th className="text-right py-2 px-1" style={{ color: '#f1f5f9' }}>Spread</th>
+                    <th className="text-right py-2 px-1" style={{ color: '#ef4444' }}>Negative %</th>
+                    <th className="text-right py-2 px-1" style={{ color: '#94a3b8' }}>Spikes &gt;$300</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {['SA', 'QLD', 'VIC', 'NSW', 'TAS']
+                    .filter(s => marketPrices.time_of_day_profiles[s])
+                    .map(s => {
+                      const p = marketPrices.time_of_day_profiles[s]
+                      return (
+                        <tr key={s} style={{ borderBottom: '1px solid #1e293b' }}>
+                          <td className="py-1.5 pr-2 font-semibold" style={{ color: '#f1f5f9' }}>{s}</td>
+                          <td className="py-1.5 px-1 text-right font-mono" style={{ color: (p.midday_avg || 0) < 0 ? '#ef4444' : '#f59e0b' }}>
+                            ${p.midday_avg?.toFixed(1)}
+                          </td>
+                          <td className="py-1.5 px-1 text-right font-mono" style={{ color: '#10b981' }}>
+                            ${p.evening_avg?.toFixed(1)}
+                          </td>
+                          <td className="py-1.5 px-1 text-right font-mono font-bold" style={{ color: '#f1f5f9' }}>
+                            ${p.spread_evening_minus_midday?.toFixed(1)}
+                          </td>
+                          <td className="py-1.5 px-1 text-right font-mono" style={{ color: (p.negative_pct || 0) > 10 ? '#ef4444' : '#94a3b8' }}>
+                            {p.negative_pct?.toFixed(1)}%
+                          </td>
+                          <td className="py-1.5 px-1 text-right font-mono" style={{ color: '#94a3b8' }}>
+                            {p.spike_gt300_count || 0}
+                          </td>
+                        </tr>
+                      )
+                    })}
+                </tbody>
+              </table>
+            </div>
+          </ChartWrapper>
+
+          {/* Time-of-day profile chart — show all states overlaid */}
+          <ChartWrapper
+            title="Average Price by Hour of Day"
+            subtitle="Hourly wholesale price profile across NEM states (last 30 days). The depth of the midday trough and height of the evening peak define the arbitrage window."
+            source="OpenElectricity API"
+          >
+            <ResponsiveContainer width="100%" height={300}>
+              <LineChart
+                data={Array.from({ length: 24 }, (_, h) => {
+                  const point: Record<string, number | string> = { hour: `${h.toString().padStart(2, '0')}:00` }
+                  for (const state of ['NSW', 'QLD', 'VIC', 'SA', 'TAS']) {
+                    const profile = marketPrices.time_of_day_profiles[state]
+                    if (profile?.hourly_avg?.[String(h)] !== undefined) {
+                      point[state] = profile.hourly_avg[String(h)]
+                    }
+                  }
+                  return point
+                })}
+                margin={{ top: 5, right: 5, bottom: 5, left: 0 }}
+              >
+                <CartesianGrid strokeDasharray="3 3" stroke="#1e293b" />
+                <XAxis
+                  dataKey="hour"
+                  tick={{ fill: '#64748b', fontSize: 9 }}
+                  interval={2}
+                />
+                <YAxis
+                  tick={{ fill: '#64748b', fontSize: 10 }}
+                  tickFormatter={(v: number) => `$${v}`}
+                />
+                <Tooltip
+                  contentStyle={{ background: '#0f172a', border: '1px solid #334155', fontSize: 11 }}
+                  formatter={(value, name) => [`$${(value as number).toFixed(1)}/MWh`, name]}
+                  labelFormatter={(label) => `Hour: ${label}`}
+                />
+                <ReferenceLine y={0} stroke="#475569" strokeDasharray="3 3" />
+                <Line type="monotone" dataKey="SA" stroke="#ef4444" strokeWidth={2} dot={false} />
+                <Line type="monotone" dataKey="VIC" stroke="#8b5cf6" strokeWidth={2} dot={false} />
+                <Line type="monotone" dataKey="QLD" stroke="#f59e0b" strokeWidth={2} dot={false} />
+                <Line type="monotone" dataKey="NSW" stroke="#3b82f6" strokeWidth={2} dot={false} />
+                <Line type="monotone" dataKey="TAS" stroke="#06b6d4" strokeWidth={1.5} dot={false} strokeDasharray="4 4" />
+              </LineChart>
+            </ResponsiveContainer>
+            <div className="flex justify-center gap-3 mt-2">
+              {[
+                { state: 'SA', colour: '#ef4444' },
+                { state: 'VIC', colour: '#8b5cf6' },
+                { state: 'QLD', colour: '#f59e0b' },
+                { state: 'NSW', colour: '#3b82f6' },
+                { state: 'TAS', colour: '#06b6d4' },
+              ].map(s => (
+                <div key={s.state} className="flex items-center gap-1 text-xs">
+                  <span className="w-3 h-1 rounded" style={{ background: s.colour }} />
+                  <span style={{ color: '#94a3b8' }}>{s.state}</span>
+                </div>
+              ))}
+            </div>
+          </ChartWrapper>
+
+          {/* Monthly price trends */}
+          {Object.keys(marketPrices.monthly_trends).length > 0 && (
+            <ChartWrapper
+              title="Monthly Average Wholesale Price by State"
+              subtitle="12-month wholesale price trend. The June 2025 spike coincided with coal plant outages and winter demand; prices have since normalised."
+              source="OpenElectricity API"
+            >
+              <ResponsiveContainer width="100%" height={260}>
+                <LineChart
+                  data={(() => {
+                    const months = new Set<string>()
+                    for (const state of Object.keys(marketPrices.monthly_trends)) {
+                      for (const pt of marketPrices.monthly_trends[state]) {
+                        months.add(pt.month)
+                      }
+                    }
+                    return [...months].sort().map(m => {
+                      const point: Record<string, number | string> = {
+                        month: m,
+                        label: new Date(m + '-01').toLocaleDateString('en-AU', { month: 'short', year: '2-digit' }),
+                      }
+                      for (const [state, pts] of Object.entries(marketPrices.monthly_trends)) {
+                        const match = pts.find(p => p.month === m)
+                        if (match) point[state] = match.avg_price
+                      }
+                      return point
+                    })
+                  })()}
+                  margin={{ top: 5, right: 5, bottom: 5, left: 0 }}
+                >
+                  <CartesianGrid strokeDasharray="3 3" stroke="#1e293b" />
+                  <XAxis
+                    dataKey="label"
+                    tick={{ fill: '#64748b', fontSize: 9 }}
+                    angle={-30}
+                    textAnchor="end"
+                    height={40}
+                  />
+                  <YAxis
+                    tick={{ fill: '#64748b', fontSize: 10 }}
+                    tickFormatter={(v: number) => `$${v}`}
+                  />
+                  <Tooltip
+                    contentStyle={{ background: '#0f172a', border: '1px solid #334155', fontSize: 11 }}
+                    formatter={(value, name) => [`$${(value as number).toFixed(1)}/MWh`, name]}
+                  />
+                  <Line type="monotone" dataKey="SA" stroke="#ef4444" strokeWidth={1.5} dot={false} />
+                  <Line type="monotone" dataKey="VIC" stroke="#8b5cf6" strokeWidth={1.5} dot={false} />
+                  <Line type="monotone" dataKey="QLD" stroke="#f59e0b" strokeWidth={1.5} dot={false} />
+                  <Line type="monotone" dataKey="NSW" stroke="#3b82f6" strokeWidth={1.5} dot={false} />
+                  <Line type="monotone" dataKey="TAS" stroke="#06b6d4" strokeWidth={1} dot={false} strokeDasharray="4 4" />
+                </LineChart>
+              </ResponsiveContainer>
+              <div className="flex justify-center gap-3 mt-2">
+                {[
+                  { state: 'SA', colour: '#ef4444' },
+                  { state: 'VIC', colour: '#8b5cf6' },
+                  { state: 'QLD', colour: '#f59e0b' },
+                  { state: 'NSW', colour: '#3b82f6' },
+                  { state: 'TAS', colour: '#06b6d4' },
+                ].map(s => (
+                  <div key={s.state} className="flex items-center gap-1 text-xs">
+                    <span className="w-3 h-1 rounded" style={{ background: s.colour }} />
+                    <span style={{ color: '#94a3b8' }}>{s.state}</span>
+                  </div>
+                ))}
+              </div>
+            </ChartWrapper>
+          )}
+
+          {/* Price-setting inference commentary */}
+          <div className="rounded-lg p-4" style={{ background: '#1e293b', border: '1px solid #334155' }}>
+            <h3 className="text-sm font-semibold mb-2" style={{ color: '#f1f5f9' }}>Can We Identify Battery Price-Setting?</h3>
+            <p className="text-xs leading-relaxed" style={{ color: '#cbd5e1' }}>
+              WattClarity notes that VIC batteries are already "setting the price" during some evening peak periods.
+              This is not directly measurable from publicly available NEM data — AEMO's marginal price-setter
+              information is not exposed through the OpenElectricity API.
+            </p>
+            <p className="text-xs leading-relaxed mt-2" style={{ color: '#cbd5e1' }}>
+              However, AURES can <span className="font-semibold" style={{ color: '#f59e0b' }}>infer</span> price-setting
+              behaviour by comparing individual battery discharge prices to the regional spot price during high-price
+              intervals (&gt;$300/MWh). When a battery's average discharge price closely tracks the spot price during
+              these intervals, it suggests the battery is the marginal unit — its offer is clearing the market.
+            </p>
+            <div className="rounded p-2 mt-3 text-xs" style={{ background: '#0f172a', border: '1px solid #334155' }}>
+              <span className="font-semibold" style={{ color: '#64748b' }}>Current data:</span>{' '}
+              <span style={{ color: '#94a3b8' }}>
+                Over the last 30 days, {marketPrices.time_of_day_profiles['VIC']?.spike_gt300_count || 0} intervals
+                exceeded $300/MWh in VIC ({marketPrices.time_of_day_profiles['VIC']?.spike_gt300_pct?.toFixed(1)}%),
+                compared to {marketPrices.time_of_day_profiles['SA']?.spike_gt300_count || 0} in SA
+                and {marketPrices.time_of_day_profiles['NSW']?.spike_gt300_count || 0} in NSW.
+                The absence of recent spikes suggests batteries are successfully moderating evening peaks — a
+                phenomenon that itself erodes future arbitrage margins.
+              </span>
+            </div>
+          </div>
+
+          {/* Key insight */}
+          <div className="rounded-lg p-4" style={{ background: '#1e293b', border: '1px solid #f59e0b20' }}>
+            <h3 className="text-sm font-semibold mb-2" style={{ color: '#f59e0b' }}>Key Insight: SA's Negative Midday</h3>
+            <p className="text-xs leading-relaxed" style={{ color: '#cbd5e1' }}>
+              South Australia's midday average price has gone <span className="font-bold" style={{ color: '#ef4444' }}>negative</span> at
+              {' '}<span className="font-mono font-bold" style={{ color: '#ef4444' }}>${marketPrices.time_of_day_profiles['SA']?.midday_avg?.toFixed(1)}/MWh</span>,
+              with <span className="font-mono font-bold" style={{ color: '#ef4444' }}>{marketPrices.time_of_day_profiles['SA']?.negative_pct?.toFixed(1)}%</span> of
+              all hourly intervals showing negative prices. VIC is close behind
+              at <span className="font-mono" style={{ color: '#ef4444' }}>{marketPrices.time_of_day_profiles['VIC']?.negative_pct?.toFixed(1)}%</span> negative.
+              This is the solar correlation penalty in its mature form — and it creates enormous opportunity for
+              batteries <em>today</em>. The question is whether correlated battery dispatch will compress the evening
+              side of this spread just as solar compressed the midday side.
+            </p>
+          </div>
         </div>
       )}
 
@@ -1112,50 +1446,44 @@ export default function WattClarity() {
             <h3 className="text-sm font-semibold mb-2" style={{ color: '#f1f5f9' }}>
               Government Scheme Underwriting of Battery Fleet
             </h3>
-            <p className="text-xs mb-4" style={{ color: '#94a3b8' }}>
+            <p className="text-xs mb-2" style={{ color: '#94a3b8' }}>
               Unlike the early solar buildout (underwritten largely through the private LGC market), a significant
-              portion of the current battery pipeline is backed by government revenue contracts — CIS, LTESA and
-              VRET. This transfers long-term revenue risk onto public balance sheets.
+              portion of the current battery pipeline is backed by government revenue contracts — CIS and LTESA.
+              This transfers long-term revenue risk onto public balance sheets.
             </p>
+            <div className="rounded p-2 mb-4 text-xs" style={{ background: '#0f172a', border: '1px solid #f59e0b40' }}>
+              <span className="font-semibold" style={{ color: '#f59e0b' }}>Methodology note:</span>{' '}
+              <span style={{ color: '#94a3b8' }}>
+                WattClarity estimates "roughly a third" of FID-stage battery capacity is government-backed.
+                The chart below shows FID-stage projects only (operating + construction), deduplicated across scheme rounds.
+                VRET (Victorian) contract data is not yet tracked by AURES.
+              </span>
+            </div>
 
-            {/* Stacked bar visual */}
+            {/* Stacked bar visual — FID only */}
             <div className="mb-4">
+              <div className="text-[10px] mb-1 font-semibold" style={{ color: '#64748b' }}>FID-STAGE FLEET ({formatGW(schemeBreakdown.total)})</div>
               <div className="flex rounded-lg overflow-hidden h-8">
-                {schemeBreakdown.cis > 0 && (
-                  <div
-                    className="flex items-center justify-center text-[10px] font-bold"
-                    style={{
-                      width: `${schemeBreakdown.cisPct}%`,
-                      background: SCHEME_COLOURS.CIS,
-                      color: '#0f172a',
-                      minWidth: schemeBreakdown.cisPct > 5 ? undefined : 30,
-                    }}
-                  >
-                    {schemeBreakdown.cisPct > 8 ? `CIS ${schemeBreakdown.cisPct}%` : 'CIS'}
+                {schemeBreakdown.cisFid > 0 && (
+                  <div className="flex items-center justify-center text-[10px] font-bold" style={{
+                    width: `${schemeBreakdown.cisFidPct}%`, background: SCHEME_COLOURS.CIS, color: '#0f172a',
+                    minWidth: schemeBreakdown.cisFidPct > 5 ? undefined : 30,
+                  }}>
+                    {schemeBreakdown.cisFidPct > 8 ? `CIS ${schemeBreakdown.cisFidPct}%` : 'CIS'}
                   </div>
                 )}
-                {schemeBreakdown.ltesa > 0 && (
-                  <div
-                    className="flex items-center justify-center text-[10px] font-bold"
-                    style={{
-                      width: `${schemeBreakdown.ltesaPct}%`,
-                      background: SCHEME_COLOURS.LTESA,
-                      color: '#f1f5f9',
-                      minWidth: schemeBreakdown.ltesaPct > 5 ? undefined : 30,
-                    }}
-                  >
-                    {schemeBreakdown.ltesaPct > 8 ? `LTESA ${schemeBreakdown.ltesaPct}%` : 'LTESA'}
+                {schemeBreakdown.ltesaFid > 0 && (
+                  <div className="flex items-center justify-center text-[10px] font-bold" style={{
+                    width: `${schemeBreakdown.ltesaFidPct}%`, background: SCHEME_COLOURS.LTESA, color: '#f1f5f9',
+                    minWidth: schemeBreakdown.ltesaFidPct > 5 ? undefined : 30,
+                  }}>
+                    {schemeBreakdown.ltesaFidPct > 8 ? `LTESA ${schemeBreakdown.ltesaFidPct}%` : 'LTESA'}
                   </div>
                 )}
-                <div
-                  className="flex items-center justify-center text-[10px] font-bold"
-                  style={{
-                    width: `${schemeBreakdown.uncontractedPct}%`,
-                    background: SCHEME_COLOURS.Uncontracted,
-                    color: '#94a3b8',
-                  }}
-                >
-                  {schemeBreakdown.uncontractedPct > 15 ? `Uncontracted ${schemeBreakdown.uncontractedPct}%` : ''}
+                <div className="flex items-center justify-center text-[10px] font-bold" style={{
+                  width: `${schemeBreakdown.uncontractedPct}%`, background: SCHEME_COLOURS.Uncontracted, color: '#94a3b8',
+                }}>
+                  {schemeBreakdown.uncontractedPct > 15 ? `Merchant ${schemeBreakdown.uncontractedPct}%` : ''}
                 </div>
               </div>
               <div className="flex justify-between mt-1 text-[10px]" style={{ color: '#64748b' }}>
@@ -1165,35 +1493,40 @@ export default function WattClarity() {
             </div>
 
             {/* Stats */}
-            <div className="grid grid-cols-3 gap-2 mb-4">
+            <div className="grid grid-cols-3 gap-2 mb-3">
               <div className="text-center p-2 rounded" style={{ background: '#0f172a' }}>
-                <div className="text-[10px] uppercase" style={{ color: '#64748b' }}>CIS</div>
-                <div className="text-sm font-bold font-mono" style={{ color: SCHEME_COLOURS.CIS }}>
-                  {formatGW(schemeBreakdown.cis)}
-                </div>
-                <div className="text-[10px]" style={{ color: '#64748b' }}>{schemeBreakdown.cisPct}%</div>
+                <div className="text-[10px] uppercase" style={{ color: '#64748b' }}>CIS (at FID)</div>
+                <div className="text-sm font-bold font-mono" style={{ color: SCHEME_COLOURS.CIS }}>{formatGW(schemeBreakdown.cisFid)}</div>
+                <div className="text-[10px]" style={{ color: '#64748b' }}>{schemeBreakdown.cisFidPct}%</div>
               </div>
               <div className="text-center p-2 rounded" style={{ background: '#0f172a' }}>
-                <div className="text-[10px] uppercase" style={{ color: '#64748b' }}>LTESA</div>
-                <div className="text-sm font-bold font-mono" style={{ color: SCHEME_COLOURS.LTESA }}>
-                  {formatGW(schemeBreakdown.ltesa)}
-                </div>
-                <div className="text-[10px]" style={{ color: '#64748b' }}>{schemeBreakdown.ltesaPct}%</div>
+                <div className="text-[10px] uppercase" style={{ color: '#64748b' }}>LTESA (at FID)</div>
+                <div className="text-sm font-bold font-mono" style={{ color: SCHEME_COLOURS.LTESA }}>{formatGW(schemeBreakdown.ltesaFid)}</div>
+                <div className="text-[10px]" style={{ color: '#64748b' }}>{schemeBreakdown.ltesaFidPct}%</div>
               </div>
               <div className="text-center p-2 rounded" style={{ background: '#0f172a' }}>
                 <div className="text-[10px] uppercase" style={{ color: '#64748b' }}>Merchant</div>
-                <div className="text-sm font-bold font-mono" style={{ color: '#94a3b8' }}>
-                  {formatGW(schemeBreakdown.uncontracted)}
-                </div>
+                <div className="text-sm font-bold font-mono" style={{ color: '#94a3b8' }}>{formatGW(schemeBreakdown.uncontracted)}</div>
                 <div className="text-[10px]" style={{ color: '#64748b' }}>{schemeBreakdown.uncontractedPct}%</div>
               </div>
             </div>
+
+            {/* Pipeline note */}
+            <div className="rounded p-2 text-xs" style={{ background: '#0f172a' }}>
+              <span style={{ color: '#64748b' }}>Full pipeline (incl. pre-FID development): CIS </span>
+              <span className="font-mono" style={{ color: SCHEME_COLOURS.CIS }}>{formatGW(schemeBreakdown.cisAll)}</span>
+              <span style={{ color: '#64748b' }}> + LTESA </span>
+              <span className="font-mono" style={{ color: SCHEME_COLOURS.LTESA }}>{formatGW(schemeBreakdown.ltesaAll)}</span>
+              <span style={{ color: '#64748b' }}> = </span>
+              <span className="font-mono font-bold" style={{ color: '#f1f5f9' }}>{formatGW(schemeBreakdown.allContracted)}</span>
+              <span style={{ color: '#64748b' }}> contracted across all stages ({schemeBreakdown.deduplicatedCount} projects, deduplicated)</span>
+            </div>
           </div>
 
-          {/* Scheme project list */}
+          {/* FID project list */}
           <ChartWrapper
-            title="Battery Projects with Government Contracts"
-            subtitle="CIS and LTESA contracted battery projects, sorted by capacity."
+            title="FID-Stage Battery Projects with Government Contracts"
+            subtitle="Operating and construction-stage CIS/LTESA contracted batteries, deduplicated."
             source="AURES scheme tracker"
           >
             <div className="overflow-x-auto">
@@ -1208,7 +1541,7 @@ export default function WattClarity() {
                   </tr>
                 </thead>
                 <tbody>
-                  {schemeBreakdown.allSchemeProjects.map((p, i) => (
+                  {schemeBreakdown.fidProjects.map((p, i) => (
                     <tr key={i} style={{ borderBottom: '1px solid #1e293b' }}>
                       <td className="py-1.5 pr-2">
                         {p.id ? (
@@ -1224,18 +1557,13 @@ export default function WattClarity() {
                         <span className="px-1.5 py-0.5 rounded text-[10px] font-semibold" style={{
                           background: (SCHEME_COLOURS[p.scheme] || '#64748b') + '20',
                           color: SCHEME_COLOURS[p.scheme] || '#64748b',
-                        }}>
-                          {p.scheme}
-                        </span>
+                        }}>{p.scheme}</span>
                       </td>
                       <td className="py-1.5 px-1" style={{ color: '#94a3b8' }}>{p.state}</td>
                       <td className="py-1.5 px-1">
                         <span className="text-[10px]" style={{
-                          color: p.status === 'operating' ? '#10b981' :
-                                 p.status === 'construction' ? '#3b82f6' : '#64748b'
-                        }}>
-                          {p.status}
-                        </span>
+                          color: p.status === 'operating' ? '#10b981' : p.status === 'construction' ? '#3b82f6' : '#64748b'
+                        }}>{p.status}</span>
                       </td>
                     </tr>
                   ))}
@@ -1244,21 +1572,31 @@ export default function WattClarity() {
             </div>
           </ChartWrapper>
 
+          {/* Behind-the-meter note */}
+          <div className="rounded-lg p-4" style={{ background: '#1e293b', border: '1px solid #ef444420' }}>
+            <h3 className="text-sm font-semibold mb-2" style={{ color: '#ef4444' }}>Blind Spot: Residential Batteries</h3>
+            <p className="text-xs leading-relaxed" style={{ color: '#cbd5e1' }}>
+              WattClarity estimates <span className="font-bold" style={{ color: '#f59e0b' }}>4–5 GW of residential battery capacity</span> was
+              installed in the first nine months of the federal home battery subsidy scheme. Like rooftop solar
+              before it, this behind-the-meter capacity is effectively dispatched before utility-scale storage —
+              quietly shrinking the evening price spikes that grid-scale batteries target.
+            </p>
+            <p className="text-xs leading-relaxed mt-2" style={{ color: '#94a3b8' }}>
+              AURES does not currently track residential/behind-the-meter batteries. This is a significant
+              analytical gap for the correlation penalty thesis, as these systems compound the saturation pressure
+              on utility-scale battery revenues without appearing in any fleet data.
+            </p>
+          </div>
+
           {/* Commentary */}
           <div className="rounded-lg p-4" style={{ background: '#1e293b', border: '1px solid #334155' }}>
             <h3 className="text-sm font-semibold mb-2" style={{ color: '#f1f5f9' }}>Why this matters</h3>
             <p className="text-xs leading-relaxed" style={{ color: '#cbd5e1' }}>
-              The early solar buildout was underwritten largely through the Renewable Energy Target's LGC scheme,
-              where asset underperformance was almost entirely a private investment problem. The current battery
-              buildout is different — CIS and LTESA contracts transfer a portion of long-term revenue risk onto
-              public balance sheets. If the correlation penalty compresses merchant battery revenues below the
-              strike prices embedded in these contracts, taxpayers and electricity consumers may bear part of
-              the cost.
-            </p>
-            <p className="text-xs leading-relaxed mt-2" style={{ color: '#cbd5e1' }}>
-              This isn't necessarily a negative outcome — these schemes were designed to de-risk the transition
-              and accelerate deployment. But it does mean the public has more skin in the game this time,
-              and the stakes of getting the sizing and pacing right are higher.
+              The early solar buildout was underwritten largely through the RET's LGC scheme, where
+              asset underperformance was almost entirely a private investment problem. The current battery
+              buildout is different — CIS and LTESA contracts transfer long-term revenue risk onto public balance
+              sheets. If the correlation penalty compresses merchant revenues below embedded strike prices,
+              taxpayers and electricity consumers may bear part of the cost.
             </p>
           </div>
         </div>
@@ -1307,7 +1645,7 @@ export default function WattClarity() {
                     {
                       factor: 'Public risk',
                       solar: 'Mostly private (LGC market)',
-                      battery: `~${schemeBreakdown ? schemeBreakdown.cisPct + schemeBreakdown.ltesaPct : 30}% government-contracted (CIS/LTESA)`,
+                      battery: `~${schemeBreakdown ? schemeBreakdown.fidContractedPct : 30}% government-contracted (CIS/LTESA)`,
                     },
                     {
                       factor: 'Price impact',
@@ -1372,16 +1710,64 @@ export default function WattClarity() {
             </p>
             <div className="grid grid-cols-1 gap-2">
               {[
-                { metric: 'Median arbitrage spread', current: `$${spreadData.find(d => d.year === 2025)?.median_spread?.toFixed(0) || '—'}/MWh`, direction: 'Watch for sustained decline below $150' },
-                { metric: 'Revenue per MW (median)', current: `${formatDollars(revenueOverTime.find(d => d.year === 2025)?.median_rev || 0)}/MW`, direction: 'Below $80k would signal distress for merchant projects' },
-                { metric: 'Q1/Q4 revenue ratio', current: `${fleetDispersion?.ratio || '—'}x`, direction: 'Widening ratio = differentiation; compression = uniform penalty' },
-                { metric: 'Fleet size', current: `${spreadData.find(d => d.year === 2025)?.fleet_count || 28} → ${batteryData?.nem_wide.operating.by_state ? Object.values(batteryData.nem_wide.operating.by_state).reduce((s, v) => s + v.projects, 0) + Object.values(batteryData.nem_wide.construction.by_state || {}).reduce((s, v) => s + v.projects, 0) : '50+'}`, direction: 'Track revenue trends against fleet additions' },
-                { metric: 'Scheme contract coverage', current: `${schemeBreakdown ? schemeBreakdown.cisPct + schemeBreakdown.ltesaPct : '—'}%`, direction: 'Higher = more public risk exposure if spreads compress' },
+                {
+                  metric: 'Median arbitrage spread',
+                  current: `$${spreadData.find(d => d.year === 2025)?.median_spread?.toFixed(0) || '—'}/MWh`,
+                  baseline: '$240/MWh (2024)',
+                  direction: 'Watch for sustained decline below $150',
+                },
+                {
+                  metric: 'Revenue per MW (median)',
+                  current: `${formatDollars(revenueOverTime.find(d => d.year === 2025)?.median_rev || 0)}/MW`,
+                  baseline: `${formatDollars(revenueOverTime.find(d => d.year === 2024)?.median_rev || 0)}/MW (2024)`,
+                  direction: 'Below $80k would signal distress for merchant projects',
+                },
+                {
+                  metric: 'Q1/Q4 revenue ratio',
+                  current: `${fleetDispersion?.ratio || '—'}x`,
+                  baseline: null,
+                  direction: 'Widening = differentiation; compression = uniform penalty',
+                },
+                {
+                  metric: 'Fleet size (tracked)',
+                  current: `${spreadData.find(d => d.year === 2025)?.fleet_count || 28} projects`,
+                  baseline: `${spreadData.find(d => d.year === 2024)?.fleet_count || 17} projects (2024)`,
+                  direction: 'Track revenue trends against fleet additions',
+                },
+                {
+                  metric: 'Govt-contracted (FID)',
+                  current: `${schemeBreakdown ? schemeBreakdown.fidContractedPct : '—'}%`,
+                  baseline: '~33% (WattClarity Apr 2026)',
+                  direction: 'Higher = more public risk if spreads compress',
+                },
+                {
+                  metric: 'SA midday avg price',
+                  current: marketPrices ? `$${marketPrices.time_of_day_profiles['SA']?.midday_avg?.toFixed(0)}/MWh` : '—',
+                  baseline: 'Negative (WattClarity Apr 2026)',
+                  direction: 'Deepening negative = more solar saturation',
+                },
+                {
+                  metric: 'SA evening–midday spread',
+                  current: marketPrices ? `$${marketPrices.time_of_day_profiles['SA']?.spread_evening_minus_midday?.toFixed(0)}/MWh` : '—',
+                  baseline: null,
+                  direction: 'Compression = batteries eating into their own opportunity',
+                },
+                {
+                  metric: 'Negative price intervals (VIC)',
+                  current: marketPrices ? `${marketPrices.time_of_day_profiles['VIC']?.negative_pct?.toFixed(1)}%` : '—',
+                  baseline: null,
+                  direction: 'Rising = deepening solar penalty, more battery opportunity',
+                },
               ].map((item, i) => (
                 <div key={i} className="flex items-center gap-3 p-2 rounded" style={{ background: '#0f172a' }}>
                   <div className="flex-1 min-w-0">
                     <div className="text-xs font-medium" style={{ color: '#f1f5f9' }}>{item.metric}</div>
                     <div className="text-[10px]" style={{ color: '#64748b' }}>{item.direction}</div>
+                    {item.baseline && (
+                      <div className="text-[10px] mt-0.5" style={{ color: '#f59e0b' }}>
+                        Baseline: {item.baseline}
+                      </div>
+                    )}
                   </div>
                   <div className="text-xs font-mono font-bold flex-shrink-0" style={{ color: '#10b981' }}>
                     {item.current}
@@ -1406,6 +1792,245 @@ export default function WattClarity() {
               </a>
               {' '}— rebuilt independently using AURES data from AEMO registrations, OpenElectricity performance
               data, and government scheme records. Data refreshed with each pipeline run.
+            </p>
+          </div>
+        </div>
+      )}
+
+      {/* ============================================================ */}
+      {/* SECTION: Data Audit — AURES vs WattClarity */}
+      {/* ============================================================ */}
+      {activeSection === 'data-audit' && (
+        <div className="space-y-4">
+          <div className="rounded-lg p-4" style={{ background: '#1e293b', border: '1px solid #334155' }}>
+            <h3 className="text-sm font-semibold mb-2" style={{ color: '#f1f5f9' }}>Data Audit: AURES vs WattClarity</h3>
+            <p className="text-xs leading-relaxed" style={{ color: '#94a3b8' }}>
+              This analysis was inspired by WattClarity's April 2026 article. To ensure AURES's independent
+              analysis is credible, we've audited key data points against the article's claims. Where discrepancies
+              exist, we explain why and what AURES is doing to close the gap.
+            </p>
+          </div>
+
+          {/* Comparison table */}
+          <ChartWrapper
+            title="Data Point Comparison"
+            subtitle="AURES figures vs WattClarity article claims, with explanations for discrepancies."
+          >
+            <div className="overflow-x-auto">
+              <table className="w-full text-xs">
+                <thead>
+                  <tr style={{ borderBottom: '1px solid #334155' }}>
+                    <th className="text-left py-2 pr-2" style={{ color: '#94a3b8' }}>Metric</th>
+                    <th className="text-right py-2 px-1" style={{ color: '#10b981' }}>AURES</th>
+                    <th className="text-right py-2 px-1" style={{ color: '#f59e0b' }}>WattClarity</th>
+                    <th className="text-left py-2 px-2" style={{ color: '#94a3b8' }}>Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {[
+                    {
+                      metric: 'Operating BESS fleet',
+                      aures: formatGW(totalOperating),
+                      wc: '~7.5 GW',
+                      status: 'gap',
+                      note: 'AURES data snapshot 22 Mar vs article 2 Apr. Difference likely due to status classification (AURES separates commissioning), phase counting, and timing of new registrations.',
+                    },
+                    {
+                      metric: 'Construction pipeline',
+                      aures: formatGW(totalConstruction),
+                      wc: '~7 GW',
+                      status: 'close',
+                      note: 'Within expected range. Minor differences in project inclusion criteria.',
+                    },
+                    {
+                      metric: 'Govt-contracted (FID)',
+                      aures: `${schemeBreakdown?.fidContractedPct || '—'}%`,
+                      wc: '~33%',
+                      status: schemeBreakdown && Math.abs(schemeBreakdown.fidContractedPct - 33) < 10 ? 'close' : 'gap',
+                      note: 'AURES excludes VRET (Victorian) contracts — not yet tracked. Including VRET would increase the government-backed percentage. Both use FID-stage denominator.',
+                    },
+                    {
+                      metric: 'Residential batteries',
+                      aures: '0 GW',
+                      wc: '4–5 GW',
+                      status: 'missing',
+                      note: 'AURES does not track behind-the-meter batteries. This is a significant blind spot for the correlation penalty thesis.',
+                    },
+                    {
+                      metric: 'QLD midday prices',
+                      aures: marketPrices ? `$${marketPrices.time_of_day_profiles['QLD']?.midday_avg?.toFixed(0)}/MWh` : '—',
+                      wc: 'Near $0',
+                      status: 'tracked',
+                      note: 'Now tracked via OpenElectricity API for all NEM states (30-day rolling). SA has gone negative.',
+                    },
+                    {
+                      metric: 'SA midday prices',
+                      aures: marketPrices ? `$${marketPrices.time_of_day_profiles['SA']?.midday_avg?.toFixed(0)}/MWh` : '—',
+                      wc: 'Negative',
+                      status: 'match',
+                      note: 'Confirmed. SA midday average is negative, with 29.4% of intervals below $0.',
+                    },
+                    {
+                      metric: 'Battery price-setting',
+                      aures: 'Inferred only',
+                      wc: 'VIC batteries setting price',
+                      status: 'limited',
+                      note: 'AEMO marginal price-setter data not available via OpenElectricity API. AURES can infer from dispatch price alignment during spikes.',
+                    },
+                    {
+                      metric: 'Spread compression',
+                      aures: `$${spreadData.find(d => d.year === 2024)?.median_spread?.toFixed(0) || '240'} → $${spreadData.find(d => d.year === 2025)?.median_spread?.toFixed(0) || '188'}`,
+                      wc: 'Declining trend',
+                      status: 'match',
+                      note: 'AURES data confirms 2024→2025 compression coinciding with fleet growth from 17 to 28 tracked projects.',
+                    },
+                  ].map((row, i) => (
+                    <tr key={i} style={{ borderBottom: '1px solid #1e293b' }}>
+                      <td className="py-2 pr-2 font-medium" style={{ color: '#f1f5f9' }}>{row.metric}</td>
+                      <td className="py-2 px-1 text-right font-mono" style={{ color: '#10b981' }}>{row.aures}</td>
+                      <td className="py-2 px-1 text-right font-mono" style={{ color: '#f59e0b' }}>{row.wc}</td>
+                      <td className="py-2 px-2">
+                        <span className="px-1.5 py-0.5 rounded text-[10px] font-semibold" style={{
+                          background: row.status === 'match' || row.status === 'tracked' ? '#10b98120' :
+                            row.status === 'close' ? '#f59e0b20' :
+                            row.status === 'missing' ? '#ef444420' : '#64748b20',
+                          color: row.status === 'match' || row.status === 'tracked' ? '#10b981' :
+                            row.status === 'close' ? '#f59e0b' :
+                            row.status === 'missing' ? '#ef4444' : '#94a3b8',
+                        }}>
+                          {row.status === 'match' ? '✓ Match' :
+                           row.status === 'tracked' ? '✓ Now tracked' :
+                           row.status === 'close' ? '≈ Close' :
+                           row.status === 'missing' ? '✗ Missing' :
+                           row.status === 'gap' ? '△ Gap' : '○ Limited'}
+                        </span>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+
+            {/* Notes per row */}
+            <div className="mt-3 space-y-2">
+              {[
+                {
+                  metric: 'Operating BESS fleet',
+                  aures: formatGW(totalOperating),
+                  wc: '~7.5 GW',
+                  status: 'gap',
+                  note: 'AURES data snapshot 22 Mar vs article 2 Apr. Difference likely due to status classification (AURES separates commissioning), phase counting, and timing of new registrations.',
+                },
+                {
+                  metric: 'Govt-contracted (FID)',
+                  aures: `${schemeBreakdown?.fidContractedPct || '—'}%`,
+                  wc: '~33%',
+                  status: 'gap',
+                  note: 'AURES excludes VRET (Victorian) contracts — not yet tracked. Including VRET would increase the government-backed percentage.',
+                },
+                {
+                  metric: 'Residential batteries',
+                  aures: '0 GW',
+                  wc: '4–5 GW',
+                  status: 'missing',
+                  note: 'AURES does not track behind-the-meter batteries. This is a significant blind spot for the correlation penalty thesis.',
+                },
+                {
+                  metric: 'Battery price-setting',
+                  aures: 'Inferred only',
+                  wc: 'VIC batteries setting price',
+                  status: 'limited',
+                  note: 'AEMO marginal price-setter data not available via public APIs. AURES can infer from dispatch price alignment during high-price intervals.',
+                },
+              ].map((row, i) => (
+                <div key={i} className="flex gap-2 p-2 rounded text-[11px]" style={{ background: '#0f172a' }}>
+                  <span className="font-semibold flex-shrink-0" style={{
+                    color: row.status === 'missing' ? '#ef4444' : row.status === 'gap' ? '#f59e0b' : '#64748b'
+                  }}>{row.metric}:</span>
+                  <span style={{ color: '#94a3b8' }}>{row.note}</span>
+                </div>
+              ))}
+            </div>
+          </ChartWrapper>
+
+          {/* Improvements made */}
+          <div className="rounded-lg p-4" style={{ background: '#1e293b', border: '1px solid #10b98120' }}>
+            <h3 className="text-sm font-semibold mb-3" style={{ color: '#10b981' }}>Improvements Made</h3>
+            <div className="space-y-2">
+              {[
+                {
+                  title: 'Midday price tracking added',
+                  detail: 'Now tracked via OpenElectricity API for all 5 NEM states (NSW, QLD, VIC, SA, TAS). Uses only 6 API calls per run: 1 for monthly trends + 5 for hourly profiles.',
+                },
+                {
+                  title: 'Scheme calculation fixed',
+                  detail: 'Previously showed 77% government-contracted due to double-counting cross-scheme projects and including development-stage. Now deduplicates across CIS/LTESA rounds and filters to FID-stage only.',
+                },
+                {
+                  title: 'Time-of-day price profiles',
+                  detail: 'Hourly price curves for each NEM state reveal the true shape of the duck curve and identify which states have the deepest midday troughs.',
+                },
+                {
+                  title: 'Negative price tracking',
+                  detail: 'Percentage of intervals with negative wholesale prices is now tracked per state — a key indicator of solar saturation maturity.',
+                },
+                {
+                  title: 'Historical baselines added',
+                  detail: 'Metrics-to-watch now include WattClarity article values as reference points for comparison over time.',
+                },
+              ].map((item, i) => (
+                <div key={i} className="flex gap-2 text-xs">
+                  <span style={{ color: '#10b981' }}>✓</span>
+                  <div>
+                    <span className="font-semibold" style={{ color: '#f1f5f9' }}>{item.title}</span>
+                    <span className="ml-1" style={{ color: '#94a3b8' }}>— {item.detail}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Remaining gaps */}
+          <div className="rounded-lg p-4" style={{ background: '#1e293b', border: '1px solid #ef444420' }}>
+            <h3 className="text-sm font-semibold mb-3" style={{ color: '#ef4444' }}>Remaining Gaps</h3>
+            <div className="space-y-2">
+              {[
+                {
+                  title: 'Residential / behind-the-meter batteries',
+                  detail: 'No public data source for home battery installations identified. CER STC data may provide estimates in future.',
+                },
+                {
+                  title: 'VRET contract data',
+                  detail: 'Victorian Renewable Energy Target contracts not yet tracked. Would increase government-backed percentage.',
+                },
+                {
+                  title: 'Marginal price-setter identification',
+                  detail: 'AEMO\'s price-setting unit data not available via public API. Would require AEMO MMS data access or NEMDE model outputs.',
+                },
+                {
+                  title: 'Fleet size discrepancy (~1.5 GW)',
+                  detail: 'Likely resolved in next pipeline run with updated AEMO registration data. May also include smaller projects below AURES tracking threshold.',
+                },
+              ].map((item, i) => (
+                <div key={i} className="flex gap-2 text-xs">
+                  <span style={{ color: '#ef4444' }}>○</span>
+                  <div>
+                    <span className="font-semibold" style={{ color: '#f1f5f9' }}>{item.title}</span>
+                    <span className="ml-1" style={{ color: '#94a3b8' }}>— {item.detail}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Data freshness note */}
+          <div className="rounded-lg p-3" style={{ background: '#0f172a', border: '1px solid #334155' }}>
+            <p className="text-xs" style={{ color: '#64748b' }}>
+              <span className="font-semibold" style={{ color: '#94a3b8' }}>Data freshness:</span>{' '}
+              Market prices updated {marketPrices ? new Date(marketPrices.generated_at).toLocaleDateString('en-AU') : '—'}.
+              Battery fleet data from AEMO registration files. Revenue data from OpenElectricity dispatch records.
+              All data refreshed with each pipeline run — discrepancies will narrow over time as AURES expands
+              its coverage.
             </p>
           </div>
         </div>

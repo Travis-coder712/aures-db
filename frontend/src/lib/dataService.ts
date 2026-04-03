@@ -590,6 +590,40 @@ export async function fetchSolarWatch(): Promise<CapacityWatchData | null> {
 }
 
 // ============================================================
+// Market Prices
+// ============================================================
+
+export interface MarketPriceProfile {
+  hourly_avg: Record<string, number>
+  midday_avg: number | null
+  evening_avg: number | null
+  spread_evening_minus_midday: number | null
+  negative_pct: number
+  zero_or_negative_pct: number
+  spike_gt300_pct: number
+  spike_gt300_count: number
+  total_intervals: number
+  data_days: number
+}
+
+export interface MarketPricesData {
+  generated_at: string
+  monthly_trends: Record<string, { month: string; avg_price: number }[]>
+  time_of_day_profiles: Record<string, MarketPriceProfile>
+}
+
+let marketPricesCache: MarketPricesData | null = null
+export async function fetchMarketPrices(): Promise<MarketPricesData | null> {
+  if (marketPricesCache) return marketPricesCache
+  try {
+    const resp = await fetch(`${BASE}/analytics/intelligence/market-prices.json`)
+    if (!resp.ok) return null
+    marketPricesCache = (await resp.json()) as MarketPricesData
+    return marketPricesCache
+  } catch { return null }
+}
+
+// ============================================================
 // Coal Watch
 // ============================================================
 

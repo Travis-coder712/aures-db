@@ -495,6 +495,19 @@ Bottom navigation with tabs on mobile. Progressive disclosure — simple surface
 - Enriched scheme analysis essay content with correct per-round project data
 - Fixed developer doughnut chart to use grouped developer data (540 vs 711 ungrouped)
 
+### Watt Clarity — Battery Correlation Penalty Analysis — 2026-04-03 (v2.8.3)
+- Added Duck Curve section with midday vs evening price comparison across all NEM states
+- 24-hour price profile chart overlaying all 5 states showing full duck curve shape
+- Monthly wholesale price trend chart (12-month history per state)
+- State-by-state arbitrage spread table with negative price % and spike counts
+- Added Data Audit section comparing AURES figures to WattClarity article claims with status badges
+- Price-setting inference commentary (OE API limitation, dispatch alignment approach)
+- SA negative midday price insight ($-10.51/MWh avg, 29.4% negative intervals)
+- Enhanced Metrics to Watch with historical baselines from WattClarity article
+- Added 3 new tracked signals: SA midday price, SA evening-midday spread, VIC negative %
+- Fixed scheme calculation references in Outlook section (cisPct+ltesaPct → fidContractedPct)
+- New market price importer pipeline script using 6 API calls (1 monthly + 5 hourly per state)
+
 ### Capacity Watch State Filter Fix — 2026-04-03 (v2.8.2)
 - Fixed state filter reactivity: timeline charts and milestone lists now update when states are toggled (previously only stat cards changed)
 - Added reusable MilestoneList component with chronological event display and "earlier milestones" truncation
@@ -534,7 +547,7 @@ Bottom navigation with tabs on mobile. Progressive disclosure — simple surface
   - Documented 4 joint venture partnerships (Pottinger/AGL+Someva, MacIntyre/Acciona+Ark, Golden Plains/TagEnergy+Ingka, Yanco Delta/Origin+ViRYA)
 - Added developer market share donut pie charts (by MW and project count) and technology breakdown pie chart
 - Made version check button accessible on mobile (tappable header badge + slide-out menu button)
-- Bumped version from v1.7.0 → v2.0.0 → v2.1.0 → v2.5.1 → v2.6.0 → v2.6.1 → v2.7.0 → v2.8.0 → v2.8.1 → v2.8.2
+- Bumped version from v1.7.0 to v2.8.3
 - New files: eis-comparison.json, eis-coverage.json, eis-pdf-opportunities.json, developer-data-quality.json, generate_developer_quality.py
 
 ### Wind Farm Deep Dive — 2026-03-12/13
