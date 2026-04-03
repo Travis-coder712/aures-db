@@ -495,6 +495,13 @@ Bottom navigation with tabs on mobile. Progressive disclosure — simple surface
 - Enriched scheme analysis essay content with correct per-round project data
 - Fixed developer doughnut chart to use grouped developer data (540 vs 711 ungrouped)
 
+### Capacity Watch State Filter Fix — 2026-04-03 (v2.8.2)
+- Fixed state filter reactivity: timeline charts and milestone lists now update when states are toggled (previously only stat cards changed)
+- Added reusable MilestoneList component with chronological event display and "earlier milestones" truncation
+- BESS tab now shows explanatory message when NSW is deselected (timeline data is NSW-only)
+- Fixed OpenElectricity API connectivity: updated User-Agent to bypass Cloudflare blocking, fixed quota field path change
+- Full pipeline data refresh with latest Open Electricity generation and performance data
+
 ### Capacity Watch & CIS Briefing — 2026-04-01 (v2.8.0)
 - Built Capacity Watch: unified BESS/Wind/Solar/All Assets capacity timeline viewer
 - Four technology tabs with step-function area charts showing cumulative capacity from 2022
@@ -527,7 +534,7 @@ Bottom navigation with tabs on mobile. Progressive disclosure — simple surface
   - Documented 4 joint venture partnerships (Pottinger/AGL+Someva, MacIntyre/Acciona+Ark, Golden Plains/TagEnergy+Ingka, Yanco Delta/Origin+ViRYA)
 - Added developer market share donut pie charts (by MW and project count) and technology breakdown pie chart
 - Made version check button accessible on mobile (tappable header badge + slide-out menu button)
-- Bumped version from v1.7.0 → v2.0.0 → v2.1.0 → v2.5.1 → v2.6.0 → v2.6.1 → v2.7.0 → v2.8.0
+- Bumped version from v1.7.0 → v2.0.0 → v2.1.0 → v2.5.1 → v2.6.0 → v2.6.1 → v2.7.0 → v2.8.0 → v2.8.1 → v2.8.2
 - New files: eis-comparison.json, eis-coverage.json, eis-pdf-opportunities.json, developer-data-quality.json, generate_developer_quality.py
 
 ### Wind Farm Deep Dive — 2026-03-12/13
