@@ -174,6 +174,7 @@ const NAV_ITEMS = [
   { path: '/performance', label: 'Performance', icon: TrendingIcon },
   { path: '/analytics/bess-capex', label: 'BESS Capex', icon: CurrencyIcon },
   { path: '/analytics/project-timeline', label: 'Timeline', icon: TimelineIcon },
+  { path: '/big-bets', label: 'Big Bets', icon: TrendingIcon },
   { path: '/intelligence', label: 'Intelligence', icon: LightbulbIcon },
   { path: '/developers', label: 'Developers', icon: UsersIcon },
   { path: '/oems', label: 'OEMs', icon: WrenchIcon },

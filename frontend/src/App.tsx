@@ -25,6 +25,10 @@ import DataSources from './pages/DataSources'
 import BESSCapex from './pages/BESSCapex'
 import ProjectTimeline from './pages/ProjectTimeline'
 import IntelligenceHub from './pages/IntelligenceHub'
+import BigBetsHub from './pages/BigBetsHub'
+import BusinessModelInnovation from './pages/big-bets/BusinessModelInnovation'
+import GeographicExpansion from './pages/big-bets/GeographicExpansion'
+import AdjacencyPage from './pages/big-bets/Adjacency'
 import SchemeTracker from './pages/intelligence/SchemeTracker'
 import DriftAnalysis from './pages/intelligence/DriftAnalysis'
 import WindResource from './pages/intelligence/WindResource'
@@ -83,6 +87,11 @@ function App() {
         <Route path="intelligence/revenue" element={<RevenueIntel />} />
         <Route path="intelligence/grid-connection" element={<TransmissionInfra />} />
         <Route path="intelligence/eis-technical" element={<EISTechnical />} />
+        {/* Big Bets */}
+        <Route path="big-bets" element={<BigBetsHub />} />
+        <Route path="big-bets/business-model-innovation" element={<BusinessModelInnovation />} />
+        <Route path="big-bets/geographic-expansion" element={<GeographicExpansion />} />
+        <Route path="big-bets/adjacency" element={<AdjacencyPage />} />
         {/* News */}
         <Route path="news" element={<News />} />
         {/* Admin */}
