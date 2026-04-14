@@ -73,6 +73,14 @@ export interface SchemeContract {
   source_url?: string
 }
 
+export interface FieldSourceEntry {
+  value: string | number
+  source: string
+  date: string
+  tier?: number
+  note?: string
+}
+
 export interface MultiSourceValue {
   value: string
   source: string
@@ -203,12 +211,21 @@ export interface Project {
   // EIS / EIA Technical Specifications (Part 3, Section 3)
   eis_specs?: EISTechnicalSpec
 
+  // Capex
+  capex_aud_m?: number
+  capex_source?: string
+  capex_year?: number
+
+  // Per-field source provenance (multi-source tracking)
+  field_sources?: Record<string, FieldSourceEntry[]>
+
   // Metadata
   sources: SourceReference[]
   data_confidence: Confidence
   last_updated: string
   last_verified: string
   aemo_gen_info_id?: string
+  first_seen?: string
 }
 
 // Performance data (Phase 3 preview — sample data)

@@ -1,6 +1,6 @@
 import { useParams, Link, useSearchParams, useNavigate } from 'react-router-dom'
 import { useState } from 'react'
-import { TECHNOLOGY_CONFIG, DEVELOPMENT_STAGE_CONFIG, type Project, type EISTechnicalSpec } from '../lib/types'
+import { TECHNOLOGY_CONFIG, DEVELOPMENT_STAGE_CONFIG, type Project, type EISTechnicalSpec, type FieldSourceEntry } from '../lib/types'
 import { useProject } from '../hooks/useProjectData'
 import TechBadge from '../components/common/TechBadge'
 import StatusBadge from '../components/common/StatusBadge'
@@ -10,7 +10,7 @@ import Breadcrumb from '../components/common/Breadcrumb'
 import { ESG_TRACKER_PROJECTS, ROUND_ESG_SUMMARIES } from '../data/esg-tracker-data'
 import type { ESGTrackerProject, PublicationStatus, AgreementStatus } from '../data/esg-tracker-data'
 
-type Tab = 'overview' | 'timeline' | 'technical' | 'performance' | 'sources'
+type Tab = 'overview' | 'timeline' | 'technical' | 'performance' | 'evolution' | 'sources'
 
 export default function ProjectDetail() {
   const { id } = useParams<{ id: string }>()
@@ -49,6 +49,7 @@ export default function ProjectDetail() {
     { key: 'timeline', label: 'Timeline' },
     { key: 'technical', label: 'Technical' },
     ...(isOperating ? [{ key: 'performance' as Tab, label: 'Performance' }] : []),
+    { key: 'evolution', label: 'Evolution' },
     { key: 'sources', label: 'Sources' },
   ]
 
@@ -139,6 +140,7 @@ export default function ProjectDetail() {
       {activeTab === 'timeline' && <TimelineTab project={project} />}
       {activeTab === 'technical' && <TechnicalTab project={project} />}
       {activeTab === 'performance' && <PerformanceTab project={project} />}
+      {activeTab === 'evolution' && <EvolutionTab project={project} />}
       {activeTab === 'sources' && <SourcesTab project={project} />}
     </div>
   )
@@ -1089,6 +1091,304 @@ function EISSpecsSection({
 // ============================================================
 // Sources Tab
 // ============================================================
+
+// ============================================================
+// Evolution Tab — Multi-source data provenance & project history
+// ============================================================
+
+const FIELD_LABELS: Record<string, { label: string; format: (v: string | number) => string; unit?: string }> = {
+  capacity_mw: { label: 'Capacity', format: (v) => `${v} MW`, unit: 'MW' },
+  storage_mwh: { label: 'Storage', format: (v) => `${v} MWh`, unit: 'MWh' },
+  capex_aud_m: { label: 'Capital Cost', format: (v) => `A$${v}M`, unit: 'A$M' },
+  bess_oem: { label: 'Battery OEM', format: (v) => String(v) },
+  status: { label: 'Project Status', format: (v) => String(v) },
+  cod_current: { label: 'Expected COD', format: (v) => String(v) },
+  cell_chemistry: { label: 'Cell Chemistry', format: (v) => String(v) },
+  current_developer: { label: 'Developer', format: (v) => String(v) },
+}
+
+const TIER_LABELS: Record<number, { label: string; colour: string }> = {
+  1: { label: 'Primary', colour: '#10b981' },
+  2: { label: 'Official', colour: '#3b82f6' },
+  3: { label: 'Industry', colour: '#f59e0b' },
+  4: { label: 'Estimate', colour: '#94a3b8' },
+  5: { label: 'Unverified', colour: '#64748b' },
+}
+
+function EvolutionTab({ project }: { project: Project }) {
+  const fieldSources = project.field_sources
+  const hasFieldSources = fieldSources && Object.keys(fieldSources).length > 0
+
+  // Build a synthesised evolution timeline from all available data:
+  // timeline events, cod_history, ownership_history, and field_sources
+  const evolutionEvents: {
+    date: string
+    field: string
+    value: string
+    source: string
+    tier?: number
+    note?: string
+    type: 'field_source' | 'timeline' | 'cod_change' | 'ownership'
+  }[] = []
+
+  // 1. Field sources (new provenance model)
+  if (fieldSources) {
+    for (const [field, entries] of Object.entries(fieldSources)) {
+      for (const entry of entries as FieldSourceEntry[]) {
+        const config = FIELD_LABELS[field]
+        evolutionEvents.push({
+          date: entry.date,
+          field: config?.label || field,
+          value: config ? config.format(entry.value) : String(entry.value),
+          source: entry.source,
+          tier: entry.tier,
+          note: entry.note,
+          type: 'field_source',
+        })
+      }
+    }
+  }
+
+  // 2. Timeline events (existing)
+  for (const event of project.timeline || []) {
+    evolutionEvents.push({
+      date: event.date,
+      field: event.title,
+      value: event.detail || '',
+      source: event.sources?.[0]?.title || 'Project timeline',
+      type: 'timeline',
+    })
+  }
+
+  // 3. COD history
+  for (const cod of project.cod_history || []) {
+    evolutionEvents.push({
+      date: cod.date || '',
+      field: 'COD Change',
+      value: cod.estimate || '?',
+      source: cod.source || 'COD tracking',
+      type: 'cod_change',
+    })
+  }
+
+  // 4. Ownership history
+  for (const own of project.ownership_history || []) {
+    evolutionEvents.push({
+      date: own.period || '',
+      field: 'Ownership Change',
+      value: `${own.owner} (${own.role})`,
+      source: own.source_url || 'Ownership tracking',
+      type: 'ownership',
+    })
+  }
+
+  // Sort chronologically (newest first)
+  evolutionEvents.sort((a, b) => (b.date || '').localeCompare(a.date || ''))
+
+  // Group field_sources by field for the comparison view
+  const fieldGroups: Record<string, FieldSourceEntry[]> = {}
+  if (fieldSources) {
+    for (const [field, entries] of Object.entries(fieldSources)) {
+      fieldGroups[field] = (entries as FieldSourceEntry[]).sort((a, b) => (b.date || '').localeCompare(a.date || ''))
+    }
+  }
+
+  const TYPE_COLOURS: Record<string, string> = {
+    field_source: '#10b981',
+    timeline: '#3b82f6',
+    cod_change: '#f59e0b',
+    ownership: '#8b5cf6',
+  }
+
+  return (
+    <div className="space-y-6">
+      {/* Field-level source comparison (if available) */}
+      {hasFieldSources && (
+        <section>
+          <SectionTitle>Data Source Comparison</SectionTitle>
+          <p className="text-xs text-[var(--color-text-muted)] mb-3">
+            Multiple sources report different values for key fields. This view shows how each data point has
+            been reported across sources — enabling you to see which source is most current and identify discrepancies.
+          </p>
+          <div className="space-y-3">
+            {Object.entries(fieldGroups).map(([field, entries]) => {
+              const config = FIELD_LABELS[field]
+              const label = config?.label || field
+              // Check if all values agree
+              const values = entries.map(e => String(e.value))
+              const allAgree = values.every(v => v === values[0])
+
+              return (
+                <div key={field} className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl overflow-hidden">
+                  <div className="flex items-center justify-between px-4 py-2 bg-[var(--color-bg-elevated)]">
+                    <span className="text-xs font-semibold text-[var(--color-text)]">{label}</span>
+                    {entries.length > 1 && (
+                      <span className={`text-[10px] px-2 py-0.5 rounded-full ${
+                        allAgree
+                          ? 'bg-green-500/20 text-green-400'
+                          : 'bg-amber-500/20 text-amber-400'
+                      }`}>
+                        {allAgree ? 'Sources agree' : 'Sources differ'}
+                      </span>
+                    )}
+                  </div>
+                  <div className="divide-y divide-[var(--color-border)]">
+                    {entries.map((entry, i) => {
+                      const tierInfo = entry.tier ? TIER_LABELS[entry.tier] : null
+                      return (
+                        <div key={i} className="flex items-center justify-between px-4 py-2.5">
+                          <div className="flex-1 min-w-0">
+                            <div className="flex items-center gap-2">
+                              <span className="text-sm font-mono font-medium text-[var(--color-text)]">
+                                {config ? config.format(entry.value) : String(entry.value)}
+                              </span>
+                              {i === 0 && entries.length > 1 && (
+                                <span className="text-[10px] px-1.5 py-0.5 rounded bg-blue-500/20 text-blue-400">Latest</span>
+                              )}
+                            </div>
+                            <div className="text-[10px] text-[var(--color-text-muted)] mt-0.5">
+                              {entry.source}
+                              {entry.note && (
+                                <span className="ml-1 italic text-amber-400">— {entry.note}</span>
+                              )}
+                            </div>
+                          </div>
+                          <div className="flex items-center gap-2 flex-shrink-0 ml-3">
+                            {tierInfo && (
+                              <span className="text-[10px] px-1.5 py-0.5 rounded-full" style={{
+                                backgroundColor: tierInfo.colour + '20',
+                                color: tierInfo.colour,
+                              }}>
+                                {tierInfo.label}
+                              </span>
+                            )}
+                            <span className="text-[10px] text-[var(--color-text-muted)] font-mono">{entry.date}</span>
+                          </div>
+                        </div>
+                      )
+                    })}
+                  </div>
+                </div>
+              )
+            })}
+          </div>
+        </section>
+      )}
+
+      {/* Unified evolution timeline */}
+      <section>
+        <SectionTitle>Project Evolution Timeline</SectionTitle>
+        <p className="text-xs text-[var(--color-text-muted)] mb-3">
+          All data changes, milestones, and source updates in chronological order.
+          {!hasFieldSources && ' Per-field source tracking will be added as data is enriched.'}
+        </p>
+
+        {/* Legend */}
+        <div className="flex flex-wrap gap-3 mb-3">
+          {[
+            ...(hasFieldSources ? [{ key: 'field_source', label: 'Data Source' }] : []),
+            { key: 'timeline', label: 'Milestone' },
+            ...(project.cod_history?.length ? [{ key: 'cod_change', label: 'COD Change' }] : []),
+            ...(project.ownership_history?.length ? [{ key: 'ownership', label: 'Ownership' }] : []),
+          ].map(item => (
+            <div key={item.key} className="flex items-center gap-1.5 text-[10px]">
+              <span className="w-2 h-2 rounded-full" style={{ backgroundColor: TYPE_COLOURS[item.key] }} />
+              <span className="text-[var(--color-text-muted)]">{item.label}</span>
+            </div>
+          ))}
+        </div>
+
+        <div className="relative">
+          {/* Vertical timeline line */}
+          <div className="absolute left-[7px] top-0 bottom-0 w-px bg-[var(--color-border)]" />
+
+          <div className="space-y-1">
+            {evolutionEvents.map((event, i) => (
+              <div key={i} className="relative flex items-start gap-3 pl-6">
+                {/* Dot */}
+                <div
+                  className="absolute left-0 top-2 w-[15px] h-[15px] rounded-full border-2 flex-shrink-0"
+                  style={{
+                    borderColor: TYPE_COLOURS[event.type],
+                    backgroundColor: i === 0 ? TYPE_COLOURS[event.type] : 'var(--color-bg)',
+                  }}
+                />
+
+                <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-lg px-3 py-2 flex-1 min-w-0">
+                  <div className="flex items-center justify-between gap-2">
+                    <span className="text-xs font-semibold text-[var(--color-text)]">{event.field}</span>
+                    <span className="text-[10px] text-[var(--color-text-muted)] font-mono flex-shrink-0">{event.date}</span>
+                  </div>
+                  {event.value && (
+                    <p className="text-xs text-[var(--color-text-muted)] mt-0.5 line-clamp-2">{event.value}</p>
+                  )}
+                  <div className="flex items-center gap-2 mt-1">
+                    <span className="text-[10px] text-[var(--color-text-muted)] italic">{event.source}</span>
+                    {event.tier && TIER_LABELS[event.tier] && (
+                      <span className="text-[10px] px-1 py-0.5 rounded" style={{
+                        backgroundColor: TIER_LABELS[event.tier].colour + '20',
+                        color: TIER_LABELS[event.tier].colour,
+                      }}>
+                        T{event.tier}
+                      </span>
+                    )}
+                    {event.note && (
+                      <span className="text-[10px] text-amber-400 italic">{event.note}</span>
+                    )}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {evolutionEvents.length === 0 && (
+          <div className="text-center py-8 text-[var(--color-text-muted)] text-sm">
+            No evolution data available yet. Data will populate as sources are tracked.
+          </div>
+        )}
+      </section>
+
+      {/* Key metrics summary (derived from available data) */}
+      <section>
+        <SectionTitle>Current Values & Sources</SectionTitle>
+        <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl divide-y divide-[var(--color-border)]">
+          {[
+            { label: 'Capacity', value: `${project.capacity_mw} MW`, source: hasFieldSources ? fieldSources?.capacity_mw?.[0]?.source : 'AEMO' },
+            ...(project.storage_mwh ? [{ label: 'Storage', value: `${project.storage_mwh} MWh`, source: hasFieldSources ? fieldSources?.storage_mwh?.[0]?.source : 'AEMO' }] : []),
+            ...(project.capex_aud_m ? [{ label: 'Capital Cost', value: `A$${project.capex_aud_m}M`, source: project.capex_source || (hasFieldSources ? fieldSources?.capex_aud_m?.[0]?.source : undefined) }] : []),
+            { label: 'Status', value: project.status, source: hasFieldSources ? fieldSources?.status?.[0]?.source : 'AEMO / Pipeline' },
+            { label: 'COD', value: project.cod_current || 'TBD', source: hasFieldSources ? fieldSources?.cod_current?.[0]?.source : 'AEMO' },
+            { label: 'Developer', value: project.current_developer || '—', source: hasFieldSources ? fieldSources?.current_developer?.[0]?.source : 'AEMO' },
+            ...(project.first_seen ? [{ label: 'First Tracked', value: project.first_seen, source: 'AURES' }] : []),
+          ].map((item, i) => (
+            <div key={i} className="flex items-center justify-between px-4 py-2.5">
+              <div>
+                <span className="text-xs text-[var(--color-text-muted)]">{item.label}</span>
+                {item.source && (
+                  <span className="text-[10px] text-[var(--color-text-muted)] ml-2 italic">({item.source})</span>
+                )}
+              </div>
+              <span className="text-sm font-medium text-[var(--color-text)] font-mono">{item.value}</span>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Coverage indicator */}
+      {!hasFieldSources && (
+        <div className="bg-[var(--color-bg-card)] border border-amber-500/20 rounded-xl p-4">
+          <p className="text-xs text-amber-400 font-medium mb-1">Per-field source tracking not yet available</p>
+          <p className="text-xs text-[var(--color-text-muted)]">
+            This project uses the standard data model. As AURES expands its multi-source provenance tracking,
+            you'll be able to see exactly where each data point came from and how it has changed across different
+            sources over time. Currently available on select projects (e.g. Tomago BESS).
+          </p>
+        </div>
+      )}
+    </div>
+  )
+}
 
 function SourcesTab({ project }: { project: Project }) {
   return (

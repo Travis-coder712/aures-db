@@ -495,6 +495,21 @@ Bottom navigation with tabs on mobile. Progressive disclosure — simple surface
 - Enriched scheme analysis essay content with correct per-round project data
 - Fixed developer doughnut chart to use grouped developer data (540 vs 711 ungrouped)
 
+### Project Evolution Tab — Multi-Source Data Provenance — 2026-04-14 (v2.8.5)
+- New Evolution tab on project detail pages showing how data has been reported across multiple sources
+- Data Source Comparison view: per-field multi-source tracking with agree/differ badges, source tiers (Primary/Official/Industry/Estimate/Unverified), and editorial notes
+- Project Evolution Timeline: unified chronological view merging field source updates, timeline events, COD history, and ownership changes with colour-coded dots
+- Current Values and Sources summary table with source attribution
+- Graceful fallback for projects without field_sources data, with explanation of the provenance model
+- Live on Tomago BESS as first project with full multi-source provenance tracking
+
+### BESS Capex Charts and Data Provenance — 2026-04-03 (v2.8.4)
+- Added cost timeline chart showing capex per MWh decreasing over time by OEM
+- Added OEM cost evolution line chart with per-OEM trend analysis
+- Added Tomago BESS benchmark section with comparable project analysis
+- Built 3-layer data provenance safeguards: AEMO importer status protection, status validator, field_sources model
+- Restored Tomago BESS to capex chart after pipeline regression
+
 ### Watt Clarity — Battery Correlation Penalty Analysis — 2026-04-03 (v2.8.3)
 - Added Duck Curve section with midday vs evening price comparison across all NEM states
 - 24-hour price profile chart overlaying all 5 states showing full duck curve shape
