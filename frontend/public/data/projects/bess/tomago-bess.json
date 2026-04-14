@@ -116,6 +116,33 @@
     "connection_augmentation": "New 330 kV feeder bay at Tomago substation required. Short connection distance and existing high-capacity substation minimise augmentation cost. NSCAS agreement with TransGrid.",
     "notes": "500 MW / 2,000 MWh (4-hour) BESS located at the former Tomago Aluminium substation precinct, Hunter Valley NSW. AGL Energy project. NSW State Significant Development. Grid-forming capability required by EIS and Network Support and Control Ancillary Service (NSCAS) agreement with TransGrid. Connection to 330 kV Hunter Valley transmission network."
   },
+  "field_sources": {
+    "capacity_mw": [
+      {"value": 500.0, "source": "AEMO Generation Information", "date": "2026-01-30", "tier": 1},
+      {"value": 500.0, "source": "AGL FID Announcement", "date": "2025-07-30", "tier": 1},
+      {"value": 500.0, "source": "NSW SSD EIS", "date": "2023", "tier": 2}
+    ],
+    "storage_mwh": [
+      {"value": 2000.0, "source": "AGL FID Announcement", "date": "2025-07-30", "tier": 1},
+      {"value": 2000.36, "source": "AEMO Generation Information", "date": "2026-01-30", "tier": 1},
+      {"value": 2000.0, "source": "NSW SSD EIS", "date": "2023", "tier": 2}
+    ],
+    "capex_aud_m": [
+      {"value": 800.0, "source": "AGL FID Announcement / Fluence press release", "date": "2025-07-30", "tier": 1}
+    ],
+    "bess_oem": [
+      {"value": "Fluence (Gridstack Pro)", "source": "Fluence IR press release", "date": "2025-07-30", "tier": 1},
+      {"value": "To be confirmed", "source": "NSW SSD EIS", "date": "2023", "tier": 2}
+    ],
+    "status": [
+      {"value": "construction", "source": "AGL project update / timeline", "date": "2025-12-01", "tier": 1},
+      {"value": "development", "source": "AEMO Generation Information (Publicly Announced)", "date": "2026-01-30", "tier": 1, "note": "AEMO lags — FID and construction already confirmed"}
+    ],
+    "cod_current": [
+      {"value": "2027-10-31", "source": "AEMO Generation Information", "date": "2026-01-30", "tier": 1},
+      {"value": "H2 2027", "source": "AGL FID Announcement", "date": "2025-07-30", "tier": 1}
+    ]
+  },
   "sources": [
     {
       "title": "AEMO Generation Information Jan 2026",
@@ -127,6 +154,18 @@
       "title": "EPBC Referral 2023/09521",
       "url": "https://epbcpublicportal.environment.gov.au/all-referrals/#!/referral/2023-09521",
       "date": "2026-03-12",
+      "source_tier": 1
+    },
+    {
+      "title": "AGL FID Announcement — Tomago Battery",
+      "url": "https://www.agl.com.au/about-agl/operations/tomago-battery",
+      "date": "2025-07-30",
+      "source_tier": 1
+    },
+    {
+      "title": "Fluence IR — AGL 500MW/2GWh Tomago Deal",
+      "url": "https://ir.fluenceenergy.com/news-releases/news-release-details/fluence-and-agl-sign-deal-deliver-500-mw-2000-mwh-tomago-battery",
+      "date": "2025-07-30",
       "source_tier": 1
     }
   ]

@@ -393,7 +393,13 @@ def import_to_database(sites: dict, source_file: str):
                 """, (sid, existing_pid))
                 skipped_count += 1
             else:
-                # Low/unverified — safe to update with AEMO data
+                # Low/unverified — update with AEMO data, but never downgrade status
+                existing_status = existing_info.get('status', 'development')
+                existing_priority = STATUS_PRIORITY.get(existing_status, 0)
+                new_priority = STATUS_PRIORITY.get(status, 0)
+                # Keep the more advanced status — AEMO can lag behind reality
+                final_status = status if new_priority >= existing_priority else existing_status
+
                 conn.execute("""
                     UPDATE projects SET
                         technology = ?,
@@ -409,13 +415,15 @@ def import_to_database(sites: dict, source_file: str):
                         updated_at = datetime('now')
                     WHERE id = ?
                 """, (
-                    tech, status, site['capacity_mw'],
+                    tech, final_status, site['capacity_mw'],
                     site['total_storage_mwh'] if site['total_storage_mwh'] > 0 else None,
                     state, site['owner'],
                     site['fcud'][:7] if site['fcud'] else None,
                     sid,
                     existing_pid,
                 ))
+                if final_status != status:
+                    print(f"    ⚠ {existing_pid}: kept status '{final_status}' (AEMO says '{status}' but that's a downgrade)")
                 updated_count += 1
         else:
             # Handle duplicate slugs
