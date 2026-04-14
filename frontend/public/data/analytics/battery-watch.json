@@ -2,20 +2,20 @@
   "generated_at": "2026-03-22",
   "nsw_focus": {
     "total_operating_mw": 1940,
-    "total_operating_mwh": 5310,
-    "total_construction_mw": 3333,
-    "total_construction_mwh": 10050,
+    "total_operating_mwh": 7080,
+    "total_construction_mw": 3093,
+    "total_construction_mwh": 8660,
     "projects": [
       {
-        "name": "Eraring Big Battery",
-        "id": "eraring-big-battery",
+        "name": "Eraring Battery",
+        "id": "eraring-battery",
         "developer": "Origin Energy",
         "capacity_mw": 700,
-        "storage_mwh": 1390,
-        "duration_hours": 2,
+        "storage_mwh": 3160,
+        "duration_hours": 4.5,
         "status": "operating",
         "cod": "2025-12-18",
-        "note": "Stage 1 (460 MW) commercial ops Dec 2025. Full 700 MW expected Q1 2027.",
+        "note": "700 MW / 3,160 MWh. Grid-forming capability. On former Eraring coal plant site.",
         "milestone": "Australia's largest battery"
       },
       {
@@ -58,17 +58,6 @@
         ],
         "note": "Built on former Liddell coal plant site. Phase 1 commissioned, Phase 2 expected May 2026. NSW LTESA Round 2.",
         "milestone": "Coal-to-battery conversion"
-      },
-      {
-        "name": "Eraring Battery (Stages 2-4)",
-        "id": "eraring-battery",
-        "developer": "Origin Energy",
-        "capacity_mw": 240,
-        "storage_mwh": 1390,
-        "duration_hours": 4.5,
-        "status": "construction",
-        "cod": "2027-03-01",
-        "note": "Expanding Eraring to full 700 MW / 3,160 MWh. Grid-forming capability."
       },
       {
         "name": "Tomago BESS",
@@ -172,13 +161,12 @@
       { "date": "2024-11-01", "label": "Waratah Super Battery online (850 MW)", "cumulative_mw": 1240 },
       { "date": "2025-09-01", "label": "Orana BESS online (415 MW)", "cumulative_mw": 1655 },
       { "date": "2025-10-18", "label": "Waratah transformer failure — reduced to 350 MW", "cumulative_mw": 1155, "event": "setback" },
-      { "date": "2025-12-18", "label": "Eraring Big Battery Stage 1 online (460 MW)", "cumulative_mw": 1615 },
+      { "date": "2025-12-18", "label": "Eraring Battery online (700 MW)", "cumulative_mw": 1615 },
       { "date": "2026-03-01", "label": "Liddell Phase 1 commissioned (250 MW)", "cumulative_mw": 1865 },
       { "date": "2026-06-01", "label": "Liddell Phase 2 + full commercial ops (500 MW total)", "cumulative_mw": 2115 },
       { "date": "2026-09-01", "label": "Waratah full capacity restored (850 MW)", "cumulative_mw": 2615 },
-      { "date": "2027-03-01", "label": "Eraring Stages 2-4 complete (700 MW total)", "cumulative_mw": 2855 },
-      { "date": "2027-06-01", "label": "Bellambi + Bulabul + New England BESS online", "cumulative_mw": 3763 },
-      { "date": "2027-10-31", "label": "Tomago BESS online (500 MW)", "cumulative_mw": 4263 }
+      { "date": "2027-06-01", "label": "Bellambi + Bulabul + New England BESS online", "cumulative_mw": 3523 },
+      { "date": "2027-10-31", "label": "Tomago BESS online (500 MW)", "cumulative_mw": 4023 }
     ]
   },
   "nem_wide": {

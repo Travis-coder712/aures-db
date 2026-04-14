@@ -1275,6 +1275,131 @@ function EvolutionTab({ project }: { project: Project }) {
         </section>
       )}
 
+      {/* Staged Build-Out (if project has stages) */}
+      {project.stages && project.stages.length > 0 && (
+        <section>
+          <SectionTitle>Staged Build-Out</SectionTitle>
+          <p className="text-xs text-[var(--color-text-muted)] mb-3">
+            This project is being delivered in {project.stages.length} stages. Each stage has its own capacity, timeline, and technology specifications.
+          </p>
+
+          {/* Visual progress bar */}
+          <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl p-4 mb-3">
+            <div className="flex items-center justify-between mb-2">
+              <span className="text-xs font-semibold text-[var(--color-text)]">Build-Out Progress</span>
+              <span className="text-xs text-[var(--color-text-muted)] font-mono">
+                {project.stages.filter(s => s.status === 'operating').reduce((sum, s) => sum + s.capacity_mw, 0)} MW operating
+                {' / '}
+                {project.capacity_mw} MW total
+              </span>
+            </div>
+            <div className="flex gap-1 h-6 rounded-lg overflow-hidden">
+              {project.stages.map((stage, i) => {
+                const widthPct = stage.capacity_mw > 0
+                  ? (stage.capacity_mw / project.capacity_mw) * 100
+                  : (stage.storage_mwh && project.storage_mwh ? (stage.storage_mwh / project.storage_mwh) * 100 : 25 / project.stages!.length)
+                const colours: Record<string, string> = {
+                  operating: '#10b981',
+                  commissioning: '#06b6d4',
+                  construction: '#f59e0b',
+                  development: '#64748b',
+                }
+                return (
+                  <div
+                    key={i}
+                    className="relative flex items-center justify-center text-[10px] font-medium text-white"
+                    style={{
+                      width: `${Math.max(widthPct, 8)}%`,
+                      backgroundColor: colours[stage.status] || '#64748b',
+                    }}
+                    title={`Stage ${stage.stage}: ${stage.capacity_mw} MW — ${stage.status}`}
+                  >
+                    S{stage.stage}
+                  </div>
+                )
+              })}
+            </div>
+            <div className="flex gap-3 mt-2">
+              {[
+                { status: 'operating', colour: '#10b981' },
+                { status: 'construction', colour: '#f59e0b' },
+                { status: 'development', colour: '#64748b' },
+              ].filter(s => project.stages!.some(st => st.status === s.status)).map(s => (
+                <div key={s.status} className="flex items-center gap-1 text-[10px]">
+                  <span className="w-2 h-2 rounded-full" style={{ backgroundColor: s.colour }} />
+                  <span className="text-[var(--color-text-muted)] capitalize">{s.status}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Stage detail cards */}
+          <div className="space-y-2">
+            {project.stages.map((stage) => {
+              const statusColours: Record<string, string> = {
+                operating: 'text-green-400 bg-green-500/20',
+                commissioning: 'text-cyan-400 bg-cyan-500/20',
+                construction: 'text-amber-400 bg-amber-500/20',
+                development: 'text-slate-400 bg-slate-500/20',
+              }
+              return (
+                <div key={stage.stage} className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl overflow-hidden">
+                  <div className="flex items-center justify-between px-4 py-2 bg-[var(--color-bg-elevated)]">
+                    <span className="text-xs font-semibold text-[var(--color-text)]">{stage.name}</span>
+                    <span className={`text-[10px] px-2 py-0.5 rounded-full capitalize ${statusColours[stage.status] || ''}`}>
+                      {stage.status}
+                    </span>
+                  </div>
+                  <div className="grid grid-cols-2 gap-x-4 gap-y-1 px-4 py-2.5">
+                    {stage.capacity_mw > 0 && (
+                      <>
+                        <span className="text-[10px] text-[var(--color-text-muted)]">Capacity</span>
+                        <span className="text-xs font-mono text-[var(--color-text)]">{stage.capacity_mw} MW</span>
+                      </>
+                    )}
+                    {stage.storage_mwh && stage.storage_mwh > 0 && (
+                      <>
+                        <span className="text-[10px] text-[var(--color-text-muted)]">Storage</span>
+                        <span className="text-xs font-mono text-[var(--color-text)]">{stage.storage_mwh} MWh</span>
+                      </>
+                    )}
+                    {stage.oem && (
+                      <>
+                        <span className="text-[10px] text-[var(--color-text-muted)]">OEM</span>
+                        <span className="text-xs font-mono text-[var(--color-text)]">{stage.oem}{stage.oem_model ? ` ${stage.oem_model}` : ''}</span>
+                      </>
+                    )}
+                    {stage.capex_aud_m && (
+                      <>
+                        <span className="text-[10px] text-[var(--color-text-muted)]">Capex</span>
+                        <span className="text-xs font-mono text-[var(--color-text)]">A${stage.capex_aud_m}M</span>
+                      </>
+                    )}
+                    {stage.cod && (
+                      <>
+                        <span className="text-[10px] text-[var(--color-text-muted)]">COD</span>
+                        <span className="text-xs font-mono text-[var(--color-text)]">{stage.cod}</span>
+                      </>
+                    )}
+                    {stage.grid_forming && (
+                      <>
+                        <span className="text-[10px] text-[var(--color-text-muted)]">Grid-Forming</span>
+                        <span className="text-xs text-green-400">Yes</span>
+                      </>
+                    )}
+                  </div>
+                  {stage.notes && (
+                    <div className="px-4 pb-2.5">
+                      <p className="text-[10px] text-[var(--color-text-muted)] italic">{stage.notes}</p>
+                    </div>
+                  )}
+                </div>
+              )
+            })}
+          </div>
+        </section>
+      )}
+
       {/* Unified evolution timeline */}
       <section>
         <SectionTitle>Project Evolution Timeline</SectionTitle>

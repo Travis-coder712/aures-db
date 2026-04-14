@@ -3484,22 +3484,6 @@
       "first_seen_year": 2025
     },
     {
-      "id": "eraring-big-battery",
-      "name": "Eraring Big Battery",
-      "technology": "bess",
-      "status": "operating",
-      "capacity_mw": 700.0,
-      "storage_mwh": 1390.0,
-      "state": "NSW",
-      "current_developer": "Origin Energy",
-      "first_seen": "2025-03-04",
-      "cod_current": "2025-12-18",
-      "cod_original": "2025-12-18",
-      "data_confidence": "good",
-      "confidence_score": "60",
-      "first_seen_year": 2025
-    },
-    {
       "id": "western-downs-battery-stage-1-and-2",
       "name": "Western Downs Battery - Stage 1 And 2",
       "technology": "bess",
@@ -3549,9 +3533,9 @@
       "id": "eraring-battery",
       "name": "Eraring Battery",
       "technology": "bess",
-      "status": "construction",
-      "capacity_mw": 460.0,
-      "storage_mwh": 1840.0,
+      "status": "operating",
+      "capacity_mw": 700.0,
+      "storage_mwh": 3160.0,
       "state": "NSW",
       "current_developer": "Origin Energy",
       "first_seen": "2023-01-01",
@@ -17386,12 +17370,12 @@
       }
     },
     "2025": {
-      "count": 41,
-      "total_mw": 18541.5,
+      "count": 40,
+      "total_mw": 17841.5,
       "by_technology": {
         "bess": {
-          "count": 14,
-          "capacity_mw": 5586.0
+          "count": 13,
+          "capacity_mw": 4886.0
         },
         "solar": {
           "count": 13,
@@ -17412,8 +17396,8 @@
       },
       "by_state": {
         "NSW": {
-          "count": 15,
-          "capacity_mw": 9367.0
+          "count": 14,
+          "capacity_mw": 8667.0
         },
         "QLD": {
           "count": 10,
@@ -17438,8 +17422,8 @@
           "capacity_mw": 584.0
         },
         "operating": {
-          "count": 18,
-          "capacity_mw": 3862.5
+          "count": 17,
+          "capacity_mw": 3162.5
         },
         "commissioning": {
           "count": 6,
@@ -17453,11 +17437,11 @@
     },
     "2026": {
       "count": 38,
-      "total_mw": 9053.8,
+      "total_mw": 9293.8,
       "by_technology": {
         "bess": {
           "count": 26,
-          "capacity_mw": 5932.0
+          "capacity_mw": 6172.0
         },
         "hybrid": {
           "count": 1,
@@ -17487,17 +17471,17 @@
         },
         "NSW": {
           "count": 10,
-          "capacity_mw": 2305.0
+          "capacity_mw": 2545.0
         }
       },
       "by_status": {
         "construction": {
-          "count": 25,
-          "capacity_mw": 6695.8
+          "count": 24,
+          "capacity_mw": 6235.8
         },
         "operating": {
-          "count": 4,
-          "capacity_mw": 660.0
+          "count": 5,
+          "capacity_mw": 1360.0
         },
         "commissioning": {
           "count": 1,

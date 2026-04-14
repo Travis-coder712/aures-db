@@ -495,6 +495,15 @@ Bottom navigation with tabs on mobile. Progressive disclosure — simple surface
 - Enriched scheme analysis essay content with correct per-round project data
 - Fixed developer doughnut chart to use grouped developer data (540 vs 711 ungrouped)
 
+### Eraring Battery — Staged Build-Out Model — 2026-04-14 (v2.8.6)
+- Merged eraring-battery and eraring-big-battery into one unified project record with 4-stage build-out
+- New stages data model: each stage has capacity, storage, OEM, capex, status, and COD independently tracked
+- Visual build-out progress bar on Evolution tab showing stage-by-stage delivery status
+- Stage detail cards with per-stage specs (MW, MWh, OEM model, capex, grid-forming status)
+- Fixed Tesla Megapack reference in EIS data — project switched from Tesla to Wartsila during EIS phase
+- Full field_sources provenance: capacity (460 to 700 MW), storage (1,770 to 3,160 MWh), capex ($600M to $1,450M), OEM evolution
+- Updated all analytics files (capex, battery-watch, EIS, timeline, developer quality, coal-watch, drift)
+
 ### Project Evolution Tab — Multi-Source Data Provenance — 2026-04-14 (v2.8.5)
 - New Evolution tab on project detail pages showing how data has been reported across multiple sources
 - Data Source Comparison view: per-field multi-source tracking with agree/differ badges, source tiers (Primary/Official/Industry/Estimate/Unverified), and editorial notes

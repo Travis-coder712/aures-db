@@ -81,6 +81,22 @@ export interface FieldSourceEntry {
   note?: string
 }
 
+export interface ProjectStage {
+  stage: number
+  name: string
+  capacity_mw: number
+  storage_mwh?: number
+  status: ProjectStatus
+  cod?: string
+  cod_original?: string
+  capex_aud_m?: number
+  capex_source?: string
+  oem?: string
+  oem_model?: string
+  grid_forming?: boolean
+  notes?: string
+}
+
 export interface MultiSourceValue {
   value: string
   source: string
@@ -218,6 +234,9 @@ export interface Project {
 
   // Per-field source provenance (multi-source tracking)
   field_sources?: Record<string, FieldSourceEntry[]>
+
+  // Staged projects (e.g. Eraring Battery — multiple build stages)
+  stages?: ProjectStage[]
 
   // Metadata
   sources: SourceReference[]

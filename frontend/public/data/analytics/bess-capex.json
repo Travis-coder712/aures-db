@@ -226,23 +226,23 @@
       "capex_source_url": "https://genexpower.com.au/bouldercombe-battery-project/"
     },
     {
-      "id": "eraring-big-battery",
-      "name": "Eraring Big Battery",
+      "id": "eraring-battery",
+      "name": "Eraring Battery (Full Build-Out)",
       "status": "operating",
       "capacity_mw": 700.0,
-      "storage_mwh": 1390.0,
-      "capex_aud_m": 600.0,
-      "capex_year": 2023,
-      "capex_source": "Origin/PV Magazine",
+      "storage_mwh": 3160.0,
+      "capex_aud_m": 1450.0,
+      "capex_year": 2024,
+      "capex_source": "Origin FID A$600M (Stage 1) + A$850M (Stages 2-4)",
       "state": "NSW",
       "current_developer": "Origin Energy",
       "current_operator": "Origin Energy",
       "bess_oem": "Wartsila",
-      "bess_model": "Quantum3",
-      "capex_per_mw": 0.86,
-      "capex_per_mwh": 0.43,
-      "duration_hours": 2.0,
-      "capex_source_url": "https://www.wartsila.com/media/news/11-12-2025-wartsila-sets-new-global-benchmark-with-fourth-stage-of-origin-s-eraring-battery-energy-storage-system-3695204"
+      "bess_model": "GridSolv Quantum / Quantum3",
+      "capex_per_mw": 2.07,
+      "capex_per_mwh": 0.46,
+      "duration_hours": 4.5,
+      "capex_source_url": "https://www.originenergy.com.au/about/who-we-are/what-we-do/generation/eraring-projects/battery/"
     },
     {
       "id": "liddell-bess",
@@ -470,24 +470,6 @@
       "capex_source_url": "https://www.quinbrook.com/news-insights/supernode-stage-1-commences-commercial-operations/"
     },
     {
-      "id": "eraring-battery",
-      "name": "Eraring Battery",
-      "status": "construction",
-      "capacity_mw": 460.0,
-      "storage_mwh": 1840.0,
-      "capex_aud_m": 850.0,
-      "capex_year": 2024,
-      "capex_source": "Origin/NS Energy (total stages 2-4)",
-      "state": "NSW",
-      "current_developer": "Origin Energy",
-      "bess_oem": "Wartsila",
-      "bess_model": "GridSolv Quantum",
-      "capex_per_mw": 1.85,
-      "capex_per_mwh": 0.46,
-      "duration_hours": 4.0,
-      "capex_source_url": "https://www.wartsila.com/media/news/20-04-2023-wartsila-selected-as-the-preferred-contractor-to-deliver-one-of-australia-s-largest-energy-storage-projects-3256698"
-    },
-    {
       "id": "orana-bess",
       "name": "Orana BESS",
       "status": "construction",
@@ -573,18 +555,18 @@
       "avg_capex_per_mwh": 0.65
     },
     "2023": {
-      "count": 12,
-      "total_mw": 3090.0,
-      "total_capex_m": 4339.0,
-      "avg_capex_per_mw": 1.53,
-      "avg_capex_per_mwh": 0.76
+      "count": 11,
+      "total_mw": 2390.0,
+      "total_capex_m": 3739.0,
+      "avg_capex_per_mw": 1.56,
+      "avg_capex_per_mwh": 0.78
     },
     "2024": {
       "count": 4,
-      "total_mw": 1745.0,
-      "total_capex_m": 3172.0,
-      "avg_capex_per_mw": 1.85,
-      "avg_capex_per_mwh": 0.52
+      "total_mw": 1985.0,
+      "total_capex_m": 3772.0,
+      "avg_capex_per_mw": 1.9,
+      "avg_capex_per_mwh": 0.53
     },
     "2025": {
       "count": 1,
@@ -608,10 +590,10 @@
       "avg_capex_per_mwh": 0.7
     },
     "Wartsila": {
-      "count": 4,
-      "total_mw": 1760.0,
-      "avg_capex_per_mw": 1.36,
-      "avg_capex_per_mwh": 0.53
+      "count": 3,
+      "total_mw": 1300.0,
+      "avg_capex_per_mw": 1.47,
+      "avg_capex_per_mwh": 0.51
     },
     "Samsung SDI": {
       "count": 2,
