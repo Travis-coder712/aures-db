@@ -616,6 +616,7 @@ export interface BESSCapexProject {
   capex_aud_m: number
   capex_year: number
   capex_source: string
+  capex_source_url?: string
   state: string
   current_developer: string
   current_operator: string

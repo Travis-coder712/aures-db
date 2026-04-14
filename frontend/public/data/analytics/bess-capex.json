@@ -16,7 +16,8 @@
       "bess_model": "Powerpack (Ph1) / Megapack (Ph2-3)",
       "capex_per_mw": 0.82,
       "capex_per_mwh": 0.82,
-      "duration_hours": 1.0
+      "duration_hours": 1.0,
+      "capex_source_url": "https://neoen.com/"
     },
     {
       "id": "hornsdale-power-reserve-unit-1",
@@ -34,7 +35,8 @@
       "bess_model": "Powerpack",
       "capex_per_mw": 0.59,
       "capex_per_mwh": 0.76,
-      "duration_hours": 0.8
+      "duration_hours": 0.8,
+      "capex_source_url": "https://hornsdalepowerreserve.com.au/"
     },
     {
       "id": "ballarat-energy-storage-system",
@@ -52,7 +54,8 @@
       "bess_model": "Advancion",
       "capex_per_mw": 1.07,
       "capex_per_mwh": 1.06,
-      "duration_hours": 1.0
+      "duration_hours": 1.0,
+      "capex_source_url": "https://blog.fluenceenergy.com/ballarat-commissioning-energy-storage-australia"
     },
     {
       "id": "dalrymple-bess",
@@ -69,7 +72,8 @@
       "bess_model": "Lithium-ion modules",
       "capex_per_mw": 1.0,
       "capex_per_mwh": 3.33,
-      "duration_hours": 0.3
+      "duration_hours": 0.3,
+      "capex_source_url": "https://www.escri-sa.com.au/about/"
     },
     {
       "id": "victorian-big-battery",
@@ -87,7 +91,8 @@
       "bess_model": "Megapack",
       "capex_per_mw": 1.0,
       "capex_per_mwh": 0.67,
-      "duration_hours": 1.5
+      "duration_hours": 1.5,
+      "capex_source_url": "https://neoen.com/"
     },
     {
       "id": "wandoan-south-bess",
@@ -105,7 +110,8 @@
       "bess_model": "Lithium-ion LFP (500k+ cells)",
       "capex_per_mw": 1.0,
       "capex_per_mwh": 0.67,
-      "duration_hours": 1.5
+      "duration_hours": 1.5,
+      "capex_source_url": "https://www.doosangridtech.com/wandoan-south-bess"
     },
     {
       "id": "wallgrove-grid-battery-project",
@@ -122,7 +128,8 @@
       "bess_model": "Megapack (Virtual Machine Mode)",
       "capex_per_mw": 1.24,
       "capex_per_mwh": 0.83,
-      "duration_hours": 1.5
+      "duration_hours": 1.5,
+      "capex_source_url": "https://arena.gov.au/projects/transgrid-wallgrove-battery/"
     },
     {
       "id": "torrens-island-bess",
@@ -140,7 +147,8 @@
       "bess_model": "Quantum (CATL LFP cells)",
       "capex_per_mw": 0.72,
       "capex_per_mwh": 0.72,
-      "duration_hours": 1.0
+      "duration_hours": 1.0,
+      "capex_source_url": "https://www.energy-storage.news/agl-wartsila-complete-250mw-torrens-island-bess-project-in-south-australia/"
     },
     {
       "id": "waratah-super-battery",
@@ -158,7 +166,8 @@
       "bess_model": "Centipede Energy Segment",
       "capex_per_mw": 1.18,
       "capex_per_mwh": 0.6,
-      "duration_hours": 2.0
+      "duration_hours": 2.0,
+      "capex_source_url": "https://powin.com/wp-content/uploads/2024/02/Waratah-Super-Battery_Case-Study-5.pdf"
     },
     {
       "id": "western-downs-battery-stage-1-and-2",
@@ -175,7 +184,8 @@
       "bess_model": "Megapack",
       "capex_per_mw": 0.48,
       "capex_per_mwh": 0.48,
-      "duration_hours": 1.0
+      "duration_hours": 1.0,
+      "capex_source_url": "https://neoen.com/en/news/2025/neoen-delivers-western-downs-battery-stage-2-and-launches-stage-3-in-queensland-australia/"
     },
     {
       "id": "capital-battery",
@@ -193,7 +203,8 @@
       "bess_model": "Doosan BESS",
       "capex_per_mw": 1.0,
       "capex_per_mwh": 0.5,
-      "duration_hours": 2.0
+      "duration_hours": 2.0,
+      "capex_source_url": "https://capitalbattery.com.au/our-battery/"
     },
     {
       "id": "bouldercombe-battery-project",
@@ -211,7 +222,8 @@
       "bess_model": "Megapack",
       "capex_per_mw": 2.0,
       "capex_per_mwh": 1.0,
-      "duration_hours": 2.0
+      "duration_hours": 2.0,
+      "capex_source_url": "https://genexpower.com.au/bouldercombe-battery-project/"
     },
     {
       "id": "eraring-big-battery",
@@ -229,7 +241,8 @@
       "bess_model": "Quantum3",
       "capex_per_mw": 0.86,
       "capex_per_mwh": 0.43,
-      "duration_hours": 2.0
+      "duration_hours": 2.0,
+      "capex_source_url": "https://www.wartsila.com/media/news/11-12-2025-wartsila-sets-new-global-benchmark-with-fourth-stage-of-origin-s-eraring-battery-energy-storage-system-3695204"
     },
     {
       "id": "liddell-bess",
@@ -246,7 +259,8 @@
       "bess_model": "Gridstack",
       "capex_per_mw": 1.5,
       "capex_per_mwh": 0.75,
-      "duration_hours": 2.0
+      "duration_hours": 2.0,
+      "capex_source_url": "https://ir.fluenceenergy.com/news-releases/news-release-details/agl-selects-fluence-deliver-500-mw-liddell-battery-project"
     },
     {
       "id": "brendale-bess",
@@ -264,7 +278,8 @@
       "bess_model": "Megapack 2",
       "capex_per_mw": 1.46,
       "capex_per_mwh": 0.73,
-      "duration_hours": 2.0
+      "duration_hours": 2.0,
+      "capex_source_url": "https://akayshaenergy.com/news/sod-turned-on-akaysha-energys-200m-brendale-bess"
     },
     {
       "id": "blyth-bess",
@@ -282,7 +297,8 @@
       "bess_model": "LFP (900+ battery units)",
       "capex_per_mw": 1.69,
       "capex_per_mwh": 0.84,
-      "duration_hours": 2.0
+      "duration_hours": 2.0,
+      "capex_source_url": "https://nhoagroup.com/documents/nhoa-energy-and-elecnor-to-deliver-a-flagship-200mw-400mwh-battery-storage-project-in-south-australia-to-neoen/"
     },
     {
       "id": "greenbank-bess",
@@ -300,7 +316,8 @@
       "bess_model": "Megapack 2XL",
       "capex_per_mw": 1.5,
       "capex_per_mwh": 0.75,
-      "duration_hours": 2.0
+      "duration_hours": 2.0,
+      "capex_source_url": "https://www.csenergy.com.au/what-we-do/firming-and-storage/greenbank-battery"
     },
     {
       "id": "latrobe-valley-bess",
@@ -318,7 +335,8 @@
       "bess_model": "Gridstack",
       "capex_per_mw": 0.75,
       "capex_per_mwh": 0.77,
-      "duration_hours": 1.0
+      "duration_hours": 1.0,
+      "capex_source_url": "https://tiltrenewables.com/official-opening-of-tilt-renewables-latrobe-valley-battery-energy-storage-system/"
     },
     {
       "id": "melbourne-renewable-energy-hub-connection-a1",
@@ -336,7 +354,8 @@
       "bess_model": "Megapack",
       "capex_per_mw": 1.83,
       "capex_per_mwh": 0.92,
-      "duration_hours": 2.0
+      "duration_hours": 2.0,
+      "capex_source_url": "https://www.secvictoria.com.au/investments/melbourne-renewable-energy-hub"
     },
     {
       "id": "melbourne-renewable-energy-hub-connection-a2",
@@ -354,7 +373,8 @@
       "bess_model": "Megapack",
       "capex_per_mw": 1.83,
       "capex_per_mwh": 0.92,
-      "duration_hours": 2.0
+      "duration_hours": 2.0,
+      "capex_source_url": "https://www.secvictoria.com.au/investments/melbourne-renewable-energy-hub"
     },
     {
       "id": "melbourne-renewable-energy-hub-connection-a3",
@@ -372,7 +392,8 @@
       "bess_model": "Megapack",
       "capex_per_mw": 1.83,
       "capex_per_mwh": 0.46,
-      "duration_hours": 4.0
+      "duration_hours": 4.0,
+      "capex_source_url": "https://www.secvictoria.com.au/investments/melbourne-renewable-energy-hub"
     },
     {
       "id": "rangebank-bess",
@@ -390,7 +411,8 @@
       "bess_model": "Gridstack",
       "capex_per_mw": 1.0,
       "capex_per_mwh": 0.5,
-      "duration_hours": 2.0
+      "duration_hours": 2.0,
+      "capex_source_url": "https://www.ekuenergy.com/what-we-do/projects/rangebank-battery-energy-storage-system"
     },
     {
       "id": "koorangie-energy-storage-system",
@@ -408,7 +430,8 @@
       "bess_model": "Megapack (grid-forming)",
       "capex_per_mw": 2.16,
       "capex_per_mwh": 1.08,
-      "duration_hours": 2.0
+      "duration_hours": 2.0,
+      "capex_source_url": "https://edifyenergy.com/project/koorangie-energy-storage-system/"
     },
     {
       "id": "chinchilla-bess",
@@ -426,7 +449,8 @@
       "bess_model": "Megapack",
       "capex_per_mw": 2.0,
       "capex_per_mwh": 1.0,
-      "duration_hours": 2.0
+      "duration_hours": 2.0,
+      "capex_source_url": "https://www.csenergy.com.au/what-we-do/firming-and-storage/chinchilla-battery"
     },
     {
       "id": "supernode-bess",
@@ -442,7 +466,8 @@
       "bess_oem": "CATL",
       "capex_per_mw": 1.39,
       "capex_per_mwh": 0.58,
-      "duration_hours": 2.4
+      "duration_hours": 2.4,
+      "capex_source_url": "https://www.quinbrook.com/news-insights/supernode-stage-1-commences-commercial-operations/"
     },
     {
       "id": "eraring-battery",
@@ -459,7 +484,8 @@
       "bess_model": "GridSolv Quantum",
       "capex_per_mw": 1.85,
       "capex_per_mwh": 0.46,
-      "duration_hours": 4.0
+      "duration_hours": 4.0,
+      "capex_source_url": "https://www.wartsila.com/media/news/20-04-2023-wartsila-selected-as-the-preferred-contractor-to-deliver-one-of-australia-s-largest-energy-storage-projects-3256698"
     },
     {
       "id": "orana-bess",
@@ -476,7 +502,8 @@
       "bess_model": "Megapack",
       "capex_per_mw": 2.17,
       "capex_per_mwh": 0.54,
-      "duration_hours": 4.0
+      "duration_hours": 4.0,
+      "capex_source_url": "https://akayshaenergy.com/projects/orana-bess"
     },
     {
       "id": "wooreen-energy-storage-system",
@@ -493,7 +520,8 @@
       "bess_model": "Quantum High Energy",
       "capex_per_mw": 2.0,
       "capex_per_mwh": 0.5,
-      "duration_hours": 4.0
+      "duration_hours": 4.0,
+      "capex_source_url": "https://www.wartsila.com/media/news/28-02-2025-wartsila-will-provide-a-350-mw-1474-mwh-energy-storage-system-for-one-of-australia-s-largest-energy-providers-3555089"
     },
     {
       "id": "tomago-bess",
@@ -511,7 +539,8 @@
       "bess_model": "Gridstack Pro",
       "capex_per_mw": 1.6,
       "capex_per_mwh": 0.4,
-      "duration_hours": 4.0
+      "duration_hours": 4.0,
+      "capex_source_url": "https://ir.fluenceenergy.com/news-releases/news-release-details/fluence-and-agl-sign-deal-deliver-500-mw-2000-mwh-tomago-battery"
     }
   ],
   "by_year": {

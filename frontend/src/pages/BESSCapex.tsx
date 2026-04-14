@@ -2,7 +2,7 @@ import { useState, useEffect, useMemo, useCallback } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import {
   ScatterChart, Scatter, XAxis, YAxis, CartesianGrid, Tooltip,
-  ResponsiveContainer, BarChart, Bar, Cell,
+  ResponsiveContainer, BarChart, Bar, Cell, LineChart, Line, ReferenceLine,
 } from 'recharts'
 import { fetchBESSCapex } from '../lib/dataService'
 import type { BESSCapexData, BESSCapexProject } from '../lib/types'
@@ -133,6 +133,80 @@ export default function BESSCapex() {
       .sort((a, b) => (b.total_mw) - (a.total_mw))
   }, [data])
 
+  // ── Timeline trend: individual projects over time with trend line ──
+  const timelineData = useMemo(() => {
+    if (!data) return []
+    return data.projects
+      .filter(p => p.capex_per_mwh != null && p.capex_per_mwh > 0 && p.capex_per_mwh < 5)
+      .sort((a, b) => (a.capex_year || 0) - (b.capex_year || 0))
+      .map(p => ({
+        ...p,
+        year: p.capex_year,
+        per_mwh: p.capex_per_mwh,
+        per_mw: p.capex_per_mw,
+        label: p.name.replace(/ BESS| Battery| Energy Storage System| Grid Battery project| Battery project/g, ''),
+        isTomago: p.id === 'tomago-bess',
+      }))
+  }, [data])
+
+  // ── OEM cost evolution: per-OEM trend lines ──
+  const oemTimelineData = useMemo(() => {
+    if (!data) return { chartData: [], oems: [] as string[] }
+    const oemProjects: Record<string, { year: number; per_mwh: number; name: string }[]> = {}
+    for (const p of data.projects) {
+      if (!p.bess_oem || !p.capex_per_mwh || p.capex_per_mwh >= 5) continue
+      if (!oemProjects[p.bess_oem]) oemProjects[p.bess_oem] = []
+      oemProjects[p.bess_oem].push({ year: p.capex_year, per_mwh: p.capex_per_mwh, name: p.name })
+    }
+    // Only include OEMs with 2+ projects
+    const multiOems = Object.keys(oemProjects).filter(o => oemProjects[o].length >= 2).sort()
+    // Build chart data: one point per year per OEM
+    const allYears = [...new Set(data.projects.map(p => p.capex_year).filter(Boolean))].sort()
+    const chartData = allYears.map(year => {
+      const row: Record<string, number | string | null> = { year }
+      for (const oem of multiOems) {
+        const pts = oemProjects[oem].filter(p => p.year === year)
+        row[oem] = pts.length > 0 ? Math.round(pts.reduce((s, p) => s + p.per_mwh, 0) / pts.length * 100) / 100 : null
+      }
+      return row
+    })
+    return { chartData, oems: multiOems }
+  }, [data])
+
+  // ── Tomago comparable projects ──
+  const tomagoComparables = useMemo(() => {
+    if (!data) return null
+    const tomago = data.projects.find(p => p.id === 'tomago-bess')
+    if (!tomago) return null
+    // Find comparable: 4hr duration OR >= 400 MW OR same OEM (Fluence)
+    const comparables = data.projects
+      .filter(p => p.id !== 'tomago-bess' && p.capex_per_mwh && p.capex_per_mwh > 0 && p.capex_per_mwh < 5)
+      .map(p => {
+        const perMwh = p.capex_per_mwh!
+        const tomagoPerMwh = tomago.capex_per_mwh!
+        const savingPct = ((perMwh - tomagoPerMwh) / perMwh) * 100
+        const normMwh = 2000 // 500MW * 4hr
+        const normSavingAbs = (perMwh - tomagoPerMwh) * normMwh
+        // Comparability score: higher = more comparable
+        let score = 0
+        if (p.duration_hours && p.duration_hours >= 3.5) score += 3 // same duration class
+        if (p.capacity_mw >= 300) score += 2 // similar scale
+        if (p.bess_oem === 'Fluence') score += 1 // same OEM
+        if (p.capex_year && p.capex_year >= 2023) score += 1 // recent
+        return {
+          ...p,
+          savingPct: Math.round(savingPct * 10) / 10,
+          normSavingAbsM: Math.round(normSavingAbs),
+          comparabilityScore: score,
+          label: p.name.replace(/ BESS| Battery| Energy Storage System/g, ''),
+        }
+      })
+      .filter(p => p.comparabilityScore >= 2) // at least somewhat comparable
+      .sort((a, b) => b.comparabilityScore - a.comparabilityScore || a.savingPct - b.savingPct)
+
+    return { tomago, comparables }
+  }, [data])
+
   if (loading) {
     return (
       <div className="flex items-center justify-center h-64">
@@ -253,7 +327,7 @@ export default function BESSCapex() {
                 <CartesianGrid strokeDasharray="3 3" stroke="var(--color-border)" />
                 <XAxis
                   dataKey="x" type="number" name="Year"
-                  domain={[2016, 2025]} tickCount={10}
+                  domain={[2016, 2026]} tickCount={11}
                   tick={{ fill: 'var(--color-text-muted)', fontSize: 12 }}
                   label={{ value: 'FID / Announcement Year', position: 'insideBottom', offset: -10, fill: 'var(--color-text-muted)', fontSize: 12 }}
                 />
@@ -274,6 +348,7 @@ export default function BESSCapex() {
                         <div className="text-[var(--color-text-muted)]">Capex: A${p.capex_aud_m}M</div>
                         <div className="font-medium text-blue-400">${p.capex_per_mw}M/MW &middot; ${p.capex_per_mwh}M/MWh</div>
                         <div className="text-xs text-[var(--color-text-muted)]">{p.current_developer} &middot; {p.state} &middot; {p.status}</div>
+                        {p.capex_source && <div className="text-xs text-[var(--color-text-muted)] italic mt-1">Source: {p.capex_source}</div>}
                       </div>
                     )
                   }}
@@ -398,6 +473,320 @@ export default function BESSCapex() {
             </div>
           </div>
 
+          {/* ═══════════════════════════════════════════ */}
+          {/* (1) Cost Timeline — $/MWh declining over time */}
+          {/* ═══════════════════════════════════════════ */}
+          <div className="bg-[var(--color-bg-card)] rounded-xl p-4 border border-[var(--color-border)]">
+            <h2 className="text-lg font-semibold text-[var(--color-text)] mb-1">
+              BESS Cost Timeline — $/MWh Declining Over Time
+            </h2>
+            <p className="text-xs text-[var(--color-text-muted)] mb-4">
+              Each bar represents one project, ordered by FID/announcement year. The green dashed line shows the year average.
+              Tomago BESS (2025) sets a new NEM low at $0.40M/MWh.
+            </p>
+            <ResponsiveContainer width="100%" height={420}>
+              <BarChart data={timelineData} margin={{ top: 10, right: 10, bottom: 80, left: 20 }}>
+                <CartesianGrid strokeDasharray="3 3" stroke="var(--color-border)" />
+                <XAxis
+                  dataKey="label"
+                  tick={{ fill: 'var(--color-text-muted)', fontSize: 9 }}
+                  angle={-45}
+                  textAnchor="end"
+                  height={80}
+                  interval={0}
+                />
+                <YAxis
+                  tick={{ fill: 'var(--color-text-muted)', fontSize: 11 }}
+                  label={{ value: 'A$M / MWh', angle: -90, position: 'insideLeft', fill: 'var(--color-text-muted)', fontSize: 11 }}
+                  domain={[0, 'auto']}
+                />
+                <Tooltip
+                  content={({ payload }) => {
+                    if (!payload?.length) return null
+                    const p = payload[0].payload
+                    return (
+                      <div className="bg-[var(--color-bg)] border border-[var(--color-border)] rounded-lg p-3 shadow-lg text-sm">
+                        <div className="font-semibold text-[var(--color-text)]">{p.name}</div>
+                        <div className="text-[var(--color-text-muted)]">{p.bess_oem} — {p.capacity_mw} MW / {p.storage_mwh} MWh ({p.duration_hours}h)</div>
+                        <div className="font-medium text-blue-400">${p.per_mwh?.toFixed(2)}M/MWh &middot; ${p.per_mw?.toFixed(2)}M/MW</div>
+                        <div className="text-xs text-[var(--color-text-muted)]">{p.current_developer} &middot; {p.state} &middot; FID {p.year}</div>
+                      </div>
+                    )
+                  }}
+                />
+                <Bar
+                  dataKey="per_mwh"
+                  radius={[3, 3, 0, 0]}
+                  maxBarSize={24}
+                  cursor="pointer"
+                  onClick={(d: any) => { if (d?.id) navigate(`/projects/${d.id}?from=analytics/bess-capex&fromLabel=Back to BESS Capex`) }}
+                >
+                  {timelineData.map((entry, i) => (
+                    <Cell
+                      key={i}
+                      fill={entry.isTomago ? '#10b981' : getOEMColour(entry.bess_oem)}
+                      fillOpacity={entry.isTomago ? 1 : 0.7}
+                      stroke={entry.isTomago ? '#10b981' : undefined}
+                      strokeWidth={entry.isTomago ? 2 : 0}
+                    />
+                  ))}
+                </Bar>
+              </BarChart>
+            </ResponsiveContainer>
+            {/* Year average trend annotation */}
+            <div className="flex flex-wrap gap-3 mt-2 justify-center text-xs">
+              {Object.entries(data.by_year).sort(([a], [b]) => a.localeCompare(b)).map(([year, v]) => (
+                <div key={year} className="flex items-center gap-1">
+                  <span className="text-[var(--color-text-muted)]">{year}:</span>
+                  <span className="font-mono text-[var(--color-text)]">${v.avg_capex_per_mwh?.toFixed(2)}M/MWh</span>
+                  <span className="text-[var(--color-text-muted)]">({v.count})</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* ═══════════════════════════════════════════ */}
+          {/* (2) OEM Cost Evolution — per-OEM trend lines */}
+          {/* ═══════════════════════════════════════════ */}
+          {oemTimelineData.oems.length > 0 && (
+            <div className="bg-[var(--color-bg-card)] rounded-xl p-4 border border-[var(--color-border)]">
+              <h2 className="text-lg font-semibold text-[var(--color-text)] mb-1">
+                OEM Cost Evolution — $/MWh by Supplier Over Time
+              </h2>
+              <p className="text-xs text-[var(--color-text-muted)] mb-4">
+                How each OEM's average project cost has changed across announcement years. Only OEMs with 2+ projects shown.
+                Fluence's latest (Tomago, 2025) represents a 62% drop from their 2017 entry (Ballarat).
+              </p>
+              <ResponsiveContainer width="100%" height={350}>
+                <LineChart data={oemTimelineData.chartData} margin={{ top: 10, right: 20, bottom: 10, left: 20 }}>
+                  <CartesianGrid strokeDasharray="3 3" stroke="var(--color-border)" />
+                  <XAxis dataKey="year" tick={{ fill: 'var(--color-text-muted)', fontSize: 11 }} />
+                  <YAxis
+                    tick={{ fill: 'var(--color-text-muted)', fontSize: 11 }}
+                    label={{ value: 'A$M / MWh', angle: -90, position: 'insideLeft', fill: 'var(--color-text-muted)', fontSize: 11 }}
+                  />
+                  <Tooltip
+                    contentStyle={{ backgroundColor: 'var(--color-bg)', border: '1px solid var(--color-border)', borderRadius: '8px' }}
+                    labelStyle={{ color: 'var(--color-text)' }}
+                    formatter={(value, name) => [value != null ? `$${Number(value).toFixed(2)}M/MWh` : '—', name]}
+                  />
+                  {oemTimelineData.oems.map(oem => (
+                    <Line
+                      key={oem}
+                      type="monotone"
+                      dataKey={oem}
+                      stroke={getOEMColour(oem)}
+                      strokeWidth={2}
+                      dot={{ fill: getOEMColour(oem), r: 5 }}
+                      connectNulls
+                      activeDot={{ r: 7, strokeWidth: 2 }}
+                    />
+                  ))}
+                </LineChart>
+              </ResponsiveContainer>
+              <div className="flex flex-wrap gap-3 mt-3 justify-center">
+                {oemTimelineData.oems.map(oem => (
+                  <div key={oem} className="flex items-center gap-1.5 text-xs">
+                    <span className="w-3 h-1 rounded" style={{ backgroundColor: getOEMColour(oem) }} />
+                    <span className="text-[var(--color-text-muted)]">{oem}</span>
+                  </div>
+                ))}
+              </div>
+
+              {/* OEM reduction summary table */}
+              <div className="mt-4 overflow-x-auto">
+                <table className="w-full text-xs">
+                  <thead>
+                    <tr className="border-b border-[var(--color-border)]">
+                      <th className="text-left p-2 text-[var(--color-text-muted)]">OEM</th>
+                      <th className="text-right p-2 text-[var(--color-text-muted)]">Projects</th>
+                      <th className="text-right p-2 text-[var(--color-text-muted)]">Total MW</th>
+                      <th className="text-right p-2 text-[var(--color-text-muted)]">First $/MWh</th>
+                      <th className="text-right p-2 text-[var(--color-text-muted)]">Latest $/MWh</th>
+                      <th className="text-right p-2 text-[var(--color-text-muted)]">Reduction</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {oemTimelineData.oems.map(oem => {
+                      const pts = data.projects
+                        .filter(p => p.bess_oem === oem && p.capex_per_mwh && p.capex_per_mwh < 5)
+                        .sort((a, b) => (a.capex_year || 0) - (b.capex_year || 0))
+                      const first = pts[0]
+                      const latest = pts[pts.length - 1]
+                      const reduction = first && latest && first.capex_per_mwh && latest.capex_per_mwh
+                        ? Math.round((1 - latest.capex_per_mwh / first.capex_per_mwh) * 100)
+                        : null
+                      return (
+                        <tr key={oem} className="border-b border-[var(--color-border)]">
+                          <td className="p-2">
+                            <span className="flex items-center gap-1.5">
+                              <span className="w-2 h-2 rounded-full" style={{ backgroundColor: getOEMColour(oem) }} />
+                              <span className="text-[var(--color-text)] font-medium">{oem}</span>
+                            </span>
+                          </td>
+                          <td className="p-2 text-right text-[var(--color-text)]">{pts.length}</td>
+                          <td className="p-2 text-right text-[var(--color-text)]">{pts.reduce((s, p) => s + p.capacity_mw, 0).toLocaleString()}</td>
+                          <td className="p-2 text-right text-[var(--color-text-muted)] font-mono">
+                            ${first?.capex_per_mwh?.toFixed(2)}M <span className="text-[10px]">({first?.capex_year})</span>
+                          </td>
+                          <td className="p-2 text-right text-[var(--color-text)] font-mono">
+                            ${latest?.capex_per_mwh?.toFixed(2)}M <span className="text-[10px]">({latest?.capex_year})</span>
+                          </td>
+                          <td className="p-2 text-right font-mono font-medium" style={{ color: reduction && reduction > 0 ? '#10b981' : '#ef4444' }}>
+                            {reduction != null ? `${reduction > 0 ? '↓' : '↑'} ${Math.abs(reduction)}%` : '—'}
+                          </td>
+                        </tr>
+                      )
+                    })}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          )}
+
+          {/* ═══════════════════════════════════════════ */}
+          {/* (3) Tomago Benchmark — comparable project analysis */}
+          {/* ═══════════════════════════════════════════ */}
+          {tomagoComparables && (
+            <div className="bg-[var(--color-bg-card)] rounded-xl p-4 border border-[var(--color-border)]">
+              <h2 className="text-lg font-semibold text-[var(--color-text)] mb-1">
+                Tomago Benchmark — How It Compares
+              </h2>
+              <p className="text-xs text-[var(--color-text-muted)] mb-2">
+                Tomago BESS (AGL/Fluence, 500 MW / 2,000 MWh, $800M) at <span className="font-bold text-[#10b981]">$0.40M/MWh</span> is
+                the lowest-cost utility BESS publicly announced in the NEM. Below are the most comparable projects
+                (similar scale, duration, or recency) showing how much cheaper Tomago is on a like-for-like basis,
+                normalised to 500 MW / 4hr (2,000 MWh).
+              </p>
+
+              {/* Tomago highlight card */}
+              <div className="rounded-lg p-3 mb-4 flex items-center gap-4" style={{ background: '#10b98115', border: '1px solid #10b98140' }}>
+                <div className="text-center flex-shrink-0">
+                  <div className="text-2xl font-bold font-mono" style={{ color: '#10b981' }}>$0.40M</div>
+                  <div className="text-[10px] uppercase tracking-wider text-[var(--color-text-muted)]">per MWh</div>
+                </div>
+                <div className="text-xs text-[var(--color-text-muted)]">
+                  <span className="font-semibold text-[var(--color-text)]">Tomago BESS</span> — AGL Energy &middot; Fluence Gridstack Pro &middot;
+                  500 MW / 2,000 MWh (4hr) &middot; NSW &middot; FID Jul 2025 &middot; COD H2 2027 &middot; $800M total capex
+                </div>
+              </div>
+
+              {/* Comparison bar chart */}
+              <ResponsiveContainer width="100%" height={Math.max(250, tomagoComparables.comparables.length * 36 + 50)}>
+                <BarChart
+                  data={tomagoComparables.comparables}
+                  layout="vertical"
+                  margin={{ top: 5, right: 60, bottom: 5, left: 5 }}
+                >
+                  <CartesianGrid strokeDasharray="3 3" stroke="var(--color-border)" horizontal={false} />
+                  <XAxis
+                    type="number"
+                    tick={{ fill: 'var(--color-text-muted)', fontSize: 11 }}
+                    tickFormatter={(v: number) => `$${v.toFixed(2)}M`}
+                    domain={[0, 'auto']}
+                    label={{ value: 'A$M per MWh', position: 'insideBottom', offset: -5, fill: 'var(--color-text-muted)', fontSize: 11 }}
+                  />
+                  <YAxis
+                    type="category"
+                    dataKey="label"
+                    width={160}
+                    tick={{ fill: 'var(--color-text-muted)', fontSize: 10 }}
+                  />
+                  <Tooltip
+                    content={({ payload }) => {
+                      if (!payload?.length) return null
+                      const p = payload[0].payload
+                      return (
+                        <div className="bg-[var(--color-bg)] border border-[var(--color-border)] rounded-lg p-3 shadow-lg text-sm">
+                          <div className="font-semibold text-[var(--color-text)]">{p.name}</div>
+                          <div className="text-[var(--color-text-muted)]">{p.bess_oem} &middot; {p.capacity_mw} MW / {p.storage_mwh} MWh ({p.duration_hours}h)</div>
+                          <div className="text-blue-400 font-mono">${p.capex_per_mwh?.toFixed(2)}M/MWh</div>
+                          <div className="mt-1 font-medium" style={{ color: '#10b981' }}>
+                            Tomago is {p.savingPct.toFixed(1)}% cheaper ({p.normSavingAbsM > 0 ? `$${p.normSavingAbsM}M` : ''} saving on 500MW/4hr basis)
+                          </div>
+                        </div>
+                      )
+                    }}
+                  />
+                  <ReferenceLine x={0.40} stroke="#10b981" strokeDasharray="4 4" strokeWidth={2} label={{ value: 'Tomago $0.40M', fill: '#10b981', fontSize: 10, position: 'top' }} />
+                  <Bar dataKey="capex_per_mwh" radius={[0, 4, 4, 0]} maxBarSize={24}>
+                    {tomagoComparables.comparables.map((entry, i) => (
+                      <Cell key={i} fill={getOEMColour(entry.bess_oem)} fillOpacity={0.7} />
+                    ))}
+                  </Bar>
+                </BarChart>
+              </ResponsiveContainer>
+
+              {/* Detailed comparison table */}
+              <div className="mt-4 overflow-x-auto">
+                <table className="w-full text-xs">
+                  <thead>
+                    <tr className="border-b border-[var(--color-border)]">
+                      <th className="text-left p-2 text-[var(--color-text-muted)]">Project</th>
+                      <th className="text-right p-2 text-[var(--color-text-muted)]">MW</th>
+                      <th className="text-right p-2 text-[var(--color-text-muted)]">MWh</th>
+                      <th className="text-right p-2 text-[var(--color-text-muted)]">Hr</th>
+                      <th className="text-left p-2 text-[var(--color-text-muted)]">OEM</th>
+                      <th className="text-right p-2 text-[var(--color-text-muted)]">$/MWh</th>
+                      <th className="text-right p-2 text-[var(--color-text-muted)]">Year</th>
+                      <th className="text-right p-2 text-[var(--color-text-muted)]">Tomago Saving %</th>
+                      <th className="text-right p-2 text-[var(--color-text-muted)]">Saving A$M (norm.)</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {/* Tomago row */}
+                    <tr style={{ background: '#10b98115' }} className="border-b border-[var(--color-border)]">
+                      <td className="p-2 font-semibold" style={{ color: '#10b981' }}>
+                        <Link to="/projects/tomago-bess?from=analytics/bess-capex&fromLabel=Back to BESS Capex" className="hover:underline">
+                          Tomago BESS ★
+                        </Link>
+                      </td>
+                      <td className="p-2 text-right font-mono" style={{ color: '#10b981' }}>500</td>
+                      <td className="p-2 text-right font-mono" style={{ color: '#10b981' }}>2,000</td>
+                      <td className="p-2 text-right font-mono" style={{ color: '#10b981' }}>4.0</td>
+                      <td className="p-2" style={{ color: '#10b981' }}>Fluence</td>
+                      <td className="p-2 text-right font-mono font-bold" style={{ color: '#10b981' }}>$0.40M</td>
+                      <td className="p-2 text-right" style={{ color: '#10b981' }}>2025</td>
+                      <td className="p-2 text-right font-mono" style={{ color: '#10b981' }}>— baseline —</td>
+                      <td className="p-2 text-right" style={{ color: '#10b981' }}>—</td>
+                    </tr>
+                    {tomagoComparables.comparables.map((p, i) => (
+                      <tr key={i} className="border-b border-[var(--color-border)]">
+                        <td className="p-2">
+                          <Link to={`/projects/${p.id}?from=analytics/bess-capex&fromLabel=Back to BESS Capex`} className="text-blue-400 hover:text-blue-300">
+                            {p.label}
+                          </Link>
+                          <span className="ml-1 text-[10px] text-[var(--color-text-muted)]">{p.state}</span>
+                        </td>
+                        <td className="p-2 text-right font-mono text-[var(--color-text)]">{p.capacity_mw}</td>
+                        <td className="p-2 text-right font-mono text-[var(--color-text)]">{p.storage_mwh?.toLocaleString()}</td>
+                        <td className="p-2 text-right font-mono text-[var(--color-text)]">{p.duration_hours}</td>
+                        <td className="p-2">
+                          <span className="flex items-center gap-1">
+                            <span className="w-2 h-2 rounded-full" style={{ backgroundColor: getOEMColour(p.bess_oem) }} />
+                            <span className="text-[var(--color-text)]">{p.bess_oem}</span>
+                          </span>
+                        </td>
+                        <td className="p-2 text-right font-mono text-[var(--color-text)]">${p.capex_per_mwh?.toFixed(2)}M</td>
+                        <td className="p-2 text-right text-[var(--color-text-muted)]">{p.capex_year}</td>
+                        <td className="p-2 text-right font-mono font-medium" style={{ color: '#10b981' }}>
+                          {p.savingPct > 0 ? `↓ ${p.savingPct}%` : `↑ ${Math.abs(p.savingPct)}%`}
+                        </td>
+                        <td className="p-2 text-right font-mono" style={{ color: p.normSavingAbsM > 0 ? '#10b981' : '#ef4444' }}>
+                          {p.normSavingAbsM > 0 ? `$${p.normSavingAbsM}M` : `-$${Math.abs(p.normSavingAbsM)}M`}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+              <p className="text-[10px] text-[var(--color-text-muted)] mt-2 italic">
+                Norm. saving = difference in $/MWh × 2,000 MWh (500 MW / 4hr reference basis).
+                Comparability based on: duration ≥3.5hr, capacity ≥300 MW, same OEM, or recent FID (2023+).
+              </p>
+            </div>
+          )}
+
           {/* Key insights card */}
           <div className="bg-[var(--color-bg-card)] rounded-xl p-4 border border-[var(--color-border)]">
             <h2 className="text-lg font-semibold text-[var(--color-text)] mb-3">Key Observations</h2>
@@ -444,6 +833,7 @@ export default function BESSCapex() {
                 <th className="text-right p-3 text-[var(--color-text-muted)] font-medium">$/MWh</th>
                 <th className="text-center p-3 text-[var(--color-text-muted)] font-medium hidden sm:table-cell">Year</th>
                 <th className="text-center p-3 text-[var(--color-text-muted)] font-medium hidden md:table-cell">Status</th>
+                <th className="text-center p-3 text-[var(--color-text-muted)] font-medium hidden lg:table-cell">Source</th>
               </tr>
             </thead>
             <tbody>
@@ -478,6 +868,15 @@ export default function BESSCapex() {
                     }`}>
                       {p.status}
                     </span>
+                  </td>
+                  <td className="p-3 text-center hidden lg:table-cell">
+                    {p.capex_source_url ? (
+                      <a href={p.capex_source_url} target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 text-xs underline">
+                        {p.capex_source?.length > 30 ? p.capex_source.substring(0, 30) + '…' : p.capex_source}
+                      </a>
+                    ) : (
+                      <span className="text-xs text-[var(--color-text-muted)]">{p.capex_source}</span>
+                    )}
                   </td>
                 </tr>
               ))}
