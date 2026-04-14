@@ -1200,8 +1200,34 @@ function EvolutionTab({ project }: { project: Project }) {
     ownership: '#8b5cf6',
   }
 
+  const isDerated = project.operational_capacity_mw != null && project.operational_capacity_mw < project.capacity_mw
+
   return (
     <div className="space-y-6">
+      {/* Derated capacity alert */}
+      {isDerated && (
+        <div className="bg-red-500/10 border border-red-500/30 rounded-xl p-4">
+          <div className="flex items-center justify-between mb-1">
+            <span className="text-xs font-semibold text-red-400">Derated Operations</span>
+            <span className="text-xs font-mono text-red-400">
+              {project.operational_capacity_mw} MW / {project.capacity_mw} MW
+              <span className="ml-1 text-red-400/60">
+                ({Math.round((project.operational_capacity_mw! / project.capacity_mw) * 100)}%)
+              </span>
+            </span>
+          </div>
+          <div className="w-full bg-red-500/10 rounded-full h-2.5 mb-2">
+            <div
+              className="bg-red-500 h-2.5 rounded-full"
+              style={{ width: `${(project.operational_capacity_mw! / project.capacity_mw) * 100}%` }}
+            />
+          </div>
+          {project.operational_capacity_note && (
+            <p className="text-[10px] text-[var(--color-text-muted)]">{project.operational_capacity_note}</p>
+          )}
+        </div>
+      )}
+
       {/* Field-level source comparison (if available) */}
       {hasFieldSources && (
         <section>

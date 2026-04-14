@@ -19,12 +19,14 @@
   "has_statcom": false,
   "has_harmonic_filter": false,
   "performance_score": 25.3,
-  "notable": "Operating at 350MW (41% capacity) due to catastrophic transformer failure Oct 2025. Replacement transformer delivery Q3 2026, full 850MW targeted end of 2026. SIPS contract ~$705M over 5 years. OEM Powin filed Chapter 11 bankruptcy June 2025.",
+  "notable": "Operating at 350 MW (41% of design capacity) due to catastrophic transformer failure Oct 2025. HVT3 ruptured beyond repair; HVT2 de-energised as precaution. Replacement transformer delivery Q3 2026, full 850 MW targeted end of 2026. SIPS contract ~$705M/5yr. OEM Powin filed Chapter 11 bankruptcy June 2025 — assets acquired by FlexGen Aug 2025.",
   "data_confidence": "good",
-  "last_updated": "2025-03-01",
-  "last_verified": "2025-03-01",
+  "last_updated": "2026-04-14",
+  "last_verified": "2026-04-14",
   "aemo_gen_info_id": "2220",
   "confidence_score": "70",
+  "operational_capacity_mw": 350.0,
+  "operational_capacity_note": "Derated from 850 MW to 350 MW since Oct 2025 transformer failure. Only HVT1 operational. Full capacity targeted end of 2026.",
   "capex_aud_m": 1000.0,
   "capex_source": "CEFC / energy-storage.news",
   "capex_year": 2022,
@@ -39,23 +41,35 @@
       "date_precision": "month",
       "event_type": "fid",
       "title": "Akaysha Energy selected for NSW SIPS battery",
-      "detail": "Akaysha (BlackRock) selected by NSW govt to build 850MW/1,680MWh battery at Eraring site. SIPS contract worth ~$705M over 5 years via Transgrid.",
-      "sources": []
+      "detail": "Akaysha (BlackRock Real Assets) selected by NSW govt to build 850 MW / 1,680 MWh battery at Munmorah site near Eraring. SIPS contract worth ~$705M over 5 years via Transgrid.",
+      "sources": [
+        {
+          "title": "NSW Government — SIPS announcement",
+          "url": "https://www.energy.nsw.gov.au/nsw-plans-and-progress/major-state-projects/waratah-super-battery",
+          "source_tier": 1
+        }
+      ]
     },
     {
       "date": "2023-01-01",
       "date_precision": "month",
       "event_type": "construction_start",
       "title": "Construction begins",
-      "detail": "Powin selected as battery OEM (2,592 Centipede Energy Segments), EKS Energy for 288 power conversion systems, CPP as EPC, Wilson Transformer for three 350MVA transformers.",
-      "sources": []
+      "detail": "Powin selected as battery OEM (2,592 Centipede Energy Segments). EKS Energy (Hitachi) for 288 power conversion systems. CPP as EPC. Wilson Transformer for three 350 MVA transformers (HVT1, HVT2, HVT3).",
+      "sources": [
+        {
+          "title": "Powin — Waratah Case Study",
+          "url": "https://powin.com/wp-content/uploads/2024/02/Waratah-Super-Battery_Case-Study-5.pdf",
+          "source_tier": 2
+        }
+      ]
     },
     {
       "date": "2024-09-02",
       "date_precision": "day",
       "event_type": "cod",
-      "title": "Commercial operations commenced",
-      "detail": "Commencement date from AEMO registration via OpenElectricity.",
+      "title": "AEMO registration — commercial operations commenced",
+      "detail": "Commencement date from AEMO registration via OpenElectricity. DUID registered as NEM's largest single battery unit.",
       "sources": []
     },
     {
@@ -71,31 +85,63 @@
       "date_precision": "day",
       "event_type": "stakeholder_issue",
       "title": "Battery OEM Powin files Chapter 11 bankruptcy",
-      "detail": "Powin filed for Chapter 11 in US Bankruptcy Court with >M debt. Causes include tariffs on Chinese imports and IRA uncertainty. Assets sold to FlexGen Aug 2025. Long-term warranty implications for Waratah.",
-      "sources": []
+      "detail": "Powin filed for Chapter 11 in US Bankruptcy Court with >$500M debt. Causes include tariffs on Chinese imports and IRA uncertainty. Long-term warranty and spare parts implications for Waratah.",
+      "sources": [
+        {
+          "title": "Energy-Storage.News — Powin Chapter 11",
+          "url": "https://www.energy-storage.news/powin-files-for-chapter-11-bankruptcy/",
+          "source_tier": 2
+        }
+      ]
+    },
+    {
+      "date": "2025-08-01",
+      "date_precision": "month",
+      "event_type": "notable",
+      "title": "Powin assets acquired by FlexGen",
+      "detail": "FlexGen acquired Powin's assets out of Chapter 11 bankruptcy. Warranty and service continuity for Waratah to be confirmed under new ownership.",
+      "sources": [
+        {
+          "title": "Energy-Storage.News — FlexGen acquires Powin",
+          "url": "https://www.energy-storage.news/flexgen-acquires-powin-assets/",
+          "source_tier": 2
+        }
+      ]
     },
     {
       "date": "2025-08-01",
       "date_precision": "month",
       "event_type": "cod",
-      "title": "Partial COD at 350MW (41% capacity)",
-      "detail": "First 350MW/700MWh commenced operations under SIPS obligations using one of three transformers (HVT1). Battery registered as NEM largest single DUID.",
-      "sources": []
+      "title": "Partial COD — 350 MW (41% of design capacity)",
+      "detail": "First 350 MW / 700 MWh commenced operations under SIPS obligations using transformer HVT1 only. HVT2 and HVT3 not yet energised. Battery operating as NEM's largest single DUID but at less than half design capacity.",
+      "sources": [
+        {
+          "title": "Akaysha Energy — Waratah Super Battery",
+          "url": "https://akayshaenergy.com/projects/waratah-super-battery",
+          "source_tier": 1
+        }
+      ]
     },
     {
       "date": "2025-10-18",
       "date_precision": "day",
       "event_type": "stakeholder_issue",
       "title": "Catastrophic transformer failure (HVT3)",
-      "detail": "Wilson Transformer HVT3 suffered catastrophic internal fault 4 hours before completing final Hold Point 5 testing. Overpressure event ruptured tank wall. Transformer beyond repair. HVT2 also de-energised as precaution. Battery capped at 350MW. Estimated loss AU-80M.",
-      "sources": []
+      "detail": "Wilson Transformer HVT3 suffered catastrophic internal fault 4 hours before completing final Hold Point 5 testing. Overpressure event ruptured tank wall — transformer beyond repair. HVT2 also de-energised as precaution pending inspection. Battery capped at 350 MW (HVT1 only). Estimated loss A$80M+.",
+      "sources": [
+        {
+          "title": "RenewEconomy — Waratah transformer failure",
+          "url": "https://reneweconomy.com.au/waratah-super-battery-transformer-failure/",
+          "source_tier": 2
+        }
+      ]
     },
     {
       "date": "2025-11-20",
       "date_precision": "day",
       "event_type": "stakeholder_issue",
       "title": "Full plant shutdown for transformer remediation",
-      "detail": "Full balance-of-plant shutdown 20 Nov to 2 Dec 2025 for HVT2 inspection and remediation works.",
+      "detail": "Full balance-of-plant shutdown 20 Nov to 2 Dec 2025 for HVT2 inspection and remediation works. Zero generation during shutdown period.",
       "sources": []
     },
     {
@@ -107,34 +153,59 @@
       "sources": []
     },
     {
+      "date": "2026-04-01",
+      "date_precision": "month",
+      "event_type": "notable",
+      "title": "HVT2 remediation — return to service pending",
+      "detail": "HVT2 inspection and remediation works completed. Return to service pending final testing and AEMO approval. Would restore capacity to ~700 MW (HVT1 + HVT2).",
+      "sources": []
+    },
+    {
       "date": "2026-12-01",
       "date_precision": "quarter",
       "event_type": "notable",
-      "title": "Full 850MW operations targeted end of 2026",
-      "detail": "All three transformers operational targeted for end of 2026 pending HVT3 replacement delivery (Q3 2026) and HVT2 remediation completion.",
+      "title": "Full 850 MW operations targeted end of 2026",
+      "detail": "All three transformers (HVT1, HVT2, HVT3) operational targeted for end of 2026. Dependent on HVT3 replacement delivery (Q3 2026) and successful commissioning.",
       "sources": []
     }
   ],
   "ownership_history": [
     {
       "period": "2022-present",
-      "owner": "Akaysha Energy (BlackRock)",
+      "owner": "Akaysha Energy (BlackRock Real Assets)",
       "role": "Developer & Operator"
     }
   ],
-  "cod_history": [],
+  "cod_history": [
+    {
+      "date": "2022-06-01",
+      "estimate": "2025",
+      "source": "NSW SIPS contract"
+    },
+    {
+      "date": "2024-09-02",
+      "estimate": "2024-09 (AEMO registration)",
+      "source": "AEMO / OpenElectricity"
+    },
+    {
+      "date": "2025-08-01",
+      "estimate": "2025-08 (partial 350 MW)",
+      "source": "Akaysha Energy"
+    }
+  ],
   "suppliers": [
     {
       "role": "bess_oem",
-      "supplier": "Powin",
+      "supplier": "Powin (now FlexGen)",
       "model": "Centipede Energy Segment",
       "quantity": 2592,
-      "grid_forming": false
+      "grid_forming": false,
+      "source_url": "https://powin.com/wp-content/uploads/2024/02/Waratah-Super-Battery_Case-Study-5.pdf"
     },
     {
       "role": "inverter",
-      "supplier": "EKS Energy (Hitachi)",
-      "model": "Power conversion system",
+      "supplier": "EKS Energy (Hitachi Energy)",
+      "model": "Power Conversion System (modular)",
       "quantity": 288,
       "grid_forming": false,
       "source_url": "https://powin.com/wp-content/uploads/2024/02/Waratah-Super-Battery_Case-Study-5.pdf"
@@ -166,7 +237,7 @@
   "cost_sources": [],
   "stakeholder_issues": [],
   "eis_specs": {
-    "document_title": "Waratah Super Battery \u2014 State Significant Development Assessment (NSW IPC SSD-2022-0195)",
+    "document_title": "Waratah Super Battery — State Significant Development Assessment (NSW IPC SSD-2022-0195)",
     "document_url": "https://www.planningportal.nsw.gov.au/major-projects/projects/waratah-super-battery",
     "document_year": 2022,
     "cell_chemistry": "LFP",
@@ -188,12 +259,67 @@
     "connection_distance_km": 2.0,
     "connection_distance_note": "~2 km from BESS site to TransGrid Tomago 330 kV substation, Hunter Valley NSW.",
     "connection_augmentation": "TransGrid Tomago substation upgrade for 850 MW BESS. NSW IPC SSD assessment included detailed TransGrid connection feasibility. Critical grid support as Hunter Valley coal plants retire.",
-    "notes": "850 MW / 1,680 MWh (2-hour) BESS, Tomago, Hunter Valley NSW. Developer: Akaysha Energy (BlackRock Real Assets). Technology: Powin Centipede Energy Segment (LFP, CATL). Inverter: EKS Energy (Hitachi Energy) PCS. EPC: CPP. NSW IPC SSD-2022-0195. Now operating (2025). One of the largest grid-scale batteries in the world. TransGrid NSP confirmed in project data."
+    "notes": "850 MW / 1,680 MWh (2-hour) BESS, Munmorah/Tomago, Hunter Valley NSW. Developer: Akaysha Energy (BlackRock Real Assets). Technology: Powin Centipede Energy Segment (LFP, CATL cells). Inverter: EKS Energy (Hitachi Energy) PCS x288. EPC: CPP. Three Wilson Transformer 350 MVA units (HVT1/HVT2/HVT3). NSW SIPS contract ~$705M/5yr via TransGrid. HVT3 catastrophic failure Oct 2025 — operating at 350 MW (41%) on HVT1 only."
+  },
+  "field_sources": {
+    "capacity_mw": [
+      {"value": 850, "source": "AEMO Generation Information", "date": "2026-01-30", "tier": 1, "note": "Design/registered capacity — actual operational capacity 350 MW since Oct 2025 transformer failure"},
+      {"value": 850, "source": "NSW SIPS contract", "date": "2022-06-01", "tier": 1},
+      {"value": 350, "source": "Operational reality (HVT1 only)", "date": "2025-10-18", "tier": 1, "note": "Derated to 41% of design capacity after HVT3 failure; HVT2 de-energised"}
+    ],
+    "storage_mwh": [
+      {"value": 1680, "source": "AEMO Generation Information", "date": "2026-01-30", "tier": 1},
+      {"value": 700, "source": "Operational reality (HVT1 only)", "date": "2025-10-18", "tier": 1, "note": "Only ~700 MWh accessible via single transformer"}
+    ],
+    "capex_aud_m": [
+      {"value": 1000, "source": "CEFC / energy-storage.news", "date": "2022-06-01", "tier": 2},
+      {"value": 705, "source": "NSW SIPS contract value (5yr)", "date": "2022-06-01", "tier": 1, "note": "SIPS revenue contract, not capex — but indicates project economics underwrite"}
+    ],
+    "bess_oem": [
+      {"value": "Powin (Centipede)", "source": "Akaysha / Powin case study", "date": "2023-01-01", "tier": 1},
+      {"value": "FlexGen (successor)", "source": "Chapter 11 asset sale", "date": "2025-08-01", "tier": 2, "note": "Powin assets acquired by FlexGen after bankruptcy — warranty and service continuity TBC"}
+    ],
+    "status": [
+      {"value": "operating", "source": "AEMO / OpenElectricity", "date": "2024-09-02", "tier": 1, "note": "Registered as operating but at 350 MW (41%) since Oct 2025 transformer failure"},
+      {"value": "partial operations", "source": "Akaysha / industry reporting", "date": "2025-10-18", "tier": 2, "note": "De facto partial operations — AEMO still shows 'operating' at full registered capacity"}
+    ],
+    "cod_current": [
+      {"value": "2024-09-02", "source": "AEMO registration", "date": "2024-09-02", "tier": 1},
+      {"value": "2025-08", "source": "Akaysha (partial 350 MW COD)", "date": "2025-08-01", "tier": 1},
+      {"value": "end 2026", "source": "Industry reporting (full 850 MW target)", "date": "2026-02-01", "tier": 2, "note": "Contingent on HVT3 replacement delivery Q3 2026 and successful commissioning"}
+    ]
   },
   "sources": [
     {
-      "title": "AEMO Generation Information",
-      "url": "https://aemo.com.au"
+      "title": "AEMO Generation Information Jan 2026",
+      "url": "https://aemo.com.au/energy-systems/electricity/national-electricity-market-nem/nem-forecasting-and-planning/forecasting-and-planning-data/generation-information",
+      "date": "2026-01-30",
+      "source_tier": 1
+    },
+    {
+      "title": "NSW Government — Waratah Super Battery",
+      "url": "https://www.energy.nsw.gov.au/nsw-plans-and-progress/major-state-projects/waratah-super-battery",
+      "source_tier": 1
+    },
+    {
+      "title": "Akaysha Energy — Waratah Super Battery",
+      "url": "https://akayshaenergy.com/projects/waratah-super-battery",
+      "source_tier": 1
+    },
+    {
+      "title": "AER — SIPS Battery Service Determination",
+      "url": "https://www.aer.gov.au/industry/registers/determinations/waratah-super-battery-sips-battery-service",
+      "source_tier": 1
+    },
+    {
+      "title": "Powin — Waratah Case Study",
+      "url": "https://powin.com/wp-content/uploads/2024/02/Waratah-Super-Battery_Case-Study-5.pdf",
+      "source_tier": 2
+    },
+    {
+      "title": "RenewEconomy — Waratah Super Battery",
+      "url": "https://reneweconomy.com.au/waratah-super-battery/",
+      "source_tier": 2
     }
   ]
 }

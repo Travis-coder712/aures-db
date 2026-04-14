@@ -238,6 +238,10 @@ export interface Project {
   // Staged projects (e.g. Eraring Battery — multiple build stages)
   stages?: ProjectStage[]
 
+  // Derated/partial operations (e.g. Waratah Super Battery — transformer failure)
+  operational_capacity_mw?: number
+  operational_capacity_note?: string
+
   // Metadata
   sources: SourceReference[]
   data_confidence: Confidence
