@@ -260,6 +260,128 @@ function StateComparisonChart({ data }: { data: BatteryWatchData }) {
 }
 
 // ============================================================
+// State Buildout Chart — cumulative MW with status layers
+// ============================================================
+
+function StateBuildoutChart({ projects, stateName }: { projects: BatteryWatchProject[]; stateName: string }) {
+  const [showLayers, setShowLayers] = useState({ operating: true, construction: true, development: false })
+
+  const chartData = useMemo(() => {
+    // Build timeline points from project COD dates
+    type Point = { date: string; label: string; mw: number; status: string }
+    const points: Point[] = []
+
+    for (const p of projects) {
+      if (!p.cod || p.cod === 'TBD') continue
+      points.push({ date: p.cod, label: p.name, mw: p.capacity_mw, status: p.status })
+    }
+
+    // Sort by date
+    points.sort((a, b) => a.date.localeCompare(b.date))
+
+    // Build cumulative series per layer
+    let opCum = 0, conCum = 0, devCum = 0
+    const data: { date: string; operating: number; construction: number; development: number; shortDate: string }[] = []
+
+    for (const pt of points) {
+      if (pt.status === 'operating' || pt.status === 'commissioning') opCum += pt.mw
+      else if (pt.status === 'construction') conCum += pt.mw
+      else if (pt.status === 'development') devCum += pt.mw
+
+      data.push({
+        date: pt.date,
+        operating: opCum,
+        construction: opCum + conCum,
+        development: opCum + conCum + devCum,
+        shortDate: new Date(pt.date).toLocaleDateString('en-AU', { month: 'short', year: '2-digit' }),
+      })
+    }
+
+    // Deduplicate same shortDate — keep last
+    const seen = new Map<string, typeof data[number]>()
+    for (const d of data) seen.set(d.shortDate, d)
+    return [...seen.values()]
+  }, [projects])
+
+  if (chartData.length < 2) return null
+
+  return (
+    <div className="rounded-lg p-4" style={{ background: '#1e293b', border: '1px solid #334155' }}>
+      <h3 className="text-sm font-semibold mb-1" style={{ color: '#f1f5f9' }}>{stateName} BESS Capacity Buildout</h3>
+      <p className="text-xs mb-3" style={{ color: '#94a3b8' }}>
+        Cumulative capacity by project COD date. Toggle layers to see operating, construction, and development pipeline.
+      </p>
+      <div className="flex gap-3 mb-3">
+        {[
+          { key: 'operating' as const, label: 'Operating', colour: '#10b981' },
+          { key: 'construction' as const, label: 'Construction', colour: '#3b82f6' },
+          { key: 'development' as const, label: 'Development (FID)', colour: '#8b5cf6' },
+        ].map(layer => (
+          <label key={layer.key} className="flex items-center gap-1.5 text-xs cursor-pointer" style={{ color: '#94a3b8' }}>
+            <input
+              type="checkbox"
+              checked={showLayers[layer.key]}
+              onChange={() => setShowLayers(s => ({ ...s, [layer.key]: !s[layer.key] }))}
+              style={{ accentColor: layer.colour }}
+            />
+            <span className="w-2 h-2 rounded-full" style={{ background: layer.colour }} />
+            {layer.label}
+          </label>
+        ))}
+      </div>
+      <div style={{ width: '100%', height: 280 }}>
+        <ResponsiveContainer>
+          <AreaChart data={chartData} margin={{ top: 10, right: 30, left: 10, bottom: 20 }}>
+            <defs>
+              <linearGradient id={`grad-op-${stateName}`} x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stopColor="#10b981" stopOpacity={0.4} />
+                <stop offset="100%" stopColor="#10b981" stopOpacity={0.05} />
+              </linearGradient>
+              <linearGradient id={`grad-con-${stateName}`} x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stopColor="#3b82f6" stopOpacity={0.3} />
+                <stop offset="100%" stopColor="#3b82f6" stopOpacity={0.05} />
+              </linearGradient>
+              <linearGradient id={`grad-dev-${stateName}`} x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stopColor="#8b5cf6" stopOpacity={0.2} />
+                <stop offset="100%" stopColor="#8b5cf6" stopOpacity={0.05} />
+              </linearGradient>
+            </defs>
+            <CartesianGrid strokeDasharray="3 3" stroke="#334155" />
+            <XAxis
+              dataKey="shortDate"
+              tick={{ fill: '#94a3b8', fontSize: 10 }}
+              stroke="#334155"
+              angle={-45}
+              textAnchor="end"
+              height={50}
+              interval="preserveStartEnd"
+            />
+            <YAxis
+              tick={{ fill: '#94a3b8', fontSize: 11 }}
+              stroke="#334155"
+              tickFormatter={(v: number) => formatMW(v)}
+            />
+            <Tooltip
+              contentStyle={{ background: '#1e293b', border: '1px solid #334155', borderRadius: 8, color: '#f1f5f9' }}
+              formatter={(value, name) => [formatMW(value as number), name === 'development' ? 'Incl. Development' : name === 'construction' ? 'Incl. Construction' : 'Operating']}
+            />
+            {showLayers.development && (
+              <Area type="stepAfter" dataKey="development" stroke="#8b5cf6" strokeWidth={1} fill={`url(#grad-dev-${stateName})`} strokeDasharray="4 2" />
+            )}
+            {showLayers.construction && (
+              <Area type="stepAfter" dataKey="construction" stroke="#3b82f6" strokeWidth={1.5} fill={`url(#grad-con-${stateName})`} />
+            )}
+            {showLayers.operating && (
+              <Area type="stepAfter" dataKey="operating" stroke="#10b981" strokeWidth={2} fill={`url(#grad-op-${stateName})`} />
+            )}
+          </AreaChart>
+        </ResponsiveContainer>
+      </div>
+    </div>
+  )
+}
+
+// ============================================================
 // Project Table
 // ============================================================
 
@@ -345,6 +467,23 @@ function ProjectTable({ projects }: { projects: BatteryWatchProject[] }) {
             </tr>
           ))}
         </tbody>
+        <tfoot>
+          <tr style={{ background: '#0f172a', borderTop: '2px solid #334155' }}>
+            <td style={{ ...tdStyle, fontWeight: 700 }}>Total ({projects.length})</td>
+            <td style={tdStyle} />
+            <td style={{ ...tdStyle, textAlign: 'right', fontWeight: 700, fontVariantNumeric: 'tabular-nums' }}>
+              {projects.reduce((s, p) => s + p.capacity_mw, 0).toLocaleString()}
+            </td>
+            <td style={{ ...tdStyle, textAlign: 'right', fontWeight: 700, fontVariantNumeric: 'tabular-nums' }}>
+              {projects.reduce((s, p) => s + p.storage_mwh, 0).toLocaleString()}
+            </td>
+            <td style={{ ...tdStyle, textAlign: 'center', color: '#94a3b8', fontSize: 11 }}>
+              {(() => { const totalMW = projects.reduce((s, p) => s + p.capacity_mw, 0); const totalMWh = projects.reduce((s, p) => s + p.storage_mwh, 0); return totalMW > 0 ? `${(totalMWh / totalMW).toFixed(1)}h avg` : '—' })()}
+            </td>
+            <td style={tdStyle} />
+            <td style={tdStyle} />
+          </tr>
+        </tfoot>
       </table>
     </div>
   )
@@ -567,6 +706,8 @@ export default function BatteryWatch() {
             <NSWTimelineChart milestones={data.nsw_focus.timeline_milestones} />
           </div>
 
+          <StateBuildoutChart projects={data.nsw_focus.projects} stateName="NSW" />
+
           {/* Timeline events list */}
           <div className="rounded-lg p-4" style={{ background: '#1e293b', border: '1px solid #334155' }}>
             <h3 className="text-sm font-semibold mb-3" style={{ color: '#f1f5f9' }}>Milestone Events</h3>
@@ -687,6 +828,8 @@ export default function BatteryWatch() {
             </div>
           )}
 
+          <StateBuildoutChart projects={data.qld_focus.projects} stateName="QLD" />
+
           {/* QLD timeline milestones */}
           {data.qld_focus.timeline_milestones.length > 0 && (
             <div className="rounded-lg p-4" style={{ background: '#1e293b', border: '1px solid #334155' }}>
@@ -748,6 +891,7 @@ export default function BatteryWatch() {
             <StatCard label="VIC Operating" value={formatMW(data.vic_focus.total_operating_mw)} sub={formatMWh(data.vic_focus.total_operating_mwh)} colour="#8b5cf6" />
             <StatCard label="VIC Construction" value={formatMW(data.vic_focus.total_construction_mw)} sub={formatMWh(data.vic_focus.total_construction_mwh)} colour="#3b82f6" />
           </div>
+          <StateBuildoutChart projects={data.vic_focus.projects} stateName="VIC" />
           {data.vic_focus.timeline_milestones.length > 0 && (
             <div className="rounded-lg p-4" style={{ background: '#1e293b', border: '1px solid #334155' }}>
               <h3 className="text-lg font-semibold mb-3" style={{ color: '#f1f5f9' }}>VIC Battery Milestones</h3>
@@ -808,6 +952,7 @@ export default function BatteryWatch() {
             <StatCard label="SA Operating" value={formatMW(data.sa_focus.total_operating_mw)} sub={formatMWh(data.sa_focus.total_operating_mwh)} colour="#10b981" />
             <StatCard label="SA Construction" value={formatMW(data.sa_focus.total_construction_mw)} sub={formatMWh(data.sa_focus.total_construction_mwh)} colour="#3b82f6" />
           </div>
+          <StateBuildoutChart projects={data.sa_focus.projects} stateName="SA" />
           {data.sa_focus.timeline_milestones.length > 0 && (
             <div className="rounded-lg p-4" style={{ background: '#1e293b', border: '1px solid #334155' }}>
               <h3 className="text-lg font-semibold mb-3" style={{ color: '#f1f5f9' }}>SA Battery Milestones</h3>

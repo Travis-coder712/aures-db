@@ -582,7 +582,7 @@ export default function EnergyMix() {
               {stateDetail.pipeline.length > 0 ? (
                 <div className="space-y-1.5 max-h-64 overflow-y-auto">
                   {stateDetail.pipeline
-                    .sort((a, b) => a.cod_year.localeCompare(b.cod_year))
+                    .sort((a, b) => (a.cod_year ?? 'zzzz').localeCompare(b.cod_year ?? 'zzzz'))
                     .map((p, i) => (
                     <div
                       key={i}
@@ -604,7 +604,7 @@ export default function EnergyMix() {
                       </div>
                       <div className="text-right text-[var(--color-text-muted)]">
                         <span className="font-medium text-[var(--color-text)]">{p.mw.toLocaleString()} MW</span>
-                        <span className="ml-2 text-xs">COD {p.cod_year}</span>
+                        <span className="ml-2 text-xs">COD {p.cod_year ?? 'TBD'}</span>
                       </div>
                     </div>
                   ))}

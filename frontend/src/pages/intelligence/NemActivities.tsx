@@ -85,8 +85,11 @@ export default function NemActivities() {
   })
   const [expandedMonths, setExpandedMonths] = useState<Set<string>>(new Set())
   const [showAll, setShowAll] = useState(false)
+  const [hideOffshore, setHideOffshore] = useState(false)
+  const [hideCodChange, setHideCodChange] = useState(true) // OFF by default — very noisy
   const [eventTypeFilters, setEventTypeFilters] = useState<Record<string, boolean>>({
-    fid: true, construction_start: true, cod: true, first_generation: true,
+    fid: true, construction_start: true, cod: true, energisation: true,
+    planning: true, notable: true, other: true,
   })
 
   useEffect(() => {
@@ -103,24 +106,52 @@ export default function NemActivities() {
 
   const EVENT_TYPE_TOGGLES = [
     { id: 'fid', label: 'FID', colour: '#f59e0b' },
-    { id: 'construction_start', label: 'Construction Start', colour: '#10b981' },
+    { id: 'construction_start', label: 'Construction', colour: '#10b981' },
     { id: 'cod', label: 'COD', colour: '#3b82f6' },
-    { id: 'first_generation', label: 'First Generation', colour: '#8b5cf6' },
+    { id: 'energisation', label: 'Energisation', colour: '#8b5cf6' },
+    { id: 'planning', label: 'Planning', colour: '#6366f1' },
+    { id: 'notable', label: 'Notable', colour: '#ec4899' },
+    { id: 'other', label: 'Other', colour: '#6b7280' },
   ] as const
 
   const hasEventTypeFilter = Object.values(eventTypeFilters).some(v => !v)
 
+  const classifyEventType = (et: string): string => {
+    if (et === 'fid') return 'fid'
+    if (et === 'construction_start' || et === 'equipment_order') return 'construction_start'
+    if (et === 'cod' || et === 'commissioning') return 'cod'
+    if (et === 'energisation') return 'energisation'
+    if (et === 'planning_submitted' || et === 'planning_approved' || et === 'planning_modified' || et === 'planning_rejected') return 'planning'
+    if (et === 'notable' || et === 'stakeholder_issue') return 'notable'
+    return 'other'
+  }
+
   const filterEvents = (events: NemActivityEvent[]): NemActivityEvent[] => {
-    if (!hasEventTypeFilter) return events
     return events.filter(evt => {
-      const et = evt.event_type
-      if (et === 'fid' && !eventTypeFilters.fid) return false
-      if (et === 'construction_start' && !eventTypeFilters.construction_start) return false
-      if ((et === 'cod' || et === 'commissioning') && !eventTypeFilters.cod) return false
-      if (et === 'first_generation' && !eventTypeFilters.first_generation) return false
+      // Hide offshore wind
+      if (hideOffshore && evt.technology === 'offshore_wind') return false
+      // Hide batch cod_change
+      if (hideCodChange && evt.event_type === 'cod_change') return false
+      // Event type filter
+      if (hasEventTypeFilter) {
+        const cls = classifyEventType(evt.event_type)
+        if (!eventTypeFilters[cls]) return false
+      }
       return true
     })
   }
+
+  // Count cod_change events for display
+  const codChangeCount = useMemo(() => {
+    if (!data) return 0
+    let count = 0
+    for (const m of data.months) {
+      for (const events of Object.values(m.sections)) {
+        count += events.filter(e => e.event_type === 'cod_change').length
+      }
+    }
+    return count
+  }, [data])
 
   const filteredMonths = useMemo(() => {
     if (!data) return []
@@ -134,7 +165,7 @@ export default function NemActivities() {
       return (Object.keys(m.sections) as SectionId[]).some(sec => m.sections[sec].length > 0)
     })
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [data, visible, eventTypeFilters])
+  }, [data, visible, eventTypeFilters, hideOffshore, hideCodChange])
 
   const displayMonths = showAll ? filteredMonths : filteredMonths.slice(0, 24)
 
@@ -197,12 +228,26 @@ export default function NemActivities() {
         ))}
         {hasEventTypeFilter && (
           <button
-            onClick={() => setEventTypeFilters({ fid: true, construction_start: true, cod: true, first_generation: true })}
+            onClick={() => setEventTypeFilters({ fid: true, construction_start: true, cod: true, energisation: true, planning: true, notable: true, other: true })}
             className="text-[10px] text-[var(--color-primary)] hover:underline ml-1"
           >
             Reset
           </button>
         )}
+      </div>
+
+      {/* Noise filters */}
+      <div className="flex flex-wrap items-center gap-3">
+        <label className="flex items-center gap-1.5 text-[11px] text-[var(--color-text-muted)] cursor-pointer">
+          <input type="checkbox" checked={hideCodChange} onChange={() => setHideCodChange(v => !v)}
+            className="rounded border-[var(--color-border)] accent-[var(--color-primary)]" />
+          Hide COD estimate updates <span className="opacity-60">({codChangeCount})</span>
+        </label>
+        <label className="flex items-center gap-1.5 text-[11px] text-[var(--color-text-muted)] cursor-pointer">
+          <input type="checkbox" checked={hideOffshore} onChange={() => setHideOffshore(v => !v)}
+            className="rounded border-[var(--color-border)] accent-[var(--color-primary)]" />
+          Hide offshore wind
+        </label>
       </div>
 
       {/* Stat cards */}
