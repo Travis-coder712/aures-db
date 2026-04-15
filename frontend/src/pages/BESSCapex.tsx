@@ -184,9 +184,9 @@ export default function BESSCapex() {
       .map(p => {
         const perMwh = p.capex_per_mwh!
         const tomagoPerMwh = tomago.capex_per_mwh!
-        const savingPct = ((perMwh - tomagoPerMwh) / perMwh) * 100
+        const premiumPct = ((perMwh - tomagoPerMwh) / tomagoPerMwh) * 100
         const normMwh = 2000 // 500MW * 4hr
-        const normSavingAbs = (perMwh - tomagoPerMwh) * normMwh
+        const normPremiumAbs = (perMwh - tomagoPerMwh) * normMwh
         // Comparability score: higher = more comparable
         let score = 0
         if (p.duration_hours && p.duration_hours >= 3.5) score += 3 // same duration class
@@ -195,14 +195,14 @@ export default function BESSCapex() {
         if (p.capex_year && p.capex_year >= 2023) score += 1 // recent
         return {
           ...p,
-          savingPct: Math.round(savingPct * 10) / 10,
-          normSavingAbsM: Math.round(normSavingAbs),
+          premiumPct: Math.round(premiumPct * 10) / 10,
+          normPremiumAbsM: Math.round(normPremiumAbs),
           comparabilityScore: score,
           label: p.name.replace(/ BESS| Battery| Energy Storage System/g, ''),
         }
       })
       .filter(p => p.comparabilityScore >= 2) // at least somewhat comparable
-      .sort((a, b) => b.comparabilityScore - a.comparabilityScore || a.savingPct - b.savingPct)
+      .sort((a, b) => b.comparabilityScore - a.comparabilityScore || b.premiumPct - a.premiumPct)
 
     return { tomago, comparables }
   }, [data])
@@ -655,7 +655,7 @@ export default function BESSCapex() {
               <p className="text-xs text-[var(--color-text-muted)] mb-2">
                 Tomago BESS (AGL/Fluence, 500 MW / 2,000 MWh, $800M) at <span className="font-bold text-[#10b981]">$0.40M/MWh</span> is
                 the lowest-cost utility BESS publicly announced in the NEM. Below are the most comparable projects
-                (similar scale, duration, or recency) showing how much cheaper Tomago is on a like-for-like basis,
+                (similar scale, duration, or recency) showing how much more expensive each project is vs Tomago,
                 normalised to 500 MW / 4hr (2,000 MWh).
               </p>
 
@@ -701,8 +701,10 @@ export default function BESSCapex() {
                           <div className="font-semibold text-[var(--color-text)]">{p.name}</div>
                           <div className="text-[var(--color-text-muted)]">{p.bess_oem} &middot; {p.capacity_mw} MW / {p.storage_mwh} MWh ({p.duration_hours}h)</div>
                           <div className="text-blue-400 font-mono">${p.capex_per_mwh?.toFixed(2)}M/MWh</div>
-                          <div className="mt-1 font-medium" style={{ color: '#10b981' }}>
-                            Tomago is {p.savingPct.toFixed(1)}% cheaper ({p.normSavingAbsM > 0 ? `$${p.normSavingAbsM}M` : ''} saving on 500MW/4hr basis)
+                          <div className="mt-1 font-medium" style={{ color: p.premiumPct > 0 ? '#f59e0b' : '#10b981' }}>
+                            {p.premiumPct > 0
+                              ? `${p.premiumPct.toFixed(1)}% more expensive than Tomago (+$${p.normPremiumAbsM}M on 500MW/4hr basis)`
+                              : `${Math.abs(p.premiumPct).toFixed(1)}% cheaper than Tomago`}
                           </div>
                         </div>
                       )
@@ -729,8 +731,8 @@ export default function BESSCapex() {
                       <th className="text-left p-2 text-[var(--color-text-muted)]">OEM</th>
                       <th className="text-right p-2 text-[var(--color-text-muted)]">$/MWh</th>
                       <th className="text-right p-2 text-[var(--color-text-muted)]">Year</th>
-                      <th className="text-right p-2 text-[var(--color-text-muted)]">Tomago Saving %</th>
-                      <th className="text-right p-2 text-[var(--color-text-muted)]">Saving A$M (norm.)</th>
+                      <th className="text-right p-2 text-[var(--color-text-muted)]">vs Tomago</th>
+                      <th className="text-right p-2 text-[var(--color-text-muted)]">Extra Cost (norm.)</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -769,11 +771,11 @@ export default function BESSCapex() {
                         </td>
                         <td className="p-2 text-right font-mono text-[var(--color-text)]">${p.capex_per_mwh?.toFixed(2)}M</td>
                         <td className="p-2 text-right text-[var(--color-text-muted)]">{p.capex_year}</td>
-                        <td className="p-2 text-right font-mono font-medium" style={{ color: '#10b981' }}>
-                          {p.savingPct > 0 ? `↓ ${p.savingPct}%` : `↑ ${Math.abs(p.savingPct)}%`}
+                        <td className="p-2 text-right font-mono font-medium" style={{ color: p.premiumPct > 0 ? '#f59e0b' : '#10b981' }}>
+                          {p.premiumPct > 0 ? `+${p.premiumPct}%` : `${p.premiumPct}%`}
                         </td>
-                        <td className="p-2 text-right font-mono" style={{ color: p.normSavingAbsM > 0 ? '#10b981' : '#ef4444' }}>
-                          {p.normSavingAbsM > 0 ? `$${p.normSavingAbsM}M` : `-$${Math.abs(p.normSavingAbsM)}M`}
+                        <td className="p-2 text-right font-mono" style={{ color: p.normPremiumAbsM > 0 ? '#f59e0b' : '#10b981' }}>
+                          {p.normPremiumAbsM > 0 ? `+$${p.normPremiumAbsM}M` : `-$${Math.abs(p.normPremiumAbsM)}M`}
                         </td>
                       </tr>
                     ))}
@@ -781,7 +783,7 @@ export default function BESSCapex() {
                 </table>
               </div>
               <p className="text-[10px] text-[var(--color-text-muted)] mt-2 italic">
-                Norm. saving = difference in $/MWh × 2,000 MWh (500 MW / 4hr reference basis).
+                Extra cost = difference in $/MWh × 2,000 MWh (500 MW / 4hr reference basis).
                 Comparability based on: duration ≥3.5hr, capacity ≥300 MW, same OEM, or recent FID (2023+).
               </p>
             </div>
