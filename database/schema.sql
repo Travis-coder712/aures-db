@@ -286,6 +286,31 @@ CREATE TABLE IF NOT EXISTS project_stages (
 CREATE INDEX IF NOT EXISTS idx_project_stages_project ON project_stages(project_id);
 
 -- ============================================================
+-- BESS BIDS: Daily bid/offer data from NEMWEB MMSDM archives
+-- ============================================================
+
+CREATE TABLE IF NOT EXISTS bess_daily_bids (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    settlement_date TEXT NOT NULL,
+    duid TEXT NOT NULL,
+    project_id TEXT,
+    bid_type TEXT NOT NULL,       -- ENERGY, LOWER5MIN, RAISE5MIN, etc.
+    direction TEXT NOT NULL,      -- GEN, LOAD, BIDIRECTIONAL
+    participant_id TEXT,
+    rebid_explanation TEXT,
+    priceband1 REAL, priceband2 REAL, priceband3 REAL, priceband4 REAL, priceband5 REAL,
+    priceband6 REAL, priceband7 REAL, priceband8 REAL, priceband9 REAL, priceband10 REAL,
+    entry_type TEXT,              -- DAILY, REBID
+    offer_date TEXT,
+    version_no INTEGER,
+    UNIQUE(settlement_date, duid, bid_type, direction, version_no)
+);
+
+CREATE INDEX IF NOT EXISTS idx_bess_bids_duid ON bess_daily_bids(duid);
+CREATE INDEX IF NOT EXISTS idx_bess_bids_date ON bess_daily_bids(settlement_date);
+CREATE INDEX IF NOT EXISTS idx_bess_bids_project ON bess_daily_bids(project_id);
+
+-- ============================================================
 -- AEMO DATA: Raw imported data from Generation Information
 -- ============================================================
 

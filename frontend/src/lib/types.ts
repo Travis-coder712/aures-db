@@ -1113,6 +1113,57 @@ export interface NemActivitiesData {
   section_counts: Record<string, number>
 }
 
+// ============================================================
+// BESS Bidding Intelligence
+// ============================================================
+
+export interface BessBiddingProfile {
+  project_id: string; project_name: string; capacity_mw: number | null; storage_mwh: number | null
+  state: string | null; participant_id: string | null
+  first_date: string; last_date: string
+  total_bids: number; energy_bids: number; fcas_bids: number; fcas_services: number
+  rebid_pct: number
+  gen_pricebands: (number | null)[]; load_pricebands: (number | null)[]
+  load_strategy: 'defensive' | 'moderate' | 'aggressive'
+  target_spread: number
+}
+
+export interface BessBiddingMonthlyTrend {
+  month: string; active_duids: number; total_bids: number
+  avg_gen_mid: number | null; avg_load_mid: number | null
+  avg_gen_cap: number | null; avg_gen_floor: number | null
+  max_cap: number | null; rebid_pct: number; target_spread: number
+}
+
+export interface BessBiddingQuarterlyEntry {
+  quarter: string; gen_mid: number | null; load_mid: number | null
+  gen_cap: number | null; load_cap: number | null
+  target_spread: number; rebid_pct: number
+}
+
+export interface BessBiddingRebidReason {
+  reason: string; count: number; projects: number
+}
+
+export interface BessBiddingInsights {
+  mpc_shift: { first_new_mpc_date: string | null; old_mpc_approx: number | null; new_mpc_approx: number | null }
+  most_active_rebidders: Array<{ project_id: string; rebid_pct: number }>
+  least_active_rebidders: Array<{ project_id: string; rebid_pct: number }>
+  participant_changes: Array<{ project_id: string; changes: Array<{ participant_id: string; first_seen: string; last_seen: string }> }>
+  strategy_counts: { defensive: number; moderate: number; aggressive: number }
+  fcas_only_energy: string[]; fcas_full_stack: string[]
+}
+
+export interface BessBiddingData {
+  generated_at: string
+  data_range: { first_date: string | null; last_date: string | null; total_bids: number; total_projects: number }
+  profiles: BessBiddingProfile[]
+  monthly_trends: BessBiddingMonthlyTrend[]
+  quarterly_evolution: Record<string, BessBiddingQuarterlyEntry[]>
+  rebid_reasons: BessBiddingRebidReason[]
+  insights: BessBiddingInsights
+}
+
 export interface REZSummary {
   rez: string; total_mw: number; operating_mw: number; pipeline_mw: number;
   project_count: number; congestion_score: number; congestion_level: string;

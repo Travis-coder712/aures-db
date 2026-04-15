@@ -3175,6 +3175,301 @@ def export_eis_comparison(conn):
     print(f"  analytics/eis-comparison.json ({len(project_list)} projects matched)")
 
 
+def export_bess_bidding(conn):
+    """Export BESS bidding intelligence from bess_daily_bids table."""
+    # Check table exists
+    table_check = conn.execute(
+        "SELECT name FROM sqlite_master WHERE type='table' AND name='bess_daily_bids'"
+    ).fetchone()
+    if not table_check:
+        print("  bess-bidding.json: skipped (table not created — run import_nemweb_bids.py first)")
+        return
+
+    total = conn.execute("SELECT COUNT(*) as c FROM bess_daily_bids").fetchone()['c']
+    if total == 0:
+        print("  bess-bidding.json: skipped (no data)")
+        return
+
+    # --- 1. Per-project strategy profiles ---
+    profiles = []
+    rows = conn.execute("""
+        SELECT
+            project_id,
+            MIN(settlement_date) as first_date,
+            MAX(settlement_date) as last_date,
+            COUNT(*) as total_bids,
+            SUM(CASE WHEN bid_type='ENERGY' THEN 1 ELSE 0 END) as energy_bids,
+            SUM(CASE WHEN bid_type!='ENERGY' THEN 1 ELSE 0 END) as fcas_bids,
+            COUNT(DISTINCT bid_type) - 1 as fcas_services,
+            SUM(CASE WHEN entry_type='REBID' THEN 1 ELSE 0 END) as rebid_count
+        FROM bess_daily_bids
+        GROUP BY project_id
+        ORDER BY total_bids DESC
+    """).fetchall()
+
+    for r in rows:
+        pid = r['project_id']
+        rebid_pct = round(r['rebid_count'] / r['total_bids'] * 100, 1) if r['total_bids'] > 0 else 0
+
+        # GEN/LOAD price bands for ENERGY
+        gen = conn.execute("""
+            SELECT
+                ROUND(AVG(priceband1), 2) as pb1, ROUND(AVG(priceband2), 2) as pb2,
+                ROUND(AVG(priceband3), 2) as pb3, ROUND(AVG(priceband4), 2) as pb4,
+                ROUND(AVG(priceband5), 2) as pb5, ROUND(AVG(priceband6), 2) as pb6,
+                ROUND(AVG(priceband7), 2) as pb7, ROUND(AVG(priceband8), 2) as pb8,
+                ROUND(AVG(priceband9), 2) as pb9, ROUND(AVG(priceband10), 2) as pb10
+            FROM bess_daily_bids
+            WHERE project_id=? AND bid_type='ENERGY' AND direction='GEN'
+        """, (pid,)).fetchone()
+
+        load = conn.execute("""
+            SELECT
+                ROUND(AVG(priceband1), 2) as pb1, ROUND(AVG(priceband2), 2) as pb2,
+                ROUND(AVG(priceband3), 2) as pb3, ROUND(AVG(priceband4), 2) as pb4,
+                ROUND(AVG(priceband5), 2) as pb5, ROUND(AVG(priceband6), 2) as pb6,
+                ROUND(AVG(priceband7), 2) as pb7, ROUND(AVG(priceband8), 2) as pb8,
+                ROUND(AVG(priceband9), 2) as pb9, ROUND(AVG(priceband10), 2) as pb10
+            FROM bess_daily_bids
+            WHERE project_id=? AND bid_type='ENERGY' AND direction='LOAD'
+        """, (pid,)).fetchone()
+
+        gen_bands = [gen[f'pb{i}'] for i in range(1, 11)] if gen else [None]*10
+        load_bands = [load[f'pb{i}'] for i in range(1, 11)] if load else [None]*10
+
+        # Load strategy classification
+        load_cap = load_bands[9] if load_bands[9] else 0
+        if load_cap < 2000:
+            load_strategy = 'defensive'
+        elif load_cap < 15000:
+            load_strategy = 'moderate'
+        else:
+            load_strategy = 'aggressive'
+
+        # Target spread (gen pb5 - load pb5)
+        gen_mid = gen_bands[4] if gen_bands[4] else 0
+        load_mid = load_bands[4] if load_bands[4] else 0
+        target_spread = round(gen_mid - load_mid, 2)
+
+        # Participant ID
+        part = conn.execute("""
+            SELECT participant_id, COUNT(*) as cnt
+            FROM bess_daily_bids
+            WHERE project_id=? AND participant_id IS NOT NULL AND participant_id != ''
+            GROUP BY participant_id ORDER BY cnt DESC LIMIT 1
+        """, (pid,)).fetchone()
+
+        # Project name from projects table
+        proj = conn.execute("SELECT name, capacity_mw, storage_mwh, state FROM projects WHERE id=?", (pid,)).fetchone()
+
+        profiles.append({
+            'project_id': pid,
+            'project_name': proj['name'] if proj else pid,
+            'capacity_mw': proj['capacity_mw'] if proj else None,
+            'storage_mwh': proj['storage_mwh'] if proj else None,
+            'state': proj['state'] if proj else None,
+            'participant_id': part['participant_id'] if part else None,
+            'first_date': r['first_date'],
+            'last_date': r['last_date'],
+            'total_bids': r['total_bids'],
+            'energy_bids': r['energy_bids'],
+            'fcas_bids': r['fcas_bids'],
+            'fcas_services': r['fcas_services'],
+            'rebid_pct': rebid_pct,
+            'gen_pricebands': gen_bands,
+            'load_pricebands': load_bands,
+            'load_strategy': load_strategy,
+            'target_spread': target_spread,
+        })
+
+    # --- 2. Monthly fleet trends ---
+    monthly_trends = []
+    months = conn.execute("""
+        SELECT DISTINCT substr(settlement_date, 1, 7) as month
+        FROM bess_daily_bids
+        ORDER BY month
+    """).fetchall()
+
+    for m in months:
+        month = m['month']
+        stats = conn.execute("""
+            SELECT
+                COUNT(DISTINCT duid) as active_duids,
+                COUNT(*) as total_bids,
+                SUM(CASE WHEN bid_type='ENERGY' THEN 1 ELSE 0 END) as energy_bids,
+                ROUND(AVG(CASE WHEN bid_type='ENERGY' AND direction='GEN' THEN priceband5 END), 2) as avg_gen_mid,
+                ROUND(AVG(CASE WHEN bid_type='ENERGY' AND direction='LOAD' THEN priceband5 END), 2) as avg_load_mid,
+                ROUND(AVG(CASE WHEN bid_type='ENERGY' AND direction='GEN' THEN priceband10 END), 2) as avg_gen_cap,
+                ROUND(AVG(CASE WHEN bid_type='ENERGY' AND direction='GEN' THEN priceband1 END), 2) as avg_gen_floor,
+                ROUND(MAX(CASE WHEN bid_type='ENERGY' THEN priceband10 END), 2) as max_cap,
+                ROUND(SUM(CASE WHEN entry_type='REBID' THEN 1.0 ELSE 0 END) / COUNT(*) * 100, 1) as rebid_pct
+            FROM bess_daily_bids
+            WHERE substr(settlement_date, 1, 7) = ?
+        """, (month,)).fetchone()
+
+        monthly_trends.append({
+            'month': month,
+            'active_duids': stats['active_duids'],
+            'total_bids': stats['total_bids'],
+            'avg_gen_mid': stats['avg_gen_mid'],
+            'avg_load_mid': stats['avg_load_mid'],
+            'avg_gen_cap': stats['avg_gen_cap'],
+            'avg_gen_floor': stats['avg_gen_floor'],
+            'max_cap': stats['max_cap'],
+            'rebid_pct': stats['rebid_pct'],
+            'target_spread': round((stats['avg_gen_mid'] or 0) - (stats['avg_load_mid'] or 0), 2),
+        })
+
+    # --- 3. Quarterly evolution per key project ---
+    key_projects = [
+        'hornsdale-power-reserve', 'victorian-big-battery', 'waratah-super-battery',
+        'torrens-island-bess', 'wallgrove-grid-battery-project', 'eraring-battery',
+        'supernode-bess', 'wandoan-south-bess', 'bouldercombe-battery-project',
+        'hazelwood-battery-energy-storage-system-hbess',
+    ]
+    quarterly_evolution = {}
+    for pid in key_projects:
+        qrows = conn.execute("""
+            SELECT
+                CASE
+                    WHEN substr(settlement_date,6,2) IN ('01','02','03') THEN substr(settlement_date,1,4)||'-Q1'
+                    WHEN substr(settlement_date,6,2) IN ('04','05','06') THEN substr(settlement_date,1,4)||'-Q2'
+                    WHEN substr(settlement_date,6,2) IN ('07','08','09') THEN substr(settlement_date,1,4)||'-Q3'
+                    WHEN substr(settlement_date,6,2) IN ('10','11','12') THEN substr(settlement_date,1,4)||'-Q4'
+                END as quarter,
+                ROUND(AVG(CASE WHEN direction='GEN' THEN priceband5 END), 2) as gen_mid,
+                ROUND(AVG(CASE WHEN direction='LOAD' THEN priceband5 END), 2) as load_mid,
+                ROUND(AVG(CASE WHEN direction='GEN' THEN priceband10 END), 2) as gen_cap,
+                ROUND(AVG(CASE WHEN direction='LOAD' THEN priceband10 END), 2) as load_cap,
+                COUNT(*) as bids,
+                ROUND(SUM(CASE WHEN entry_type='REBID' THEN 1.0 ELSE 0 END) / COUNT(*) * 100, 1) as rebid_pct
+            FROM bess_daily_bids
+            WHERE project_id=? AND bid_type='ENERGY'
+            GROUP BY quarter
+            ORDER BY quarter
+        """, (pid,)).fetchall()
+
+        quarterly_evolution[pid] = [{
+            'quarter': q['quarter'],
+            'gen_mid': q['gen_mid'],
+            'load_mid': q['load_mid'],
+            'gen_cap': q['gen_cap'],
+            'load_cap': q['load_cap'],
+            'target_spread': round((q['gen_mid'] or 0) - (q['load_mid'] or 0), 2),
+            'rebid_pct': q['rebid_pct'],
+        } for q in qrows]
+
+    # --- 4. Rebid reason breakdown ---
+    rebid_reasons = []
+    reason_rows = conn.execute("""
+        SELECT
+            CASE
+                WHEN LOWER(rebid_explanation) LIKE '%forecast%price%' OR LOWER(rebid_explanation) LIKE '%price forecast%' THEN 'price_forecast'
+                WHEN LOWER(rebid_explanation) LIKE '%soc%' OR LOWER(rebid_explanation) LIKE '%state of charge%' OR LOWER(rebid_explanation) LIKE '%soe%' THEN 'state_of_charge'
+                WHEN LOWER(rebid_explanation) LIKE '%capability%' THEN 'capability_change'
+                WHEN LOWER(rebid_explanation) LIKE '%trapezium%' OR LOWER(rebid_explanation) LIKE '%trap%' THEN 'trapezium_update'
+                WHEN LOWER(rebid_explanation) LIKE '%price%' THEN 'price_response'
+                WHEN LOWER(rebid_explanation) LIKE '%forecast%' THEN 'forecast_update'
+                WHEN LOWER(rebid_explanation) LIKE '%outage%' OR LOWER(rebid_explanation) LIKE '%maintenance%' THEN 'outage'
+                WHEN LOWER(rebid_explanation) LIKE '%demand%' THEN 'demand'
+                WHEN LOWER(rebid_explanation) LIKE '%fcas%' OR LOWER(rebid_explanation) LIKE '%enablement%' THEN 'fcas_enablement'
+                WHEN LOWER(rebid_explanation) LIKE '%avail%' THEN 'availability'
+                WHEN LOWER(rebid_explanation) LIKE '%commercial%' OR LOWER(rebid_explanation) LIKE '%trading%' THEN 'commercial'
+                ELSE 'other'
+            END as reason,
+            COUNT(*) as count,
+            COUNT(DISTINCT project_id) as projects
+        FROM bess_daily_bids
+        WHERE entry_type = 'REBID' AND rebid_explanation IS NOT NULL AND rebid_explanation != ''
+        GROUP BY reason
+        ORDER BY count DESC
+    """).fetchall()
+
+    for rr in reason_rows:
+        rebid_reasons.append({
+            'reason': rr['reason'],
+            'count': rr['count'],
+            'projects': rr['projects'],
+        })
+
+    # --- 5. Key insights (pre-computed narrative data) ---
+    # MPC change detection
+    mpc_shift = conn.execute("""
+        SELECT
+            MIN(CASE WHEN priceband10 > 20000 THEN settlement_date END) as first_new_mpc_date,
+            MAX(CASE WHEN priceband10 < 19000 AND priceband10 > 17000 THEN priceband10 END) as old_mpc_approx,
+            MAX(priceband10) as new_mpc_approx
+        FROM bess_daily_bids
+        WHERE bid_type='ENERGY'
+    """).fetchone()
+
+    # Most/least active rebidders
+    rebid_rankings = conn.execute("""
+        SELECT
+            project_id,
+            ROUND(SUM(CASE WHEN entry_type='REBID' THEN 1.0 ELSE 0 END) / COUNT(*) * 100, 1) as rebid_pct
+        FROM bess_daily_bids
+        WHERE bid_type='ENERGY'
+        GROUP BY project_id
+        HAVING COUNT(*) > 100
+        ORDER BY rebid_pct DESC
+    """).fetchall()
+
+    # Participant changes (ownership events)
+    participant_changes = []
+    for pid in key_projects:
+        parts = conn.execute("""
+            SELECT participant_id, MIN(settlement_date) as first_seen, MAX(settlement_date) as last_seen
+            FROM bess_daily_bids
+            WHERE project_id=? AND participant_id IS NOT NULL AND participant_id != ''
+            GROUP BY participant_id
+            ORDER BY first_seen
+        """, (pid,)).fetchall()
+        if len(parts) > 1:
+            participant_changes.append({
+                'project_id': pid,
+                'changes': [{'participant_id': p['participant_id'], 'first_seen': p['first_seen'], 'last_seen': p['last_seen']} for p in parts],
+            })
+
+    insights = {
+        'mpc_shift': {
+            'first_new_mpc_date': mpc_shift['first_new_mpc_date'],
+            'old_mpc_approx': round(mpc_shift['old_mpc_approx']) if mpc_shift['old_mpc_approx'] else None,
+            'new_mpc_approx': round(mpc_shift['new_mpc_approx']) if mpc_shift['new_mpc_approx'] else None,
+        },
+        'most_active_rebidders': [{'project_id': r['project_id'], 'rebid_pct': r['rebid_pct']} for r in rebid_rankings[:5]],
+        'least_active_rebidders': [{'project_id': r['project_id'], 'rebid_pct': r['rebid_pct']} for r in rebid_rankings[-5:]],
+        'participant_changes': participant_changes,
+        'strategy_counts': {
+            'defensive': sum(1 for p in profiles if p['load_strategy'] == 'defensive'),
+            'moderate': sum(1 for p in profiles if p['load_strategy'] == 'moderate'),
+            'aggressive': sum(1 for p in profiles if p['load_strategy'] == 'aggressive'),
+        },
+        'fcas_only_energy': [p['project_id'] for p in profiles if p['fcas_services'] == 0],
+        'fcas_full_stack': [p['project_id'] for p in profiles if p['fcas_services'] >= 8],
+    }
+
+    # --- Assemble output ---
+    output = {
+        'generated_at': datetime.now().isoformat(),
+        'data_range': {
+            'first_date': monthly_trends[0]['month'] if monthly_trends else None,
+            'last_date': monthly_trends[-1]['month'] if monthly_trends else None,
+            'total_bids': total,
+            'total_projects': len(profiles),
+        },
+        'profiles': profiles,
+        'monthly_trends': monthly_trends,
+        'quarterly_evolution': quarterly_evolution,
+        'rebid_reasons': rebid_reasons,
+        'insights': insights,
+    }
+
+    path = os.path.join(INTEL_DIR, 'bess-bidding.json')
+    write_json(path, output)
+    print(f"  intelligence/bess-bidding.json ({len(profiles)} projects, {total} bids)")
+
+
 def export_intelligence(conn):
     """Export all intelligence layer JSON files."""
     print("\nIntelligence Layer:")
@@ -3189,6 +3484,7 @@ def export_intelligence(conn):
     export_grid_connection(conn)
     export_rez_access(conn)
     export_nem_activities(conn)
+    export_bess_bidding(conn)
 
 
 # ---- News Export -----------------------------------------------------------

@@ -35,6 +35,7 @@ import RevenueIntel from './pages/intelligence/RevenueIntel'
 import TransmissionInfra from './pages/intelligence/TransmissionInfra'
 import EISTechnical from './pages/intelligence/EISTechnical'
 import NemActivities from './pages/intelligence/NemActivities'
+import BessBidding from './pages/intelligence/BessBidding'
 import BatteryWatch from './components/intelligence/BatteryWatch'
 import News from './pages/News'
 import Watchlist from './pages/Watchlist'
@@ -87,6 +88,7 @@ function App() {
         <Route path="intelligence/grid-connection" element={<TransmissionInfra />} />
         <Route path="intelligence/eis-technical" element={<EISTechnical />} />
         <Route path="intelligence/nem-activities" element={<NemActivities />} />
+        <Route path="intelligence/bess-bidding" element={<BessBidding />} />
         <Route path="intelligence/battery-watch" element={<div className="p-6 lg:p-8 max-w-5xl"><BatteryWatch /></div>} />
         {/* News */}
         <Route path="news" element={<News />} />

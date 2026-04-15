@@ -459,6 +459,21 @@ export async function fetchNemActivities(): Promise<NemActivitiesData | null> {
 }
 
 // ============================================================
+// BESS Bidding Intelligence
+// ============================================================
+
+let bessBiddingCache: import('./types').BessBiddingData | null = null
+export async function fetchBessBidding(): Promise<import('./types').BessBiddingData | null> {
+  if (bessBiddingCache) return bessBiddingCache
+  try {
+    const resp = await fetch(`${BASE}/analytics/intelligence/bess-bidding.json`)
+    if (!resp.ok) return null
+    bessBiddingCache = (await resp.json()) as import('./types').BessBiddingData
+    return bessBiddingCache
+  } catch { return null }
+}
+
+// ============================================================
 // EIS Analytics
 // ============================================================
 

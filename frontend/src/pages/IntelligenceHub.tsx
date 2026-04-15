@@ -62,6 +62,12 @@ const FEATURES = [
     route: '/intelligence/battery-watch',
   },
   {
+    icon: '\u{1F4C8}',
+    title: 'BESS Bidding Intelligence',
+    description: 'NEMWEB bidding strategy analysis, trading platform identification, and competitive dynamics',
+    route: '/intelligence/bess-bidding',
+  },
+  {
     icon: '\u{1F4C5}',
     title: 'NEM Activities Timeline',
     description: 'Month-by-month key highlights across development, construction, and operations',
