@@ -343,11 +343,11 @@ export default function Home() {
           Coming Soon
         </h2>
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-3">
-          <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] border-dashed rounded-xl p-4 opacity-60">
+          <Link to="/watchlist" className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl p-4 hover:border-[var(--color-primary)]/30 transition-all block">
             <span className="text-lg">👁️</span>
             <h3 className="text-sm font-semibold text-[var(--color-text)] mt-2">Project Watchlist</h3>
-            <p className="text-xs text-[var(--color-text-muted)] mt-1">Monitor COD deadlines, risk scores, and zombie project detection</p>
-          </div>
+            <p className="text-xs text-[var(--color-text-muted)] mt-1">Star projects to track, monitor construction progress, and detect zombie projects</p>
+          </Link>
         </div>
       </section>
 

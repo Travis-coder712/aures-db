@@ -181,6 +181,7 @@ const NAV_ITEMS = [
   { path: '/offtakers', label: 'Offtakers', icon: DocumentIcon },
   { path: '/map', label: 'Map', icon: GlobeIcon },
   { path: '/rez', label: 'REZ', icon: MapIcon },
+  { path: '/watchlist', label: 'Watchlist', icon: EyeIcon },
   { path: '/news', label: 'News', icon: NewspaperIcon },
   { path: '/guides', label: 'Guides', icon: BookIcon },
   { path: '/search', label: 'Search', icon: SearchIcon },
@@ -513,7 +514,5 @@ export default function Layout() {
   )
 }
 
-// Future nav items (greyed out)
-const FUTURE_ITEMS = [
-  { label: 'Watchlist', icon: EyeIcon },
-]
+// Future nav items (greyed out) — currently empty
+const FUTURE_ITEMS: { label: string; icon: React.ComponentType<{ className?: string }> }[] = []

@@ -5,6 +5,7 @@ import { TECHNOLOGY_CONFIG, STATUS_CONFIG, CONFIDENCE_CONFIG, DEVELOPMENT_STAGE_
 import type { ProjectSummary } from '../lib/types'
 import ProjectCard from '../components/common/ProjectCard'
 import { isCuratedProject } from '../lib/curatedFilter'
+import { useWatchlist } from '../lib/useWatchlist'
 
 type SortKey = 'name' | 'capacity_mw' | 'state' | 'status'
 type PipelineTier = 'curated' | 'extended' | 'onshore' | 'full'
@@ -52,6 +53,7 @@ export default function ProjectList() {
   const [sortBy, setSortBy] = useState<SortKey>('capacity_mw')
   const [sortDesc, setSortDesc] = useState(true)
   const [showFilters, setShowFilters] = useState(false)
+  const { toggle: toggleWatch, isWatched } = useWatchlist()
   const [showCuratedInfo, setShowCuratedInfo] = useState(false)
   const { projects: allProjects, loading } = useProjectIndex()
 
@@ -590,7 +592,7 @@ export default function ProjectList() {
       {/* Project Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
         {filtered.map((project) => (
-          <ProjectCard key={project.id} project={project} />
+          <ProjectCard key={project.id} project={project} isWatched={isWatched(project.id)} onToggleWatch={toggleWatch} />
         ))}
       </div>
 

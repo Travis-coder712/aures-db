@@ -835,6 +835,32 @@
       "transformer_mva": 900.0
     },
     {
+      "id": "eraring-big-battery",
+      "name": "Eraring Big Battery",
+      "state": "NSW",
+      "capacity_mw": 700.0,
+      "status": "operating",
+      "developer": "Origin Energy",
+      "connection_voltage_kv": 330.0,
+      "connection_distance_km": 0.0,
+      "connection_substation_name": "Eraring 330 kV substation (TransGrid), Lake Macquarie NSW (on-site, former power station)",
+      "nsp": "TransGrid",
+      "connection_augmentation": "IMPORTANT NOTE: This is a separate battery from the existing eraring-battery (150 MW Tesla Megapack). The Eraring Big Battery (700 MW Wartsila Quantum3) is a different, larger project also at the Eraring site. Both batteries use the same TransGrid 330 kV Eraring substation, eliminating major connection capex.",
+      "document_title": "Eraring Big Battery \u2014 State Significant Development Assessment (NSW IPC SSD-2022-0119)",
+      "document_url": "https://www.planningportal.nsw.gov.au/major-projects/projects/eraring-big-battery",
+      "document_year": 2022,
+      "storage_mwh": 1390.0,
+      "cell_chemistry": "LFP",
+      "cell_supplier": "CATL (Contemporary Amperex Technology Co. Limited)",
+      "inverter_supplier": "Wartsila Energy",
+      "inverter_model": "Quantum3",
+      "pcs_type": "grid_following",
+      "round_trip_efficiency_pct": 89.0,
+      "round_trip_efficiency_ac": 85.0,
+      "duration_hours": 2.0,
+      "transformer_mva": 750.0
+    },
+    {
       "id": "supernode-bess",
       "name": "Supernode BESS",
       "state": "QLD",
@@ -940,8 +966,8 @@
       "id": "eraring-battery",
       "name": "Eraring Battery",
       "state": "NSW",
-      "capacity_mw": 700.0,
-      "status": "operating",
+      "capacity_mw": 460.0,
+      "status": "construction",
       "developer": "Origin Energy",
       "connection_voltage_kv": 330.0,
       "connection_distance_km": 0.0,
@@ -951,7 +977,7 @@
       "document_title": "Eraring Battery Energy Storage System \u2014 SSD EIS (NSW IPC)",
       "document_url": "https://www.ipc.nsw.gov.au/cases/eraring-battery-energy-storage-system",
       "document_year": 2023,
-      "storage_mwh": 3160.0,
+      "storage_mwh": 1840.0,
       "cell_chemistry": "LFP",
       "cell_supplier": "Samsung SDI / CATL (per Wartsila supply chain)",
       "inverter_supplier": "Wartsila",
@@ -1763,5 +1789,5 @@
       }
     }
   },
-  "exported_at": "2026-04-03T13:13:08.010893"
+  "exported_at": "2026-04-15T11:19:46.040894"
 }

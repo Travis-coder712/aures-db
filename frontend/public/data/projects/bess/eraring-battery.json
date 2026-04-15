@@ -2,92 +2,41 @@
   "id": "eraring-battery",
   "name": "Eraring Battery",
   "technology": "bess",
-  "status": "operating",
-  "capacity_mw": 700.0,
-  "storage_mwh": 3160.0,
+  "status": "construction",
+  "capacity_mw": 460.0,
+  "storage_mwh": 1840.0,
   "state": "NSW",
   "lga": "Lake Macquarie",
   "current_developer": "Origin Energy",
-  "current_operator": "Origin Energy",
-  "cod_current": "2026-01-07",
+  "cod_current": "2026",
   "cod_original": "2025",
-  "connection_status": "Connected",
+  "connection_status": "In progress",
   "connection_nsp": "TransGrid",
   "grid_forming": true,
   "has_sips": false,
   "has_syncon": false,
   "has_statcom": false,
   "has_harmonic_filter": false,
-  "notable": "Australia's largest battery. 4-stage build at former Eraring coal plant site. Stage 1 (460 MW / 1,770 MWh) operational Jan 2026. Full build-out to 700 MW / 3,160 MWh. Wartsila GridSolv Quantum / Quantum3.",
+  "notable": "Australia's largest battery. Stage 1 (460 MW/1,770 MWh) operational Jan 2026. Wartsila GridSolv Quantum. 4-stage build to 700 MW/3,160 MWh.",
   "data_confidence": "high",
-  "last_updated": "2026-04-14",
-  "last_verified": "2026-04-14",
-  "aemo_gen_info_id": "1870",
+  "last_updated": "2025-03-01",
+  "last_verified": "2025-03-01",
   "confidence_score": "85",
-  "capex_aud_m": 1450.0,
-  "capex_source": "Origin FID A$600M (Stage 1) + A$850M (Stages 2-4, NS Energy/Origin)",
+  "capex_aud_m": 850.0,
+  "capex_source": "Origin/NS Energy (total stages 2-4)",
   "capex_year": 2024,
   "first_seen": "2023-01-01",
   "coordinates": {
     "lat": -33.07,
     "lng": 151.53
   },
-  "stages": [
-    {
-      "stage": 1,
-      "name": "Stage 1",
-      "capacity_mw": 460,
-      "storage_mwh": 1770,
-      "status": "operating",
-      "cod": "2026-01-07",
-      "cod_original": "2025",
-      "capex_aud_m": 600,
-      "capex_source": "Origin FID announcement Apr 2023",
-      "oem": "Wartsila",
-      "oem_model": "GridSolv Quantum",
-      "grid_forming": false,
-      "notes": "Australia's largest battery at commissioning. Commercial operations commenced Jan 2026."
-    },
-    {
-      "stage": 2,
-      "name": "Stage 2",
-      "capacity_mw": 240,
-      "storage_mwh": 1030,
-      "status": "construction",
-      "capex_aud_m": 490,
-      "capex_source": "Origin/NS Energy (Stages 2-4 combined A$850M)",
-      "oem": "Wartsila",
-      "oem_model": "GridSolv Quantum",
-      "grid_forming": true,
-      "notes": "Approved Jul 2024. Grid-forming advanced inverters."
-    },
-    {
-      "stage": 3,
-      "name": "Stage 3",
-      "status": "development",
-      "capacity_mw": 0,
-      "storage_mwh": 0,
-      "oem": "Wartsila",
-      "notes": "Part of full build-out to 700 MW / 3,160 MWh. Capacity allocation between Stage 3 and 4 to be confirmed."
-    },
-    {
-      "stage": 4,
-      "name": "Stage 4",
-      "status": "construction",
-      "capacity_mw": 0,
-      "storage_mwh": 360,
-      "oem": "Wartsila",
-      "oem_model": "Quantum3",
-      "notes": "Construction commenced Dec 2025. 360 MWh addition. Completion expected early 2027."
-    }
-  ],
   "timeline": [
     {
       "date": "2023-01-01",
       "date_precision": "year",
       "event_type": "conceived",
       "title": "Origin announces large battery at Eraring coal site",
-      "detail": "Battery to be co-located at the Eraring coal power station site. 4-stage build to 700 MW / 3,160 MWh.",
+      "detail": "Battery to be co-located at the Eraring coal power station site",
       "sources": [
         {
           "title": "Origin Energy",
@@ -98,30 +47,24 @@
     {
       "date": "2023-04-01",
       "date_precision": "month",
-      "event_type": "fid",
-      "title": "FID — A$600M for Stage 1 (460 MW / 1,770 MWh)",
-      "detail": "Origin commits A$600M for Stage 1. Wartsila selected as preferred contractor (GridSolv Quantum).",
-      "sources": [
-        {
-          "title": "Origin Energy — Eraring Battery",
-          "url": "https://www.originenergy.com.au/about/who-we-are/what-we-do/generation/eraring-projects/battery/"
-        }
-      ]
+      "event_type": "notable",
+      "title": "FID \u2014 A$600M for Stage 1",
+      "detail": "Origin commits A$600M; Wartsila as preferred contractor",
+      "sources": []
     },
     {
       "date": "2023-06-01",
       "date_precision": "month",
       "event_type": "construction_start",
       "title": "Stage 1 construction commenced",
-      "detail": "460 MW / 1,770 MWh. Wartsila GridSolv Quantum. EPC by Enerven (SA Power Networks).",
+      "detail": "460 MW / 1,770 MWh",
       "sources": []
     },
     {
       "date": "2024-06-01",
       "date_precision": "month",
       "event_type": "construction_start",
-      "title": "Stage 1 construction milestone",
-      "detail": "Major construction phase underway.",
+      "title": "Construction commenced",
       "sources": [
         {
           "title": "RenewEconomy",
@@ -133,53 +76,25 @@
     {
       "date": "2024-07-01",
       "date_precision": "month",
-      "event_type": "expansion",
-      "title": "Stage 2 approved (240 MW / 1,030 MWh)",
-      "detail": "Grid-forming advanced inverters. Part of A$850M Stages 2-4 investment.",
+      "event_type": "notable",
+      "title": "Stage 2 approval (240 MW / 1,030 MWh)",
+      "detail": "Grid-forming advanced inverters",
       "sources": []
     },
     {
-      "date": "2025-03-04",
-      "date_precision": "day",
-      "event_type": "energisation",
-      "title": "First generation recorded (AEMO registration)",
-      "detail": "First market dispatch data recorded in AEMO systems under DUID registration.",
-      "sources": []
-    },
-    {
-      "date": "2025-12-01",
+      "date": "2026-01-01",
       "date_precision": "month",
-      "event_type": "expansion",
-      "title": "Stage 4 construction commences (360 MWh addition)",
-      "detail": "Wartsila Quantum3 technology. Completion expected early 2027.",
-      "sources": [
-        {
-          "title": "Wartsila — Stage 4 Eraring",
-          "url": "https://www.wartsila.com/media/news/11-12-2025-wartsila-sets-new-global-benchmark-with-fourth-stage-of-origin-s-eraring-battery-energy-storage-system-3695204",
-          "source_tier": 1
-        }
-      ]
-    },
-    {
-      "date": "2026-01-07",
-      "date_precision": "day",
       "event_type": "cod",
-      "title": "Stage 1 commercial operations (460 MW / 1,770 MWh)",
-      "detail": "Australia's largest battery begins commercial operations at the site of the former 2,880 MW Eraring coal plant.",
-      "sources": [
-        {
-          "title": "Energy-Storage.News — Eraring Ops",
-          "url": "https://www.energy-storage.news/australias-1770mwh-eraring-battery-1-commences-commercial-operations/",
-          "source_tier": 2
-        }
-      ]
+      "title": "Stage 1 commercial operations",
+      "detail": "Australia's largest battery begins commercial ops",
+      "sources": []
     }
   ],
   "ownership_history": [
     {
       "period": "2023-present",
       "owner": "Origin Energy",
-      "role": "Developer & Operator"
+      "role": "Developer"
     }
   ],
   "cod_history": [
@@ -192,23 +107,18 @@
       "date": "2024-06-01",
       "estimate": "2026",
       "source": "Origin"
-    },
-    {
-      "date": "2026-01-07",
-      "estimate": "2026-01-07",
-      "source": "AEMO / Energy-Storage.News"
     }
   ],
   "suppliers": [
     {
       "role": "bess_oem",
       "supplier": "Wartsila",
-      "model": "GridSolv Quantum / Quantum3",
-      "grid_forming": true,
+      "model": "GridSolv Quantum",
+      "grid_forming": false,
       "source_url": "https://www.wartsila.com/media/news/20-04-2023-wartsila-selected-as-the-preferred-contractor-to-deliver-one-of-australia-s-largest-energy-storage-projects-3256698"
     },
     {
-      "role": "epc",
+      "role": "bop",
       "supplier": "Enerven (SA Power Networks)",
       "grid_forming": false,
       "source_url": "https://www.enerven.com.au/projects/eraring-battery-energy-storage-system/"
@@ -219,97 +129,54 @@
   "cost_sources": [],
   "stakeholder_issues": [],
   "eis_specs": {
-    "document_title": "Eraring Battery Energy Storage System — SSD EIS (NSW IPC SSD-2022-0119)",
-    "document_url": "https://www.planningportal.nsw.gov.au/major-projects/projects/eraring-big-battery",
-    "document_year": 2022,
+    "document_title": "Eraring Battery Energy Storage System \u2014 SSD EIS (NSW IPC)",
+    "document_url": "https://www.ipc.nsw.gov.au/cases/eraring-battery-energy-storage-system",
+    "document_year": 2023,
     "cell_chemistry": "LFP",
     "cell_chemistry_full": "Lithium Iron Phosphate (LiFePO4)",
-    "cell_supplier": "CATL (Contemporary Amperex Technology Co. Limited)",
-    "cell_country_of_manufacture": "China",
-    "inverter_supplier": "Wartsila Energy",
-    "inverter_model": "GridSolv Quantum (Stage 1-2) / Quantum3 (Stage 4)",
+    "cell_supplier": "Samsung SDI / CATL (per Wartsila supply chain)",
+    "cell_country_of_manufacture": "South Korea / China",
+    "inverter_supplier": "Wartsila",
+    "inverter_model": "GridSolv Quantum \u2014 integrated PCS",
     "inverter_country_of_manufacture": "Finland",
     "pcs_type": "grid_forming",
     "round_trip_efficiency_pct": 88.0,
     "round_trip_efficiency_ac": 85.0,
     "duration_hours": 4.0,
     "connection_voltage_kv": 330.0,
-    "transformer_mva": 750.0,
+    "transformer_mva": 460.0,
     "network_service_provider": "TransGrid",
-    "connection_substation_name": "Eraring 330 kV substation (former 2,880 MW coal plant, on-site)",
+    "connection_substation_name": "Eraring 330 kV substation (former power station, on-site)",
     "connection_substation_capacity_mva": 3000.0,
     "connection_distance_km": 0.0,
-    "connection_distance_note": "On-site — located within the Eraring Power Station compound on Lake Macquarie, NSW. Former 2,880 MW coal plant 330 kV substation directly reused. Zero transmission line cost.",
+    "connection_distance_note": "On-site \u2014 former Eraring coal power station 330 kV substation directly reused. Zero transmission line cost.",
     "connection_augmentation": "Minimal augmentation. Existing 330 kV bays from the 2,880 MW coal plant reused. New BESS protection and control systems required but major civil/HV works avoided. Major cost saving vs greenfield connection.",
-    "notes": "Australia's largest utility-scale battery. 4-stage build-out to 700 MW / 3,160 MWh at the former Eraring Power Station site on Lake Macquarie, NSW. Stage 1 (460 MW / 1,770 MWh, Wartsila GridSolv Quantum) operational Jan 2026. Stage 2 (240 MW / 1,030 MWh, grid-forming) approved Jul 2024. Stage 4 (360 MWh, Wartsila Quantum3) construction commenced Dec 2025. Origin Energy developer and operator. Enerven (SA Power Networks) EPC. Originally proposed with Tesla Megapack technology during early EIS phase — subsequently switched to Wartsila."
-  },
-  "field_sources": {
-    "capacity_mw": [
-      {"value": 700, "source": "AEMO Generation Information", "date": "2026-01-30", "tier": 1, "note": "Full registered capacity across all stages"},
-      {"value": 460, "source": "Origin FID announcement (Stage 1)", "date": "2023-04-01", "tier": 1},
-      {"value": 700, "source": "Origin total build-out plan", "date": "2024-07-01", "tier": 1}
-    ],
-    "storage_mwh": [
-      {"value": 1390, "source": "AEMO Generation Information", "date": "2026-01-30", "tier": 1, "note": "AEMO 2-hour duration config — understates total storage across stages"},
-      {"value": 1770, "source": "Origin (Stage 1 only)", "date": "2023-04-01", "tier": 1},
-      {"value": 3160, "source": "Origin (full 4-stage build-out)", "date": "2024-07-01", "tier": 1}
-    ],
-    "capex_aud_m": [
-      {"value": 600, "source": "Origin FID announcement (Stage 1)", "date": "2023-04-01", "tier": 1},
-      {"value": 850, "source": "Origin/NS Energy (Stages 2-4)", "date": "2024-07-01", "tier": 1},
-      {"value": 1450, "source": "Combined total (all stages)", "date": "2024-07-01", "tier": 1}
-    ],
-    "bess_oem": [
-      {"value": "Wartsila (GridSolv Quantum)", "source": "Wartsila press release", "date": "2023-04-01", "tier": 1},
-      {"value": "Wartsila (Quantum3)", "source": "Wartsila Stage 4 announcement", "date": "2025-12-01", "tier": 1},
-      {"value": "Tesla (Megapack)", "source": "Early EIS phase", "date": "2022", "tier": 2, "note": "Original EIS technology — subsequently switched to Wartsila"}
-    ],
-    "status": [
-      {"value": "operating", "source": "Energy-Storage.News / AEMO", "date": "2026-01-07", "tier": 1, "note": "Stage 1 operational; Stages 2-4 in construction/development"},
-      {"value": "construction", "source": "Origin project updates", "date": "2024-07-01", "tier": 1}
-    ],
-    "cod_current": [
-      {"value": "2026-01-07", "source": "Energy-Storage.News / AEMO dispatch data", "date": "2026-01-07", "tier": 1},
-      {"value": "2025-12-18", "source": "AEMO Generation Information", "date": "2026-01-30", "tier": 1},
-      {"value": "2025", "source": "Origin (original estimate)", "date": "2023-06-01", "tier": 1}
-    ]
+    "notes": "Australia's largest utility-scale battery. Stage 1 (460 MW / 1,770 MWh) commenced commercial operations January 2026. Full build-out to 700 MW / 3,160 MWh in 4 stages. Wartsila GridSolv Quantum system is grid-forming capable (voltage-source converter). Located at the former Eraring Power Station site on Lake Macquarie, NSW. Origin Energy owns and operates. Enerven (SA Power Networks) provided balance-of-plant EPC. NSW IPC approved with conditions February 2024."
   },
   "sources": [
     {
-      "title": "AEMO Generation Information Jan 2026",
-      "url": "https://aemo.com.au/energy-systems/electricity/national-electricity-market-nem/nem-forecasting-and-planning/forecasting-and-planning-data/generation-information",
-      "date": "2026-01-30",
-      "source_tier": 1
+      "title": "AEMO Generation Information",
+      "url": "https://aemo.com.au"
     },
     {
-      "title": "Origin Energy — Eraring Battery",
+      "title": "Origin Energy \u2014 Eraring Battery",
       "url": "https://www.originenergy.com.au/about/who-we-are/what-we-do/generation/eraring-projects/battery/",
-      "source_tier": 1
+      "source_tier": 2
     },
     {
-      "title": "Wartsila — Selected for Eraring",
+      "title": "Wartsila \u2014 Selected for Eraring",
       "url": "https://www.wartsila.com/media/news/20-04-2023-wartsila-selected-as-the-preferred-contractor-to-deliver-one-of-australia-s-largest-energy-storage-projects-3256698",
-      "source_tier": 1
+      "source_tier": 2
     },
     {
-      "title": "Wartsila — Stage 4 Eraring",
-      "url": "https://www.wartsila.com/media/news/11-12-2025-wartsila-sets-new-global-benchmark-with-fourth-stage-of-origin-s-eraring-battery-energy-storage-system-3695204",
-      "source_tier": 1
-    },
-    {
-      "title": "Enerven — Eraring BESS EPC",
+      "title": "Enerven \u2014 Eraring BESS",
       "url": "https://www.enerven.com.au/projects/eraring-battery-energy-storage-system/",
       "source_tier": 2
     },
     {
-      "title": "Energy-Storage.News — Eraring Stage 1 Ops",
+      "title": "Energy-Storage.News \u2014 Eraring Ops",
       "url": "https://www.energy-storage.news/australias-1770mwh-eraring-battery-1-commences-commercial-operations/",
       "source_tier": 2
-    },
-    {
-      "title": "NSW Major Projects Portal — Eraring Big Battery SSD",
-      "url": "https://www.planningportal.nsw.gov.au/major-projects/projects/eraring-big-battery",
-      "source_tier": 1
     }
   ]
 }
