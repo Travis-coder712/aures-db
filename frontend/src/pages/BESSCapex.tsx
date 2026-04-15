@@ -1051,6 +1051,170 @@ export default function BESSCapex() {
             </div>
           </div>
           )}
+
+          {/* Next-Gen Technology & Market Outlook */}
+          <div className="bg-[var(--color-bg-card)] rounded-xl p-4 border border-[var(--color-border)]">
+            <h2 className="text-lg font-semibold text-[var(--color-text)] mb-1">Next-Generation BESS Technology & Market Outlook</h2>
+            <p className="text-xs text-[var(--color-text-muted)] mb-4">
+              Will the next wave of products push costs below Tomago&apos;s benchmark &mdash; or will macro forces push them back up?
+            </p>
+
+            {/* Product cards */}
+            <div className="space-y-4 text-sm">
+              <div className="flex items-center gap-2 mb-1">
+                <span className="w-1.5 h-1.5 rounded-full bg-blue-400" />
+                <span className="text-[var(--color-text)] font-semibold">Next-Gen OEM Products</span>
+              </div>
+
+              <div className="grid md:grid-cols-3 gap-3">
+                {/* Tesla Megapack 3 */}
+                <div className="rounded-lg p-3" style={{ background: '#e74c3c10', border: '1px solid #e74c3c30' }}>
+                  <div className="flex items-center gap-2 mb-2">
+                    <span className="w-2.5 h-2.5 rounded-full" style={{ background: '#e74c3c' }} />
+                    <span className="text-sm font-bold text-[var(--color-text)]">Tesla Megapack 3</span>
+                  </div>
+                  <div className="text-xs font-medium text-[#e74c3c] mb-1">Expected: Late 2025 / 2026</div>
+                  <div className="space-y-1.5 text-xs text-[var(--color-text-muted)] leading-relaxed">
+                    <p>
+                      Tesla&apos;s next-gen Megapack is expected to increase energy density by <span className="text-[var(--color-text)] font-medium">~25-30%</span> over the current Megapack 2 (3.9 MWh/unit), potentially reaching <span className="text-[var(--color-text)] font-medium">~5 MWh per unit</span>.
+                      This is driven by Tesla&apos;s in-house 4680 cell manufacturing improvements and next-gen LFP cell chemistry.
+                    </p>
+                    <p>
+                      <span className="text-[var(--color-text)] font-medium">Key advantages:</span> Higher energy density per footprint reduces land, cabling, and BoP costs. Integrated Autobidder AI trading platform (already confirmed in NEM bidding data). Potential for factory-direct pricing from Lathrop, CA and Shanghai Megafactories.
+                    </p>
+                    <p>
+                      <span className="text-[var(--color-text)] font-medium">Cost impact:</span> Industry estimates suggest 10-15% capex reduction per MWh vs Megapack 2, driven primarily by fewer units per site (less BoP) rather than cell cost alone. Could push Tesla NEM projects toward <span className="text-[#10b981] font-mono font-medium">$0.35-0.40M/MWh</span>.
+                    </p>
+                  </div>
+                </div>
+
+                {/* Fluence Gridstack Pro / SmartStack */}
+                <div className="rounded-lg p-3" style={{ background: '#3498db10', border: '1px solid #3498db30' }}>
+                  <div className="flex items-center gap-2 mb-2">
+                    <span className="w-2.5 h-2.5 rounded-full" style={{ background: '#3498db' }} />
+                    <span className="text-sm font-bold text-[var(--color-text)]">Fluence Gridstack Pro</span>
+                  </div>
+                  <div className="text-xs font-medium text-[#3498db] mb-1">Available now &mdash; Tomago is first major NEM deployment</div>
+                  <div className="space-y-1.5 text-xs text-[var(--color-text-muted)] leading-relaxed">
+                    <p>
+                      Fluence&apos;s Gridstack Pro represents a fundamental redesign: a <span className="text-[var(--color-text)] font-medium">modular, pre-engineered &ldquo;building block&rdquo;</span> architecture that reduces site installation time by up to 40%. Each block is factory-assembled and pre-tested, minimising field commissioning.
+                    </p>
+                    <p>
+                      <span className="text-[var(--color-text)] font-medium">Key advantages:</span> Dramatically lower EPC/BoP costs through standardisation. Cell-agnostic design accepts multiple LFP suppliers (CATL, BYD, EVE Energy), enabling competitive procurement. Integrated Fluence IQ software platform for bidding optimisation.
+                    </p>
+                    <p>
+                      <span className="text-[var(--color-text)] font-medium">Cost impact:</span> Tomago&apos;s <span className="text-[#10b981] font-mono font-medium">{keyInsights?.tomago?.capex_per_mwh ? `$${keyInsights.tomago.capex_per_mwh.toFixed(2)}M/MWh` : '~$0.36M/MWh'}</span> is the proof point. As Gridstack Pro scales across more sites, further 5-10% reductions are plausible through supply chain maturation and repeat EPC contracting.
+                    </p>
+                  </div>
+                </div>
+
+                {/* Wärtsilä Quantum 3 */}
+                <div className="rounded-lg p-3" style={{ background: '#2ecc7110', border: '1px solid #2ecc7130' }}>
+                  <div className="flex items-center gap-2 mb-2">
+                    <span className="w-2.5 h-2.5 rounded-full" style={{ background: '#2ecc71' }} />
+                    <span className="text-sm font-bold text-[var(--color-text)]">W&auml;rtsil&auml; Quantum HD</span>
+                  </div>
+                  <div className="text-xs font-medium text-[#2ecc71] mb-1">Quantum HD platform launched 2024</div>
+                  <div className="space-y-1.5 text-xs text-[var(--color-text-muted)] leading-relaxed">
+                    <p>
+                      W&auml;rtsil&auml;&apos;s Quantum HD (High Density) platform delivers <span className="text-[var(--color-text)] font-medium">~40% more energy in the same footprint</span> vs previous Quantum generation, using advanced LFP cell packs with higher gravimetric and volumetric density.
+                    </p>
+                    <p>
+                      <span className="text-[var(--color-text)] font-medium">Key advantages:</span> GEMS digital energy platform provides advanced optimisation and grid services. W&auml;rtsil&auml;&apos;s strong NEM track record (Torrens Island, Capital Battery, multiple SA projects). Containerised modular design with liquid cooling for high-cycle applications.
+                    </p>
+                    <p>
+                      <span className="text-[var(--color-text)] font-medium">Cost impact:</span> Higher density = fewer containers, foundations, and cabling per MWh. Combined with GEMS software optimisation, W&auml;rtsil&auml; projects could target <span className="text-[#10b981] font-mono font-medium">$0.38-0.42M/MWh</span> for 4hr+ systems, depending on site and procurement timing.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* BoP improvements */}
+              <div className="mt-4">
+                <div className="flex items-center gap-2 mb-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-cyan-400" />
+                  <span className="text-[var(--color-text)] font-semibold">Balance of Plant (BoP) Cost Trajectory</span>
+                </div>
+                <p className="text-[var(--color-text-muted)] leading-relaxed">
+                  BoP typically accounts for <span className="text-[var(--color-text)] font-medium">35-45% of total BESS capex</span> (inverters, transformers, switchgear, cabling, civil works, grid connection, EPC margin).
+                  All three next-gen platforms target BoP reduction through higher energy density per container (fewer foundations, less cabling) and modular pre-assembly
+                  (less on-site construction time). Industry-wide, string inverter costs have fallen ~15% since 2023, and Australian EPC contractors are building repeat experience
+                  that reduces construction risk premiums. However, <span className="text-[var(--color-text)] font-medium">transformer lead times remain 18-24 months</span> and are a persistent bottleneck.
+                  A realistic BoP improvement of <span className="text-[var(--color-text)] font-medium">10-20% per MWh</span> over the next 2-3 years is achievable, contributing
+                  ~$0.03-0.06M/MWh in savings when combined with density improvements.
+                </p>
+              </div>
+
+              {/* Macro headwinds */}
+              <div className="mt-4">
+                <div className="flex items-center gap-2 mb-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-red-400" />
+                  <span className="text-[var(--color-text)] font-semibold">Macro Headwinds: The Cell Oversupply Window Is Closing</span>
+                </div>
+                <p className="text-[var(--color-text-muted)] leading-relaxed mb-2">
+                  The <span className="text-[var(--color-text)] font-medium">2023-2025 LFP cell price collapse</span> (down ~50% from peak) was driven by a structural oversupply: Chinese cell manufacturers
+                  (CATL, BYD, EVE Energy, Hithium) invested aggressively for an EV boom that underdelivered in Western markets.
+                  This created a <span className="text-[var(--color-text)] font-medium">golden window for stationary storage procurement</span> &mdash; Tomago&apos;s pricing reflects this window.
+                </p>
+                <div className="grid md:grid-cols-2 gap-3 mb-2">
+                  <div className="rounded-lg p-2.5" style={{ background: '#ef444410', border: '1px solid #ef444430' }}>
+                    <div className="text-xs font-bold text-[#ef4444] mb-1">Upward Pressure</div>
+                    <ul className="text-xs text-[var(--color-text-muted)] space-y-1 list-disc list-inside">
+                      <li><span className="text-[var(--color-text)]">Geopolitical supply risk:</span> Iran conflict and Middle East instability pushing up oil/petrol prices, which accelerates EV adoption and absorbs cell oversupply</li>
+                      <li><span className="text-[var(--color-text)]">EV demand recovery:</span> Higher petrol prices make EVs compelling again &mdash; global EV sales are re-accelerating in 2025, drawing LFP cells away from stationary storage</li>
+                      <li><span className="text-[var(--color-text)]">Sticky inflation:</span> Australian construction costs, labour, and materials (steel, copper, concrete) remain elevated with CPI still above target</li>
+                      <li><span className="text-[var(--color-text)]">Lithium price floor:</span> Lithium carbonate has stabilised after its 85% crash &mdash; further cell price declines require efficiency gains, not commodity deflation</li>
+                      <li><span className="text-[var(--color-text)]">AUD weakness:</span> Equipment is priced in USD/CNY &mdash; a weaker Australian dollar erodes import price gains</li>
+                    </ul>
+                  </div>
+                  <div className="rounded-lg p-2.5" style={{ background: '#10b98110', border: '1px solid #10b98130' }}>
+                    <div className="text-xs font-bold text-[#10b981] mb-1">Downward Pressure</div>
+                    <ul className="text-xs text-[var(--color-text-muted)] space-y-1 list-disc list-inside">
+                      <li><span className="text-[var(--color-text)]">Continued manufacturing scale:</span> Chinese LFP capacity continues to expand &mdash; CATL alone adding 100+ GWh/yr</li>
+                      <li><span className="text-[var(--color-text)]">Technology learning curves:</span> Each OEM generation delivers 15-25% more energy per footprint</li>
+                      <li><span className="text-[var(--color-text)]">Australian market maturity:</span> Repeat EPC contracting, established supply chains, standardised designs reduce risk premiums</li>
+                      <li><span className="text-[var(--color-text)]">Competition:</span> 3+ major OEMs competing for NEM contracts drives procurement discipline</li>
+                      <li><span className="text-[var(--color-text)]">Sodium-ion emergence:</span> Na-ion cells reaching commercial scale for stationary storage could provide a long-term alternative if lithium prices recover</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              {/* The Tomago question */}
+              <div className="mt-4">
+                <div className="flex items-center gap-2 mb-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
+                  <span className="text-[var(--color-text)] font-semibold">Will Tomago Remain the NEM&apos;s Lowest-Cost BESS?</span>
+                </div>
+                <div className="rounded-lg p-3" style={{ background: '#f59e0b08', border: '1px solid #f59e0b30' }}>
+                  <p className="text-[var(--color-text-muted)] leading-relaxed mb-2">
+                    <span className="text-[var(--color-text)] font-medium">Short answer: possibly for 12-18 months, but unlikely to hold permanently.</span>
+                  </p>
+                  <p className="text-[var(--color-text-muted)] leading-relaxed mb-2">
+                    Tomago&apos;s {keyInsights?.tomago?.capex_per_mwh ? <span className="text-[#10b981] font-mono font-bold">${keyInsights.tomago.capex_per_mwh.toFixed(2)}M/MWh</span> : <span className="text-[#10b981] font-mono font-bold">~$0.36M/MWh</span>} was achieved at a near-perfect intersection:
+                    peak LFP cell oversupply, Fluence&apos;s latest Gridstack Pro platform, AGL&apos;s 500 MW single-site scale economies, and 2025 procurement timing.
+                    This is a <span className="text-[var(--color-text)] font-medium">cyclical low point</span> that several forces are now working to reverse.
+                  </p>
+                  <p className="text-[var(--color-text-muted)] leading-relaxed mb-2">
+                    <span className="text-[var(--color-text)] font-medium">The bull case for even lower costs:</span> Next-gen products (Megapack 3, Quantum HD) delivering 25-40% higher energy density could push BoP costs per MWh down another 10-20%.
+                    If cell prices remain depressed AND a developer achieves 1+ GWh single-site scale (e.g. a future Eraring Stage 5+ or a greenfield gigapack), costs of <span className="text-[#10b981] font-mono">$0.30-0.35M/MWh</span> become theoretically achievable.
+                  </p>
+                  <p className="text-[var(--color-text-muted)] leading-relaxed mb-2">
+                    <span className="text-[var(--color-text)] font-medium">The bear case (more likely near-term):</span> The cell oversupply window is closing as EV demand recovers.
+                    Iranian conflict-driven petrol price increases are accelerating this. Sticky Australian inflation keeps construction costs elevated.
+                    Projects reaching FID in late 2025 or 2026 may face <span className="text-[#ef4444] font-mono">$0.40-0.50M/MWh</span> &mdash; reverting toward pre-Tomago levels.
+                    This would make Tomago&apos;s pricing look increasingly like a one-off market timing win rather than a new structural floor.
+                  </p>
+                  <p className="text-[var(--color-text)] leading-relaxed font-medium">
+                    The critical variable is whether technology improvements (next-gen density + BoP standardisation) can outpace macro headwinds (cell price recovery + inflation + FX).
+                    On balance, the next 2-3 NEM projects will likely cost 10-20% more than Tomago, not less &mdash; making it the benchmark to beat for the foreseeable future.
+                  </p>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
         </div>
       ) : (
         /* Table view */
