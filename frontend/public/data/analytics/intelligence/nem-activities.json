@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-04-15T14:45:45.557376",
+  "generated_at": "2026-04-15T15:10:58.020355",
   "months": [
     {
       "month": "2027-06",
@@ -208,6 +208,17 @@
             "date": "2026-03-12"
           },
           {
+            "project_id": "supernode-bess",
+            "project_name": "Supernode BESS",
+            "technology": "bess",
+            "state": "QLD",
+            "capacity_mw": 1300.0,
+            "event_type": "cod_change",
+            "title": "COD estimate updated",
+            "detail": "COD changed from 2026-01 to 2026-01-07 (source: AEMO Generation Information)",
+            "date": "2026-03-12"
+          },
+          {
             "project_id": "skye-ridge-wind-farm",
             "project_name": "Skye Ridge Wind Farm",
             "technology": "wind",
@@ -271,6 +282,17 @@
             "event_type": "cod_change",
             "title": "COD estimate updated",
             "detail": "COD changed from 2030-12 to 2030-12-30 (source: AEMO Generation Information)",
+            "date": "2026-03-12"
+          },
+          {
+            "project_id": "clarke-creek-wind-farm",
+            "project_name": "Clarke Creek Wind Farm",
+            "technology": "wind",
+            "state": "QLD",
+            "capacity_mw": 1135.0,
+            "event_type": "cod_change",
+            "title": "COD estimate updated",
+            "detail": "COD changed from 2025-09 to 2025-09-30 (source: AEMO Generation Information)",
             "date": "2026-03-12"
           },
           {
@@ -582,17 +604,6 @@
             "date": "2026-03-12"
           },
           {
-            "project_id": "eraring-big-battery",
-            "project_name": "Eraring Big Battery",
-            "technology": "bess",
-            "state": "NSW",
-            "capacity_mw": 700.0,
-            "event_type": "cod_change",
-            "title": "COD estimate updated",
-            "detail": "COD changed from 2025-12 to 2025-12-18 (source: AEMO Generation Information)",
-            "date": "2026-03-12"
-          },
-          {
             "project_id": "sandy-creek-solar-farm",
             "project_name": "Sandy Creek Solar Farm",
             "technology": "solar",
@@ -758,14 +769,14 @@
             "date": "2026-03-12"
           },
           {
-            "project_id": "supernode-bess",
-            "project_name": "Supernode BESS",
+            "project_id": "mornington-bess",
+            "project_name": "Mornington BESS",
             "technology": "bess",
-            "state": "QLD",
-            "capacity_mw": 520.0,
+            "state": "VIC",
+            "capacity_mw": 540.0,
             "event_type": "cod_change",
             "title": "COD estimate updated",
-            "detail": "COD changed from 2026-01 to 2026-01-07 (source: AEMO Generation Information)",
+            "detail": "COD changed from 2026-02 to 2026-02-28 (source: AEMO Generation Information)",
             "date": "2026-03-12"
           },
           {
@@ -1132,17 +1143,6 @@
             "date": "2026-03-12"
           },
           {
-            "project_id": "clarke-creek-wind-farm",
-            "project_name": "Clarke Creek Wind Farm",
-            "technology": "wind",
-            "state": "QLD",
-            "capacity_mw": 439.0,
-            "event_type": "cod_change",
-            "title": "COD estimate updated",
-            "detail": "COD changed from 2025-09 to 2025-09-30 (source: AEMO Generation Information)",
-            "date": "2026-03-12"
-          },
-          {
             "project_id": "tarong-west-wind-farm-ironleaf",
             "project_name": "Tarong West Wind Farm (Ironleaf)",
             "technology": "wind",
@@ -1261,6 +1261,28 @@
             "event_type": "cod_change",
             "title": "COD estimate updated",
             "detail": "COD changed from 2026-01 to 2026-01-31 (source: AEMO Generation Information)",
+            "date": "2026-03-12"
+          },
+          {
+            "project_id": "summerfield-bess",
+            "project_name": "Summerfield BESS",
+            "technology": "bess",
+            "state": "SA",
+            "capacity_mw": 400.0,
+            "event_type": "cod_change",
+            "title": "COD estimate updated",
+            "detail": "COD changed from 2026-11 to 2026-11-20 (source: AEMO Generation Information)",
+            "date": "2026-03-12"
+          },
+          {
+            "project_id": "bulabul-bess-1",
+            "project_name": "Bulabul BESS 1",
+            "technology": "bess",
+            "state": "NSW",
+            "capacity_mw": 400.0,
+            "event_type": "cod_change",
+            "title": "COD estimate updated",
+            "detail": "COD changed from 2027-03 to 2027-03-26 (source: AEMO Generation Information)",
             "date": "2026-03-12"
           },
           {
@@ -1583,6 +1605,17 @@
             "date": "2026-03-12"
           },
           {
+            "project_id": "wandoan-south-solar-stage-1",
+            "project_name": "Wandoan South Solar Stage 1",
+            "technology": "solar",
+            "state": "QLD",
+            "capacity_mw": 365.0,
+            "event_type": "cod_change",
+            "title": "COD estimate updated",
+            "detail": "COD changed from 2023-08 to 2023-08-31 (source: AEMO Generation Information)",
+            "date": "2026-03-12"
+          },
+          {
             "project_id": "sundown-hybrid-facility",
             "project_name": "Sundown Hybrid Facility",
             "technology": "hybrid",
@@ -1844,17 +1877,6 @@
             "event_type": "cod_change",
             "title": "COD estimate updated",
             "detail": "COD changed from 2026-12 to 2026-12-31 (source: AEMO Generation Information)",
-            "date": "2026-03-12"
-          },
-          {
-            "project_id": "bulabul-bess-1",
-            "project_name": "Bulabul BESS 1",
-            "technology": "bess",
-            "state": "NSW",
-            "capacity_mw": 300.0,
-            "event_type": "cod_change",
-            "title": "COD estimate updated",
-            "detail": "COD changed from 2027-03 to 2027-03-26 (source: AEMO Generation Information)",
             "date": "2026-03-12"
           },
           {
@@ -2485,6 +2507,17 @@
             "date": "2026-03-12"
           },
           {
+            "project_id": "calala-bess-a1",
+            "project_name": "Calala BESS A1",
+            "technology": "bess",
+            "state": "NSW",
+            "capacity_mw": 250.0,
+            "event_type": "cod_change",
+            "title": "COD estimate updated",
+            "detail": "COD changed from 2026-12 to 2026-12-31 (source: AEMO Generation Information)",
+            "date": "2026-03-12"
+          },
+          {
             "project_id": "kidston-pumped-storage-hydro-project-250mw",
             "project_name": "Kidston Pumped Storage Hydro Project 250MW",
             "technology": "pumped_hydro",
@@ -2691,28 +2724,6 @@
             "event_type": "cod_change",
             "title": "COD estimate updated",
             "detail": "COD changed from 2028-09 to 2028-09-30 (source: AEMO Generation Information)",
-            "date": "2026-03-12"
-          },
-          {
-            "project_id": "mornington-bess",
-            "project_name": "Mornington BESS",
-            "technology": "bess",
-            "state": "VIC",
-            "capacity_mw": 240.0,
-            "event_type": "cod_change",
-            "title": "COD estimate updated",
-            "detail": "COD changed from 2026-02 to 2026-02-28 (source: AEMO Generation Information)",
-            "date": "2026-03-12"
-          },
-          {
-            "project_id": "summerfield-bess",
-            "project_name": "Summerfield BESS",
-            "technology": "bess",
-            "state": "SA",
-            "capacity_mw": 240.0,
-            "event_type": "cod_change",
-            "title": "COD estimate updated",
-            "detail": "COD changed from 2026-11 to 2026-11-20 (source: AEMO Generation Information)",
             "date": "2026-03-12"
           },
           {
@@ -3563,17 +3574,6 @@
             "date": "2026-03-12"
           },
           {
-            "project_id": "wandoan-south-solar-stage-1",
-            "project_name": "Wandoan South Solar Stage 1",
-            "technology": "solar",
-            "state": "QLD",
-            "capacity_mw": 125.0,
-            "event_type": "cod_change",
-            "title": "COD estimate updated",
-            "detail": "COD changed from 2023-08 to 2023-08-31 (source: AEMO Generation Information)",
-            "date": "2026-03-12"
-          },
-          {
             "project_id": "elaine-solar-farm-and-bess",
             "project_name": "Elaine Solar Farm and BESS",
             "technology": "hybrid",
@@ -3831,17 +3831,6 @@
             "project_name": "Collinsville North Battery Project",
             "technology": "bess",
             "state": "QLD",
-            "capacity_mw": 100.0,
-            "event_type": "cod_change",
-            "title": "COD estimate updated",
-            "detail": "COD changed from 2026-12 to 2026-12-31 (source: AEMO Generation Information)",
-            "date": "2026-03-12"
-          },
-          {
-            "project_id": "calala-bess-a1",
-            "project_name": "Calala BESS A1",
-            "technology": "bess",
-            "state": "NSW",
             "capacity_mw": 100.0,
             "event_type": "cod_change",
             "title": "COD estimate updated",
@@ -4501,7 +4490,7 @@
             "project_name": "Supernode BESS",
             "technology": "bess",
             "state": "QLD",
-            "capacity_mw": 520.0,
+            "capacity_mw": 1300.0,
             "event_type": "cod",
             "title": "Stage 1 commercial operations",
             "detail": "First 260 MW / 619 MWh begins commercial operations",
@@ -4554,22 +4543,11 @@
         "rez_progress": [],
         "construction": [
           {
-            "project_id": "eraring-big-battery",
-            "project_name": "Eraring Big Battery",
-            "technology": "bess",
-            "state": "NSW",
-            "capacity_mw": 700.0,
-            "event_type": "cod",
-            "title": "Stage 1 enters commercial operations (460MW/1,770MWh)",
-            "detail": "Origin commenced commercial operations of Eraring Battery 1 at the site of the 2,880MW Eraring coal plant.",
-            "date": "2026-01-07"
-          },
-          {
             "project_id": "eraring-battery",
             "project_name": "Eraring Battery",
             "technology": "bess",
             "state": "NSW",
-            "capacity_mw": 460.0,
+            "capacity_mw": 700.0,
             "event_type": "cod",
             "title": "Stage 1 commercial operations",
             "detail": "Australia's largest battery begins commercial ops",
@@ -4643,17 +4621,6 @@
         "rez_progress": [],
         "construction": [
           {
-            "project_id": "eraring-big-battery",
-            "project_name": "Eraring Big Battery",
-            "technology": "bess",
-            "state": "NSW",
-            "capacity_mw": 700.0,
-            "event_type": "expansion",
-            "title": "Stage 4 construction commences",
-            "detail": "Wartsila announced fourth stage expansion (360MWh addition), completion expected early 2027.",
-            "date": "2025-12-01"
-          },
-          {
             "project_id": "tomago-bess",
             "project_name": "Tomago BESS",
             "technology": "bess",
@@ -4684,17 +4651,6 @@
             "event_type": "notable",
             "title": "Financial close \u2014 A$900M",
             "detail": "Aula Energy secured financial close",
-            "date": "2025-12-01"
-          },
-          {
-            "project_id": "pine-lodge-bess",
-            "project_name": "Pine Lodge BESS",
-            "technology": "bess",
-            "state": "VIC",
-            "capacity_mw": 250.0,
-            "event_type": "notable",
-            "title": "AusNet terminal station energised",
-            "detail": "",
             "date": "2025-12-01"
           },
           {
@@ -4731,7 +4687,19 @@
             "date": "2025-12-01"
           }
         ],
-        "operational": []
+        "operational": [
+          {
+            "project_id": "pine-lodge-bess",
+            "project_name": "Pine Lodge BESS",
+            "technology": "bess",
+            "state": "VIC",
+            "capacity_mw": 250.0,
+            "event_type": "notable",
+            "title": "AusNet terminal station energised",
+            "detail": "",
+            "date": "2025-12-01"
+          }
+        ]
       }
     },
     {
@@ -4824,7 +4792,7 @@
             "project_name": "Supernode BESS",
             "technology": "bess",
             "state": "QLD",
-            "capacity_mw": 520.0,
+            "capacity_mw": 1300.0,
             "event_type": "energisation",
             "title": "Stage 1 grid connection",
             "detail": "Stage 1 (260 MW / 619 MWh) connected to QLD grid",
@@ -4840,17 +4808,6 @@
             "title": "Construction commenced",
             "detail": "",
             "date": "2025-10-01"
-          },
-          {
-            "project_id": "mornington-bess",
-            "project_name": "Mornington BESS",
-            "technology": "bess",
-            "state": "VIC",
-            "capacity_mw": 240.0,
-            "event_type": "notable",
-            "title": "Construction completed; commissioning underway",
-            "detail": "",
-            "date": "2025-10-01"
           }
         ],
         "operational": [
@@ -4864,6 +4821,17 @@
             "title": "Catastrophic transformer failure (HVT3)",
             "detail": "Wilson Transformer HVT3 suffered catastrophic internal fault 4 hours before completing final Hold Point 5 testing. Overpressure event ruptured tank wall. Transformer beyond repair. HVT2 also de-energised as precaution. Battery capped at 350MW. Estimated loss AU-80M.",
             "date": "2025-10-18"
+          },
+          {
+            "project_id": "mornington-bess",
+            "project_name": "Mornington BESS",
+            "technology": "bess",
+            "state": "VIC",
+            "capacity_mw": 540.0,
+            "event_type": "notable",
+            "title": "Construction completed; commissioning underway",
+            "detail": "",
+            "date": "2025-10-01"
           }
         ]
       }
@@ -4875,17 +4843,6 @@
         "govt_programs": [],
         "rez_progress": [],
         "construction": [
-          {
-            "project_id": "liddell-bess",
-            "project_name": "Liddell BESS",
-            "technology": "bess",
-            "state": "NSW",
-            "capacity_mw": 500.0,
-            "event_type": "notable",
-            "title": "Registered with AEMO",
-            "detail": "AEMO MMS registration",
-            "date": "2025-09-30"
-          },
           {
             "project_id": "culcairn-solar-farm",
             "project_name": "Culcairn Solar Farm",
@@ -4997,7 +4954,19 @@
             "date": "2025-09-01"
           }
         ],
-        "operational": []
+        "operational": [
+          {
+            "project_id": "liddell-bess",
+            "project_name": "Liddell BESS",
+            "technology": "bess",
+            "state": "NSW",
+            "capacity_mw": 500.0,
+            "event_type": "notable",
+            "title": "Registered with AEMO",
+            "detail": "AEMO MMS registration",
+            "date": "2025-09-30"
+          }
+        ]
       }
     },
     {
@@ -5087,6 +5056,17 @@
             "date": "2025-08-01"
           },
           {
+            "project_id": "bulabul-bess-1",
+            "project_name": "Bulabul BESS 1",
+            "technology": "bess",
+            "state": "NSW",
+            "capacity_mw": 400.0,
+            "event_type": "construction_start",
+            "title": "Bulabul 1 construction commenced",
+            "detail": "200 MW / 200 MWh first sub-phase",
+            "date": "2025-08-01"
+          },
+          {
             "project_id": "culcairn-solar-farm",
             "project_name": "Culcairn Solar Farm",
             "technology": "solar",
@@ -5095,17 +5075,6 @@
             "event_type": "energisation",
             "title": "First generation recorded",
             "detail": "First market dispatch data recorded in AEMO systems.",
-            "date": "2025-08-01"
-          },
-          {
-            "project_id": "bulabul-bess-1",
-            "project_name": "Bulabul BESS 1",
-            "technology": "bess",
-            "state": "NSW",
-            "capacity_mw": 300.0,
-            "event_type": "construction_start",
-            "title": "Bulabul 1 construction commenced",
-            "detail": "200 MW / 200 MWh first sub-phase",
             "date": "2025-08-01"
           },
           {
@@ -5180,7 +5149,7 @@
             "project_name": "Bulabul BESS 1",
             "technology": "bess",
             "state": "NSW",
-            "capacity_mw": 300.0,
+            "capacity_mw": 400.0,
             "event_type": "notable",
             "title": "Financial close \u2014 A$340M",
             "detail": "CBA, Bank of China, HSBC, Rabobank, SocGen, UOB",
@@ -5623,33 +5592,11 @@
             "date": "2025-03-21"
           },
           {
-            "project_id": "eraring-big-battery",
-            "project_name": "Eraring Big Battery",
-            "technology": "bess",
-            "state": "NSW",
-            "capacity_mw": 700.0,
-            "event_type": "energisation",
-            "title": "First generation recorded",
-            "detail": "First market dispatch data recorded in AEMO systems.",
-            "date": "2025-03-04"
-          },
-          {
-            "project_id": "eraring-big-battery",
-            "project_name": "Eraring Big Battery",
-            "technology": "bess",
-            "state": "NSW",
-            "capacity_mw": 700.0,
-            "event_type": "cod",
-            "title": "Commercial operations commenced",
-            "detail": "Commencement date from AEMO registration via OpenElectricity.",
-            "date": "2025-03-04"
-          },
-          {
             "project_id": "golden-plains-wind",
             "project_name": "Golden Plains Wind Farm",
             "technology": "wind",
             "state": "VIC",
-            "capacity_mw": 1300.0,
+            "capacity_mw": 1610.0,
             "event_type": "energisation",
             "title": "Stage 1 first power delivered",
             "detail": "First turbines energised in Q1 2025",
@@ -5675,6 +5622,28 @@
             "event_type": "construction_start",
             "title": "Ground-breaking",
             "detail": "Wartsila Quantum + Zenviron BoP",
+            "date": "2025-03-01"
+          },
+          {
+            "project_id": "calala-bess-a1",
+            "project_name": "Calala BESS A1",
+            "technology": "bess",
+            "state": "NSW",
+            "capacity_mw": 250.0,
+            "event_type": "construction_start",
+            "title": "Construction commenced",
+            "detail": "Tesla Megapack; CPP BoP",
+            "date": "2025-03-01"
+          },
+          {
+            "project_id": "calala-bess-a1",
+            "project_name": "Calala BESS A1",
+            "technology": "bess",
+            "state": "NSW",
+            "capacity_mw": 250.0,
+            "event_type": "notable",
+            "title": "Financial close \u2014 A$260M",
+            "detail": "Westpac, SocGen, SMBC; first merchant BESS debt in NSW",
             "date": "2025-03-01"
           },
           {
@@ -5708,28 +5677,6 @@
             "event_type": "cod",
             "title": "Commercial operations commence",
             "detail": "Chinchilla BESS entered commercial operations, CS Energy's second big battery after Greenbank.",
-            "date": "2025-03-01"
-          },
-          {
-            "project_id": "calala-bess-a1",
-            "project_name": "Calala BESS A1",
-            "technology": "bess",
-            "state": "NSW",
-            "capacity_mw": 100.0,
-            "event_type": "construction_start",
-            "title": "Construction commenced",
-            "detail": "Tesla Megapack; CPP BoP",
-            "date": "2025-03-01"
-          },
-          {
-            "project_id": "calala-bess-a1",
-            "project_name": "Calala BESS A1",
-            "technology": "bess",
-            "state": "NSW",
-            "capacity_mw": 100.0,
-            "event_type": "notable",
-            "title": "Financial close \u2014 A$260M",
-            "detail": "Westpac, SocGen, SMBC; first merchant BESS debt in NSW",
             "date": "2025-03-01"
           }
         ],
@@ -6076,29 +6023,30 @@
             "date": "2025-01-28"
           },
           {
-            "project_id": "supernode-bess",
-            "project_name": "Supernode BESS",
-            "technology": "bess",
-            "state": "QLD",
-            "capacity_mw": 520.0,
-            "event_type": "notable",
-            "title": "Financial close \u2014 A$722M debt",
-            "detail": "Bank of America, CBA, Deutsche Bank, Mizuho, MUFG consortium",
-            "date": "2025-01-01"
-          },
-          {
             "project_id": "summerfield-bess",
             "project_name": "Summerfield BESS",
             "technology": "bess",
             "state": "SA",
-            "capacity_mw": 240.0,
+            "capacity_mw": 400.0,
             "event_type": "construction_start",
             "title": "Construction commenced",
             "detail": "Canadian Solar e-STORAGE turnkey EPC",
             "date": "2025-01-01"
           }
         ],
-        "operational": []
+        "operational": [
+          {
+            "project_id": "supernode-bess",
+            "project_name": "Supernode BESS",
+            "technology": "bess",
+            "state": "QLD",
+            "capacity_mw": 1300.0,
+            "event_type": "notable",
+            "title": "Financial close \u2014 A$722M debt",
+            "detail": "Bank of America, CBA, Deutsche Bank, Mizuho, MUFG consortium",
+            "date": "2025-01-01"
+          }
+        ]
       }
     },
     {
@@ -6299,6 +6247,17 @@
             "date": "2024-10-16"
           },
           {
+            "project_id": "mornington-bess",
+            "project_name": "Mornington BESS",
+            "technology": "bess",
+            "state": "VIC",
+            "capacity_mw": 540.0,
+            "event_type": "construction_start",
+            "title": "Construction commenced",
+            "detail": "CATL batteries; ACLE Services BoP",
+            "date": "2024-10-01"
+          },
+          {
             "project_id": "lotus-creek-wind-farm",
             "project_name": "Lotus Creek Wind Farm",
             "technology": "wind",
@@ -6307,17 +6266,6 @@
             "event_type": "construction_start",
             "title": "Early works commenced",
             "detail": "",
-            "date": "2024-10-01"
-          },
-          {
-            "project_id": "mornington-bess",
-            "project_name": "Mornington BESS",
-            "technology": "bess",
-            "state": "VIC",
-            "capacity_mw": 240.0,
-            "event_type": "construction_start",
-            "title": "Construction commenced",
-            "detail": "CATL batteries; ACLE Services BoP",
             "date": "2024-10-01"
           },
           {
@@ -6424,7 +6372,7 @@
             "project_name": "Summerfield BESS",
             "technology": "bess",
             "state": "SA",
-            "capacity_mw": 240.0,
+            "capacity_mw": 400.0,
             "event_type": "notable",
             "title": "FID reached",
             "detail": "",
@@ -6585,17 +6533,6 @@
             "date": "2024-07-01"
           },
           {
-            "project_id": "eraring-battery",
-            "project_name": "Eraring Battery",
-            "technology": "bess",
-            "state": "NSW",
-            "capacity_mw": 460.0,
-            "event_type": "notable",
-            "title": "Stage 2 approval (240 MW / 1,030 MWh)",
-            "detail": "Grid-forming advanced inverters",
-            "date": "2024-07-01"
-          },
-          {
             "project_id": "orana-bess",
             "project_name": "Orana BESS",
             "technology": "bess",
@@ -6604,17 +6541,6 @@
             "event_type": "construction_start",
             "title": "Civil works commenced",
             "detail": "Tesla Megapack deployment",
-            "date": "2024-07-01"
-          },
-          {
-            "project_id": "orana-bess",
-            "project_name": "Orana BESS",
-            "technology": "bess",
-            "state": "NSW",
-            "capacity_mw": 415.0,
-            "event_type": "notable",
-            "title": "Financial close \u2014 A$650M",
-            "detail": "Largest BESS financing globally; ANZ, CBA, Westpac led consortium",
             "date": "2024-07-01"
           },
           {
@@ -6629,13 +6555,47 @@
             "date": "2024-07-01"
           }
         ],
-        "operational": []
+        "operational": [
+          {
+            "project_id": "eraring-battery",
+            "project_name": "Eraring Battery",
+            "technology": "bess",
+            "state": "NSW",
+            "capacity_mw": 700.0,
+            "event_type": "notable",
+            "title": "Stage 2 approval (240 MW / 1,030 MWh)",
+            "detail": "Grid-forming advanced inverters",
+            "date": "2024-07-01"
+          },
+          {
+            "project_id": "orana-bess",
+            "project_name": "Orana BESS",
+            "technology": "bess",
+            "state": "NSW",
+            "capacity_mw": 415.0,
+            "event_type": "notable",
+            "title": "Financial close \u2014 A$650M",
+            "detail": "Largest BESS financing globally; ANZ, CBA, Westpac led consortium",
+            "date": "2024-07-01"
+          }
+        ]
       }
     },
     {
       "month": "2024-06",
       "sections": {
         "development": [
+          {
+            "project_id": "calala-bess-a1",
+            "project_name": "Calala BESS A1",
+            "technology": "bess",
+            "state": "NSW",
+            "capacity_mw": 250.0,
+            "event_type": "planning_approved",
+            "title": "NSW Development Consent granted",
+            "detail": "",
+            "date": "2024-06-28"
+          },
           {
             "project_id": "calala-bess-a2",
             "project_name": "Calala BESS A2",
@@ -6645,17 +6605,6 @@
             "event_type": "planning_approved",
             "title": "NSW Development Consent granted",
             "detail": "Combined A1+A2 consent",
-            "date": "2024-06-28"
-          },
-          {
-            "project_id": "calala-bess-a1",
-            "project_name": "Calala BESS A1",
-            "technology": "bess",
-            "state": "NSW",
-            "capacity_mw": 100.0,
-            "event_type": "planning_approved",
-            "title": "NSW Development Consent granted",
-            "detail": "",
             "date": "2024-06-28"
           },
           {
@@ -6711,10 +6660,21 @@
             "project_name": "Golden Plains Wind Farm",
             "technology": "wind",
             "state": "VIC",
-            "capacity_mw": 1300.0,
+            "capacity_mw": 1610.0,
             "event_type": "notable",
             "title": "Stage 2 financial close",
             "detail": "Vestas EPC for 93 turbines / 577 MW Stage 2 West",
+            "date": "2024-06-01"
+          },
+          {
+            "project_id": "eraring-battery",
+            "project_name": "Eraring Battery",
+            "technology": "bess",
+            "state": "NSW",
+            "capacity_mw": 700.0,
+            "event_type": "construction_start",
+            "title": "Construction commenced",
+            "detail": "",
             "date": "2024-06-01"
           },
           {
@@ -6726,17 +6686,6 @@
             "event_type": "notable",
             "title": "Financial close for Stage 2",
             "detail": "Vestas EPC contract; EnergyAustralia PPA for 345 MW",
-            "date": "2024-06-01"
-          },
-          {
-            "project_id": "eraring-battery",
-            "project_name": "Eraring Battery",
-            "technology": "bess",
-            "state": "NSW",
-            "capacity_mw": 460.0,
-            "event_type": "construction_start",
-            "title": "Construction commenced",
-            "detail": "",
             "date": "2024-06-01"
           },
           {
@@ -7017,7 +6966,9 @@
             "title": "Stage 2 QLD government approval",
             "detail": "41 additional turbines / 254 MW",
             "date": "2024-02-01"
-          },
+          }
+        ],
+        "operational": [
           {
             "project_id": "clements-gap-bess",
             "project_name": "Clements Gap - BESS",
@@ -7029,8 +6980,7 @@
             "detail": "",
             "date": "2024-02-01"
           }
-        ],
-        "operational": []
+        ]
       }
     },
     {
@@ -7427,17 +7377,6 @@
         "rez_progress": [],
         "construction": [
           {
-            "project_id": "mortlake-battery",
-            "project_name": "Mortlake Battery",
-            "technology": "bess",
-            "state": "VIC",
-            "capacity_mw": 300.0,
-            "event_type": "notable",
-            "title": "FID \u2014 A$400M; Fluence contract signed",
-            "detail": "",
-            "date": "2024-01-29"
-          },
-          {
             "project_id": "liddell-bess",
             "project_name": "Liddell BESS",
             "technology": "bess",
@@ -7515,7 +7454,19 @@
             "date": "2024"
           }
         ],
-        "operational": []
+        "operational": [
+          {
+            "project_id": "mortlake-battery",
+            "project_name": "Mortlake Battery",
+            "technology": "bess",
+            "state": "VIC",
+            "capacity_mw": 300.0,
+            "event_type": "notable",
+            "title": "FID \u2014 A$400M; Fluence contract signed",
+            "detail": "",
+            "date": "2024-01-29"
+          }
+        ]
       }
     },
     {
@@ -7989,10 +7940,21 @@
             "project_name": "Golden Plains Wind Farm",
             "technology": "wind",
             "state": "VIC",
-            "capacity_mw": 1300.0,
+            "capacity_mw": 1610.0,
             "event_type": "construction_start",
             "title": "Stage 1 construction commenced",
             "detail": "Construction began on 122-turbine Stage 1 (756MW)",
+            "date": "2023-06-01"
+          },
+          {
+            "project_id": "eraring-battery",
+            "project_name": "Eraring Battery",
+            "technology": "bess",
+            "state": "NSW",
+            "capacity_mw": 700.0,
+            "event_type": "construction_start",
+            "title": "Stage 1 construction commenced",
+            "detail": "460 MW / 1,770 MWh",
             "date": "2023-06-01"
           },
           {
@@ -8004,17 +7966,6 @@
             "event_type": "construction_start",
             "title": "Stage 1 construction commenced",
             "detail": "42 turbines / 252 MW",
-            "date": "2023-06-01"
-          },
-          {
-            "project_id": "eraring-battery",
-            "project_name": "Eraring Battery",
-            "technology": "bess",
-            "state": "NSW",
-            "capacity_mw": 460.0,
-            "event_type": "construction_start",
-            "title": "Stage 1 construction commenced",
-            "detail": "460 MW / 1,770 MWh",
             "date": "2023-06-01"
           },
           {
@@ -8140,17 +8091,6 @@
             "date": "2023-04-12"
           },
           {
-            "project_id": "eraring-battery",
-            "project_name": "Eraring Battery",
-            "technology": "bess",
-            "state": "NSW",
-            "capacity_mw": 460.0,
-            "event_type": "notable",
-            "title": "FID \u2014 A$600M for Stage 1",
-            "detail": "Origin commits A$600M; Wartsila as preferred contractor",
-            "date": "2023-04-01"
-          },
-          {
             "project_id": "wandoan-south-bess",
             "project_name": "Wandoan South BESS",
             "technology": "bess",
@@ -8162,7 +8102,19 @@
             "date": "2023-04-01"
           }
         ],
-        "operational": []
+        "operational": [
+          {
+            "project_id": "eraring-battery",
+            "project_name": "Eraring Battery",
+            "technology": "bess",
+            "state": "NSW",
+            "capacity_mw": 700.0,
+            "event_type": "notable",
+            "title": "FID \u2014 A$600M for Stage 1",
+            "detail": "Origin commits A$600M; Wartsila as preferred contractor",
+            "date": "2023-04-01"
+          }
+        ]
       }
     },
     {
@@ -8297,7 +8249,7 @@
             "project_name": "Eraring Battery",
             "technology": "bess",
             "state": "NSW",
-            "capacity_mw": 460.0,
+            "capacity_mw": 700.0,
             "event_type": "conceived",
             "title": "Origin announces large battery at Eraring coal site",
             "detail": "Battery to be co-located at the Eraring coal power station site",
@@ -8480,6 +8432,17 @@
             "date": "2023"
           },
           {
+            "project_id": "summerfield-bess",
+            "project_name": "Summerfield BESS",
+            "technology": "bess",
+            "state": "SA",
+            "capacity_mw": 400.0,
+            "event_type": "planning_submitted",
+            "title": "EPBC Referral 2023/09475",
+            "detail": "Summerfield BESS Project \u2014 Completed",
+            "date": "2023"
+          },
+          {
             "project_id": "lake-lyell-pumped-hydro",
             "project_name": "Lake Lyell Pumped Hydro",
             "technology": "pumped_hydro",
@@ -8565,17 +8528,6 @@
             "event_type": "planning_submitted",
             "title": "EPBC Referral 2023/09660",
             "detail": "Mt Piper Battery Energy Storage System (BESS) \u2014 Completed",
-            "date": "2023"
-          },
-          {
-            "project_id": "summerfield-bess",
-            "project_name": "Summerfield BESS",
-            "technology": "bess",
-            "state": "SA",
-            "capacity_mw": 240.0,
-            "event_type": "planning_submitted",
-            "title": "EPBC Referral 2023/09475",
-            "detail": "Summerfield BESS Project \u2014 Completed",
             "date": "2023"
           },
           {
@@ -8686,7 +8638,7 @@
             "project_name": "Golden Plains Wind Farm",
             "technology": "wind",
             "state": "VIC",
-            "capacity_mw": 1300.0,
+            "capacity_mw": 1610.0,
             "event_type": "construction_start",
             "title": "Stage 1 construction commenced",
             "detail": "122 Vestas V162-6.2 MW turbines",
@@ -8808,7 +8760,7 @@
             "project_name": "Golden Plains Wind Farm",
             "technology": "wind",
             "state": "VIC",
-            "capacity_mw": 1300.0,
+            "capacity_mw": 1610.0,
             "event_type": "notable",
             "title": "Stage 1 financial close",
             "detail": "A$3 billion commitment including Stage 2 development",
@@ -9272,7 +9224,7 @@
             "project_name": "Mornington BESS",
             "technology": "bess",
             "state": "VIC",
-            "capacity_mw": 240.0,
+            "capacity_mw": 540.0,
             "event_type": "planning_approved",
             "title": "Victoria Minister for Planning approval",
             "detail": "",
@@ -9290,6 +9242,17 @@
             "date": "2022"
           },
           {
+            "project_id": "golden-plains-wind",
+            "project_name": "Golden Plains Wind Farm",
+            "technology": "wind",
+            "state": "VIC",
+            "capacity_mw": 1610.0,
+            "event_type": "fid",
+            "title": "Financial close \u2014 A$2B+",
+            "detail": "Australias largest wind farm reached financial close",
+            "date": "2022"
+          },
+          {
             "project_id": "yanco-delta-wind-farm",
             "project_name": "Yanco Delta Wind Farm",
             "technology": "wind",
@@ -9298,17 +9261,6 @@
             "event_type": "planning_submitted",
             "title": "EPBC Referral 2022/09214",
             "detail": "Yanco Delta Wind Farm \u2014 Post-Approval",
-            "date": "2022"
-          },
-          {
-            "project_id": "golden-plains-wind",
-            "project_name": "Golden Plains Wind Farm",
-            "technology": "wind",
-            "state": "VIC",
-            "capacity_mw": 1300.0,
-            "event_type": "fid",
-            "title": "Financial close \u2014 A$2B+",
-            "detail": "Australias largest wind farm reached financial close",
             "date": "2022"
           },
           {
@@ -9529,7 +9481,7 @@
             "project_name": "Clarke Creek Wind Farm",
             "technology": "wind",
             "state": "QLD",
-            "capacity_mw": 439.0,
+            "capacity_mw": 1135.0,
             "event_type": "construction_start",
             "title": "Construction commenced",
             "detail": "Construction began for 66 GE Cypress 5.7 MW turbines + 33 GE 3.8 MW",
@@ -10238,7 +10190,7 @@
             "project_name": "Clarke Creek Wind Farm",
             "technology": "wind",
             "state": "QLD",
-            "capacity_mw": 439.0,
+            "capacity_mw": 1135.0,
             "event_type": "fid",
             "title": "Financial close \u2014 A$1.5B",
             "detail": "Lacour Energy/Squadron Energy reached financial close",
@@ -10681,7 +10633,7 @@
             "project_name": "Golden Plains Wind Farm",
             "technology": "wind",
             "state": "VIC",
-            "capacity_mw": 1300.0,
+            "capacity_mw": 1610.0,
             "event_type": "planning_approved",
             "title": "Planning approval granted",
             "detail": "Victorian Government planning approval for 228 turbines across two stages",
@@ -11054,6 +11006,17 @@
             "date": "2020"
           },
           {
+            "project_id": "clarke-creek-wind-farm",
+            "project_name": "Clarke Creek Wind Farm",
+            "technology": "wind",
+            "state": "QLD",
+            "capacity_mw": 1135.0,
+            "event_type": "planning_approved",
+            "title": "QLD development approval",
+            "detail": "Queensland Government approved the project",
+            "date": "2020"
+          },
+          {
             "project_id": "valley-of-the-winds",
             "project_name": "Valley of the Winds",
             "technology": "wind",
@@ -11106,17 +11069,6 @@
             "event_type": "planning_submitted",
             "title": "EPBC Referral 2020/8727",
             "detail": "Wambo Wind Farm \u2014 Post-Approval",
-            "date": "2020"
-          },
-          {
-            "project_id": "clarke-creek-wind-farm",
-            "project_name": "Clarke Creek Wind Farm",
-            "technology": "wind",
-            "state": "QLD",
-            "capacity_mw": 439.0,
-            "event_type": "planning_approved",
-            "title": "QLD development approval",
-            "detail": "Queensland Government approved the project",
             "date": "2020"
           },
           {
@@ -12306,7 +12258,7 @@
             "project_name": "Golden Plains Wind Farm",
             "technology": "wind",
             "state": "VIC",
-            "capacity_mw": 1300.0,
+            "capacity_mw": 1610.0,
             "event_type": "planning_approved",
             "title": "EES assessment concluded / planning permit",
             "detail": "Victorian Minister for Planning granted permit",
@@ -13070,7 +13022,7 @@
             "project_name": "Golden Plains Wind Farm",
             "technology": "wind",
             "state": "VIC",
-            "capacity_mw": 1300.0,
+            "capacity_mw": 1610.0,
             "event_type": "conceived",
             "title": "Project conceived by WestWind Energy",
             "detail": "",
@@ -13660,7 +13612,7 @@
             "project_name": "Golden Plains Wind Farm",
             "technology": "wind",
             "state": "VIC",
-            "capacity_mw": 1300.0,
+            "capacity_mw": 1610.0,
             "event_type": "planning_submitted",
             "title": "EPBC Referral 2017/7965",
             "detail": "Golden Plains Wind Farm, Vic \u2014 Controlled Action",
@@ -17364,8 +17316,8 @@
     }
   ],
   "section_counts": {
-    "construction": 650,
-    "operational": 436,
+    "construction": 637,
+    "operational": 444,
     "govt_programs": 10,
     "development": 258,
     "rez_progress": 16

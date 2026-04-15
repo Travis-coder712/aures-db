@@ -2,17 +2,21 @@
   "rez_summaries": [
     {
       "rez": "nsw-central-west-orana",
-      "total_mw": 9446.0,
+      "total_mw": 9546.0,
       "operating_mw": 0,
-      "pipeline_mw": 9446.0,
+      "pipeline_mw": 9546.0,
       "project_count": 15,
       "congestion_score": 100,
       "congestion_level": "high",
       "technologies": {
         "bess": {
+          "commissioning": {
+            "count": 1,
+            "mw": 415.0
+          },
           "construction": {
-            "count": 3,
-            "mw": 1123.0
+            "count": 2,
+            "mw": 808.0
           },
           "development": {
             "count": 3,
@@ -113,8 +117,8 @@
   "state_summary": {
     "NSW": {
       "rez_count": 3,
-      "total_mw": 16521.0,
-      "pipeline_mw": 15801.0,
+      "total_mw": 16621.0,
+      "pipeline_mw": 15901.0,
       "rezs": [
         "nsw-central-west-orana",
         "nsw-south-west",
@@ -129,7 +133,7 @@
     },
     "In progress": {
       "count": 2,
-      "mw": 1760.0
+      "mw": 2310.0
     },
     "Pre-application": {
       "count": 2,
@@ -137,5 +141,5 @@
     }
   },
   "total_rez_zones": 3,
-  "exported_at": "2026-04-15T14:45:45.544703"
+  "exported_at": "2026-04-15T15:10:58.016074"
 }

@@ -3,8 +3,8 @@
   "name": "Calala BESS A1",
   "technology": "bess",
   "status": "construction",
-  "capacity_mw": 100.0,
-  "storage_mwh": 199.92,
+  "capacity_mw": 250.0,
+  "storage_mwh": 500.0,
   "state": "NSW",
   "current_developer": "Equis Australia",
   "cod_current": "2026-12-31",
@@ -14,7 +14,7 @@
   "has_syncon": false,
   "has_statcom": false,
   "has_harmonic_filter": false,
-  "notable": "Tesla Megapack. First merchant BESS debt financing in NSW. SmartestEnergy 100% offtake.",
+  "notable": "Staged build: 250 MW total. Both phases CIS T3, under construction.",
   "data_confidence": "good",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
@@ -73,6 +73,26 @@
   ],
   "offtakes": [],
   "scheme_contracts": [],
+  "stages": [
+    {
+      "stage": 1,
+      "name": "Phase A1",
+      "capacity_mw": 100.0,
+      "storage_mwh": 200.0,
+      "status": "construction",
+      "grid_forming": false,
+      "notes": "CIS Tender 3."
+    },
+    {
+      "stage": 2,
+      "name": "Phase A2",
+      "capacity_mw": 150.0,
+      "storage_mwh": 300.0,
+      "status": "construction",
+      "grid_forming": false,
+      "notes": "CIS Tender 3."
+    }
+  ],
   "cost_sources": [],
   "stakeholder_issues": [],
   "eis_specs": {

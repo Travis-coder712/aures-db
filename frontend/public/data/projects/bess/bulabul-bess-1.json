@@ -3,8 +3,8 @@
   "name": "Bulabul BESS 1",
   "technology": "bess",
   "status": "construction",
-  "capacity_mw": 300.0,
-  "storage_mwh": 600.0,
+  "capacity_mw": 400.0,
+  "storage_mwh": 800.0,
   "state": "NSW",
   "rez": "nsw-central-west-orana",
   "current_developer": "Ampyr Australia (AGP Singapore)",
@@ -15,7 +15,7 @@
   "has_syncon": false,
   "has_statcom": false,
   "has_harmonic_filter": false,
-  "notable": "Fluence Gridstack. First Nations 5% equity (Wambal Bila). A$340M. InCommodities A$450M deal.",
+  "notable": "Staged build: 400 MW total. Stage 1 (300 MW) CIS T3, Stage 2 (100 MW) development.",
   "data_confidence": "good",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
@@ -65,6 +65,26 @@
   ],
   "offtakes": [],
   "scheme_contracts": [],
+  "stages": [
+    {
+      "stage": 1,
+      "name": "Stage 1",
+      "capacity_mw": 300.0,
+      "storage_mwh": 600.0,
+      "status": "construction",
+      "grid_forming": false,
+      "notes": "CIS Tender 3. Under construction."
+    },
+    {
+      "stage": 2,
+      "name": "Stage 2",
+      "capacity_mw": 100.0,
+      "storage_mwh": 200.0,
+      "status": "development",
+      "grid_forming": false,
+      "notes": "Development stage expansion."
+    }
+  ],
   "cost_sources": [],
   "stakeholder_issues": [],
   "eis_specs": {

@@ -259,6 +259,33 @@ CREATE TABLE IF NOT EXISTS stakeholder_issues (
 CREATE INDEX IF NOT EXISTS idx_stakeholder_project ON stakeholder_issues(project_id);
 
 -- ============================================================
+-- PROJECT STAGES: Multi-stage project tracking
+-- ============================================================
+
+CREATE TABLE IF NOT EXISTS project_stages (
+    id                  INTEGER PRIMARY KEY AUTOINCREMENT,
+    project_id          TEXT NOT NULL REFERENCES projects(id) ON DELETE CASCADE,
+    stage               TEXT NOT NULL,              -- '1', '2', '3-5', etc.
+    name                TEXT,                       -- 'Stage 1', 'Phase A1', 'East (Phase 1)', etc.
+    capacity_mw         REAL,
+    storage_mwh         REAL,
+    status              TEXT,                       -- operating, construction, commissioning, development
+    cod                 TEXT,                       -- actual or expected COD date
+    cod_original        TEXT,                       -- original COD if revised
+    capex_aud_m         REAL,
+    capex_source        TEXT,
+    oem                 TEXT,
+    oem_model           TEXT,
+    grid_forming        INTEGER DEFAULT 0,
+    notes               TEXT,
+
+    created_at          TEXT NOT NULL DEFAULT (datetime('now')),
+    updated_at          TEXT NOT NULL DEFAULT (datetime('now'))
+);
+
+CREATE INDEX IF NOT EXISTS idx_project_stages_project ON project_stages(project_id);
+
+-- ============================================================
 -- AEMO DATA: Raw imported data from Generation Information
 -- ============================================================
 

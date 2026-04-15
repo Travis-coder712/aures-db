@@ -2,7 +2,7 @@
   "id": "orana-bess",
   "name": "Orana BESS",
   "technology": "bess",
-  "status": "construction",
+  "status": "commissioning",
   "capacity_mw": 415.0,
   "storage_mwh": 1662.08,
   "state": "NSW",
@@ -26,6 +26,7 @@
   "capex_source": "Akaysha ($650m debt + equity)",
   "capex_year": 2024,
   "first_seen": "2023",
+  "capex_source_url": "https://akayshaenergy.com/projects/orana-bess",
   "coordinates": {
     "lat": -32.54,
     "lng": 148.95

@@ -39,7 +39,7 @@
       "slug": "shell-energy",
       "name": "Shell Energy",
       "project_count": 4,
-      "total_capacity_mw": 3123.1,
+      "total_capacity_mw": 3433.1,
       "types": [
         "PPA"
       ],
@@ -88,6 +88,30 @@
         "palmer-wind-farm",
         "rye-park-wind-farm",
         "silverton-wind-farm"
+      ]
+    },
+    {
+      "slug": "stanwell-corporation",
+      "name": "Stanwell Corporation",
+      "project_count": 3,
+      "total_capacity_mw": 2531.0,
+      "types": [
+        "PPA"
+      ],
+      "by_technology": {
+        "wind": 3
+      },
+      "by_status": {
+        "commissioning": 2,
+        "construction": 1
+      },
+      "states": [
+        "QLD"
+      ],
+      "project_ids": [
+        "clarke-creek-wind-farm",
+        "macintyre-wind-farm",
+        "wambo-wind-farm"
       ]
     },
     {
@@ -176,34 +200,10 @@
       ]
     },
     {
-      "slug": "stanwell-corporation",
-      "name": "Stanwell Corporation",
-      "project_count": 3,
-      "total_capacity_mw": 1835.0,
-      "types": [
-        "PPA"
-      ],
-      "by_technology": {
-        "wind": 3
-      },
-      "by_status": {
-        "commissioning": 2,
-        "construction": 1
-      },
-      "states": [
-        "QLD"
-      ],
-      "project_ids": [
-        "clarke-creek-wind-farm",
-        "macintyre-wind-farm",
-        "wambo-wind-farm"
-      ]
-    },
-    {
       "slug": "cs-energy",
       "name": "CS Energy",
       "project_count": 4,
-      "total_capacity_mw": 1352.0,
+      "total_capacity_mw": 2048.0,
       "types": [
         "PPA"
       ],

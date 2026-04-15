@@ -11,7 +11,7 @@
       "total_storage_mwh": 2390,
       "num_projects": 6,
       "by_stage": {
-        "construction": 2,
+        "commissioning": 2,
         "operating": 1,
         "unknown": 3
       },
@@ -27,8 +27,8 @@
           "capacity_mw": 460,
           "storage_mwh": 920,
           "state": "NSW",
-          "status": "construction",
-          "stage": "construction",
+          "status": "commissioning",
+          "stage": "commissioning",
           "construction_start": "2024-07-01",
           "cod_current": "2026-06-30"
         },
@@ -40,8 +40,8 @@
           "capacity_mw": 500,
           "storage_mwh": 1000,
           "state": "NSW",
-          "status": "construction",
-          "stage": "construction",
+          "status": "commissioning",
+          "stage": "commissioning",
           "construction_start": "2024-01-01",
           "cod_current": "2026-02-20"
         },
@@ -97,8 +97,9 @@
       "total_storage_mwh": 3626,
       "num_projects": 6,
       "by_stage": {
-        "construction": 4,
+        "construction": 2,
         "unknown": 1,
+        "commissioning": 2,
         "development": 1
       },
       "by_state": {
@@ -137,8 +138,8 @@
           "capacity_mw": 135,
           "storage_mwh": 270,
           "state": "VIC",
-          "status": "construction",
-          "stage": "construction",
+          "status": "commissioning",
+          "stage": "commissioning",
           "construction_start": "2024-07-01",
           "cod_current": "2026-07-31"
         },
@@ -163,8 +164,8 @@
           "capacity_mw": 60,
           "storage_mwh": 240,
           "state": "SA",
-          "status": "construction",
-          "stage": "construction",
+          "status": "commissioning",
+          "stage": "commissioning",
           "construction_start": "2024-06-12",
           "cod_current": "2026-01-05"
         },
@@ -488,7 +489,8 @@
       "num_projects": 16,
       "by_stage": {
         "development": 14,
-        "construction": 2
+        "construction": 1,
+        "commissioning": 1
       },
       "by_state": {
         "NSW": 5,
@@ -612,8 +614,8 @@
           "capacity_mw": 240,
           "storage_mwh": 587,
           "state": "VIC",
-          "status": "construction",
-          "stage": "construction",
+          "status": "commissioning",
+          "stage": "commissioning",
           "construction_start": "2024-10-01",
           "cod_current": "2026-02-28"
         },
@@ -1019,7 +1021,7 @@
       "total_storage_mwh": 1790,
       "num_projects": 3,
       "by_stage": {
-        "construction": 1,
+        "commissioning": 1,
         "unknown": 1,
         "operating": 1
       },
@@ -1035,8 +1037,8 @@
           "capacity_mw": 415,
           "storage_mwh": 1660,
           "state": "NSW",
-          "status": "construction",
-          "stage": "construction",
+          "status": "commissioning",
+          "stage": "commissioning",
           "construction_start": "2024-07-01",
           "cod_current": "2026-06-30"
         },
@@ -1333,9 +1335,9 @@
     "total_projects": 94,
     "total_mw": 25926.0,
     "by_stage": {
-      "construction": {
-        "count": 13,
-        "mw": 3657.0
+      "commissioning": {
+        "count": 6,
+        "mw": 1810.0
       },
       "operating": {
         "count": 7,
@@ -1345,11 +1347,15 @@
         "count": 12,
         "mw": 1811.0
       },
+      "construction": {
+        "count": 7,
+        "mw": 1847.0
+      },
       "development": {
         "count": 62,
         "mw": 18497.0
       }
     }
   },
-  "exported_at": "2026-04-15T14:45:45.421886"
+  "exported_at": "2026-04-15T15:10:57.950353"
 }

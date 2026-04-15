@@ -4,7 +4,7 @@
       "slug": "consolidated-power-projects-cpp",
       "name": "Consolidated Power Projects (CPP)",
       "project_count": 13,
-      "total_capacity_mw": 3066.0,
+      "total_capacity_mw": 3216.0,
       "roles": [
         "bop",
         "epc"
@@ -13,9 +13,9 @@
         "bess": 13
       },
       "by_status": {
-        "construction": 5,
-        "operating": 7,
-        "commissioning": 1
+        "commissioning": 2,
+        "construction": 4,
+        "operating": 7
       },
       "states": [
         "NSW",
@@ -103,6 +103,27 @@
       ]
     },
     {
+      "slug": "vestas-epc-for-stage-1-and-stage-2",
+      "name": "Vestas (EPC for Stage 1 and Stage 2)",
+      "project_count": 1,
+      "total_capacity_mw": 1610.0,
+      "roles": [
+        "epc"
+      ],
+      "by_technology": {
+        "wind": 1
+      },
+      "by_status": {
+        "construction": 1
+      },
+      "states": [
+        "VIC"
+      ],
+      "project_ids": [
+        "golden-plains-wind"
+      ]
+    },
+    {
       "slug": "zenviron",
       "name": "Zenviron",
       "project_count": 4,
@@ -131,24 +152,24 @@
       ]
     },
     {
-      "slug": "vestas-epc-for-stage-1-and-stage-2",
-      "name": "Vestas (EPC for Stage 1 and Stage 2)",
+      "slug": "nuenergy-infrastructure",
+      "name": "NuEnergy Infrastructure",
       "project_count": 1,
       "total_capacity_mw": 1300.0,
       "roles": [
-        "epc"
+        "bop"
       ],
       "by_technology": {
-        "wind": 1
+        "bess": 1
       },
       "by_status": {
-        "construction": 1
+        "operating": 1
       },
       "states": [
-        "VIC"
+        "QLD"
       ],
       "project_ids": [
-        "golden-plains-wind"
+        "supernode-bess"
       ]
     },
     {
@@ -175,12 +196,38 @@
       ]
     },
     {
-      "slug": "enerven",
-      "name": "Enerven",
+      "slug": "acle-services",
+      "name": "ACLE Services",
+      "project_count": 3,
+      "total_capacity_mw": 855.0,
+      "roles": [
+        "bop",
+        "epc"
+      ],
+      "by_technology": {
+        "bess": 3
+      },
+      "by_status": {
+        "commissioning": 1,
+        "operating": 2
+      },
+      "states": [
+        "NSW",
+        "VIC"
+      ],
+      "project_ids": [
+        "mornington-bess",
+        "pine-lodge-bess",
+        "smithfield-bess"
+      ]
+    },
+    {
+      "slug": "enerven-sa-power-networks",
+      "name": "Enerven (SA Power Networks)",
       "project_count": 1,
       "total_capacity_mw": 700.0,
       "roles": [
-        "epc"
+        "bop"
       ],
       "by_technology": {
         "bess": 1
@@ -192,7 +239,7 @@
         "NSW"
       ],
       "project_ids": [
-        "eraring-big-battery"
+        "eraring-battery"
       ]
     },
     {
@@ -243,32 +290,6 @@
       ]
     },
     {
-      "slug": "acle-services",
-      "name": "ACLE Services",
-      "project_count": 3,
-      "total_capacity_mw": 555.0,
-      "roles": [
-        "bop",
-        "epc"
-      ],
-      "by_technology": {
-        "bess": 3
-      },
-      "by_status": {
-        "construction": 2,
-        "operating": 1
-      },
-      "states": [
-        "NSW",
-        "VIC"
-      ],
-      "project_ids": [
-        "mornington-bess",
-        "pine-lodge-bess",
-        "smithfield-bess"
-      ]
-    },
-    {
       "slug": "snc-lavalin-wbho-jv",
       "name": "SNC-Lavalin / WBHO JV",
       "project_count": 1,
@@ -290,27 +311,6 @@
       ]
     },
     {
-      "slug": "nuenergy-infrastructure",
-      "name": "NuEnergy Infrastructure",
-      "project_count": 1,
-      "total_capacity_mw": 520.0,
-      "roles": [
-        "bop"
-      ],
-      "by_technology": {
-        "bess": 1
-      },
-      "by_status": {
-        "construction": 1
-      },
-      "states": [
-        "QLD"
-      ],
-      "project_ids": [
-        "supernode-bess"
-      ]
-    },
-    {
       "slug": "ugl-cimic-group",
       "name": "UGL (CIMIC Group)",
       "project_count": 1,
@@ -329,27 +329,6 @@
       ],
       "project_ids": [
         "western-downs-battery-stage-1-and-2"
-      ]
-    },
-    {
-      "slug": "enerven-sa-power-networks",
-      "name": "Enerven (SA Power Networks)",
-      "project_count": 1,
-      "total_capacity_mw": 460.0,
-      "roles": [
-        "bop"
-      ],
-      "by_technology": {
-        "bess": 1
-      },
-      "by_status": {
-        "construction": 1
-      },
-      "states": [
-        "NSW"
-      ],
-      "project_ids": [
-        "eraring-battery"
       ]
     },
     {
@@ -452,7 +431,7 @@
         "bess": 1
       },
       "by_status": {
-        "construction": 1
+        "operating": 1
       },
       "states": [
         "QLD"
@@ -557,7 +536,7 @@
         "bess": 1
       },
       "by_status": {
-        "construction": 1
+        "operating": 1
       },
       "states": [
         "VIC"
@@ -897,7 +876,7 @@
         "bess": 1
       },
       "by_status": {
-        "construction": 1
+        "commissioning": 1
       },
       "states": [
         "SA"
@@ -991,5 +970,5 @@
       ]
     }
   ],
-  "total": 45
+  "total": 44
 }

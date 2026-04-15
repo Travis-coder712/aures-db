@@ -3,8 +3,8 @@
   "name": "Summerfield BESS",
   "technology": "bess",
   "status": "construction",
-  "capacity_mw": 240.0,
-  "storage_mwh": 532.7,
+  "capacity_mw": 400.0,
+  "storage_mwh": 800.0,
   "state": "SA",
   "current_developer": "Copenhagen Infrastructure Partners (CIP)",
   "cod_current": "2026-11-20",
@@ -14,7 +14,7 @@
   "has_syncon": false,
   "has_statcom": false,
   "has_harmonic_filter": false,
-  "notable": "Canadian Solar e-STORAGE SolBank 3.0. 4-hour duration (240 MW / 960 MWh). 10-yr Origin offtake.",
+  "notable": "Staged build: 400 MW total. Main (240 MW) construction, North (160 MW) development.",
   "data_confidence": "good",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
@@ -72,6 +72,26 @@
   ],
   "offtakes": [],
   "scheme_contracts": [],
+  "stages": [
+    {
+      "stage": 1,
+      "name": "Summerfield BESS",
+      "capacity_mw": 240.0,
+      "storage_mwh": 480.0,
+      "status": "construction",
+      "grid_forming": false,
+      "notes": "Under construction."
+    },
+    {
+      "stage": 2,
+      "name": "Summerfield North",
+      "capacity_mw": 160.0,
+      "storage_mwh": 320.0,
+      "status": "development",
+      "grid_forming": false,
+      "notes": "Development."
+    }
+  ],
   "cost_sources": [],
   "stakeholder_issues": [],
   "eis_specs": {

@@ -2,9 +2,9 @@
   "id": "supernode-bess",
   "name": "Supernode BESS",
   "technology": "bess",
-  "status": "construction",
-  "capacity_mw": 520.0,
-  "storage_mwh": 1238.04,
+  "status": "operating",
+  "capacity_mw": 1300.0,
+  "storage_mwh": 2600.0,
   "state": "QLD",
   "current_developer": "Quinbrook Infrastructure Partners",
   "cod_current": "2026-01-07",
@@ -14,7 +14,7 @@
   "has_syncon": false,
   "has_statcom": false,
   "has_harmonic_filter": false,
-  "notable": "Stage 1 commercial ops Feb 2026. A$1.4B+ for 3 stages. 12-yr Origin tolling. GE Vernova + CATL cells.",
+  "notable": "Staged build: 1,300 MW / 2.6 GWh total. Stage 1 operating (Origin tolling), Stage 2 construction, Stages 3-5 development.",
   "data_confidence": "good",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
@@ -24,6 +24,7 @@
   "capex_source": "Quinbrook ($722m debt S1+S2)",
   "capex_year": 2024,
   "first_seen": "2025-01-01",
+  "capex_source_url": "https://www.quinbrook.com/news-insights/supernode-stage-1-commences-commercial-operations/",
   "coordinates": {
     "lat": -27.3167,
     "lng": 152.95
@@ -86,6 +87,50 @@
   ],
   "offtakes": [],
   "scheme_contracts": [],
+  "stages": [
+    {
+      "stage": 1,
+      "name": "Stage 1",
+      "capacity_mw": 260.0,
+      "storage_mwh": 520.0,
+      "status": "operating",
+      "grid_forming": false,
+      "notes": "Operating. Origin tolling agreement."
+    },
+    {
+      "stage": 2,
+      "name": "Stage 2",
+      "capacity_mw": 260.0,
+      "storage_mwh": 520.0,
+      "status": "construction",
+      "grid_forming": false,
+      "notes": "Under construction."
+    },
+    {
+      "stage": 3,
+      "name": "Stage 3",
+      "capacity_mw": 260.0,
+      "storage_mwh": 520.0,
+      "status": "development",
+      "grid_forming": false
+    },
+    {
+      "stage": 4,
+      "name": "Stage 4",
+      "capacity_mw": 260.0,
+      "storage_mwh": 520.0,
+      "status": "development",
+      "grid_forming": false
+    },
+    {
+      "stage": 5,
+      "name": "Stage 5",
+      "capacity_mw": 260.0,
+      "storage_mwh": 520.0,
+      "status": "development",
+      "grid_forming": false
+    }
+  ],
   "cost_sources": [],
   "stakeholder_issues": [],
   "eis_specs": {

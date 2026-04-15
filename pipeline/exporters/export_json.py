@@ -143,6 +143,24 @@ def fetch_full_project(conn, project_id):
     """, (project_id,)).fetchall()
     project['scheme_contracts'] = [dict(r) for r in rows]
 
+    # Project stages (multi-stage projects)
+    tables = [r[0] for r in conn.execute(
+        "SELECT name FROM sqlite_master WHERE type='table' AND name='project_stages'"
+    ).fetchall()]
+    if tables:
+        rows = conn.execute("""
+            SELECT stage, name, capacity_mw, storage_mwh, status, cod, cod_original,
+                   capex_aud_m, capex_source, oem, oem_model, grid_forming, notes
+            FROM project_stages WHERE project_id = ? ORDER BY stage ASC
+        """, (project_id,)).fetchall()
+        if rows:
+            stages = []
+            for r in rows:
+                s = dict(r)
+                s['grid_forming'] = bool(s.get('grid_forming'))
+                stages.append(s)
+            project['stages'] = stages
+
     # Cost sources (multi-source values)
     rows = conn.execute("""
         SELECT value, source, source_url, date, context, what_this_covers
@@ -1058,7 +1076,7 @@ def export_bess_capex(conn):
     """Export BESS capex analytics data for cost trend analysis."""
     rows = conn.execute("""
         SELECT p.id, p.name, p.status, p.capacity_mw, p.storage_mwh,
-               p.capex_aud_m, p.capex_year, p.capex_source, p.state,
+               p.capex_aud_m, p.capex_year, p.capex_source, p.capex_source_url, p.state,
                p.current_developer, p.current_operator,
                s.supplier as bess_oem, s.model as bess_model
         FROM projects p

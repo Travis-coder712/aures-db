@@ -2,9 +2,9 @@
   "id": "mornington-bess",
   "name": "Mornington BESS",
   "technology": "bess",
-  "status": "construction",
-  "capacity_mw": 240.0,
-  "storage_mwh": 480.0,
+  "status": "commissioning",
+  "capacity_mw": 540.0,
+  "storage_mwh": 1080.0,
   "state": "VIC",
   "current_developer": "Valent Energy (Gaw Capital / BW ESS)",
   "cod_current": "2026-02-28",
@@ -14,7 +14,7 @@
   "has_syncon": false,
   "has_statcom": false,
   "has_harmonic_filter": false,
-  "notable": "CATL batteries + Power Electronics inverters. Construction completed Oct 2025. Commissioning underway.",
+  "notable": "Staged build: 540 MW total. Stage 1 (240 MW) CIS T3 commissioning, Stage 2 (300 MW) development.",
   "data_confidence": "good",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
@@ -80,6 +80,26 @@
   ],
   "offtakes": [],
   "scheme_contracts": [],
+  "stages": [
+    {
+      "stage": 1,
+      "name": "Stage 1",
+      "capacity_mw": 240.0,
+      "storage_mwh": 480.0,
+      "status": "commissioning",
+      "grid_forming": false,
+      "notes": "CIS Tender 3. Commissioning."
+    },
+    {
+      "stage": 2,
+      "name": "Stage 2",
+      "capacity_mw": 300.0,
+      "storage_mwh": 600.0,
+      "status": "development",
+      "grid_forming": false,
+      "notes": "Development stage expansion."
+    }
+  ],
   "cost_sources": [],
   "stakeholder_issues": [],
   "eis_specs": {

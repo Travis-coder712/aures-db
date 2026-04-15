@@ -2,9 +2,9 @@
   "id": "eraring-battery",
   "name": "Eraring Battery",
   "technology": "bess",
-  "status": "construction",
-  "capacity_mw": 460.0,
-  "storage_mwh": 1840.0,
+  "status": "operating",
+  "capacity_mw": 700.0,
+  "storage_mwh": 3160.0,
   "state": "NSW",
   "lga": "Lake Macquarie",
   "current_developer": "Origin Energy",
@@ -17,7 +17,7 @@
   "has_syncon": false,
   "has_statcom": false,
   "has_harmonic_filter": false,
-  "notable": "Australia's largest battery. Stage 1 (460 MW/1,770 MWh) operational Jan 2026. Wartsila GridSolv Quantum. 4-stage build to 700 MW/3,160 MWh.",
+  "notable": "Staged build-out: 4 stages, 700 MW / 3.2 GWh when complete. Stage 1 (460 MW) operating Jan 2026. Stages 2+4 under construction.",
   "data_confidence": "high",
   "last_updated": "2025-03-01",
   "last_verified": "2025-03-01",
@@ -26,6 +26,7 @@
   "capex_source": "Origin/NS Energy (total stages 2-4)",
   "capex_year": 2024,
   "first_seen": "2023-01-01",
+  "capex_source_url": "https://www.originenergy.com.au/about/who-we-are/what-we-do/generation/eraring-projects/battery/",
   "coordinates": {
     "lat": -33.07,
     "lng": 151.53
@@ -126,6 +127,57 @@
   ],
   "offtakes": [],
   "scheme_contracts": [],
+  "stages": [
+    {
+      "stage": 1,
+      "name": "Stage 1",
+      "capacity_mw": 460.0,
+      "storage_mwh": 1770.0,
+      "status": "operating",
+      "cod": "2026-01-07",
+      "cod_original": "2025",
+      "capex_aud_m": 600.0,
+      "capex_source": "Origin FID announcement Apr 2023",
+      "oem": "Wartsila",
+      "oem_model": "GridSolv Quantum",
+      "grid_forming": false,
+      "notes": "Australia's largest battery at commissioning. Commercial operations commenced Jan 2026."
+    },
+    {
+      "stage": 2,
+      "name": "Stage 2",
+      "capacity_mw": 240.0,
+      "storage_mwh": 1030.0,
+      "status": "construction",
+      "capex_aud_m": 490.0,
+      "capex_source": "Origin/NS Energy (Stages 2-4 combined A$850M)",
+      "oem": "Wartsila",
+      "oem_model": "GridSolv Quantum",
+      "grid_forming": true,
+      "notes": "Approved Jul 2024. Grid-forming advanced inverters."
+    },
+    {
+      "stage": 3,
+      "name": "Stage 3",
+      "capacity_mw": 0.0,
+      "storage_mwh": 0.0,
+      "status": "development",
+      "oem": "Wartsila",
+      "grid_forming": false,
+      "notes": "Part of full build-out to 700 MW / 3,160 MWh. Capacity allocation between Stage 3 and 4 to be confirmed."
+    },
+    {
+      "stage": 4,
+      "name": "Stage 4",
+      "capacity_mw": 0.0,
+      "storage_mwh": 360.0,
+      "status": "construction",
+      "oem": "Wartsila",
+      "oem_model": "Quantum3",
+      "grid_forming": false,
+      "notes": "Construction commenced Dec 2025. 360 MWh addition. Completion expected early 2027."
+    }
+  ],
   "cost_sources": [],
   "stakeholder_issues": [],
   "eis_specs": {

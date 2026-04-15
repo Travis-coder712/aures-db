@@ -3,7 +3,7 @@
   "name": "Wandoan South Solar Stage 1",
   "technology": "solar",
   "status": "commissioning",
-  "capacity_mw": 125.0,
+  "capacity_mw": 365.0,
   "state": "QLD",
   "current_developer": "Vena Evergy",
   "cod_current": "2023-08-31",
@@ -13,7 +13,7 @@
   "has_syncon": false,
   "has_statcom": false,
   "has_harmonic_filter": false,
-  "notable": "125 MW Stage 1 of the Wandoan South complex, QLD. Vena Energy development.",
+  "notable": "Staged build: 365 MW total. Stage 1 (125 MW) commissioning, Stage 2 (240 MW) construction.",
   "data_confidence": "medium",
   "last_updated": "2026-04-01",
   "last_verified": "2026-03-10",
@@ -39,6 +39,26 @@
   "suppliers": [],
   "offtakes": [],
   "scheme_contracts": [],
+  "stages": [
+    {
+      "stage": 1,
+      "name": "Stage 1",
+      "capacity_mw": 125.0,
+      "storage_mwh": 0.0,
+      "status": "commissioning",
+      "grid_forming": false,
+      "notes": "Commissioning."
+    },
+    {
+      "stage": 2,
+      "name": "Stage 2",
+      "capacity_mw": 240.0,
+      "storage_mwh": 0.0,
+      "status": "construction",
+      "grid_forming": false,
+      "notes": "Under construction."
+    }
+  ],
   "cost_sources": [],
   "stakeholder_issues": [],
   "sources": [

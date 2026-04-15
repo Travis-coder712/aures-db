@@ -39,11 +39,23 @@
     "name": "Golden Plains Wind Farm",
     "technology": "wind",
     "status": "construction",
-    "capacity_mw": 1300.0,
+    "capacity_mw": 1610.0,
     "state": "VIC",
     "lat": -37.78,
     "lng": 143.94,
     "developer": "TagEnergy / Ingka Group"
+  },
+  {
+    "id": "supernode-bess",
+    "name": "Supernode BESS",
+    "technology": "bess",
+    "status": "operating",
+    "capacity_mw": 1300.0,
+    "storage_mwh": 2600.0,
+    "state": "QLD",
+    "lat": -27.3167,
+    "lng": 152.95,
+    "developer": "Quinbrook Infrastructure Partners"
   },
   {
     "id": "yanco-delta",
@@ -91,15 +103,15 @@
     "developer": "ACEN Australia (formerly UPC/AC Renewables)"
   },
   {
-    "id": "eraring-big-battery",
-    "name": "Eraring Big Battery",
+    "id": "eraring-battery",
+    "name": "Eraring Battery",
     "technology": "bess",
     "status": "operating",
     "capacity_mw": 700.0,
-    "storage_mwh": 1390.0,
+    "storage_mwh": 3160.0,
     "state": "NSW",
-    "lat": -33.066837,
-    "lng": 151.515026,
+    "lat": -33.07,
+    "lng": 151.53,
     "developer": "Origin Energy"
   },
   {
@@ -160,6 +172,18 @@
     "developer": "Synergy"
   },
   {
+    "id": "mornington-bess",
+    "name": "Mornington BESS",
+    "technology": "bess",
+    "status": "commissioning",
+    "capacity_mw": 540.0,
+    "storage_mwh": 1080.0,
+    "state": "VIC",
+    "lat": -38.22,
+    "lng": 145.04,
+    "developer": "Valent Energy (Gaw Capital / BW ESS)"
+  },
+  {
     "id": "stockyard-hill-wind-farm",
     "name": "Stockyard Hill Wind Farm",
     "technology": "wind",
@@ -169,18 +193,6 @@
     "lat": -37.53568,
     "lng": 143.252548,
     "developer": "Goldwind Australia"
-  },
-  {
-    "id": "supernode-bess",
-    "name": "Supernode BESS",
-    "technology": "bess",
-    "status": "construction",
-    "capacity_mw": 520.0,
-    "storage_mwh": 1238.04,
-    "state": "QLD",
-    "lat": -27.3167,
-    "lng": 152.95,
-    "developer": "Quinbrook Infrastructure Partners"
   },
   {
     "id": "western-downs-battery-stage-1-and-2",
@@ -209,7 +221,7 @@
     "id": "liddell-bess",
     "name": "Liddell BESS",
     "technology": "bess",
-    "status": "construction",
+    "status": "commissioning",
     "capacity_mw": 500.0,
     "storage_mwh": 1000.0,
     "state": "NSW",
@@ -228,18 +240,6 @@
     "lat": -32.865,
     "lng": 151.612,
     "developer": "AGL"
-  },
-  {
-    "id": "eraring-battery",
-    "name": "Eraring Battery",
-    "technology": "bess",
-    "status": "construction",
-    "capacity_mw": 460.0,
-    "storage_mwh": 1840.0,
-    "state": "NSW",
-    "lat": -33.07,
-    "lng": 151.53,
-    "developer": "Origin Energy"
   },
   {
     "id": "coopers-gap-wind-farm",
@@ -290,7 +290,7 @@
     "id": "orana-bess",
     "name": "Orana BESS",
     "technology": "bess",
-    "status": "construction",
+    "status": "commissioning",
     "capacity_mw": 415.0,
     "storage_mwh": 1662.08,
     "state": "NSW",
@@ -322,6 +322,18 @@
     "developer": "Vena Energy"
   },
   {
+    "id": "bulabul-bess-1",
+    "name": "Bulabul BESS 1",
+    "technology": "bess",
+    "status": "construction",
+    "capacity_mw": 400.0,
+    "storage_mwh": 800.0,
+    "state": "NSW",
+    "lat": -32.35,
+    "lng": 148.78,
+    "developer": "Ampyr Australia (AGP Singapore)"
+  },
+  {
     "id": "stubbo-solar-farm",
     "name": "Stubbo Solar Farm",
     "technology": "solar",
@@ -331,6 +343,18 @@
     "lat": -32.26254,
     "lng": 149.589068,
     "developer": "ACEN AUSTRALIA"
+  },
+  {
+    "id": "summerfield-bess",
+    "name": "Summerfield BESS",
+    "technology": "bess",
+    "status": "construction",
+    "capacity_mw": 400.0,
+    "storage_mwh": 800.0,
+    "state": "SA",
+    "lat": -34.16,
+    "lng": 139.45,
+    "developer": "Copenhagen Infrastructure Partners (CIP)"
   },
   {
     "id": "western-downs-green-power-hub-pl",
@@ -375,6 +399,17 @@
     "lat": -41.805073,
     "lng": 146.924365,
     "developer": "Hydro-Electric Corporation"
+  },
+  {
+    "id": "wandoan-south-solar-stage-1",
+    "name": "Wandoan South Solar Stage 1",
+    "technology": "solar",
+    "status": "commissioning",
+    "capacity_mw": 365.0,
+    "state": "QLD",
+    "lat": -26.13,
+    "lng": 149.95,
+    "developer": "Vena Evergy"
   },
   {
     "id": "culcairn-solar-farm",
@@ -491,22 +526,10 @@
     "developer": "AGL Hydro Partnership"
   },
   {
-    "id": "bulabul-bess-1",
-    "name": "Bulabul BESS 1",
-    "technology": "bess",
-    "status": "construction",
-    "capacity_mw": 300.0,
-    "storage_mwh": 600.0,
-    "state": "NSW",
-    "lat": -32.35,
-    "lng": 148.78,
-    "developer": "Ampyr Australia (AGP Singapore)"
-  },
-  {
     "id": "mortlake-battery",
     "name": "Mortlake Battery",
     "technology": "bess",
-    "status": "construction",
+    "status": "commissioning",
     "capacity_mw": 300.0,
     "storage_mwh": 650.0,
     "state": "VIC",
@@ -518,7 +541,7 @@
     "id": "tarong-bess-stanwell",
     "name": "Tarong BESS - Stanwell",
     "technology": "bess",
-    "status": "construction",
+    "status": "operating",
     "capacity_mw": 300.0,
     "storage_mwh": 600.0,
     "state": "QLD",
@@ -676,7 +699,7 @@
     "id": "pine-lodge-bess",
     "name": "Pine Lodge BESS",
     "technology": "bess",
-    "status": "construction",
+    "status": "operating",
     "capacity_mw": 250.0,
     "storage_mwh": 550.0,
     "state": "VIC",
@@ -741,30 +764,6 @@
     "lat": -37.263393,
     "lng": 143.082116,
     "developer": "Ararat Wind Farm Pty Ltd"
-  },
-  {
-    "id": "mornington-bess",
-    "name": "Mornington BESS",
-    "technology": "bess",
-    "status": "construction",
-    "capacity_mw": 240.0,
-    "storage_mwh": 480.0,
-    "state": "VIC",
-    "lat": -38.22,
-    "lng": 145.04,
-    "developer": "Valent Energy (Gaw Capital / BW ESS)"
-  },
-  {
-    "id": "summerfield-bess",
-    "name": "Summerfield BESS",
-    "technology": "bess",
-    "status": "construction",
-    "capacity_mw": 240.0,
-    "storage_mwh": 532.7,
-    "state": "SA",
-    "lat": -34.16,
-    "lng": 139.45,
-    "developer": "Copenhagen Infrastructure Partners (CIP)"
   },
   {
     "id": "wandoan-south-solar-stage-2",
@@ -1530,17 +1529,6 @@
     "lat": -32.546333,
     "lng": 137.552763,
     "developer": "Lincoln Gap Wind Farm Pty Ltd"
-  },
-  {
-    "id": "wandoan-south-solar-stage-1",
-    "name": "Wandoan South Solar Stage 1",
-    "technology": "solar",
-    "status": "commissioning",
-    "capacity_mw": 125.0,
-    "state": "QLD",
-    "lat": -26.13,
-    "lng": 149.95,
-    "developer": "Vena Evergy"
   },
   {
     "id": "sun-metals-corporation-solar-farm",

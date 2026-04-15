@@ -326,45 +326,45 @@
       "technology": "bess",
       "year": 2025,
       "revenue_per_mw": {
-        "count": 28,
-        "mean": 142659.2,
-        "median": 108301.5,
+        "count": 27,
+        "mean": 147724.9,
+        "median": 110983.0,
         "p25": 22980.0,
         "p75": 256374.0
       },
       "energy_price": {
-        "count": 28,
-        "mean": 204.8,
-        "median": 241.6,
+        "count": 27,
+        "mean": 209.8,
+        "median": 242.5,
         "p25": 113.0,
         "p75": 290.6
       },
       "capacity_factor": {
-        "count": 28,
-        "mean": 6.6,
-        "median": 5.4,
+        "count": 27,
+        "mean": 6.8,
+        "median": 6.2,
         "p25": 1.9,
         "p75": 11.2
       },
       "bess_spread": {
-        "count": 28,
-        "mean": 154.0,
-        "median": 187.5,
+        "count": 27,
+        "mean": 159.9,
+        "median": 188.3,
         "p25": 87.4,
         "p75": 221.4
       },
       "discharge_price": {
-        "count": 28,
-        "mean": 186.6,
-        "median": 220.4,
+        "count": 27,
+        "mean": 192.1,
+        "median": 221.6,
         "p25": 102.4,
         "p75": 254.3
       },
       "charge_price": {
-        "count": 28,
-        "mean": 32.6,
-        "median": 28.9,
-        "p25": 15.0,
+        "count": 27,
+        "mean": 32.2,
+        "median": 25.2,
+        "p25": 13.6,
         "p75": 45.1
       }
     },
@@ -372,44 +372,44 @@
       "technology": "bess",
       "year": 2026,
       "revenue_per_mw": {
-        "count": 29,
-        "mean": 35904.7,
-        "median": 28883.0,
+        "count": 28,
+        "mean": 35067.8,
+        "median": 28612.0,
         "p25": 20573.0,
         "p75": 50196.0
       },
       "energy_price": {
-        "count": 29,
-        "mean": 191.3,
-        "median": 147.2,
+        "count": 28,
+        "mean": 192.1,
+        "median": 143.2,
         "p25": 102.1,
-        "p75": 250.6
+        "p75": 300.2
       },
       "capacity_factor": {
-        "count": 29,
-        "mean": 9.9,
+        "count": 28,
+        "mean": 9.7,
         "median": 10.0,
         "p25": 5.5,
         "p75": 13.6
       },
       "bess_spread": {
-        "count": 29,
-        "mean": 154.9,
-        "median": 98.9,
+        "count": 28,
+        "mean": 156.3,
+        "median": 98.7,
         "p25": 86.8,
-        "p75": 166.2
+        "p75": 180.4
       },
       "discharge_price": {
-        "count": 29,
-        "mean": 174.9,
-        "median": 131.9,
+        "count": 28,
+        "mean": 175.7,
+        "median": 128.5,
         "p25": 100.5,
-        "p75": 212.6
+        "p75": 224.6
       },
       "charge_price": {
-        "count": 29,
-        "mean": 19.9,
-        "median": 22.9,
+        "count": 28,
+        "mean": 19.4,
+        "median": 16.3,
         "p25": 4.5,
         "p75": 30.8
       }
@@ -1253,13 +1253,13 @@
       },
       {
         "year": 2025,
-        "median_rpm": 108301.5,
-        "yoy_change_pct": 23.1
+        "median_rpm": 110983.0,
+        "yoy_change_pct": 26.2
       },
       {
         "year": 2026,
-        "median_rpm": 28883.0,
-        "yoy_change_pct": -73.3
+        "median_rpm": 28612.0,
+        "yoy_change_pct": -74.2
       }
     ],
     "hybrid": [
@@ -1817,15 +1817,6 @@
     },
     "bess": {
       "NSW": [
-        {
-          "project_id": "eraring-big-battery",
-          "name": "Eraring Big Battery",
-          "revenue_per_mw": 59338.0,
-          "capacity_factor_pct": 16.1,
-          "capacity_mw": 700.0,
-          "yoy_change_pct": 908.1,
-          "latest_year": 2026
-        },
         {
           "project_id": "smithfield-bess",
           "name": "Smithfield BESS",
@@ -3715,15 +3706,15 @@
       },
       {
         "year": 2025,
-        "total_revenue_m_aud": 544.4,
-        "project_count": 28,
-        "mean_per_project_aud": 19442083.0
+        "total_revenue_m_aud": 540.3,
+        "project_count": 27,
+        "mean_per_project_aud": 20009560.0
       },
       {
         "year": 2026,
-        "total_revenue_m_aud": 179.1,
-        "project_count": 29,
-        "mean_per_project_aud": 6175679.0
+        "total_revenue_m_aud": 137.6,
+        "project_count": 28,
+        "mean_per_project_aud": 4912789.0
       }
     ],
     "hybrid": [
@@ -3927,5 +3918,5 @@
       }
     ]
   },
-  "exported_at": "2026-04-15T14:45:45.536440"
+  "exported_at": "2026-04-15T15:10:58.012829"
 }

@@ -18,7 +18,7 @@
       "technology": "wind",
       "status": "construction",
       "state": "VIC",
-      "capacity_mw": 1300.0,
+      "capacity_mw": 1610.0,
       "drift_months": 12,
       "cod_current": "2026 (Stage 1)",
       "cod_original": "2025",
@@ -28,9 +28,9 @@
       "project_id": "eraring-battery",
       "name": "Eraring Battery",
       "technology": "bess",
-      "status": "construction",
+      "status": "operating",
       "state": "NSW",
-      "capacity_mw": 460.0,
+      "capacity_mw": 700.0,
       "drift_months": 12,
       "cod_current": "2026",
       "cod_original": "2025",
@@ -144,5 +144,5 @@
     "p25": -2,
     "p75": 12
   },
-  "exported_at": "2026-04-15T14:45:45.434918"
+  "exported_at": "2026-04-15T15:10:57.958047"
 }

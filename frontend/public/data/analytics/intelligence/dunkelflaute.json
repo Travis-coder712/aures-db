@@ -493,17 +493,17 @@
     "NSW": {
       "bess_count": 8,
       "bess_mw": 1940.0,
-      "bess_mwh": 3785.2,
+      "bess_mwh": 5555.2,
       "peak_demand_mw_est": 14000,
-      "coverage_hours": 0.27,
+      "coverage_hours": 0.4,
       "coverage_rating": "Low"
     },
     "QLD": {
-      "bess_count": 6,
-      "bess_mw": 810.0,
-      "bess_mwh": 1557.9,
+      "bess_count": 8,
+      "bess_mw": 2410.0,
+      "bess_mwh": 4757.9,
       "peak_demand_mw_est": 10000,
-      "coverage_hours": 0.16,
+      "coverage_hours": 0.48,
       "coverage_rating": "Low"
     },
     "SA": {
@@ -515,29 +515,29 @@
       "coverage_rating": "Low"
     },
     "VIC": {
-      "bess_count": 9,
-      "bess_mw": 1665.0,
-      "bess_mwh": 3208.4,
+      "bess_count": 10,
+      "bess_mw": 1915.0,
+      "bess_mwh": 3758.4,
       "peak_demand_mw_est": 10000,
-      "coverage_hours": 0.32,
+      "coverage_hours": 0.38,
       "coverage_rating": "Low"
     }
   },
   "bess_pipeline": {
     "NSW": {
-      "count": 133,
-      "mw": 42734.0,
-      "mwh": 94748.6
+      "count": 130,
+      "mw": 41609.0,
+      "mwh": 90746.6
     },
     "QLD": {
-      "count": 127,
-      "mw": 45399.0,
-      "mwh": 101591.7
+      "count": 125,
+      "mw": 44579.0,
+      "mwh": 99753.6
     },
     "SA": {
-      "count": 51,
-      "mw": 10265.0,
-      "mwh": 21096.4
+      "count": 50,
+      "mw": 10365.0,
+      "mwh": 21243.7
     },
     "TAS": {
       "count": 4,
@@ -545,9 +545,9 @@
       "mwh": 1250.0
     },
     "VIC": {
-      "count": 84,
-      "mw": 23728.4,
-      "mwh": 63069.3
+      "count": 81,
+      "mw": 22938.4,
+      "mwh": 61389.3
     },
     "WA": {
       "count": 1,
@@ -5565,5 +5565,5 @@
       "solar_mw": 1186.0
     }
   ],
-  "exported_at": "2026-04-15T14:45:45.472202"
+  "exported_at": "2026-04-15T15:10:57.981055"
 }

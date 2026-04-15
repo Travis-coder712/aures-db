@@ -3,7 +3,7 @@
   "name": "Golden Plains Wind Farm",
   "technology": "wind",
   "status": "construction",
-  "capacity_mw": 1300.0,
+  "capacity_mw": 1610.0,
   "state": "VIC",
   "lga": "Golden Plains Shire",
   "current_developer": "TagEnergy / Ingka Group",
@@ -16,7 +16,7 @@
   "has_syncon": false,
   "has_statcom": false,
   "has_harmonic_filter": false,
-  "notable": "Largest wind farm in Southern Hemisphere. 215 turbines across two stages. Stage 1 first power delivered Q1 2025.",
+  "notable": "Staged build: 1,610 MW total (1,310 MW wind + 300 MW BESS). East commissioning, West construction, BESS in development.",
   "data_confidence": "high",
   "last_updated": "2025-03-01",
   "last_verified": "2025-03-01",
@@ -170,6 +170,44 @@
     }
   ],
   "scheme_contracts": [],
+  "stages": [
+    {
+      "stage": 1,
+      "name": "East (Phase 1)",
+      "capacity_mw": 733.0,
+      "storage_mwh": 0.0,
+      "status": "commissioning",
+      "grid_forming": false,
+      "notes": "Commissioning. 122 turbines."
+    },
+    {
+      "stage": 2,
+      "name": "West (Phase 2)",
+      "capacity_mw": 577.0,
+      "storage_mwh": 0.0,
+      "status": "construction",
+      "grid_forming": false,
+      "notes": "Under construction."
+    },
+    {
+      "stage": 3,
+      "name": "BESS Phase 1",
+      "capacity_mw": 150.0,
+      "storage_mwh": 300.0,
+      "status": "development",
+      "grid_forming": false,
+      "notes": "Battery storage."
+    },
+    {
+      "stage": 4,
+      "name": "BESS Phase 2",
+      "capacity_mw": 150.0,
+      "storage_mwh": 300.0,
+      "status": "development",
+      "grid_forming": false,
+      "notes": "Battery storage expansion."
+    }
+  ],
   "cost_sources": [],
   "stakeholder_issues": [],
   "eis_specs": {
