@@ -155,6 +155,8 @@ function GenerationMonthlyCharts({
     })
   }, [data.monthly, years])
 
+  const hasRevenue = data.monthly.some(m => m.revenue_aud != null && m.revenue_aud > 0)
+
   const displayYear = selectedYear === 'average' ? null : selectedYear
   const summaryToShow = displayYear ? annualSummary.filter(s => s.year === displayYear) : annualSummary
 
@@ -264,6 +266,11 @@ function GenerationMonthlyCharts({
           </BarChart>
         </ResponsiveContainer>
       </ChartSection>
+
+      {/* Monthly Revenue — Year-over-Year */}
+      {hasRevenue && (
+        <RevenueYoYChart data={data} years={years} selectedYear={selectedYear} />
+      )}
 
       {/* Monthly energy output heatmap-style table */}
       <MonthlyTable data={data.monthly} years={years} metric="capacity_factor_pct" label="CF%" format={v => `${v.toFixed(1)}%`} colorFn={cfColor} />
@@ -427,6 +434,128 @@ function BessMonthlyCharts({
             <Legend wrapperStyle={{ fontSize: 10 }} formatter={(v: string) => v === 'spread' ? 'Avg Spread ($/MWh)' : 'Total Cycles'} />
             <Bar dataKey="spread" fill="#22c55e" radius={[4, 4, 0, 0]} />
             <Bar dataKey="cycles" fill="#8b5cf6" radius={[4, 4, 0, 0]} opacity={0.7} />
+          </BarChart>
+        </ResponsiveContainer>
+      </ChartSection>
+
+      {/* Monthly Revenue — Year-over-Year */}
+      {data.monthly.some(m => m.revenue_aud != null && m.revenue_aud > 0) && (
+        <RevenueYoYChart data={data} years={years} selectedYear={selectedYear} />
+      )}
+    </>
+  )
+}
+
+// ============================================================
+// Revenue Year-over-Year Chart (shared by generation & BESS)
+// ============================================================
+
+function RevenueYoYChart({
+  data,
+  years,
+  selectedYear,
+}: {
+  data: { monthly: MonthlyPerformanceEntry[]; capacity_mw: number }
+  years: number[]
+  selectedYear: number | 'average'
+}) {
+  const revenueComparison = useMemo(() => {
+    return MONTH_LABELS.map((label, i) => {
+      const month = i + 1
+      const row: Record<string, string | number | null> = { month: label }
+
+      for (const y of years) {
+        const entry = data.monthly.find(m => m.year === y && m.month === month)
+        row[`y${y}`] = entry?.revenue_aud != null ? Math.round(entry.revenue_aud / 1000) : null
+      }
+
+      const vals = years.map(y => {
+        const e = data.monthly.find(m => m.year === y && m.month === month)
+        return e?.revenue_aud
+      }).filter((v): v is number => v != null)
+      row.average = vals.length > 0 ? Math.round(vals.reduce((s, v) => s + v, 0) / vals.length / 1000) : null
+
+      return row
+    })
+  }, [data.monthly, years])
+
+  // Annual revenue totals for bar chart
+  const annualRevenue = useMemo(() => {
+    return years.map(y => {
+      const entries = data.monthly.filter(m => m.year === y)
+      const total = entries.reduce((s, e) => s + (e.revenue_aud ?? 0), 0)
+      const perMw = data.capacity_mw > 0 ? total / data.capacity_mw : 0
+      return { year: y.toString(), revenue_m: Math.round(total / 1_000_000 * 10) / 10, per_mw_k: Math.round(perMw / 1000 * 10) / 10, months: entries.length }
+    })
+  }, [data.monthly, years, data.capacity_mw])
+
+  return (
+    <>
+      <ChartSection title="Monthly Revenue — Year-over-Year ($k)">
+        <ResponsiveContainer width="100%" height={280}>
+          <LineChart data={revenueComparison} margin={{ top: 8, right: 8, bottom: 0, left: -12 }}>
+            <CartesianGrid strokeDasharray="3 3" stroke="var(--color-border)" />
+            <XAxis dataKey="month" tick={{ fontSize: 10, fill: 'var(--color-text-muted)' }} />
+            <YAxis tick={{ fontSize: 10, fill: 'var(--color-text-muted)' }} tickFormatter={v => `$${v}k`} />
+            <Tooltip
+              contentStyle={tooltipStyle}
+              formatter={((value: number, name: string) => [
+                `$${value?.toLocaleString()}k`,
+                name === 'average' ? 'Average' : name.replace('y', ''),
+              ]) as TooltipFormatter}
+            />
+            <Legend wrapperStyle={{ fontSize: 10 }} formatter={(v: string) => v === 'average' ? 'Average' : v.replace('y', '')} />
+            {selectedYear === 'average' ? (
+              <>
+                {years.map(y => (
+                  <Line
+                    key={y}
+                    type="monotone"
+                    dataKey={`y${y}`}
+                    stroke={YEAR_COLORS[y] || '#6b7280'}
+                    strokeWidth={1.5}
+                    dot={{ r: 2.5 }}
+                    connectNulls
+                    strokeOpacity={0.7}
+                  />
+                ))}
+                <Line
+                  type="monotone"
+                  dataKey="average"
+                  stroke="#ffffff"
+                  strokeWidth={3}
+                  dot={{ r: 4, fill: '#ffffff' }}
+                  connectNulls
+                />
+              </>
+            ) : (
+              <Line
+                type="monotone"
+                dataKey={`y${selectedYear}`}
+                stroke={YEAR_COLORS[selectedYear as number] || '#3b82f6'}
+                strokeWidth={2.5}
+                dot={{ r: 4 }}
+                connectNulls
+              />
+            )}
+          </LineChart>
+        </ResponsiveContainer>
+      </ChartSection>
+
+      <ChartSection title="Annual Revenue Trend">
+        <ResponsiveContainer width="100%" height={200}>
+          <BarChart data={annualRevenue} margin={{ top: 8, right: 8, bottom: 0, left: -12 }}>
+            <CartesianGrid strokeDasharray="3 3" stroke="var(--color-border)" />
+            <XAxis dataKey="year" tick={{ fontSize: 10, fill: 'var(--color-text-muted)' }} />
+            <YAxis yAxisId="left" tick={{ fontSize: 10, fill: 'var(--color-text-muted)' }} tickFormatter={v => `$${v}M`} />
+            <YAxis yAxisId="right" orientation="right" tick={{ fontSize: 10, fill: 'var(--color-text-muted)' }} tickFormatter={v => `$${v}k`} />
+            <Tooltip contentStyle={tooltipStyle} formatter={((value: number, name: string) => [
+              name === 'revenue_m' ? `$${value}M` : `$${value}k/MW`,
+              name === 'revenue_m' ? 'Total Revenue' : 'Revenue per MW',
+            ]) as TooltipFormatter} />
+            <Legend wrapperStyle={{ fontSize: 10 }} formatter={(v: string) => v === 'revenue_m' ? 'Total Revenue ($M)' : 'Revenue/MW ($k)'} />
+            <Bar yAxisId="left" dataKey="revenue_m" fill="#f59e0b" radius={[4, 4, 0, 0]} />
+            <Bar yAxisId="right" dataKey="per_mw_k" fill="#8b5cf6" radius={[4, 4, 0, 0]} opacity={0.6} />
           </BarChart>
         </ResponsiveContainer>
       </ChartSection>

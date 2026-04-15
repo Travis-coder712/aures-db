@@ -2,11 +2,11 @@ import { useState, useEffect, useMemo } from 'react'
 import { Link } from 'react-router-dom'
 import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip,
-  ResponsiveContainer, LineChart, Line, Legend,
+  ResponsiveContainer, LineChart, Line, Legend, Cell,
 } from 'recharts'
 import { fetchRevenueIntel } from '../../lib/dataService'
 import ChartWrapper from '../../components/common/ChartWrapper'
-import type { RevenueIntelData, MetricStats } from '../../lib/types'
+import type { RevenueIntelData, MetricStats, RevenueProjectRanking } from '../../lib/types'
 
 // ============================================================
 // Icons — defined BEFORE const arrays per project pattern
@@ -35,6 +35,37 @@ const ShieldIcon = () => (
     <path fillRule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
   </svg>
 )
+
+// ============================================================
+// Section navigation
+// ============================================================
+
+type SectionId = 'overview' | 'state-breakdown' | 'trouble' | 'magnitude'
+
+const StateIcon = () => (
+  <svg className="w-4 h-4" viewBox="0 0 20 20" fill="currentColor">
+    <path fillRule="evenodd" d="M12 1.586l-4 4v12.828l4-4V1.586zM3.707 3.293A1 1 0 002 4v10a1 1 0 00.293.707L6 18.414V5.586L3.707 3.293zM14 5.586v12.828l2.293-2.293A1 1 0 0017 16V6a1 1 0 00-.293-.707L14 2.586v3z" clipRule="evenodd" />
+  </svg>
+)
+
+const AlertIcon = () => (
+  <svg className="w-4 h-4" viewBox="0 0 20 20" fill="currentColor">
+    <path fillRule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+  </svg>
+)
+
+const ChartBarIcon = () => (
+  <svg className="w-4 h-4" viewBox="0 0 20 20" fill="currentColor">
+    <path d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5zm6-4a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7zm6-3a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V4z" />
+  </svg>
+)
+
+const REV_SECTIONS: { id: SectionId; label: string; icon: React.ReactNode }[] = [
+  { id: 'overview', label: 'Overview', icon: <DollarIcon /> },
+  { id: 'state-breakdown', label: 'State Leaders', icon: <StateIcon /> },
+  { id: 'trouble', label: 'Revenue Pressure', icon: <AlertIcon /> },
+  { id: 'magnitude', label: 'Fleet Revenue', icon: <ChartBarIcon /> },
+]
 
 // ============================================================
 // Tech colours & labels
@@ -80,6 +111,9 @@ export default function RevenueIntel() {
   const [data, setData] = useState<RevenueIntelData | null>(null)
   const [loading, setLoading] = useState(true)
   const [selectedYear, setSelectedYear] = useState<SelectedYear>(2024)
+  const [activeSection, setActiveSection] = useState<SectionId>('overview')
+  const [selectedTech, setSelectedTech] = useState<string>('bess')
+  const [selectedState, setSelectedState] = useState<string>('all')
 
   useEffect(() => {
     fetchRevenueIntel().then(d => { setData(d); setLoading(false) })
@@ -226,6 +260,25 @@ export default function RevenueIntel() {
         </p>
       </div>
 
+      {/* Section navigation */}
+      <div className="flex flex-wrap gap-1.5">
+        {REV_SECTIONS.map(sec => (
+          <button
+            key={sec.id}
+            onClick={() => setActiveSection(sec.id)}
+            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
+              activeSection === sec.id
+                ? 'bg-blue-600 text-white'
+                : 'bg-[var(--color-bg-card)] text-[var(--color-text-muted)] border border-[var(--color-border)] hover:border-blue-500/30'
+            }`}
+          >
+            {sec.icon}
+            {sec.label}
+          </button>
+        ))}
+      </div>
+
+      {activeSection === 'overview' && <>
       {/* Year selector */}
       <div className="flex items-center gap-3">
         <span className="text-xs font-semibold uppercase tracking-wider text-[var(--color-text-muted)]">Year</span>
@@ -559,6 +612,415 @@ export default function RevenueIntel() {
       <div className="text-xs text-[var(--color-text-muted)] italic">
         Revenue figures derived from AEMO dispatch and pricing data. Revenue/MW = annual energy revenue
         divided by registered capacity. 2026 figures are year-to-date and not comparable to full-year values.
+      </div>
+      </>}
+
+      {/* ============================================================ */}
+      {/* State Breakdown Section */}
+      {/* ============================================================ */}
+      {activeSection === 'state-breakdown' && data.top_10_by_state && (
+        <StateBreakdownSection
+          data={data.top_10_by_state}
+          selectedTech={selectedTech}
+          setSelectedTech={setSelectedTech}
+          selectedState={selectedState}
+          setSelectedState={setSelectedState}
+        />
+      )}
+
+      {/* ============================================================ */}
+      {/* Revenue Pressure Section */}
+      {/* ============================================================ */}
+      {activeSection === 'trouble' && data.projects_in_trouble && (
+        <RevenuePressureSection projects={data.projects_in_trouble} />
+      )}
+
+      {/* ============================================================ */}
+      {/* Fleet Revenue Magnitude Section */}
+      {/* ============================================================ */}
+      {activeSection === 'magnitude' && data.revenue_magnitude_trends && (
+        <FleetRevenueMagnitudeSection data={data.revenue_magnitude_trends} />
+      )}
+    </div>
+  )
+}
+
+// ============================================================
+// State Breakdown Section
+// ============================================================
+
+function StateBreakdownSection({ data, selectedTech, setSelectedTech, selectedState, setSelectedState }: {
+  data: Record<string, Record<string, RevenueProjectRanking[]>>
+  selectedTech: string; setSelectedTech: (t: string) => void
+  selectedState: string; setSelectedState: (s: string) => void
+}) {
+  const techKeys = Object.keys(data)
+  const states = useMemo(() => {
+    const s = new Set<string>()
+    for (const stateMap of Object.values(data)) {
+      for (const state of Object.keys(stateMap)) s.add(state)
+    }
+    return ['all', ...Array.from(s).sort()]
+  }, [data])
+
+  const stateData = data[selectedTech] || {}
+  const displayProjects = useMemo(() => {
+    if (selectedState === 'all') {
+      const all: RevenueProjectRanking[] = []
+      for (const projects of Object.values(stateData)) all.push(...projects)
+      return all.sort((a, b) => b.revenue_per_mw - a.revenue_per_mw).slice(0, 20)
+    }
+    return stateData[selectedState] || []
+  }, [stateData, selectedState])
+
+  return (
+    <div className="space-y-4">
+      {/* Filters */}
+      <div className="flex flex-wrap gap-3">
+        <div className="flex items-center gap-2">
+          <span className="text-xs font-semibold uppercase tracking-wider text-[var(--color-text-muted)]">Technology</span>
+          <div className="flex rounded-lg overflow-hidden border border-[var(--color-border)]">
+            {techKeys.map(tech => (
+              <button
+                key={tech}
+                onClick={() => setSelectedTech(tech)}
+                className={`px-3 py-1.5 text-xs ${selectedTech === tech ? 'text-white' : 'bg-[var(--color-bg-card)] text-[var(--color-text-muted)]'}`}
+                style={selectedTech === tech ? { backgroundColor: TECH_COLOURS[tech] || '#3b82f6' } : {}}
+              >
+                {TECH_LABELS[tech] || tech}
+              </button>
+            ))}
+          </div>
+        </div>
+        <div className="flex items-center gap-2">
+          <span className="text-xs font-semibold uppercase tracking-wider text-[var(--color-text-muted)]">State</span>
+          <div className="flex rounded-lg overflow-hidden border border-[var(--color-border)]">
+            {states.map(st => (
+              <button
+                key={st}
+                onClick={() => setSelectedState(st)}
+                className={`px-2.5 py-1.5 text-xs ${selectedState === st ? 'bg-blue-600 text-white' : 'bg-[var(--color-bg-card)] text-[var(--color-text-muted)]'}`}
+              >
+                {st === 'all' ? 'All' : st}
+              </button>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Table */}
+      <div className="bg-[var(--color-bg-card)] rounded-xl border border-[var(--color-border)] overflow-x-auto">
+        <div className="p-4 border-b border-[var(--color-border)]">
+          <h2 className="text-lg font-semibold text-[var(--color-text)]">
+            Top Revenue Performers — {TECH_LABELS[selectedTech] || selectedTech} {selectedState !== 'all' ? `(${selectedState})` : ''}
+          </h2>
+          <p className="text-xs text-[var(--color-text-muted)] mt-1">Ranked by revenue per MW for latest full year</p>
+        </div>
+        <table className="w-full text-sm">
+          <thead>
+            <tr className="border-b border-[var(--color-border)]">
+              <th className="text-left p-3 text-[var(--color-text-muted)] font-medium">#</th>
+              <th className="text-left p-3 text-[var(--color-text-muted)] font-medium">Project</th>
+              <th className="text-left p-3 text-[var(--color-text-muted)] font-medium hidden sm:table-cell">State</th>
+              <th className="text-right p-3 text-[var(--color-text-muted)] font-medium">MW</th>
+              <th className="text-right p-3 text-[var(--color-text-muted)] font-medium">Revenue/MW</th>
+              <th className="text-right p-3 text-[var(--color-text-muted)] font-medium hidden sm:table-cell">CF %</th>
+              <th className="text-right p-3 text-[var(--color-text-muted)] font-medium">YoY</th>
+            </tr>
+          </thead>
+          <tbody>
+            {displayProjects.map((p, i) => (
+              <tr key={p.project_id} className="border-b border-[var(--color-border)] hover:bg-[var(--color-bg)]/50">
+                <td className="p-3 text-[var(--color-text-muted)]">{i + 1}</td>
+                <td className="p-3">
+                  <Link to={`/projects/${p.project_id}`} className="text-[var(--color-text)] hover:text-[var(--color-primary)] font-medium">
+                    {p.name}
+                  </Link>
+                </td>
+                <td className="p-3 text-[var(--color-text-muted)] hidden sm:table-cell">{p.state}</td>
+                <td className="p-3 text-right text-[var(--color-text-muted)]">{Math.round(p.capacity_mw)}</td>
+                <td className="p-3 text-right font-medium text-[var(--color-text)]">${Math.round(p.revenue_per_mw / 1000)}k</td>
+                <td className="p-3 text-right text-[var(--color-text-muted)] hidden sm:table-cell">
+                  {p.capacity_factor_pct ? `${p.capacity_factor_pct.toFixed(1)}%` : '-'}
+                </td>
+                <td className="p-3 text-right">
+                  {p.yoy_change_pct != null ? (
+                    <span className={p.yoy_change_pct >= 0 ? 'text-emerald-400' : 'text-red-400'}>
+                      {p.yoy_change_pct >= 0 ? '+' : ''}{p.yoy_change_pct.toFixed(1)}%
+                    </span>
+                  ) : '-'}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        {displayProjects.length === 0 && (
+          <div className="p-8 text-center text-sm text-[var(--color-text-muted)]">No data for this combination.</div>
+        )}
+      </div>
+    </div>
+  )
+}
+
+// ============================================================
+// Revenue Pressure Section
+// ============================================================
+
+function RevenuePressureSection({ projects }: { projects: RevenueProjectRanking[] }) {
+  const [filterTech, setFilterTech] = useState<string>('all')
+
+  const techCounts = useMemo(() => {
+    const counts: Record<string, number> = { all: projects.length }
+    for (const p of projects) {
+      const t = p.technology || 'unknown'
+      counts[t] = (counts[t] || 0) + 1
+    }
+    return counts
+  }, [projects])
+
+  const filtered = useMemo(() => {
+    if (filterTech === 'all') return projects
+    return projects.filter(p => p.technology === filterTech)
+  }, [projects, filterTech])
+
+  // Chart data: worst 15 decliners
+  const chartData = useMemo(() => {
+    return filtered.slice(0, 15).map(p => ({
+      name: p.name.length > 20 ? p.name.slice(0, 18) + '...' : p.name,
+      fullName: p.name,
+      yoy_change: p.yoy_change_pct || 0,
+      tech: p.technology || '',
+    }))
+  }, [filtered])
+
+  return (
+    <div className="space-y-4">
+      {/* Tech filter */}
+      <div className="flex flex-wrap gap-1.5">
+        {Object.keys(techCounts).map(tech => (
+          <button
+            key={tech}
+            onClick={() => setFilterTech(tech)}
+            className={`px-3 py-1.5 text-xs rounded-lg font-medium transition-all ${
+              filterTech === tech
+                ? 'text-white'
+                : 'bg-[var(--color-bg-card)] text-[var(--color-text-muted)] border border-[var(--color-border)]'
+            }`}
+            style={filterTech === tech ? { backgroundColor: tech === 'all' ? '#6b7280' : TECH_COLOURS[tech] || '#6b7280' } : {}}
+          >
+            {tech === 'all' ? 'All' : TECH_LABELS[tech] || tech} ({techCounts[tech]})
+          </button>
+        ))}
+      </div>
+
+      {/* Decline chart */}
+      <div className="bg-[var(--color-bg-card)] rounded-xl p-4 border border-[var(--color-border)]">
+        <h2 className="text-lg font-semibold text-[var(--color-text)] mb-1">Revenue Pressure — Biggest YoY Declines</h2>
+        <p className="text-xs text-[var(--color-text-muted)] mb-4">Projects with the largest year-over-year revenue per MW decline</p>
+        <ChartWrapper title="Revenue Pressure" data={chartData} csvColumns={['fullName', 'yoy_change', 'tech']}>
+          <ResponsiveContainer width="100%" height={Math.max(300, chartData.length * 28)}>
+            <BarChart data={chartData} layout="vertical" margin={{ top: 5, right: 30, bottom: 5, left: 120 }}>
+              <CartesianGrid strokeDasharray="3 3" stroke="var(--color-border)" />
+              <XAxis type="number" tick={{ fill: 'var(--color-text-muted)', fontSize: 11 }} tickFormatter={(v) => `${v}%`} />
+              <YAxis type="category" dataKey="name" tick={{ fill: 'var(--color-text-muted)', fontSize: 11 }} width={115} />
+              <Tooltip
+                contentStyle={{ backgroundColor: 'var(--color-bg)', border: '1px solid var(--color-border)', borderRadius: '8px' }}
+                labelStyle={{ color: 'var(--color-text)' }}
+                formatter={(value) => [`${Number(value).toFixed(1)}%`, 'YoY Change']}
+                labelFormatter={(_, payload) => {
+                  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                  const p = (payload as any)?.[0]?.payload
+                  return p?.fullName || ''
+                }}
+              />
+              <Bar dataKey="yoy_change" radius={[0, 4, 4, 0]}>
+                {chartData.map((entry, i) => (
+                  <Cell key={i} fill={entry.yoy_change >= 0 ? '#10b981' : '#ef4444'} />
+                ))}
+              </Bar>
+            </BarChart>
+          </ResponsiveContainer>
+        </ChartWrapper>
+      </div>
+
+      {/* Table */}
+      <div className="bg-[var(--color-bg-card)] rounded-xl border border-[var(--color-border)] overflow-x-auto">
+        <div className="p-4 border-b border-[var(--color-border)]">
+          <h2 className="text-lg font-semibold text-[var(--color-text)]">All Revenue Decliners</h2>
+        </div>
+        <table className="w-full text-sm">
+          <thead>
+            <tr className="border-b border-[var(--color-border)]">
+              <th className="text-left p-3 text-[var(--color-text-muted)] font-medium">Project</th>
+              <th className="text-left p-3 text-[var(--color-text-muted)] font-medium hidden sm:table-cell">Tech</th>
+              <th className="text-left p-3 text-[var(--color-text-muted)] font-medium hidden sm:table-cell">State</th>
+              <th className="text-right p-3 text-[var(--color-text-muted)] font-medium">MW</th>
+              <th className="text-right p-3 text-[var(--color-text-muted)] font-medium">Prev $/MW</th>
+              <th className="text-right p-3 text-[var(--color-text-muted)] font-medium">Latest $/MW</th>
+              <th className="text-right p-3 text-[var(--color-text-muted)] font-medium">YoY</th>
+            </tr>
+          </thead>
+          <tbody>
+            {filtered.slice(0, 30).map(p => (
+              <tr key={p.project_id} className={`border-b border-[var(--color-border)] hover:bg-[var(--color-bg)]/50 ${(p.yoy_change_pct || 0) < -30 ? 'bg-red-500/5' : ''}`}>
+                <td className="p-3">
+                  <Link to={`/projects/${p.project_id}`} className="text-[var(--color-text)] hover:text-[var(--color-primary)] font-medium">
+                    {p.name}
+                  </Link>
+                </td>
+                <td className="p-3 hidden sm:table-cell">
+                  <span className="text-[10px] font-medium px-1.5 py-0.5 rounded-full text-white" style={{ backgroundColor: TECH_COLOURS[p.technology || ''] || '#6b7280' }}>
+                    {TECH_LABELS[p.technology || ''] || p.technology}
+                  </span>
+                </td>
+                <td className="p-3 text-[var(--color-text-muted)] hidden sm:table-cell">{p.state}</td>
+                <td className="p-3 text-right text-[var(--color-text-muted)]">{Math.round(p.capacity_mw)}</td>
+                <td className="p-3 text-right text-[var(--color-text-muted)]">
+                  {p.prev_revenue_per_mw ? `$${Math.round(p.prev_revenue_per_mw / 1000)}k` : '-'}
+                </td>
+                <td className="p-3 text-right font-medium text-[var(--color-text)]">
+                  {p.latest_revenue_per_mw ? `$${Math.round(p.latest_revenue_per_mw / 1000)}k` : `$${Math.round(p.revenue_per_mw / 1000)}k`}
+                </td>
+                <td className="p-3 text-right">
+                  {p.yoy_change_pct != null ? (
+                    <span className={`font-medium ${p.yoy_change_pct >= 0 ? 'text-emerald-400' : 'text-red-400'}`}>
+                      {p.yoy_change_pct >= 0 ? '+' : ''}{p.yoy_change_pct.toFixed(1)}%
+                    </span>
+                  ) : '-'}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  )
+}
+
+// ============================================================
+// Fleet Revenue Magnitude Section
+// ============================================================
+
+function FleetRevenueMagnitudeSection({ data }: { data: Record<string, Array<{ year: number; total_revenue_m_aud: number; project_count: number; mean_per_project_aud: number }>> }) {
+  const chartData = useMemo(() => {
+    const years = new Set<number>()
+    for (const entries of Object.values(data)) {
+      for (const e of entries) years.add(e.year)
+    }
+    return Array.from(years).sort().map(year => {
+      const point: Record<string, number | string> = { year: String(year) }
+      for (const [tech, entries] of Object.entries(data)) {
+        const entry = entries.find(e => e.year === year)
+        if (entry) {
+          point[`${tech}_rev`] = entry.total_revenue_m_aud
+          point[`${tech}_count`] = entry.project_count
+        }
+      }
+      return point
+    })
+  }, [data])
+
+  const techKeys = Object.keys(data).sort()
+
+  return (
+    <div className="space-y-4">
+      {/* Summary cards */}
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
+        {techKeys.filter(t => TECH_LABELS[t]).map(tech => {
+          const entries = data[tech]
+          const latest = entries[entries.length - 1]
+          const prev = entries.length > 1 ? entries[entries.length - 2] : null
+          const yoy = prev && prev.total_revenue_m_aud > 0
+            ? ((latest.total_revenue_m_aud - prev.total_revenue_m_aud) / prev.total_revenue_m_aud * 100)
+            : null
+          return (
+            <div key={tech} className="bg-[var(--color-bg-card)] rounded-xl p-4 border border-[var(--color-border)]">
+              <div className="flex items-center gap-2 mb-2">
+                <span className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: TECH_COLOURS[tech] }} />
+                <span className="text-xs font-medium text-[var(--color-text-muted)]">{TECH_LABELS[tech]}</span>
+              </div>
+              <div className="text-lg font-bold text-[var(--color-text)]">
+                ${latest.total_revenue_m_aud.toFixed(0)}M
+              </div>
+              <div className="text-xs text-[var(--color-text-muted)]">
+                {latest.project_count} projects ({latest.year})
+              </div>
+              {yoy != null && (
+                <div className={`text-xs mt-1 font-medium ${yoy >= 0 ? 'text-emerald-400' : 'text-red-400'}`}>
+                  {yoy >= 0 ? '+' : ''}{yoy.toFixed(1)}% YoY
+                </div>
+              )}
+            </div>
+          )
+        })}
+      </div>
+
+      {/* Stacked bar chart */}
+      <div className="bg-[var(--color-bg-card)] rounded-xl p-4 border border-[var(--color-border)]">
+        <h2 className="text-lg font-semibold text-[var(--color-text)] mb-1">Fleet Revenue by Technology</h2>
+        <p className="text-xs text-[var(--color-text-muted)] mb-4">
+          Total estimated annual revenue ($M AUD) across all operating projects
+        </p>
+        <ChartWrapper title="Fleet Revenue" data={chartData} csvColumns={['year', ...techKeys.map(t => `${t}_rev`)]}>
+          <ResponsiveContainer width="100%" height={360}>
+            <BarChart data={chartData} margin={{ top: 5, right: 20, bottom: 5, left: 20 }}>
+              <CartesianGrid strokeDasharray="3 3" stroke="var(--color-border)" />
+              <XAxis dataKey="year" tick={{ fill: 'var(--color-text-muted)', fontSize: 12 }} />
+              <YAxis tick={{ fill: 'var(--color-text-muted)', fontSize: 12 }} tickFormatter={(v) => `$${v}M`} />
+              <Tooltip
+                contentStyle={{ backgroundColor: 'var(--color-bg)', border: '1px solid var(--color-border)', borderRadius: '8px' }}
+                labelStyle={{ color: 'var(--color-text)' }}
+                formatter={(value, name) => {
+                  const tech = String(name).replace('_rev', '')
+                  return [`$${Number(value).toFixed(0)}M`, TECH_LABELS[tech] || tech]
+                }}
+              />
+              <Legend formatter={(value) => TECH_LABELS[value.replace('_rev', '')] || value} wrapperStyle={{ fontSize: '12px' }} />
+              {techKeys.filter(t => TECH_COLOURS[t]).map(tech => (
+                <Bar key={tech} dataKey={`${tech}_rev`} stackId="a" fill={TECH_COLOURS[tech]} />
+              ))}
+            </BarChart>
+          </ResponsiveContainer>
+        </ChartWrapper>
+      </div>
+
+      {/* Per-project mean chart */}
+      <div className="bg-[var(--color-bg-card)] rounded-xl p-4 border border-[var(--color-border)]">
+        <h2 className="text-lg font-semibold text-[var(--color-text)] mb-1">Mean Revenue Per Project</h2>
+        <p className="text-xs text-[var(--color-text-muted)] mb-4">
+          Average annual revenue per project ($k AUD) — a declining trend indicates dilution from new entrants
+        </p>
+        <ChartWrapper title="Mean Revenue Per Project" data={chartData} csvColumns={['year', ...techKeys.map(t => `${t}_mean`)]}>
+          <ResponsiveContainer width="100%" height={300}>
+            <LineChart
+              data={chartData.map(point => {
+                const withMeans = { ...point }
+                for (const tech of techKeys) {
+                  const entries = data[tech]
+                  const entry = entries?.find(e => String(e.year) === point.year)
+                  if (entry) withMeans[`${tech}_mean`] = Math.round(entry.mean_per_project_aud / 1000)
+                }
+                return withMeans
+              })}
+              margin={{ top: 5, right: 20, bottom: 5, left: 20 }}
+            >
+              <CartesianGrid strokeDasharray="3 3" stroke="var(--color-border)" />
+              <XAxis dataKey="year" tick={{ fill: 'var(--color-text-muted)', fontSize: 12 }} />
+              <YAxis tick={{ fill: 'var(--color-text-muted)', fontSize: 12 }} tickFormatter={(v) => `$${v}k`} />
+              <Tooltip
+                contentStyle={{ backgroundColor: 'var(--color-bg)', border: '1px solid var(--color-border)', borderRadius: '8px' }}
+                formatter={(value, name) => {
+                  const tech = String(name).replace('_mean', '')
+                  return [`$${Number(value).toFixed(0)}k`, TECH_LABELS[tech] || tech]
+                }}
+              />
+              <Legend formatter={(value) => TECH_LABELS[value.replace('_mean', '')] || value} wrapperStyle={{ fontSize: '12px' }} />
+              {techKeys.filter(t => TECH_COLOURS[t]).map(tech => (
+                <Line key={tech} type="monotone" dataKey={`${tech}_mean`} stroke={TECH_COLOURS[tech]} strokeWidth={2} dot={{ r: 4, fill: TECH_COLOURS[tech] }} connectNulls />
+              ))}
+            </LineChart>
+          </ResponsiveContainer>
+        </ChartWrapper>
       </div>
     </div>
   )

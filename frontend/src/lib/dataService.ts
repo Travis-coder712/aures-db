@@ -5,7 +5,7 @@
  * In production (GitHub Pages), they're served as static files.
  * In development (Vite dev server), they're served from the public/ directory.
  */
-import type { ProjectSummary, Project, Technology, ProjectStatus, State, LeagueTable, LeagueTableIndex, LeagueTechnology, DeveloperIndex, OEMIndex, ContractorIndex, OfftakerIndex, MapProject, CODDriftData, DataSourcesIndex, BESSCapexData, ProjectTimelineData, SchemeTrackerData, DriftAnalysisData, WindResourceData, DunkelflaunteData, EnergyMixData, DeveloperScoreData, RevenueIntelData, GridConnectionData, NewsData, REZAccessMap, EISAnalyticsData, EISComparisonData, EISCoverageData, ProjectMonthlyPerformance, GenerationProfileData, BatteryWatchData, CoalWatchData, CapacityWatchData } from './types'
+import type { ProjectSummary, Project, Technology, ProjectStatus, State, LeagueTable, LeagueTableIndex, LeagueTechnology, DeveloperIndex, OEMIndex, ContractorIndex, OfftakerIndex, MapProject, CODDriftData, DataSourcesIndex, BESSCapexData, ProjectTimelineData, SchemeTrackerData, DriftAnalysisData, WindResourceData, DunkelflaunteData, EnergyMixData, DeveloperScoreData, RevenueIntelData, GridConnectionData, NewsData, REZAccessMap, EISAnalyticsData, EISComparisonData, EISCoverageData, ProjectMonthlyPerformance, GenerationProfileData, BatteryWatchData, CoalWatchData, CapacityWatchData, NemActivitiesData } from './types'
 
 const BASE = import.meta.env.BASE_URL + 'data'
 
@@ -440,6 +440,21 @@ export async function fetchNews(): Promise<NewsData | null> {
     if (!resp.ok) return null
     newsCache = (await resp.json()) as NewsData
     return newsCache
+  } catch { return null }
+}
+
+// ============================================================
+// NEM Activities Timeline
+// ============================================================
+
+let nemActivitiesCache: NemActivitiesData | null = null
+export async function fetchNemActivities(): Promise<NemActivitiesData | null> {
+  if (nemActivitiesCache) return nemActivitiesCache
+  try {
+    const resp = await fetch(`${BASE}/analytics/intelligence/nem-activities.json`)
+    if (!resp.ok) return null
+    nemActivitiesCache = (await resp.json()) as NemActivitiesData
+    return nemActivitiesCache
   } catch { return null }
 }
 

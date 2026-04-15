@@ -34,7 +34,9 @@ import DeveloperScores from './pages/intelligence/DeveloperScores'
 import RevenueIntel from './pages/intelligence/RevenueIntel'
 import TransmissionInfra from './pages/intelligence/TransmissionInfra'
 import EISTechnical from './pages/intelligence/EISTechnical'
+import NemActivities from './pages/intelligence/NemActivities'
 import News from './pages/News'
+import Watchlist from './pages/Watchlist'
 import NotFound from './pages/NotFound'
 
 function App() {
@@ -83,12 +85,13 @@ function App() {
         <Route path="intelligence/revenue" element={<RevenueIntel />} />
         <Route path="intelligence/grid-connection" element={<TransmissionInfra />} />
         <Route path="intelligence/eis-technical" element={<EISTechnical />} />
+        <Route path="intelligence/nem-activities" element={<NemActivities />} />
         {/* News */}
         <Route path="news" element={<News />} />
         {/* Admin */}
         <Route path="data-sources" element={<DataSources />} />
-        {/* Future routes */}
-        {/* <Route path="watchlist" element={<Watchlist />} /> */}
+        {/* Watchlist */}
+        <Route path="watchlist" element={<Watchlist />} />
         <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>

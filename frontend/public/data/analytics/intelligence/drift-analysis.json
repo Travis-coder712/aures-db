@@ -28,9 +28,9 @@
       "project_id": "eraring-battery",
       "name": "Eraring Battery",
       "technology": "bess",
-      "status": "operating",
+      "status": "construction",
       "state": "NSW",
-      "capacity_mw": 700.0,
+      "capacity_mw": 460.0,
       "drift_months": 12,
       "cod_current": "2026",
       "cod_original": "2025",
@@ -144,5 +144,5 @@
     "p25": -2,
     "p75": 12
   },
-  "exported_at": "2026-04-03T13:13:08.023062"
+  "exported_at": "2026-04-15T11:19:46.056278"
 }

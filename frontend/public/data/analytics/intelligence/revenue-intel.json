@@ -1588,5 +1588,2344 @@
       }
     }
   },
-  "exported_at": "2026-04-03T13:13:08.066039"
+  "top_10_by_state": {
+    "pumped_hydro": {
+      "NSW": [
+        {
+          "project_id": "upper-tumut",
+          "name": "Upper Tumut",
+          "revenue_per_mw": 40322.0,
+          "capacity_factor_pct": 14.0,
+          "capacity_mw": 665.0,
+          "yoy_change_pct": -88.4,
+          "latest_year": 2026
+        },
+        {
+          "project_id": "tumut-3",
+          "name": "Tumut 3",
+          "revenue_per_mw": 25790.0,
+          "capacity_factor_pct": 5.2,
+          "capacity_mw": 1800.0,
+          "yoy_change_pct": -85.0,
+          "latest_year": 2026
+        },
+        {
+          "project_id": "guthega",
+          "name": "Guthega",
+          "revenue_per_mw": 24972.0,
+          "capacity_factor_pct": 11.3,
+          "capacity_mw": 80.0,
+          "yoy_change_pct": -88.9,
+          "latest_year": 2026
+        },
+        {
+          "project_id": "blowering",
+          "name": "Blowering",
+          "revenue_per_mw": 23994.0,
+          "capacity_factor_pct": 16.0,
+          "capacity_mw": 80.0,
+          "yoy_change_pct": -83.6,
+          "latest_year": 2026
+        },
+        {
+          "project_id": "shoalhaven",
+          "name": "Shoalhaven",
+          "revenue_per_mw": 20841.0,
+          "capacity_factor_pct": 15.5,
+          "capacity_mw": 247.0,
+          "yoy_change_pct": -86.3,
+          "latest_year": 2026
+        }
+      ],
+      "VIC": [
+        {
+          "project_id": "dartmouth",
+          "name": "Dartmouth",
+          "revenue_per_mw": 35669.0,
+          "capacity_factor_pct": 21.0,
+          "capacity_mw": 185.0,
+          "yoy_change_pct": -88.6,
+          "latest_year": 2026
+        },
+        {
+          "project_id": "eildon",
+          "name": "Eildon",
+          "revenue_per_mw": 31007.0,
+          "capacity_factor_pct": 19.0,
+          "capacity_mw": 120.0,
+          "yoy_change_pct": -86.8,
+          "latest_year": 2026
+        },
+        {
+          "project_id": "murray-1",
+          "name": "Murray 1",
+          "revenue_per_mw": 26618.0,
+          "capacity_factor_pct": 11.4,
+          "capacity_mw": 950.0,
+          "yoy_change_pct": -84.9,
+          "latest_year": 2026
+        },
+        {
+          "project_id": "murray-2",
+          "name": "Murray 2",
+          "revenue_per_mw": 26618.0,
+          "capacity_factor_pct": 11.4,
+          "capacity_mw": 625.0,
+          "yoy_change_pct": -84.9,
+          "latest_year": 2026
+        },
+        {
+          "project_id": "west-kiewa",
+          "name": "West Kiewa",
+          "revenue_per_mw": 16082.0,
+          "capacity_factor_pct": 8.6,
+          "capacity_mw": 68.0,
+          "yoy_change_pct": -91.3,
+          "latest_year": 2026
+        },
+        {
+          "project_id": "bogong-mackay",
+          "name": "Bogong / Mackay",
+          "revenue_per_mw": 11149.0,
+          "capacity_factor_pct": 3.3,
+          "capacity_mw": 300.0,
+          "yoy_change_pct": -94.2,
+          "latest_year": 2026
+        }
+      ],
+      "QLD": [
+        {
+          "project_id": "barron-gorge",
+          "name": "Barron Gorge",
+          "revenue_per_mw": 134032.0,
+          "capacity_factor_pct": 90.4,
+          "capacity_mw": 66.0,
+          "yoy_change_pct": -52.9,
+          "latest_year": 2026
+        },
+        {
+          "project_id": "kareeya",
+          "name": "Kareeya",
+          "revenue_per_mw": 120282.0,
+          "capacity_factor_pct": 73.3,
+          "capacity_mw": 86.4,
+          "yoy_change_pct": -82.1,
+          "latest_year": 2026
+        },
+        {
+          "project_id": "wivenhoe",
+          "name": "Wivenhoe",
+          "revenue_per_mw": 39861.0,
+          "capacity_factor_pct": 33.4,
+          "capacity_mw": 570.0,
+          "yoy_change_pct": -84.5,
+          "latest_year": 2026
+        }
+      ],
+      "TAS": [
+        {
+          "project_id": "poatina",
+          "name": "Poatina",
+          "revenue_per_mw": 136018.0,
+          "capacity_factor_pct": 64.6,
+          "capacity_mw": 372.0,
+          "yoy_change_pct": -29.7,
+          "latest_year": 2026
+        },
+        {
+          "project_id": "john-butters",
+          "name": "John Butters",
+          "revenue_per_mw": 72304.0,
+          "capacity_factor_pct": 33.3,
+          "capacity_mw": 144.0,
+          "yoy_change_pct": -81.4,
+          "latest_year": 2026
+        },
+        {
+          "project_id": "lake-echo",
+          "name": "Lake Echo",
+          "revenue_per_mw": 72240.0,
+          "capacity_factor_pct": 33.6,
+          "capacity_mw": 34.0,
+          "yoy_change_pct": -76.7,
+          "latest_year": 2026
+        },
+        {
+          "project_id": "gordon",
+          "name": "Gordon",
+          "revenue_per_mw": 70564.0,
+          "capacity_factor_pct": 31.8,
+          "capacity_mw": 450.0,
+          "yoy_change_pct": -73.1,
+          "latest_year": 2026
+        },
+        {
+          "project_id": "catagunya-liapootah-wayatinah",
+          "name": "Catagunya / Liapootah / Wayatinah",
+          "revenue_per_mw": 68236.0,
+          "capacity_factor_pct": 33.5,
+          "capacity_mw": 190.0,
+          "yoy_change_pct": -83.8,
+          "latest_year": 2026
+        },
+        {
+          "project_id": "tarraleah",
+          "name": "Tarraleah",
+          "revenue_per_mw": 62924.0,
+          "capacity_factor_pct": 30.1,
+          "capacity_mw": 94.0,
+          "yoy_change_pct": -87.8,
+          "latest_year": 2026
+        },
+        {
+          "project_id": "trevallyn",
+          "name": "Trevallyn",
+          "revenue_per_mw": 61476.0,
+          "capacity_factor_pct": 29.6,
+          "capacity_mw": 107.0,
+          "yoy_change_pct": -76.1,
+          "latest_year": 2026
+        },
+        {
+          "project_id": "repulse",
+          "name": "Repulse",
+          "revenue_per_mw": 59709.0,
+          "capacity_factor_pct": 29.3,
+          "capacity_mw": 34.0,
+          "yoy_change_pct": -83.2,
+          "latest_year": 2026
+        },
+        {
+          "project_id": "tungatinah",
+          "name": "Tungatinah",
+          "revenue_per_mw": 52979.0,
+          "capacity_factor_pct": 25.9,
+          "capacity_mw": 142.0,
+          "yoy_change_pct": -83.4,
+          "latest_year": 2026
+        },
+        {
+          "project_id": "fisher",
+          "name": "Fisher",
+          "revenue_per_mw": 52653.0,
+          "capacity_factor_pct": 24.3,
+          "capacity_mw": 46.0,
+          "yoy_change_pct": -87.3,
+          "latest_year": 2026
+        }
+      ]
+    },
+    "bess": {
+      "NSW": [
+        {
+          "project_id": "eraring-big-battery",
+          "name": "Eraring Big Battery",
+          "revenue_per_mw": 59338.0,
+          "capacity_factor_pct": 16.1,
+          "capacity_mw": 700.0,
+          "yoy_change_pct": 908.1,
+          "latest_year": 2026
+        },
+        {
+          "project_id": "smithfield-bess",
+          "name": "Smithfield BESS",
+          "revenue_per_mw": 52397.0,
+          "capacity_factor_pct": 9.7,
+          "capacity_mw": 65.0,
+          "yoy_change_pct": 40.4,
+          "latest_year": 2026
+        },
+        {
+          "project_id": "capital-battery",
+          "name": "Capital Battery",
+          "revenue_per_mw": 51331.0,
+          "capacity_factor_pct": 14.6,
+          "capacity_mw": 100.0,
+          "yoy_change_pct": -81.1,
+          "latest_year": 2026
+        },
+        {
+          "project_id": "riverina-energy-storage-system-1",
+          "name": "Riverina Energy Storage System 1",
+          "revenue_per_mw": 50196.0,
+          "capacity_factor_pct": 10.8,
+          "capacity_mw": 60.0,
+          "yoy_change_pct": -89.0,
+          "latest_year": 2026
+        },
+        {
+          "project_id": "wallgrove-grid-battery-project",
+          "name": "Wallgrove Grid Battery project",
+          "revenue_per_mw": 39192.0,
+          "capacity_factor_pct": 7.5,
+          "capacity_mw": 50.0,
+          "yoy_change_pct": -88.4,
+          "latest_year": 2026
+        },
+        {
+          "project_id": "riverina-energy-storage-system-2",
+          "name": "Riverina Energy Storage System 2",
+          "revenue_per_mw": 38781.0,
+          "capacity_factor_pct": 10.7,
+          "capacity_mw": 65.0,
+          "yoy_change_pct": -88.2,
+          "latest_year": 2026
+        },
+        {
+          "project_id": "broken-hill-bess",
+          "name": "Broken Hill BESS",
+          "revenue_per_mw": 28118.0,
+          "capacity_factor_pct": 6.9,
+          "capacity_mw": 50.0,
+          "yoy_change_pct": -84.1,
+          "latest_year": 2026
+        },
+        {
+          "project_id": "waratah-super-battery",
+          "name": "Waratah Super Battery",
+          "revenue_per_mw": 3118.0,
+          "capacity_factor_pct": 0.4,
+          "capacity_mw": 850.0,
+          "yoy_change_pct": -91.5,
+          "latest_year": 2026
+        }
+      ],
+      "VIC": [
+        {
+          "project_id": "melbourne-renewable-energy-hub-connection-a3",
+          "name": "Melbourne Renewable Energy Hub Connection A3",
+          "revenue_per_mw": 52919.0,
+          "capacity_factor_pct": 27.6,
+          "capacity_mw": 200.0,
+          "yoy_change_pct": 181.1,
+          "latest_year": 2026
+        },
+        {
+          "project_id": "rangebank-bess",
+          "name": "Rangebank BESS",
+          "revenue_per_mw": 26913.0,
+          "capacity_factor_pct": 12.8,
+          "capacity_mw": 200.0,
+          "yoy_change_pct": -91.6,
+          "latest_year": 2026
+        },
+        {
+          "project_id": "melbourne-renewable-energy-hub-connection-a1",
+          "name": "Melbourne Renewable Energy Hub Connection A1",
+          "revenue_per_mw": 26012.0,
+          "capacity_factor_pct": 11.8,
+          "capacity_mw": 200.0,
+          "latest_year": 2026
+        },
+        {
+          "project_id": "melbourne-renewable-energy-hub-connection-a2",
+          "name": "Melbourne Renewable Energy Hub Connection A2",
+          "revenue_per_mw": 25989.0,
+          "capacity_factor_pct": 11.8,
+          "capacity_mw": 200.0,
+          "latest_year": 2026
+        },
+        {
+          "project_id": "koorangie-energy-storage-system",
+          "name": "Koorangie Energy Storage System",
+          "revenue_per_mw": 24654.0,
+          "capacity_factor_pct": 10.9,
+          "capacity_mw": 185.0,
+          "yoy_change_pct": -89.6,
+          "latest_year": 2026
+        },
+        {
+          "project_id": "latrobe-valley-bess",
+          "name": "LaTrobe Valley BESS",
+          "revenue_per_mw": 11428.0,
+          "capacity_factor_pct": 5.6,
+          "capacity_mw": 200.0,
+          "yoy_change_pct": -8.3,
+          "latest_year": 2026
+        },
+        {
+          "project_id": "hazelwood-battery-energy-storage-system-hbess",
+          "name": "Hazelwood Battery Energy Storage System (HBESS)",
+          "revenue_per_mw": 11338.0,
+          "capacity_factor_pct": 5.5,
+          "capacity_mw": 150.0,
+          "yoy_change_pct": -92.5,
+          "latest_year": 2026
+        },
+        {
+          "project_id": "victorian-big-battery",
+          "name": "Victorian Big Battery",
+          "revenue_per_mw": 7355.0,
+          "capacity_factor_pct": 4.3,
+          "capacity_mw": 300.0,
+          "yoy_change_pct": -96.1,
+          "latest_year": 2026
+        },
+        {
+          "project_id": "ballarat-energy-storage-system",
+          "name": "Ballarat Energy Storage System",
+          "revenue_per_mw": 6607.0,
+          "capacity_factor_pct": 3.1,
+          "capacity_mw": 30.0,
+          "yoy_change_pct": -93.7,
+          "latest_year": 2026
+        }
+      ],
+      "SA": [
+        {
+          "project_id": "mannum-bess",
+          "name": "Mannum BESS",
+          "revenue_per_mw": 107612.0,
+          "capacity_factor_pct": 14.0,
+          "capacity_mw": 100.0,
+          "yoy_change_pct": 197.5,
+          "latest_year": 2026
+        },
+        {
+          "project_id": "blyth-bess",
+          "name": "Blyth BESS",
+          "revenue_per_mw": 94629.0,
+          "capacity_factor_pct": 14.6,
+          "capacity_mw": 200.0,
+          "yoy_change_pct": -66.4,
+          "latest_year": 2026
+        },
+        {
+          "project_id": "torrens-island-bess",
+          "name": "Torrens Island BESS",
+          "revenue_per_mw": 56259.0,
+          "capacity_factor_pct": 7.6,
+          "capacity_mw": 250.0,
+          "yoy_change_pct": -67.9,
+          "latest_year": 2026
+        },
+        {
+          "project_id": "hornsdale-power-reserve",
+          "name": "Hornsdale Power Reserve",
+          "revenue_per_mw": 20573.0,
+          "capacity_factor_pct": 2.7,
+          "capacity_mw": 194.0,
+          "yoy_change_pct": -71.7,
+          "latest_year": 2026
+        },
+        {
+          "project_id": "hornsdale-power-reserve-unit-1",
+          "name": "Hornsdale Power Reserve Unit 1",
+          "revenue_per_mw": 20573.0,
+          "capacity_factor_pct": 2.7,
+          "capacity_mw": 150.0,
+          "yoy_change_pct": -71.7,
+          "latest_year": 2026
+        },
+        {
+          "project_id": "dalrymple-bess",
+          "name": "Dalrymple BESS",
+          "revenue_per_mw": 17310.0,
+          "capacity_factor_pct": 1.8,
+          "capacity_mw": 30.0,
+          "yoy_change_pct": -24.7,
+          "latest_year": 2026
+        }
+      ],
+      "QLD": [
+        {
+          "project_id": "brendale-bess",
+          "name": "Brendale BESS",
+          "revenue_per_mw": 46907.0,
+          "capacity_factor_pct": 16.8,
+          "capacity_mw": 205.0,
+          "yoy_change_pct": 150.8,
+          "latest_year": 2026
+        },
+        {
+          "project_id": "bouldercombe-battery-project",
+          "name": "Bouldercombe Battery project",
+          "revenue_per_mw": 38894.0,
+          "capacity_factor_pct": 14.2,
+          "capacity_mw": 50.0,
+          "latest_year": 2026
+        },
+        {
+          "project_id": "ulinda-park-bess",
+          "name": "Ulinda Park BESS",
+          "revenue_per_mw": 35394.0,
+          "capacity_factor_pct": 13.6,
+          "capacity_mw": 155.0,
+          "yoy_change_pct": 20.4,
+          "latest_year": 2026
+        },
+        {
+          "project_id": "greenbank-bess",
+          "name": "Greenbank BESS",
+          "revenue_per_mw": 30175.0,
+          "capacity_factor_pct": 10.0,
+          "capacity_mw": 200.0,
+          "yoy_change_pct": -72.8,
+          "latest_year": 2026
+        },
+        {
+          "project_id": "wandoan-south-bess",
+          "name": "Wandoan South BESS",
+          "revenue_per_mw": 28883.0,
+          "capacity_factor_pct": 9.9,
+          "capacity_mw": 100.0,
+          "yoy_change_pct": -87.8,
+          "latest_year": 2026
+        },
+        {
+          "project_id": "chinchilla-bess",
+          "name": "Chinchilla BESS",
+          "revenue_per_mw": 28341.0,
+          "capacity_factor_pct": 8.9,
+          "capacity_mw": 100.0,
+          "yoy_change_pct": -88.9,
+          "latest_year": 2026
+        }
+      ]
+    },
+    "hybrid": {
+      "NSW": [
+        {
+          "project_id": "new-england-solar-farm",
+          "name": "New England Solar Farm",
+          "revenue_per_mw": 15408.0,
+          "capacity_factor_pct": 15.7,
+          "capacity_mw": 720.0,
+          "yoy_change_pct": -69.8,
+          "latest_year": 2026
+        }
+      ]
+    },
+    "wind": {
+      "VIC": [
+        {
+          "project_id": "kiata-wind-farm",
+          "name": "Kiata Wind Farm",
+          "revenue_per_mw": 38800.0,
+          "capacity_factor_pct": 31.3,
+          "capacity_mw": 31.0,
+          "yoy_change_pct": -83.7,
+          "latest_year": 2026
+        },
+        {
+          "project_id": "cherry-tree-wind-farm",
+          "name": "Cherry Tree Wind Farm",
+          "revenue_per_mw": 33686.0,
+          "capacity_factor_pct": 33.7,
+          "capacity_mw": 57.6,
+          "yoy_change_pct": -81.2,
+          "latest_year": 2026
+        },
+        {
+          "project_id": "crowlands-wind-farm",
+          "name": "Crowlands Wind Farm",
+          "revenue_per_mw": 27085.0,
+          "capacity_factor_pct": 29.5,
+          "capacity_mw": 79.95,
+          "yoy_change_pct": -79.9,
+          "latest_year": 2026
+        },
+        {
+          "project_id": "murra-warra-wind-farm-stage-1",
+          "name": "Murra Warra Wind Farm - stage 1",
+          "revenue_per_mw": 26920.0,
+          "capacity_factor_pct": 24.8,
+          "capacity_mw": 225.7,
+          "yoy_change_pct": -82.3,
+          "latest_year": 2026
+        },
+        {
+          "project_id": "murra-warra-wind-farm-stage-2",
+          "name": "Murra Warra Wind Farm - stage 2",
+          "revenue_per_mw": 26920.0,
+          "capacity_factor_pct": 24.8,
+          "capacity_mw": 209.0,
+          "yoy_change_pct": -82.3,
+          "latest_year": 2026
+        },
+        {
+          "project_id": "hawkesdale-wind-farm",
+          "name": "Hawkesdale Wind Farm",
+          "revenue_per_mw": 25483.0,
+          "capacity_factor_pct": 23.9,
+          "capacity_mw": 89.5,
+          "yoy_change_pct": -85.4,
+          "latest_year": 2026
+        },
+        {
+          "project_id": "waubra",
+          "name": "Waubra",
+          "revenue_per_mw": 24157.0,
+          "capacity_factor_pct": 33.7,
+          "capacity_mw": 192.0,
+          "yoy_change_pct": -81.7,
+          "latest_year": 2026
+        },
+        {
+          "project_id": "bald-hills-wind-farm",
+          "name": "Bald Hills Wind Farm",
+          "revenue_per_mw": 24064.0,
+          "capacity_factor_pct": 34.5,
+          "capacity_mw": 106.0,
+          "yoy_change_pct": -85.5,
+          "latest_year": 2026
+        },
+        {
+          "project_id": "dundonnell-wind-farm",
+          "name": "Dundonnell Wind Farm",
+          "revenue_per_mw": 21652.0,
+          "capacity_factor_pct": 27.0,
+          "capacity_mw": 336.0,
+          "yoy_change_pct": -84.7,
+          "latest_year": 2026
+        },
+        {
+          "project_id": "salt-creek-wind-farm",
+          "name": "Salt Creek Wind Farm",
+          "revenue_per_mw": 20253.0,
+          "capacity_factor_pct": 17.5,
+          "capacity_mw": 54.0,
+          "yoy_change_pct": -85.7,
+          "latest_year": 2026
+        }
+      ],
+      "QLD": [
+        {
+          "project_id": "kennedy-energy-park-phase-1-wind",
+          "name": "Kennedy Energy Park - Phase 1 - Wind",
+          "revenue_per_mw": 55141.0,
+          "capacity_factor_pct": 41.2,
+          "capacity_mw": 43.3,
+          "yoy_change_pct": -81.4,
+          "latest_year": 2026
+        },
+        {
+          "project_id": "dulacca-wind-farm",
+          "name": "Dulacca Wind Farm",
+          "revenue_per_mw": 54010.0,
+          "capacity_factor_pct": 36.3,
+          "capacity_mw": 180.6,
+          "yoy_change_pct": -81.9,
+          "latest_year": 2026
+        },
+        {
+          "project_id": "coopers-gap-wind-farm",
+          "name": "Coopers Gap Wind Farm",
+          "revenue_per_mw": 52460.0,
+          "capacity_factor_pct": 35.5,
+          "capacity_mw": 453.0,
+          "yoy_change_pct": -79.2,
+          "latest_year": 2026
+        },
+        {
+          "project_id": "kaban-wind-farm",
+          "name": "Kaban Wind Farm",
+          "revenue_per_mw": 30848.0,
+          "capacity_factor_pct": 20.3,
+          "capacity_mw": 152.0,
+          "yoy_change_pct": -81.9,
+          "latest_year": 2026
+        },
+        {
+          "project_id": "mount-emerald",
+          "name": "Mount Emerald",
+          "revenue_per_mw": 29595.0,
+          "capacity_factor_pct": 20.2,
+          "capacity_mw": 180.5,
+          "yoy_change_pct": -83.9,
+          "latest_year": 2026
+        }
+      ],
+      "NSW": [
+        {
+          "project_id": "cullerin-range-wind-farm",
+          "name": "Cullerin Range Wind Farm",
+          "revenue_per_mw": 55491.0,
+          "capacity_factor_pct": 36.5,
+          "capacity_mw": 30.0,
+          "yoy_change_pct": -81.4,
+          "latest_year": 2026
+        },
+        {
+          "project_id": "sapphire-wind-farm",
+          "name": "Sapphire Wind Farm",
+          "revenue_per_mw": 54601.0,
+          "capacity_factor_pct": 37.9,
+          "capacity_mw": 270.0,
+          "yoy_change_pct": -79.0,
+          "latest_year": 2026
+        },
+        {
+          "project_id": "bodangora-wind-farm",
+          "name": "Bodangora Wind Farm",
+          "revenue_per_mw": 51569.0,
+          "capacity_factor_pct": 34.9,
+          "capacity_mw": 111.3,
+          "yoy_change_pct": -77.9,
+          "latest_year": 2026
+        },
+        {
+          "project_id": "gullen-range-wind-farm-2",
+          "name": "Gullen Range Wind Farm 2",
+          "revenue_per_mw": 49329.0,
+          "capacity_factor_pct": 37.7,
+          "capacity_mw": 110.67,
+          "yoy_change_pct": -81.5,
+          "latest_year": 2026
+        },
+        {
+          "project_id": "gunning-wind-farm",
+          "name": "Gunning Wind Farm",
+          "revenue_per_mw": 47132.0,
+          "capacity_factor_pct": 35.3,
+          "capacity_mw": 46.5,
+          "yoy_change_pct": -83.2,
+          "latest_year": 2026
+        },
+        {
+          "project_id": "boco-rock-wind-farm",
+          "name": "Boco Rock Wind Farm",
+          "revenue_per_mw": 47051.0,
+          "capacity_factor_pct": 27.8,
+          "capacity_mw": 113.0,
+          "yoy_change_pct": -81.1,
+          "latest_year": 2026
+        },
+        {
+          "project_id": "white-rock-wind-farm-stage-1",
+          "name": "White Rock Wind Farm - Stage 1",
+          "revenue_per_mw": 46970.0,
+          "capacity_factor_pct": 33.4,
+          "capacity_mw": 175.0,
+          "yoy_change_pct": -82.8,
+          "latest_year": 2026
+        },
+        {
+          "project_id": "crudine-ridge-wind-farm",
+          "name": "Crudine Ridge Wind Farm",
+          "revenue_per_mw": 46727.0,
+          "capacity_factor_pct": 31.2,
+          "capacity_mw": 138.0,
+          "yoy_change_pct": -79.6,
+          "latest_year": 2026
+        },
+        {
+          "project_id": "woodlawn-wind-farm",
+          "name": "Woodlawn Wind Farm",
+          "revenue_per_mw": 46429.0,
+          "capacity_factor_pct": 28.4,
+          "capacity_mw": 48.3,
+          "yoy_change_pct": -81.1,
+          "latest_year": 2026
+        },
+        {
+          "project_id": "rye-park-wind-farm",
+          "name": "Rye Park Wind Farm",
+          "revenue_per_mw": 41673.0,
+          "capacity_factor_pct": 32.5,
+          "capacity_mw": 396.0,
+          "yoy_change_pct": -83.3,
+          "latest_year": 2026
+        }
+      ],
+      "SA": [
+        {
+          "project_id": "wattle-point",
+          "name": "Wattle Point",
+          "revenue_per_mw": 86826.0,
+          "capacity_factor_pct": 31.1,
+          "capacity_mw": 91.0,
+          "yoy_change_pct": -38.0,
+          "latest_year": 2026
+        },
+        {
+          "project_id": "starfish-hill",
+          "name": "Starfish Hill",
+          "revenue_per_mw": 78522.0,
+          "capacity_factor_pct": 34.2,
+          "capacity_mw": 34.5,
+          "yoy_change_pct": -34.3,
+          "latest_year": 2026
+        },
+        {
+          "project_id": "cathedral-rocks",
+          "name": "Cathedral Rocks",
+          "revenue_per_mw": 76148.0,
+          "capacity_factor_pct": 26.6,
+          "capacity_mw": 66.0,
+          "yoy_change_pct": -52.2,
+          "latest_year": 2026
+        },
+        {
+          "project_id": "mt-millar-wind-farm",
+          "name": "Mt Millar Wind Farm",
+          "revenue_per_mw": 57745.0,
+          "capacity_factor_pct": 23.8,
+          "capacity_mw": 70.0,
+          "yoy_change_pct": -63.2,
+          "latest_year": 2026
+        },
+        {
+          "project_id": "lincoln-gap-wind-farm-stage-1",
+          "name": "Lincoln Gap Wind Farm - stage 1",
+          "revenue_per_mw": 51792.0,
+          "capacity_factor_pct": 25.6,
+          "capacity_mw": 126.0,
+          "yoy_change_pct": -68.7,
+          "latest_year": 2026
+        },
+        {
+          "project_id": "lincoln-gap-wind-farm-stage-2",
+          "name": "Lincoln Gap Wind Farm - Stage 2",
+          "revenue_per_mw": 51792.0,
+          "capacity_factor_pct": 25.6,
+          "capacity_mw": 86.0,
+          "yoy_change_pct": -68.7,
+          "latest_year": 2026
+        },
+        {
+          "project_id": "snowtown-wind-farm",
+          "name": "Snowtown Wind Farm",
+          "revenue_per_mw": 45858.0,
+          "capacity_factor_pct": 31.0,
+          "capacity_mw": 98.7,
+          "yoy_change_pct": -76.5,
+          "latest_year": 2026
+        },
+        {
+          "project_id": "hornsdale-wind-farm-stage-1",
+          "name": "Hornsdale Wind Farm Stage 1",
+          "revenue_per_mw": 42140.0,
+          "capacity_factor_pct": 38.9,
+          "capacity_mw": 100.0,
+          "yoy_change_pct": -75.3,
+          "latest_year": 2026
+        },
+        {
+          "project_id": "canunda",
+          "name": "Canunda",
+          "revenue_per_mw": 39452.0,
+          "capacity_factor_pct": 18.4,
+          "capacity_mw": 46.0,
+          "yoy_change_pct": -67.4,
+          "latest_year": 2026
+        },
+        {
+          "project_id": "port-augusta-renewable-energy-park-wind",
+          "name": "Port Augusta Renewable Energy Park - Wind",
+          "revenue_per_mw": 38803.0,
+          "capacity_factor_pct": 26.1,
+          "capacity_mw": 210.0,
+          "yoy_change_pct": -74.7,
+          "latest_year": 2026
+        }
+      ],
+      "TAS": [
+        {
+          "project_id": "woolnorth-studland-bay-bluff-point",
+          "name": "Woolnorth Studland Bay / Bluff Point",
+          "revenue_per_mw": 61471.0,
+          "capacity_factor_pct": 32.1,
+          "capacity_mw": 138.0,
+          "yoy_change_pct": -75.5,
+          "latest_year": 2026
+        },
+        {
+          "project_id": "musselroe-wind-farm",
+          "name": "Musselroe Wind Farm",
+          "revenue_per_mw": 58100.0,
+          "capacity_factor_pct": 30.0,
+          "capacity_mw": 168.0,
+          "yoy_change_pct": -75.2,
+          "latest_year": 2026
+        },
+        {
+          "project_id": "cattle-hill-wind-farm",
+          "name": "Cattle Hill Wind Farm",
+          "revenue_per_mw": 54523.0,
+          "capacity_factor_pct": 27.9,
+          "capacity_mw": 144.0,
+          "yoy_change_pct": -77.3,
+          "latest_year": 2026
+        },
+        {
+          "project_id": "granville-harbour-wind-farm",
+          "name": "Granville Harbour Wind Farm",
+          "revenue_per_mw": 44378.0,
+          "capacity_factor_pct": 23.3,
+          "capacity_mw": 111.0,
+          "yoy_change_pct": -80.9,
+          "latest_year": 2026
+        }
+      ]
+    },
+    "solar": {
+      "NSW": [
+        {
+          "project_id": "moree-solar-farm",
+          "name": "Moree Solar Farm",
+          "revenue_per_mw": 33190.0,
+          "capacity_factor_pct": 30.9,
+          "capacity_mw": 56.0,
+          "yoy_change_pct": -67.0,
+          "latest_year": 2026
+        },
+        {
+          "project_id": "corowa-solar-farm",
+          "name": "Corowa Solar Farm",
+          "revenue_per_mw": 32731.0,
+          "capacity_factor_pct": 33.7,
+          "capacity_mw": 30.0,
+          "yoy_change_pct": -69.9,
+          "latest_year": 2026
+        },
+        {
+          "project_id": "stubbo-solar-farm",
+          "name": "Stubbo Solar Farm",
+          "revenue_per_mw": 32189.0,
+          "capacity_factor_pct": 32.1,
+          "capacity_mw": 400.0,
+          "yoy_change_pct": 31.0,
+          "latest_year": 2026
+        },
+        {
+          "project_id": "hillston-sun-farm",
+          "name": "Hillston Sun Farm",
+          "revenue_per_mw": 31024.0,
+          "capacity_factor_pct": 32.8,
+          "capacity_mw": 85.0,
+          "yoy_change_pct": -71.1,
+          "latest_year": 2026
+        },
+        {
+          "project_id": "wellington-north-solar-farm-lightsource",
+          "name": "Wellington North Solar Farm (Lightsource)",
+          "revenue_per_mw": 30846.0,
+          "capacity_factor_pct": 32.2,
+          "capacity_mw": 330.0,
+          "yoy_change_pct": -65.9,
+          "latest_year": 2026
+        },
+        {
+          "project_id": "gunnedah-solar-farm",
+          "name": "Gunnedah Solar Farm",
+          "revenue_per_mw": 30830.0,
+          "capacity_factor_pct": 25.4,
+          "capacity_mw": 110.0,
+          "yoy_change_pct": -67.3,
+          "latest_year": 2026
+        },
+        {
+          "project_id": "coleambally-solar-farm",
+          "name": "Coleambally Solar Farm",
+          "revenue_per_mw": 29628.0,
+          "capacity_factor_pct": 28.7,
+          "capacity_mw": 150.0,
+          "yoy_change_pct": -66.9,
+          "latest_year": 2026
+        },
+        {
+          "project_id": "beryl-solar-farm",
+          "name": "Beryl Solar Farm",
+          "revenue_per_mw": 28908.0,
+          "capacity_factor_pct": 28.4,
+          "capacity_mw": 87.0,
+          "yoy_change_pct": -58.7,
+          "latest_year": 2026
+        },
+        {
+          "project_id": "wyalong-solar-farm",
+          "name": "Wyalong Solar Farm",
+          "revenue_per_mw": 27318.0,
+          "capacity_factor_pct": 28.1,
+          "capacity_mw": 53.0,
+          "yoy_change_pct": -68.7,
+          "latest_year": 2026
+        },
+        {
+          "project_id": "junee-solar-farm",
+          "name": "Junee Solar Farm",
+          "revenue_per_mw": 27048.0,
+          "capacity_factor_pct": 28.0,
+          "capacity_mw": 30.0,
+          "yoy_change_pct": -64.7,
+          "latest_year": 2026
+        }
+      ],
+      "QLD": [
+        {
+          "project_id": "western-downs-green-power-hub-pl",
+          "name": "Western Downs Green Power Hub P/L",
+          "revenue_per_mw": 25365.0,
+          "capacity_factor_pct": 34.0,
+          "capacity_mw": 400.0,
+          "yoy_change_pct": -51.1,
+          "latest_year": 2026
+        },
+        {
+          "project_id": "columboola-solar-farm",
+          "name": "Columboola Solar Farm",
+          "revenue_per_mw": 25009.0,
+          "capacity_factor_pct": 33.8,
+          "capacity_mw": 162.0,
+          "yoy_change_pct": -38.9,
+          "latest_year": 2026
+        },
+        {
+          "project_id": "moura-solar-farm",
+          "name": "Moura Solar Farm",
+          "revenue_per_mw": 23208.0,
+          "capacity_factor_pct": 30.8,
+          "capacity_mw": 82.0,
+          "yoy_change_pct": -54.5,
+          "latest_year": 2026
+        },
+        {
+          "project_id": "kingaroy-solar-farm",
+          "name": "Kingaroy Solar Farm",
+          "revenue_per_mw": 22959.0,
+          "capacity_factor_pct": 28.9,
+          "capacity_mw": 40.0,
+          "yoy_change_pct": -50.7,
+          "latest_year": 2026
+        },
+        {
+          "project_id": "oakey-2-solar-farm",
+          "name": "Oakey 2 Solar Farm",
+          "revenue_per_mw": 21208.0,
+          "capacity_factor_pct": 27.4,
+          "capacity_mw": 55.0,
+          "yoy_change_pct": -56.3,
+          "latest_year": 2026
+        },
+        {
+          "project_id": "rugby-run-solar-farm",
+          "name": "Rugby Run Solar Farm",
+          "revenue_per_mw": 20548.0,
+          "capacity_factor_pct": 23.4,
+          "capacity_mw": 65.0,
+          "yoy_change_pct": -67.8,
+          "latest_year": 2026
+        },
+        {
+          "project_id": "edenvale-solar-park",
+          "name": "Edenvale Solar Park.",
+          "revenue_per_mw": 20540.0,
+          "capacity_factor_pct": 27.5,
+          "capacity_mw": 180.0,
+          "yoy_change_pct": -54.4,
+          "latest_year": 2026
+        },
+        {
+          "project_id": "emerald-solar-park",
+          "name": "Emerald Solar Park",
+          "revenue_per_mw": 19969.0,
+          "capacity_factor_pct": 26.3,
+          "capacity_mw": 72.0,
+          "yoy_change_pct": -55.0,
+          "latest_year": 2026
+        },
+        {
+          "project_id": "woolooga-solar-farm",
+          "name": "Woolooga Solar Farm",
+          "revenue_per_mw": 19892.0,
+          "capacity_factor_pct": 27.1,
+          "capacity_mw": 176.0,
+          "yoy_change_pct": -50.8,
+          "latest_year": 2026
+        },
+        {
+          "project_id": "aldoga-solar-farm",
+          "name": "Aldoga Solar Farm",
+          "revenue_per_mw": 19495.0,
+          "capacity_factor_pct": 26.8,
+          "capacity_mw": 387.0,
+          "yoy_change_pct": 28.7,
+          "latest_year": 2026
+        }
+      ],
+      "VIC": [
+        {
+          "project_id": "girgarre-solar-farm",
+          "name": "Girgarre Solar Farm",
+          "revenue_per_mw": 16895.0,
+          "capacity_factor_pct": 21.8,
+          "capacity_mw": 76.0,
+          "yoy_change_pct": -76.3,
+          "latest_year": 2026
+        },
+        {
+          "project_id": "glenrowan-west-solar-farm",
+          "name": "Glenrowan West Solar Farm",
+          "revenue_per_mw": 15338.0,
+          "capacity_factor_pct": 20.0,
+          "capacity_mw": 110.0,
+          "yoy_change_pct": -75.6,
+          "latest_year": 2026
+        },
+        {
+          "project_id": "mokoan-solar-farm",
+          "name": "Mokoan Solar Farm",
+          "revenue_per_mw": 14768.0,
+          "capacity_factor_pct": 20.4,
+          "capacity_mw": 46.0,
+          "yoy_change_pct": -69.3,
+          "latest_year": 2026
+        },
+        {
+          "project_id": "numurkah-solar-farm",
+          "name": "Numurkah Solar Farm",
+          "revenue_per_mw": 12937.0,
+          "capacity_factor_pct": 18.8,
+          "capacity_mw": 128.0,
+          "yoy_change_pct": -74.0,
+          "latest_year": 2026
+        },
+        {
+          "project_id": "glenrowan-solar-farm",
+          "name": "Glenrowan Solar Farm",
+          "revenue_per_mw": 12919.0,
+          "capacity_factor_pct": 35.3,
+          "capacity_mw": 102.0,
+          "yoy_change_pct": -75.4,
+          "latest_year": 2026
+        },
+        {
+          "project_id": "wemen-solar-farm",
+          "name": "Wemen Solar Farm",
+          "revenue_per_mw": 11111.0,
+          "capacity_factor_pct": 25.9,
+          "capacity_mw": 88.0,
+          "yoy_change_pct": -76.6,
+          "latest_year": 2026
+        },
+        {
+          "project_id": "winton-solar-farm",
+          "name": "Winton Solar Farm",
+          "revenue_per_mw": 10886.0,
+          "capacity_factor_pct": 31.0,
+          "capacity_mw": 85.0,
+          "yoy_change_pct": -77.3,
+          "latest_year": 2026
+        },
+        {
+          "project_id": "kiamal-solar-farm-stage-1",
+          "name": "Kiamal Solar Farm - Stage 1",
+          "revenue_per_mw": 10039.0,
+          "capacity_factor_pct": 28.5,
+          "capacity_mw": 200.0,
+          "yoy_change_pct": -77.4,
+          "latest_year": 2026
+        },
+        {
+          "project_id": "karadoc-solar-farm",
+          "name": "Karadoc Solar Farm",
+          "revenue_per_mw": 9820.0,
+          "capacity_factor_pct": 27.7,
+          "capacity_mw": 90.0,
+          "yoy_change_pct": -80.3,
+          "latest_year": 2026
+        },
+        {
+          "project_id": "gannawarra-solar-farm",
+          "name": "Gannawarra Solar Farm",
+          "revenue_per_mw": 9363.0,
+          "capacity_factor_pct": 29.7,
+          "capacity_mw": 50.0,
+          "yoy_change_pct": -72.8,
+          "latest_year": 2026
+        }
+      ],
+      "SA": [
+        {
+          "project_id": "port-augusta-renewable-energy-park-solar",
+          "name": "Port Augusta Renewable Energy Park - Solar",
+          "revenue_per_mw": 38803.0,
+          "capacity_factor_pct": 26.1,
+          "capacity_mw": 107.0,
+          "yoy_change_pct": -74.7,
+          "latest_year": 2026
+        },
+        {
+          "project_id": "bungala-two-solar-farm",
+          "name": "Bungala Two Solar Farm",
+          "revenue_per_mw": 23516.0,
+          "capacity_factor_pct": 21.8,
+          "capacity_mw": 110.0,
+          "yoy_change_pct": -69.7,
+          "latest_year": 2026
+        },
+        {
+          "project_id": "bungala-one-solar-farm",
+          "name": "Bungala One Solar Farm",
+          "revenue_per_mw": 21259.0,
+          "capacity_factor_pct": 15.7,
+          "capacity_mw": 110.0,
+          "yoy_change_pct": -72.9,
+          "latest_year": 2026
+        },
+        {
+          "project_id": "tailem-bend-solar",
+          "name": "Tailem Bend - Solar",
+          "revenue_per_mw": 15244.0,
+          "capacity_factor_pct": 12.1,
+          "capacity_mw": 95.0,
+          "yoy_change_pct": -74.2,
+          "latest_year": 2026
+        }
+      ]
+    }
+  },
+  "projects_in_trouble": [
+    {
+      "project_id": "lemonthyme-wilmot",
+      "name": "Lemonthyme / Wilmot",
+      "technology": "pumped_hydro",
+      "state": "TAS",
+      "capacity_mw": 87.0,
+      "latest_revenue_per_mw": 4444.0,
+      "prev_revenue_per_mw": 330450.0,
+      "yoy_change_pct": -98.7,
+      "latest_year": 2026
+    },
+    {
+      "project_id": "victorian-big-battery",
+      "name": "Victorian Big Battery",
+      "technology": "bess",
+      "state": "VIC",
+      "capacity_mw": 300.0,
+      "latest_revenue_per_mw": 7355.0,
+      "prev_revenue_per_mw": 186750.0,
+      "yoy_change_pct": -96.1,
+      "latest_year": 2026
+    },
+    {
+      "project_id": "bogong-mackay",
+      "name": "Bogong / Mackay",
+      "technology": "pumped_hydro",
+      "state": "VIC",
+      "capacity_mw": 300.0,
+      "latest_revenue_per_mw": 11149.0,
+      "prev_revenue_per_mw": 191489.0,
+      "yoy_change_pct": -94.2,
+      "latest_year": 2026
+    },
+    {
+      "project_id": "cethana",
+      "name": "Cethana",
+      "technology": "pumped_hydro",
+      "state": "TAS",
+      "capacity_mw": 100.0,
+      "latest_revenue_per_mw": 17541.0,
+      "prev_revenue_per_mw": 295462.0,
+      "yoy_change_pct": -94.1,
+      "latest_year": 2026
+    },
+    {
+      "project_id": "ballarat-energy-storage-system",
+      "name": "Ballarat Energy Storage System",
+      "technology": "bess",
+      "state": "VIC",
+      "capacity_mw": 30.0,
+      "latest_revenue_per_mw": 6607.0,
+      "prev_revenue_per_mw": 105620.0,
+      "yoy_change_pct": -93.7,
+      "latest_year": 2026
+    },
+    {
+      "project_id": "finley-solar-farm",
+      "name": "Finley Solar Farm",
+      "technology": "solar",
+      "state": "NSW",
+      "capacity_mw": 133.0,
+      "latest_revenue_per_mw": 5546.0,
+      "prev_revenue_per_mw": 85489.0,
+      "yoy_change_pct": -93.5,
+      "latest_year": 2026
+    },
+    {
+      "project_id": "hazelwood-battery-energy-storage-system-hbess",
+      "name": "Hazelwood Battery Energy Storage System (HBESS)",
+      "technology": "bess",
+      "state": "VIC",
+      "capacity_mw": 150.0,
+      "latest_revenue_per_mw": 11338.0,
+      "prev_revenue_per_mw": 150634.0,
+      "yoy_change_pct": -92.5,
+      "latest_year": 2026
+    },
+    {
+      "project_id": "paloona",
+      "name": "Paloona",
+      "technology": "pumped_hydro",
+      "state": "TAS",
+      "capacity_mw": 33.0,
+      "latest_revenue_per_mw": 20704.0,
+      "prev_revenue_per_mw": 259508.0,
+      "yoy_change_pct": -92.0,
+      "latest_year": 2026
+    },
+    {
+      "project_id": "rangebank-bess",
+      "name": "Rangebank BESS",
+      "technology": "bess",
+      "state": "VIC",
+      "capacity_mw": 200.0,
+      "latest_revenue_per_mw": 26913.0,
+      "prev_revenue_per_mw": 320486.0,
+      "yoy_change_pct": -91.6,
+      "latest_year": 2026
+    },
+    {
+      "project_id": "waratah-super-battery",
+      "name": "Waratah Super Battery",
+      "technology": "bess",
+      "state": "NSW",
+      "capacity_mw": 850.0,
+      "latest_revenue_per_mw": 3118.0,
+      "prev_revenue_per_mw": 36677.0,
+      "yoy_change_pct": -91.5,
+      "latest_year": 2026
+    },
+    {
+      "project_id": "devils-gate",
+      "name": "Devils Gate",
+      "technology": "pumped_hydro",
+      "state": "TAS",
+      "capacity_mw": 67.0,
+      "latest_revenue_per_mw": 27491.0,
+      "prev_revenue_per_mw": 321206.0,
+      "yoy_change_pct": -91.4,
+      "latest_year": 2026
+    },
+    {
+      "project_id": "west-kiewa",
+      "name": "West Kiewa",
+      "technology": "pumped_hydro",
+      "state": "VIC",
+      "capacity_mw": 68.0,
+      "latest_revenue_per_mw": 16082.0,
+      "prev_revenue_per_mw": 185397.0,
+      "yoy_change_pct": -91.3,
+      "latest_year": 2026
+    },
+    {
+      "project_id": "tribute",
+      "name": "Tribute",
+      "technology": "pumped_hydro",
+      "state": "TAS",
+      "capacity_mw": 92.0,
+      "latest_revenue_per_mw": 24998.0,
+      "prev_revenue_per_mw": 265024.0,
+      "yoy_change_pct": -90.6,
+      "latest_year": 2026
+    },
+    {
+      "project_id": "moorabool-wind-farm",
+      "name": "Moorabool Wind Farm",
+      "technology": "wind",
+      "state": "VIC",
+      "capacity_mw": 305.0,
+      "latest_revenue_per_mw": 11950.0,
+      "prev_revenue_per_mw": 116144.0,
+      "yoy_change_pct": -89.7,
+      "latest_year": 2026
+    },
+    {
+      "project_id": "koorangie-energy-storage-system",
+      "name": "Koorangie Energy Storage System",
+      "technology": "bess",
+      "state": "VIC",
+      "capacity_mw": 185.0,
+      "latest_revenue_per_mw": 24654.0,
+      "prev_revenue_per_mw": 236996.0,
+      "yoy_change_pct": -89.6,
+      "latest_year": 2026
+    },
+    {
+      "project_id": "reece",
+      "name": "Reece",
+      "technology": "pumped_hydro",
+      "state": "TAS",
+      "capacity_mw": 238.0,
+      "latest_revenue_per_mw": 32799.0,
+      "prev_revenue_per_mw": 312362.0,
+      "yoy_change_pct": -89.5,
+      "latest_year": 2026
+    },
+    {
+      "project_id": "taralga-wind-farm",
+      "name": "Taralga Wind Farm",
+      "technology": "wind",
+      "state": "NSW",
+      "capacity_mw": 106.8,
+      "latest_revenue_per_mw": 24207.0,
+      "prev_revenue_per_mw": 228306.0,
+      "yoy_change_pct": -89.4,
+      "latest_year": 2026
+    },
+    {
+      "project_id": "riverina-energy-storage-system-1",
+      "name": "Riverina Energy Storage System 1",
+      "technology": "bess",
+      "state": "NSW",
+      "capacity_mw": 60.0,
+      "latest_revenue_per_mw": 50196.0,
+      "prev_revenue_per_mw": 456956.0,
+      "yoy_change_pct": -89.0,
+      "latest_year": 2026
+    },
+    {
+      "project_id": "guthega",
+      "name": "Guthega",
+      "technology": "pumped_hydro",
+      "state": "NSW",
+      "capacity_mw": 80.0,
+      "latest_revenue_per_mw": 24972.0,
+      "prev_revenue_per_mw": 225853.0,
+      "yoy_change_pct": -88.9,
+      "latest_year": 2026
+    },
+    {
+      "project_id": "chinchilla-bess",
+      "name": "Chinchilla BESS",
+      "technology": "bess",
+      "state": "QLD",
+      "capacity_mw": 100.0,
+      "latest_revenue_per_mw": 28341.0,
+      "prev_revenue_per_mw": 256374.0,
+      "yoy_change_pct": -88.9,
+      "latest_year": 2026
+    },
+    {
+      "project_id": "dartmouth",
+      "name": "Dartmouth",
+      "technology": "pumped_hydro",
+      "state": "VIC",
+      "capacity_mw": 185.0,
+      "latest_revenue_per_mw": 35669.0,
+      "prev_revenue_per_mw": 313608.0,
+      "yoy_change_pct": -88.6,
+      "latest_year": 2026
+    },
+    {
+      "project_id": "upper-tumut",
+      "name": "Upper Tumut",
+      "technology": "pumped_hydro",
+      "state": "NSW",
+      "capacity_mw": 665.0,
+      "latest_revenue_per_mw": 40322.0,
+      "prev_revenue_per_mw": 346505.0,
+      "yoy_change_pct": -88.4,
+      "latest_year": 2026
+    },
+    {
+      "project_id": "wallgrove-grid-battery-project",
+      "name": "Wallgrove Grid Battery project",
+      "technology": "bess",
+      "state": "NSW",
+      "capacity_mw": 50.0,
+      "latest_revenue_per_mw": 39192.0,
+      "prev_revenue_per_mw": 336473.0,
+      "yoy_change_pct": -88.4,
+      "latest_year": 2026
+    },
+    {
+      "project_id": "riverina-energy-storage-system-2",
+      "name": "Riverina Energy Storage System 2",
+      "technology": "bess",
+      "state": "NSW",
+      "capacity_mw": 65.0,
+      "latest_revenue_per_mw": 38781.0,
+      "prev_revenue_per_mw": 329408.0,
+      "yoy_change_pct": -88.2,
+      "latest_year": 2026
+    },
+    {
+      "project_id": "tarraleah",
+      "name": "Tarraleah",
+      "technology": "pumped_hydro",
+      "state": "TAS",
+      "capacity_mw": 94.0,
+      "latest_revenue_per_mw": 62924.0,
+      "prev_revenue_per_mw": 514698.0,
+      "yoy_change_pct": -87.8,
+      "latest_year": 2026
+    },
+    {
+      "project_id": "wandoan-south-bess",
+      "name": "Wandoan South BESS",
+      "technology": "bess",
+      "state": "QLD",
+      "capacity_mw": 100.0,
+      "latest_revenue_per_mw": 28883.0,
+      "prev_revenue_per_mw": 236217.0,
+      "yoy_change_pct": -87.8,
+      "latest_year": 2026
+    },
+    {
+      "project_id": "fisher",
+      "name": "Fisher",
+      "technology": "pumped_hydro",
+      "state": "TAS",
+      "capacity_mw": 46.0,
+      "latest_revenue_per_mw": 52653.0,
+      "prev_revenue_per_mw": 414012.0,
+      "yoy_change_pct": -87.3,
+      "latest_year": 2026
+    },
+    {
+      "project_id": "bastyan",
+      "name": "Bastyan",
+      "technology": "pumped_hydro",
+      "state": "TAS",
+      "capacity_mw": 88.0,
+      "latest_revenue_per_mw": 39278.0,
+      "prev_revenue_per_mw": 301711.0,
+      "yoy_change_pct": -87.0,
+      "latest_year": 2026
+    },
+    {
+      "project_id": "eildon",
+      "name": "Eildon",
+      "technology": "pumped_hydro",
+      "state": "VIC",
+      "capacity_mw": 120.0,
+      "latest_revenue_per_mw": 31007.0,
+      "prev_revenue_per_mw": 234271.0,
+      "yoy_change_pct": -86.8,
+      "latest_year": 2026
+    },
+    {
+      "project_id": "mt-mercer-wind-farm",
+      "name": "Mt Mercer Wind Farm",
+      "technology": "wind",
+      "state": "VIC",
+      "capacity_mw": 131.2,
+      "latest_revenue_per_mw": 14001.0,
+      "prev_revenue_per_mw": 106049.0,
+      "yoy_change_pct": -86.8,
+      "latest_year": 2026
+    },
+    {
+      "project_id": "yendon-wind-farm",
+      "name": "Yendon Wind Farm",
+      "technology": "wind",
+      "state": "VIC",
+      "capacity_mw": 142.0,
+      "latest_revenue_per_mw": 15370.0,
+      "prev_revenue_per_mw": 114811.0,
+      "yoy_change_pct": -86.6,
+      "latest_year": 2026
+    },
+    {
+      "project_id": "elaine-wind-farm",
+      "name": "Elaine Wind Farm",
+      "technology": "wind",
+      "state": "VIC",
+      "capacity_mw": 82.0,
+      "latest_revenue_per_mw": 15773.0,
+      "prev_revenue_per_mw": 117417.0,
+      "yoy_change_pct": -86.6,
+      "latest_year": 2026
+    },
+    {
+      "project_id": "mackintosh",
+      "name": "Mackintosh",
+      "technology": "pumped_hydro",
+      "state": "TAS",
+      "capacity_mw": 89.0,
+      "latest_revenue_per_mw": 39177.0,
+      "prev_revenue_per_mw": 288646.0,
+      "yoy_change_pct": -86.4,
+      "latest_year": 2026
+    },
+    {
+      "project_id": "shoalhaven",
+      "name": "Shoalhaven",
+      "technology": "pumped_hydro",
+      "state": "NSW",
+      "capacity_mw": 247.0,
+      "latest_revenue_per_mw": 20841.0,
+      "prev_revenue_per_mw": 151696.0,
+      "yoy_change_pct": -86.3,
+      "latest_year": 2026
+    },
+    {
+      "project_id": "ryan-corner-wind-farm",
+      "name": "Ryan Corner Wind Farm",
+      "technology": "wind",
+      "state": "VIC",
+      "capacity_mw": 218.0,
+      "latest_revenue_per_mw": 19128.0,
+      "prev_revenue_per_mw": 138384.0,
+      "yoy_change_pct": -86.2,
+      "latest_year": 2026
+    },
+    {
+      "project_id": "berrybank-wind-farm",
+      "name": "Berrybank Wind Farm",
+      "technology": "wind",
+      "state": "VIC",
+      "capacity_mw": 281.1,
+      "latest_revenue_per_mw": 17999.0,
+      "prev_revenue_per_mw": 128241.0,
+      "yoy_change_pct": -86.0,
+      "latest_year": 2026
+    },
+    {
+      "project_id": "mortlake-south-wind-farm",
+      "name": "Mortlake South Wind Farm",
+      "technology": "wind",
+      "state": "VIC",
+      "capacity_mw": 157.5,
+      "latest_revenue_per_mw": 16897.0,
+      "prev_revenue_per_mw": 118798.0,
+      "yoy_change_pct": -85.8,
+      "latest_year": 2026
+    },
+    {
+      "project_id": "stockyard-hill-wind-farm",
+      "name": "Stockyard Hill Wind Farm",
+      "technology": "wind",
+      "state": "VIC",
+      "capacity_mw": 530.0,
+      "latest_revenue_per_mw": 19484.0,
+      "prev_revenue_per_mw": 136079.0,
+      "yoy_change_pct": -85.7,
+      "latest_year": 2026
+    },
+    {
+      "project_id": "gullen-range-wind-farm",
+      "name": "Gullen Range Wind Farm",
+      "technology": "wind",
+      "state": "NSW",
+      "capacity_mw": 165.5,
+      "latest_revenue_per_mw": 31356.0,
+      "prev_revenue_per_mw": 219143.0,
+      "yoy_change_pct": -85.7,
+      "latest_year": 2026
+    },
+    {
+      "project_id": "salt-creek-wind-farm",
+      "name": "Salt Creek Wind Farm",
+      "technology": "wind",
+      "state": "VIC",
+      "capacity_mw": 54.0,
+      "latest_revenue_per_mw": 20253.0,
+      "prev_revenue_per_mw": 141228.0,
+      "yoy_change_pct": -85.7,
+      "latest_year": 2026
+    },
+    {
+      "project_id": "bald-hills-wind-farm",
+      "name": "Bald Hills Wind Farm",
+      "technology": "wind",
+      "state": "VIC",
+      "capacity_mw": 106.0,
+      "latest_revenue_per_mw": 24064.0,
+      "prev_revenue_per_mw": 165798.0,
+      "yoy_change_pct": -85.5,
+      "latest_year": 2026
+    },
+    {
+      "project_id": "willogoleche-wind-farm",
+      "name": "Willogoleche Wind Farm",
+      "technology": "wind",
+      "state": "SA",
+      "capacity_mw": 119.76,
+      "latest_revenue_per_mw": 21340.0,
+      "prev_revenue_per_mw": 146616.0,
+      "yoy_change_pct": -85.4,
+      "latest_year": 2026
+    },
+    {
+      "project_id": "hawkesdale-wind-farm",
+      "name": "Hawkesdale Wind Farm",
+      "technology": "wind",
+      "state": "VIC",
+      "capacity_mw": 89.5,
+      "latest_revenue_per_mw": 25483.0,
+      "prev_revenue_per_mw": 174441.0,
+      "yoy_change_pct": -85.4,
+      "latest_year": 2026
+    },
+    {
+      "project_id": "silverton-wind-farm",
+      "name": "Silverton Wind Farm",
+      "technology": "wind",
+      "state": "NSW",
+      "capacity_mw": 200.0,
+      "latest_revenue_per_mw": 40410.0,
+      "prev_revenue_per_mw": 274747.0,
+      "yoy_change_pct": -85.3,
+      "latest_year": 2026
+    },
+    {
+      "project_id": "crookwell-3-wind-farm",
+      "name": "Crookwell 3 Wind Farm",
+      "technology": "wind",
+      "state": "NSW",
+      "capacity_mw": 56.0,
+      "latest_revenue_per_mw": 33563.0,
+      "prev_revenue_per_mw": 226351.0,
+      "yoy_change_pct": -85.2,
+      "latest_year": 2026
+    },
+    {
+      "project_id": "tumut-3",
+      "name": "Tumut 3",
+      "technology": "pumped_hydro",
+      "state": "NSW",
+      "capacity_mw": 1800.0,
+      "latest_revenue_per_mw": 25790.0,
+      "prev_revenue_per_mw": 171526.0,
+      "yoy_change_pct": -85.0,
+      "latest_year": 2026
+    },
+    {
+      "project_id": "portland-wind-farm",
+      "name": "Portland Wind Farm",
+      "technology": "wind",
+      "state": "VIC",
+      "capacity_mw": 151.7,
+      "latest_revenue_per_mw": 19787.0,
+      "prev_revenue_per_mw": 132341.0,
+      "yoy_change_pct": -85.0,
+      "latest_year": 2026
+    },
+    {
+      "project_id": "murray-1",
+      "name": "Murray 1",
+      "technology": "pumped_hydro",
+      "state": "VIC",
+      "capacity_mw": 950.0,
+      "latest_revenue_per_mw": 26618.0,
+      "prev_revenue_per_mw": 176819.0,
+      "yoy_change_pct": -84.9,
+      "latest_year": 2026
+    },
+    {
+      "project_id": "murray-2",
+      "name": "Murray 2",
+      "technology": "pumped_hydro",
+      "state": "VIC",
+      "capacity_mw": 625.0,
+      "latest_revenue_per_mw": 26618.0,
+      "prev_revenue_per_mw": 176819.0,
+      "yoy_change_pct": -84.9,
+      "latest_year": 2026
+    },
+    {
+      "project_id": "yambuk",
+      "name": "Yambuk",
+      "technology": "wind",
+      "state": "VIC",
+      "capacity_mw": 30.0,
+      "latest_revenue_per_mw": 18436.0,
+      "prev_revenue_per_mw": 121575.0,
+      "yoy_change_pct": -84.8,
+      "latest_year": 2026
+    },
+    {
+      "project_id": "dundonnell-wind-farm",
+      "name": "Dundonnell Wind Farm",
+      "technology": "wind",
+      "state": "VIC",
+      "capacity_mw": 336.0,
+      "latest_revenue_per_mw": 21652.0,
+      "prev_revenue_per_mw": 141408.0,
+      "yoy_change_pct": -84.7,
+      "latest_year": 2026
+    },
+    {
+      "project_id": "crookwell-2-wind-farm",
+      "name": "Crookwell 2 Wind Farm",
+      "technology": "wind",
+      "state": "NSW",
+      "capacity_mw": 91.0,
+      "latest_revenue_per_mw": 35264.0,
+      "prev_revenue_per_mw": 225168.0,
+      "yoy_change_pct": -84.3,
+      "latest_year": 2026
+    },
+    {
+      "project_id": "broken-hill-bess",
+      "name": "Broken Hill BESS",
+      "technology": "bess",
+      "state": "NSW",
+      "capacity_mw": 50.0,
+      "latest_revenue_per_mw": 28118.0,
+      "prev_revenue_per_mw": 176841.0,
+      "yoy_change_pct": -84.1,
+      "latest_year": 2026
+    },
+    {
+      "project_id": "sebastopol-solar-farm",
+      "name": "Sebastopol Solar Farm",
+      "technology": "solar",
+      "state": "NSW",
+      "capacity_mw": 90.0,
+      "latest_revenue_per_mw": 14179.0,
+      "prev_revenue_per_mw": 81485.0,
+      "yoy_change_pct": -82.6,
+      "latest_year": 2026
+    },
+    {
+      "project_id": "capital-battery",
+      "name": "Capital Battery",
+      "technology": "bess",
+      "state": "NSW",
+      "capacity_mw": 100.0,
+      "latest_revenue_per_mw": 51331.0,
+      "prev_revenue_per_mw": 271192.0,
+      "yoy_change_pct": -81.1,
+      "latest_year": 2026
+    },
+    {
+      "project_id": "yatpool-solar-farm",
+      "name": "Yatpool Solar Farm",
+      "technology": "solar",
+      "state": "VIC",
+      "capacity_mw": 81.0,
+      "latest_revenue_per_mw": 8953.0,
+      "prev_revenue_per_mw": 45936.0,
+      "yoy_change_pct": -80.5,
+      "latest_year": 2026
+    },
+    {
+      "project_id": "karadoc-solar-farm",
+      "name": "Karadoc Solar Farm",
+      "technology": "solar",
+      "state": "VIC",
+      "capacity_mw": 90.0,
+      "latest_revenue_per_mw": 9820.0,
+      "prev_revenue_per_mw": 49870.0,
+      "yoy_change_pct": -80.3,
+      "latest_year": 2026
+    },
+    {
+      "project_id": "clermont-solar-farm",
+      "name": "Clermont Solar Farm",
+      "technology": "solar",
+      "state": "QLD",
+      "capacity_mw": 75.0,
+      "latest_revenue_per_mw": 10992.0,
+      "prev_revenue_per_mw": 49558.0,
+      "yoy_change_pct": -77.8,
+      "latest_year": 2026
+    },
+    {
+      "project_id": "kiamal-solar-farm-stage-1",
+      "name": "Kiamal Solar Farm - Stage 1",
+      "technology": "solar",
+      "state": "VIC",
+      "capacity_mw": 200.0,
+      "latest_revenue_per_mw": 10039.0,
+      "prev_revenue_per_mw": 44424.0,
+      "yoy_change_pct": -77.4,
+      "latest_year": 2026
+    },
+    {
+      "project_id": "winton-solar-farm",
+      "name": "Winton Solar Farm",
+      "technology": "solar",
+      "state": "VIC",
+      "capacity_mw": 85.0,
+      "latest_revenue_per_mw": 10886.0,
+      "prev_revenue_per_mw": 47851.0,
+      "yoy_change_pct": -77.3,
+      "latest_year": 2026
+    },
+    {
+      "project_id": "sunraysia-solar-farm",
+      "name": "Sunraysia Solar Farm",
+      "technology": "solar",
+      "state": "NSW",
+      "capacity_mw": 200.0,
+      "latest_revenue_per_mw": 24040.0,
+      "prev_revenue_per_mw": 104371.0,
+      "yoy_change_pct": -77.0,
+      "latest_year": 2026
+    },
+    {
+      "project_id": "wemen-solar-farm",
+      "name": "Wemen Solar Farm",
+      "technology": "solar",
+      "state": "VIC",
+      "capacity_mw": 88.0,
+      "latest_revenue_per_mw": 11111.0,
+      "prev_revenue_per_mw": 47425.0,
+      "yoy_change_pct": -76.6,
+      "latest_year": 2026
+    },
+    {
+      "project_id": "girgarre-solar-farm",
+      "name": "Girgarre Solar Farm",
+      "technology": "solar",
+      "state": "VIC",
+      "capacity_mw": 76.0,
+      "latest_revenue_per_mw": 16895.0,
+      "prev_revenue_per_mw": 71183.0,
+      "yoy_change_pct": -76.3,
+      "latest_year": 2026
+    },
+    {
+      "project_id": "metz-solar-farm",
+      "name": "Metz Solar Farm",
+      "technology": "solar",
+      "state": "NSW",
+      "capacity_mw": 115.0,
+      "latest_revenue_per_mw": 21554.0,
+      "prev_revenue_per_mw": 90011.0,
+      "yoy_change_pct": -76.1,
+      "latest_year": 2026
+    },
+    {
+      "project_id": "glenrowan-west-solar-farm",
+      "name": "Glenrowan West Solar Farm",
+      "technology": "solar",
+      "state": "VIC",
+      "capacity_mw": 110.0,
+      "latest_revenue_per_mw": 15338.0,
+      "prev_revenue_per_mw": 62809.0,
+      "yoy_change_pct": -75.6,
+      "latest_year": 2026
+    },
+    {
+      "project_id": "glenrowan-solar-farm",
+      "name": "Glenrowan Solar Farm",
+      "technology": "solar",
+      "state": "VIC",
+      "capacity_mw": 102.0,
+      "latest_revenue_per_mw": 12919.0,
+      "prev_revenue_per_mw": 52437.0,
+      "yoy_change_pct": -75.4,
+      "latest_year": 2026
+    },
+    {
+      "project_id": "bluegrass-solar-farm",
+      "name": "Bluegrass Solar Farm",
+      "technology": "solar",
+      "state": "QLD",
+      "capacity_mw": 148.0,
+      "latest_revenue_per_mw": 12016.0,
+      "prev_revenue_per_mw": 48616.0,
+      "yoy_change_pct": -75.3,
+      "latest_year": 2026
+    },
+    {
+      "project_id": "kidston-solar-project-phase-one",
+      "name": "Kidston Solar Project Phase One",
+      "technology": "solar",
+      "state": "QLD",
+      "capacity_mw": 50.0,
+      "latest_revenue_per_mw": 18432.0,
+      "prev_revenue_per_mw": 73590.0,
+      "yoy_change_pct": -75.0,
+      "latest_year": 2026
+    },
+    {
+      "project_id": "walla-walla-solar-farm",
+      "name": "Walla Walla Solar Farm",
+      "technology": "solar",
+      "state": "NSW",
+      "capacity_mw": 300.0,
+      "latest_revenue_per_mw": 18726.0,
+      "prev_revenue_per_mw": 74021.0,
+      "yoy_change_pct": -74.7,
+      "latest_year": 2026
+    },
+    {
+      "project_id": "port-augusta-renewable-energy-park-solar",
+      "name": "Port Augusta Renewable Energy Park - Solar",
+      "technology": "solar",
+      "state": "SA",
+      "capacity_mw": 107.0,
+      "latest_revenue_per_mw": 38803.0,
+      "prev_revenue_per_mw": 153507.0,
+      "yoy_change_pct": -74.7,
+      "latest_year": 2026
+    },
+    {
+      "project_id": "clare-solar-farm",
+      "name": "Clare Solar Farm",
+      "technology": "solar",
+      "state": "QLD",
+      "capacity_mw": 100.0,
+      "latest_revenue_per_mw": 16946.0,
+      "prev_revenue_per_mw": 67051.0,
+      "yoy_change_pct": -74.7,
+      "latest_year": 2026
+    },
+    {
+      "project_id": "manildra-solar-farm",
+      "name": "Manildra Solar Farm",
+      "technology": "solar",
+      "state": "NSW",
+      "capacity_mw": 46.7,
+      "latest_revenue_per_mw": 12963.0,
+      "prev_revenue_per_mw": 51030.0,
+      "yoy_change_pct": -74.6,
+      "latest_year": 2026
+    },
+    {
+      "project_id": "tailem-bend-solar",
+      "name": "Tailem Bend - Solar",
+      "technology": "solar",
+      "state": "SA",
+      "capacity_mw": 95.0,
+      "latest_revenue_per_mw": 15244.0,
+      "prev_revenue_per_mw": 59085.0,
+      "yoy_change_pct": -74.2,
+      "latest_year": 2026
+    },
+    {
+      "project_id": "greenbank-bess",
+      "name": "Greenbank BESS",
+      "technology": "bess",
+      "state": "QLD",
+      "capacity_mw": 200.0,
+      "latest_revenue_per_mw": 30175.0,
+      "prev_revenue_per_mw": 110983.0,
+      "yoy_change_pct": -72.8,
+      "latest_year": 2026
+    },
+    {
+      "project_id": "hornsdale-power-reserve",
+      "name": "Hornsdale Power Reserve",
+      "technology": "bess",
+      "state": "SA",
+      "capacity_mw": 194.0,
+      "latest_revenue_per_mw": 20573.0,
+      "prev_revenue_per_mw": 72687.0,
+      "yoy_change_pct": -71.7,
+      "latest_year": 2026
+    },
+    {
+      "project_id": "hornsdale-power-reserve-unit-1",
+      "name": "Hornsdale Power Reserve Unit 1",
+      "technology": "bess",
+      "state": "SA",
+      "capacity_mw": 150.0,
+      "latest_revenue_per_mw": 20573.0,
+      "prev_revenue_per_mw": 72687.0,
+      "yoy_change_pct": -71.7,
+      "latest_year": 2026
+    },
+    {
+      "project_id": "new-england-solar-farm",
+      "name": "New England Solar Farm",
+      "technology": "hybrid",
+      "state": "NSW",
+      "capacity_mw": 720.0,
+      "latest_revenue_per_mw": 15408.0,
+      "prev_revenue_per_mw": 50972.0,
+      "yoy_change_pct": -69.8,
+      "latest_year": 2026
+    },
+    {
+      "project_id": "torrens-island-bess",
+      "name": "Torrens Island BESS",
+      "technology": "bess",
+      "state": "SA",
+      "capacity_mw": 250.0,
+      "latest_revenue_per_mw": 56259.0,
+      "prev_revenue_per_mw": 175072.0,
+      "yoy_change_pct": -67.9,
+      "latest_year": 2026
+    },
+    {
+      "project_id": "blyth-bess",
+      "name": "Blyth BESS",
+      "technology": "bess",
+      "state": "SA",
+      "capacity_mw": 200.0,
+      "latest_revenue_per_mw": 94629.0,
+      "prev_revenue_per_mw": 281525.0,
+      "yoy_change_pct": -66.4,
+      "latest_year": 2026
+    },
+    {
+      "project_id": "dalrymple-bess",
+      "name": "Dalrymple BESS",
+      "technology": "bess",
+      "state": "SA",
+      "capacity_mw": 30.0,
+      "latest_revenue_per_mw": 17310.0,
+      "prev_revenue_per_mw": 22980.0,
+      "yoy_change_pct": -24.7,
+      "latest_year": 2026
+    },
+    {
+      "project_id": "latrobe-valley-bess",
+      "name": "LaTrobe Valley BESS",
+      "technology": "bess",
+      "state": "VIC",
+      "capacity_mw": 200.0,
+      "latest_revenue_per_mw": 11428.0,
+      "prev_revenue_per_mw": 12459.0,
+      "yoy_change_pct": -8.3,
+      "latest_year": 2026
+    }
+  ],
+  "revenue_magnitude_trends": {
+    "bess": [
+      {
+        "year": 2018,
+        "total_revenue_m_aud": 9.9,
+        "project_count": 4,
+        "mean_per_project_aud": 2465026.0
+      },
+      {
+        "year": 2019,
+        "total_revenue_m_aud": 12.3,
+        "project_count": 4,
+        "mean_per_project_aud": 3082620.0
+      },
+      {
+        "year": 2020,
+        "total_revenue_m_aud": 4.7,
+        "project_count": 4,
+        "mean_per_project_aud": 1165974.0
+      },
+      {
+        "year": 2021,
+        "total_revenue_m_aud": 11.1,
+        "project_count": 7,
+        "mean_per_project_aud": 1581353.0
+      },
+      {
+        "year": 2022,
+        "total_revenue_m_aud": 98.9,
+        "project_count": 7,
+        "mean_per_project_aud": 14135004.0
+      },
+      {
+        "year": 2023,
+        "total_revenue_m_aud": 51.2,
+        "project_count": 14,
+        "mean_per_project_aud": 3657042.0
+      },
+      {
+        "year": 2024,
+        "total_revenue_m_aud": 203.3,
+        "project_count": 17,
+        "mean_per_project_aud": 11957240.0
+      },
+      {
+        "year": 2025,
+        "total_revenue_m_aud": 544.4,
+        "project_count": 28,
+        "mean_per_project_aud": 19442083.0
+      },
+      {
+        "year": 2026,
+        "total_revenue_m_aud": 179.1,
+        "project_count": 29,
+        "mean_per_project_aud": 6175679.0
+      }
+    ],
+    "hybrid": [
+      {
+        "year": 2022,
+        "total_revenue_m_aud": 0.0,
+        "project_count": 1,
+        "mean_per_project_aud": 4320.0
+      },
+      {
+        "year": 2023,
+        "total_revenue_m_aud": 25.0,
+        "project_count": 1,
+        "mean_per_project_aud": 25033680.0
+      },
+      {
+        "year": 2024,
+        "total_revenue_m_aud": 64.1,
+        "project_count": 1,
+        "mean_per_project_aud": 64119600.0
+      },
+      {
+        "year": 2025,
+        "total_revenue_m_aud": 36.7,
+        "project_count": 1,
+        "mean_per_project_aud": 36699840.0
+      },
+      {
+        "year": 2026,
+        "total_revenue_m_aud": 11.1,
+        "project_count": 1,
+        "mean_per_project_aud": 11093760.0
+      }
+    ],
+    "pumped_hydro": [
+      {
+        "year": 2018,
+        "total_revenue_m_aud": 1453.8,
+        "project_count": 33,
+        "mean_per_project_aud": 44055633.0
+      },
+      {
+        "year": 2019,
+        "total_revenue_m_aud": 1661.7,
+        "project_count": 33,
+        "mean_per_project_aud": 50355970.0
+      },
+      {
+        "year": 2020,
+        "total_revenue_m_aud": 995.2,
+        "project_count": 33,
+        "mean_per_project_aud": 30156616.0
+      },
+      {
+        "year": 2021,
+        "total_revenue_m_aud": 1167.7,
+        "project_count": 33,
+        "mean_per_project_aud": 35384281.0
+      },
+      {
+        "year": 2022,
+        "total_revenue_m_aud": 3754.6,
+        "project_count": 33,
+        "mean_per_project_aud": 113776055.0
+      },
+      {
+        "year": 2023,
+        "total_revenue_m_aud": 1532.0,
+        "project_count": 33,
+        "mean_per_project_aud": 46425752.0
+      },
+      {
+        "year": 2024,
+        "total_revenue_m_aud": 2544.0,
+        "project_count": 33,
+        "mean_per_project_aud": 77090545.0
+      },
+      {
+        "year": 2025,
+        "total_revenue_m_aud": 2004.9,
+        "project_count": 33,
+        "mean_per_project_aud": 60754692.0
+      },
+      {
+        "year": 2026,
+        "total_revenue_m_aud": 337.5,
+        "project_count": 33,
+        "mean_per_project_aud": 10226896.0
+      }
+    ],
+    "solar": [
+      {
+        "year": 2018,
+        "total_revenue_m_aud": 134.4,
+        "project_count": 23,
+        "mean_per_project_aud": 5841700.0
+      },
+      {
+        "year": 2019,
+        "total_revenue_m_aud": 352.8,
+        "project_count": 36,
+        "mean_per_project_aud": 9800391.0
+      },
+      {
+        "year": 2020,
+        "total_revenue_m_aud": 283.1,
+        "project_count": 48,
+        "mean_per_project_aud": 5898318.0
+      },
+      {
+        "year": 2021,
+        "total_revenue_m_aud": 334.7,
+        "project_count": 56,
+        "mean_per_project_aud": 5976116.0
+      },
+      {
+        "year": 2022,
+        "total_revenue_m_aud": 1115.8,
+        "project_count": 64,
+        "mean_per_project_aud": 17434066.0
+      },
+      {
+        "year": 2023,
+        "total_revenue_m_aud": 540.2,
+        "project_count": 68,
+        "mean_per_project_aud": 7944665.0
+      },
+      {
+        "year": 2024,
+        "total_revenue_m_aud": 748.4,
+        "project_count": 73,
+        "mean_per_project_aud": 10252178.0
+      },
+      {
+        "year": 2025,
+        "total_revenue_m_aud": 560.5,
+        "project_count": 78,
+        "mean_per_project_aud": 7186280.0
+      },
+      {
+        "year": 2026,
+        "total_revenue_m_aud": 199.6,
+        "project_count": 78,
+        "mean_per_project_aud": 2559541.0
+      }
+    ],
+    "wind": [
+      {
+        "year": 2018,
+        "total_revenue_m_aud": 1070.4,
+        "project_count": 48,
+        "mean_per_project_aud": 22299742.0
+      },
+      {
+        "year": 2019,
+        "total_revenue_m_aud": 1325.6,
+        "project_count": 54,
+        "mean_per_project_aud": 24548861.0
+      },
+      {
+        "year": 2020,
+        "total_revenue_m_aud": 762.9,
+        "project_count": 64,
+        "mean_per_project_aud": 11919775.0
+      },
+      {
+        "year": 2021,
+        "total_revenue_m_aud": 958.4,
+        "project_count": 69,
+        "mean_per_project_aud": 13890513.0
+      },
+      {
+        "year": 2022,
+        "total_revenue_m_aud": 3447.2,
+        "project_count": 72,
+        "mean_per_project_aud": 47877415.0
+      },
+      {
+        "year": 2023,
+        "total_revenue_m_aud": 1492.6,
+        "project_count": 75,
+        "mean_per_project_aud": 19900931.0
+      },
+      {
+        "year": 2024,
+        "total_revenue_m_aud": 2143.0,
+        "project_count": 80,
+        "mean_per_project_aud": 26787705.0
+      },
+      {
+        "year": 2025,
+        "total_revenue_m_aud": 1995.4,
+        "project_count": 80,
+        "mean_per_project_aud": 24943064.0
+      },
+      {
+        "year": 2026,
+        "total_revenue_m_aud": 385.5,
+        "project_count": 80,
+        "mean_per_project_aud": 4819332.0
+      }
+    ]
+  },
+  "exported_at": "2026-04-15T11:19:46.106815"
 }

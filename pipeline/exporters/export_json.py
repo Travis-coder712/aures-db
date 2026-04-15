@@ -2482,16 +2482,118 @@ def export_revenue_intel(conn):
             if 'bess_spread' in entry:
                 tech_comparison[entry['technology']]['bess_spread'] = entry['bess_spread']
 
+    # ---- Top 10 by state per technology ----
+    # Group by (tech, state, project) for latest year with data
+    project_latest = {}  # (project_id) -> {tech, state, name, capacity_mw, latest_year, latest_rpm, prev_rpm}
+    for r in perf_rows:
+        pid = r['id']
+        yr = r['year']
+        rpm = r['revenue_per_mw']
+        if rpm is None:
+            continue
+        if pid not in project_latest or yr > project_latest[pid]['latest_year']:
+            prev = project_latest[pid] if pid in project_latest else None
+            project_latest[pid] = {
+                'project_id': pid, 'name': r['name'], 'technology': r['technology'],
+                'state': conn.execute("SELECT state FROM projects WHERE id = ?", (pid,)).fetchone()['state'],
+                'capacity_mw': conn.execute("SELECT capacity_mw FROM projects WHERE id = ?", (pid,)).fetchone()['capacity_mw'] or 0,
+                'latest_year': yr, 'latest_rpm': rpm,
+                'prev_rpm': prev['latest_rpm'] if prev else None,
+                'prev_year': prev['latest_year'] if prev else None,
+                'cf': r['capacity_factor_pct'],
+            }
+        elif pid in project_latest and yr > (project_latest[pid].get('prev_year') or 0) and yr < project_latest[pid]['latest_year']:
+            project_latest[pid]['prev_rpm'] = rpm
+            project_latest[pid]['prev_year'] = yr
+
+    # Build top 10 by state
+    top_10_by_state = defaultdict(lambda: defaultdict(list))
+    for p in project_latest.values():
+        tech = p['technology']
+        state = p['state'] or 'Unknown'
+        yoy_change = None
+        if p.get('prev_rpm') and p['prev_rpm'] > 0:
+            yoy_change = round(100 * (p['latest_rpm'] - p['prev_rpm']) / abs(p['prev_rpm']), 1)
+        entry = {
+            'project_id': p['project_id'], 'name': p['name'],
+            'revenue_per_mw': round(p['latest_rpm'], 0),
+            'capacity_factor_pct': round(p['cf'], 1) if p['cf'] else None,
+            'capacity_mw': p['capacity_mw'],
+            'yoy_change_pct': yoy_change,
+            'latest_year': p['latest_year'],
+        }
+        top_10_by_state[tech][state].append(entry)
+
+    # Sort each state list by revenue_per_mw descending, take top 10
+    for tech in top_10_by_state:
+        for state in top_10_by_state[tech]:
+            top_10_by_state[tech][state] = sorted(
+                top_10_by_state[tech][state], key=lambda x: x['revenue_per_mw'], reverse=True
+            )[:10]
+
+    # ---- Projects in trouble (biggest YoY revenue declines) ----
+    projects_in_trouble = []
+    for p in project_latest.values():
+        if p.get('prev_rpm') and p['prev_rpm'] > 0:
+            yoy = round(100 * (p['latest_rpm'] - p['prev_rpm']) / abs(p['prev_rpm']), 1)
+            projects_in_trouble.append({
+                'project_id': p['project_id'], 'name': p['name'],
+                'technology': p['technology'], 'state': p['state'] or 'Unknown',
+                'capacity_mw': p['capacity_mw'],
+                'latest_revenue_per_mw': round(p['latest_rpm'], 0),
+                'prev_revenue_per_mw': round(p['prev_rpm'], 0),
+                'yoy_change_pct': yoy,
+                'latest_year': p['latest_year'],
+            })
+    projects_in_trouble.sort(key=lambda x: x['yoy_change_pct'])
+    # Keep top 20 worst decliners per tech
+    trouble_by_tech = defaultdict(list)
+    for p in projects_in_trouble:
+        if len(trouble_by_tech[p['technology']]) < 20:
+            trouble_by_tech[p['technology']].append(p)
+    projects_in_trouble_flat = []
+    for tech_list in trouble_by_tech.values():
+        projects_in_trouble_flat.extend(tech_list)
+    projects_in_trouble_flat.sort(key=lambda x: x['yoy_change_pct'])
+
+    # ---- Revenue magnitude trends (fleet-wide annual totals by tech) ----
+    rev_by_tech_year = defaultdict(lambda: defaultdict(lambda: {'total_aud': 0, 'count': 0}))
+    for r in perf_rows:
+        if r['revenue_per_mw'] is not None:
+            tech = r['technology']
+            yr = r['year']
+            # Use revenue_aud if available, else estimate from revenue_per_mw * capacity_mw
+            cap_mw = conn.execute("SELECT capacity_mw FROM projects WHERE id = ?", (r['id'],)).fetchone()['capacity_mw'] or 0
+            rev_aud = r['revenue_per_mw'] * cap_mw if r['revenue_per_mw'] else 0
+            rev_by_tech_year[tech][yr]['total_aud'] += rev_aud
+            rev_by_tech_year[tech][yr]['count'] += 1
+
+    revenue_magnitude = {}
+    for tech, years in sorted(rev_by_tech_year.items()):
+        entries = []
+        for yr in sorted(years.keys()):
+            d = years[yr]
+            entries.append({
+                'year': yr,
+                'total_revenue_m_aud': round(d['total_aud'] / 1_000_000, 1),
+                'project_count': d['count'],
+                'mean_per_project_aud': round(d['total_aud'] / d['count'], 0) if d['count'] > 0 else 0,
+            })
+        revenue_magnitude[tech] = entries
+
     output = {
         'by_technology_year': tech_year_stats,
         'yoy_trends': dict(yoy_trends),
         'technology_comparison_2024': tech_comparison,
         'offtake_comparison': offtake_comparison,
+        'top_10_by_state': {k: dict(v) for k, v in top_10_by_state.items()},
+        'projects_in_trouble': projects_in_trouble_flat,
+        'revenue_magnitude_trends': revenue_magnitude,
         'exported_at': datetime.now().isoformat(),
     }
     path = os.path.join(INTEL_DIR, 'revenue-intel.json')
     write_json(path, clean_none_values(output))
-    print(f"  analytics/intelligence/revenue-intel.json ({len(tech_year_stats)} tech-year records)")
+    print(f"  analytics/intelligence/revenue-intel.json ({len(tech_year_stats)} tech-year records, {len(projects_in_trouble_flat)} trouble projects)")
 
 
 # ---- 8. Grid Connection -----------------------------------------------------
@@ -2655,6 +2757,117 @@ def export_rez_access(conn):
     path = os.path.join(DATA_DIR, 'analytics', 'rez-access.json')
     write_json(path, access_map)
     print(f"  analytics/rez-access.json ({len(access_map)} projects with REZ access)")
+
+
+# ---- 9b. NEM Activities Timeline -------------------------------------------
+
+def export_nem_activities(conn):
+    """Export month-by-month NEM activities timeline from project timeline events."""
+
+    # Categorise event_types into 5 sections
+    DEVELOPMENT_TYPES = {'conceived', 'planning_submitted', 'planning_approved', 'planning_rejected', 'planning_modified', 'fid'}
+    GOVT_TYPES = {'offtake_signed'}
+    GOVT_KEYWORDS = {'cis', 'ltesa', 'firm', 'arena', 'capacity investment scheme', 'long term energy', 'sips', 'esem'}
+    REZ_TYPES = {'rez_access', 'connection_milestone'}
+    CONSTRUCTION_TYPES = {'construction_start', 'equipment_order', 'energisation', 'commissioning', 'cod', 'expansion'}
+    OPERATIONAL_TYPES = {'cod_change', 'capacity_change', 'stakeholder_issue'}
+
+    rows = conn.execute("""
+        SELECT p.id, p.name, p.technology, p.status, p.state, p.capacity_mw,
+               p.rez,
+               te.date, te.date_precision, te.event_type, te.title, te.detail
+        FROM timeline_events te
+        JOIN projects p ON p.id = te.project_id
+        WHERE te.date IS NOT NULL
+        ORDER BY te.date DESC
+    """).fetchall()
+
+    months = defaultdict(lambda: {
+        'development': [], 'govt_programs': [], 'rez_progress': [],
+        'construction': [], 'operational': [],
+    })
+    section_counts = defaultdict(int)
+
+    def make_event(project_id, name, tech, state, capacity_mw, event_type, title, detail, date):
+        return {
+            'project_id': project_id,
+            'project_name': name,
+            'technology': tech or '',
+            'state': state or '',
+            'capacity_mw': capacity_mw or 0,
+            'event_type': event_type,
+            'title': title,
+            'detail': detail or '',
+            'date': date,
+        }
+
+    for r in rows:
+        evt_type = r['event_type']
+        title_lower = (r['title'] or '').lower()
+        detail_lower = (r['detail'] or '').lower()
+        combined_text = title_lower + ' ' + detail_lower
+
+        # Extract month key
+        date_str = r['date']
+        if len(date_str) >= 7:
+            month_key = date_str[:7]  # YYYY-MM
+        elif len(date_str) == 4:
+            month_key = date_str + '-01'  # year only → Jan
+        else:
+            continue
+
+        evt = make_event(r['id'], r['name'], r['technology'], r['state'],
+                         r['capacity_mw'], evt_type, r['title'], r['detail'], date_str)
+
+        section = None
+        if evt_type in DEVELOPMENT_TYPES:
+            section = 'development'
+        elif evt_type in CONSTRUCTION_TYPES:
+            section = 'construction'
+        elif evt_type in OPERATIONAL_TYPES:
+            section = 'operational'
+        elif evt_type in GOVT_TYPES:
+            section = 'govt_programs'
+        elif evt_type in REZ_TYPES:
+            section = 'rez_progress'
+        elif evt_type == 'notable':
+            # Classify notable events by context
+            if any(kw in combined_text for kw in GOVT_KEYWORDS):
+                section = 'govt_programs'
+            elif r['rez'] and any(kw in combined_text for kw in ('rez', 'access', 'transmission')):
+                section = 'rez_progress'
+            elif r['status'] in ('operating', 'commissioning'):
+                section = 'operational'
+            elif r['status'] == 'construction':
+                section = 'construction'
+            else:
+                section = 'development'
+        elif evt_type == 'ownership_change':
+            section = 'development'
+
+        if section:
+            months[month_key][section].append(evt)
+            section_counts[section] += 1
+
+    # Sort months descending, events within each section by date descending then capacity
+    sorted_months = []
+    for month_key in sorted(months.keys(), reverse=True):
+        sections = months[month_key]
+        for sec in sections.values():
+            sec.sort(key=lambda e: (-e['capacity_mw'], e['date']), reverse=False)
+            sec.sort(key=lambda e: e['date'], reverse=True)
+        sorted_months.append({'month': month_key, 'sections': sections})
+
+    output = {
+        'generated_at': datetime.now().isoformat(),
+        'months': sorted_months,
+        'section_counts': dict(section_counts),
+    }
+
+    path = os.path.join(INTEL_DIR, 'nem-activities.json')
+    write_json(path, clean_none_values(output))
+    total_events = sum(section_counts.values())
+    print(f"  analytics/intelligence/nem-activities.json ({len(sorted_months)} months, {total_events} events)")
 
 
 # ---- Intelligence Wrapper ---------------------------------------------------
@@ -2902,6 +3115,7 @@ def export_intelligence(conn):
     export_revenue_intel(conn)
     export_grid_connection(conn)
     export_rez_access(conn)
+    export_nem_activities(conn)
 
 
 # ---- News Export -----------------------------------------------------------

@@ -1434,6 +1434,107 @@ export default function WattClarity() {
               weather, lower demand).
             </p>
           </div>
+
+          {/* ── Revenue Pressure by State — Correlation Evidence ── */}
+          {revenueData?.projects_in_trouble && revenueData.projects_in_trouble.length > 0 && (
+            <div className="rounded-lg p-4" style={{ background: '#1e293b', border: '1px solid #334155' }}>
+              <h3 className="text-sm font-semibold mb-2" style={{ color: '#f1f5f9' }}>
+                Revenue Pressure — Project-Level Evidence
+              </h3>
+              <p className="text-xs mb-4" style={{ color: '#94a3b8' }}>
+                The correlation penalty thesis predicts that as fleet capacity grows, individual project revenues decline.
+                Below are the projects experiencing the largest year-over-year revenue declines — concrete evidence of the
+                cannibalization effect across BESS, solar, and wind.
+              </p>
+
+              {/* BESS in trouble */}
+              {(() => {
+                const bessTrouble = revenueData.projects_in_trouble!.filter(p => p.technology === 'bess').slice(0, 10)
+                const solarTrouble = revenueData.projects_in_trouble!.filter(p => p.technology === 'solar').slice(0, 10)
+                const windTrouble = revenueData.projects_in_trouble!.filter(p => p.technology === 'wind').slice(0, 10)
+
+                const renderTroubleTable = (title: string, projects: typeof bessTrouble, colour: string) => {
+                  if (!projects.length) return null
+                  return (
+                    <div className="mb-4">
+                      <div className="flex items-center gap-2 mb-2">
+                        <span className="w-2.5 h-2.5 rounded-full" style={{ background: colour }} />
+                        <h4 className="text-xs font-semibold" style={{ color: '#f1f5f9' }}>{title}</h4>
+                      </div>
+                      <div className="overflow-x-auto">
+                        <table className="w-full text-xs">
+                          <thead>
+                            <tr style={{ borderBottom: '1px solid #334155' }}>
+                              <th className="text-left py-1 pr-2" style={{ color: '#94a3b8' }}>Project</th>
+                              <th className="text-left py-1 pr-2" style={{ color: '#94a3b8' }}>State</th>
+                              <th className="text-right py-1 px-1" style={{ color: '#94a3b8' }}>MW</th>
+                              <th className="text-right py-1 px-1" style={{ color: '#94a3b8' }}>YoY</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {projects.map(p => (
+                              <tr key={p.project_id} style={{ borderBottom: '1px solid #1e293b' }}>
+                                <td className="py-1 pr-2">
+                                  <Link to={`/projects/${p.project_id}`} className="hover:underline" style={{ color: '#cbd5e1' }}>
+                                    {p.name.length > 28 ? p.name.substring(0, 26) + '...' : p.name}
+                                  </Link>
+                                </td>
+                                <td className="py-1 pr-2" style={{ color: '#64748b' }}>{p.state}</td>
+                                <td className="py-1 px-1 text-right font-mono" style={{ color: '#94a3b8' }}>{Math.round(p.capacity_mw)}</td>
+                                <td className="py-1 px-1 text-right font-mono font-bold" style={{ color: (p.yoy_change_pct || 0) < 0 ? '#ef4444' : '#10b981' }}>
+                                  {(p.yoy_change_pct || 0) >= 0 ? '+' : ''}{(p.yoy_change_pct || 0).toFixed(1)}%
+                                </td>
+                              </tr>
+                            ))}
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  )
+                }
+
+                return (
+                  <>
+                    {renderTroubleTable('BESS — Biggest Revenue Decliners', bessTrouble, '#10b981')}
+                    {renderTroubleTable('Solar — Biggest Revenue Decliners', solarTrouble, '#f59e0b')}
+                    {renderTroubleTable('Wind — Biggest Revenue Decliners', windTrouble, '#3b82f6')}
+                  </>
+                )
+              })()}
+
+              {/* State-level summary */}
+              {revenueData.top_10_by_state && (
+                <div className="mt-4 rounded p-3" style={{ background: '#0f172a', border: '1px solid #334155' }}>
+                  <h4 className="text-xs font-semibold mb-2" style={{ color: '#f59e0b' }}>State-Level Revenue Leaders (BESS)</h4>
+                  <p className="text-[10px] mb-2" style={{ color: '#64748b' }}>
+                    Top performers by state. Even the leaders are seeing revenue pressure in crowded markets.
+                  </p>
+                  <div className="grid sm:grid-cols-2 gap-3">
+                    {Object.entries(revenueData.top_10_by_state.bess || {}).map(([state, projects]) => (
+                      <div key={state}>
+                        <div className="text-[10px] font-bold mb-1" style={{ color: '#94a3b8' }}>{state}</div>
+                        {projects.slice(0, 3).map((p, i) => (
+                          <div key={p.project_id} className="flex items-center justify-between text-[10px] py-0.5">
+                            <Link to={`/projects/${p.project_id}`} className="hover:underline truncate mr-2" style={{ color: '#cbd5e1' }}>
+                              {i + 1}. {p.name}
+                            </Link>
+                            <div className="flex items-center gap-2 flex-shrink-0">
+                              <span className="font-mono" style={{ color: '#10b981' }}>${Math.round(p.revenue_per_mw / 1000)}k/MW</span>
+                              {p.yoy_change_pct != null && (
+                                <span className="font-mono" style={{ color: (p.yoy_change_pct || 0) < 0 ? '#ef4444' : '#10b981' }}>
+                                  {p.yoy_change_pct >= 0 ? '+' : ''}{p.yoy_change_pct.toFixed(0)}%
+                                </span>
+                              )}
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
         </div>
       )}
 

@@ -43,7 +43,7 @@ function statusLabel(s: string): string {
 // Section components
 // ============================================================
 
-type SectionId = 'nsw-timeline' | 'nsw-projects' | 'nem-pipeline' | 'displacement' | 'analysis'
+type SectionId = 'nsw-timeline' | 'nsw-projects' | 'qld-timeline' | 'qld-projects' | 'nem-pipeline' | 'displacement' | 'analysis'
 
 const SectionIcon = ({ section }: { section: SectionId }) => {
   switch (section) {
@@ -65,6 +65,16 @@ const SectionIcon = ({ section }: { section: SectionId }) => {
     case 'displacement': return (
       <svg className="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
         <path fillRule="evenodd" d="M12 7a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0V8.414l-4.293 4.293a1 1 0 01-1.414 0L8 10.414l-4.293 4.293a1 1 0 01-1.414-1.414l5-5a1 1 0 011.414 0L11 10.586 14.586 7H12z" clipRule="evenodd" />
+      </svg>
+    )
+    case 'qld-timeline': return (
+      <svg className="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
+        <path fillRule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 011 1v3.586l1.293-1.293a1 1 0 011.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 111.414-1.414L5 11.586V8a1 1 0 011-1z" clipRule="evenodd" />
+      </svg>
+    )
+    case 'qld-projects': return (
+      <svg className="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
+        <path d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.381z" />
       </svg>
     )
     case 'analysis': return (
@@ -462,6 +472,10 @@ export default function BatteryWatch() {
   const SECTIONS: { id: SectionId; label: string }[] = [
     { id: 'nsw-timeline', label: 'NSW Timeline' },
     { id: 'nsw-projects', label: 'NSW Projects' },
+    ...(data.qld_focus ? [
+      { id: 'qld-timeline' as SectionId, label: 'QLD Timeline' },
+      { id: 'qld-projects' as SectionId, label: 'QLD Projects' },
+    ] : []),
     { id: 'nem-pipeline', label: 'NEM Pipeline' },
     { id: 'displacement', label: 'Displacement' },
     { id: 'analysis', label: 'Analysis' },
@@ -607,6 +621,97 @@ export default function BatteryWatch() {
           </div>
         </div>
       )}
+
+      {/* QLD Timeline */}
+      {activeSection === 'qld-timeline' && data.qld_focus && (
+        <div className="space-y-4">
+          {/* QLD stat cards */}
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+            <StatCard label="QLD Operating" value={formatMW(data.qld_focus.total_operating_mw)} sub={formatMWh(data.qld_focus.total_operating_mwh)} colour="#f59e0b" />
+            <StatCard label="QLD Construction" value={formatMW(data.qld_focus.total_construction_mw)} sub={formatMWh(data.qld_focus.total_construction_mwh)} colour="#3b82f6" />
+            {data.qld_focus.demand_context && (
+              <>
+                <StatCard label="QLD Max Demand" value={formatMW(data.qld_focus.demand_context.max_demand_mw)} sub={`BESS = ${data.qld_focus.demand_context.bess_pct_max.toFixed(1)}% of peak`} colour="#ef4444" />
+                <StatCard label="QLD Avg Demand" value={formatMW(data.qld_focus.demand_context.avg_demand_mw)} colour="#94a3b8" />
+              </>
+            )}
+          </div>
+
+          {/* Demand context by season */}
+          {data.qld_focus.demand_context?.seasonal && (
+            <div className="rounded-lg p-4" style={{ background: '#1e293b', border: '1px solid #334155' }}>
+              <h3 className="text-lg font-semibold mb-3" style={{ color: '#f1f5f9' }}>QLD Demand by Season</h3>
+              <p className="text-xs mb-3" style={{ color: '#94a3b8' }}>
+                BESS capacity ({formatMW(data.qld_focus.total_operating_mw)} operating) relative to seasonal demand
+              </p>
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                {data.qld_focus.demand_context.seasonal.map(s => (
+                  <div key={s.season} className="rounded-lg p-3" style={{ background: '#0f172a', border: '1px solid #334155' }}>
+                    <div className="text-xs uppercase tracking-wider mb-1" style={{ color: '#94a3b8' }}>{s.season}</div>
+                    <div className="text-sm font-bold" style={{ color: '#f1f5f9' }}>Max: {formatMW(s.max_demand_mw)}</div>
+                    <div className="text-xs" style={{ color: '#94a3b8' }}>Avg: {formatMW(s.avg_demand_mw)}</div>
+                    <div className="text-xs mt-1" style={{ color: '#f59e0b' }}>
+                      BESS: {((data.qld_focus!.total_operating_mw / s.max_demand_mw) * 100).toFixed(1)}% of peak
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* QLD timeline milestones */}
+          {data.qld_focus.timeline_milestones.length > 0 && (
+            <div className="rounded-lg p-4" style={{ background: '#1e293b', border: '1px solid #334155' }}>
+              <h3 className="text-lg font-semibold mb-3" style={{ color: '#f1f5f9' }}>QLD Battery Milestones</h3>
+              <div className="space-y-2 max-h-[400px] overflow-y-auto">
+                {data.qld_focus.timeline_milestones.slice().reverse().map((m, i) => (
+                  <div key={i} className="flex items-start gap-3 text-sm">
+                    <span className="text-xs font-mono flex-shrink-0" style={{ color: '#94a3b8', minWidth: 80 }}>{m.date}</span>
+                    <span style={{ color: '#f1f5f9' }}>{m.label}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* QLD Projects */}
+      {activeSection === 'qld-projects' && data.qld_focus && (() => {
+        const qldOp = data.qld_focus!.projects.filter(p => p.status === 'operating')
+        const qldCon = data.qld_focus!.projects.filter(p => p.status === 'construction' || p.status === 'commissioning')
+        const qldDev = data.qld_focus!.projects.filter(p => p.status === 'development').slice(0, 20)
+        const qldDevTotal = data.qld_focus!.projects.filter(p => p.status === 'development').length
+        return (
+          <div className="space-y-4">
+            {qldOp.length > 0 && (
+              <div className="rounded-lg p-4" style={{ background: '#1e293b', border: '1px solid #334155' }}>
+                <div className="flex items-center gap-2 mb-3">
+                  <span className="w-2 h-2 rounded-full" style={{ background: '#10b981' }} />
+                  <h3 className="text-sm font-semibold" style={{ color: '#f1f5f9' }}>Operating ({qldOp.length} projects, {formatMW(data.qld_focus!.total_operating_mw)})</h3>
+                </div>
+                <ProjectTable projects={qldOp} />
+              </div>
+            )}
+            {qldCon.length > 0 && (
+              <div className="rounded-lg p-4" style={{ background: '#1e293b', border: '1px solid #334155' }}>
+                <div className="flex items-center gap-2 mb-3">
+                  <span className="w-2 h-2 rounded-full" style={{ background: '#3b82f6' }} />
+                  <h3 className="text-sm font-semibold" style={{ color: '#f1f5f9' }}>Construction & Commissioning ({qldCon.length} projects, {formatMW(data.qld_focus!.total_construction_mw)})</h3>
+                </div>
+                <ProjectTable projects={qldCon} />
+              </div>
+            )}
+            <div className="rounded-lg p-4" style={{ background: '#1e293b', border: '1px solid #334155' }}>
+              <div className="flex items-center gap-2 mb-3">
+                <span className="w-2 h-2 rounded-full" style={{ background: '#8b5cf6' }} />
+                <h3 className="text-sm font-semibold" style={{ color: '#f1f5f9' }}>Development Pipeline (Top 20 of {qldDevTotal})</h3>
+              </div>
+              <ProjectTable projects={qldDev} />
+            </div>
+          </div>
+        )
+      })()}
 
       {activeSection === 'nem-pipeline' && (
         <div className="space-y-4">

@@ -608,32 +608,32 @@
     {
       "year": 2026,
       "month": 1,
-      "energy_discharged_mwh": 3459.4,
-      "energy_charged_mwh": 4344.2,
-      "avg_charge_price": 36.04,
-      "avg_discharge_price": 169.24,
-      "utilisation_pct": 6.8,
-      "cycles": 23.1
+      "energy_discharged_mwh": 4431.4,
+      "energy_charged_mwh": 5479.7,
+      "avg_charge_price": 35.39,
+      "avg_discharge_price": 164.13,
+      "utilisation_pct": 5.7,
+      "cycles": 29.6
     },
     {
       "year": 2026,
       "month": 2,
-      "energy_discharged_mwh": 2446.5,
-      "energy_charged_mwh": 3072.4,
-      "avg_charge_price": 30.37,
-      "avg_discharge_price": 118.85,
-      "utilisation_pct": 6.4,
-      "cycles": 16.3
+      "energy_discharged_mwh": 3133.9,
+      "energy_charged_mwh": 3875.3,
+      "avg_charge_price": 29.83,
+      "avg_discharge_price": 115.27,
+      "utilisation_pct": 5.4,
+      "cycles": 20.9
     },
     {
       "year": 2026,
       "month": 3,
-      "energy_discharged_mwh": 2437.5,
-      "energy_charged_mwh": 3061.0,
-      "avg_charge_price": 27.33,
-      "avg_discharge_price": 148.13,
-      "utilisation_pct": 5.2,
-      "cycles": 16.2
+      "energy_discharged_mwh": 3122.3,
+      "energy_charged_mwh": 3861.0,
+      "avg_charge_price": 26.83,
+      "avg_discharge_price": 143.65,
+      "utilisation_pct": 4.4,
+      "cycles": 20.9
     }
   ],
   "storage_mwh": 150.0

@@ -717,6 +717,86 @@ export default function CoalWatch() {
             </div>
           </div>
 
+          {/* Seasonal Revenue Chart */}
+          {data.revenue_watch.seasonal_revenue && data.revenue_watch.seasonal_revenue.length > 0 && (
+            <div className="rounded-lg p-4" style={{ background: '#1e293b', border: '1px solid #334155' }}>
+              <h3 className="text-sm font-semibold mb-1" style={{ color: '#f1f5f9' }}>NSW Coal Fleet — Revenue by Season</h3>
+              <p className="text-xs mb-4" style={{ color: '#94a3b8' }}>
+                Seasonal breakdown shows winter as the dominant revenue driver. Year-over-year seasonal comparison reveals where coal plant economics are most under pressure.
+              </p>
+              {(() => {
+                const SEASON_COLOURS: Record<string, string> = {
+                  summer: '#ef4444', autumn: '#f59e0b', winter: '#3b82f6', spring: '#10b981',
+                }
+                const seasons = ['summer', 'autumn', 'winter', 'spring']
+                const sr = data.revenue_watch.seasonal_revenue!
+                const years = [...new Set(sr.map(s => s.year))].sort()
+                const chartData = years.map(year => {
+                  const row: Record<string, number | string> = { year: year.toString() }
+                  for (const season of seasons) {
+                    const entry = sr.find(s => s.year === year && s.season === season)
+                    row[season] = entry?.est_revenue_m_aud ?? 0
+                  }
+                  return row
+                })
+                return (
+                  <>
+                    <div style={{ width: '100%', height: 320 }}>
+                      <ResponsiveContainer>
+                        <BarChart data={chartData} margin={{ top: 10, right: 30, left: 10, bottom: 10 }}>
+                          <CartesianGrid strokeDasharray="3 3" stroke="#334155" />
+                          <XAxis dataKey="year" tick={{ fill: '#94a3b8', fontSize: 12 }} stroke="#334155" />
+                          <YAxis tick={{ fill: '#94a3b8', fontSize: 11 }} stroke="#334155" tickFormatter={(v) => formatAUD(v as number)} />
+                          <Tooltip
+                            contentStyle={{ background: '#1e293b', border: '1px solid #334155', borderRadius: 8, color: '#f1f5f9' }}
+                            formatter={(value, name) => [formatAUD(value as number), SEASON_LABELS[name as string] || name]}
+                          />
+                          <Legend
+                            wrapperStyle={{ color: '#94a3b8', fontSize: 12 }}
+                            formatter={(value) => `${SEASON_EMOJI[value] || ''} ${SEASON_LABELS[value]?.split(' ')[0] || value}`}
+                          />
+                          {seasons.map(season => (
+                            <Bar key={season} dataKey={season} stackId="a" fill={SEASON_COLOURS[season]} radius={season === 'spring' ? [4, 4, 0, 0] : [0, 0, 0, 0]} />
+                          ))}
+                        </BarChart>
+                      </ResponsiveContainer>
+                    </div>
+                    {/* Seasonal comparison table */}
+                    <div className="mt-4 overflow-x-auto">
+                      <table className="w-full text-xs">
+                        <thead>
+                          <tr style={{ borderBottom: '1px solid #334155' }}>
+                            <th className="text-left p-2" style={{ color: '#94a3b8' }}>Season</th>
+                            {years.map(y => (
+                              <th key={y} className="text-right p-2" style={{ color: '#94a3b8' }}>{y}</th>
+                            ))}
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {seasons.map(season => (
+                            <tr key={season} style={{ borderBottom: '1px solid #334155' }}>
+                              <td className="p-2 font-medium" style={{ color: '#f1f5f9' }}>
+                                {SEASON_EMOJI[season]} {season.charAt(0).toUpperCase() + season.slice(1)}
+                              </td>
+                              {years.map(y => {
+                                const entry = sr.find(s => s.year === y && s.season === season)
+                                return (
+                                  <td key={y} className="p-2 text-right font-mono" style={{ color: '#f1f5f9' }}>
+                                    {entry ? formatAUD(entry.est_revenue_m_aud) : '-'}
+                                  </td>
+                                )
+                              })}
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  </>
+                )
+              })()}
+            </div>
+          )}
+
           {/* Insights */}
           <div className="rounded-lg p-4" style={{ background: '#0f172a', border: '1px solid #334155' }}>
             <h4 className="text-xs font-semibold uppercase tracking-wider mb-2" style={{ color: '#94a3b8' }}>Key Insights</h4>

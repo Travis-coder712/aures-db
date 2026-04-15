@@ -55,6 +55,12 @@ const FEATURES = [
     description: 'Wind resource, BESS chemistry, grid connection data from Environmental Impact Statements',
     route: '/intelligence/eis-technical',
   },
+  {
+    icon: '\u{1F4C5}',
+    title: 'NEM Activities Timeline',
+    description: 'Month-by-month key highlights across development, construction, and operations',
+    route: '/intelligence/nem-activities',
+  },
 ] as const
 
 export default function IntelligenceHub() {

@@ -326,6 +326,7 @@ export interface ProjectSummary {
   has_eis_data?: boolean    // true when eis_specs are populated (planning document sourced)
   zombie_flag?: 'zombie_stale' | 'zombie_minimal' | null  // stale or minimal-data projects
   has_scheme_contract?: boolean  // true when project has CIS or LTESA contract
+  has_stages?: boolean  // true when project has multi-stage build-out
   user_override?: 'include' | 'exclude'  // manual curation override
 }
 
@@ -903,6 +904,19 @@ export interface BatteryWatchKeyQuestion {
   question: string; answer: string
 }
 
+export interface BatteryWatchDemandContext {
+  max_demand_mw: number; avg_demand_mw: number; bess_pct_max: number
+  seasonal: Array<{ season: string; max_demand_mw: number; avg_demand_mw: number }>
+}
+
+export interface BatteryWatchStateFocus {
+  total_operating_mw: number; total_operating_mwh: number
+  total_construction_mw: number; total_construction_mwh: number
+  projects: BatteryWatchProject[]
+  timeline_milestones: BatteryWatchMilestone[]
+  demand_context?: BatteryWatchDemandContext
+}
+
 export interface BatteryWatchData {
   generated_at: string
   nsw_focus: {
@@ -911,6 +925,7 @@ export interface BatteryWatchData {
     projects: BatteryWatchProject[]
     timeline_milestones: BatteryWatchMilestone[]
   }
+  qld_focus?: BatteryWatchStateFocus
   nem_wide: {
     operating: { total_mw: number; total_mwh: number; by_state: Record<string, BatteryWatchStateData> }
     construction: { total_mw: number; total_mwh: number; by_state: Record<string, BatteryWatchStateData> }
@@ -1018,6 +1033,7 @@ export interface CoalWatchData {
   }
   revenue_watch: {
     note: string; nsw_fleet_total: CoalFleetTotal[]
+    seasonal_revenue?: Array<{ year: number; season: string; est_revenue_m_aud: number; generation_gwh: number }>
   }
   insights: string[]
   sources: { name: string; url: string; note?: string }[]
@@ -1043,11 +1059,48 @@ export interface TechYearRevenue {
   revenue_per_mw: MetricStats; energy_price: MetricStats; capacity_factor: MetricStats;
   bess_spread?: MetricStats; discharge_price?: MetricStats; charge_price?: MetricStats;
 }
+export interface RevenueProjectRanking {
+  project_id: string; name: string; technology?: string; state?: string
+  capacity_mw: number; revenue_per_mw: number; capacity_factor_pct?: number
+  yoy_change_pct?: number; latest_year?: number
+  prev_revenue_per_mw?: number; latest_revenue_per_mw?: number
+}
+
+export interface RevenueMagnitudeEntry {
+  year: number; total_revenue_m_aud: number; project_count: number; mean_per_project_aud: number
+}
+
 export interface RevenueIntelData {
   by_technology_year: TechYearRevenue[];
   yoy_trends: Record<string, Array<{ year: number; revenue_per_mw: number; energy_price: number; cf: number }>>;
   technology_comparison_2024: Record<string, { revenue_per_mw: MetricStats; energy_price: MetricStats; capacity_factor: MetricStats }>;
   offtake_comparison: { year: number; with_offtake: { count: number; revenue_per_mw: MetricStats; energy_price: MetricStats }; without_offtake: { count: number; revenue_per_mw: MetricStats; energy_price: MetricStats } };
+  top_10_by_state?: Record<string, Record<string, RevenueProjectRanking[]>>;
+  projects_in_trouble?: RevenueProjectRanking[];
+  revenue_magnitude_trends?: Record<string, RevenueMagnitudeEntry[]>;
+}
+
+// ============================================================
+// NEM Activities Timeline
+// ============================================================
+
+export interface NemActivityEvent {
+  project_id: string; project_name: string; technology: string; state: string
+  capacity_mw: number; event_type: string; title: string; detail?: string; date: string
+}
+
+export interface NemActivitiesMonth {
+  month: string
+  sections: {
+    development: NemActivityEvent[]; govt_programs: NemActivityEvent[]
+    rez_progress: NemActivityEvent[]; construction: NemActivityEvent[]
+    operational: NemActivityEvent[]
+  }
+}
+
+export interface NemActivitiesData {
+  generated_at: string; months: NemActivitiesMonth[]
+  section_counts: Record<string, number>
 }
 
 export interface REZSummary {

@@ -410,6 +410,38 @@
         "est_revenue_b_aud": 0.9,
         "avg_price_aud_mwh": 83.0
       }
+    ],
+    "seasonal_revenue": [
+      {
+        "year": 2025,
+        "season": "autumn",
+        "est_revenue_m_aud": 878.5,
+        "generation_gwh": 6936.0
+      },
+      {
+        "year": 2025,
+        "season": "spring",
+        "est_revenue_m_aud": 836.9,
+        "generation_gwh": 8897.0
+      },
+      {
+        "year": 2025,
+        "season": "winter",
+        "est_revenue_m_aud": 2176.1,
+        "generation_gwh": 12812.0
+      },
+      {
+        "year": 2026,
+        "season": "autumn",
+        "est_revenue_m_aud": 289.1,
+        "generation_gwh": 3721.0
+      },
+      {
+        "year": 2026,
+        "season": "summer",
+        "est_revenue_m_aud": 852.7,
+        "generation_gwh": 9915.0
+      }
     ]
   },
   "insights": [

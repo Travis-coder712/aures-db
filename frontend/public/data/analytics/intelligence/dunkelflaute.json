@@ -1548,9 +1548,19 @@
       "state": "NSW",
       "year": 2026,
       "month": 3,
-      "wind_cf": 13.5,
-      "solar_cf": 11.7,
-      "combined_cf": 12.4,
+      "wind_cf": 22.1,
+      "solar_cf": 20.2,
+      "combined_cf": 20.9,
+      "wind_mw": 2807.0,
+      "solar_mw": 4685.0
+    },
+    {
+      "state": "NSW",
+      "year": 2026,
+      "month": 4,
+      "wind_cf": 14.9,
+      "solar_cf": 8.9,
+      "combined_cf": 11.1,
       "wind_mw": 2807.0,
       "solar_mw": 4685.0
     },
@@ -2538,9 +2548,19 @@
       "state": "QLD",
       "year": 2026,
       "month": 3,
-      "wind_cf": 20.1,
-      "solar_cf": 12.4,
-      "combined_cf": 14.3,
+      "wind_cf": 35.8,
+      "solar_cf": 22.5,
+      "combined_cf": 25.7,
+      "wind_mw": 1009.0,
+      "solar_mw": 3190.0
+    },
+    {
+      "state": "QLD",
+      "year": 2026,
+      "month": 4,
+      "wind_cf": 18.5,
+      "solar_cf": 11.4,
+      "combined_cf": 13.1,
       "wind_mw": 1009.0,
       "solar_mw": 3190.0
     },
@@ -3528,11 +3548,21 @@
       "state": "SA",
       "year": 2026,
       "month": 3,
-      "wind_cf": 12.4,
-      "solar_cf": 7.8,
-      "combined_cf": 11.8,
+      "wind_cf": 20.1,
+      "solar_cf": 13.1,
+      "combined_cf": 19.2,
       "wind_mw": 2795.0,
       "solar_mw": 422.0
+    },
+    {
+      "state": "SA",
+      "year": 2026,
+      "month": 4,
+      "wind_cf": 12.1,
+      "solar_cf": 6.9,
+      "combined_cf": 11.6,
+      "wind_mw": 2795.0,
+      "solar_mw": 312.0
     },
     {
       "state": "TAS",
@@ -4518,9 +4548,19 @@
       "state": "TAS",
       "year": 2026,
       "month": 3,
-      "wind_cf": 15.9,
+      "wind_cf": 24.1,
       "solar_cf": 0,
-      "combined_cf": 15.9,
+      "combined_cf": 24.1,
+      "wind_mw": 561.0,
+      "solar_mw": 0
+    },
+    {
+      "state": "TAS",
+      "year": 2026,
+      "month": 4,
+      "wind_cf": 24.7,
+      "solar_cf": 0,
+      "combined_cf": 24.7,
       "wind_mw": 561.0,
       "solar_mw": 0
     },
@@ -5508,12 +5548,22 @@
       "state": "VIC",
       "year": 2026,
       "month": 3,
-      "wind_cf": 11.9,
-      "solar_cf": 12.3,
-      "combined_cf": 12.0,
+      "wind_cf": 21.0,
+      "solar_cf": 21.8,
+      "combined_cf": 21.2,
+      "wind_mw": 4516.0,
+      "solar_mw": 1186.0
+    },
+    {
+      "state": "VIC",
+      "year": 2026,
+      "month": 4,
+      "wind_cf": 13.6,
+      "solar_cf": 7.6,
+      "combined_cf": 12.4,
       "wind_mw": 4516.0,
       "solar_mw": 1186.0
     }
   ],
-  "exported_at": "2026-04-03T13:13:08.046338"
+  "exported_at": "2026-04-15T11:19:46.073086"
 }
