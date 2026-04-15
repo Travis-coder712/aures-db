@@ -56,6 +56,12 @@ const FEATURES = [
     route: '/intelligence/eis-technical',
   },
   {
+    icon: '\u{1F50B}',
+    title: 'Battery Watch',
+    description: 'NSW & QLD BESS buildout tracking, milestones, demand context, and coal displacement',
+    route: '/intelligence/battery-watch',
+  },
+  {
     icon: '\u{1F4C5}',
     title: 'NEM Activities Timeline',
     description: 'Month-by-month key highlights across development, construction, and operations',

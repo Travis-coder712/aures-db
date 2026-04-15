@@ -1798,5 +1798,2295 @@
         }
       ]
     }
+  },
+  "vic_focus": {
+    "total_operating_mw": 1665.0,
+    "total_operating_mwh": 3208.37,
+    "total_construction_mw": 1901.0,
+    "total_construction_mwh": 5251.14,
+    "projects": [
+      {
+        "id": "connewarren-bess",
+        "name": "Connewarren BESS",
+        "developer": "Akaysha Energy Pty Ltd",
+        "capacity_mw": 1100.0,
+        "storage_mwh": 4400.0,
+        "duration_hours": 4.0,
+        "status": "development",
+        "cod": "2029-03-16"
+      },
+      {
+        "id": "morwell-bess",
+        "name": "Morwell BESS",
+        "developer": "TagEnergy Australia Pty Ltd",
+        "capacity_mw": 1000.0,
+        "storage_mwh": 4029.2,
+        "duration_hours": 4.0,
+        "status": "development",
+        "cod": "2028-12-31"
+      },
+      {
+        "id": "portland-energy-park-bess",
+        "name": "Portland Energy Park BESS",
+        "developer": "Pacific Green",
+        "capacity_mw": 1000.0,
+        "storage_mwh": 2500.0,
+        "duration_hours": 2.5,
+        "status": "development",
+        "cod": "2029-02-01"
+      },
+      {
+        "id": "doreen-bess",
+        "name": "Doreen BESS",
+        "developer": "BZ Renewables Holdings Pty Ltd",
+        "capacity_mw": 800.0,
+        "storage_mwh": 1600,
+        "duration_hours": 2.0,
+        "status": "development",
+        "cod": "TBD"
+      },
+      {
+        "id": "melbourne-renewable-energy-hub-side-b",
+        "name": "Melbourne Renewable Energy Hub - Side B",
+        "developer": "MREH Pty Ltd as trustee for MREH Asset Trust",
+        "capacity_mw": 600.0,
+        "storage_mwh": 2587.2,
+        "duration_hours": 4.3,
+        "status": "development",
+        "cod": "2028-12-31"
+      },
+      {
+        "id": "hazelwood-east-bess-kci",
+        "name": "Hazelwood East BESS - KCI",
+        "developer": "Hazelwood East BESS",
+        "capacity_mw": 500.0,
+        "storage_mwh": 500.0,
+        "duration_hours": 1.0,
+        "status": "development",
+        "cod": "TBD"
+      },
+      {
+        "id": "kiewa-valley-bess",
+        "name": "KIEWA VALLEY BESS",
+        "developer": "KIEWA VALLEY BESS NOMINEES PTY LTD on behalf of KIEWA VALLEY BESS Trust",
+        "capacity_mw": 500.0,
+        "storage_mwh": 1000.0,
+        "duration_hours": 2.0,
+        "status": "development",
+        "cod": "TBD"
+      },
+      {
+        "id": "malunga-nine-mile-bess-kci",
+        "name": "Malunga Nine Mile BESS - KCI",
+        "developer": "Green Switch Energy Pty Ltd",
+        "capacity_mw": 500.0,
+        "storage_mwh": 1000,
+        "duration_hours": 2.0,
+        "status": "development",
+        "cod": "TBD"
+      },
+      {
+        "id": "tragowel-bess",
+        "name": "Tragowel BESS",
+        "developer": "Virya Energy Pty Ltd",
+        "capacity_mw": 500.0,
+        "storage_mwh": 999.36,
+        "duration_hours": 2.0,
+        "status": "development",
+        "cod": "2029-01-01"
+      },
+      {
+        "id": "glenrowan-bess",
+        "name": "Glenrowan BESS",
+        "developer": "Akaysha Energy Pty Ltd",
+        "capacity_mw": 450.0,
+        "storage_mwh": 1600.0,
+        "duration_hours": 3.6,
+        "status": "development",
+        "cod": "2029-03-16"
+      },
+      {
+        "id": "baranduda-electrical-energy-reserve",
+        "name": "Baranduda Electrical Energy Reserve",
+        "developer": "Birdwood Energy Reserve Pty Ltd (ACN 658 507 441) as Trustee for Birdwood Energy Reserve Trust",
+        "capacity_mw": 400.0,
+        "storage_mwh": 1800.48,
+        "duration_hours": 4.5,
+        "status": "development",
+        "cod": "2028-06-30"
+      },
+      {
+        "id": "bunyip-north-battery-energy-storage-system",
+        "name": "Bunyip North Battery Energy Storage System",
+        "developer": "Bunyip North Project Co Pty Ltd as trustee for Bunyip North Project Trust",
+        "capacity_mw": 400.0,
+        "storage_mwh": 2400.0,
+        "duration_hours": 6.0,
+        "status": "development",
+        "cod": "TBD"
+      },
+      {
+        "id": "corop-bess",
+        "name": "Corop BESS",
+        "developer": "Leeson Solar Pty Ltd.",
+        "capacity_mw": 400.0,
+        "storage_mwh": 800,
+        "duration_hours": 2.0,
+        "status": "development",
+        "cod": "TBD"
+      },
+      {
+        "id": "glenrowan-bess-storage-kci",
+        "name": "Glenrowan BESS - Storage - KCI",
+        "developer": "Enervest Operations Pty Ltd",
+        "capacity_mw": 400.0,
+        "storage_mwh": 800,
+        "duration_hours": 2.0,
+        "status": "development",
+        "cod": "2029-06-30"
+      },
+      {
+        "id": "goorambat-bess-lightsourcebp",
+        "name": "Goorambat BESS (LightsourceBP)",
+        "developer": "Lightsource Development Services Australia Pty Ltd",
+        "capacity_mw": 400.0,
+        "storage_mwh": 1600.0,
+        "duration_hours": 4.0,
+        "status": "development",
+        "cod": "2031-06-30"
+      },
+      {
+        "id": "lovely-banks-renewable-energy-hub-kci",
+        "name": "Lovely Banks Renewable Energy Hub - KCI",
+        "developer": "Syncline Energy Pty Ltd",
+        "capacity_mw": 400.0,
+        "storage_mwh": 800,
+        "duration_hours": 2.0,
+        "status": "development",
+        "cod": "TBD"
+      },
+      {
+        "id": "winton-energy-reserve-1",
+        "name": "Winton Energy Reserve 1",
+        "developer": "Lochard Energy",
+        "capacity_mw": 400.0,
+        "storage_mwh": 400.0,
+        "duration_hours": 1.0,
+        "status": "development",
+        "cod": "TBD"
+      },
+      {
+        "id": "giddi-bess-trafalgar-east-bess-stage-1",
+        "name": "GIDDI BESS (Trafalgar East BESS - Stage 1)",
+        "developer": "Ib vogt Development Australia Pty Ltd",
+        "capacity_mw": 360.0,
+        "storage_mwh": 1440.0,
+        "duration_hours": 4.0,
+        "status": "development",
+        "cod": "TBD"
+      },
+      {
+        "id": "little-river-bess",
+        "name": "Little River BESS",
+        "developer": "ACEnergy Pty Ltd",
+        "capacity_mw": 350.0,
+        "storage_mwh": 1795.52,
+        "duration_hours": 5.1,
+        "status": "development",
+        "cod": "2028-06-29"
+      },
+      {
+        "id": "pine-lodge-2-bess-kci",
+        "name": "Pine Lodge 2 BESS - KCI",
+        "developer": "ACEnergy Pty Ltd",
+        "capacity_mw": 350.0,
+        "storage_mwh": 700.56,
+        "duration_hours": 2.0,
+        "status": "development",
+        "cod": "2029-06-01"
+      },
+      {
+        "id": "portland-renewables-project-kci",
+        "name": "Portland Renewables Project - KCI",
+        "developer": "HAMR Energy Pty Ltd",
+        "capacity_mw": 350.0,
+        "storage_mwh": 350.0,
+        "duration_hours": 1.0,
+        "status": "development",
+        "cod": "TBD"
+      },
+      {
+        "id": "wooreen-energy-storage-system",
+        "name": "Wooreen Energy Storage System",
+        "developer": "EnergyAustralia",
+        "capacity_mw": 350.0,
+        "storage_mwh": 1400.0,
+        "duration_hours": 4.0,
+        "status": "construction",
+        "cod": "2027-12-31"
+      },
+      {
+        "id": "elaine-bess",
+        "name": "Elaine BESS",
+        "developer": "Akaysha Energy (BlackRock)",
+        "capacity_mw": 311.0,
+        "storage_mwh": 1248.72,
+        "duration_hours": 4.0,
+        "status": "construction",
+        "cod": "2027-12-31"
+      },
+      {
+        "id": "victorian-big-battery",
+        "name": "Victorian Big Battery",
+        "developer": "HMC Capital (ex-Neoen)",
+        "capacity_mw": 300.0,
+        "storage_mwh": 450.0,
+        "duration_hours": 1.5,
+        "status": "operating",
+        "cod": "2022-01"
+      },
+      {
+        "id": "berrybank-bess-storage-kci",
+        "name": "Berrybank BESS - Storage - KCI",
+        "developer": "Global Power Generation Australia Pty Ltd",
+        "capacity_mw": 300.0,
+        "storage_mwh": 600.0,
+        "duration_hours": 2.0,
+        "status": "development",
+        "cod": "2029-12-31"
+      },
+      {
+        "id": "heywood-bess",
+        "name": "Heywood BESS",
+        "developer": "Atmos Renewables",
+        "capacity_mw": 300.0,
+        "storage_mwh": 1140.8,
+        "duration_hours": 3.8,
+        "status": "development",
+        "cod": "2028-12-01"
+      },
+      {
+        "id": "moorabool-bess",
+        "name": "Moorabool BESS",
+        "developer": "Storenergy",
+        "capacity_mw": 300.0,
+        "storage_mwh": 1200.0,
+        "duration_hours": 4.0,
+        "status": "development",
+        "cod": "TBD"
+      },
+      {
+        "id": "mornington-bess-2",
+        "name": "Mornington BESS 2",
+        "developer": "Valent Energy",
+        "capacity_mw": 300.0,
+        "storage_mwh": 1200.0,
+        "duration_hours": 4.0,
+        "status": "development",
+        "cod": "2028-07-28"
+      },
+      {
+        "id": "mortlake-battery",
+        "name": "Mortlake Battery",
+        "developer": "Origin Energy",
+        "capacity_mw": 300.0,
+        "storage_mwh": 650.0,
+        "duration_hours": 2.2,
+        "status": "construction",
+        "cod": "2026-07-31"
+      },
+      {
+        "id": "thomastown-bess",
+        "name": "Thomastown BESS",
+        "developer": "Ausnet Transmission Group Pty Ltd",
+        "capacity_mw": 300.0,
+        "storage_mwh": 600.0,
+        "duration_hours": 2.0,
+        "status": "development",
+        "cod": "2028-03-31"
+      },
+      {
+        "id": "tramway-road-bess",
+        "name": "Tramway Road BESS",
+        "developer": "Eku Energy Projects (Australia) Pty Ltd as trustee for the Eku Energy Projects Australia Trust",
+        "capacity_mw": 300.0,
+        "storage_mwh": 1200.0,
+        "duration_hours": 4.0,
+        "status": "development",
+        "cod": "2028-12-30"
+      },
+      {
+        "id": "deer-park-bess-akaysha",
+        "name": "Deer Park BESS - Akaysha",
+        "developer": "Akaysha Energy",
+        "capacity_mw": 275.0,
+        "storage_mwh": 1101.12,
+        "duration_hours": 4.0,
+        "status": "development",
+        "cod": "2028-12-12"
+      },
+      {
+        "id": "learmonth-bess",
+        "name": "Learmonth BESS",
+        "developer": "The Trustee for Learmonth BESS Holdings Unit Trust",
+        "capacity_mw": 268.0,
+        "storage_mwh": 1072.0,
+        "duration_hours": 4.0,
+        "status": "development",
+        "cod": "TBD"
+      },
+      {
+        "id": "boulka-park-bess",
+        "name": "Boulka Park BESS",
+        "developer": "The Trustee for X-ELIO BOULKA PARK TRUST",
+        "capacity_mw": 250.0,
+        "storage_mwh": 500.0,
+        "duration_hours": 2.0,
+        "status": "development",
+        "cod": "TBD"
+      },
+      {
+        "id": "dalvui-bess",
+        "name": "Dalvui BESS",
+        "developer": "Tilt Renewables Australia Pty Ltd",
+        "capacity_mw": 250.0,
+        "storage_mwh": 500.0,
+        "duration_hours": 2.0,
+        "status": "development",
+        "cod": "TBD"
+      },
+      {
+        "id": "geelong-bess",
+        "name": "Geelong BESS",
+        "developer": "Elgin Energy Pty Ltd",
+        "capacity_mw": 250.0,
+        "storage_mwh": 1000.0,
+        "duration_hours": 4.0,
+        "status": "development",
+        "cod": "TBD"
+      },
+      {
+        "id": "glenbrae-bess",
+        "name": "Glenbrae BESS",
+        "developer": "Acenergy",
+        "capacity_mw": 250.0,
+        "storage_mwh": 250.0,
+        "duration_hours": 1.0,
+        "status": "development",
+        "cod": "TBD"
+      },
+      {
+        "id": "gnarwarre-bess-facility",
+        "name": "Gnarwarre BESS Facility",
+        "developer": "FRV Australia (Abdul Latif Jameel / OMERS)",
+        "capacity_mw": 250.0,
+        "storage_mwh": 499.52,
+        "duration_hours": 2.0,
+        "status": "construction",
+        "cod": "2027-11-30"
+      },
+      {
+        "id": "joel-joel-bess",
+        "name": "Joel Joel BESS",
+        "developer": "ACEnergy Pty Ltd",
+        "capacity_mw": 250.0,
+        "storage_mwh": 999.68,
+        "duration_hours": 4.0,
+        "status": "development",
+        "cod": "2028-10-02"
+      },
+      {
+        "id": "loy-yang-b-power-station-bess-stage-1-kci",
+        "name": "Loy Yang B Power Station - BESS Stage 1 - KCI",
+        "developer": "Alinta Energy Clean Energy Development Pty Ltd",
+        "capacity_mw": 250.0,
+        "storage_mwh": 500.0,
+        "duration_hours": 2.0,
+        "status": "development",
+        "cod": "2028-12-31"
+      },
+      {
+        "id": "meadow-creek-bess",
+        "name": "Meadow Creek BESS",
+        "developer": "Meadow Creek Solar",
+        "capacity_mw": 250.0,
+        "storage_mwh": 1000.0,
+        "duration_hours": 4.0,
+        "status": "development",
+        "cod": "2026-01-07"
+      },
+      {
+        "id": "nine-mile-energy-park-stage-1-bess",
+        "name": "Nine Mile Energy Park Stage 1 - BESS",
+        "developer": "Green Switch Energy Pty Ltd",
+        "capacity_mw": 250.0,
+        "storage_mwh": 500.0,
+        "duration_hours": 2.0,
+        "status": "development",
+        "cod": "TBD"
+      },
+      {
+        "id": "nine-mile-energy-park-stage-2-bess",
+        "name": "Nine Mile Energy Park Stage 2 - BESS",
+        "developer": "Green Switch Energy Pty Ltd",
+        "capacity_mw": 250.0,
+        "storage_mwh": 1000.0,
+        "duration_hours": 4.0,
+        "status": "development",
+        "cod": "TBD"
+      },
+      {
+        "id": "pacific-green-energy-park-portland",
+        "name": "Pacific Green Energy Park \u2013 Portland",
+        "developer": "Pacific Green Energy Park Cascade Trust",
+        "capacity_mw": 250.0,
+        "storage_mwh": 500.8,
+        "duration_hours": 2.0,
+        "status": "development",
+        "cod": "TBD"
+      },
+      {
+        "id": "pacific-green-energy-park-portland-west",
+        "name": "Pacific Green Energy Park Portland West",
+        "developer": "Pacific Green Energy Park Portland West Trust",
+        "capacity_mw": 250.0,
+        "storage_mwh": 1000.0,
+        "duration_hours": 4.0,
+        "status": "development",
+        "cod": "TBD"
+      },
+      {
+        "id": "pine-lodge-bess",
+        "name": "Pine Lodge BESS",
+        "developer": "Valent Energy (Gaw Capital / BW ESS)",
+        "capacity_mw": 250.0,
+        "storage_mwh": 550.0,
+        "duration_hours": 2.2,
+        "status": "construction",
+        "cod": "2026-10-31"
+      },
+      {
+        "id": "wodonga-bess",
+        "name": "Wodonga BESS",
+        "developer": "IBERDROLA AUSTRALIA DEVELOPMENT PTY LIMITED",
+        "capacity_mw": 250.0,
+        "storage_mwh": 500.0,
+        "duration_hours": 2.0,
+        "status": "development",
+        "cod": "TBD"
+      },
+      {
+        "id": "mornington-bess",
+        "name": "Mornington BESS",
+        "developer": "Valent Energy (Gaw Capital / BW ESS)",
+        "capacity_mw": 240.0,
+        "storage_mwh": 480.0,
+        "duration_hours": 2.0,
+        "status": "construction",
+        "cod": "2026-02-28"
+      },
+      {
+        "id": "warrenheip-bess",
+        "name": "Warrenheip BESS",
+        "developer": "AE Solar 6 Pty Ltd as Trustee for AE Solar 6 Unit Trust",
+        "capacity_mw": 240.0,
+        "storage_mwh": 240.0,
+        "duration_hours": 1.0,
+        "status": "development",
+        "cod": "TBD"
+      },
+      {
+        "id": "kerang-battery-plant",
+        "name": "Kerang Battery Plant",
+        "developer": "BSR EPC P/L",
+        "capacity_mw": 230.0,
+        "storage_mwh": 1036.8,
+        "duration_hours": 4.5,
+        "status": "development",
+        "cod": "2030-01-10"
+      },
+      {
+        "id": "bunyip-bess-kci",
+        "name": "Bunyip BESS - KCI",
+        "developer": "AMPYR Energy",
+        "capacity_mw": 220.0,
+        "storage_mwh": 220.0,
+        "duration_hours": 1.0,
+        "status": "development",
+        "cod": "TBD"
+      },
+      {
+        "id": "east-terang-bess-kci",
+        "name": "East Terang BESS - KCI",
+        "developer": "Terang ESS Pty Ltd as trustee for the TESS Project Trust",
+        "capacity_mw": 220.0,
+        "storage_mwh": 220.0,
+        "duration_hours": 1.0,
+        "status": "development",
+        "cod": "TBD"
+      },
+      {
+        "id": "kiamal-bess",
+        "name": "Kiamal BESS",
+        "developer": "TotalEnergies Renewables Australia",
+        "capacity_mw": 220.0,
+        "storage_mwh": 880.0,
+        "duration_hours": 4.0,
+        "status": "development",
+        "cod": "2028-08-31"
+      },
+      {
+        "id": "zero-moorabool-bess-cordoba-bess-kci",
+        "name": "Zero Moorabool BESS (Cordoba BESS) - KCI",
+        "developer": "Zero E Services Australia Pty Ltd",
+        "capacity_mw": 220.0,
+        "storage_mwh": 220.0,
+        "duration_hours": 1.0,
+        "status": "development",
+        "cod": "TBD"
+      },
+      {
+        "id": "north-yarragon-bess-kci",
+        "name": "North Yarragon BESS - KCI",
+        "developer": "ZEBRE Pty Ltd",
+        "capacity_mw": 210.0,
+        "storage_mwh": 840.0,
+        "duration_hours": 4.0,
+        "status": "development",
+        "cod": "2029-06-30"
+      },
+      {
+        "id": "darnum-bess",
+        "name": "Darnum BESS",
+        "developer": "samsung_NR",
+        "capacity_mw": 200.0,
+        "storage_mwh": 784.0,
+        "duration_hours": 3.9,
+        "status": "development",
+        "cod": "2028-11-30"
+      },
+      {
+        "id": "dederang-bess",
+        "name": "Dederang BESS",
+        "developer": "Mint Renewables",
+        "capacity_mw": 200.0,
+        "storage_mwh": 800.0,
+        "duration_hours": 4.0,
+        "status": "development",
+        "cod": "2028-07-01"
+      },
+      {
+        "id": "latrobe-valley-bess",
+        "name": "LaTrobe Valley BESS",
+        "developer": "Tilt Renewables (Mercury NZ)",
+        "capacity_mw": 200.0,
+        "storage_mwh": 195.8,
+        "duration_hours": 1.0,
+        "status": "operating",
+        "cod": "2025-04-08"
+      },
+      {
+        "id": "lya-bess",
+        "name": "LYA BESS",
+        "developer": "LOYYANGA",
+        "capacity_mw": 200.0,
+        "storage_mwh": 800.0,
+        "duration_hours": 4.0,
+        "status": "development",
+        "cod": "TBD"
+      },
+      {
+        "id": "melbourne-renewable-energy-hub-connection-a1",
+        "name": "Melbourne Renewable Energy Hub Connection A1",
+        "developer": "Equis Energy / SEC Victoria",
+        "capacity_mw": 200.0,
+        "storage_mwh": 399.84,
+        "duration_hours": 2.0,
+        "status": "operating",
+        "cod": "2025-08-11"
+      },
+      {
+        "id": "melbourne-renewable-energy-hub-connection-a2",
+        "name": "Melbourne Renewable Energy Hub Connection A2",
+        "developer": "Equis Energy / SEC Victoria",
+        "capacity_mw": 200.0,
+        "storage_mwh": 399.84,
+        "duration_hours": 2.0,
+        "status": "operating",
+        "cod": "2025-08-24"
+      },
+      {
+        "id": "melbourne-renewable-energy-hub-connection-a3",
+        "name": "Melbourne Renewable Energy Hub Connection A3",
+        "developer": "Equis Energy / SEC Victoria",
+        "capacity_mw": 200.0,
+        "storage_mwh": 800.8,
+        "duration_hours": 4.0,
+        "status": "operating",
+        "cod": "2025-09-11"
+      },
+      {
+        "id": "mt-doran-bess",
+        "name": "Mt Doran BESS",
+        "developer": "Iberdrola Australia Development Pty Ltd",
+        "capacity_mw": 200.0,
+        "storage_mwh": 400.0,
+        "duration_hours": 2.0,
+        "status": "development",
+        "cod": "TBD"
+      },
+      {
+        "id": "rangebank-bess",
+        "name": "Rangebank BESS",
+        "developer": "Eku Energy (Macquarie/Shell)",
+        "capacity_mw": 200.0,
+        "storage_mwh": 400.0,
+        "duration_hours": 2.0,
+        "status": "operating",
+        "cod": "2024-07-31"
+      },
+      {
+        "id": "rubicon-bess",
+        "name": "Rubicon BESS",
+        "developer": "samsung_NR",
+        "capacity_mw": 200.0,
+        "storage_mwh": 1267.2,
+        "duration_hours": 6.3,
+        "status": "development",
+        "cod": "2029-08-01"
+      },
+      {
+        "id": "tall-tree-bess",
+        "name": "Tall Tree BESS",
+        "developer": "Acciona Energy",
+        "capacity_mw": 200.0,
+        "storage_mwh": 800.0,
+        "duration_hours": 4.0,
+        "status": "development",
+        "cod": "2030-12-31"
+      },
+      {
+        "id": "tarrone-bess-storage-kci",
+        "name": "Tarrone BESS - Storage - KCI",
+        "developer": "Global Power Generation Australia Pty Ltd",
+        "capacity_mw": 200.0,
+        "storage_mwh": 400.0,
+        "duration_hours": 2.0,
+        "status": "development",
+        "cod": "2028-07-01"
+      },
+      {
+        "id": "waubra-bess-kci",
+        "name": "Waubra BESS - KCI",
+        "developer": "Acciona Energy Australia Global",
+        "capacity_mw": 200.0,
+        "storage_mwh": 200.0,
+        "duration_hours": 1.0,
+        "status": "development",
+        "cod": "TBD"
+      },
+      {
+        "id": "koorangie-energy-storage-system",
+        "name": "Koorangie Energy Storage System",
+        "developer": "Edify Energy (Sosteneo)",
+        "capacity_mw": 185.0,
+        "storage_mwh": 370.0,
+        "duration_hours": 2.0,
+        "status": "operating",
+        "cod": "2025-06-24"
+      },
+      {
+        "id": "cranbourne-bess-macquarie",
+        "name": "Cranbourne BESS (Macquarie)",
+        "developer": "Macquarie Corporate Holdings Pty Ltd",
+        "capacity_mw": 150.0,
+        "storage_mwh": 300,
+        "duration_hours": 2.0,
+        "status": "development",
+        "cod": "TBD"
+      },
+      {
+        "id": "golden-plains-bess",
+        "name": "Golden Plains BESS",
+        "developer": "Tag Energy Australia P/L",
+        "capacity_mw": 150.0,
+        "storage_mwh": 619.92,
+        "duration_hours": 4.1,
+        "status": "development",
+        "cod": "2027-07-01"
+      },
+      {
+        "id": "golden-plains-bess-2-kci",
+        "name": "Golden Plains BESS 2 - KCI",
+        "developer": "TagEnergy Australia Pty Ltd",
+        "capacity_mw": 150.0,
+        "storage_mwh": 150.0,
+        "duration_hours": 1.0,
+        "status": "development",
+        "cod": "TBD"
+      },
+      {
+        "id": "hazelwood-battery-energy-storage-system-hbess",
+        "name": "Hazelwood Battery Energy Storage System (HBESS)",
+        "developer": "ENGIE",
+        "capacity_mw": 150.0,
+        "storage_mwh": 162.0,
+        "duration_hours": 1.1,
+        "status": "operating",
+        "cod": "2023-03-09"
+      },
+      {
+        "id": "hazelwood-bess-kci",
+        "name": "Hazelwood BESS - KCI",
+        "developer": "International Power (Australia) Pty Ltd",
+        "capacity_mw": 150.0,
+        "storage_mwh": 200.0,
+        "duration_hours": 1.3,
+        "status": "development",
+        "cod": "TBD"
+      },
+      {
+        "id": "koorangie-bess-stage-2",
+        "name": "Koorangie BESS Stage 2",
+        "developer": "Edify Energy Pty Ltd",
+        "capacity_mw": 150.0,
+        "storage_mwh": 300,
+        "duration_hours": 2.0,
+        "status": "development",
+        "cod": "TBD"
+      },
+      {
+        "id": "melbourne-grid-battery-kci",
+        "name": "Melbourne Grid Battery - KCI",
+        "developer": "Lumea",
+        "capacity_mw": 140.0,
+        "storage_mwh": 280,
+        "duration_hours": 2.0,
+        "status": "development",
+        "cod": "TBD"
+      },
+      {
+        "id": "carwarp-hybrid",
+        "name": "Carwarp Hybrid",
+        "developer": "Recurrent Energy (Australia) Pty Ltd",
+        "capacity_mw": 120.0,
+        "storage_mwh": 316.08,
+        "duration_hours": 2.6,
+        "status": "development",
+        "cod": "2028-01-01"
+      },
+      {
+        "id": "winton-bess",
+        "name": "Winton BESS",
+        "developer": "AE BESS 10 as Trustee for AE BESS 10 Unit Trust",
+        "capacity_mw": 120.0,
+        "storage_mwh": 480.0,
+        "duration_hours": 4.0,
+        "status": "development",
+        "cod": "TBD"
+      },
+      {
+        "id": "springvale-energy-hub",
+        "name": "Springvale Energy Hub",
+        "developer": "progresspower_nr",
+        "capacity_mw": 115.0,
+        "storage_mwh": 246.4,
+        "duration_hours": 2.1,
+        "status": "development",
+        "cod": "2026-10-30"
+      },
+      {
+        "id": "kerang-bess",
+        "name": "Kerang BESS",
+        "developer": "Kerang Bess Pty Ltd",
+        "capacity_mw": 103.0,
+        "storage_mwh": 206.08,
+        "duration_hours": 2.0,
+        "status": "development",
+        "cod": "2027-03-31"
+      },
+      {
+        "id": "bennetts-creek-bess",
+        "name": "Bennetts Creek BESS",
+        "developer": "Bennetts Creek Energy Project Pty Ltd in its capacity as Trustee for the Bennetts Creek Energy Project Trust",
+        "capacity_mw": 100.0,
+        "storage_mwh": 223.02,
+        "duration_hours": 2.2,
+        "status": "construction",
+        "cod": "2028-03-30"
+      },
+      {
+        "id": "grahamvale-bess-kci",
+        "name": "Grahamvale BESS - KCI",
+        "developer": "AE BESS 3 Pty Ltd as Trustee for AE BESS 3 Unit Trust",
+        "capacity_mw": 100.0,
+        "storage_mwh": 200,
+        "duration_hours": 2.0,
+        "status": "development",
+        "cod": "TBD"
+      },
+      {
+        "id": "horsham-bess",
+        "name": "Horsham BESS",
+        "developer": "ESCO Solar Farm 7 Trust",
+        "capacity_mw": 100.0,
+        "storage_mwh": 200.0,
+        "duration_hours": 2.0,
+        "status": "development",
+        "cod": "TBD"
+      },
+      {
+        "id": "sec-renewable-energy-hub",
+        "name": "SEC Renewable Energy Hub",
+        "developer": "SEC",
+        "capacity_mw": 100.0,
+        "storage_mwh": 200.0,
+        "duration_hours": 2.0,
+        "status": "development",
+        "cod": "TBD"
+      },
+      {
+        "id": "terang-bess",
+        "name": "Terang BESS",
+        "developer": "frv_NR",
+        "capacity_mw": 100.0,
+        "storage_mwh": 199.88,
+        "duration_hours": 2.0,
+        "status": "construction",
+        "cod": "2026-06-30"
+      },
+      {
+        "id": "wimmera-plains-bess",
+        "name": "Wimmera Plains BESs",
+        "developer": "BayWA r.e Projects Australia Pty Ltd",
+        "capacity_mw": 100.0,
+        "storage_mwh": 400.0,
+        "duration_hours": 4.0,
+        "status": "development",
+        "cod": "TBD"
+      },
+      {
+        "id": "mt-mercer-bess",
+        "name": "Mt Mercer BESS",
+        "developer": "Foresight Australia",
+        "capacity_mw": 80.0,
+        "storage_mwh": 160.0,
+        "duration_hours": 2.0,
+        "status": "development",
+        "cod": "TBD"
+      },
+      {
+        "id": "nowingi-solar-storage-storage",
+        "name": "Nowingi Solar Storage - Storage",
+        "developer": "Lyon Solar",
+        "capacity_mw": 80.0,
+        "storage_mwh": 160,
+        "duration_hours": 2.0,
+        "status": "development",
+        "cod": "TBD"
+      },
+      {
+        "id": "cobden-bess",
+        "name": "Cobden BESS",
+        "developer": "Cobden BESS Pty Ltd",
+        "capacity_mw": 75.0,
+        "storage_mwh": 358.6,
+        "duration_hours": 4.8,
+        "status": "development",
+        "cod": "2028-06-30"
+      },
+      {
+        "id": "heatherton-bess",
+        "name": "Heatherton BESS",
+        "developer": "Heatherton BESS Pty Ltd",
+        "capacity_mw": 71.4,
+        "storage_mwh": 153.0,
+        "duration_hours": 2.1,
+        "status": "development",
+        "cod": "2027-11-30"
+      },
+      {
+        "id": "camperdown-bess",
+        "name": "Camperdown BESS",
+        "developer": "Camperdown BESS Pty Ltd",
+        "capacity_mw": 60.0,
+        "storage_mwh": 293.4,
+        "duration_hours": 4.9,
+        "status": "development",
+        "cod": "2028-06-30"
+      },
+      {
+        "id": "bairnsdale-bess",
+        "name": "Bairnsdale BESS",
+        "developer": "Bison Energy",
+        "capacity_mw": 50.0,
+        "storage_mwh": 260.0,
+        "duration_hours": 5.2,
+        "status": "development",
+        "cod": "TBD"
+      },
+      {
+        "id": "ballarat-energy-storage-system",
+        "name": "Ballarat Energy Storage System",
+        "developer": "AusNet Services",
+        "capacity_mw": 30.0,
+        "storage_mwh": 30.09,
+        "duration_hours": 1.0,
+        "status": "operating",
+        "cod": "2018-11-06"
+      }
+    ],
+    "timeline_milestones": [
+      {
+        "date": "2018-10-23",
+        "label": "Ballarat Energy Storage System: Victoria's first utility-scale battery inaugurated",
+        "cumulative_mw": 30.0
+      },
+      {
+        "date": "2018-11-06",
+        "label": "Ballarat Energy Storage System: Commercial operations commenced",
+        "cumulative_mw": 30.0
+      },
+      {
+        "date": "2018-11-07",
+        "label": "Ballarat Energy Storage System: First generation recorded",
+        "cumulative_mw": 30.0
+      },
+      {
+        "date": "2020-11-01",
+        "label": "Victorian Big Battery: Project announced by Neoen",
+        "cumulative_mw": 30.0
+      },
+      {
+        "date": "2021-02-01",
+        "label": "Victorian Big Battery: Construction commenced",
+        "cumulative_mw": 30.0
+      },
+      {
+        "date": "2021-07-13",
+        "label": "Victorian Big Battery: Tesla Megapack fire during testing",
+        "cumulative_mw": 30.0
+      },
+      {
+        "date": "2021-07-28",
+        "label": "Victorian Big Battery: First generation recorded",
+        "cumulative_mw": 330.0
+      },
+      {
+        "date": "2021-12-01",
+        "label": "Victorian Big Battery: Commissioning commenced",
+        "cumulative_mw": 330.0
+      },
+      {
+        "date": "2021-12-08",
+        "label": "Victorian Big Battery: Commercial operations begin",
+        "cumulative_mw": 330.0
+      },
+      {
+        "date": "2022-01-01",
+        "label": "Victorian Big Battery: Full commercial operations",
+        "cumulative_mw": 330.0
+      },
+      {
+        "date": "2022-01-01",
+        "label": "Mornington BESS: Victoria Minister for Planning approval",
+        "cumulative_mw": 330.0
+      },
+      {
+        "date": "2023-02-01",
+        "label": "Wooreen Energy Storage System: Victorian planning approval",
+        "cumulative_mw": 330.0
+      },
+      {
+        "date": "2023-03-09",
+        "label": "Hazelwood Battery Energy Storage System (HBESS): Commercial operations commenced",
+        "cumulative_mw": 480.0
+      },
+      {
+        "date": "2023-03-10",
+        "label": "Hazelwood Battery Energy Storage System (HBESS): First generation recorded",
+        "cumulative_mw": 480.0
+      },
+      {
+        "date": "2023-06-01",
+        "label": "Rangebank BESS: Construction begins",
+        "cumulative_mw": 480.0
+      },
+      {
+        "date": "2023-12-01",
+        "label": "Hazelwood Battery Energy Storage System (HBESS): Construction begins at former Hazelwood coal site",
+        "cumulative_mw": 480.0
+      },
+      {
+        "date": "2024-01-01",
+        "label": "LaTrobe Valley BESS: Construction begins in Latrobe Valley",
+        "cumulative_mw": 480.0
+      },
+      {
+        "date": "2024-01-29",
+        "label": "Mortlake Battery: FID \u2014 A$400M; Fluence contract signed",
+        "cumulative_mw": 480.0
+      },
+      {
+        "date": "2024-06-01",
+        "label": "Hazelwood Battery Energy Storage System (HBESS): Australia's first big battery on decommissioned coal site",
+        "cumulative_mw": 480.0
+      },
+      {
+        "date": "2024-07-01",
+        "label": "Mortlake Battery: Civil works commenced",
+        "cumulative_mw": 480.0
+      },
+      {
+        "date": "2024-07-31",
+        "label": "Rangebank BESS: Commercial operations commenced",
+        "cumulative_mw": 680.0
+      },
+      {
+        "date": "2024-08-04",
+        "label": "Gnarwarre BESS Facility: Financial close \u2014 part of A$1.2B FRV portfolio",
+        "cumulative_mw": 680.0
+      },
+      {
+        "date": "2024-08-27",
+        "label": "Rangebank BESS: First generation recorded",
+        "cumulative_mw": 680.0
+      },
+      {
+        "date": "2024-10-01",
+        "label": "Mornington BESS: Construction commenced",
+        "cumulative_mw": 680.0
+      },
+      {
+        "date": "2024-12-01",
+        "label": "Victorian Big Battery: Sold to HMC Capital in ACCC-ordered divestment",
+        "cumulative_mw": 680.0
+      },
+      {
+        "date": "2024-12-01",
+        "label": "Rangebank BESS: Victoria's second-largest BESS enters commercial operations",
+        "cumulative_mw": 680.0
+      },
+      {
+        "date": "2025-02-14",
+        "label": "Koorangie Energy Storage System: Commercial operations commenced",
+        "cumulative_mw": 865.0
+      },
+      {
+        "date": "2025-02-14",
+        "label": "Koorangie Energy Storage System: First generation recorded",
+        "cumulative_mw": 865.0
+      },
+      {
+        "date": "2025-02-20",
+        "label": "Wooreen Energy Storage System: Financial close \u2014 A$700M",
+        "cumulative_mw": 865.0
+      },
+      {
+        "date": "2025-03-01",
+        "label": "LaTrobe Valley BESS: Commercial operations commence",
+        "cumulative_mw": 1065.0
+      },
+      {
+        "date": "2025-03-01",
+        "label": "Wooreen Energy Storage System: Ground-breaking",
+        "cumulative_mw": 1065.0
+      },
+      {
+        "date": "2025-04-08",
+        "label": "LaTrobe Valley BESS: Commercial operations commenced",
+        "cumulative_mw": 1065.0
+      },
+      {
+        "date": "2025-04-08",
+        "label": "LaTrobe Valley BESS: First generation recorded",
+        "cumulative_mw": 1065.0
+      },
+      {
+        "date": "2025-07-01",
+        "label": "Koorangie Energy Storage System: Full commercial operations commence",
+        "cumulative_mw": 1065.0
+      },
+      {
+        "date": "2025-07-01",
+        "label": "Koorangie Energy Storage System: 20-year AEMO system strength agreement activated",
+        "cumulative_mw": 1065.0
+      },
+      {
+        "date": "2025-08-01",
+        "label": "Gnarwarre BESS Facility: Construction commenced",
+        "cumulative_mw": 1065.0
+      },
+      {
+        "date": "2025-08-11",
+        "label": "Melbourne Renewable Energy Hub Connection A1: Commercial operations commenced",
+        "cumulative_mw": 1265.0
+      },
+      {
+        "date": "2025-08-11",
+        "label": "Melbourne Renewable Energy Hub Connection A1: First generation recorded",
+        "cumulative_mw": 1265.0
+      },
+      {
+        "date": "2025-08-24",
+        "label": "Melbourne Renewable Energy Hub Connection A2: Commercial operations commenced",
+        "cumulative_mw": 1465.0
+      },
+      {
+        "date": "2025-08-25",
+        "label": "Melbourne Renewable Energy Hub Connection A2: First generation recorded",
+        "cumulative_mw": 1465.0
+      },
+      {
+        "date": "2025-09-11",
+        "label": "Melbourne Renewable Energy Hub Connection A3: Commercial operations commenced",
+        "cumulative_mw": 1665.0
+      },
+      {
+        "date": "2025-09-12",
+        "label": "Melbourne Renewable Energy Hub Connection A3: First generation recorded",
+        "cumulative_mw": 1665.0
+      },
+      {
+        "date": "2025-10-01",
+        "label": "Elaine BESS: Construction commenced",
+        "cumulative_mw": 1665.0
+      },
+      {
+        "date": "2025-10-01",
+        "label": "Mornington BESS: Construction completed; commissioning underway",
+        "cumulative_mw": 1665.0
+      },
+      {
+        "date": "2025-11-01",
+        "label": "Elaine BESS: Financial close \u2014 A$460M",
+        "cumulative_mw": 1665.0
+      },
+      {
+        "date": "2025-12-01",
+        "label": "Melbourne Renewable Energy Hub Connection A1: MREH commercial operations commence",
+        "cumulative_mw": 1665.0
+      },
+      {
+        "date": "2025-12-01",
+        "label": "Pine Lodge BESS: AusNet terminal station energised",
+        "cumulative_mw": 1665.0
+      },
+      {
+        "date": "2026-03-12",
+        "label": "Baranduda Electrical Energy Reserve: COD estimate updated",
+        "cumulative_mw": 1665.0
+      },
+      {
+        "date": "2026-03-12",
+        "label": "Bennetts Creek BESS: COD estimate updated",
+        "cumulative_mw": 1665.0
+      },
+      {
+        "date": "2026-03-12",
+        "label": "Berrybank BESS - Storage - KCI: COD estimate updated",
+        "cumulative_mw": 1665.0
+      },
+      {
+        "date": "2026-03-12",
+        "label": "Camperdown BESS: COD estimate updated",
+        "cumulative_mw": 1665.0
+      },
+      {
+        "date": "2026-03-12",
+        "label": "Carwarp Hybrid: COD estimate updated",
+        "cumulative_mw": 1665.0
+      },
+      {
+        "date": "2026-03-12",
+        "label": "Cobden BESS: COD estimate updated",
+        "cumulative_mw": 1665.0
+      },
+      {
+        "date": "2026-03-12",
+        "label": "Connewarren BESS: COD estimate updated",
+        "cumulative_mw": 1665.0
+      },
+      {
+        "date": "2026-03-12",
+        "label": "Darnum BESS: COD estimate updated",
+        "cumulative_mw": 1665.0
+      },
+      {
+        "date": "2026-03-12",
+        "label": "Dederang BESS: COD estimate updated",
+        "cumulative_mw": 1665.0
+      },
+      {
+        "date": "2026-03-12",
+        "label": "Deer Park BESS - Akaysha: COD estimate updated",
+        "cumulative_mw": 1665.0
+      },
+      {
+        "date": "2026-03-12",
+        "label": "Elaine BESS: COD estimate updated",
+        "cumulative_mw": 1665.0
+      },
+      {
+        "date": "2026-03-12",
+        "label": "Glenrowan BESS: COD estimate updated",
+        "cumulative_mw": 1665.0
+      },
+      {
+        "date": "2026-03-12",
+        "label": "Glenrowan BESS - Storage - KCI: COD estimate updated",
+        "cumulative_mw": 1665.0
+      },
+      {
+        "date": "2026-03-12",
+        "label": "Gnarwarre BESS Facility: COD estimate updated",
+        "cumulative_mw": 1665.0
+      },
+      {
+        "date": "2026-03-12",
+        "label": "Golden Plains BESS: COD estimate updated",
+        "cumulative_mw": 1665.0
+      },
+      {
+        "date": "2026-03-12",
+        "label": "Goorambat BESS (LightsourceBP): COD estimate updated",
+        "cumulative_mw": 1665.0
+      },
+      {
+        "date": "2026-03-12",
+        "label": "Heatherton BESS: COD estimate updated",
+        "cumulative_mw": 1665.0
+      },
+      {
+        "date": "2026-03-12",
+        "label": "Heywood BESS: COD estimate updated",
+        "cumulative_mw": 1665.0
+      },
+      {
+        "date": "2026-03-12",
+        "label": "Joel Joel BESS: COD estimate updated",
+        "cumulative_mw": 1665.0
+      },
+      {
+        "date": "2026-03-12",
+        "label": "Kerang Battery Plant: COD estimate updated",
+        "cumulative_mw": 1665.0
+      },
+      {
+        "date": "2026-03-12",
+        "label": "Kerang BESS: COD estimate updated",
+        "cumulative_mw": 1665.0
+      },
+      {
+        "date": "2026-03-12",
+        "label": "Kiamal BESS: COD estimate updated",
+        "cumulative_mw": 1665.0
+      },
+      {
+        "date": "2026-03-12",
+        "label": "Koorangie Energy Storage System: COD estimate updated",
+        "cumulative_mw": 1665.0
+      },
+      {
+        "date": "2026-03-12",
+        "label": "Little River BESS: COD estimate updated",
+        "cumulative_mw": 1665.0
+      },
+      {
+        "date": "2026-03-12",
+        "label": "Loy Yang B Power Station - BESS Stage 1 - KCI: COD estimate updated",
+        "cumulative_mw": 1665.0
+      },
+      {
+        "date": "2026-03-12",
+        "label": "Meadow Creek BESS: COD estimate updated",
+        "cumulative_mw": 1665.0
+      },
+      {
+        "date": "2026-03-12",
+        "label": "Melbourne Renewable Energy Hub - Side B: COD estimate updated",
+        "cumulative_mw": 1665.0
+      },
+      {
+        "date": "2026-03-12",
+        "label": "Mornington BESS: COD estimate updated",
+        "cumulative_mw": 1665.0
+      },
+      {
+        "date": "2026-03-12",
+        "label": "Mornington BESS 2: COD estimate updated",
+        "cumulative_mw": 1665.0
+      },
+      {
+        "date": "2026-03-12",
+        "label": "Mortlake Battery: COD estimate updated",
+        "cumulative_mw": 1665.0
+      },
+      {
+        "date": "2026-03-12",
+        "label": "Morwell BESS: COD estimate updated",
+        "cumulative_mw": 1665.0
+      },
+      {
+        "date": "2026-03-12",
+        "label": "North Yarragon BESS - KCI: COD estimate updated",
+        "cumulative_mw": 1665.0
+      },
+      {
+        "date": "2026-03-12",
+        "label": "Pine Lodge 2 BESS - KCI: COD estimate updated",
+        "cumulative_mw": 1665.0
+      },
+      {
+        "date": "2026-03-12",
+        "label": "Pine Lodge BESS: COD estimate updated",
+        "cumulative_mw": 1665.0
+      },
+      {
+        "date": "2026-03-12",
+        "label": "Portland Energy Park BESS: COD estimate updated",
+        "cumulative_mw": 1665.0
+      },
+      {
+        "date": "2026-03-12",
+        "label": "Rubicon BESS: COD estimate updated",
+        "cumulative_mw": 1665.0
+      },
+      {
+        "date": "2026-03-12",
+        "label": "Springvale Energy Hub: COD estimate updated",
+        "cumulative_mw": 1665.0
+      },
+      {
+        "date": "2026-03-12",
+        "label": "Tall Tree BESS: COD estimate updated",
+        "cumulative_mw": 1665.0
+      },
+      {
+        "date": "2026-03-12",
+        "label": "Tarrone BESS - Storage - KCI: COD estimate updated",
+        "cumulative_mw": 1665.0
+      },
+      {
+        "date": "2026-03-12",
+        "label": "Terang BESS: COD estimate updated",
+        "cumulative_mw": 1665.0
+      },
+      {
+        "date": "2026-03-12",
+        "label": "Thomastown BESS: COD estimate updated",
+        "cumulative_mw": 1665.0
+      },
+      {
+        "date": "2026-03-12",
+        "label": "Tragowel BESS: COD estimate updated",
+        "cumulative_mw": 1665.0
+      },
+      {
+        "date": "2026-03-12",
+        "label": "Tramway Road BESS: COD estimate updated",
+        "cumulative_mw": 1665.0
+      },
+      {
+        "date": "2026-03-12",
+        "label": "Wooreen Energy Storage System: COD estimate updated",
+        "cumulative_mw": 1665.0
+      }
+    ]
+  },
+  "sa_focus": {
+    "total_operating_mw": 924.0,
+    "total_operating_mwh": 1169.6100000000001,
+    "total_construction_mw": 856.5,
+    "total_construction_mwh": 1835.7,
+    "projects": [
+      {
+        "id": "marcollat-energy-hub-stage-1",
+        "name": "Marcollat Energy Hub (Stage 1)",
+        "developer": "BE PRO MC1 PTY LTD",
+        "capacity_mw": 400.0,
+        "storage_mwh": 1600.0,
+        "duration_hours": 4.0,
+        "status": "development",
+        "cod": "TBD"
+      },
+      {
+        "id": "marcollat-energy-hub-stage-2",
+        "name": "Marcollat Energy Hub (stage 2)",
+        "developer": "Bison Energy",
+        "capacity_mw": 400.0,
+        "storage_mwh": 800,
+        "duration_hours": 2.0,
+        "status": "development",
+        "cod": "TBD"
+      },
+      {
+        "id": "robertstown-bess",
+        "name": "Robertstown BESS",
+        "developer": "StorEnergy 4 Pty Ltd",
+        "capacity_mw": 400.0,
+        "storage_mwh": 1211.0,
+        "duration_hours": 3.0,
+        "status": "development",
+        "cod": "TBD"
+      },
+      {
+        "id": "aurora-solar-energy-project-phase-1",
+        "name": "Aurora Solar Energy Project - Phase 1",
+        "developer": "SiliconAurora",
+        "capacity_mw": 390.0,
+        "storage_mwh": 140.0,
+        "duration_hours": 0.4,
+        "status": "development",
+        "cod": "TBD"
+      },
+      {
+        "id": "goyder-bess",
+        "name": "Goyder BESS",
+        "developer": "Neoen Australia Pty Ltd",
+        "capacity_mw": 300.0,
+        "storage_mwh": 800.88,
+        "duration_hours": 2.7,
+        "status": "development",
+        "cod": "2028-05-09"
+      },
+      {
+        "id": "goyder-north-bess-2",
+        "name": "Goyder North BESS 2",
+        "developer": "Neoen Australia Pty Ltd",
+        "capacity_mw": 300.0,
+        "storage_mwh": 600,
+        "duration_hours": 2.0,
+        "status": "development",
+        "cod": "TBD"
+      },
+      {
+        "id": "hughes-gap-bess-kci",
+        "name": "Hughes Gap BESS - KCI",
+        "developer": "ReEnerge Australia Pty Ltd",
+        "capacity_mw": 300.0,
+        "storage_mwh": 300.0,
+        "duration_hours": 1.0,
+        "status": "development",
+        "cod": "TBD"
+      },
+      {
+        "id": "para-hill-bess",
+        "name": "Para Hill BESS",
+        "developer": "X-Elio Australia Pty Ltd",
+        "capacity_mw": 300.0,
+        "storage_mwh": 300.0,
+        "duration_hours": 1.0,
+        "status": "development",
+        "cod": "TBD"
+      },
+      {
+        "id": "augusta-bess",
+        "name": "Augusta BESS",
+        "developer": "Augusta BESS Pty Ltd",
+        "capacity_mw": 270.0,
+        "storage_mwh": 540.0,
+        "duration_hours": 2.0,
+        "status": "development",
+        "cod": "TBD"
+      },
+      {
+        "id": "barn-hill-bess",
+        "name": "Barn Hill BESS",
+        "developer": "AGL Energy Limited",
+        "capacity_mw": 270.0,
+        "storage_mwh": 1080.0,
+        "duration_hours": 4.0,
+        "status": "development",
+        "cod": "TBD"
+      },
+      {
+        "id": "harrogate-bess",
+        "name": "Harrogate BESS",
+        "developer": "Enel Green Power Australia Pty Ltd",
+        "capacity_mw": 270.0,
+        "storage_mwh": 1184.72,
+        "duration_hours": 4.4,
+        "status": "development",
+        "cod": "2028-12-30"
+      },
+      {
+        "id": "northern-battery",
+        "name": "Northern Battery",
+        "developer": "Green Gold Energy Pty Ltd",
+        "capacity_mw": 270.0,
+        "storage_mwh": 261.04,
+        "duration_hours": 1.0,
+        "status": "development",
+        "cod": "2028-01-08"
+      },
+      {
+        "id": "tungkillo-south-bess",
+        "name": "Tungkillo South BESS",
+        "developer": "RES Australia Pty Ltd",
+        "capacity_mw": 270.0,
+        "storage_mwh": 1215.0,
+        "duration_hours": 4.5,
+        "status": "development",
+        "cod": "2029-06-01"
+      },
+      {
+        "id": "brinkworth-bess",
+        "name": "Brinkworth BESS",
+        "developer": "Brinkworth Solar Farm Pty Ltd",
+        "capacity_mw": 250.0,
+        "storage_mwh": 999.92,
+        "duration_hours": 4.0,
+        "status": "development",
+        "cod": "2029-04-10"
+      },
+      {
+        "id": "limestone-creek-bess",
+        "name": "Limestone Creek BESS",
+        "developer": "Intera",
+        "capacity_mw": 250.0,
+        "storage_mwh": 750.0,
+        "duration_hours": 3.0,
+        "status": "development",
+        "cod": "TBD"
+      },
+      {
+        "id": "megalink-bess",
+        "name": "MegaLink BESS",
+        "developer": "SynCo Global",
+        "capacity_mw": 250.0,
+        "storage_mwh": 500,
+        "duration_hours": 2.0,
+        "status": "development",
+        "cod": "2027-12-30"
+      },
+      {
+        "id": "opal-bess",
+        "name": "Opal BESS",
+        "developer": "SynCo Global",
+        "capacity_mw": 250.0,
+        "storage_mwh": 500,
+        "duration_hours": 2.0,
+        "status": "development",
+        "cod": "2028-06-30"
+      },
+      {
+        "id": "pacific-green-energy-park-limestone-coast-north",
+        "name": "Pacific Green Energy Park - Limestone Coast North",
+        "developer": "Pacific Green",
+        "capacity_mw": 250.0,
+        "storage_mwh": 500.0,
+        "duration_hours": 2.0,
+        "status": "development",
+        "cod": "TBD"
+      },
+      {
+        "id": "pacific-green-energy-park-limestone-coast-west",
+        "name": "Pacific Green Energy Park - Limestone Coast West",
+        "developer": "Pacific Green",
+        "capacity_mw": 250.0,
+        "storage_mwh": 500.0,
+        "duration_hours": 2.0,
+        "status": "development",
+        "cod": "TBD"
+      },
+      {
+        "id": "reeves-plains-power-station-bess",
+        "name": "Reeves Plains Power Station BESS",
+        "developer": "Alinta Energy (Reeves Plains) Pty Ltd",
+        "capacity_mw": 250.0,
+        "storage_mwh": 1000.0,
+        "duration_hours": 4.0,
+        "status": "development",
+        "cod": "2028-02-29"
+      },
+      {
+        "id": "torrens-island-bess",
+        "name": "Torrens Island BESS",
+        "developer": "AGL Energy",
+        "capacity_mw": 250.0,
+        "storage_mwh": 249.61,
+        "duration_hours": 1.0,
+        "status": "operating",
+        "cod": "2023-04-25"
+      },
+      {
+        "id": "summerfield-bess",
+        "name": "Summerfield BESS",
+        "developer": "Copenhagen Infrastructure Partners (CIP)",
+        "capacity_mw": 240.0,
+        "storage_mwh": 532.7,
+        "duration_hours": 2.2,
+        "status": "construction",
+        "cod": "2026-11-20"
+      },
+      {
+        "id": "globe-derby-bess",
+        "name": "Globe Derby BESS",
+        "developer": "Grid Store Pty Limited",
+        "capacity_mw": 230.0,
+        "storage_mwh": 460,
+        "duration_hours": 2.0,
+        "status": "development",
+        "cod": "TBD"
+      },
+      {
+        "id": "emeroo-bess",
+        "name": "Emeroo BESS",
+        "developer": "Potentia Energy Pty Ltd",
+        "capacity_mw": 225.0,
+        "storage_mwh": 212.38,
+        "duration_hours": 0.9,
+        "status": "development",
+        "cod": "2028-12-15"
+      },
+      {
+        "id": "gould-creek-bess",
+        "name": "Gould Creek BESS",
+        "developer": "Gould Creek BESS Project Pty Ltd",
+        "capacity_mw": 215.0,
+        "storage_mwh": 430.0,
+        "duration_hours": 2.0,
+        "status": "development",
+        "cod": "TBD"
+      },
+      {
+        "id": "tailem-bend-stage-3",
+        "name": "Tailem Bend Stage 3",
+        "developer": "Vena Energy",
+        "capacity_mw": 204.0,
+        "storage_mwh": 408.0,
+        "duration_hours": 2.0,
+        "status": "construction",
+        "cod": "2027-04-30"
+      },
+      {
+        "id": "blyth-bess",
+        "name": "Blyth BESS",
+        "developer": "Neoen",
+        "capacity_mw": 200.0,
+        "storage_mwh": 400.0,
+        "duration_hours": 2.0,
+        "status": "operating",
+        "cod": "2025-03-27"
+      },
+      {
+        "id": "bungama-bess-risen",
+        "name": "Bungama BESS (Risen )",
+        "developer": "Bungama Bess Trust",
+        "capacity_mw": 200.0,
+        "storage_mwh": 400.0,
+        "duration_hours": 2.0,
+        "status": "development",
+        "cod": "TBD"
+      },
+      {
+        "id": "goyder-bess-stage-2",
+        "name": "Goyder BESS Stage 2",
+        "developer": "Neoen Australia Pty Ltd",
+        "capacity_mw": 200.0,
+        "storage_mwh": 800.0,
+        "duration_hours": 4.0,
+        "status": "development",
+        "cod": "2029-05-31"
+      },
+      {
+        "id": "koolunga-battery-energy-storage-system",
+        "name": "Koolunga Battery Energy Storage System",
+        "developer": "Equis Energy (Australia) Projects (Ngumi 6) Pty Ltd as trustee for the Equis Energy (Australia) Ngumi 6 Asset Trust",
+        "capacity_mw": 200.0,
+        "storage_mwh": 800.8,
+        "duration_hours": 4.0,
+        "status": "development",
+        "cod": "2028-01-01"
+      },
+      {
+        "id": "pelican-point-bess",
+        "name": "Pelican Point BESS",
+        "developer": "ENGIE",
+        "capacity_mw": 200.0,
+        "storage_mwh": 400.0,
+        "duration_hours": 2.0,
+        "status": "construction",
+        "cod": "2027-07-19"
+      },
+      {
+        "id": "south-east-bess-storage-kci",
+        "name": "South East BESS - Storage - KCI",
+        "developer": "Equis Energy (Australia) Projects (Ngumi 8) Pty Ltd as trustee for the Equis Energy(Australia) Ngumi 8 Asset Trust",
+        "capacity_mw": 200.0,
+        "storage_mwh": 798.6,
+        "duration_hours": 4.0,
+        "status": "development",
+        "cod": "2030-07-31"
+      },
+      {
+        "id": "templers-b-bess",
+        "name": "Templers B BESS",
+        "developer": "BORAL",
+        "capacity_mw": 200.0,
+        "storage_mwh": 400.0,
+        "duration_hours": 2.0,
+        "status": "development",
+        "cod": "2028-03-31"
+      },
+      {
+        "id": "hornsdale-power-reserve",
+        "name": "Hornsdale Power Reserve",
+        "developer": "Neoen",
+        "capacity_mw": 194.0,
+        "storage_mwh": 194.0,
+        "duration_hours": 1.0,
+        "status": "operating",
+        "cod": "2017-12 (Phase 1)"
+      },
+      {
+        "id": "mobilong-bess",
+        "name": "Mobilong BESS",
+        "developer": "Mobilong ProjectCo Pty Ltd",
+        "capacity_mw": 180.0,
+        "storage_mwh": 720.0,
+        "duration_hours": 4.0,
+        "status": "development",
+        "cod": "TBD"
+      },
+      {
+        "id": "summerfield-north",
+        "name": "Summerfield North",
+        "developer": "CI SUMMERFIELD NORTH PROJECTCO PTY LTD",
+        "capacity_mw": 160.0,
+        "storage_mwh": 940.0,
+        "duration_hours": 5.9,
+        "status": "development",
+        "cod": "2028-12-30"
+      },
+      {
+        "id": "hornsdale-power-reserve-unit-1",
+        "name": "Hornsdale Power Reserve Unit 1",
+        "developer": "Neoen",
+        "capacity_mw": 150.0,
+        "storage_mwh": 117.0,
+        "duration_hours": 0.8,
+        "status": "operating",
+        "cod": "2017-11-23"
+      },
+      {
+        "id": "kincraig-bess",
+        "name": "Kincraig BESS",
+        "developer": "TagEnergy Australia Pty Ltd",
+        "capacity_mw": 150.0,
+        "storage_mwh": 604.38,
+        "duration_hours": 4.0,
+        "status": "development",
+        "cod": "2028-12-31"
+      },
+      {
+        "id": "lionsgate-battery",
+        "name": "Lionsgate Battery",
+        "developer": "CEP Energy",
+        "capacity_mw": 150.0,
+        "storage_mwh": 300,
+        "duration_hours": 2.0,
+        "status": "development",
+        "cod": "TBD"
+      },
+      {
+        "id": "blanche-bess-kci",
+        "name": "Blanche BESS - KCI",
+        "developer": "Blanche BESS Pty Ltd as trustee for Blanche BESS Trust",
+        "capacity_mw": 128.0,
+        "storage_mwh": 256,
+        "duration_hours": 2.0,
+        "status": "development",
+        "cod": "TBD"
+      },
+      {
+        "id": "project-monash-storage-kci",
+        "name": "Project Monash - Storage - KCI",
+        "developer": "Monash Renewables Pty Ltd",
+        "capacity_mw": 125.0,
+        "storage_mwh": 250,
+        "duration_hours": 2.0,
+        "status": "development",
+        "cod": "TBD"
+      },
+      {
+        "id": "osborne-bess",
+        "name": "Osborne BESS",
+        "developer": "Osboourne Cogeneration P/L",
+        "capacity_mw": 120.0,
+        "storage_mwh": 240,
+        "duration_hours": 2.0,
+        "status": "development",
+        "cod": "TBD"
+      },
+      {
+        "id": "carmodys-hill-bess",
+        "name": "Carmodys Hill BESS",
+        "developer": "Georgetown Hills Renewable Energy Pty Ltd as trustee for the Georgetown Hills Renewable Energy Trust",
+        "capacity_mw": 118.0,
+        "storage_mwh": 247.04,
+        "duration_hours": 2.1,
+        "status": "development",
+        "cod": "2030-01-01"
+      },
+      {
+        "id": "templers-bess",
+        "name": "Templers BESS",
+        "developer": "ZEBRE Pty Ltd",
+        "capacity_mw": 111.0,
+        "storage_mwh": 291.0,
+        "duration_hours": 2.6,
+        "status": "commissioning",
+        "cod": "2025-08-31"
+      },
+      {
+        "id": "blacktop-bess-kci",
+        "name": "Blacktop BESS - KCI",
+        "developer": "BESS Officer Pty Ltd",
+        "capacity_mw": 100.0,
+        "storage_mwh": 200,
+        "duration_hours": 2.0,
+        "status": "development",
+        "cod": "TBD"
+      },
+      {
+        "id": "kingfisher-solar-storage-storage",
+        "name": "Kingfisher Solar Storage - Storage",
+        "developer": "Lyon Solar",
+        "capacity_mw": 100.0,
+        "storage_mwh": 200,
+        "duration_hours": 2.0,
+        "status": "development",
+        "cod": "TBD"
+      },
+      {
+        "id": "lindley-bess",
+        "name": "Lindley BESS",
+        "developer": "SynCo Global",
+        "capacity_mw": 100.0,
+        "storage_mwh": 200,
+        "duration_hours": 2.0,
+        "status": "development",
+        "cod": "2027-06-30"
+      },
+      {
+        "id": "mannum-bess",
+        "name": "Mannum BESS",
+        "developer": "Epic Energy",
+        "capacity_mw": 100.0,
+        "storage_mwh": 200.0,
+        "duration_hours": 2.0,
+        "status": "operating",
+        "cod": "2026-01-08"
+      },
+      {
+        "id": "playford-battery",
+        "name": "Playford Battery",
+        "developer": "CFG",
+        "capacity_mw": 100.0,
+        "storage_mwh": 100.0,
+        "duration_hours": 1.0,
+        "status": "development",
+        "cod": "TBD"
+      },
+      {
+        "id": "riverland-solar-storage-storage",
+        "name": "Riverland Solar Storage - Storage",
+        "developer": "Lyon Solar",
+        "capacity_mw": 100.0,
+        "storage_mwh": 200,
+        "duration_hours": 2.0,
+        "status": "development",
+        "cod": "TBD"
+      },
+      {
+        "id": "snowtown-north-solar-farm-bess",
+        "name": "Snowtown North Solar Farm - BESS",
+        "developer": "Tilt Renewables",
+        "capacity_mw": 100.0,
+        "storage_mwh": 200.0,
+        "duration_hours": 2.0,
+        "status": "development",
+        "cod": "TBD"
+      },
+      {
+        "id": "whyalla-bess-kci",
+        "name": "Whyalla BESS - KCI",
+        "developer": "BESS Kalkallo Pty Ltd",
+        "capacity_mw": 100.0,
+        "storage_mwh": 200,
+        "duration_hours": 2.0,
+        "status": "development",
+        "cod": "TBD"
+      },
+      {
+        "id": "clements-gap-bess",
+        "name": "Clements Gap - BESS",
+        "developer": "Pacific Blue (SPIC China)",
+        "capacity_mw": 60.0,
+        "storage_mwh": 120.0,
+        "duration_hours": 2.0,
+        "status": "construction",
+        "cod": "2026-01-05"
+      },
+      {
+        "id": "hallett-bess",
+        "name": "Hallett BESS",
+        "developer": "EnergyAustralia Hallett Pty Ltd",
+        "capacity_mw": 50.0,
+        "storage_mwh": 199.92,
+        "duration_hours": 4.0,
+        "status": "development",
+        "cod": "2027-06-01"
+      },
+      {
+        "id": "reeves-plains-battery-stage-2",
+        "name": "Reeves Plains Battery - stage 2",
+        "developer": "Alinta Energy Reeves Plains Pty Ltd",
+        "capacity_mw": 50.0,
+        "storage_mwh": 400.0,
+        "duration_hours": 8.0,
+        "status": "development",
+        "cod": "2029-11-30"
+      },
+      {
+        "id": "tailem-bend-battery-project",
+        "name": "Tailem Bend Battery Project",
+        "developer": "Vena Energy",
+        "capacity_mw": 41.5,
+        "storage_mwh": 84.0,
+        "duration_hours": 2.0,
+        "status": "commissioning",
+        "cod": "2024-01-03"
+      },
+      {
+        "id": "morgan-long-duration-energy-storage-kci",
+        "name": "Morgan Long Duration Energy Storage - KCI",
+        "developer": "Origin Energy",
+        "capacity_mw": 40.0,
+        "storage_mwh": 80,
+        "duration_hours": 2.0,
+        "status": "development",
+        "cod": "TBD"
+      },
+      {
+        "id": "dalrymple-bess",
+        "name": "Dalrymple BESS",
+        "developer": "ElectraNet",
+        "capacity_mw": 30.0,
+        "storage_mwh": 9.0,
+        "duration_hours": 0.3,
+        "status": "operating",
+        "cod": "2018-06-05"
+      },
+      {
+        "id": "morgan-battery",
+        "name": "Morgan Battery",
+        "developer": "Origin Energy Limited",
+        "capacity_mw": 30.0,
+        "storage_mwh": 60,
+        "duration_hours": 2.0,
+        "status": "development",
+        "cod": "TBD"
+      }
+    ],
+    "timeline_milestones": [
+      {
+        "date": "2017-07-01",
+        "label": "Hornsdale Power Reserve: Project announced after Elon Musk Twitter bet",
+        "cumulative_mw": 0
+      },
+      {
+        "date": "2017-11-23",
+        "label": "Hornsdale Power Reserve Unit 1: Commercial operations commenced",
+        "cumulative_mw": 150.0
+      },
+      {
+        "date": "2017-11-24",
+        "label": "Hornsdale Power Reserve: First generation recorded",
+        "cumulative_mw": 344.0
+      },
+      {
+        "date": "2017-11-24",
+        "label": "Hornsdale Power Reserve Unit 1: First generation recorded",
+        "cumulative_mw": 344.0
+      },
+      {
+        "date": "2017-12-01",
+        "label": "Hornsdale Power Reserve: Phase 1 operational \u2014 100 MW / 129 MWh",
+        "cumulative_mw": 344.0
+      },
+      {
+        "date": "2017-12-01",
+        "label": "Hornsdale Power Reserve: World's largest lithium-ion battery connected to grid",
+        "cumulative_mw": 344.0
+      },
+      {
+        "date": "2017-12-14",
+        "label": "Hornsdale Power Reserve: First major grid response \u2014 Loy Yang A trip",
+        "cumulative_mw": 344.0
+      },
+      {
+        "date": "2018-06-01",
+        "label": "Hornsdale Power Reserve: Captures 55% of SA FCAS market, cuts prices 91%",
+        "cumulative_mw": 344.0
+      },
+      {
+        "date": "2018-06-05",
+        "label": "Dalrymple BESS: Commercial operations commenced",
+        "cumulative_mw": 374.0
+      },
+      {
+        "date": "2018-07-05",
+        "label": "Dalrymple BESS: First generation recorded",
+        "cumulative_mw": 374.0
+      },
+      {
+        "date": "2018-12-01",
+        "label": "Dalrymple BESS: South Australia's second big battery commissioned",
+        "cumulative_mw": 374.0
+      },
+      {
+        "date": "2022-07-01",
+        "label": "Hornsdale Power Reserve: World-first: AEMO approves battery inertia services",
+        "cumulative_mw": 374.0
+      },
+      {
+        "date": "2023-04-25",
+        "label": "Torrens Island BESS: Commercial operations commenced",
+        "cumulative_mw": 624.0
+      },
+      {
+        "date": "2023-04-26",
+        "label": "Torrens Island BESS: First generation recorded",
+        "cumulative_mw": 624.0
+      },
+      {
+        "date": "2023-06-01",
+        "label": "Blyth BESS: Construction begins",
+        "cumulative_mw": 624.0
+      },
+      {
+        "date": "2023-08-01",
+        "label": "Torrens Island BESS: Commercial operations begin",
+        "cumulative_mw": 624.0
+      },
+      {
+        "date": "2023-12-01",
+        "label": "Dalrymple BESS: Battery repays ARENA grant after windfall revenue",
+        "cumulative_mw": 624.0
+      },
+      {
+        "date": "2023-12-01",
+        "label": "Dalrymple BESS: Five-year anniversary \u2014 strong operational track record",
+        "cumulative_mw": 624.0
+      },
+      {
+        "date": "2024-02-01",
+        "label": "Clements Gap - BESS: Board endorsement / FID",
+        "cumulative_mw": 624.0
+      },
+      {
+        "date": "2024-06-01",
+        "label": "Mannum BESS: Construction begins",
+        "cumulative_mw": 624.0
+      },
+      {
+        "date": "2024-06-12",
+        "label": "Clements Gap - BESS: Sod-turning ceremony",
+        "cumulative_mw": 624.0
+      },
+      {
+        "date": "2024-08-20",
+        "label": "Blyth BESS: First generation recorded",
+        "cumulative_mw": 824.0
+      },
+      {
+        "date": "2024-08-31",
+        "label": "Blyth BESS: Commercial operations commenced",
+        "cumulative_mw": 824.0
+      },
+      {
+        "date": "2024-09-01",
+        "label": "Summerfield BESS: FID reached",
+        "cumulative_mw": 824.0
+      },
+      {
+        "date": "2025-01-01",
+        "label": "Summerfield BESS: Construction commenced",
+        "cumulative_mw": 824.0
+      },
+      {
+        "date": "2025-04-01",
+        "label": "Blyth BESS: Commercial operations begin (477MWh final capacity)",
+        "cumulative_mw": 824.0
+      },
+      {
+        "date": "2025-04-01",
+        "label": "Blyth BESS: Grid-forming capability with ARENA support",
+        "cumulative_mw": 824.0
+      },
+      {
+        "date": "2025-05-12",
+        "label": "Mannum BESS: Commercial operations commenced",
+        "cumulative_mw": 924.0
+      },
+      {
+        "date": "2025-05-13",
+        "label": "Mannum BESS: First generation recorded",
+        "cumulative_mw": 924.0
+      },
+      {
+        "date": "2025-06-01",
+        "label": "Mannum BESS: Commercial operations commence",
+        "cumulative_mw": 924.0
+      },
+      {
+        "date": "2025-12-01",
+        "label": "Pelican Point BESS: Construction commenced",
+        "cumulative_mw": 924.0
+      },
+      {
+        "date": "2025-12-01",
+        "label": "Tailem Bend Stage 3: Construction commenced",
+        "cumulative_mw": 924.0
+      },
+      {
+        "date": "2026-03-12",
+        "label": "Blyth BESS: COD estimate updated",
+        "cumulative_mw": 924.0
+      },
+      {
+        "date": "2026-03-12",
+        "label": "Brinkworth BESS: COD estimate updated",
+        "cumulative_mw": 924.0
+      },
+      {
+        "date": "2026-03-12",
+        "label": "Carmodys Hill BESS: COD estimate updated",
+        "cumulative_mw": 924.0
+      },
+      {
+        "date": "2026-03-12",
+        "label": "Clements Gap - BESS: COD estimate updated",
+        "cumulative_mw": 924.0
+      },
+      {
+        "date": "2026-03-12",
+        "label": "Emeroo BESS: COD estimate updated",
+        "cumulative_mw": 924.0
+      },
+      {
+        "date": "2026-03-12",
+        "label": "Goyder BESS: COD estimate updated",
+        "cumulative_mw": 924.0
+      },
+      {
+        "date": "2026-03-12",
+        "label": "Goyder BESS Stage 2: COD estimate updated",
+        "cumulative_mw": 924.0
+      },
+      {
+        "date": "2026-03-12",
+        "label": "Hallett BESS: COD estimate updated",
+        "cumulative_mw": 924.0
+      },
+      {
+        "date": "2026-03-12",
+        "label": "Harrogate BESS: COD estimate updated",
+        "cumulative_mw": 924.0
+      },
+      {
+        "date": "2026-03-12",
+        "label": "Kincraig BESS: COD estimate updated",
+        "cumulative_mw": 924.0
+      },
+      {
+        "date": "2026-03-12",
+        "label": "Koolunga Battery Energy Storage System: COD estimate updated",
+        "cumulative_mw": 924.0
+      },
+      {
+        "date": "2026-03-12",
+        "label": "Lindley BESS: COD estimate updated",
+        "cumulative_mw": 924.0
+      },
+      {
+        "date": "2026-03-12",
+        "label": "Mannum BESS: COD estimate updated",
+        "cumulative_mw": 924.0
+      },
+      {
+        "date": "2026-03-12",
+        "label": "MegaLink BESS: COD estimate updated",
+        "cumulative_mw": 924.0
+      },
+      {
+        "date": "2026-03-12",
+        "label": "Northern Battery: COD estimate updated",
+        "cumulative_mw": 924.0
+      },
+      {
+        "date": "2026-03-12",
+        "label": "Opal BESS: COD estimate updated",
+        "cumulative_mw": 924.0
+      },
+      {
+        "date": "2026-03-12",
+        "label": "Pelican Point BESS: COD estimate updated",
+        "cumulative_mw": 924.0
+      },
+      {
+        "date": "2026-03-12",
+        "label": "Reeves Plains Battery - stage 2: COD estimate updated",
+        "cumulative_mw": 924.0
+      },
+      {
+        "date": "2026-03-12",
+        "label": "Reeves Plains Power Station BESS: COD estimate updated",
+        "cumulative_mw": 924.0
+      },
+      {
+        "date": "2026-03-12",
+        "label": "South East BESS - Storage - KCI: COD estimate updated",
+        "cumulative_mw": 924.0
+      },
+      {
+        "date": "2026-03-12",
+        "label": "Summerfield BESS: COD estimate updated",
+        "cumulative_mw": 924.0
+      },
+      {
+        "date": "2026-03-12",
+        "label": "Summerfield North: COD estimate updated",
+        "cumulative_mw": 924.0
+      },
+      {
+        "date": "2026-03-12",
+        "label": "Tailem Bend Battery Project: COD estimate updated",
+        "cumulative_mw": 924.0
+      },
+      {
+        "date": "2026-03-12",
+        "label": "Tailem Bend Stage 3: COD estimate updated",
+        "cumulative_mw": 924.0
+      },
+      {
+        "date": "2026-03-12",
+        "label": "Templers B BESS: COD estimate updated",
+        "cumulative_mw": 924.0
+      },
+      {
+        "date": "2026-03-12",
+        "label": "Templers BESS: COD estimate updated",
+        "cumulative_mw": 924.0
+      },
+      {
+        "date": "2026-03-12",
+        "label": "Tungkillo South BESS: COD estimate updated",
+        "cumulative_mw": 924.0
+      }
+    ]
   }
 }

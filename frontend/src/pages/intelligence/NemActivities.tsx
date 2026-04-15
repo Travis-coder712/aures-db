@@ -85,6 +85,9 @@ export default function NemActivities() {
   })
   const [expandedMonths, setExpandedMonths] = useState<Set<string>>(new Set())
   const [showAll, setShowAll] = useState(false)
+  const [eventTypeFilters, setEventTypeFilters] = useState<Record<string, boolean>>({
+    fid: true, construction_start: true, cod: true, first_generation: true,
+  })
 
   useEffect(() => {
     fetchNemActivities().then(d => { setData(d); setLoading(false) })
@@ -98,13 +101,40 @@ export default function NemActivities() {
     }
   }, [data])
 
+  const EVENT_TYPE_TOGGLES = [
+    { id: 'fid', label: 'FID', colour: '#f59e0b' },
+    { id: 'construction_start', label: 'Construction Start', colour: '#10b981' },
+    { id: 'cod', label: 'COD', colour: '#3b82f6' },
+    { id: 'first_generation', label: 'First Generation', colour: '#8b5cf6' },
+  ] as const
+
+  const hasEventTypeFilter = Object.values(eventTypeFilters).some(v => !v)
+
+  const filterEvents = (events: NemActivityEvent[]): NemActivityEvent[] => {
+    if (!hasEventTypeFilter) return events
+    return events.filter(evt => {
+      const et = evt.event_type
+      if (et === 'fid' && !eventTypeFilters.fid) return false
+      if (et === 'construction_start' && !eventTypeFilters.construction_start) return false
+      if ((et === 'cod' || et === 'commissioning') && !eventTypeFilters.cod) return false
+      if (et === 'first_generation' && !eventTypeFilters.first_generation) return false
+      return true
+    })
+  }
+
   const filteredMonths = useMemo(() => {
     if (!data) return []
-    return data.months.filter(m => {
-      const secs = m.sections
-      return (Object.keys(secs) as SectionId[]).some(sec => visible[sec] && secs[sec].length > 0)
+    return data.months.map(m => {
+      const filteredSections = {} as Record<SectionId, NemActivityEvent[]>
+      for (const sec of Object.keys(m.sections) as SectionId[]) {
+        filteredSections[sec] = visible[sec] ? filterEvents(m.sections[sec]) : []
+      }
+      return { ...m, sections: filteredSections }
+    }).filter(m => {
+      return (Object.keys(m.sections) as SectionId[]).some(sec => m.sections[sec].length > 0)
     })
-  }, [data, visible])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [data, visible, eventTypeFilters])
 
   const displayMonths = showAll ? filteredMonths : filteredMonths.slice(0, 24)
 
@@ -146,6 +176,33 @@ export default function NemActivities() {
             <span className="ml-1 opacity-75">{data.section_counts[sec.id] || 0}</span>
           </button>
         ))}
+      </div>
+
+      {/* Event type filters */}
+      <div className="flex flex-wrap items-center gap-2">
+        <span className="text-[10px] text-[var(--color-text-muted)] uppercase tracking-wider mr-1">Event Type</span>
+        {EVENT_TYPE_TOGGLES.map(et => (
+          <button
+            key={et.id}
+            onClick={() => setEventTypeFilters(f => ({ ...f, [et.id]: !f[et.id] }))}
+            className={`px-2.5 py-1 rounded-full text-[11px] font-medium border transition-all ${
+              eventTypeFilters[et.id]
+                ? 'border-transparent text-white'
+                : 'border-[var(--color-border)] text-[var(--color-text-muted)] opacity-50'
+            }`}
+            style={eventTypeFilters[et.id] ? { backgroundColor: et.colour } : {}}
+          >
+            {et.label}
+          </button>
+        ))}
+        {hasEventTypeFilter && (
+          <button
+            onClick={() => setEventTypeFilters({ fid: true, construction_start: true, cod: true, first_generation: true })}
+            className="text-[10px] text-[var(--color-primary)] hover:underline ml-1"
+          >
+            Reset
+          </button>
+        )}
       </div>
 
       {/* Stat cards */}

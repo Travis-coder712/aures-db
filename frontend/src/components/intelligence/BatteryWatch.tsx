@@ -43,7 +43,7 @@ function statusLabel(s: string): string {
 // Section components
 // ============================================================
 
-type SectionId = 'nsw-timeline' | 'nsw-projects' | 'qld-timeline' | 'qld-projects' | 'nem-pipeline' | 'displacement' | 'analysis'
+type SectionId = 'nsw-timeline' | 'nsw-projects' | 'qld-timeline' | 'qld-projects' | 'vic-timeline' | 'vic-projects' | 'sa-timeline' | 'sa-projects' | 'nem-pipeline' | 'displacement' | 'analysis'
 
 const SectionIcon = ({ section }: { section: SectionId }) => {
   switch (section) {
@@ -73,6 +73,26 @@ const SectionIcon = ({ section }: { section: SectionId }) => {
       </svg>
     )
     case 'qld-projects': return (
+      <svg className="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
+        <path d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.381z" />
+      </svg>
+    )
+    case 'vic-timeline': return (
+      <svg className="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
+        <path fillRule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 011 1v3.586l1.293-1.293a1 1 0 011.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 111.414-1.414L5 11.586V8a1 1 0 011-1z" clipRule="evenodd" />
+      </svg>
+    )
+    case 'vic-projects': return (
+      <svg className="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
+        <path d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.381z" />
+      </svg>
+    )
+    case 'sa-timeline': return (
+      <svg className="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
+        <path fillRule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 011 1v3.586l1.293-1.293a1 1 0 011.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 111.414-1.414L5 11.586V8a1 1 0 011-1z" clipRule="evenodd" />
+      </svg>
+    )
+    case 'sa-projects': return (
       <svg className="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
         <path d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.381z" />
       </svg>
@@ -476,6 +496,14 @@ export default function BatteryWatch() {
       { id: 'qld-timeline' as SectionId, label: 'QLD Timeline' },
       { id: 'qld-projects' as SectionId, label: 'QLD Projects' },
     ] : []),
+    ...(data.vic_focus ? [
+      { id: 'vic-timeline' as SectionId, label: 'VIC Timeline' },
+      { id: 'vic-projects' as SectionId, label: 'VIC Projects' },
+    ] : []),
+    ...(data.sa_focus ? [
+      { id: 'sa-timeline' as SectionId, label: 'SA Timeline' },
+      { id: 'sa-projects' as SectionId, label: 'SA Projects' },
+    ] : []),
     { id: 'nem-pipeline', label: 'NEM Pipeline' },
     { id: 'displacement', label: 'Displacement' },
     { id: 'analysis', label: 'Analysis' },
@@ -708,6 +736,126 @@ export default function BatteryWatch() {
                 <h3 className="text-sm font-semibold" style={{ color: '#f1f5f9' }}>Development Pipeline (Top 20 of {qldDevTotal})</h3>
               </div>
               <ProjectTable projects={qldDev} />
+            </div>
+          </div>
+        )
+      })()}
+
+      {/* VIC Timeline */}
+      {activeSection === 'vic-timeline' && data.vic_focus && (
+        <div className="space-y-4">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+            <StatCard label="VIC Operating" value={formatMW(data.vic_focus.total_operating_mw)} sub={formatMWh(data.vic_focus.total_operating_mwh)} colour="#8b5cf6" />
+            <StatCard label="VIC Construction" value={formatMW(data.vic_focus.total_construction_mw)} sub={formatMWh(data.vic_focus.total_construction_mwh)} colour="#3b82f6" />
+          </div>
+          {data.vic_focus.timeline_milestones.length > 0 && (
+            <div className="rounded-lg p-4" style={{ background: '#1e293b', border: '1px solid #334155' }}>
+              <h3 className="text-lg font-semibold mb-3" style={{ color: '#f1f5f9' }}>VIC Battery Milestones</h3>
+              <div className="space-y-2 max-h-[400px] overflow-y-auto">
+                {data.vic_focus.timeline_milestones.slice().reverse().map((m, i) => (
+                  <div key={i} className="flex items-start gap-3 text-sm">
+                    <span className="text-xs font-mono flex-shrink-0" style={{ color: '#94a3b8', minWidth: 80 }}>{m.date}</span>
+                    <span style={{ color: '#f1f5f9' }}>{m.label}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* VIC Projects */}
+      {activeSection === 'vic-projects' && data.vic_focus && (() => {
+        const vicOp = data.vic_focus!.projects.filter(p => p.status === 'operating')
+        const vicCon = data.vic_focus!.projects.filter(p => p.status === 'construction' || p.status === 'commissioning')
+        const vicDev = data.vic_focus!.projects.filter(p => p.status === 'development').slice(0, 20)
+        const vicDevTotal = data.vic_focus!.projects.filter(p => p.status === 'development').length
+        return (
+          <div className="space-y-4">
+            {vicOp.length > 0 && (
+              <div className="rounded-lg p-4" style={{ background: '#1e293b', border: '1px solid #334155' }}>
+                <div className="flex items-center gap-2 mb-3">
+                  <span className="w-2 h-2 rounded-full" style={{ background: '#10b981' }} />
+                  <h3 className="text-sm font-semibold" style={{ color: '#f1f5f9' }}>Operating ({vicOp.length} projects, {formatMW(data.vic_focus!.total_operating_mw)})</h3>
+                </div>
+                <ProjectTable projects={vicOp} />
+              </div>
+            )}
+            {vicCon.length > 0 && (
+              <div className="rounded-lg p-4" style={{ background: '#1e293b', border: '1px solid #334155' }}>
+                <div className="flex items-center gap-2 mb-3">
+                  <span className="w-2 h-2 rounded-full" style={{ background: '#3b82f6' }} />
+                  <h3 className="text-sm font-semibold" style={{ color: '#f1f5f9' }}>Construction & Commissioning ({vicCon.length} projects, {formatMW(data.vic_focus!.total_construction_mw)})</h3>
+                </div>
+                <ProjectTable projects={vicCon} />
+              </div>
+            )}
+            <div className="rounded-lg p-4" style={{ background: '#1e293b', border: '1px solid #334155' }}>
+              <div className="flex items-center gap-2 mb-3">
+                <span className="w-2 h-2 rounded-full" style={{ background: '#8b5cf6' }} />
+                <h3 className="text-sm font-semibold" style={{ color: '#f1f5f9' }}>Development Pipeline (Top 20 of {vicDevTotal})</h3>
+              </div>
+              <ProjectTable projects={vicDev} />
+            </div>
+          </div>
+        )
+      })()}
+
+      {/* SA Timeline */}
+      {activeSection === 'sa-timeline' && data.sa_focus && (
+        <div className="space-y-4">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+            <StatCard label="SA Operating" value={formatMW(data.sa_focus.total_operating_mw)} sub={formatMWh(data.sa_focus.total_operating_mwh)} colour="#10b981" />
+            <StatCard label="SA Construction" value={formatMW(data.sa_focus.total_construction_mw)} sub={formatMWh(data.sa_focus.total_construction_mwh)} colour="#3b82f6" />
+          </div>
+          {data.sa_focus.timeline_milestones.length > 0 && (
+            <div className="rounded-lg p-4" style={{ background: '#1e293b', border: '1px solid #334155' }}>
+              <h3 className="text-lg font-semibold mb-3" style={{ color: '#f1f5f9' }}>SA Battery Milestones</h3>
+              <div className="space-y-2 max-h-[400px] overflow-y-auto">
+                {data.sa_focus.timeline_milestones.slice().reverse().map((m, i) => (
+                  <div key={i} className="flex items-start gap-3 text-sm">
+                    <span className="text-xs font-mono flex-shrink-0" style={{ color: '#94a3b8', minWidth: 80 }}>{m.date}</span>
+                    <span style={{ color: '#f1f5f9' }}>{m.label}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* SA Projects */}
+      {activeSection === 'sa-projects' && data.sa_focus && (() => {
+        const saOp = data.sa_focus!.projects.filter(p => p.status === 'operating')
+        const saCon = data.sa_focus!.projects.filter(p => p.status === 'construction' || p.status === 'commissioning')
+        const saDev = data.sa_focus!.projects.filter(p => p.status === 'development').slice(0, 20)
+        const saDevTotal = data.sa_focus!.projects.filter(p => p.status === 'development').length
+        return (
+          <div className="space-y-4">
+            {saOp.length > 0 && (
+              <div className="rounded-lg p-4" style={{ background: '#1e293b', border: '1px solid #334155' }}>
+                <div className="flex items-center gap-2 mb-3">
+                  <span className="w-2 h-2 rounded-full" style={{ background: '#10b981' }} />
+                  <h3 className="text-sm font-semibold" style={{ color: '#f1f5f9' }}>Operating ({saOp.length} projects, {formatMW(data.sa_focus!.total_operating_mw)})</h3>
+                </div>
+                <ProjectTable projects={saOp} />
+              </div>
+            )}
+            {saCon.length > 0 && (
+              <div className="rounded-lg p-4" style={{ background: '#1e293b', border: '1px solid #334155' }}>
+                <div className="flex items-center gap-2 mb-3">
+                  <span className="w-2 h-2 rounded-full" style={{ background: '#3b82f6' }} />
+                  <h3 className="text-sm font-semibold" style={{ color: '#f1f5f9' }}>Construction & Commissioning ({saCon.length} projects, {formatMW(data.sa_focus!.total_construction_mw)})</h3>
+                </div>
+                <ProjectTable projects={saCon} />
+              </div>
+            )}
+            <div className="rounded-lg p-4" style={{ background: '#1e293b', border: '1px solid #334155' }}>
+              <div className="flex items-center gap-2 mb-3">
+                <span className="w-2 h-2 rounded-full" style={{ background: '#8b5cf6' }} />
+                <h3 className="text-sm font-semibold" style={{ color: '#f1f5f9' }}>Development Pipeline (Top 20 of {saDevTotal})</h3>
+              </div>
+              <ProjectTable projects={saDev} />
             </div>
           </div>
         )

@@ -926,6 +926,8 @@ export interface BatteryWatchData {
     timeline_milestones: BatteryWatchMilestone[]
   }
   qld_focus?: BatteryWatchStateFocus
+  vic_focus?: BatteryWatchStateFocus
+  sa_focus?: BatteryWatchStateFocus
   nem_wide: {
     operating: { total_mw: number; total_mwh: number; by_state: Record<string, BatteryWatchStateData> }
     construction: { total_mw: number; total_mwh: number; by_state: Record<string, BatteryWatchStateData> }
