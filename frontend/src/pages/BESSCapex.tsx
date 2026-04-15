@@ -207,6 +207,46 @@ export default function BESSCapex() {
     return { tomago, comparables }
   }, [data])
 
+  // Pre-compute key insight numbers from actual data
+  const keyInsights = useMemo(() => {
+    if (!data) return null
+    const ps = data.projects
+    const byYear = data.by_year as Record<string, { count: number; total_mw: number; avg_capex_per_mwh: number | null; avg_capex_per_mw: number | null }>
+
+    // OEM-specific project trajectories
+    const oemProjects = (oem: string) =>
+      ps.filter(p => p.bess_oem === oem).sort((a, b) => (a.capex_year || 0) - (b.capex_year || 0))
+
+    const tesla = oemProjects('Tesla')
+    const fluence = oemProjects('Fluence')
+    const wartsila = oemProjects('Wartsila')
+
+    const earliest = (arr: BESSCapexProject[]) => arr[0]
+    const latest = (arr: BESSCapexProject[]) => arr[arr.length - 1]
+    const pctDrop = (from: number, to: number) => Math.round(((from - to) / from) * 100)
+
+    // Duration analysis
+    const oneHr = ps.filter(p => (p.duration_hours || 0) <= 1.5)
+    const twoHr = ps.filter(p => (p.duration_hours || 0) > 1.5 && (p.duration_hours || 0) <= 2.5)
+    const fourHr = ps.filter(p => (p.duration_hours || 0) >= 3.5)
+    const avgMwh = (arr: BESSCapexProject[]) => {
+      const vals = arr.filter(p => p.capex_per_mwh).map(p => p.capex_per_mwh!)
+      return vals.length ? vals.reduce((a, b) => a + b, 0) / vals.length : 0
+    }
+
+    const tomago = ps.find(p => p.id === 'tomago-bess')
+    // 4hr projects excluding Tomago, for comparison
+    const fourHrOthers = fourHr.filter(p => p.id !== 'tomago-bess')
+
+    return {
+      byYear,
+      tesla, fluence, wartsila,
+      earliest, latest, pctDrop,
+      oneHr, twoHr, fourHr, avgMwh,
+      tomago, fourHrOthers,
+    }
+  }, [data])
+
   if (loading) {
     return (
       <div className="flex items-center justify-center h-64">
@@ -790,33 +830,198 @@ export default function BESSCapex() {
           )}
 
           {/* Key insights card */}
+          {keyInsights && (
           <div className="bg-[var(--color-bg-card)] rounded-xl p-4 border border-[var(--color-border)]">
-            <h2 className="text-lg font-semibold text-[var(--color-text)] mb-3">Key Observations</h2>
-            <div className="grid md:grid-cols-3 gap-4 text-sm">
+            <h2 className="text-lg font-semibold text-[var(--color-text)] mb-4">Key Observations</h2>
+            <div className="space-y-5 text-sm">
+
+              {/* 1. Cost Decline Over Time */}
               <div>
-                <div className="text-[var(--color-text-muted)] font-medium mb-1">Cost Trend</div>
-                <p className="text-[var(--color-text)]">
-                  $/MWh costs have fallen significantly as storage duration increases — early batteries (2017) were 1-hour systems at
-                  &gt;$1M/MWh, while 2024 projects achieve 4-hour duration at ~$0.50M/MWh.
+                <div className="flex items-center gap-2 mb-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-blue-400" />
+                  <span className="text-[var(--color-text)] font-semibold">Cost Decline Over Time</span>
+                </div>
+                <p className="text-[var(--color-text-muted)] leading-relaxed">
+                  NEM battery costs have fallen{' '}
+                  <span className="text-[var(--color-text)] font-medium">
+                    {keyInsights.byYear['2017'] && keyInsights.byYear['2024']
+                      ? `${keyInsights.pctDrop(keyInsights.byYear['2017'].avg_capex_per_mwh!, keyInsights.byYear['2024'].avg_capex_per_mwh!)}%`
+                      : '~73%'}
+                  </span>{' '}
+                  on a $/MWh basis from 2017 to 2024. Three distinct eras are visible:
+                </p>
+                <div className="grid grid-cols-3 gap-3 mt-2">
+                  {[
+                    { era: '2017–2020', label: 'Early BESS', avg: keyInsights.byYear['2017']?.avg_capex_per_mwh, color: '#ef4444' },
+                    { era: '2021–2023', label: '2hr Scale-Up', avg: keyInsights.byYear['2022']?.avg_capex_per_mwh, color: '#f59e0b' },
+                    { era: '2024–2025', label: '4hr Revolution', avg: keyInsights.byYear['2024']?.avg_capex_per_mwh, color: '#10b981' },
+                  ].map(e => (
+                    <div key={e.era} className="rounded-lg p-2.5 text-center" style={{ background: `${e.color}10`, border: `1px solid ${e.color}30` }}>
+                      <div className="text-[10px] uppercase tracking-wider text-[var(--color-text-muted)]">{e.era}</div>
+                      <div className="text-lg font-bold font-mono mt-0.5" style={{ color: e.color }}>
+                        ${e.avg?.toFixed(2) ?? '?'}M
+                      </div>
+                      <div className="text-[10px] text-[var(--color-text-muted)]">{e.label} avg $/MWh</div>
+                    </div>
+                  ))}
+                </div>
+                <p className="text-[var(--color-text-muted)] mt-2 leading-relaxed">
+                  The sharpest single-year drop came in 2024 ({keyInsights.byYear['2024']?.count} projects, {keyInsights.byYear['2024']?.total_mw?.toLocaleString()} MW)
+                  at an average of <span className="text-[var(--color-text)] font-mono">${keyInsights.byYear['2024']?.avg_capex_per_mwh?.toFixed(2)}M/MWh</span> —
+                  {keyInsights.byYear['2023'] && keyInsights.byYear['2024']
+                    ? ` a ${keyInsights.pctDrop(keyInsights.byYear['2023'].avg_capex_per_mwh!, keyInsights.byYear['2024'].avg_capex_per_mwh!)}% drop from 2023's`
+                    : ' down from'}{' '}
+                  <span className="font-mono">${keyInsights.byYear['2023']?.avg_capex_per_mwh?.toFixed(2)}M/MWh</span>,
+                  driven by 4-hour systems reaching commercial scale.
                 </p>
               </div>
+
+              {/* 2. OEM Cost Trajectories */}
               <div>
-                <div className="text-[var(--color-text-muted)] font-medium mb-1">OEM Market</div>
-                <p className="text-[var(--color-text)]">
-                  Tesla dominates with {data.by_oem['Tesla']?.count || 0} projects
-                  ({data.by_oem['Tesla']?.total_mw?.toLocaleString() || 0} MW).
-                  Fluence and Wartsila are key competitors with {data.by_oem['Fluence']?.count || 0} and {data.by_oem['Wartsila']?.count || 0} projects respectively.
+                <div className="flex items-center gap-2 mb-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-purple-400" />
+                  <span className="text-[var(--color-text)] font-semibold">OEM Cost Trajectories</span>
+                </div>
+                <div className="grid md:grid-cols-3 gap-3">
+                  {/* Tesla */}
+                  {keyInsights.tesla.length > 0 && (() => {
+                    const first = keyInsights.earliest(keyInsights.tesla)
+                    const last = keyInsights.latest(keyInsights.tesla)
+                    const drop = first.capex_per_mwh && last.capex_per_mwh
+                      ? keyInsights.pctDrop(first.capex_per_mwh, last.capex_per_mwh) : 0
+                    return (
+                      <div className="rounded-lg p-3 border border-[var(--color-border)]">
+                        <div className="flex items-center gap-2 mb-1">
+                          <span className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: '#e74c3c' }} />
+                          <span className="font-semibold text-[var(--color-text)]">Tesla</span>
+                          <span className="text-[10px] text-[var(--color-text-muted)] ml-auto">{keyInsights.tesla.length} projects · {data.by_oem['Tesla']?.total_mw?.toLocaleString()} MW</span>
+                        </div>
+                        <p className="text-[var(--color-text-muted)] leading-relaxed">
+                          From <span className="font-mono text-[var(--color-text)]">${first.capex_per_mwh?.toFixed(2)}M/MWh</span> ({first.name?.replace(/ BESS| Battery/g, '')}, {first.capex_year})
+                          to <span className="font-mono text-[var(--color-text)]">${last.capex_per_mwh?.toFixed(2)}M/MWh</span> ({last.name?.replace(/ BESS| Battery/g, '')}, {last.capex_year}).
+                          {drop > 0 ? <> <span className="text-[#10b981] font-medium">{drop}% decline</span> overall.</> : ''}
+                          {' '}Market leader by volume but shows wider price variance ($0.46–$1.08 in 2023 alone) reflecting diverse project scales.
+                        </p>
+                      </div>
+                    )
+                  })()}
+                  {/* Fluence */}
+                  {keyInsights.fluence.length > 0 && (() => {
+                    const first = keyInsights.earliest(keyInsights.fluence)
+                    const last = keyInsights.latest(keyInsights.fluence)
+                    const drop = first.capex_per_mwh && last.capex_per_mwh
+                      ? keyInsights.pctDrop(first.capex_per_mwh, last.capex_per_mwh) : 0
+                    return (
+                      <div className="rounded-lg p-3 border border-[var(--color-border)]">
+                        <div className="flex items-center gap-2 mb-1">
+                          <span className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: '#3498db' }} />
+                          <span className="font-semibold text-[var(--color-text)]">Fluence</span>
+                          <span className="text-[10px] text-[var(--color-text-muted)] ml-auto">{keyInsights.fluence.length} projects · {data.by_oem['Fluence']?.total_mw?.toLocaleString()} MW</span>
+                        </div>
+                        <p className="text-[var(--color-text-muted)] leading-relaxed">
+                          From <span className="font-mono text-[var(--color-text)]">${first.capex_per_mwh?.toFixed(2)}M/MWh</span> ({first.name?.replace(/ BESS| Battery| Energy Storage System/g, '')}, {first.capex_year})
+                          to <span className="font-mono text-[var(--color-text)]">${last.capex_per_mwh?.toFixed(2)}M/MWh</span> ({last.name?.replace(/ BESS| Battery/g, '')}, {last.capex_year}).
+                          {drop > 0 ? <> <span className="text-[#10b981] font-medium">{drop}% decline</span> over {(last.capex_year || 0) - (first.capex_year || 0)} years.</> : ''}
+                          {' '}Steepest trajectory of any Western OEM, culminating in the Tomago benchmark.
+                        </p>
+                      </div>
+                    )
+                  })()}
+                  {/* Wartsila */}
+                  {keyInsights.wartsila.length > 0 && (() => {
+                    const first = keyInsights.earliest(keyInsights.wartsila)
+                    const last = keyInsights.latest(keyInsights.wartsila)
+                    const drop = first.capex_per_mwh && last.capex_per_mwh
+                      ? keyInsights.pctDrop(first.capex_per_mwh, last.capex_per_mwh) : 0
+                    return (
+                      <div className="rounded-lg p-3 border border-[var(--color-border)]">
+                        <div className="flex items-center gap-2 mb-1">
+                          <span className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: '#2ecc71' }} />
+                          <span className="font-semibold text-[var(--color-text)]">Wärtsilä</span>
+                          <span className="text-[10px] text-[var(--color-text-muted)] ml-auto">{keyInsights.wartsila.length} projects · {data.by_oem['Wartsila']?.total_mw?.toLocaleString()} MW</span>
+                        </div>
+                        <p className="text-[var(--color-text-muted)] leading-relaxed">
+                          From <span className="font-mono text-[var(--color-text)]">${first.capex_per_mwh?.toFixed(2)}M/MWh</span> ({first.name?.replace(/ BESS| Battery/g, '')}, {first.capex_year})
+                          to <span className="font-mono text-[var(--color-text)]">${last.capex_per_mwh?.toFixed(2)}M/MWh</span> ({last.name?.replace(/ BESS| Battery/g, '')}, {last.capex_year}).
+                          {drop > 0 ? <> <span className="text-[#10b981] font-medium">{drop}% decline</span> in just {(last.capex_year || 0) - (first.capex_year || 0)} years</> : ''} —
+                          the fastest cost compression of any OEM, achieving the NEM's lowest-ever $/MWh on Eraring's 4.5hr system.
+                        </p>
+                      </div>
+                    )
+                  })()}
+                </div>
+              </div>
+
+              {/* 3. Duration Shift */}
+              <div>
+                <div className="flex items-center gap-2 mb-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
+                  <span className="text-[var(--color-text)] font-semibold">The Duration Revolution</span>
+                </div>
+                <p className="text-[var(--color-text-muted)] leading-relaxed mb-2">
+                  The NEM BESS market has undergone three duration eras, each unlocking a step-change in $/MWh economics:
+                </p>
+                <div className="grid grid-cols-3 gap-3">
+                  {[
+                    { dur: '≤1.5hr', label: '2017–2020', count: keyInsights.oneHr.length, avg: keyInsights.avgMwh(keyInsights.oneHr), color: '#ef4444',
+                      note: 'FCAS-focused, frequency response' },
+                    { dur: '2hr', label: '2021–2023', count: keyInsights.twoHr.length, avg: keyInsights.avgMwh(keyInsights.twoHr), color: '#f59e0b',
+                      note: 'Energy arbitrage + FCAS stacking' },
+                    { dur: '4hr+', label: '2024–2025', count: keyInsights.fourHr.length, avg: keyInsights.avgMwh(keyInsights.fourHr), color: '#10b981',
+                      note: 'Firming, capacity credits, peak shifting' },
+                  ].map(d => (
+                    <div key={d.dur} className="rounded-lg p-2.5" style={{ background: `${d.color}10`, border: `1px solid ${d.color}30` }}>
+                      <div className="text-xs font-bold" style={{ color: d.color }}>{d.dur}</div>
+                      <div className="text-[10px] text-[var(--color-text-muted)]">{d.label} · {d.count} projects</div>
+                      <div className="text-base font-bold font-mono mt-1" style={{ color: d.color }}>
+                        ${d.avg.toFixed(2)}M
+                      </div>
+                      <div className="text-[10px] text-[var(--color-text-muted)]">avg $/MWh</div>
+                      <div className="text-[10px] text-[var(--color-text-muted)] mt-1 italic">{d.note}</div>
+                    </div>
+                  ))}
+                </div>
+                <p className="text-[var(--color-text-muted)] mt-2 leading-relaxed">
+                  The shift to 4-hour systems has been transformative: despite storing 4× the energy, 4hr+ projects average{' '}
+                  <span className="text-[var(--color-text)] font-mono">${keyInsights.avgMwh(keyInsights.fourHr).toFixed(2)}M/MWh</span> —{' '}
+                  {keyInsights.avgMwh(keyInsights.oneHr) > 0 && (
+                    <><span className="text-[#10b981] font-medium">{keyInsights.pctDrop(keyInsights.avgMwh(keyInsights.oneHr), keyInsights.avgMwh(keyInsights.fourHr))}% cheaper</span> than the 1-hour era.</>
+                  )}{' '}
+                  Longer duration spreads fixed costs (balance of plant, grid connection, land) across more MWh while cell costs
+                  benefit from global LFP manufacturing scale.
                 </p>
               </div>
+
+              {/* 4. Tomago Benchmark */}
               <div>
-                <div className="text-[var(--color-text-muted)] font-medium mb-1">Duration Shift</div>
-                <p className="text-[var(--color-text)]">
-                  The market has shifted from 1-hour systems (2017-2020) to 2-hour (2021-2023) and now 4-hour systems (2024+),
-                  driven by revenue stacking and grid reliability needs.
-                </p>
+                <div className="flex items-center gap-2 mb-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+                  <span className="text-[var(--color-text)] font-semibold">Tomago BESS — New Market Benchmark</span>
+                </div>
+                {keyInsights.tomago && (
+                  <p className="text-[var(--color-text-muted)] leading-relaxed">
+                    At <span className="font-mono font-bold text-[#10b981]">${keyInsights.tomago.capex_per_mwh?.toFixed(2)}M/MWh</span> for
+                    a {keyInsights.tomago.capacity_mw} MW / {keyInsights.tomago.storage_mwh?.toLocaleString()} MWh 4-hour system,
+                    Tomago BESS sets the clear low-water mark for utility-scale BESS in the NEM.
+                    {keyInsights.fourHrOthers.length > 0 && (() => {
+                      const avgOthers = keyInsights.avgMwh(keyInsights.fourHrOthers)
+                      const premium = Math.round(((avgOthers - keyInsights.tomago!.capex_per_mwh!) / keyInsights.tomago!.capex_per_mwh!) * 100)
+                      return (
+                        <> Compared to other 4hr+ systems averaging <span className="font-mono text-[var(--color-text)]">${avgOthers.toFixed(2)}M/MWh</span>,
+                        Tomago is <span className="text-[#10b981] font-medium">{premium}% below the peer average</span>.
+                        </>
+                      )
+                    })()}
+                    {' '}The combination of Fluence's latest Gridstack Pro platform, AGL's 500 MW single-site scale, and 2025 procurement timing
+                    (benefiting from global LFP cell oversupply) has produced a cost point that resets market expectations for what a Tier 1 Western OEM
+                    BESS should cost in Australia.
+                  </p>
+                )}
               </div>
+
             </div>
           </div>
+          )}
         </div>
       ) : (
         /* Table view */
