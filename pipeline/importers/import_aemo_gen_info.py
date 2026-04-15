@@ -383,6 +383,32 @@ def import_to_database(sites: dict, source_file: str):
             existing_info = existing.get(existing_pid, {})
             confidence = existing_info.get('data_confidence', 'unverified')
 
+            # ── STATUS PROTECTION (applies at ALL confidence levels) ──
+            # Never downgrade a project's status. AEMO data can lag months
+            # behind reality (e.g., project is constructing but AEMO still
+            # lists it as "proposed"). Also check timeline events for
+            # construction evidence.
+            existing_status = existing_info.get('status', 'development')
+            existing_priority = STATUS_PRIORITY.get(existing_status, 0)
+            new_priority = STATUS_PRIORITY.get(status, 0)
+
+            # Timeline-based floor: if construction_start event exists,
+            # status must be at least 'construction' (priority 3)
+            timeline_floor = conn.execute(
+                "SELECT MAX(CASE WHEN event_type='construction_start' THEN 3 "
+                "WHEN event_type='fid' THEN 2 ELSE 0 END) FROM timeline_events WHERE project_id=?",
+                (existing_pid,),
+            ).fetchone()[0] or 0
+            effective_existing = max(existing_priority, timeline_floor)
+
+            final_status = status if new_priority >= effective_existing else existing_status
+            # If timeline says construction but current status is lower, upgrade
+            if timeline_floor >= 3 and STATUS_PRIORITY.get(final_status, 0) < 3:
+                final_status = 'construction'
+
+            if final_status != status:
+                print(f"    ⚠ {existing_pid}: kept status '{final_status}' (AEMO says '{status}' but that's a downgrade)")
+
             if confidence in ('high', 'good', 'medium'):
                 # Only update AEMO-specific fields, preserve everything else
                 conn.execute("""
@@ -393,13 +419,7 @@ def import_to_database(sites: dict, source_file: str):
                 """, (sid, existing_pid))
                 skipped_count += 1
             else:
-                # Low/unverified — update with AEMO data, but never downgrade status
-                existing_status = existing_info.get('status', 'development')
-                existing_priority = STATUS_PRIORITY.get(existing_status, 0)
-                new_priority = STATUS_PRIORITY.get(status, 0)
-                # Keep the more advanced status — AEMO can lag behind reality
-                final_status = status if new_priority >= existing_priority else existing_status
-
+                # Low/unverified — update with AEMO data but protected status
                 conn.execute("""
                     UPDATE projects SET
                         technology = ?,
@@ -422,8 +442,6 @@ def import_to_database(sites: dict, source_file: str):
                     sid,
                     existing_pid,
                 ))
-                if final_status != status:
-                    print(f"    ⚠ {existing_pid}: kept status '{final_status}' (AEMO says '{status}' but that's a downgrade)")
                 updated_count += 1
         else:
             # Handle duplicate slugs

@@ -208,8 +208,8 @@
       "technology": "bess",
       "status": "construction",
       "cod_year": "2027",
-      "count": 2,
-      "mw": 708.0
+      "count": 3,
+      "mw": 1208.0
     },
     {
       "state": "NSW",
@@ -231,8 +231,8 @@
       "technology": "bess",
       "status": "development",
       "cod_year": "2027",
-      "count": 13,
-      "mw": 2541.0
+      "count": 12,
+      "mw": 2041.0
     },
     {
       "state": "NSW",
@@ -1687,5 +1687,5 @@
       }
     ]
   },
-  "exported_at": "2026-04-15T11:19:46.078978"
+  "exported_at": "2026-04-15T14:45:45.481952"
 }

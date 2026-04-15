@@ -347,9 +347,8 @@
         "bess": 10
       },
       "by_status": {
-        "construction": 4,
-        "operating": 5,
-        "development": 1
+        "construction": 5,
+        "operating": 5
       },
       "by_state": {
         "NSW": 4,
@@ -375,19 +374,14 @@
       ],
       "status_detail": {
         "construction": {
-          "count": 4,
-          "capacity_mw": 1322.0,
-          "storage_mwh": 2843.3
+          "count": 5,
+          "capacity_mw": 1822.0,
+          "storage_mwh": 4843.6
         },
         "operating": {
           "count": 5,
           "capacity_mw": 630.0,
           "storage_mwh": 848.2
-        },
-        "development": {
-          "count": 1,
-          "capacity_mw": 500.0,
-          "storage_mwh": 2000.4
         }
       },
       "state_detail": {
@@ -614,8 +608,7 @@
         "bess": 5
       },
       "by_status": {
-        "construction": 3,
-        "development": 2
+        "construction": 5
       },
       "by_state": {
         "NSW": 5
@@ -630,14 +623,9 @@
       ],
       "status_detail": {
         "construction": {
-          "count": 3,
-          "capacity_mw": 900.0,
-          "storage_mwh": 1400.0
-        },
-        "development": {
-          "count": 2,
-          "capacity_mw": 1000.0,
-          "storage_mwh": 4000.7
+          "count": 5,
+          "capacity_mw": 1900.0,
+          "storage_mwh": 5400.7
         }
       },
       "state_detail": {
