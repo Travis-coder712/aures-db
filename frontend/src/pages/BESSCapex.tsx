@@ -381,7 +381,7 @@ export default function BESSCapex() {
                     if (!payload?.length) return null
                     const p = payload[0].payload as BESSCapexProject & { y: number }
                     return (
-                      <div className="bg-[var(--color-bg)] border border-[var(--color-border)] rounded-lg p-3 shadow-lg text-sm">
+                      <div className="bg-[var(--color-bg)] border border-[var(--color-border)] rounded-lg p-3 shadow-lg text-sm max-w-xs">
                         <div className="font-semibold text-[var(--color-text)]">{p.name}</div>
                         <div className="text-[var(--color-text-muted)]">{p.bess_oem} — {p.bess_model}</div>
                         <div className="text-[var(--color-text-muted)]">{p.capacity_mw} MW / {p.storage_mwh} MWh ({p.duration_hours}h)</div>
@@ -389,6 +389,20 @@ export default function BESSCapex() {
                         <div className="font-medium text-blue-400">${p.capex_per_mw}M/MW &middot; ${p.capex_per_mwh}M/MWh</div>
                         <div className="text-xs text-[var(--color-text-muted)]">{p.current_developer} &middot; {p.state} &middot; {p.status}</div>
                         {p.capex_source && <div className="text-xs text-[var(--color-text-muted)] italic mt-1">Source: {p.capex_source}</div>}
+                        {p.stages && p.stages.length > 0 && (
+                          <div className="mt-2 pt-2 border-t border-[var(--color-border)]">
+                            <div className="text-[10px] font-semibold uppercase tracking-wider text-[var(--color-text-muted)] mb-1">Stages</div>
+                            {p.stages.map((s, i) => (
+                              <div key={i} className="text-xs text-[var(--color-text-muted)]">
+                                {s.name}: {s.capacity_mw}MW/{s.storage_mwh}MWh — {s.status}
+                                {s.capex_aud_m ? ` ($${s.capex_aud_m}M)` : ''}
+                              </div>
+                            ))}
+                            {p.capex_scope_note && (
+                              <div className="text-[10px] text-amber-400 mt-1 italic">{p.capex_scope_note}</div>
+                            )}
+                          </div>
+                        )}
                       </div>
                     )
                   }}
@@ -545,11 +559,26 @@ export default function BESSCapex() {
                     if (!payload?.length) return null
                     const p = payload[0].payload
                     return (
-                      <div className="bg-[var(--color-bg)] border border-[var(--color-border)] rounded-lg p-3 shadow-lg text-sm">
+                      <div className="bg-[var(--color-bg)] border border-[var(--color-border)] rounded-lg p-3 shadow-lg text-sm max-w-xs">
                         <div className="font-semibold text-[var(--color-text)]">{p.name}</div>
                         <div className="text-[var(--color-text-muted)]">{p.bess_oem} — {p.capacity_mw} MW / {p.storage_mwh} MWh ({p.duration_hours}h)</div>
+                        <div className="text-[var(--color-text-muted)]">Capex: A${p.capex_aud_m}M</div>
                         <div className="font-medium text-blue-400">${p.per_mwh?.toFixed(2)}M/MWh &middot; ${p.per_mw?.toFixed(2)}M/MW</div>
                         <div className="text-xs text-[var(--color-text-muted)]">{p.current_developer} &middot; {p.state} &middot; FID {p.year}</div>
+                        {p.stages && p.stages.length > 0 && (
+                          <div className="mt-2 pt-2 border-t border-[var(--color-border)]">
+                            <div className="text-[10px] font-semibold uppercase tracking-wider text-[var(--color-text-muted)] mb-1">Stages</div>
+                            {p.stages.map((s: any, i: number) => (
+                              <div key={i} className="text-xs text-[var(--color-text-muted)]">
+                                {s.name}: {s.capacity_mw}MW/{s.storage_mwh}MWh — {s.status}
+                                {s.capex_aud_m ? ` ($${s.capex_aud_m}M)` : ''}
+                              </div>
+                            ))}
+                            {p.capex_scope_note && (
+                              <div className="text-[10px] text-amber-400 mt-1 italic">{p.capex_scope_note}</div>
+                            )}
+                          </div>
+                        )}
                       </div>
                     )
                   }}
@@ -1052,6 +1081,11 @@ export default function BESSCapex() {
                     <Link to={`/projects/${p.id}`} className="text-blue-400 hover:text-blue-300">
                       {p.name}
                     </Link>
+                    {p.stages && p.stages.length > 0 && (
+                      <span className="ml-1 text-[10px] text-amber-400" title={p.capex_scope_note || `${p.stages.length} stages`}>
+                        ({p.stages.length} stages)
+                      </span>
+                    )}
                   </td>
                   <td className="p-3 text-[var(--color-text-muted)] hidden md:table-cell">{p.current_developer}</td>
                   <td className="p-3 text-right text-[var(--color-text)]">{p.capacity_mw}</td>

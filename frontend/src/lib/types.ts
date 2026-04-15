@@ -666,6 +666,14 @@ export interface BESSCapexProject {
   capex_per_mw: number
   capex_per_mwh: number
   duration_hours: number
+  // Multi-stage project scope
+  capex_scope_note?: string
+  capex_scope_mw?: number
+  capex_scope_mwh?: number
+  stages?: Array<{
+    stage: string; name?: string; capacity_mw?: number; storage_mwh?: number
+    status?: string; capex_aud_m?: number
+  }>
 }
 
 export interface BESSCapexYearSummary {

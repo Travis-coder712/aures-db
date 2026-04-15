@@ -441,14 +441,56 @@
       "storage_mwh": 2600.0,
       "capex_aud_m": 722.0,
       "capex_year": 2024,
-      "capex_source": "Quinbrook ($722m debt S1+S2)",
+      "capex_source": "Quinbrook ($722M debt S1+S2 only, 520MW/1040MWh scope)",
       "capex_source_url": "https://www.quinbrook.com/news-insights/supernode-stage-1-commences-commercial-operations/",
       "state": "QLD",
       "current_developer": "Quinbrook Infrastructure Partners",
       "bess_oem": "CATL",
-      "capex_per_mw": 0.56,
-      "capex_per_mwh": 0.28,
-      "duration_hours": 2.0
+      "capex_scope_note": "Capex covers 2 of 5 stages (520MW/1040MWh scope)",
+      "capex_scope_mw": 520.0,
+      "capex_scope_mwh": 1040.0,
+      "capex_per_mw": 1.39,
+      "capex_per_mwh": 0.69,
+      "duration_hours": 2.0,
+      "stages": [
+        {
+          "stage": 1,
+          "name": "Stage 1",
+          "capacity_mw": 260.0,
+          "storage_mwh": 520.0,
+          "status": "operating",
+          "capex_aud_m": 361.0
+        },
+        {
+          "stage": 2,
+          "name": "Stage 2",
+          "capacity_mw": 260.0,
+          "storage_mwh": 520.0,
+          "status": "construction",
+          "capex_aud_m": 361.0
+        },
+        {
+          "stage": 3,
+          "name": "Stage 3",
+          "capacity_mw": 260.0,
+          "storage_mwh": 520.0,
+          "status": "development"
+        },
+        {
+          "stage": 4,
+          "name": "Stage 4",
+          "capacity_mw": 260.0,
+          "storage_mwh": 520.0,
+          "status": "development"
+        },
+        {
+          "stage": 5,
+          "name": "Stage 5",
+          "capacity_mw": 260.0,
+          "storage_mwh": 520.0,
+          "status": "development"
+        }
+      ]
     },
     {
       "id": "eraring-battery",
@@ -456,17 +498,50 @@
       "status": "operating",
       "capacity_mw": 700.0,
       "storage_mwh": 3160.0,
-      "capex_aud_m": 850.0,
+      "capex_aud_m": 1450.0,
       "capex_year": 2024,
-      "capex_source": "Origin/NS Energy (total stages 2-4)",
+      "capex_source": "Origin/NS Energy (S1 $600M FID 2023 + S2-4 $850M announced 2024)",
       "capex_source_url": "https://www.originenergy.com.au/about/who-we-are/what-we-do/generation/eraring-projects/battery/",
       "state": "NSW",
       "current_developer": "Origin Energy",
       "bess_oem": "Wartsila",
       "bess_model": "GridSolv Quantum",
-      "capex_per_mw": 1.21,
-      "capex_per_mwh": 0.27,
-      "duration_hours": 4.5
+      "capex_scope_note": "Total capex across all 4 stages",
+      "capex_per_mw": 2.07,
+      "capex_per_mwh": 0.46,
+      "duration_hours": 4.5,
+      "stages": [
+        {
+          "stage": 1,
+          "name": "Stage 1",
+          "capacity_mw": 460.0,
+          "storage_mwh": 1770.0,
+          "status": "operating",
+          "capex_aud_m": 600.0
+        },
+        {
+          "stage": 2,
+          "name": "Stage 2",
+          "capacity_mw": 240.0,
+          "storage_mwh": 1030.0,
+          "status": "construction",
+          "capex_aud_m": 490.0
+        },
+        {
+          "stage": 3,
+          "name": "Stage 3",
+          "capacity_mw": 0.0,
+          "storage_mwh": 0.0,
+          "status": "development"
+        },
+        {
+          "stage": 4,
+          "name": "Stage 4",
+          "capacity_mw": 0.0,
+          "storage_mwh": 360.0,
+          "status": "construction"
+        }
+      ]
     },
     {
       "id": "orana-bess",
@@ -563,9 +638,9 @@
     "2024": {
       "count": 4,
       "total_mw": 2765.0,
-      "total_capex_m": 3172.0,
-      "avg_capex_per_mw": 1.48,
-      "avg_capex_per_mwh": 0.4
+      "total_capex_m": 3772.0,
+      "avg_capex_per_mw": 1.91,
+      "avg_capex_per_mwh": 0.55
     },
     "2025": {
       "count": 1,
@@ -591,8 +666,8 @@
     "Wartsila": {
       "count": 3,
       "total_mw": 1300.0,
-      "avg_capex_per_mw": 1.31,
-      "avg_capex_per_mwh": 0.5
+      "avg_capex_per_mw": 1.6,
+      "avg_capex_per_mwh": 0.56
     },
     "Samsung SDI": {
       "count": 2,
@@ -603,8 +678,8 @@
     "CATL": {
       "count": 2,
       "total_mw": 1500.0,
-      "avg_capex_per_mw": 1.12,
-      "avg_capex_per_mwh": 0.56
+      "avg_capex_per_mw": 1.54,
+      "avg_capex_per_mwh": 0.76
     },
     "Powin": {
       "count": 1,
@@ -619,5 +694,5 @@
       "avg_capex_per_mwh": 0.5
     }
   },
-  "exported_at": "2026-04-15T15:10:57.924538"
+  "exported_at": "2026-04-15T18:15:14.829269"
 }

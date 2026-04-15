@@ -21,7 +21,7 @@
   "aemo_gen_info_id": "2431",
   "confidence_score": "67",
   "capex_aud_m": 722.0,
-  "capex_source": "Quinbrook ($722m debt S1+S2)",
+  "capex_source": "Quinbrook ($722M debt S1+S2 only, 520MW/1040MWh scope)",
   "capex_year": 2024,
   "first_seen": "2025-01-01",
   "capex_source_url": "https://www.quinbrook.com/news-insights/supernode-stage-1-commences-commercial-operations/",
@@ -94,6 +94,8 @@
       "capacity_mw": 260.0,
       "storage_mwh": 520.0,
       "status": "operating",
+      "capex_aud_m": 361.0,
+      "capex_source": "Quinbrook debt financing ($722M S1+S2)",
       "grid_forming": false,
       "notes": "Operating. Origin tolling agreement."
     },
@@ -103,6 +105,8 @@
       "capacity_mw": 260.0,
       "storage_mwh": 520.0,
       "status": "construction",
+      "capex_aud_m": 361.0,
+      "capex_source": "Quinbrook debt financing ($722M S1+S2)",
       "grid_forming": false,
       "notes": "Under construction."
     },

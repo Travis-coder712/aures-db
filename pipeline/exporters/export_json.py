@@ -1088,16 +1088,71 @@ def export_bess_capex(conn):
         ORDER BY p.capex_year, p.capacity_mw DESC
     """).fetchall()
 
+    # Check for project_stages table
+    has_stages = bool(conn.execute(
+        "SELECT name FROM sqlite_master WHERE type='table' AND name='project_stages'"
+    ).fetchone())
+
+    # Pre-fetch stage capex data for scope-matched calculations
+    stage_scope = {}
+    if has_stages:
+        stage_rows = conn.execute("""
+            SELECT project_id,
+                   SUM(CASE WHEN capex_aud_m IS NOT NULL THEN capacity_mw ELSE 0 END) as capex_mw,
+                   SUM(CASE WHEN capex_aud_m IS NOT NULL THEN storage_mwh ELSE 0 END) as capex_mwh,
+                   SUM(capex_aud_m) as total_stage_capex,
+                   COUNT(*) as total_stages,
+                   SUM(CASE WHEN capex_aud_m IS NOT NULL THEN 1 ELSE 0 END) as costed_stages
+            FROM project_stages
+            GROUP BY project_id
+            HAVING total_stage_capex IS NOT NULL
+        """).fetchall()
+        for sr in stage_rows:
+            stage_scope[sr['project_id']] = dict(sr)
+
     projects = []
     for r in rows:
         d = dict(r)
-        mw = d['capacity_mw'] or 0
-        mwh = d['storage_mwh'] or 0
         capex = d['capex_aud_m'] or 0
+
+        # For multi-stage projects where capex only covers some stages,
+        # use stage-matched capacity/storage for $/MW and $/MWh calculations.
+        # Heuristic: if project capex ≈ sum of costed stages, it's partial scope.
+        # If project capex > sum of costed stages, it covers the full project.
+        pid = d['id']
+        ss = stage_scope.get(pid)
+        if ss and ss['costed_stages'] < ss['total_stages']:
+            stage_sum = ss['total_stage_capex'] or 0
+            # If project capex roughly matches sum of costed stages (within 5%),
+            # capex only covers those stages — use scope-matched capacity
+            if stage_sum > 0 and abs(capex - stage_sum) / stage_sum < 0.05:
+                mw = ss['capex_mw'] or d['capacity_mw'] or 0
+                mwh = ss['capex_mwh'] or d['storage_mwh'] or 0
+                d['capex_scope_note'] = f"Capex covers {ss['costed_stages']} of {ss['total_stages']} stages ({round(mw)}MW/{round(mwh)}MWh scope)"
+                d['capex_scope_mw'] = round(mw, 1)
+                d['capex_scope_mwh'] = round(mwh, 1)
+            else:
+                # Project capex is total (covers all stages) — use full project capacity
+                mw = d['capacity_mw'] or 0
+                mwh = d['storage_mwh'] or 0
+                d['capex_scope_note'] = f"Total capex across all {ss['total_stages']} stages"
+        else:
+            mw = d['capacity_mw'] or 0
+            mwh = d['storage_mwh'] or 0
 
         d['capex_per_mw'] = round(capex / mw, 2) if mw > 0 else None
         d['capex_per_mwh'] = round(capex / mwh, 2) if mwh > 0 else None
         d['duration_hours'] = round(mwh / mw, 1) if mw > 0 and mwh > 0 else None
+
+        # Also include stage info for multi-stage projects
+        if has_stages:
+            stages = conn.execute("""
+                SELECT stage, name, capacity_mw, storage_mwh, status, capex_aud_m
+                FROM project_stages WHERE project_id = ? ORDER BY stage
+            """, (pid,)).fetchall()
+            if stages:
+                d['stages'] = [clean_none_values(dict(s)) for s in stages]
+
         projects.append(clean_none_values(d))
 
     # Summary stats by year
