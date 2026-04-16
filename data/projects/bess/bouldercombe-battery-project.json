@@ -1,23 +1,37 @@
 {
   "id": "bouldercombe-battery-project",
-  "name": "Bouldercombe Battery project",
+  "name": "Bouldercombe Battery",
   "technology": "bess",
   "status": "operating",
-  "capacity_mw": 50.0,
-  "storage_mwh": 100.0,
+  "capacity_mw": 100.0,
+  "storage_mwh": 200.0,
   "state": "QLD",
-  "current_developer": "Genex Power Limited",
+  "current_developer": "Genex Power (J-POWER)",
   "grid_forming": false,
   "has_sips": false,
   "has_syncon": false,
   "has_statcom": false,
   "has_harmonic_filter": false,
-  "data_confidence": "low",
-  "last_updated": "2026-03-10",
-  "last_verified": "2026-03-10",
+  "data_confidence": "good",
+  "last_updated": "2026-04-16",
+  "last_verified": "2026-04-16",
   "aemo_gen_info_id": "1873",
-  "timeline": [],
-  "ownership_history": [],
+  "timeline": [
+    {
+      "date": "2024-08",
+      "date_precision": "month",
+      "event_type": "notable",
+      "title": "J-POWER completes 100% acquisition of Genex Power",
+      "detail": "AUD $351M takeover. All Genex projects now under J-POWER ownership."
+    }
+  ],
+  "ownership_history": [
+    {
+      "date": "2024-08",
+      "owner": "J-POWER",
+      "event": "J-POWER acquires Genex Power for $351M."
+    }
+  ],
   "cod_history": [],
   "suppliers": [],
   "offtakes": [],
@@ -30,6 +44,39 @@
       "url": "https://aemo.com.au/energy-systems/electricity/national-electricity-market-nem/nem-forecasting-and-planning/forecasting-and-planning-data/generation-information",
       "date": "2026-01-30",
       "source_tier": 1
+    },
+    {
+      "title": "Genex Power \u2014 Bouldercombe project page",
+      "url": "https://genexpower.com.au/bouldercombe-battery-project/",
+      "source_tier": 1
+    },
+    {
+      "title": "Energy-Storage.News \u2014 J-POWER completes Genex takeover",
+      "url": "https://www.energy-storage.news/j-power-completes-takeover-of-australias-genex-power/",
+      "source_tier": 2
+    }
+  ],
+  "duration_hours": 2.0,
+  "current_owner": "J-POWER",
+  "bess_oem": "Tesla",
+  "stages": [
+    {
+      "stage": 1,
+      "name": "Stage 1 (BBP)",
+      "capacity_mw": 50.0,
+      "storage_mwh": 100.0,
+      "status": "operating",
+      "cod": "2023-11",
+      "oem": "Tesla",
+      "notes": "Tesla Megapack 2.0. Operational since Nov 2023. Autobidder revenue-sharing offtake."
+    },
+    {
+      "stage": 2,
+      "name": "Stage 2 (BBP 2)",
+      "capacity_mw": 50.0,
+      "storage_mwh": 100.0,
+      "status": "development",
+      "notes": "Confirmed in Genex Power pipeline. AEMO KCI entry."
     }
   ]
 }

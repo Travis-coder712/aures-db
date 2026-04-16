@@ -4,26 +4,190 @@
   "technology": "bess",
   "status": "operating",
   "capacity_mw": 700.0,
-  "storage_mwh": 1390.0,
+  "storage_mwh": 3160.0,
   "state": "NSW",
-  "current_developer": "Origin Energy Electricity Limited",
+  "lga": "Lake Macquarie",
+  "current_developer": "Origin Energy",
   "cod_current": "2025-12",
-  "grid_forming": false,
+  "cod_original": "2025",
+  "connection_status": "In progress",
+  "connection_nsp": "TransGrid",
+  "grid_forming": true,
   "has_sips": false,
   "has_syncon": false,
   "has_statcom": false,
   "has_harmonic_filter": false,
-  "data_confidence": "low",
-  "last_updated": "2026-03-10",
-  "last_verified": "2026-03-10",
+  "notable": "Largest battery in the Southern Hemisphere. Co-located at the Eraring coal power station site. 700 MW across 4 stages: Stages 1 & 3 (460 MW, ~4h) operating; Stages 2 & 4 (240 MW, grid-forming, ~5.8h) under construction. Average 4.5h duration at full buildout.",
+  "data_confidence": "high",
+  "last_updated": "2026-04-16",
+  "last_verified": "2026-04-16",
   "aemo_gen_info_id": "1870",
-  "timeline": [],
-  "ownership_history": [],
-  "cod_history": [],
-  "suppliers": [],
+  "coordinates": {
+    "lat": -33.07,
+    "lng": 151.53
+  },
+  "stages": [
+    {
+      "stage": 1,
+      "name": "Stages 1 & 3",
+      "capacity_mw": 460.0,
+      "storage_mwh": 1770.0,
+      "status": "operating",
+      "notes": "Stage 1 (460 MW / 1,070 MWh, 2h) plus Stage 3 (+700 MWh extension to ~4h). Commercial operations commenced Dec 2025. Built by Wartsila/Enerven."
+    },
+    {
+      "stage": 2,
+      "name": "Stages 2 & 4",
+      "capacity_mw": 240.0,
+      "storage_mwh": 1390.0,
+      "status": "construction",
+      "notes": "Stage 2 (240 MW / 1,030 MWh, 4h, grid-forming) plus Stage 4 (+360 MWh extension to ~5.8h). Target COD Q1 2027. AUD 80M committed for Stage 4."
+    }
+  ],
+  "timeline": [
+    {
+      "date": "2023-01-01",
+      "date_precision": "year",
+      "event_type": "conceived",
+      "title": "Origin announces large battery at Eraring coal site",
+      "detail": "Battery to be co-located at the Eraring coal power station site, initially 460 MW",
+      "sources": [
+        {
+          "title": "Origin Energy",
+          "url": "https://www.originenergy.com.au/",
+          "source_tier": 1
+        }
+      ]
+    },
+    {
+      "date": "2023-06-01",
+      "date_precision": "month",
+      "event_type": "other",
+      "title": "Wartsila selected as technology supplier for Stage 1",
+      "sources": [
+        {
+          "title": "Wartsila",
+          "url": "https://www.wartsila.com/",
+          "source_tier": 1
+        }
+      ]
+    },
+    {
+      "date": "2024-06-01",
+      "date_precision": "month",
+      "event_type": "construction_start",
+      "title": "Construction commenced on Stages 1 & 3",
+      "sources": [
+        {
+          "title": "RenewEconomy",
+          "url": "https://reneweconomy.com.au/",
+          "source_tier": 2
+        }
+      ]
+    },
+    {
+      "date": "2024-07-01",
+      "date_precision": "month",
+      "event_type": "other",
+      "title": "Wartsila selected for Stage 2 (240 MW / 1,030 MWh)",
+      "detail": "Stage 2 adds 240 MW of grid-forming battery capacity",
+      "sources": [
+        {
+          "title": "Wartsila",
+          "url": "https://www.wartsila.com/",
+          "source_tier": 1
+        }
+      ]
+    },
+    {
+      "date": "2024-12-01",
+      "date_precision": "month",
+      "event_type": "other",
+      "title": "Wartsila selected for Stage 3 (700 MWh storage extension)",
+      "detail": "Extends Stage 1 duration from ~2h to ~4h",
+      "sources": [
+        {
+          "title": "Wartsila",
+          "url": "https://www.wartsila.com/",
+          "source_tier": 1
+        }
+      ]
+    },
+    {
+      "date": "2025-12-01",
+      "date_precision": "month",
+      "event_type": "cod",
+      "title": "Stages 1 & 3 achieve commercial operations",
+      "detail": "460 MW / 1,770 MWh (~4h duration) commenced commercial operations. Completed on time and under budget.",
+      "sources": [
+        {
+          "title": "PV Magazine - Australia's biggest battery starts commercial operations",
+          "url": "https://www.pv-magazine.com/2026/01/08/australias-biggest-battery-starts-commercial-operations/",
+          "source_tier": 2
+        }
+      ]
+    },
+    {
+      "date": "2025-12-01",
+      "date_precision": "month",
+      "event_type": "construction_start",
+      "title": "Stage 4 construction commenced",
+      "detail": "360 MWh storage extension for Stage 2, AUD 80M investment. Target completion early 2027.",
+      "sources": [
+        {
+          "title": "Wartsila - Fourth stage of Eraring BESS",
+          "url": "https://www.wartsila.com/media/news/11-12-2025-wartsila-sets-new-global-benchmark-with-fourth-stage-of-origin-s-eraring-battery-energy-storage-system-3695204",
+          "source_tier": 1
+        }
+      ]
+    }
+  ],
+  "ownership_history": [
+    {
+      "period": "2023-present",
+      "owner": "Origin Energy",
+      "role": "Developer"
+    }
+  ],
+  "cod_history": [
+    {
+      "date": "2023-06-01",
+      "estimate": "2025",
+      "source": "Origin"
+    },
+    {
+      "date": "2024-06-01",
+      "estimate": "2025-H2",
+      "source": "Origin"
+    },
+    {
+      "date": "2025-12-01",
+      "estimate": "2025-12",
+      "source": "Origin (actual COD for Stages 1 & 3)"
+    }
+  ],
+  "suppliers": [
+    {
+      "name": "Wartsila",
+      "role": "Technology supplier (Quantum energy storage system + GEMS platform)",
+      "stages": "All stages"
+    },
+    {
+      "name": "Enerven",
+      "role": "Design and construction contractor",
+      "stages": "All stages"
+    }
+  ],
   "offtakes": [],
   "scheme_contracts": [],
-  "cost_sources": [],
+  "cost_sources": [
+    {
+      "date": "2025-12-01",
+      "amount_aud": 80000000,
+      "description": "Stage 4 investment (360 MWh storage extension)",
+      "source": "Origin Energy investor announcement"
+    }
+  ],
   "stakeholder_issues": [],
   "sources": [
     {
@@ -31,6 +195,35 @@
       "url": "https://aemo.com.au/energy-systems/electricity/national-electricity-market-nem/nem-forecasting-and-planning/forecasting-and-planning-data/generation-information",
       "date": "2026-01-30",
       "source_tier": 1
+    },
+    {
+      "title": "Wartsila - Fourth stage of Eraring BESS",
+      "url": "https://www.wartsila.com/media/news/11-12-2025-wartsila-sets-new-global-benchmark-with-fourth-stage-of-origin-s-eraring-battery-energy-storage-system-3695204",
+      "date": "2025-12-11",
+      "source_tier": 1
+    },
+    {
+      "title": "PV Magazine - Australia's biggest battery starts commercial operations",
+      "url": "https://www.pv-magazine.com/2026/01/08/australias-biggest-battery-starts-commercial-operations/",
+      "date": "2026-01-08",
+      "source_tier": 2
+    },
+    {
+      "title": "Enerven - Eraring BESS project page",
+      "url": "https://www.enerven.com.au/projects/eraring-battery-energy-storage-system/",
+      "source_tier": 2
+    },
+    {
+      "title": "IPP Journal - Eraring BESS commercial operations",
+      "url": "https://ippjournal.com/update/origin-energys-first-stage-of-700-mw3160-mwh-eraring-bess-commences-commercial-operations",
+      "date": "2026-01-13",
+      "source_tier": 2
+    },
+    {
+      "title": "Batteries International - Origin ramps up to 700MW",
+      "url": "https://www.batteriesinternational.com/2026/01/07/origin-ramps-up-australian-bess-capacity-to-700mw/",
+      "date": "2026-01-07",
+      "source_tier": 2
     }
   ]
 }

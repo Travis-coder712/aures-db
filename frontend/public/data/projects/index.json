@@ -768,25 +768,14 @@
   },
   {
     "id": "blackstone-bess",
-    "name": "Blackstone BESS",
+    "name": "Blackstone Battery",
     "technology": "bess",
     "status": "development",
-    "capacity_mw": 250.0,
-    "storage_mwh": 531.3,
+    "capacity_mw": 500.0,
+    "storage_mwh": 1000.0,
     "state": "QLD",
-    "current_developer": "AGL Energy (via Firm Power)",
-    "data_confidence": "low"
-  },
-  {
-    "id": "blackstone-bess-2-kci",
-    "name": "Blackstone BESS 2 - KCI",
-    "technology": "bess",
-    "status": "development",
-    "capacity_mw": 250.0,
-    "storage_mwh": 531.3,
-    "state": "QLD",
-    "current_developer": "AGL Energy (via Firm Power)",
-    "data_confidence": "low"
+    "current_developer": "Octopus Australia",
+    "data_confidence": "good"
   },
   {
     "id": "blacktop-bess-kci",
@@ -1077,25 +1066,14 @@
   },
   {
     "id": "bouldercombe-battery-project",
-    "name": "Bouldercombe Battery project",
+    "name": "Bouldercombe Battery",
     "technology": "bess",
     "status": "operating",
-    "capacity_mw": 50.0,
-    "storage_mwh": 100.0,
-    "state": "QLD",
-    "current_developer": "Genex Power Limited",
-    "data_confidence": "low"
-  },
-  {
-    "id": "bouldercombe-battery-project-stage-2-kci",
-    "name": "Bouldercombe Battery project - Stage 2 - KCI",
-    "technology": "bess",
-    "status": "development",
-    "capacity_mw": 50.0,
+    "capacity_mw": 100.0,
     "storage_mwh": 200.0,
     "state": "QLD",
-    "current_developer": "Genex Power Limited",
-    "data_confidence": "low"
+    "current_developer": "Genex Power (J-POWER)",
+    "data_confidence": "good"
   },
   {
     "id": "boulka-park-bess",
@@ -1171,44 +1149,15 @@
     "data_confidence": "low"
   },
   {
-    "id": "bremer-battery-1",
-    "name": "Bremer Battery 1",
+    "id": "bremer-battery",
+    "name": "Bremer Battery",
     "technology": "bess",
     "status": "development",
-    "capacity_mw": 212.0,
+    "capacity_mw": 850.0,
     "state": "QLD",
-    "current_developer": "Libra Energy Pty Ltd",
-    "data_confidence": "low"
-  },
-  {
-    "id": "bremer-battery-2",
-    "name": "Bremer Battery 2",
-    "technology": "bess",
-    "status": "development",
-    "capacity_mw": 212.0,
-    "state": "QLD",
-    "current_developer": "Libra Energy Pty Ltd",
-    "data_confidence": "low"
-  },
-  {
-    "id": "bremer-battery-3",
-    "name": "Bremer Battery 3",
-    "technology": "bess",
-    "status": "development",
-    "capacity_mw": 212.0,
-    "state": "QLD",
-    "current_developer": "Libra Energy Pty Ltd",
-    "data_confidence": "low"
-  },
-  {
-    "id": "bremer-battery-4",
-    "name": "Bremer Battery 4",
-    "technology": "bess",
-    "status": "development",
-    "capacity_mw": 212.0,
-    "state": "QLD",
-    "current_developer": "Libra Energy Pty Ltd",
-    "data_confidence": "low"
+    "current_developer": "Libra Energy",
+    "data_confidence": "medium",
+    "storage_mwh": 3400.0
   },
   {
     "id": "brendale-bess",
@@ -3158,26 +3107,15 @@
     "data_confidence": "low"
   },
   {
-    "id": "eraring-battery",
-    "name": "Eraring Battery",
-    "technology": "bess",
-    "status": "construction",
-    "capacity_mw": 460.0,
-    "storage_mwh": 1840.0,
-    "state": "NSW",
-    "current_developer": "Origin Energy",
-    "data_confidence": "medium"
-  },
-  {
     "id": "eraring-big-battery",
     "name": "Eraring Big Battery",
     "technology": "bess",
     "status": "operating",
     "capacity_mw": 700.0,
-    "storage_mwh": 1390.0,
+    "storage_mwh": 3160.0,
     "state": "NSW",
-    "current_developer": "Origin Energy Electricity Limited",
-    "data_confidence": "low"
+    "current_developer": "Origin Energy",
+    "data_confidence": "high"
   },
   {
     "id": "euleilah-solar-farm-and-bess-kci",
@@ -3740,12 +3678,12 @@
     "id": "golden-plains-bess",
     "name": "Golden Plains BESS",
     "technology": "bess",
-    "status": "development",
+    "status": "construction",
     "capacity_mw": 150.0,
-    "storage_mwh": 619.92,
+    "storage_mwh": 620.0,
     "state": "VIC",
-    "current_developer": "Tag Energy Australia P/L",
-    "data_confidence": "low"
+    "current_developer": "TagEnergy",
+    "data_confidence": "good"
   },
   {
     "id": "golden-plains-bess-2-kci",
@@ -3885,25 +3823,14 @@
   },
   {
     "id": "goyder-bess",
-    "name": "Goyder BESS",
+    "name": "Goyder Battery",
     "technology": "bess",
     "status": "development",
-    "capacity_mw": 300.0,
-    "storage_mwh": 800.88,
+    "capacity_mw": 500.0,
+    "storage_mwh": 1601.0,
     "state": "SA",
-    "current_developer": "Neoen Australia Pty Ltd",
-    "data_confidence": "low"
-  },
-  {
-    "id": "goyder-bess-stage-2",
-    "name": "Goyder BESS Stage 2",
-    "technology": "bess",
-    "status": "development",
-    "capacity_mw": 200.0,
-    "storage_mwh": 800.0,
-    "state": "SA",
-    "current_developer": "Neoen Australia Pty Ltd",
-    "data_confidence": "low"
+    "current_developer": "Neoen (Brookfield)",
+    "data_confidence": "good"
   },
   {
     "id": "goyder-north-bess-2",
@@ -6636,26 +6563,15 @@
     "data_confidence": "low"
   },
   {
-    "id": "mount-britton-bess1",
-    "name": "Mount Britton BESS1",
+    "id": "mount-britton-bess",
+    "name": "Mount Britton BESS",
     "technology": "bess",
     "status": "development",
-    "capacity_mw": 250.0,
-    "storage_mwh": 1000.0,
+    "capacity_mw": 500.0,
+    "storage_mwh": 2000.0,
     "state": "QLD",
-    "current_developer": "firmpower_NR",
-    "data_confidence": "low"
-  },
-  {
-    "id": "mount-britton-bess2",
-    "name": "Mount Britton BESS2",
-    "technology": "bess",
-    "status": "development",
-    "capacity_mw": 250.0,
-    "storage_mwh": 1000.0,
-    "state": "QLD",
-    "current_developer": "firmpower_NR",
-    "data_confidence": "low"
+    "current_developer": "AGL Energy (via Firm Power)",
+    "data_confidence": "medium"
   },
   {
     "id": "mount-emerald",
@@ -7076,26 +6992,15 @@
     "data_confidence": "medium"
   },
   {
-    "id": "nine-mile-energy-park-stage-1-bess",
-    "name": "Nine Mile Energy Park Stage 1 - BESS",
+    "id": "nine-mile-energy-park-bess",
+    "name": "Nine Mile Energy Park BESS",
     "technology": "bess",
     "status": "development",
-    "capacity_mw": 250.0,
-    "storage_mwh": 500.0,
+    "capacity_mw": 500.0,
+    "storage_mwh": 1500.0,
     "state": "VIC",
-    "current_developer": "Green Switch Energy Pty Ltd",
-    "data_confidence": "low"
-  },
-  {
-    "id": "nine-mile-energy-park-stage-2-bess",
-    "name": "Nine Mile Energy Park Stage 2 - BESS",
-    "technology": "bess",
-    "status": "development",
-    "capacity_mw": 250.0,
-    "storage_mwh": 1000.0,
-    "state": "VIC",
-    "current_developer": "Green Switch Energy Pty Ltd",
-    "data_confidence": "low"
+    "current_developer": "Pacific Green / Green Switch Energy",
+    "data_confidence": "medium"
   },
   {
     "id": "noblevale-bess-kci",
@@ -7430,12 +7335,12 @@
     "id": "pacific-green-energy-park-limestone-coast-north",
     "name": "Pacific Green Energy Park - Limestone Coast North",
     "technology": "bess",
-    "status": "development",
+    "status": "construction",
     "capacity_mw": 250.0,
     "storage_mwh": 500.0,
     "state": "SA",
-    "current_developer": "Pacific Green",
-    "data_confidence": "low"
+    "current_developer": "Intera Renewables (Palisade)",
+    "data_confidence": "good"
   },
   {
     "id": "pacific-green-energy-park-limestone-coast-west",
@@ -7443,7 +7348,7 @@
     "technology": "bess",
     "status": "development",
     "capacity_mw": 250.0,
-    "storage_mwh": 500.0,
+    "storage_mwh": 1000.0,
     "state": "SA",
     "current_developer": "Pacific Green",
     "data_confidence": "low"
@@ -7723,18 +7628,8 @@
     "capacity_mw": 200.0,
     "storage_mwh": 800.0,
     "state": "QLD",
-    "current_developer": "PLEYSTOWE BESS PTY LTD",
-    "data_confidence": "low"
-  },
-  {
-    "id": "pleystowe-bess-kci",
-    "name": "Pleystowe BESS (KCI)",
-    "technology": "bess",
-    "status": "development",
-    "capacity_mw": 200.0,
-    "state": "QLD",
-    "current_developer": "Pleystowe BESS P/L",
-    "data_confidence": "low"
+    "current_developer": "Trina Solar (via Pleystowe BESS Pty Ltd)",
+    "data_confidence": "medium"
   },
   {
     "id": "poatina",
@@ -7960,26 +7855,15 @@
     "data_confidence": "low"
   },
   {
-    "id": "punchs-creek-hybrid-stage-2-kci",
-    "name": "Punchs Creek Hybrid Stage 2 - KCI",
+    "id": "punchs-creek-hybrid-bess",
+    "name": "Punchs Creek Hybrid BESS",
     "technology": "bess",
     "status": "development",
-    "capacity_mw": 200.0,
-    "storage_mwh": 200.0,
+    "capacity_mw": 800.0,
+    "storage_mwh": 3200.0,
     "state": "QLD",
-    "current_developer": "EDPR Australia Pty Ltd",
-    "data_confidence": "low"
-  },
-  {
-    "id": "punchs-creek-hybrid-stage-3-kci",
-    "name": "Punchs Creek Hybrid Stage 3 - KCI",
-    "technology": "bess",
-    "status": "development",
-    "capacity_mw": 600.0,
-    "storage_mwh": 600.0,
-    "state": "QLD",
-    "current_developer": "EDPR Australia Pty Ltd",
-    "data_confidence": "low"
+    "current_developer": "EDPR Australia",
+    "data_confidence": "medium"
   },
   {
     "id": "puzzle-range-wind-farm",
@@ -9158,37 +9042,15 @@
     "data_confidence": "low"
   },
   {
-    "id": "supernode-north-bess-1",
-    "name": "Supernode North BESS 1",
+    "id": "supernode-north-bess",
+    "name": "Supernode North BESS",
     "technology": "bess",
     "status": "development",
-    "capacity_mw": 260.0,
-    "storage_mwh": 2080.0,
+    "capacity_mw": 780.0,
+    "storage_mwh": 2200.0,
     "state": "QLD",
-    "current_developer": "Supernode North BESS ProjectCo Pty Ltd",
-    "data_confidence": "low"
-  },
-  {
-    "id": "supernode-north-bess-2",
-    "name": "Supernode North BESS 2",
-    "technology": "bess",
-    "status": "development",
-    "capacity_mw": 260.0,
-    "storage_mwh": 2080.0,
-    "state": "QLD",
-    "current_developer": "Supernode North BESS ProjectCo Pty Ltd",
-    "data_confidence": "low"
-  },
-  {
-    "id": "supernode-north-bess-3",
-    "name": "Supernode North BESS 3",
-    "technology": "bess",
-    "status": "development",
-    "capacity_mw": 260.0,
-    "storage_mwh": 2080.0,
-    "state": "QLD",
-    "current_developer": "Supernode North BESS ProjectCo Pty Ltd",
-    "data_confidence": "low"
+    "current_developer": "Quinbrook Infrastructure Partners",
+    "data_confidence": "good"
   },
   {
     "id": "susan-river-solar-farm",

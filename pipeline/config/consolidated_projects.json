@@ -1,29 +1,168 @@
 {
   "_description": "AEMO Gen Info IDs and project slugs that have been manually consolidated into a parent project. The importer will skip these IDs instead of creating/updating separate records. The exporter will skip these project IDs when writing JSON files.",
   "_usage": "When consolidating staged projects (e.g. merging Stage 1 + Stage 2 into a single file with a stages array), add the deprecated AEMO ID and slug here, pointing to the parent project that absorbed it.",
-
   "by_aemo_id": {
-    "1870": {
-      "parent_project": "eraring-battery",
-      "reason": "Eraring Big Battery (AEMO ID 1870, 700 MW total) is the same project as eraring-battery. Origin Energy's Eraring Battery is a single 4-stage project: Stages 1-3 (460 MW) operating, Stage 4 (240 MW) construction.",
-      "consolidated_date": "2026-04-14"
-    },
+    "_note_eraring": "AEMO ID 1870 (eraring-big-battery) is the SURVIVING consolidated project. Do NOT skip it. The deprecated slug 'eraring-battery' is in by_slug below.",
     "1523": {
       "parent_project": "reeves-plains-power-station-bess",
       "reason": "Reeves Plains Battery Stage 2 (AEMO ID 1523) is Stage 2 of the Reeves Plains Energy Hub BESS (AEMO ID 2906).",
       "consolidated_date": "2026-04-16"
+    },
+    "2979": {
+      "parent_project": "bremer-battery",
+      "reason": "Bremer Battery 2 \u2014 AEMO DUID split of single 850 MW project",
+      "consolidated_date": "2026-04-16"
+    },
+    "2980": {
+      "parent_project": "bremer-battery",
+      "reason": "Bremer Battery 3 \u2014 AEMO DUID split of single 850 MW project",
+      "consolidated_date": "2026-04-16"
+    },
+    "2981": {
+      "parent_project": "bremer-battery",
+      "reason": "Bremer Battery 4 \u2014 AEMO DUID split of single 850 MW project",
+      "consolidated_date": "2026-04-16"
+    },
+    "2831": {
+      "parent_project": "supernode-north-bess",
+      "reason": "Supernode North BESS 2 \u2014 AEMO DUID split of single 780 MW project",
+      "consolidated_date": "2026-04-16"
+    },
+    "2832": {
+      "parent_project": "supernode-north-bess",
+      "reason": "Supernode North BESS 3 \u2014 AEMO DUID split of single 780 MW project",
+      "consolidated_date": "2026-04-16"
+    },
+    "2741": {
+      "parent_project": "blackstone-bess",
+      "reason": "Blackstone BESS 2 KCI \u2014 same 500 MW project, dual AEMO connection entries",
+      "consolidated_date": "2026-04-16"
+    },
+    "2971": {
+      "parent_project": "mount-britton-bess",
+      "reason": "Mount Britton BESS2 \u2014 same 500 MW project, dual AEMO entries",
+      "consolidated_date": "2026-04-16"
+    },
+    "2712": {
+      "parent_project": "bouldercombe-battery-project",
+      "reason": "Bouldercombe Stage 2 KCI \u2014 expansion of operating 50 MW project",
+      "consolidated_date": "2026-04-16"
+    },
+    "3161": {
+      "parent_project": "goyder-bess",
+      "reason": "Goyder BESS Stage 2 \u2014 part of 900 MW approved Goyder Battery envelope",
+      "consolidated_date": "2026-04-16"
+    },
+    "3087": {
+      "parent_project": "nine-mile-energy-park-bess",
+      "reason": "Nine Mile Energy Park Stage 2 BESS \u2014 same energy park, staged development",
+      "consolidated_date": "2026-04-16"
+    },
+    "2836": {
+      "parent_project": "pleystowe-bess",
+      "reason": "Pleystowe BESS KCI \u2014 duplicate AEMO entry for same 200 MW project",
+      "consolidated_date": "2026-04-16"
+    },
+    "3210": {
+      "parent_project": "punchs-creek-hybrid-bess",
+      "reason": "Punchs Creek Hybrid Stage 3 KCI \u2014 consolidated with Stage 2 KCI",
+      "consolidated_date": "2026-04-16"
     }
   },
-
   "by_slug": {
-    "eraring-big-battery": {
-      "parent_project": "eraring-battery",
-      "reason": "Merged into eraring-battery as a staged project.",
-      "consolidated_date": "2026-04-14"
+    "eraring-battery": {
+      "parent_project": "eraring-big-battery",
+      "reason": "Merged into eraring-big-battery. The 460 MW 'eraring-battery' was Stages 1+3 only; eraring-big-battery (700 MW) is the full consolidated project.",
+      "consolidated_date": "2026-04-16"
     },
     "reeves-plains-battery-stage-2": {
       "parent_project": "reeves-plains-power-station-bess",
       "reason": "Consolidated into parent as Stage 2. Reeves Plains Energy Hub is a single staged project (S1: 250 MW construction, S2: 250 MW development).",
+      "consolidated_date": "2026-04-16"
+    },
+    "bremer-battery-1": {
+      "parent_project": "bremer-battery",
+      "reason": "Renamed to bremer-battery (consolidated 4 DUIDs)",
+      "consolidated_date": "2026-04-16"
+    },
+    "bremer-battery-2": {
+      "parent_project": "bremer-battery",
+      "reason": "Merged into bremer-battery",
+      "consolidated_date": "2026-04-16"
+    },
+    "bremer-battery-3": {
+      "parent_project": "bremer-battery",
+      "reason": "Merged into bremer-battery",
+      "consolidated_date": "2026-04-16"
+    },
+    "bremer-battery-4": {
+      "parent_project": "bremer-battery",
+      "reason": "Merged into bremer-battery",
+      "consolidated_date": "2026-04-16"
+    },
+    "supernode-north-bess-1": {
+      "parent_project": "supernode-north-bess",
+      "reason": "Renamed to supernode-north-bess",
+      "consolidated_date": "2026-04-16"
+    },
+    "supernode-north-bess-2": {
+      "parent_project": "supernode-north-bess",
+      "reason": "Merged into supernode-north-bess",
+      "consolidated_date": "2026-04-16"
+    },
+    "supernode-north-bess-3": {
+      "parent_project": "supernode-north-bess",
+      "reason": "Merged into supernode-north-bess",
+      "consolidated_date": "2026-04-16"
+    },
+    "blackstone-bess-2-kci": {
+      "parent_project": "blackstone-bess",
+      "reason": "Merged into blackstone-bess",
+      "consolidated_date": "2026-04-16"
+    },
+    "mount-britton-bess1": {
+      "parent_project": "mount-britton-bess",
+      "reason": "Renamed to mount-britton-bess",
+      "consolidated_date": "2026-04-16"
+    },
+    "mount-britton-bess2": {
+      "parent_project": "mount-britton-bess",
+      "reason": "Merged into mount-britton-bess",
+      "consolidated_date": "2026-04-16"
+    },
+    "bouldercombe-battery-project-stage-2-kci": {
+      "parent_project": "bouldercombe-battery-project",
+      "reason": "Merged as Stage 2",
+      "consolidated_date": "2026-04-16"
+    },
+    "goyder-bess-stage-2": {
+      "parent_project": "goyder-bess",
+      "reason": "Merged as Stage 2 of Goyder Battery",
+      "consolidated_date": "2026-04-16"
+    },
+    "nine-mile-energy-park-stage-1-bess": {
+      "parent_project": "nine-mile-energy-park-bess",
+      "reason": "Renamed to nine-mile-energy-park-bess",
+      "consolidated_date": "2026-04-16"
+    },
+    "nine-mile-energy-park-stage-2-bess": {
+      "parent_project": "nine-mile-energy-park-bess",
+      "reason": "Merged into nine-mile-energy-park-bess",
+      "consolidated_date": "2026-04-16"
+    },
+    "pleystowe-bess-kci": {
+      "parent_project": "pleystowe-bess",
+      "reason": "Duplicate AEMO entry for same project",
+      "consolidated_date": "2026-04-16"
+    },
+    "punchs-creek-hybrid-stage-2-kci": {
+      "parent_project": "punchs-creek-hybrid-bess",
+      "reason": "Renamed + consolidated with Stage 3",
+      "consolidated_date": "2026-04-16"
+    },
+    "punchs-creek-hybrid-stage-3-kci": {
+      "parent_project": "punchs-creek-hybrid-bess",
+      "reason": "Merged into punchs-creek-hybrid-bess",
       "consolidated_date": "2026-04-16"
     }
   }
