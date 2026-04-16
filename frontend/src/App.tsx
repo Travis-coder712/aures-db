@@ -73,11 +73,13 @@ function App() {
         <Route path="offtakers/:slug" element={<OfftakerDetail />} />
         {/* Phase 4: Map */}
         <Route path="map" element={<MapView />} />
-        {/* Analytics */}
-        <Route path="analytics/bess-capex" element={<BESSCapex />} />
-        <Route path="analytics/project-timeline" element={<ProjectTimeline />} />
+        {/* Analytics → Intelligence redirects (old bookmarks) */}
+        <Route path="analytics/bess-capex" element={<Navigate to="/intelligence/bess-capex" replace />} />
+        <Route path="analytics/project-timeline" element={<Navigate to="/intelligence/project-timeline" replace />} />
         {/* Intelligence Layer */}
         <Route path="intelligence" element={<IntelligenceHub />} />
+        <Route path="intelligence/bess-capex" element={<BESSCapex />} />
+        <Route path="intelligence/project-timeline" element={<ProjectTimeline />} />
         <Route path="intelligence/scheme-tracker" element={<SchemeTracker />} />
         <Route path="intelligence/drift-analysis" element={<DriftAnalysis />} />
         <Route path="intelligence/wind-resource" element={<WindResource />} />
@@ -85,7 +87,8 @@ function App() {
         <Route path="intelligence/energy-mix" element={<EnergyMix />} />
         <Route path="intelligence/developer-scores" element={<DeveloperScores />} />
         <Route path="intelligence/revenue" element={<RevenueIntel />} />
-        <Route path="intelligence/grid-connection" element={<TransmissionInfra />} />
+        <Route path="intelligence/transmission-infra" element={<TransmissionInfra />} />
+        <Route path="intelligence/grid-connection" element={<Navigate to="/intelligence/transmission-infra" replace />} />
         <Route path="intelligence/eis-technical" element={<EISTechnical />} />
         <Route path="intelligence/nem-activities" element={<NemActivities />} />
         <Route path="intelligence/bess-bidding" element={<BessBidding />} />

@@ -6,7 +6,7 @@ import {
   ResponsiveContainer, Cell, PieChart, Pie, Legend,
 } from 'recharts'
 import { fetchGridConnection, fetchEISAnalytics } from '../../lib/dataService'
-import type { GridConnectionData, EISAnalyticsData, EISWindProject, EISBESSProject } from '../../lib/types'
+import type { GridConnectionData, EISAnalyticsData, EISWindProject, EISBESSProject, REZSummary } from '../../lib/types'
 import {
   TRANSMISSION_PROJECTS,
   TRANSMISSION_STATUS_COLOURS,
@@ -16,6 +16,8 @@ import {
 } from '../../data/transmission-projects'
 import type { TransmissionStatus } from '../../data/transmission-projects'
 import { REZ_ZONES } from '../../data/rez-zones'
+import DataTable from '../../components/common/DataTable'
+import type { Column } from '../../components/common/DataTable'
 
 // ============================================================
 // Icons — defined BEFORE const arrays per project pattern
@@ -82,6 +84,22 @@ function formatREZName(rez: string): string {
     .split('-')
     .map(w => w.charAt(0).toUpperCase() + w.slice(1))
     .join(' ')
+}
+
+/** Format technology key for display */
+function formatTech(tech: string): string {
+  return tech.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase())
+}
+
+/** Collect all unique technologies across all REZ summaries */
+function getAllTechnologies(summaries: REZSummary[]): string[] {
+  const techs = new Set<string>()
+  for (const rez of summaries) {
+    for (const tech of Object.keys(rez.technologies)) {
+      techs.add(tech)
+    }
+  }
+  return Array.from(techs).sort()
 }
 
 // Stat card component
@@ -909,6 +927,107 @@ interface REZTabProps {
 function REZTab({ gridData, congestionData }: REZTabProps) {
   const [expandedREZ, setExpandedREZ] = useState<string | null>(null)
 
+  // Connection status pie data (moved into REZ tab from GridConnection)
+  const connectionPieData = useMemo(() => {
+    if (!gridData) return []
+    const statusColours: Record<string, string> = {
+      Connected: '#10b981',
+      'In progress': '#3b82f6',
+      'Pre-application': '#f59e0b',
+    }
+    return Object.entries(gridData.connection_status_overall).map(([status, info]) => ({
+      name: status,
+      value: info.mw,
+      count: info.count,
+      fill: statusColours[status] || '#636e72',
+    }))
+  }, [gridData])
+
+  // Technology stacked bar data per REZ (ported from GridConnection)
+  const techStackData = useMemo(() => {
+    if (!gridData) return { chartData: [] as Record<string, unknown>[], techs: [] as string[] }
+    const techs = getAllTechnologies(gridData.rez_summaries)
+    const chartData = [...gridData.rez_summaries]
+      .sort((a, b) => b.total_mw - a.total_mw)
+      .map(r => {
+        const row: Record<string, unknown> = { name: formatREZName(r.rez) }
+        for (const tech of techs) {
+          const statuses = r.technologies[tech]
+          if (statuses) {
+            row[tech] = Object.values(statuses).reduce((sum, s) => sum + s.mw, 0)
+          } else {
+            row[tech] = 0
+          }
+        }
+        return row
+      })
+    return { chartData, techs }
+  }, [gridData])
+
+  // REZ Comparison table rows (for DataTable)
+  const comparisonRows = useMemo(() => {
+    if (!gridData) return []
+    return gridData.rez_summaries.map(r => ({
+      rez: r.rez,
+      name: formatREZName(r.rez),
+      total_mw: r.total_mw,
+      operating_mw: r.operating_mw,
+      pipeline_mw: r.pipeline_mw,
+      congestion_level: r.congestion_level,
+      congestion_score: r.congestion_score,
+      project_count: r.project_count,
+    }))
+  }, [gridData])
+
+  type ComparisonRow = (typeof comparisonRows)[number]
+
+  const comparisonColumns: Column<ComparisonRow>[] = [
+    {
+      key: 'name',
+      label: 'REZ Zone',
+      render: (_v, row) => (
+        <Link to={`/rez/${row.rez}`} className="text-[var(--color-primary)] hover:underline font-medium">
+          {row.name}
+        </Link>
+      ),
+    },
+    { key: 'total_mw', label: 'Total MW', format: 'number0', aggregator: 'sum' },
+    { key: 'operating_mw', label: 'Operating MW', format: 'number0', aggregator: 'sum', hideOnMobile: true, cellClassName: 'text-green-400' },
+    { key: 'pipeline_mw', label: 'Pipeline MW', format: 'number0', aggregator: 'sum', hideOnMobile: true, cellClassName: 'text-amber-400' },
+    {
+      key: 'congestion_level',
+      label: 'Congestion',
+      align: 'center',
+      render: (v) => {
+        const level = String(v)
+        const colour = CONGESTION_COLOURS[level] || '#636e72'
+        return (
+          <span
+            className="px-2 py-0.5 rounded-full text-xs font-medium capitalize"
+            style={{ backgroundColor: `${colour}20`, color: colour }}
+          >
+            {level}
+          </span>
+        )
+      },
+    },
+    {
+      key: 'congestion_score',
+      label: 'Score',
+      align: 'center',
+      hideOnMobile: true,
+      render: (v, row) => {
+        const colour = CONGESTION_COLOURS[row.congestion_level] || '#636e72'
+        return (
+          <span className="font-semibold" style={{ color: colour }}>
+            {Number(v).toFixed(1)}
+          </span>
+        )
+      },
+    },
+    { key: 'project_count', label: 'Projects', format: 'number0', aggregator: 'sum' },
+  ]
+
   if (!gridData || congestionData.length === 0) {
     return (
       <div className="text-center text-[var(--color-text-muted)] py-12">
@@ -922,12 +1041,14 @@ function REZTab({ gridData, congestionData }: REZTabProps) {
 
   return (
     <div className="space-y-5">
-      {/* Rationale */}
+      {/* Rationale — fuller 4-paragraph version ported from GridConnection */}
       <details className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl p-4">
         <summary className="text-sm font-medium text-[var(--color-text)] cursor-pointer">Understanding REZ congestion</summary>
         <div className="mt-3 text-xs text-[var(--color-text-muted)] space-y-2">
-          <p><strong>Congestion score (0-10)</strong> indicates how much pipeline capacity is competing for limited grid connection in each Renewable Energy Zone.</p>
-          <p><strong>Connection status</strong> shows how many projects have secured grid connection versus those still in the queue.</p>
+          <p><strong>Congestion score (0-10)</strong> indicates how much pipeline capacity is competing for limited grid connection in each Renewable Energy Zone. Higher scores mean more projects competing for limited connection capacity, resulting in higher risk of delays.</p>
+          <p><strong>How it is calculated:</strong> The score is based on the ratio of pipeline MW to existing grid hosting capacity within each REZ. A zone with 5,000 MW of pipeline competing for 1,000 MW of available capacity will score much higher than a zone with headroom.</p>
+          <p><strong>Connection status</strong> shows how many projects have secured grid connection (Connected) versus those still in progress or at the pre-application stage. This breakdown helps gauge how congested the queue actually is.</p>
+          <p><strong>Why this matters:</strong> REZ congestion is a key risk factor for new projects. Heavily congested zones may face multi-year connection delays, increased curtailment risk, and potential requirements for system strength remediation — all of which affect project economics and timelines.</p>
         </div>
       </details>
 
@@ -939,46 +1060,150 @@ function REZTab({ gridData, congestionData }: REZTabProps) {
         <StatCard label="Pipeline" value={totalPipelineMW.toLocaleString()} unit="MW" color="#f59e0b" />
       </div>
 
-      {/* Congestion bar chart */}
+      {/* Connection Status pie + REZ Congestion bar (side-by-side) */}
+      <div className="grid md:grid-cols-5 gap-4">
+        {/* Connection Status PieChart */}
+        {connectionPieData.length > 0 && (
+          <div className="md:col-span-2 bg-[var(--color-bg-card)] rounded-xl p-4 border border-[var(--color-border)]">
+            <h2 className="text-lg font-semibold text-[var(--color-text)] mb-1">Connection Status</h2>
+            <p className="text-xs text-[var(--color-text-muted)] mb-3">
+              Overall MW by connection stage
+            </p>
+            <ResponsiveContainer width="100%" height={240}>
+              <PieChart>
+                <Pie
+                  data={connectionPieData}
+                  dataKey="value"
+                  nameKey="name"
+                  cx="50%"
+                  cy="50%"
+                  outerRadius={80}
+                  innerRadius={40}
+                  paddingAngle={2}
+                  strokeWidth={0}
+                >
+                  {connectionPieData.map((entry, i) => (
+                    <Cell key={`pie-${i}`} fill={entry.fill} />
+                  ))}
+                </Pie>
+                <Tooltip
+                  contentStyle={{ backgroundColor: 'var(--color-bg)', border: '1px solid var(--color-border)', borderRadius: '8px' }}
+                  labelStyle={{ color: 'var(--color-text)' }}
+                  itemStyle={{ color: 'var(--color-text)' }}
+                  formatter={(value) => [`${Number(value).toLocaleString()} MW`, 'Capacity']}
+                />
+                <Legend
+                  formatter={(value) => <span style={{ color: 'var(--color-text-muted)', fontSize: 12 }}>{value}</span>}
+                />
+              </PieChart>
+            </ResponsiveContainer>
+            {/* Per-status count strip */}
+            <div className="flex justify-center gap-4 mt-2">
+              {connectionPieData.map(s => (
+                <div key={s.name} className="text-center">
+                  <div className="text-sm font-semibold" style={{ color: s.fill }}>
+                    {s.count} projects
+                  </div>
+                  <div className="text-xs text-[var(--color-text-muted)]">{s.name}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Congestion bar chart */}
+        <div className={`${connectionPieData.length > 0 ? 'md:col-span-3' : 'md:col-span-5'} bg-[var(--color-bg-card)] rounded-xl p-4 border border-[var(--color-border)]`}>
+          <h2 className="text-lg font-semibold text-[var(--color-text)] mb-1">REZ Congestion</h2>
+          <p className="text-xs text-[var(--color-text-muted)] mb-3">
+            Total capacity by REZ zone. Colour indicates congestion level.
+          </p>
+          <ResponsiveContainer width="100%" height={Math.max(congestionData.length * 70, 200)}>
+            <BarChart data={congestionData} layout="vertical" margin={{ top: 5, right: 60, bottom: 5, left: 10 }}>
+              <CartesianGrid strokeDasharray="3 3" stroke="var(--color-border)" />
+              <XAxis type="number" tick={{ fill: 'var(--color-text-muted)', fontSize: 12 }} tickFormatter={(v) => `${(v / 1000).toFixed(0)}k`} />
+              <YAxis type="category" dataKey="name" width={150} tick={{ fill: 'var(--color-text-muted)', fontSize: 11 }} />
+              <Tooltip
+                contentStyle={{ backgroundColor: 'var(--color-bg)', border: '1px solid var(--color-border)', borderRadius: '8px' }}
+                formatter={(value, name) => {
+                  const label = name === 'operating_mw' ? 'Operating' : 'Pipeline'
+                  return [`${Number(value).toLocaleString()} MW`, label]
+                }}
+              />
+              <Bar dataKey="operating_mw" stackId="cap" name="operating_mw" radius={[0, 0, 0, 0]}>
+                {congestionData.map((entry, i) => (
+                  <Cell key={`op-${i}`} fill={CONGESTION_COLOURS[entry.congestion_level] || '#636e72'} fillOpacity={0.9} />
+                ))}
+              </Bar>
+              <Bar dataKey="pipeline_mw" stackId="cap" name="pipeline_mw" radius={[0, 4, 4, 0]}>
+                {congestionData.map((entry, i) => (
+                  <Cell key={`pip-${i}`} fill={CONGESTION_COLOURS[entry.congestion_level] || '#636e72'} fillOpacity={0.4} />
+                ))}
+              </Bar>
+            </BarChart>
+          </ResponsiveContainer>
+          <div className="flex gap-4 justify-center mt-2 text-xs text-[var(--color-text-muted)]">
+            <span className="flex items-center gap-1">
+              <span className="inline-block w-3 h-3 rounded" style={{ backgroundColor: '#636e72', opacity: 0.9 }} /> Operating
+            </span>
+            <span className="flex items-center gap-1">
+              <span className="inline-block w-3 h-3 rounded" style={{ backgroundColor: '#636e72', opacity: 0.4 }} /> Pipeline
+            </span>
+            {Object.entries(CONGESTION_COLOURS).map(([level, colour]) => (
+              <span key={level} className="flex items-center gap-1">
+                <span className="inline-block w-3 h-3 rounded" style={{ backgroundColor: colour }} /> {level.charAt(0).toUpperCase() + level.slice(1)}
+              </span>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Technology Breakdown per REZ — Stacked bar (ported from GridConnection) */}
       <div className="bg-[var(--color-bg-card)] rounded-xl p-4 border border-[var(--color-border)]">
-        <h2 className="text-sm font-semibold text-[var(--color-text)] mb-1">REZ Congestion</h2>
-        <p className="text-xs text-[var(--color-text-muted)] mb-3">
-          Total capacity by REZ zone. Colour indicates congestion level.
+        <h2 className="text-lg font-semibold text-[var(--color-text)] mb-1">Technology Breakdown by REZ</h2>
+        <p className="text-xs text-[var(--color-text-muted)] mb-4">
+          Capacity (MW) by technology within each Renewable Energy Zone
         </p>
-        <ResponsiveContainer width="100%" height={Math.max(congestionData.length * 70, 200)}>
-          <BarChart data={congestionData} layout="vertical" margin={{ top: 5, right: 60, bottom: 5, left: 10 }}>
+        <ResponsiveContainer width="100%" height={Math.max(techStackData.chartData.length * 70, 200)}>
+          <BarChart
+            data={techStackData.chartData}
+            layout="vertical"
+            margin={{ top: 5, right: 60, bottom: 5, left: 10 }}
+          >
             <CartesianGrid strokeDasharray="3 3" stroke="var(--color-border)" />
-            <XAxis type="number" tick={{ fill: 'var(--color-text-muted)', fontSize: 12 }} tickFormatter={(v) => `${(v / 1000).toFixed(0)}k`} />
-            <YAxis type="category" dataKey="name" width={150} tick={{ fill: 'var(--color-text-muted)', fontSize: 11 }} />
+            <XAxis
+              type="number"
+              tick={{ fill: 'var(--color-text-muted)', fontSize: 12 }}
+              tickFormatter={(v) => `${(v / 1000).toFixed(0)}k`}
+            />
+            <YAxis
+              type="category"
+              dataKey="name"
+              width={150}
+              tick={{ fill: 'var(--color-text-muted)', fontSize: 11 }}
+            />
             <Tooltip
               contentStyle={{ backgroundColor: 'var(--color-bg)', border: '1px solid var(--color-border)', borderRadius: '8px' }}
-              formatter={(value, name) => {
-                const label = name === 'operating_mw' ? 'Operating' : 'Pipeline'
-                return [`${Number(value).toLocaleString()} MW`, label]
-              }}
+              labelStyle={{ color: 'var(--color-text)' }}
+              itemStyle={{ color: 'var(--color-text)' }}
+              formatter={(value, name) => [`${Number(value).toLocaleString()} MW`, formatTech(String(name))]}
             />
-            <Bar dataKey="operating_mw" stackId="cap" name="operating_mw" radius={[0, 0, 0, 0]}>
-              {congestionData.map((entry, i) => (
-                <Cell key={`op-${i}`} fill={CONGESTION_COLOURS[entry.congestion_level] || '#636e72'} fillOpacity={0.9} />
-              ))}
-            </Bar>
-            <Bar dataKey="pipeline_mw" stackId="cap" name="pipeline_mw" radius={[0, 4, 4, 0]}>
-              {congestionData.map((entry, i) => (
-                <Cell key={`pip-${i}`} fill={CONGESTION_COLOURS[entry.congestion_level] || '#636e72'} fillOpacity={0.4} />
-              ))}
-            </Bar>
+            {techStackData.techs.map(tech => (
+              <Bar
+                key={tech}
+                dataKey={tech}
+                stackId="tech"
+                name={tech}
+                fill={TECH_COLOURS[tech] || '#636e72'}
+                radius={[0, 0, 0, 0]}
+              />
+            ))}
           </BarChart>
         </ResponsiveContainer>
-        <div className="flex gap-4 justify-center mt-2 text-xs text-[var(--color-text-muted)]">
-          <span className="flex items-center gap-1">
-            <span className="inline-block w-3 h-3 rounded" style={{ backgroundColor: '#636e72', opacity: 0.9 }} /> Operating
-          </span>
-          <span className="flex items-center gap-1">
-            <span className="inline-block w-3 h-3 rounded" style={{ backgroundColor: '#636e72', opacity: 0.4 }} /> Pipeline
-          </span>
-          {Object.entries(CONGESTION_COLOURS).map(([level, colour]) => (
-            <span key={level} className="flex items-center gap-1">
-              <span className="inline-block w-3 h-3 rounded" style={{ backgroundColor: colour }} /> {level.charAt(0).toUpperCase() + level.slice(1)}
+        <div className="flex flex-wrap gap-3 justify-center mt-3 text-xs text-[var(--color-text-muted)]">
+          {techStackData.techs.map(tech => (
+            <span key={tech} className="flex items-center gap-1">
+              <span className="inline-block w-3 h-3 rounded" style={{ backgroundColor: TECH_COLOURS[tech] || '#636e72' }} />
+              {formatTech(tech)}
             </span>
           ))}
         </div>
@@ -1060,7 +1285,7 @@ function REZTab({ gridData, congestionData }: REZTabProps) {
                               <td className="py-1.5 pr-4">
                                 <span className="flex items-center gap-1.5">
                                   <span className="inline-block w-2.5 h-2.5 rounded" style={{ backgroundColor: TECH_COLOURS[tech] || '#636e72' }} />
-                                  <span className="text-[var(--color-text)]">{tech.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase())}</span>
+                                  <span className="text-[var(--color-text)]">{formatTech(tech)}</span>
                                 </span>
                               </td>
                               <td className="py-1.5 pr-4 text-[var(--color-text-muted)] capitalize">{status}</td>
@@ -1078,6 +1303,29 @@ function REZTab({ gridData, congestionData }: REZTabProps) {
           )
         })}
       </div>
+
+      {/* REZ Comparison Table (ported from GridConnection — uses shared DataTable) */}
+      <div className="bg-[var(--color-bg-card)] rounded-xl border border-[var(--color-border)] overflow-hidden">
+        <div className="p-4 border-b border-[var(--color-border)]">
+          <h2 className="text-lg font-semibold text-[var(--color-text)]">REZ Comparison</h2>
+        </div>
+        <div className="p-3">
+          <DataTable
+            rows={comparisonRows}
+            columns={comparisonColumns}
+            showRowNumbers
+            showTotals
+            defaultSort={{ key: 'total_mw', dir: 'desc' }}
+            csvFilename="rez-comparison"
+          />
+        </div>
+      </div>
+
+      {/* Source note (ported from GridConnection) */}
+      <p className="text-xs text-[var(--color-text-muted)] italic">
+        Grid connection data sourced from AEMO connection registers, REZ access scheme disclosures, and developer announcements.
+        Congestion scores reflect pipeline-to-capacity ratios and known curtailment patterns.
+      </p>
     </div>
   )
 }

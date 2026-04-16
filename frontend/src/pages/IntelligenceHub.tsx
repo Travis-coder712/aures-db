@@ -47,7 +47,7 @@ const FEATURES = [
     icon: '\u{1F50C}',
     title: 'Transmission Infrastructure',
     description: 'Major NEM transmission upgrades, grid connection analytics, and REZ congestion',
-    route: '/intelligence/grid-connection',
+    route: '/intelligence/transmission-infra',
   },
   {
     icon: '\u{1F4D1}',
@@ -72,6 +72,18 @@ const FEATURES = [
     title: 'NEM Activities Timeline',
     description: 'Month-by-month key highlights across development, construction, and operations',
     route: '/intelligence/nem-activities',
+  },
+  {
+    icon: '\u{1F4B5}',
+    title: 'BESS Capex',
+    description: 'Battery storage capex benchmarking by $/MW, $/MWh, OEM, and state',
+    route: '/intelligence/bess-capex',
+  },
+  {
+    icon: '\u{1F5D3}\uFE0F',
+    title: 'Project Timeline',
+    description: 'Gantt-style development, construction, and operations timeline across the pipeline',
+    route: '/intelligence/project-timeline',
   },
 ] as const
 

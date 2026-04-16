@@ -105,7 +105,7 @@ export default function BESSCapex() {
     const params = new URLSearchParams({
       ids: ids.join(','),
       title,
-      from: 'analytics/bess-capex',
+      from: 'intelligence/bess-capex',
       fromLabel: 'Back to BESS Capex',
     })
     navigate(`/projects?${params.toString()}`)
@@ -427,7 +427,7 @@ export default function BESSCapex() {
                 <Scatter
                   data={scatterData}
                   onClick={(data: any) => {
-                    if (data?.id) navigate(`/projects/${data.id}?from=analytics/bess-capex&fromLabel=Back to BESS Capex`)
+                    if (data?.id) navigate(`/projects/${data.id}?from=intelligence/bess-capex&fromLabel=Back to BESS Capex`)
                   }}
                   cursor="pointer"
                   shape={
@@ -605,7 +605,7 @@ export default function BESSCapex() {
                   radius={[3, 3, 0, 0]}
                   maxBarSize={24}
                   cursor="pointer"
-                  onClick={(d: any) => { if (d?.id) navigate(`/projects/${d.id}?from=analytics/bess-capex&fromLabel=Back to BESS Capex`) }}
+                  onClick={(d: any) => { if (d?.id) navigate(`/projects/${d.id}?from=intelligence/bess-capex&fromLabel=Back to BESS Capex`) }}
                 >
                   {timelineData.map((entry, i) => (
                     <Cell
@@ -839,7 +839,7 @@ export default function BESSCapex() {
                     {/* Tomago row */}
                     <tr style={{ background: '#10b98115' }} className="border-b border-[var(--color-border)]">
                       <td className="p-2 font-semibold" style={{ color: '#10b981' }}>
-                        <Link to="/projects/tomago-bess?from=analytics/bess-capex&fromLabel=Back to BESS Capex" className="hover:underline">
+                        <Link to="/projects/tomago-bess?from=intelligence/bess-capex&fromLabel=Back to BESS Capex" className="hover:underline">
                           Tomago BESS ★
                         </Link>
                       </td>
@@ -855,7 +855,7 @@ export default function BESSCapex() {
                     {tomagoComparables.comparables.map((p, i) => (
                       <tr key={i} className="border-b border-[var(--color-border)]">
                         <td className="p-2">
-                          <Link to={`/projects/${p.id}?from=analytics/bess-capex&fromLabel=Back to BESS Capex`} className="text-blue-400 hover:text-blue-300">
+                          <Link to={`/projects/${p.id}?from=intelligence/bess-capex&fromLabel=Back to BESS Capex`} className="text-blue-400 hover:text-blue-300">
                             {p.label}
                           </Link>
                           <span className="ml-1 text-[10px] text-[var(--color-text-muted)]">{p.state}</span>
