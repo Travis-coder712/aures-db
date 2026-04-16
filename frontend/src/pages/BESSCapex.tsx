@@ -1097,29 +1097,70 @@ export default function BESSCapex() {
                 <span className="text-[var(--color-text)] font-semibold">Next-Gen OEM Products</span>
               </div>
 
-              <div className="grid md:grid-cols-3 gap-3">
-                {/* Tesla Megapack 3 */}
+              <div className="grid md:grid-cols-2 gap-3">
+                {/* Tesla Megapack 3 + Megablock */}
                 <div className="rounded-lg p-3" style={{ background: '#e74c3c10', border: '1px solid #e74c3c30' }}>
                   <div className="flex items-center gap-2 mb-2">
                     <span className="w-2.5 h-2.5 rounded-full" style={{ background: '#e74c3c' }} />
-                    <span className="text-sm font-bold text-[var(--color-text)]">Tesla Megapack 3</span>
+                    <span className="text-sm font-bold text-[var(--color-text)]">Tesla Megapack 3 &amp; Megablock</span>
                   </div>
-                  <div className="text-xs font-medium text-[#e74c3c] mb-1">Expected: Late 2025 / 2026</div>
+                  <div className="text-xs font-medium text-[#e74c3c] mb-1">Megapack 3 shipping 2025 &mdash; Megablock available 2026</div>
                   <div className="space-y-1.5 text-xs text-[var(--color-text-muted)] leading-relaxed">
                     <p>
-                      Tesla&apos;s next-gen Megapack is expected to increase energy density by <span className="text-[var(--color-text)] font-medium">~25-30%</span> over the current Megapack 2 (3.9 MWh/unit), potentially reaching <span className="text-[var(--color-text)] font-medium">~5 MWh per unit</span>.
-                      This is driven by Tesla&apos;s in-house 4680 cell manufacturing improvements and next-gen LFP cell chemistry.
+                      <span className="text-[var(--color-text)] font-medium">Megapack 3</span> increases energy density by <span className="text-[var(--color-text)] font-medium">~25-30%</span> over the Megapack 2 (3.9 MWh/unit), reaching <span className="text-[var(--color-text)] font-medium">~5 MWh per unit</span>.
+                      Each Megapack 3 unit contains a proprietary <span className="text-[var(--color-text)] font-medium">silicon carbide (SiC) inverter</span> integrated at the unit level &mdash;
+                      not a centralised PCS or string inverter architecture, but a per-unit integrated approach that achieves similar modularity and fault isolation benefits.
+                      The SiC power electronics deliver higher switching efficiency and lower thermal losses than conventional IGBT inverters.
                     </p>
                     <p>
-                      <span className="text-[var(--color-text)] font-medium">Key advantages:</span> Higher energy density per footprint reduces land, cabling, and BoP costs. Integrated Autobidder AI trading platform (already confirmed in NEM bidding data). Potential for factory-direct pricing from Lathrop, CA and Shanghai Megafactories.
+                      <span className="text-[var(--color-text)] font-medium">Megablock</span> is Tesla&apos;s new pre-engineered MV AC-coupled solution: <span className="text-[var(--color-text)] font-medium">4&times; Megapack 3 units + transformer + switchgear = 20 MWh per block</span>.
+                      Factory-assembled and shipped as a single deployable unit, targeting <span className="text-[var(--color-text)] font-medium">40% lower construction costs</span> and
+                      <span className="text-[var(--color-text)] font-medium">91% round-trip efficiency</span>. Dramatically reduces on-site EPC scope &mdash; connections, not construction.
                     </p>
                     <p>
-                      <span className="text-[var(--color-text)] font-medium">Cost impact:</span> Industry estimates suggest 10-15% capex reduction per MWh vs Megapack 2, driven primarily by fewer units per site (less BoP) rather than cell cost alone. Could push Tesla NEM projects toward <span className="text-[#10b981] font-mono font-medium">$0.35-0.40M/MWh</span>.
+                      <span className="text-[var(--color-text)] font-medium">Key advantages:</span> Integrated Autobidder AI trading platform (confirmed in NEM bidding data). Factory-direct pricing from Lathrop, CA and Shanghai Megafactories.
+                      Per-unit SiC inverter means a single unit fault doesn&apos;t affect the rest of the system. Megablock&apos;s pre-integration eliminates most on-site AC wiring and civil works.
+                    </p>
+                    <p>
+                      <span className="text-[var(--color-text)] font-medium">Cost impact:</span> 10-15% capex reduction per MWh vs Megapack 2, driven primarily by fewer units per site and Megablock&apos;s BoP elimination. Could push Tesla NEM projects toward <span className="text-[#10b981] font-mono font-medium">$0.35-0.40M/MWh</span>.
                     </p>
                   </div>
                 </div>
 
-                {/* Fluence Gridstack Pro / SmartStack */}
+                {/* Wärtsilä Quantum3 */}
+                <div className="rounded-lg p-3" style={{ background: '#2ecc7110', border: '1px solid #2ecc7130' }}>
+                  <div className="flex items-center gap-2 mb-2">
+                    <span className="w-2.5 h-2.5 rounded-full" style={{ background: '#2ecc71' }} />
+                    <span className="text-sm font-bold text-[var(--color-text)]">W&auml;rtsil&auml; Quantum3</span>
+                  </div>
+                  <div className="text-xs font-medium text-[#2ecc71] mb-1">Deployed at Eraring (700 MW / 3,160 MWh) &mdash; string inverter architecture</div>
+                  <div className="space-y-1.5 text-xs text-[var(--color-text-muted)] leading-relaxed">
+                    <p>
+                      W&auml;rtsil&auml;&apos;s Quantum3 is a fully integrated <span className="text-[var(--color-text)] font-medium">AC block</span> delivering <span className="text-[var(--color-text)] font-medium">5 MWh per 20ft container</span> with
+                      <span className="text-[var(--color-text)] font-medium">string-based power conversion systems (PCS)</span> built into each unit &mdash; the key innovation distinguishing it from competitors.
+                      The string inverter architecture distributes power conversion across multiple independent paths within each container,
+                      providing granular control and inherent redundancy at the hardware level.
+                    </p>
+                    <p>
+                      <span className="text-[var(--color-text)] font-medium">NEM proof point:</span> Quantum3 is the platform behind Australia&apos;s largest battery &mdash; Origin Energy&apos;s
+                      <span className="text-[var(--color-text)] font-medium">Eraring Big Battery (700 MW / 3,160 MWh)</span>, where Stages 1 &amp; 3 (460 MW) are operating and Stages 2 &amp; 4 (240 MW, grid-forming) are under construction.
+                      Completed on time and under budget. W&auml;rtsil&auml; also supplies Torrens Island, Capital Battery, and multiple SA projects via the GEMS digital energy platform.
+                    </p>
+                    <p>
+                      <span className="text-[var(--color-text)] font-medium">Key advantages:</span> String inverters deliver <span className="text-[var(--color-text)] font-medium">higher availability</span> (individual string faults don&apos;t take down the container),
+                      simplified maintenance (replace a string inverter board, not a 4 MW central unit), and easier future augmentation. GEMS platform provides advanced optimisation and grid services.
+                      Liquid cooling enables sustained high-cycle operation.
+                    </p>
+                    <p>
+                      <span className="text-[var(--color-text)] font-medium">Cost impact:</span> ~40% more energy per footprint vs previous Quantum generation = fewer containers, foundations, and cabling per MWh.
+                      String inverters reduce single-point-of-failure risk, lowering long-term O&amp;M costs. Projects could target <span className="text-[#10b981] font-mono font-medium">$0.38-0.42M/MWh</span> for 4hr+ systems.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Fluence Gridstack Pro + SmartStack */}
+              <div className="grid md:grid-cols-2 gap-3 mt-3">
                 <div className="rounded-lg p-3" style={{ background: '#3498db10', border: '1px solid #3498db30' }}>
                   <div className="flex items-center gap-2 mb-2">
                     <span className="w-2.5 h-2.5 rounded-full" style={{ background: '#3498db' }} />
@@ -1129,9 +1170,11 @@ export default function BESSCapex() {
                   <div className="space-y-1.5 text-xs text-[var(--color-text-muted)] leading-relaxed">
                     <p>
                       Fluence&apos;s Gridstack Pro represents a fundamental redesign: a <span className="text-[var(--color-text)] font-medium">modular, pre-engineered &ldquo;building block&rdquo;</span> architecture that reduces site installation time by up to 40%. Each block is factory-assembled and pre-tested, minimising field commissioning.
+                      Cell-agnostic design accepts multiple LFP suppliers (CATL, BYD, EVE Energy), enabling competitive procurement.
                     </p>
                     <p>
-                      <span className="text-[var(--color-text)] font-medium">Key advantages:</span> Dramatically lower EPC/BoP costs through standardisation. Cell-agnostic design accepts multiple LFP suppliers (CATL, BYD, EVE Energy), enabling competitive procurement. Integrated Fluence IQ software platform for bidding optimisation.
+                      <span className="text-[var(--color-text)] font-medium">Key advantages:</span> Dramatically lower EPC/BoP costs through standardisation. Integrated Fluence IQ software platform for bidding optimisation.
+                      DC-coupled architecture with centralised inverters &mdash; a more traditional PCS approach that benefits from mature, proven power electronics.
                     </p>
                     <p>
                       <span className="text-[var(--color-text)] font-medium">Cost impact:</span> Tomago&apos;s <span className="text-[#10b981] font-mono font-medium">{keyInsights?.tomago?.capex_per_mwh ? `$${keyInsights.tomago.capex_per_mwh.toFixed(2)}M/MWh` : '~$0.36M/MWh'}</span> is the proof point. As Gridstack Pro scales across more sites, further 5-10% reductions are plausible through supply chain maturation and repeat EPC contracting.
@@ -1139,23 +1182,67 @@ export default function BESSCapex() {
                   </div>
                 </div>
 
-                {/* Wärtsilä Quantum 3 */}
-                <div className="rounded-lg p-3" style={{ background: '#2ecc7110', border: '1px solid #2ecc7130' }}>
+                {/* Fluence SmartStack */}
+                <div className="rounded-lg p-3" style={{ background: '#9b59b610', border: '1px solid #9b59b630' }}>
                   <div className="flex items-center gap-2 mb-2">
-                    <span className="w-2.5 h-2.5 rounded-full" style={{ background: '#2ecc71' }} />
-                    <span className="text-sm font-bold text-[var(--color-text)]">W&auml;rtsil&auml; Quantum HD</span>
+                    <span className="w-2.5 h-2.5 rounded-full" style={{ background: '#9b59b6' }} />
+                    <span className="text-sm font-bold text-[var(--color-text)]">Fluence SmartStack</span>
                   </div>
-                  <div className="text-xs font-medium text-[#2ecc71] mb-1">Quantum HD platform launched 2024</div>
+                  <div className="text-xs font-medium text-[#9b59b6] mb-1">Announced 2025 &mdash; patent-pending integrated AC block</div>
                   <div className="space-y-1.5 text-xs text-[var(--color-text-muted)] leading-relaxed">
                     <p>
-                      W&auml;rtsil&auml;&apos;s Quantum HD (High Density) platform delivers <span className="text-[var(--color-text)] font-medium">~40% more energy in the same footprint</span> vs previous Quantum generation, using advanced LFP cell packs with higher gravimetric and volumetric density.
+                      Fluence&apos;s newest platform takes the opposite approach to Gridstack Pro: a fully integrated <span className="text-[var(--color-text)] font-medium">AC block</span> with
+                      <span className="text-[var(--color-text)] font-medium">7.5 MWh per unit</span> and integrated power conversion system (PCS) built directly into each container.
+                      This patent-pending architecture delivers <span className="text-[var(--color-text)] font-medium">~30% higher energy density</span> than Gridstack Pro by eliminating external inverter skids and associated cabling.
                     </p>
                     <p>
-                      <span className="text-[var(--color-text)] font-medium">Key advantages:</span> GEMS digital energy platform provides advanced optimisation and grid services. W&auml;rtsil&auml;&apos;s strong NEM track record (Torrens Island, Capital Battery, multiple SA projects). Containerised modular design with liquid cooling for high-cycle applications.
+                      <span className="text-[var(--color-text)] font-medium">Key advantages:</span> Highest energy density per footprint of any announced Fluence product.
+                      Integrated PCS within each unit means each SmartStack is a self-contained AC generation asset &mdash; similar in philosophy to Tesla&apos;s Megapack and W&auml;rtsil&auml;&apos;s Quantum3.
+                      Factory pre-tested as a complete AC system, reducing commissioning time. Retains Fluence IQ software platform.
                     </p>
                     <p>
-                      <span className="text-[var(--color-text)] font-medium">Cost impact:</span> Higher density = fewer containers, foundations, and cabling per MWh. Combined with GEMS software optimisation, W&auml;rtsil&auml; projects could target <span className="text-[#10b981] font-mono font-medium">$0.38-0.42M/MWh</span> for 4hr+ systems, depending on site and procurement timing.
+                      <span className="text-[var(--color-text)] font-medium">Cost impact:</span> Fewer units per site and elimination of separate inverter infrastructure could push costs <span className="text-[#10b981] font-mono font-medium">10-15% below Gridstack Pro</span>.
+                      If deployed at Tomago-scale sites, sub-$0.35M/MWh becomes theoretically achievable. No confirmed NEM deployments yet.
                     </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* String Inverters vs Centralised PCS */}
+              <div className="mt-4">
+                <div className="flex items-center gap-2 mb-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-purple-400" />
+                  <span className="text-[var(--color-text)] font-semibold">Power Conversion Architecture: String Inverters vs Centralised PCS</span>
+                </div>
+                <p className="text-[var(--color-text-muted)] leading-relaxed mb-3">
+                  A fundamental design divergence is emerging across BESS OEMs: <span className="text-[var(--color-text)] font-medium">distributed string inverters</span> (W&auml;rtsil&auml; Quantum3)
+                  vs <span className="text-[var(--color-text)] font-medium">per-unit integrated inverters</span> (Tesla Megapack with SiC) vs <span className="text-[var(--color-text)] font-medium">centralised PCS</span> (traditional Fluence Gridstack).
+                  This choice has significant implications for availability, maintenance costs, and long-term project economics.
+                </p>
+                <div className="grid md:grid-cols-2 gap-3">
+                  <div className="rounded-lg p-3" style={{ background: '#8b5cf610', border: '1px solid #8b5cf630' }}>
+                    <div className="text-xs font-bold text-[#8b5cf6] mb-2">String / Distributed Inverter Advantages</div>
+                    <ul className="text-xs text-[var(--color-text-muted)] space-y-1.5 list-disc list-inside">
+                      <li><span className="text-[var(--color-text)]">Higher availability:</span> If one string inverter faults, only that string&apos;s capacity (~100-500 kW) is lost &mdash; the rest of the container continues operating. A centralised 4 MW inverter failure takes the entire block offline.</li>
+                      <li><span className="text-[var(--color-text)]">Fault isolation:</span> Electrical faults are contained within the affected string. Arc flash risk is lower as each string operates at lower current. No single point of failure in the power conversion path.</li>
+                      <li><span className="text-[var(--color-text)]">Granular MPPT-like control:</span> Each string can be independently controlled, enabling cell-level optimisation across battery racks with slightly different degradation states &mdash; improving round-trip efficiency over the asset&apos;s life.</li>
+                      <li><span className="text-[var(--color-text)]">Simpler maintenance:</span> A failed string inverter board can be swapped in minutes by a single technician. Centralised inverters require crane lifts, specialist contractors, and longer outages.</li>
+                      <li><span className="text-[var(--color-text)]">Easier augmentation:</span> New battery racks can be added with their own string inverters without upgrading the central PCS, enabling capacity additions that match degradation curves.</li>
+                      <li><span className="text-[var(--color-text)]">Safety:</span> Lower fault current per string reduces arc flash hazard during maintenance, enabling simpler PPE requirements and faster turnaround.</li>
+                    </ul>
+                  </div>
+                  <div className="rounded-lg p-3" style={{ background: '#64748b10', border: '1px solid #64748b30' }}>
+                    <div className="text-xs font-bold text-[#64748b] mb-2">Centralised PCS Advantages</div>
+                    <ul className="text-xs text-[var(--color-text-muted)] space-y-1.5 list-disc list-inside">
+                      <li><span className="text-[var(--color-text)]">Proven at scale:</span> Centralised inverters (SMA, Power Electronics, Sungrow) have decades of grid-scale deployment history with well-understood failure modes.</li>
+                      <li><span className="text-[var(--color-text)]">Lower initial cost:</span> A single 4 MW central inverter is typically cheaper per MW than the equivalent capacity in distributed string inverters, though the gap is narrowing.</li>
+                      <li><span className="text-[var(--color-text)]">Grid compliance:</span> Centralised inverters can more easily coordinate grid-forming behaviour at the point of connection, though string architectures are solving this via intelligent aggregation.</li>
+                      <li><span className="text-[var(--color-text)]">Supply chain:</span> Broader supplier base for centralised inverters. String inverter supply for grid-scale BESS is currently limited to a few OEMs&apos; proprietary designs.</li>
+                    </ul>
+                    <div className="mt-3 p-2 rounded bg-[var(--color-bg)] text-xs text-[var(--color-text-muted)]">
+                      <span className="text-[var(--color-text)] font-medium">Industry trend:</span> The shift toward distributed/string architectures mirrors the solar industry&apos;s evolution from central inverters to string inverters over the past decade.
+                      As BESS projects grow to 500+ MW, the availability and maintenance advantages of distributed architectures become increasingly compelling for long-term asset economics.
+                    </div>
                   </div>
                 </div>
               </div>

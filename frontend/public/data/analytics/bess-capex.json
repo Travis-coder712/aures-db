@@ -493,8 +493,8 @@
       ]
     },
     {
-      "id": "eraring-battery",
-      "name": "Eraring Battery",
+      "id": "eraring-big-battery",
+      "name": "Eraring Big Battery",
       "status": "operating",
       "capacity_mw": 700.0,
       "storage_mwh": 3160.0,
@@ -505,7 +505,7 @@
       "state": "NSW",
       "current_developer": "Origin Energy",
       "bess_oem": "Wartsila",
-      "bess_model": "GridSolv Quantum",
+      "bess_model": "Quantum / Quantum3",
       "capex_scope_note": "Total capex across all 4 stages",
       "capex_per_mw": 2.07,
       "capex_per_mwh": 0.46,
