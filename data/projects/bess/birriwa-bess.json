@@ -4,7 +4,7 @@
   "technology": "bess",
   "status": "development",
   "capacity_mw": 600.0,
-  "storage_mwh": 600.0,
+  "storage_mwh": 1200.0,
   "state": "NSW",
   "current_developer": "ACEN RENEWABLES",
   "grid_forming": false,
@@ -13,8 +13,8 @@
   "has_statcom": false,
   "has_harmonic_filter": false,
   "data_confidence": "low",
-  "last_updated": "2026-03-10",
-  "last_verified": "2026-03-10",
+  "last_updated": "2026-04-16",
+  "last_verified": "2026-04-16",
   "aemo_gen_info_id": "3031",
   "timeline": [],
   "ownership_history": [],
@@ -31,5 +31,6 @@
       "date": "2026-01-30",
       "source_tier": 1
     }
-  ]
+  ],
+  "duration_hours": 2.0
 }

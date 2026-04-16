@@ -2,22 +2,30 @@
   "id": "brendale-bess",
   "name": "Brendale BESS",
   "technology": "bess",
-  "status": "construction",
+  "status": "operating",
   "capacity_mw": 205.0,
   "storage_mwh": 409.92,
   "state": "QLD",
-  "current_developer": "Brendale Battery ProjectCo Pty Lt",
+  "current_developer": "Supernode (Quinbrook)",
   "cod_current": "2026-06",
   "grid_forming": false,
   "has_sips": false,
   "has_syncon": false,
   "has_statcom": false,
   "has_harmonic_filter": false,
-  "data_confidence": "low",
-  "last_updated": "2026-03-10",
-  "last_verified": "2026-03-10",
+  "data_confidence": "medium",
+  "last_updated": "2026-04-16",
+  "last_verified": "2026-04-16",
   "aemo_gen_info_id": "2526",
-  "timeline": [],
+  "timeline": [
+    {
+      "date": "2025-06",
+      "date_precision": "month",
+      "event_type": "cod",
+      "title": "Stage 1 achieves commercial operations",
+      "detail": "Supernode/Quinbrook: Brendale BESS Stage 1 achieved commercial operations mid-2025."
+    }
+  ],
   "ownership_history": [],
   "cod_history": [],
   "suppliers": [],
@@ -32,5 +40,6 @@
       "date": "2026-01-30",
       "source_tier": 1
     }
-  ]
+  ],
+  "current_owner": "Quinbrook Infrastructure Partners"
 }

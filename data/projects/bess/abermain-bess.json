@@ -6,7 +6,7 @@
   "capacity_mw": 125.0,
   "storage_mwh": 254.1,
   "state": "QLD",
-  "current_developer": "FIrm Power P/L",
+  "current_developer": "AGL Energy (via Firm Power)",
   "cod_current": "2029-12",
   "grid_forming": false,
   "has_sips": false,
@@ -14,11 +14,17 @@
   "has_statcom": false,
   "has_harmonic_filter": false,
   "data_confidence": "low",
-  "last_updated": "2026-03-10",
-  "last_verified": "2026-03-10",
+  "last_updated": "2026-04-16",
+  "last_verified": "2026-04-16",
   "aemo_gen_info_id": "2489",
   "timeline": [],
-  "ownership_history": [],
+  "ownership_history": [
+    {
+      "date": "2024-08",
+      "owner": "AGL Energy",
+      "event": "AGL acquired Firm Power for ~$250M (incl. Terrain Solar). All Firm Power BESS projects now under AGL."
+    }
+  ],
   "cod_history": [],
   "suppliers": [],
   "offtakes": [],
@@ -32,5 +38,6 @@
       "date": "2026-01-30",
       "source_tier": 1
     }
-  ]
+  ],
+  "current_owner": "AGL Energy"
 }

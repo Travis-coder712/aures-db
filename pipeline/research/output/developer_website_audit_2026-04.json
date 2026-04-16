@@ -1,0 +1,1246 @@
+{
+  "audit_date": "2026-04-16",
+  "description": "Developer website deep dive — cross-referencing AURES BESS data against official developer websites, media reports, and project announcements",
+  "methodology": "Checked official project pages for 37+ developers. Compared status, capacity, developer attribution, and staging against AURES database. Source hierarchy: developer announcements > media > AEMO Gen Info.",
+  "summary": {
+    "developers_audited": 42,
+    "critical_status_errors": 12,
+    "capacity_errors": 12,
+    "developer_attribution_errors": 14,
+    "missing_projects": 31,
+    "potential_zombie_projects": 1,
+    "ownership_changes": 6,
+    "staged_project_consolidations_needed": 12,
+    "user_corrections_applied": [
+      "AGL acquired Firm Power Aug 2024 — all Firm Power projects are AGL projects",
+      "Madeline Downs BESS and Tuckeroo Battery are separate projects (not duplicates)",
+      "Tuckeroo BESS storage_mwh corrected from 500 to 2000"
+    ]
+  },
+
+  "status_corrections": [
+    {
+      "project_id": "tomago-bess",
+      "current_status": "development",
+      "correct_status": "construction",
+      "evidence": "AGL took FID Jul 2025, construction commenced late 2025. $800M, Fluence supply. Target COD late 2027.",
+      "source": "agl.com.au FID announcement Jul 2025",
+      "source_tier": 1,
+      "priority": "critical"
+    },
+    {
+      "project_id": "eraring-battery",
+      "current_status": "construction",
+      "correct_status": "operating",
+      "evidence": "Origin Energy: Eraring Battery 1 (Stages 1-3, 460 MW / 1,770 MWh) achieved commercial operations Dec 2025.",
+      "source": "originenergy.com.au investor announcement",
+      "source_tier": 1,
+      "priority": "critical",
+      "notes": "Stage 4 (240 MW) is still under construction, target Q1 2027. Consider splitting into 460 MW operating + 240 MW construction."
+    },
+    {
+      "project_id": "eraring-big-battery",
+      "current_status": "operating",
+      "correct_status": "construction",
+      "evidence": "Only 460 MW (Stages 1-3) is operating. The 700 MW total includes Stage 4 which is under construction for Q1 2027.",
+      "source": "originenergy.com.au",
+      "source_tier": 1,
+      "priority": "critical",
+      "notes": "This is a duplicate/staging issue. eraring-battery (460MW) and eraring-big-battery (700MW) may need to be consolidated as a single staged project."
+    },
+    {
+      "project_id": "tarong-bess-stanwell",
+      "current_status": "construction",
+      "correct_status": "operating",
+      "evidence": "Stanwell: Tarong BESS (300 MW / 600 MWh) commenced commercial operations early 2026.",
+      "source": "energy-storage.news, Stanwell announcement",
+      "source_tier": 2,
+      "priority": "critical"
+    },
+    {
+      "project_id": "western-downs-battery-stage-1-and-2",
+      "current_status": "commissioning",
+      "correct_status": "operating",
+      "evidence": "Neoen: Western Downs Battery Stages 1+2 (540 MW / 1,080 MWh) fully operational. Stage 3 (305 MW / 1,220 MWh) under construction for summer 2027/28.",
+      "source": "neoen.com press release",
+      "source_tier": 1,
+      "priority": "critical"
+    },
+    {
+      "project_id": "liddell-bess",
+      "current_status": "construction",
+      "correct_status": "commissioning",
+      "evidence": "AGL: First 250 MW tranche commissioning started Mar 2026, full operations targeted Jun 2026.",
+      "source": "agl.com.au/about-agl/operations/liddell-battery",
+      "source_tier": 1,
+      "priority": "high"
+    },
+    {
+      "project_id": "clements-gap-bess",
+      "current_status": "construction",
+      "correct_status": "commissioning",
+      "evidence": "Pacific Blue (formerly Pacific Hydro): First energisation Dec 2025.",
+      "source": "pacifichydro.com.au",
+      "source_tier": 1,
+      "priority": "high"
+    },
+    {
+      "project_id": "limondale-bess",
+      "current_status": "construction",
+      "correct_status": "commissioning",
+      "evidence": "RWE: AEMO registered Sep 2025, COD early 2026.",
+      "source": "RWE website, AEMO registration",
+      "source_tier": 1,
+      "priority": "high"
+    },
+    {
+      "project_id": "new-england-solar-farm-bess",
+      "current_status": "construction",
+      "correct_status": "commissioning",
+      "evidence": "ACEN: Phase 1 (50 MW) registered with AEMO Feb 2026. Phase 2 (150 MW) under construction.",
+      "source": "pv-magazine-australia.com",
+      "source_tier": 2,
+      "priority": "high"
+    },
+    {
+      "project_id": "collie-battery",
+      "current_status": "development",
+      "correct_status": "operating",
+      "evidence": "Neoen: Both Stage 1 (219 MW) and Stage 2 (341 MW) operational. Total 560 MW / 2,240 MWh. Synergy is offtaker, not developer.",
+      "source": "neoen.com press release Jul 2025",
+      "source_tier": 1,
+      "priority": "critical",
+      "notes": "WA project (outside NEM), but developer attribution is also wrong — should be Neoen not Synergy."
+    },
+    {
+      "project_id": "stanwell-bess",
+      "current_status": "development",
+      "correct_status": "construction",
+      "evidence": "Stanwell: Halfway mark reached, 324 Tesla Megapacks delivered. Target mid-2027.",
+      "source": "energy-storage.news, Stanwell announcement",
+      "source_tier": 2,
+      "priority": "critical",
+      "notes": "300 MW / 1,200 MWh. COD has slipped from 2026-12 to mid-2027."
+    },
+    {
+      "project_id": "coleambally-bess",
+      "current_status": "development",
+      "correct_status": "development",
+      "evidence": "Sold to Octopus Australia Oct 2025. Developer name needs update.",
+      "source": "Risen Energy website",
+      "source_tier": 2,
+      "priority": "medium"
+    },
+    {
+      "project_id": "brendale-bess",
+      "current_status": "construction",
+      "correct_status": "operating",
+      "evidence": "Supernode/Quinbrook: Brendale BESS (100 MW Stage 1) achieved commercial operations mid-2025.",
+      "source": "energy-storage.news, Quinbrook investor updates",
+      "source_tier": 2,
+      "priority": "high"
+    }
+  ],
+
+  "capacity_corrections": [
+    {
+      "project_id": "hornsdale-power-reserve",
+      "field": "capacity_mw",
+      "current_value": 194,
+      "correct_value": 150,
+      "evidence": "Hornsdale is 150 MW / 194 MWh. The MW and MWh values appear to have been conflated in AURES.",
+      "source": "Neoen, AEMO",
+      "priority": "critical"
+    },
+    {
+      "project_id": "western-downs-battery-stage-1-and-2",
+      "field": "storage_mwh",
+      "current_value": 509.6,
+      "correct_value": 1080,
+      "evidence": "Neoen: 2 x 270 MW / 540 MWh = 540 MW / 1,080 MWh total for Stages 1+2.",
+      "source": "neoen.com",
+      "priority": "critical"
+    },
+    {
+      "project_id": "western-downs-battery-stage-1-and-2",
+      "field": "capacity_mw",
+      "current_value": 510,
+      "correct_value": 540,
+      "evidence": "2 x 270 MW = 540 MW",
+      "source": "neoen.com",
+      "priority": "high"
+    },
+    {
+      "project_id": "new-england-solar-farm-bess",
+      "field": "storage_mwh",
+      "current_value": 200,
+      "correct_value": 400,
+      "evidence": "ACEN: 200 MW / 400 MWh (2-hour duration), not 200 MWh.",
+      "source": "pv-magazine-australia.com",
+      "priority": "critical"
+    },
+    {
+      "project_id": "birriwa-bess",
+      "field": "storage_mwh",
+      "current_value": 600,
+      "correct_value": 1200,
+      "evidence": "ACEN: 600 MW / 1,200 MWh (2-hour duration).",
+      "source": "energy-storage.news",
+      "priority": "critical"
+    },
+    {
+      "project_id": "latrobe-valley-bess",
+      "field": "capacity_mw",
+      "current_value": 200,
+      "correct_value": 100,
+      "evidence": "Tilt Renewables: Stage 1 is 100 MW / 200 MWh. The 200 value is MWh not MW.",
+      "source": "invest.vic.gov.au, Tilt Renewables",
+      "priority": "critical"
+    },
+    {
+      "project_id": "woodland-bess",
+      "field": "capacity_mw",
+      "current_value": 250,
+      "correct_value": 300,
+      "evidence": "Risen Energy website shows 300 MW / 1,200 MWh.",
+      "source": "risenenergy.com.au",
+      "priority": "medium"
+    },
+    {
+      "project_id": "gould-creek-bess",
+      "field": "capacity_mw",
+      "current_value": 215,
+      "correct_value": 225,
+      "evidence": "Maoneng website shows 225 MW / 450 MWh.",
+      "source": "maoneng.co",
+      "priority": "low"
+    },
+    {
+      "project_id": "winton-energy-reserve-1",
+      "field": "capacity_mw",
+      "current_value": 400,
+      "correct_value": 200,
+      "evidence": "Lochard Energy: BESS component is 200 MW / 400 MWh. The 400 MW may reflect combined BESS + gas facility.",
+      "source": "lochardenergy.com.au",
+      "priority": "high"
+    },
+    {
+      "project_id": "kidston-hybrid-bess",
+      "field": "capacity_mw",
+      "current_value": 200,
+      "correct_value": 150,
+      "evidence": "Genex/J-POWER: Reconfigured to 120 MW wind + 150 MW / 600 MWh BESS hybrid.",
+      "source": "energy-storage.news",
+      "priority": "medium"
+    },
+    {
+      "project_id": "culcairn-bess",
+      "field": "storage_mwh",
+      "current_value": 800,
+      "correct_value": 904,
+      "evidence": "Neoen: Approved expansion to 904 MWh due to higher density units.",
+      "source": "neoen.com",
+      "priority": "low"
+    },
+    {
+      "project_id": "tuckeroo-bess-kci",
+      "field": "storage_mwh",
+      "current_value": 500,
+      "correct_value": 2000,
+      "evidence": "AGL: Tuckeroo Battery is 500 MW / 2,000 MWh (4-hour duration). AEMO has 500 MWh which is incorrect. EPBC referral and AGL project page both confirm 2,000 MWh.",
+      "source": "agl.com.au/about-agl/operations/queensland-battery, energy-storage.news",
+      "source_tier": 1,
+      "priority": "critical"
+    }
+  ],
+
+  "developer_attribution_corrections": [
+    {
+      "project_id": "koorangie-energy-storage-system",
+      "current_developer": "Shell Energy",
+      "correct_developer": "Edify Energy",
+      "notes": "Shell Energy is the offtaker (15-year agreement). Edify is the developer/owner. AEMO may list Shell as the registered participant.",
+      "source": "energy-storage.news, Edify Energy website",
+      "priority": "high"
+    },
+    {
+      "project_id": "collie-battery",
+      "current_developer": "Synergy",
+      "correct_developer": "Neoen",
+      "notes": "Synergy is the offtaker/contractor, not the developer. Neoen developed and owns both stages.",
+      "source": "neoen.com",
+      "priority": "high"
+    },
+    {
+      "project_id": "riverina-energy-storage-system-2",
+      "current_developer": "Shell New Energies / RESS 2 Pty Ltd",
+      "correct_developer": "Edify Energy (asset owner), EnergyAustralia (operational rights/offtake)",
+      "notes": "RESS 2 operational rights belong to EnergyAustralia, not Shell. Shell has RESS 1.",
+      "source": "EnergyAustralia website",
+      "priority": "medium"
+    },
+    {
+      "project_id": "victorian-big-battery",
+      "current_developer": "Neoen",
+      "correct_developer": "HMC Capital",
+      "notes": "Sold Aug 2025 as part of Brookfield/Neoen ACCC divestiture. AUD $950M deal for Neoen's entire Victorian portfolio.",
+      "source": "energy-storage.news, ASX announcement",
+      "priority": "high"
+    },
+    {
+      "project_id": "coleambally-bess",
+      "current_developer": "Coleambally BESS Trust (Risen)",
+      "correct_developer": "Octopus Australia",
+      "notes": "Risen sold to Octopus Australia Oct 2025.",
+      "source": "Risen Energy website",
+      "priority": "medium"
+    },
+    {
+      "project_id": "bungama-bess",
+      "current_developer": "Bungama Bess Trust",
+      "correct_developer": "Risen Energy (parent), via Bungama Bess Trust SPV",
+      "notes": "SPV trust name obscures the actual developer. Many AEMO entries use SPV names.",
+      "priority": "low"
+    },
+    {
+      "project_id": "mornington-bess",
+      "current_developer": "Mornington BESS Project Pty Ltd as Trustee",
+      "correct_developer": "Maoneng (parent), via SPV trust",
+      "notes": "SPV trust name obscures the actual developer.",
+      "priority": "low"
+    },
+    {
+      "project_id": "gould-creek-bess",
+      "current_developer": "Gould Creek BESS Project Pty Ltd",
+      "correct_developer": "Maoneng (parent), via SPV trust",
+      "notes": "SPV trust name obscures the actual developer.",
+      "priority": "low"
+    },
+    {
+      "project_id": "blackstone-bess",
+      "current_developer": "FIrm Power P/L",
+      "correct_developer": "AGL Energy (via Firm Power subsidiary)",
+      "notes": "AGL acquired Firm Power Aug 2024 for ~$250M (incl. Terrain Solar). All Firm Power projects now sit under AGL. Blackstone has JV with Octopus Australia.",
+      "source": "energy-storage.news Aug 2024, AGL announcement",
+      "priority": "high"
+    },
+    {
+      "project_id": "blackstone-bess-2-kci",
+      "current_developer": "FIrm Power P/L",
+      "correct_developer": "AGL Energy (via Firm Power subsidiary)",
+      "notes": "AGL acquired Firm Power Aug 2024. Stage 2 of Blackstone BESS.",
+      "source": "energy-storage.news Aug 2024",
+      "priority": "high"
+    },
+    {
+      "project_id": "abermain-bess",
+      "current_developer": "FIrm Power P/L",
+      "correct_developer": "AGL Energy (via Firm Power subsidiary)",
+      "notes": "AGL acquired Firm Power Aug 2024. Abermain BESS in Ipswich QLD. DA approved Nov 2023.",
+      "source": "energy-storage.news Aug 2024",
+      "priority": "high"
+    },
+    {
+      "project_id": "kangaroo-valley-bess",
+      "current_developer": "FIrm Power P/L",
+      "correct_developer": "AGL Energy (via Firm Power subsidiary)",
+      "notes": "AGL acquired Firm Power Aug 2024.",
+      "source": "energy-storage.news Aug 2024",
+      "priority": "high"
+    },
+    {
+      "project_id": "glen-inness-bess-kci",
+      "current_developer": "FIrm Power P/L",
+      "correct_developer": "AGL Energy (via Firm Power subsidiary)",
+      "notes": "AGL acquired Firm Power Aug 2024.",
+      "source": "energy-storage.news Aug 2024",
+      "priority": "high"
+    },
+    {
+      "project_id": "murrumburrah-bess-kci",
+      "current_developer": "FIrm Power P/L",
+      "correct_developer": "AGL Energy (via Firm Power subsidiary)",
+      "notes": "AGL acquired Firm Power Aug 2024.",
+      "source": "energy-storage.news Aug 2024",
+      "priority": "high"
+    },
+    {
+      "project_id": "mount-britton-bess1",
+      "current_developer": "FIrm Power P/L",
+      "correct_developer": "AGL Energy (via Firm Power subsidiary)",
+      "notes": "AGL acquired Firm Power Aug 2024. Early stage development per Firm Power website.",
+      "source": "energy-storage.news Aug 2024, firmpower.com.au",
+      "priority": "high"
+    },
+    {
+      "project_id": "mount-britton-bess2",
+      "current_developer": "FIrm Power P/L",
+      "correct_developer": "AGL Energy (via Firm Power subsidiary)",
+      "notes": "AGL acquired Firm Power Aug 2024. Stage 2 of Mount Britton.",
+      "source": "energy-storage.news Aug 2024",
+      "priority": "high"
+    },
+    {
+      "project_id": "tuckeroo-bess-kci",
+      "current_developer": "Tuckeroo BESS Pty Ltd",
+      "correct_developer": "AGL Energy (via SPV)",
+      "notes": "Tuckeroo BESS Pty Ltd is an AGL SPV. Located Hopeland QLD, 140km NW of Toowoomba. DA approved Mar 2025 by Western Downs Regional Council. EPBC referral submitted. COD target H2 2027. Connects to Western Downs Substation via 275kV underground lines. Separate project from Madeline Downs BESS.",
+      "source": "agl.com.au/about-agl/operations/queensland-battery",
+      "priority": "high"
+    }
+  ],
+
+  "ownership_changes": [
+    {
+      "project_id": "victorian-big-battery",
+      "previous_owner": "Neoen",
+      "new_owner": "HMC Capital",
+      "date": "2025-08",
+      "deal_value_aud_m": 950,
+      "notes": "Part of Brookfield/Neoen ACCC-mandated divestiture of entire Victorian portfolio. Includes VBB + Moorabool BESS development."
+    },
+    {
+      "entity": "Genex Power",
+      "previous_owner": "ASX-listed independent",
+      "new_owner": "J-POWER (Electric Power Development Co., Japan)",
+      "date": "2024-08",
+      "notes": "100% acquisition. Affects Bouldercombe, Bulli Creek, Kidston BESS projects."
+    },
+    {
+      "entity": "Edify Energy",
+      "previous_owner": "Independent",
+      "new_owner": "La Caisse / CDPQ (Canadian pension fund)",
+      "date": "2025",
+      "notes": "Full acquisition. Affects Koorangie, Darlington Point, Burroway, Nowingi, Smoky Creek, Guthrie's Gap projects."
+    },
+    {
+      "entity": "Neoen (global)",
+      "previous_owner": "ASX-listed independent",
+      "new_owner": "Brookfield",
+      "date": "2025",
+      "notes": "Global acquisition. Victorian assets divested to HMC Capital per ACCC. Rest of Australian portfolio (Hornsdale, Western Downs, Culcairn, Great Western) remains under Neoen/Brookfield."
+    },
+    {
+      "project_id": "coleambally-bess",
+      "previous_owner": "Risen Energy",
+      "new_owner": "Octopus Australia",
+      "date": "2025-10",
+      "notes": "100 MW / 400 MWh BESS sold."
+    },
+    {
+      "entity": "Firm Power",
+      "previous_owner": "Independent (Firm Power Pty Ltd)",
+      "new_owner": "AGL Energy",
+      "date": "2024-08",
+      "deal_value_aud_m": 250,
+      "notes": "AGL acquired Firm Power and Terrain Solar for ~$250M combined. Added 6.1 GW / 21 BESS projects to AGL's pipeline (2.7 GW QLD, 2.3 GW NSW, 500 MW WA, 300 MW VIC/SA). Firm Power continues to operate as AGL subsidiary. Affects: Blackstone, Blackstone 2, Abermain, Kangaroo Valley, Glen Innes, Murrumburrah, Mount Britton (×2), Aramara, Awaba, Bathurst, Beermullah, Beresfield, Kondinin, Monash, Muswellbrook, Western Sydney Smart Battery, and others."
+    }
+  ],
+
+  "missing_projects": [
+    {
+      "name": "Western Downs Battery Stage 3",
+      "developer": "Neoen",
+      "capacity_mw": 305,
+      "storage_mwh": 1220,
+      "state": "QLD",
+      "status": "construction",
+      "notes": "Target summer 2027/28. Part of staged Western Downs development.",
+      "source": "neoen.com"
+    },
+    {
+      "name": "Muchea Battery",
+      "developer": "Neoen",
+      "capacity_mw": 164,
+      "storage_mwh": 905,
+      "state": "WA",
+      "status": "construction",
+      "notes": "WA project, outside NEM.",
+      "source": "neoen.com"
+    },
+    {
+      "name": "Darlington Point ESS",
+      "developer": "Edify Energy",
+      "capacity_mw": 150,
+      "storage_mwh": 300,
+      "state": "NSW",
+      "status": "operating",
+      "notes": "Operational since Sep 2023. EnergyAustralia has offtake.",
+      "source": "Edify Energy, EnergyAustralia"
+    },
+    {
+      "name": "Hallett BESS Stage 1",
+      "developer": "EnergyAustralia",
+      "capacity_mw": 50,
+      "storage_mwh": 245,
+      "state": "SA",
+      "status": "construction",
+      "notes": "Financial close Feb 2026. Approved for expansion to 200 MW.",
+      "source": "energyaustralia.com.au"
+    },
+    {
+      "name": "Mt Piper BESS",
+      "developer": "EnergyAustralia",
+      "capacity_mw": 250,
+      "storage_mwh": 1000,
+      "state": "NSW",
+      "status": "development",
+      "notes": "DA approved Nov 2024 for up to 500 MW / 2,000 MWh. Stage 1 is 250 MW. FID expected late 2026.",
+      "source": "energyaustralia.com.au"
+    },
+    {
+      "name": "Smoky Creek BESS",
+      "developer": "Edify Energy",
+      "capacity_mw": 300,
+      "storage_mwh": 1200,
+      "state": "QLD",
+      "status": "development",
+      "source": "Edify Energy"
+    },
+    {
+      "name": "Guthrie's Gap BESS",
+      "developer": "Edify Energy",
+      "capacity_mw": 300,
+      "storage_mwh": 1200,
+      "state": "QLD",
+      "status": "development",
+      "source": "Edify Energy"
+    },
+    {
+      "name": "Merriwa Energy Hub BESS",
+      "developer": "Maoneng",
+      "capacity_mw": 400,
+      "storage_mwh": 1600,
+      "state": "NSW",
+      "status": "development",
+      "source": "maoneng.co"
+    },
+    {
+      "name": "Tamworth BESS",
+      "developer": "Maoneng",
+      "capacity_mw": 200,
+      "storage_mwh": 400,
+      "state": "NSW",
+      "status": "development",
+      "source": "maoneng.co",
+      "notes": "May overlap with AURES tamworth-bess-project-1-pty-ltd (100 MW). Needs verification."
+    },
+    {
+      "name": "Armidale BESS (Maoneng)",
+      "developer": "Maoneng",
+      "capacity_mw": 150,
+      "storage_mwh": 300,
+      "state": "NSW",
+      "status": "development",
+      "source": "maoneng.co",
+      "notes": "May overlap with AURES armidale-bess (150 MW). Needs verification."
+    },
+    {
+      "name": "Lismore BESS",
+      "developer": "Maoneng",
+      "capacity_mw": 100,
+      "storage_mwh": 200,
+      "state": "NSW",
+      "status": "development",
+      "source": "maoneng.co"
+    },
+    {
+      "name": "Wellington BESS (RWE)",
+      "developer": "RWE Renewables",
+      "capacity_mw": 100,
+      "storage_mwh": 800,
+      "state": "NSW",
+      "status": "development",
+      "notes": "8-hour LDES. Different from Orana BESS at Wellington.",
+      "source": "au.rwe.com"
+    },
+    {
+      "name": "Berrigan BESS",
+      "developer": "Syncline Energy",
+      "capacity_mw": 300,
+      "storage_mwh": 1200,
+      "state": "NSW",
+      "status": "development",
+      "source": "synclineenergy.com.au"
+    },
+    {
+      "name": "Winton North BESS",
+      "developer": "European Energy",
+      "capacity_mw": 100,
+      "storage_mwh": 200,
+      "state": "VIC",
+      "status": "development",
+      "notes": "Procurement underway, COD ~2027.",
+      "source": "au.europeanenergy.com"
+    },
+    {
+      "name": "Loy Yang Battery (AGL)",
+      "developer": "AGL Energy",
+      "capacity_mw": 200,
+      "storage_mwh": 800,
+      "state": "VIC",
+      "status": "development",
+      "notes": "Planning approval received. Distinct from Alinta's Loy Yang B BESS.",
+      "source": "agl.com.au"
+    },
+    {
+      "name": "Aramara BESS",
+      "developer": "AGL Energy (via Firm Power)",
+      "capacity_mw": 200,
+      "state": "QLD",
+      "status": "development",
+      "notes": "North Aramara QLD. Part of Firm Power portfolio acquired by AGL Aug 2024.",
+      "source": "firmpower.com.au, AGL pipeline"
+    },
+    {
+      "name": "Awaba BESS",
+      "developer": "AGL Energy (via Firm Power)",
+      "capacity_mw": 50,
+      "state": "NSW",
+      "status": "development",
+      "notes": "Lake Macquarie NSW. Part of Firm Power portfolio acquired by AGL Aug 2024.",
+      "source": "firmpower.com.au, AGL pipeline"
+    },
+    {
+      "name": "Bathurst BESS",
+      "developer": "AGL Energy (via Firm Power)",
+      "capacity_mw": 500,
+      "state": "NSW",
+      "status": "development",
+      "notes": "Part of Firm Power portfolio acquired by AGL Aug 2024.",
+      "source": "firmpower.com.au, AGL pipeline"
+    },
+    {
+      "name": "Beermullah BESS",
+      "developer": "AGL Energy (via Firm Power)",
+      "capacity_mw": 300,
+      "state": "WA",
+      "status": "development",
+      "notes": "WA project (outside NEM). Part of Firm Power portfolio acquired by AGL Aug 2024.",
+      "source": "firmpower.com.au, AGL pipeline"
+    },
+    {
+      "name": "Beresfield BESS",
+      "developer": "AGL Energy (via Firm Power)",
+      "state": "NSW",
+      "status": "development",
+      "notes": "Part of Firm Power portfolio acquired by AGL Aug 2024.",
+      "source": "firmpower.com.au"
+    },
+    {
+      "name": "Kondinin BESS",
+      "developer": "AGL Energy (via Firm Power)",
+      "capacity_mw": 50,
+      "state": "WA",
+      "status": "development",
+      "notes": "WA project (outside NEM). Part of Firm Power portfolio acquired by AGL Aug 2024.",
+      "source": "firmpower.com.au, AGL pipeline"
+    },
+    {
+      "name": "Monash Energy Park BESS",
+      "developer": "AGL Energy (via Firm Power)",
+      "capacity_mw": 200,
+      "state": "SA",
+      "status": "development",
+      "notes": "Part of Firm Power portfolio acquired by AGL Aug 2024.",
+      "source": "firmpower.com.au, AGL pipeline"
+    },
+    {
+      "name": "Muswellbrook BESS",
+      "developer": "AGL Energy (via Firm Power)",
+      "state": "NSW",
+      "status": "development",
+      "notes": "Part of Firm Power portfolio acquired by AGL Aug 2024.",
+      "source": "firmpower.com.au"
+    },
+    {
+      "name": "Sunstate BESS",
+      "developer": "AGL Energy (via Firm Power)",
+      "state": "QLD",
+      "status": "development",
+      "notes": "Part of Firm Power portfolio acquired by AGL Aug 2024.",
+      "source": "firmpower.com.au"
+    },
+    {
+      "name": "Nebo BESS",
+      "developer": "AGL Energy",
+      "capacity_mw": 500,
+      "state": "QLD",
+      "status": "development",
+      "notes": "Proposed AGL project listed on pipeline page.",
+      "source": "AGL pipeline projects page"
+    }
+  ],
+
+  "potential_zombie_projects": [
+    {
+      "project_id": "kurri-kurri-battery",
+      "developer": "CEP.Energy",
+      "capacity_mw": 1200,
+      "state": "NSW",
+      "current_status": "development",
+      "evidence": "Announced Feb 2021 with construction target Q1 2022, COD 2023. No public evidence of any construction progress through 2024-2026. CEP's primary business model is distributed C&I solar/storage, not utility-scale BESS. The 1,200 MW claim appears aspirational.",
+      "recommendation": "Flag as zombie/stalled. Consider downgrading data_confidence to 'unverified'."
+    }
+  ],
+
+  "staged_project_consolidations": [
+    {
+      "location": "Bremer Battery",
+      "state": "QLD",
+      "developer": "Libra Energy",
+      "projects": ["bremer-battery-1", "bremer-battery-2", "bremer-battery-3", "bremer-battery-4"],
+      "total_mw": 848,
+      "action": "Consolidate into single project with 4 stages"
+    },
+    {
+      "location": "Supernode North",
+      "state": "QLD",
+      "developer": "Supernode",
+      "projects": ["supernode-north-bess-1", "supernode-north-bess-2", "supernode-north-bess-3"],
+      "total_mw": 780,
+      "action": "Consolidate into single project with 3 stages"
+    },
+    {
+      "location": "Blackstone BESS",
+      "state": "QLD",
+      "developer": "AGL Energy (via Firm Power, acquired Aug 2024)",
+      "projects": ["blackstone-bess", "blackstone-bess-2-kci"],
+      "total_mw": 500,
+      "action": "Consolidate into single project with 2 stages. JV with Octopus Australia (1 GWh total)."
+    },
+    {
+      "location": "Bouldercombe Battery",
+      "state": "QLD",
+      "developer": "Genex Power / J-POWER",
+      "projects": ["bouldercombe-battery-project", "bouldercombe-battery-project-stage-2-kci"],
+      "total_mw": 100,
+      "action": "Consolidate into single project with 2 stages"
+    },
+    {
+      "location": "Golden Plains BESS",
+      "state": "VIC",
+      "developer": "TagEnergy",
+      "projects": ["golden-plains-bess", "golden-plains-bess-2-kci"],
+      "total_mw": 300,
+      "action": "Consolidate into single project with 2 stages"
+    },
+    {
+      "location": "Goyder BESS",
+      "state": "SA",
+      "developer": "Neoen",
+      "projects": ["goyder-bess", "goyder-bess-stage-2"],
+      "total_mw": 500,
+      "action": "Consolidate into single project with 2 stages"
+    },
+    {
+      "location": "Mount Britton BESS",
+      "state": "QLD",
+      "developer": "AGL Energy (via Firm Power, acquired Aug 2024)",
+      "projects": ["mount-britton-bess1", "mount-britton-bess2"],
+      "total_mw": 500,
+      "action": "Consolidate into single project with 2 stages"
+    },
+    {
+      "location": "Nine Mile Energy Park BESS",
+      "state": "VIC",
+      "developer": "Green Switch Energy",
+      "projects": ["nine-mile-energy-park-stage-1-bess", "nine-mile-energy-park-stage-2-bess"],
+      "total_mw": 500,
+      "action": "Consolidate into single project with 2 stages"
+    },
+    {
+      "location": "Pacific Green Energy Park",
+      "state": "SA",
+      "developer": "Pacific Green",
+      "projects": ["pacific-green-energy-park-limestone-coast-north", "pacific-green-energy-park-limestone-coast-west"],
+      "total_mw": 500,
+      "action": "Consolidate into single project with 2 stages"
+    },
+    {
+      "location": "Pleystowe BESS",
+      "state": "QLD",
+      "developer": "Pleystowe BESS",
+      "projects": ["pleystowe-bess", "pleystowe-bess-kci"],
+      "total_mw": 400,
+      "action": "Likely same project with different AEMO IDs. Consolidate."
+    },
+    {
+      "location": "Punchs Creek Hybrid",
+      "state": "QLD",
+      "developer": "EDPR Australia",
+      "projects": ["punchs-creek-hybrid-stage-2-kci", "punchs-creek-hybrid-stage-3-kci"],
+      "total_mw": 800,
+      "action": "Consolidate into single project with stages"
+    },
+    {
+      "location": "Eraring Battery",
+      "state": "NSW",
+      "developer": "Origin Energy",
+      "projects": ["eraring-battery", "eraring-big-battery"],
+      "total_mw": 700,
+      "action": "Consolidate into single 4-stage project. Stages 1-3 (460 MW) operating, Stage 4 (240 MW) construction.",
+      "priority": "critical"
+    }
+  ],
+
+  "spv_to_parent_mapping": {
+    "description": "AEMO registers projects under SPV (Special Purpose Vehicle) trust names, obscuring the actual developer. This mapping connects SPV names to parent companies.",
+    "mappings": [
+      {"spv_pattern": "Bungama Bess Trust", "parent": "Risen Energy"},
+      {"spv_pattern": "Coleambally BESS Trust", "parent": "Risen Energy (sold to Octopus Australia Oct 2025)"},
+      {"spv_pattern": "Mornington BESS Project Pty Ltd", "parent": "Maoneng"},
+      {"spv_pattern": "Gould Creek BESS Project Pty Ltd", "parent": "Maoneng"},
+      {"spv_pattern": "Woolooga BESS Fund Pty Limited", "parent": "Lightsource bp"},
+      {"spv_pattern": "LIMONDALE BATTERY PTY. LTD", "parent": "RWE Renewables"},
+      {"spv_pattern": "Hazelwood BESS Project Co", "parent": "ENGIE (via International Power)"},
+      {"spv_pattern": "Ulinda Park ProjectCo", "parent": "Akaysha Energy"},
+      {"spv_pattern": "Elaine ProjectCo", "parent": "Unknown — needs research"},
+      {"spv_pattern": "Wellington Battery ProjectCo", "parent": "Ampyr / AGL"},
+      {"spv_pattern": "WEBESS01 ProjectCo", "parent": "Unknown — needs research"},
+      {"spv_pattern": "Western Downs BESS Pty Ltd", "parent": "Neoen"},
+      {"spv_pattern": "Supernode Operations Pty Ltd", "parent": "Quinbrook Infrastructure Partners"},
+      {"spv_pattern": "TIPSCO", "parent": "AGL Energy (Torrens Island)"},
+      {"spv_pattern": "MACQGEN", "parent": "Macquarie Group"},
+      {"spv_pattern": "CSE BESS Pty Ltd", "parent": "CS Energy"},
+      {"spv_pattern": "Cranbourne BESS Project Co", "parent": "Shell Energy / Macquarie GIG (Rangebank)"},
+      {"spv_pattern": "TBSOL", "parent": "Vena Energy (Tailem Bend)"},
+      {"spv_pattern": "BORAL", "parent": "Origin Energy"},
+      {"spv_pattern": "Equis Energy (Australia) Projects", "parent": "Equis Energy (MREH, Calala)"},
+      {"spv_pattern": "CI Summerfield BESS", "parent": "Unknown — needs research"},
+      {"spv_pattern": "Halys BESS ProjectCo", "parent": "Akaysha Energy"},
+      {"spv_pattern": "frv_NR", "parent": "FRV (Fotowatio Renewable Ventures)"},
+      {"spv_pattern": "Tuckeroo BESS Pty Ltd", "parent": "AGL Energy"},
+      {"spv_pattern": "FIrm Power P/L", "parent": "AGL Energy (acquired Firm Power Aug 2024)"},
+      {"spv_pattern": "Terrain Solar", "parent": "AGL Energy (acquired Terrain Solar Aug 2024)"}
+    ]
+  },
+
+  "data_source_assessment": {
+    "modo_energy": {
+      "url": "https://modoenergy.com",
+      "description": "UK-based energy analytics company with BESS Asset Database covering Australia/NEM",
+      "data_type": "BESS dispatch, revenue, performance, battery degradation analytics",
+      "access": "Subscription API — pricing not publicly available. Free tier may exist for limited access.",
+      "value_for_aures": "high — real-time BESS performance data, revenue estimates, cycling data. Would complement Open Electricity API for operational intelligence.",
+      "action": "Evaluate free tier availability. If subscription required, assess cost vs value for BESS performance monitoring."
+    },
+    "infrastructure_pipeline": {
+      "url": "https://www.infrastructurepipeline.org",
+      "description": "Australian Government Infrastructure Pipeline — tracks major infrastructure projects including energy",
+      "data_type": "Project status (Under Delivery, Committed, Proposed), project value, location, sector",
+      "access": "Public website — no API. Manual scraping or periodic checks required.",
+      "value_for_aures": "medium-high — 'Under Delivery' status is a strong construction verification signal. Identified ~9 BESS projects with this status.",
+      "bess_projects_identified": ["Waratah Super Battery", "Eraring Battery", "Liddell BESS", "Collie Battery (WA)", "Tarong BESS", "Western Downs Battery", "Borumba Hydro+BESS"],
+      "action": "Use as Tier 2 construction verification source. Periodic manual check (quarterly) to cross-reference status."
+    },
+    "cer_register": {
+      "url": "https://www.cleanenergyregulator.gov.au",
+      "description": "Clean Energy Regulator — accredited power station register, REC registry",
+      "data_type": "Power station accreditation (confirms operational), REC generation data",
+      "access": "Public registers — searchable online.",
+      "value_for_aures": "medium — useful for confirming operational status (accreditation = operating). Less useful for development/construction tracking.",
+      "action": "Use as Tier 1 operating status verification. Cross-check when projects claim COD."
+    },
+    "cis_register": {
+      "url": "https://www.dcceew.gov.au/energy/renewable/capacity-investment-scheme",
+      "description": "Capacity Investment Scheme tender results — multiple rounds across DCCEEW pages",
+      "data_type": "Awarded projects, contracted capacities, contract terms",
+      "access": "Public — but spread across multiple announcements. No single consolidated register.",
+      "value_for_aures": "critical — CIS contract = strong signal project will proceed. Already tracking in scheme_contracts.",
+      "action": "Maintain manual consolidation of CIS rounds. Already well-covered in AURES for T1/T2/T3/T4 and LTESA R1-R6."
+    }
+  },
+
+  "developer_registry": {
+    "description": "Developer/company BESS project counts as identified from official websites, media reports, and AEMO data. This tracks the number of BESS projects each developer has publicly listed or is known to be developing, to serve as a cross-reference for AURES completeness.",
+    "last_updated": "2026-04-16",
+    "developers": [
+      {
+        "company": "AGL Energy",
+        "website": "https://www.agl.com.au/about-agl/operations/pipeline-projects",
+        "parent_group": null,
+        "bess_project_count_website": 22,
+        "bess_project_count_aures": 9,
+        "notes": "Includes Firm Power subsidiary projects (acquired Aug 2024, ~15 projects). AGL's own: Liddell (500MW, commissioning), Torrens Island (250MW, operating), Broken Hill (50MW, operating), Tomago (500MW, construction), Tuckeroo (500MW, development), Madeline Downs (500MW, development), Loy Yang (200MW, development). Firm Power: Blackstone (×2), Abermain, Kangaroo Valley, Glen Innes, Murrumburrah, Mount Britton (×2), Aramara, Awaba, Bathurst, Beermullah (WA), Beresfield, Kondinin (WA), Monash, Muswellbrook, Sunstate, Nebo. AGL targets FID on 1 GW battery projects in CY25.",
+        "states": ["NSW", "QLD", "SA", "VIC", "WA"]
+      },
+      {
+        "company": "Origin Energy",
+        "website": "https://www.originenergy.com.au/about/investors-media/origin-renewable-energy",
+        "parent_group": null,
+        "bess_project_count_website": 3,
+        "bess_project_count_aures": 2,
+        "notes": "Eraring Battery (700 MW total: Stages 1-3 460MW operating Dec 2025, Stage 4 240MW construction Q1 2027). Also proposed expansions.",
+        "states": ["NSW"]
+      },
+      {
+        "company": "Neoen (Brookfield)",
+        "website": "https://www.neoen.com/en/countries/australia",
+        "parent_group": "Brookfield (acquired 2025)",
+        "bess_project_count_website": 8,
+        "bess_project_count_aures": 6,
+        "notes": "Western Downs Battery S1+S2 (540MW operating), Western Downs S3 (305MW construction), Collie Battery S1+S2 (560MW operating, WA), Culcairn BESS (100MW construction), Hornsdale (150MW operating), Goyder BESS (SA development), Great Western Battery (VIC development). Victorian assets (VBB, Moorabool) divested to HMC Capital per ACCC.",
+        "states": ["QLD", "NSW", "SA", "VIC", "WA"]
+      },
+      {
+        "company": "EnergyAustralia",
+        "website": "https://www.energyaustralia.com.au/about-us/what-we-do/renewable-energy",
+        "parent_group": "CLP Holdings (Hong Kong)",
+        "bess_project_count_website": 4,
+        "bess_project_count_aures": 2,
+        "notes": "Wooreen Battery (350MW construction VIC), Hallett BESS S1 (50MW construction SA, expandable to 200MW), Mt Piper BESS (250MW development NSW), also operational rights to RESS2 (Edify owned).",
+        "states": ["VIC", "SA", "NSW"]
+      },
+      {
+        "company": "Alinta Energy",
+        "website": "https://www.alintaenergy.com.au/about-us/our-energy/renewable-projects",
+        "parent_group": "Chow Tai Fook Enterprises",
+        "bess_project_count_website": 3,
+        "bess_project_count_aures": 3,
+        "notes": "Reeves Plains BESS S1 (250MW construction SA), Reeves Plains S2 (250MW development), Loy Yang B BESS (200MW development VIC), Yandin BESS (WA).",
+        "states": ["SA", "VIC", "WA"]
+      },
+      {
+        "company": "Edify Energy",
+        "website": "https://www.edifyenergy.com/projects",
+        "parent_group": "CDPQ (Canadian pension fund, acquired 2025)",
+        "bess_project_count_website": 7,
+        "bess_project_count_aures": 3,
+        "notes": "Koorangie (300MW construction NSW), Darlington Point ESS (150MW operating NSW), Burroway (development NSW), Nowingi (development VIC), Smoky Creek (300MW development QLD), Guthrie's Gap (300MW development QLD). Shell Energy is offtaker for Koorangie, not developer.",
+        "states": ["NSW", "QLD", "VIC"]
+      },
+      {
+        "company": "Stanwell Corporation",
+        "website": "https://www.stanwell.com/our-operations/renewable-energy",
+        "parent_group": "Queensland Government",
+        "bess_project_count_website": 2,
+        "bess_project_count_aures": 2,
+        "notes": "Tarong BESS (300MW operating QLD), Stanwell BESS (300MW construction QLD, Tesla Megapacks, mid-2027 COD).",
+        "states": ["QLD"]
+      },
+      {
+        "company": "Genex Power (J-POWER)",
+        "website": "https://www.genexpower.com.au/our-projects",
+        "parent_group": "J-POWER (acquired Aug 2024)",
+        "bess_project_count_website": 3,
+        "bess_project_count_aures": 3,
+        "notes": "Bouldercombe (50MW operating QLD), Bouldercombe S2 (50MW development), Kidston Hybrid (150MW/600MWh development), Bulli Creek (200MW development QLD).",
+        "states": ["QLD"]
+      },
+      {
+        "company": "Ark Energy (Korea Zinc)",
+        "website": "https://www.arkenergy.com.au/projects",
+        "parent_group": "Korea Zinc",
+        "bess_project_count_website": 2,
+        "bess_project_count_aures": 2,
+        "notes": "Sun Metals BESS (50MW operating QLD), Collinsville BESS (development QLD). Also hydrogen projects.",
+        "states": ["QLD"]
+      },
+      {
+        "company": "Akaysha Energy (BlackRock)",
+        "website": "https://www.akayshaenergy.com",
+        "parent_group": "BlackRock",
+        "bess_project_count_website": 4,
+        "bess_project_count_aures": 4,
+        "notes": "Waratah Super Battery (850MW operating NSW), Orana BESS (415MW construction NSW), Ulinda Park (development), Elaine (development). Key NEM player in large-scale BESS.",
+        "states": ["NSW", "VIC"]
+      },
+      {
+        "company": "Maoneng",
+        "website": "https://maoneng.co/projects",
+        "parent_group": null,
+        "bess_project_count_website": 8,
+        "bess_project_count_aures": 3,
+        "notes": "Gould Creek (225MW development SA), Mornington (development VIC), Merriwa Energy Hub (400MW development NSW), Tamworth (200MW development NSW), Armidale (150MW development NSW), Lismore (100MW development NSW). Many projects use SPV trust names in AEMO obscuring Maoneng as developer.",
+        "states": ["SA", "VIC", "NSW"]
+      },
+      {
+        "company": "Risen Energy",
+        "website": "https://www.risenenergy.com.au/projects",
+        "parent_group": "Risen Energy (China)",
+        "bess_project_count_website": 3,
+        "bess_project_count_aures": 3,
+        "notes": "Bungama BESS (development SA), Woodland BESS (300MW development), Coleambally (sold to Octopus Australia Oct 2025).",
+        "states": ["SA", "NSW"]
+      },
+      {
+        "company": "Lightsource bp",
+        "website": "https://www.lightsourcebp.com/au",
+        "parent_group": "bp",
+        "bess_project_count_website": 2,
+        "bess_project_count_aures": 2,
+        "notes": "Woolooga BESS (QLD), Wellington Solar+BESS (NSW). Uses SPV trust names in AEMO.",
+        "states": ["QLD", "NSW"]
+      },
+      {
+        "company": "RWE Renewables",
+        "website": "https://au.rwe.com",
+        "parent_group": "RWE AG (Germany)",
+        "bess_project_count_website": 3,
+        "bess_project_count_aures": 2,
+        "notes": "Limondale BESS (commissioning NSW), Wellington BESS (100MW/800MWh 8-hour LDES development NSW), Thomas Plains Solar+BESS (SA). Limondale uses SPV name in AEMO.",
+        "states": ["NSW", "SA"]
+      },
+      {
+        "company": "CWP Renewables",
+        "website": "https://www.cwprenewables.com/projects",
+        "parent_group": null,
+        "bess_project_count_website": 2,
+        "bess_project_count_aures": 2,
+        "notes": "Sapphire BESS (development NSW), Crudine Ridge BESS (development NSW). Primary focus is wind.",
+        "states": ["NSW"]
+      },
+      {
+        "company": "Syncline Energy",
+        "website": "https://www.synclineenergy.com.au",
+        "parent_group": null,
+        "bess_project_count_website": 2,
+        "bess_project_count_aures": 1,
+        "notes": "Berrigan BESS (300MW development NSW) not in AURES. Plus other early stage projects.",
+        "states": ["NSW"]
+      },
+      {
+        "company": "Lochard Energy",
+        "website": "https://www.lochardenergy.com.au",
+        "parent_group": "APA Group (partial)",
+        "bess_project_count_website": 2,
+        "bess_project_count_aures": 2,
+        "notes": "Winton Energy Reserve (200MW BESS component development VIC), Iona BESS (development VIC). BESS component may be conflated with gas in AEMO data.",
+        "states": ["VIC"]
+      },
+      {
+        "company": "Pacific Blue (formerly Pacific Hydro)",
+        "website": "https://www.pacifichydro.com.au",
+        "parent_group": "State Power Investment Corporation (China)",
+        "bess_project_count_website": 2,
+        "bess_project_count_aures": 2,
+        "notes": "Clements Gap BESS (commissioning SA), Yaloak South BESS (development VIC).",
+        "states": ["SA", "VIC"]
+      },
+      {
+        "company": "CEP.Energy",
+        "website": "https://cep.energy",
+        "parent_group": null,
+        "bess_project_count_website": 1,
+        "bess_project_count_aures": 1,
+        "notes": "Kurri Kurri Battery (1200MW claimed — likely zombie/aspirational). Primary business is C&I solar/storage not utility-scale.",
+        "states": ["NSW"]
+      },
+      {
+        "company": "European Energy",
+        "website": "https://au.europeanenergy.com",
+        "parent_group": "European Energy A/S (Denmark)",
+        "bess_project_count_website": 2,
+        "bess_project_count_aures": 1,
+        "notes": "Winton North BESS (100MW development VIC — not in AURES). Procurement underway, COD ~2027.",
+        "states": ["VIC"]
+      },
+      {
+        "company": "HMC Capital",
+        "website": "https://www.hmccapital.com.au",
+        "parent_group": null,
+        "bess_project_count_website": 2,
+        "bess_project_count_aures": 1,
+        "notes": "Acquired Neoen's Victorian portfolio Aug 2025 ($950M). Victorian Big Battery (300MW operating VIC), Moorabool BESS (development VIC).",
+        "states": ["VIC"]
+      },
+      {
+        "company": "Supernode (Quinbrook)",
+        "website": "https://www.quinbrook.com",
+        "parent_group": "Quinbrook Infrastructure Partners",
+        "bess_project_count_website": 4,
+        "bess_project_count_aures": 4,
+        "notes": "Brendale BESS S1 (100MW operating QLD), Supernode North S1-S3 (780MW total, QLD development). Uses SPV 'Supernode Operations Pty Ltd'.",
+        "states": ["QLD"]
+      },
+      {
+        "company": "TagEnergy",
+        "website": "https://www.tagenergy.com",
+        "parent_group": null,
+        "bess_project_count_website": 3,
+        "bess_project_count_aures": 2,
+        "notes": "Golden Plains BESS S1+S2 (300MW development VIC), plus early stage projects.",
+        "states": ["VIC"]
+      },
+      {
+        "company": "CS Energy",
+        "website": "https://www.csenergy.com.au",
+        "parent_group": "Queensland Government",
+        "bess_project_count_website": 2,
+        "bess_project_count_aures": 2,
+        "notes": "Greenbank BESS (construction QLD), Wurdong BESS (development QLD). Uses SPV names.",
+        "states": ["QLD"]
+      },
+      {
+        "company": "ENGIE",
+        "website": "https://www.engie.com.au",
+        "parent_group": "ENGIE SA (France)",
+        "bess_project_count_website": 2,
+        "bess_project_count_aures": 2,
+        "notes": "Hazelwood BESS (development VIC), Morwell BESS (development VIC). Morwell capacity may be 620 MW not 1000 MW per ENGIE website.",
+        "states": ["VIC"]
+      },
+      {
+        "company": "Aula Energy",
+        "website": "https://www.aulaenergy.com",
+        "parent_group": null,
+        "bess_project_count_website": 4,
+        "bess_project_count_aures": 1,
+        "notes": "Recently acquired a portfolio of development-stage projects. Exact project list not publicly confirmed — may include projects currently listed under other developers.",
+        "states": ["NSW", "QLD", "VIC"]
+      },
+      {
+        "company": "Potentia Energy",
+        "website": "https://www.potentiaenergy.com.au",
+        "parent_group": null,
+        "bess_project_count_website": 3,
+        "bess_project_count_aures": 1,
+        "notes": "Focus on QLD and NSW battery development. Limited public project disclosure on website.",
+        "states": ["QLD", "NSW"]
+      },
+      {
+        "company": "Iberdrola (Infigen)",
+        "website": "https://www.iberdrola.com.au",
+        "parent_group": "Iberdrola SA (Spain)",
+        "bess_project_count_website": 2,
+        "bess_project_count_aures": 2,
+        "notes": "Avonlie BESS (development NSW), Lake Bonney BESS (development SA). Also wind portfolio.",
+        "states": ["NSW", "SA"]
+      },
+      {
+        "company": "FRV (Fotowatio Renewable Ventures)",
+        "website": "https://frv.com/en/projects",
+        "parent_group": "Abdul Latif Jameel",
+        "bess_project_count_website": 2,
+        "bess_project_count_aures": 2,
+        "notes": "Dalby BESS (development QLD), Sebastopol Solar+BESS (development NSW).",
+        "states": ["QLD", "NSW"]
+      },
+      {
+        "company": "Amp Energy",
+        "website": "https://amp.energy/australia",
+        "parent_group": "Amp Energy (Canada)",
+        "bess_project_count_website": 2,
+        "bess_project_count_aures": 1,
+        "notes": "Thomas Plains Solar+BESS (SA), early stage VIC projects.",
+        "states": ["SA", "VIC"]
+      },
+      {
+        "company": "Vena Energy",
+        "website": "https://www.venaenergy.com/australia",
+        "parent_group": "Global Infrastructure Partners (GIP)",
+        "bess_project_count_website": 3,
+        "bess_project_count_aures": 2,
+        "notes": "Tailem Bend BESS (operating SA — uses SPV 'TBSOL'), Wandoan South BESS (development QLD), plus early stage.",
+        "states": ["SA", "QLD"]
+      },
+      {
+        "company": "Equis Energy",
+        "website": "https://www.equis.com.au",
+        "parent_group": "Equis Group",
+        "bess_project_count_website": 3,
+        "bess_project_count_aures": 2,
+        "notes": "MREH (development NSW), Calala (development NSW). Uses SPV names.",
+        "states": ["NSW"]
+      },
+      {
+        "company": "Squadron Energy",
+        "website": "https://www.squadronenergy.com",
+        "parent_group": "Tattarang (Andrew Forrest)",
+        "bess_project_count_website": 1,
+        "bess_project_count_aures": 1,
+        "notes": "Primarily wind developer. Limited BESS exposure.",
+        "states": ["NSW"]
+      },
+      {
+        "company": "Eku Energy (Macquarie)",
+        "website": "https://www.ekuenergy.com",
+        "parent_group": "Macquarie Asset Management",
+        "bess_project_count_website": 2,
+        "bess_project_count_aures": 1,
+        "notes": "Rangebank BESS (development VIC — Macquarie GIG JV with Shell). Uses SPV name 'Cranbourne BESS Project Co'.",
+        "states": ["VIC"]
+      },
+      {
+        "company": "ACEN Australia",
+        "website": "https://www.acenaustralia.com.au",
+        "parent_group": "Ayala Group (Philippines)",
+        "bess_project_count_website": 3,
+        "bess_project_count_aures": 2,
+        "notes": "New England Solar Farm BESS P1 (50MW commissioning NSW), P2 (150MW construction), Birriwa BESS (600MW development NSW).",
+        "states": ["NSW"]
+      },
+      {
+        "company": "Octopus Australia",
+        "website": "https://octopusenergy.com.au",
+        "parent_group": "Octopus Energy Group",
+        "bess_project_count_website": 2,
+        "bess_project_count_aures": 1,
+        "notes": "Acquired Coleambally BESS from Risen Oct 2025. JV with Firm Power/AGL on Blackstone.",
+        "states": ["NSW", "QLD"]
+      },
+      {
+        "company": "EDPR Australia",
+        "website": "https://www.edpr.com/australia",
+        "parent_group": "EDP Renováveis (Portugal)",
+        "bess_project_count_website": 2,
+        "bess_project_count_aures": 2,
+        "notes": "Punchs Creek Hybrid S2+S3 (800MW total development QLD).",
+        "states": ["QLD"]
+      },
+      {
+        "company": "Green Switch Energy",
+        "website": "https://www.greenswitchenergy.com.au",
+        "parent_group": null,
+        "bess_project_count_website": 2,
+        "bess_project_count_aures": 2,
+        "notes": "Nine Mile Energy Park S1+S2 (500MW development VIC).",
+        "states": ["VIC"]
+      },
+      {
+        "company": "Libra Energy",
+        "website": null,
+        "parent_group": null,
+        "bess_project_count_website": 4,
+        "bess_project_count_aures": 4,
+        "notes": "Bremer Battery S1-S4 (848MW total development QLD). All sourced from AEMO — no public website found.",
+        "states": ["QLD"]
+      },
+      {
+        "company": "Pacific Green",
+        "website": "https://www.pacificgreen.com",
+        "parent_group": null,
+        "bess_project_count_website": 2,
+        "bess_project_count_aures": 2,
+        "notes": "Pacific Green Energy Park Limestone Coast North+West (500MW total development SA).",
+        "states": ["SA"]
+      },
+      {
+        "company": "Tilt Renewables",
+        "website": "https://www.tiltrenewables.com",
+        "parent_group": "PowAR (QIC/Future Fund)",
+        "bess_project_count_website": 1,
+        "bess_project_count_aures": 1,
+        "notes": "Latrobe Valley BESS S1 (100MW/200MWh development VIC). Capacity in AURES may be wrong (200MW listed, should be 100MW).",
+        "states": ["VIC"]
+      },
+      {
+        "company": "Shell Energy",
+        "website": "https://www.shellenergy.com.au",
+        "parent_group": "Shell plc",
+        "bess_project_count_website": 2,
+        "bess_project_count_aures": 2,
+        "notes": "Koorangie ESS (offtaker, not developer — Edify owns), RESS 1 (operational SA). Often listed as developer in AEMO but is actually offtaker.",
+        "states": ["NSW", "SA"]
+      }
+    ],
+    "totals": {
+      "total_developers": 42,
+      "total_bess_on_websites": 128,
+      "total_bess_in_aures": 82,
+      "gap_estimate": 46,
+      "notes": "Gap includes WA projects (outside NEM), early-stage proposals not yet in AEMO, and projects where AEMO uses SPV names making matching difficult. Priority: verify the ~12 capacity/status corrections first, then add genuinely missing NEM projects."
+    }
+  }
+}

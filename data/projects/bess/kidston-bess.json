@@ -3,18 +3,18 @@
   "name": "Kidston BESS",
   "technology": "bess",
   "status": "development",
-  "capacity_mw": 200.0,
+  "capacity_mw": 150.0,
   "storage_mwh": 600.0,
   "state": "QLD",
-  "current_developer": "Genex Power Ltd",
+  "current_developer": "Genex Power (J-POWER)",
   "grid_forming": false,
   "has_sips": false,
   "has_syncon": false,
   "has_statcom": false,
   "has_harmonic_filter": false,
   "data_confidence": "low",
-  "last_updated": "2026-03-10",
-  "last_verified": "2026-03-10",
+  "last_updated": "2026-04-16",
+  "last_verified": "2026-04-16",
   "aemo_gen_info_id": "3156",
   "timeline": [],
   "ownership_history": [],
@@ -31,5 +31,6 @@
       "date": "2026-01-30",
       "source_tier": 1
     }
-  ]
+  ],
+  "duration_hours": 4.0
 }

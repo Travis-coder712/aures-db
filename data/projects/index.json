@@ -7,7 +7,7 @@
     "capacity_mw": 125.0,
     "storage_mwh": 254.1,
     "state": "QLD",
-    "current_developer": "FIrm Power P/L",
+    "current_developer": "AGL Energy (via Firm Power)",
     "data_confidence": "low"
   },
   {
@@ -740,7 +740,7 @@
     "technology": "bess",
     "status": "development",
     "capacity_mw": 600.0,
-    "storage_mwh": 600.0,
+    "storage_mwh": 1200.0,
     "state": "NSW",
     "current_developer": "ACEN RENEWABLES",
     "data_confidence": "low"
@@ -774,7 +774,7 @@
     "capacity_mw": 250.0,
     "storage_mwh": 531.3,
     "state": "QLD",
-    "current_developer": "FIrm Power P/L",
+    "current_developer": "AGL Energy (via Firm Power)",
     "data_confidence": "low"
   },
   {
@@ -785,7 +785,7 @@
     "capacity_mw": 250.0,
     "storage_mwh": 531.3,
     "state": "QLD",
-    "current_developer": "FIrm Power P/L",
+    "current_developer": "AGL Energy (via Firm Power)",
     "data_confidence": "low"
   },
   {
@@ -1214,12 +1214,12 @@
     "id": "brendale-bess",
     "name": "Brendale BESS",
     "technology": "bess",
-    "status": "construction",
+    "status": "operating",
     "capacity_mw": 205.0,
     "storage_mwh": 409.92,
     "state": "QLD",
-    "current_developer": "Brendale Battery ProjectCo Pty Lt",
-    "data_confidence": "low"
+    "current_developer": "Supernode (Quinbrook)",
+    "data_confidence": "medium"
   },
   {
     "id": "brewongle-solar-farm",
@@ -1488,7 +1488,7 @@
     "capacity_mw": 200.0,
     "storage_mwh": 400.0,
     "state": "SA",
-    "current_developer": "Bungama Bess Trust",
+    "current_developer": "Risen Energy",
     "data_confidence": "low"
   },
   {
@@ -2069,12 +2069,12 @@
     "id": "clements-gap-bess",
     "name": "Clements Gap - BESS",
     "technology": "bess",
-    "status": "construction",
+    "status": "commissioning",
     "capacity_mw": 60.0,
     "storage_mwh": 120.0,
     "state": "SA",
-    "current_developer": "Pacific Hydro Clements Gap Pty Ltd",
-    "data_confidence": "low"
+    "current_developer": "Pacific Blue (formerly Pacific Hydro)",
+    "data_confidence": "medium"
   },
   {
     "id": "clements-gap-wind-farm",
@@ -2136,7 +2136,7 @@
     "capacity_mw": 100.0,
     "storage_mwh": 400.0,
     "state": "NSW",
-    "current_developer": "Coleambally BESS Trust",
+    "current_developer": "Octopus Australia",
     "data_confidence": "low"
   },
   {
@@ -2163,12 +2163,12 @@
     "id": "collie-battery",
     "name": "Collie Battery",
     "technology": "bess",
-    "status": "development",
+    "status": "operating",
     "capacity_mw": 560.0,
     "storage_mwh": 2240.0,
     "state": "WA",
-    "current_developer": "Synergy",
-    "data_confidence": "medium"
+    "current_developer": "Neoen (Brookfield)",
+    "data_confidence": "good"
   },
   {
     "id": "collinsville-bess-kci",
@@ -2489,7 +2489,7 @@
     "technology": "bess",
     "status": "development",
     "capacity_mw": 350.0,
-    "storage_mwh": 800.0,
+    "storage_mwh": 904.0,
     "state": "NSW",
     "current_developer": "Neoen Australia Pty Ltd",
     "data_confidence": "low"
@@ -3597,7 +3597,7 @@
     "capacity_mw": 100.0,
     "storage_mwh": 200.2,
     "state": "NSW",
-    "current_developer": "FIrm Power P/L",
+    "current_developer": "AGL Energy (via Firm Power)",
     "data_confidence": "low"
   },
   {
@@ -3877,10 +3877,10 @@
     "name": "Gould Creek BESS",
     "technology": "bess",
     "status": "development",
-    "capacity_mw": 215.0,
-    "storage_mwh": 430.0,
+    "capacity_mw": 225.0,
+    "storage_mwh": 450.0,
     "state": "SA",
-    "current_developer": "Gould Creek BESS Project Pty Ltd",
+    "current_developer": "Maoneng",
     "data_confidence": "low"
   },
   {
@@ -4710,7 +4710,7 @@
     "name": "Hornsdale Power Reserve",
     "technology": "bess",
     "status": "operating",
-    "capacity_mw": 194.0,
+    "capacity_mw": 150.0,
     "storage_mwh": 194.0,
     "state": "SA",
     "current_developer": "Neoen",
@@ -5057,7 +5057,7 @@
     "capacity_mw": 400.0,
     "storage_mwh": 1617.0,
     "state": "NSW",
-    "current_developer": "FIrm Power P/L",
+    "current_developer": "AGL Energy (via Firm Power)",
     "data_confidence": "low"
   },
   {
@@ -5272,10 +5272,10 @@
     "name": "Kidston BESS",
     "technology": "bess",
     "status": "development",
-    "capacity_mw": 200.0,
+    "capacity_mw": 150.0,
     "storage_mwh": 600.0,
     "state": "QLD",
-    "current_developer": "Genex Power Ltd",
+    "current_developer": "Genex Power (J-POWER)",
     "data_confidence": "low"
   },
   {
@@ -5410,8 +5410,8 @@
     "capacity_mw": 185.0,
     "storage_mwh": 370.0,
     "state": "VIC",
-    "current_developer": "Shell Energy",
-    "data_confidence": "low"
+    "current_developer": "Edify Energy",
+    "data_confidence": "good"
   },
   {
     "id": "koyuga-nanneella-wind-farm",
@@ -5449,7 +5449,7 @@
     "name": "LaTrobe Valley BESS",
     "technology": "bess",
     "status": "operating",
-    "capacity_mw": 200.0,
+    "capacity_mw": 100.0,
     "storage_mwh": 195.8,
     "state": "VIC",
     "current_developer": "Tilt Renewables Australia Pty Ltd",
@@ -5582,12 +5582,12 @@
     "id": "liddell-bess",
     "name": "Liddell BESS",
     "technology": "bess",
-    "status": "construction",
+    "status": "commissioning",
     "capacity_mw": 500.0,
     "storage_mwh": 1000.0,
     "state": "NSW",
-    "current_developer": "MACQGEN",
-    "data_confidence": "low"
+    "current_developer": "AGL Energy",
+    "data_confidence": "good"
   },
   {
     "id": "lilyvale-bess-kci",
@@ -5625,12 +5625,12 @@
     "id": "limondale-bess",
     "name": "Limondale BESS",
     "technology": "bess",
-    "status": "construction",
+    "status": "commissioning",
     "capacity_mw": 50.0,
     "storage_mwh": 400.0,
     "state": "NSW",
-    "current_developer": "LIMONDALE BATTERY PTY. LTD",
-    "data_confidence": "low"
+    "current_developer": "RWE Renewables",
+    "data_confidence": "medium"
   },
   {
     "id": "limondale-solar-farm-1",
@@ -5868,7 +5868,7 @@
     "capacity_mw": 500.0,
     "storage_mwh": 2000.0,
     "state": "QLD",
-    "current_developer": "AGL Energy Limited",
+    "current_developer": "AGL Energy",
     "data_confidence": "low"
   },
   {
@@ -6578,7 +6578,7 @@
     "capacity_mw": 240.0,
     "storage_mwh": 480.0,
     "state": "VIC",
-    "current_developer": "Mornington BESS Project Pty Ltd as Trustee of Mornington BESS Project Trust",
+    "current_developer": "Maoneng",
     "data_confidence": "low"
   },
   {
@@ -6913,7 +6913,7 @@
     "capacity_mw": 100.0,
     "storage_mwh": 200.2,
     "state": "NSW",
-    "current_developer": "FIrm Power P/L",
+    "current_developer": "AGL Energy (via Firm Power)",
     "data_confidence": "low"
   },
   {
@@ -7068,12 +7068,12 @@
     "id": "new-england-solar-farm-bess",
     "name": "New England Solar Farm BESS",
     "technology": "bess",
-    "status": "construction",
+    "status": "commissioning",
     "capacity_mw": 200.0,
-    "storage_mwh": 200.0,
+    "storage_mwh": 400.0,
     "state": "NSW",
-    "current_developer": "ACEN RENEWABLES",
-    "data_confidence": "low"
+    "current_developer": "ACEN Australia",
+    "data_confidence": "medium"
   },
   {
     "id": "nine-mile-energy-park-stage-1-bess",
@@ -8066,26 +8066,15 @@
     "data_confidence": "low"
   },
   {
-    "id": "reeves-plains-battery-stage-2",
-    "name": "Reeves Plains Battery - stage 2",
-    "technology": "bess",
-    "status": "development",
-    "capacity_mw": 50.0,
-    "storage_mwh": 400.0,
-    "state": "SA",
-    "current_developer": "Alinta Energy Reeves Plains Pty Ltd",
-    "data_confidence": "low"
-  },
-  {
     "id": "reeves-plains-power-station-bess",
-    "name": "Reeves Plains Power Station BESS",
+    "name": "Reeves Plains Energy Hub BESS",
     "technology": "bess",
-    "status": "development",
+    "status": "construction",
     "capacity_mw": 250.0,
     "storage_mwh": 1000.0,
     "state": "SA",
-    "current_developer": "Alinta Energy (Reeves Plains) Pty Ltd",
-    "data_confidence": "low"
+    "current_developer": "Alinta Energy",
+    "data_confidence": "good"
   },
   {
     "id": "regentville-bess",
@@ -8838,12 +8827,12 @@
     "id": "stanwell-bess",
     "name": "Stanwell BESS",
     "technology": "bess",
-    "status": "development",
+    "status": "construction",
     "capacity_mw": 300.0,
     "storage_mwh": 1200.0,
     "state": "QLD",
-    "current_developer": "Stanwell Corporation Limited",
-    "data_confidence": "low"
+    "current_developer": "Stanwell Corporation",
+    "data_confidence": "good"
   },
   {
     "id": "star-of-the-south-wind-farm",
@@ -9395,12 +9384,12 @@
     "id": "tarong-bess-stanwell",
     "name": "Tarong BESS - Stanwell",
     "technology": "bess",
-    "status": "construction",
+    "status": "operating",
     "capacity_mw": 300.0,
     "storage_mwh": 600.0,
     "state": "QLD",
-    "current_developer": "Stanwell Corporation Limited",
-    "data_confidence": "low"
+    "current_developer": "Stanwell Corporation",
+    "data_confidence": "good"
   },
   {
     "id": "tarong-west-wind-farm-ironleaf",
@@ -9819,14 +9808,14 @@
   },
   {
     "id": "tuckeroo-bess-kci",
-    "name": "Tuckeroo BESS - KCI",
+    "name": "Tuckeroo Battery",
     "technology": "bess",
     "status": "development",
     "capacity_mw": 500.0,
-    "storage_mwh": 500.0,
+    "storage_mwh": 2000.0,
     "state": "QLD",
-    "current_developer": "Tuckeroo BESS Pty Ltd",
-    "data_confidence": "low"
+    "current_developer": "AGL Energy",
+    "data_confidence": "good"
   },
   {
     "id": "tully-bess",
@@ -10064,8 +10053,8 @@
     "capacity_mw": 300.0,
     "storage_mwh": 450.0,
     "state": "VIC",
-    "current_developer": "Neoen",
-    "data_confidence": "high"
+    "current_developer": "HMC Capital",
+    "data_confidence": "good"
   },
   {
     "id": "wagga-north-bess-ib-vogt-kci",
@@ -10445,12 +10434,12 @@
     "id": "western-downs-battery-stage-1-and-2",
     "name": "Western Downs Battery - Stage 1 And 2",
     "technology": "bess",
-    "status": "commissioning",
-    "capacity_mw": 510.0,
-    "storage_mwh": 509.6,
+    "status": "operating",
+    "capacity_mw": 540.0,
+    "storage_mwh": 1080.0,
     "state": "QLD",
-    "current_developer": "Western Downs BESS Pty Ltd as trustee for Western Downs BESS Trust",
-    "data_confidence": "low"
+    "current_developer": "Neoen (Brookfield)",
+    "data_confidence": "good"
   },
   {
     "id": "western-downs-green-power-hub-pl",
@@ -10664,7 +10653,7 @@
     "name": "Winton Energy Reserve 1",
     "technology": "bess",
     "status": "development",
-    "capacity_mw": 400.0,
+    "capacity_mw": 200.0,
     "storage_mwh": 400.0,
     "state": "VIC",
     "current_developer": "Lochard Energy",
@@ -10768,7 +10757,7 @@
     "name": "Woodland BESS",
     "technology": "bess",
     "status": "development",
-    "capacity_mw": 250.0,
+    "capacity_mw": 300.0,
     "storage_mwh": 1000.0,
     "state": "NSW",
     "current_developer": "Risen Energy (Australia) Pty Ltd",

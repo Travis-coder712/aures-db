@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from 'react'
+import { useState, useEffect, useMemo, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import {
   BarChart, Bar, LineChart, Line, XAxis, YAxis, Tooltip, CartesianGrid,
@@ -6,6 +6,7 @@ import {
   Legend, ScatterChart, Scatter, ZAxis,
 } from 'recharts'
 import { fetchBessBidding } from '../../lib/dataService'
+import { exportElementToPdf } from '../../lib/exportPdf'
 import type { BessBiddingData, BessBiddingProfile } from '../../lib/types'
 
 // Icons — defined BEFORE const arrays (Vite HMR pattern)
@@ -74,6 +75,23 @@ export default function BessBidding() {
   const [loading, setLoading] = useState(true)
   const [activeSection, setActiveSection] = useState<SectionId>('overview')
   const [selectedProject, setSelectedProject] = useState<string | null>(null)
+  const [exporting, setExporting] = useState(false)
+  const pdfRef = useRef<HTMLDivElement>(null)
+
+  const handleExportPdf = async () => {
+    if (!pdfRef.current || exporting) return
+    setExporting(true)
+    try {
+      const sectionLabel = SECTIONS.find(s => s.id === activeSection)?.label || 'All'
+      await exportElementToPdf(pdfRef.current, {
+        filename: `BESS-Bidding-Intelligence-${sectionLabel.replace(/\s+/g, '-')}`,
+        title: `BESS Bidding Intelligence — ${sectionLabel}`,
+        subtitle: `AURES Intelligence · ${new Date().toLocaleDateString('en-AU', { day: 'numeric', month: 'long', year: 'numeric' })}`,
+      })
+    } finally {
+      setExporting(false)
+    }
+  }
 
   useEffect(() => {
     fetchBessBidding().then(d => { setData(d); setLoading(false) })
@@ -129,7 +147,7 @@ export default function BessBidding() {
       </div>
 
       {/* Section nav */}
-      <div className="flex flex-wrap gap-2 mb-6">
+      <div className="flex flex-wrap items-center gap-2 mb-6">
         {SECTIONS.map(s => (
           <button
             key={s.id}
@@ -144,8 +162,19 @@ export default function BessBidding() {
             {s.label}
           </button>
         ))}
+        <button
+          onClick={handleExportPdf}
+          disabled={exporting}
+          className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium bg-[var(--color-bg-card)] text-[var(--color-text-muted)] hover:text-[var(--color-text)] border border-[var(--color-border)] transition-colors disabled:opacity-50 ml-auto"
+        >
+          <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+          </svg>
+          {exporting ? 'Generating PDF…' : 'Download PDF'}
+        </button>
       </div>
 
+      <div ref={pdfRef}>
       {/* OVERVIEW */}
       {activeSection === 'overview' && (
         <div className="space-y-6">
@@ -678,6 +707,7 @@ export default function BessBidding() {
           />
         </div>
       )}
+      </div>{/* end pdfRef */}
     </div>
   )
 }

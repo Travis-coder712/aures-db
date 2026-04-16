@@ -2,12 +2,12 @@
   "id": "collie-battery",
   "name": "Collie Battery",
   "technology": "bess",
-  "status": "development",
+  "status": "operating",
   "capacity_mw": 560.0,
   "storage_mwh": 2240.0,
   "state": "WA",
   "lga": "Shire of Collie",
-  "current_developer": "Synergy",
+  "current_developer": "Neoen (Brookfield)",
   "cod_current": "2027",
   "cod_original": "2027",
   "connection_status": "Pre-application",
@@ -18,9 +18,9 @@
   "has_statcom": false,
   "has_harmonic_filter": false,
   "notable": "WA's flagship battery project. At 560MW/2,240MWh it's the largest planned battery in the WEM. 4-hour duration.",
-  "data_confidence": "medium",
-  "last_updated": "2025-03-01",
-  "last_verified": "2025-03-01",
+  "data_confidence": "good",
+  "last_updated": "2026-04-16",
+  "last_verified": "2026-04-16",
   "coordinates": {
     "lat": -33.36,
     "lng": 116.15
@@ -38,6 +38,13 @@
           "url": "https://www.wa.gov.au/"
         }
       ]
+    },
+    {
+      "date": "2025-07",
+      "date_precision": "month",
+      "event_type": "cod",
+      "title": "Stage 2 reaches commercial operations \u2014 full 560 MW operational",
+      "detail": "Neoen: Both Stage 1 (219 MW) and Stage 2 (341 MW) now operational. Total 560 MW / 2,240 MWh. Synergy is offtaker, not developer."
     }
   ],
   "ownership_history": [
@@ -45,6 +52,11 @@
       "period": "2023-present",
       "owner": "Synergy",
       "role": "Developer (state-owned)"
+    },
+    {
+      "date": "2025",
+      "owner": "Neoen (Brookfield)",
+      "event": "Neoen acquired by Brookfield globally. Collie Battery remains under Neoen/Brookfield."
     }
   ],
   "cod_history": [
@@ -63,6 +75,25 @@
     {
       "title": "WA Government",
       "url": "https://www.wa.gov.au/"
+    }
+  ],
+  "current_owner": "Neoen",
+  "stages": [
+    {
+      "stage": 1,
+      "name": "Stage 1",
+      "capacity_mw": 219.0,
+      "storage_mwh": 877.0,
+      "status": "operating",
+      "notes": "Operational. Synergy is offtaker, not developer."
+    },
+    {
+      "stage": 2,
+      "name": "Stage 2",
+      "capacity_mw": 341.0,
+      "storage_mwh": 1363.0,
+      "status": "operating",
+      "notes": "Operational Jul 2025."
     }
   ]
 }

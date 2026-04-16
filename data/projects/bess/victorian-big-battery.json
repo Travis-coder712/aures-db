@@ -7,7 +7,7 @@
   "storage_mwh": 450.0,
   "state": "VIC",
   "lga": "Moorabool Shire",
-  "current_developer": "Neoen",
+  "current_developer": "HMC Capital",
   "current_operator": "Neoen",
   "cod_current": "2022-01",
   "cod_original": "Q3 2021",
@@ -19,9 +19,9 @@
   "has_statcom": false,
   "has_harmonic_filter": false,
   "notable": "Largest battery in Victoria at commissioning. Experienced a notable Tesla Megapack fire during testing in July 2021.",
-  "data_confidence": "high",
-  "last_updated": "2025-03-01",
-  "last_verified": "2025-03-01",
+  "data_confidence": "good",
+  "last_updated": "2026-04-16",
+  "last_verified": "2026-04-16",
   "aemo_gen_info_id": "1864",
   "coordinates": {
     "lat": -37.73,
@@ -97,6 +97,11 @@
       "period": "2020-present",
       "owner": "Neoen",
       "role": "Developer & Operator"
+    },
+    {
+      "date": "2025-08",
+      "owner": "HMC Capital",
+      "event": "Acquired from Neoen/Brookfield as part of ACCC-mandated divestiture of Victorian portfolio. $950M deal."
     }
   ],
   "cod_history": [
@@ -135,5 +140,6 @@
       "title": "Neoen",
       "url": "https://neoen.com/"
     }
-  ]
+  ],
+  "current_owner": "HMC Capital"
 }
