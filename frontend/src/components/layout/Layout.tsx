@@ -167,24 +167,54 @@ function NewspaperIcon({ className }: { className?: string }) {
   )
 }
 
-const NAV_ITEMS = [
-  { path: '/', label: 'Home', icon: HomeIcon },
-  { path: '/dashboard', label: 'Dashboard', icon: ChartIcon },
-  { path: '/projects', label: 'Projects', icon: DatabaseIcon },
-  { path: '/performance', label: 'Performance', icon: TrendingIcon },
-  { path: '/analytics/bess-capex', label: 'BESS Capex', icon: CurrencyIcon },
-  { path: '/analytics/project-timeline', label: 'Timeline', icon: TimelineIcon },
-  { path: '/intelligence', label: 'Intelligence', icon: LightbulbIcon },
-  { path: '/developers', label: 'Developers', icon: UsersIcon },
-  { path: '/oems', label: 'OEMs', icon: WrenchIcon },
-  { path: '/contractors', label: 'Contractors', icon: BuildingIcon },
-  { path: '/offtakers', label: 'Offtakers', icon: DocumentIcon },
-  { path: '/map', label: 'Map', icon: GlobeIcon },
-  { path: '/rez', label: 'REZ', icon: MapIcon },
-  { path: '/watchlist', label: 'Watchlist', icon: EyeIcon },
-  { path: '/news', label: 'News', icon: NewspaperIcon },
-  { path: '/guides', label: 'Guides', icon: BookIcon },
-  { path: '/search', label: 'Search', icon: SearchIcon },
+type NavItem = {
+  path: string
+  label: string
+  icon: React.ComponentType<{ className?: string }>
+}
+
+type NavGroup = {
+  title: string
+  items: NavItem[]
+}
+
+// Grouped navigation — flat 17-item list was collapsed into 3 sections in v2.16.0.
+// The "5 Intelligence sub-hubs" pattern (Performance & Revenue / Equipment & Technology /
+// Developers & Contractors / Pipeline & Delivery / Grid & Geography) is a future build —
+// for now the Intelligence group lists all intelligence-layer pages as siblings.
+const NAV_GROUPS: NavGroup[] = [
+  {
+    title: 'Explore',
+    items: [
+      { path: '/', label: 'Home', icon: HomeIcon },
+      { path: '/dashboard', label: 'Dashboard', icon: ChartIcon },
+      { path: '/projects', label: 'Projects', icon: DatabaseIcon },
+      { path: '/map', label: 'Map', icon: GlobeIcon },
+      { path: '/watchlist', label: 'Watchlist', icon: EyeIcon },
+      { path: '/search', label: 'Search', icon: SearchIcon },
+    ],
+  },
+  {
+    title: 'Intelligence',
+    items: [
+      { path: '/performance', label: 'Performance', icon: TrendingIcon },
+      { path: '/intelligence', label: 'Intelligence Hub', icon: LightbulbIcon },
+      { path: '/intelligence/bess-capex', label: 'BESS Capex', icon: CurrencyIcon },
+      { path: '/intelligence/project-timeline', label: 'Timeline', icon: TimelineIcon },
+      { path: '/developers', label: 'Developers', icon: UsersIcon },
+      { path: '/oems', label: 'OEMs', icon: WrenchIcon },
+      { path: '/contractors', label: 'Contractors', icon: BuildingIcon },
+      { path: '/offtakers', label: 'Offtakers', icon: DocumentIcon },
+      { path: '/rez', label: 'REZ', icon: MapIcon },
+    ],
+  },
+  {
+    title: 'Resources',
+    items: [
+      { path: '/news', label: 'News', icon: NewspaperIcon },
+      { path: '/guides', label: 'Guides', icon: BookIcon },
+    ],
+  },
 ]
 
 // Mobile bottom nav — limited to 5 items
@@ -246,42 +276,55 @@ export default function Layout() {
             <p className="text-[10px] text-[var(--color-text-muted)] -mt-0.5">AU Renewable Energy System</p>
           </div>
         </div>
-        <nav role="navigation" aria-label="Main navigation" className="flex-1 px-3 py-4 space-y-1 overflow-y-auto">
-          {NAV_ITEMS.map((item) => (
-            <NavLink
-              key={item.path}
-              to={item.path}
-              end={item.path === '/'}
-              aria-current={location.pathname === item.path || (item.path !== '/' && location.pathname.startsWith(item.path)) ? 'page' : undefined}
-              className={({ isActive }) =>
-                `flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${
-                  isActive
-                    ? 'bg-[var(--color-primary)]/10 text-[var(--color-primary)]'
-                    : 'text-[var(--color-text-muted)] hover:text-[var(--color-text)] hover:bg-white/5'
-                }`
-              }
-            >
-              <item.icon className="w-5 h-5" />
-              {item.label}
-              {item.path === '/search' && <span className="ml-auto text-[9px] text-[var(--color-text-muted)]/40 font-mono bg-white/5 px-1 py-0.5 rounded">⌘K</span>}
-            </NavLink>
-          ))}
-
-          <div className="pt-4 pb-2 px-3">
-            <p className="text-[10px] font-semibold uppercase tracking-wider text-[var(--color-text-muted)]/60">
-              Coming Soon
-            </p>
-          </div>
-          {FUTURE_ITEMS.map((item) => (
-            <div
-              key={item.label}
-              className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-[var(--color-text-muted)]/40 cursor-not-allowed"
-            >
-              <item.icon className="w-5 h-5" />
-              {item.label}
-              <span className="ml-auto text-[9px] bg-[var(--color-bg-elevated)] px-1.5 py-0.5 rounded-full">Soon</span>
+        <nav role="navigation" aria-label="Main navigation" className="flex-1 px-3 py-4 overflow-y-auto">
+          {NAV_GROUPS.map((group, gi) => (
+            <div key={group.title} className={gi === 0 ? '' : 'mt-5'}>
+              <p className="px-3 pb-1.5 text-[10px] font-semibold uppercase tracking-wider text-[var(--color-text-muted)]/60">
+                {group.title}
+              </p>
+              <div className="space-y-1">
+                {group.items.map((item) => (
+                  <NavLink
+                    key={item.path}
+                    to={item.path}
+                    end={item.path === '/' || item.path === '/intelligence'}
+                    aria-current={location.pathname === item.path || (item.path !== '/' && item.path !== '/intelligence' && location.pathname.startsWith(item.path)) ? 'page' : undefined}
+                    className={({ isActive }) =>
+                      `flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${
+                        isActive
+                          ? 'bg-[var(--color-primary)]/10 text-[var(--color-primary)]'
+                          : 'text-[var(--color-text-muted)] hover:text-[var(--color-text)] hover:bg-white/5'
+                      }`
+                    }
+                  >
+                    <item.icon className="w-5 h-5" />
+                    {item.label}
+                    {item.path === '/search' && <span className="ml-auto text-[9px] text-[var(--color-text-muted)]/40 font-mono bg-white/5 px-1 py-0.5 rounded">⌘K</span>}
+                  </NavLink>
+                ))}
+              </div>
             </div>
           ))}
+
+          {FUTURE_ITEMS.length > 0 && (
+            <div className="mt-5">
+              <p className="px-3 pb-1.5 text-[10px] font-semibold uppercase tracking-wider text-[var(--color-text-muted)]/60">
+                Coming Soon
+              </p>
+              <div className="space-y-1">
+                {FUTURE_ITEMS.map((item) => (
+                  <div
+                    key={item.label}
+                    className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-[var(--color-text-muted)]/40 cursor-not-allowed"
+                  >
+                    <item.icon className="w-5 h-5" />
+                    {item.label}
+                    <span className="ml-auto text-[9px] bg-[var(--color-bg-elevated)] px-1.5 py-0.5 rounded-full">Soon</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
         </nav>
         <div className="px-4 py-3 border-t border-[var(--color-border)]">
           <NavLink
@@ -351,42 +394,55 @@ export default function Layout() {
                 <XIcon className="w-5 h-5" />
               </button>
             </div>
-            <nav role="navigation" aria-label="Mobile navigation" className="flex-1 px-3 py-4 space-y-1 overflow-y-auto">
-              {NAV_ITEMS.map((item) => (
-                <NavLink
-                  key={item.path}
-                  to={item.path}
-                  end={item.path === '/'}
-                  onClick={() => setMobileMenuOpen(false)}
-                  aria-current={location.pathname === item.path || (item.path !== '/' && location.pathname.startsWith(item.path)) ? 'page' : undefined}
-                  className={({ isActive }) =>
-                    `flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${
-                      isActive
-                        ? 'bg-[var(--color-primary)]/10 text-[var(--color-primary)]'
-                        : 'text-[var(--color-text-muted)] hover:text-[var(--color-text)] hover:bg-white/5'
-                    }`
-                  }
-                >
-                  <item.icon className="w-5 h-5" />
-                  {item.label}
-                </NavLink>
-              ))}
-
-              <div className="pt-4 pb-2 px-3">
-                <p className="text-[10px] font-semibold uppercase tracking-wider text-[var(--color-text-muted)]/60">
-                  Coming Soon
-                </p>
-              </div>
-              {FUTURE_ITEMS.map((item) => (
-                <div
-                  key={item.label}
-                  className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-[var(--color-text-muted)]/40 cursor-not-allowed"
-                >
-                  <item.icon className="w-5 h-5" />
-                  {item.label}
-                  <span className="ml-auto text-[9px] bg-[var(--color-bg-elevated)] px-1.5 py-0.5 rounded-full">Soon</span>
+            <nav role="navigation" aria-label="Mobile navigation" className="flex-1 px-3 py-4 overflow-y-auto">
+              {NAV_GROUPS.map((group, gi) => (
+                <div key={group.title} className={gi === 0 ? '' : 'mt-5'}>
+                  <p className="px-3 pb-1.5 text-[10px] font-semibold uppercase tracking-wider text-[var(--color-text-muted)]/60">
+                    {group.title}
+                  </p>
+                  <div className="space-y-1">
+                    {group.items.map((item) => (
+                      <NavLink
+                        key={item.path}
+                        to={item.path}
+                        end={item.path === '/' || item.path === '/intelligence'}
+                        onClick={() => setMobileMenuOpen(false)}
+                        aria-current={location.pathname === item.path || (item.path !== '/' && item.path !== '/intelligence' && location.pathname.startsWith(item.path)) ? 'page' : undefined}
+                        className={({ isActive }) =>
+                          `flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${
+                            isActive
+                              ? 'bg-[var(--color-primary)]/10 text-[var(--color-primary)]'
+                              : 'text-[var(--color-text-muted)] hover:text-[var(--color-text)] hover:bg-white/5'
+                          }`
+                        }
+                      >
+                        <item.icon className="w-5 h-5" />
+                        {item.label}
+                      </NavLink>
+                    ))}
+                  </div>
                 </div>
               ))}
+
+              {FUTURE_ITEMS.length > 0 && (
+                <div className="mt-5">
+                  <p className="px-3 pb-1.5 text-[10px] font-semibold uppercase tracking-wider text-[var(--color-text-muted)]/60">
+                    Coming Soon
+                  </p>
+                  <div className="space-y-1">
+                    {FUTURE_ITEMS.map((item) => (
+                      <div
+                        key={item.label}
+                        className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-[var(--color-text-muted)]/40 cursor-not-allowed"
+                      >
+                        <item.icon className="w-5 h-5" />
+                        {item.label}
+                        <span className="ml-auto text-[9px] bg-[var(--color-bg-elevated)] px-1.5 py-0.5 rounded-full">Soon</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
             </nav>
             <div className="px-4 py-3 border-t border-[var(--color-border)] space-y-2">
               <NavLink
