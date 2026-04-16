@@ -66,6 +66,49 @@ Behaviour:
 
 **Migration target:** start with Performance league tables (user's specific ask), then roll out to all intelligence pages.
 
+### F4. DataProvenance — source, freshness, update triggers
+**Problem:** data in the performance and intelligence layers now comes from multiple sources with different refresh cadences — OpenElectricity API (AEMO dispatch), NEMWEB (BESS bids), per-project enrichment (EIS PDFs, WattClarity articles, RenewEconomy / PV Magazine / Energy Storage News, ASX disclosures, developer websites, media releases). Users can't tell where a given number came from, how stale it is, or whether they should trigger a refresh.
+
+**Solution:** a shared `<DataProvenance>` component that every chart/view uses to surface:
+
+```tsx
+<DataProvenance
+  sources={[
+    { id: 'openelectricity', label: 'OpenElectricity', lastUpdated: '2026-04-12',
+      staleAfterDays: 3, refreshCommand: 'python pipeline/fetch_openelectricity.py' },
+    { id: 'nemweb-bids', label: 'NEMWEB Bids', lastUpdated: '2026-04-15',
+      staleAfterDays: 1, refreshCommand: 'python pipeline/fetch_nemweb_bids.py' },
+  ]}
+/>
+```
+
+Behaviour per source:
+- **Badge showing "Last updated X days ago"** with green/amber/red traffic light based on `staleAfterDays`
+- **Hover tooltip** with full datetime and source description
+- **"Update now" button per source** — two modes (phased rollout):
+  - **Phase 1 (no backend):** clicking copies the CLI command to clipboard and shows a toast "Run this locally to refresh"
+  - **Phase 2 (pipeline trigger endpoint):** POSTs to a new local/internal pipeline API that runs the job and streams status back to the UI
+
+Source registry (initial set):
+| Source | Purpose | Staleness threshold |
+|---|---|---|
+| `openelectricity` | Monthly CF%, revenue, price, curtailment (AEMO dispatch) | 7 days |
+| `nemweb-bids` | BESS daily bids (10 price bands × direction) | 1 day |
+| `aemo-gen-info` | AEMO Generator Info registration | 30 days |
+| `epbc-referrals` | Environmental referrals matched to projects | 30 days |
+| `rez-isp` | AEMO ISP REZ data | 180 days |
+| `news-rss` | RSS from RenewEconomy / PV Magazine / Energy Storage News | 1 day |
+| `wattclarity` | WattClarity article scrape | 7 days |
+| `asx-disclosures` | Listed developer ASX announcements | 7 days |
+| `web-research-oems` | OEM supplier research (solar/hydro/wind/bess) | 90 days — mostly one-off |
+| `web-research-offtakes` | PPA counterparty research | 90 days — mostly one-off |
+| `eis-pdfs` | Project EIS technical extraction | 180 days |
+| `developer-websites` | Developer website scrape | 30 days |
+
+**Placement:** a compact source-chip strip at the top of every chart / analysis section. Also an expanded "Data Sources & Status" page (exists today — refresh it to drive off the same registry) gathering all sources into one admin view with per-source update buttons.
+
+**Prior art in this codebase:** `Performance.tsx` already has an "Update Performance Data" collapsible panel with CLI instructions. DataProvenance generalises that pattern and applies it everywhere.
+
 ### F3. DataTable — sortable, totals, row numbers
 **Problem:** tables across the app have inconsistent behaviour. The user wants, on every table:
 - Sortable by any column (click header, toggle asc/desc)
@@ -161,7 +204,7 @@ Replace the flat 17-item hamburger menu with 6 grouped sections.
 
 ### Duplicates to merge / retire
 - `/intelligence/grid-connection` → merge into `/intelligence/transmission-infra` (the latter has the Leaflet map and is strictly richer)
-- `/intelligence/battery-watch` → retire (already embedded in Energy Mix > Capacity Watch tab)
+- `/intelligence/battery-watch` → **MERGE, DO NOT RETIRE BLINDLY**. The standalone BatteryWatch component is 1,080 lines and contains unique content the user relies on (NSW/QLD BESS buildout, capacity milestones, demand context, coal displacement timeline). Before retiring the route: (a) diff the standalone component against the CapacityWatch.tsx (1,438 lines) that sits inside Energy Mix; (b) port any unique sections into CapacityWatch; (c) consider renaming CapacityWatch → a name that reflects the combined scope (eg "DeploymentWatch" or keep "CapacityWatch" and add a BESS-focused sub-section). Only then retire the standalone route.
 - `/intelligence/wind-resource` → becomes "Wind & Solar Resource" (add solar equivalent)
 
 ---
@@ -326,12 +369,13 @@ This sits as a parallel track to the intelligence layer work. Rewrite each guide
 
 | Session | Work | Output |
 |---|---|---|
-| 1 | Foundation F1 (ChartFrame), F3 (DataTable) · regenerate solar OEM profile · quick wins 2–5 · group hamburger menu · retire stale guides (build-tracker, session-guide, vibecoding-notes, planned-* stubs) | v2.16.0 |
-| 2 | Foundation F2 (drill-down pattern) · retrofit Performance charts with click-through · rewrite About/Using/Navigating guides | v2.17.0 |
-| 3 | T1.A — OEM Intelligence tabbed deep-dive · rewrite OEM & Supplier Data guide | v2.18.0 |
-| 4 | T1.B — Developer portfolio dashboard · rewrite Developer Execution Scoring guide | v2.19.0 |
-| 5 | T1.C — Lifecycle Quartile Matrix · rewrite Performance & Quartile Rankings guide | v2.20.0 |
-| 6+ | Tier 2 features in user-priority order · remaining guide rewrites alongside | v2.21+ |
+| 1 | Foundation F1 (ChartFrame), F3 (DataTable) · regenerate solar OEM profile · quick wins 2–5 · group hamburger menu · retire stale guides | v2.16.0 |
+| 2 | Foundation F4 (DataProvenance — Phase 1 clipboard-copy mode) · surface on Performance + Intelligence pages | v2.17.0 |
+| 3 | Foundation F2 (drill-down pattern) · retrofit Performance charts with click-through · rewrite About/Using/Navigating guides | v2.18.0 |
+| 4 | T1.A — OEM Intelligence tabbed deep-dive · rewrite OEM & Supplier Data guide | v2.19.0 |
+| 5 | T1.B — Developer portfolio dashboard · rewrite Developer Execution Scoring guide | v2.20.0 |
+| 6 | T1.C — Lifecycle Quartile Matrix · rewrite Performance & Quartile Rankings guide | v2.21.0 |
+| 7+ | Tier 2 features in user-priority order · F4 Phase 2 (pipeline trigger endpoint) · remaining guide rewrites | v2.22+ |
 
 ---
 
@@ -349,6 +393,7 @@ This sits as a parallel track to the intelligence layer work. Rewrite each guide
 ### Current baseline: v2.15.1 (committed 2026-04-17)
 
 Recent notable releases (from git log):
+- **v2.16.0** — Intelligence layer foundation: ChartFrame + DataTable · solar OEMs visible (16 new, 101 total) · GridConnection merged into Transmission/REZ · analytics pages moved into /intelligence · 3-group nav (Explore · Intelligence · Resources) · stale guides retired
 - **v2.15.1** — Fix stakeholder_issues rendering for object-format data
 - **v2.15.0** — Solar & hydro supplier enrichment: 202 new supplier records from web research
 - **v2.14.0** — Notable text enrichment: 100% coverage across all 225 operating projects
