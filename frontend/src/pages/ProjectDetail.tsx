@@ -287,12 +287,25 @@ function OverviewTab({ project }: { project: Project }) {
           <SectionTitle>Stakeholder Issues</SectionTitle>
           <div className="bg-red-500/5 border border-red-500/20 rounded-xl p-4">
             <ul className="space-y-1">
-              {project.stakeholder_issues.map((issue, i) => (
-                <li key={i} className="text-sm text-[var(--color-text)] flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-red-400 flex-shrink-0" />
-                  {issue}
-                </li>
-              ))}
+              {project.stakeholder_issues.map((issue: string | { issue?: string; detail?: string; date?: string; status?: string }, i: number) => {
+                const text = typeof issue === 'string' ? issue : issue.issue || ''
+                const detail = typeof issue === 'object' ? issue.detail : undefined
+                const date = typeof issue === 'object' ? issue.date : undefined
+                const status = typeof issue === 'object' ? issue.status : undefined
+                return (
+                  <li key={i} className="text-sm text-[var(--color-text)]">
+                    <div className="flex items-start gap-2">
+                      <span className="w-1.5 h-1.5 rounded-full bg-red-400 flex-shrink-0 mt-1.5" />
+                      <div>
+                        <span className="font-medium">{text}</span>
+                        {date && <span className="text-[var(--color-text-secondary)] ml-2">({date})</span>}
+                        {status && <span className={`ml-2 text-xs px-1.5 py-0.5 rounded ${status === 'resolved' ? 'bg-green-500/20 text-green-400' : 'bg-yellow-500/20 text-yellow-400'}`}>{status}</span>}
+                        {detail && <p className="text-xs text-[var(--color-text-secondary)] mt-1">{detail}</p>}
+                      </div>
+                    </div>
+                  </li>
+                )
+              })}
             </ul>
           </div>
         </section>
