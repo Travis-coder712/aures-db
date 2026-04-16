@@ -19,7 +19,10 @@ import {
 } from 'recharts'
 import { fetchDriftAnalysis } from '../../lib/dataService'
 import ChartWrapper from '../../components/common/ChartWrapper'
+import ChartFrame from '../../components/common/ChartFrame'
 import ScrollableTable from '../../components/common/ScrollableTable'
+import DataTable from '../../components/common/DataTable'
+import type { Column } from '../../components/common/DataTable'
 import type { DriftAnalysisData, DriftProject } from '../../lib/types'
 
 /* ── icons defined BEFORE const arrays (Vite HMR issue) ── */
@@ -370,31 +373,27 @@ export default function DriftAnalysis() {
         <p className="text-xs text-[var(--color-text-muted)] mb-4">
           Bars show median and mean drift. Whiskers show interquartile range (p25–p75).
         </p>
-        <ChartWrapper title="Drift by Technology" data={techChartData} csvColumns={['name', 'median', 'mean', 'count']}>
-          <div className="h-72 lg:h-80">
-            <ResponsiveContainer width="100%" height="100%">
-              <BarChart data={techChartData} barGap={4}>
-                <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.06)" />
-                <XAxis dataKey="name" tick={TICK_STYLE} axisLine={AXIS_STYLE} />
-                <YAxis
-                  tick={TICK_STYLE}
-                  axisLine={AXIS_STYLE}
-                  label={{ value: 'Months', angle: -90, position: 'insideLeft', fill: 'var(--color-text-muted, #6b7280)', fontSize: 12 }}
-                />
-                <Tooltip
-                  contentStyle={TOOLTIP_STYLE}
-                  itemStyle={TOOLTIP_ITEM_STYLE}
-                  formatter={(value) => `${Number(value).toFixed(1)} months`}
-                />
-                <Legend wrapperStyle={{ fontSize: 12, color: 'var(--color-text-muted, #9ca3af)' }} />
-                <Bar dataKey="median" name="Median" fill="#3b82f6" radius={[4, 4, 0, 0]}>
-                  <ErrorBar dataKey="errorHigh" direction="y" width={4} stroke="#3b82f6" strokeWidth={1.5} />
-                </Bar>
-                <Bar dataKey="mean" name="Mean" fill="#f59e0b" radius={[4, 4, 0, 0]} />
-              </BarChart>
-            </ResponsiveContainer>
-          </div>
-        </ChartWrapper>
+        <ChartFrame title="Drift by Technology" height={288} heightLg={320} data={techChartData} csvColumns={['name', 'median', 'mean', 'count']}>
+          <BarChart data={techChartData} barGap={4}>
+            <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.06)" />
+            <XAxis dataKey="name" tick={TICK_STYLE} axisLine={AXIS_STYLE} />
+            <YAxis
+              tick={TICK_STYLE}
+              axisLine={AXIS_STYLE}
+              label={{ value: 'Months', angle: -90, position: 'insideLeft', fill: 'var(--color-text-muted, #6b7280)', fontSize: 12 }}
+            />
+            <Tooltip
+              contentStyle={TOOLTIP_STYLE}
+              itemStyle={TOOLTIP_ITEM_STYLE}
+              formatter={(value) => `${Number(value).toFixed(1)} months`}
+            />
+            <Legend wrapperStyle={{ fontSize: 12, color: 'var(--color-text-muted, #9ca3af)' }} />
+            <Bar dataKey="median" name="Median" fill="#3b82f6" radius={[4, 4, 0, 0]}>
+              <ErrorBar dataKey="errorHigh" direction="y" width={4} stroke="#3b82f6" strokeWidth={1.5} />
+            </Bar>
+            <Bar dataKey="mean" name="Mean" fill="#f59e0b" radius={[4, 4, 0, 0]} />
+          </BarChart>
+        </ChartFrame>
       </section>
 
       {/* Drift by State */}
@@ -403,31 +402,27 @@ export default function DriftAnalysis() {
         <p className="text-xs text-[var(--color-text-muted)] mb-4">
           Median and mean COD drift by state. Whiskers show p25–p75 range.
         </p>
-        <ChartWrapper title="Drift by State" data={stateChartData} csvColumns={['name', 'median', 'mean', 'count']}>
-          <div className="h-72 lg:h-80">
-            <ResponsiveContainer width="100%" height="100%">
-              <BarChart data={stateChartData} barGap={4}>
-                <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.06)" />
-                <XAxis dataKey="name" tick={TICK_STYLE} axisLine={AXIS_STYLE} />
-                <YAxis
-                  tick={TICK_STYLE}
-                  axisLine={AXIS_STYLE}
-                  label={{ value: 'Months', angle: -90, position: 'insideLeft', fill: 'var(--color-text-muted, #6b7280)', fontSize: 12 }}
-                />
-                <Tooltip
-                  contentStyle={TOOLTIP_STYLE}
-                  itemStyle={TOOLTIP_ITEM_STYLE}
-                  formatter={(value) => `${Number(value).toFixed(1)} months`}
-                />
-                <Legend wrapperStyle={{ fontSize: 12, color: 'var(--color-text-muted, #9ca3af)' }} />
-                <Bar dataKey="median" name="Median" fill="#3b82f6" radius={[4, 4, 0, 0]}>
-                  <ErrorBar dataKey="errorHigh" direction="y" width={4} stroke="#3b82f6" strokeWidth={1.5} />
-                </Bar>
-                <Bar dataKey="mean" name="Mean" fill="#f59e0b" radius={[4, 4, 0, 0]} />
-              </BarChart>
-            </ResponsiveContainer>
-          </div>
-        </ChartWrapper>
+        <ChartFrame title="Drift by State" height={288} heightLg={320} data={stateChartData} csvColumns={['name', 'median', 'mean', 'count']}>
+          <BarChart data={stateChartData} barGap={4}>
+            <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.06)" />
+            <XAxis dataKey="name" tick={TICK_STYLE} axisLine={AXIS_STYLE} />
+            <YAxis
+              tick={TICK_STYLE}
+              axisLine={AXIS_STYLE}
+              label={{ value: 'Months', angle: -90, position: 'insideLeft', fill: 'var(--color-text-muted, #6b7280)', fontSize: 12 }}
+            />
+            <Tooltip
+              contentStyle={TOOLTIP_STYLE}
+              itemStyle={TOOLTIP_ITEM_STYLE}
+              formatter={(value) => `${Number(value).toFixed(1)} months`}
+            />
+            <Legend wrapperStyle={{ fontSize: 12, color: 'var(--color-text-muted, #9ca3af)' }} />
+            <Bar dataKey="median" name="Median" fill="#3b82f6" radius={[4, 4, 0, 0]}>
+              <ErrorBar dataKey="errorHigh" direction="y" width={4} stroke="#3b82f6" strokeWidth={1.5} />
+            </Bar>
+            <Bar dataKey="mean" name="Mean" fill="#f59e0b" radius={[4, 4, 0, 0]} />
+          </BarChart>
+        </ChartFrame>
       </section>
 
       {/* Year Trend */}
@@ -621,53 +616,54 @@ export default function DriftAnalysis() {
         <section className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl p-5">
           <h2 className="text-lg font-semibold text-[var(--color-text)] mb-1">Largest Drifters</h2>
           <p className="text-xs text-[var(--color-text-muted)] mb-4">
-            Top 20 projects by absolute drift. Click to view project details.
+            Top 20 projects by absolute drift. Click any column header to re-sort; click a project name to open it.
           </p>
-          <ScrollableTable>
-            <table className="w-full text-sm">
-              <thead>
-                <tr className="border-b border-[var(--color-border)]">
-                  <th className="text-left py-2.5 pr-3 text-[var(--color-text-muted)] font-medium">Project</th>
-                  <th className="text-left py-2.5 px-3 text-[var(--color-text-muted)] font-medium hidden lg:table-cell">Tech</th>
-                  <th className="text-left py-2.5 px-3 text-[var(--color-text-muted)] font-medium hidden lg:table-cell">State</th>
-                  <th className="text-right py-2.5 px-3 text-[var(--color-text-muted)] font-medium">MW</th>
-                  <th className="text-right py-2.5 pl-3 text-[var(--color-text-muted)] font-medium">Drift</th>
-                </tr>
-              </thead>
-              <tbody>
-                {[...filteredProjects]
-                  .sort((a, b) => Math.abs(b.drift_months) - Math.abs(a.drift_months))
-                  .slice(0, 20)
-                  .map((p) => (
-                    <tr
-                      key={p.project_id}
-                      className="border-b border-[var(--color-border)]/30 hover:bg-[var(--color-bg-primary)]/50 transition-colors"
-                    >
-                      <td className="py-2.5 pr-3 max-w-[200px] truncate">
-                        <Link
-                          to={`/projects/${p.project_id}?from=intelligence/drift-analysis&fromLabel=Back to Drift Analysis`}
-                          className="text-[var(--color-primary)] hover:underline"
-                        >
-                          {p.name}
-                        </Link>
-                      </td>
-                      <td className="py-2.5 px-3 text-[var(--color-text-muted)] hidden lg:table-cell">
-                        <span style={{ color: TECH_COLORS[p.technology] }}>
-                          {TECH_LABELS[p.technology] || p.technology}
-                        </span>
-                      </td>
-                      <td className="py-2.5 px-3 text-[var(--color-text-muted)] hidden lg:table-cell">{p.state}</td>
-                      <td className="text-right py-2.5 px-3 text-[var(--color-text)] tabular-nums">
-                        {p.capacity_mw.toLocaleString()}
-                      </td>
-                      <td className="text-right py-2.5 pl-3 tabular-nums font-medium" style={{ color: driftColor(p.drift_months) }}>
-                        {p.drift_months > 0 ? '+' : ''}{p.drift_months} mo
-                      </td>
-                    </tr>
-                  ))}
-              </tbody>
-            </table>
-          </ScrollableTable>
+          <DataTable<DriftProject>
+            rows={[...filteredProjects]
+              .sort((a, b) => Math.abs(b.drift_months) - Math.abs(a.drift_months))
+              .slice(0, 20)}
+            columns={[
+              {
+                key: 'name',
+                label: 'Project',
+                render: (_v, row) => (
+                  <Link
+                    to={`/projects/${row.project_id}?from=intelligence/drift-analysis&fromLabel=Back to Drift Analysis`}
+                    className="text-[var(--color-primary)] hover:underline"
+                  >
+                    {row.name}
+                  </Link>
+                ),
+              },
+              {
+                key: 'technology',
+                label: 'Tech',
+                hideOnMobile: true,
+                render: (_v, row) => (
+                  <span style={{ color: TECH_COLORS[row.technology] }}>
+                    {TECH_LABELS[row.technology] || row.technology}
+                  </span>
+                ),
+              },
+              { key: 'state', label: 'State', hideOnMobile: true },
+              { key: 'capacity_mw', label: 'MW', format: 'number0', aggregator: 'sum' },
+              {
+                key: 'drift_months',
+                label: 'Drift',
+                align: 'right',
+                aggregator: 'median',
+                render: (v, row) => (
+                  <span className="font-medium" style={{ color: driftColor(row.drift_months) }}>
+                    {(v as number) > 0 ? '+' : ''}{v as number} mo
+                  </span>
+                ),
+              },
+            ]}
+            defaultSort={{ key: 'drift_months', dir: 'desc' }}
+            showTotals
+            totalsLabel={<span className="text-[var(--color-text-muted)]">Top 20 aggregate</span>}
+            csvFilename="largest-drifters"
+          />
         </section>
       )}
     </div>
