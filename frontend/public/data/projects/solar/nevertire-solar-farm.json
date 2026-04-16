@@ -45,7 +45,26 @@
   ],
   "ownership_history": [],
   "cod_history": [],
-  "suppliers": [],
+  "suppliers": [
+    {
+      "role": "solar_oem",
+      "supplier": "Suntech",
+      "grid_forming": false,
+      "source_url": "https://suntech-power.com.au/project/nevertire-solar-power-farm/"
+    },
+    {
+      "role": "inverter",
+      "supplier": "SMA",
+      "grid_forming": false,
+      "source_url": "https://suntech-power.com.au/project/nevertire-solar-power-farm/"
+    },
+    {
+      "role": "epc",
+      "supplier": "Biosar",
+      "grid_forming": false,
+      "source_url": "https://suntech-power.com.au/project/nevertire-solar-power-farm/"
+    }
+  ],
   "offtakes": [],
   "scheme_contracts": [],
   "cost_sources": [],

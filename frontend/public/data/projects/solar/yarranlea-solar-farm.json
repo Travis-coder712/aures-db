@@ -45,7 +45,20 @@
   ],
   "ownership_history": [],
   "cod_history": [],
-  "suppliers": [],
+  "suppliers": [
+    {
+      "role": "solar_oem",
+      "supplier": "Risen Energy",
+      "grid_forming": false,
+      "source_url": "https://risenenergy.com.au/portfolio/yarranlea-queensland/"
+    },
+    {
+      "role": "inverter",
+      "supplier": "SMA",
+      "grid_forming": false,
+      "source_url": "https://risenenergy.com.au/portfolio/yarranlea-queensland/"
+    }
+  ],
   "offtakes": [],
   "scheme_contracts": [],
   "cost_sources": [],

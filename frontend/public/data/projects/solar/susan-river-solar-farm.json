@@ -45,7 +45,26 @@
   ],
   "ownership_history": [],
   "cod_history": [],
-  "suppliers": [],
+  "suppliers": [
+    {
+      "role": "solar_oem",
+      "supplier": "BYD",
+      "grid_forming": false,
+      "source_url": "https://www.pv-magazine-australia.com/2019/02/07/egp-highlights-local-value-creation-as-95-mw-susan-river-project-completion/"
+    },
+    {
+      "role": "inverter",
+      "supplier": "Ingeteam",
+      "grid_forming": false,
+      "source_url": "https://www.pv-magazine-australia.com/2019/02/07/egp-highlights-local-value-creation-as-95-mw-susan-river-project-completion/"
+    },
+    {
+      "role": "epc",
+      "supplier": "Biosar",
+      "grid_forming": false,
+      "source_url": "https://www.pv-magazine-australia.com/2019/02/07/egp-highlights-local-value-creation-as-95-mw-susan-river-project-completion/"
+    }
+  ],
   "offtakes": [],
   "scheme_contracts": [],
   "cost_sources": [],

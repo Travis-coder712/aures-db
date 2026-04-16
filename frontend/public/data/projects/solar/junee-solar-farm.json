@@ -45,7 +45,14 @@
   ],
   "ownership_history": [],
   "cod_history": [],
-  "suppliers": [],
+  "suppliers": [
+    {
+      "role": "epc",
+      "supplier": "METKA EGN (Metlen)",
+      "grid_forming": false,
+      "source_url": "https://terrainsolar.com/our-projects/junee-solar-farm/"
+    }
+  ],
   "offtakes": [],
   "scheme_contracts": [],
   "cost_sources": [],

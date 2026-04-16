@@ -46,7 +46,16 @@
   ],
   "ownership_history": [],
   "cod_history": [],
-  "suppliers": [],
+  "suppliers": [
+    {
+      "role": "hydro_oem",
+      "supplier": "Toshiba",
+      "model": "Francis (reversible pump-turbine)",
+      "quantity": 2,
+      "grid_forming": false,
+      "source_url": "https://en.wikipedia.org/wiki/Wivenhoe_Power_Station"
+    }
+  ],
   "offtakes": [],
   "scheme_contracts": [],
   "cost_sources": [],

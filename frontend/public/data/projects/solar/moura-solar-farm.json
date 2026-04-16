@@ -54,7 +54,14 @@
   ],
   "ownership_history": [],
   "cod_history": [],
-  "suppliers": [],
+  "suppliers": [
+    {
+      "role": "epc",
+      "supplier": "METKA EGN (Mytilineos)",
+      "grid_forming": false,
+      "source_url": "https://www.ox2.com/australia/projects/moura-solar-farm"
+    }
+  ],
   "offtakes": [],
   "scheme_contracts": [],
   "cost_sources": [],

@@ -45,7 +45,27 @@
   ],
   "ownership_history": [],
   "cod_history": [],
-  "suppliers": [],
+  "suppliers": [
+    {
+      "role": "solar_oem",
+      "supplier": "Jinko Solar",
+      "grid_forming": false,
+      "source_url": "https://en.wikipedia.org/wiki/Wemen_Solar_Farm"
+    },
+    {
+      "role": "inverter",
+      "supplier": "SMA",
+      "model": "SMA 2500 SC-EV",
+      "grid_forming": false,
+      "source_url": "https://en.wikipedia.org/wiki/Wemen_Solar_Farm"
+    },
+    {
+      "role": "epc",
+      "supplier": "RCR / Laing O'Rourke",
+      "grid_forming": false,
+      "source_url": "https://en.wikipedia.org/wiki/Wemen_Solar_Farm"
+    }
+  ],
   "offtakes": [],
   "scheme_contracts": [],
   "cost_sources": [],

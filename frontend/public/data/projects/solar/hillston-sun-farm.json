@@ -45,7 +45,14 @@
   ],
   "ownership_history": [],
   "cod_history": [],
-  "suppliers": [],
+  "suppliers": [
+    {
+      "role": "epc",
+      "supplier": "Tranex Solar",
+      "grid_forming": false,
+      "source_url": "https://hillstonsunfarm.com/"
+    }
+  ],
   "offtakes": [],
   "scheme_contracts": [],
   "cost_sources": [],

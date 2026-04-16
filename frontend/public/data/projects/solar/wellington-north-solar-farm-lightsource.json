@@ -45,7 +45,14 @@
   ],
   "ownership_history": [],
   "cod_history": [],
-  "suppliers": [],
+  "suppliers": [
+    {
+      "role": "epc",
+      "supplier": "GRS (Gransolar)",
+      "grid_forming": false,
+      "source_url": "https://grs.energy/grs-agreement-lightsource-bp-solar-epc/"
+    }
+  ],
   "offtakes": [
     {
       "party": "EnergyAustralia",

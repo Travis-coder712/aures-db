@@ -54,7 +54,14 @@
   ],
   "ownership_history": [],
   "cod_history": [],
-  "suppliers": [],
+  "suppliers": [
+    {
+      "role": "epc",
+      "supplier": "PCL Construction",
+      "grid_forming": false,
+      "source_url": "https://www.pcl.com/au/en/our-work/west-wyalong-solar-project"
+    }
+  ],
   "offtakes": [],
   "scheme_contracts": [],
   "cost_sources": [],

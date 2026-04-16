@@ -45,7 +45,15 @@
   ],
   "ownership_history": [],
   "cod_history": [],
-  "suppliers": [],
+  "suppliers": [
+    {
+      "role": "inverter",
+      "supplier": "Huawei",
+      "model": "100kW string inverter",
+      "grid_forming": false,
+      "source_url": "https://www.power-technology.com/data-insights/power-plant-profile-winton-solar-farm-australia/"
+    }
+  ],
   "offtakes": [],
   "scheme_contracts": [],
   "cost_sources": [],

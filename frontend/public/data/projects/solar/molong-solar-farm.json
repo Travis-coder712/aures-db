@@ -45,7 +45,20 @@
   ],
   "ownership_history": [],
   "cod_history": [],
-  "suppliers": [],
+  "suppliers": [
+    {
+      "role": "inverter",
+      "supplier": "Ingeteam",
+      "grid_forming": false,
+      "source_url": "https://www.pv-magazine-australia.com/2020/05/27/gransolar-group-to-build-molong-solar-farm-in-nsw/"
+    },
+    {
+      "role": "epc",
+      "supplier": "Gransolar (GRS)",
+      "grid_forming": false,
+      "source_url": "https://www.pv-magazine-australia.com/2020/05/27/gransolar-group-to-build-molong-solar-farm-in-nsw/"
+    }
+  ],
   "offtakes": [],
   "scheme_contracts": [],
   "cost_sources": [],

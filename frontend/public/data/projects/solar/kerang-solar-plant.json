@@ -53,7 +53,14 @@
   ],
   "ownership_history": [],
   "cod_history": [],
-  "suppliers": [],
+  "suppliers": [
+    {
+      "role": "epc",
+      "supplier": "British Solar Renewables",
+      "grid_forming": false,
+      "source_url": "https://kerangsolarplant.com/"
+    }
+  ],
   "offtakes": [],
   "scheme_contracts": [],
   "cost_sources": [],

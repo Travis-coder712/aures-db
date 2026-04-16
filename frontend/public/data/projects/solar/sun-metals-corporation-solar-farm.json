@@ -45,7 +45,20 @@
   ],
   "ownership_history": [],
   "cod_history": [],
-  "suppliers": [],
+  "suppliers": [
+    {
+      "role": "solar_oem",
+      "supplier": "First Solar",
+      "grid_forming": false,
+      "source_url": "https://en.wikipedia.org/wiki/Sun_Metals_Solar_Farm"
+    },
+    {
+      "role": "epc",
+      "supplier": "RCR Tomlinson",
+      "grid_forming": false,
+      "source_url": "https://en.wikipedia.org/wiki/Sun_Metals_Solar_Farm"
+    }
+  ],
   "offtakes": [
     {
       "party": "Sun Metals (Korea Zinc)",

@@ -53,7 +53,21 @@
   ],
   "ownership_history": [],
   "cod_history": [],
-  "suppliers": [],
+  "suppliers": [
+    {
+      "role": "solar_oem",
+      "supplier": "Astronergy",
+      "model": "ASTRO N5",
+      "grid_forming": false,
+      "source_url": "https://www.astronergy.com/astronergy-355mw-topcon-modules-to-offer-green-energy-in-australia/"
+    },
+    {
+      "role": "epc",
+      "supplier": "GRS / CHINT Solar (JV)",
+      "grid_forming": false,
+      "source_url": "https://www.astronergy.com/astronergy-355mw-topcon-modules-to-offer-green-energy-in-australia/"
+    }
+  ],
   "offtakes": [
     {
       "party": "EnergyAustralia",

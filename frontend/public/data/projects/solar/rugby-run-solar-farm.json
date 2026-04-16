@@ -45,7 +45,14 @@
   ],
   "ownership_history": [],
   "cod_history": [],
-  "suppliers": [],
+  "suppliers": [
+    {
+      "role": "solar_oem",
+      "supplier": "Adani Solar",
+      "grid_forming": false,
+      "source_url": "https://www.bravus.com.au/our-businesses/rugby-run/"
+    }
+  ],
   "offtakes": [],
   "scheme_contracts": [],
   "cost_sources": [],

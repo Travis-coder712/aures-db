@@ -45,7 +45,26 @@
   ],
   "ownership_history": [],
   "cod_history": [],
-  "suppliers": [],
+  "suppliers": [
+    {
+      "role": "solar_oem",
+      "supplier": "BYD",
+      "grid_forming": false,
+      "source_url": "https://www.pv-magazine-australia.com/2018/03/30/byd-signs-75mw-supply-deal-in-australia/"
+    },
+    {
+      "role": "inverter",
+      "supplier": "Ingeteam",
+      "grid_forming": false,
+      "source_url": "https://www.pv-magazine-australia.com/2018/03/30/byd-signs-75mw-supply-deal-in-australia/"
+    },
+    {
+      "role": "epc",
+      "supplier": "Biosar",
+      "grid_forming": false,
+      "source_url": "https://www.pv-magazine-australia.com/2018/03/30/byd-signs-75mw-supply-deal-in-australia/"
+    }
+  ],
   "offtakes": [],
   "scheme_contracts": [],
   "cost_sources": [],

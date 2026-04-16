@@ -45,7 +45,27 @@
   ],
   "ownership_history": [],
   "cod_history": [],
-  "suppliers": [],
+  "suppliers": [
+    {
+      "role": "solar_oem",
+      "supplier": "Canadian Solar",
+      "model": "BiHiKu CS3W-MB-AG",
+      "grid_forming": false,
+      "source_url": "https://www.power-technology.com/data-insights/power-plant-profile-suntop-solar-pv-park-australia/"
+    },
+    {
+      "role": "inverter",
+      "supplier": "Ingeteam",
+      "grid_forming": false,
+      "source_url": "https://www.power-technology.com/data-insights/power-plant-profile-suntop-solar-pv-park-australia/"
+    },
+    {
+      "role": "epc",
+      "supplier": "Bouygues Construction",
+      "grid_forming": false,
+      "source_url": "https://www.power-technology.com/data-insights/power-plant-profile-suntop-solar-pv-park-australia/"
+    }
+  ],
   "offtakes": [],
   "scheme_contracts": [],
   "cost_sources": [],

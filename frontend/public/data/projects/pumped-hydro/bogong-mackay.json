@@ -45,7 +45,16 @@
   ],
   "ownership_history": [],
   "cod_history": [],
-  "suppliers": [],
+  "suppliers": [
+    {
+      "role": "hydro_oem",
+      "supplier": "Toshiba",
+      "model": "Francis (Bogong); Pelton (McKay Creek)",
+      "quantity": 8,
+      "grid_forming": false,
+      "source_url": "https://www.power-technology.com/projects/bogong-station/"
+    }
+  ],
   "offtakes": [],
   "scheme_contracts": [],
   "cost_sources": [],

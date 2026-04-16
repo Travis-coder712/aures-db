@@ -45,7 +45,26 @@
   ],
   "ownership_history": [],
   "cod_history": [],
-  "suppliers": [],
+  "suppliers": [
+    {
+      "role": "solar_oem",
+      "supplier": "Jinko Solar",
+      "grid_forming": false,
+      "source_url": "https://www.nsenergybusiness.com/news/jinkosolar-delivers-275-4-mw-of-solar-modules-for-bungala-solar-farm/"
+    },
+    {
+      "role": "inverter",
+      "supplier": "SMA",
+      "grid_forming": false,
+      "source_url": "https://www.nsenergybusiness.com/news/jinkosolar-delivers-275-4-mw-of-solar-modules-for-bungala-solar-farm/"
+    },
+    {
+      "role": "epc",
+      "supplier": "Elecnor",
+      "grid_forming": false,
+      "source_url": "https://www.nsenergybusiness.com/news/jinkosolar-delivers-275-4-mw-of-solar-modules-for-bungala-solar-farm/"
+    }
+  ],
   "offtakes": [],
   "scheme_contracts": [],
   "cost_sources": [],

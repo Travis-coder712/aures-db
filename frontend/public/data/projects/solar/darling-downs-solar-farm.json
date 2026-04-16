@@ -45,7 +45,20 @@
   ],
   "ownership_history": [],
   "cod_history": [],
-  "suppliers": [],
+  "suppliers": [
+    {
+      "role": "solar_oem",
+      "supplier": "JA Solar",
+      "grid_forming": false,
+      "source_url": "https://www.power-technology.com/data-insights/power-plant-profile-darling-downs-solar-farm-australia/"
+    },
+    {
+      "role": "epc",
+      "supplier": "RCR Tomlinson",
+      "grid_forming": false,
+      "source_url": "https://www.power-technology.com/data-insights/power-plant-profile-darling-downs-solar-farm-australia/"
+    }
+  ],
   "offtakes": [],
   "scheme_contracts": [],
   "cost_sources": [],

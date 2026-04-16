@@ -45,7 +45,20 @@
   ],
   "ownership_history": [],
   "cod_history": [],
-  "suppliers": [],
+  "suppliers": [
+    {
+      "role": "solar_oem",
+      "supplier": "LONGi",
+      "grid_forming": false,
+      "source_url": "https://www.power-technology.com/projects/port-augusta-renewable-energy-park-port-augusta-australia/"
+    },
+    {
+      "role": "epc",
+      "supplier": "Sterling & Wilson",
+      "grid_forming": false,
+      "source_url": "https://www.power-technology.com/projects/port-augusta-renewable-energy-park-port-augusta-australia/"
+    }
+  ],
   "offtakes": [
     {
       "party": "BHP",

@@ -45,7 +45,20 @@
   ],
   "ownership_history": [],
   "cod_history": [],
-  "suppliers": [],
+  "suppliers": [
+    {
+      "role": "solar_oem",
+      "supplier": "Canadian Solar",
+      "grid_forming": false,
+      "source_url": "https://www.pv-tech.org/sterling-and-wilson-starts-building-200mw-solar-project-in-australia/"
+    },
+    {
+      "role": "epc",
+      "supplier": "Sterling & Wilson",
+      "grid_forming": false,
+      "source_url": "https://www.pv-tech.org/sterling-and-wilson-starts-building-200mw-solar-project-in-australia/"
+    }
+  ],
   "offtakes": [],
   "scheme_contracts": [],
   "cost_sources": [],

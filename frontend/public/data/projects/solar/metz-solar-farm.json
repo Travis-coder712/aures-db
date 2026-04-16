@@ -45,7 +45,20 @@
   ],
   "ownership_history": [],
   "cod_history": [],
-  "suppliers": [],
+  "suppliers": [
+    {
+      "role": "inverter",
+      "supplier": "SMA",
+      "grid_forming": false,
+      "source_url": "https://www.pv-magazine-australia.com/2022/09/13/frv-australia-reveals-115-mw-solar-farm-now-at-100-capacity/"
+    },
+    {
+      "role": "epc",
+      "supplier": "Beon Energy Solutions",
+      "grid_forming": false,
+      "source_url": "https://www.pv-magazine-australia.com/2022/09/13/frv-australia-reveals-115-mw-solar-farm-now-at-100-capacity/"
+    }
+  ],
   "offtakes": [],
   "scheme_contracts": [],
   "cost_sources": [],

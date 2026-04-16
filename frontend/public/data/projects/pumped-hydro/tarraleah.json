@@ -45,7 +45,16 @@
   ],
   "ownership_history": [],
   "cod_history": [],
-  "suppliers": [],
+  "suppliers": [
+    {
+      "role": "hydro_oem",
+      "supplier": "English Electric / Boving",
+      "model": "Pelton",
+      "quantity": 6,
+      "grid_forming": false,
+      "source_url": "https://en.wikipedia.org/wiki/Tarraleah_Power_Station"
+    }
+  ],
   "offtakes": [],
   "scheme_contracts": [],
   "cost_sources": [],

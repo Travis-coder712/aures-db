@@ -45,7 +45,28 @@
   ],
   "ownership_history": [],
   "cod_history": [],
-  "suppliers": [],
+  "suppliers": [
+    {
+      "role": "solar_oem",
+      "supplier": "Trina Solar",
+      "model": "TSM-DE14A (355W)",
+      "grid_forming": false,
+      "source_url": "https://reneweconomy.com.au/ratch-appoints-epc-contractor-collinsville-solar-project-65055/"
+    },
+    {
+      "role": "inverter",
+      "supplier": "SMA",
+      "model": "Sunny Central 2500-EV",
+      "grid_forming": false,
+      "source_url": "https://reneweconomy.com.au/ratch-appoints-epc-contractor-collinsville-solar-project-65055/"
+    },
+    {
+      "role": "epc",
+      "supplier": "UGL",
+      "grid_forming": false,
+      "source_url": "https://reneweconomy.com.au/ratch-appoints-epc-contractor-collinsville-solar-project-65055/"
+    }
+  ],
   "offtakes": [],
   "scheme_contracts": [],
   "cost_sources": [],

@@ -45,7 +45,21 @@
   ],
   "ownership_history": [],
   "cod_history": [],
-  "suppliers": [],
+  "suppliers": [
+    {
+      "role": "solar_oem",
+      "supplier": "First Solar",
+      "model": "CdTe thin film",
+      "grid_forming": false,
+      "source_url": "https://reneweconomy.com.au/rcr-awarded-315m-daydream-hayman-solar-farm-projects-91887/"
+    },
+    {
+      "role": "epc",
+      "supplier": "RCR Tomlinson",
+      "grid_forming": false,
+      "source_url": "https://reneweconomy.com.au/rcr-awarded-315m-daydream-hayman-solar-farm-projects-91887/"
+    }
+  ],
   "offtakes": [],
   "scheme_contracts": [],
   "cost_sources": [],

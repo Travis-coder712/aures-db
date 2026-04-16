@@ -45,7 +45,22 @@
   ],
   "ownership_history": [],
   "cod_history": [],
-  "suppliers": [],
+  "suppliers": [
+    {
+      "role": "hydro_oem",
+      "supplier": "English Electric",
+      "model": "Generator",
+      "grid_forming": false,
+      "source_url": "https://en.wikipedia.org/wiki/Guthega_Power_Station"
+    },
+    {
+      "role": "hydro_oem",
+      "supplier": "Andritz",
+      "model": "Refurbishment",
+      "grid_forming": false,
+      "source_url": "https://en.wikipedia.org/wiki/Guthega_Power_Station"
+    }
+  ],
   "offtakes": [],
   "scheme_contracts": [],
   "cost_sources": [],

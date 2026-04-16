@@ -45,7 +45,14 @@
   ],
   "ownership_history": [],
   "cod_history": [],
-  "suppliers": [],
+  "suppliers": [
+    {
+      "role": "epc",
+      "supplier": "Lendlease",
+      "grid_forming": false,
+      "source_url": "https://sustainability.uq.edu.au/warwicksolarfarm"
+    }
+  ],
   "offtakes": [],
   "scheme_contracts": [],
   "cost_sources": [],

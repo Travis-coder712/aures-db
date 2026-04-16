@@ -53,7 +53,14 @@
   ],
   "ownership_history": [],
   "cod_history": [],
-  "suppliers": [],
+  "suppliers": [
+    {
+      "role": "epc",
+      "supplier": "European Energy",
+      "grid_forming": false,
+      "source_url": "https://au.europeanenergy.com/solar/mokoan-solar-farm/"
+    }
+  ],
   "offtakes": [],
   "scheme_contracts": [],
   "cost_sources": [],

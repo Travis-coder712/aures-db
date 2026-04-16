@@ -45,7 +45,15 @@
   ],
   "ownership_history": [],
   "cod_history": [],
-  "suppliers": [],
+  "suppliers": [
+    {
+      "role": "inverter",
+      "supplier": "SMA",
+      "model": "MVPS 5500-S-AU",
+      "grid_forming": false,
+      "source_url": "https://www.power-technology.com/data-insights/power-plant-profile-yatpool-solar-pv-park-australia/"
+    }
+  ],
   "offtakes": [],
   "scheme_contracts": [],
   "cost_sources": [],

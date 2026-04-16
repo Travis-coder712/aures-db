@@ -45,7 +45,27 @@
   ],
   "ownership_history": [],
   "cod_history": [],
-  "suppliers": [],
+  "suppliers": [
+    {
+      "role": "solar_oem",
+      "supplier": "Canadian Solar",
+      "model": "KuMax CS3U-340P",
+      "grid_forming": false,
+      "source_url": "https://www.pv-magazine-australia.com/2019/12/07/long-read-what-broke-at-oakey/"
+    },
+    {
+      "role": "inverter",
+      "supplier": "SMA",
+      "grid_forming": false,
+      "source_url": "https://www.pv-magazine-australia.com/2019/12/07/long-read-what-broke-at-oakey/"
+    },
+    {
+      "role": "epc",
+      "supplier": "Biosar",
+      "grid_forming": false,
+      "source_url": "https://www.pv-magazine-australia.com/2019/12/07/long-read-what-broke-at-oakey/"
+    }
+  ],
   "offtakes": [],
   "scheme_contracts": [],
   "cost_sources": [],

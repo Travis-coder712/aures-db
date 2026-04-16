@@ -45,7 +45,27 @@
   ],
   "ownership_history": [],
   "cod_history": [],
-  "suppliers": [],
+  "suppliers": [
+    {
+      "role": "solar_oem",
+      "supplier": "Canadian Solar",
+      "model": "HiKu CS3W-P",
+      "grid_forming": false,
+      "source_url": "https://investors.canadiansolar.com/news-releases/news-release-details/canadian-solar-provide-epc-services-and-supply-solar-modules"
+    },
+    {
+      "role": "inverter",
+      "supplier": "SMA",
+      "grid_forming": false,
+      "source_url": "https://investors.canadiansolar.com/news-releases/news-release-details/canadian-solar-provide-epc-services-and-supply-solar-modules"
+    },
+    {
+      "role": "epc",
+      "supplier": "Canadian Solar / Signal Energy (JV)",
+      "grid_forming": false,
+      "source_url": "https://investors.canadiansolar.com/news-releases/news-release-details/canadian-solar-provide-epc-services-and-supply-solar-modules"
+    }
+  ],
   "offtakes": [
     {
       "party": "Origin Energy",

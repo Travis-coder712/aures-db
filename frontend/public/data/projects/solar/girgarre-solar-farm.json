@@ -53,7 +53,26 @@
   ],
   "ownership_history": [],
   "cod_history": [],
-  "suppliers": [],
+  "suppliers": [
+    {
+      "role": "solar_oem",
+      "supplier": "LONGi",
+      "grid_forming": false,
+      "source_url": "https://www.pv-tech.org/ingeteam-to-supply-inverters-for-93mw-victoria-australia-solar-pv-project/"
+    },
+    {
+      "role": "inverter",
+      "supplier": "Ingeteam",
+      "grid_forming": false,
+      "source_url": "https://www.pv-tech.org/ingeteam-to-supply-inverters-for-93mw-victoria-australia-solar-pv-project/"
+    },
+    {
+      "role": "epc",
+      "supplier": "Beon Energy Solutions",
+      "grid_forming": false,
+      "source_url": "https://www.pv-tech.org/ingeteam-to-supply-inverters-for-93mw-victoria-australia-solar-pv-project/"
+    }
+  ],
   "offtakes": [],
   "scheme_contracts": [],
   "cost_sources": [],

@@ -45,7 +45,14 @@
   ],
   "ownership_history": [],
   "cod_history": [],
-  "suppliers": [],
+  "suppliers": [
+    {
+      "role": "epc",
+      "supplier": "Beon Energy Solutions",
+      "grid_forming": false,
+      "source_url": "https://www.pv-tech.org/iberdrola-australia-completes-the-golden-row-of-its-largest-solar-pv-power-plant/"
+    }
+  ],
   "offtakes": [
     {
       "party": "Snowy Hydro",

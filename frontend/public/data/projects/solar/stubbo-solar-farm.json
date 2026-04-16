@@ -54,7 +54,14 @@
   ],
   "ownership_history": [],
   "cod_history": [],
-  "suppliers": [],
+  "suppliers": [
+    {
+      "role": "epc",
+      "supplier": "PCL Construction",
+      "grid_forming": false,
+      "source_url": "https://www.pv-tech.org/acen-australia-appoints-pcl-construction-as-epc-contractor-for-400mwac-stubbo-solar-plant/"
+    }
+  ],
   "offtakes": [
     {
       "party": "Snowy Hydro",

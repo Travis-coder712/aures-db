@@ -404,6 +404,106 @@
       }
     },
     {
+      "slug": "sma",
+      "name": "SMA",
+      "project_count": 28,
+      "total_capacity_mw": 2801.8,
+      "total_storage_mwh": 249.6,
+      "roles": [
+        "inverter"
+      ],
+      "models": [
+        "MPVS",
+        "MVPS 5500-S-AU",
+        "SMA 2500 SC-EV",
+        "Sunny Central",
+        "Sunny Central 2500",
+        "Sunny Central 2500-EV",
+        "Sunny Central 2500SC-EV",
+        "Sunny Central 2750",
+        "Sunny Central 2750-EV",
+        "Sunny Central Storage 3600 UP-XT"
+      ],
+      "by_technology": {
+        "bess": 1,
+        "solar": 27
+      },
+      "by_status": {
+        "operating": 28
+      },
+      "by_state": {
+        "SA": 3,
+        "NSW": 10,
+        "QLD": 9,
+        "VIC": 6
+      },
+      "states": [
+        "NSW",
+        "QLD",
+        "SA",
+        "VIC"
+      ],
+      "project_ids": [
+        "bannerton-solar-park",
+        "bomen-solar-farm",
+        "broken-hill-solar-plant",
+        "bungala-one-solar-farm",
+        "bungala-two-solar-farm",
+        "clermont-solar-farm",
+        "collinsville-pv",
+        "columboola-solar-farm",
+        "darlington-point-solar-farm",
+        "emerald-solar-park",
+        "gannawarra-solar-farm",
+        "glenrowan-west-solar-farm",
+        "hamilton-solar-farm",
+        "jemalong-solar",
+        "karadoc-solar-farm",
+        "kidston-solar-project-phase-one",
+        "limondale-solar-farm-1",
+        "limondale-solar-farm-2",
+        "manildra-solar-farm",
+        "metz-solar-farm",
+        "nevertire-solar-farm",
+        "oakey-2-solar-farm",
+        "parkes-solar-farm",
+        "torrens-island-bess",
+        "wemen-solar-farm",
+        "whitsunday-solar-farm",
+        "yarranlea-solar-farm",
+        "yatpool-solar-farm"
+      ],
+      "status_detail": {
+        "operating": {
+          "count": 28,
+          "capacity_mw": 2801.8,
+          "storage_mwh": 249.6
+        }
+      },
+      "state_detail": {
+        "SA": {
+          "count": 3,
+          "capacity_mw": 470.0,
+          "storage_mwh": 249.6
+        },
+        "NSW": {
+          "count": 10,
+          "capacity_mw": 1143.0,
+          "storage_mwh": 0
+        },
+        "QLD": {
+          "count": 9,
+          "capacity_mw": 669.8,
+          "storage_mwh": 0
+        },
+        "VIC": {
+          "count": 6,
+          "capacity_mw": 519.0,
+          "storage_mwh": 0
+        }
+      }
+    },
+    {
       "slug": "catl",
       "name": "CATL",
       "project_count": 7,
@@ -483,6 +583,65 @@
           "count": 1,
           "capacity_mw": 250.0,
           "storage_mwh": 500.0
+        }
+      }
+    },
+    {
+      "slug": "toshiba",
+      "name": "Toshiba",
+      "project_count": 3,
+      "total_capacity_mw": 2670.0,
+      "total_storage_mwh": 3000.0,
+      "roles": [
+        "hydro_oem"
+      ],
+      "models": [
+        "Francis (Bogong); Pelton (McKay Creek)",
+        "Francis (reversible pump-turbine)"
+      ],
+      "by_technology": {
+        "pumped_hydro": 3
+      },
+      "by_status": {
+        "operating": 3
+      },
+      "by_state": {
+        "NSW": 1,
+        "VIC": 1,
+        "QLD": 1
+      },
+      "states": [
+        "NSW",
+        "QLD",
+        "VIC"
+      ],
+      "project_ids": [
+        "bogong-mackay",
+        "tumut-3",
+        "wivenhoe"
+      ],
+      "status_detail": {
+        "operating": {
+          "count": 3,
+          "capacity_mw": 2670.0,
+          "storage_mwh": 3000.0
+        }
+      },
+      "state_detail": {
+        "NSW": {
+          "count": 1,
+          "capacity_mw": 1800.0,
+          "storage_mwh": 0
+        },
+        "VIC": {
+          "count": 1,
+          "capacity_mw": 300.0,
+          "storage_mwh": 0
+        },
+        "QLD": {
+          "count": 1,
+          "capacity_mw": 570.0,
+          "storage_mwh": 3000.0
         }
       }
     },
@@ -794,6 +953,270 @@
       }
     },
     {
+      "slug": "melco-mitsubishi-electric",
+      "name": "Melco (Mitsubishi Electric)",
+      "project_count": 1,
+      "total_capacity_mw": 1800.0,
+      "total_storage_mwh": 0,
+      "roles": [
+        "hydro_oem"
+      ],
+      "models": [
+        "Generator"
+      ],
+      "by_technology": {
+        "pumped_hydro": 1
+      },
+      "by_status": {
+        "operating": 1
+      },
+      "by_state": {
+        "NSW": 1
+      },
+      "states": [
+        "NSW"
+      ],
+      "project_ids": [
+        "tumut-3"
+      ],
+      "status_detail": {
+        "operating": {
+          "count": 1,
+          "capacity_mw": 1800.0,
+          "storage_mwh": 0
+        }
+      },
+      "state_detail": {
+        "NSW": {
+          "count": 1,
+          "capacity_mw": 1800.0,
+          "storage_mwh": 0
+        }
+      }
+    },
+    {
+      "slug": "asea",
+      "name": "ASEA",
+      "project_count": 2,
+      "total_capacity_mw": 1575.0,
+      "total_storage_mwh": 0,
+      "roles": [
+        "hydro_oem"
+      ],
+      "models": [
+        "Generator"
+      ],
+      "by_technology": {
+        "pumped_hydro": 2
+      },
+      "by_status": {
+        "operating": 2
+      },
+      "by_state": {
+        "VIC": 2
+      },
+      "states": [
+        "VIC"
+      ],
+      "project_ids": [
+        "murray-1",
+        "murray-2"
+      ],
+      "status_detail": {
+        "operating": {
+          "count": 2,
+          "capacity_mw": 1575.0,
+          "storage_mwh": 0
+        }
+      },
+      "state_detail": {
+        "VIC": {
+          "count": 2,
+          "capacity_mw": 1575.0,
+          "storage_mwh": 0
+        }
+      }
+    },
+    {
+      "slug": "boving",
+      "name": "Boving",
+      "project_count": 5,
+      "total_capacity_mw": 1565.0,
+      "total_storage_mwh": 0,
+      "roles": [
+        "hydro_oem"
+      ],
+      "models": [
+        "Francis",
+        "Kaplan",
+        "Pelton"
+      ],
+      "by_technology": {
+        "pumped_hydro": 5
+      },
+      "by_status": {
+        "operating": 5
+      },
+      "by_state": {
+        "VIC": 1,
+        "TAS": 4
+      },
+      "states": [
+        "TAS",
+        "VIC"
+      ],
+      "project_ids": [
+        "devils-gate",
+        "murray-1",
+        "poatina",
+        "repulse",
+        "tungatinah"
+      ],
+      "status_detail": {
+        "operating": {
+          "count": 5,
+          "capacity_mw": 1565.0,
+          "storage_mwh": 0
+        }
+      },
+      "state_detail": {
+        "VIC": {
+          "count": 1,
+          "capacity_mw": 950.0,
+          "storage_mwh": 0
+        },
+        "TAS": {
+          "count": 4,
+          "capacity_mw": 615.0,
+          "storage_mwh": 0
+        }
+      }
+    },
+    {
+      "slug": "ingeteam",
+      "name": "Ingeteam",
+      "project_count": 12,
+      "total_capacity_mw": 1375.0,
+      "total_storage_mwh": 0,
+      "roles": [
+        "inverter"
+      ],
+      "models": [
+        "1600TL B615",
+        "INGECON SUN 3Power C",
+        "INGECON SUN CON20/CON40",
+        "INGECON SUN PowerMax 1000TL M400",
+        "INGECON SUN PowerMax B Series 1600kW"
+      ],
+      "by_technology": {
+        "solar": 12
+      },
+      "by_status": {
+        "operating": 12
+      },
+      "by_state": {
+        "QLD": 6,
+        "NSW": 5,
+        "VIC": 1
+      },
+      "states": [
+        "NSW",
+        "QLD",
+        "VIC"
+      ],
+      "project_ids": [
+        "aldoga-solar-farm",
+        "beryl-solar-farm",
+        "bluegrass-solar-farm",
+        "childers-solar-farm",
+        "clare-solar-farm",
+        "girgarre-solar-farm",
+        "gunnedah-solar-farm",
+        "lilyvale-solar-farm",
+        "molong-solar-farm",
+        "moree-solar-farm",
+        "suntop-solar-farm",
+        "susan-river-solar-farm"
+      ],
+      "status_detail": {
+        "operating": {
+          "count": 12,
+          "capacity_mw": 1375.0,
+          "storage_mwh": 0
+        }
+      },
+      "state_detail": {
+        "QLD": {
+          "count": 6,
+          "capacity_mw": 866.0,
+          "storage_mwh": 0
+        },
+        "NSW": {
+          "count": 5,
+          "capacity_mw": 433.0,
+          "storage_mwh": 0
+        },
+        "VIC": {
+          "count": 1,
+          "capacity_mw": 76.0,
+          "storage_mwh": 0
+        }
+      }
+    },
+    {
+      "slug": "fuji-electric",
+      "name": "Fuji Electric",
+      "project_count": 10,
+      "total_capacity_mw": 1367.0,
+      "total_storage_mwh": 0,
+      "roles": [
+        "hydro_oem"
+      ],
+      "models": [
+        "Francis",
+        "Kaplan",
+        "Pelton"
+      ],
+      "by_technology": {
+        "pumped_hydro": 10
+      },
+      "by_status": {
+        "operating": 10
+      },
+      "by_state": {
+        "TAS": 10
+      },
+      "states": [
+        "TAS"
+      ],
+      "project_ids": [
+        "bastyan",
+        "cethana",
+        "fisher",
+        "gordon",
+        "john-butters",
+        "lemonthyme-wilmot",
+        "mackintosh",
+        "paloona",
+        "reece",
+        "tribute"
+      ],
+      "status_detail": {
+        "operating": {
+          "count": 10,
+          "capacity_mw": 1367.0,
+          "storage_mwh": 0
+        }
+      },
+      "state_detail": {
+        "TAS": {
+          "count": 10,
+          "capacity_mw": 1367.0,
+          "storage_mwh": 0
+        }
+      }
+    },
+    {
       "slug": "fluence-catl-fluence-gridstack-pro-system",
       "name": "Fluence / CATL (Fluence Gridstack Pro system)",
       "project_count": 1,
@@ -1097,6 +1520,48 @@
         "SA": {
           "count": 6,
           "capacity_mw": 968.8,
+          "storage_mwh": 0
+        }
+      }
+    },
+    {
+      "slug": "voith",
+      "name": "Voith",
+      "project_count": 1,
+      "total_capacity_mw": 950.0,
+      "total_storage_mwh": 0,
+      "roles": [
+        "hydro_oem"
+      ],
+      "models": [
+        "Refurbishment"
+      ],
+      "by_technology": {
+        "pumped_hydro": 1
+      },
+      "by_status": {
+        "operating": 1
+      },
+      "by_state": {
+        "VIC": 1
+      },
+      "states": [
+        "VIC"
+      ],
+      "project_ids": [
+        "murray-1"
+      ],
+      "status_detail": {
+        "operating": {
+          "count": 1,
+          "capacity_mw": 950.0,
+          "storage_mwh": 0
+        }
+      },
+      "state_detail": {
+        "VIC": {
+          "count": 1,
+          "capacity_mw": 950.0,
           "storage_mwh": 0
         }
       }
@@ -1615,6 +2080,161 @@
       }
     },
     {
+      "slug": "hitachi",
+      "name": "Hitachi",
+      "project_count": 1,
+      "total_capacity_mw": 625.0,
+      "total_storage_mwh": 0,
+      "roles": [
+        "hydro_oem"
+      ],
+      "models": [
+        "Francis"
+      ],
+      "by_technology": {
+        "pumped_hydro": 1
+      },
+      "by_status": {
+        "operating": 1
+      },
+      "by_state": {
+        "VIC": 1
+      },
+      "states": [
+        "VIC"
+      ],
+      "project_ids": [
+        "murray-2"
+      ],
+      "status_detail": {
+        "operating": {
+          "count": 1,
+          "capacity_mw": 625.0,
+          "storage_mwh": 0
+        }
+      },
+      "state_detail": {
+        "VIC": {
+          "count": 1,
+          "capacity_mw": 625.0,
+          "storage_mwh": 0
+        }
+      }
+    },
+    {
+      "slug": "andritz",
+      "name": "Andritz",
+      "project_count": 5,
+      "total_capacity_mw": 563.0,
+      "total_storage_mwh": 0,
+      "roles": [
+        "hydro_oem"
+      ],
+      "models": [
+        "Kaplan",
+        "Refurbishment"
+      ],
+      "by_technology": {
+        "pumped_hydro": 5
+      },
+      "by_status": {
+        "operating": 5
+      },
+      "by_state": {
+        "NSW": 1,
+        "TAS": 4
+      },
+      "states": [
+        "NSW",
+        "TAS"
+      ],
+      "project_ids": [
+        "guthega",
+        "meadowbank",
+        "paloona",
+        "poatina",
+        "repulse"
+      ],
+      "status_detail": {
+        "operating": {
+          "count": 5,
+          "capacity_mw": 563.0,
+          "storage_mwh": 0
+        }
+      },
+      "state_detail": {
+        "NSW": {
+          "count": 1,
+          "capacity_mw": 80.0,
+          "storage_mwh": 0
+        },
+        "TAS": {
+          "count": 4,
+          "capacity_mw": 483.0,
+          "storage_mwh": 0
+        }
+      }
+    },
+    {
+      "slug": "schneider-electric",
+      "name": "Schneider Electric",
+      "project_count": 4,
+      "total_capacity_mw": 561.0,
+      "total_storage_mwh": 0,
+      "roles": [
+        "inverter"
+      ],
+      "models": [
+        "SC2000"
+      ],
+      "by_technology": {
+        "solar": 4
+      },
+      "by_status": {
+        "operating": 4
+      },
+      "by_state": {
+        "NSW": 2,
+        "QLD": 1,
+        "SA": 1
+      },
+      "states": [
+        "NSW",
+        "QLD",
+        "SA"
+      ],
+      "project_ids": [
+        "coleambally-solar-farm",
+        "ross-river-solar-farm",
+        "sunraysia-solar-farm",
+        "tailem-bend-solar"
+      ],
+      "status_detail": {
+        "operating": {
+          "count": 4,
+          "capacity_mw": 561.0,
+          "storage_mwh": 0
+        }
+      },
+      "state_detail": {
+        "NSW": {
+          "count": 2,
+          "capacity_mw": 350.0,
+          "storage_mwh": 0
+        },
+        "QLD": {
+          "count": 1,
+          "capacity_mw": 116.0,
+          "storage_mwh": 0
+        },
+        "SA": {
+          "count": 1,
+          "capacity_mw": 95.0,
+          "storage_mwh": 0
+        }
+      }
+    },
+    {
       "slug": "power-electronics-inverters",
       "name": "Power Electronics (inverters)",
       "project_count": 1,
@@ -1651,6 +2271,57 @@
           "count": 1,
           "capacity_mw": 540.0,
           "storage_mwh": 1080.0
+        }
+      }
+    },
+    {
+      "slug": "ge",
+      "name": "GE",
+      "project_count": 2,
+      "total_capacity_mw": 518.0,
+      "total_storage_mwh": 0,
+      "roles": [
+        "hydro_oem"
+      ],
+      "models": [
+        "Francis",
+        "Refurbishment"
+      ],
+      "by_technology": {
+        "pumped_hydro": 2
+      },
+      "by_status": {
+        "operating": 2
+      },
+      "by_state": {
+        "VIC": 1,
+        "TAS": 1
+      },
+      "states": [
+        "TAS",
+        "VIC"
+      ],
+      "project_ids": [
+        "gordon",
+        "west-kiewa"
+      ],
+      "status_detail": {
+        "operating": {
+          "count": 2,
+          "capacity_mw": 518.0,
+          "storage_mwh": 0
+        }
+      },
+      "state_detail": {
+        "VIC": {
+          "count": 1,
+          "capacity_mw": 68.0,
+          "storage_mwh": 0
+        },
+        "TAS": {
+          "count": 1,
+          "capacity_mw": 450.0,
+          "storage_mwh": 0
         }
       }
     },
@@ -1945,6 +2616,57 @@
       }
     },
     {
+      "slug": "alstom",
+      "name": "Alstom",
+      "project_count": 3,
+      "total_capacity_mw": 317.0,
+      "total_storage_mwh": 0,
+      "roles": [
+        "hydro_oem"
+      ],
+      "models": [
+        "Refurbishment"
+      ],
+      "by_technology": {
+        "pumped_hydro": 3
+      },
+      "by_status": {
+        "operating": 3
+      },
+      "by_state": {
+        "VIC": 1,
+        "TAS": 2
+      },
+      "states": [
+        "TAS",
+        "VIC"
+      ],
+      "project_ids": [
+        "trevallyn",
+        "tungatinah",
+        "west-kiewa"
+      ],
+      "status_detail": {
+        "operating": {
+          "count": 3,
+          "capacity_mw": 317.0,
+          "storage_mwh": 0
+        }
+      },
+      "state_detail": {
+        "VIC": {
+          "count": 1,
+          "capacity_mw": 68.0,
+          "storage_mwh": 0
+        },
+        "TAS": {
+          "count": 2,
+          "capacity_mw": 249.0,
+          "storage_mwh": 0
+        }
+      }
+    },
+    {
       "slug": "sma-solar-inverters",
       "name": "SMA Solar (inverters)",
       "project_count": 2,
@@ -2159,6 +2881,50 @@
       }
     },
     {
+      "slug": "english-electric-boving",
+      "name": "English Electric / Boving",
+      "project_count": 2,
+      "total_capacity_mw": 284.0,
+      "total_storage_mwh": 0,
+      "roles": [
+        "hydro_oem"
+      ],
+      "models": [
+        "Francis",
+        "Pelton"
+      ],
+      "by_technology": {
+        "pumped_hydro": 2
+      },
+      "by_status": {
+        "operating": 2
+      },
+      "by_state": {
+        "TAS": 2
+      },
+      "states": [
+        "TAS"
+      ],
+      "project_ids": [
+        "catagunya-liapootah-wayatinah",
+        "tarraleah"
+      ],
+      "status_detail": {
+        "operating": {
+          "count": 2,
+          "capacity_mw": 284.0,
+          "storage_mwh": 0
+        }
+      },
+      "state_detail": {
+        "TAS": {
+          "count": 2,
+          "capacity_mw": 284.0,
+          "storage_mwh": 0
+        }
+      }
+    },
+    {
       "slug": "samsung-sdi",
       "name": "Samsung SDI",
       "project_count": 3,
@@ -2218,6 +2984,59 @@
       }
     },
     {
+      "slug": "siemens",
+      "name": "Siemens",
+      "project_count": 2,
+      "total_capacity_mw": 267.0,
+      "total_storage_mwh": 0,
+      "roles": [
+        "hydro_oem",
+        "wind_oem"
+      ],
+      "models": [
+        "Generator",
+        "SWT-3.4-108"
+      ],
+      "by_technology": {
+        "wind": 1,
+        "pumped_hydro": 1
+      },
+      "by_status": {
+        "operating": 2
+      },
+      "by_state": {
+        "NSW": 1,
+        "TAS": 1
+      },
+      "states": [
+        "NSW",
+        "TAS"
+      ],
+      "project_ids": [
+        "devils-gate",
+        "silverton-wind-farm"
+      ],
+      "status_detail": {
+        "operating": {
+          "count": 2,
+          "capacity_mw": 267.0,
+          "storage_mwh": 0
+        }
+      },
+      "state_detail": {
+        "NSW": {
+          "count": 1,
+          "capacity_mw": 200.0,
+          "storage_mwh": 0
+        },
+        "TAS": {
+          "count": 1,
+          "capacity_mw": 67.0,
+          "storage_mwh": 0
+        }
+      }
+    },
+    {
       "slug": "andritz-hydro",
       "name": "ANDRITZ Hydro",
       "project_count": 1,
@@ -2256,48 +3075,6 @@
           "count": 1,
           "capacity_mw": 250.0,
           "storage_mwh": 900.0
-        }
-      }
-    },
-    {
-      "slug": "sma",
-      "name": "SMA",
-      "project_count": 1,
-      "total_capacity_mw": 250.0,
-      "total_storage_mwh": 249.6,
-      "roles": [
-        "inverter"
-      ],
-      "models": [
-        "Sunny Central Storage 3600 UP-XT"
-      ],
-      "by_technology": {
-        "bess": 1
-      },
-      "by_status": {
-        "operating": 1
-      },
-      "by_state": {
-        "SA": 1
-      },
-      "states": [
-        "SA"
-      ],
-      "project_ids": [
-        "torrens-island-bess"
-      ],
-      "status_detail": {
-        "operating": {
-          "count": 1,
-          "capacity_mw": 250.0,
-          "storage_mwh": 249.6
-        }
-      },
-      "state_detail": {
-        "SA": {
-          "count": 1,
-          "capacity_mw": 250.0,
-          "storage_mwh": 249.6
         }
       }
     },
@@ -2464,6 +3241,48 @@
       }
     },
     {
+      "slug": "boving-fouress",
+      "name": "Boving Fouress",
+      "project_count": 1,
+      "total_capacity_mw": 247.0,
+      "total_storage_mwh": 4600.0,
+      "roles": [
+        "hydro_oem"
+      ],
+      "models": [
+        "Francis (reversible pump-turbine)"
+      ],
+      "by_technology": {
+        "pumped_hydro": 1
+      },
+      "by_status": {
+        "operating": 1
+      },
+      "by_state": {
+        "NSW": 1
+      },
+      "states": [
+        "NSW"
+      ],
+      "project_ids": [
+        "shoalhaven"
+      ],
+      "status_detail": {
+        "operating": {
+          "count": 1,
+          "capacity_mw": 247.0,
+          "storage_mwh": 4600.0
+        }
+      },
+      "state_detail": {
+        "NSW": {
+          "count": 1,
+          "capacity_mw": 247.0,
+          "storage_mwh": 4600.0
+        }
+      }
+    },
+    {
       "slug": "fluence-catl",
       "name": "Fluence / CATL",
       "project_count": 1,
@@ -2500,6 +3319,58 @@
           "count": 1,
           "capacity_mw": 222.0,
           "storage_mwh": 593.3
+        }
+      }
+    },
+    {
+      "slug": "english-electric",
+      "name": "English Electric",
+      "project_count": 3,
+      "total_capacity_mw": 221.0,
+      "total_storage_mwh": 0,
+      "roles": [
+        "hydro_oem"
+      ],
+      "models": [
+        "Francis",
+        "Generator"
+      ],
+      "by_technology": {
+        "pumped_hydro": 3
+      },
+      "by_status": {
+        "operating": 3
+      },
+      "by_state": {
+        "NSW": 1,
+        "TAS": 2
+      },
+      "states": [
+        "NSW",
+        "TAS"
+      ],
+      "project_ids": [
+        "guthega",
+        "lake-echo",
+        "trevallyn"
+      ],
+      "status_detail": {
+        "operating": {
+          "count": 3,
+          "capacity_mw": 221.0,
+          "storage_mwh": 0
+        }
+      },
+      "state_detail": {
+        "NSW": {
+          "count": 1,
+          "capacity_mw": 80.0,
+          "storage_mwh": 0
+        },
+        "TAS": {
+          "count": 2,
+          "capacity_mw": 141.0,
+          "storage_mwh": 0
         }
       }
     },
@@ -2704,48 +3575,6 @@
           "count": 1,
           "capacity_mw": 200.0,
           "storage_mwh": 400.0
-        }
-      }
-    },
-    {
-      "slug": "siemens",
-      "name": "Siemens",
-      "project_count": 1,
-      "total_capacity_mw": 200.0,
-      "total_storage_mwh": 0,
-      "roles": [
-        "wind_oem"
-      ],
-      "models": [
-        "SWT-3.4-108"
-      ],
-      "by_technology": {
-        "wind": 1
-      },
-      "by_status": {
-        "operating": 1
-      },
-      "by_state": {
-        "NSW": 1
-      },
-      "states": [
-        "NSW"
-      ],
-      "project_ids": [
-        "silverton-wind-farm"
-      ],
-      "status_detail": {
-        "operating": {
-          "count": 1,
-          "capacity_mw": 200.0,
-          "storage_mwh": 0
-        }
-      },
-      "state_detail": {
-        "NSW": {
-          "count": 1,
-          "capacity_mw": 200.0,
-          "storage_mwh": 0
         }
       }
     },
@@ -3078,6 +3907,48 @@
           "count": 1,
           "capacity_mw": 100.0,
           "storage_mwh": 223.0
+        }
+      }
+    },
+    {
+      "slug": "huawei",
+      "name": "Huawei",
+      "project_count": 1,
+      "total_capacity_mw": 85.0,
+      "total_storage_mwh": 0,
+      "roles": [
+        "inverter"
+      ],
+      "models": [
+        "100kW string inverter"
+      ],
+      "by_technology": {
+        "solar": 1
+      },
+      "by_status": {
+        "operating": 1
+      },
+      "by_state": {
+        "VIC": 1
+      },
+      "states": [
+        "VIC"
+      ],
+      "project_ids": [
+        "winton-solar-farm"
+      ],
+      "status_detail": {
+        "operating": {
+          "count": 1,
+          "capacity_mw": 85.0,
+          "storage_mwh": 0
+        }
+      },
+      "state_detail": {
+        "VIC": {
+          "count": 1,
+          "capacity_mw": 85.0,
+          "storage_mwh": 0
         }
       }
     },
@@ -3448,5 +4319,5 @@
       }
     }
   ],
-  "total": 70
+  "total": 86
 }

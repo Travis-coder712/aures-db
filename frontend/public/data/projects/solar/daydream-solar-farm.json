@@ -45,7 +45,21 @@
   ],
   "ownership_history": [],
   "cod_history": [],
-  "suppliers": [],
+  "suppliers": [
+    {
+      "role": "solar_oem",
+      "supplier": "First Solar",
+      "model": "Series 4",
+      "grid_forming": false,
+      "source_url": "https://www.pv-tech.org/news/first-solar-tops-500mw-of-series-4-module-orders-in-australia"
+    },
+    {
+      "role": "epc",
+      "supplier": "RCR Tomlinson",
+      "grid_forming": false,
+      "source_url": "https://www.pv-tech.org/news/first-solar-tops-500mw-of-series-4-module-orders-in-australia"
+    }
+  ],
   "offtakes": [],
   "scheme_contracts": [],
   "cost_sources": [],

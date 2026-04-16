@@ -45,7 +45,23 @@
   ],
   "ownership_history": [],
   "cod_history": [],
-  "suppliers": [],
+  "suppliers": [
+    {
+      "role": "hydro_oem",
+      "supplier": "Boving",
+      "model": "Kaplan",
+      "quantity": 1,
+      "grid_forming": false,
+      "source_url": "https://www.andritz.com/hydro-en/hydronews/27/hy-news-27-07-repulse-hydro"
+    },
+    {
+      "role": "hydro_oem",
+      "supplier": "Andritz",
+      "model": "Refurbishment",
+      "grid_forming": false,
+      "source_url": "https://www.andritz.com/hydro-en/hydronews/27/hy-news-27-07-repulse-hydro"
+    }
+  ],
   "offtakes": [],
   "scheme_contracts": [],
   "cost_sources": [],

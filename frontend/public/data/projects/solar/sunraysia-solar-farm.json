@@ -45,7 +45,27 @@
   ],
   "ownership_history": [],
   "cod_history": [],
-  "suppliers": [],
+  "suppliers": [
+    {
+      "role": "solar_oem",
+      "supplier": "Jinko Solar",
+      "model": "Cheetah HC",
+      "grid_forming": false,
+      "source_url": "https://www.nsenergybusiness.com/projects/sunraysia-solar-farm-new-south-wales/"
+    },
+    {
+      "role": "inverter",
+      "supplier": "Schneider Electric",
+      "grid_forming": false,
+      "source_url": "https://www.nsenergybusiness.com/projects/sunraysia-solar-farm-new-south-wales/"
+    },
+    {
+      "role": "epc",
+      "supplier": "Decmil",
+      "grid_forming": false,
+      "source_url": "https://www.nsenergybusiness.com/projects/sunraysia-solar-farm-new-south-wales/"
+    }
+  ],
   "offtakes": [],
   "scheme_contracts": [],
   "cost_sources": [],

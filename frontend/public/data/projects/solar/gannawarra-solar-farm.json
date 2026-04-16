@@ -45,7 +45,27 @@
   ],
   "ownership_history": [],
   "cod_history": [],
-  "suppliers": [],
+  "suppliers": [
+    {
+      "role": "solar_oem",
+      "supplier": "JA Solar",
+      "grid_forming": false,
+      "source_url": "https://www.sma-australia.com.au/references/gannawarra-solar-farm-victoria.html"
+    },
+    {
+      "role": "inverter",
+      "supplier": "SMA",
+      "model": "Sunny Central 2500-EV",
+      "grid_forming": false,
+      "source_url": "https://www.sma-australia.com.au/references/gannawarra-solar-farm-victoria.html"
+    },
+    {
+      "role": "epc",
+      "supplier": "RCR Tomlinson",
+      "grid_forming": false,
+      "source_url": "https://www.sma-australia.com.au/references/gannawarra-solar-farm-victoria.html"
+    }
+  ],
   "offtakes": [],
   "scheme_contracts": [],
   "cost_sources": [],

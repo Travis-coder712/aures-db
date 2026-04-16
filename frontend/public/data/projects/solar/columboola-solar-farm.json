@@ -45,7 +45,21 @@
   ],
   "ownership_history": [],
   "cod_history": [],
-  "suppliers": [],
+  "suppliers": [
+    {
+      "role": "inverter",
+      "supplier": "SMA",
+      "model": "Sunny Central",
+      "grid_forming": false,
+      "source_url": "https://www.pv-magazine-australia.com/2022/12/01/162-mw-queensland-solar-farm-begins-commercial-operations/"
+    },
+    {
+      "role": "epc",
+      "supplier": "Sterling & Wilson",
+      "grid_forming": false,
+      "source_url": "https://www.pv-magazine-australia.com/2022/12/01/162-mw-queensland-solar-farm-begins-commercial-operations/"
+    }
+  ],
   "offtakes": [],
   "scheme_contracts": [],
   "cost_sources": [],

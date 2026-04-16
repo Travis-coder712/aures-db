@@ -45,7 +45,21 @@
   ],
   "ownership_history": [],
   "cod_history": [],
-  "suppliers": [],
+  "suppliers": [
+    {
+      "role": "solar_oem",
+      "supplier": "First Solar",
+      "model": "CdTe thin film",
+      "grid_forming": false,
+      "source_url": "https://en.wikipedia.org/wiki/Nyngan_Solar_Plant"
+    },
+    {
+      "role": "epc",
+      "supplier": "First Solar",
+      "grid_forming": false,
+      "source_url": "https://en.wikipedia.org/wiki/Nyngan_Solar_Plant"
+    }
+  ],
   "offtakes": [],
   "scheme_contracts": [],
   "cost_sources": [],

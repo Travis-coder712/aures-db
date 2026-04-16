@@ -53,7 +53,20 @@
   ],
   "ownership_history": [],
   "cod_history": [],
-  "suppliers": [],
+  "suppliers": [
+    {
+      "role": "inverter",
+      "supplier": "Ingeteam",
+      "grid_forming": false,
+      "source_url": "https://www.pv-magazine-australia.com/2020/12/04/grs-named-as-epc-of-x-elios-200-mw-blue-grass-solar-farm/"
+    },
+    {
+      "role": "epc",
+      "supplier": "GRS (Gransolar)",
+      "grid_forming": false,
+      "source_url": "https://www.pv-magazine-australia.com/2020/12/04/grs-named-as-epc-of-x-elios-200-mw-blue-grass-solar-farm/"
+    }
+  ],
   "offtakes": [],
   "scheme_contracts": [],
   "cost_sources": [],

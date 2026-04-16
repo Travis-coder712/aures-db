@@ -45,7 +45,14 @@
   ],
   "ownership_history": [],
   "cod_history": [],
-  "suppliers": [],
+  "suppliers": [
+    {
+      "role": "epc",
+      "supplier": "UGL",
+      "grid_forming": false,
+      "source_url": "https://www.ugllimited.com/our-projects/energy-and-utilities/glenrowan-solar-farm"
+    }
+  ],
   "offtakes": [],
   "scheme_contracts": [],
   "cost_sources": [],

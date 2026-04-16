@@ -53,7 +53,14 @@
   ],
   "ownership_history": [],
   "cod_history": [],
-  "suppliers": [],
+  "suppliers": [
+    {
+      "role": "epc",
+      "supplier": "DT Infrastructure (Gamuda)",
+      "grid_forming": false,
+      "source_url": "https://www.power-technology.com/projects/goulburn-river-solar-farm/"
+    }
+  ],
   "offtakes": [],
   "scheme_contracts": [],
   "cost_sources": [],

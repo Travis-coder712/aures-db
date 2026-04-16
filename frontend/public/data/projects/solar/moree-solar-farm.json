@@ -45,7 +45,27 @@
   ],
   "ownership_history": [],
   "cod_history": [],
-  "suppliers": [],
+  "suppliers": [
+    {
+      "role": "solar_oem",
+      "supplier": "JA Solar",
+      "grid_forming": false,
+      "source_url": "https://www.power-technology.com/marketdata/moree-solar-farm-australia/"
+    },
+    {
+      "role": "inverter",
+      "supplier": "Ingeteam",
+      "model": "INGECON SUN PowerMax 1000TL M400",
+      "grid_forming": false,
+      "source_url": "https://www.power-technology.com/marketdata/moree-solar-farm-australia/"
+    },
+    {
+      "role": "epc",
+      "supplier": "Elecnor",
+      "grid_forming": false,
+      "source_url": "https://www.power-technology.com/marketdata/moree-solar-farm-australia/"
+    }
+  ],
   "offtakes": [],
   "scheme_contracts": [],
   "cost_sources": [],

@@ -45,7 +45,14 @@
   ],
   "ownership_history": [],
   "cod_history": [],
-  "suppliers": [],
+  "suppliers": [
+    {
+      "role": "epc",
+      "supplier": "Sterling & Wilson",
+      "grid_forming": false,
+      "source_url": "https://www.nsenergybusiness.com/projects/western-downs-green-power-hub/"
+    }
+  ],
   "offtakes": [
     {
       "party": "CS Energy",

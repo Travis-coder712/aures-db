@@ -45,7 +45,20 @@
   ],
   "ownership_history": [],
   "cod_history": [],
-  "suppliers": [],
+  "suppliers": [
+    {
+      "role": "solar_oem",
+      "supplier": "Canadian Solar",
+      "grid_forming": false,
+      "source_url": "https://www.nsenergybusiness.com/projects/finley-solar-farm-new-south-wales/"
+    },
+    {
+      "role": "epc",
+      "supplier": "Canadian Solar / Signal Energy (JV)",
+      "grid_forming": false,
+      "source_url": "https://www.nsenergybusiness.com/projects/finley-solar-farm-new-south-wales/"
+    }
+  ],
   "offtakes": [],
   "scheme_contracts": [],
   "cost_sources": [],

@@ -45,7 +45,21 @@
   ],
   "ownership_history": [],
   "cod_history": [],
-  "suppliers": [],
+  "suppliers": [
+    {
+      "role": "solar_oem",
+      "supplier": "Trina Solar",
+      "grid_forming": false,
+      "source_url": "https://www.pv-tech.org/ingeteam-supplying-inverters-to-frvs-125mw-australian-pv-power-plant/"
+    },
+    {
+      "role": "inverter",
+      "supplier": "Ingeteam",
+      "model": "INGECON SUN PowerMax B Series 1600kW",
+      "grid_forming": false,
+      "source_url": "https://www.pv-tech.org/ingeteam-supplying-inverters-to-frvs-125mw-australian-pv-power-plant/"
+    }
+  ],
   "offtakes": [],
   "scheme_contracts": [],
   "cost_sources": [],

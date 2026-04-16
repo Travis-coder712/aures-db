@@ -45,7 +45,27 @@
   ],
   "ownership_history": [],
   "cod_history": [],
-  "suppliers": [],
+  "suppliers": [
+    {
+      "role": "solar_oem",
+      "supplier": "Canadian Solar",
+      "grid_forming": false,
+      "source_url": "https://www.pcl.com/au/en/our-work/gunnedah-solar"
+    },
+    {
+      "role": "inverter",
+      "supplier": "Ingeteam",
+      "model": "INGECON SUN CON20/CON40",
+      "grid_forming": false,
+      "source_url": "https://www.pcl.com/au/en/our-work/gunnedah-solar"
+    },
+    {
+      "role": "epc",
+      "supplier": "PCL Construction",
+      "grid_forming": false,
+      "source_url": "https://www.pcl.com/au/en/our-work/gunnedah-solar"
+    }
+  ],
   "offtakes": [],
   "scheme_contracts": [],
   "cost_sources": [],

@@ -45,7 +45,28 @@
   ],
   "ownership_history": [],
   "cod_history": [],
-  "suppliers": [],
+  "suppliers": [
+    {
+      "role": "solar_oem",
+      "supplier": "SunPower",
+      "model": "P-Series",
+      "grid_forming": false,
+      "source_url": "https://www.nsenergybusiness.com/projects/limondale-solar-farm-new-south-wales/"
+    },
+    {
+      "role": "inverter",
+      "supplier": "SMA",
+      "model": "MPVS",
+      "grid_forming": false,
+      "source_url": "https://www.nsenergybusiness.com/projects/limondale-solar-farm-new-south-wales/"
+    },
+    {
+      "role": "epc",
+      "supplier": "BELECTRIC",
+      "grid_forming": false,
+      "source_url": "https://www.nsenergybusiness.com/projects/limondale-solar-farm-new-south-wales/"
+    }
+  ],
   "offtakes": [
     {
       "party": "EnergyAustralia",

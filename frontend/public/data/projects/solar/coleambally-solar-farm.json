@@ -45,7 +45,21 @@
   ],
   "ownership_history": [],
   "cod_history": [],
-  "suppliers": [],
+  "suppliers": [
+    {
+      "role": "inverter",
+      "supplier": "Schneider Electric",
+      "model": "SC2000",
+      "grid_forming": false,
+      "source_url": "https://www.power-technology.com/projects/coleambally-solar-farm-new-south-wales/"
+    },
+    {
+      "role": "epc",
+      "supplier": "Bouygues Construction Australia",
+      "grid_forming": false,
+      "source_url": "https://www.power-technology.com/projects/coleambally-solar-farm-new-south-wales/"
+    }
+  ],
   "offtakes": [],
   "scheme_contracts": [],
   "cost_sources": [],

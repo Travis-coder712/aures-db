@@ -45,7 +45,21 @@
   ],
   "ownership_history": [],
   "cod_history": [],
-  "suppliers": [],
+  "suppliers": [
+    {
+      "role": "solar_oem",
+      "supplier": "Hanwha Q Cells",
+      "model": "345W",
+      "grid_forming": false,
+      "source_url": "https://en.wikipedia.org/wiki/Bannerton_Solar_Park"
+    },
+    {
+      "role": "inverter",
+      "supplier": "SMA",
+      "grid_forming": false,
+      "source_url": "https://en.wikipedia.org/wiki/Bannerton_Solar_Park"
+    }
+  ],
   "offtakes": [],
   "scheme_contracts": [],
   "cost_sources": [],

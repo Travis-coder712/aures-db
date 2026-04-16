@@ -45,7 +45,23 @@
   ],
   "ownership_history": [],
   "cod_history": [],
-  "suppliers": [],
+  "suppliers": [
+    {
+      "role": "hydro_oem",
+      "supplier": "Boving",
+      "model": "Francis",
+      "quantity": 5,
+      "grid_forming": false,
+      "source_url": "https://en.wikipedia.org/wiki/Tungatinah_Power_Station"
+    },
+    {
+      "role": "hydro_oem",
+      "supplier": "Alstom",
+      "model": "Refurbishment",
+      "grid_forming": false,
+      "source_url": "https://en.wikipedia.org/wiki/Tungatinah_Power_Station"
+    }
+  ],
   "offtakes": [],
   "scheme_contracts": [],
   "cost_sources": [],

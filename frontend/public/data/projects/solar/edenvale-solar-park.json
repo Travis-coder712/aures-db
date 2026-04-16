@@ -54,7 +54,14 @@
   ],
   "ownership_history": [],
   "cod_history": [],
-  "suppliers": [],
+  "suppliers": [
+    {
+      "role": "epc",
+      "supplier": "GRS (Gransolar)",
+      "grid_forming": false,
+      "source_url": "https://www.sojitz.com/en/news/2021/06/20210610.php"
+    }
+  ],
   "offtakes": [],
   "scheme_contracts": [],
   "cost_sources": [],

@@ -45,7 +45,16 @@
   ],
   "ownership_history": [],
   "cod_history": [],
-  "suppliers": [],
+  "suppliers": [
+    {
+      "role": "hydro_oem",
+      "supplier": "Fuji Electric",
+      "model": "Francis",
+      "quantity": 1,
+      "grid_forming": false,
+      "source_url": "https://en.wikipedia.org/wiki/Tribute_Power_Station"
+    }
+  ],
   "offtakes": [],
   "scheme_contracts": [],
   "cost_sources": [],

@@ -54,7 +54,27 @@
   ],
   "ownership_history": [],
   "cod_history": [],
-  "suppliers": [],
+  "suppliers": [
+    {
+      "role": "solar_oem",
+      "supplier": "First Solar",
+      "model": "CdTe thin film",
+      "grid_forming": false,
+      "source_url": "https://www.agl.com.au/about-agl/how-we-source-energy/broken-hill-solar-plant"
+    },
+    {
+      "role": "inverter",
+      "supplier": "SMA",
+      "grid_forming": false,
+      "source_url": "https://www.agl.com.au/about-agl/how-we-source-energy/broken-hill-solar-plant"
+    },
+    {
+      "role": "epc",
+      "supplier": "First Solar",
+      "grid_forming": false,
+      "source_url": "https://www.agl.com.au/about-agl/how-we-source-energy/broken-hill-solar-plant"
+    }
+  ],
   "offtakes": [],
   "scheme_contracts": [],
   "cost_sources": [],

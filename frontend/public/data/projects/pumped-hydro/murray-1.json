@@ -45,7 +45,30 @@
   ],
   "ownership_history": [],
   "cod_history": [],
-  "suppliers": [],
+  "suppliers": [
+    {
+      "role": "hydro_oem",
+      "supplier": "Boving",
+      "model": "Francis",
+      "quantity": 10,
+      "grid_forming": false,
+      "source_url": "https://en.wikipedia.org/wiki/Murray_Hydroelectric_Power_Station"
+    },
+    {
+      "role": "hydro_oem",
+      "supplier": "ASEA",
+      "model": "Generator",
+      "grid_forming": false,
+      "source_url": "https://en.wikipedia.org/wiki/Murray_Hydroelectric_Power_Station"
+    },
+    {
+      "role": "hydro_oem",
+      "supplier": "Voith",
+      "model": "Refurbishment",
+      "grid_forming": false,
+      "source_url": "https://en.wikipedia.org/wiki/Murray_Hydroelectric_Power_Station"
+    }
+  ],
   "offtakes": [],
   "scheme_contracts": [],
   "cost_sources": [],

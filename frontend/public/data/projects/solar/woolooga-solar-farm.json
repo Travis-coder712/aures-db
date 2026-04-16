@@ -54,7 +54,20 @@
   ],
   "ownership_history": [],
   "cod_history": [],
-  "suppliers": [],
+  "suppliers": [
+    {
+      "role": "solar_oem",
+      "supplier": "Risen Energy",
+      "grid_forming": false,
+      "source_url": "https://risenenergy.com.au/portfolio/woolooga-solar-farm/"
+    },
+    {
+      "role": "epc",
+      "supplier": "PCL Construction",
+      "grid_forming": false,
+      "source_url": "https://risenenergy.com.au/portfolio/woolooga-solar-farm/"
+    }
+  ],
   "offtakes": [],
   "scheme_contracts": [],
   "cost_sources": [],

@@ -45,7 +45,14 @@
   ],
   "ownership_history": [],
   "cod_history": [],
-  "suppliers": [],
+  "suppliers": [
+    {
+      "role": "epc",
+      "supplier": "Bouygues Construction Australia",
+      "grid_forming": false,
+      "source_url": "https://neoen.com/en/news/2023/neoen-signs-contract-in-new-south-wales-and-launches-construction-of-440-mwp-culcairn-solar-farm-in-australia/"
+    }
+  ],
   "offtakes": [
     {
       "party": "EnergyAustralia",

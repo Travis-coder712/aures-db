@@ -45,7 +45,27 @@
   ],
   "ownership_history": [],
   "cod_history": [],
-  "suppliers": [],
+  "suppliers": [
+    {
+      "role": "solar_oem",
+      "supplier": "First Solar",
+      "model": "Series 4",
+      "grid_forming": false,
+      "source_url": "https://arena.gov.au/projects/kidston-solar-project-phase-1/"
+    },
+    {
+      "role": "inverter",
+      "supplier": "SMA",
+      "grid_forming": false,
+      "source_url": "https://arena.gov.au/projects/kidston-solar-project-phase-1/"
+    },
+    {
+      "role": "epc",
+      "supplier": "UGL",
+      "grid_forming": false,
+      "source_url": "https://arena.gov.au/projects/kidston-solar-project-phase-1/"
+    }
+  ],
   "offtakes": [],
   "scheme_contracts": [],
   "cost_sources": [],

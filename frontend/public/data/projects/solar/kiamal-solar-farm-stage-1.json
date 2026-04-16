@@ -53,7 +53,21 @@
   ],
   "ownership_history": [],
   "cod_history": [],
-  "suppliers": [],
+  "suppliers": [
+    {
+      "role": "solar_oem",
+      "supplier": "Canadian Solar",
+      "model": "KuMax CS3U-P",
+      "grid_forming": false,
+      "source_url": "https://investors.canadiansolar.com/news-releases/news-release-details/canadian-solar-partners-biosar-build-256-mwp-solar-project-total"
+    },
+    {
+      "role": "epc",
+      "supplier": "Canadian Solar / Biosar (JV)",
+      "grid_forming": false,
+      "source_url": "https://investors.canadiansolar.com/news-releases/news-release-details/canadian-solar-partners-biosar-build-256-mwp-solar-project-total"
+    }
+  ],
   "offtakes": [],
   "scheme_contracts": [],
   "cost_sources": [],

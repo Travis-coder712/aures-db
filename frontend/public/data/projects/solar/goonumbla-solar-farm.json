@@ -45,7 +45,20 @@
   ],
   "ownership_history": [],
   "cod_history": [],
-  "suppliers": [],
+  "suppliers": [
+    {
+      "role": "solar_oem",
+      "supplier": "Chint Solar",
+      "grid_forming": false,
+      "source_url": "https://www.power-technology.com/marketdata/frv-goonumbla-solar-pv-park-australia/"
+    },
+    {
+      "role": "epc",
+      "supplier": "Gransolar (GRS)",
+      "grid_forming": false,
+      "source_url": "https://www.power-technology.com/marketdata/frv-goonumbla-solar-pv-park-australia/"
+    }
+  ],
   "offtakes": [],
   "scheme_contracts": [],
   "cost_sources": [],

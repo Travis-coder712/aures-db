@@ -45,7 +45,23 @@
   ],
   "ownership_history": [],
   "cod_history": [],
-  "suppliers": [],
+  "suppliers": [
+    {
+      "role": "hydro_oem",
+      "supplier": "Boving",
+      "model": "Pelton",
+      "quantity": 6,
+      "grid_forming": false,
+      "source_url": "https://www.andritz.com/hydro-en/hydronews/hn34/poatina-australia"
+    },
+    {
+      "role": "hydro_oem",
+      "supplier": "Andritz",
+      "model": "Refurbishment",
+      "grid_forming": false,
+      "source_url": "https://www.andritz.com/hydro-en/hydronews/hn34/poatina-australia"
+    }
+  ],
   "offtakes": [],
   "scheme_contracts": [],
   "cost_sources": [],

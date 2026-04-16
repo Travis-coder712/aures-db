@@ -45,7 +45,26 @@
   ],
   "ownership_history": [],
   "cod_history": [],
-  "suppliers": [],
+  "suppliers": [
+    {
+      "role": "solar_oem",
+      "supplier": "Jinko Solar",
+      "grid_forming": false,
+      "source_url": "https://en.wikipedia.org/wiki/Tailem_Bend_Solar_Power_Farm"
+    },
+    {
+      "role": "inverter",
+      "supplier": "Schneider Electric",
+      "grid_forming": false,
+      "source_url": "https://en.wikipedia.org/wiki/Tailem_Bend_Solar_Power_Farm"
+    },
+    {
+      "role": "epc",
+      "supplier": "UGL",
+      "grid_forming": false,
+      "source_url": "https://en.wikipedia.org/wiki/Tailem_Bend_Solar_Power_Farm"
+    }
+  ],
   "offtakes": [],
   "scheme_contracts": [],
   "cost_sources": [],

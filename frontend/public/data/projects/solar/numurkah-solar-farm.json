@@ -45,7 +45,20 @@
   ],
   "ownership_history": [],
   "cod_history": [],
-  "suppliers": [],
+  "suppliers": [
+    {
+      "role": "solar_oem",
+      "supplier": "LONGi",
+      "grid_forming": false,
+      "source_url": "https://www.powerinfotoday.com/solar-energy/longi-supplied-128mw-high-efficiency-monocrystalline-panels-to-the-biggest-numurkah-solar-farm-in-australia/"
+    },
+    {
+      "role": "epc",
+      "supplier": "Downer",
+      "grid_forming": false,
+      "source_url": "https://www.powerinfotoday.com/solar-energy/longi-supplied-128mw-high-efficiency-monocrystalline-panels-to-the-biggest-numurkah-solar-farm-in-australia/"
+    }
+  ],
   "offtakes": [],
   "scheme_contracts": [],
   "cost_sources": [],
