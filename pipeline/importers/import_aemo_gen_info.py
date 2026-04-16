@@ -28,6 +28,7 @@ from collections import defaultdict
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 from db import get_connection, init_db, DB_PATH
 
+import json
 import openpyxl
 
 # ============================================================
@@ -35,6 +36,20 @@ import openpyxl
 # ============================================================
 
 DOWNLOAD_DIR = os.path.join(os.path.dirname(__file__), 'downloads')
+CONFIG_DIR = os.path.join(os.path.dirname(__file__), '..', 'config')
+
+def load_consolidated_projects():
+    """Load the consolidated projects config — AEMO IDs and slugs that have
+    been manually merged into a parent project and should not be recreated."""
+    config_path = os.path.join(CONFIG_DIR, 'consolidated_projects.json')
+    if not os.path.exists(config_path):
+        return {'by_aemo_id': {}, 'by_slug': {}}
+    with open(config_path) as f:
+        data = json.load(f)
+    return {
+        'by_aemo_id': {str(k): v for k, v in data.get('by_aemo_id', {}).items()},
+        'by_slug': data.get('by_slug', {}),
+    }
 AEMO_URL = 'https://www.aemo.com.au/-/media/files/electricity/nem/planning_and_forecasting/generation_information/2026/nem-generation-information-jan-2026.xlsx'
 MIN_CAPACITY_MW = 30  # Only import sites >= 30 MW
 
@@ -357,10 +372,26 @@ def import_to_database(sites: dict, source_file: str):
     new_count = 0
     updated_count = 0
     skipped_count = 0
+    consolidated_skipped = 0
+
+    # Load consolidated projects config — these AEMO IDs have been manually
+    # merged into a parent project and must not be recreated as separate records
+    consolidated = load_consolidated_projects()
+    if consolidated['by_aemo_id']:
+        print(f"  Consolidated project guard: {len(consolidated['by_aemo_id'])} AEMO IDs will be skipped")
 
     aemo_source_url = 'https://aemo.com.au/energy-systems/electricity/national-electricity-market-nem/nem-forecasting-and-planning/forecasting-and-planning-data/generation-information'
 
     for sid, site in sites.items():
+        # ── CONSOLIDATION GUARD ──
+        # Skip AEMO IDs that have been manually merged into a parent project.
+        # Without this, the importer recreates files we've deliberately consolidated.
+        if sid in consolidated['by_aemo_id']:
+            parent = consolidated['by_aemo_id'][sid]['parent_project']
+            print(f"    ⊘ Skipping AEMO ID {sid} ({site['name']}) — consolidated into {parent}")
+            consolidated_skipped += 1
+            continue
+
         tech = determine_primary_tech(dict(site['techs_capacity']))
         if not tech:
             continue
@@ -533,6 +564,8 @@ def import_to_database(sites: dict, source_file: str):
     print(f"    New projects:     {new_count}")
     print(f"    Updated projects: {updated_count}")
     print(f"    Skipped (enriched): {skipped_count}")
+    if consolidated_skipped:
+        print(f"    Skipped (consolidated): {consolidated_skipped}")
     print(f"    Total processed:  {total}")
 
     # Print summary stats

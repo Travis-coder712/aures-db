@@ -24,6 +24,18 @@ from db import get_connection, DB_PATH
 
 # Export to frontend/public/data/ so Vite serves it in dev and includes it in build
 DATA_DIR = os.path.join(os.path.dirname(__file__), '..', '..', 'frontend', 'public', 'data')
+CONFIG_DIR = os.path.join(os.path.dirname(__file__), '..', 'config')
+
+
+def load_consolidated_slugs():
+    """Load set of project slugs that have been consolidated into parent projects.
+    The exporter will skip these — they should not be written as separate JSON files."""
+    config_path = os.path.join(CONFIG_DIR, 'consolidated_projects.json')
+    if not os.path.exists(config_path):
+        return set()
+    with open(config_path) as f:
+        data = json.load(f)
+    return set(data.get('by_slug', {}).keys())
 
 
 def ensure_dir(path):
@@ -254,6 +266,16 @@ def export_all(db_path=DB_PATH):
 
     # Get all project IDs
     project_ids = [r['id'] for r in conn.execute("SELECT id FROM projects ORDER BY name").fetchall()]
+
+    # Load consolidated projects — these slugs were merged into parent projects
+    # and must not be exported as separate JSON files
+    consolidated_slugs = load_consolidated_slugs()
+    if consolidated_slugs:
+        before = len(project_ids)
+        project_ids = [pid for pid in project_ids if pid not in consolidated_slugs]
+        skipped = before - len(project_ids)
+        if skipped:
+            print(f"  Consolidation guard: skipping {skipped} merged project(s): {consolidated_slugs & set([pid for pid in project_ids]) or consolidated_slugs}")
 
     print(f"Exporting {len(project_ids)} projects...")
 

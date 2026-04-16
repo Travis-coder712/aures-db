@@ -1,0 +1,30 @@
+{
+  "_description": "AEMO Gen Info IDs and project slugs that have been manually consolidated into a parent project. The importer will skip these IDs instead of creating/updating separate records. The exporter will skip these project IDs when writing JSON files.",
+  "_usage": "When consolidating staged projects (e.g. merging Stage 1 + Stage 2 into a single file with a stages array), add the deprecated AEMO ID and slug here, pointing to the parent project that absorbed it.",
+
+  "by_aemo_id": {
+    "1870": {
+      "parent_project": "eraring-battery",
+      "reason": "Eraring Big Battery (AEMO ID 1870, 700 MW total) is the same project as eraring-battery. Origin Energy's Eraring Battery is a single 4-stage project: Stages 1-3 (460 MW) operating, Stage 4 (240 MW) construction.",
+      "consolidated_date": "2026-04-14"
+    },
+    "1523": {
+      "parent_project": "reeves-plains-power-station-bess",
+      "reason": "Reeves Plains Battery Stage 2 (AEMO ID 1523) is Stage 2 of the Reeves Plains Energy Hub BESS (AEMO ID 2906).",
+      "consolidated_date": "2026-04-16"
+    }
+  },
+
+  "by_slug": {
+    "eraring-big-battery": {
+      "parent_project": "eraring-battery",
+      "reason": "Merged into eraring-battery as a staged project.",
+      "consolidated_date": "2026-04-14"
+    },
+    "reeves-plains-battery-stage-2": {
+      "parent_project": "reeves-plains-power-station-bess",
+      "reason": "Consolidated into parent as Stage 2. Reeves Plains Energy Hub is a single staged project (S1: 250 MW construction, S2: 250 MW development).",
+      "consolidated_date": "2026-04-16"
+    }
+  }
+}
