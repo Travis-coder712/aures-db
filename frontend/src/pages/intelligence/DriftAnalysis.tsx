@@ -22,7 +22,6 @@ import ChartWrapper from '../../components/common/ChartWrapper'
 import ChartFrame from '../../components/common/ChartFrame'
 import ScrollableTable from '../../components/common/ScrollableTable'
 import DataTable from '../../components/common/DataTable'
-import type { Column } from '../../components/common/DataTable'
 import type { DriftAnalysisData, DriftProject } from '../../lib/types'
 
 /* ── icons defined BEFORE const arrays (Vite HMR issue) ── */
