@@ -446,7 +446,7 @@ export interface QuartileBenchmarks {
 }
 
 // OEM & Contractor profile types (Phase 5)
-export type OEMRole = 'wind_oem' | 'bess_oem' | 'hydro_oem' | 'inverter'
+export type OEMRole = 'wind_oem' | 'solar_oem' | 'bess_oem' | 'hydro_oem' | 'inverter'
 export type ContractorRole = 'epc' | 'bop'
 
 export interface OEMDetailBreakdown {
@@ -528,6 +528,7 @@ export const OFFTAKE_TYPE_CONFIG: Record<OfftakeType, { label: string; color: st
 
 export const OEM_ROLE_CONFIG: Record<OEMRole, { label: string; color: string }> = {
   wind_oem: { label: 'Wind OEM', color: '#3b82f6' },
+  solar_oem: { label: 'Solar OEM', color: '#facc15' },
   bess_oem: { label: 'BESS OEM', color: '#8b5cf6' },
   hydro_oem: { label: 'Hydro OEM', color: '#14b8a6' },
   inverter: { label: 'Inverter', color: '#f59e0b' },

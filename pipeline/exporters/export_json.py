@@ -959,7 +959,7 @@ def export_oem_profiles(conn):
                p.technology, p.status, p.state, p.capacity_mw, p.storage_mwh
         FROM suppliers s
         JOIN projects p ON s.project_id = p.id
-        WHERE s.role IN ('wind_oem', 'bess_oem', 'hydro_oem', 'inverter')
+        WHERE s.role IN ('wind_oem', 'solar_oem', 'bess_oem', 'hydro_oem', 'inverter')
     """).fetchall()
 
     # Group by supplier name
