@@ -3,19 +3,21 @@
   "name": "Gould Creek BESS",
   "technology": "bess",
   "status": "development",
-  "capacity_mw": 225.0,
-  "storage_mwh": 450.0,
+  "capacity_mw": 215.0,
+  "storage_mwh": 430.0,
   "state": "SA",
-  "current_developer": "Maoneng",
+  "current_developer": "Gould Creek BESS Project Pty Ltd",
   "grid_forming": false,
   "has_sips": false,
   "has_syncon": false,
   "has_statcom": false,
   "has_harmonic_filter": false,
   "data_confidence": "low",
-  "last_updated": "2026-04-16",
-  "last_verified": "2026-04-16",
+  "last_updated": "2026-04-01",
+  "last_verified": "2026-03-10",
   "aemo_gen_info_id": "2911",
+  "confidence_score": "20",
+  "development_stage": "planning_submitted",
   "timeline": [],
   "ownership_history": [],
   "cod_history": [],
@@ -31,6 +33,5 @@
       "date": "2026-01-30",
       "source_tier": 1
     }
-  ],
-  "duration_hours": 2.0
+  ]
 }

@@ -18,10 +18,10 @@
   "has_syncon": false,
   "has_statcom": false,
   "has_harmonic_filter": false,
-  "notable": "Australia's largest battery at 850MW/1,680MWh. Provides SIPS services following Eraring coal closure. Delivered ahead of schedule.",
+  "notable": "Australia's largest battery at 850 MW / 1,680 MWh. Core of the NSW System Integrity Protection Scheme (SIPS) enabling higher transmission utilisation after Eraring coal closure. Total AER-approved SIPS revenue $705.2M over 5 years (battery + paired generators + Transgrid network). Suffered catastrophic transformer failure Oct 2025 with estimated $50-80M revenue loss. Funded by Akaysha Energy (BlackRock) with $100M CEFC investment. Tesla Megapack 2XL.",
   "data_confidence": "high",
-  "last_updated": "2025-03-01",
-  "last_verified": "2025-03-01",
+  "last_updated": "2026-04-16",
+  "last_verified": "2026-04-16",
   "aemo_gen_info_id": "2220",
   "coordinates": {
     "lat": -33.07,
@@ -29,14 +29,44 @@
   },
   "timeline": [
     {
+      "date": "2022-10-14",
+      "date_precision": "day",
+      "event_type": "scheme_contract",
+      "title": "NSW Minister directs Transgrid to carry out SIPS project",
+      "detail": "Classified as Priority Transmission Infrastructure Project (PTIP) under the Electricity Infrastructure Investment (EII) Act. EnergyCo selected Akaysha Energy as SIPS battery service provider.",
+      "sources": [
+        {
+          "title": "EnergyCo — Waratah Super Battery Project",
+          "url": "https://www.energyco.nsw.gov.au/our-projects/waratah-super-battery-project",
+          "source_tier": 1
+        }
+      ]
+    },
+    {
       "date": "2022-11-01",
       "date_precision": "month",
       "event_type": "conceived",
-      "title": "NSW Government announces tender winner",
+      "title": "NSW Government announces Akaysha Energy as tender winner",
+      "detail": "Akaysha Energy (backed by BlackRock) selected to build 850 MW / 1,680 MWh battery at Eraring site for SIPS services",
       "sources": [
         {
           "title": "NSW Government",
-          "url": "https://www.nsw.gov.au/"
+          "url": "https://www.nsw.gov.au/",
+          "source_tier": 1
+        }
+      ]
+    },
+    {
+      "date": "2022-12-14",
+      "date_precision": "day",
+      "event_type": "scheme_contract",
+      "title": "AER issues SIPS battery service revenue determination",
+      "detail": "AER determines the revenue Transgrid may recover for the SIPS battery service component. Contestable amount (battery + paired generators combined) is commercially confidential.",
+      "sources": [
+        {
+          "title": "AER — SIPS Battery Service Determination",
+          "url": "https://www.aer.gov.au/industry/registers/determinations/waratah-super-battery-sips-battery-service",
+          "source_tier": 1
         }
       ]
     },
@@ -54,15 +84,101 @@
       ]
     },
     {
+      "date": "2023-11-29",
+      "date_precision": "day",
+      "event_type": "scheme_contract",
+      "title": "AER determines paired generation services revenue",
+      "detail": "Revenue determination for paired generators that rapidly reduce output during SIPS contingency events. Third provider added May 2024.",
+      "sources": [
+        {
+          "title": "AER — Paired Generation Services Determination",
+          "url": "https://www.aer.gov.au/industry/registers/determinations/waratah-super-battery-paired-generation-services",
+          "source_tier": 1
+        }
+      ]
+    },
+    {
+      "date": "2023-12-15",
+      "date_precision": "day",
+      "event_type": "scheme_contract",
+      "title": "AER approves Transgrid network augmentation revenue (~$105M over 5 years)",
+      "detail": "Non-contestable component: ~$104.2M (nominal) for network augmentations (line raising, tightening, substation upgrades) and SIPS control and communications system. Revenue cap ~$106.8M for 2024-29 regulatory period.",
+      "sources": [
+        {
+          "title": "AER — Network Augmentation and SIPS Control System",
+          "url": "https://www.aer.gov.au/industry/registers/determinations/waratah-super-battery-network-augmentation-and-sips-control-system",
+          "source_tier": 1
+        }
+      ]
+    },
+    {
+      "date": "2024-07-01",
+      "date_precision": "month",
+      "event_type": "scheme_contract",
+      "title": "AER publishes total WSB revenue: $705.2M nominal over 5 years",
+      "detail": "Aggregated total revenue across all 3 components (SIPS battery, paired generators, network/control). Breakdown: ~$105M Transgrid network, ~$600M+ contestable (battery + paired generators — split redacted as commercially sensitive). Payments flow: NSW consumers → distributors → Scheme Financial Vehicle → Transgrid → service providers.",
+      "sources": [
+        {
+          "title": "AER — Waratah Super Battery Total Revenue",
+          "url": "https://www.aer.gov.au/industry/registers/determinations/waratah-super-battery-total-revenue",
+          "source_tier": 1
+        },
+        {
+          "title": "AER — Revenue Summary PDF",
+          "url": "https://www.aer.gov.au/system/files/2024-07/Waratah%20Super%20Battery%20Project%20Revenue%20Summary_0.pdf",
+          "source_tier": 1
+        },
+        {
+          "title": "RenewEconomy — Giant Waratah Super Battery to receive more than $700m",
+          "url": "https://reneweconomy.com.au/filling-eraring-gap-giant-waratah-super-battery-project-to-receive-more-than-700m/",
+          "source_tier": 2
+        }
+      ]
+    },
+    {
       "date": "2024-11-01",
       "date_precision": "month",
       "event_type": "cod",
-      "title": "Full commercial operations \u2014 850 MW",
-      "detail": "Commissioned as Australia's largest battery and one of the largest in the world",
+      "title": "Full commercial operations — 850 MW / 1,680 MWh",
+      "detail": "Commissioned as Australia's largest battery and one of the largest in the world. Delivered ahead of original schedule.",
       "sources": [
         {
           "title": "AEMO Generation Information",
-          "url": "https://aemo.com.au"
+          "url": "https://aemo.com.au",
+          "source_tier": 1
+        }
+      ]
+    },
+    {
+      "date": "2025-10-01",
+      "date_precision": "month",
+      "event_type": "stakeholder_issue",
+      "title": "Catastrophic transformer failure takes battery offline",
+      "detail": "Major transformer failure resulted in extended outage. Estimated revenue loss $50-80M from SIPS availability payments. Significant media scrutiny of project reliability.",
+      "sources": [
+        {
+          "title": "RenewEconomy — Waratah Super Battery revenue haircut",
+          "url": "https://reneweconomy.com.au/waratah-super-battery-to-take-another-revenue-haircut-as-transformer-failure-causes-more-delays/",
+          "source_tier": 2
+        },
+        {
+          "title": "WattClarity — AFR Article Discussion",
+          "url": "https://wattclarity.com.au/articles/2025/11/11nov-wtahb1-afr-article/",
+          "source_tier": 2
+        }
+      ]
+    },
+    {
+      "date": "2025-03-28",
+      "date_precision": "day",
+      "event_type": "other",
+      "title": "Transgrid submits revenue adjustment proposal to AER",
+      "detail": "Revenue adjustment due to commissioning delays and transformer failure. AER approved a reduction to SIPS battery service payments — amounts redacted as commercially sensitive.",
+      "sources": [
+        {
+          "title": "AER — Revenue Adjustment Proposal March 2025",
+          "url": "https://www.aer.gov.au/documents/transgrid-revenue-adjustment-proposal-waratah-super-battery-project-sips-battery-service-28-march-2025",
+          "source_tier": 1
         }
       ]
     }
@@ -84,13 +200,145 @@
     }
   ],
   "offtakes": [],
-  "scheme_contracts": [],
-  "cost_sources": [],
-  "stakeholder_issues": [],
+  "scheme_contracts": [
+    {
+      "scheme": "NSW SIPS (System Integrity Protection Scheme)",
+      "type": "SIPS battery service — availability payment",
+      "awarding_body": "EnergyCo (NSW) / Transgrid (counterparty)",
+      "regulator": "AER",
+      "total_aer_revenue_all_components": "$705.2M nominal (5yr, 2024-2029)",
+      "revenue_breakdown": {
+        "transgrid_network_and_control": "~$105M (non-contestable — line raising, substation upgrades, SIPS control system)",
+        "battery_plus_paired_generators": "~$600M+ (contestable — split between Akaysha and paired generators is redacted as commercially confidential)",
+        "average_annual_contestable": ">$110M/year from 2025/26"
+      },
+      "contract_start": "2022-12",
+      "revenue_period": "2024/25 to ~2030/31",
+      "payment_structure": "Quarterly availability payments from Scheme Financial Vehicle → Transgrid → Akaysha. Revenue reduced when battery unavailable.",
+      "funding_chain": "NSW electricity consumers → distributors (Ausgrid, Endeavour, Essential) → Scheme Financial Vehicle → Transgrid → service providers",
+      "legislative_basis": "Electricity Infrastructure Investment (EII) Act — Priority Transmission Infrastructure Project (PTIP)",
+      "sips_service_description": "Battery must maintain guaranteed continuous active power capacity ≥700 MW and useable energy storage ≥1,400 MWh. Provides instant discharge when SIPS control system signals a network contingency, enabling transmission lines to run at higher capacity. Paired generators simultaneously ramp down to prevent overloads.",
+      "transparency_note": "The AER has redacted the specific payment split between Akaysha (battery) and paired generators as commercially sensitive. Only the aggregated contestable total and the non-contestable Transgrid amount are public.",
+      "revenue_adjustments": [
+        {
+          "date": "2025-03-28",
+          "reason": "Commissioning delays and transformer failure",
+          "outcome": "AER approved reduction to SIPS battery service payments (amount redacted)"
+        }
+      ],
+      "sources": [
+        {
+          "title": "AER — Waratah Super Battery Total Revenue",
+          "url": "https://www.aer.gov.au/industry/registers/determinations/waratah-super-battery-total-revenue",
+          "source_tier": 1
+        },
+        {
+          "title": "AER — SIPS Battery Service Determination",
+          "url": "https://www.aer.gov.au/industry/registers/determinations/waratah-super-battery-sips-battery-service",
+          "source_tier": 1
+        },
+        {
+          "title": "AER — Network Augmentation and SIPS Control System",
+          "url": "https://www.aer.gov.au/industry/registers/determinations/waratah-super-battery-network-augmentation-and-sips-control-system",
+          "source_tier": 1
+        },
+        {
+          "title": "AER — Paired Generation Services",
+          "url": "https://www.aer.gov.au/industry/registers/determinations/waratah-super-battery-paired-generation-services",
+          "source_tier": 1
+        }
+      ]
+    }
+  ],
+  "cost_sources": [
+    {
+      "date": "2024-07-01",
+      "amount_aud": 705200000,
+      "description": "Total AER-approved SIPS revenue (all 3 components: battery, paired generators, Transgrid network) over 5 years. NOT the construction cost — estimated total construction cost ~$1B (AFR). Battery share of the $705M is unknown (contestable split redacted).",
+      "source": "AER Revenue Summary"
+    },
+    {
+      "date": "2022-11-01",
+      "amount_aud": 100000000,
+      "description": "CEFC investment in Waratah Super Battery construction",
+      "source": "CEFC"
+    }
+  ],
+  "stakeholder_issues": [
+    {
+      "date": "2025-10",
+      "issue": "Catastrophic transformer failure",
+      "detail": "Major transformer failure caused extended outage, triggering SIPS availability payment reductions. Estimated revenue loss $50-80M. Significant media scrutiny from AFR, RenewEconomy, WattClarity. AER approved revenue adjustment March 2025.",
+      "status": "resolved"
+    }
+  ],
   "sources": [
     {
-      "title": "AEMO Generation Information",
-      "url": "https://aemo.com.au"
+      "title": "AEMO Generation Information Jan 2026",
+      "url": "https://aemo.com.au/energy-systems/electricity/national-electricity-market-nem/nem-forecasting-and-planning/forecasting-and-planning-data/generation-information",
+      "date": "2026-01-30",
+      "source_tier": 1
+    },
+    {
+      "title": "AER — Waratah Super Battery Total Revenue",
+      "url": "https://www.aer.gov.au/industry/registers/determinations/waratah-super-battery-total-revenue",
+      "date": "2024-07-01",
+      "source_tier": 1
+    },
+    {
+      "title": "AER — SIPS Battery Service Determination",
+      "url": "https://www.aer.gov.au/industry/registers/determinations/waratah-super-battery-sips-battery-service",
+      "date": "2022-12-14",
+      "source_tier": 1
+    },
+    {
+      "title": "AER — Revenue Summary PDF",
+      "url": "https://www.aer.gov.au/system/files/2024-07/Waratah%20Super%20Battery%20Project%20Revenue%20Summary_0.pdf",
+      "date": "2024-07-01",
+      "source_tier": 1
+    },
+    {
+      "title": "AER — Network Augmentation and SIPS Control System",
+      "url": "https://www.aer.gov.au/industry/registers/determinations/waratah-super-battery-network-augmentation-and-sips-control-system",
+      "date": "2023-12-15",
+      "source_tier": 1
+    },
+    {
+      "title": "AER — Paired Generation Services",
+      "url": "https://www.aer.gov.au/industry/registers/determinations/waratah-super-battery-paired-generation-services",
+      "date": "2023-11-29",
+      "source_tier": 1
+    },
+    {
+      "title": "AER — Revenue Adjustment Proposal March 2025",
+      "url": "https://www.aer.gov.au/documents/transgrid-revenue-adjustment-proposal-waratah-super-battery-project-sips-battery-service-28-march-2025",
+      "date": "2025-03-28",
+      "source_tier": 1
+    },
+    {
+      "title": "EnergyCo — Waratah Super Battery Project",
+      "url": "https://www.energyco.nsw.gov.au/our-projects/waratah-super-battery-project",
+      "source_tier": 1
+    },
+    {
+      "title": "Transgrid — SIPS Control System",
+      "url": "https://www.transgrid.com.au/media-publications/news-articles/transgrid-specialists-deliver-australian-first-control-system-to-support-waratah-super-battery-project/",
+      "source_tier": 1
+    },
+    {
+      "title": "RenewEconomy — Giant Waratah Super Battery to receive more than $700m",
+      "url": "https://reneweconomy.com.au/filling-eraring-gap-giant-waratah-super-battery-project-to-receive-more-than-700m/",
+      "source_tier": 2
+    },
+    {
+      "title": "RenewEconomy — Waratah Super Battery revenue haircut",
+      "url": "https://reneweconomy.com.au/waratah-super-battery-to-take-another-revenue-haircut-as-transformer-failure-causes-more-delays/",
+      "source_tier": 2
+    },
+    {
+      "title": "WattClarity — AFR Article Discussion",
+      "url": "https://wattclarity.com.au/articles/2025/11/11nov-wtahb1-afr-article/",
+      "source_tier": 2
     }
   ]
 }

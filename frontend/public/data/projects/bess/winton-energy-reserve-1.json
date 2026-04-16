@@ -3,7 +3,7 @@
   "name": "Winton Energy Reserve 1",
   "technology": "bess",
   "status": "development",
-  "capacity_mw": 200.0,
+  "capacity_mw": 400.0,
   "storage_mwh": 400.0,
   "state": "VIC",
   "current_developer": "Lochard Energy",
@@ -13,9 +13,11 @@
   "has_statcom": false,
   "has_harmonic_filter": false,
   "data_confidence": "low",
-  "last_updated": "2026-04-16",
-  "last_verified": "2026-04-16",
+  "last_updated": "2026-04-01",
+  "last_verified": "2026-03-10",
   "aemo_gen_info_id": "1984",
+  "confidence_score": "20",
+  "development_stage": "planning_submitted",
   "timeline": [],
   "ownership_history": [],
   "cod_history": [],
@@ -31,6 +33,5 @@
       "date": "2026-01-30",
       "source_tier": 1
     }
-  ],
-  "duration_hours": 2.0
+  ]
 }

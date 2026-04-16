@@ -506,42 +506,9 @@
       "current_developer": "Origin Energy",
       "bess_oem": "Wartsila",
       "bess_model": "Quantum / Quantum3",
-      "capex_scope_note": "Total capex across all 4 stages",
       "capex_per_mw": 2.07,
       "capex_per_mwh": 0.46,
-      "duration_hours": 4.5,
-      "stages": [
-        {
-          "stage": 1,
-          "name": "Stage 1",
-          "capacity_mw": 460.0,
-          "storage_mwh": 1770.0,
-          "status": "operating",
-          "capex_aud_m": 600.0
-        },
-        {
-          "stage": 2,
-          "name": "Stage 2",
-          "capacity_mw": 240.0,
-          "storage_mwh": 1030.0,
-          "status": "construction",
-          "capex_aud_m": 490.0
-        },
-        {
-          "stage": 3,
-          "name": "Stage 3",
-          "capacity_mw": 0.0,
-          "storage_mwh": 0.0,
-          "status": "development"
-        },
-        {
-          "stage": 4,
-          "name": "Stage 4",
-          "capacity_mw": 0.0,
-          "storage_mwh": 360.0,
-          "status": "construction"
-        }
-      ]
+      "duration_hours": 4.5
     },
     {
       "id": "orana-bess",
@@ -694,5 +661,5 @@
       "avg_capex_per_mwh": 0.5
     }
   },
-  "exported_at": "2026-04-15T18:21:11.986409"
+  "exported_at": "2026-04-16T21:31:55.848866"
 }

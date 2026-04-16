@@ -265,41 +265,6 @@
       ]
     },
     {
-      "slug": "neoen-australia",
-      "name": "Neoen Australia Pty Ltd",
-      "project_count": 11,
-      "total_capacity_mw": 3160.0,
-      "total_storage_mwh": 11070.9,
-      "by_technology": {
-        "bess": 9,
-        "hybrid": 1,
-        "wind": 1
-      },
-      "by_status": {
-        "development": 11
-      },
-      "states": [
-        "NSW",
-        "QLD",
-        "SA",
-        "TAS"
-      ],
-      "avg_confidence": "medium",
-      "project_ids": [
-        "great-western-battery-project",
-        "tchelery-wind-farm-and-bess",
-        "culcairn-bess",
-        "goyder-bess",
-        "goyder-north-bess-2",
-        "mount-hopeful-bess",
-        "tchelery-bess",
-        "thunderbolt-wind-farm",
-        "goyder-bess-stage-2",
-        "territory-battery",
-        "great-lakes-battery"
-      ]
-    },
-    {
       "slug": "collinsville-green-energy-hub",
       "name": "COLLINSVILLE GREEN ENERGY HUB PTY LTD",
       "project_count": 1,
@@ -377,6 +342,40 @@
       "avg_confidence": "medium",
       "project_ids": [
         "deal-2-east-off-shore-wind-farm"
+      ]
+    },
+    {
+      "slug": "neoen-australia",
+      "name": "Neoen Australia Pty Ltd",
+      "project_count": 10,
+      "total_capacity_mw": 2960.0,
+      "total_storage_mwh": 10270.9,
+      "by_technology": {
+        "bess": 8,
+        "hybrid": 1,
+        "wind": 1
+      },
+      "by_status": {
+        "development": 10
+      },
+      "states": [
+        "NSW",
+        "QLD",
+        "SA",
+        "TAS"
+      ],
+      "avg_confidence": "medium",
+      "project_ids": [
+        "great-western-battery-project",
+        "tchelery-wind-farm-and-bess",
+        "culcairn-bess",
+        "goyder-bess",
+        "goyder-north-bess-2",
+        "mount-hopeful-bess",
+        "tchelery-bess",
+        "thunderbolt-wind-farm",
+        "territory-battery",
+        "great-lakes-battery"
       ]
     },
     {
@@ -475,38 +474,6 @@
         "uungula-bess",
         "koorakee-wind-farm",
         "jeremiah-wind-farm"
-      ]
-    },
-    {
-      "slug": "origin-energy",
-      "name": "Origin Energy",
-      "project_count": 7,
-      "total_capacity_mw": 2785.0,
-      "total_storage_mwh": 9450.0,
-      "by_technology": {
-        "bess": 3,
-        "pumped_hydro": 1,
-        "solar": 3
-      },
-      "by_status": {
-        "operating": 1,
-        "development": 5,
-        "commissioning": 1
-      },
-      "states": [
-        "NSW",
-        "SA",
-        "VIC"
-      ],
-      "avg_confidence": "low",
-      "project_ids": [
-        "yanco-delta",
-        "eraring-battery",
-        "yarrabee-solar-power-project",
-        "mortlake-battery",
-        "shoalhaven-expansion",
-        "yanco-solar-farm",
-        "morgan-long-duration-energy-storage-kci"
       ]
     },
     {
@@ -814,6 +781,36 @@
       "project_ids": [
         "mt-arthur-pumped-hydro-energy-storage-project-kci",
         "aldoga-solar-farm"
+      ]
+    },
+    {
+      "slug": "origin-energy",
+      "name": "Origin Energy",
+      "project_count": 6,
+      "total_capacity_mw": 2085.0,
+      "total_storage_mwh": 6290.0,
+      "by_technology": {
+        "bess": 2,
+        "pumped_hydro": 1,
+        "solar": 3
+      },
+      "by_status": {
+        "development": 5,
+        "commissioning": 1
+      },
+      "states": [
+        "NSW",
+        "SA",
+        "VIC"
+      ],
+      "avg_confidence": "low",
+      "project_ids": [
+        "yanco-delta",
+        "yarrabee-solar-power-project",
+        "mortlake-battery",
+        "shoalhaven-expansion",
+        "yanco-solar-farm",
+        "morgan-long-duration-energy-storage-kci"
       ]
     },
     {
@@ -1236,32 +1233,6 @@
       ]
     },
     {
-      "slug": "genex-power-limited",
-      "name": "Genex Power Limited",
-      "project_count": 5,
-      "total_capacity_mw": 1745.0,
-      "total_storage_mwh": 2600.0,
-      "by_technology": {
-        "bess": 2,
-        "solar": 3
-      },
-      "by_status": {
-        "development": 4,
-        "operating": 1
-      },
-      "states": [
-        "QLD"
-      ],
-      "avg_confidence": "low",
-      "project_ids": [
-        "bulli-creek-solar-farm",
-        "bulli-creek-battery",
-        "kidston-solar-project-phase-two",
-        "bouldercombe-battery-project-stage-2-kci",
-        "kidston-solar-project-phase-one"
-      ]
-    },
-    {
       "slug": "bluefloat-energy-origin-energy-cancelled",
       "name": "BlueFloat Energy / Origin Energy (CANCELLED)",
       "project_count": 1,
@@ -1301,6 +1272,31 @@
       "project_ids": [
         "marmadua-wind-farm-kci",
         "middle-creek-renewable-energy-hub-wind"
+      ]
+    },
+    {
+      "slug": "genex-power-limited",
+      "name": "Genex Power Limited",
+      "project_count": 4,
+      "total_capacity_mw": 1695.0,
+      "total_storage_mwh": 2400.0,
+      "by_technology": {
+        "bess": 1,
+        "solar": 3
+      },
+      "by_status": {
+        "development": 3,
+        "operating": 1
+      },
+      "states": [
+        "QLD"
+      ],
+      "avg_confidence": "medium",
+      "project_ids": [
+        "bulli-creek-solar-farm",
+        "bulli-creek-battery",
+        "kidston-solar-project-phase-two",
+        "kidston-solar-project-phase-one"
       ]
     },
     {
@@ -1968,32 +1964,6 @@
       ]
     },
     {
-      "slug": "firm-power-p-l",
-      "name": "FIrm Power P/L",
-      "project_count": 6,
-      "total_capacity_mw": 1225.0,
-      "total_storage_mwh": 3334.1,
-      "by_technology": {
-        "bess": 6
-      },
-      "by_status": {
-        "development": 6
-      },
-      "states": [
-        "NSW",
-        "QLD"
-      ],
-      "avg_confidence": "medium",
-      "project_ids": [
-        "kangaroo-valley-bess",
-        "blackstone-bess",
-        "blackstone-bess-2-kci",
-        "abermain-bess",
-        "glen-inness-bess-kci",
-        "murrumburrah-bess-kci"
-      ]
-    },
-    {
       "slug": "agl-energy",
       "name": "AGL Energy",
       "project_count": 3,
@@ -2552,28 +2522,6 @@
       ]
     },
     {
-      "slug": "green-switch-energy",
-      "name": "Green Switch Energy Pty Ltd",
-      "project_count": 3,
-      "total_capacity_mw": 1000.0,
-      "total_storage_mwh": 1500.0,
-      "by_technology": {
-        "bess": 3
-      },
-      "by_status": {
-        "development": 3
-      },
-      "states": [
-        "VIC"
-      ],
-      "avg_confidence": "low",
-      "project_ids": [
-        "malunga-nine-mile-bess-kci",
-        "nine-mile-energy-park-stage-1-bess",
-        "nine-mile-energy-park-stage-2-bess"
-      ]
-    },
-    {
       "slug": "valent-energy-developments",
       "name": "Valent Energy Developments Pty Ltd",
       "project_count": 1,
@@ -2611,6 +2559,31 @@
       "avg_confidence": "medium",
       "project_ids": [
         "western-sydney-pumped-hydro-project"
+      ]
+    },
+    {
+      "slug": "firm-power-p-l",
+      "name": "FIrm Power P/L",
+      "project_count": 5,
+      "total_capacity_mw": 975.0,
+      "total_storage_mwh": 2802.8,
+      "by_technology": {
+        "bess": 5
+      },
+      "by_status": {
+        "development": 5
+      },
+      "states": [
+        "NSW",
+        "QLD"
+      ],
+      "avg_confidence": "medium",
+      "project_ids": [
+        "kangaroo-valley-bess",
+        "blackstone-bess",
+        "abermain-bess",
+        "glen-inness-bess-kci",
+        "murrumburrah-bess-kci"
       ]
     },
     {
@@ -2792,31 +2765,6 @@
       ]
     },
     {
-      "slug": "firmpower-nr",
-      "name": "firmpower_NR",
-      "project_count": 5,
-      "total_capacity_mw": 870.0,
-      "total_storage_mwh": 2785.4,
-      "by_technology": {
-        "bess": 5
-      },
-      "by_status": {
-        "development": 5
-      },
-      "states": [
-        "NSW",
-        "QLD"
-      ],
-      "avg_confidence": "medium",
-      "project_ids": [
-        "mount-britton-bess1",
-        "mount-britton-bess2",
-        "beresfield-bess",
-        "muswellbrook-bess",
-        "awaba-bess"
-      ]
-    },
-    {
       "slug": "frv",
       "name": "FRV",
       "project_count": 3,
@@ -2911,29 +2859,6 @@
         "megalink-bess",
         "opal-bess",
         "lindley-bess"
-      ]
-    },
-    {
-      "slug": "libra-energy",
-      "name": "Libra Energy Pty Ltd",
-      "project_count": 4,
-      "total_capacity_mw": 848.0,
-      "total_storage_mwh": 0,
-      "by_technology": {
-        "bess": 4
-      },
-      "by_status": {
-        "development": 4
-      },
-      "states": [
-        "QLD"
-      ],
-      "avg_confidence": "low",
-      "project_ids": [
-        "bremer-battery-1",
-        "bremer-battery-2",
-        "bremer-battery-3",
-        "bremer-battery-4"
       ]
     },
     {
@@ -3105,27 +3030,6 @@
       ]
     },
     {
-      "slug": "edpr-australia",
-      "name": "EDPR Australia Pty Ltd",
-      "project_count": 2,
-      "total_capacity_mw": 800.0,
-      "total_storage_mwh": 800.0,
-      "by_technology": {
-        "bess": 2
-      },
-      "by_status": {
-        "development": 2
-      },
-      "states": [
-        "QLD"
-      ],
-      "avg_confidence": "medium",
-      "project_ids": [
-        "punchs-creek-hybrid-stage-3-kci",
-        "punchs-creek-hybrid-stage-2-kci"
-      ]
-    },
-    {
       "slug": "red-hill-renewable-energy",
       "name": "Red Hill Renewable Energy Pty Ltd",
       "project_count": 2,
@@ -3277,28 +3181,6 @@
         "supernode-bess-stage-3",
         "supernode-bess-stage-4",
         "supernode-bess-stage-5"
-      ]
-    },
-    {
-      "slug": "supernode-north-bess-projectco",
-      "name": "Supernode North BESS ProjectCo Pty Ltd",
-      "project_count": 3,
-      "total_capacity_mw": 780.0,
-      "total_storage_mwh": 6240.0,
-      "by_technology": {
-        "bess": 3
-      },
-      "by_status": {
-        "development": 3
-      },
-      "states": [
-        "QLD"
-      ],
-      "avg_confidence": "medium",
-      "project_ids": [
-        "supernode-north-bess-1",
-        "supernode-north-bess-2",
-        "supernode-north-bess-3"
       ]
     },
     {
@@ -4711,6 +4593,26 @@
       "avg_confidence": "low",
       "project_ids": [
         "maison-dieu-bess"
+      ]
+    },
+    {
+      "slug": "green-switch-energy",
+      "name": "Green Switch Energy Pty Ltd",
+      "project_count": 1,
+      "total_capacity_mw": 500.0,
+      "total_storage_mwh": 0,
+      "by_technology": {
+        "bess": 1
+      },
+      "by_status": {
+        "development": 1
+      },
+      "states": [
+        "VIC"
+      ],
+      "avg_confidence": "low",
+      "project_ids": [
+        "malunga-nine-mile-bess-kci"
       ]
     },
     {
@@ -6230,6 +6132,28 @@
       "avg_confidence": "low",
       "project_ids": [
         "swallow-tail-bess"
+      ]
+    },
+    {
+      "slug": "firmpower-nr",
+      "name": "firmpower_NR",
+      "project_count": 3,
+      "total_capacity_mw": 370.0,
+      "total_storage_mwh": 785.4,
+      "by_technology": {
+        "bess": 3
+      },
+      "by_status": {
+        "development": 3
+      },
+      "states": [
+        "NSW"
+      ],
+      "avg_confidence": "medium",
+      "project_ids": [
+        "beresfield-bess",
+        "muswellbrook-bess",
+        "awaba-bess"
       ]
     },
     {
@@ -8321,7 +8245,7 @@
       ]
     },
     {
-      "slug": "alinta-energy-reeves-plains-2",
+      "slug": "alinta-energy-reeves-plains",
       "name": "Alinta Energy (Reeves Plains) Pty Ltd",
       "project_count": 1,
       "total_capacity_mw": 250.0,
@@ -9501,26 +9425,6 @@
       "avg_confidence": "low",
       "project_ids": [
         "pleystowe-bess"
-      ]
-    },
-    {
-      "slug": "pleystowe-bess-p-l",
-      "name": "Pleystowe BESS P/L",
-      "project_count": 1,
-      "total_capacity_mw": 200.0,
-      "total_storage_mwh": 0,
-      "by_technology": {
-        "bess": 1
-      },
-      "by_status": {
-        "development": 1
-      },
-      "states": [
-        "QLD"
-      ],
-      "avg_confidence": "low",
-      "project_ids": [
-        "pleystowe-bess-kci"
       ]
     },
     {
@@ -14290,26 +14194,6 @@
       ]
     },
     {
-      "slug": "alinta-energy-reeves-plains",
-      "name": "Alinta Energy Reeves Plains Pty Ltd",
-      "project_count": 1,
-      "total_capacity_mw": 50.0,
-      "total_storage_mwh": 400.0,
-      "by_technology": {
-        "bess": 1
-      },
-      "by_status": {
-        "development": 1
-      },
-      "states": [
-        "SA"
-      ],
-      "avg_confidence": "medium",
-      "project_ids": [
-        "reeves-plains-battery-stage-2"
-      ]
-    },
-    {
       "slug": "transgrid",
       "name": "TransGrid",
       "project_count": 1,
@@ -14810,7 +14694,7 @@
       ]
     }
   ],
-  "total_developers": 711,
+  "total_developers": 706,
   "grouped_developers": [
     {
       "slug": "acen",
@@ -14970,20 +14854,20 @@
         "Origin Energy Pty Ltd",
         "Origin energy"
       ],
-      "project_count": 15,
-      "total_capacity_mw": 8445.0,
-      "total_storage_mwh": 14850.0,
+      "project_count": 14,
+      "total_capacity_mw": 7745.0,
+      "total_storage_mwh": 11690.0,
       "by_technology": {
         "offshore_wind": 1,
-        "bess": 5,
+        "bess": 4,
         "pumped_hydro": 2,
         "solar": 4,
         "wind": 3
       },
       "by_status": {
         "development": 12,
-        "operating": 2,
-        "commissioning": 1
+        "commissioning": 1,
+        "operating": 1
       },
       "states": [
         "NSW",
@@ -14996,7 +14880,6 @@
         "yanco-delta-wind-farm",
         "skye-ridge-wind-farm",
         "yanco-delta",
-        "eraring-battery",
         "yarrabee-solar-power-project",
         "salisbury-solar-450mw",
         "mortlake-battery",
@@ -15052,67 +14935,6 @@
         "golden-plains-bess",
         "golden-plains-bess-2-kci",
         "kincraig-bess"
-      ]
-    },
-    {
-      "slug": "agl-energy",
-      "name": "AGL Energy",
-      "aliases": [
-        "AGL",
-        "AGL Energy",
-        "AGL Energy Limited",
-        "AGL Hydro Partnership",
-        "FIrm Power P/L",
-        "firmpower_NR"
-      ],
-      "project_count": 25,
-      "total_capacity_mw": 6633.0,
-      "total_storage_mwh": 17649.5,
-      "by_technology": {
-        "bess": 17,
-        "wind": 1,
-        "pumped_hydro": 5,
-        "solar": 2
-      },
-      "by_status": {
-        "construction": 1,
-        "operating": 6,
-        "commissioning": 1,
-        "development": 17
-      },
-      "states": [
-        "NSW",
-        "QLD",
-        "SA",
-        "VIC"
-      ],
-      "avg_confidence": "medium",
-      "project_ids": [
-        "tomago-bess",
-        "liddell-bess",
-        "madeline-downs-bess",
-        "woodstock-bess",
-        "coopers-gap-wind-farm",
-        "muswellbrook-pumped-hydro",
-        "kangaroo-valley-bess",
-        "bogong-mackay",
-        "wellington-north-solar-farm",
-        "barn-hill-bess",
-        "torrens-island-bess",
-        "blackstone-bess",
-        "blackstone-bess-2-kci",
-        "mount-britton-bess1",
-        "mount-britton-bess2",
-        "yadnarie-solar-farm",
-        "dartmouth",
-        "beresfield-bess",
-        "muswellbrook-bess",
-        "abermain-bess",
-        "eildon",
-        "glen-inness-bess-kci",
-        "murrumburrah-bess-kci",
-        "west-kiewa",
-        "awaba-bess"
       ]
     },
     {
@@ -15229,6 +15051,64 @@
         "uungula-bess",
         "koorakee-wind-farm",
         "jeremiah-wind-farm"
+      ]
+    },
+    {
+      "slug": "agl-energy",
+      "name": "AGL Energy",
+      "aliases": [
+        "AGL",
+        "AGL Energy",
+        "AGL Energy Limited",
+        "AGL Hydro Partnership",
+        "FIrm Power P/L",
+        "firmpower_NR"
+      ],
+      "project_count": 22,
+      "total_capacity_mw": 5883.0,
+      "total_storage_mwh": 15118.2,
+      "by_technology": {
+        "bess": 14,
+        "wind": 1,
+        "pumped_hydro": 5,
+        "solar": 2
+      },
+      "by_status": {
+        "construction": 1,
+        "operating": 6,
+        "commissioning": 1,
+        "development": 14
+      },
+      "states": [
+        "NSW",
+        "QLD",
+        "SA",
+        "VIC"
+      ],
+      "avg_confidence": "medium",
+      "project_ids": [
+        "tomago-bess",
+        "liddell-bess",
+        "madeline-downs-bess",
+        "woodstock-bess",
+        "coopers-gap-wind-farm",
+        "muswellbrook-pumped-hydro",
+        "kangaroo-valley-bess",
+        "bogong-mackay",
+        "wellington-north-solar-farm",
+        "barn-hill-bess",
+        "torrens-island-bess",
+        "blackstone-bess",
+        "yadnarie-solar-farm",
+        "dartmouth",
+        "beresfield-bess",
+        "muswellbrook-bess",
+        "abermain-bess",
+        "eildon",
+        "glen-inness-bess-kci",
+        "murrumburrah-bess-kci",
+        "west-kiewa",
+        "awaba-bess"
       ]
     },
     {
@@ -15382,52 +15262,6 @@
       ]
     },
     {
-      "slug": "neoen",
-      "name": "Neoen",
-      "aliases": [
-        "Neoen",
-        "Neoen Australia",
-        "Neoen Australia Pty Ltd"
-      ],
-      "project_count": 16,
-      "total_capacity_mw": 4404.0,
-      "total_storage_mwh": 11981.9,
-      "by_technology": {
-        "bess": 13,
-        "wind": 2,
-        "hybrid": 1
-      },
-      "by_status": {
-        "operating": 4,
-        "development": 12
-      },
-      "states": [
-        "NSW",
-        "QLD",
-        "SA",
-        "TAS"
-      ],
-      "avg_confidence": "medium",
-      "project_ids": [
-        "goyder-north-wind-farm",
-        "great-western-battery-project",
-        "tchelery-wind-farm-and-bess",
-        "culcairn-bess",
-        "goyder-bess",
-        "goyder-north-bess-2",
-        "mount-hopeful-bess",
-        "tchelery-bess",
-        "thunderbolt-wind-farm",
-        "blyth-bess",
-        "goyder-bess-stage-2",
-        "territory-battery",
-        "hornsdale-power-reserve",
-        "hornsdale-power-reserve-unit-1",
-        "capital-battery",
-        "great-lakes-battery"
-      ]
-    },
-    {
       "slug": "lightsource-bp",
       "name": "Lightsource bp",
       "aliases": [
@@ -15557,6 +15391,51 @@
         "brewongle-solar-farm",
         "burroway-bess",
         "peninsula-solar-farm-and-bess"
+      ]
+    },
+    {
+      "slug": "neoen",
+      "name": "Neoen",
+      "aliases": [
+        "Neoen",
+        "Neoen Australia",
+        "Neoen Australia Pty Ltd"
+      ],
+      "project_count": 15,
+      "total_capacity_mw": 4204.0,
+      "total_storage_mwh": 11181.9,
+      "by_technology": {
+        "bess": 12,
+        "wind": 2,
+        "hybrid": 1
+      },
+      "by_status": {
+        "operating": 4,
+        "development": 11
+      },
+      "states": [
+        "NSW",
+        "QLD",
+        "SA",
+        "TAS"
+      ],
+      "avg_confidence": "medium",
+      "project_ids": [
+        "goyder-north-wind-farm",
+        "great-western-battery-project",
+        "tchelery-wind-farm-and-bess",
+        "culcairn-bess",
+        "goyder-bess",
+        "goyder-north-bess-2",
+        "mount-hopeful-bess",
+        "tchelery-bess",
+        "thunderbolt-wind-farm",
+        "blyth-bess",
+        "territory-battery",
+        "hornsdale-power-reserve",
+        "hornsdale-power-reserve-unit-1",
+        "capital-battery",
+        "great-lakes-battery"
       ]
     },
     {
@@ -15719,19 +15598,18 @@
         "Alinta Energy",
         "Alinta Energy (Reeves Plains) Pty Ltd",
         "Alinta Energy / JERA Nex (Parkwind)",
-        "Alinta Energy Clean Energy Development Pty Ltd",
-        "Alinta Energy Reeves Plains Pty Ltd"
+        "Alinta Energy Clean Energy Development Pty Ltd"
       ],
-      "project_count": 9,
-      "total_capacity_mw": 3272.8,
-      "total_storage_mwh": 5580.0,
+      "project_count": 8,
+      "total_capacity_mw": 3222.8,
+      "total_storage_mwh": 5180.0,
       "by_technology": {
         "hybrid": 5,
-        "bess": 3,
+        "bess": 2,
         "offshore_wind": 1
       },
       "by_status": {
-        "development": 9
+        "development": 8
       },
       "states": [
         "NSW",
@@ -15748,8 +15626,7 @@
         "reeves-plains-power-station-bess",
         "loy-yang-b-power-station-bess-stage-1-kci",
         "mt-challenger-wind-farm",
-        "mount-lambie-wind-farm",
-        "reeves-plains-battery-stage-2"
+        "mount-lambie-wind-farm"
       ]
     },
     {
@@ -16201,18 +16078,18 @@
         "Genex Power Limited",
         "Genex Power Ltd"
       ],
-      "project_count": 9,
-      "total_capacity_mw": 2295.0,
-      "total_storage_mwh": 4200.0,
+      "project_count": 8,
+      "total_capacity_mw": 2245.0,
+      "total_storage_mwh": 4000.0,
       "by_technology": {
-        "bess": 4,
+        "bess": 3,
         "solar": 4,
         "pumped_hydro": 1
       },
       "by_status": {
         "operating": 3,
         "construction": 1,
-        "development": 5
+        "development": 4
       },
       "states": [
         "NSW",
@@ -16227,7 +16104,6 @@
         "kidston-bess",
         "bouldercombe-battery-project",
         "jemalong-solar",
-        "bouldercombe-battery-project-stage-2-kci",
         "kidston-solar-project-phase-one"
       ]
     },
@@ -17675,29 +17551,6 @@
       "aliases": []
     },
     {
-      "slug": "green-switch-energy",
-      "name": "Green Switch Energy Pty Ltd",
-      "project_count": 3,
-      "total_capacity_mw": 1000.0,
-      "total_storage_mwh": 1500.0,
-      "by_technology": {
-        "bess": 3
-      },
-      "by_status": {
-        "development": 3
-      },
-      "states": [
-        "VIC"
-      ],
-      "avg_confidence": "low",
-      "project_ids": [
-        "malunga-nine-mile-bess-kci",
-        "nine-mile-energy-park-stage-1-bess",
-        "nine-mile-energy-park-stage-2-bess"
-      ],
-      "aliases": []
-    },
-    {
       "slug": "cleanco-queensland",
       "name": "CleanCo Queensland",
       "aliases": [
@@ -17983,32 +17836,6 @@
       "aliases": []
     },
     {
-      "slug": "libra-energy",
-      "name": "Libra Energy",
-      "aliases": [
-        "Libra Energy Pty Ltd"
-      ],
-      "project_count": 4,
-      "total_capacity_mw": 848.0,
-      "total_storage_mwh": 0,
-      "by_technology": {
-        "bess": 4
-      },
-      "by_status": {
-        "development": 4
-      },
-      "states": [
-        "QLD"
-      ],
-      "avg_confidence": "low",
-      "project_ids": [
-        "bremer-battery-1",
-        "bremer-battery-2",
-        "bremer-battery-3",
-        "bremer-battery-4"
-      ]
-    },
-    {
       "slug": "tbsol",
       "name": "TBSOL",
       "project_count": 3,
@@ -18063,30 +17890,6 @@
         "winton-bess",
         "moree-bess",
         "grahamvale-bess-kci"
-      ]
-    },
-    {
-      "slug": "edpr",
-      "name": "EDPR",
-      "aliases": [
-        "EDPR Australia Pty Ltd"
-      ],
-      "project_count": 2,
-      "total_capacity_mw": 800.0,
-      "total_storage_mwh": 800.0,
-      "by_technology": {
-        "bess": 2
-      },
-      "by_status": {
-        "development": 2
-      },
-      "states": [
-        "QLD"
-      ],
-      "avg_confidence": "medium",
-      "project_ids": [
-        "punchs-creek-hybrid-stage-3-kci",
-        "punchs-creek-hybrid-stage-2-kci"
       ]
     },
     {
@@ -18304,29 +18107,6 @@
         "supernode-bess-stage-3",
         "supernode-bess-stage-4",
         "supernode-bess-stage-5"
-      ],
-      "aliases": []
-    },
-    {
-      "slug": "supernode-north-bess-projectco",
-      "name": "Supernode North BESS ProjectCo Pty Ltd",
-      "project_count": 3,
-      "total_capacity_mw": 780.0,
-      "total_storage_mwh": 6240.0,
-      "by_technology": {
-        "bess": 3
-      },
-      "by_status": {
-        "development": 3
-      },
-      "states": [
-        "QLD"
-      ],
-      "avg_confidence": "medium",
-      "project_ids": [
-        "supernode-north-bess-1",
-        "supernode-north-bess-2",
-        "supernode-north-bess-3"
       ],
       "aliases": []
     },
@@ -19425,6 +19205,27 @@
       "aliases": []
     },
     {
+      "slug": "green-switch-energy",
+      "name": "Green Switch Energy Pty Ltd",
+      "project_count": 1,
+      "total_capacity_mw": 500.0,
+      "total_storage_mwh": 0,
+      "by_technology": {
+        "bess": 1
+      },
+      "by_status": {
+        "development": 1
+      },
+      "states": [
+        "VIC"
+      ],
+      "avg_confidence": "low",
+      "project_ids": [
+        "malunga-nine-mile-bess-kci"
+      ],
+      "aliases": []
+    },
+    {
       "slug": "monash-energy",
       "name": "Monash Energy Pty Ltd",
       "project_count": 1,
@@ -20182,31 +19983,6 @@
         "mallee-wind-farm"
       ],
       "aliases": []
-    },
-    {
-      "slug": "pleystowe-bess",
-      "name": "PLEYSTOWE BESS PTY LTD",
-      "aliases": [
-        "PLEYSTOWE BESS PTY LTD",
-        "Pleystowe BESS P/L"
-      ],
-      "project_count": 2,
-      "total_capacity_mw": 400.0,
-      "total_storage_mwh": 800.0,
-      "by_technology": {
-        "bess": 2
-      },
-      "by_status": {
-        "development": 2
-      },
-      "states": [
-        "QLD"
-      ],
-      "avg_confidence": "low",
-      "project_ids": [
-        "pleystowe-bess",
-        "pleystowe-bess-kci"
-      ]
     },
     {
       "slug": "birdwood-energy-reserve-pty-ltd-acn-658-507-441-as-trustee-for-birdwood-energy-reserve-trust",
@@ -22561,6 +22337,29 @@
       "avg_confidence": "low",
       "project_ids": [
         "callide-energy-hub-kci"
+      ]
+    },
+    {
+      "slug": "pleystowe-bess",
+      "name": "PLEYSTOWE BESS PTY LTD",
+      "aliases": [
+        "PLEYSTOWE BESS PTY LTD"
+      ],
+      "project_count": 1,
+      "total_capacity_mw": 200.0,
+      "total_storage_mwh": 800.0,
+      "by_technology": {
+        "bess": 1
+      },
+      "by_status": {
+        "development": 1
+      },
+      "states": [
+        "QLD"
+      ],
+      "avg_confidence": "low",
+      "project_ids": [
+        "pleystowe-bess"
       ]
     },
     {
@@ -27352,16 +27151,11 @@
       "aliases": []
     }
   ],
-  "total_grouped": 540,
+  "total_grouped": 537,
   "top_developers": [
     {
       "slug": "acen",
       "name": "ACEN",
-      "project_count": 25
-    },
-    {
-      "slug": "agl-energy",
-      "name": "AGL Energy",
       "project_count": 25
     },
     {
@@ -27370,9 +27164,9 @@
       "project_count": 24
     },
     {
-      "slug": "neoen",
-      "name": "Neoen",
-      "project_count": 16
+      "slug": "agl-energy",
+      "name": "AGL Energy",
+      "project_count": 22
     },
     {
       "slug": "edify-energy",
@@ -27380,19 +27174,24 @@
       "project_count": 16
     },
     {
-      "slug": "origin-energy",
-      "name": "Origin Energy",
+      "slug": "x-elio",
+      "name": "X-Elio",
       "project_count": 15
     },
     {
-      "slug": "x-elio",
-      "name": "X-Elio",
+      "slug": "neoen",
+      "name": "Neoen",
       "project_count": 15
     },
     {
       "slug": "samsung-c-t",
       "name": "Samsung C&T",
       "project_count": 15
+    },
+    {
+      "slug": "origin-energy",
+      "name": "Origin Energy",
+      "project_count": 14
     },
     {
       "slug": "tagenergy",

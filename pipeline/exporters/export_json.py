@@ -11,6 +11,7 @@ Produces:
   data/metadata/stats.json        — Quick stats for the home dashboard
   data/metadata/last-export.json  — Export timestamp
 """
+import calendar
 import json
 import os
 import re
@@ -378,6 +379,9 @@ def export_all(db_path=DB_PATH):
     # 5. Performance / League Tables
     export_performance_data(conn)
 
+    # 5b. Monthly performance from real DB data (replaces synthetic generator)
+    export_monthly_performance(conn)
+
     # 6. Developer profiles
     export_developer_profiles(conn, summaries)
 
@@ -562,6 +566,127 @@ def export_performance_data(conn):
             })
 
     print(f"  performance/ (league tables for {len(years)} years, {len(technologies)} techs)")
+
+
+def _hours_in_month(year, month):
+    """Return total hours in a given month."""
+    return calendar.monthrange(year, month)[1] * 24
+
+
+def export_monthly_performance(conn):
+    """Export per-project monthly performance from real DB data.
+
+    Replaces the synthetic generator with actual OpenElectricity API data
+    from the performance_monthly table, including BESS revenue.
+    """
+    monthly_dir = os.path.join(DATA_DIR, 'performance', 'monthly')
+    ensure_dir(monthly_dir)
+
+    # Get all projects with monthly data
+    projects = conn.execute("""
+        SELECT DISTINCT pm.project_id, p.name, p.technology, p.capacity_mw,
+               p.storage_mwh, p.state
+        FROM performance_monthly pm
+        JOIN projects p ON pm.project_id = p.id
+        ORDER BY p.name
+    """).fetchall()
+
+    if not projects:
+        print("  performance/monthly/ (no monthly data in DB)")
+        return
+
+    index_entries = []
+    for proj in projects:
+        pid = proj['project_id']
+
+        # Fetch all monthly rows for this project
+        rows = conn.execute("""
+            SELECT year, month, energy_mwh, capacity_factor_pct,
+                   energy_price_received, revenue_aud,
+                   energy_charged_mwh, energy_discharged_mwh,
+                   avg_charge_price, avg_discharge_price,
+                   data_source
+            FROM performance_monthly
+            WHERE project_id = ?
+            ORDER BY year, month
+        """, (pid,)).fetchall()
+
+        if not rows:
+            continue
+
+        monthly_data = []
+        for r in rows:
+            entry = {}
+            entry['year'] = r['year']
+            entry['month'] = r['month']
+
+            is_bess = proj['technology'] in ('bess', 'pumped_hydro')
+
+            if is_bess:
+                # BESS / Pumped Hydro fields
+                discharged = r['energy_discharged_mwh'] or 0
+                charged = r['energy_charged_mwh'] or 0
+                if discharged > 0:
+                    entry['energy_discharged_mwh'] = round(discharged, 1)
+                if charged > 0:
+                    entry['energy_charged_mwh'] = round(charged, 1)
+                if r['avg_charge_price'] is not None:
+                    entry['avg_charge_price'] = round(r['avg_charge_price'], 2)
+                if r['avg_discharge_price'] is not None:
+                    entry['avg_discharge_price'] = round(r['avg_discharge_price'], 2)
+
+                # Derived BESS fields
+                cap = proj['capacity_mw'] or 1
+                hours = _hours_in_month(r['year'], r['month'])
+                if cap and hours:
+                    entry['utilisation_pct'] = round(discharged / (cap * hours) * 100, 1)
+                if proj['storage_mwh'] and proj['storage_mwh'] > 0:
+                    entry['cycles'] = round(discharged / proj['storage_mwh'], 1)
+
+                # BESS revenue (new — not in synthetic files)
+                if r['revenue_aud'] is not None and r['revenue_aud'] != 0:
+                    entry['revenue_aud'] = round(r['revenue_aud'], 0)
+            else:
+                # Wind / Solar / Hybrid fields
+                if r['capacity_factor_pct'] is not None:
+                    entry['capacity_factor_pct'] = round(r['capacity_factor_pct'], 1)
+                if r['energy_mwh'] is not None:
+                    entry['energy_mwh'] = round(r['energy_mwh'], 1)
+                if r['revenue_aud'] is not None:
+                    entry['revenue_aud'] = round(r['revenue_aud'], 0)
+                if r['energy_price_received'] is not None:
+                    entry['energy_price_received'] = round(r['energy_price_received'], 2)
+
+            monthly_data.append(entry)
+
+        file_data = {
+            'project_id': pid,
+            'name': proj['name'],
+            'technology': proj['technology'],
+            'capacity_mw': proj['capacity_mw'],
+            'state': proj['state'],
+            'data_source': 'openelectricity_api',
+            'monthly': monthly_data,
+        }
+        if proj['storage_mwh']:
+            file_data['storage_mwh'] = proj['storage_mwh']
+
+        write_json(os.path.join(monthly_dir, f'{pid}.json'), file_data)
+        index_entries.append({
+            'project_id': pid,
+            'months': len(monthly_data),
+            'first': f"{rows[0]['year']}-{rows[0]['month']:02d}",
+            'last': f"{rows[-1]['year']}-{rows[-1]['month']:02d}",
+        })
+
+    # Write index
+    write_json(os.path.join(monthly_dir, 'index.json'), {
+        'count': len(index_entries),
+        'last_updated': datetime.now().isoformat(),
+        'projects': index_entries,
+    })
+
+    print(f"  performance/monthly/ ({len(index_entries)} project files from real DB data)")
 
 
 def export_coordinates_index(conn):
@@ -1132,9 +1257,24 @@ def export_bess_capex(conn):
         for sr in stage_rows:
             stage_scope[sr['project_id']] = dict(sr)
 
+    # Remap DB IDs to canonical consolidated IDs where the JSON file was
+    # manually renamed but the DB record was not updated
+    _capex_id_remap = {
+        'eraring-battery': ('eraring-big-battery', 'Eraring Big Battery'),
+    }
+
     projects = []
     for r in rows:
         d = dict(r)
+
+        # Apply ID remapping for consolidated projects
+        if d['id'] in _capex_id_remap:
+            new_id, new_name = _capex_id_remap[d['id']]
+            d['id'] = new_id
+            d['name'] = new_name
+            if d.get('bess_model') == 'GridSolv Quantum':
+                d['bess_model'] = 'Quantum / Quantum3'
+
         capex = d['capex_aud_m'] or 0
 
         # For multi-stage projects where capex only covers some stages,

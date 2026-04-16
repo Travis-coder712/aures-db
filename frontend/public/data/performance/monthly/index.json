@@ -1,237 +1,1326 @@
 {
+  "count": 220,
+  "last_updated": "2026-04-16T21:31:55.798491",
   "projects": [
-    "aldoga-solar-farm",
-    "ararat-wind-farm",
-    "avonlie-solar-farm",
-    "bald-hills-wind-farm",
-    "ballarat-energy-storage-system",
-    "bango-973-wind-farm",
-    "bango-999-wind-farm",
-    "bannerton-solar-park",
-    "barron-gorge",
-    "bastyan",
-    "berrybank-wind-farm",
-    "beryl-solar-farm",
-    "blowering",
-    "bluegrass-solar-farm",
-    "blyth-bess",
-    "boco-rock-wind-farm",
-    "bodangora-wind-farm",
-    "bogong-mackay",
-    "bomen-solar-farm",
-    "bouldercombe-battery-project",
-    "brendale-bess",
-    "broken-hill-bess",
-    "broken-hill-solar-plant",
-    "bulgana-green-power-hub-wind-farm",
-    "bungala-one-solar-farm",
-    "bungala-two-solar-farm",
-    "canunda",
-    "capital-battery",
-    "capital-wind-farm",
-    "catagunya-liapootah-wayatinah",
-    "cathedral-rocks",
-    "cattle-hill-wind-farm",
-    "cethana",
-    "challicum-hills",
-    "cherry-tree-wind-farm",
-    "childers-solar-farm",
-    "chinchilla-bess",
-    "clare-solar-farm",
-    "clements-gap-wind-farm",
-    "clermont-solar-farm",
-    "coleambally-solar-farm",
-    "collector",
-    "collinsville-pv",
-    "columboola-solar-farm",
-    "coopers-gap-wind-farm",
-    "corowa-solar-farm",
-    "crookwell-2-wind-farm",
-    "crookwell-3-wind-farm",
-    "crowlands-wind-farm",
-    "crudine-ridge-wind-farm",
-    "culcairn-solar-farm",
-    "cullerin-range-wind-farm",
-    "dalrymple-bess",
-    "darling-downs-solar-farm",
-    "darlington-point-solar-farm",
-    "dartmouth",
-    "daydream-solar-farm",
-    "devils-gate",
-    "dulacca-wind-farm",
-    "dundonnell-wind-farm",
-    "edenvale-solar-park",
-    "eildon",
-    "elaine-wind-farm",
-    "emerald-solar-park",
-    "eraring-big-battery",
-    "finley-solar-farm",
-    "fisher",
-    "flyers-creek-wind-farm",
-    "gannawarra-solar-farm",
-    "girgarre-solar-farm",
-    "glenrowan-solar-farm",
-    "glenrowan-west-solar-farm",
-    "goonumbla-solar-farm",
-    "gordon",
-    "goyder-south-wind-farm-1a",
-    "goyder-south-wind-farm-1b",
-    "granville-harbour-wind-farm",
-    "greenbank-bess",
-    "gullen-range-wind-farm",
-    "gullen-range-wind-farm-2",
-    "gunnedah-solar-farm",
-    "gunning-wind-farm",
-    "guthega",
-    "hallett-4-north-brown-hill",
-    "hallett-5-the-bluff-wf",
-    "hallett-stage-1-brown-hill",
-    "hallett-stage-2-hallett-hill",
-    "hamilton-solar-farm",
-    "haughton-solar-farm-stage-1",
-    "hawkesdale-wind-farm",
-    "hayman-solar-farm",
-    "hazelwood-battery-energy-storage-system-hbess",
-    "hillston-sun-farm",
-    "hornsdale-power-reserve",
-    "hornsdale-power-reserve-unit-1",
-    "hornsdale-wind-farm-stage-1",
-    "hornsdale-wind-farm-stage-2",
-    "hornsdale-wind-farm-stage-3",
-    "jemalong-solar",
-    "john-butters",
-    "junee-solar-farm",
-    "kaban-wind-farm",
-    "karadoc-solar-farm",
-    "kareeya",
-    "kennedy-energy-park-phase-1-wind",
-    "kerang-solar-plant",
-    "kiamal-solar-farm-stage-1",
-    "kiata-wind-farm",
-    "kidston-solar-project-phase-one",
-    "kingaroy-solar-farm",
-    "koorangie-energy-storage-system",
-    "lake-bonney-1-wind-farm",
-    "lake-bonney-2-wind-farm",
-    "lake-bonney-3-wind-farm",
-    "lake-echo",
-    "latrobe-valley-bess",
-    "lemonthyme-wilmot",
-    "lilyvale-solar-farm",
-    "limondale-solar-farm-1",
-    "limondale-solar-farm-2",
-    "lincoln-gap-wind-farm-stage-1",
-    "lincoln-gap-wind-farm-stage-2",
-    "macarthur-wind-farm",
-    "mackintosh",
-    "manildra-solar-farm",
-    "mannum-bess",
-    "meadowbank",
-    "melbourne-renewable-energy-hub-connection-a1",
-    "melbourne-renewable-energy-hub-connection-a2",
-    "melbourne-renewable-energy-hub-connection-a3",
-    "metz-solar-farm",
-    "mokoan-solar-farm",
-    "molong-solar-farm",
-    "moorabool-wind-farm",
-    "moree-solar-farm",
-    "mortlake-south-wind-farm",
-    "mount-emerald",
-    "moura-solar-farm",
-    "mt-gellibrand-wind-farm",
-    "mt-mercer-wind-farm",
-    "mt-millar-wind-farm",
-    "murra-warra-wind-farm-stage-1",
-    "murra-warra-wind-farm-stage-2",
-    "murray-1",
-    "murray-2",
-    "musselroe-wind-farm",
-    "nevertire-solar-farm",
-    "new-england-solar-farm",
-    "numurkah-solar-farm",
-    "nyngan-solar-plant",
-    "oakey-2-solar-farm",
-    "oaklands-hill-wind-farm",
-    "paloona",
-    "parkes-solar-farm",
-    "poatina",
-    "port-augusta-renewable-energy-park-solar",
-    "port-augusta-renewable-energy-park-wind",
-    "portland-wind-farm",
-    "rangebank-bess",
-    "reece",
-    "repulse",
-    "riverina-energy-storage-system-1",
-    "riverina-energy-storage-system-2",
-    "ross-river-solar-farm",
-    "rugby-run-solar-farm",
-    "ryan-corner-wind-farm",
-    "rye-park-wind-farm",
-    "salt-creek-wind-farm",
-    "sapphire-wind-farm",
-    "sebastopol-solar-farm",
-    "shoalhaven",
-    "silverton-wind-farm",
-    "smithfield-bess",
-    "snowtown-s2-wind-farm",
-    "snowtown-wind-farm",
-    "starfish-hill",
-    "stockyard-hill-wind-farm",
-    "stubbo-solar-farm",
-    "sun-metals-corporation-solar-farm",
-    "sunraysia-solar-farm",
-    "suntop-solar-farm",
-    "susan-river-solar-farm",
-    "tailem-bend-solar",
-    "taralga-wind-farm",
-    "tarraleah",
-    "torrens-island-bess",
-    "trevallyn",
-    "tribute",
-    "tumut-3",
-    "tungatinah",
-    "ulinda-park-bess",
-    "upper-tumut",
-    "victorian-big-battery",
-    "walla-walla-solar-farm",
-    "wallgrove-grid-battery-project",
-    "wandoan-south-bess",
-    "waratah-super-battery",
-    "warwick-solar-farm",
-    "waterloo-wind-farm",
-    "wattle-point",
-    "waubra",
-    "wellington-north-solar-farm-lightsource",
-    "wellington-solar-farm",
-    "wemen-solar-farm",
-    "west-kiewa",
-    "west-wyalong-solar-farm",
-    "western-downs-green-power-hub-pl",
-    "white-rock-wind-farm-stage-1",
-    "whitsunday-solar-farm",
-    "willogoleche-wind-farm",
-    "winton-solar-farm",
-    "wivenhoe",
-    "wollar-solar-farm",
-    "woodlawn-wind-farm",
-    "woolnorth-studland-bay-bluff-point",
-    "woolooga-solar-farm",
-    "wyalong-solar-farm",
-    "yambuk",
-    "yarranlea-solar-farm",
-    "yatpool-solar-farm",
-    "yendon-wind-farm"
-  ],
-  "years": [
-    2018,
-    2019,
-    2020,
-    2021,
-    2022,
-    2023,
-    2024,
-    2025,
-    2026
-  ],
-  "last_updated": "2026-04-15T01:17:03.920775+00:00"
+    {
+      "project_id": "aldoga-solar-farm",
+      "months": 14,
+      "first": "2025-03",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "ararat-wind-farm",
+      "months": 100,
+      "first": "2018-01",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "avonlie-solar-farm",
+      "months": 38,
+      "first": "2023-03",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "bald-hills-wind-farm",
+      "months": 100,
+      "first": "2018-01",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "ballarat-energy-storage-system",
+      "months": 90,
+      "first": "2018-11",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "bango-973-wind-farm",
+      "months": 64,
+      "first": "2021-01",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "bango-999-wind-farm",
+      "months": 64,
+      "first": "2021-01",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "bannerton-solar-park",
+      "months": 93,
+      "first": "2018-07",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "barron-gorge",
+      "months": 90,
+      "first": "2018-01",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "bastyan",
+      "months": 97,
+      "first": "2018-01",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "berrybank-wind-farm",
+      "months": 63,
+      "first": "2021-02",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "beryl-solar-farm",
+      "months": 85,
+      "first": "2019-04",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "blowering",
+      "months": 79,
+      "first": "2018-01",
+      "last": "2026-02"
+    },
+    {
+      "project_id": "bluegrass-solar-farm",
+      "months": 45,
+      "first": "2022-08",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "blyth-bess",
+      "months": 20,
+      "first": "2024-09",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "boco-rock-wind-farm",
+      "months": 99,
+      "first": "2018-01",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "bodangora-wind-farm",
+      "months": 93,
+      "first": "2018-08",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "bogong-mackay",
+      "months": 98,
+      "first": "2018-01",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "bomen-solar-farm",
+      "months": 74,
+      "first": "2020-03",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "bouldercombe-battery-project",
+      "months": 5,
+      "first": "2025-10",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "brendale-bess",
+      "months": 7,
+      "first": "2025-10",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "broken-hill-bess",
+      "months": 29,
+      "first": "2023-12",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "broken-hill-solar-plant",
+      "months": 100,
+      "first": "2018-01",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "bulgana-green-power-hub-wind-farm",
+      "months": 72,
+      "first": "2020-05",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "bungala-one-solar-farm",
+      "months": 95,
+      "first": "2018-05",
+      "last": "2026-03"
+    },
+    {
+      "project_id": "bungala-two-solar-farm",
+      "months": 91,
+      "first": "2018-10",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "canunda",
+      "months": 100,
+      "first": "2018-01",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "capital-battery",
+      "months": 34,
+      "first": "2023-07",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "capital-wind-farm",
+      "months": 100,
+      "first": "2018-01",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "catagunya-liapootah-wayatinah",
+      "months": 100,
+      "first": "2018-01",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "cathedral-rocks",
+      "months": 100,
+      "first": "2018-01",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "cattle-hill-wind-farm",
+      "months": 76,
+      "first": "2020-01",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "cethana",
+      "months": 99,
+      "first": "2018-01",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "challicum-hills",
+      "months": 100,
+      "first": "2018-01",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "cherry-tree-wind-farm",
+      "months": 72,
+      "first": "2020-05",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "childers-solar-farm",
+      "months": 87,
+      "first": "2019-02",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "chinchilla-bess",
+      "months": 28,
+      "first": "2023-12",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "clare-solar-farm",
+      "months": 97,
+      "first": "2018-04",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "clements-gap-wind-farm",
+      "months": 100,
+      "first": "2018-01",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "clermont-solar-farm",
+      "months": 83,
+      "first": "2019-06",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "coleambally-solar-farm",
+      "months": 92,
+      "first": "2018-09",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "collector",
+      "months": 66,
+      "first": "2020-11",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "collinsville-pv",
+      "months": 94,
+      "first": "2018-07",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "columboola-solar-farm",
+      "months": 47,
+      "first": "2022-06",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "coopers-gap-wind-farm",
+      "months": 83,
+      "first": "2019-06",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "corowa-solar-farm",
+      "months": 62,
+      "first": "2021-03",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "crookwell-2-wind-farm",
+      "months": 93,
+      "first": "2018-08",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "crookwell-3-wind-farm",
+      "months": 24,
+      "first": "2024-05",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "crowlands-wind-farm",
+      "months": 89,
+      "first": "2018-12",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "crudine-ridge-wind-farm",
+      "months": 65,
+      "first": "2020-12",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "culcairn-solar-farm",
+      "months": 7,
+      "first": "2025-10",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "cullerin-range-wind-farm",
+      "months": 99,
+      "first": "2018-01",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "dalrymple-bess",
+      "months": 94,
+      "first": "2018-07",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "darling-downs-solar-farm",
+      "months": 94,
+      "first": "2018-07",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "darlington-point-solar-farm",
+      "months": 68,
+      "first": "2020-09",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "dartmouth",
+      "months": 97,
+      "first": "2018-01",
+      "last": "2026-03"
+    },
+    {
+      "project_id": "daydream-solar-farm",
+      "months": 91,
+      "first": "2018-10",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "devils-gate",
+      "months": 91,
+      "first": "2018-01",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "dulacca-wind-farm",
+      "months": 37,
+      "first": "2023-04",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "dundonnell-wind-farm",
+      "months": 74,
+      "first": "2020-03",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "edenvale-solar-park",
+      "months": 39,
+      "first": "2023-02",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "eildon",
+      "months": 99,
+      "first": "2018-01",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "elaine-wind-farm",
+      "months": 68,
+      "first": "2020-04",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "emerald-solar-park",
+      "months": 92,
+      "first": "2018-09",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "finley-solar-farm",
+      "months": 80,
+      "first": "2019-08",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "fisher",
+      "months": 90,
+      "first": "2018-01",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "flyers-creek-wind-farm",
+      "months": 32,
+      "first": "2023-09",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "gannawarra-solar-farm",
+      "months": 97,
+      "first": "2018-04",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "girgarre-solar-farm",
+      "months": 22,
+      "first": "2024-07",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "glenrowan-solar-farm",
+      "months": 30,
+      "first": "2023-11",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "glenrowan-west-solar-farm",
+      "months": 65,
+      "first": "2020-12",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "goonumbla-solar-farm",
+      "months": 72,
+      "first": "2020-05",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "gordon",
+      "months": 100,
+      "first": "2018-01",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "goyder-south-wind-farm-1a",
+      "months": 25,
+      "first": "2024-04",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "goyder-south-wind-farm-1b",
+      "months": 25,
+      "first": "2024-04",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "granville-harbour-wind-farm",
+      "months": 76,
+      "first": "2020-01",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "greenbank-bess",
+      "months": 15,
+      "first": "2025-02",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "gullen-range-wind-farm",
+      "months": 100,
+      "first": "2018-01",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "gullen-range-wind-farm-2",
+      "months": 70,
+      "first": "2020-06",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "gunnedah-solar-farm",
+      "months": 59,
+      "first": "2021-06",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "gunning-wind-farm",
+      "months": 100,
+      "first": "2018-01",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "guthega",
+      "months": 100,
+      "first": "2018-01",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "hallett-4-north-brown-hill",
+      "months": 100,
+      "first": "2018-01",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "hallett-5-the-bluff-wf",
+      "months": 100,
+      "first": "2018-01",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "hallett-stage-1-brown-hill",
+      "months": 100,
+      "first": "2018-01",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "hallett-stage-2-hallett-hill",
+      "months": 100,
+      "first": "2018-01",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "hamilton-solar-farm",
+      "months": 94,
+      "first": "2018-07",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "haughton-solar-farm-stage-1",
+      "months": 84,
+      "first": "2019-05",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "hawkesdale-wind-farm",
+      "months": 23,
+      "first": "2024-06",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "hayman-solar-farm",
+      "months": 88,
+      "first": "2019-01",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "hazelwood-battery-energy-storage-system-hbess",
+      "months": 38,
+      "first": "2023-03",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "hillston-sun-farm",
+      "months": 55,
+      "first": "2021-10",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "hornsdale-power-reserve",
+      "months": 100,
+      "first": "2018-01",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "hornsdale-power-reserve-unit-1",
+      "months": 100,
+      "first": "2018-01",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "hornsdale-wind-farm-stage-1",
+      "months": 100,
+      "first": "2018-01",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "hornsdale-wind-farm-stage-2",
+      "months": 100,
+      "first": "2018-01",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "hornsdale-wind-farm-stage-3",
+      "months": 100,
+      "first": "2018-01",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "jemalong-solar",
+      "months": 63,
+      "first": "2021-02",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "john-butters",
+      "months": 97,
+      "first": "2018-01",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "junee-solar-farm",
+      "months": 60,
+      "first": "2021-05",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "kaban-wind-farm",
+      "months": 44,
+      "first": "2022-09",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "karadoc-solar-farm",
+      "months": 91,
+      "first": "2018-10",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "kareeya",
+      "months": 99,
+      "first": "2018-01",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "kennedy-energy-park-phase-1-wind",
+      "months": 58,
+      "first": "2021-07",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "kerang-solar-plant",
+      "months": 15,
+      "first": "2025-02",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "kiamal-solar-farm-stage-1",
+      "months": 68,
+      "first": "2020-09",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "kiata-wind-farm",
+      "months": 100,
+      "first": "2018-01",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "kidston-solar-project-phase-one",
+      "months": 100,
+      "first": "2018-01",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "kingaroy-solar-farm",
+      "months": 20,
+      "first": "2024-09",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "koorangie-energy-storage-system",
+      "months": 15,
+      "first": "2025-02",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "latrobe-valley-bess",
+      "months": 7,
+      "first": "2025-10",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "lake-bonney-1-wind-farm",
+      "months": 100,
+      "first": "2018-01",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "lake-bonney-2-wind-farm",
+      "months": 100,
+      "first": "2018-01",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "lake-bonney-3-wind-farm",
+      "months": 100,
+      "first": "2018-01",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "lake-echo",
+      "months": 63,
+      "first": "2018-01",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "lemonthyme-wilmot",
+      "months": 99,
+      "first": "2018-01",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "lilyvale-solar-farm",
+      "months": 86,
+      "first": "2019-03",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "limondale-solar-farm-1",
+      "months": 70,
+      "first": "2020-07",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "limondale-solar-farm-2",
+      "months": 77,
+      "first": "2019-12",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "lincoln-gap-wind-farm-stage-2",
+      "months": 84,
+      "first": "2019-05",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "lincoln-gap-wind-farm-stage-1",
+      "months": 84,
+      "first": "2019-05",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "macarthur-wind-farm",
+      "months": 100,
+      "first": "2018-01",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "mackintosh",
+      "months": 98,
+      "first": "2018-01",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "manildra-solar-farm",
+      "months": 96,
+      "first": "2018-05",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "mannum-bess",
+      "months": 12,
+      "first": "2025-05",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "meadowbank",
+      "months": 92,
+      "first": "2018-01",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "melbourne-renewable-energy-hub-connection-a1",
+      "months": 5,
+      "first": "2025-12",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "melbourne-renewable-energy-hub-connection-a2",
+      "months": 5,
+      "first": "2025-12",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "melbourne-renewable-energy-hub-connection-a3",
+      "months": 7,
+      "first": "2025-10",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "metz-solar-farm",
+      "months": 50,
+      "first": "2022-03",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "mokoan-solar-farm",
+      "months": 17,
+      "first": "2024-12",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "molong-solar-farm",
+      "months": 66,
+      "first": "2020-11",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "moorabool-wind-farm",
+      "months": 65,
+      "first": "2020-12",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "moree-solar-farm",
+      "months": 100,
+      "first": "2018-01",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "mortlake-south-wind-farm",
+      "months": 43,
+      "first": "2022-10",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "mount-emerald",
+      "months": 93,
+      "first": "2018-08",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "moura-solar-farm",
+      "months": 43,
+      "first": "2022-10",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "mt-gellibrand-wind-farm",
+      "months": 95,
+      "first": "2018-06",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "mt-mercer-wind-farm",
+      "months": 100,
+      "first": "2018-01",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "mt-millar-wind-farm",
+      "months": 100,
+      "first": "2018-01",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "murra-warra-wind-farm-stage-1",
+      "months": 85,
+      "first": "2019-04",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "murra-warra-wind-farm-stage-2",
+      "months": 85,
+      "first": "2019-04",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "murray-1",
+      "months": 100,
+      "first": "2018-01",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "murray-2",
+      "months": 100,
+      "first": "2018-01",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "musselroe-wind-farm",
+      "months": 100,
+      "first": "2018-01",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "nevertire-solar-farm",
+      "months": 77,
+      "first": "2019-12",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "new-england-solar-farm",
+      "months": 41,
+      "first": "2022-12",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "numurkah-solar-farm",
+      "months": 84,
+      "first": "2019-05",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "nyngan-solar-plant",
+      "months": 100,
+      "first": "2018-01",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "oakey-2-solar-farm",
+      "months": 80,
+      "first": "2019-09",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "oaklands-hill-wind-farm",
+      "months": 100,
+      "first": "2018-01",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "paloona",
+      "months": 96,
+      "first": "2018-01",
+      "last": "2026-03"
+    },
+    {
+      "project_id": "parkes-solar-farm",
+      "months": 99,
+      "first": "2018-02",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "poatina",
+      "months": 100,
+      "first": "2018-01",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "port-augusta-renewable-energy-park-solar",
+      "months": 49,
+      "first": "2022-04",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "port-augusta-renewable-energy-park-wind",
+      "months": 49,
+      "first": "2022-04",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "portland-wind-farm",
+      "months": 100,
+      "first": "2018-01",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "rangebank-bess",
+      "months": 21,
+      "first": "2024-08",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "reece",
+      "months": 100,
+      "first": "2018-01",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "repulse",
+      "months": 86,
+      "first": "2018-01",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "riverina-energy-storage-system-1",
+      "months": 35,
+      "first": "2023-06",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "riverina-energy-storage-system-2",
+      "months": 35,
+      "first": "2023-06",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "ross-river-solar-farm",
+      "months": 92,
+      "first": "2018-09",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "rugby-run-solar-farm",
+      "months": 84,
+      "first": "2019-05",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "ryan-corner-wind-farm",
+      "months": 22,
+      "first": "2024-07",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "rye-park-wind-farm",
+      "months": 33,
+      "first": "2023-08",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "salt-creek-wind-farm",
+      "months": 95,
+      "first": "2018-06",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "sapphire-wind-farm",
+      "months": 99,
+      "first": "2018-02",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "sebastopol-solar-farm",
+      "months": 54,
+      "first": "2021-11",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "shoalhaven",
+      "months": 97,
+      "first": "2018-01",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "silverton-wind-farm",
+      "months": 96,
+      "first": "2018-05",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "smithfield-bess",
+      "months": 8,
+      "first": "2025-09",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "snowtown-s2-wind-farm",
+      "months": 100,
+      "first": "2018-01",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "snowtown-wind-farm",
+      "months": 100,
+      "first": "2018-01",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "starfish-hill",
+      "months": 100,
+      "first": "2018-01",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "stockyard-hill-wind-farm",
+      "months": 58,
+      "first": "2021-07",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "stubbo-solar-farm",
+      "months": 7,
+      "first": "2025-10",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "sun-metals-corporation-solar-farm",
+      "months": 91,
+      "first": "2018-05",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "sunraysia-solar-farm",
+      "months": 66,
+      "first": "2020-11",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "suntop-solar-farm",
+      "months": 57,
+      "first": "2021-08",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "susan-river-solar-farm",
+      "months": 89,
+      "first": "2018-12",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "tailem-bend-solar",
+      "months": 87,
+      "first": "2019-02",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "taralga-wind-farm",
+      "months": 99,
+      "first": "2018-01",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "tarraleah",
+      "months": 100,
+      "first": "2018-01",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "torrens-island-bess",
+      "months": 37,
+      "first": "2023-04",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "trevallyn",
+      "months": 100,
+      "first": "2018-01",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "tribute",
+      "months": 93,
+      "first": "2018-01",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "tumut-3",
+      "months": 100,
+      "first": "2018-01",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "tungatinah",
+      "months": 100,
+      "first": "2018-01",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "ulinda-park-bess",
+      "months": 11,
+      "first": "2025-06",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "upper-tumut",
+      "months": 100,
+      "first": "2018-01",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "victorian-big-battery",
+      "months": 57,
+      "first": "2021-07",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "walla-walla-solar-farm",
+      "months": 19,
+      "first": "2024-10",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "wallgrove-grid-battery-project",
+      "months": 55,
+      "first": "2021-10",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "wandoan-south-bess",
+      "months": 56,
+      "first": "2021-09",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "waratah-super-battery",
+      "months": 20,
+      "first": "2024-09",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "warwick-solar-farm",
+      "months": 65,
+      "first": "2020-09",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "waterloo-wind-farm",
+      "months": 100,
+      "first": "2018-01",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "wattle-point",
+      "months": 100,
+      "first": "2018-01",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "waubra",
+      "months": 100,
+      "first": "2018-01",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "wellington-north-solar-farm-lightsource",
+      "months": 24,
+      "first": "2024-05",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "wellington-solar-farm",
+      "months": 66,
+      "first": "2020-11",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "wemen-solar-farm",
+      "months": 90,
+      "first": "2018-11",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "west-kiewa",
+      "months": 100,
+      "first": "2018-01",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "west-wyalong-solar-farm",
+      "months": 44,
+      "first": "2022-09",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "western-downs-green-power-hub-pl",
+      "months": 51,
+      "first": "2022-02",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "white-rock-wind-farm-stage-1",
+      "months": 100,
+      "first": "2018-01",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "whitsunday-solar-farm",
+      "months": 94,
+      "first": "2018-07",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "willogoleche-wind-farm",
+      "months": 93,
+      "first": "2018-08",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "winton-solar-farm",
+      "months": 62,
+      "first": "2021-03",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "wivenhoe",
+      "months": 100,
+      "first": "2018-01",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "wollar-solar-farm",
+      "months": 16,
+      "first": "2025-01",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "woodlawn-wind-farm",
+      "months": 100,
+      "first": "2018-01",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "woolnorth-studland-bay-bluff-point",
+      "months": 100,
+      "first": "2018-01",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "woolooga-solar-farm",
+      "months": 48,
+      "first": "2022-05",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "wyalong-solar-farm",
+      "months": 33,
+      "first": "2023-08",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "yambuk",
+      "months": 100,
+      "first": "2018-01",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "yarranlea-solar-farm",
+      "months": 76,
+      "first": "2020-01",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "yatpool-solar-farm",
+      "months": 66,
+      "first": "2020-11",
+      "last": "2026-04"
+    },
+    {
+      "project_id": "yendon-wind-farm",
+      "months": 83,
+      "first": "2019-06",
+      "last": "2026-04"
+    }
+  ]
 }

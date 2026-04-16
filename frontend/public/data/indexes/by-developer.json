@@ -2,7 +2,6 @@
   "FIrm Power P/L": [
     "abermain-bess",
     "blackstone-bess",
-    "blackstone-bess-2-kci",
     "glen-inness-bess-kci",
     "kangaroo-valley-bess",
     "murrumburrah-bess-kci"
@@ -91,8 +90,6 @@
   "firmpower_NR": [
     "awaba-bess",
     "beresfield-bess",
-    "mount-britton-bess1",
-    "mount-britton-bess2",
     "muswellbrook-bess"
   ],
   "FRV Services Australia": [
@@ -400,13 +397,6 @@
     "jemalong-solar",
     "kidston-pumped-storage-hydro-project-250mw"
   ],
-  "Genex Power Limited": [
-    "bouldercombe-battery-project-stage-2-kci",
-    "bulli-creek-battery",
-    "bulli-creek-solar-farm",
-    "kidston-solar-project-phase-one",
-    "kidston-solar-project-phase-two"
-  ],
   "The Trustee for X-ELIO BOULKA PARK TRUST": [
     "boulka-park-bess",
     "boulka-park-solar-farm"
@@ -434,12 +424,6 @@
   ],
   "Braemar Power Project Pty Ltd": [
     "braemar-bess"
-  ],
-  "Libra Energy Pty Ltd": [
-    "bremer-battery-1",
-    "bremer-battery-2",
-    "bremer-battery-3",
-    "bremer-battery-4"
   ],
   "Akaysha Energy (BlackRock)": [
     "brendale-bess",
@@ -484,6 +468,12 @@
   "Bulli Creek Hybrid Nominee Pty Ltd on behalf of Bulli Creek Hybrid Trust": [
     "bulli-creek-bess-trina",
     "bulli-creek-solar-farm-trina"
+  ],
+  "Genex Power Limited": [
+    "bulli-creek-battery",
+    "bulli-creek-solar-farm",
+    "kidston-solar-project-phase-one",
+    "kidston-solar-project-phase-two"
   ],
   "EE Solar 9 Pty Ltd as trustee for the EE Solar 9 Trust": [
     "bullyard-solar-farm"
@@ -776,7 +766,6 @@
   "Neoen Australia Pty Ltd": [
     "culcairn-bess",
     "goyder-bess",
-    "goyder-bess-stage-2",
     "goyder-north-bess-2",
     "great-lakes-battery",
     "great-western-battery-project",
@@ -958,15 +947,6 @@
   "M Renweables Australia": [
     "emu-park-bess",
     "emu-park-solar-farm"
-  ],
-  "Origin Energy": [
-    "eraring-battery",
-    "morgan-long-duration-energy-storage-kci",
-    "mortlake-battery",
-    "shoalhaven-expansion",
-    "yanco-delta",
-    "yanco-solar-farm",
-    "yarrabee-solar-power-project"
   ],
   "Euleilah Development Pty Ltd": [
     "euleilah-solar-farm-and-bess-kci"
@@ -1572,9 +1552,7 @@
     "mallee-wind-farm"
   ],
   "Green Switch Energy Pty Ltd": [
-    "malunga-nine-mile-bess-kci",
-    "nine-mile-energy-park-stage-1-bess",
-    "nine-mile-energy-park-stage-2-bess"
+    "malunga-nine-mile-bess-kci"
   ],
   "Manildra Prop Pty Ltd as trustee for the Manildra Asset Trust": [
     "manildra-solar-farm"
@@ -1704,6 +1682,14 @@
   ],
   "Origin Energy Limited": [
     "morgan-battery"
+  ],
+  "Origin Energy": [
+    "morgan-long-duration-energy-storage-kci",
+    "mortlake-battery",
+    "shoalhaven-expansion",
+    "yanco-delta",
+    "yanco-solar-farm",
+    "yarrabee-solar-power-project"
   ],
   "Green Gold Energy Pty Ltd": [
     "morgan-solar",
@@ -1902,9 +1888,6 @@
   "PLEYSTOWE BESS PTY LTD": [
     "pleystowe-bess"
   ],
-  "Pleystowe BESS P/L": [
-    "pleystowe-bess-kci"
-  ],
   "PAREP 1 Pty Ltd": [
     "port-augusta-renewable-energy-park-solar",
     "port-augusta-renewable-energy-park-wind"
@@ -1949,10 +1932,6 @@
   "skylabgroup_NR": [
     "punch-and-creek-renewable-energy-stage-2"
   ],
-  "EDPR Australia Pty Ltd": [
-    "punchs-creek-hybrid-stage-2-kci",
-    "punchs-creek-hybrid-stage-3-kci"
-  ],
   "Emergent Technologies": [
     "quandong-solar-farm"
   ],
@@ -1967,9 +1946,6 @@
   ],
   "NEMMCO": [
     "ravenswood-solar-farm-bess"
-  ],
-  "Alinta Energy Reeves Plains Pty Ltd": [
-    "reeves-plains-battery-stage-2"
   ],
   "Alinta Energy (Reeves Plains) Pty Ltd": [
     "reeves-plains-power-station-bess"
@@ -2162,11 +2138,6 @@
     "supernode-bess-stage-3",
     "supernode-bess-stage-4",
     "supernode-bess-stage-5"
-  ],
-  "Supernode North BESS ProjectCo Pty Ltd": [
-    "supernode-north-bess-1",
-    "supernode-north-bess-2",
-    "supernode-north-bess-3"
   ],
   "Susan River Solar Pty Ltd as trustee for the Susan River Solar Trust": [
     "susan-river-solar-farm"
