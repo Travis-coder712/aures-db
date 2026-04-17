@@ -118,12 +118,15 @@ def ensure_schema(conn: sqlite3.Connection):
 def fetch_network_battery_power(api_key: str, date_start: str, date_end: str):
     """Pull NEM + per-region 5-minute battery power data from OpenElectricity.
 
-    Uses the `/data/network/NEM` endpoint with:
-      metrics=power
-      interval=5m
-      primary_grouping=network_region
-      secondary_grouping=fueltech
-      fueltech=battery_charging,battery_discharging
+    Uses /v4/data/network/NEM with metrics=power, interval=5m,
+    primary_grouping=network_region, secondary_grouping=fueltech. The API
+    returns every fueltech (not just battery) — we filter to
+    battery_charging and battery_discharging client-side.
+
+    Response shape:
+      { data: [ { metric: 'power', results: [
+          { columns: {region, fueltech}, data: [[iso_ts, mw], ...] }, ...
+      ] } ] }
 
     Returns the raw API response dict.
     """
@@ -132,7 +135,6 @@ def fetch_network_battery_power(api_key: str, date_start: str, date_end: str):
         'interval': '5m',
         'primary_grouping': 'network_region',
         'secondary_grouping': 'fueltech',
-        'fueltech': ['battery_charging', 'battery_discharging'],
         'date_start': date_start,
         'date_end': date_end,
     }
@@ -140,33 +142,36 @@ def fetch_network_battery_power(api_key: str, date_start: str, date_end: str):
     return api_get('/data/network/NEM', api_key, params)
 
 
+TARGET_FUELTECHS = {'battery_charging', 'battery_discharging'}
+
+
 def parse_series(resp: dict):
-    """Iterate the OE response and yield (region, fueltech, datetime, power_mw)."""
-    data = resp.get('data') if isinstance(resp, dict) else None
-    if not data:
+    """Iterate the OE response and yield (region, fueltech, ts, power_mw)
+    tuples for battery_charging + battery_discharging only."""
+    top = resp.get('data') if isinstance(resp, dict) else None
+    if not top:
         return
-    for entry in data:
-        region = entry.get('columns', {}).get('network_region') or entry.get('network_region')
-        fueltech = entry.get('columns', {}).get('fueltech') or entry.get('fueltech')
-        if not region or not fueltech:
+    for entry in top:
+        if entry.get('metric') != 'power':
             continue
-        results = entry.get('results') or entry.get('data') or []
-        for point in results:
-            # API may return [timestamp, value] pairs or {date, value} objects
-            if isinstance(point, list) and len(point) >= 2:
-                ts, val = point[0], point[1]
-            elif isinstance(point, dict):
-                ts = point.get('date') or point.get('timestamp') or point.get('interval')
-                val = point.get('value') or point.get('v')
-            else:
+        for result in entry.get('results', []):
+            cols = result.get('columns') or {}
+            region = cols.get('region') or cols.get('network_region')
+            fueltech = cols.get('fueltech')
+            if not region or fueltech not in TARGET_FUELTECHS:
                 continue
-            if ts is None or val is None:
-                continue
-            try:
-                val_f = float(val)
-            except (TypeError, ValueError):
-                continue
-            yield region, fueltech, ts, val_f
+            for point in result.get('data', []):
+                if isinstance(point, (list, tuple)) and len(point) >= 2:
+                    ts, val = point[0], point[1]
+                else:
+                    continue
+                if ts is None or val is None:
+                    continue
+                try:
+                    val_f = float(val)
+                except (TypeError, ValueError):
+                    continue
+                yield region, fueltech, ts, val_f
 
 
 # ---------------------------------------------------------------------
@@ -261,79 +266,53 @@ def upsert_daily(conn, agg):
 # ---------------------------------------------------------------------
 
 def recompute_records(conn: sqlite3.Connection):
-    """Refresh the battery_records table by scanning battery_daily_scada."""
+    """Refresh the battery_records table by scanning battery_daily_scada.
+    Uses a 2-step find-then-lookup approach (SQLite doesn't support window
+    functions in older builds uniformly)."""
     cur = conn.cursor()
     cur.execute('DELETE FROM battery_records')
 
-    # Max single-interval records come from the peak_*_mw columns
-    cur.execute("""
-        INSERT INTO battery_records (metric, region, value, unit, recorded_at, settlement_date, details)
-        SELECT 'max_discharge_5min' AS metric,
-               region,
-               MAX(peak_discharge_mw) AS value,
-               'MW' AS unit,
-               (SELECT peak_discharge_time FROM battery_daily_scada AS b2
-                WHERE b2.region = b1.region
-                  AND b2.peak_discharge_mw = MAX(b1.peak_discharge_mw)
-                LIMIT 1) AS recorded_at,
-               (SELECT settlement_date FROM battery_daily_scada AS b2
-                WHERE b2.region = b1.region
-                  AND b2.peak_discharge_mw = MAX(b1.peak_discharge_mw)
-                LIMIT 1) AS settlement_date,
-               NULL AS details
-        FROM battery_daily_scada AS b1
-        WHERE peak_discharge_mw IS NOT NULL
-        GROUP BY region
-    """)
-    cur.execute("""
-        INSERT INTO battery_records (metric, region, value, unit, recorded_at, settlement_date, details)
-        SELECT 'max_charge_5min',
-               region,
-               MAX(peak_charge_mw),
-               'MW',
-               (SELECT peak_charge_time FROM battery_daily_scada AS b2
-                WHERE b2.region = b1.region
-                  AND b2.peak_charge_mw = MAX(b1.peak_charge_mw)
-                LIMIT 1),
-               (SELECT settlement_date FROM battery_daily_scada AS b2
-                WHERE b2.region = b1.region
-                  AND b2.peak_charge_mw = MAX(b1.peak_charge_mw)
-                LIMIT 1),
-               NULL
-        FROM battery_daily_scada AS b1
-        WHERE peak_charge_mw IS NOT NULL
-        GROUP BY region
-    """)
-    cur.execute("""
-        INSERT INTO battery_records (metric, region, value, unit, settlement_date, details)
-        SELECT 'max_daily_discharge',
-               region,
-               MAX(discharged_mwh),
-               'MWh',
-               (SELECT settlement_date FROM battery_daily_scada AS b2
-                WHERE b2.region = b1.region
-                  AND b2.discharged_mwh = MAX(b1.discharged_mwh)
-                LIMIT 1),
-               NULL
-        FROM battery_daily_scada AS b1
-        WHERE discharged_mwh > 0
-        GROUP BY region
-    """)
-    cur.execute("""
-        INSERT INTO battery_records (metric, region, value, unit, settlement_date, details)
-        SELECT 'max_daily_charge',
-               region,
-               MAX(charged_mwh),
-               'MWh',
-               (SELECT settlement_date FROM battery_daily_scada AS b2
-                WHERE b2.region = b1.region
-                  AND b2.charged_mwh = MAX(b1.charged_mwh)
-                LIMIT 1),
-               NULL
-        FROM battery_daily_scada AS b1
-        WHERE charged_mwh > 0
-        GROUP BY region
-    """)
+    # For each metric × region, find the max value then look up the row that
+    # set it. Where multiple rows tie, pick the most recent one.
+    metric_specs = [
+        ('max_discharge_5min', 'peak_discharge_mw', 'MW', 'peak_discharge_time'),
+        ('max_charge_5min',    'peak_charge_mw',    'MW', 'peak_charge_time'),
+        ('max_daily_discharge', 'discharged_mwh',   'MWh', None),
+        ('max_daily_charge',   'charged_mwh',       'MWh', None),
+    ]
+    for metric, col, unit, time_col in metric_specs:
+        # Step 1: max value per region
+        rows = cur.execute(f"""
+            SELECT region, MAX({col})
+            FROM battery_daily_scada
+            WHERE {col} IS NOT NULL AND {col} > 0
+            GROUP BY region
+        """).fetchall()
+        for region, max_val in rows:
+            # Step 2: find a row with this max_val, prefer most recent
+            if time_col:
+                row = cur.execute(f"""
+                    SELECT settlement_date, {time_col}
+                    FROM battery_daily_scada
+                    WHERE region = ? AND {col} = ?
+                    ORDER BY settlement_date DESC LIMIT 1
+                """, (region, max_val)).fetchone()
+                settlement_date = row[0] if row else None
+                recorded_at = row[1] if row else None
+            else:
+                row = cur.execute(f"""
+                    SELECT settlement_date FROM battery_daily_scada
+                    WHERE region = ? AND {col} = ?
+                    ORDER BY settlement_date DESC LIMIT 1
+                """, (region, max_val)).fetchone()
+                settlement_date = row[0] if row else None
+                recorded_at = None
+            cur.execute("""
+                INSERT INTO battery_records
+                  (metric, region, value, unit, recorded_at, settlement_date)
+                VALUES (?, ?, ?, ?, ?, ?)
+            """, (metric, region, max_val, unit, recorded_at, settlement_date))
+
     conn.commit()
     n_rec = cur.execute('SELECT COUNT(*) FROM battery_records').fetchone()[0]
     print(f'  refreshed battery_records: {n_rec} rows')
@@ -366,19 +345,32 @@ def main():
     conn = get_connection()
     ensure_schema(conn)
 
-    try:
-        resp = fetch_network_battery_power(api_key, args.start, args.end)
-    except Exception as e:
-        print(f'! API request failed: {e}')
-        sys.exit(2)
+    # OpenElectricity caps 5-minute interval queries at 8 days per request.
+    # Chunk the requested range into 7-day windows.
+    start_dt = datetime.fromisoformat(args.start).date()
+    end_dt = datetime.fromisoformat(args.end).date()
+    chunk_days = 7
+    all_points: list[tuple] = []
+    cursor = start_dt
+    n_requests = 0
+    while cursor < end_dt:
+        chunk_end = min(cursor + timedelta(days=chunk_days), end_dt)
+        try:
+            resp = fetch_network_battery_power(api_key, cursor.isoformat(), chunk_end.isoformat())
+            n_requests += 1
+            chunk_points = list(parse_series(resp))
+            all_points.extend(chunk_points)
+            print(f'  {cursor} → {chunk_end}: {len(chunk_points)} points')
+        except Exception as e:
+            print(f'  ! chunk {cursor} → {chunk_end} failed: {e}')
+        cursor = chunk_end
 
-    points = list(parse_series(resp))
-    if not points:
-        print('! No data points returned. API endpoint shape may have changed. See docstring.')
+    if not all_points:
+        print('! No data points returned across any chunk. Check API key and endpoint shape.')
         sys.exit(3)
-    print(f'  Parsed {len(points)} raw 5-min points')
+    print(f'  Total: {len(all_points)} points from {n_requests} API request(s)')
 
-    agg = aggregate_daily(points)
+    agg = aggregate_daily(all_points)
     n = upsert_daily(conn, agg)
     print(f'  Upserted {n} daily-region rows')
     recompute_records(conn)

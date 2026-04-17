@@ -18,7 +18,7 @@ import re
 import statistics
 import sys
 from collections import defaultdict
-from datetime import datetime
+from datetime import datetime, timedelta
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 from db import get_connection, DB_PATH
