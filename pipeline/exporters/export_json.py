@@ -6965,6 +6965,9 @@ def export_energy_transition(conn):
         'ytd_days': set(), 'full_days': set(),
     }))
     if _table_exists(conn, 'demand_daily'):
+        # Per-region rows contribute to both NEM and region scopes, but only
+        # for demand_mwh (NEM total = SUM(state demand) per day) and per-region
+        # peak. The NEM concurrent peak is a separate pseudo-region row.
         demand_rows = conn.execute("""
             SELECT
               CAST(strftime('%Y', date) AS INTEGER) AS yr,
@@ -6973,17 +6976,38 @@ def export_energy_transition(conn):
               demand_mwh,
               peak_demand_mw
             FROM demand_daily
+            WHERE region != 'NEM'
         """).fetchall()
         for yr, doy, region, d_mwh, peak_mw in demand_rows:
             for scope in ('NEM', region):
                 b = demand_agg[scope][yr]
                 b['full_mwh'] += d_mwh or 0
-                b['full_peak_mw'] = max(b['full_peak_mw'], peak_mw or 0)
+                # Only update peak_mw for the region itself; NEM scope gets its
+                # concurrent peak from the NEM pseudo-region rows below.
+                if scope != 'NEM':
+                    b['full_peak_mw'] = max(b['full_peak_mw'], peak_mw or 0)
                 b['full_days'].add(doy)
                 if doy <= cutoff_doy:
                     b['ytd_mwh'] += d_mwh or 0
-                    b['ytd_peak_mw'] = max(b['ytd_peak_mw'], peak_mw or 0)
+                    if scope != 'NEM':
+                        b['ytd_peak_mw'] = max(b['ytd_peak_mw'], peak_mw or 0)
                     b['ytd_days'].add(doy)
+
+        # NEM concurrent peak — from the 'NEM' pseudo-region rows written by
+        # import_dispatch_regionsum.py.
+        nem_peak_rows = conn.execute("""
+            SELECT
+              CAST(strftime('%Y', date) AS INTEGER) AS yr,
+              CAST(strftime('%j', date) AS INTEGER) AS doy,
+              peak_demand_mw
+            FROM demand_daily
+            WHERE region = 'NEM'
+        """).fetchall()
+        for yr, doy, peak_mw in nem_peak_rows:
+            b = demand_agg['NEM'][yr]
+            b['full_peak_mw'] = max(b['full_peak_mw'], peak_mw or 0)
+            if doy <= cutoff_doy:
+                b['ytd_peak_mw'] = max(b['ytd_peak_mw'], peak_mw or 0)
 
     # --- Assemble scopes ---
     scopes_in_order = ['NEM', 'NSW1', 'QLD1', 'VIC1', 'SA1', 'TAS1']
@@ -7287,30 +7311,33 @@ def _compute_transition_records(conn, duid_state: dict[str, str]) -> dict:
             seen_r.add(region)
             records['renewables_highest_daily'][region] = {'gwh': round(mwh / 1000, 2), 'date': date}
 
-    # Demand peak MW
+    # Demand peak MW. The importer pre-computes a true concurrent peak
+    # and stores it under region='NEM' (sum of TOTALDEMAND across the 5
+    # regions at each 5-min interval, max per day). For each state we use
+    # the region's own daily peak_demand_mw.
     if _table_exists(conn, 'demand_daily'):
-        # NEM peak (sum of all regions for a given day? no — peak happens within a 5-min interval
-        # which we didn't store, only per-region peak_mw. Approximate NEM peak as max-day sum of regional peaks
-        # which overstates true concurrent peak but is a reasonable proxy.)
         nem_peak = conn.execute("""
-            SELECT date, SUM(peak_demand_mw) AS peak_sum
+            SELECT date, peak_demand_mw
             FROM demand_daily
-            GROUP BY date
-            ORDER BY peak_sum DESC
+            WHERE region = 'NEM'
+            ORDER BY peak_demand_mw DESC
             LIMIT 1
         """).fetchone()
         if nem_peak:
             records['demand_peak_mw']['NEM'] = {
                 'mw': round(nem_peak[1], 0),
                 'date': nem_peak[0],
-                'note': 'sum of regional 5-min peaks — may overstate concurrent NEM peak',
             }
+
+        # Per-region peaks (excluding the NEM pseudo-region)
         for region_rec in conn.execute("""
             SELECT region, date, peak_demand_mw
             FROM demand_daily
-            WHERE peak_demand_mw = (
-                SELECT MAX(peak_demand_mw) FROM demand_daily d2 WHERE d2.region = demand_daily.region
-            )
+            WHERE region != 'NEM'
+              AND peak_demand_mw = (
+                  SELECT MAX(peak_demand_mw) FROM demand_daily d2
+                  WHERE d2.region = demand_daily.region AND d2.region != 'NEM'
+              )
             GROUP BY region
         """).fetchall():
             region, date, peak_mw = region_rec

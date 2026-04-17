@@ -109,9 +109,14 @@ def iter_csv_rows(content: bytes):
             yield dict(zip(header, values))
 
 
-def _accumulate_csv(content, per_day, per_day_peak, seen=None):
-    """DISPATCHREGIONSUM rows also have multiple revisions per
-    (SETTLEMENTDATE, REGIONID). Dedupe on that key across the batch."""
+def _accumulate_csv(content, per_day, per_day_peak, seen=None, nem_per_interval=None):
+    """DISPATCHREGIONSUM rows have multiple revisions per
+    (SETTLEMENTDATE, REGIONID). Dedupe on that key across the batch.
+
+    `nem_per_interval`, if provided, accumulates the sum of TOTALDEMAND
+    across regions per 5-min settlement — used by the caller to compute
+    a true concurrent NEM peak (vs naive sum-of-regional-peaks).
+    """
     if seen is None:
         seen = set()
     for row in iter_csv_rows(content):
@@ -134,18 +139,28 @@ def _accumulate_csv(content, per_day, per_day_peak, seen=None):
         per_day[key] += demand / 12.0
         if demand > per_day_peak[key]:
             per_day_peak[key] = demand
+        if nem_per_interval is not None:
+            nem_per_interval[settlement] = nem_per_interval.get(settlement, 0.0) + demand
 
 
 def parse_zip(zip_path: str):
+    """Returns (per_day, per_day_peak, intervals, nem_peak_by_date).
+
+    `nem_peak_by_date[date] = (concurrent_peak_mw, peak_mwh_sum)` where
+    concurrent_peak_mw = max over 5-min intervals of
+    SUM(TOTALDEMAND across regions at that interval). Used to produce a
+    true NEM peak vs the naive sum-of-regional-peaks.
+    """
     per_day: dict[tuple[str, str], float] = defaultdict(float)
     per_day_peak: dict[tuple[str, str], float] = defaultdict(float)
     intervals: dict[tuple[str, str], int] = defaultdict(int)
+    nem_per_interval: dict[str, float] = {}
 
     try:
         zf = zipfile.ZipFile(zip_path)
     except zipfile.BadZipFile:
         print(f'  ! bad zip: {os.path.basename(zip_path)}')
-        return {}, {}, {}
+        return {}, {}, {}, {}
 
     seen: set[tuple[str, str]] = set()
     with zf:
@@ -153,7 +168,7 @@ def parse_zip(zip_path: str):
             if name.upper().endswith('.CSV'):
                 with zf.open(name) as f:
                     content = f.read()
-                _accumulate_csv(content, per_day, per_day_peak, seen)
+                _accumulate_csv(content, per_day, per_day_peak, seen, nem_per_interval)
             elif name.upper().endswith('.ZIP'):
                 with zf.open(name) as inner:
                     try:
@@ -165,14 +180,21 @@ def parse_zip(zip_path: str):
                             if iname.upper().endswith('.CSV'):
                                 with izf.open(iname) as f:
                                     content = f.read()
-                                _accumulate_csv(content, per_day, per_day_peak, seen)
+                                _accumulate_csv(content, per_day, per_day_peak, seen, nem_per_interval)
 
-    # Interval count derivable from demand / min_demand heuristic — but just
-    # leave as 0 for now; it's bookkeeping only.
-    return per_day, per_day_peak, intervals
+    # Roll up NEM per-interval sums into per-date peak + total.
+    nem_peak_by_date: dict[str, tuple[float, float]] = {}
+    for settlement, demand_sum in nem_per_interval.items():
+        date = settlement[:10].replace('/', '-')
+        prev_peak, prev_sum = nem_peak_by_date.get(date, (0.0, 0.0))
+        nem_peak_by_date[date] = (
+            max(prev_peak, demand_sum),
+            prev_sum + demand_sum / 12.0,  # MWh
+        )
+    return per_day, per_day_peak, intervals, nem_peak_by_date
 
 
-def upsert_daily(conn, per_day, per_day_peak):
+def upsert_daily(conn, per_day, per_day_peak, nem_peak_by_date=None):
     n = 0
     for (date, region), demand_mwh in per_day.items():
         peak = per_day_peak.get((date, region), 0)
@@ -184,6 +206,19 @@ def upsert_daily(conn, per_day, per_day_peak):
               peak_demand_mw = excluded.peak_demand_mw
         """, (date, region, round(demand_mwh, 3), round(peak, 2)))
         n += 1
+
+    # Upsert a NEM pseudo-region with the TRUE concurrent peak across
+    # all regions per 5-min interval (not the naive sum of regional peaks).
+    if nem_peak_by_date:
+        for date, (peak_mw, demand_mwh) in nem_peak_by_date.items():
+            conn.execute("""
+                INSERT INTO demand_daily (date, region, demand_mwh, peak_demand_mw)
+                VALUES (?, 'NEM', ?, ?)
+                ON CONFLICT(date, region) DO UPDATE SET
+                  demand_mwh = excluded.demand_mwh,
+                  peak_demand_mw = excluded.peak_demand_mw
+            """, (date, round(demand_mwh, 3), round(peak_mw, 2)))
+            n += 1
     conn.commit()
     return n
 
@@ -208,8 +243,8 @@ def import_month(month: str) -> None:
         print(f'  ! {month} download failed (tried both URL formats)')
         return
 
-    per_day, per_day_peak, _ = parse_zip(target)
-    n = upsert_daily(conn, per_day, per_day_peak)
+    per_day, per_day_peak, _, nem_peak_by_date = parse_zip(target)
+    n = upsert_daily(conn, per_day, per_day_peak, nem_peak_by_date)
     print(f'  {month}: {n} daily region-rows')
     conn.close()
 
