@@ -87,19 +87,23 @@
     {
       "party": "CleanCo Queensland",
       "type": "government_ppa",
+      "capacity_mw": 400.0,
       "source_url": "https://reneweconomy.com.au/macintyre-wind-farm/"
     },
     {
       "party": "CleanCo Queensland",
-      "type": "government_ppa"
+      "type": "government_ppa",
+      "capacity_mw": 400.0
     },
     {
       "party": "Stanwell Corporation",
-      "type": "PPA"
+      "type": "PPA",
+      "capacity_mw": 150.0
     },
     {
       "party": "Ark Energy/Telstra",
-      "type": "corporate_ppa"
+      "type": "corporate_ppa",
+      "capacity_mw": 100.0
     }
   ],
   "scheme_contracts": [],

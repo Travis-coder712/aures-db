@@ -89,7 +89,9 @@
   "offtakes": [
     {
       "party": "Neoen portfolio",
-      "type": "PPA"
+      "type": "PPA",
+      "term_years": 15,
+      "capacity_mw": 157.0
     }
   ],
   "scheme_contracts": [],

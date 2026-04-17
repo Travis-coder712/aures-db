@@ -73,7 +73,8 @@
   "offtakes": [
     {
       "party": "Iberdrola portfolio",
-      "type": "PPA"
+      "type": "PPA",
+      "capacity_mw": 145.0
     }
   ],
   "scheme_contracts": [],

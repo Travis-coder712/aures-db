@@ -78,7 +78,8 @@
     },
     {
       "party": "BHP",
-      "type": "corporate_ppa"
+      "type": "corporate_ppa",
+      "capacity_mw": 70.0
     }
   ],
   "scheme_contracts": [],

@@ -72,6 +72,8 @@
     {
       "party": "Origin Energy",
       "type": "PPA",
+      "term_years": 15,
+      "capacity_mw": 270.0,
       "source_url": "https://reneweconomy.com.au/snowtown-wind-farm/"
     }
   ],

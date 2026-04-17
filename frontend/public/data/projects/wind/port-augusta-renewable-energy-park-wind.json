@@ -87,7 +87,9 @@
     },
     {
       "party": "Woolworths",
-      "type": "corporate_ppa"
+      "type": "corporate_ppa",
+      "term_years": 9,
+      "capacity_mw": 25.0
     }
   ],
   "scheme_contracts": [],

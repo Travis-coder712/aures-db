@@ -78,11 +78,15 @@
     },
     {
       "party": "ACT Government",
-      "type": "government_ppa"
+      "type": "government_ppa",
+      "term_years": 14,
+      "capacity_mw": 100.0
     },
     {
       "party": "Flow Power",
-      "type": "PPA"
+      "type": "PPA",
+      "term_years": 10,
+      "capacity_mw": 40.0
     }
   ],
   "scheme_contracts": [],

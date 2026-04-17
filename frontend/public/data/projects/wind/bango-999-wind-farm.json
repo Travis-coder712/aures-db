@@ -65,7 +65,9 @@
   "offtakes": [
     {
       "party": "Woolworths",
-      "type": "corporate_ppa"
+      "type": "corporate_ppa",
+      "term_years": 10,
+      "capacity_mw": 60.0
     }
   ],
   "scheme_contracts": [],

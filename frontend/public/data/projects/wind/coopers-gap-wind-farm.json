@@ -125,11 +125,15 @@
     {
       "party": "AGL Energy",
       "type": "PPA",
+      "term_years": 5,
+      "capacity_mw": 453.0,
       "source_url": "https://reneweconomy.com.au/coopers-gap-wind-farm/"
     },
     {
       "party": "AGL Energy",
-      "type": "PPA"
+      "type": "PPA",
+      "term_years": 5,
+      "capacity_mw": 453.0
     }
   ],
   "scheme_contracts": [],

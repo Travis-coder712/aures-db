@@ -70,7 +70,9 @@
   "offtakes": [
     {
       "party": "EnergyAustralia",
-      "type": "PPA"
+      "type": "PPA",
+      "term_years": 10,
+      "capacity_mw": 345.0
     }
   ],
   "scheme_contracts": [],

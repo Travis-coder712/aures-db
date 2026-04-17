@@ -103,7 +103,8 @@
   "offtakes": [
     {
       "party": "CS Energy",
-      "type": "PPA"
+      "type": "PPA",
+      "capacity_mw": 285.0
     }
   ],
   "scheme_contracts": [

@@ -115,15 +115,21 @@
     },
     {
       "party": "Victorian Government",
-      "type": "government_ppa"
+      "type": "government_ppa",
+      "term_years": 15,
+      "capacity_mw": 126.0
     },
     {
       "party": "Snowy Hydro",
-      "type": "PPA"
+      "type": "PPA",
+      "term_years": 15,
+      "capacity_mw": 168.0
     },
     {
       "party": "ALDI",
-      "type": "corporate_ppa"
+      "type": "corporate_ppa",
+      "term_years": 10,
+      "capacity_mw": 20.0
     }
   ],
   "scheme_contracts": [],

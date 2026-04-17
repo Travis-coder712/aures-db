@@ -83,11 +83,15 @@
     {
       "party": "AGL Energy",
       "type": "PPA",
+      "term_years": 5,
+      "capacity_mw": 200.0,
       "source_url": "https://reneweconomy.com.au/silverton-wind-farm/"
     },
     {
       "party": "AGL Energy",
-      "type": "PPA"
+      "type": "PPA",
+      "term_years": 5,
+      "capacity_mw": 200.0
     }
   ],
   "scheme_contracts": [],

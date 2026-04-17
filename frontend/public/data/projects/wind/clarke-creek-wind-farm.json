@@ -73,7 +73,9 @@
     },
     {
       "party": "Stanwell Corporation",
-      "type": "PPA"
+      "type": "PPA",
+      "term_years": 15,
+      "capacity_mw": 348.0
     }
   ],
   "scheme_contracts": [],

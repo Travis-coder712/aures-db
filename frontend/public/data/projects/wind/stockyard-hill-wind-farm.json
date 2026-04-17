@@ -116,6 +116,7 @@
     {
       "party": "Origin Energy",
       "type": "PPA",
+      "capacity_mw": 530.0,
       "source_url": "https://reneweconomy.com.au/stockyard-hill-wind-farm/"
     },
     {
@@ -125,7 +126,8 @@
     },
     {
       "party": "Origin Energy",
-      "type": "PPA"
+      "type": "PPA",
+      "capacity_mw": 530.0
     }
   ],
   "scheme_contracts": [],

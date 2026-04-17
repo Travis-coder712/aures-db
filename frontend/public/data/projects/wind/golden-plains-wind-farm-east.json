@@ -52,11 +52,13 @@
   "offtakes": [
     {
       "party": "Snowy Hydro",
-      "type": "PPA"
+      "type": "PPA",
+      "capacity_mw": 302.0
     },
     {
       "party": "Equinix",
-      "type": "corporate_ppa"
+      "type": "corporate_ppa",
+      "capacity_mw": 151.0
     }
   ],
   "scheme_contracts": [],

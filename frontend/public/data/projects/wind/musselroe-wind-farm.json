@@ -74,7 +74,9 @@
   "offtakes": [
     {
       "party": "Hydro Tasmania",
-      "type": "PPA"
+      "type": "PPA",
+      "term_years": 17,
+      "capacity_mw": 168.0
     }
   ],
   "scheme_contracts": [],

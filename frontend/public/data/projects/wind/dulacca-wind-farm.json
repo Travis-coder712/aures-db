@@ -95,7 +95,8 @@
   "offtakes": [
     {
       "party": "CleanCo Queensland",
-      "type": "government_ppa"
+      "type": "government_ppa",
+      "capacity_mw": 126.0
     }
   ],
   "scheme_contracts": [],

@@ -65,7 +65,9 @@
   "offtakes": [
     {
       "party": "Ergon Energy",
-      "type": "PPA"
+      "type": "PPA",
+      "term_years": 12,
+      "capacity_mw": 180.5
     }
   ],
   "scheme_contracts": [],

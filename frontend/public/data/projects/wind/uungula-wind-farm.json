@@ -89,7 +89,8 @@
     {
       "party": "Snowy Hydro",
       "type": "PPA",
-      "term_years": 15
+      "term_years": 15,
+      "capacity_mw": 200.0
     }
   ],
   "scheme_contracts": [

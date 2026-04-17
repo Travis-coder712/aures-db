@@ -163,6 +163,8 @@
     {
       "party": "AEMO (system services)",
       "type": "tolling",
+      "term_years": 11,
+      "capacity_mw": 250.0,
       "source_url": "https://reneweconomy.com.au/victorian-big-battery/"
     }
   ],

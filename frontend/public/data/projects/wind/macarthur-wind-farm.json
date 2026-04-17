@@ -95,11 +95,15 @@
     {
       "party": "AGL Energy",
       "type": "PPA",
+      "term_years": 25,
+      "capacity_mw": 420.0,
       "source_url": "https://www.agl.com.au/about-agl/how-we-source-energy/macarthur-wind-farm"
     },
     {
       "party": "AGL Energy",
-      "type": "PPA"
+      "type": "PPA",
+      "term_years": 25,
+      "capacity_mw": 420.0
     }
   ],
   "scheme_contracts": [],

@@ -25,7 +25,9 @@
   "offtakes": [
     {
       "party": "AGL Energy",
-      "type": "PPA"
+      "type": "PPA",
+      "term_years": 15,
+      "capacity_mw": 123.0
     }
   ],
   "scheme_contracts": [],

@@ -66,11 +66,15 @@
     {
       "party": "Snowy Hydro",
       "type": "PPA",
+      "term_years": 15,
+      "capacity_mw": 100.0,
       "source_url": "https://reneweconomy.com.au/bango-wind-farm/"
     },
     {
       "party": "Snowy Hydro",
-      "type": "PPA"
+      "type": "PPA",
+      "term_years": 15,
+      "capacity_mw": 100.0
     }
   ],
   "scheme_contracts": [],
