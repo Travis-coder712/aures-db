@@ -1,5 +1,5 @@
 import { useState, useEffect, useMemo, useCallback } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip,
   ResponsiveContainer, AreaChart, Area,
@@ -246,6 +246,17 @@ export default function ProjectTimeline() {
         </p>
         <div className="mt-3">
           <DataProvenance page="project-timeline" />
+        </div>
+        <div className="mt-2">
+          <Link
+            to="/intelligence/nem-activities"
+            className="inline-flex items-center gap-1.5 text-xs text-[var(--color-primary)] hover:underline"
+          >
+            <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M17.25 6.75L22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3l-4.5 16.5" />
+            </svg>
+            See month-by-month NEM activities timeline →
+          </Link>
         </div>
       </div>
 
