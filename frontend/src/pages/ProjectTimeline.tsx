@@ -8,6 +8,7 @@ import { fetchProjectTimeline } from '../lib/dataService'
 import { TECHNOLOGY_CONFIG, STATUS_CONFIG } from '../lib/types'
 import type { ProjectTimelineData, Technology, State, ProjectStatus } from '../lib/types'
 import { isCuratedProject, CURATED_NOTE, CURATED_BENCHMARK } from '../lib/curatedFilter'
+import DataProvenance from '../components/common/DataProvenance'
 
 // ============================================================
 // Icons — defined BEFORE const arrays per project pattern
@@ -243,6 +244,9 @@ export default function ProjectTimeline() {
             </span>
           )}
         </p>
+        <div className="mt-3">
+          <DataProvenance page="project-timeline" />
+        </div>
       </div>
 
       {/* Multi-select Filter Chips */}

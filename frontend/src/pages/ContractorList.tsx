@@ -2,6 +2,7 @@ import { useState, useMemo } from 'react'
 import { Link, useSearchParams, useNavigate } from 'react-router-dom'
 import { useContractorIndex } from '../hooks/useContractorData'
 import { TECHNOLOGY_CONFIG, CONTRACTOR_ROLE_CONFIG, STATUS_CONFIG, type Technology, type State, type ProjectStatus, type ContractorRole } from '../lib/types'
+import DataProvenance from '../components/common/DataProvenance'
 
 type SortKey = 'capacity' | 'projects' | 'name'
 
@@ -107,6 +108,9 @@ export default function ContractorList() {
             : `${Math.round(totalCapacity)} MW`
           } total project capacity
         </p>
+        <div className="mt-3">
+          <DataProvenance page="contractors" />
+        </div>
       </div>
 
       {/* Top Contractors Quick Buttons */}

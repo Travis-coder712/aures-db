@@ -14,6 +14,7 @@ import { useProjectIndex } from '../hooks/useProjectData'
 import { TECHNOLOGY_CONFIG, STATUS_CONFIG } from '../lib/types'
 import type { Technology, ProjectStatus, ProjectSummary } from '../lib/types'
 import ProjectCard from '../components/common/ProjectCard'
+import DataProvenance from '../components/common/DataProvenance'
 
 export default function DeveloperDetail() {
   const { slug } = useParams<{ slug: string }>()
@@ -116,6 +117,9 @@ export default function DeveloperDetail() {
             ))}
           </div>
         )}
+        <div className="mt-3">
+          <DataProvenance page="developer-detail" />
+        </div>
       </section>
 
       {/* Stat Cards */}

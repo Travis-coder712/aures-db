@@ -8,6 +8,7 @@ import {
 import { fetchWindResource } from '../../lib/dataService'
 import type { WindResourceData, WindResourceFarm } from '../../lib/types'
 import ScrollableTable from '../../components/common/ScrollableTable'
+import DataProvenance from '../../components/common/DataProvenance'
 
 // ============================================================
 // Icons — defined BEFORE const arrays per project pattern
@@ -285,6 +286,9 @@ export default function WindResource() {
         <p className="text-sm text-[var(--color-text-muted)] mt-1">
           Capacity factor analysis across {data.total_operating} operating wind farms and {data.total_development} development projects
         </p>
+        <div className="mt-3">
+          <DataProvenance page="wind-resource" />
+        </div>
       </div>
 
       {/* Methodology */}

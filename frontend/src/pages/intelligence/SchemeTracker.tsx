@@ -11,6 +11,7 @@ import { ESG_TRACKER_PROJECTS, ROUND_ESG_SUMMARIES } from '../../data/esg-tracke
 import { CIS_PROJECTS, LTESA_PROJECTS, CIS_ROUNDS } from '../../data/scheme-rounds'
 import type { SchemeProject } from '../../data/scheme-rounds'
 import type { ESGTrackerProject, PublicationStatus, AgreementStatus } from '../../data/esg-tracker-data'
+import DataProvenance from '../../components/common/DataProvenance'
 
 // ============================================================
 // Stage colours & helpers — defined BEFORE const arrays
@@ -278,6 +279,9 @@ export default function SchemeTracker() {
         <p className="text-sm text-[var(--color-text-muted)] mt-1">
           Capacity Investment Scheme and NSW Long-term Energy Service Agreements
         </p>
+        <div className="mt-3">
+          <DataProvenance page="scheme-tracker" />
+        </div>
       </div>
 
       {/* Tabs */}

@@ -2,6 +2,7 @@ import { useState, useMemo } from 'react'
 import { Link, useSearchParams, useNavigate } from 'react-router-dom'
 import { useOfftakerIndex } from '../hooks/useOfftakerData'
 import { TECHNOLOGY_CONFIG, OFFTAKE_TYPE_CONFIG, STATUS_CONFIG, type Technology, type State, type ProjectStatus, type OfftakeType } from '../lib/types'
+import DataProvenance from '../components/common/DataProvenance'
 
 type SortKey = 'capacity' | 'projects' | 'name'
 
@@ -107,6 +108,9 @@ export default function OfftakerList() {
             : `${Math.round(totalCapacity)} MW`
           } total project capacity
         </p>
+        <div className="mt-3">
+          <DataProvenance page="offtakers" />
+        </div>
       </div>
 
       {/* Top Offtakers Quick Buttons */}

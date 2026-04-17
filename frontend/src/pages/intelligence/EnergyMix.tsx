@@ -11,6 +11,7 @@ import GenerationStack from '../../components/intelligence/GenerationStack'
 import CapacityWatch from '../../components/intelligence/CapacityWatch'
 import CoalWatch from '../../components/intelligence/CoalWatch'
 import WattClarity from '../../components/intelligence/WattClarity'
+import DataProvenance from '../../components/common/DataProvenance'
 
 // ============================================================
 // Icons — defined BEFORE const arrays per project pattern
@@ -301,6 +302,9 @@ export default function EnergyMix() {
         <p className="text-sm text-[var(--color-text-muted)] mt-1">
           Operating capacity, pipeline analysis, and transition modelling across the NEM
         </p>
+        <div className="mt-3">
+          <DataProvenance page="energy-mix" />
+        </div>
       </div>
 
       {/* Tab navigation */}

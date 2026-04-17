@@ -23,6 +23,7 @@ import ChartFrame from '../../components/common/ChartFrame'
 import ScrollableTable from '../../components/common/ScrollableTable'
 import DataTable from '../../components/common/DataTable'
 import type { DriftAnalysisData, DriftProject } from '../../lib/types'
+import DataProvenance from '../../components/common/DataProvenance'
 
 /* ── icons defined BEFORE const arrays (Vite HMR issue) ── */
 const ClockIcon = () => (
@@ -276,6 +277,9 @@ export default function DriftAnalysis() {
             ? `${filteredProjects.length} of ${data.total_projects} projects matching filters`
             : `${data.total_projects} projects with COD drift`}
         </p>
+        <div className="mt-3">
+          <DataProvenance page="drift-analysis" />
+        </div>
       </section>
 
       {/* Filter Bar */}

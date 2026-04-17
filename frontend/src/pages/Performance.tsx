@@ -15,6 +15,7 @@ import {
 import { useLeagueTableIndex, useLeagueTable, useFilteredLeagueTable } from '../hooks/usePerformanceData'
 import { fetchMonthlyPerformance, fetchLeagueTable } from '../lib/dataService'
 import type { LeagueTable, LeagueTechnology, LeagueTableEntry, State, ProjectMonthlyPerformance } from '../lib/types'
+import DataProvenance from '../components/common/DataProvenance'
 
 // ============================================================
 // Info Tooltip Definitions
@@ -429,6 +430,11 @@ export default function Performance() {
           </svg>
           How are these metrics calculated?
         </Link>
+        <div className="mt-3">
+          <DataProvenance
+            sources={tech === 'bess' ? ['openelectricity_performance', 'nemweb_bids', 'json_export'] : ['openelectricity_performance', 'json_export']}
+          />
+        </div>
         {(table || index) && (
           <div className="mt-2 flex flex-wrap items-center gap-2">
             {/* Data freshness badge */}

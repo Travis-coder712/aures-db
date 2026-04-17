@@ -7,6 +7,7 @@ import {
 import { fetchBESSCapex } from '../lib/dataService'
 import { exportElementToPdf } from '../lib/exportPdf'
 import type { BESSCapexData, BESSCapexProject } from '../lib/types'
+import DataProvenance from '../components/common/DataProvenance'
 
 // ============================================================
 // Icons — defined BEFORE const arrays per project pattern
@@ -294,6 +295,9 @@ export default function BESSCapex() {
           </button>
           {' '}in operation, construction & commissioning
         </p>
+        <div className="mt-3">
+          <DataProvenance page="bess-capex" />
+        </div>
       </div>
 
       {/* Controls */}

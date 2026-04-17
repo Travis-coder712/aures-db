@@ -2,6 +2,7 @@ import { useState, useEffect, useMemo } from 'react'
 import { Link } from 'react-router-dom'
 import { fetchNemActivities } from '../../lib/dataService'
 import type { NemActivitiesData, NemActivityEvent } from '../../lib/types'
+import DataProvenance from '../../components/common/DataProvenance'
 
 // ============================================================
 // Icons — defined BEFORE const arrays per project pattern
@@ -187,6 +188,9 @@ export default function NemActivities() {
         <p className="text-sm text-[var(--color-text-muted)] mt-1">
           Month-by-month key highlights across the NEM. Toggle sections to focus on what matters.
         </p>
+        <div className="mt-3">
+          <DataProvenance page="nem-activities" />
+        </div>
       </div>
 
       {/* Section toggles */}

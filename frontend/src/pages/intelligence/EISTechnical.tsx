@@ -10,6 +10,7 @@ import type { EISPdfOpportunitiesData, EISPdfOpportunity } from '../../lib/dataS
 import type { EISAnalyticsData, EISWindProject, EISBESSProject, EISSolarProject, EISComparisonData, EISComparisonProject, EISCoverageData } from '../../lib/types'
 import ScrollableTable from '../../components/common/ScrollableTable'
 import { FINANCIAL_CLOSE_PROJECTS } from '../../data/financial-close-data'
+import DataProvenance from '../../components/common/DataProvenance'
 
 // ============================================================
 // Icons — defined BEFORE const arrays per project pattern
@@ -607,6 +608,9 @@ export default function EISTechnical() {
           Technical parameters extracted from {summary.total_eis} Environmental Impact Statements.
           {summary.wind} wind · {summary.bess} BESS{summary.solar ? ` · ${summary.solar} solar` : ''} · {summary.pumped_hydro} pumped hydro projects.
         </p>
+        <div className="mt-3">
+          <DataProvenance page="eis-technical" />
+        </div>
       </div>
 
       {/* Summary stats */}

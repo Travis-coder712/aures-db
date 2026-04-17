@@ -18,6 +18,7 @@ import type { TransmissionStatus } from '../../data/transmission-projects'
 import { REZ_ZONES } from '../../data/rez-zones'
 import DataTable from '../../components/common/DataTable'
 import type { Column } from '../../components/common/DataTable'
+import DataProvenance from '../../components/common/DataProvenance'
 
 // ============================================================
 // Icons — defined BEFORE const arrays per project pattern
@@ -280,6 +281,9 @@ export default function TransmissionInfra() {
         <p className="text-sm text-[var(--color-text-muted)] mt-1">
           Major NEM transmission upgrades, grid connection analytics, and REZ congestion analysis
         </p>
+        <div className="mt-3">
+          <DataProvenance page="transmission-infra" />
+        </div>
       </div>
 
       {/* Summary stats */}

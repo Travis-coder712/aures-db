@@ -8,6 +8,7 @@ import { fetchDeveloperScores, fetchDeveloperIndex, fetchSchemeTracker } from '.
 import ChartWrapper from '../../components/common/ChartWrapper'
 import type { DeveloperScoreData, ScoredDeveloper, DeveloperIndex, SchemeTrackerData } from '../../lib/types'
 import ScrollableTable from '../../components/common/ScrollableTable'
+import DataProvenance from '../../components/common/DataProvenance'
 
 // ============================================================
 // Icons — defined BEFORE const arrays per project pattern
@@ -262,6 +263,9 @@ export default function DeveloperScores() {
           Execution tracking for {data.total_developers} developers based on project delivery,
           schedule drift, and completion rates.
         </p>
+        <div className="mt-3">
+          <DataProvenance page="developer-scores" />
+        </div>
       </div>
 
       {/* Rationale */}

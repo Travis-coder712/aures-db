@@ -11,6 +11,7 @@ import {
 import { useDeveloperIndex } from '../hooks/useDeveloperData'
 import { fetchDevDataQuality, type DevDataQuality, type DevWebsiteComparison, type DevCorrection } from '../lib/dataService'
 import { TECHNOLOGY_CONFIG, type Technology, type State, type DeveloperProfile } from '../lib/types'
+import DataProvenance from '../components/common/DataProvenance'
 
 type SortKey = 'capacity' | 'projects' | 'name'
 type TabId = 'directory' | 'data-quality'
@@ -176,6 +177,9 @@ export default function DeveloperList() {
             : `${Math.round(totalCapacity)} MW`
           } total capacity
         </p>
+        <div className="mt-3">
+          <DataProvenance page="developers" />
+        </div>
       </div>
 
       {/* Tabs */}

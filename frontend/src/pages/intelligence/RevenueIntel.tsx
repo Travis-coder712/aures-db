@@ -7,6 +7,7 @@ import {
 import { fetchRevenueIntel } from '../../lib/dataService'
 import ChartWrapper from '../../components/common/ChartWrapper'
 import type { RevenueIntelData, MetricStats, RevenueProjectRanking } from '../../lib/types'
+import DataProvenance from '../../components/common/DataProvenance'
 
 // ============================================================
 // Icons — defined BEFORE const arrays per project pattern
@@ -258,6 +259,9 @@ export default function RevenueIntel() {
         <p className="text-sm text-[var(--color-text-muted)] mt-1">
           Revenue and pricing analytics across {data.by_technology_year.length} technology-year combinations
         </p>
+        <div className="mt-3">
+          <DataProvenance page="revenue-intel" />
+        </div>
       </div>
 
       {/* Section navigation */}

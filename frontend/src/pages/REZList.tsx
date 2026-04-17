@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { useREZList } from '../hooks/useREZData'
 import type { State } from '../lib/types'
 import type { REZZone } from '../data/rez-zones'
+import DataProvenance from '../components/common/DataProvenance'
 
 const STATE_TABS: { label: string; value: State | 'ALL' }[] = [
   { label: 'All', value: 'ALL' },
@@ -73,6 +74,9 @@ export default function REZList() {
         <p className="text-sm text-[var(--color-text-muted)]">
           {totalZones} REZ zones across 5 states. {totalCapacity.toFixed(1)} GW of declared network capacity.
         </p>
+        <div className="mt-3">
+          <DataProvenance page="rez" />
+        </div>
       </section>
 
       {/* Summary Stats */}

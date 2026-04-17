@@ -10,6 +10,7 @@ import {
 } from 'recharts'
 import { useOEMIndex } from '../hooks/useOEMData'
 import { TECHNOLOGY_CONFIG, OEM_ROLE_CONFIG, STATUS_CONFIG, type Technology, type State, type ProjectStatus, type OEMRole, type OEMProfile } from '../lib/types'
+import DataProvenance from '../components/common/DataProvenance'
 
 type SortKey = 'capacity' | 'projects' | 'name'
 
@@ -115,6 +116,9 @@ export default function OEMList() {
             : `${Math.round(totalCapacity)} MW`
           } total project capacity
         </p>
+        <div className="mt-3">
+          <DataProvenance page="oems" />
+        </div>
       </div>
 
       {/* Top OEMs Quick Buttons */}

@@ -14,6 +14,7 @@ import { useProjectIndex } from '../hooks/useProjectData'
 import { TECHNOLOGY_CONFIG, STATUS_CONFIG, OEM_ROLE_CONFIG } from '../lib/types'
 import type { Technology, ProjectStatus, ProjectSummary, OEMRole } from '../lib/types'
 import ProjectCard from '../components/common/ProjectCard'
+import DataProvenance from '../components/common/DataProvenance'
 
 export default function OEMDetail() {
   const { slug } = useParams<{ slug: string }>()
@@ -115,6 +116,9 @@ export default function OEMDetail() {
         <p className="text-sm text-[var(--color-text-muted)]">
           {oem.project_count} projects across {oem.states.join(', ')}
         </p>
+        <div className="mt-3">
+          <DataProvenance page="oem-detail" />
+        </div>
       </section>
 
       {/* Stat Cards */}

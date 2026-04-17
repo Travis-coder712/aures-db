@@ -19,6 +19,7 @@ import {
   getClimateEventForYear,
 } from '../../data/climate-intelligence'
 import type { ClimateDriver, HistoricalClimateEvent } from '../../data/climate-intelligence'
+import DataProvenance from '../../components/common/DataProvenance'
 
 // ============================================================
 // Icons — defined BEFORE const arrays (Vite HMR issue)
@@ -563,6 +564,9 @@ export default function Dunkelflaute() {
         <p className="text-sm text-[var(--color-text-muted)] mt-1">
           Wind and solar generation vulnerability, climate intelligence, and BESS adequacy by state
         </p>
+        <div className="mt-3">
+          <DataProvenance page="dunkelflaute" />
+        </div>
       </div>
 
       {/* ── Tab Bar ── */}
