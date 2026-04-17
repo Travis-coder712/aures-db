@@ -626,6 +626,174 @@ The underlying data is publicly available:
 If you spot a discrepancy, it's likely due to capacity differences (registered vs maximum), time period alignment, or DUID mapping. We welcome corrections.`,
   },
   {
+    id: 'solar-resource',
+    title: 'Solar Resource',
+    description: 'How the solar capacity-factor benchmarks are built, what the rating thresholds mean, and the difference between small and utility-scale solar CF.',
+    icon: '☀️',
+    category: 'technical',
+    readingTime: '6 min read',
+    content: `# Solar Resource
+
+The \`/intelligence/solar-resource\` page is the solar equivalent of the Wind Resource deep-dive — it shows every operating solar farm's capacity factor, benchmarks them by state / REZ / capacity class, and projects predicted CF for development-pipeline projects.
+
+## Why solar CF is different to wind CF
+
+Wind CF can reach 45-50% at the best sites. **Solar CF is fundamentally capped by the sun** — a perfectly sized, perfectly sited, zero-curtailment solar farm in Northern Australia maxes out around 30-32% on annual CF, because roughly 12 of every 24 hours is night-time and the winter low-sun months pull the annual average down.
+
+The page uses solar-specific CF rating thresholds:
+
+| Rating | CF% | Notes |
+|---|---|---|
+| **Excellent** | ≥ 29% | Northern QLD / tracker-equipped sites |
+| **Good** | 24 – 29% | Most NSW / VIC / QLD operating fleet |
+| **Average** | 20 – 24% | SA / older fixed-mount sites |
+| **Below Average** | < 20% | Heavily curtailed or older equipment |
+
+Compared to wind, where Excellent starts at 35%+ — the scale is shifted down to reflect solar's underlying physics.
+
+## The capacity-class signal
+
+Solar has an unusual pattern that wind does not: **larger plants tend to have lower CF**. The Capacity Class Benchmarks section surfaces this directly. Two reasons:
+
+1. **Inverter clipping** — utility-scale solar is typically built with a DC-to-AC ratio ≥ 1.3, meaning the DC panel capacity exceeds the AC inverter capacity. On sunny days around noon, the inverters "clip" and can't push all the generated DC output through. This costs a few percentage points of CF by design (it's a cost-optimal trade-off).
+2. **Network curtailment** — large plants in heavily-developed REZs get hit harder by AEMO / network constraint directions, especially during midday.
+
+Small solar farms (<50 MW) typically see 1-3% higher CF than utility-scale (300+ MW) in the same state. This isn't a performance problem — larger plants are optimising for \$/MWh built, not raw CF.
+
+## State benchmarks (2024 dispatch year)
+
+Approximate state averages from the current fleet:
+
+| State | Avg CF | Sample size |
+|---|---|---|
+| VIC | 25.4% | 13 projects |
+| QLD | 23.5% | 28 projects |
+| NSW | 22.8% | 33 projects |
+| SA | 18.9% | 4 projects |
+
+VIC's lead is partly curtailment-adjusted: VIC's market has had less midday solar over-supply than QLD.
+
+## Development pipeline predictions
+
+The Development Pipeline Predictions table projects each pipeline project's CF using its state's operating fleet average. This is a **floor estimate** — new projects with modern panels and tracking should outperform the state average, but the average is the honest starting point when we don't yet have real dispatch data.
+
+## Known limitations
+
+1. **Tracker vs fixed-mount isn't broken out** — solar tracker data lives in individual project EIS documents but isn't systematically extracted yet. A solar farm with a single-axis horizontal tracker can outperform a fixed-mount equivalent by 10-15% on annual CF. The data is present in the underlying EIS PDFs; parsing it is a future enrichment job.
+2. **No rooftop PV interaction** — this page only covers utility-scale projects. Behind-the-meter rooftop PV reduces daytime demand and can indirectly suppress utility-scale capture, but isn't modelled here.
+3. **Developer fleet benchmarks are empty** — no developer currently has ≥ 3 operating solar farms in their portfolio. As the pipeline commissions over 2026-2028, this section will populate.
+4. **REZ benchmarks sparse** — most solar farms aren't yet formally assigned to a declared REZ.
+
+## Cross-references
+
+- See the **Performance Metrics** guide for the full CF definition and how it's computed from OpenElectricity API data.
+- See the **Dunkelflaute Monitor** for the climate context — when solar underperforms system-wide.
+- See the **Revenue Intelligence** page for how solar price capture (\$/MWh) varies by tech and state.
+`,
+  },
+  {
+    id: 'bess-portfolio-intelligence',
+    title: 'BESS Portfolio Intelligence',
+    description: 'Duration trends, grid-forming tracker, co-located hybrid projects, cell chemistry from EIS, and the network-services contract registry.',
+    icon: '🔋',
+    category: 'technical',
+    readingTime: '8 min read',
+    content: `# BESS Portfolio Intelligence
+
+The \`/intelligence/bess-portfolio\` page is the battery-side counterpart to Wind/Solar Resource. Instead of capacity factor (BESS CF is meaningless — it's dispatch-controlled), it surfaces the **structural shape** of the Australian BESS fleet: duration, grid-forming adoption, co-location, cell chemistry, and system-service contracts.
+
+---
+
+## The 6 tabs
+
+### 1. Overview
+
+Stat cards (431 total BESS, 32 operating, 11 GFM, 34 EIS-verified chemistry) plus three signals:
+- **Duration is doubling** line chart — avg / median duration by COD year shows the industry-wide shift from 1-2h in 2017-2022 to 4+ hours in 2027+ commitments.
+- **LFP dominates** — the EIS-verified set is 33 LFP : 1 NMC.
+- **GFM stat line** — 11 of 431 BESS (2.6%) are grid-forming, clustered in recent commissions.
+
+### 2. Duration
+
+The core BESS supply-side trend. Three views:
+
+1. **Buckets by status** — operating fleet clusters in 1-2h and 2-4h; development pipeline dominates 4-8h with 14 projects at 8h+.
+2. **Summary cards** — avg / median / max duration per status.
+3. **Evolution by COD year** — the 2017 cohort averaged 0.89h; 2028-2029 cohort averages 4.0h+. Background area shows total MWh committed to each year.
+4. **Top-20 longest-duration table** — dominated by 8h+ committed pipeline projects.
+
+### 3. Grid-Forming
+
+Grid-forming (GFM) inverters provide voltage and frequency support that grid-following inverters cannot. As coal retires, synchronous machine inertia drops — GFM batteries and synchronous condensers become essential.
+
+Current fleet (11 projects):
+- Eraring Battery (NSW, 700 MW / 3,160 MWh / 4.5h) — largest GFM
+- Tomago BESS (NSW, 500 MW / 2,000 MWh / 4h)
+- Liddell BESS (NSW, 500 MW / 1,000 MWh / 2h)
+- Western Downs Battery (QLD, 510 MW)
+- Victorian Big Battery (VIC, 300 MW / 450 MWh)
+- Plus 6 smaller NSW/VIC/QLD projects
+
+NSW dominates GFM adoption. Queensland state-owned projects (CleanCo, Stanwell) are also investing in GFM.
+
+### 4. Co-located (hybrid)
+
+92 hybrid projects — solar+BESS and wind+BESS sharing a connection point. One operating (development/construction heavy). BESS is typically sized at 30-50% of generator AC capacity to:
+- Absorb curtailment (peak solar hours)
+- Shift output to evening peak (6-9pm)
+- Provide frequency response (if GFM)
+
+This is a huge pipeline but almost none is operating yet — expect 2027-2029 to reshape the fleet.
+
+### 5. Chemistry
+
+From \`eis_technical_specs\` — 34 projects with verified cell chemistry from published EIS documents. Coverage is thin (~8% of the BESS fleet) because most development-stage projects don't publish EIS with cell specs, and most operating-stage projects commissioned before systematic EIS parsing began.
+
+What's visible:
+- **LFP** (Lithium Iron Phosphate) = 33 / 34 verified projects
+- **NMC** (Nickel Manganese Cobalt) = 1 / 34
+- Top cell suppliers in the EIS set: CATL (via Tesla Gigafactory), BYD, direct CATL, Samsung SDI
+
+Why LFP wins:
+- Thermal stability (safer in stationary applications)
+- Longer cycle life
+- No cobalt (cheaper, less supply-chain risk)
+- Lower energy density matters less on a stationary MWh footprint
+
+PCS type split in the same 34 projects: 17 grid-forming, 17 grid-following. Developers are roughly evenly split on whether to take on the GFM premium.
+
+### 6. Network Services
+
+BESS projects holding specific system-service contracts — SIPS (System Integrity Protection Schemes), FCAS tolling, and network augmentation agreements. Currently 4 documented contracts:
+
+- **Waratah Super Battery** (NSW EnergyCo SIPS) — 700 MW reserved for shock-absorber service, 5.5-year contract from 2025
+- **Victorian Big Battery** (AEMO SIPS) — 250 MW reserved summer-peak, 11-year contract from 2021
+- **Torrens Island BESS** — the entry was flagged during research as likely mis-attributed (AGL-owned merchant battery with no publicly disclosed SA Government contract)
+
+These contracts usually pay an **availability fee** (annual \$/MW-year) rather than a \$/MWh energy price. Exact fees are commercial-in-confidence but AER revenue determinations set the regulated ceiling.
+
+---
+
+## Known limitations
+
+1. **Chemistry coverage is 8%** of the fleet. As more projects publish EIS (required for most development approvals), this will grow.
+2. **GFM flag comes from developer disclosure** — the 11 flagged projects are conservative. Some projects use inverters that are technically capable of GFM but not explicitly marketed or contracted as such.
+3. **Co-located doesn't distinguish AC vs DC coupling** — a DC-coupled hybrid (BESS wired to the solar inverter DC bus) behaves differently to AC-coupled (BESS has its own inverter). The distinction matters for revenue modelling but isn't systematically captured.
+4. **Duration is computed as \`storage_mwh / capacity_mw\`**. Some larger projects are published with only MW (no MWh), giving null duration. They're excluded from distribution charts.
+5. **Operating BESS avg duration (1.83h) under-states reality** — the operating fleet is dominated by 2017-2022 vintage, before the shift to 4h. Look at the COD-year evolution line for the forward trend.
+6. **Network services list is thin (4 contracts)** because it's sourced from the \`offtakes\` table. More contracts may exist but are undocumented publicly.
+
+---
+
+## Cross-references
+
+- **BESS Capex** — \$/kWh by OEM, capex evolution over COD years
+- **BESS Bidding** — revenue + dispatch behaviour, not structural
+- **OEM Intelligence** — BESS tab, for supplier concentration
+- **Offtaker / PPA Mapper** — tolling contracts and SIPS-type arrangements live there too
+`,
+  },
+  {
     id: 'contractor-intelligence',
     title: 'Contractor Intelligence',
     description: 'How the EPC/BoP contractor layer is structured, how concentration is measured, and what the developer × contractor + contractor × OEM matrices reveal.',
