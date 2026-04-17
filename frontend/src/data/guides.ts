@@ -626,6 +626,129 @@ The underlying data is publicly available:
 If you spot a discrepancy, it's likely due to capacity differences (registered vs maximum), time period alignment, or DUID mapping. We welcome corrections.`,
   },
   {
+    id: 'battery-records-live',
+    title: 'Battery Records & Live Activity',
+    description: 'How the Records Board is computed, how the 30-day snapshot works, and the single-API-request pattern that keeps costs low.',
+    icon: '⚡',
+    category: 'technical',
+    readingTime: '6 min read',
+    content: `# Battery Records & Live Activity
+
+The new **Live & Records** tab on \`/intelligence/bess-portfolio\` surfaces what the structural BESS intelligence can't: the actual behavioural records of the operating fleet — how big a single 5-minute discharge has ever been, how much the NEM's batteries moved yesterday, and where the daily records sit per state.
+
+## What's tracked
+
+Per region (NEM plus each of NSW1, VIC1, QLD1, SA1, TAS1):
+
+| Metric | Unit | Source |
+|---|---|---|
+| **Max 5-min discharge** | MW | Peak single-interval discharge across the fleet |
+| **Max 5-min charge** | MW | Peak single-interval charge (load) |
+| **Max daily discharge** | MWh | Highest total daily throughput discharged |
+| **Max daily charge** | MWh | Highest total daily throughput charged |
+
+Plus for the latest day available:
+- Total discharged / charged MWh per region
+- Peak 5-min discharge and charge MW with timestamps
+- 30-day trailing daily throughput chart (NEM-wide)
+
+## Data source — OpenElectricity 5-minute network endpoint
+
+Rather than scraping raw NEMWEB 5-minute SCADA (which would be ~8M rows/year across 80+ battery DUIDs), we use OpenElectricity's pre-aggregated \`/data/network/NEM\` endpoint with:
+
+\`\`\`
+metrics=power
+interval=5m
+primary_grouping=network_region
+secondary_grouping=fueltech
+fueltech=battery_charging,battery_discharging
+\`\`\`
+
+**One API request per month of history** — fits easily in OE's free-tier 500/day quota. For a full-year backfill, 12 requests.
+
+The importer stores only **daily aggregates per region**, not raw 5-min data. Schema:
+
+\`\`\`sql
+battery_daily_scada (
+  settlement_date, region, discharged_mwh, charged_mwh,
+  peak_discharge_mw, peak_charge_mw,
+  peak_discharge_time, peak_charge_time, intervals_counted
+)
+battery_records (
+  metric, region, value, unit, recorded_at, settlement_date
+)
+\`\`\`
+
+## Running the importer
+
+\`\`\`bash
+# First-run 30-day backfill
+python3 pipeline/importers/import_battery_scada.py --days 30
+
+# Incremental catch-up (daily cron)
+python3 pipeline/importers/import_battery_scada.py --days 7
+
+# Specific historical range
+python3 pipeline/importers/import_battery_scada.py \\
+    --date-start 2025-01-01 --date-end 2025-12-31
+\`\`\`
+
+Requires \`OPENELECTRICITY_API_KEY\` env var (sign up at https://platform.openelectricity.org.au — free tier).
+
+After each run, \`battery_records\` is recomputed from scratch against the full \`battery_daily_scada\` history. Running the importer multiple times is idempotent — daily rows are upserted on their unique (date, region) key.
+
+## How the importer works
+
+1. Single API call fetches 5-min battery_charging + battery_discharging power for the chosen date range, already split by region.
+2. For each 5-min interval, we synthesise a "NEM" row by summing the 5 NEM regions.
+3. Daily aggregate per (date, region):
+   - \`discharged_mwh = Σ battery_discharging_mw / 12\` (12 five-min intervals per hour)
+   - \`charged_mwh = Σ battery_charging_mw / 12\`
+   - \`peak_discharge_mw = max(battery_discharging_mw)\` + timestamp of peak
+   - \`peak_charge_mw = max(battery_charging_mw)\` + timestamp of peak
+4. Upsert into \`battery_daily_scada\`.
+5. Refresh \`battery_records\` from the updated daily table.
+
+## Graceful rendering when no data yet
+
+The exporter writes \`battery-live-records.json\` on every \`export_json.py\` run. If \`battery_daily_scada\` is empty:
+- \`has_data: false\`
+- \`records: { max_discharge_5min: [], ... }\` (empty arrays)
+- \`source_note\` with the exact importer command
+
+The UI renders an amber info banner with the command, and every record cell shows \`—\` without breaking.
+
+When data is present:
+- Banner turns green ✓
+- Stat cards populate: Fleet capacity (GW), Max 5-min discharge/charge, Max daily discharge
+- Latest snapshot table shows yesterday's activity per region
+- Records Board shows every record with timestamp / date
+- 30-day NEM throughput bar chart shows the recent trend
+
+## Design choices
+
+1. **Aggregate-only storage.** The brief's original plan kept raw 5-min data, but at ~3M rows/year it bloats the DB unnecessarily. Daily aggregates + peaks cover every user-facing metric with 99% less storage.
+2. **NEM synthesised from 5 regions.** Keeps the API simple and the sums trivial to verify.
+3. **Records recomputed in full, not incremental.** The table is tiny (4 metrics × 6 regions = 24 rows max). Full recompute avoids the "record stuck at old value because the daily it was set on got overwritten" bug class.
+4. **No per-DUID tracking.** Individual project activity is captured in \`performance_monthly\` + league tables. Live & Records is about fleet-level records, not unit-level drill-in.
+5. **State-of-charge inference deferred.** The brief flagged it as approximate (round-trip efficiency 85-90% estimate). Shipping the records board first; SOC estimation can layer on top later if users want it.
+
+## Known limitations
+
+1. **First-run lookback is ~12 months on free tier** — OpenElectricity free plan caps historical queries at 367 days. Longer history requires a paid plan.
+2. **Records history only goes back as far as you've ingested.** If the importer hasn't run, records are empty. If you ingested only 30 days, records reflect that window.
+3. **NEMWEB is the authoritative AEMO source.** OpenElectricity is a downstream consumer with ~2-5 minute latency. For absolute real-time, the brief's original raw-NEMWEB-SCADA path would be needed — but the complexity jump is large for marginal improvement.
+4. **5-min interval aggregation.** MWh figures assume each 5-min interval is accurate; minor rounding error accumulates in multi-day totals but doesn't affect peaks or single-day records.
+5. **No FCAS market separation.** The OE fueltech tags don't split energy dispatch vs FCAS service — a battery providing contingency FCAS shows up in the same power trace as a battery arbitraging energy.
+
+## Cross-references
+
+- **BESS Portfolio Intelligence** guide for structural data (duration, chemistry, grid-forming, co-location)
+- **BESS Bidding** for per-DUID price-band analysis (NEMWEB bids)
+- **Coal Outage vs Dispatch** (v2.27.0) — same graceful-pending-state pattern and similar NEMWEB / OE data architecture
+`,
+  },
+  {
     id: 'coal-outage-vs-dispatch',
     title: 'Coal Outage vs Dispatch Erosion',
     description: 'How AURES distinguishes coal unit unavailability from market displacement — the difference between mechanical events and structural decline.',
