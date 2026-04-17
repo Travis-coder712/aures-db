@@ -21,6 +21,7 @@ export type SourceId =
   | 'offtake_research'
   | 'web_research'
   | 'nemweb_bids'
+  | 'nemweb_dispatchload'
   | 'news_rss'
   | 'aemo_isp_rez'
   | 'market_prices'
@@ -99,6 +100,20 @@ export const SOURCE_REGISTRY: Record<SourceId, SourceRegistryEntry> = {
     criticallyStaleAfterDays: 10,
     refreshCommand: 'python3 pipeline/importers/import_nemweb_bids.py --days 7',
     refreshNote: 'Last 7 days of bid data (~3 min, no API limit — AEMO public data).',
+    url: 'https://nemweb.com.au',
+  },
+  nemweb_dispatchload: {
+    id: 'nemweb_dispatchload',
+    label: 'NEMWEB Dispatch Load',
+    shortLabel: 'NEMWEB Dispatch',
+    icon: '⚙️',
+    description:
+      'AEMO NEMWEB 5-minute DISPATCHLOAD data — AVAILABILITY (MW offered) vs TOTALCLEARED (MW dispatched) per DUID. Lets us split coal MWh reductions into outage-driven (unit unavailable) vs dispatch-driven (unit offered but not taken — market displacement).',
+    category: 'market',
+    staleAfterDays: 2,
+    criticallyStaleAfterDays: 7,
+    refreshCommand: 'python3 pipeline/importers/import_dispatchload.py --days 7',
+    refreshNote: 'Last 7 days of DISPATCHLOAD for the 44 coal DUIDs only. ~2 min, ~20 MB temporary download. For a full 12-month backfill use --month YYYY-MM per month.',
     url: 'https://nemweb.com.au',
   },
   aemo_generation_info: {

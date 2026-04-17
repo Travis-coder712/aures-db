@@ -1,0 +1,856 @@
+{
+  "nem": {
+    "total_capacity_mw": 21199,
+    "total_stations": 15,
+    "total_units": 44,
+    "total_duids": 44,
+    "stations_with_dispatch_data": 0,
+    "outage_hours": 0.0,
+    "displaced_hours": 0.0,
+    "dispatched_hours": 0.0,
+    "outage_mwh_missed": 0.0,
+    "displaced_mwh_missed": 0.0,
+    "dispatched_mwh": 0.0,
+    "outage_pct": null,
+    "displaced_pct": null,
+    "dispatched_pct": null
+  },
+  "by_state": {
+    "NSW": {
+      "total_capacity_mw": 8240.0,
+      "station_count": 4,
+      "stations": [
+        "Eraring Power Station",
+        "Bayswater Power Station",
+        "Mount Piper Power Station",
+        "Vales Point B Power Station"
+      ],
+      "duid_count": 12,
+      "outage_hours": 0.0,
+      "displaced_hours": 0.0,
+      "dispatched_hours": 0.0,
+      "outage_mwh_missed": 0.0,
+      "displaced_mwh_missed": 0.0,
+      "dispatched_mwh": 0.0,
+      "outage_pct": null,
+      "displaced_pct": null,
+      "dispatched_pct": null
+    },
+    "QLD": {
+      "total_capacity_mw": 8199.0,
+      "station_count": 8,
+      "stations": [
+        "Gladstone Power Station",
+        "Tarong Power Station",
+        "Tarong North Power Station",
+        "Callide B Power Station",
+        "Callide C Power Station",
+        "Kogan Creek Power Station",
+        "Stanwell Power Station",
+        "Millmerran Power Station"
+      ],
+      "duid_count": 22,
+      "outage_hours": 0.0,
+      "displaced_hours": 0.0,
+      "dispatched_hours": 0.0,
+      "outage_mwh_missed": 0.0,
+      "displaced_mwh_missed": 0.0,
+      "dispatched_mwh": 0.0,
+      "outage_pct": null,
+      "displaced_pct": null,
+      "dispatched_pct": null
+    },
+    "VIC": {
+      "total_capacity_mw": 4760.0,
+      "station_count": 3,
+      "stations": [
+        "Loy Yang A Power Station",
+        "Loy Yang B Power Station",
+        "Yallourn Power Station"
+      ],
+      "duid_count": 10,
+      "outage_hours": 0.0,
+      "displaced_hours": 0.0,
+      "dispatched_hours": 0.0,
+      "outage_mwh_missed": 0.0,
+      "displaced_mwh_missed": 0.0,
+      "dispatched_mwh": 0.0,
+      "outage_pct": null,
+      "displaced_pct": null,
+      "dispatched_pct": null
+    }
+  },
+  "stations": [
+    {
+      "station_name": "Eraring Power Station",
+      "facility_code": "ERARING",
+      "state": "NSW",
+      "owner": "Origin Energy",
+      "fuel": "Black coal",
+      "capacity_mw": 2880,
+      "units": 4,
+      "unit_size_mw": 720,
+      "duids": [
+        "ER01",
+        "ER02",
+        "ER03",
+        "ER04"
+      ],
+      "commissioned": 1982,
+      "closure_date": "2029-08-31",
+      "closure_note": "Extended from Aug 2025 \u2192 Aug 2027 \u2192 Aug 2029. Origin cited slower renewables rollout. NSW Government underwrite agreed.",
+      "battery_replacement": "Eraring Battery 700 MW / 3,160 MWh (operating)",
+      "outage_hours": 0.0,
+      "displaced_hours": 0.0,
+      "dispatched_hours": 0.0,
+      "outage_mwh_missed": 0.0,
+      "displaced_mwh_missed": 0.0,
+      "dispatched_mwh": 0.0,
+      "outage_pct": null,
+      "displaced_pct": null,
+      "dispatched_pct": null,
+      "has_dispatch_data": false,
+      "per_duid": [
+        {
+          "duid": "ER01",
+          "has_data": false
+        },
+        {
+          "duid": "ER02",
+          "has_data": false
+        },
+        {
+          "duid": "ER03",
+          "has_data": false
+        },
+        {
+          "duid": "ER04",
+          "has_data": false
+        }
+      ],
+      "annual_data": [
+        {
+          "year": 2025,
+          "generation_gwh": 11450.0,
+          "capacity_factor_pct": 45.4,
+          "est_revenue_m_aud": 1477.0,
+          "avg_price_aud_mwh": 129.0
+        },
+        {
+          "year": 2026,
+          "generation_gwh": 3680.0,
+          "capacity_factor_pct": 14.6,
+          "est_revenue_m_aud": 298.0,
+          "avg_price_aud_mwh": 81.0
+        }
+      ],
+      "seasonal_data": [
+        {
+          "year": 2025,
+          "season": "autumn",
+          "generation_gwh": 2928.0,
+          "avg_price_aud_mwh": 126.0
+        },
+        {
+          "year": 2025,
+          "season": "spring",
+          "generation_gwh": 2979.0,
+          "avg_price_aud_mwh": 94.0
+        },
+        {
+          "year": 2025,
+          "season": "winter",
+          "generation_gwh": 4385.0,
+          "avg_price_aud_mwh": 166.0
+        },
+        {
+          "year": 2026,
+          "season": "autumn",
+          "generation_gwh": 1277.0,
+          "avg_price_aud_mwh": 77.0
+        },
+        {
+          "year": 2026,
+          "season": "summer",
+          "generation_gwh": 3561.0,
+          "avg_price_aud_mwh": 85.0
+        }
+      ]
+    },
+    {
+      "station_name": "Bayswater Power Station",
+      "facility_code": "BAYSW",
+      "state": "NSW",
+      "owner": "AGL Energy",
+      "fuel": "Black coal",
+      "capacity_mw": 2640,
+      "units": 4,
+      "unit_size_mw": 660,
+      "duids": [
+        "BW01",
+        "BW02",
+        "BW03",
+        "BW04"
+      ],
+      "commissioned": 1985,
+      "closure_date": "2033-12-31",
+      "closure_note": "AGL announced closure by 2033, accelerated from original 2035.",
+      "battery_replacement": "Liddell Battery 500 MW / 1,000 MWh on adjacent site",
+      "outage_hours": 0.0,
+      "displaced_hours": 0.0,
+      "dispatched_hours": 0.0,
+      "outage_mwh_missed": 0.0,
+      "displaced_mwh_missed": 0.0,
+      "dispatched_mwh": 0.0,
+      "outage_pct": null,
+      "displaced_pct": null,
+      "dispatched_pct": null,
+      "has_dispatch_data": false,
+      "per_duid": [
+        {
+          "duid": "BW01",
+          "has_data": false
+        },
+        {
+          "duid": "BW02",
+          "has_data": false
+        },
+        {
+          "duid": "BW03",
+          "has_data": false
+        },
+        {
+          "duid": "BW04",
+          "has_data": false
+        }
+      ],
+      "annual_data": [
+        {
+          "year": 2025,
+          "generation_gwh": 10894.0,
+          "capacity_factor_pct": 45.8,
+          "est_revenue_m_aud": 1363.0,
+          "avg_price_aud_mwh": 125.0
+        },
+        {
+          "year": 2026,
+          "generation_gwh": 3920.0,
+          "capacity_factor_pct": 16.5,
+          "est_revenue_m_aud": 322.0,
+          "avg_price_aud_mwh": 82.0
+        }
+      ],
+      "seasonal_data": [
+        {
+          "year": 2025,
+          "season": "autumn",
+          "generation_gwh": 2330.0,
+          "avg_price_aud_mwh": 122.0
+        },
+        {
+          "year": 2025,
+          "season": "spring",
+          "generation_gwh": 3192.0,
+          "avg_price_aud_mwh": 91.0
+        },
+        {
+          "year": 2025,
+          "season": "winter",
+          "generation_gwh": 4384.0,
+          "avg_price_aud_mwh": 161.0
+        },
+        {
+          "year": 2026,
+          "season": "autumn",
+          "generation_gwh": 1413.0,
+          "avg_price_aud_mwh": 77.0
+        },
+        {
+          "year": 2026,
+          "season": "summer",
+          "generation_gwh": 3495.0,
+          "avg_price_aud_mwh": 84.0
+        }
+      ]
+    },
+    {
+      "station_name": "Mount Piper Power Station",
+      "facility_code": "MTPIPER",
+      "state": "NSW",
+      "owner": "EnergyAustralia",
+      "fuel": "Black coal",
+      "capacity_mw": 1400,
+      "units": 2,
+      "unit_size_mw": 700,
+      "duids": [
+        "MP1",
+        "MP2"
+      ],
+      "commissioned": 1993,
+      "closure_date": "2040-12-31",
+      "closure_note": "Longest-running NSW coal plant; no formal closure beyond 2040.",
+      "battery_replacement": null,
+      "outage_hours": 0.0,
+      "displaced_hours": 0.0,
+      "dispatched_hours": 0.0,
+      "outage_mwh_missed": 0.0,
+      "displaced_mwh_missed": 0.0,
+      "dispatched_mwh": 0.0,
+      "outage_pct": null,
+      "displaced_pct": null,
+      "dispatched_pct": null,
+      "has_dispatch_data": false,
+      "per_duid": [
+        {
+          "duid": "MP1",
+          "has_data": false
+        },
+        {
+          "duid": "MP2",
+          "has_data": false
+        }
+      ],
+      "annual_data": [],
+      "seasonal_data": []
+    },
+    {
+      "station_name": "Vales Point B Power Station",
+      "facility_code": "VALESP",
+      "state": "NSW",
+      "owner": "Delta Electricity",
+      "fuel": "Black coal",
+      "capacity_mw": 1320,
+      "units": 2,
+      "unit_size_mw": 660,
+      "duids": [
+        "VP5",
+        "VP6"
+      ],
+      "commissioned": 1978,
+      "closure_date": "2033-04-30",
+      "closure_note": "Extended from 2029 by Delta due to system security considerations.",
+      "battery_replacement": null,
+      "outage_hours": 0.0,
+      "displaced_hours": 0.0,
+      "dispatched_hours": 0.0,
+      "outage_mwh_missed": 0.0,
+      "displaced_mwh_missed": 0.0,
+      "dispatched_mwh": 0.0,
+      "outage_pct": null,
+      "displaced_pct": null,
+      "dispatched_pct": null,
+      "has_dispatch_data": false,
+      "per_duid": [
+        {
+          "duid": "VP5",
+          "has_data": false
+        },
+        {
+          "duid": "VP6",
+          "has_data": false
+        }
+      ],
+      "annual_data": [],
+      "seasonal_data": []
+    },
+    {
+      "station_name": "Gladstone Power Station",
+      "facility_code": "GSTONE",
+      "state": "QLD",
+      "owner": "NRG Gladstone Operating Services / Rio Tinto JV",
+      "fuel": "Black coal",
+      "capacity_mw": 1680,
+      "units": 6,
+      "unit_size_mw": 280,
+      "duids": [
+        "GSTONE1",
+        "GSTONE2",
+        "GSTONE3",
+        "GSTONE4",
+        "GSTONE5",
+        "GSTONE6"
+      ],
+      "commissioned": 1976,
+      "closure_date": "2029-03-31",
+      "closure_note": "Oldest major NEM coal station; dedicated to Rio Tinto's Boyne smelter load.",
+      "battery_replacement": null,
+      "outage_hours": 0.0,
+      "displaced_hours": 0.0,
+      "dispatched_hours": 0.0,
+      "outage_mwh_missed": 0.0,
+      "displaced_mwh_missed": 0.0,
+      "dispatched_mwh": 0.0,
+      "outage_pct": null,
+      "displaced_pct": null,
+      "dispatched_pct": null,
+      "has_dispatch_data": false,
+      "per_duid": [
+        {
+          "duid": "GSTONE1",
+          "has_data": false
+        },
+        {
+          "duid": "GSTONE2",
+          "has_data": false
+        },
+        {
+          "duid": "GSTONE3",
+          "has_data": false
+        },
+        {
+          "duid": "GSTONE4",
+          "has_data": false
+        },
+        {
+          "duid": "GSTONE5",
+          "has_data": false
+        },
+        {
+          "duid": "GSTONE6",
+          "has_data": false
+        }
+      ],
+      "annual_data": [],
+      "seasonal_data": []
+    },
+    {
+      "station_name": "Tarong Power Station",
+      "facility_code": "TARONG",
+      "state": "QLD",
+      "owner": "Stanwell Corporation",
+      "fuel": "Black coal",
+      "capacity_mw": 1400,
+      "units": 4,
+      "unit_size_mw": 350,
+      "duids": [
+        "TARONG#1",
+        "TARONG#2",
+        "TARONG#3",
+        "TARONG#4"
+      ],
+      "commissioned": 1984,
+      "closure_date": "2037-12-31",
+      "closure_note": "QLD Government extended to 2037 under state-owned coal strategy.",
+      "battery_replacement": "Tarong BESS 300 MW planned",
+      "outage_hours": 0.0,
+      "displaced_hours": 0.0,
+      "dispatched_hours": 0.0,
+      "outage_mwh_missed": 0.0,
+      "displaced_mwh_missed": 0.0,
+      "dispatched_mwh": 0.0,
+      "outage_pct": null,
+      "displaced_pct": null,
+      "dispatched_pct": null,
+      "has_dispatch_data": false,
+      "per_duid": [
+        {
+          "duid": "TARONG#1",
+          "has_data": false
+        },
+        {
+          "duid": "TARONG#2",
+          "has_data": false
+        },
+        {
+          "duid": "TARONG#3",
+          "has_data": false
+        },
+        {
+          "duid": "TARONG#4",
+          "has_data": false
+        }
+      ],
+      "annual_data": [],
+      "seasonal_data": []
+    },
+    {
+      "station_name": "Tarong North Power Station",
+      "facility_code": "TARONG_N",
+      "state": "QLD",
+      "owner": "Stanwell Corporation",
+      "fuel": "Black coal",
+      "capacity_mw": 443,
+      "units": 1,
+      "unit_size_mw": 443,
+      "duids": [
+        "TNPS1"
+      ],
+      "commissioned": 2003,
+      "closure_date": "2037-12-31",
+      "closure_note": "Single-unit supercritical station; closure synced with Tarong.",
+      "battery_replacement": null,
+      "outage_hours": 0.0,
+      "displaced_hours": 0.0,
+      "dispatched_hours": 0.0,
+      "outage_mwh_missed": 0.0,
+      "displaced_mwh_missed": 0.0,
+      "dispatched_mwh": 0.0,
+      "outage_pct": null,
+      "displaced_pct": null,
+      "dispatched_pct": null,
+      "has_dispatch_data": false,
+      "per_duid": [
+        {
+          "duid": "TNPS1",
+          "has_data": false
+        }
+      ],
+      "annual_data": [],
+      "seasonal_data": []
+    },
+    {
+      "station_name": "Callide B Power Station",
+      "facility_code": "CALL_B",
+      "state": "QLD",
+      "owner": "CS Energy",
+      "fuel": "Black coal",
+      "capacity_mw": 700,
+      "units": 2,
+      "unit_size_mw": 350,
+      "duids": [
+        "CALL_B_1",
+        "CALL_B_2"
+      ],
+      "commissioned": 1988,
+      "closure_date": "2028-12-31",
+      "closure_note": "Scheduled closure end 2028 per CS Energy transition plan.",
+      "battery_replacement": null,
+      "outage_hours": 0.0,
+      "displaced_hours": 0.0,
+      "dispatched_hours": 0.0,
+      "outage_mwh_missed": 0.0,
+      "displaced_mwh_missed": 0.0,
+      "dispatched_mwh": 0.0,
+      "outage_pct": null,
+      "displaced_pct": null,
+      "dispatched_pct": null,
+      "has_dispatch_data": false,
+      "per_duid": [
+        {
+          "duid": "CALL_B_1",
+          "has_data": false
+        },
+        {
+          "duid": "CALL_B_2",
+          "has_data": false
+        }
+      ],
+      "annual_data": [],
+      "seasonal_data": []
+    },
+    {
+      "station_name": "Callide C Power Station",
+      "facility_code": "CALL_C",
+      "state": "QLD",
+      "owner": "CS Energy / InterGen JV",
+      "fuel": "Black coal",
+      "capacity_mw": 920,
+      "units": 2,
+      "unit_size_mw": 460,
+      "duids": [
+        "CPP_3",
+        "CPP_4"
+      ],
+      "commissioned": 2001,
+      "closure_date": "2033-12-31",
+      "closure_note": "Unit 4 suffered catastrophic explosion May 2021; returned to service 2024. Unit 3 also suffered separate outage.",
+      "battery_replacement": null,
+      "outage_hours": 0.0,
+      "displaced_hours": 0.0,
+      "dispatched_hours": 0.0,
+      "outage_mwh_missed": 0.0,
+      "displaced_mwh_missed": 0.0,
+      "dispatched_mwh": 0.0,
+      "outage_pct": null,
+      "displaced_pct": null,
+      "dispatched_pct": null,
+      "has_dispatch_data": false,
+      "per_duid": [
+        {
+          "duid": "CPP_3",
+          "has_data": false
+        },
+        {
+          "duid": "CPP_4",
+          "has_data": false
+        }
+      ],
+      "annual_data": [],
+      "seasonal_data": []
+    },
+    {
+      "station_name": "Kogan Creek Power Station",
+      "facility_code": "KOGANCK",
+      "state": "QLD",
+      "owner": "CS Energy",
+      "fuel": "Black coal",
+      "capacity_mw": 744,
+      "units": 1,
+      "unit_size_mw": 744,
+      "duids": [
+        "KPP_1"
+      ],
+      "commissioned": 2007,
+      "closure_date": "2042-12-31",
+      "closure_note": "Single-unit supercritical. Newest major NEM coal; QLD state-owned.",
+      "battery_replacement": null,
+      "outage_hours": 0.0,
+      "displaced_hours": 0.0,
+      "dispatched_hours": 0.0,
+      "outage_mwh_missed": 0.0,
+      "displaced_mwh_missed": 0.0,
+      "dispatched_mwh": 0.0,
+      "outage_pct": null,
+      "displaced_pct": null,
+      "dispatched_pct": null,
+      "has_dispatch_data": false,
+      "per_duid": [
+        {
+          "duid": "KPP_1",
+          "has_data": false
+        }
+      ],
+      "annual_data": [],
+      "seasonal_data": []
+    },
+    {
+      "station_name": "Stanwell Power Station",
+      "facility_code": "STANWELL",
+      "state": "QLD",
+      "owner": "Stanwell Corporation",
+      "fuel": "Black coal",
+      "capacity_mw": 1460,
+      "units": 4,
+      "unit_size_mw": 365,
+      "duids": [
+        "STAN-1",
+        "STAN-2",
+        "STAN-3",
+        "STAN-4"
+      ],
+      "commissioned": 1993,
+      "closure_date": "2046-12-31",
+      "closure_note": "Longest-lived QLD coal asset; QLD government plan kept it to 2046.",
+      "battery_replacement": null,
+      "outage_hours": 0.0,
+      "displaced_hours": 0.0,
+      "dispatched_hours": 0.0,
+      "outage_mwh_missed": 0.0,
+      "displaced_mwh_missed": 0.0,
+      "dispatched_mwh": 0.0,
+      "outage_pct": null,
+      "displaced_pct": null,
+      "dispatched_pct": null,
+      "has_dispatch_data": false,
+      "per_duid": [
+        {
+          "duid": "STAN-1",
+          "has_data": false
+        },
+        {
+          "duid": "STAN-2",
+          "has_data": false
+        },
+        {
+          "duid": "STAN-3",
+          "has_data": false
+        },
+        {
+          "duid": "STAN-4",
+          "has_data": false
+        }
+      ],
+      "annual_data": [],
+      "seasonal_data": []
+    },
+    {
+      "station_name": "Millmerran Power Station",
+      "facility_code": "MILLMERR",
+      "state": "QLD",
+      "owner": "InterGen / Shanghai Electric",
+      "fuel": "Black coal",
+      "capacity_mw": 852,
+      "units": 2,
+      "unit_size_mw": 426,
+      "duids": [
+        "MPP_1",
+        "MPP_2"
+      ],
+      "commissioned": 2002,
+      "closure_date": "2030-12-31",
+      "closure_note": "Privately owned; no confirmed extension.",
+      "battery_replacement": null,
+      "outage_hours": 0.0,
+      "displaced_hours": 0.0,
+      "dispatched_hours": 0.0,
+      "outage_mwh_missed": 0.0,
+      "displaced_mwh_missed": 0.0,
+      "dispatched_mwh": 0.0,
+      "outage_pct": null,
+      "displaced_pct": null,
+      "dispatched_pct": null,
+      "has_dispatch_data": false,
+      "per_duid": [
+        {
+          "duid": "MPP_1",
+          "has_data": false
+        },
+        {
+          "duid": "MPP_2",
+          "has_data": false
+        }
+      ],
+      "annual_data": [],
+      "seasonal_data": []
+    },
+    {
+      "station_name": "Loy Yang A Power Station",
+      "facility_code": "LYA",
+      "state": "VIC",
+      "owner": "AGL Energy",
+      "fuel": "Brown coal",
+      "capacity_mw": 2210,
+      "units": 4,
+      "unit_size_mw": 553,
+      "duids": [
+        "LYA1",
+        "LYA2",
+        "LYA3",
+        "LYA4"
+      ],
+      "commissioned": 1984,
+      "closure_date": "2035-06-30",
+      "closure_note": "AGL accelerated closure from 2045 \u2192 2035; biggest single-site emitter in NEM.",
+      "battery_replacement": "Loy Yang A Battery planned",
+      "outage_hours": 0.0,
+      "displaced_hours": 0.0,
+      "dispatched_hours": 0.0,
+      "outage_mwh_missed": 0.0,
+      "displaced_mwh_missed": 0.0,
+      "dispatched_mwh": 0.0,
+      "outage_pct": null,
+      "displaced_pct": null,
+      "dispatched_pct": null,
+      "has_dispatch_data": false,
+      "per_duid": [
+        {
+          "duid": "LYA1",
+          "has_data": false
+        },
+        {
+          "duid": "LYA2",
+          "has_data": false
+        },
+        {
+          "duid": "LYA3",
+          "has_data": false
+        },
+        {
+          "duid": "LYA4",
+          "has_data": false
+        }
+      ],
+      "annual_data": [],
+      "seasonal_data": []
+    },
+    {
+      "station_name": "Loy Yang B Power Station",
+      "facility_code": "LOYB",
+      "state": "VIC",
+      "owner": "Alinta Energy",
+      "fuel": "Brown coal",
+      "capacity_mw": 1070,
+      "units": 2,
+      "unit_size_mw": 535,
+      "duids": [
+        "LOYYB1",
+        "LOYYB2"
+      ],
+      "commissioned": 1993,
+      "closure_date": "2047-12-31",
+      "closure_note": "Longest-lived NEM coal asset under current plans.",
+      "battery_replacement": null,
+      "outage_hours": 0.0,
+      "displaced_hours": 0.0,
+      "dispatched_hours": 0.0,
+      "outage_mwh_missed": 0.0,
+      "displaced_mwh_missed": 0.0,
+      "dispatched_mwh": 0.0,
+      "outage_pct": null,
+      "displaced_pct": null,
+      "dispatched_pct": null,
+      "has_dispatch_data": false,
+      "per_duid": [
+        {
+          "duid": "LOYYB1",
+          "has_data": false
+        },
+        {
+          "duid": "LOYYB2",
+          "has_data": false
+        }
+      ],
+      "annual_data": [],
+      "seasonal_data": []
+    },
+    {
+      "station_name": "Yallourn Power Station",
+      "facility_code": "YWPS",
+      "state": "VIC",
+      "owner": "EnergyAustralia",
+      "fuel": "Brown coal",
+      "capacity_mw": 1480,
+      "units": 4,
+      "unit_size_mw": 370,
+      "duids": [
+        "YWPS1",
+        "YWPS2",
+        "YWPS3",
+        "YWPS4"
+      ],
+      "commissioned": 1975,
+      "closure_date": "2028-06-30",
+      "closure_note": "Accelerated from 2032 \u2192 2028. Victorian Big Battery provides SIPS replacement.",
+      "battery_replacement": "Victorian Big Battery 300 MW (via SIPS)",
+      "outage_hours": 0.0,
+      "displaced_hours": 0.0,
+      "dispatched_hours": 0.0,
+      "outage_mwh_missed": 0.0,
+      "displaced_mwh_missed": 0.0,
+      "dispatched_mwh": 0.0,
+      "outage_pct": null,
+      "displaced_pct": null,
+      "dispatched_pct": null,
+      "has_dispatch_data": false,
+      "per_duid": [
+        {
+          "duid": "YWPS1",
+          "has_data": false
+        },
+        {
+          "duid": "YWPS2",
+          "has_data": false
+        },
+        {
+          "duid": "YWPS3",
+          "has_data": false
+        },
+        {
+          "duid": "YWPS4",
+          "has_data": false
+        }
+      ],
+      "annual_data": [],
+      "seasonal_data": []
+    }
+  ],
+  "has_dispatch_data": false,
+  "source_note": "No DISPATCHLOAD data ingested yet. Station metadata + annual CF history is populated from coal-watch.json. To decompose MWh reduction into outage vs displaced vs dispatched, run: python3 pipeline/importers/import_dispatchload.py --days 365",
+  "analysis_window_days": null,
+  "classification_rules": {
+    "outage": "availability_mw < 20% of unit capacity (unit unavailable or partial outage)",
+    "displaced": "availability_mw \u2265 20% capacity but total_cleared_mw < 30% of availability (offered but not dispatched)",
+    "dispatched": "total_cleared_mw \u2265 30% of availability (normal operation)"
+  },
+  "exported_at": "2026-04-17T19:43:45.015050"
+}

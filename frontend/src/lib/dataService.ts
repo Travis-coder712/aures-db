@@ -563,6 +563,22 @@ export async function fetchContractorAnalytics(): Promise<any | null> {
   } catch { return null }
 }
 
+// Coal Outage vs Dispatch — NEM/state/station decomposition of coal MWh
+// reduction into outage (unavailable) vs displaced (available but not
+// dispatched) vs dispatched (v2.27.0).
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+let coalOutageDispatchCache: any | null = null
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export async function fetchCoalOutageDispatch(): Promise<any | null> {
+  if (coalOutageDispatchCache) return coalOutageDispatchCache
+  try {
+    const resp = await fetch(`${BASE}/analytics/intelligence/coal-outage-dispatch.json`)
+    if (!resp.ok) return null
+    coalOutageDispatchCache = await resp.json()
+    return coalOutageDispatchCache
+  } catch { return null }
+}
+
 // Supply Chain Concentration Risk — dominance cells, at-risk OEM projects,
 // dev×OEM single points of failure (T3.I).
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

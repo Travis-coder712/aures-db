@@ -6222,6 +6222,249 @@ def export_bess_bidding(conn):
     print(f"  intelligence/bess-bidding.json ({len(profiles)} projects, {total} bids)")
 
 
+def export_coal_outage_dispatch(conn):
+    """Coal Outage vs Dispatch Decomposition — v2.27.0.
+
+    Reads the hand-curated coal station config at
+    pipeline/config/coal_stations.json (15 stations, 44 DUIDs across
+    NSW / QLD / VIC, ~21 GW nameplate) and produces aggregates at NEM,
+    state, and station levels.
+
+    If dispatch_availability has data → computes real 5-min outage /
+    displaced / dispatched hours per DUID over the last 12 months using
+    NEMWEB DISPATCHLOAD. If the table is empty, emits a framework-only
+    JSON with "source_note": "run import_dispatchload.py" so the page
+    can render gracefully.
+
+    Output: analytics/intelligence/coal-outage-dispatch.json
+    """
+    config_path = os.path.join(os.path.dirname(__file__), '..', 'config', 'coal_stations.json')
+    if not os.path.exists(config_path):
+        print("  coal-outage-dispatch.json skipped (no coal_stations.json config)")
+        return
+
+    with open(config_path) as f:
+        coal_config = json.load(f)
+    stations = coal_config.get('stations', [])
+
+    # Build DUID → station lookup + state totals
+    duid_to_station: dict[str, dict] = {}
+    for s in stations:
+        for duid in s['duids']:
+            duid_to_station[duid.upper()] = s
+
+    # Check whether dispatch_availability has any rows
+    row = conn.execute("SELECT COUNT(*) FROM dispatch_availability").fetchone()
+    has_dispatch_data = bool(row and row[0] > 0)
+
+    if has_dispatch_data:
+        # Real 5-min analysis: aggregate hours by mode, per DUID, last 12 months
+        analysis_window_days = 365
+        cutoff = (datetime.now() - timedelta(days=analysis_window_days)).strftime('%Y-%m-%d 00:00:00')
+        intervals_per_hour = 12  # 5-minute intervals
+
+        rows = conn.execute("""
+            SELECT duid, dispatch_mode,
+                   COUNT(*) interval_count,
+                   SUM(COALESCE(total_cleared_mw, 0)) cleared_sum,
+                   SUM(COALESCE(availability_mw, 0)) avail_sum
+            FROM dispatch_availability
+            WHERE settlement_date >= ?
+            GROUP BY duid, dispatch_mode
+        """, (cutoff,)).fetchall()
+
+        per_duid: dict[str, dict] = defaultdict(lambda: {
+            'outage_hours': 0.0, 'outage_mwh_missed': 0.0,
+            'displaced_hours': 0.0, 'displaced_mwh_missed': 0.0,
+            'dispatched_hours': 0.0, 'dispatched_mwh': 0.0,
+            'total_intervals': 0,
+        })
+        for r in rows:
+            d = per_duid[r['duid'] if hasattr(r, '__getitem__') else r[0]]
+            # sqlite3 rows by index
+            duid = r[0]; mode = r[1]; n = r[2]; cleared = r[3]; avail = r[4]
+            hours = n / intervals_per_hour
+            per_duid[duid]['total_intervals'] += n
+            # MW × hours = MWh (SUM(cleared_mw) over intervals / 12 = MWh delivered)
+            if mode == 'outage':
+                # Missed MWh = (capacity - avail) over the period
+                station = duid_to_station.get(duid)
+                cap = (station.get('unit_size_mw')
+                       or (station.get('capacity_mw', 0) / max(station.get('units', 1), 1))) if station else 0
+                per_duid[duid]['outage_hours'] += hours
+                per_duid[duid]['outage_mwh_missed'] += (cap * hours - (avail or 0) / intervals_per_hour)
+            elif mode == 'displaced':
+                per_duid[duid]['displaced_hours'] += hours
+                per_duid[duid]['displaced_mwh_missed'] += (
+                    ((avail or 0) - (cleared or 0)) / intervals_per_hour
+                )
+            elif mode == 'dispatched':
+                per_duid[duid]['dispatched_hours'] += hours
+                per_duid[duid]['dispatched_mwh'] += (cleared or 0) / intervals_per_hour
+    else:
+        per_duid = {}
+
+    # Build station-level output from the annual_data in coal-watch.json where available
+    coal_watch_path = os.path.join(DATA_DIR, 'analytics', 'coal-watch.json')
+    coal_watch = {}
+    if os.path.exists(coal_watch_path):
+        try:
+            with open(coal_watch_path) as f:
+                coal_watch = json.load(f)
+        except json.JSONDecodeError:
+            pass
+
+    # Map facility_code → annual_data (from existing coal-watch for NSW)
+    existing_station_data = {}
+    for plant in coal_watch.get('nsw_coal_plants', []):
+        existing_station_data[plant.get('facility_code')] = plant
+
+    station_out = []
+    nem_totals = {
+        'outage_hours': 0.0, 'displaced_hours': 0.0, 'dispatched_hours': 0.0,
+        'outage_mwh_missed': 0.0, 'displaced_mwh_missed': 0.0, 'dispatched_mwh': 0.0,
+        'total_duids': 0, 'stations_with_data': 0,
+    }
+    by_state = defaultdict(lambda: {
+        'outage_hours': 0.0, 'displaced_hours': 0.0, 'dispatched_hours': 0.0,
+        'outage_mwh_missed': 0.0, 'displaced_mwh_missed': 0.0, 'dispatched_mwh': 0.0,
+        'total_capacity_mw': 0.0, 'stations': [], 'duids': 0,
+    })
+
+    for station in stations:
+        duids = [d.upper() for d in station['duids']]
+        station_totals = {
+            'outage_hours': 0.0, 'displaced_hours': 0.0, 'dispatched_hours': 0.0,
+            'outage_mwh_missed': 0.0, 'displaced_mwh_missed': 0.0, 'dispatched_mwh': 0.0,
+            'total_intervals': 0,
+        }
+        per_duid_rows = []
+        for duid in duids:
+            data = per_duid.get(duid, {})
+            if data:
+                for k in ['outage_hours', 'displaced_hours', 'dispatched_hours',
+                          'outage_mwh_missed', 'displaced_mwh_missed', 'dispatched_mwh']:
+                    station_totals[k] += data.get(k, 0)
+                station_totals['total_intervals'] += data.get('total_intervals', 0)
+            per_duid_rows.append({
+                'duid': duid,
+                'has_data': bool(data),
+                **{k: round(v, 1) for k, v in data.items() if k != 'total_intervals'},
+            })
+
+        total_hrs = (station_totals['outage_hours']
+                     + station_totals['displaced_hours']
+                     + station_totals['dispatched_hours'])
+        outage_pct = round(station_totals['outage_hours'] / total_hrs * 100, 1) if total_hrs else None
+        displaced_pct = round(station_totals['displaced_hours'] / total_hrs * 100, 1) if total_hrs else None
+        dispatched_pct = round(station_totals['dispatched_hours'] / total_hrs * 100, 1) if total_hrs else None
+
+        enriched = existing_station_data.get(station['facility_code'], {})
+        annual_data = enriched.get('annual_data', [])
+        seasonal_data = enriched.get('seasonal_data', [])
+
+        station_rec = {
+            **station,
+            'outage_hours': round(station_totals['outage_hours'], 1),
+            'displaced_hours': round(station_totals['displaced_hours'], 1),
+            'dispatched_hours': round(station_totals['dispatched_hours'], 1),
+            'outage_mwh_missed': round(station_totals['outage_mwh_missed'], 1),
+            'displaced_mwh_missed': round(station_totals['displaced_mwh_missed'], 1),
+            'dispatched_mwh': round(station_totals['dispatched_mwh'], 1),
+            'outage_pct': outage_pct,
+            'displaced_pct': displaced_pct,
+            'dispatched_pct': dispatched_pct,
+            'has_dispatch_data': station_totals['total_intervals'] > 0,
+            'per_duid': per_duid_rows,
+            'annual_data': annual_data,
+            'seasonal_data': seasonal_data,
+        }
+        station_out.append(station_rec)
+
+        # State aggregation
+        state = station['state']
+        for k in ['outage_hours', 'displaced_hours', 'dispatched_hours',
+                  'outage_mwh_missed', 'displaced_mwh_missed', 'dispatched_mwh']:
+            by_state[state][k] += station_totals[k]
+        by_state[state]['total_capacity_mw'] += station['capacity_mw']
+        by_state[state]['stations'].append(station['station_name'])
+        by_state[state]['duids'] += len(duids)
+
+        for k in ['outage_hours', 'displaced_hours', 'dispatched_hours',
+                  'outage_mwh_missed', 'displaced_mwh_missed', 'dispatched_mwh']:
+            nem_totals[k] += station_totals[k]
+        nem_totals['total_duids'] += len(duids)
+        if station_totals['total_intervals'] > 0:
+            nem_totals['stations_with_data'] += 1
+
+    # Clean state output
+    state_out = {}
+    for state, d in by_state.items():
+        total_hrs = d['outage_hours'] + d['displaced_hours'] + d['dispatched_hours']
+        state_out[state] = {
+            'total_capacity_mw': d['total_capacity_mw'],
+            'station_count': len(d['stations']),
+            'stations': d['stations'],
+            'duid_count': d['duids'],
+            'outage_hours': round(d['outage_hours'], 1),
+            'displaced_hours': round(d['displaced_hours'], 1),
+            'dispatched_hours': round(d['dispatched_hours'], 1),
+            'outage_mwh_missed': round(d['outage_mwh_missed'], 1),
+            'displaced_mwh_missed': round(d['displaced_mwh_missed'], 1),
+            'dispatched_mwh': round(d['dispatched_mwh'], 1),
+            'outage_pct': round(d['outage_hours'] / total_hrs * 100, 1) if total_hrs else None,
+            'displaced_pct': round(d['displaced_hours'] / total_hrs * 100, 1) if total_hrs else None,
+            'dispatched_pct': round(d['dispatched_hours'] / total_hrs * 100, 1) if total_hrs else None,
+        }
+
+    # NEM total
+    total_nem_capacity = sum(s['capacity_mw'] for s in stations)
+    total_nem_units = sum(s['units'] for s in stations)
+    nem_total_hrs = nem_totals['outage_hours'] + nem_totals['displaced_hours'] + nem_totals['dispatched_hours']
+    nem_out = {
+        'total_capacity_mw': total_nem_capacity,
+        'total_stations': len(stations),
+        'total_units': total_nem_units,
+        'total_duids': nem_totals['total_duids'],
+        'stations_with_dispatch_data': nem_totals['stations_with_data'],
+        'outage_hours': round(nem_totals['outage_hours'], 1),
+        'displaced_hours': round(nem_totals['displaced_hours'], 1),
+        'dispatched_hours': round(nem_totals['dispatched_hours'], 1),
+        'outage_mwh_missed': round(nem_totals['outage_mwh_missed'], 1),
+        'displaced_mwh_missed': round(nem_totals['displaced_mwh_missed'], 1),
+        'dispatched_mwh': round(nem_totals['dispatched_mwh'], 1),
+        'outage_pct': round(nem_totals['outage_hours'] / nem_total_hrs * 100, 1) if nem_total_hrs else None,
+        'displaced_pct': round(nem_totals['displaced_hours'] / nem_total_hrs * 100, 1) if nem_total_hrs else None,
+        'dispatched_pct': round(nem_totals['dispatched_hours'] / nem_total_hrs * 100, 1) if nem_total_hrs else None,
+    }
+
+    source_note = (
+        "DISPATCHLOAD data present — outage / displaced / dispatched hours computed over last 365 days."
+        if has_dispatch_data
+        else "No DISPATCHLOAD data ingested yet. Station metadata + annual CF history is populated from coal-watch.json. "
+             "To decompose MWh reduction into outage vs displaced vs dispatched, run: "
+             "python3 pipeline/importers/import_dispatchload.py --days 365"
+    )
+
+    write_json(os.path.join(INTEL_DIR, 'coal-outage-dispatch.json'), {
+        'nem': nem_out,
+        'by_state': state_out,
+        'stations': station_out,
+        'has_dispatch_data': has_dispatch_data,
+        'source_note': source_note,
+        'analysis_window_days': 365 if has_dispatch_data else None,
+        'classification_rules': {
+            'outage': 'availability_mw < 20% of unit capacity (unit unavailable or partial outage)',
+            'displaced': 'availability_mw ≥ 20% capacity but total_cleared_mw < 30% of availability (offered but not dispatched)',
+            'dispatched': 'total_cleared_mw ≥ 30% of availability (normal operation)',
+        },
+        'exported_at': datetime.now().isoformat(),
+    })
+    print(f"  analytics/intelligence/coal-outage-dispatch.json ({len(stations)} stations, "
+          f"{nem_totals['total_duids']} DUIDs, "
+          f"dispatch_data={'populated' if has_dispatch_data else 'pending'})")
+
+
 def export_intelligence(conn):
     """Export all intelligence layer JSON files."""
     print("\nIntelligence Layer:")
@@ -6234,6 +6477,7 @@ def export_intelligence(conn):
     export_asset_lifecycle(conn)
     export_concentration_risk(conn)
     export_scheme_win_probability(conn)
+    export_coal_outage_dispatch(conn)
     export_dunkelflaute(conn)
     export_energy_mix(conn)
     export_developer_scores(conn)
