@@ -3297,8 +3297,12 @@ def export_scheme_tracker(conn):
     ]
 
     # ---- Build lookup maps from DB ----
-    # Project status from projects table
-    project_rows = conn.execute("SELECT id, status, technology, capacity_mw, current_developer, cod_current FROM projects").fetchall()
+    # Project status + annotation signals from projects table
+    project_rows = conn.execute("""
+        SELECT id, status, technology, capacity_mw, current_developer, cod_current,
+               development_stage, connection_status
+        FROM projects
+    """).fetchall()
     project_map = {r['id']: dict(r) for r in project_rows}
 
     # Timeline events for milestone dates
@@ -3309,6 +3313,96 @@ def export_scheme_tracker(conn):
         WHERE event_type IN ('fid', 'construction_start', 'commissioning', 'cod', 'planning_approved')
     """).fetchall():
         event_map[ev['project_id']][ev['event_type']] = ev['date']
+
+    # EIS coverage — any row in eis_technical_specs for this project_id
+    eis_project_ids: set[str] = set()
+    try:
+        for row in conn.execute("SELECT DISTINCT project_id FROM eis_technical_specs").fetchall():
+            pid = row['project_id'] if hasattr(row, '__getitem__') else row[0]
+            if pid:
+                eis_project_ids.add(pid)
+    except sqlite3.OperationalError:
+        pass
+
+    # Developer execution grades (A/B/C/D/F) for "execution risk" annotation.
+    # Loaded from the pre-computed developer-scores JSON so we don't
+    # reimplement scoring here.
+    dev_grades: dict[str, str] = {}
+    dev_scores_path = os.path.join(INTEL_DIR, 'developer-scores.json')
+    if os.path.exists(dev_scores_path):
+        try:
+            with open(dev_scores_path) as _f:
+                _dev_data = json.load(_f)
+            for _d in _dev_data.get('developers', []):
+                name = _d.get('developer')
+                grade = _d.get('grade')
+                if name and grade:
+                    dev_grades[name.strip().lower()] = grade
+        except (json.JSONDecodeError, OSError):
+            pass
+
+    def _annotate(proj_entry, db_proj, pid):
+        """Compute primary dev_status + full annotations list.
+
+        Signals:
+          - `pre-planning`: development_stage = 'early_stage'
+          - `grid connection pending`: connection_status empty on a development-stage project
+          - `environmental pending`: no EIS on file AND COD > end-2027
+          - `execution risk`: developer grade D or F
+
+        Primary status precedence: FID reached → construction → most severe
+        annotation → on track.
+        """
+        annotations = []
+        stage = proj_entry.get('stage')
+        cod = proj_entry.get('cod_current')
+        has_eis = bool(pid and pid in eis_project_ids)
+        dev_stage = (db_proj or {}).get('development_stage') or ''
+        conn_status = ((db_proj or {}).get('connection_status') or '').strip()
+        developer_name = proj_entry.get('developer') or ''
+        grade = dev_grades.get(developer_name.strip().lower())
+
+        if dev_stage == 'early_stage':
+            annotations.append({
+                'flag': 'pre-planning',
+                'reason': 'Development stage is early — not in planning yet',
+                'severity': 'high',
+            })
+        if not conn_status and stage in ('development', 'unknown'):
+            annotations.append({
+                'flag': 'grid connection pending',
+                'reason': 'No connection application on record',
+                'severity': 'medium',
+            })
+        if not has_eis and cod and cod > '2027-12-31' and stage in ('development', 'unknown'):
+            annotations.append({
+                'flag': 'environmental pending',
+                'reason': 'No EIS lodged and COD > 2027',
+                'severity': 'medium',
+            })
+        if grade in ('D', 'F'):
+            annotations.append({
+                'flag': 'execution risk',
+                'reason': f'Developer execution grade: {grade}',
+                'severity': 'high',
+            })
+
+        if proj_entry.get('fid_date'):
+            primary = 'FID reached'
+        elif proj_entry.get('construction_start'):
+            primary = 'construction'
+        elif stage == 'planning_approved':
+            primary = 'planning approved'
+        elif stage in ('operating', 'commissioning'):
+            primary = stage
+        elif annotations:
+            severity_rank = {'high': 0, 'medium': 1, 'low': 2}
+            primary = sorted(
+                annotations, key=lambda a: severity_rank.get(a['severity'], 3)
+            )[0]['flag']
+        else:
+            primary = 'on track'
+        return primary, annotations
 
     today = date_type.today()
     total_projects = 0
@@ -3367,6 +3461,14 @@ def export_scheme_tracker(conn):
                 'construction_start': construction_start,
                 'cod_current': cod_current,
             }
+
+            primary, annotations = _annotate(proj_entry, db_proj, pid)
+            proj_entry['dev_status'] = primary
+            proj_entry['annotations'] = annotations
+            # Promote developer grade when available so the UI can show it
+            grade = dev_grades.get((developer or '').strip().lower())
+            if grade:
+                proj_entry['developer_grade'] = grade
 
             project_list.append(proj_entry)
             by_stage[stage] += 1

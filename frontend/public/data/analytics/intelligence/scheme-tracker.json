@@ -30,7 +30,10 @@
           "status": "commissioning",
           "stage": "commissioning",
           "construction_start": "2024-07-01",
-          "cod_current": "2026-06-30"
+          "cod_current": "2026-06-30",
+          "dev_status": "construction",
+          "annotations": [],
+          "developer_grade": "A"
         },
         {
           "name": "Liddell BESS",
@@ -43,7 +46,10 @@
           "status": "commissioning",
           "stage": "commissioning",
           "construction_start": "2024-01-01",
-          "cod_current": "2026-02-20"
+          "cod_current": "2026-02-20",
+          "dev_status": "construction",
+          "annotations": [],
+          "developer_grade": "A"
         },
         {
           "name": "Smithfield Sydney Battery",
@@ -55,7 +61,9 @@
           "state": "NSW",
           "status": "operating",
           "stage": "operating",
-          "cod_current": "2025-11-19"
+          "cod_current": "2025-11-19",
+          "dev_status": "operating",
+          "annotations": []
         },
         {
           "name": "Enel X VPP 1",
@@ -64,7 +72,15 @@
           "capacity_mw": 43,
           "state": "NSW",
           "status": "unknown",
-          "stage": "unknown"
+          "stage": "unknown",
+          "dev_status": "grid connection pending",
+          "annotations": [
+            {
+              "flag": "grid connection pending",
+              "reason": "No connection application on record",
+              "severity": "medium"
+            }
+          ]
         },
         {
           "name": "Enel X VPP 2",
@@ -73,7 +89,15 @@
           "capacity_mw": 43,
           "state": "NSW",
           "status": "unknown",
-          "stage": "unknown"
+          "stage": "unknown",
+          "dev_status": "grid connection pending",
+          "annotations": [
+            {
+              "flag": "grid connection pending",
+              "reason": "No connection application on record",
+              "severity": "medium"
+            }
+          ]
         },
         {
           "name": "Enel X VPP 3",
@@ -82,7 +106,15 @@
           "capacity_mw": 44,
           "state": "NSW",
           "status": "unknown",
-          "stage": "unknown"
+          "stage": "unknown",
+          "dev_status": "grid connection pending",
+          "annotations": [
+            {
+              "flag": "grid connection pending",
+              "reason": "No connection application on record",
+              "severity": "medium"
+            }
+          ]
         }
       ]
     },
@@ -118,7 +150,9 @@
           "status": "construction",
           "stage": "construction",
           "construction_start": "2025-03-01",
-          "cod_current": "2027-12-31"
+          "cod_current": "2027-12-31",
+          "dev_status": "construction",
+          "annotations": []
         },
         {
           "name": "Springfield BESS",
@@ -128,7 +162,16 @@
           "storage_mwh": 400,
           "state": "VIC",
           "status": "unknown",
-          "stage": "unknown"
+          "stage": "unknown",
+          "dev_status": "grid connection pending",
+          "annotations": [
+            {
+              "flag": "grid connection pending",
+              "reason": "No connection application on record",
+              "severity": "medium"
+            }
+          ],
+          "developer_grade": "A"
         },
         {
           "name": "Mortlake BESS",
@@ -141,7 +184,16 @@
           "status": "commissioning",
           "stage": "commissioning",
           "construction_start": "2024-07-01",
-          "cod_current": "2026-07-31"
+          "cod_current": "2026-07-31",
+          "dev_status": "construction",
+          "annotations": [
+            {
+              "flag": "execution risk",
+              "reason": "Developer execution grade: D",
+              "severity": "high"
+            }
+          ],
+          "developer_grade": "D"
         },
         {
           "name": "Tailem Bend BESS",
@@ -154,7 +206,10 @@
           "status": "construction",
           "stage": "construction",
           "construction_start": "2025-12-01",
-          "cod_current": "2027-04-30"
+          "cod_current": "2027-04-30",
+          "dev_status": "construction",
+          "annotations": [],
+          "developer_grade": "B"
         },
         {
           "name": "Clements Gap Battery",
@@ -167,7 +222,9 @@
           "status": "commissioning",
           "stage": "commissioning",
           "construction_start": "2024-06-12",
-          "cod_current": "2026-01-05"
+          "cod_current": "2026-01-05",
+          "dev_status": "construction",
+          "annotations": []
         },
         {
           "name": "Hallett Battery",
@@ -179,7 +236,15 @@
           "state": "SA",
           "status": "development",
           "stage": "development",
-          "cod_current": "2027-06-01"
+          "cod_current": "2027-06-01",
+          "dev_status": "grid connection pending",
+          "annotations": [
+            {
+              "flag": "grid connection pending",
+              "reason": "No connection application on record",
+              "severity": "medium"
+            }
+          ]
         }
       ]
     },
@@ -214,7 +279,21 @@
           "state": "NSW",
           "status": "development",
           "stage": "development",
-          "cod_current": "2029-12-31"
+          "cod_current": "2029-12-31",
+          "dev_status": "grid connection pending",
+          "annotations": [
+            {
+              "flag": "grid connection pending",
+              "reason": "No connection application on record",
+              "severity": "medium"
+            },
+            {
+              "flag": "environmental pending",
+              "reason": "No EIS lodged and COD > 2027",
+              "severity": "medium"
+            }
+          ],
+          "developer_grade": "B"
         },
         {
           "name": "Sandy Creek Solar Farm",
@@ -225,7 +304,20 @@
           "state": "NSW",
           "status": "development",
           "stage": "development",
-          "cod_current": "2029-06-01"
+          "cod_current": "2029-06-01",
+          "dev_status": "grid connection pending",
+          "annotations": [
+            {
+              "flag": "grid connection pending",
+              "reason": "No connection application on record",
+              "severity": "medium"
+            },
+            {
+              "flag": "environmental pending",
+              "reason": "No EIS lodged and COD > 2027",
+              "severity": "medium"
+            }
+          ]
         },
         {
           "name": "Spicers Creek Wind Farm",
@@ -235,7 +327,16 @@
           "capacity_mw": 700,
           "state": "NSW",
           "status": "development",
-          "stage": "development"
+          "stage": "development",
+          "dev_status": "grid connection pending",
+          "annotations": [
+            {
+              "flag": "grid connection pending",
+              "reason": "No connection application on record",
+              "severity": "medium"
+            }
+          ],
+          "developer_grade": "B"
         },
         {
           "name": "Junction Rivers",
@@ -247,7 +348,20 @@
           "state": "NSW",
           "status": "development",
           "stage": "development",
-          "cod_current": "2032-04-30"
+          "cod_current": "2032-04-30",
+          "dev_status": "grid connection pending",
+          "annotations": [
+            {
+              "flag": "grid connection pending",
+              "reason": "No connection application on record",
+              "severity": "medium"
+            },
+            {
+              "flag": "environmental pending",
+              "reason": "No EIS lodged and COD > 2027",
+              "severity": "medium"
+            }
+          ]
         },
         {
           "name": "Goulburn River Solar Farm",
@@ -258,7 +372,9 @@
           "state": "NSW",
           "status": "construction",
           "stage": "construction",
-          "cod_current": "2027-03-31"
+          "cod_current": "2027-03-31",
+          "dev_status": "on track",
+          "annotations": []
         },
         {
           "name": "Thunderbolt Wind Farm",
@@ -268,7 +384,16 @@
           "capacity_mw": 230,
           "state": "NSW",
           "status": "development",
-          "stage": "development"
+          "stage": "development",
+          "dev_status": "grid connection pending",
+          "annotations": [
+            {
+              "flag": "grid connection pending",
+              "reason": "No connection application on record",
+              "severity": "medium"
+            }
+          ],
+          "developer_grade": "B"
         },
         {
           "name": "Glanmire Solar Farm",
@@ -280,7 +405,21 @@
           "state": "NSW",
           "status": "development",
           "stage": "development",
-          "cod_current": "2027-07-31"
+          "cod_current": "2027-07-31",
+          "dev_status": "pre-planning",
+          "annotations": [
+            {
+              "flag": "pre-planning",
+              "reason": "Development stage is early \u2014 not in planning yet",
+              "severity": "high"
+            },
+            {
+              "flag": "grid connection pending",
+              "reason": "No connection application on record",
+              "severity": "medium"
+            }
+          ],
+          "developer_grade": "B"
         },
         {
           "name": "Kentbruck Wind Farm",
@@ -291,7 +430,20 @@
           "state": "VIC",
           "status": "development",
           "stage": "development",
-          "cod_current": "2030-06-30"
+          "cod_current": "2030-06-30",
+          "dev_status": "grid connection pending",
+          "annotations": [
+            {
+              "flag": "grid connection pending",
+              "reason": "No connection application on record",
+              "severity": "medium"
+            },
+            {
+              "flag": "environmental pending",
+              "reason": "No EIS lodged and COD > 2027",
+              "severity": "medium"
+            }
+          ]
         },
         {
           "name": "West Mokoan Solar Farm",
@@ -303,7 +455,25 @@
           "state": "VIC",
           "status": "development",
           "stage": "development",
-          "cod_current": "2029-07-02"
+          "cod_current": "2029-07-02",
+          "dev_status": "pre-planning",
+          "annotations": [
+            {
+              "flag": "pre-planning",
+              "reason": "Development stage is early \u2014 not in planning yet",
+              "severity": "high"
+            },
+            {
+              "flag": "grid connection pending",
+              "reason": "No connection application on record",
+              "severity": "medium"
+            },
+            {
+              "flag": "environmental pending",
+              "reason": "No EIS lodged and COD > 2027",
+              "severity": "medium"
+            }
+          ]
         },
         {
           "name": "Barwon Solar Farm",
@@ -315,7 +485,16 @@
           "state": "VIC",
           "status": "development",
           "stage": "development",
-          "cod_current": "2027-07-31"
+          "cod_current": "2027-07-31",
+          "dev_status": "grid connection pending",
+          "annotations": [
+            {
+              "flag": "grid connection pending",
+              "reason": "No connection application on record",
+              "severity": "medium"
+            }
+          ],
+          "developer_grade": "B"
         },
         {
           "name": "Campbells Forest Solar Farm",
@@ -325,7 +504,15 @@
           "capacity_mw": 205,
           "state": "VIC",
           "status": "development",
-          "stage": "development"
+          "stage": "development",
+          "dev_status": "grid connection pending",
+          "annotations": [
+            {
+              "flag": "grid connection pending",
+              "reason": "No connection application on record",
+              "severity": "medium"
+            }
+          ]
         },
         {
           "name": "Elaine Solar Farm",
@@ -337,7 +524,21 @@
           "state": "VIC",
           "status": "development",
           "stage": "development",
-          "cod_current": "2027-07-31"
+          "cod_current": "2027-07-31",
+          "dev_status": "pre-planning",
+          "annotations": [
+            {
+              "flag": "pre-planning",
+              "reason": "Development stage is early \u2014 not in planning yet",
+              "severity": "high"
+            },
+            {
+              "flag": "grid connection pending",
+              "reason": "No connection application on record",
+              "severity": "medium"
+            }
+          ],
+          "developer_grade": "B"
         },
         {
           "name": "Barnawartha Solar Farm",
@@ -348,7 +549,15 @@
           "storage_mwh": 139,
           "state": "VIC",
           "status": "development",
-          "stage": "development"
+          "stage": "development",
+          "dev_status": "grid connection pending",
+          "annotations": [
+            {
+              "flag": "grid connection pending",
+              "reason": "No connection application on record",
+              "severity": "medium"
+            }
+          ]
         },
         {
           "name": "Goyder North Wind Farm",
@@ -359,7 +568,25 @@
           "state": "SA",
           "status": "development",
           "stage": "development",
-          "cod_current": "2029-12-31"
+          "cod_current": "2029-12-31",
+          "dev_status": "pre-planning",
+          "annotations": [
+            {
+              "flag": "pre-planning",
+              "reason": "Development stage is early \u2014 not in planning yet",
+              "severity": "high"
+            },
+            {
+              "flag": "grid connection pending",
+              "reason": "No connection application on record",
+              "severity": "medium"
+            },
+            {
+              "flag": "environmental pending",
+              "reason": "No EIS lodged and COD > 2027",
+              "severity": "medium"
+            }
+          ]
         },
         {
           "name": "Palmer Wind Farm",
@@ -369,7 +596,16 @@
           "capacity_mw": 274,
           "state": "SA",
           "status": "development",
-          "stage": "development"
+          "stage": "development",
+          "dev_status": "grid connection pending",
+          "annotations": [
+            {
+              "flag": "grid connection pending",
+              "reason": "No connection application on record",
+              "severity": "medium"
+            }
+          ],
+          "developer_grade": "B"
         },
         {
           "name": "Hopeland Solar Farm",
@@ -379,7 +615,15 @@
           "capacity_mw": 250,
           "state": "QLD",
           "status": "development",
-          "stage": "development"
+          "stage": "development",
+          "dev_status": "grid connection pending",
+          "annotations": [
+            {
+              "flag": "grid connection pending",
+              "reason": "No connection application on record",
+              "severity": "medium"
+            }
+          ]
         },
         {
           "name": "Majors Creek Solar Power Station",
@@ -391,7 +635,26 @@
           "state": "QLD",
           "status": "development",
           "stage": "development",
-          "cod_current": "2029-02-01"
+          "cod_current": "2029-02-01",
+          "dev_status": "pre-planning",
+          "annotations": [
+            {
+              "flag": "pre-planning",
+              "reason": "Development stage is early \u2014 not in planning yet",
+              "severity": "high"
+            },
+            {
+              "flag": "grid connection pending",
+              "reason": "No connection application on record",
+              "severity": "medium"
+            },
+            {
+              "flag": "environmental pending",
+              "reason": "No EIS lodged and COD > 2027",
+              "severity": "medium"
+            }
+          ],
+          "developer_grade": "B"
         },
         {
           "name": "Ganymirra Solar Power Station",
@@ -403,7 +666,26 @@
           "state": "QLD",
           "status": "development",
           "stage": "development",
-          "cod_current": "2029-02-01"
+          "cod_current": "2029-02-01",
+          "dev_status": "pre-planning",
+          "annotations": [
+            {
+              "flag": "pre-planning",
+              "reason": "Development stage is early \u2014 not in planning yet",
+              "severity": "high"
+            },
+            {
+              "flag": "grid connection pending",
+              "reason": "No connection application on record",
+              "severity": "medium"
+            },
+            {
+              "flag": "environmental pending",
+              "reason": "No EIS lodged and COD > 2027",
+              "severity": "medium"
+            }
+          ],
+          "developer_grade": "B"
         },
         {
           "name": "Mokoan Solar Farm",
@@ -414,7 +696,9 @@
           "state": "VIC",
           "status": "operating",
           "stage": "operating",
-          "cod_current": "2025-05-22"
+          "cod_current": "2025-05-22",
+          "dev_status": "operating",
+          "annotations": []
         }
       ]
     },
@@ -443,7 +727,15 @@
           "storage_mwh": 1296,
           "state": "WA",
           "status": "unknown",
-          "stage": "unknown"
+          "stage": "unknown",
+          "dev_status": "grid connection pending",
+          "annotations": [
+            {
+              "flag": "grid connection pending",
+              "reason": "No connection application on record",
+              "severity": "medium"
+            }
+          ]
         },
         {
           "name": "Merredin Big Battery",
@@ -453,7 +745,15 @@
           "storage_mwh": 400,
           "state": "WA",
           "status": "unknown",
-          "stage": "unknown"
+          "stage": "unknown",
+          "dev_status": "grid connection pending",
+          "annotations": [
+            {
+              "flag": "grid connection pending",
+              "reason": "No connection application on record",
+              "severity": "medium"
+            }
+          ]
         },
         {
           "name": "Muchea Big Battery",
@@ -463,7 +763,16 @@
           "storage_mwh": 600,
           "state": "WA",
           "status": "unknown",
-          "stage": "unknown"
+          "stage": "unknown",
+          "dev_status": "grid connection pending",
+          "annotations": [
+            {
+              "flag": "grid connection pending",
+              "reason": "No connection application on record",
+              "severity": "medium"
+            }
+          ],
+          "developer_grade": "A"
         },
         {
           "name": "Waroona Renewable Energy Project Stage 1",
@@ -473,7 +782,15 @@
           "storage_mwh": 299,
           "state": "WA",
           "status": "unknown",
-          "stage": "unknown"
+          "stage": "unknown",
+          "dev_status": "grid connection pending",
+          "annotations": [
+            {
+              "flag": "grid connection pending",
+              "reason": "No connection application on record",
+              "severity": "medium"
+            }
+          ]
         }
       ]
     },
@@ -508,7 +825,15 @@
           "storage_mwh": 406,
           "state": "NSW",
           "status": "development",
-          "stage": "development"
+          "stage": "development",
+          "dev_status": "grid connection pending",
+          "annotations": [
+            {
+              "flag": "grid connection pending",
+              "reason": "No connection application on record",
+              "severity": "medium"
+            }
+          ]
         },
         {
           "name": "Swallow Tail BESS",
@@ -519,7 +844,15 @@
           "storage_mwh": 1218,
           "state": "NSW",
           "status": "development",
-          "stage": "development"
+          "stage": "development",
+          "dev_status": "grid connection pending",
+          "annotations": [
+            {
+              "flag": "grid connection pending",
+              "reason": "No connection application on record",
+              "severity": "medium"
+            }
+          ]
         },
         {
           "name": "Calala BESS",
@@ -532,7 +865,10 @@
           "status": "construction",
           "stage": "construction",
           "construction_start": "2025-03-01",
-          "cod_current": "2026-12-31"
+          "cod_current": "2026-12-31",
+          "dev_status": "construction",
+          "annotations": [],
+          "developer_grade": "B"
         },
         {
           "name": "Goulburn River Standalone BESS",
@@ -544,7 +880,21 @@
           "state": "NSW",
           "status": "development",
           "stage": "development",
-          "cod_current": "2029-08-01"
+          "cod_current": "2029-08-01",
+          "dev_status": "grid connection pending",
+          "annotations": [
+            {
+              "flag": "grid connection pending",
+              "reason": "No connection application on record",
+              "severity": "medium"
+            },
+            {
+              "flag": "environmental pending",
+              "reason": "No EIS lodged and COD > 2027",
+              "severity": "medium"
+            }
+          ],
+          "developer_grade": "B"
         },
         {
           "name": "Mount Piper BESS Stage 1",
@@ -556,7 +906,20 @@
           "state": "NSW",
           "status": "development",
           "stage": "development",
-          "cod_current": "2028-10-31"
+          "cod_current": "2028-10-31",
+          "dev_status": "grid connection pending",
+          "annotations": [
+            {
+              "flag": "grid connection pending",
+              "reason": "No connection application on record",
+              "severity": "medium"
+            },
+            {
+              "flag": "environmental pending",
+              "reason": "No EIS lodged and COD > 2027",
+              "severity": "medium"
+            }
+          ]
         },
         {
           "name": "Deer Park BESS",
@@ -568,7 +931,21 @@
           "state": "VIC",
           "status": "development",
           "stage": "development",
-          "cod_current": "2028-12-12"
+          "cod_current": "2028-12-12",
+          "dev_status": "grid connection pending",
+          "annotations": [
+            {
+              "flag": "grid connection pending",
+              "reason": "No connection application on record",
+              "severity": "medium"
+            },
+            {
+              "flag": "environmental pending",
+              "reason": "No EIS lodged and COD > 2027",
+              "severity": "medium"
+            }
+          ],
+          "developer_grade": "B"
         },
         {
           "name": "Joel Joel BESS",
@@ -580,7 +957,26 @@
           "state": "VIC",
           "status": "development",
           "stage": "development",
-          "cod_current": "2028-10-02"
+          "cod_current": "2028-10-02",
+          "dev_status": "pre-planning",
+          "annotations": [
+            {
+              "flag": "pre-planning",
+              "reason": "Development stage is early \u2014 not in planning yet",
+              "severity": "high"
+            },
+            {
+              "flag": "grid connection pending",
+              "reason": "No connection application on record",
+              "severity": "medium"
+            },
+            {
+              "flag": "environmental pending",
+              "reason": "No EIS lodged and COD > 2027",
+              "severity": "medium"
+            }
+          ],
+          "developer_grade": "B"
         },
         {
           "name": "Kiamal BESS",
@@ -592,7 +988,20 @@
           "state": "VIC",
           "status": "development",
           "stage": "development",
-          "cod_current": "2028-08-31"
+          "cod_current": "2028-08-31",
+          "dev_status": "grid connection pending",
+          "annotations": [
+            {
+              "flag": "grid connection pending",
+              "reason": "No connection application on record",
+              "severity": "medium"
+            },
+            {
+              "flag": "environmental pending",
+              "reason": "No EIS lodged and COD > 2027",
+              "severity": "medium"
+            }
+          ]
         },
         {
           "name": "Little River BESS",
@@ -604,7 +1013,26 @@
           "state": "VIC",
           "status": "development",
           "stage": "development",
-          "cod_current": "2028-06-29"
+          "cod_current": "2028-06-29",
+          "dev_status": "pre-planning",
+          "annotations": [
+            {
+              "flag": "pre-planning",
+              "reason": "Development stage is early \u2014 not in planning yet",
+              "severity": "high"
+            },
+            {
+              "flag": "grid connection pending",
+              "reason": "No connection application on record",
+              "severity": "medium"
+            },
+            {
+              "flag": "environmental pending",
+              "reason": "No EIS lodged and COD > 2027",
+              "severity": "medium"
+            }
+          ],
+          "developer_grade": "B"
         },
         {
           "name": "Mornington BESS",
@@ -617,7 +1045,10 @@
           "status": "commissioning",
           "stage": "commissioning",
           "construction_start": "2024-10-01",
-          "cod_current": "2026-02-28"
+          "cod_current": "2026-02-28",
+          "dev_status": "construction",
+          "annotations": [],
+          "developer_grade": "A"
         },
         {
           "name": "Capricorn BESS",
@@ -629,7 +1060,20 @@
           "state": "QLD",
           "status": "development",
           "stage": "development",
-          "cod_current": "2029-04-30"
+          "cod_current": "2029-04-30",
+          "dev_status": "grid connection pending",
+          "annotations": [
+            {
+              "flag": "grid connection pending",
+              "reason": "No connection application on record",
+              "severity": "medium"
+            },
+            {
+              "flag": "environmental pending",
+              "reason": "No EIS lodged and COD > 2027",
+              "severity": "medium"
+            }
+          ]
         },
         {
           "name": "Lower Wonga BESS",
@@ -641,7 +1085,20 @@
           "state": "QLD",
           "status": "development",
           "stage": "development",
-          "cod_current": "2028-01-01"
+          "cod_current": "2028-01-01",
+          "dev_status": "grid connection pending",
+          "annotations": [
+            {
+              "flag": "grid connection pending",
+              "reason": "No connection application on record",
+              "severity": "medium"
+            },
+            {
+              "flag": "environmental pending",
+              "reason": "No EIS lodged and COD > 2027",
+              "severity": "medium"
+            }
+          ]
         },
         {
           "name": "Teebar BESS",
@@ -653,7 +1110,25 @@
           "state": "QLD",
           "status": "development",
           "stage": "development",
-          "cod_current": "2028-08-31"
+          "cod_current": "2028-08-31",
+          "dev_status": "pre-planning",
+          "annotations": [
+            {
+              "flag": "pre-planning",
+              "reason": "Development stage is early \u2014 not in planning yet",
+              "severity": "high"
+            },
+            {
+              "flag": "grid connection pending",
+              "reason": "No connection application on record",
+              "severity": "medium"
+            },
+            {
+              "flag": "environmental pending",
+              "reason": "No EIS lodged and COD > 2027",
+              "severity": "medium"
+            }
+          ]
         },
         {
           "name": "Ulinda Park Expansion",
@@ -665,7 +1140,21 @@
           "state": "QLD",
           "status": "development",
           "stage": "development",
-          "cod_current": "2028-06-30"
+          "cod_current": "2028-06-30",
+          "dev_status": "grid connection pending",
+          "annotations": [
+            {
+              "flag": "grid connection pending",
+              "reason": "No connection application on record",
+              "severity": "medium"
+            },
+            {
+              "flag": "environmental pending",
+              "reason": "No EIS lodged and COD > 2027",
+              "severity": "medium"
+            }
+          ],
+          "developer_grade": "B"
         },
         {
           "name": "Koolunga BESS",
@@ -677,7 +1166,20 @@
           "state": "SA",
           "status": "development",
           "stage": "development",
-          "cod_current": "2028-01-01"
+          "cod_current": "2028-01-01",
+          "dev_status": "grid connection pending",
+          "annotations": [
+            {
+              "flag": "grid connection pending",
+              "reason": "No connection application on record",
+              "severity": "medium"
+            },
+            {
+              "flag": "environmental pending",
+              "reason": "No EIS lodged and COD > 2027",
+              "severity": "medium"
+            }
+          ]
         },
         {
           "name": "Reeves Plains BESS",
@@ -689,7 +1191,25 @@
           "state": "SA",
           "status": "development",
           "stage": "development",
-          "cod_current": "2028-02-29"
+          "cod_current": "2028-02-29",
+          "dev_status": "pre-planning",
+          "annotations": [
+            {
+              "flag": "pre-planning",
+              "reason": "Development stage is early \u2014 not in planning yet",
+              "severity": "high"
+            },
+            {
+              "flag": "grid connection pending",
+              "reason": "No connection application on record",
+              "severity": "medium"
+            },
+            {
+              "flag": "environmental pending",
+              "reason": "No EIS lodged and COD > 2027",
+              "severity": "medium"
+            }
+          ]
         }
       ]
     },
@@ -723,7 +1243,15 @@
           "capacity_mw": 224,
           "state": "TAS",
           "status": "unknown",
-          "stage": "unknown"
+          "stage": "unknown",
+          "dev_status": "grid connection pending",
+          "annotations": [
+            {
+              "flag": "grid connection pending",
+              "reason": "No connection application on record",
+              "severity": "medium"
+            }
+          ]
         },
         {
           "name": "Bendemeer Energy Hub",
@@ -734,7 +1262,21 @@
           "storage_mwh": 300,
           "state": "NSW",
           "status": "development",
-          "stage": "development"
+          "stage": "development",
+          "dev_status": "execution risk",
+          "annotations": [
+            {
+              "flag": "grid connection pending",
+              "reason": "No connection application on record",
+              "severity": "medium"
+            },
+            {
+              "flag": "execution risk",
+              "reason": "Developer execution grade: F",
+              "severity": "high"
+            }
+          ],
+          "developer_grade": "F"
         },
         {
           "name": "Bundey BESS and Solar",
@@ -745,7 +1287,15 @@
           "storage_mwh": 1200,
           "state": "SA",
           "status": "development",
-          "stage": "development"
+          "stage": "development",
+          "dev_status": "grid connection pending",
+          "annotations": [
+            {
+              "flag": "grid connection pending",
+              "reason": "No connection application on record",
+              "severity": "medium"
+            }
+          ]
         },
         {
           "name": "Carmody's Hill Wind Farm",
@@ -758,7 +1308,9 @@
           "stage": "construction",
           "fid_date": "2023",
           "construction_start": "2026-01-01",
-          "cod_current": "2029-01-01"
+          "cod_current": "2029-01-01",
+          "dev_status": "FID reached",
+          "annotations": []
         },
         {
           "name": "Corop Solar Farm and BESS",
@@ -769,7 +1321,21 @@
           "storage_mwh": 704,
           "state": "VIC",
           "status": "development",
-          "stage": "development"
+          "stage": "development",
+          "dev_status": "execution risk",
+          "annotations": [
+            {
+              "flag": "grid connection pending",
+              "reason": "No connection application on record",
+              "severity": "medium"
+            },
+            {
+              "flag": "execution risk",
+              "reason": "Developer execution grade: F",
+              "severity": "high"
+            }
+          ],
+          "developer_grade": "F"
         },
         {
           "name": "Derby Solar Project",
@@ -781,7 +1347,15 @@
           "state": "VIC",
           "status": "development",
           "stage": "development",
-          "cod_current": "2027-09-01"
+          "cod_current": "2027-09-01",
+          "dev_status": "grid connection pending",
+          "annotations": [
+            {
+              "flag": "grid connection pending",
+              "reason": "No connection application on record",
+              "severity": "medium"
+            }
+          ]
         },
         {
           "name": "Dinawan Wind Farm Stage 1",
@@ -792,7 +1366,20 @@
           "state": "NSW",
           "status": "development",
           "stage": "development",
-          "cod_current": "2029-12-01"
+          "cod_current": "2029-12-01",
+          "dev_status": "grid connection pending",
+          "annotations": [
+            {
+              "flag": "grid connection pending",
+              "reason": "No connection application on record",
+              "severity": "medium"
+            },
+            {
+              "flag": "environmental pending",
+              "reason": "No EIS lodged and COD > 2027",
+              "severity": "medium"
+            }
+          ]
         },
         {
           "name": "Gawara Baya",
@@ -804,7 +1391,25 @@
           "state": "QLD",
           "status": "development",
           "stage": "development",
-          "cod_current": "2029-01-15"
+          "cod_current": "2029-01-15",
+          "dev_status": "pre-planning",
+          "annotations": [
+            {
+              "flag": "pre-planning",
+              "reason": "Development stage is early \u2014 not in planning yet",
+              "severity": "high"
+            },
+            {
+              "flag": "grid connection pending",
+              "reason": "No connection application on record",
+              "severity": "medium"
+            },
+            {
+              "flag": "environmental pending",
+              "reason": "No EIS lodged and COD > 2027",
+              "severity": "medium"
+            }
+          ]
         },
         {
           "name": "Guthrie's Gap Solar Power Station",
@@ -816,7 +1421,26 @@
           "state": "QLD",
           "status": "development",
           "stage": "development",
-          "cod_current": "2029-05-01"
+          "cod_current": "2029-05-01",
+          "dev_status": "pre-planning",
+          "annotations": [
+            {
+              "flag": "pre-planning",
+              "reason": "Development stage is early \u2014 not in planning yet",
+              "severity": "high"
+            },
+            {
+              "flag": "grid connection pending",
+              "reason": "No connection application on record",
+              "severity": "medium"
+            },
+            {
+              "flag": "environmental pending",
+              "reason": "No EIS lodged and COD > 2027",
+              "severity": "medium"
+            }
+          ],
+          "developer_grade": "B"
         },
         {
           "name": "Hexham Wind Farm",
@@ -827,7 +1451,21 @@
           "state": "VIC",
           "status": "development",
           "stage": "development",
-          "cod_current": "2030-11-01"
+          "cod_current": "2030-11-01",
+          "dev_status": "grid connection pending",
+          "annotations": [
+            {
+              "flag": "grid connection pending",
+              "reason": "No connection application on record",
+              "severity": "medium"
+            },
+            {
+              "flag": "environmental pending",
+              "reason": "No EIS lodged and COD > 2027",
+              "severity": "medium"
+            }
+          ],
+          "developer_grade": "B"
         },
         {
           "name": "Liverpool Range Wind Stage 1",
@@ -837,7 +1475,16 @@
           "capacity_mw": 634,
           "state": "NSW",
           "status": "development",
-          "stage": "development"
+          "stage": "development",
+          "dev_status": "grid connection pending",
+          "annotations": [
+            {
+              "flag": "grid connection pending",
+              "reason": "No connection application on record",
+              "severity": "medium"
+            }
+          ],
+          "developer_grade": "B"
         },
         {
           "name": "Lower Wonga Solar Farm",
@@ -848,7 +1495,25 @@
           "state": "QLD",
           "status": "development",
           "stage": "development",
-          "cod_current": "2028-08-01"
+          "cod_current": "2028-08-01",
+          "dev_status": "pre-planning",
+          "annotations": [
+            {
+              "flag": "pre-planning",
+              "reason": "Development stage is early \u2014 not in planning yet",
+              "severity": "high"
+            },
+            {
+              "flag": "grid connection pending",
+              "reason": "No connection application on record",
+              "severity": "medium"
+            },
+            {
+              "flag": "environmental pending",
+              "reason": "No EIS lodged and COD > 2027",
+              "severity": "medium"
+            }
+          ]
         },
         {
           "name": "Merino Solar Farm",
@@ -859,7 +1524,15 @@
           "storage_mwh": 1800,
           "state": "NSW",
           "status": "development",
-          "stage": "development"
+          "stage": "development",
+          "dev_status": "grid connection pending",
+          "annotations": [
+            {
+              "flag": "grid connection pending",
+              "reason": "No connection application on record",
+              "severity": "medium"
+            }
+          ]
         },
         {
           "name": "Middlebrook Solar Farm",
@@ -871,7 +1544,25 @@
           "state": "NSW",
           "status": "development",
           "stage": "development",
-          "cod_current": "2029-12-14"
+          "cod_current": "2029-12-14",
+          "dev_status": "pre-planning",
+          "annotations": [
+            {
+              "flag": "pre-planning",
+              "reason": "Development stage is early \u2014 not in planning yet",
+              "severity": "high"
+            },
+            {
+              "flag": "grid connection pending",
+              "reason": "No connection application on record",
+              "severity": "medium"
+            },
+            {
+              "flag": "environmental pending",
+              "reason": "No EIS lodged and COD > 2027",
+              "severity": "medium"
+            }
+          ]
         },
         {
           "name": "Moah Creek Wind Farm",
@@ -882,7 +1573,20 @@
           "state": "QLD",
           "status": "development",
           "stage": "development",
-          "cod_current": "2028-03-31"
+          "cod_current": "2028-03-31",
+          "dev_status": "grid connection pending",
+          "annotations": [
+            {
+              "flag": "grid connection pending",
+              "reason": "No connection application on record",
+              "severity": "medium"
+            },
+            {
+              "flag": "environmental pending",
+              "reason": "No EIS lodged and COD > 2027",
+              "severity": "medium"
+            }
+          ]
         },
         {
           "name": "Nowingi Solar Power Station",
@@ -894,7 +1598,21 @@
           "state": "VIC",
           "status": "development",
           "stage": "development",
-          "cod_current": "2028-02-01"
+          "cod_current": "2028-02-01",
+          "dev_status": "grid connection pending",
+          "annotations": [
+            {
+              "flag": "grid connection pending",
+              "reason": "No connection application on record",
+              "severity": "medium"
+            },
+            {
+              "flag": "environmental pending",
+              "reason": "No EIS lodged and COD > 2027",
+              "severity": "medium"
+            }
+          ],
+          "developer_grade": "B"
         },
         {
           "name": "Punchs Creek Solar Farm",
@@ -904,7 +1622,15 @@
           "storage_mwh": 1600,
           "state": "QLD",
           "status": "unknown",
-          "stage": "unknown"
+          "stage": "unknown",
+          "dev_status": "grid connection pending",
+          "annotations": [
+            {
+              "flag": "grid connection pending",
+              "reason": "No connection application on record",
+              "severity": "medium"
+            }
+          ]
         },
         {
           "name": "Smoky Creek Solar Power Station",
@@ -916,7 +1642,26 @@
           "state": "QLD",
           "status": "development",
           "stage": "development",
-          "cod_current": "2029-05-01"
+          "cod_current": "2029-05-01",
+          "dev_status": "pre-planning",
+          "annotations": [
+            {
+              "flag": "pre-planning",
+              "reason": "Development stage is early \u2014 not in planning yet",
+              "severity": "high"
+            },
+            {
+              "flag": "grid connection pending",
+              "reason": "No connection application on record",
+              "severity": "medium"
+            },
+            {
+              "flag": "environmental pending",
+              "reason": "No EIS lodged and COD > 2027",
+              "severity": "medium"
+            }
+          ],
+          "developer_grade": "B"
         },
         {
           "name": "Tallawang Solar Hybrid",
@@ -928,7 +1673,21 @@
           "state": "NSW",
           "status": "development",
           "stage": "development",
-          "cod_current": "2030-01-15"
+          "cod_current": "2030-01-15",
+          "dev_status": "grid connection pending",
+          "annotations": [
+            {
+              "flag": "grid connection pending",
+              "reason": "No connection application on record",
+              "severity": "medium"
+            },
+            {
+              "flag": "environmental pending",
+              "reason": "No EIS lodged and COD > 2027",
+              "severity": "medium"
+            }
+          ],
+          "developer_grade": "B"
         },
         {
           "name": "Willogoleche 2 Wind Farm",
@@ -938,7 +1697,15 @@
           "capacity_mw": 108,
           "state": "SA",
           "status": "unknown",
-          "stage": "unknown"
+          "stage": "unknown",
+          "dev_status": "grid connection pending",
+          "annotations": [
+            {
+              "flag": "grid connection pending",
+              "reason": "No connection application on record",
+              "severity": "medium"
+            }
+          ]
         }
       ]
     },
@@ -971,7 +1738,9 @@
           "status": "operating",
           "stage": "operating",
           "construction_start": "2019-01-01",
-          "cod_current": "2028-10-31"
+          "cod_current": "2028-10-31",
+          "dev_status": "construction",
+          "annotations": []
         },
         {
           "name": "Stubbo Solar Farm",
@@ -982,7 +1751,9 @@
           "state": "NSW",
           "status": "operating",
           "stage": "operating",
-          "cod_current": "2024-12-18"
+          "cod_current": "2024-12-18",
+          "dev_status": "operating",
+          "annotations": []
         },
         {
           "name": "Coppabella Wind Farm",
@@ -993,7 +1764,20 @@
           "state": "NSW",
           "status": "development",
           "stage": "development",
-          "cod_current": "2027-09-30"
+          "cod_current": "2027-09-30",
+          "dev_status": "pre-planning",
+          "annotations": [
+            {
+              "flag": "pre-planning",
+              "reason": "Development stage is early \u2014 not in planning yet",
+              "severity": "high"
+            },
+            {
+              "flag": "grid connection pending",
+              "reason": "No connection application on record",
+              "severity": "medium"
+            }
+          ]
         },
         {
           "name": "Limondale BESS",
@@ -1006,7 +1790,10 @@
           "status": "construction",
           "stage": "construction",
           "construction_start": "2024-10-01",
-          "cod_current": "2026-03-07"
+          "cod_current": "2026-03-07",
+          "dev_status": "construction",
+          "annotations": [],
+          "developer_grade": "B"
         }
       ]
     },
@@ -1040,7 +1827,10 @@
           "status": "commissioning",
           "stage": "commissioning",
           "construction_start": "2024-07-01",
-          "cod_current": "2026-06-30"
+          "cod_current": "2026-06-30",
+          "dev_status": "construction",
+          "annotations": [],
+          "developer_grade": "A"
         },
         {
           "name": "Enel X VPP Portfolio",
@@ -1049,7 +1839,15 @@
           "capacity_mw": 95,
           "state": "NSW",
           "status": "unknown",
-          "stage": "unknown"
+          "stage": "unknown",
+          "dev_status": "grid connection pending",
+          "annotations": [
+            {
+              "flag": "grid connection pending",
+              "reason": "No connection application on record",
+              "severity": "medium"
+            }
+          ]
         },
         {
           "name": "Smithfield BESS",
@@ -1061,7 +1859,9 @@
           "state": "NSW",
           "status": "operating",
           "stage": "operating",
-          "cod_current": "2025-11-19"
+          "cod_current": "2025-11-19",
+          "dev_status": "operating",
+          "annotations": []
         }
       ]
     },
@@ -1095,7 +1895,10 @@
           "stage": "construction",
           "fid_date": "2023",
           "construction_start": "2024-01-01",
-          "cod_current": "2028-02-01"
+          "cod_current": "2028-02-01",
+          "dev_status": "FID reached",
+          "annotations": [],
+          "developer_grade": "B"
         },
         {
           "name": "Culcairn Solar Farm",
@@ -1106,7 +1909,9 @@
           "state": "NSW",
           "status": "operating",
           "stage": "operating",
-          "cod_current": "2025-09-29"
+          "cod_current": "2025-09-29",
+          "dev_status": "operating",
+          "annotations": []
         },
         {
           "name": "Richmond Valley BESS",
@@ -1118,7 +1923,26 @@
           "state": "NSW",
           "status": "development",
           "stage": "development",
-          "cod_current": "2027-12-31"
+          "cod_current": "2027-12-31",
+          "dev_status": "pre-planning",
+          "annotations": [
+            {
+              "flag": "pre-planning",
+              "reason": "Development stage is early \u2014 not in planning yet",
+              "severity": "high"
+            },
+            {
+              "flag": "grid connection pending",
+              "reason": "No connection application on record",
+              "severity": "medium"
+            },
+            {
+              "flag": "execution risk",
+              "reason": "Developer execution grade: F",
+              "severity": "high"
+            }
+          ],
+          "developer_grade": "F"
         },
         {
           "name": "Silver City Energy Storage Centre",
@@ -1130,7 +1954,20 @@
           "state": "NSW",
           "status": "development",
           "stage": "development",
-          "cod_current": "2028-12-31"
+          "cod_current": "2028-12-31",
+          "dev_status": "grid connection pending",
+          "annotations": [
+            {
+              "flag": "grid connection pending",
+              "reason": "No connection application on record",
+              "severity": "medium"
+            },
+            {
+              "flag": "environmental pending",
+              "reason": "No EIS lodged and COD > 2027",
+              "severity": "medium"
+            }
+          ]
         },
         {
           "name": "Goulburn River BESS",
@@ -1142,7 +1979,21 @@
           "state": "NSW",
           "status": "development",
           "stage": "development",
-          "cod_current": "2029-08-01"
+          "cod_current": "2029-08-01",
+          "dev_status": "grid connection pending",
+          "annotations": [
+            {
+              "flag": "grid connection pending",
+              "reason": "No connection application on record",
+              "severity": "medium"
+            },
+            {
+              "flag": "environmental pending",
+              "reason": "No EIS lodged and COD > 2027",
+              "severity": "medium"
+            }
+          ],
+          "developer_grade": "B"
         }
       ]
     },
@@ -1174,7 +2025,20 @@
           "state": "NSW",
           "status": "development",
           "stage": "development",
-          "cod_current": "2027-02-28"
+          "cod_current": "2027-02-28",
+          "dev_status": "pre-planning",
+          "annotations": [
+            {
+              "flag": "pre-planning",
+              "reason": "Development stage is early \u2014 not in planning yet",
+              "severity": "high"
+            },
+            {
+              "flag": "grid connection pending",
+              "reason": "No connection application on record",
+              "severity": "medium"
+            }
+          ]
         },
         {
           "name": "Flyers Creek Wind Farm",
@@ -1186,7 +2050,9 @@
           "status": "operating",
           "stage": "operating",
           "construction_start": "2022-03",
-          "cod_current": "2023-09-19"
+          "cod_current": "2023-09-19",
+          "dev_status": "construction",
+          "annotations": []
         }
       ]
     },
@@ -1216,7 +2082,15 @@
           "storage_mwh": 11990,
           "state": "NSW",
           "status": "development",
-          "stage": "development"
+          "stage": "development",
+          "dev_status": "grid connection pending",
+          "annotations": [
+            {
+              "flag": "grid connection pending",
+              "reason": "No connection application on record",
+              "severity": "medium"
+            }
+          ]
         },
         {
           "name": "Stoney Creek BESS",
@@ -1228,7 +2102,20 @@
           "state": "NSW",
           "status": "development",
           "stage": "development",
-          "cod_current": "2027-11-30"
+          "cod_current": "2027-11-30",
+          "dev_status": "pre-planning",
+          "annotations": [
+            {
+              "flag": "pre-planning",
+              "reason": "Development stage is early \u2014 not in planning yet",
+              "severity": "high"
+            },
+            {
+              "flag": "grid connection pending",
+              "reason": "No connection application on record",
+              "severity": "medium"
+            }
+          ]
         },
         {
           "name": "Griffith BESS",
@@ -1240,7 +2127,21 @@
           "state": "NSW",
           "status": "development",
           "stage": "development",
-          "cod_current": "2028-12-30"
+          "cod_current": "2028-12-30",
+          "dev_status": "grid connection pending",
+          "annotations": [
+            {
+              "flag": "grid connection pending",
+              "reason": "No connection application on record",
+              "severity": "medium"
+            },
+            {
+              "flag": "environmental pending",
+              "reason": "No EIS lodged and COD > 2027",
+              "severity": "medium"
+            }
+          ],
+          "developer_grade": "B"
         }
       ]
     },
@@ -1271,7 +2172,26 @@
           "state": "NSW",
           "status": "development",
           "stage": "development",
-          "cod_current": "2028-12-31"
+          "cod_current": "2028-12-31",
+          "dev_status": "pre-planning",
+          "annotations": [
+            {
+              "flag": "pre-planning",
+              "reason": "Development stage is early \u2014 not in planning yet",
+              "severity": "high"
+            },
+            {
+              "flag": "grid connection pending",
+              "reason": "No connection application on record",
+              "severity": "medium"
+            },
+            {
+              "flag": "environmental pending",
+              "reason": "No EIS lodged and COD > 2027",
+              "severity": "medium"
+            }
+          ],
+          "developer_grade": "B"
         },
         {
           "name": "Bowmans Creek BESS",
@@ -1282,7 +2202,15 @@
           "storage_mwh": 2414,
           "state": "NSW",
           "status": "development",
-          "stage": "development"
+          "stage": "development",
+          "dev_status": "grid connection pending",
+          "annotations": [
+            {
+              "flag": "grid connection pending",
+              "reason": "No connection application on record",
+              "severity": "medium"
+            }
+          ]
         },
         {
           "name": "Bannaby BESS",
@@ -1293,7 +2221,15 @@
           "storage_mwh": 2676,
           "state": "NSW",
           "status": "development",
-          "stage": "development"
+          "stage": "development",
+          "dev_status": "grid connection pending",
+          "annotations": [
+            {
+              "flag": "grid connection pending",
+              "reason": "No connection application on record",
+              "severity": "medium"
+            }
+          ]
         },
         {
           "name": "Armidale East BESS",
@@ -1304,7 +2240,16 @@
           "storage_mwh": 1440,
           "state": "NSW",
           "status": "development",
-          "stage": "development"
+          "stage": "development",
+          "dev_status": "grid connection pending",
+          "annotations": [
+            {
+              "flag": "grid connection pending",
+              "reason": "No connection application on record",
+              "severity": "medium"
+            }
+          ],
+          "developer_grade": "B"
         },
         {
           "name": "Ebor BESS",
@@ -1315,7 +2260,15 @@
           "storage_mwh": 870,
           "state": "NSW",
           "status": "development",
-          "stage": "development"
+          "stage": "development",
+          "dev_status": "grid connection pending",
+          "annotations": [
+            {
+              "flag": "grid connection pending",
+              "reason": "No connection application on record",
+              "severity": "medium"
+            }
+          ]
         },
         {
           "name": "Kingswood BESS",
@@ -1326,7 +2279,21 @@
           "storage_mwh": 1080,
           "state": "NSW",
           "status": "development",
-          "stage": "development"
+          "stage": "development",
+          "dev_status": "execution risk",
+          "annotations": [
+            {
+              "flag": "grid connection pending",
+              "reason": "No connection application on record",
+              "severity": "medium"
+            },
+            {
+              "flag": "execution risk",
+              "reason": "Developer execution grade: F",
+              "severity": "high"
+            }
+          ],
+          "developer_grade": "F"
         }
       ]
     }
@@ -1357,5 +2324,5 @@
       }
     }
   },
-  "exported_at": "2026-04-17T21:05:04.495412"
+  "exported_at": "2026-04-17T23:01:00.292365"
 }
