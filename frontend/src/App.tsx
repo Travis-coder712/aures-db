@@ -46,6 +46,7 @@ import Watchlist from './pages/Watchlist'
 import NotFound from './pages/NotFound'
 
 const LifecycleQuartile = lazy(() => import('./pages/intelligence/LifecycleQuartile'))
+const RiskSignals = lazy(() => import('./pages/intelligence/RiskSignals'))
 
 function LazyFallback() {
   return (
@@ -115,6 +116,14 @@ function App() {
           element={
             <Suspense fallback={<LazyFallback />}>
               <LifecycleQuartile />
+            </Suspense>
+          }
+        />
+        <Route
+          path="intelligence/risk-signals"
+          element={
+            <Suspense fallback={<LazyFallback />}>
+              <RiskSignals />
             </Suspense>
           }
         />

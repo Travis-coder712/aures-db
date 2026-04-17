@@ -260,6 +260,9 @@ export const PAGE_SOURCES: Record<string, SourceId[]> = {
   // Asset Lifecycle & Repowering — age profile, refurb candidates, OEM fleet ages, turnover forecast
   'asset-lifecycle': ['aemo_generation_info', 'openelectricity_performance', 'web_research', 'json_export'],
 
+  // Risk & Probability Signals — supply chain concentration (T3.I) + scheme win probability (T3.J)
+  'risk-signals': ['aemo_generation_info', 'web_research', 'json_export'],
+
   // Core
   projects: ['aemo_generation_info', 'openelectricity_performance', 'web_research', 'json_export'],
   dashboard: ['aemo_generation_info', 'openelectricity_performance', 'json_export'],

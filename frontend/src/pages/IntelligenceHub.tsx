@@ -109,6 +109,12 @@ const FEATURES = [
     description: 'Operating fleet age profile, repowering candidates, aging OEM exposure, and fleet turnover forecast to 2050.',
     route: '/intelligence/asset-lifecycle',
   },
+  {
+    icon: '\u26A0\uFE0F',
+    title: 'Risk & Probability Signals',
+    description: 'Supply chain concentration, bankrupt-OEM exposure, dev-OEM chain risks, and scheme win probability scoring for development projects.',
+    route: '/intelligence/risk-signals',
+  },
 ] as const
 
 export default function IntelligenceHub() {
