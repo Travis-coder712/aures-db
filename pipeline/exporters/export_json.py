@@ -3599,6 +3599,344 @@ def export_wind_resource(conn):
     print(f"  analytics/intelligence/wind-resource.json ({len(farms)} operating, {len(development_projects)} development)")
 
 
+def export_asset_lifecycle(conn):
+    """Asset Lifecycle & Repowering Intelligence — T3.H + T3.K combined.
+
+    Plots the age distribution of the operating fleet, identifies
+    repowering / refurbishment candidates, and forecasts fleet turnover.
+
+    Output: analytics/intelligence/asset-lifecycle.json with sections:
+      - summary:              fleet totals, avg age, projects ≥ 15/20 years
+      - age_distribution:     per-tech bucketed histograms + stats
+      - refurb_candidates:    scored list of repowering targets
+      - oem_fleet_age:        per-OEM fleet average age (spot aging OEMs)
+      - aging_oems_flagged:   OEMs with >50% of fleet >15yr old (incl.
+                              bankrupt parents like Senvion)
+      - projected_turnover:   fleet turnover forecast assuming 25-year EoL
+      - historic_repowering:  ownership_history entries that look like
+                              repowering deals (>10yr age at change)
+
+    Refurbishment score (0-100): age (0-60) + OEM risk (0-25) + CF
+    underperformance (0-15). Higher score = stronger repowering signal.
+    """
+    from datetime import datetime as _dt
+
+    # OEMs known to be wound down / bankrupt — projects using these have
+    # higher repowering urgency because spares / service contracts are
+    # harder to maintain.
+    AT_RISK_OEMS = {
+        'Senvion',        # bankrupt 2019, brand absorbed by Siemens Gamesa
+        'REpower',        # Senvion's previous name
+        'Suzlon',         # stressed balance sheet, limited NEM support
+        'Acciona Windpower',  # absorbed into Nordex 2016
+        'Vestas (legacy)',  # V66/V80 older models
+    }
+
+    # Fetch operating projects with COD
+    op_rows = conn.execute("""
+        SELECT p.id, p.name, p.technology, p.state, p.rez, p.capacity_mw,
+               p.storage_mwh, p.current_developer, p.current_operator,
+               p.cod_current, p.cod_original, p.latitude, p.longitude,
+               (SELECT supplier FROM suppliers WHERE project_id=p.id
+                  AND role IN ('wind_oem','solar_oem','bess_oem','hydro_oem')
+                  LIMIT 1) AS primary_oem,
+               (SELECT model FROM suppliers WHERE project_id=p.id
+                  AND role IN ('wind_oem','solar_oem','bess_oem','hydro_oem')
+                  LIMIT 1) AS primary_model
+        FROM projects p
+        WHERE p.status = 'operating' AND p.cod_current IS NOT NULL
+    """).fetchall()
+
+    current_year = datetime.now().year
+
+    # Performance annual for CF-underperformance signal
+    perf_rows = conn.execute("""
+        SELECT project_id, year, capacity_factor_pct, revenue_per_mw
+        FROM performance_annual
+        WHERE capacity_factor_pct IS NOT NULL
+    """).fetchall()
+    perf_by_project = defaultdict(list)
+    for r in perf_rows:
+        perf_by_project[r['project_id']].append({
+            'year': r['year'],
+            'cf': r['capacity_factor_pct'],
+            'rev_per_mw': r['revenue_per_mw'],
+        })
+
+    # State + tech median CF for underperformance comparison
+    state_tech_cf = defaultdict(list)
+    proj_to_state_tech = {r['id']: (r['state'], r['technology']) for r in op_rows}
+    for pid, entries in perf_by_project.items():
+        st = proj_to_state_tech.get(pid)
+        if not st:
+            continue
+        latest = max(entries, key=lambda e: e['year'])
+        state_tech_cf[st].append(latest['cf'])
+    state_tech_median = {k: statistics.median(v) for k, v in state_tech_cf.items() if v}
+
+    def cod_year(iso_str):
+        if not iso_str:
+            return None
+        try:
+            return int(str(iso_str)[:4])
+        except (ValueError, TypeError):
+            return None
+
+    def age_bucket(age):
+        if age is None:
+            return None
+        if age < 5: return '<5y'
+        if age < 10: return '5-10y'
+        if age < 15: return '10-15y'
+        if age < 20: return '15-20y'
+        if age < 25: return '20-25y'
+        return '25y+'
+
+    AGE_BUCKETS = ['<5y', '5-10y', '10-15y', '15-20y', '20-25y', '25y+']
+
+    # ---- Age distribution per tech ----
+    by_tech_ages = defaultdict(list)
+    asset_records = []
+    for r in op_rows:
+        y = cod_year(r['cod_current'])
+        if y is None:
+            continue
+        age = current_year - y
+        by_tech_ages[r['technology']].append(age)
+
+        # CF trend: latest - earliest (simple linear, positive = improving)
+        entries = perf_by_project.get(r['id'], [])
+        cf_latest = None
+        cf_earliest = None
+        cf_trend = None
+        if len(entries) >= 2:
+            sorted_e = sorted(entries, key=lambda e: e['year'])
+            cf_earliest = sorted_e[0]['cf']
+            cf_latest = sorted_e[-1]['cf']
+            cf_trend = round(cf_latest - cf_earliest, 2)
+        elif len(entries) == 1:
+            cf_latest = entries[0]['cf']
+
+        # Underperformance vs state-tech median
+        st_key = (r['state'], r['technology'])
+        cf_median = state_tech_median.get(st_key)
+        cf_gap = None
+        if cf_latest is not None and cf_median is not None:
+            cf_gap = round(cf_latest - cf_median, 2)
+
+        # Repowering / refurbishment score
+        # Age component: linear 0-60 over 0-25 years
+        age_score = min(age, 25) / 25 * 60
+        # OEM risk component: up to 25
+        oem_risk = 0
+        primary_oem = r['primary_oem'] or ''
+        if any(risk.lower() in primary_oem.lower() for risk in AT_RISK_OEMS):
+            oem_risk = 25
+        elif 'vestas' in primary_oem.lower() and r['primary_model'] and any(
+            m in r['primary_model'] for m in ['V66', 'V80', 'V82', 'V90']
+        ):
+            oem_risk = 15
+        # Underperformance component: 0-15 based on how far below median
+        perf_risk = 0
+        if cf_gap is not None and cf_gap < 0:
+            perf_risk = min(abs(cf_gap) * 2, 15)
+        if cf_trend is not None and cf_trend < -1:
+            perf_risk = max(perf_risk, min(abs(cf_trend) * 3, 15))
+
+        refurb_score = round(age_score + oem_risk + perf_risk, 1)
+
+        asset_records.append({
+            'project_id': r['id'],
+            'name': r['name'],
+            'technology': r['technology'],
+            'state': r['state'],
+            'rez': r['rez'],
+            'capacity_mw': r['capacity_mw'],
+            'storage_mwh': r['storage_mwh'],
+            'developer': r['current_developer'],
+            'operator': r['current_operator'],
+            'cod_year': y,
+            'age_years': age,
+            'age_bucket': age_bucket(age),
+            'primary_oem': r['primary_oem'],
+            'primary_model': r['primary_model'],
+            'cf_latest': cf_latest,
+            'cf_trend': cf_trend,
+            'cf_gap_to_state_median': cf_gap,
+            'refurb_score': refurb_score,
+            'at_risk_oem': oem_risk > 0,
+            'latitude': r['latitude'],
+            'longitude': r['longitude'],
+        })
+
+    # Per-tech age stats
+    age_distribution = {}
+    for tech, ages in by_tech_ages.items():
+        bucket_counts = {b: 0 for b in AGE_BUCKETS}
+        for age in ages:
+            b = age_bucket(age)
+            if b:
+                bucket_counts[b] += 1
+        age_distribution[tech] = {
+            'count': len(ages),
+            'avg_age': round(sum(ages) / len(ages), 1) if ages else None,
+            'median_age': round(statistics.median(ages), 1) if ages else None,
+            'oldest_age': max(ages) if ages else None,
+            'newest_age': min(ages) if ages else None,
+            'buckets': bucket_counts,
+        }
+
+    # COD year distribution (flat list)
+    by_year_count = defaultdict(lambda: {'count': 0, 'mw': 0.0, 'by_tech': defaultdict(int)})
+    for rec in asset_records:
+        y = rec['cod_year']
+        by_year_count[y]['count'] += 1
+        by_year_count[y]['mw'] += rec['capacity_mw'] or 0
+        by_year_count[y]['by_tech'][rec['technology']] += 1
+
+    by_cod_year = [
+        {
+            'year': y,
+            'count': d['count'],
+            'total_mw': round(d['mw'], 1),
+            'by_tech': dict(d['by_tech']),
+        }
+        for y, d in sorted(by_year_count.items())
+    ]
+
+    # ---- Refurb candidates — filter to age ≥ 10 or refurb_score ≥ 40 ----
+    refurb_candidates = [
+        rec for rec in asset_records
+        if (rec['age_years'] >= 10 or rec['refurb_score'] >= 40)
+    ]
+    refurb_candidates.sort(key=lambda r: -r['refurb_score'])
+
+    # ---- OEM fleet age ----
+    oem_age_agg = defaultdict(lambda: {'projects': [], 'tech_set': set()})
+    for rec in asset_records:
+        if not rec['primary_oem']:
+            continue
+        key = rec['primary_oem']
+        oem_age_agg[key]['projects'].append(rec['age_years'])
+        oem_age_agg[key]['tech_set'].add(rec['technology'])
+
+    oem_fleet_age = []
+    for oem, d in oem_age_agg.items():
+        ages = d['projects']
+        if len(ages) < 2:  # min 2 projects to surface meaningfully
+            continue
+        oem_fleet_age.append({
+            'oem': oem,
+            'project_count': len(ages),
+            'technologies': sorted(d['tech_set']),
+            'avg_age': round(sum(ages) / len(ages), 1),
+            'median_age': round(statistics.median(ages), 1),
+            'oldest': max(ages),
+            'newest': min(ages),
+            'pct_over_15yr': round(sum(1 for a in ages if a >= 15) / len(ages) * 100, 0),
+            'at_risk': any(risk.lower() in oem.lower() for risk in AT_RISK_OEMS),
+        })
+    oem_fleet_age.sort(key=lambda e: -e['avg_age'])
+
+    aging_oems_flagged = [e for e in oem_fleet_age if e['pct_over_15yr'] >= 50 or e['at_risk']]
+
+    # ---- Historic repowering — scan ownership_history for deals on 10+ yr assets ----
+    own_rows = conn.execute("""
+        SELECT oh.project_id, oh.period, oh.owner, oh.role,
+               oh.acquisition_value_aud, oh.transaction_structure, oh.source_url,
+               p.name, p.technology, p.state, p.capacity_mw, p.cod_current
+        FROM ownership_history oh
+        JOIN projects p ON p.id = oh.project_id
+        WHERE p.status = 'operating'
+    """).fetchall()
+
+    historic_repowering = []
+    for r in own_rows:
+        y = cod_year(r['cod_current'])
+        if y is None:
+            continue
+        age = current_year - y
+        # Heuristic: if asset was 10+ years old when a transaction happened, it's
+        # likely a refurb/repower deal or end-of-life change of hands.
+        # We don't have precise transaction dates, so we surface all 10+ yr deals.
+        if age >= 10:
+            historic_repowering.append({
+                'project_id': r['project_id'],
+                'name': r['name'],
+                'technology': r['technology'],
+                'state': r['state'],
+                'capacity_mw': r['capacity_mw'],
+                'cod_year': y,
+                'age_years': age,
+                'period': r['period'],
+                'owner': r['owner'],
+                'role': r['role'],
+                'acquisition_value_aud': r['acquisition_value_aud'],
+                'transaction_structure': r['transaction_structure'],
+                'source_url': r['source_url'],
+            })
+    historic_repowering.sort(key=lambda r: (-r['age_years'], r['name']))
+
+    # ---- Projected turnover — fleet hitting 25 years over next 15 years ----
+    projected_turnover = defaultdict(lambda: {'count': 0, 'mw': 0.0, 'by_tech': defaultdict(int)})
+    for rec in asset_records:
+        eol_year = rec['cod_year'] + 25
+        if eol_year >= current_year and eol_year <= current_year + 30:
+            projected_turnover[eol_year]['count'] += 1
+            projected_turnover[eol_year]['mw'] += rec['capacity_mw'] or 0
+            projected_turnover[eol_year]['by_tech'][rec['technology']] += 1
+
+    projected_turnover_list = [
+        {
+            'eol_year': y,
+            'count': d['count'],
+            'total_mw': round(d['mw'], 1),
+            'by_tech': dict(d['by_tech']),
+        }
+        for y, d in sorted(projected_turnover.items())
+    ]
+
+    # ---- Summary ----
+    total_assets = len(asset_records)
+    if asset_records:
+        all_ages = [r['age_years'] for r in asset_records]
+        avg_age = round(sum(all_ages) / len(all_ages), 1)
+        over_15 = sum(1 for r in asset_records if r['age_years'] >= 15)
+        over_20 = sum(1 for r in asset_records if r['age_years'] >= 20)
+        over_25 = sum(1 for r in asset_records if r['age_years'] >= 25)
+    else:
+        avg_age = None
+        over_15 = over_20 = over_25 = 0
+
+    total_mw_at_risk = round(sum(r['capacity_mw'] or 0 for r in asset_records if r['refurb_score'] >= 50), 1)
+
+    write_json(os.path.join(INTEL_DIR, 'asset-lifecycle.json'), {
+        'summary': {
+            'total_operating': total_assets,
+            'avg_age_years': avg_age,
+            'over_15_years': over_15,
+            'over_20_years': over_20,
+            'over_25_years': over_25,
+            'refurb_score_50_plus': sum(1 for r in asset_records if r['refurb_score'] >= 50),
+            'total_mw_at_risk': total_mw_at_risk,
+            'current_year': current_year,
+            'at_risk_oems': sorted(AT_RISK_OEMS),
+        },
+        'age_distribution': age_distribution,
+        'by_cod_year': by_cod_year,
+        'refurb_candidates': refurb_candidates,
+        'oem_fleet_age': oem_fleet_age,
+        'aging_oems_flagged': aging_oems_flagged,
+        'historic_repowering': historic_repowering,
+        'projected_turnover': projected_turnover_list,
+        'all_operating_assets': asset_records,
+        'exported_at': datetime.now().isoformat(),
+    })
+    print(f"  analytics/intelligence/asset-lifecycle.json ({total_assets} operating, "
+          f"{over_15} ≥15y, {len(refurb_candidates)} refurb candidates, "
+          f"{len(historic_repowering)} historic deals)")
+
+
 def export_bess_portfolio(conn):
     """BESS Portfolio Intelligence — T2.G.
 
@@ -5482,6 +5820,7 @@ def export_intelligence(conn):
     export_wind_resource(conn)
     export_solar_resource(conn)
     export_bess_portfolio(conn)
+    export_asset_lifecycle(conn)
     export_dunkelflaute(conn)
     export_energy_mix(conn)
     export_developer_scores(conn)

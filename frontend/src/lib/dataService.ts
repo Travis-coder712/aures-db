@@ -563,6 +563,21 @@ export async function fetchContractorAnalytics(): Promise<any | null> {
   } catch { return null }
 }
 
+// Asset Lifecycle & Repowering — age distribution, refurb candidates, aging OEMs,
+// historic repowering deals, fleet turnover forecast (T3.H + T3.K).
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+let assetLifecycleCache: any | null = null
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export async function fetchAssetLifecycle(): Promise<any | null> {
+  if (assetLifecycleCache) return assetLifecycleCache
+  try {
+    const resp = await fetch(`${BASE}/analytics/intelligence/asset-lifecycle.json`)
+    if (!resp.ok) return null
+    assetLifecycleCache = await resp.json()
+    return assetLifecycleCache
+  } catch { return null }
+}
+
 // BESS portfolio — duration distribution + evolution, grid-forming, co-located,
 // chemistry breakdown, network services registry (T2.G).
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
