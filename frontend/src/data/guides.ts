@@ -626,6 +626,87 @@ The underlying data is publicly available:
 If you spot a discrepancy, it's likely due to capacity differences (registered vs maximum), time period alignment, or DUID mapping. We welcome corrections.`,
   },
   {
+    id: 'asset-lifecycle-repowering',
+    title: 'Asset Lifecycle & Repowering',
+    description: 'How operating fleet age is tracked, how repowering candidates are scored, and how the fleet turnover forecast is built.',
+    icon: '🔁',
+    category: 'technical',
+    readingTime: '7 min read',
+    content: `# Asset Lifecycle & Repowering
+
+The \`/intelligence/asset-lifecycle\` page takes the operating fleet and answers: **how old is it, which projects are due for repowering, which OEMs are carrying the aging exposure, and when does the replacement wave hit?**
+
+## Why this matters
+
+The Australian renewable fleet commissioned most of its wind capacity between 2007 and 2018 — meaning 59 operating projects are now ≥15 years old, and will face end-of-life decisions over the next decade. Wind turbines are typically designed for 20-25 years. Solar panels degrade but can run 25-30+ years. BESS cells lose cycle capacity over 10-15 years depending on duty cycle. Pumped hydro is effectively open-ended with periodic refurbishment.
+
+Smart operators plan repowering 5-10 years in advance. The page surfaces the fleet-level picture.
+
+## The refurb score (0-100)
+
+Each operating project gets a composite score indicating repowering likelihood. Three components:
+
+| Component | Max | Reasoning |
+|---|---|---|
+| **Age** | 60 pts | Linear 0 → 60 across 0 → 25 years. Pumped hydro is excluded because hydro refurbishes in place rather than repowers. |
+| **OEM risk** | 25 pts | 25 if primary OEM is bankrupt / absorbed / withdrawn (Senvion, REpower, Acciona Windpower, Suzlon). 15 if Vestas legacy model (V66/V80/V82/V90). 0 otherwise. |
+| **Performance underperformance** | 15 pts | Scaled by how far below the state-tech median CF the project sits. Also triggered by declining CF trend (-1%/y or worse). |
+
+A score of **80+** reflects high age + stressed OEM + material underperformance. **60-80** is worth watching. **40-60** may be normal mid-life operation; not every mid-aged asset needs repowering.
+
+### The OEM risk list
+
+At-risk OEMs in the database:
+- **Senvion** — filed for insolvency 2019. Brand absorbed by Siemens Gamesa but legacy units have limited aftermarket support.
+- **REpower** — Senvion's previous name. Same situation.
+- **Suzlon** — long-running balance sheet stress. Still operating globally but minimal AU presence for new spares.
+- **Acciona Windpower** — absorbed into Nordex in 2016. Older AW77 / AW82 fleet has reduced support.
+- **Vestas (legacy)** — V66/V80/V82/V90 are out of current service programs. Vestas still supports them for existing customers but new spares are limited.
+
+## Tabs
+
+### Overview
+Top-line stats, fleet age by technology, COD year profile, and an **aging OEM exposure** list.
+
+### Age Distribution
+Bucket histograms per technology (<5y / 5-10y / 10-15y / 15-20y / 20-25y / 25y+), plus a full 225-row DataTable of every operating asset with age, OEM, CF latest, and CF trend.
+
+### Refurb Candidates
+Ranked 74 candidates (excludes pumped hydro). Columns include OEM model, CF gap to state median, and at-risk OEM flag. Score is colour-banded:
+- ≥80 → red (high signal)
+- 60-79 → amber
+- 40-59 → yellow (worth tracking)
+- <40 → neutral
+
+### OEM Fleet Ages
+Per-OEM fleet averages, %-over-15-years, and at-risk flag. **Hydro OEMs** (Fuji Electric, Toshiba, Voith, Boving, English Electric) show extremely old fleets because hydro turbines are designed for 50+ year lifetimes — refurbished in place rather than replaced. These are not repowering candidates. Wind-OEM aging is the real signal.
+
+### Fleet Turnover Forecast
+Assumes a 25-year nominal operating life and plots projected end-of-life year by project count and MW. Key near-term turnover:
+- **2026** — 4 projects / ~1 GW (mostly pumped hydro — will be refurbished)
+- **2028** — 2 projects / 87 MW (wind)
+- **2029-2036** — accelerating wind turnover, 3-7 projects per year
+
+### Historic Deals
+Placeholder until more ownership_history data accumulates. Currently 12 records in the database; future enrichment passes will expand this.
+
+## Known limitations
+
+1. **25-year nominal life is approximate.** Many wind farms are being extended to 30 years with targeted refurbishment (blade upgrades, gearbox swaps). Some will be fully repowered (new bigger turbines on the same site). Others will be retired. The turnover forecast is a planning signal, not a schedule.
+2. **Refurbishment ≠ repowering.** "Refurb" in industry parlance can mean swapping sub-components while keeping the same nameplate — different capex and permitting than a full repower (replace turbines, often larger).
+3. **At-risk OEM list is conservative.** A Senvion fleet with strong O&M contracts and spare-parts hoarding can still be delivering today. The flag indicates risk of availability gaps, not certainty of failure.
+4. **CF underperformance only counts when both latest-year CF and state-tech median are available.** Smaller states (like TAS with one solar farm) will show no CF gap.
+5. **Hydro OEM ages look alarming** (avg 45-80 years) because hydro is just old. The UI explicitly notes this is not a repowering signal.
+6. **Refurb candidates intentionally exclude pumped hydro.** Hydro fleet refurbishment happens in place via overhaul programs (e.g. Snowy refurb projects, Tasmania's "Battery of the Nation") and is better tracked there.
+
+## Cross-references
+
+- **Performance Metrics** guide — full definition of capacity factor and composite score used for the underperformance signal.
+- **OEM Intelligence** page — per-OEM fleet profile + market concentration.
+- **Developer Intelligence** page — ownership track record for the acquiring / replacement parties.
+`,
+  },
+  {
     id: 'solar-resource',
     title: 'Solar Resource',
     description: 'How the solar capacity-factor benchmarks are built, what the rating thresholds mean, and the difference between small and utility-scale solar CF.',
