@@ -1,3 +1,4 @@
+import { lazy, Suspense } from 'react'
 import { Routes, Route, Navigate } from 'react-router-dom'
 import Layout from './components/layout/Layout'
 import Home from './pages/Home'
@@ -40,6 +41,16 @@ import BatteryWatch from './components/intelligence/BatteryWatch'
 import News from './pages/News'
 import Watchlist from './pages/Watchlist'
 import NotFound from './pages/NotFound'
+
+const LifecycleQuartile = lazy(() => import('./pages/intelligence/LifecycleQuartile'))
+
+function LazyFallback() {
+  return (
+    <div className="flex items-center justify-center h-64">
+      <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500" />
+    </div>
+  )
+}
 
 function App() {
   return (
@@ -93,6 +104,14 @@ function App() {
         <Route path="intelligence/nem-activities" element={<NemActivities />} />
         <Route path="intelligence/bess-bidding" element={<BessBidding />} />
         <Route path="intelligence/battery-watch" element={<div className="p-6 lg:p-8 max-w-5xl"><BatteryWatch /></div>} />
+        <Route
+          path="intelligence/lifecycle-quartile"
+          element={
+            <Suspense fallback={<LazyFallback />}>
+              <LifecycleQuartile />
+            </Suspense>
+          }
+        />
         {/* News */}
         <Route path="news" element={<News />} />
         {/* Admin */}

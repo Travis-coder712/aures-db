@@ -85,6 +85,12 @@ const FEATURES = [
     description: 'Gantt-style development, construction, and operations timeline across the pipeline',
     route: '/intelligence/project-timeline',
   },
+  {
+    icon: '\u{1F9ED}',
+    title: 'Lifecycle Quartile Matrix',
+    description: 'State-of-the-nation grid \u2014 every project by tech \u00d7 state \u00d7 stage with quartile scoring.',
+    route: '/intelligence/lifecycle-quartile',
+  },
 ] as const
 
 export default function IntelligenceHub() {
