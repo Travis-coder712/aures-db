@@ -626,6 +626,125 @@ The underlying data is publicly available:
 If you spot a discrepancy, it's likely due to capacity differences (registered vs maximum), time period alignment, or DUID mapping. We welcome corrections.`,
   },
   {
+    id: 'oem-supplier-data',
+    title: 'OEM & Supplier Data',
+    description: 'What the OEM intelligence layer tracks, where the data comes from, how concentration is measured, and known limitations.',
+    icon: '🔧',
+    category: 'technical',
+    readingTime: '8 min read',
+    content: `# OEM & Supplier Data — Deep Dive
+
+The OEM Intelligence page at \`/oems\` pulls together everything AURES knows about who supplies equipment into the NEM — turbine manufacturers, battery systems, inverters, panels, and hydro turbines. This guide explains what's tracked, where the data comes from, how the market concentration metrics are calculated, and where the gaps are.
+
+---
+
+## What counts as an OEM here
+
+AURES tracks five **equipment-supplier roles**:
+
+| Role | What it is | Typical examples |
+|---|---|---|
+| \`wind_oem\` | The turbine manufacturer — the entity whose nameplate is on the tower | Vestas, Goldwind, GE Vernova, Siemens Gamesa, Suzlon, Nordex |
+| \`solar_oem\` | The panel / module manufacturer | Canadian Solar, Jinko Solar, JA Solar, First Solar, LONGi |
+| \`bess_oem\` | The battery system integrator (includes cell + container + BMS) | Tesla, Fluence, Wartsila, CATL, Samsung SDI, Powin, BYD |
+| \`hydro_oem\` | The turbine / generator / pump manufacturer for pumped hydro | Fuji Electric, Toshiba, Voith, Melco (Mitsubishi Electric), Boving |
+| \`inverter\` | Power electronics — for solar farms and separately for BESS PCS | SMA, Ingeteam, Sungrow, Huawei, TMEIC; also Tesla/Fluence/BYD for integrated BESS |
+
+Some vendors carry multiple roles. Tesla is both \`bess_oem\` and \`inverter\` because Megapack integrates cells and power electronics. BYD is \`solar_oem\`, \`bess_oem\`, **and** \`inverter\`.
+
+**Not** tracked here:
+- **EPC contractors** — these are in \`/contractors\` (roles \`epc\`, \`bop\`)
+- **Transformer / switchgear suppliers** — not systematically captured
+- **FCAS controller or bid-optimisation software** — captured as "trading platform" in BESS Bidding intelligence, not as an OEM
+
+---
+
+## Where the data comes from
+
+OEM records are assembled from three data sources — each pass is validated against the others before records land in the database:
+
+1. **AEMO Generation Information** (monthly Excel) — flags manufacturers on operating and committed projects where AEMO lists them.
+2. **Web research** — targeted searches on ASX disclosures, RenewEconomy / PV Magazine / Energy Storage News articles, developer investor presentations, and WattClarity writeups. Sourced with URLs where possible.
+3. **EIS technical specifications** — extracted from Environmental Impact Statements when a project publishes one. This is the most reliable source for BESS cell chemistry, inverter model numbers, and solar panel specs. Currently 34 BESS projects have verified EIS chemistry (33 LFP, 1 NMC).
+
+Each \`suppliers\` record in the database carries a \`source\` field (one of \`aemo\`, \`web_research\`, \`eis\`, \`manual\`) so we can trace where the attribution came from. Records are deduplicated by \`(project_id, role, supplier)\`.
+
+---
+
+## Market concentration — how it's measured
+
+The Overview tab shows a **Herfindahl-Hirschman Index (HHI)** per role, calculated over installed MW market share:
+
+\`\`\`
+HHI = Σ (market_share_pct)² for each OEM
+\`\`\`
+
+- HHI below **1,500** → competitive market
+- HHI between **1,500 and 2,500** → moderately concentrated
+- HHI above **2,500** → highly concentrated
+
+Current state (v2.19.0):
+
+| Role | HHI (MW) | Top-3 Share | Interpretation |
+|---|---|---|---|
+| Wind | 2,827 | 78% (Vestas · Goldwind · GE) | Highly concentrated |
+| BESS | 1,848 | 66% (Tesla · CATL · Fluence) | Moderately concentrated |
+| Inverter | 1,703 | 62% (SMA · Ingeteam · GE) | Moderately concentrated |
+| Solar panels | 1,175 | 50% (Canadian · Jinko · JA) | Competitive |
+| Hydro | 1,047 | 44% (Toshiba · Voith · Melco) | Competitive (but state-level dynamics matter) |
+
+**Caveat:** these numbers are computed across the whole pipeline (operating + construction + development). If a development-stage project announces a different OEM than what ultimately gets installed, it will shift the reading. We treat announced equipment as firm intent until a project commissions differently.
+
+---
+
+## Performance correlation (OEM → fleet quartile)
+
+For operating OEMs we cross-join \`suppliers\` with \`performance_annual\` and \`league_table_entries\` (see the Performance Metrics guide) to surface:
+
+- **Average capacity factor** across the OEM's operating fleet
+- **Average composite performance score** (0-100)
+- **Q1 share** — what % of the fleet is in the top-25% of its technology
+
+This is visible in the "Top Wind OEMs" and similar DataTables on each tech tab. Example: Vestas' 27 ranked operating wind farms have an average CF of 24.7% with 26% of the fleet in Q1.
+
+**Caveat:** correlation ≠ causation. A Vestas farm with high CF might reflect site quality, developer skill, or O&M practice — not the turbine alone. Use this to spot patterns, not to assign blame.
+
+---
+
+## Developer-OEM pairings
+
+The "Most Active Developer-OEM Pairings" DataTable on the Overview tab flattens our supplier data by developer × OEM. This exposes preferred-partner patterns (eg "Akaysha uses Tesla on 3 projects", "Edify uses Fluence on X projects"). Counts are based on whichever current developer AEMO has on record, consolidated via the developer-alias map.
+
+---
+
+## Known limitations
+
+1. **~35% of OEMs have no model list.** "Models" is free-text and often reads as a generic category (eg "CATL BESS system") rather than a specific SKU. Expanding this requires parsing developer announcements and EIS documents more aggressively.
+2. **BESS chemistry coverage is thin** — only 34 of 420 BESS projects have verified chemistry from EIS documents. We mark this clearly in the BESS tab rather than inferring.
+3. **Tracker vs fixed-mount** — we have this for some solar projects via EIS but it's not yet systematically surfaced in the OEM view.
+4. **Mid-stream OEM changes** — if a project replaces its originally announced supplier mid-construction, we may not catch it until commissioning. Ownership changes often drag OEM changes along.
+5. **WEM not included in some views** — Western Australian projects appear in the directory but their CF/performance data is absent (we only have NEM dispatch via OpenElectricity).
+
+---
+
+## Using the intelligence tabs
+
+- **Overview** — start here to see the market-structure picture and biggest developer-OEM pairings
+- **Wind / Solar / BESS / Hydro** — each tab has its own market-share pie, an OEM-ranked table with performance columns, and tech-specific commentary (eg the Fuji Tasmania callout on the Hydro tab)
+- **Directory** — full filterable list of all 101 OEMs with search, jump-to, tech/state/status filters, and card layout
+
+Click an OEM name anywhere → individual OEM detail page with their full project list, equipment models, and state/status breakdowns.
+
+---
+
+## Want to verify the data?
+
+- Individual \`suppliers\` records with source URLs are visible on each project detail page under "Suppliers" section
+- Raw aggregation is in \`indexes/oem-profiles.json\` and \`analytics/oem-analytics.json\` — both are exported from the SQLite database
+- The EIS-extracted chemistry data is at \`analytics/eis-analytics.json\` under \`summary.bess_stats\`
+`,
+  },
+  {
     id: 'strategic-roadmap',
     title: 'Strategic Roadmap',
     description: 'Comprehensive review of infrastructure, UX, data strategy, and the 10-feature intelligence layer plan.',
