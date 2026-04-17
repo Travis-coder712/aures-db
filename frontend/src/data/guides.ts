@@ -626,6 +626,126 @@ The underlying data is publicly available:
 If you spot a discrepancy, it's likely due to capacity differences (registered vs maximum), time period alignment, or DUID mapping. We welcome corrections.`,
   },
   {
+    id: 'coal-outage-vs-dispatch',
+    title: 'Coal Outage vs Dispatch Erosion',
+    description: 'How AURES distinguishes coal unit unavailability from market displacement — the difference between mechanical events and structural decline.',
+    icon: '🔥',
+    category: 'technical',
+    readingTime: '6 min read',
+    content: `# Coal Outage vs Dispatch Erosion
+
+The Coal Watch page on \`/intelligence/energy-mix\` now includes an **Outage vs Dispatch** decomposition across all 15 NEM coal stations (NSW / QLD / VIC, ~21 GW nameplate). This guide explains the distinction, why it matters, and how the signal is computed.
+
+---
+
+## Why it matters
+
+When a coal unit's monthly output drops, there are two very different explanations — and they tell completely different stories about the energy transition:
+
+1. **Outage** — planned maintenance or unplanned trip. The unit is physically unavailable. **A mechanical event, not a structural market shift.** Callide C Unit 4's explosion in 2021 took 2 GWh/day off the system for months — but that reduction said nothing about whether coal was being displaced.
+
+2. **Dispatch erosion** (a.k.a. "displacement") — the unit is available and bidding into the market, but cheaper renewables are pushing it out in the merit order. **This is the structural signal of coal's decline.** A solar-rich state pushing Eraring's midday output to minimum stable load every day is dispatch erosion.
+
+Conflating these two produces misleading conclusions. A station with 20% CF because it had a 3-month forced outage is very different from a station with 20% CF because it gets cycled off-and-on by renewables.
+
+---
+
+## How we detect each
+
+The exporter uses AEMO's NEMWEB **DISPATCHLOAD** table, which publishes two key numbers per DUID per 5-minute interval:
+
+- **\`AVAILABILITY\`** — MW the unit has offered as available for dispatch
+- **\`TOTALCLEARED\`** — MW the unit was actually dispatched for
+
+Three classifications per interval:
+
+| Mode | Rule | Interpretation |
+|---|---|---|
+| **Outage** | \`availability < 20% of unit capacity\` | Unit unavailable (partial or full outage) |
+| **Displaced** | \`availability ≥ 20%\` AND \`total_cleared < 30% of availability\` | Unit offered, market didn't take it |
+| **Dispatched** | \`total_cleared ≥ 30% of availability\` | Normal operation |
+
+These thresholds are deliberate:
+- **20%** reflects that coal units have minimum stable generation at ~40-60% of capacity — offering below 20% means the unit effectively can't run
+- **30%** accounts for minimum-load constraints and ramp rates — a unit dispatched at 25% of what it offered is genuinely being displaced
+
+---
+
+## Aggregation hierarchy
+
+Data aggregates at three levels:
+
+### NEM-wide
+- Total outage hours / displaced hours / dispatched hours across all 44 coal DUIDs
+- Total MWh displaced — the capacity the market *could* have had from coal but didn't take
+
+### State-level
+Breakdowns for NSW (4 stations, 8.2 GW), QLD (8 stations, 8.2 GW), VIC (3 stations, 4.8 GW). This surfaces regional patterns — e.g. QLD's daytime solar push vs VIC's wind-heavy evenings.
+
+### Station-level
+All 15 operational stations with outage / displaced / dispatched % plus closure year. Enables direct comparison between Yallourn (old brown coal, closing 2028) vs Kogan Creek (newer supercritical black, 2042 close).
+
+---
+
+## What the numbers *should* look like
+
+When DISPATCHLOAD data is populated, expect patterns like:
+
+- **Dispatch % declining** year-on-year in NSW / VIC as renewables build
+- **Outage %** clustered around 10-15% for well-maintained fleets, higher (20%+) for older brown coal
+- **Displaced %** rising steadily — this is the structural signal
+- **QLD > NSW > VIC** for dispatched % in current data (QLD keeps more coal running due to weaker grid interconnection)
+
+Without DISPATCHLOAD data the page shows all structural metadata (stations, DUIDs, capacity, closure dates) but the percentage columns sit as "—" until you run the importer.
+
+---
+
+## Running the importer
+
+\`\`\`bash
+# Last 7 days from NEMWEB Current
+python3 pipeline/importers/import_dispatchload.py --days 7
+
+# Or a specific historical month
+python3 pipeline/importers/import_dispatchload.py --month 2025-12
+\`\`\`
+
+The importer:
+- Filters to only the 44 coal DUIDs (not all ~400 NEM DUIDs — small footprint)
+- Caches zips at \`data/nemweb_cache/\`
+- Respects NEMWEB's CSV format (skips C/I header rows, parses D rows)
+- Classifies each interval on insert
+- Fails gracefully on bad zips, logs continue
+
+First-run volume: a 12-month backfill is ~12 MB of filtered data. Rebuilding from scratch takes ~5-10 minutes over a decent connection.
+
+---
+
+## Known limitations
+
+1. **Classification thresholds are heuristic.** 20% and 30% reflect typical coal dispatch dynamics; edge cases (ramp constraints, ancillary service offers, minimum-load violations) can miscategorise intervals. The alternative — parsing every rebid reason and ancillary-service cap — is out of scope.
+
+2. **No outage cause attribution.** We identify *that* the unit was unavailable, not *why*. Callide C's 2021 explosion and a routine Bayswater boiler clean both read as "outage". Cross-referencing to AEMO Market Notices would disambiguate — queued for a future enrichment.
+
+3. **"Displaced" doesn't mean "permanently lost".** A unit displaced during peak solar hours is still available for evenings. The page reports hours in each mode, not a verdict.
+
+4. **DUID list is point-in-time accurate** (verified 2026-04-17). New units or rebrands require updating \`pipeline/config/coal_stations.json\`.
+
+5. **5-minute data is aggregated to hours by dividing by 12 (12 × 5-min = 1h).** For MWh calculations, \`cleared_mw × hours\` ignores within-interval variation — small effect.
+
+6. **NEMWEB platform migration 21 April 2026** may change URLs / case sensitivity. The importer's base URL constants would need updating. See: aemo.com.au/energy-systems/electricity/national-electricity-market-nem/data-nem/market-data-nemweb
+
+---
+
+## Cross-references
+
+- \`/intelligence/energy-mix\` → **Coal Watch** tab for the main decline narrative
+- **Asset Lifecycle & Repowering** guide for closure-timeline analysis
+- **Revenue Intelligence** for how coal revenue has tracked this dispatch erosion
+- Station closure dates and battery replacements: coal-watch.json + pipeline/config/coal_stations.json
+`,
+  },
+  {
     id: 'risk-probability-signals',
     title: 'Risk & Probability Signals',
     description: 'Supply chain concentration, at-risk OEM exposure, developer-OEM chain risks, and forward-looking CIS/LTESA win probability.',
