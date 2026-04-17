@@ -626,6 +626,131 @@ The underlying data is publicly available:
 If you spot a discrepancy, it's likely due to capacity differences (registered vs maximum), time period alignment, or DUID mapping. We welcome corrections.`,
   },
   {
+    id: 'ppa-market-mapper',
+    title: 'PPA Market Mapper',
+    description: 'How offtake contracts are classified, what price/volume/tenor coverage looks like, and how to read the uncontracted-operating risk register.',
+    icon: '🤝',
+    category: 'technical',
+    readingTime: '10 min read',
+    content: `# PPA Market Mapper
+
+The \`/offtakers\` page is the intelligence layer's PPA mapper — a tabbed view of every offtake contract in the database, the buyers signing them, and the operating projects that remain uncontracted. This guide explains what's tracked, how the data was sourced (heavily enriched in v2.21.0), buyer classifications, and current limitations.
+
+---
+
+## What's tracked
+
+The \`offtakes\` table carries one row per contract we've identified, with these fields:
+
+| Field | What it is |
+|---|---|
+| \`party\` | The **buyer** / offtaker (e.g. "AGL Energy", "Snowy Hydro", "ACT Government", "BHP") |
+| \`type\` | Contract classification — PPA / corporate_ppa / government_ppa / tolling / merchant / CIS / LTESA / SIPS / FCAS / other |
+| \`capacity_mw\` | Contracted volume in MW (may be less than project size) |
+| \`volume_structure\` | Free-text alternative: "100% of output", "50% of generation", "first 200 GWh pa", "LGCs only", "195 GWh pa for 10 years" |
+| \`price_aud_per_mwh\` | Contracted price where disclosed — rare for private PPAs, common for government auctions |
+| \`price_structure\` | "fixed FIT" / "CPI-indexed" / "merchant floor + cap" / "sleeved through retailer" / "availability payment" etc. |
+| \`price_notes\` | Free-text context: "record low at award", "excludes LGCs", "CPI-indexed annually", "confidential" |
+| \`term_years\` | Contract tenor |
+| \`start_date\` / \`end_date\` | ISO dates where known |
+| \`tenor_description\` | Free-text: "20-year FIT from commercial operation", "15 + 5 extension" |
+| \`sources\` | JSON array of \`{url, title, accessed}\` — primary sources where possible |
+| \`data_confidence\` | \`high\` / \`medium\` / \`low\` / \`inferred\` — see below |
+| \`last_verified\` | ISO date of last web-research pass |
+
+---
+
+## The v2.21.0 enrichment pass
+
+The offtakes table existed before v2.21.0 but was ~85% empty beyond party and type. In v2.21.0 we ran a systematic research pass across all 85 known contracts, split into 4 buyer clusters (gentailers, state-owned, government, corporates + industrial) and dispatched to parallel research agents. Coverage before → after:
+
+| Field | Before | After |
+|---|---|---|
+| capacity_mw | 1 of 85 | 57 of 84 |
+| term_years | 14 of 85 | 40 of 84 |
+| price_aud_per_mwh | 0 of 85 | 11 of 84 |
+| price_structure | 0 | 60 of 84 |
+| start_date | 0 | 58 of 84 |
+| end_date | 0 | 35 of 84 |
+| Source URLs | 47 | 241 |
+| data_confidence | 0 | 84 |
+
+Highlights: **all seven ACT Government reverse-auction strike prices recovered** — from $92/MWh (Hornsdale Round 1, CPI-indexed) down to $44.97/MWh (Goyder Round 5, 14-year flat). Average government_ppa price now **$78.5/MWh with 17.2-year tenor**. Standard PPAs come in at **$60/MWh / 13.7 years**.
+
+---
+
+## Buyer categories
+
+The Overview tab groups buyers into seven categories. The classification is rule-based (substring match on party name):
+
+| Category | Includes | Colour |
+|---|---|---|
+| \`gentailer\` | AGL · Origin · EnergyAustralia · Alinta · Shell · ActewAGL · Flow Power · **Snowy Hydro · Hydro Tasmania** | red |
+| \`state_owned\` | CleanCo · CS Energy · Stanwell · Ergon · Synergy | amber |
+| \`government\` | ACT Gov · Victorian Gov · NSW Gov (EII) · SA Gov · AEMO | blue |
+| \`industrial\` | BHP · Rio Tinto · Ark Energy · Fortescue · Sun Metals · Glencore · Nectar Farms | green |
+| \`corporate\` | Telstra · Woolworths · Coles · ALDI · Qantas · Microsoft · Amazon · data centres · banks | purple |
+| \`trader\` | Zen Energy · Iberdrola · Neoen portfolio · ENGIE | teal |
+| \`other\` | unmatched | grey |
+
+Snowy Hydro is classified \`gentailer\` despite being federal-owned because its market role is indistinguishable from AGL or Origin for PPA purposes. The state-owned QLD generators (CleanCo, CS Energy, Stanwell) get their own \`state_owned\` bucket to preserve the QLD renewable-policy signal.
+
+---
+
+## The tabs
+
+- **Overview** — market shape at a glance: category market-share bar, offtake-type aggregates (count, parties, avg tenor, avg price).
+- **Top Buyers** — full 31-row table with buyer link, category pill, offtake count, project count, MW, avg tenor, avg price, top-2 technologies. Sortable / CSV export.
+- **Developer × Offtaker** — flattened pairings. Shows preferred-partner patterns (Neoen × Snowy Hydro, Tilt × AGL).
+- **Offtake Types** — 4 type cards (PPA / corporate_ppa / government_ppa / tolling) with explainer, avg-tenor-by-type bar chart.
+- **Uncontracted** — operating projects with no known offtake. 142 projects covering projects like Supernode BESS (1300 MW), Eraring Battery (700 MW), Aldoga Solar (387 MW). Cross-references project CF and revenue/MW so you can spot merchant-exposed revenue pressure.
+- **Directory** — the original filterable card grid.
+
+---
+
+## Individual offtaker pages
+
+\`/offtakers/:slug\` gains an "Offtake Contracts" table with every contract we have for that buyer, each row showing project, tech, state, contract type, volume, price, tenor, and a confidence pill. **Click any row** to open a DrillPanel with the full detail: tenor description, price notes, all source URLs with access dates, provenance metadata.
+
+---
+
+## data_confidence — what the levels mean
+
+- **high** — primary source (developer ASX release, government contract outcome, AER determination) with exact figures matching
+- **medium** — secondary reporting (RenewEconomy, PV Magazine) or figures inferred from a combination of sources
+- **low** — one uncorroborated source, or figures that look wrong against other known data
+- **inferred** — contract existence is clear but specific figures aren't disclosed
+
+Several rows were flagged \`low\` with explanatory notes during research:
+- **ActewAGL entries** on Goyder South likely duplicate ACT Government contracts
+- **Torrens Island SA Government** — AGL battery is merchant, no disclosed SA Government offtake
+- **Telstra Murra Warra Stage 2** — publicly disclosed offtaker is Snowy Hydro, not Telstra
+- **Several EnergyAustralia wind entries** could not be corroborated
+
+These are preserved as-is (with low confidence flags) rather than deleted, so you can review and correct them if you have better information.
+
+---
+
+## Known limitations
+
+1. **Corporate PPA prices are universally confidential** — we captured 0 published prices across BHP, Telstra, Woolworths, NAB, CBA, etc. Best we can do is the tenor and the volume commitment.
+2. **Uncontracted ≠ merchant** — a project may be under a private PPA we haven't identified, OR fully merchant, OR partially contracted. Use the CF / revenue/MW columns on the Uncontracted tab to triangulate.
+3. **Buyer categorisation is mechanical** — a party not matching any rule falls to \`other\`. Some clear categorisations (Shell Energy is gentailer since it absorbed ERM Power in 2019) rely on substring matching that may mis-attribute unusual names.
+4. **VRET prices never disclosed** — VRET1 reference price was reported as ~$56.52/MWh but individual winning strike prices were not released. VRET2 similar.
+5. **SIPS contracts are availability payments, not $/MWh** — Waratah, Victorian Big Battery, Wallgrove etc. appear under government_ppa with null price. That's correct; price is per-year-availability-fee from AER-approved revenue determinations.
+6. **One input row didn't round-trip** — 85 original records → 84 research outputs (one likely duplicate deduplicated by the research agents).
+
+---
+
+## Want to verify?
+
+- Every row in the DB has source URLs in \`offtakes.sources\` (JSON array) and/or the legacy \`source_url\` column
+- All ACT Government prices cross-verified against climatechoices.act.gov.au
+- AER determinations at aer.gov.au for SIPS / EII contracts
+- Raw aggregation at \`analytics/offtake-analytics.json\` (~75kB)
+`,
+  },
+  {
     id: 'developer-execution-scoring',
     title: 'Developer Intelligence & Execution Scoring',
     description: 'How developer grades are calculated, what the portfolio dashboard shows, and how to read the execution scorecard.',
