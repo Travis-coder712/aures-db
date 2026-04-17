@@ -592,6 +592,19 @@ Each metric also has a percentile ranking (0-100th percentile) showing where a p
 
 ---
 
+## Drill-down — from aggregate to projects
+
+Every aggregate chart on the Performance and intelligence pages supports click-through drill-down:
+
+- **Performance > Quartile Distribution chart** — click any quartile bar (Q1/Q2/Q3/Q4) to open a side panel listing the projects in that quartile, sorted by composite rank. The panel shows rank, project name (link), state, capacity, and the key tech-specific metric (CF% for wind/solar, Spread for BESS).
+- **Drift Analysis > Drift by Technology/State** — click a bar to see the projects in that technology or state.
+- **Revenue Intelligence > Revenue by Tech / Revenue Pressure** — click a bar to see the underlying projects.
+- **BESS Bidding > Rebid Frequency Ranking** — click a bar to see that DUID's full bidding profile and 10 price bands.
+
+The panel slides in from the right on desktop and up from the bottom on mobile. Press **Escape** or click outside to close. Every drill panel embeds a sortable table with row numbers, totals, and CSV export.
+
+---
+
 ## Known Limitations
 
 1. **WEM not covered** — Western Australian projects (Collie Battery, etc.) have no performance data
