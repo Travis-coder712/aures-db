@@ -1,0 +1,396 @@
+{
+  "has_data": true,
+  "cutoff_date": "2026-04-17",
+  "cutoff_date_label": "17 Apr",
+  "cutoff_year": 2026,
+  "cutoff_doy": 107,
+  "years_present": [
+    2026
+  ],
+  "has_historical": false,
+  "total_capacity_mw": 21199.0,
+  "nem": {
+    "years": [
+      {
+        "year": 2026,
+        "ytd_generation_gwh": 28024.9,
+        "full_generation_gwh": 28024.9,
+        "ytd_capacity_factor_pct": 61.2,
+        "full_capacity_factor_pct": 61.2,
+        "ytd_outage_pct": 12.6,
+        "full_outage_pct": 12.6,
+        "ytd_days_covered": 90,
+        "full_days_covered": 90
+      }
+    ]
+  },
+  "by_state": {
+    "NSW": {
+      "capacity_mw": 8240.0,
+      "years": [
+        {
+          "year": 2026,
+          "ytd_generation_gwh": 10387.8,
+          "full_generation_gwh": 10387.8,
+          "ytd_capacity_factor_pct": 58.4,
+          "full_capacity_factor_pct": 58.4,
+          "ytd_outage_pct": 8.8,
+          "full_outage_pct": 8.8,
+          "ytd_days_covered": 90,
+          "full_days_covered": 90
+        }
+      ]
+    },
+    "QLD": {
+      "capacity_mw": 8199.0,
+      "years": [
+        {
+          "year": 2026,
+          "ytd_generation_gwh": 10001.4,
+          "full_generation_gwh": 10001.4,
+          "ytd_capacity_factor_pct": 56.5,
+          "full_capacity_factor_pct": 56.5,
+          "ytd_outage_pct": 14.2,
+          "full_outage_pct": 14.2,
+          "ytd_days_covered": 90,
+          "full_days_covered": 90
+        }
+      ]
+    },
+    "VIC": {
+      "capacity_mw": 4760.0,
+      "years": [
+        {
+          "year": 2026,
+          "ytd_generation_gwh": 7635.6,
+          "full_generation_gwh": 7635.6,
+          "ytd_capacity_factor_pct": 74.3,
+          "full_capacity_factor_pct": 74.3,
+          "ytd_outage_pct": 13.6,
+          "full_outage_pct": 13.6,
+          "ytd_days_covered": 90,
+          "full_days_covered": 90
+        }
+      ]
+    }
+  },
+  "stations": [
+    {
+      "facility_code": "ERARING",
+      "station_name": "Eraring Power Station",
+      "state": "NSW",
+      "owner": "Origin Energy",
+      "fuel": "Black coal",
+      "capacity_mw": 2880,
+      "years": [
+        {
+          "year": 2026,
+          "ytd_generation_gwh": 3700.1,
+          "full_generation_gwh": 3700.1,
+          "ytd_capacity_factor_pct": 59.5,
+          "full_capacity_factor_pct": 59.5,
+          "ytd_outage_pct": 13.9,
+          "full_outage_pct": 13.9,
+          "ytd_days_covered": 90,
+          "full_days_covered": 90
+        }
+      ]
+    },
+    {
+      "facility_code": "BAYSW",
+      "station_name": "Bayswater Power Station",
+      "state": "NSW",
+      "owner": "AGL Energy",
+      "fuel": "Black coal",
+      "capacity_mw": 2640,
+      "years": [
+        {
+          "year": 2026,
+          "ytd_generation_gwh": 3864.0,
+          "full_generation_gwh": 3864.0,
+          "ytd_capacity_factor_pct": 67.8,
+          "full_capacity_factor_pct": 67.8,
+          "ytd_outage_pct": 2.3,
+          "full_outage_pct": 2.3,
+          "ytd_days_covered": 90,
+          "full_days_covered": 90
+        }
+      ]
+    },
+    {
+      "facility_code": "MTPIPER",
+      "station_name": "Mount Piper Power Station",
+      "state": "NSW",
+      "owner": "EnergyAustralia",
+      "fuel": "Black coal",
+      "capacity_mw": 1400,
+      "years": [
+        {
+          "year": 2026,
+          "ytd_generation_gwh": 1447.0,
+          "full_generation_gwh": 1447.0,
+          "ytd_capacity_factor_pct": 47.9,
+          "full_capacity_factor_pct": 47.9,
+          "ytd_outage_pct": 8.4,
+          "full_outage_pct": 8.4,
+          "ytd_days_covered": 90,
+          "full_days_covered": 90
+        }
+      ]
+    },
+    {
+      "facility_code": "VALESP",
+      "station_name": "Vales Point B Power Station",
+      "state": "NSW",
+      "owner": "Delta Electricity",
+      "fuel": "Black coal",
+      "capacity_mw": 1320,
+      "years": [
+        {
+          "year": 2026,
+          "ytd_generation_gwh": 1376.6,
+          "full_generation_gwh": 1376.6,
+          "ytd_capacity_factor_pct": 48.3,
+          "full_capacity_factor_pct": 48.3,
+          "ytd_outage_pct": 12.1,
+          "full_outage_pct": 12.1,
+          "ytd_days_covered": 90,
+          "full_days_covered": 90
+        }
+      ]
+    },
+    {
+      "facility_code": "GSTONE",
+      "station_name": "Gladstone Power Station",
+      "state": "QLD",
+      "owner": "NRG Gladstone Operating Services / Rio Tinto JV",
+      "fuel": "Black coal",
+      "capacity_mw": 1680,
+      "years": [
+        {
+          "year": 2026,
+          "ytd_generation_gwh": 1219.5,
+          "full_generation_gwh": 1219.5,
+          "ytd_capacity_factor_pct": 33.6,
+          "full_capacity_factor_pct": 33.6,
+          "ytd_outage_pct": 41.9,
+          "full_outage_pct": 41.9,
+          "ytd_days_covered": 90,
+          "full_days_covered": 90
+        }
+      ]
+    },
+    {
+      "facility_code": "TARONG",
+      "station_name": "Tarong Power Station",
+      "state": "QLD",
+      "owner": "Stanwell Corporation",
+      "fuel": "Black coal",
+      "capacity_mw": 1400,
+      "years": [
+        {
+          "year": 2026,
+          "ytd_generation_gwh": 1846.2,
+          "full_generation_gwh": 1846.2,
+          "ytd_capacity_factor_pct": 61.1,
+          "full_capacity_factor_pct": 61.1,
+          "ytd_outage_pct": 4.5,
+          "full_outage_pct": 4.5,
+          "ytd_days_covered": 90,
+          "full_days_covered": 90
+        }
+      ]
+    },
+    {
+      "facility_code": "TARONG_N",
+      "station_name": "Tarong North Power Station",
+      "state": "QLD",
+      "owner": "Stanwell Corporation",
+      "fuel": "Black coal",
+      "capacity_mw": 443,
+      "years": [
+        {
+          "year": 2026,
+          "ytd_generation_gwh": 589.5,
+          "full_generation_gwh": 589.5,
+          "ytd_capacity_factor_pct": 61.6,
+          "full_capacity_factor_pct": 61.6,
+          "ytd_outage_pct": 0.0,
+          "full_outage_pct": 0.0,
+          "ytd_days_covered": 90,
+          "full_days_covered": 90
+        }
+      ]
+    },
+    {
+      "facility_code": "CALL_B",
+      "station_name": "Callide B Power Station",
+      "state": "QLD",
+      "owner": "CS Energy",
+      "fuel": "Black coal",
+      "capacity_mw": 700,
+      "years": [
+        {
+          "year": 2026,
+          "ytd_generation_gwh": 1139.0,
+          "full_generation_gwh": 1139.0,
+          "ytd_capacity_factor_pct": 75.3,
+          "full_capacity_factor_pct": 75.3,
+          "ytd_outage_pct": 0.9,
+          "full_outage_pct": 0.9,
+          "ytd_days_covered": 90,
+          "full_days_covered": 90
+        }
+      ]
+    },
+    {
+      "facility_code": "CALL_C",
+      "station_name": "Callide C Power Station",
+      "state": "QLD",
+      "owner": "CS Energy / InterGen JV",
+      "fuel": "Black coal",
+      "capacity_mw": 920,
+      "years": [
+        {
+          "year": 2026,
+          "ytd_generation_gwh": 1238.0,
+          "full_generation_gwh": 1238.0,
+          "ytd_capacity_factor_pct": 62.3,
+          "full_capacity_factor_pct": 62.3,
+          "ytd_outage_pct": 8.0,
+          "full_outage_pct": 8.0,
+          "ytd_days_covered": 90,
+          "full_days_covered": 90
+        }
+      ]
+    },
+    {
+      "facility_code": "KOGANCK",
+      "station_name": "Kogan Creek Power Station",
+      "state": "QLD",
+      "owner": "CS Energy",
+      "fuel": "Black coal",
+      "capacity_mw": 744,
+      "years": [
+        {
+          "year": 2026,
+          "ytd_generation_gwh": 1096.9,
+          "full_generation_gwh": 1096.9,
+          "ytd_capacity_factor_pct": 68.3,
+          "full_capacity_factor_pct": 68.3,
+          "ytd_outage_pct": 19.1,
+          "full_outage_pct": 19.1,
+          "ytd_days_covered": 90,
+          "full_days_covered": 90
+        }
+      ]
+    },
+    {
+      "facility_code": "STANWELL",
+      "station_name": "Stanwell Power Station",
+      "state": "QLD",
+      "owner": "Stanwell Corporation",
+      "fuel": "Black coal",
+      "capacity_mw": 1460,
+      "years": [
+        {
+          "year": 2026,
+          "ytd_generation_gwh": 1459.3,
+          "full_generation_gwh": 1459.3,
+          "ytd_capacity_factor_pct": 46.3,
+          "full_capacity_factor_pct": 46.3,
+          "ytd_outage_pct": 0.0,
+          "full_outage_pct": 0.0,
+          "ytd_days_covered": 90,
+          "full_days_covered": 90
+        }
+      ]
+    },
+    {
+      "facility_code": "MILLMERR",
+      "station_name": "Millmerran Power Station",
+      "state": "QLD",
+      "owner": "InterGen / Shanghai Electric",
+      "fuel": "Black coal",
+      "capacity_mw": 852,
+      "years": [
+        {
+          "year": 2026,
+          "ytd_generation_gwh": 1413.0,
+          "full_generation_gwh": 1413.0,
+          "ytd_capacity_factor_pct": 76.8,
+          "full_capacity_factor_pct": 76.8,
+          "ytd_outage_pct": 2.8,
+          "full_outage_pct": 2.8,
+          "ytd_days_covered": 90,
+          "full_days_covered": 90
+        }
+      ]
+    },
+    {
+      "facility_code": "LYA",
+      "station_name": "Loy Yang A Power Station",
+      "state": "VIC",
+      "owner": "AGL Energy",
+      "fuel": "Brown coal",
+      "capacity_mw": 2210,
+      "years": [
+        {
+          "year": 2026,
+          "ytd_generation_gwh": 3384.4,
+          "full_generation_gwh": 3384.4,
+          "ytd_capacity_factor_pct": 70.9,
+          "full_capacity_factor_pct": 70.9,
+          "ytd_outage_pct": 8.8,
+          "full_outage_pct": 8.8,
+          "ytd_days_covered": 90,
+          "full_days_covered": 90
+        }
+      ]
+    },
+    {
+      "facility_code": "LOYB",
+      "station_name": "Loy Yang B Power Station",
+      "state": "VIC",
+      "owner": "Alinta Energy",
+      "fuel": "Brown coal",
+      "capacity_mw": 1070,
+      "years": [
+        {
+          "year": 2026,
+          "ytd_generation_gwh": 2115.9,
+          "full_generation_gwh": 2115.9,
+          "ytd_capacity_factor_pct": 91.5,
+          "full_capacity_factor_pct": 91.5,
+          "ytd_outage_pct": 0.0,
+          "full_outage_pct": 0.0,
+          "ytd_days_covered": 90,
+          "full_days_covered": 90
+        }
+      ]
+    },
+    {
+      "facility_code": "YWPS",
+      "station_name": "Yallourn Power Station",
+      "state": "VIC",
+      "owner": "EnergyAustralia",
+      "fuel": "Brown coal",
+      "capacity_mw": 1480,
+      "years": [
+        {
+          "year": 2026,
+          "ytd_generation_gwh": 2135.4,
+          "full_generation_gwh": 2135.4,
+          "ytd_capacity_factor_pct": 66.8,
+          "full_capacity_factor_pct": 66.8,
+          "ytd_outage_pct": 25.2,
+          "full_outage_pct": 25.2,
+          "ytd_days_covered": 90,
+          "full_days_covered": 90
+        }
+      ]
+    }
+  ],
+  "source_note": "Latest data: 2026-04-17. YTD window = Jan 1 \u2192 17 Apr (day 107). Years with data: 2026. Backfill prior years with python3 pipeline/importers/import_dispatchload.py --month YYYY-MM to enable same-period cross-year comparison.",
+  "exported_at": "2026-04-17T21:34:29.593507"
+}

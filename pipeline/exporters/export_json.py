@@ -6465,6 +6465,256 @@ def export_coal_outage_dispatch(conn):
           f"dispatch_data={'populated' if has_dispatch_data else 'pending'})")
 
 
+def export_coal_ytd_comparison(conn):
+    """Coal YTD + Same-Period Comparison — v2.29.0.
+
+    Aggregates dispatch_availability 5-min MW into MWh per
+    (year, day-of-year, DUID), then rolls up at NEM / state / station
+    level. Produces two windows per year:
+      - YTD: Jan 1 → cutoff day-of-year (day-of-year of most recent
+        data). Guarantees apples-to-apples comparison between years
+        regardless of how far into the year the latest data extends.
+      - Full year: entire calendar year (for historical years).
+
+    Degrades gracefully when only partial history is present: renders
+    whatever years exist, surfaces days_covered so the UI can indicate
+    partial coverage, and stays silent on prior years not yet
+    backfilled.
+
+    Output: analytics/intelligence/coal-ytd-comparison.json
+    """
+    config_path = os.path.join(os.path.dirname(__file__), '..', 'config', 'coal_stations.json')
+    if not os.path.exists(config_path):
+        print("  coal-ytd-comparison.json skipped (no coal_stations.json config)")
+        return
+
+    with open(config_path) as f:
+        coal_config = json.load(f)
+    stations = coal_config.get('stations', [])
+
+    duid_to_station: dict[str, dict] = {}
+    for s in stations:
+        for duid in s['duids']:
+            duid_to_station[duid.upper()] = s
+
+    row_count = conn.execute("SELECT COUNT(*) FROM dispatch_availability").fetchone()[0]
+    has_data = row_count and row_count > 0
+
+    if not has_data:
+        write_json(os.path.join(INTEL_DIR, 'coal-ytd-comparison.json'), {
+            'has_data': False,
+            'cutoff_date': None,
+            'cutoff_date_label': None,
+            'cutoff_year': None,
+            'cutoff_doy': None,
+            'years_present': [],
+            'has_historical': False,
+            'total_capacity_mw': sum(s['capacity_mw'] for s in stations),
+            'nem': {'years': []},
+            'by_state': {},
+            'stations': [{
+                'facility_code': s['facility_code'],
+                'station_name': s['station_name'],
+                'state': s['state'],
+                'owner': s['owner'],
+                'fuel': s['fuel'],
+                'capacity_mw': s['capacity_mw'],
+                'years': [],
+            } for s in stations],
+            'source_note': (
+                'No dispatch data ingested yet. Run '
+                'python3 pipeline/importers/import_dispatchload.py --days 90 '
+                'to populate the current-year view, or --month YYYY-MM per month '
+                'to backfill prior years.'
+            ),
+            'exported_at': datetime.now().isoformat(),
+        })
+        print("  analytics/intelligence/coal-ytd-comparison.json (no data — framework only)")
+        return
+
+    most_recent = conn.execute("SELECT MAX(settlement_date) FROM dispatch_availability").fetchone()[0]
+    most_recent_date_str = most_recent[:10].replace('/', '-')
+    cutoff_dt = datetime.strptime(most_recent_date_str, '%Y-%m-%d')
+    cutoff_doy = cutoff_dt.timetuple().tm_yday
+    cutoff_year = cutoff_dt.year
+    cutoff_date_label = cutoff_dt.strftime('%-d %b')
+
+    rows = conn.execute("""
+        SELECT
+          CAST(SUBSTR(settlement_date, 1, 4) AS INTEGER) AS yr,
+          CAST(strftime('%j', REPLACE(SUBSTR(settlement_date, 1, 10), '/', '-')) AS INTEGER) AS doy,
+          duid,
+          SUM(COALESCE(total_cleared_mw, 0)) / 12.0 AS gen_mwh,
+          SUM(COALESCE(availability_mw, 0)) / 12.0 AS avail_mwh,
+          SUM(CASE WHEN dispatch_mode = 'outage' THEN 1 ELSE 0 END) AS outage_intervals,
+          COUNT(*) AS total_intervals
+        FROM dispatch_availability
+        GROUP BY yr, doy, duid
+    """).fetchall()
+
+    station_year: dict[str, dict[int, dict]] = defaultdict(lambda: defaultdict(lambda: {
+        'ytd_gen_mwh': 0.0, 'full_gen_mwh': 0.0,
+        'ytd_avail_mwh': 0.0, 'full_avail_mwh': 0.0,
+        'ytd_outage_intervals': 0, 'full_outage_intervals': 0,
+        'ytd_total_intervals': 0, 'full_total_intervals': 0,
+        'ytd_days': set(), 'full_days': set(),
+    }))
+
+    for r in rows:
+        yr, doy, duid, gen, avail, out_int, tot_int = r[0], r[1], r[2], r[3], r[4], r[5], r[6]
+        station = duid_to_station.get((duid or '').upper())
+        if not station:
+            continue
+        b = station_year[station['facility_code']][yr]
+        b['full_gen_mwh'] += gen or 0
+        b['full_avail_mwh'] += avail or 0
+        b['full_outage_intervals'] += out_int or 0
+        b['full_total_intervals'] += tot_int or 0
+        b['full_days'].add(doy)
+        if doy is not None and doy <= cutoff_doy:
+            b['ytd_gen_mwh'] += gen or 0
+            b['ytd_avail_mwh'] += avail or 0
+            b['ytd_outage_intervals'] += out_int or 0
+            b['ytd_total_intervals'] += tot_int or 0
+            b['ytd_days'].add(doy)
+
+    all_years = sorted({yr for buckets in station_year.values() for yr in buckets.keys()})
+
+    stations_out = []
+    for station in stations:
+        fc = station['facility_code']
+        cap = station['capacity_mw']
+        year_rows = []
+        for yr in all_years:
+            b = station_year.get(fc, {}).get(yr)
+            if not b or (not b['ytd_total_intervals'] and not b['full_total_intervals']):
+                continue
+            ytd_days = len(b['ytd_days'])
+            full_days = len(b['full_days'])
+            ytd_hours = ytd_days * 24
+            full_hours = full_days * 24
+            year_rows.append({
+                'year': yr,
+                'ytd_generation_gwh': round(b['ytd_gen_mwh'] / 1000, 1),
+                'full_generation_gwh': round(b['full_gen_mwh'] / 1000, 1),
+                'ytd_capacity_factor_pct': round(b['ytd_gen_mwh'] / (cap * ytd_hours) * 100, 1) if cap and ytd_hours else None,
+                'full_capacity_factor_pct': round(b['full_gen_mwh'] / (cap * full_hours) * 100, 1) if cap and full_hours else None,
+                'ytd_outage_pct': round(b['ytd_outage_intervals'] / b['ytd_total_intervals'] * 100, 1) if b['ytd_total_intervals'] else None,
+                'full_outage_pct': round(b['full_outage_intervals'] / b['full_total_intervals'] * 100, 1) if b['full_total_intervals'] else None,
+                'ytd_days_covered': ytd_days,
+                'full_days_covered': full_days,
+            })
+        stations_out.append({
+            'facility_code': fc,
+            'station_name': station['station_name'],
+            'state': station['state'],
+            'owner': station['owner'],
+            'fuel': station['fuel'],
+            'capacity_mw': cap,
+            'years': year_rows,
+        })
+
+    state_caps: dict[str, float] = defaultdict(float)
+    for s in stations:
+        state_caps[s['state']] += s['capacity_mw']
+    nem_cap = sum(state_caps.values())
+
+    state_year: dict[str, dict[int, dict]] = defaultdict(lambda: defaultdict(lambda: {
+        'ytd_gen_mwh': 0.0, 'full_gen_mwh': 0.0,
+        'ytd_outage_intervals': 0, 'full_outage_intervals': 0,
+        'ytd_total_intervals': 0, 'full_total_intervals': 0,
+        'ytd_days_max': 0, 'full_days_max': 0,
+    }))
+    nem_year: dict[int, dict] = defaultdict(lambda: {
+        'ytd_gen_mwh': 0.0, 'full_gen_mwh': 0.0,
+        'ytd_outage_intervals': 0, 'full_outage_intervals': 0,
+        'ytd_total_intervals': 0, 'full_total_intervals': 0,
+        'ytd_days_max': 0, 'full_days_max': 0,
+    })
+
+    for station in stations:
+        state = station['state']
+        for yr, b in station_year.get(station['facility_code'], {}).items():
+            sy = state_year[state][yr]
+            sy['ytd_gen_mwh'] += b['ytd_gen_mwh']
+            sy['full_gen_mwh'] += b['full_gen_mwh']
+            sy['ytd_outage_intervals'] += b['ytd_outage_intervals']
+            sy['full_outage_intervals'] += b['full_outage_intervals']
+            sy['ytd_total_intervals'] += b['ytd_total_intervals']
+            sy['full_total_intervals'] += b['full_total_intervals']
+            sy['ytd_days_max'] = max(sy['ytd_days_max'], len(b['ytd_days']))
+            sy['full_days_max'] = max(sy['full_days_max'], len(b['full_days']))
+
+            ny = nem_year[yr]
+            ny['ytd_gen_mwh'] += b['ytd_gen_mwh']
+            ny['full_gen_mwh'] += b['full_gen_mwh']
+            ny['ytd_outage_intervals'] += b['ytd_outage_intervals']
+            ny['full_outage_intervals'] += b['full_outage_intervals']
+            ny['ytd_total_intervals'] += b['ytd_total_intervals']
+            ny['full_total_intervals'] += b['full_total_intervals']
+            ny['ytd_days_max'] = max(ny['ytd_days_max'], len(b['ytd_days']))
+            ny['full_days_max'] = max(ny['full_days_max'], len(b['full_days']))
+
+    def build_year_rows(year_data, cap_mw):
+        out = []
+        for yr in sorted(year_data.keys()):
+            d = year_data[yr]
+            ytd_hours = d['ytd_days_max'] * 24
+            full_hours = d['full_days_max'] * 24
+            out.append({
+                'year': yr,
+                'ytd_generation_gwh': round(d['ytd_gen_mwh'] / 1000, 1),
+                'full_generation_gwh': round(d['full_gen_mwh'] / 1000, 1),
+                'ytd_capacity_factor_pct': round(d['ytd_gen_mwh'] / (cap_mw * ytd_hours) * 100, 1) if cap_mw and ytd_hours else None,
+                'full_capacity_factor_pct': round(d['full_gen_mwh'] / (cap_mw * full_hours) * 100, 1) if cap_mw and full_hours else None,
+                'ytd_outage_pct': round(d['ytd_outage_intervals'] / d['ytd_total_intervals'] * 100, 1) if d['ytd_total_intervals'] else None,
+                'full_outage_pct': round(d['full_outage_intervals'] / d['full_total_intervals'] * 100, 1) if d['full_total_intervals'] else None,
+                'ytd_days_covered': d['ytd_days_max'],
+                'full_days_covered': d['full_days_max'],
+            })
+        return out
+
+    states_out = {}
+    for state, year_data in state_year.items():
+        states_out[state] = {
+            'capacity_mw': state_caps[state],
+            'years': build_year_rows(year_data, state_caps[state]),
+        }
+
+    nem_years_out = build_year_rows(nem_year, nem_cap)
+
+    has_historical = len(all_years) > 1
+    note_extra = ''
+    if not has_historical:
+        note_extra = (
+            ' Backfill prior years with '
+            'python3 pipeline/importers/import_dispatchload.py --month YYYY-MM '
+            'to enable same-period cross-year comparison.'
+        )
+
+    write_json(os.path.join(INTEL_DIR, 'coal-ytd-comparison.json'), {
+        'has_data': True,
+        'cutoff_date': most_recent_date_str,
+        'cutoff_date_label': cutoff_date_label,
+        'cutoff_year': cutoff_year,
+        'cutoff_doy': cutoff_doy,
+        'years_present': all_years,
+        'has_historical': has_historical,
+        'total_capacity_mw': nem_cap,
+        'nem': {'years': nem_years_out},
+        'by_state': states_out,
+        'stations': stations_out,
+        'source_note': (
+            f'Latest data: {most_recent_date_str}. YTD window = Jan 1 → {cutoff_date_label} '
+            f'(day {cutoff_doy}). Years with data: {", ".join(str(y) for y in all_years)}.'
+            + note_extra
+        ),
+        'exported_at': datetime.now().isoformat(),
+    })
+    print(f"  analytics/intelligence/coal-ytd-comparison.json "
+          f"(years={all_years}, cutoff_doy={cutoff_doy}, stations={len([s for s in stations_out if s['years']])})")
+
+
 def export_battery_live_records(conn):
     """Battery Records & Live Activity — v2.28.0.
 
@@ -6620,6 +6870,7 @@ def export_intelligence(conn):
     export_concentration_risk(conn)
     export_scheme_win_probability(conn)
     export_coal_outage_dispatch(conn)
+    export_coal_ytd_comparison(conn)
     export_battery_live_records(conn)
     export_dunkelflaute(conn)
     export_energy_mix(conn)
