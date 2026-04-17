@@ -1542,6 +1542,38 @@ def export_data_sources(conn):
             'script': 'web_research.py',
         },
         {
+            'id': 'nemweb_bids',
+            'name': 'NEMWEB BESS Bids',
+            'description': 'AEMO NEMWEB daily bid data for BESS fleet — 10 price bands × direction per DUID per day. Powers the BESS Bidding intelligence page and quartile benchmarks.',
+            'url': 'https://nemweb.com.au',
+            'frequency': 'daily',
+            'script': 'import_nemweb_bids.py',
+        },
+        {
+            'id': 'news_rss',
+            'name': 'News RSS',
+            'description': 'RSS feeds from RenewEconomy, PV Magazine, and Energy Storage News — sourced daily for the News feed and NEM Activities timeline.',
+            'url': 'https://reneweconomy.com.au',
+            'frequency': 'daily',
+            'script': 'import_news_rss.py',
+        },
+        {
+            'id': 'aemo_isp_rez',
+            'name': 'AEMO ISP REZ',
+            'description': 'Renewable Energy Zone hosting and connection capacity from the AEMO Integrated System Plan. Powers REZ comparison and grid-connection analysis.',
+            'url': 'https://aemo.com.au/energy-systems/major-publications/integrated-system-plan-isp',
+            'frequency': 'yearly',
+            'script': 'import_aemo_isp.py',
+        },
+        {
+            'id': 'market_prices',
+            'name': 'AEMO Market Prices',
+            'description': 'Regional reference prices from AEMO dispatch, used as the revenue backstop when OpenElectricity data is incomplete.',
+            'url': 'https://aemo.com.au',
+            'frequency': 'monthly',
+            'script': 'import_market_prices.py',
+        },
+        {
             'id': 'json_export',
             'name': 'JSON Export',
             'description': 'Static JSON export of all database tables for the frontend application.',
@@ -1600,6 +1632,50 @@ def export_data_sources(conn):
         """).fetchone()
         if r and r['cnt'] > 0:
             data_evidence['epbc_referrals'] = {'records': r['cnt'], 'latest': r['latest']}
+    except Exception:
+        pass
+
+    # Detect NEMWEB bid freshness from settlement_date (the date the bid was for)
+    try:
+        r = conn.execute("""
+            SELECT COUNT(*) as cnt, MAX(settlement_date) as latest FROM bess_daily_bids
+        """).fetchone()
+        if r and r['cnt'] > 0:
+            data_evidence['nemweb_bids'] = {'records': r['cnt'], 'latest': r['latest']}
+    except Exception:
+        pass
+
+    # News RSS freshness from published_date
+    try:
+        r = conn.execute("""
+            SELECT COUNT(*) as cnt, MAX(published_date) as latest FROM news_articles
+        """).fetchone()
+        if r and r['cnt'] > 0:
+            data_evidence['news_rss'] = {'records': r['cnt'], 'latest': r['latest']}
+    except Exception:
+        pass
+
+    # AEMO ISP REZ — detect via max isp_year
+    try:
+        r = conn.execute("""
+            SELECT COUNT(*) as cnt, MAX(isp_year) as year FROM rez_isp_data
+        """).fetchone()
+        if r and r['cnt'] > 0 and r['year']:
+            # Treat as "latest = January of ISP year + 1" (ISP is published annually)
+            data_evidence['aemo_isp_rez'] = {
+                'records': r['cnt'],
+                'latest': f"{r['year']}-01-01T00:00:00",
+            }
+    except Exception:
+        pass
+
+    # Market prices — check market_prices table if it exists
+    try:
+        r = conn.execute("""
+            SELECT COUNT(*) as cnt, MAX(settlement_date) as latest FROM market_prices
+        """).fetchone()
+        if r and r['cnt'] > 0:
+            data_evidence['market_prices'] = {'records': r['cnt'], 'latest': r['latest']}
     except Exception:
         pass
 
