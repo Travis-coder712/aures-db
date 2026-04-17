@@ -10,6 +10,7 @@ import EnergyTransitionSimulator from '../../components/intelligence/EnergyTrans
 import GenerationStack from '../../components/intelligence/GenerationStack'
 import CapacityWatch from '../../components/intelligence/CapacityWatch'
 import CoalWatch from '../../components/intelligence/CoalWatch'
+import EnergyTransition from '../../components/intelligence/EnergyTransition'
 import WattClarity from '../../components/intelligence/WattClarity'
 import DataProvenance from '../../components/common/DataProvenance'
 
@@ -79,14 +80,21 @@ const WattClarityIcon = () => (
   </svg>
 )
 
+const ScoreboardIcon = () => (
+  <svg className="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
+    <path d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5zm5-5a1 1 0 011-1h2a1 1 0 011 1v10a1 1 0 01-1 1H8a1 1 0 01-1-1V6zm5-3a1 1 0 011-1h2a1 1 0 011 1v13a1 1 0 01-1 1h-2a1 1 0 01-1-1V3z" />
+  </svg>
+)
+
 // ============================================================
 // Tab types and config — defined AFTER icons
 // ============================================================
 
-type TabId = 'simulator' | 'generation-stack' | 'battery-watch' | 'coal-watch' | 'watt-clarity' | 'current-mix'
+type TabId = 'simulator' | 'transition-scoreboard' | 'generation-stack' | 'battery-watch' | 'coal-watch' | 'watt-clarity' | 'current-mix'
 
 const TABS: { id: TabId; label: string; icon: React.ReactNode }[] = [
   { id: 'simulator', label: 'Simulator', icon: <SimulatorIcon /> },
+  { id: 'transition-scoreboard', label: 'Transition Scoreboard', icon: <ScoreboardIcon /> },
   { id: 'generation-stack', label: 'Generation Stack', icon: <StackIcon /> },
   { id: 'battery-watch', label: 'Capacity Watch', icon: <BatteryIcon /> },
   { id: 'coal-watch', label: 'Coal Watch', icon: <CoalIcon /> },
@@ -327,6 +335,8 @@ export default function EnergyMix() {
 
       {/* ─── Simulator Tab ─── */}
       {activeTab === 'simulator' && <EnergyTransitionSimulator />}
+
+      {activeTab === 'transition-scoreboard' && <EnergyTransition />}
 
       {/* ─── Generation Stack Tab ─── */}
       {activeTab === 'generation-stack' && <GenerationStack />}

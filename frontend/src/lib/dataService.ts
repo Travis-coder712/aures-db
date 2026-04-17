@@ -610,6 +610,21 @@ export async function fetchCoalYtdComparison(): Promise<any | null> {
   } catch { return null }
 }
 
+// Energy Transition Scoreboard — YoY coal vs wind/solar/BESS per region with
+// YTD and full-year windows (v2.30.0).
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+let energyTransitionCache: any | null = null
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export async function fetchEnergyTransition(): Promise<any | null> {
+  if (energyTransitionCache) return energyTransitionCache
+  try {
+    const resp = await fetch(`${BASE}/analytics/intelligence/energy-transition.json`)
+    if (!resp.ok) return null
+    energyTransitionCache = await resp.json()
+    return energyTransitionCache
+  } catch { return null }
+}
+
 // Supply Chain Concentration Risk — dominance cells, at-risk OEM projects,
 // dev×OEM single points of failure (T3.I).
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
