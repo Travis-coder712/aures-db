@@ -594,6 +594,22 @@ export async function fetchCoalOutageDispatch(): Promise<any | null> {
   } catch { return null }
 }
 
+// Coal YTD + Same-Period Comparison — per-year aggregates from
+// dispatch_availability with YTD (Jan 1 → cutoff day-of-year) and
+// full-year modes for apples-to-apples cross-year comparison (v2.29.0).
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+let coalYtdComparisonCache: any | null = null
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export async function fetchCoalYtdComparison(): Promise<any | null> {
+  if (coalYtdComparisonCache) return coalYtdComparisonCache
+  try {
+    const resp = await fetch(`${BASE}/analytics/intelligence/coal-ytd-comparison.json`)
+    if (!resp.ok) return null
+    coalYtdComparisonCache = await resp.json()
+    return coalYtdComparisonCache
+  } catch { return null }
+}
+
 // Supply Chain Concentration Risk — dominance cells, at-risk OEM projects,
 // dev×OEM single points of failure (T3.I).
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

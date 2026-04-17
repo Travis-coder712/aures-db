@@ -4,7 +4,7 @@ import {
   ResponsiveContainer, LineChart, Line, AreaChart, Area,
   Legend,
 } from 'recharts'
-import { fetchCoalWatch, fetchCoalOutageDispatch } from '../../lib/dataService'
+import { fetchCoalWatch, fetchCoalOutageDispatch, fetchCoalYtdComparison } from '../../lib/dataService'
 import type { CoalWatchData, CoalPlant } from '../../lib/types'
 
 // Outage/Dispatch data shape
@@ -108,7 +108,48 @@ function formatAUD(m: number): string {
 // Section types
 // ============================================================
 
-type SectionId = 'overview' | 'plant-profiles' | 'revenue' | 'seasonal' | 'closure-timeline' | 'outage-dispatch'
+type SectionId = 'overview' | 'ytd-comparison' | 'plant-profiles' | 'revenue' | 'seasonal' | 'closure-timeline' | 'outage-dispatch'
+
+// YTD comparison data shape (from coal-ytd-comparison.json)
+interface CoalYtdYearRow {
+  year: number
+  ytd_generation_gwh: number
+  full_generation_gwh: number
+  ytd_capacity_factor_pct: number | null
+  full_capacity_factor_pct: number | null
+  ytd_outage_pct: number | null
+  full_outage_pct: number | null
+  ytd_days_covered: number
+  full_days_covered: number
+}
+
+interface CoalYtdStation {
+  facility_code: string
+  station_name: string
+  state: string
+  owner: string
+  fuel: string
+  capacity_mw: number
+  years: CoalYtdYearRow[]
+}
+
+interface CoalYtdComparison {
+  has_data: boolean
+  cutoff_date: string | null
+  cutoff_date_label: string | null
+  cutoff_year: number | null
+  cutoff_doy: number | null
+  years_present: number[]
+  has_historical: boolean
+  total_capacity_mw: number
+  nem: { years: CoalYtdYearRow[] }
+  by_state: Record<string, { capacity_mw: number; years: CoalYtdYearRow[] }>
+  stations: CoalYtdStation[]
+  source_note: string
+}
+
+type YtdMode = 'ytd' | 'full'
+type YtdScope = 'NEM' | 'NSW' | 'QLD' | 'VIC'
 
 // ============================================================
 // Stat Card
@@ -505,10 +546,15 @@ export default function CoalWatch() {
   const [activeSection, setActiveSection] = useState<SectionId>('overview')
   const [seasonalYear, setSeasonalYear] = useState(2025)
   const [outageData, setOutageData] = useState<CoalOutageDispatch | null>(null)
+  const [ytdData, setYtdData] = useState<CoalYtdComparison | null>(null)
+  const [ytdScope, setYtdScope] = useState<YtdScope>('NEM')
+  const [ytdMode, setYtdMode] = useState<YtdMode | null>(null)
+  const [ytdYear, setYtdYear] = useState<number | null>(null)
 
   useEffect(() => {
     fetchCoalWatch().then(d => { setData(d); setLoading(false) })
     fetchCoalOutageDispatch().then(d => setOutageData(d))
+    fetchCoalYtdComparison().then(d => setYtdData(d))
   }, [])
 
   const totalGen2025 = useMemo(() =>
@@ -539,6 +585,7 @@ export default function CoalWatch() {
 
   const SECTIONS: { id: SectionId; label: string }[] = [
     { id: 'overview', label: 'Overview' },
+    { id: 'ytd-comparison', label: 'YTD Comparison' },
     { id: 'plant-profiles', label: 'Plant Profiles' },
     { id: 'revenue', label: 'Revenue Watch' },
     { id: 'seasonal', label: 'Seasonal' },
@@ -640,6 +687,19 @@ export default function CoalWatch() {
             </div>
           </div>
         </div>
+      )}
+
+      {/* ─── YTD COMPARISON ─── */}
+      {activeSection === 'ytd-comparison' && (
+        <YtdComparisonSection
+          ytdData={ytdData}
+          scope={ytdScope}
+          setScope={setYtdScope}
+          mode={ytdMode}
+          setMode={setYtdMode}
+          featuredYear={ytdYear}
+          setFeaturedYear={setYtdYear}
+        />
       )}
 
       {/* ─── PLANT PROFILES ─── */}
@@ -999,6 +1059,315 @@ export default function CoalWatch() {
     </div>
   )
 }
+
+// =====================================================================
+// YTD + Same-Period comparison section (v2.29.0)
+// =====================================================================
+
+function YtdComparisonSection({
+  ytdData, scope, setScope, mode, setMode, featuredYear, setFeaturedYear,
+}: {
+  ytdData: CoalYtdComparison | null
+  scope: YtdScope
+  setScope: (s: YtdScope) => void
+  mode: YtdMode | null
+  setMode: (m: YtdMode) => void
+  featuredYear: number | null
+  setFeaturedYear: (y: number) => void
+}) {
+  if (!ytdData) {
+    return (
+      <div className="rounded-lg p-8 text-center" style={{ background: '#1e293b', border: '1px solid #334155' }}>
+        <p style={{ color: '#94a3b8' }}>Loading YTD comparison data…</p>
+      </div>
+    )
+  }
+
+  if (!ytdData.has_data) {
+    return (
+      <div className="rounded-lg p-6" style={{ background: '#2c2416', border: '1px solid #f59e0b40' }}>
+        <h3 className="text-sm font-semibold mb-2" style={{ color: '#fbbf24' }}>No dispatch data yet</h3>
+        <p className="text-xs" style={{ color: '#cbd5e1' }}>{ytdData.source_note}</p>
+      </div>
+    )
+  }
+
+  const years = ytdData.years_present.slice().sort()
+  const cutoffYear = ytdData.cutoff_year
+  const selectedYear = featuredYear ?? cutoffYear ?? years[years.length - 1]
+  // Auto-default mode: YTD when viewing the in-progress year, Full-year
+  // when viewing a historical year. User can still override explicitly.
+  const autoMode: YtdMode = selectedYear === cutoffYear ? 'ytd' : 'full'
+  const effectiveMode: YtdMode = mode ?? autoMode
+
+  const scopeYears =
+    scope === 'NEM'
+      ? ytdData.nem.years
+      : (ytdData.by_state[scope]?.years ?? [])
+  const scopeCap =
+    scope === 'NEM'
+      ? ytdData.total_capacity_mw
+      : (ytdData.by_state[scope]?.capacity_mw ?? 0)
+
+  const genKey = effectiveMode === 'ytd' ? 'ytd_generation_gwh' : 'full_generation_gwh'
+  const cfKey = effectiveMode === 'ytd' ? 'ytd_capacity_factor_pct' : 'full_capacity_factor_pct'
+  const outKey = effectiveMode === 'ytd' ? 'ytd_outage_pct' : 'full_outage_pct'
+  const daysKey = effectiveMode === 'ytd' ? 'ytd_days_covered' : 'full_days_covered'
+
+  const stateOrder: YtdScope[] = ['NEM', 'NSW', 'QLD', 'VIC']
+  const availableScopes = stateOrder.filter(s =>
+    s === 'NEM' ? true : !!ytdData.by_state[s]
+  )
+
+  const currentYearRow =
+    selectedYear != null
+      ? scopeYears.find(y => y.year === selectedYear) ?? null
+      : null
+
+  const priorYearRow =
+    selectedYear != null
+      ? scopeYears.find(y => y.year === selectedYear - 1) ?? null
+      : null
+
+  const stationChartData = (ytdData.stations || [])
+    .filter(s => (scope === 'NEM' ? true : s.state === scope))
+    .map(s => {
+      const row = s.years.find(y => y.year === selectedYear)
+      return {
+        facility: s.facility_code,
+        name: s.station_name.replace(' Power Station', ''),
+        gwh: row ? (row[genKey] as number) : 0,
+        cf: row ? (row[cfKey] as number | null) : null,
+        capacity_mw: s.capacity_mw,
+      }
+    })
+    .sort((a, b) => b.gwh - a.gwh)
+
+  return (
+    <div className="space-y-6">
+      {/* Explainer banner */}
+      <div className="rounded-lg p-5" style={{ background: 'linear-gradient(135deg, #1e3a8a 0%, #1e293b 100%)', border: '1px solid #334155' }}>
+        <h3 className="text-lg font-semibold mb-2" style={{ color: '#f1f5f9' }}>
+          Apples-to-apples — YTD vs Same Period
+        </h3>
+        <p className="text-sm" style={{ color: '#cbd5e1' }}>
+          Comparing a partial current year to a full prior year misleads. This view aggregates coal
+          dispatch strictly within the same calendar window across years:
+          <strong style={{ color: '#f1f5f9' }}> Jan 1 → {ytdData.cutoff_date_label}</strong> (day {ytdData.cutoff_doy}).
+          Prior years show the same window only — the rest of each calendar year is ignored in YTD mode.
+        </p>
+      </div>
+
+      {/* Controls */}
+      <div className="rounded-lg p-4" style={{ background: '#1e293b', border: '1px solid #334155' }}>
+        <div className="flex flex-wrap items-center gap-4">
+          {/* Scope pills */}
+          <div className="flex flex-col gap-1">
+            <span className="text-xs uppercase tracking-wider" style={{ color: '#94a3b8' }}>Scope</span>
+            <div className="flex flex-wrap gap-2">
+              {availableScopes.map(s => (
+                <button
+                  key={s}
+                  onClick={() => setScope(s)}
+                  className="px-3 py-1.5 rounded-md text-sm font-medium transition-colors"
+                  style={{
+                    background: scope === s ? '#3b82f620' : '#0f172a',
+                    color: scope === s ? '#60a5fa' : '#94a3b8',
+                    border: `1px solid ${scope === s ? '#3b82f640' : '#334155'}`,
+                  }}
+                >{s}</button>
+              ))}
+            </div>
+          </div>
+          {/* Year pills */}
+          <div className="flex flex-col gap-1">
+            <span className="text-xs uppercase tracking-wider" style={{ color: '#94a3b8' }}>Year</span>
+            <div className="flex flex-wrap gap-2">
+              {years.map(y => (
+                <button
+                  key={y}
+                  onClick={() => { setFeaturedYear(y); setMode(y === cutoffYear ? 'ytd' : 'full') }}
+                  className="px-3 py-1.5 rounded-md text-sm font-medium transition-colors"
+                  style={{
+                    background: selectedYear === y ? '#10b98120' : '#0f172a',
+                    color: selectedYear === y ? '#10b981' : '#94a3b8',
+                    border: `1px solid ${selectedYear === y ? '#10b98140' : '#334155'}`,
+                  }}
+                >
+                  {y}{y === cutoffYear ? ' ·' : ''}
+                </button>
+              ))}
+            </div>
+          </div>
+          {/* Mode toggle */}
+          <div className="flex flex-col gap-1">
+            <span className="text-xs uppercase tracking-wider" style={{ color: '#94a3b8' }}>Window</span>
+            <div className="flex gap-2">
+              {(['ytd', 'full'] as YtdMode[]).map(m => (
+                <button
+                  key={m}
+                  onClick={() => setMode(m)}
+                  className="px-3 py-1.5 rounded-md text-sm font-medium transition-colors"
+                  style={{
+                    background: effectiveMode === m ? '#ef444420' : '#0f172a',
+                    color: effectiveMode === m ? '#ef4444' : '#94a3b8',
+                    border: `1px solid ${effectiveMode === m ? '#ef444440' : '#334155'}`,
+                  }}
+                >
+                  {m === 'ytd'
+                    ? `YTD (to ${ytdData.cutoff_date_label})`
+                    : 'Full calendar year'}
+                </button>
+              ))}
+            </div>
+          </div>
+          <div className="flex flex-col gap-1 ml-auto">
+            <span className="text-xs uppercase tracking-wider" style={{ color: '#94a3b8' }}>Fleet capacity</span>
+            <span className="text-sm font-medium" style={{ color: '#f1f5f9' }}>
+              {(scopeCap / 1000).toFixed(1)} GW
+            </span>
+          </div>
+        </div>
+      </div>
+
+      {/* Headline stat cards for the current year */}
+      {currentYearRow ? (
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+          <StatCard
+            label={`${selectedYear} ${effectiveMode === 'ytd' ? 'YTD' : 'Full-yr'} Generation`}
+            value={formatGWh(currentYearRow[genKey] as number)}
+            sub={`${currentYearRow[daysKey]} days covered`}
+            colour="#ef4444"
+          />
+          <StatCard
+            label="Capacity factor"
+            value={currentYearRow[cfKey] != null ? `${(currentYearRow[cfKey] as number).toFixed(1)}%` : '—'}
+            sub={`Over ${scope === 'NEM' ? 'NEM coal fleet' : `${scope} coal`}`}
+            colour="#f59e0b"
+          />
+          <StatCard
+            label="Outage share"
+            value={currentYearRow[outKey] != null ? `${(currentYearRow[outKey] as number).toFixed(1)}%` : '—'}
+            sub="Intervals at < 20% availability"
+            colour="#fbbf24"
+          />
+          <StatCard
+            label="vs prior year"
+            value={
+              priorYearRow && (priorYearRow[genKey] as number) > 0
+                ? `${(((currentYearRow[genKey] as number) - (priorYearRow[genKey] as number)) / (priorYearRow[genKey] as number) * 100).toFixed(1)}%`
+                : '—'
+            }
+            sub={priorYearRow ? `vs ${priorYearRow.year} same window` : 'no prior-year data yet'}
+            colour="#10b981"
+            trend={
+              priorYearRow && (priorYearRow[genKey] as number) > 0
+                ? ((currentYearRow[genKey] as number) < (priorYearRow[genKey] as number) ? 'down' : 'up')
+                : undefined
+            }
+          />
+        </div>
+      ) : (
+        <div className="rounded-lg p-4" style={{ background: '#1e293b', border: '1px solid #334155' }}>
+          <p className="text-sm" style={{ color: '#94a3b8' }}>No data for {selectedYear} yet at this scope.</p>
+        </div>
+      )}
+
+      {/* Year comparison table */}
+      <div className="rounded-lg p-4" style={{ background: '#1e293b', border: '1px solid #334155' }}>
+        <h3 className="text-sm font-semibold mb-1" style={{ color: '#f1f5f9' }}>
+          {scope} — Year-over-year, {effectiveMode === 'ytd' ? `YTD through ${ytdData.cutoff_date_label}` : 'full calendar year'}
+        </h3>
+        <p className="text-xs mb-3" style={{ color: '#94a3b8' }}>
+          {ytdData.has_historical
+            ? 'Prior-year rows are restricted to the same day-of-year window for apples-to-apples comparison.'
+            : 'Only one year of dispatch data is present. Prior years will populate once MMSDM backfill is run.'}
+        </p>
+        <div style={{ overflowX: 'auto' }}>
+          <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+            <thead>
+              <tr style={{ background: '#0f172a' }}>
+                {['Year', 'Generation', 'CF%', 'Outage %', 'Days covered'].map(h => (
+                  <th key={h} style={{
+                    color: '#94a3b8', fontSize: 11, textTransform: 'uppercase',
+                    letterSpacing: '0.05em', padding: '8px 12px',
+                    borderBottom: '1px solid #334155',
+                    textAlign: h === 'Year' ? 'left' : 'right',
+                  }}>{h}</th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {[...scopeYears].sort((a, b) => b.year - a.year).map(row => {
+                const gwh = row[genKey] as number
+                const cf = row[cfKey] as number | null
+                const out = row[outKey] as number | null
+                const days = row[daysKey] as number
+                const isCurrent = row.year === selectedYear
+                return (
+                  <tr key={row.year} style={{ background: isCurrent ? '#3b82f615' : '#1e293b' }}>
+                    <td style={{ padding: '8px 12px', borderBottom: '1px solid #0f172a', color: '#f1f5f9', fontSize: 13, fontWeight: isCurrent ? 600 : 400 }}>
+                      {row.year} {isCurrent && <span style={{ color: '#60a5fa', fontSize: 10 }}>(selected)</span>}
+                      {row.year === cutoffYear && row.year !== selectedYear && <span style={{ color: '#94a3b8', fontSize: 10 }}>(latest)</span>}
+                    </td>
+                    <td style={{ padding: '8px 12px', borderBottom: '1px solid #0f172a', color: '#f1f5f9', fontSize: 13, textAlign: 'right', fontVariantNumeric: 'tabular-nums' }}>
+                      {formatGWh(gwh)}
+                    </td>
+                    <td style={{ padding: '8px 12px', borderBottom: '1px solid #0f172a', color: '#f1f5f9', fontSize: 13, textAlign: 'right', fontVariantNumeric: 'tabular-nums' }}>
+                      {cf != null ? `${cf.toFixed(1)}%` : '—'}
+                    </td>
+                    <td style={{ padding: '8px 12px', borderBottom: '1px solid #0f172a', color: '#fbbf24', fontSize: 13, textAlign: 'right', fontVariantNumeric: 'tabular-nums' }}>
+                      {out != null ? `${out.toFixed(1)}%` : '—'}
+                    </td>
+                    <td style={{ padding: '8px 12px', borderBottom: '1px solid #0f172a', color: '#94a3b8', fontSize: 13, textAlign: 'right', fontVariantNumeric: 'tabular-nums' }}>
+                      {days}
+                    </td>
+                  </tr>
+                )
+              })}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      {/* Station breakdown for selected scope */}
+      {stationChartData.length > 0 && (
+        <div className="rounded-lg p-4" style={{ background: '#1e293b', border: '1px solid #334155' }}>
+          <h3 className="text-sm font-semibold mb-1" style={{ color: '#f1f5f9' }}>
+            Station breakdown — {selectedYear} {effectiveMode === 'ytd' ? `YTD (Jan-${ytdData.cutoff_date_label})` : 'full year'}
+          </h3>
+          <p className="text-xs mb-3" style={{ color: '#94a3b8' }}>
+            {scope === 'NEM' ? 'All NEM coal stations' : `${scope} coal stations`} ranked by generation in the selected window.
+          </p>
+          <div style={{ width: '100%', height: Math.max(260, stationChartData.length * 28 + 60) }}>
+            <ResponsiveContainer>
+              <BarChart data={stationChartData} layout="vertical" margin={{ top: 10, right: 30, left: 80, bottom: 10 }}>
+                <CartesianGrid strokeDasharray="3 3" stroke="#334155" />
+                <XAxis type="number" tick={{ fill: '#94a3b8', fontSize: 11 }} stroke="#334155" tickFormatter={(v) => formatGWh(v as number)} />
+                <YAxis type="category" dataKey="name" tick={{ fill: '#94a3b8', fontSize: 11 }} stroke="#334155" width={80} />
+                <Tooltip
+                  contentStyle={{ background: '#1e293b', border: '1px solid #334155', borderRadius: 8, color: '#f1f5f9' }}
+                  formatter={(value, _name, props) => {
+                    const p = (props as { payload?: { cf?: number | null } })?.payload
+                    const cf = p?.cf != null ? ` (${p.cf.toFixed(1)}% CF)` : ''
+                    return [`${formatGWh(value as number)}${cf}`]
+                  }}
+                />
+                <Bar dataKey="gwh" fill="#ef4444" radius={[0, 2, 2, 0]} />
+              </BarChart>
+            </ResponsiveContainer>
+          </div>
+        </div>
+      )}
+
+      {/* Source note */}
+      <div className="rounded-lg p-3" style={{ background: '#0f172a', border: '1px solid #334155' }}>
+        <p className="text-xs" style={{ color: '#94a3b8' }}>{ytdData.source_note}</p>
+      </div>
+    </div>
+  )
+}
+
 
 // =====================================================================
 // Outage vs Dispatch decomposition section (v2.27.0)
