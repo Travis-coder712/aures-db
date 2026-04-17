@@ -626,6 +626,128 @@ The underlying data is publicly available:
 If you spot a discrepancy, it's likely due to capacity differences (registered vs maximum), time period alignment, or DUID mapping. We welcome corrections.`,
   },
   {
+    id: 'contractor-intelligence',
+    title: 'Contractor Intelligence',
+    description: 'How the EPC/BoP contractor layer is structured, how concentration is measured, and what the developer × contractor + contractor × OEM matrices reveal.',
+    icon: '🏗️',
+    category: 'technical',
+    readingTime: '7 min read',
+    content: `# Contractor Intelligence
+
+The \`/contractors\` page is the intelligence layer's view of the Australian renewable build market — who's physically constructing these projects, which OEM partners they pair with, and which developers they deliver for. This guide explains what's tracked, how concentration is measured, and the current limitations.
+
+---
+
+## What we mean by "contractor"
+
+AURES tracks **two contractor roles**:
+
+| Role | What it covers | Typical examples |
+|---|---|---|
+| \`epc\` | Engineering, Procurement & Construction — the firm responsible for end-to-end project delivery | RCR Tomlinson, Beon Energy Solutions, Sterling & Wilson, PCL Construction, UGL, METKA EGN, Biosar |
+| \`bop\` | Balance of Plant — the civil / electrical / interconnection works around the core equipment | Consolidated Power Projects (CPP), Zenviron, NuEnergy Infrastructure |
+
+Some firms operate in both roles on different projects — CPP is the clearest example, doing **both EPC and BoP** on BESS projects including Waratah Super Battery.
+
+**Not tracked here**:
+- OEMs / equipment manufacturers — see the [OEM & Supplier Data](./oem-supplier-data) guide and \`/oems\`
+- Sub-contractors one level down (civil works, mounting structures, cabling)
+- O&M operators (post-commissioning)
+
+---
+
+## Source data
+
+Contractor rows come from \`suppliers\` where \`role IN ('epc', 'bop')\`. Each record is attributed to:
+- A specific project
+- An optional contract value, model note, and source URL
+- Research provenance (AEMO registry, developer announcement, ASX disclosure, RenewEconomy / PV Magazine coverage)
+
+Total coverage: 71 contractors across 115 EPC records + 21 BoP records.
+
+---
+
+## Market concentration — how it's measured
+
+The Overview tab shows a **Herfindahl-Hirschman Index (HHI)** per role, computed over installed MW market share — identical methodology to the OEM intelligence page.
+
+| Role | HHI | Top-3 Share (MW) | Reading |
+|---|---|---|---|
+| **EPC** | 389 | 24% | Highly competitive — 63 firms |
+| **BoP** | 1,417 | 58% | Moderately concentrated — 12 firms |
+
+**EPC is one of the most fragmented segments in the renewable supply chain** — dozens of national and international firms competing on project-by-project tenders. BoP is far more concentrated because the work is more specialised and local. CPP + Zenviron + NuEnergy hold over half of BoP activity.
+
+---
+
+## The four tabs
+
+### 1. Overview
+- Stat cards: total contractors, EPC firms, BoP firms, most concentrated role
+- Horizontal HHI chart with competitive / moderately-concentrated / highly-concentrated bands
+- Top-3-per-role summary table
+- Most Active Developer-Contractor Pairings — the top-15 repeat relationships
+
+### 2. EPC tab
+- Market share pie (top 10 + "Other")
+- Full EPC firms DataTable with columns: Contractor, Category, Projects, MW, Top Tech, Top OEM Partner, Top Developer
+- Sortable, CSV export
+
+### 3. BoP tab
+- Same structure as EPC, filtered to the 12 BoP firms
+
+### 4. Developer × Contractor
+- Full matrix of 125 pairings sorted by project count
+- Highlights preferred-partner relationships
+
+### 5. Directory
+- Original filterable card grid preserved
+
+---
+
+## Standout findings
+
+**The CPP × Tesla partnership is the single strongest contractor-OEM signal in the database** — CPP has delivered 8 projects with Tesla Megapack as the BESS OEM, including Akaysha Energy's Orana BESS and Waratah Super Battery.
+
+Other strong pairings:
+- **Akaysha Energy × CPP** — 5 projects, both EPC and BoP, 1,936 MW — the strongest developer-contractor relationship
+- **RCR Tomlinson × First Solar** — 4 solar projects (thin-film specialisation)
+- **Zenviron × Vestas** — 3 wind projects (BoP for V150/V162 rollouts)
+- **Beon × SMA** — 3 solar projects (inverter pairing)
+- **Samsung C&T / Genus Plus JV × Tesla** — 3 BESS projects including the Equis Energy / SEC Victoria portfolio
+
+---
+
+## Individual contractor pages
+
+\`/contractors/:slug\` shows:
+- Summary pills — category, roles, top OEM partner, top developer client
+- Go-to OEM Partners — table with OEM (linked to \`/oems/:slug\`), role pill, project count
+- Top Clients (Developers) — table with developer (linked to \`/developers/:slug\`), project count
+- Project Portfolio — every project this contractor has worked on with role, tech, state, status, MW, developer, external source link. Sortable, CSV export.
+- Summary charts — capacity by technology + pipeline status
+
+---
+
+## Known limitations
+
+1. **COD drift per contractor is weak signal.** The database has drift data on operating projects but the per-contractor averages come out near zero because cod_original often matches cod_current in the source data. A true "delivery track record" per contractor needs more granular construction-phase milestones.
+2. **Only EPC and BoP are tracked.** Specialist subcontractors (civil works, mounting, cabling) aren't in the database. A project may list CPP as EPC but use five subcontractors for site works — we only see the head contract.
+3. **Some JVs are treated as single entities.** "Samsung C&T / Genus Plus JV" is one row, not two. This is deliberate but means the underlying partner firms aren't independently visible.
+4. **Pipeline project contractors are often unknown.** The database is strongest on operating and construction projects. Many development-stage projects don't name their EPC until FID.
+5. **BESS skews the data heavily.** CPP appears at the top of most tables because BESS is the largest segment of contractor activity and CPP is the dominant BESS integrator. This is a real market signal — not a data artefact — but it means EPC ranking can look different when you filter by tech.
+
+---
+
+## Want to verify?
+
+- Each contractor record carries a \`source_url\` where possible
+- Raw aggregation: \`analytics/contractor-analytics.json\` (~90kB)
+- Raw profiles: \`indexes/contractor-profiles.json\`
+- Top-level stats on the Contractor Intelligence Overview tab
+`,
+  },
+  {
     id: 'lifecycle-quartile-matrix',
     title: 'Lifecycle Quartile Matrix',
     description: 'The state-of-the-nation grid — how every project in the NEM is scored and quartile-ranked at each lifecycle stage.',
