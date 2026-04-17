@@ -563,6 +563,21 @@ export async function fetchContractorAnalytics(): Promise<any | null> {
   } catch { return null }
 }
 
+// Battery Live & Records — daily throughput, records board, latest snapshot
+// for /intelligence/bess-portfolio Live & Records tab (v2.28.0).
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+let batteryLiveRecordsCache: any | null = null
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export async function fetchBatteryLiveRecords(): Promise<any | null> {
+  if (batteryLiveRecordsCache) return batteryLiveRecordsCache
+  try {
+    const resp = await fetch(`${BASE}/analytics/intelligence/battery-live-records.json`)
+    if (!resp.ok) return null
+    batteryLiveRecordsCache = await resp.json()
+    return batteryLiveRecordsCache
+  } catch { return null }
+}
+
 // Coal Outage vs Dispatch — NEM/state/station decomposition of coal MWh
 // reduction into outage (unavailable) vs displaced (available but not
 // dispatched) vs dispatched (v2.27.0).

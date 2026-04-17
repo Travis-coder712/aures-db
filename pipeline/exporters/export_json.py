@@ -6465,6 +6465,148 @@ def export_coal_outage_dispatch(conn):
           f"dispatch_data={'populated' if has_dispatch_data else 'pending'})")
 
 
+def export_battery_live_records(conn):
+    """Battery Records & Live Activity — v2.28.0.
+
+    Reads battery_daily_scada + battery_records (populated by
+    pipeline/importers/import_battery_scada.py) and emits a JSON
+    aggregating:
+      - records board (max 5-min discharge/charge + max daily
+        discharge/charge per region)
+      - last 30 days of daily throughput (total MWh per day)
+      - latest snapshot (most recent settlement_date's NEM + per-state
+        activity)
+      - installed-capacity context (for ratio metrics — sourced from
+        existing oem-profiles / stats.json)
+
+    When tables are empty, emits a framework-only JSON with source_note
+    so the UI renders a "pending" state matching the v2.27.0 pattern.
+    """
+    # Check whether we have any data
+    row = conn.execute('SELECT COUNT(*) FROM battery_daily_scada').fetchone()
+    has_data = bool(row and row[0] > 0)
+
+    # ---- Records board ----
+    records_by_metric: dict[str, list[dict]] = defaultdict(list)
+    if has_data:
+        for r in conn.execute("""
+            SELECT metric, region, value, unit, recorded_at, settlement_date
+            FROM battery_records
+        """).fetchall():
+            records_by_metric[r['metric']].append({
+                'region': r['region'],
+                'value': r['value'],
+                'unit': r['unit'],
+                'recorded_at': r['recorded_at'],
+                'settlement_date': r['settlement_date'],
+            })
+
+    # ---- Last 30 days of daily throughput ----
+    daily_by_region: dict[str, list[dict]] = defaultdict(list)
+    latest_date = None
+    if has_data:
+        latest_row = conn.execute("SELECT MAX(settlement_date) FROM battery_daily_scada").fetchone()
+        latest_date = latest_row[0] if latest_row else None
+        cutoff_dt = None
+        if latest_date:
+            try:
+                cutoff_dt = (datetime.fromisoformat(latest_date) - timedelta(days=30)).date().isoformat()
+            except Exception:
+                cutoff_dt = None
+
+        for r in conn.execute("""
+            SELECT settlement_date, region, discharged_mwh, charged_mwh,
+                   peak_discharge_mw, peak_charge_mw
+            FROM battery_daily_scada
+            WHERE settlement_date >= COALESCE(?, '0000-00-00')
+            ORDER BY settlement_date
+        """, (cutoff_dt,)).fetchall():
+            daily_by_region[r['region']].append({
+                'settlement_date': r['settlement_date'],
+                'discharged_mwh': round(r['discharged_mwh'] or 0, 1),
+                'charged_mwh': round(r['charged_mwh'] or 0, 1),
+                'peak_discharge_mw': round(r['peak_discharge_mw'] or 0, 1),
+                'peak_charge_mw': round(r['peak_charge_mw'] or 0, 1),
+            })
+
+    # ---- Latest snapshot (most recent day per region) ----
+    latest_snapshot: dict[str, dict] = {}
+    if has_data and latest_date:
+        for r in conn.execute("""
+            SELECT region, discharged_mwh, charged_mwh,
+                   peak_discharge_mw, peak_charge_mw,
+                   peak_discharge_time, peak_charge_time, intervals_counted
+            FROM battery_daily_scada
+            WHERE settlement_date = ?
+        """, (latest_date,)).fetchall():
+            latest_snapshot[r['region']] = {
+                'discharged_mwh': round(r['discharged_mwh'] or 0, 1),
+                'charged_mwh': round(r['charged_mwh'] or 0, 1),
+                'peak_discharge_mw': round(r['peak_discharge_mw'] or 0, 1),
+                'peak_charge_mw': round(r['peak_charge_mw'] or 0, 1),
+                'peak_discharge_time': r['peak_discharge_time'],
+                'peak_charge_time': r['peak_charge_time'],
+                'intervals': r['intervals_counted'],
+            }
+
+    # ---- Installed capacity per region (from projects table) ----
+    installed_capacity: dict[str, dict] = {}
+    try:
+        for r in conn.execute("""
+            SELECT state, COUNT(*) AS count, SUM(capacity_mw) AS mw, SUM(storage_mwh) AS mwh
+            FROM projects
+            WHERE technology = 'bess' AND status = 'operating'
+            GROUP BY state
+        """).fetchall():
+            state_key = r['state']
+            # Map to NEM region code
+            region_map = {'NSW': 'NSW1', 'VIC': 'VIC1', 'QLD': 'QLD1', 'SA': 'SA1', 'TAS': 'TAS1'}
+            if state_key in region_map:
+                installed_capacity[region_map[state_key]] = {
+                    'project_count': r['count'],
+                    'total_mw': round(r['mw'] or 0, 1),
+                    'total_mwh': round(r['mwh'] or 0, 1),
+                }
+        total_mw = sum(v['total_mw'] for v in installed_capacity.values())
+        total_mwh = sum(v['total_mwh'] for v in installed_capacity.values())
+        total_projects = sum(v['project_count'] for v in installed_capacity.values())
+        installed_capacity['NEM'] = {
+            'project_count': total_projects,
+            'total_mw': round(total_mw, 1),
+            'total_mwh': round(total_mwh, 1),
+        }
+    except Exception as e:
+        print(f'  ! installed capacity query failed: {e}')
+
+    source_note = (
+        f"Battery records computed from OpenElectricity 5-min network data. Latest date: {latest_date}."
+        if has_data
+        else "No battery SCADA data ingested yet. Run: python3 pipeline/importers/import_battery_scada.py --days 30 "
+             "(requires OPENELECTRICITY_API_KEY). This will populate daily aggregates + records board for NEM + 5 states."
+    )
+
+    write_json(os.path.join(INTEL_DIR, 'battery-live-records.json'), {
+        'has_data': has_data,
+        'latest_date': latest_date,
+        'source_note': source_note,
+        'records': {
+            'max_discharge_5min': records_by_metric.get('max_discharge_5min', []),
+            'max_charge_5min': records_by_metric.get('max_charge_5min', []),
+            'max_daily_discharge': records_by_metric.get('max_daily_discharge', []),
+            'max_daily_charge': records_by_metric.get('max_daily_charge', []),
+        },
+        'latest_snapshot': latest_snapshot,
+        'daily_30d': daily_by_region,
+        'installed_capacity': installed_capacity,
+        'exported_at': datetime.now().isoformat(),
+    })
+
+    n_records = sum(len(v) for v in records_by_metric.values())
+    total_days = sum(len(v) for v in daily_by_region.values())
+    print(f"  analytics/intelligence/battery-live-records.json ("
+          f"has_data={has_data}, {n_records} record rows, {total_days} daily-region rows)")
+
+
 def export_intelligence(conn):
     """Export all intelligence layer JSON files."""
     print("\nIntelligence Layer:")
@@ -6478,6 +6620,7 @@ def export_intelligence(conn):
     export_concentration_risk(conn)
     export_scheme_win_probability(conn)
     export_coal_outage_dispatch(conn)
+    export_battery_live_records(conn)
     export_dunkelflaute(conn)
     export_energy_mix(conn)
     export_developer_scores(conn)

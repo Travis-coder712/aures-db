@@ -17,6 +17,7 @@ export type SourceId =
   | 'aemo_generation_info'
   | 'openelectricity_performance'
   | 'openelectricity_metadata'
+  | 'openelectricity_5min'
   | 'epbc_referrals'
   | 'offtake_research'
   | 'web_research'
@@ -72,6 +73,20 @@ export const SOURCE_REGISTRY: Record<SourceId, SourceRegistryEntry> = {
     criticallyStaleAfterDays: 35,
     refreshCommand: `python3 pipeline/importers/import_openelectricity.py --year ${new Date().getFullYear()} --ytd`,
     refreshNote: 'YTD dispatch data (~10 API calls, ~2 min). Free plan allows 367-day lookback.',
+    url: 'https://openelectricity.org.au',
+  },
+  openelectricity_5min: {
+    id: 'openelectricity_5min',
+    label: 'OpenElectricity 5-min Battery SCADA',
+    shortLabel: 'OE 5-min Battery',
+    icon: '🔋',
+    description:
+      '5-minute network-level battery power data from the OpenElectricity API (separate `battery_charging` and `battery_discharging` fueltechs). Aggregated daily per NEM region. Powers the Live & Records tab on BESS Portfolio.',
+    category: 'market',
+    staleAfterDays: 2,
+    criticallyStaleAfterDays: 7,
+    refreshCommand: 'python3 pipeline/importers/import_battery_scada.py --days 7',
+    refreshNote: 'Last 7 days (1 API call per month of history — very efficient). First-run backfill: use --days 30 or --days 365.',
     url: 'https://openelectricity.org.au',
   },
   openelectricity_metadata: {
@@ -252,7 +267,7 @@ export const PAGE_SOURCES: Record<string, SourceId[]> = {
   dunkelflaute: ['openelectricity_performance', 'json_export'],
   'eis-technical': ['web_research', 'json_export'],
   'bess-capex': ['web_research', 'aemo_generation_info', 'json_export'],
-  'bess-portfolio': ['aemo_generation_info', 'web_research', 'json_export', 'offtake_research'],
+  'bess-portfolio': ['aemo_generation_info', 'web_research', 'openelectricity_5min', 'json_export', 'offtake_research'],
 
   // Grid & Geography
   'transmission-infra': ['aemo_isp_rez', 'epbc_referrals', 'web_research', 'json_export'],

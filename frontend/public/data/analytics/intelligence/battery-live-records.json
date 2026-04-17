@@ -1,0 +1,41 @@
+{
+  "has_data": false,
+  "latest_date": null,
+  "source_note": "No battery SCADA data ingested yet. Run: python3 pipeline/importers/import_battery_scada.py --days 30 (requires OPENELECTRICITY_API_KEY). This will populate daily aggregates + records board for NEM + 5 states.",
+  "records": {
+    "max_discharge_5min": [],
+    "max_charge_5min": [],
+    "max_daily_discharge": [],
+    "max_daily_charge": []
+  },
+  "latest_snapshot": {},
+  "daily_30d": {},
+  "installed_capacity": {
+    "NSW1": {
+      "project_count": 8,
+      "total_mw": 1940.0,
+      "total_mwh": 5555.2
+    },
+    "QLD1": {
+      "project_count": 8,
+      "total_mw": 2410.0,
+      "total_mwh": 4757.9
+    },
+    "SA1": {
+      "project_count": 6,
+      "total_mw": 924.0,
+      "total_mwh": 1169.6
+    },
+    "VIC1": {
+      "project_count": 10,
+      "total_mw": 1915.0,
+      "total_mwh": 3758.4
+    },
+    "NEM": {
+      "project_count": 32,
+      "total_mw": 7189.0,
+      "total_mwh": 15241.1
+    }
+  },
+  "exported_at": "2026-04-17T20:44:07.656907"
+}
