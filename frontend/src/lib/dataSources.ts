@@ -257,6 +257,9 @@ export const PAGE_SOURCES: Record<string, SourceId[]> = {
   // Lifecycle Quartile Matrix — state-of-the-nation by (tech × state × stage)
   'lifecycle-quartile': ['aemo_generation_info', 'openelectricity_performance', 'web_research', 'json_export'],
 
+  // Asset Lifecycle & Repowering — age profile, refurb candidates, OEM fleet ages, turnover forecast
+  'asset-lifecycle': ['aemo_generation_info', 'openelectricity_performance', 'web_research', 'json_export'],
+
   // Core
   projects: ['aemo_generation_info', 'openelectricity_performance', 'web_research', 'json_export'],
   dashboard: ['aemo_generation_info', 'openelectricity_performance', 'json_export'],

@@ -103,6 +103,12 @@ const FEATURES = [
     description: 'State-of-the-nation grid \u2014 every project by tech \u00d7 state \u00d7 stage with quartile scoring.',
     route: '/intelligence/lifecycle-quartile',
   },
+  {
+    icon: '\u{1F501}',
+    title: 'Asset Lifecycle & Repowering',
+    description: 'Operating fleet age profile, repowering candidates, aging OEM exposure, and fleet turnover forecast to 2050.',
+    route: '/intelligence/asset-lifecycle',
+  },
 ] as const
 
 export default function IntelligenceHub() {

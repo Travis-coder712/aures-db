@@ -39,6 +39,7 @@ import EISTechnical from './pages/intelligence/EISTechnical'
 import NemActivities from './pages/intelligence/NemActivities'
 import BessBidding from './pages/intelligence/BessBidding'
 import BessPortfolio from './pages/intelligence/BessPortfolio'
+import AssetLifecycle from './pages/intelligence/AssetLifecycle'
 import BatteryWatch from './components/intelligence/BatteryWatch'
 import News from './pages/News'
 import Watchlist from './pages/Watchlist'
@@ -107,6 +108,7 @@ function App() {
         <Route path="intelligence/nem-activities" element={<NemActivities />} />
         <Route path="intelligence/bess-bidding" element={<BessBidding />} />
         <Route path="intelligence/bess-portfolio" element={<BessPortfolio />} />
+        <Route path="intelligence/asset-lifecycle" element={<AssetLifecycle />} />
         <Route path="intelligence/battery-watch" element={<div className="p-6 lg:p-8 max-w-5xl"><BatteryWatch /></div>} />
         <Route
           path="intelligence/lifecycle-quartile"
