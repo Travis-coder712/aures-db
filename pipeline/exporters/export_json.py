@@ -510,6 +510,10 @@ def export_all(db_path=DB_PATH):
     # 6. Developer profiles
     export_developer_profiles(conn, summaries)
 
+    # 8b. Developer analytics — pre-aggregated performance, equipment prefs,
+    # scheme wins, offtake counterparties
+    export_developer_analytics(conn)
+
     # 7. Coordinates index (for map view)
     export_coordinates_index(conn)
 
@@ -1075,6 +1079,223 @@ def export_developer_profiles(conn, summaries):
     })
     grouped_count = len([g for g in grouped_developers if g.get('aliases')])
     print(f"  indexes/developer-profiles.json ({len(developers)} developers, {len(grouped_developers)} grouped ({grouped_count} with aliases))")
+
+
+def export_developer_analytics(conn):
+    """Pre-aggregate developer-level intelligence for the portfolio dashboard.
+
+    Output: analytics/developer-analytics.json keyed by the raw developer
+    name (matches `projects.current_developer`). The frontend collapses
+    aliases at render time using developer-profiles.json.
+
+    Sections per developer:
+      - equipment_preferences: top OEMs and contractors from supplier joins
+      - cod_drift: per-project original vs actual COD + drift months
+      - scheme_wins: list of scheme_contracts entries
+      - fleet_performance: avg composite + quartile_counts (only if ≥3
+          ranked projects; otherwise null)
+      - offtake_counterparties: list of buyers with counts (only if ≥1)
+    """
+    # ---- Equipment preferences (OEM + contractor) ----
+    eq_rows = conn.execute("""
+        SELECT p.current_developer AS developer, s.role, s.supplier,
+               COUNT(DISTINCT p.id) AS projects, SUM(COALESCE(p.capacity_mw,0)) AS mw,
+               p.technology
+        FROM projects p
+        JOIN suppliers s ON s.project_id = p.id
+        WHERE p.current_developer IS NOT NULL AND p.current_developer != ''
+        GROUP BY p.current_developer, s.role, s.supplier, p.technology
+    """).fetchall()
+
+    equipment = defaultdict(lambda: defaultdict(lambda: defaultdict(lambda: {'projects': 0, 'mw': 0.0})))
+    for r in eq_rows:
+        bucket = equipment[r['developer']][r['role']][r['supplier']]
+        bucket['projects'] += r['projects']
+        bucket['mw'] += r['mw'] or 0
+
+    # Flatten equipment to a list of {role, supplier, projects, mw} per developer,
+    # sorted by projects desc
+    eq_out = {}
+    for dev, by_role in equipment.items():
+        flat = []
+        for role, suppliers in by_role.items():
+            for sup, stats in suppliers.items():
+                flat.append({
+                    'role': role,
+                    'supplier': sup,
+                    'projects': stats['projects'],
+                    'mw': round(stats['mw'], 1),
+                })
+        flat.sort(key=lambda e: (-e['projects'], -e['mw']))
+        eq_out[dev] = flat
+
+    # ---- COD drift per project ----
+    cod_rows = conn.execute("""
+        SELECT id, name, current_developer AS developer, technology, state, status,
+               capacity_mw, cod_current, cod_original,
+               CASE
+                 WHEN cod_current IS NOT NULL AND cod_original IS NOT NULL
+                 THEN ROUND(
+                   (julianday(cod_current) - julianday(cod_original)) / 30.0, 1
+                 )
+                 ELSE NULL
+               END AS drift_months
+        FROM projects
+        WHERE current_developer IS NOT NULL AND current_developer != ''
+    """).fetchall()
+
+    drift_out = defaultdict(list)
+    for r in cod_rows:
+        drift_out[r['developer']].append({
+            'id': r['id'],
+            'name': r['name'],
+            'technology': r['technology'],
+            'state': r['state'],
+            'status': r['status'],
+            'capacity_mw': r['capacity_mw'],
+            'cod_current': r['cod_current'],
+            'cod_original': r['cod_original'],
+            'drift_months': r['drift_months'],
+        })
+    # Sort each developer's list chronologically by COD
+    for dev, rows in drift_out.items():
+        rows.sort(key=lambda r: (r['cod_current'] or '9999', r['name']))
+
+    # ---- Scheme wins ----
+    scheme_rows = conn.execute("""
+        SELECT p.current_developer AS developer, sc.scheme, sc.round, sc.project_id,
+               p.name AS project_name, p.technology, p.state,
+               sc.capacity_mw, sc.storage_mwh, sc.contract_type, sc.source_url
+        FROM scheme_contracts sc
+        JOIN projects p ON p.id = sc.project_id
+        WHERE p.current_developer IS NOT NULL AND p.current_developer != ''
+    """).fetchall()
+
+    schemes_out = defaultdict(list)
+    for r in scheme_rows:
+        schemes_out[r['developer']].append({
+            'scheme': r['scheme'],
+            'round': r['round'],
+            'project_id': r['project_id'],
+            'project_name': r['project_name'],
+            'technology': r['technology'],
+            'state': r['state'],
+            'capacity_mw': r['capacity_mw'],
+            'storage_mwh': r['storage_mwh'],
+            'contract_type': r['contract_type'],
+            'source_url': r['source_url'],
+        })
+
+    # ---- Fleet performance (only developers with ≥3 ranked projects) ----
+    perf_rows = conn.execute("""
+        SELECT p.current_developer AS developer, lte.project_id, p.name AS project_name,
+               lte.technology, lte.quartile, lte.composite_score,
+               lte.year, pa.capacity_factor_pct, pa.revenue_per_mw
+        FROM projects p
+        JOIN league_table_entries lte ON lte.project_id = p.id
+        LEFT JOIN performance_annual pa ON pa.project_id = p.id AND pa.year = lte.year
+        WHERE p.current_developer IS NOT NULL AND p.current_developer != ''
+    """).fetchall()
+
+    perf_agg = defaultdict(lambda: {
+        'projects': [],
+        'composite_values': [],
+        'cf_values': [],
+        'quartile_counts': {1: 0, 2: 0, 3: 0, 4: 0},
+    })
+    for r in perf_rows:
+        agg = perf_agg[r['developer']]
+        agg['projects'].append({
+            'project_id': r['project_id'],
+            'project_name': r['project_name'],
+            'technology': r['technology'],
+            'quartile': r['quartile'],
+            'composite_score': round(r['composite_score'], 1) if r['composite_score'] is not None else None,
+            'capacity_factor_pct': round(r['capacity_factor_pct'], 1) if r['capacity_factor_pct'] is not None else None,
+            'year': r['year'],
+        })
+        if r['composite_score'] is not None:
+            agg['composite_values'].append(r['composite_score'])
+        if r['capacity_factor_pct'] is not None:
+            agg['cf_values'].append(r['capacity_factor_pct'])
+        if r['quartile'] in (1, 2, 3, 4):
+            agg['quartile_counts'][r['quartile']] += 1
+
+    perf_out = {}
+    for dev, d in perf_agg.items():
+        ranked = sum(d['quartile_counts'].values())
+        if ranked < 1:
+            continue  # no signal at all
+        cf = d['cf_values']
+        comp = d['composite_values']
+        perf_out[dev] = {
+            'ranked_projects': ranked,
+            'avg_cf': round(sum(cf) / len(cf), 1) if cf else None,
+            'avg_composite': round(sum(comp) / len(comp), 1) if comp else None,
+            'quartile_counts': d['quartile_counts'],
+            'q1_pct': round(d['quartile_counts'][1] / ranked * 100, 0) if ranked else None,
+            'meaningful': ranked >= 3,
+            'projects': sorted(d['projects'], key=lambda p: (p['quartile'] or 9, -(p['composite_score'] or 0))),
+        }
+
+    # ---- Offtake counterparties ----
+    off_rows = conn.execute("""
+        SELECT p.current_developer AS developer, o.party AS counterparty, o.type AS offtake_type,
+               o.project_id, p.name AS project_name, p.technology, p.state,
+               o.term_years, o.capacity_mw AS offtake_mw, o.source_url
+        FROM offtakes o
+        JOIN projects p ON p.id = o.project_id
+        WHERE p.current_developer IS NOT NULL AND p.current_developer != ''
+          AND o.party IS NOT NULL AND o.party != ''
+    """).fetchall()
+
+    offtake_out = defaultdict(list)
+    for r in off_rows:
+        offtake_out[r['developer']].append({
+            'counterparty': r['counterparty'],
+            'offtake_type': r['offtake_type'],
+            'project_id': r['project_id'],
+            'project_name': r['project_name'],
+            'technology': r['technology'],
+            'state': r['state'],
+            'term_years': r['term_years'],
+            'offtake_mw': r['offtake_mw'],
+            'source_url': r['source_url'],
+        })
+
+    # ---- Ownership events (inline badges on projects) ----
+    own_rows = conn.execute("""
+        SELECT oh.project_id, oh.period, oh.owner, oh.role,
+               oh.acquisition_value_aud, oh.transaction_structure, oh.source_url,
+               p.current_developer AS developer, p.name AS project_name
+        FROM ownership_history oh
+        JOIN projects p ON p.id = oh.project_id
+        WHERE p.current_developer IS NOT NULL AND p.current_developer != ''
+    """).fetchall()
+
+    ownership_out = defaultdict(list)
+    for r in own_rows:
+        ownership_out[r['developer']].append({
+            'project_id': r['project_id'],
+            'project_name': r['project_name'],
+            'period': r['period'],
+            'owner': r['owner'],
+            'role': r['role'],
+            'acquisition_value_aud': r['acquisition_value_aud'],
+            'transaction_structure': r['transaction_structure'],
+            'source_url': r['source_url'],
+        })
+
+    write_json(os.path.join(DATA_DIR, 'analytics', 'developer-analytics.json'), {
+        'equipment_preferences': eq_out,
+        'cod_drift': dict(drift_out),
+        'scheme_wins': dict(schemes_out),
+        'fleet_performance': perf_out,
+        'offtake_counterparties': dict(offtake_out),
+        'ownership_events': dict(ownership_out),
+        'exported_at': datetime.now().isoformat(),
+    })
+    print(f"  analytics/developer-analytics.json ({len(eq_out)} eq, {len(perf_out)} perf, {len(schemes_out)} scheme, {len(offtake_out)} offtake)")
 
 
 def export_oem_profiles(conn):

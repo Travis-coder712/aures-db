@@ -503,6 +503,21 @@ export async function fetchOEMAnalytics(): Promise<any | null> {
   } catch { return null }
 }
 
+// Developer analytics — per-developer equipment, COD drift, scheme wins,
+// fleet performance, offtake counterparties, ownership events
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+let developerAnalyticsCache: any | null = null
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export async function fetchDeveloperAnalytics(): Promise<any | null> {
+  if (developerAnalyticsCache) return developerAnalyticsCache
+  try {
+    const resp = await fetch(`${BASE}/analytics/developer-analytics.json`)
+    if (!resp.ok) return null
+    developerAnalyticsCache = await resp.json()
+    return developerAnalyticsCache
+  } catch { return null }
+}
+
 export async function fetchEISComparison(): Promise<EISComparisonData | null> {
   if (eisComparisonCache) return eisComparisonCache
   try {
