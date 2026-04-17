@@ -50,10 +50,19 @@ CACHE_DIR = os.path.join(os.path.dirname(__file__), '..', '..', 'data', 'nemweb_
 
 NEMWEB_BASE = 'https://nemweb.com.au'
 CURRENT_DISPATCH_URL = f'{NEMWEB_BASE}/Reports/Current/Next_Day_Dispatch/'
-ARCHIVE_URL_TEMPLATE = (
+# AEMO changed the MMSDM DISPATCHLOAD archive filename from
+# PUBLIC_DVD_DISPATCHLOAD_... to PUBLIC_ARCHIVE#DISPATCHLOAD#FILE01#... at
+# around August 2024. Try the new format first, fall back to the legacy
+# format for older months. Both live in the same DATA/ directory.
+ARCHIVE_URL_TEMPLATES = (
+    # New format (Aug 2024 onward)
     f'{NEMWEB_BASE}/Data_Archive/Wholesale_Electricity/MMSDM/{{yyyy}}/'
     f'MMSDM_{{yyyy}}_{{mm}}/MMSDM_Historical_Data_SQLLoader/DATA/'
-    f'PUBLIC_DVD_DISPATCHLOAD_{{yyyy}}{{mm}}010000.zip'
+    f'PUBLIC_ARCHIVE%23DISPATCHLOAD%23FILE01%23{{yyyy}}{{mm}}010000.zip',
+    # Legacy format (through July 2024)
+    f'{NEMWEB_BASE}/Data_Archive/Wholesale_Electricity/MMSDM/{{yyyy}}/'
+    f'MMSDM_{{yyyy}}_{{mm}}/MMSDM_Historical_Data_SQLLoader/DATA/'
+    f'PUBLIC_DVD_DISPATCHLOAD_{{yyyy}}{{mm}}010000.zip',
 )
 
 
@@ -99,7 +108,7 @@ def list_current_zip_urls() -> list[str]:
     return [urljoin(CURRENT_DISPATCH_URL, h) for h in hrefs]
 
 
-def download(url: str, target: str) -> bool:
+def download(url: str, target: str, verbose: bool = True) -> bool:
     if os.path.exists(target):
         return True
     os.makedirs(os.path.dirname(target), exist_ok=True)
@@ -111,7 +120,8 @@ def download(url: str, target: str) -> bool:
                     f.write(chunk)
         return True
     except Exception as e:
-        print(f'  ! download failed: {url} — {e}')
+        if verbose:
+            print(f'  ! download failed: {url} — {e}')
         if os.path.exists(target):
             os.remove(target)
         return False
@@ -274,16 +284,28 @@ def import_current(days: int):
 def import_archive(month: str):
     """Pull a whole historical month from the MMSDM archive."""
     yyyy, mm = month.split('-')
-    url = ARCHIVE_URL_TEMPLATE.format(yyyy=yyyy, mm=mm.zfill(2))
-    target = os.path.join(CACHE_DIR, os.path.basename(url))
+    mm = mm.zfill(2)
     coal_duids = load_coal_duids()
     cap_map = duid_capacity_map()
 
     conn = sqlite3.connect(DB_PATH)
     ensure_schema(conn)
 
-    if not download(url, target):
-        print(f'  ! archive download failed: {url}')
+    url = None
+    target = None
+    from urllib.parse import unquote
+    for i, tmpl in enumerate(ARCHIVE_URL_TEMPLATES):
+        candidate = tmpl.format(yyyy=yyyy, mm=mm)
+        candidate_target = os.path.join(CACHE_DIR, unquote(os.path.basename(candidate)))
+        # Only print the download failure if this is the last template we try
+        is_last = (i == len(ARCHIVE_URL_TEMPLATES) - 1)
+        if download(candidate, candidate_target, verbose=is_last):
+            url = candidate
+            target = candidate_target
+            break
+
+    if target is None:
+        print(f'  ! archive download failed for {month} (tried both URL formats)')
         return
 
     print(f'  Parsing archive for {month} ({len(coal_duids)} target DUIDs)')
