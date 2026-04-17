@@ -4,8 +4,70 @@ import {
   ResponsiveContainer, LineChart, Line, AreaChart, Area,
   Legend,
 } from 'recharts'
-import { fetchCoalWatch } from '../../lib/dataService'
+import { fetchCoalWatch, fetchCoalOutageDispatch } from '../../lib/dataService'
 import type { CoalWatchData, CoalPlant } from '../../lib/types'
+
+// Outage/Dispatch data shape
+interface CoalStation {
+  station_name: string
+  facility_code: string
+  state: string
+  owner: string
+  fuel: string
+  capacity_mw: number
+  units: number
+  unit_size_mw: number
+  duids: string[]
+  closure_date: string | null
+  closure_note: string | null
+  outage_hours: number
+  displaced_hours: number
+  dispatched_hours: number
+  outage_mwh_missed: number
+  displaced_mwh_missed: number
+  dispatched_mwh: number
+  outage_pct: number | null
+  displaced_pct: number | null
+  dispatched_pct: number | null
+  has_dispatch_data: boolean
+}
+
+interface CoalOutageDispatch {
+  nem: {
+    total_capacity_mw: number
+    total_stations: number
+    total_units: number
+    total_duids: number
+    stations_with_dispatch_data: number
+    outage_hours: number
+    displaced_hours: number
+    dispatched_hours: number
+    outage_mwh_missed: number
+    displaced_mwh_missed: number
+    dispatched_mwh: number
+    outage_pct: number | null
+    displaced_pct: number | null
+    dispatched_pct: number | null
+  }
+  by_state: Record<string, {
+    total_capacity_mw: number
+    station_count: number
+    stations: string[]
+    duid_count: number
+    outage_hours: number
+    displaced_hours: number
+    dispatched_hours: number
+    outage_mwh_missed: number
+    displaced_mwh_missed: number
+    dispatched_mwh: number
+    outage_pct: number | null
+    displaced_pct: number | null
+    dispatched_pct: number | null
+  }>
+  stations: CoalStation[]
+  has_dispatch_data: boolean
+  source_note: string
+}
 
 // ============================================================
 // Colours & constants
@@ -46,7 +108,7 @@ function formatAUD(m: number): string {
 // Section types
 // ============================================================
 
-type SectionId = 'overview' | 'plant-profiles' | 'revenue' | 'seasonal' | 'closure-timeline'
+type SectionId = 'overview' | 'plant-profiles' | 'revenue' | 'seasonal' | 'closure-timeline' | 'outage-dispatch'
 
 // ============================================================
 // Stat Card
@@ -442,9 +504,11 @@ export default function CoalWatch() {
   const [loading, setLoading] = useState(true)
   const [activeSection, setActiveSection] = useState<SectionId>('overview')
   const [seasonalYear, setSeasonalYear] = useState(2025)
+  const [outageData, setOutageData] = useState<CoalOutageDispatch | null>(null)
 
   useEffect(() => {
     fetchCoalWatch().then(d => { setData(d); setLoading(false) })
+    fetchCoalOutageDispatch().then(d => setOutageData(d))
   }, [])
 
   const totalGen2025 = useMemo(() =>
@@ -479,6 +543,7 @@ export default function CoalWatch() {
     { id: 'revenue', label: 'Revenue Watch' },
     { id: 'seasonal', label: 'Seasonal' },
     { id: 'closure-timeline', label: 'Closure Timeline' },
+    { id: 'outage-dispatch', label: 'Outage vs Dispatch' },
   ]
 
   return (
@@ -926,6 +991,173 @@ export default function CoalWatch() {
           </div>
         </div>
       )}
+
+      {/* ─── OUTAGE vs DISPATCH DECOMPOSITION ─── */}
+      {activeSection === 'outage-dispatch' && (
+        <OutageDispatchSection outageData={outageData} />
+      )}
+    </div>
+  )
+}
+
+// =====================================================================
+// Outage vs Dispatch decomposition section (v2.27.0)
+// =====================================================================
+
+function OutageDispatchSection({ outageData }: { outageData: CoalOutageDispatch | null }) {
+  if (!outageData) {
+    return (
+      <div className="rounded-lg p-8 text-center" style={{ background: '#1e293b', border: '1px solid #334155' }}>
+        <p style={{ color: '#94a3b8' }}>Loading outage vs dispatch data…</p>
+      </div>
+    )
+  }
+
+  const hasDispatch = outageData.has_dispatch_data
+  const nem = outageData.nem
+  const stateOrder: string[] = ['NSW', 'QLD', 'VIC']
+
+  return (
+    <div className="space-y-6">
+      {/* Explainer + data state banner */}
+      <div className="rounded-lg p-5" style={{ background: 'linear-gradient(135deg, #1e3a8a 0%, #1e293b 100%)', border: '1px solid #334155' }}>
+        <h3 className="text-lg font-semibold mb-2" style={{ color: '#f1f5f9' }}>
+          Outage vs Dispatch Erosion
+        </h3>
+        <p className="text-sm mb-3" style={{ color: '#cbd5e1' }}>
+          When a coal unit's output drops, there are two very different explanations:
+        </p>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-3">
+          <div className="rounded p-3" style={{ background: '#0f172a', border: '1px solid #475569' }}>
+            <div className="text-xs font-semibold uppercase tracking-wider mb-1" style={{ color: '#fbbf24' }}>
+              🛠️ Outage
+            </div>
+            <p className="text-xs" style={{ color: '#94a3b8' }}>
+              Unit is physically unavailable — planned maintenance or unplanned trip.
+              A mechanical event, not a structural market shift.
+              Detected when <code style={{ color: '#f59e0b' }}>AVAILABILITY</code> drops below 20% of capacity.
+            </p>
+          </div>
+          <div className="rounded p-3" style={{ background: '#0f172a', border: '1px solid #475569' }}>
+            <div className="text-xs font-semibold uppercase tracking-wider mb-1" style={{ color: '#10b981' }}>
+              📉 Dispatch Erosion
+            </div>
+            <p className="text-xs" style={{ color: '#94a3b8' }}>
+              Unit is available and bidding, but cheaper generation (renewables) is displacing it in merit order.
+              <strong> This is the structural signal of coal's decline.</strong>
+              Detected when <code style={{ color: '#10b981' }}>TOTALCLEARED &lt; 30%</code> of <code>AVAILABILITY</code>.
+            </p>
+          </div>
+        </div>
+        <div className="rounded p-3 flex items-start gap-3" style={{ background: hasDispatch ? '#0f1e1a' : '#2c2416', border: `1px solid ${hasDispatch ? '#10b98140' : '#f59e0b40'}` }}>
+          <span style={{ color: hasDispatch ? '#10b981' : '#f59e0b' }}>
+            {hasDispatch ? '✓' : 'ℹ️'}
+          </span>
+          <p className="text-xs" style={{ color: '#cbd5e1' }}>
+            {outageData.source_note}
+          </p>
+        </div>
+      </div>
+
+      {/* NEM-level totals */}
+      <div className="rounded-lg p-4" style={{ background: '#1e293b', border: '1px solid #334155' }}>
+        <h3 className="text-sm font-semibold mb-3" style={{ color: '#f1f5f9' }}>
+          NEM Fleet · {nem.total_stations} stations · {nem.total_units} units · {(nem.total_capacity_mw / 1000).toFixed(1)} GW
+        </h3>
+        {hasDispatch ? (
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+            <StatCard label="Outage" value={`${nem.outage_pct?.toFixed(1) ?? '—'}%`} sub={`${Math.round(nem.outage_hours).toLocaleString()} h`} colour="#fbbf24" />
+            <StatCard label="Displaced" value={`${nem.displaced_pct?.toFixed(1) ?? '—'}%`} sub={`${Math.round(nem.displaced_hours).toLocaleString()} h`} colour="#10b981" />
+            <StatCard label="Dispatched" value={`${nem.dispatched_pct?.toFixed(1) ?? '—'}%`} sub={`${Math.round(nem.dispatched_hours).toLocaleString()} h`} colour="#3b82f6" />
+            <StatCard label="MWh displaced" value={`${(nem.displaced_mwh_missed / 1000).toFixed(1)} GWh`} sub="Market could have dispatched" colour="#10b981" />
+          </div>
+        ) : (
+          <div className="rounded p-4 text-sm" style={{ background: '#0f172a', color: '#94a3b8' }}>
+            No 5-min <code>DISPATCHLOAD</code> data ingested yet. The framework is ready — run the importer and this section will populate with real NEM-wide outage / displacement / dispatch hour breakdowns per station.
+          </div>
+        )}
+      </div>
+
+      {/* Per-state */}
+      <div className="rounded-lg p-4" style={{ background: '#1e293b', border: '1px solid #334155' }}>
+        <h3 className="text-sm font-semibold mb-3" style={{ color: '#f1f5f9' }}>By State</h3>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+          {stateOrder.map(state => {
+            const s = outageData.by_state[state]
+            if (!s) return null
+            return (
+              <div key={state} className="rounded p-3" style={{ background: '#0f172a', border: '1px solid #334155' }}>
+                <div className="flex items-center justify-between mb-2">
+                  <span className="text-sm font-semibold" style={{ color: '#f1f5f9' }}>{state}</span>
+                  <span className="text-xs" style={{ color: '#94a3b8' }}>{(s.total_capacity_mw / 1000).toFixed(1)} GW · {s.station_count} stations</span>
+                </div>
+                <div className="text-xs space-y-1" style={{ color: '#94a3b8' }}>
+                  <div>
+                    <span style={{ color: '#fbbf24' }}>Outage: </span>
+                    {hasDispatch ? `${s.outage_pct?.toFixed(1) ?? '—'}% (${Math.round(s.outage_hours)}h)` : 'pending'}
+                  </div>
+                  <div>
+                    <span style={{ color: '#10b981' }}>Displaced: </span>
+                    {hasDispatch ? `${s.displaced_pct?.toFixed(1) ?? '—'}% (${Math.round(s.displaced_hours)}h)` : 'pending'}
+                  </div>
+                  <div>
+                    <span style={{ color: '#3b82f6' }}>Dispatched: </span>
+                    {hasDispatch ? `${s.dispatched_pct?.toFixed(1) ?? '—'}% (${Math.round(s.dispatched_hours)}h)` : 'pending'}
+                  </div>
+                </div>
+              </div>
+            )
+          })}
+        </div>
+      </div>
+
+      {/* Per-station table */}
+      <div className="rounded-lg p-4" style={{ background: '#1e293b', border: '1px solid #334155' }}>
+        <h3 className="text-sm font-semibold mb-3" style={{ color: '#f1f5f9' }}>Per-Station Breakdown</h3>
+        <div className="overflow-x-auto">
+          <table className="w-full text-xs">
+            <thead>
+              <tr style={{ color: '#94a3b8', borderBottom: '1px solid #334155' }}>
+                <th className="text-left py-2 px-2">Station</th>
+                <th className="text-left py-2 px-2">State</th>
+                <th className="text-left py-2 px-2">Owner</th>
+                <th className="text-right py-2 px-2">MW</th>
+                <th className="text-right py-2 px-2">Units</th>
+                <th className="text-right py-2 px-2">Outage %</th>
+                <th className="text-right py-2 px-2">Displaced %</th>
+                <th className="text-right py-2 px-2">Dispatched %</th>
+                <th className="text-left py-2 px-2">Closure</th>
+              </tr>
+            </thead>
+            <tbody>
+              {outageData.stations.map(s => (
+                <tr key={s.facility_code} style={{ color: '#cbd5e1', borderBottom: '1px solid #1e293b' }}>
+                  <td className="py-2 px-2 font-medium" style={{ color: '#f1f5f9' }}>{s.station_name.replace(' Power Station', '')}</td>
+                  <td className="py-2 px-2">{s.state}</td>
+                  <td className="py-2 px-2">{s.owner}</td>
+                  <td className="py-2 px-2 text-right tabular-nums">{s.capacity_mw.toLocaleString()}</td>
+                  <td className="py-2 px-2 text-right tabular-nums">{s.units}</td>
+                  <td className="py-2 px-2 text-right tabular-nums" style={{ color: s.outage_pct ? '#fbbf24' : '#475569' }}>
+                    {s.has_dispatch_data ? `${s.outage_pct?.toFixed(1) ?? '—'}%` : '—'}
+                  </td>
+                  <td className="py-2 px-2 text-right tabular-nums" style={{ color: s.displaced_pct ? '#10b981' : '#475569' }}>
+                    {s.has_dispatch_data ? `${s.displaced_pct?.toFixed(1) ?? '—'}%` : '—'}
+                  </td>
+                  <td className="py-2 px-2 text-right tabular-nums" style={{ color: s.dispatched_pct ? '#3b82f6' : '#475569' }}>
+                    {s.has_dispatch_data ? `${s.dispatched_pct?.toFixed(1) ?? '—'}%` : '—'}
+                  </td>
+                  <td className="py-2 px-2" style={{ color: '#94a3b8' }}>{s.closure_date?.slice(0, 4) ?? '—'}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        {!hasDispatch && (
+          <p className="text-xs mt-3" style={{ color: '#94a3b8' }}>
+            Percentage columns populate once NEMWEB DISPATCHLOAD data is ingested. Station metadata, owner, capacity, and closure dates are curated and ready now.
+          </p>
+        )}
+      </div>
     </div>
   )
 }
