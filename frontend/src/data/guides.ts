@@ -626,6 +626,114 @@ The underlying data is publicly available:
 If you spot a discrepancy, it's likely due to capacity differences (registered vs maximum), time period alignment, or DUID mapping. We welcome corrections.`,
   },
   {
+    id: 'risk-probability-signals',
+    title: 'Risk & Probability Signals',
+    description: 'Supply chain concentration, at-risk OEM exposure, developer-OEM chain risks, and forward-looking CIS/LTESA win probability.',
+    icon: '⚠️',
+    category: 'technical',
+    readingTime: '8 min read',
+    content: `# Risk & Probability Signals
+
+The \`/intelligence/risk-signals\` page bundles **T3.I Supply Chain Concentration Risk** and **T3.J Scheme Win Probability** — two forward-looking views that help anticipate where the market is exposed and which development projects are best positioned for the next scheme round.
+
+## Why it's one page
+
+Both features answer a similar question framed differently:
+- **T3.I** looks backward at installed fleet concentration (where is failure cost amplified?)
+- **T3.J** looks forward at development pipeline fit (which projects will win next?)
+
+Putting them together in five tabs lets you pivot from "where are today's risks" to "where's the next opportunity" without leaving the page.
+
+---
+
+## T3.I Supply Chain Concentration Risk
+
+Three signals surfaced.
+
+### Dominance matrix
+
+Cells where a single OEM holds ≥40% of installed MW within a (technology × state × role) cohort. Thresholds:
+
+| Classification | Share | Current cells |
+|---|---|---|
+| 🏴 Monopoly | ≥75% | 3 |
+| ⚠️ Dominant | 50-74% | 5 |
+| Concentrated | 40-49% | 3 |
+
+Notable current state:
+- **Vestas TAS wind** = 100% monopoly (4/4 projects, 561 MW). Makes sense given Tasmania's small wind fleet.
+- **EKS Energy (Hitachi) NSW BESS inverter** = 77% (driven by Waratah Super Battery).
+- **SMA VIC solar inverter** = 76%. SMA dominates Australian solar inverters.
+- **Vestas VIC wind** = 68% (13/24 projects, 4.8 GW).
+
+### At-risk OEMs
+
+Projects using OEMs whose parent is bankrupt, absorbed, or stressed. Three OEMs on the flag list have live project exposure:
+
+- **Suzlon** — 7 projects, 697 MW (NSW, SA, VIC). Stressed balance sheet, minimal AU support.
+- **Senvion** — 5 projects, 741 MW (SA, VIC). Parent filed insolvency 2019, absorbed by Siemens Gamesa with reduced support.
+- **Acciona Windpower** — 1 project, 192 MW (VIC — Waubra). Absorbed into Nordex 2016.
+
+Note the risk is about spare-parts availability and service warranty coverage, not certain failure. A well-maintained Senvion fleet can keep running; the concern is what happens when something breaks.
+
+### Dev-OEM chain risks
+
+Single-developer-single-OEM pairings where one supplier accounts for ≥50% of that developer's fleet in one role. Current state (2 chains flagged):
+
+- **Equis Energy / SEC Victoria × Tesla** (bess_oem) — 3 BESS projects, 100% of their BESS fleet
+- **Lake Bonney Wind Power × Vestas** (wind_oem) — 3 wind projects, 100% of their wind fleet
+
+These aren't bad — Tesla and Vestas are fine OEMs — but they flag where any supply-chain disruption would cascade across the developer's whole portfolio.
+
+---
+
+## T3.J Scheme Win Probability
+
+Heuristic composite (0-100) predicting which development-stage projects are most likely to win future CIS / LTESA / scheme rounds. 782 development projects scored.
+
+### The model
+
+| Component | Max pts | How |
+|---|---|---|
+| **Developer track record** | 30 | A = 30, B = 22, C = 15, D = 8, F = 0 from developer-scores.json |
+| **Tech fit** | 20 | BESS + pumped_hydro = 20 (dispatchable rounds); hybrid = 18; wind = 15; solar = 12; offshore_wind = 10 |
+| **Project size fit** | 15 | 100-500 MW = 15 (sweet spot); 50-100 or 500-1000 = 10; others = 5 |
+| **Readiness** | 20 | has_cod (5) + has_rez (5) + has_eis (5) + planning_submitted (5) |
+| **Repeat-winner bonus** | 15 | 5 pts per prior scheme win, capped at 15 |
+
+### Bands
+
+- **High** (≥75) — 2 projects currently (Haughton BESS 200 MW QLD Pacific Hydro grade A; Karara BESS 400 MW QLD Acciona Energy grade A)
+- **Medium** (55-74) — 260 projects
+- **Low** (35-54) — 462 projects
+- **Very low** (<35) — 58 projects
+
+### What the scoring reflects
+
+The heuristic rewards:
+1. **BESS in dispatchable-leaning rounds.** CIS Tender 1 and 3 both targeted dispatchable; NSW LTESA Round 2 targeted firming. Any BESS in NSW / QLD / VIC with an A/B developer and reasonable size scores well.
+2. **Proven developers.** Grade A is 3× the points of grade D. This matches reality — scheme administrators favour known successful deliverers.
+3. **Project readiness.** Has COD, REZ, EIS → signals a serious submission. Early-stage projects with no planning work are long shots.
+4. **Repeat winners.** Developers who've won before generally win again.
+
+## Known limitations
+
+1. **It's a heuristic, not a trained model.** We don't yet have enough scheme-round data to train a real classifier. The weights are judgement-based, informed by the 6 CIS tenders and 6 LTESA rounds to date.
+2. **Tech fit is round-dependent.** The current weights blend generation and dispatchable round appetites. A strictly-generation round (no BESS) would flip the ranking.
+3. **Size fit uses standard caps.** A project outside the 100-500 MW band can still win — the score just reflects that historical round outcomes lean to that band.
+4. **Existing scheme winners currently excluded.** Projects that already hold a scheme contract don't show up in the ranked list (they can't win again for that project).
+5. **No state quota handling.** Recent CIS rounds have had implicit state caps (e.g. NSW capacity ceiling) that aren't in the model. A high-scoring NSW project may still get squeezed out on state quota.
+6. **Model score is a relative ranking signal, not an absolute probability.** A score of 75 doesn't mean "75% chance of winning" — it means "this project clusters with historically-successful submissions."
+
+## Cross-references
+
+- **OEM Intelligence** — full HHI and top-3 per role; the Dominance Matrix here is a complementary lens
+- **Asset Lifecycle & Repowering** — at-risk OEMs feed into the refurbishment scoring too
+- **Scheme Tracker** — actual scheme round outcomes (historical CIS + LTESA)
+- **Developer Intelligence** — per-developer grade and scheme win history
+`,
+  },
+  {
     id: 'asset-lifecycle-repowering',
     title: 'Asset Lifecycle & Repowering',
     description: 'How operating fleet age is tracked, how repowering candidates are scored, and how the fleet turnover forecast is built.',
