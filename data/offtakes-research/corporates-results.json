@@ -1,0 +1,439 @@
+[
+  {
+    "id": 55,
+    "project_id": "dundonnell-wind-farm",
+    "party": "ALDI",
+    "notes": "Tilt Renewables' first corporate PPA. ALDI takes approximately 6% of output (~20 MW equivalent) from the 336 MW project. Deal took total long-term contracted output of DDWF to ~93% (alongside Victorian Renewable Energy Target auction contract for 37% and Snowy Hydro offtake). Supports ALDI Australia's commitment to be 100% renewable by end of 2021.",
+    "updates": {
+      "capacity_mw": 20.0,
+      "volume_structure": "Approximately 6% of project output (~20 MW equivalent of 336 MW project)",
+      "price_aud_per_mwh": null,
+      "price_structure": "Fixed-price corporate PPA (undisclosed)",
+      "price_notes": "Price not publicly disclosed. Tilt described pricing as reflecting tightening Victorian wind PPA market at time of signing (April 2020).",
+      "term_years": 10,
+      "start_date": "2021-01-01",
+      "end_date": "2030-12-31",
+      "tenor_description": "10-year PPA signed April 2020; offtake commenced at the beginning of 2021.",
+      "sources": [
+        {"url": "https://tiltrenewables.com/tilt-renewables-and-aldi-sign-a-long-term-ppa-from-the-dundonnell-wind-farm/", "title": "Tilt Renewables and ALDI Sign a Long Term PPA from the Dundonnell Wind Farm", "accessed": "2026-04-17"},
+        {"url": "https://reneweconomy.com.au/tilt-signs-up-aldi-for-dundonnell-wind-farm-as-snowtown-dodges-negative-prices-22973/", "title": "Tilt signs up Aldi for Dundonnell wind farm — RenewEconomy", "accessed": "2026-04-17"},
+        {"url": "https://www.energymagazine.com.au/aldi-signs-decade-long-ppa-for-wind-farm-output/", "title": "ALDI signs decade-long PPA for wind farm output — Energy Magazine", "accessed": "2026-04-17"}
+      ],
+      "data_confidence": "medium"
+    }
+  },
+  {
+    "id": 85,
+    "project_id": "macintyre-wind-farm",
+    "party": "Ark Energy/Telstra",
+    "notes": "Ark Energy holds a 30% interest in MacIntyre Wind Farm (ACCIONA Energía 70%). Ark Energy in turn signed Australia's largest corporate wind PPA with Telstra (October 2022) supplying 350 GWh/year. The other portion of Ark Energy's 30% share decarbonises the Sun Metals zinc refinery in Townsville.",
+    "notes_detail_telstra": "Telstra's 350 GWh/year represents approximately half of Ark Energy's ~30% share (277.2 MW) of the 923.4 MW project. Deal announced as helping Telstra achieve 100% renewable by FY25.",
+    "updates": {
+      "capacity_mw": 100.0,
+      "volume_structure": "350 GWh/year to Telstra (~100 MW equivalent of 923 MW project). Remainder of Ark Energy's 30% stake (~177 MW) supplies Sun Metals zinc refinery.",
+      "price_aud_per_mwh": null,
+      "price_structure": "Fixed-price corporate PPA (undisclosed)",
+      "price_notes": "Price not publicly disclosed. Described as Australia's largest corporate wind PPA by volume at announcement.",
+      "term_years": null,
+      "start_date": "2024-04-01",
+      "end_date": null,
+      "tenor_description": "Long-term PPA signed October 2022. Energy supply commenced as MacIntyre ramped up through 2024; full commissioning 2025.",
+      "sources": [
+        {"url": "https://arkenergy.com.au/news/2022/10/4/315-ark-energy-and-telstra-sign-landmark-agreement/", "title": "Ark Energy and Telstra sign landmark agreement — Ark Energy", "accessed": "2026-04-17"},
+        {"url": "https://reneweconomy.com.au/telstra-underwrites-australias-biggest-wind-farm-in-ppa-with-ark-energy/", "title": "Telstra underwrites Australia's biggest wind farm in PPA with Ark Energy — RenewEconomy", "accessed": "2026-04-17"},
+        {"url": "https://www.telstra.com.au/aboutus/media/media-releases/telstra-boosts-investment-in-renewable-energy", "title": "Telstra boosts investment in renewable energy future — Telstra", "accessed": "2026-04-17"}
+      ],
+      "data_confidence": "high"
+    }
+  },
+  {
+    "id": 60,
+    "project_id": "goyder-south-wind-farm-1b",
+    "party": "BHP",
+    "notes": "Industry-first 24/7 baseload renewable PPA: 70 MW round-the-clock supply to BHP Olympic Dam, firmed by 238.5 MW Blyth Battery. Underpins the 203.5 MW Goyder South Stage 1B build. Intended to meet ~50% of Olympic Dam's electricity demand. BHP later signed an additional 100 MW baseload deal (2025) for further expansion.",
+    "updates": {
+      "capacity_mw": 70.0,
+      "volume_structure": "70 MW round-the-clock baseload equivalent (from 412 MW Goyder South Stage 1 wind + Blyth Battery firming). Represents ~50% of Olympic Dam demand.",
+      "price_aud_per_mwh": null,
+      "price_structure": "Baseload PPA — flat-shaped (24/7) renewable supply firmed by battery",
+      "price_notes": "Price not publicly disclosed. Structured as a baseload product rather than pay-as-produced, reflecting novel firming arrangement.",
+      "term_years": null,
+      "start_date": "2025-07-01",
+      "end_date": null,
+      "tenor_description": "PPA signed November 2022. Supply commenced July 2025 on commissioning of Goyder South Stage 1 and Blyth Battery. Term length not publicly disclosed.",
+      "sources": [
+        {"url": "https://www.bhp.com/news/media-centre/releases/2022/11/new-wind-and-battery-project-in-south-australia", "title": "New wind and battery project in South Australia — BHP", "accessed": "2026-04-17"},
+        {"url": "https://neoen.com/en/innovations/neoen-bhp-sign-70mw-renewable-energy-baseload-contract-south-australia/", "title": "Neoen and BHP sign a 70 MW renewable energy baseload contract — Neoen", "accessed": "2026-04-17"},
+        {"url": "https://www.pv-magazine-australia.com/2022/11/04/bhp-signs-baseload-ppa-contract-with-neoen-for-24-7-renewable-energy/", "title": "BHP signs baseload PPA contract with Neoen for 24/7 renewable energy — PV Magazine Australia", "accessed": "2026-04-17"},
+        {"url": "https://reneweconomy.com.au/south-australias-biggest-wind-farm-and-blyth-battery-hits-financial-close-on-track-to-power-bhp-copper-mine/", "title": "South Australia's biggest wind farm and Blyth battery hit financial close — RenewEconomy", "accessed": "2026-04-17"}
+      ],
+      "data_confidence": "high"
+    }
+  },
+  {
+    "id": 32,
+    "project_id": "port-augusta-renewable-energy-park-solar",
+    "party": "BHP",
+    "notes": "Part of BHP's long-term renewable supply agreement with Iberdrola (announced October 2021) to provide 100% renewable electricity to Olympic Dam. PPA covers energy from Iberdrola's 320 MW Port Augusta Renewable Energy Park (210 MW wind + 107 MW solar), plus Iberdrola's broader SA portfolio. BHP buys LGCs for 100% of energy purchased until 2025. Reduces Olympic Dam scope 2 emissions ~50% by 2025.",
+    "updates": {
+      "capacity_mw": null,
+      "volume_structure": "Share of output from 107 MW solar component of 320 MW hybrid (paired with 210 MW wind in same PPA). Combined with Iberdrola portfolio to meet 100% of Olympic Dam demand alongside Neoen deal.",
+      "price_aud_per_mwh": null,
+      "price_structure": "Long-term bundled PPA (energy + LGCs)",
+      "price_notes": "Price not publicly disclosed. Includes innovative LGC purchase mechanism — BHP purchases LGCs for 100% of purchased energy through to 2025.",
+      "term_years": null,
+      "start_date": "2022-07-01",
+      "end_date": null,
+      "tenor_description": "Long-term PPA signed October 2021, commenced 1 July 2022. Term length not publicly disclosed.",
+      "sources": [
+        {"url": "https://www.bhp.com/news/media-centre/releases/2021/10/olympic-dam-to-partner-with-iberdrola-at-port-augusta-renewable-energy-park", "title": "Olympic Dam to partner with Iberdrola at Port Augusta Renewable Energy Park — BHP", "accessed": "2026-04-17"},
+        {"url": "https://www.iberdrola.com/press-room/news/detail/iberdrola-supply-green-energy-bhp-olympic-dam-mine-project-south-australia", "title": "Iberdrola will supply green energy to BHP Olympic Dam — Iberdrola", "accessed": "2026-04-17"},
+        {"url": "https://reneweconomy.com.au/bhp-signs-landmark-renewable-energy-deal-for-huge-olympic-dam-mine/", "title": "BHP signs landmark renewable energy deal for huge Olympic Dam mine — RenewEconomy", "accessed": "2026-04-17"}
+      ],
+      "data_confidence": "medium"
+    }
+  },
+  {
+    "id": 33,
+    "project_id": "port-augusta-renewable-energy-park-wind",
+    "party": "BHP",
+    "notes": "Wind component of BHP's Port Augusta PPA with Iberdrola (see id 32). 210 MW wind + 107 MW solar hybrid. BHP takes a share of output, sharing the project with Woolworths (see id 65) and other Iberdrola portfolio customers.",
+    "updates": {
+      "capacity_mw": null,
+      "volume_structure": "Share of output from 210 MW wind component of 320 MW hybrid (paired with 107 MW solar in same PPA).",
+      "price_aud_per_mwh": null,
+      "price_structure": "Long-term bundled PPA (energy + LGCs)",
+      "price_notes": "Price not publicly disclosed. LGC purchase for 100% of energy to 2025 is part of the deal.",
+      "term_years": null,
+      "start_date": "2022-07-01",
+      "end_date": null,
+      "tenor_description": "Long-term PPA signed October 2021, commenced 1 July 2022. Term length not publicly disclosed.",
+      "sources": [
+        {"url": "https://www.bhp.com/news/media-centre/releases/2021/10/olympic-dam-to-partner-with-iberdrola-at-port-augusta-renewable-energy-park", "title": "Olympic Dam to partner with Iberdrola at Port Augusta Renewable Energy Park — BHP", "accessed": "2026-04-17"},
+        {"url": "https://www.pv-magazine.com/2021/10/14/bhp-signs-supply-deal-with-australias-largest-windsolar-farm/", "title": "BHP signs supply deal with Australia's largest wind+solar farm — PV Magazine", "accessed": "2026-04-17"},
+        {"url": "https://en.wikipedia.org/wiki/Port_Augusta_Renewable_Energy_Park", "title": "Port Augusta Renewable Energy Park — Wikipedia", "accessed": "2026-04-17"}
+      ],
+      "data_confidence": "medium"
+    }
+  },
+  {
+    "id": 64,
+    "project_id": "port-augusta-renewable-energy-park-wind",
+    "party": "BHP",
+    "notes": "Duplicate record for BHP's PPA over the Port Augusta wind component (see id 33). Same underlying contract: BHP with Iberdrola, October 2021. Retained as a separate offtake row in the database to represent BHP's counterparty linkage where Woolworths (id 65) is also linked to the same generator.",
+    "updates": {
+      "capacity_mw": null,
+      "volume_structure": "Share of 210 MW wind output (same PPA as id 33). Counterpart to Woolworths linkage on the same asset.",
+      "price_aud_per_mwh": null,
+      "price_structure": "Long-term bundled PPA (energy + LGCs)",
+      "price_notes": "Price not publicly disclosed.",
+      "term_years": null,
+      "start_date": "2022-07-01",
+      "end_date": null,
+      "tenor_description": "Long-term PPA signed October 2021, commenced 1 July 2022.",
+      "sources": [
+        {"url": "https://www.bhp.com/news/media-centre/releases/2021/10/olympic-dam-to-partner-with-iberdrola-at-port-augusta-renewable-energy-park", "title": "Olympic Dam to partner with Iberdrola at Port Augusta Renewable Energy Park — BHP", "accessed": "2026-04-17"},
+        {"url": "https://www.iberdrola.com/press-room/news/detail/iberdrola-supply-green-energy-bhp-olympic-dam-mine-project-south-australia", "title": "Iberdrola will supply green energy to BHP Olympic Dam — Iberdrola", "accessed": "2026-04-17"}
+      ],
+      "data_confidence": "medium"
+    }
+  },
+  {
+    "id": 14,
+    "project_id": "sapphire-wind-farm",
+    "party": "CBA (Commonwealth Bank)",
+    "notes": "Commonwealth Bank signed a 12-year PPA in November 2018 with CWP Renewables' 270 MW Sapphire Wind Farm, administered by ERM Power. Covers 96,000 MWh/year (~65% of CBA's Australian electricity). First Australian company to join RE100. Commenced 1 January 2019.",
+    "updates": {
+      "capacity_mw": 30.0,
+      "volume_structure": "96,000 MWh/year (~30 MW capacity equivalent at typical NSW wind capacity factor). Represents 65% of CBA's Australian electricity needs.",
+      "price_aud_per_mwh": null,
+      "price_structure": "Fixed-price bundled PPA (energy + LGCs), administered via ERM Power sleeve",
+      "price_notes": "Price not publicly disclosed. Structured via retailer sleeve (ERM Power) rather than direct balancing.",
+      "term_years": 12,
+      "start_date": "2019-01-01",
+      "end_date": "2030-12-31",
+      "tenor_description": "12-year PPA signed November 2018, commenced 1 January 2019. Supports CBA's RE100 commitment to 100% renewables by 2030.",
+      "sources": [
+        {"url": "https://www.commbank.com.au/guidance/newsroom/cba-renewables-two-thirds-energy-needs-201811.html", "title": "CBA to use renewables for two thirds of electricity needs — CBA", "accessed": "2026-04-17"},
+        {"url": "https://reneweconomy.com.au/commbank-commits-to-100-renewables-signs-up-sapphire-wind-solar-battery-project-23586/", "title": "CommBank commits to 100% renewables, signs up Sapphire — RenewEconomy", "accessed": "2026-04-17"},
+        {"url": "https://www.there100.org/our-work/news/commonwealth-bank-australia-becomes-first-australian-company-join-global-business", "title": "CBA becomes first Australian company to join RE100 — RE100", "accessed": "2026-04-17"}
+      ],
+      "data_confidence": "high"
+    }
+  },
+  {
+    "id": 74,
+    "project_id": "golden-plains-wind-farm-east",
+    "party": "Equinix",
+    "notes": "Equinix's first Australian renewable PPA (February 2024) with TagEnergy for 151 MW — ~20% of the 756 MW Golden Plains Wind Farm East Stage 1. Enough to cover all of Equinix's 17 Australian data centres. Brings total project contracted volume to 60% (Snowy Hydro took 40% in 2023). Note: stage one is typically reported as 756 MW though some sources cite 733 MW nameplate variant.",
+    "updates": {
+      "capacity_mw": 151.0,
+      "volume_structure": "151 MW (~20% of 756 MW stage one); covers full load of 17 Australian IBX data centres",
+      "price_aud_per_mwh": null,
+      "price_structure": "Long-term fixed-price PPA (energy + LGCs)",
+      "price_notes": "Price not publicly disclosed.",
+      "term_years": null,
+      "start_date": "2029-01-01",
+      "end_date": null,
+      "tenor_description": "Long-term PPA signed February 2024. Supply commences once stage one operational (expected 2029 per TagEnergy). Ashurst advised Equinix.",
+      "sources": [
+        {"url": "https://newsroom.equinix.com/2024-02-06-Equinix-Signs-its-First-Renewable-Energy-PPA-in-Australia-with-TagEnergy", "title": "Equinix Signs its First Renewable Energy PPA in Australia with TagEnergy", "accessed": "2026-04-17"},
+        {"url": "https://tag-en.com/tagenergy-signs-second-power-purchase-agreement-for-stage-one-of-golden-plains-wind-farm/", "title": "TagEnergy signs second PPA for stage one of Golden Plains — TagEnergy", "accessed": "2026-04-17"},
+        {"url": "https://reneweconomy.com.au/massive-golden-plains-wind-farm-snags-a-second-ppa/", "title": "Massive Golden Plains wind farm snags a second PPA — RenewEconomy", "accessed": "2026-04-17"}
+      ],
+      "data_confidence": "high"
+    }
+  },
+  {
+    "id": 77,
+    "project_id": "flyers-creek-wind-farm",
+    "party": "Iberdrola portfolio",
+    "notes": "Flyers Creek is wholly owned and operated by Iberdrola Australia (145 MW, 38 turbines). Output is dispatched as part of Iberdrola's broader NEM renewable portfolio rather than under a single disclosed third-party corporate PPA. Iberdrola's portfolio customers include BHP (Olympic Dam), Woolworths, and Sydney Opera House — no project-specific sleeve to any one counterparty has been publicly named.",
+    "updates": {
+      "capacity_mw": 145.0,
+      "volume_structure": "Full 145 MW nameplate (~450 GWh/year) dispatched into Iberdrola Australia NEM portfolio; no publicly named project-specific corporate PPA.",
+      "price_aud_per_mwh": null,
+      "price_structure": "Portfolio dispatch — no disclosed single offtake PPA",
+      "price_notes": "No publicly disclosed project-level PPA price or counterparty. Output is merchant + portfolio-firmed sales including Iberdrola's PPA book (BHP, Woolworths, others).",
+      "term_years": null,
+      "start_date": null,
+      "end_date": null,
+      "tenor_description": "Iberdrola committed to construction February 2022. First power to grid 2024. Portfolio-dispatched — no discrete tenor.",
+      "sources": [
+        {"url": "https://www.iberdrola.com.au/our-assets/asset-map/operating-renewable-energy-assets/flyers-creek-wind-farm", "title": "Flyers Creek Wind Farm — Iberdrola Australia", "accessed": "2026-04-17"},
+        {"url": "https://renews.biz/75948/iberdrola-to-construct-145mw-australian-onshore-wind/", "title": "Iberdrola to construct 145MW Australian onshore wind farm — reNews", "accessed": "2026-04-17"},
+        {"url": "https://reneweconomy.com.au/new-nsw-wind-farm-sends-first-bursts-of-power-sent-to-the-grid/", "title": "New NSW wind farm sends first bursts of power to the grid — RenewEconomy", "accessed": "2026-04-17"}
+      ],
+      "data_confidence": "low"
+    }
+  },
+  {
+    "id": 15,
+    "project_id": "crowlands-wind-farm",
+    "party": "NAB (National Australia Bank)",
+    "notes": "NAB is a member of the 14-party Melbourne Renewable Energy Project (MREP) consortium that anchored the 80 MW Crowlands Wind Farm (Pacific Hydro). Consortium buys 88 GWh/year (~33% of project output). NAB also co-financed the $80M debt package with CBA. Supports NAB's target of 50% renewable energy by 2025.",
+    "updates": {
+      "capacity_mw": 10.0,
+      "volume_structure": "NAB's share within MREP consortium (14 buyers, 88 GWh/year combined). NAB share not publicly broken out but estimated in single-digit MW range.",
+      "price_aud_per_mwh": null,
+      "price_structure": "Bundled PPA via MREP group purchasing model (PPA + LGCs)",
+      "price_notes": "Price not publicly disclosed. MREP structure pools demand across councils, universities and corporates; each member signs individual sub-contract at uniform pricing terms.",
+      "term_years": 10,
+      "start_date": "2019-04-01",
+      "end_date": "2029-03-31",
+      "tenor_description": "10-year PPA via MREP; Crowlands achieved commissioning mid-2019. NAB separately provided project finance debt.",
+      "sources": [
+        {"url": "https://news.nab.com.au/news/nab-backs-100th-green-energy-project/", "title": "NAB backs 100th green energy project — NAB", "accessed": "2026-04-17"},
+        {"url": "https://reneweconomy.com.au/nab-cba-provide-80m-finance-crowlands-wind-farm-10929/", "title": "NAB, CBA to provide $80m finance for Crowlands — RenewEconomy", "accessed": "2026-04-17"},
+        {"url": "https://business.nab.com.au/crowlands-bringing-together-councils-32598/", "title": "Crowlands: Bringing together councils, universities & companies — NAB", "accessed": "2026-04-17"}
+      ],
+      "data_confidence": "medium"
+    }
+  },
+  {
+    "id": 37,
+    "project_id": "bulgana-green-power-hub-wind-farm",
+    "party": "Nectar Farms",
+    "notes": "Nectar Farms signed a 10-year PPA with Neoen for ~15% of output from the 194 MW Bulgana wind farm + 20 MW/34 MWh Tesla battery, powering its 30 ha glasshouse facility in Stawell, VIC. Described as a first-of-its-kind agribusiness renewable partnership globally. Remaining 85% of output goes to the grid (including Victorian Renewable Energy Target support contract).",
+    "updates": {
+      "capacity_mw": 30.0,
+      "volume_structure": "~15% of Bulgana output (194 MW wind + battery) = ~30 MW equivalent, dedicated to Stawell glasshouse load",
+      "price_aud_per_mwh": null,
+      "price_structure": "Behind-the-meter-equivalent PPA (energy + firming from co-located Tesla battery)",
+      "price_notes": "Price not publicly disclosed. Structure uses Neoen's 20 MW / 34 MWh Tesla battery to firm supply to Nectar Farms' glasshouse.",
+      "term_years": 10,
+      "start_date": "2021-01-01",
+      "end_date": "2030-12-31",
+      "tenor_description": "10-year PPA signed 2018. Bulgana achieved full grid connection in 2021; operations ramped through 2020–2021.",
+      "sources": [
+        {"url": "https://neoen.com/en/news/2018/neoen-to-break-ground-on-bulgana-green-power-hub/", "title": "Neoen to break ground on Bulgana Green Power Hub — Neoen", "accessed": "2026-04-17"},
+        {"url": "https://www.energy.vic.gov.au/renewable-energy/batteries-energy-storage-projects/bulgana-green-power-hub", "title": "Bulgana Green Power Hub — Victorian Department of Energy", "accessed": "2026-04-17"},
+        {"url": "https://www.nsenergybusiness.com/projects/bulgana-green-power-hub-victoria/", "title": "Bulgana Green Power Hub, Wimmera, Victoria — NS Energy", "accessed": "2026-04-17"}
+      ],
+      "data_confidence": "medium"
+    }
+  },
+  {
+    "id": 79,
+    "project_id": "kaban-wind-farm",
+    "party": "Neoen portfolio",
+    "notes": "CleanCo Queensland (state-owned gentailer) signed a 15-year PPA in October 2020 for 100% of Kaban's output — 110 MW of the 157 MW project reported initially, with CleanCo taking whole output. Despite being flagged as 'Neoen portfolio' in the TSV, the effective offtaker is CleanCo. Supports state renewable targets and NAIF-backed financing.",
+    "updates": {
+      "capacity_mw": 157.0,
+      "volume_structure": "100% of output (157 MW / 457 GWh/year) to CleanCo Queensland",
+      "price_aud_per_mwh": null,
+      "price_structure": "15-year offtake PPA (energy + LGCs)",
+      "price_notes": "Price not publicly disclosed. Supported by A$370M Neoen investment including NAIF financing component.",
+      "term_years": 15,
+      "start_date": "2023-09-01",
+      "end_date": "2038-08-31",
+      "tenor_description": "15-year PPA signed October 2020. Kaban Green Power Hub connected to Queensland's transmission network and started powering up in 2023.",
+      "sources": [
+        {"url": "https://neoen.com/en/news/2020/neoen-and-cleanco-queensland-sign-a-new-ppa-for-110-mw-of-wind-energy-in-australia/", "title": "Neoen and CleanCo Queensland sign a new PPA for 110 MW — Neoen", "accessed": "2026-04-17"},
+        {"url": "https://cleancoqueensland.com.au/portfolio/offtakes/kaban-green-power-hub/", "title": "Kaban Green Power Hub — CleanCo Queensland", "accessed": "2026-04-17"},
+        {"url": "https://reneweconomy.com.au/kaban-wind-farm-powers-up-connects-to-queenslands-renewable-supergrid/", "title": "Kaban wind farm powers up — RenewEconomy", "accessed": "2026-04-17"}
+      ],
+      "data_confidence": "high"
+    }
+  },
+  {
+    "id": 31,
+    "project_id": "sun-metals-corporation-solar-farm",
+    "party": "Sun Metals (Korea Zinc)",
+    "notes": "Not a third-party PPA — this is vertically integrated self-supply. Sun Metals Corporation (subsidiary of Korea Zinc) built the 124 MW (125 MW DC, 143 MW in some filings) solar farm itself with A$199M own investment, no government funding, specifically to supply its own Townsville zinc refinery. First major Australian energy user to build its own large-scale solar rather than sign a corporate PPA. Asset later transferred into Korea Zinc's Ark Energy entity. Provides ~25% of refinery demand.",
+    "updates": {
+      "capacity_mw": 124.0,
+      "volume_structure": "Self-supply: ~25% of Sun Metals refinery demand (124 MW installed, 25% of total refinery load). Remainder exported to NEM.",
+      "price_aud_per_mwh": null,
+      "price_structure": "Self-generation (not a PPA)",
+      "price_notes": "No external PPA — generation asset owned and operated by Korea Zinc subsidiary (Ark Energy) for internal supply. No disclosed transfer price.",
+      "term_years": null,
+      "start_date": "2018-05-01",
+      "end_date": null,
+      "tenor_description": "Began exporting May 2018; officially opened August 2018. Ongoing self-supply arrangement with no defined tenor.",
+      "sources": [
+        {"url": "https://en.wikipedia.org/wiki/Sun_Metals_Solar_Farm", "title": "Sun Metals Solar Farm — Wikipedia", "accessed": "2026-04-17"},
+        {"url": "https://www.pv-magazine.com/2018/08/17/australias-125-mw-sun-metals-refinery-solar-farm-officially-opens/", "title": "Australia's 125 MW Sun Metals refinery solar farm officially opens — PV Magazine", "accessed": "2026-04-17"},
+        {"url": "https://arkenergy.com.au/solar/sun-metals-solar-farm/", "title": "Sun Metals Solar Farm — Ark Energy", "accessed": "2026-04-17"}
+      ],
+      "data_confidence": "high"
+    }
+  },
+  {
+    "id": 16,
+    "project_id": "murra-warra-wind-farm-stage-1",
+    "party": "Telstra",
+    "notes": "Stage 1 (226 MW) underwritten by the Telstra-led consortium PPA signed December 2017: Telstra, ANZ Bank, Coca-Cola Amatil and University of Melbourne. Telstra's 70 MW share was the first part of its major corporate procurement and was struck at a 'stunning low cost' per RenewEconomy. Stage 1 operations began February 2020.",
+    "updates": {
+      "capacity_mw": 70.0,
+      "volume_structure": "Telstra's share: 70 MW out of 226 MW stage 1 consortium PPA (ANZ 20 MW, Coca-Cola Amatil 20 MW, UniMelb 16 MW, Telstra 70 MW — approximate allocations per public reporting).",
+      "price_aud_per_mwh": null,
+      "price_structure": "Fixed-price pay-as-produced PPA (consortium PPA)",
+      "price_notes": "Price not publicly disclosed but described as 'stunning low cost' at signing (Dec 2017). Consortium structure pools 4 buyers under one PPA.",
+      "term_years": 10,
+      "start_date": "2020-02-01",
+      "end_date": "2030-01-31",
+      "tenor_description": "~10-12 year PPA signed Dec 2017 (consortium PPA); Stage 1 operations began February 2020.",
+      "sources": [
+        {"url": "https://reneweconomy.com.au/telstra-signs-up-for-429mw-wind-farm-at-stunning-low-cost-13414/", "title": "Telstra signs up for 429MW wind farm, at stunning low cost — RenewEconomy", "accessed": "2026-04-17"},
+        {"url": "https://en.wikipedia.org/wiki/Murra_Warra_Wind_Farm", "title": "Murra Warra Wind Farm — Wikipedia", "accessed": "2026-04-17"},
+        {"url": "https://sustainablecampus.unimelb.edu.au/sustainability-commitment/news/murra-warra-windfarm", "title": "Murra Warra Windfarm — University of Melbourne Sustainability", "accessed": "2026-04-17"}
+      ],
+      "data_confidence": "high"
+    }
+  },
+  {
+    "id": 62,
+    "project_id": "murra-warra-wind-farm-stage-1",
+    "party": "Telstra",
+    "notes": "Duplicate record for Telstra's consortium PPA at Murra Warra Stage 1 (see id 16). Same underlying contract — retained in the database as separate counterparty linkage.",
+    "updates": {
+      "capacity_mw": 70.0,
+      "volume_structure": "Telstra's 70 MW share of stage 1 consortium PPA (see id 16).",
+      "price_aud_per_mwh": null,
+      "price_structure": "Fixed-price pay-as-produced PPA (consortium)",
+      "price_notes": "Price not publicly disclosed.",
+      "term_years": 10,
+      "start_date": "2020-02-01",
+      "end_date": "2030-01-31",
+      "tenor_description": "~10-12 year PPA signed Dec 2017. Same contract as id 16.",
+      "sources": [
+        {"url": "https://reneweconomy.com.au/telstra-signs-up-for-429mw-wind-farm-at-stunning-low-cost-13414/", "title": "Telstra signs up for 429MW wind farm, at stunning low cost — RenewEconomy", "accessed": "2026-04-17"},
+        {"url": "https://en.wikipedia.org/wiki/Murra_Warra_Wind_Farm", "title": "Murra Warra Wind Farm — Wikipedia", "accessed": "2026-04-17"}
+      ],
+      "data_confidence": "high"
+    }
+  },
+  {
+    "id": 17,
+    "project_id": "murra-warra-wind-farm-stage-2",
+    "party": "Telstra",
+    "notes": "Note: TSV labels party as 'Telstra' for stage 2 but public reporting indicates Stage 2 (209 MW, 38 turbines) was actually 100% underpinned by a long-term PPA with Snowy Hydro, enabling financial close August 2020 and Partners Group acquisition. Telstra may have an associated sub-arrangement via Snowy Hydro's retail arm, but Stage 2 offtake is properly attributed to Snowy Hydro per RES/Macquarie press releases.",
+    "updates": {
+      "capacity_mw": 209.0,
+      "volume_structure": "100% of Stage 2 output (209 MW / 38 turbines). Primary offtaker per public record is Snowy Hydro, not Telstra directly — data record appears mislabelled.",
+      "price_aud_per_mwh": null,
+      "price_structure": "Long-term fixed-price PPA",
+      "price_notes": "Price not publicly disclosed. Telstra labelling in DB likely a misattribution — Stage 2 was announced as 100% contracted to Snowy Hydro (Federal Government retailer). Recommend DB reclassification.",
+      "term_years": null,
+      "start_date": "2022-06-01",
+      "end_date": null,
+      "tenor_description": "PPA signed around August 2020 concurrent with Partners Group acquisition and financial close. Stage 2 construction completed by mid-2022.",
+      "sources": [
+        {"url": "https://www.partnersgroup.com/news-and-views/press-releases/investment-news/detail?news_id=3c5068ea-f295-458d-b091-372cb2af104c", "title": "Partners Group acquires Murra Warra II 209MW — Partners Group", "accessed": "2026-04-17"},
+        {"url": "https://reneweconomy.com.au/res-macquarie-land-finance-and-buyer-to-double-size-of-murra-warra-wind-farm-52673/", "title": "RES, Macquarie land finance and buyer to double size of Murra Warra — RenewEconomy", "accessed": "2026-04-17"},
+        {"url": "https://en.wikipedia.org/wiki/Murra_Warra_Wind_Farm", "title": "Murra Warra Wind Farm — Wikipedia", "accessed": "2026-04-17"}
+      ],
+      "data_confidence": "low"
+    }
+  },
+  {
+    "id": 56,
+    "project_id": "bango-999-wind-farm",
+    "party": "Woolworths",
+    "notes": "Woolworths' first renewable PPA (10 years) signed June 2021 with CWP Renewables (now Squadron Energy) over the 244 MW Bango Wind Farm. Covers 195,000 MWh/year = ~30% of Woolworths' NSW demand (108 supermarkets). Avoids ~158,000 tCO2/year. Advised by Ashurst.",
+    "updates": {
+      "capacity_mw": 60.0,
+      "volume_structure": "195,000 MWh/year (~60 MW equivalent of 244 MW project). Covers 30% of Woolworths NSW demand including 108 supermarkets.",
+      "price_aud_per_mwh": null,
+      "price_structure": "Fixed-price bundled PPA (energy + LGCs)",
+      "price_notes": "Price not publicly disclosed.",
+      "term_years": 10,
+      "start_date": "2022-01-01",
+      "end_date": "2031-12-31",
+      "tenor_description": "10-year PPA signed June 2021. Offtake commenced January 2022; Bango fully operational 2023.",
+      "sources": [
+        {"url": "https://www.woolworthsgroup.com.au/au/en/our-newsroom/latest-news/2021/woolworths-group-invests-in-power-purchase-agreement-with-nsw-wind-farm-on-road-to-100-per-cent-green-electricity-by-2025.html", "title": "Woolworths Group invests in PPA with NSW wind farm — Woolworths", "accessed": "2026-04-17"},
+        {"url": "https://www.squadronenergy.com/news/woolworths-group-invests-in-power-purchase-agreement-with-cwp-renewables", "title": "Woolworths Group invests in PPA with CWP Renewables — Squadron Energy", "accessed": "2026-04-17"},
+        {"url": "https://www.ashurst.com/en/news-and-insights/news-deals-and-awards/ashurst-advises-woolworths-on-power-purchase-agreement-for-bango-999-wind-farm-in-nsw/", "title": "Ashurst advises Woolworths on PPA for Bango 999 Wind Farm — Ashurst", "accessed": "2026-04-17"}
+      ],
+      "data_confidence": "high"
+    }
+  },
+  {
+    "id": 65,
+    "project_id": "port-augusta-renewable-energy-park-wind",
+    "party": "Woolworths",
+    "notes": "Woolworths' SA renewable partnership with Iberdrola Australia (announced 2021/2022): 9-year PPA supplying ~100,000 MWh/year (~25 MW equivalent) to cover Woolworths' entire SA footprint — ~70 Woolworths supermarkets, 17 Big W stores and the Adelaide Regional Distribution Centre. Sits alongside BHP's larger PPA on the same Port Augusta hybrid asset.",
+    "updates": {
+      "capacity_mw": 25.0,
+      "volume_structure": "~100,000 MWh/year (~25 MW equivalent) from 210 MW wind component of hybrid. Covers 100% of Woolworths' SA load (70 supermarkets + 17 Big W + DC).",
+      "price_aud_per_mwh": null,
+      "price_structure": "Fixed-price bundled PPA (energy + LGCs)",
+      "price_notes": "Price not publicly disclosed.",
+      "term_years": 9,
+      "start_date": "2022-01-01",
+      "end_date": "2030-12-31",
+      "tenor_description": "9-year PPA; park completed 2022 (initially targeted 2021). Woolworths' SA operations fully supplied by Port Augusta from 2022 onward.",
+      "sources": [
+        {"url": "https://www.energymatters.com.au/renewable-news/woolworths-signs-supply-deal-with-australias-biggest-wind-and-solar-energy-park/", "title": "Woolworths signs supply deal with Australia's biggest wind-solar energy park — Energy Matters", "accessed": "2026-04-17"},
+        {"url": "https://www.reccessary.com/en/news/Woolworths-inks-PPA-to-reach-100-percent-renewable-in-South-Australia", "title": "Woolworths inks PPA to reach 100% renewable in South Australia — Reccessary", "accessed": "2026-04-17"},
+        {"url": "https://www.iberdrola.com.au/our-assets/asset-map/operating-renewable-energy-assets/port-augusta", "title": "Port Augusta Renewable Energy Park — Iberdrola Australia", "accessed": "2026-04-17"}
+      ],
+      "data_confidence": "high"
+    }
+  },
+  {
+    "id": 66,
+    "project_id": "waubra",
+    "party": "Zen Energy",
+    "notes": "ACCIONA Energía signed a 10-year PPA with ZEN Energy (September 2022) for 200 GWh/year from the 192 MW Waubra Wind Farm (VIC) — 34% of total generation. A second 10-year deal was subsequently signed with ACCIONA Energía in 2024 to continue the offtake relationship to at least December 2033. Not a corporate/end-user PPA in the retail sense — Zen is a retailer/gentailer reselling on to its commercial customers.",
+    "updates": {
+      "capacity_mw": 65.0,
+      "volume_structure": "200 GWh/year (~34% of Waubra output, ~65 MW equivalent of 192 MW project)",
+      "price_aud_per_mwh": null,
+      "price_structure": "Fixed-price wholesale PPA (pay-as-produced, wholesale/retailer-to-retailer)",
+      "price_notes": "Price not publicly disclosed. Second 10-year tranche signed 2024 extending offtake to end 2033 at revised terms.",
+      "term_years": 10,
+      "start_date": "2022-10-01",
+      "end_date": "2033-12-31",
+      "tenor_description": "10-year PPA signed September 2022. Second 10-year offtake commenced January 2024, running to at least December 2033. Waubra operational since 2009.",
+      "sources": [
+        {"url": "https://www.acciona.com/updates/news/acciona-energia-signs-ppa-with-zen-energy-australia", "title": "ACCIONA Energía signs 10-year PPA with ZEN Energy — ACCIONA", "accessed": "2026-04-17"},
+        {"url": "https://www.zenenergy.com.au/knowledge-base/industry-news/zen-signs-a-10-year-deal-with-global-renewable-leader-acciona-energia-continuing-its-sustained-growth-strategy/", "title": "ZEN signs 10-year deal with ACCIONA Energía — ZEN Energy", "accessed": "2026-04-17"},
+        {"url": "https://reneweconomy.com.au/zen-energy-signs-new-look-offtake-deal-with-teenaged-wind-farm/", "title": "Zen Energy signs new-look offtake deal with Waubra — RenewEconomy", "accessed": "2026-04-17"}
+      ],
+      "data_confidence": "high"
+    }
+  }
+]

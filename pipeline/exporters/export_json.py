@@ -532,6 +532,10 @@ def export_all(db_path=DB_PATH):
     # 11. Offtaker profiles
     export_offtaker_profiles(conn)
 
+    # 11b. PPA Market Mapper analytics — rich per-buyer portfolio, types breakdown,
+    # developer×offtaker matrix, uncontracted operating risk register
+    export_offtake_analytics(conn)
+
     # 12. Data sources status
     export_data_sources(conn)
 
@@ -1731,6 +1735,289 @@ def export_offtaker_profiles(conn):
         'total': len(offtakers),
     })
     print(f"  indexes/offtaker-profiles.json ({len(offtakers)} offtakers)")
+
+
+# ---------------------------------------------------------------------------
+# Offtaker (PPA) analytics — powers the v2.21+ PPA Market Mapper
+# ---------------------------------------------------------------------------
+
+# Buyer-type classification — maps a party name substring to a category.
+# Order matters: first match wins. Used for the "buyer categories" stat cards.
+BUYER_CATEGORIES = [
+    # State-owned generators
+    ('gentailer',      ['Snowy Hydro', 'Hydro Tasmania']),
+    ('state_owned',    ['CleanCo', 'CS Energy', 'Stanwell', 'Ergon Energy', 'Synergy']),
+    # Gentailers (private)
+    ('gentailer',      ['AGL Energy', 'Origin Energy', 'EnergyAustralia', 'Alinta Energy',
+                        'Shell Energy', 'ActewAGL', 'Flow Power', 'Momentum', 'Red Energy',
+                        'Lumo', 'Simply Energy', 'GloBird']),
+    # Government
+    ('government',     ['ACT Government', 'Victorian Government', 'NSW Government',
+                        'SA Government', 'QLD Government', 'WA Government', 'AEMO']),
+    # Mining / industrial
+    ('industrial',     ['BHP', 'Rio Tinto', 'Korea Zinc', 'Sun Metals', 'Ark Energy',
+                        'Fortescue', 'Glencore', 'Anglo American', 'Nectar Farms']),
+    # Retail / consumer corporates
+    ('corporate',      ['Telstra', 'Woolworths', 'Coles', 'Aldi', 'ALDI', 'Qantas',
+                        'Microsoft', 'Amazon', 'Google', 'Equinix', 'Nextdc',
+                        'Westpac', 'NAB', 'CBA', 'ANZ']),
+    # Independent retailers / trading houses
+    ('trader',         ['Zen Energy', 'Iberdrola', 'Neoen portfolio', 'ENGIE']),
+]
+
+
+def classify_buyer(party: str) -> str:
+    """Return the broad category for an offtaker party name."""
+    for category, patterns in BUYER_CATEGORIES:
+        for pat in patterns:
+            if pat.lower() in (party or '').lower():
+                return category
+    return 'other'
+
+
+def export_offtake_analytics(conn):
+    """Pre-aggregate offtake intelligence for the PPA Market Mapper at /offtakers.
+
+    Output: analytics/offtake-analytics.json with sections:
+      - summary: total counts, totals by type, totals by buyer category
+      - types: per-offtake-type stats (count, avg tenor, avg price, counterparty count)
+      - top_buyers: ranked list with category, tech mix, tenor distribution
+      - dev_offtaker_matrix: flattened developer × offtaker pairings
+      - uncontracted_operating: operating projects with no offtake (risk register)
+      - buyer_portfolio: per-buyer detailed project list (for OfftakerDetail)
+    """
+    off_rows = conn.execute("""
+        SELECT o.id, o.project_id, o.party, o.type, o.term_years, o.capacity_mw,
+               o.price_aud_per_mwh, o.price_structure, o.price_notes,
+               o.start_date, o.end_date, o.tenor_description, o.volume_structure,
+               o.source_url, o.sources, o.data_confidence, o.last_verified,
+               p.name AS project_name, p.technology, p.state,
+               p.capacity_mw AS project_mw, p.status, p.current_developer
+        FROM offtakes o
+        JOIN projects p ON p.id = o.project_id
+    """).fetchall()
+
+    if not off_rows:
+        print("  analytics/offtake-analytics.json (no offtakes — skipped)")
+        return
+
+    # Attach buyer category
+    offtakes = []
+    for r in off_rows:
+        d = dict(r)
+        d['buyer_category'] = classify_buyer(d['party'])
+        offtakes.append(d)
+
+    # ---- Summary ----
+    total_offtakes = len(offtakes)
+    total_projects = len(set(o['project_id'] for o in offtakes))
+    total_buyers = len(set(o['party'] for o in offtakes))
+    by_category_count = defaultdict(int)
+    by_category_projects = defaultdict(set)
+    by_category_mw = defaultdict(float)
+    for o in offtakes:
+        by_category_count[o['buyer_category']] += 1
+        by_category_projects[o['buyer_category']].add(o['project_id'])
+        by_category_mw[o['buyer_category']] += o['capacity_mw'] or o['project_mw'] or 0
+
+    # ---- Types breakdown ----
+    by_type = defaultdict(lambda: {
+        'count': 0,
+        'tenors': [],
+        'prices': [],
+        'parties': set(),
+        'projects': set(),
+        'mw_contracted': 0.0,
+    })
+    for o in offtakes:
+        t = by_type[o['type']]
+        t['count'] += 1
+        t['parties'].add(o['party'])
+        t['projects'].add(o['project_id'])
+        if o['term_years']:
+            t['tenors'].append(o['term_years'])
+        if o['price_aud_per_mwh']:
+            t['prices'].append(o['price_aud_per_mwh'])
+        if o['capacity_mw']:
+            t['mw_contracted'] += o['capacity_mw']
+
+    types_out = {}
+    for t_name, d in by_type.items():
+        types_out[t_name] = {
+            'count': d['count'],
+            'parties': len(d['parties']),
+            'projects': len(d['projects']),
+            'mw_contracted': round(d['mw_contracted'], 1) if d['mw_contracted'] else None,
+            'avg_tenor_years': round(sum(d['tenors']) / len(d['tenors']), 1) if d['tenors'] else None,
+            'tenor_coverage': len(d['tenors']),
+            'avg_price_aud_per_mwh': round(sum(d['prices']) / len(d['prices']), 1) if d['prices'] else None,
+            'price_coverage': len(d['prices']),
+        }
+
+    # ---- Top buyers with rich detail ----
+    buyer_agg = defaultdict(lambda: {
+        'offtakes': 0,
+        'projects': set(),
+        'mw': 0.0,
+        'mw_contracted': 0.0,
+        'tenors': [],
+        'prices': [],
+        'technologies': defaultdict(int),
+        'states': defaultdict(int),
+        'types': defaultdict(int),
+        'category': '',
+        'developers': defaultdict(int),
+        'rows': [],
+    })
+    for o in offtakes:
+        b = buyer_agg[o['party']]
+        b['category'] = o['buyer_category']
+        b['offtakes'] += 1
+        b['projects'].add(o['project_id'])
+        b['mw'] += o['project_mw'] or 0
+        if o['capacity_mw']:
+            b['mw_contracted'] += o['capacity_mw']
+        if o['term_years']:
+            b['tenors'].append(o['term_years'])
+        if o['price_aud_per_mwh']:
+            b['prices'].append(o['price_aud_per_mwh'])
+        b['technologies'][o['technology']] += 1
+        b['states'][o['state']] += 1
+        b['types'][o['type']] += 1
+        if o['current_developer']:
+            b['developers'][o['current_developer']] += 1
+        # Per-row detail for OfftakerDetail buyer portfolio
+        sources_list = []
+        if o['sources']:
+            try:
+                sources_list = json.loads(o['sources'])
+            except (json.JSONDecodeError, TypeError):
+                pass
+        elif o['source_url']:
+            sources_list = [{'url': o['source_url'], 'title': None, 'accessed': None}]
+        b['rows'].append({
+            'offtake_id': o['id'],
+            'project_id': o['project_id'],
+            'project_name': o['project_name'],
+            'technology': o['technology'],
+            'state': o['state'],
+            'project_mw': o['project_mw'],
+            'developer': o['current_developer'],
+            'type': o['type'],
+            'term_years': o['term_years'],
+            'capacity_mw': o['capacity_mw'],
+            'volume_structure': o['volume_structure'],
+            'price_aud_per_mwh': o['price_aud_per_mwh'],
+            'price_structure': o['price_structure'],
+            'price_notes': o['price_notes'],
+            'start_date': o['start_date'],
+            'end_date': o['end_date'],
+            'tenor_description': o['tenor_description'],
+            'sources': sources_list,
+            'data_confidence': o['data_confidence'],
+            'last_verified': o['last_verified'],
+        })
+
+    top_buyers = []
+    buyer_portfolio = {}
+    for party, b in buyer_agg.items():
+        top_buyers.append({
+            'party': party,
+            'slug': make_slug(party),
+            'category': b['category'],
+            'offtakes': b['offtakes'],
+            'projects': len(b['projects']),
+            'mw_project_total': round(b['mw'], 1),
+            'mw_contracted': round(b['mw_contracted'], 1) if b['mw_contracted'] else None,
+            'avg_tenor_years': round(sum(b['tenors']) / len(b['tenors']), 1) if b['tenors'] else None,
+            'avg_price_aud_per_mwh': round(sum(b['prices']) / len(b['prices']), 1) if b['prices'] else None,
+            'by_technology': dict(b['technologies']),
+            'by_state': dict(b['states']),
+            'by_type': dict(b['types']),
+            'top_developers': sorted(b['developers'].items(), key=lambda e: -e[1])[:5],
+        })
+        buyer_portfolio[party] = b['rows']
+
+    top_buyers.sort(key=lambda b: (-b['offtakes'], -b['mw_project_total']))
+
+    # ---- Developer × Offtaker matrix ----
+    matrix = defaultdict(lambda: {
+        'offtakes': 0,
+        'projects': set(),
+        'mw': 0.0,
+    })
+    for o in offtakes:
+        dev = o['current_developer'] or '(unknown developer)'
+        key = (dev, o['party'])
+        matrix[key]['offtakes'] += 1
+        matrix[key]['projects'].add(o['project_id'])
+        matrix[key]['mw'] += o['project_mw'] or 0
+
+    matrix_out = []
+    for (dev, party), stats in matrix.items():
+        matrix_out.append({
+            'developer': dev,
+            'offtaker': party,
+            'offtakes': stats['offtakes'],
+            'projects': len(stats['projects']),
+            'mw': round(stats['mw'], 1),
+        })
+    matrix_out.sort(key=lambda e: (-e['offtakes'], -e['mw']))
+
+    # ---- Uncontracted operating projects (risk register) ----
+    # Operating projects with no offtake row at all.
+    contracted_ids = set(o['project_id'] for o in offtakes)
+    uncontracted = conn.execute("""
+        SELECT p.id, p.name, p.technology, p.state, p.capacity_mw,
+               p.current_developer, pa.capacity_factor_pct, pa.revenue_per_mw
+        FROM projects p
+        LEFT JOIN performance_annual pa
+          ON pa.project_id = p.id
+          AND pa.year = (SELECT MAX(year) FROM performance_annual WHERE project_id = p.id)
+        WHERE p.status = 'operating'
+          AND p.technology IN ('wind', 'solar', 'bess', 'hybrid')
+    """).fetchall()
+
+    risk_rows = []
+    for r in uncontracted:
+        if r['id'] in contracted_ids:
+            continue
+        risk_rows.append({
+            'project_id': r['id'],
+            'name': r['name'],
+            'technology': r['technology'],
+            'state': r['state'],
+            'capacity_mw': r['capacity_mw'],
+            'developer': r['current_developer'],
+            'capacity_factor_pct': round(r['capacity_factor_pct'], 1) if r['capacity_factor_pct'] else None,
+            'revenue_per_mw': round(r['revenue_per_mw'], 0) if r['revenue_per_mw'] else None,
+        })
+    risk_rows.sort(key=lambda p: -(p['capacity_mw'] or 0))
+
+    write_json(os.path.join(DATA_DIR, 'analytics', 'offtake-analytics.json'), {
+        'summary': {
+            'total_offtakes': total_offtakes,
+            'total_projects_contracted': total_projects,
+            'total_buyers': total_buyers,
+            'by_category': {
+                cat: {
+                    'offtakes': by_category_count[cat],
+                    'projects': len(by_category_projects[cat]),
+                    'mw': round(by_category_mw[cat], 1),
+                }
+                for cat in by_category_count
+            },
+        },
+        'types': types_out,
+        'top_buyers': top_buyers,
+        'buyer_portfolio': buyer_portfolio,
+        'dev_offtaker_matrix': matrix_out,
+        'uncontracted_operating': risk_rows,
+        'exported_at': datetime.now().isoformat(),
+    })
+    print(f"  analytics/offtake-analytics.json ({total_offtakes} offtakes, "
+          f"{total_buyers} buyers, {len(matrix_out)} dev-offtaker pairings, "
+          f"{len(risk_rows)} uncontracted operating)")
 
 
 def export_bess_capex(conn):
