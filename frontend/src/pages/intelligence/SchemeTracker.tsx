@@ -62,10 +62,13 @@ export default function SchemeTracker() {
   // Overview data
   const { cisRounds, ltesaRounds, loading: overviewLoading } = useSchemeData()
 
-  // Multi-select filters
+  // Multi-select filters. `selectedStates` starts seeded with NSW because
+  // NSW is the anchor state for CIS scheme commentary — user can add more
+  // or clear to view the whole NEM.
   const [selectedPrograms, setSelectedPrograms] = useState<string[]>([])
   const [selectedRounds, setSelectedRounds] = useState<string[]>([])
-  const [selectedStates, setSelectedStates] = useState<string[]>([])
+  const [selectedStates, setSelectedStates] = useState<string[]>(['NSW'])
+  const [selectedTechnologies, setSelectedTechnologies] = useState<string[]>([])
 
   // Expanded rounds
   const [expandedRounds, setExpandedRounds] = useState<Set<string>>(new Set())
@@ -110,10 +113,14 @@ export default function SchemeTracker() {
       rounds = rounds.filter(r => selectedRounds.includes(r.id))
     }
 
-    // For state filtering, filter projects within rounds
-    if (selectedStates.length > 0) {
+    // For state + technology filtering, filter projects within rounds
+    if (selectedStates.length > 0 || selectedTechnologies.length > 0) {
       rounds = rounds.map(r => {
-        const filteredProjects = r.projects.filter(p => selectedStates.includes(p.state))
+        const filteredProjects = r.projects.filter(p => {
+          if (selectedStates.length > 0 && !selectedStates.includes(p.state)) return false
+          if (selectedTechnologies.length > 0 && !selectedTechnologies.includes(p.technology)) return false
+          return true
+        })
         if (filteredProjects.length === 0) return null
         // Recompute by_stage and by_state for filtered projects
         const byStage: Record<string, number> = {}
@@ -136,7 +143,7 @@ export default function SchemeTracker() {
 
     // Sort by announced_date descending (newest first)
     return [...rounds].sort((a, b) => b.announced_date.localeCompare(a.announced_date))
-  }, [data, selectedPrograms, selectedRounds, selectedStates])
+  }, [data, selectedPrograms, selectedRounds, selectedStates, selectedTechnologies])
 
   // Summary stats from filtered rounds
   const summaryStats = useMemo(() => {
@@ -167,11 +174,26 @@ export default function SchemeTracker() {
     })
   }
 
-  const hasFilters = selectedPrograms.length > 0 || selectedRounds.length > 0 || selectedStates.length > 0
+  const hasFilters = selectedPrograms.length > 0 || selectedRounds.length > 0 || selectedStates.length > 0 || selectedTechnologies.length > 0
   const [showMobileFilters, setShowMobileFilters] = useState(false)
   const [showEssay, setShowEssay] = useState(false)
   const [pctMode, setPctMode] = useState<'projects' | 'mw'>('projects')
-  const filterCount = (selectedPrograms.length > 0 ? 1 : 0) + (selectedRounds.length > 0 ? 1 : 0) + (selectedStates.length > 0 ? 1 : 0)
+  const filterCount = (selectedPrograms.length > 0 ? 1 : 0) + (selectedRounds.length > 0 ? 1 : 0) + (selectedStates.length > 0 ? 1 : 0) + (selectedTechnologies.length > 0 ? 1 : 0)
+
+  // All technologies present in the dataset (for the filter pills)
+  const allTechnologies = useMemo(() => {
+    if (!data) return []
+    const set = new Set<string>()
+    for (const r of data.rounds) {
+      for (const p of r.projects) set.add(p.technology)
+    }
+    return [...set].sort()
+  }, [data])
+
+  const TECH_COLOURS: Record<string, string> = {
+    wind: '#3b82f6', solar: '#f59e0b', bess: '#10b981',
+    hybrid: '#ec4899', vpp: '#8b5cf6', pumped_hydro: '#06b6d4',
+  }
 
   function renderSchemeFilters() {
     return (
@@ -224,7 +246,7 @@ export default function SchemeTracker() {
           </div>
         </div>
 
-        {/* State filter */}
+        {/* State filter — NSW seeded as default (anchor state for CIS commentary) */}
         <div>
           <div className="text-[10px] font-semibold uppercase tracking-wider text-[var(--color-text-muted)] mb-1.5">State</div>
           <div className="flex items-center gap-1.5 flex-wrap">
@@ -247,9 +269,46 @@ export default function SchemeTracker() {
           </div>
         </div>
 
+        {/* Technology filter + CIS Wind Pipeline preset */}
+        <div>
+          <div className="text-[10px] font-semibold uppercase tracking-wider text-[var(--color-text-muted)] mb-1.5">Technology</div>
+          <div className="flex items-center gap-1.5 flex-wrap">
+            {allTechnologies.map(tech => {
+              const isActive = selectedTechnologies.includes(tech)
+              const col = TECH_COLOURS[tech] ?? '#94a3b8'
+              return (
+                <button
+                  key={tech}
+                  onClick={() => setSelectedTechnologies(toggle(selectedTechnologies, tech))}
+                  className={`text-xs px-2.5 py-1 rounded-full border transition-colors capitalize ${
+                    isActive
+                      ? 'border-transparent font-medium'
+                      : 'border-[var(--color-border)] text-[var(--color-text-muted)] hover:border-[var(--color-text-muted)]'
+                  }`}
+                  style={isActive ? { backgroundColor: `${col}20`, color: col } : undefined}
+                >
+                  {tech === 'bess' ? 'BESS' : tech === 'vpp' ? 'VPP' : tech.replace(/_/g, ' ')}
+                </button>
+              )
+            })}
+            <button
+              onClick={() => {
+                setSelectedPrograms(['CIS'])
+                setSelectedTechnologies(['wind'])
+                setSelectedStates(['NSW'])
+                setSelectedRounds([])
+              }}
+              className="text-xs px-2.5 py-1 rounded-full border border-emerald-500/60 text-emerald-300 bg-emerald-500/10 hover:bg-emerald-500/20 transition-colors ml-2"
+              title="Apply CIS + Wind + NSW filter preset"
+            >
+              🌬️ CIS Wind (NSW)
+            </button>
+          </div>
+        </div>
+
         {hasFilters && (
           <button
-            onClick={() => { setSelectedPrograms([]); setSelectedRounds([]); setSelectedStates([]) }}
+            onClick={() => { setSelectedPrograms([]); setSelectedRounds([]); setSelectedStates([]); setSelectedTechnologies([]) }}
             className="text-xs text-blue-400 hover:underline"
           >
             Clear filters
@@ -1605,6 +1664,7 @@ function RoundProgressCard({
                   <th className="text-left p-3 text-[var(--color-text-muted)] font-medium text-xs hidden sm:table-cell">Tech</th>
                   <th className="text-left p-3 text-[var(--color-text-muted)] font-medium text-xs hidden sm:table-cell">State</th>
                   <th className="text-left p-3 text-[var(--color-text-muted)] font-medium text-xs">Stage</th>
+                  <th className="text-left p-3 text-[var(--color-text-muted)] font-medium text-xs">Dev Status</th>
                   <th className="text-right p-3 text-[var(--color-text-muted)] font-medium text-xs">MW</th>
                   <th className="text-center p-3 text-[var(--color-text-muted)] font-medium text-xs hidden md:table-cell">FID</th>
                   <th className="text-center p-3 text-[var(--color-text-muted)] font-medium text-xs hidden md:table-cell">Construction</th>
@@ -1637,8 +1697,31 @@ function RoundProgressCard({
 // Project Row
 // ============================================================
 
+// Colours for the Dev Status chip — green = progressing, amber = blocker, red = high-severity, grey = unknown
+const DEV_STATUS_COLOUR: Record<string, string> = {
+  'construction': '#10b981',
+  'FID reached': '#10b981',
+  'planning approved': '#22d3ee',
+  'operating': '#10b981',
+  'commissioning': '#10b981',
+  'on track': '#22d3ee',
+  'grid connection pending': '#f59e0b',
+  'environmental pending': '#f59e0b',
+  'pre-planning': '#ef4444',
+  'execution risk': '#ef4444',
+}
+
+function devStatusColor(s?: string): string {
+  if (!s) return '#94a3b8'
+  return DEV_STATUS_COLOUR[s] ?? '#94a3b8'
+}
+
 function ProjectRow({ project: p }: { project: SchemeTrackerProject }) {
   const color = stageColor(p.stage)
+  const devColor = devStatusColor(p.dev_status)
+  const tooltip = p.annotations && p.annotations.length
+    ? p.annotations.map(a => `[${a.severity}] ${a.flag}: ${a.reason}`).join('\n')
+    : undefined
 
   return (
     <tr className="border-b border-[var(--color-border)]/50 hover:bg-[var(--color-bg)]/50">
@@ -1655,7 +1738,18 @@ function ProjectRow({ project: p }: { project: SchemeTrackerProject }) {
         )}
         <div className="text-[10px] text-[var(--color-text-muted)] md:hidden mt-0.5">{p.developer}</div>
       </td>
-      <td className="p-3 text-xs text-[var(--color-text-muted)] hidden md:table-cell">{p.developer}</td>
+      <td className="p-3 text-xs text-[var(--color-text-muted)] hidden md:table-cell">
+        {p.developer}
+        {p.developer_grade && (
+          <span
+            className="ml-1.5 text-[9px] px-1 py-0.5 rounded border border-[var(--color-border)] align-middle"
+            style={{ color: devStatusColor(p.developer_grade === 'D' || p.developer_grade === 'F' ? 'execution risk' : 'on track') }}
+            title={`Developer execution grade: ${p.developer_grade}`}
+          >
+            {p.developer_grade}
+          </span>
+        )}
+      </td>
       <td className="p-3 hidden sm:table-cell">
         <span className="text-[10px] px-1.5 py-0.5 rounded-full border border-[var(--color-border)] text-[var(--color-text-muted)]">
           {formatTech(p.technology)}
@@ -1669,6 +1763,21 @@ function ProjectRow({ project: p }: { project: SchemeTrackerProject }) {
         >
           {stageLabel(p.stage)}
         </span>
+      </td>
+      <td className="p-3" title={tooltip}>
+        {p.dev_status ? (
+          <span
+            className="text-[10px] px-2 py-0.5 rounded-full font-medium capitalize whitespace-nowrap"
+            style={{ backgroundColor: `${devColor}20`, color: devColor }}
+          >
+            {p.dev_status}
+            {p.annotations && p.annotations.length > 1 && (
+              <span className="ml-1 opacity-75">+{p.annotations.length - 1}</span>
+            )}
+          </span>
+        ) : (
+          <span className="text-[10px] text-[var(--color-text-muted)]">—</span>
+        )}
       </td>
       <td className="p-3 text-right text-xs text-[var(--color-text)]">{p.capacity_mw.toLocaleString()}</td>
       <td className="p-3 text-center text-[10px] text-[var(--color-text-muted)] hidden md:table-cell">

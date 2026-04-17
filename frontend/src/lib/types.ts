@@ -753,6 +753,12 @@ export interface DataSourcesIndex {
 
 export type MilestoneStage = 'operating' | 'commissioning' | 'construction' | 'planning_approved' | 'development' | 'unknown'
 
+export interface SchemeAnnotation {
+  flag: string
+  reason: string
+  severity: 'high' | 'medium' | 'low'
+}
+
 export interface SchemeTrackerProject {
   name: string
   project_id: string | null
@@ -766,6 +772,13 @@ export interface SchemeTrackerProject {
   fid_date: string | null
   construction_start: string | null
   cod_current: string | null
+  /** Pre-computed "why isn't this building yet" headline plus supporting
+   * annotations (v2.31.0). `dev_status` is always present — "FID reached",
+   * "construction", "planning approved", "on track", or the highest-severity
+   * annotation flag. */
+  dev_status?: string
+  annotations?: SchemeAnnotation[]
+  developer_grade?: string
 }
 
 export interface SchemeTrackerRound {
