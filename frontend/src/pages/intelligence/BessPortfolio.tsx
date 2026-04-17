@@ -19,7 +19,7 @@ import {
 import DataProvenance from '../../components/common/DataProvenance'
 import DataTable from '../../components/common/DataTable'
 import ChartFrame from '../../components/common/ChartFrame'
-import { fetchBessPortfolio } from '../../lib/dataService'
+import { fetchBessPortfolio, fetchBatteryLiveRecords } from '../../lib/dataService'
 import { STATUS_CONFIG, type ProjectStatus } from '../../lib/types'
 
 // =====================================================================
@@ -149,7 +149,7 @@ interface BessPortfolioData {
 // Tabs
 // =====================================================================
 
-type TabId = 'overview' | 'duration' | 'grid-forming' | 'co-located' | 'chemistry' | 'network-services'
+type TabId = 'overview' | 'duration' | 'grid-forming' | 'co-located' | 'chemistry' | 'network-services' | 'live-records'
 
 const TABS: { id: TabId; label: string }[] = [
   { id: 'overview', label: 'Overview' },
@@ -158,6 +158,7 @@ const TABS: { id: TabId; label: string }[] = [
   { id: 'co-located', label: 'Co-located' },
   { id: 'chemistry', label: 'Chemistry' },
   { id: 'network-services', label: 'Network Services' },
+  { id: 'live-records', label: 'Live & Records' },
 ]
 
 // =====================================================================
@@ -315,6 +316,7 @@ export default function BessPortfolio() {
       {tab === 'co-located' && <CoLocatedTab data={data} />}
       {tab === 'chemistry' && <ChemistryTab data={data} />}
       {tab === 'network-services' && <NetworkServicesTab data={data} />}
+      {tab === 'live-records' && <LiveAndRecordsTab />}
     </div>
   )
 }
@@ -1128,4 +1130,268 @@ function NetworkServicesTab({ data }: { data: BessPortfolioData }) {
       </section>
     </div>
   )
+}
+
+// =====================================================================
+// Live & Records tab (v2.28.0)
+// =====================================================================
+
+interface RecordEntry {
+  region: string
+  value: number
+  unit: string
+  recorded_at?: string | null
+  settlement_date?: string | null
+}
+
+interface BatteryLiveRecords {
+  has_data: boolean
+  latest_date: string | null
+  source_note: string
+  records: {
+    max_discharge_5min: RecordEntry[]
+    max_charge_5min: RecordEntry[]
+    max_daily_discharge: RecordEntry[]
+    max_daily_charge: RecordEntry[]
+  }
+  latest_snapshot: Record<string, {
+    discharged_mwh: number
+    charged_mwh: number
+    peak_discharge_mw: number
+    peak_charge_mw: number
+    peak_discharge_time: string | null
+    peak_charge_time: string | null
+    intervals: number
+  }>
+  daily_30d: Record<string, Array<{
+    settlement_date: string
+    discharged_mwh: number
+    charged_mwh: number
+    peak_discharge_mw: number
+    peak_charge_mw: number
+  }>>
+  installed_capacity: Record<string, { project_count: number; total_mw: number; total_mwh: number }>
+}
+
+const REGION_ORDER = ['NEM', 'NSW1', 'VIC1', 'QLD1', 'SA1', 'TAS1']
+const REGION_LABEL: Record<string, string> = {
+  NEM: 'NEM (All)',
+  NSW1: 'NSW',
+  VIC1: 'VIC',
+  QLD1: 'QLD',
+  SA1: 'SA',
+  TAS1: 'TAS',
+}
+
+function LiveAndRecordsTab() {
+  const [data, setData] = useState<BatteryLiveRecords | null>(null)
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    fetchBatteryLiveRecords().then((d) => {
+      setData(d as BatteryLiveRecords | null)
+      setLoading(false)
+    })
+  }, [])
+
+  if (loading) {
+    return <div className="py-16 text-center text-sm text-[var(--color-text-muted)]">Loading battery records…</div>
+  }
+  if (!data) {
+    return <div className="py-16 text-center text-sm text-[var(--color-text-muted)]">No data available.</div>
+  }
+
+  const hasData = data.has_data
+  const nemRecs = {
+    max_discharge: data.records.max_discharge_5min.find((r) => r.region === 'NEM'),
+    max_charge: data.records.max_charge_5min.find((r) => r.region === 'NEM'),
+    max_daily_discharge: data.records.max_daily_discharge.find((r) => r.region === 'NEM'),
+    max_daily_charge: data.records.max_daily_charge.find((r) => r.region === 'NEM'),
+  }
+  const nemCap = data.installed_capacity?.['NEM']
+  const nemLatest = data.latest_snapshot?.['NEM']
+
+  return (
+    <div className="space-y-6">
+      {/* Banner */}
+      <section
+        className="rounded-xl p-4 flex items-start gap-3"
+        style={{
+          background: hasData ? 'rgba(16,185,129,0.05)' : 'rgba(245,158,11,0.05)',
+          border: `1px solid ${hasData ? 'rgba(16,185,129,0.25)' : 'rgba(245,158,11,0.25)'}`,
+        }}
+      >
+        <span style={{ color: hasData ? '#10b981' : '#f59e0b' }}>{hasData ? '✓' : 'ℹ️'}</span>
+        <p className="text-xs text-[var(--color-text-muted)] leading-snug">{data.source_note}</p>
+      </section>
+
+      {hasData && nemCap && (
+        <section className="grid grid-cols-2 md:grid-cols-4 gap-3">
+          <MiniStat
+            label="Fleet Capacity"
+            value={`${(nemCap.total_mw / 1000).toFixed(2)} GW`}
+            sub={`${nemCap.project_count} operating projects · ${(nemCap.total_mwh / 1000).toFixed(1)} GWh total`}
+            colour="#10b981"
+          />
+          <MiniStat
+            label="Max 5-min Discharge"
+            value={nemRecs.max_discharge ? `${Math.round(nemRecs.max_discharge.value)} MW` : '—'}
+            sub={nemRecs.max_discharge?.recorded_at ? `Recorded ${formatShortDatetime(nemRecs.max_discharge.recorded_at)}` : ''}
+            colour="#3b82f6"
+          />
+          <MiniStat
+            label="Max 5-min Charge"
+            value={nemRecs.max_charge ? `${Math.round(nemRecs.max_charge.value)} MW` : '—'}
+            sub={nemRecs.max_charge?.recorded_at ? `Recorded ${formatShortDatetime(nemRecs.max_charge.recorded_at)}` : ''}
+            colour="#8b5cf6"
+          />
+          <MiniStat
+            label="Max Daily Discharge"
+            value={nemRecs.max_daily_discharge ? `${Math.round(nemRecs.max_daily_discharge.value).toLocaleString()} MWh` : '—'}
+            sub={nemRecs.max_daily_discharge?.settlement_date ? `On ${nemRecs.max_daily_discharge.settlement_date}` : ''}
+            colour="#f59e0b"
+          />
+        </section>
+      )}
+
+      {/* Latest snapshot */}
+      {hasData && nemLatest && (
+        <section className="rounded-xl border border-[var(--color-border)] bg-[var(--color-bg-card)] p-4">
+          <h2 className="text-base font-semibold text-[var(--color-text)] mb-1">
+            Latest snapshot · {data.latest_date}
+          </h2>
+          <p className="text-xs text-[var(--color-text-muted)] mb-3">
+            Most recent day's total throughput and peak dispatch per region.
+          </p>
+          <div className="overflow-x-auto">
+            <table className="w-full text-sm">
+              <thead>
+                <tr className="border-b border-[var(--color-border)] text-xs uppercase tracking-wider text-[var(--color-text-muted)]">
+                  <th className="text-left py-2 px-2">Region</th>
+                  <th className="text-right py-2 px-2">Discharged</th>
+                  <th className="text-right py-2 px-2">Charged</th>
+                  <th className="text-right py-2 px-2">Peak Discharge</th>
+                  <th className="text-right py-2 px-2">Peak Charge</th>
+                </tr>
+              </thead>
+              <tbody>
+                {REGION_ORDER.map((r) => {
+                  const snap = data.latest_snapshot?.[r]
+                  if (!snap) return null
+                  return (
+                    <tr key={r} className="border-b border-[var(--color-border)]/30">
+                      <td className="py-2 px-2 font-medium">{REGION_LABEL[r]}</td>
+                      <td className="py-2 px-2 text-right tabular-nums" style={{ color: '#10b981' }}>
+                        {Math.round(snap.discharged_mwh).toLocaleString()} MWh
+                      </td>
+                      <td className="py-2 px-2 text-right tabular-nums" style={{ color: '#8b5cf6' }}>
+                        {Math.round(snap.charged_mwh).toLocaleString()} MWh
+                      </td>
+                      <td className="py-2 px-2 text-right tabular-nums">
+                        {Math.round(snap.peak_discharge_mw).toLocaleString()} MW
+                      </td>
+                      <td className="py-2 px-2 text-right tabular-nums">
+                        {Math.round(snap.peak_charge_mw).toLocaleString()} MW
+                      </td>
+                    </tr>
+                  )
+                })}
+              </tbody>
+            </table>
+          </div>
+        </section>
+      )}
+
+      {/* Records by region */}
+      <section className="rounded-xl border border-[var(--color-border)] bg-[var(--color-bg-card)] p-4">
+        <h2 className="text-base font-semibold text-[var(--color-text)] mb-1">Records Board</h2>
+        <p className="text-xs text-[var(--color-text-muted)] mb-3">
+          All-time peaks per region since DISPATCHLOAD data was ingested. Updates every time the importer runs.
+        </p>
+        <div className="overflow-x-auto">
+          <table className="w-full text-sm">
+            <thead>
+              <tr className="border-b border-[var(--color-border)] text-xs uppercase tracking-wider text-[var(--color-text-muted)]">
+                <th className="text-left py-2 px-2">Region</th>
+                <th className="text-right py-2 px-2">Max 5-min Discharge</th>
+                <th className="text-right py-2 px-2">Max 5-min Charge</th>
+                <th className="text-right py-2 px-2">Max Daily Discharge</th>
+                <th className="text-right py-2 px-2">Max Daily Charge</th>
+              </tr>
+            </thead>
+            <tbody>
+              {REGION_ORDER.map((r) => {
+                const md = data.records.max_discharge_5min.find((x) => x.region === r)
+                const mc = data.records.max_charge_5min.find((x) => x.region === r)
+                const mdd = data.records.max_daily_discharge.find((x) => x.region === r)
+                const mdc = data.records.max_daily_charge.find((x) => x.region === r)
+                const hasRegion = md || mc || mdd || mdc
+                return (
+                  <tr key={r} className="border-b border-[var(--color-border)]/30">
+                    <td className="py-2 px-2 font-medium">{REGION_LABEL[r]}</td>
+                    <td className="py-2 px-2 text-right tabular-nums">
+                      {md ? `${Math.round(md.value)} MW` : hasRegion ? '—' : '—'}
+                      {md?.recorded_at && <div className="text-[10px] text-[var(--color-text-muted)]">{formatShortDatetime(md.recorded_at)}</div>}
+                    </td>
+                    <td className="py-2 px-2 text-right tabular-nums">
+                      {mc ? `${Math.round(mc.value)} MW` : '—'}
+                      {mc?.recorded_at && <div className="text-[10px] text-[var(--color-text-muted)]">{formatShortDatetime(mc.recorded_at)}</div>}
+                    </td>
+                    <td className="py-2 px-2 text-right tabular-nums">
+                      {mdd ? `${Math.round(mdd.value).toLocaleString()} MWh` : '—'}
+                      {mdd?.settlement_date && <div className="text-[10px] text-[var(--color-text-muted)]">{mdd.settlement_date}</div>}
+                    </td>
+                    <td className="py-2 px-2 text-right tabular-nums">
+                      {mdc ? `${Math.round(mdc.value).toLocaleString()} MWh` : '—'}
+                      {mdc?.settlement_date && <div className="text-[10px] text-[var(--color-text-muted)]">{mdc.settlement_date}</div>}
+                    </td>
+                  </tr>
+                )
+              })}
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      {/* 30-day chart */}
+      {hasData && data.daily_30d?.NEM?.length > 0 && (
+        <section className="rounded-xl border border-[var(--color-border)] bg-[var(--color-bg-card)] p-4">
+          <h2 className="text-base font-semibold text-[var(--color-text)] mb-1">30-day NEM fleet throughput</h2>
+          <p className="text-xs text-[var(--color-text-muted)] mb-3">
+            Daily MWh discharged (green) and charged (purple) across the whole NEM BESS fleet.
+          </p>
+          <ChartFrame title="Daily throughput NEM" height={280} data={data.daily_30d.NEM} csvColumns={['settlement_date', 'discharged_mwh', 'charged_mwh']}>
+            <BarChart data={data.daily_30d.NEM}>
+              <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.05)" />
+              <XAxis dataKey="settlement_date" tick={{ fill: '#94a3b8', fontSize: 11 }} />
+              <YAxis tick={{ fill: '#94a3b8', fontSize: 11 }} />
+              <Tooltip contentStyle={{ background: '#1e293b', border: '1px solid #334155', borderRadius: 6 }} />
+              <Legend wrapperStyle={{ fontSize: 11 }} />
+              <Bar dataKey="discharged_mwh" name="Discharged (MWh)" fill="#10b981" />
+              <Bar dataKey="charged_mwh" name="Charged (MWh)" fill="#8b5cf6" />
+            </BarChart>
+          </ChartFrame>
+        </section>
+      )}
+    </div>
+  )
+}
+
+function MiniStat({ label, value, sub, colour }: { label: string; value: string; sub?: string; colour: string }) {
+  return (
+    <div className="rounded-xl border border-[var(--color-border)] bg-[var(--color-bg-card)] p-3">
+      <div className="text-[10px] uppercase tracking-wider text-[var(--color-text-muted)] font-semibold">{label}</div>
+      <div className="text-xl font-bold mt-0.5 tabular-nums" style={{ color: colour }}>{value}</div>
+      {sub && <div className="text-[10px] text-[var(--color-text-muted)] mt-1">{sub}</div>}
+    </div>
+  )
+}
+
+function formatShortDatetime(iso: string): string {
+  try {
+    const d = new Date(iso)
+    return d.toLocaleString('en-AU', { day: 'numeric', month: 'short', year: '2-digit', hour: '2-digit', minute: '2-digit' })
+  } catch {
+    return iso
+  }
 }
