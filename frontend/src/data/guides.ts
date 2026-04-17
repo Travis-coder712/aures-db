@@ -626,6 +626,142 @@ The underlying data is publicly available:
 If you spot a discrepancy, it's likely due to capacity differences (registered vs maximum), time period alignment, or DUID mapping. We welcome corrections.`,
   },
   {
+    id: 'lifecycle-quartile-matrix',
+    title: 'Lifecycle Quartile Matrix',
+    description: 'The state-of-the-nation grid — how every project in the NEM is scored and quartile-ranked at each lifecycle stage.',
+    icon: '🎯',
+    category: 'technical',
+    readingTime: '9 min read',
+    content: `# Lifecycle Quartile Matrix
+
+The \`/intelligence/lifecycle-quartile\` page is the intelligence layer's capstone view — every project in the NEM pipeline, grouped by **technology × state × stage**, with a stage-appropriate quartile score in each cell. It's the single view that answers "where are we, at a glance?"
+
+This guide explains the three scoring systems behind the matrix, what "Q1 vs Q4" means in each stage, the data limits, and how to use the drill-through.
+
+---
+
+## The stages
+
+Every project in AURES sits in one of three stage groups:
+
+- **Operating** — project is commissioned and dispatching. 220 projects scored.
+- **Construction / commissioning** — FID has passed, physical build is underway or complete but not yet operating. 56 projects scored.
+- **Development** — pre-FID: planning, permitting, grid connection, equipment procurement. 782 projects scored.
+
+Total: **1,058 projects** plotted across 63 non-empty cells in the matrix (6 techs × 6 states × 3 stages = 108 possible cells; sparse cells for hydro and offshore wind leave 45 empty).
+
+---
+
+## How each stage is scored
+
+Every project gets a single score (0-100ish) on a stage-specific formula. Within each cell (tech + state + stage), we rank projects, split into quartiles, and render the mix as a coloured strip.
+
+### Operating — fleet performance
+
+Uses the **composite score** from the annual league tables (see the Performance Metrics guide). This is a weighted blend of:
+
+- 40% capacity factor
+- 40% revenue per MW
+- 20% curtailment (inverted)
+
+For BESS: 30% revenue + 30% utilisation + 20% spread + 20% cycles.
+
+**Q1 = top-25% of the project's (tech, state) cohort**. If a league-table quartile is already assigned across the NEM, we prefer that; otherwise we compute the quartile within the cell cohort.
+
+### Construction / Commissioning — delivery risk
+
+Lower risk = better. We score each project starting at 100 and deduct for:
+
+- **|COD drift months| × 1.5** (capped at 90 pts) — how far current COD has slipped from originally announced
+- **−20 if drift data missing** (uncertainty penalty)
+- **−10 if no construction_start event has been captured**
+
+Then add:
+
+- **+ developer grade × 2.5** (A=+10, B=+7.5, C=+5, D=+2.5, F=0)
+
+Q1 = lowest-risk quarter of the cohort.
+
+### Development — readiness
+
+Higher = more ready. Components:
+
+| Signal | Points | Meaning |
+|---|---|---|
+| development_stage | 15 (planning_submitted) or 0 (early) | Formal planning submission is a hurdle cleared |
+| cod_current set | 15 | The developer has announced a target COD |
+| rez set | 10 | Project sits inside a defined Renewable Energy Zone |
+| has scheme contract | 20 | CIS / LTESA / ARENA award |
+| has EIS | 15 | Environmental Impact Statement filed (more common for wind and large solar) |
+| developer grade | ×5 | A=20, B=15, C=10, D=5, F=0 based on execution track record |
+
+Theoretical max: 110.
+
+Quartile = position in the (tech, state) development cohort.
+
+---
+
+## How to read a cell
+
+Each matrix cell shows:
+- **Big number** — project count
+- **MW total** (smaller)
+- **Coloured quartile strip** — four segments proportional to Q1/Q2/Q3/Q4 shares, colours:
+  - Q1 emerald (#10b981)
+  - Q2 blue (#3b82f6)
+  - Q3 amber (#f59e0b)
+  - Q4 red (#ef4444)
+- **Q1 %** — how much of the cell is in the top quartile
+
+An emerald-heavy cell is healthy (top performers / most ready). A red-heavy cell is a risk or low-readiness cluster.
+
+Click any cell → DrillPanel with the full project list, stage-specific columns (CF/rev for operating, drift/dev grade for construction, scheme/EIS/REZ flags for development), and CSV export.
+
+---
+
+## Notable current state (v2.22.0)
+
+| Tech | Stage | Count | MW | Q1 share |
+|---|---|---|---|---|
+| BESS | Development | 374 | 116 GW | 34% |
+| BESS | Construction | 25 | 6.8 GW | 40% |
+| BESS | Operating | 28 | 4.6 GW | 25% |
+| Solar | Development | 135 | 38 GW | 34% |
+| Solar | Operating | 78 | 9.5 GW | 26% |
+| Wind | Development | 121 | 68 GW | 36% |
+| Wind | Operating | 80 | 11.7 GW | 25% |
+| Hybrid | Development | 105 | 43.8 GW | 32% |
+| Offshore wind | Development | 22 | 43 GW | 59% |
+| Pumped hydro | Operating | 33 | 8.3 GW | 27% |
+
+**Observations worth noting:**
+- BESS dominates the development pipeline (374 projects, 116 GW). About a third are "Q1 ready" — a healthy pipeline.
+- Offshore wind has only 22 projects but 59% are in Q1 readiness — largely because these are state-blessed projects (VIC declared zones) with scheme support.
+- Operating fleets across all techs cluster around 25-27% Q1 share, which is the expected distribution (quartiles by definition)... *except* where the NEM-wide league quartile overrides, which reflects true performance vs just within-cohort ranking.
+
+---
+
+## Known limitations
+
+1. **Development scores are structural, not predictive.** A high readiness score means "this project has cleared more milestones", not "this project will definitely commission on time". For delivery probability, cross-reference the developer's execution grade on the developer profile.
+2. **Construction has only 56 projects scored.** The signal is meaningful but the cohort is small — some (tech × state) cells for construction have just 1-2 projects, and the quartile becomes a neutral mid-bucket.
+3. **Development Q1 distribution is structural 25%**, not a real ranking. Within a cohort, 25% will always fall in Q1. What matters is the score spread — a Q1 project in a weak cohort may still be less ready than a Q4 project in a strong cohort. Treat quartiles as within-cohort comparisons.
+4. **development_score field is unused** — the DB has a \`development_score\` column but it's currently empty. Our readiness score is computed at export time from the component flags. If development_score gets populated in a future enrichment pass, we may switch to that.
+5. **No FID / ownership-change / ESG signals yet** — those events exist in timeline_events but aren't fed into the score. Could be added later.
+6. **WEM excluded from operating scoring** — WA projects appear in construction/development cells but have no operating quartile because OpenElectricity only covers NEM dispatch.
+
+---
+
+## Cross-references
+
+- **Operating cell drills** → see the individual project detail page for full league-table history
+- **Construction cell drills** → check Drift Analysis for cohort-wide trends
+- **Development cell drills** → check Scheme Tracker (for CIS/LTESA wins) and EIS Technical (for environmental coverage)
+
+The matrix is built on the v2.16–v2.18 foundation primitives (ChartFrame, DataTable, DrillPanel, DataProvenance) — the same drill-through and CSV-export patterns as the rest of the intelligence layer.
+`,
+  },
+  {
     id: 'ppa-market-mapper',
     title: 'PPA Market Mapper',
     description: 'How offtake contracts are classified, what price/volume/tenor coverage looks like, and how to read the uncontracted-operating risk register.',
