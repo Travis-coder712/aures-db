@@ -22,6 +22,7 @@ import ChartWrapper from '../../components/common/ChartWrapper'
 import ChartFrame from '../../components/common/ChartFrame'
 import ScrollableTable from '../../components/common/ScrollableTable'
 import DataTable from '../../components/common/DataTable'
+import DrillPanel from '../../components/common/DrillPanel'
 import type { DriftAnalysisData, DriftProject } from '../../lib/types'
 import DataProvenance from '../../components/common/DataProvenance'
 
@@ -91,6 +92,13 @@ export default function DriftAnalysis() {
   const [selectedStates, setSelectedStates] = useState<Set<string>>(new Set())
   const [sortKey, setSortKey] = useState<SortKey>('count')
   const [sortDir, setSortDir] = useState<SortDir>('desc')
+  const [drill, setDrill] = useState<{ dim: 'technology' | 'state'; key: string; label: string } | null>(null)
+
+  // Projects matching the current drill dimension
+  const drillProjects = useMemo(() => {
+    if (!drill || !data) return []
+    return data.projects.filter((p) => p[drill.dim] === drill.key)
+  }, [drill, data])
 
   useEffect(() => {
     fetchDriftAnalysis().then((d) => {
@@ -147,6 +155,7 @@ export default function DriftAnalysis() {
     return techs.map((tech) => {
       const g = data.by_technology[tech]
       return {
+        key: tech,
         name: TECH_LABELS[tech] || tech,
         median: g.median,
         mean: parseFloat(g.mean.toFixed(1)),
@@ -166,6 +175,7 @@ export default function DriftAnalysis() {
     return states.map((state) => {
       const g = data.by_state[state]
       return {
+        key: state,
         name: state,
         median: g.median,
         mean: parseFloat(g.mean.toFixed(1)),
@@ -376,8 +386,19 @@ export default function DriftAnalysis() {
         <p className="text-xs text-[var(--color-text-muted)] mb-4">
           Bars show median and mean drift. Whiskers show interquartile range (p25–p75).
         </p>
+        <p className="text-[11px] text-[var(--color-text-muted)]/70 -mt-3 mb-3 italic">
+          Click any bar to see the projects behind it.
+        </p>
         <ChartFrame title="Drift by Technology" height={288} heightLg={320} data={techChartData} csvColumns={['name', 'median', 'mean', 'count']}>
-          <BarChart data={techChartData} barGap={4}>
+          <BarChart
+            data={techChartData}
+            barGap={4}
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            onClick={(e: any) => {
+              const p = e?.activePayload?.[0]?.payload
+              if (p?.key) setDrill({ dim: 'technology', key: p.key, label: p.name })
+            }}
+          >
             <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.06)" />
             <XAxis dataKey="name" tick={TICK_STYLE} axisLine={AXIS_STYLE} />
             <YAxis
@@ -389,12 +410,13 @@ export default function DriftAnalysis() {
               contentStyle={TOOLTIP_STYLE}
               itemStyle={TOOLTIP_ITEM_STYLE}
               formatter={(value) => `${Number(value).toFixed(1)} months`}
+              cursor={{ fill: 'rgba(255,255,255,0.03)' }}
             />
             <Legend wrapperStyle={{ fontSize: 12, color: 'var(--color-text-muted, #9ca3af)' }} />
-            <Bar dataKey="median" name="Median" fill="#3b82f6" radius={[4, 4, 0, 0]}>
+            <Bar dataKey="median" name="Median" fill="#3b82f6" radius={[4, 4, 0, 0]} cursor="pointer">
               <ErrorBar dataKey="errorHigh" direction="y" width={4} stroke="#3b82f6" strokeWidth={1.5} />
             </Bar>
-            <Bar dataKey="mean" name="Mean" fill="#f59e0b" radius={[4, 4, 0, 0]} />
+            <Bar dataKey="mean" name="Mean" fill="#f59e0b" radius={[4, 4, 0, 0]} cursor="pointer" />
           </BarChart>
         </ChartFrame>
       </section>
@@ -405,8 +427,19 @@ export default function DriftAnalysis() {
         <p className="text-xs text-[var(--color-text-muted)] mb-4">
           Median and mean COD drift by state. Whiskers show p25–p75 range.
         </p>
+        <p className="text-[11px] text-[var(--color-text-muted)]/70 -mt-3 mb-3 italic">
+          Click any bar to see the projects behind it.
+        </p>
         <ChartFrame title="Drift by State" height={288} heightLg={320} data={stateChartData} csvColumns={['name', 'median', 'mean', 'count']}>
-          <BarChart data={stateChartData} barGap={4}>
+          <BarChart
+            data={stateChartData}
+            barGap={4}
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            onClick={(e: any) => {
+              const p = e?.activePayload?.[0]?.payload
+              if (p?.key) setDrill({ dim: 'state', key: p.key, label: p.name })
+            }}
+          >
             <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.06)" />
             <XAxis dataKey="name" tick={TICK_STYLE} axisLine={AXIS_STYLE} />
             <YAxis
@@ -418,12 +451,13 @@ export default function DriftAnalysis() {
               contentStyle={TOOLTIP_STYLE}
               itemStyle={TOOLTIP_ITEM_STYLE}
               formatter={(value) => `${Number(value).toFixed(1)} months`}
+              cursor={{ fill: 'rgba(255,255,255,0.03)' }}
             />
             <Legend wrapperStyle={{ fontSize: 12, color: 'var(--color-text-muted, #9ca3af)' }} />
-            <Bar dataKey="median" name="Median" fill="#3b82f6" radius={[4, 4, 0, 0]}>
+            <Bar dataKey="median" name="Median" fill="#3b82f6" radius={[4, 4, 0, 0]} cursor="pointer">
               <ErrorBar dataKey="errorHigh" direction="y" width={4} stroke="#3b82f6" strokeWidth={1.5} />
             </Bar>
-            <Bar dataKey="mean" name="Mean" fill="#f59e0b" radius={[4, 4, 0, 0]} />
+            <Bar dataKey="mean" name="Mean" fill="#f59e0b" radius={[4, 4, 0, 0]} cursor="pointer" />
           </BarChart>
         </ChartFrame>
       </section>
@@ -669,6 +703,62 @@ export default function DriftAnalysis() {
           />
         </section>
       )}
+
+      {/* Drill-down panel — opens when a bar is clicked */}
+      <DrillPanel
+        open={drill !== null}
+        title={drill ? (drill.dim === 'technology' ? `${drill.label} projects` : `Projects in ${drill.label}`) : ''}
+        subtitle={drill ? `${drillProjects.length} projects · sorted by absolute drift` : undefined}
+        onClose={() => setDrill(null)}
+      >
+        {drill && drillProjects.length > 0 ? (
+          <DataTable<DriftProject>
+            rows={[...drillProjects].sort((a, b) => Math.abs(b.drift_months) - Math.abs(a.drift_months))}
+            columns={[
+              {
+                key: 'name',
+                label: 'Project',
+                render: (_v, row) => (
+                  <Link
+                    to={`/projects/${row.project_id}?from=intelligence/drift-analysis&fromLabel=Back to Drift Analysis`}
+                    className="text-[var(--color-primary)] hover:underline"
+                    onClick={() => setDrill(null)}
+                  >
+                    {row.name}
+                  </Link>
+                ),
+              },
+              ...(drill.dim === 'state'
+                ? [{
+                    key: 'technology',
+                    label: 'Tech',
+                    render: (_v: unknown, row: DriftProject) => (
+                      <span style={{ color: TECH_COLORS[row.technology] }}>
+                        {TECH_LABELS[row.technology] || row.technology}
+                      </span>
+                    ),
+                  }]
+                : [{ key: 'state', label: 'State' }]),
+              { key: 'capacity_mw', label: 'MW', format: 'number0' as const, aggregator: 'sum' as const },
+              {
+                key: 'drift_months',
+                label: 'Drift',
+                align: 'right' as const,
+                aggregator: 'median' as const,
+                render: (v: unknown, row: DriftProject) => (
+                  <span className="font-medium" style={{ color: driftColor(row.drift_months) }}>
+                    {(v as number) > 0 ? '+' : ''}{v as number} mo
+                  </span>
+                ),
+              },
+            ]}
+            showTotals
+            csvFilename={`drift-${drill.dim}-${drill.key}`}
+          />
+        ) : (
+          <p className="text-sm text-[var(--color-text-muted)]">No projects found.</p>
+        )}
+      </DrillPanel>
     </div>
   )
 }

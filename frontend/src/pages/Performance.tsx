@@ -16,6 +16,8 @@ import { useLeagueTableIndex, useLeagueTable, useFilteredLeagueTable } from '../
 import { fetchMonthlyPerformance, fetchLeagueTable } from '../lib/dataService'
 import type { LeagueTable, LeagueTechnology, LeagueTableEntry, State, ProjectMonthlyPerformance } from '../lib/types'
 import DataProvenance from '../components/common/DataProvenance'
+import DrillPanel from '../components/common/DrillPanel'
+import DataTable from '../components/common/DataTable'
 
 // ============================================================
 // Info Tooltip Definitions
@@ -194,6 +196,7 @@ export default function Performance() {
   const [showUpdatePanel, setShowUpdatePanel] = useState(false)
   const [sortField, setSortField] = useState<SortField>('rank')
   const [sortDir, setSortDir] = useState<SortDir>('asc')
+  const [drill, setDrill] = useState<1 | 2 | 3 | 4 | null>(null)
 
   // Sync year when index loads
   const [yearInitialized, setYearInitialized] = useState(false)
@@ -366,12 +369,18 @@ export default function Performance() {
       counts[p.quartile] = (counts[p.quartile] || 0) + 1
     }
     return [
-      { name: 'Q1', count: counts[1], fill: QUARTILE_COLORS[1] },
-      { name: 'Q2', count: counts[2], fill: QUARTILE_COLORS[2] },
-      { name: 'Q3', count: counts[3], fill: QUARTILE_COLORS[3] },
-      { name: 'Q4', count: counts[4], fill: QUARTILE_COLORS[4] },
+      { name: 'Q1', quartile: 1 as const, count: counts[1], fill: QUARTILE_COLORS[1] },
+      { name: 'Q2', quartile: 2 as const, count: counts[2], fill: QUARTILE_COLORS[2] },
+      { name: 'Q3', quartile: 3 as const, count: counts[3], fill: QUARTILE_COLORS[3] },
+      { name: 'Q4', quartile: 4 as const, count: counts[4], fill: QUARTILE_COLORS[4] },
     ]
   }, [filtered])
+
+  // Drill-down projects filtered by selected quartile
+  const drillProjects = useMemo(() => {
+    if (drill === null || !filtered?.projects) return []
+    return filtered.projects.filter((p) => p.quartile === drill)
+  }, [drill, filtered])
 
   // No data state
   if (indexLoading) {
@@ -632,9 +641,12 @@ export default function Performance() {
       {/* Quartile Distribution */}
       {quartileData.some((d) => d.count > 0) && (
         <section className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl p-5">
-          <h2 className="text-sm font-semibold text-[var(--color-text)] mb-3">
+          <h2 className="text-sm font-semibold text-[var(--color-text)] mb-1">
             Quartile Distribution
           </h2>
+          <p className="text-[11px] text-[var(--color-text-muted)]/70 mb-3 italic">
+            Click any bar to see projects.
+          </p>
           <div className="flex items-center gap-4 mb-3">
             {[1, 2, 3, 4].map((q) => (
               <div key={q} className="flex items-center gap-1.5 text-[10px]">
@@ -648,7 +660,14 @@ export default function Performance() {
           </div>
           <div className="h-40">
             <ResponsiveContainer width="100%" height="100%">
-              <BarChart data={quartileData}>
+              <BarChart
+                data={quartileData}
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                onClick={(e: any) => {
+                  const p = e?.activePayload?.[0]?.payload
+                  if (p?.quartile) setDrill(p.quartile as 1 | 2 | 3 | 4)
+                }}
+              >
                 <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.06)" />
                 <XAxis dataKey="name" tick={{ fill: '#9ca3af', fontSize: 12 }} />
                 <YAxis tick={{ fill: '#9ca3af', fontSize: 12 }} />
@@ -662,8 +681,9 @@ export default function Performance() {
                   }}
                   itemStyle={{ color: '#f1f5f9' }}
                   formatter={(value) => `${value} projects`}
+                  cursor={{ fill: 'rgba(255,255,255,0.03)' }}
                 />
-                <Bar dataKey="count" radius={[4, 4, 0, 0]}>
+                <Bar dataKey="count" radius={[4, 4, 0, 0]} cursor="pointer">
                   {quartileData.map((entry, idx) => (
                     <rect key={idx} fill={entry.fill} />
                   ))}
@@ -748,6 +768,71 @@ cd frontend && npm run build`}
           </div>
         )}
       </section>
+
+      {/* Drill-down panel — opens when a quartile bar is clicked */}
+      <DrillPanel
+        open={drill !== null}
+        title={drill !== null ? `${QUARTILE_LABELS[drill]} — ${TECH_TABS.find((t) => t.value === tech)?.label ?? tech}${stateFilter !== 'ALL' ? ` · ${stateFilter}` : ''}${year !== 'all' ? ` · ${year}` : ' · All Years'}` : ''}
+        subtitle={drill !== null ? `${drillProjects.length} projects — sorted by rank` : undefined}
+        onClose={() => setDrill(null)}
+      >
+        {drill !== null && drillProjects.length > 0 ? (
+          <DataTable<LeagueTableEntry>
+            rows={[...drillProjects].sort((a, b) => a.rank_composite - b.rank_composite)}
+            columns={[
+              {
+                key: 'rank_composite',
+                label: 'Rank',
+                format: 'integer',
+                align: 'right',
+              },
+              {
+                key: 'name',
+                label: 'Project',
+                render: (_v, row) => (
+                  <Link
+                    to={`/projects/${row.project_id}?from=performance&fromLabel=Back to Performance`}
+                    className="text-[var(--color-primary)] hover:underline"
+                    onClick={() => setDrill(null)}
+                  >
+                    {row.name}
+                  </Link>
+                ),
+              },
+              { key: 'state', label: 'State' },
+              {
+                key: 'capacity_mw',
+                label: 'MW',
+                format: 'number0',
+                aggregator: 'sum',
+              },
+              tech === 'bess' || tech === 'pumped_hydro'
+                ? {
+                    key: 'spread',
+                    label: 'Spread',
+                    align: 'right' as const,
+                    accessor: (row: LeagueTableEntry) =>
+                      row.avg_discharge_price != null && row.avg_charge_price != null
+                        ? row.avg_discharge_price - row.avg_charge_price
+                        : null,
+                    render: (v: unknown) =>
+                      typeof v === 'number' ? `$${v.toFixed(0)}` : '—',
+                  }
+                : {
+                    key: 'capacity_factor_pct',
+                    label: 'CF%',
+                    format: 'percent1' as const,
+                    aggregator: 'avg' as const,
+                  },
+            ]}
+            showRowNumbers
+            showTotals
+            csvFilename={`performance-q${drill}-${tech}${year !== 'all' ? `-${year}` : ''}`}
+          />
+        ) : (
+          <p className="text-sm text-[var(--color-text-muted)]">No projects in this quartile.</p>
+        )}
+      </DrillPanel>
     </div>
   )
 }

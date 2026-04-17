@@ -9,6 +9,8 @@ import { fetchBessBidding } from '../../lib/dataService'
 import { exportElementToPdf } from '../../lib/exportPdf'
 import type { BessBiddingData, BessBiddingProfile } from '../../lib/types'
 import DataProvenance from '../../components/common/DataProvenance'
+import DrillPanel from '../../components/common/DrillPanel'
+import DataTable from '../../components/common/DataTable'
 
 // Icons — defined BEFORE const arrays (Vite HMR pattern)
 const OverviewIcon = () => <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" /></svg>
@@ -76,6 +78,7 @@ export default function BessBidding() {
   const [loading, setLoading] = useState(true)
   const [activeSection, setActiveSection] = useState<SectionId>('overview')
   const [selectedProject, setSelectedProject] = useState<string | null>(null)
+  const [drillProjectId, setDrillProjectId] = useState<string | null>(null)
   const [exporting, setExporting] = useState(false)
   const pdfRef = useRef<HTMLDivElement>(null)
 
@@ -489,16 +492,27 @@ export default function BessBidding() {
           {/* Rebid frequency ranking */}
           <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-lg p-4">
             <h3 className="text-sm font-semibold text-[var(--color-text)] mb-2">Rebid Frequency Ranking</h3>
-            <p className="text-xs text-[var(--color-text-muted)] mb-3">
+            <p className="text-xs text-[var(--color-text-muted)] mb-1">
               Higher rebid % = more sophisticated algorithmic trading. Top operators rebid 98-99% of intervals.
             </p>
+            <p className="text-[11px] text-[var(--color-text-muted)]/70 mb-3 italic">
+              Click any bar to see the full bidding profile.
+            </p>
             <ResponsiveContainer width="100%" height={Math.max(300, profiles.filter(p => p.energy_bids > 100).length * 22)}>
-              <BarChart data={profiles.filter(p => p.energy_bids > 100).sort((a, b) => b.rebid_pct - a.rebid_pct)} layout="vertical">
+              <BarChart
+                data={profiles.filter(p => p.energy_bids > 100).sort((a, b) => b.rebid_pct - a.rebid_pct)}
+                layout="vertical"
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                onClick={(e: any) => {
+                  const pid = e?.activePayload?.[0]?.payload?.project_id
+                  if (pid) setDrillProjectId(pid)
+                }}
+              >
                 <CartesianGrid strokeDasharray="3 3" stroke="var(--color-border)" />
                 <XAxis type="number" tick={{ fontSize: 10, fill: 'var(--color-text-muted)' }} domain={[0, 100]} />
                 <YAxis type="category" dataKey="project_name" width={180} tick={{ fontSize: 9, fill: 'var(--color-text-muted)' }} />
-                <Tooltip content={(props) => <ChartTooltip {...props} />} />
-                <Bar dataKey="rebid_pct" name="Rebid %" radius={[0, 2, 2, 0]}>
+                <Tooltip content={(props) => <ChartTooltip {...props} />} cursor={{ fill: 'rgba(255,255,255,0.03)' }} />
+                <Bar dataKey="rebid_pct" name="Rebid %" radius={[0, 2, 2, 0]} cursor="pointer">
                   {profiles.filter(p => p.energy_bids > 100).sort((a, b) => b.rebid_pct - a.rebid_pct).map((p, i) => (
                     <Cell key={i} fill={p.rebid_pct > 90 ? '#10b981' : p.rebid_pct > 50 ? '#f59e0b' : '#ef4444'} />
                   ))}
@@ -712,6 +726,99 @@ export default function BessBidding() {
         </div>
       )}
       </div>{/* end pdfRef */}
+
+      {/* Drill-down panel — opens when a rebid-frequency bar is clicked */}
+      <DrillPanel
+        open={drillProjectId !== null}
+        title={(() => {
+          const p = data.profiles.find(x => x.project_id === drillProjectId)
+          return p ? `${p.project_name}${p.participant_id ? ` · ${p.participant_id}` : ''}` : ''
+        })()}
+        subtitle={(() => {
+          const p = data.profiles.find(x => x.project_id === drillProjectId)
+          if (!p) return undefined
+          return `${p.state ?? '—'} · ${p.capacity_mw ? `${fmt(p.capacity_mw)} MW` : 'MW unknown'} · ${p.first_date} → ${p.last_date}`
+        })()}
+        onClose={() => setDrillProjectId(null)}
+      >
+        {(() => {
+          const p = data.profiles.find(x => x.project_id === drillProjectId)
+          if (!p) return <p className="text-sm text-[var(--color-text-muted)]">No profile found.</p>
+
+          const metricRows = [
+            { metric: 'Load Strategy', value: p.load_strategy.toUpperCase() },
+            { metric: 'Total Bids', value: fmt(p.total_bids) },
+            { metric: 'Energy Bids', value: fmt(p.energy_bids) },
+            { metric: 'FCAS Bids', value: fmt(p.fcas_bids) },
+            { metric: 'FCAS Services', value: p.fcas_services > 0 ? `${p.fcas_services} / 8` : 'None' },
+            { metric: 'Rebid %', value: `${fmt(p.rebid_pct, 1)}%` },
+            { metric: 'Target Spread', value: fmtK(p.target_spread) },
+            { metric: 'Storage', value: p.storage_mwh ? `${fmt(p.storage_mwh)} MWh` : '—' },
+            { metric: 'Capacity', value: p.capacity_mw ? `${fmt(p.capacity_mw)} MW` : '—' },
+          ]
+
+          const bandRows = Array.from({ length: 10 }, (_, i) => ({
+            band: `PB${i + 1}`,
+            gen: p.gen_pricebands[i],
+            load: p.load_pricebands[i],
+          }))
+
+          return (
+            <div className="space-y-5">
+              <div>
+                <Link
+                  to={projectSlug(p.project_id)}
+                  className="inline-block text-xs text-[var(--color-accent)] hover:underline"
+                  onClick={() => setDrillProjectId(null)}
+                >
+                  View full project page →
+                </Link>
+              </div>
+
+              <div>
+                <div className="text-[10px] font-semibold uppercase tracking-wider text-[var(--color-text-muted)] mb-2">
+                  Key Metrics
+                </div>
+                <DataTable
+                  rows={metricRows}
+                  columns={[
+                    { key: 'metric', label: 'Metric', sortable: false },
+                    { key: 'value', label: 'Value', align: 'right', sortable: false },
+                  ]}
+                  showRowNumbers={false}
+                />
+              </div>
+
+              <div>
+                <div className="text-[10px] font-semibold uppercase tracking-wider text-[var(--color-text-muted)] mb-2">
+                  Price Bands (GEN vs LOAD)
+                </div>
+                <DataTable
+                  rows={bandRows}
+                  columns={[
+                    { key: 'band', label: 'Band', sortable: false },
+                    {
+                      key: 'gen',
+                      label: 'GEN $',
+                      align: 'right',
+                      sortable: false,
+                      render: (v) => v == null ? '—' : fmtK(v as number),
+                    },
+                    {
+                      key: 'load',
+                      label: 'LOAD $',
+                      align: 'right',
+                      sortable: false,
+                      render: (v) => v == null ? '—' : fmtK(v as number),
+                    },
+                  ]}
+                  showRowNumbers={false}
+                />
+              </div>
+            </div>
+          )
+        })()}
+      </DrillPanel>
     </div>
   )
 }

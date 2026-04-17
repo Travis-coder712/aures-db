@@ -6,6 +6,8 @@ import {
 } from 'recharts'
 import { fetchRevenueIntel } from '../../lib/dataService'
 import ChartWrapper from '../../components/common/ChartWrapper'
+import DataTable from '../../components/common/DataTable'
+import DrillPanel from '../../components/common/DrillPanel'
 import type { RevenueIntelData, MetricStats, RevenueProjectRanking } from '../../lib/types'
 import DataProvenance from '../../components/common/DataProvenance'
 
@@ -115,6 +117,7 @@ export default function RevenueIntel() {
   const [activeSection, setActiveSection] = useState<SectionId>('overview')
   const [selectedTech, setSelectedTech] = useState<string>('bess')
   const [selectedState, setSelectedState] = useState<string>('all')
+  const [drill, setDrill] = useState<{ dim: 'tech' | 'state'; key: string; label: string } | null>(null)
 
   useEffect(() => {
     fetchRevenueIntel().then(d => { setData(d); setLoading(false) })
@@ -134,6 +137,7 @@ export default function RevenueIntel() {
         const row = techYearRows.find(r => r.technology === tech)
         if (!row) return null
         return {
+          key: tech,
           tech,
           label: TECH_LABELS[tech],
           median: row.revenue_per_mw.median,
@@ -143,7 +147,7 @@ export default function RevenueIntel() {
           colour: TECH_COLOURS[tech],
         }
       })
-      .filter(Boolean) as Array<{ tech: string; label: string; median: number; p25: number; p75: number; count: number; colour: string }>
+      .filter(Boolean) as Array<{ key: string; tech: string; label: string; median: number; p25: number; p75: number; count: number; colour: string }>
   }, [techYearRows])
 
   // YoY trend line data — actual JSON uses median_rpm, not revenue_per_mw
@@ -234,6 +238,18 @@ export default function RevenueIntel() {
       windRevenue: wind2024?.revenue_per_mw.median ?? 0,
     }
   }, [data])
+
+  // Projects for the current drill — sourced from top_10_by_state (flattened)
+  const drillProjects = useMemo(() => {
+    if (!drill || !data?.top_10_by_state) return []
+    if (drill.dim === 'tech') {
+      const stateMap = data.top_10_by_state[drill.key] || {}
+      const flat: RevenueProjectRanking[] = []
+      for (const list of Object.values(stateMap)) flat.push(...list)
+      return flat.sort((a, b) => b.revenue_per_mw - a.revenue_per_mw)
+    }
+    return []
+  }, [drill, data])
 
   // ---- Render ----
 
@@ -369,12 +385,23 @@ export default function RevenueIntel() {
         <h2 className="text-lg font-semibold text-[var(--color-text)] mb-1">
           Revenue by Technology ({selectedYear})
         </h2>
-        <p className="text-xs text-[var(--color-text-muted)] mb-4">
+        <p className="text-xs text-[var(--color-text-muted)] mb-1">
           Median revenue per MW by technology. Bar colour indicates technology.
+        </p>
+        <p className="text-[11px] text-[var(--color-text-muted)]/70 mb-3 italic">
+          Click any bar to see projects.
         </p>
         <ChartWrapper title={`Revenue by Technology (${selectedYear})`} data={revenueBarData} csvColumns={['label', 'median', 'p25', 'p75', 'count']}>
           <ResponsiveContainer width="100%" height={320}>
-            <BarChart data={revenueBarData} margin={{ top: 5, right: 20, bottom: 5, left: 20 }}>
+            <BarChart
+              data={revenueBarData}
+              margin={{ top: 5, right: 20, bottom: 5, left: 20 }}
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+              onClick={(e: any) => {
+                const p = e?.activePayload?.[0]?.payload
+                if (p?.key) setDrill({ dim: 'tech', key: p.key, label: p.label })
+              }}
+            >
               <CartesianGrid strokeDasharray="3 3" stroke="var(--color-border)" />
               <XAxis dataKey="label" tick={{ fill: 'var(--color-text-muted)', fontSize: 12 }} />
               <YAxis
@@ -391,9 +418,9 @@ export default function RevenueIntel() {
                   return `${label} (${row?.count ?? 0} projects)`
                 }}
               />
-              <Bar dataKey="median" radius={[4, 4, 0, 0]}>
+              <Bar dataKey="median" radius={[4, 4, 0, 0]} cursor="pointer">
                 {revenueBarData.map((entry, i) => (
-                  <rect key={i} fill={entry.colour} />
+                  <Cell key={i} fill={entry.colour} />
                 ))}
               </Bar>
             </BarChart>
@@ -645,6 +672,55 @@ export default function RevenueIntel() {
       {activeSection === 'magnitude' && data.revenue_magnitude_trends && (
         <FleetRevenueMagnitudeSection data={data.revenue_magnitude_trends} />
       )}
+
+      {/* Drill-down panel — opens when a Revenue by Tech bar is clicked */}
+      <DrillPanel
+        open={drill !== null}
+        title={drill ? `${drill.label} projects` : ''}
+        subtitle={drill ? `${drillProjects.length} top revenue projects (from State Leaders)` : undefined}
+        onClose={() => setDrill(null)}
+      >
+        {drill && drillProjects.length > 0 ? (
+          <DataTable<RevenueProjectRanking>
+            rows={drillProjects}
+            columns={[
+              {
+                key: 'name',
+                label: 'Project',
+                render: (_v, row) => (
+                  <Link
+                    to={`/projects/${row.project_id}?from=intelligence/revenue-intel&fromLabel=Back to Revenue Intelligence`}
+                    className="text-[var(--color-primary)] hover:underline"
+                    onClick={() => setDrill(null)}
+                  >
+                    {row.name}
+                  </Link>
+                ),
+              },
+              { key: 'state', label: 'State' },
+              { key: 'capacity_mw', label: 'MW', format: 'number0', aggregator: 'sum' },
+              {
+                key: 'capacity_factor_pct',
+                label: 'CF%',
+                format: 'percent1',
+                aggregator: 'avg',
+                hideOnMobile: true,
+              },
+              {
+                key: 'revenue_per_mw',
+                label: 'Revenue/MW',
+                format: 'currency0',
+                aggregator: 'avg',
+                render: (v) => v != null ? `$${Math.round(Number(v) / 1000)}k` : '—',
+              },
+            ]}
+            showTotals
+            csvFilename={`revenue-${drill.dim}-${drill.key}`}
+          />
+        ) : (
+          <p className="text-sm text-[var(--color-text-muted)]">No projects found for this technology.</p>
+        )}
+      </DrillPanel>
     </div>
   )
 }
@@ -772,6 +848,7 @@ function StateBreakdownSection({ data, selectedTech, setSelectedTech, selectedSt
 
 function RevenuePressureSection({ projects }: { projects: RevenueProjectRanking[] }) {
   const [filterTech, setFilterTech] = useState<string>('all')
+  const [drill, setDrill] = useState<{ dim: 'tech'; key: string; label: string } | null>(null)
 
   const techCounts = useMemo(() => {
     const counts: Record<string, number> = { all: projects.length }
@@ -790,12 +867,21 @@ function RevenuePressureSection({ projects }: { projects: RevenueProjectRanking[
   // Chart data: worst 15 decliners
   const chartData = useMemo(() => {
     return filtered.slice(0, 15).map(p => ({
+      key: p.technology || 'unknown',
       name: p.name.length > 20 ? p.name.slice(0, 18) + '...' : p.name,
       fullName: p.name,
       yoy_change: p.yoy_change_pct || 0,
       tech: p.technology || '',
     }))
   }, [filtered])
+
+  // Projects in the drilled tech, sorted by biggest decline first
+  const drillProjects = useMemo(() => {
+    if (!drill) return []
+    return projects
+      .filter(p => (p.technology || 'unknown') === drill.key)
+      .sort((a, b) => (a.yoy_change_pct ?? 0) - (b.yoy_change_pct ?? 0))
+  }, [drill, projects])
 
   return (
     <div className="space-y-4">
@@ -820,10 +906,22 @@ function RevenuePressureSection({ projects }: { projects: RevenueProjectRanking[
       {/* Decline chart */}
       <div className="bg-[var(--color-bg-card)] rounded-xl p-4 border border-[var(--color-border)]">
         <h2 className="text-lg font-semibold text-[var(--color-text)] mb-1">Revenue Pressure — Biggest YoY Declines</h2>
-        <p className="text-xs text-[var(--color-text-muted)] mb-4">Projects with the largest year-over-year revenue per MW decline</p>
+        <p className="text-xs text-[var(--color-text-muted)] mb-1">Projects with the largest year-over-year revenue per MW decline</p>
+        <p className="text-[11px] text-[var(--color-text-muted)]/70 mb-3 italic">
+          Click any bar to see all decliners in that technology.
+        </p>
         <ChartWrapper title="Revenue Pressure" data={chartData} csvColumns={['fullName', 'yoy_change', 'tech']}>
           <ResponsiveContainer width="100%" height={Math.max(300, chartData.length * 28)}>
-            <BarChart data={chartData} layout="vertical" margin={{ top: 5, right: 30, bottom: 5, left: 120 }}>
+            <BarChart
+              data={chartData}
+              layout="vertical"
+              margin={{ top: 5, right: 30, bottom: 5, left: 120 }}
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+              onClick={(e: any) => {
+                const p = e?.activePayload?.[0]?.payload
+                if (p?.key) setDrill({ dim: 'tech', key: p.key, label: TECH_LABELS[p.key] || p.key })
+              }}
+            >
               <CartesianGrid strokeDasharray="3 3" stroke="var(--color-border)" />
               <XAxis type="number" tick={{ fill: 'var(--color-text-muted)', fontSize: 11 }} tickFormatter={(v) => `${v}%`} />
               <YAxis type="category" dataKey="name" tick={{ fill: 'var(--color-text-muted)', fontSize: 11 }} width={115} />
@@ -837,7 +935,7 @@ function RevenuePressureSection({ projects }: { projects: RevenueProjectRanking[
                   return p?.fullName || ''
                 }}
               />
-              <Bar dataKey="yoy_change" radius={[0, 4, 4, 0]}>
+              <Bar dataKey="yoy_change" radius={[0, 4, 4, 0]} cursor="pointer">
                 {chartData.map((entry, i) => (
                   <Cell key={i} fill={entry.yoy_change >= 0 ? '#10b981' : '#ef4444'} />
                 ))}
@@ -897,6 +995,63 @@ function RevenuePressureSection({ projects }: { projects: RevenueProjectRanking[
           </tbody>
         </table>
       </div>
+
+      {/* Drill-down panel — opens when a decline bar is clicked */}
+      <DrillPanel
+        open={drill !== null}
+        title={drill ? `${drill.label} decliners` : ''}
+        subtitle={drill ? `${drillProjects.length} projects · sorted by largest decline` : undefined}
+        onClose={() => setDrill(null)}
+      >
+        {drill && drillProjects.length > 0 ? (
+          <DataTable<RevenueProjectRanking>
+            rows={drillProjects}
+            columns={[
+              {
+                key: 'name',
+                label: 'Project',
+                render: (_v, row) => (
+                  <Link
+                    to={`/projects/${row.project_id}?from=intelligence/revenue-intel&fromLabel=Back to Revenue Intelligence`}
+                    className="text-[var(--color-primary)] hover:underline"
+                    onClick={() => setDrill(null)}
+                  >
+                    {row.name}
+                  </Link>
+                ),
+              },
+              { key: 'state', label: 'State', hideOnMobile: true },
+              { key: 'capacity_mw', label: 'MW', format: 'number0', aggregator: 'sum' },
+              {
+                key: 'revenue_per_mw',
+                label: 'Revenue/MW',
+                aggregator: 'avg',
+                align: 'right',
+                render: (v) => v != null ? `$${Math.round(Number(v) / 1000)}k` : '—',
+              },
+              {
+                key: 'yoy_change_pct',
+                label: 'YoY',
+                align: 'right',
+                aggregator: 'median',
+                render: (v) => {
+                  if (v == null) return '—'
+                  const n = Number(v)
+                  return (
+                    <span className={`font-medium ${n >= 0 ? 'text-emerald-400' : 'text-red-400'}`}>
+                      {n >= 0 ? '+' : ''}{n.toFixed(1)}%
+                    </span>
+                  )
+                },
+              },
+            ]}
+            showTotals
+            csvFilename={`revenue-pressure-${drill.key}`}
+          />
+        ) : (
+          <p className="text-sm text-[var(--color-text-muted)]">No projects found.</p>
+        )}
+      </DrillPanel>
     </div>
   )
 }
