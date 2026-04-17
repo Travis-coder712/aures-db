@@ -548,6 +548,21 @@ export async function fetchLifecycleQuartile(): Promise<any | null> {
   } catch { return null }
 }
 
+// Contractor analytics — EPC/BoP concentration, developer pairings, OEM
+// co-occurrence, full portfolio per contractor (T2.D Contractor Intelligence).
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+let contractorAnalyticsCache: any | null = null
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export async function fetchContractorAnalytics(): Promise<any | null> {
+  if (contractorAnalyticsCache) return contractorAnalyticsCache
+  try {
+    const resp = await fetch(`${BASE}/analytics/contractor-analytics.json`)
+    if (!resp.ok) return null
+    contractorAnalyticsCache = await resp.json()
+    return contractorAnalyticsCache
+  } catch { return null }
+}
+
 export async function fetchEISComparison(): Promise<EISComparisonData | null> {
   if (eisComparisonCache) return eisComparisonCache
   try {

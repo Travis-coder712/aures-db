@@ -532,6 +532,10 @@ def export_all(db_path=DB_PATH):
     # 10. Contractor profiles
     export_contractor_profiles(conn)
 
+    # 10b. Contractor analytics — concentration, developer pairings,
+    # OEM co-occurrence, full portfolio per contractor
+    export_contractor_analytics(conn)
+
     # 11. Offtaker profiles
     export_offtaker_profiles(conn)
 
@@ -1967,6 +1971,207 @@ def export_contractor_profiles(conn):
         'total': len(contractors),
     })
     print(f"  indexes/contractor-profiles.json ({len(contractors)} contractors)")
+
+
+def export_contractor_analytics(conn):
+    """Pre-aggregate contractor (EPC/BoP) intelligence for the v2.23+
+    tabbed /contractors page.
+
+    Output: analytics/contractor-analytics.json with sections:
+      - concentration:   per-role HHI + top-3 + total_mw
+      - top_contractors: ranked list with category (epc_only / bop_only /
+                         both), project counts, MW, technology/state mix,
+                         top developer + OEM partners
+      - contractor_portfolio: per-contractor full project list for drill
+      - dev_contractor_matrix: flattened developer × contractor pairings
+      - contractor_oem_matrix: flattened contractor × OEM pairings (the
+                         "who partners with whom" signal — CPP×Tesla etc.)
+    """
+    rows = conn.execute("""
+        SELECT s.supplier, s.role, s.project_id, s.model, s.source_url,
+               p.name AS project_name, p.technology, p.status, p.state,
+               p.capacity_mw, p.current_developer, p.current_operator,
+               p.cod_current, p.cod_original
+        FROM suppliers s
+        JOIN projects p ON p.id = s.project_id
+        WHERE s.role IN ('epc', 'bop')
+    """).fetchall()
+
+    if not rows:
+        print("  analytics/contractor-analytics.json (no contractor rows — skipped)")
+        return
+
+    # OEM rows per project for co-occurrence analysis
+    oem_rows = conn.execute("""
+        SELECT project_id, supplier, role
+        FROM suppliers
+        WHERE role IN ('wind_oem', 'solar_oem', 'bess_oem', 'hydro_oem', 'inverter')
+    """).fetchall()
+    oems_by_project = defaultdict(list)
+    for r in oem_rows:
+        oems_by_project[r['project_id']].append({'supplier': r['supplier'], 'role': r['role']})
+
+    # ---- Concentration per role ----
+    by_role = defaultdict(list)
+    for r in rows:
+        by_role[r['role']].append({'supplier': r['supplier'], 'mw': r['capacity_mw'] or 0, 'project_id': r['project_id']})
+
+    concentration = {}
+    for role, entries in by_role.items():
+        # Group to unique supplier totals
+        per_supplier = defaultdict(lambda: {'mw': 0.0, 'projects': set()})
+        for e in entries:
+            per_supplier[e['supplier']]['mw'] += e['mw']
+            per_supplier[e['supplier']]['projects'].add(e['project_id'])
+        total_mw = sum(v['mw'] for v in per_supplier.values()) or 1
+        total_projects = sum(len(v['projects']) for v in per_supplier.values()) or 1
+        hhi_mw = sum((v['mw'] / total_mw * 100) ** 2 for v in per_supplier.values())
+        ranked = sorted(per_supplier.items(), key=lambda e: -e[1]['mw'])
+        top3 = ranked[:3]
+        top3_share_mw = sum(v['mw'] for _, v in top3) / total_mw * 100
+        concentration[role] = {
+            'total_contractors': len(per_supplier),
+            'total_mw': round(total_mw, 1),
+            'total_project_slots': total_projects,
+            'hhi_mw': round(hhi_mw, 0),
+            'top3_share_mw_pct': round(top3_share_mw, 1),
+            'top3': [{'supplier': s, 'mw': round(v['mw'], 1), 'projects': len(v['projects'])} for s, v in top3],
+        }
+
+    # ---- Aggregate per contractor ----
+    agg = defaultdict(lambda: {
+        'roles': set(),
+        'projects': set(),
+        'mw': 0.0,
+        'technologies': defaultdict(int),
+        'states': defaultdict(int),
+        'statuses': defaultdict(int),
+        'developers': defaultdict(int),
+        'oem_partners': defaultdict(lambda: {'role': '', 'count': 0}),
+        'portfolio_rows': [],
+    })
+
+    for r in rows:
+        c = agg[r['supplier']]
+        c['roles'].add(r['role'])
+        c['projects'].add(r['project_id'])
+        c['mw'] += r['capacity_mw'] or 0
+        c['technologies'][r['technology']] += 1
+        c['states'][r['state']] += 1
+        c['statuses'][r['status']] += 1
+        if r['current_developer']:
+            c['developers'][r['current_developer']] += 1
+        # OEM partners on the same project
+        for oem in oems_by_project.get(r['project_id'], []):
+            key = f"{oem['supplier']}|{oem['role']}"
+            c['oem_partners'][key]['role'] = oem['role']
+            c['oem_partners'][key]['count'] += 1
+        # Project row for drill
+        drift = None
+        if r['cod_current'] and r['cod_original']:
+            try:
+                from datetime import datetime as _dt
+                d_cur = _dt.fromisoformat(r['cod_current'])
+                d_orig = _dt.fromisoformat(r['cod_original'])
+                drift = round((d_cur - d_orig).days / 30.0, 1)
+            except (ValueError, TypeError):
+                drift = None
+        c['portfolio_rows'].append({
+            'project_id': r['project_id'],
+            'project_name': r['project_name'],
+            'role': r['role'],
+            'technology': r['technology'],
+            'state': r['state'],
+            'status': r['status'],
+            'capacity_mw': r['capacity_mw'],
+            'developer': r['current_developer'],
+            'model': r['model'],
+            'source_url': r['source_url'],
+            'drift_months': drift,
+        })
+
+    # ---- Top contractors list ----
+    top_contractors = []
+    contractor_portfolio = {}
+    for name, c in agg.items():
+        roles = sorted(c['roles'])
+        category = 'both' if len(roles) > 1 else ('epc_only' if 'epc' in roles else 'bop_only')
+        # Top 5 OEM partners
+        top_oems = sorted(c['oem_partners'].items(), key=lambda e: -e[1]['count'])[:5]
+        # Top 5 developers
+        top_devs = sorted(c['developers'].items(), key=lambda e: -e[1])[:5]
+        top_contractors.append({
+            'contractor': name,
+            'slug': make_slug(name),
+            'category': category,
+            'roles': roles,
+            'projects': len(c['projects']),
+            'mw_total': round(c['mw'], 1),
+            'technologies': dict(c['technologies']),
+            'states': dict(c['states']),
+            'statuses': dict(c['statuses']),
+            'top_developers': [[d, n] for d, n in top_devs],
+            'top_oem_partners': [
+                {'supplier': k.split('|')[0], 'role': v['role'], 'count': v['count']}
+                for k, v in top_oems
+            ],
+        })
+        contractor_portfolio[name] = c['portfolio_rows']
+
+    top_contractors.sort(key=lambda e: (-e['projects'], -e['mw_total']))
+
+    # ---- Developer × Contractor matrix ----
+    dev_pairs = defaultdict(lambda: {'projects': set(), 'mw': 0.0, 'roles': set()})
+    for r in rows:
+        if not r['current_developer']:
+            continue
+        key = (r['current_developer'], r['supplier'])
+        dev_pairs[key]['projects'].add(r['project_id'])
+        dev_pairs[key]['mw'] += r['capacity_mw'] or 0
+        dev_pairs[key]['roles'].add(r['role'])
+
+    dev_matrix = []
+    for (dev, contractor), stats in dev_pairs.items():
+        dev_matrix.append({
+            'developer': dev,
+            'contractor': contractor,
+            'projects': len(stats['projects']),
+            'mw': round(stats['mw'], 1),
+            'roles': sorted(stats['roles']),
+        })
+    dev_matrix.sort(key=lambda e: (-e['projects'], -e['mw']))
+
+    # ---- Contractor × OEM matrix (flat, top pairings) ----
+    oem_pairs = []
+    for c_name, c in agg.items():
+        for key, v in c['oem_partners'].items():
+            oem_pairs.append({
+                'contractor': c_name,
+                'oem': key.split('|')[0],
+                'oem_role': v['role'],
+                'count': v['count'],
+            })
+    oem_pairs.sort(key=lambda e: -e['count'])
+
+    write_json(os.path.join(DATA_DIR, 'analytics', 'contractor-analytics.json'), {
+        'concentration': concentration,
+        'top_contractors': top_contractors,
+        'contractor_portfolio': contractor_portfolio,
+        'dev_contractor_matrix': dev_matrix,
+        'contractor_oem_matrix': oem_pairs,
+        'summary': {
+            'total_contractors': len(agg),
+            'total_project_rows': len(rows),
+            'by_category_count': {
+                'epc_only': sum(1 for c in top_contractors if c['category'] == 'epc_only'),
+                'bop_only': sum(1 for c in top_contractors if c['category'] == 'bop_only'),
+                'both': sum(1 for c in top_contractors if c['category'] == 'both'),
+            },
+        },
+        'exported_at': datetime.now().isoformat(),
+    })
+    print(f"  analytics/contractor-analytics.json ({len(agg)} contractors · "
+          f"{len(dev_matrix)} dev pairings · {len(oem_pairs)} OEM pairings)")
 
 
 def export_offtaker_profiles(conn):
