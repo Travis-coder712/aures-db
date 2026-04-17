@@ -1,15 +1,1301 @@
 {
-  "has_data": false,
-  "latest_date": null,
-  "source_note": "No battery SCADA data ingested yet. Run: python3 pipeline/importers/import_battery_scada.py --days 30 (requires OPENELECTRICITY_API_KEY). This will populate daily aggregates + records board for NEM + 5 states.",
+  "has_data": true,
+  "latest_date": "2026-04-16",
+  "source_note": "Battery records computed from OpenElectricity 5-min network data. Latest date: 2026-04-16.",
   "records": {
-    "max_discharge_5min": [],
-    "max_charge_5min": [],
-    "max_daily_discharge": [],
-    "max_daily_charge": []
+    "max_discharge_5min": [
+      {
+        "region": "NEM",
+        "value": 3675.0193,
+        "unit": "MW",
+        "recorded_at": "2026-01-25T18:55:00+10:00",
+        "settlement_date": "2026-01-25"
+      },
+      {
+        "region": "NSW1",
+        "value": 1042.045,
+        "unit": "MW",
+        "recorded_at": "2026-04-13T18:20:00+10:00",
+        "settlement_date": "2026-04-13"
+      },
+      {
+        "region": "QLD1",
+        "value": 1557.0839,
+        "unit": "MW",
+        "recorded_at": "2026-01-22T18:30:00+10:00",
+        "settlement_date": "2026-01-22"
+      },
+      {
+        "region": "SA1",
+        "value": 690.6265,
+        "unit": "MW",
+        "recorded_at": "2026-01-18T19:35:00+10:00",
+        "settlement_date": "2026-01-18"
+      },
+      {
+        "region": "VIC1",
+        "value": 1297.2748,
+        "unit": "MW",
+        "recorded_at": "2026-01-25T18:55:00+10:00",
+        "settlement_date": "2026-01-25"
+      }
+    ],
+    "max_charge_5min": [
+      {
+        "region": "NEM",
+        "value": 2906.2145,
+        "unit": "MW",
+        "recorded_at": "2026-04-02T13:05:00+10:00",
+        "settlement_date": "2026-04-02"
+      },
+      {
+        "region": "NSW1",
+        "value": 1165.1578,
+        "unit": "MW",
+        "recorded_at": "2026-04-12T11:20:00+10:00",
+        "settlement_date": "2026-04-12"
+      },
+      {
+        "region": "QLD1",
+        "value": 1374.4198,
+        "unit": "MW",
+        "recorded_at": "2026-01-25T11:05:00+10:00",
+        "settlement_date": "2026-01-25"
+      },
+      {
+        "region": "SA1",
+        "value": 667.0696,
+        "unit": "MW",
+        "recorded_at": "2026-01-31T15:10:00+10:00",
+        "settlement_date": "2026-01-31"
+      },
+      {
+        "region": "VIC1",
+        "value": 1255.0488,
+        "unit": "MW",
+        "recorded_at": "2026-02-06T13:00:00+10:00",
+        "settlement_date": "2026-02-06"
+      }
+    ],
+    "max_daily_discharge": [
+      {
+        "region": "NEM",
+        "value": 16001.117250000005,
+        "unit": "MWh",
+        "recorded_at": null,
+        "settlement_date": "2026-04-13"
+      },
+      {
+        "region": "NSW1",
+        "value": 6166.063933333336,
+        "unit": "MWh",
+        "recorded_at": null,
+        "settlement_date": "2026-04-13"
+      },
+      {
+        "region": "QLD1",
+        "value": 4092.120091666666,
+        "unit": "MWh",
+        "recorded_at": null,
+        "settlement_date": "2026-04-13"
+      },
+      {
+        "region": "SA1",
+        "value": 2096.4427833333334,
+        "unit": "MWh",
+        "recorded_at": null,
+        "settlement_date": "2026-02-06"
+      },
+      {
+        "region": "VIC1",
+        "value": 4714.390049999998,
+        "unit": "MWh",
+        "recorded_at": null,
+        "settlement_date": "2026-04-05"
+      }
+    ],
+    "max_daily_charge": [
+      {
+        "region": "NEM",
+        "value": 14497.000949999996,
+        "unit": "MWh",
+        "recorded_at": null,
+        "settlement_date": "2026-04-13"
+      },
+      {
+        "region": "NSW1",
+        "value": 4664.524824999999,
+        "unit": "MWh",
+        "recorded_at": null,
+        "settlement_date": "2026-04-13"
+      },
+      {
+        "region": "QLD1",
+        "value": 4705.572141666665,
+        "unit": "MWh",
+        "recorded_at": null,
+        "settlement_date": "2026-03-27"
+      },
+      {
+        "region": "SA1",
+        "value": 2233.2614583333316,
+        "unit": "MWh",
+        "recorded_at": null,
+        "settlement_date": "2026-03-31"
+      },
+      {
+        "region": "VIC1",
+        "value": 4469.169199999998,
+        "unit": "MWh",
+        "recorded_at": null,
+        "settlement_date": "2026-03-31"
+      }
+    ]
   },
-  "latest_snapshot": {},
-  "daily_30d": {},
+  "latest_snapshot": {
+    "NSW1": {
+      "discharged_mwh": 2971.5,
+      "charged_mwh": 3925.2,
+      "peak_discharge_mw": 749.2,
+      "peak_charge_mw": 1164.8,
+      "peak_discharge_time": "2026-04-16T19:40:00+10:00",
+      "peak_charge_time": "2026-04-16T12:05:00+10:00",
+      "intervals": 576
+    },
+    "QLD1": {
+      "discharged_mwh": 3353.7,
+      "charged_mwh": 4202.7,
+      "peak_discharge_mw": 1156.5,
+      "peak_charge_mw": 1104.6,
+      "peak_discharge_time": "2026-04-16T18:05:00+10:00",
+      "peak_charge_time": "2026-04-16T10:15:00+10:00",
+      "intervals": 576
+    },
+    "SA1": {
+      "discharged_mwh": 1269.1,
+      "charged_mwh": 1989.7,
+      "peak_discharge_mw": 388.0,
+      "peak_charge_mw": 482.7,
+      "peak_discharge_time": "2026-04-16T19:20:00+10:00",
+      "peak_charge_time": "2026-04-16T11:05:00+10:00",
+      "intervals": 575
+    },
+    "VIC1": {
+      "discharged_mwh": 1139.9,
+      "charged_mwh": 3651.7,
+      "peak_discharge_mw": 444.1,
+      "peak_charge_mw": 873.4,
+      "peak_discharge_time": "2026-04-16T18:40:00+10:00",
+      "peak_charge_time": "2026-04-16T12:30:00+10:00",
+      "intervals": 576
+    },
+    "NEM": {
+      "discharged_mwh": 8734.2,
+      "charged_mwh": 13769.2,
+      "peak_discharge_mw": 2148.6,
+      "peak_charge_mw": 2822.3,
+      "peak_discharge_time": "2026-04-16T18:40:00+10:00",
+      "peak_charge_time": "2026-04-16T11:45:00+10:00",
+      "intervals": 576
+    }
+  },
+  "daily_30d": {
+    "NSW1": [
+      {
+        "settlement_date": "2026-03-17",
+        "discharged_mwh": 3395.4,
+        "charged_mwh": 3121.0,
+        "peak_discharge_mw": 847.9,
+        "peak_charge_mw": 849.6
+      },
+      {
+        "settlement_date": "2026-03-18",
+        "discharged_mwh": 1768.8,
+        "charged_mwh": 3287.6,
+        "peak_discharge_mw": 559.5,
+        "peak_charge_mw": 738.1
+      },
+      {
+        "settlement_date": "2026-03-19",
+        "discharged_mwh": 3222.7,
+        "charged_mwh": 4040.7,
+        "peak_discharge_mw": 682.5,
+        "peak_charge_mw": 856.1
+      },
+      {
+        "settlement_date": "2026-03-20",
+        "discharged_mwh": 2757.2,
+        "charged_mwh": 3342.7,
+        "peak_discharge_mw": 687.4,
+        "peak_charge_mw": 971.6
+      },
+      {
+        "settlement_date": "2026-03-21",
+        "discharged_mwh": 1738.5,
+        "charged_mwh": 2230.7,
+        "peak_discharge_mw": 533.4,
+        "peak_charge_mw": 565.4
+      },
+      {
+        "settlement_date": "2026-03-22",
+        "discharged_mwh": 2143.9,
+        "charged_mwh": 2885.9,
+        "peak_discharge_mw": 737.6,
+        "peak_charge_mw": 743.9
+      },
+      {
+        "settlement_date": "2026-03-23",
+        "discharged_mwh": 1630.4,
+        "charged_mwh": 2796.1,
+        "peak_discharge_mw": 632.7,
+        "peak_charge_mw": 570.4
+      },
+      {
+        "settlement_date": "2026-03-24",
+        "discharged_mwh": 2922.6,
+        "charged_mwh": 2479.4,
+        "peak_discharge_mw": 770.2,
+        "peak_charge_mw": 708.7
+      },
+      {
+        "settlement_date": "2026-03-25",
+        "discharged_mwh": 3353.5,
+        "charged_mwh": 3792.0,
+        "peak_discharge_mw": 851.8,
+        "peak_charge_mw": 952.9
+      },
+      {
+        "settlement_date": "2026-03-26",
+        "discharged_mwh": 1355.4,
+        "charged_mwh": 2140.0,
+        "peak_discharge_mw": 648.4,
+        "peak_charge_mw": 649.5
+      },
+      {
+        "settlement_date": "2026-03-27",
+        "discharged_mwh": 2135.2,
+        "charged_mwh": 3401.4,
+        "peak_discharge_mw": 490.0,
+        "peak_charge_mw": 955.8
+      },
+      {
+        "settlement_date": "2026-03-28",
+        "discharged_mwh": 2556.0,
+        "charged_mwh": 2907.9,
+        "peak_discharge_mw": 598.3,
+        "peak_charge_mw": 775.2
+      },
+      {
+        "settlement_date": "2026-03-29",
+        "discharged_mwh": 2020.9,
+        "charged_mwh": 3160.3,
+        "peak_discharge_mw": 682.9,
+        "peak_charge_mw": 790.4
+      },
+      {
+        "settlement_date": "2026-03-30",
+        "discharged_mwh": 3649.6,
+        "charged_mwh": 2980.7,
+        "peak_discharge_mw": 719.0,
+        "peak_charge_mw": 706.9
+      },
+      {
+        "settlement_date": "2026-03-31",
+        "discharged_mwh": 1704.6,
+        "charged_mwh": 2997.6,
+        "peak_discharge_mw": 653.4,
+        "peak_charge_mw": 643.4
+      },
+      {
+        "settlement_date": "2026-04-01",
+        "discharged_mwh": 3269.1,
+        "charged_mwh": 3660.8,
+        "peak_discharge_mw": 716.1,
+        "peak_charge_mw": 882.7
+      },
+      {
+        "settlement_date": "2026-04-02",
+        "discharged_mwh": 3131.2,
+        "charged_mwh": 4081.4,
+        "peak_discharge_mw": 690.6,
+        "peak_charge_mw": 936.2
+      },
+      {
+        "settlement_date": "2026-04-03",
+        "discharged_mwh": 1587.5,
+        "charged_mwh": 2188.1,
+        "peak_discharge_mw": 475.1,
+        "peak_charge_mw": 713.9
+      },
+      {
+        "settlement_date": "2026-04-04",
+        "discharged_mwh": 2389.0,
+        "charged_mwh": 2429.2,
+        "peak_discharge_mw": 762.5,
+        "peak_charge_mw": 663.3
+      },
+      {
+        "settlement_date": "2026-04-05",
+        "discharged_mwh": 3168.8,
+        "charged_mwh": 3992.6,
+        "peak_discharge_mw": 767.9,
+        "peak_charge_mw": 991.0
+      },
+      {
+        "settlement_date": "2026-04-06",
+        "discharged_mwh": 3130.9,
+        "charged_mwh": 3377.8,
+        "peak_discharge_mw": 768.2,
+        "peak_charge_mw": 880.6
+      },
+      {
+        "settlement_date": "2026-04-07",
+        "discharged_mwh": 3718.3,
+        "charged_mwh": 4581.5,
+        "peak_discharge_mw": 920.6,
+        "peak_charge_mw": 916.4
+      },
+      {
+        "settlement_date": "2026-04-08",
+        "discharged_mwh": 3897.2,
+        "charged_mwh": 3890.8,
+        "peak_discharge_mw": 877.7,
+        "peak_charge_mw": 979.2
+      },
+      {
+        "settlement_date": "2026-04-09",
+        "discharged_mwh": 3084.6,
+        "charged_mwh": 4034.4,
+        "peak_discharge_mw": 936.9,
+        "peak_charge_mw": 1056.2
+      },
+      {
+        "settlement_date": "2026-04-10",
+        "discharged_mwh": 3960.3,
+        "charged_mwh": 4396.8,
+        "peak_discharge_mw": 767.5,
+        "peak_charge_mw": 849.2
+      },
+      {
+        "settlement_date": "2026-04-11",
+        "discharged_mwh": 3043.2,
+        "charged_mwh": 4310.2,
+        "peak_discharge_mw": 784.7,
+        "peak_charge_mw": 1003.8
+      },
+      {
+        "settlement_date": "2026-04-12",
+        "discharged_mwh": 1682.0,
+        "charged_mwh": 4169.5,
+        "peak_discharge_mw": 370.0,
+        "peak_charge_mw": 1165.2
+      },
+      {
+        "settlement_date": "2026-04-13",
+        "discharged_mwh": 6166.1,
+        "charged_mwh": 4664.5,
+        "peak_discharge_mw": 1042.0,
+        "peak_charge_mw": 1140.5
+      },
+      {
+        "settlement_date": "2026-04-14",
+        "discharged_mwh": 4014.6,
+        "charged_mwh": 4377.4,
+        "peak_discharge_mw": 971.0,
+        "peak_charge_mw": 1055.0
+      },
+      {
+        "settlement_date": "2026-04-15",
+        "discharged_mwh": 3486.8,
+        "charged_mwh": 3931.0,
+        "peak_discharge_mw": 862.1,
+        "peak_charge_mw": 995.9
+      },
+      {
+        "settlement_date": "2026-04-16",
+        "discharged_mwh": 2971.5,
+        "charged_mwh": 3925.2,
+        "peak_discharge_mw": 749.2,
+        "peak_charge_mw": 1164.8
+      }
+    ],
+    "QLD1": [
+      {
+        "settlement_date": "2026-03-17",
+        "discharged_mwh": 3374.9,
+        "charged_mwh": 3997.3,
+        "peak_discharge_mw": 1134.0,
+        "peak_charge_mw": 897.5
+      },
+      {
+        "settlement_date": "2026-03-18",
+        "discharged_mwh": 2633.2,
+        "charged_mwh": 4074.0,
+        "peak_discharge_mw": 983.9,
+        "peak_charge_mw": 851.5
+      },
+      {
+        "settlement_date": "2026-03-19",
+        "discharged_mwh": 3346.5,
+        "charged_mwh": 3440.9,
+        "peak_discharge_mw": 969.5,
+        "peak_charge_mw": 793.3
+      },
+      {
+        "settlement_date": "2026-03-20",
+        "discharged_mwh": 3574.6,
+        "charged_mwh": 3975.3,
+        "peak_discharge_mw": 1189.6,
+        "peak_charge_mw": 934.0
+      },
+      {
+        "settlement_date": "2026-03-21",
+        "discharged_mwh": 3323.4,
+        "charged_mwh": 4016.0,
+        "peak_discharge_mw": 1224.4,
+        "peak_charge_mw": 926.1
+      },
+      {
+        "settlement_date": "2026-03-22",
+        "discharged_mwh": 3051.8,
+        "charged_mwh": 4054.1,
+        "peak_discharge_mw": 1153.1,
+        "peak_charge_mw": 870.5
+      },
+      {
+        "settlement_date": "2026-03-23",
+        "discharged_mwh": 3233.3,
+        "charged_mwh": 3976.0,
+        "peak_discharge_mw": 1233.0,
+        "peak_charge_mw": 989.1
+      },
+      {
+        "settlement_date": "2026-03-24",
+        "discharged_mwh": 3885.6,
+        "charged_mwh": 4138.3,
+        "peak_discharge_mw": 1426.7,
+        "peak_charge_mw": 840.1
+      },
+      {
+        "settlement_date": "2026-03-25",
+        "discharged_mwh": 3710.1,
+        "charged_mwh": 4483.1,
+        "peak_discharge_mw": 1188.5,
+        "peak_charge_mw": 1176.0
+      },
+      {
+        "settlement_date": "2026-03-26",
+        "discharged_mwh": 3605.0,
+        "charged_mwh": 4157.6,
+        "peak_discharge_mw": 1235.7,
+        "peak_charge_mw": 1097.3
+      },
+      {
+        "settlement_date": "2026-03-27",
+        "discharged_mwh": 3587.0,
+        "charged_mwh": 4705.6,
+        "peak_discharge_mw": 1243.6,
+        "peak_charge_mw": 1190.5
+      },
+      {
+        "settlement_date": "2026-03-28",
+        "discharged_mwh": 4003.1,
+        "charged_mwh": 4686.6,
+        "peak_discharge_mw": 1127.5,
+        "peak_charge_mw": 1178.8
+      },
+      {
+        "settlement_date": "2026-03-29",
+        "discharged_mwh": 3625.3,
+        "charged_mwh": 4594.0,
+        "peak_discharge_mw": 1152.6,
+        "peak_charge_mw": 967.9
+      },
+      {
+        "settlement_date": "2026-03-30",
+        "discharged_mwh": 3942.7,
+        "charged_mwh": 4297.9,
+        "peak_discharge_mw": 1206.1,
+        "peak_charge_mw": 1001.9
+      },
+      {
+        "settlement_date": "2026-03-31",
+        "discharged_mwh": 3288.3,
+        "charged_mwh": 4603.0,
+        "peak_discharge_mw": 1135.0,
+        "peak_charge_mw": 927.8
+      },
+      {
+        "settlement_date": "2026-04-01",
+        "discharged_mwh": 3850.5,
+        "charged_mwh": 4363.0,
+        "peak_discharge_mw": 1099.8,
+        "peak_charge_mw": 1077.7
+      },
+      {
+        "settlement_date": "2026-04-02",
+        "discharged_mwh": 3885.7,
+        "charged_mwh": 4531.2,
+        "peak_discharge_mw": 1283.5,
+        "peak_charge_mw": 990.1
+      },
+      {
+        "settlement_date": "2026-04-03",
+        "discharged_mwh": 3440.3,
+        "charged_mwh": 3971.3,
+        "peak_discharge_mw": 1208.4,
+        "peak_charge_mw": 769.9
+      },
+      {
+        "settlement_date": "2026-04-04",
+        "discharged_mwh": 3388.9,
+        "charged_mwh": 3909.4,
+        "peak_discharge_mw": 1164.5,
+        "peak_charge_mw": 925.9
+      },
+      {
+        "settlement_date": "2026-04-05",
+        "discharged_mwh": 3358.6,
+        "charged_mwh": 4163.4,
+        "peak_discharge_mw": 1149.6,
+        "peak_charge_mw": 903.0
+      },
+      {
+        "settlement_date": "2026-04-06",
+        "discharged_mwh": 3272.1,
+        "charged_mwh": 4085.9,
+        "peak_discharge_mw": 1290.3,
+        "peak_charge_mw": 1000.8
+      },
+      {
+        "settlement_date": "2026-04-07",
+        "discharged_mwh": 3941.3,
+        "charged_mwh": 4115.0,
+        "peak_discharge_mw": 1427.9,
+        "peak_charge_mw": 1140.3
+      },
+      {
+        "settlement_date": "2026-04-08",
+        "discharged_mwh": 3397.2,
+        "charged_mwh": 4340.1,
+        "peak_discharge_mw": 1158.1,
+        "peak_charge_mw": 1059.6
+      },
+      {
+        "settlement_date": "2026-04-09",
+        "discharged_mwh": 3412.7,
+        "charged_mwh": 4111.8,
+        "peak_discharge_mw": 1360.6,
+        "peak_charge_mw": 1118.7
+      },
+      {
+        "settlement_date": "2026-04-10",
+        "discharged_mwh": 3737.4,
+        "charged_mwh": 4288.3,
+        "peak_discharge_mw": 1188.5,
+        "peak_charge_mw": 1232.1
+      },
+      {
+        "settlement_date": "2026-04-11",
+        "discharged_mwh": 3483.6,
+        "charged_mwh": 4335.3,
+        "peak_discharge_mw": 1177.8,
+        "peak_charge_mw": 945.7
+      },
+      {
+        "settlement_date": "2026-04-12",
+        "discharged_mwh": 2787.4,
+        "charged_mwh": 4518.3,
+        "peak_discharge_mw": 1173.4,
+        "peak_charge_mw": 888.4
+      },
+      {
+        "settlement_date": "2026-04-13",
+        "discharged_mwh": 4092.1,
+        "charged_mwh": 4152.0,
+        "peak_discharge_mw": 1367.4,
+        "peak_charge_mw": 926.8
+      },
+      {
+        "settlement_date": "2026-04-14",
+        "discharged_mwh": 3670.7,
+        "charged_mwh": 4440.6,
+        "peak_discharge_mw": 1532.2,
+        "peak_charge_mw": 1207.8
+      },
+      {
+        "settlement_date": "2026-04-15",
+        "discharged_mwh": 3594.8,
+        "charged_mwh": 4345.1,
+        "peak_discharge_mw": 1209.1,
+        "peak_charge_mw": 879.6
+      },
+      {
+        "settlement_date": "2026-04-16",
+        "discharged_mwh": 3353.7,
+        "charged_mwh": 4202.7,
+        "peak_discharge_mw": 1156.5,
+        "peak_charge_mw": 1104.6
+      }
+    ],
+    "SA1": [
+      {
+        "settlement_date": "2026-03-17",
+        "discharged_mwh": 1500.9,
+        "charged_mwh": 974.8,
+        "peak_discharge_mw": 464.5,
+        "peak_charge_mw": 360.0
+      },
+      {
+        "settlement_date": "2026-03-18",
+        "discharged_mwh": 378.2,
+        "charged_mwh": 1055.0,
+        "peak_discharge_mw": 176.0,
+        "peak_charge_mw": 236.2
+      },
+      {
+        "settlement_date": "2026-03-19",
+        "discharged_mwh": 995.8,
+        "charged_mwh": 1199.7,
+        "peak_discharge_mw": 438.3,
+        "peak_charge_mw": 401.0
+      },
+      {
+        "settlement_date": "2026-03-20",
+        "discharged_mwh": 985.1,
+        "charged_mwh": 1762.3,
+        "peak_discharge_mw": 400.5,
+        "peak_charge_mw": 458.9
+      },
+      {
+        "settlement_date": "2026-03-21",
+        "discharged_mwh": 1598.0,
+        "charged_mwh": 1637.5,
+        "peak_discharge_mw": 305.4,
+        "peak_charge_mw": 459.9
+      },
+      {
+        "settlement_date": "2026-03-22",
+        "discharged_mwh": 1214.2,
+        "charged_mwh": 1683.8,
+        "peak_discharge_mw": 395.8,
+        "peak_charge_mw": 413.1
+      },
+      {
+        "settlement_date": "2026-03-23",
+        "discharged_mwh": 1703.7,
+        "charged_mwh": 1509.4,
+        "peak_discharge_mw": 595.0,
+        "peak_charge_mw": 413.3
+      },
+      {
+        "settlement_date": "2026-03-24",
+        "discharged_mwh": 775.6,
+        "charged_mwh": 1724.4,
+        "peak_discharge_mw": 409.3,
+        "peak_charge_mw": 444.9
+      },
+      {
+        "settlement_date": "2026-03-25",
+        "discharged_mwh": 1325.8,
+        "charged_mwh": 1440.3,
+        "peak_discharge_mw": 321.3,
+        "peak_charge_mw": 514.9
+      },
+      {
+        "settlement_date": "2026-03-26",
+        "discharged_mwh": 1414.4,
+        "charged_mwh": 1699.2,
+        "peak_discharge_mw": 499.7,
+        "peak_charge_mw": 625.0
+      },
+      {
+        "settlement_date": "2026-03-27",
+        "discharged_mwh": 1156.1,
+        "charged_mwh": 1817.6,
+        "peak_discharge_mw": 381.9,
+        "peak_charge_mw": 383.4
+      },
+      {
+        "settlement_date": "2026-03-28",
+        "discharged_mwh": 1838.5,
+        "charged_mwh": 1617.9,
+        "peak_discharge_mw": 368.4,
+        "peak_charge_mw": 349.1
+      },
+      {
+        "settlement_date": "2026-03-29",
+        "discharged_mwh": 1172.0,
+        "charged_mwh": 1603.5,
+        "peak_discharge_mw": 355.7,
+        "peak_charge_mw": 451.0
+      },
+      {
+        "settlement_date": "2026-03-30",
+        "discharged_mwh": 1328.4,
+        "charged_mwh": 1513.3,
+        "peak_discharge_mw": 536.6,
+        "peak_charge_mw": 420.5
+      },
+      {
+        "settlement_date": "2026-03-31",
+        "discharged_mwh": 915.6,
+        "charged_mwh": 2233.3,
+        "peak_discharge_mw": 391.4,
+        "peak_charge_mw": 427.9
+      },
+      {
+        "settlement_date": "2026-04-01",
+        "discharged_mwh": 1623.1,
+        "charged_mwh": 1646.1,
+        "peak_discharge_mw": 470.4,
+        "peak_charge_mw": 469.8
+      },
+      {
+        "settlement_date": "2026-04-02",
+        "discharged_mwh": 1429.1,
+        "charged_mwh": 1853.5,
+        "peak_discharge_mw": 392.2,
+        "peak_charge_mw": 532.4
+      },
+      {
+        "settlement_date": "2026-04-03",
+        "discharged_mwh": 1548.6,
+        "charged_mwh": 1567.9,
+        "peak_discharge_mw": 427.0,
+        "peak_charge_mw": 509.1
+      },
+      {
+        "settlement_date": "2026-04-04",
+        "discharged_mwh": 756.6,
+        "charged_mwh": 1695.0,
+        "peak_discharge_mw": 375.3,
+        "peak_charge_mw": 463.5
+      },
+      {
+        "settlement_date": "2026-04-05",
+        "discharged_mwh": 1427.6,
+        "charged_mwh": 976.1,
+        "peak_discharge_mw": 270.3,
+        "peak_charge_mw": 238.5
+      },
+      {
+        "settlement_date": "2026-04-06",
+        "discharged_mwh": 588.4,
+        "charged_mwh": 1718.1,
+        "peak_discharge_mw": 375.3,
+        "peak_charge_mw": 462.5
+      },
+      {
+        "settlement_date": "2026-04-07",
+        "discharged_mwh": 1962.1,
+        "charged_mwh": 1647.8,
+        "peak_discharge_mw": 418.5,
+        "peak_charge_mw": 418.7
+      },
+      {
+        "settlement_date": "2026-04-08",
+        "discharged_mwh": 982.7,
+        "charged_mwh": 1305.3,
+        "peak_discharge_mw": 329.0,
+        "peak_charge_mw": 408.0
+      },
+      {
+        "settlement_date": "2026-04-09",
+        "discharged_mwh": 369.1,
+        "charged_mwh": 995.9,
+        "peak_discharge_mw": 199.9,
+        "peak_charge_mw": 191.2
+      },
+      {
+        "settlement_date": "2026-04-10",
+        "discharged_mwh": 427.3,
+        "charged_mwh": 697.1,
+        "peak_discharge_mw": 140.6,
+        "peak_charge_mw": 258.1
+      },
+      {
+        "settlement_date": "2026-04-11",
+        "discharged_mwh": 297.3,
+        "charged_mwh": 835.1,
+        "peak_discharge_mw": 198.3,
+        "peak_charge_mw": 308.5
+      },
+      {
+        "settlement_date": "2026-04-12",
+        "discharged_mwh": 382.4,
+        "charged_mwh": 1044.4,
+        "peak_discharge_mw": 239.5,
+        "peak_charge_mw": 291.9
+      },
+      {
+        "settlement_date": "2026-04-13",
+        "discharged_mwh": 2043.5,
+        "charged_mwh": 1629.0,
+        "peak_discharge_mw": 390.9,
+        "peak_charge_mw": 327.4
+      },
+      {
+        "settlement_date": "2026-04-14",
+        "discharged_mwh": 1477.0,
+        "charged_mwh": 1566.2,
+        "peak_discharge_mw": 289.4,
+        "peak_charge_mw": 362.2
+      },
+      {
+        "settlement_date": "2026-04-15",
+        "discharged_mwh": 1589.2,
+        "charged_mwh": 1854.1,
+        "peak_discharge_mw": 556.9,
+        "peak_charge_mw": 482.4
+      },
+      {
+        "settlement_date": "2026-04-16",
+        "discharged_mwh": 1269.1,
+        "charged_mwh": 1989.7,
+        "peak_discharge_mw": 388.0,
+        "peak_charge_mw": 482.7
+      }
+    ],
+    "VIC1": [
+      {
+        "settlement_date": "2026-03-17",
+        "discharged_mwh": 2549.2,
+        "charged_mwh": 2149.4,
+        "peak_discharge_mw": 548.1,
+        "peak_charge_mw": 928.8
+      },
+      {
+        "settlement_date": "2026-03-18",
+        "discharged_mwh": 837.0,
+        "charged_mwh": 2729.9,
+        "peak_discharge_mw": 273.1,
+        "peak_charge_mw": 701.4
+      },
+      {
+        "settlement_date": "2026-03-19",
+        "discharged_mwh": 2532.5,
+        "charged_mwh": 2316.0,
+        "peak_discharge_mw": 917.2,
+        "peak_charge_mw": 779.6
+      },
+      {
+        "settlement_date": "2026-03-20",
+        "discharged_mwh": 2934.4,
+        "charged_mwh": 3243.8,
+        "peak_discharge_mw": 667.2,
+        "peak_charge_mw": 1003.9
+      },
+      {
+        "settlement_date": "2026-03-21",
+        "discharged_mwh": 2627.7,
+        "charged_mwh": 3207.9,
+        "peak_discharge_mw": 693.2,
+        "peak_charge_mw": 705.5
+      },
+      {
+        "settlement_date": "2026-03-22",
+        "discharged_mwh": 2519.4,
+        "charged_mwh": 3152.7,
+        "peak_discharge_mw": 593.4,
+        "peak_charge_mw": 869.0
+      },
+      {
+        "settlement_date": "2026-03-23",
+        "discharged_mwh": 3112.7,
+        "charged_mwh": 2458.4,
+        "peak_discharge_mw": 856.2,
+        "peak_charge_mw": 684.1
+      },
+      {
+        "settlement_date": "2026-03-24",
+        "discharged_mwh": 2755.0,
+        "charged_mwh": 3251.8,
+        "peak_discharge_mw": 840.6,
+        "peak_charge_mw": 1013.9
+      },
+      {
+        "settlement_date": "2026-03-25",
+        "discharged_mwh": 1882.9,
+        "charged_mwh": 3047.9,
+        "peak_discharge_mw": 712.3,
+        "peak_charge_mw": 708.7
+      },
+      {
+        "settlement_date": "2026-03-26",
+        "discharged_mwh": 1504.6,
+        "charged_mwh": 1647.2,
+        "peak_discharge_mw": 447.9,
+        "peak_charge_mw": 588.2
+      },
+      {
+        "settlement_date": "2026-03-27",
+        "discharged_mwh": 1827.0,
+        "charged_mwh": 1768.6,
+        "peak_discharge_mw": 469.4,
+        "peak_charge_mw": 621.3
+      },
+      {
+        "settlement_date": "2026-03-28",
+        "discharged_mwh": 1807.2,
+        "charged_mwh": 3324.3,
+        "peak_discharge_mw": 484.1,
+        "peak_charge_mw": 820.0
+      },
+      {
+        "settlement_date": "2026-03-29",
+        "discharged_mwh": 2755.5,
+        "charged_mwh": 3219.6,
+        "peak_discharge_mw": 556.1,
+        "peak_charge_mw": 1048.9
+      },
+      {
+        "settlement_date": "2026-03-30",
+        "discharged_mwh": 3831.7,
+        "charged_mwh": 3192.2,
+        "peak_discharge_mw": 972.6,
+        "peak_charge_mw": 851.5
+      },
+      {
+        "settlement_date": "2026-03-31",
+        "discharged_mwh": 2934.0,
+        "charged_mwh": 4469.2,
+        "peak_discharge_mw": 1243.9,
+        "peak_charge_mw": 985.9
+      },
+      {
+        "settlement_date": "2026-04-01",
+        "discharged_mwh": 2731.6,
+        "charged_mwh": 2469.8,
+        "peak_discharge_mw": 916.7,
+        "peak_charge_mw": 693.1
+      },
+      {
+        "settlement_date": "2026-04-02",
+        "discharged_mwh": 2905.4,
+        "charged_mwh": 3798.7,
+        "peak_discharge_mw": 834.4,
+        "peak_charge_mw": 1137.2
+      },
+      {
+        "settlement_date": "2026-04-03",
+        "discharged_mwh": 2969.3,
+        "charged_mwh": 3156.2,
+        "peak_discharge_mw": 758.2,
+        "peak_charge_mw": 705.4
+      },
+      {
+        "settlement_date": "2026-04-04",
+        "discharged_mwh": 1928.2,
+        "charged_mwh": 3817.1,
+        "peak_discharge_mw": 525.6,
+        "peak_charge_mw": 945.6
+      },
+      {
+        "settlement_date": "2026-04-05",
+        "discharged_mwh": 4714.4,
+        "charged_mwh": 3716.0,
+        "peak_discharge_mw": 983.3,
+        "peak_charge_mw": 1058.3
+      },
+      {
+        "settlement_date": "2026-04-06",
+        "discharged_mwh": 3365.1,
+        "charged_mwh": 3963.9,
+        "peak_discharge_mw": 1224.1,
+        "peak_charge_mw": 848.1
+      },
+      {
+        "settlement_date": "2026-04-07",
+        "discharged_mwh": 2666.9,
+        "charged_mwh": 3659.4,
+        "peak_discharge_mw": 800.1,
+        "peak_charge_mw": 857.2
+      },
+      {
+        "settlement_date": "2026-04-08",
+        "discharged_mwh": 3670.8,
+        "charged_mwh": 3724.4,
+        "peak_discharge_mw": 964.3,
+        "peak_charge_mw": 1004.8
+      },
+      {
+        "settlement_date": "2026-04-09",
+        "discharged_mwh": 1384.0,
+        "charged_mwh": 3006.8,
+        "peak_discharge_mw": 322.0,
+        "peak_charge_mw": 814.0
+      },
+      {
+        "settlement_date": "2026-04-10",
+        "discharged_mwh": 1382.8,
+        "charged_mwh": 1536.5,
+        "peak_discharge_mw": 239.3,
+        "peak_charge_mw": 690.5
+      },
+      {
+        "settlement_date": "2026-04-11",
+        "discharged_mwh": 1608.0,
+        "charged_mwh": 2257.2,
+        "peak_discharge_mw": 575.7,
+        "peak_charge_mw": 782.7
+      },
+      {
+        "settlement_date": "2026-04-12",
+        "discharged_mwh": 2710.2,
+        "charged_mwh": 2466.8,
+        "peak_discharge_mw": 603.6,
+        "peak_charge_mw": 678.7
+      },
+      {
+        "settlement_date": "2026-04-13",
+        "discharged_mwh": 3699.5,
+        "charged_mwh": 4051.5,
+        "peak_discharge_mw": 825.8,
+        "peak_charge_mw": 976.9
+      },
+      {
+        "settlement_date": "2026-04-14",
+        "discharged_mwh": 3149.3,
+        "charged_mwh": 3393.6,
+        "peak_discharge_mw": 901.9,
+        "peak_charge_mw": 959.2
+      },
+      {
+        "settlement_date": "2026-04-15",
+        "discharged_mwh": 3453.4,
+        "charged_mwh": 3849.7,
+        "peak_discharge_mw": 821.9,
+        "peak_charge_mw": 905.1
+      },
+      {
+        "settlement_date": "2026-04-16",
+        "discharged_mwh": 1139.9,
+        "charged_mwh": 3651.7,
+        "peak_discharge_mw": 444.1,
+        "peak_charge_mw": 873.4
+      }
+    ],
+    "NEM": [
+      {
+        "settlement_date": "2026-03-17",
+        "discharged_mwh": 10820.4,
+        "charged_mwh": 10242.5,
+        "peak_discharge_mw": 2538.9,
+        "peak_charge_mw": 1766.1
+      },
+      {
+        "settlement_date": "2026-03-18",
+        "discharged_mwh": 5617.3,
+        "charged_mwh": 11146.4,
+        "peak_discharge_mw": 1717.3,
+        "peak_charge_mw": 2238.1
+      },
+      {
+        "settlement_date": "2026-03-19",
+        "discharged_mwh": 10097.6,
+        "charged_mwh": 10997.3,
+        "peak_discharge_mw": 2179.4,
+        "peak_charge_mw": 2207.5
+      },
+      {
+        "settlement_date": "2026-03-20",
+        "discharged_mwh": 10251.3,
+        "charged_mwh": 12324.2,
+        "peak_discharge_mw": 2446.5,
+        "peak_charge_mw": 2402.5
+      },
+      {
+        "settlement_date": "2026-03-21",
+        "discharged_mwh": 9287.6,
+        "charged_mwh": 11092.1,
+        "peak_discharge_mw": 2514.7,
+        "peak_charge_mw": 2237.3
+      },
+      {
+        "settlement_date": "2026-03-22",
+        "discharged_mwh": 8929.3,
+        "charged_mwh": 11776.6,
+        "peak_discharge_mw": 2611.8,
+        "peak_charge_mw": 2419.1
+      },
+      {
+        "settlement_date": "2026-03-23",
+        "discharged_mwh": 9680.1,
+        "charged_mwh": 10740.0,
+        "peak_discharge_mw": 2806.1,
+        "peak_charge_mw": 2138.0
+      },
+      {
+        "settlement_date": "2026-03-24",
+        "discharged_mwh": 10338.8,
+        "charged_mwh": 11593.9,
+        "peak_discharge_mw": 3094.3,
+        "peak_charge_mw": 2045.4
+      },
+      {
+        "settlement_date": "2026-03-25",
+        "discharged_mwh": 10272.3,
+        "charged_mwh": 12763.3,
+        "peak_discharge_mw": 2892.8,
+        "peak_charge_mw": 2274.9
+      },
+      {
+        "settlement_date": "2026-03-26",
+        "discharged_mwh": 7879.5,
+        "charged_mwh": 9644.1,
+        "peak_discharge_mw": 1729.2,
+        "peak_charge_mw": 1910.9
+      },
+      {
+        "settlement_date": "2026-03-27",
+        "discharged_mwh": 8705.4,
+        "charged_mwh": 11693.2,
+        "peak_discharge_mw": 1920.3,
+        "peak_charge_mw": 2552.9
+      },
+      {
+        "settlement_date": "2026-03-28",
+        "discharged_mwh": 10204.8,
+        "charged_mwh": 12536.7,
+        "peak_discharge_mw": 1990.2,
+        "peak_charge_mw": 2238.3
+      },
+      {
+        "settlement_date": "2026-03-29",
+        "discharged_mwh": 9573.7,
+        "charged_mwh": 12577.4,
+        "peak_discharge_mw": 2467.2,
+        "peak_charge_mw": 2817.4
+      },
+      {
+        "settlement_date": "2026-03-30",
+        "discharged_mwh": 12752.4,
+        "charged_mwh": 11984.1,
+        "peak_discharge_mw": 3207.1,
+        "peak_charge_mw": 2251.3
+      },
+      {
+        "settlement_date": "2026-03-31",
+        "discharged_mwh": 8842.5,
+        "charged_mwh": 14303.0,
+        "peak_discharge_mw": 3064.7,
+        "peak_charge_mw": 2254.7
+      },
+      {
+        "settlement_date": "2026-04-01",
+        "discharged_mwh": 11474.3,
+        "charged_mwh": 12139.6,
+        "peak_discharge_mw": 2639.1,
+        "peak_charge_mw": 2152.1
+      },
+      {
+        "settlement_date": "2026-04-02",
+        "discharged_mwh": 11351.4,
+        "charged_mwh": 14264.8,
+        "peak_discharge_mw": 2871.3,
+        "peak_charge_mw": 2906.2
+      },
+      {
+        "settlement_date": "2026-04-03",
+        "discharged_mwh": 9545.6,
+        "charged_mwh": 10883.5,
+        "peak_discharge_mw": 2459.1,
+        "peak_charge_mw": 2111.0
+      },
+      {
+        "settlement_date": "2026-04-04",
+        "discharged_mwh": 8462.8,
+        "charged_mwh": 11850.7,
+        "peak_discharge_mw": 2180.8,
+        "peak_charge_mw": 2379.8
+      },
+      {
+        "settlement_date": "2026-04-05",
+        "discharged_mwh": 12669.4,
+        "charged_mwh": 12848.0,
+        "peak_discharge_mw": 2783.9,
+        "peak_charge_mw": 2401.2
+      },
+      {
+        "settlement_date": "2026-04-06",
+        "discharged_mwh": 10356.5,
+        "charged_mwh": 13145.6,
+        "peak_discharge_mw": 2884.8,
+        "peak_charge_mw": 1857.1
+      },
+      {
+        "settlement_date": "2026-04-07",
+        "discharged_mwh": 12288.5,
+        "charged_mwh": 14003.6,
+        "peak_discharge_mw": 2903.0,
+        "peak_charge_mw": 2401.9
+      },
+      {
+        "settlement_date": "2026-04-08",
+        "discharged_mwh": 11947.9,
+        "charged_mwh": 13260.6,
+        "peak_discharge_mw": 3031.4,
+        "peak_charge_mw": 2371.9
+      },
+      {
+        "settlement_date": "2026-04-09",
+        "discharged_mwh": 8250.5,
+        "charged_mwh": 12148.8,
+        "peak_discharge_mw": 2362.1,
+        "peak_charge_mw": 2265.8
+      },
+      {
+        "settlement_date": "2026-04-10",
+        "discharged_mwh": 9507.8,
+        "charged_mwh": 10918.7,
+        "peak_discharge_mw": 1974.0,
+        "peak_charge_mw": 2504.2
+      },
+      {
+        "settlement_date": "2026-04-11",
+        "discharged_mwh": 8432.2,
+        "charged_mwh": 11737.8,
+        "peak_discharge_mw": 2155.3,
+        "peak_charge_mw": 2460.9
+      },
+      {
+        "settlement_date": "2026-04-12",
+        "discharged_mwh": 7562.0,
+        "charged_mwh": 12199.0,
+        "peak_discharge_mw": 1597.6,
+        "peak_charge_mw": 2533.9
+      },
+      {
+        "settlement_date": "2026-04-13",
+        "discharged_mwh": 16001.1,
+        "charged_mwh": 14497.0,
+        "peak_discharge_mw": 2789.5,
+        "peak_charge_mw": 2768.9
+      },
+      {
+        "settlement_date": "2026-04-14",
+        "discharged_mwh": 12311.6,
+        "charged_mwh": 13777.8,
+        "peak_discharge_mw": 3288.6,
+        "peak_charge_mw": 2323.0
+      },
+      {
+        "settlement_date": "2026-04-15",
+        "discharged_mwh": 12124.1,
+        "charged_mwh": 13979.9,
+        "peak_discharge_mw": 2959.8,
+        "peak_charge_mw": 2571.7
+      },
+      {
+        "settlement_date": "2026-04-16",
+        "discharged_mwh": 8734.2,
+        "charged_mwh": 13769.2,
+        "peak_discharge_mw": 2148.6,
+        "peak_charge_mw": 2822.3
+      }
+    ]
+  },
   "installed_capacity": {
     "NSW1": {
       "project_count": 8,
@@ -37,5 +1323,5 @@
       "total_mwh": 15241.1
     }
   },
-  "exported_at": "2026-04-17T20:44:07.656907"
+  "exported_at": "2026-04-17T21:05:06.365308"
 }
