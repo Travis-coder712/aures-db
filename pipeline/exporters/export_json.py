@@ -26,6 +26,125 @@ from db import get_connection, DB_PATH
 # Export to frontend/public/data/ so Vite serves it in dev and includes it in build
 DATA_DIR = os.path.join(os.path.dirname(__file__), '..', '..', 'frontend', 'public', 'data')
 CONFIG_DIR = os.path.join(os.path.dirname(__file__), '..', 'config')
+# Source-of-truth manual enrichment. Per-project JSON files here are merged
+# over the DB-exported project JSON so narrative / consolidated-project fields
+# (notable text, SIPS contracts, revenue determinations, stakeholder issues)
+# survive re-exports. See `merge_project_overlay` below.
+OVERLAY_DIR = os.path.join(os.path.dirname(__file__), '..', '..', 'data', 'projects')
+
+# Fields where a manually-curated overlay at data/projects/<tech>/<id>.json
+# should OVERRIDE the DB-exported value. Any field in the overlay NOT listed
+# here but also not present in the export is still ADDED (additive). Everything
+# else: the DB wins (it is the source of truth for structured data like
+# capacity, coordinates, status, performance arrays, etc.).
+OVERLAY_OVERRIDE_FIELDS = frozenset({
+    # Narrative
+    'notable',
+    'description',
+    'overview',
+    'operational_notes',
+    'note',
+    # Curated complex fields
+    'stakeholder_issues',
+    'timeline_events',
+    'sources',
+    'technology_details',
+    # Provenance / confidence
+    'last_updated',
+    'last_verified',
+    'data_confidence',
+    'confidence_score',
+    'first_seen',
+    # Capex — often hand-curated from announcements
+    'capex_aud_m',
+    'capex_source',
+    'capex_source_url',
+    'capex_year',
+    # BESS regulatory contracts (SIPS, AER determinations)
+    'sips_contracts',
+    'sips_revenue',
+    'sip_battery_contract',
+    'aer_determinations',
+    'revenue_determinations',
+    # Specialised
+    'performance_score',
+    'battery_status',
+})
+
+
+def load_project_overlay(project_id, tech_dir):
+    """Load the manual-enrichment overlay for a project if it exists.
+
+    Returns None if no overlay file exists at
+    `data/projects/<tech_dir>/<project_id>.json`. Parsing errors are logged
+    and treated as "no overlay" so a broken file never blocks the export.
+    """
+    overlay_path = os.path.join(OVERLAY_DIR, tech_dir, f"{project_id}.json")
+    if not os.path.exists(overlay_path):
+        return None
+    try:
+        with open(overlay_path) as f:
+            return json.load(f)
+    except (OSError, json.JSONDecodeError) as e:
+        print(f"  ! overlay load failed for {project_id}: {e}")
+        return None
+
+
+# Fields where an EMPTY export value (null, empty array, empty dict) should be
+# replaced by a non-empty overlay value. Covers legacy research not yet
+# imported into the DB (eg suppliers known from announcements but not yet in
+# the suppliers table).
+OVERLAY_FILL_EMPTY_FIELDS = frozenset({
+    'suppliers',
+    'scheme_contracts',
+    'ownership_history',
+    'offtakes',
+})
+
+# Legacy key renames (old overlay key → canonical export key). Applied before
+# the override / fill-empty / additive checks run.
+OVERLAY_KEY_ALIASES = {
+    'timeline': 'timeline_events',
+}
+
+
+def _is_empty(val):
+    """Treat None, [] and {} as 'absent' for fill-empty merging.
+    Zero and empty string are NOT considered empty — they are real values."""
+    if val is None:
+        return True
+    if isinstance(val, (list, dict)) and len(val) == 0:
+        return True
+    return False
+
+
+def merge_project_overlay(exported, overlay):
+    """Merge a manual-enrichment overlay on top of a DB-exported project dict.
+
+    Rules (applied per field in the overlay, after the alias rename below):
+      1. Legacy key aliases (`timeline` → `timeline_events`) are renamed first.
+      2. Fields in OVERLAY_OVERRIDE_FIELDS → overlay value replaces export value.
+      3. Fields not in export → added to result (additive).
+      4. Fields in OVERLAY_FILL_EMPTY_FIELDS where export value is empty
+         (None, [], {}) → overlay value replaces it.
+      5. All other fields → export value kept (DB is source of truth).
+
+    Zero and empty strings are NOT treated as empty — only None and
+    empty collections.
+    """
+    if not overlay:
+        return exported
+    merged = dict(exported)
+    for raw_key, value in overlay.items():
+        key = OVERLAY_KEY_ALIASES.get(raw_key, raw_key)
+        if key in OVERLAY_OVERRIDE_FIELDS:
+            merged[key] = value
+        elif key not in merged:
+            merged[key] = value
+        elif key in OVERLAY_FILL_EMPTY_FIELDS and _is_empty(merged[key]) and not _is_empty(value):
+            merged[key] = value
+        # else: DB wins — keep the exported value
+    return merged
 
 
 def load_consolidated_slugs():
@@ -310,15 +429,21 @@ def export_all(db_path=DB_PATH):
         'hybrid': 'hybrid', 'pumped_hydro': 'pumped-hydro',
         'offshore_wind': 'offshore-wind', 'gas': 'gas'
     }
+    overlay_count = 0
     for pid in project_ids:
         project = fetch_full_project(conn, pid)
         if project:
             tech_dir = tech_map.get(project['technology'], project['technology'])
+            overlay = load_project_overlay(pid, tech_dir)
+            if overlay:
+                project = merge_project_overlay(project, overlay)
+                overlay_count += 1
             write_json(
                 os.path.join(DATA_DIR, 'projects', tech_dir, f"{pid}.json"),
                 clean_none_values(project)
             )
-    print(f"  projects/{{tech}}/{{id}}.json ({len(project_ids)} files)")
+    suffix = f", {overlay_count} with manual overlay" if overlay_count else ""
+    print(f"  projects/{{tech}}/{{id}}.json ({len(project_ids)} files{suffix})")
 
     # 3. Indexes
     indexes = {
