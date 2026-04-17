@@ -489,6 +489,20 @@ export async function fetchEISAnalytics(): Promise<EISAnalyticsData | null> {
 }
 
 let eisComparisonCache: EISComparisonData | null = null
+// OEM analytics — per-OEM performance + developer cross-links + concentration
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+let oemAnalyticsCache: any | null = null
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export async function fetchOEMAnalytics(): Promise<any | null> {
+  if (oemAnalyticsCache) return oemAnalyticsCache
+  try {
+    const resp = await fetch(`${BASE}/analytics/oem-analytics.json`)
+    if (!resp.ok) return null
+    oemAnalyticsCache = await resp.json()
+    return oemAnalyticsCache
+  } catch { return null }
+}
+
 export async function fetchEISComparison(): Promise<EISComparisonData | null> {
   if (eisComparisonCache) return eisComparisonCache
   try {

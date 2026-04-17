@@ -519,6 +519,9 @@ def export_all(db_path=DB_PATH):
     # 9. OEM profiles
     export_oem_profiles(conn)
 
+    # 9b. OEM analytics — pre-aggregated performance + developer cross-links
+    export_oem_analytics(conn)
+
     # 10. Contractor profiles
     export_contractor_profiles(conn)
 
@@ -1221,6 +1224,171 @@ def export_oem_profiles(conn):
         'total': len(oems),
     })
     print(f"  indexes/oem-profiles.json ({len(oems)} OEMs)")
+
+
+def export_oem_analytics(conn):
+    """Pre-aggregate OEM intelligence data for the /oems deep-dive.
+
+    Joins the suppliers table against projects, performance_annual, and
+    league_table_entries so the frontend doesn't have to do N per-project
+    fetches to compute OEM-level summaries. Output file:
+
+      analytics/oem-analytics.json = {
+        performance: {
+          <oem_name>: { avg_cf, avg_composite, quartile_counts: {1..4},
+                        project_quartiles: [{project_id, quartile, cf, tech, year}] }
+        },
+        developers: {
+          <oem_name>: [{developer, project_count, total_mw, technologies:[...]}]
+        },
+        bess_capex_by_oem: [...]   // lifted from bess-capex.json for convenience
+      }
+    """
+    # Per-OEM performance: join suppliers → performance_annual → league_table_entries
+    # Use the most-recent year for each project so we get a single CF/quartile per
+    # OEM×project pair rather than mixing years.
+    perf_rows = conn.execute("""
+        WITH latest AS (
+            SELECT project_id, MAX(year) AS year
+            FROM performance_annual
+            WHERE capacity_factor_pct IS NOT NULL
+            GROUP BY project_id
+        )
+        SELECT s.supplier, s.role, s.project_id, s.model,
+               p.technology, p.name as project_name,
+               pa.year, pa.capacity_factor_pct, pa.energy_price_received, pa.revenue_per_mw,
+               lte.quartile, lte.composite_score
+        FROM suppliers s
+        JOIN projects p ON p.id = s.project_id
+        LEFT JOIN latest la ON la.project_id = s.project_id
+        LEFT JOIN performance_annual pa ON pa.project_id = s.project_id AND pa.year = la.year
+        LEFT JOIN league_table_entries lte ON lte.project_id = s.project_id AND lte.year = la.year
+        WHERE s.role IN ('wind_oem', 'solar_oem', 'bess_oem', 'hydro_oem', 'inverter')
+    """).fetchall()
+
+    performance = defaultdict(lambda: {
+        'project_quartiles': [],
+        'cf_values': [],
+        'composite_values': [],
+        'quartile_counts': {1: 0, 2: 0, 3: 0, 4: 0},
+    })
+    for r in perf_rows:
+        name = r['supplier']
+        if r['capacity_factor_pct'] is not None:
+            performance[name]['cf_values'].append(r['capacity_factor_pct'])
+        if r['composite_score'] is not None:
+            performance[name]['composite_values'].append(r['composite_score'])
+        if r['quartile'] in (1, 2, 3, 4):
+            performance[name]['quartile_counts'][r['quartile']] += 1
+        if r['capacity_factor_pct'] is not None or r['quartile'] is not None:
+            performance[name]['project_quartiles'].append({
+                'project_id': r['project_id'],
+                'project_name': r['project_name'],
+                'technology': r['technology'],
+                'quartile': r['quartile'],
+                'capacity_factor_pct': round(r['capacity_factor_pct'], 1) if r['capacity_factor_pct'] is not None else None,
+                'composite_score': round(r['composite_score'], 1) if r['composite_score'] is not None else None,
+                'year': r['year'],
+            })
+
+    perf_out = {}
+    for name, d in performance.items():
+        cf_vals = d['cf_values']
+        comp_vals = d['composite_values']
+        total_ranked = sum(d['quartile_counts'].values())
+        perf_out[name] = {
+            'ranked_projects': total_ranked,
+            'avg_cf': round(sum(cf_vals) / len(cf_vals), 1) if cf_vals else None,
+            'avg_composite': round(sum(comp_vals) / len(comp_vals), 1) if comp_vals else None,
+            'quartile_counts': d['quartile_counts'],
+            'q1_pct': round(d['quartile_counts'][1] / total_ranked * 100, 0) if total_ranked else None,
+            'projects': sorted(d['project_quartiles'], key=lambda p: (p['quartile'] or 9, -(p['composite_score'] or 0))),
+        }
+
+    # Per-OEM developer breakdown
+    dev_rows = conn.execute("""
+        SELECT s.supplier, s.role, p.current_developer AS developer,
+               p.technology, p.capacity_mw, p.id as project_id, p.name as project_name, p.status
+        FROM suppliers s
+        JOIN projects p ON p.id = s.project_id
+        WHERE s.role IN ('wind_oem', 'solar_oem', 'bess_oem', 'hydro_oem', 'inverter')
+          AND p.current_developer IS NOT NULL
+          AND p.current_developer != ''
+    """).fetchall()
+
+    dev_agg = defaultdict(lambda: defaultdict(lambda: {
+        'project_count': 0,
+        'total_mw': 0.0,
+        'technologies': set(),
+        'statuses': set(),
+    }))
+    for r in dev_rows:
+        d = dev_agg[r['supplier']][r['developer']]
+        d['project_count'] += 1
+        d['total_mw'] += r['capacity_mw'] or 0
+        d['technologies'].add(r['technology'])
+        d['statuses'].add(r['status'])
+
+    dev_out = {}
+    for oem, devs in dev_agg.items():
+        entries = []
+        for dev_name, stats in devs.items():
+            entries.append({
+                'developer': dev_name,
+                'project_count': stats['project_count'],
+                'total_mw': round(stats['total_mw'], 1),
+                'technologies': sorted(stats['technologies']),
+                'statuses': sorted(stats['statuses']),
+            })
+        entries.sort(key=lambda e: (-e['project_count'], -e['total_mw']))
+        dev_out[oem] = entries
+
+    # Concentration: Herfindahl-Hirschman Index per OEM role
+    # HHI = Σ(share²) × 10,000 for market-share percentages; 10,000 = monopoly
+    role_totals = defaultdict(lambda: defaultdict(float))  # role → oem → mw
+    for r in perf_rows:
+        role_totals[r['role']][r['supplier']] += 0  # touch key
+    # Use project_count by_technology from suppliers table for concentration
+    conc_rows = conn.execute("""
+        SELECT s.role, s.supplier, COUNT(DISTINCT s.project_id) as projects,
+               SUM(COALESCE(p.capacity_mw, 0)) as mw
+        FROM suppliers s
+        JOIN projects p ON p.id = s.project_id
+        WHERE s.role IN ('wind_oem', 'solar_oem', 'bess_oem', 'hydro_oem', 'inverter')
+        GROUP BY s.role, s.supplier
+    """).fetchall()
+
+    concentration = {}
+    by_role = defaultdict(list)
+    for r in conc_rows:
+        by_role[r['role']].append({'supplier': r['supplier'], 'projects': r['projects'], 'mw': r['mw']})
+
+    for role, entries in by_role.items():
+        total_mw = sum(e['mw'] for e in entries) or 1
+        total_p = sum(e['projects'] for e in entries) or 1
+        hhi_mw = sum((e['mw'] / total_mw * 100) ** 2 for e in entries)
+        hhi_p = sum((e['projects'] / total_p * 100) ** 2 for e in entries)
+        entries.sort(key=lambda e: -e['mw'])
+        top3_share_mw = sum(e['mw'] for e in entries[:3]) / total_mw * 100 if total_mw else 0
+        top3_share_p = sum(e['projects'] for e in entries[:3]) / total_p * 100 if total_p else 0
+        concentration[role] = {
+            'total_oems': len(entries),
+            'total_mw': round(total_mw, 1),
+            'total_projects': total_p,
+            'hhi_mw': round(hhi_mw, 0),
+            'hhi_projects': round(hhi_p, 0),
+            'top3_share_mw_pct': round(top3_share_mw, 1),
+            'top3_share_projects_pct': round(top3_share_p, 1),
+            'top3': [{'supplier': e['supplier'], 'mw': round(e['mw'], 1), 'projects': e['projects']} for e in entries[:3]],
+        }
+
+    write_json(os.path.join(DATA_DIR, 'analytics', 'oem-analytics.json'), {
+        'performance': perf_out,
+        'developers': dev_out,
+        'concentration': concentration,
+        'exported_at': datetime.now().isoformat(),
+    })
+    print(f"  analytics/oem-analytics.json ({len(perf_out)} perf, {len(dev_out)} dev, {len(concentration)} roles)")
 
 
 def export_contractor_profiles(conn):
