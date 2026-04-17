@@ -514,6 +514,9 @@ def export_all(db_path=DB_PATH):
     # scheme wins, offtake counterparties
     export_developer_analytics(conn)
 
+    # 8c. Lifecycle Quartile Matrix — state-of-the-nation grid
+    export_lifecycle_quartile(conn)
+
     # 7. Coordinates index (for map view)
     export_coordinates_index(conn)
 
@@ -1300,6 +1303,297 @@ def export_developer_analytics(conn):
         'exported_at': datetime.now().isoformat(),
     })
     print(f"  analytics/developer-analytics.json ({len(eq_out)} eq, {len(perf_out)} perf, {len(schemes_out)} scheme, {len(offtake_out)} offtake)")
+
+
+# ---------------------------------------------------------------------------
+# Lifecycle Quartile Matrix — powers the v2.22+ state-of-the-nation grid at
+# /intelligence/lifecycle-quartile. Groups projects by (technology, state,
+# stage) and scores each one on a stage-appropriate metric so we can show
+# a Q1-Q4 distribution per cell.
+# ---------------------------------------------------------------------------
+
+# Stage → group mapping. 'commissioning' buckets with construction for matrix
+# purposes because their readiness signal is closer to construction than
+# operating performance.
+STAGE_MAP = {
+    'operating': 'operating',
+    'commissioning': 'construction',
+    'construction': 'construction',
+    'development': 'development',
+}
+
+# Tech normalisation for the matrix axes (only the main techs + offshore_wind get rows)
+MATRIX_TECHS = ['wind', 'solar', 'bess', 'hybrid', 'pumped_hydro', 'offshore_wind']
+
+# Standard NEM states
+MATRIX_STATES = ['NSW', 'VIC', 'QLD', 'SA', 'TAS', 'WA']
+
+
+def _quartile_from_score(score, all_scores, higher_is_better=True):
+    """Return a quartile 1-4 given a score and its cohort.
+    Q1 = best. If only 1-2 items in cohort, return median bucket."""
+    if not all_scores or score is None:
+        return None
+    if len(all_scores) < 4:
+        return 2 if higher_is_better else 3  # neutral
+    sorted_scores = sorted(all_scores, reverse=higher_is_better)
+    position = sorted_scores.index(score)
+    pct = position / (len(sorted_scores) - 1)
+    if pct <= 0.25:
+        return 1
+    if pct <= 0.50:
+        return 2
+    if pct <= 0.75:
+        return 3
+    return 4
+
+
+def _quartile_counts(quartiles):
+    return {q: sum(1 for x in quartiles if x == q) for q in (1, 2, 3, 4)}
+
+
+def export_lifecycle_quartile(conn):
+    """Build a single matrix keyed by (technology, state, stage) with
+    per-project scores and quartile assignments.
+
+    Scoring per stage:
+
+      operating   — composite_score from league_table_entries (latest year).
+                    Higher is better. Q1 = top quartile.
+
+      construction — delivery risk score (lower is better).
+                    Components: |COD drift months| + optional penalty if
+                    construction_start is absent. Converted to rank inside
+                    each (tech, state) cohort.
+
+      development  — readiness score (higher is better).
+                    Components: development_stage (planning_submitted = 2,
+                    early_stage = 1), has_cod (+1), has_rez (+1), has
+                    scheme contract (+2), has EIS (+2), developer grade
+                    (A=4, B=3, C=2, D=1, F=0).
+    """
+    # ---- Operating: lift the most recent league-table row per project ----
+    op_rows = conn.execute("""
+        SELECT p.id, p.name, p.technology, p.state, p.capacity_mw, p.current_developer,
+               lte.composite_score, lte.quartile, lte.year,
+               pa.capacity_factor_pct, pa.revenue_per_mw
+        FROM projects p
+        JOIN league_table_entries lte
+          ON lte.project_id = p.id
+          AND lte.year = (SELECT MAX(year) FROM league_table_entries WHERE project_id = p.id)
+        LEFT JOIN performance_annual pa
+          ON pa.project_id = p.id AND pa.year = lte.year
+        WHERE p.status = 'operating'
+    """).fetchall()
+
+    # ---- Construction / commissioning: compute delivery risk ----
+    con_rows = conn.execute("""
+        SELECT p.id, p.name, p.technology, p.state, p.status, p.capacity_mw,
+               p.current_developer, p.cod_current, p.cod_original,
+               CASE WHEN cod_current IS NOT NULL AND cod_original IS NOT NULL
+                 THEN (julianday(cod_current) - julianday(cod_original)) / 30.0
+                 ELSE NULL END AS drift_months,
+               (SELECT MIN(date) FROM timeline_events
+                WHERE project_id = p.id AND event_type = 'construction_start') AS con_start
+        FROM projects p
+        WHERE p.status IN ('construction', 'commissioning')
+    """).fetchall()
+
+    # ---- Development: readiness score components ----
+    scheme_ids = {r[0] for r in conn.execute("SELECT DISTINCT project_id FROM scheme_contracts").fetchall()}
+    eis_ids = {r[0] for r in conn.execute("SELECT DISTINCT project_id FROM eis_technical_specs").fetchall()}
+
+    # Developer grade map from computed developer-scores (if the analytics file exists yet)
+    dev_grades: dict[str, str] = {}
+    try:
+        scores_path = os.path.join(DATA_DIR, 'analytics', 'intelligence', 'developer-scores.json')
+        if os.path.exists(scores_path):
+            with open(scores_path) as f:
+                scores_data = json.load(f)
+            for entry in scores_data.get('developers', []):
+                if entry.get('developer') and entry.get('grade'):
+                    dev_grades[entry['developer']] = entry['grade']
+    except Exception:
+        pass
+
+    GRADE_POINTS = {'A': 4, 'B': 3, 'C': 2, 'D': 1, 'F': 0}
+
+    dev_rows = conn.execute("""
+        SELECT p.id, p.name, p.technology, p.state, p.capacity_mw, p.current_developer,
+               p.development_stage, p.cod_current, p.rez
+        FROM projects p
+        WHERE p.status = 'development'
+    """).fetchall()
+
+    # ---- Assemble per-project records with stage-appropriate raw score ----
+    projects_by_cell = defaultdict(list)  # (tech, state, stage_group) → list of project records
+
+    # Operating
+    op_scores_by_cohort = defaultdict(list)  # (tech, state) → [composite_scores]
+    op_records = []
+    for r in op_rows:
+        if r['technology'] not in MATRIX_TECHS or r['state'] not in MATRIX_STATES:
+            continue
+        rec = {
+            'id': r['id'], 'name': r['name'], 'technology': r['technology'], 'state': r['state'],
+            'status': 'operating', 'stage_group': 'operating',
+            'capacity_mw': r['capacity_mw'], 'developer': r['current_developer'],
+            'score': r['composite_score'],
+            'league_quartile': r['quartile'],
+            'capacity_factor_pct': round(r['capacity_factor_pct'], 1) if r['capacity_factor_pct'] is not None else None,
+            'revenue_per_mw': round(r['revenue_per_mw'], 0) if r['revenue_per_mw'] is not None else None,
+            'score_basis': f"Composite score (league-table year {r['year']})",
+        }
+        op_records.append(rec)
+        if r['composite_score'] is not None:
+            op_scores_by_cohort[(r['technology'], r['state'])].append(r['composite_score'])
+
+    for rec in op_records:
+        cohort = op_scores_by_cohort.get((rec['technology'], rec['state']), [])
+        # Prefer the league-table quartile if present (already cohort-aware across NEM);
+        # fall back to our per-(tech,state) quartile.
+        rec['quartile'] = rec['league_quartile'] or _quartile_from_score(rec['score'], cohort, higher_is_better=True)
+        projects_by_cell[(rec['technology'], rec['state'], 'operating')].append(rec)
+
+    # Construction / commissioning
+    con_scores_by_cohort = defaultdict(list)
+    con_records = []
+    for r in con_rows:
+        if r['technology'] not in MATRIX_TECHS or r['state'] not in MATRIX_STATES:
+            continue
+        # Score: higher = better. Start with 100, deduct for drift months (abs), penalise if
+        # no construction_start event, bonus for developer grade.
+        score = 100.0
+        if r['drift_months'] is not None:
+            score -= min(abs(r['drift_months']), 60) * 1.5  # cap penalty at 90 pts
+        else:
+            score -= 20  # no drift data = uncertainty penalty
+        if not r['con_start']:
+            score -= 10
+        grade = dev_grades.get(r['current_developer'] or '')
+        score += GRADE_POINTS.get(grade, 2) * 2.5  # up to +10
+        rec = {
+            'id': r['id'], 'name': r['name'], 'technology': r['technology'], 'state': r['state'],
+            'status': r['status'], 'stage_group': 'construction',
+            'capacity_mw': r['capacity_mw'], 'developer': r['current_developer'],
+            'score': round(score, 1),
+            'drift_months': round(r['drift_months'], 1) if r['drift_months'] is not None else None,
+            'construction_started': r['con_start'],
+            'developer_grade': grade,
+            'score_basis': "100 − |drift months|×1.5 − 10 (no construction_start) + developer grade×2.5",
+        }
+        con_records.append(rec)
+        con_scores_by_cohort[(r['technology'], r['state'])].append(score)
+
+    for rec in con_records:
+        cohort = con_scores_by_cohort.get((rec['technology'], rec['state']), [])
+        rec['quartile'] = _quartile_from_score(rec['score'], cohort, higher_is_better=True)
+        projects_by_cell[(rec['technology'], rec['state'], 'construction')].append(rec)
+
+    # Development
+    dev_scores_by_cohort = defaultdict(list)
+    dev_records = []
+    for r in dev_rows:
+        if r['technology'] not in MATRIX_TECHS or r['state'] not in MATRIX_STATES:
+            continue
+        stage_pts = 2 if r['development_stage'] == 'planning_submitted' else 1 if r['development_stage'] == 'early_stage' else 0
+        has_cod = 1 if r['cod_current'] else 0
+        has_rez = 1 if r['rez'] else 0
+        has_scheme = 2 if r['id'] in scheme_ids else 0
+        has_eis = 2 if r['id'] in eis_ids else 0
+        grade = dev_grades.get(r['current_developer'] or '')
+        grade_pts = GRADE_POINTS.get(grade, 2)
+        score = stage_pts * 15 + has_cod * 15 + has_rez * 10 + has_scheme * 20 + has_eis * 15 + grade_pts * 5
+        # Theoretical max: 2*15 + 15 + 10 + 20 + 15 + 4*5 = 110
+        rec = {
+            'id': r['id'], 'name': r['name'], 'technology': r['technology'], 'state': r['state'],
+            'status': 'development', 'stage_group': 'development',
+            'capacity_mw': r['capacity_mw'], 'developer': r['current_developer'],
+            'score': round(score, 1),
+            'development_stage': r['development_stage'],
+            'has_cod': bool(has_cod),
+            'has_rez': bool(has_rez),
+            'has_scheme': bool(has_scheme),
+            'has_eis': bool(has_eis),
+            'developer_grade': grade,
+            'score_basis': "stage (×15) + has_cod (15) + has_rez (10) + scheme (20) + EIS (15) + developer grade (×5); max 110",
+        }
+        dev_records.append(rec)
+        dev_scores_by_cohort[(r['technology'], r['state'])].append(score)
+
+    for rec in dev_records:
+        cohort = dev_scores_by_cohort.get((rec['technology'], rec['state']), [])
+        rec['quartile'] = _quartile_from_score(rec['score'], cohort, higher_is_better=True)
+        projects_by_cell[(rec['technology'], rec['state'], 'development')].append(rec)
+
+    # ---- Build matrix cells: (tech, state, stage) aggregates ----
+    cells = []
+    for tech in MATRIX_TECHS:
+        for state in MATRIX_STATES:
+            for stage in ('operating', 'construction', 'development'):
+                rows = projects_by_cell.get((tech, state, stage), [])
+                if not rows:
+                    continue
+                quartiles = [r['quartile'] for r in rows if r['quartile']]
+                scores = [r['score'] for r in rows if r['score'] is not None]
+                cells.append({
+                    'technology': tech,
+                    'state': state,
+                    'stage': stage,
+                    'project_count': len(rows),
+                    'total_mw': round(sum(r['capacity_mw'] or 0 for r in rows), 1),
+                    'avg_score': round(sum(scores) / len(scores), 1) if scores else None,
+                    'quartile_counts': _quartile_counts(quartiles),
+                    'q1_pct': round(sum(1 for q in quartiles if q == 1) / len(quartiles) * 100, 0) if quartiles else None,
+                    'project_ids': [r['id'] for r in sorted(rows, key=lambda x: (x['quartile'] or 9, -(x['score'] or 0)))],
+                })
+
+    # ---- Totals by (tech × stage) and (state × stage) for summary panels ----
+    by_tech_stage = defaultdict(lambda: {'count': 0, 'mw': 0.0, 'q1': 0})
+    by_state_stage = defaultdict(lambda: {'count': 0, 'mw': 0.0, 'q1': 0})
+    for c in cells:
+        key_t = (c['technology'], c['stage'])
+        by_tech_stage[key_t]['count'] += c['project_count']
+        by_tech_stage[key_t]['mw'] += c['total_mw']
+        by_tech_stage[key_t]['q1'] += c['quartile_counts'].get(1, 0)
+        key_s = (c['state'], c['stage'])
+        by_state_stage[key_s]['count'] += c['project_count']
+        by_state_stage[key_s]['mw'] += c['total_mw']
+        by_state_stage[key_s]['q1'] += c['quartile_counts'].get(1, 0)
+
+    # ---- Flat project records for drill-through (frontend indexes by id) ----
+    project_details = {}
+    for rec in op_records + con_records + dev_records:
+        project_details[rec['id']] = rec
+
+    # Count summaries
+    count_op = len(op_records)
+    count_con = len(con_records)
+    count_dev = len(dev_records)
+
+    write_json(os.path.join(DATA_DIR, 'analytics', 'lifecycle-quartile.json'), {
+        'cells': cells,
+        'by_tech_stage': [
+            {'technology': t, 'stage': s, **v}
+            for (t, s), v in by_tech_stage.items()
+        ],
+        'by_state_stage': [
+            {'state': s, 'stage': stg, **v}
+            for (s, stg), v in by_state_stage.items()
+        ],
+        'project_details': project_details,
+        'summary': {
+            'total_cells': len(cells),
+            'operating_count': count_op,
+            'construction_count': count_con,
+            'development_count': count_dev,
+            'matrix_techs': MATRIX_TECHS,
+            'matrix_states': MATRIX_STATES,
+        },
+        'exported_at': datetime.now().isoformat(),
+    })
+    print(f"  analytics/lifecycle-quartile.json ({len(cells)} cells · "
+          f"op:{count_op} con:{count_con} dev:{count_dev} · {len(project_details)} projects scored)")
 
 
 def export_oem_profiles(conn):

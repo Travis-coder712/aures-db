@@ -533,6 +533,21 @@ export async function fetchOfftakeAnalytics(): Promise<any | null> {
   } catch { return null }
 }
 
+// Lifecycle Quartile Matrix — state-of-the-nation grid by (tech, state, stage)
+// with per-project scores + quartile assignments + drill IDs.
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+let lifecycleQuartileCache: any | null = null
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export async function fetchLifecycleQuartile(): Promise<any | null> {
+  if (lifecycleQuartileCache) return lifecycleQuartileCache
+  try {
+    const resp = await fetch(`${BASE}/analytics/lifecycle-quartile.json`)
+    if (!resp.ok) return null
+    lifecycleQuartileCache = await resp.json()
+    return lifecycleQuartileCache
+  } catch { return null }
+}
+
 export async function fetchEISComparison(): Promise<EISComparisonData | null> {
   if (eisComparisonCache) return eisComparisonCache
   try {

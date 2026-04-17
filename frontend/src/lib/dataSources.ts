@@ -252,6 +252,9 @@ export const PAGE_SOURCES: Record<string, SourceId[]> = {
   'oem-detail': ['web_research', 'aemo_generation_info', 'json_export'],
   'developer-detail': ['aemo_generation_info', 'web_research', 'json_export'],
 
+  // Lifecycle Quartile Matrix — state-of-the-nation by (tech × state × stage)
+  'lifecycle-quartile': ['aemo_generation_info', 'openelectricity_performance', 'web_research', 'json_export'],
+
   // Core
   projects: ['aemo_generation_info', 'openelectricity_performance', 'web_research', 'json_export'],
   dashboard: ['aemo_generation_info', 'openelectricity_performance', 'json_export'],
