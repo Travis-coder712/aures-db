@@ -272,7 +272,7 @@ export const PAGE_SOURCES: Record<string, SourceId[]> = {
   // Grid & Geography
   'transmission-infra': ['aemo_isp_rez', 'epbc_referrals', 'web_research', 'json_export'],
   rez: ['aemo_isp_rez', 'aemo_generation_info', 'web_research', 'json_export'],
-  'energy-mix': ['openelectricity_performance', 'aemo_generation_info', 'json_export'],
+  'energy-mix': ['nemweb_dispatchload', 'openelectricity_performance', 'aemo_generation_info', 'json_export'],
 
   // Entity directories
   oems: ['web_research', 'aemo_generation_info', 'json_export'],

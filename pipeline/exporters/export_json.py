@@ -6887,10 +6887,16 @@ def export_energy_transition(conn):
     scopes_in_order = ['NEM', 'NSW1', 'QLD1', 'VIC1', 'SA1', 'TAS1']
     fuel_techs = ['coal', 'wind', 'solar', 'bess']
 
+    # Minimum days of coverage required to include a fuel-year entry. Filters
+    # out near-zero noise when an archive's edge spills 1-2 days into the
+    # adjacent year (e.g. 2025-12 archive → a handful of 2026-01-01 intervals).
+    min_days = 7
+
     def _fuel_year_block(coal_entry, tech_entry_by_fuel):
         block = {}
         # Coal
-        if coal_entry:
+        if coal_entry and (len(coal_entry['ytd_days']) >= min_days
+                           or len(coal_entry['full_days']) >= min_days):
             block['coal'] = {
                 'ytd_gwh': round(coal_entry['ytd_mwh'] / 1000, 1),
                 'full_gwh': round(coal_entry['full_mwh'] / 1000, 1),
@@ -6901,6 +6907,8 @@ def export_energy_transition(conn):
         for fkey in ('wind', 'solar', 'bess'):
             e = tech_entry_by_fuel.get(fkey)
             if not e:
+                continue
+            if len(e['ytd_days']) < min_days and len(e['full_days']) < min_days:
                 continue
             rec = {
                 'ytd_gwh': round(e['ytd_mwh'] / 1000, 1),
