@@ -393,6 +393,7 @@ This sits as a parallel track to the intelligence layer work. Rewrite each guide
 ### Current baseline: v2.15.1 (committed 2026-04-17)
 
 Recent notable releases (from git log):
+- **v2.17.0** — Data provenance across the app: typed source registry + `<DataProvenance>` chip widget + 21 pages retrofitted (every intelligence page, every entity directory, BESS Capex, Project Timeline, Performance). Extended exporter registry to 11 sources (added NEMWEB bids, News RSS, AEMO ISP REZ, market prices). Each chip shows source · age · status dot; click for full description + copyable refresh command.
 - **v2.16.0** — Intelligence layer foundation: ChartFrame + DataTable · solar OEMs visible (16 new, 101 total) · GridConnection merged into Transmission/REZ · analytics pages moved into /intelligence · 3-group nav (Explore · Intelligence · Resources) · stale guides retired
 - **v2.15.1** — Fix stakeholder_issues rendering for object-format data
 - **v2.15.0** — Solar & hydro supplier enrichment: 202 new supplier records from web research

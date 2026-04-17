@@ -85,13 +85,69 @@
       "error": null
     },
     {
+      "id": "nemweb_bids",
+      "name": "NEMWEB BESS Bids",
+      "description": "AEMO NEMWEB daily bid data for BESS fleet \u2014 10 price bands \u00d7 direction per DUID per day. Powers the BESS Bidding intelligence page and quartile benchmarks.",
+      "url": "https://nemweb.com.au",
+      "frequency": "daily",
+      "script": "import_nemweb_bids.py",
+      "last_run": "2026-03-31",
+      "last_status": "completed",
+      "records_imported": 123690,
+      "records_updated": 0,
+      "records_new": 0,
+      "error": null
+    },
+    {
+      "id": "news_rss",
+      "name": "News RSS",
+      "description": "RSS feeds from RenewEconomy, PV Magazine, and Energy Storage News \u2014 sourced daily for the News feed and NEM Activities timeline.",
+      "url": "https://reneweconomy.com.au",
+      "frequency": "daily",
+      "script": "import_news_rss.py",
+      "last_run": "2026-04-01T23:34:15.386686",
+      "last_status": "completed",
+      "records_imported": 85,
+      "records_updated": 0,
+      "records_new": 0,
+      "error": null
+    },
+    {
+      "id": "aemo_isp_rez",
+      "name": "AEMO ISP REZ",
+      "description": "Renewable Energy Zone hosting and connection capacity from the AEMO Integrated System Plan. Powers REZ comparison and grid-connection analysis.",
+      "url": "https://aemo.com.au/energy-systems/major-publications/integrated-system-plan-isp",
+      "frequency": "yearly",
+      "script": "import_aemo_isp.py",
+      "last_run": null,
+      "last_status": "never",
+      "records_imported": 0,
+      "records_updated": 0,
+      "records_new": 0,
+      "error": null
+    },
+    {
+      "id": "market_prices",
+      "name": "AEMO Market Prices",
+      "description": "Regional reference prices from AEMO dispatch, used as the revenue backstop when OpenElectricity data is incomplete.",
+      "url": "https://aemo.com.au",
+      "frequency": "monthly",
+      "script": "import_market_prices.py",
+      "last_run": null,
+      "last_status": "never",
+      "records_imported": 0,
+      "records_updated": 0,
+      "records_new": 0,
+      "error": null
+    },
+    {
       "id": "json_export",
       "name": "JSON Export",
       "description": "Static JSON export of all database tables for the frontend application.",
       "url": "",
       "frequency": "ad_hoc",
       "script": "exporters/export_json.py",
-      "last_run": "2026-04-17T07:41:06.581930",
+      "last_run": "2026-04-17T09:33:53.963698",
       "last_status": "completed",
       "records_imported": 0,
       "records_updated": 0,
@@ -105,5 +161,5 @@
     "total_oems_contractors": 132,
     "operating_projects": 225
   },
-  "exported_at": "2026-04-17T07:41:06.582343"
+  "exported_at": "2026-04-17T09:33:53.963994"
 }
