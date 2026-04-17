@@ -5,7 +5,26 @@ export interface Guide {
   icon: string
   category: 'about' | 'technical' | 'process' | 'roadmap'
   readingTime: string
+  /** ISO date (YYYY-MM-DD) the guide first shipped. */
+  added: string
+  /** ISO date of the last meaningful edit — typically the release that
+   * refreshed the underlying feature. Defaults to `added` when never
+   * materially revised. */
+  updated?: string
   content: string
+}
+
+/**
+ * True if the guide is considered recent — used to badge guides as "New"
+ * or "Updated" in the index. Threshold is 14 days from the latest of
+ * `updated` / `added`.
+ */
+export function isGuideRecent(guide: Guide, now: Date = new Date()): boolean {
+  const stamp = guide.updated ?? guide.added
+  if (!stamp) return false
+  const t = new Date(stamp).getTime()
+  if (Number.isNaN(t)) return false
+  return (now.getTime() - t) < 14 * 24 * 60 * 60 * 1000
 }
 
 export const GUIDES: Guide[] = [
@@ -16,6 +35,7 @@ export const GUIDES: Guide[] = [
     icon: '💡',
     category: 'about',
     readingTime: '5 min read',
+    added: '2026-03-10',
     content: `# What Is This and Why Does It Exist?
 
 ## The Plain English Version
@@ -174,6 +194,8 @@ News feed integration (RenewEconomy, PV Magazine, Energy Storage News) with fuzz
     icon: '🏗️',
     category: 'technical',
     readingTime: '12 min read',
+    added: '2026-03-10',
+    updated: '2026-04-17',
     content: `# AURES — Comprehensive Project Plan
 
 ## What Is AURES?
@@ -324,6 +346,7 @@ Bottom navigation with tabs on mobile. Progressive disclosure — simple surface
     icon: '📱',
     category: 'about',
     readingTime: '3 min read',
+    added: '2026-03-11',
     content: `# Using AURES on Your Phone
 
 ## Installing the PWA
@@ -417,6 +440,7 @@ To access all pages (Developers, OEMs, Contractors, Offtakers, Dashboard, Map, S
     icon: '🔬',
     category: 'technical',
     readingTime: '10 min read',
+    added: '2026-03-12',
     content: `# Performance Metrics — Deep Dive
 
 This guide explains exactly how every metric on the Performance League Tables page is calculated, where the data comes from, and what the limitations are.
@@ -632,6 +656,7 @@ If you spot a discrepancy, it's likely due to capacity differences (registered v
     icon: '⚡',
     category: 'technical',
     readingTime: '6 min read',
+    added: '2026-04-16',
     content: `# Battery Records & Live Activity
 
 The new **Live & Records** tab on \`/intelligence/bess-portfolio\` surfaces what the structural BESS intelligence can't: the actual behavioural records of the operating fleet — how big a single 5-minute discharge has ever been, how much the NEM's batteries moved yesterday, and where the daily records sit per state.
@@ -749,12 +774,96 @@ When data is present:
 `,
   },
   {
+    id: 'energy-transition-scoreboard',
+    title: 'Energy Transition Scoreboard',
+    description: 'Year-over-year coal decline stacked against wind / solar / BESS growth with demand overlaid — at NEM and per-state scope.',
+    icon: '📊',
+    category: 'technical',
+    readingTime: '7 min read',
+    added: '2026-04-17',
+    content: `# Australia's Energy Transition — Scoreboard
+
+The scoreboard lives on \`/intelligence/energy-mix\` as the **Transition Scoreboard** tab. It answers the single question everyone asks when they look at generation data: *is the transition actually happening?* — with five years of NEM-wide and per-state evidence.
+
+## What it shows at a glance
+
+**One stacked bar per year.** Coal is red at the bottom. Wind (blue) / solar (amber) / BESS discharge (green) stack on top. A dashed line traces total demand.
+
+- If coal bars shrink and renewables grow → the transition is doing the work.
+- If the total bar stays flat while the mix flips → demand is steady, generation is re-composing.
+- If the demand line climbs faster than the stack → new load is being added faster than new supply (not the case in the NEM to date).
+- If demand falls in line with coal → the transition is partially "load response, not new supply" (also not the case — demand is essentially flat 2021-2025).
+
+## Same-period comparison — not apples to oranges
+
+Every year is aggregated over the **same Jan 1 → current day-of-year window**. A partial 2026 does NOT get compared to a full 2025 — both are restricted to the first 107 days when the cutoff is 17 April.
+
+This is the same apples-to-apples pattern used in Coal Watch → YTD Comparison tab, extended across all four fuel techs plus demand. The \`Full calendar year\` toggle lets you switch to full-year view for historical years.
+
+## Records board
+
+Six transition-specific records per scope:
+
+| Record | Direction | Insight |
+|---|---|---|
+| Coal — lowest 5-min dispatch | ↓ | The deepest trough the NEM coal fleet has ever hit |
+| Coal — lowest daily dispatch | ↓ | The slowest full day of the coal era |
+| Wind — highest daily output | ↑ | The windiest 24 hours for the fleet |
+| Solar — highest daily output | ↑ | The brightest clear-sky day |
+| Renewables — highest combined day | ↑ | Wind + solar + BESS all firing |
+| Demand — peak 5-min MW | ↑ | The system's biggest pull of the period |
+
+Records are scoreboard-specific — they communicate the transition rather than duplicating the raw-peak records on the BESS Portfolio page. BESS headline records (max 5-min discharge, max daily discharge) live on \`/intelligence/bess-portfolio → Live & Records\` — we link out rather than duplicating.
+
+## Storyline chips
+
+Four chips surface the percentage change from the earliest to latest year for each fuel tech, with the absolute values underneath. We auto-pick the latest year with enough coverage (≥93 YTD days for the in-progress year, ≥300 days for historical) so a sparse 2026 row can't produce a spurious -100% chip for fuel techs that are still populating.
+
+## Data pipeline
+
+The scoreboard joins three tables:
+
+1. **\`dispatch_availability\`** — 5-min coal dispatch. Populated by \`import_dispatchload.py\` from NEMWEB MMSDM DISPATCHLOAD archives. 5 years × 44 coal DUIDs = ~24M rows.
+2. **\`generation_daily\`** — daily MWh per solar / wind / BESS DUID. Populated by \`import_generation_daily.py\`, which re-parses the *same cached MMSDM zips* with an expanded DUID filter (208 DUIDs from \`aemo_generation_info\`). Aggregates to daily at parse time so the table stays small (~270k rows across 60 months).
+3. **\`demand_daily\`** — daily MWh + peak MW per NEM region. Populated by \`import_dispatch_regionsum.py\` from MMSDM DISPATCHREGIONSUM. ~9k rows.
+
+Exporter: \`export_energy_transition()\` in \`pipeline/exporters/export_json.py\` produces \`analytics/intelligence/energy-transition.json\`.
+
+## The NSW narrative — Liddell in motion
+
+NSW is the state where the transition tells the sharpest story. Liddell Power Station (4 × 500 MW black coal, commissioned 1971-1973) closed on 28 April 2023. You can see the ripple in the data:
+
+- **Coal tonnage UP, not down** — the four remaining NSW coal plants (Eraring, Bayswater, Mount Piper, Vales Point B) ran harder to cover Liddell's 8+ TWh/yr gap.
+- **Wind +53% YTD** (1.4 → 2.1 TWh Jan-Apr 2021→2025) — new Sapphire, Bango, Rye Park wind farms commissioning.
+- **Solar +188% YTD** (1.0 → 2.8 TWh) — dramatic CIS-funded and privately-developed solar buildout.
+- **BESS from 0 to 32 GWh YTD** — Eraring Big Battery, Waratah, Liddell Battery come online.
+- **Demand essentially flat** — the buildout is reshaping supply, not meeting growing load.
+
+This is why NSW is the flagship state view: the coal-retirement transition is visible in real operational data, not projected.
+
+## Known limitations
+
+1. **2026 coal data goes to 17 Apr; solar/wind/BESS only to the end of the cached archive month (currently Feb 2026).** AEMO publishes MMSDM archives ~45 days after month end.
+2. **BESS 2021-2023 was tiny** — the fleet really started growing in 2024. Our scoreboard reflects reality: near-zero BESS through 2023, visible from 2024.
+3. **Demand peak is "sum of regional 5-min peaks"** — this overstates the true concurrent NEM peak because not all regions peak in the same 5-min interval. The NSW/QLD/VIC/SA/TAS individual peaks are accurate.
+4. **DUID coverage** — we filter to \`In Service\` + \`In Commissioning\` DUIDs from \`aemo_generation_info\` (208 DUIDs). Projects registered but not yet commissioning aren't counted. This matches operational reality.
+
+## Cross-references
+
+- **Coal Watch → YTD Comparison** — same same-period comparison pattern but coal-only, with station-level drill-down
+- **BESS Portfolio → Live & Records** — structural BESS records (max discharge, max throughput)
+- **BESS Bidding** — per-DUID bid-stack analysis for the BESS fleet
+`,
+  },
+  {
     id: 'coal-outage-vs-dispatch',
     title: 'Coal Outage vs Dispatch Erosion',
-    description: 'How AURES distinguishes coal unit unavailability from market displacement — the difference between mechanical events and structural decline.',
+    description: 'How AURES distinguishes coal unit unavailability from market displacement — plus YTD same-period comparison across 5 years.',
     icon: '🔥',
     category: 'technical',
-    readingTime: '6 min read',
+    readingTime: '7 min read',
+    added: '2026-04-14',
+    updated: '2026-04-17',
     content: `# Coal Outage vs Dispatch Erosion
 
 The Coal Watch page on \`/intelligence/energy-mix\` now includes an **Outage vs Dispatch** decomposition across all 15 NEM coal stations (NSW / QLD / VIC, ~21 GW nameplate). This guide explains the distinction, why it matters, and how the signal is computed.
@@ -866,6 +975,21 @@ First-run volume: a 12-month backfill is ~12 MB of filtered data. Rebuilding fro
 - **Asset Lifecycle & Repowering** guide for closure-timeline analysis
 - **Revenue Intelligence** for how coal revenue has tracked this dispatch erosion
 - Station closure dates and battery replacements: coal-watch.json + pipeline/config/coal_stations.json
+
+## v2.29 — YTD same-period comparison (new tab)
+
+The Coal Watch page now also has a **YTD Comparison** tab answering a different question: *is coal generation declining year-on-year, once you compare the same calendar window?*
+
+- Aggregates \`dispatch_availability\` into per-(year, day-of-year, DUID) MWh
+- Two windows per year: **YTD** (Jan 1 → cutoff day-of-year) and **full calendar year**
+- Scope pills: NEM / NSW / QLD / VIC — the three coal states plus NEM-wide
+- Year pills switch the featured year. Auto-defaults to YTD for the current year, full-year for historicals
+- Station breakdown bar chart for the selected year × scope
+- Year-over-year table comparing 2021-2026 at the chosen window
+
+With five years of backfilled DISPATCHLOAD data (~24M 5-min rows, Jan 2021 → Apr 2026), the YTD comparison makes the coal decline unambiguous: NEM YTD capacity factor went from 67.5% (2021) → 64.0% (2025) → 60.5% (2026 so far, Jan 1 → 17 Apr).
+
+See the **Energy Transition Scoreboard** guide for the companion stacked view that folds solar / wind / BESS / demand on top of this coal trend.
 `,
   },
   {
@@ -875,6 +999,7 @@ First-run volume: a 12-month backfill is ~12 MB of filtered data. Rebuilding fro
     icon: '⚠️',
     category: 'technical',
     readingTime: '8 min read',
+    added: '2026-04-12',
     content: `# Risk & Probability Signals
 
 The \`/intelligence/risk-signals\` page bundles **T3.I Supply Chain Concentration Risk** and **T3.J Scheme Win Probability** — two forward-looking views that help anticipate where the market is exposed and which development projects are best positioned for the next scheme round.
@@ -983,6 +1108,7 @@ The heuristic rewards:
     icon: '🔁',
     category: 'technical',
     readingTime: '7 min read',
+    added: '2026-04-10',
     content: `# Asset Lifecycle & Repowering
 
 The \`/intelligence/asset-lifecycle\` page takes the operating fleet and answers: **how old is it, which projects are due for repowering, which OEMs are carrying the aging exposure, and when does the replacement wave hit?**
@@ -1064,6 +1190,7 @@ Placeholder until more ownership_history data accumulates. Currently 12 records 
     icon: '☀️',
     category: 'technical',
     readingTime: '6 min read',
+    added: '2026-04-09',
     content: `# Solar Resource
 
 The \`/intelligence/solar-resource\` page is the solar equivalent of the Wind Resource deep-dive — it shows every operating solar farm's capacity factor, benchmarks them by state / REZ / capacity class, and projects predicted CF for development-pipeline projects.
@@ -1130,6 +1257,7 @@ The Development Pipeline Predictions table projects each pipeline project's CF u
     icon: '🔋',
     category: 'technical',
     readingTime: '8 min read',
+    added: '2026-04-09',
     content: `# BESS Portfolio Intelligence
 
 The \`/intelligence/bess-portfolio\` page is the battery-side counterpart to Wind/Solar Resource. Instead of capacity factor (BESS CF is meaningless — it's dispatch-controlled), it surfaces the **structural shape** of the Australian BESS fleet: duration, grid-forming adoption, co-location, cell chemistry, and system-service contracts.
@@ -1232,6 +1360,7 @@ These contracts usually pay an **availability fee** (annual \$/MW-year) rather t
     icon: '🏗️',
     category: 'technical',
     readingTime: '7 min read',
+    added: '2026-04-08',
     content: `# Contractor Intelligence
 
 The \`/contractors\` page is the intelligence layer's view of the Australian renewable build market — who's physically constructing these projects, which OEM partners they pair with, and which developers they deliver for. This guide explains what's tracked, how concentration is measured, and the current limitations.
@@ -1354,6 +1483,7 @@ Other strong pairings:
     icon: '🎯',
     category: 'technical',
     readingTime: '9 min read',
+    added: '2026-04-07',
     content: `# Lifecycle Quartile Matrix
 
 The \`/intelligence/lifecycle-quartile\` page is the intelligence layer's capstone view — every project in the NEM pipeline, grouped by **technology × state × stage**, with a stage-appropriate quartile score in each cell. It's the single view that answers "where are we, at a glance?"
@@ -1490,6 +1620,7 @@ The matrix is built on the v2.16–v2.18 foundation primitives (ChartFrame, Data
     icon: '🤝',
     category: 'technical',
     readingTime: '10 min read',
+    added: '2026-04-06',
     content: `# PPA Market Mapper
 
 The \`/offtakers\` page is the intelligence layer's PPA mapper — a tabbed view of every offtake contract in the database, the buyers signing them, and the operating projects that remain uncontracted. This guide explains what's tracked, how the data was sourced (heavily enriched in v2.21.0), buyer classifications, and current limitations.
@@ -1615,6 +1746,7 @@ These are preserved as-is (with low confidence flags) rather than deleted, so yo
     icon: '👷',
     category: 'technical',
     readingTime: '8 min read',
+    added: '2026-04-05',
     content: `# Developer Intelligence & Execution Scoring
 
 The \`/developers\` list and individual developer profile pages tell you who's actually building in the NEM — how much, where, with which OEMs and contractors, and how reliably they deliver. This guide explains what the scorecard measures, how the grades are assigned, and what the limitations are.
@@ -1721,6 +1853,7 @@ All three are exported directly from the SQLite database by the pipeline — no 
     icon: '🔧',
     category: 'technical',
     readingTime: '8 min read',
+    added: '2026-04-04',
     content: `# OEM & Supplier Data — Deep Dive
 
 The OEM Intelligence page at \`/oems\` pulls together everything AURES knows about who supplies equipment into the NEM — turbine manufacturers, battery systems, inverters, panels, and hydro turbines. This guide explains what's tracked, where the data comes from, how the market concentration metrics are calculated, and where the gaps are.
@@ -1840,6 +1973,8 @@ Click an OEM name anywhere → individual OEM detail page with their full projec
     icon: '🗺️',
     category: 'roadmap',
     readingTime: '20 min read',
+    added: '2026-03-15',
+    updated: '2026-04-17',
     content: `# AURES Strategic Roadmap
 
 > **Last Updated:** 22 March 2026
@@ -2245,6 +2380,7 @@ New api_rate_limits table tracking daily usage per API. OpenElectricity budget: 
     icon: '🔍',
     category: 'about',
     readingTime: '2 min read',
+    added: '2026-03-15',
     content: `# Search Tips
 
 ## Opening Search
@@ -2320,6 +2456,8 @@ On mobile devices, the search modal opens full-screen for easier typing and brow
     icon: '🔬',
     category: 'technical',
     readingTime: '10 min read',
+    added: '2026-03-28',
+    updated: '2026-04-17',
     content: `# Data Quality Audit
 
 > **Last Updated:** 2026-03-27

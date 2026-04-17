@@ -46,6 +46,12 @@ export default function GuideReader() {
             {cat.label}
           </span>
           <span className="text-[10px] text-[var(--color-text-muted)]">{guide.readingTime}</span>
+          <span className="text-[10px] text-[var(--color-text-muted)]/60">·</span>
+          <span className="text-[10px] text-[var(--color-text-muted)]">
+            {guide.updated && guide.updated !== guide.added
+              ? `Updated ${new Date(guide.updated).toLocaleDateString('en-AU', { day: 'numeric', month: 'short', year: 'numeric' })}`
+              : `Added ${new Date(guide.added).toLocaleDateString('en-AU', { day: 'numeric', month: 'short', year: 'numeric' })}`}
+          </span>
         </div>
         <h1 className="text-xl lg:text-2xl font-bold text-[var(--color-text)]">
           {guide.title}

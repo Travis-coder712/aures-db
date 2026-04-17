@@ -1,5 +1,11 @@
 import { Link } from 'react-router-dom'
-import { GUIDES, GUIDE_CATEGORIES } from '../data/guides'
+import { GUIDES, GUIDE_CATEGORIES, isGuideRecent } from '../data/guides'
+
+function formatStamp(iso: string): string {
+  return new Date(iso).toLocaleDateString('en-AU', {
+    day: 'numeric', month: 'short', year: 'numeric',
+  })
+}
 
 export default function Guides() {
   return (
@@ -33,15 +39,34 @@ export default function Guides() {
                 >
                   <span className="text-2xl flex-shrink-0 mt-0.5">{guide.icon}</span>
                   <div className="flex-1 min-w-0">
-                    <h3 className="text-sm font-semibold text-[var(--color-text)] mb-0.5">
-                      {guide.title}
-                    </h3>
+                    <div className="flex items-center gap-2 mb-0.5 flex-wrap">
+                      <h3 className="text-sm font-semibold text-[var(--color-text)]">
+                        {guide.title}
+                      </h3>
+                      {isGuideRecent(guide) && (
+                        <span
+                          className="text-[10px] font-semibold uppercase tracking-wider px-1.5 py-0.5 rounded"
+                          style={{
+                            background: guide.updated && guide.updated !== guide.added ? '#3b82f620' : '#10b98120',
+                            color: guide.updated && guide.updated !== guide.added ? '#60a5fa' : '#10b981',
+                          }}
+                        >
+                          {guide.updated && guide.updated !== guide.added ? 'Updated' : 'New'}
+                        </span>
+                      )}
+                    </div>
                     <p className="text-xs text-[var(--color-text-muted)] leading-relaxed">
                       {guide.description}
                     </p>
-                    <span className="text-[10px] text-[var(--color-text-muted)]/60 mt-1 inline-block">
-                      {guide.readingTime}
-                    </span>
+                    <div className="flex items-center gap-2 mt-1 text-[10px] text-[var(--color-text-muted)]/60">
+                      <span>{guide.readingTime}</span>
+                      <span>·</span>
+                      <span>
+                        {guide.updated && guide.updated !== guide.added
+                          ? `Updated ${formatStamp(guide.updated)}`
+                          : `Added ${formatStamp(guide.added)}`}
+                      </span>
+                    </div>
                   </div>
                   <svg
                     className="w-4 h-4 text-[var(--color-text-muted)] flex-shrink-0 mt-1"
