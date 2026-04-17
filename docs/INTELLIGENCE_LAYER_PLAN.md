@@ -374,8 +374,9 @@ This sits as a parallel track to the intelligence layer work. Rewrite each guide
 | 3 | Foundation F2 (drill-down pattern) · retrofit Performance charts with click-through · rewrite About/Using/Navigating guides | v2.18.0 |
 | 4 | T1.A — OEM Intelligence tabbed deep-dive · rewrite OEM & Supplier Data guide | v2.19.0 |
 | 5 | T1.B — Developer portfolio dashboard · rewrite Developer Execution Scoring guide | v2.20.0 |
-| 6 | T1.C — Lifecycle Quartile Matrix · rewrite Performance & Quartile Rankings guide | v2.21.0 |
-| 7+ | Tier 2 features in user-priority order · F4 Phase 2 (pipeline trigger endpoint) · remaining guide rewrites | v2.22+ |
+| 6 | **T2.E — Offtaker Intelligence / PPA Market Mapper** (promoted from Tier 2 ahead of T1.C — offtakes need their own first-class home, not a sub-section of DeveloperDetail) | v2.21.0 |
+| 7 | T1.C — Lifecycle Quartile Matrix · rewrite Performance & Quartile Rankings guide | v2.22.0 |
+| 8+ | Remaining Tier 2 features in user-priority order · F4 Phase 2 (pipeline trigger endpoint) · remaining guide rewrites | v2.23+ |
 
 ---
 
@@ -393,6 +394,7 @@ This sits as a parallel track to the intelligence layer work. Rewrite each guide
 ### Current baseline: v2.15.1 (committed 2026-04-17)
 
 Recent notable releases (from git log):
+- **v2.20.0** — T1.B Developer Portfolio Dashboard: `/developers/:slug` rebuilt from a basic stat page into an 8-section portfolio view — execution scorecard with A/B/D/F grade, scheme-win chips, pipeline waterfall, COD drift timeline, equipment preferences (go-to OEMs + contractors), conditional operating-fleet quartile distribution (9 devs qualify), offtake summary + cross-link to PPA mapper, full project list. New `export_developer_analytics()` pre-aggregates equipment + drift + scheme wins + performance + offtakes (181 devs with equipment data, 167 with performance, 16 with scheme wins, 54 with offtakes). Plan reordered to promote T2.E (Offtaker PPA Market Mapper) ahead of T1.C for v2.21.0 — offtakes needs its own first-class home.
 - **v2.19.0** — T1.A OEM Intelligence deep-dive: `/oems` rebuilt as a tabbed page (Overview · Wind · Solar · BESS · Hydro · Directory) · new Hydro market-share pie · new Overview tab with HHI concentration index per role + "Top 3 per Equipment Type" + "Most Active Developer-OEM Pairings" · per-tech OEM league tables with CF% + Q1-share performance correlation · BESS tab adds $/kWh by OEM + EIS-verified chemistry callout · Hydro tab adds Fuji Tasmania monopoly callout · new `export_oem_analytics()` in pipeline pre-aggregates performance + developer cross-links (no N+1 fetches) · new "OEM & Supplier Data" guide.
 - **v2.18.0** — F2 drill-down pattern: `<DrillPanel>` + `<DrillBreadcrumb>` components · click-through retrofitted on 5 charts across 4 pages (DriftAnalysis tech + state bars · Performance quartile distribution · Revenue by Tech · Revenue Pressure · BESS rebid frequency) · slide-in-right on desktop, bottom-sheet on mobile · Escape + click-outside to close · Performance methodology guide updated.
 - **v2.17.1** — Refinements: Solar OEM market share chart on `/oems` (panels + inverters toggle) · BESS Capex + Project Timeline removed from hamburger (still reachable via Intelligence Hub) · **overlay merge in exporter** — manual-enrichment files at `data/projects/<tech>/<id>.json` now survive re-exports (no more copy-back needed for Waratah SIPS contracts, etc.) · Timeline ↔ NEM Activities cross-links.
