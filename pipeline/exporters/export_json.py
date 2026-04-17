@@ -3599,6 +3599,417 @@ def export_wind_resource(conn):
     print(f"  analytics/intelligence/wind-resource.json ({len(farms)} operating, {len(development_projects)} development)")
 
 
+def export_concentration_risk(conn):
+    """Supply Chain Concentration Risk — T3.I.
+
+    Builds on the HHI concentration work already shown on /oems and
+    adds:
+      - Per-(tech, state) dominance matrix: cells where a single OEM
+        holds > 50% of installed MW
+      - Bankruptcy / stressed-parent risk propagation: which projects
+        carry exposure to Senvion / Acciona Windpower / Suzlon / etc.
+      - Supply-chain single-points-of-failure: developer × OEM pairings
+        where a single chain carries disproportionate concentration.
+
+    Output: analytics/intelligence/concentration-risk.json
+    """
+    # Reuse the at-risk set from export_asset_lifecycle
+    AT_RISK_OEMS = {
+        'Senvion', 'REpower', 'Suzlon', 'Acciona Windpower',
+    }
+
+    rows = conn.execute("""
+        SELECT s.supplier, s.role, s.project_id, s.model,
+               p.name, p.technology, p.status, p.state, p.capacity_mw,
+               p.current_developer
+        FROM suppliers s
+        JOIN projects p ON p.id = s.project_id
+        WHERE s.role IN ('wind_oem', 'solar_oem', 'bess_oem', 'hydro_oem', 'inverter')
+    """).fetchall()
+
+    def is_at_risk(supplier):
+        if not supplier:
+            return False
+        return any(risk.lower() in supplier.lower() for risk in AT_RISK_OEMS)
+
+    # ---- Dominance matrix per (tech, state, role) ----
+    by_cell = defaultdict(lambda: defaultdict(lambda: {'mw': 0.0, 'projects': set()}))
+    cell_totals = defaultdict(lambda: {'mw': 0.0, 'projects': set()})
+
+    for r in rows:
+        if not r['technology'] or not r['state']:
+            continue
+        cell_key = (r['technology'], r['state'], r['role'])
+        by_cell[cell_key][r['supplier']]['mw'] += r['capacity_mw'] or 0
+        by_cell[cell_key][r['supplier']]['projects'].add(r['project_id'])
+        cell_totals[cell_key]['mw'] += r['capacity_mw'] or 0
+        cell_totals[cell_key]['projects'].add(r['project_id'])
+
+    dominance_cells = []
+    for (tech, state, role), suppliers in by_cell.items():
+        total_mw = cell_totals[(tech, state, role)]['mw'] or 1
+        total_projects = len(cell_totals[(tech, state, role)]['projects'])
+        ranked = sorted(suppliers.items(), key=lambda e: -e[1]['mw'])
+        top = ranked[0]
+        top_share_mw = top[1]['mw'] / total_mw * 100
+        if total_projects < 3 or top_share_mw < 40:
+            continue  # only surface meaningful concentration
+        top_projects = len(top[1]['projects'])
+        dominance_cells.append({
+            'technology': tech,
+            'state': state,
+            'role': role,
+            'top_supplier': top[0],
+            'top_share_mw_pct': round(top_share_mw, 1),
+            'top_mw': round(top[1]['mw'], 1),
+            'top_projects': top_projects,
+            'total_mw_in_cell': round(total_mw, 1),
+            'total_projects_in_cell': total_projects,
+            'other_suppliers': len(suppliers) - 1,
+            'top_supplier_at_risk': is_at_risk(top[0]),
+            'monopoly': top_share_mw >= 75,
+            'dominant': 50 <= top_share_mw < 75,
+            'concentrated': 40 <= top_share_mw < 50,
+        })
+    dominance_cells.sort(key=lambda e: -e['top_share_mw_pct'])
+
+    # ---- Bankruptcy / stressed-parent risk propagation ----
+    at_risk_projects = []
+    per_oem_exposure = defaultdict(lambda: {
+        'mw': 0.0, 'projects': [], 'states': set(), 'developers': set(),
+    })
+    for r in rows:
+        if not is_at_risk(r['supplier']):
+            continue
+        at_risk_projects.append({
+            'project_id': r['project_id'],
+            'name': r['name'],
+            'technology': r['technology'],
+            'state': r['state'],
+            'status': r['status'],
+            'capacity_mw': r['capacity_mw'],
+            'at_risk_oem': r['supplier'],
+            'oem_role': r['role'],
+            'model': r['model'],
+            'developer': r['current_developer'],
+        })
+        per_oem_exposure[r['supplier']]['mw'] += r['capacity_mw'] or 0
+        per_oem_exposure[r['supplier']]['projects'].append(r['project_id'])
+        if r['state']:
+            per_oem_exposure[r['supplier']]['states'].add(r['state'])
+        if r['current_developer']:
+            per_oem_exposure[r['supplier']]['developers'].add(r['current_developer'])
+
+    at_risk_oem_summary = [
+        {
+            'supplier': oem,
+            'total_mw': round(d['mw'], 1),
+            'project_count': len(d['projects']),
+            'states_exposed': sorted(d['states']),
+            'developers_affected': sorted(d['developers']),
+        }
+        for oem, d in per_oem_exposure.items()
+    ]
+    at_risk_oem_summary.sort(key=lambda e: -e['total_mw'])
+    at_risk_projects.sort(key=lambda e: -(e['capacity_mw'] or 0))
+
+    # ---- Supply-chain single-points-of-failure: developer + OEM pairings ----
+    # If 1 developer has > 3 projects with the SAME OEM, and that's a large share
+    # of that developer's fleet, flag it.
+    dev_oem_pairs = defaultdict(lambda: {
+        'mw': 0.0, 'projects': set(), 'role': '', 'states': set(),
+    })
+    dev_totals = defaultdict(lambda: {'mw': 0.0, 'projects': set()})
+    for r in rows:
+        if not r['current_developer']:
+            continue
+        dev = r['current_developer']
+        pair_key = (dev, r['supplier'], r['role'])
+        dev_oem_pairs[pair_key]['mw'] += r['capacity_mw'] or 0
+        dev_oem_pairs[pair_key]['projects'].add(r['project_id'])
+        dev_oem_pairs[pair_key]['role'] = r['role']
+        if r['state']:
+            dev_oem_pairs[pair_key]['states'].add(r['state'])
+        dev_totals[(dev, r['role'])]['mw'] += r['capacity_mw'] or 0
+        dev_totals[(dev, r['role'])]['projects'].add(r['project_id'])
+
+    dev_chain_risks = []
+    for (dev, oem, role), stats in dev_oem_pairs.items():
+        projects = len(stats['projects'])
+        if projects < 3:
+            continue
+        total_role = dev_totals[(dev, role)]['mw'] or 1
+        share_pct = stats['mw'] / total_role * 100
+        if share_pct < 50:
+            continue
+        dev_chain_risks.append({
+            'developer': dev,
+            'oem': oem,
+            'role': role,
+            'projects': projects,
+            'mw': round(stats['mw'], 1),
+            'share_of_developer_role_mw_pct': round(share_pct, 1),
+            'states': sorted(stats['states']),
+            'oem_at_risk': is_at_risk(oem),
+        })
+    dev_chain_risks.sort(key=lambda e: (-e['projects'], -e['share_of_developer_role_mw_pct']))
+
+    # ---- Summary ----
+    summary = {
+        'total_dominance_cells': len(dominance_cells),
+        'monopoly_cells': sum(1 for c in dominance_cells if c['monopoly']),
+        'dominant_cells': sum(1 for c in dominance_cells if c['dominant']),
+        'concentrated_cells': sum(1 for c in dominance_cells if c['concentrated']),
+        'cells_with_at_risk_top_supplier': sum(1 for c in dominance_cells if c['top_supplier_at_risk']),
+        'at_risk_projects_total': len(at_risk_projects),
+        'at_risk_mw_total': round(sum(p['capacity_mw'] or 0 for p in at_risk_projects), 1),
+        'dev_chain_risks_count': len(dev_chain_risks),
+        'at_risk_oems_list': sorted(AT_RISK_OEMS),
+    }
+
+    write_json(os.path.join(INTEL_DIR, 'concentration-risk.json'), {
+        'summary': summary,
+        'dominance_cells': dominance_cells,
+        'at_risk_projects': at_risk_projects,
+        'at_risk_oem_summary': at_risk_oem_summary,
+        'dev_chain_risks': dev_chain_risks,
+        'exported_at': datetime.now().isoformat(),
+    })
+    print(f"  analytics/intelligence/concentration-risk.json ({len(dominance_cells)} dom cells · "
+          f"{summary['monopoly_cells']} monopolies · {len(at_risk_projects)} at-risk projects · "
+          f"{len(dev_chain_risks)} dev chain risks)")
+
+
+def export_scheme_win_probability(conn):
+    """Scheme Win Probability Model — T3.J.
+
+    Ranks development-stage projects by likelihood of winning a future
+    CIS / LTESA tender round. Heuristic composite (0-100):
+      - developer track record (0-30) from developer-scores.json grade
+      - tech-fit bonus (0-20) if tech matches recent scheme round appetite
+      - project size fit (0-15) — mid-size projects tend to win more
+      - readiness signals (0-20) — has_cod + REZ + EIS + planning stage
+      - existing scheme win bonus (0-15) — winners repeat
+
+    Output: analytics/intelligence/scheme-win-probability.json
+    """
+    # Load developer grades
+    dev_grades = {}
+    try:
+        scores_path = os.path.join(DATA_DIR, 'analytics', 'intelligence', 'developer-scores.json')
+        if os.path.exists(scores_path):
+            with open(scores_path) as f:
+                scores_data = json.load(f)
+            for entry in scores_data.get('developers', []):
+                if entry.get('developer') and entry.get('grade'):
+                    dev_grades[entry['developer']] = entry['grade']
+    except Exception:
+        pass
+
+    GRADE_POINTS = {'A': 30, 'B': 22, 'C': 15, 'D': 8, 'F': 0}
+
+    # Existing scheme wins per developer
+    dev_scheme_wins = defaultdict(set)
+    for r in conn.execute("""
+        SELECT p.current_developer AS developer, sc.scheme
+        FROM scheme_contracts sc
+        JOIN projects p ON p.id = sc.project_id
+        WHERE p.current_developer IS NOT NULL
+    """).fetchall():
+        dev_scheme_wins[r['developer']].add(r['scheme'])
+
+    # Tech preference by recent scheme rounds. Based on actual CIS/LTESA round
+    # types captured in scheme-tracker data:
+    #   Dispatchable schemes (CIS dispatchable, NSW LTESA firming, LTESA LDS)
+    #   favour BESS + pumped hydro + hybrid.
+    #   Generation schemes (CIS generation, NSW LTESA generation) favour
+    #   wind + solar + hybrid.
+    # Both appetites rolled into one "tech fit" score.
+    TECH_FIT_POINTS = {
+        'bess': 20,         # Highly sought in dispatchable + firming rounds
+        'pumped_hydro': 20,
+        'hybrid': 18,       # Dual appetite
+        'wind': 15,
+        'solar': 12,
+        'offshore_wind': 10,  # Not yet in scheme rounds
+    }
+
+    # Which project_ids already have scheme wins?
+    projects_with_wins = {r[0] for r in conn.execute(
+        "SELECT DISTINCT project_id FROM scheme_contracts"
+    ).fetchall()}
+
+    # Projects with EIS / REZ flags already handled by development enrichment
+    eis_ids = {r[0] for r in conn.execute(
+        "SELECT DISTINCT project_id FROM eis_technical_specs"
+    ).fetchall()}
+
+    dev_rows = conn.execute("""
+        SELECT p.id, p.name, p.technology, p.state, p.capacity_mw, p.storage_mwh,
+               p.current_developer, p.cod_current, p.rez, p.development_stage,
+               p.data_confidence, p.status
+        FROM projects p
+        WHERE p.status = 'development'
+    """).fetchall()
+
+    def size_fit_score(mw):
+        """Mid-size bonus — 100-500 MW is the sweet spot for most CIS
+        rounds. Very small or very large projects score lower."""
+        if not mw:
+            return 0
+        if 100 <= mw <= 500:
+            return 15
+        if 50 <= mw < 100 or 500 < mw <= 1000:
+            return 10
+        if mw < 50 or mw > 1000:
+            return 5
+        return 8
+
+    ranked = []
+    for r in dev_rows:
+        if not r['technology'] or not r['state']:
+            continue
+
+        # Developer grade
+        grade = dev_grades.get(r['current_developer'] or '')
+        grade_points = GRADE_POINTS.get(grade, 10)  # unknown → neutral-low
+
+        # Tech fit
+        tech_points = TECH_FIT_POINTS.get(r['technology'], 8)
+
+        # Size fit
+        size_points = size_fit_score(r['capacity_mw'])
+
+        # Readiness signals — 0-20 total
+        readiness = 0
+        if r['cod_current']:
+            readiness += 5
+        if r['rez']:
+            readiness += 5
+        if r['id'] in eis_ids:
+            readiness += 5
+        if r['development_stage'] == 'planning_submitted':
+            readiness += 5
+
+        # Repeat-winner bonus
+        wins_count = len(dev_scheme_wins.get(r['current_developer'] or '', set()))
+        existing_wins_bonus = min(wins_count * 5, 15)
+
+        total = grade_points + tech_points + size_points + readiness + existing_wins_bonus
+
+        # Categorise
+        if total >= 75:
+            band = 'high'
+        elif total >= 55:
+            band = 'medium'
+        elif total >= 35:
+            band = 'low'
+        else:
+            band = 'very_low'
+
+        ranked.append({
+            'project_id': r['id'],
+            'name': r['name'],
+            'technology': r['technology'],
+            'state': r['state'],
+            'capacity_mw': r['capacity_mw'],
+            'storage_mwh': r['storage_mwh'],
+            'developer': r['current_developer'],
+            'developer_grade': grade,
+            'cod_current': r['cod_current'],
+            'rez': r['rez'],
+            'development_stage': r['development_stage'],
+            'has_cod': bool(r['cod_current']),
+            'has_rez': bool(r['rez']),
+            'has_eis': r['id'] in eis_ids,
+            'existing_scheme_winner_developer': wins_count > 0,
+            'existing_wins_count': wins_count,
+            'grade_points': grade_points,
+            'tech_fit_points': tech_points,
+            'size_fit_points': size_points,
+            'readiness_points': readiness,
+            'existing_wins_bonus': existing_wins_bonus,
+            'win_probability_score': total,
+            'band': band,
+        })
+
+    ranked.sort(key=lambda e: -e['win_probability_score'])
+
+    # Aggregate summaries
+    by_tech = defaultdict(lambda: {'count': 0, 'avg_score': 0, 'high': 0, 'total_mw': 0.0})
+    for e in ranked:
+        bucket = by_tech[e['technology']]
+        bucket['count'] += 1
+        bucket['avg_score'] += e['win_probability_score']
+        bucket['total_mw'] += e['capacity_mw'] or 0
+        if e['band'] == 'high':
+            bucket['high'] += 1
+
+    tech_summary = {}
+    for tech, d in by_tech.items():
+        tech_summary[tech] = {
+            'count': d['count'],
+            'avg_score': round(d['avg_score'] / d['count'], 1) if d['count'] else 0,
+            'high_band_count': d['high'],
+            'high_band_pct': round(d['high'] / d['count'] * 100, 1) if d['count'] else 0,
+            'total_mw': round(d['total_mw'], 1),
+        }
+
+    by_state = defaultdict(lambda: {'count': 0, 'high': 0, 'total_mw': 0.0})
+    for e in ranked:
+        by_state[e['state']]['count'] += 1
+        if e['band'] == 'high':
+            by_state[e['state']]['high'] += 1
+        by_state[e['state']]['total_mw'] += e['capacity_mw'] or 0
+
+    state_summary = {
+        s: {
+            'count': d['count'],
+            'high_band_count': d['high'],
+            'high_band_pct': round(d['high'] / d['count'] * 100, 1) if d['count'] else 0,
+            'total_mw': round(d['total_mw'], 1),
+        }
+        for s, d in by_state.items()
+    }
+
+    summary = {
+        'total_development_projects_scored': len(ranked),
+        'projects_with_scheme_wins_excluded': len([r for r in dev_rows if r['id'] in projects_with_wins]),
+        'band_counts': {
+            'high': sum(1 for e in ranked if e['band'] == 'high'),
+            'medium': sum(1 for e in ranked if e['band'] == 'medium'),
+            'low': sum(1 for e in ranked if e['band'] == 'low'),
+            'very_low': sum(1 for e in ranked if e['band'] == 'very_low'),
+        },
+    }
+
+    write_json(os.path.join(INTEL_DIR, 'scheme-win-probability.json'), {
+        'summary': summary,
+        'ranked_projects': ranked,
+        'by_tech': tech_summary,
+        'by_state': state_summary,
+        'scoring_model': {
+            'description': 'Heuristic composite (0-100) predicting future CIS/LTESA win likelihood',
+            'components': [
+                {'name': 'Developer track record', 'max': 30, 'basis': 'developer-scores.json grade A=30, B=22, C=15, D=8, F=0'},
+                {'name': 'Tech fit', 'max': 20, 'basis': 'BESS/pumped_hydro=20 (dispatchable), hybrid=18, wind=15, solar=12, offshore_wind=10'},
+                {'name': 'Project size fit', 'max': 15, 'basis': '100-500 MW = 15 (sweet spot), 50-100 or 500-1000 = 10, others = 5'},
+                {'name': 'Readiness', 'max': 20, 'basis': 'has_cod (5) + has_rez (5) + has_eis (5) + planning_submitted (5)'},
+                {'name': 'Repeat-winner bonus', 'max': 15, 'basis': 'existing_scheme_wins × 5 pts, capped at 15'},
+            ],
+            'bands': {
+                'high': '≥ 75',
+                'medium': '55 – 74',
+                'low': '35 – 54',
+                'very_low': '< 35',
+            },
+        },
+        'exported_at': datetime.now().isoformat(),
+    })
+    print(f"  analytics/intelligence/scheme-win-probability.json ({len(ranked)} dev projects scored, "
+          f"{summary['band_counts']['high']} high-band)")
+
+
 def export_asset_lifecycle(conn):
     """Asset Lifecycle & Repowering Intelligence — T3.H + T3.K combined.
 
@@ -5821,6 +6232,8 @@ def export_intelligence(conn):
     export_solar_resource(conn)
     export_bess_portfolio(conn)
     export_asset_lifecycle(conn)
+    export_concentration_risk(conn)
+    export_scheme_win_probability(conn)
     export_dunkelflaute(conn)
     export_energy_mix(conn)
     export_developer_scores(conn)

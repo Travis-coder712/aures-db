@@ -563,6 +563,35 @@ export async function fetchContractorAnalytics(): Promise<any | null> {
   } catch { return null }
 }
 
+// Supply Chain Concentration Risk — dominance cells, at-risk OEM projects,
+// dev×OEM single points of failure (T3.I).
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+let concentrationRiskCache: any | null = null
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export async function fetchConcentrationRisk(): Promise<any | null> {
+  if (concentrationRiskCache) return concentrationRiskCache
+  try {
+    const resp = await fetch(`${BASE}/analytics/intelligence/concentration-risk.json`)
+    if (!resp.ok) return null
+    concentrationRiskCache = await resp.json()
+    return concentrationRiskCache
+  } catch { return null }
+}
+
+// Scheme Win Probability — ranked development-stage projects (T3.J).
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+let schemeWinCache: any | null = null
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export async function fetchSchemeWinProbability(): Promise<any | null> {
+  if (schemeWinCache) return schemeWinCache
+  try {
+    const resp = await fetch(`${BASE}/analytics/intelligence/scheme-win-probability.json`)
+    if (!resp.ok) return null
+    schemeWinCache = await resp.json()
+    return schemeWinCache
+  } catch { return null }
+}
+
 // Asset Lifecycle & Repowering — age distribution, refurb candidates, aging OEMs,
 // historic repowering deals, fleet turnover forecast (T3.H + T3.K).
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
