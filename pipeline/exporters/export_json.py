@@ -6715,6 +6715,515 @@ def export_coal_ytd_comparison(conn):
           f"(years={all_years}, cutoff_doy={cutoff_doy}, stations={len([s for s in stations_out if s['years']])})")
 
 
+REGION_LABELS = {
+    'NSW1': 'NSW',
+    'QLD1': 'QLD',
+    'VIC1': 'VIC',
+    'SA1': 'SA',
+    'TAS1': 'TAS',
+}
+
+
+def export_energy_transition(conn):
+    """Energy Transition Scoreboard — v2.30.0.
+
+    Joins coal dispatch (dispatch_availability), daily solar / wind / BESS
+    MWh (generation_daily), and regional demand (demand_daily) to produce
+    a YoY breakdown at NEM and per-state scope. Same YTD + same-period
+    apples-to-apples pattern as export_coal_ytd_comparison, but stacked
+    across fuel techs plus a demand overlay so the user sees coal
+    declining while solar / wind / BESS climb — and whether the demand
+    side is growing, flat, or also falling.
+
+    Emits a records board alongside the YoY data: coal-lows and
+    renewable-highs that communicate the transition rather than
+    duplicate BESS Portfolio's records board.
+
+    Output: analytics/intelligence/energy-transition.json
+    """
+    # Determine cutoff (most recent settlement we have across either source)
+    dispatch_max = conn.execute(
+        "SELECT MAX(settlement_date) FROM dispatch_availability"
+    ).fetchone()[0]
+    gen_max = conn.execute(
+        "SELECT MAX(date) FROM generation_daily"
+    ).fetchone()[0] if _table_exists(conn, 'generation_daily') else None
+
+    # Normalise both to YYYY-MM-DD
+    def _to_date(s):
+        if not s:
+            return None
+        return s[:10].replace('/', '-')
+
+    dispatch_date = _to_date(dispatch_max)
+    gen_date = gen_max  # already YYYY-MM-DD
+    most_recent = max(d for d in (dispatch_date, gen_date) if d) if (dispatch_date or gen_date) else None
+
+    if not most_recent:
+        write_json(os.path.join(INTEL_DIR, 'energy-transition.json'), {
+            'has_data': False,
+            'source_note': (
+                'No dispatch_availability or generation_daily data yet. Run '
+                'pipeline/scripts/backfill_coal_history.sh then '
+                'python3 pipeline/importers/import_generation_daily.py --all-cached'
+            ),
+            'exported_at': datetime.now().isoformat(),
+        })
+        print('  analytics/intelligence/energy-transition.json (no data)')
+        return
+
+    cutoff_dt = datetime.strptime(most_recent, '%Y-%m-%d')
+    cutoff_doy = cutoff_dt.timetuple().tm_yday
+    cutoff_year = cutoff_dt.year
+    cutoff_label = cutoff_dt.strftime('%-d %b')
+
+    # --- Coal: aggregate dispatch_availability per (year, doy, station.state) ---
+    coal_stations = _load_coal_stations()
+    duid_state = {}
+    for s in coal_stations:
+        for duid in s['duids']:
+            duid_state[duid.upper()] = s['state']
+    state_caps = defaultdict(float)
+    for s in coal_stations:
+        state_caps[s['state']] += s.get('capacity_mw', 0) or 0
+
+    coal_rows = conn.execute("""
+        SELECT
+          CAST(SUBSTR(settlement_date, 1, 4) AS INTEGER) AS yr,
+          CAST(strftime('%j', REPLACE(SUBSTR(settlement_date, 1, 10), '/', '-')) AS INTEGER) AS doy,
+          duid,
+          SUM(COALESCE(total_cleared_mw, 0)) / 12.0 AS gen_mwh
+        FROM dispatch_availability
+        GROUP BY yr, doy, duid
+    """).fetchall()
+
+    # {scope: {year: {'ytd_mwh': .., 'full_mwh': .., 'ytd_days': set, 'full_days': set}}}
+    coal_agg = defaultdict(lambda: defaultdict(lambda: {
+        'ytd_mwh': 0.0, 'full_mwh': 0.0, 'ytd_days': set(), 'full_days': set(),
+    }))
+    for yr, doy, duid, gen_mwh in coal_rows:
+        state = duid_state.get((duid or '').upper())
+        if not state:
+            continue
+        # State code in coal_stations is NSW/QLD/VIC; map to NEMWEB region
+        region_code = f'{state}1'
+        for scope in ('NEM', region_code):
+            b = coal_agg[scope][yr]
+            b['full_mwh'] += gen_mwh
+            b['full_days'].add(doy)
+            if doy <= cutoff_doy:
+                b['ytd_mwh'] += gen_mwh
+                b['ytd_days'].add(doy)
+
+    # --- Solar / Wind / BESS: aggregate generation_daily per (year, doy, region, fuel) ---
+    tech_agg = defaultdict(lambda: defaultdict(lambda: defaultdict(lambda: {
+        'ytd_mwh': 0.0, 'full_mwh': 0.0,
+        'ytd_charge_mwh': 0.0, 'full_charge_mwh': 0.0,
+        'ytd_days': set(), 'full_days': set(),
+    })))
+
+    if _table_exists(conn, 'generation_daily'):
+        gen_rows = conn.execute("""
+            SELECT
+              CAST(strftime('%Y', date) AS INTEGER) AS yr,
+              CAST(strftime('%j', date) AS INTEGER) AS doy,
+              region,
+              fuel_type,
+              gen_mwh,
+              charge_mwh
+            FROM generation_daily
+            WHERE region IS NOT NULL AND region != ''
+        """).fetchall()
+
+        # Map fuel_type → scoreboard key
+        fuel_key_map = {
+            'Solar PV': 'solar',
+            'Wind': 'wind',
+            'Battery Storage': 'bess',
+        }
+
+        for yr, doy, region, fuel_type, gen_mwh, charge_mwh in gen_rows:
+            fkey = fuel_key_map.get(fuel_type)
+            if not fkey:
+                continue
+            for scope in ('NEM', region):
+                b = tech_agg[scope][yr][fkey]
+                b['full_mwh'] += gen_mwh or 0
+                b['full_charge_mwh'] += charge_mwh or 0
+                b['full_days'].add(doy)
+                if doy <= cutoff_doy:
+                    b['ytd_mwh'] += gen_mwh or 0
+                    b['ytd_charge_mwh'] += charge_mwh or 0
+                    b['ytd_days'].add(doy)
+
+    # --- Demand: aggregate demand_daily per (year, doy, region) ---
+    demand_agg = defaultdict(lambda: defaultdict(lambda: {
+        'ytd_mwh': 0.0, 'full_mwh': 0.0,
+        'ytd_peak_mw': 0.0, 'full_peak_mw': 0.0,
+        'ytd_days': set(), 'full_days': set(),
+    }))
+    if _table_exists(conn, 'demand_daily'):
+        demand_rows = conn.execute("""
+            SELECT
+              CAST(strftime('%Y', date) AS INTEGER) AS yr,
+              CAST(strftime('%j', date) AS INTEGER) AS doy,
+              region,
+              demand_mwh,
+              peak_demand_mw
+            FROM demand_daily
+        """).fetchall()
+        for yr, doy, region, d_mwh, peak_mw in demand_rows:
+            for scope in ('NEM', region):
+                b = demand_agg[scope][yr]
+                b['full_mwh'] += d_mwh or 0
+                b['full_peak_mw'] = max(b['full_peak_mw'], peak_mw or 0)
+                b['full_days'].add(doy)
+                if doy <= cutoff_doy:
+                    b['ytd_mwh'] += d_mwh or 0
+                    b['ytd_peak_mw'] = max(b['ytd_peak_mw'], peak_mw or 0)
+                    b['ytd_days'].add(doy)
+
+    # --- Assemble scopes ---
+    scopes_in_order = ['NEM', 'NSW1', 'QLD1', 'VIC1', 'SA1', 'TAS1']
+    fuel_techs = ['coal', 'wind', 'solar', 'bess']
+
+    def _fuel_year_block(coal_entry, tech_entry_by_fuel):
+        block = {}
+        # Coal
+        if coal_entry:
+            block['coal'] = {
+                'ytd_gwh': round(coal_entry['ytd_mwh'] / 1000, 1),
+                'full_gwh': round(coal_entry['full_mwh'] / 1000, 1),
+                'ytd_days': len(coal_entry['ytd_days']),
+                'full_days': len(coal_entry['full_days']),
+            }
+        # Wind / Solar / BESS
+        for fkey in ('wind', 'solar', 'bess'):
+            e = tech_entry_by_fuel.get(fkey)
+            if not e:
+                continue
+            rec = {
+                'ytd_gwh': round(e['ytd_mwh'] / 1000, 1),
+                'full_gwh': round(e['full_mwh'] / 1000, 1),
+                'ytd_days': len(e['ytd_days']),
+                'full_days': len(e['full_days']),
+            }
+            if fkey == 'bess':
+                rec['ytd_charge_gwh'] = round(e['ytd_charge_mwh'] / 1000, 1)
+                rec['full_charge_gwh'] = round(e['full_charge_mwh'] / 1000, 1)
+                # Round-trip efficiency indicator (discharge / charge)
+                if e['full_charge_mwh'] > 0:
+                    rec['roundtrip_pct'] = round(
+                        e['full_mwh'] / e['full_charge_mwh'] * 100, 1
+                    )
+            block[fkey] = rec
+        return block
+
+    by_scope = {}
+    all_years: set[int] = set()
+    for yr_dict in coal_agg.values():
+        all_years.update(yr_dict.keys())
+    for scope_dict in tech_agg.values():
+        all_years.update(scope_dict.keys())
+    for yr_dict in demand_agg.values():
+        all_years.update(yr_dict.keys())
+    sorted_years = sorted(all_years)
+
+    for scope in scopes_in_order:
+        year_rows = []
+        for yr in sorted_years:
+            coal_entry = coal_agg.get(scope, {}).get(yr)
+            tech_entry = tech_agg.get(scope, {}).get(yr, {})
+            demand_entry = demand_agg.get(scope, {}).get(yr)
+            if not coal_entry and not tech_entry and not demand_entry:
+                continue
+            block = _fuel_year_block(coal_entry, tech_entry)
+            block['year'] = yr
+            if demand_entry:
+                block['demand'] = {
+                    'ytd_gwh': round(demand_entry['ytd_mwh'] / 1000, 1),
+                    'full_gwh': round(demand_entry['full_mwh'] / 1000, 1),
+                    'ytd_peak_mw': round(demand_entry['ytd_peak_mw'], 0),
+                    'full_peak_mw': round(demand_entry['full_peak_mw'], 0),
+                    'ytd_days': len(demand_entry['ytd_days']),
+                    'full_days': len(demand_entry['full_days']),
+                }
+            year_rows.append(block)
+        by_scope[scope] = {
+            'label': 'NEM' if scope == 'NEM' else REGION_LABELS.get(scope, scope),
+            'coal_capacity_mw': state_caps.get(scope.rstrip('1'), 0) if scope != 'NEM' else sum(state_caps.values()),
+            'years': year_rows,
+        }
+
+    # Storyline chips — pick the earliest-vs-latest year pair with meaningful
+    # data so partial-year noise (e.g. 2026 with only a few days of data for
+    # one fuel tech) doesn't produce spurious -100% chips. "Meaningful" =
+    # ytd_days ≥ cutoff_doy when current year, full_days ≥ 300 for historical.
+    def _has_data(entry, year):
+        if year == cutoff_year:
+            return (entry.get('ytd_days') or 0) >= max(7, cutoff_doy - 14)
+        return (entry.get('full_days') or 0) >= 300
+
+    def _same_period_gwh(entry, year):
+        # Always compare like-for-like windows across years. Use YTD for the
+        # in-progress year, the same-period YTD (from full-year aggregate) for
+        # historical years would be ideal — but we already aggregate the YTD
+        # window server-side (ytd_gwh), so just use ytd_gwh for every year.
+        return entry.get('ytd_gwh') or 0
+
+    def _change_chip(scope_key, fkey):
+        years_list = by_scope[scope_key]['years']
+        if len(years_list) < 2:
+            return None
+        candidates = [y for y in years_list if fkey in y and _has_data(y[fkey], y['year'])]
+        if len(candidates) < 2:
+            return None
+        first = candidates[0]
+        last = candidates[-1]
+        a = _same_period_gwh(first[fkey], first['year'])
+        b = _same_period_gwh(last[fkey], last['year'])
+        if not a:
+            return None
+        pct = (b - a) / a * 100
+        return {
+            'fuel': fkey,
+            'first_year': first['year'],
+            'last_year': last['year'],
+            'first_gwh': a,
+            'last_gwh': b,
+            'change_pct': round(pct, 1),
+        }
+
+    storylines = {}
+    for scope in scopes_in_order:
+        chips = []
+        for f in fuel_techs:
+            chip = _change_chip(scope, f)
+            if chip:
+                chips.append(chip)
+        storylines[scope] = chips
+
+    years_with_tech = sorted({yr for yr_dict in tech_agg.values() for yr in yr_dict.keys()})
+    years_with_coal = sorted({yr for yr_dict in coal_agg.values() for yr in yr_dict.keys()})
+
+    source_note = (
+        f"Latest data: {most_recent}. YTD window = Jan 1 → {cutoff_label} (day {cutoff_doy}). "
+        f"Coal: {years_with_coal[0] if years_with_coal else '—'}→{years_with_coal[-1] if years_with_coal else '—'} from NEMWEB DISPATCHLOAD. "
+        f"Wind/Solar/BESS: {years_with_tech[0] if years_with_tech else '—'}→{years_with_tech[-1] if years_with_tech else '—'} from daily aggregation of the same DISPATCHLOAD archives."
+    )
+
+    # --- Records board: transition-specific highs + lows ---
+    records = _compute_transition_records(conn, duid_state)
+
+    write_json(os.path.join(INTEL_DIR, 'energy-transition.json'), {
+        'has_data': True,
+        'cutoff_date': most_recent,
+        'cutoff_date_label': cutoff_label,
+        'cutoff_year': cutoff_year,
+        'cutoff_doy': cutoff_doy,
+        'years_present': sorted_years,
+        'scope_order': scopes_in_order,
+        'fuel_techs': fuel_techs,
+        'by_scope': by_scope,
+        'storylines': storylines,
+        'records': records,
+        'source_note': source_note,
+        'exported_at': datetime.now().isoformat(),
+    })
+    print(f"  analytics/intelligence/energy-transition.json "
+          f"(coal-years={years_with_coal}, tech-years={years_with_tech}, scopes={len(scopes_in_order)})")
+
+
+def _compute_transition_records(conn, duid_state: dict[str, str]) -> dict:
+    """Compute transition-scoreboard records (coal lows, renewable highs).
+
+    Records that communicate the transition itself — not raw-peaks (those live
+    on BESS Portfolio). Scoped by NEM + per-region. Uses:
+      - dispatch_availability (5-min coal) for coal lows
+      - generation_daily (daily solar/wind/BESS) for renewable highs
+      - demand_daily (daily + peak MW) for demand peaks
+    """
+    records: dict = {
+        'coal_lowest_5min': {},       # {scope: {mw, date, note}}
+        'coal_lowest_daily': {},      # {scope: {gwh, date}}
+        'solar_highest_daily': {},    # {scope: {gwh, date}}
+        'wind_highest_daily': {},     # {scope: {gwh, date}}
+        'renewables_highest_daily': {},  # solar+wind+bess combined
+        'bess_highest_daily': {},
+        'demand_peak_mw': {},         # {scope: {mw, date, region}}
+    }
+
+    # Coal lowest 5-min dispatch (summed across all coal DUIDs per scope)
+    # For NEM: sum of all coal total_cleared_mw in each 5-min interval.
+    # For a state: sum only the DUIDs in that state.
+    # Approach: compute per-settlement-interval sums in Python (SQL aggregation
+    # is easy at NEM but state-scoped needs the DUID→state join).
+    coal_rows = conn.execute("""
+        SELECT settlement_date, duid, total_cleared_mw
+        FROM dispatch_availability
+        WHERE total_cleared_mw IS NOT NULL
+    """).fetchall()
+
+    # For memory efficiency: iterate and maintain running minimums per scope.
+    scope_interval: dict[str, dict[str, float]] = {
+        'NEM': {}, 'NSW1': {}, 'QLD1': {}, 'VIC1': {}, 'SA1': {}, 'TAS1': {},
+    }
+    # We accumulate per settlement-date per scope; then find min.
+    # Memory: ~290k intervals per scope × float = ~10 MB across scopes, fine.
+    for settlement, duid, mw in coal_rows:
+        state = duid_state.get((duid or '').upper())
+        if not state:
+            continue
+        region = f'{state}1'
+        scope_interval['NEM'][settlement] = scope_interval['NEM'].get(settlement, 0) + (mw or 0)
+        scope_interval[region][settlement] = scope_interval[region].get(settlement, 0) + (mw or 0)
+
+    for scope, intervals in scope_interval.items():
+        if not intervals:
+            continue
+        min_interval = min(intervals.items(), key=lambda kv: kv[1])
+        dt = min_interval[0]
+        records['coal_lowest_5min'][scope] = {
+            'mw': round(min_interval[1], 1),
+            'settlement_date': dt,
+        }
+
+    # Coal lowest daily MWh: sum MW / 12 per date per scope.
+    # Require ≥ 288 intervals (full 24h × 12/h) to filter partial days at
+    # archive boundaries where a zip only contains a few hours of the last day.
+    daily_scope: dict[str, dict[str, float]] = {k: {} for k in scope_interval}
+    daily_interval_count: dict[str, dict[str, int]] = {k: {} for k in scope_interval}
+    for scope in daily_scope:
+        for settlement, mw in scope_interval[scope].items():
+            date = settlement[:10].replace('/', '-')
+            daily_scope[scope][date] = daily_scope[scope].get(date, 0) + (mw / 12.0)
+            daily_interval_count[scope][date] = daily_interval_count[scope].get(date, 0) + 1
+    for scope, daily in daily_scope.items():
+        full_days = {
+            date: mwh for date, mwh in daily.items()
+            if daily_interval_count[scope].get(date, 0) >= 288
+        }
+        if not full_days:
+            continue
+        min_day = min(full_days.items(), key=lambda kv: kv[1])
+        records['coal_lowest_daily'][scope] = {
+            'gwh': round(min_day[1] / 1000, 2),
+            'date': min_day[0],
+        }
+
+    # Solar/Wind/BESS daily highs per (scope, fuel)
+    if _table_exists(conn, 'generation_daily'):
+        for fuel_type, fkey in [
+            ('Solar PV', 'solar_highest_daily'),
+            ('Wind', 'wind_highest_daily'),
+            ('Battery Storage', 'bess_highest_daily'),
+        ]:
+            # NEM total per day
+            nem_rows = conn.execute("""
+                SELECT date, SUM(gen_mwh) AS mwh
+                FROM generation_daily
+                WHERE fuel_type = ?
+                GROUP BY date
+                ORDER BY mwh DESC
+                LIMIT 1
+            """, (fuel_type,)).fetchone()
+            if nem_rows:
+                records[fkey]['NEM'] = {
+                    'gwh': round(nem_rows[1] / 1000, 2),
+                    'date': nem_rows[0],
+                }
+            # Per region
+            region_rows = conn.execute("""
+                SELECT region, date, SUM(gen_mwh) AS mwh
+                FROM generation_daily
+                WHERE fuel_type = ?
+                GROUP BY region, date
+                ORDER BY mwh DESC
+            """, (fuel_type,)).fetchall()
+            seen_regions: set[str] = set()
+            for region, date, mwh in region_rows:
+                if region in seen_regions or not region:
+                    continue
+                seen_regions.add(region)
+                records[fkey][region] = {'gwh': round(mwh / 1000, 2), 'date': date}
+
+        # Combined renewables day (solar + wind + bess discharge)
+        combined = conn.execute("""
+            SELECT date, SUM(gen_mwh) AS mwh
+            FROM generation_daily
+            WHERE fuel_type IN ('Solar PV', 'Wind', 'Battery Storage')
+            GROUP BY date
+            ORDER BY mwh DESC
+            LIMIT 1
+        """).fetchone()
+        if combined:
+            records['renewables_highest_daily']['NEM'] = {
+                'gwh': round(combined[1] / 1000, 2),
+                'date': combined[0],
+            }
+
+        combined_region = conn.execute("""
+            SELECT region, date, SUM(gen_mwh) AS mwh
+            FROM generation_daily
+            WHERE fuel_type IN ('Solar PV', 'Wind', 'Battery Storage')
+              AND region IS NOT NULL AND region != ''
+            GROUP BY region, date
+            ORDER BY mwh DESC
+        """).fetchall()
+        seen_r: set[str] = set()
+        for region, date, mwh in combined_region:
+            if region in seen_r:
+                continue
+            seen_r.add(region)
+            records['renewables_highest_daily'][region] = {'gwh': round(mwh / 1000, 2), 'date': date}
+
+    # Demand peak MW
+    if _table_exists(conn, 'demand_daily'):
+        # NEM peak (sum of all regions for a given day? no — peak happens within a 5-min interval
+        # which we didn't store, only per-region peak_mw. Approximate NEM peak as max-day sum of regional peaks
+        # which overstates true concurrent peak but is a reasonable proxy.)
+        nem_peak = conn.execute("""
+            SELECT date, SUM(peak_demand_mw) AS peak_sum
+            FROM demand_daily
+            GROUP BY date
+            ORDER BY peak_sum DESC
+            LIMIT 1
+        """).fetchone()
+        if nem_peak:
+            records['demand_peak_mw']['NEM'] = {
+                'mw': round(nem_peak[1], 0),
+                'date': nem_peak[0],
+                'note': 'sum of regional 5-min peaks — may overstate concurrent NEM peak',
+            }
+        for region_rec in conn.execute("""
+            SELECT region, date, peak_demand_mw
+            FROM demand_daily
+            WHERE peak_demand_mw = (
+                SELECT MAX(peak_demand_mw) FROM demand_daily d2 WHERE d2.region = demand_daily.region
+            )
+            GROUP BY region
+        """).fetchall():
+            region, date, peak_mw = region_rec
+            records['demand_peak_mw'][region] = {'mw': round(peak_mw, 0), 'date': date}
+
+    return records
+
+
+def _table_exists(conn, name: str) -> bool:
+    row = conn.execute(
+        "SELECT 1 FROM sqlite_master WHERE type='table' AND name=?", (name,)
+    ).fetchone()
+    return bool(row)
+
+
+def _load_coal_stations() -> list[dict]:
+    path = os.path.join(os.path.dirname(__file__), '..', 'config', 'coal_stations.json')
+    if not os.path.exists(path):
+        return []
+    with open(path) as f:
+        return json.load(f).get('stations', [])
+
+
 def export_battery_live_records(conn):
     """Battery Records & Live Activity — v2.28.0.
 
@@ -6871,6 +7380,7 @@ def export_intelligence(conn):
     export_scheme_win_probability(conn)
     export_coal_outage_dispatch(conn)
     export_coal_ytd_comparison(conn)
+    export_energy_transition(conn)
     export_battery_live_records(conn)
     export_dunkelflaute(conn)
     export_energy_mix(conn)
