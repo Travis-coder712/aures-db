@@ -128,13 +128,15 @@ def parse_zip_for_duids(
         print(f'  ! bad zip: {os.path.basename(zip_path)}')
         return {}
 
+    # Shared dedupe set for the whole zip — a (SETTLEMENTDATE, DUID) key can
+    # appear both in a CSV and in a nested-zip CSV across the same archive.
+    seen: set[tuple[str, str]] = set()
     with zf:
-        # Archive zips contain an inner CSV; some contain nested zips.
         for name in zf.namelist():
             if name.upper().endswith('.CSV'):
                 with zf.open(name) as f:
                     content = f.read()
-                _accumulate_csv(content, target_duids, per_day)
+                _accumulate_csv(content, target_duids, per_day, seen)
             elif name.upper().endswith('.ZIP'):
                 with zf.open(name) as inner:
                     try:
@@ -146,7 +148,7 @@ def parse_zip_for_duids(
                             if iname.upper().endswith('.CSV'):
                                 with izf.open(iname) as f:
                                     content = f.read()
-                                _accumulate_csv(content, target_duids, per_day)
+                                _accumulate_csv(content, target_duids, per_day, seen)
     return per_day
 
 
@@ -154,8 +156,19 @@ def _accumulate_csv(
     content: bytes,
     target_duids: dict[str, tuple[str, str]],
     per_day: dict[tuple[str, str], dict[str, float | int]],
+    seen_intervals: set[tuple[str, str]] | None = None,
 ) -> None:
-    """Parse one CSV's D-rows and fold them into per_day."""
+    """Parse one CSV's D-rows and fold them into per_day.
+
+    DISPATCHLOAD CSVs contain multiple revision rows per (SETTLEMENTDATE, DUID)
+    — base case + intervention case + rerun revisions — with the same
+    TOTALCLEARED. Accumulating all of them 6× over-counts dispatched energy.
+    We dedupe by (settlement_date, duid) across the whole CSV batch: the
+    first row for an interval wins. The caller must pass a fresh set per
+    batch to avoid state bleed across different zips.
+    """
+    if seen_intervals is None:
+        seen_intervals = set()
     for row in iter_csv_rows(content):
         duid = (row.get('DUID') or '').strip().upper()
         if duid not in target_duids:
@@ -163,7 +176,10 @@ def _accumulate_csv(
         settlement = row.get('SETTLEMENTDATE') or ''
         if len(settlement) < 10:
             continue
-        # Normalise to YYYY-MM-DD. Upstream format: '2025/06/15 04:05:00'
+        interval_key = (settlement, duid)
+        if interval_key in seen_intervals:
+            continue
+        seen_intervals.add(interval_key)
         date = settlement[:10].replace('/', '-')
         try:
             cleared = float(row.get('TOTALCLEARED') or 0)
@@ -171,7 +187,6 @@ def _accumulate_csv(
             continue
         key = (date, duid)
         bucket = per_day[key]
-        # 5-min interval ⇒ MWh = MW × (5/60) = MW / 12
         if cleared >= 0:
             bucket['gen_mwh'] += cleared / 12.0
         else:

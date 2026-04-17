@@ -109,7 +109,11 @@ def iter_csv_rows(content: bytes):
             yield dict(zip(header, values))
 
 
-def _accumulate_csv(content, per_day, per_day_peak):
+def _accumulate_csv(content, per_day, per_day_peak, seen=None):
+    """DISPATCHREGIONSUM rows also have multiple revisions per
+    (SETTLEMENTDATE, REGIONID). Dedupe on that key across the batch."""
+    if seen is None:
+        seen = set()
     for row in iter_csv_rows(content):
         region = (row.get('REGIONID') or '').strip().upper()
         if region not in TARGET_REGIONS:
@@ -117,13 +121,17 @@ def _accumulate_csv(content, per_day, per_day_peak):
         settlement = row.get('SETTLEMENTDATE') or ''
         if len(settlement) < 10:
             continue
+        ikey = (settlement, region)
+        if ikey in seen:
+            continue
+        seen.add(ikey)
         date = settlement[:10].replace('/', '-')
         try:
             demand = float(row.get('TOTALDEMAND') or 0)
         except ValueError:
             continue
         key = (date, region)
-        per_day[key] += demand / 12.0  # MW × (5/60) → MWh
+        per_day[key] += demand / 12.0
         if demand > per_day_peak[key]:
             per_day_peak[key] = demand
 
@@ -139,12 +147,13 @@ def parse_zip(zip_path: str):
         print(f'  ! bad zip: {os.path.basename(zip_path)}')
         return {}, {}, {}
 
+    seen: set[tuple[str, str]] = set()
     with zf:
         for name in zf.namelist():
             if name.upper().endswith('.CSV'):
                 with zf.open(name) as f:
                     content = f.read()
-                _accumulate_csv(content, per_day, per_day_peak)
+                _accumulate_csv(content, per_day, per_day_peak, seen)
             elif name.upper().endswith('.ZIP'):
                 with zf.open(name) as inner:
                     try:
@@ -156,7 +165,7 @@ def parse_zip(zip_path: str):
                             if iname.upper().endswith('.CSV'):
                                 with izf.open(iname) as f:
                                     content = f.read()
-                                _accumulate_csv(content, per_day, per_day_peak)
+                                _accumulate_csv(content, per_day, per_day_peak, seen)
 
     # Interval count derivable from demand / min_demand heuristic — but just
     # leave as 0 for now; it's bookkeeping only.

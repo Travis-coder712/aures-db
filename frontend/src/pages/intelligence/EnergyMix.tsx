@@ -316,7 +316,12 @@ export default function EnergyMix() {
       </div>
 
       {/* Tab navigation */}
-      <div className="flex gap-1 overflow-x-auto pb-1 -mb-3">
+      <style>{`[data-tabs-row]::-webkit-scrollbar { display: none; }`}</style>
+      <div
+        data-tabs-row
+        className="flex gap-1 overflow-x-auto pb-1 -mb-3"
+        style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+      >
         {TABS.map(tab => (
           <button
             key={tab.id}
