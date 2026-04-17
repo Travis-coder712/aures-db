@@ -568,7 +568,7 @@
           "state": "SA",
           "status": "development",
           "stage": "development",
-          "cod_current": "2029-12-31",
+          "cod_current": "2029-12",
           "dev_status": "pre-planning",
           "annotations": [
             {
@@ -1764,7 +1764,7 @@
           "state": "NSW",
           "status": "development",
           "stage": "development",
-          "cod_current": "2027-09-30",
+          "cod_current": "2027-09",
           "dev_status": "pre-planning",
           "annotations": [
             {
@@ -2324,5 +2324,5 @@
       }
     }
   },
-  "exported_at": "2026-04-17T23:01:00.292365"
+  "exported_at": "2026-04-17T23:22:43.329208"
 }
