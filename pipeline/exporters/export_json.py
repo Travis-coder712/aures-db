@@ -3125,6 +3125,20 @@ def _cf_rating(cf):
     return 'Below Average'
 
 
+def _solar_cf_rating(cf):
+    """Rate capacity factor for solar. Solar fleet tops out around 30% —
+    scaled accordingly. Best operating sites in Aus achieve 28-32%."""
+    if cf is None:
+        return 'Unknown'
+    if cf >= 29:
+        return 'Excellent'
+    elif cf >= 24:
+        return 'Good'
+    elif cf >= 20:
+        return 'Average'
+    return 'Below Average'
+
+
 def _grade(score):
     """Score 0-100 to letter grade."""
     if score >= 85:
@@ -3583,6 +3597,457 @@ def export_wind_resource(conn):
     path = os.path.join(INTEL_DIR, 'wind-resource.json')
     write_json(path, clean_none_values(output))
     print(f"  analytics/intelligence/wind-resource.json ({len(farms)} operating, {len(development_projects)} development)")
+
+
+def export_bess_portfolio(conn):
+    """BESS Portfolio Intelligence — T2.G.
+
+    Surfaces the shape of the Australian BESS fleet:
+      - duration_distribution: histogram of storage_mwh / capacity_mw per
+        status, plus cohort stats
+      - duration_evolution: avg duration by COD year, showing the
+        2h → 4h → 8h trend
+      - grid_forming: list of GFM-flagged projects
+      - co_located: hybrid projects (solar+BESS, wind+BESS)
+      - chemistry: LFP/NMC breakdown from EIS (≈35 projects verified)
+        + OEM correlation
+      - network_services: SIPS / FCAS / system-service contracts from the
+        offtakes table (Waratah, VBB, Wallgrove etc.)
+      - summary: totals, GFM %, chemistry coverage %, duration trend
+    """
+    bess_rows = conn.execute("""
+        SELECT p.id, p.name, p.state, p.status, p.capacity_mw, p.storage_mwh,
+               p.grid_forming, p.has_sips, p.has_syncon, p.has_statcom,
+               p.current_developer, p.current_operator,
+               p.cod_current, p.cod_original, p.latitude, p.longitude
+        FROM projects p
+        WHERE p.technology = 'bess'
+    """).fetchall()
+
+    hybrid_rows = conn.execute("""
+        SELECT p.id, p.name, p.state, p.status, p.capacity_mw, p.storage_mwh,
+               p.current_developer, p.current_operator, p.cod_current
+        FROM projects p
+        WHERE p.technology = 'hybrid' AND p.storage_mwh IS NOT NULL
+    """).fetchall()
+
+    # Helper to extract duration in hours
+    def duration_h(row):
+        mw = row['capacity_mw']
+        mwh = row['storage_mwh']
+        if mw and mwh and mw > 0:
+            return round(mwh / mw, 2)
+        return None
+
+    # Helper to get duration bucket
+    def duration_bucket(h):
+        if h is None:
+            return None
+        if h < 1:
+            return '<1h'
+        if h < 2:
+            return '1-2h'
+        if h < 4:
+            return '2-4h'
+        if h < 8:
+            return '4-8h'
+        return '8h+'
+
+    # COD year helper
+    def cod_year(iso_str):
+        if not iso_str:
+            return None
+        try:
+            return int(iso_str[:4])
+        except (ValueError, TypeError):
+            return None
+
+    # ---- Duration distribution by status ----
+    duration_by_status = defaultdict(lambda: {'buckets': defaultdict(int), 'durations': []})
+    for r in bess_rows:
+        d = duration_h(r)
+        bucket = duration_bucket(d)
+        if bucket:
+            duration_by_status[r['status']]['buckets'][bucket] += 1
+            duration_by_status[r['status']]['durations'].append(d)
+
+    duration_distribution = {}
+    for status, data in duration_by_status.items():
+        # Ensure all buckets are present (even if 0) for consistent frontend rendering
+        ordered_buckets = ['<1h', '1-2h', '2-4h', '4-8h', '8h+']
+        buckets_dict = {b: data['buckets'].get(b, 0) for b in ordered_buckets}
+        durations = data['durations']
+        duration_distribution[status] = {
+            'buckets': buckets_dict,
+            'count': len(durations),
+            'avg': round(sum(durations) / len(durations), 2) if durations else None,
+            'median': round(statistics.median(durations), 2) if durations else None,
+            'max': round(max(durations), 2) if durations else None,
+            'min': round(min(durations), 2) if durations else None,
+        }
+
+    # ---- Duration evolution by COD year ----
+    by_year = defaultdict(list)
+    for r in bess_rows:
+        y = cod_year(r['cod_current'])
+        d = duration_h(r)
+        if y and d and 2016 <= y <= 2035:
+            by_year[y].append({
+                'duration_h': d,
+                'mw': r['capacity_mw'],
+                'mwh': r['storage_mwh'],
+                'status': r['status'],
+            })
+
+    duration_evolution = []
+    for year in sorted(by_year.keys()):
+        entries = by_year[year]
+        durations = [e['duration_h'] for e in entries]
+        total_mw = sum(e['mw'] or 0 for e in entries)
+        total_mwh = sum(e['mwh'] or 0 for e in entries)
+        duration_evolution.append({
+            'year': year,
+            'count': len(entries),
+            'avg_duration_h': round(sum(durations) / len(durations), 2),
+            'median_duration_h': round(statistics.median(durations), 2),
+            'max_duration_h': round(max(durations), 2),
+            'total_mw': round(total_mw, 1),
+            'total_mwh': round(total_mwh, 1),
+        })
+
+    # ---- Grid-forming list ----
+    grid_forming = []
+    for r in bess_rows:
+        if r['grid_forming'] and str(r['grid_forming']).lower() in ('1', 'true', 'yes'):
+            grid_forming.append({
+                'project_id': r['id'],
+                'name': r['name'],
+                'state': r['state'],
+                'status': r['status'],
+                'capacity_mw': r['capacity_mw'],
+                'storage_mwh': r['storage_mwh'],
+                'duration_h': duration_h(r),
+                'developer': r['current_developer'],
+                'operator': r['current_operator'],
+                'cod': r['cod_current'],
+            })
+    grid_forming.sort(key=lambda e: -(e['capacity_mw'] or 0))
+
+    # ---- Co-located (hybrid) projects ----
+    co_located = []
+    for r in hybrid_rows:
+        co_located.append({
+            'project_id': r['id'],
+            'name': r['name'],
+            'state': r['state'],
+            'status': r['status'],
+            'capacity_mw': r['capacity_mw'],
+            'storage_mwh': r['storage_mwh'],
+            'duration_h': duration_h(r),
+            'developer': r['current_developer'],
+            'cod': r['cod_current'],
+        })
+    co_located.sort(key=lambda e: -(e['capacity_mw'] or 0))
+
+    # ---- Chemistry from EIS + OEM correlation ----
+    eis_rows = conn.execute("""
+        SELECT e.project_id, e.cell_chemistry, e.cell_chemistry_full, e.cell_supplier,
+               e.cell_country_of_manufacture, e.inverter_supplier, e.inverter_model,
+               e.pcs_type, e.round_trip_efficiency_pct, e.duration_hours,
+               p.name AS project_name, p.state, p.status, p.capacity_mw, p.storage_mwh,
+               p.current_developer
+        FROM eis_technical_specs e
+        JOIN projects p ON p.id = e.project_id
+        WHERE p.technology IN ('bess', 'hybrid') AND e.cell_chemistry IS NOT NULL
+    """).fetchall()
+
+    chemistry_rows = []
+    chemistry_counts = defaultdict(int)
+    chemistry_mw = defaultdict(float)
+    oem_by_chemistry = defaultdict(lambda: defaultdict(int))
+
+    for r in eis_rows:
+        chem = r['cell_chemistry']
+        chemistry_counts[chem] += 1
+        chemistry_mw[chem] += r['capacity_mw'] or 0
+        if r['cell_supplier']:
+            oem_by_chemistry[chem][r['cell_supplier']] += 1
+        chemistry_rows.append({
+            'project_id': r['project_id'],
+            'name': r['project_name'],
+            'state': r['state'],
+            'status': r['status'],
+            'capacity_mw': r['capacity_mw'],
+            'storage_mwh': r['storage_mwh'],
+            'duration_h': duration_h(r),
+            'chemistry': chem,
+            'chemistry_full': r['cell_chemistry_full'],
+            'cell_supplier': r['cell_supplier'],
+            'cell_country': r['cell_country_of_manufacture'],
+            'inverter_supplier': r['inverter_supplier'],
+            'inverter_model': r['inverter_model'],
+            'pcs_type': r['pcs_type'],
+            'rte_pct': r['round_trip_efficiency_pct'],
+            'developer': r['current_developer'],
+        })
+    chemistry_rows.sort(key=lambda e: -(e['capacity_mw'] or 0))
+
+    chemistry_breakdown = {}
+    for chem, count in chemistry_counts.items():
+        top_oems = sorted(oem_by_chemistry[chem].items(), key=lambda e: -e[1])[:5]
+        chemistry_breakdown[chem] = {
+            'project_count': count,
+            'total_mw': round(chemistry_mw[chem], 1),
+            'top_oems': [[o, n] for o, n in top_oems],
+        }
+
+    # PCS type distribution (grid_forming vs grid_following)
+    pcs_counts = defaultdict(int)
+    for r in eis_rows:
+        if r['pcs_type']:
+            pcs_counts[r['pcs_type']] += 1
+
+    # ---- Network services from offtakes ----
+    net_svc_rows = conn.execute("""
+        SELECT o.id, o.party, o.type, o.term_years, o.capacity_mw AS contracted_mw,
+               o.price_aud_per_mwh, o.price_structure, o.price_notes,
+               o.start_date, o.end_date, o.tenor_description, o.volume_structure,
+               o.sources, o.data_confidence,
+               p.id AS project_id, p.name, p.state, p.status,
+               p.capacity_mw, p.storage_mwh, p.current_developer
+        FROM offtakes o
+        JOIN projects p ON p.id = o.project_id
+        WHERE p.technology = 'bess'
+          AND (o.type IN ('SIPS', 'FCAS') OR o.type = 'tolling'
+               OR o.price_structure LIKE '%availability%'
+               OR o.price_structure LIKE '%SIPS%'
+               OR o.price_structure LIKE '%system service%'
+               OR p.has_sips IS NOT NULL)
+    """).fetchall()
+
+    network_services = []
+    seen_projects = set()
+    for r in net_svc_rows:
+        # Parse sources JSON if present
+        sources = []
+        if r['sources']:
+            try:
+                parsed = json.loads(r['sources'])
+                if isinstance(parsed, list):
+                    sources = parsed
+            except (json.JSONDecodeError, TypeError):
+                pass
+        network_services.append({
+            'offtake_id': r['id'],
+            'project_id': r['project_id'],
+            'name': r['name'],
+            'state': r['state'],
+            'status': r['status'],
+            'capacity_mw': r['capacity_mw'],
+            'storage_mwh': r['storage_mwh'],
+            'duration_h': duration_h(r),
+            'developer': r['current_developer'],
+            'contract_party': r['party'],
+            'contract_type': r['type'],
+            'contracted_mw': r['contracted_mw'],
+            'term_years': r['term_years'],
+            'price_structure': r['price_structure'],
+            'price_notes': r['price_notes'],
+            'start_date': r['start_date'],
+            'end_date': r['end_date'],
+            'tenor_description': r['tenor_description'],
+            'volume_structure': r['volume_structure'],
+            'sources': sources,
+            'data_confidence': r['data_confidence'],
+        })
+        seen_projects.add(r['project_id'])
+
+    # ---- Summary stats ----
+    total_bess = len(bess_rows)
+    total_with_storage = sum(1 for r in bess_rows if r['storage_mwh'])
+    total_operating = sum(1 for r in bess_rows if r['status'] == 'operating')
+    total_standalone_operating = total_operating
+    total_hybrid_operating = sum(1 for r in hybrid_rows if r['status'] == 'operating')
+
+    summary = {
+        'total_bess': total_bess,
+        'total_with_storage': total_with_storage,
+        'total_operating': total_operating,
+        'total_hybrid': len(hybrid_rows),
+        'total_hybrid_operating': total_hybrid_operating,
+        'grid_forming_count': len(grid_forming),
+        'grid_forming_pct': round(len(grid_forming) / total_bess * 100, 1) if total_bess else None,
+        'chemistry_verified_count': len(chemistry_rows),
+        'chemistry_coverage_pct': round(len(chemistry_rows) / total_bess * 100, 1) if total_bess else None,
+        'pcs_type_counts': dict(pcs_counts),
+        'network_service_contracts': len(network_services),
+    }
+
+    write_json(os.path.join(INTEL_DIR, 'bess-portfolio.json'), {
+        'summary': summary,
+        'duration_distribution': duration_distribution,
+        'duration_evolution': duration_evolution,
+        'grid_forming': grid_forming,
+        'co_located': co_located,
+        'chemistry_breakdown': chemistry_breakdown,
+        'chemistry_projects': chemistry_rows,
+        'network_services': network_services,
+        'exported_at': datetime.now().isoformat(),
+    })
+    print(f"  analytics/intelligence/bess-portfolio.json ({total_bess} BESS · "
+          f"{len(grid_forming)} GFM · {len(co_located)} co-located · "
+          f"{len(chemistry_rows)} EIS chemistry · {len(network_services)} net-svc contracts)")
+
+
+def export_solar_resource(conn):
+    """Solar farm capacity factor benchmarks and resource rating.
+
+    Mirrors export_wind_resource() but uses solar CF thresholds (top
+    operating sites reach 28-32%, not 35%+ like wind). Adds a capacity-
+    class breakdown to expose the "large plant, lower CF" trade-off that
+    shows up strongly in solar.
+    """
+    # Use the most recent year for each project — matches wind-resource behaviour
+    operating = conn.execute("""
+        SELECT p.id, p.name, p.state, p.rez, p.capacity_mw,
+               p.latitude, p.longitude, p.current_developer,
+               pa.capacity_factor_pct, pa.energy_price_received, pa.revenue_per_mw,
+               pa.curtailment_pct, pa.year
+        FROM projects p
+        JOIN performance_annual pa ON pa.project_id = p.id
+        WHERE p.technology = 'solar' AND p.status = 'operating'
+              AND pa.year = (SELECT MAX(year) FROM performance_annual WHERE project_id = p.id)
+              AND pa.capacity_factor_pct IS NOT NULL
+    """).fetchall()
+
+    by_state = defaultdict(list)
+    by_rez = defaultdict(list)
+    by_developer = defaultdict(list)
+    farms = []
+
+    for r in operating:
+        cf = r['capacity_factor_pct']
+        entry = {
+            'project_id': r['id'],
+            'name': r['name'],
+            'state': r['state'],
+            'rez': r['rez'],
+            'capacity_mw': r['capacity_mw'],
+            'latitude': r['latitude'],
+            'longitude': r['longitude'],
+            'developer': r['current_developer'],
+            'capacity_factor_pct': round(cf, 2) if cf else None,
+            'energy_price': r['energy_price_received'],
+            'revenue_per_mw': r['revenue_per_mw'],
+            'curtailment_pct': round(r['curtailment_pct'], 2) if r['curtailment_pct'] is not None else None,
+            'resource_rating': _solar_cf_rating(cf),
+            'data_year': r['year'],
+        }
+        farms.append(entry)
+        if r['state']:
+            by_state[r['state']].append(cf)
+        if r['rez']:
+            by_rez[r['rez']].append(cf)
+        if r['current_developer']:
+            by_developer[r['current_developer']].append({'cf': cf, 'mw': r['capacity_mw'] or 0})
+
+    state_benchmarks = {}
+    for st, cfs in sorted(by_state.items()):
+        state_benchmarks[st] = {
+            **_stats_summary(cfs),
+            'rating': _solar_cf_rating(statistics.median(cfs) if cfs else None),
+        }
+
+    rez_benchmarks = {}
+    for rz, cfs in sorted(by_rez.items()):
+        rez_benchmarks[rz] = {
+            **_stats_summary(cfs),
+            'rating': _solar_cf_rating(statistics.median(cfs) if cfs else None),
+        }
+
+    # ---- Capacity-class benchmarks — the "bigger plants have lower CF" signal ----
+    # Solar cap factor dips on larger farms because of inverter clipping and
+    # network curtailment, so this is worth surfacing.
+    class_bands = [
+        ('Small (<50 MW)', lambda mw: mw and mw < 50),
+        ('Medium (50-150 MW)', lambda mw: mw and 50 <= mw < 150),
+        ('Large (150-300 MW)', lambda mw: mw and 150 <= mw < 300),
+        ('Utility (300+ MW)', lambda mw: mw and mw >= 300),
+    ]
+    capacity_class_benchmarks = {}
+    for label, predicate in class_bands:
+        cfs_in_class = [f['capacity_factor_pct'] for f in farms
+                         if predicate(f['capacity_mw']) and f['capacity_factor_pct'] is not None]
+        mw_in_class = [f['capacity_mw'] for f in farms if predicate(f['capacity_mw'])]
+        capacity_class_benchmarks[label] = {
+            **_stats_summary(cfs_in_class),
+            'count': len(cfs_in_class),
+            'total_mw': round(sum(mw_in_class), 1),
+            'rating': _solar_cf_rating(statistics.median(cfs_in_class) if cfs_in_class else None),
+        }
+
+    # ---- Developer fleet benchmarks — min 3 operating projects ----
+    dev_benchmarks = []
+    for dev, entries in by_developer.items():
+        cfs = [e['cf'] for e in entries]
+        if len(cfs) < 3:
+            continue
+        total_mw = sum(e['mw'] for e in entries)
+        dev_benchmarks.append({
+            'developer': dev,
+            'project_count': len(cfs),
+            'total_mw': round(total_mw, 1),
+            **_stats_summary(cfs),
+            'rating': _solar_cf_rating(statistics.median(cfs)),
+        })
+    dev_benchmarks.sort(key=lambda e: -(e.get('median') or 0))
+
+    # ---- Development pipeline — predict CF from state average ----
+    dev_solar = conn.execute("""
+        SELECT id, name, state, rez, capacity_mw, latitude, longitude, current_developer
+        FROM projects
+        WHERE technology = 'solar' AND status IN ('development', 'construction', 'commissioning')
+    """).fetchall()
+
+    development_projects = []
+    for r in dev_solar:
+        state_avg = None
+        if r['state'] and r['state'] in state_benchmarks:
+            state_avg = state_benchmarks[r['state']]['mean']
+        development_projects.append({
+            'project_id': r['id'],
+            'name': r['name'],
+            'state': r['state'],
+            'rez': r['rez'],
+            'capacity_mw': r['capacity_mw'],
+            'latitude': r['latitude'],
+            'longitude': r['longitude'],
+            'developer': r['current_developer'],
+            'predicted_cf_pct': round(state_avg, 1) if state_avg else None,
+            'predicted_rating': _solar_cf_rating(state_avg),
+            'basis': 'state_average',
+        })
+
+    output = {
+        'operating_farms': sorted(farms, key=lambda x: -(x['capacity_factor_pct'] or 0)),
+        'state_benchmarks': state_benchmarks,
+        'rez_benchmarks': rez_benchmarks,
+        'capacity_class_benchmarks': capacity_class_benchmarks,
+        'developer_benchmarks': dev_benchmarks,
+        'development_projects': development_projects,
+        'total_operating': len(farms),
+        'total_development': len(development_projects),
+        'cf_rating_thresholds': {
+            'Excellent': '≥ 29%',
+            'Good': '24% – 29%',
+            'Average': '20% – 24%',
+            'Below Average': '< 20%',
+        },
+        'exported_at': datetime.now().isoformat(),
+    }
+    path = os.path.join(INTEL_DIR, 'solar-resource.json')
+    write_json(path, clean_none_values(output))
+    print(f"  analytics/intelligence/solar-resource.json ({len(farms)} operating, {len(development_projects)} development, {len(dev_benchmarks)} dev benchmarks)")
 
 
 # ---- 4. Dunkelflaute -------------------------------------------------------
@@ -5015,6 +5480,8 @@ def export_intelligence(conn):
     export_scheme_tracker(conn)
     export_drift_analysis(conn)
     export_wind_resource(conn)
+    export_solar_resource(conn)
+    export_bess_portfolio(conn)
     export_dunkelflaute(conn)
     export_energy_mix(conn)
     export_developer_scores(conn)

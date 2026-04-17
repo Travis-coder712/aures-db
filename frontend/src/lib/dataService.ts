@@ -563,6 +563,37 @@ export async function fetchContractorAnalytics(): Promise<any | null> {
   } catch { return null }
 }
 
+// BESS portfolio — duration distribution + evolution, grid-forming, co-located,
+// chemistry breakdown, network services registry (T2.G).
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+let bessPortfolioCache: any | null = null
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export async function fetchBessPortfolio(): Promise<any | null> {
+  if (bessPortfolioCache) return bessPortfolioCache
+  try {
+    const resp = await fetch(`${BASE}/analytics/intelligence/bess-portfolio.json`)
+    if (!resp.ok) return null
+    bessPortfolioCache = await resp.json()
+    return bessPortfolioCache
+  } catch { return null }
+}
+
+// Solar resource — mirrors fetchWindResource but for solar (T2.F).
+// Shape is parallel to wind-resource but with solar-specific CF thresholds
+// and extra capacity_class_benchmarks + developer_benchmarks sections.
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+let solarResourceCache: any | null = null
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export async function fetchSolarResource(): Promise<any | null> {
+  if (solarResourceCache) return solarResourceCache
+  try {
+    const resp = await fetch(`${BASE}/analytics/intelligence/solar-resource.json`)
+    if (!resp.ok) return null
+    solarResourceCache = await resp.json()
+    return solarResourceCache
+  } catch { return null }
+}
+
 export async function fetchEISComparison(): Promise<EISComparisonData | null> {
   if (eisComparisonCache) return eisComparisonCache
   try {

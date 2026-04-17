@@ -233,9 +233,11 @@ export const PAGE_SOURCES: Record<string, SourceId[]> = {
 
   // Equipment & Technology
   'wind-resource': ['openelectricity_performance', 'web_research', 'json_export'],
+  'solar-resource': ['openelectricity_performance', 'aemo_generation_info', 'json_export'],
   dunkelflaute: ['openelectricity_performance', 'json_export'],
   'eis-technical': ['web_research', 'json_export'],
   'bess-capex': ['web_research', 'aemo_generation_info', 'json_export'],
+  'bess-portfolio': ['aemo_generation_info', 'web_research', 'json_export', 'offtake_research'],
 
   // Grid & Geography
   'transmission-infra': ['aemo_isp_rez', 'epbc_referrals', 'web_research', 'json_export'],
