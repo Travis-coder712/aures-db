@@ -20,6 +20,12 @@ const FEATURES = [
     route: '/intelligence/wind-resource',
   },
   {
+    icon: '\u2600\uFE0F',
+    title: 'Solar Resource',
+    description: 'Solar capacity factor benchmarks by state, REZ, capacity class, and developer. Development pipeline predictions.',
+    route: '/intelligence/solar-resource',
+  },
+  {
     icon: '\u{1F311}',
     title: 'Dunkelflaute Monitor',
     description: 'Low wind + solar periods and BESS adequacy analysis',
@@ -66,6 +72,12 @@ const FEATURES = [
     title: 'BESS Bidding Intelligence',
     description: 'NEMWEB bidding strategy analysis, trading platform identification, and competitive dynamics',
     route: '/intelligence/bess-bidding',
+  },
+  {
+    icon: '\u{1F50B}',
+    title: 'BESS Portfolio Intelligence',
+    description: 'Duration trends, grid-forming coverage, co-located projects, cell chemistry, and network service contracts across the Australian battery fleet.',
+    route: '/intelligence/bess-portfolio',
   },
   {
     icon: '\u{1F4C5}',

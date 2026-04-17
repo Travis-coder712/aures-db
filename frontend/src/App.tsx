@@ -29,6 +29,7 @@ import IntelligenceHub from './pages/IntelligenceHub'
 import SchemeTracker from './pages/intelligence/SchemeTracker'
 import DriftAnalysis from './pages/intelligence/DriftAnalysis'
 import WindResource from './pages/intelligence/WindResource'
+import SolarResource from './pages/intelligence/SolarResource'
 import Dunkelflaute from './pages/intelligence/Dunkelflaute'
 import EnergyMix from './pages/intelligence/EnergyMix'
 import DeveloperScores from './pages/intelligence/DeveloperScores'
@@ -37,6 +38,7 @@ import TransmissionInfra from './pages/intelligence/TransmissionInfra'
 import EISTechnical from './pages/intelligence/EISTechnical'
 import NemActivities from './pages/intelligence/NemActivities'
 import BessBidding from './pages/intelligence/BessBidding'
+import BessPortfolio from './pages/intelligence/BessPortfolio'
 import BatteryWatch from './components/intelligence/BatteryWatch'
 import News from './pages/News'
 import Watchlist from './pages/Watchlist'
@@ -94,6 +96,7 @@ function App() {
         <Route path="intelligence/scheme-tracker" element={<SchemeTracker />} />
         <Route path="intelligence/drift-analysis" element={<DriftAnalysis />} />
         <Route path="intelligence/wind-resource" element={<WindResource />} />
+        <Route path="intelligence/solar-resource" element={<SolarResource />} />
         <Route path="intelligence/dunkelflaute" element={<Dunkelflaute />} />
         <Route path="intelligence/energy-mix" element={<EnergyMix />} />
         <Route path="intelligence/developer-scores" element={<DeveloperScores />} />
@@ -103,6 +106,7 @@ function App() {
         <Route path="intelligence/eis-technical" element={<EISTechnical />} />
         <Route path="intelligence/nem-activities" element={<NemActivities />} />
         <Route path="intelligence/bess-bidding" element={<BessBidding />} />
+        <Route path="intelligence/bess-portfolio" element={<BessPortfolio />} />
         <Route path="intelligence/battery-watch" element={<div className="p-6 lg:p-8 max-w-5xl"><BatteryWatch /></div>} />
         <Route
           path="intelligence/lifecycle-quartile"
