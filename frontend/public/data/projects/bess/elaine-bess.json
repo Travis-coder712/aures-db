@@ -15,7 +15,7 @@
   "has_statcom": false,
   "has_harmonic_filter": false,
   "notable": "Tesla Megapack. A$460M financing. 15-year virtual toll with Snowy Hydro for 220 MW.",
-  "data_confidence": "good",
+  "data_confidence": "low",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "2527",
@@ -110,22 +110,7 @@
       "url": "https://aemo.com.au/energy-systems/electricity/national-electricity-market-nem/nem-forecasting-and-planning/forecasting-and-planning-data/generation-information",
       "date": "2026-01-30",
       "source_tier": 1
-    },
-    {
-      "title": "Akaysha \u2014 Elaine Financing",
-      "url": "https://akayshaenergy.com/news/akaysha-closes-a-460m-construction-financing-and-commences-construction-on-elaine-bess",
-      "source_tier": 2
-    },
-    {
-      "title": "Energy-Storage.News \u2014 Elaine A$460M",
-      "url": "https://www.energy-storage.news/akaysha-energy-bags-au460-million-for-1244mwh-bess-in-victoria-australia/",
-      "source_tier": 2
-    },
-    {
-      "title": "EPBC Referral 2023/09749",
-      "url": "https://epbcpublicportal.environment.gov.au/all-referrals/#!/referral/2023-09749",
-      "date": "2026-03-12",
-      "source_tier": 1
     }
-  ]
+  ],
+  "timeline_events": []
 }

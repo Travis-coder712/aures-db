@@ -15,7 +15,7 @@
   "has_harmonic_filter": false,
   "performance_score": 37.4,
   "notable": "46 MW solar farm near Benalla, VIC. Developed by Elecnor.",
-  "data_confidence": "medium",
+  "data_confidence": "low",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "1999",
@@ -72,5 +72,6 @@
       "date": "2026-01-30",
       "source_tier": 1
     }
-  ]
+  ],
+  "timeline_events": []
 }

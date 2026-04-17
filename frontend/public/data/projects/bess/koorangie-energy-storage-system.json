@@ -18,8 +18,8 @@
   "performance_score": 52.2,
   "notable": "185 MW / 370 MWh grid-forming BESS near Kerang in Victoria's Murray River region. A$400M, developed by Edify Energy, owned by Sosteneo. 15-year Shell Energy offtake for full capacity. 20-year AEMO System Support Agreement for 125 MW of system strength services \u2014 one of the first large-scale BESS contracted for this function.",
   "data_confidence": "good",
-  "last_updated": "2026-03-10",
-  "last_verified": "2026-03-10",
+  "last_updated": "2026-04-16",
+  "last_verified": "2026-04-16",
   "aemo_gen_info_id": "2173",
   "confidence_score": "60",
   "capex_aud_m": 400.0,
@@ -127,5 +127,7 @@
       "date": "2026-01-30",
       "source_tier": 1
     }
-  ]
+  ],
+  "timeline_events": [],
+  "current_owner": "Edify Energy (CDPQ)"
 }

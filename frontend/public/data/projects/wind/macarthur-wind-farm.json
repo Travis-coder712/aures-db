@@ -16,7 +16,7 @@
   "has_harmonic_filter": false,
   "performance_score": 12.7,
   "notable": "Was largest wind farm in southern hemisphere at commissioning (2013). 140x Vestas V112-3.0MW. ~A$1B cost.",
-  "data_confidence": "good",
+  "data_confidence": "low",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "1128",
@@ -139,5 +139,6 @@
       "date": "2026-01-30",
       "source_tier": 1
     }
-  ]
+  ],
+  "timeline_events": []
 }

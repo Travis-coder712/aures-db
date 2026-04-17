@@ -15,7 +15,7 @@
   "has_harmonic_filter": false,
   "performance_score": 33.6,
   "notable": "115 MW solar farm near Collinsville, QLD. Developed by FRV (Abdul Latif Jameel). Located in North Queensland's Bowen Basin.",
-  "data_confidence": "medium",
+  "data_confidence": "low",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "1408",
@@ -77,5 +77,6 @@
       "date": "2026-01-30",
       "source_tier": 1
     }
-  ]
+  ],
+  "timeline_events": []
 }

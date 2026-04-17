@@ -16,7 +16,7 @@
   "has_statcom": false,
   "has_harmonic_filter": false,
   "notable": "CWO REZ location. Originally 500 MW Gulgong Solar, scaled down to BESS-only. Two stages of 204 MW each.",
-  "data_confidence": "good",
+  "data_confidence": "low",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "1580",
@@ -98,21 +98,7 @@
       "url": "https://aemo.com.au/energy-systems/electricity/national-electricity-market-nem/nem-forecasting-and-planning/forecasting-and-planning-data/generation-information",
       "date": "2026-01-30",
       "source_tier": 1
-    },
-    {
-      "title": "Vena Energy \u2014 Bellambi Heights",
-      "url": "https://www.venaenergy.com.au/all_projects/bellambi-heights-bess/",
-      "source_tier": 2
-    },
-    {
-      "title": "NSW Planning Portal \u2014 Bellambi Heights",
-      "url": "https://www.planningportal.nsw.gov.au/major-projects/projects/bellambi-heights-battery-energy-storage-system",
-      "source_tier": 2
-    },
-    {
-      "title": "RenewEconomy \u2014 Vena BESS-only pivot",
-      "url": "https://reneweconomy.com.au/singapores-vena-ditches-huge-big-solar-plans-opts-for-big-battery-only-in-central-nsw/",
-      "source_tier": 2
     }
-  ]
+  ],
+  "timeline_events": []
 }

@@ -15,7 +15,7 @@
   "has_harmonic_filter": false,
   "performance_score": 43.8,
   "notable": "70 MW wind farm on the Eyre Peninsula, SA. Meridian Energy. One of the earlier wind farms on the Eyre Peninsula.",
-  "data_confidence": "medium",
+  "data_confidence": "low",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "1143",
@@ -65,5 +65,6 @@
       "date": "2026-01-30",
       "source_tier": 1
     }
-  ]
+  ],
+  "timeline_events": []
 }

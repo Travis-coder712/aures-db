@@ -16,8 +16,8 @@
   "has_statcom": false,
   "has_harmonic_filter": false,
   "notable": "500 MW / 2 GWh grid-scale battery at former Tomago aluminium smelter site. AGL Energy flagship storage project in the Hunter Valley, NSW.",
-  "data_confidence": "good",
-  "last_updated": "2026-04-01",
+  "data_confidence": "low",
+  "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "2463",
   "confidence_score": "65",
@@ -123,12 +123,7 @@
       "url": "https://aemo.com.au/energy-systems/electricity/national-electricity-market-nem/nem-forecasting-and-planning/forecasting-and-planning-data/generation-information",
       "date": "2026-01-30",
       "source_tier": 1
-    },
-    {
-      "title": "EPBC Referral 2023/09521",
-      "url": "https://epbcpublicportal.environment.gov.au/all-referrals/#!/referral/2023-09521",
-      "date": "2026-03-12",
-      "source_tier": 1
     }
-  ]
+  ],
+  "timeline_events": []
 }

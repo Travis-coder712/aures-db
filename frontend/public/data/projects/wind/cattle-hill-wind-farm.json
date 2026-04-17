@@ -16,7 +16,7 @@
   "has_harmonic_filter": false,
   "performance_score": 74.9,
   "notable": "44x Vestas V126-3.45MW. Cattle Hill Wind Farm Holdings (Goldwind subsidiary). Launched Feb 2020.",
-  "data_confidence": "good",
+  "data_confidence": "low",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "1260",
@@ -124,12 +124,7 @@
       "url": "https://aemo.com.au/energy-systems/electricity/national-electricity-market-nem/nem-forecasting-and-planning/forecasting-and-planning-data/generation-information",
       "date": "2026-01-30",
       "source_tier": 1
-    },
-    {
-      "title": "EPBC Referral 2009/4707",
-      "url": "https://epbcpublicportal.environment.gov.au/all-referrals/#!/referral/2009-4707",
-      "date": "2026-03-12",
-      "source_tier": 1
     }
-  ]
+  ],
+  "timeline_events": []
 }

@@ -15,7 +15,7 @@
   "has_harmonic_filter": false,
   "performance_score": 4.4,
   "notable": "Australia's largest pumped hydro facility at 1,800 MW \u2014 six Toshiba turbines (three reversible as pumps at 600 MW combined). Part of the Snowy Mountains Hydroelectric Scheme, commissioned 1973. Located below Talbingo Dam on the Tumut River, NSW.",
-  "data_confidence": "medium",
+  "data_confidence": "low",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "1215",
@@ -73,5 +73,6 @@
       "date": "2026-01-30",
       "source_tier": 1
     }
-  ]
+  ],
+  "timeline_events": []
 }

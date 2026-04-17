@@ -20,9 +20,9 @@
   "has_harmonic_filter": false,
   "performance_score": 45.5,
   "notable": "The battery that started it all. Born from Elon Musk's famous Twitter bet. Has earned tens of millions in FCAS revenue.",
-  "data_confidence": "good",
-  "last_updated": "2025-03-01",
-  "last_verified": "2025-03-01",
+  "data_confidence": "high",
+  "last_updated": "2026-04-16",
+  "last_verified": "2026-04-16",
   "confidence_score": "70",
   "capex_aud_m": 160.0,
   "capex_source": "RenewEconomy ($89m original + $71m expansion)",
@@ -187,6 +187,59 @@
     {
       "title": "Neoen",
       "url": "https://neoen.com/"
+    }
+  ],
+  "timeline_events": [
+    {
+      "date": "2017-07-01",
+      "date_precision": "month",
+      "event_type": "conceived",
+      "title": "Project announced after Elon Musk Twitter bet",
+      "detail": "Tesla CEO bet the system would be built within 100 days or it would be free. Original capacity 100MW/129MWh.",
+      "sources": [
+        {
+          "title": "RenewEconomy",
+          "url": "https://reneweconomy.com.au/",
+          "source_tier": 2
+        }
+      ]
+    },
+    {
+      "date": "2017-12-01",
+      "date_precision": "month",
+      "event_type": "cod",
+      "title": "Phase 1 operational \u2014 100 MW / 129 MWh",
+      "detail": "Completed within the 100-day deadline. At the time, the largest lithium-ion battery in the world.",
+      "sources": [
+        {
+          "title": "AEMO Generation Information",
+          "url": "https://aemo.com.au"
+        }
+      ]
+    },
+    {
+      "date": "2020-09-01",
+      "date_precision": "month",
+      "event_type": "expansion",
+      "title": "Phase 2 expansion to 150 MW / 194 MWh",
+      "sources": [
+        {
+          "title": "ARENA",
+          "url": "https://arena.gov.au/"
+        }
+      ]
+    },
+    {
+      "date": "2024-03-01",
+      "date_precision": "month",
+      "event_type": "expansion",
+      "title": "Phase 3 expansion to 194 MW",
+      "sources": [
+        {
+          "title": "Neoen",
+          "url": "https://neoen.com/"
+        }
+      ]
     }
   ]
 }

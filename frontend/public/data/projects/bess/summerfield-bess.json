@@ -15,7 +15,7 @@
   "has_statcom": false,
   "has_harmonic_filter": false,
   "notable": "Staged build: 400 MW total. Main (240 MW) construction, North (160 MW) development.",
-  "data_confidence": "good",
+  "data_confidence": "low",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "2584",
@@ -123,22 +123,7 @@
       "url": "https://aemo.com.au/energy-systems/electricity/national-electricity-market-nem/nem-forecasting-and-planning/forecasting-and-planning-data/generation-information",
       "date": "2026-01-30",
       "source_tier": 1
-    },
-    {
-      "title": "Summerfield Battery \u2014 Official",
-      "url": "https://www.summerfieldbattery.com.au/",
-      "source_tier": 2
-    },
-    {
-      "title": "Energy-Storage.News \u2014 CIP 960 MWh",
-      "url": "https://www.energy-storage.news/copenhagen-infrastructure-partners-kicks-off-960mwh-south-australia-battery-storage-project/",
-      "source_tier": 2
-    },
-    {
-      "title": "EPBC Referral 2023/09475",
-      "url": "https://epbcpublicportal.environment.gov.au/all-referrals/#!/referral/2023-09475",
-      "date": "2026-03-12",
-      "source_tier": 1
     }
-  ]
+  ],
+  "timeline_events": []
 }

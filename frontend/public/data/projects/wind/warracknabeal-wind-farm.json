@@ -13,8 +13,8 @@
   "has_syncon": false,
   "has_statcom": false,
   "has_harmonic_filter": false,
-  "data_confidence": "medium",
-  "last_updated": "2026-04-01",
+  "data_confidence": "low",
+  "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "1636",
   "confidence_score": "31",
@@ -51,12 +51,7 @@
       "url": "https://aemo.com.au/energy-systems/electricity/national-electricity-market-nem/nem-forecasting-and-planning/forecasting-and-planning-data/generation-information",
       "date": "2026-01-30",
       "source_tier": 1
-    },
-    {
-      "title": "EPBC Referral 2023/09546",
-      "url": "https://epbcpublicportal.environment.gov.au/all-referrals/#!/referral/2023-09546",
-      "date": "2026-03-12",
-      "source_tier": 1
     }
-  ]
+  ],
+  "timeline_events": []
 }

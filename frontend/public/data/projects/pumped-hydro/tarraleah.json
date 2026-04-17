@@ -15,7 +15,7 @@
   "has_harmonic_filter": false,
   "performance_score": 88.8,
   "notable": "90 MW heritage-listed underground hydro in Tasmania's Central Highlands, part of the Upper Derwent Scheme. First units 1938, remaining by 1951. Art Deco style. Hydro Tasmania has proposed A$2B+ redevelopment to increase to 190 MW and deliver 30% more energy from the same water.",
-  "data_confidence": "medium",
+  "data_confidence": "low",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "1200",
@@ -66,5 +66,6 @@
       "date": "2026-01-30",
       "source_tier": 1
     }
-  ]
+  ],
+  "timeline_events": []
 }

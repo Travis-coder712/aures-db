@@ -17,7 +17,7 @@
   "has_harmonic_filter": false,
   "performance_score": 51.8,
   "notable": "The 'Tesla Big Battery' \u2014 world's largest lithium-ion battery when commissioned in November 2017 at 100 MW / 129 MWh, expanded to 150 MW / 194 MWh in 2020. First large-scale BESS in the NEM. First big battery globally to provide inertia grid services at scale via Tesla Virtual Machine Mode, supplying ~2,000 MWs of equivalent inertia to SA's grid.",
-  "data_confidence": "good",
+  "data_confidence": "low",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "1610",
@@ -71,5 +71,6 @@
       "date": "2026-01-30",
       "source_tier": 1
     }
-  ]
+  ],
+  "timeline_events": []
 }

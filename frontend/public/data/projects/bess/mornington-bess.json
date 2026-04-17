@@ -15,9 +15,9 @@
   "has_statcom": false,
   "has_harmonic_filter": false,
   "notable": "Staged build: 540 MW total. Stage 1 (240 MW) CIS T3 commissioning, Stage 2 (300 MW) development.",
-  "data_confidence": "good",
-  "last_updated": "2026-03-10",
-  "last_verified": "2026-03-10",
+  "data_confidence": "low",
+  "last_updated": "2026-04-16",
+  "last_verified": "2026-04-16",
   "aemo_gen_info_id": "1945",
   "confidence_score": "67",
   "first_seen": "2022-01-01",
@@ -133,21 +133,7 @@
       "url": "https://aemo.com.au/energy-systems/electricity/national-electricity-market-nem/nem-forecasting-and-planning/forecasting-and-planning-data/generation-information",
       "date": "2026-01-30",
       "source_tier": 1
-    },
-    {
-      "title": "Mornington BESS \u2014 Official",
-      "url": "https://morningtonbess.com.au/",
-      "source_tier": 2
-    },
-    {
-      "title": "AusNet \u2014 Mornington BESS",
-      "url": "https://www.ausnetservices.com.au/projects-and-innovation/battery-storage/mornington-battery-energy-storage-system",
-      "source_tier": 2
-    },
-    {
-      "title": "RenewablesNow \u2014 Commissioning",
-      "url": "https://renewablesnow.com/news/valents-240-mw-mornington-battery-enters-commissioning-in-victoria-1283358/",
-      "source_tier": 2
     }
-  ]
+  ],
+  "timeline_events": []
 }

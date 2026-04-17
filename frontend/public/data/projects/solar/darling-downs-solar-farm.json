@@ -15,7 +15,7 @@
   "has_harmonic_filter": false,
   "performance_score": 28.2,
   "notable": "110 MW solar farm near Dalby, QLD. Developed by APA Group \u2014 one of Australia's first utility-scale solar farms built by a major pipeline/infrastructure company. Has a 12-year PPA with Origin Energy.",
-  "data_confidence": "medium",
+  "data_confidence": "low",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "1545",
@@ -70,5 +70,6 @@
       "date": "2026-01-30",
       "source_tier": 1
     }
-  ]
+  ],
+  "timeline_events": []
 }

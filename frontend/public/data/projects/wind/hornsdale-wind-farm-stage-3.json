@@ -16,7 +16,7 @@
   "has_harmonic_filter": false,
   "performance_score": 58.7,
   "notable": "100 MW \u2014 third and final stage of Neoen's 315 MW Hornsdale Wind Farm. Co-located with the Hornsdale Power Reserve (world's first large-scale grid battery at commissioning). Central to Neoen's Australian operations near Jamestown, SA.",
-  "data_confidence": "medium",
+  "data_confidence": "low",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "1381",
@@ -80,5 +80,6 @@
       "date": "2026-01-30",
       "source_tier": 1
     }
-  ]
+  ],
+  "timeline_events": []
 }

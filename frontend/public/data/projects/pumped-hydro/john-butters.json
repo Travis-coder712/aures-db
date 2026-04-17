@@ -15,7 +15,7 @@
   "has_harmonic_filter": false,
   "performance_score": 87.5,
   "notable": "144 MW conventional hydro in western Tasmania, fed from Lake Burbury via Crotty Dam. Single Fuji Francis turbine. Commissioned 1992 \u2014 one of the last major Tasmanian stations before HEC restructuring into Hydro Tasmania. Named after Hydro Tasmania's first general manager.",
-  "data_confidence": "medium",
+  "data_confidence": "low",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "1097",
@@ -66,5 +66,6 @@
       "date": "2026-01-30",
       "source_tier": 1
     }
-  ]
+  ],
+  "timeline_events": []
 }

@@ -17,7 +17,7 @@
   "has_harmonic_filter": true,
   "performance_score": 55.0,
   "notable": "250 MW / 250 MWh BESS at AGL's Torrens Island gas plant site in SA. W\u00e4rtsil\u00e4-supplied system completed in 18 months, designed for Virtual Synchronous Generator (VSG) grid-forming operation \u2014 the largest BESS globally capable of VSG at time of commissioning.",
-  "data_confidence": "good",
+  "data_confidence": "low",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "1866",
@@ -149,5 +149,6 @@
       "date": "2026-01-30",
       "source_tier": 1
     }
-  ]
+  ],
+  "timeline_events": []
 }

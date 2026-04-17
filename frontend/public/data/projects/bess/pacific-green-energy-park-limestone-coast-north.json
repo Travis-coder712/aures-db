@@ -12,16 +12,31 @@
   "has_syncon": false,
   "has_statcom": false,
   "has_harmonic_filter": false,
-  "data_confidence": "low",
-  "last_updated": "2026-04-01",
-  "last_verified": "2026-03-10",
+  "data_confidence": "good",
+  "last_updated": "2026-04-16",
+  "last_verified": "2026-04-16",
   "aemo_gen_info_id": "2522",
   "confidence_score": "20",
   "development_stage": "planning_submitted",
   "timeline": [],
-  "ownership_history": [],
+  "ownership_history": [
+    {
+      "date": "2025-03",
+      "owner": "Intera Renewables",
+      "event": "Purchased from Pacific Green for A$460M."
+    }
+  ],
   "cod_history": [],
-  "suppliers": [],
+  "suppliers": [
+    {
+      "role": "bop",
+      "company": "Gransolar"
+    },
+    {
+      "role": "battery_modules",
+      "company": "Trina Storage"
+    }
+  ],
   "offtakes": [],
   "scheme_contracts": [],
   "cost_sources": [],
@@ -33,5 +48,8 @@
       "date": "2026-01-30",
       "source_tier": 1
     }
-  ]
+  ],
+  "timeline_events": [],
+  "current_owner": "Intera Renewables",
+  "duration_hours": 2.0
 }

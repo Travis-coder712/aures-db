@@ -15,7 +15,7 @@
   "has_statcom": false,
   "has_harmonic_filter": false,
   "notable": "Canadian Solar e-STORAGE SolBank 3.0. ~100 battery containers. CPP BoP.",
-  "data_confidence": "good",
+  "data_confidence": "low",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "2436",
@@ -92,11 +92,7 @@
       "url": "https://aemo.com.au/energy-systems/electricity/national-electricity-market-nem/nem-forecasting-and-planning/forecasting-and-planning-data/generation-information",
       "date": "2026-01-30",
       "source_tier": 1
-    },
-    {
-      "title": "Vena Energy \u2014 Tailem Bend 3",
-      "url": "https://www.energy-storage.news/vena-energy-builds-408mwh-bess-at-third-phase-of-south-australia-renewable-energy-project/",
-      "source_tier": 2
     }
-  ]
+  ],
+  "timeline_events": []
 }

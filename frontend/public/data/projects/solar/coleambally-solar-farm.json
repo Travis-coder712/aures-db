@@ -15,7 +15,7 @@
   "has_harmonic_filter": false,
   "performance_score": 69.2,
   "notable": "88 MW solar farm near Coleambally in the Riverina, NSW. Now owned by Octopus Renewables. Has a PPA with EnergyAustralia.",
-  "data_confidence": "medium",
+  "data_confidence": "low",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "1420",
@@ -71,5 +71,6 @@
       "date": "2026-01-30",
       "source_tier": 1
     }
-  ]
+  ],
+  "timeline_events": []
 }

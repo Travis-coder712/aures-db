@@ -15,7 +15,7 @@
   "has_harmonic_filter": false,
   "performance_score": 54.1,
   "notable": "95 MW solar farm near Port Augusta, SA. Stage 1 of the 190 MW Bungala Solar Power Project. Developed by ENEL Green Power / DIF Capital Partners. One of the first utility-scale solar projects in the Port Augusta renewable energy precinct.",
-  "data_confidence": "medium",
+  "data_confidence": "low",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "1589",
@@ -76,5 +76,6 @@
       "date": "2026-01-30",
       "source_tier": 1
     }
-  ]
+  ],
+  "timeline_events": []
 }

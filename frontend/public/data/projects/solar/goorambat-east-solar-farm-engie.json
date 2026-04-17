@@ -14,7 +14,7 @@
   "has_statcom": false,
   "has_harmonic_filter": false,
   "notable": "250 MW solar farm near Benalla, VIC. Located in the Murray River REZ.",
-  "data_confidence": "medium",
+  "data_confidence": "low",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "2793",
@@ -48,5 +48,6 @@
       "date": "2026-01-30",
       "source_tier": 1
     }
-  ]
+  ],
+  "timeline_events": []
 }

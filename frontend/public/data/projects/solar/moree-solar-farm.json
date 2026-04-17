@@ -15,7 +15,7 @@
   "has_harmonic_filter": false,
   "performance_score": 84.1,
   "notable": "150 MW solar farm near Moree, NSW. One of the earliest large-scale solar farms in the New England REZ. Now owned by Tilt Renewables.",
-  "data_confidence": "medium",
+  "data_confidence": "low",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "1318",
@@ -77,5 +77,6 @@
       "date": "2026-01-30",
       "source_tier": 1
     }
-  ]
+  ],
+  "timeline_events": []
 }

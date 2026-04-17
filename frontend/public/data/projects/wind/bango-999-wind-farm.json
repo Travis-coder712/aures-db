@@ -16,7 +16,7 @@
   "has_harmonic_filter": false,
   "performance_score": 54.2,
   "notable": "First deployment of GE Cypress 5.3-158 turbines globally. 16 turbines. Woolworths PPA for ~108 NSW supermarkets.",
-  "data_confidence": "good",
+  "data_confidence": "low",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "1843",
@@ -78,5 +78,6 @@
       "date": "2026-01-30",
       "source_tier": 1
     }
-  ]
+  ],
+  "timeline_events": []
 }

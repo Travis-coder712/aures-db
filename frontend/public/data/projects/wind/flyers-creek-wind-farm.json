@@ -16,7 +16,7 @@
   "has_harmonic_filter": false,
   "performance_score": 63.5,
   "notable": "38x GE 3.8-137 turbines. Iberdrola Australia developed. Located near Orange, NSW.",
-  "data_confidence": "good",
+  "data_confidence": "low",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "1268",
@@ -86,5 +86,6 @@
       "date": "2026-01-30",
       "source_tier": 1
     }
-  ]
+  ],
+  "timeline_events": []
 }

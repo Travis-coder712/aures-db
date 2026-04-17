@@ -16,7 +16,7 @@
   "has_harmonic_filter": false,
   "performance_score": 63.3,
   "notable": "75x Vestas V117-3.6MW. ACT Govt 20yr PPA + CBA 12yr corporate PPA. Located in New England REZ.",
-  "data_confidence": "good",
+  "data_confidence": "low",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "1270",
@@ -145,5 +145,6 @@
       "date": "2026-01-30",
       "source_tier": 1
     }
-  ]
+  ],
+  "timeline_events": []
 }

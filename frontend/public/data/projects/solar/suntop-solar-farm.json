@@ -15,7 +15,7 @@
   "has_harmonic_filter": false,
   "performance_score": 70.8,
   "notable": "150 MW solar farm near Orange, NSW. Developed by Canadian Solar / Recurrent Energy. Located in the Central-West Orana REZ.",
-  "data_confidence": "medium",
+  "data_confidence": "low",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "1586",
@@ -77,5 +77,6 @@
       "date": "2026-01-30",
       "source_tier": 1
     }
-  ]
+  ],
+  "timeline_events": []
 }

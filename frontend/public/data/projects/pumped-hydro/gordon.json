@@ -15,7 +15,7 @@
   "has_harmonic_filter": false,
   "performance_score": 35.0,
   "notable": "Tasmania's largest power station at 432 MW (three 144 MW Francis turbines), 183m underground in western Tasmania. Gordon Dam is a 140m high concrete arch, completed 1974. Supplies ~13% of Tasmania's electricity. Undergoing its most extensive upgrade program in history (commenced 2024).",
-  "data_confidence": "medium",
+  "data_confidence": "low",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "1081",
@@ -73,5 +73,6 @@
       "date": "2026-01-30",
       "source_tier": 1
     }
-  ]
+  ],
+  "timeline_events": []
 }

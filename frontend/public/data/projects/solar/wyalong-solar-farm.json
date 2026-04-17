@@ -15,7 +15,7 @@
   "has_harmonic_filter": false,
   "performance_score": 71.3,
   "notable": "53 MW solar farm near West Wyalong, NSW. Part of a cluster of solar developments in central western NSW.",
-  "data_confidence": "medium",
+  "data_confidence": "low",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "1865",
@@ -64,5 +64,6 @@
       "date": "2026-01-30",
       "source_tier": 1
     }
-  ]
+  ],
+  "timeline_events": []
 }

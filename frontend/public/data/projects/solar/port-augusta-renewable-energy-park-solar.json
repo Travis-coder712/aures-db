@@ -15,7 +15,7 @@
   "has_harmonic_filter": false,
   "performance_score": 74.1,
   "notable": "107 MW solar component of the Port Augusta Renewable Energy Park, SA. Co-located with 210 MW wind \u2014 one of Australia's largest hybrid renewable energy parks. Developed by DP Energy / Iberdrola.",
-  "data_confidence": "medium",
+  "data_confidence": "low",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "1392",
@@ -76,5 +76,6 @@
       "date": "2026-01-30",
       "source_tier": 1
     }
-  ]
+  ],
+  "timeline_events": []
 }

@@ -15,7 +15,7 @@
   "has_harmonic_filter": false,
   "performance_score": 40.3,
   "notable": "116 MW solar farm near Townsville, QLD. Owned by Palisade Investment Partners. One of the first large-scale solar farms in the Townsville region.",
-  "data_confidence": "medium",
+  "data_confidence": "low",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "1401",
@@ -76,5 +76,6 @@
       "date": "2026-01-30",
       "source_tier": 1
     }
-  ]
+  ],
+  "timeline_events": []
 }

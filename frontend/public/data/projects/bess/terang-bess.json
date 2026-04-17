@@ -15,8 +15,8 @@
   "has_statcom": false,
   "has_harmonic_filter": false,
   "notable": "108 MW wind farm near Terang, VIC. Located in the Western Victoria renewable energy zone.",
-  "data_confidence": "medium",
-  "last_updated": "2026-04-01",
+  "data_confidence": "low",
+  "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "2168",
   "confidence_score": "48",
@@ -63,5 +63,6 @@
       "date": "2026-01-30",
       "source_tier": 1
     }
-  ]
+  ],
+  "timeline_events": []
 }

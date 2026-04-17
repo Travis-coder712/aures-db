@@ -15,7 +15,7 @@
   "has_harmonic_filter": false,
   "performance_score": 68.1,
   "notable": "Underground hydro station in NW Tasmania, fifth in the Mersey-Forth scheme. Single Fuji Francis turbine, ~95 MW. Commissioned 1971 by HEC. Hydro Tasmania has proposed a pumped hydro extension (Cethana Pumped Hydro) at the site.",
-  "data_confidence": "good",
+  "data_confidence": "low",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "1043",
@@ -74,12 +74,7 @@
       "url": "https://aemo.com.au/energy-systems/electricity/national-electricity-market-nem/nem-forecasting-and-planning/forecasting-and-planning-data/generation-information",
       "date": "2026-01-30",
       "source_tier": 1
-    },
-    {
-      "title": "EPBC Referral 2023/09613",
-      "url": "https://epbcpublicportal.environment.gov.au/all-referrals/#!/referral/2023-09613",
-      "date": "2026-03-12",
-      "source_tier": 1
     }
-  ]
+  ],
+  "timeline_events": []
 }

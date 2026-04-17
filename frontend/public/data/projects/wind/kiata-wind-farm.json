@@ -15,7 +15,7 @@
   "has_harmonic_filter": false,
   "performance_score": 83.0,
   "notable": "31 MW, 9 Vestas V126-3.45 MW turbines, 50 km NW of Horsham, VIC. Developed by Windlab; now owned by Atmos Renewables. Set a 65% monthly capacity factor record for a Victorian wind farm. COD December 2017.",
-  "data_confidence": "medium",
+  "data_confidence": "low",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "1382",
@@ -65,5 +65,6 @@
       "date": "2026-01-30",
       "source_tier": 1
     }
-  ]
+  ],
+  "timeline_events": []
 }

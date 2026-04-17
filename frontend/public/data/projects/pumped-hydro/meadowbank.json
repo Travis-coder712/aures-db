@@ -15,7 +15,7 @@
   "has_harmonic_filter": false,
   "performance_score": 66.2,
   "notable": "50 MW hydro in Tasmania's Central Highlands, part of the Derwent scheme. One of eleven stations in the cascaded Derwent river system. Hydro Tasmania.",
-  "data_confidence": "medium",
+  "data_confidence": "low",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "1133",
@@ -66,5 +66,6 @@
       "date": "2026-01-30",
       "source_tier": 1
     }
-  ]
+  ],
+  "timeline_events": []
 }

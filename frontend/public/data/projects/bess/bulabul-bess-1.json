@@ -16,7 +16,7 @@
   "has_statcom": false,
   "has_harmonic_filter": false,
   "notable": "Staged build: 400 MW total. Stage 1 (300 MW) CIS T3, Stage 2 (100 MW) development.",
-  "data_confidence": "good",
+  "data_confidence": "low",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "3025",
@@ -116,21 +116,7 @@
       "url": "https://aemo.com.au/energy-systems/electricity/national-electricity-market-nem/nem-forecasting-and-planning/forecasting-and-planning-data/generation-information",
       "date": "2026-01-30",
       "source_tier": 1
-    },
-    {
-      "title": "Ampyr \u2014 Bulabul Battery",
-      "url": "https://www.ampyr.com.au/our-projects/bulabul-battery/",
-      "source_tier": 2
-    },
-    {
-      "title": "Fluence \u2014 Wellington BESS",
-      "url": "https://ir.fluenceenergy.com/news-releases/news-release-details/fluence-chosen-300-mw-600-mwh-wellington-battery-energy-storage",
-      "source_tier": 2
-    },
-    {
-      "title": "Energy-Storage.News \u2014 Ampyr Construction",
-      "url": "https://www.energy-storage.news/ampyr-australia-starts-construction-on-600mwh-bess-in-new-south-wales/",
-      "source_tier": 2
     }
-  ]
+  ],
+  "timeline_events": []
 }

@@ -17,9 +17,9 @@
   "has_harmonic_filter": false,
   "performance_score": 15.3,
   "notable": "Tesla Megapack 2 grid-forming. A$200M. Completed 5 months early (Jan 2026). Gunvor offtake.",
-  "data_confidence": "high",
-  "last_updated": "2026-03-10",
-  "last_verified": "2026-03-10",
+  "data_confidence": "medium",
+  "last_updated": "2026-04-16",
+  "last_verified": "2026-04-16",
   "aemo_gen_info_id": "2526",
   "confidence_score": "80",
   "capex_aud_m": 300.0,
@@ -121,16 +121,16 @@
       "url": "https://aemo.com.au/energy-systems/electricity/national-electricity-market-nem/nem-forecasting-and-planning/forecasting-and-planning-data/generation-information",
       "date": "2026-01-30",
       "source_tier": 1
-    },
-    {
-      "title": "Akaysha \u2014 Brendale Ground-breaking",
-      "url": "https://akayshaenergy.com/news/sod-turned-on-akaysha-energys-200m-brendale-bess",
-      "source_tier": 2
-    },
-    {
-      "title": "Akaysha \u2014 Gunvor Offtake",
-      "url": "https://akayshaenergy.com/news/akaysha-energy-gunvor-group-sign-offtake-agreement",
-      "source_tier": 2
     }
-  ]
+  ],
+  "timeline_events": [
+    {
+      "date": "2025-06",
+      "date_precision": "month",
+      "event_type": "cod",
+      "title": "Stage 1 achieves commercial operations",
+      "detail": "Supernode/Quinbrook: Brendale BESS Stage 1 achieved commercial operations mid-2025."
+    }
+  ],
+  "current_owner": "Quinbrook Infrastructure Partners"
 }

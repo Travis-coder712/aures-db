@@ -16,7 +16,7 @@
   "has_harmonic_filter": false,
   "performance_score": 61.8,
   "notable": "113 MW, 33 GE 3.43-130 turbines, 15 km east of Wellington in central NSW. Developed by Iberdrola Australia (formerly Infigen Energy). 60% output PPA with EnergyAustralia through 2030. COD February 2019.",
-  "data_confidence": "medium",
+  "data_confidence": "low",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "1259",
@@ -73,5 +73,6 @@
       "date": "2026-01-30",
       "source_tier": 1
     }
-  ]
+  ],
+  "timeline_events": []
 }

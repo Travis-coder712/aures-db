@@ -16,7 +16,7 @@
   "has_harmonic_filter": false,
   "performance_score": 76.5,
   "notable": "113 MW, 67 GE turbines (58x 1.7 MW + 9x 1.62 MW) near Nimmitabel, NSW Snowy Mountains. CWP Renewables / Asia Pacific Renewables. 15-year PPA with EnergyAustralia. Downer EDI as EPC. COD November 2014.",
-  "data_confidence": "good",
+  "data_confidence": "low",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "1022",
@@ -81,12 +81,7 @@
       "url": "https://aemo.com.au/energy-systems/electricity/national-electricity-market-nem/nem-forecasting-and-planning/forecasting-and-planning-data/generation-information",
       "date": "2026-01-30",
       "source_tier": 1
-    },
-    {
-      "title": "EPBC Referral 2009/4905",
-      "url": "https://epbcpublicportal.environment.gov.au/all-referrals/#!/referral/2009-4905",
-      "date": "2026-03-12",
-      "source_tier": 1
     }
-  ]
+  ],
+  "timeline_events": []
 }

@@ -15,7 +15,7 @@
   "has_statcom": false,
   "has_harmonic_filter": false,
   "notable": "Hithium cells + SMA inverters. Samsung C&T EPC. ARENA A$15M grid-forming grant.",
-  "data_confidence": "good",
+  "data_confidence": "low",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "1912",
@@ -118,21 +118,7 @@
       "url": "https://aemo.com.au/energy-systems/electricity/national-electricity-market-nem/nem-forecasting-and-planning/forecasting-and-planning-data/generation-information",
       "date": "2026-01-30",
       "source_tier": 1
-    },
-    {
-      "title": "FRV \u2014 Gnarwarre Financial Close",
-      "url": "https://frv.com/en/frv-australia-completes-financial-close-of-the-250mw-500mwh-gnarwarre-battery-project/",
-      "source_tier": 2
-    },
-    {
-      "title": "ARENA \u2014 Gnarwarre BESS",
-      "url": "https://arena.gov.au/projects/gnarwarre-bess-project/",
-      "source_tier": 2
-    },
-    {
-      "title": "Gnarwarre BESS \u2014 Official",
-      "url": "https://gnarwarrebess.com/",
-      "source_tier": 2
     }
-  ]
+  ],
+  "timeline_events": []
 }

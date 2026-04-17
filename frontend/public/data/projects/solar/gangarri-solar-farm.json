@@ -14,8 +14,8 @@
   "has_statcom": false,
   "has_harmonic_filter": false,
   "notable": "120 MW solar farm near Miles, QLD. Developed by Acciona Energ\u00eda.",
-  "data_confidence": "medium",
-  "last_updated": "2026-04-01",
+  "data_confidence": "low",
+  "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "1538",
   "confidence_score": "43",
@@ -48,5 +48,6 @@
       "date": "2026-01-30",
       "source_tier": 1
     }
-  ]
+  ],
+  "timeline_events": []
 }

@@ -15,7 +15,7 @@
   "has_harmonic_filter": false,
   "performance_score": 41.8,
   "notable": "~80 MW, 39 Senvion MM92 turbines in Victoria's Pyrenees Shire. Owned by Pacific Hydro (State Power Investment Corporation of China). COD January 2019.",
-  "data_confidence": "medium",
+  "data_confidence": "low",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "1566",
@@ -72,5 +72,6 @@
       "date": "2026-01-30",
       "source_tier": 1
     }
-  ]
+  ],
+  "timeline_events": []
 }

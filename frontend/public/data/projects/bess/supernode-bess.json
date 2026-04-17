@@ -15,7 +15,7 @@
   "has_statcom": false,
   "has_harmonic_filter": false,
   "notable": "Staged build: 1,300 MW / 2.6 GWh total. Stage 1 operating (Origin tolling), Stage 2 construction, Stages 3-5 development.",
-  "data_confidence": "good",
+  "data_confidence": "low",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "2431",
@@ -168,26 +168,7 @@
       "url": "https://aemo.com.au/energy-systems/electricity/national-electricity-market-nem/nem-forecasting-and-planning/forecasting-and-planning-data/generation-information",
       "date": "2026-01-30",
       "source_tier": 1
-    },
-    {
-      "title": "Quinbrook \u2014 Supernode Stage 1 Ops",
-      "url": "https://www.quinbrook.com/news-insights/supernode-stage-1-commences-commercial-operations/",
-      "source_tier": 2
-    },
-    {
-      "title": "Quinbrook \u2014 Fully Contracts Supernode",
-      "url": "https://www.quinbrook.com/news-insights/quinbrook-fully-contracts-supernode-battery-storage-project/",
-      "source_tier": 2
-    },
-    {
-      "title": "NuEnergy \u2014 Supernode Partnership",
-      "url": "https://nuenergy.au/nuenergy-landmark-supernode-battery-storage-project/",
-      "source_tier": 2
-    },
-    {
-      "title": "Energy-Storage.News \u2014 Stage 1",
-      "url": "https://www.energy-storage.news/quinbrook-powers-up-619mwh-supernode-stage-one-bess-in-queensland-australia/",
-      "source_tier": 2
     }
-  ]
+  ],
+  "timeline_events": []
 }

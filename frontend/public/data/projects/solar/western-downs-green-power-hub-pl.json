@@ -15,7 +15,7 @@
   "has_harmonic_filter": false,
   "performance_score": 60.5,
   "notable": "400 MW solar farm near Chinchilla, QLD \u2014 part of Neoen's Western Downs Green Power Hub. One of Queensland's largest solar installations in the Western Downs energy corridor.",
-  "data_confidence": "medium",
+  "data_confidence": "low",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "2011",
@@ -70,5 +70,6 @@
       "date": "2026-01-30",
       "source_tier": 1
     }
-  ]
+  ],
+  "timeline_events": []
 }

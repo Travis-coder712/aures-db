@@ -15,7 +15,7 @@
   "has_harmonic_filter": false,
   "performance_score": 49.4,
   "notable": "31 MW hydro in the Mersey-Forth catchment, NW Tasmania. Part of the eight-station Mersey-Forth cascade. Hydro Tasmania.",
-  "data_confidence": "medium",
+  "data_confidence": "low",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "1156",
@@ -73,5 +73,6 @@
       "date": "2026-01-30",
       "source_tier": 1
     }
-  ]
+  ],
+  "timeline_events": []
 }

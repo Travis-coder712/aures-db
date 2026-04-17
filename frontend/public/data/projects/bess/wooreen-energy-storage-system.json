@@ -15,7 +15,7 @@
   "has_statcom": false,
   "has_harmonic_filter": false,
   "notable": "Wartsila Quantum High Energy. A$700M. CIS Round 1 winner. Replaces Yallourn coal (retires mid-2028).",
-  "data_confidence": "good",
+  "data_confidence": "low",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "1876",
@@ -123,21 +123,7 @@
       "url": "https://aemo.com.au/energy-systems/electricity/national-electricity-market-nem/nem-forecasting-and-planning/forecasting-and-planning-data/generation-information",
       "date": "2026-01-30",
       "source_tier": 1
-    },
-    {
-      "title": "EnergyAustralia \u2014 Wooreen",
-      "url": "https://www.energyaustralia.com.au/about-us/what-we-do/new-energy-projects/wooreen-energy-storage-system",
-      "source_tier": 2
-    },
-    {
-      "title": "Wartsila \u2014 350 MW / 1,474 MWh",
-      "url": "https://www.wartsila.com/media/news/28-02-2025-wartsila-will-provide-a-350-mw-1474-mwh-energy-storage-system-for-one-of-australia-s-largest-energy-providers-3555089",
-      "source_tier": 2
-    },
-    {
-      "title": "Zenviron \u2014 Wooreen BoP",
-      "url": "https://www.energy-storage.news/zenviron-wins-contract-for-350mw-4-hour-bess-in-victoria-australia/",
-      "source_tier": 2
     }
-  ]
+  ],
+  "timeline_events": []
 }

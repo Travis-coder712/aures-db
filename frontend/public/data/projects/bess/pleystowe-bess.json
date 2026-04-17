@@ -12,9 +12,9 @@
   "has_syncon": false,
   "has_statcom": false,
   "has_harmonic_filter": false,
-  "data_confidence": "low",
-  "last_updated": "2026-04-01",
-  "last_verified": "2026-03-10",
+  "data_confidence": "medium",
+  "last_updated": "2026-04-16",
+  "last_verified": "2026-04-16",
   "aemo_gen_info_id": "2806",
   "confidence_score": "20",
   "development_stage": "planning_submitted",
@@ -32,6 +32,26 @@
       "url": "https://aemo.com.au/energy-systems/electricity/national-electricity-market-nem/nem-forecasting-and-planning/forecasting-and-planning-data/generation-information",
       "date": "2026-01-30",
       "source_tier": 1
+    },
+    {
+      "title": "Pleystowe BESS project website",
+      "url": "https://pleystowebess.com.au/",
+      "source_tier": 1
+    },
+    {
+      "title": "RenewEconomy \u2014 China giant scraps plan for big battery called in by state LNP",
+      "url": "https://reneweconomy.com.au/fresh-blow-to-queensland-renewables-as-china-giant-scraps-plan-for-big-battery-called-in-by-state-lnp/",
+      "source_tier": 2
     }
-  ]
+  ],
+  "timeline_events": [
+    {
+      "date": "2026-01",
+      "date_precision": "month",
+      "event_type": "notable",
+      "title": "Development application withdrawn",
+      "detail": "Trina Solar withdrew DA after QLD Planning Minister called it in following 733 submissions. Trina stated it will continue community engagement but has not re-lodged. Project effectively stalled."
+    }
+  ],
+  "duration_hours": 4.0
 }

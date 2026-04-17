@@ -15,7 +15,7 @@
   "has_harmonic_filter": false,
   "performance_score": 43.3,
   "notable": "221 MW solar farm near Wagga Wagga, NSW. Developed by Canadian Solar / Recurrent Energy using Canadian Solar BiHiKu bifacial modules. One of the early large-scale bifacial deployments in Australia.",
-  "data_confidence": "medium",
+  "data_confidence": "low",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "1554",
@@ -76,5 +76,6 @@
       "date": "2026-01-30",
       "source_tier": 1
     }
-  ]
+  ],
+  "timeline_events": []
 }

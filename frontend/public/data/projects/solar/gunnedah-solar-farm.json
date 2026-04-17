@@ -15,7 +15,7 @@
   "has_harmonic_filter": false,
   "performance_score": 71.5,
   "notable": "110 MW solar farm near Gunnedah, NSW. Developed by Canadian Solar / Recurrent Energy.",
-  "data_confidence": "medium",
+  "data_confidence": "low",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "1585",
@@ -77,5 +77,6 @@
       "date": "2026-01-30",
       "source_tier": 1
     }
-  ]
+  ],
+  "timeline_events": []
 }

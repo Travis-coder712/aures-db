@@ -16,8 +16,8 @@
   "has_syncon": false,
   "has_statcom": false,
   "has_harmonic_filter": false,
-  "notable": "Staged build: 1,610 MW total (1,310 MW wind + 300 MW BESS). East commissioning, West construction, BESS in development.",
-  "data_confidence": "high",
+  "notable": "At 1,300MW across two stages, this will be one of the largest wind farms in the Southern Hemisphere when complete. Uses 228 Vestas turbines.",
+  "data_confidence": "good",
   "last_updated": "2025-03-01",
   "last_verified": "2025-03-01",
   "confidence_score": "80",
@@ -241,32 +241,47 @@
     {
       "title": "AEMO Generation Information",
       "url": "https://aemo.com.au"
+    }
+  ],
+  "timeline_events": [
+    {
+      "date": "2018-01-01",
+      "date_precision": "year",
+      "event_type": "conceived",
+      "title": "Project conceived by WestWind Energy",
+      "sources": [
+        {
+          "title": "AEMO Generation Information",
+          "url": "https://aemo.com.au"
+        }
+      ]
     },
     {
-      "title": "Golden Plains Wind Farm \u2014 Official",
-      "url": "https://goldenplainswindfarm.com.au/about-golden-plains-wind-farm/",
-      "source_tier": 2
+      "date": "2020-09-01",
+      "date_precision": "month",
+      "event_type": "planning_approved",
+      "title": "Planning approval granted",
+      "detail": "Victorian Government planning approval for 228 turbines across two stages",
+      "sources": [
+        {
+          "title": "Victorian Planning",
+          "url": "https://www.planning.vic.gov.au/"
+        }
+      ]
     },
     {
-      "title": "TagEnergy \u2014 Stage 2 Financial Close",
-      "url": "https://tag-en.com/construction-to-begin-as-golden-plains-wind-farm-stage-2-reaches-financial-close/",
-      "source_tier": 2
-    },
-    {
-      "title": "Vestas \u2014 577 MW Stage 2 Order",
-      "url": "https://www.vestas.com/en/media/company-news/2024/vestas-receives-577-mw-order-in-australia-for-second-st-c4003383",
-      "source_tier": 2
-    },
-    {
-      "title": "EnergyAustralia \u2014 PPA",
-      "url": "https://www.energyaustralia.com.au/about-us/media/news/energyaustralia-take-significant-share-energy-golden-plains-wind-farm-stage-2",
-      "source_tier": 2
-    },
-    {
-      "title": "EPBC Referral 2017/7965",
-      "url": "https://epbcpublicportal.environment.gov.au/all-referrals/#!/referral/2017-7965",
-      "date": "2026-03-12",
-      "source_tier": 1
+      "date": "2023-06-01",
+      "date_precision": "month",
+      "event_type": "construction_start",
+      "title": "Stage 1 construction commenced",
+      "detail": "Construction began on 122-turbine Stage 1 (756MW)",
+      "sources": [
+        {
+          "title": "RenewEconomy",
+          "url": "https://reneweconomy.com.au/",
+          "source_tier": 2
+        }
+      ]
     }
   ]
 }

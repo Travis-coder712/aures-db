@@ -15,7 +15,7 @@
   "has_harmonic_filter": false,
   "performance_score": 72.6,
   "notable": "74 MW solar farm at Broken Hill, NSW. Developed by AGL Energy. Co-located in the same area as the Broken Hill BESS. One of the earliest large-scale solar plants in far western NSW.",
-  "data_confidence": "good",
+  "data_confidence": "low",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "1266",
@@ -85,12 +85,7 @@
       "url": "https://aemo.com.au/energy-systems/electricity/national-electricity-market-nem/nem-forecasting-and-planning/forecasting-and-planning-data/generation-information",
       "date": "2026-01-30",
       "source_tier": 1
-    },
-    {
-      "title": "EPBC Referral 2012/6621",
-      "url": "https://epbcpublicportal.environment.gov.au/all-referrals/#!/referral/2012-6621",
-      "date": "2026-03-12",
-      "source_tier": 1
     }
-  ]
+  ],
+  "timeline_events": []
 }

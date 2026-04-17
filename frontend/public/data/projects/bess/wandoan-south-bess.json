@@ -17,7 +17,7 @@
   "has_harmonic_filter": false,
   "performance_score": 56.9,
   "notable": "100 MW / 150 MWh BESS \u2014 Queensland's largest utility-scale battery at time of commissioning (September 2021). A$120M Stage 1 of Vena Energy's broader 650 MW solar / 450 MW storage Wandoan South Project. Samsung SDI M3 modules with Doosan GridTech Intelligent Controller. AGL holds full operational dispatch rights.",
-  "data_confidence": "good",
+  "data_confidence": "low",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "1762",
@@ -93,5 +93,6 @@
       "date": "2026-01-30",
       "source_tier": 1
     }
-  ]
+  ],
+  "timeline_events": []
 }

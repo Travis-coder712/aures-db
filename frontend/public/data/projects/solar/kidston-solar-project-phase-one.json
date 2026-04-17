@@ -15,7 +15,7 @@
   "has_harmonic_filter": false,
   "performance_score": 52.6,
   "notable": "54 MW solar farm at the former Kidston gold mine, QLD. Developed by Genex Power as Stage 1 of the Kidston Clean Energy Hub, which also includes the 250 MW Kidston Pumped Storage Hydro project \u2014 a world-first use of a former mine for pumped hydro.",
-  "data_confidence": "medium",
+  "data_confidence": "low",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "1378",
@@ -77,5 +77,6 @@
       "date": "2026-01-30",
       "source_tier": 1
     }
-  ]
+  ],
+  "timeline_events": []
 }

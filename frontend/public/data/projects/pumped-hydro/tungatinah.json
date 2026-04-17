@@ -15,7 +15,7 @@
   "has_harmonic_filter": false,
   "performance_score": 57.5,
   "notable": "125 MW hydro in Tasmania's Central Highlands, second station in the Derwent scheme. Five Boving Francis turbines (1953-1956). Water descends 290m through five steel penstocks from Tungatinah Lagoon. Heritage-listed. Hydro Tasmania.",
-  "data_confidence": "medium",
+  "data_confidence": "low",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "1216",
@@ -73,5 +73,6 @@
       "date": "2026-01-30",
       "source_tier": 1
     }
-  ]
+  ],
+  "timeline_events": []
 }

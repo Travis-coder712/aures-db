@@ -16,7 +16,7 @@
   "has_statcom": false,
   "has_harmonic_filter": false,
   "notable": "Largest committed renewable energy project in Australia. Serial cost blowouts from A$2B to A$12B+. ~70% complete.",
-  "data_confidence": "good",
+  "data_confidence": "low",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "1752",
@@ -109,31 +109,7 @@
       "url": "https://aemo.com.au/energy-systems/electricity/national-electricity-market-nem/nem-forecasting-and-planning/forecasting-and-planning-data/generation-information",
       "date": "2026-01-30",
       "source_tier": 1
-    },
-    {
-      "title": "Snowy Hydro \u2014 Snowy 2.0 Progress",
-      "url": "https://www.snowyhydro.com.au/snowy-20/progress/",
-      "source_tier": 2
-    },
-    {
-      "title": "Webuild \u2014 Snowy 2.0",
-      "url": "https://www.webuildgroup.com/en/projects/dams-hydroelectric-plants/snowy-2-0/",
-      "source_tier": 2
-    },
-    {
-      "title": "Future Generation JV",
-      "url": "https://www.futuregenerationjv.com.au/about-us",
-      "source_tier": 2
-    },
-    {
-      "title": "RenewEconomy \u2014 Snowy 2.0 cost blowout",
-      "url": "https://reneweconomy.com.au/snowy-2-0-pumped-hydro-fiasco-faces-another-major-cost-blowout-analysts-expect-more-delays/",
-      "source_tier": 2
-    },
-    {
-      "title": "Infrastructure Pipeline \u2014 Snowy 2.0",
-      "url": "https://infrastructurepipeline.org/project/snowy-2-0",
-      "source_tier": 2
     }
-  ]
+  ],
+  "timeline_events": []
 }

@@ -16,7 +16,7 @@
   "has_statcom": false,
   "has_harmonic_filter": false,
   "notable": "Tesla Megapack. A$650M debt financing (largest BESS financing globally at time). NSW LTESA + CIS double winner.",
-  "data_confidence": "good",
+  "data_confidence": "low",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "2015",
@@ -142,27 +142,7 @@
       "url": "https://aemo.com.au/energy-systems/electricity/national-electricity-market-nem/nem-forecasting-and-planning/forecasting-and-planning-data/generation-information",
       "date": "2026-01-30",
       "source_tier": 1
-    },
-    {
-      "title": "Akaysha Energy \u2014 Orana BESS",
-      "url": "https://akayshaenergy.com/projects/orana-bess",
-      "source_tier": 2
-    },
-    {
-      "title": "Akaysha \u2014 $650M Financing",
-      "url": "https://akayshaenergy.com/news/akaysha-energy-secures-largest-bess-financing-globally-at-650-million",
-      "source_tier": 2
-    },
-    {
-      "title": "RenewEconomy \u2014 Orana Finance",
-      "url": "https://reneweconomy.com.au/huge-finance-deal-and-off-take-landed-for-one-of-australias-biggest-four-hour-battery-projects/",
-      "source_tier": 2
-    },
-    {
-      "title": "EPBC Referral 2023/09512",
-      "url": "https://epbcpublicportal.environment.gov.au/all-referrals/#!/referral/2023-09512",
-      "date": "2026-03-12",
-      "source_tier": 1
     }
-  ]
+  ],
+  "timeline_events": []
 }

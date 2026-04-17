@@ -15,7 +15,7 @@
   "has_harmonic_filter": false,
   "performance_score": 86.2,
   "notable": "330 MW solar farm near Wellington, NSW. Developed by Lightsource BP. One of the largest single-axis tracking solar installations in the Central-West Orana REZ.",
-  "data_confidence": "medium",
+  "data_confidence": "low",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "1960",
@@ -70,5 +70,6 @@
       "date": "2026-01-30",
       "source_tier": 1
     }
-  ]
+  ],
+  "timeline_events": []
 }

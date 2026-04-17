@@ -15,7 +15,7 @@
   "has_harmonic_filter": false,
   "performance_score": 28.2,
   "notable": "52 MW solar farm near Tailem Bend, SA. Developed by Vena Energy. Located adjacent to The Bend Motorsport Park and the former Tailem Bend gas-fired power station site.",
-  "data_confidence": "medium",
+  "data_confidence": "low",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "1397",
@@ -76,5 +76,6 @@
       "date": "2026-01-30",
       "source_tier": 1
     }
-  ]
+  ],
+  "timeline_events": []
 }

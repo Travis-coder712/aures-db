@@ -15,7 +15,7 @@
   "has_harmonic_filter": false,
   "performance_score": 23.8,
   "notable": "950 MW conventional hydroelectric station, part of the Snowy Mountains Scheme, completed 1967. Ten Boving Francis-type turbines, 460m head from Geehi Reservoir. Located underground near Khancoban, NSW. ~1,413 GWh annually.",
-  "data_confidence": "medium",
+  "data_confidence": "low",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "1147",
@@ -80,5 +80,6 @@
       "date": "2026-01-30",
       "source_tier": 1
     }
-  ]
+  ],
+  "timeline_events": []
 }

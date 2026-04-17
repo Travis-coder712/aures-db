@@ -15,7 +15,7 @@
   "has_harmonic_filter": false,
   "performance_score": 16.9,
   "notable": "Tasmania's first underground power station, commissioned 1964-65. Six Pelton turbines in cavern 150m underground in the Central Highlands. Historically housed 2,000+ construction workers in dedicated Poatina Village. Currently undergoing major upgrade with Andritz-supplied replacement Pelton turbines.",
-  "data_confidence": "medium",
+  "data_confidence": "low",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "1162",
@@ -73,5 +73,6 @@
       "date": "2026-01-30",
       "source_tier": 1
     }
-  ]
+  ],
+  "timeline_events": []
 }

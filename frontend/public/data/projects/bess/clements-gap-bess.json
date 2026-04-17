@@ -15,9 +15,9 @@
   "has_statcom": false,
   "has_harmonic_filter": false,
   "notable": "Trina Storage + SMA inverters. Enzen EPC. CIS Tender 1 winner. >A$100M.",
-  "data_confidence": "good",
-  "last_updated": "2026-03-10",
-  "last_verified": "2026-03-10",
+  "data_confidence": "medium",
+  "last_updated": "2026-04-16",
+  "last_verified": "2026-04-16",
   "aemo_gen_info_id": "1993",
   "confidence_score": "54",
   "first_seen": "2024-02-01",
@@ -112,21 +112,15 @@
       "url": "https://aemo.com.au/energy-systems/electricity/national-electricity-market-nem/nem-forecasting-and-planning/forecasting-and-planning-data/generation-information",
       "date": "2026-01-30",
       "source_tier": 1
-    },
+    }
+  ],
+  "timeline_events": [
     {
-      "title": "Pacific Blue \u2014 Clements Gap Battery",
-      "url": "https://www.pacificblue.com.au/our-energy-production/sites-in-development/clements-gap-battery",
-      "source_tier": 2
-    },
-    {
-      "title": "Energy Magazine \u2014 Clements Gap",
-      "url": "https://www.energymagazine.com.au/constuction-of-60mw-clements-gap-bess-underway/",
-      "source_tier": 2
-    },
-    {
-      "title": "RenewEconomy \u2014 Clements Gap",
-      "url": "https://reneweconomy.com.au/construction-begins-on-new-big-battery-next-to-one-of-australias-oldest-wind-farms/",
-      "source_tier": 2
+      "date": "2025-12",
+      "date_precision": "month",
+      "event_type": "energisation",
+      "title": "First energisation achieved",
+      "detail": "Pacific Blue: First energisation Dec 2025."
     }
   ]
 }

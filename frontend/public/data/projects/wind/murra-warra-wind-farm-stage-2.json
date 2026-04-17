@@ -16,7 +16,7 @@
   "has_harmonic_filter": false,
   "performance_score": 32.7,
   "notable": "38x GE Cypress 5.5-158. Telstra corporate PPA + Snowy Hydro offtake. Senvion bearing failures required staged maintenance (2024).",
-  "data_confidence": "good",
+  "data_confidence": "low",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "1506",
@@ -83,5 +83,6 @@
       "date": "2026-01-30",
       "source_tier": 1
     }
-  ]
+  ],
+  "timeline_events": []
 }

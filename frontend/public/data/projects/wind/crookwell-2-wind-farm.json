@@ -15,7 +15,7 @@
   "has_harmonic_filter": false,
   "performance_score": 70.4,
   "notable": "91 MW wind farm near Crookwell in NSW Southern Tablelands. Part of one of Australia's earliest wind farm regions \u2014 the original Crookwell Wind Farm (1998) was the first in NSW.",
-  "data_confidence": "good",
+  "data_confidence": "low",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "1061",
@@ -87,5 +87,6 @@
       "date": "2026-01-30",
       "source_tier": 1
     }
-  ]
+  ],
+  "timeline_events": []
 }

@@ -17,7 +17,7 @@
   "has_harmonic_filter": false,
   "performance_score": 13.8,
   "notable": "The 4-hour duration unit within the 600 MW / 1.6 GWh Melbourne Renewable Energy Hub, providing ~801 MWh of storage \u2014 the longest-duration component of the Plumpton site. A$1.1B hub co-developed by Equis Energy and SEC Victoria with A$400M debt financing.",
-  "data_confidence": "good",
+  "data_confidence": "low",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "3102",
@@ -77,5 +77,6 @@
       "date": "2026-01-30",
       "source_tier": 1
     }
-  ]
+  ],
+  "timeline_events": []
 }

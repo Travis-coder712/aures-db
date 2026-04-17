@@ -15,9 +15,9 @@
   "has_statcom": false,
   "has_harmonic_filter": false,
   "notable": "510 MW / 1,020 MWh BESS at Chinchilla, QLD. CleanCo Queensland flagship \u2014 one of the largest batteries in the Southern Hemisphere.",
-  "data_confidence": "medium",
-  "last_updated": "2026-04-01",
-  "last_verified": "2026-03-10",
+  "data_confidence": "good",
+  "last_updated": "2026-04-16",
+  "last_verified": "2026-04-16",
   "aemo_gen_info_id": "1966",
   "confidence_score": "48",
   "capex_aud_m": 244.0,
@@ -98,5 +98,16 @@
       "date": "2026-01-30",
       "source_tier": 1
     }
-  ]
+  ],
+  "timeline_events": [
+    {
+      "date": "2025-12",
+      "date_precision": "month",
+      "event_type": "cod",
+      "title": "Stages 1 and 2 reach full commercial operations",
+      "detail": "Western Downs Battery Stages 1+2 (540 MW / 1,080 MWh) fully operational. Stage 3 (305 MW / 1,220 MWh) under construction for summer 2027/28."
+    }
+  ],
+  "duration_hours": 2.0,
+  "current_owner": "Neoen"
 }

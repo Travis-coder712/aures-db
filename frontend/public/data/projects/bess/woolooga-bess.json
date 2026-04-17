@@ -15,7 +15,7 @@
   "has_statcom": false,
   "has_harmonic_filter": false,
   "notable": "Hithium 5 MWh containers (128 units). INTEC EPC. CIS Tender 1 winner.",
-  "data_confidence": "good",
+  "data_confidence": "low",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "1961",
@@ -105,16 +105,7 @@
       "url": "https://aemo.com.au/energy-systems/electricity/national-electricity-market-nem/nem-forecasting-and-planning/forecasting-and-planning-data/generation-information",
       "date": "2026-01-30",
       "source_tier": 1
-    },
-    {
-      "title": "Lightsource bp \u2014 Woolooga",
-      "url": "https://lightsourcebp.com/news/australia-lightsource-bp-reaches-major-milestone-on-solar-and-battery-projects-to-deliver-firmed-renewable-energy-solutions/",
-      "source_tier": 2
-    },
-    {
-      "title": "INTEC \u2014 Woolooga EPC",
-      "url": "https://in-tecenergy.com/news/intec-provides-bess-epc-for-lightsource-bp/",
-      "source_tier": 2
     }
-  ]
+  ],
+  "timeline_events": []
 }

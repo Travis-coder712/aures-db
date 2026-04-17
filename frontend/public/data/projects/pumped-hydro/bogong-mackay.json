@@ -15,7 +15,7 @@
   "has_harmonic_filter": false,
   "performance_score": 20.6,
   "notable": "300 MW combined Bogong (140 MW) + McKay Creek (140 MW) stations \u2014 fourth and final addition to the Kiewa Hydroelectric Scheme in the Victorian Alps near Mount Beauty. AGL Energy. Commissioned November 2009 after decades of delays. A$240M.",
-  "data_confidence": "medium",
+  "data_confidence": "low",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "1023",
@@ -66,5 +66,6 @@
       "date": "2026-01-30",
       "source_tier": 1
     }
-  ]
+  ],
+  "timeline_events": []
 }

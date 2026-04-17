@@ -15,7 +15,7 @@
   "has_harmonic_filter": false,
   "performance_score": 60.0,
   "notable": "Comprises Tumut 1 (330 MW, 1959) and Tumut 2 (286 MW, 1962) underground stations \u2014 Upper Tumut Works of the Snowy Mountains Scheme. Tumut 1 is 366m underground near Cabramurra. Combined ~1,634 GWh annually. Feed water to downstream Tumut 3.",
-  "data_confidence": "medium",
+  "data_confidence": "low",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "1217",
@@ -57,5 +57,6 @@
       "date": "2026-01-30",
       "source_tier": 1
     }
-  ]
+  ],
+  "timeline_events": []
 }

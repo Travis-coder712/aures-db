@@ -16,7 +16,7 @@
   "has_harmonic_filter": true,
   "performance_score": 72.2,
   "notable": "Largest wind farm in southern hemisphere at commissioning (2021). 149 turbines, Goldwind GW140-3.57S. 4x STATCOM units + 5x harmonic filters.",
-  "data_confidence": "high",
+  "data_confidence": "low",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "1187",
@@ -164,12 +164,7 @@
       "url": "https://aemo.com.au/energy-systems/electricity/national-electricity-market-nem/nem-forecasting-and-planning/forecasting-and-planning-data/generation-information",
       "date": "2026-01-30",
       "source_tier": 1
-    },
-    {
-      "title": "EPBC Referral 2009/4719",
-      "url": "https://epbcpublicportal.environment.gov.au/all-referrals/#!/referral/2009-4719",
-      "date": "2026-03-12",
-      "source_tier": 1
     }
-  ]
+  ],
+  "timeline_events": []
 }

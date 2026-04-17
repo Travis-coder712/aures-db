@@ -16,9 +16,9 @@
   "has_statcom": false,
   "has_harmonic_filter": false,
   "notable": "Energy Vault B-VAULT (first Australian project). Siemens grid-forming inverters. 20-year NSW LTESA.",
-  "data_confidence": "good",
-  "last_updated": "2026-03-10",
-  "last_verified": "2026-03-10",
+  "data_confidence": "medium",
+  "last_updated": "2026-04-16",
+  "last_verified": "2026-04-16",
   "aemo_gen_info_id": "1893",
   "confidence_score": "61",
   "first_seen": "2025-02-01",
@@ -102,16 +102,16 @@
       "url": "https://aemo.com.au/energy-systems/electricity/national-electricity-market-nem/nem-forecasting-and-planning/forecasting-and-planning-data/generation-information",
       "date": "2026-01-30",
       "source_tier": 1
-    },
-    {
-      "title": "Energy Vault \u2014 New England BESS",
-      "url": "https://www.energyvault.com/projects/new-england-bess",
-      "source_tier": 2
-    },
-    {
-      "title": "ACEN Australia \u2014 New England Solar",
-      "url": "https://acenrenewables.com.au/project/new-england-solar/",
-      "source_tier": 2
     }
-  ]
+  ],
+  "timeline_events": [
+    {
+      "date": "2026-02",
+      "date_precision": "month",
+      "event_type": "commissioning",
+      "title": "Phase 1 (50 MW) registered with AEMO",
+      "detail": "ACEN: Phase 1 (50 MW) registered with AEMO Feb 2026. Phase 2 (150 MW) remains under construction."
+    }
+  ],
+  "duration_hours": 2.0
 }

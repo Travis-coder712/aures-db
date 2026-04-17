@@ -15,7 +15,7 @@
   "has_harmonic_filter": false,
   "performance_score": 26.1,
   "notable": "53 MW wind farm near Ararat, VIC. Pacific Hydro (SPIC). One of Victoria's earliest large-scale wind farms, commissioned 2003. 35 NEG Micon NM72 1.5 MW turbines.",
-  "data_confidence": "medium",
+  "data_confidence": "low",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "1044",
@@ -65,5 +65,6 @@
       "date": "2026-01-30",
       "source_tier": 1
     }
-  ]
+  ],
+  "timeline_events": []
 }

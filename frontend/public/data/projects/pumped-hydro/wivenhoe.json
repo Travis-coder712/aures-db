@@ -16,7 +16,7 @@
   "has_harmonic_filter": false,
   "performance_score": 52.5,
   "notable": "Queensland's only pumped storage hydro at 570 MW \u2014 two 285 MW Francis turbines (largest hydromachines in Australia). Commissioned 1984, 75 km west of Brisbane. Water cycles between Split Yard Creek Dam and Wivenhoe Dam. Transferred to CleanCo Queensland in 2019. Set a 40-year generation record in Q3 2024.",
-  "data_confidence": "good",
+  "data_confidence": "low",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "1235",
@@ -67,5 +67,6 @@
       "date": "2026-01-30",
       "source_tier": 1
     }
-  ]
+  ],
+  "timeline_events": []
 }

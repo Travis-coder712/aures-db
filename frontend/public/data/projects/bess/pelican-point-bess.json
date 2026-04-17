@@ -15,7 +15,7 @@
   "has_statcom": false,
   "has_harmonic_filter": false,
   "notable": "Sungrow PowerTitan 2.0. Grid-forming. Elecnor delivery partner.",
-  "data_confidence": "good",
+  "data_confidence": "low",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "3008",
@@ -95,16 +95,7 @@
       "url": "https://aemo.com.au/energy-systems/electricity/national-electricity-market-nem/nem-forecasting-and-planning/forecasting-and-planning-data/generation-information",
       "date": "2026-01-30",
       "source_tier": 1
-    },
-    {
-      "title": "ENGIE \u2014 Pelican Point BESS",
-      "url": "https://engie.com.au/about-us/our-generation-activities/battery-storage/pelican-point-battery-energy-storage-system",
-      "source_tier": 2
-    },
-    {
-      "title": "Power Technology \u2014 Pelican Point",
-      "url": "https://www.power-technology.com/news/construction-engies-pelican-point-bess/",
-      "source_tier": 2
     }
-  ]
+  ],
+  "timeline_events": []
 }

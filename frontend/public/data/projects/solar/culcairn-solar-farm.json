@@ -15,7 +15,7 @@
   "has_harmonic_filter": false,
   "performance_score": 5.9,
   "notable": "350 MW solar farm in the Riverina region of NSW. Developed by Neoen. One of the largest solar farms in the South-West NSW REZ.",
-  "data_confidence": "medium",
+  "data_confidence": "low",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "2630",
@@ -70,5 +70,6 @@
       "date": "2026-01-30",
       "source_tier": 1
     }
-  ]
+  ],
+  "timeline_events": []
 }

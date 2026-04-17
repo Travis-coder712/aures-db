@@ -15,7 +15,7 @@
   "has_statcom": false,
   "has_harmonic_filter": false,
   "notable": "First pumped hydro registered in NEM in ~40 years. Former Kidston Gold Mine site. 8-hour storage.",
-  "data_confidence": "good",
+  "data_confidence": "low",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "1352",
@@ -126,31 +126,7 @@
       "url": "https://aemo.com.au/energy-systems/electricity/national-electricity-market-nem/nem-forecasting-and-planning/forecasting-and-planning-data/generation-information",
       "date": "2026-01-30",
       "source_tier": 1
-    },
-    {
-      "title": "Genex Power \u2014 Kidston Project",
-      "url": "https://genexpower.com.au/250mw-kidston-pumped-storage-hydro-project/",
-      "source_tier": 2
-    },
-    {
-      "title": "ARENA \u2014 Kidston",
-      "url": "https://arena.gov.au/projects/kidston-pumped-hydro-energy-storage/",
-      "source_tier": 2
-    },
-    {
-      "title": "ANDRITZ \u2014 Kidston Order",
-      "url": "https://www.andritz.com/newsroom-en/hydro/2021-04-29-kidston-group",
-      "source_tier": 2
-    },
-    {
-      "title": "McConnell Dowell \u2014 Kidston",
-      "url": "https://www.mcconnelldowell.com/projects/kidston-pumped-storage-hydro",
-      "source_tier": 2
-    },
-    {
-      "title": "Energy-Storage.News \u2014 Kidston enters NEM",
-      "url": "https://www.energy-storage.news/australia-breaks-40-year-pumped-hydro-drought-as-2gwh-kidston-project-enters-the-nem/",
-      "source_tier": 2
     }
-  ]
+  ],
+  "timeline_events": []
 }

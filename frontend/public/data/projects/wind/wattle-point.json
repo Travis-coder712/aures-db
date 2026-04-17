@@ -15,7 +15,7 @@
   "has_harmonic_filter": false,
   "performance_score": 24.8,
   "notable": "91 MW, 55 Vestas V80-1.65 MW turbines on Yorke Peninsula, SA. One of SA's earlier wind developments. Now owned by Infrastructure Capital Group.",
-  "data_confidence": "medium",
+  "data_confidence": "low",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "1224",
@@ -57,5 +57,6 @@
       "date": "2026-01-30",
       "source_tier": 1
     }
-  ]
+  ],
+  "timeline_events": []
 }

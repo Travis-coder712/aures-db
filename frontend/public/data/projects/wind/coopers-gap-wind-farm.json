@@ -16,7 +16,7 @@
   "has_harmonic_filter": false,
   "performance_score": 73.2,
   "notable": "Largest wind farm in Queensland. 123 turbines (91x GE 3.6MW + 32x GE 3.8MW). AGL developed, sold to Tilt 2017.",
-  "data_confidence": "high",
+  "data_confidence": "low",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "1057",
@@ -168,12 +168,7 @@
       "url": "https://aemo.com.au/energy-systems/electricity/national-electricity-market-nem/nem-forecasting-and-planning/forecasting-and-planning-data/generation-information",
       "date": "2026-01-30",
       "source_tier": 1
-    },
-    {
-      "title": "EPBC Referral 2008/4237",
-      "url": "https://epbcpublicportal.environment.gov.au/all-referrals/#!/referral/2008-4237",
-      "date": "2026-03-12",
-      "source_tier": 1
     }
-  ]
+  ],
+  "timeline_events": []
 }

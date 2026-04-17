@@ -14,7 +14,7 @@
   "has_statcom": false,
   "has_harmonic_filter": false,
   "notable": "46x Vestas V162-6.2MW. CS Energy acquired from CIP. Vestas EPC + Zenviron BOP. A$1.3B. COD Q4 2026.",
-  "data_confidence": "good",
+  "data_confidence": "low",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "2002",
@@ -150,32 +150,7 @@
       "url": "https://aemo.com.au/energy-systems/electricity/national-electricity-market-nem/nem-forecasting-and-planning/forecasting-and-planning-data/generation-information",
       "date": "2026-01-30",
       "source_tier": 1
-    },
-    {
-      "title": "Vestas \u2014 285 MW Order",
-      "url": "https://www.vestas.com/en/media/company-news/2024/vestas-successfully-develops-lotus-creek-wind-farm-in-a-c4024583",
-      "source_tier": 2
-    },
-    {
-      "title": "CS Energy \u2014 Acquisition",
-      "url": "https://www.csenergy.com.au/news/cs-energy-acquires-lotus-creek-wind-farm",
-      "source_tier": 2
-    },
-    {
-      "title": "Zenviron \u2014 Lotus Creek",
-      "url": "https://zenviron.com/projects/lotus-creek-wind-farm",
-      "source_tier": 2
-    },
-    {
-      "title": "Lotus Creek Wind Farm \u2014 Official",
-      "url": "https://lotuscreekwindfarm.com.au/",
-      "source_tier": 2
-    },
-    {
-      "title": "EPBC Referral 2020/8627",
-      "url": "https://epbcpublicportal.environment.gov.au/all-referrals/#!/referral/2020-8627",
-      "date": "2026-03-12",
-      "source_tier": 1
     }
-  ]
+  ],
+  "timeline_events": []
 }

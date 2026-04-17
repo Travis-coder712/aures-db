@@ -15,7 +15,7 @@
   "has_harmonic_filter": false,
   "performance_score": 72.8,
   "notable": "133 MW solar farm near Finley in the Riverina, NSW. Developed by ESCO Pacific (now John Laing). One of the first large-scale solar farms in the southern Riverina.",
-  "data_confidence": "medium",
+  "data_confidence": "low",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "1680",
@@ -70,5 +70,6 @@
       "date": "2026-01-30",
       "source_tier": 1
     }
-  ]
+  ],
+  "timeline_events": []
 }

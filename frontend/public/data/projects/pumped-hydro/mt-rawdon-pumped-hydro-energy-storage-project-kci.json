@@ -13,7 +13,7 @@
   "has_statcom": false,
   "has_harmonic_filter": false,
   "notable": "Former gold mine repurposed. CleanCo QLD committed to invest. EIS phase. A$3.3B estimated.",
-  "data_confidence": "medium",
+  "data_confidence": "low",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "2274",
@@ -59,27 +59,7 @@
       "url": "https://aemo.com.au/energy-systems/electricity/national-electricity-market-nem/nem-forecasting-and-planning/forecasting-and-planning-data/generation-information",
       "date": "2026-01-30",
       "source_tier": 1
-    },
-    {
-      "title": "Mt Rawdon Pumped Hydro \u2014 Project",
-      "url": "https://mtrawdonhydro.com.au/",
-      "source_tier": 2
-    },
-    {
-      "title": "Evolution Mining \u2014 Case Study",
-      "url": "https://evolutionmining.com.au/case-study/mro-pumped-hydro/",
-      "source_tier": 2
-    },
-    {
-      "title": "CleanCo Queensland \u2014 Mt Rawdon",
-      "url": "https://cleancoqueensland.com.au/mountrawdonannouncement/",
-      "source_tier": 2
-    },
-    {
-      "title": "EPBC Referral 2022/09284",
-      "url": "https://epbcpublicportal.environment.gov.au/all-referrals/#!/referral/2022-09284",
-      "date": "2026-03-12",
-      "source_tier": 1
     }
-  ]
+  ],
+  "timeline_events": []
 }

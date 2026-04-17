@@ -15,7 +15,7 @@
   "has_statcom": false,
   "has_harmonic_filter": false,
   "notable": "Staged build: 250 MW total. Both phases CIS T3, under construction.",
-  "data_confidence": "good",
+  "data_confidence": "low",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "2646",
@@ -126,16 +126,7 @@
       "url": "https://aemo.com.au/energy-systems/electricity/national-electricity-market-nem/nem-forecasting-and-planning/forecasting-and-planning-data/generation-information",
       "date": "2026-01-30",
       "source_tier": 1
-    },
-    {
-      "title": "Equis \u2014 Calala BESS",
-      "url": "https://equis.engagementhub.com.au/calala-bess",
-      "source_tier": 2
-    },
-    {
-      "title": "Energy-Storage.News \u2014 Merchant BESS",
-      "url": "https://www.energy-storage.news/equis-claims-new-south-wales-first-merchant-bess-debt-financing-for-500mwh-asset/",
-      "source_tier": 2
     }
-  ]
+  ],
+  "timeline_events": []
 }

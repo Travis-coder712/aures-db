@@ -16,7 +16,7 @@
   "has_harmonic_filter": false,
   "performance_score": 40.3,
   "notable": "38x GE Cypress 5.5-158. PPAs: ACT Govt 100MW (14yr) + Flow Power 40MW (10yr). Inaugurated 2024, Neoen sold to Brookfield.",
-  "data_confidence": "good",
+  "data_confidence": "low",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "1964",
@@ -95,5 +95,6 @@
       "date": "2026-01-30",
       "source_tier": 1
     }
-  ]
+  ],
+  "timeline_events": []
 }

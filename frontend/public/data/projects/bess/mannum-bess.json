@@ -17,7 +17,7 @@
   "has_harmonic_filter": false,
   "performance_score": 22.6,
   "notable": "100 MW / 200 MWh BESS ~60 km east of Adelaide, developed by Canadian Solar's Recurrent Energy then sold to SA infrastructure company Epic Energy. Canadian Solar e-STORAGE SolBank technology, CPP as EPC. Integrated with Epic Energy's existing 35 MW Mannum Energy Park solar plants. Habitat Energy manages market optimisation.",
-  "data_confidence": "good",
+  "data_confidence": "low",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "2256",
@@ -105,12 +105,7 @@
       "url": "https://aemo.com.au/energy-systems/electricity/national-electricity-market-nem/nem-forecasting-and-planning/forecasting-and-planning-data/generation-information",
       "date": "2026-01-30",
       "source_tier": 1
-    },
-    {
-      "title": "EPBC Referral 2020/8796",
-      "url": "https://epbcpublicportal.environment.gov.au/all-referrals/#!/referral/2020-8796",
-      "date": "2026-03-12",
-      "source_tier": 1
     }
-  ]
+  ],
+  "timeline_events": []
 }

@@ -14,9 +14,9 @@
   "has_syncon": false,
   "has_statcom": false,
   "has_harmonic_filter": false,
-  "data_confidence": "medium",
-  "last_updated": "2026-04-01",
-  "last_verified": "2026-03-10",
+  "data_confidence": "good",
+  "last_updated": "2026-04-16",
+  "last_verified": "2026-04-16",
   "aemo_gen_info_id": "1935",
   "confidence_score": "28",
   "development_stage": "early_stage",
@@ -45,5 +45,15 @@
       "date": "2026-01-30",
       "source_tier": 1
     }
-  ]
+  ],
+  "timeline_events": [
+    {
+      "date": "2026-02",
+      "date_precision": "month",
+      "event_type": "notable",
+      "title": "Construction passes halfway mark \u2014 324 Tesla Megapacks delivered",
+      "detail": "Stanwell: Halfway construction milestone reached. 324 Tesla Megapacks delivered to site. Target COD mid-2027 (slipped from Dec 2026)."
+    }
+  ],
+  "bess_oem": "Tesla"
 }

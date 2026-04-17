@@ -15,7 +15,7 @@
   "has_harmonic_filter": false,
   "performance_score": 63.8,
   "notable": "238 MW hydro (two Fuji Francis turbines) at Lake Pieman, western Tasmania. Final station in the Pieman River cascade. Commissioned 1986-87 as concluding component of the major 1974-1987 Pieman development. Hydro Tasmania.",
-  "data_confidence": "medium",
+  "data_confidence": "low",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "1168",
@@ -66,5 +66,6 @@
       "date": "2026-01-30",
       "source_tier": 1
     }
-  ]
+  ],
+  "timeline_events": []
 }

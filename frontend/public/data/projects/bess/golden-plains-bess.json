@@ -14,9 +14,9 @@
   "has_syncon": false,
   "has_statcom": false,
   "has_harmonic_filter": false,
-  "data_confidence": "medium",
-  "last_updated": "2026-04-01",
-  "last_verified": "2026-03-10",
+  "data_confidence": "good",
+  "last_updated": "2026-04-16",
+  "last_verified": "2026-04-16",
   "aemo_gen_info_id": "2543",
   "confidence_score": "28",
   "development_stage": "early_stage",
@@ -44,6 +44,34 @@
       "url": "https://aemo.com.au/energy-systems/electricity/national-electricity-market-nem/nem-forecasting-and-planning/forecasting-and-planning-data/generation-information",
       "date": "2026-01-30",
       "source_tier": 1
+    },
+    {
+      "title": "TagEnergy \u2014 Golden Plains BESS construction announcement",
+      "url": "https://tag-en.com/tagenergy-to-start-building-its-first-australian-battery-energy-storage-system-at-golden-plains-wind-farm/",
+      "source_tier": 1
+    },
+    {
+      "title": "RenewEconomy \u2014 Financial close for four-hour big battery",
+      "url": "https://reneweconomy.com.au/financial-close-reached-for-four-hour-big-battery-to-be-built-next-to-australias-biggest-wind-farm/",
+      "source_tier": 2
     }
-  ]
+  ],
+  "timeline_events": [
+    {
+      "date": "2025-11",
+      "date_precision": "month",
+      "event_type": "fid",
+      "title": "Financial close reached for Golden Plains BESS",
+      "detail": "168 Tesla Megapack 2XL units. Construction commenced early 2026. COD mid-2027."
+    },
+    {
+      "date": "2026-01",
+      "date_precision": "month",
+      "event_type": "construction_start",
+      "title": "Construction commences",
+      "detail": "TagEnergy's first Australian BESS project. At Golden Plains Wind Farm."
+    }
+  ],
+  "bess_oem": "Tesla",
+  "duration_hours": 4.0
 }

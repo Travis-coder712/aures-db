@@ -17,7 +17,7 @@
   "has_harmonic_filter": false,
   "performance_score": 19.8,
   "notable": "155 MW / 298 MWh BESS in Queensland's Western Downs near Hopeland. Stage 1 of a project approved to reach 350 MW / 1,078 MWh. Developed by Akaysha Energy (BlackRock). Powin battery stacks with Eks Energy inverters. Portfolio financing alongside Brendale BESS was Australia's first multi-project battery financing.",
-  "data_confidence": "good",
+  "data_confidence": "low",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "2016",
@@ -104,5 +104,6 @@
       "date": "2026-01-30",
       "source_tier": 1
     }
-  ]
+  ],
+  "timeline_events": []
 }

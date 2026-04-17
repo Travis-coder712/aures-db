@@ -16,7 +16,7 @@
   "has_harmonic_filter": false,
   "performance_score": 59.2,
   "notable": "141 MW, 67 Suzlon S88 turbines east of Lake George, NSW. Built 2009 by Suzlon for Infigen Energy. One of the first large-scale wind farms in the ACT/NSW Capital Region. Now operated by Iberdrola Australia (2020 Infigen acquisition).",
-  "data_confidence": "good",
+  "data_confidence": "low",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "1038",
@@ -81,5 +81,6 @@
       "date": "2026-01-30",
       "source_tier": 1
     }
-  ]
+  ],
+  "timeline_events": []
 }

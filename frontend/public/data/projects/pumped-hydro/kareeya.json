@@ -15,7 +15,7 @@
   "has_harmonic_filter": false,
   "performance_score": 93.8,
   "notable": "88 MW underground run-of-river hydro near Tully, Far North QLD. Four 22 MW Pelton turbines. Commenced 1957. CleanCo Queensland (transferred from Stanwell 2019). Set a new station generation record of ~691,000 MWh in calendar year 2024.",
-  "data_confidence": "medium",
+  "data_confidence": "low",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "1100",
@@ -57,5 +57,6 @@
       "date": "2026-01-30",
       "source_tier": 1
     }
-  ]
+  ],
+  "timeline_events": []
 }

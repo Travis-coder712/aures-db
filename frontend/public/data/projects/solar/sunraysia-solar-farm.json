@@ -15,7 +15,7 @@
   "has_harmonic_filter": false,
   "performance_score": 75.6,
   "notable": "255 MW solar farm near Balranald, NSW. Developed by Maoneng Group using Canadian Solar bifacial modules. One of the first large-scale bifacial solar deployments in Australia. Has a 15-year PPA with the Commonwealth Bank of Australia (CBA).",
-  "data_confidence": "medium",
+  "data_confidence": "low",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "1447",
@@ -77,5 +77,6 @@
       "date": "2026-01-30",
       "source_tier": 1
     }
-  ]
+  ],
+  "timeline_events": []
 }

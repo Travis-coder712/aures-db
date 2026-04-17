@@ -15,7 +15,7 @@
   "has_statcom": false,
   "has_harmonic_filter": false,
   "notable": "Tesla Megapack. A$400M. ACT Big Canberra Battery. 50% revenue to ACT Government. Grid-forming.",
-  "data_confidence": "good",
+  "data_confidence": "low",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "2525",
@@ -100,21 +100,7 @@
       "url": "https://aemo.com.au/energy-systems/electricity/national-electricity-market-nem/nem-forecasting-and-planning/forecasting-and-planning-data/generation-information",
       "date": "2026-01-30",
       "source_tier": 1
-    },
-    {
-      "title": "Eku Energy \u2014 Williamsdale",
-      "url": "https://www.ekuenergy.com/news/eku-energy-reaches-financial-close-for-williamsdale-battery-energy-storage-system",
-      "source_tier": 2
-    },
-    {
-      "title": "ACT Government \u2014 Williamsdale",
-      "url": "https://www.act.gov.au/our-canberra/latest-news/2024/november/work-begins-on-williamsdale-battery-energy-storage-system",
-      "source_tier": 2
-    },
-    {
-      "title": "Energy-Storage.News \u2014 Williamsdale",
-      "url": "https://www.energy-storage.news/eku-energy-reaches-financial-close-on-500mwh-grid-forming-bess-in-the-australian-capital-territory/",
-      "source_tier": 2
     }
-  ]
+  ],
+  "timeline_events": []
 }

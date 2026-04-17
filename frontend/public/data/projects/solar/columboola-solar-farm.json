@@ -15,7 +15,7 @@
   "has_harmonic_filter": false,
   "performance_score": 44.9,
   "notable": "135 MW solar farm near Miles, QLD. Developed by Vena Energy. Located in Queensland's Western Downs region.",
-  "data_confidence": "medium",
+  "data_confidence": "low",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "1459",
@@ -71,5 +71,6 @@
       "date": "2026-01-30",
       "source_tier": 1
     }
-  ]
+  ],
+  "timeline_events": []
 }

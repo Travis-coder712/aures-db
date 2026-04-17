@@ -15,7 +15,7 @@
   "has_harmonic_filter": false,
   "performance_score": 45.9,
   "notable": "50 MW solar farm near Kerang, VIC. Co-located with a 25 MW / 50 MWh Tesla Megapack battery \u2014 one of Australia's first solar-plus-storage projects. Developed by Edify Energy. EnergyAustralia PPA.",
-  "data_confidence": "medium",
+  "data_confidence": "low",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "1396",
@@ -77,5 +77,6 @@
       "date": "2026-01-30",
       "source_tier": 1
     }
-  ]
+  ],
+  "timeline_events": []
 }

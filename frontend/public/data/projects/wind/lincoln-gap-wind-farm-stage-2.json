@@ -16,7 +16,7 @@
   "has_harmonic_filter": false,
   "performance_score": 48.4,
   "notable": "24x Vestas V136-3.45MW (3.6MW optimised). Owned by RATCH-Australia. Very high capacity factor site near Port Augusta.",
-  "data_confidence": "good",
+  "data_confidence": "low",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "1574",
@@ -73,5 +73,6 @@
       "date": "2026-01-30",
       "source_tier": 1
     }
-  ]
+  ],
+  "timeline_events": []
 }

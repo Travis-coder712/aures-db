@@ -14,7 +14,7 @@
   "has_statcom": false,
   "has_harmonic_filter": false,
   "notable": "Stage 2, 93x Vestas V162-6.2MW. Brings Golden Plains total to 1,333MW. Financial close reached.",
-  "data_confidence": "good",
+  "data_confidence": "low",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "1990",
@@ -109,16 +109,7 @@
       "url": "https://aemo.com.au/energy-systems/electricity/national-electricity-market-nem/nem-forecasting-and-planning/forecasting-and-planning-data/generation-information",
       "date": "2026-01-30",
       "source_tier": 1
-    },
-    {
-      "title": "TagEnergy \u2014 Stage 2 Financial Close",
-      "url": "https://tag-en.com/construction-to-begin-as-golden-plains-wind-farm-stage-2-reaches-financial-close/",
-      "source_tier": 2
-    },
-    {
-      "title": "Vestas \u2014 577 MW Stage 2 Order",
-      "url": "https://www.vestas.com/en/media/company-news/2024/vestas-receives-577-mw-order-in-australia-for-second-st-c4003383",
-      "source_tier": 2
     }
-  ]
+  ],
+  "timeline_events": []
 }

@@ -16,7 +16,7 @@
   "has_harmonic_filter": false,
   "performance_score": 78.7,
   "notable": "138 MW across Studland Bay (75 MW) and Bluff Point (65 MW) wind farms at Woolnorth in NW Tasmania. Among the earliest large-scale wind farms in Tasmania, on one of the world's windiest coastlines. Operated by Hydro Tasmania.",
-  "data_confidence": "medium",
+  "data_confidence": "low",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "1242",
@@ -65,5 +65,6 @@
       "date": "2026-01-30",
       "source_tier": 1
     }
-  ]
+  ],
+  "timeline_events": []
 }

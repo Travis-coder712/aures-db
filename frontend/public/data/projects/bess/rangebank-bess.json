@@ -17,7 +17,7 @@
   "has_harmonic_filter": false,
   "performance_score": 63.3,
   "notable": "200 MW / 400 MWh BESS in Cranbourne's Rangebank Business Park, Melbourne's southeast. Developed by Eku Energy (Macquarie/BCI JV) and Shell Energy. Fluence sixth-generation Gridstack technology. Victoria's second-largest battery at time of opening in December 2024.",
-  "data_confidence": "good",
+  "data_confidence": "low",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "2460",
@@ -94,5 +94,6 @@
       "date": "2026-01-30",
       "source_tier": 1
     }
-  ]
+  ],
+  "timeline_events": []
 }

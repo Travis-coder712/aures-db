@@ -15,7 +15,7 @@
   "has_harmonic_filter": false,
   "performance_score": 27.7,
   "notable": "83 MW solar farm in the Whitsunday region, QLD. Developed by Edify Energy. Part of Edify's portfolio of Queensland solar assets.",
-  "data_confidence": "medium",
+  "data_confidence": "low",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "1407",
@@ -77,5 +77,6 @@
       "date": "2026-01-30",
       "source_tier": 1
     }
-  ]
+  ],
+  "timeline_events": []
 }

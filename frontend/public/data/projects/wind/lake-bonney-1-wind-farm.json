@@ -16,7 +16,7 @@
   "has_harmonic_filter": false,
   "performance_score": 20.3,
   "notable": "81 MW wind farm near Millicent, SA. Stage 1 of the Lake Bonney Wind Farm complex (three stages totalling ~278 MW). One of SA's earliest large-scale wind projects. Developed by Infigen Energy.",
-  "data_confidence": "good",
+  "data_confidence": "low",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "1108",
@@ -81,12 +81,7 @@
       "url": "https://aemo.com.au/energy-systems/electricity/national-electricity-market-nem/nem-forecasting-and-planning/forecasting-and-planning-data/generation-information",
       "date": "2026-01-30",
       "source_tier": 1
-    },
-    {
-      "title": "EPBC Referral 2004/1630",
-      "url": "https://epbcpublicportal.environment.gov.au/all-referrals/#!/referral/2004-1630",
-      "date": "2026-03-12",
-      "source_tier": 1
     }
-  ]
+  ],
+  "timeline_events": []
 }

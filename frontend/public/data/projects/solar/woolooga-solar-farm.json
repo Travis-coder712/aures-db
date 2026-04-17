@@ -15,7 +15,7 @@
   "has_harmonic_filter": false,
   "performance_score": 53.8,
   "notable": "176 MW solar farm near Woolooga in QLD's Wide Bay region. Developed by Risen Energy.",
-  "data_confidence": "good",
+  "data_confidence": "low",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "1672",
@@ -78,12 +78,7 @@
       "url": "https://aemo.com.au/energy-systems/electricity/national-electricity-market-nem/nem-forecasting-and-planning/forecasting-and-planning-data/generation-information",
       "date": "2026-01-30",
       "source_tier": 1
-    },
-    {
-      "title": "EPBC Referral 2019/8554",
-      "url": "https://epbcpublicportal.environment.gov.au/all-referrals/#!/referral/2019-8554",
-      "date": "2026-03-12",
-      "source_tier": 1
     }
-  ]
+  ],
+  "timeline_events": []
 }

@@ -15,7 +15,7 @@
   "has_harmonic_filter": false,
   "performance_score": 55.4,
   "notable": "43 MW solar farm near Balranald, western NSW. Part of the Limondale solar complex. Now owned by RWE/BELECTRIC.",
-  "data_confidence": "medium",
+  "data_confidence": "low",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "1675",
@@ -72,5 +72,6 @@
       "date": "2026-01-30",
       "source_tier": 1
     }
-  ]
+  ],
+  "timeline_events": []
 }

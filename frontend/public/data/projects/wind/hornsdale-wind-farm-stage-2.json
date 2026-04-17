@@ -16,7 +16,7 @@
   "has_harmonic_filter": false,
   "performance_score": 71.9,
   "notable": "~112 MW Stage 2 of Neoen's 315 MW Hornsdale Wind Farm. Central to Neoen's Australian operations near Jamestown, SA.",
-  "data_confidence": "medium",
+  "data_confidence": "low",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "1376",
@@ -80,5 +80,6 @@
       "date": "2026-01-30",
       "source_tier": 1
     }
-  ]
+  ],
+  "timeline_events": []
 }

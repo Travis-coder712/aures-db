@@ -16,7 +16,7 @@
   "has_harmonic_filter": false,
   "performance_score": 35.9,
   "notable": "132 MW \u2014 Stage 4 (North Brown Hill) of the Hallett Wind Farm complex, SA. Part of AGL's 351 MW multi-site Hallett development ~180 km north of Adelaide.",
-  "data_confidence": "medium",
+  "data_confidence": "low",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "1311",
@@ -73,5 +73,6 @@
       "date": "2026-01-30",
       "source_tier": 1
     }
-  ]
+  ],
+  "timeline_events": []
 }

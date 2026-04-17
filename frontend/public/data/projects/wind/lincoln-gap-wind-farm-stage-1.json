@@ -16,7 +16,7 @@
   "has_harmonic_filter": false,
   "performance_score": 42.5,
   "notable": "35x Senvion 3.6M140 EBC. Snowy Hydro offtake. Owned by RATCH-Australia (acquired Dec 2022 from Nexif).",
-  "data_confidence": "good",
+  "data_confidence": "low",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "1119",
@@ -78,5 +78,6 @@
       "date": "2026-01-30",
       "source_tier": 1
     }
-  ]
+  ],
+  "timeline_events": []
 }

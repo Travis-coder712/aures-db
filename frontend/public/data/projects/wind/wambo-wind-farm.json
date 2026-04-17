@@ -14,7 +14,7 @@
   "has_statcom": false,
   "has_harmonic_filter": false,
   "notable": "83x Vestas V162-6.2MW (S1:42, S2:41). Cubico/Stanwell 50:50 JV. Stanwell 15yr PPA. A$650M+ finance. S1 late 2025, S2 2026.",
-  "data_confidence": "good",
+  "data_confidence": "low",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "2287",
@@ -174,32 +174,7 @@
       "url": "https://aemo.com.au/energy-systems/electricity/national-electricity-market-nem/nem-forecasting-and-planning/forecasting-and-planning-data/generation-information",
       "date": "2026-01-30",
       "source_tier": 1
-    },
-    {
-      "title": "Wambo Wind Farm \u2014 Official",
-      "url": "https://www.wambowindfarm.com.au/",
-      "source_tier": 2
-    },
-    {
-      "title": "Cubico \u2014 Financial Close",
-      "url": "https://www.cubicoinvest.com/news/cubico-reaches-financial-close-for-500-mw-wambo-project/",
-      "source_tier": 2
-    },
-    {
-      "title": "Stanwell \u2014 Wambo Wind Farm",
-      "url": "https://www.stanwell.com/wambo-wind-farm",
-      "source_tier": 2
-    },
-    {
-      "title": "Stanwell \u2014 First Turbines Power Up",
-      "url": "https://www.stanwell.com/info-hub/article/wambos-first-turbines-power-up-western-downs",
-      "source_tier": 2
-    },
-    {
-      "title": "EPBC Referral 2020/8727",
-      "url": "https://epbcpublicportal.environment.gov.au/all-referrals/#!/referral/2020-8727",
-      "date": "2026-03-12",
-      "source_tier": 1
     }
-  ]
+  ],
+  "timeline_events": []
 }

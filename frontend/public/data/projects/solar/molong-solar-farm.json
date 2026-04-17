@@ -15,7 +15,7 @@
   "has_harmonic_filter": false,
   "performance_score": 31.5,
   "notable": "30 MW solar farm near Molong, NSW. Developed by Lightsource BP.",
-  "data_confidence": "medium",
+  "data_confidence": "low",
   "last_updated": "2026-03-10",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "1641",
@@ -70,5 +70,6 @@
       "date": "2026-01-30",
       "source_tier": 1
     }
-  ]
+  ],
+  "timeline_events": []
 }
