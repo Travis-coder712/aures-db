@@ -626,6 +626,112 @@ The underlying data is publicly available:
 If you spot a discrepancy, it's likely due to capacity differences (registered vs maximum), time period alignment, or DUID mapping. We welcome corrections.`,
   },
   {
+    id: 'developer-execution-scoring',
+    title: 'Developer Intelligence & Execution Scoring',
+    description: 'How developer grades are calculated, what the portfolio dashboard shows, and how to read the execution scorecard.',
+    icon: '👷',
+    category: 'technical',
+    readingTime: '8 min read',
+    content: `# Developer Intelligence & Execution Scoring
+
+The \`/developers\` list and individual developer profile pages tell you who's actually building in the NEM — how much, where, with which OEMs and contractors, and how reliably they deliver. This guide explains what the scorecard measures, how the grades are assigned, and what the limitations are.
+
+---
+
+## What a developer profile shows
+
+Every developer detail page (\`/developers/:slug\`) is a **portfolio dashboard** with these sections, rendered only when the underlying data supports them:
+
+1. **Header + alias chips** — the canonical grouped name plus any SPV aliases we've mapped to this developer. "Edify Energy Pty Ltd" and "Edify Energy (Bartlett Holding Company) Pty Ltd" collapse to one profile; you see both.
+2. **Execution Scorecard** — A/B/D/F grade badge + on-time %, average drift (months), completion rate, score /100.
+3. **Scheme Wins** — coloured chip row for CIS / LTESA / ARENA / state scheme awards (only developers with at least one award). Click any chip to open the specific project.
+4. **Pipeline Waterfall** — four stage cards (Development → Construction → Commissioning → Operating) with project counts and MW.
+5. **Portfolio Timeline (COD drift)** — a sortable table of every project with original COD, current COD, and the drift in months, colour-coded green/amber/red.
+6. **Equipment Preferences** — two side-by-side tables (Go-to OEMs, Go-to Contractors). Only renders if the developer has ≥3 supplier rows. Shows supplier, project count, MW.
+7. **Operating Fleet Performance** — quartile distribution chart + ranked project list. Only renders if the developer has ≥3 league-ranked operating projects (9 developers qualify today).
+8. **Offtake Counterparties summary** — counterparty chips + link to the PPA Market Mapper for full analysis.
+9. **Full project list** — every project the developer owns, grouped by status.
+
+---
+
+## The grade — how it's calculated
+
+The execution grade comes from \`analytics/intelligence/developer-scores.json\` (see the underlying pipeline in \`pipeline/analytics/compute_developer_scores.py\`). It blends three delivery-timing signals:
+
+| Component | Weight | What it measures |
+|---|---|---|
+| **On-time delivery %** | 40% | Projects commissioned within ±6 months of their original COD |
+| **Average COD drift (months)** | 30% | Absolute drift, rewarded for staying near zero |
+| **Completion rate** | 20% | Projects that made it to operating vs withdrew |
+| **Portfolio diversity** | 10% | Number of distinct technologies and states |
+
+The weighted score (0-100) bins into grades:
+- **A** — 80+ (consistent on-time delivery across a meaningful portfolio)
+- **B** — 60-79 (solid track record with occasional drift)
+- **D** — 40-59 (mixed reliability, expect delays)
+- **F** — below 40 (frequent drift or high withdrawal rate)
+
+Distribution as of v2.20.0: **26 A · 74 B · 2 D · 50 F** across 152 scored developers.
+
+---
+
+## Equipment preferences
+
+Preferences come from the \`suppliers\` table joined to \`projects.current_developer\`. We surface the top OEMs (roles: \`wind_oem\`, \`solar_oem\`, \`bess_oem\`, \`hydro_oem\`, \`inverter\`) and top contractors (roles: \`epc\`, \`bop\`) by project count.
+
+Real examples:
+- **Akaysha Energy (BlackRock)** — Tesla on 3 BESS projects, Powin on 2. CPP as BOP on 3, EPC on 2.
+- **Neoen** — Tesla + CATL on BESS; GE Vernova on wind.
+- **Snowy Hydro** — Alstom/GE/Toshiba on hydro turbines.
+
+**Caveat:** we only surface relationships where we have supplier records. Many development-stage projects don't have a named OEM yet. About 35% of developer supplier rows are still "to be confirmed" or a generic category (e.g. "CATL BESS system").
+
+---
+
+## Fleet performance
+
+The **Operating Fleet Performance** section cross-joins the developer's operating projects against the annual league tables (see the Performance Metrics guide). A developer's **quartile distribution** shows how their fleet clusters — are most of their farms Q1 performers, or scattered across Q3/Q4?
+
+**Requirement: ≥3 ranked operating projects.** Below that threshold we show only a short note, because 1-2 data points don't form a fleet. This gates the section on ~9 developers today — mostly state-owned (Hydro-Electric Corp, Snowy Hydro, AGL Hydro Partnership) plus a few wind developers (Neoen, Ratch, Lake Bonney).
+
+Example: **Snowy Hydro** has 54 ranked projects with an average composite of 39.9, Q1 share 11%, clustered heavily in Q3/Q4 (38 of 54 are below median).
+
+---
+
+## Scheme wins
+
+The scheme chip row comes from the \`scheme_contracts\` table. Currently there are 20 scheme-contract records across 15 developers:
+- **CIS** (Commonwealth Capacity Investment Scheme) — 5 contracts
+- **NSW LTESA** (Long-term Energy Service Agreement) — 5
+- **ARENA** — 4
+- **QLD Renewable Energy & Hydrogen** — 3
+- **NAIF, NSW SIPS, VIC SIPS** — 1 each
+
+Developers with multiple scheme wins include Akaysha Energy (CIS + NSW LTESA + NSW SIPS = 3 schemes), AGL Energy (ARENA + LTESA), Genex (ARENA + NAIF).
+
+---
+
+## Known limitations
+
+1. **Developer names are sometimes SPVs.** AEMO registers projects under special-purpose vehicles (e.g. "Culcairn Solar Farm Pty Ltd") rather than the parent developer. We collapse known SPVs via the alias mechanism in \`developer-profiles.json\`, but it's a moving target — corrections welcome.
+2. **Execution grade is delivery-timing only.** It does not reward financial discipline, community engagement, or post-commissioning operating performance. A developer can have an A for on-time delivery and still have weak operating CF.
+3. **COD drift requires both original and current COD.** Projects without an announced original COD drop out of the timeline section.
+4. **Performance quartiles gate on ≥3 ranked projects.** Most developers don't qualify — that's OK, it just means we don't over-extrapolate from a small fleet.
+5. **Ownership changes are thin.** The \`ownership_history\` table has 12 entries across 10 projects — good for case studies, not comprehensive.
+6. **Scheme win chip attribution.** If a project changes hands after a scheme award, we still attribute the chip to whoever currently owns the project. A follow-up pass could split "won by X, now owned by Y" cleanly.
+
+---
+
+## Want to verify?
+
+- Raw developer data: \`indexes/developer-profiles.json\` (706 developers, 537 grouped)
+- Scoring data: \`analytics/intelligence/developer-scores.json\` (152 with grades)
+- Portfolio analytics: \`analytics/developer-analytics.json\` (181 with equipment, 167 with performance, 16 with scheme wins)
+
+All three are exported directly from the SQLite database by the pipeline — no external API calls.
+`,
+  },
+  {
     id: 'oem-supplier-data',
     title: 'OEM & Supplier Data',
     description: 'What the OEM intelligence layer tracks, where the data comes from, how concentration is measured, and known limitations.',
