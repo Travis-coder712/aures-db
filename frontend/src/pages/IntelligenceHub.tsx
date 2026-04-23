@@ -80,6 +80,12 @@ const FEATURES = [
     route: '/intelligence/bess-portfolio',
   },
   {
+    icon: '\u{1F3C6}',
+    title: 'BESS Records Leaderboard',
+    description: 'All-time discharge and charge records across 30 grid-scale batteries — ranked by battery, state, and NEM with fleet peak records.',
+    route: '/intelligence/bess-records',
+  },
+  {
     icon: '\u{1F4C5}',
     title: 'NEM Activities Timeline',
     description: 'Month-by-month key highlights across development, construction, and operations',

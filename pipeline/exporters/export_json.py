@@ -7503,6 +7503,165 @@ def export_battery_live_records(conn):
           f"has_data={has_data}, {n_records} record rows, {total_days} daily-region rows)")
 
 
+def export_bess_records_leaderboard(conn):
+    """BESS Records Leaderboard — per-battery and fleet all-time records.
+
+    Sources:
+      - generation_daily (fuel_type='Battery Storage') — per-DUID daily MWh
+      - aemo_generation_info — DUID → station name, capacity
+      - battery_records / battery_daily_scada — fleet 5-min peaks by region
+
+    Outputs bess-records-leaderboard.json consumed by /intelligence/bess-records.
+    """
+    REGIONS = ['NSW1', 'VIC1', 'QLD1', 'SA1', 'TAS1']
+    REGION_LABELS = {'NSW1': 'NSW', 'VIC1': 'VIC', 'QLD1': 'QLD', 'SA1': 'SA', 'TAS1': 'TAS', 'NEM': 'NEM'}
+
+    # ---- Per-battery records from generation_daily ----
+    rows = conn.execute("""
+        SELECT g.duid, g.region,
+               a.station_name,
+               a.expected_storage_mwh,
+               COUNT(DISTINCT g.date) AS days_active,
+               MIN(g.date) AS first_date,
+               MAX(g.date) AS last_date,
+               ROUND(MAX(g.gen_mwh), 1) AS peak_discharge_mwh,
+               ROUND(MAX(g.charge_mwh), 1) AS peak_charge_mwh,
+               ROUND(SUM(g.gen_mwh), 0) AS total_discharge_mwh,
+               ROUND(SUM(g.charge_mwh), 0) AS total_charge_mwh
+        FROM generation_daily g
+        LEFT JOIN (
+            SELECT duid, station_name, SUM(registered_capacity_mw) AS reg_mw,
+                   AVG(expected_storage_mwh) AS expected_storage_mwh
+            FROM aemo_generation_info
+            WHERE fuel_type = 'Battery Storage' AND status IN ('In Service','In Commissioning','Committed')
+            GROUP BY duid
+        ) a ON g.duid = a.duid
+        WHERE g.fuel_type = 'Battery Storage'
+        GROUP BY g.duid
+        ORDER BY peak_discharge_mwh DESC
+    """).fetchall()
+
+    # For each DUID get the date of peak discharge and peak charge
+    peak_dates = {}
+    for r in conn.execute("""
+        SELECT duid, gen_mwh, charge_mwh, date
+        FROM generation_daily WHERE fuel_type='Battery Storage'
+    """).fetchall():
+        d = r['duid']
+        if d not in peak_dates:
+            peak_dates[d] = {'pd_mwh': 0, 'pd_date': None, 'pc_mwh': 0, 'pc_date': None}
+        if r['gen_mwh'] > peak_dates[d]['pd_mwh']:
+            peak_dates[d]['pd_mwh'] = r['gen_mwh']
+            peak_dates[d]['pd_date'] = r['date']
+        if r['charge_mwh'] > peak_dates[d]['pc_mwh']:
+            peak_dates[d]['pc_mwh'] = r['charge_mwh']
+            peak_dates[d]['pc_date'] = r['date']
+
+    batteries = []
+    for r in rows:
+        duid = r['duid']
+        pd_info = peak_dates.get(duid, {})
+        batteries.append({
+            'duid': duid,
+            'name': r['station_name'] or duid,
+            'region': r['region'] or 'UNK',
+            'capacity_mwh': r['expected_storage_mwh'],
+            'days_active': r['days_active'],
+            'first_date': r['first_date'],
+            'last_date': r['last_date'],
+            'peak_discharge_mwh': r['peak_discharge_mwh'],
+            'peak_discharge_date': pd_info.get('pd_date'),
+            'peak_charge_mwh': r['peak_charge_mwh'],
+            'peak_charge_date': pd_info.get('pc_date'),
+            'total_discharge_mwh': r['total_discharge_mwh'],
+            'total_charge_mwh': r['total_charge_mwh'],
+        })
+
+    data_through = batteries[0]['last_date'] if batteries else None
+
+    # ---- Fleet-level daily records (sum all DUIDs per date) ----
+    fleet_daily = conn.execute("""
+        SELECT date, region,
+               ROUND(SUM(gen_mwh), 1) AS fleet_discharge_mwh,
+               ROUND(SUM(charge_mwh), 1) AS fleet_charge_mwh
+        FROM generation_daily
+        WHERE fuel_type='Battery Storage'
+        GROUP BY date, region
+        ORDER BY date
+    """).fetchall()
+
+    # NEM fleet daily = sum across all regions per date
+    nem_by_date: dict = {}
+    region_by_date: dict = {r: {} for r in REGIONS}
+    for row in fleet_daily:
+        dt, reg = row['date'], row['region']
+        nem_by_date.setdefault(dt, {'d': 0.0, 'c': 0.0})
+        nem_by_date[dt]['d'] += row['fleet_discharge_mwh'] or 0
+        nem_by_date[dt]['c'] += row['fleet_charge_mwh'] or 0
+        if reg in region_by_date:
+            region_by_date[reg][dt] = {
+                'd': row['fleet_discharge_mwh'] or 0,
+                'c': row['fleet_charge_mwh'] or 0,
+            }
+
+    def best_day(by_date: dict, metric: str) -> dict:
+        if not by_date:
+            return {}
+        best_date = max(by_date, key=lambda d: by_date[d][metric])
+        return {'value_mwh': round(by_date[best_date][metric], 1), 'date': best_date}
+
+    # ---- 5-min fleet records from battery_records ----
+    five_min: dict = {}
+    has_scada = bool(conn.execute('SELECT COUNT(*) FROM battery_daily_scada').fetchone()[0])
+    if has_scada:
+        for r in conn.execute("""
+            SELECT metric, region, value, unit, recorded_at, settlement_date
+            FROM battery_records
+            WHERE metric IN ('max_discharge_5min', 'max_charge_5min')
+        """).fetchall():
+            five_min.setdefault(r['region'], {})[r['metric']] = {
+                'value_mw': round(r['value'], 1),
+                'date': r['settlement_date'],
+                'time': r['recorded_at'],
+            }
+
+    # ---- Build fleet_records per scope ----
+    fleet_records = {}
+    for scope in ['NEM'] + REGIONS:
+        by_date = nem_by_date if scope == 'NEM' else region_by_date.get(scope, {})
+        fr = {
+            'fleet_peak_discharge_day': best_day(by_date, 'd'),
+            'fleet_peak_charge_day': best_day(by_date, 'c'),
+        }
+        scope_5min = five_min.get(scope, {})
+        if scope_5min.get('max_discharge_5min'):
+            fr['peak_5min_discharge_mw'] = scope_5min['max_discharge_5min']
+        if scope_5min.get('max_charge_5min'):
+            fr['peak_5min_charge_mw'] = scope_5min['max_charge_5min']
+        fleet_records[scope] = fr
+
+    # ---- Top-battery records per scope ----
+    def top_battery(scope: str, metric: str, n: int = 10) -> list:
+        scoped = [b for b in batteries if scope == 'NEM' or b['region'] == scope]
+        return sorted(scoped, key=lambda b: b[metric] or 0, reverse=True)[:n]
+
+    out = {
+        'generated_at': datetime.utcnow().isoformat() + 'Z',
+        'data_through': data_through,
+        'total_batteries': len(batteries),
+        'batteries': batteries,
+        'fleet_records': fleet_records,
+        'top_discharge': {s: top_battery(s, 'peak_discharge_mwh') for s in ['NEM'] + REGIONS},
+        'top_charge': {s: top_battery(s, 'peak_charge_mwh') for s in ['NEM'] + REGIONS},
+    }
+
+    out_path = os.path.join(INTEL_DIR, 'bess-records-leaderboard.json')
+    with open(out_path, 'w') as f:
+        json.dump(out, f, indent=2, default=str)
+    print(f"  analytics/intelligence/bess-records-leaderboard.json "
+          f"({len(batteries)} batteries, data_through={data_through})")
+
+
 def export_intelligence(conn):
     """Export all intelligence layer JSON files."""
     print("\nIntelligence Layer:")
@@ -7527,6 +7686,7 @@ def export_intelligence(conn):
     export_rez_access(conn)
     export_nem_activities(conn)
     export_bess_bidding(conn)
+    export_bess_records_leaderboard(conn)
 
 
 # ---- News Export -----------------------------------------------------------

@@ -578,6 +578,20 @@ export async function fetchBatteryLiveRecords(): Promise<any | null> {
   } catch { return null }
 }
 
+// BESS Records Leaderboard — per-battery + fleet all-time records (v2.32.0).
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+let bessRecordsLeaderboardCache: any | null = null
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export async function fetchBessRecordsLeaderboard(): Promise<any | null> {
+  if (bessRecordsLeaderboardCache) return bessRecordsLeaderboardCache
+  try {
+    const resp = await fetch(`${BASE}/analytics/intelligence/bess-records-leaderboard.json`)
+    if (!resp.ok) return null
+    bessRecordsLeaderboardCache = await resp.json()
+    return bessRecordsLeaderboardCache
+  } catch { return null }
+}
+
 // Coal Outage vs Dispatch — NEM/state/station decomposition of coal MWh
 // reduction into outage (unavailable) vs displaced (available but not
 // dispatched) vs dispatched (v2.27.0).
