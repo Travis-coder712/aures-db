@@ -748,14 +748,14 @@
       "stage": "development",
       "project_count": 49,
       "total_mw": 18270.6,
-      "avg_score": 41.9,
+      "avg_score": 41.6,
       "quartile_counts": {
-        "1": 17,
-        "2": 19,
+        "1": 16,
+        "2": 20,
         "3": 13,
         "4": 0
       },
-      "q1_pct": 35.0,
+      "q1_pct": 33.0,
       "project_ids": [
         "bulli-creek-solar-farm",
         "burdekin-solar-farm-kci",
@@ -766,7 +766,6 @@
         "pleasant-hills-solar-farm-kci",
         "punch-and-creek-renewable-energy-stage-2",
         "theodore-solar-farm",
-        "tumuruu-one",
         "wooderson-solar-farm",
         "beelbee-solar-farm",
         "callide-power-station-solar-farm",
@@ -790,6 +789,7 @@
         "raglan-solar-farm",
         "sunshine-energy-solar-farm",
         "sunshine-state-solar-farm-and-bess-rollingstone",
+        "tumuruu-one",
         "upper-calliope-solar-farm-side-a",
         "wandoan-solar-farm",
         "x-elio-sixteen-mile-sf-bess",
@@ -902,18 +902,19 @@
       "technology": "bess",
       "state": "NSW",
       "stage": "operating",
-      "project_count": 7,
-      "total_mw": 1240.0,
-      "avg_score": 37.2,
+      "project_count": 8,
+      "total_mw": 1940.0,
+      "avg_score": 38.5,
       "quartile_counts": {
-        "1": 3,
+        "1": 4,
         "2": 3,
         "3": 0,
         "4": 1
       },
-      "q1_pct": 43.0,
+      "q1_pct": 50.0,
       "project_ids": [
         "smithfield-bess",
+        "eraring-big-battery",
         "riverina-energy-storage-system-1",
         "capital-battery",
         "wallgrove-grid-battery-project",
@@ -2171,14 +2172,14 @@
       "stage": "development",
       "count": 135,
       "mw": 38396.6,
-      "q1": 46
+      "q1": 45
     },
     {
       "technology": "bess",
       "stage": "operating",
-      "count": 28,
-      "mw": 4639.0,
-      "q1": 7
+      "count": 29,
+      "mw": 5339.0,
+      "q1": 8
     },
     {
       "technology": "bess",
@@ -2248,9 +2249,9 @@
     {
       "state": "NSW",
       "stage": "operating",
-      "count": 66,
-      "mw": 12323.9,
-      "q1": 26
+      "count": 67,
+      "mw": 13023.9,
+      "q1": 27
     },
     {
       "state": "NSW",
@@ -2306,7 +2307,7 @@
       "stage": "development",
       "count": 249,
       "mw": 112782.5,
-      "q1": 79
+      "q1": 78
     },
     {
       "state": "SA",
@@ -5871,6 +5872,22 @@
       "revenue_per_mw": 15370.0,
       "score_basis": "Composite score (league-table year 2026)",
       "quartile": 4
+    },
+    "eraring-big-battery": {
+      "id": "eraring-big-battery",
+      "name": "Eraring Big Battery",
+      "technology": "bess",
+      "state": "NSW",
+      "status": "operating",
+      "stage_group": "operating",
+      "capacity_mw": 700.0,
+      "developer": "Origin Energy Electricity Limited",
+      "score": 47.2,
+      "league_quartile": 1,
+      "capacity_factor_pct": 16.1,
+      "revenue_per_mw": 59338.0,
+      "score_basis": "Composite score (league-table year 2026)",
+      "quartile": 1
     },
     "clarke-creek-wind-farm": {
       "id": "clarke-creek-wind-farm",
@@ -20134,15 +20151,15 @@
       "stage_group": "development",
       "capacity_mw": 440.0,
       "developer": "Australian Solar Enterprises Pty Ltd",
-      "score": 55,
+      "score": 40,
       "development_stage": "planning_submitted",
-      "has_cod": true,
+      "has_cod": false,
       "has_rez": false,
       "has_scheme": false,
       "has_eis": false,
       "developer_grade": null,
       "score_basis": "stage (\u00d715) + has_cod (15) + has_rez (10) + scheme (20) + EIS (15) + developer grade (\u00d75); max 110",
-      "quartile": 1
+      "quartile": 2
     },
     "tungkillo-south-bess": {
       "id": "tungkillo-south-bess",
@@ -21629,7 +21646,7 @@
   },
   "summary": {
     "total_cells": 63,
-    "operating_count": 220,
+    "operating_count": 221,
     "construction_count": 56,
     "development_count": 782,
     "matrix_techs": [
@@ -21649,5 +21666,5 @@
       "WA"
     ]
   },
-  "exported_at": "2026-04-17T21:05:04.426058"
+  "exported_at": "2026-04-23T18:25:54.749830"
 }

@@ -491,11 +491,11 @@
   ],
   "bess_coverage": {
     "NSW": {
-      "bess_count": 8,
-      "bess_mw": 1940.0,
-      "bess_mwh": 5555.2,
+      "bess_count": 9,
+      "bess_mw": 2640.0,
+      "bess_mwh": 6945.2,
       "peak_demand_mw_est": 14000,
-      "coverage_hours": 0.4,
+      "coverage_hours": 0.5,
       "coverage_rating": "Low"
     },
     "QLD": {
@@ -5565,5 +5565,5 @@
       "solar_mw": 1186.0
     }
   ],
-  "exported_at": "2026-04-17T21:05:06.376417"
+  "exported_at": "2026-04-23T18:27:27.140637"
 }

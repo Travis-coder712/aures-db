@@ -887,6 +887,32 @@
       "transformer_mva": 460.0
     },
     {
+      "id": "eraring-big-battery",
+      "name": "Eraring Big Battery",
+      "state": "NSW",
+      "capacity_mw": 700.0,
+      "status": "operating",
+      "developer": "Origin Energy Electricity Limited",
+      "connection_voltage_kv": 330.0,
+      "connection_distance_km": 0.0,
+      "connection_substation_name": "Eraring 330 kV substation (TransGrid), Lake Macquarie NSW (on-site, former power station)",
+      "nsp": "TransGrid",
+      "connection_augmentation": "IMPORTANT NOTE: This is a separate battery from the existing eraring-battery (150 MW Tesla Megapack). The Eraring Big Battery (700 MW Wartsila Quantum3) is a different, larger project also at the Eraring site. Both batteries use the same TransGrid 330 kV Eraring substation, eliminating major connection capex.",
+      "document_title": "Eraring Big Battery \u2014 State Significant Development Assessment (NSW IPC SSD-2022-0119)",
+      "document_url": "https://www.planningportal.nsw.gov.au/major-projects/projects/eraring-big-battery",
+      "document_year": 2022,
+      "storage_mwh": 1390.0,
+      "cell_chemistry": "LFP",
+      "cell_supplier": "CATL (Contemporary Amperex Technology Co. Limited)",
+      "inverter_supplier": "Wartsila Energy",
+      "inverter_model": "Quantum3",
+      "pcs_type": "grid_following",
+      "round_trip_efficiency_pct": 89.0,
+      "round_trip_efficiency_ac": 85.0,
+      "duration_hours": 2.0,
+      "transformer_mva": 750.0
+    },
+    {
       "id": "mornington-bess",
       "name": "Mornington BESS",
       "state": "VIC",
@@ -1685,9 +1711,9 @@
   ],
   "solar_projects": [],
   "summary": {
-    "total_eis": 67,
+    "total_eis": 68,
     "wind": 31,
-    "bess": 34,
+    "bess": 35,
     "solar": 0,
     "pumped_hydro": 2,
     "wind_stats": {
@@ -1699,11 +1725,11 @@
     },
     "bess_stats": {
       "chemistry_breakdown": {
-        "LFP": 33,
+        "LFP": 34,
         "NMC": 1
       },
       "pcs_type_breakdown": {
-        "grid_following": 17,
+        "grid_following": 18,
         "grid_forming": 17
       },
       "avg_efficiency_dc": 88.5,
@@ -1711,7 +1737,7 @@
       "avg_duration": 2.4,
       "avg_connection_distance": 5.0,
       "top_cell_suppliers": {
-        "CATL": 5,
+        "CATL": 6,
         "CATL / Tesla": 5,
         "BYD": 3,
         "To be confirmed through procurement": 3,
@@ -1732,6 +1758,7 @@
         "Tesla": 9,
         "BYD": 3,
         "To be confirmed through procurement": 3,
+        "Wartsila Energy": 2,
         "Powin Energy": 2,
         "Sungrow": 2,
         "Fluence": 2,
@@ -1745,7 +1772,6 @@
         "SMA Solar Technology": 1,
         "Huawei or Sungrow": 1,
         "Sungrow Power Supply Co.": 1,
-        "Wartsila Energy": 1,
         "Huawei / SPIC subsidiary": 1,
         "SMA or Sungrow": 1
       }
@@ -1757,11 +1783,11 @@
         "132 kV": 12,
         "220 kV": 16,
         "275 kV": 13,
-        "330 kV": 17,
+        "330 kV": 18,
         "500 kV": 2,
         "66 kV": 5
       }
     }
   },
-  "exported_at": "2026-04-17T21:05:04.491772"
+  "exported_at": "2026-04-23T18:25:54.840669"
 }

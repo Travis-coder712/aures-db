@@ -355,6 +355,27 @@
       ]
     },
     {
+      "slug": "enerven",
+      "name": "Enerven",
+      "project_count": 1,
+      "total_capacity_mw": 700.0,
+      "roles": [
+        "epc"
+      ],
+      "by_technology": {
+        "bess": 1
+      },
+      "by_status": {
+        "operating": 1
+      },
+      "states": [
+        "NSW"
+      ],
+      "project_ids": [
+        "eraring-big-battery"
+      ]
+    },
+    {
       "slug": "grs-gransolar",
       "name": "GRS (Gransolar)",
       "project_count": 3,
@@ -1596,5 +1617,5 @@
       ]
     }
   ],
-  "total": 71
+  "total": 72
 }

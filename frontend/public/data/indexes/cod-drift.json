@@ -1,5 +1,5 @@
 {
-  "projects_with_drift": 610,
+  "projects_with_drift": 609,
   "avg_drift_months": {
     "solar": 0.2,
     "wind": 0.1,
@@ -127,7 +127,7 @@
       "capacity_mw": 101.4,
       "state": "QLD",
       "original": "2028-06-15",
-      "current": "2028-06-15",
+      "current": "2028-06",
       "drift_months": 0
     },
     {
@@ -215,7 +215,7 @@
       "capacity_mw": 360.0,
       "state": "NSW",
       "original": "2029-06-30",
-      "current": "2029-06-30",
+      "current": "2029-06",
       "drift_months": 0
     },
     {
@@ -259,7 +259,7 @@
       "capacity_mw": 220.0,
       "state": "QLD",
       "original": "2029-12-31",
-      "current": "2029-12-31",
+      "current": "2029-12",
       "drift_months": 0
     },
     {
@@ -402,7 +402,7 @@
       "capacity_mw": 224.0,
       "state": "TAS",
       "original": "2030-01-01",
-      "current": "2030-01-01",
+      "current": "2030-01",
       "drift_months": 0
     },
     {
@@ -622,7 +622,7 @@
       "capacity_mw": 200.0,
       "state": "NSW",
       "original": "2027-05-31",
-      "current": "2027-05-31",
+      "current": "2027-05",
       "drift_months": 0
     },
     {
@@ -644,7 +644,7 @@
       "capacity_mw": 1000.0,
       "state": "VIC",
       "original": "2031-09-30",
-      "current": "2031-09-30",
+      "current": "2031-09",
       "drift_months": 0
     },
     {
@@ -655,7 +655,7 @@
       "capacity_mw": 150.0,
       "state": "NSW",
       "original": "2029-12-25",
-      "current": "2029-12-25",
+      "current": "2029-12",
       "drift_months": 0
     },
     {
@@ -820,7 +820,7 @@
       "capacity_mw": 775.0,
       "state": "QLD",
       "original": "2029-08-01",
-      "current": "2029-08-01",
+      "current": "2029-08",
       "drift_months": 0
     },
     {
@@ -831,7 +831,7 @@
       "capacity_mw": 97.0,
       "state": "QLD",
       "original": "2027-04-30",
-      "current": "2027-04-30",
+      "current": "2027-04",
       "drift_months": 0
     },
     {
@@ -919,7 +919,7 @@
       "capacity_mw": 500.0,
       "state": "QLD",
       "original": "2035-12-01",
-      "current": "2035-12-01",
+      "current": "2035-12",
       "drift_months": 0
     },
     {
@@ -941,7 +941,7 @@
       "capacity_mw": 500.0,
       "state": "QLD",
       "original": "2029-12-28",
-      "current": "2029-12-28",
+      "current": "2029-12",
       "drift_months": 0
     },
     {
@@ -1458,7 +1458,7 @@
       "capacity_mw": 270.0,
       "state": "NSW",
       "original": "2027-09-30",
-      "current": "2027-09-30",
+      "current": "2027-09",
       "drift_months": 0
     },
     {
@@ -1579,7 +1579,7 @@
       "capacity_mw": 250.0,
       "state": "NSW",
       "original": "2034-06-01",
-      "current": "2034-06-01",
+      "current": "2034-06",
       "drift_months": 0
     },
     {
@@ -1964,7 +1964,7 @@
       "capacity_mw": 77.0,
       "state": "VIC",
       "original": "2027-06-30",
-      "current": "2027-06-30",
+      "current": "2027-06",
       "drift_months": 0
     },
     {
@@ -2129,7 +2129,7 @@
       "capacity_mw": 400.0,
       "state": "VIC",
       "original": "2029-06-30",
-      "current": "2029-06-30",
+      "current": "2029-06",
       "drift_months": 0
     },
     {
@@ -2294,7 +2294,7 @@
       "capacity_mw": 600.0,
       "state": "SA",
       "original": "2029-12-31",
-      "current": "2029-12-31",
+      "current": "2029-12",
       "drift_months": 0
     },
     {
@@ -2591,7 +2591,7 @@
       "capacity_mw": 710.0,
       "state": "NSW",
       "original": "2032-12-31",
-      "current": "2032-12-31",
+      "current": "2032-12",
       "drift_months": 0
     },
     {
@@ -2635,7 +2635,7 @@
       "capacity_mw": 300.0,
       "state": "QLD",
       "original": "2028-01-06",
-      "current": "2028-01-06",
+      "current": "2028-01",
       "drift_months": 0
     },
     {
@@ -2734,7 +2734,7 @@
       "capacity_mw": 1281.0,
       "state": "VIC",
       "original": "2035-07-25",
-      "current": "2035-07-25",
+      "current": "2035-07",
       "drift_months": 0
     },
     {
@@ -2767,7 +2767,7 @@
       "capacity_mw": 250.0,
       "state": "NSW",
       "original": "2029-03-30",
-      "current": "2029-03-30",
+      "current": "2029-03",
       "drift_months": 0
     },
     {
@@ -2910,7 +2910,7 @@
       "capacity_mw": 600.0,
       "state": "QLD",
       "original": "2030-01-01",
-      "current": "2030-01-01",
+      "current": "2030-01",
       "drift_months": 0
     },
     {
@@ -3207,7 +3207,7 @@
       "capacity_mw": 270.0,
       "state": "QLD",
       "original": "2035-01-01",
-      "current": "2035-01-01",
+      "current": "2035-01",
       "drift_months": 0
     },
     {
@@ -3262,7 +3262,7 @@
       "capacity_mw": 230.0,
       "state": "VIC",
       "original": "2032-01-01",
-      "current": "2032-01-01",
+      "current": "2032-01",
       "drift_months": 0
     },
     {
@@ -3328,7 +3328,7 @@
       "capacity_mw": 72.0,
       "state": "QLD",
       "original": "2030-01-01",
-      "current": "2030-01-01",
+      "current": "2030-01",
       "drift_months": 0
     },
     {
@@ -3339,7 +3339,7 @@
       "capacity_mw": 300.0,
       "state": "NSW",
       "original": "2029-11-30",
-      "current": "2029-11-30",
+      "current": "2029-11",
       "drift_months": 0
     },
     {
@@ -3471,7 +3471,7 @@
       "capacity_mw": 100.0,
       "state": "SA",
       "original": "2027-06-30",
-      "current": "2027-06-30",
+      "current": "2027-06",
       "drift_months": 0
     },
     {
@@ -3680,7 +3680,7 @@
       "capacity_mw": 152.0,
       "state": "NSW",
       "original": "2027-12-02",
-      "current": "2027-12-02",
+      "current": "2027-12",
       "drift_months": 0
     },
     {
@@ -3724,7 +3724,7 @@
       "capacity_mw": 1500.0,
       "state": "VIC",
       "original": "2030-01-01",
-      "current": "2030-01-01",
+      "current": "2030-01",
       "drift_months": 0
     },
     {
@@ -3735,7 +3735,7 @@
       "capacity_mw": 250.0,
       "state": "SA",
       "original": "2027-12-30",
-      "current": "2027-12-30",
+      "current": "2027-12",
       "drift_months": 0
     },
     {
@@ -3834,7 +3834,7 @@
       "capacity_mw": 500.0,
       "state": "QLD",
       "original": "2030-07-01",
-      "current": "2030-07-01",
+      "current": "2030-07",
       "drift_months": 0
     },
     {
@@ -3845,7 +3845,7 @@
       "capacity_mw": 400.0,
       "state": "NSW",
       "original": "2029-10-12",
-      "current": "2029-10-12",
+      "current": "2029-10",
       "drift_months": 0
     },
     {
@@ -3867,7 +3867,7 @@
       "capacity_mw": 30.0,
       "state": "NSW",
       "original": "2027-12-01",
-      "current": "2027-12-01",
+      "current": "2027-12",
       "drift_months": 0
     },
     {
@@ -3911,7 +3911,7 @@
       "capacity_mw": 150.0,
       "state": "VIC",
       "original": "2029-12-26",
-      "current": "2029-12-26",
+      "current": "2029-12",
       "drift_months": 0
     },
     {
@@ -4043,7 +4043,7 @@
       "capacity_mw": 750.0,
       "state": "VIC",
       "original": "2032-07-05",
-      "current": "2032-07-05",
+      "current": "2032-07",
       "drift_months": 0
     },
     {
@@ -4120,7 +4120,7 @@
       "capacity_mw": 291.4,
       "state": "QLD",
       "original": "2032-01-01",
-      "current": "2032-01-01",
+      "current": "2032-01",
       "drift_months": 0
     },
     {
@@ -4351,7 +4351,7 @@
       "capacity_mw": 1260.0,
       "state": "TAS",
       "original": "2032-07-30",
-      "current": "2032-07-30",
+      "current": "2032-07",
       "drift_months": 0
     },
     {
@@ -4439,7 +4439,7 @@
       "capacity_mw": 302.1,
       "state": "VIC",
       "original": "2028-12-31",
-      "current": "2028-12-31",
+      "current": "2028-12",
       "drift_months": 0
     },
     {
@@ -4483,7 +4483,7 @@
       "capacity_mw": 250.0,
       "state": "SA",
       "original": "2028-06-30",
-      "current": "2028-06-30",
+      "current": "2028-06",
       "drift_months": 0
     },
     {
@@ -4626,7 +4626,7 @@
       "capacity_mw": 80.0,
       "state": "QLD",
       "original": "2029-10-07",
-      "current": "2029-10-07",
+      "current": "2029-10",
       "drift_months": 0
     },
     {
@@ -4692,7 +4692,7 @@
       "capacity_mw": 250.0,
       "state": "VIC",
       "original": "2035-09-30",
-      "current": "2035-09-30",
+      "current": "2035-09",
       "drift_months": 0
     },
     {
@@ -4703,7 +4703,7 @@
       "capacity_mw": 2000.0,
       "state": "QLD",
       "original": "2031-12-31",
-      "current": "2031-12-31",
+      "current": "2031-12",
       "drift_months": 0
     },
     {
@@ -4714,7 +4714,7 @@
       "capacity_mw": 400.0,
       "state": "QLD",
       "original": "2026-01-31",
-      "current": "2026-01-31",
+      "current": "2026-01",
       "drift_months": 0
     },
     {
@@ -4725,7 +4725,7 @@
       "capacity_mw": 400.0,
       "state": "QLD",
       "original": "2028-10-31",
-      "current": "2028-10-31",
+      "current": "2028-10",
       "drift_months": 0
     },
     {
@@ -4780,7 +4780,7 @@
       "capacity_mw": 63.0,
       "state": "VIC",
       "original": "2026-01-16",
-      "current": "2026-01-16",
+      "current": "2026-01",
       "drift_months": 0
     },
     {
@@ -4912,7 +4912,7 @@
       "capacity_mw": 100.0,
       "state": "VIC",
       "original": "2029-08-01",
-      "current": "2029-08-01",
+      "current": "2029-08",
       "drift_months": 0
     },
     {
@@ -4923,7 +4923,7 @@
       "capacity_mw": 248.0,
       "state": "NSW",
       "original": "2028-09-30",
-      "current": "2028-09-30",
+      "current": "2028-09",
       "drift_months": 0
     },
     {
@@ -4989,7 +4989,7 @@
       "capacity_mw": 450.0,
       "state": "NSW",
       "original": "2032-02-27",
-      "current": "2032-02-27",
+      "current": "2032-02",
       "drift_months": 0
     },
     {
@@ -5088,7 +5088,7 @@
       "capacity_mw": 1300.0,
       "state": "NSW",
       "original": "2031-11-28",
-      "current": "2031-11-28",
+      "current": "2031-11",
       "drift_months": 0
     },
     {
@@ -5165,7 +5165,7 @@
       "capacity_mw": 300.0,
       "state": "QLD",
       "original": "2027-09-30",
-      "current": "2027-09-30",
+      "current": "2027-09",
       "drift_months": 0
     },
     {
@@ -5209,7 +5209,7 @@
       "capacity_mw": 800.0,
       "state": "QLD",
       "original": "2030-12-30",
-      "current": "2030-12-30",
+      "current": "2030-12",
       "drift_months": 0
     },
     {
@@ -5286,7 +5286,7 @@
       "capacity_mw": 800.0,
       "state": "VIC",
       "original": "2031-12-01",
-      "current": "2031-12-01",
+      "current": "2031-12",
       "drift_months": 0
     },
     {
@@ -5561,7 +5561,7 @@
       "capacity_mw": 400.0,
       "state": "VIC",
       "original": "2029-12-31",
-      "current": "2029-12-31",
+      "current": "2029-12",
       "drift_months": 0
     },
     {
@@ -5906,17 +5906,6 @@
       "drift_months": 0
     },
     {
-      "id": "tumuruu-one",
-      "name": "Tumuruu One",
-      "technology": "solar",
-      "status": "development",
-      "capacity_mw": 440.0,
-      "state": "QLD",
-      "original": "2028-08-31",
-      "current": "2028-08-31",
-      "drift_months": 0
-    },
-    {
       "id": "tumut-3",
       "name": "Tumut 3",
       "technology": "pumped_hydro",
@@ -6177,7 +6166,7 @@
       "capacity_mw": 306.0,
       "state": "VIC",
       "original": "2030-12-30",
-      "current": "2030-12-30",
+      "current": "2030-12",
       "drift_months": 0
     },
     {
@@ -6353,7 +6342,7 @@
       "capacity_mw": 215.0,
       "state": "NSW",
       "original": "2028-03-31",
-      "current": "2028-03-31",
+      "current": "2028-03",
       "drift_months": 0
     },
     {
@@ -6419,7 +6408,7 @@
       "capacity_mw": 100.0,
       "state": "VIC",
       "original": "2027-04-30",
-      "current": "2027-04-30",
+      "current": "2027-04",
       "drift_months": 0
     },
     {
@@ -6474,7 +6463,7 @@
       "capacity_mw": 450.0,
       "state": "QLD",
       "original": "2030-05-01",
-      "current": "2030-05-01",
+      "current": "2030-05",
       "drift_months": 0
     },
     {
@@ -6496,7 +6485,7 @@
       "capacity_mw": 500.0,
       "state": "NSW",
       "original": "2033-06-01",
-      "current": "2033-06-01",
+      "current": "2033-06",
       "drift_months": 0
     },
     {
@@ -6540,7 +6529,7 @@
       "capacity_mw": 70.0,
       "state": "VIC",
       "original": "2028-09-20",
-      "current": "2028-09-20",
+      "current": "2028-09",
       "drift_months": 0
     },
     {
@@ -6661,7 +6650,7 @@
       "capacity_mw": 60.0,
       "state": "NSW",
       "original": "2027-05-31",
-      "current": "2027-05-31",
+      "current": "2027-05",
       "drift_months": 0
     },
     {
@@ -6672,7 +6661,7 @@
       "capacity_mw": 450.0,
       "state": "NSW",
       "original": "2029-07-31",
-      "current": "2029-07-31",
+      "current": "2029-07",
       "drift_months": 0
     },
     {

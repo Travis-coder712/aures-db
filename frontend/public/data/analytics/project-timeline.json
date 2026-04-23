@@ -3484,6 +3484,19 @@
       "first_seen_year": 2025
     },
     {
+      "id": "eraring-big-battery",
+      "name": "Eraring Big Battery",
+      "technology": "bess",
+      "status": "operating",
+      "capacity_mw": 700.0,
+      "storage_mwh": 1390.0,
+      "state": "NSW",
+      "current_developer": "Origin Energy Electricity Limited",
+      "cod_current": "2025-12",
+      "data_confidence": "low",
+      "first_seen_year": 2025
+    },
+    {
       "id": "western-downs-battery-stage-1-and-2",
       "name": "Western Downs Battery - Stage 1 And 2",
       "technology": "bess",
@@ -3561,6 +3574,38 @@
       "data_confidence": "high",
       "confidence_score": "80",
       "earliest_event": "2017",
+      "first_seen_year": 2026
+    },
+    {
+      "id": "punch-and-creek-renewable-energy",
+      "name": "Punch and Creek Renewable Energy",
+      "technology": "solar",
+      "status": "development",
+      "capacity_mw": 400.0,
+      "state": "QLD",
+      "current_developer": "Skylab",
+      "first_seen": "2026-03-12",
+      "development_stage": "early_stage",
+      "cod_current": "2026-01",
+      "cod_original": "2026-01-31",
+      "data_confidence": "low",
+      "confidence_score": "23",
+      "first_seen_year": 2026
+    },
+    {
+      "id": "ravenswood-solar-farm-bess",
+      "name": "Ravenswood Solar Farm BESS",
+      "technology": "solar",
+      "status": "development",
+      "capacity_mw": 63.0,
+      "state": "VIC",
+      "current_developer": "NEMMCO",
+      "first_seen": "2026-03-12",
+      "development_stage": "planning_submitted",
+      "cod_current": "2026-01",
+      "cod_original": "2026-01-16",
+      "data_confidence": "low",
+      "confidence_score": "23",
       "first_seen_year": 2026
     },
     {
@@ -3663,22 +3708,6 @@
       "first_seen_year": 2026
     },
     {
-      "id": "ravenswood-solar-farm-bess",
-      "name": "Ravenswood Solar Farm BESS",
-      "technology": "solar",
-      "status": "development",
-      "capacity_mw": 63.0,
-      "state": "VIC",
-      "current_developer": "NEMMCO",
-      "first_seen": "2026-03-12",
-      "development_stage": "planning_submitted",
-      "cod_current": "2026-01-16",
-      "cod_original": "2026-01-16",
-      "data_confidence": "low",
-      "confidence_score": "23",
-      "first_seen_year": 2026
-    },
-    {
       "id": "munna-creek-solar-farm",
       "name": "Munna Creek Solar Farm",
       "technology": "solar",
@@ -3726,22 +3755,6 @@
       "cod_original": "2026-01-30",
       "data_confidence": "good",
       "confidence_score": "64",
-      "first_seen_year": 2026
-    },
-    {
-      "id": "punch-and-creek-renewable-energy",
-      "name": "Punch and Creek Renewable Energy",
-      "technology": "solar",
-      "status": "development",
-      "capacity_mw": 400.0,
-      "state": "QLD",
-      "current_developer": "Skylab",
-      "first_seen": "2026-03-12",
-      "development_stage": "early_stage",
-      "cod_current": "2026-01-31",
-      "cod_original": "2026-01-31",
-      "data_confidence": "low",
-      "confidence_score": "23",
       "first_seen_year": 2026
     },
     {
@@ -4350,6 +4363,38 @@
       "first_seen_year": 2027
     },
     {
+      "id": "winton-north-solar-farm",
+      "name": "Winton North Solar Farm",
+      "technology": "solar",
+      "status": "development",
+      "capacity_mw": 100.0,
+      "state": "VIC",
+      "current_developer": "EE Solar 12 Pty Ltd as trustee for the EE Solar 12 Trust",
+      "first_seen": "2026-03-12",
+      "development_stage": "early_stage",
+      "cod_current": "2027-04",
+      "cod_original": "2027-04-30",
+      "data_confidence": "low",
+      "confidence_score": "23",
+      "first_seen_year": 2027
+    },
+    {
+      "id": "bullyard-solar-farm",
+      "name": "Bullyard Solar Farm",
+      "technology": "solar",
+      "status": "development",
+      "capacity_mw": 97.0,
+      "state": "QLD",
+      "current_developer": "EE Solar 9 Pty Ltd as trustee for the EE Solar 9 Trust",
+      "first_seen": "2026-03-12",
+      "development_stage": "early_stage",
+      "cod_current": "2027-04",
+      "cod_original": "2027-04-30",
+      "data_confidence": "low",
+      "confidence_score": "23",
+      "first_seen_year": 2027
+    },
+    {
       "id": "tailem-bend-stage-3",
       "name": "Tailem Bend Stage 3",
       "technology": "bess",
@@ -4367,38 +4412,6 @@
       "has_scheme_contract": true
     },
     {
-      "id": "winton-north-solar-farm",
-      "name": "Winton North Solar Farm",
-      "technology": "solar",
-      "status": "development",
-      "capacity_mw": 100.0,
-      "state": "VIC",
-      "current_developer": "EE Solar 12 Pty Ltd as trustee for the EE Solar 12 Trust",
-      "first_seen": "2026-03-12",
-      "development_stage": "early_stage",
-      "cod_current": "2027-04-30",
-      "cod_original": "2027-04-30",
-      "data_confidence": "low",
-      "confidence_score": "23",
-      "first_seen_year": 2027
-    },
-    {
-      "id": "bullyard-solar-farm",
-      "name": "Bullyard Solar Farm",
-      "technology": "solar",
-      "status": "development",
-      "capacity_mw": 97.0,
-      "state": "QLD",
-      "current_developer": "EE Solar 9 Pty Ltd as trustee for the EE Solar 9 Trust",
-      "first_seen": "2026-03-12",
-      "development_stage": "early_stage",
-      "cod_current": "2027-04-30",
-      "cod_original": "2027-04-30",
-      "data_confidence": "low",
-      "confidence_score": "23",
-      "first_seen_year": 2027
-    },
-    {
       "id": "bonshaw-solar-farm",
       "name": "Bonshaw Solar Farm",
       "technology": "solar",
@@ -4408,7 +4421,7 @@
       "current_developer": "GAIA Australia Pty Ltd",
       "first_seen": "2026-03-12",
       "development_stage": "planning_submitted",
-      "cod_current": "2027-05-31",
+      "cod_current": "2027-05",
       "cod_original": "2027-05-31",
       "data_confidence": "low",
       "confidence_score": "23",
@@ -4424,8 +4437,40 @@
       "current_developer": "Origin Energy",
       "first_seen": "2026-03-12",
       "development_stage": "planning_submitted",
-      "cod_current": "2027-05-31",
+      "cod_current": "2027-05",
       "cod_original": "2027-05-31",
+      "data_confidence": "low",
+      "confidence_score": "23",
+      "first_seen_year": 2027
+    },
+    {
+      "id": "lindley-bess",
+      "name": "Lindley BESS",
+      "technology": "bess",
+      "status": "development",
+      "capacity_mw": 100.0,
+      "state": "SA",
+      "current_developer": "SynCo Global",
+      "first_seen": "2026-03-12",
+      "development_stage": "early_stage",
+      "cod_current": "2027-06",
+      "cod_original": "2027-06-30",
+      "data_confidence": "low",
+      "confidence_score": "23",
+      "first_seen_year": 2027
+    },
+    {
+      "id": "frasers-solar-farm",
+      "name": "Frasers Solar Farm",
+      "technology": "solar",
+      "status": "development",
+      "capacity_mw": 77.0,
+      "state": "VIC",
+      "current_developer": "Frasers Lane Development Pty Ltd",
+      "first_seen": "2026-03-12",
+      "development_stage": "early_stage",
+      "cod_current": "2027-06",
+      "cod_original": "2027-06-30",
       "data_confidence": "low",
       "confidence_score": "23",
       "first_seen_year": 2027
@@ -4482,38 +4527,6 @@
       "cod_original": "2027-06-30",
       "data_confidence": "medium",
       "confidence_score": "28",
-      "first_seen_year": 2027
-    },
-    {
-      "id": "lindley-bess",
-      "name": "Lindley BESS",
-      "technology": "bess",
-      "status": "development",
-      "capacity_mw": 100.0,
-      "state": "SA",
-      "current_developer": "SynCo Global",
-      "first_seen": "2026-03-12",
-      "development_stage": "early_stage",
-      "cod_current": "2027-06-30",
-      "cod_original": "2027-06-30",
-      "data_confidence": "low",
-      "confidence_score": "23",
-      "first_seen_year": 2027
-    },
-    {
-      "id": "frasers-solar-farm",
-      "name": "Frasers Solar Farm",
-      "technology": "solar",
-      "status": "development",
-      "capacity_mw": 77.0,
-      "state": "VIC",
-      "current_developer": "Frasers Lane Development Pty Ltd",
-      "first_seen": "2026-03-12",
-      "development_stage": "early_stage",
-      "cod_current": "2027-06-30",
-      "cod_original": "2027-06-30",
-      "data_confidence": "low",
-      "confidence_score": "23",
       "first_seen_year": 2027
     },
     {
@@ -4670,6 +4683,39 @@
       "first_seen_year": 2027
     },
     {
+      "id": "south-burnett-bess",
+      "name": "South Burnett BESS",
+      "technology": "bess",
+      "status": "development",
+      "capacity_mw": 300.0,
+      "state": "QLD",
+      "current_developer": "X-Elio Australia Pty Ltd",
+      "first_seen": "2026-03-12",
+      "development_stage": "planning_submitted",
+      "cod_current": "2027-09",
+      "cod_original": "2027-09-30",
+      "data_confidence": "low",
+      "confidence_score": "23",
+      "first_seen_year": 2027
+    },
+    {
+      "id": "coppabella-wind-farm",
+      "name": "Coppabella Wind Farm",
+      "technology": "wind",
+      "status": "development",
+      "capacity_mw": 270.0,
+      "state": "NSW",
+      "current_developer": "Coppabella Wind Farm Pty Ltd",
+      "first_seen": "2026-03-12",
+      "development_stage": "early_stage",
+      "cod_current": "2027-09",
+      "cod_original": "2027-09-30",
+      "data_confidence": "low",
+      "confidence_score": "23",
+      "first_seen_year": 2027,
+      "has_scheme_contract": true
+    },
+    {
       "id": "normanville-energy-park",
       "name": "Normanville Energy Park",
       "technology": "wind",
@@ -4722,22 +4768,6 @@
       "first_seen_year": 2027
     },
     {
-      "id": "south-burnett-bess",
-      "name": "South Burnett BESS",
-      "technology": "bess",
-      "status": "development",
-      "capacity_mw": 300.0,
-      "state": "QLD",
-      "current_developer": "X-Elio Australia Pty Ltd",
-      "first_seen": "2026-03-12",
-      "development_stage": "planning_submitted",
-      "cod_current": "2027-09-30",
-      "cod_original": "2027-09-30",
-      "data_confidence": "low",
-      "confidence_score": "23",
-      "first_seen_year": 2027
-    },
-    {
       "id": "fraser-coast-hybrid-plant",
       "name": "Fraser Coast Hybrid Plant",
       "technology": "hybrid",
@@ -4753,23 +4783,6 @@
       "data_confidence": "medium",
       "confidence_score": "28",
       "first_seen_year": 2027
-    },
-    {
-      "id": "coppabella-wind-farm",
-      "name": "Coppabella Wind Farm",
-      "technology": "wind",
-      "status": "development",
-      "capacity_mw": 270.0,
-      "state": "NSW",
-      "current_developer": "Coppabella Wind Farm Pty Ltd",
-      "first_seen": "2026-03-12",
-      "development_stage": "early_stage",
-      "cod_current": "2027-09-30",
-      "cod_original": "2027-09-30",
-      "data_confidence": "low",
-      "confidence_score": "23",
-      "first_seen_year": 2027,
-      "has_scheme_contract": true
     },
     {
       "id": "fulham-solar-farm-and-bess",
@@ -4943,17 +4956,17 @@
       "first_seen_year": 2027
     },
     {
-      "id": "moama-solar-farm",
-      "name": "Moama Solar Farm",
-      "technology": "solar",
+      "id": "megalink-bess",
+      "name": "MegaLink BESS",
+      "technology": "bess",
       "status": "development",
-      "capacity_mw": 30.0,
-      "state": "NSW",
-      "current_developer": "Moama Propertyco Pty Ltd as trustee for the Moama Property Trust",
+      "capacity_mw": 250.0,
+      "state": "SA",
+      "current_developer": "SynCo Global",
       "first_seen": "2026-03-12",
       "development_stage": "planning_submitted",
-      "cod_current": "2027-12-01",
-      "cod_original": "2027-12-01",
+      "cod_current": "2027-12",
+      "cod_original": "2027-12-30",
       "data_confidence": "low",
       "confidence_score": "23",
       "first_seen_year": 2027
@@ -4968,8 +4981,24 @@
       "current_developer": "Marulan Solar Farm Pty Ltd",
       "first_seen": "2026-03-12",
       "development_stage": "early_stage",
-      "cod_current": "2027-12-02",
+      "cod_current": "2027-12",
       "cod_original": "2027-12-02",
+      "data_confidence": "low",
+      "confidence_score": "23",
+      "first_seen_year": 2027
+    },
+    {
+      "id": "moama-solar-farm",
+      "name": "Moama Solar Farm",
+      "technology": "solar",
+      "status": "development",
+      "capacity_mw": 30.0,
+      "state": "NSW",
+      "current_developer": "Moama Propertyco Pty Ltd as trustee for the Moama Property Trust",
+      "first_seen": "2026-03-12",
+      "development_stage": "planning_submitted",
+      "cod_current": "2027-12",
+      "cod_original": "2027-12-01",
       "data_confidence": "low",
       "confidence_score": "23",
       "first_seen_year": 2027
@@ -5023,22 +5052,6 @@
       "cod_original": "2027-12-18",
       "data_confidence": "medium",
       "confidence_score": "28",
-      "first_seen_year": 2027
-    },
-    {
-      "id": "megalink-bess",
-      "name": "MegaLink BESS",
-      "technology": "bess",
-      "status": "development",
-      "capacity_mw": 250.0,
-      "state": "SA",
-      "current_developer": "SynCo Global",
-      "first_seen": "2026-03-12",
-      "development_stage": "planning_submitted",
-      "cod_current": "2027-12-30",
-      "cod_original": "2027-12-30",
-      "data_confidence": "low",
-      "confidence_score": "23",
       "first_seen_year": 2027
     },
     {
@@ -5250,6 +5263,22 @@
       "first_seen_year": 2028
     },
     {
+      "id": "haughton-solar-farm-stage-2",
+      "name": "Haughton Solar Farm Stage 2",
+      "technology": "solar",
+      "status": "development",
+      "capacity_mw": 300.0,
+      "state": "QLD",
+      "current_developer": "Pacific Hydro Australia Pty Ltd",
+      "first_seen": "2026-03-12",
+      "development_stage": "early_stage",
+      "cod_current": "2028-01",
+      "cod_original": "2028-01-06",
+      "data_confidence": "low",
+      "confidence_score": "23",
+      "first_seen_year": 2028
+    },
+    {
       "id": "sundown-hybrid-facility",
       "name": "Sundown Hybrid Facility",
       "technology": "hybrid",
@@ -5371,22 +5400,6 @@
       "first_seen_year": 2028
     },
     {
-      "id": "haughton-solar-farm-stage-2",
-      "name": "Haughton Solar Farm Stage 2",
-      "technology": "solar",
-      "status": "development",
-      "capacity_mw": 300.0,
-      "state": "QLD",
-      "current_developer": "Pacific Hydro Australia Pty Ltd",
-      "first_seen": "2026-03-12",
-      "development_stage": "early_stage",
-      "cod_current": "2028-01-06",
-      "cod_original": "2028-01-06",
-      "data_confidence": "low",
-      "confidence_score": "23",
-      "first_seen_year": 2028
-    },
-    {
       "id": "northern-battery",
       "name": "Northern Battery",
       "technology": "bess",
@@ -5492,6 +5505,22 @@
       "has_scheme_contract": true
     },
     {
+      "id": "white-rock-wind-farm-stage-2",
+      "name": "White Rock Wind Farm - Stage 2",
+      "technology": "wind",
+      "status": "development",
+      "capacity_mw": 215.0,
+      "state": "NSW",
+      "current_developer": "White Rock Wind Farm Pty Ltd",
+      "first_seen": "2026-03-12",
+      "development_stage": "planning_submitted",
+      "cod_current": "2028-03",
+      "cod_original": "2028-03-31",
+      "data_confidence": "low",
+      "confidence_score": "23",
+      "first_seen_year": 2028
+    },
+    {
       "id": "vales-point-bess",
       "name": "Vales Point BESS",
       "technology": "bess",
@@ -5594,22 +5623,6 @@
       "first_seen_year": 2028
     },
     {
-      "id": "white-rock-wind-farm-stage-2",
-      "name": "White Rock Wind Farm - Stage 2",
-      "technology": "wind",
-      "status": "development",
-      "capacity_mw": 215.0,
-      "state": "NSW",
-      "current_developer": "White Rock Wind Farm Pty Ltd",
-      "first_seen": "2026-03-12",
-      "development_stage": "planning_submitted",
-      "cod_current": "2028-03-31",
-      "cod_original": "2028-03-31",
-      "data_confidence": "low",
-      "confidence_score": "23",
-      "first_seen_year": 2028
-    },
-    {
       "id": "templers-b-bess",
       "name": "Templers B BESS",
       "technology": "bess",
@@ -5644,6 +5657,22 @@
       "first_seen_year": 2028
     },
     {
+      "id": "opal-bess",
+      "name": "Opal BESS",
+      "technology": "bess",
+      "status": "development",
+      "capacity_mw": 250.0,
+      "state": "SA",
+      "current_developer": "SynCo Global",
+      "first_seen": "2026-03-12",
+      "development_stage": "planning_submitted",
+      "cod_current": "2028-06",
+      "cod_original": "2028-06-30",
+      "data_confidence": "low",
+      "confidence_score": "23",
+      "first_seen_year": 2028
+    },
+    {
       "id": "aramara-solar-farm",
       "name": "Aramara Solar Farm",
       "technology": "solar",
@@ -5653,7 +5682,7 @@
       "current_developer": "Aramara Solar Pty Ltd",
       "first_seen": "2026-03-12",
       "development_stage": "early_stage",
-      "cod_current": "2028-06-15",
+      "cod_current": "2028-06",
       "cod_original": "2028-06-15",
       "data_confidence": "low",
       "confidence_score": "23",
@@ -5709,22 +5738,6 @@
       "data_confidence": "medium",
       "confidence_score": "31",
       "earliest_event": "2022",
-      "first_seen_year": 2028
-    },
-    {
-      "id": "opal-bess",
-      "name": "Opal BESS",
-      "technology": "bess",
-      "status": "development",
-      "capacity_mw": 250.0,
-      "state": "SA",
-      "current_developer": "SynCo Global",
-      "first_seen": "2026-03-12",
-      "development_stage": "planning_submitted",
-      "cod_current": "2028-06-30",
-      "cod_original": "2028-06-30",
-      "data_confidence": "low",
-      "confidence_score": "23",
       "first_seen_year": 2028
     },
     {
@@ -5901,22 +5914,6 @@
       "first_seen_year": 2028
     },
     {
-      "id": "tumuruu-one",
-      "name": "Tumuruu One",
-      "technology": "solar",
-      "status": "development",
-      "capacity_mw": 440.0,
-      "state": "QLD",
-      "current_developer": "Australian Solar Enterprises Pty Ltd",
-      "development_stage": "planning_submitted",
-      "cod_current": "2028-08-31",
-      "cod_original": "2028-08-31",
-      "zombie_flag": "zombie_minimal",
-      "data_confidence": "low",
-      "confidence_score": "20",
-      "first_seen_year": 2028
-    },
-    {
       "id": "teebar-creek-battery-storage-kci",
       "name": "Teebar Creek Battery Storage - KCI",
       "technology": "bess",
@@ -6005,6 +6002,38 @@
       "first_seen_year": 2028
     },
     {
+      "id": "ruby-hills-north-wind-farm",
+      "name": "Ruby Hills North Wind Farm",
+      "technology": "wind",
+      "status": "development",
+      "capacity_mw": 248.0,
+      "state": "NSW",
+      "current_developer": "Origin energy",
+      "first_seen": "2026-03-12",
+      "development_stage": "planning_submitted",
+      "cod_current": "2028-09",
+      "cod_original": "2028-09-30",
+      "data_confidence": "low",
+      "confidence_score": "23",
+      "first_seen_year": 2028
+    },
+    {
+      "id": "woolsthorpe-wind-farm",
+      "name": "Woolsthorpe Wind Farm",
+      "technology": "wind",
+      "status": "development",
+      "capacity_mw": 70.0,
+      "state": "VIC",
+      "current_developer": "Woolsthorpe Wind Farm Pty Ltd",
+      "first_seen": "2026-03-12",
+      "development_stage": "early_stage",
+      "cod_current": "2028-09",
+      "cod_original": "2028-09-20",
+      "data_confidence": "low",
+      "confidence_score": "23",
+      "first_seen_year": 2028
+    },
+    {
       "id": "mortlake-energy-hub",
       "name": "Mortlake Energy Hub",
       "technology": "hybrid",
@@ -6019,22 +6048,6 @@
       "cod_original": "2028-09-01",
       "data_confidence": "medium",
       "confidence_score": "28",
-      "first_seen_year": 2028
-    },
-    {
-      "id": "woolsthorpe-wind-farm",
-      "name": "Woolsthorpe Wind Farm",
-      "technology": "wind",
-      "status": "development",
-      "capacity_mw": 70.0,
-      "state": "VIC",
-      "current_developer": "Woolsthorpe Wind Farm Pty Ltd",
-      "first_seen": "2026-03-12",
-      "development_stage": "early_stage",
-      "cod_current": "2028-09-20",
-      "cod_original": "2028-09-20",
-      "data_confidence": "low",
-      "confidence_score": "23",
       "first_seen_year": 2028
     },
     {
@@ -6088,17 +6101,17 @@
       "first_seen_year": 2028
     },
     {
-      "id": "ruby-hills-north-wind-farm",
-      "name": "Ruby Hills North Wind Farm",
-      "technology": "wind",
+      "id": "punch-and-creek-renewable-energy-stage-2",
+      "name": "Punch and Creek Renewable Energy Stage 2",
+      "technology": "solar",
       "status": "development",
-      "capacity_mw": 248.0,
-      "state": "NSW",
-      "current_developer": "Origin energy",
+      "capacity_mw": 400.0,
+      "state": "QLD",
+      "current_developer": "skylabgroup_NR",
       "first_seen": "2026-03-12",
       "development_stage": "planning_submitted",
-      "cod_current": "2028-09-30",
-      "cod_original": "2028-09-30",
+      "cod_current": "2028-10",
+      "cod_original": "2028-10-31",
       "data_confidence": "low",
       "confidence_score": "23",
       "first_seen_year": 2028
@@ -6240,22 +6253,6 @@
       "has_scheme_contract": true
     },
     {
-      "id": "punch-and-creek-renewable-energy-stage-2",
-      "name": "Punch and Creek Renewable Energy Stage 2",
-      "technology": "solar",
-      "status": "development",
-      "capacity_mw": 400.0,
-      "state": "QLD",
-      "current_developer": "skylabgroup_NR",
-      "first_seen": "2026-03-12",
-      "development_stage": "planning_submitted",
-      "cod_current": "2028-10-31",
-      "cod_original": "2028-10-31",
-      "data_confidence": "low",
-      "confidence_score": "23",
-      "first_seen_year": 2028
-    },
-    {
       "id": "mt-piper-bess",
       "name": "Mt Piper BESS",
       "technology": "bess",
@@ -6306,6 +6303,22 @@
       "cod_original": "2028-11-30",
       "data_confidence": "medium",
       "confidence_score": "28",
+      "first_seen_year": 2028
+    },
+    {
+      "id": "nyaninyuk-wind-farm",
+      "name": "Nyaninyuk Wind Farm",
+      "technology": "wind",
+      "status": "development",
+      "capacity_mw": 302.1,
+      "state": "VIC",
+      "current_developer": "Acciona Energy",
+      "first_seen": "2026-03-12",
+      "development_stage": "planning_submitted",
+      "cod_current": "2028-12",
+      "cod_original": "2028-12-31",
+      "data_confidence": "low",
+      "confidence_score": "23",
       "first_seen_year": 2028
     },
     {
@@ -6944,22 +6957,6 @@
       "has_scheme_contract": true
     },
     {
-      "id": "nyaninyuk-wind-farm",
-      "name": "Nyaninyuk Wind Farm",
-      "technology": "wind",
-      "status": "development",
-      "capacity_mw": 302.1,
-      "state": "VIC",
-      "current_developer": "Acciona Energy",
-      "first_seen": "2026-03-12",
-      "development_stage": "planning_submitted",
-      "cod_current": "2028-12-31",
-      "cod_original": "2028-12-31",
-      "data_confidence": "low",
-      "confidence_score": "23",
-      "first_seen_year": 2028
-    },
-    {
       "id": "loy-yang-b-power-station-bess-stage-1-kci",
       "name": "Loy Yang B Power Station - BESS Stage 1 - KCI",
       "technology": "bess",
@@ -7289,6 +7286,22 @@
       "first_seen_year": 2029
     },
     {
+      "id": "holloway-battery",
+      "name": "Holloway - Battery",
+      "technology": "bess",
+      "status": "development",
+      "capacity_mw": 250.0,
+      "state": "NSW",
+      "current_developer": "SynCo Global",
+      "first_seen": "2026-03-12",
+      "development_stage": "planning_submitted",
+      "cod_current": "2029-03",
+      "cod_original": "2029-03-30",
+      "data_confidence": "low",
+      "confidence_score": "23",
+      "first_seen_year": 2029
+    },
+    {
       "id": "central-queensland-energy-storage-project-stage-1",
       "name": "Central Queensland Energy Storage Project - Stage 1",
       "technology": "bess",
@@ -7388,22 +7401,6 @@
       "cod_original": "2029-03-30",
       "data_confidence": "medium",
       "confidence_score": "28",
-      "first_seen_year": 2029
-    },
-    {
-      "id": "holloway-battery",
-      "name": "Holloway - Battery",
-      "technology": "bess",
-      "status": "development",
-      "capacity_mw": 250.0,
-      "state": "NSW",
-      "current_developer": "SynCo Global",
-      "first_seen": "2026-03-12",
-      "development_stage": "planning_submitted",
-      "cod_current": "2029-03-30",
-      "cod_original": "2029-03-30",
-      "data_confidence": "low",
-      "confidence_score": "23",
       "first_seen_year": 2029
     },
     {
@@ -7631,6 +7628,38 @@
       "first_seen_year": 2029
     },
     {
+      "id": "glenrowan-bess-storage-kci",
+      "name": "Glenrowan BESS - Storage - KCI",
+      "technology": "bess",
+      "status": "development",
+      "capacity_mw": 400.0,
+      "state": "VIC",
+      "current_developer": "Enervest Operations Pty Ltd",
+      "first_seen": "2026-03-12",
+      "development_stage": "planning_submitted",
+      "cod_current": "2029-06",
+      "cod_original": "2029-06-30",
+      "data_confidence": "low",
+      "confidence_score": "23",
+      "first_seen_year": 2029
+    },
+    {
+      "id": "baldon-wind-farm",
+      "name": "Baldon Wind Farm",
+      "technology": "wind",
+      "status": "development",
+      "capacity_mw": 360.0,
+      "state": "NSW",
+      "current_developer": "Baldon Wind Farm Pty Ltd",
+      "first_seen": "2026-03-12",
+      "development_stage": "planning_submitted",
+      "cod_current": "2029-06",
+      "cod_original": "2029-06-30",
+      "data_confidence": "low",
+      "confidence_score": "23",
+      "first_seen_year": 2029
+    },
+    {
       "id": "sandy-creek-solar-farm",
       "name": "Sandy Creek Solar Farm",
       "technology": "solar",
@@ -7752,38 +7781,6 @@
       "first_seen_year": 2029
     },
     {
-      "id": "glenrowan-bess-storage-kci",
-      "name": "Glenrowan BESS - Storage - KCI",
-      "technology": "bess",
-      "status": "development",
-      "capacity_mw": 400.0,
-      "state": "VIC",
-      "current_developer": "Enervest Operations Pty Ltd",
-      "first_seen": "2026-03-12",
-      "development_stage": "planning_submitted",
-      "cod_current": "2029-06-30",
-      "cod_original": "2029-06-30",
-      "data_confidence": "low",
-      "confidence_score": "23",
-      "first_seen_year": 2029
-    },
-    {
-      "id": "baldon-wind-farm",
-      "name": "Baldon Wind Farm",
-      "technology": "wind",
-      "status": "development",
-      "capacity_mw": 360.0,
-      "state": "NSW",
-      "current_developer": "Baldon Wind Farm Pty Ltd",
-      "first_seen": "2026-03-12",
-      "development_stage": "planning_submitted",
-      "cod_current": "2029-06-30",
-      "cod_original": "2029-06-30",
-      "data_confidence": "low",
-      "confidence_score": "23",
-      "first_seen_year": 2029
-    },
-    {
       "id": "byellee-bess",
       "name": "Byellee BESS",
       "technology": "bess",
@@ -7832,6 +7829,22 @@
       "cod_original": "2029-06-30",
       "data_confidence": "medium",
       "confidence_score": "28",
+      "first_seen_year": 2029
+    },
+    {
+      "id": "yarrabee-solar-power-project",
+      "name": "Yarrabee Solar Power Project",
+      "technology": "solar",
+      "status": "development",
+      "capacity_mw": 450.0,
+      "state": "NSW",
+      "current_developer": "Origin Energy",
+      "first_seen": "2026-03-12",
+      "development_stage": "planning_submitted",
+      "cod_current": "2029-07",
+      "cod_original": "2029-07-31",
+      "data_confidence": "low",
+      "confidence_score": "23",
       "first_seen_year": 2029
     },
     {
@@ -7905,22 +7918,6 @@
       "first_seen_year": 2029
     },
     {
-      "id": "yarrabee-solar-power-project",
-      "name": "Yarrabee Solar Power Project",
-      "technology": "solar",
-      "status": "development",
-      "capacity_mw": 450.0,
-      "state": "NSW",
-      "current_developer": "Origin Energy",
-      "first_seen": "2026-03-12",
-      "development_stage": "planning_submitted",
-      "cod_current": "2029-07-31",
-      "cod_original": "2029-07-31",
-      "data_confidence": "low",
-      "confidence_score": "23",
-      "first_seen_year": 2029
-    },
-    {
       "id": "bulli-creek-solar-farm",
       "name": "Bulli Creek Solar Farm",
       "technology": "solar",
@@ -7930,7 +7927,23 @@
       "current_developer": "Genex Power Limited",
       "first_seen": "2026-03-12",
       "development_stage": "planning_submitted",
-      "cod_current": "2029-08-01",
+      "cod_current": "2029-08",
+      "cod_original": "2029-08-01",
+      "data_confidence": "low",
+      "confidence_score": "23",
+      "first_seen_year": 2029
+    },
+    {
+      "id": "rubicon-solar-farm",
+      "name": "Rubicon Solar Farm",
+      "technology": "solar",
+      "status": "development",
+      "capacity_mw": 100.0,
+      "state": "VIC",
+      "current_developer": "samsung_NR",
+      "first_seen": "2026-03-12",
+      "development_stage": "planning_submitted",
+      "cod_current": "2029-08",
       "cod_original": "2029-08-01",
       "data_confidence": "low",
       "confidence_score": "23",
@@ -7973,17 +7986,17 @@
       "first_seen_year": 2029
     },
     {
-      "id": "rubicon-solar-farm",
-      "name": "Rubicon Solar Farm",
-      "technology": "solar",
+      "id": "milpulling-wind-farm",
+      "name": "Milpulling Wind Farm",
+      "technology": "wind",
       "status": "development",
-      "capacity_mw": 100.0,
-      "state": "VIC",
-      "current_developer": "samsung_NR",
+      "capacity_mw": 400.0,
+      "state": "NSW",
+      "current_developer": "Milpulling Wind Farm Pty Ltd",
       "first_seen": "2026-03-12",
       "development_stage": "planning_submitted",
-      "cod_current": "2029-08-01",
-      "cod_original": "2029-08-01",
+      "cod_current": "2029-10",
+      "cod_original": "2029-10-12",
       "data_confidence": "low",
       "confidence_score": "23",
       "first_seen_year": 2029
@@ -7998,24 +8011,8 @@
       "current_developer": "TotalEnergies Renewables Australia Pty Ltd",
       "first_seen": "2026-03-12",
       "development_stage": "planning_submitted",
-      "cod_current": "2029-10-07",
+      "cod_current": "2029-10",
       "cod_original": "2029-10-07",
-      "data_confidence": "low",
-      "confidence_score": "23",
-      "first_seen_year": 2029
-    },
-    {
-      "id": "milpulling-wind-farm",
-      "name": "Milpulling Wind Farm",
-      "technology": "wind",
-      "status": "development",
-      "capacity_mw": 400.0,
-      "state": "NSW",
-      "current_developer": "Milpulling Wind Farm Pty Ltd",
-      "first_seen": "2026-03-12",
-      "development_stage": "planning_submitted",
-      "cod_current": "2029-10-12",
-      "cod_original": "2029-10-12",
       "data_confidence": "low",
       "confidence_score": "23",
       "first_seen_year": 2029
@@ -8064,7 +8061,7 @@
       "current_developer": "Venn Energy Pty Ltd / Acacia Solar Project Pty Ltd.",
       "first_seen": "2026-03-12",
       "development_stage": "planning_submitted",
-      "cod_current": "2029-11-30",
+      "cod_current": "2029-11",
       "cod_original": "2029-11-30",
       "data_confidence": "low",
       "confidence_score": "23",
@@ -8085,6 +8082,103 @@
       "cod_original": "2029-11-30",
       "data_confidence": "medium",
       "confidence_score": "28",
+      "first_seen_year": 2029
+    },
+    {
+      "id": "goyder-north-wind-farm",
+      "name": "Goyder North Wind Farm",
+      "technology": "wind",
+      "status": "development",
+      "capacity_mw": 600.0,
+      "state": "SA",
+      "current_developer": "Neoen Australia",
+      "first_seen": "2026-03-12",
+      "development_stage": "early_stage",
+      "cod_current": "2029-12",
+      "cod_original": "2029-12-31",
+      "data_confidence": "low",
+      "confidence_score": "23",
+      "first_seen_year": 2029,
+      "has_scheme_contract": true
+    },
+    {
+      "id": "burdekin-solar-farm-kci",
+      "name": "Burdekin Solar Farm - KCI",
+      "technology": "solar",
+      "status": "development",
+      "capacity_mw": 500.0,
+      "state": "QLD",
+      "current_developer": "BURDEKIN SOLAR FARM PTY LTD ATF BURDEKIN GENESIS PROJECT TRUST",
+      "first_seen": "2026-03-12",
+      "development_stage": "planning_submitted",
+      "cod_current": "2029-12",
+      "cod_original": "2029-12-28",
+      "data_confidence": "low",
+      "confidence_score": "23",
+      "first_seen_year": 2029
+    },
+    {
+      "id": "tall-tree-wind-farm",
+      "name": "Tall Tree Wind Farm",
+      "technology": "wind",
+      "status": "development",
+      "capacity_mw": 400.0,
+      "state": "VIC",
+      "current_developer": "Acciona Energy Global Australia",
+      "first_seen": "2026-03-12",
+      "development_stage": "planning_submitted",
+      "cod_current": "2029-12",
+      "cod_original": "2029-12-31",
+      "data_confidence": "low",
+      "confidence_score": "23",
+      "first_seen_year": 2029
+    },
+    {
+      "id": "banana-range-wind-farm",
+      "name": "Banana Range Wind Farm",
+      "technology": "wind",
+      "status": "development",
+      "capacity_mw": 220.0,
+      "state": "QLD",
+      "current_developer": "Orange Creek Energy Pty Ltd",
+      "first_seen": "2026-03-12",
+      "development_stage": "planning_submitted",
+      "cod_current": "2029-12",
+      "cod_original": "2029-12-31",
+      "data_confidence": "low",
+      "confidence_score": "23",
+      "first_seen_year": 2029
+    },
+    {
+      "id": "boree-solar-project",
+      "name": "Boree Solar Project",
+      "technology": "solar",
+      "status": "development",
+      "capacity_mw": 150.0,
+      "state": "NSW",
+      "current_developer": "Venn Energy Pty Ltd",
+      "first_seen": "2026-03-12",
+      "development_stage": "planning_submitted",
+      "cod_current": "2029-12",
+      "cod_original": "2029-12-25",
+      "data_confidence": "low",
+      "confidence_score": "23",
+      "first_seen_year": 2029
+    },
+    {
+      "id": "moonah-solar-farm-kci",
+      "name": "Moonah Solar Farm - KCI",
+      "technology": "solar",
+      "status": "development",
+      "capacity_mw": 150.0,
+      "state": "VIC",
+      "current_developer": "Venn Energy Pty Ltd / Moonah Solar Project Pty Ltd",
+      "first_seen": "2026-03-12",
+      "development_stage": "planning_submitted",
+      "cod_current": "2029-12",
+      "cod_original": "2029-12-26",
+      "data_confidence": "low",
+      "confidence_score": "23",
       "first_seen_year": 2029
     },
     {
@@ -8193,54 +8287,6 @@
       "first_seen_year": 2029
     },
     {
-      "id": "boree-solar-project",
-      "name": "Boree Solar Project",
-      "technology": "solar",
-      "status": "development",
-      "capacity_mw": 150.0,
-      "state": "NSW",
-      "current_developer": "Venn Energy Pty Ltd",
-      "first_seen": "2026-03-12",
-      "development_stage": "planning_submitted",
-      "cod_current": "2029-12-25",
-      "cod_original": "2029-12-25",
-      "data_confidence": "low",
-      "confidence_score": "23",
-      "first_seen_year": 2029
-    },
-    {
-      "id": "moonah-solar-farm-kci",
-      "name": "Moonah Solar Farm - KCI",
-      "technology": "solar",
-      "status": "development",
-      "capacity_mw": 150.0,
-      "state": "VIC",
-      "current_developer": "Venn Energy Pty Ltd / Moonah Solar Project Pty Ltd",
-      "first_seen": "2026-03-12",
-      "development_stage": "planning_submitted",
-      "cod_current": "2029-12-26",
-      "cod_original": "2029-12-26",
-      "data_confidence": "low",
-      "confidence_score": "23",
-      "first_seen_year": 2029
-    },
-    {
-      "id": "burdekin-solar-farm-kci",
-      "name": "Burdekin Solar Farm - KCI",
-      "technology": "solar",
-      "status": "development",
-      "capacity_mw": 500.0,
-      "state": "QLD",
-      "current_developer": "BURDEKIN SOLAR FARM PTY LTD ATF BURDEKIN GENESIS PROJECT TRUST",
-      "first_seen": "2026-03-12",
-      "development_stage": "planning_submitted",
-      "cod_current": "2029-12-28",
-      "cod_original": "2029-12-28",
-      "data_confidence": "low",
-      "confidence_score": "23",
-      "first_seen_year": 2029
-    },
-    {
       "id": "yabulu-solar-farm",
       "name": "Yabulu Solar Farm",
       "technology": "solar",
@@ -8310,23 +8356,6 @@
       "has_scheme_contract": true
     },
     {
-      "id": "goyder-north-wind-farm",
-      "name": "Goyder North Wind Farm",
-      "technology": "wind",
-      "status": "development",
-      "capacity_mw": 600.0,
-      "state": "SA",
-      "current_developer": "Neoen Australia",
-      "first_seen": "2026-03-12",
-      "development_stage": "early_stage",
-      "cod_current": "2029-12-31",
-      "cod_original": "2029-12-31",
-      "data_confidence": "low",
-      "confidence_score": "23",
-      "first_seen_year": 2029,
-      "has_scheme_contract": true
-    },
-    {
       "id": "belah-bess",
       "name": "Belah BESS",
       "technology": "bess",
@@ -8341,22 +8370,6 @@
       "cod_original": "2029-12-31",
       "data_confidence": "medium",
       "confidence_score": "28",
-      "first_seen_year": 2029
-    },
-    {
-      "id": "tall-tree-wind-farm",
-      "name": "Tall Tree Wind Farm",
-      "technology": "wind",
-      "status": "development",
-      "capacity_mw": 400.0,
-      "state": "VIC",
-      "current_developer": "Acciona Energy Global Australia",
-      "first_seen": "2026-03-12",
-      "development_stage": "planning_submitted",
-      "cod_current": "2029-12-31",
-      "cod_original": "2029-12-31",
-      "data_confidence": "low",
-      "confidence_score": "23",
       "first_seen_year": 2029
     },
     {
@@ -8408,22 +8421,6 @@
       "cod_original": "2029-12-31",
       "data_confidence": "medium",
       "confidence_score": "28",
-      "first_seen_year": 2029
-    },
-    {
-      "id": "banana-range-wind-farm",
-      "name": "Banana Range Wind Farm",
-      "technology": "wind",
-      "status": "development",
-      "capacity_mw": 220.0,
-      "state": "QLD",
-      "current_developer": "Orange Creek Energy Pty Ltd",
-      "first_seen": "2026-03-12",
-      "development_stage": "planning_submitted",
-      "cod_current": "2029-12-31",
-      "cod_original": "2029-12-31",
-      "data_confidence": "low",
-      "confidence_score": "23",
       "first_seen_year": 2029
     },
     {
@@ -8487,7 +8484,7 @@
       "current_developer": "Virya Energy Pty Ltd",
       "first_seen": "2026-03-12",
       "development_stage": "planning_submitted",
-      "cod_current": "2030-01-01",
+      "cod_current": "2030-01",
       "cod_original": "2030-01-01",
       "data_confidence": "low",
       "confidence_score": "23",
@@ -8503,7 +8500,39 @@
       "current_developer": "Equis Australia",
       "first_seen": "2026-03-12",
       "development_stage": "planning_submitted",
-      "cod_current": "2030-01-01",
+      "cod_current": "2030-01",
+      "cod_original": "2030-01-01",
+      "data_confidence": "low",
+      "confidence_score": "23",
+      "first_seen_year": 2030
+    },
+    {
+      "id": "bellbay-wind-farm",
+      "name": "Bellbay Wind Farm",
+      "technology": "wind",
+      "status": "development",
+      "capacity_mw": 224.0,
+      "state": "TAS",
+      "current_developer": "The Trustee for Equis Wind (Australia) LHWF2 Asset Trust",
+      "first_seen": "2026-03-12",
+      "development_stage": "planning_submitted",
+      "cod_current": "2030-01",
+      "cod_original": "2030-01-01",
+      "data_confidence": "low",
+      "confidence_score": "23",
+      "first_seen_year": 2030
+    },
+    {
+      "id": "lakeland-wind-farm",
+      "name": "Lakeland Wind Farm",
+      "technology": "wind",
+      "status": "development",
+      "capacity_mw": 72.0,
+      "state": "QLD",
+      "current_developer": "Lakeland Wind Farm Pty Ltd",
+      "first_seen": "2026-03-12",
+      "development_stage": "planning_submitted",
+      "cod_current": "2030-01",
       "cod_original": "2030-01-01",
       "data_confidence": "low",
       "confidence_score": "23",
@@ -8524,22 +8553,6 @@
       "cod_original": "2030-01-01",
       "data_confidence": "medium",
       "confidence_score": "28",
-      "first_seen_year": 2030
-    },
-    {
-      "id": "bellbay-wind-farm",
-      "name": "Bellbay Wind Farm",
-      "technology": "wind",
-      "status": "development",
-      "capacity_mw": 224.0,
-      "state": "TAS",
-      "current_developer": "The Trustee for Equis Wind (Australia) LHWF2 Asset Trust",
-      "first_seen": "2026-03-12",
-      "development_stage": "planning_submitted",
-      "cod_current": "2030-01-01",
-      "cod_original": "2030-01-01",
-      "data_confidence": "low",
-      "confidence_score": "23",
       "first_seen_year": 2030
     },
     {
@@ -8575,22 +8588,6 @@
       "data_confidence": "medium",
       "confidence_score": "36",
       "earliest_event": "2024",
-      "first_seen_year": 2030
-    },
-    {
-      "id": "lakeland-wind-farm",
-      "name": "Lakeland Wind Farm",
-      "technology": "wind",
-      "status": "development",
-      "capacity_mw": 72.0,
-      "state": "QLD",
-      "current_developer": "Lakeland Wind Farm Pty Ltd",
-      "first_seen": "2026-03-12",
-      "development_stage": "planning_submitted",
-      "cod_current": "2030-01-01",
-      "cod_original": "2030-01-01",
-      "data_confidence": "low",
-      "confidence_score": "23",
       "first_seen_year": 2030
     },
     {
@@ -8740,7 +8737,7 @@
       "current_developer": "Wooderson Solar Development Company Pty Ltd",
       "first_seen": "2026-03-12",
       "development_stage": "planning_submitted",
-      "cod_current": "2030-05-01",
+      "cod_current": "2030-05",
       "cod_original": "2030-05-01",
       "data_confidence": "low",
       "confidence_score": "23",
@@ -8783,6 +8780,22 @@
       "first_seen_year": 2030
     },
     {
+      "id": "miles-solar-project",
+      "name": "Miles Solar Project",
+      "technology": "solar",
+      "status": "development",
+      "capacity_mw": 500.0,
+      "state": "QLD",
+      "current_developer": "Vena Energy",
+      "first_seen": "2026-03-12",
+      "development_stage": "planning_submitted",
+      "cod_current": "2030-07",
+      "cod_original": "2030-07-01",
+      "data_confidence": "low",
+      "confidence_score": "23",
+      "first_seen_year": 2030
+    },
+    {
       "id": "bendenine",
       "name": "Bendenine",
       "technology": "hybrid",
@@ -8814,22 +8827,6 @@
       "cod_original": "2030-07-01",
       "data_confidence": "medium",
       "confidence_score": "28",
-      "first_seen_year": 2030
-    },
-    {
-      "id": "miles-solar-project",
-      "name": "Miles Solar Project",
-      "technology": "solar",
-      "status": "development",
-      "capacity_mw": 500.0,
-      "state": "QLD",
-      "current_developer": "Vena Energy",
-      "first_seen": "2026-03-12",
-      "development_stage": "planning_submitted",
-      "cod_current": "2030-07-01",
-      "cod_original": "2030-07-01",
-      "data_confidence": "low",
-      "confidence_score": "23",
       "first_seen_year": 2030
     },
     {
@@ -8988,6 +8985,38 @@
       "first_seen_year": 2030
     },
     {
+      "id": "springlands-wind-farm",
+      "name": "Springlands Wind Farm",
+      "technology": "wind",
+      "status": "development",
+      "capacity_mw": 800.0,
+      "state": "QLD",
+      "current_developer": "Ratch Australia",
+      "first_seen": "2026-03-12",
+      "development_stage": "planning_submitted",
+      "cod_current": "2030-12",
+      "cod_original": "2030-12-30",
+      "data_confidence": "low",
+      "confidence_score": "23",
+      "first_seen_year": 2030
+    },
+    {
+      "id": "watta-wella-power-station",
+      "name": "Watta Wella Power Station",
+      "technology": "wind",
+      "status": "development",
+      "capacity_mw": 306.0,
+      "state": "VIC",
+      "current_developer": "RES Australia Pty Ltd",
+      "first_seen": "2026-03-12",
+      "development_stage": "planning_submitted",
+      "cod_current": "2030-12",
+      "cod_original": "2030-12-30",
+      "data_confidence": "low",
+      "confidence_score": "23",
+      "first_seen_year": 2030
+    },
+    {
       "id": "coonerang-wind-farm",
       "name": "Coonerang Wind Farm",
       "technology": "hybrid",
@@ -9074,22 +9103,6 @@
       "first_seen_year": 2030
     },
     {
-      "id": "springlands-wind-farm",
-      "name": "Springlands Wind Farm",
-      "technology": "wind",
-      "status": "development",
-      "capacity_mw": 800.0,
-      "state": "QLD",
-      "current_developer": "Ratch Australia",
-      "first_seen": "2026-03-12",
-      "development_stage": "planning_submitted",
-      "cod_current": "2030-12-30",
-      "cod_original": "2030-12-30",
-      "data_confidence": "low",
-      "confidence_score": "23",
-      "first_seen_year": 2030
-    },
-    {
       "id": "narrandera-solar-hybrid-pvbess",
       "name": "Narrandera Solar Hybrid (PV+BESS)",
       "technology": "hybrid",
@@ -9104,22 +9117,6 @@
       "cod_original": "2030-12-30",
       "data_confidence": "medium",
       "confidence_score": "28",
-      "first_seen_year": 2030
-    },
-    {
-      "id": "watta-wella-power-station",
-      "name": "Watta Wella Power Station",
-      "technology": "wind",
-      "status": "development",
-      "capacity_mw": 306.0,
-      "state": "VIC",
-      "current_developer": "RES Australia Pty Ltd",
-      "first_seen": "2026-03-12",
-      "development_stage": "planning_submitted",
-      "cod_current": "2030-12-30",
-      "cod_original": "2030-12-30",
-      "data_confidence": "low",
-      "confidence_score": "23",
       "first_seen_year": 2030
     },
     {
@@ -9420,7 +9417,7 @@
       "current_developer": "feraaustralia_nr",
       "first_seen": "2026-03-12",
       "development_stage": "planning_submitted",
-      "cod_current": "2031-09-30",
+      "cod_current": "2031-09",
       "cod_original": "2031-09-30",
       "data_confidence": "low",
       "confidence_score": "23",
@@ -9436,8 +9433,24 @@
       "current_developer": "Origin Energy Pty Ltd",
       "first_seen": "2026-03-12",
       "development_stage": "planning_submitted",
-      "cod_current": "2031-11-28",
+      "cod_current": "2031-11",
       "cod_original": "2031-11-28",
+      "data_confidence": "low",
+      "confidence_score": "23",
+      "first_seen_year": 2031
+    },
+    {
+      "id": "prairie-wf-and-wongalee-wf",
+      "name": "Prairie WF and Wongalee WF",
+      "technology": "wind",
+      "status": "development",
+      "capacity_mw": 2000.0,
+      "state": "QLD",
+      "current_developer": "Prairie Wind Farm Pty Ltd",
+      "first_seen": "2026-03-12",
+      "development_stage": "planning_submitted",
+      "cod_current": "2031-12",
+      "cod_original": "2031-12-31",
       "data_confidence": "low",
       "confidence_score": "23",
       "first_seen_year": 2031
@@ -9452,7 +9465,7 @@
       "current_developer": "Seymour Wind Pty Ltd",
       "first_seen": "2026-03-12",
       "development_stage": "planning_submitted",
-      "cod_current": "2031-12-01",
+      "cod_current": "2031-12",
       "cod_original": "2031-12-01",
       "data_confidence": "low",
       "confidence_score": "23",
@@ -9474,22 +9487,6 @@
       "data_confidence": "medium",
       "confidence_score": "36",
       "earliest_event": "2023",
-      "first_seen_year": 2031
-    },
-    {
-      "id": "prairie-wf-and-wongalee-wf",
-      "name": "Prairie WF and Wongalee WF",
-      "technology": "wind",
-      "status": "development",
-      "capacity_mw": 2000.0,
-      "state": "QLD",
-      "current_developer": "Prairie Wind Farm Pty Ltd",
-      "first_seen": "2026-03-12",
-      "development_stage": "planning_submitted",
-      "cod_current": "2031-12-31",
-      "cod_original": "2031-12-31",
-      "data_confidence": "low",
-      "confidence_score": "23",
       "first_seen_year": 2031
     },
     {
@@ -9527,23 +9524,6 @@
       "first_seen_year": 2031
     },
     {
-      "id": "bookham-wf-and-bess",
-      "name": "Bookham WF and BESS",
-      "technology": "hybrid",
-      "status": "development",
-      "capacity_mw": 1160.0,
-      "storage_mwh": 400.0,
-      "state": "NSW",
-      "current_developer": "Bookham Wind Farm Pty Ltd",
-      "first_seen": "2026-03-12",
-      "development_stage": "planning_submitted",
-      "cod_current": "2032-01-01",
-      "cod_original": "2032-01-01",
-      "data_confidence": "medium",
-      "confidence_score": "28",
-      "first_seen_year": 2032
-    },
-    {
       "id": "mt-fox-wind-farm",
       "name": "Mt Fox Wind Farm",
       "technology": "wind",
@@ -9553,7 +9533,7 @@
       "current_developer": "Mount Fox Energy Park Pty Ltd",
       "first_seen": "2026-03-12",
       "development_stage": "planning_submitted",
-      "cod_current": "2032-01-01",
+      "cod_current": "2032-01",
       "cod_original": "2032-01-01",
       "data_confidence": "low",
       "confidence_score": "23",
@@ -9569,10 +9549,27 @@
       "current_developer": "FERA Australia Pty Ltd",
       "first_seen": "2026-03-12",
       "development_stage": "planning_submitted",
-      "cod_current": "2032-01-01",
+      "cod_current": "2032-01",
       "cod_original": "2032-01-01",
       "data_confidence": "low",
       "confidence_score": "23",
+      "first_seen_year": 2032
+    },
+    {
+      "id": "bookham-wf-and-bess",
+      "name": "Bookham WF and BESS",
+      "technology": "hybrid",
+      "status": "development",
+      "capacity_mw": 1160.0,
+      "storage_mwh": 400.0,
+      "state": "NSW",
+      "current_developer": "Bookham Wind Farm Pty Ltd",
+      "first_seen": "2026-03-12",
+      "development_stage": "planning_submitted",
+      "cod_current": "2032-01-01",
+      "cod_original": "2032-01-01",
+      "data_confidence": "medium",
+      "confidence_score": "28",
       "first_seen_year": 2032
     },
     {
@@ -9602,7 +9599,7 @@
       "current_developer": "Origin Energy Pty Ltd",
       "first_seen": "2026-03-12",
       "development_stage": "planning_submitted",
-      "cod_current": "2032-02-27",
+      "cod_current": "2032-02",
       "cod_original": "2032-02-27",
       "data_confidence": "low",
       "confidence_score": "23",
@@ -9661,22 +9658,6 @@
       "first_seen_year": 2032
     },
     {
-      "id": "mount-fyans-wind-farm",
-      "name": "Mount Fyans Wind Farm",
-      "technology": "wind",
-      "status": "development",
-      "capacity_mw": 750.0,
-      "state": "VIC",
-      "current_developer": "Woolnorth Wind Farm Holding Pty Ltd",
-      "first_seen": "2026-03-12",
-      "development_stage": "planning_submitted",
-      "cod_current": "2032-07-05",
-      "cod_original": "2032-07-05",
-      "data_confidence": "low",
-      "confidence_score": "23",
-      "first_seen_year": 2032
-    },
-    {
       "id": "north-east-wind-kci",
       "name": "North East Wind - KCI",
       "technology": "wind",
@@ -9686,8 +9667,40 @@
       "current_developer": "ACEN North East Tasmania Pty Ltd",
       "first_seen": "2026-03-12",
       "development_stage": "planning_submitted",
-      "cod_current": "2032-07-30",
+      "cod_current": "2032-07",
       "cod_original": "2032-07-30",
+      "data_confidence": "low",
+      "confidence_score": "23",
+      "first_seen_year": 2032
+    },
+    {
+      "id": "mount-fyans-wind-farm",
+      "name": "Mount Fyans Wind Farm",
+      "technology": "wind",
+      "status": "development",
+      "capacity_mw": 750.0,
+      "state": "VIC",
+      "current_developer": "Woolnorth Wind Farm Holding Pty Ltd",
+      "first_seen": "2026-03-12",
+      "development_stage": "planning_submitted",
+      "cod_current": "2032-07",
+      "cod_original": "2032-07-05",
+      "data_confidence": "low",
+      "confidence_score": "23",
+      "first_seen_year": 2032
+    },
+    {
+      "id": "hargraves-bess",
+      "name": "Hargraves BESS",
+      "technology": "hybrid",
+      "status": "development",
+      "capacity_mw": 710.0,
+      "state": "NSW",
+      "current_developer": "Tilt Renewables DevCo Pty Ltd as the trustee for Development Hold Trust",
+      "first_seen": "2026-03-12",
+      "development_stage": "planning_submitted",
+      "cod_current": "2032-12",
+      "cod_original": "2032-12-31",
       "data_confidence": "low",
       "confidence_score": "23",
       "first_seen_year": 2032
@@ -9724,22 +9737,6 @@
       "cod_original": "2032-12-31",
       "data_confidence": "medium",
       "confidence_score": "39",
-      "first_seen_year": 2032
-    },
-    {
-      "id": "hargraves-bess",
-      "name": "Hargraves BESS",
-      "technology": "hybrid",
-      "status": "development",
-      "capacity_mw": 710.0,
-      "state": "NSW",
-      "current_developer": "Tilt Renewables DevCo Pty Ltd as the trustee for Development Hold Trust",
-      "first_seen": "2026-03-12",
-      "development_stage": "planning_submitted",
-      "cod_current": "2032-12-31",
-      "cod_original": "2032-12-31",
-      "data_confidence": "low",
-      "confidence_score": "23",
       "first_seen_year": 2032
     },
     {
@@ -9786,7 +9783,7 @@
       "current_developer": "Lightsource bp",
       "first_seen": "2026-03-12",
       "development_stage": "planning_submitted",
-      "cod_current": "2033-06-01",
+      "cod_current": "2033-06",
       "cod_original": "2033-06-01",
       "data_confidence": "low",
       "confidence_score": "23",
@@ -9837,7 +9834,7 @@
       "current_developer": "Lightsource bp",
       "first_seen": "2026-03-12",
       "development_stage": "planning_submitted",
-      "cod_current": "2034-06-01",
+      "cod_current": "2034-06",
       "cod_original": "2034-06-01",
       "data_confidence": "low",
       "confidence_score": "23",
@@ -9859,6 +9856,22 @@
       "confidence_score": "31",
       "earliest_event": "2021",
       "first_seen_year": 2034
+    },
+    {
+      "id": "kidston-solar-project-phase-two",
+      "name": "Kidston Solar Project Phase Two",
+      "technology": "solar",
+      "status": "development",
+      "capacity_mw": 270.0,
+      "state": "QLD",
+      "current_developer": "Genex Power Limited",
+      "first_seen": "2026-03-12",
+      "development_stage": "planning_submitted",
+      "cod_current": "2035-01",
+      "cod_original": "2035-01-01",
+      "data_confidence": "low",
+      "confidence_score": "23",
+      "first_seen_year": 2035
     },
     {
       "id": "ulladulla-offshore-wind-farm",
@@ -9891,22 +9904,6 @@
       "cod_original": "2035-01-01",
       "data_confidence": "medium",
       "confidence_score": "28",
-      "first_seen_year": 2035
-    },
-    {
-      "id": "kidston-solar-project-phase-two",
-      "name": "Kidston Solar Project Phase Two",
-      "technology": "solar",
-      "status": "development",
-      "capacity_mw": 270.0,
-      "state": "QLD",
-      "current_developer": "Genex Power Limited",
-      "first_seen": "2026-03-12",
-      "development_stage": "planning_submitted",
-      "cod_current": "2035-01-01",
-      "cod_original": "2035-01-01",
-      "data_confidence": "low",
-      "confidence_score": "23",
       "first_seen_year": 2035
     },
     {
@@ -9953,7 +9950,7 @@
       "current_developer": "High Sea Wind Pty Ltd",
       "first_seen": "2026-03-12",
       "development_stage": "planning_submitted",
-      "cod_current": "2035-07-25",
+      "cod_current": "2035-07",
       "cod_original": "2035-07-25",
       "data_confidence": "low",
       "confidence_score": "23",
@@ -9987,7 +9984,7 @@
       "current_developer": "Pacific Hydro Australia Developments Pty Ltd",
       "first_seen": "2026-03-12",
       "development_stage": "planning_submitted",
-      "cod_current": "2035-09-30",
+      "cod_current": "2035-09",
       "cod_original": "2035-09-30",
       "data_confidence": "low",
       "confidence_score": "23",
@@ -10003,7 +10000,7 @@
       "current_developer": "Pacific Hydro",
       "first_seen": "2026-03-12",
       "development_stage": "planning_submitted",
-      "cod_current": "2035-12-01",
+      "cod_current": "2035-12",
       "cod_original": "2035-12-01",
       "data_confidence": "low",
       "confidence_score": "23",
@@ -11702,6 +11699,21 @@
       "development_stage": "planning_submitted",
       "data_confidence": "low",
       "confidence_score": "20"
+    },
+    {
+      "id": "tumuruu-one",
+      "name": "Tumuruu One",
+      "technology": "solar",
+      "status": "development",
+      "capacity_mw": 440.0,
+      "state": "QLD",
+      "current_developer": "Australian Solar Enterprises Pty Ltd",
+      "development_stage": "planning_submitted",
+      "cod_original": "2028-08-31",
+      "zombie_flag": "zombie_minimal",
+      "data_confidence": "low",
+      "confidence_score": "20",
+      "first_seen_year": 2028
     },
     {
       "id": "burrendong-wind-farm",
@@ -16131,17 +16143,17 @@
         }
       },
       "by_state": {
-        "QLD": {
+        "TAS": {
           "count": 1,
-          "capacity_mw": 86.4
+          "capacity_mw": 34.0
         },
         "VIC": {
           "count": 1,
           "capacity_mw": 120.0
         },
-        "TAS": {
+        "QLD": {
           "count": 1,
-          "capacity_mw": 34.0
+          "capacity_mw": 86.4
         }
       },
       "by_status": {
@@ -16563,13 +16575,13 @@
       "count": 4,
       "total_mw": 963.0,
       "by_technology": {
-        "wind": {
-          "count": 1,
-          "capacity_mw": 138.0
-        },
         "pumped_hydro": {
           "count": 3,
           "capacity_mw": 825.0
+        },
+        "wind": {
+          "count": 1,
+          "capacity_mw": 138.0
         }
       },
       "by_state": {
@@ -16759,13 +16771,13 @@
           "count": 3,
           "capacity_mw": 208.5
         },
-        "VIC": {
-          "count": 2,
-          "capacity_mw": 343.7
-        },
         "NSW": {
           "count": 2,
           "capacity_mw": 170.7
+        },
+        "VIC": {
+          "count": 2,
+          "capacity_mw": 343.7
         }
       },
       "by_status": {
@@ -16871,6 +16883,10 @@
         }
       },
       "by_state": {
+        "NSW": {
+          "count": 1,
+          "capacity_mw": 165.5
+        },
         "VIC": {
           "count": 1,
           "capacity_mw": 131.2
@@ -16878,10 +16894,6 @@
         "TAS": {
           "count": 1,
           "capacity_mw": 168.0
-        },
-        "NSW": {
-          "count": 1,
-          "capacity_mw": 165.5
         }
       },
       "by_status": {
@@ -16917,23 +16929,23 @@
       "count": 3,
       "total_mw": 262.0,
       "by_technology": {
-        "wind": {
-          "count": 1,
-          "capacity_mw": 106.0
-        },
         "solar": {
           "count": 2,
           "capacity_mw": 156.0
+        },
+        "wind": {
+          "count": 1,
+          "capacity_mw": 106.0
         }
       },
       "by_state": {
-        "VIC": {
-          "count": 1,
-          "capacity_mw": 106.0
-        },
         "NSW": {
           "count": 2,
           "capacity_mw": 156.0
+        },
+        "VIC": {
+          "count": 1,
+          "capacity_mw": 106.0
         }
       },
       "by_status": {
@@ -16947,13 +16959,13 @@
       "count": 3,
       "total_mw": 396.0,
       "by_technology": {
-        "wind": {
-          "count": 2,
-          "capacity_mw": 340.0
-        },
         "solar": {
           "count": 1,
           "capacity_mw": 56.0
+        },
+        "wind": {
+          "count": 2,
+          "capacity_mw": 340.0
         }
       },
       "by_state": {
@@ -16981,17 +16993,17 @@
       "count": 8,
       "total_mw": 922.2,
       "by_technology": {
-        "wind": {
-          "count": 4,
-          "capacity_mw": 415.0
+        "bess": {
+          "count": 2,
+          "capacity_mw": 344.0
         },
         "solar": {
           "count": 2,
           "capacity_mw": 163.2
         },
-        "bess": {
-          "count": 2,
-          "capacity_mw": 344.0
+        "wind": {
+          "count": 4,
+          "capacity_mw": 415.0
         }
       },
       "by_state": {
@@ -17027,35 +17039,35 @@
       "count": 29,
       "total_mw": 2899.0,
       "by_technology": {
-        "wind": {
-          "count": 8,
-          "capacity_mw": 1147.5
+        "bess": {
+          "count": 2,
+          "capacity_mw": 60.0
         },
         "solar": {
           "count": 19,
           "capacity_mw": 1691.5
         },
-        "bess": {
-          "count": 2,
-          "capacity_mw": 60.0
+        "wind": {
+          "count": 8,
+          "capacity_mw": 1147.5
         }
       },
       "by_state": {
-        "QLD": {
-          "count": 11,
-          "capacity_mw": 1077.8
+        "SA": {
+          "count": 4,
+          "capacity_mw": 369.8
         },
         "NSW": {
           "count": 6,
           "capacity_mw": 827.5
         },
-        "SA": {
-          "count": 4,
-          "capacity_mw": 369.8
-        },
         "VIC": {
           "count": 8,
           "capacity_mw": 624.0
+        },
+        "QLD": {
+          "count": 11,
+          "capacity_mw": 1077.8
         }
       },
       "by_status": {
@@ -17069,24 +17081,16 @@
       "count": 20,
       "total_mw": 2431.5,
       "by_technology": {
-        "wind": {
-          "count": 6,
-          "capacity_mw": 1241.7
-        },
         "solar": {
           "count": 14,
           "capacity_mw": 1189.8
+        },
+        "wind": {
+          "count": 6,
+          "capacity_mw": 1241.7
         }
       },
       "by_state": {
-        "QLD": {
-          "count": 9,
-          "capacity_mw": 1052.0
-        },
-        "VIC": {
-          "count": 4,
-          "capacity_mw": 704.7
-        },
         "SA": {
           "count": 3,
           "capacity_mw": 307.0
@@ -17094,6 +17098,14 @@
         "NSW": {
           "count": 4,
           "capacity_mw": 367.8
+        },
+        "VIC": {
+          "count": 4,
+          "capacity_mw": 704.7
+        },
+        "QLD": {
+          "count": 9,
+          "capacity_mw": 1052.0
         }
       },
       "by_status": {
@@ -17111,19 +17123,23 @@
       "count": 24,
       "total_mw": 5772.2,
       "by_technology": {
-        "wind": {
-          "count": 14,
-          "capacity_mw": 4327.5
-        },
         "solar": {
           "count": 10,
           "capacity_mw": 1444.8
+        },
+        "wind": {
+          "count": 14,
+          "capacity_mw": 4327.5
         }
       },
       "by_state": {
         "QLD": {
           "count": 2,
           "capacity_mw": 1303.0
+        },
+        "NSW": {
+          "count": 11,
+          "capacity_mw": 2350.0
         },
         "VIC": {
           "count": 8,
@@ -17132,10 +17148,6 @@
         "TAS": {
           "count": 3,
           "capacity_mw": 780.6
-        },
-        "NSW": {
-          "count": 11,
-          "capacity_mw": 2350.0
         }
       },
       "by_status": {
@@ -17153,6 +17165,14 @@
       "count": 19,
       "total_mw": 4270.6,
       "by_technology": {
+        "bess": {
+          "count": 2,
+          "capacity_mw": 150.0
+        },
+        "solar": {
+          "count": 9,
+          "capacity_mw": 752.4
+        },
         "offshore_wind": {
           "count": 1,
           "capacity_mw": 1500.0
@@ -17160,21 +17180,9 @@
         "wind": {
           "count": 7,
           "capacity_mw": 1868.2
-        },
-        "solar": {
-          "count": 9,
-          "capacity_mw": 752.4
-        },
-        "bess": {
-          "count": 2,
-          "capacity_mw": 150.0
         }
       },
       "by_state": {
-        "QLD": {
-          "count": 3,
-          "capacity_mw": 479.3
-        },
         "NSW": {
           "count": 12,
           "capacity_mw": 1395.2
@@ -17182,6 +17190,10 @@
         "VIC": {
           "count": 4,
           "capacity_mw": 2396.1
+        },
+        "QLD": {
+          "count": 3,
+          "capacity_mw": 479.3
         }
       },
       "by_status": {
@@ -17203,20 +17215,24 @@
           "count": 1,
           "capacity_mw": 2040.0
         },
-        "bess": {
-          "count": 2,
-          "capacity_mw": 353.0
+        "wind": {
+          "count": 6,
+          "capacity_mw": 1776.5
         },
         "solar": {
           "count": 11,
           "capacity_mw": 2121.0
         },
-        "wind": {
-          "count": 6,
-          "capacity_mw": 1776.5
+        "bess": {
+          "count": 2,
+          "capacity_mw": 353.0
         }
       },
       "by_state": {
+        "NSW": {
+          "count": 7,
+          "capacity_mw": 1885.0
+        },
         "TAS": {
           "count": 1,
           "capacity_mw": 155.0
@@ -17225,17 +17241,13 @@
           "count": 2,
           "capacity_mw": 457.5
         },
-        "SA": {
-          "count": 2,
-          "capacity_mw": 317.0
-        },
         "QLD": {
           "count": 8,
           "capacity_mw": 3476.0
         },
-        "NSW": {
-          "count": 7,
-          "capacity_mw": 1885.0
+        "SA": {
+          "count": 2,
+          "capacity_mw": 317.0
         }
       },
       "by_status": {
@@ -17253,21 +17265,9 @@
       "count": 31,
       "total_mw": 12043.8,
       "by_technology": {
-        "pumped_hydro": {
-          "count": 1,
-          "capacity_mw": 190.0
-        },
         "bess": {
           "count": 11,
           "capacity_mw": 1715.0
-        },
-        "wind": {
-          "count": 5,
-          "capacity_mw": 1906.1
-        },
-        "offshore_wind": {
-          "count": 3,
-          "capacity_mw": 4280.0
         },
         "solar": {
           "count": 10,
@@ -17276,9 +17276,25 @@
         "hybrid": {
           "count": 1,
           "capacity_mw": 2030.0
+        },
+        "offshore_wind": {
+          "count": 3,
+          "capacity_mw": 4280.0
+        },
+        "pumped_hydro": {
+          "count": 1,
+          "capacity_mw": 190.0
+        },
+        "wind": {
+          "count": 5,
+          "capacity_mw": 1906.1
         }
       },
       "by_state": {
+        "NSW": {
+          "count": 17,
+          "capacity_mw": 7586.2
+        },
         "TAS": {
           "count": 1,
           "capacity_mw": 190.0
@@ -17287,20 +17303,20 @@
           "count": 3,
           "capacity_mw": 1407.0
         },
-        "SA": {
-          "count": 2,
-          "capacity_mw": 337.0
-        },
         "QLD": {
           "count": 8,
           "capacity_mw": 2523.6
         },
-        "NSW": {
-          "count": 17,
-          "capacity_mw": 7586.2
+        "SA": {
+          "count": 2,
+          "capacity_mw": 337.0
         }
       },
       "by_status": {
+        "development": {
+          "count": 13,
+          "capacity_mw": 9664.0
+        },
         "commissioning": {
           "count": 3,
           "capacity_mw": 500.7
@@ -17308,10 +17324,6 @@
         "operating": {
           "count": 15,
           "capacity_mw": 1879.1
-        },
-        "development": {
-          "count": 13,
-          "capacity_mw": 9664.0
         }
       }
     },
@@ -17319,21 +17331,21 @@
       "count": 28,
       "total_mw": 10015.0,
       "by_technology": {
-        "bess": {
-          "count": 8,
-          "capacity_mw": 2291.5
-        },
-        "hybrid": {
-          "count": 2,
-          "capacity_mw": 1600.0
+        "wind": {
+          "count": 11,
+          "capacity_mw": 3463.5
         },
         "solar": {
           "count": 7,
           "capacity_mw": 2660.0
         },
-        "wind": {
-          "count": 11,
-          "capacity_mw": 3463.5
+        "hybrid": {
+          "count": 2,
+          "capacity_mw": 1600.0
+        },
+        "bess": {
+          "count": 8,
+          "capacity_mw": 2291.5
         }
       },
       "by_state": {
@@ -17355,6 +17367,10 @@
         }
       },
       "by_status": {
+        "development": {
+          "count": 17,
+          "capacity_mw": 7134.0
+        },
         "commissioning": {
           "count": 1,
           "capacity_mw": 41.5
@@ -17362,24 +17378,16 @@
         "operating": {
           "count": 10,
           "capacity_mw": 2839.5
-        },
-        "development": {
-          "count": 17,
-          "capacity_mw": 7134.0
         }
       }
     },
     "2025": {
-      "count": 40,
-      "total_mw": 18537.5,
+      "count": 41,
+      "total_mw": 19237.5,
       "by_technology": {
         "bess": {
-          "count": 13,
-          "capacity_mw": 4886.0
-        },
-        "wind": {
-          "count": 10,
-          "capacity_mw": 7064.5
+          "count": 14,
+          "capacity_mw": 5586.0
         },
         "offshore_wind": {
           "count": 2,
@@ -17392,9 +17400,17 @@
         "hybrid": {
           "count": 2,
           "capacity_mw": 1770.0
+        },
+        "wind": {
+          "count": 10,
+          "capacity_mw": 7064.5
         }
       },
       "by_state": {
+        "NSW": {
+          "count": 15,
+          "capacity_mw": 9367.0
+        },
         "TAS": {
           "count": 2,
           "capacity_mw": 960.0
@@ -17403,35 +17419,31 @@
           "count": 11,
           "capacity_mw": 2950.0
         },
-        "SA": {
-          "count": 3,
-          "capacity_mw": 514.5
-        },
         "QLD": {
           "count": 10,
           "capacity_mw": 5446.0
         },
-        "NSW": {
-          "count": 14,
-          "capacity_mw": 8667.0
+        "SA": {
+          "count": 3,
+          "capacity_mw": 514.5
         }
       },
       "by_status": {
-        "commissioning": {
-          "count": 6,
-          "capacity_mw": 3454.0
-        },
-        "operating": {
-          "count": 17,
-          "capacity_mw": 3162.5
+        "construction": {
+          "count": 2,
+          "capacity_mw": 584.0
         },
         "development": {
           "count": 15,
           "capacity_mw": 11337.0
         },
-        "construction": {
-          "count": 2,
-          "capacity_mw": 584.0
+        "commissioning": {
+          "count": 6,
+          "capacity_mw": 3454.0
+        },
+        "operating": {
+          "count": 18,
+          "capacity_mw": 3862.5
         }
       }
     },
@@ -17439,21 +17451,21 @@
       "count": 38,
       "total_mw": 10993.8,
       "by_technology": {
-        "bess": {
-          "count": 26,
-          "capacity_mw": 7562.0
-        },
-        "hybrid": {
+        "wind": {
           "count": 1,
-          "capacity_mw": 80.0
+          "capacity_mw": 1610.0
         },
         "solar": {
           "count": 10,
           "capacity_mw": 1741.8
         },
-        "wind": {
+        "hybrid": {
           "count": 1,
-          "capacity_mw": 1610.0
+          "capacity_mw": 80.0
+        },
+        "bess": {
+          "count": 26,
+          "capacity_mw": 7562.0
         }
       },
       "by_state": {
@@ -17475,6 +17487,14 @@
         }
       },
       "by_status": {
+        "construction": {
+          "count": 16,
+          "capacity_mw": 4270.8
+        },
+        "development": {
+          "count": 8,
+          "capacity_mw": 1578.0
+        },
         "commissioning": {
           "count": 6,
           "capacity_mw": 1935.0
@@ -17482,14 +17502,6 @@
         "operating": {
           "count": 8,
           "capacity_mw": 3210.0
-        },
-        "development": {
-          "count": 8,
-          "capacity_mw": 1578.0
-        },
-        "construction": {
-          "count": 16,
-          "capacity_mw": 4270.8
         }
       }
     },
@@ -17497,14 +17509,6 @@
       "count": 63,
       "total_mw": 14999.4,
       "by_technology": {
-        "pumped_hydro": {
-          "count": 1,
-          "capacity_mw": 250.0
-        },
-        "wind": {
-          "count": 5,
-          "capacity_mw": 1482.0
-        },
         "bess": {
           "count": 36,
           "capacity_mw": 8713.4
@@ -17516,9 +17520,25 @@
         "hybrid": {
           "count": 10,
           "capacity_mw": 2778.0
+        },
+        "pumped_hydro": {
+          "count": 1,
+          "capacity_mw": 250.0
+        },
+        "wind": {
+          "count": 5,
+          "capacity_mw": 1482.0
         }
       },
       "by_state": {
+        "WA": {
+          "count": 1,
+          "capacity_mw": 560.0
+        },
+        "NSW": {
+          "count": 24,
+          "capacity_mw": 5743.0
+        },
         "TAS": {
           "count": 1,
           "capacity_mw": 310.0
@@ -17527,31 +17547,23 @@
           "count": 15,
           "capacity_mw": 3111.4
         },
-        "SA": {
-          "count": 6,
-          "capacity_mw": 1060.0
-        },
         "QLD": {
           "count": 16,
           "capacity_mw": 4215.0
         },
-        "NSW": {
-          "count": 24,
-          "capacity_mw": 5743.0
-        },
-        "WA": {
-          "count": 1,
-          "capacity_mw": 560.0
+        "SA": {
+          "count": 6,
+          "capacity_mw": 1060.0
         }
       },
       "by_status": {
-        "development": {
-          "count": 47,
-          "capacity_mw": 10206.4
-        },
         "construction": {
           "count": 16,
           "capacity_mw": 4793.0
+        },
+        "development": {
+          "count": 47,
+          "capacity_mw": 10206.4
         }
       }
     },
@@ -17559,14 +17571,6 @@
       "count": 108,
       "total_mw": 36280.2,
       "by_technology": {
-        "hybrid": {
-          "count": 18,
-          "capacity_mw": 5411.0
-        },
-        "wind": {
-          "count": 10,
-          "capacity_mw": 4041.8
-        },
         "bess": {
           "count": 72,
           "capacity_mw": 21626.0
@@ -17575,12 +17579,24 @@
           "count": 7,
           "capacity_mw": 3001.4
         },
+        "hybrid": {
+          "count": 18,
+          "capacity_mw": 5411.0
+        },
         "pumped_hydro": {
           "count": 1,
           "capacity_mw": 2200.0
+        },
+        "wind": {
+          "count": 10,
+          "capacity_mw": 4041.8
         }
       },
       "by_state": {
+        "NSW": {
+          "count": 36,
+          "capacity_mw": 13487.2
+        },
         "TAS": {
           "count": 1,
           "capacity_mw": 100.0
@@ -17596,24 +17612,20 @@
         "SA": {
           "count": 12,
           "capacity_mw": 2663.0
-        },
-        "NSW": {
-          "count": 36,
-          "capacity_mw": 13487.2
         }
       },
       "by_status": {
-        "operating": {
-          "count": 1,
-          "capacity_mw": 720.0
+        "construction": {
+          "count": 5,
+          "capacity_mw": 3294.0
         },
         "development": {
           "count": 102,
           "capacity_mw": 32266.2
         },
-        "construction": {
-          "count": 5,
-          "capacity_mw": 3294.0
+        "operating": {
+          "count": 1,
+          "capacity_mw": 720.0
         }
       }
     },
@@ -17621,14 +17633,6 @@
       "count": 82,
       "total_mw": 30054.3,
       "by_technology": {
-        "bess": {
-          "count": 41,
-          "capacity_mw": 14200.0
-        },
-        "hybrid": {
-          "count": 15,
-          "capacity_mw": 4791.0
-        },
         "solar": {
           "count": 11,
           "capacity_mw": 3475.0
@@ -17636,9 +17640,21 @@
         "wind": {
           "count": 15,
           "capacity_mw": 7588.3
+        },
+        "hybrid": {
+          "count": 15,
+          "capacity_mw": 4791.0
+        },
+        "bess": {
+          "count": 41,
+          "capacity_mw": 14200.0
         }
       },
       "by_state": {
+        "NSW": {
+          "count": 29,
+          "capacity_mw": 12526.7
+        },
         "TAS": {
           "count": 1,
           "capacity_mw": 350.0
@@ -17654,20 +17670,16 @@
         "SA": {
           "count": 6,
           "capacity_mw": 1626.0
-        },
-        "NSW": {
-          "count": 29,
-          "capacity_mw": 12526.7
         }
       },
       "by_status": {
-        "development": {
-          "count": 81,
-          "capacity_mw": 29798.3
-        },
         "construction": {
           "count": 1,
           "capacity_mw": 256.0
+        },
+        "development": {
+          "count": 81,
+          "capacity_mw": 29798.3
         }
       }
     },
@@ -17675,14 +17687,6 @@
       "count": 45,
       "total_mw": 21732.9,
       "by_technology": {
-        "hybrid": {
-          "count": 13,
-          "capacity_mw": 6465.5
-        },
-        "wind": {
-          "count": 12,
-          "capacity_mw": 8284.4
-        },
         "bess": {
           "count": 17,
           "capacity_mw": 5648.0
@@ -17691,12 +17695,24 @@
           "count": 2,
           "capacity_mw": 950.0
         },
+        "hybrid": {
+          "count": 13,
+          "capacity_mw": 6465.5
+        },
         "pumped_hydro": {
           "count": 1,
           "capacity_mw": 385.0
+        },
+        "wind": {
+          "count": 12,
+          "capacity_mw": 8284.4
         }
       },
       "by_state": {
+        "NSW": {
+          "count": 16,
+          "capacity_mw": 6249.0
+        },
         "TAS": {
           "count": 2,
           "capacity_mw": 324.0
@@ -17705,17 +17721,13 @@
           "count": 8,
           "capacity_mw": 5507.1
         },
-        "SA": {
-          "count": 3,
-          "capacity_mw": 892.4
-        },
         "QLD": {
           "count": 16,
           "capacity_mw": 8760.4
         },
-        "NSW": {
-          "count": 16,
-          "capacity_mw": 6249.0
+        "SA": {
+          "count": 3,
+          "capacity_mw": 892.4
         }
       },
       "by_status": {
@@ -17729,39 +17741,39 @@
       "count": 17,
       "total_mw": 14336.8,
       "by_technology": {
+        "bess": {
+          "count": 2,
+          "capacity_mw": 1100.0
+        },
         "offshore_wind": {
           "count": 2,
           "capacity_mw": 4000.0
-        },
-        "wind": {
-          "count": 5,
-          "capacity_mw": 5388.0
         },
         "hybrid": {
           "count": 8,
           "capacity_mw": 3848.8
         },
-        "bess": {
-          "count": 2,
-          "capacity_mw": 1100.0
+        "wind": {
+          "count": 5,
+          "capacity_mw": 5388.0
         }
       },
       "by_state": {
-        "QLD": {
-          "count": 5,
-          "capacity_mw": 4550.0
+        "SA": {
+          "count": 1,
+          "capacity_mw": 352.8
         },
         "NSW": {
           "count": 8,
           "capacity_mw": 7234.0
         },
-        "SA": {
-          "count": 1,
-          "capacity_mw": 352.8
-        },
         "VIC": {
           "count": 3,
           "capacity_mw": 2200.0
+        },
+        "QLD": {
+          "count": 5,
+          "capacity_mw": 4550.0
         }
       },
       "by_status": {
@@ -17775,17 +17787,9 @@
       "count": 14,
       "total_mw": 11161.4,
       "by_technology": {
-        "wind": {
-          "count": 4,
-          "capacity_mw": 2531.4
-        },
         "bess": {
           "count": 2,
           "capacity_mw": 900.0
-        },
-        "offshore_wind": {
-          "count": 2,
-          "capacity_mw": 4305.0
         },
         "solar": {
           "count": 1,
@@ -17794,12 +17798,20 @@
         "hybrid": {
           "count": 5,
           "capacity_mw": 2975.0
+        },
+        "offshore_wind": {
+          "count": 2,
+          "capacity_mw": 4305.0
+        },
+        "wind": {
+          "count": 4,
+          "capacity_mw": 2531.4
         }
       },
       "by_state": {
-        "QLD": {
-          "count": 2,
-          "capacity_mw": 691.4
+        "TAS": {
+          "count": 1,
+          "capacity_mw": 1260.0
         },
         "NSW": {
           "count": 7,
@@ -17809,9 +17821,9 @@
           "count": 4,
           "capacity_mw": 5285.0
         },
-        "TAS": {
-          "count": 1,
-          "capacity_mw": 1260.0
+        "QLD": {
+          "count": 2,
+          "capacity_mw": 691.4
         }
       },
       "by_status": {
@@ -17825,13 +17837,13 @@
       "count": 3,
       "total_mw": 1800.0,
       "by_technology": {
-        "wind": {
-          "count": 1,
-          "capacity_mw": 500.0
-        },
         "pumped_hydro": {
           "count": 2,
           "capacity_mw": 1300.0
+        },
+        "wind": {
+          "count": 1,
+          "capacity_mw": 500.0
         }
       },
       "by_state": {
@@ -17855,13 +17867,13 @@
           "count": 1,
           "capacity_mw": 2000.0
         },
-        "wind": {
-          "count": 1,
-          "capacity_mw": 250.0
-        },
         "solar": {
           "count": 1,
           "capacity_mw": 100.0
+        },
+        "wind": {
+          "count": 1,
+          "capacity_mw": 250.0
         }
       },
       "by_state": {
@@ -17881,18 +17893,6 @@
       "count": 9,
       "total_mw": 8547.0,
       "by_technology": {
-        "pumped_hydro": {
-          "count": 2,
-          "capacity_mw": 2296.0
-        },
-        "wind": {
-          "count": 2,
-          "capacity_mw": 1781.0
-        },
-        "offshore_wind": {
-          "count": 2,
-          "capacity_mw": 3600.0
-        },
         "solar": {
           "count": 2,
           "capacity_mw": 520.0
@@ -17900,13 +17900,21 @@
         "hybrid": {
           "count": 1,
           "capacity_mw": 350.0
+        },
+        "offshore_wind": {
+          "count": 2,
+          "capacity_mw": 3600.0
+        },
+        "pumped_hydro": {
+          "count": 2,
+          "capacity_mw": 2296.0
+        },
+        "wind": {
+          "count": 2,
+          "capacity_mw": 1781.0
         }
       },
       "by_state": {
-        "QLD": {
-          "count": 4,
-          "capacity_mw": 3066.0
-        },
         "NSW": {
           "count": 2,
           "capacity_mw": 3600.0
@@ -17914,6 +17922,10 @@
         "VIC": {
           "count": 3,
           "capacity_mw": 1881.0
+        },
+        "QLD": {
+          "count": 4,
+          "capacity_mw": 3066.0
         }
       },
       "by_status": {
@@ -17927,14 +17939,6 @@
       "count": 386,
       "total_mw": 154913.4,
       "by_technology": {
-        "pumped_hydro": {
-          "count": 18,
-          "capacity_mw": 11847.0
-        },
-        "wind": {
-          "count": 45,
-          "capacity_mw": 24105.8
-        },
         "bess": {
           "count": 195,
           "capacity_mw": 60819.0
@@ -17950,9 +17954,21 @@
         "hybrid": {
           "count": 34,
           "capacity_mw": 13158.0
+        },
+        "pumped_hydro": {
+          "count": 18,
+          "capacity_mw": 11847.0
+        },
+        "wind": {
+          "count": 45,
+          "capacity_mw": 24105.8
         }
       },
       "by_state": {
+        "NSW": {
+          "count": 125,
+          "capacity_mw": 38753.6
+        },
         "TAS": {
           "count": 15,
           "capacity_mw": 6737.4
@@ -17961,17 +17977,13 @@
           "count": 70,
           "capacity_mw": 37193.4
         },
-        "SA": {
-          "count": 53,
-          "capacity_mw": 14226.0
-        },
         "QLD": {
           "count": 123,
           "capacity_mw": 58003.0
         },
-        "NSW": {
-          "count": 125,
-          "capacity_mw": 38753.6
+        "SA": {
+          "count": 53,
+          "capacity_mw": 14226.0
         }
       },
       "by_status": {
@@ -17984,9 +17996,9 @@
   },
   "by_technology": {
     "bess": {
-      "count": 431,
-      "total_mw": 130367.9,
-      "with_date": 236
+      "count": 432,
+      "total_mw": 131067.9,
+      "with_date": 237
     },
     "solar": {
       "count": 228,
@@ -18016,8 +18028,8 @@
   },
   "by_state": {
     "NSW": {
-      "count": 363,
-      "total_mw": 131307.0
+      "count": 364,
+      "total_mw": 132007.0
     },
     "QLD": {
       "count": 309,
@@ -18040,7 +18052,7 @@
       "total_mw": 560.0
     }
   },
-  "total_with_date": 677,
+  "total_with_date": 678,
   "total_without_date": 386,
-  "exported_at": "2026-04-17T21:05:04.479918"
+  "exported_at": "2026-04-23T18:25:54.818146"
 }

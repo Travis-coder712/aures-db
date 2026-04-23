@@ -2,9 +2,9 @@
   "current_mix": {
     "NSW": {
       "bess": {
-        "count": 8,
-        "mw": 1940.0,
-        "mwh": 5555.2
+        "count": 9,
+        "mw": 2640.0,
+        "mwh": 6945.2
       },
       "hybrid": {
         "count": 1,
@@ -91,12 +91,12 @@
   },
   "state_totals": {
     "NSW": {
-      "operating_mw": 13057.9,
+      "operating_mw": 13757.9,
       "technologies": {
         "bess": {
-          "count": 8,
-          "mw": 1940.0,
-          "mwh": 5555.2
+          "count": 9,
+          "mw": 2640.0,
+          "mwh": 6945.2
         },
         "hybrid": {
           "count": 1,
@@ -734,8 +734,8 @@
       "state": "QLD",
       "technology": "solar",
       "status": "development",
-      "count": 34,
-      "mw": 13127.2
+      "count": 35,
+      "mw": 13567.2
     },
     {
       "state": "QLD",
@@ -758,8 +758,8 @@
       "technology": "solar",
       "status": "development",
       "cod_year": "2028",
-      "count": 5,
-      "mw": 1801.4
+      "count": 4,
+      "mw": 1361.4
     },
     {
       "state": "QLD",
@@ -1437,47 +1437,47 @@
     "bess": [
       {
         "year": "current",
-        "cumulative_mw": 7189.0
+        "cumulative_mw": 7889.0
       },
       {
         "year": 2026,
         "added_mw": 4552.0,
-        "cumulative_mw": 11741.0
+        "cumulative_mw": 12441.0
       },
       {
         "year": 2027,
         "added_mw": 8713.4,
-        "cumulative_mw": 20454.4
+        "cumulative_mw": 21154.4
       },
       {
         "year": 2028,
         "added_mw": 21626.0,
-        "cumulative_mw": 42080.4
+        "cumulative_mw": 42780.4
       },
       {
         "year": 2029,
         "added_mw": 14200.0,
-        "cumulative_mw": 56280.4
+        "cumulative_mw": 56980.4
       },
       {
         "year": 2030,
         "added_mw": 5648.0,
-        "cumulative_mw": 61928.4
+        "cumulative_mw": 62628.4
       },
       {
         "year": 2031,
         "added_mw": 1100.0,
-        "cumulative_mw": 63028.4
+        "cumulative_mw": 63728.4
       },
       {
         "year": 2032,
         "added_mw": 900.0,
-        "cumulative_mw": 63928.4
+        "cumulative_mw": 64628.4
       },
       {
         "year": 2033,
         "added_mw": 0,
-        "cumulative_mw": 63928.4
+        "cumulative_mw": 64628.4
       }
     ],
     "hybrid": [
@@ -1635,33 +1635,33 @@
       },
       {
         "year": 2028,
-        "added_mw": 3001.4,
-        "cumulative_mw": 15802.2
+        "added_mw": 2561.4,
+        "cumulative_mw": 15362.2
       },
       {
         "year": 2029,
         "added_mw": 3475.0,
-        "cumulative_mw": 19277.2
+        "cumulative_mw": 18837.2
       },
       {
         "year": 2030,
         "added_mw": 950.0,
-        "cumulative_mw": 20227.2
+        "cumulative_mw": 19787.2
       },
       {
         "year": 2031,
         "added_mw": 0,
-        "cumulative_mw": 20227.2
+        "cumulative_mw": 19787.2
       },
       {
         "year": 2032,
         "added_mw": 450.0,
-        "cumulative_mw": 20677.2
+        "cumulative_mw": 20237.2
       },
       {
         "year": 2033,
         "added_mw": 0,
-        "cumulative_mw": 20677.2
+        "cumulative_mw": 20237.2
       }
     ],
     "wind": [
@@ -1711,5 +1711,5 @@
       }
     ]
   },
-  "exported_at": "2026-04-17T21:05:06.381658"
+  "exported_at": "2026-04-23T18:27:27.146154"
 }

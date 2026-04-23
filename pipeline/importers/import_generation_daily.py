@@ -68,18 +68,25 @@ def ensure_schema(conn: sqlite3.Connection) -> None:
 
 
 def load_target_duids(conn: sqlite3.Connection) -> dict[str, tuple[str, str]]:
-    """Return {DUID → (fuel_type, region)} for in-service solar / wind / BESS DUIDs.
+    """Return {DUID → (fuel_type, region)} for solar / wind / BESS DUIDs.
 
-    Deduplicates multiple rows per DUID in aemo_generation_info by preferring
-    'In Service' / 'In Commissioning' status. Region is normalised to NSW1 /
-    QLD1 / VIC1 / SA1 / TAS1.
+    For solar/wind: includes 'In Service' and 'In Commissioning' only.
+    For Battery Storage: also includes 'Committed' and 'Committed*' because
+    AEMO's status lags reality — batteries like Waratah, Tarong, Liddell,
+    Supernode etc. are actively dispatching in AEMO markets despite showing
+    'Committed' status in the generation info registry.
     """
     rows = conn.execute("""
         SELECT DISTINCT UPPER(duid) AS duid, fuel_type, region, status
         FROM aemo_generation_info
         WHERE duid IS NOT NULL AND duid != ''
-          AND fuel_type IN ('Solar PV', 'Wind', 'Battery Storage')
-          AND status IN ('In Service', 'In Commissioning')
+          AND (
+            (fuel_type IN ('Solar PV', 'Wind') AND status IN ('In Service', 'In Commissioning'))
+            OR
+            (fuel_type = 'Battery Storage' AND status IN (
+              'In Service', 'In Commissioning', 'Committed', 'Committed*'
+            ))
+          )
     """).fetchall()
     out: dict[str, tuple[str, str]] = {}
     for duid, fuel, region, _status in rows:

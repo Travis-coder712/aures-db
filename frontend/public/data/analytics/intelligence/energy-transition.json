@@ -139,12 +139,12 @@
           },
           "bess": {
             "ytd_gwh": 0.0,
-            "full_gwh": 143.4,
+            "full_gwh": 144.9,
             "ytd_days": 0,
             "full_days": 181,
             "ytd_charge_gwh": 0.0,
-            "full_charge_gwh": 258.6,
-            "roundtrip_pct": 55.5
+            "full_charge_gwh": 264.1,
+            "roundtrip_pct": 54.9
           },
           "year": 2024,
           "demand": {
@@ -176,13 +176,13 @@
             "full_days": 365
           },
           "bess": {
-            "ytd_gwh": 205.1,
-            "full_gwh": 1266.4,
+            "ytd_gwh": 208.4,
+            "full_gwh": 1362.7,
             "ytd_days": 107,
             "full_days": 365,
-            "ytd_charge_gwh": 312.1,
-            "full_charge_gwh": 1752.1,
-            "roundtrip_pct": 72.3
+            "ytd_charge_gwh": 332.1,
+            "full_charge_gwh": 1921.8,
+            "roundtrip_pct": 70.9
           },
           "year": 2025,
           "demand": {
@@ -202,25 +202,25 @@
             "full_days": 107
           },
           "wind": {
-            "ytd_gwh": 7577.1,
-            "full_gwh": 7577.1,
+            "ytd_gwh": 7666.7,
+            "full_gwh": 7666.7,
             "ytd_days": 91,
             "full_days": 91
           },
           "solar": {
-            "ytd_gwh": 5464.2,
-            "full_gwh": 5464.2,
+            "ytd_gwh": 5525.2,
+            "full_gwh": 5525.2,
             "ytd_days": 91,
             "full_days": 91
           },
           "bess": {
-            "ytd_gwh": 566.7,
-            "full_gwh": 566.7,
+            "ytd_gwh": 693.8,
+            "full_gwh": 693.8,
             "ytd_days": 91,
             "full_days": 91,
-            "ytd_charge_gwh": 755.3,
-            "full_charge_gwh": 755.3,
-            "roundtrip_pct": 75.0
+            "ytd_charge_gwh": 941.2,
+            "full_charge_gwh": 941.2,
+            "roundtrip_pct": 73.7
           },
           "year": 2026,
           "demand": {
@@ -346,12 +346,12 @@
           },
           "bess": {
             "ytd_gwh": 0.0,
-            "full_gwh": 27.9,
+            "full_gwh": 29.4,
             "ytd_days": 0,
             "full_days": 181,
             "ytd_charge_gwh": 0.0,
-            "full_charge_gwh": 42.0,
-            "roundtrip_pct": 66.5
+            "full_charge_gwh": 47.5,
+            "roundtrip_pct": 61.8
           },
           "year": 2024,
           "demand": {
@@ -383,13 +383,13 @@
             "full_days": 365
           },
           "bess": {
-            "ytd_gwh": 31.6,
-            "full_gwh": 189.8,
+            "ytd_gwh": 35.0,
+            "full_gwh": 246.6,
             "ytd_days": 107,
             "full_days": 365,
-            "ytd_charge_gwh": 42.3,
-            "full_charge_gwh": 238.6,
-            "roundtrip_pct": 79.5
+            "ytd_charge_gwh": 62.3,
+            "full_charge_gwh": 358.5,
+            "roundtrip_pct": 68.8
           },
           "year": 2025,
           "demand": {
@@ -409,25 +409,25 @@
             "full_days": 107
           },
           "wind": {
-            "ytd_gwh": 1669.0,
-            "full_gwh": 1669.0,
+            "ytd_gwh": 1702.5,
+            "full_gwh": 1702.5,
             "ytd_days": 91,
             "full_days": 91
           },
           "solar": {
-            "ytd_gwh": 2713.1,
-            "full_gwh": 2713.1,
+            "ytd_gwh": 2750.9,
+            "full_gwh": 2750.9,
             "ytd_days": 91,
             "full_days": 91
           },
           "bess": {
-            "ytd_gwh": 161.1,
-            "full_gwh": 161.1,
+            "ytd_gwh": 172.7,
+            "full_gwh": 172.7,
             "ytd_days": 91,
             "full_days": 91,
-            "ytd_charge_gwh": 191.9,
-            "full_charge_gwh": 191.9,
-            "roundtrip_pct": 84.0
+            "ytd_charge_gwh": 229.3,
+            "full_charge_gwh": 229.3,
+            "roundtrip_pct": 75.3
           },
           "year": 2026,
           "demand": {
@@ -591,12 +591,12 @@
           },
           "bess": {
             "ytd_gwh": 62.3,
-            "full_gwh": 361.8,
+            "full_gwh": 401.4,
             "ytd_days": 107,
             "full_days": 365,
             "ytd_charge_gwh": 89.1,
-            "full_charge_gwh": 485.8,
-            "roundtrip_pct": 74.5
+            "full_charge_gwh": 535.6,
+            "roundtrip_pct": 74.9
           },
           "year": 2025,
           "demand": {
@@ -616,25 +616,25 @@
             "full_days": 107
           },
           "wind": {
-            "ytd_gwh": 1479.5,
-            "full_gwh": 1479.5,
+            "ytd_gwh": 1491.7,
+            "full_gwh": 1491.7,
             "ytd_days": 91,
             "full_days": 91
           },
           "solar": {
-            "ytd_gwh": 1881.0,
-            "full_gwh": 1881.0,
+            "ytd_gwh": 1900.0,
+            "full_gwh": 1900.0,
             "ytd_days": 91,
             "full_days": 91
           },
           "bess": {
-            "ytd_gwh": 134.4,
-            "full_gwh": 134.4,
+            "ytd_gwh": 245.3,
+            "full_gwh": 245.3,
             "ytd_days": 91,
             "full_days": 91,
-            "ytd_charge_gwh": 186.0,
-            "full_charge_gwh": 186.0,
-            "roundtrip_pct": 72.3
+            "ytd_charge_gwh": 326.9,
+            "full_charge_gwh": 326.9,
+            "roundtrip_pct": 75.1
           },
           "year": 2026,
           "demand": {
@@ -823,25 +823,25 @@
             "full_days": 107
           },
           "wind": {
-            "ytd_gwh": 2494.7,
-            "full_gwh": 2494.7,
+            "ytd_gwh": 2518.5,
+            "full_gwh": 2518.5,
             "ytd_days": 91,
             "full_days": 91
           },
           "solar": {
-            "ytd_gwh": 699.5,
-            "full_gwh": 699.5,
+            "ytd_gwh": 703.4,
+            "full_gwh": 703.4,
             "ytd_days": 91,
             "full_days": 91
           },
           "bess": {
-            "ytd_gwh": 179.7,
-            "full_gwh": 179.7,
+            "ytd_gwh": 182.0,
+            "full_gwh": 182.0,
             "ytd_days": 91,
             "full_days": 91,
-            "ytd_charge_gwh": 247.7,
-            "full_charge_gwh": 247.7,
-            "roundtrip_pct": 72.5
+            "ytd_charge_gwh": 251.4,
+            "full_charge_gwh": 251.4,
+            "roundtrip_pct": 72.4
           },
           "year": 2026,
           "demand": {
@@ -994,25 +994,25 @@
         },
         {
           "wind": {
-            "ytd_gwh": 1681.8,
-            "full_gwh": 1681.8,
+            "ytd_gwh": 1700.8,
+            "full_gwh": 1700.8,
             "ytd_days": 91,
             "full_days": 91
           },
           "solar": {
-            "ytd_gwh": 170.6,
-            "full_gwh": 170.6,
+            "ytd_gwh": 170.9,
+            "full_gwh": 170.9,
             "ytd_days": 91,
             "full_days": 91
           },
           "bess": {
-            "ytd_gwh": 91.5,
-            "full_gwh": 91.5,
+            "ytd_gwh": 93.8,
+            "full_gwh": 93.8,
             "ytd_days": 91,
             "full_days": 91,
-            "ytd_charge_gwh": 129.6,
-            "full_charge_gwh": 129.6,
-            "roundtrip_pct": 70.6
+            "ytd_charge_gwh": 133.6,
+            "full_charge_gwh": 133.6,
+            "roundtrip_pct": 70.2
           },
           "year": 2026,
           "demand": {
@@ -1117,8 +1117,8 @@
         },
         {
           "wind": {
-            "ytd_gwh": 252.1,
-            "full_gwh": 252.1,
+            "ytd_gwh": 253.1,
+            "full_gwh": 253.1,
             "ytd_days": 91,
             "full_days": 91
           },
@@ -1356,7 +1356,7 @@
     },
     "renewables_highest_daily": {
       "NEM": {
-        "gwh": 225.23,
+        "gwh": 225.47,
         "date": "2025-06-24"
       },
       "VIC1": {
@@ -1368,7 +1368,7 @@
         "date": "2026-01-18"
       },
       "QLD1": {
-        "gwh": 51.94,
+        "gwh": 53.34,
         "date": "2026-01-07"
       },
       "SA1": {
@@ -1382,20 +1382,20 @@
     },
     "bess_highest_daily": {
       "NEM": {
-        "gwh": 9.91,
-        "date": "2026-03-30"
+        "gwh": 11.81,
+        "date": "2026-02-10"
       },
       "VIC1": {
         "gwh": 3.85,
         "date": "2026-02-10"
       },
       "NSW1": {
-        "gwh": 3.69,
+        "gwh": 3.7,
         "date": "2025-12-31"
       },
       "QLD1": {
-        "gwh": 2.17,
-        "date": "2025-12-19"
+        "gwh": 3.68,
+        "date": "2026-03-24"
       },
       "SA1": {
         "gwh": 2.11,
@@ -1430,5 +1430,5 @@
     }
   },
   "source_note": "Latest data: 2026-04-17. YTD window = Jan 1 \u2192 17 Apr (day 107). Coal: 2021\u21922026 from NEMWEB DISPATCHLOAD. Wind/Solar/BESS: 2021\u21922026 from daily aggregation of the same DISPATCHLOAD archives.",
-  "exported_at": "2026-04-17T23:24:05.555167"
+  "exported_at": "2026-04-23T18:27:27.098325"
 }

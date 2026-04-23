@@ -4811,6 +4811,16 @@
       "revenue_per_mw": null
     },
     {
+      "project_id": "eraring-big-battery",
+      "name": "Eraring Big Battery",
+      "technology": "bess",
+      "state": "NSW",
+      "capacity_mw": 700.0,
+      "developer": "Origin Energy Electricity Limited",
+      "capacity_factor_pct": 16.1,
+      "revenue_per_mw": 59338.0
+    },
+    {
       "project_id": "aldoga-solar-farm",
       "name": "Aldoga Solar Farm",
       "technology": "solar",
@@ -6211,5 +6221,5 @@
       "revenue_per_mw": 18436.0
     }
   ],
-  "exported_at": "2026-04-17T21:05:04.463566"
+  "exported_at": "2026-04-23T18:25:54.791003"
 }

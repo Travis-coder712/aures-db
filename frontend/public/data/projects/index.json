@@ -4109,6 +4109,18 @@
     "zombie_flag": "zombie_minimal"
   },
   {
+    "id": "eraring-big-battery",
+    "name": "Eraring Big Battery",
+    "technology": "bess",
+    "status": "operating",
+    "capacity_mw": 700.0,
+    "storage_mwh": 1390.0,
+    "state": "NSW",
+    "current_developer": "Origin Energy Electricity Limited",
+    "data_confidence": "low",
+    "has_eis_data": true
+  },
+  {
     "id": "euleilah-solar-farm-and-bess-kci",
     "name": "Euleilah Solar Farm and BESS - KCI",
     "technology": "solar",

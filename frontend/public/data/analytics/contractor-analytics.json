@@ -1,11 +1,11 @@
 {
   "concentration": {
     "epc": {
-      "total_contractors": 63,
-      "total_mw": 25609.3,
-      "total_project_slots": 114,
-      "hhi_mw": 389.0,
-      "top3_share_mw_pct": 24.2,
+      "total_contractors": 64,
+      "total_mw": 26309.3,
+      "total_project_slots": 115,
+      "hhi_mw": 376.0,
+      "top3_share_mw_pct": 23.6,
       "top3": [
         {
           "supplier": "Future Generation Joint Venture (Webuild/Clough/Lane)",
@@ -1369,6 +1369,38 @@
       "top_developers": [
         [
           "Origin Energy",
+          1
+        ]
+      ],
+      "top_oem_partners": [
+        {
+          "supplier": "Wartsila",
+          "role": "bess_oem",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "contractor": "Enerven",
+      "slug": "enerven",
+      "category": "epc_only",
+      "roles": [
+        "epc"
+      ],
+      "projects": 1,
+      "mw_total": 700.0,
+      "technologies": {
+        "bess": 1
+      },
+      "states": {
+        "NSW": 1
+      },
+      "statuses": {
+        "operating": 1
+      },
+      "top_developers": [
+        [
+          "Origin Energy Electricity Limited",
           1
         ]
       ],
@@ -3401,6 +3433,21 @@
         "drift_months": 0.0
       }
     ],
+    "Enerven": [
+      {
+        "project_id": "eraring-big-battery",
+        "project_name": "Eraring Big Battery",
+        "role": "epc",
+        "technology": "bess",
+        "state": "NSW",
+        "status": "operating",
+        "capacity_mw": 700.0,
+        "developer": "Origin Energy Electricity Limited",
+        "model": null,
+        "source_url": "https://www.enerven.com.au/projects/eraring-battery-energy-storage-system/",
+        "drift_months": null
+      }
+    ],
     "Wartsila": [
       {
         "project_id": "torrens-island-bess",
@@ -4759,6 +4806,15 @@
       ]
     },
     {
+      "developer": "Origin Energy Electricity Limited",
+      "contractor": "Enerven",
+      "projects": 1,
+      "mw": 700.0,
+      "roles": [
+        "epc"
+      ]
+    },
+    {
       "developer": "TagEnergy / Ingka Group",
       "contractor": "Vestas (EPC)",
       "projects": 1,
@@ -6108,6 +6164,12 @@
       "count": 1
     },
     {
+      "contractor": "Enerven",
+      "oem": "Wartsila",
+      "oem_role": "bess_oem",
+      "count": 1
+    },
+    {
       "contractor": "Wartsila",
       "oem": "Wartsila",
       "oem_role": "bess_oem",
@@ -6493,13 +6555,13 @@
     }
   ],
   "summary": {
-    "total_contractors": 71,
-    "total_project_rows": 135,
+    "total_contractors": 72,
+    "total_project_rows": 136,
     "by_category_count": {
-      "epc_only": 59,
+      "epc_only": 60,
       "bop_only": 8,
       "both": 4
     }
   },
-  "exported_at": "2026-04-17T21:05:04.457818"
+  "exported_at": "2026-04-23T18:25:54.784508"
 }

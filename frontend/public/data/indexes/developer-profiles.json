@@ -1018,7 +1018,7 @@
       ]
     },
     {
-      "slug": "origin-energy-4",
+      "slug": "origin-energy-5",
       "name": "Origin Energy Pty Ltd",
       "project_count": 3,
       "total_capacity_mw": 1950.0,
@@ -3558,6 +3558,26 @@
       "project_ids": [
         "edderton-hybrid-faciility-solar",
         "edderton-hybrid-facility-bess"
+      ]
+    },
+    {
+      "slug": "origin-energy-electricity-limited",
+      "name": "Origin Energy Electricity Limited",
+      "project_count": 1,
+      "total_capacity_mw": 700.0,
+      "total_storage_mwh": 1390.0,
+      "by_technology": {
+        "bess": 1
+      },
+      "by_status": {
+        "operating": 1
+      },
+      "states": [
+        "NSW"
+      ],
+      "avg_confidence": "low",
+      "project_ids": [
+        "eraring-big-battery"
       ]
     },
     {
@@ -8365,7 +8385,7 @@
       ]
     },
     {
-      "slug": "origin-energy-3",
+      "slug": "origin-energy-4",
       "name": "Origin energy",
       "project_count": 1,
       "total_capacity_mw": 248.0,
@@ -14694,7 +14714,7 @@
       ]
     }
   ],
-  "total_developers": 706,
+  "total_developers": 707,
   "grouped_developers": [
     {
       "slug": "acen",
@@ -14849,17 +14869,18 @@
         "BlueFloat Energy / Origin Energy (CANCELLED)",
         "Origin Energy",
         "Origin Energy (acquired from Virya Energy)",
+        "Origin Energy Electricity Limited",
         "Origin Energy Eraring Pty Ltd",
         "Origin Energy Limited",
         "Origin Energy Pty Ltd",
         "Origin energy"
       ],
-      "project_count": 14,
-      "total_capacity_mw": 7745.0,
-      "total_storage_mwh": 11690.0,
+      "project_count": 15,
+      "total_capacity_mw": 8445.0,
+      "total_storage_mwh": 13080.0,
       "by_technology": {
         "offshore_wind": 1,
-        "bess": 4,
+        "bess": 5,
         "pumped_hydro": 2,
         "solar": 4,
         "wind": 3
@@ -14867,7 +14888,7 @@
       "by_status": {
         "development": 12,
         "commissioning": 1,
-        "operating": 1
+        "operating": 2
       },
       "states": [
         "NSW",
@@ -14880,6 +14901,7 @@
         "yanco-delta-wind-farm",
         "skye-ridge-wind-farm",
         "yanco-delta",
+        "eraring-big-battery",
         "yarrabee-solar-power-project",
         "salisbury-solar-450mw",
         "mortlake-battery",
@@ -27174,6 +27196,11 @@
       "project_count": 16
     },
     {
+      "slug": "origin-energy",
+      "name": "Origin Energy",
+      "project_count": 15
+    },
+    {
       "slug": "x-elio",
       "name": "X-Elio",
       "project_count": 15
@@ -27187,11 +27214,6 @@
       "slug": "samsung-c-t",
       "name": "Samsung C&T",
       "project_count": 15
-    },
-    {
-      "slug": "origin-energy",
-      "name": "Origin Energy",
-      "project_count": 14
     },
     {
       "slug": "tagenergy",

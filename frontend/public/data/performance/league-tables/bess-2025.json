@@ -3,10 +3,10 @@
   "technology": "bess",
   "data_source": "openelectricity",
   "fleet_avg": {
-    "capacity_factor_pct": 6.78,
-    "revenue_per_mw": 147725.0,
-    "curtailment_pct": 4.61,
-    "count": 27
+    "capacity_factor_pct": 6.58,
+    "revenue_per_mw": 142659.0,
+    "curtailment_pct": 4.73,
+    "count": 28
   },
   "projects": [
     {
@@ -756,6 +756,36 @@
       "avg_discharge_price": 74.47,
       "utilisation_pct": 1.59,
       "cycles": 34.8,
+      "data_source": "openelectricity"
+    },
+    {
+      "project_id": "eraring-big-battery",
+      "rank_composite": 26,
+      "quartile": 4,
+      "composite_score": 3.3,
+      "rank_capacity_factor": 25,
+      "rank_revenue_per_mw": 26,
+      "rank_curtailment": 26,
+      "percentile_capacity_factor": 11.1,
+      "percentile_revenue_per_mw": 7.4,
+      "name": "Eraring Big Battery",
+      "technology": "bess",
+      "capacity_mw": 700.0,
+      "storage_mwh": 1390.0,
+      "state": "NSW",
+      "energy_mwh": 60697.7,
+      "capacity_factor_pct": 0.99,
+      "curtailment_pct": 7.82,
+      "energy_price_received": 67.88,
+      "revenue_aud": 4119867.0,
+      "revenue_per_mw": 5886.0,
+      "market_value_aud": 4119867.0,
+      "energy_charged_mwh": 43947.9,
+      "energy_discharged_mwh": 30146.0,
+      "avg_charge_price": 44.03,
+      "avg_discharge_price": 36.23,
+      "utilisation_pct": 0.49,
+      "cycles": 21.7,
       "data_source": "openelectricity"
     },
     {

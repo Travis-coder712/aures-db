@@ -7557,68 +7557,242 @@ def export_bess_records_leaderboard(conn):
             peak_dates[d]['pc_mwh'] = r['charge_mwh']
             peak_dates[d]['pc_date'] = r['date']
 
-    # ---- Per-DUID 5-min peaks from bess_5min_peaks (if populated) ----
-    has_5min = bool(conn.execute(
+    # ---- Per-DUID multi-window peaks from bess_5min_peaks ----
+    has_5min_tbl = bool(conn.execute(
         "SELECT name FROM sqlite_master WHERE type='table' AND name='bess_5min_peaks'"
-    ).fetchone() and conn.execute('SELECT COUNT(*) FROM bess_5min_peaks').fetchone()[0])
+    ).fetchone())
+    has_5min = has_5min_tbl and bool(
+        conn.execute('SELECT COUNT(*) FROM bess_5min_peaks').fetchone()[0])
+    has_30min = has_5min and bool(
+        conn.execute('SELECT COUNT(*) FROM bess_5min_peaks WHERE peak_30min_mwh IS NOT NULL').fetchone()[0])
+
     duid_5min: dict[str, dict] = {}
     if has_5min:
         for r in conn.execute("""
             SELECT duid,
-                   ROUND(MAX(peak_discharge_mw), 1) AS peak_d_mw,
-                   peak_discharge_time AS pd_time_raw,
-                   ROUND(MAX(peak_charge_mw), 1) AS peak_c_mw,
-                   peak_charge_time AS pc_time_raw
-            FROM bess_5min_peaks
-            GROUP BY duid
+                   ROUND(MAX(peak_discharge_mw),   1) AS peak_d_mw,
+                   ROUND(MAX(peak_charge_mw),       1) AS peak_c_mw,
+                   ROUND(MAX(peak_30min_mwh),       2) AS peak_30min_d,
+                   ROUND(MAX(peak_30min_charge_mwh),2) AS peak_30min_c,
+                   ROUND(MAX(peak_1hr_mwh),         2) AS peak_1hr_d,
+                   ROUND(MAX(peak_1hr_charge_mwh),  2) AS peak_1hr_c
+            FROM bess_5min_peaks GROUP BY duid
         """).fetchall():
-            # Also fetch the date/time of the all-time peak
-            pd_row = conn.execute(
-                "SELECT date, peak_discharge_time FROM bess_5min_peaks "
-                "WHERE duid=? ORDER BY peak_discharge_mw DESC LIMIT 1", (r['duid'],)
-            ).fetchone()
-            pc_row = conn.execute(
-                "SELECT date, peak_charge_time FROM bess_5min_peaks "
-                "WHERE duid=? ORDER BY peak_charge_mw DESC LIMIT 1", (r['duid'],)
-            ).fetchone()
-            duid_5min[r['duid']] = {
-                'peak_discharge_mw': r['peak_d_mw'],
-                'peak_discharge_mw_date': pd_row['date'] if pd_row else None,
-                'peak_discharge_mw_time': pd_row['peak_discharge_time'] if pd_row else None,
-                'peak_charge_mw': r['peak_c_mw'],
-                'peak_charge_mw_date': pc_row['date'] if pc_row else None,
-                'peak_charge_mw_time': pc_row['peak_charge_time'] if pc_row else None,
+            duid = r['duid']
+            # Fetch the specific date/time for each peak
+            def _peak_row(col_mw, col_time):
+                return conn.execute(
+                    f"SELECT date, {col_time} as t FROM bess_5min_peaks "
+                    f"WHERE duid=? ORDER BY {col_mw} DESC LIMIT 1", (duid,)
+                ).fetchone()
+
+            pd_row  = _peak_row('peak_discharge_mw',    'peak_discharge_time')
+            pc_row  = _peak_row('peak_charge_mw',       'peak_charge_time')
+            pd30_row = _peak_row('peak_30min_mwh',      'peak_30min_start')
+            pc30_row = _peak_row('peak_30min_charge_mwh','peak_30min_charge_start')
+            pd1h_row = _peak_row('peak_1hr_mwh',        'peak_1hr_start')
+            pc1h_row = _peak_row('peak_1hr_charge_mwh', 'peak_1hr_charge_start')
+
+            duid_5min[duid] = {
+                'peak_discharge_mw':        r['peak_d_mw'],
+                'peak_discharge_mw_date':   pd_row['date'] if pd_row else None,
+                'peak_discharge_mw_time':   pd_row['t']    if pd_row else None,
+                'peak_charge_mw':           r['peak_c_mw'],
+                'peak_charge_mw_date':      pc_row['date'] if pc_row else None,
+                'peak_charge_mw_time':      pc_row['t']    if pc_row else None,
+                'peak_30min_mwh':           r['peak_30min_d'],
+                'peak_30min_start':         pd30_row['t']  if pd30_row else None,
+                'peak_30min_date':          pd30_row['date'] if pd30_row else None,
+                'peak_30min_charge_mwh':    r['peak_30min_c'],
+                'peak_30min_charge_start':  pc30_row['t']  if pc30_row else None,
+                'peak_30min_charge_date':   pc30_row['date'] if pc30_row else None,
+                'peak_1hr_mwh':             r['peak_1hr_d'],
+                'peak_1hr_start':           pd1h_row['t']  if pd1h_row else None,
+                'peak_1hr_date':            pd1h_row['date'] if pd1h_row else None,
+                'peak_1hr_charge_mwh':      r['peak_1hr_c'],
+                'peak_1hr_charge_start':    pc1h_row['t']  if pc1h_row else None,
+                'peak_1hr_charge_date':     pc1h_row['date'] if pc1h_row else None,
             }
+
+    # ---- Quarterly discharge/charge from generation_daily ----
+    quarterly: dict[str, dict] = {}
+    for r in conn.execute("""
+        SELECT duid,
+               strftime('%Y-Q', date, 'start of month') ||
+                   CAST((CAST(strftime('%m', date) AS INTEGER) - 1) / 3 + 1 AS TEXT) AS quarter,
+               ROUND(SUM(gen_mwh), 1) AS q_discharge_mwh,
+               ROUND(SUM(charge_mwh), 1) AS q_charge_mwh
+        FROM generation_daily WHERE fuel_type='Battery Storage'
+        GROUP BY duid, quarter
+    """).fetchall():
+        d = r['duid']
+        q = r['quarter']
+        if d not in quarterly:
+            quarterly[d] = {'best_discharge': 0.0, 'best_discharge_q': None,
+                            'best_charge': 0.0, 'best_charge_q': None}
+        if (r['q_discharge_mwh'] or 0) > quarterly[d]['best_discharge']:
+            quarterly[d]['best_discharge']   = r['q_discharge_mwh']
+            quarterly[d]['best_discharge_q'] = q
+        if (r['q_charge_mwh'] or 0) > quarterly[d]['best_charge']:
+            quarterly[d]['best_charge']   = r['q_charge_mwh']
+            quarterly[d]['best_charge_q'] = q
+
+    # ---- Revenue context from dispatch_price_daily (if populated) ----
+    has_prices = bool(conn.execute(
+        "SELECT name FROM sqlite_master WHERE type='table' AND name='dispatch_price_daily'"
+    ).fetchone() and conn.execute('SELECT COUNT(*) FROM dispatch_price_daily').fetchone()[0])
+
+    # Map (date, short_region) → {avg_rrp, peak_rrp, p90_rrp}
+    price_by_date_region: dict[tuple, dict] = {}
+    if has_prices:
+        for r in conn.execute(
+            "SELECT date, region, avg_rrp, peak_rrp, p90_rrp FROM dispatch_price_daily"
+        ).fetchall():
+            short = r['region'].replace('1', '')  # NSW1 → NSW
+            price_by_date_region[(r['date'], short)] = {
+                'avg': r['avg_rrp'], 'peak': r['peak_rrp'], 'p90': r['p90_rrp']
+            }
+
+    def revenue_estimate(date, region, mwh):
+        if not (date and region and mwh and has_prices):
+            return None
+        short = region.replace('1', '')
+        p = price_by_date_region.get((date, short))
+        if not p or not p.get('avg'):
+            return None
+        return {
+            'avg_rrp': p['avg'],
+            'peak_rrp': p['peak'],
+            'p90_rrp': p['p90'],
+            'estimated_revenue_aud': round(mwh * (p['p90'] or p['avg']), 0),
+        }
 
     batteries = []
     for r in rows:
         duid = r['duid']
         pd_info = peak_dates.get(duid, {})
-        five = duid_5min.get(duid, {})
+        five    = duid_5min.get(duid, {})
+        q_info  = quarterly.get(duid, {})
+        region  = (r['region'] or 'UNK').replace('1', '')
+        pd_date = pd_info.get('pd_date')
+        pc_date = pd_info.get('pc_date')
         batteries.append({
             'duid': duid,
             'name': r['station_name'] or duid,
-            'region': r['region'] or 'UNK',
+            'region': region,
             'capacity_mwh': r['expected_storage_mwh'],
             'days_active': r['days_active'],
             'first_date': r['first_date'],
             'last_date': r['last_date'],
+            # Daily (24-hr) records
             'peak_discharge_mwh': r['peak_discharge_mwh'],
-            'peak_discharge_date': pd_info.get('pd_date'),
+            'peak_discharge_date': pd_date,
             'peak_charge_mwh': r['peak_charge_mwh'],
-            'peak_charge_date': pd_info.get('pc_date'),
+            'peak_charge_date': pc_date,
             'total_discharge_mwh': r['total_discharge_mwh'],
             'total_charge_mwh': r['total_charge_mwh'],
-            # 5-min peaks (None until import_bess_5min.py has been run)
-            'peak_discharge_mw': five.get('peak_discharge_mw'),
-            'peak_discharge_mw_date': five.get('peak_discharge_mw_date'),
-            'peak_discharge_mw_time': five.get('peak_discharge_mw_time'),
-            'peak_charge_mw': five.get('peak_charge_mw'),
-            'peak_charge_mw_date': five.get('peak_charge_mw_date'),
-            'peak_charge_mw_time': five.get('peak_charge_mw_time'),
+            # Quarterly records
+            'peak_quarter_discharge_mwh': q_info.get('best_discharge'),
+            'peak_quarter_discharge_q':   q_info.get('best_discharge_q'),
+            'peak_quarter_charge_mwh':    q_info.get('best_charge'),
+            'peak_quarter_charge_q':      q_info.get('best_charge_q'),
+            # 5-min peaks
+            'peak_discharge_mw':       five.get('peak_discharge_mw'),
+            'peak_discharge_mw_date':  five.get('peak_discharge_mw_date'),
+            'peak_discharge_mw_time':  five.get('peak_discharge_mw_time'),
+            'peak_charge_mw':          five.get('peak_charge_mw'),
+            'peak_charge_mw_date':     five.get('peak_charge_mw_date'),
+            'peak_charge_mw_time':     five.get('peak_charge_mw_time'),
+            # 30-min window peaks (MWh in best 30-min window)
+            'peak_30min_mwh':          five.get('peak_30min_mwh'),
+            'peak_30min_date':         five.get('peak_30min_date'),
+            'peak_30min_start':        five.get('peak_30min_start'),
+            'peak_30min_charge_mwh':   five.get('peak_30min_charge_mwh'),
+            'peak_30min_charge_date':  five.get('peak_30min_charge_date'),
+            # 1-hr window peaks
+            'peak_1hr_mwh':            five.get('peak_1hr_mwh'),
+            'peak_1hr_date':           five.get('peak_1hr_date'),
+            'peak_1hr_start':          five.get('peak_1hr_start'),
+            'peak_1hr_charge_mwh':     five.get('peak_1hr_charge_mwh'),
+            'peak_1hr_charge_date':    five.get('peak_1hr_charge_date'),
+            # Revenue lens (on peak discharge day)
+            'peak_discharge_revenue':  revenue_estimate(pd_date, region, r['peak_discharge_mwh']),
         })
 
     data_through = batteries[0]['last_date'] if batteries else None
+
+    # ---- Records timeline: staircase of when each NEM/state record was broken ----
+    def build_timeline(scope: str, metric_col: str, name_col: str) -> list:
+        """Return [{date, value, duid, name}] where each entry is a new all-time record."""
+        if scope == 'NEM':
+            rows_t = conn.execute(f"""
+                SELECT date, duid, {metric_col} AS val
+                FROM generation_daily WHERE fuel_type='Battery Storage' AND {metric_col} > 0
+                ORDER BY date
+            """).fetchall()
+        else:
+            rows_t = conn.execute(f"""
+                SELECT date, duid, {metric_col} AS val
+                FROM generation_daily WHERE fuel_type='Battery Storage'
+                  AND region=? AND {metric_col} > 0
+                ORDER BY date
+            """, (scope,)).fetchall()
+
+        timeline = []
+        current_max = 0.0
+        for row in rows_t:
+            if row['val'] > current_max:
+                current_max = row['val']
+                # Lookup name from batteries list
+                name = next((b['name'] for b in batteries if b['duid'] == row['duid']),
+                            row['duid'])
+                timeline.append({
+                    'date': row['date'],
+                    'value': round(row['val'], 1),
+                    'duid': row['duid'],
+                    'name': name,
+                })
+        return timeline
+
+    # 5-min discharge timeline from bess_5min_peaks (NEM-wide running record)
+    def build_5min_timeline(scope: str) -> list:
+        if not has_5min:
+            return []
+        if scope == 'NEM':
+            rows_t = conn.execute("""
+                SELECT date, duid, peak_discharge_mw AS val
+                FROM bess_5min_peaks WHERE peak_discharge_mw > 0
+                ORDER BY date
+            """).fetchall()
+        else:
+            rows_t = conn.execute("""
+                SELECT date, duid, peak_discharge_mw AS val
+                FROM bess_5min_peaks WHERE region=? AND peak_discharge_mw > 0
+                ORDER BY date
+            """, (scope,)).fetchall()
+        timeline = []
+        current_max = 0.0
+        for row in rows_t:
+            if row['val'] > current_max:
+                current_max = row['val']
+                name = next((b['name'] for b in batteries if b['duid'] == row['duid']),
+                            row['duid'])
+                timeline.append({
+                    'date': row['date'],
+                    'value': round(row['val'], 1),
+                    'duid': row['duid'],
+                    'name': name,
+                })
+        return timeline
+
+    records_timeline = {}
+    for scope in ['NEM'] + REGIONS:
+        scope_key = scope.replace('1', '') if scope != 'NEM' else 'NEM'
+        records_timeline[scope_key] = {
+            'daily_discharge': build_timeline(scope, 'gen_mwh',    'station_name'),
+            'daily_charge':    build_timeline(scope, 'charge_mwh', 'station_name'),
+            '5min_discharge':  build_5min_timeline(scope),
+        }
 
     # ---- Fleet-level daily records (sum all DUIDs per date) ----
     fleet_daily = conn.execute("""
@@ -7683,17 +7857,45 @@ def export_bess_records_leaderboard(conn):
 
     # ---- Top-battery records per scope ----
     def top_battery(scope: str, metric: str, n: int = 10) -> list:
-        scoped = [b for b in batteries if scope == 'NEM' or b['region'] == scope]
+        short = scope.replace('1', '') if scope != 'NEM' else 'NEM'
+        scoped = [b for b in batteries if short == 'NEM' or b['region'] == short]
         return sorted(scoped, key=lambda b: b[metric] or 0, reverse=True)[:n]
 
     out = {
-        'generated_at': datetime.utcnow().isoformat() + 'Z',
-        'data_through': data_through,
+        'generated_at':   datetime.utcnow().isoformat() + 'Z',
+        'data_through':   data_through,
         'total_batteries': len(batteries),
-        'batteries': batteries,
-        'fleet_records': fleet_records,
-        'top_discharge': {s: top_battery(s, 'peak_discharge_mwh') for s in ['NEM'] + REGIONS},
-        'top_charge': {s: top_battery(s, 'peak_charge_mwh') for s in ['NEM'] + REGIONS},
+        'has_5min_data':  has_5min,
+        'has_30min_data': has_30min,
+        'has_price_data': has_prices,
+        'batteries':      batteries,
+        'fleet_records':  fleet_records,
+        'records_timeline': records_timeline,
+        'top_discharge': {
+            s.replace('1','') if s != 'NEM' else 'NEM':
+            top_battery(s, 'peak_discharge_mwh')
+            for s in ['NEM'] + REGIONS
+        },
+        'top_charge': {
+            s.replace('1','') if s != 'NEM' else 'NEM':
+            top_battery(s, 'peak_charge_mwh')
+            for s in ['NEM'] + REGIONS
+        },
+        'top_discharge_5min': {
+            s.replace('1','') if s != 'NEM' else 'NEM':
+            top_battery(s, 'peak_discharge_mw')
+            for s in ['NEM'] + REGIONS
+        } if has_5min else {},
+        'top_30min': {
+            s.replace('1','') if s != 'NEM' else 'NEM':
+            top_battery(s, 'peak_30min_mwh')
+            for s in ['NEM'] + REGIONS
+        } if has_30min else {},
+        'top_1hr': {
+            s.replace('1','') if s != 'NEM' else 'NEM':
+            top_battery(s, 'peak_1hr_mwh')
+            for s in ['NEM'] + REGIONS
+        } if has_30min else {},
     }
 
     out_path = os.path.join(INTEL_DIR, 'bess-records-leaderboard.json')

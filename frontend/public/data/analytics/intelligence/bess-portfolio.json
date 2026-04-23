@@ -1,16 +1,16 @@
 {
   "summary": {
-    "total_bess": 431,
-    "total_with_storage": 346,
-    "total_operating": 32,
+    "total_bess": 432,
+    "total_with_storage": 347,
+    "total_operating": 33,
     "total_hybrid": 92,
     "total_hybrid_operating": 0,
     "grid_forming_count": 11,
-    "grid_forming_pct": 2.6,
-    "chemistry_verified_count": 34,
-    "chemistry_coverage_pct": 7.9,
+    "grid_forming_pct": 2.5,
+    "chemistry_verified_count": 35,
+    "chemistry_coverage_pct": 8.1,
     "pcs_type_counts": {
-      "grid_following": 17,
+      "grid_following": 18,
       "grid_forming": 17
     },
     "network_service_contracts": 4
@@ -19,12 +19,12 @@
     "operating": {
       "buckets": {
         "<1h": 3,
-        "1-2h": 10,
+        "1-2h": 11,
         "2-4h": 17,
         "4-8h": 2,
         "8h+": 0
       },
-      "count": 32,
+      "count": 33,
       "avg": 1.83,
       "median": 2.0,
       "max": 4.51,
@@ -130,12 +130,12 @@
     },
     {
       "year": 2025,
-      "count": 10,
-      "avg_duration_h": 2.06,
+      "count": 11,
+      "avg_duration_h": 2.05,
       "median_duration_h": 2.0,
       "max_duration_h": 4.0,
-      "total_mw": 2071.0,
-      "total_mwh": 3896.8
+      "total_mw": 2771.0,
+      "total_mwh": 5286.8
     },
     {
       "year": 2026,
@@ -1351,8 +1351,8 @@
   ],
   "chemistry_breakdown": {
     "LFP": {
-      "project_count": 33,
-      "total_mw": 11060.0,
+      "project_count": 34,
+      "total_mw": 11760.0,
       "top_oems": [
         [
           "CATL / Tesla (Tesla Gigafactory)",
@@ -1363,15 +1363,15 @@
           3
         ],
         [
+          "CATL (Contemporary Amperex Technology Co. Limited)",
+          2
+        ],
+        [
           "CATL",
           2
         ],
         [
           "Powin Energy / CATL",
-          2
-        ],
-        [
-          "Tesla",
           2
         ]
       ]
@@ -1441,6 +1441,24 @@
       "pcs_type": "grid_forming",
       "rte_pct": 88.0,
       "developer": "Origin Energy"
+    },
+    {
+      "project_id": "eraring-big-battery",
+      "name": "Eraring Big Battery",
+      "state": "NSW",
+      "status": "operating",
+      "capacity_mw": 700.0,
+      "storage_mwh": 1390.0,
+      "duration_h": 1.99,
+      "chemistry": "LFP",
+      "chemistry_full": "Lithium Iron Phosphate (LiFePO4)",
+      "cell_supplier": "CATL (Contemporary Amperex Technology Co. Limited)",
+      "cell_country": "China",
+      "inverter_supplier": "Wartsila Energy",
+      "inverter_model": "Quantum3",
+      "pcs_type": "grid_following",
+      "rte_pct": 89.0,
+      "developer": "Origin Energy Electricity Limited"
     },
     {
       "project_id": "mornington-bess",
@@ -2158,5 +2176,5 @@
       "data_confidence": "low"
     }
   ],
-  "exported_at": "2026-04-17T21:05:04.508275"
+  "exported_at": "2026-04-23T18:25:54.864639"
 }

@@ -7,11 +7,11 @@
       "url": "https://www.aemo.com.au/energy-systems/electricity/national-electricity-market-nem/nem-forecasting-and-planning/forecasting-and-planning-data/generation-information",
       "frequency": "monthly",
       "script": "import_aemo_gen_info.py",
-      "last_run": "2026-04-01 12:31:40",
+      "last_run": "2026-04-17 13:17:59",
       "last_status": "completed",
-      "records_imported": 1060,
-      "records_updated": 771,
-      "records_new": 0,
+      "records_imported": 1047,
+      "records_updated": 478,
+      "records_new": 1,
       "error": null
     },
     {
@@ -35,7 +35,7 @@
       "url": "https://openelectricity.org.au",
       "frequency": "quarterly",
       "script": "harvest_facility_metadata.py",
-      "last_run": "2026-04-15 08:14:00",
+      "last_run": "2026-04-17 13:17:59",
       "last_status": "completed",
       "records_imported": 276,
       "records_updated": 0,
@@ -105,7 +105,7 @@
       "url": "https://reneweconomy.com.au",
       "frequency": "daily",
       "script": "import_news_rss.py",
-      "last_run": "2026-04-01T23:34:15.386686",
+      "last_run": "2026-04-17T23:18:05.201989",
       "last_status": "completed",
       "records_imported": 85,
       "records_updated": 0,
@@ -147,7 +147,7 @@
       "url": "",
       "frequency": "ad_hoc",
       "script": "exporters/export_json.py",
-      "last_run": "2026-04-17T21:05:04.471243",
+      "last_run": "2026-04-23T18:25:54.809103",
       "last_status": "completed",
       "records_imported": 0,
       "records_updated": 0,
@@ -156,10 +156,10 @@
     }
   ],
   "database_stats": {
-    "total_projects": 1063,
+    "total_projects": 1064,
     "total_offtakes": 85,
     "total_oems_contractors": 132,
-    "operating_projects": 225
+    "operating_projects": 226
   },
-  "exported_at": "2026-04-17T21:05:04.471415"
+  "exported_at": "2026-04-23T18:25:54.809327"
 }

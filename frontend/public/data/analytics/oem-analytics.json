@@ -173,11 +173,11 @@
       ]
     },
     "Wartsila": {
-      "ranked_projects": 1,
-      "avg_cf": 7.6,
-      "avg_composite": 52.7,
+      "ranked_projects": 2,
+      "avg_cf": 11.8,
+      "avg_composite": 50.0,
       "quartile_counts": {
-        "1": 1,
+        "1": 2,
         "2": 0,
         "3": 0,
         "4": 0
@@ -191,6 +191,15 @@
           "quartile": 1,
           "capacity_factor_pct": 7.6,
           "composite_score": 52.7,
+          "year": 2026
+        },
+        {
+          "project_id": "eraring-big-battery",
+          "project_name": "Eraring Big Battery",
+          "technology": "bess",
+          "quartile": 1,
+          "capacity_factor_pct": 16.1,
+          "composite_score": 47.2,
           "year": 2026
         }
       ]
@@ -3683,6 +3692,17 @@
         ]
       },
       {
+        "developer": "Origin Energy Electricity Limited",
+        "project_count": 1,
+        "total_mw": 700.0,
+        "technologies": [
+          "bess"
+        ],
+        "statuses": [
+          "operating"
+        ]
+      },
+      {
         "developer": "EnergyAustralia",
         "project_count": 1,
         "total_mw": 350.0,
@@ -5693,12 +5713,12 @@
   "concentration": {
     "bess_oem": {
       "total_oems": 13,
-      "total_mw": 13603.5,
-      "total_projects": 56,
-      "hhi_mw": 1848.0,
-      "hhi_projects": 2047.0,
-      "top3_share_mw_pct": 66.6,
-      "top3_share_projects_pct": 64.3,
+      "total_mw": 14303.5,
+      "total_projects": 57,
+      "hhi_mw": 1791.0,
+      "hhi_projects": 2004.0,
+      "top3_share_mw_pct": 63.3,
+      "top3_share_projects_pct": 63.2,
       "top3": [
         {
           "supplier": "Tesla",
@@ -5822,5 +5842,5 @@
       ]
     }
   },
-  "exported_at": "2026-04-17T21:05:04.450702"
+  "exported_at": "2026-04-23T18:25:54.777486"
 }

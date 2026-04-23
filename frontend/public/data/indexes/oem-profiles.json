@@ -504,6 +504,78 @@
       }
     },
     {
+      "slug": "wartsila",
+      "name": "Wartsila",
+      "project_count": 5,
+      "total_capacity_mw": 2800.0,
+      "total_storage_mwh": 9582.6,
+      "roles": [
+        "bess_oem",
+        "inverter"
+      ],
+      "models": [
+        "GridSolv Quantum",
+        "GridSolv Quantum \u2014 integrated PCS",
+        "Quantum",
+        "Quantum (CATL LFP cells)",
+        "Quantum High Energy",
+        "Quantum3"
+      ],
+      "by_technology": {
+        "bess": 6
+      },
+      "by_status": {
+        "operating": 4,
+        "construction": 2
+      },
+      "by_state": {
+        "NSW": 3,
+        "VIC": 2,
+        "SA": 1
+      },
+      "states": [
+        "NSW",
+        "SA",
+        "VIC"
+      ],
+      "project_ids": [
+        "bennetts-creek-bess",
+        "eraring-battery",
+        "eraring-big-battery",
+        "torrens-island-bess",
+        "wooreen-energy-storage-system"
+      ],
+      "status_detail": {
+        "operating": {
+          "count": 4,
+          "capacity_mw": 2350.0,
+          "storage_mwh": 7959.6
+        },
+        "construction": {
+          "count": 2,
+          "capacity_mw": 450.0,
+          "storage_mwh": 1623.0
+        }
+      },
+      "state_detail": {
+        "NSW": {
+          "count": 3,
+          "capacity_mw": 2100.0,
+          "storage_mwh": 7710.0
+        },
+        "VIC": {
+          "count": 2,
+          "capacity_mw": 450.0,
+          "storage_mwh": 1623.0
+        },
+        "SA": {
+          "count": 1,
+          "capacity_mw": 250.0,
+          "storage_mwh": 249.6
+        }
+      }
+    },
+    {
       "slug": "catl",
       "name": "CATL",
       "project_count": 7,
@@ -845,76 +917,6 @@
       }
     },
     {
-      "slug": "wartsila",
-      "name": "Wartsila",
-      "project_count": 4,
-      "total_capacity_mw": 2100.0,
-      "total_storage_mwh": 8192.6,
-      "roles": [
-        "bess_oem",
-        "inverter"
-      ],
-      "models": [
-        "GridSolv Quantum",
-        "GridSolv Quantum \u2014 integrated PCS",
-        "Quantum",
-        "Quantum (CATL LFP cells)",
-        "Quantum High Energy"
-      ],
-      "by_technology": {
-        "bess": 5
-      },
-      "by_status": {
-        "operating": 3,
-        "construction": 2
-      },
-      "by_state": {
-        "NSW": 2,
-        "VIC": 2,
-        "SA": 1
-      },
-      "states": [
-        "NSW",
-        "SA",
-        "VIC"
-      ],
-      "project_ids": [
-        "bennetts-creek-bess",
-        "eraring-battery",
-        "torrens-island-bess",
-        "wooreen-energy-storage-system"
-      ],
-      "status_detail": {
-        "operating": {
-          "count": 3,
-          "capacity_mw": 1650.0,
-          "storage_mwh": 6569.6
-        },
-        "construction": {
-          "count": 2,
-          "capacity_mw": 450.0,
-          "storage_mwh": 1623.0
-        }
-      },
-      "state_detail": {
-        "NSW": {
-          "count": 2,
-          "capacity_mw": 1400.0,
-          "storage_mwh": 6320.0
-        },
-        "VIC": {
-          "count": 2,
-          "capacity_mw": 450.0,
-          "storage_mwh": 1623.0
-        },
-        "SA": {
-          "count": 1,
-          "capacity_mw": 250.0,
-          "storage_mwh": 249.6
-        }
-      }
-    },
-    {
       "slug": "to-be-confirmed-through-procurement",
       "name": "To be confirmed through procurement",
       "project_count": 3,
@@ -1100,6 +1102,47 @@
           "count": 4,
           "capacity_mw": 615.0,
           "storage_mwh": 0
+        }
+      }
+    },
+    {
+      "slug": "catl-contemporary-amperex-technology-co-limited",
+      "name": "CATL (Contemporary Amperex Technology Co. Limited)",
+      "project_count": 2,
+      "total_capacity_mw": 1550.0,
+      "total_storage_mwh": 3070.0,
+      "roles": [
+        "bess_oem"
+      ],
+      "models": [],
+      "by_technology": {
+        "bess": 2
+      },
+      "by_status": {
+        "operating": 2
+      },
+      "by_state": {
+        "NSW": 2
+      },
+      "states": [
+        "NSW"
+      ],
+      "project_ids": [
+        "eraring-big-battery",
+        "waratah-super-battery"
+      ],
+      "status_detail": {
+        "operating": {
+          "count": 2,
+          "capacity_mw": 1550.0,
+          "storage_mwh": 3070.0
+        }
+      },
+      "state_detail": {
+        "NSW": {
+          "count": 2,
+          "capacity_mw": 1550.0,
+          "storage_mwh": 3070.0
         }
       }
     },
@@ -1749,46 +1792,6 @@
       }
     },
     {
-      "slug": "catl-contemporary-amperex-technology-co-limited",
-      "name": "CATL (Contemporary Amperex Technology Co. Limited)",
-      "project_count": 1,
-      "total_capacity_mw": 850.0,
-      "total_storage_mwh": 1680.0,
-      "roles": [
-        "bess_oem"
-      ],
-      "models": [],
-      "by_technology": {
-        "bess": 1
-      },
-      "by_status": {
-        "operating": 1
-      },
-      "by_state": {
-        "NSW": 1
-      },
-      "states": [
-        "NSW"
-      ],
-      "project_ids": [
-        "waratah-super-battery"
-      ],
-      "status_detail": {
-        "operating": {
-          "count": 1,
-          "capacity_mw": 850.0,
-          "storage_mwh": 1680.0
-        }
-      },
-      "state_detail": {
-        "NSW": {
-          "count": 1,
-          "capacity_mw": 850.0,
-          "storage_mwh": 1680.0
-        }
-      }
-    },
-    {
       "slug": "eks-energy-hitachi-energy",
       "name": "EKS Energy (Hitachi Energy)",
       "project_count": 1,
@@ -1949,6 +1952,63 @@
           "count": 1,
           "capacity_mw": 100.0,
           "storage_mwh": 199.9
+        }
+      }
+    },
+    {
+      "slug": "wartsila-energy",
+      "name": "Wartsila Energy",
+      "project_count": 2,
+      "total_capacity_mw": 800.0,
+      "total_storage_mwh": 1613.0,
+      "roles": [
+        "inverter"
+      ],
+      "models": [
+        "Quantum",
+        "Quantum3"
+      ],
+      "by_technology": {
+        "bess": 2
+      },
+      "by_status": {
+        "operating": 1,
+        "construction": 1
+      },
+      "by_state": {
+        "NSW": 1,
+        "VIC": 1
+      },
+      "states": [
+        "NSW",
+        "VIC"
+      ],
+      "project_ids": [
+        "bennetts-creek-bess",
+        "eraring-big-battery"
+      ],
+      "status_detail": {
+        "operating": {
+          "count": 1,
+          "capacity_mw": 700.0,
+          "storage_mwh": 1390.0
+        },
+        "construction": {
+          "count": 1,
+          "capacity_mw": 100.0,
+          "storage_mwh": 223.0
+        }
+      },
+      "state_detail": {
+        "NSW": {
+          "count": 1,
+          "capacity_mw": 700.0,
+          "storage_mwh": 1390.0
+        },
+        "VIC": {
+          "count": 1,
+          "capacity_mw": 100.0,
+          "storage_mwh": 223.0
         }
       }
     },
@@ -4432,48 +4492,6 @@
           "count": 1,
           "capacity_mw": 100.0,
           "storage_mwh": 0
-        }
-      }
-    },
-    {
-      "slug": "wartsila-energy",
-      "name": "Wartsila Energy",
-      "project_count": 1,
-      "total_capacity_mw": 100.0,
-      "total_storage_mwh": 223.0,
-      "roles": [
-        "inverter"
-      ],
-      "models": [
-        "Quantum"
-      ],
-      "by_technology": {
-        "bess": 1
-      },
-      "by_status": {
-        "construction": 1
-      },
-      "by_state": {
-        "VIC": 1
-      },
-      "states": [
-        "VIC"
-      ],
-      "project_ids": [
-        "bennetts-creek-bess"
-      ],
-      "status_detail": {
-        "construction": {
-          "count": 1,
-          "capacity_mw": 100.0,
-          "storage_mwh": 223.0
-        }
-      },
-      "state_detail": {
-        "VIC": {
-          "count": 1,
-          "capacity_mw": 100.0,
-          "storage_mwh": 223.0
         }
       }
     },
