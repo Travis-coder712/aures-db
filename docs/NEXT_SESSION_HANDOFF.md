@@ -1,21 +1,20 @@
 # AURES — Next Session Handoff
 
-**Last refreshed:** 2026-04-17, end of the v2.31.0 session
-**Latest shipped version:** v2.31.0 (plus v2.31.1 pending release of this session's quick-wins)
+**Last refreshed:** 2026-04-23, end of the v2.32.0 session
+**Latest shipped version:** v2.32.0
 **Purpose:** Single-place brief for the next session. Cold-readable — no context required beyond this file and `docs/INTELLIGENCE_LAYER_PLAN.md`.
 
 ---
 
-## 🟢 Current state snapshot (v2.31.0)
+## 🟢 Current state snapshot (v2.32.0)
 
 ### What's live on the deployed site
-- **31 releases shipped** v2.15.1 → v2.31.0, with the recent ones covering:
-  - **v2.29.0 / v2.29.1** — Coal Watch **YTD Comparison** tab + 5-year MMSDM backfill
+- **32 releases shipped** v2.15.1 → v2.32.0, with the recent ones covering:
   - **v2.30.0** — **Energy Transition Scoreboard** (coal vs wind/solar/BESS + demand overlay + records)
-  - **v2.31.0** — **CIS Wind Pipeline filter** (Dev Status column + NSW-default + preset)
+  - **v2.31.0 / v2.31.1** — **CIS Wind Pipeline filter** + data/peak-calc patch
+  - **v2.32.0** — **BESS Bidding Trading Platform deep-dives** (OEM match, lock-in, convergence, grid implications per platform + grid-scale monoculture callout)
 - All features on `https://travis-coder712.github.io/aures-db/`
 - Plan doc: `docs/INTELLIGENCE_LAYER_PLAN.md` — authoritative release log
-- Session brief for today's three+one releases: `docs/SESSION_2026-04-17_SUMMARY.md`
 
 ### Pipeline / data state
 - **Coal dispatch** (`dispatch_availability`): **~24M rows** from Jan 2021 → Apr 2026. MMSDM-backfilled.

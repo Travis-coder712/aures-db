@@ -577,6 +577,15 @@ export default function BessBidding() {
                   'Very high rebid rates (91-94%)',
                 ]}
               />
+              <PlatformNote
+                items={[
+                  { label: 'OEM match', text: 'Waratah Super Battery is confirmed Tesla Megapack 2XL hardware — the strongest OEM-to-software match in the fleet. Ballarat and Riverina hardware is unconfirmed in public data but the Autobidder signature is unambiguous.' },
+                  { label: 'Is the software locked to the OEM?', text: "Tesla historically bundled Autobidder with Megapack as an integrated product. In practice this creates a strong default path, but Waratah's migration to Fluence/MONDO proves the lock-in is not contractually absolute — an owner can switch if they choose. The cost is operational: retraining, re-integration, and a visible transition period visible in the rebid data." },
+                  { label: 'Platform convergence', text: 'Rebid rates cluster tightly (91–94%). Target spreads differ between Ballarat ($78/MWh) and Riverina ($93/MWh), showing the platform enforces strategy type (defensive LOAD) but not price points. Each asset sizes its spread based on capacity, local market depth, and risk appetite.' },
+                  { label: 'Grid implication', text: 'Defensive LOAD strategy means these assets charge cheap and rarely bid aggressively into dispatch spikes. They are price-takers on the charge side, not price-setters on the discharge side — reducing the crowding-out risk for other assets during high-price events.' },
+                ]}
+              />
+
               <SoftwareCluster
                 name="Fluence/MONDO Platform"
                 confidence="High"
@@ -590,6 +599,16 @@ export default function BessBidding() {
                   'Highest rebid rates in fleet (94-98%)',
                 ]}
               />
+              <PlatformNote
+                items={[
+                  { label: 'OEM match', text: 'Fluence is itself a battery software and storage company (Siemens/AES joint venture) operating independently of hardware OEMs. Waratah uses Tesla Megapack 2XL hardware yet runs Fluence software — confirming hardware-agnosticism. No OEM hardware data is available for the other four assets in this cluster.' },
+                  { label: 'Is the software locked to the OEM?', text: "No — Fluence is the clearest example of a hardware-agnostic third-party trading platform. Waratah's migration from Tesla Autobidder to Fluence demonstrates this: an owner can switch software without changing the physical battery. MONDO Energy Pty Ltd acts as the market participant and trading operator on top of Fluence's AI engine." },
+                  { label: 'Platform convergence', text: 'Rebid rates are the most consistent in the fleet (94–98% across all five assets). Target spreads are not convergent: Hazelwood reaches $219/MWh while Brendale sits at $84/MWh — a 2.6× difference on the same software. The platform enforces aggressive strategy and extreme rebid frequency, but individual spread sizing reflects each asset\'s capacity, state market, and operator judgment.' },
+                  { label: 'Why "partial" for Waratah?', text: "Waratah's early rebid history (Q3–Q4 2024) carries Tesla Autobidder signatures — explicit 'auto bidder failure' messages and SOC deviation reports. From Q1 2025 the pattern fully shifts to Fluence/MONDO fingerprints, with the target spread jumping from $54 to $248/MWh in one quarter. This marks one of only two confirmed platform migrations in the NEM BESS fleet." },
+                  { label: 'VIC concentration risk', text: 'Hazelwood (150 MW), Pine Lodge (250 MW), and LaTrobe Valley BESS in Victoria are all on the same Fluence/MONDO platform with identical aggressive strategies. Three assets sharing a common AI price forecast in the same regional market will respond to the same signals simultaneously — amplifying dispatch spikes rather than smoothing them.' },
+                ]}
+              />
+
               <SoftwareCluster
                 name="AGL Trading Platform"
                 confidence="High"
@@ -603,6 +622,15 @@ export default function BessBidding() {
                   'Aggressive LOAD strategy',
                 ]}
               />
+              <PlatformNote
+                items={[
+                  { label: 'OEM match', text: 'Hardware OEM is unconfirmed for all three AGL assets in available public data. AGL is a generator/retailer rather than a software company, suggesting this is an in-house proprietary trading system built to manage AGL-operated assets — not a purchasable product.' },
+                  { label: 'Is the software locked to the OEM?', text: "Yes, in a different sense: AGL's platform is tied to AGL as the operator. An asset must be AGL-operated to access this system. Unlike Fluence (software you license), this is a vertically integrated capability. Broken Hill BESS involves Macquarie as owner, but AGL retains the trading role and its participant ID (MACQGEN) still routes through AGL's bidding engine." },
+                  { label: 'Platform convergence', text: "AGL's platform is uniquely capability-driven: rebids respond to technical availability signals ('Capability Change ENERGY, LOWER1SEC...') rather than market price forecasts. This is a fundamentally different philosophy to Fluence or Neoen/Shell. Rebid rates (90–99%) are extremely high, but target spreads diverge sharply: $221/MWh at Torrens Island, $99/MWh at Wandoan, $39/MWh at Broken Hill — driven by asset size and state market depth, not platform logic." },
+                  { label: 'Grid implication', text: 'Three assets across SA, QLD, and NSW means no geographic concentration. The capability-driven approach also means AGL assets respond to plant conditions rather than price spikes, so they are less likely to crowd the same 5-minute interval as price-chasing platforms like Fluence or Neoen/Shell.' },
+                ]}
+              />
+
               <SoftwareCluster
                 name="Timestamp-P Platform"
                 confidence="Medium"
@@ -616,6 +644,15 @@ export default function BessBidding() {
                   'Moderate rebid rates (60-65%)',
                 ]}
               />
+              <PlatformNote
+                items={[
+                  { label: 'OEM match', text: 'Hardware OEM is unconfirmed for all three assets. Critically, Blyth (SA), Capital Battery (ACT), and Western Downs (QLD) have three different owners — Blyth Battery Trust, Capital Battery Pty Ltd, and Neoen respectively. Different owners using the same distinctive timestamp-prefixed format strongly implies this is a third-party SaaS product, not an in-house or OEM-bundled system.' },
+                  { label: 'Is the software locked to the OEM?', text: 'Unlikely. The cross-owner pattern suggests this platform is independently purchasable — a software-as-a-service provider selling to multiple operators. The platform is unidentified (no public company has claimed it); the "Timestamp-P" label is derived from the distinctive rebid format, not a known product name.' },
+                  { label: 'Platform convergence', text: 'Blyth and Capital Battery show nearly identical rebid rates (85.8% vs 85.9%) — a striking match that supports a shared algorithm. Western Downs is listed as partial (95.4% rebid rate, likely a different primary system). Target spreads diverge: $212/MWh (Blyth) vs $134/MWh (Capital) — size and state market differences dominate.' },
+                  { label: 'Grid implication', text: 'Assets are in SA, ACT/NSW, and QLD — geographically dispersed. SOC-centric rebidding means these assets optimise around their own energy state rather than purely price signals, reducing synchronised spike-chasing behaviour.' },
+                ]}
+              />
+
               <SoftwareCluster
                 name="Neoen/Shell Trading"
                 confidence="Medium"
@@ -629,6 +666,15 @@ export default function BessBidding() {
                   'High rebid rates (95-97%)',
                 ]}
               />
+              <PlatformNote
+                items={[
+                  { label: 'OEM match', text: 'This cluster has the strongest OEM-to-platform correlation in the fleet: Hornsdale Power Reserve (Tesla Powerpack + Megapack), Victorian Big Battery (210 Tesla Megapacks), and Bouldercombe (Tesla Megapack 2.0) are all Tesla hardware. The trading platform appears to have been co-developed with or for the Tesla ecosystem by Neoen, now maintained under HMC Capital (HMCA) post-acquisition.' },
+                  { label: 'Is the software locked to the OEM?', text: "Tightly correlated but not absolutely locked. Victorian Big Battery's ownership transferred from Neoen to HMC Capital (Aug 2025, ~$950M deal), and the participant ID changed (VICBAT → VBBHMCA3), yet bidding signatures remain identical — the platform migrated with the asset, not with the OEM. Shell New Energies (Riverina BESS) uses Tesla Autobidder rather than this platform despite being a Tesla-hardware operator, confirming the link is to Neoen's operating model, not Tesla's product." },
+                  { label: 'Platform convergence', text: "Tightest rebid rate band in the fleet: 95.8–97.5% across all four assets. The 'internal vs AEMO price' logic means these assets run their own price forecast and rebid whenever it diverges from AEMO's — a more sophisticated approach than SOC- or capability-driven systems. Target spreads still vary widely ($194–$306/MWh), driven by asset size and state market depth." },
+                  { label: 'Grid implication', text: 'Assets span SA, VIC, NSW, and QLD — well-distributed. However, if all four share the same internal price model, they may simultaneously perceive the same price signals and rebid in the same direction during forecast-divergence events, briefly concentrating dispatch offers across multiple states.' },
+                ]}
+              />
+
               <SoftwareCluster
                 name="Origin/NS Energy Platform"
                 confidence="Medium"
@@ -642,6 +688,15 @@ export default function BessBidding() {
                   'Moderate LOAD strategy',
                 ]}
               />
+              <PlatformNote
+                items={[
+                  { label: 'OEM match', text: 'Eraring Battery is confirmed Wartsila Quantum hardware — the only Wartsila deployment identified in this dataset. NS Energy (NS Energy Services) appears to be the trading and optimisation operator for both Eraring (Origin-owned) and Supernode BESS (Quinbrook-owned), suggesting Wartsila Quantum may be bundled with NS Energy as the operational service provider.' },
+                  { label: 'Is the software locked to the OEM?', text: "This cluster shows the strongest evidence of OEM-operator bundling in the fleet. NS Energy is operating assets for two different owners (Origin and Quinbrook), and 17 days of completely identical GEN ENERGY price bands suggests a centralised NS Energy optimisation engine is dispatching both assets from the same system. Choosing Wartsila Quantum hardware may effectively mean choosing NS Energy as your trading operator." },
+                  { label: 'Platform convergence — most convergent in the fleet', text: 'Eraring and Supernode are the only cluster where BOTH rebid rates (17–33%) AND target spreads ($45–$48/MWh) converge tightly. This is likely because both projects are in early-stage market participation (Eraring started Mar 2025, Supernode Sept 2025) and NS Energy is running a centralised cautious strategy while both assets build market experience. Rapid sophistication growth is visible — expect rebid rates to rise toward fleet norms over 2025–2026.' },
+                  { label: 'Grid implication', text: 'Eraring (NSW, 700 MW) and Supernode (QLD, 1,300 MW) are in different states, limiting co-location risk. However, sharing an optimisation engine effectively makes them one economic entity: an NS Energy decision to bid aggressively would deploy 2,000 MW simultaneously across two states — a market-moving volume as these assets mature.' },
+                ]}
+              />
+
               <SoftwareCluster
                 name="CS Energy"
                 confidence="Confirmed"
@@ -655,6 +710,64 @@ export default function BessBidding() {
                   'High rebid rate (91%)',
                 ]}
               />
+              <PlatformNote
+                items={[
+                  { label: 'OEM match', text: "Hardware OEM is unconfirmed for Chinchilla BESS. CS Energy is a Queensland Government-owned generation company, and the unique 'trapezium availability' rebid pattern does not match any commercial BESS trading platform identified in this dataset — suggesting an internally developed or heavily customised proprietary system." },
+                  { label: 'Is the software locked to the OEM?', text: 'In the operational sense, yes — this appears to be a state-government proprietary system with no external access. No other asset in the 28-project dataset uses this rebid signature, despite the NEM hosting multiple batteries of similar capacity. A private owner or third-party operator could not access CS Energy\'s platform.' },
+                  { label: 'Platform convergence', text: 'With only one project in this cluster, convergence analysis is not possible. The trapezium-based approach reflects AEMO\'s physical availability framework (SCADA-linked trapezium parameters) more explicitly than any other platform, suggesting CS Energy prioritises technical accuracy in dispatch availability over pure price optimisation.' },
+                  { label: 'Grid implication', text: 'Single asset (100 MW) in QLD. Low market impact. The trapezium-SCADA linkage means Chinchilla BESS is tightly bound to its physical operating envelope and unlikely to make opportunistic or speculative bids outside plant capability.' },
+                ]}
+              />
+            </div>
+
+            {/* Grid-scale implications */}
+            <div className="mt-6 bg-amber-500/5 border border-amber-500/25 rounded-lg p-4">
+              <div className="flex items-start gap-2">
+                <span className="text-amber-400 text-base mt-0.5">⚡</span>
+                <div>
+                  <p className="text-sm font-semibold text-amber-400 mb-3">Grid-scale implications — when big batteries share a platform</p>
+                  <div className="space-y-3">
+                    <div>
+                      <p className="text-xs font-medium text-[var(--color-text)] mb-1">Do same-platform assets chase the same price spike?</p>
+                      <p className="text-xs text-[var(--color-text-muted)] leading-relaxed">
+                        Partially. Platform enforces <span className="font-medium text-[var(--color-text)]">strategy type</span> (aggressive vs defensive) and
+                        <span className="font-medium text-[var(--color-text)]"> rebid aggressiveness</span> (how often they reposition), but
+                        <span className="font-medium text-[var(--color-text)]"> not price points</span>. Two Fluence/MONDO assets will both
+                        react to the same external price forecast signal, but one may offer discharge at $300/MWh while another prices at $500/MWh — they
+                        are competitors for the same event, not a coordinated bloc. The exception is Origin/NS Energy, where 17 days of identical
+                        price bands suggests a centralised optimiser dispatching Eraring and Supernode as one economic entity.
+                      </p>
+                    </div>
+                    <div>
+                      <p className="text-xs font-medium text-[var(--color-text)] mb-1">Victoria — Fluence/MONDO concentration risk</p>
+                      <p className="text-xs text-[var(--color-text-muted)] leading-relaxed">
+                        Hazelwood (150 MW), Pine Lodge (250 MW), and LaTrobe Valley BESS are all Fluence/MONDO in Victoria, running identical aggressive
+                        strategies with 94–98% rebid rates. All three receive the same external price forecast signal. During a VIC price spike, all three
+                        will simultaneously reposition to discharge — compressing the spike faster than a mixed-platform fleet would,
+                        but also meaning a forecast error in Fluence's model will affect all three assets at once.
+                      </p>
+                    </div>
+                    <div>
+                      <p className="text-xs font-medium text-[var(--color-text)] mb-1">NSW — platform diversity provides resilience</p>
+                      <p className="text-xs text-[var(--color-text-muted)] leading-relaxed">
+                        NSW's two largest batteries — Waratah (850 MW, Fluence/MONDO) and Eraring (700 MW, Wartsila/NS Energy) — use entirely different
+                        platforms with different price models and different strategies (aggressive vs moderate). A forecast error or platform outage that
+                        disables one will not affect the other. This cross-platform diversity is more grid-stable than a single dominant software
+                        operating the majority of NSW dispatchable capacity.
+                      </p>
+                    </div>
+                    <div>
+                      <p className="text-xs font-medium text-[var(--color-text)] mb-1">The "monoculture" risk as the fleet scales</p>
+                      <p className="text-xs text-[var(--color-text-muted)] leading-relaxed">
+                        Seven identifiable platforms across 28 assets is healthy diversity today. The risk emerges if one or two platforms
+                        win the next generation of contracts: a 2,000+ MW Fluence/MONDO or NS Energy bloc responding to a single price model
+                        could amplify volatility rather than dampen it. The NEM currently benefits from no single platform holding more than
+                        ~30% of dispatchable BESS capacity — a balance worth monitoring as Supernode (1,300 MW) and further Waratah stages come online.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
 
@@ -833,6 +946,18 @@ function StatCard({ label, value, sub }: { label: string; value: string; sub?: s
         {value}
         {sub && <span className="text-sm font-normal text-[var(--color-text-muted)] ml-1">{sub}</span>}
       </div>
+    </div>
+  )
+}
+
+function PlatformNote({ items }: { items: { label: string; text: string }[] }) {
+  return (
+    <div className="bg-[var(--color-bg)]/60 border border-[var(--color-border)] rounded-lg p-3 ml-2 space-y-2">
+      {items.map((item, i) => (
+        <p key={i} className="text-xs text-[var(--color-text-muted)] leading-relaxed">
+          <span className="font-medium text-[var(--color-text)]">{item.label}: </span>{item.text}
+        </p>
+      ))}
     </div>
   )
 }
