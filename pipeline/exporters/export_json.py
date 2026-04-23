@@ -7557,10 +7557,44 @@ def export_bess_records_leaderboard(conn):
             peak_dates[d]['pc_mwh'] = r['charge_mwh']
             peak_dates[d]['pc_date'] = r['date']
 
+    # ---- Per-DUID 5-min peaks from bess_5min_peaks (if populated) ----
+    has_5min = bool(conn.execute(
+        "SELECT name FROM sqlite_master WHERE type='table' AND name='bess_5min_peaks'"
+    ).fetchone() and conn.execute('SELECT COUNT(*) FROM bess_5min_peaks').fetchone()[0])
+    duid_5min: dict[str, dict] = {}
+    if has_5min:
+        for r in conn.execute("""
+            SELECT duid,
+                   ROUND(MAX(peak_discharge_mw), 1) AS peak_d_mw,
+                   peak_discharge_time AS pd_time_raw,
+                   ROUND(MAX(peak_charge_mw), 1) AS peak_c_mw,
+                   peak_charge_time AS pc_time_raw
+            FROM bess_5min_peaks
+            GROUP BY duid
+        """).fetchall():
+            # Also fetch the date/time of the all-time peak
+            pd_row = conn.execute(
+                "SELECT date, peak_discharge_time FROM bess_5min_peaks "
+                "WHERE duid=? ORDER BY peak_discharge_mw DESC LIMIT 1", (r['duid'],)
+            ).fetchone()
+            pc_row = conn.execute(
+                "SELECT date, peak_charge_time FROM bess_5min_peaks "
+                "WHERE duid=? ORDER BY peak_charge_mw DESC LIMIT 1", (r['duid'],)
+            ).fetchone()
+            duid_5min[r['duid']] = {
+                'peak_discharge_mw': r['peak_d_mw'],
+                'peak_discharge_mw_date': pd_row['date'] if pd_row else None,
+                'peak_discharge_mw_time': pd_row['peak_discharge_time'] if pd_row else None,
+                'peak_charge_mw': r['peak_c_mw'],
+                'peak_charge_mw_date': pc_row['date'] if pc_row else None,
+                'peak_charge_mw_time': pc_row['peak_charge_time'] if pc_row else None,
+            }
+
     batteries = []
     for r in rows:
         duid = r['duid']
         pd_info = peak_dates.get(duid, {})
+        five = duid_5min.get(duid, {})
         batteries.append({
             'duid': duid,
             'name': r['station_name'] or duid,
@@ -7575,6 +7609,13 @@ def export_bess_records_leaderboard(conn):
             'peak_charge_date': pd_info.get('pc_date'),
             'total_discharge_mwh': r['total_discharge_mwh'],
             'total_charge_mwh': r['total_charge_mwh'],
+            # 5-min peaks (None until import_bess_5min.py has been run)
+            'peak_discharge_mw': five.get('peak_discharge_mw'),
+            'peak_discharge_mw_date': five.get('peak_discharge_mw_date'),
+            'peak_discharge_mw_time': five.get('peak_discharge_mw_time'),
+            'peak_charge_mw': five.get('peak_charge_mw'),
+            'peak_charge_mw_date': five.get('peak_charge_mw_date'),
+            'peak_charge_mw_time': five.get('peak_charge_mw_time'),
         })
 
     data_through = batteries[0]['last_date'] if batteries else None

@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-04-23T04:01:36.107311Z",
+  "generated_at": "2026-04-23T04:19:17.687577Z",
   "data_through": "2026-04-01",
   "total_batteries": 30,
   "batteries": [
@@ -16,7 +16,13 @@
       "peak_charge_mwh": 3920.3,
       "peak_charge_date": "2025-12-10",
       "total_discharge_mwh": 152156.0,
-      "total_charge_mwh": 179285.0
+      "total_charge_mwh": 179285.0,
+      "peak_discharge_mw": 460.6,
+      "peak_discharge_mw_date": "2025-11-27",
+      "peak_discharge_mw_time": "2025-11-27T13:45:00",
+      "peak_charge_mw": 460.4,
+      "peak_charge_mw_date": "2026-03-30",
+      "peak_charge_mw_time": "2026-03-30T14:25:00"
     },
     {
       "duid": "MREHA3",
@@ -31,7 +37,13 @@
       "peak_charge_mwh": 1537.7,
       "peak_charge_date": "2026-03-31",
       "total_discharge_mwh": 83039.0,
-      "total_charge_mwh": 102064.0
+      "total_charge_mwh": 102064.0,
+      "peak_discharge_mw": 202.7,
+      "peak_discharge_mw_date": "2026-02-18",
+      "peak_discharge_mw_time": "2026-02-18T21:15:00",
+      "peak_charge_mw": 207.6,
+      "peak_charge_mw_date": "2026-02-23",
+      "peak_charge_mw_time": "2026-02-23T13:05:00"
     },
     {
       "duid": "WDBESS1",
@@ -46,7 +58,13 @@
       "peak_charge_mwh": 1158.7,
       "peak_charge_date": "2025-11-13",
       "total_discharge_mwh": 170493.0,
-      "total_charge_mwh": 237662.0
+      "total_charge_mwh": 237662.0,
+      "peak_discharge_mw": 256.6,
+      "peak_discharge_mw_date": "2025-07-24",
+      "peak_discharge_mw_time": "2025-07-24T17:50:00",
+      "peak_charge_mw": 256.6,
+      "peak_charge_mw_date": "2025-07-16",
+      "peak_charge_mw_time": "2025-07-16T01:45:00"
     },
     {
       "duid": "BLYTHB1",
@@ -61,7 +79,13 @@
       "peak_charge_mwh": 1433.7,
       "peak_charge_date": "2025-06-30",
       "total_discharge_mwh": 131021.0,
-      "total_charge_mwh": 182828.0
+      "total_charge_mwh": 182828.0,
+      "peak_discharge_mw": 201.5,
+      "peak_discharge_mw_date": "2026-02-18",
+      "peak_discharge_mw_time": "2026-02-18T05:10:00",
+      "peak_charge_mw": 201.6,
+      "peak_charge_mw_date": "2025-05-24",
+      "peak_charge_mw_time": "2025-05-24T12:30:00"
     },
     {
       "duid": "VBB1",
@@ -76,7 +100,13 @@
       "peak_charge_mwh": 980.8,
       "peak_charge_date": "2024-10-22",
       "total_discharge_mwh": 131683.0,
-      "total_charge_mwh": 202107.0
+      "total_charge_mwh": 202107.0,
+      "peak_discharge_mw": 268.7,
+      "peak_discharge_mw_date": "2025-10-28",
+      "peak_discharge_mw_time": "2025-10-28T10:30:00",
+      "peak_charge_mw": 257.0,
+      "peak_charge_mw_date": "2024-10-07",
+      "peak_charge_mw_time": "2024-10-07T12:05:00"
     },
     {
       "duid": "RANGEB1",
@@ -91,7 +121,13 @@
       "peak_charge_mwh": 885.6,
       "peak_charge_date": "2025-09-12",
       "total_discharge_mwh": 181672.0,
-      "total_charge_mwh": 224322.0
+      "total_charge_mwh": 224322.0,
+      "peak_discharge_mw": 201.3,
+      "peak_discharge_mw_date": "2025-08-19",
+      "peak_discharge_mw_time": "2025-08-19T18:30:00",
+      "peak_charge_mw": 201.4,
+      "peak_charge_mw_date": "2026-01-11",
+      "peak_charge_mw_time": "2026-01-11T14:20:00"
     },
     {
       "duid": "WDBESS2",
@@ -106,7 +142,13 @@
       "peak_charge_mwh": 980.8,
       "peak_charge_date": "2025-11-26",
       "total_discharge_mwh": 65078.0,
-      "total_charge_mwh": 81875.0
+      "total_charge_mwh": 81875.0,
+      "peak_discharge_mw": 256.7,
+      "peak_discharge_mw_date": "2026-02-07",
+      "peak_discharge_mw_time": "2026-02-07T18:35:00",
+      "peak_charge_mw": 256.8,
+      "peak_charge_mw_date": "2025-10-28",
+      "peak_charge_mw_time": "2025-10-28T12:55:00"
     },
     {
       "duid": "MREHA1",
@@ -121,7 +163,13 @@
       "peak_charge_mwh": 950.0,
       "peak_charge_date": "2025-09-16",
       "total_discharge_mwh": 53997.0,
-      "total_charge_mwh": 73993.0
+      "total_charge_mwh": 73993.0,
+      "peak_discharge_mw": 202.0,
+      "peak_discharge_mw_date": "2025-09-17",
+      "peak_discharge_mw_time": "2025-09-17T18:05:00",
+      "peak_charge_mw": 202.2,
+      "peak_charge_mw_date": "2025-10-13",
+      "peak_charge_mw_time": "2025-10-13T12:45:00"
     },
     {
       "duid": "KESSB1",
@@ -136,7 +184,13 @@
       "peak_charge_mwh": 852.9,
       "peak_charge_date": "2025-08-13",
       "total_discharge_mwh": 97055.0,
-      "total_charge_mwh": 112744.0
+      "total_charge_mwh": 112744.0,
+      "peak_discharge_mw": 185.6,
+      "peak_discharge_mw_date": "2025-11-25",
+      "peak_discharge_mw_time": "2025-11-25T19:05:00",
+      "peak_charge_mw": 187.4,
+      "peak_charge_mw_date": "2025-05-13",
+      "peak_charge_mw_time": "2025-05-13T14:50:00"
     },
     {
       "duid": "GREENB1",
@@ -151,7 +205,13 @@
       "peak_charge_mwh": 923.4,
       "peak_charge_date": "2025-07-16",
       "total_discharge_mwh": 92342.0,
-      "total_charge_mwh": 116623.0
+      "total_charge_mwh": 116623.0,
+      "peak_discharge_mw": 200.9,
+      "peak_discharge_mw_date": "2025-07-08",
+      "peak_discharge_mw_time": "2025-07-08T06:25:00",
+      "peak_charge_mw": 200.9,
+      "peak_charge_mw_date": "2025-11-04",
+      "peak_charge_mw_time": "2025-11-04T13:25:00"
     },
     {
       "duid": "MREHA2",
@@ -166,7 +226,13 @@
       "peak_charge_mwh": 747.7,
       "peak_charge_date": "2025-10-23",
       "total_discharge_mwh": 41834.0,
-      "total_charge_mwh": 58300.0
+      "total_charge_mwh": 58300.0,
+      "peak_discharge_mw": 201.7,
+      "peak_discharge_mw_date": "2025-11-18",
+      "peak_discharge_mw_time": "2025-11-18T15:55:00",
+      "peak_charge_mw": 201.3,
+      "peak_charge_mw_date": "2025-11-20",
+      "peak_charge_mw_time": "2025-11-20T18:05:00"
     },
     {
       "duid": "TEMPB1",
@@ -181,7 +247,13 @@
       "peak_charge_mwh": 496.5,
       "peak_charge_date": "2025-11-20",
       "total_discharge_mwh": 46907.0,
-      "total_charge_mwh": 57933.0
+      "total_charge_mwh": 57933.0,
+      "peak_discharge_mw": 111.1,
+      "peak_discharge_mw_date": "2026-03-20",
+      "peak_discharge_mw_time": "2026-03-20T09:10:00",
+      "peak_charge_mw": 112.1,
+      "peak_charge_mw_date": "2025-11-30",
+      "peak_charge_mw_time": "2025-11-30T12:00:00"
     },
     {
       "duid": "ULPBESS1",
@@ -196,7 +268,13 @@
       "peak_charge_mwh": 740.8,
       "peak_charge_date": "2025-12-19",
       "total_discharge_mwh": 40755.0,
-      "total_charge_mwh": 64362.0
+      "total_charge_mwh": 64362.0,
+      "peak_discharge_mw": 155.3,
+      "peak_discharge_mw_date": "2025-09-10",
+      "peak_discharge_mw_time": "2025-09-10T13:50:00",
+      "peak_charge_mw": 155.3,
+      "peak_charge_mw_date": "2026-03-14",
+      "peak_charge_mw_time": "2026-03-14T08:55:00"
     },
     {
       "duid": "TIB1",
@@ -211,7 +289,13 @@
       "peak_charge_mwh": 793.4,
       "peak_charge_date": "2025-07-25",
       "total_discharge_mwh": 108804.0,
-      "total_charge_mwh": 210923.0
+      "total_charge_mwh": 210923.0,
+      "peak_discharge_mw": 251.2,
+      "peak_discharge_mw_date": "2025-09-02",
+      "peak_discharge_mw_time": "2025-09-02T19:15:00",
+      "peak_charge_mw": 249.8,
+      "peak_charge_mw_date": "2025-09-23",
+      "peak_charge_mw_time": "2025-09-23T11:40:00"
     },
     {
       "duid": "LVES1",
@@ -226,7 +310,13 @@
       "peak_charge_mwh": 646.4,
       "peak_charge_date": "2025-08-15",
       "total_discharge_mwh": 32491.0,
-      "total_charge_mwh": 50430.0
+      "total_charge_mwh": 50430.0,
+      "peak_discharge_mw": 100.9,
+      "peak_discharge_mw_date": "2025-06-04",
+      "peak_discharge_mw_time": "2025-06-04T09:35:00",
+      "peak_charge_mw": 101.3,
+      "peak_charge_mw_date": "2025-06-27",
+      "peak_charge_mw_time": "2025-06-27T12:00:00"
     },
     {
       "duid": "CAPBES1",
@@ -241,7 +331,13 @@
       "peak_charge_mwh": 376.4,
       "peak_charge_date": "2025-08-01",
       "total_discharge_mwh": 63426.0,
-      "total_charge_mwh": 77873.0
+      "total_charge_mwh": 77873.0,
+      "peak_discharge_mw": 101.6,
+      "peak_discharge_mw_date": "2025-10-07",
+      "peak_discharge_mw_time": "2025-10-07T06:55:00",
+      "peak_charge_mw": 101.7,
+      "peak_charge_mw_date": "2026-01-22",
+      "peak_charge_mw_time": "2026-01-22T13:00:00"
     },
     {
       "duid": "MANNUMB1",
@@ -256,7 +352,13 @@
       "peak_charge_mwh": 364.5,
       "peak_charge_date": "2025-09-24",
       "total_discharge_mwh": 29783.0,
-      "total_charge_mwh": 42545.0
+      "total_charge_mwh": 42545.0,
+      "peak_discharge_mw": 102.9,
+      "peak_discharge_mw_date": "2025-10-15",
+      "peak_discharge_mw_time": "2025-10-15T20:25:00",
+      "peak_charge_mw": 107.3,
+      "peak_charge_mw_date": "2026-02-04",
+      "peak_charge_mw_time": "2026-02-04T17:20:00"
     },
     {
       "duid": "HPR1",
@@ -271,7 +373,13 @@
       "peak_charge_mwh": 354.7,
       "peak_charge_date": "2024-11-19",
       "total_discharge_mwh": 54546.0,
-      "total_charge_mwh": 99572.0
+      "total_charge_mwh": 99572.0,
+      "peak_discharge_mw": 98.0,
+      "peak_discharge_mw_date": "2024-12-16",
+      "peak_discharge_mw_time": "2024-12-16T14:45:00",
+      "peak_charge_mw": 103.3,
+      "peak_charge_mw_date": "2024-12-08",
+      "peak_charge_mw_time": "2024-12-08T08:15:00"
     },
     {
       "duid": "CHBESS1",
@@ -286,7 +394,13 @@
       "peak_charge_mwh": 374.1,
       "peak_charge_date": "2025-07-15",
       "total_discharge_mwh": 67251.0,
-      "total_charge_mwh": 85579.0
+      "total_charge_mwh": 85579.0,
+      "peak_discharge_mw": 100.0,
+      "peak_discharge_mw_date": "2025-08-23",
+      "peak_discharge_mw_time": "2025-08-23T05:45:00",
+      "peak_charge_mw": 100.1,
+      "peak_charge_mw_date": "2025-07-09",
+      "peak_charge_mw_time": "2025-07-09T13:25:00"
     },
     {
       "duid": "WANDB1",
@@ -301,7 +415,13 @@
       "peak_charge_mwh": 368.9,
       "peak_charge_date": "2025-04-01",
       "total_discharge_mwh": 67692.0,
-      "total_charge_mwh": 95104.0
+      "total_charge_mwh": 95104.0,
+      "peak_discharge_mw": 100.1,
+      "peak_discharge_mw_date": "2025-02-12",
+      "peak_discharge_mw_time": "2025-02-12T19:10:00",
+      "peak_charge_mw": 85.7,
+      "peak_charge_mw_date": "2025-08-19",
+      "peak_charge_mw_time": "2025-08-19T12:10:00"
     },
     {
       "duid": "HBESS1",
@@ -316,7 +436,13 @@
       "peak_charge_mwh": 473.0,
       "peak_charge_date": "2025-03-31",
       "total_discharge_mwh": 51494.0,
-      "total_charge_mwh": 102714.0
+      "total_charge_mwh": 102714.0,
+      "peak_discharge_mw": 152.2,
+      "peak_discharge_mw_date": "2025-02-06",
+      "peak_discharge_mw_time": "2025-02-06T16:05:00",
+      "peak_charge_mw": 149.4,
+      "peak_charge_mw_date": "2025-08-01",
+      "peak_charge_mw_time": "2025-08-01T04:25:00"
     },
     {
       "duid": "RIVNB2",
@@ -331,7 +457,13 @@
       "peak_charge_mwh": 285.1,
       "peak_charge_date": "2025-05-29",
       "total_discharge_mwh": 49344.0,
-      "total_charge_mwh": 64317.0
+      "total_charge_mwh": 64317.0,
+      "peak_discharge_mw": 65.4,
+      "peak_discharge_mw_date": "2024-11-17",
+      "peak_discharge_mw_time": "2024-11-17T20:45:00",
+      "peak_charge_mw": 65.7,
+      "peak_charge_mw_date": "2024-11-16",
+      "peak_charge_mw_time": "2024-11-16T13:20:00"
     },
     {
       "duid": "SMTHBES1",
@@ -346,7 +478,13 @@
       "peak_charge_mwh": 254.7,
       "peak_charge_date": "2026-02-06",
       "total_discharge_mwh": 10065.0,
-      "total_charge_mwh": 13749.0
+      "total_charge_mwh": 13749.0,
+      "peak_discharge_mw": 65.5,
+      "peak_discharge_mw_date": "2025-10-15",
+      "peak_discharge_mw_time": "2025-10-15T05:55:00",
+      "peak_charge_mw": 65.5,
+      "peak_charge_mw_date": "2026-02-07",
+      "peak_charge_mw_time": "2026-02-07T09:10:00"
     },
     {
       "duid": "RESS1",
@@ -361,7 +499,13 @@
       "peak_charge_mwh": 327.9,
       "peak_charge_date": "2025-10-22",
       "total_discharge_mwh": 56489.0,
-      "total_charge_mwh": 67749.0
+      "total_charge_mwh": 67749.0,
+      "peak_discharge_mw": 60.7,
+      "peak_discharge_mw_date": "2024-12-17",
+      "peak_discharge_mw_time": "2024-12-17T17:55:00",
+      "peak_charge_mw": 60.6,
+      "peak_charge_mw_date": "2025-07-17",
+      "peak_charge_mw_time": "2025-07-17T04:35:00"
     },
     {
       "duid": "BBATTERY1",
@@ -376,7 +520,13 @@
       "peak_charge_mwh": 299.6,
       "peak_charge_date": "2025-02-22",
       "total_discharge_mwh": 30395.0,
-      "total_charge_mwh": 49809.0
+      "total_charge_mwh": 49809.0,
+      "peak_discharge_mw": 50.0,
+      "peak_discharge_mw_date": "2025-11-25",
+      "peak_discharge_mw_time": "2025-11-25T17:30:00",
+      "peak_charge_mw": 50.0,
+      "peak_charge_mw_date": "2024-11-29",
+      "peak_charge_mw_time": "2024-11-29T21:50:00"
     },
     {
       "duid": "WALGRV1",
@@ -391,7 +541,13 @@
       "peak_charge_mwh": 186.8,
       "peak_charge_date": "2025-06-03",
       "total_discharge_mwh": 25045.0,
-      "total_charge_mwh": 40343.0
+      "total_charge_mwh": 40343.0,
+      "peak_discharge_mw": 51.0,
+      "peak_discharge_mw_date": "2025-07-02",
+      "peak_discharge_mw_time": "2025-07-02T17:50:00",
+      "peak_charge_mw": 47.9,
+      "peak_charge_mw_date": "2025-07-03",
+      "peak_charge_mw_time": "2025-07-03T12:05:00"
     },
     {
       "duid": "BHB1",
@@ -406,7 +562,13 @@
       "peak_charge_mwh": 116.9,
       "peak_charge_date": "2024-08-07",
       "total_discharge_mwh": 22338.0,
-      "total_charge_mwh": 29183.0
+      "total_charge_mwh": 29183.0,
+      "peak_discharge_mw": 50.2,
+      "peak_discharge_mw_date": "2024-08-14",
+      "peak_discharge_mw_time": "2024-08-14T17:45:00",
+      "peak_charge_mw": 48.5,
+      "peak_charge_mw_date": "2024-10-10",
+      "peak_charge_mw_time": "2024-10-10T10:40:00"
     },
     {
       "duid": "TB2B1",
@@ -421,7 +583,13 @@
       "peak_charge_mwh": 159.2,
       "peak_charge_date": "2024-12-16",
       "total_discharge_mwh": 9211.0,
-      "total_charge_mwh": 21284.0
+      "total_charge_mwh": 21284.0,
+      "peak_discharge_mw": 41.3,
+      "peak_discharge_mw_date": "2026-02-12",
+      "peak_discharge_mw_time": "2026-02-12T07:45:00",
+      "peak_charge_mw": 41.5,
+      "peak_charge_mw_date": "2025-03-06",
+      "peak_charge_mw_time": "2025-03-06T06:40:00"
     },
     {
       "duid": "BALB1",
@@ -436,7 +604,13 @@
       "peak_charge_mwh": 82.7,
       "peak_charge_date": "2024-11-13",
       "total_discharge_mwh": 6884.0,
-      "total_charge_mwh": 13385.0
+      "total_charge_mwh": 13385.0,
+      "peak_discharge_mw": 30.4,
+      "peak_discharge_mw_date": "2024-08-12",
+      "peak_discharge_mw_time": "2024-08-12T07:25:00",
+      "peak_charge_mw": 31.0,
+      "peak_charge_mw_date": "2024-10-11",
+      "peak_charge_mw_time": "2024-10-11T09:15:00"
     },
     {
       "duid": "DALNTH1",
@@ -451,7 +625,13 @@
       "peak_charge_mwh": 35.5,
       "peak_charge_date": "2024-12-28",
       "total_discharge_mwh": 3264.0,
-      "total_charge_mwh": 7351.0
+      "total_charge_mwh": 7351.0,
+      "peak_discharge_mw": 30.0,
+      "peak_discharge_mw_date": "2024-12-12",
+      "peak_discharge_mw_time": "2024-12-12T07:50:00",
+      "peak_charge_mw": 30.0,
+      "peak_charge_mw_date": "2025-11-20",
+      "peak_charge_mw_time": "2025-11-20T11:40:00"
     }
   ],
   "fleet_records": {
@@ -575,7 +755,13 @@
         "peak_charge_mwh": 3920.3,
         "peak_charge_date": "2025-12-10",
         "total_discharge_mwh": 152156.0,
-        "total_charge_mwh": 179285.0
+        "total_charge_mwh": 179285.0,
+        "peak_discharge_mw": 460.6,
+        "peak_discharge_mw_date": "2025-11-27",
+        "peak_discharge_mw_time": "2025-11-27T13:45:00",
+        "peak_charge_mw": 460.4,
+        "peak_charge_mw_date": "2026-03-30",
+        "peak_charge_mw_time": "2026-03-30T14:25:00"
       },
       {
         "duid": "MREHA3",
@@ -590,7 +776,13 @@
         "peak_charge_mwh": 1537.7,
         "peak_charge_date": "2026-03-31",
         "total_discharge_mwh": 83039.0,
-        "total_charge_mwh": 102064.0
+        "total_charge_mwh": 102064.0,
+        "peak_discharge_mw": 202.7,
+        "peak_discharge_mw_date": "2026-02-18",
+        "peak_discharge_mw_time": "2026-02-18T21:15:00",
+        "peak_charge_mw": 207.6,
+        "peak_charge_mw_date": "2026-02-23",
+        "peak_charge_mw_time": "2026-02-23T13:05:00"
       },
       {
         "duid": "WDBESS1",
@@ -605,7 +797,13 @@
         "peak_charge_mwh": 1158.7,
         "peak_charge_date": "2025-11-13",
         "total_discharge_mwh": 170493.0,
-        "total_charge_mwh": 237662.0
+        "total_charge_mwh": 237662.0,
+        "peak_discharge_mw": 256.6,
+        "peak_discharge_mw_date": "2025-07-24",
+        "peak_discharge_mw_time": "2025-07-24T17:50:00",
+        "peak_charge_mw": 256.6,
+        "peak_charge_mw_date": "2025-07-16",
+        "peak_charge_mw_time": "2025-07-16T01:45:00"
       },
       {
         "duid": "BLYTHB1",
@@ -620,7 +818,13 @@
         "peak_charge_mwh": 1433.7,
         "peak_charge_date": "2025-06-30",
         "total_discharge_mwh": 131021.0,
-        "total_charge_mwh": 182828.0
+        "total_charge_mwh": 182828.0,
+        "peak_discharge_mw": 201.5,
+        "peak_discharge_mw_date": "2026-02-18",
+        "peak_discharge_mw_time": "2026-02-18T05:10:00",
+        "peak_charge_mw": 201.6,
+        "peak_charge_mw_date": "2025-05-24",
+        "peak_charge_mw_time": "2025-05-24T12:30:00"
       },
       {
         "duid": "VBB1",
@@ -635,7 +839,13 @@
         "peak_charge_mwh": 980.8,
         "peak_charge_date": "2024-10-22",
         "total_discharge_mwh": 131683.0,
-        "total_charge_mwh": 202107.0
+        "total_charge_mwh": 202107.0,
+        "peak_discharge_mw": 268.7,
+        "peak_discharge_mw_date": "2025-10-28",
+        "peak_discharge_mw_time": "2025-10-28T10:30:00",
+        "peak_charge_mw": 257.0,
+        "peak_charge_mw_date": "2024-10-07",
+        "peak_charge_mw_time": "2024-10-07T12:05:00"
       },
       {
         "duid": "RANGEB1",
@@ -650,7 +860,13 @@
         "peak_charge_mwh": 885.6,
         "peak_charge_date": "2025-09-12",
         "total_discharge_mwh": 181672.0,
-        "total_charge_mwh": 224322.0
+        "total_charge_mwh": 224322.0,
+        "peak_discharge_mw": 201.3,
+        "peak_discharge_mw_date": "2025-08-19",
+        "peak_discharge_mw_time": "2025-08-19T18:30:00",
+        "peak_charge_mw": 201.4,
+        "peak_charge_mw_date": "2026-01-11",
+        "peak_charge_mw_time": "2026-01-11T14:20:00"
       },
       {
         "duid": "WDBESS2",
@@ -665,7 +881,13 @@
         "peak_charge_mwh": 980.8,
         "peak_charge_date": "2025-11-26",
         "total_discharge_mwh": 65078.0,
-        "total_charge_mwh": 81875.0
+        "total_charge_mwh": 81875.0,
+        "peak_discharge_mw": 256.7,
+        "peak_discharge_mw_date": "2026-02-07",
+        "peak_discharge_mw_time": "2026-02-07T18:35:00",
+        "peak_charge_mw": 256.8,
+        "peak_charge_mw_date": "2025-10-28",
+        "peak_charge_mw_time": "2025-10-28T12:55:00"
       },
       {
         "duid": "MREHA1",
@@ -680,7 +902,13 @@
         "peak_charge_mwh": 950.0,
         "peak_charge_date": "2025-09-16",
         "total_discharge_mwh": 53997.0,
-        "total_charge_mwh": 73993.0
+        "total_charge_mwh": 73993.0,
+        "peak_discharge_mw": 202.0,
+        "peak_discharge_mw_date": "2025-09-17",
+        "peak_discharge_mw_time": "2025-09-17T18:05:00",
+        "peak_charge_mw": 202.2,
+        "peak_charge_mw_date": "2025-10-13",
+        "peak_charge_mw_time": "2025-10-13T12:45:00"
       },
       {
         "duid": "KESSB1",
@@ -695,7 +923,13 @@
         "peak_charge_mwh": 852.9,
         "peak_charge_date": "2025-08-13",
         "total_discharge_mwh": 97055.0,
-        "total_charge_mwh": 112744.0
+        "total_charge_mwh": 112744.0,
+        "peak_discharge_mw": 185.6,
+        "peak_discharge_mw_date": "2025-11-25",
+        "peak_discharge_mw_time": "2025-11-25T19:05:00",
+        "peak_charge_mw": 187.4,
+        "peak_charge_mw_date": "2025-05-13",
+        "peak_charge_mw_time": "2025-05-13T14:50:00"
       },
       {
         "duid": "GREENB1",
@@ -710,7 +944,13 @@
         "peak_charge_mwh": 923.4,
         "peak_charge_date": "2025-07-16",
         "total_discharge_mwh": 92342.0,
-        "total_charge_mwh": 116623.0
+        "total_charge_mwh": 116623.0,
+        "peak_discharge_mw": 200.9,
+        "peak_discharge_mw_date": "2025-07-08",
+        "peak_discharge_mw_time": "2025-07-08T06:25:00",
+        "peak_charge_mw": 200.9,
+        "peak_charge_mw_date": "2025-11-04",
+        "peak_charge_mw_time": "2025-11-04T13:25:00"
       }
     ],
     "NSW1": [
@@ -727,7 +967,13 @@
         "peak_charge_mwh": 3920.3,
         "peak_charge_date": "2025-12-10",
         "total_discharge_mwh": 152156.0,
-        "total_charge_mwh": 179285.0
+        "total_charge_mwh": 179285.0,
+        "peak_discharge_mw": 460.6,
+        "peak_discharge_mw_date": "2025-11-27",
+        "peak_discharge_mw_time": "2025-11-27T13:45:00",
+        "peak_charge_mw": 460.4,
+        "peak_charge_mw_date": "2026-03-30",
+        "peak_charge_mw_time": "2026-03-30T14:25:00"
       },
       {
         "duid": "CAPBES1",
@@ -742,7 +988,13 @@
         "peak_charge_mwh": 376.4,
         "peak_charge_date": "2025-08-01",
         "total_discharge_mwh": 63426.0,
-        "total_charge_mwh": 77873.0
+        "total_charge_mwh": 77873.0,
+        "peak_discharge_mw": 101.6,
+        "peak_discharge_mw_date": "2025-10-07",
+        "peak_discharge_mw_time": "2025-10-07T06:55:00",
+        "peak_charge_mw": 101.7,
+        "peak_charge_mw_date": "2026-01-22",
+        "peak_charge_mw_time": "2026-01-22T13:00:00"
       },
       {
         "duid": "RIVNB2",
@@ -757,7 +1009,13 @@
         "peak_charge_mwh": 285.1,
         "peak_charge_date": "2025-05-29",
         "total_discharge_mwh": 49344.0,
-        "total_charge_mwh": 64317.0
+        "total_charge_mwh": 64317.0,
+        "peak_discharge_mw": 65.4,
+        "peak_discharge_mw_date": "2024-11-17",
+        "peak_discharge_mw_time": "2024-11-17T20:45:00",
+        "peak_charge_mw": 65.7,
+        "peak_charge_mw_date": "2024-11-16",
+        "peak_charge_mw_time": "2024-11-16T13:20:00"
       },
       {
         "duid": "SMTHBES1",
@@ -772,7 +1030,13 @@
         "peak_charge_mwh": 254.7,
         "peak_charge_date": "2026-02-06",
         "total_discharge_mwh": 10065.0,
-        "total_charge_mwh": 13749.0
+        "total_charge_mwh": 13749.0,
+        "peak_discharge_mw": 65.5,
+        "peak_discharge_mw_date": "2025-10-15",
+        "peak_discharge_mw_time": "2025-10-15T05:55:00",
+        "peak_charge_mw": 65.5,
+        "peak_charge_mw_date": "2026-02-07",
+        "peak_charge_mw_time": "2026-02-07T09:10:00"
       },
       {
         "duid": "RESS1",
@@ -787,7 +1051,13 @@
         "peak_charge_mwh": 327.9,
         "peak_charge_date": "2025-10-22",
         "total_discharge_mwh": 56489.0,
-        "total_charge_mwh": 67749.0
+        "total_charge_mwh": 67749.0,
+        "peak_discharge_mw": 60.7,
+        "peak_discharge_mw_date": "2024-12-17",
+        "peak_discharge_mw_time": "2024-12-17T17:55:00",
+        "peak_charge_mw": 60.6,
+        "peak_charge_mw_date": "2025-07-17",
+        "peak_charge_mw_time": "2025-07-17T04:35:00"
       },
       {
         "duid": "WALGRV1",
@@ -802,7 +1072,13 @@
         "peak_charge_mwh": 186.8,
         "peak_charge_date": "2025-06-03",
         "total_discharge_mwh": 25045.0,
-        "total_charge_mwh": 40343.0
+        "total_charge_mwh": 40343.0,
+        "peak_discharge_mw": 51.0,
+        "peak_discharge_mw_date": "2025-07-02",
+        "peak_discharge_mw_time": "2025-07-02T17:50:00",
+        "peak_charge_mw": 47.9,
+        "peak_charge_mw_date": "2025-07-03",
+        "peak_charge_mw_time": "2025-07-03T12:05:00"
       },
       {
         "duid": "BHB1",
@@ -817,7 +1093,13 @@
         "peak_charge_mwh": 116.9,
         "peak_charge_date": "2024-08-07",
         "total_discharge_mwh": 22338.0,
-        "total_charge_mwh": 29183.0
+        "total_charge_mwh": 29183.0,
+        "peak_discharge_mw": 50.2,
+        "peak_discharge_mw_date": "2024-08-14",
+        "peak_discharge_mw_time": "2024-08-14T17:45:00",
+        "peak_charge_mw": 48.5,
+        "peak_charge_mw_date": "2024-10-10",
+        "peak_charge_mw_time": "2024-10-10T10:40:00"
       }
     ],
     "VIC1": [
@@ -834,7 +1116,13 @@
         "peak_charge_mwh": 1537.7,
         "peak_charge_date": "2026-03-31",
         "total_discharge_mwh": 83039.0,
-        "total_charge_mwh": 102064.0
+        "total_charge_mwh": 102064.0,
+        "peak_discharge_mw": 202.7,
+        "peak_discharge_mw_date": "2026-02-18",
+        "peak_discharge_mw_time": "2026-02-18T21:15:00",
+        "peak_charge_mw": 207.6,
+        "peak_charge_mw_date": "2026-02-23",
+        "peak_charge_mw_time": "2026-02-23T13:05:00"
       },
       {
         "duid": "VBB1",
@@ -849,7 +1137,13 @@
         "peak_charge_mwh": 980.8,
         "peak_charge_date": "2024-10-22",
         "total_discharge_mwh": 131683.0,
-        "total_charge_mwh": 202107.0
+        "total_charge_mwh": 202107.0,
+        "peak_discharge_mw": 268.7,
+        "peak_discharge_mw_date": "2025-10-28",
+        "peak_discharge_mw_time": "2025-10-28T10:30:00",
+        "peak_charge_mw": 257.0,
+        "peak_charge_mw_date": "2024-10-07",
+        "peak_charge_mw_time": "2024-10-07T12:05:00"
       },
       {
         "duid": "RANGEB1",
@@ -864,7 +1158,13 @@
         "peak_charge_mwh": 885.6,
         "peak_charge_date": "2025-09-12",
         "total_discharge_mwh": 181672.0,
-        "total_charge_mwh": 224322.0
+        "total_charge_mwh": 224322.0,
+        "peak_discharge_mw": 201.3,
+        "peak_discharge_mw_date": "2025-08-19",
+        "peak_discharge_mw_time": "2025-08-19T18:30:00",
+        "peak_charge_mw": 201.4,
+        "peak_charge_mw_date": "2026-01-11",
+        "peak_charge_mw_time": "2026-01-11T14:20:00"
       },
       {
         "duid": "MREHA1",
@@ -879,7 +1179,13 @@
         "peak_charge_mwh": 950.0,
         "peak_charge_date": "2025-09-16",
         "total_discharge_mwh": 53997.0,
-        "total_charge_mwh": 73993.0
+        "total_charge_mwh": 73993.0,
+        "peak_discharge_mw": 202.0,
+        "peak_discharge_mw_date": "2025-09-17",
+        "peak_discharge_mw_time": "2025-09-17T18:05:00",
+        "peak_charge_mw": 202.2,
+        "peak_charge_mw_date": "2025-10-13",
+        "peak_charge_mw_time": "2025-10-13T12:45:00"
       },
       {
         "duid": "KESSB1",
@@ -894,7 +1200,13 @@
         "peak_charge_mwh": 852.9,
         "peak_charge_date": "2025-08-13",
         "total_discharge_mwh": 97055.0,
-        "total_charge_mwh": 112744.0
+        "total_charge_mwh": 112744.0,
+        "peak_discharge_mw": 185.6,
+        "peak_discharge_mw_date": "2025-11-25",
+        "peak_discharge_mw_time": "2025-11-25T19:05:00",
+        "peak_charge_mw": 187.4,
+        "peak_charge_mw_date": "2025-05-13",
+        "peak_charge_mw_time": "2025-05-13T14:50:00"
       },
       {
         "duid": "MREHA2",
@@ -909,7 +1221,13 @@
         "peak_charge_mwh": 747.7,
         "peak_charge_date": "2025-10-23",
         "total_discharge_mwh": 41834.0,
-        "total_charge_mwh": 58300.0
+        "total_charge_mwh": 58300.0,
+        "peak_discharge_mw": 201.7,
+        "peak_discharge_mw_date": "2025-11-18",
+        "peak_discharge_mw_time": "2025-11-18T15:55:00",
+        "peak_charge_mw": 201.3,
+        "peak_charge_mw_date": "2025-11-20",
+        "peak_charge_mw_time": "2025-11-20T18:05:00"
       },
       {
         "duid": "LVES1",
@@ -924,7 +1242,13 @@
         "peak_charge_mwh": 646.4,
         "peak_charge_date": "2025-08-15",
         "total_discharge_mwh": 32491.0,
-        "total_charge_mwh": 50430.0
+        "total_charge_mwh": 50430.0,
+        "peak_discharge_mw": 100.9,
+        "peak_discharge_mw_date": "2025-06-04",
+        "peak_discharge_mw_time": "2025-06-04T09:35:00",
+        "peak_charge_mw": 101.3,
+        "peak_charge_mw_date": "2025-06-27",
+        "peak_charge_mw_time": "2025-06-27T12:00:00"
       },
       {
         "duid": "HBESS1",
@@ -939,7 +1263,13 @@
         "peak_charge_mwh": 473.0,
         "peak_charge_date": "2025-03-31",
         "total_discharge_mwh": 51494.0,
-        "total_charge_mwh": 102714.0
+        "total_charge_mwh": 102714.0,
+        "peak_discharge_mw": 152.2,
+        "peak_discharge_mw_date": "2025-02-06",
+        "peak_discharge_mw_time": "2025-02-06T16:05:00",
+        "peak_charge_mw": 149.4,
+        "peak_charge_mw_date": "2025-08-01",
+        "peak_charge_mw_time": "2025-08-01T04:25:00"
       },
       {
         "duid": "BALB1",
@@ -954,7 +1284,13 @@
         "peak_charge_mwh": 82.7,
         "peak_charge_date": "2024-11-13",
         "total_discharge_mwh": 6884.0,
-        "total_charge_mwh": 13385.0
+        "total_charge_mwh": 13385.0,
+        "peak_discharge_mw": 30.4,
+        "peak_discharge_mw_date": "2024-08-12",
+        "peak_discharge_mw_time": "2024-08-12T07:25:00",
+        "peak_charge_mw": 31.0,
+        "peak_charge_mw_date": "2024-10-11",
+        "peak_charge_mw_time": "2024-10-11T09:15:00"
       }
     ],
     "QLD1": [
@@ -971,7 +1307,13 @@
         "peak_charge_mwh": 1158.7,
         "peak_charge_date": "2025-11-13",
         "total_discharge_mwh": 170493.0,
-        "total_charge_mwh": 237662.0
+        "total_charge_mwh": 237662.0,
+        "peak_discharge_mw": 256.6,
+        "peak_discharge_mw_date": "2025-07-24",
+        "peak_discharge_mw_time": "2025-07-24T17:50:00",
+        "peak_charge_mw": 256.6,
+        "peak_charge_mw_date": "2025-07-16",
+        "peak_charge_mw_time": "2025-07-16T01:45:00"
       },
       {
         "duid": "WDBESS2",
@@ -986,7 +1328,13 @@
         "peak_charge_mwh": 980.8,
         "peak_charge_date": "2025-11-26",
         "total_discharge_mwh": 65078.0,
-        "total_charge_mwh": 81875.0
+        "total_charge_mwh": 81875.0,
+        "peak_discharge_mw": 256.7,
+        "peak_discharge_mw_date": "2026-02-07",
+        "peak_discharge_mw_time": "2026-02-07T18:35:00",
+        "peak_charge_mw": 256.8,
+        "peak_charge_mw_date": "2025-10-28",
+        "peak_charge_mw_time": "2025-10-28T12:55:00"
       },
       {
         "duid": "GREENB1",
@@ -1001,7 +1349,13 @@
         "peak_charge_mwh": 923.4,
         "peak_charge_date": "2025-07-16",
         "total_discharge_mwh": 92342.0,
-        "total_charge_mwh": 116623.0
+        "total_charge_mwh": 116623.0,
+        "peak_discharge_mw": 200.9,
+        "peak_discharge_mw_date": "2025-07-08",
+        "peak_discharge_mw_time": "2025-07-08T06:25:00",
+        "peak_charge_mw": 200.9,
+        "peak_charge_mw_date": "2025-11-04",
+        "peak_charge_mw_time": "2025-11-04T13:25:00"
       },
       {
         "duid": "ULPBESS1",
@@ -1016,7 +1370,13 @@
         "peak_charge_mwh": 740.8,
         "peak_charge_date": "2025-12-19",
         "total_discharge_mwh": 40755.0,
-        "total_charge_mwh": 64362.0
+        "total_charge_mwh": 64362.0,
+        "peak_discharge_mw": 155.3,
+        "peak_discharge_mw_date": "2025-09-10",
+        "peak_discharge_mw_time": "2025-09-10T13:50:00",
+        "peak_charge_mw": 155.3,
+        "peak_charge_mw_date": "2026-03-14",
+        "peak_charge_mw_time": "2026-03-14T08:55:00"
       },
       {
         "duid": "CHBESS1",
@@ -1031,7 +1391,13 @@
         "peak_charge_mwh": 374.1,
         "peak_charge_date": "2025-07-15",
         "total_discharge_mwh": 67251.0,
-        "total_charge_mwh": 85579.0
+        "total_charge_mwh": 85579.0,
+        "peak_discharge_mw": 100.0,
+        "peak_discharge_mw_date": "2025-08-23",
+        "peak_discharge_mw_time": "2025-08-23T05:45:00",
+        "peak_charge_mw": 100.1,
+        "peak_charge_mw_date": "2025-07-09",
+        "peak_charge_mw_time": "2025-07-09T13:25:00"
       },
       {
         "duid": "WANDB1",
@@ -1046,7 +1412,13 @@
         "peak_charge_mwh": 368.9,
         "peak_charge_date": "2025-04-01",
         "total_discharge_mwh": 67692.0,
-        "total_charge_mwh": 95104.0
+        "total_charge_mwh": 95104.0,
+        "peak_discharge_mw": 100.1,
+        "peak_discharge_mw_date": "2025-02-12",
+        "peak_discharge_mw_time": "2025-02-12T19:10:00",
+        "peak_charge_mw": 85.7,
+        "peak_charge_mw_date": "2025-08-19",
+        "peak_charge_mw_time": "2025-08-19T12:10:00"
       },
       {
         "duid": "BBATTERY1",
@@ -1061,7 +1433,13 @@
         "peak_charge_mwh": 299.6,
         "peak_charge_date": "2025-02-22",
         "total_discharge_mwh": 30395.0,
-        "total_charge_mwh": 49809.0
+        "total_charge_mwh": 49809.0,
+        "peak_discharge_mw": 50.0,
+        "peak_discharge_mw_date": "2025-11-25",
+        "peak_discharge_mw_time": "2025-11-25T17:30:00",
+        "peak_charge_mw": 50.0,
+        "peak_charge_mw_date": "2024-11-29",
+        "peak_charge_mw_time": "2024-11-29T21:50:00"
       }
     ],
     "SA1": [
@@ -1078,7 +1456,13 @@
         "peak_charge_mwh": 1433.7,
         "peak_charge_date": "2025-06-30",
         "total_discharge_mwh": 131021.0,
-        "total_charge_mwh": 182828.0
+        "total_charge_mwh": 182828.0,
+        "peak_discharge_mw": 201.5,
+        "peak_discharge_mw_date": "2026-02-18",
+        "peak_discharge_mw_time": "2026-02-18T05:10:00",
+        "peak_charge_mw": 201.6,
+        "peak_charge_mw_date": "2025-05-24",
+        "peak_charge_mw_time": "2025-05-24T12:30:00"
       },
       {
         "duid": "TEMPB1",
@@ -1093,7 +1477,13 @@
         "peak_charge_mwh": 496.5,
         "peak_charge_date": "2025-11-20",
         "total_discharge_mwh": 46907.0,
-        "total_charge_mwh": 57933.0
+        "total_charge_mwh": 57933.0,
+        "peak_discharge_mw": 111.1,
+        "peak_discharge_mw_date": "2026-03-20",
+        "peak_discharge_mw_time": "2026-03-20T09:10:00",
+        "peak_charge_mw": 112.1,
+        "peak_charge_mw_date": "2025-11-30",
+        "peak_charge_mw_time": "2025-11-30T12:00:00"
       },
       {
         "duid": "TIB1",
@@ -1108,7 +1498,13 @@
         "peak_charge_mwh": 793.4,
         "peak_charge_date": "2025-07-25",
         "total_discharge_mwh": 108804.0,
-        "total_charge_mwh": 210923.0
+        "total_charge_mwh": 210923.0,
+        "peak_discharge_mw": 251.2,
+        "peak_discharge_mw_date": "2025-09-02",
+        "peak_discharge_mw_time": "2025-09-02T19:15:00",
+        "peak_charge_mw": 249.8,
+        "peak_charge_mw_date": "2025-09-23",
+        "peak_charge_mw_time": "2025-09-23T11:40:00"
       },
       {
         "duid": "MANNUMB1",
@@ -1123,7 +1519,13 @@
         "peak_charge_mwh": 364.5,
         "peak_charge_date": "2025-09-24",
         "total_discharge_mwh": 29783.0,
-        "total_charge_mwh": 42545.0
+        "total_charge_mwh": 42545.0,
+        "peak_discharge_mw": 102.9,
+        "peak_discharge_mw_date": "2025-10-15",
+        "peak_discharge_mw_time": "2025-10-15T20:25:00",
+        "peak_charge_mw": 107.3,
+        "peak_charge_mw_date": "2026-02-04",
+        "peak_charge_mw_time": "2026-02-04T17:20:00"
       },
       {
         "duid": "HPR1",
@@ -1138,7 +1540,13 @@
         "peak_charge_mwh": 354.7,
         "peak_charge_date": "2024-11-19",
         "total_discharge_mwh": 54546.0,
-        "total_charge_mwh": 99572.0
+        "total_charge_mwh": 99572.0,
+        "peak_discharge_mw": 98.0,
+        "peak_discharge_mw_date": "2024-12-16",
+        "peak_discharge_mw_time": "2024-12-16T14:45:00",
+        "peak_charge_mw": 103.3,
+        "peak_charge_mw_date": "2024-12-08",
+        "peak_charge_mw_time": "2024-12-08T08:15:00"
       },
       {
         "duid": "TB2B1",
@@ -1153,7 +1561,13 @@
         "peak_charge_mwh": 159.2,
         "peak_charge_date": "2024-12-16",
         "total_discharge_mwh": 9211.0,
-        "total_charge_mwh": 21284.0
+        "total_charge_mwh": 21284.0,
+        "peak_discharge_mw": 41.3,
+        "peak_discharge_mw_date": "2026-02-12",
+        "peak_discharge_mw_time": "2026-02-12T07:45:00",
+        "peak_charge_mw": 41.5,
+        "peak_charge_mw_date": "2025-03-06",
+        "peak_charge_mw_time": "2025-03-06T06:40:00"
       },
       {
         "duid": "DALNTH1",
@@ -1168,7 +1582,13 @@
         "peak_charge_mwh": 35.5,
         "peak_charge_date": "2024-12-28",
         "total_discharge_mwh": 3264.0,
-        "total_charge_mwh": 7351.0
+        "total_charge_mwh": 7351.0,
+        "peak_discharge_mw": 30.0,
+        "peak_discharge_mw_date": "2024-12-12",
+        "peak_discharge_mw_time": "2024-12-12T07:50:00",
+        "peak_charge_mw": 30.0,
+        "peak_charge_mw_date": "2025-11-20",
+        "peak_charge_mw_time": "2025-11-20T11:40:00"
       }
     ],
     "TAS1": []
@@ -1188,7 +1608,13 @@
         "peak_charge_mwh": 3920.3,
         "peak_charge_date": "2025-12-10",
         "total_discharge_mwh": 152156.0,
-        "total_charge_mwh": 179285.0
+        "total_charge_mwh": 179285.0,
+        "peak_discharge_mw": 460.6,
+        "peak_discharge_mw_date": "2025-11-27",
+        "peak_discharge_mw_time": "2025-11-27T13:45:00",
+        "peak_charge_mw": 460.4,
+        "peak_charge_mw_date": "2026-03-30",
+        "peak_charge_mw_time": "2026-03-30T14:25:00"
       },
       {
         "duid": "MREHA3",
@@ -1203,7 +1629,13 @@
         "peak_charge_mwh": 1537.7,
         "peak_charge_date": "2026-03-31",
         "total_discharge_mwh": 83039.0,
-        "total_charge_mwh": 102064.0
+        "total_charge_mwh": 102064.0,
+        "peak_discharge_mw": 202.7,
+        "peak_discharge_mw_date": "2026-02-18",
+        "peak_discharge_mw_time": "2026-02-18T21:15:00",
+        "peak_charge_mw": 207.6,
+        "peak_charge_mw_date": "2026-02-23",
+        "peak_charge_mw_time": "2026-02-23T13:05:00"
       },
       {
         "duid": "BLYTHB1",
@@ -1218,7 +1650,13 @@
         "peak_charge_mwh": 1433.7,
         "peak_charge_date": "2025-06-30",
         "total_discharge_mwh": 131021.0,
-        "total_charge_mwh": 182828.0
+        "total_charge_mwh": 182828.0,
+        "peak_discharge_mw": 201.5,
+        "peak_discharge_mw_date": "2026-02-18",
+        "peak_discharge_mw_time": "2026-02-18T05:10:00",
+        "peak_charge_mw": 201.6,
+        "peak_charge_mw_date": "2025-05-24",
+        "peak_charge_mw_time": "2025-05-24T12:30:00"
       },
       {
         "duid": "WDBESS1",
@@ -1233,7 +1671,13 @@
         "peak_charge_mwh": 1158.7,
         "peak_charge_date": "2025-11-13",
         "total_discharge_mwh": 170493.0,
-        "total_charge_mwh": 237662.0
+        "total_charge_mwh": 237662.0,
+        "peak_discharge_mw": 256.6,
+        "peak_discharge_mw_date": "2025-07-24",
+        "peak_discharge_mw_time": "2025-07-24T17:50:00",
+        "peak_charge_mw": 256.6,
+        "peak_charge_mw_date": "2025-07-16",
+        "peak_charge_mw_time": "2025-07-16T01:45:00"
       },
       {
         "duid": "VBB1",
@@ -1248,7 +1692,13 @@
         "peak_charge_mwh": 980.8,
         "peak_charge_date": "2024-10-22",
         "total_discharge_mwh": 131683.0,
-        "total_charge_mwh": 202107.0
+        "total_charge_mwh": 202107.0,
+        "peak_discharge_mw": 268.7,
+        "peak_discharge_mw_date": "2025-10-28",
+        "peak_discharge_mw_time": "2025-10-28T10:30:00",
+        "peak_charge_mw": 257.0,
+        "peak_charge_mw_date": "2024-10-07",
+        "peak_charge_mw_time": "2024-10-07T12:05:00"
       },
       {
         "duid": "WDBESS2",
@@ -1263,7 +1713,13 @@
         "peak_charge_mwh": 980.8,
         "peak_charge_date": "2025-11-26",
         "total_discharge_mwh": 65078.0,
-        "total_charge_mwh": 81875.0
+        "total_charge_mwh": 81875.0,
+        "peak_discharge_mw": 256.7,
+        "peak_discharge_mw_date": "2026-02-07",
+        "peak_discharge_mw_time": "2026-02-07T18:35:00",
+        "peak_charge_mw": 256.8,
+        "peak_charge_mw_date": "2025-10-28",
+        "peak_charge_mw_time": "2025-10-28T12:55:00"
       },
       {
         "duid": "MREHA1",
@@ -1278,7 +1734,13 @@
         "peak_charge_mwh": 950.0,
         "peak_charge_date": "2025-09-16",
         "total_discharge_mwh": 53997.0,
-        "total_charge_mwh": 73993.0
+        "total_charge_mwh": 73993.0,
+        "peak_discharge_mw": 202.0,
+        "peak_discharge_mw_date": "2025-09-17",
+        "peak_discharge_mw_time": "2025-09-17T18:05:00",
+        "peak_charge_mw": 202.2,
+        "peak_charge_mw_date": "2025-10-13",
+        "peak_charge_mw_time": "2025-10-13T12:45:00"
       },
       {
         "duid": "GREENB1",
@@ -1293,7 +1755,13 @@
         "peak_charge_mwh": 923.4,
         "peak_charge_date": "2025-07-16",
         "total_discharge_mwh": 92342.0,
-        "total_charge_mwh": 116623.0
+        "total_charge_mwh": 116623.0,
+        "peak_discharge_mw": 200.9,
+        "peak_discharge_mw_date": "2025-07-08",
+        "peak_discharge_mw_time": "2025-07-08T06:25:00",
+        "peak_charge_mw": 200.9,
+        "peak_charge_mw_date": "2025-11-04",
+        "peak_charge_mw_time": "2025-11-04T13:25:00"
       },
       {
         "duid": "RANGEB1",
@@ -1308,7 +1776,13 @@
         "peak_charge_mwh": 885.6,
         "peak_charge_date": "2025-09-12",
         "total_discharge_mwh": 181672.0,
-        "total_charge_mwh": 224322.0
+        "total_charge_mwh": 224322.0,
+        "peak_discharge_mw": 201.3,
+        "peak_discharge_mw_date": "2025-08-19",
+        "peak_discharge_mw_time": "2025-08-19T18:30:00",
+        "peak_charge_mw": 201.4,
+        "peak_charge_mw_date": "2026-01-11",
+        "peak_charge_mw_time": "2026-01-11T14:20:00"
       },
       {
         "duid": "KESSB1",
@@ -1323,7 +1797,13 @@
         "peak_charge_mwh": 852.9,
         "peak_charge_date": "2025-08-13",
         "total_discharge_mwh": 97055.0,
-        "total_charge_mwh": 112744.0
+        "total_charge_mwh": 112744.0,
+        "peak_discharge_mw": 185.6,
+        "peak_discharge_mw_date": "2025-11-25",
+        "peak_discharge_mw_time": "2025-11-25T19:05:00",
+        "peak_charge_mw": 187.4,
+        "peak_charge_mw_date": "2025-05-13",
+        "peak_charge_mw_time": "2025-05-13T14:50:00"
       }
     ],
     "NSW1": [
@@ -1340,7 +1820,13 @@
         "peak_charge_mwh": 3920.3,
         "peak_charge_date": "2025-12-10",
         "total_discharge_mwh": 152156.0,
-        "total_charge_mwh": 179285.0
+        "total_charge_mwh": 179285.0,
+        "peak_discharge_mw": 460.6,
+        "peak_discharge_mw_date": "2025-11-27",
+        "peak_discharge_mw_time": "2025-11-27T13:45:00",
+        "peak_charge_mw": 460.4,
+        "peak_charge_mw_date": "2026-03-30",
+        "peak_charge_mw_time": "2026-03-30T14:25:00"
       },
       {
         "duid": "CAPBES1",
@@ -1355,7 +1841,13 @@
         "peak_charge_mwh": 376.4,
         "peak_charge_date": "2025-08-01",
         "total_discharge_mwh": 63426.0,
-        "total_charge_mwh": 77873.0
+        "total_charge_mwh": 77873.0,
+        "peak_discharge_mw": 101.6,
+        "peak_discharge_mw_date": "2025-10-07",
+        "peak_discharge_mw_time": "2025-10-07T06:55:00",
+        "peak_charge_mw": 101.7,
+        "peak_charge_mw_date": "2026-01-22",
+        "peak_charge_mw_time": "2026-01-22T13:00:00"
       },
       {
         "duid": "RESS1",
@@ -1370,7 +1862,13 @@
         "peak_charge_mwh": 327.9,
         "peak_charge_date": "2025-10-22",
         "total_discharge_mwh": 56489.0,
-        "total_charge_mwh": 67749.0
+        "total_charge_mwh": 67749.0,
+        "peak_discharge_mw": 60.7,
+        "peak_discharge_mw_date": "2024-12-17",
+        "peak_discharge_mw_time": "2024-12-17T17:55:00",
+        "peak_charge_mw": 60.6,
+        "peak_charge_mw_date": "2025-07-17",
+        "peak_charge_mw_time": "2025-07-17T04:35:00"
       },
       {
         "duid": "RIVNB2",
@@ -1385,7 +1883,13 @@
         "peak_charge_mwh": 285.1,
         "peak_charge_date": "2025-05-29",
         "total_discharge_mwh": 49344.0,
-        "total_charge_mwh": 64317.0
+        "total_charge_mwh": 64317.0,
+        "peak_discharge_mw": 65.4,
+        "peak_discharge_mw_date": "2024-11-17",
+        "peak_discharge_mw_time": "2024-11-17T20:45:00",
+        "peak_charge_mw": 65.7,
+        "peak_charge_mw_date": "2024-11-16",
+        "peak_charge_mw_time": "2024-11-16T13:20:00"
       },
       {
         "duid": "SMTHBES1",
@@ -1400,7 +1904,13 @@
         "peak_charge_mwh": 254.7,
         "peak_charge_date": "2026-02-06",
         "total_discharge_mwh": 10065.0,
-        "total_charge_mwh": 13749.0
+        "total_charge_mwh": 13749.0,
+        "peak_discharge_mw": 65.5,
+        "peak_discharge_mw_date": "2025-10-15",
+        "peak_discharge_mw_time": "2025-10-15T05:55:00",
+        "peak_charge_mw": 65.5,
+        "peak_charge_mw_date": "2026-02-07",
+        "peak_charge_mw_time": "2026-02-07T09:10:00"
       },
       {
         "duid": "WALGRV1",
@@ -1415,7 +1925,13 @@
         "peak_charge_mwh": 186.8,
         "peak_charge_date": "2025-06-03",
         "total_discharge_mwh": 25045.0,
-        "total_charge_mwh": 40343.0
+        "total_charge_mwh": 40343.0,
+        "peak_discharge_mw": 51.0,
+        "peak_discharge_mw_date": "2025-07-02",
+        "peak_discharge_mw_time": "2025-07-02T17:50:00",
+        "peak_charge_mw": 47.9,
+        "peak_charge_mw_date": "2025-07-03",
+        "peak_charge_mw_time": "2025-07-03T12:05:00"
       },
       {
         "duid": "BHB1",
@@ -1430,7 +1946,13 @@
         "peak_charge_mwh": 116.9,
         "peak_charge_date": "2024-08-07",
         "total_discharge_mwh": 22338.0,
-        "total_charge_mwh": 29183.0
+        "total_charge_mwh": 29183.0,
+        "peak_discharge_mw": 50.2,
+        "peak_discharge_mw_date": "2024-08-14",
+        "peak_discharge_mw_time": "2024-08-14T17:45:00",
+        "peak_charge_mw": 48.5,
+        "peak_charge_mw_date": "2024-10-10",
+        "peak_charge_mw_time": "2024-10-10T10:40:00"
       }
     ],
     "VIC1": [
@@ -1447,7 +1969,13 @@
         "peak_charge_mwh": 1537.7,
         "peak_charge_date": "2026-03-31",
         "total_discharge_mwh": 83039.0,
-        "total_charge_mwh": 102064.0
+        "total_charge_mwh": 102064.0,
+        "peak_discharge_mw": 202.7,
+        "peak_discharge_mw_date": "2026-02-18",
+        "peak_discharge_mw_time": "2026-02-18T21:15:00",
+        "peak_charge_mw": 207.6,
+        "peak_charge_mw_date": "2026-02-23",
+        "peak_charge_mw_time": "2026-02-23T13:05:00"
       },
       {
         "duid": "VBB1",
@@ -1462,7 +1990,13 @@
         "peak_charge_mwh": 980.8,
         "peak_charge_date": "2024-10-22",
         "total_discharge_mwh": 131683.0,
-        "total_charge_mwh": 202107.0
+        "total_charge_mwh": 202107.0,
+        "peak_discharge_mw": 268.7,
+        "peak_discharge_mw_date": "2025-10-28",
+        "peak_discharge_mw_time": "2025-10-28T10:30:00",
+        "peak_charge_mw": 257.0,
+        "peak_charge_mw_date": "2024-10-07",
+        "peak_charge_mw_time": "2024-10-07T12:05:00"
       },
       {
         "duid": "MREHA1",
@@ -1477,7 +2011,13 @@
         "peak_charge_mwh": 950.0,
         "peak_charge_date": "2025-09-16",
         "total_discharge_mwh": 53997.0,
-        "total_charge_mwh": 73993.0
+        "total_charge_mwh": 73993.0,
+        "peak_discharge_mw": 202.0,
+        "peak_discharge_mw_date": "2025-09-17",
+        "peak_discharge_mw_time": "2025-09-17T18:05:00",
+        "peak_charge_mw": 202.2,
+        "peak_charge_mw_date": "2025-10-13",
+        "peak_charge_mw_time": "2025-10-13T12:45:00"
       },
       {
         "duid": "RANGEB1",
@@ -1492,7 +2032,13 @@
         "peak_charge_mwh": 885.6,
         "peak_charge_date": "2025-09-12",
         "total_discharge_mwh": 181672.0,
-        "total_charge_mwh": 224322.0
+        "total_charge_mwh": 224322.0,
+        "peak_discharge_mw": 201.3,
+        "peak_discharge_mw_date": "2025-08-19",
+        "peak_discharge_mw_time": "2025-08-19T18:30:00",
+        "peak_charge_mw": 201.4,
+        "peak_charge_mw_date": "2026-01-11",
+        "peak_charge_mw_time": "2026-01-11T14:20:00"
       },
       {
         "duid": "KESSB1",
@@ -1507,7 +2053,13 @@
         "peak_charge_mwh": 852.9,
         "peak_charge_date": "2025-08-13",
         "total_discharge_mwh": 97055.0,
-        "total_charge_mwh": 112744.0
+        "total_charge_mwh": 112744.0,
+        "peak_discharge_mw": 185.6,
+        "peak_discharge_mw_date": "2025-11-25",
+        "peak_discharge_mw_time": "2025-11-25T19:05:00",
+        "peak_charge_mw": 187.4,
+        "peak_charge_mw_date": "2025-05-13",
+        "peak_charge_mw_time": "2025-05-13T14:50:00"
       },
       {
         "duid": "MREHA2",
@@ -1522,7 +2074,13 @@
         "peak_charge_mwh": 747.7,
         "peak_charge_date": "2025-10-23",
         "total_discharge_mwh": 41834.0,
-        "total_charge_mwh": 58300.0
+        "total_charge_mwh": 58300.0,
+        "peak_discharge_mw": 201.7,
+        "peak_discharge_mw_date": "2025-11-18",
+        "peak_discharge_mw_time": "2025-11-18T15:55:00",
+        "peak_charge_mw": 201.3,
+        "peak_charge_mw_date": "2025-11-20",
+        "peak_charge_mw_time": "2025-11-20T18:05:00"
       },
       {
         "duid": "LVES1",
@@ -1537,7 +2095,13 @@
         "peak_charge_mwh": 646.4,
         "peak_charge_date": "2025-08-15",
         "total_discharge_mwh": 32491.0,
-        "total_charge_mwh": 50430.0
+        "total_charge_mwh": 50430.0,
+        "peak_discharge_mw": 100.9,
+        "peak_discharge_mw_date": "2025-06-04",
+        "peak_discharge_mw_time": "2025-06-04T09:35:00",
+        "peak_charge_mw": 101.3,
+        "peak_charge_mw_date": "2025-06-27",
+        "peak_charge_mw_time": "2025-06-27T12:00:00"
       },
       {
         "duid": "HBESS1",
@@ -1552,7 +2116,13 @@
         "peak_charge_mwh": 473.0,
         "peak_charge_date": "2025-03-31",
         "total_discharge_mwh": 51494.0,
-        "total_charge_mwh": 102714.0
+        "total_charge_mwh": 102714.0,
+        "peak_discharge_mw": 152.2,
+        "peak_discharge_mw_date": "2025-02-06",
+        "peak_discharge_mw_time": "2025-02-06T16:05:00",
+        "peak_charge_mw": 149.4,
+        "peak_charge_mw_date": "2025-08-01",
+        "peak_charge_mw_time": "2025-08-01T04:25:00"
       },
       {
         "duid": "BALB1",
@@ -1567,7 +2137,13 @@
         "peak_charge_mwh": 82.7,
         "peak_charge_date": "2024-11-13",
         "total_discharge_mwh": 6884.0,
-        "total_charge_mwh": 13385.0
+        "total_charge_mwh": 13385.0,
+        "peak_discharge_mw": 30.4,
+        "peak_discharge_mw_date": "2024-08-12",
+        "peak_discharge_mw_time": "2024-08-12T07:25:00",
+        "peak_charge_mw": 31.0,
+        "peak_charge_mw_date": "2024-10-11",
+        "peak_charge_mw_time": "2024-10-11T09:15:00"
       }
     ],
     "QLD1": [
@@ -1584,7 +2160,13 @@
         "peak_charge_mwh": 1158.7,
         "peak_charge_date": "2025-11-13",
         "total_discharge_mwh": 170493.0,
-        "total_charge_mwh": 237662.0
+        "total_charge_mwh": 237662.0,
+        "peak_discharge_mw": 256.6,
+        "peak_discharge_mw_date": "2025-07-24",
+        "peak_discharge_mw_time": "2025-07-24T17:50:00",
+        "peak_charge_mw": 256.6,
+        "peak_charge_mw_date": "2025-07-16",
+        "peak_charge_mw_time": "2025-07-16T01:45:00"
       },
       {
         "duid": "WDBESS2",
@@ -1599,7 +2181,13 @@
         "peak_charge_mwh": 980.8,
         "peak_charge_date": "2025-11-26",
         "total_discharge_mwh": 65078.0,
-        "total_charge_mwh": 81875.0
+        "total_charge_mwh": 81875.0,
+        "peak_discharge_mw": 256.7,
+        "peak_discharge_mw_date": "2026-02-07",
+        "peak_discharge_mw_time": "2026-02-07T18:35:00",
+        "peak_charge_mw": 256.8,
+        "peak_charge_mw_date": "2025-10-28",
+        "peak_charge_mw_time": "2025-10-28T12:55:00"
       },
       {
         "duid": "GREENB1",
@@ -1614,7 +2202,13 @@
         "peak_charge_mwh": 923.4,
         "peak_charge_date": "2025-07-16",
         "total_discharge_mwh": 92342.0,
-        "total_charge_mwh": 116623.0
+        "total_charge_mwh": 116623.0,
+        "peak_discharge_mw": 200.9,
+        "peak_discharge_mw_date": "2025-07-08",
+        "peak_discharge_mw_time": "2025-07-08T06:25:00",
+        "peak_charge_mw": 200.9,
+        "peak_charge_mw_date": "2025-11-04",
+        "peak_charge_mw_time": "2025-11-04T13:25:00"
       },
       {
         "duid": "ULPBESS1",
@@ -1629,7 +2223,13 @@
         "peak_charge_mwh": 740.8,
         "peak_charge_date": "2025-12-19",
         "total_discharge_mwh": 40755.0,
-        "total_charge_mwh": 64362.0
+        "total_charge_mwh": 64362.0,
+        "peak_discharge_mw": 155.3,
+        "peak_discharge_mw_date": "2025-09-10",
+        "peak_discharge_mw_time": "2025-09-10T13:50:00",
+        "peak_charge_mw": 155.3,
+        "peak_charge_mw_date": "2026-03-14",
+        "peak_charge_mw_time": "2026-03-14T08:55:00"
       },
       {
         "duid": "CHBESS1",
@@ -1644,7 +2244,13 @@
         "peak_charge_mwh": 374.1,
         "peak_charge_date": "2025-07-15",
         "total_discharge_mwh": 67251.0,
-        "total_charge_mwh": 85579.0
+        "total_charge_mwh": 85579.0,
+        "peak_discharge_mw": 100.0,
+        "peak_discharge_mw_date": "2025-08-23",
+        "peak_discharge_mw_time": "2025-08-23T05:45:00",
+        "peak_charge_mw": 100.1,
+        "peak_charge_mw_date": "2025-07-09",
+        "peak_charge_mw_time": "2025-07-09T13:25:00"
       },
       {
         "duid": "WANDB1",
@@ -1659,7 +2265,13 @@
         "peak_charge_mwh": 368.9,
         "peak_charge_date": "2025-04-01",
         "total_discharge_mwh": 67692.0,
-        "total_charge_mwh": 95104.0
+        "total_charge_mwh": 95104.0,
+        "peak_discharge_mw": 100.1,
+        "peak_discharge_mw_date": "2025-02-12",
+        "peak_discharge_mw_time": "2025-02-12T19:10:00",
+        "peak_charge_mw": 85.7,
+        "peak_charge_mw_date": "2025-08-19",
+        "peak_charge_mw_time": "2025-08-19T12:10:00"
       },
       {
         "duid": "BBATTERY1",
@@ -1674,7 +2286,13 @@
         "peak_charge_mwh": 299.6,
         "peak_charge_date": "2025-02-22",
         "total_discharge_mwh": 30395.0,
-        "total_charge_mwh": 49809.0
+        "total_charge_mwh": 49809.0,
+        "peak_discharge_mw": 50.0,
+        "peak_discharge_mw_date": "2025-11-25",
+        "peak_discharge_mw_time": "2025-11-25T17:30:00",
+        "peak_charge_mw": 50.0,
+        "peak_charge_mw_date": "2024-11-29",
+        "peak_charge_mw_time": "2024-11-29T21:50:00"
       }
     ],
     "SA1": [
@@ -1691,7 +2309,13 @@
         "peak_charge_mwh": 1433.7,
         "peak_charge_date": "2025-06-30",
         "total_discharge_mwh": 131021.0,
-        "total_charge_mwh": 182828.0
+        "total_charge_mwh": 182828.0,
+        "peak_discharge_mw": 201.5,
+        "peak_discharge_mw_date": "2026-02-18",
+        "peak_discharge_mw_time": "2026-02-18T05:10:00",
+        "peak_charge_mw": 201.6,
+        "peak_charge_mw_date": "2025-05-24",
+        "peak_charge_mw_time": "2025-05-24T12:30:00"
       },
       {
         "duid": "TIB1",
@@ -1706,7 +2330,13 @@
         "peak_charge_mwh": 793.4,
         "peak_charge_date": "2025-07-25",
         "total_discharge_mwh": 108804.0,
-        "total_charge_mwh": 210923.0
+        "total_charge_mwh": 210923.0,
+        "peak_discharge_mw": 251.2,
+        "peak_discharge_mw_date": "2025-09-02",
+        "peak_discharge_mw_time": "2025-09-02T19:15:00",
+        "peak_charge_mw": 249.8,
+        "peak_charge_mw_date": "2025-09-23",
+        "peak_charge_mw_time": "2025-09-23T11:40:00"
       },
       {
         "duid": "TEMPB1",
@@ -1721,7 +2351,13 @@
         "peak_charge_mwh": 496.5,
         "peak_charge_date": "2025-11-20",
         "total_discharge_mwh": 46907.0,
-        "total_charge_mwh": 57933.0
+        "total_charge_mwh": 57933.0,
+        "peak_discharge_mw": 111.1,
+        "peak_discharge_mw_date": "2026-03-20",
+        "peak_discharge_mw_time": "2026-03-20T09:10:00",
+        "peak_charge_mw": 112.1,
+        "peak_charge_mw_date": "2025-11-30",
+        "peak_charge_mw_time": "2025-11-30T12:00:00"
       },
       {
         "duid": "MANNUMB1",
@@ -1736,7 +2372,13 @@
         "peak_charge_mwh": 364.5,
         "peak_charge_date": "2025-09-24",
         "total_discharge_mwh": 29783.0,
-        "total_charge_mwh": 42545.0
+        "total_charge_mwh": 42545.0,
+        "peak_discharge_mw": 102.9,
+        "peak_discharge_mw_date": "2025-10-15",
+        "peak_discharge_mw_time": "2025-10-15T20:25:00",
+        "peak_charge_mw": 107.3,
+        "peak_charge_mw_date": "2026-02-04",
+        "peak_charge_mw_time": "2026-02-04T17:20:00"
       },
       {
         "duid": "HPR1",
@@ -1751,7 +2393,13 @@
         "peak_charge_mwh": 354.7,
         "peak_charge_date": "2024-11-19",
         "total_discharge_mwh": 54546.0,
-        "total_charge_mwh": 99572.0
+        "total_charge_mwh": 99572.0,
+        "peak_discharge_mw": 98.0,
+        "peak_discharge_mw_date": "2024-12-16",
+        "peak_discharge_mw_time": "2024-12-16T14:45:00",
+        "peak_charge_mw": 103.3,
+        "peak_charge_mw_date": "2024-12-08",
+        "peak_charge_mw_time": "2024-12-08T08:15:00"
       },
       {
         "duid": "TB2B1",
@@ -1766,7 +2414,13 @@
         "peak_charge_mwh": 159.2,
         "peak_charge_date": "2024-12-16",
         "total_discharge_mwh": 9211.0,
-        "total_charge_mwh": 21284.0
+        "total_charge_mwh": 21284.0,
+        "peak_discharge_mw": 41.3,
+        "peak_discharge_mw_date": "2026-02-12",
+        "peak_discharge_mw_time": "2026-02-12T07:45:00",
+        "peak_charge_mw": 41.5,
+        "peak_charge_mw_date": "2025-03-06",
+        "peak_charge_mw_time": "2025-03-06T06:40:00"
       },
       {
         "duid": "DALNTH1",
@@ -1781,7 +2435,13 @@
         "peak_charge_mwh": 35.5,
         "peak_charge_date": "2024-12-28",
         "total_discharge_mwh": 3264.0,
-        "total_charge_mwh": 7351.0
+        "total_charge_mwh": 7351.0,
+        "peak_discharge_mw": 30.0,
+        "peak_discharge_mw_date": "2024-12-12",
+        "peak_discharge_mw_time": "2024-12-12T07:50:00",
+        "peak_charge_mw": 30.0,
+        "peak_charge_mw_date": "2025-11-20",
+        "peak_charge_mw_time": "2025-11-20T11:40:00"
       }
     ],
     "TAS1": []

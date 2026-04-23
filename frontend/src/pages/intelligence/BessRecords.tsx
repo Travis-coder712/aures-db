@@ -19,6 +19,13 @@ interface Battery {
   peak_charge_date: string
   total_discharge_mwh: number
   total_charge_mwh: number
+  // 5-min peaks — populated after import_bess_5min.py backfill
+  peak_discharge_mw?: number | null
+  peak_discharge_mw_date?: string | null
+  peak_discharge_mw_time?: string | null
+  peak_charge_mw?: number | null
+  peak_charge_mw_date?: string | null
+  peak_charge_mw_time?: string | null
 }
 
 interface FleetRecord {
@@ -427,32 +434,38 @@ export default function BessRecords() {
       </div>
 
       {/* Full battery table — all metrics */}
-      <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl overflow-hidden">
-        <div className="px-4 py-3 border-b border-[var(--color-border)]">
-          <p className="text-sm font-semibold text-[var(--color-text)]">All Batteries — {scopeLabel}</p>
-          <p className="text-[10px] text-[var(--color-text-muted)]">
-            Peak single-day discharge and charge records per battery. Data period: MMSDM daily generation.
-          </p>
-        </div>
-        <div className="overflow-x-auto">
-          <table className="w-full text-xs">
-            <thead>
-              <tr className="bg-[var(--color-bg)]/50 border-b border-[var(--color-border)]">
-                <th className="text-left px-3 py-2 text-[10px] font-semibold uppercase tracking-wide text-[var(--color-text-muted)]">Battery</th>
-                <th className="text-center px-2 py-2 text-[10px] font-semibold uppercase tracking-wide text-[var(--color-text-muted)]">Region</th>
-                <th className="text-right px-3 py-2 text-[10px] font-semibold uppercase tracking-wide text-emerald-500">Peak Discharge</th>
-                <th className="text-right px-3 py-2 text-[10px] font-semibold uppercase tracking-wide text-emerald-500 hidden md:table-cell">Date</th>
-                <th className="text-right px-3 py-2 text-[10px] font-semibold uppercase tracking-wide text-purple-400">Peak Charge</th>
-                <th className="text-right px-3 py-2 text-[10px] font-semibold uppercase tracking-wide text-purple-400 hidden md:table-cell">Date</th>
-                <th className="text-right px-3 py-2 text-[10px] font-semibold uppercase tracking-wide text-[var(--color-text-muted)] hidden lg:table-cell">Total Discharge</th>
-                <th className="text-right px-3 py-2 text-[10px] font-semibold uppercase tracking-wide text-[var(--color-text-muted)] hidden lg:table-cell">Days</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-[var(--color-border)]">
-              {data.batteries
-                .filter(b => scope === 'NEM' || b.region === scope)
-                .sort((a, b) => (b.peak_discharge_mwh || 0) - (a.peak_discharge_mwh || 0))
-                .map((b, i) => {
+      {(() => {
+        const has5min = data.batteries.some(b => b.peak_discharge_mw != null)
+        const scopedBatteries = data.batteries
+          .filter(b => scope === 'NEM' || b.region === scope)
+          .sort((a, b) => (b.peak_discharge_mwh || 0) - (a.peak_discharge_mwh || 0))
+        return (
+        <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl overflow-hidden">
+          <div className="px-4 py-3 border-b border-[var(--color-border)]">
+            <p className="text-sm font-semibold text-[var(--color-text)]">All Batteries — {scopeLabel}</p>
+            <p className="text-[10px] text-[var(--color-text-muted)]">
+              Peak single-day discharge and charge (MWh){has5min ? ' and peak 5-min output (MW)' : ''} per battery.
+              {!has5min && <span className="ml-1 text-amber-400">Run <code>import_bess_5min.py --months 2024-08 2026-03</code> to add per-battery MW records.</span>}
+            </p>
+          </div>
+          <div className="overflow-x-auto">
+            <table className="w-full text-xs">
+              <thead>
+                <tr className="bg-[var(--color-bg)]/50 border-b border-[var(--color-border)]">
+                  <th className="text-left px-3 py-2 text-[10px] font-semibold uppercase tracking-wide text-[var(--color-text-muted)]">Battery</th>
+                  <th className="text-center px-2 py-2 text-[10px] font-semibold uppercase tracking-wide text-[var(--color-text-muted)]">Region</th>
+                  <th className="text-right px-3 py-2 text-[10px] font-semibold uppercase tracking-wide text-emerald-500">Peak Day</th>
+                  <th className="text-right px-3 py-2 text-[10px] font-semibold uppercase tracking-wide text-emerald-500 hidden md:table-cell">Date</th>
+                  {has5min && <th className="text-right px-3 py-2 text-[10px] font-semibold uppercase tracking-wide text-yellow-400 hidden md:table-cell">Peak 5-min ⚡</th>}
+                  <th className="text-right px-3 py-2 text-[10px] font-semibold uppercase tracking-wide text-purple-400">Peak Charge</th>
+                  <th className="text-right px-3 py-2 text-[10px] font-semibold uppercase tracking-wide text-purple-400 hidden md:table-cell">Date</th>
+                  {has5min && <th className="text-right px-3 py-2 text-[10px] font-semibold uppercase tracking-wide text-fuchsia-400 hidden md:table-cell">Peak 5-min 🔋</th>}
+                  <th className="text-right px-3 py-2 text-[10px] font-semibold uppercase tracking-wide text-[var(--color-text-muted)] hidden lg:table-cell">Total ⚡</th>
+                  <th className="text-right px-3 py-2 text-[10px] font-semibold uppercase tracking-wide text-[var(--color-text-muted)] hidden lg:table-cell">Days</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-[var(--color-border)]">
+                {scopedBatteries.map((b, i) => {
                   const color = REGION_COLOR[b.region] || '#64748b'
                   return (
                     <tr key={b.duid} className="hover:bg-[var(--color-bg)]/40 transition-colors">
@@ -477,6 +490,13 @@ export default function BessRecords() {
                       <td className="px-3 py-2 text-right text-[var(--color-text-muted)] hidden md:table-cell">
                         {fmtDate(b.peak_discharge_date)}
                       </td>
+                      {has5min && (
+                        <td className="px-3 py-2 text-right hidden md:table-cell">
+                          {b.peak_discharge_mw != null
+                            ? <><span className="font-semibold text-yellow-400">{fmt(b.peak_discharge_mw)}</span><span className="text-[var(--color-text-muted)] ml-0.5">MW</span></>
+                            : <span className="text-[var(--color-text-muted)]">—</span>}
+                        </td>
+                      )}
                       <td className="px-3 py-2 text-right">
                         <span className="font-semibold text-purple-400">{fmt(b.peak_charge_mwh)}</span>
                         <span className="text-[var(--color-text-muted)] ml-0.5">MWh</span>
@@ -484,6 +504,13 @@ export default function BessRecords() {
                       <td className="px-3 py-2 text-right text-[var(--color-text-muted)] hidden md:table-cell">
                         {fmtDate(b.peak_charge_date)}
                       </td>
+                      {has5min && (
+                        <td className="px-3 py-2 text-right hidden md:table-cell">
+                          {b.peak_charge_mw != null
+                            ? <><span className="font-semibold text-fuchsia-400">{fmt(b.peak_charge_mw)}</span><span className="text-[var(--color-text-muted)] ml-0.5">MW</span></>
+                            : <span className="text-[var(--color-text-muted)]">—</span>}
+                        </td>
+                      )}
                       <td className="px-3 py-2 text-right text-[var(--color-text-muted)] hidden lg:table-cell">
                         {fmt(b.total_discharge_mwh)} MWh
                       </td>
@@ -493,20 +520,23 @@ export default function BessRecords() {
                     </tr>
                   )
                 })}
-            </tbody>
-          </table>
+              </tbody>
+            </table>
+          </div>
         </div>
-      </div>
+        )
+      })()}
 
       {/* Methodology note */}
       <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-lg px-4 py-3 text-xs text-[var(--color-text-muted)] leading-relaxed">
         <span className="font-medium text-[var(--color-text)]">Methodology: </span>
-        Records are sourced from AEMO NEMWEB MMSDM DISPATCHLOAD data aggregated to daily totals per DUID.
-        <span className="font-medium text-[var(--color-text)]"> Discharge MWh</span> = sum of all 5-min generation intervals in a settlement day.
+        Records sourced from AEMO NEMWEB MMSDM DISPATCHLOAD aggregated to daily totals per DUID.
+        <span className="font-medium text-[var(--color-text)]"> Discharge MWh</span> = sum of all 5-min generation intervals per day.
         <span className="font-medium text-[var(--color-text)]"> Charge MWh</span> = sum of all 5-min load intervals.
-        Fleet-level 5-min peak records (where shown) are sourced from OpenElectricity API via the BESS Portfolio data pipeline.
-        Per-battery 5-min peak records require individual DUID 5-min DISPATCHLOAD extraction — a future enhancement.
-        Batteries commissioning mid-year will have lower totals; compare peak single-day records for fairness.
+        <span className="font-medium text-[var(--color-text)]"> Peak 5-min MW</span> = maximum INITIALMW observed across any single 5-min interval,
+        populated by running <code className="bg-[var(--color-bg)] px-1 rounded">import_bess_5min.py --months 2024-08 2026-03</code>.
+        Fleet-level 5-min peaks sourced from OpenElectricity API.
+        Batteries commissioning mid-year have lower totals; compare peak single-day records for fairness.
       </div>
     </div>
   )
