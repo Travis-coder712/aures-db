@@ -1,19 +1,20 @@
 # AURES — Next Session Handoff
 
-**Last refreshed:** 2026-04-23, end of the v2.33.0 session
-**Latest shipped version:** v2.33.0
+**Last refreshed:** 2026-04-23, end of the v2.34.0 session
+**Latest shipped version:** v2.34.0
 **Purpose:** Single-place brief for the next session. Cold-readable — no context required beyond this file and `docs/INTELLIGENCE_LAYER_PLAN.md`.
 
 ---
 
-## 🟢 Current state snapshot (v2.32.0)
+## 🟢 Current state snapshot (v2.34.0)
 
 ### What's live on the deployed site
-- **32 releases shipped** v2.15.1 → v2.32.0, with the recent ones covering:
+- **34 releases shipped** v2.15.1 → v2.34.0, with the recent ones covering:
   - **v2.30.0** — **Energy Transition Scoreboard** (coal vs wind/solar/BESS + demand overlay + records)
   - **v2.31.0 / v2.31.1** — **CIS Wind Pipeline filter** + data/peak-calc patch
   - **v2.32.0** — **BESS Bidding Trading Platform deep-dives** (OEM match, lock-in, convergence, grid implications per platform + grid-scale monoculture callout)
   - **v2.33.0** — **BESS Records Leaderboard** (`/intelligence/bess-records`) — 30 batteries, NEM + state scope, discharge/charge tabs, fleet peak records
+  - **v2.34.0** — **Per-DUID 5-min BESS Dispatch Peaks** — `import_bess_5min.py` backfills DISPATCHLOAD for 56 DUIDs (Aug 2024→Mar 2026); Peak 5-min ⚡/🔋 columns now live in leaderboard table
 - All features on `https://travis-coder712.github.io/aures-db/`
 - Plan doc: `docs/INTELLIGENCE_LAYER_PLAN.md` — authoritative release log
 
