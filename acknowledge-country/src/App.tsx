@@ -5,6 +5,7 @@ import { GENERAL_FACTS } from './data/generalFacts'
 import { LEGISLATION } from './data/legislation'
 import { RESOURCES } from './data/resources'
 import { CITIES, findNearestCity, searchCities } from './data/cities'
+import { ON_THIS_DAY, getTodayKey } from './data/onThisDay'
 import type {
   Nation,
   City,
@@ -216,7 +217,28 @@ function NavBar({
 }
 
 // ── WELCOME SCREEN ────────────────────────────────────────────────────────
-function WelcomeScreen({ onStart, nation }: { onStart: () => void; nation: Nation | null }) {
+function WelcomeScreen({
+  onStart,
+  onAcknowledge,
+  nation,
+}: {
+  onStart: () => void
+  onAcknowledge: () => void
+  nation: Nation | null
+}) {
+  const todayKey = getTodayKey()
+  const todayEvent = ON_THIS_DAY[todayKey] ?? null
+
+  // Format "MM-DD" → "7 May" for the card header
+  const todayDisplay = (() => {
+    const [mm, dd] = todayKey.split('-').map(Number)
+    const months = [
+      'January', 'February', 'March', 'April', 'May', 'June',
+      'July', 'August', 'September', 'October', 'November', 'December',
+    ]
+    return `${dd} ${months[mm - 1]}`
+  })()
+
   return (
     <div
       style={{
@@ -264,8 +286,87 @@ function WelcomeScreen({ onStart, nation }: { onStart: () => void; nation: Natio
         A tool to help meeting hosts give a meaningful, informed Acknowledgement of Country — backed by verified, sourced facts about the Traditional Custodians of the land you're on.
       </p>
 
-      {nation && (
+      {/* ── On This Day card ── */}
+      {todayEvent && (
         <div
+          style={{
+            marginTop: '1.75rem',
+            padding: '1rem 1.2rem',
+            background: C.card,
+            border: `1px solid ${C.border}`,
+            borderLeft: `4px solid ${C.ochre}`,
+            borderRadius: 10,
+            maxWidth: 380,
+            width: '100%',
+            textAlign: 'left',
+          }}
+        >
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              marginBottom: '0.5rem',
+              flexWrap: 'wrap',
+              gap: '0.35rem',
+            }}
+          >
+            <p
+              style={{
+                margin: 0,
+                fontSize: '0.72rem',
+                color: C.ochre,
+                textTransform: 'uppercase',
+                letterSpacing: '0.1em',
+                fontWeight: 700,
+              }}
+            >
+              On This Day — {todayDisplay}
+            </p>
+            <span
+              style={{
+                fontSize: '0.65rem',
+                fontWeight: 700,
+                color: C.muted,
+                background: C.border,
+                padding: '1px 7px',
+                borderRadius: 4,
+                letterSpacing: '0.04em',
+              }}
+            >
+              {todayEvent.year}
+            </span>
+          </div>
+          <p style={{ margin: '0 0 0.4rem', color: C.text, fontWeight: 600, fontSize: '0.9rem' }}>
+            {todayEvent.title}
+          </p>
+          <p style={{ margin: '0 0 0.55rem', color: C.muted, fontSize: '0.82rem', lineHeight: 1.65 }}>
+            {todayEvent.description}
+          </p>
+          <a
+            href={todayEvent.sourceUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              color: C.sky,
+              fontSize: '0.75rem',
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: 3,
+            }}
+          >
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3" />
+            </svg>
+            {todayEvent.source}
+          </a>
+        </div>
+      )}
+
+      {/* ── Last location card (clickable → acknowledge screen) ── */}
+      {nation && (
+        <button
+          onClick={onAcknowledge}
           style={{
             marginTop: '1.5rem',
             padding: '0.9rem 1.2rem',
@@ -274,18 +375,54 @@ function WelcomeScreen({ onStart, nation }: { onStart: () => void; nation: Natio
             borderRadius: 10,
             maxWidth: 380,
             width: '100%',
+            textAlign: 'left',
+            cursor: 'pointer',
+            transition: 'border-color 0.15s, background 0.15s',
+          }}
+          onMouseEnter={(e) => {
+            ;(e.currentTarget as HTMLButtonElement).style.borderColor = C.borderLight
+            ;(e.currentTarget as HTMLButtonElement).style.background = C.cardHover
+          }}
+          onMouseLeave={(e) => {
+            ;(e.currentTarget as HTMLButtonElement).style.borderColor = C.border
+            ;(e.currentTarget as HTMLButtonElement).style.background = C.card
           }}
         >
-          <p style={{ margin: 0, fontSize: '0.8rem', color: C.muted, textTransform: 'uppercase', letterSpacing: '0.08em' }}>Last location</p>
+          <p style={{ margin: 0, fontSize: '0.8rem', color: C.muted, textTransform: 'uppercase', letterSpacing: '0.08em' }}>
+            Last location
+          </p>
           <p style={{ margin: '0.3rem 0 0', color: C.ochre, fontWeight: 600 }}>{nation.name} Country</p>
           <p style={{ margin: '0.2rem 0 0', fontSize: '0.82rem', color: C.muted }}>{nation.region}</p>
-        </div>
+          <p
+            style={{
+              margin: '0.5rem 0 0',
+              fontSize: '0.75rem',
+              color: C.muted,
+              display: 'flex',
+              alignItems: 'center',
+              gap: 4,
+            }}
+          >
+            <svg
+              width="11"
+              height="11"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              viewBox="0 0 24 24"
+              style={{ flexShrink: 0 }}
+            >
+              <path d="M5 12h14M12 5l7 7-7 7" />
+            </svg>
+            View acknowledgement
+          </p>
+        </button>
       )}
 
       <button
         onClick={onStart}
         style={{
-          marginTop: '2rem',
+          marginTop: '1.25rem',
           padding: '0.9rem 2.5rem',
           background: C.ochre,
           color: '#1a0c04',
@@ -1551,7 +1688,11 @@ export default function App() {
       )}
       <div style={{ maxWidth: 700, margin: '0 auto' }}>
         {screen === 'welcome' && (
-          <WelcomeScreen onStart={() => setScreen('location')} nation={nation} />
+          <WelcomeScreen
+            onStart={() => setScreen('location')}
+            onAcknowledge={() => setScreen('acknowledge')}
+            nation={nation}
+          />
         )}
         {screen === 'location' && <LocationScreen onNationFound={handleNationFound} />}
         {screen === 'acknowledge' && nation && (
