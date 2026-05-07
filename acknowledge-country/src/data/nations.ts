@@ -401,6 +401,25 @@ export const NATIONS: Nation[] = [
       comprehensive:
         'I begin by acknowledging the Whadjuk Noongar people as the Traditional Custodians of the land we call Perth — Boorloo in the Noongar language. The Whadjuk are one of 14 groups of the broader Noongar Nation, whose peoples have occupied the south-west of Western Australia for at least 45,000 to 50,000 years. The Derbarl Yerrigan (Swan River) and its tributaries are not merely waterways but living parts of Noongar law and spirituality, shaped by the Wagyl — the ancestral serpent being. The Noongar people observe a unique six-season calendar that reflects deep ecological knowledge of this landscape. Despite the profound impacts of colonisation — including the dispossession of Whadjuk warrior Yagan whose head was taken to England — the Noongar people have maintained their culture and recently won recognition of their native title rights through the landmark South West Native Title Settlement of 2015. I extend my deepest respects to Whadjuk Noongar Elders past, present and emerging.',
     },
+    commonWords: [
+      { word: 'Kaya', pronunciation: 'KAH-yah', meaning: 'Hello / yes', notes: 'The most widely known Noongar word; also means "yes"' },
+      { word: 'Boodja', pronunciation: 'BOOD-jah', meaning: 'Country / land — central to Noongar identity and connection' },
+      { word: 'Moort', pronunciation: 'MOORT', meaning: 'Family / kin' },
+      { word: 'Kaartdijin', pronunciation: 'KART-di-jin', meaning: 'Knowledge' },
+      { word: 'Bilya', pronunciation: 'BIL-yah', meaning: 'River — the Swan River is Djarlgarra Bilya' },
+      { word: 'Yorga', pronunciation: 'YOR-gah', meaning: 'Woman' },
+    ],
+    nativeTitle: {
+      status: 'consent_determined',
+      determinationDate: '2021',
+      body: 'South West Aboriginal Land and Sea Council (SWALSC) / Six Noongar Regional Corporations',
+      bodyUrl: 'https://www.noongar.org.au',
+      areaDescription: 'The entire South West of Western Australia — approximately 200,000 km² — the largest native title settlement in Australian history',
+      wasContested: true,
+      notes: 'The South West Native Title Settlement (2014–2021) is the most significant native title agreement in Australian history. Under six Regional Settlement Agreements, the Noongar people received: $1.3 billion in funding over 12 years; 320,000 hectares of land transferred; recognition of Noongar cultural authority across the South West; and the establishment of six Regional Corporations. It was the first state-wide settlement of its kind in Australia. While not a formal "native title determination," it provides stronger and broader rights than native title alone would deliver. The settlement was achieved after decades of advocacy, legal battles and negotiation.',
+      source: 'South West Aboriginal Land and Sea Council',
+      sourceUrl: 'https://www.noongar.org.au',
+    },
   },
 
   // ── 6. ARRERNTE ───────────────────────────────────────────────────────────
@@ -468,6 +487,23 @@ export const NATIONS: Nation[] = [
       comprehensive:
         'I begin by acknowledging the Arrernte people as the Traditional Custodians of Mparntwe — the place of the watering holes that we call Alice Springs. The Arrernte have occupied this Central Australian desert for at least 30,000 years, developing unparalleled ecological knowledge of an arid landscape that sustains extraordinary cultural life. Their Altyerre (Dreaming) ancestors — caterpillars, wild dogs, and many others — shaped the MacDonnell Ranges and the rivers that flow through them. The Arrernte speak one of Australia\'s more resilient Aboriginal languages, with thousands of speakers across multiple dialects. Among their most celebrated members is artist Albert Namatjira (1902–1959), whose watercolour landscapes revealed the beauty of Central Australia to the world. I extend my deepest respects to Arrernte Elders past, present and emerging, and acknowledge the ongoing custodianship of this remarkable country.',
     },
+    commonWords: [
+      { word: 'Werte', pronunciation: 'WER-deh', meaning: 'Hello / how are you' },
+      { word: 'Mparntwe', pronunciation: 'um-BARN-tweh', meaning: 'Alice Springs — the Arrernte name for the town, meaning "the place of the caterpillar Dreaming"' },
+      { word: 'Altyerre', pronunciation: 'al-CHEER-reh', meaning: 'The Dreaming — the sacred law, creation stories and ongoing spiritual framework of Arrernte life' },
+      { word: 'Kwatye', pronunciation: 'KWAH-cheh', meaning: 'Water — essential to life in the desert' },
+      { word: 'Ampe', pronunciation: 'AHM-peh', meaning: 'Child' },
+      { word: 'Arnga', pronunciation: 'ARN-gah', meaning: 'Fire' },
+    ],
+    nativeTitle: {
+      status: 'partial',
+      body: 'Central Land Council',
+      bodyUrl: 'https://www.clc.org.au',
+      areaDescription: 'Substantial areas around Alice Springs and across Central Australia under the Aboriginal Land Rights Act (NT) 1976 and native title determinations',
+      notes: 'Arrernte people hold significant land through two complementary frameworks. Under the Aboriginal Land Rights (Northern Territory) Act 1976, large areas of Arrernte traditional country are held as inalienable Aboriginal freehold — including areas around Mparntwe (Alice Springs). The Central Land Council represents Arrernte interests across Central Australia. Multiple native title determinations have been made across Arrernte country. The Arrernte are the traditional owners of Alice Springs town itself — an unusual situation where an Aboriginal nation has formal legal recognition over the land beneath a major town.',
+      source: 'Central Land Council',
+      sourceUrl: 'https://www.clc.org.au',
+    },
   },
 
   // ── 7. LARRAKIA ───────────────────────────────────────────────────────────
@@ -529,6 +565,24 @@ export const NATIONS: Nation[] = [
         'I would like to acknowledge the Larrakia people as the Traditional Custodians of the land and sea country we call Darwin — Garramilla in the Larrakia language. The Larrakia are the Saltwater People, whose profound connection to the coastal and marine environment of the Darwin Harbour region extends back at least 40,000 years. I pay my deepest respects to Larrakia Elders past, present and emerging.',
       comprehensive:
         'I begin by acknowledging the Larrakia people as the Traditional Custodians of Garramilla — Darwin and its harbour country. The Larrakia are the Saltwater People, whose spiritual, cultural and practical connection to the sea, tidal zones and coastal land of the Top End has endured for at least 40,000 years. Their Dreaming stories trace creation across the land and sea, connecting them to this place with a depth of intimacy that no colonial settlement can sever. Despite the disruptions of colonisation, the impact of the WWII bombing of Darwin, and the more recent Northern Territory Intervention, the Larrakia have maintained their culture and continue to speak for Country through the Larrakia Nation Aboriginal Corporation. I extend my deepest respects to Larrakia Elders past, present and emerging, and to all Aboriginal and Torres Strait Islander peoples present today.',
+    },
+    commonWords: [
+      { word: 'Gulumoerrgin', pronunciation: 'goo-loo-MOH-er-gin', meaning: 'Hello / greetings — the traditional Larrakia greeting' },
+      { word: 'Muluwurri', pronunciation: 'moo-loo-WUR-ee', meaning: 'Good / beautiful' },
+      { word: 'Kardu', pronunciation: 'KAR-doo', meaning: 'Person / people' },
+      { word: 'Warramba', pronunciation: 'wah-RAM-bah', meaning: 'Country / land' },
+      { word: 'Garramilla', pronunciation: 'gah-rah-MIL-ah', meaning: 'Darwin — the Larrakia name for the Darwin area' },
+    ],
+    nativeTitle: {
+      status: 'determined',
+      determinationDate: '2003',
+      body: 'Larrakia Nation Aboriginal Corporation',
+      bodyUrl: 'https://www.larrakia.com',
+      areaDescription: 'Areas around Darwin including the Cox Peninsula and surrounding sea country',
+      wasContested: true,
+      notes: 'The Larrakia native title determination came after one of the longest-running land rights battles in Australian history. The Kenbi (Cox Peninsula) land claim was lodged in 1979 and took 32 years to resolve — finally determined in 2012 when the Cox Peninsula was returned to the Larrakia people. The native title determination over Darwin (2003) was a landmark recognition of Aboriginal connection to a capital city. The Larrakia Nation Aboriginal Corporation represents Larrakia interests and is a significant presence in Darwin, providing cultural, heritage and community services. The Larrakia language is critically endangered, with very few fluent speakers remaining.',
+      source: 'Larrakia Nation Aboriginal Corporation',
+      sourceUrl: 'https://www.larrakia.com',
     },
   },
 
@@ -599,6 +653,23 @@ export const NATIONS: Nation[] = [
       comprehensive:
         'I begin by acknowledging the palawa — the Aboriginal peoples of lutruwita — as the Traditional Custodians of this island. The palawa arrived in Tasmania at least 35,000 years ago, and when the land bridge to the mainland was submerged 10,000 years ago, they became one of the most isolated human populations on Earth — developing a remarkable and distinct culture adapted to environments ranging from the northern grasslands to the subarctic southwest. The Black War of the 1820s and the colonial removal of survivors to Bass Strait islands nearly destroyed the palawa community. Yet palawa culture, identity and sovereignty have endured. The palawa kani language is being actively revitalized through the Tasmanian Aboriginal Centre. I extend my deepest respects to palawa Elders past, present and emerging, and acknowledge that we stand on Aboriginal land, always was and always will be.',
     },
+    commonWords: [
+      { word: 'Palawa', pronunciation: 'PAH-lah-wah', meaning: 'Aboriginal Tasmanian person' },
+      { word: 'Kani', pronunciation: 'KAH-nee', meaning: 'Talk / language — as in palawa kani, the revived Tasmanian language' },
+      { word: 'Lutrawita', pronunciation: 'loo-trah-WEE-tah', meaning: 'Tasmania — the palawa name for the island' },
+      { word: 'Nayri', pronunciation: 'NAY-ree', meaning: 'Sky' },
+      { word: 'Prana', pronunciation: 'PRAH-nah', meaning: 'Water' },
+      { word: 'Tali', pronunciation: 'TAH-lee', meaning: 'Fire' },
+    ],
+    nativeTitle: {
+      status: 'under_freehold',
+      body: 'Aboriginal Land Council of Tasmania (ALCT)',
+      bodyUrl: 'https://www.aboriginalland.org.au',
+      areaDescription: 'Significant areas of Tasmania returned under the Aboriginal Land Act 1995 (Tas), including Wybalenna on Flinders Island, Kutalayna (Jordan River area), and parts of the Tasmanian Wilderness World Heritage Area',
+      notes: 'Tasmania operates under a different framework to mainland Australia. The Aboriginal Land Act 1995 (Tas) — rather than native title — returned land to the Aboriginal community. The Aboriginal Land Council of Tasmania manages this land on behalf of the Tasmanian Aboriginal community. Additional land has been returned since then, including significant cultural sites. The palawa people have faced a unique historical trauma: British colonisation in Tasmania was so violent that by 1876 it was claimed (inaccurately) that the last "full-blooded" Tasmanian Aboriginal person had died. In reality, Aboriginal Tasmanians survived through communities on the Bass Strait islands, and their descendants have maintained cultural connection and fought for recognition for over 150 years. The palawa kani language, reconstructed from 19th century records, is now taught in schools and used in community life.',
+      source: 'Aboriginal Land Council of Tasmania',
+      sourceUrl: 'https://www.aboriginalland.org.au',
+    },
   },
 
   // ── 9. YOLŊU ─────────────────────────────────────────────────────────────
@@ -665,6 +736,23 @@ export const NATIONS: Nation[] = [
       comprehensive:
         'I begin by acknowledging the Yolŋu people as the Traditional Custodians of this land and sea country in northeast Arnhem Land. The Yolŋu have lived on and cared for this country for over 60,000 years, maintaining one of the most intact living Aboriginal cultures in Australia. Their Yolŋu Matha languages — spoken as first languages in daily life — are extraordinary repositories of ecological, spiritual and legal knowledge. In 1963, Yolŋu leaders sent the landmark Bark Petitions to Parliament, asserting their sovereign rights to Country in one of the most significant acts of Aboriginal resistance in Australian history. The Yolŋu concept of Makarrata — coming together and making things right — now forms the basis of the call for an Australian treaty. I extend my deepest respects to Yolŋu Elders past, present and emerging.',
     },
+    commonWords: [
+      { word: 'Nhe nhäma yä?', pronunciation: 'nyeh NYAH-mah YAH', meaning: 'Where are you from? — a common Yolŋu greeting that emphasises connection to place over personal name' },
+      { word: 'Bäpurru', pronunciation: 'BAH-puh-roo', meaning: 'Clan / sacred group — the foundational social and spiritual unit of Yolŋu society' },
+      { word: 'Miny\'tji', pronunciation: 'MIN-chee', meaning: 'Design / sacred pattern — each clan\'s unique ceremonial designs encode law, land and identity' },
+      { word: 'Djalkiri', pronunciation: 'JAL-kee-ree', meaning: 'Foundation / footprint — the ancestral connection to country' },
+      { word: 'Gurtha', pronunciation: 'GUR-tah', meaning: 'Fire' },
+      { word: 'Guku', pronunciation: 'GOO-koo', meaning: 'Honey — an important food and trade item' },
+    ],
+    nativeTitle: {
+      status: 'under_freehold',
+      body: 'Northern Land Council',
+      bodyUrl: 'https://www.nlc.org.au',
+      areaDescription: 'Arnhem Land — approximately 97,000 km² of land held as inalienable Aboriginal freehold under the Aboriginal Land Rights (Northern Territory) Act 1976',
+      notes: 'Yolŋu people of Arnhem Land were among the first to achieve formal legal recognition of their land rights in Australia. The Gove land rights case (1971) — while ultimately unsuccessful in court — galvanised the national land rights movement and directly led to the Aboriginal Land Rights (Northern Territory) Act 1976. Arnhem Land is now held as inalienable Aboriginal freehold — land that cannot be bought, sold or compulsorily acquired. The Yolŋu were also responsible for the landmark Yirrkala Bark Petitions (1963), the first Indigenous documents recognised by the Australian Parliament. The Northern Land Council represents Yolŋu and other NT peoples in land matters. Yolŋu Matha (the language) is one of the strongest Indigenous languages in Australia, with thousands of speakers and active intergenerational transmission.',
+      source: 'Northern Land Council',
+      sourceUrl: 'https://www.nlc.org.au',
+    },
   },
 
   // ── 10. NGUNNAWAL ─────────────────────────────────────────────────────────
@@ -725,6 +813,19 @@ export const NATIONS: Nation[] = [
       comprehensive:
         'I begin by acknowledging the Ngunnawal people as the Traditional Custodians of this land — the place we call Canberra, known in Ngunnawal as Kambera, "the meeting place." It is deeply fitting that Australia\'s national capital occupies land that Aboriginal people have gathered on for at least 25,000 years, as evidenced by the Birrigai rock shelter nearby. The Ngunnawal people are master fire managers and ecological stewards of the grassy woodlands and wetlands of the ACT. On Ngunnawal country, on 26 January 1972, Aboriginal activists established the Aboriginal Tent Embassy outside Old Parliament House — one of the world\'s longest-running political protests for Indigenous land rights and recognition. I extend my deepest respects to Ngunnawal Elders past, present and emerging.',
     },
+    commonWords: [
+      { word: 'Ngambri', pronunciation: 'NGAM-bree', meaning: 'One of the Ngunnawal names for the Canberra area — the origin of the name "Canberra"' },
+      { word: 'Ngunawal', pronunciation: 'NGOO-nah-wahl', meaning: 'The people — alternate spelling of the nation\'s name' },
+      { word: 'Umba', pronunciation: 'UM-bah', meaning: 'Water' },
+      { word: 'Marning', pronunciation: 'MAR-ning', meaning: 'Yes' },
+    ],
+    nativeTitle: {
+      status: 'pending',
+      body: 'Ngunnawal Native Title Claimants / ACT Government partnership',
+      notes: 'The ACT is a unique jurisdiction for native title. The Ngunnawal and Ngambri peoples have been working with the ACT Government toward formal recognition. In 2023, the ACT Government and Ngunnawal/Ngambri representatives signed a Recognition and Settlement Agreement — a landmark step toward formal recognition. The ACT Government formally recognises the Ngunnawal and Ngambri peoples as Traditional Custodians of the ACT. Parliament House in Canberra sits on Ngunnawal country, and since 2010 the Parliament has begun proceedings with a formal Acknowledgement of Country. The Ngunnawal language is endangered, with community-led revitalization work ongoing.',
+      source: 'ACT Government — Aboriginal and Torres Strait Islander Affairs',
+      sourceUrl: 'https://www.act.gov.au/atsia',
+    },
   },
 
   // ── 11. WIRADJURI ─────────────────────────────────────────────────────────
@@ -784,6 +885,22 @@ export const NATIONS: Nation[] = [
       comprehensive:
         'I begin by acknowledging the Wiradjuri people as the Traditional Custodians of this vast country of the three rivers — the Wambool (Macquarie), Kalari (Lachlan), and Murrumbidgee — that give the Wiradjuri their name and their life. The Wiradjuri are one of Australia\'s largest Aboriginal nations, with traditional country covering approximately 97,000 km² of central-western NSW. Wiradjuri people fiercely resisted colonial expansion during the Bathurst Wars of the 1820s, when frontier violence and martial law were imposed on their country. Among the most celebrated Wiradjuri people today are Olympic champion Cathy Freeman, whose gold-medal victory at the 2000 Sydney Olympics carrying the Aboriginal flag was a defining moment for the nation, and author Stan Grant, whose powerful writings on identity and race have contributed to the national conversation. I extend my deepest respects to Wiradjuri Elders past, present and emerging.',
     },
+    commonWords: [
+      { word: 'Yindyamarra', pronunciation: 'yin-DYAH-mah-rah', meaning: 'Go slowly and gently / do things with respect — a core Wiradjuri value encompassing respect, honour and care', notes: 'One of the most significant Wiradjuri concepts, taught in schools across Wiradjuri country' },
+      { word: 'Yaama', pronunciation: 'YAH-mah', meaning: 'Hello / how are you' },
+      { word: 'Bila', pronunciation: 'BIL-ah', meaning: 'River — the three rivers (Lachlan, Macquarie, Murrumbidgee) are central to Wiradjuri identity' },
+      { word: 'Ngurang', pronunciation: 'NGOO-rang', meaning: 'Camp / home / place' },
+      { word: 'Wiradjuri', pronunciation: 'wih-RAD-joo-ree', meaning: 'People of the three rivers' },
+    ],
+    nativeTitle: {
+      status: 'partial',
+      body: 'Wiradjuri Council of Elders / NTSCORP',
+      bodyUrl: 'https://www.ntscorp.com.au',
+      areaDescription: 'The largest language/nation group in NSW, covering approximately 97,000 km² of central and western NSW',
+      notes: 'Native title across Wiradjuri country has been a complex, ongoing process. The Winburndale native title consent determination (2007) was among the first in Wiradjuri country. Multiple claims and determinations exist across the vast Wiradjuri territory, with outcomes varying by area. Large parts remain under pastoral lease (which can be consistent with native title) while urban areas are largely extinguished. The Wiradjuri are one of the largest nations in Australia, and Yindyamarra — the concept of going slowly and doing things with respect — has become widely adopted as a framework for reconciliation and education across NSW.',
+      source: 'NTSCORP — NSW and ACT Native Title',
+      sourceUrl: 'https://www.ntscorp.com.au',
+    },
   },
 
   // ── 12. GAMILAROI ─────────────────────────────────────────────────────────
@@ -838,6 +955,22 @@ export const NATIONS: Nation[] = [
       comprehensive:
         'I begin by acknowledging the Gamilaroi (also Kamilaroi or Gomeroi) people as the Traditional Custodians of this country — one of Australia\'s largest Aboriginal nations, whose territory covers the rich plains and tablelands of northern NSW. Among the most remarkable achievements of the Gamilaroi and their neighbours are the Brewarrina Fish Traps (Baiame\'s Ngunnhu) — a vast stone aquaculture system on the Barwon River, considered among the oldest human constructions on Earth. The Myall Creek Massacre of 1838, in which 28 Gamilaroi people were killed, and the subsequent prosecution of seven perpetrators, is a significant and painful moment in the history of Aboriginal and colonial relations. Today, the Gamilaraay language is being revitalized through community programs and university research. I extend my deepest respects to Gamilaroi Elders past, present and emerging.',
     },
+    commonWords: [
+      { word: 'Yaama', pronunciation: 'YAH-mah', meaning: 'Hello' },
+      { word: 'Yuwi', pronunciation: 'YOO-wee', meaning: 'Yes' },
+      { word: 'Wiray', pronunciation: 'WIR-ay', meaning: 'No' },
+      { word: 'Ngaya', pronunciation: 'NGAH-yah', meaning: 'I / me' },
+      { word: 'Ngurambang', pronunciation: 'ngoo-RAM-bang', meaning: 'Country / the land' },
+      { word: 'Yiraay', pronunciation: 'yih-RAH-ee', meaning: 'Language / word' },
+    ],
+    nativeTitle: {
+      status: 'partial',
+      body: 'NTSCORP (NSW and ACT Representative Body)',
+      bodyUrl: 'https://www.ntscorp.com.au',
+      notes: 'Various native title claims and some determinations exist across the vast Gamilaroi/Gomeroi territory. The Gamilaraay language is experiencing significant revitalization, with the Yuwaalaraay and Gamilaraay language programs being among the most active in NSW. The Myall Creek Memorial, on Gamilaroi country, is Australia\'s only memorial to a frontier massacre, and the annual ceremony draws people together for truth-telling and reconciliation.',
+      source: 'NTSCORP',
+      sourceUrl: 'https://www.ntscorp.com.au',
+    },
   },
 
   // ── 13. GUNDITJMARA ───────────────────────────────────────────────────────
@@ -889,6 +1022,23 @@ export const NATIONS: Nation[] = [
         'I would like to acknowledge the Gunditjmara people as the Traditional Custodians of this land in south-west Victoria. The Gunditjmara are the engineers of Budj Bim — a UNESCO World Heritage aquaculture system over 6,600 years old. Their connection to this volcanic country is profound and ancient. I pay my respects to Gunditjmara Elders past, present and emerging.',
       comprehensive:
         'I begin by acknowledging the Gunditjmara people as the Traditional Custodians of this volcanic country in south-west Victoria. The Gunditjmara built and maintained the Budj Bim Cultural Landscape — a sophisticated aquaculture system of channels, weirs, and holding ponds for harvesting kooyang (short-finned eels) that is at least 6,600 years old, listed as a UNESCO World Heritage Site in 2019. Their oral traditions carry memories of the volcanic eruption of Mount Budj Bim dating back an estimated 34,000 years — potentially the world\'s oldest oral account of a geological event. The Gunditjmara built permanent stone houses and fiercely resisted colonial invasion in the Eumeralla Wars. I extend my deepest respects to Gunditjmara Elders past, present and emerging.',
+    },
+    commonWords: [
+      { word: 'Kooyang', pronunciation: 'KOO-yang', meaning: 'Eel — the basis of the ancient aquaculture system at Budj Bim' },
+      { word: 'Budj Bim', pronunciation: 'BUDGE bim', meaning: 'Mt Eccles / Lake Condah area — "high head" — a sacred volcano and site of the world\'s oldest aquaculture system' },
+      { word: 'Tae Rak', pronunciation: 'TAY rak', meaning: 'Lake Condah — the lake at the heart of the Budj Bim aquaculture system' },
+      { word: 'Wuurn', pronunciation: 'WURN', meaning: 'Eel trap — stone channels used to manage eel populations' },
+    ],
+    nativeTitle: {
+      status: 'consent_determined',
+      determinationDate: '2007',
+      body: 'Gunditj Mirring Traditional Owners Aboriginal Corporation',
+      bodyUrl: 'https://www.gunditjmirring.com',
+      areaDescription: 'Gunditjmara traditional country in south-western Victoria, including the Budj Bim landscape around Lake Condah and Mt Eccles',
+      wasContested: false,
+      notes: 'In 2007, the Gunditjmara People received Australia\'s first native title consent determination in Victoria — a landmark moment for Victorian Traditional Owners. The determination recognised the Gunditjmara people\'s continuing connection to their country. The Gunditjmara are also known globally for the Budj Bim Cultural Landscape — a sophisticated 6,600-year-old aquaculture system using volcanic stone to channel and trap eels — inscribed as a UNESCO World Heritage Site in 2019. This ancient engineering feat, predating the Egyptian pyramids, was one of the first sites inscribed solely for its Aboriginal cultural values. The Gunditj Mirring Traditional Owners Aboriginal Corporation manages both the native title determination and the World Heritage Site co-management.',
+      source: 'Gunditj Mirring Traditional Owners Aboriginal Corporation',
+      sourceUrl: 'https://www.gunditjmirring.com',
     },
   },
 
@@ -952,6 +1102,25 @@ export const NATIONS: Nation[] = [
       comprehensive:
         'I begin by acknowledging the Anangu people as the Traditional Custodians of this country — the Western Desert lands and the Uluru-Kata Tjuta region, governed for thousands of years by their Tjukurpa: the law, spirituality, and wisdom of their creation ancestors. Uluru — the great sandstone monolith — is not merely iconic; it is a living sacred landscape inscribed with ancestral stories that the Anangu have kept alive for at least 30,000 years. The Anangu fought for and won inalienable freehold title over 102,650 km² of APY Lands in 1981 and received the handback of Uluru-Kata Tjuta National Park in 1985. In 2019, after decades of respectful request, the Anangu celebrated the permanent closure of the Uluru climb. Pitjantjatjara and Yankunytjatjara remain thriving first languages. I extend my deepest respects to Anangu Elders past, present and emerging.',
     },
+    commonWords: [
+      { word: 'Wai', pronunciation: 'WYE', meaning: 'Hello / welcome' },
+      { word: 'Tjukurpa', pronunciation: 'CHOOK-oor-pah', meaning: 'The Law / the Dreaming — the foundational sacred knowledge system that governs Anangu life, land and relationships', notes: 'Tjukurpa is not merely "mythology" — it is living law that governs how Anangu relate to the land and each other' },
+      { word: 'Walytja', pronunciation: 'wah-LITCH-ah', meaning: 'Family / kin' },
+      { word: 'Ngura', pronunciation: 'NGOO-rah', meaning: 'Camp / country / home' },
+      { word: 'Kali', pronunciation: 'KAH-lee', meaning: 'Boomerang' },
+      { word: 'Mala', pronunciation: 'MAH-lah', meaning: 'Rufous hare-wallaby — a key ancestor in Uluru\'s Tjukurpa' },
+    ],
+    nativeTitle: {
+      status: 'under_freehold',
+      determinationDate: '1985',
+      body: 'Anangu Pitjantjatjara Yankunytjatjara (APY) Land Council',
+      bodyUrl: 'https://www.apy.org.au',
+      areaDescription: 'Uluru-Kata Tjuta National Park (1,326 km²) returned to Anangu under inalienable freehold; leased back to Parks Australia for joint management',
+      wasContested: true,
+      notes: 'The return of Uluru to the Anangu people in 1985 was a landmark moment in Australian history — Prime Minister Bob Hawke handed back the title deed in a ceremony at Uluru. The land is held as inalienable freehold title — a stronger right than native title. It is leased back to Parks Australia under a 99-year joint management agreement, with Anangu as the majority on the Board of Management. The Anangu had long requested visitors not climb Uluru due to its sacred significance, and the climb was permanently closed in October 2019 after the Board of Management voted to close it. The APY Lands (Anangu Pitjantjatjara Yankunytjatjara) to the west of Uluru are also held under inalienable freehold under the Pitjantjatjara Land Rights Act 1981 — among the first land rights legislation in Australia.',
+      source: 'Parks Australia — Uluru-Kata Tjuta National Park',
+      sourceUrl: 'https://parksaustralia.gov.au/uluru/',
+    },
   },
 
   // ── 15. BUNDJALUNG ────────────────────────────────────────────────────────
@@ -1004,6 +1173,20 @@ export const NATIONS: Nation[] = [
       comprehensive:
         'I begin by acknowledging the Bundjalung people — a confederation of clans — as the Traditional Custodians of the country we gather on, encompassing the subtropical coastal, river and rainforest landscapes of northern NSW and south-east QLD. The Bundjalung have occupied this rich country for at least 12,000 years, sustaining diverse and vibrant cultures along the rivers, coast and hinterland. Byron Bay (Cavanbah) is a place of gathering for Bundjalung clans, now managed cooperatively through Arakwal National Park. I extend my deepest respects to Bundjalung Elders past, present and emerging.',
     },
+    commonWords: [
+      { word: 'Gidaa', pronunciation: 'gih-DAH', meaning: 'Hello' },
+      { word: 'Jali', pronunciation: 'JAH-lee', meaning: 'One of the Bundjalung dialects — name also used for the people of the Richmond River area' },
+      { word: 'Biyaami', pronunciation: 'bee-YAH-mee', meaning: 'The creator spirit / sky being of the Bundjalung people' },
+      { word: 'Ngulingah', pronunciation: 'ngoo-LING-ah', meaning: 'Country / our country' },
+    ],
+    nativeTitle: {
+      status: 'partial',
+      body: 'NTSCORP / Queensland South Native Title Services',
+      bodyUrl: 'https://www.ntscorp.com.au',
+      notes: 'Multiple native title claims and some determinations exist across the extensive Bundjalung territory in northern NSW and south-east Queensland. The Byron Shire area (Cavanbah) is recognised as Bundjalung country. Bundjalung Elders have been significant voices in the campaign to protect the McPherson Ranges and coastal Country. The Bundjalung language has several dialects and active revitalization programs.',
+      source: 'NTSCORP',
+      sourceUrl: 'https://www.ntscorp.com.au',
+    },
   },
 
   // ── 16. DHARAWAL ─────────────────────────────────────────────────────────
@@ -1048,6 +1231,20 @@ export const NATIONS: Nation[] = [
         'I would like to acknowledge the Dharawal people as the Traditional Custodians of this coastal and escarpment country. The Dharawal are the Saltwater People, whose deep connection to the coast between Botany Bay and the Shoalhaven stretches back tens of thousands of years. I pay my respects to Dharawal Elders past, present and emerging.',
       comprehensive:
         'I begin by acknowledging the Dharawal people — the Saltwater People — as the Traditional Custodians of this coast and escarpment country. The Dharawal have cared for the land between Botany Bay and the Shoalhaven for tens of thousands of years, developing deep knowledge of the coastal marine environment, including an extraordinary relationship with dolphins in traditional fishing practices. Royal National Park — one of the world\'s oldest national parks — sits on Dharawal country and contains significant rock art sites. I extend my deepest respects to Dharawal Elders past, present and emerging.',
+    },
+    commonWords: [
+      { word: 'Nura', pronunciation: 'NOO-rah', meaning: 'Country / the land we belong to' },
+      { word: 'Dharawal', pronunciation: 'DHAR-ah-wahl', meaning: 'The people of the coast south of Sydney — also the name of their language' },
+      { word: 'Wodi Wodi', pronunciation: 'WOH-dee WOH-dee', meaning: 'A Dharawal clan name for the Wollongong area' },
+      { word: 'Wollongong', pronunciation: 'WOLL-on-gong', meaning: 'Derived from a Dharawal word — various translations including "hard ground near water" or "sound of the sea"' },
+    ],
+    nativeTitle: {
+      status: 'partial',
+      body: 'Dharawal Aboriginal Corporation / NTSCORP',
+      bodyUrl: 'https://www.ntscorp.com.au',
+      notes: 'Native title across Dharawal country is partially extinguished in urban areas (Wollongong, southern Sydney suburbs) but native title determinations exist in less-developed parts of Dharawal country, including areas in the Illawarra and Royal National Park region. Dharawal people have been active in campaigns to protect sacred sites in the Royal National Park and Woronora region.',
+      source: 'NTSCORP',
+      sourceUrl: 'https://www.ntscorp.com.au',
     },
   },
 
@@ -1094,6 +1291,19 @@ export const NATIONS: Nation[] = [
       comprehensive:
         'I begin by acknowledging the Yorta Yorta people as the Traditional Custodians of the river country at the junction of the Murray and Goulburn rivers. The Barmah-Millewa Forest — the world\'s largest river red gum forest — is the ecological and cultural heart of Yorta Yorta country. In 1939, Yorta Yorta people led Australia\'s first Aboriginal strike when residents walked off the Cummeragunja mission in protest at exploitation and abuse. I extend my deepest respects to Yorta Yorta Elders past, present and emerging.',
     },
+    commonWords: [
+      { word: 'Dhungala', pronunciation: 'DOON-gah-lah', meaning: 'The Murray River — the great river at the heart of Yorta Yorta country' },
+      { word: 'Moira', pronunciation: 'MOY-rah', meaning: 'A key area of Yorta Yorta country — the Barmah-Millewa Forest' },
+      { word: 'Yorta Yorta', pronunciation: 'YOR-tah YOR-tah', meaning: 'The people — name derived from the word for "flowing water"' },
+      { word: 'Ngurungaeta', pronunciation: 'ngoo-roon-GAY-tah', meaning: 'Leader / head man — the traditional leadership role' },
+    ],
+    nativeTitle: {
+      status: 'extinguished',
+      wasContested: true,
+      notes: 'The Yorta Yorta native title claim is one of the most significant and painful cases in Australian legal history. Their claim — lodged in 1994 — was rejected by Justice Olney of the Federal Court in 1998 in a ruling that found the "tide of history has washed away any real acknowledgement of [their] traditional laws and any real observance of their traditional customs." The decision was devastating and widely criticised. An appeal to the Full Federal Court and then the High Court (2002) upheld the original rejection. The case exposed fundamental injustices in the native title system: the Yorta Yorta were penalised for having their culture suppressed by the very colonisation the system was meant to address. Despite this, the Yorta Yorta Nation Aboriginal Corporation has continued to advocate for their rights, and the Victorian Government recognises them as Traditional Owners for heritage purposes under the Traditional Owner Settlement Act 2010. The Barmah-Millewa Forest (Moira), the world\'s largest river red gum forest, sits on their country and is co-managed with state agencies.',
+      source: 'Yorta Yorta Nation Aboriginal Corporation',
+      sourceUrl: 'https://www.yynac.com.au',
+    },
   },
 
   // ── 18. YUGAMBEH ──────────────────────────────────────────────────────────
@@ -1135,6 +1345,19 @@ export const NATIONS: Nation[] = [
       comprehensive:
         'I begin by acknowledging the Yugambeh people as the Traditional Custodians of Kombumerri — the Gold Coast. The Yugambeh have cared for these spectacular coastal landscapes, rainforest hinterlands, estuaries, and the Nerang River for tens of thousands of years. Before the development of the Gold Coast as a tourist destination, this country sustained rich and complex cultural life. I extend my deepest respects to Yugambeh Elders past, present and emerging.',
     },
+    commonWords: [
+      { word: 'Kombumerri', pronunciation: 'kom-boo-MER-ee', meaning: 'The salt water people — the name used by the clan of the Yugambeh who occupied the coastal Gold Coast area' },
+      { word: 'Bullum', pronunciation: 'BUL-um', meaning: 'Fire' },
+      { word: 'Kalum', pronunciation: 'KAH-lum', meaning: 'Water / the river' },
+      { word: 'Coomera', pronunciation: 'KOO-meh-rah', meaning: 'Derived from a Yugambeh word — the Coomera River, a major waterway of Yugambeh country' },
+    ],
+    nativeTitle: {
+      status: 'partial',
+      body: 'Yugambeh-Bundjalung Language Committee / Queensland South Native Title Services',
+      notes: 'Various native title claims exist across Yugambeh country (Gold Coast hinterland and coastal areas). The Gold Coast urban area presents complex extinguishment issues similar to other major cities. The Kombumerri people (coastal Yugambeh clan) have been recognised as Traditional Owners for significant coastal areas. The Yugambeh language is critically endangered, with active revitalization efforts led by the Yugambeh Museum Language and Heritage Research Centre in Beaudesert.',
+      source: 'Yugambeh Museum Language and Heritage Research Centre',
+      sourceUrl: 'https://www.yugambeh.com',
+    },
   },
 
   // ── 19. GUBBI GUBBI ───────────────────────────────────────────────────────
@@ -1175,6 +1398,20 @@ export const NATIONS: Nation[] = [
       comprehensive:
         'I begin by acknowledging the Gubbi Gubbi (also Kabi Kabi) people as the Traditional Custodians of the Sunshine Coast country — the coastal and hinterland landscapes that include Noosa National Park, the Noosa River (Cooran), and the Blackall Range. The Gubbi Gubbi have cared for these rich subtropical landscapes for tens of thousands of years. I extend my deepest respects to Gubbi Gubbi Elders past, present and emerging.',
     },
+    commonWords: [
+      { word: 'Gubbi Gubbi', pronunciation: 'GOO-bee GOO-bee', meaning: 'The people — the nation\'s self-name, also spelled Kabi Kabi' },
+      { word: 'Yumba', pronunciation: 'YUM-bah', meaning: 'Camp / home' },
+      { word: 'Jinibara', pronunciation: 'jin-ih-BAR-ah', meaning: 'A related neighbouring nation to the west of Gubbi Gubbi territory' },
+      { word: 'Maroochy', pronunciation: 'mah-ROO-chee', meaning: 'Derived from Gubbi Gubbi — the Maroochy River; approximately "black swan" in the language' },
+    ],
+    nativeTitle: {
+      status: 'pending',
+      body: 'Kabi Kabi People / Queensland South Native Title Services',
+      bodyUrl: 'https://www.qsnts.com.au',
+      notes: 'The Kabi Kabi (Gubbi Gubbi) people have a native title claim lodged and progressing through the Federal Court. The claim covers significant areas of the Sunshine Coast hinterland and coastal areas. The Sunshine Coast urban area presents significant extinguishment issues. The Kabi Kabi people are actively engaged in cultural heritage protection across the region, particularly around Noosa Biosphere Reserve and Jinibara country. Language revitalization programs are underway.',
+      source: 'Queensland South Native Title Services',
+      sourceUrl: 'https://www.qsnts.com.au',
+    },
   },
 
   // ── 20. BOONWURRUNG ───────────────────────────────────────────────────────
@@ -1214,6 +1451,20 @@ export const NATIONS: Nation[] = [
         'I would like to acknowledge the Boonwurrung people of the Kulin Nation as the Traditional Custodians of this coastal country on Port Phillip Bay\'s southern shores. The Boonwurrung have cared for the beaches, bay and hinterland of the Mornington Peninsula for tens of thousands of years. I pay my respects to Boonwurrung Elders past, present and emerging.',
       comprehensive:
         'I begin by acknowledging the Boonwurrung people of the Kulin Nation as the Traditional Custodians of this coastal and bay country. The Boonwurrung have cared for Port Phillip Bay\'s southern shores, Western Port Bay, the Mornington Peninsula, and the wilderness of Wilsons Promontory (Wamoon) for tens of thousands of years. The tragic story of Elder Derrimut — who helped the Melbourne settlers, only to be dispossessed of all his country — illuminates the profound injustice of colonisation. I extend my deepest respects to Boonwurrung Elders past, present and emerging.',
+    },
+    commonWords: [
+      { word: 'Wominjeka', pronunciation: 'woh-MIN-jeh-kah', meaning: 'Welcome / come in — shared with Wurundjeri as part of the Kulin Nation' },
+      { word: 'Nerm', pronunciation: 'NERM', meaning: 'Port Phillip Bay — "the sea" in Boonwurrung language (also Narrm)' },
+      { word: 'Bunjil', pronunciation: 'BUN-jil', meaning: 'The creator eagle — shared Kulin Nation creator spirit' },
+      { word: 'Boonwurrung', pronunciation: 'BOON-wur-ung', meaning: 'The people of the bay / coastal people' },
+    ],
+    nativeTitle: {
+      status: 'pending',
+      body: 'Bunurong Land Council Aboriginal Corporation',
+      bodyUrl: 'https://www.bunuronglc.org',
+      notes: 'The Boonwurrung (also known as Bunurong) people have a native title claim covering Port Phillip Bay and surrounding areas. Native title in the Melbourne metropolitan area is complex, with significant extinguishment in urban areas. The Bunurong Land Council Aboriginal Corporation is the formally registered Native Title Representative Body. The Boonwurrung are one of five nations of the Kulin Nation alliance, and their coastal country covers the Mornington Peninsula, Phillip Island, and the Bellarine Peninsula. They are recognised as Traditional Owners for heritage purposes under the Victorian Heritage Act.',
+      source: 'Bunurong Land Council Aboriginal Corporation',
+      sourceUrl: 'https://www.bunuronglc.org',
     },
   },
 ]
