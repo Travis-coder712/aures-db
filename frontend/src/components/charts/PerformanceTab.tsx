@@ -5,6 +5,7 @@ import {
 } from 'recharts'
 import type { Project, MonthlyPerformanceEntry } from '../../lib/types'
 import { useMonthlyPerformance } from '../../hooks/usePerformanceData'
+import WindValueAnalysis from './WindValueAnalysis'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type TooltipFormatter = (value: any, name: any) => [string, string]
@@ -104,6 +105,11 @@ export default function PerformanceTab({ project }: Props) {
       <p className="text-[9px] text-[var(--color-text-muted)] italic">
         Monthly data derived from AEMO dispatch records via OpenElectricity API. {years.length} years of operational history ({years[0]}–{years[years.length - 1]}).
       </p>
+
+      {/* Wind value analysis */}
+      {project.technology === 'wind' && (
+        <WindValueAnalysis projectId={project.id} capacityMw={project.capacity_mw} />
+      )}
     </div>
   )
 }

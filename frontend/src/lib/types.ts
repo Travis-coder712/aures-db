@@ -1341,3 +1341,116 @@ export interface EISCoverageData {
   coverage_gap: EISCoverageGapEntry[]
   last_updated: string
 }
+
+// ============================================================
+// Wind Value Analytics
+// ============================================================
+
+export interface WindMonthlyDataPoint {
+  year: number
+  month: number
+  cf_pct: number | null
+  capture_price: number | null
+  energy_mwh: number | null
+  revenue_aud: number | null
+  pool_price: number | null
+  value_factor: number | null
+}
+
+export interface WindAnnualDataPoint {
+  year: number
+  months: number
+  cf_pct: number
+  capture_price: number | null
+  energy_mwh: number
+  revenue_aud: number
+  revenue_per_mw: number | null
+}
+
+export interface WindSeasonalAvg {
+  months: number[]
+  avg_cf_pct: number | null
+  avg_capture_price: number | null
+  avg_value_factor: number | null
+  pct_of_annual_energy: number | null
+}
+
+export interface WindMonthlyAvg {
+  label: string
+  avg_cf_pct: number | null
+  avg_capture_price: number | null
+  avg_value_factor: number | null
+}
+
+export interface WindValueSummary {
+  avg_cf_pct: number | null
+  avg_capture_price: number | null
+  avg_value_factor: number | null
+  cf_trend: 'improving' | 'declining' | 'stable'
+  best_capture_month: number | null
+  worst_capture_month: number | null
+  best_cf_month: number | null
+  annual_cf_variability: number | null
+  latest_revenue_per_mw: number | null
+  data_years: number
+  data_first_year: number | null
+  data_last_year: number | null
+}
+
+export interface WindHourlyShape {
+  annual: (number | null)[]       // 24 values, CF% by hour 0-23 AEST
+  months: Record<string, (number | null)[]>  // "1"–"12"
+  seasons: Record<string, (number | null)[]> // summer/autumn/winter/spring
+  data_period: string
+}
+
+export interface WindStateRank {
+  cf_rank: number
+  cf_total: number
+  cf_percentile: number
+  capture_price_rank: number
+  capture_price_total: number
+  capture_price_percentile: number
+  revenue_per_mw_rank: number
+  revenue_per_mw_total: number
+}
+
+export interface WindProsCons {
+  pros: string[]
+  cons: string[]
+  score: number
+  grade: string
+}
+
+export interface WindValueProject {
+  id: string
+  name: string
+  state: string
+  capacity_mw: number
+  cod: string | null
+  monthly_data: WindMonthlyDataPoint[]
+  annual_data: WindAnnualDataPoint[]
+  seasonal_averages: Record<string, WindSeasonalAvg>
+  monthly_averages: Record<string, WindMonthlyAvg>
+  value_summary: WindValueSummary
+  hourly_shape: WindHourlyShape | null
+  state_rank: WindStateRank | null
+  pros_cons: WindProsCons | null
+}
+
+export interface WindStateAverage {
+  wind_count: number
+  avg_cf_pct: number | null
+  median_cf_pct: number | null
+  avg_capture_price: number | null
+  avg_value_factor: number | null
+  avg_revenue_per_mw: number | null
+}
+
+export interface WindValueData {
+  generated_at: string
+  data_note: string
+  pool_prices: Record<string, Record<string, number>>
+  state_averages: Record<string, WindStateAverage>
+  projects: Record<string, WindValueProject>
+}
