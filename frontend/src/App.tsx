@@ -1,6 +1,7 @@
 import { lazy, Suspense } from 'react'
 import { Routes, Route, Navigate } from 'react-router-dom'
 import Layout from './components/layout/Layout'
+import CountryAcknowledgement from './pages/Country'
 import Home from './pages/Home'
 import ProjectList from './pages/ProjectList'
 import ProjectDetail from './pages/ProjectDetail'
@@ -60,6 +61,8 @@ function LazyFallback() {
 function App() {
   return (
     <Routes>
+      {/* Standalone Acknowledge Country PWA — no AURES navigation */}
+      <Route path="country" element={<CountryAcknowledgement />} />
       <Route element={<Layout />}>
         <Route index element={<Home />} />
         <Route path="projects" element={<ProjectList />} />
