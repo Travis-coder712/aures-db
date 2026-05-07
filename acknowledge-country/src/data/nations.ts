@@ -73,6 +73,20 @@ export const NATIONS: Nation[] = [
       comprehensive:
         'I would like to begin by acknowledging the Gadigal people of the Eora Nation as the Traditional Custodians of the land we now call Sydney. The Gadigal are one of approximately 29 clans of the Eora Nation, whose deep connection to this harbour country — which they call Cadi — stretches back at least 65,000 years. We are gathered on the same land where the British First Fleet established the colony of New South Wales in 1788, at the place the Gadigal called Warrane — now known as Sydney Cove. Despite the devastating impact of colonisation — including the smallpox epidemic of 1789 that catastrophically reduced the Gadigal population — Gadigal descendants and the wider Eora community continue to maintain their culture, language, and connection to this country today. I acknowledge the immense and ongoing contribution of Aboriginal and Torres Strait Islander peoples to Australian life, and I extend my deepest respects to Elders past, present and emerging.',
     },
+    commonWords: [
+      { word: 'Eora', pronunciation: 'ee-OR-ah', meaning: 'Here / from this place — what Gadigal people called themselves to colonists' },
+      { word: 'Cadi', pronunciation: 'KAH-dee', meaning: 'Port Jackson — Sydney Harbour, the heart of Gadigal country' },
+      { word: 'Warrane', pronunciation: 'WAR-ran', meaning: 'Sydney Cove — where the First Fleet landed in 1788' },
+      { word: 'Yura', pronunciation: 'YOO-rah', meaning: 'Person / people' },
+      { word: 'Badu', pronunciation: 'BAH-doo', meaning: 'Water' },
+      { word: 'Ngaya', pronunciation: 'NGAH-ya', meaning: 'I / me' },
+    ],
+    nativeTitle: {
+      status: 'extinguished',
+      notes: 'Native title over the Sydney CBD and inner suburbs is almost entirely extinguished due to the extensive granting of freehold titles since 1788 — one of the earliest such extinguishments in Australia. The Aboriginal Land Rights Act (NSW) 1983 returned some land to Local Aboriginal Land Councils. The Gadigal people continue to assert sovereignty and cultural connection to their country despite the absence of a formal native title determination. The City of Sydney funds ongoing Gadigal history and cultural programs.',
+      source: 'National Native Title Tribunal',
+      sourceUrl: 'https://www.nntt.gov.au/',
+    },
   },
 
   // ── 2. WURUNDJERI ──────────────────────────────────────────────────────────
@@ -141,6 +155,24 @@ export const NATIONS: Nation[] = [
       comprehensive:
         'I begin by acknowledging the Wurundjeri Woi Wurrung people of the Kulin Nation as the Traditional Custodians of the land we now call Melbourne — the land they call Naarm. The Wurundjeri are one of five nations of the Kulin alliance, whose peoples have lived in this landscape for at least 40,000 years. The Birrarung — the Yarra River — is not merely a waterway but a living ancestor, central to Wurundjeri ceremony, culture and law. European settlement from 1835 brought rapid and devastating dispossession, yet the Wurundjeri have maintained their culture, language and connection to Country across generations. The Wurundjeri Woi Wurrung Cultural Heritage Aboriginal Corporation continues to speak for Country today. I extend my deepest respects to Elders past, present and emerging, and acknowledge the ongoing sovereignty of the Wurundjeri people over this land.',
     },
+    commonWords: [
+      { word: 'Wominjeka', pronunciation: 'woh-MIN-jeh-kah', meaning: 'Welcome / come in', notes: 'The traditional Wurundjeri greeting, now widely used at events across Victoria' },
+      { word: 'Narrm', pronunciation: 'NARM', meaning: 'Melbourne — the Woi Wurrung name for the Port Phillip Bay area' },
+      { word: 'Bunjil', pronunciation: 'BUN-jil', meaning: 'The wedge-tailed eagle — creator spirit of the Kulin Nation' },
+      { word: 'Waa', pronunciation: 'WAH', meaning: 'Crow — the second moiety totem of the Kulin Nation; all people are either Bunjil or Waa' },
+      { word: 'Moondani', pronunciation: 'MOON-dah-nee', meaning: 'To embrace / to hold — used in the name of Moondani Balluk Indigenous Academic Unit' },
+      { word: 'Yaluk', pronunciation: 'YAH-luk', meaning: 'River' },
+    ],
+    nativeTitle: {
+      status: 'partial',
+      body: 'Wurundjeri Woi Wurrung Cultural Heritage Aboriginal Corporation',
+      bodyUrl: 'https://www.wurundjeri.com.au',
+      areaDescription: 'Traditional Wurundjeri country including parts of metropolitan Melbourne and the Yarra/Birrarung River corridor',
+      wasContested: false,
+      notes: 'Native title over Melbourne CBD is largely extinguished due to prior freehold grants. However, the Wurundjeri Woi Wurrung Cultural Heritage Aboriginal Corporation has negotiated recognition and co-management arrangements under Victoria\'s Traditional Owner Settlement Act 2010. The Wurundjeri are recognised as the Traditional Owners of the land for heritage and cultural purposes across a wide area. The Birrarung (Yarra River) was given formal recognition as a living entity with rights in 2017, partly reflecting Wurundjeri advocacy.',
+      source: 'Wurundjeri Woi Wurrung Cultural Heritage Aboriginal Corporation',
+      sourceUrl: 'https://www.wurundjeri.com.au',
+    },
   },
 
   // ── 3. TURRBAL ────────────────────────────────────────────────────────────
@@ -201,6 +233,19 @@ export const NATIONS: Nation[] = [
         'I would like to acknowledge the Turrbal people — the Traditional Custodians of the land we call Brisbane, known to them as Meanjin — and the Jagera people, whose country surrounds the southern parts of this great city. Their peoples have cared for this country for tens of thousands of years. I pay my deepest respects to Elders past, present and emerging, and to all Aboriginal and Torres Strait Islander peoples joining us today.',
       comprehensive:
         'I begin by acknowledging the Turrbal people as the Traditional Custodians of Meanjin — the land known today as Brisbane\'s CBD and northern suburbs. I also acknowledge the Jagera people, who hold custodianship of the south bank and western areas of the greater Brisbane region. Together, the Turrbal and Jagera have been the stewards of this river country for tens of thousands of years. The Brisbane River — and the rich ecosystems of Moreton Bay — sustained complex and vibrant cultures long before European settlement in 1825. Despite frontier violence, dispossession, and decades of assimilation policies, the Turrbal and Jagera peoples and their descendants continue to maintain their cultures and connections to Country today. I extend my deepest respects to Elders past, present and emerging.',
+    },
+    commonWords: [
+      { word: 'Meaanjin', pronunciation: 'mee-AN-jin', meaning: 'Brisbane — "place of the spike rush" — now the official Aboriginal name used by Brisbane City Council' },
+      { word: 'Yagara', pronunciation: 'yah-GAH-rah', meaning: 'The language spoken by Turrbal and Jagera peoples around Brisbane' },
+      { word: 'Guwinmal', pronunciation: 'goo-WIN-mal', meaning: 'The Brisbane River — life-giving waterway at the heart of Turrbal country' },
+      { word: 'Tulgi', pronunciation: 'TUL-ghee', meaning: 'Kangaroo' },
+      { word: 'Bunya', pronunciation: 'BUN-yah', meaning: 'Bunya pine — a sacred tree and major food source; bunya festivals brought many nations together' },
+    ],
+    nativeTitle: {
+      status: 'extinguished',
+      notes: 'Native title over the Brisbane CBD and inner suburbs is largely extinguished by prior freehold and leasehold grants. Both the Turrbal Association and Jagera people maintain their cultural authority and are recognised as Traditional Owners for cultural heritage consultation purposes. Brisbane City Council formally adopted "Meaanjin" as the Aboriginal name for Brisbane. The Turrbal Association engages with government on planning and heritage matters.',
+      source: 'National Native Title Tribunal',
+      sourceUrl: 'https://www.nntt.gov.au/',
     },
   },
 
@@ -270,6 +315,22 @@ export const NATIONS: Nation[] = [
         'I would like to acknowledge the Kaurna people as the Traditional Custodians of the Adelaide Plains — Kaurna Yerta — the land they have called home for tens of thousands of years. We gather today in Tarndanya, the "place of the red kangaroo," beside the Karrawirra Pari — the Torrens River. I pay my respects to Kaurna Elders past, present and emerging, and to all Aboriginal and Torres Strait Islander peoples present today.',
       comprehensive:
         'I begin by acknowledging the Kaurna people as the Traditional Custodians of the Adelaide Plains — Kaurna Yerta — where we gather today in Tarndanya, the "place of the red kangaroo." The Kaurna have cared for this country for tens of thousands of years: hunting in the grasslands and wetlands of the plains, fishing the Karrawirra Pari (Torrens River), and performing ceremony in the foothills of Yurrebilla (the Mount Lofty Ranges). The Kaurna language, documented in the 1830s by Lutheran missionaries and nearly lost through colonisation, is today undergoing a remarkable revival through the dedicated work of the Kaurna community and the Kaurna Warra Pintyanthi project at the University of Adelaide. Over 1,000 places, institutions and objects now bear Kaurna names — a living testament to the enduring strength of Kaurna culture. I extend my deepest respects to Kaurna Elders past, present and emerging.',
+    },
+    commonWords: [
+      { word: 'Yaitya', pronunciation: 'YI-chah', meaning: 'Hello / welcome' },
+      { word: 'Tarntanya', pronunciation: 'TARN-tahn-yah', meaning: 'Adelaide — "place of the red kangaroo" — the official Kaurna name for the city' },
+      { word: 'Parnta', pronunciation: 'PARN-tah', meaning: 'Kangaroo' },
+      { word: 'Wirra', pronunciation: 'WIR-rah', meaning: 'Bush / forest' },
+      { word: 'Tindo', pronunciation: 'TIN-doh', meaning: 'Sun' },
+      { word: 'Kumangka', pronunciation: 'koo-MANG-kah', meaning: 'Tree' },
+    ],
+    nativeTitle: {
+      status: 'extinguished',
+      body: 'Kaurna Yerta Aboriginal Corporation',
+      bodyUrl: 'https://www.kaurna.org.au',
+      notes: 'Native title over metropolitan Adelaide is extinguished by prior Crown grants. However, the Kaurna people have achieved significant recognition through other means. The Kaurna language — once thought nearly lost — has been substantially revitalized since the 1990s through the work of linguist Rob Amery and the Kaurna community, using records made by German missionaries in the 1840s. The Kaurna Yerta Aboriginal Corporation represents Kaurna interests across the Adelaide Plains (Kaurna Yerta).',
+      source: 'Kaurna Yerta Aboriginal Corporation',
+      sourceUrl: 'https://www.kaurna.org.au',
     },
   },
 

@@ -44,6 +44,8 @@ export interface Nation {
   facts: Fact[]
   acknowledgementTemplates: AcknowledgementTemplates
   websiteUrl?: string
+  commonWords?: CommonWord[]
+  nativeTitle?: NativeTitleInfo
 }
 
 export interface City {
@@ -77,6 +79,25 @@ export interface Resource {
   tags?: string[]
 }
 
+export interface CommonWord {
+  word: string
+  pronunciation?: string  // phonetic guide
+  meaning: string
+  notes?: string  // e.g. cultural context
+}
+
+export interface NativeTitleInfo {
+  status: 'determined' | 'consent_determined' | 'pending' | 'extinguished' | 'under_freehold' | 'partial'
+  determinationDate?: string
+  body?: string  // the Aboriginal Corporation or body that holds/represents
+  bodyUrl?: string
+  areaDescription?: string  // what land is covered
+  wasContested?: boolean
+  notes: string  // significance, history, what it means, difficulty, opposition
+  source: string
+  sourceUrl: string
+}
+
 export type Screen = 'welcome' | 'location' | 'acknowledge' | 'guide' | 'resources'
 export type AcknowledgementFormat = 'brief' | 'standard' | 'comprehensive'
-export type AcknowledgeTab = 'text' | 'facts' | 'history' | 'language'
+export type AcknowledgeTab = 'text' | 'facts' | 'history' | 'language' | 'nativeTitle'
