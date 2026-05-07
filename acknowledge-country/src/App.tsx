@@ -802,7 +802,6 @@ function AcknowledgeScreen({
               <FactCard key={i} fact={f} index={i} />
             ))}
 
-            {/* General facts note */}
             <div
               style={{
                 padding: '0.85rem',
@@ -827,7 +826,6 @@ function AcknowledgeScreen({
               Key moments in the history of First Nations peoples and Australian law — each with a verified source.
             </p>
             <div style={{ position: 'relative', paddingLeft: '1.5rem' }}>
-              {/* Timeline line */}
               <div
                 style={{
                   position: 'absolute',
@@ -842,7 +840,6 @@ function AcknowledgeScreen({
               <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
                 {events.map((ev, i) => (
                   <div key={i} style={{ position: 'relative' }}>
-                    {/* Dot */}
                     <div
                       style={{
                         position: 'absolute',
@@ -1013,7 +1010,6 @@ function AcknowledgeScreen({
               </div>
             )}
 
-            {/* General language facts */}
             <div
               style={{
                 background: C.card,
@@ -1208,7 +1204,6 @@ After your Acknowledgement, invite others to reflect — even 30 seconds of sile
         ))}
       </div>
 
-      {/* Reconciliation Australia reference */}
       <div
         style={{
           marginTop: '1.5rem',
@@ -1286,7 +1281,6 @@ function ResourcesScreen() {
         Curated podcasts, videos, and websites for deeper learning about First Nations cultures, histories, and peoples.
       </p>
 
-      {/* Filter */}
       <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '1.25rem' }}>
         {(['all', 'podcast', 'youtube', 'website'] as const).map((f) => (
           <button
@@ -1399,12 +1393,11 @@ function ResourcesScreen() {
 }
 
 // ── MAIN APP ──────────────────────────────────────────────────────────────
-export default function CountryAcknowledgement() {
+export default function App() {
   const [screen, setScreen] = useState<Screen>('welcome')
   const [nation, setNation] = useState<Nation | null>(null)
   const [city, setCity] = useState<City | null>(null)
 
-  // Restore last nation from localStorage
   useEffect(() => {
     try {
       const stored = localStorage.getItem('country-ack-nation')

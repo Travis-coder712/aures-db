@@ -47,7 +47,7 @@ export default defineConfig({
       },
       workbox: {
         globPatterns: ['**/*.{js,css,html,ico,png,svg,json}'],
-        maximumFileSizeToCacheInBytes: 5 * 1024 * 1024, // 5 MiB — main bundle + country data
+        maximumFileSizeToCacheInBytes: 3 * 1024 * 1024,
         // Ensure SW responds to SKIP_WAITING messages from the app
         skipWaiting: true,
         clientsClaim: true,
