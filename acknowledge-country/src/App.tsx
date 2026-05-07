@@ -5,7 +5,6 @@ import { GENERAL_FACTS } from './data/generalFacts'
 import { LEGISLATION } from './data/legislation'
 import { RESOURCES } from './data/resources'
 import { CITIES, findNearestCity, searchCities } from './data/cities'
-import { ON_THIS_DAY, getTodayKey } from './data/onThisDay'
 import type {
   Nation,
   City,
