@@ -209,18 +209,15 @@ def import_from_api(conn, year: int, ytd: bool = False):
                         "date_start": date_start,
                         "date_end": date_end,
                     })
+                    if batch_num == 1:
+                        import json as _json
+                        print(f"  [DEBUG] metric={metric_name} top-level keys: {list(resp.keys())}")
+                        print(f"  [DEBUG] raw response (first 600 chars): {_json.dumps(resp, default=str)[:600]}")
                     all_series.extend(resp.get('data', []))
-                except Exception:
-                    pass  # market_value may not be available; energy is required
+                except Exception as dbg_e:
+                    if batch_num == 1:
+                        print(f"  [DEBUG] metric={metric_name} raised: {dbg_e}")
 
-            # Parse results — split by unit fueltech for BESS charge/discharge
-            if batch_num == 1 and all_series:
-                import json as _json
-                print("  [DEBUG] First series keys:", list(all_series[0].keys()))
-                first_results = all_series[0].get('results', [])
-                if first_results:
-                    print("  [DEBUG] First result keys:", list(first_results[0].keys()))
-                    print("  [DEBUG] First result sample:", _json.dumps(first_results[0], default=str)[:400])
             for series in all_series:
                 metric = series.get('metric')
                 for result in series.get('results', []):
