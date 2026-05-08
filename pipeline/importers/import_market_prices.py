@@ -72,7 +72,7 @@ def fetch_monthly_prices(api_key):
     print(f"  Fetching monthly prices for all regions ({start} to {end})...")
     return api_get('/market/network/NEM', api_key, {
         'metrics': 'price',
-        'interval': '1m',
+        'interval': '1M',
         'date_start': start,
         'date_end': end,
         'primary_grouping': 'network_region',

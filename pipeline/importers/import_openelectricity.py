@@ -680,7 +680,7 @@ def import_monthly_from_api(conn, year: int):
             data = api_get("/data/facilities/NEM", api_key, {
                 "facility_code": batch,
                 "metrics": ["energy", "market_value"],
-                "interval": "1m",
+                "interval": "1M",
                 "date_start": date_start,
                 "date_end": date_end,
             })
@@ -741,9 +741,11 @@ def import_monthly_from_api(conn, year: int):
             except Exception:
                 pass
             print(f"  Batch {batch_num}/{total_batches}: FAILED - {e}{' — ' + err_body if err_body else ''}")
-            # 400 on first batch = date range unsupported — abort this year entirely
-            if getattr(e, 'code', None) == 400 and batch_num == 1:
-                print(f"  → Date range {date_start}–{date_end} not supported by API. Skipping year {year}.")
+            # Abort remaining batches on first failure — all batches share the same params
+            if batch_num == 1:
+                print(f"  → Aborting year {year}: all batches would fail with the same error.")
+                print(f"  → Tip: Community plan only allows monthly data within the last ~367 days.")
+                print(f"  → For historical years, run without --monthly to use annual (1y) interval.")
                 return
 
     # Compute metrics and upsert monthly
