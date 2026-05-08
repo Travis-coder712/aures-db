@@ -52,14 +52,8 @@ jobs:
         working-directory: acknowledge-country
         run: npm run build
 
-      - name: List acknowledge-country dist
-        run: ls -la acknowledge-country/dist/
-
       - name: Copy Acknowledge Country into AURES dist
         run: cp -r acknowledge-country/dist frontend/dist/country
-
-      - name: Confirm country/ in artifact
-        run: ls -la frontend/dist/country/
 
       - name: Setup Pages
         uses: actions/configure-pages@v5

@@ -1,9 +1,11 @@
 import React, { useState, useCallback, useEffect } from 'react'
+import { useRegisterSW } from 'virtual:pwa-register/react'
 import { findNationById } from './data/nations'
 import { GENERAL_FACTS } from './data/generalFacts'
 import { LEGISLATION } from './data/legislation'
 import { RESOURCES } from './data/resources'
 import { CITIES, findNearestCity, searchCities } from './data/cities'
+import { ON_THIS_DAY, getTodayKey } from './data/onThisDay'
 import type {
   Nation,
   City,
@@ -16,7 +18,7 @@ import type {
   Resource,
 } from './data/types'
 
-// ── Colour tokens ──────────────────────────────────────────────────────────
+// ── Colour tokens ──────────────────────────────────────────────────────────────────
 const C = {
   bg: '#0d0906',
   card: '#1c130d',
@@ -32,7 +34,7 @@ const C = {
   sky: '#7ab8d4',
 }
 
-// ── Category styling ───────────────────────────────────────────────────────
+// ── Category styling ───────────────────────────────────────────────────────────────
 const CAT_STYLE: Record<FactCategory, { bg: string; label: string }> = {
   history: { bg: '#4a1c0d', label: 'History' },
   culture: { bg: '#0d3040', label: 'Culture' },
@@ -44,7 +46,7 @@ const CAT_STYLE: Record<FactCategory, { bg: string; label: string }> = {
   spirituality: { bg: '#221a35', label: 'Spirituality' },
 }
 
-// ── Helpers ────────────────────────────────────────────────────────────────
+// ── Helpers ────────────────────────────────────────────────────────────────────
 function shuffle<T>(arr: T[]): T[] {
   return [...arr].sort(() => Math.random() - 0.5)
 }
@@ -61,7 +63,7 @@ function pickEvents(count = 8): HistoricalEvent[] {
   return shuffle(LEGISLATION).slice(0, count).sort((a, b) => a.year - b.year)
 }
 
-// ── Sub-components ─────────────────────────────────────────────────────────
+// ── Sub-components ───────────────────────────────────────────────────────────────
 function SourceLink({ source, url }: { source: string; url: string }) {
   return (
     <a
@@ -120,7 +122,7 @@ function FactCard({ fact, index }: { fact: Fact; index: number }) {
   )
 }
 
-// ── NAV BAR ────────────────────────────────────────────────────────────────
+// ── NAV BAR ──────────────────────────────────────────────────────────────────────
 function NavBar({
   screen,
   onNav,
@@ -214,8 +216,28 @@ function NavBar({
   )
 }
 
-// ── WELCOME SCREEN ────────────────────────────────────────────────────────
-function WelcomeScreen({ onStart, nation }: { onStart: () => void; nation: Nation | null }) {
+// ── WELCOME SCREEN ────────────────────────────────────────────────────────────────────
+function WelcomeScreen({
+  onStart,
+  onAcknowledge,
+  nation,
+}: {
+  onStart: () => void
+  onAcknowledge: () => void
+  nation: Nation | null
+}) {
+  const todayKey = getTodayKey()
+  const todayEvent = ON_THIS_DAY[todayKey] ?? null
+
+  const todayDisplay = (() => {
+    const [mm, dd] = todayKey.split('-').map(Number)
+    const months = [
+      'January', 'February', 'March', 'April', 'May', 'June',
+      'July', 'August', 'September', 'October', 'November', 'December',
+    ]
+    return `${dd} ${months[mm - 1]}`
+  })()
+
   return (
     <div
       style={{
@@ -229,7 +251,6 @@ function WelcomeScreen({ onStart, nation }: { onStart: () => void; nation: Natio
         paddingBottom: '5rem',
       }}
     >
-      {/* Flag-inspired stripe decoration */}
       <div style={{ display: 'flex', gap: 6, marginBottom: '2rem' }}>
         <div style={{ width: 40, height: 6, borderRadius: 3, background: '#111' }} />
         <div style={{ width: 40, height: 6, borderRadius: 3, background: C.red }} />
@@ -263,8 +284,85 @@ function WelcomeScreen({ onStart, nation }: { onStart: () => void; nation: Natio
         A tool to help meeting hosts give a meaningful, informed Acknowledgement of Country — backed by verified, sourced facts about the Traditional Custodians of the land you're on.
       </p>
 
-      {nation && (
+      {todayEvent && (
         <div
+          style={{
+            marginTop: '1.75rem',
+            padding: '1rem 1.2rem',
+            background: C.card,
+            border: `1px solid ${C.border}`,
+            borderLeft: `4px solid ${C.ochre}`,
+            borderRadius: 10,
+            maxWidth: 380,
+            width: '100%',
+            textAlign: 'left',
+          }}
+        >
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              marginBottom: '0.5rem',
+              flexWrap: 'wrap',
+              gap: '0.35rem',
+            }}
+          >
+            <p
+              style={{
+                margin: 0,
+                fontSize: '0.72rem',
+                color: C.ochre,
+                textTransform: 'uppercase',
+                letterSpacing: '0.1em',
+                fontWeight: 700,
+              }}
+            >
+              On This Day — {todayDisplay}
+            </p>
+            <span
+              style={{
+                fontSize: '0.65rem',
+                fontWeight: 700,
+                color: C.muted,
+                background: C.border,
+                padding: '1px 7px',
+                borderRadius: 4,
+                letterSpacing: '0.04em',
+              }}
+            >
+              {todayEvent.year}
+            </span>
+          </div>
+          <p style={{ margin: '0 0 0.4rem', color: C.text, fontWeight: 600, fontSize: '0.9rem' }}>
+            {todayEvent.title}
+          </p>
+          <p style={{ margin: '0 0 0.55rem', color: C.muted, fontSize: '0.82rem', lineHeight: 1.65 }}>
+            {todayEvent.description}
+          </p>
+          <a
+            href={todayEvent.sourceUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              color: C.sky,
+              fontSize: '0.75rem',
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: 3,
+            }}
+          >
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3" />
+            </svg>
+            {todayEvent.source}
+          </a>
+        </div>
+      )}
+
+      {nation && (
+        <button
+          onClick={onAcknowledge}
           style={{
             marginTop: '1.5rem',
             padding: '0.9rem 1.2rem',
@@ -273,18 +371,54 @@ function WelcomeScreen({ onStart, nation }: { onStart: () => void; nation: Natio
             borderRadius: 10,
             maxWidth: 380,
             width: '100%',
+            textAlign: 'left',
+            cursor: 'pointer',
+            transition: 'border-color 0.15s, background 0.15s',
+          }}
+          onMouseEnter={(e) => {
+            ;(e.currentTarget as HTMLButtonElement).style.borderColor = C.borderLight
+            ;(e.currentTarget as HTMLButtonElement).style.background = C.cardHover
+          }}
+          onMouseLeave={(e) => {
+            ;(e.currentTarget as HTMLButtonElement).style.borderColor = C.border
+            ;(e.currentTarget as HTMLButtonElement).style.background = C.card
           }}
         >
-          <p style={{ margin: 0, fontSize: '0.8rem', color: C.muted, textTransform: 'uppercase', letterSpacing: '0.08em' }}>Last location</p>
+          <p style={{ margin: 0, fontSize: '0.8rem', color: C.muted, textTransform: 'uppercase', letterSpacing: '0.08em' }}>
+            Last location
+          </p>
           <p style={{ margin: '0.3rem 0 0', color: C.ochre, fontWeight: 600 }}>{nation.name} Country</p>
           <p style={{ margin: '0.2rem 0 0', fontSize: '0.82rem', color: C.muted }}>{nation.region}</p>
-        </div>
+          <p
+            style={{
+              margin: '0.5rem 0 0',
+              fontSize: '0.75rem',
+              color: C.muted,
+              display: 'flex',
+              alignItems: 'center',
+              gap: 4,
+            }}
+          >
+            <svg
+              width="11"
+              height="11"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              viewBox="0 0 24 24"
+              style={{ flexShrink: 0 }}
+            >
+              <path d="M5 12h14M12 5l7 7-7 7" />
+            </svg>
+            View acknowledgement
+          </p>
+        </button>
       )}
 
       <button
         onClick={onStart}
         style={{
-          marginTop: '2rem',
+          marginTop: '1.25rem',
           padding: '0.9rem 2.5rem',
           background: C.ochre,
           color: '#1a0c04',
@@ -311,11 +445,13 @@ function WelcomeScreen({ onStart, nation }: { onStart: () => void; nation: Natio
       >
         All facts include verified source links. This app draws on authoritative sources including AIATSIS, Reconciliation Australia, National Museum of Australia, and community-owned organisations.
       </p>
+
+      <p style={{ color: C.muted, fontSize: '0.72rem', marginTop: '1rem' }}>v{__APP_VERSION__}</p>
     </div>
   )
 }
 
-// ── LOCATION SCREEN ────────────────────────────────────────────────────────
+// ── LOCATION SCREEN ────────────────────────────────────────────────────────────────────
 function LocationScreen({
   onNationFound,
 }: {
@@ -379,7 +515,6 @@ function LocationScreen({
         Identify whose Country you are on to generate a meaningful, informed acknowledgement.
       </p>
 
-      {/* GPS Button */}
       <button
         onClick={handleGPS}
         disabled={gpsLoading}
@@ -413,7 +548,6 @@ function LocationScreen({
         </p>
       )}
 
-      {/* Search */}
       <div style={{ position: 'relative', marginBottom: '1.25rem' }}>
         <input
           type="text"
@@ -481,7 +615,6 @@ function LocationScreen({
         )}
       </div>
 
-      {/* Popular cities */}
       <p style={{ color: C.muted, fontSize: '0.78rem', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '0.6rem' }}>
         Popular locations
       </p>
@@ -515,7 +648,7 @@ function LocationScreen({
   )
 }
 
-// ── ACKNOWLEDGE SCREEN ────────────────────────────────────────────────────
+// ── ACKNOWLEDGE SCREEN ──────────────────────────────────────────────────────────────────
 function AcknowledgeScreen({
   nation,
   city,
@@ -554,13 +687,13 @@ function AcknowledgeScreen({
     { id: 'facts', label: 'Facts' },
     { id: 'history', label: 'History' },
     { id: 'language', label: 'Language' },
+    { id: 'nativeTitle', label: 'Country & Title' },
   ]
 
   const nativeLandUrl = city?.nativeLandUrl ?? `https://native-land.ca/#maps/territories/${nation.nativeLandSlug ?? ''}`
 
   return (
     <div style={{ paddingBottom: '5rem', maxWidth: 700, margin: '0 auto' }}>
-      {/* Nation header */}
       <div
         style={{
           padding: '1.5rem',
@@ -591,7 +724,6 @@ function AcknowledgeScreen({
           {nation.traditionalCountry}
         </p>
 
-        {/* Map link */}
         <a
           href={nativeLandUrl}
           target="_blank"
@@ -613,7 +745,6 @@ function AcknowledgeScreen({
         </a>
       </div>
 
-      {/* Format selector */}
       <div style={{ padding: '1rem 1.5rem 0', display: 'flex', gap: '0.5rem' }}>
         {(['brief', 'standard', 'comprehensive'] as AcknowledgementFormat[]).map((f) => (
           <button
@@ -637,7 +768,6 @@ function AcknowledgeScreen({
         ))}
       </div>
 
-      {/* Tabs */}
       <div
         style={{
           display: 'flex',
@@ -669,7 +799,6 @@ function AcknowledgeScreen({
       </div>
 
       <div style={{ padding: '1.25rem 1.5rem' }}>
-        {/* ACKNOWLEDGE TAB */}
         {tab === 'text' && (
           <div>
             <div
@@ -746,7 +875,6 @@ function AcknowledgeScreen({
               </button>
             </div>
 
-            {/* Format guide */}
             <div
               style={{
                 marginTop: '1.5rem',
@@ -792,7 +920,6 @@ function AcknowledgeScreen({
           </div>
         )}
 
-        {/* FACTS TAB */}
         {tab === 'facts' && (
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
             <p style={{ color: C.muted, fontSize: '0.82rem', margin: '0 0 0.25rem', lineHeight: 1.6 }}>
@@ -819,7 +946,6 @@ function AcknowledgeScreen({
           </div>
         )}
 
-        {/* HISTORY TAB */}
         {tab === 'history' && (
           <div>
             <p style={{ color: C.muted, fontSize: '0.82rem', margin: '0 0 1.25rem', lineHeight: 1.6 }}>
@@ -918,7 +1044,6 @@ function AcknowledgeScreen({
           </div>
         )}
 
-        {/* LANGUAGE TAB */}
         {tab === 'language' && (
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
             <div
@@ -1049,6 +1174,104 @@ function AcknowledgeScreen({
                 </p>
               </div>
             )}
+
+            {nation.commonWords && nation.commonWords.length > 0 && (
+              <div style={{ background: C.card, border: `1px solid ${C.border}`, borderRadius: 10, padding: '1rem 1.25rem' }}>
+                <p style={{ margin: '0 0 0.75rem', color: C.ochre, fontSize: '0.8rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.06em' }}>Common words in {nation.language.name}</p>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
+                  {nation.commonWords.map((w, i) => (
+                    <div key={i} style={{ display: 'flex', gap: '0.75rem', alignItems: 'flex-start' }}>
+                      <div style={{ minWidth: 120 }}>
+                        <span style={{ color: C.ochre, fontWeight: 700, fontSize: '0.95rem' }}>{w.word}</span>
+                        {w.pronunciation && <div style={{ color: C.muted, fontSize: '0.7rem', fontStyle: 'italic' }}>{w.pronunciation}</div>}
+                      </div>
+                      <div>
+                        <span style={{ color: C.text, fontSize: '0.85rem' }}>{w.meaning}</span>
+                        {w.notes && <div style={{ color: C.muted, fontSize: '0.78rem', marginTop: 2 }}>{w.notes}</div>}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+        )}
+
+        {tab === 'nativeTitle' && (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+            {nation.nativeTitle ? (
+              <>
+                <div style={{ background: C.card, border: `1px solid ${C.border}`, borderRadius: 10, padding: '1rem 1.25rem' }}>
+                  <p style={{ margin: '0 0 0.5rem', color: C.muted, fontSize: '0.72rem', textTransform: 'uppercase', letterSpacing: '0.08em' }}>Native Title Status</p>
+                  {(() => {
+                    const statusConfig: Record<string, { label: string; color: string; bg: string }> = {
+                      determined: { label: 'Determined', color: '#6acd6a', bg: '#1a3d1a' },
+                      consent_determined: { label: 'Consent Determination', color: '#6acd6a', bg: '#1a3d1a' },
+                      pending: { label: 'Claim Pending', color: '#e8c76a', bg: '#3d2d00' },
+                      extinguished: { label: 'Extinguished in urban area', color: '#e87070', bg: '#3d1a1a' },
+                      under_freehold: { label: 'Held as Aboriginal Freehold', color: '#70a8e8', bg: '#1a253d' },
+                      partial: { label: 'Partial Determination', color: '#e8c76a', bg: '#3d2d00' },
+                    }
+                    const cfg = statusConfig[nation.nativeTitle!.status] ?? { label: nation.nativeTitle!.status, color: C.ochre, bg: C.card }
+                    return (
+                      <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', padding: '0.5rem 0.85rem', background: cfg.bg, borderRadius: 8, border: `1px solid ${cfg.color}44` }}>
+                        <div style={{ width: 8, height: 8, borderRadius: '50%', background: cfg.color }} />
+                        <span style={{ color: cfg.color, fontWeight: 700, fontSize: '0.9rem' }}>{cfg.label}</span>
+                      </div>
+                    )
+                  })()}
+                  {nation.nativeTitle.determinationDate && (
+                    <p style={{ margin: '0.6rem 0 0', color: C.muted, fontSize: '0.82rem' }}>
+                      Determination / handback: <span style={{ color: C.text }}>{nation.nativeTitle.determinationDate}</span>
+                    </p>
+                  )}
+                </div>
+
+                {nation.nativeTitle.body && (
+                  <div style={{ background: C.card, border: `1px solid ${C.border}`, borderRadius: 10, padding: '1rem 1.25rem' }}>
+                    <p style={{ margin: '0 0 0.25rem', color: C.muted, fontSize: '0.72rem', textTransform: 'uppercase', letterSpacing: '0.08em' }}>Representative Body</p>
+                    <p style={{ margin: 0, color: C.text, fontWeight: 600, fontSize: '0.9rem' }}>{nation.nativeTitle.body}</p>
+                    {nation.nativeTitle.bodyUrl && (
+                      <div style={{ marginTop: '0.4rem' }}>
+                        <SourceLink source="Official website" url={nation.nativeTitle.bodyUrl} />
+                      </div>
+                    )}
+                  </div>
+                )}
+
+                {nation.nativeTitle.areaDescription && (
+                  <div style={{ background: C.card, border: `1px solid ${C.border}`, borderRadius: 10, padding: '1rem 1.25rem' }}>
+                    <p style={{ margin: '0 0 0.3rem', color: C.muted, fontSize: '0.72rem', textTransform: 'uppercase', letterSpacing: '0.08em' }}>Area</p>
+                    <p style={{ margin: 0, color: C.text, fontSize: '0.88rem', lineHeight: 1.65 }}>{nation.nativeTitle.areaDescription}</p>
+                  </div>
+                )}
+
+                <div style={{ background: C.card, border: `1px solid ${C.border}`, borderLeft: `4px solid ${C.ochre}`, borderRadius: 10, padding: '1rem 1.25rem' }}>
+                  <p style={{ margin: '0 0 0.5rem', color: C.ochre, fontSize: '0.8rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.06em' }}>Background & significance</p>
+                  <p style={{ margin: 0, color: C.text, fontSize: '0.88rem', lineHeight: 1.7 }}>{nation.nativeTitle.notes}</p>
+                  <div style={{ marginTop: '0.75rem' }}>
+                    <SourceLink source={nation.nativeTitle.source} url={nation.nativeTitle.sourceUrl} />
+                  </div>
+                </div>
+              </>
+            ) : (
+              <div style={{ background: C.card, border: `1px solid ${C.border}`, borderRadius: 10, padding: '1rem 1.25rem' }}>
+                <p style={{ margin: '0 0 0.4rem', color: C.muted, fontSize: '0.82rem', lineHeight: 1.65 }}>
+                  Native title information for <strong style={{ color: C.text }}>{nation.name}</strong> country is being compiled. Check the NNTT register for current claim status.
+                </p>
+                <SourceLink source="National Native Title Tribunal" url="https://www.nntt.gov.au/" />
+              </div>
+            )}
+
+            <div style={{ background: C.card, border: `1px solid ${C.border}`, borderRadius: 10, padding: '1rem 1.25rem' }}>
+              <p style={{ margin: '0 0 0.5rem', color: C.muted, fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.08em' }}>What is native title?</p>
+              <p style={{ margin: 0, color: C.muted, fontSize: '0.83rem', lineHeight: 1.7 }}>
+                Native title is the recognition in Australian law that Aboriginal and Torres Strait Islander peoples have rights to their traditional lands and waters. It was established by the <em>Mabo v Queensland (No 2)</em> High Court decision in 1992, which overturned the colonial fiction of <em>terra nullius</em> — the claim that Australia was legally unoccupied before British colonisation. The <em>Native Title Act 1993</em> created a legal process for determining these rights. Native title can be extinguished by prior grants of freehold land, leases, and other government acts — which is why many urban areas have no surviving native title, even though Aboriginal people’s sovereign connection to country is unbroken.
+              </p>
+              <div style={{ marginTop: '0.6rem' }}>
+                <SourceLink source="National Native Title Tribunal" url="https://www.nntt.gov.au/" />
+              </div>
+            </div>
           </div>
         )}
       </div>
@@ -1056,7 +1279,7 @@ function AcknowledgeScreen({
   )
 }
 
-// ── GUIDE SCREEN ──────────────────────────────────────────────────────────
+// ── GUIDE SCREEN ──────────────────────────────────────────────────────────────────────
 function GuideScreen() {
   const [expanded, setExpanded] = useState<number | null>(0)
 
@@ -1115,7 +1338,7 @@ An Acknowledgement is only tokenistic if it is not backed by genuine respect, kn
       content: `The most powerful Acknowledgements go beyond a formula. Consider including:
 
 • A specific place name in the Traditional language (e.g., "We gather on Naarm — Melbourne in the Wurundjeri language")
-• A fact about the nation's history, culture, or ongoing contribution
+• A fact about the nation’s history, culture, or ongoing contribution
 • A reference to their language: whether it is being spoken, revitalized, or was nearly lost
 • The length of their occupation: "for at least 65,000 years" grounds the acknowledgement in historical reality
 • Something contemporary: ongoing cultural practices, land rights, or current community-led work
@@ -1130,7 +1353,7 @@ After your Acknowledgement, invite others to reflect — even 30 seconds of sile
 • Never use sacred images, songs, or designs without permission from the relevant community.
 • Be aware of "men's business" and "women's business" — some knowledge and ceremony is restricted.
 • When photographing, recording, or publishing about Aboriginal culture, obtain explicit consent.
-• Aboriginal and Torres Strait Islander peoples' cultural and intellectual property (ICIP) belongs to the communities, not the public domain.
+• Aboriginal and Torres Strait Islander peoples’ cultural and intellectual property (ICIP) belongs to the communities, not the public domain.
 • Sourced information: always cite where facts come from. This app models this practice — every fact has a source link.`,
     },
   ]
@@ -1232,7 +1455,7 @@ After your Acknowledgement, invite others to reflect — even 30 seconds of sile
   )
 }
 
-// ── RESOURCES SCREEN ──────────────────────────────────────────────────────
+// ── RESOURCES SCREEN ───────────────────────────────────────────────────────────────────
 function ResourcesScreen() {
   const [filter, setFilter] = useState<'all' | 'podcast' | 'youtube' | 'website'>('all')
 
@@ -1392,11 +1615,13 @@ function ResourcesScreen() {
   )
 }
 
-// ── MAIN APP ──────────────────────────────────────────────────────────────
+// ── MAIN APP ──────────────────────────────────────────────────────────────────────────
 export default function App() {
   const [screen, setScreen] = useState<Screen>('welcome')
   const [nation, setNation] = useState<Nation | null>(null)
   const [city, setCity] = useState<City | null>(null)
+
+  const { needRefresh: [needRefresh], updateServiceWorker } = useRegisterSW()
 
   useEffect(() => {
     try {
@@ -1433,9 +1658,19 @@ export default function App() {
         WebkitFontSmoothing: 'antialiased',
       }}
     >
+      {needRefresh && (
+        <div style={{ position: 'fixed', top: 0, left: 0, right: 0, zIndex: 200, background: C.ochre, color: '#1a0c04', padding: '0.6rem 1rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: '0.85rem', fontWeight: 600 }}>
+          <span>Update available</span>
+          <button onClick={() => updateServiceWorker(true)} style={{ background: '#1a0c04', color: C.ochre, border: 'none', borderRadius: 6, padding: '0.3rem 0.75rem', fontWeight: 700, cursor: 'pointer', fontSize: '0.82rem' }}>Refresh</button>
+        </div>
+      )}
       <div style={{ maxWidth: 700, margin: '0 auto' }}>
         {screen === 'welcome' && (
-          <WelcomeScreen onStart={() => setScreen('location')} nation={nation} />
+          <WelcomeScreen
+            onStart={() => setScreen('location')}
+            onAcknowledge={() => setScreen('acknowledge')}
+            nation={nation}
+          />
         )}
         {screen === 'location' && <LocationScreen onNationFound={handleNationFound} />}
         {screen === 'acknowledge' && nation && (
