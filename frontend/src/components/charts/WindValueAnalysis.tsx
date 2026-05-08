@@ -1,4 +1,4 @@
-import { useState, type ReactNode } from 'react'
+import { useState, useRef, useCallback, type ReactNode } from 'react'
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type TF = (value: any, name: any) => [string, string]
 import {
@@ -8,6 +8,7 @@ import {
 } from 'recharts'
 import { useWindValueProject } from '../../hooks/useWindValue'
 import type { WindValueProject, WindStateAverage } from '../../lib/types'
+import { exportElementToPdf } from '../../lib/exportPdf'
 
 // ============================================================
 // Constants
@@ -62,7 +63,7 @@ function ChartInfo({ children }: { children: ReactNode }) {
   )
 }
 
-type TabId = 'explainer' | 'shape' | 'capture' | 'seasonal' | 'trend' | 'peers'
+type TabId = 'explainer' | 'shape' | 'capture' | 'seasonal' | 'trend' | 'peers' | 'nem'
 
 // ============================================================
 // Main component
