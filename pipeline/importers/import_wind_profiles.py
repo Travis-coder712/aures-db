@@ -277,7 +277,7 @@ def fetch_hourly_shapes(
         if not cap or cap <= 0:
             continue
 
-        def _cf_array(hour_buckets: Dict[int, List[float]], interval_hours: float = 0.5) -> List[Optional[float]]:
+        def _cf_array(hour_buckets: Dict[int, List[float]], interval_hours: float = 1.0) -> List[Optional[float]]:
             """Convert hour->mwh_values dict to 24-element CF% array."""
             result = []
             for h in range(24):
@@ -1000,7 +1000,7 @@ def main():
         "data_note": (
             "Value analytics sourced from OpenElectricity API (performance_monthly). "
             "Pool prices from AEMO MMSDM dispatch_price_daily (Aug 2024 onward). "
-            "Hourly shape profiles from OpenElectricity 30-min facility data."
+            "Hourly shape profiles from OpenElectricity 1-hour facility dispatch data."
         ),
         "pool_prices": pool_price_summary,
         "state_averages": state_averages,
