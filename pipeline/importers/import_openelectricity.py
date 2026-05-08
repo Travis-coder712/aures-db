@@ -605,7 +605,7 @@ def upsert_performance_monthly(conn, project_id, year, month, metrics, source):
 def import_monthly_from_api(conn, year: int):
     """Import monthly performance data from the OpenElectricity API.
 
-    Uses interval=1M to get 12 data points per facility per year.
+    Uses interval=1m to get 12 data points per facility per year.
     """
     api_key = os.environ.get('OPENELECTRICITY_API_KEY')
     if not api_key:
@@ -680,7 +680,7 @@ def import_monthly_from_api(conn, year: int):
             data = api_get("/data/facilities/NEM", api_key, {
                 "facility_code": batch,
                 "metrics": ["energy", "market_value"],
-                "interval": "1M",
+                "interval": "1m",
                 "date_start": date_start,
                 "date_end": date_end,
             })
@@ -735,7 +735,16 @@ def import_monthly_from_api(conn, year: int):
             time.sleep(0.5)
 
         except Exception as e:
-            print(f"  Batch {batch_num}/{total_batches}: FAILED - {e}")
+            err_body = ''
+            try:
+                err_body = e.read().decode()  # type: ignore[attr-defined]
+            except Exception:
+                pass
+            print(f"  Batch {batch_num}/{total_batches}: FAILED - {e}{' — ' + err_body if err_body else ''}")
+            # 400 on first batch = date range unsupported — abort this year entirely
+            if getattr(e, 'code', None) == 400 and batch_num == 1:
+                print(f"  → Date range {date_start}–{date_end} not supported by API. Skipping year {year}.")
+                return
 
     # Compute metrics and upsert monthly
     imported = 0
