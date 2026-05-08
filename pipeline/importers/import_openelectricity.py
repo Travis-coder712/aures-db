@@ -214,6 +214,13 @@ def import_from_api(conn, year: int, ytd: bool = False):
                     pass  # market_value may not be available; energy is required
 
             # Parse results — split by unit fueltech for BESS charge/discharge
+            if batch_num == 1 and all_series:
+                import json as _json
+                print("  [DEBUG] First series keys:", list(all_series[0].keys()))
+                first_results = all_series[0].get('results', [])
+                if first_results:
+                    print("  [DEBUG] First result keys:", list(first_results[0].keys()))
+                    print("  [DEBUG] First result sample:", _json.dumps(first_results[0], default=str)[:400])
             for series in all_series:
                 metric = series.get('metric')
                 for result in series.get('results', []):
