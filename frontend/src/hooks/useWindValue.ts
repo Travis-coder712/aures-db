@@ -20,6 +20,7 @@ export function useWindValueProject(projectId: string) {
   const [project, setProject] = useState<WindValueProject | null>(null)
   const [stateAvg, setStateAvg] = useState<WindValueData['state_averages'][string] | null>(null)
   const [allStateProjects, setAllStateProjects] = useState<WindValueProject[]>([])
+  const [poolPrices, setPoolPrices] = useState<Record<string, Record<string, number>>>({})
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
@@ -28,6 +29,7 @@ export function useWindValueProject(projectId: string) {
       if (!data) return
       const proj = data.projects[projectId] ?? null
       setProject(proj)
+      setPoolPrices(data.pool_prices ?? {})
       if (proj) {
         setStateAvg(data.state_averages[proj.state] ?? null)
         setAllStateProjects(
@@ -37,5 +39,5 @@ export function useWindValueProject(projectId: string) {
     }).finally(() => setLoading(false))
   }, [projectId])
 
-  return { project, stateAvg, allStateProjects, loading }
+  return { project, stateAvg, allStateProjects, poolPrices, loading }
 }
