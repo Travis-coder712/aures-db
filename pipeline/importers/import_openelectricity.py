@@ -12,6 +12,10 @@ Usage:
     # Import year-to-date for current year:
     python3 pipeline/importers/import_openelectricity.py --year 2026 --ytd
 
+    # Backfill all years from 2015 to last full year:
+    python3 pipeline/importers/import_openelectricity.py --backfill-from 2015
+    python3 pipeline/importers/import_openelectricity.py --backfill-from 2015 --monthly
+
     # Generate sample data for frontend development:
     python3 pipeline/importers/import_openelectricity.py --year 2025 --sample
 """
@@ -800,12 +804,35 @@ def main():
     parser.add_argument('--sample', action='store_true', help='Generate sample data instead of API import')
     parser.add_argument('--ytd', action='store_true', help='Import year-to-date (partial year) data')
     parser.add_argument('--monthly', action='store_true', help='Import monthly data (12 data points per facility)')
+    parser.add_argument(
+        '--backfill-from', type=int, metavar='YEAR', dest='backfill_from',
+        help='Backfill all years from YEAR to present (e.g. --backfill-from 2015). '
+             'Use --monthly to backfill monthly data instead of annual.'
+    )
     args = parser.parse_args()
 
     conn = get_connection()
+    current_year = datetime.now().year
 
     if args.sample:
         generate_sample_data(conn, args.year)
+    elif args.backfill_from:
+        start_year = args.backfill_from
+        end_year = current_year - 1  # don't import partial current year in backfill
+        if start_year > end_year:
+            print(f"ERROR: --backfill-from {start_year} is >= current year {current_year}. Use --year for current year.")
+            sys.exit(1)
+        print(f"Backfilling {start_year}–{end_year} ({'monthly' if args.monthly else 'annual'})...")
+        for yr in range(start_year, end_year + 1):
+            print(f"\n{'='*50}\nYear {yr}\n{'='*50}")
+            if args.monthly:
+                import_monthly_from_api(conn, yr)
+            else:
+                import_from_api(conn, yr, ytd=False)
+            # Brief pause between years to avoid rate-limiting
+            if yr < end_year:
+                time.sleep(2)
+        print(f"\nBackfill complete: {start_year}–{end_year}.")
     elif args.monthly:
         import_monthly_from_api(conn, args.year)
     else:

@@ -1395,6 +1395,16 @@ export interface WindValueSummary {
   data_years: number
   data_first_year: number | null
   data_last_year: number | null
+  // Data completeness metadata
+  commissioning_year: number | null
+  data_months_available: number
+  data_years_clean: number
+  ramp_year: number | null
+  ramp_year_cf_pct: number | null
+  avg_cf_excl_ramp: number | null
+  data_completeness_pct: number
+  years_since_cod: number
+  data_confidence: 'high' | 'medium' | 'low'
 }
 
 export interface WindHourlyShape {

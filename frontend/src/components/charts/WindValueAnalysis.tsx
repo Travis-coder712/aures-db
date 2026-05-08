@@ -138,6 +138,13 @@ export default function WindValueAnalysis({ projectId }: Props) {
           >
             {pdfLoading ? <><span className="animate-spin inline-block">⏳</span> Generating…</> : <><span>📄</span> Export PDF</>}
           </button>
+          <DataConfidenceBadge
+            confidence={project.value_summary.data_confidence}
+            dataYearsClean={project.value_summary.data_years_clean}
+            completeness={project.value_summary.data_completeness_pct}
+            yearsAvailable={project.value_summary.data_years}
+            yearsSinceCod={project.value_summary.years_since_cod}
+          />
           <GradeChip grade={project.pros_cons?.grade} score={project.pros_cons?.score} />
         </div>
       </div>
@@ -223,6 +230,131 @@ function GradeChip({ grade, score }: { grade?: string; score?: number }) {
       </span>
       {score !== undefined && (
         <span className="text-[10px] text-[var(--color-text-muted)]">{score.toFixed(1)}/5.0</span>
+      )}
+    </div>
+  )
+}
+
+// ============================================================
+// Data confidence badge
+// ============================================================
+
+function DataConfidenceBadge({
+  confidence, dataYearsClean, completeness, yearsAvailable, yearsSinceCod,
+}: {
+  confidence?: 'high' | 'medium' | 'low'
+  dataYearsClean?: number
+  completeness?: number
+  yearsAvailable?: number
+  yearsSinceCod?: number
+}) {
+  const [open, setOpen] = useState(false)
+  if (!confidence) return null
+  const cfg = {
+    high:   { label: 'High confidence',   color: '#22c55e', dot: '🟢' },
+    medium: { label: 'Medium confidence', color: '#f59e0b', dot: '🟡' },
+    low:    { label: 'Low confidence',    color: '#ef4444', dot: '🔴' },
+  }[confidence]
+  return (
+    <span className="relative inline-block">
+      <button
+        onClick={e => { e.stopPropagation(); setOpen(v => !v) }}
+        className="flex items-center gap-1 px-2 py-0.5 rounded-full text-[9px] font-semibold border transition-colors"
+        style={{ borderColor: `${cfg.color}40`, backgroundColor: `${cfg.color}15`, color: cfg.color }}
+      >
+        <span>{cfg.dot}</span>
+        <span className="hidden sm:inline">{cfg.label}</span>
+      </button>
+      {open && (
+        <>
+          <div className="fixed inset-0 z-40" onClick={() => setOpen(false)} />
+          <div className="absolute z-50 top-7 right-0 w-64 bg-[#111827] border border-[#374151] rounded-lg p-3 shadow-xl text-left"
+            style={{ fontSize: 10, color: '#94a3b8', lineHeight: 1.6 }}>
+            <button onClick={() => setOpen(false)}
+              className="absolute top-2 right-2 text-[#6b7280] hover:text-[#f1f5f9] text-xs leading-none">✕</button>
+            <p style={{ color: '#f1f5f9', fontWeight: 600, marginBottom: 6 }}>Data confidence: {cfg.dot} {confidence.charAt(0).toUpperCase() + confidence.slice(1)}</p>
+            {yearsAvailable != null && yearsSinceCod != null && (
+              <p><strong style={{ color: '#f1f5f9' }}>{yearsAvailable} year{yearsAvailable !== 1 ? 's' : ''} of data</strong> available out of {yearsSinceCod} years in operation.</p>
+            )}
+            {completeness != null && (
+              <p>Data completeness: <strong style={{ color: cfg.color }}>{completeness}%</strong></p>
+            )}
+            {dataYearsClean != null && (
+              <p>Clean data years (excl. ramp-up): <strong style={{ color: '#f1f5f9' }}>{dataYearsClean}</strong></p>
+            )}
+            <p style={{ marginTop: 6 }}>
+              {confidence === 'high' && '≥3 full years of clean data. Metrics are statistically reliable.'}
+              {confidence === 'medium' && '1–2 clean years available. Treat averages as indicative — more data needed for firm conclusions.'}
+              {confidence === 'low' && 'Fewer than 1 clean year available. All metrics are highly uncertain. Farm may be recently commissioned or ramping up.'}
+            </p>
+          </div>
+        </>
+      )}
+    </span>
+  )
+}
+
+// ============================================================
+// Data coverage card (used in ExplainerTab)
+// ============================================================
+
+function DataCoverageCard({ vs }: { vs: import('../../lib/types').WindValueSummary }) {
+  if (!vs.commissioning_year) return null
+  const hasRamp = vs.ramp_year != null
+  const cfDiff = hasRamp && vs.avg_cf_pct != null && vs.avg_cf_excl_ramp != null
+    ? vs.avg_cf_excl_ramp - vs.avg_cf_pct
+    : null
+  const confidenceColor = vs.data_confidence === 'high' ? '#22c55e'
+    : vs.data_confidence === 'medium' ? '#f59e0b' : '#ef4444'
+  const dots = vs.data_confidence === 'high' ? '●●●' : vs.data_confidence === 'medium' ? '●●○' : '●○○'
+  return (
+    <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl p-3">
+      <p className="text-[10px] font-semibold text-[var(--color-text-muted)] uppercase tracking-wider mb-2">
+        📊 Data Coverage &amp; Reliability
+      </p>
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 mb-2">
+        <div>
+          <p className="text-[9px] text-[var(--color-text-muted)]">Commissioned</p>
+          <p className="text-xs font-bold text-[var(--color-text)]">{vs.commissioning_year}</p>
+        </div>
+        <div>
+          <p className="text-[9px] text-[var(--color-text-muted)]">Years of data</p>
+          <p className="text-xs font-bold text-[var(--color-text)]">
+            {vs.data_years_clean} clean{vs.ramp_year ? ` (+1 ramp-up)` : ''}
+          </p>
+        </div>
+        <div>
+          <p className="text-[9px] text-[var(--color-text-muted)]">Completeness</p>
+          <p className="text-xs font-bold" style={{ color: confidenceColor }}>{vs.data_completeness_pct}%</p>
+          <p className="text-[9px] text-[var(--color-text-muted)]">{vs.data_years} of {vs.years_since_cod} yrs</p>
+        </div>
+        <div>
+          <p className="text-[9px] text-[var(--color-text-muted)]">Confidence</p>
+          <p className="text-xs font-bold" style={{ color: confidenceColor }}>
+            <span style={{ letterSpacing: 1 }}>{dots}</span> {vs.data_confidence.charAt(0).toUpperCase() + vs.data_confidence.slice(1)}
+          </p>
+        </div>
+      </div>
+      {hasRamp && cfDiff != null && cfDiff > 0.5 && (
+        <div className="bg-amber-500/10 border border-amber-500/30 rounded-lg p-2 mt-1">
+          <p className="text-[10px] text-amber-400 font-semibold mb-0.5">⚠️ Ramp-up year detected ({vs.ramp_year})</p>
+          <p className="text-[10px] text-[var(--color-text-muted)] leading-relaxed">
+            The {vs.ramp_year} data year shows very low output ({vs.ramp_year_cf_pct?.toFixed(1)}% CF) consistent
+            with commissioning ramp-up rather than full operation. This drags the multi-year average CF down by{' '}
+            <strong className="text-amber-400">+{cfDiff.toFixed(1)}%</strong>.{' '}
+            Excluding the ramp-up year: <strong className="text-[var(--color-text)]">{vs.avg_cf_excl_ramp?.toFixed(1)}% avg CF</strong>
+            {' '}vs reported{' '}<strong className="text-[var(--color-text-muted)]">{vs.avg_cf_pct?.toFixed(1)}%</strong>.
+          </p>
+        </div>
+      )}
+      {vs.data_completeness_pct < 60 && (
+        <div className="bg-blue-500/10 border border-blue-500/20 rounded-lg p-2 mt-1">
+          <p className="text-[10px] text-blue-400 leading-relaxed">
+            <strong>Historical data gap:</strong> {vs.data_years} years of data available but this farm has been operating for {vs.years_since_cod} years
+            ({vs.commissioning_year}–present). Pre-2018 records are not yet loaded — earlier data may be backfilled
+            via the <code className="bg-white/10 px-0.5 rounded">--backfill-from</code> pipeline flag.
+          </p>
+        </div>
       )}
     </div>
   )
@@ -329,6 +461,9 @@ function ExplainerTab({ project, stateAvg }: { project: WindValueProject; stateA
             : undefined}
         />
       </div>
+
+      {/* Data coverage card */}
+      <DataCoverageCard vs={vs} />
 
       {/* Valuation framework */}
       <div>
@@ -1005,10 +1140,13 @@ function SeasonalTab({ project }: { project: WindValueProject; stateAvg?: WindSt
 
 function TrendTab({ project }: { project: WindValueProject }) {
   const annualData = project.annual_data
+  const vs = project.value_summary
 
   if (annualData.length === 0) {
     return <EmptyState text="Insufficient data for trend analysis" />
   }
+
+  const rampYear = vs.ramp_year
 
   const cfTrendData = annualData.map(a => ({
     year: a.year.toString(),
@@ -1016,6 +1154,7 @@ function TrendTab({ project }: { project: WindValueProject }) {
     capture: a.capture_price,
     rev_mw: a.revenue_per_mw != null ? Math.round(a.revenue_per_mw / 1000) : null,
     energy: a.energy_mwh != null ? Math.round(a.energy_mwh / 1000) : null,
+    isRamp: a.year === rampYear,
   }))
 
   // Month-by-month heatmap data
@@ -1069,14 +1208,33 @@ function TrendTab({ project }: { project: WindValueProject }) {
             <CartesianGrid strokeDasharray="3 3" stroke="var(--color-border)" />
             <XAxis dataKey="year" tick={{ fontSize: 10, fill: 'var(--color-text-muted)' }} />
             <YAxis tick={{ fontSize: 10, fill: 'var(--color-text-muted)' }} tickFormatter={v => `${v}%`} domain={['auto', 'auto']} />
-            <Tooltip contentStyle={tooltipStyle} labelStyle={tooltipLabelStyle} itemStyle={tooltipItemStyle} formatter={((v) => [`${v?.toFixed(1)}%`, 'Capacity Factor']) as TF} />
+            <Tooltip
+              contentStyle={tooltipStyle} labelStyle={tooltipLabelStyle} itemStyle={tooltipItemStyle}
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+              formatter={((v: any, _name: any, props: any) => {
+                const isRamp = props?.payload?.isRamp
+                return [`${v?.toFixed(1)}%${isRamp ? ' ⚠ ramp-up year' : ''}`, 'Capacity Factor']
+              }) as TF}
+            />
             <Bar dataKey="cf" radius={[4, 4, 0, 0]}>
               {cfTrendData.map((d, i) => (
-                <Cell key={i} fill={YEAR_COLORS[parseInt(d.year)] ?? '#3b82f6'} />
+                <Cell
+                  key={i}
+                  fill={d.isRamp ? '#6b7280' : (YEAR_COLORS[parseInt(d.year)] ?? '#3b82f6')}
+                  fillOpacity={d.isRamp ? 0.5 : 1}
+                />
               ))}
             </Bar>
           </BarChart>
         </ResponsiveContainer>
+        {rampYear && (
+          <p className="text-[9px] text-amber-400 mt-1">
+            ⚠ Grey bar ({rampYear}): commissioning ramp-up year — low CF due to partial operation, not indicative of long-run performance.
+            {vs.avg_cf_excl_ramp != null && vs.avg_cf_pct != null && (
+              <> Clean average: <strong>{vs.avg_cf_excl_ramp.toFixed(1)}%</strong> vs incl. ramp: {vs.avg_cf_pct.toFixed(1)}%.</>
+            )}
+          </p>
+        )}
       </div>
 
       {/* Revenue/MW trend */}
@@ -1099,7 +1257,11 @@ function TrendTab({ project }: { project: WindValueProject }) {
               <Tooltip contentStyle={tooltipStyle} labelStyle={tooltipLabelStyle} itemStyle={tooltipItemStyle} formatter={((v) => [`$${v}k/MW`, 'Revenue']) as TF} />
               <Bar dataKey="rev_mw" radius={[4, 4, 0, 0]}>
                 {cfTrendData.map((d, i) => (
-                  <Cell key={i} fill={YEAR_COLORS[parseInt(d.year)] ?? '#22c55e'} fillOpacity={0.8} />
+                  <Cell
+                    key={i}
+                    fill={d.isRamp ? '#6b7280' : (YEAR_COLORS[parseInt(d.year)] ?? '#22c55e')}
+                    fillOpacity={d.isRamp ? 0.4 : 0.8}
+                  />
                 ))}
               </Bar>
             </BarChart>
@@ -1185,48 +1347,74 @@ function TrendTab({ project }: { project: WindValueProject }) {
 
 function PeersTab({ project, allStateProjects }: { project: WindValueProject; allStateProjects: WindValueProject[] }) {
   const [metric, setMetric] = useState<'cf' | 'capture' | 'rev'>('cf')
+  const [filterPartial, setFilterPartial] = useState(false)
 
-  // Sorted peer list for bar chart
   const sortKey: Record<string, (p: WindValueProject) => number> = {
-    cf: p => p.value_summary.avg_cf_pct ?? 0,
+    cf: p => {
+      // Use clean CF average if ramp year distorts the reported avg
+      const vs = p.value_summary
+      if (vs.ramp_year != null && vs.avg_cf_excl_ramp != null) return vs.avg_cf_excl_ramp
+      return vs.avg_cf_pct ?? 0
+    },
     capture: p => p.value_summary.avg_capture_price ?? 0,
     rev: p => p.value_summary.latest_revenue_per_mw ?? 0,
   }
-  const sorted = [...allStateProjects].sort((a, b) => sortKey[metric](b) - sortKey[metric](a))
-  const barData = sorted.map(p => ({
-    name: p.name.replace(' Wind Farm', '').replace(' Wind', '').slice(0, 22),
-    value: sortKey[metric](p),
-    isThis: p.id === project.id,
-  }))
 
-  // Scatter: CF vs capture price
-  const scatterData = allStateProjects.map(p => ({
+  const peers = filterPartial
+    ? allStateProjects.filter(p => (p.value_summary.data_years_clean ?? p.value_summary.data_years) >= 2)
+    : allStateProjects
+
+  const sorted = [...peers].sort((a, b) => sortKey[metric](b) - sortKey[metric](a))
+  const barData = sorted.map(p => {
+    const vs = p.value_summary
+    const hasRamp = vs.ramp_year != null
+    const displayValue = metric === 'cf' && hasRamp && vs.avg_cf_excl_ramp != null
+      ? vs.avg_cf_excl_ramp
+      : sortKey[metric](p)
+    return {
+      name: p.name.replace(' Wind Farm', '').replace(' Wind', '').slice(0, 22),
+      value: displayValue,
+      rawValue: sortKey[metric](p),
+      isThis: p.id === project.id,
+      confidence: vs.data_confidence ?? 'high',
+      hasRamp,
+      rampYear: vs.ramp_year,
+      dataYears: vs.data_years_clean ?? vs.data_years,
+    }
+  })
+
+  const scatterData = peers.map(p => ({
     cf: p.value_summary.avg_cf_pct ?? 0,
     capture: p.value_summary.avg_capture_price ?? 0,
     name: p.name.replace(' Wind Farm', '').slice(0, 20),
     isThis: p.id === project.id,
     cap: p.capacity_mw,
+    confidence: p.value_summary.data_confidence ?? 'high',
   }))
 
-  const metricLabel = { cf: 'Avg CF%', capture: 'Avg Capture $/MWh', rev: 'Revenue/MW $k' }
+  const metricLabel = { cf: 'Avg CF% (clean)', capture: 'Avg Capture $/MWh', rev: 'Revenue/MW $k' }
   const metricFmt: Record<string, (v: number) => string> = {
     cf: v => `${v.toFixed(1)}%`,
     capture: v => `$${v.toFixed(0)}/MWh`,
     rev: v => `$${Math.round(v / 1000)}k/MW`,
   }
 
+  const confDot = (c: string) => c === 'high' ? '🟢' : c === 'medium' ? '🟡' : '🔴'
+  const rampAffected = allStateProjects.filter(p => p.value_summary.ramp_year != null)
+  const filteredCount = allStateProjects.length - peers.length
+
   return (
     <div className="space-y-4">
       <div className="bg-teal-500/5 border border-teal-500/20 rounded-lg p-3">
         <p className="text-[11px] text-[var(--color-text-muted)] leading-relaxed">
           <strong className="text-[var(--color-text)]">Peer comparison</strong> across {allStateProjects.length} operating wind
-          farms in {project.state}. Highlighted in white below. The scatter plot (CF vs capture price) reveals whether
-          a farm&apos;s location produces both volume and value simultaneously.
+          farms in {project.state}. Highlighted in white below. Rankings use clean CF averages (excluding ramp-up years)
+          so newly commissioned farms are not unfairly penalised.
         </p>
       </div>
 
-      {/* Metric toggle */}
-      <div className="flex gap-1">
+      {/* Metric + filter toggles */}
+      <div className="flex flex-wrap gap-1 items-center">
         {(['cf', 'capture', 'rev'] as const).map(m => (
           <button
             key={m}
@@ -1240,6 +1428,17 @@ function PeersTab({ project, allStateProjects }: { project: WindValueProject; al
             {metricLabel[m]}
           </button>
         ))}
+        <button
+          onClick={() => setFilterPartial(v => !v)}
+          className={`ml-auto px-2.5 py-1 rounded text-[10px] font-medium transition-colors border ${
+            filterPartial
+              ? 'bg-amber-500/20 border-amber-500/50 text-amber-400'
+              : 'bg-[var(--color-bg-card)] border-[var(--color-border)] text-[var(--color-text-muted)] hover:text-[var(--color-text)]'
+          }`}
+          title="Exclude farms with fewer than 2 full years of clean data"
+        >
+          {filterPartial ? `✓ Hiding ${filteredCount} partial` : '🔍 Show all farms'}
+        </button>
       </div>
 
       {/* Horizontal bar chart — ranked peers */}
@@ -1248,8 +1447,9 @@ function PeersTab({ project, allStateProjects }: { project: WindValueProject; al
           {project.state} Wind Farm Rankings — {metricLabel[metric]}
           <ChartInfo>
             <p style={{color:'#f1f5f9',fontWeight:600,marginBottom:4}}>Peer rankings</p>
-            All operating wind farms in {project.state}, ranked by the selected metric. Toggle between Avg CF%, Avg Capture $/MWh, and Revenue/MW $k using the buttons above.<br/><br/>
-            Rankings use each farm's multi-year average. <span style={{color:'#f59e0b',fontWeight:600}}>Caution:</span> farms commissioned at different times are compared over different historical periods — a newer farm's shorter history may not reflect its long-run potential.<br/><br/>
+            All operating wind farms in {project.state}, ranked by the selected metric.<br/><br/>
+            <strong style={{color:'#22c55e'}}>CF rankings use clean averages</strong> — ramp-up years (first year of commissioning with anomalously low output) are automatically excluded so newly commissioned farms are not artificially ranked lower than their long-run potential would suggest.<br/><br/>
+            🟢 High confidence = ≥3 clean years · 🟡 Medium = 1–2 years · 🔴 Low = &lt;1 year. Use the filter button to hide partial-data farms.<br/><br/>
             <span style={{color:'#f1f5f9',fontWeight:600}}>Data:</span> Same AEMO dispatch pipeline applied to all {project.state} wind farms. Updated when the import pipeline is re-run (typically monthly).
           </ChartInfo>
         </p>
@@ -1258,9 +1458,12 @@ function PeersTab({ project, allStateProjects }: { project: WindValueProject; al
             const maxVal = barData[0].value || 1
             const w = Math.round((d.value / maxVal) * 100)
             return (
-              <div key={i} className="flex items-center gap-2">
+              <div key={i} className="flex items-center gap-1.5">
                 <span className={`text-[9px] w-4 shrink-0 text-right ${d.isThis ? 'text-white font-bold' : 'text-[var(--color-text-muted)]'}`}>
                   {i + 1}
+                </span>
+                <span className="text-[8px] shrink-0 w-3" title={`Data confidence: ${d.confidence}`}>
+                  {confDot(d.confidence)}
                 </span>
                 <div className="flex-1 relative h-5 flex items-center">
                   <div
@@ -1272,6 +1475,7 @@ function PeersTab({ project, allStateProjects }: { project: WindValueProject; al
                   />
                   <span className={`relative z-10 text-[10px] px-1.5 truncate ${d.isThis ? 'font-bold text-[var(--color-bg)]' : 'text-[var(--color-text-muted)]'}`}>
                     {d.name}
+                    {d.hasRamp && <span className="ml-1 text-[8px] text-amber-400">*</span>}
                   </span>
                 </div>
                 <span className={`text-[10px] font-mono shrink-0 ${d.isThis ? 'text-white font-bold' : 'text-[var(--color-text-muted)]'}`}>
@@ -1281,6 +1485,14 @@ function PeersTab({ project, allStateProjects }: { project: WindValueProject; al
             )
           })}
         </div>
+        {rampAffected.length > 0 && (
+          <p className="text-[9px] text-amber-400 mt-2">
+            * CF excluding ramp-up year (commissioning year anomaly detected).{' '}
+            {rampAffected.length} farm{rampAffected.length > 1 ? 's' : ''} affected:{' '}
+            {rampAffected.slice(0, 3).map(p => p.name.replace(' Wind Farm', '')).join(', ')}
+            {rampAffected.length > 3 && ` +${rampAffected.length - 3} more`}.
+          </p>
+        )}
       </div>
 
       {/* Scatter: CF vs capture price */}
@@ -1331,7 +1543,7 @@ function PeersTab({ project, allStateProjects }: { project: WindValueProject; al
                     <p style={{ color: '#f1f5f9', fontWeight: 600, fontSize: 11 }}>{d.name}</p>
                     <p style={tooltipItemStyle}>CF: {d.cf?.toFixed(1)}%</p>
                     <p style={tooltipItemStyle}>Capture: ${d.capture?.toFixed(0)}/MWh</p>
-                    <p style={{ color: '#94a3b8', fontSize: 10 }}>{d.cap} MW</p>
+                    <p style={{ color: '#94a3b8', fontSize: 10 }}>{d.cap} MW · {confDot(d.confidence)} {d.confidence} confidence</p>
                   </div>
                 )
               }}
@@ -1507,10 +1719,10 @@ function DiversityTab({
   // Solar dark hours share: how much of this farm's output is outside solar hours (9am–3pm)?
   const solarPeakHours = [9, 10, 11, 12, 13, 14, 15]
   const farmTotalShape = farmHourly
-    ? farmHourly.reduce((s, v) => s + (v ?? 0), 0)
+    ? farmHourly.reduce((s: number, v) => s + (v ?? 0), 0)
     : null
   const farmOffSolarShape = farmHourly && farmTotalShape
-    ? farmHourly.filter((_, i) => !solarPeakHours.includes(i)).reduce((s, v) => s + (v ?? 0), 0)
+    ? farmHourly.filter((_, i) => !solarPeakHours.includes(i)).reduce((s: number, v) => s + (v ?? 0), 0)
     : null
   const offSolarPct = farmTotalShape && farmOffSolarShape
     ? Math.round(farmOffSolarShape / farmTotalShape * 100) : null
@@ -1821,8 +2033,8 @@ function DiversityTab({
             <MetricCard
               label="Evening Peak Share"
               value={farmHourly ? (() => {
-                const total = farmHourly.reduce((s, v) => s + (v ?? 0), 0)
-                const peak = [18, 19, 20, 21].reduce((s, i) => s + (farmHourly[i] ?? 0), 0)
+                const total = farmHourly.reduce((s: number, v) => s + (v ?? 0), 0)
+                const peak = [18, 19, 20, 21].reduce((s: number, i) => s + (farmHourly[i] ?? 0), 0)
                 return total > 0 ? `${(peak / total * 100).toFixed(0)}%` : '–'
               })() : '–'}
               sub="output in 6–9pm window"

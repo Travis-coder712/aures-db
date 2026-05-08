@@ -576,6 +576,44 @@ def compute_project_analytics(
 
     latest_year_r_mw = annual_data[-1]['revenue_per_mw'] if annual_data else None
 
+    # ---- data completeness & ramp-up detection ----
+    commissioning_year = None
+    if project.get('cod_current'):
+        try:
+            commissioning_year = int(str(project['cod_current'])[:4])
+        except (ValueError, TypeError):
+            pass
+
+    # Ramp-up year: first data year CF < 40% of subsequent-years avg (or < 8% absolute)
+    # Typical cause: farm commissioned mid-year or turbines rolled out progressively
+    ramp_year: Optional[int] = None
+    ramp_year_cf: Optional[float] = None
+    if len(annual_data) >= 2:
+        first = annual_data[0]
+        rest_cf = [a['cf_pct'] for a in annual_data[1:] if a['cf_pct'] is not None]
+        if rest_cf and first.get('cf_pct') is not None:
+            rest_avg = sum(rest_cf) / len(rest_cf)
+            threshold = min(rest_avg * 0.40, 8.0)
+            if first['cf_pct'] < threshold:
+                ramp_year = first['year']
+                ramp_year_cf = first['cf_pct']
+
+    # Clean averages excluding ramp year
+    clean_monthly = [m for m in monthly_enriched if m['year'] != ramp_year]
+    clean_annual = [a for a in annual_data if a['year'] != ramp_year]
+    clean_cf_vals = [m['cf_pct'] for m in clean_monthly if m['cf_pct'] is not None]
+    avg_cf_excl_ramp = round(sum(clean_cf_vals) / len(clean_cf_vals), 2) if clean_cf_vals else avg_cf
+
+    current_year = date.today().year
+    years_since_cod = (current_year - commissioning_year) if commissioning_year else None
+    # How many full calendar years of clean data vs age of farm
+    data_completeness_pct: Optional[float] = None
+    if years_since_cod and years_since_cod > 0:
+        data_completeness_pct = round(min(len(annual_data) / years_since_cod * 100, 100), 0)
+
+    data_years_clean = len(clean_annual)
+    data_confidence = 'low' if data_years_clean < 1 else ('medium' if data_years_clean < 3 else 'high')
+
     value_summary = {
         "avg_cf_pct": avg_cf,
         "avg_capture_price": avg_cp,
@@ -589,6 +627,16 @@ def compute_project_analytics(
         "data_years": len(annual_data),
         "data_first_year": annual_data[0]['year'] if annual_data else None,
         "data_last_year": annual_data[-1]['year'] if annual_data else None,
+        # completeness metadata
+        "commissioning_year": commissioning_year,
+        "data_months_available": len(monthly_enriched),
+        "data_years_clean": data_years_clean,
+        "ramp_year": ramp_year,
+        "ramp_year_cf_pct": ramp_year_cf,
+        "avg_cf_excl_ramp": avg_cf_excl_ramp,
+        "data_completeness_pct": data_completeness_pct,
+        "years_since_cod": years_since_cod,
+        "data_confidence": data_confidence,
     }
 
     return {
