@@ -216,7 +216,12 @@ def import_from_api(conn, year: int, ytd: bool = False):
                     all_series.extend(resp.get('data', []))
                 except Exception as dbg_e:
                     if batch_num == 1:
-                        print(f"  [DEBUG] metric={metric_name} raised: {dbg_e}")
+                        body = ''
+                        try:
+                            body = dbg_e.read().decode()  # type: ignore[attr-defined]
+                        except Exception:
+                            pass
+                        print(f"  [DEBUG] metric={metric_name} raised: {dbg_e} — {body}")
 
             for series in all_series:
                 metric = series.get('metric')
