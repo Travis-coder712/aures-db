@@ -26,7 +26,7 @@ import argparse
 import random
 import json
 import time
-from datetime import datetime, date
+from datetime import datetime, date, timedelta
 from difflib import SequenceMatcher
 from urllib.request import Request, urlopen
 from urllib.parse import urlencode, quote
@@ -112,6 +112,13 @@ def import_from_api(conn, year: int, ytd: bool = False):
     if remaining < 15:
         print("WARNING: Low API quota. Consider waiting for reset.")
         sys.exit(1)
+
+    # Check the Community plan's 367-day data window
+    earliest_allowed = date.today() - timedelta(days=367)
+    if date(year, 12, 31) < earliest_allowed:
+        print(f"  Skipping {year}: outside the 367-day API window (Community plan allows from {earliest_allowed}).")
+        print(f"  To access older data, upgrade your OpenElectricity plan.")
+        return
 
     # Determine date range
     date_start = f"{year}-01-01"
@@ -209,19 +216,9 @@ def import_from_api(conn, year: int, ytd: bool = False):
                         "date_start": date_start,
                         "date_end": date_end,
                     })
-                    if batch_num == 1:
-                        import json as _json
-                        print(f"  [DEBUG] metric={metric_name} top-level keys: {list(resp.keys())}")
-                        print(f"  [DEBUG] raw response (first 600 chars): {_json.dumps(resp, default=str)[:600]}")
                     all_series.extend(resp.get('data', []))
-                except Exception as dbg_e:
-                    if batch_num == 1:
-                        body = ''
-                        try:
-                            body = dbg_e.read().decode()  # type: ignore[attr-defined]
-                        except Exception:
-                            pass
-                        print(f"  [DEBUG] metric={metric_name} raised: {dbg_e} — {body}")
+                except Exception:
+                    pass  # market_value may not be available on all plans
 
             for series in all_series:
                 metric = series.get('metric')
