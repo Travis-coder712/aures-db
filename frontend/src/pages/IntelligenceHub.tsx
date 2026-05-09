@@ -1,17 +1,11 @@
 import { useNavigate } from 'react-router-dom'
 
-const FEATURES = [
+const ACTIVE_FEATURES = [
   {
     icon: '\u{1F3AF}',
     title: 'CIS / LTESA Scheme Intelligence',
     description: 'Overview, comparison, and milestone tracking for CIS and LTESA rounds',
     route: '/intelligence/scheme-tracker',
-  },
-  {
-    icon: '\u{1F4CA}',
-    title: 'COD Drift Analysis',
-    description: 'Aggregate delay patterns by technology, state, and developer',
-    route: '/intelligence/drift-analysis',
   },
   {
     icon: '\u{1F4A8}',
@@ -20,7 +14,7 @@ const FEATURES = [
     route: '/intelligence/wind-resource',
   },
   {
-    icon: '\u2600\uFE0F',
+    icon: '☀️',
     title: 'Solar Resource',
     description: 'Solar capacity factor benchmarks by state, REZ, capacity class, and developer. Development pipeline predictions.',
     route: '/intelligence/solar-resource',
@@ -32,16 +26,10 @@ const FEATURES = [
     route: '/intelligence/dunkelflaute',
   },
   {
-    icon: '\u26A1',
+    icon: '⚡',
     title: 'Energy Mix Transition',
     description: 'State-by-state generation mix evolution and pipeline projection',
     route: '/intelligence/energy-mix',
-  },
-  {
-    icon: '\u{1F3D7}\uFE0F',
-    title: 'Developer Execution',
-    description: 'Track record ratings for project delivery reliability',
-    route: '/intelligence/developer-scores',
   },
   {
     icon: '\u{1F4B0}',
@@ -97,29 +85,38 @@ const FEATURES = [
     description: 'Battery storage capex benchmarking by $/MW, $/MWh, OEM, and state',
     route: '/intelligence/bess-capex',
   },
+] as const
+
+const UNDER_CONSTRUCTION_FEATURES = [
   {
-    icon: '\u{1F5D3}\uFE0F',
+    icon: '\u{1F4CA}',
+    title: 'COD Drift Analysis',
+    description: 'Aggregate delay patterns by technology, state, and developer',
+  },
+  {
+    icon: '\u{1F3D7}️',
+    title: 'Developer Execution',
+    description: 'Track record ratings for project delivery reliability',
+  },
+  {
+    icon: '\u{1F5D3}️',
     title: 'Project Timeline',
     description: 'Gantt-style development, construction, and operations timeline across the pipeline',
-    route: '/intelligence/project-timeline',
   },
   {
     icon: '\u{1F9ED}',
     title: 'Lifecycle Quartile Matrix',
-    description: 'State-of-the-nation grid \u2014 every project by tech \u00d7 state \u00d7 stage with quartile scoring.',
-    route: '/intelligence/lifecycle-quartile',
+    description: 'State-of-the-nation grid — every project by tech × state × stage with quartile scoring.',
   },
   {
     icon: '\u{1F501}',
     title: 'Asset Lifecycle & Repowering',
     description: 'Operating fleet age profile, repowering candidates, aging OEM exposure, and fleet turnover forecast to 2050.',
-    route: '/intelligence/asset-lifecycle',
   },
   {
-    icon: '\u26A0\uFE0F',
+    icon: '⚠️',
     title: 'Risk & Probability Signals',
     description: 'Supply chain concentration, bankrupt-OEM exposure, dev-OEM chain risks, and scheme win probability scoring for development projects.',
-    route: '/intelligence/risk-signals',
   },
 ] as const
 
@@ -136,7 +133,7 @@ export default function IntelligenceHub() {
       </p>
 
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 lg:gap-4">
-        {FEATURES.map((f) => (
+        {ACTIVE_FEATURES.map((f) => (
           <div
             key={f.route}
             onClick={() => navigate(f.route)}
@@ -151,6 +148,32 @@ export default function IntelligenceHub() {
             </p>
           </div>
         ))}
+      </div>
+
+      <div className="mt-10">
+        <div className="flex items-center gap-2 mb-4">
+          <span className="text-base">🚧</span>
+          <h2 className="text-sm font-semibold uppercase tracking-wider text-[var(--color-text-muted)]/60">
+            Under Construction
+          </h2>
+          <div className="flex-1 h-px bg-[var(--color-border)]" />
+        </div>
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 lg:gap-4">
+          {UNDER_CONSTRUCTION_FEATURES.map((f) => (
+            <div
+              key={f.title}
+              className="bg-[var(--color-bg-card)]/50 border border-[var(--color-border)]/50 rounded-xl p-5 cursor-not-allowed opacity-50"
+            >
+              <span className="text-3xl block mb-3 grayscale">{f.icon}</span>
+              <h2 className="text-sm font-semibold text-[var(--color-text-muted)] mb-1">
+                {f.title}
+              </h2>
+              <p className="text-xs text-[var(--color-text-muted)]/60 leading-relaxed">
+                {f.description}
+              </p>
+            </div>
+          ))}
+        </div>
       </div>
 
       <p className="text-[11px] text-[var(--color-text-muted)]/50 mt-8 text-center">

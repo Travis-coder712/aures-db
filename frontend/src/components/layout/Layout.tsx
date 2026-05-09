@@ -171,10 +171,6 @@ const NAV_GROUPS: NavGroup[] = [
     title: 'Explore',
     items: [
       { path: '/', label: 'Home', icon: HomeIcon },
-      { path: '/dashboard', label: 'Dashboard', icon: ChartIcon },
-      { path: '/projects', label: 'Projects', icon: DatabaseIcon },
-      { path: '/map', label: 'Map', icon: GlobeIcon },
-      { path: '/watchlist', label: 'Watchlist', icon: EyeIcon },
       { path: '/search', label: 'Search', icon: SearchIcon },
     ],
   },
@@ -183,10 +179,7 @@ const NAV_GROUPS: NavGroup[] = [
     items: [
       { path: '/performance', label: 'Performance', icon: TrendingIcon },
       { path: '/intelligence', label: 'Intelligence Hub', icon: LightbulbIcon },
-      { path: '/developers', label: 'Developers', icon: UsersIcon },
       { path: '/oems', label: 'OEMs', icon: WrenchIcon },
-      { path: '/contractors', label: 'Contractors', icon: BuildingIcon },
-      { path: '/offtakers', label: 'Offtakers', icon: DocumentIcon },
       { path: '/rez', label: 'REZ', icon: MapIcon },
     ],
   },
@@ -291,7 +284,7 @@ export default function Layout() {
           {FUTURE_ITEMS.length > 0 && (
             <div className="mt-5">
               <p className="px-3 pb-1.5 text-[10px] font-semibold uppercase tracking-wider text-[var(--color-text-muted)]/60">
-                Coming Soon
+                Under Construction
               </p>
               <div className="space-y-1">
                 {FUTURE_ITEMS.map((item) => (
@@ -301,7 +294,7 @@ export default function Layout() {
                   >
                     <item.icon className="w-5 h-5" />
                     {item.label}
-                    <span className="ml-auto text-[9px] bg-[var(--color-bg-elevated)] px-1.5 py-0.5 rounded-full">Soon</span>
+                    <span className="ml-auto text-[9px] bg-[var(--color-bg-elevated)] px-1.5 py-0.5 rounded-full">🚧</span>
                   </div>
                 ))}
               </div>
@@ -409,7 +402,7 @@ export default function Layout() {
               {FUTURE_ITEMS.length > 0 && (
                 <div className="mt-5">
                   <p className="px-3 pb-1.5 text-[10px] font-semibold uppercase tracking-wider text-[var(--color-text-muted)]/60">
-                    Coming Soon
+                    Under Construction
                   </p>
                   <div className="space-y-1">
                     {FUTURE_ITEMS.map((item) => (
@@ -419,7 +412,7 @@ export default function Layout() {
                       >
                         <item.icon className="w-5 h-5" />
                         {item.label}
-                        <span className="ml-auto text-[9px] bg-[var(--color-bg-elevated)] px-1.5 py-0.5 rounded-full">Soon</span>
+                        <span className="ml-auto text-[9px] bg-[var(--color-bg-elevated)] px-1.5 py-0.5 rounded-full">🚧</span>
                       </div>
                     ))}
                   </div>
@@ -552,5 +545,13 @@ export default function Layout() {
   )
 }
 
-// Future nav items (greyed out) — currently empty
-const FUTURE_ITEMS: { label: string; icon: React.ComponentType<{ className?: string }> }[] = []
+// Under-construction nav items — greyed out, non-clickable
+const FUTURE_ITEMS: { label: string; icon: React.ComponentType<{ className?: string }> }[] = [
+  { label: 'Dashboard', icon: ChartIcon },
+  { label: 'Projects', icon: DatabaseIcon },
+  { label: 'Map', icon: GlobeIcon },
+  { label: 'Watchlist', icon: EyeIcon },
+  { label: 'Developers', icon: UsersIcon },
+  { label: 'Contractors', icon: BuildingIcon },
+  { label: 'Offtakers', icon: DocumentIcon },
+]
