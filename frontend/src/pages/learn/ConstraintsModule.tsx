@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useCallback } from 'react'
 import { useParams, useNavigate, Link } from 'react-router-dom'
 
 // ============================================================
@@ -222,7 +222,6 @@ function Lesson1() {
 
         <div className="space-y-2">
           {display.map((u) => {
-            const pct = (u.dispatched / u.capacity) * 100
             const isMarginal = u.name === marginalUnit?.name
             return (
               <div key={u.name} className="flex items-center gap-3">
@@ -232,7 +231,7 @@ function Lesson1() {
                     className="h-full rounded transition-all duration-500"
                     style={{ width: `${(u.dispatched / 400) * 100}%`, backgroundColor: u.color, opacity: 0.85 }}
                   />
-                  {'capped' in u && u.capped && (
+                  {Boolean('capped' in u && u.capped) && (
                     <div
                       className="absolute top-0 h-full border-r-2 border-amber-400 border-dashed"
                       style={{ left: `${(SOLAR_LIMIT / 400) * 100}%` }}
