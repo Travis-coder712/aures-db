@@ -1,7 +1,7 @@
-"""True 5-minute price band capture importer for wind farms.
+"""True 5-minute price band capture importer for wind and solar farms.
 
 Correlates NEMWEB 5-min DISPATCHPRICE (regional spot price) with 5-min
-DISPATCHLOAD (per-DUID generation) to compute, per wind farm per month:
+DISPATCHLOAD (per-DUID generation) to compute, per farm per month:
 
   - Exact weighted-average capture price (cross-validates OpenElectricity values)
   - Distribution of generation across price regime bands (% MWh in each band)
@@ -26,6 +26,12 @@ Usage:
 
     # Process all months that have BOTH price and load ZIPs already cached
     python3 pipeline/importers/import_price_band_capture.py --all-cached
+
+    # Run for solar DUIDs (uses the same cached ZIPs — no re-download)
+    python3 pipeline/importers/import_price_band_capture.py --all-cached --tech solar
+
+    # Run for both wind and solar in one pass
+    python3 pipeline/importers/import_price_band_capture.py --all-cached --tech all
 
     # Validate computed capture prices against OpenElectricity reported values
     python3 pipeline/importers/import_price_band_capture.py --validate
@@ -270,7 +276,7 @@ def parse_5min_prices(price_zip: str) -> dict[str, dict[str, float]]:
 
 
 # ============================================================
-# Wind DUID registry
+# DUID registry
 # ============================================================
 
 def load_wind_duids(conn: sqlite3.Connection) -> dict[str, tuple[str, str]]:
@@ -283,6 +289,31 @@ def load_wind_duids(conn: sqlite3.Connection) -> dict[str, tuple[str, str]]:
           AND duid IS NOT NULL AND duid != ''
     """).fetchall()
     return {r['duid']: (r['project_id'] or '', r['region'] or '') for r in rows}
+
+
+def load_solar_duids(conn: sqlite3.Connection) -> dict[str, tuple[str, str]]:
+    """Return {DUID: (project_id, region)} for operating solar DUIDs."""
+    rows = conn.execute("""
+        SELECT UPPER(duid) as duid, project_id, region
+        FROM aemo_generation_info
+        WHERE (fuel_type LIKE '%Solar%' OR fuel_type LIKE '%PV%')
+          AND status IN ('In Service', 'In Commissioning')
+          AND duid IS NOT NULL AND duid != ''
+    """).fetchall()
+    return {r['duid']: (r['project_id'] or '', r['region'] or '') for r in rows}
+
+
+def load_duids_for_tech(conn: sqlite3.Connection, tech: str) -> dict[str, tuple[str, str]]:
+    """Load DUIDs for the given tech: 'wind', 'solar', or 'all'."""
+    if tech == 'wind':
+        return load_wind_duids(conn)
+    if tech == 'solar':
+        return load_solar_duids(conn)
+    if tech == 'all':
+        merged = load_wind_duids(conn)
+        merged.update(load_solar_duids(conn))
+        return merged
+    raise ValueError(f"Unknown tech '{tech}' — use wind, solar, or all")
 
 
 # ============================================================
@@ -449,7 +480,7 @@ def upsert_month(
 # Per-month orchestration
 # ============================================================
 
-def process_month(month: str, conn: sqlite3.Connection) -> bool:
+def process_month(month: str, conn: sqlite3.Connection, tech: str = 'wind') -> bool:
     yyyy_s, mm_s = month.split('-')
     year, mon = int(yyyy_s), int(mm_s)
 
@@ -465,23 +496,23 @@ def process_month(month: str, conn: sqlite3.Connection) -> bool:
         print(f'    ! DISPATCHLOAD not available for {month}')
         return False
 
-    wind_duids = load_wind_duids(conn)
-    if not wind_duids:
-        print('    ! no wind DUIDs in aemo_generation_info — run import_aemo_gen_info.py first')
+    duids = load_duids_for_tech(conn, tech)
+    if not duids:
+        print(f'    ! no {tech} DUIDs in aemo_generation_info — run import_aemo_gen_info.py first')
         return False
 
     print(f'  [{month}] Parsing 5-min prices ({os.path.basename(price_zip)})...')
     prices = parse_5min_prices(price_zip)
     n_intervals = sum(len(v) for v in prices.values())
-    print(f'    {n_intervals:,} price intervals loaded ({len(wind_duids)} wind DUIDs)')
+    print(f'    {n_intervals:,} price intervals loaded ({len(duids)} {tech} DUIDs)')
 
     print(f'  [{month}] Correlating generation × price ({os.path.basename(load_zip)})...')
-    buckets = compute_price_bands_for_month(load_zip, prices, wind_duids)
+    buckets = compute_price_bands_for_month(load_zip, prices, duids)
 
     active = sum(1 for d, bands in buckets.items() if any(b['gen_mwh'] > 0 for b in bands.values()))
-    print(f'    {active}/{len(wind_duids)} DUIDs had generation this month')
+    print(f'    {active}/{len(duids)} DUIDs had generation this month')
 
-    rows = upsert_month(conn, year, mon, buckets, wind_duids)
+    rows = upsert_month(conn, year, mon, buckets, duids)
     print(f'    Wrote {rows} band rows to price_band_capture')
     return True
 
@@ -591,12 +622,14 @@ def month_range(start: str, end: str) -> list[str]:
 
 def main() -> None:
     parser = argparse.ArgumentParser(
-        description='Import true 5-min price band capture for wind farms from NEMWEB archives'
+        description='Import true 5-min price band capture for wind/solar farms from NEMWEB archives'
     )
     grp = parser.add_mutually_exclusive_group()
     grp.add_argument('--month',      metavar='YYYY-MM', help='Process a single month')
     grp.add_argument('--months',     nargs=2, metavar=('START', 'END'), help='Process a date range')
     grp.add_argument('--all-cached', action='store_true', help='Process all months with both ZIPs cached')
+    parser.add_argument('--tech', choices=['wind', 'solar', 'all'], default='wind',
+                        help='Which technology DUIDs to process (default: wind)')
     parser.add_argument('--validate', action='store_true',
                         help='Print comparison table vs OpenElectricity capture prices')
     args = parser.parse_args()
@@ -627,11 +660,11 @@ def main() -> None:
         conn.close()
         sys.exit(1)
 
-    print('=== 5-min Price Band Capture Importer ===')
+    print(f'=== 5-min Price Band Capture Importer — tech={args.tech} ===')
     ok = fail = 0
     t0 = datetime.now()
     for month in months:
-        if process_month(month, conn):
+        if process_month(month, conn, tech=args.tech):
             ok += 1
         else:
             fail += 1
