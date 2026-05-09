@@ -903,3 +903,33 @@ export async function fetchREZAccess(): Promise<REZAccessMap | null> {
     return rezAccessCache
   } catch { return null }
 }
+
+// ============================================================
+// Value Analysis Data (Wind + Solar cannibalisation)
+// ============================================================
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+let windValueCache: any | null = null
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export async function fetchWindValue(): Promise<any | null> {
+  if (windValueCache) return windValueCache
+  try {
+    const resp = await fetch(`${BASE}/analytics/wind-value.json`)
+    if (!resp.ok) return null
+    windValueCache = await resp.json()
+    return windValueCache
+  } catch { return null }
+}
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+let solarValueCache: any | null = null
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export async function fetchSolarValue(): Promise<any | null> {
+  if (solarValueCache) return solarValueCache
+  try {
+    const resp = await fetch(`${BASE}/analytics/intelligence/solar-value.json`)
+    if (!resp.ok) return null
+    solarValueCache = await resp.json()
+    return solarValueCache
+  } catch { return null }
+}

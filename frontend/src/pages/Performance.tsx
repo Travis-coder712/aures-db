@@ -13,7 +13,7 @@ import {
   Legend,
 } from 'recharts'
 import { useLeagueTableIndex, useLeagueTable, useFilteredLeagueTable } from '../hooks/usePerformanceData'
-import { fetchMonthlyPerformance, fetchLeagueTable } from '../lib/dataService'
+import { fetchMonthlyPerformance, fetchLeagueTable, fetchWindValue, fetchSolarValue } from '../lib/dataService'
 import type { LeagueTable, LeagueTechnology, LeagueTableEntry, State, ProjectMonthlyPerformance } from '../lib/types'
 import DataProvenance from '../components/common/DataProvenance'
 import DrillPanel from '../components/common/DrillPanel'
@@ -100,6 +100,12 @@ const METRIC_INFO: Record<string, MetricInfo> = {
     description: 'Projects are divided into four equal groups based on composite score. Q1 (top 25%) are the best performers, Q4 (bottom 25%) are the lowest ranked.',
     source: 'Calculated by AURES from composite performance scores.',
   },
+  value_factor: {
+    label: 'Value Factor (VF)',
+    description: 'The ratio of the average price received (capture price) to the pool average price. Values below 1.0 indicate price cannibalisation — the asset generates at times when many others also generate, depressing wholesale prices. Solar VF is typically 0.5–0.8 and declining as more solar enters the market.',
+    formula: 'VF = Capture Price / Pool Average Price',
+    source: 'Computed from AEMO 5-minute NEMWEB dispatch data.',
+  },
 }
 
 function InfoTooltip({ metricKey }: { metricKey: string }) {
@@ -179,7 +185,19 @@ const QUARTILE_LABELS: Record<number, string> = {
   4: 'Q4 — Bottom 25%',
 }
 
-type SortField = 'rank' | 'capacity' | 'cf' | 'price' | 'rev' | 'curtailment' | 'spread' | 'util' | 'cycles' | 'discharged' | 'charged'
+type SortField = 'rank' | 'capacity' | 'cf' | 'price' | 'rev' | 'curtailment' | 'spread' | 'util' | 'cycles' | 'discharged' | 'charged' | 'vf'
+
+interface ValueProject {
+  id: string
+  state: string
+  annual_data: Array<{ year: number; capture_price?: number; months?: number }>
+  value_summary: { avg_value_factor?: number }
+}
+interface ValueDataFile {
+  pool_prices: Record<string, Record<string, number>>
+  state_averages: Record<string, { avg_value_factor?: number }>
+  projects: Record<string, ValueProject>
+}
 type SortDir = 'asc' | 'desc'
 
 // ============================================================
@@ -197,6 +215,18 @@ export default function Performance() {
   const [sortField, setSortField] = useState<SortField>('rank')
   const [sortDir, setSortDir] = useState<SortDir>('asc')
   const [drill, setDrill] = useState<1 | 2 | 3 | 4 | null>(null)
+  const [valueData, setValueData] = useState<ValueDataFile | null>(null)
+
+  // Load value factor data for wind/solar
+  useEffect(() => {
+    if (tech === 'wind') {
+      fetchWindValue().then(d => setValueData(d))
+    } else if (tech === 'solar') {
+      fetchSolarValue().then(d => setValueData(d))
+    } else {
+      setValueData(null)
+    }
+  }, [tech])
 
   // Sync year when index loads
   const [yearInitialized, setYearInitialized] = useState(false)
@@ -327,6 +357,7 @@ export default function Performance() {
         case 'cycles': return p.cycles ?? 0
         case 'discharged': return p.energy_discharged_mwh ?? 0
         case 'charged': return p.energy_charged_mwh ?? 0
+        case 'vf': return vfMap.get(p.project_id) ?? 0
         default: return p.rank_composite
       }
     }
@@ -338,6 +369,49 @@ export default function Performance() {
     })
     return projects
   }, [filtered, sortField, sortDir])
+
+  // Map project_id → avg value factor (from wind-value.json / solar-value.json)
+  const vfMap = useMemo<Map<string, number>>(() => {
+    const m = new Map<string, number>()
+    if (!valueData?.projects) return m
+    for (const [id, p] of Object.entries(valueData.projects)) {
+      const vf = p.value_summary?.avg_value_factor
+      if (vf != null) m.set(id, vf)
+    }
+    return m
+  }, [valueData])
+
+  const fleetAvgVF = useMemo(() => {
+    if (vfMap.size === 0 || !sorted.length) return undefined
+    const vals = sorted.map(p => vfMap.get(p.project_id)).filter((v): v is number => v != null)
+    return vals.length > 0 ? vals.reduce((s, v) => s + v, 0) / vals.length : undefined
+  }, [vfMap, sorted])
+
+  // Annual VF trend (fleet avg per year — for cannibalisation chart)
+  const vfTrendData = useMemo(() => {
+    if (!valueData) return []
+    const yearMap = new Map<number, { total: number; count: number }>()
+    for (const proj of Object.values(valueData.projects)) {
+      for (const ann of proj.annual_data) {
+        const poolPrice = valueData.pool_prices[proj.state]?.[String(ann.year)]
+        if (!poolPrice || !ann.capture_price || poolPrice <= 0) continue
+        const vf = ann.capture_price / poolPrice
+        if (vf <= 0 || vf > 2) continue
+        const entry = yearMap.get(ann.year) ?? { total: 0, count: 0 }
+        entry.total += vf
+        entry.count++
+        yearMap.set(ann.year, entry)
+      }
+    }
+    return Array.from(yearMap.entries())
+      .sort((a, b) => a[0] - b[0])
+      .filter(([, { count }]) => count >= 3)
+      .map(([year, { total, count }]) => ({
+        year: String(year),
+        vf: Math.round((total / count) * 1000) / 1000,
+        count,
+      }))
+  }, [valueData])
 
   const handleSort = useCallback((field: SortField) => {
     if (sortField === field) {
@@ -551,7 +625,14 @@ export default function Performance() {
               infoKey="revenue_per_mw"
             />
           )}
-          {tech !== 'bess' && table.fleet_avg.curtailment_pct != null && (
+          {tech !== 'bess' && fleetAvgVF != null ? (
+            <StatCard
+              label="Avg Value Factor"
+              value={fleetAvgVF.toFixed(3)}
+              color="#8b5cf6"
+              infoKey="value_factor"
+            />
+          ) : tech !== 'bess' && table.fleet_avg.curtailment_pct != null && (
             <StatCard
               label="Avg Curtailment"
               value={`${table.fleet_avg.curtailment_pct.toFixed(1)}%`}
@@ -618,6 +699,9 @@ export default function Performance() {
                       <SortHeader field="price" label="$/MWh" infoKey="price_received" />
                       <SortHeader field="rev" label="Rev/MW" infoKey="revenue_per_mw" />
                       <SortHeader field="curtailment" label="Curt%" infoKey="curtailment" />
+                      {vfMap.size > 0 && (
+                        <SortHeader field="vf" label="VF" infoKey="value_factor" />
+                      )}
                     </>
                   )}
                   {year === 'all' && (
@@ -630,7 +714,7 @@ export default function Performance() {
               </thead>
               <tbody>
                 {sorted.map((p) => (
-                  <LeagueRow key={p.project_id} entry={p} tech={tech} showYears={year === 'all'} />
+                  <LeagueRow key={p.project_id} entry={p} tech={tech} showYears={year === 'all'} vfMap={vfMap} />
                 ))}
               </tbody>
             </table>
@@ -696,6 +780,11 @@ export default function Performance() {
 
       {/* Fleet Monthly Trends */}
       {table && <FleetMonthlyTrends projects={sorted} tech={tech} year={year} />}
+
+      {/* Cannibalisation Value Factor Trend */}
+      {vfTrendData.length >= 2 && (
+        <FleetValueTrend data={vfTrendData} tech={tech} />
+      )}
 
       {/* Data Methodology */}
       <section className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl p-5">
@@ -837,7 +926,7 @@ cd frontend && npm run build`}
   )
 }
 
-function LeagueRow({ entry, tech, showYears }: { entry: LeagueTableEntry; tech: LeagueTechnology; showYears?: boolean }) {
+function LeagueRow({ entry, tech, showYears, vfMap }: { entry: LeagueTableEntry; tech: LeagueTechnology; showYears?: boolean; vfMap?: Map<string, number> }) {
   const spread = tech === 'bess'
     ? ((entry.avg_discharge_price ?? 0) - (entry.avg_charge_price ?? 0))
     : 0
@@ -897,6 +986,18 @@ function LeagueRow({ entry, tech, showYears }: { entry: LeagueTableEntry; tech: 
               {entry.curtailment_pct?.toFixed(1) ?? '—'}
             </span>
           </td>
+          {vfMap && vfMap.size > 0 && (() => {
+            const vf = vfMap.get(entry.project_id)
+            return (
+              <td className="px-2 py-2">
+                {vf != null ? (
+                  <span style={{ color: vfColor(vf) }}>{vf.toFixed(3)}</span>
+                ) : (
+                  <span className="text-[var(--color-text-muted)]">—</span>
+                )}
+              </td>
+            )
+          })()}
         </>
       )}
       {showYears && (
@@ -1070,4 +1171,96 @@ function curtColor(curt?: number): string {
   if (curt <= 2) return '#22c55e'
   if (curt <= 5) return '#f59e0b'
   return '#ef4444'
+}
+
+function vfColor(vf?: number): string {
+  if (vf == null) return '#6b7280'
+  if (vf >= 0.95) return '#22c55e'
+  if (vf >= 0.85) return '#84cc16'
+  if (vf >= 0.70) return '#f59e0b'
+  return '#ef4444'
+}
+
+// ============================================================
+// Fleet Value Factor Trend (cannibalisation over time)
+// ============================================================
+
+function FleetValueTrend({ data, tech }: { data: Array<{ year: string; vf: number; count: number }>; tech: LeagueTechnology }) {
+  const label = tech === 'solar' ? 'Solar' : 'Wind'
+  const refLine = tech === 'solar' ? 0.8 : 0.9
+
+  return (
+    <section className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl p-5">
+      <h2 className="text-sm font-semibold text-[var(--color-text)] mb-1">
+        {label} Fleet Value Factor — Cannibalisation Trend
+      </h2>
+      <p className="text-[10px] text-[var(--color-text-muted)] mb-3">
+        Fleet average capture price ÷ pool price by year. A declining trend indicates growing
+        cannibalisation — more {label.toLowerCase()} farms competing at the same time, depressing
+        the prices they capture. Values below 1.0 mean the fleet earns less than the pool average.
+      </p>
+      <ResponsiveContainer width="100%" height={200}>
+        <LineChart data={data} margin={{ top: 8, right: 16, bottom: 0, left: -8 }}>
+          <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.06)" />
+          <XAxis dataKey="year" tick={{ fill: '#9ca3af', fontSize: 10 }} />
+          <YAxis
+            domain={[0.3, 1.1]}
+            tick={{ fill: '#9ca3af', fontSize: 10 }}
+            tickFormatter={(v: number) => v.toFixed(2)}
+          />
+          <Tooltip
+            contentStyle={{
+              backgroundColor: '#1e293b',
+              border: '1px solid rgba(255,255,255,0.1)',
+              borderRadius: 8,
+              fontSize: 11,
+            }}
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            formatter={(value: any, _name: any, props: any) => [
+              `${Number(value).toFixed(3)} (${props.payload?.count ?? 0} farms)`,
+              'Fleet Avg Value Factor',
+            ]}
+          />
+          {/* Reference line at 1.0 (pool parity) */}
+          <Line
+            type="monotone"
+            dataKey={() => 1.0}
+            stroke="rgba(255,255,255,0.15)"
+            strokeWidth={1}
+            strokeDasharray="4 2"
+            dot={false}
+            legendType="none"
+          />
+          {/* Reference line at tech-specific cannibalisation threshold */}
+          <Line
+            type="monotone"
+            dataKey={() => refLine}
+            stroke="rgba(245,158,11,0.3)"
+            strokeWidth={1}
+            strokeDasharray="4 2"
+            dot={false}
+            legendType="none"
+          />
+          <Line
+            type="monotone"
+            dataKey="vf"
+            stroke="#8b5cf6"
+            strokeWidth={2.5}
+            dot={{ r: 4, fill: '#8b5cf6' }}
+            activeDot={{ r: 5 }}
+          />
+        </LineChart>
+      </ResponsiveContainer>
+      <div className="flex gap-4 mt-2 text-[9px] text-[var(--color-text-muted)]">
+        <span className="flex items-center gap-1">
+          <span className="w-4 h-0.5 bg-white/20 inline-block" style={{ borderTop: '1px dashed rgba(255,255,255,0.2)' }} />
+          Pool parity (1.0)
+        </span>
+        <span className="flex items-center gap-1">
+          <span className="w-4 h-0.5 inline-block" style={{ borderTop: '1px dashed rgba(245,158,11,0.4)' }} />
+          Cannibalisation threshold ({refLine})
+        </span>
+      </div>
+    </section>
+  )
 }
