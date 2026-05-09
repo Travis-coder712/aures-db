@@ -2,6 +2,21 @@ import { useState, useEffect } from 'react'
 import { fetchDataSources } from '../lib/dataService'
 import type { DataSourcesIndex, DataSourceInfo } from '../lib/types'
 
+interface UpdateLogEntry {
+  date: string
+  version: string
+  title: string
+  completed: boolean
+  summary: string
+  data_refreshed: { source: string; days_stale: number; note: string }[]
+  new_operational: { project: string; technology: string; capacity_mw: number; state: string; cod: string; note: string }[]
+  status_changes: { project: string; from: string; to: string; capacity_mw: number; state: string }[]
+  nem_records: { metric: string; value: string; date: string; note: string }[]
+  new_projects: { project: string; technology: string; capacity_mw: number; state: string; note: string }[]
+  removed_projects: { project: string; reason: string }[]
+  data_quality_notes: string
+}
+
 interface PipelineStep {
   step: string
   success: boolean
@@ -354,9 +369,292 @@ function UpdateNowCards({ sources }: { sources: DataSourceInfo[] }) {
   )
 }
 
+function StatusBadge({ status }: { status: string }) {
+  const colours: Record<string, string> = {
+    operating: '#22c55e',
+    commissioning: '#3b82f6',
+    construction: '#f59e0b',
+    approved: '#8b5cf6',
+    proposed: '#6b7280',
+  }
+  const colour = colours[status] ?? '#6b7280'
+  return (
+    <span
+      className="inline-flex px-1.5 py-0.5 rounded text-[9px] font-semibold uppercase tracking-wide"
+      style={{ backgroundColor: colour + '20', color: colour }}
+    >
+      {status}
+    </span>
+  )
+}
+
+function UpdateLogSection({ entries }: { entries: UpdateLogEntry[] }) {
+  const [expanded, setExpanded] = useState<number | null>(
+    entries[0] && !entries[0].completed ? 0 : null
+  )
+
+  if (entries.length === 0) return null
+
+  return (
+    <div className="mt-6 bg-[var(--color-bg-card)] rounded-xl border border-[var(--color-border)] overflow-hidden">
+      <div className="px-4 py-3 border-b border-[var(--color-border)]">
+        <h2 className="text-sm font-semibold text-[var(--color-text)]">Data Update Log</h2>
+        <p className="text-xs text-[var(--color-text-muted)] mt-0.5">
+          Record of each data refresh — new operational assets, NEM records, and status transitions
+        </p>
+      </div>
+
+      <div className="divide-y divide-[var(--color-border)]/50">
+        {entries.map((entry, idx) => {
+          const isExpanded = expanded === idx
+          const hasDetail = (
+            entry.data_refreshed.length > 0 ||
+            entry.new_operational.length > 0 ||
+            entry.status_changes.length > 0 ||
+            entry.nem_records.length > 0 ||
+            entry.new_projects.length > 0 ||
+            entry.removed_projects.length > 0 ||
+            !!entry.data_quality_notes
+          )
+
+          return (
+            <div key={idx}>
+              <button
+                className="w-full px-4 py-3 flex items-center justify-between hover:bg-white/[0.02] transition-colors text-left"
+                onClick={() => setExpanded(isExpanded ? null : idx)}
+              >
+                <div className="flex items-start gap-3 min-w-0">
+                  <div className="mt-0.5">
+                    {entry.completed ? (
+                      <span className="w-5 h-5 rounded-full bg-[#22c55e]/20 flex items-center justify-center">
+                        <svg className="w-3 h-3 text-[#22c55e]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                        </svg>
+                      </span>
+                    ) : (
+                      <span className="w-5 h-5 rounded-full bg-[#f59e0b]/20 flex items-center justify-center">
+                        <span className="w-2 h-2 rounded-full bg-[#f59e0b]" />
+                      </span>
+                    )}
+                  </div>
+                  <div className="min-w-0">
+                    <div className="flex items-center gap-2 flex-wrap">
+                      <span className="text-sm font-semibold text-[var(--color-text)]">{entry.title}</span>
+                      <span className="text-[10px] px-1.5 py-0.5 rounded bg-[var(--color-bg)] text-[var(--color-text-muted)] font-mono border border-[var(--color-border)]">
+                        v{entry.version}
+                      </span>
+                      {!entry.completed && (
+                        <span className="text-[10px] px-1.5 py-0.5 rounded bg-[#f59e0b]/20 text-[#f59e0b] font-semibold">
+                          PENDING
+                        </span>
+                      )}
+                    </div>
+                    <div className="text-xs text-[var(--color-text-muted)] mt-0.5">{entry.date}</div>
+                    {!isExpanded && (
+                      <p className="text-xs text-[var(--color-text-muted)] mt-1 line-clamp-1">{entry.summary}</p>
+                    )}
+                  </div>
+                </div>
+                <div className="flex items-center gap-2 shrink-0 ml-2">
+                  {entry.new_operational.length > 0 && (
+                    <span className="text-[10px] px-1.5 py-0.5 rounded bg-[#22c55e]/10 text-[#22c55e]">
+                      +{entry.new_operational.length} online
+                    </span>
+                  )}
+                  {entry.nem_records.length > 0 && (
+                    <span className="text-[10px] px-1.5 py-0.5 rounded bg-[#3b82f6]/10 text-[#3b82f6]">
+                      {entry.nem_records.length} records
+                    </span>
+                  )}
+                  {hasDetail && (
+                    <svg
+                      className={`w-4 h-4 text-[var(--color-text-muted)] transition-transform ${isExpanded ? 'rotate-180' : ''}`}
+                      viewBox="0 0 20 20" fill="currentColor"
+                    >
+                      <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
+                    </svg>
+                  )}
+                </div>
+              </button>
+
+              {isExpanded && (
+                <div className="px-4 pb-4 space-y-4">
+                  {/* Summary */}
+                  <p className="text-xs text-[var(--color-text-muted)] leading-relaxed">{entry.summary}</p>
+
+                  {/* Data refreshed */}
+                  {entry.data_refreshed.length > 0 && (
+                    <div>
+                      <div className="text-[10px] uppercase tracking-wider text-[var(--color-text-muted)] font-semibold mb-2">
+                        Sources Refreshed
+                      </div>
+                      <div className="grid grid-cols-1 lg:grid-cols-2 gap-1.5">
+                        {entry.data_refreshed.map((s, i) => (
+                          <div key={i} className="flex items-start gap-2 bg-[var(--color-bg)] rounded-lg px-3 py-2">
+                            <div className="min-w-0 flex-1">
+                              <div className="text-xs font-medium text-[var(--color-text)]">{s.source}</div>
+                              <div className="text-[10px] text-[var(--color-text-muted)]">{s.note}</div>
+                            </div>
+                            {s.days_stale > 0 && (
+                              <span className="text-[9px] px-1.5 py-0.5 rounded bg-[#ef4444]/10 text-[#ef4444] shrink-0 font-mono">
+                                {s.days_stale}d stale
+                              </span>
+                            )}
+                            {s.days_stale === 0 && (
+                              <span className="text-[9px] px-1.5 py-0.5 rounded bg-[#22c55e]/10 text-[#22c55e] shrink-0">
+                                current
+                              </span>
+                            )}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* New operational */}
+                  {entry.new_operational.length > 0 && (
+                    <div>
+                      <div className="text-[10px] uppercase tracking-wider text-[var(--color-text-muted)] font-semibold mb-2">
+                        New Operational Projects
+                      </div>
+                      <div className="space-y-1.5">
+                        {entry.new_operational.map((p, i) => (
+                          <div key={i} className="flex items-start gap-2 bg-[#22c55e]/5 border border-[#22c55e]/20 rounded-lg px-3 py-2">
+                            <div className="flex-1 min-w-0">
+                              <div className="flex items-center gap-2 flex-wrap">
+                                <span className="text-xs font-semibold text-[var(--color-text)]">{p.project}</span>
+                                <span className="text-[10px] text-[var(--color-text-muted)]">{p.state}</span>
+                                <span className="text-[10px] font-mono text-[#22c55e]">{p.capacity_mw} MW</span>
+                                <span className="text-[10px] text-[var(--color-text-muted)]">COD {p.cod}</span>
+                              </div>
+                              {p.note && (
+                                <div className="text-[10px] text-[var(--color-text-muted)] mt-0.5">{p.note}</div>
+                              )}
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Status changes */}
+                  {entry.status_changes.length > 0 && (
+                    <div>
+                      <div className="text-[10px] uppercase tracking-wider text-[var(--color-text-muted)] font-semibold mb-2">
+                        Status Changes
+                      </div>
+                      <div className="space-y-1.5">
+                        {entry.status_changes.map((c, i) => (
+                          <div key={i} className="flex items-center gap-2 bg-[var(--color-bg)] rounded-lg px-3 py-2">
+                            <div className="flex-1 min-w-0">
+                              <div className="flex items-center gap-2 flex-wrap">
+                                <span className="text-xs font-medium text-[var(--color-text)]">{c.project}</span>
+                                <span className="text-[10px] text-[var(--color-text-muted)]">{c.state}</span>
+                                <span className="text-[10px] font-mono text-[var(--color-text-muted)]">{c.capacity_mw} MW</span>
+                              </div>
+                            </div>
+                            <div className="flex items-center gap-1.5 shrink-0">
+                              <StatusBadge status={c.from} />
+                              <svg className="w-3 h-3 text-[var(--color-text-muted)]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                              </svg>
+                              <StatusBadge status={c.to} />
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* NEM Records */}
+                  {entry.nem_records.length > 0 && (
+                    <div>
+                      <div className="text-[10px] uppercase tracking-wider text-[var(--color-text-muted)] font-semibold mb-2">
+                        NEM Records Set
+                      </div>
+                      <div className="space-y-1.5">
+                        {entry.nem_records.map((r, i) => (
+                          <div key={i} className="flex items-start gap-2 bg-[#3b82f6]/5 border border-[#3b82f6]/20 rounded-lg px-3 py-2">
+                            <div className="flex-1 min-w-0">
+                              <div className="flex items-center gap-2 flex-wrap">
+                                <span className="text-xs font-semibold text-[var(--color-text)]">{r.value}</span>
+                                <span className="text-[10px] text-[var(--color-text-muted)]">{r.metric}</span>
+                              </div>
+                              <div className="flex items-center gap-2 mt-0.5">
+                                <span className="text-[10px] font-mono text-[#3b82f6]">{r.date}</span>
+                                {r.note && <span className="text-[10px] text-[var(--color-text-muted)]">{r.note}</span>}
+                              </div>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* New projects (pipeline, not yet operational) */}
+                  {entry.new_projects.length > 0 && (
+                    <div>
+                      <div className="text-[10px] uppercase tracking-wider text-[var(--color-text-muted)] font-semibold mb-2">
+                        New Projects Added
+                      </div>
+                      <div className="space-y-1.5">
+                        {entry.new_projects.map((p, i) => (
+                          <div key={i} className="flex items-start gap-2 bg-[var(--color-bg)] rounded-lg px-3 py-2">
+                            <div className="flex-1 min-w-0">
+                              <div className="flex items-center gap-2 flex-wrap">
+                                <span className="text-xs font-medium text-[var(--color-text)]">{p.project}</span>
+                                <span className="text-[10px] text-[var(--color-text-muted)]">{p.technology}</span>
+                                <span className="text-[10px] text-[var(--color-text-muted)]">{p.state}</span>
+                                <span className="text-[10px] font-mono text-[var(--color-text-muted)]">{p.capacity_mw} MW</span>
+                              </div>
+                              {p.note && <div className="text-[10px] text-[var(--color-text-muted)] mt-0.5">{p.note}</div>}
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Removed projects */}
+                  {entry.removed_projects.length > 0 && (
+                    <div>
+                      <div className="text-[10px] uppercase tracking-wider text-[var(--color-text-muted)] font-semibold mb-2">
+                        Projects Removed
+                      </div>
+                      <div className="space-y-1.5">
+                        {entry.removed_projects.map((p, i) => (
+                          <div key={i} className="flex items-center gap-2 bg-[var(--color-bg)] rounded-lg px-3 py-2">
+                            <span className="text-xs font-medium text-[var(--color-text)]">{p.project}</span>
+                            <span className="text-[10px] text-[var(--color-text-muted)]">{p.reason}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Data quality notes */}
+                  {entry.data_quality_notes && (
+                    <div className="bg-[var(--color-bg-elevated)] rounded-lg px-3 py-2.5">
+                      <div className="text-[10px] uppercase tracking-wider text-[var(--color-text-muted)] font-semibold mb-1">
+                        Data Quality Notes
+                      </div>
+                      <p className="text-xs text-[var(--color-text-muted)] leading-relaxed">{entry.data_quality_notes}</p>
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
+          )
+        })}
+      </div>
+    </div>
+  )
+}
+
 export default function DataSources() {
   const [data, setData] = useState<DataSourcesIndex | null>(null)
   const [pipelineRuns, setPipelineRuns] = useState<PipelineRun[]>([])
+  const [updateLog, setUpdateLog] = useState<UpdateLogEntry[]>([])
   const [expandedRun, setExpandedRun] = useState<number | null>(0)
   const [loading, setLoading] = useState(true)
 
@@ -366,9 +664,13 @@ export default function DataSources() {
       fetch(`${import.meta.env.BASE_URL}data/metadata/pipeline-log.json`)
         .then(r => r.ok ? r.json() : { runs: [] })
         .catch(() => ({ runs: [] })),
-    ]).then(([d, log]) => {
+      fetch(`${import.meta.env.BASE_URL}data/metadata/update-log.json`)
+        .then(r => r.ok ? r.json() : { updates: [] })
+        .catch(() => ({ updates: [] })),
+    ]).then(([d, log, updateLogData]) => {
       setData(d)
       setPipelineRuns(log.runs || [])
+      setUpdateLog(updateLogData.updates || [])
       setLoading(false)
     })
   }, [])
@@ -539,6 +841,9 @@ export default function DataSources() {
           </div>
         </div>
       </div>
+
+      {/* Data Update Log */}
+      <UpdateLogSection entries={updateLog} />
 
       {/* Pipeline Run Log */}
       {pipelineRuns.length > 0 && (
