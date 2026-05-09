@@ -1,0 +1,94 @@
+{
+  "updates": [
+    {
+      "version": "2.53.0",
+      "date": "2026-05-10",
+      "completed": true,
+      "summary": "May 2026 data refresh — all importers run, DB current as at 10 May 2026.",
+      "importers_run": [
+        "import_aemo_gen_info.py",
+        "import_openelectricity.py (2026 YTD + 2025 annual + 2026 monthly)",
+        "import_battery_scada.py",
+        "import_bess_5min.py",
+        "import_dispatch_regionsum.py",
+        "import_epbc.py",
+        "import_coal_generation.py",
+        "import_nemweb_bids.py"
+      ],
+      "new_operational": [
+        {
+          "id": "collie-battery",
+          "name": "Collie Battery",
+          "capacity_mw": 560,
+          "state": "WA",
+          "note": "Both Stage 1 (219 MW) and Stage 2 (341 MW) operational July 2025. WA/WEM project — DB corrected manually."
+        },
+        {
+          "id": "tarong-bess-stanwell",
+          "name": "Tarong BESS - Stanwell",
+          "capacity_mw": 300,
+          "state": "QLD",
+          "note": "COD January 2026."
+        },
+        {
+          "id": "brendale-bess",
+          "name": "Brendale BESS",
+          "capacity_mw": 205,
+          "state": "QLD",
+          "note": "Operating. COD June 2026 per AEMO."
+        }
+      ],
+      "status_changes": [
+        {
+          "id": "collie-battery",
+          "from": "development",
+          "to": "operating",
+          "note": "WA/WEM project — status and cod_current corrected in DB (was stale from NEM-only AEMO data)."
+        },
+        {
+          "id": "liddell-bess",
+          "status": "commissioning",
+          "note": "500 MW — first 250 MW tranche commissioning from Mar 2026, full operations targeted Jun 2026."
+        },
+        {
+          "id": "western-downs-battery-stage-1-and-2",
+          "status": "commissioning",
+          "note": "510 MW — AEMO still shows commissioning as at Jan 2026 Gen Info."
+        }
+      ],
+      "nem_records": [
+        {
+          "metric": "max_discharge_5min",
+          "value_mw": 3675.0,
+          "date": "2026-01-25",
+          "note": "Unchanged from previous update."
+        },
+        {
+          "metric": "max_charge_5min",
+          "value_mw": 3186.9,
+          "date": "2026-05-07",
+          "note": "NEW RECORD — up from 2,906.2 MW on 2026-04-02 (+9.7%). Driven by QLD1 peak of 1,398.8 MW."
+        },
+        {
+          "metric": "max_daily_discharge",
+          "value_mwh": 16001.1,
+          "date": "2026-04-13",
+          "note": "Unchanged from previous update."
+        },
+        {
+          "metric": "max_daily_charge",
+          "value_mwh": 15094.3,
+          "date": "2026-05-08",
+          "note": "NEW RECORD — up from 14,497.0 MWh on 2026-04-13 (+4.1%)."
+        }
+      ],
+      "data_quality_notes": "Dispatch Region Sum and band capture tables current to March 2026 — NEMWEB MMSDM archives for April/May not yet published by AEMO (normal ~4-6 week lag). Re-run import_dispatch_regionsum.py, import_bess_band_capture.py, and import_price_band_capture.py in late May/early June once archives are available. Battery SCADA current to May 10, BESS 5-min peaks current to May 9.",
+      "bugs_fixed": [
+        "import_openelectricity.py: removed redundant local 'from datetime import timedelta' that shadowed top-level import, causing UnboundLocalError on line 117."
+      ],
+      "db_corrections": [
+        "collie-battery: cod_current changed from '2027' to '2025-07' in both overlay and DB. Status changed from 'development' to 'operating' in DB."
+      ]
+    }
+  ]
+}

@@ -2,7 +2,7 @@
   "summary": {
     "total_bess": 432,
     "total_with_storage": 347,
-    "total_operating": 33,
+    "total_operating": 34,
     "total_hybrid": 92,
     "total_hybrid_operating": 0,
     "grid_forming_count": 11,
@@ -21,11 +21,11 @@
         "<1h": 3,
         "1-2h": 11,
         "2-4h": 17,
-        "4-8h": 2,
+        "4-8h": 3,
         "8h+": 0
       },
-      "count": 33,
-      "avg": 1.83,
+      "count": 34,
+      "avg": 1.9,
       "median": 2.0,
       "max": 4.51,
       "min": 0.3
@@ -35,12 +35,12 @@
         "<1h": 6,
         "1-2h": 51,
         "2-4h": 95,
-        "4-8h": 123,
+        "4-8h": 122,
         "8h+": 14
       },
-      "count": 289,
+      "count": 288,
       "avg": 3.16,
-      "median": 3.71,
+      "median": 3.63,
       "max": 8.01,
       "min": 0.36
     },
@@ -130,12 +130,12 @@
     },
     {
       "year": 2025,
-      "count": 11,
-      "avg_duration_h": 2.05,
+      "count": 12,
+      "avg_duration_h": 2.22,
       "median_duration_h": 2.0,
       "max_duration_h": 4.0,
-      "total_mw": 2771.0,
-      "total_mwh": 5286.8
+      "total_mw": 3331.0,
+      "total_mwh": 7526.8
     },
     {
       "year": 2026,
@@ -148,12 +148,12 @@
     },
     {
       "year": 2027,
-      "count": 33,
-      "avg_duration_h": 3.19,
-      "median_duration_h": 2.29,
+      "count": 32,
+      "avg_duration_h": 3.17,
+      "median_duration_h": 2.21,
       "max_duration_h": 8.0,
-      "total_mw": 8063.4,
-      "total_mwh": 25585.2
+      "total_mw": 7503.4,
+      "total_mwh": 23345.2
     },
     {
       "year": 2028,
@@ -2176,5 +2176,5 @@
       "data_confidence": "low"
     }
   ],
-  "exported_at": "2026-04-23T18:25:54.864639"
+  "exported_at": "2026-05-10T08:30:21.555536"
 }

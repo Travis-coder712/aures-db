@@ -13,6 +13,18 @@
       "developer": "Origin Energy"
     },
     {
+      "project_id": "collie-battery",
+      "name": "Collie Battery",
+      "technology": "bess",
+      "status": "operating",
+      "state": "WA",
+      "capacity_mw": 560.0,
+      "drift_months": -18,
+      "cod_current": "2025-07",
+      "cod_original": "2027",
+      "developer": "Synergy"
+    },
+    {
       "project_id": "golden-plains-wind",
       "name": "Golden Plains Wind Farm",
       "technology": "wind",
@@ -507,10 +519,10 @@
   ],
   "by_technology": {
     "bess": {
-      "count": 9,
-      "mean": 1.0,
-      "median": -1,
-      "p25": -1,
+      "count": 10,
+      "mean": -0.9,
+      "median": -1.0,
+      "p25": -2,
       "p75": -1
     },
     "hybrid": {
@@ -570,13 +582,20 @@
       "median": -1,
       "p25": -1,
       "p75": -1
+    },
+    "WA": {
+      "count": 1,
+      "mean": -18.0,
+      "median": -18,
+      "p25": -18,
+      "p75": -18
     }
   },
   "by_capacity_band": {
     "large": {
-      "count": 34,
-      "mean": 0.6,
-      "median": -1.0,
+      "count": 35,
+      "mean": 0.1,
+      "median": -1,
       "p25": -1,
       "p75": -1
     },
@@ -635,9 +654,9 @@
     },
     {
       "year": 2027,
-      "count": 9,
-      "mean": -1.0,
-      "median": -1,
+      "count": 10,
+      "mean": -2.7,
+      "median": -1.0,
       "p25": -1,
       "p75": -1
     },
@@ -690,13 +709,13 @@
       "p75": -1
     }
   ],
-  "total_projects": 42,
+  "total_projects": 43,
   "overall": {
-    "count": 42,
-    "mean": 0.3,
-    "median": -1.0,
+    "count": 43,
+    "mean": -0.1,
+    "median": -1,
     "p25": -1,
     "p75": -1
   },
-  "exported_at": "2026-04-23T18:25:54.856026"
+  "exported_at": "2026-05-10T08:30:21.549295"
 }

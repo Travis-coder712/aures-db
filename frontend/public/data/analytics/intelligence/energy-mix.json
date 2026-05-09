@@ -87,6 +87,13 @@
         "count": 26,
         "mw": 4515.8
       }
+    },
+    "WA": {
+      "bess": {
+        "count": 1,
+        "mw": 560.0,
+        "mwh": 2240.0
+      }
     }
   },
   "state_totals": {
@@ -190,6 +197,16 @@
         "wind": {
           "count": 26,
           "mw": 4515.8
+        }
+      }
+    },
+    "WA": {
+      "operating_mw": 560.0,
+      "technologies": {
+        "bess": {
+          "count": 1,
+          "mw": 560.0,
+          "mwh": 2240.0
         }
       }
     }
@@ -1423,30 +1440,22 @@
       "cod_year": "2035",
       "count": 1,
       "mw": 1281.0
-    },
-    {
-      "state": "WA",
-      "technology": "bess",
-      "status": "development",
-      "cod_year": "2027",
-      "count": 1,
-      "mw": 560.0
     }
   ],
   "projection": {
     "bess": [
       {
         "year": "current",
-        "cumulative_mw": 7889.0
+        "cumulative_mw": 8449.0
       },
       {
         "year": 2026,
         "added_mw": 4552.0,
-        "cumulative_mw": 12441.0
+        "cumulative_mw": 13001.0
       },
       {
         "year": 2027,
-        "added_mw": 8713.4,
+        "added_mw": 8153.4,
         "cumulative_mw": 21154.4
       },
       {
@@ -1711,5 +1720,5 @@
       }
     ]
   },
-  "exported_at": "2026-04-23T18:27:27.146154"
+  "exported_at": "2026-05-10T08:32:22.138239"
 }

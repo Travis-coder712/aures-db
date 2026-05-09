@@ -1098,13 +1098,24 @@
     {
       "year": 2026,
       "month": 4,
-      "energy_discharged_mwh": 649.9,
-      "energy_charged_mwh": 831.0,
-      "avg_charge_price": 20.3,
-      "avg_discharge_price": 92.84,
-      "utilisation_pct": 0.6,
-      "cycles": 5.6,
-      "revenue_aud": 136428.0
+      "energy_discharged_mwh": 1503.5,
+      "energy_charged_mwh": 1919.6,
+      "avg_charge_price": 15.34,
+      "avg_discharge_price": 104.85,
+      "utilisation_pct": 1.4,
+      "cycles": 12.9,
+      "revenue_aud": 343415.0
+    },
+    {
+      "year": 2026,
+      "month": 5,
+      "energy_discharged_mwh": 114.3,
+      "energy_charged_mwh": 167.5,
+      "avg_charge_price": 0.92,
+      "avg_discharge_price": 54.32,
+      "utilisation_pct": 0.1,
+      "cycles": 1.0,
+      "revenue_aud": 12506.0
     }
   ],
   "storage_mwh": 117.0

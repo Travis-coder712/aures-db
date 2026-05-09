@@ -4797,8 +4797,8 @@
       "state": "QLD",
       "capacity_mw": 1300.0,
       "developer": "Quinbrook Infrastructure Partners",
-      "capacity_factor_pct": null,
-      "revenue_per_mw": null
+      "capacity_factor_pct": 2.6,
+      "revenue_per_mw": 8990.0
     },
     {
       "project_id": "eraring-battery",
@@ -4817,8 +4817,18 @@
       "state": "NSW",
       "capacity_mw": 700.0,
       "developer": "Origin Energy Electricity Limited",
-      "capacity_factor_pct": 16.1,
-      "revenue_per_mw": 59338.0
+      "capacity_factor_pct": 16.6,
+      "revenue_per_mw": 72374.0
+    },
+    {
+      "project_id": "collie-battery",
+      "name": "Collie Battery",
+      "technology": "bess",
+      "state": "WA",
+      "capacity_mw": 560.0,
+      "developer": "Synergy",
+      "capacity_factor_pct": null,
+      "revenue_per_mw": null
     },
     {
       "project_id": "aldoga-solar-farm",
@@ -4827,8 +4837,8 @@
       "state": "QLD",
       "capacity_mw": 387.0,
       "developer": "Acciona Energy Australia Global Pty Ltd",
-      "capacity_factor_pct": 26.8,
-      "revenue_per_mw": 19495.0
+      "capacity_factor_pct": 27.3,
+      "revenue_per_mw": 22640.0
     },
     {
       "project_id": "tarong-bess-stanwell",
@@ -4837,8 +4847,8 @@
       "state": "QLD",
       "capacity_mw": 300.0,
       "developer": "Stanwell Corporation",
-      "capacity_factor_pct": null,
-      "revenue_per_mw": null
+      "capacity_factor_pct": 12.8,
+      "revenue_per_mw": 39692.0
     },
     {
       "project_id": "wollar-solar-farm",
@@ -4847,8 +4857,8 @@
       "state": "NSW",
       "capacity_mw": 280.0,
       "developer": "Wollar Solar Development Pty Ltd",
-      "capacity_factor_pct": 27.3,
-      "revenue_per_mw": 26483.0
+      "capacity_factor_pct": 26.6,
+      "revenue_per_mw": 30099.0
     },
     {
       "project_id": "pine-lodge-bess",
@@ -4867,8 +4877,8 @@
       "state": "QLD",
       "capacity_mw": 205.0,
       "developer": "Akaysha Energy (BlackRock)",
-      "capacity_factor_pct": 16.8,
-      "revenue_per_mw": 46907.0
+      "capacity_factor_pct": 17.5,
+      "revenue_per_mw": 60319.0
     },
     {
       "project_id": "blyth-bess",
@@ -4877,8 +4887,8 @@
       "state": "SA",
       "capacity_mw": 200.0,
       "developer": "Neoen",
-      "capacity_factor_pct": 14.6,
-      "revenue_per_mw": 94629.0
+      "capacity_factor_pct": 13.5,
+      "revenue_per_mw": 102678.0
     },
     {
       "project_id": "greenbank-bess",
@@ -4887,8 +4897,8 @@
       "state": "QLD",
       "capacity_mw": 200.0,
       "developer": "CS Energy",
-      "capacity_factor_pct": 10.0,
-      "revenue_per_mw": 30175.0
+      "capacity_factor_pct": 10.7,
+      "revenue_per_mw": 38822.0
     },
     {
       "project_id": "kiamal-solar-farm-stage-1",
@@ -4897,8 +4907,8 @@
       "state": "VIC",
       "capacity_mw": 200.0,
       "developer": "KSF Project Nominees Pty Ltd ATF KSF Project Trust",
-      "capacity_factor_pct": 28.5,
-      "revenue_per_mw": 10039.0
+      "capacity_factor_pct": 26.3,
+      "revenue_per_mw": 11340.0
     },
     {
       "project_id": "latrobe-valley-bess",
@@ -4907,8 +4917,8 @@
       "state": "VIC",
       "capacity_mw": 200.0,
       "developer": "Tilt Renewables (Mercury NZ)",
-      "capacity_factor_pct": 5.6,
-      "revenue_per_mw": 11428.0
+      "capacity_factor_pct": 6.5,
+      "revenue_per_mw": 16591.0
     },
     {
       "project_id": "melbourne-renewable-energy-hub-connection-a1",
@@ -4917,8 +4927,8 @@
       "state": "VIC",
       "capacity_mw": 200.0,
       "developer": "Equis Energy / SEC Victoria",
-      "capacity_factor_pct": 11.8,
-      "revenue_per_mw": 26012.0
+      "capacity_factor_pct": 12.3,
+      "revenue_per_mw": 33916.0
     },
     {
       "project_id": "melbourne-renewable-energy-hub-connection-a2",
@@ -4927,8 +4937,8 @@
       "state": "VIC",
       "capacity_mw": 200.0,
       "developer": "Equis Energy / SEC Victoria",
-      "capacity_factor_pct": 11.8,
-      "revenue_per_mw": 25989.0
+      "capacity_factor_pct": 12.5,
+      "revenue_per_mw": 34761.0
     },
     {
       "project_id": "melbourne-renewable-energy-hub-connection-a3",
@@ -4937,8 +4947,8 @@
       "state": "VIC",
       "capacity_mw": 200.0,
       "developer": "Equis Energy / SEC Victoria",
-      "capacity_factor_pct": 27.6,
-      "revenue_per_mw": 52919.0
+      "capacity_factor_pct": 28.4,
+      "revenue_per_mw": 68703.0
     },
     {
       "project_id": "rangebank-bess",
@@ -4947,8 +4957,8 @@
       "state": "VIC",
       "capacity_mw": 200.0,
       "developer": "Eku Energy (Macquarie/Shell)",
-      "capacity_factor_pct": 12.8,
-      "revenue_per_mw": 26913.0
+      "capacity_factor_pct": 13.2,
+      "revenue_per_mw": 35399.0
     },
     {
       "project_id": "sunraysia-solar-farm",
@@ -4957,8 +4967,8 @@
       "state": "NSW",
       "capacity_mw": 200.0,
       "developer": "Sunraysia Solar Project Pty Ltd",
-      "capacity_factor_pct": 20.6,
-      "revenue_per_mw": 24040.0
+      "capacity_factor_pct": 18.6,
+      "revenue_per_mw": 26827.0
     },
     {
       "project_id": "hornsdale-power-reserve",
@@ -4968,7 +4978,7 @@
       "capacity_mw": 194.0,
       "developer": "Neoen",
       "capacity_factor_pct": 2.7,
-      "revenue_per_mw": 20573.0
+      "revenue_per_mw": 22820.0
     },
     {
       "project_id": "koorangie-energy-storage-system",
@@ -4977,8 +4987,8 @@
       "state": "VIC",
       "capacity_mw": 185.0,
       "developer": "Edify Energy (Sosteneo)",
-      "capacity_factor_pct": 10.9,
-      "revenue_per_mw": 24654.0
+      "capacity_factor_pct": 11.9,
+      "revenue_per_mw": 33347.0
     },
     {
       "project_id": "edenvale-solar-park",
@@ -4987,8 +4997,8 @@
       "state": "QLD",
       "capacity_mw": 180.0,
       "developer": "Edenvale Solar Park Pty Ltd",
-      "capacity_factor_pct": 27.5,
-      "revenue_per_mw": 20540.0
+      "capacity_factor_pct": 27.4,
+      "revenue_per_mw": 23586.0
     },
     {
       "project_id": "woolooga-solar-farm",
@@ -4998,7 +5008,7 @@
       "capacity_mw": 176.0,
       "developer": "Woolooga Fund Pty Ltd",
       "capacity_factor_pct": 27.1,
-      "revenue_per_mw": 19892.0
+      "revenue_per_mw": 22832.0
     },
     {
       "project_id": "white-rock-wind-farm-stage-1",
@@ -5007,8 +5017,8 @@
       "state": "NSW",
       "capacity_mw": 175.0,
       "developer": "CECEP Wind Power Australia Pty Ltd",
-      "capacity_factor_pct": 33.4,
-      "revenue_per_mw": 46970.0
+      "capacity_factor_pct": 33.6,
+      "revenue_per_mw": 62201.0
     },
     {
       "project_id": "wellington-solar-farm",
@@ -5017,8 +5027,8 @@
       "state": "NSW",
       "capacity_mw": 170.0,
       "developer": "Lightsource Australia SPV 4 Pty Ltd",
-      "capacity_factor_pct": 27.3,
-      "revenue_per_mw": 25272.0
+      "capacity_factor_pct": 24.9,
+      "revenue_per_mw": 28243.0
     },
     {
       "project_id": "columboola-solar-farm",
@@ -5027,8 +5037,8 @@
       "state": "QLD",
       "capacity_mw": 162.0,
       "developer": "Luminous Energy",
-      "capacity_factor_pct": 33.8,
-      "revenue_per_mw": 25009.0
+      "capacity_factor_pct": 33.1,
+      "revenue_per_mw": 28503.0
     },
     {
       "project_id": "lake-bonney-2-wind-farm",
@@ -5037,8 +5047,8 @@
       "state": "SA",
       "capacity_mw": 159.0,
       "developer": "Lake Bonney Wind Power Pty Ltd",
-      "capacity_factor_pct": 18.3,
-      "revenue_per_mw": 35842.0
+      "capacity_factor_pct": 18.1,
+      "revenue_per_mw": 40828.0
     },
     {
       "project_id": "mortlake-south-wind-farm",
@@ -5047,8 +5057,8 @@
       "state": "VIC",
       "capacity_mw": 157.5,
       "developer": "Mortlake South Wind Farm Pty Ltd",
-      "capacity_factor_pct": 26.5,
-      "revenue_per_mw": 16897.0
+      "capacity_factor_pct": 27.8,
+      "revenue_per_mw": 19954.0
     },
     {
       "project_id": "ulinda-park-bess",
@@ -5057,8 +5067,8 @@
       "state": "QLD",
       "capacity_mw": 155.0,
       "developer": "Akaysha Energy (BlackRock)",
-      "capacity_factor_pct": 13.6,
-      "revenue_per_mw": 35394.0
+      "capacity_factor_pct": 14.7,
+      "revenue_per_mw": 48107.0
     },
     {
       "project_id": "portland-wind-farm",
@@ -5067,8 +5077,8 @@
       "state": "VIC",
       "capacity_mw": 151.7,
       "developer": "Pacific Hydro Portland Wind Farm Pty Ltd",
-      "capacity_factor_pct": 23.9,
-      "revenue_per_mw": 19787.0
+      "capacity_factor_pct": 23.8,
+      "revenue_per_mw": 23809.0
     },
     {
       "project_id": "coleambally-solar-farm",
@@ -5077,8 +5087,8 @@
       "state": "NSW",
       "capacity_mw": 150.0,
       "developer": "Coleambally Solar Pty Ltd",
-      "capacity_factor_pct": 28.7,
-      "revenue_per_mw": 29628.0
+      "capacity_factor_pct": 26.9,
+      "revenue_per_mw": 34012.0
     },
     {
       "project_id": "daydream-solar-farm",
@@ -5087,8 +5097,8 @@
       "state": "QLD",
       "capacity_mw": 150.0,
       "developer": "The Daydream Solar Farm Trust",
-      "capacity_factor_pct": 22.3,
-      "revenue_per_mw": 17996.0
+      "capacity_factor_pct": 22.1,
+      "revenue_per_mw": 20738.0
     },
     {
       "project_id": "hazelwood-battery-energy-storage-system-hbess",
@@ -5097,8 +5107,8 @@
       "state": "VIC",
       "capacity_mw": 150.0,
       "developer": "ENGIE",
-      "capacity_factor_pct": 5.5,
-      "revenue_per_mw": 11338.0
+      "capacity_factor_pct": 5.0,
+      "revenue_per_mw": 13341.0
     },
     {
       "project_id": "hornsdale-power-reserve-unit-1",
@@ -5108,7 +5118,7 @@
       "capacity_mw": 150.0,
       "developer": "Neoen",
       "capacity_factor_pct": 2.7,
-      "revenue_per_mw": 20573.0
+      "revenue_per_mw": 22820.0
     },
     {
       "project_id": "suntop-solar-farm",
@@ -5117,8 +5127,8 @@
       "state": "NSW",
       "capacity_mw": 150.0,
       "developer": "Suntop SF Pty Ltd As Trustee For The Suntop Asset",
-      "capacity_factor_pct": 23.9,
-      "revenue_per_mw": 25064.0
+      "capacity_factor_pct": 22.3,
+      "revenue_per_mw": 28742.0
     },
     {
       "project_id": "bluegrass-solar-farm",
@@ -5127,8 +5137,8 @@
       "state": "QLD",
       "capacity_mw": 148.0,
       "developer": "X-Elio Australia Pty Ltd",
-      "capacity_factor_pct": 17.2,
-      "revenue_per_mw": 12016.0
+      "capacity_factor_pct": 17.9,
+      "revenue_per_mw": 14361.0
     },
     {
       "project_id": "cattle-hill-wind-farm",
@@ -5137,8 +5147,8 @@
       "state": "TAS",
       "capacity_mw": 144.0,
       "developer": "Wild Cattle Hill Pty Ltd",
-      "capacity_factor_pct": 27.9,
-      "revenue_per_mw": 54523.0
+      "capacity_factor_pct": 33.2,
+      "revenue_per_mw": 83118.0
     },
     {
       "project_id": "yendon-wind-farm",
@@ -5147,8 +5157,8 @@
       "state": "VIC",
       "capacity_mw": 142.0,
       "developer": "Northleaf /InfraRed/Macquarie Capital",
-      "capacity_factor_pct": 18.3,
-      "revenue_per_mw": 15370.0
+      "capacity_factor_pct": 19.0,
+      "revenue_per_mw": 18731.0
     },
     {
       "project_id": "capital-wind-farm",
@@ -5157,8 +5167,8 @@
       "state": "NSW",
       "capacity_mw": 140.7,
       "developer": "Renewable Power Ventures Pty Ltd",
-      "capacity_factor_pct": 23.2,
-      "revenue_per_mw": 40823.0
+      "capacity_factor_pct": 22.1,
+      "revenue_per_mw": 48392.0
     },
     {
       "project_id": "crudine-ridge-wind-farm",
@@ -5167,8 +5177,8 @@
       "state": "NSW",
       "capacity_mw": 138.0,
       "developer": "CRWF Nominees Pty Ltd as trustee of the CRWF Trust",
-      "capacity_factor_pct": 31.2,
-      "revenue_per_mw": 46727.0
+      "capacity_factor_pct": 28.9,
+      "revenue_per_mw": 55441.0
     },
     {
       "project_id": "woolnorth-studland-bay-bluff-point",
@@ -5177,8 +5187,8 @@
       "state": "TAS",
       "capacity_mw": 138.0,
       "developer": "Woolnorth Wind Farm Finance Pty Ltd",
-      "capacity_factor_pct": 32.1,
-      "revenue_per_mw": 61471.0
+      "capacity_factor_pct": 34.3,
+      "revenue_per_mw": 85446.0
     },
     {
       "project_id": "finley-solar-farm",
@@ -5187,8 +5197,8 @@
       "state": "NSW",
       "capacity_mw": 133.0,
       "developer": "Finley Solar Farm Pty Ltd as The trustee for Finley Solar Trust",
-      "capacity_factor_pct": 7.1,
-      "revenue_per_mw": 5546.0
+      "capacity_factor_pct": 7.6,
+      "revenue_per_mw": 7517.0
     },
     {
       "project_id": "hallett-4-north-brown-hill",
@@ -5197,8 +5207,8 @@
       "state": "SA",
       "capacity_mw": 132.3,
       "developer": "Brown Hill North Pty Ltd",
-      "capacity_factor_pct": 28.3,
-      "revenue_per_mw": 34562.0
+      "capacity_factor_pct": 27.4,
+      "revenue_per_mw": 40763.0
     },
     {
       "project_id": "mt-gellibrand-wind-farm",
@@ -5207,8 +5217,8 @@
       "state": "VIC",
       "capacity_mw": 132.0,
       "developer": "ACCIONA Energy",
-      "capacity_factor_pct": 23.4,
-      "revenue_per_mw": 18813.0
+      "capacity_factor_pct": 24.4,
+      "revenue_per_mw": 22901.0
     },
     {
       "project_id": "mt-mercer-wind-farm",
@@ -5217,8 +5227,8 @@
       "state": "VIC",
       "capacity_mw": 131.2,
       "developer": "Mt Mercer Windfarm Pty Ltd",
-      "capacity_factor_pct": 17.3,
-      "revenue_per_mw": 14001.0
+      "capacity_factor_pct": 19.2,
+      "revenue_per_mw": 18025.0
     },
     {
       "project_id": "waterloo-wind-farm",
@@ -5227,8 +5237,8 @@
       "state": "SA",
       "capacity_mw": 130.8,
       "developer": "Waterloo Windfarm Pty Ltd",
-      "capacity_factor_pct": 25.5,
-      "revenue_per_mw": 27693.0
+      "capacity_factor_pct": 25.6,
+      "revenue_per_mw": 30870.0
     },
     {
       "project_id": "numurkah-solar-farm",
@@ -5237,8 +5247,8 @@
       "state": "VIC",
       "capacity_mw": 128.0,
       "developer": "Numurkah Solar Farm Pty Ltd",
-      "capacity_factor_pct": 18.8,
-      "revenue_per_mw": 12937.0
+      "capacity_factor_pct": 16.4,
+      "revenue_per_mw": 13954.0
     },
     {
       "project_id": "willogoleche-wind-farm",
@@ -5247,8 +5257,8 @@
       "state": "SA",
       "capacity_mw": 119.76,
       "developer": "Willogoleche Power Pty Ltd",
-      "capacity_factor_pct": 22.4,
-      "revenue_per_mw": 21340.0
+      "capacity_factor_pct": 24.3,
+      "revenue_per_mw": 25690.0
     },
     {
       "project_id": "ross-river-solar-farm",
@@ -5258,7 +5268,7 @@
       "capacity_mw": 116.0,
       "developer": "Ross River Operations Pty Ltd as the Trustee for the Ross River Operations Trust",
       "capacity_factor_pct": 21.5,
-      "revenue_per_mw": 16165.0
+      "revenue_per_mw": 18435.0
     },
     {
       "project_id": "metz-solar-farm",
@@ -5267,8 +5277,8 @@
       "state": "NSW",
       "capacity_mw": 115.0,
       "developer": "Metz ProjectCo Pty Ltd as trustee for Metz ProjectCo Trust",
-      "capacity_factor_pct": 21.5,
-      "revenue_per_mw": 21554.0
+      "capacity_factor_pct": 23.1,
+      "revenue_per_mw": 27117.0
     },
     {
       "project_id": "boco-rock-wind-farm",
@@ -5277,8 +5287,8 @@
       "state": "NSW",
       "capacity_mw": 113.0,
       "developer": "Tilt Renewables Australia Pty Ltd",
-      "capacity_factor_pct": 27.8,
-      "revenue_per_mw": 47051.0
+      "capacity_factor_pct": 26.8,
+      "revenue_per_mw": 56754.0
     },
     {
       "project_id": "bodangora-wind-farm",
@@ -5287,8 +5297,8 @@
       "state": "NSW",
       "capacity_mw": 111.3,
       "developer": "Bodangora Wind Farm Pty Ltd",
-      "capacity_factor_pct": 34.9,
-      "revenue_per_mw": 51569.0
+      "capacity_factor_pct": 33.4,
+      "revenue_per_mw": 65360.0
     },
     {
       "project_id": "granville-harbour-wind-farm",
@@ -5297,8 +5307,8 @@
       "state": "TAS",
       "capacity_mw": 111.0,
       "developer": "Granville Harbour Operations Pty Ltd as trustee for Granville Harbour Operations Trust",
-      "capacity_factor_pct": 23.3,
-      "revenue_per_mw": 44378.0
+      "capacity_factor_pct": 30.4,
+      "revenue_per_mw": 74361.0
     },
     {
       "project_id": "gullen-range-wind-farm-2",
@@ -5307,8 +5317,8 @@
       "state": "NSW",
       "capacity_mw": 110.67,
       "developer": "BEIJING JINGNENG CLEAN ENERGY (AUSTRALIA) HOLDING PTY LTD",
-      "capacity_factor_pct": 37.7,
-      "revenue_per_mw": 49329.0
+      "capacity_factor_pct": 35.6,
+      "revenue_per_mw": 60845.0
     },
     {
       "project_id": "bungala-one-solar-farm",
@@ -5317,7 +5327,7 @@
       "state": "SA",
       "capacity_mw": 110.0,
       "developer": "Bungala One Operations Pty Ltd as trustee for the Bungala One Operations Trust",
-      "capacity_factor_pct": 15.7,
+      "capacity_factor_pct": 11.7,
       "revenue_per_mw": 21259.0
     },
     {
@@ -5327,8 +5337,8 @@
       "state": "SA",
       "capacity_mw": 110.0,
       "developer": "Potentia Energy Pty Ltd",
-      "capacity_factor_pct": 21.8,
-      "revenue_per_mw": 23516.0
+      "capacity_factor_pct": 20.9,
+      "revenue_per_mw": 29091.0
     },
     {
       "project_id": "darling-downs-solar-farm",
@@ -5338,7 +5348,7 @@
       "capacity_mw": 110.0,
       "developer": "Darling Downs Solar Farm Pty Ltd",
       "capacity_factor_pct": 22.3,
-      "revenue_per_mw": 14373.0
+      "revenue_per_mw": 16293.0
     },
     {
       "project_id": "glenrowan-west-solar-farm",
@@ -5347,8 +5357,8 @@
       "state": "VIC",
       "capacity_mw": 110.0,
       "developer": "Glenrowan Sun Farm Pty Ltd",
-      "capacity_factor_pct": 20.0,
-      "revenue_per_mw": 15338.0
+      "capacity_factor_pct": 18.6,
+      "revenue_per_mw": 17373.0
     },
     {
       "project_id": "gunnedah-solar-farm",
@@ -5357,8 +5367,8 @@
       "state": "NSW",
       "capacity_mw": 110.0,
       "developer": "Gunnedah SF Pty Ltd atf Gunnedah Asset Trust",
-      "capacity_factor_pct": 25.4,
-      "revenue_per_mw": 30830.0
+      "capacity_factor_pct": 24.2,
+      "revenue_per_mw": 35487.0
     },
     {
       "project_id": "taralga-wind-farm",
@@ -5367,8 +5377,8 @@
       "state": "NSW",
       "capacity_mw": 106.8,
       "developer": "Energy Pacific Vic Pty Ltd",
-      "capacity_factor_pct": 20.1,
-      "revenue_per_mw": 24207.0
+      "capacity_factor_pct": 20.9,
+      "revenue_per_mw": 33382.0
     },
     {
       "project_id": "bald-hills-wind-farm",
@@ -5377,8 +5387,8 @@
       "state": "VIC",
       "capacity_mw": 106.0,
       "developer": "Bald Hills Wind Farm Pty Ltd",
-      "capacity_factor_pct": 34.5,
-      "revenue_per_mw": 24064.0
+      "capacity_factor_pct": 35.9,
+      "revenue_per_mw": 31561.0
     },
     {
       "project_id": "nevertire-solar-farm",
@@ -5387,8 +5397,8 @@
       "state": "NSW",
       "capacity_mw": 105.0,
       "developer": "Nevertire Solar Pty Ltd as Trustee for the Nevertire Solar Trust",
-      "capacity_factor_pct": 22.5,
-      "revenue_per_mw": 23735.0
+      "capacity_factor_pct": 20.7,
+      "revenue_per_mw": 26442.0
     },
     {
       "project_id": "nyngan-solar-plant",
@@ -5397,8 +5407,8 @@
       "state": "NSW",
       "capacity_mw": 103.0,
       "developer": "PARF Company 6 Pty Limited",
-      "capacity_factor_pct": 18.9,
-      "revenue_per_mw": 19165.0
+      "capacity_factor_pct": 17.2,
+      "revenue_per_mw": 21674.0
     },
     {
       "project_id": "yarranlea-solar-farm",
@@ -5407,8 +5417,8 @@
       "state": "QLD",
       "capacity_mw": 103.0,
       "developer": "Yarranlea Solar Pty Ltd",
-      "capacity_factor_pct": 24.9,
-      "revenue_per_mw": 18652.0
+      "capacity_factor_pct": 24.3,
+      "revenue_per_mw": 21809.0
     },
     {
       "project_id": "glenrowan-solar-farm",
@@ -5417,8 +5427,8 @@
       "state": "VIC",
       "capacity_mw": 102.0,
       "developer": "Glenrowan Solar Farm Pty Ltd as trustee for Glenrowan Solar Farm Trust",
-      "capacity_factor_pct": 35.3,
-      "revenue_per_mw": 12919.0
+      "capacity_factor_pct": 32.8,
+      "revenue_per_mw": 14169.0
     },
     {
       "project_id": "bannerton-solar-park",
@@ -5427,8 +5437,8 @@
       "state": "VIC",
       "capacity_mw": 100.0,
       "developer": "Foresight Solar Australia Pty Ltd",
-      "capacity_factor_pct": 21.1,
-      "revenue_per_mw": 8285.0
+      "capacity_factor_pct": 20.3,
+      "revenue_per_mw": 9223.0
     },
     {
       "project_id": "bomen-solar-farm",
@@ -5437,8 +5447,8 @@
       "state": "NSW",
       "capacity_mw": 100.0,
       "developer": "Spark Infrastructure Holdings No. 6 Pty Limited",
-      "capacity_factor_pct": 22.9,
-      "revenue_per_mw": 21415.0
+      "capacity_factor_pct": 22.5,
+      "revenue_per_mw": 25076.0
     },
     {
       "project_id": "capital-battery",
@@ -5447,8 +5457,8 @@
       "state": "NSW",
       "capacity_mw": 100.0,
       "developer": "Neoen",
-      "capacity_factor_pct": 14.6,
-      "revenue_per_mw": 51331.0
+      "capacity_factor_pct": 14.3,
+      "revenue_per_mw": 60993.0
     },
     {
       "project_id": "chinchilla-bess",
@@ -5457,8 +5467,8 @@
       "state": "QLD",
       "capacity_mw": 100.0,
       "developer": "CS Energy",
-      "capacity_factor_pct": 8.9,
-      "revenue_per_mw": 28341.0
+      "capacity_factor_pct": 9.3,
+      "revenue_per_mw": 35147.0
     },
     {
       "project_id": "clare-solar-farm",
@@ -5467,8 +5477,8 @@
       "state": "QLD",
       "capacity_mw": 100.0,
       "developer": "Clare Asset Co Pty Ltd ATF Clare Asset Trust",
-      "capacity_factor_pct": 20.6,
-      "revenue_per_mw": 16946.0
+      "capacity_factor_pct": 20.2,
+      "revenue_per_mw": 19544.0
     },
     {
       "project_id": "haughton-solar-farm-stage-1",
@@ -5477,8 +5487,8 @@
       "state": "QLD",
       "capacity_mw": 100.0,
       "developer": "Pacific Hydro Haughton Solar Farm Pty Ltd",
-      "capacity_factor_pct": 23.8,
-      "revenue_per_mw": 19333.0
+      "capacity_factor_pct": 23.9,
+      "revenue_per_mw": 22321.0
     },
     {
       "project_id": "lilyvale-solar-farm",
@@ -5487,8 +5497,8 @@
       "state": "QLD",
       "capacity_mw": 100.0,
       "developer": "Lilyvale Asset Co Pty Ltd ATF Lilyvale Asset Trust",
-      "capacity_factor_pct": 23.3,
-      "revenue_per_mw": 17650.0
+      "capacity_factor_pct": 22.7,
+      "revenue_per_mw": 20323.0
     },
     {
       "project_id": "mannum-bess",
@@ -5497,8 +5507,8 @@
       "state": "SA",
       "capacity_mw": 100.0,
       "developer": "Epic Energy",
-      "capacity_factor_pct": 14.0,
-      "revenue_per_mw": 107612.0
+      "capacity_factor_pct": 14.1,
+      "revenue_per_mw": 119396.0
     },
     {
       "project_id": "wandoan-south-bess",
@@ -5507,8 +5517,8 @@
       "state": "QLD",
       "capacity_mw": 100.0,
       "developer": "Vena Energy",
-      "capacity_factor_pct": 9.9,
-      "revenue_per_mw": 28883.0
+      "capacity_factor_pct": 9.8,
+      "revenue_per_mw": 35203.0
     },
     {
       "project_id": "snowtown-wind-farm",
@@ -5517,8 +5527,8 @@
       "state": "SA",
       "capacity_mw": 98.7,
       "developer": "Snowtown Wind Farm Pty Ltd",
-      "capacity_factor_pct": 31.0,
-      "revenue_per_mw": 45858.0
+      "capacity_factor_pct": 29.5,
+      "revenue_per_mw": 53554.0
     },
     {
       "project_id": "tailem-bend-solar",
@@ -5527,8 +5537,8 @@
       "state": "SA",
       "capacity_mw": 95.0,
       "developer": "Vena Energy",
-      "capacity_factor_pct": 12.1,
-      "revenue_per_mw": 15244.0
+      "capacity_factor_pct": 12.3,
+      "revenue_per_mw": 19072.0
     },
     {
       "project_id": "wattle-point",
@@ -5537,8 +5547,8 @@
       "state": "SA",
       "capacity_mw": 91.0,
       "developer": "Infrastructure Capital Group",
-      "capacity_factor_pct": 31.1,
-      "revenue_per_mw": 86826.0
+      "capacity_factor_pct": 27.8,
+      "revenue_per_mw": 92461.0
     },
     {
       "project_id": "karadoc-solar-farm",
@@ -5547,8 +5557,8 @@
       "state": "VIC",
       "capacity_mw": 90.0,
       "developer": "Iraak Sun Farm Pty Ltd",
-      "capacity_factor_pct": 27.7,
-      "revenue_per_mw": 9820.0
+      "capacity_factor_pct": 25.1,
+      "revenue_per_mw": 10932.0
     },
     {
       "project_id": "sebastopol-solar-farm",
@@ -5557,8 +5567,8 @@
       "state": "NSW",
       "capacity_mw": 90.0,
       "developer": "Sebastopol Asset Co Pty Ltd ATF Sebastopol Asset Trust",
-      "capacity_factor_pct": 13.5,
-      "revenue_per_mw": 14179.0
+      "capacity_factor_pct": 15.2,
+      "revenue_per_mw": 18146.0
     },
     {
       "project_id": "west-wyalong-solar-farm",
@@ -5567,8 +5577,8 @@
       "state": "NSW",
       "capacity_mw": 90.0,
       "developer": "West Wyalong Fund Pty Ltd",
-      "capacity_factor_pct": 28.1,
-      "revenue_per_mw": 26286.0
+      "capacity_factor_pct": 27.2,
+      "revenue_per_mw": 30616.0
     },
     {
       "project_id": "hawkesdale-wind-farm",
@@ -5577,8 +5587,8 @@
       "state": "VIC",
       "capacity_mw": 89.5,
       "developer": "Hawkesdale Asset Pty Ltd as trustee for Hawkesdale Asset Trust",
-      "capacity_factor_pct": 23.9,
-      "revenue_per_mw": 25483.0
+      "capacity_factor_pct": 24.1,
+      "revenue_per_mw": 30434.0
     },
     {
       "project_id": "wemen-solar-farm",
@@ -5587,8 +5597,8 @@
       "state": "VIC",
       "capacity_mw": 88.0,
       "developer": "Wemen Asset Co Pty Ltd as Trustee to Wemen Solar Unit Trust",
-      "capacity_factor_pct": 25.9,
-      "revenue_per_mw": 11111.0
+      "capacity_factor_pct": 25.0,
+      "revenue_per_mw": 12467.0
     },
     {
       "project_id": "beryl-solar-farm",
@@ -5597,8 +5607,8 @@
       "state": "NSW",
       "capacity_mw": 87.0,
       "developer": "FS NSW Project No 1 AT Pty Ltd as trustee of FS NSW Project No 1 Asset Trust",
-      "capacity_factor_pct": 28.4,
-      "revenue_per_mw": 28908.0
+      "capacity_factor_pct": 27.5,
+      "revenue_per_mw": 32890.0
     },
     {
       "project_id": "lincoln-gap-wind-farm-stage-2",
@@ -5607,8 +5617,8 @@
       "state": "SA",
       "capacity_mw": 86.0,
       "developer": "Lincoln Gap Wind Farm Pty Ltd",
-      "capacity_factor_pct": 25.6,
-      "revenue_per_mw": 51792.0
+      "capacity_factor_pct": 23.9,
+      "revenue_per_mw": 57624.0
     },
     {
       "project_id": "hillston-sun-farm",
@@ -5617,8 +5627,8 @@
       "state": "NSW",
       "capacity_mw": 85.0,
       "developer": "Hillston Sun Farm Operations Pty Ltd ATF Hillston",
-      "capacity_factor_pct": 32.8,
-      "revenue_per_mw": 31024.0
+      "capacity_factor_pct": 31.7,
+      "revenue_per_mw": 36368.0
     },
     {
       "project_id": "winton-solar-farm",
@@ -5627,8 +5637,8 @@
       "state": "VIC",
       "capacity_mw": 85.0,
       "developer": "Winton Asset Co. Pty Ltd as Trustee of the Winton Asset Trust",
-      "capacity_factor_pct": 31.0,
-      "revenue_per_mw": 10886.0
+      "capacity_factor_pct": 28.8,
+      "revenue_per_mw": 12075.0
     },
     {
       "project_id": "elaine-wind-farm",
@@ -5637,8 +5647,8 @@
       "state": "VIC",
       "capacity_mw": 82.0,
       "developer": "Northleaf /InfraRed/Macquarie Capital",
-      "capacity_factor_pct": 19.1,
-      "revenue_per_mw": 15773.0
+      "capacity_factor_pct": 20.4,
+      "revenue_per_mw": 19802.0
     },
     {
       "project_id": "moura-solar-farm",
@@ -5647,8 +5657,8 @@
       "state": "QLD",
       "capacity_mw": 82.0,
       "developer": "Moura Solar Farm SPV Pty Ltd as the Trustee for Moura Solar Farm Unit Trust",
-      "capacity_factor_pct": 30.8,
-      "revenue_per_mw": 23208.0
+      "capacity_factor_pct": 31.3,
+      "revenue_per_mw": 27257.0
     },
     {
       "project_id": "yatpool-solar-farm",
@@ -5657,8 +5667,8 @@
       "state": "VIC",
       "capacity_mw": 81.0,
       "developer": "Yatpool Sun Farm Pty Ltd",
-      "capacity_factor_pct": 22.8,
-      "revenue_per_mw": 8953.0
+      "capacity_factor_pct": 20.8,
+      "revenue_per_mw": 10231.0
     },
     {
       "project_id": "lake-bonney-1-wind-farm",
@@ -5667,8 +5677,8 @@
       "state": "SA",
       "capacity_mw": 80.5,
       "developer": "Lake Bonney Wind Power Pty Ltd",
-      "capacity_factor_pct": 15.4,
-      "revenue_per_mw": 29984.0
+      "capacity_factor_pct": 15.0,
+      "revenue_per_mw": 34407.0
     },
     {
       "project_id": "girgarre-solar-farm",
@@ -5677,8 +5687,8 @@
       "state": "VIC",
       "capacity_mw": 76.0,
       "developer": "Giragarre Solar Farm Pty Ltd as trustee for Giragarre Solar Farm Trust",
-      "capacity_factor_pct": 21.8,
-      "revenue_per_mw": 16895.0
+      "capacity_factor_pct": 18.8,
+      "revenue_per_mw": 18191.0
     },
     {
       "project_id": "clermont-solar-farm",
@@ -5687,8 +5697,8 @@
       "state": "QLD",
       "capacity_mw": 75.0,
       "developer": "Clermont Asset Co Pty Ltd as Trustee for Clerrmont Solar Unit Trust",
-      "capacity_factor_pct": 15.5,
-      "revenue_per_mw": 10992.0
+      "capacity_factor_pct": 18.4,
+      "revenue_per_mw": 14333.0
     },
     {
       "project_id": "susan-river-solar-farm",
@@ -5697,8 +5707,8 @@
       "state": "QLD",
       "capacity_mw": 75.0,
       "developer": "Susan River Solar Pty Ltd as trustee for the Susan River Solar Trust",
-      "capacity_factor_pct": 19.9,
-      "revenue_per_mw": 16829.0
+      "capacity_factor_pct": 19.7,
+      "revenue_per_mw": 19657.0
     },
     {
       "project_id": "emerald-solar-park",
@@ -5707,8 +5717,8 @@
       "state": "QLD",
       "capacity_mw": 72.0,
       "developer": "Lighthouse Infrastructure Management Limited",
-      "capacity_factor_pct": 26.3,
-      "revenue_per_mw": 19969.0
+      "capacity_factor_pct": 26.5,
+      "revenue_per_mw": 23048.0
     },
     {
       "project_id": "hallett-stage-2-hallett-hill",
@@ -5717,8 +5727,8 @@
       "state": "SA",
       "capacity_mw": 71.0,
       "developer": "Infrastructure Capital Group Limited",
-      "capacity_factor_pct": 25.9,
-      "revenue_per_mw": 33630.0
+      "capacity_factor_pct": 25.2,
+      "revenue_per_mw": 38942.0
     },
     {
       "project_id": "mt-millar-wind-farm",
@@ -5727,8 +5737,8 @@
       "state": "SA",
       "capacity_mw": 70.0,
       "developer": "MT MILLAR WIND FARM PTY LTD",
-      "capacity_factor_pct": 23.8,
-      "revenue_per_mw": 57745.0
+      "capacity_factor_pct": 23.2,
+      "revenue_per_mw": 64296.0
     },
     {
       "project_id": "goonumbla-solar-farm",
@@ -5737,8 +5747,8 @@
       "state": "NSW",
       "capacity_mw": 69.75,
       "developer": "Goonumbla Asset Co Pty Ltd as trustee for the Goonumbla Asset Trust",
-      "capacity_factor_pct": 15.6,
-      "revenue_per_mw": 21385.0
+      "capacity_factor_pct": 16.1,
+      "revenue_per_mw": 25027.0
     },
     {
       "project_id": "oaklands-hill-wind-farm",
@@ -5747,8 +5757,8 @@
       "state": "VIC",
       "capacity_mw": 68.0,
       "developer": "Oaklands Hill Wind farm pty ltd",
-      "capacity_factor_pct": 19.7,
-      "revenue_per_mw": 17456.0
+      "capacity_factor_pct": 19.8,
+      "revenue_per_mw": 19731.0
     },
     {
       "project_id": "cathedral-rocks",
@@ -5757,8 +5767,8 @@
       "state": "SA",
       "capacity_mw": 66.0,
       "developer": "JV Cathedral Rock Investments Pty Ltd  - Acciona Energy Australia Global Pty Ltd and EnergyAustralia Pty Ltd",
-      "capacity_factor_pct": 26.6,
-      "revenue_per_mw": 76148.0
+      "capacity_factor_pct": 26.0,
+      "revenue_per_mw": 82454.0
     },
     {
       "project_id": "riverina-energy-storage-system-2",
@@ -5767,8 +5777,8 @@
       "state": "NSW",
       "capacity_mw": 65.0,
       "developer": "Edify Energy / Federation Asset Management",
-      "capacity_factor_pct": 10.7,
-      "revenue_per_mw": 38781.0
+      "capacity_factor_pct": 11.4,
+      "revenue_per_mw": 48861.0
     },
     {
       "project_id": "rugby-run-solar-farm",
@@ -5777,8 +5787,8 @@
       "state": "QLD",
       "capacity_mw": 65.0,
       "developer": "Adani Rugby Run Pty Ltd",
-      "capacity_factor_pct": 23.4,
-      "revenue_per_mw": 20548.0
+      "capacity_factor_pct": 22.6,
+      "revenue_per_mw": 23483.0
     },
     {
       "project_id": "smithfield-bess",
@@ -5787,8 +5797,8 @@
       "state": "NSW",
       "capacity_mw": 65.0,
       "developer": "Iberdrola",
-      "capacity_factor_pct": 9.7,
-      "revenue_per_mw": 52397.0
+      "capacity_factor_pct": 10.6,
+      "revenue_per_mw": 62422.0
     },
     {
       "project_id": "warwick-solar-farm",
@@ -5797,8 +5807,8 @@
       "state": "QLD",
       "capacity_mw": 64.0,
       "developer": "The University of Queensland",
-      "capacity_factor_pct": 16.5,
-      "revenue_per_mw": 15820.0
+      "capacity_factor_pct": 16.1,
+      "revenue_per_mw": 18967.0
     },
     {
       "project_id": "riverina-energy-storage-system-1",
@@ -5807,8 +5817,8 @@
       "state": "NSW",
       "capacity_mw": 60.0,
       "developer": "Edify Energy / Federation Asset Management",
-      "capacity_factor_pct": 10.8,
-      "revenue_per_mw": 50196.0
+      "capacity_factor_pct": 11.2,
+      "revenue_per_mw": 59549.0
     },
     {
       "project_id": "cherry-tree-wind-farm",
@@ -5817,8 +5827,8 @@
       "state": "VIC",
       "capacity_mw": 57.6,
       "developer": "Cherry Tree Wind Farm Pty Limited A.T.F. Cherry Tree Project Trust",
-      "capacity_factor_pct": 33.7,
-      "revenue_per_mw": 33686.0
+      "capacity_factor_pct": 30.6,
+      "revenue_per_mw": 38466.0
     },
     {
       "project_id": "clements-gap-wind-farm",
@@ -5827,8 +5837,8 @@
       "state": "SA",
       "capacity_mw": 57.0,
       "developer": "Pacific Hydro Clements Gap Pty Ltd",
-      "capacity_factor_pct": 37.7,
-      "revenue_per_mw": 36927.0
+      "capacity_factor_pct": 36.1,
+      "revenue_per_mw": 44778.0
     },
     {
       "project_id": "childers-solar-farm",
@@ -5837,8 +5847,8 @@
       "state": "QLD",
       "capacity_mw": 56.0,
       "developer": "Childers Solar Pty Ltd as trustee for the Childers Solar Trust",
-      "capacity_factor_pct": 22.9,
-      "revenue_per_mw": 19407.0
+      "capacity_factor_pct": 22.0,
+      "revenue_per_mw": 22349.0
     },
     {
       "project_id": "crookwell-3-wind-farm",
@@ -5847,8 +5857,8 @@
       "state": "NSW",
       "capacity_mw": 56.0,
       "developer": "Crookwell 3 Development Pty Ltd",
-      "capacity_factor_pct": 26.7,
-      "revenue_per_mw": 33563.0
+      "capacity_factor_pct": 26.0,
+      "revenue_per_mw": 42915.0
     },
     {
       "project_id": "hamilton-solar-farm",
@@ -5857,8 +5867,8 @@
       "state": "QLD",
       "capacity_mw": 56.0,
       "developer": "Hamilton Solar Farm Pty Ltd",
-      "capacity_factor_pct": 20.9,
-      "revenue_per_mw": 17621.0
+      "capacity_factor_pct": 19.9,
+      "revenue_per_mw": 20380.0
     },
     {
       "project_id": "moree-solar-farm",
@@ -5867,8 +5877,8 @@
       "state": "NSW",
       "capacity_mw": 56.0,
       "developer": "Moree Solar Farm Pty Ltd",
-      "capacity_factor_pct": 30.9,
-      "revenue_per_mw": 33190.0
+      "capacity_factor_pct": 30.4,
+      "revenue_per_mw": 38345.0
     },
     {
       "project_id": "whitsunday-solar-farm",
@@ -5877,8 +5887,8 @@
       "state": "QLD",
       "capacity_mw": 56.0,
       "developer": "Whitsunday Solar Farm Pty Ltd",
-      "capacity_factor_pct": 20.6,
-      "revenue_per_mw": 17836.0
+      "capacity_factor_pct": 19.3,
+      "revenue_per_mw": 20584.0
     },
     {
       "project_id": "oakey-2-solar-farm",
@@ -5887,8 +5897,8 @@
       "state": "QLD",
       "capacity_mw": 55.0,
       "developer": "RE Oakey Pty Ltd",
-      "capacity_factor_pct": 27.4,
-      "revenue_per_mw": 21208.0
+      "capacity_factor_pct": 25.6,
+      "revenue_per_mw": 23995.0
     },
     {
       "project_id": "salt-creek-wind-farm",
@@ -5897,8 +5907,8 @@
       "state": "VIC",
       "capacity_mw": 54.0,
       "developer": "Salt Creek Wind Farm Pty Ltd",
-      "capacity_factor_pct": 17.5,
-      "revenue_per_mw": 20253.0
+      "capacity_factor_pct": 16.6,
+      "revenue_per_mw": 23610.0
     },
     {
       "project_id": "broken-hill-solar-plant",
@@ -5907,8 +5917,8 @@
       "state": "NSW",
       "capacity_mw": 53.0,
       "developer": "PARF Company 6 Pty Limited",
-      "capacity_factor_pct": 19.0,
-      "revenue_per_mw": 24383.0
+      "capacity_factor_pct": 18.4,
+      "revenue_per_mw": 28341.0
     },
     {
       "project_id": "hallett-5-the-bluff-wf",
@@ -5917,8 +5927,8 @@
       "state": "SA",
       "capacity_mw": 53.0,
       "developer": "Eurus Energy",
-      "capacity_factor_pct": 18.1,
-      "revenue_per_mw": 19815.0
+      "capacity_factor_pct": 17.9,
+      "revenue_per_mw": 23250.0
     },
     {
       "project_id": "wyalong-solar-farm",
@@ -5927,8 +5937,8 @@
       "state": "NSW",
       "capacity_mw": 53.0,
       "developer": "Wyalong Solar Farm Pty Ltd as the trustee for the Wyalong Solar Farm Unit Trust",
-      "capacity_factor_pct": 28.1,
-      "revenue_per_mw": 27318.0
+      "capacity_factor_pct": 26.6,
+      "revenue_per_mw": 31596.0
     },
     {
       "project_id": "challicum-hills",
@@ -5937,8 +5947,8 @@
       "state": "VIC",
       "capacity_mw": 52.5,
       "developer": "Pacific Hydro Challicum Hills Pty Ltd",
-      "capacity_factor_pct": 20.7,
-      "revenue_per_mw": 16340.0
+      "capacity_factor_pct": 20.6,
+      "revenue_per_mw": 19243.0
     },
     {
       "project_id": "bouldercombe-battery-project",
@@ -5947,8 +5957,8 @@
       "state": "QLD",
       "capacity_mw": 50.0,
       "developer": "Genex Power",
-      "capacity_factor_pct": 14.2,
-      "revenue_per_mw": 38894.0
+      "capacity_factor_pct": 14.1,
+      "revenue_per_mw": 47567.0
     },
     {
       "project_id": "broken-hill-bess",
@@ -5958,7 +5968,7 @@
       "capacity_mw": 50.0,
       "developer": "AGL Energy / Macquarie",
       "capacity_factor_pct": 6.9,
-      "revenue_per_mw": 28118.0
+      "revenue_per_mw": 33123.0
     },
     {
       "project_id": "gannawarra-solar-farm",
@@ -5967,8 +5977,8 @@
       "state": "VIC",
       "capacity_mw": 50.0,
       "developer": "Gannawarra Solar Farm Pty Ltd",
-      "capacity_factor_pct": 29.7,
-      "revenue_per_mw": 9363.0
+      "capacity_factor_pct": 27.2,
+      "revenue_per_mw": 10181.0
     },
     {
       "project_id": "hayman-solar-farm",
@@ -5977,8 +5987,8 @@
       "state": "QLD",
       "capacity_mw": 50.0,
       "developer": "Hayman Solar Farm Pty Ltd as trustee for Hayman Solar Farm Trust",
-      "capacity_factor_pct": 20.3,
-      "revenue_per_mw": 17600.0
+      "capacity_factor_pct": 19.5,
+      "revenue_per_mw": 20235.0
     },
     {
       "project_id": "jemalong-solar",
@@ -5988,7 +5998,7 @@
       "capacity_mw": 50.0,
       "developer": "Genex Power",
       "capacity_factor_pct": 22.8,
-      "revenue_per_mw": 23524.0
+      "revenue_per_mw": 27828.0
     },
     {
       "project_id": "kidston-solar-project-phase-one",
@@ -5997,8 +6007,8 @@
       "state": "QLD",
       "capacity_mw": 50.0,
       "developer": "Genex Power Limited",
-      "capacity_factor_pct": 20.6,
-      "revenue_per_mw": 18432.0
+      "capacity_factor_pct": 20.5,
+      "revenue_per_mw": 22439.0
     },
     {
       "project_id": "wallgrove-grid-battery-project",
@@ -6007,8 +6017,8 @@
       "state": "NSW",
       "capacity_mw": 50.0,
       "developer": "TransGrid",
-      "capacity_factor_pct": 7.5,
-      "revenue_per_mw": 39192.0
+      "capacity_factor_pct": 7.6,
+      "revenue_per_mw": 45073.0
     },
     {
       "project_id": "parkes-solar-farm",
@@ -6017,8 +6027,8 @@
       "state": "NSW",
       "capacity_mw": 49.5,
       "developer": "Parkes Solar Farm Pty Ltd",
-      "capacity_factor_pct": 15.0,
-      "revenue_per_mw": 21168.0
+      "capacity_factor_pct": 16.3,
+      "revenue_per_mw": 25087.0
     },
     {
       "project_id": "woodlawn-wind-farm",
@@ -6027,8 +6037,8 @@
       "state": "NSW",
       "capacity_mw": 48.3,
       "developer": "Woodlawn Wind Pty Ltd",
-      "capacity_factor_pct": 28.4,
-      "revenue_per_mw": 46429.0
+      "capacity_factor_pct": 28.0,
+      "revenue_per_mw": 57223.0
     },
     {
       "project_id": "manildra-solar-farm",
@@ -6037,8 +6047,8 @@
       "state": "NSW",
       "capacity_mw": 46.7,
       "developer": "Manildra Prop Pty Ltd as trustee for the Manildra Asset Trust",
-      "capacity_factor_pct": 8.2,
-      "revenue_per_mw": 12963.0
+      "capacity_factor_pct": 8.3,
+      "revenue_per_mw": 15438.0
     },
     {
       "project_id": "gunning-wind-farm",
@@ -6047,8 +6057,8 @@
       "state": "NSW",
       "capacity_mw": 46.5,
       "developer": "Gunning Wind Energy Developments",
-      "capacity_factor_pct": 35.3,
-      "revenue_per_mw": 47132.0
+      "capacity_factor_pct": 33.8,
+      "revenue_per_mw": 59207.0
     },
     {
       "project_id": "canunda",
@@ -6057,8 +6067,8 @@
       "state": "SA",
       "capacity_mw": 46.0,
       "developer": "Canunda Power Pty Ltd",
-      "capacity_factor_pct": 18.4,
-      "revenue_per_mw": 39452.0
+      "capacity_factor_pct": 17.4,
+      "revenue_per_mw": 44154.0
     },
     {
       "project_id": "mokoan-solar-farm",
@@ -6067,8 +6077,8 @@
       "state": "VIC",
       "capacity_mw": 46.0,
       "developer": "EE Solar 6 Pty Ltd as trustee for EE Solar 6 Trust",
-      "capacity_factor_pct": 20.4,
-      "revenue_per_mw": 14768.0
+      "capacity_factor_pct": 19.2,
+      "revenue_per_mw": 16888.0
     },
     {
       "project_id": "kennedy-energy-park-phase-1-wind",
@@ -6077,8 +6087,8 @@
       "state": "QLD",
       "capacity_mw": 43.3,
       "developer": "Windlab / Eurus",
-      "capacity_factor_pct": 41.2,
-      "revenue_per_mw": 55141.0
+      "capacity_factor_pct": 44.0,
+      "revenue_per_mw": 75195.0
     },
     {
       "project_id": "limondale-solar-farm-2",
@@ -6087,8 +6097,8 @@
       "state": "NSW",
       "capacity_mw": 42.8,
       "developer": "Limondale Sun Farm Pty Ltd",
-      "capacity_factor_pct": 21.9,
-      "revenue_per_mw": 22829.0
+      "capacity_factor_pct": 20.1,
+      "revenue_per_mw": 25994.0
     },
     {
       "project_id": "collinsville-pv",
@@ -6097,8 +6107,8 @@
       "state": "QLD",
       "capacity_mw": 40.76,
       "developer": "Ratch Australia",
-      "capacity_factor_pct": 21.0,
-      "revenue_per_mw": 15398.0
+      "capacity_factor_pct": 21.3,
+      "revenue_per_mw": 17567.0
     },
     {
       "project_id": "kingaroy-solar-farm",
@@ -6107,8 +6117,8 @@
       "state": "QLD",
       "capacity_mw": 40.0,
       "developer": "Kingaroy PropertyCo Pty Ltd as trustee for Kingaroy Property Trust",
-      "capacity_factor_pct": 28.9,
-      "revenue_per_mw": 22959.0
+      "capacity_factor_pct": 28.7,
+      "revenue_per_mw": 26628.0
     },
     {
       "project_id": "lake-bonney-3-wind-farm",
@@ -6118,7 +6128,7 @@
       "capacity_mw": 39.0,
       "developer": "Lake Bonney Wind Power Pty Ltd",
       "capacity_factor_pct": 16.5,
-      "revenue_per_mw": 33257.0
+      "revenue_per_mw": 38834.0
     },
     {
       "project_id": "starfish-hill",
@@ -6127,8 +6137,8 @@
       "state": "SA",
       "capacity_mw": 34.5,
       "developer": "Ratch Australia",
-      "capacity_factor_pct": 34.2,
-      "revenue_per_mw": 78522.0
+      "capacity_factor_pct": 31.6,
+      "revenue_per_mw": 83103.0
     },
     {
       "project_id": "kiata-wind-farm",
@@ -6137,8 +6147,8 @@
       "state": "VIC",
       "capacity_mw": 31.0,
       "developer": "Kiata ProjectCo Pty Ltd atf Kiata Project Trust",
-      "capacity_factor_pct": 31.3,
-      "revenue_per_mw": 38800.0
+      "capacity_factor_pct": 31.6,
+      "revenue_per_mw": 46319.0
     },
     {
       "project_id": "ballarat-energy-storage-system",
@@ -6147,8 +6157,8 @@
       "state": "VIC",
       "capacity_mw": 30.0,
       "developer": "AusNet Services",
-      "capacity_factor_pct": 3.1,
-      "revenue_per_mw": 6607.0
+      "capacity_factor_pct": 3.4,
+      "revenue_per_mw": 9341.0
     },
     {
       "project_id": "corowa-solar-farm",
@@ -6157,8 +6167,8 @@
       "state": "NSW",
       "capacity_mw": 30.0,
       "developer": "Corowa Operationsco Pty Ltd as trustee for Corowa Operations Trust",
-      "capacity_factor_pct": 33.7,
-      "revenue_per_mw": 32731.0
+      "capacity_factor_pct": 30.9,
+      "revenue_per_mw": 36697.0
     },
     {
       "project_id": "cullerin-range-wind-farm",
@@ -6167,8 +6177,8 @@
       "state": "NSW",
       "capacity_mw": 30.0,
       "developer": "Cullerin Range Wind Farm Pty Ltd",
-      "capacity_factor_pct": 36.5,
-      "revenue_per_mw": 55491.0
+      "capacity_factor_pct": 35.6,
+      "revenue_per_mw": 68614.0
     },
     {
       "project_id": "dalrymple-bess",
@@ -6178,7 +6188,7 @@
       "capacity_mw": 30.0,
       "developer": "ElectraNet",
       "capacity_factor_pct": 1.8,
-      "revenue_per_mw": 17310.0
+      "revenue_per_mw": 19075.0
     },
     {
       "project_id": "junee-solar-farm",
@@ -6187,8 +6197,8 @@
       "state": "NSW",
       "capacity_mw": 30.0,
       "developer": "Junee Operationsco Pty Ltd as trustee for Junee Operations Trust",
-      "capacity_factor_pct": 28.0,
-      "revenue_per_mw": 27048.0
+      "capacity_factor_pct": 26.4,
+      "revenue_per_mw": 31118.0
     },
     {
       "project_id": "kerang-solar-plant",
@@ -6197,8 +6207,8 @@
       "state": "VIC",
       "capacity_mw": 30.0,
       "developer": "Kerang Solar Plant Pty Ltd",
-      "capacity_factor_pct": 27.5,
-      "revenue_per_mw": 7685.0
+      "capacity_factor_pct": 27.0,
+      "revenue_per_mw": 8796.0
     },
     {
       "project_id": "molong-solar-farm",
@@ -6208,7 +6218,7 @@
       "capacity_mw": 30.0,
       "developer": "Molong Operations co Pty Ltd ATF Molong Operations Trust",
       "capacity_factor_pct": 12.9,
-      "revenue_per_mw": 14988.0
+      "revenue_per_mw": 17822.0
     },
     {
       "project_id": "yambuk",
@@ -6218,8 +6228,8 @@
       "capacity_mw": 30.0,
       "developer": "Energy Pacific Vic Pty Ltd",
       "capacity_factor_pct": 22.3,
-      "revenue_per_mw": 18436.0
+      "revenue_per_mw": 22286.0
     }
   ],
-  "exported_at": "2026-04-23T18:25:54.791003"
+  "exported_at": "2026-05-10T08:30:21.513433"
 }

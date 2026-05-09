@@ -2811,11 +2811,11 @@
         "name": "Collie Battery",
         "technology": "bess",
         "state": "WA",
-        "status": "development",
+        "status": "operating",
         "capacity_mw": 560.0,
-        "cod_current": "2027",
+        "cod_current": "2025-07",
         "cod_original": "2027",
-        "drift_months": 0.0
+        "drift_months": null
       }
     ],
     "FIrm Power P/L": [
@@ -15992,7 +15992,7 @@
   "fleet_performance": {
     "Murra Warra II Project Co Pty Ltd as Trustee for the Murra Warra II Project Trust": {
       "ranked_projects": 8,
-      "avg_cf": 21.0,
+      "avg_cf": 20.8,
       "avg_composite": 45.9,
       "quartile_counts": {
         "1": 2,
@@ -16018,7 +16018,7 @@
           "technology": "wind",
           "quartile": 1,
           "composite_score": 87.6,
-          "capacity_factor_pct": 24.8,
+          "capacity_factor_pct": 23.5,
           "year": 2026
         },
         {
@@ -16079,7 +16079,7 @@
     },
     "Murra Warra Project Co Pty Ltd": {
       "ranked_projects": 8,
-      "avg_cf": 21.0,
+      "avg_cf": 20.8,
       "avg_composite": 46.5,
       "quartile_counts": {
         "1": 2,
@@ -16105,7 +16105,7 @@
           "technology": "wind",
           "quartile": 1,
           "composite_score": 83.8,
-          "capacity_factor_pct": 24.8,
+          "capacity_factor_pct": 23.5,
           "year": 2026
         },
         {
@@ -16166,7 +16166,7 @@
     },
     "BWF Nominees Pty Ltd as trustee for the BWF Trust": {
       "ranked_projects": 12,
-      "avg_cf": 21.1,
+      "avg_cf": 20.9,
       "avg_composite": 51.2,
       "quartile_counts": {
         "1": 4,
@@ -16192,7 +16192,7 @@
           "technology": "wind",
           "quartile": 1,
           "composite_score": 87.3,
-          "capacity_factor_pct": 29.0,
+          "capacity_factor_pct": 27.6,
           "year": 2026
         },
         {
@@ -16210,7 +16210,7 @@
           "technology": "wind",
           "quartile": 1,
           "composite_score": 85.1,
-          "capacity_factor_pct": 29.0,
+          "capacity_factor_pct": 27.6,
           "year": 2026
         },
         {
@@ -16289,7 +16289,7 @@
     },
     "Lincoln Gap Wind Farm Pty Ltd": {
       "ranked_projects": 16,
-      "avg_cf": 25.2,
+      "avg_cf": 25.0,
       "avg_composite": 53.2,
       "quartile_counts": {
         "1": 7,
@@ -16315,7 +16315,7 @@
           "technology": "wind",
           "quartile": 1,
           "composite_score": 85.3,
-          "capacity_factor_pct": 25.6,
+          "capacity_factor_pct": 23.9,
           "year": 2026
         },
         {
@@ -16333,7 +16333,7 @@
           "technology": "wind",
           "quartile": 1,
           "composite_score": 84.6,
-          "capacity_factor_pct": 25.6,
+          "capacity_factor_pct": 23.9,
           "year": 2026
         },
         {
@@ -16483,7 +16483,7 @@
           "technology": "wind",
           "quartile": 1,
           "composite_score": 80.0,
-          "capacity_factor_pct": 36.3,
+          "capacity_factor_pct": 36.4,
           "year": 2026
         },
         {
@@ -16499,7 +16499,7 @@
     },
     "AGL Energy": {
       "ranked_projects": 12,
-      "avg_cf": 21.4,
+      "avg_cf": 21.2,
       "avg_composite": 61.6,
       "quartile_counts": {
         "1": 7,
@@ -16543,7 +16543,7 @@
           "technology": "wind",
           "quartile": 1,
           "composite_score": 80.0,
-          "capacity_factor_pct": 35.5,
+          "capacity_factor_pct": 33.8,
           "year": 2026
         },
         {
@@ -16570,7 +16570,7 @@
           "technology": "bess",
           "quartile": 1,
           "composite_score": 52.7,
-          "capacity_factor_pct": 7.6,
+          "capacity_factor_pct": 7.3,
           "year": 2026
         },
         {
@@ -16622,7 +16622,7 @@
     },
     "Windlab / Eurus": {
       "ranked_projects": 6,
-      "avg_cf": 35.7,
+      "avg_cf": 36.1,
       "avg_composite": 61.3,
       "quartile_counts": {
         "1": 3,
@@ -16666,7 +16666,7 @@
           "technology": "wind",
           "quartile": 2,
           "composite_score": 65.6,
-          "capacity_factor_pct": 41.2,
+          "capacity_factor_pct": 44.0,
           "year": 2026
         },
         {
@@ -16691,7 +16691,7 @@
     },
     "PARF Company 8 Pty Ltd as trustee for the Silverton Project Trust": {
       "ranked_projects": 9,
-      "avg_cf": 30.2,
+      "avg_cf": 30.1,
       "avg_composite": 68.3,
       "quartile_counts": {
         "1": 6,
@@ -16762,7 +16762,7 @@
           "technology": "wind",
           "quartile": 3,
           "composite_score": 41.3,
-          "capacity_factor_pct": 23.1,
+          "capacity_factor_pct": 22.7,
           "year": 2026
         },
         {
@@ -16787,7 +16787,7 @@
     },
     "PAREP 1 Pty Ltd": {
       "ranked_projects": 10,
-      "avg_cf": 22.4,
+      "avg_cf": 21.9,
       "avg_composite": 61.4,
       "quartile_counts": {
         "1": 6,
@@ -16813,7 +16813,7 @@
           "technology": "solar",
           "quartile": 1,
           "composite_score": 92.1,
-          "capacity_factor_pct": 26.1,
+          "capacity_factor_pct": 23.8,
           "year": 2026
         },
         {
@@ -16822,7 +16822,7 @@
           "technology": "wind",
           "quartile": 1,
           "composite_score": 87.8,
-          "capacity_factor_pct": 26.1,
+          "capacity_factor_pct": 23.8,
           "year": 2026
         },
         {
@@ -16892,7 +16892,7 @@
     },
     "Musselroe Wind Farm Pty Ltd": {
       "ranked_projects": 9,
-      "avg_cf": 37.6,
+      "avg_cf": 37.7,
       "avg_composite": 75.1,
       "quartile_counts": {
         "1": 7,
@@ -16954,7 +16954,7 @@
           "technology": "wind",
           "quartile": 1,
           "composite_score": 72.9,
-          "capacity_factor_pct": 30.0,
+          "capacity_factor_pct": 30.9,
           "year": 2026
         },
         {
@@ -16988,7 +16988,7 @@
     },
     "Wild Cattle Hill Pty Ltd": {
       "ranked_projects": 7,
-      "avg_cf": 33.3,
+      "avg_cf": 34.1,
       "avg_composite": 62.5,
       "quartile_counts": {
         "1": 3,
@@ -17041,7 +17041,7 @@
           "technology": "wind",
           "quartile": 2,
           "composite_score": 63.5,
-          "capacity_factor_pct": 27.9,
+          "capacity_factor_pct": 33.2,
           "year": 2026
         },
         {
@@ -17066,7 +17066,7 @@
     },
     "SWF1 Operations Holdings Pty Ltd as trustee for SWF1 Hold Trust": {
       "ranked_projects": 9,
-      "avg_cf": 31.4,
+      "avg_cf": 31.1,
       "avg_composite": 70.3,
       "quartile_counts": {
         "1": 6,
@@ -17101,7 +17101,7 @@
           "technology": "wind",
           "quartile": 1,
           "composite_score": 81.3,
-          "capacity_factor_pct": 37.9,
+          "capacity_factor_pct": 35.7,
           "year": 2026
         },
         {
@@ -17162,7 +17162,7 @@
     },
     "Woolnorth Wind Farm Finance Pty Ltd": {
       "ranked_projects": 9,
-      "avg_cf": 38.2,
+      "avg_cf": 38.4,
       "avg_composite": 74.0,
       "quartile_counts": {
         "1": 8,
@@ -17224,7 +17224,7 @@
           "technology": "wind",
           "quartile": 1,
           "composite_score": 72.9,
-          "capacity_factor_pct": 32.1,
+          "capacity_factor_pct": 34.3,
           "year": 2026
         },
         {
@@ -17258,7 +17258,7 @@
     },
     "Granville Harbour Operations Pty Ltd as trustee for Granville Harbour Operations Trust": {
       "ranked_projects": 7,
-      "avg_cf": 34.3,
+      "avg_cf": 35.3,
       "avg_composite": 61.1,
       "quartile_counts": {
         "1": 4,
@@ -17320,7 +17320,7 @@
           "technology": "wind",
           "quartile": 3,
           "composite_score": 44.1,
-          "capacity_factor_pct": 23.3,
+          "capacity_factor_pct": 30.4,
           "year": 2026
         },
         {
@@ -17336,7 +17336,7 @@
     },
     "HWF 1 Pty Ltd": {
       "ranked_projects": 9,
-      "avg_cf": 40.5,
+      "avg_cf": 40.4,
       "avg_composite": 70.4,
       "quartile_counts": {
         "1": 6,
@@ -17407,7 +17407,7 @@
           "technology": "wind",
           "quartile": 2,
           "composite_score": 65.6,
-          "capacity_factor_pct": 38.9,
+          "capacity_factor_pct": 38.2,
           "year": 2026
         },
         {
@@ -17432,7 +17432,7 @@
     },
     "BEIJING JINGNENG CLEAN ENERGY (AUSTRALIA) HOLDING PTY LTD": {
       "ranked_projects": 7,
-      "avg_cf": 28.3,
+      "avg_cf": 28.0,
       "avg_composite": 60.3,
       "quartile_counts": {
         "1": 5,
@@ -17476,7 +17476,7 @@
           "technology": "wind",
           "quartile": 1,
           "composite_score": 73.2,
-          "capacity_factor_pct": 37.7,
+          "capacity_factor_pct": 35.6,
           "year": 2026
         },
         {
@@ -17554,7 +17554,7 @@
           "technology": "wind",
           "quartile": 1,
           "composite_score": 70.6,
-          "capacity_factor_pct": 33.4,
+          "capacity_factor_pct": 33.6,
           "year": 2026
         },
         {
@@ -17606,7 +17606,7 @@
     },
     "Gunning Wind Energy Developments": {
       "ranked_projects": 9,
-      "avg_cf": 37.8,
+      "avg_cf": 37.6,
       "avg_composite": 73.1,
       "quartile_counts": {
         "1": 7,
@@ -17695,14 +17695,14 @@
           "technology": "wind",
           "quartile": 2,
           "composite_score": 59.5,
-          "capacity_factor_pct": 35.3,
+          "capacity_factor_pct": 33.8,
           "year": 2026
         }
       ]
     },
     "Tilt Renewables Australia Pty Ltd": {
       "ranked_projects": 13,
-      "avg_cf": 30.7,
+      "avg_cf": 30.4,
       "avg_composite": 66.6,
       "quartile_counts": {
         "1": 8,
@@ -17755,7 +17755,7 @@
           "technology": "wind",
           "quartile": 1,
           "composite_score": 74.4,
-          "capacity_factor_pct": 32.5,
+          "capacity_factor_pct": 30.0,
           "year": 2026
         },
         {
@@ -17809,7 +17809,7 @@
           "technology": "wind",
           "quartile": 2,
           "composite_score": 58.2,
-          "capacity_factor_pct": 27.8,
+          "capacity_factor_pct": 26.8,
           "year": 2026
         },
         {
@@ -17834,7 +17834,7 @@
     },
     "Ratch Australia": {
       "ranked_projects": 34,
-      "avg_cf": 24.2,
+      "avg_cf": 24.3,
       "avg_composite": 43.8,
       "quartile_counts": {
         "1": 3,
@@ -17869,7 +17869,7 @@
           "technology": "wind",
           "quartile": 1,
           "composite_score": 67.1,
-          "capacity_factor_pct": 34.2,
+          "capacity_factor_pct": 31.6,
           "year": 2026
         },
         {
@@ -17941,7 +17941,7 @@
           "technology": "wind",
           "quartile": 2,
           "composite_score": 49.1,
-          "capacity_factor_pct": 24.9,
+          "capacity_factor_pct": 23.9,
           "year": 2026
         },
         {
@@ -18103,7 +18103,7 @@
           "technology": "solar",
           "quartile": 4,
           "composite_score": 25.9,
-          "capacity_factor_pct": 21.0,
+          "capacity_factor_pct": 21.3,
           "year": 2026
         },
         {
@@ -18121,7 +18121,7 @@
           "technology": "wind",
           "quartile": 4,
           "composite_score": 23.5,
-          "capacity_factor_pct": 20.2,
+          "capacity_factor_pct": 26.1,
           "year": 2026
         },
         {
@@ -18155,7 +18155,7 @@
     },
     "Goldwind Australia": {
       "ranked_projects": 6,
-      "avg_cf": 29.8,
+      "avg_cf": 30.0,
       "avg_composite": 55.9,
       "quartile_counts": {
         "1": 2,
@@ -18208,7 +18208,7 @@
           "technology": "wind",
           "quartile": 2,
           "composite_score": 54.4,
-          "capacity_factor_pct": 32.5,
+          "capacity_factor_pct": 33.7,
           "year": 2026
         },
         {
@@ -18224,7 +18224,7 @@
     },
     "Kaban Wind Farm Trust": {
       "ranked_projects": 5,
-      "avg_cf": 19.6,
+      "avg_cf": 20.5,
       "avg_composite": 40.5,
       "quartile_counts": {
         "1": 0,
@@ -18268,7 +18268,7 @@
           "technology": "wind",
           "quartile": 4,
           "composite_score": 26.1,
-          "capacity_factor_pct": 20.3,
+          "capacity_factor_pct": 25.0,
           "year": 2026
         },
         {
@@ -18346,7 +18346,7 @@
           "technology": "wind",
           "quartile": 2,
           "composite_score": 62.3,
-          "capacity_factor_pct": 38.0,
+          "capacity_factor_pct": 37.5,
           "year": 2026
         },
         {
@@ -18380,7 +18380,7 @@
     },
     "Cullerin Range Wind Farm Pty Ltd": {
       "ranked_projects": 9,
-      "avg_cf": 35.1,
+      "avg_cf": 35.0,
       "avg_composite": 66.0,
       "quartile_counts": {
         "1": 4,
@@ -18424,7 +18424,7 @@
           "technology": "wind",
           "quartile": 1,
           "composite_score": 68.4,
-          "capacity_factor_pct": 36.5,
+          "capacity_factor_pct": 35.6,
           "year": 2026
         },
         {
@@ -18476,7 +18476,7 @@
     },
     "HWF 3 Pty Ltd": {
       "ranked_projects": 9,
-      "avg_cf": 37.6,
+      "avg_cf": 37.5,
       "avg_composite": 62.5,
       "quartile_counts": {
         "1": 1,
@@ -18538,7 +18538,7 @@
           "technology": "wind",
           "quartile": 2,
           "composite_score": 60.8,
-          "capacity_factor_pct": 37.2,
+          "capacity_factor_pct": 36.4,
           "year": 2026
         },
         {
@@ -18661,7 +18661,7 @@
           "technology": "wind",
           "quartile": 3,
           "composite_score": 45.6,
-          "capacity_factor_pct": 31.3,
+          "capacity_factor_pct": 31.6,
           "year": 2026
         }
       ]
@@ -18757,14 +18757,14 @@
           "technology": "wind",
           "quartile": 3,
           "composite_score": 46.8,
-          "capacity_factor_pct": 25.4,
+          "capacity_factor_pct": 25.2,
           "year": 2026
         }
       ]
     },
     "Snowtown Wind Farm Pty Ltd": {
       "ranked_projects": 9,
-      "avg_cf": 34.9,
+      "avg_cf": 34.7,
       "avg_composite": 65.3,
       "quartile_counts": {
         "1": 2,
@@ -18853,14 +18853,14 @@
           "technology": "wind",
           "quartile": 2,
           "composite_score": 55.9,
-          "capacity_factor_pct": 31.0,
+          "capacity_factor_pct": 29.5,
           "year": 2026
         }
       ]
     },
     "Pyrenees Wind Energy Developments": {
       "ranked_projects": 9,
-      "avg_cf": 36.0,
+      "avg_cf": 35.8,
       "avg_composite": 69.6,
       "quartile_counts": {
         "1": 4,
@@ -18949,7 +18949,7 @@
           "technology": "wind",
           "quartile": 2,
           "composite_score": 54.7,
-          "capacity_factor_pct": 33.7,
+          "capacity_factor_pct": 32.7,
           "year": 2026
         }
       ]
@@ -19045,14 +19045,14 @@
           "technology": "wind",
           "quartile": 2,
           "composite_score": 53.2,
-          "capacity_factor_pct": 28.4,
+          "capacity_factor_pct": 28.0,
           "year": 2026
         }
       ]
     },
     "Cherry Tree Wind Farm Pty Limited A.T.F. Cherry Tree Project Trust": {
       "ranked_projects": 7,
-      "avg_cf": 32.4,
+      "avg_cf": 31.9,
       "avg_composite": 52.9,
       "quartile_counts": {
         "1": 0,
@@ -19105,7 +19105,7 @@
           "technology": "wind",
           "quartile": 3,
           "composite_score": 47.6,
-          "capacity_factor_pct": 33.7,
+          "capacity_factor_pct": 30.6,
           "year": 2026
         },
         {
@@ -19130,7 +19130,7 @@
     },
     "Berrbank Development Pty ltd": {
       "ranked_projects": 6,
-      "avg_cf": 27.8,
+      "avg_cf": 28.1,
       "avg_composite": 42.6,
       "quartile_counts": {
         "1": 0,
@@ -19174,7 +19174,7 @@
           "technology": "wind",
           "quartile": 3,
           "composite_score": 41.3,
-          "capacity_factor_pct": 28.2,
+          "capacity_factor_pct": 30.3,
           "year": 2026
         },
         {
@@ -19351,7 +19351,7 @@
           "technology": "wind",
           "quartile": 4,
           "composite_score": 27.6,
-          "capacity_factor_pct": 20.1,
+          "capacity_factor_pct": 20.9,
           "year": 2026
         },
         {
@@ -19376,7 +19376,7 @@
     },
     "Bald Hills Wind Farm Pty Ltd": {
       "ranked_projects": 9,
-      "avg_cf": 36.7,
+      "avg_cf": 36.8,
       "avg_composite": 66.6,
       "quartile_counts": {
         "1": 4,
@@ -19465,7 +19465,7 @@
           "technology": "wind",
           "quartile": 2,
           "composite_score": 51.6,
-          "capacity_factor_pct": 34.5,
+          "capacity_factor_pct": 35.9,
           "year": 2026
         }
       ]
@@ -19534,7 +19534,7 @@
           "technology": "wind",
           "quartile": 3,
           "composite_score": 48.4,
-          "capacity_factor_pct": 27.0,
+          "capacity_factor_pct": 26.8,
           "year": 2026
         },
         {
@@ -19550,7 +19550,7 @@
     },
     "Bodangora Wind Farm Pty Ltd": {
       "ranked_projects": 9,
-      "avg_cf": 30.0,
+      "avg_cf": 29.8,
       "avg_composite": 62.4,
       "quartile_counts": {
         "1": 3,
@@ -19594,7 +19594,7 @@
           "technology": "wind",
           "quartile": 2,
           "composite_score": 66.6,
-          "capacity_factor_pct": 34.9,
+          "capacity_factor_pct": 33.4,
           "year": 2026
         },
         {
@@ -19646,7 +19646,7 @@
     },
     "Renewable Power Ventures Pty Ltd": {
       "ranked_projects": 9,
-      "avg_cf": 27.1,
+      "avg_cf": 27.0,
       "avg_composite": 54.5,
       "quartile_counts": {
         "1": 1,
@@ -19708,7 +19708,7 @@
           "technology": "wind",
           "quartile": 2,
           "composite_score": 50.4,
-          "capacity_factor_pct": 23.2,
+          "capacity_factor_pct": 22.1,
           "year": 2026
         },
         {
@@ -19742,7 +19742,7 @@
     },
     "Willogoleche Power Pty Ltd": {
       "ranked_projects": 9,
-      "avg_cf": 28.0,
+      "avg_cf": 28.2,
       "avg_composite": 44.4,
       "quartile_counts": {
         "1": 0,
@@ -19813,7 +19813,7 @@
           "technology": "wind",
           "quartile": 4,
           "composite_score": 25.6,
-          "capacity_factor_pct": 22.4,
+          "capacity_factor_pct": 24.3,
           "year": 2026
         },
         {
@@ -19927,14 +19927,14 @@
           "technology": "wind",
           "quartile": 3,
           "composite_score": 32.9,
-          "capacity_factor_pct": 23.9,
+          "capacity_factor_pct": 23.8,
           "year": 2026
         }
       ]
     },
     "Pacific Hydro Clements Gap Pty Ltd": {
       "ranked_projects": 9,
-      "avg_cf": 34.5,
+      "avg_cf": 34.3,
       "avg_composite": 51.9,
       "quartile_counts": {
         "1": 1,
@@ -19969,7 +19969,7 @@
           "technology": "wind",
           "quartile": 2,
           "composite_score": 55.9,
-          "capacity_factor_pct": 37.7,
+          "capacity_factor_pct": 36.1,
           "year": 2026
         },
         {
@@ -20030,7 +20030,7 @@
     },
     "CRWF Nominees Pty Ltd as trustee of the CRWF Trust": {
       "ranked_projects": 7,
-      "avg_cf": 24.2,
+      "avg_cf": 23.9,
       "avg_composite": 51.0,
       "quartile_counts": {
         "1": 1,
@@ -20056,7 +20056,7 @@
           "technology": "wind",
           "quartile": 2,
           "composite_score": 62.5,
-          "capacity_factor_pct": 31.2,
+          "capacity_factor_pct": 28.9,
           "year": 2026
         },
         {
@@ -20108,7 +20108,7 @@
     },
     "Pacific Hydro Crowlands Pty Ltd": {
       "ranked_projects": 9,
-      "avg_cf": 30.3,
+      "avg_cf": 30.2,
       "avg_composite": 48.6,
       "quartile_counts": {
         "1": 2,
@@ -20188,7 +20188,7 @@
           "technology": "wind",
           "quartile": 3,
           "composite_score": 41.3,
-          "capacity_factor_pct": 29.5,
+          "capacity_factor_pct": 28.4,
           "year": 2026
         },
         {
@@ -20284,7 +20284,7 @@
           "technology": "wind",
           "quartile": 3,
           "composite_score": 39.2,
-          "capacity_factor_pct": 25.5,
+          "capacity_factor_pct": 25.6,
           "year": 2026
         },
         {
@@ -20300,7 +20300,7 @@
     },
     "Storenergy": {
       "ranked_projects": 7,
-      "avg_cf": 24.2,
+      "avg_cf": 24.0,
       "avg_composite": 37.4,
       "quartile_counts": {
         "1": 0,
@@ -20353,7 +20353,7 @@
           "technology": "wind",
           "quartile": 3,
           "composite_score": 31.6,
-          "capacity_factor_pct": 24.2,
+          "capacity_factor_pct": 22.7,
           "year": 2026
         },
         {
@@ -20378,7 +20378,7 @@
     },
     "Brown Hill North Pty Ltd": {
       "ranked_projects": 9,
-      "avg_cf": 33.4,
+      "avg_cf": 33.3,
       "avg_composite": 59.9,
       "quartile_counts": {
         "1": 3,
@@ -20449,7 +20449,7 @@
           "technology": "wind",
           "quartile": 2,
           "composite_score": 48.6,
-          "capacity_factor_pct": 28.3,
+          "capacity_factor_pct": 27.4,
           "year": 2026
         },
         {
@@ -20474,7 +20474,7 @@
     },
     "Moorabool Wind Farm Interface Company Pty Ltd": {
       "ranked_projects": 7,
-      "avg_cf": 20.5,
+      "avg_cf": 20.8,
       "avg_composite": 32.3,
       "quartile_counts": {
         "1": 0,
@@ -20518,7 +20518,7 @@
           "technology": "wind",
           "quartile": 4,
           "composite_score": 27.8,
-          "capacity_factor_pct": 21.1,
+          "capacity_factor_pct": 23.5,
           "year": 2026
         },
         {
@@ -20552,7 +20552,7 @@
     },
     "Mortlake South Wind Farm Pty Ltd": {
       "ranked_projects": 5,
-      "avg_cf": 21.2,
+      "avg_cf": 21.4,
       "avg_composite": 29.6,
       "quartile_counts": {
         "1": 0,
@@ -20587,7 +20587,7 @@
           "technology": "wind",
           "quartile": 3,
           "composite_score": 34.4,
-          "capacity_factor_pct": 26.5,
+          "capacity_factor_pct": 27.8,
           "year": 2026
         },
         {
@@ -20701,14 +20701,14 @@
           "technology": "wind",
           "quartile": 3,
           "composite_score": 39.0,
-          "capacity_factor_pct": 25.9,
+          "capacity_factor_pct": 25.2,
           "year": 2026
         }
       ]
     },
     "JV Cathedral Rock Investments Pty Ltd  - Acciona Energy Australia Global Pty Ltd and EnergyAustralia Pty Ltd": {
       "ranked_projects": 9,
-      "avg_cf": 26.2,
+      "avg_cf": 26.1,
       "avg_composite": 41.3,
       "quartile_counts": {
         "1": 0,
@@ -20725,7 +20725,7 @@
           "technology": "wind",
           "quartile": 2,
           "composite_score": 60.0,
-          "capacity_factor_pct": 26.6,
+          "capacity_factor_pct": 26.0,
           "year": 2026
         },
         {
@@ -20804,7 +20804,7 @@
     },
     "Flyers Creek Wind Farm Pty Ltd": {
       "ranked_projects": 4,
-      "avg_cf": 18.8,
+      "avg_cf": 18.3,
       "avg_composite": 40.2,
       "quartile_counts": {
         "1": 0,
@@ -20830,7 +20830,7 @@
           "technology": "wind",
           "quartile": 3,
           "composite_score": 47.6,
-          "capacity_factor_pct": 25.6,
+          "capacity_factor_pct": 23.4,
           "year": 2026
         },
         {
@@ -20855,7 +20855,7 @@
     },
     "ACCIONA Energy": {
       "ranked_projects": 9,
-      "avg_cf": 23.5,
+      "avg_cf": 23.6,
       "avg_composite": 31.9,
       "quartile_counts": {
         "1": 0,
@@ -20917,7 +20917,7 @@
           "technology": "wind",
           "quartile": 4,
           "composite_score": 28.1,
-          "capacity_factor_pct": 23.4,
+          "capacity_factor_pct": 24.4,
           "year": 2026
         },
         {
@@ -20968,7 +20968,7 @@
           "technology": "wind",
           "quartile": 2,
           "composite_score": 50.9,
-          "capacity_factor_pct": 23.8,
+          "capacity_factor_pct": 23.2,
           "year": 2026
         },
         {
@@ -21047,7 +21047,7 @@
     },
     "Infrastructure Capital Group": {
       "ranked_projects": 9,
-      "avg_cf": 30.5,
+      "avg_cf": 30.2,
       "avg_composite": 45.8,
       "quartile_counts": {
         "1": 1,
@@ -21064,7 +21064,7 @@
           "technology": "wind",
           "quartile": 1,
           "composite_score": 70.9,
-          "capacity_factor_pct": 31.1,
+          "capacity_factor_pct": 27.8,
           "year": 2026
         },
         {
@@ -21143,7 +21143,7 @@
     },
     "Salt Creek Wind Farm Pty Ltd": {
       "ranked_projects": 9,
-      "avg_cf": 28.1,
+      "avg_cf": 28.0,
       "avg_composite": 38.9,
       "quartile_counts": {
         "1": 1,
@@ -21232,14 +21232,14 @@
           "technology": "wind",
           "quartile": 4,
           "composite_score": 15.4,
-          "capacity_factor_pct": 17.5,
+          "capacity_factor_pct": 16.6,
           "year": 2026
         }
       ]
     },
     "Northleaf /InfraRed/Macquarie Capital": {
       "ranked_projects": 15,
-      "avg_cf": 22.8,
+      "avg_cf": 22.9,
       "avg_composite": 26.5,
       "quartile_counts": {
         "1": 0,
@@ -21346,7 +21346,7 @@
           "technology": "wind",
           "quartile": 4,
           "composite_score": 18.2,
-          "capacity_factor_pct": 18.3,
+          "capacity_factor_pct": 19.0,
           "year": 2026
         },
         {
@@ -21382,14 +21382,14 @@
           "technology": "wind",
           "quartile": 4,
           "composite_score": 11.9,
-          "capacity_factor_pct": 19.1,
+          "capacity_factor_pct": 20.4,
           "year": 2026
         }
       ]
     },
     "Lake Bonney Wind Power Pty Ltd": {
       "ranked_projects": 27,
-      "avg_cf": 22.7,
+      "avg_cf": 22.6,
       "avg_composite": 26.7,
       "quartile_counts": {
         "1": 0,
@@ -21406,7 +21406,7 @@
           "technology": "wind",
           "quartile": 3,
           "composite_score": 43.0,
-          "capacity_factor_pct": 18.3,
+          "capacity_factor_pct": 18.1,
           "year": 2026
         },
         {
@@ -21568,7 +21568,7 @@
           "technology": "wind",
           "quartile": 4,
           "composite_score": 22.8,
-          "capacity_factor_pct": 15.4,
+          "capacity_factor_pct": 15.0,
           "year": 2026
         },
         {
@@ -21647,7 +21647,7 @@
     },
     "Ararat Wind Farm Pty Ltd": {
       "ranked_projects": 9,
-      "avg_cf": 24.8,
+      "avg_cf": 24.6,
       "avg_composite": 35.2,
       "quartile_counts": {
         "1": 0,
@@ -21691,7 +21691,7 @@
           "technology": "wind",
           "quartile": 3,
           "composite_score": 38.5,
-          "capacity_factor_pct": 25.3,
+          "capacity_factor_pct": 24.1,
           "year": 2026
         },
         {
@@ -21743,7 +21743,7 @@
     },
     "Snowtown Wind Farm Stage 2 Pty Ltd": {
       "ranked_projects": 9,
-      "avg_cf": 17.9,
+      "avg_cf": 17.8,
       "avg_composite": 24.7,
       "quartile_counts": {
         "1": 0,
@@ -21769,7 +21769,7 @@
           "technology": "wind",
           "quartile": 4,
           "composite_score": 30.9,
-          "capacity_factor_pct": 18.8,
+          "capacity_factor_pct": 18.1,
           "year": 2026
         },
         {
@@ -21919,7 +21919,7 @@
           "technology": "wind",
           "quartile": 4,
           "composite_score": 21.0,
-          "capacity_factor_pct": 14.8,
+          "capacity_factor_pct": 15.0,
           "year": 2026
         },
         {
@@ -21997,7 +21997,7 @@
           "technology": "wind",
           "quartile": 4,
           "composite_score": 24.1,
-          "capacity_factor_pct": 17.8,
+          "capacity_factor_pct": 17.9,
           "year": 2026
         },
         {
@@ -22031,7 +22031,7 @@
     },
     "Mt Mercer Windfarm Pty Ltd": {
       "ranked_projects": 9,
-      "avg_cf": 27.4,
+      "avg_cf": 27.6,
       "avg_composite": 36.9,
       "quartile_counts": {
         "1": 0,
@@ -22120,7 +22120,7 @@
           "technology": "wind",
           "quartile": 4,
           "composite_score": 12.7,
-          "capacity_factor_pct": 17.3,
+          "capacity_factor_pct": 19.2,
           "year": 2026
         }
       ]
@@ -22216,14 +22216,14 @@
           "technology": "wind",
           "quartile": 4,
           "composite_score": 14.4,
-          "capacity_factor_pct": 20.7,
+          "capacity_factor_pct": 20.6,
           "year": 2026
         }
       ]
     },
     "Canunda Power Pty Ltd": {
       "ranked_projects": 9,
-      "avg_cf": 25.6,
+      "avg_cf": 25.5,
       "avg_composite": 30.1,
       "quartile_counts": {
         "1": 0,
@@ -22267,7 +22267,7 @@
           "technology": "wind",
           "quartile": 4,
           "composite_score": 30.4,
-          "capacity_factor_pct": 18.4,
+          "capacity_factor_pct": 17.4,
           "year": 2026
         },
         {
@@ -22408,14 +22408,14 @@
           "technology": "wind",
           "quartile": 4,
           "composite_score": 15.7,
-          "capacity_factor_pct": 19.7,
+          "capacity_factor_pct": 19.8,
           "year": 2026
         }
       ]
     },
     "Goyder Wind Farm 1A Pty Ltd as trustee for Goyder Wind Farm 1A Trust": {
       "ranked_projects": 3,
-      "avg_cf": 17.6,
+      "avg_cf": 18.0,
       "avg_composite": 49.6,
       "quartile_counts": {
         "1": 1,
@@ -22432,7 +22432,7 @@
           "technology": "wind",
           "quartile": 1,
           "composite_score": 90.6,
-          "capacity_factor_pct": 23.5,
+          "capacity_factor_pct": 24.8,
           "year": 2026
         },
         {
@@ -22457,7 +22457,7 @@
     },
     "Crookwell Development Pty Ltd": {
       "ranked_projects": 9,
-      "avg_cf": 29.3,
+      "avg_cf": 29.2,
       "avg_composite": 57.1,
       "quartile_counts": {
         "1": 5,
@@ -22528,7 +22528,7 @@
           "technology": "wind",
           "quartile": 3,
           "composite_score": 48.4,
-          "capacity_factor_pct": 26.7,
+          "capacity_factor_pct": 25.9,
           "year": 2026
         },
         {
@@ -22553,7 +22553,7 @@
     },
     "Goyder Wind Farm 1B Pty Ltd as trustee for Goyder Wind Farm 1B Trust": {
       "ranked_projects": 3,
-      "avg_cf": 17.6,
+      "avg_cf": 18.0,
       "avg_composite": 43.8,
       "quartile_counts": {
         "1": 1,
@@ -22570,7 +22570,7 @@
           "technology": "wind",
           "quartile": 1,
           "composite_score": 89.4,
-          "capacity_factor_pct": 23.5,
+          "capacity_factor_pct": 24.8,
           "year": 2026
         },
         {
@@ -22621,7 +22621,7 @@
           "technology": "wind",
           "quartile": 3,
           "composite_score": 40.5,
-          "capacity_factor_pct": 23.5,
+          "capacity_factor_pct": 23.3,
           "year": 2026
         },
         {
@@ -22708,7 +22708,7 @@
           "technology": "wind",
           "quartile": 4,
           "composite_score": 17.2,
-          "capacity_factor_pct": 18.1,
+          "capacity_factor_pct": 17.9,
           "year": 2026
         },
         {
@@ -22733,7 +22733,7 @@
     },
     "Hawkesdale Asset Pty Ltd as trustee for Hawkesdale Asset Trust": {
       "ranked_projects": 3,
-      "avg_cf": 24.3,
+      "avg_cf": 24.4,
       "avg_composite": 33.0,
       "quartile_counts": {
         "1": 0,
@@ -22759,7 +22759,7 @@
           "technology": "wind",
           "quartile": 3,
           "composite_score": 31.9,
-          "capacity_factor_pct": 23.9,
+          "capacity_factor_pct": 24.1,
           "year": 2026
         },
         {
@@ -22775,7 +22775,7 @@
     },
     "Crookwell 3 Development Pty Ltd": {
       "ranked_projects": 3,
-      "avg_cf": 22.6,
+      "avg_cf": 22.4,
       "avg_composite": 39.4,
       "quartile_counts": {
         "1": 1,
@@ -22801,7 +22801,7 @@
           "technology": "wind",
           "quartile": 3,
           "composite_score": 41.0,
-          "capacity_factor_pct": 26.7,
+          "capacity_factor_pct": 26.0,
           "year": 2026
         },
         {
@@ -22817,7 +22817,7 @@
     },
     "Darlington Point Solar Farm Pty Ltd": {
       "ranked_projects": 7,
-      "avg_cf": 18.8,
+      "avg_cf": 18.3,
       "avg_composite": 63.5,
       "quartile_counts": {
         "1": 4,
@@ -22843,7 +22843,7 @@
           "technology": "solar",
           "quartile": 1,
           "composite_score": 74.1,
-          "capacity_factor_pct": 26.0,
+          "capacity_factor_pct": 22.4,
           "year": 2026
         },
         {
@@ -22895,7 +22895,7 @@
     },
     "Sunraysia Solar Project Pty Ltd": {
       "ranked_projects": 7,
-      "avg_cf": 18.0,
+      "avg_cf": 17.7,
       "avg_composite": 61.1,
       "quartile_counts": {
         "1": 3,
@@ -22939,7 +22939,7 @@
           "technology": "solar",
           "quartile": 2,
           "composite_score": 61.5,
-          "capacity_factor_pct": 20.6,
+          "capacity_factor_pct": 18.6,
           "year": 2026
         },
         {
@@ -22973,7 +22973,7 @@
     },
     "Lightsource Australia SPV 4 Pty Ltd": {
       "ranked_projects": 7,
-      "avg_cf": 19.8,
+      "avg_cf": 19.5,
       "avg_composite": 64.5,
       "quartile_counts": {
         "1": 4,
@@ -23008,7 +23008,7 @@
           "technology": "solar",
           "quartile": 1,
           "composite_score": 81.8,
-          "capacity_factor_pct": 27.3,
+          "capacity_factor_pct": 24.9,
           "year": 2026
         },
         {
@@ -23051,7 +23051,7 @@
     },
     "Coleambally Solar Pty Ltd": {
       "ranked_projects": 9,
-      "avg_cf": 22.7,
+      "avg_cf": 22.5,
       "avg_composite": 76.4,
       "quartile_counts": {
         "1": 8,
@@ -23095,7 +23095,7 @@
           "technology": "solar",
           "quartile": 1,
           "composite_score": 81.3,
-          "capacity_factor_pct": 28.7,
+          "capacity_factor_pct": 26.9,
           "year": 2026
         },
         {
@@ -23147,7 +23147,7 @@
     },
     "Nevertire Solar Pty Ltd as Trustee for the Nevertire Solar Trust": {
       "ranked_projects": 8,
-      "avg_cf": 20.7,
+      "avg_cf": 20.5,
       "avg_composite": 66.6,
       "quartile_counts": {
         "1": 4,
@@ -23209,7 +23209,7 @@
           "technology": "solar",
           "quartile": 2,
           "composite_score": 61.5,
-          "capacity_factor_pct": 22.5,
+          "capacity_factor_pct": 20.7,
           "year": 2026
         },
         {
@@ -23287,7 +23287,7 @@
           "technology": "bess",
           "quartile": 2,
           "composite_score": 29.7,
-          "capacity_factor_pct": 14.2,
+          "capacity_factor_pct": 14.1,
           "year": 2026
         },
         {
@@ -23312,7 +23312,7 @@
     },
     "Hillston Sun Farm Operations Pty Ltd ATF Hillston": {
       "ranked_projects": 6,
-      "avg_cf": 20.8,
+      "avg_cf": 20.6,
       "avg_composite": 65.5,
       "quartile_counts": {
         "1": 5,
@@ -23338,7 +23338,7 @@
           "technology": "solar",
           "quartile": 1,
           "composite_score": 83.1,
-          "capacity_factor_pct": 32.8,
+          "capacity_factor_pct": 31.7,
           "year": 2026
         },
         {
@@ -23381,7 +23381,7 @@
     },
     "Gunnedah SF Pty Ltd atf Gunnedah Asset Trust": {
       "ranked_projects": 6,
-      "avg_cf": 20.3,
+      "avg_cf": 20.1,
       "avg_composite": 68.8,
       "quartile_counts": {
         "1": 5,
@@ -23416,7 +23416,7 @@
           "technology": "solar",
           "quartile": 1,
           "composite_score": 75.4,
-          "capacity_factor_pct": 25.4,
+          "capacity_factor_pct": 24.2,
           "year": 2026
         },
         {
@@ -23530,14 +23530,14 @@
           "technology": "solar",
           "quartile": 4,
           "composite_score": 14.6,
-          "capacity_factor_pct": 7.1,
+          "capacity_factor_pct": 7.6,
           "year": 2026
         }
       ]
     },
     "Corowa Operationsco Pty Ltd as trustee for Corowa Operations Trust": {
       "ranked_projects": 6,
-      "avg_cf": 22.2,
+      "avg_cf": 21.7,
       "avg_composite": 56.1,
       "quartile_counts": {
         "1": 3,
@@ -23554,7 +23554,7 @@
           "technology": "solar",
           "quartile": 1,
           "composite_score": 78.5,
-          "capacity_factor_pct": 33.7,
+          "capacity_factor_pct": 30.9,
           "year": 2026
         },
         {
@@ -23606,7 +23606,7 @@
     },
     "Moree Solar Farm Pty Ltd": {
       "ranked_projects": 9,
-      "avg_cf": 28.1,
+      "avg_cf": 28.0,
       "avg_composite": 79.7,
       "quartile_counts": {
         "1": 9,
@@ -23668,7 +23668,7 @@
           "technology": "solar",
           "quartile": 1,
           "composite_score": 79.7,
-          "capacity_factor_pct": 30.9,
+          "capacity_factor_pct": 30.4,
           "year": 2026
         },
         {
@@ -23702,7 +23702,7 @@
     },
     "X-Elio Australia Pty Ltd": {
       "ranked_projects": 5,
-      "avg_cf": 21.8,
+      "avg_cf": 21.9,
       "avg_composite": 49.9,
       "quartile_counts": {
         "1": 2,
@@ -23746,7 +23746,7 @@
           "technology": "solar",
           "quartile": 4,
           "composite_score": 24.6,
-          "capacity_factor_pct": 17.2,
+          "capacity_factor_pct": 17.9,
           "year": 2026
         },
         {
@@ -23833,7 +23833,7 @@
           "technology": "solar",
           "quartile": 2,
           "composite_score": 47.9,
-          "capacity_factor_pct": 22.3,
+          "capacity_factor_pct": 22.1,
           "year": 2026
         },
         {
@@ -23858,7 +23858,7 @@
     },
     "Wyalong Solar Farm Pty Ltd as the trustee for the Wyalong Solar Farm Unit Trust": {
       "ranked_projects": 4,
-      "avg_cf": 20.2,
+      "avg_cf": 19.8,
       "avg_composite": 54.7,
       "quartile_counts": {
         "1": 3,
@@ -23875,7 +23875,7 @@
           "technology": "solar",
           "quartile": 1,
           "composite_score": 71.3,
-          "capacity_factor_pct": 28.1,
+          "capacity_factor_pct": 26.6,
           "year": 2026
         },
         {
@@ -23909,7 +23909,7 @@
     },
     "Adani Rugby Run Pty Ltd": {
       "ranked_projects": 8,
-      "avg_cf": 25.4,
+      "avg_cf": 25.3,
       "avg_composite": 64.3,
       "quartile_counts": {
         "1": 5,
@@ -23980,7 +23980,7 @@
           "technology": "solar",
           "quartile": 2,
           "composite_score": 48.2,
-          "capacity_factor_pct": 23.4,
+          "capacity_factor_pct": 22.6,
           "year": 2026
         },
         {
@@ -23996,7 +23996,7 @@
     },
     "West Wyalong Fund Pty Ltd": {
       "ranked_projects": 5,
-      "avg_cf": 18.6,
+      "avg_cf": 18.4,
       "avg_composite": 53.2,
       "quartile_counts": {
         "1": 3,
@@ -24013,7 +24013,7 @@
           "technology": "solar",
           "quartile": 1,
           "composite_score": 73.3,
-          "capacity_factor_pct": 28.1,
+          "capacity_factor_pct": 27.2,
           "year": 2026
         },
         {
@@ -24118,7 +24118,7 @@
           "technology": "solar",
           "quartile": 2,
           "composite_score": 51.0,
-          "capacity_factor_pct": 23.8,
+          "capacity_factor_pct": 23.9,
           "year": 2026
         },
         {
@@ -24143,7 +24143,7 @@
     },
     "PARF Company 6 Pty Limited": {
       "ranked_projects": 18,
-      "avg_cf": 22.7,
+      "avg_cf": 22.5,
       "avg_composite": 64.6,
       "quartile_counts": {
         "1": 8,
@@ -24304,7 +24304,7 @@
           "technology": "solar",
           "quartile": 3,
           "composite_score": 42.8,
-          "capacity_factor_pct": 19.0,
+          "capacity_factor_pct": 18.4,
           "year": 2026
         },
         {
@@ -24313,14 +24313,14 @@
           "technology": "solar",
           "quartile": 3,
           "composite_score": 39.0,
-          "capacity_factor_pct": 18.9,
+          "capacity_factor_pct": 17.2,
           "year": 2026
         }
       ]
     },
     "Western Downs Green Power Hub Pty Ltd": {
       "ranked_projects": 5,
-      "avg_cf": 22.4,
+      "avg_cf": 22.3,
       "avg_composite": 59.4,
       "quartile_counts": {
         "1": 1,
@@ -24337,7 +24337,7 @@
           "technology": "solar",
           "quartile": 1,
           "composite_score": 87.4,
-          "capacity_factor_pct": 34.0,
+          "capacity_factor_pct": 33.4,
           "year": 2026
         },
         {
@@ -24380,7 +24380,7 @@
     },
     "FS NSW Project No 1 AT Pty Ltd as trustee of FS NSW Project No 1 Asset Trust": {
       "ranked_projects": 8,
-      "avg_cf": 22.5,
+      "avg_cf": 22.4,
       "avg_composite": 61.5,
       "quartile_counts": {
         "1": 2,
@@ -24397,7 +24397,7 @@
           "technology": "solar",
           "quartile": 1,
           "composite_score": 78.5,
-          "capacity_factor_pct": 28.4,
+          "capacity_factor_pct": 27.5,
           "year": 2026
         },
         {
@@ -24467,7 +24467,7 @@
     },
     "Moura Solar Farm SPV Pty Ltd as the Trustee for Moura Solar Farm Unit Trust": {
       "ranked_projects": 5,
-      "avg_cf": 22.2,
+      "avg_cf": 22.3,
       "avg_composite": 48.2,
       "quartile_counts": {
         "1": 2,
@@ -24484,7 +24484,7 @@
           "technology": "solar",
           "quartile": 1,
           "composite_score": 67.9,
-          "capacity_factor_pct": 30.8,
+          "capacity_factor_pct": 31.3,
           "year": 2026
         },
         {
@@ -24598,7 +24598,7 @@
           "technology": "solar",
           "quartile": 3,
           "composite_score": 37.4,
-          "capacity_factor_pct": 20.6,
+          "capacity_factor_pct": 20.2,
           "year": 2026
         },
         {
@@ -24623,7 +24623,7 @@
     },
     "Sebastopol Asset Co Pty Ltd ATF Sebastopol Asset Trust": {
       "ranked_projects": 6,
-      "avg_cf": 16.6,
+      "avg_cf": 16.9,
       "avg_composite": 44.4,
       "quartile_counts": {
         "1": 0,
@@ -24676,7 +24676,7 @@
           "technology": "solar",
           "quartile": 4,
           "composite_score": 16.2,
-          "capacity_factor_pct": 13.5,
+          "capacity_factor_pct": 15.2,
           "year": 2026
         },
         {
@@ -24692,7 +24692,7 @@
     },
     "Iberdrola Australia Limited": {
       "ranked_projects": 4,
-      "avg_cf": 17.5,
+      "avg_cf": 17.1,
       "avg_composite": 53.4,
       "quartile_counts": {
         "1": 1,
@@ -24709,7 +24709,7 @@
           "technology": "solar",
           "quartile": 1,
           "composite_score": 76.9,
-          "capacity_factor_pct": 25.1,
+          "capacity_factor_pct": 23.6,
           "year": 2026
         },
         {
@@ -24814,7 +24814,7 @@
           "technology": "solar",
           "quartile": 2,
           "composite_score": 49.2,
-          "capacity_factor_pct": 26.3,
+          "capacity_factor_pct": 26.5,
           "year": 2026
         },
         {
@@ -24839,7 +24839,7 @@
     },
     "Suntop SF Pty Ltd As Trustee For The Suntop Asset": {
       "ranked_projects": 6,
-      "avg_cf": 18.5,
+      "avg_cf": 18.2,
       "avg_composite": 59.5,
       "quartile_counts": {
         "1": 3,
@@ -24856,7 +24856,7 @@
           "technology": "solar",
           "quartile": 1,
           "composite_score": 71.8,
-          "capacity_factor_pct": 23.9,
+          "capacity_factor_pct": 22.3,
           "year": 2026
         },
         {
@@ -24908,7 +24908,7 @@
     },
     "Metz ProjectCo Pty Ltd as trustee for Metz ProjectCo Trust": {
       "ranked_projects": 5,
-      "avg_cf": 20.0,
+      "avg_cf": 20.3,
       "avg_composite": 60.1,
       "quartile_counts": {
         "1": 2,
@@ -24952,7 +24952,7 @@
           "technology": "solar",
           "quartile": 2,
           "composite_score": 55.6,
-          "capacity_factor_pct": 21.5,
+          "capacity_factor_pct": 23.1,
           "year": 2026
         },
         {
@@ -24968,7 +24968,7 @@
     },
     "Parkes Solar Farm Pty Ltd": {
       "ranked_projects": 9,
-      "avg_cf": 23.5,
+      "avg_cf": 23.6,
       "avg_composite": 61.5,
       "quartile_counts": {
         "1": 3,
@@ -25057,7 +25057,7 @@
           "technology": "solar",
           "quartile": 4,
           "composite_score": 29.5,
-          "capacity_factor_pct": 15.0,
+          "capacity_factor_pct": 16.3,
           "year": 2026
         }
       ]
@@ -25160,7 +25160,7 @@
     },
     "Potentia Energy Pty Ltd": {
       "ranked_projects": 9,
-      "avg_cf": 18.0,
+      "avg_cf": 17.9,
       "avg_composite": 49.0,
       "quartile_counts": {
         "1": 1,
@@ -25204,7 +25204,7 @@
           "technology": "solar",
           "quartile": 2,
           "composite_score": 60.5,
-          "capacity_factor_pct": 21.8,
+          "capacity_factor_pct": 20.9,
           "year": 2026
         },
         {
@@ -25256,7 +25256,7 @@
     },
     "Limondale Sun Farm Pty Ltd": {
       "ranked_projects": 15,
-      "avg_cf": 13.2,
+      "avg_cf": 13.0,
       "avg_composite": 36.8,
       "quartile_counts": {
         "1": 0,
@@ -25300,7 +25300,7 @@
           "technology": "solar",
           "quartile": 3,
           "composite_score": 47.7,
-          "capacity_factor_pct": 18.1,
+          "capacity_factor_pct": 16.0,
           "year": 2026
         },
         {
@@ -25309,7 +25309,7 @@
           "technology": "solar",
           "quartile": 3,
           "composite_score": 47.7,
-          "capacity_factor_pct": 21.9,
+          "capacity_factor_pct": 20.1,
           "year": 2026
         },
         {
@@ -25406,7 +25406,7 @@
     },
     "Clermont Asset Co Pty Ltd as Trustee for Clerrmont Solar Unit Trust": {
       "ranked_projects": 8,
-      "avg_cf": 21.3,
+      "avg_cf": 21.7,
       "avg_composite": 51.7,
       "quartile_counts": {
         "1": 3,
@@ -25486,14 +25486,14 @@
           "technology": "solar",
           "quartile": 4,
           "composite_score": 12.1,
-          "capacity_factor_pct": 15.5,
+          "capacity_factor_pct": 18.4,
           "year": 2026
         }
       ]
     },
     "Bungala One Operations Pty Ltd as trustee for the Bungala One Operations Trust": {
       "ranked_projects": 9,
-      "avg_cf": 21.9,
+      "avg_cf": 21.5,
       "avg_composite": 64.3,
       "quartile_counts": {
         "1": 3,
@@ -25582,14 +25582,14 @@
           "technology": "solar",
           "quartile": 2,
           "composite_score": 50.8,
-          "capacity_factor_pct": 15.7,
+          "capacity_factor_pct": 11.7,
           "year": 2026
         }
       ]
     },
     "Goonumbla Asset Co Pty Ltd as trustee for the Goonumbla Asset Trust": {
       "ranked_projects": 7,
-      "avg_cf": 17.8,
+      "avg_cf": 17.9,
       "avg_composite": 44.9,
       "quartile_counts": {
         "1": 0,
@@ -25651,7 +25651,7 @@
           "technology": "solar",
           "quartile": 3,
           "composite_score": 34.1,
-          "capacity_factor_pct": 15.6,
+          "capacity_factor_pct": 16.1,
           "year": 2026
         },
         {
@@ -25667,7 +25667,7 @@
     },
     "Hamilton Solar Farm Pty Ltd": {
       "ranked_projects": 9,
-      "avg_cf": 21.2,
+      "avg_cf": 21.1,
       "avg_composite": 51.2,
       "quartile_counts": {
         "1": 2,
@@ -25756,14 +25756,14 @@
           "technology": "solar",
           "quartile": 4,
           "composite_score": 29.7,
-          "capacity_factor_pct": 20.9,
+          "capacity_factor_pct": 19.9,
           "year": 2026
         }
       ]
     },
     "Spark Infrastructure Holdings No. 6 Pty Limited": {
       "ranked_projects": 7,
-      "avg_cf": 20.0,
+      "avg_cf": 19.9,
       "avg_composite": 50.6,
       "quartile_counts": {
         "1": 0,
@@ -25798,7 +25798,7 @@
           "technology": "solar",
           "quartile": 2,
           "composite_score": 55.4,
-          "capacity_factor_pct": 22.9,
+          "capacity_factor_pct": 22.5,
           "year": 2026
         },
         {
@@ -25930,14 +25930,14 @@
           "technology": "solar",
           "quartile": 4,
           "composite_score": 30.3,
-          "capacity_factor_pct": 20.6,
+          "capacity_factor_pct": 20.5,
           "year": 2026
         }
       ]
     },
     "KSF Project Nominees Pty Ltd ATF KSF Project Trust": {
       "ranked_projects": 7,
-      "avg_cf": 18.1,
+      "avg_cf": 17.8,
       "avg_composite": 39.9,
       "quartile_counts": {
         "1": 0,
@@ -25954,7 +25954,7 @@
           "technology": "solar",
           "quartile": 2,
           "composite_score": 50.0,
-          "capacity_factor_pct": 28.5,
+          "capacity_factor_pct": 26.3,
           "year": 2026
         },
         {
@@ -26032,7 +26032,7 @@
           "technology": "solar",
           "quartile": 2,
           "composite_score": 65.9,
-          "capacity_factor_pct": 27.5,
+          "capacity_factor_pct": 27.4,
           "year": 2026
         },
         {
@@ -26066,7 +26066,7 @@
     },
     "Junee Operationsco Pty Ltd as trustee for Junee Operations Trust": {
       "ranked_projects": 6,
-      "avg_cf": 18.4,
+      "avg_cf": 18.2,
       "avg_composite": 43.6,
       "quartile_counts": {
         "1": 1,
@@ -26083,7 +26083,7 @@
           "technology": "solar",
           "quartile": 1,
           "composite_score": 68.5,
-          "capacity_factor_pct": 28.0,
+          "capacity_factor_pct": 26.4,
           "year": 2026
         },
         {
@@ -26135,7 +26135,7 @@
     },
     "Luminous Energy": {
       "ranked_projects": 5,
-      "avg_cf": 22.2,
+      "avg_cf": 22.1,
       "avg_composite": 50.7,
       "quartile_counts": {
         "1": 1,
@@ -26152,7 +26152,7 @@
           "technology": "solar",
           "quartile": 1,
           "composite_score": 82.1,
-          "capacity_factor_pct": 33.8,
+          "capacity_factor_pct": 33.1,
           "year": 2026
         },
         {
@@ -26195,7 +26195,7 @@
     },
     "Glenrowan Solar Farm Pty Ltd as trustee for Glenrowan Solar Farm Trust": {
       "ranked_projects": 4,
-      "avg_cf": 21.2,
+      "avg_cf": 20.6,
       "avg_composite": 46.5,
       "quartile_counts": {
         "1": 1,
@@ -26221,7 +26221,7 @@
           "technology": "solar",
           "quartile": 2,
           "composite_score": 57.7,
-          "capacity_factor_pct": 35.3,
+          "capacity_factor_pct": 32.8,
           "year": 2026
         },
         {
@@ -26246,7 +26246,7 @@
     },
     "ACEN Australia (formerly UPC/AC Renewables)": {
       "ranked_projects": 5,
-      "avg_cf": 10.0,
+      "avg_cf": 9.9,
       "avg_composite": 30.4,
       "quartile_counts": {
         "1": 0,
@@ -26272,7 +26272,7 @@
           "technology": "solar",
           "quartile": 3,
           "composite_score": 37.4,
-          "capacity_factor_pct": 15.7,
+          "capacity_factor_pct": 15.1,
           "year": 2026
         },
         {
@@ -26306,7 +26306,7 @@
     },
     "Woolooga Fund Pty Ltd": {
       "ranked_projects": 5,
-      "avg_cf": 18.7,
+      "avg_cf": 18.8,
       "avg_composite": 44.7,
       "quartile_counts": {
         "1": 0,
@@ -26366,7 +26366,7 @@
     },
     "Glenrowan Sun Farm Pty Ltd": {
       "ranked_projects": 7,
-      "avg_cf": 17.2,
+      "avg_cf": 17.0,
       "avg_composite": 39.1,
       "quartile_counts": {
         "1": 0,
@@ -26419,7 +26419,7 @@
           "technology": "solar",
           "quartile": 3,
           "composite_score": 37.7,
-          "capacity_factor_pct": 20.0,
+          "capacity_factor_pct": 18.6,
           "year": 2026
         },
         {
@@ -26444,7 +26444,7 @@
     },
     "Gannawarra Solar Farm Pty Ltd": {
       "ranked_projects": 9,
-      "avg_cf": 22.7,
+      "avg_cf": 22.4,
       "avg_composite": 46.5,
       "quartile_counts": {
         "1": 0,
@@ -26524,7 +26524,7 @@
           "technology": "solar",
           "quartile": 3,
           "composite_score": 40.3,
-          "capacity_factor_pct": 29.7,
+          "capacity_factor_pct": 27.2,
           "year": 2026
         },
         {
@@ -26540,7 +26540,7 @@
     },
     "Yarranlea Solar Pty Ltd": {
       "ranked_projects": 7,
-      "avg_cf": 20.3,
+      "avg_cf": 20.2,
       "avg_composite": 46.3,
       "quartile_counts": {
         "1": 0,
@@ -26584,7 +26584,7 @@
           "technology": "solar",
           "quartile": 2,
           "composite_score": 52.1,
-          "capacity_factor_pct": 24.9,
+          "capacity_factor_pct": 24.3,
           "year": 2026
         },
         {
@@ -26618,7 +26618,7 @@
     },
     "Hayman Solar Farm Pty Ltd as trustee for Hayman Solar Farm Trust": {
       "ranked_projects": 8,
-      "avg_cf": 20.9,
+      "avg_cf": 20.8,
       "avg_composite": 44.8,
       "quartile_counts": {
         "1": 0,
@@ -26698,14 +26698,14 @@
           "technology": "solar",
           "quartile": 4,
           "composite_score": 25.6,
-          "capacity_factor_pct": 20.3,
+          "capacity_factor_pct": 19.5,
           "year": 2026
         }
       ]
     },
     "RE Oakey Pty Ltd": {
       "ranked_projects": 8,
-      "avg_cf": 18.7,
+      "avg_cf": 18.4,
       "avg_composite": 36.7,
       "quartile_counts": {
         "1": 0,
@@ -26722,7 +26722,7 @@
           "technology": "solar",
           "quartile": 2,
           "composite_score": 56.4,
-          "capacity_factor_pct": 27.4,
+          "capacity_factor_pct": 25.6,
           "year": 2026
         },
         {
@@ -26792,7 +26792,7 @@
     },
     "Whitsunday Solar Farm Pty Ltd": {
       "ranked_projects": 9,
-      "avg_cf": 17.8,
+      "avg_cf": 17.7,
       "avg_composite": 42.5,
       "quartile_counts": {
         "1": 0,
@@ -26881,7 +26881,7 @@
           "technology": "solar",
           "quartile": 4,
           "composite_score": 27.4,
-          "capacity_factor_pct": 20.6,
+          "capacity_factor_pct": 19.3,
           "year": 2026
         }
       ]
@@ -26959,7 +26959,7 @@
           "technology": "solar",
           "quartile": 4,
           "composite_score": 27.4,
-          "capacity_factor_pct": 17.7,
+          "capacity_factor_pct": 17.9,
           "year": 2026
         },
         {
@@ -26984,7 +26984,7 @@
     },
     "Darling Downs Solar Farm Pty Ltd": {
       "ranked_projects": 9,
-      "avg_cf": 20.1,
+      "avg_cf": 20.0,
       "avg_composite": 44.4,
       "quartile_counts": {
         "1": 1,
@@ -27080,7 +27080,7 @@
     },
     "Lilyvale Asset Co Pty Ltd ATF Lilyvale Asset Trust": {
       "ranked_projects": 8,
-      "avg_cf": 21.7,
+      "avg_cf": 21.6,
       "avg_composite": 53.9,
       "quartile_counts": {
         "1": 1,
@@ -27133,7 +27133,7 @@
           "technology": "solar",
           "quartile": 3,
           "composite_score": 43.6,
-          "capacity_factor_pct": 23.3,
+          "capacity_factor_pct": 22.7,
           "year": 2026
         },
         {
@@ -27167,7 +27167,7 @@
     },
     "Wellington North Solar Farm Pty Ltd": {
       "ranked_projects": 3,
-      "avg_cf": 23.6,
+      "avg_cf": 23.0,
       "avg_composite": 71.2,
       "quartile_counts": {
         "1": 2,
@@ -27184,7 +27184,7 @@
           "technology": "solar",
           "quartile": 1,
           "composite_score": 94.6,
-          "capacity_factor_pct": 32.2,
+          "capacity_factor_pct": 30.6,
           "year": 2026
         },
         {
@@ -27298,7 +27298,7 @@
           "technology": "bess",
           "quartile": 3,
           "composite_score": 26.0,
-          "capacity_factor_pct": 9.9,
+          "capacity_factor_pct": 9.8,
           "year": 2026
         },
         {
@@ -27334,7 +27334,7 @@
           "technology": "solar",
           "quartile": 4,
           "composite_score": 20.8,
-          "capacity_factor_pct": 12.1,
+          "capacity_factor_pct": 12.3,
           "year": 2026
         },
         {
@@ -27403,7 +27403,7 @@
           "technology": "solar",
           "quartile": 4,
           "composite_score": 19.2,
-          "capacity_factor_pct": 16.5,
+          "capacity_factor_pct": 16.1,
           "year": 2026
         },
         {
@@ -27428,7 +27428,7 @@
     },
     "Numurkah Solar Farm Pty Ltd": {
       "ranked_projects": 8,
-      "avg_cf": 16.2,
+      "avg_cf": 15.9,
       "avg_composite": 39.3,
       "quartile_counts": {
         "1": 1,
@@ -27490,7 +27490,7 @@
           "technology": "solar",
           "quartile": 4,
           "composite_score": 28.2,
-          "capacity_factor_pct": 18.8,
+          "capacity_factor_pct": 16.4,
           "year": 2026
         },
         {
@@ -27515,7 +27515,7 @@
     },
     "Childers Solar Pty Ltd as trustee for the Childers Solar Trust": {
       "ranked_projects": 8,
-      "avg_cf": 19.8,
+      "avg_cf": 19.7,
       "avg_composite": 37.4,
       "quartile_counts": {
         "1": 0,
@@ -27550,7 +27550,7 @@
           "technology": "solar",
           "quartile": 3,
           "composite_score": 45.1,
-          "capacity_factor_pct": 22.9,
+          "capacity_factor_pct": 22.0,
           "year": 2026
         },
         {
@@ -27602,7 +27602,7 @@
     },
     "Yatpool Sun Farm Pty Ltd": {
       "ranked_projects": 7,
-      "avg_cf": 16.7,
+      "avg_cf": 16.4,
       "avg_composite": 27.5,
       "quartile_counts": {
         "1": 0,
@@ -27628,7 +27628,7 @@
           "technology": "solar",
           "quartile": 4,
           "composite_score": 28.7,
-          "capacity_factor_pct": 22.8,
+          "capacity_factor_pct": 20.8,
           "year": 2026
         },
         {
@@ -27680,7 +27680,7 @@
     },
     "Wemen Asset Co Pty Ltd as Trustee to Wemen Solar Unit Trust": {
       "ranked_projects": 9,
-      "avg_cf": 17.3,
+      "avg_cf": 17.2,
       "avg_composite": 35.2,
       "quartile_counts": {
         "1": 0,
@@ -27724,7 +27724,7 @@
           "technology": "solar",
           "quartile": 3,
           "composite_score": 38.7,
-          "capacity_factor_pct": 25.9,
+          "capacity_factor_pct": 25.0,
           "year": 2026
         },
         {
@@ -27776,7 +27776,7 @@
     },
     "Iraak Sun Farm Pty Ltd": {
       "ranked_projects": 9,
-      "avg_cf": 19.7,
+      "avg_cf": 19.4,
       "avg_composite": 42.5,
       "quartile_counts": {
         "1": 1,
@@ -27829,7 +27829,7 @@
           "technology": "solar",
           "quartile": 3,
           "composite_score": 40.0,
-          "capacity_factor_pct": 27.7,
+          "capacity_factor_pct": 25.1,
           "year": 2026
         },
         {
@@ -27961,14 +27961,14 @@
           "technology": "solar",
           "quartile": 4,
           "composite_score": 8.2,
-          "capacity_factor_pct": 8.2,
+          "capacity_factor_pct": 8.3,
           "year": 2026
         }
       ]
     },
     "FRV Australia (Walla Walla Asset Co Pty Ltd (ACN 634 728 868) as trustee for the Walla Walla Asset Trust)": {
       "ranked_projects": 3,
-      "avg_cf": 13.4,
+      "avg_cf": 12.9,
       "avg_composite": 45.9,
       "quartile_counts": {
         "1": 1,
@@ -27994,7 +27994,7 @@
           "technology": "solar",
           "quartile": 2,
           "composite_score": 52.1,
-          "capacity_factor_pct": 17.9,
+          "capacity_factor_pct": 16.5,
           "year": 2026
         },
         {
@@ -28010,7 +28010,7 @@
     },
     "Winton Asset Co. Pty Ltd as Trustee of the Winton Asset Trust": {
       "ranked_projects": 6,
-      "avg_cf": 20.1,
+      "avg_cf": 19.8,
       "avg_composite": 32.2,
       "quartile_counts": {
         "1": 0,
@@ -28027,7 +28027,7 @@
           "technology": "solar",
           "quartile": 2,
           "composite_score": 48.5,
-          "capacity_factor_pct": 31.0,
+          "capacity_factor_pct": 28.8,
           "year": 2026
         },
         {
@@ -28079,7 +28079,7 @@
     },
     "Susan River Solar Pty Ltd as trustee for the Susan River Solar Trust": {
       "ranked_projects": 9,
-      "avg_cf": 17.5,
+      "avg_cf": 17.4,
       "avg_composite": 35.1,
       "quartile_counts": {
         "1": 0,
@@ -28141,7 +28141,7 @@
           "technology": "solar",
           "quartile": 3,
           "composite_score": 32.8,
-          "capacity_factor_pct": 19.9,
+          "capacity_factor_pct": 19.7,
           "year": 2026
         },
         {
@@ -28324,7 +28324,7 @@
           "technology": "solar",
           "quartile": 4,
           "composite_score": 25.9,
-          "capacity_factor_pct": 21.1,
+          "capacity_factor_pct": 20.3,
           "year": 2026
         },
         {
@@ -28349,7 +28349,7 @@
     },
     "Giragarre Solar Farm Pty Ltd as trustee for Giragarre Solar Farm Trust": {
       "ranked_projects": 3,
-      "avg_cf": 15.2,
+      "avg_cf": 14.1,
       "avg_composite": 39.1,
       "quartile_counts": {
         "1": 0,
@@ -28375,7 +28375,7 @@
           "technology": "solar",
           "quartile": 3,
           "composite_score": 44.9,
-          "capacity_factor_pct": 21.8,
+          "capacity_factor_pct": 18.8,
           "year": 2026
         },
         {
@@ -28408,7 +28408,7 @@
           "technology": "solar",
           "quartile": 2,
           "composite_score": 59.5,
-          "capacity_factor_pct": 28.9,
+          "capacity_factor_pct": 28.7,
           "year": 2026
         },
         {
@@ -28433,7 +28433,7 @@
     },
     "EE Solar 6 Pty Ltd as trustee for EE Solar 6 Trust": {
       "ranked_projects": 3,
-      "avg_cf": 11.6,
+      "avg_cf": 11.2,
       "avg_composite": 23.2,
       "quartile_counts": {
         "1": 0,
@@ -28459,7 +28459,7 @@
           "technology": "solar",
           "quartile": 3,
           "composite_score": 30.5,
-          "capacity_factor_pct": 20.4,
+          "capacity_factor_pct": 19.2,
           "year": 2026
         },
         {
@@ -28475,7 +28475,7 @@
     },
     "Edify Energy / Federation Asset Management": {
       "ranked_projects": 8,
-      "avg_cf": 10.9,
+      "avg_cf": 11.1,
       "avg_composite": 50.5,
       "quartile_counts": {
         "1": 5,
@@ -28528,7 +28528,7 @@
           "technology": "bess",
           "quartile": 1,
           "composite_score": 45.9,
-          "capacity_factor_pct": 10.8,
+          "capacity_factor_pct": 11.2,
           "year": 2026
         },
         {
@@ -28537,7 +28537,7 @@
           "technology": "bess",
           "quartile": 2,
           "composite_score": 36.2,
-          "capacity_factor_pct": 10.7,
+          "capacity_factor_pct": 11.4,
           "year": 2026
         },
         {
@@ -28562,7 +28562,7 @@
     },
     "Neoen": {
       "ranked_projects": 25,
-      "avg_cf": 4.9,
+      "avg_cf": 4.8,
       "avg_composite": 39.9,
       "quartile_counts": {
         "1": 10,
@@ -28606,7 +28606,7 @@
           "technology": "bess",
           "quartile": 1,
           "composite_score": 55.8,
-          "capacity_factor_pct": 14.6,
+          "capacity_factor_pct": 13.5,
           "year": 2026
         },
         {
@@ -28660,7 +28660,7 @@
           "technology": "bess",
           "quartile": 1,
           "composite_score": 42.5,
-          "capacity_factor_pct": 14.6,
+          "capacity_factor_pct": 14.3,
           "year": 2026
         },
         {
@@ -28802,7 +28802,7 @@
     },
     "HMC Capital (ex-Neoen)": {
       "ranked_projects": 6,
-      "avg_cf": 7.4,
+      "avg_cf": 7.6,
       "avg_composite": 39.0,
       "quartile_counts": {
         "1": 2,
@@ -28864,7 +28864,7 @@
           "technology": "bess",
           "quartile": 4,
           "composite_score": 11.7,
-          "capacity_factor_pct": 4.3,
+          "capacity_factor_pct": 5.7,
           "year": 2026
         }
       ]
@@ -28924,7 +28924,7 @@
           "technology": "bess",
           "quartile": 2,
           "composite_score": 41.0,
-          "capacity_factor_pct": 7.5,
+          "capacity_factor_pct": 7.6,
           "year": 2026
         },
         {
@@ -28940,7 +28940,7 @@
     },
     "CS Energy": {
       "ranked_projects": 6,
-      "avg_cf": 7.5,
+      "avg_cf": 7.7,
       "avg_composite": 32.8,
       "quartile_counts": {
         "1": 1,
@@ -28984,7 +28984,7 @@
           "technology": "bess",
           "quartile": 3,
           "composite_score": 28.8,
-          "capacity_factor_pct": 10.0,
+          "capacity_factor_pct": 10.7,
           "year": 2026
         },
         {
@@ -28993,7 +28993,7 @@
           "technology": "bess",
           "quartile": 3,
           "composite_score": 26.3,
-          "capacity_factor_pct": 8.9,
+          "capacity_factor_pct": 9.3,
           "year": 2026
         },
         {
@@ -29009,7 +29009,7 @@
     },
     "ENGIE": {
       "ranked_projects": 4,
-      "avg_cf": 6.1,
+      "avg_cf": 6.0,
       "avg_composite": 35.1,
       "quartile_counts": {
         "1": 0,
@@ -29053,7 +29053,7 @@
           "technology": "bess",
           "quartile": 4,
           "composite_score": 16.0,
-          "capacity_factor_pct": 5.5,
+          "capacity_factor_pct": 5.0,
           "year": 2026
         }
       ]
@@ -29200,14 +29200,14 @@
           "technology": "bess",
           "quartile": 4,
           "composite_score": 13.4,
-          "capacity_factor_pct": 3.1,
+          "capacity_factor_pct": 3.4,
           "year": 2026
         }
       ]
     },
     "Akaysha Energy (BlackRock)": {
       "ranked_projects": 7,
-      "avg_cf": 5.4,
+      "avg_cf": 5.9,
       "avg_composite": 23.1,
       "quartile_counts": {
         "1": 0,
@@ -29224,7 +29224,7 @@
           "technology": "bess",
           "quartile": 2,
           "composite_score": 37.6,
-          "capacity_factor_pct": 16.8,
+          "capacity_factor_pct": 17.5,
           "year": 2026
         },
         {
@@ -29233,7 +29233,7 @@
           "technology": "bess",
           "quartile": 3,
           "composite_score": 29.6,
-          "capacity_factor_pct": 13.6,
+          "capacity_factor_pct": 14.7,
           "year": 2026
         },
         {
@@ -29278,14 +29278,14 @@
           "technology": "bess",
           "quartile": 4,
           "composite_score": 11.9,
-          "capacity_factor_pct": 0.4,
+          "capacity_factor_pct": 2.1,
           "year": 2026
         }
       ]
     },
     "Eku Energy (Macquarie/Shell)": {
       "ranked_projects": 3,
-      "avg_cf": 10.1,
+      "avg_cf": 10.3,
       "avg_composite": 31.1,
       "quartile_counts": {
         "1": 1,
@@ -29311,7 +29311,7 @@
           "technology": "bess",
           "quartile": 4,
           "composite_score": 22.4,
-          "capacity_factor_pct": 12.8,
+          "capacity_factor_pct": 13.2,
           "year": 2026
         },
         {
@@ -29458,7 +29458,7 @@
           "technology": "pumped_hydro",
           "quartile": 1,
           "composite_score": 76.9,
-          "capacity_factor_pct": 11.4,
+          "capacity_factor_pct": 10.8,
           "year": 2026
         },
         {
@@ -29530,7 +29530,7 @@
           "technology": "pumped_hydro",
           "quartile": 2,
           "composite_score": 55.6,
-          "capacity_factor_pct": 11.4,
+          "capacity_factor_pct": 10.8,
           "year": 2026
         },
         {
@@ -29566,7 +29566,7 @@
           "technology": "pumped_hydro",
           "quartile": 2,
           "composite_score": 51.2,
-          "capacity_factor_pct": 14.0,
+          "capacity_factor_pct": 13.1,
           "year": 2026
         },
         {
@@ -29647,7 +29647,7 @@
           "technology": "pumped_hydro",
           "quartile": 3,
           "composite_score": 38.8,
-          "capacity_factor_pct": 16.0,
+          "capacity_factor_pct": 12.0,
           "year": 2026
         },
         {
@@ -29656,7 +29656,7 @@
           "technology": "pumped_hydro",
           "quartile": 3,
           "composite_score": 37.5,
-          "capacity_factor_pct": 5.2,
+          "capacity_factor_pct": 6.4,
           "year": 2026
         },
         {
@@ -29872,7 +29872,7 @@
           "technology": "pumped_hydro",
           "quartile": 4,
           "composite_score": 18.1,
-          "capacity_factor_pct": 11.3,
+          "capacity_factor_pct": 12.3,
           "year": 2026
         },
         {
@@ -29924,7 +29924,7 @@
     },
     "Hydro-Electric Corporation": {
       "ranked_projects": 171,
-      "avg_cf": 38.1,
+      "avg_cf": 38.3,
       "avg_composite": 56.5,
       "quartile_counts": {
         "1": 61,
@@ -29941,7 +29941,7 @@
           "technology": "pumped_hydro",
           "quartile": 1,
           "composite_score": 93.8,
-          "capacity_factor_pct": 64.6,
+          "capacity_factor_pct": 53.4,
           "year": 2026
         },
         {
@@ -30103,7 +30103,7 @@
           "technology": "pumped_hydro",
           "quartile": 1,
           "composite_score": 81.9,
-          "capacity_factor_pct": 31.8,
+          "capacity_factor_pct": 31.9,
           "year": 2026
         },
         {
@@ -30175,7 +30175,7 @@
           "technology": "pumped_hydro",
           "quartile": 1,
           "composite_score": 77.5,
-          "capacity_factor_pct": 33.3,
+          "capacity_factor_pct": 43.8,
           "year": 2026
         },
         {
@@ -30274,7 +30274,7 @@
           "technology": "pumped_hydro",
           "quartile": 1,
           "composite_score": 74.4,
-          "capacity_factor_pct": 29.6,
+          "capacity_factor_pct": 24.7,
           "year": 2026
         },
         {
@@ -30310,7 +30310,7 @@
           "technology": "pumped_hydro",
           "quartile": 1,
           "composite_score": 73.1,
-          "capacity_factor_pct": 30.1,
+          "capacity_factor_pct": 35.8,
           "year": 2026
         },
         {
@@ -30679,7 +30679,7 @@
           "technology": "pumped_hydro",
           "quartile": 2,
           "composite_score": 59.4,
-          "capacity_factor_pct": 25.9,
+          "capacity_factor_pct": 25.1,
           "year": 2026
         },
         {
@@ -30706,7 +30706,7 @@
           "technology": "pumped_hydro",
           "quartile": 2,
           "composite_score": 58.8,
-          "capacity_factor_pct": 24.3,
+          "capacity_factor_pct": 28.1,
           "year": 2026
         },
         {
@@ -30751,7 +30751,7 @@
           "technology": "pumped_hydro",
           "quartile": 2,
           "composite_score": 56.9,
-          "capacity_factor_pct": 29.3,
+          "capacity_factor_pct": 30.4,
           "year": 2026
         },
         {
@@ -30877,7 +30877,7 @@
           "technology": "pumped_hydro",
           "quartile": 2,
           "composite_score": 51.2,
-          "capacity_factor_pct": 33.6,
+          "capacity_factor_pct": 31.2,
           "year": 2026
         },
         {
@@ -31012,7 +31012,7 @@
           "technology": "pumped_hydro",
           "quartile": 3,
           "composite_score": 46.9,
-          "capacity_factor_pct": 24.1,
+          "capacity_factor_pct": 25.9,
           "year": 2026
         },
         {
@@ -31120,7 +31120,7 @@
           "technology": "pumped_hydro",
           "quartile": 3,
           "composite_score": 43.1,
-          "capacity_factor_pct": 19.0,
+          "capacity_factor_pct": 24.4,
           "year": 2026
         },
         {
@@ -31165,7 +31165,7 @@
           "technology": "pumped_hydro",
           "quartile": 3,
           "composite_score": 39.4,
-          "capacity_factor_pct": 16.9,
+          "capacity_factor_pct": 22.4,
           "year": 2026
         },
         {
@@ -31183,7 +31183,7 @@
           "technology": "pumped_hydro",
           "quartile": 3,
           "composite_score": 38.8,
-          "capacity_factor_pct": 18.7,
+          "capacity_factor_pct": 24.2,
           "year": 2026
         },
         {
@@ -31354,7 +31354,7 @@
           "technology": "pumped_hydro",
           "quartile": 4,
           "composite_score": 25.0,
-          "capacity_factor_pct": 11.4,
+          "capacity_factor_pct": 16.9,
           "year": 2026
         },
         {
@@ -31363,7 +31363,7 @@
           "technology": "pumped_hydro",
           "quartile": 4,
           "composite_score": 23.8,
-          "capacity_factor_pct": 13.8,
+          "capacity_factor_pct": 18.1,
           "year": 2026
         },
         {
@@ -31399,7 +31399,7 @@
           "technology": "pumped_hydro",
           "quartile": 4,
           "composite_score": 16.2,
-          "capacity_factor_pct": 7.5,
+          "capacity_factor_pct": 13.1,
           "year": 2026
         },
         {
@@ -31408,7 +31408,7 @@
           "technology": "pumped_hydro",
           "quartile": 4,
           "composite_score": 16.2,
-          "capacity_factor_pct": 10.5,
+          "capacity_factor_pct": 10.2,
           "year": 2026
         },
         {
@@ -31444,7 +31444,7 @@
           "technology": "pumped_hydro",
           "quartile": 4,
           "composite_score": 6.9,
-          "capacity_factor_pct": 2.6,
+          "capacity_factor_pct": 5.0,
           "year": 2026
         },
         {
@@ -31478,7 +31478,7 @@
     },
     "CleanCo Queensland Limited": {
       "ranked_projects": 27,
-      "avg_cf": 43.7,
+      "avg_cf": 44.0,
       "avg_composite": 61.1,
       "quartile_counts": {
         "1": 14,
@@ -31558,7 +31558,7 @@
           "technology": "pumped_hydro",
           "quartile": 1,
           "composite_score": 82.5,
-          "capacity_factor_pct": 73.3,
+          "capacity_factor_pct": 77.8,
           "year": 2026
         },
         {
@@ -31576,7 +31576,7 @@
           "technology": "pumped_hydro",
           "quartile": 1,
           "composite_score": 81.9,
-          "capacity_factor_pct": 90.4,
+          "capacity_factor_pct": 91.9,
           "year": 2026
         },
         {
@@ -31621,7 +31621,7 @@
           "technology": "pumped_hydro",
           "quartile": 2,
           "composite_score": 72.5,
-          "capacity_factor_pct": 33.4,
+          "capacity_factor_pct": 35.5,
           "year": 2026
         },
         {
@@ -31736,7 +31736,7 @@
     },
     "Origin Energy Eraring Pty Ltd": {
       "ranked_projects": 9,
-      "avg_cf": 16.6,
+      "avg_cf": 16.7,
       "avg_composite": 30.3,
       "quartile_counts": {
         "1": 0,
@@ -31780,7 +31780,7 @@
           "technology": "pumped_hydro",
           "quartile": 3,
           "composite_score": 32.5,
-          "capacity_factor_pct": 15.5,
+          "capacity_factor_pct": 16.3,
           "year": 2026
         },
         {
@@ -31832,7 +31832,7 @@
     },
     "AGL Hydro Partnership": {
       "ranked_projects": 36,
-      "avg_cf": 15.6,
+      "avg_cf": 15.4,
       "avg_composite": 30.9,
       "quartile_counts": {
         "1": 0,
@@ -31849,7 +31849,7 @@
           "technology": "pumped_hydro",
           "quartile": 2,
           "composite_score": 60.6,
-          "capacity_factor_pct": 21.0,
+          "capacity_factor_pct": 15.7,
           "year": 2026
         },
         {
@@ -31921,7 +31921,7 @@
           "technology": "pumped_hydro",
           "quartile": 3,
           "composite_score": 42.5,
-          "capacity_factor_pct": 19.0,
+          "capacity_factor_pct": 16.8,
           "year": 2026
         },
         {
@@ -32119,7 +32119,7 @@
           "technology": "pumped_hydro",
           "quartile": 4,
           "composite_score": 18.1,
-          "capacity_factor_pct": 3.3,
+          "capacity_factor_pct": 2.9,
           "year": 2026
         },
         {
@@ -32188,7 +32188,7 @@
           "technology": "solar",
           "quartile": 1,
           "composite_score": 94.4,
-          "capacity_factor_pct": 32.1,
+          "capacity_factor_pct": 32.2,
           "year": 2026
         },
         {
@@ -32204,7 +32204,7 @@
     },
     "Wollar Solar Development Pty Ltd": {
       "ranked_projects": 2,
-      "avg_cf": 20.8,
+      "avg_cf": 20.5,
       "avg_composite": 56.5,
       "quartile_counts": {
         "1": 1,
@@ -32221,7 +32221,7 @@
           "technology": "solar",
           "quartile": 1,
           "composite_score": 83.1,
-          "capacity_factor_pct": 27.3,
+          "capacity_factor_pct": 26.6,
           "year": 2026
         },
         {
@@ -32237,7 +32237,7 @@
     },
     "Acciona Energy Australia Global Pty Ltd": {
       "ranked_projects": 2,
-      "avg_cf": 19.0,
+      "avg_cf": 19.2,
       "avg_composite": 34.8,
       "quartile_counts": {
         "1": 0,
@@ -32254,7 +32254,7 @@
           "technology": "solar",
           "quartile": 2,
           "composite_score": 66.9,
-          "capacity_factor_pct": 26.8,
+          "capacity_factor_pct": 27.3,
           "year": 2026
         },
         {
@@ -32270,7 +32270,7 @@
     },
     "Culcairn Solar Farm Pty Ltd as trustee for Culcairn Solar Farm Trust": {
       "ranked_projects": 2,
-      "avg_cf": 9.8,
+      "avg_cf": 10.1,
       "avg_composite": 25.8,
       "quartile_counts": {
         "1": 0,
@@ -32287,7 +32287,7 @@
           "technology": "solar",
           "quartile": 3,
           "composite_score": 45.6,
-          "capacity_factor_pct": 17.3,
+          "capacity_factor_pct": 18.0,
           "year": 2026
         },
         {
@@ -32303,7 +32303,7 @@
     },
     "Kerang Solar Plant Pty Ltd": {
       "ranked_projects": 2,
-      "avg_cf": 20.4,
+      "avg_cf": 20.1,
       "avg_composite": 27.7,
       "quartile_counts": {
         "1": 0,
@@ -32320,7 +32320,7 @@
           "technology": "solar",
           "quartile": 4,
           "composite_score": 29.5,
-          "capacity_factor_pct": 27.5,
+          "capacity_factor_pct": 27.0,
           "year": 2026
         },
         {
@@ -32336,7 +32336,7 @@
     },
     "Epic Energy": {
       "ranked_projects": 2,
-      "avg_cf": 9.3,
+      "avg_cf": 9.4,
       "avg_composite": 39.6,
       "quartile_counts": {
         "1": 1,
@@ -32353,7 +32353,7 @@
           "technology": "bess",
           "quartile": 1,
           "composite_score": 56.6,
-          "capacity_factor_pct": 14.0,
+          "capacity_factor_pct": 14.1,
           "year": 2026
         },
         {
@@ -32369,7 +32369,7 @@
     },
     "Iberdrola": {
       "ranked_projects": 2,
-      "avg_cf": 6.0,
+      "avg_cf": 6.4,
       "avg_composite": 39.8,
       "quartile_counts": {
         "1": 1,
@@ -32386,7 +32386,7 @@
           "technology": "bess",
           "quartile": 1,
           "composite_score": 50.0,
-          "capacity_factor_pct": 9.7,
+          "capacity_factor_pct": 10.6,
           "year": 2026
         },
         {
@@ -32402,7 +32402,7 @@
     },
     "Origin Energy Electricity Limited": {
       "ranked_projects": 2,
-      "avg_cf": 8.6,
+      "avg_cf": 8.8,
       "avg_composite": 25.2,
       "quartile_counts": {
         "1": 1,
@@ -32419,7 +32419,7 @@
           "technology": "bess",
           "quartile": 1,
           "composite_score": 47.2,
-          "capacity_factor_pct": 16.1,
+          "capacity_factor_pct": 16.6,
           "year": 2026
         },
         {
@@ -32435,7 +32435,7 @@
     },
     "Equis Energy / SEC Victoria": {
       "ranked_projects": 6,
-      "avg_cf": 9.1,
+      "avg_cf": 9.5,
       "avg_composite": 17.9,
       "quartile_counts": {
         "1": 0,
@@ -32452,7 +32452,7 @@
           "technology": "bess",
           "quartile": 2,
           "composite_score": 41.6,
-          "capacity_factor_pct": 27.6,
+          "capacity_factor_pct": 28.4,
           "year": 2026
         },
         {
@@ -32461,7 +32461,7 @@
           "technology": "bess",
           "quartile": 3,
           "composite_score": 25.5,
-          "capacity_factor_pct": 11.8,
+          "capacity_factor_pct": 12.3,
           "year": 2026
         },
         {
@@ -32470,7 +32470,7 @@
           "technology": "bess",
           "quartile": 3,
           "composite_score": 24.6,
-          "capacity_factor_pct": 11.8,
+          "capacity_factor_pct": 12.5,
           "year": 2026
         },
         {
@@ -32504,7 +32504,7 @@
     },
     "Edify Energy (Sosteneo)": {
       "ranked_projects": 2,
-      "avg_cf": 9.9,
+      "avg_cf": 10.4,
       "avg_composite": 36.9,
       "quartile_counts": {
         "1": 0,
@@ -32530,14 +32530,14 @@
           "technology": "bess",
           "quartile": 4,
           "composite_score": 21.5,
-          "capacity_factor_pct": 10.9,
+          "capacity_factor_pct": 11.9,
           "year": 2026
         }
       ]
     },
     "Tilt Renewables (Mercury NZ)": {
       "ranked_projects": 2,
-      "avg_cf": 3.4,
+      "avg_cf": 3.9,
       "avg_composite": 16.7,
       "quartile_counts": {
         "1": 0,
@@ -32554,7 +32554,7 @@
           "technology": "bess",
           "quartile": 4,
           "composite_score": 17.0,
-          "capacity_factor_pct": 5.6,
+          "capacity_factor_pct": 6.5,
           "year": 2026
         },
         {
@@ -33743,5 +33743,5 @@
       }
     ]
   },
-  "exported_at": "2026-04-23T18:25:54.719844"
+  "exported_at": "2026-05-10T08:30:21.455979"
 }

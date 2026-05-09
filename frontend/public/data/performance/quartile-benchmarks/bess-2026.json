@@ -3,14 +3,14 @@
   "technology": "bess",
   "benchmarks": {
     "capacity_factor": {
-      "q1": 5.57,
-      "median": 10.04,
-      "q3": 13.63
+      "q1": 6.52,
+      "median": 10.74,
+      "q3": 13.52
     },
     "revenue_per_mw": {
-      "q1": 20573.0,
-      "median": 28883.0,
-      "q3": 50196.0
+      "q1": 22820.0,
+      "median": 35399.0,
+      "q3": 60319.0
     }
   }
 }

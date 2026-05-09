@@ -665,10 +665,18 @@
     {
       "year": 2026,
       "month": 4,
-      "capacity_factor_pct": 14.3,
-      "energy_mwh": 46812.3,
-      "revenue_aud": 2981440.0,
-      "energy_price_received": 63.69
+      "capacity_factor_pct": 29.1,
+      "energy_mwh": 94881.5,
+      "revenue_aud": 5689023.0,
+      "energy_price_received": 59.96
+    },
+    {
+      "year": 2026,
+      "month": 5,
+      "capacity_factor_pct": 10.0,
+      "energy_mwh": 33699.9,
+      "revenue_aud": 1980966.0,
+      "energy_price_received": 58.78
     }
   ]
 }

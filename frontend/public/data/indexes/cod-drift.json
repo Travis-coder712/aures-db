@@ -3,7 +3,7 @@
   "avg_drift_months": {
     "solar": 0.2,
     "wind": 0.1,
-    "bess": 0.1,
+    "bess": -0.1,
     "hybrid": 0.0,
     "pumped_hydro": 0.0,
     "offshore_wind": 0.0
@@ -19,6 +19,17 @@
       "original": "2026",
       "current": "2028",
       "drift_months": 24
+    },
+    {
+      "id": "collie-battery",
+      "name": "Collie Battery",
+      "technology": "bess",
+      "status": "operating",
+      "capacity_mw": 560.0,
+      "state": "WA",
+      "original": "2027",
+      "current": "2025-07",
+      "drift_months": -24
     },
     {
       "id": "golden-plains-wind",
@@ -73,17 +84,6 @@
       "state": "SA",
       "original": "2017-12",
       "current": "2017-12 (Phase 1)",
-      "drift_months": 0
-    },
-    {
-      "id": "collie-battery",
-      "name": "Collie Battery",
-      "technology": "bess",
-      "status": "development",
-      "capacity_mw": 560.0,
-      "state": "WA",
-      "original": "2027",
-      "current": "2027",
       "drift_months": 0
     },
     {

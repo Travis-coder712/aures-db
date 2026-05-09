@@ -155,25 +155,25 @@
       "annual_data": [
         {
           "year": 2025,
-          "generation_gwh": 11450.0,
-          "capacity_factor_pct": 45.4,
-          "est_revenue_m_aud": 1477.0,
-          "avg_price_aud_mwh": 129.0
+          "generation_gwh": 9546.0,
+          "capacity_factor_pct": 37.8,
+          "est_revenue_m_aud": 1261.0,
+          "avg_price_aud_mwh": 132.0
         },
         {
           "year": 2026,
-          "generation_gwh": 3680.0,
-          "capacity_factor_pct": 14.6,
-          "est_revenue_m_aud": 298.0,
-          "avg_price_aud_mwh": 81.0
+          "generation_gwh": 5216.0,
+          "capacity_factor_pct": 20.7,
+          "est_revenue_m_aud": 404.0,
+          "avg_price_aud_mwh": 77.0
         }
       ],
       "seasonal_data": [
         {
           "year": 2025,
           "season": "autumn",
-          "generation_gwh": 2928.0,
-          "avg_price_aud_mwh": 126.0
+          "generation_gwh": 1024.0,
+          "avg_price_aud_mwh": 148.0
         },
         {
           "year": 2025,
@@ -190,8 +190,8 @@
         {
           "year": 2026,
           "season": "autumn",
-          "generation_gwh": 1277.0,
-          "avg_price_aud_mwh": 77.0
+          "generation_gwh": 2813.0,
+          "avg_price_aud_mwh": 73.0
         },
         {
           "year": 2026,
@@ -275,25 +275,25 @@
       "annual_data": [
         {
           "year": 2025,
-          "generation_gwh": 10894.0,
-          "capacity_factor_pct": 45.8,
-          "est_revenue_m_aud": 1363.0,
-          "avg_price_aud_mwh": 125.0
+          "generation_gwh": 9552.0,
+          "capacity_factor_pct": 40.2,
+          "est_revenue_m_aud": 1222.0,
+          "avg_price_aud_mwh": 128.0
         },
         {
           "year": 2026,
-          "generation_gwh": 3920.0,
-          "capacity_factor_pct": 16.5,
-          "est_revenue_m_aud": 322.0,
-          "avg_price_aud_mwh": 82.0
+          "generation_gwh": 5458.0,
+          "capacity_factor_pct": 22.9,
+          "est_revenue_m_aud": 425.0,
+          "avg_price_aud_mwh": 78.0
         }
       ],
       "seasonal_data": [
         {
           "year": 2025,
           "season": "autumn",
-          "generation_gwh": 2330.0,
-          "avg_price_aud_mwh": 122.0
+          "generation_gwh": 989.0,
+          "avg_price_aud_mwh": 146.0
         },
         {
           "year": 2025,
@@ -310,8 +310,8 @@
         {
           "year": 2026,
           "season": "autumn",
-          "generation_gwh": 1413.0,
-          "avg_price_aud_mwh": 77.0
+          "generation_gwh": 2951.0,
+          "avg_price_aud_mwh": 72.0
         },
         {
           "year": 2026,
@@ -1116,5 +1116,5 @@
     "displaced": "availability_mw \u2265 20% capacity but total_cleared_mw < 30% of availability (offered but not dispatched)",
     "dispatched": "total_cleared_mw \u2265 30% of availability (normal operation)"
   },
-  "exported_at": "2026-04-23T18:26:30.381226"
+  "exported_at": "2026-05-10T08:31:00.244437"
 }

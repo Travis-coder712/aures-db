@@ -3,14 +3,14 @@
   "technology": "wind",
   "benchmarks": {
     "capacity_factor": {
-      "q1": 23.05,
-      "median": 25.91,
-      "q3": 32.07
+      "q1": 23.29,
+      "median": 25.93,
+      "q3": 31.6
     },
     "revenue_per_mw": {
-      "q1": 21461.0,
-      "median": 33686.0,
-      "q3": 46727.0
+      "q1": 25690.0,
+      "median": 42915.0,
+      "q3": 57223.0
     }
   }
 }

@@ -140,7 +140,6 @@ def import_from_api(conn, year: int, ytd: bool = False):
             last_day = calendar.monthrange(year, last_month)[1]
             date_end = f"{year}-{last_month:02d}-{last_day:02d}"
             # Calculate hours elapsed for CF adjustment
-            from datetime import timedelta
             start_dt = date(year, 1, 1)
             end_dt = date(year, last_month, last_day)
             hours_elapsed = (end_dt - start_dt + timedelta(days=1)).days * 24
