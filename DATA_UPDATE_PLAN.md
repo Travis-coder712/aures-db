@@ -2,18 +2,39 @@
 
 > Written by Claude Code after a comprehensive audit of the codebase, pipeline, and data state as at 9 May 2026.
 > This document is the handoff reference for executing the May 2026 data run on Travis's Mac (`~/aures-db/`).
+> **All execution steps are written as Claude Code prompts** — open `claude` in `~/aures-db/` and paste each prompt in sequence.
 
 ---
 
-## Context
+## How to Use This Document
 
-This plan covers the first full data refresh since the database launched. Seven data sources are stale by 23–59 days. The local DB on the dev server is EMPTY — all pipeline steps run on Travis's Mac only.
+1. On Travis's Mac, `cd ~/aures-db` and run `claude` to open Claude Code
+2. Start a new session with the orientation prompt below
+3. Work through stages 1–9 in order, pasting each prompt
+4. Claude Code handles the commands, reads output, catches errors, and edits files
+5. You review and approve at each stage before moving to the next
 
-Target state: database current as at 10 May 2026, deployed as **v2.53.0**.
+You don't need to type any terminal commands yourself. Claude Code does the running, checking, and fixing.
 
 ---
 
-## Critical Technical Notes (Read Before Touching Anything)
+## Opening Prompt (start every new session with this)
+
+```
+Read DATA_UPDATE_PLAN.md at the repo root. This is the handoff document for the May 2026 AURES data run.
+
+Key things to keep in mind throughout this session:
+- The overlay system in export_json.py protects hand-curated data — NEVER bulk-overwrite data/projects/**/*.json files
+- status is NOT an overlay override field — the DB always wins for project status
+- Three pipeline scripts are NOT in admin.py and must be run manually: import_battery_scada.py, import_bess_5min.py, import_dispatch_regionsum.py
+- The local DB on the dev server is empty — we are running on this Mac only
+
+Confirm you've read and understood the plan, then wait for me to give you the first stage prompt.
+```
+
+---
+
+## Critical Technical Notes (Claude Code Must Know These)
 
 ### The Overlay System
 
@@ -39,7 +60,7 @@ Do NOT bulk-overwrite overlay files. They contain hand-curated narrative, timeli
 - `import_nemweb_bids.py` → BESS bid profiles → `bess_daily_bids` → `bess-bidding.json`
 - `export_json.py` → all frontend JSON
 
-**NOT in `admin.py` — run manually:**
+**NOT in `admin.py` — must be run explicitly:**
 - `import_battery_scada.py` → `battery_daily_scada` → `battery-live-records.json`
 - `import_bess_5min.py` → BESS 5-min dispatch peaks → BESS records leaderboard
 - `import_dispatch_regionsum.py` → regional demand → Energy Transition Scoreboard
@@ -76,168 +97,252 @@ Do NOT bulk-overwrite overlay files. They contain hand-curated narrative, timeli
 
 ---
 
-## BESS Projects Requiring Status Review
+## BESS Projects Requiring Status Review After Stage 2
 
-After running AEMO Gen Info, verify these 7 projects whose COD dates have passed but may still show wrong status. The DB wins for status, so if AEMO has updated them to operating, they'll export correctly. Check overlays if status still looks wrong.
+After AEMO Gen Info runs, verify these 7 projects. The DB wins for status, so AEMO data takes effect automatically. Check overlays only if status still looks wrong after export.
 
 | Slug | Issue |
 |------|-------|
 | `collie-battery` | `cod_current: "2027"` in overlay — both stages operational July 2025. Fix overlay to `"2025-07"`. WA/WEM project, not NEM. |
 | `brendale-bess` | Stage 1 operating June 2025, `cod_current: "2026-06"` is full project COD — check if correct |
-| `liddell-bess` | Was in construction, should be commissioning |
+| `liddell-bess` | Was in construction, should be commissioning or beyond |
 | `koorangie-ess` | Was commissioning → verify now operating |
 | `tarong-bess` | Was commissioning → verify now operating |
 | `waratah-super-battery` | 850 MW / 1,680 MWh — largest NEM battery — verify operating |
 | `western-downs-battery` | 540 MW — CS Energy / Amp Energy — verify operational stage |
 
-**collie-battery fix**: in `data/projects/bess/collie-battery.json`, change `cod_current` from `"2027"` to `"2025-07"`. This is a WA (WEM) project, not NEM — no NEM SCADA data expected.
-
 ---
 
-## The 9-Stage Execution Plan
+## The 9-Stage Execution Plan (Claude Code Prompts)
 
-Run on Travis's Mac (`~/aures-db/`). Do a `git pull` first.
+### Stage 1 — Orientation & Dry Run
 
-### Stage 1: Dry Run Preview
-```bash
-python3 pipeline/smart_refresh.py --phase data --dry-run
 ```
-Confirms what will be fetched before spending API quota.
+First, pull the latest code: git pull origin main (or the current branch).
 
-### Stage 2: AEMO Generation Info (run first — no API quota cost)
-```bash
-python3 pipeline/importers/import_aemo_gen_info.py
-```
-Updates project status, capacity, DUID registrations. This is the source of truth for what's operating.
-After: manually review the 7 BESS projects listed above.
+Then run a dry run to show what the smart refresh would fetch without spending any API quota:
+  python3 pipeline/smart_refresh.py --phase data --dry-run
 
-### Stage 3: NEMWEB Operational Data (three scripts, run in order)
-```bash
-python3 pipeline/importers/import_battery_scada.py          # 30-day backfill
-python3 pipeline/importers/import_bess_5min.py              # 30-day backfill
-python3 pipeline/importers/import_dispatch_regionsum.py     # 30-day backfill
-```
-These are NOT in admin.py — must be run manually. Feed battery-live-records, BESS leaderboard, Energy Transition Scoreboard.
+Read the output and tell me:
+1. Which sources it would fetch and approximately how many API calls each will use
+2. Which sources it considers fresh enough to skip
+3. Any warnings or configuration issues
 
-**Also run if data exists:**
-```bash
-python3 pipeline/importers/import_bess_band_capture.py
-python3 pipeline/importers/import_price_band_capture.py
-```
-These populate unused tables. Check if the importers exist and have been run before — if yes, run them to keep data fresh for future Value Factor analysis.
-
-### Stage 4: OpenElectricity Performance
-```bash
-python3 pipeline/importers/import_openelectricity.py --year 2026 --ytd
-python3 pipeline/importers/import_openelectricity.py --year 2025 --annual
-python3 pipeline/importers/import_openelectricity.py --year 2026 --monthly
-```
-YTD 2026, full 2025 annual, and monthly breakdown. ~30 API calls total. Run early in the day.
-
-### Stage 5: EPBC Referrals
-```bash
-python3 pipeline/importers/import_epbc.py
-```
-59 days stale. Environmental referral pipeline data.
-
-### Stage 6: Coal Generation Monitor
-```bash
-python3 pipeline/importers/import_coal.py
-```
-
-### Stage 7: NEMWEB BESS Bids (if stale)
-```bash
-python3 pipeline/importers/import_nemweb_bids.py
-```
-Bid profiles — check staleness first with `--dry-run` or inspect `data/sources`.
-
-### Stage 8: Export JSON + Intelligence
-```bash
-python3 pipeline/exporters/export_json.py
-python3 pipeline/smart_refresh.py --phase intelligence
-```
-Regenerate all frontend JSON. Run intelligence phase after to rebuild analytics.
-
-### Stage 9: Data Quality Checks
-After export, verify:
-- `frontend/public/data/projects/bess/*.json` — spot check 3–5 large BESS projects for correct status
-- `frontend/public/data/metadata/sources.json` — confirm last_run timestamps updated
-- Check 19 consolidated slugs haven't reappeared as duplicates
-- Confirm `battery-live-records.json` has records up to ~May 2026
-- Confirm Energy Transition Scoreboard has recent regional demand data
-
----
-
-## After the Data Run
-
-### 1. Fix collie-battery overlay
-```json
-// data/projects/bess/collie-battery.json
-"cod_current": "2025-07"  // was "2027"
-```
-
-### 2. Update update-log.json
-File: `frontend/public/data/metadata/update-log.json`
-
-The May 2026 entry (`completed: false`) needs to be filled in with actual results:
-- Set `completed: true`
-- Fill `new_operational` with any newly confirmed operating projects
-- Fill `status_changes` with transitions confirmed during Stage 2
-- Fill `nem_records` with any new NEM records identified
-- Fill `new_projects` with any new projects added to the DB
-- Update `data_quality_notes` with actual findings
-
-### 3. Bump to v2.53.0 and deploy
-```json
-// frontend/package.json
-"version": "2.53.0"
-
-// frontend/public/data/metadata/version.json
-"version": "2.53.0"
-```
-Commit, push to main, CI deploys automatically.
-
----
-
-## Guides Rewrite (Post-Data-Run)
-
-The guides in `frontend/src/data/guides.ts` (or wherever they live — check the file) have not been updated since the database launch and are out of date. After the data run:
-
-1. **Rewrite all guide entries** to reflect current state of NEM (new large BESS, changed market dynamics, etc.)
-2. **Add a "Data Update Process" guide** documenting the 9-stage plan above — this makes it self-referencing and reproducible
-3. **Update the Architecture & Plan guide** to reflect changes made since launch
-4. **Update any guides with March 2026 or earlier data cutoffs** — these will have stale stats/narratives
-5. **Focus guides on what's changed**: large BESS entering service, record battery discharge events, FCAS market evolution, Value Factor cannibalisation trends
-
-To find the guides file:
-```bash
-grep -r "guides" frontend/src --include="*.ts" -l
-grep -r "GuideEntry\|guides:" frontend/src --include="*.ts" -l
+Do not run any actual imports yet — this is a preview only.
 ```
 
 ---
 
-## What Was Done in This Session (Before This Plan)
+### Stage 2 — AEMO Generation Info
 
-- ✅ Completed NEM Constraints Learning Module lessons 4–7 (full interactive content)
-- ✅ Fixed version.json staleness — users were seeing downgrade prompt, not update prompt
-- ✅ Resolved PR merge conflicts for lessons completion
-- ✅ Created `update-log.json` data structure with May 2026 pending entry + April 2026 historical entry
-- ✅ Built `UpdateLogSection` component in `DataSources.tsx` — shows per-update cards with sources refreshed, new operational, status changes, NEM records, data quality notes
+```
+Run the AEMO Generation Info importer. This has no API quota cost and updates project status, capacity, and DUID registrations — it's the source of truth for what's operating.
+
+  python3 pipeline/importers/import_aemo_gen_info.py
+
+After it completes, query the database to check the current status of these 7 BESS projects that had past COD dates and may have transitioned:
+  collie-battery, brendale-bess, liddell-bess, koorangie-ess, tarong-bess, waratah-super-battery, western-downs-battery
+
+For each one, tell me:
+- What status the DB now shows
+- What the overlay file (data/projects/bess/{slug}.json) shows for status and cod_current
+- Whether there's a mismatch that needs fixing
+
+Important: collie-battery is a WA/WEM project — no NEM SCADA data is expected for it. Both its stages were operational July 2025 so cod_current should be "2025-07" not "2027".
+
+After the review, fix any overlay mismatches you find. Do NOT change status fields in overlays — only fix cod_current, capacity, or factual data errors. Status comes from the DB.
+```
+
+---
+
+### Stage 3 — NEMWEB Operational Data
+
+```
+Run the three NEMWEB operational data importers that are NOT in admin.py. These feed battery live records, the BESS 5-min leaderboard, and the Energy Transition Scoreboard. Run them in order:
+
+  python3 pipeline/importers/import_battery_scada.py
+  python3 pipeline/importers/import_bess_5min.py
+  python3 pipeline/importers/import_dispatch_regionsum.py
+
+For each one, report: how many records were imported, what date range they cover, and any errors.
+
+Then check whether these two additional importers exist and have previously been run:
+  pipeline/importers/import_bess_band_capture.py
+  pipeline/importers/import_price_band_capture.py
+
+If they exist, check when they were last run and whether the tables bess_band_capture and price_band_capture have data. If yes, run them too. These feed future Value Factor analysis — the tables exist but aren't yet exported to JSON.
+
+Report the results of all imports before moving on.
+```
+
+---
+
+### Stage 4 — OpenElectricity Performance
+
+```
+Run the OpenElectricity performance importer for three data sets. The OE API has ~500 requests/day on the free plan so run these in one go — do not split across sessions.
+
+  python3 pipeline/importers/import_openelectricity.py --year 2026 --ytd
+  python3 pipeline/importers/import_openelectricity.py --year 2025 --annual
+  python3 pipeline/importers/import_openelectricity.py --year 2026 --monthly
+
+After all three complete, report:
+- Total API calls used across all three runs
+- Record counts imported for each
+- Date range covered
+- Any facilities that failed or returned incomplete data
+
+If the API returns a rate limit error, stop and tell me — do not retry automatically as we may need to wait until tomorrow.
+```
+
+---
+
+### Stage 5 — EPBC Referrals & Coal Monitor
+
+```
+Run the two remaining importers — EPBC referrals (59 days stale) and the coal generation monitor:
+
+  python3 pipeline/importers/import_epbc.py
+  python3 pipeline/importers/import_coal.py
+
+Report record counts and any errors for each.
+```
+
+---
+
+### Stage 6 — NEMWEB BESS Bids
+
+```
+Check how stale the BESS bid data is by looking at the last_run timestamp in the data sources metadata or by querying the bess_daily_bids table for the most recent date.
+
+If the data is more than 14 days old, run:
+  python3 pipeline/importers/import_nemweb_bids.py
+
+Report what date range is now covered and how many bid records are in the database.
+```
+
+---
+
+### Stage 7 — Export JSON + Intelligence
+
+```
+Now regenerate all frontend JSON from the updated database, then rebuild the intelligence layer:
+
+  python3 pipeline/exporters/export_json.py
+  python3 pipeline/smart_refresh.py --phase intelligence
+
+After both complete:
+1. Check frontend/public/data/metadata/sources.json — confirm last_run timestamps reflect today's imports
+2. Spot-check 5 large BESS projects in frontend/public/data/projects/bess/ — verify status, capacity, and that timeline_events from overlays are still present (overlay data must survive the export)
+3. Check that battery-live-records.json covers dates up to approximately today
+4. Check that the Energy Transition Scoreboard data (dispatch_regionsum output) has recent regional demand data
+
+Report any discrepancies. If overlay data was lost from any project, stop — do not proceed until we understand why.
+```
+
+---
+
+### Stage 8 — Data Quality & NEM Records Check
+
+```
+Perform the following data quality checks and report findings:
+
+1. Consolidated projects: query the database or check the export to confirm the 19 slugs in pipeline/config/consolidated_projects.json have NOT reappeared as duplicates in the project listing
+
+2. BESS status summary: count how many BESS projects are now in each status (operating, commissioning, construction, approved, proposed) and compare to what we'd expect given the 7 projects reviewed in Stage 2
+
+3. NEM records check: query the battery_daily_scada and bess_5min tables to find the all-time maximums for:
+   - Max 5-min battery discharge (NEM-wide)
+   - Max 5-min battery charge (NEM-wide)
+   - Max daily battery discharge (NEM-wide)
+   - Max daily battery charge (NEM-wide)
+   
+   The previous records (as at April 2026) were:
+   - 3,675 MW discharge on 2026-01-25
+   - 2,906.2 MW charge on 2026-04-02
+   - 16,001.1 MWh daily discharge on 2026-04-13
+   - 14,497 MWh daily charge on 2026-04-13
+   
+   Report whether any of these have been broken since April 2026, and if so, the new record value and date.
+
+4. Report anything unexpected you found during the export — missing data, schema changes, import errors that affected output.
+```
+
+---
+
+### Stage 9 — Update Log, Version Bump & Deploy
+
+```
+We're now ready to record the update and deploy. Do the following steps in order:
+
+1. Update frontend/public/data/metadata/update-log.json:
+   - Find the May 2026 entry (version "2.53.0", completed: false)
+   - Set completed: true
+   - Fill new_operational with any BESS/wind/solar projects confirmed as newly operating in this run
+   - Fill status_changes with the transitions found in Stage 2 (e.g. commissioning → operating)
+   - Fill nem_records with any new NEM records found in Stage 8 (keep existing ones if not broken)
+   - Update data_quality_notes with a 2-3 sentence summary of findings from this run
+   
+2. Bump the version to 2.53.0 in both:
+   - frontend/package.json  ("version": "2.53.0")
+   - frontend/public/data/metadata/version.json  ("version": "2.53.0")
+
+3. Commit all changed files with a clear message summarising what was updated (data sources, new operational projects, any NEM records). Push to main.
+
+4. Confirm the git push succeeded and tell me the commit hash. The CI/CD pipeline (GitHub Actions) will deploy automatically.
+
+Do not push until you've confirmed the update-log.json looks correct — read it back to me before committing.
+```
+
+---
+
+## Guides Rewrite (Separate Session After Data Run)
+
+The guides have not been updated since the database launched and contain stale narratives and statistics. Run this as a separate Claude Code session after the data run is confirmed deployed.
+
+### Guides Rewrite Prompt
+
+```
+Read DATA_UPDATE_PLAN.md first for context on what changed in the May 2026 data run.
+
+We need to do a complete rewrite of the AURES guides. First, find the guides data file:
+  grep -r "GuideEntry\|guides:" frontend/src --include="*.ts" -l
+
+Read the file and list all existing guide entries with their titles and a one-line summary of what each covers.
+
+Then work through each guide and:
+1. Identify any statistics, project counts, or NEM metrics that are now out of date
+2. Identify any references to "upcoming" projects that are now operating
+3. Flag any sections that don't reflect the current state of the NEM (e.g. battery storage has scaled enormously, Value Factor cannibalisation is now a major issue)
+
+Give me the full list of changes needed before making any edits. We'll review and approve before you start rewriting.
+
+Also: add a new guide entry titled "Data Update Process" that documents the 9-stage monthly data refresh pipeline (the process described in DATA_UPDATE_PLAN.md) — this makes the process self-documenting for future reference.
+```
+
+---
+
+## What Was Completed Before This Plan
+
+- ✅ NEM Constraints Learning Module lessons 4–7 (full interactive content)
+- ✅ Fixed version.json staleness causing broken update notifications
+- ✅ Resolved PR merge conflicts
+- ✅ Created `update-log.json` data structure with May 2026 pending + April 2026 historical entries
+- ✅ Built `UpdateLogSection` component in `DataSources.tsx`
 - ✅ Deployed as v2.52.1
 
 ## What Is NOT Done
 
-- ❌ The actual data run (runs on Travis's Mac, not this server)
+- ❌ The actual data run (stages 1–9 above)
+- ❌ collie-battery `cod_current` correction (handled in Stage 2 prompt)
 - ❌ Add export functions to `export_json.py` for `bess_band_capture`/`price_band_capture` tables
 - ❌ Guides rewrite
-- ❌ collie-battery `cod_current` correction (do alongside data run)
 
 ---
 
 ## Key NEM Records Known at Time of Writing
 
-These are in `update-log.json` and the UI already shows them:
+These are in `update-log.json` and displayed in the UI. Verify in Stage 8 whether they've been broken.
 
 | Metric | Value | Date |
 |--------|-------|------|
@@ -245,8 +350,6 @@ These are in `update-log.json` and the UI already shows them:
 | Max 5-min battery charge (NEM) | 2,906.2 MW | 2026-04-02 |
 | Max daily battery discharge (NEM) | 16,001.1 MWh | 2026-04-13 |
 | Max daily battery charge (NEM) | 14,497 MWh | 2026-04-13 |
-
-These may have been broken again — check NEMWEB during Stage 3/4 of the data run.
 
 ---
 
@@ -261,8 +364,8 @@ These may have been broken again — check NEMWEB during Stage 3/4 of the data r
 | `data/projects/bess/*.json` | BESS overlay files (hand-curated, don't bulk overwrite) |
 | `data/projects/wind/*.json` | Wind overlay files |
 | `data/projects/solar/*.json` | Solar overlay files |
-| `frontend/public/data/metadata/update-log.json` | Data update log (fill in after each run) |
+| `frontend/public/data/metadata/update-log.json` | Data update log (fill in Stage 9) |
 | `frontend/public/data/metadata/version.json` | Must match package.json version |
-| `frontend/package.json` | Bump version here before deploying |
+| `frontend/package.json` | Bump version here in Stage 9 |
 | `frontend/src/pages/DataSources.tsx` | Data Sources page incl. UpdateLogSection component |
 | `frontend/src/hooks/useVersion.ts` | Update notification logic |
