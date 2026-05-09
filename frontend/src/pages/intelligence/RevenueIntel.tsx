@@ -2,9 +2,9 @@ import { useState, useEffect, useMemo } from 'react'
 import { Link } from 'react-router-dom'
 import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip,
-  ResponsiveContainer, LineChart, Line, Legend, Cell,
+  ResponsiveContainer, LineChart, Line, Legend, Cell, ReferenceLine,
 } from 'recharts'
-import { fetchRevenueIntel } from '../../lib/dataService'
+import { fetchRevenueIntel, fetchWindValue, fetchSolarValue } from '../../lib/dataService'
 import ChartWrapper from '../../components/common/ChartWrapper'
 import DataTable from '../../components/common/DataTable'
 import DrillPanel from '../../components/common/DrillPanel'
@@ -43,7 +43,7 @@ const ShieldIcon = () => (
 // Section navigation
 // ============================================================
 
-type SectionId = 'overview' | 'state-breakdown' | 'trouble' | 'magnitude'
+type SectionId = 'overview' | 'state-breakdown' | 'trouble' | 'magnitude' | 'value-factor'
 
 const StateIcon = () => (
   <svg className="w-4 h-4" viewBox="0 0 20 20" fill="currentColor">
@@ -63,11 +63,18 @@ const ChartBarIcon = () => (
   </svg>
 )
 
+const SparkleIcon = () => (
+  <svg className="w-4 h-4" viewBox="0 0 20 20" fill="currentColor">
+    <path fillRule="evenodd" d="M5 2a1 1 0 011 1v1h1a1 1 0 010 2H6v1a1 1 0 01-2 0V6H3a1 1 0 010-2h1V3a1 1 0 011-1zm0 10a1 1 0 011 1v1h1a1 1 0 110 2H6v1a1 1 0 11-2 0v-1H3a1 1 0 110-2h1v-1a1 1 0 011-1zM12 2a1 1 0 01.967.744L14.146 7.2 17.5 9.134a1 1 0 010 1.732l-3.354 1.935-1.18 4.455a1 1 0 01-1.933 0L9.854 12.8 6.5 10.866a1 1 0 010-1.732l3.354-1.935 1.18-4.455A1 1 0 0112 2z" clipRule="evenodd" />
+  </svg>
+)
+
 const REV_SECTIONS: { id: SectionId; label: string; icon: React.ReactNode }[] = [
   { id: 'overview', label: 'Overview', icon: <DollarIcon /> },
   { id: 'state-breakdown', label: 'State Leaders', icon: <StateIcon /> },
   { id: 'trouble', label: 'Revenue Pressure', icon: <AlertIcon /> },
   { id: 'magnitude', label: 'Fleet Revenue', icon: <ChartBarIcon /> },
+  { id: 'value-factor', label: 'Value Factor', icon: <SparkleIcon /> },
 ]
 
 // ============================================================
@@ -122,6 +129,19 @@ export default function RevenueIntel() {
   useEffect(() => {
     fetchRevenueIntel().then(d => { setData(d); setLoading(false) })
   }, [])
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const [vfData, setVfData] = useState<{ wind: any; solar: any } | null>(null)
+  const [vfLoading, setVfLoading] = useState(false)
+
+  useEffect(() => {
+    if (activeSection !== 'value-factor' || vfData) return
+    setVfLoading(true)
+    Promise.all([fetchWindValue(), fetchSolarValue()]).then(([windResult, solarResult]) => {
+      setVfData({ wind: windResult, solar: solarResult })
+      setVfLoading(false)
+    })
+  }, [activeSection, vfData])
 
   // ---- Derived data ----
 
@@ -673,6 +693,15 @@ export default function RevenueIntel() {
         <FleetRevenueMagnitudeSection data={data.revenue_magnitude_trends} />
       )}
 
+      {/* ============================================================ */}
+      {/* Value Factor Intel Section */}
+      {/* ============================================================ */}
+      {activeSection === 'value-factor' && (
+        vfLoading
+          ? <div className="flex items-center justify-center h-64"><div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500" /></div>
+          : <ValueFactorSection wind={vfData?.wind ?? null} solar={vfData?.solar ?? null} />
+      )}
+
       {/* Drill-down panel — opens when a Revenue by Tech bar is clicked */}
       <DrillPanel
         open={drill !== null}
@@ -1052,6 +1081,221 @@ function RevenuePressureSection({ projects }: { projects: RevenueProjectRanking[
           <p className="text-sm text-[var(--color-text-muted)]">No projects found.</p>
         )}
       </DrillPanel>
+    </div>
+  )
+}
+
+// ============================================================
+// Value Factor Intel Section
+// ============================================================
+
+function ValueFactorSection({
+  wind, solar,
+}: {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  wind: any;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  solar: any;
+}) {
+  const vfTrendData = useMemo(() => {
+    const years = [2024, 2025, 2026]
+    return years.map(year => {
+      const yStr = String(year)
+      let windSum = 0, windCount = 0
+      let solarSum = 0, solarCount = 0
+      if (wind?.projects) {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        for (const proj of Object.values(wind.projects) as any[]) {
+          if (!proj.monthly_data) continue
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          for (const m of proj.monthly_data as any[]) {
+            if (m.value_factor == null) continue
+            if (String(m.month).startsWith(yStr)) { windSum += m.value_factor; windCount++ }
+          }
+        }
+      }
+      if (solar?.projects) {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        for (const proj of Object.values(solar.projects) as any[]) {
+          if (!proj.monthly_data) continue
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          for (const m of proj.monthly_data as any[]) {
+            if (m.value_factor == null) continue
+            if (String(m.month).startsWith(yStr)) { solarSum += m.value_factor; solarCount++ }
+          }
+        }
+      }
+      return {
+        year: yStr,
+        wind: windCount > 0 ? windSum / windCount : null,
+        solar: solarCount > 0 ? solarSum / solarCount : null,
+      }
+    }).filter(d => d.wind != null || d.solar != null)
+  }, [wind, solar])
+
+  const stateVfData = useMemo(() => {
+    const states = ['NSW', 'VIC', 'SA', 'QLD', 'TAS']
+    return states.map(state => ({
+      state,
+      wind: (wind?.state_averages?.[state]?.avg_value_factor as number | undefined) ?? null,
+      solar: (solar?.state_averages?.[state]?.avg_value_factor as number | undefined) ?? null,
+    })).filter(d => d.wind != null || d.solar != null)
+  }, [wind, solar])
+
+  const vintageData = useMemo(() => {
+    if (!solar?.projects) return []
+    const byVintage: Record<number, { vfSum: number; count: number }> = {}
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    for (const proj of Object.values(solar.projects) as any[]) {
+      if (!proj.cod || proj.value_summary?.avg_value_factor == null) continue
+      const vintage = parseInt(String(proj.cod).slice(0, 4))
+      if (isNaN(vintage) || vintage < 2015 || vintage > 2030) continue
+      if (!byVintage[vintage]) byVintage[vintage] = { vfSum: 0, count: 0 }
+      byVintage[vintage].vfSum += proj.value_summary.avg_value_factor
+      byVintage[vintage].count++
+    }
+    return Object.entries(byVintage)
+      .sort(([a], [b]) => Number(a) - Number(b))
+      .map(([vintage, { vfSum, count }]) => ({ vintage, vf: count > 0 ? vfSum / count : null, count }))
+      .filter(d => d.vf != null)
+  }, [solar])
+
+  if (!wind && !solar) {
+    return <div className="p-6 text-center text-[var(--color-text-muted)]">Value factor data unavailable</div>
+  }
+
+  return (
+    <div className="space-y-6">
+      {/* Explainer */}
+      <div className="bg-amber-500/10 border border-amber-500/30 rounded-xl p-4">
+        <h3 className="text-sm font-semibold text-amber-400 mb-1">Understanding Value Factor &amp; Cannibalisation</h3>
+        <p className="text-xs text-[var(--color-text-muted)]">
+          Value Factor (VF) = capture price ÷ pool average price. VF = 1.0 means pool parity. As solar and wind
+          capacity expands, assets generate at the same times as peers, pushing spot prices down and compressing
+          VF — this is cannibalisation. Solar is most affected (VF typically 0.3–0.6); wind stays closer to
+          parity (0.8–0.9). State-level VF varies significantly with grid mix.
+        </p>
+      </div>
+
+      {/* Chart 1: Wind vs Solar VF Trend */}
+      <div className="bg-[var(--color-bg-card)] rounded-xl p-4 border border-[var(--color-border)]">
+        <h2 className="text-lg font-semibold text-[var(--color-text)] mb-1">Wind vs Solar Value Factor Trend</h2>
+        <p className="text-xs text-[var(--color-text-muted)] mb-4">
+          Fleet-average value factor by year. 2024 covers Aug–Dec only (NEMWEB pool prices available from Aug 2024).
+        </p>
+        <ChartWrapper title="VF Trend" data={vfTrendData} csvColumns={['year', 'wind', 'solar']}>
+          <ResponsiveContainer width="100%" height={300}>
+            <LineChart data={vfTrendData} margin={{ top: 5, right: 20, bottom: 5, left: 20 }}>
+              <CartesianGrid strokeDasharray="3 3" stroke="var(--color-border)" />
+              <XAxis dataKey="year" tick={{ fill: 'var(--color-text-muted)', fontSize: 12 }} />
+              <YAxis
+                domain={[0, 1.15]}
+                tick={{ fill: 'var(--color-text-muted)', fontSize: 12 }}
+                tickFormatter={(v) => Number(v).toFixed(2)}
+              />
+              <Tooltip
+                contentStyle={{ backgroundColor: 'var(--color-bg)', border: '1px solid var(--color-border)', borderRadius: '8px' }}
+                labelStyle={{ color: 'var(--color-text)' }}
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                formatter={(value: any, name: any) => [
+                  value != null ? Number(value).toFixed(3) : '—',
+                  name === 'wind' ? 'Wind VF' : 'Solar VF',
+                ]}
+              />
+              <Legend
+                wrapperStyle={{ fontSize: '12px', color: 'var(--color-text-muted)' }}
+                formatter={(value) => value === 'wind' ? 'Wind' : value === 'solar' ? 'Solar' : value}
+              />
+              <ReferenceLine y={1.0} stroke="#6b7280" strokeDasharray="4 4" label={{ value: 'Pool parity', fill: '#6b7280', fontSize: 10, position: 'insideTopRight' }} />
+              <Line type="monotone" dataKey="wind" stroke="#3b82f6" strokeWidth={2.5} dot={{ fill: '#3b82f6', r: 5 }} connectNulls />
+              <Line type="monotone" dataKey="solar" stroke="#f59e0b" strokeWidth={2.5} dot={{ fill: '#f59e0b', r: 5 }} connectNulls />
+            </LineChart>
+          </ResponsiveContainer>
+        </ChartWrapper>
+      </div>
+
+      {/* Chart 2: State Cannibalisation Index */}
+      <div className="bg-[var(--color-bg-card)] rounded-xl p-4 border border-[var(--color-border)]">
+        <h2 className="text-lg font-semibold text-[var(--color-text)] mb-1">State Cannibalisation Index</h2>
+        <p className="text-xs text-[var(--color-text-muted)] mb-4">
+          Average value factor by state and technology. Lower = more cannibalisation pressure from fleet penetration.
+        </p>
+        <ChartWrapper title="State Cannibalisation Index" data={stateVfData} csvColumns={['state', 'wind', 'solar']}>
+          <ResponsiveContainer width="100%" height={Math.max(240, stateVfData.length * 50)}>
+            <BarChart data={stateVfData} layout="vertical" margin={{ top: 5, right: 40, bottom: 5, left: 40 }}>
+              <CartesianGrid strokeDasharray="3 3" stroke="var(--color-border)" />
+              <XAxis
+                type="number"
+                domain={[0, 1.15]}
+                tickFormatter={(v) => Number(v).toFixed(1)}
+                tick={{ fill: 'var(--color-text-muted)', fontSize: 11 }}
+              />
+              <YAxis type="category" dataKey="state" tick={{ fill: 'var(--color-text-muted)', fontSize: 12 }} width={35} />
+              <Tooltip
+                contentStyle={{ backgroundColor: 'var(--color-bg)', border: '1px solid var(--color-border)', borderRadius: '8px' }}
+                labelStyle={{ color: 'var(--color-text)' }}
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                formatter={(value: any, name: any) => [
+                  value != null ? Number(value).toFixed(3) : '—',
+                  name === 'wind' ? 'Wind VF' : 'Solar VF',
+                ]}
+              />
+              <Legend wrapperStyle={{ fontSize: '12px' }} formatter={(value) => value === 'wind' ? 'Wind' : 'Solar'} />
+              <ReferenceLine x={1.0} stroke="#6b7280" strokeDasharray="4 4" />
+              <Bar dataKey="wind" name="wind" fill="#3b82f6" radius={[0, 4, 4, 0]} barSize={10} />
+              <Bar dataKey="solar" name="solar" fill="#f59e0b" radius={[0, 4, 4, 0]} barSize={10} />
+            </BarChart>
+          </ResponsiveContainer>
+        </ChartWrapper>
+        <div className="mt-3 p-3 bg-[var(--color-bg)]/50 border border-[var(--color-border)] rounded-lg">
+          <p className="text-xs text-[var(--color-text-muted)]">
+            <span className="font-semibold text-amber-400">SA Solar</span> has the lowest VF due to extremely high solar penetration in South Australia.
+            {' '}<span className="font-semibold text-blue-400">QLD Wind</span> exceeds pool parity (VF &gt; 1.0), benefiting from favourable timing relative to peak demand.
+          </p>
+        </div>
+      </div>
+
+      {/* Chart 3: Solar VF by Vintage */}
+      {vintageData.length > 0 && (
+        <div className="bg-[var(--color-bg-card)] rounded-xl p-4 border border-[var(--color-border)]">
+          <h2 className="text-lg font-semibold text-[var(--color-text)] mb-1">Solar Value Factor by Vintage (COD Year)</h2>
+          <p className="text-xs text-[var(--color-text-muted)] mb-4">
+            Average VF grouped by year of commissioning. Later cohorts commissioned into a more saturated grid typically show lower VF.
+          </p>
+          <ChartWrapper title="Solar VF by Vintage" data={vintageData} csvColumns={['vintage', 'vf', 'count']}>
+            <ResponsiveContainer width="100%" height={280}>
+              <BarChart data={vintageData} margin={{ top: 5, right: 20, bottom: 5, left: 20 }}>
+                <CartesianGrid strokeDasharray="3 3" stroke="var(--color-border)" />
+                <XAxis dataKey="vintage" tick={{ fill: 'var(--color-text-muted)', fontSize: 12 }} />
+                <YAxis
+                  domain={[0, 0.75]}
+                  tick={{ fill: 'var(--color-text-muted)', fontSize: 12 }}
+                  tickFormatter={(v) => Number(v).toFixed(2)}
+                />
+                <Tooltip
+                  contentStyle={{ backgroundColor: 'var(--color-bg)', border: '1px solid var(--color-border)', borderRadius: '8px' }}
+                  labelStyle={{ color: 'var(--color-text)' }}
+                  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                  formatter={(value: any, _name: any, props: any) => [
+                    `${Number(value).toFixed(3)} (${props.payload?.count ?? 0} projects)`,
+                    'Avg Value Factor',
+                  ]}
+                />
+                <Bar dataKey="vf" name="Avg VF" radius={[4, 4, 0, 0]}>
+                  {vintageData.map((d, i) => {
+                    const vf = d.vf ?? 0
+                    const fill = vf >= 0.5 ? '#10b981' : vf >= 0.35 ? '#f59e0b' : '#ef4444'
+                    return <Cell key={i} fill={fill} />
+                  })}
+                </Bar>
+              </BarChart>
+            </ResponsiveContainer>
+          </ChartWrapper>
+          <p className="text-xs text-[var(--color-text-muted)] mt-2 italic">
+            Colour: green ≥ 0.50 · amber ≥ 0.35 · red &lt; 0.35
+          </p>
+        </div>
+      )}
     </div>
   )
 }

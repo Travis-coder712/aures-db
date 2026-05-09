@@ -46,7 +46,9 @@ export default defineConfig({
         ]
       },
       workbox: {
-        globPatterns: ['**/*.{js,css,html,ico,png,svg,json}'],
+        // Precache only app shell assets — data/ JSONs are served via runtimeCaching below
+        globPatterns: ['**/*.{js,css,html,ico,png,svg}'],
+        globIgnores: ['**/data/**'],
         maximumFileSizeToCacheInBytes: 5 * 1024 * 1024,
         // Ensure SW responds to SKIP_WAITING messages from the app
         skipWaiting: true,
