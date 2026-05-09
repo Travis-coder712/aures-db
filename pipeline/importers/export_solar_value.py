@@ -58,19 +58,16 @@ STATE_TO_REGION = {v: k for k, v in REGION_TO_STATE.items()}
 
 def load_solar_projects(conn) -> List[dict]:
     rows = conn.execute("""
-        SELECT p.id, p.name, p.state, p.capacity_mw, p.cod,
-               COALESCE(p.region, ?) as region
+        SELECT p.id, p.name, p.state, p.capacity_mw, p.cod_current as cod
         FROM projects p
         WHERE p.technology = 'solar' AND p.status = 'operating'
           AND p.capacity_mw IS NOT NULL AND p.capacity_mw > 0
         ORDER BY p.state, p.name
-    """, ('',)).fetchall()
+    """).fetchall()
     result = []
     for r in rows:
         d = dict(r)
-        # Infer region from state if missing
-        if not d['region'] and d['state']:
-            d['region'] = STATE_TO_REGION.get(d['state'], '')
+        d['region'] = STATE_TO_REGION.get(d['state'] or '', '')
         result.append(d)
     return result
 

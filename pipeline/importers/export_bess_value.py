@@ -50,8 +50,7 @@ STATE_TO_REGION = {v: k for k, v in REGION_TO_STATE.items()}
 
 def load_bess_projects(conn) -> List[dict]:
     rows = conn.execute("""
-        SELECT p.id, p.name, p.state, p.capacity_mw, p.storage_mwh, p.cod,
-               COALESCE(p.region, '') as region
+        SELECT p.id, p.name, p.state, p.capacity_mw, p.storage_mwh, p.cod_current as cod
         FROM projects p
         WHERE p.technology = 'bess' AND p.status = 'operating'
           AND p.capacity_mw IS NOT NULL AND p.capacity_mw > 0
@@ -60,8 +59,7 @@ def load_bess_projects(conn) -> List[dict]:
     result = []
     for r in rows:
         d = dict(r)
-        if not d['region'] and d['state']:
-            d['region'] = STATE_TO_REGION.get(d['state'], '')
+        d['region'] = STATE_TO_REGION.get(d['state'] or '', '')
         # Compute duration
         if d['capacity_mw'] and d['storage_mwh']:
             d['duration_h'] = round(d['storage_mwh'] / d['capacity_mw'], 2)
