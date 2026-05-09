@@ -23,8 +23,13 @@ database/*.db
 database/*.db-shm
 database/*.db-wal
 database/*.sqlite
+database/*.bak*
+database/*.db.bak*
 
 # Python
 __pycache__/
 *.pyc
 .venv/
+
+# NEMWEB cache (large, regenerable)
+data/nemweb_cache/
