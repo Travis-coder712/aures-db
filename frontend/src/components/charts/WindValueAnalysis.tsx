@@ -79,11 +79,16 @@ export default function WindValueAnalysis({ projectId }: Props) {
   const [showPdf, setShowPdf] = useState(false)
 
   const handleExportPdf = useCallback(async () => {
-    if (!project || !pdfRef.current) return
+    if (!project) return
     setPdfLoading(true)
     setShowPdf(true)
-    // Give browser a frame to mount + paint the element at opacity:0
+    // Wait for React to mount the hidden PDF div and the browser to paint it
     await new Promise(r => setTimeout(r, 600))
+    if (!pdfRef.current) {
+      setShowPdf(false)
+      setPdfLoading(false)
+      return
+    }
     try {
       await exportElementToPdf(pdfRef.current, {
         filename: `${project.name.replace(/\s+/g, '_')}_wind_value_analysis`,
