@@ -1632,14 +1632,14 @@ const NEM_PRICE_SHAPE = [
   88, 100, 92, 78, 62, 52, // 6pm–11pm: evening peak, late decline
 ]
 
+// Labels must match import_price_band_capture.py PRICE_BANDS
 const PRICE_BANDS = [
-  { label: '< $0',        min: -Infinity, max: 0,   color: '#7c3aed' },
-  { label: '$0–$50',      min: 0,         max: 50,  color: '#3b82f6' },
-  { label: '$50–$100',    min: 50,        max: 100, color: '#22c55e' },
-  { label: '$100–$150',   min: 100,       max: 150, color: '#f59e0b' },
-  { label: '$150–$200',   min: 150,       max: 200, color: '#f97316' },
-  { label: '$200–$300',   min: 200,       max: 300, color: '#ef4444' },
-  { label: '> $300',      min: 300,       max: Infinity, color: '#991b1b' },
+  { label: 'negative',   dbLabel: 'negative',   min: -Infinity, max: 0,    color: '#7c3aed', display: '< $0'      },
+  { label: '$0–$50',     dbLabel: '$0-50',       min: 0,         max: 50,   color: '#3b82f6', display: '$0–$50'    },
+  { label: '$50–$100',   dbLabel: '$50-100',     min: 50,        max: 100,  color: '#22c55e', display: '$50–$100'  },
+  { label: '$100–$300',  dbLabel: '$100-300',    min: 100,       max: 300,  color: '#f59e0b', display: '$100–$300' },
+  { label: '$300–$1k',   dbLabel: '$300-1000',   min: 300,       max: 1000, color: '#f97316', display: '$300–$1k'  },
+  { label: '> $1000',    dbLabel: '$1000+',      min: 1000,      max: Infinity, color: '#ef4444', display: '> $1000'  },
 ]
 
 type PoolPrices = Record<string, Record<string, number>>
@@ -1650,37 +1650,37 @@ function bandFor(price: number) {
 
 function computePriceBandDist(monthly: import('../../lib/types').WindMonthlyDataPoint[]) {
   const totals: Record<string, { energy: number }> = {}
-  PRICE_BANDS.forEach(b => { totals[b.label] = { energy: 0 } })
+  PRICE_BANDS.forEach(b => { totals[b.display] = { energy: 0 } })
   let totalEnergy = 0
   monthly.forEach(m => {
     if (m.capture_price == null || m.energy_mwh == null || m.energy_mwh <= 0) return
     const b = bandFor(m.capture_price)
-    totals[b.label].energy += m.energy_mwh
+    totals[b.display].energy += m.energy_mwh
     totalEnergy += m.energy_mwh
   })
   return PRICE_BANDS.map(b => ({
-    label: b.label,
+    label: b.display,
     color: b.color,
-    pct: totalEnergy > 0 ? (totals[b.label].energy / totalEnergy) * 100 : 0,
+    pct: totalEnergy > 0 ? (totals[b.display].energy / totalEnergy) * 100 : 0,
   }))
 }
 
 function computeFleetPriceBandDist(projects: import('../../lib/types').WindValueProject[]) {
   const totals: Record<string, number> = {}
-  PRICE_BANDS.forEach(b => { totals[b.label] = 0 })
+  PRICE_BANDS.forEach(b => { totals[b.display] = 0 })
   let totalEnergy = 0
   projects.forEach(p => {
     p.monthly_data.forEach(m => {
       if (m.capture_price == null || m.energy_mwh == null || m.energy_mwh <= 0) return
       const b = bandFor(m.capture_price)
-      totals[b.label] += m.energy_mwh
+      totals[b.display] += m.energy_mwh
       totalEnergy += m.energy_mwh
     })
   })
   return PRICE_BANDS.map(b => ({
-    label: b.label,
+    label: b.display,
     color: b.color,
-    pct: totalEnergy > 0 ? (totals[b.label] / totalEnergy) * 100 : 0,
+    pct: totalEnergy > 0 ? (totals[b.display] / totalEnergy) * 100 : 0,
   }))
 }
 
@@ -1704,15 +1704,45 @@ function PriceBandTab({
     pool_price: m.pool_price ?? statePricesByMonth[`${m.year}-${String(m.month).padStart(2, '0')}`] ?? null,
   }))
 
-  // Price band distributions
-  const farmBands = computePriceBandDist(monthly)
+  // Price band distributions — prefer real 5-min NEMWEB data, fall back to synthetic
+  const realBandData = project.price_band_data
+  const dataSource = realBandData ? '5min_nemweb' : 'monthly_proxy'
+
+  const farmBands: Array<{ label: string; color: string; pct: number; avgPrice: number | null }> = (() => {
+    if (realBandData) {
+      // Aggregate across all covered months from real 5-min data
+      const totals: Record<string, { gen_mwh: number; price_sum: number }> = {}
+      PRICE_BANDS.forEach(b => { totals[b.dbLabel] = { gen_mwh: 0, price_sum: 0 } })
+      let totalMwh = 0
+      Object.values(realBandData.monthly).forEach(bands => {
+        bands.forEach(b => {
+          if (totals[b.label]) {
+            totals[b.label].gen_mwh += b.gen_mwh
+            totals[b.label].price_sum += (b.avg_price ?? 0) * b.gen_mwh
+            totalMwh += b.gen_mwh
+          }
+        })
+      })
+      return PRICE_BANDS.map(b => ({
+        label: b.display,
+        color: b.color,
+        pct: totalMwh > 0 ? (totals[b.dbLabel].gen_mwh / totalMwh) * 100 : 0,
+        avgPrice: totals[b.dbLabel].gen_mwh > 0
+          ? totals[b.dbLabel].price_sum / totals[b.dbLabel].gen_mwh
+          : null,
+      }))
+    }
+    return computePriceBandDist(monthly).map(b => ({ ...b, avgPrice: null }))
+  })()
+
   const fleetBands = computeFleetPriceBandDist(allStateProjects)
   const bandData = farmBands.map((f, i) => ({
     label: f.label,
     color: f.color,
     farm: Number(f.pct.toFixed(1)),
-    fleet: Number(fleetBands[i].pct.toFixed(1)),
-    diff: Number((f.pct - fleetBands[i].pct).toFixed(1)),
+    fleet: Number(fleetBands[i]?.pct.toFixed(1) ?? '0'),
+    diff: Number((f.pct - (fleetBands[i]?.pct ?? 0)).toFixed(1)),
+    avgPrice: f.avgPrice,
   }))
 
   // Monthly premium/discount (where pool_price exists)
@@ -1751,7 +1781,7 @@ function PriceBandTab({
     monthly.filter(m => m.month === Number(mo) && m.capture_price != null && m.energy_mwh)
       .forEach(m => {
         const b = bandFor(m.capture_price!)
-        acc[season].bands[b.label] = (acc[season].bands[b.label] ?? 0) + (m.energy_mwh ?? 0)
+        acc[season].bands[b.display] = (acc[season].bands[b.display] ?? 0) + (m.energy_mwh ?? 0)
         acc[season].energy += (m.energy_mwh ?? 0)
         acc[season].count++
       })
@@ -1781,23 +1811,32 @@ function PriceBandTab({
       <div className="bg-violet-500/5 border border-violet-500/20 rounded-lg p-3">
         <p className="text-[11px] text-[var(--color-text-muted)] leading-relaxed">
           <strong className="text-[var(--color-text)]">Price band analysis</strong> shows <em>when</em> this farm generates relative to the NEM spot price.
-          A farm that consistently generates during high-price periods is worth more than its raw volume suggests.
-          Bands use each month&apos;s average capture price — interval-level $5 precision requires 5-min AEMO dispatch data.
+          A farm that consistently generates during high-price periods earns more revenue per MWh.
+          {dataSource === '5min_nemweb'
+            ? <> Data sourced from <strong className="text-violet-400">5-min AEMO DISPATCHLOAD × DISPATCHPRICE correlation</strong> — exact interval-level accuracy. Coverage: {realBandData?.coverage_start} to {realBandData?.coverage_end}.</>
+            : <> Using monthly average capture price as a proxy — run <code className="text-[10px] bg-[var(--color-bg-elevated)] px-1 rounded">import_price_band_capture.py</code> for 5-min interval accuracy.</>
+          }
         </p>
       </div>
 
       {/* Price band distribution: farm vs fleet */}
       <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl p-3">
-        <p className="text-[10px] font-medium text-[var(--color-text-muted)] mb-3 uppercase tracking-wider flex items-center">
+        <p className="text-[10px] font-medium text-[var(--color-text-muted)] mb-3 uppercase tracking-wider flex items-center gap-2">
           Generation by Price Band — Farm vs {project.state} Fleet
+          {dataSource === '5min_nemweb' && (
+            <span className="text-[8px] font-semibold px-1.5 py-0.5 rounded bg-violet-500/20 text-violet-300 normal-case tracking-normal">5-min exact</span>
+          )}
           <ChartInfo>
             <p style={{color:'#f1f5f9',fontWeight:600,marginBottom:4}}>Price band distribution</p>
-            Each bar = % of total MWh generated (by this farm, and by all {project.state} wind farms) during months
-            where the average capture price fell in that band. A farm skewed toward higher price bands earns more revenue
-            per MWh — it&apos;s effectively a self-selecting revenue hedge.<br/><br/>
-            <strong style={{color:'#f59e0b'}}>Methodology:</strong> Uses monthly average capture price per farm.
-            Interval-level ($5 band) analysis would require 5-min AEMO dispatch correlated with generation — not
-            yet in the pipeline.
+            {dataSource === '5min_nemweb'
+              ? <>Each bar = % of total MWh generated at each price regime, computed by correlating this farm&apos;s
+                5-min AEMO dispatch with the 5-min regional spot price (RRP) for every interval in the coverage period.
+                This is exact — no approximation. Fleet bar uses monthly-average proxy as 5-min data is only available per-farm.</>
+              : <>Each bar = % of total MWh generated during months where the average capture price fell in that band.
+                This is a proxy — run import_price_band_capture.py to replace with 5-min exact data.</>
+            }
+            <br/><br/>
+            A farm skewed toward higher price bands earns more revenue per MWh — an effective self-selecting revenue hedge.
           </ChartInfo>
         </p>
         <div className="space-y-2">
@@ -1807,9 +1846,14 @@ function PriceBandTab({
               <div key={d.label}>
                 <div className="flex items-center justify-between mb-0.5">
                   <span className="text-[10px] text-[var(--color-text-muted)] w-20 shrink-0">{d.label}</span>
-                  <span className={`text-[9px] font-semibold ml-2 ${d.diff > 1 ? 'text-green-400' : d.diff < -1 ? 'text-red-400' : 'text-[var(--color-text-muted)]'}`}>
-                    {d.diff > 0 ? '+' : ''}{d.diff}%
-                  </span>
+                  <div className="flex items-center gap-2 ml-2">
+                    {d.avgPrice != null && (
+                      <span className="text-[9px] font-mono text-[var(--color-text-muted)]">avg ${d.avgPrice.toFixed(0)}</span>
+                    )}
+                    <span className={`text-[9px] font-semibold ${d.diff > 1 ? 'text-green-400' : d.diff < -1 ? 'text-red-400' : 'text-[var(--color-text-muted)]'}`}>
+                      {d.diff > 0 ? '+' : ''}{d.diff}%
+                    </span>
+                  </div>
                 </div>
                 <div className="space-y-0.5">
                   <div className="flex items-center gap-1.5">
@@ -1832,7 +1876,8 @@ function PriceBandTab({
           })}
         </div>
         <p className="text-[9px] text-[var(--color-text-muted)] mt-2 italic">
-          Bright bar = this farm. Faded bar = {project.state} fleet avg. Green/red diff = farm vs fleet skew.
+          Bright = this farm. Faded = {project.state} fleet avg. Green/red diff = farm vs fleet skew.
+          {dataSource === '5min_nemweb' && ' Avg price shown per band when generating.'}
         </p>
       </div>
 
@@ -1956,12 +2001,12 @@ function PriceBandTab({
               <div key={season} className="space-y-1">
                 <p className="text-[10px] font-semibold" style={{ color: conf.color }}>{conf.icon} {conf.label}</p>
                 {PRICE_BANDS.map(b => {
-                  const pct = sd.energy > 0 ? ((sd.bands[b.label] ?? 0) / sd.energy * 100) : 0
+                  const pct = sd.energy > 0 ? ((sd.bands[b.display] ?? 0) / sd.energy * 100) : 0
                   if (pct < 0.5) return null
                   return (
-                    <div key={b.label} className="flex items-center gap-1">
+                    <div key={b.display} className="flex items-center gap-1">
                       <div className="w-2 h-2 rounded-sm shrink-0" style={{ backgroundColor: b.color }} />
-                      <span className="text-[9px] text-[var(--color-text-muted)] flex-1 truncate">{b.label}</span>
+                      <span className="text-[9px] text-[var(--color-text-muted)] flex-1 truncate">{b.display}</span>
                       <span className="text-[9px] font-mono text-[var(--color-text)]">{pct.toFixed(0)}%</span>
                     </div>
                   )
