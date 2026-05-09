@@ -92,31 +92,37 @@ const UNDER_CONSTRUCTION_FEATURES = [
     icon: '\u{1F4CA}',
     title: 'COD Drift Analysis',
     description: 'Aggregate delay patterns by technology, state, and developer',
+    route: '/intelligence/drift-analysis',
   },
   {
     icon: '\u{1F3D7}️',
     title: 'Developer Execution',
     description: 'Track record ratings for project delivery reliability',
+    route: '/intelligence/developer-scores',
   },
   {
     icon: '\u{1F5D3}️',
     title: 'Project Timeline',
     description: 'Gantt-style development, construction, and operations timeline across the pipeline',
+    route: '/intelligence/project-timeline',
   },
   {
     icon: '\u{1F9ED}',
     title: 'Lifecycle Quartile Matrix',
     description: 'State-of-the-nation grid — every project by tech × state × stage with quartile scoring.',
+    route: '/intelligence/lifecycle-quartile',
   },
   {
     icon: '\u{1F501}',
     title: 'Asset Lifecycle & Repowering',
     description: 'Operating fleet age profile, repowering candidates, aging OEM exposure, and fleet turnover forecast to 2050.',
+    route: '/intelligence/asset-lifecycle',
   },
   {
     icon: '⚠️',
     title: 'Risk & Probability Signals',
     description: 'Supply chain concentration, bankrupt-OEM exposure, dev-OEM chain risks, and scheme win probability scoring for development projects.',
+    route: '/intelligence/risk-signals',
   },
 ] as const
 
@@ -161,14 +167,16 @@ export default function IntelligenceHub() {
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 lg:gap-4">
           {UNDER_CONSTRUCTION_FEATURES.map((f) => (
             <div
-              key={f.title}
-              className="bg-[var(--color-bg-card)]/50 border border-[var(--color-border)]/50 rounded-xl p-5 cursor-not-allowed opacity-50"
+              key={f.route}
+              onClick={() => navigate(f.route)}
+              className="relative bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl p-5 cursor-pointer hover:border-[var(--color-primary)]/30 hover:bg-[var(--color-bg-elevated)] transition-all active:scale-[0.98]"
             >
-              <span className="text-3xl block mb-3 grayscale">{f.icon}</span>
-              <h2 className="text-sm font-semibold text-[var(--color-text-muted)] mb-1">
+              <span className="absolute top-2.5 right-2.5 text-[9px] bg-amber-500/15 text-amber-400 px-1.5 py-0.5 rounded-full font-medium">🚧 WIP</span>
+              <span className="text-3xl block mb-3">{f.icon}</span>
+              <h2 className="text-sm font-semibold text-[var(--color-text)] mb-1">
                 {f.title}
               </h2>
-              <p className="text-xs text-[var(--color-text-muted)]/60 leading-relaxed">
+              <p className="text-xs text-[var(--color-text-muted)] leading-relaxed">
                 {f.description}
               </p>
             </div>
