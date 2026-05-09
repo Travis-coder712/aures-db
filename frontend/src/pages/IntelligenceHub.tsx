@@ -2,10 +2,46 @@ import { useNavigate } from 'react-router-dom'
 
 const ACTIVE_FEATURES = [
   {
+    icon: '⚡',
+    title: 'Energy Mix Transition',
+    description: 'State-by-state generation mix evolution and pipeline projection',
+    route: '/intelligence/energy-mix',
+  },
+  {
     icon: '\u{1F3AF}',
     title: 'CIS / LTESA Scheme Intelligence',
     description: 'Overview, comparison, and milestone tracking for CIS and LTESA rounds',
     route: '/intelligence/scheme-tracker',
+  },
+  {
+    icon: '\u{1F3C6}',
+    title: 'BESS Records Leaderboard',
+    description: 'All-time discharge and charge records across 30 grid-scale batteries — ranked by battery, state, and NEM with fleet peak records.',
+    route: '/intelligence/bess-records',
+  },
+  {
+    icon: '\u{1F50B}',
+    title: 'Battery Watch',
+    description: 'NSW & QLD BESS buildout tracking, milestones, demand context, and coal displacement',
+    route: '/intelligence/battery-watch',
+  },
+  {
+    icon: '\u{1F4B5}',
+    title: 'BESS Capex',
+    description: 'Battery storage capex benchmarking by $/MW, $/MWh, OEM, and state',
+    route: '/intelligence/bess-capex',
+  },
+  {
+    icon: '\u{1F4C8}',
+    title: 'BESS Bidding Intelligence',
+    description: 'NEMWEB bidding strategy analysis, trading platform identification, and competitive dynamics',
+    route: '/intelligence/bess-bidding',
+  },
+  {
+    icon: '\u{1F50B}',
+    title: 'BESS Portfolio Intelligence',
+    description: 'Duration trends, grid-forming coverage, co-located projects, cell chemistry, and network service contracts across the Australian battery fleet.',
+    route: '/intelligence/bess-portfolio',
   },
   {
     icon: '\u{1F4A8}',
@@ -26,12 +62,6 @@ const ACTIVE_FEATURES = [
     route: '/intelligence/dunkelflaute',
   },
   {
-    icon: '⚡',
-    title: 'Energy Mix Transition',
-    description: 'State-by-state generation mix evolution and pipeline projection',
-    route: '/intelligence/energy-mix',
-  },
-  {
     icon: '\u{1F4B0}',
     title: 'Revenue Intelligence',
     description: 'Revenue benchmarking and market price analysis',
@@ -50,40 +80,10 @@ const ACTIVE_FEATURES = [
     route: '/intelligence/eis-technical',
   },
   {
-    icon: '\u{1F50B}',
-    title: 'Battery Watch',
-    description: 'NSW & QLD BESS buildout tracking, milestones, demand context, and coal displacement',
-    route: '/intelligence/battery-watch',
-  },
-  {
-    icon: '\u{1F4C8}',
-    title: 'BESS Bidding Intelligence',
-    description: 'NEMWEB bidding strategy analysis, trading platform identification, and competitive dynamics',
-    route: '/intelligence/bess-bidding',
-  },
-  {
-    icon: '\u{1F50B}',
-    title: 'BESS Portfolio Intelligence',
-    description: 'Duration trends, grid-forming coverage, co-located projects, cell chemistry, and network service contracts across the Australian battery fleet.',
-    route: '/intelligence/bess-portfolio',
-  },
-  {
-    icon: '\u{1F3C6}',
-    title: 'BESS Records Leaderboard',
-    description: 'All-time discharge and charge records across 30 grid-scale batteries — ranked by battery, state, and NEM with fleet peak records.',
-    route: '/intelligence/bess-records',
-  },
-  {
     icon: '\u{1F4C5}',
     title: 'NEM Activities Timeline',
     description: 'Month-by-month key highlights across development, construction, and operations',
     route: '/intelligence/nem-activities',
-  },
-  {
-    icon: '\u{1F4B5}',
-    title: 'BESS Capex',
-    description: 'Battery storage capex benchmarking by $/MW, $/MWh, OEM, and state',
-    route: '/intelligence/bess-capex',
   },
 ] as const
 
