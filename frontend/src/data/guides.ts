@@ -2645,6 +2645,156 @@ Run it **after every data import or manual edit** to catch regressions.
 4. **Re-run audit** to verify fixes and check for regressions
 5. **Commit** the updated data-quality.json alongside your fixes`,
   },
+  {
+    id: 'learning-module-constraints',
+    title: 'Learning Module Plan: NEM Constraints & Constraint Equations',
+    description: 'Build plan for the 7-lesson interactive learning module. Documents scope, lesson content, interactive components, data sources, and implementation status.',
+    icon: '🎓',
+    category: 'roadmap',
+    readingTime: '8 min read',
+    added: '2026-05-09',
+    content: `# Learning Module Plan: NEM Constraints & Constraint Equations
+
+## Overview
+
+A 7-lesson interactive learning module under **Resources → Learning** explaining how network constraints work in the NEM — from physical phenomena through to market price impacts and data access. Content is pitched at the WattClarity level: technically credible, data-first, real constraint IDs throughout.
+
+**Route:** \`/learn/constraints\` and \`/learn/constraints/:lessonId\`
+
+**Status:** Lessons 1–3 built. Lessons 4–7 content complete, interactive elements in progress.
+
+---
+
+## Lesson Inventory
+
+### Lesson 1 — Why Dispatch Is More Than a Bid Stack ✅
+*The problem constraints solve*
+
+- NEMDE as Security-Constrained Economic Dispatch (SCED)
+- The gap between "cheapest on paper" and "physically safe"
+- What happens without constraints: thermal overloads, voltage collapse, cascading failures
+- Scale: ~1,000 constraint equations active per 5-minute dispatch interval
+- **Interactive:** 5-unit bid stack comparison — unconstrained vs constrained dispatch
+
+### Lesson 2 — Anatomy of a Constraint Equation ✅
+*The LHS / RHS structure*
+
+- General form: \`Σ(Factor_i × Q_i) ≤ RHS\`
+- LHS entities: generator DUIDs, interconnectors, scheduled loads, FCAS providers
+- LHS factors: fractions of 1 MW injection reaching the monitored line
+- RHS: line rating, stability limit, or dynamic SCADA-derived value
+- Operators: ≤, ≥, =
+- The 5 MMS tables: GENCONDATA, SPDCONNECTIONPOINTCONSTRAINT, SPDINTERCONNECTORCONSTRAINT, SPDREGIONCONSTRAINT, GENERICCONSTRAINTRHS
+- The 0.07 minimum factor threshold (Dec 2025 rule change raising this)
+- **Interactive:** Live constraint equation builder using real X5 (N^^N_NIL_3) factors
+
+### Lesson 3 — Injection Shift Factors: Where the Numbers Come From ✅
+*The maths behind LHS coefficients*
+
+- DC power flow model — why it's linear and why AEMO uses it
+- ISF definition: \`ISF(line, bus) = ΔFlow(line) / ΔInjection(bus)\`
+- The swing bus: always the Regional Reference Node (RRN)
+- Post-contingency ISFs: switch out the contingent element, rerun power flow
+- Why radial lines have ISF = 1.0 and meshed lines have ISF < 1.0
+- The 0.07 minimum threshold and normalisation rules
+- **Interactive:** 4-bus network walkthrough with sliders showing how 1 MW splits across parallel paths
+
+### Lesson 4 — Types of Constraints and Physical Phenomena 🔲
+*What each constraint type is protecting against*
+
+- Thermal limits (static vs dynamic line ratings, N-1 post-contingency thermal)
+- Voltage stability (^^): N-1 voltage collapse limits
+- Transient stability (::): rotor angle following a fault
+- Oscillatory stability: inter-area oscillation modes, damping ratio ≥ 5%
+- System strength / fault level: IBR penetration, SCR, SA_ISLE_STRENGTH example
+- FCAS sufficiency constraints (D_ and F_ prefix equations)
+- **Reference table:** one row per type — phenomenon, example constraint ID, typical binding frequency
+
+### Lesson 5 — Constraint IDs, Sets, and the Operational Lifecycle 🔲
+*How constraints get activated and decoded*
+
+- Decoding constraint IDs: state prefix, type operator (^^, ::, >>), NIL vs outage-specific
+- Worked decodes: N^^N_NIL_3, Q^^TR_CLHA_-600, V_NWVIC_GFT1_750, N-DPWG_63_X5
+- Constraint sets: grouped equations invoked/revoked as outages occur
+- The Network Outage Schedule
+- Pre-dispatch vs dispatch RHS values (DS / PD / ST scope)
+- The RPN (Reverse Polish Notation) RHS calculation engine
+- **Interactive:** Constraint ID decoder — type in a real constraint ID, see plain-English breakdown
+
+### Lesson 6 — Market Impacts: Shadow Prices and Congestion 🔲
+*How binding constraints move spot prices*
+
+- What "binding" means: LHS = RHS, marginal value ≠ 0
+- Shadow price (marginal value): \`λ = ∂(dispatch cost) / ∂(RHS)\`
+- Regional price separation from binding interconnector constraints
+- Congestion rent: \`|P_export − P_import| × Flow × Duration\`
+- CVP factors: priority order for constraint violations
+- Case study 1 — X5 / N^^N_NIL_3: SW NSW solar curtailment
+- Case study 2 — SA islanding (2020): Heywood trip, $90M+ FCAS bill
+- Case study 3 — Opaque congestion (Jun 2024): N-DPWG_63_X5, 103 equations, hidden curtailment
+- **Chart:** Top 10 most-binding 2024 constraints by marginal value from real DISPATCHCONSTRAINT data
+
+### Lesson 7 — Working with Constraint Data 🔲
+*Practical data access guide*
+
+- AEMO Congestion Information Resource (CIR): CFG, Limits Advice Guidelines, Monthly Constraint Reports
+- NEMweb MMS Archive: which ZIPs contain GENCONDATA, SPD tables, GENERICCONSTRAINTRHS
+- NEMOSIS (Python): \`dynamic_data_compiler()\` for DISPATCHCONSTRAINT at scale
+- Julius Susanto's NEM_constraints library: \`get_LHS_terms()\`, \`get_RHS_terms()\`
+- AEMO MMS Data Model Report: column-level documentation
+- **Interactive:** Constraint lookup panel — enter constraint ID, see binding stats from AURES data
+
+---
+
+## Key Data Sources Used
+
+| Source | Used In |
+|--------|---------|
+| AEMO Constraint Formulation Guidelines v12 | Lessons 2, 3, 4 |
+| AEMO Constraint Naming Guidelines (May 2013) | Lesson 5 |
+| AEMO Congestion Information Resource (CIR) | Lessons 5, 7 |
+| AEMO DISPATCHCONSTRAINT MMS table | Lessons 2, 6, 7 |
+| AEMO GENCONDATA / SPD tables | Lessons 2, 7 |
+| WattClarity constraint articles (X5, SA islanding, opaque congestion) | Lessons 1, 5, 6 |
+| NEMOSIS Python package | Lesson 7 |
+| Julius Susanto NEM_constraints library | Lesson 7 |
+| AEMC Appendix A — Congestion in the NEM | Lesson 6 |
+
+---
+
+## Key Formulae
+
+\`\`\`
+Constraint equation:   Σ(ISF_i × Q_i) ≤ LineRating_post-contingency
+
+ISF definition:        ISF(line ℓ, bus k) = ∂P_ℓ / ∂P_k  [swing at RRN]
+
+Marginal value:        λ = ∂(ObjFn cost) / ∂(RHS)  [$/MW/DI]
+
+Congestion rent:       |P_export − P_import| × Flow × Duration
+
+CVP violation cost:    CVP × MarketPriceCap × ViolationDegree
+\`\`\`
+
+---
+
+## Implementation Notes
+
+- **Route tree:** \`/learn/constraints\` (module index) · \`/learn/constraints/:lessonId\` (individual lessons)
+- **Components:** \`src/pages/learn/ConstraintsModule.tsx\` — single file containing module shell, lesson data, and all lesson content components
+- **Style:** Inline styles for PDF-safe sections; Tailwind CSS variables for interactive UI. Follows the WattClarity "technically credible, data-first" standard — real constraint IDs throughout, real MMS table names, worked examples from actual NEMweb data
+- **Progress tracking:** localStorage key \`aures-constraints-progress\` stores completed lesson IDs
+- **Navigation entry:** Guides page → Learning category card → module index
+- **Version shipped:** v2.51.0
+
+---
+
+## Lesson Status Legend
+
+- ✅ Built and on main
+- 🔲 Planned, not yet built
+`,
+  },
 ]
 
 export const GUIDE_CATEGORIES = {

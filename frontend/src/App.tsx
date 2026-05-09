@@ -7,6 +7,7 @@ import ProjectDetail from './pages/ProjectDetail'
 import Search from './pages/Search'
 import Guides from './pages/Guides'
 import GuideReader from './pages/GuideReader'
+import ConstraintsModule from './pages/learn/ConstraintsModule'
 // SchemesOverview merged into SchemeTracker intelligence page
 import SchemeRoundDetail from './pages/SchemeRoundDetail'
 import Dashboard from './pages/Dashboard'
@@ -67,6 +68,8 @@ function App() {
         <Route path="search" element={<Search />} />
         <Route path="guides" element={<Guides />} />
         <Route path="guides/:id" element={<GuideReader />} />
+        <Route path="learn/constraints" element={<ConstraintsModule />} />
+        <Route path="learn/constraints/:lessonId" element={<ConstraintsModule />} />
         {/* Redirect old /schemes to intelligence page */}
         <Route path="schemes" element={<Navigate to="/intelligence/scheme-tracker" replace />} />
         <Route path="schemes/:scheme/:roundId" element={<SchemeRoundDetail />} />
