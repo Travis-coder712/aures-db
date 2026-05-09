@@ -3065,7 +3065,7 @@ function WindValuePdfSummary({
             <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
             <XAxis dataKey="year" tick={{ fontSize: 10, fill: '#475569' }} />
             <YAxis tick={{ fontSize: 10, fill: '#475569' }} tickFormatter={v => `${v}%`} domain={['auto', 'auto']} />
-            <Bar dataKey="cf" radius={[4, 4, 0, 0]}>
+            <Bar dataKey="cf" radius={[4, 4, 0, 0]} isAnimationActive={false}>
               {annualData.map((d, i) => <Cell key={i} fill={YEAR_COLORS[parseInt(d.year)] ?? '#3b82f6'} />)}
             </Bar>
           </BarChart>
@@ -3084,7 +3084,7 @@ function WindValuePdfSummary({
               <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
               <XAxis dataKey="month" tick={{ fontSize: 9, fill: '#475569' }} />
               <YAxis tick={{ fontSize: 9, fill: '#475569' }} tickFormatter={v => `$${v}`} />
-              <Bar dataKey="capture" radius={[3, 3, 0, 0]}>
+              <Bar dataKey="capture" radius={[3, 3, 0, 0]} isAnimationActive={false}>
                 {monthlyCapture.map((d, i) => <Cell key={i} fill={d.vf == null ? '#3b82f6' : d.vf >= 1.0 ? '#22c55e' : d.vf >= 0.8 ? '#3b82f6' : '#ef4444'} />)}
               </Bar>
               {vs.avg_capture_price != null && (
@@ -3231,7 +3231,7 @@ function WindValuePdfSummary({
             <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" horizontal={false} />
             <XAxis type="number" tick={{ fontSize: 9, fill: '#475569' }} tickFormatter={v => `${v}%`} />
             <YAxis type="category" dataKey="name" tick={{ fontSize: 8, fill: '#475569' }} width={100} />
-            <Bar dataKey="cf" radius={[0, 4, 4, 0]}>
+            <Bar dataKey="cf" radius={[0, 4, 4, 0]} isAnimationActive={false}>
               {peerData.map((d, i) => <Cell key={i} fill={d.isThis ? '#0f172a' : '#3b82f640'} />)}
             </Bar>
           </BarChart>
