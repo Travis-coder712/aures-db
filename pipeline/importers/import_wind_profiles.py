@@ -395,6 +395,57 @@ def load_pool_prices(conn) -> Dict[str, Dict[str, float]]:
     return result
 
 
+def load_price_band_data(conn) -> Dict[str, Dict[str, List[dict]]]:
+    """Load 5-min price band capture data, aggregated to project level.
+
+    Returns: project_id -> "YYYY-MM" -> [band_dict, ...]
+    Each band_dict: {label, band_min, band_max, gen_mwh, gen_pct, avg_price}
+    """
+    try:
+        rows = conn.execute("""
+            SELECT project_id, year, month, band_label, band_min, band_max,
+                   SUM(gen_mwh) as gen_mwh,
+                   SUM(interval_count) as interval_count,
+                   -- weighted-average price across DUIDs
+                   CASE WHEN SUM(gen_mwh) > 0
+                        THEN SUM(gen_mwh * COALESCE(avg_price, 0)) / SUM(gen_mwh)
+                        ELSE NULL END as avg_price
+            FROM price_band_capture
+            WHERE project_id IS NOT NULL AND project_id != ''
+            GROUP BY project_id, year, month, band_label
+            ORDER BY project_id, year, month, band_min
+        """).fetchall()
+    except Exception:
+        return {}   # table not yet populated — fall back to synthetic bands
+
+    # First pass: build raw totals per (project, ym, band)
+    raw: Dict[str, Dict[str, Dict[str, dict]]] = {}
+    for r in rows:
+        pid = r['project_id']
+        ym  = f"{r['year']}-{r['month']:02d}"
+        raw.setdefault(pid, {}).setdefault(ym, {})[r['band_label']] = {
+            'label':    r['band_label'],
+            'band_min': r['band_min'],
+            'band_max': r['band_max'],
+            'gen_mwh':  round(r['gen_mwh'], 3),
+            'avg_price': round(r['avg_price'], 2) if r['avg_price'] is not None else None,
+        }
+
+    # Second pass: compute gen_pct within each (project, ym)
+    result: Dict[str, Dict[str, List[dict]]] = {}
+    for pid, months in raw.items():
+        result[pid] = {}
+        for ym, bands in months.items():
+            total = sum(b['gen_mwh'] for b in bands.values())
+            band_list = []
+            for b in sorted(bands.values(), key=lambda x: x['band_min']):
+                b['gen_pct'] = round(b['gen_mwh'] / total * 100, 2) if total > 0 else 0.0
+                band_list.append(b)
+            result[pid][ym] = band_list
+
+    return result
+
+
 def load_wind_projects(conn) -> List[dict]:
     rows = conn.execute("""
         SELECT id, name, technology, capacity_mw, state, cod_current
@@ -427,6 +478,7 @@ def compute_project_analytics(
     project: dict,
     monthly: List[dict],
     pool_prices: Dict[str, Dict[str, float]],
+    price_bands: Optional[Dict[str, List[dict]]] = None,
 ) -> dict:
     """Compute all value metrics for one wind project."""
     pid = project['id']
@@ -639,6 +691,18 @@ def compute_project_analytics(
         "data_confidence": data_confidence,
     }
 
+    # ---- Price band data (from 5-min NEMWEB correlation if available) ----
+    price_band_monthly = price_bands or {}   # {ym: [band_dict, ...]}
+    price_band_summary: Optional[dict] = None
+    if price_band_monthly:
+        yms = sorted(price_band_monthly.keys())
+        price_band_summary = {
+            "source": "5min_nemweb",
+            "coverage_start": yms[0] if yms else None,
+            "coverage_end": yms[-1] if yms else None,
+            "monthly": price_band_monthly,
+        }
+
     return {
         "id": pid,
         "name": project['name'],
@@ -650,6 +714,7 @@ def compute_project_analytics(
         "seasonal_averages": seasonal_averages,
         "monthly_averages": monthly_averages,
         "value_summary": value_summary,
+        "price_band_data": price_band_summary,
         "hourly_shape": None,  # populated later by hourly fetch
         "state_rank": None,    # populated later by compute_rankings
         "pros_cons": None,     # populated later by generate_pros_cons
@@ -968,6 +1033,14 @@ def main():
     total_months = sum(len(v) for v in pool_prices.values())
     print(f"    {total_months} region-months of pool price data")
 
+    print("\n[3b] Loading 5-min price band capture data...")
+    all_price_bands = load_price_band_data(conn)
+    n_pbd = sum(len(m) for m in all_price_bands.values())
+    if n_pbd:
+        print(f"    Real price band data for {len(all_price_bands)} projects, {n_pbd} project-months")
+    else:
+        print("    No 5-min price band data yet — run import_price_band_capture.py to populate")
+
     print("\n[4] Computing project value analytics...")
     projects_analytics: Dict[str, dict] = {}
     for p in wind_projects:
@@ -975,7 +1048,10 @@ def main():
         if not monthly:
             print(f"    SKIP {p['name']} — no monthly data")
             continue
-        pa = compute_project_analytics(p, monthly, pool_prices)
+        pa = compute_project_analytics(
+            p, monthly, pool_prices,
+            price_bands=all_price_bands.get(p['id']),
+        )
         projects_analytics[p['id']] = pa
     print(f"    Computed analytics for {len(projects_analytics)} projects")
 

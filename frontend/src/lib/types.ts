@@ -1432,6 +1432,22 @@ export interface WindProsCons {
   grade: string
 }
 
+export interface PriceBandMonthEntry {
+  label: string
+  band_min: number
+  band_max: number
+  gen_mwh: number
+  gen_pct: number
+  avg_price: number | null
+}
+
+export interface WindPriceBandData {
+  source: '5min_nemweb'
+  coverage_start: string   // YYYY-MM
+  coverage_end: string     // YYYY-MM
+  monthly: Record<string, PriceBandMonthEntry[]>  // YYYY-MM -> bands
+}
+
 export interface WindValueProject {
   id: string
   name: string
@@ -1443,6 +1459,7 @@ export interface WindValueProject {
   seasonal_averages: Record<string, WindSeasonalAvg>
   monthly_averages: Record<string, WindMonthlyAvg>
   value_summary: WindValueSummary
+  price_band_data: WindPriceBandData | null
   hourly_shape: WindHourlyShape | null
   state_rank: WindStateRank | null
   pros_cons: WindProsCons | null

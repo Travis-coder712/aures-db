@@ -63,7 +63,7 @@ function ChartInfo({ children }: { children: ReactNode }) {
   )
 }
 
-type TabId = 'explainer' | 'shape' | 'capture' | 'seasonal' | 'trend' | 'peers' | 'nem' | 'diversity'
+type TabId = 'explainer' | 'shape' | 'capture' | 'seasonal' | 'trend' | 'peers' | 'nem' | 'diversity' | 'price'
 
 // ============================================================
 // Main component
@@ -72,23 +72,32 @@ type TabId = 'explainer' | 'shape' | 'capture' | 'seasonal' | 'trend' | 'peers' 
 interface Props { projectId: string; capacityMw?: number }
 
 export default function WindValueAnalysis({ projectId }: Props) {
-  const { project, stateAvg, allStateProjects, loading } = useWindValueProject(projectId)
+  const { project, stateAvg, allStateProjects, poolPrices, loading } = useWindValueProject(projectId)
   const [activeTab, setActiveTab] = useState<TabId>('explainer')
   const pdfRef = useRef<HTMLDivElement>(null)
   const [pdfLoading, setPdfLoading] = useState(false)
   const [showPdf, setShowPdf] = useState(false)
 
   const handleExportPdf = useCallback(async () => {
-    if (!project || !pdfRef.current) return
+    if (!project) return
     setPdfLoading(true)
     setShowPdf(true)
-    await new Promise(r => setTimeout(r, 900))
+    // Wait for React to mount the hidden PDF div and the browser to paint it
+    await new Promise(r => setTimeout(r, 600))
+    if (!pdfRef.current) {
+      setShowPdf(false)
+      setPdfLoading(false)
+      return
+    }
     try {
       await exportElementToPdf(pdfRef.current, {
         filename: `${project.name.replace(/\s+/g, '_')}_wind_value_analysis`,
         title: `Wind Value Analysis — ${project.name}`,
         subtitle: `${project.state} · ${project.capacity_mw} MW · AURES Intelligence · ${new Date().toLocaleDateString('en-AU', { year: 'numeric', month: 'long', day: 'numeric' })}`,
       })
+    } catch (err) {
+      console.error('PDF export failed:', err)
+      alert('PDF generation failed — please try again. If the issue persists, try a different browser.')
     } finally {
       setShowPdf(false)
       setPdfLoading(false)
@@ -120,6 +129,7 @@ export default function WindValueAnalysis({ projectId }: Props) {
     { key: 'trend', label: '📈 Trend' },
     { key: 'peers', label: '🏆 Peers' },
     { key: 'diversity', label: '🔄 Diversity' },
+    { key: 'price', label: '💲 Price Bands' },
     { key: 'nem', label: '🏛️ NEM Lens' },
   ]
 
@@ -188,6 +198,9 @@ export default function WindValueAnalysis({ projectId }: Props) {
       {activeTab === 'diversity' && (
         <DiversityTab project={project} allStateProjects={allStateProjects} />
       )}
+      {activeTab === 'price' && (
+        <PriceBandTab project={project} allStateProjects={allStateProjects} poolPrices={poolPrices} />
+      )}
       {activeTab === 'nem' && (
         <NemLensTab project={project} stateAvg={stateAvg} />
       )}
@@ -196,12 +209,17 @@ export default function WindValueAnalysis({ projectId }: Props) {
       {showPdf && (
         <div
           ref={pdfRef}
-          style={{ position: 'fixed', left: '-9999px', top: 0, zIndex: -1 }}
+          style={{
+            position: 'fixed', top: 0, left: '-10000px',
+            pointerEvents: 'none', zIndex: 9999,
+            width: 900,
+          }}
         >
           <WindValuePdfSummary
             project={project}
             stateAvg={stateAvg}
             allStateProjects={allStateProjects}
+            poolPrices={poolPrices}
           />
         </div>
       )}
@@ -1606,6 +1624,458 @@ const MONTH_SEASON: Record<number, string> = {
   9: 'spring', 10: 'spring', 11: 'spring',
 }
 
+// ============================================================
+// Price Band Analysis tab
+// ============================================================
+
+// Approximate NEM hourly price index (relative, 0–100), based on typical
+// NEM dispatch price profiles: low solar hours, high evening peak, moderate overnight
+const NEM_PRICE_SHAPE = [
+  45, 40, 38, 36, 38, 42,  // 12am–5am: overnight taper
+  55, 68, 72, 42, 22, 15,  // 6am–11am: morning ramp, solar dump begins
+  12, 14, 18, 30, 52, 72,  // 12pm–5pm: solar low, pre-peak ramp
+  88, 100, 92, 78, 62, 52, // 6pm–11pm: evening peak, late decline
+]
+
+// Labels must match import_price_band_capture.py PRICE_BANDS
+const PRICE_BANDS = [
+  { label: 'negative',   dbLabel: 'negative',   min: -Infinity, max: 0,    color: '#7c3aed', display: '< $0'      },
+  { label: '$0–$50',     dbLabel: '$0-50',       min: 0,         max: 50,   color: '#3b82f6', display: '$0–$50'    },
+  { label: '$50–$100',   dbLabel: '$50-100',     min: 50,        max: 100,  color: '#22c55e', display: '$50–$100'  },
+  { label: '$100–$300',  dbLabel: '$100-300',    min: 100,       max: 300,  color: '#f59e0b', display: '$100–$300' },
+  { label: '$300–$1k',   dbLabel: '$300-1000',   min: 300,       max: 1000, color: '#f97316', display: '$300–$1k'  },
+  { label: '> $1000',    dbLabel: '$1000+',      min: 1000,      max: Infinity, color: '#ef4444', display: '> $1000'  },
+]
+
+type PoolPrices = Record<string, Record<string, number>>
+
+function bandFor(price: number) {
+  return PRICE_BANDS.find(b => price >= b.min && price < b.max) ?? PRICE_BANDS[1]
+}
+
+function computePriceBandDist(monthly: import('../../lib/types').WindMonthlyDataPoint[]) {
+  const totals: Record<string, { energy: number }> = {}
+  PRICE_BANDS.forEach(b => { totals[b.display] = { energy: 0 } })
+  let totalEnergy = 0
+  monthly.forEach(m => {
+    if (m.capture_price == null || m.energy_mwh == null || m.energy_mwh <= 0) return
+    const b = bandFor(m.capture_price)
+    totals[b.display].energy += m.energy_mwh
+    totalEnergy += m.energy_mwh
+  })
+  return PRICE_BANDS.map(b => ({
+    label: b.display,
+    color: b.color,
+    pct: totalEnergy > 0 ? (totals[b.display].energy / totalEnergy) * 100 : 0,
+  }))
+}
+
+function computeFleetPriceBandDist(projects: import('../../lib/types').WindValueProject[]) {
+  const totals: Record<string, number> = {}
+  PRICE_BANDS.forEach(b => { totals[b.display] = 0 })
+  let totalEnergy = 0
+  projects.forEach(p => {
+    p.monthly_data.forEach(m => {
+      if (m.capture_price == null || m.energy_mwh == null || m.energy_mwh <= 0) return
+      const b = bandFor(m.capture_price)
+      totals[b.display] += m.energy_mwh
+      totalEnergy += m.energy_mwh
+    })
+  })
+  return PRICE_BANDS.map(b => ({
+    label: b.display,
+    color: b.color,
+    pct: totalEnergy > 0 ? (totals[b.display] / totalEnergy) * 100 : 0,
+  }))
+}
+
+function PriceBandTab({
+  project, allStateProjects, poolPrices,
+}: {
+  project: import('../../lib/types').WindValueProject
+  allStateProjects: import('../../lib/types').WindValueProject[]
+  poolPrices: PoolPrices
+}) {
+  // State pool prices keyed by region (NSW1, VIC1 etc) — map to project state
+  const stateToRegion: Record<string, string> = {
+    NSW: 'NSW1', VIC: 'VIC1', QLD: 'QLD1', SA: 'SA1', TAS: 'TAS1',
+  }
+  const regionKey = stateToRegion[project.state] ?? `${project.state}1`
+  const statePricesByMonth = poolPrices[regionKey] ?? {}
+
+  // Monthly data with pool price filled from top-level where missing
+  const monthly = project.monthly_data.map(m => ({
+    ...m,
+    pool_price: m.pool_price ?? statePricesByMonth[`${m.year}-${String(m.month).padStart(2, '0')}`] ?? null,
+  }))
+
+  // Price band distributions — prefer real 5-min NEMWEB data, fall back to synthetic
+  const realBandData = project.price_band_data
+  const dataSource = realBandData ? '5min_nemweb' : 'monthly_proxy'
+
+  const farmBands: Array<{ label: string; color: string; pct: number; avgPrice: number | null }> = (() => {
+    if (realBandData) {
+      // Aggregate across all covered months from real 5-min data
+      const totals: Record<string, { gen_mwh: number; price_sum: number }> = {}
+      PRICE_BANDS.forEach(b => { totals[b.dbLabel] = { gen_mwh: 0, price_sum: 0 } })
+      let totalMwh = 0
+      Object.values(realBandData.monthly).forEach(bands => {
+        bands.forEach(b => {
+          if (totals[b.label]) {
+            totals[b.label].gen_mwh += b.gen_mwh
+            totals[b.label].price_sum += (b.avg_price ?? 0) * b.gen_mwh
+            totalMwh += b.gen_mwh
+          }
+        })
+      })
+      return PRICE_BANDS.map(b => ({
+        label: b.display,
+        color: b.color,
+        pct: totalMwh > 0 ? (totals[b.dbLabel].gen_mwh / totalMwh) * 100 : 0,
+        avgPrice: totals[b.dbLabel].gen_mwh > 0
+          ? totals[b.dbLabel].price_sum / totals[b.dbLabel].gen_mwh
+          : null,
+      }))
+    }
+    return computePriceBandDist(monthly).map(b => ({ ...b, avgPrice: null }))
+  })()
+
+  const fleetBands = computeFleetPriceBandDist(allStateProjects)
+  const bandData = farmBands.map((f, i) => ({
+    label: f.label,
+    color: f.color,
+    farm: Number(f.pct.toFixed(1)),
+    fleet: Number(fleetBands[i]?.pct.toFixed(1) ?? '0'),
+    diff: Number((f.pct - (fleetBands[i]?.pct ?? 0)).toFixed(1)),
+    avgPrice: f.avgPrice,
+  }))
+
+  // Monthly premium/discount (where pool_price exists)
+  const premiumData = monthly
+    .filter(m => m.capture_price != null && m.pool_price != null)
+    .map(m => ({
+      label: `${MONTH_LABELS[(m.month ?? 1) - 1]} ${m.year}`,
+      premium: Number(((m.capture_price ?? 0) - (m.pool_price ?? 0)).toFixed(1)),
+      value_factor: m.value_factor,
+      capture: m.capture_price,
+      pool: m.pool_price,
+    }))
+    .sort((a, b) => {
+      const [ma, ya] = [a.label.slice(0, 3), a.label.slice(4)]
+      const [mb, yb] = [b.label.slice(0, 3), b.label.slice(4)]
+      return ya !== yb ? Number(ya) - Number(yb) : MONTH_LABELS.indexOf(ma) - MONTH_LABELS.indexOf(mb)
+    })
+
+  // Capture price heatmap (by year + month)
+  const heatYears = [...new Set(monthly.map(m => m.year))].sort()
+  const captureMin = Math.min(...monthly.map(m => m.capture_price ?? Infinity).filter(isFinite))
+  const captureMax = Math.max(...monthly.map(m => m.capture_price ?? -Infinity).filter(isFinite))
+  const captureRange = captureMax - captureMin || 1
+  const captureColor = (v: number | null) => {
+    if (v == null) return 'transparent'
+    const t = (v - captureMin) / captureRange
+    const r = Math.round(239 + (34 - 239) * t)
+    const g = Math.round(68 + (197 - 68) * t)
+    const b = Math.round(68 + (94 - 68) * t)
+    return `rgb(${r},${g},${b})`
+  }
+
+  // Monthly capture by season breakdown
+  const seasonBandData = Object.entries(MONTH_SEASON).reduce<Record<string, {count:number;energy:number;bands:Record<string,number>}>>((acc, [mo, season]) => {
+    if (!acc[season]) acc[season] = { count: 0, energy: 0, bands: {} }
+    monthly.filter(m => m.month === Number(mo) && m.capture_price != null && m.energy_mwh)
+      .forEach(m => {
+        const b = bandFor(m.capture_price!)
+        acc[season].bands[b.display] = (acc[season].bands[b.display] ?? 0) + (m.energy_mwh ?? 0)
+        acc[season].energy += (m.energy_mwh ?? 0)
+        acc[season].count++
+      })
+    return acc
+  }, {})
+
+  // Time-of-day: farm hourly shape vs NEM price reference
+  const farmHourly = project.hourly_shape?.annual
+  const todData = HOURS.map((label, i) => ({
+    hour: label,
+    farmCf: farmHourly ? (farmHourly[i] ?? 0) : null,
+    priceIdx: NEM_PRICE_SHAPE[i],
+    // price-weighted generation index: how much does this farm earn relative to flat?
+    priceWeighted: farmHourly && farmHourly[i] != null
+      ? Number(((farmHourly[i] as number) * NEM_PRICE_SHAPE[i] / 50).toFixed(2))
+      : null,
+  }))
+
+  const hasPremiumData = premiumData.length > 0
+  const avgPremium = hasPremiumData
+    ? premiumData.reduce((s, d) => s + d.premium, 0) / premiumData.length
+    : null
+
+  return (
+    <div className="space-y-4">
+      {/* Explainer */}
+      <div className="bg-violet-500/5 border border-violet-500/20 rounded-lg p-3">
+        <p className="text-[11px] text-[var(--color-text-muted)] leading-relaxed">
+          <strong className="text-[var(--color-text)]">Price band analysis</strong> shows <em>when</em> this farm generates relative to the NEM spot price.
+          A farm that consistently generates during high-price periods earns more revenue per MWh.
+          {dataSource === '5min_nemweb'
+            ? <> Data sourced from <strong className="text-violet-400">5-min AEMO DISPATCHLOAD × DISPATCHPRICE correlation</strong> — exact interval-level accuracy. Coverage: {realBandData?.coverage_start} to {realBandData?.coverage_end}.</>
+            : <> Using monthly average capture price as a proxy — run <code className="text-[10px] bg-[var(--color-bg-elevated)] px-1 rounded">import_price_band_capture.py</code> for 5-min interval accuracy.</>
+          }
+        </p>
+      </div>
+
+      {/* Price band distribution: farm vs fleet */}
+      <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl p-3">
+        <p className="text-[10px] font-medium text-[var(--color-text-muted)] mb-3 uppercase tracking-wider flex items-center gap-2">
+          Generation by Price Band — Farm vs {project.state} Fleet
+          {dataSource === '5min_nemweb' && (
+            <span className="text-[8px] font-semibold px-1.5 py-0.5 rounded bg-violet-500/20 text-violet-300 normal-case tracking-normal">5-min exact</span>
+          )}
+          <ChartInfo>
+            <p style={{color:'#f1f5f9',fontWeight:600,marginBottom:4}}>Price band distribution</p>
+            {dataSource === '5min_nemweb'
+              ? <>Each bar = % of total MWh generated at each price regime, computed by correlating this farm&apos;s
+                5-min AEMO dispatch with the 5-min regional spot price (RRP) for every interval in the coverage period.
+                This is exact — no approximation. Fleet bar uses monthly-average proxy as 5-min data is only available per-farm.</>
+              : <>Each bar = % of total MWh generated during months where the average capture price fell in that band.
+                This is a proxy — run import_price_band_capture.py to replace with 5-min exact data.</>
+            }
+            <br/><br/>
+            A farm skewed toward higher price bands earns more revenue per MWh — an effective self-selecting revenue hedge.
+          </ChartInfo>
+        </p>
+        <div className="space-y-2">
+          {bandData.map(d => {
+            const maxPct = Math.max(...bandData.map(b => Math.max(b.farm, b.fleet)), 1)
+            return (
+              <div key={d.label}>
+                <div className="flex items-center justify-between mb-0.5">
+                  <span className="text-[10px] text-[var(--color-text-muted)] w-20 shrink-0">{d.label}</span>
+                  <div className="flex items-center gap-2 ml-2">
+                    {d.avgPrice != null && (
+                      <span className="text-[9px] font-mono text-[var(--color-text-muted)]">avg ${d.avgPrice.toFixed(0)}</span>
+                    )}
+                    <span className={`text-[9px] font-semibold ${d.diff > 1 ? 'text-green-400' : d.diff < -1 ? 'text-red-400' : 'text-[var(--color-text-muted)]'}`}>
+                      {d.diff > 0 ? '+' : ''}{d.diff}%
+                    </span>
+                  </div>
+                </div>
+                <div className="space-y-0.5">
+                  <div className="flex items-center gap-1.5">
+                    <span className="text-[8px] w-8 text-right text-[var(--color-text-muted)]">Farm</span>
+                    <div className="flex-1 h-3 bg-[var(--color-border)] rounded-sm overflow-hidden">
+                      <div className="h-full rounded-sm" style={{ width: `${(d.farm / maxPct) * 100}%`, backgroundColor: d.color }} />
+                    </div>
+                    <span className="text-[9px] w-8 text-right font-mono text-[var(--color-text)]">{d.farm.toFixed(1)}%</span>
+                  </div>
+                  <div className="flex items-center gap-1.5">
+                    <span className="text-[8px] w-8 text-right text-[var(--color-text-muted)]">Fleet</span>
+                    <div className="flex-1 h-3 bg-[var(--color-border)] rounded-sm overflow-hidden">
+                      <div className="h-full rounded-sm" style={{ width: `${(d.fleet / maxPct) * 100}%`, backgroundColor: d.color, opacity: 0.4 }} />
+                    </div>
+                    <span className="text-[9px] w-8 text-right font-mono text-[var(--color-text-muted)]">{d.fleet.toFixed(1)}%</span>
+                  </div>
+                </div>
+              </div>
+            )
+          })}
+        </div>
+        <p className="text-[9px] text-[var(--color-text-muted)] mt-2 italic">
+          Bright = this farm. Faded = {project.state} fleet avg. Green/red diff = farm vs fleet skew.
+          {dataSource === '5min_nemweb' && ' Avg price shown per band when generating.'}
+        </p>
+      </div>
+
+      {/* Monthly capture premium/discount */}
+      {hasPremiumData && (
+        <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl p-3">
+          <p className="text-[10px] font-medium text-[var(--color-text-muted)] mb-1 uppercase tracking-wider flex items-center">
+            Monthly Capture Premium vs Pool Price ($/MWh)
+            <ChartInfo>
+              <p style={{color:'#f1f5f9',fontWeight:600,marginBottom:4}}>Capture premium / discount</p>
+              Each bar = this farm&apos;s monthly capture price minus the regional pool price (TWAP) for that month.
+              <strong style={{color:'#22c55e'}}> Positive = premium</strong> — the farm generated more during higher-price periods than the market average.
+              <strong style={{color:'#ef4444'}}> Negative = discount</strong> — it generated into lower prices (cannibalisation or off-peak generation).<br/><br/>
+              Pool price data available from Aug 2024. Value factor = capture ÷ pool.
+            </ChartInfo>
+          </p>
+          {avgPremium != null && (
+            <p className="text-[10px] text-[var(--color-text-muted)] mb-3">
+              Average premium over period:{' '}
+              <span className={`font-bold ${avgPremium >= 0 ? 'text-green-400' : 'text-red-400'}`}>
+                {avgPremium >= 0 ? '+' : ''}${avgPremium.toFixed(1)}/MWh
+              </span>
+            </p>
+          )}
+          <ResponsiveContainer width="100%" height={180}>
+            <BarChart data={premiumData} margin={{ top: 4, right: 8, bottom: 20, left: -8 }}>
+              <CartesianGrid strokeDasharray="3 3" stroke="var(--color-border)" />
+              <XAxis dataKey="label" tick={{ fontSize: 8, fill: 'var(--color-text-muted)' }} angle={-45} textAnchor="end" interval={0} />
+              <YAxis tick={{ fontSize: 10, fill: 'var(--color-text-muted)' }} tickFormatter={v => `$${v}`} />
+              <ReferenceLine y={0} stroke="var(--color-border)" strokeWidth={1.5} />
+              <Tooltip
+                contentStyle={tooltipStyle} labelStyle={tooltipLabelStyle}
+                content={({ active, payload }) => {
+                  if (!active || !payload?.length) return null
+                  const d = payload[0].payload
+                  return (
+                    <div style={tooltipStyle} className="p-2 space-y-0.5">
+                      <p style={{ color: '#f1f5f9', fontWeight: 600, fontSize: 11 }}>{d.label}</p>
+                      <p style={tooltipItemStyle}>Capture: ${d.capture?.toFixed(0)}/MWh</p>
+                      <p style={tooltipItemStyle}>Pool: ${d.pool?.toFixed(0)}/MWh</p>
+                      <p style={{ color: d.premium >= 0 ? '#22c55e' : '#ef4444', fontWeight: 600 }}>
+                        Premium: {d.premium >= 0 ? '+' : ''}${d.premium?.toFixed(1)}/MWh
+                      </p>
+                      {d.value_factor && <p style={tooltipItemStyle}>Value factor: {d.value_factor.toFixed(2)}×</p>}
+                    </div>
+                  )
+                }}
+              />
+              <Bar dataKey="premium" radius={[3, 3, 0, 0]}>
+                {premiumData.map((d, i) => (
+                  <Cell key={i} fill={d.premium >= 0 ? '#22c55e' : '#ef4444'} fillOpacity={0.85} />
+                ))}
+              </Bar>
+            </BarChart>
+          </ResponsiveContainer>
+        </div>
+      )}
+
+      {/* Capture price heatmap by year + month */}
+      <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl p-3">
+        <p className="text-[10px] font-medium text-[var(--color-text-muted)] mb-3 uppercase tracking-wider flex items-center">
+          Capture Price Heatmap ($/MWh) — red=low, green=high
+          <ChartInfo>
+            <p style={{color:'#f1f5f9',fontWeight:600,marginBottom:4}}>Capture price by month/year</p>
+            Each cell = average $/MWh received that month. Colour scale is relative to this farm&apos;s own
+            range — reveals seasonal patterns and multi-year trends in price capture independent of market level.<br/><br/>
+            Compare vertically (year-over-year same month) to see whether cannibalisation is worsening.
+            Compare horizontally (month-to-month) to see seasonal price skew.
+          </ChartInfo>
+        </p>
+        <div className="overflow-x-auto">
+          <table className="w-full text-[10px]">
+            <thead>
+              <tr>
+                <th className="text-left text-[var(--color-text-muted)] font-medium pr-2 w-10">Year</th>
+                {MONTH_LABELS.map(m => (
+                  <th key={m} className="text-center text-[var(--color-text-muted)] font-medium px-0.5 w-8">{m}</th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {heatYears.map(y => (
+                <tr key={y}>
+                  <td className="text-[var(--color-text-muted)] pr-2 py-0.5 font-mono">{y}</td>
+                  {Array.from({ length: 12 }, (_, i) => {
+                    const entry = monthly.find(m => m.year === y && m.month === i + 1)
+                    const val = entry?.capture_price ?? null
+                    return (
+                      <td
+                        key={i}
+                        className="text-center py-0.5 px-0.5 rounded text-white font-bold"
+                        style={{ backgroundColor: captureColor(val) }}
+                        title={val != null ? `$${val.toFixed(0)}/MWh` : 'No data'}
+                      >
+                        {val != null ? Math.round(val) : ''}
+                      </td>
+                    )
+                  })}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <div className="flex items-center gap-2 mt-2">
+          <span className="text-[9px] text-[var(--color-text-muted)]">${Math.round(captureMin)}/MWh</span>
+          <div className="flex-1 h-2 rounded" style={{ background: 'linear-gradient(to right, rgb(239,68,68), rgb(34,197,94))' }} />
+          <span className="text-[9px] text-[var(--color-text-muted)]">${Math.round(captureMax)}/MWh</span>
+        </div>
+      </div>
+
+      {/* Seasonal price band breakdown */}
+      <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl p-3">
+        <p className="text-[10px] font-medium text-[var(--color-text-muted)] mb-3 uppercase tracking-wider">
+          Price Band Skew by Season
+        </p>
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+          {Object.entries(SEASON_CONFIG).map(([season, conf]) => {
+            const sd = seasonBandData[season]
+            if (!sd || sd.energy === 0) return null
+            return (
+              <div key={season} className="space-y-1">
+                <p className="text-[10px] font-semibold" style={{ color: conf.color }}>{conf.icon} {conf.label}</p>
+                {PRICE_BANDS.map(b => {
+                  const pct = sd.energy > 0 ? ((sd.bands[b.display] ?? 0) / sd.energy * 100) : 0
+                  if (pct < 0.5) return null
+                  return (
+                    <div key={b.display} className="flex items-center gap-1">
+                      <div className="w-2 h-2 rounded-sm shrink-0" style={{ backgroundColor: b.color }} />
+                      <span className="text-[9px] text-[var(--color-text-muted)] shrink-0">{b.display}</span>
+                      <span className="text-[9px] font-mono text-[var(--color-text)] shrink-0">{pct.toFixed(0)}%</span>
+                    </div>
+                  )
+                })}
+              </div>
+            )
+          })}
+        </div>
+      </div>
+
+      {/* Time-of-day: farm generation vs NEM price reference */}
+      {farmHourly && (
+        <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl p-3">
+          <p className="text-[10px] font-medium text-[var(--color-text-muted)] mb-1 uppercase tracking-wider flex items-center">
+            Time-of-Day Generation vs NEM Price Curve
+            <ChartInfo>
+              <p style={{color:'#f1f5f9',fontWeight:600,marginBottom:4}}>Time-of-day price skew</p>
+              <strong style={{color:'#3b82f6'}}>Blue line</strong>: this farm&apos;s average hourly CF profile (left axis).<br/>
+              <strong style={{color:'#f59e0b'}}>Orange line</strong>: normalised NEM reference price curve (right axis, 0–100 index)
+              — based on typical NEM dispatch prices: low during solar hours (9am–3pm), peaks in the evening (6–9pm).<br/><br/>
+              When the blue and orange lines move together → the farm generates into high-price periods (good).
+              When they diverge → the farm generates into low-price periods (cannibalisation / value erosion).
+            </ChartInfo>
+          </p>
+          <p className="text-[9px] text-[var(--color-text-muted)] mb-2">
+            Blue = farm CF% (left) · Orange = NEM price index 0–100 (right). Overlap = high-value generation.
+          </p>
+          <ResponsiveContainer width="100%" height={200}>
+            <LineChart data={todData} margin={{ top: 4, right: 24, bottom: 0, left: -14 }}>
+              <CartesianGrid strokeDasharray="3 3" stroke="var(--color-border)" />
+              <XAxis dataKey="hour" tick={{ fontSize: 9, fill: 'var(--color-text-muted)' }} interval={3} />
+              <YAxis yAxisId="cf" tick={{ fontSize: 9, fill: '#3b82f6' }} tickFormatter={v => `${v}%`} domain={['auto', 'auto']} />
+              <YAxis yAxisId="price" orientation="right" tick={{ fontSize: 9, fill: '#f59e0b' }} tickFormatter={v => `${v}`} domain={[0, 110]} />
+              <Tooltip
+                contentStyle={tooltipStyle}
+                content={({ active, payload }) => {
+                  if (!active || !payload?.length) return null
+                  const d = payload[0].payload
+                  return (
+                    <div style={tooltipStyle} className="p-2 space-y-0.5">
+                      <p style={{ color: '#f1f5f9', fontWeight: 600, fontSize: 11 }}>{d.hour}</p>
+                      {d.farmCf != null && <p style={{ color: '#3b82f6' }}>CF: {d.farmCf.toFixed(1)}%</p>}
+                      <p style={{ color: '#f59e0b' }}>Price index: {d.priceIdx}/100</p>
+                    </div>
+                  )
+                }}
+              />
+              <Line yAxisId="cf" type="monotone" dataKey="farmCf" stroke="#3b82f6" strokeWidth={2.5} dot={false} name="Farm CF%" />
+              <Line yAxisId="price" type="monotone" dataKey="priceIdx" stroke="#f59e0b" strokeWidth={2} dot={false} strokeDasharray="5 3" name="Price index" />
+              <Legend wrapperStyle={{ fontSize: 9, color: '#94a3b8' }} />
+            </LineChart>
+          </ResponsiveContainer>
+        </div>
+      )}
+
+      <p className="text-[9px] text-[var(--color-text-muted)] italic">
+        Price band data uses monthly average capture price ({project.value_summary.data_first_year}–{project.value_summary.data_last_year}).
+        For $5-increment granularity, interval-level (5-min AEMO dispatch) price correlation is required.
+        Pool price reference data available Aug 2024 onward.
+      </p>
+    </div>
+  )
+}
+
 function DiversityTab({
   project,
   allStateProjects,
@@ -2412,12 +2882,78 @@ function NemLensTab({ project, stateAvg }: { project: WindValueProject; stateAvg
 // PDF summary — flat light-mode layout for export
 // ============================================================
 
+function computeKeyFindings(
+  project: WindValueProject,
+  stateAvg: WindStateAverage | null,
+  corrR: number,
+): string[] {
+  const vs = project.value_summary
+  const sr = project.state_rank
+  const findings: string[] = []
+
+  if (vs.avg_cf_pct != null) {
+    const cfDiff = stateAvg?.avg_cf_pct != null ? vs.avg_cf_pct - stateAvg.avg_cf_pct : null
+    const rank = sr?.cf_percentile != null ? ` — top ${Math.round(100 - sr.cf_percentile)}% of ${project.state} fleet` : ''
+    if (cfDiff != null && Math.abs(cfDiff) >= 1) {
+      findings.push(`Capacity factor: ${vs.avg_cf_pct.toFixed(1)}% (${cfDiff > 0 ? '+' : ''}${cfDiff.toFixed(1)}pp vs ${project.state} average of ${stateAvg!.avg_cf_pct!.toFixed(1)}%)${rank}.`)
+    } else {
+      findings.push(`Capacity factor: ${vs.avg_cf_pct.toFixed(1)}% — in line with ${project.state} state average${rank}.`)
+    }
+  }
+
+  if (vs.avg_value_factor != null) {
+    const disc = ((1 - vs.avg_value_factor) * 100).toFixed(0)
+    if (vs.avg_value_factor >= 0.95) {
+      findings.push(`Capture quality: value factor ${vs.avg_value_factor.toFixed(2)} — earns close to the pool average with minimal cannibalisation discount.`)
+    } else if (vs.avg_value_factor >= 0.80) {
+      findings.push(`Capture quality: value factor ${vs.avg_value_factor.toFixed(2)} — earns ~${disc}% below pool price, typical for ${project.state} wind; moderate cannibalisation exposure.`)
+    } else {
+      findings.push(`Capture quality: value factor ${vs.avg_value_factor.toFixed(2)} — earns ${disc}% below pool price; significant cannibalisation discount reflects high wind-hour congestion.`)
+    }
+  }
+
+  if (corrR != null) {
+    if (corrR < 0.5) {
+      findings.push(`Fleet diversity: correlation R=${corrR.toFixed(2)} — output is relatively uncorrelated with other ${project.state} wind farms, reducing exposure to mass generation events.`)
+    } else if (corrR < 0.75) {
+      findings.push(`Fleet diversity: moderate fleet correlation R=${corrR.toFixed(2)} — some exposure to cannibalisation during high-wind periods across ${project.state}.`)
+    } else {
+      findings.push(`Fleet diversity: high fleet correlation R=${corrR.toFixed(2)} — strongly correlated with ${project.state} wind fleet; elevated cannibalisation risk.`)
+    }
+  }
+
+  const seasonData = ['summer', 'autumn', 'winter', 'spring'].map(s => ({
+    s, cf: project.seasonal_averages[s]?.avg_cf_pct ?? null, capture: project.seasonal_averages[s]?.avg_capture_price ?? null,
+  })).filter(d => d.cf != null)
+  const best = [...seasonData].sort((a, b) => b.cf! - a.cf!)[0]
+  const worst = [...seasonData].sort((a, b) => a.cf! - b.cf!)[0]
+  if (best && worst && best.s !== worst.s) {
+    const priceNote = best.s === 'winter' ? ' Winter peak aligns with high evening demand and elevated prices.' : best.s === 'summer' ? ' Summer peak may coincide with solar suppression of midday prices.' : ''
+    findings.push(`Seasonal profile: strongest in ${best.s} (${best.cf!.toFixed(1)}% CF${best.capture != null ? `, $${best.capture.toFixed(0)}/MWh capture` : ''}), weakest in ${worst.s} (${worst.cf!.toFixed(1)}% CF).${priceNote}`)
+  }
+
+  if (project.annual_data.length >= 4) {
+    const sorted = [...project.annual_data].sort((a, b) => a.year - b.year)
+    const early = sorted.slice(0, Math.floor(sorted.length / 2)).map(y => y.cf_pct ?? 0)
+    const recent = sorted.slice(-Math.floor(sorted.length / 2)).map(y => y.cf_pct ?? 0)
+    const earlyAvg = early.reduce((a, b) => a + b, 0) / early.length
+    const recentAvg = recent.reduce((a, b) => a + b, 0) / recent.length
+    const delta = recentAvg - earlyAvg
+    if (Math.abs(delta) >= 1.5) {
+      findings.push(`Long-term trend: CF ${delta > 0 ? 'improving' : 'declining'} — recent average ${recentAvg.toFixed(1)}% vs early-life ${earlyAvg.toFixed(1)}%.${delta < -2 ? ' Declining trend may reflect resource variability or equipment wear.' : ''}`)
+    }
+  }
+
+  return findings
+}
+
 function WindValuePdfSummary({
   project, stateAvg, allStateProjects,
 }: {
   project: WindValueProject
   stateAvg: WindStateAverage | null
   allStateProjects: WindValueProject[]
+  poolPrices?: Record<string, Record<string, number>>
 }) {
   const vs = project.value_summary
   const sr = project.state_rank
@@ -2469,6 +3005,13 @@ function WindValuePdfSummary({
   const gradeColor = pc?.grade?.startsWith('A') ? '#166534' : pc?.grade?.startsWith('B') ? '#1d4ed8' : '#92400e'
   const gradeBg = pc?.grade?.startsWith('A') ? '#dcfce7' : pc?.grade?.startsWith('B') ? '#dbeafe' : '#fef3c7'
 
+  const keyFindings = computeKeyFindings(project, stateAvg, corrR)
+
+  // Price band distribution (from monthly capture prices)
+  const priceBandRows = computePriceBandDist(project.monthly_data)
+  const fleetBandRows = computeFleetPriceBandDist(allStateProjects)
+  const maxBandPct = Math.max(...priceBandRows.map(b => b.pct), ...fleetBandRows.map(b => b.pct), 1)
+
   return (
     <div style={{ width: 900, backgroundColor: '#ffffff', color: '#0f172a', fontFamily: 'system-ui, sans-serif', padding: 24 }}>
       {/* Header */}
@@ -2502,6 +3045,18 @@ function WindValuePdfSummary({
         ))}
       </div>
 
+      {/* Key findings */}
+      {keyFindings.length > 0 && (
+        <div style={{ backgroundColor: '#f0f9ff', border: '1px solid #bae6fd', borderRadius: 10, padding: 14, marginBottom: 14 }}>
+          <p style={{ fontSize: 10, fontWeight: 700, color: '#0369a1', textTransform: 'uppercase', letterSpacing: '0.05em', margin: '0 0 8px 0' }}>Key Findings</p>
+          <ul style={{ margin: 0, padding: '0 0 0 14px' }}>
+            {keyFindings.map((f, i) => (
+              <li key={i} style={{ fontSize: 10, color: '#0f172a', lineHeight: 1.6, marginBottom: 4 }}>{f}</li>
+            ))}
+          </ul>
+        </div>
+      )}
+
       {/* Annual CF chart */}
       {annualData.length > 0 && (
         <div style={{ backgroundColor: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: 10, padding: 14, marginBottom: 14 }}>
@@ -2514,6 +3069,9 @@ function WindValuePdfSummary({
               {annualData.map((d, i) => <Cell key={i} fill={YEAR_COLORS[parseInt(d.year)] ?? '#3b82f6'} />)}
             </Bar>
           </BarChart>
+          <p style={{ fontSize: 9, color: '#64748b', margin: '6px 0 0 0', lineHeight: 1.5 }}>
+            Each bar shows annual capacity factor (% of maximum possible generation achieved). Year-on-year changes reflect wind resource variability, equipment availability, and curtailment. A declining trend over multiple years may indicate resource depletion, wake effects from new neighbouring wind farms, or equipment degradation.
+          </p>
         </div>
       )}
 
@@ -2556,8 +3114,55 @@ function WindValuePdfSummary({
               ))}
             </tbody>
           </table>
+          <p style={{ fontSize: 9, color: '#64748b', margin: '8px 0 0 0', lineHeight: 1.5 }}>
+            VF = value factor (capture price ÷ pool price). VF {'>'} 1.0 (green) means the farm earns above pool; {'<'} 0.8 (red) indicates strong cannibalisation. %Egy = share of annual energy delivered in that season.
+          </p>
         </div>
       </div>
+
+      {/* Price band distribution */}
+      {priceBandRows.some(b => b.pct > 0) && (
+        <div style={{ backgroundColor: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: 10, padding: 14, marginBottom: 14 }}>
+          <p style={{ fontSize: 10, fontWeight: 600, color: '#475569', textTransform: 'uppercase', marginBottom: 4, letterSpacing: '0.05em' }}>Price Band Distribution — % of MWh by Capture Price Regime</p>
+          <p style={{ fontSize: 9, color: '#94a3b8', margin: '0 0 10px 0' }}>Based on monthly average capture prices. Farm vs {project.state} fleet comparison.</p>
+          <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+            <thead>
+              <tr>
+                {['Price Band', 'This Farm', '', 'State Fleet', ''].map((h, i) => (
+                  <th key={i} style={{ textAlign: i === 0 ? 'left' : i % 2 === 0 ? 'left' : 'right', color: '#64748b', paddingBottom: 6, fontWeight: 600, fontSize: 9, paddingRight: i % 2 === 0 ? 8 : 0 }}>{h}</th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {priceBandRows.map((b, i) => {
+                const fleet = fleetBandRows[i]
+                const farmWidth = `${Math.round(b.pct / maxBandPct * 100)}%`
+                const fleetWidth = `${Math.round((fleet?.pct ?? 0) / maxBandPct * 100)}%`
+                return (
+                  <tr key={i} style={{ borderTop: '1px solid #e2e8f0' }}>
+                    <td style={{ padding: '4px 8px 4px 0', fontSize: 10, fontWeight: 600, color: '#0f172a', whiteSpace: 'nowrap', width: 80 }}>{b.label}</td>
+                    <td style={{ width: 40, textAlign: 'right', fontSize: 10, color: '#0f172a', paddingRight: 6 }}>{b.pct.toFixed(1)}%</td>
+                    <td style={{ width: 160, paddingRight: 12 }}>
+                      <div style={{ height: 10, backgroundColor: '#e2e8f0', borderRadius: 3, overflow: 'hidden' }}>
+                        <div style={{ height: '100%', width: farmWidth, backgroundColor: PRICE_BANDS[i]?.color ?? '#3b82f6', borderRadius: 3 }} />
+                      </div>
+                    </td>
+                    <td style={{ width: 40, textAlign: 'right', fontSize: 10, color: '#475569', paddingRight: 6 }}>{(fleet?.pct ?? 0).toFixed(1)}%</td>
+                    <td style={{ width: 160 }}>
+                      <div style={{ height: 10, backgroundColor: '#e2e8f0', borderRadius: 3, overflow: 'hidden' }}>
+                        <div style={{ height: '100%', width: fleetWidth, backgroundColor: '#94a3b8', borderRadius: 3 }} />
+                      </div>
+                    </td>
+                  </tr>
+                )
+              })}
+            </tbody>
+          </table>
+          <p style={{ fontSize: 9, color: '#64748b', margin: '8px 0 0 0', lineHeight: 1.5 }}>
+            Months where this farm's average capture price fell in each band, weighted by MWh delivered. A farm skewed toward the $0–$50 band generates heavily during low-price periods (solar hours, high-wind events). Exposure to {'>'} $100 bands indicates capture of scarcity pricing. Note: based on monthly average prices; actual dispatch-level distribution requires 5-min data (not yet available).
+          </p>
+        </div>
+      )}
 
       {/* State ranking + pros/cons */}
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, marginBottom: 14 }}>
@@ -2630,6 +3235,9 @@ function WindValuePdfSummary({
               {peerData.map((d, i) => <Cell key={i} fill={d.isThis ? '#0f172a' : '#3b82f640'} />)}
             </Bar>
           </BarChart>
+          <p style={{ fontSize: 9, color: '#64748b', margin: '6px 0 0 0', lineHeight: 1.5 }}>
+            Peer comparison across the top {peerData.length} {project.state} wind farms by average capacity factor (full operational history). Higher CF reduces LCOE and improves debt serviceability. This farm is shown in dark; peers in blue.
+          </p>
         </div>
       )}
 

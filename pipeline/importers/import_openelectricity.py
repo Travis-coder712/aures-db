@@ -26,7 +26,7 @@ import argparse
 import random
 import json
 import time
-from datetime import datetime, date
+from datetime import datetime, date, timedelta
 from difflib import SequenceMatcher
 from urllib.request import Request, urlopen
 from urllib.parse import urlencode, quote
@@ -113,6 +113,13 @@ def import_from_api(conn, year: int, ytd: bool = False):
         print("WARNING: Low API quota. Consider waiting for reset.")
         sys.exit(1)
 
+    # Check the Community plan's 367-day data window
+    earliest_allowed = date.today() - timedelta(days=367)
+    if date(year, 12, 31) < earliest_allowed:
+        print(f"  Skipping {year}: outside the 367-day API window (Community plan allows from {earliest_allowed}).")
+        print(f"  To access older data, upgrade your OpenElectricity plan.")
+        return
+
     # Determine date range
     date_start = f"{year}-01-01"
     if ytd:
@@ -197,16 +204,23 @@ def import_from_api(conn, year: int, ytd: bool = False):
         batch_num = i // BATCH_SIZE + 1
 
         try:
-            data = api_get("/data/facilities/NEM", api_key, {
-                "facility_code": batch,
-                "metrics": ["energy", "market_value"],
-                "interval": "1y",
-                "date_start": date_start,
-                "date_end": date_end,
-            })
+            # Fetch energy and market_value in separate calls — some API plans
+            # don't support multiple metrics in a single request.
+            all_series = []
+            for metric_name in ["energy", "market_value"]:
+                try:
+                    resp = api_get("/data/facilities/NEM", api_key, {
+                        "facility_code": batch,
+                        "metrics": [metric_name],
+                        "interval": "1y",
+                        "date_start": date_start,
+                        "date_end": date_end,
+                    })
+                    all_series.extend(resp.get('data', []))
+                except Exception:
+                    pass  # market_value may not be available on all plans
 
-            # Parse results — split by unit fueltech for BESS charge/discharge
-            for series in data.get('data', []):
+            for series in all_series:
                 metric = series.get('metric')
                 for result in series.get('results', []):
                     unit_code = result.get('columns', {}).get('unit_code', '')
@@ -250,7 +264,15 @@ def import_from_api(conn, year: int, ytd: bool = False):
             time.sleep(0.5)  # Be polite to the API
 
         except Exception as e:
-            print(f"  Batch {batch_num}/{total_batches}: FAILED - {e}")
+            err_body = ''
+            try:
+                err_body = e.read().decode()  # type: ignore[attr-defined]
+            except Exception:
+                pass
+            print(f"  Batch {batch_num}/{total_batches}: FAILED - {e}{' — ' + err_body if err_body else ''}")
+            if batch_num == 1:
+                print(f"  → Aborting year {year}: all batches share the same params.")
+                return
 
     # Step 5: Compute metrics and upsert
     imported = 0
@@ -605,7 +627,7 @@ def upsert_performance_monthly(conn, project_id, year, month, metrics, source):
 def import_monthly_from_api(conn, year: int):
     """Import monthly performance data from the OpenElectricity API.
 
-    Uses interval=1M to get 12 data points per facility per year.
+    Uses interval=1m to get 12 data points per facility per year.
     """
     api_key = os.environ.get('OPENELECTRICITY_API_KEY')
     if not api_key:
@@ -735,7 +757,18 @@ def import_monthly_from_api(conn, year: int):
             time.sleep(0.5)
 
         except Exception as e:
-            print(f"  Batch {batch_num}/{total_batches}: FAILED - {e}")
+            err_body = ''
+            try:
+                err_body = e.read().decode()  # type: ignore[attr-defined]
+            except Exception:
+                pass
+            print(f"  Batch {batch_num}/{total_batches}: FAILED - {e}{' — ' + err_body if err_body else ''}")
+            # Abort remaining batches on first failure — all batches share the same params
+            if batch_num == 1:
+                print(f"  → Aborting year {year}: all batches would fail with the same error.")
+                print(f"  → Tip: Community plan only allows monthly data within the last ~367 days.")
+                print(f"  → For historical years, run without --monthly to use annual (1y) interval.")
+                return
 
     # Compute metrics and upsert monthly
     imported = 0
