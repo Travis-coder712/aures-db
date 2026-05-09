@@ -2006,8 +2006,8 @@ function PriceBandTab({
                   return (
                     <div key={b.display} className="flex items-center gap-1">
                       <div className="w-2 h-2 rounded-sm shrink-0" style={{ backgroundColor: b.color }} />
-                      <span className="text-[9px] text-[var(--color-text-muted)] flex-1 truncate">{b.display}</span>
-                      <span className="text-[9px] font-mono text-[var(--color-text)]">{pct.toFixed(0)}%</span>
+                      <span className="text-[9px] text-[var(--color-text-muted)] shrink-0">{b.display}</span>
+                      <span className="text-[9px] font-mono text-[var(--color-text)] shrink-0">{pct.toFixed(0)}%</span>
                     </div>
                   )
                 })}
