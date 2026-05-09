@@ -210,8 +210,8 @@ export default function WindValueAnalysis({ projectId }: Props) {
         <div
           ref={pdfRef}
           style={{
-            position: 'fixed', top: 0, left: 0,
-            opacity: 0, pointerEvents: 'none', zIndex: 9999,
+            position: 'fixed', top: 0, left: '-10000px',
+            pointerEvents: 'none', zIndex: 9999,
             width: 900,
           }}
         >
