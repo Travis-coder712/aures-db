@@ -7,7 +7,7 @@ import {
   ReferenceLine, Legend, Cell,
 } from 'recharts'
 import { useWindValueProject } from '../../hooks/useWindValue'
-import type { WindValueProject, WindStateAverage, Project } from '../../lib/types'
+import type { WindValueProject, WindStateAverage, Project, FieldSourceEntry } from '../../lib/types'
 import { exportElementToPdf } from '../../lib/exportPdf'
 import { fetchProject } from '../../lib/dataService'
 
@@ -3291,6 +3291,176 @@ function WindValuePdfSummary({
                 ))}
               </div>
             )}
+          </div>
+        )
+      })()}
+
+      {/* Project Evolution Timeline — mirrors the Evolution tab on the project page */}
+      {projectMeta && (() => {
+        type EvoEvent = {
+          date: string
+          title: string
+          detail: string
+          source: string
+          type: 'field_source' | 'timeline' | 'cod_change' | 'ownership'
+          tier?: number
+        }
+        const events: EvoEvent[] = []
+
+        // 1. Field-source provenance entries (where available)
+        if (projectMeta.field_sources) {
+          for (const [field, entries] of Object.entries(projectMeta.field_sources)) {
+            for (const entry of entries as FieldSourceEntry[]) {
+              events.push({
+                date: entry.date,
+                title: `Data update · ${field}`,
+                detail: `${entry.value}${entry.note ? ` — ${entry.note}` : ''}`,
+                source: entry.source,
+                type: 'field_source',
+                tier: entry.tier,
+              })
+            }
+          }
+        }
+        // 2. Timeline milestone events
+        for (const ev of projectMeta.timeline ?? []) {
+          events.push({
+            date: ev.date,
+            title: ev.title,
+            detail: ev.detail ?? '',
+            source: ev.sources?.[0]?.title ?? 'Project timeline',
+            type: 'timeline',
+          })
+        }
+        // 3. COD history
+        for (const c of projectMeta.cod_history ?? []) {
+          events.push({
+            date: c.date,
+            title: 'COD change',
+            detail: c.estimate,
+            source: c.source,
+            type: 'cod_change',
+          })
+        }
+        // 4. Ownership history
+        for (const o of projectMeta.ownership_history ?? []) {
+          events.push({
+            date: o.period,
+            title: 'Ownership change',
+            detail: `${o.owner} — ${o.role}${o.transaction_structure ? ` (${o.transaction_structure})` : ''}`,
+            source: o.source_url ?? 'Ownership tracking',
+            type: 'ownership',
+          })
+        }
+
+        if (events.length === 0) return null
+
+        // For the PDF, render OLDEST first — the project's story reads chronologically
+        events.sort((a, b) => (a.date || '').localeCompare(b.date || ''))
+
+        const TYPE_COLOURS: Record<EvoEvent['type'], string> = {
+          field_source: '#10b981',
+          timeline: '#3b82f6',
+          cod_change: '#f59e0b',
+          ownership: '#8b5cf6',
+        }
+        const TYPE_LABELS: Record<EvoEvent['type'], string> = {
+          field_source: 'Data',
+          timeline: 'Milestone',
+          cod_change: 'COD',
+          ownership: 'Owner',
+        }
+
+        // Cap to a sensible number for one PDF section; show the most recent 24 if there are many
+        const capped = events.length > 24 ? events.slice(-24) : events
+        const truncated = events.length > 24
+
+        // Pull the unique type set actually present for the legend
+        const typesPresent = Array.from(new Set(capped.map(e => e.type)))
+
+        return (
+          <div style={{ backgroundColor: '#ffffff', border: '1px solid #e2e8f0', borderRadius: 10, padding: 14, marginBottom: 14 }}>
+            <p style={{ fontSize: 11, fontWeight: 700, color: '#0f172a', textTransform: 'uppercase', letterSpacing: '0.05em', margin: '0 0 4px 0' }}>
+              Project Evolution Timeline
+            </p>
+            <p style={{ fontSize: 9, color: '#64748b', margin: '0 0 10px 0', lineHeight: 1.5, fontStyle: 'italic' }}>
+              Chronological history of milestones, ownership changes, COD revisions and data-source updates on file for this project. Same data as the Evolution tab on the project page.
+              {truncated && ` Showing the most recent ${capped.length} of ${events.length} recorded events.`}
+            </p>
+
+            {/* Legend */}
+            <div style={{ display: 'flex', gap: 12, marginBottom: 10, flexWrap: 'wrap' }}>
+              {typesPresent.map(t => (
+                <div key={t} style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
+                  <span style={{ width: 8, height: 8, borderRadius: '50%', backgroundColor: TYPE_COLOURS[t] }} />
+                  <span style={{ fontSize: 9, color: '#475569' }}>{TYPE_LABELS[t]}</span>
+                </div>
+              ))}
+            </div>
+
+            {/* Timeline rows */}
+            <div style={{ position: 'relative', paddingLeft: 18 }}>
+              {/* Vertical line behind the dots */}
+              <div style={{ position: 'absolute', left: 6, top: 6, bottom: 6, width: 1, backgroundColor: '#e2e8f0' }} />
+              {capped.map((ev, i) => {
+                const color = TYPE_COLOURS[ev.type]
+                return (
+                  <div key={i} style={{ position: 'relative', marginBottom: 8 }}>
+                    {/* Dot */}
+                    <div style={{
+                      position: 'absolute',
+                      left: -16,
+                      top: 4,
+                      width: 11,
+                      height: 11,
+                      borderRadius: '50%',
+                      backgroundColor: color,
+                      border: '2px solid #ffffff',
+                      boxShadow: `0 0 0 1px ${color}`,
+                    }} />
+                    <div style={{ display: 'grid', gridTemplateColumns: '74px 1fr', gap: 10, alignItems: 'baseline' }}>
+                      <span style={{ fontSize: 9, color: '#475569', fontFamily: 'ui-monospace, SFMono-Regular, monospace', whiteSpace: 'nowrap' }}>
+                        {ev.date || '—'}
+                      </span>
+                      <div>
+                        <div style={{ display: 'flex', alignItems: 'baseline', gap: 6, flexWrap: 'wrap' }}>
+                          <span style={{ fontSize: 10, fontWeight: 700, color: '#0f172a' }}>{ev.title}</span>
+                          <span style={{
+                            fontSize: 8,
+                            fontWeight: 600,
+                            color: color,
+                            backgroundColor: color + '20',
+                            padding: '1px 5px',
+                            borderRadius: 3,
+                            textTransform: 'uppercase',
+                            letterSpacing: '0.05em',
+                          }}>
+                            {TYPE_LABELS[ev.type]}
+                          </span>
+                          {ev.tier && (
+                            <span style={{
+                              fontSize: 8,
+                              color: '#475569',
+                              border: '1px solid #cbd5e1',
+                              padding: '0 4px',
+                              borderRadius: 3,
+                            }}>
+                              T{ev.tier}
+                            </span>
+                          )}
+                        </div>
+                        {ev.detail && (
+                          <p style={{ fontSize: 10, color: '#475569', margin: '2px 0 0 0', lineHeight: 1.4 }}>{ev.detail}</p>
+                        )}
+                        {ev.source && (
+                          <p style={{ fontSize: 9, color: '#94a3b8', margin: '2px 0 0 0', fontStyle: 'italic' }}>{ev.source}</p>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                )
+              })}
+            </div>
           </div>
         )
       })()}
