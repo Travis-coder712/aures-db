@@ -49,9 +49,11 @@ const LESSONS: LessonMeta[] = [
   { id: 'hornsdale',                number: 5,  title: 'Origins: Hornsdale and the Tesla bet',                subtitle: 'How a Twitter bet rewrote the orthodoxy',              readingTime: '10 min' },
   { id: 'how-earns',                number: 6,  title: 'How a battery actually earns',                        subtitle: 'Arbitrage, FCAS, capacity, with real AURES numbers',   readingTime: '11 min' },
   { id: 'duration-records',         number: 7,  title: 'The duration evolution and BESS records',             subtitle: '1-hour to 8-hour and the state-by-state leaderboard',  readingTime: '10 min' },
-  { id: 'solar-storage-stacking',   number: 8,  title: 'Solar + storage stacking — the answer to cannibalisation', subtitle: 'Co-located batteries that recover the cannibalised value', readingTime: '9 min' },
-  { id: 'spread-reduction',         number: 9,  title: 'BESS spread reduction — does arbitrage eat itself?',  subtitle: 'Saturation dynamics and the California parallel',      readingTime: '9 min' },
-  { id: 'outlook',                  number: 10, title: 'Where this is going — more solar, more batteries',    subtitle: 'Residential battery boom and ISP storage targets',     readingTime: '9 min' },
+  { id: 'hybrid-architecture',      number: 8,  title: 'Hybrid architectures — what "hybrid" actually means',  subtitle: 'AC vs DC coupling, shared connection, charge sources', readingTime: '11 min' },
+  { id: 'hybrid-economics',         number: 9,  title: 'Hybrid economics — solar+BESS vs standalone',         subtitle: 'Unit economics, bull/bear cases, what you must believe', readingTime: '12 min' },
+  { id: 'hybrid-cis-push',          number: 10, title: 'Hybrids in the CIS — the policy push',                subtitle: 'T1 → T4 → T6: how Capacity Investment Scheme is reshaping the pipeline', readingTime: '10 min' },
+  { id: 'spread-reduction',         number: 11, title: 'BESS spread reduction — does arbitrage eat itself?',  subtitle: 'Saturation dynamics and the California parallel',      readingTime: '9 min' },
+  { id: 'outlook',                  number: 12, title: 'Where this is going — more solar, more batteries',    subtitle: 'Residential battery boom and ISP storage targets',     readingTime: '9 min' },
 ]
 
 // ============================================================
@@ -1037,113 +1039,547 @@ function Lesson7() {
 }
 
 // ============================================================
-// Lesson 8 — Solar + storage stacking
+// Lesson 8 — Hybrid architectures (what "hybrid" actually means)
 // ============================================================
 
 function Lesson8() {
   return (
     <div>
-      <H2>Why the answer to solar cannibalisation is solar+storage</H2>
+      <H2>The terminology problem — hybrid vs co-located vs paired</H2>
       <P>
-        If solar cannibalises itself by all generating at the same time, the obvious answer is to{' '}
-        <Em>time-shift</Em> some of that generation into the evening. That is exactly what a co-located
-        battery does. The economic logic is direct: charge the battery during the midday glut (when
-        wholesale prices are at or below zero), discharge during the evening peak (when prices are
-        $200-500/MWh or higher), and capture the spread you would otherwise have surrendered to
-        cannibalisation.
-      </P>
-
-      <Callout type="key">
-        Solar + storage stacking is not just an additive revenue model — it's a <Em>defensive</Em> one.
-        Without a co-located battery, the solar farm captures the depressed midday price; with one, the
-        same MWh is re-priced to the evening peak. The battery doesn't have to make money in absolute
-        terms — even if its arbitrage covers only its own depreciation, the solar farm's overall
-        capture price improves dramatically.
-      </Callout>
-
-      <H2>DC-coupled vs AC-coupled hybrids</H2>
-      <P>
-        There are two engineering topologies for combining solar and storage at the same site:
+        In Australian renewable-energy discourse, <Em>"hybrid"</Em> gets used loosely to mean anything
+        from "solar farm with a battery somewhere on site" to "single integrated DC-coupled plant".
+        Before talking about economics or policy, we need to be precise. There are four levels of
+        integration, and they have very different cost, revenue and contractual implications:
       </P>
       <Table
         emphasizeFirst
-        headers={['', 'DC-coupled', 'AC-coupled']}
+        headers={['Level', 'What it means', 'What is shared', 'Example']}
         rows={[
-          ['Architecture', 'Battery sits behind the solar inverter; shares a single grid connection point', 'Battery has its own inverter and grid connection alongside the solar'],
-          ['Advantage', 'Single inverter — cheaper capex per MWh; can charge directly from the array without conversion losses', 'Independent operation — battery can charge from the grid when solar is offline; cleaner accounting'],
-          ['Disadvantage', 'Battery cannot charge if solar inverter trips; tightly coupled with array degradation', 'Higher capex; conversion losses on every charge cycle'],
-          ['Typical use', 'Greenfield hybrid projects (CIS T4 hybrids)', 'Retrofit batteries added to existing solar farms'],
+          ['Standalone + standalone', 'Separate solar and BESS, different sites, different connection points', 'Nothing — independent NMI, MLF, EPC', 'Eraring BESS (Origin) — sited at the retiring coal plant, no solar pairing'],
+          ['Co-located', 'Same site, but each plant has its own connection asset, MLF, AEMO registration', 'Land, sometimes substation pad', 'Many brownfield retrofits — bolt a battery beside existing solar'],
+          ['Paired (single connection)', 'One AC connection point, one MLF, one transformer, but each plant retains its own inverter and AEMO ID', 'Connection asset, switchyard, land, grid studies', 'Most "CIS hybrids" — Tallawang Solar Hybrid, Bundey BESS and Solar'],
+          ['True integrated (DC-coupled)', 'Battery and PV array share DC bus and inverter; single plant from grid perspective', 'Inverter, transformer, connection — battery <em>cannot</em> operate without solar inverter', 'Greenfield Edify hybrids (Majors Creek, Smoky Creek)'],
+        ]}
+      />
+      <P>
+        AEMO's published statistics, the CIS contract structure, and most developer disclosures treat
+        levels 3 and 4 together as "hybrid". Level 2 is usually called "co-located". Level 1 is the
+        baseline — what we've had for ten years.
+      </P>
+
+      <H2>AC-coupled architecture</H2>
+      <P>
+        In an AC-coupled hybrid, the solar array and the battery are wired in parallel on the AC side
+        of the project. The solar has its own inverter (PV inverter — typically a string or central
+        inverter sized to ~120% of array DC rating). The battery has its own four-quadrant inverter
+        (battery PCS — Power Conversion System). Both feed into a common LV bus, then a common
+        transformer, then the grid connection.
+      </P>
+      <P>
+        <Em>Energy path when charging from solar:</Em> PV DC → PV inverter → AC → BESS PCS → battery DC.
+        Two conversion steps, ~3-5% round-trip losses before the battery even starts cycling.{' '}
+        <Em>Energy path when discharging:</Em> battery DC → BESS PCS → AC → grid. Standard one-way
+        conversion loss.
+      </P>
+      <P>
+        AC-coupled is what almost every retrofit looks like — the battery is added later, designed
+        independently, sized independently, and can operate even when the solar inverter is offline
+        (for maintenance, faults, or just at night). It's also the easiest configuration for the
+        operator: separate AEMO registrations, separate dispatch instructions, the BESS can chase
+        FCAS and energy arbitrage independent of the solar profile.
+      </P>
+
+      <H2>DC-coupled architecture</H2>
+      <P>
+        In a DC-coupled hybrid, the battery and the PV array share a single inverter. A DC-DC
+        converter sits between the array and the battery, allowing the battery to charge or discharge
+        on the DC bus before energy is inverted to AC. Effectively the battery looks like another
+        DC source to the same inverter that's converting solar.
+      </P>
+      <P>
+        <Em>Energy path when charging from solar:</Em> PV DC → DC-DC converter → battery DC. <Em>One
+        conversion step</Em>, ~1-2% losses. That's the headline efficiency advantage of DC coupling.
+      </P>
+      <ul className="list-disc list-inside text-sm text-[var(--color-text-muted)] space-y-1.5 mb-3 ml-2">
+        <li><Em>Clipping recovery:</Em> Australian solar farms typically have DC:AC ratios of 1.3-1.5.
+          On a peak-irradiance summer noon, the array generates more DC than the AC inverter can handle
+          and the excess is "clipped" — thrown away. A DC-coupled battery captures that clipped energy
+          (free, since the alternative was waste) and time-shifts it. Industry data suggests 3-8% of
+          annual solar output is clipped on high-DC-ratio sites; a DC-coupled BESS can recover most of
+          that.</li>
+        <li><Em>Single connection cost:</Em> One inverter instead of two, one MV transformer instead of
+          two, one set of protection and SCADA — capex savings of $80-150/kW vs AC-coupled.</li>
+        <li><Em>The trade-off:</Em> The battery cannot operate independently of the solar inverter. If
+          the inverter trips for any reason, the BESS goes offline with it. The BESS also cannot charge
+          from the grid through the same inverter (some DC-coupled designs include a grid-charge mode
+          but it's expensive and unusual).</li>
+      </ul>
+
+      <Callout type="key">
+        The DC-coupled vs AC-coupled choice is mostly a developer decision based on whether they will
+        ever want to charge the battery from the grid. If yes (energy arbitrage across all hours,
+        capacity for night-time discharge) — AC-coupled. If no (battery exists primarily to time-shift
+        the solar) — DC-coupled.
+      </Callout>
+
+      <H2>The connection-point view — what's actually shared</H2>
+      <P>
+        From a grid operator's perspective, a "single connection" hybrid is one with one Network
+        Connection Agreement, one MLF (Marginal Loss Factor), one Generation Performance Standard,
+        and one set of grid studies. This matters enormously for project economics:
+      </P>
+      <ul className="list-disc list-inside text-sm text-[var(--color-text-muted)] space-y-1.5 mb-3 ml-2">
+        <li><Em>Connection asset cost</Em> — the substation, switchyard, transmission line, and any
+          network reinforcement are amortised across both the solar MW and the battery MW. For a
+          remote-REZ site, the connection asset can be 20-30% of total project cost; halving it across
+          two assets is real money.</li>
+        <li><Em>Single MLF</Em> — the battery doesn't get penalised by a remote location's loss
+          factor in the same way standalone storage at the same node would, because some of its
+          discharged energy is effectively "behind the meter" against the solar.</li>
+        <li><Em>Single set of grid studies</Em> — System Strength Remediation Scheme contributions,
+          oscillatory stability studies, do-no-harm assessments — done once.</li>
+        <li><Em>Shared land and balance of plant</Em> — fencing, road, security, control room,
+          weather station — paid for once.</li>
+        <li><Em>Single set of approvals</Em> — one development application, one EIS, one Section 75W
+          referral (in NSW) covering both the array and the battery.</li>
+      </ul>
+
+      <H2>Charge sources and the "renewable" label</H2>
+      <P>
+        A subtle but commercially important question: when the battery discharges energy, is that
+        energy "renewable"? It depends on what the battery is charging from.
+      </P>
+      <ul className="list-disc list-inside text-sm text-[var(--color-text-muted)] space-y-1.5 mb-3 ml-2">
+        <li>In a DC-coupled hybrid, every electron in the battery came from the solar array. Discharge
+          is unambiguously renewable. The energy is eligible for STCs/LGCs if the project is registered,
+          and contracts to corporate offtakers (Microsoft, Telstra, ACT government) can claim it as
+          renewable.</li>
+        <li>In an AC-coupled hybrid configured to <em>only</em> charge from solar, the energy is also
+          renewable, but the operator must hold and prove that — usually via metering at the BESS PCS
+          and a "charge restriction" in the dispatch logic. Some PPAs include this restriction in their
+          terms.</li>
+        <li>In an AC-coupled hybrid that charges <em>opportunistically from the grid</em> at night
+          (low spot prices), the energy is greyback — the battery effectively absorbs the grid
+          generation mix (which is still 60-65% coal in NSW/QLD as of mid-2026), then re-sells it at a
+          premium during the evening peak. This is fine for energy arbitrage but it's not renewable
+          generation; the operator cannot create LGCs for those MWhs.</li>
+      </ul>
+      <P>
+        For projects targeting a corporate PPA (which usually requires demonstrably renewable energy
+        through the night), DC-coupling or charge-restriction is effectively mandatory. For projects
+        playing pure energy arbitrage (most CIS-3 standalone BESS), the question doesn't arise — they
+        charge from whatever's cheap and discharge into whatever's expensive.
+      </P>
+
+      <H2>Real Australian hybrid examples — what's actually being built</H2>
+      <P>
+        Six hybrid configurations under construction or in advanced development in 2026 (all CIS or
+        LTESA contracted, all in AURES):
+      </P>
+      <Table
+        emphasizeFirst
+        headers={['Project', 'State', 'Solar', 'BESS', 'Coupling', 'Notes']}
+        rows={[
+          ['Junction Rivers', 'NSW', '585 MW', '800 MWh', 'AC', 'Largest CIS T1 hybrid — also includes a wind component'],
+          ['Tallawang Solar Hybrid', 'NSW', '500 MW', '1,000 MWh', 'AC', 'Enel Green Power — CIS T4 — 2-hr battery sized for evening shift'],
+          ['Smoky Creek + Majors Creek', 'QLD', '300+150 MW', '1,200+600 MWh', 'DC', 'Edify Energy — two sites, both DC-coupled, both CIS contracted'],
+          ['Bundey BESS and Solar', 'SA', '240 MW', '1,200 MWh', 'AC', '5-hour BESS — long-duration paired hybrid, CIS T4'],
+          ['Killawarra Hybrid', 'WA', '350 MW', '2,100 MWh', 'AC', 'CIS T5 — 6-hour storage to firm WA daily peak (Trina Solar developer)'],
+          ['Collie Battery + Solar Hybrid', 'WA', '200 MW', '1,518 MWh', 'AC', 'Enpowered / Plenary — CIS T6 — sized for South West Interconnected System evening shift'],
         ]}
       />
 
-      <H2>The CIS hybrid awards</H2>
-      <P>
-        The CIS framework strongly favours hybrid projects. Of the 20 awards under CIS Tender 4 (Oct
-        2025), <Em>12 were hybrids</Em> — solar + co-located battery contracted under a single CISA.
-        The hybrid contract typically defines the solar generation profile, the battery
-        charge/discharge profile, and the total firm capacity available to the grid. Examples:
-      </P>
-      <ul className="list-disc list-inside text-sm text-[var(--color-text-muted)] space-y-1.5 mb-3 ml-2">
-        <li><Em>Junction Rivers</Em> (NSW, 585 MW solar + 800 MWh BESS) — the largest CIS T1 hybrid</li>
-        <li><Em>Bendemeer Energy Hub</Em> (NSW, 252 MW solar + 300 MWh BESS, T4)</li>
-        <li><Em>Bundey BESS and Solar</Em> (SA, 240 MW solar + 1,200 MWh BESS, T4)</li>
-        <li><Em>Killawarra Hybrid Project</Em> (WA, 350 MW solar + 2,100 MWh BESS, T5)</li>
-        <li><Em>Goulburn River Solar</Em> (NSW, 450 MW solar) — in construction with planned 3-hour
-          co-located battery as a separate CIS T3 award</li>
-      </ul>
-
-      <H2>The charge-from-own-array math</H2>
-      <P>
-        A 200 MW solar farm with a co-located 4-hour battery (800 MWh) can typically charge the entire
-        battery from its own generation during the midday peak window. At a 30% capacity factor, the
-        solar farm generates 200 × 24 × 0.30 = 1,440 MWh per day, of which a ~6 hour midday window
-        produces ~600 MWh. The battery only needs ~800 MWh × 1/0.85 = ~940 MWh to fully charge after
-        round-trip efficiency, so the array can fill the battery and still deliver ~500 MWh to the grid
-        at midday. The discharge over the evening peak adds another ~800 MWh × 0.85 = ~680 MWh sold at
-        a higher price.
-      </P>
-
-      <H2>Why only ~50% of utility solar will be hybrid</H2>
-      <P>
-        Despite the obvious economic appeal, AEMO's ISP modelling assumes only about half of
-        utility-scale solar will be co-located with storage by 2030. The reasons:
-      </P>
-      <ul className="list-disc list-inside text-sm text-[var(--color-text-muted)] space-y-1.5 mb-3 ml-2">
-        <li><Em>Existing brownfield solar</Em> wasn't designed for battery co-location — retrofitting
-          requires inverter changes, network connection upgrades, and often regulatory approval
-          variation. Many of the 12 GW of operating Australian utility solar won't be retrofitted.</li>
-        <li><Em>Standalone batteries can do the same arbitrage</Em> from anywhere in the network — at
-          load-centre BESS sites (Eraring, Waratah, Tarong) the connection point matters more than
-          co-location with solar.</li>
-        <li><Em>Capital constraints</Em> — adding a battery doubles project capex. Greenfield developers
-          increasingly add them; brownfield owners often can't afford to.</li>
-        <li><Em>Network constraints</Em> — many solar sites have limited additional export capacity,
-          so a co-located battery's discharge can't increase total grid injection.</li>
-      </ul>
-
       <Callout type="info">
-        The ISP forecast is therefore: hybrids capture ~50% of new utility solar by 2030 (and rising
-        toward 70% by 2034); standalone BESS provides the rest of the storage build-out. The
-        complementarity matters — hybrids fix solar's cannibalisation problem at the source,
-        standalone BESS provides system-level arbitrage and FCAS.
+        The Australian hybrid pipeline as of mid-2026: <Em>24 CIS-contracted hybrid projects</Em>{' '}
+        across T1, T4, T5 and T6 — total ~5.8 GW of solar and ~17 GWh of battery. Most are
+        AC-coupled (because the contracts allow grid charging during very low-priced periods); the
+        Edify Australian portfolio is the most prominent DC-coupled fleet.
       </Callout>
 
       <Callout type="source">
-        Sources: AEMO Integrated System Plan 2024 + 2026 ·
-        DCCEEW CIS Tender 4 results · Energy-Storage News <em>11.4 GWh of solar-plus-storage in
-        Tender 4</em> ·
-        Modo Energy <em>hybrid co-location economics</em> ·
-        Aurora Energy Research <em>solar + storage stacking outlook</em>.
+        Sources: AURES scheme tracker · DCCEEW CIS Tender 1, 4, 5, 6 results ·
+        Edify Energy quarterly disclosures · Enel Green Power Tallawang DA submission ·
+        Modo Energy <em>DC-coupling clipping recovery economics</em> ·
+        EPRI <em>Hybrid Power Plant Best Practice Guide</em>.
       </Callout>
     </div>
   )
 }
 
 // ============================================================
-// Lesson 9 — BESS spread reduction (the saturation question)
+// Lesson 9 — Hybrid economics (when does it win?)
 // ============================================================
 
 function Lesson9() {
+  return (
+    <div>
+      <H2>Setting up the four-way comparison</H2>
+      <P>
+        The hybrid question is rarely "should this site exist". It's almost always: <Em>given a piece
+        of land, a connection point, and a budget, what configuration maximises NPV?</Em> Four
+        archetypal configurations to compare:
+      </P>
+      <ul className="list-disc list-inside text-sm text-[var(--color-text-muted)] space-y-1.5 mb-3 ml-2">
+        <li><Em>Solar-alone</Em> — 200 MW PV, single inverter fleet, sells to pool at solar capture
+          price</li>
+        <li><Em>BESS-alone (load-centre)</Em> — 200 MW / 800 MWh BESS at a strong-grid urban node,
+          charges from grid, plays full arbitrage</li>
+        <li><Em>BESS-alone (REZ-site)</Em> — 200 MW / 800 MWh BESS at the same remote solar location,
+          but no solar — pure arbitrage from a low-MLF node</li>
+        <li><Em>Solar + BESS hybrid</Em> — 200 MW PV + 200 MW / 800 MWh battery sharing one connection
+          point, one MLF, one set of grid studies</li>
+      </ul>
+
+      <H2>What the hybrid actually saves on capex</H2>
+      <P>
+        The hybrid capex saving is not the battery cost (that's the same whether co-located or
+        standalone) or the solar cost (same). It's the <Em>shared infrastructure</Em>:
+      </P>
+      <Table
+        emphasizeFirst
+        headers={['Cost line', 'Standalone solar', 'Standalone BESS', 'Hybrid', 'Hybrid saving']}
+        rows={[
+          ['Connection asset (line, substation, switchyard)', '$60-90M', '$60-90M', '$70-100M', '$50-80M'],
+          ['MLF / grid studies / SSRS', '$3-5M', '$3-5M', '$4-6M', '$2-4M'],
+          ['DA / EIS / planning', '$5-10M', '$5-10M', '$7-12M', '$3-8M'],
+          ['Land + access road + civil', '$8-15M', '$5-10M', '$10-18M', '$3-7M'],
+          ['Control room / SCADA / security', '$2-3M', '$2-3M', '$2.5-3.5M', '$1.5-2.5M'],
+          ['Sub-total shared BoP', '~$78-123M', '~$75-118M', '~$93-139M', '~$60-101M'],
+        ]}
+      />
+      <P>
+        For a 200 MW + 200 MW / 800 MWh site, hybrid capex is therefore ~$60-100M lower than the same
+        two assets built standalone. That's 8-12% of total project capex of roughly $700-900M.
+        Material — but not enormous, and it's offset by some loss of flexibility (see below).
+      </P>
+
+      <H2>What the hybrid changes on revenue</H2>
+      <P>
+        Revenue is where the four configurations really diverge. Using 2025-26 indicative values for a
+        well-resourced NEM site:
+      </P>
+      <Table
+        emphasizeFirst
+        headers={['Revenue stream', 'Solar-alone', 'BESS-alone load-centre', 'BESS-alone REZ-site', 'Hybrid (solar+BESS)']}
+        rows={[
+          ['Energy: capture price (annual av $/MWh)', '$30-50', '$130 spread × 320 cycles', '$120 spread × 320 cycles', 'Solar @ $30-50, BESS @ $120-130 × 280 cycles'],
+          ['Energy: gross revenue per MW of capacity', '$80-130k', '$170-230k', '$155-210k', 'Solar $80-130k + BESS $140-180k'],
+          ['FCAS', 'minimal', '$25-40k/MW', '$15-25k/MW (less liquid)', '$20-30k/MW on BESS only'],
+          ['Capacity / scheme revenue (CISA or LTESA)', 'CIS revenue floor', 'CIS revenue floor or capacity payment', 'CIS revenue floor', 'Single CISA across both assets — fewer dollars but one contract'],
+          ['MLF degradation risk', 'High (solar farms have worst MLF trajectory)', 'Low (load-centre)', 'High', 'Medium — battery shifts a chunk of solar generation across the day so peak-export MLF impact is lower'],
+        ]}
+      />
+      <P>
+        The hybrid's revenue is <Em>not</Em> the sum of standalone solar + standalone BESS. The BESS
+        in a hybrid does fewer cycles (because it's optimising against its own solar's profile rather
+        than the full market), and it gives up some FCAS optionality (less flexible than a standalone
+        battery). But it captures three structural advantages:
+      </P>
+      <ul className="list-disc list-inside text-sm text-[var(--color-text-muted)] space-y-1.5 mb-3 ml-2">
+        <li><Em>The "free fuel" advantage</Em> — solar that would otherwise be cannibalised (or
+          curtailed, or clipped) charges the battery at zero cost. This is the highest-value form of
+          arbitrage available in the NEM.</li>
+        <li><Em>Solar capture-price rescue</Em> — by absorbing midday solar into the battery and
+          discharging it at 6-9 pm, the hybrid effectively lifts its <em>solar</em> revenue. A
+          standalone solar farm at 0.45 VF earns $35/MWh on a $80 pool average; the same farm with a
+          co-located 4-hour BESS effectively sells 25-30% of its annual generation at the
+          $150-200/MWh evening peak instead. Total revenue rises by 30-50% without changing the
+          array.</li>
+        <li><Em>One CISA contract</Em> — the hybrid is signed as one project with one revenue
+          underwriting agreement, simpler to structure and finance than two separate contracts.</li>
+      </ul>
+
+      <H2>The unit economics — a side-by-side</H2>
+      <P>
+        Indicative 25-year NPV per MW of grid connection capacity for a 200 MW NSW South West REZ
+        site, assuming the 2026 ISP central trajectory for prices, MLFs and cost curves:
+      </P>
+      <Table
+        emphasizeFirst
+        headers={['Configuration', 'Capex ($/MW)', 'Annual revenue ($/MW)', 'IRR (un-levered)', 'NPV @ 8% ($/MW)']}
+        rows={[
+          ['Solar-alone (200 MW PV)', '$1.05-1.20M', '$95-130k', '6.0-7.5%', '$50-150k'],
+          ['BESS-alone (200/800 MWh BESS)', '$1.5-1.7M', '$200-260k', '7.5-9.5%', '$200-450k'],
+          ['Hybrid (200 PV + 200/800 BESS)', '$2.2-2.5M', '$280-360k', '9.0-11.5%', '$400-750k'],
+          ['Two standalones built side-by-side', '$2.55-2.90M', '$295-390k', '7.0-9.0%', '$250-550k'],
+        ]}
+      />
+      <P>
+        Two observations:
+      </P>
+      <ul className="list-disc list-inside text-sm text-[var(--color-text-muted)] space-y-1.5 mb-3 ml-2">
+        <li><Em>BESS-alone IRRs higher than solar-alone</Em> — at current spreads, batteries are the
+          better single-asset bet. Solar's high cannibalisation risk and high MLF degradation tail eat
+          its returns.</li>
+        <li><Em>Hybrid beats both standalones, and beats the sum of two standalones built
+          separately</Em> — the connection-asset saving and the solar capture-price uplift more than
+          offset the BESS cycling loss. This is the policy basis for CIS T4's hybrid weighting.</li>
+      </ul>
+
+      <Callout type="warn">
+        These numbers assume mid-case spreads, mid-case capture prices, and 2026 cost stacks. They
+        are <Em>not</Em> robust to a bad scenario — see the next sections.
+      </Callout>
+
+      <H2>The bull case — what you'd have to believe</H2>
+      <P>
+        For the hybrid math to keep working (especially the high IRRs), you need to believe several
+        things at once:
+      </P>
+      <ul className="list-disc list-inside text-sm text-[var(--color-text-muted)] space-y-1.5 mb-3 ml-2">
+        <li><Em>Solar VFs stay below 0.55 in NSW/QLD/VIC and 0.40 in SA through 2030.</Em> If solar
+          capture prices recover (e.g. coal exits faster than expected, evening battery discharge
+          flattens the duck), the standalone solar case improves and the hybrid premium shrinks.</li>
+        <li><Em>BESS spreads stay above $130/MWh through 2030.</Em> If spreads compress faster than
+          expected (the spread-reduction thesis in Lesson 11), the BESS revenue contribution drops
+          and the hybrid economics weaken.</li>
+        <li><Em>Connection-asset costs keep climbing.</Em> The hybrid advantage is largely about
+          amortising connection. If grid build-out catches up and connection costs fall (the
+          opposite of recent experience), the saving shrinks.</li>
+        <li><Em>Solar capex falls another 15-25% by 2030.</Em> Cheaper modules make the hybrid case
+          stronger relative to BESS-alone (because adding solar to an existing connection becomes
+          almost free).</li>
+        <li><Em>The grid stays constrained.</Em> If REZ transmission lines are built faster than
+          generation arrives, the connection-asset constraint vanishes and standalone projects can
+          plug in cheaply at the new substations.</li>
+      </ul>
+
+      <H2>The bear case — what you'd have to disbelieve</H2>
+      <P>
+        Equally, there are scenarios where hybrid loses to one or both standalones:
+      </P>
+      <ul className="list-disc list-inside text-sm text-[var(--color-text-muted)] space-y-1.5 mb-3 ml-2">
+        <li><Em>BESS cycle life and degradation curves are worse than warranties suggest.</Em> A
+          hybrid battery is cycled hard (every solar day) to capture the midday-to-evening shift —
+          ~330+ full cycles per year vs ~280 for a load-centre BESS that picks its arbitrage windows.
+          If cells degrade meaningfully faster under that cycling pattern, the hybrid's BESS revenue
+          assumption breaks.</li>
+        <li><Em>Evening peak prices fall faster than midday troughs rise.</Em> The arbitrage spread
+          relies on the evening peak. If gas-peaker retirement accelerates BESS discharge and the peak
+          collapses to $120/MWh, hybrid economics weaken substantially.</li>
+        <li><Em>Long-duration storage (LDS) wins the firmness market.</Em> LTESA Round 6 awarded 1.17
+          GW of 8-12 hour batteries. If LDS becomes the cheapest source of evening firm capacity, the
+          4-hour BESS in a typical hybrid is competing on a downward-sloping price curve.</li>
+        <li><Em>Capex of standalone BESS falls faster than hybrid capex.</Em> Tier-1 cell prices are
+          declining ~10-15%/yr; integration costs less rapidly. A standalone BESS gets the cell-price
+          tailwind without the inverter / DC-DC integration complexity of a DC-coupled hybrid.</li>
+      </ul>
+
+      <H2>The verdict — per use case</H2>
+      <Table
+        emphasizeFirst
+        headers={['Use case', 'Best configuration', 'Why']}
+        rows={[
+          ['Remote REZ site, no existing infrastructure', 'Hybrid', 'Connection-asset amortisation is the entire point — single shared substation across both technologies'],
+          ['Load-centre node with high evening prices', 'Standalone BESS', 'No solar resource needed; battery captures the full FCAS+arbitrage stack'],
+          ['Retiring coal plant with strong grid', 'Standalone BESS', 'Connection asset already exists (the coal plant\'s switchyard); solar adds little'],
+          ['Existing operating solar farm with poor VF', 'Co-located retrofit BESS', 'Defensive — recover cannibalised value without rebuilding the connection'],
+          ['Greenfield large-scale corporate-PPA site', 'DC-coupled hybrid', 'Single renewable energy stream, clean LGC accounting, lowest-cost firm renewable PPA'],
+          ['Long-duration storage (8h+)', 'Standalone or paired with wind', 'Hybrid with solar is over-cycled for LDS economics — wind pairing is more typical'],
+        ]}
+      />
+
+      <Callout type="key">
+        Hybrids win the most when (1) you're paying for a new connection anyway, (2) the local solar
+        resource is good but the local capture price is poor, and (3) the evening peak is still
+        well-defined. They lose to standalone BESS at urban nodes and to retrofit BESS at operating
+        sites. The CIS T4 60% hybrid weighting reflects DCCEEW judging that (1)+(2)+(3) all hold for
+        most of the remaining utility-solar pipeline.
+      </Callout>
+
+      <Callout type="source">
+        Sources: Aurora Energy Research <em>Australia hybrid economics 2025</em> ·
+        Modo Energy <em>standalone vs hybrid BESS dispatch</em> · AEMO ISP 2024 + 2026 cost stacks ·
+        CSIRO GenCost 2025 · UNSW CEEM <em>hybrid power plant economics</em> ·
+        Cornwall Insight <em>Australian BESS captured spread analysis</em>.
+      </Callout>
+    </div>
+  )
+}
+
+// ============================================================
+// Lesson 10 — Hybrids in the CIS (the policy push)
+// ============================================================
+
+function Lesson10() {
+  return (
+    <div>
+      <H2>The CIS framework — Generation vs Battery tenders, and the hybrid crossover</H2>
+      <P>
+        The Capacity Investment Scheme (covered in detail in the CIS-LTESA module) runs two parallel
+        tender streams: <Em>Generation tenders</Em> (T1, T4 in the NEM; T5 in the WEM) which support
+        new renewable energy capacity, and <Em>Dispatchable tenders</Em> (T2, T3 in the NEM; T6 in
+        the WEM) which support batteries and other dispatchable assets. Hybrid projects can be
+        contracted under either stream — and how they're contracted shapes the project design.
+      </P>
+      <ul className="list-disc list-inside text-sm text-[var(--color-text-muted)] space-y-1.5 mb-3 ml-2">
+        <li><Em>Generation tender hybrid:</Em> the project is contracted on its solar (or wind)
+          generation profile, with the battery treated as a firming asset that shifts generation into
+          higher-value periods. The CISA revenue underwriting is calibrated to total firmed
+          generation, not battery arbitrage.</li>
+        <li><Em>Dispatchable tender hybrid:</Em> the project is contracted on its dispatchable
+          capacity, with the solar treated as a low-cost charging source for the battery. The CISA
+          underwriting is calibrated to capacity availability and dispatch performance.</li>
+      </ul>
+      <P>
+        Both designs have been awarded — the choice depends on what the developer is optimising for
+        and where the round is positioned in the policy timeline.
+      </P>
+
+      <H2>Tender-by-tender hybrid share</H2>
+      <P>
+        The hybrid share of CIS awards has shifted dramatically across rounds. Live AURES data:
+      </P>
+      <Table
+        emphasizeFirst
+        headers={['Tender', 'Region', 'Type', 'Awards', 'Hybrid count', 'Hybrid %']}
+        rows={[
+          ['T1', 'NEM', 'Generation', '19', '8', '42%'],
+          ['T2', 'WEM', 'Dispatch', '4', '0', '0%'],
+          ['T3', 'NEM', 'Dispatch', '16', '0', '0%'],
+          ['T4', 'NEM', 'Generation', '20', '12', '60%'],
+          ['T5', 'WEM', 'Generation', '7', '1', '14%'],
+          ['T6', 'WEM', 'Dispatch', '3', '2', '67%'],
+          ['Total', '—', '—', '69', '23', '33%'],
+        ]}
+      />
+      <P>
+        Two patterns stand out. First, <Em>Generation tenders trended hybrid</Em> — T1 was 42%,
+        T4 was 60% — as developers and DCCEEW both learned that solar-only economics were exposed to
+        cannibalisation risk that hybrid configurations could mitigate. Second, <Em>Dispatch tenders
+        stayed standalone</Em> in the NEM (T3 was 0% hybrid — all 16 awards were pure batteries) but
+        T6 in WA flipped to 67% hybrid, because WA's solar+BESS economics are uniquely advantageous
+        (strong solar resource, expensive evening gas peakers).
+      </P>
+
+      <H2>CIS T1 hybrids — the foundation (Nov 2023 / Mar 2024 awards)</H2>
+      <P>
+        Tender 1 in the NEM was the first scaled hybrid awards, with 8 of 19 contracted projects
+        being solar+BESS:
+      </P>
+      <ul className="list-disc list-inside text-sm text-[var(--color-text-muted)] space-y-1.5 mb-3 ml-2">
+        <li><Em>Junction Rivers</Em> (NSW, 585 MW / 800 MWh) — largest of the T1 cohort; combined
+          wind+solar+BESS</li>
+        <li><Em>Glanmire, Barwon, Elaine, Barnawartha Solar Farms</Em> (Elgin Energy portfolio) — four
+          mid-sized hybrids in NSW + VIC ranging 60-250 MW, all with 1.5-2x MWh ratios</li>
+        <li><Em>West Mokoan Solar Farm</Em> (VIC, 300 MW / 560 MWh)</li>
+        <li><Em>Majors Creek + Ganymirra</Em> (QLD, both 150 MW / 600 MWh) — Edify Energy's
+          DC-coupled portfolio entry</li>
+      </ul>
+
+      <H2>CIS T4 hybrids — the inflection (Oct 2025 award)</H2>
+      <P>
+        Tender 4 saw the hybrid share jump to 60% (12 of 20 awards). The contract design also matured
+        — most T4 hybrids are at the larger end of the scale (250-500 MW solar, 600-1,800 MWh BESS)
+        and the battery durations cluster around 4-6 hours, designed for evening shift rather than
+        intra-day arbitrage:
+      </P>
+      <ul className="list-disc list-inside text-sm text-[var(--color-text-muted)] space-y-1.5 mb-3 ml-2">
+        <li><Em>Tallawang Solar Hybrid</Em> (NSW, 500 MW / 1,000 MWh) — Enel Green Power</li>
+        <li><Em>Bundey BESS and Solar</Em> (SA, 240 MW / 1,200 MWh) — Genaspi Energy; 5-hour battery</li>
+        <li><Em>Smoky Creek + Guthrie's Gap + Nowingi</Em> (QLD/VIC, Edify portfolio) — three 300 MW
+          / 1,200 MWh hybrids, all DC-coupled, all with 4-hour batteries</li>
+        <li><Em>Punchs Creek Solar Farm</Em> (QLD, 400 MW / 1,600 MWh) — EDPR</li>
+        <li><Em>Merino Solar Farm</Em> (NSW, 450 MW / 1,800 MWh) — 4-hour battery, NSW South West REZ</li>
+        <li><Em>Middlebrook Solar Farm</Em> (NSW, 363 MW / 813 MWh) — shorter duration (~2.3 hr)
+          paired hybrid</li>
+        <li><Em>Bendemeer Energy Hub</Em> (NSW, 252 MW / 300 MWh) — sub-1.5-hour battery, the smallest
+          BESS share in the T4 cohort</li>
+        <li><Em>Corop Solar Farm and BESS</Em> (VIC, 230 MW / 704 MWh) — Leeson Solar; 3-hour battery</li>
+        <li><Em>Derby Solar Project</Em> (VIC, 95 MW / 210 MWh) — mid-size hybrid</li>
+        <li><Em>Gawara Baya</Em> (QLD, 399 MW wind + 217 MWh BESS) — wind+BESS rather than solar+BESS,
+          shows the same hybrid model extending to wind</li>
+      </ul>
+
+      <H2>CIS T5 and T6 — the WA pipeline</H2>
+      <P>
+        Western Australia's SWIS market has a unique dynamic: extremely high midday solar penetration
+        (over 50% on good days) and high evening prices (LNG-linked gas peakers). Hybrid economics in
+        WA are arguably stronger than anywhere in the NEM, and the T5 and T6 awards reflect that:
+      </P>
+      <ul className="list-disc list-inside text-sm text-[var(--color-text-muted)] space-y-1.5 mb-3 ml-2">
+        <li><Em>Killawarra Hybrid Project</Em> (T5, 350 MW / 2,100 MWh) — Trina Solar — 6-hour
+          battery, the largest hybrid in the Australian CIS pipeline by MWh</li>
+        <li><Em>Collie Battery and Solar Hybrid</Em> (T6, 200 MW / 1,518 MWh) — Enpowered / Plenary
+          — co-located at the retiring Collie coal complex, using existing connection</li>
+        <li><Em>Waroona Renewable Energy Project Stage 1</Em> (T6, 82 MW / 565 MWh) — Frontier
+          Energy; smaller-scale hybrid</li>
+      </ul>
+
+      <H2>LTESA hybrids — the long-duration crossover</H2>
+      <P>
+        The NSW LTESA program (covered in the CIS-LTESA module) ran in parallel with CIS through
+        2024-25 and awarded one solar+BESS hybrid in Round 4: <Em>Maryvale Solar + BESS</Em> (NSW,
+        172 MW / 372 MWh). LTESA Rounds 5 and 6 focused on standalone long-duration storage (8h+)
+        rather than hybrids, but the framework remains open to hybrid bids in future rounds — a
+        hybrid solar + 8-hour BESS combination could plausibly win a future LTESA round if developers
+        bring well-priced projects.
+      </P>
+
+      <H2>What's coming — CIS rounds 7-12 and the 2030 view</H2>
+      <P>
+        The CIS framework is committed to running ~32 GW of additional capacity to 2030, with
+        roughly half generation and half dispatchable. Based on the T1-T6 pattern, the expected
+        hybrid share by round type:
+      </P>
+      <Table
+        emphasizeFirst
+        headers={['Tender', 'Type', 'Expected timing', 'Expected hybrid %', 'Why']}
+        rows={[
+          ['T7', 'NEM Generation', 'mid-2026', '60-75%', 'T4 pattern continues; remaining utility-solar pipeline is almost all paired with BESS'],
+          ['T8', 'NEM Dispatch', 'late 2026', '5-15%', 'Mostly standalone BESS as connection sites near retiring coal'],
+          ['T9', 'NEM Generation (wind-weighted)', 'early 2027', '20-35%', 'Wind+BESS hybrids start appearing in earnest'],
+          ['T10', 'NEM Dispatch (LDS-weighted)', 'mid-2027', '10-25%', 'Some hybrid LDS but mostly standalone pumped hydro / 8h batteries'],
+          ['T11-12', 'WEM rounds', '2027-28', '50-70%', 'WA hybrid dominance continues'],
+        ]}
+      />
+
+      <Callout type="key">
+        AEMO's 2026 ISP central scenario projects that <Em>~50% of new utility-scale solar capacity
+        commissioned 2026-2030 will be paired with co-located storage</Em>, rising to ~70% by 2034.
+        The CIS is the main vehicle delivering this — by structuring contracts to favour firmed
+        rather than as-available solar, it has tipped developer economics decisively toward hybrid
+        configurations.
+      </Callout>
+
+      <H2>What the hybrid wave means for the market</H2>
+      <P>
+        Three downstream effects of the CIS-driven hybrid wave:
+      </P>
+      <ul className="list-disc list-inside text-sm text-[var(--color-text-muted)] space-y-1.5 mb-3 ml-2">
+        <li><Em>Solar capture-price stabilisation.</Em> If 50% of new solar comes with co-located
+          storage that shifts midday output to evening, the average solar VF stops decaying — the
+          incremental MWh in the market is partially time-shifted rather than dumped at midday.
+          Standalone solar VFs may even partially recover (the "spread reduction" lesson explores
+          why).</li>
+        <li><Em>BESS revenue mix shift.</Em> As more BESS capacity arrives via hybrids (with cycling
+          patterns dictated by solar shape rather than market price), standalone BESS revenue
+          becomes increasingly the marginal price-setter. The pricing dynamics of hybrid vs
+          standalone BESS will diverge through the late 2020s.</li>
+        <li><Em>Connection queue rebalancing.</Em> A hybrid takes one connection slot where two
+          standalone projects would have taken two. The grid connection queue is the binding
+          constraint in the NEM; hybridisation effectively doubles the "useful" capacity per
+          connection point. This is one of the strongest non-price arguments for the CIS hybrid
+          weighting.</li>
+      </ul>
+
+      <Callout type="source">
+        Sources: AURES scheme tracker · DCCEEW CIS round results (T1-T6) ·
+        AEMO ISP 2024 + 2026 · NSW EnergyCo LTESA Round 4 results ·
+        Aurora Energy Research <em>Australia CIS hybrid market analysis</em> ·
+        Cornwall Insight <em>Hybrid project pipeline 2026</em> ·
+        Modo Energy <em>WEM hybrid economics</em>.
+      </Callout>
+    </div>
+  )
+}
+
+// ============================================================
+// Lesson 11 — BESS spread reduction (renumbered from old Lesson 9)
+// ============================================================
+
+function Lesson11() {
   return (
     <div>
       <H2>The thesis: does arbitrage eat itself?</H2>
@@ -1262,10 +1698,10 @@ function Lesson9() {
 }
 
 // ============================================================
-// Lesson 10 — Outlook (renumbered from old Lesson 7)
+// Lesson 12 — Outlook (renumbered from old Lesson 10)
 // ============================================================
 
-function Lesson10() {
+function Lesson12() {
   return (
     <div>
       <H2>The residential battery boom</H2>
@@ -1508,9 +1944,11 @@ function LessonView({ lesson, progress, onComplete }: {
         {lesson.id === 'hornsdale'                && <Lesson5 />}
         {lesson.id === 'how-earns'                && <Lesson6 />}
         {lesson.id === 'duration-records'         && <Lesson7 />}
-        {lesson.id === 'solar-storage-stacking'   && <Lesson8 />}
-        {lesson.id === 'spread-reduction'         && <Lesson9 />}
-        {lesson.id === 'outlook'                  && <Lesson10 />}
+        {lesson.id === 'hybrid-architecture'      && <Lesson8 />}
+        {lesson.id === 'hybrid-economics'         && <Lesson9 />}
+        {lesson.id === 'hybrid-cis-push'          && <Lesson10 />}
+        {lesson.id === 'spread-reduction'         && <Lesson11 />}
+        {lesson.id === 'outlook'                  && <Lesson12 />}
       </article>
 
       <div className="flex items-center justify-between gap-3 pt-6 border-t border-[var(--color-border)]">
