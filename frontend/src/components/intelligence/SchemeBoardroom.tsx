@@ -794,7 +794,7 @@ function SenatePanel() {
         </div>
         <ul className="space-y-2.5 text-sm text-[var(--color-text-muted)] leading-relaxed">
           <li>
-            <span className="font-semibold text-[var(--color-text)]">Eraring extension (Jan 2026)</span> — Origin Energy committed to operate Eraring to 2029 as a profitable commercial decision <em>without taxpayer subsidy</em>. Centre for Independent Studies framed the extension as &ldquo;Bowen&rsquo;s credibility gap on renewables.&rdquo; The decision shifts political risk: if T1 wind doesn&rsquo;t deliver on schedule, NSW retains coal longer than the 82% target assumes.
+            <span className="font-semibold text-[var(--color-text)]">Eraring extension</span> — Origin extended Eraring to August 2027 in May 2024 under an <em>opt-in underwriting arrangement with the NSW Government</em>: Origin can elect each year (by 31 March) to share up to $40M of profits with NSW or claim up to 80% of losses, capped at $225M/year. Origin chose <em>not</em> to opt in for both 2025-26 and 2026-27, so no taxpayer money has flowed to date — but the underwriting backstop exists and its monetary impact in any future year remains unknown. In Jan 2026 Origin further extended operations to April 2029. Centre for Independent Studies framed the broader sequence as &ldquo;Bowen&rsquo;s credibility gap on renewables.&rdquo; The political risk: if CIS Tender 1 wind doesn&rsquo;t deliver on schedule, NSW retains coal longer than the 82% target assumes.
           </li>
           <li>
             <span className="font-semibold text-[var(--color-text)]">First Nations Clean Energy Network — &ldquo;From Commitment to Delivery&rdquo;</span> tracker has become an external proxy for which CISA projects are actually executing. The 20-business-day publication clock after CISA signature means sustained absence is a strong negative signal.
@@ -813,17 +813,17 @@ function SenatePanel() {
         <div className="flex items-center gap-3">
           <span className="w-8 h-8 rounded-full grid place-items-center text-base font-bold text-white"
             style={{ backgroundColor: COLORS.green }}>F</span>
-          <h3 className="text-base font-bold text-[var(--color-text)]">Watch list — CIS Tender 1 projects positioning for FID in 2026</h3>
+          <h3 className="text-base font-bold text-[var(--color-text)]">Watch list — CIS Tender 1 projects progressing or positioning for FID in 2026</h3>
         </div>
-        <p className="text-sm text-[var(--color-text-muted)]">Per AER and industry reporting, these are the wind &amp; solar projects most likely to break the FID drought:</p>
+        <p className="text-sm text-[var(--color-text-muted)]">From the 19 CIS Tender 1 awards (Dec 2024), these are the projects publicly identified by AER and industry reporting as already in construction, operating, or closest to reaching FID. The South Australian wind projects (Goyder North, Palmer) have been flagged as the most likely first wind FIDs.</p>
         <div className="grid sm:grid-cols-2 gap-2 text-sm">
           {[
-            { name: 'Pottinger', desc: '831 MW wind · NSW · positioning for FID 2026' },
-            { name: 'Goyder North', desc: '300 MW wind · SA · expected first wind FID' },
-            { name: 'East Pilbara Hub Stage 1', desc: '132 MW solar · Fortescue · WA' },
-            { name: 'Palmer Wind', desc: 'SA · approaching FID' },
-            { name: 'Goulburn River', desc: 'Solar · already in construction' },
-            { name: 'Mokoan', desc: 'Solar · operating, first to LGC approval' },
+            { name: 'Mokoan Solar Farm',      desc: '46 MW solar · VIC · first T1 project operating, first to LGC approval' },
+            { name: 'Goulburn River Solar',   desc: '450 MW solar · NSW · in construction' },
+            { name: 'Goyder North Wind Farm', desc: '300 MW wind · SA · expected first wind FID under T1' },
+            { name: 'Palmer Wind Farm',       desc: '274 MW wind · SA · approaching FID' },
+            { name: 'Valley of the Winds',    desc: '936 MW wind · NSW · NSW IPC planning approval Jun 2025; awaiting grid connection' },
+            { name: 'Sandy Creek Solar',      desc: '700 MW solar · NSW · largest NSW solar in T1' },
           ].map(p => (
             <div key={p.name} className="flex items-start gap-2 p-2.5 rounded-lg border border-[var(--color-border)]">
               <span className="w-1.5 h-1.5 rounded-full mt-1.5" style={{ backgroundColor: COLORS.green }} />
@@ -837,6 +837,7 @@ function SenatePanel() {
         <p className="text-[10px] text-[var(--color-text-muted)]/70 italic">
           Sources: <a href="https://reneweconomy.com.au/regulator-says-cis-tender-1-projects-are-taking-longer-to-land-finance-only-half-have-made-progress/" target="_blank" rel="noopener" className="hover:underline">RenewEconomy AER analysis</a> ·
           {' '}<a href="https://reneweconomy.com.au/south-australia-wind-projects-to-be-first-cis-winners-to-reach-financial-close-victoria-says-no-to-more-solar-hybrids/" target="_blank" rel="noopener" className="hover:underline">RenewEconomy SA wind first</a>.
+          Note: earlier-flagged projects like Pottinger Wind Farm (NSW) and Fortescue East Pilbara are also positioning for FID in 2026 but were <em>not</em> awarded under CIS Tender 1.
         </p>
       </div>
     </div>
