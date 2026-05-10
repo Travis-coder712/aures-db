@@ -8,6 +8,7 @@ import Search from './pages/Search'
 import Guides from './pages/Guides'
 import GuideReader from './pages/GuideReader'
 import ConstraintsModule from './pages/learn/ConstraintsModule'
+import CISLTESAModule from './pages/learn/CISLTESAModule'
 import LearnHub from './pages/learn/LearnHub'
 import ModuleStub from './pages/learn/ModuleStub'
 // SchemesOverview merged into SchemeTracker intelligence page
@@ -73,6 +74,8 @@ function App() {
         <Route path="learn" element={<LearnHub />} />
         <Route path="learn/constraints" element={<ConstraintsModule />} />
         <Route path="learn/constraints/:lessonId" element={<ConstraintsModule />} />
+        <Route path="learn/cis-ltesa-bidding" element={<CISLTESAModule />} />
+        <Route path="learn/cis-ltesa-bidding/:lessonId" element={<CISLTESAModule />} />
         <Route path="learn/:moduleId" element={<ModuleStub />} />
         {/* Redirect old /schemes to intelligence page */}
         <Route path="schemes" element={<Navigate to="/intelligence/scheme-tracker" replace />} />

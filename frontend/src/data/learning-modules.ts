@@ -686,11 +686,11 @@ const M_CIS_LTESA: LearningModule = {
   tagline: 'How sovereign-backed renewable underwriting auctions actually work.',
   description:
     'A deep dive into the mechanics of bidding into the federal Capacity Investment Scheme and NSW Long-Term Energy Service Agreements. The strike price, floor and ceiling parameters, merit criteria evolution, First Nations & Social Licence requirements, project bonds, and how each round’s changes interact with project finance and equity returns. Heavy use of AURES scheme tracker data.',
-  status: 'in-development',
-  readingTime: '70 min planned',
+  status: 'available',
+  readingTime: '66 min',
   accent: '#3b82f6',
-  added: '2026-05-10',
-  buildOrder: 1,
+  added: '2026-05-11',
+  route: '/learn/cis-ltesa-bidding',
   lessons: [
     { id: 'architecture', number: 1, title: 'The federal-state architecture', summary: 'Why Australia ended up with two parallel sovereign underwriting schemes.', covers: ['CIS national rationale', 'LTESA Electricity Infrastructure Investment Act 2020', 'Overlap & gap-filling', 'How states without LTESA equivalents fare'] },
     { id: 'cis-mechanics', number: 2, title: 'CIS mechanics — floor + ceiling CFD', summary: 'The CISA structure. Strike price vs floor, ceiling sharing, term length.', covers: ['Underlying CFD structure', 'Floor price negotiation', 'Ceiling profit-share triggers', 'Term length (typically 12-15 years)', 'Generation vs Dispatchable contracts differ'] },
