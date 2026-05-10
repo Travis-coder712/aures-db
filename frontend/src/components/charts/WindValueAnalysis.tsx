@@ -407,7 +407,7 @@ function ExplainerTab({ project, stateAvg }: { project: WindValueProject; stateA
     {
       icon: '📊',
       title: 'Value Factor',
-      explain: 'Capture price ÷ average pool price. A value factor of 1.0 means the farm earns exactly the pool average. Wind typically scores 0.75–0.95; higher penetration markets (SA) often see 0.60–0.80. Declining over time as wind penetration grows.',
+      explain: 'Value factor (VF) = capture price ÷ time-averaged regional reference price (RRP). It is a RATIO (not a percentage). VF = 1.00 means this farm earns exactly the regional average across all hours — no cannibalisation discount. VF = 0.85 means it earns 15% below pool, the typical wind range (0.75–0.95). VF > 1.00 means the farm structurally generates more during higher-price periods than lower ones — rare for wind, sometimes seen in cold-fronted ranges that produce best in winter peaks. VF < 0.65 reflects heavy cannibalisation (concentrated output in low-price renewable hours), common in SA and parts of VIC.',
       value: vs.avg_value_factor != null ? vs.avg_value_factor.toFixed(2) : '–',
       benchmark: stateAvg?.avg_value_factor != null ? `${stateAvg.avg_value_factor.toFixed(2)} state avg` : null,
       signal: vs.avg_value_factor != null
@@ -2068,9 +2068,10 @@ function PriceBandTab({
       )}
 
       <p className="text-[9px] text-[var(--color-text-muted)] italic">
-        Price band data uses monthly average capture price ({project.value_summary.data_first_year}–{project.value_summary.data_last_year}).
-        For $5-increment granularity, interval-level (5-min AEMO dispatch) price correlation is required.
-        Pool price reference data available Aug 2024 onward.
+        {dataSource === '5min_nemweb'
+          ? <>Price band data sourced from 5-min AEMO DISPATCHLOAD × DISPATCHPRICE — every interval's MWh bucketed by the 5-min RRP at that moment. Coverage: {realBandData?.coverage_start} to {realBandData?.coverage_end}.</>
+          : <>Price band data uses monthly average capture price ({project.value_summary.data_first_year}–{project.value_summary.data_last_year}). For interval-level accuracy run <code>import_price_band_capture.py</code>. Pool price reference data available Aug 2024 onward.</>
+        }
       </p>
     </div>
   )
@@ -2216,6 +2217,9 @@ function DiversityTab({
           supply floods the market). A farm that generates when solar <em>doesn't</em> avoids the duck-curve price
           trough entirely. Both effects intensify as renewable penetration grows. Low correlation with the wind
           fleet and low correlation with solar = highest long-run capture price.
+        </p>
+        <p className="text-[10px] text-[var(--color-text-muted)] leading-relaxed mt-2 pt-2 border-t border-emerald-500/10">
+          <strong className="text-[var(--color-text)]">How to read R:</strong> the wind-fleet R below is the <em>Pearson correlation coefficient</em> between this farm's monthly capacity factor and the average monthly capacity factor of all other operating {project.state} wind farms. R is bounded between −1 and +1 (it is <strong>not</strong> a percentage). R = 0.9 means the farm's good and bad months track the rest of the fleet very tightly (limited diversity benefit; high cannibalisation risk). R = 0.3 means it is largely independent — a useful portfolio diversifier. R = 0.0 means no statistical relationship. <strong>Lower is better</strong> for revenue. Solar R works the same way against a representative NEM solar shape.
         </p>
       </div>
 
@@ -3045,6 +3049,17 @@ function WindValuePdfSummary({
         ))}
       </div>
 
+      {/* Reading the metrics */}
+      <div style={{ backgroundColor: '#fffbeb', border: '1px solid #fde68a', borderRadius: 10, padding: 12, marginBottom: 14 }}>
+        <p style={{ fontSize: 10, fontWeight: 700, color: '#92400e', textTransform: 'uppercase', letterSpacing: '0.05em', margin: '0 0 6px 0' }}>How to Read These Metrics</p>
+        <p style={{ fontSize: 10, color: '#475569', lineHeight: 1.5, margin: '0 0 6px 0' }}>
+          <strong style={{ color: '#0f172a' }}>Value Factor (VF)</strong> = capture price ÷ time-averaged regional reference price (RRP). It is a ratio (not a percentage). VF = 1.00 means this farm earns exactly the regional average across all hours — no cannibalisation discount. Wind typically scores 0.75–0.95. VF below 0.65 reflects heavy cannibalisation; VF above 1.00 means the farm structurally generates during higher-than-average price periods (rare).
+        </p>
+        <p style={{ fontSize: 10, color: '#475569', lineHeight: 1.5, margin: 0 }}>
+          <strong style={{ color: '#0f172a' }}>Wind Fleet Correlation (R)</strong> = Pearson correlation coefficient between this farm's monthly CF and the rest of the {project.state} wind fleet's average monthly CF. R is bounded between −1 and +1 (it is not a percentage). R = 0.9 → tracks the fleet tightly (limited diversification, high cannibalisation risk). R = 0.3 → largely independent (good portfolio diversifier; lower cannibalisation exposure). R = 0.0 → no statistical relationship. Lower R is better for revenue.
+        </p>
+      </div>
+
       {/* Key findings */}
       {keyFindings.length > 0 && (
         <div style={{ backgroundColor: '#f0f9ff', border: '1px solid #bae6fd', borderRadius: 10, padding: 14, marginBottom: 14 }}>
@@ -3124,7 +3139,7 @@ function WindValuePdfSummary({
       {priceBandRows.some(b => b.pct > 0) && (
         <div style={{ backgroundColor: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: 10, padding: 14, marginBottom: 14 }}>
           <p style={{ fontSize: 10, fontWeight: 600, color: '#475569', textTransform: 'uppercase', marginBottom: 4, letterSpacing: '0.05em' }}>Price Band Distribution — % of MWh by Capture Price Regime</p>
-          <p style={{ fontSize: 9, color: '#94a3b8', margin: '0 0 10px 0' }}>Based on monthly average capture prices. Farm vs {project.state} fleet comparison.</p>
+          <p style={{ fontSize: 9, color: '#94a3b8', margin: '0 0 10px 0' }}>Each interval's MWh is bucketed by the 5-min RRP at that moment, then summed within the period. Farm vs {project.state} fleet comparison.</p>
           <table style={{ width: '100%', borderCollapse: 'collapse' }}>
             <thead>
               <tr>
@@ -3159,7 +3174,7 @@ function WindValuePdfSummary({
             </tbody>
           </table>
           <p style={{ fontSize: 9, color: '#64748b', margin: '8px 0 0 0', lineHeight: 1.5 }}>
-            Months where this farm's average capture price fell in each band, weighted by MWh delivered. A farm skewed toward the $0–$50 band generates heavily during low-price periods (solar hours, high-wind events). Exposure to {'>'} $100 bands indicates capture of scarcity pricing. Note: based on monthly average prices; actual dispatch-level distribution requires 5-min data (not yet available).
+            Each 5-min dispatch interval's generated MWh is bucketed by the regional reference price (RRP) at that moment, then summed within the coverage period. Farms skewed toward the $0–$50 band generate heavily during low-price periods (solar hours, high-wind events). Exposure to {'>'} $100 bands indicates capture of scarcity pricing — early-evening peaks, generator outages, transmission constraint events. Source: AEMO 5-min DISPATCHLOAD × DISPATCHPRICE.
           </p>
         </div>
       )}

@@ -25,6 +25,33 @@ const LIGHT_MODE_VARS: Record<string, string> = {
   '--color-primary': '#0369a1',
 }
 
+/**
+ * Count near-non-white pixels per row of a captured canvas.
+ * Used by the multi-page slicer to pick page-break rows that land in
+ * natural gutters (low-ink rows = empty space between sections).
+ * Samples every 4th column for speed; close enough for break detection.
+ */
+function computeInkDensity(canvas: HTMLCanvasElement): number[] {
+  const ctx = canvas.getContext('2d')
+  if (!ctx) return []
+  const { width, height } = canvas
+  // Reading the full image data once is faster than per-row reads.
+  const data = ctx.getImageData(0, 0, width, height).data
+  const out = new Array<number>(height)
+  const stride = 4
+  for (let y = 0; y < height; y++) {
+    let count = 0
+    const rowStart = y * width * 4
+    for (let x = 0; x < width; x += stride) {
+      const i = rowStart + x * 4
+      // Treat anything darker than 245 in any channel as "ink".
+      if (data[i] < 245 || data[i + 1] < 245 || data[i + 2] < 245) count++
+    }
+    out[y] = count
+  }
+  return out
+}
+
 interface ExportOptions {
   /** Filename without .pdf extension */
   filename: string
@@ -166,29 +193,68 @@ export async function exportElementToPdf(
       // We use the source image coordinates to crop sections
       const pxPerMm = img.width / pdfImgWidth
 
+      // Build an "ink density" array — count of non-near-white pixels per
+      // image row — so we can pick page-break rows that fall in natural
+      // gutters between sections, rather than slicing through them.
+      const inkPerRow = computeInkDensity(canvas)
+      // Look back up to ~50mm above the hard limit for a clean gutter.
+      // (A4 content is ~277mm, so 50mm = roughly the bottom 18% of a page.)
+      const slackPxBefore = Math.round(50 * pxPerMm)
+      // Don't extend below the limit — that would overflow the page.
+      const slackPxAfter = 0
+      // Score each candidate by the SUM of ink in a small window around it,
+      // so we prefer rows that are part of a multi-row gutter (true section
+      // boundary) over isolated low-ink rows inside a busy section.
+      const gutterWindowHalf = Math.max(2, Math.round(1.5 * pxPerMm))
+
       let remainingHeight = totalImageHeight
       let srcY = 0
       let isFirstPage = true
 
       while (remainingHeight > 0) {
         const availableHeight = isFirstPage ? firstPageContent : contentHeight
-        const sliceHeight = Math.min(remainingHeight, availableHeight)
-        const srcSliceHeight = sliceHeight * pxPerMm
+        let sliceHeight = Math.min(remainingHeight, availableHeight)
+
+        // If the natural cut would split the image (more pages to come),
+        // try to snap to a low-ink row inside the slack window. Score each
+        // candidate by the average ink across a small window around it —
+        // this favours real section gutters (multiple consecutive empty
+        // rows) over isolated low-ink rows inside busy table content.
+        if (sliceHeight < remainingHeight) {
+          const targetEnd = srcY + Math.round(sliceHeight * pxPerMm)
+          const winStart = Math.max(srcY + Math.round(20 * pxPerMm), targetEnd - slackPxBefore)
+          const winEnd = Math.min(canvas.height, targetEnd + slackPxAfter)
+          const windowScore = (y: number) => {
+            let sum = 0, n = 0
+            const lo = Math.max(0, y - gutterWindowHalf)
+            const hi = Math.min(canvas.height - 1, y + gutterWindowHalf)
+            for (let i = lo; i <= hi; i++) { sum += (inkPerRow[i] ?? 0); n++ }
+            return n > 0 ? sum / n : Infinity
+          }
+          let bestY = targetEnd, bestScore = windowScore(targetEnd)
+          for (let y = winStart; y < winEnd; y++) {
+            const s = windowScore(y)
+            if (s < bestScore) { bestScore = s; bestY = y }
+          }
+          sliceHeight = (bestY - srcY) / pxPerMm
+        }
+
+        const srcSliceHeight = Math.round(sliceHeight * pxPerMm)
 
         // Create a canvas to slice the image
-        const canvas = document.createElement('canvas')
-        canvas.width = img.width
-        canvas.height = Math.ceil(srcSliceHeight)
-        const ctx = canvas.getContext('2d')!
+        const sliceCanvas = document.createElement('canvas')
+        sliceCanvas.width = img.width
+        sliceCanvas.height = srcSliceHeight
+        const ctx = sliceCanvas.getContext('2d')!
         ctx.fillStyle = '#ffffff'
-        ctx.fillRect(0, 0, canvas.width, canvas.height)
+        ctx.fillRect(0, 0, sliceCanvas.width, sliceCanvas.height)
         ctx.drawImage(
           img,
-          0, srcY, img.width, Math.ceil(srcSliceHeight),
-          0, 0, img.width, Math.ceil(srcSliceHeight)
+          0, srcY, img.width, srcSliceHeight,
+          0, 0, img.width, srcSliceHeight
         )
 
-        const sliceDataUrl = canvas.toDataURL('image/png')
+        const sliceDataUrl = sliceCanvas.toDataURL('image/png')
         const pageY = isFirstPage ? yOffset : margin
 
         pdf.addImage(sliceDataUrl, 'PNG', margin, pageY, pdfImgWidth, sliceHeight)
