@@ -1,9 +1,15 @@
 /**
  * PDF Export Utility
  * Captures a DOM element as a light-mode image and generates a multi-page PDF.
- * Uses html-to-image for DOM capture and jsPDF for PDF generation.
+ * Uses html2canvas for DOM capture and jsPDF for PDF generation.
+ *
+ * Why html2canvas (not html-to-image): html-to-image silently produces blank
+ * output when capturing elements positioned off-screen via `position: fixed;
+ * left: -10000px` (it relies on a foreignObject SVG clone whose layout context
+ * differs from the original). html2canvas re-renders into a real canvas and
+ * works reliably on hidden / off-flow elements.
  */
-import { toPng } from 'html-to-image'
+import html2canvas from 'html2canvas'
 import { jsPDF } from 'jspdf'
 
 // Light-mode CSS variable overrides for PDF readability
@@ -82,22 +88,24 @@ export async function exportElementToPdf(
 
   try {
     // 2. Capture the element as a PNG data URL
-    const dataUrl = await toPng(element, {
-      pixelRatio: scale,
+    const canvas = await html2canvas(element, {
+      scale,
       backgroundColor: '#ffffff',
-      skipFonts: true, // avoid CORS errors from Google Fonts
-      style: {
-        transform: 'none',
-      },
-      filter: (node) => {
-        // Skip nav elements, bottom bars etc
+      logging: false,
+      useCORS: true,
+      // Match the captured rect to the element's natural size — html2canvas
+      // walks the live DOM, so off-screen `position: fixed` elements work fine.
+      width: element.offsetWidth,
+      height: element.offsetHeight,
+      ignoreElements: (node) => {
         if (node instanceof HTMLElement) {
           const cl = node.className
-          if (typeof cl === 'string' && cl.includes('bottom-nav')) return false
+          if (typeof cl === 'string' && cl.includes('bottom-nav')) return true
         }
-        return true
+        return false
       },
     })
+    const dataUrl = canvas.toDataURL('image/png')
 
     // 3. Load image to get dimensions
     const img = new Image()

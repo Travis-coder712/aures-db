@@ -422,14 +422,22 @@ export default function Layout() {
                   </p>
                   <div className="space-y-1">
                     {FUTURE_ITEMS.map((item) => (
-                      <div
-                        key={item.label}
-                        className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-[var(--color-text-muted)]/40 cursor-not-allowed"
+                      <NavLink
+                        key={item.path}
+                        to={item.path}
+                        onClick={() => setMobileMenuOpen(false)}
+                        className={({ isActive }) =>
+                          `flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${
+                            isActive
+                              ? 'bg-[var(--color-primary)]/10 text-[var(--color-primary)]'
+                              : 'text-[var(--color-text-muted)]/60 hover:text-[var(--color-text-muted)] hover:bg-white/5'
+                          }`
+                        }
                       >
                         <item.icon className="w-5 h-5" />
                         {item.label}
                         <span className="ml-auto text-[9px] bg-[var(--color-bg-elevated)] px-1.5 py-0.5 rounded-full">🚧</span>
-                      </div>
+                      </NavLink>
                     ))}
                   </div>
                 </div>
