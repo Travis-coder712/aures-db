@@ -42,13 +42,16 @@ interface LessonMeta {
 }
 
 const LESSONS: LessonMeta[] = [
-  { id: 'rooftop-boom',     number: 1, title: 'The Australian rooftop solar boom',                subtitle: 'FITs, STCs, electricians and Chinese modules',           readingTime: '12 min' },
-  { id: 'btm-scale',        number: 2, title: 'Commercial solar and the hidden-demand effect',     subtitle: 'Operational demand vs underlying demand',                readingTime: '10 min' },
-  { id: 'cannibalisation',  number: 3, title: 'From cannibalisation to opportunity',               subtitle: 'Why solar made BESS necessary',                          readingTime: '8 min' },
-  { id: 'hornsdale',        number: 4, title: 'Origins: Hornsdale and the Tesla bet',              subtitle: 'How a Twitter bet rewrote the orthodoxy',                readingTime: '10 min' },
-  { id: 'how-earns',        number: 5, title: 'How a battery actually earns',                      subtitle: 'Arbitrage, FCAS, capacity, with real AURES numbers',     readingTime: '11 min' },
-  { id: 'duration-records', number: 6, title: 'The duration evolution and BESS records',           subtitle: '1-hour to 8-hour and the state-by-state leaderboard',    readingTime: '10 min' },
-  { id: 'outlook',          number: 7, title: 'Where this is going — more solar, more batteries',  subtitle: 'Residential battery boom and ISP storage targets',       readingTime: '9 min' },
+  { id: 'rooftop-boom',             number: 1,  title: 'The Australian rooftop solar boom',                  subtitle: 'FITs, STCs, electricians and Chinese modules',         readingTime: '12 min' },
+  { id: 'btm-scale',                number: 2,  title: 'Commercial solar and the hidden-demand effect',       subtitle: 'Operational demand vs underlying demand',              readingTime: '10 min' },
+  { id: 'cannibalisation-mechanic', number: 3,  title: 'The cannibalisation mechanic',                        subtitle: 'Value factor, merit-order, why all solar is correlated', readingTime: '10 min' },
+  { id: 'capture-price-decay',      number: 4,  title: 'Capture-price decay — by state and farm',             subtitle: 'Real AURES data from operating solar farms',           readingTime: '10 min' },
+  { id: 'hornsdale',                number: 5,  title: 'Origins: Hornsdale and the Tesla bet',                subtitle: 'How a Twitter bet rewrote the orthodoxy',              readingTime: '10 min' },
+  { id: 'how-earns',                number: 6,  title: 'How a battery actually earns',                        subtitle: 'Arbitrage, FCAS, capacity, with real AURES numbers',   readingTime: '11 min' },
+  { id: 'duration-records',         number: 7,  title: 'The duration evolution and BESS records',             subtitle: '1-hour to 8-hour and the state-by-state leaderboard',  readingTime: '10 min' },
+  { id: 'solar-storage-stacking',   number: 8,  title: 'Solar + storage stacking — the answer to cannibalisation', subtitle: 'Co-located batteries that recover the cannibalised value', readingTime: '9 min' },
+  { id: 'spread-reduction',         number: 9,  title: 'BESS spread reduction — does arbitrage eat itself?',  subtitle: 'Saturation dynamics and the California parallel',      readingTime: '9 min' },
+  { id: 'outlook',                  number: 10, title: 'Where this is going — more solar, more batteries',    subtitle: 'Residential battery boom and ISP storage targets',     readingTime: '9 min' },
 ]
 
 // ============================================================
@@ -443,115 +446,276 @@ function Lesson2() {
 }
 
 // ============================================================
-// Lesson 3 — From cannibalisation to opportunity
+// Lesson 3 — The cannibalisation mechanic (deep dive)
 // ============================================================
 
 function Lesson3() {
   return (
     <div>
-      <H2>What rooftop did to wholesale prices</H2>
+      <H2>The headline equation</H2>
       <P>
-        For most of the 2000s and early 2010s, the NEM's wholesale spot price had a familiar daily
-        pattern — a soft trough overnight, a morning ramp, a midday plateau, an evening peak. Rooftop
-        solar broke that pattern. As behind-the-meter solar grew, midday <Em>operational demand</Em>
-        fell sharply (Lesson 2), which meant fewer thermal generators had to bid into the midday
-        window, which meant the merit-order price-setter shifted leftward, which meant the midday
-        price collapsed. By 2018-2019 the daily curve had inverted: midday prices were the cheapest of
-        the day, evening prices the most expensive.
+        Cannibalisation isn't a metaphor or a marketing phrase — it's a specific economic phenomenon
+        with a specific measurement. The standard metric is{' '}
+        <Em>value factor</Em>:
+      </P>
+      <div className="bg-[var(--color-bg-elevated)] border border-[var(--color-border)] rounded-xl p-4 my-4 font-mono text-sm leading-relaxed">
+        <Em>Value factor</Em> = <code>capture price</code> ÷ <code>time-averaged regional reference price</code>
+      </div>
+      <P>
+        A value factor of 1.00 means the project earns exactly the pool average — the energy gets paid
+        the same as if it had been sold steadily across all hours. A value factor of 0.65 means the
+        project earns 35% less than the pool average, because it generates concentrated in low-price
+        hours. Utility-scale solar in Australia typically sits at 0.50-0.85 today, down from 0.90+ in
+        2018-2019. That decline is cannibalisation, in a single number.
       </P>
 
       <Callout type="key">
-        Rooftop solar cannibalises utility-scale solar. Both technologies generate at the same time
-        (the sun shines on everyone), so the more rooftop there is, the lower the price utility solar
-        farms receive. By 2024, utility solar in SA was capturing prices ~35-50% below the regional
-        average. The cannibalisation effect is the single biggest economic problem for utility-scale
-        solar developers — and it created the conditions in which grid-scale BESS became economic.
+        The mechanic in plain language: every solar farm in a region generates at almost exactly the
+        same time of day — when the sun is up — because they all rely on the same underlying resource.
+        That perfect correlation means their generation is concentrated in a narrow daily window.
+        Concentrated supply hitting a finite demand pushes the local price down. The more solar there
+        is, the steeper the price collapse. Each farm therefore earns less per MWh as more solar joins
+        the system. That is cannibalisation.
       </Callout>
 
-      <H2>Negative price hours</H2>
+      <H2>The merit-order effect, formally</H2>
       <P>
-        Once midday operational demand falls below the must-run output of synchronous generators (coal
-        and gas units that can't easily turn off), wholesale prices go <Em>negative</Em>. The
-        generators are paying retailers to take their energy because shutting down and restarting is
-        more expensive. Negative-price hours have grown from a curiosity to a regular feature:
+        Markets clear at the marginal generator's offer price — the price of the next MWh of supply
+        needed to meet demand. In the NEM, generators submit bids representing the price at which they
+        are willing to dispatch, and NEMDE (the dispatch engine) selects the cheapest bids that
+        collectively meet demand. Solar's marginal cost is essentially zero (no fuel; the sun is free),
+        so solar bids at very low prices — typically $-50 to $0/MWh. When solar output ramps up, it
+        displaces the most expensive marginal generator at the time.
       </P>
-      <Table
-        emphasizeFirst
-        headers={['Year', 'Hours of negative spot in SA', 'Hours in QLD', 'Hours in VIC']}
-        rows={[
-          ['2019', '~50 hr/yr', '<10 hr/yr', '<10 hr/yr'],
-          ['2021', '~150 hr/yr', '~50 hr/yr', '~80 hr/yr'],
-          ['2023', '~600 hr/yr', '~250 hr/yr', '~400 hr/yr'],
-          ['2025', '~900 hr/yr', '~500 hr/yr', '~700 hr/yr'],
-          ['Q1 2026 (annualised)', '~1100 hr/yr', '~700 hr/yr', '~900 hr/yr'],
-        ]}
-      />
-
-      <H2>What the BESS opportunity actually is</H2>
       <P>
-        A battery's economic logic is simple: charge when prices are low, discharge when prices are
-        high. The bigger the spread between low and high, the better. Rooftop solar created exactly
-        that spread:
+        Pre-2015, solar displaced gas peakers, which were typically the marginal generator on hot
+        midday-summer afternoons. The merit-order effect was modest: a 100 MW solar farm operating at
+        peak would reduce wholesale prices by maybe $5-10/MWh during its dispatch hours. The first
+        order economics looked fine for the new entrant. But as solar capacity grew:
       </P>
       <ul className="list-disc list-inside text-sm text-[var(--color-text-muted)] space-y-1.5 mb-3 ml-2">
-        <li><Em>Cheap charge window</Em> — midday, when behind-the-meter solar pushes wholesale prices
-          to zero (or below).</li>
-        <li><Em>Expensive discharge window</Em> — evening peak (5-9 pm), when the sun has gone, demand
-          is rising, and only thermal and hydro can supply.</li>
-        <li><Em>Daily spread</Em> — typically $80-200/MWh, sometimes $500+/MWh during scarcity events.</li>
+        <li>Solar started displacing coal — coal's marginal cost is ~$15-25/MWh. Solar bidding below
+          that pushed coal off-line during peak solar hours, dropping prices.</li>
+        <li>Eventually solar started displacing <Em>other solar</Em> — bidding negative to ensure
+          dispatch. Wholesale prices crashed to floor or below.</li>
+        <li>The marginal generator setting price during solar peak became <Em>another solar generator
+          bidding negative</Em>. At that point the price-setting mechanism is unstable: the market
+          is signalling there is too much supply, and someone has to leave.</li>
       </ul>
 
+      <H2>Why solar is perfectly correlated within a region</H2>
       <P>
-        Pre-2017, this spread didn't exist on any meaningful scale in Australia. There were occasional
-        scarcity events but the daily structure was relatively flat. By 2020-2021, the spread was
-        large enough that a 1-hour battery (just enough to cycle once a day) could pay back capex
-        within 5-7 years from arbitrage alone — before counting any FCAS or capacity contract revenue.
-        That was the moment grid-scale BESS became investable.
+        The unique feature of solar (vs wind) is that within any reasonable geographic region, every
+        solar farm has nearly the same hourly output profile. The sun is essentially a synchronous
+        signal: it rises at the same time across a state, peaks at the same time, sets at the same
+        time. Cloud cover varies, but the underlying envelope is identical. By contrast, wind output
+        across NSW is much more decorrelated — a wind farm in the New England Tablelands can be
+        flat-out when one in the Riverina is becalmed. That's why <Em>wind has a much smaller
+        cannibalisation problem than solar</Em>, and why the wind value factor decline has been
+        gentler.
       </P>
 
-      <Callout type="info">
-        The cannibalisation problem is also addressed in detail in the upcoming{' '}
-        <Link to="/learn/solar-cannibalisation" className="text-[var(--color-primary)] hover:underline">
-          Solar Cannibalisation in the NEM
-        </Link>{' '}module (Phase 2 #4). That module will go deeper on capture-price math, value factors,
-        and the technical drivers of price decay. For this BESS module, the key takeaway is simply that
-        the cannibalisation problem creates the arbitrage spread, and the arbitrage spread creates the
-        BESS opportunity.
+      <H2>The hourly profile and the duck</H2>
+      <P>
+        Plot operational demand over a typical day in 2026 and you get the famous &ldquo;duck curve&rdquo;
+        — a deep midday belly (solar offsetting load) followed by a steep evening shoulder (sun setting,
+        load rising). The deeper the duck, the worse cannibalisation gets. AEMO's QED reports a
+        typical mid-spring weekday in NSW now shows operational demand dropping from ~10 GW morning
+        peak to ~5-6 GW midday trough, then ramping to ~12 GW evening peak — a 6-7 GW swing across
+        ~5 hours. That swing is exactly the spread that batteries arbitrage.
+      </P>
+
+      <H2>Negative spot prices — mechanism and who pays</H2>
+      <P>
+        Negative prices happen when there is more supply than demand AND non-zero-cost producers are
+        unwilling to shut down. Coal and gas plants with minimum stable load requirements would rather
+        pay to keep running than incur the cost of stopping and restarting. So they bid down toward
+        zero, even into negative territory, to ensure they stay in the dispatch order. Solar generators
+        with contracted offtake or LGC-bundled revenue have positive non-market revenue per MWh, so
+        they too bid below the cost of curtailment.
+      </P>
+      <P>
+        Who pays for negative prices? The generator with merchant exposure absorbs the loss directly.
+        Retailers benefit (they pay nothing or are paid to take energy). Consumers see the effect later
+        — wholesale price savings flow through to retail prices over time. The big losers are merchant
+        solar farms without long-term offtake, which are increasingly rare because new build-out
+        requires contracted revenue floors (CIS, LTESA, PPAs).
+      </P>
+
+      <Callout type="numbers">
+        Worked example. A 200 MW solar farm in SA generates 50,000 MWh in a quarter. The
+        capacity-weighted average NEM SA RRP for that quarter is $65/MWh. If the farm captured the
+        time-weighted average, it would earn $65 × 50,000 = $3.25M. But its volume-weighted capture
+        price (because it produces during midday troughs) is $35/MWh, so it actually earns $35 ×
+        50,000 = $1.75M. The difference — $1.5M — is the cannibalisation gap. Value factor =
+        35/65 = 0.54.
       </Callout>
 
-      <H2>The bridge to grid BESS</H2>
+      <H2>The math of cannibalisation vs penetration</H2>
       <P>
-        By the mid-2010s, rooftop solar had created a market where:
+        Empirically, value factor declines roughly linearly with solar penetration up to a point, then
+        accelerates as penetration approaches local market saturation. Aurora Energy Research and
+        Cornwall Insight have published curves showing:
       </P>
       <ul className="list-disc list-inside text-sm text-[var(--color-text-muted)] space-y-1.5 mb-3 ml-2">
-        <li>Midday wholesale prices were structurally suppressed</li>
-        <li>Evening peaks were getting steeper</li>
-        <li>Frequency control needed faster response than thermal could give</li>
-        <li>The first FCAS contingency markets were oversupplied by hydro and underused by anything
-          fast</li>
+        <li><Em>0-15% solar share of generation</Em> — VF stays near 0.95-1.00 (modest discount)</li>
+        <li><Em>15-25% solar share</Em> — VF declines ~0.5 pp per percentage point of solar growth, so
+          VF reaches roughly 0.85 at 20% solar share</li>
+        <li><Em>25-40% solar share</Em> — VF declines accelerate, ~1 pp VF per 1 pp solar. SA today is
+          at ~40% solar share and VF for utility solar is 0.50-0.60.</li>
+        <li><Em>40%+ solar share</Em> — saturation. Additional solar is largely curtailed or
+          self-cannibalises. New solar without storage becomes uneconomic.</li>
       </ul>
-      <P>
-        Anyone building a battery into that market would find three revenue streams ready and waiting:
-        arbitrage, FCAS, and capacity payments under emerging schemes. All it took was a project big
-        enough to prove the concept. That project — Hornsdale — is the subject of the next lesson.
-      </P>
 
       <Callout type="source">
-        Sources: AEMO <em>Quarterly Energy Dynamics — negative-price hour data</em> ·
-        Modo Energy <em>Australia BESS revenue stack reports</em> ·
+        Sources: AEMO <em>Quarterly Energy Dynamics</em> with regional price-duration curves ·
         Aurora Energy Research <em>Australia capture price modelling</em> ·
-        WattClarity <em>negative-price commentary</em> ·
-        AEMC <em>FCAS market design papers</em>.
+        Cornwall Insight <em>Australia solar value factor reports</em> ·
+        UNSW CEEM <em>cannibalisation literature</em> ·
+        Joachim Seel et al, LBNL <em>cannibalisation curves international</em>.
       </Callout>
     </div>
   )
 }
 
 // ============================================================
-// Lesson 4 — Hornsdale
+// Lesson 4 — Capture price decay (with AURES data)
 // ============================================================
 
 function Lesson4() {
+  return (
+    <div>
+      <H2>What the numbers actually look like</H2>
+      <P>
+        Lesson 3 explained the cannibalisation mechanic in theory. This lesson shows the empirical
+        reality using AURES data from operating solar farms across the NEM. Every utility-scale solar
+        farm tracked by AURES has a value factor, a capture price, and a year-by-year trajectory; we
+        present the patterns here and link to the underlying farm-level data.
+      </P>
+
+      <Callout type="info">
+        For per-project capture price, value factor, and seasonal breakdowns, see the AURES{' '}
+        <Link to="/intelligence/revenue" className="text-[var(--color-primary)] hover:underline">
+          Revenue Intelligence
+        </Link>{' '}
+        page or any individual solar project's Performance tab in the project database.
+      </Callout>
+
+      <H2>Value factor by region, 2018-2026</H2>
+      <P>
+        Capacity-weighted average value factor for utility solar in each NEM region:
+      </P>
+      <Table
+        emphasizeFirst
+        headers={['Year', 'SA', 'VIC', 'NSW', 'QLD', 'NEM avg']}
+        rows={[
+          ['2018', '0.92', '0.95', '0.96', '0.97', '0.95'],
+          ['2020', '0.78', '0.85', '0.88', '0.89', '0.86'],
+          ['2022', '0.64', '0.74', '0.81', '0.81', '0.76'],
+          ['2024', '0.52', '0.66', '0.74', '0.73', '0.67'],
+          ['2026 (est)', '0.48', '0.60', '0.68', '0.67', '0.62'],
+        ]}
+      />
+      <P>
+        SA went from 0.92 to 0.48 in eight years — a 47% decline. Every region declined materially.
+        The trajectories track solar penetration: SA has the highest solar share (~40% of generation),
+        QLD and VIC have caught up rapidly, NSW lags slightly because its larger underlying load
+        absorbs more solar before saturation.
+      </P>
+
+      <H2>Worst capture-price farms in 2024-25</H2>
+      <P>
+        The farms with the lowest capture prices are typically large, early-builds in SA or VIC's
+        Mallee region where local solar density is highest. From AURES data:
+      </P>
+      <Table
+        emphasizeFirst
+        headers={['Farm', 'State', 'Size', 'VF 2024', 'Why this low']}
+        rows={[
+          ['Bungala Solar', 'SA', '275 MW', '~0.42', 'Among earliest-build SA solar; co-located with another large solar farm; heavy local oversupply'],
+          ['Daydream Solar', 'QLD', '180 MW', '~0.55', 'North QLD; far from major load; constrained transmission limits export during peak generation'],
+          ['Hayman Solar', 'QLD', '50 MW', '~0.55', 'Co-located with Daydream — same constraints'],
+          ['Limondale Solar', 'NSW (SW REZ)', '349 MW', '~0.62', 'PEC pre-energisation suffered curtailment; post-PEC capture should improve materially'],
+          ['Yatpool Solar', 'VIC', '88 MW', '~0.58', 'Mallee region — VIC\'s solar belt — heavy local oversupply'],
+        ]}
+      />
+
+      <H2>Best capture-price solar — the regional outliers</H2>
+      <P>
+        Some farms buck the trend. They tend to be either (a) in areas with strong local industrial
+        load, (b) in transmission-constrained regions where exports cap local oversupply, or (c)
+        co-located with storage that captures the cannibalised value:
+      </P>
+      <Table
+        emphasizeFirst
+        headers={['Farm', 'State', 'Size', 'VF 2024', 'Why this high']}
+        rows={[
+          ['Bomen Solar', 'NSW (SW REZ)', '120 MW', '~0.78', 'Near Wagga industrial load + good network position'],
+          ['Sunraysia Solar', 'NSW', '255 MW', '~0.75', 'Operational improvements + transmission position'],
+          ['Glenrowan West Solar', 'VIC', '132 MW', '~0.77', 'Smaller VIC fleet share + good network position'],
+          ['Goulburn River Solar', 'NSW', '450 MW (in construction)', 'Targeted 0.80+', 'Co-located battery (3-hour) recovers cannibalised midday value'],
+        ]}
+      />
+
+      <H2>Curtailment — economic vs technical</H2>
+      <P>
+        Curtailment is when a solar farm is dispatched <Em>below</Em> what it could physically produce.
+        There are two distinct types:
+      </P>
+      <ul className="list-disc list-inside text-sm text-[var(--color-text-muted)] space-y-1.5 mb-3 ml-2">
+        <li><Em>Economic curtailment</Em> — the farm voluntarily bids high to avoid being dispatched
+          at negative prices. This is bid-driven. It's a strategy, not a system failure. Negative
+          prices force this on uncontracted merchant farms.</li>
+        <li><Em>Technical curtailment</Em> — AEMO directs the farm to reduce output because of
+          network constraints, system strength shortages, or thermal-line limits. This is
+          dispatch-driven. The farm receives no revenue for the curtailed MWh and has no economic
+          choice.</li>
+      </ul>
+      <P>
+        AURES tracks both. The Solar Value Analysis page on each operating project shows the split.
+        For SA solar farms, technical curtailment was ~10-15% of capable MWh in 2023; for QLD it was
+        ~5-8%. Post-PEC, SA technical curtailment has dropped to ~5-8%.
+      </P>
+
+      <H2>The "diversity capture premium" metric</H2>
+      <P>
+        AURES tracks a per-farm metric called the <Em>Diversity Capture Premium</Em>: the $/MWh by
+        which a farm's capture price exceeds (or trails) the volume-weighted state fleet average. A
+        positive premium means the farm is somehow capturing better than the fleet — usually because
+        of generation profile differences (e.g. tracker vs fixed-tilt, different shading patterns) or
+        network-position advantages. As of 2026, the largest diversity capture premium for an
+        operating Australian solar farm is around +$4/MWh (Glenrowan West VIC); the worst is around
+        −$8/MWh (Bungala). See any solar farm's individual Solar Value Analysis page for its value.
+      </P>
+
+      <Callout type="warn">
+        Capture price decay is not symmetric — it is biased toward decline. Once cannibalisation
+        kicks in, recovery is slow and depends on storage build-out, demand growth, or coal closures.
+        In SA the value factor decline of 0.04-0.05 pp/yr has been steady for eight years; only
+        Hornsdale's expansion and the broader BESS build-out has slowed but not reversed it.
+      </Callout>
+
+      <Callout type="source">
+        Sources: AURES{' '}
+        <Link to="/intelligence/revenue" className="text-[var(--color-primary)] hover:underline">
+          Revenue Intelligence
+        </Link>{' '}
+        and individual project Solar Value Analysis pages ·
+        AEMO Quarterly Energy Dynamics — capture-price disclosures ·
+        Aurora Energy Research <em>Australia solar capture-price reports</em> ·
+        Cornwall Insight <em>Australia capture price reports</em> ·
+        Modo Energy <em>solar value factor by region</em> ·
+        Operator quarterly disclosures (Tilt, Genex, Edify).
+      </Callout>
+    </div>
+  )
+}
+
+// ============================================================
+// Lesson 5 — Hornsdale (renumbered from old Lesson 4)
+// ============================================================
+
+function Lesson5() {
   return (
     <div>
       <H2>The 28 September 2016 South Australia blackout</H2>
@@ -658,10 +822,10 @@ function Lesson4() {
 }
 
 // ============================================================
-// Lesson 5 — How a battery actually earns
+// Lesson 6 — How a battery actually earns (renumbered from old Lesson 5)
 // ============================================================
 
-function Lesson5() {
+function Lesson6() {
   return (
     <div>
       <H2>The four revenue streams</H2>
@@ -772,10 +936,10 @@ function Lesson5() {
 }
 
 // ============================================================
-// Lesson 6 — Duration evolution and BESS records
+// Lesson 7 — Duration evolution and BESS records (renumbered from old Lesson 6)
 // ============================================================
 
-function Lesson6() {
+function Lesson7() {
   return (
     <div>
       <H2>The duration arc</H2>
@@ -873,10 +1037,235 @@ function Lesson6() {
 }
 
 // ============================================================
-// Lesson 7 — Outlook
+// Lesson 8 — Solar + storage stacking
 // ============================================================
 
-function Lesson7() {
+function Lesson8() {
+  return (
+    <div>
+      <H2>Why the answer to solar cannibalisation is solar+storage</H2>
+      <P>
+        If solar cannibalises itself by all generating at the same time, the obvious answer is to{' '}
+        <Em>time-shift</Em> some of that generation into the evening. That is exactly what a co-located
+        battery does. The economic logic is direct: charge the battery during the midday glut (when
+        wholesale prices are at or below zero), discharge during the evening peak (when prices are
+        $200-500/MWh or higher), and capture the spread you would otherwise have surrendered to
+        cannibalisation.
+      </P>
+
+      <Callout type="key">
+        Solar + storage stacking is not just an additive revenue model — it's a <Em>defensive</Em> one.
+        Without a co-located battery, the solar farm captures the depressed midday price; with one, the
+        same MWh is re-priced to the evening peak. The battery doesn't have to make money in absolute
+        terms — even if its arbitrage covers only its own depreciation, the solar farm's overall
+        capture price improves dramatically.
+      </Callout>
+
+      <H2>DC-coupled vs AC-coupled hybrids</H2>
+      <P>
+        There are two engineering topologies for combining solar and storage at the same site:
+      </P>
+      <Table
+        emphasizeFirst
+        headers={['', 'DC-coupled', 'AC-coupled']}
+        rows={[
+          ['Architecture', 'Battery sits behind the solar inverter; shares a single grid connection point', 'Battery has its own inverter and grid connection alongside the solar'],
+          ['Advantage', 'Single inverter — cheaper capex per MWh; can charge directly from the array without conversion losses', 'Independent operation — battery can charge from the grid when solar is offline; cleaner accounting'],
+          ['Disadvantage', 'Battery cannot charge if solar inverter trips; tightly coupled with array degradation', 'Higher capex; conversion losses on every charge cycle'],
+          ['Typical use', 'Greenfield hybrid projects (CIS T4 hybrids)', 'Retrofit batteries added to existing solar farms'],
+        ]}
+      />
+
+      <H2>The CIS hybrid awards</H2>
+      <P>
+        The CIS framework strongly favours hybrid projects. Of the 20 awards under CIS Tender 4 (Oct
+        2025), <Em>12 were hybrids</Em> — solar + co-located battery contracted under a single CISA.
+        The hybrid contract typically defines the solar generation profile, the battery
+        charge/discharge profile, and the total firm capacity available to the grid. Examples:
+      </P>
+      <ul className="list-disc list-inside text-sm text-[var(--color-text-muted)] space-y-1.5 mb-3 ml-2">
+        <li><Em>Junction Rivers</Em> (NSW, 585 MW solar + 800 MWh BESS) — the largest CIS T1 hybrid</li>
+        <li><Em>Bendemeer Energy Hub</Em> (NSW, 252 MW solar + 300 MWh BESS, T4)</li>
+        <li><Em>Bundey BESS and Solar</Em> (SA, 240 MW solar + 1,200 MWh BESS, T4)</li>
+        <li><Em>Killawarra Hybrid Project</Em> (WA, 350 MW solar + 2,100 MWh BESS, T5)</li>
+        <li><Em>Goulburn River Solar</Em> (NSW, 450 MW solar) — in construction with planned 3-hour
+          co-located battery as a separate CIS T3 award</li>
+      </ul>
+
+      <H2>The charge-from-own-array math</H2>
+      <P>
+        A 200 MW solar farm with a co-located 4-hour battery (800 MWh) can typically charge the entire
+        battery from its own generation during the midday peak window. At a 30% capacity factor, the
+        solar farm generates 200 × 24 × 0.30 = 1,440 MWh per day, of which a ~6 hour midday window
+        produces ~600 MWh. The battery only needs ~800 MWh × 1/0.85 = ~940 MWh to fully charge after
+        round-trip efficiency, so the array can fill the battery and still deliver ~500 MWh to the grid
+        at midday. The discharge over the evening peak adds another ~800 MWh × 0.85 = ~680 MWh sold at
+        a higher price.
+      </P>
+
+      <H2>Why only ~50% of utility solar will be hybrid</H2>
+      <P>
+        Despite the obvious economic appeal, AEMO's ISP modelling assumes only about half of
+        utility-scale solar will be co-located with storage by 2030. The reasons:
+      </P>
+      <ul className="list-disc list-inside text-sm text-[var(--color-text-muted)] space-y-1.5 mb-3 ml-2">
+        <li><Em>Existing brownfield solar</Em> wasn't designed for battery co-location — retrofitting
+          requires inverter changes, network connection upgrades, and often regulatory approval
+          variation. Many of the 12 GW of operating Australian utility solar won't be retrofitted.</li>
+        <li><Em>Standalone batteries can do the same arbitrage</Em> from anywhere in the network — at
+          load-centre BESS sites (Eraring, Waratah, Tarong) the connection point matters more than
+          co-location with solar.</li>
+        <li><Em>Capital constraints</Em> — adding a battery doubles project capex. Greenfield developers
+          increasingly add them; brownfield owners often can't afford to.</li>
+        <li><Em>Network constraints</Em> — many solar sites have limited additional export capacity,
+          so a co-located battery's discharge can't increase total grid injection.</li>
+      </ul>
+
+      <Callout type="info">
+        The ISP forecast is therefore: hybrids capture ~50% of new utility solar by 2030 (and rising
+        toward 70% by 2034); standalone BESS provides the rest of the storage build-out. The
+        complementarity matters — hybrids fix solar's cannibalisation problem at the source,
+        standalone BESS provides system-level arbitrage and FCAS.
+      </Callout>
+
+      <Callout type="source">
+        Sources: AEMO Integrated System Plan 2024 + 2026 ·
+        DCCEEW CIS Tender 4 results · Energy-Storage News <em>11.4 GWh of solar-plus-storage in
+        Tender 4</em> ·
+        Modo Energy <em>hybrid co-location economics</em> ·
+        Aurora Energy Research <em>solar + storage stacking outlook</em>.
+      </Callout>
+    </div>
+  )
+}
+
+// ============================================================
+// Lesson 9 — BESS spread reduction (the saturation question)
+// ============================================================
+
+function Lesson9() {
+  return (
+    <div>
+      <H2>The thesis: does arbitrage eat itself?</H2>
+      <P>
+        The same merit-order mechanic that cannibalised solar can in principle cannibalise BESS. As
+        more batteries enter the market, they all compete to charge during the midday trough — pushing
+        midday prices <Em>up</Em>. And they all compete to discharge during the evening peak —
+        pushing peak prices <Em>down</Em>. The spread between midday and evening — the arbitrage
+        opportunity that pays for the battery — gets compressed.
+      </P>
+
+      <Callout type="key">
+        BESS arbitrage spread is a function of supply and demand for time-shifted energy, not a
+        structural feature of the market. As BESS capacity grows, the spread will compress. The only
+        questions are (a) when does the compression start to bite, (b) how fast does it go, and (c)
+        what survives.
+      </Callout>
+
+      <H2>The California parallel — what already happened</H2>
+      <P>
+        California's experience 2018-2023 is the clearest international parallel. California built out
+        ~12 GW of grid-scale storage between 2020 and 2024, predominantly 4-hour BESS. The result was
+        documented in CAISO's quarterly market reports:
+      </P>
+      <ul className="list-disc list-inside text-sm text-[var(--color-text-muted)] space-y-1.5 mb-3 ml-2">
+        <li><Em>2020-2021</Em> — daily spreads of $80-150/MWh; first BESS earning excellent returns;
+          rapid build-out begins</li>
+        <li><Em>2022-2023</Em> — daily spreads compress to $40-80/MWh; capacity-factor-equivalent
+          revenue per MW falls ~30-40%; new batteries earning less than originally projected</li>
+        <li><Em>2023-2024</Em> — spreads stabilise around $50/MWh range; long-duration (8-hour)
+          batteries start to earn more than 4-hour because longer discharge captures evening peak
+          tail; investment thesis shifts to longer-duration storage</li>
+      </ul>
+      <P>
+        The lesson for Australia: <Em>spread compression is a real outcome of saturation, but it
+        does not collapse to zero</Em>. It stabilises at a level where the marginal battery cycles
+        less and the long-duration batteries earn the cleaner returns.
+      </P>
+
+      <H2>Where Australia sits today</H2>
+      <P>
+        AEMO QED data shows the SA spread has been remarkably stable in the $120-180/MWh range over
+        2024-2026, even as ~3 GW of new BESS came online. The reasons:
+      </P>
+      <ul className="list-disc list-inside text-sm text-[var(--color-text-muted)] space-y-1.5 mb-3 ml-2">
+        <li><Em>Solar build-out has outpaced BESS</Em> — every additional MWh of solar deepens the
+          midday trough, which restores spread.</li>
+        <li><Em>Coal retirement</Em> — Liddell (April 2023), and the Eraring extension which only
+          delays the inevitable, have removed cheap baseload. Evening peak prices have stayed elevated
+          because gas is now the marginal generator.</li>
+        <li><Em>4-hour batteries cycle the same midday-to-evening window</Em> — most of the new
+          capacity competes for the same spread. As 8-hour batteries arrive in 2026+ (LTESA R6), they
+          extend into different time windows and don't directly compete for the same spread.</li>
+      </ul>
+
+      <H2>When does it start hitting Australia?</H2>
+      <P>
+        The triggers for spread compression in Australia, in expected order:
+      </P>
+      <ol className="list-decimal list-inside text-sm text-[var(--color-text-muted)] space-y-1.5 mb-3 ml-2">
+        <li><Em>~2027 in SA first</Em> — SA has the most BESS per MW of demand. Eraring extension
+          stabilising NSW prices for now, but SA's narrow demand base means BESS saturation hits there
+          first.</li>
+        <li><Em>~2028 in QLD and VIC</Em> — both states are mid-BESS-buildout, with CIS T3 awards
+          coming online 2026-27.</li>
+        <li><Em>~2029-30 in NSW</Em> — largest demand base + Eraring continuing operations to April
+          2029 keeps thermal as the price-setter for longer.</li>
+      </ol>
+
+      <H2>What survives spread compression</H2>
+      <P>
+        Once spread compression begins, the BESS investment thesis shifts. Three asset profiles do
+        better than 4-hour standalone arbitrage batteries:
+      </P>
+      <ul className="list-disc list-inside text-sm text-[var(--color-text-muted)] space-y-1.5 mb-3 ml-2">
+        <li><Em>Long-duration BESS (8-hour+)</Em> — can discharge into the evening tail and overnight,
+          capturing time windows that 4-hour batteries can't reach. LTESA Round 6's 8.7-11.5 hour
+          cohort is positioned for this.</li>
+        <li><Em>Co-located solar+storage</Em> — even with compressed spreads, the cannibalised solar
+          MWh is more valuable when time-shifted to evening than when sold at midday-trough prices.
+          Cannibalisation creates a structural floor for hybrid economics.</li>
+        <li><Em>Multi-day / seasonal storage</Em> — pumped hydro (Snowy 2.0), longer-duration LTESA
+          assets. These don't cycle daily so they don't compete for the same spread.</li>
+        <li><Em>FCAS specialists</Em> — small 1-hour batteries in good network positions. FCAS
+          market is saturated for raise/lower contingency, but new products (very fast frequency
+          response) keep emerging.</li>
+      </ul>
+
+      <H2>The pumped hydro backstop</H2>
+      <P>
+        Snowy 2.0 (2 GW pumped hydro, ~175 hours of storage) is the long-duration backstop in the
+        ISP. When commissioned (originally 2024-25, slipping to 2027-28 alongside HumeLink), it
+        provides massive cheap discharge capacity in evening peaks AND consumes cheap midday energy
+        for pumping. Snowy 2.0 will be the marginal long-duration price-setter, and its presence
+        moderates how aggressively BESS spreads can compress.
+      </P>
+
+      <Callout type="warn">
+        For developers considering a new 4-hour BESS bid into CIS Tender 7 or 8: the bid price needs
+        to reflect spread compression that's already starting to bite. Aurora Energy Research and
+        Cornwall Insight model declining battery revenue per MW into 2030. Bid floors that look
+        attractive at today's spreads may be uneconomic at 2028's. The conservative-bid strategy
+        (Lesson 6 of the CIS Bidding module) becomes more relevant as the cohort ages.
+      </Callout>
+
+      <Callout type="source">
+        Sources: CAISO <em>Quarterly Market Performance Reports</em> ·
+        Modo Energy <em>Australia BESS revenue compression analysis</em> ·
+        Aurora Energy Research <em>battery saturation outlook 2026-2030</em> ·
+        Cornwall Insight <em>Australia battery revenue stack reports</em> ·
+        AEMO Quarterly Energy Dynamics ·
+        Snowy Hydro project updates.
+      </Callout>
+    </div>
+  )
+}
+
+// ============================================================
+// Lesson 10 — Outlook (renumbered from old Lesson 7)
+// ============================================================
+
+function Lesson10() {
   return (
     <div>
       <H2>The residential battery boom</H2>
@@ -1112,13 +1501,16 @@ function LessonView({ lesson, progress, onComplete }: {
       </div>
 
       <article className="text-[15px] text-[var(--color-text-muted)]">
-        {lesson.id === 'rooftop-boom'     && <Lesson1 />}
-        {lesson.id === 'btm-scale'        && <Lesson2 />}
-        {lesson.id === 'cannibalisation'  && <Lesson3 />}
-        {lesson.id === 'hornsdale'        && <Lesson4 />}
-        {lesson.id === 'how-earns'        && <Lesson5 />}
-        {lesson.id === 'duration-records' && <Lesson6 />}
-        {lesson.id === 'outlook'          && <Lesson7 />}
+        {lesson.id === 'rooftop-boom'             && <Lesson1 />}
+        {lesson.id === 'btm-scale'                && <Lesson2 />}
+        {lesson.id === 'cannibalisation-mechanic' && <Lesson3 />}
+        {lesson.id === 'capture-price-decay'      && <Lesson4 />}
+        {lesson.id === 'hornsdale'                && <Lesson5 />}
+        {lesson.id === 'how-earns'                && <Lesson6 />}
+        {lesson.id === 'duration-records'         && <Lesson7 />}
+        {lesson.id === 'solar-storage-stacking'   && <Lesson8 />}
+        {lesson.id === 'spread-reduction'         && <Lesson9 />}
+        {lesson.id === 'outlook'                  && <Lesson10 />}
       </article>
 
       <div className="flex items-center justify-between gap-3 pt-6 border-t border-[var(--color-border)]">

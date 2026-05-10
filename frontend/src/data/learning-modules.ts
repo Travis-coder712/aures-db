@@ -420,23 +420,26 @@ const M_PPAS: LearningModule = {
 const M_BESS: LearningModule = {
   id: 'bess-story',
   icon: '🔋',
-  title: 'The Solar + BESS Story in the NEM',
-  tagline: 'From rooftop boom to grid-scale batteries — how Australia got here.',
+  title: 'Solar + BESS in the NEM — Boom, Cannibalisation, Batteries',
+  tagline: 'The full arc: rooftop boom → cannibalisation deep-dive → BESS → spread saturation.',
   description:
-    'Australia has more rooftop solar per capita than any country on earth. That fact created the cannibalisation problem, which created the BESS opportunity, which created the modern NEM. This module tells the full arc — the residential solar boom (FITs, STCs, the Australian electrician cost advantage, Chinese panel economics), commercial scale-up, behind-the-meter scale, and how all of that led to Hornsdale, Tesla, FCAS, and today’s 32% price-setting share for batteries.',
+    'Australia\'s solar and storage stories are too entangled to tell separately. Rooftop solar created cannibalisation, cannibalisation created the BESS opportunity, BESS deployment is now compressing its own arbitrage spread — and the next wave (long-duration storage and solar+storage co-location) is what answers that. This 10-lesson module tells the whole arc, with deep-dive treatments of capture-price decay (using AURES data), how a battery earns, the BESS records leaderboard, and the coming spread-saturation question.',
   status: 'available',
-  readingTime: '70 min',
+  readingTime: '95 min',
   accent: '#22c55e',
   added: '2026-05-11',
   route: '/learn/bess-story',
   lessons: [
     { id: 'rooftop-boom',  number: 1, title: 'The Australian rooftop solar boom', summary: 'How feed-in tariffs, STCs and a hyper-competitive installer market built the world’s densest rooftop solar fleet.', covers: ['Premium FITs (NSW Solar Bonus, VIC Premium FIT)', 'STC scheme replacing RECs in 2011', 'Australian electrician industry — sole-operator competition keeps install costs low', 'Chinese module costs and dumping allegations', 'Cost trajectory: $5/W in 2010 to ~$1.10/W today', '~4 million homes, 24+ GW installed by 2026'] },
     { id: 'btm-scale',     number: 2, title: 'Commercial solar and the hidden demand effect', summary: 'Commercial mid-scale roll-out plus the impact of behind-the-meter generation on operational demand.', covers: ['Commercial 100 kW – 1 MW segment', 'Operational demand vs underlying demand', 'Minimum demand events in SA, VIC, QLD', 'How 30+ GW behind-the-meter changes the grid view of demand', 'Hidden demand growth from data centres and EVs masked by rooftop'] },
-    { id: 'cannibalisation', number: 3, title: 'From cannibalisation to opportunity', summary: 'Why so much solar at the same time of day pushed prices toward zero — and made BESS necessary.', covers: ['The midday price collapse', 'Negative price hours emergence', 'Capture-price decline for utility solar', 'Why batteries were the only economic answer', 'Bridge to the BESS story'] },
-    { id: 'hornsdale',     number: 4, title: 'Origins: Hornsdale and the Tesla bet', summary: 'How a Twitter bet brought the world’s biggest battery to South Australia and rewrote the orthodoxy.', covers: ['28 Sep 2016 SA blackout context', 'Tesla / Neoen / Musk 100-day bet', 'Hornsdale Power Reserve commissioning Dec 2017', 'FCAS revenue surprise (the contingency-raise breakthrough)', '2019 expansion to 150 MW / 193.5 MWh'] },
-    { id: 'how-earns',     number: 5, title: 'How a battery actually earns', summary: 'Arbitrage spread, FCAS, capacity contracts, contracted offtake — and the real numbers from AURES.', covers: ['Spread = avg discharge price minus avg charge price', 'Round-trip efficiency 80–88%', 'Cycles per year (target ~250–350)', 'FCAS market revenue mix', 'Why 1-hour batteries dominated FCAS first'], interactive: 'AURES BESS Records Leaderboard cross-link' },
-    { id: 'duration-records', number: 6, title: 'The duration evolution and BESS records', summary: '1-hour → 2-hour → 4-hour → 8-hour. The records each state has set. CIS and LTESA driving the new tiers.', covers: ['Why 1-hour led for FCAS', 'CIS Tender 3 4-hour minimum', 'LTESA Round 6 8.7–11.5 hour batteries', 'AURES leaderboard data per state', 'Hornsdale, Victorian Big Battery, Waratah Super Battery, Eraring BESS, Wandoan, Tailem Bend'] },
-    { id: 'outlook',       number: 7, title: 'Where this is going — more solar, more batteries', summary: 'Residential battery boom, AEMO ISP storage targets, why more solar needs more BESS.', covers: ['Federal Cheaper Home Batteries program (2025)', '~250,000+ home batteries by 2024', 'AEMO ISP storage outlook (~13 GW dispatchable target)', 'NSW 2 GW / 28 GWh LDS target by 2034', 'BESS as price-setter (32% of intervals Q1 2026)', 'Why baseload exit means more solar AND more BESS'] },
+    { id: 'cannibalisation-mechanic', number: 3, title: 'The cannibalisation mechanic', summary: 'What value factor really means, why solar farms are perfectly correlated, the merit-order effect.', covers: ['Value factor = capture price / pool average', 'The merit-order effect formally', 'Why solar output is perfectly correlated within a region', 'Hourly profile of a typical solar farm', 'Negative spot prices — mechanism and who pays', 'Mathematical relationship between solar penetration and VF'] },
+    { id: 'capture-price-decay',   number: 4, title: 'Capture-price decay — real data by state and farm', summary: 'Year-on-year VF decline using AURES data. Worst farms, best farms, and what predicts the gap.', covers: ['VF trajectory 2018-2026 by NEM region', 'Worst capture price farms (Bungala, Daydream, Hayman, Limondale)', 'Best capture price solar (regional outliers)', 'Curtailment — economic vs technical', 'AURES Solar Value Analysis cross-link', 'The "diversity capture premium" metric'], interactive: 'AURES Solar Value Analysis cross-link' },
+    { id: 'hornsdale',             number: 5, title: 'Origins: Hornsdale and the Tesla bet', summary: 'How a Twitter bet brought the world\'s biggest battery to South Australia and rewrote the orthodoxy.', covers: ['28 Sep 2016 SA blackout context', 'Tesla / Neoen / Musk 100-day bet', 'Hornsdale Power Reserve commissioning Dec 2017', 'FCAS revenue surprise', '2019 expansion to 150 MW / 193.5 MWh'] },
+    { id: 'how-earns',             number: 6, title: 'How a battery actually earns', summary: 'Arbitrage spread, FCAS, capacity contracts — and the real numbers from AURES.', covers: ['Spread = avg discharge price minus avg charge price', 'Round-trip efficiency 80–88%', 'Cycles per year (target ~250–350)', 'FCAS market revenue mix'], interactive: 'AURES BESS Records Leaderboard cross-link' },
+    { id: 'duration-records',      number: 7, title: 'The duration evolution and BESS records', summary: '1-hour → 4-hour → 8h+. State-by-state records. CIS and LTESA driving each tier.', covers: ['Why 1-hour led for FCAS', 'CIS Tender 3 4-hour minimum', 'LTESA Round 6 8.7–11.5 hour batteries', 'AURES leaderboard per state'] },
+    { id: 'solar-storage-stacking', number: 8, title: 'Solar + storage stacking — the answer to cannibalisation', summary: 'Co-located batteries that charge from their own solar array, time-shift to evening, and recover the cannibalised value.', covers: ['DC-coupled vs AC-coupled hybrids', 'Charge-from-own-array math', 'CIS hybrid awards (12 of 20 in T4)', 'Real examples — Junction Rivers, Wellington, Bundey', 'Why only ~50% of utility solar will eventually be hybrid'] },
+    { id: 'spread-reduction',      number: 9, title: 'BESS spread reduction — does the arbitrage eat itself?', summary: 'As more batteries arrive, midday-to-evening spread compresses. International experience and Australian outlook.', covers: ['The cannibalisation-by-storage thesis', 'AEMO QED data on spread compression', 'California 2022-23 spread collapse parallel', 'When does it start hitting Australia?', 'What survives — long-duration, co-located, multi-day storage'] },
+    { id: 'outlook',               number: 10, title: 'Where this is going — more solar, more batteries', summary: 'Residential battery boom, AEMO ISP storage targets, the compounding loop.', covers: ['Federal Cheaper Home Batteries program (2025)', '~250,000+ home batteries by 2024', 'AEMO ISP storage outlook', 'NSW 2 GW / 28 GWh LDS target by 2034', 'BESS as price-setter (32% Q1 2026)', 'Why baseload exit means more solar AND more BESS'] },
   ],
   sources: [
     { category: 'AURES live data', items: [
@@ -761,12 +764,17 @@ const M_CIS_LTESA: LearningModule = {
 // Module catalogue export
 // ============================================================
 
+// Note: solar cannibalisation has been folded into the merged
+// "Solar + BESS in the NEM" module (M_BESS) — see lessons 3, 4, 8 and 9
+// of that module. M_SOLAR_CANN is retained in code for historical
+// reference but is no longer exposed in the catalogue.
+void M_SOLAR_CANN
+
 export const LEARNING_MODULES: LearningModule[] = [
   M_CONSTRAINTS,
   M_CIS_LTESA,
   M_REZ,
   M_BESS,
-  M_SOLAR_CANN,
   M_TRANSITION,
   M_PLANNING,
   M_CONNECTIONS,
