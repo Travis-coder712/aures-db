@@ -154,6 +154,49 @@ function Lesson1() {
         ]}
       />
 
+      <H2>The underlying geographic logic — generation chases resource, not load</H2>
+      <P>
+        Step back from the regulatory machinery for a moment. The fundamental decision a REZ makes is
+        a geographic one: <Em>build transmission to where the resource is</Em>, rather than build
+        generation where the load is. That is a deliberate choice — and it reverses some prior
+        Australian practice but echoes others.
+      </P>
+      <P>
+        In the coal era, generation was located <Em>at the fuel</Em>, not at the load. The Latrobe
+        Valley's brown-coal seams put four major power stations (Hazelwood, Yallourn, Loy Yang A, Loy
+        Yang B) ~150 km from Melbourne. The Hunter Valley's black coal put Liddell, Bayswater and
+        Eraring 200+ km from Sydney. The transmission network was built to evacuate the fuel, not to
+        deliver to where people lived. The pattern was: <Em>generation goes to the resource, transmission
+        goes to the load</Em>.
+      </P>
+      <P>
+        The renewable era is structurally identical. Wind is on the Northern Tablelands. Solar is in
+        the Riverina. Pumped hydro is in the Snowy Mountains. None of those are at the Sydney load.
+        So once again the network has to be built to <Em>evacuate the resource</Em> — except this time
+        the resource is geographically more dispersed (multiple REZs rather than two coal valleys), the
+        scale is larger (32 GW vs ~10 GW of coal at peak), and the timeline is compressed (a decade vs
+        the four decades over which the coal fleet was built).
+      </P>
+
+      <Callout type="key">
+        The genuinely new question for the renewable era is not whether to chase resource — that's
+        what generation has always done — but whether to <Em>also</Em> chase load. Behind-the-meter
+        solar, distributed batteries, and demand-flexibility programs are all attempts to do exactly
+        that: bring some of the generation to where the demand is. But for utility-scale wind and solar
+        — and for grid-scale storage — the resource-led siting logic still holds, and that is what the
+        REZ + TNSP architecture is designed for.
+      </Callout>
+
+      <P>
+        This frame matters when assessing each REZ. South Australia is the canonical example of a
+        renewable resource &ldquo;stuck&rdquo; without transmission — abundant wind, modest local load,
+        and (until 2024) only one congested 660 MW interconnector to the rest of the NEM. That stranded
+        energy is exactly what Project EnergyConnect was built to unstick (Lesson 5). The South-West
+        NSW REZ is the same problem on a smaller scale: world-class solar resource, virtually no
+        nearby load, and almost zero project economics without dedicated evacuation. Without the REZ +
+        TNSP wrap, the resource is not commercially accessible.
+      </P>
+
       <H2>Why NSW chose this model</H2>
       <P>
         Other states made different choices. Victoria pursued direct public investment (the SEC
@@ -458,6 +501,17 @@ function Lesson4() {
         with reasonable single-axis-tracking economics. Storage co-location is heavily incentivised
         because the local network is constrained for unmanaged solar export.
       </P>
+
+      <Callout type="key">
+        SW REZ is the cleanest illustration of the resource-vs-load thesis. The Riverina has world-class
+        solar resource and modest local wind. It has <Em>almost no local load</Em> — Wagga and Albury
+        sit on the periphery, and the rest is broadacre agriculture. Without dedicated transmission, a
+        500 MW solar farm here is essentially valueless: you cannot consume the energy locally and the
+        existing 220-330 kV TransGrid backbone is already congested. PEC and the Access Scheme together
+        turn the resource from stranded to accessible — and as soon as PEC Stage 1 energised in mid-2024,
+        the existing operating solar farms (Limondale, Yatpool, Bomen) saw measurable curtailment
+        relief. The SW REZ thesis is the resource-led model in its purest form.
+      </Callout>
       <P>
         The South-West REZ does <Em>not</Em> have a dedicated REZ transmission project. Instead it
         rides on:
@@ -573,6 +627,19 @@ function Lesson5() {
         renewable periods, and NSW's Riverina solar would have hit local network constraints before
         delivering material market value.
       </P>
+
+      <Callout type="key">
+        PEC is the canonical example of the resource-vs-load problem the REZ + TNSP architecture is
+        designed to solve. South Australia has been Australia's renewable showcase for a decade —
+        regularly the most renewable region in the NEM, sometimes 100%+ instantaneous renewable share —
+        but a chunk of that renewable energy was effectively <Em>stuck</Em>: SA's local load is roughly
+        a quarter of the NEM's total, the existing Heywood interconnector to Victoria caps at ~600 MW,
+        and during high-wind / high-solar periods SA spot prices crashed to zero or negative because
+        the energy could not leave the state. PEC is the second route out. It does not move the resource
+        closer to the load — that is geographically impossible — but it builds the wire that lets the
+        resource travel to the load. Same logic that built the 500 kV from the Latrobe Valley to
+        Melbourne in the 1970s, just with renewable energy in place of brown coal.
+      </Callout>
 
       <H2>The long history</H2>
       <P>
