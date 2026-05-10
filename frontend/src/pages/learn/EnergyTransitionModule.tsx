@@ -52,7 +52,13 @@ const LESSONS: LessonMeta[] = [
   { id: 'origin',           number: 8,  title: 'Origin Energy — Boral, APLNG, Eraring, and the Brookfield bid', subtitle: 'How a building-materials spin-off became a NEM giant',           readingTime: '12 min' },
   { id: 'energy-australia', number: 9,  title: 'EnergyAustralia — Sydney County Council to Hong Kong-owned', subtitle: 'TRUenergy, CLP, Yallourn closure and Tallawarra B',                  readingTime: '11 min' },
   { id: 'alinta',           number: 10, title: 'Alinta Energy — SECWA roots to Chow Tai Fook',              subtitle: 'Babcock & Brown, TPG, Loy Yang B and the WA stronghold',            readingTime: '10 min' },
-  { id: 'coal-exit',        number: 11, title: 'Coal exit and the 2030-35 NEM landing',                     subtitle: 'Who closes when, federal/state interventions, what fills the gap', readingTime: '13 min' },
+  { id: 'ret-era',          number: 11, title: 'RET Era (2001-2016) — the LGC mechanism and the first wind boom', subtitle: 'MRET, LRET, the Warburton freeze, and the post-2020 LGC collapse', readingTime: '11 min' },
+  { id: 'carbon-price',     number: 12, title: 'Carbon Price Era (2012-2014) — 25 months that re-shaped coal', subtitle: 'Clean Energy Act, the merit-order shift, why repeal didn\'t fully reverse it', readingTime: '11 min' },
+  { id: 'closure-decade',   number: 13, title: 'Coal Closure Decade (2016-2024) — from Northern + Hazelwood to managed exits', subtitle: 'The shocks that forced government coordination of every subsequent closure', readingTime: '12 min' },
+  { id: 'external-drivers', number: 14, title: 'External drivers — solar costs, BESS learning curves, drought', subtitle: 'Why Chinese manufacturing scale matters more than Australian policy', readingTime: '11 min' },
+  { id: 'data-centres',     number: 15, title: 'Data centres — the demand wildcard', subtitle: 'Global growth, TNSP connection-application surge, the materialisation question', readingTime: '13 min' },
+  { id: 'coal-exit',        number: 16, title: 'Coal exit and the 2030-35 NEM landing',                     subtitle: 'Who closes when, federal/state interventions, what fills the gap', readingTime: '13 min' },
+  { id: 'where-going',      number: 17, title: 'Where we go from here — synthesis',                         subtitle: 'Four 2035 scenarios, gentailer trajectories, the second-half transition', readingTime: '11 min' },
 ]
 
 // ============================================================
@@ -1650,10 +1656,778 @@ function Lesson10() {
 }
 
 // ============================================================
-// Lesson 11 — Coal exit and the 2030-35 NEM landing
+// Lesson 11 — RET Era (2001-2016)
 // ============================================================
 
 function Lesson11() {
+  return (
+    <div>
+      <H2>The MRET — Australia's first renewables instrument</H2>
+      <P>
+        The Howard Coalition government legislated the <Em>Mandatory Renewable Energy Target
+        (MRET)</Em> in 2000-2001 as Australia's response to obligations under the Kyoto Protocol. The
+        target was modest by today's standards: 9,500 GWh of additional renewable generation by 2010,
+        equivalent to ~2% of national electricity consumption. The MRET would become the dominant
+        policy lever shaping renewable investment for the next 15 years — through five different
+        federal governments and at least four major design changes.
+      </P>
+
+      <H2>How the LGC market works</H2>
+      <P>
+        The MRET (and from 2010 the expanded LRET — Large-scale Renewable Energy Target) operates
+        through a tradable certificate market called the <Em>Large-scale Generation Certificate
+        (LGC)</Em>. Every megawatt-hour of eligible renewable energy generated creates one LGC.
+        Liable retailers (and large electricity buyers) must surrender LGCs each calendar year equal
+        to their proportional share of the national target — or pay a shortfall charge (~$65/MWh in
+        2010-15, set well above the expected market price as a stick).
+      </P>
+      <ul className="list-disc list-inside text-sm text-[var(--color-text-muted)] space-y-1.5 mb-3 ml-2">
+        <li><Em>Eligibility:</Em> wind, solar, biomass, geothermal, large hydro (existing hydro
+          excluded for additionality)</li>
+        <li><Em>Price formation:</Em> LGCs traded on a small spot market; long-dated LGC contracts
+          underpinned project finance</li>
+        <li><Em>The bundling logic:</Em> a wind farm sells wholesale energy at pool price <em>plus</em>
+          LGCs separately — the LGC revenue is the marginal economics that makes the project bankable</li>
+      </ul>
+
+      <H2>2010 — The expanded LRET (41,000 GWh by 2020)</H2>
+      <P>
+        The Rudd-Gillard Labor government dramatically expanded the target in 2010 — the Large-scale
+        Renewable Energy Target (LRET) was set at 41,000 GWh by 2020, broadly equivalent to a 20%
+        renewable share of national electricity consumption (using 2000-era demand projections).
+        Combined with the Small-scale Renewable Energy Scheme (SRES — the residential rooftop solar
+        side), the total renewable energy target was structured to drive ~15 GW of new renewable
+        capacity by 2020.
+      </P>
+      <P>
+        The expansion triggered the first major Australian wind boom — projects sanctioned 2010-2014
+        included Macarthur Wind Farm (420 MW, AGL/Meridian, then-largest in the southern hemisphere),
+        Snowtown Stage 2 (270 MW, TrustPower), Hornsdale Wind Farm (310 MW, Neoen), Mt Mercer (131 MW),
+        Mt Emerald (180 MW), Ararat (240 MW) and dozens of smaller projects. By 2014, ~1 GW per year
+        of new wind capacity was reaching financial close.
+      </P>
+
+      <H2>2014-15 — The Warburton Review and the investment freeze</H2>
+      <P>
+        The Abbott Coalition government, elected 2013, commissioned the <Em>Warburton Review</Em>
+        into the RET in February 2014 — chaired by former Caltex CEO Dick Warburton. The review's
+        June 2014 report recommended reducing the LRET from 41,000 GWh to between 20,000 and 30,000
+        GWh ("real 20%"), with options to close it to new entrants entirely.
+      </P>
+      <P>
+        The immediate market response was severe: LGC long-dated prices fell from ~$45/MWh to
+        ~$25/MWh in three months. New wind farm financial close decisions paused. Industry
+        association Clean Energy Council reported $20B+ of pipeline projects on hold. The investment
+        freeze lasted ~18 months until political compromise was reached in mid-2015.
+      </P>
+      <P>
+        The June 2015 bipartisan compromise reduced the LRET to 33,000 GWh by 2020 (down from
+        41,000) but preserved the scheme structure. Investment resumed almost immediately. LGC spot
+        prices spiked from $50/MWh to $90/MWh as retailers scrambled to procure LGCs before the
+        2020 deadline — the price peak in 2016-17 made many post-Warburton-freeze projects highly
+        profitable.
+      </P>
+
+      <H2>2016-2020 — The LRET delivery sprint</H2>
+      <P>
+        The 33,000 GWh target was effectively achieved by mid-2020 with combined wind and large-scale
+        solar capacity reaching ~16 GW. Key projects commissioned in the sprint:
+      </P>
+      <ul className="list-disc list-inside text-sm text-[var(--color-text-muted)] space-y-1.5 mb-3 ml-2">
+        <li><Em>Coopers Gap Wind Farm</Em> (453 MW, AGL, QLD 2019)</li>
+        <li><Em>Stockyard Hill Wind Farm</Em> (530 MW, Goldwind, VIC 2020)</li>
+        <li><Em>Murra Warra Wind Farm Stage 1+2</Em> (435 MW, Renewable Energy Systems, VIC 2019-21)</li>
+        <li><Em>Bungala Solar Farm</Em> (220 MW, Enel Green Power, SA 2018-19)</li>
+        <li><Em>Sun Cable + Limondale Solar Farm</Em> (~350 MW combined, NSW 2020)</li>
+        <li><Em>Beryl Solar Farm</Em> (87 MW, New Energy Solar, NSW 2019)</li>
+      </ul>
+
+      <H2>The LGC market after 2020</H2>
+      <P>
+        Post-2020, the LRET became a closed scheme — no new target growth, the existing target
+        continued to be met by cumulative generation. LGC prices collapsed:
+      </P>
+      <Table
+        emphasizeFirst
+        headers={['Year', 'LGC spot price', 'Comment']}
+        rows={[
+          ['2010', '~$30/MWh', 'New scheme, modest demand'],
+          ['2014', '~$25/MWh', 'Warburton uncertainty'],
+          ['2016', '~$80/MWh', 'Pre-deadline scarcity'],
+          ['2017', '~$85-90/MWh (peak)', 'Maximum scarcity pricing'],
+          ['2019', '~$45/MWh', 'Supply catching up'],
+          ['2021', '~$30/MWh', 'Surplus emerging'],
+          ['2024', '~$10/MWh', 'Severe oversupply'],
+          ['2026', '~$5/MWh', 'Functionally zero'],
+        ]}
+      />
+
+      <Callout type="key">
+        The RET era achieved what it was designed to do — Australia's first ~15 GW of utility-scale
+        renewables — but it did so via a market mechanism (LGCs) that was inherently temporary.
+        Once the 33,000 GWh target was met, the price signal collapsed and new investment lost its
+        primary subsidy. The transition from RET-era support to Carbon Price era and ultimately to
+        the CIS framework reflects this evolution.
+      </Callout>
+
+      <Callout type="source">
+        Sources: Clean Energy Regulator <em>LRET market data</em> · Warburton Review 2014 ·
+        AEMO renewables capacity tracking · Clean Energy Council
+        <em> Renewables Industry Reports 2010-2024</em>.
+      </Callout>
+    </div>
+  )
+}
+
+// ============================================================
+// Lesson 12 — Carbon Price Era (2012-2014)
+// ============================================================
+
+function Lesson12() {
+  return (
+    <div>
+      <H2>Two years that re-shaped the NEM</H2>
+      <P>
+        Australia operated a national carbon price for exactly 25 months: from 1 July 2012 to 17 July
+        2014. The Gillard Labor government legislated the Clean Energy Act 2011 — negotiated with the
+        Greens, the independents, and the Coalition's strenuous opposition — and the Abbott Coalition
+        government repealed it in their first parliamentary year. Yet in those 25 months the carbon
+        price re-set generator economics in ways that outlasted the policy by a decade.
+      </P>
+
+      <H2>How the carbon price worked</H2>
+      <P>
+        Under the Clean Energy Act:
+      </P>
+      <ul className="list-disc list-inside text-sm text-[var(--color-text-muted)] space-y-1.5 mb-3 ml-2">
+        <li><Em>Fixed-price period (2012-2015)</Em>: $23/tCO₂-equivalent from July 2012, escalating
+          to $24.15 in 2013-14, $25.40 in 2014-15</li>
+        <li><Em>Floating-price period (2015 onward)</Em>: linked to the EU Emissions Trading Scheme
+          (never reached — repealed first)</li>
+        <li><Em>Coverage</Em>: ~370 largest emitters, including all major electricity generators</li>
+        <li><Em>Pass-through</Em>: generators passed the cost through to wholesale electricity prices
+          via the merit-order effect — high-emissions generators (brown coal) were displaced from
+          dispatch as their effective marginal cost rose</li>
+      </ul>
+
+      <H2>The merit-order impact — by fuel type</H2>
+      <Table
+        emphasizeFirst
+        headers={['Generator type', 'Emissions intensity (t/MWh)', 'Carbon cost added ($/MWh @ $23)', 'Effect']}
+        rows={[
+          ['Brown coal (VIC Latrobe Valley)', '~1.20-1.30', '~$28-30/MWh', 'Worst-hit; significant margin compression'],
+          ['Black coal (NSW Hunter Valley)', '~0.85-1.00', '~$20-23/MWh', 'Significant margin compression'],
+          ['Black coal (QLD)', '~0.75-0.90', '~$17-21/MWh', 'Margin compression'],
+          ['CCGT gas', '~0.40-0.45', '~$9-10/MWh', 'Modest cost increase; relatively advantaged'],
+          ['OCGT gas peaker', '~0.55-0.65', '~$13-15/MWh', 'Cost increase but rare dispatch'],
+          ['Wind / solar / hydro', '0', '$0/MWh', 'Relatively advantaged'],
+        ]}
+      />
+
+      <H2>What happened to wholesale prices</H2>
+      <P>
+        Wholesale electricity prices rose by approximately $25-30/MWh on average across the NEM
+        during 2012-14, reflecting the partial pass-through of carbon cost into the merit order.
+        Some highlights:
+      </P>
+      <ul className="list-disc list-inside text-sm text-[var(--color-text-muted)] space-y-1.5 mb-3 ml-2">
+        <li><Em>2011-12 (pre-CP):</Em> NEM-wide average ~$30-35/MWh</li>
+        <li><Em>2012-13 (CP year 1):</Em> NEM-wide average ~$55-60/MWh</li>
+        <li><Em>2013-14 (CP year 2):</Em> NEM-wide average ~$50-60/MWh</li>
+        <li><Em>2014-15 (post-repeal):</Em> NEM-wide average ~$35-40/MWh — partial reversion</li>
+        <li><Em>Brown coal margins</Em> compressed from ~$15-20/MWh to ~$5/MWh during CP era;
+          recovered partially after repeal but never fully</li>
+      </ul>
+
+      <H2>The Loy Yang A timing — counter-intuitive but explainable</H2>
+      <P>
+        AGL's decision in 2012 to acquire the remaining 67.5% of Loy Yang A — closing the
+        transaction in December 2012, six months into the carbon price era — looks counter-intuitive
+        on its face. Brown coal economics had just been crushed by ~$28/MWh of carbon cost. Yet AGL
+        paid ~$448M for the remaining equity and assumed the project debt.
+      </P>
+      <P>
+        AGL's thesis at the time was three-part: (1) the carbon price would likely be repealed
+        within 2-3 years if the Coalition won government, (2) Loy Yang A's LCOE was so low that
+        even fully-priced carbon left positive operating margin, and (3) the asset would deliver
+        decades of cash flow even under continued carbon pricing. AGL's bet paid off — the price
+        was repealed within 18 months of acquisition, and Loy Yang A delivered approximately $230-
+        450M/year of gross margin for the next decade.
+      </P>
+
+      <H2>July 2014 — The repeal</H2>
+      <P>
+        The Abbott Coalition government had campaigned on "axe the tax" since 2010, won the 2013
+        election decisively, and repealed the Clean Energy Act in July 2014. The Direct Action Plan
+        / Emissions Reduction Fund was introduced as a replacement — a reverse-auction mechanism
+        paying carbon abatement projects a per-tonne price, funded from general revenue. The
+        differences in market impact were stark:
+      </P>
+      <ul className="list-disc list-inside text-sm text-[var(--color-text-muted)] space-y-1.5 mb-3 ml-2">
+        <li><Em>Carbon price:</Em> universal coverage, market price signal, structural — touched
+          every MWh dispatched</li>
+        <li><Em>Direct Action:</Em> opt-in for project-by-project abatement contracts, taxpayer-
+          funded, did not change merit-order economics</li>
+      </ul>
+      <P>
+        The ERF/Direct Action mechanism continued under various rebranding (Climate Solutions Fund,
+        then Safeguard Mechanism reforms in 2023) but never replaced the structural impact of a
+        universal carbon price.
+      </P>
+
+      <H2>The long tail of the carbon price era</H2>
+      <P>
+        The carbon price was active for only 25 months — but its effects on coal generator
+        investment economics outlasted the policy by a decade. Three lasting impacts:
+      </P>
+      <ul className="list-disc list-inside text-sm text-[var(--color-text-muted)] space-y-1.5 mb-3 ml-2">
+        <li><Em>Capital expenditure deferred:</Em> brown-coal generators deferred boiler tube
+          replacements and major maintenance during 2012-14 expecting closure. Hazelwood's 2017
+          closure was partly precipitated by these deferred works — equipment failures piled up.</li>
+        <li><Em>Closure planning accelerated:</Em> Engie's decision to close Hazelwood was made
+          in 2016 but the analytical work began during the carbon price era. The CP made closure
+          look economically inevitable; the repeal didn't fully restore the prior margin.</li>
+        <li><Em>Investor mental model shifted:</Em> Australian electricity investors stopped
+          modelling coal as a long-life asset class after 2014. Even with the price repealed, the
+          permanent-impairment risk had become real.</li>
+      </ul>
+
+      <Callout type="key">
+        The Carbon Price era illustrates a counterintuitive truth about Australian energy policy —
+        even policies that get repealed reshape investment expectations permanently. The 2012-14
+        carbon price didn't survive politically, but it crystallised the market's view that
+        coal's long-term cost structure was vulnerable to future carbon pricing. Every major coal
+        closure announcement since 2014 (Hazelwood, Liddell, Eraring, Yallourn, Bayswater, Loy Yang
+        A) traces back to the economics revealed during those 25 months.
+      </Callout>
+
+      <Callout type="source">
+        Sources: Clean Energy Act 2011 + Repeal Act 2014 · Productivity Commission
+        <em> Carbon Price Impacts Review</em> · AEMO QED archives 2012-2015 ·
+        Treasury <em>Mid-Year Economic and Fiscal Outlook 2014</em>.
+      </Callout>
+    </div>
+  )
+}
+
+// ============================================================
+// Lesson 13 — Coal Closure Decade (2016-2024)
+// ============================================================
+
+function Lesson13() {
+  return (
+    <div>
+      <H2>The decade Australia exited 7 GW of coal</H2>
+      <P>
+        Between mid-2016 and early-2024, Australian coal capacity went from approximately 24 GW
+        operating to approximately 17 GW — a reduction of 7 GW (~30% of the fleet) in less than a
+        decade. Most of this was unplanned by the system operator, politically chaotic for state
+        and federal governments, and unaccompanied by sufficient replacement build. The lesson
+        of those eight years is that <Em>coal closures cannot be left to private owners alone</Em> —
+        a lesson now embedded in the CIS and state-level underwriting frameworks.
+      </P>
+
+      <H2>Northern + Playford — the SA exit (2016)</H2>
+      <P>
+        Engie's decision to close Northern Power Station (520 MW) and Playford B (240 MW, already
+        mothballed) in May 2016 was the first major signal. Both were Leigh Creek brown coal — the
+        only operating coal generators in South Australia. Their closure made SA the first
+        Australian state without any operating coal generation, and forced SA to rely on the
+        Heywood interconnector to VIC plus gas peakers plus the rapidly-growing wind fleet.
+      </P>
+      <P>
+        The 28 September 2016 SA system black blackout — covered in detail in the BESS Story
+        module — happened five months after Northern's closure, and the connection was not lost on
+        federal policy makers. The Tesla / Hornsdale / "Tesla bet" episode followed within months.
+      </P>
+
+      <H2>Hazelwood — the November 2016 shock</H2>
+      <P>
+        Engie's 3 November 2016 announcement that Hazelwood Power Station (1,600 MW, VIC brown coal)
+        would close on 31 March 2017 was the watershed moment. Five months' notice. The fifth-
+        biggest coal generator in the NEM. The decision was made by the French parent on capital
+        allocation grounds — Engie had been told by its global board to exit coal globally.
+      </P>
+      <P>
+        The market response over the following 12 months:
+      </P>
+      <ul className="list-disc list-inside text-sm text-[var(--color-text-muted)] space-y-1.5 mb-3 ml-2">
+        <li><Em>VIC wholesale prices</Em> rose from ~$60/MWh (Q1 2017) to ~$110-120/MWh (Q3 2017) —
+          near-doubling within 6 months</li>
+        <li><Em>NSW prices</Em> rose by ~30% via interconnector flow effects</li>
+        <li><Em>SA prices</Em> spiked, hitting summer 2017-18 record highs</li>
+        <li><Em>National wholesale average</Em> reached ~$100/MWh — highest since the carbon price era</li>
+        <li><Em>AEMO declared a system adequacy warning</Em> for VIC and SA summer 2017-18</li>
+      </ul>
+
+      <H2>The Turnbull policy response</H2>
+      <P>
+        The political response to Hazelwood was rapid and reshaped Australian energy policy:
+      </P>
+      <ul className="list-disc list-inside text-sm text-[var(--color-text-muted)] space-y-1.5 mb-3 ml-2">
+        <li><Em>March 2017 — Snowy 2.0 announcement</Em> by Malcolm Turnbull at Cooma. A $4-6B
+          (later $12B+) pumped hydro project as the federal response to firmness gap</li>
+        <li><Em>Finkel Review (June 2017)</Em> — Chief Scientist Alan Finkel's comprehensive
+          review of NEM design, recommending a Clean Energy Target (CET) and notice-of-closure rules</li>
+        <li><Em>2018 NEG (National Energy Guarantee)</Em> — Turnbull's attempted replacement for
+          CET, requiring retailers to maintain both reliability and emissions targets. Killed by
+          Coalition party room August 2018, contributing to Turnbull's ouster.</li>
+        <li><Em>Three years' closure notice rule</Em> — implemented via NEM Rules amendment 2018,
+          requiring generators to give AEMO three years' notice of intended closure</li>
+      </ul>
+
+      <H2>Liddell — the policy chess match (2015-2023)</H2>
+      <P>
+        AGL announced Liddell's closure in 2015 (originally scheduled 2022, later extended to April
+        2023). The federal Coalition government pressured AGL relentlessly to keep it open or sell
+        it to a buyer willing to extend operations:
+      </P>
+      <ul className="list-disc list-inside text-sm text-[var(--color-text-muted)] space-y-1.5 mb-3 ml-2">
+        <li><Em>2017</Em> — Turnbull asked AGL to consider extending Liddell to 2027 or selling it</li>
+        <li><Em>2018</Em> — Frydenberg (Energy Minister) considered compulsory acquisition under the
+          Petroleum and Other Fuels Reporting Act</li>
+        <li><Em>2019</Em> — Alinta Energy (then-TPG-owned) made a public bid for Liddell that AGL
+          rejected</li>
+        <li><Em>2020</Em> — Morrison government considered direct purchase / underwriting; AGL
+          declined to sell</li>
+        <li><Em>2022</Em> — AGL's demerger collapse and new strategy confirmed Liddell would close
+          April 2023 as planned</li>
+        <li><Em>April 2023</Em> — Liddell closed on schedule. Replacement: 500 MW BESS being built
+          on the same site by 2026-27.</li>
+      </ul>
+
+      <H2>The 2021-2024 cascade — managed but compressed</H2>
+      <P>
+        From 2021 onwards, every major coal closure announcement was wrapped in a government
+        coordination mechanism:
+      </P>
+      <Table
+        emphasizeFirst
+        headers={['Plant', 'Original closure', 'Negotiated closure', 'Government deal']}
+        rows={[
+          ['Yallourn (EA)', '2032', 'Mid-2028', 'VIC confidential payments (2021)'],
+          ['Eraring (Origin)', '2025', '2027-2029', 'NSW opt-in profit/loss share (2024)'],
+          ['Bayswater (AGL)', '2035', '2033', 'Climate Transition Action Plan (2024)'],
+          ['Loy Yang A (AGL)', '2045-48', '2035', 'Climate Transition Action Plan (2024)'],
+          ['QLD GOC fleet', 'Various', '2028-37', 'Queensland Energy & Jobs Plan ($62B, 2022)'],
+        ]}
+      />
+
+      <H2>Wholesale price trajectory through the decade</H2>
+      <Table
+        emphasizeFirst
+        headers={['Period', 'NEM avg wholesale $/MWh', 'Defining event']}
+        rows={[
+          ['2014-15', '~$35-40', 'Post-carbon-price repeal'],
+          ['2016', '~$60', 'Pre-Hazelwood'],
+          ['2017', '~$100', 'Hazelwood shock'],
+          ['2018-19', '~$110-130', 'Tight market, gas price spike'],
+          ['2020-21', '~$60-70', 'COVID demand drop, mild winters'],
+          ['2022', '~$140-200', 'Russia-Ukraine, gas supply shock, Callide C explosion'],
+          ['2023', '~$100', 'Eraring announcement, gas peaker stress'],
+          ['2024', '~$80', 'Renewable build catching up, mild weather'],
+          ['2026', '~$95-100', 'Tight margins, data centre load growth pressure'],
+        ]}
+      />
+
+      <Callout type="key">
+        The Coal Closure Decade is the period during which Australian governments learned — at
+        considerable political and economic cost — that <Em>coal exits cannot be left to private
+        capital decisions alone</Em>. The Hazelwood shock (2017), the Eraring near-miss (2024-25),
+        and the Callide C explosion (May 2021, blacked out QLD for hours) each generated political
+        crises severe enough to embed the modern federal/state coordination model — CIS, LTESA,
+        state underwriting deals, three-years-notice rules. The next generation of coal closures
+        (Yallourn 2028, Eraring 2027-29, Bayswater 2033, Loy Yang A 2035) will all happen inside
+        this framework.
+      </Callout>
+
+      <Callout type="source">
+        Sources: AEMO QED archives 2016-2024 · Finkel Review 2017 · NSW EnergyCo
+        <em> Eraring Agreement 2024</em> · Engie Hazelwood Closure Announcement Nov 2016 ·
+        Queensland Energy and Jobs Plan 2022 · AFR <em>Coal Closure Files</em>.
+      </Callout>
+    </div>
+  )
+}
+
+// ============================================================
+// Lesson 14 — External Drivers (solar costs, drought, learning curves)
+// ============================================================
+
+function Lesson14() {
+  return (
+    <div>
+      <H2>The three external forces</H2>
+      <P>
+        Policy alone didn't drive Australia's renewable transition. Three external forces —
+        falling solar costs, the BESS learning curve, and drought-induced hydro reduction — shifted
+        the economic landscape underneath the policy machinery. By 2018, renewables had become the
+        cheapest source of new electricity in Australia regardless of subsidy or carbon pricing.
+        This lesson covers what drove that.
+      </P>
+
+      <H2>Solar PV cost decline — the dominant force</H2>
+      <P>
+        Module prices have followed an extraordinary 80-90% decline over 15 years, far steeper than
+        any other major energy technology:
+      </P>
+      <Table
+        emphasizeFirst
+        headers={['Year', 'Mono-Si module ($/W)', 'Utility-scale PV LCOE ($/MWh)', 'Comment']}
+        rows={[
+          ['2010', '~$2.00', '~$200-250', 'First Solar dominant; Chinese ramp beginning'],
+          ['2012', '~$1.00', '~$140-180', 'Trina, Yingli, Jinko emerging'],
+          ['2015', '~$0.60', '~$90-110', 'Anti-dumping tariffs in US, irrelevant globally'],
+          ['2018', '~$0.35', '~$55-70', 'Mono PERC commodity'],
+          ['2020', '~$0.22', '~$40-55', 'Bifacial widespread'],
+          ['2022', '~$0.26 (supply shock)', '~$50-60', 'Polysilicon shortage briefly reversed trend'],
+          ['2024', '~$0.12', '~$35-45', 'Resolved supply chains; TOPCon technology'],
+          ['2026', '~$0.08-0.10', '~$30-40', 'HJT + TOPCon at scale; commodity floor'],
+        ]}
+      />
+      <P>
+        The learning rate (Wright's law) for solar PV has held at approximately 20-22% cost
+        reduction per doubling of cumulative installed capacity over five decades. Global cumulative
+        installed solar has gone from ~50 GW in 2010 to ~1,800 GW in 2026 (~5.2 doublings) —
+        producing the observed ~85% module price decline.
+      </P>
+
+      <H2>Why Chinese manufacturing scale drove the decline</H2>
+      <P>
+        Chinese module manufacturers (Trina, Jinko, Longi, JA Solar, Canadian Solar — all Chinese
+        despite the latter's name) achieved economies of scale and supply-chain integration that
+        Western manufacturers could not match. Key drivers:
+      </P>
+      <ul className="list-disc list-inside text-sm text-[var(--color-text-muted)] space-y-1.5 mb-3 ml-2">
+        <li><Em>Vertical integration</Em> — polysilicon → ingot → wafer → cell → module all under
+          one company, eliminating intermediate margin layers</li>
+        <li><Em>State-backed capex</Em> — Chinese provincial governments funded factory expansion
+          on subsidised terms</li>
+        <li><Em>Cluster effects</Em> — Jiangsu province alone hosts most of the world's solar
+          supply chain; logistics costs minimised</li>
+        <li><Em>Operational scale</Em> — single Chinese mega-factory now produces 30+ GW/yr,
+          vs maximum Western factory at 5 GW/yr</li>
+        <li><Em>R&D pace</Em> — TOPCon, HJT, bifacial, perovskite tandem all entered commercial
+          production within 18-24 months of lab demonstration</li>
+      </ul>
+
+      <H2>The BESS learning curve</H2>
+      <P>
+        Battery storage has followed an even steeper cost-decline curve than solar:
+      </P>
+      <Table
+        emphasizeFirst
+        headers={['Year', 'Cell price ($/kWh)', 'Installed BESS ($/kWh)', 'Comment']}
+        rows={[
+          ['2015', '~$300/kWh', '~$1,400/kWh', 'Tesla Powerwall launch year'],
+          ['2018', '~$180/kWh', '~$700/kWh', 'Hornsdale Power Reserve era'],
+          ['2020', '~$130/kWh', '~$450/kWh', 'CATL, BYD dominant'],
+          ['2022', '~$140/kWh (supply shock)', '~$500/kWh', 'Lithium spot price spike'],
+          ['2024', '~$80/kWh', '~$350/kWh', 'LFP commodity'],
+          ['2026', '~$60-70/kWh', '~$280-320/kWh', 'CATL Shenxing, BYD Blade at scale'],
+        ]}
+      />
+      <P>
+        BESS learning rate has run at approximately 22-25% per doubling — slightly faster than
+        solar. The 2022 supply shock (lithium carbonate spot price spiked from $20,000/t to
+        $80,000/t before falling back to $10,000-12,000/t by 2024) was a temporary deviation that
+        reset by 2024.
+      </P>
+
+      <H2>Drought — the hydro problem</H2>
+      <P>
+        Australia's drought cycles have meaningfully reduced hydro firmness over the transition
+        decade. Key episodes:
+      </P>
+      <ul className="list-disc list-inside text-sm text-[var(--color-text-muted)] space-y-1.5 mb-3 ml-2">
+        <li><Em>2015-16 Tasmania crisis</Em>: Basslink interconnector cable failure (Dec 2015) +
+          dry conditions reduced Tasmanian hydro storage from 39% to 12% by April 2016. Tasmania
+          required emergency diesel imports.</li>
+        <li><Em>2017-19 Murray-Darling drought</Em>: Snowy Hydro output reduced; Hume and Dartmouth
+          storage volumes hit historic lows. Mainland hydro firmness reduced through summer 2018-19
+          peak demand period.</li>
+        <li><Em>2019-20 Black Summer</Em>: smoke + heat + bushfires reduced solar output by 20-30%
+          in NSW/VIC for weeks; coordinated with low hydro storage; multiple AEMO directions to
+          maintain reliability</li>
+        <li><Em>2022-23 La Niña recovery</Em>: returned hydro storages to &gt;80% capacity; storage
+          firmness recovered</li>
+      </ul>
+      <P>
+        The implication: pumped hydro firmness (Tumut 3, Wivenhoe, Shoalhaven, Snowy 2.0 coming
+        online) has had to scale to meet the system's replacement-firmness needs, partly because
+        existing run-of-river hydro became less dependable.
+      </P>
+
+      <H2>Why these external forces matter together</H2>
+      <P>
+        Three independent cost curves compounded over the transition decade:
+      </P>
+      <ul className="list-disc list-inside text-sm text-[var(--color-text-muted)] space-y-1.5 mb-3 ml-2">
+        <li>Solar PV got 85% cheaper</li>
+        <li>BESS got 80% cheaper</li>
+        <li>Onshore wind capex got 25% cheaper (slower curve, more mature technology)</li>
+      </ul>
+      <P>
+        The combined effect: a 4-hour firmed solar + storage project that LCOE'd at ~$200/MWh in
+        2015 now LCOEs at ~$80-100/MWh. That's the structural breakthrough — not policy. By 2024,
+        firmed renewables undercut new-build gas peakers in every NEM region. By 2026, firmed
+        renewables undercut even the marginal cost of existing coal during sunlight hours.
+      </P>
+
+      <Callout type="key">
+        The energy transition is fundamentally a story of <Em>learning curves running through
+        Chinese manufacturing scale</Em>. Australian policy (RET, CIS, LTESA, state schemes) has
+        deployed the capacity; Chinese supply chain has made the deployment economically viable.
+        The next phase of the transition (LDS, hydrogen, advanced storage) is similarly dependent
+        on continuing cost decline — and similarly exposed to supply chain risk if those declines
+        slow or reverse.
+      </Callout>
+
+      <Callout type="source">
+        Sources: BloombergNEF <em>Solar PV cost benchmark 2010-2026</em> ·
+        IEA <em>Renewables 2024 outlook</em> · CSIRO GenCost annual reports ·
+        AEMO QED hydro storage data · Wood Mackenzie <em>Battery storage cost curve</em>.
+      </Callout>
+    </div>
+  )
+}
+
+// ============================================================
+// Lesson 15 — Data Centres (the demand wildcard)
+// ============================================================
+
+function Lesson15() {
+  return (
+    <div>
+      <H2>The new demand story</H2>
+      <P>
+        For two decades, Australian electricity demand was projected to grow slowly or flatten. The
+        2010s actually saw declining grid demand in some years as rooftop solar offset behind-the-
+        meter load. AEMO's ISP forecasts as recently as 2022 modelled total NEM consumption staying
+        below 200 TWh until 2030. That story is now under serious challenge from one demand
+        source: <Em>data centres</Em>. The connection-application volumes seen by transmission
+        network service providers (TNSPs) since 2023 — particularly Transgrid (NSW) and Powerlink
+        (QLD) — suggest the next decade of NEM demand may be reshaped by hyperscale infrastructure.
+      </P>
+
+      <H2>The global story — what's happening overseas</H2>
+      <P>
+        Data centre electricity consumption has been one of the fastest-growing global demand
+        segments since 2018:
+      </P>
+      <Table
+        emphasizeFirst
+        headers={['Country / region', '2020 DC share of electricity', '2025 share', '2030 projection']}
+        rows={[
+          ['United States', '~2.0%', '~4.0%', '~9-12%'],
+          ['Ireland', '~9%', '~21%', '~30% (build paused)'],
+          ['Singapore', '~7%', '~7% (build moratorium)', '~10% post-moratorium lift'],
+          ['Netherlands', '~3%', '~5%', '~8-10%'],
+          ['EU (avg)', '~2%', '~3%', '~6%'],
+          ['Australia', '~3%', '~4%', '~8-15% (high uncertainty)'],
+          ['Global average', '~1.5%', '~2.5%', '~5%'],
+        ]}
+      />
+      <P>
+        The Ireland case is instructive. Data centre load grew so fast that the country's grid
+        operator (EirGrid) imposed a de facto moratorium on new connections in the Dublin region
+        from 2022. Singapore did similarly 2019-2022. Both moratoriums have since partially eased
+        but with strict efficiency and renewable-energy conditions. The pattern: <Em>uncontrolled
+        data centre demand growth strains local grids faster than network operators expected</Em>.
+      </P>
+
+      <H2>The driver — AI and hyperscale compute</H2>
+      <P>
+        Three categories of data centre load drive the global growth:
+      </P>
+      <ul className="list-disc list-inside text-sm text-[var(--color-text-muted)] space-y-1.5 mb-3 ml-2">
+        <li><Em>Hyperscale (cloud) — NextDC, Equinix, AirTrunk, DigitalRealty, AWS, Microsoft,
+          Google.</Em> Steady-state ~10-15%/yr growth. Per-rack power density rising from ~5 kW
+          to ~30 kW.</li>
+        <li><Em>AI training infrastructure — large dedicated clusters.</Em> NVIDIA H100/B200/B300
+          racks consume 60-130 kW per rack. Training a frontier LLM consumes 25-50 MW for
+          months. Roughly doubling capacity per ~14 months globally through 2025-2027.</li>
+        <li><Em>AI inference workloads.</Em> Smaller per-rack but distributed; total scaling with
+          consumer + enterprise AI adoption</li>
+      </ul>
+      <P>
+        AI workloads are the new variable. Pre-2022, data centre electricity demand grew predictably
+        at 10-15%/yr globally. Post-ChatGPT (Nov 2022), industry analysts have repeatedly revised
+        forecasts upward. McKinsey, BCG and IEA now all forecast data centre electricity demand to
+        rise 100-200% globally by 2030 vs 2024.
+      </P>
+
+      <H2>Australia today — the existing footprint</H2>
+      <P>
+        Australian data centre load in 2025-26:
+      </P>
+      <ul className="list-disc list-inside text-sm text-[var(--color-text-muted)] space-y-1.5 mb-3 ml-2">
+        <li><Em>Existing operating capacity:</Em> ~1,200-1,500 MW across the NEM</li>
+        <li><Em>Annual consumption:</Em> ~8-10 TWh (about 4% of total NEM consumption)</li>
+        <li><Em>Sydney basin:</Em> ~700-800 MW (dominant cluster)</li>
+        <li><Em>Melbourne:</Em> ~300-400 MW</li>
+        <li><Em>Brisbane:</Em> ~100-150 MW (growing fastest)</li>
+        <li><Em>Perth (SWIS, separate market):</Em> ~80-100 MW</li>
+      </ul>
+      <P>
+        Major operators in Australia: NextDC (ASX-listed, largest pure-play), AirTrunk (acquired by
+        Blackstone Sept 2024 for $24B), Equinix (US-listed global), DigitalRealty, Macquarie Data
+        Centres, Canberra Data Centres (Federal Government / Infratil), AWS direct operations,
+        Microsoft Azure direct operations, Google direct operations.
+      </P>
+
+      <H2>The connection application surge — what the TNSPs are seeing</H2>
+      <P>
+        The data centre demand story is most clearly visible in transmission and distribution
+        connection applications. The numbers reported by Australian TNSPs and DNSPs since 2023
+        are striking:
+      </P>
+      <ul className="list-disc list-inside text-sm text-[var(--color-text-muted)] space-y-1.5 mb-3 ml-2">
+        <li><Em>Transgrid (NSW transmission).</Em> Connection applications received by Transgrid
+          for the Sydney basin exceed available transmission capacity by approximately 3-4x.
+          Specific application data shows ~6-8 GW of data centre connection enquiries in 2024-25
+          alone, against a Sydney metropolitan load base of ~10 GW.</li>
+        <li><Em>Ausgrid (NSW distribution).</Em> Connection applications for data centres up
+          approximately 600% from 2023 to 2025. The Northern Sydney transmission corridor (Western
+          Sydney + Hunter axis) is reportedly fully subscribed for the rest of the decade.</li>
+        <li><Em>Endeavour Energy (NSW Western Sydney distribution).</Em> Several large data centre
+          development applications pending in Western Sydney, totaling ~2 GW of nameplate load if
+          all proceed.</li>
+        <li><Em>Powerlink Queensland (QLD transmission).</Em> Brisbane / Gold Coast applications
+          totalling ~3-4 GW received 2023-2025. The Gladstone industrial precinct is being
+          actively targeted for AI / hyperscale clusters.</li>
+        <li><Em>AusNet (VIC transmission).</Em> Melbourne metropolitan applications totalling ~2-3
+          GW. The Geelong corridor is being marketed as a data centre destination.</li>
+        <li><Em>SA Power Networks + ElectraNet (SA).</Em> Smaller volume but growing — Adelaide
+          northern suburbs / Edinburgh corridor seeing applications</li>
+      </ul>
+
+      <Callout type="numbers">
+        Aggregate connection application volume across NEM TNSPs/DNSPs as of mid-2026 is
+        approximately <Em>15-20 GW of nameplate data centre load</Em>. To put that in context: the
+        entire NEM peak demand is approximately 35 GW. If even half of these applications
+        materialised, it would represent a ~50% increase in NEM consumption.
+      </Callout>
+
+      <H2>The materialisation question — will it actually arrive?</H2>
+      <P>
+        Connection applications are not commitments. Industry rule-of-thumb conversion rates from
+        connection application to actual operating load:
+      </P>
+      <ul className="list-disc list-inside text-sm text-[var(--color-text-muted)] space-y-1.5 mb-3 ml-2">
+        <li><Em>Hyperscale operators (AWS, Microsoft, Google direct):</Em> ~70-80% conversion —
+          generally only file applications when site selection is locked</li>
+        <li><Em>Co-location operators (NextDC, Equinix, AirTrunk):</Em> ~40-60% conversion —
+          speculative site reservation is common</li>
+        <li><Em>Development capital / property developers:</Em> ~20-30% conversion — many applications
+          are option-value plays without committed tenants</li>
+      </ul>
+      <P>
+        Applying these to the ~15-20 GW pipeline gives a probabilistic range of:
+      </P>
+      <ul className="list-disc list-inside text-sm text-[var(--color-text-muted)] space-y-1.5 mb-3 ml-2">
+        <li><Em>Conservative (30% conversion):</Em> ~5 GW of new firm load by 2030. Roughly
+          doubles current data centre demand.</li>
+        <li><Em>Central (50% conversion):</Em> ~8 GW of new firm load by 2030. Triples current data
+          centre demand. Adds ~50-60 TWh annual consumption (~25-30% of current NEM total).</li>
+        <li><Em>Aggressive (70% conversion):</Em> ~12 GW of new firm load by 2030. Adds ~80-90 TWh
+          annual consumption (~40% of current NEM total).</li>
+      </ul>
+
+      <H2>What this means for coal exit</H2>
+      <P>
+        Here is the structural question that the data centre demand wildcard introduces:
+        <Em> Will the prospect of high, firm, long-dated demand encourage coal extension and slow
+        the renewable transition?</Em>
+      </P>
+      <P>
+        The argument that it might:
+      </P>
+      <ul className="list-disc list-inside text-sm text-[var(--color-text-muted)] space-y-1.5 mb-3 ml-2">
+        <li>Coal generators currently making marginal economic returns become solidly profitable at
+          $100-130/MWh wholesale prices</li>
+        <li>State and federal governments under pressure to maintain reliability will be more
+          willing to fund extensions (Eraring 2027 → 2029 → 2031; Yallourn 2028 → 2030)</li>
+        <li>Bayswater's 2033 closure date could shift right if NSW load grows faster than ISP
+          forecasts</li>
+        <li>The renewable build is supply-constrained (transmission, supply chain) regardless of
+          demand — additional demand cannot be met purely by renewables in the next 5-7 years</li>
+        <li>Returning baseload coal to profitability while wind/solar is built out is a credible
+          path for the gentailers, particularly AGL and EnergyAustralia</li>
+      </ul>
+      <P>
+        The argument that it won't:
+      </P>
+      <ul className="list-disc list-inside text-sm text-[var(--color-text-muted)] space-y-1.5 mb-3 ml-2">
+        <li>Hyperscale data centre operators (Microsoft, Google, AWS) have <Em>24/7 carbon-free
+          energy commitments</Em> tied to their global net-zero plans. They explicitly avoid grids
+          where they cannot procure firm renewable energy.</li>
+        <li>Corporate PPA demand from these operators is driving firmed-renewable + storage
+          investment that wouldn't otherwise happen (e.g. Goldwind/Stockyard Hill + BESS,
+          NextDC behind-the-meter solar at the Sun Cable site)</li>
+        <li>Australian coal capacity is fundamentally too old to extend at scale — Bayswater is
+          1985-86 commissioned, Loy Yang A is 1984-88 — the physical assets are at end-of-life
+          regardless of demand</li>
+        <li>Data centre operators in Singapore and Ireland have shown willingness to pause or
+          redirect investment when local grids cannot meet 24/7 clean energy commitments</li>
+      </ul>
+
+      <H2>AEMO's response</H2>
+      <P>
+        AEMO's 2024 Integrated System Plan (ISP) raised the central case for data centre demand
+        from ~10 TWh in 2030 to ~18 TWh, reflecting early evidence of the connection-application
+        surge. The 2026 ISP update — being finalised through 2026 — is expected to raise this
+        further, possibly to ~30-40 TWh in 2030. AEMO's "high demand" sensitivity scenario already
+        models a ~3 GW system adequacy gap by 2028-2030 if coal exits on schedule and data centre
+        demand materialises at the upper bound.
+      </P>
+
+      <H2>Implications for the gentailers</H2>
+      <P>
+        For AGL, Origin, EnergyAustralia and Alinta, the data centre demand wildcard creates an
+        interesting strategic question. The traditional play is to bid for data centre wholesale
+        contracts (24/7 firm electricity supply at $80-110/MWh, ~10-year terms). Such contracts
+        underwrite renewable + storage investment far more efficiently than spot-market exposure.
+      </P>
+      <ul className="list-disc list-inside text-sm text-[var(--color-text-muted)] space-y-1.5 mb-3 ml-2">
+        <li><Em>AGL</Em> — most aggressive positioning, particularly for Hunter / Sydney basin data
+          centres co-located with the AGL transmission asset base</li>
+        <li><Em>Origin</Em> — Eraring + Eraring BESS as a Sydney-basin firmness asset; Mortlake +
+          Shoalhaven as a Melbourne-basin firmness asset</li>
+        <li><Em>EnergyAustralia</Em> — Mt Piper as a NSW central-west firmness asset (potentially
+          attractive to operators considering Bathurst / Lithgow data centre locations)</li>
+        <li><Em>Alinta</Em> — least exposed to NEM data centre opportunity; WA SWIS data centre
+          growth is real but smaller scale</li>
+      </ul>
+
+      <Callout type="key">
+        The data centre demand wildcard is the largest single unknown in Australia's energy
+        transition outlook for the next 5-10 years. If demand grows at the upper bound of the
+        connection-application pipeline, the coal exit schedule will slow, coal will return to
+        profitability for the gentailers running it, and the renewable build will need to
+        accelerate substantially to meet both replacement and growth. If demand grows at the lower
+        bound, the existing 2030-35 transition plan is achievable with current commitments. Which
+        scenario plays out depends on global hyperscaler capital allocation decisions made
+        primarily in San Francisco, Seattle and Redmond — not Sydney or Canberra.
+      </Callout>
+
+      <Callout type="source">
+        Sources: Transgrid <em>Annual Performance Report 2024</em> · Ausgrid <em>Network Investment
+        Plan 2024-29</em> · Powerlink Queensland <em>Network Plan 2024</em> ·
+        AEMO ISP 2024 + 2026 · NextDC + AirTrunk + Equinix annual reports ·
+        IEA <em>Electricity 2024</em> · BloombergNEF <em>Data Center Electricity Demand 2025</em>.
+      </Callout>
+    </div>
+  )
+}
+
+// ============================================================
+// Lesson 16 — Coal exit and the 2030-35 NEM landing
+// (renumbered from old Lesson 11; the policy-era + data-centre lessons
+//  L11-L15 insert before this, and L17 closes the module)
+// ============================================================
+
+function Lesson16() {
   return (
     <div>
       <H2>The coal closure schedule</H2>
@@ -1666,7 +2440,7 @@ function Lesson11() {
         emphasizeFirst
         headers={['Plant', 'State', 'Owner', 'Capacity', 'Close date']}
         rows={[
-          ['Hazelwood', 'VIC', 'ENGIE (was Internat\'l Power)', '1,600 MW', 'Mar 2017 (already closed)'],
+          ['Hazelwood', 'VIC', 'ENGIE (was International Power)', '1,600 MW', 'Mar 2017 (already closed)'],
           ['Northern', 'SA', 'ENGIE (was NRG)', '520 MW', 'May 2016 (already closed)'],
           ['Wallerawang', 'NSW', 'EnergyAustralia', '1,000 MW', '2014 (already closed)'],
           ['Munmorah', 'NSW', 'Delta', '600 MW', '2010 (already closed)'],
@@ -1828,6 +2602,148 @@ function Lesson11() {
 }
 
 // ============================================================
+// Lesson 17 — Where we go from here (synthesis)
+// ============================================================
+
+function Lesson17() {
+  return (
+    <div>
+      <H2>The convergence — four forces meeting at once</H2>
+      <P>
+        The energy transition in the NEM is not driven by a single force but by four converging
+        ones: <Em>structural privatisation</Em> (the 1992-2014 reform whose unfinished consolidation
+        produced today's Big 4 gentailers); <Em>policy eras</Em> (RET, Carbon Price, CIS) that
+        each underwrote a different generation of investment; <Em>external drivers</Em> (solar PV
+        and BESS learning curves, drought-induced hydro reduction); and now <Em>data centre demand
+        growth</Em> as a potential demand wildcard. Where these forces meet over the next decade
+        determines what the NEM looks like in 2035.
+      </P>
+
+      <H2>Four plausible 2035 scenarios</H2>
+      <P>
+        Four working scenarios for the NEM at 2035, ordered roughly from "policy mainstream" to
+        "outlier":
+      </P>
+      <Table
+        emphasizeFirst
+        headers={['Scenario', 'Renewable share', 'Coal at 2035', 'Defining trigger']}
+        rows={[
+          ['Step Change (AEMO base)', '~75-80%', '~4-5 GW (Mt Piper + Loy Yang B)', 'Current CIS pipeline converts on schedule'],
+          ['Hydrogen Superpower', '~80-85%', '~3-4 GW', 'Green H2 industry adds 10-15 TWh load + co-located renewables'],
+          ['Data Centre Dominant', '~65-70%', '~8-12 GW (Bayswater extended)', 'Connection applications materialise at upper bound; coal extends'],
+          ['Slow Build', '~55-65%', '~10-14 GW (multiple extensions)', 'Transmission bottlenecks + supply chain delays slow renewable build'],
+        ]}
+      />
+      <P>
+        AEMO's base case (Step Change) is the central planning assumption but it implicitly bets
+        that data centre demand stays near the lower bound of the connection-application pipeline.
+        The "Data Centre Dominant" scenario is increasingly plausible and would meaningfully
+        reshape the trajectory of coal exit and gentailer profitability.
+      </P>
+
+      <H2>What each scenario means for the Big 4 gentailers</H2>
+      <Table
+        emphasizeFirst
+        headers={['Gentailer', 'Step Change outcome', 'Data Centre Dominant outcome']}
+        rows={[
+          ['AGL', 'Coal exit on schedule; ~$20B renewables build delivers 12 GW; transformed into renewable+storage gentailer by 2035', 'Bayswater extended to 2038; coal profits fund renewable build faster; net debt lower'],
+          ['Origin', 'Eraring closes 2027-29; Eraring BESS + Mortlake BESS firm renewable PPAs; APLNG continues as cash engine', 'Eraring extended to 2031; coal profits boost FY29-31 returns; renewable build pace unchanged'],
+          ['EnergyAustralia', 'Yallourn closes 2028 on schedule; Mt Piper exits ~2040; smaller renewable build vs AGL/Origin', 'Mt Piper attractive to data centres; CLP allocates more capital; renewable build accelerates'],
+          ['Alinta', 'Loy Yang B exits ~2035-37; minimal east-coast renewable build; WA-focused', 'Loy Yang B extended to 2042; coal profits enable second-tier east-coast renewable push'],
+        ]}
+      />
+
+      <H2>Risk drivers for the next decade</H2>
+      <ul className="list-disc list-inside text-sm text-[var(--color-text-muted)] space-y-1.5 mb-3 ml-2">
+        <li><Em>Federal policy continuity.</Em> The CIS is a Labor government program. A future
+          Coalition government could reduce its scale or alter the contract structure — though
+          unwinding existing contracts is legally difficult and politically costly. Risk is in
+          rounds T7+ rather than committed projects.</li>
+        <li><Em>Transmission build pace.</Em> Project EnergyConnect (NSW-SA), HumeLink (NSW),
+          VNI West (NSW-VIC), Marinus Link (TAS-VIC), Copperstring (QLD) are all running behind
+          original schedule. Delays of 12-24 months are now baseline assumption. Each year of
+          delay strands hundreds of MW of REZ generation and indirectly extends coal.</li>
+        <li><Em>Supply chain disruption.</Em> Chinese module export controls, US tariff measures,
+          or BESS cell supply constraints could slow Australia's renewable build by 6-18 months
+          per cycle. The 2022 polysilicon spike was the trial run.</li>
+        <li><Em>Demand surprises.</Em> Data centres on the upside; EV adoption faster than
+          forecast; electrification of industrial heat. AEMO's demand forecasts have been wrong
+          in both directions every year since 2018.</li>
+        <li><Em>Gentailer balance sheet stress.</Em> AGL's $20B Climate Transition Action Plan
+          assumes continued coal cash flow plus debt capacity. A weak 2027-29 wholesale price
+          environment plus a forced Bayswater early closure could compress that pipeline by 30-50%.</li>
+      </ul>
+
+      <H2>What this means for the developer pipeline</H2>
+      <P>
+        The 2026-2035 developer landscape will be shaped by three factors:
+      </P>
+      <ul className="list-disc list-inside text-sm text-[var(--color-text-muted)] space-y-1.5 mb-3 ml-2">
+        <li><Em>CIS becomes the marginal price-setter.</Em> Most utility-scale renewable projects
+          will be CIS-contracted by 2030. Merchant exposure becomes a minority of the developer
+          pipeline (covered in detail in the CIS &amp; LTESA Bidding module).</li>
+        <li><Em>Standalone storage is the most resilient asset class.</Em> 4-hour and 8-hour
+          batteries at strong-grid nodes have multiple revenue stacks (arbitrage, FCAS, CISA,
+          capacity contracts). Standalone BESS at urban nodes is the highest-IRR asset class.</li>
+        <li><Em>Hybrid projects gain premium.</Em> Solar + BESS hybrids covered in the BESS Story
+          module Lessons 8-10 reflect a CIS structural preference. Wind + BESS hybrids are next.</li>
+        <li><Em>Long-duration storage emerging.</Em> LTESA Round 6 (2025) awarded 1.17 GW of 8.7-
+          11.5 hour batteries. LDS will be 10-15 GW of the 2030-2035 build.</li>
+      </ul>
+
+      <H2>The closing question — halfway there</H2>
+      <P>
+        Australia has crossed the 47% renewable share milestone in 2026. The transition is roughly
+        half-complete. The second half — moving from ~50% renewable to 80%+ — is structurally
+        harder because:
+      </P>
+      <ul className="list-disc list-inside text-sm text-[var(--color-text-muted)] space-y-1.5 mb-3 ml-2">
+        <li><Em>Easy renewables are largely deployed.</Em> The best wind sites and solar sites in
+          each REZ are committed or built. The next 50% is in lower-resource sites with worse MLFs
+          and higher transmission cost.</li>
+        <li><Em>Storage requirements escalate non-linearly.</Em> Adding renewable generation to a
+          system that's already 50% renewable requires proportionally more storage per MWh of
+          renewable than adding the first 50% did. Long-duration storage is the binding
+          constraint.</li>
+        <li><Em>Coal exit creates firmness gaps.</Em> The remaining ~17 GW of coal does the heavy
+          lifting on system inertia, voltage support, fault current. Replacing those system
+          services with synchronous condensers, grid-forming BESS, and pumped hydro is technically
+          solvable but takes time and capital.</li>
+        <li><Em>Demand growth from data centres + electrification</Em> means renewables must be
+          built faster than coal exits — not just replace MWh for MWh.</li>
+      </ul>
+      <P>
+        Whether Australia gets to 80%+ renewables by 2035, 2040 or 2045 depends on continuing cost
+        decline (especially long-duration storage), transmission build-out at pace, demand growth
+        management (especially data centres), federal/state policy continuity, and gentailer
+        balance sheet capacity to fund the build. The first 47% took 25 years. The next 33%
+        probably takes 10-15 years if everything goes well, longer if the data centre wildcard,
+        political reversal or supply chain shock intervenes.
+      </P>
+
+      <Callout type="key">
+        The Energy Transition in the NEM module ends here, but the underlying story is unfinished.
+        The CIS and state-level underwriting frameworks now in place are the most ambitious
+        national energy investment commitment in Australian history — committing roughly $200-
+        300B of public-and-private capital between 2024 and 2035. Whether that scale is enough
+        depends in part on the data centre demand wildcard, in part on global supply chains, and
+        in part on whether the post-1990s gentailer model — AGL, Origin, EnergyAustralia,
+        Alinta — can simultaneously decarbonise their fleets while serving customers profitably.
+        These are the open questions the AURES platform is built to track.
+      </Callout>
+
+      <Callout type="source">
+        Sources: AEMO Integrated System Plan 2024 + 2026 (forthcoming) · DCCEEW
+        <em> Australian Energy Statistics 2025</em> · AURES intelligence dashboards ·
+        AGL Climate Transition Action Plan 2024 · Origin Energy Investor Day 2025 ·
+        Grattan Institute <em>Energy Transition Risks 2025</em> ·
+        Clean Energy Council <em>Outlook to 2035</em>.
+      </Callout>
+    </div>
+  )
+}
+
+// ============================================================
 // Module shell — index + per-lesson view
 // ============================================================
 
@@ -1958,7 +2874,13 @@ function LessonView({ lesson, progress, onComplete }: {
         {lesson.id === 'origin'           && <Lesson8 />}
         {lesson.id === 'energy-australia' && <Lesson9 />}
         {lesson.id === 'alinta'           && <Lesson10 />}
-        {lesson.id === 'coal-exit'        && <Lesson11 />}
+        {lesson.id === 'ret-era'          && <Lesson11 />}
+        {lesson.id === 'carbon-price'     && <Lesson12 />}
+        {lesson.id === 'closure-decade'   && <Lesson13 />}
+        {lesson.id === 'external-drivers' && <Lesson14 />}
+        {lesson.id === 'data-centres'     && <Lesson15 />}
+        {lesson.id === 'coal-exit'        && <Lesson16 />}
+        {lesson.id === 'where-going'      && <Lesson17 />}
       </article>
 
       <div className="flex items-center justify-between gap-3 pt-6 border-t border-[var(--color-border)]">
