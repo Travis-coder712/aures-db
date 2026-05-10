@@ -196,7 +196,7 @@ export default function WindValueAnalysis({ projectId }: Props) {
         <PeersTab project={project} allStateProjects={allStateProjects} />
       )}
       {activeTab === 'diversity' && (
-        <DiversityTab project={project} allStateProjects={allStateProjects} />
+        <DiversityTab project={project} allStateProjects={allStateProjects} stateAvg={stateAvg} />
       )}
       {activeTab === 'price' && (
         <PriceBandTab project={project} allStateProjects={allStateProjects} poolPrices={poolPrices} />
@@ -2073,6 +2073,10 @@ function PriceBandTab({
           : <>Price band data uses monthly average capture price ({project.value_summary.data_first_year}–{project.value_summary.data_last_year}). For interval-level accuracy run <code>import_price_band_capture.py</code>. Pool price reference data available Aug 2024 onward.</>
         }
       </p>
+      <p className="text-[10px] text-[var(--color-text-muted)] italic mt-1">
+        <strong className="text-[var(--color-text)] not-italic">Note: </strong>
+        Differences between farm and fleet bars are often visually small because all {project.state} wind farms operate against the same regional price backdrop. The clearer dollar signal is the <strong className="text-[var(--color-text)] not-italic">Diversity Capture Premium</strong> on the Diversity tab — translates Wind Fleet R into $/MWh of capture-price advantage and ranks this farm against state peers.
+      </p>
     </div>
   )
 }
@@ -2080,9 +2084,11 @@ function PriceBandTab({
 function DiversityTab({
   project,
   allStateProjects,
+  stateAvg,
 }: {
   project: WindValueProject
   allStateProjects: WindValueProject[]
+  stateAvg: WindStateAverage | null
 }) {
   const [seasonFilter, setSeasonFilter] = useState<'all' | string>('all')
   const [diversityView, setDiversityView] = useState<'wind' | 'solar'>('wind')
@@ -2205,6 +2211,46 @@ function DiversityTab({
     ? (solarCorrR < 0.2 ? 'Strong solar complement' : solarCorrR < 0.5 ? 'Partial solar complement' : 'Correlated with solar')
     : '–'
 
+  // ----------------------------------------------------------
+  // Diversity Capture Premium — dollar-value translation of R
+  //
+  // The "low R = good diversity" message above doesn't always show up
+  // dramatically in the price-band distribution chart, because all NSW
+  // wind farms still operate inside the same supply/demand backdrop.
+  // The cleaner signal is the $/MWh capture price differential between
+  // this farm and the capacity-weighted state fleet average — and how
+  // that ranks across the {project.state} fleet.
+  // ----------------------------------------------------------
+  const farmCapture = project.value_summary.avg_capture_price ?? null
+  const stateCapture = stateAvg?.avg_capture_price ?? null
+  const capturePremium = farmCapture != null && stateCapture != null
+    ? farmCapture - stateCapture : null
+
+  // Rank this farm among all state peers by capture-vs-state-avg
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const peerPremiums = stateCapture != null
+    ? allStateProjects
+        .map((p) => {
+          const cp = p.value_summary?.avg_capture_price
+          return cp != null ? { id: p.id, name: p.name, premium: cp - stateCapture, capture: cp } : null
+        })
+        .filter((x): x is { id: string; name: string; premium: number; capture: number } => x !== null)
+        .sort((a, b) => b.premium - a.premium)
+    : []
+
+  const ourRank = peerPremiums.findIndex(p => p.id === project.id) + 1
+  const totalRanked = peerPremiums.length
+  const bestPremium = peerPremiums[0]
+  const worstPremium = peerPremiums[peerPremiums.length - 1]
+  const medianPremium = peerPremiums[Math.floor(peerPremiums.length / 2)]
+  const premiumPctile = totalRanked > 0 ? Math.round(((totalRanked - ourRank) / totalRanked) * 100) : null
+  const premiumColor =
+    capturePremium == null ? 'var(--color-text-muted)' :
+    capturePremium >= 5 ? '#22c55e' :
+    capturePremium >= 1 ? '#84cc16' :
+    capturePremium >= -1 ? '#f59e0b' :
+    '#ef4444'
+
   if (divData.length < 6) return <EmptyState text="Insufficient monthly overlap with fleet data for diversity analysis." />
 
   return (
@@ -2250,6 +2296,67 @@ function DiversityTab({
           highlight={offSolarPct != null ? (offSolarPct >= 65 ? 'green' : offSolarPct >= 50 ? 'yellow' : 'red') : undefined}
         />
       </div>
+
+      {/* Diversity Capture Premium — translates the abstract R into $/MWh */}
+      {capturePremium != null && totalRanked > 1 && (
+        <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl p-4">
+          <div className="flex items-baseline justify-between flex-wrap gap-2 mb-2">
+            <div>
+              <p className="text-[10px] font-bold uppercase tracking-wider text-[var(--color-text-muted)]">
+                Diversity Capture Premium — $/MWh vs {project.state} wind fleet average
+              </p>
+              <p className="text-[10px] text-[var(--color-text-muted)]/80 mt-0.5 italic">
+                Translates the abstract Wind Fleet R into a dollar value: how much more $/MWh this farm earns than the capacity-weighted {project.state} wind average.
+              </p>
+            </div>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mt-3">
+            {/* Big headline number */}
+            <div className="md:col-span-1 flex flex-col items-start">
+              <span className="text-3xl font-bold" style={{ color: premiumColor }}>
+                {capturePremium >= 0 ? '+' : ''}${capturePremium.toFixed(1)}/MWh
+              </span>
+              <span className="text-[11px] text-[var(--color-text-muted)] mt-1">
+                vs ${stateCapture?.toFixed(0)}/MWh state avg
+              </span>
+              {ourRank > 0 && (
+                <span className="text-[11px] mt-1.5 px-2 py-0.5 rounded-full"
+                  style={{ backgroundColor: `${premiumColor}20`, color: premiumColor }}>
+                  Rank {ourRank} of {totalRanked} {project.state} wind farms · top {100 - (premiumPctile ?? 0)}%
+                </span>
+              )}
+            </div>
+            {/* Best / Median / Worst comparators */}
+            <div className="md:col-span-2 grid grid-cols-3 gap-2">
+              {bestPremium && (
+                <div className="bg-[var(--color-bg-elevated)] rounded-lg p-2.5">
+                  <p className="text-[9px] uppercase tracking-wider text-[var(--color-text-muted)]">Best NSW</p>
+                  <p className="text-sm font-semibold text-emerald-400 mt-0.5">+${bestPremium.premium.toFixed(1)}/MWh</p>
+                  <p className="text-[10px] text-[var(--color-text-muted)] mt-0.5 truncate" title={bestPremium.name}>{bestPremium.name.replace(' Wind Farm', '').replace(' - Stage 1', '')}</p>
+                </div>
+              )}
+              {medianPremium && (
+                <div className="bg-[var(--color-bg-elevated)] rounded-lg p-2.5">
+                  <p className="text-[9px] uppercase tracking-wider text-[var(--color-text-muted)]">Median</p>
+                  <p className="text-sm font-semibold text-[var(--color-text)] mt-0.5">{medianPremium.premium >= 0 ? '+' : ''}${medianPremium.premium.toFixed(1)}/MWh</p>
+                  <p className="text-[10px] text-[var(--color-text-muted)] mt-0.5 truncate" title={medianPremium.name}>{medianPremium.name.replace(' Wind Farm', '').replace(' - Stage 1', '')}</p>
+                </div>
+              )}
+              {worstPremium && (
+                <div className="bg-[var(--color-bg-elevated)] rounded-lg p-2.5">
+                  <p className="text-[9px] uppercase tracking-wider text-[var(--color-text-muted)]">Worst</p>
+                  <p className="text-sm font-semibold text-rose-400 mt-0.5">${worstPremium.premium.toFixed(1)}/MWh</p>
+                  <p className="text-[10px] text-[var(--color-text-muted)] mt-0.5 truncate" title={worstPremium.name}>{worstPremium.name.replace(' Wind Farm', '').replace(' - Stage 1', '')}</p>
+                </div>
+              )}
+            </div>
+          </div>
+          {/* Bottom explainer */}
+          <p className="text-[11px] text-[var(--color-text-muted)] leading-relaxed mt-3 pt-3 border-t border-[var(--color-border)]">
+            <strong className="text-[var(--color-text)]">Reading the price-band chart vs this number:</strong> band-level differences between this farm and the {project.state} fleet are often visually subtle because all wind farms in the state operate against the same supply/demand backdrop. The $/MWh capture premium above is the cleaner signal of how much the diversity (low R = {corrR.toFixed(2)}) is actually paying off in revenue terms. A premium of ${capturePremium >= 0 ? '+' : ''}{capturePremium.toFixed(1)}/MWh on a typical 30% CF wind farm equates to roughly ${(capturePremium * 0.3 * 8.76).toFixed(0)}k of extra revenue per MW per year vs the fleet average.
+          </p>
+        </div>
+      )}
 
       {/* View toggle: wind vs solar */}
       <div className="flex gap-1">
@@ -3006,6 +3113,22 @@ function WindValuePdfSummary({
     .slice(0, 8)
     .map(p => ({ name: p.name.replace(' Wind Farm', '').replace(' Wind', '').slice(0, 18), cf: p.value_summary.avg_cf_pct ?? 0, isThis: p.id === project.id }))
 
+  // Diversity Capture Premium — same calc as the live Diversity tab
+  const farmCapture = vs.avg_capture_price ?? null
+  const stateCapturePdf = stateAvg?.avg_capture_price ?? null
+  const capturePremium = farmCapture != null && stateCapturePdf != null ? farmCapture - stateCapturePdf : null
+  const peerPremiums = stateCapturePdf != null
+    ? allStateProjects
+        .map(p => p.value_summary.avg_capture_price != null ? { id: p.id, name: p.name, premium: p.value_summary.avg_capture_price - stateCapturePdf } : null)
+        .filter((x): x is { id: string; name: string; premium: number } => x !== null)
+        .sort((a, b) => b.premium - a.premium)
+    : []
+  const ourPremiumRank = peerPremiums.findIndex(p => p.id === project.id) + 1
+  const totalPremiumRanked = peerPremiums.length
+  const bestPremiumPdf = peerPremiums[0]
+  const worstPremiumPdf = peerPremiums[peerPremiums.length - 1]
+  const medianPremiumPdf = peerPremiums[Math.floor(peerPremiums.length / 2)]
+
   const gradeColor = pc?.grade?.startsWith('A') ? '#166534' : pc?.grade?.startsWith('B') ? '#1d4ed8' : '#92400e'
   const gradeBg = pc?.grade?.startsWith('A') ? '#dcfce7' : pc?.grade?.startsWith('B') ? '#dbeafe' : '#fef3c7'
 
@@ -3059,6 +3182,60 @@ function WindValuePdfSummary({
           <strong style={{ color: '#0f172a' }}>Wind Fleet Correlation (R)</strong> = Pearson correlation coefficient between this farm's monthly CF and the rest of the {project.state} wind fleet's average monthly CF. R is bounded between −1 and +1 (it is not a percentage). R = 0.9 → tracks the fleet tightly (limited diversification, high cannibalisation risk). R = 0.3 → largely independent (good portfolio diversifier; lower cannibalisation exposure). R = 0.0 → no statistical relationship. Lower R is better for revenue.
         </p>
       </div>
+
+      {/* Diversity Capture Premium — translates R into $/MWh */}
+      {capturePremium != null && totalPremiumRanked > 1 && (() => {
+        const premiumColorPdf =
+          capturePremium >= 5 ? '#16a34a' :
+          capturePremium >= 1 ? '#65a30d' :
+          capturePremium >= -1 ? '#d97706' :
+          '#dc2626'
+        const pct = totalPremiumRanked > 0 ? Math.round(((totalPremiumRanked - ourPremiumRank) / totalPremiumRanked) * 100) : 0
+        return (
+          <div style={{ backgroundColor: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: 10, padding: 14, marginBottom: 14 }}>
+            <p style={{ fontSize: 10, fontWeight: 600, color: '#475569', textTransform: 'uppercase', letterSpacing: '0.05em', margin: '0 0 4px 0' }}>
+              Diversity Capture Premium — $/MWh vs {project.state} fleet average
+            </p>
+            <p style={{ fontSize: 9, color: '#94a3b8', margin: '0 0 10px 0', fontStyle: 'italic' }}>
+              Translates the abstract Wind Fleet R = {corrR.toFixed(2)} into a dollar value: how much more $/MWh this farm earns than the capacity-weighted state wind average.
+            </p>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr 1fr', gap: 10 }}>
+              <div style={{ backgroundColor: '#ffffff', border: '1px solid #e2e8f0', borderRadius: 8, padding: '10px 12px' }}>
+                <p style={{ fontSize: 9, color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.05em', margin: 0 }}>This Farm</p>
+                <p style={{ fontSize: 22, fontWeight: 700, color: premiumColorPdf, margin: '3px 0 2px 0' }}>{capturePremium >= 0 ? '+' : ''}${capturePremium.toFixed(1)}</p>
+                <p style={{ fontSize: 9, color: '#64748b', margin: 0 }}>vs ${stateCapturePdf?.toFixed(0)} state avg</p>
+                {ourPremiumRank > 0 && (
+                  <p style={{ fontSize: 9, color: premiumColorPdf, fontWeight: 600, margin: '3px 0 0 0' }}>Rank {ourPremiumRank} of {totalPremiumRanked} · top {100 - pct}%</p>
+                )}
+              </div>
+              {bestPremiumPdf && (
+                <div style={{ backgroundColor: '#f0fdf4', border: '1px solid #bbf7d0', borderRadius: 8, padding: '10px 12px' }}>
+                  <p style={{ fontSize: 9, color: '#166534', textTransform: 'uppercase', letterSpacing: '0.05em', margin: 0 }}>Best NSW</p>
+                  <p style={{ fontSize: 18, fontWeight: 700, color: '#15803d', margin: '3px 0 2px 0' }}>+${bestPremiumPdf.premium.toFixed(1)}</p>
+                  <p style={{ fontSize: 9, color: '#15803d', margin: 0 }}>{bestPremiumPdf.name.replace(' Wind Farm', '').replace(' - Stage 1', '').slice(0, 22)}</p>
+                </div>
+              )}
+              {medianPremiumPdf && (
+                <div style={{ backgroundColor: '#ffffff', border: '1px solid #e2e8f0', borderRadius: 8, padding: '10px 12px' }}>
+                  <p style={{ fontSize: 9, color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.05em', margin: 0 }}>Median</p>
+                  <p style={{ fontSize: 18, fontWeight: 700, color: '#0f172a', margin: '3px 0 2px 0' }}>{medianPremiumPdf.premium >= 0 ? '+' : ''}${medianPremiumPdf.premium.toFixed(1)}</p>
+                  <p style={{ fontSize: 9, color: '#475569', margin: 0 }}>{medianPremiumPdf.name.replace(' Wind Farm', '').replace(' - Stage 1', '').slice(0, 22)}</p>
+                </div>
+              )}
+              {worstPremiumPdf && (
+                <div style={{ backgroundColor: '#fef2f2', border: '1px solid #fecaca', borderRadius: 8, padding: '10px 12px' }}>
+                  <p style={{ fontSize: 9, color: '#991b1b', textTransform: 'uppercase', letterSpacing: '0.05em', margin: 0 }}>Worst</p>
+                  <p style={{ fontSize: 18, fontWeight: 700, color: '#b91c1c', margin: '3px 0 2px 0' }}>${worstPremiumPdf.premium.toFixed(1)}</p>
+                  <p style={{ fontSize: 9, color: '#b91c1c', margin: 0 }}>{worstPremiumPdf.name.replace(' Wind Farm', '').replace(' - Stage 1', '').slice(0, 22)}</p>
+                </div>
+              )}
+            </div>
+            <p style={{ fontSize: 9, color: '#64748b', lineHeight: 1.5, margin: '10px 0 0 0' }}>
+              <strong style={{ color: '#0f172a' }}>Reading the price-band chart vs this number:</strong> band-level differences between this farm and the {project.state} fleet are often visually small because all wind farms operate against the same supply/demand backdrop. The $/MWh capture premium above is the cleaner signal. A premium of {capturePremium >= 0 ? '+' : ''}${capturePremium.toFixed(1)}/MWh on a {(vs.avg_cf_pct ?? 30).toFixed(0)}% CF wind farm equates to roughly ${(capturePremium * (vs.avg_cf_pct ?? 30) / 100 * 8.76).toFixed(0)}k of extra revenue per MW per year vs the fleet average.
+            </p>
+          </div>
+        )
+      })()}
 
       {/* Key findings */}
       {keyFindings.length > 0 && (
