@@ -12,6 +12,7 @@ import { CIS_PROJECTS, LTESA_PROJECTS, CIS_ROUNDS } from '../../data/scheme-roun
 import type { SchemeProject } from '../../data/scheme-rounds'
 import type { ESGTrackerProject, PublicationStatus, AgreementStatus } from '../../data/esg-tracker-data'
 import DataProvenance from '../../components/common/DataProvenance'
+import { exportSchemePpt } from '../../lib/exportSchemePpt'
 
 // ============================================================
 // Stage colours & helpers — defined BEFORE const arrays
@@ -58,9 +59,23 @@ export default function SchemeTracker() {
   const [activeTab, setActiveTab] = useState<Tab>('overview')
   const [data, setData] = useState<SchemeTrackerData | null>(null)
   const [loading, setLoading] = useState(true)
+  const [pptLoading, setPptLoading] = useState(false)
 
   // Overview data
   const { cisRounds, ltesaRounds, loading: overviewLoading } = useSchemeData()
+
+  const handleExportPpt = useCallback(async () => {
+    if (!data) return
+    setPptLoading(true)
+    try {
+      await exportSchemePpt(data)
+    } catch (err) {
+      console.error('PowerPoint export failed:', err)
+      alert('PowerPoint generation failed — please try again.')
+    } finally {
+      setPptLoading(false)
+    }
+  }, [data])
 
   // Multi-select filters. `selectedStates` starts seeded with NSW because
   // NSW is the anchor state for CIS scheme commentary — user can add more
@@ -360,8 +375,8 @@ export default function SchemeTracker() {
         ))}
       </div>
 
-      {/* Scheme Analysis Button */}
-      <div className="flex items-center">
+      {/* Scheme Analysis + Export buttons */}
+      <div className="flex items-center gap-2">
         <button
           onClick={() => setShowEssay(true)}
           className="text-xs px-4 py-2 rounded-lg border border-[var(--color-border)] text-[var(--color-text-muted)] hover:text-[var(--color-text)] hover:border-[var(--color-text-muted)] transition-colors flex items-center gap-2"
@@ -370,6 +385,16 @@ export default function SchemeTracker() {
             <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
           </svg>
           Read Full Scheme Analysis
+        </button>
+        <button
+          onClick={handleExportPpt}
+          disabled={pptLoading || !data}
+          className="text-xs px-4 py-2 rounded-lg border border-[var(--color-border)] text-[var(--color-text-muted)] hover:text-[var(--color-text)] hover:border-[var(--color-primary)] transition-colors flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+        >
+          {pptLoading
+            ? <><span className="animate-spin inline-block">⏳</span> Generating…</>
+            : <><span>📊</span> Export to PowerPoint</>
+          }
         </button>
       </div>
 
