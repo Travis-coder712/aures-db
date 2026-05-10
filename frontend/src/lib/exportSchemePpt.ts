@@ -824,11 +824,27 @@ function drawTechBreakdownSlide(
   const cisBest = findBestTech(cisRows)
   const ltesaBest = findBestTech(ltesaRows)
 
+  // Compute the hybrid count for the callout
+  const hybridCount = (agg.CIS.hybrid?.count ?? 0) + (agg.LTESA.hybrid?.count ?? 0)
+  const hybridDelivering = (agg.CIS.hybrid?.delivering ?? 0) + (agg.LTESA.hybrid?.delivering ?? 0)
+  const hybridBuilding = (agg.CIS.hybrid?.building ?? 0) + (agg.LTESA.hybrid?.building ?? 0)
+
   s.addText([
     { text: 'Headline read: ', options: { bold: true, color: COLOR.text, fontSize: 10, fontFace: FONT } },
-    { text: `Across CIS, ${cisBest ? `${techLabel[cisBest.tech] || cisBest.tech} leads on success rate at ${cisBest.succ.toFixed(0)}% delivering or building.` : 'no technology has crossed enough scale to show a delivery rate yet.'} For LTESA, ${ltesaBest ? `${techLabel[ltesaBest.tech] || ltesaBest.tech} is the strongest performer at ${ltesaBest.succ.toFixed(0)}%.` : 'most rounds remain in development.'} BESS and hybrid projects with shorter lead times typically reach construction faster than greenfield wind, which is a structural rather than execution observation.`,
+    { text: `Across CIS, ${cisBest ? `${techLabel[cisBest.tech] || cisBest.tech} leads on success rate at ${cisBest.succ.toFixed(0)}% delivering or building.` : 'no technology has crossed enough scale to show a delivery rate yet.'} For LTESA, ${ltesaBest ? `${techLabel[ltesaBest.tech] || ltesaBest.tech} is the strongest performer at ${ltesaBest.succ.toFixed(0)}%.` : 'most rounds remain in development.'} Standalone solar and BESS reach construction faster than the hybrid cohort because their development cycle is simpler and the rounds are older.`,
       options: { color: COLOR.textMuted, fontSize: 10, fontFace: FONT } },
-  ], { x: 0.4, y: 6.55, w: 12.5, h: 0.5, fontSize: 10, fontFace: FONT })
+  ], { x: 0.4, y: 6.20, w: 12.5, h: 0.4, fontSize: 10, fontFace: FONT })
+
+  // Hybrid context callout
+  if (hybridCount > 0 && (hybridDelivering + hybridBuilding) === 0) {
+    s.addShape('rect', { x: 0.4, y: 6.55, w: 12.5, h: 0.5, fill: { color: '#FFFBEB' }, line: { color: '#FDE68A', width: 1 } })
+    s.addShape('rect', { x: 0.4, y: 6.55, w: 0.1, h: 0.5, fill: { color: COLOR.amber }, line: { color: COLOR.amber } })
+    s.addText([
+      { text: `0 of ${hybridCount} hybrid projects in construction. `, options: { bold: true, color: '#92400E', fontSize: 10, fontFace: FONT } },
+      { text: `Hybrids = solar + co-located battery in a single CIS award. CIS Tender 1 is 17 months old, Tender 4 only 7 — DCCEEW expects construction starts from 2026 onward. CIS does not award contracts to existing solar farms adding batteries; every hybrid here is a new co-located build with a longer permitting/financing cycle than standalone solar or BESS.`,
+        options: { color: COLOR.textMuted, fontSize: 9, fontFace: FONT } },
+    ], { x: 0.6, y: 6.6, w: 12.2, h: 0.4, fontSize: 9, fontFace: FONT, valign: 'middle' })
+  }
 
   addFooter(s, page, totalPages)
 }

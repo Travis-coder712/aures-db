@@ -5,7 +5,7 @@
  * AURES dark mode. Sticky anchor nav lets you jump between sections; each
  * section is a generous-padding card optimised for projection.
  */
-import { useMemo } from 'react'
+import { useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 import type { SchemeTrackerData, SchemeTrackerRound, SchemeTrackerProject } from '../../lib/types'
 
@@ -495,10 +495,95 @@ function TechBreakdownPanel({ data }: { data: SchemeTrackerData }) {
     )
   }
 
+  // Compute the "no hybrid in construction" headline
+  const cisAgg = aggregate('CIS')
+  const ltesaAgg = aggregate('LTESA')
+  const hybridCounts = (() => {
+    const cis = cisAgg.find(([t]) => t === 'hybrid')?.[1]
+    const ltesa = ltesaAgg.find(([t]) => t === 'hybrid')?.[1]
+    const cisCount = cis?.count ?? 0
+    const cisMw = cis?.mw ?? 0
+    const cisInProgress = (cis?.delivering ?? 0) + (cis?.building ?? 0)
+    const ltesaCount = ltesa?.count ?? 0
+    const ltesaInProgress = (ltesa?.delivering ?? 0) + (ltesa?.building ?? 0)
+    return { cisCount, cisMw, cisInProgress, ltesaCount, ltesaInProgress, total: cisCount + ltesaCount, totalInProgress: cisInProgress + ltesaInProgress }
+  })()
+
   return (
-    <div className="grid lg:grid-cols-2 gap-4">
-      {renderBlock('CIS', COLORS.cis, aggregate('CIS'))}
-      {renderBlock('LTESA', COLORS.ltesa, aggregate('LTESA'))}
+    <div className="space-y-4">
+      {/* Hybrid context callout — answers "why is hybrid 0%?" */}
+      {hybridCounts.total > 0 && hybridCounts.totalInProgress === 0 && (
+        <HybridCallout counts={hybridCounts} />
+      )}
+      <div className="grid lg:grid-cols-2 gap-4">
+        {renderBlock('CIS', COLORS.cis, cisAgg)}
+        {renderBlock('LTESA', COLORS.ltesa, ltesaAgg)}
+      </div>
+    </div>
+  )
+}
+
+// ============================================================
+// Hybrid callout — explains "0 in construction" finding
+// ============================================================
+
+function HybridCallout({ counts }: { counts: { cisCount: number; cisMw: number; cisInProgress: number; ltesaCount: number; ltesaInProgress: number; total: number; totalInProgress: number } }) {
+  const [open, setOpen] = useState(false)
+  return (
+    <div className="bg-[var(--color-bg-card)] border-l-4 rounded-xl overflow-hidden" style={{ borderLeftColor: COLORS.amber }}>
+      <button
+        onClick={() => setOpen(o => !o)}
+        className="w-full flex items-start gap-3 p-4 text-left hover:bg-[var(--color-bg)]/40 transition-colors"
+      >
+        <span className="w-7 h-7 rounded-full grid place-items-center text-sm font-bold text-white flex-shrink-0 mt-0.5"
+          style={{ backgroundColor: COLORS.amber }}>i</span>
+        <div className="flex-1 min-w-0">
+          <p className="text-sm font-semibold text-[var(--color-text)]">
+            Why are 0 of {counts.total} hybrid projects in construction or operating?
+          </p>
+          <p className="text-xs text-[var(--color-text-muted)] mt-1 leading-relaxed">
+            CIS hybrids are <em>solar + co-located battery</em> bundled into a single contract. {counts.cisCount} CIS hybrids ({counts.cisMw / 1000 >= 1 ? `${(counts.cisMw/1000).toFixed(1)} GW` : `${Math.round(counts.cisMw)} MW`}) and {counts.ltesaCount} LTESA hybrids — none yet at construction. {open ? 'Click to hide' : 'Click for the explanation.'}
+          </p>
+        </div>
+        <span className="text-[var(--color-text-muted)] text-lg" style={{ transform: open ? 'rotate(180deg)' : 'none', transition: 'transform 200ms' }}>⌄</span>
+      </button>
+
+      {open && (
+        <div className="px-4 pb-4 pt-1 border-t border-[var(--color-border)] bg-[var(--color-bg)]/40 space-y-3">
+          <div>
+            <p className="text-[11px] font-bold uppercase tracking-wider text-[var(--color-text-muted)] mb-1">What we found</p>
+            <ul className="text-xs text-[var(--color-text-muted)] space-y-1.5 leading-relaxed list-none">
+              <li className="flex gap-2">
+                <span className="text-[var(--color-text-muted)]">•</span>
+                <span><strong className="text-[var(--color-text)]">All CIS &ldquo;hybrid&rdquo; awards are new co-located builds, not retrofits.</strong> Adding a battery to an <em>existing</em> solar farm is not eligible for a CIS contract — CIS underwrites new capacity. So even where a hybrid project shares a site name with an existing facility (e.g. West Mokoan vs Mokoan), the CIS award is for new generation + battery built together.</span>
+              </li>
+              <li className="flex gap-2">
+                <span className="text-[var(--color-text-muted)]">•</span>
+                <span><strong className="text-[var(--color-text)]">Timing.</strong> CIS Tender 1 (where the first 8 hybrids were awarded) was announced 11 Dec 2024 — only 17 months ago. CIS Tender 4 (12 of 20 awards were hybrids) was announced 9 Oct 2025 — only ~7 months ago. DCCEEW publicly expects construction starts on the T4 cohort &ldquo;from 2026 onward&rdquo; with FIDs in 2026-27.</span>
+              </li>
+              <li className="flex gap-2">
+                <span className="text-[var(--color-text-muted)]">•</span>
+                <span><strong className="text-[var(--color-text)]">Hybrid lead time is structurally longer than pure solar or pure BESS.</strong> Both the solar component and the battery have to be financed and permitted together; grid connection studies cover both. Industry reporting (Modo Energy, Energy-Storage News) confirms hybrid CISA execution is trailing the standalone-BESS rounds.</span>
+              </li>
+              <li className="flex gap-2">
+                <span className="text-[var(--color-text-muted)]">•</span>
+                <span><strong className="text-[var(--color-text)]">Junction Rivers</strong> (NSW, 585 MW + 800 MWh) — the largest CIS hybrid — is &ldquo;setting the ball rolling on environmental approvals&rdquo; per RenewEconomy after winning T1. <strong className="text-[var(--color-text)]">Bendemeer Energy Hub</strong> (NSW, 252 MW + 300 MWh) and <strong className="text-[var(--color-text)]">Bundey BESS &amp; Solar</strong> (SA, 240 MW + 1,200 MWh) are flagged in AURES with &ldquo;execution risk&rdquo; / &ldquo;grid connection pending&rdquo; status — typical for the T4 cohort.</span>
+              </li>
+            </ul>
+          </div>
+          <div>
+            <p className="text-[11px] font-bold uppercase tracking-wider text-[var(--color-text-muted)] mb-1">What it means</p>
+            <p className="text-xs text-[var(--color-text-muted)] leading-relaxed">
+              <strong className="text-[var(--color-text)]">0% delivering hybrids today is not a failure signal — it&rsquo;s a timing artefact.</strong> The hybrid cohort is younger than the standalone solar and BESS rounds. Watch for first hybrid CISA executions and FIDs from late 2026 onward; if 12 months from now the hybrid bucket is still 0% delivering, <em>that</em> would warrant a delivery-risk re-read.
+            </p>
+          </div>
+          <p className="text-[10px] text-[var(--color-text-muted)]/70 italic">
+            Sources: <a href="https://www.dcceew.gov.au/about/news/cis-tender-4-deliver-6-6gw-clean-energy" target="_blank" rel="noopener" className="hover:underline">DCCEEW Tender 4 announcement</a> ·
+            {' '}<a href="https://www.energy-storage.news/australias-capacity-investment-scheme-tender-4-sees-11-4gwh-of-solar-plus-storage-awarded/" target="_blank" rel="noopener" className="hover:underline">Energy-Storage News T4 hybrid award</a> ·
+            {' '}<a href="https://reneweconomy.com.au/new-solar-and-battery-hybrid-project-sets-ball-rolling-on-environmental-approvals-after-cis-tender-win/" target="_blank" rel="noopener" className="hover:underline">RenewEconomy on Junction Rivers approvals</a>.
+          </p>
+        </div>
+      )}
     </div>
   )
 }
