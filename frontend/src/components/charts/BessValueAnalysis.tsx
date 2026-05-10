@@ -1,12 +1,15 @@
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type TF = (v: any, n: any) => [string, string]
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useRef, useCallback } from 'react'
 import {
   BarChart, Bar, LineChart, Line,
   XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
   ReferenceLine, Legend, Cell,
 } from 'recharts'
 import { useBessValueProject } from '../../hooks/useBessValue'
+import { exportElementToPdf } from '../../lib/exportPdf'
+
+const MONTH_LABELS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 
 // ============================================================
 // Constants
@@ -104,6 +107,34 @@ interface Props { projectId: string }
 export default function BessValueAnalysis({ projectId }: Props) {
   const { project, stateAvg, allStateProjects, loading } = useBessValueProject(projectId)
   const [activeTab, setActiveTab] = useState<TabId>('valuation')
+  const pdfRef = useRef<HTMLDivElement>(null)
+  const [pdfLoading, setPdfLoading] = useState(false)
+  const [showPdf, setShowPdf] = useState(false)
+
+  const handleExportPdf = useCallback(async () => {
+    if (!project) return
+    setPdfLoading(true)
+    setShowPdf(true)
+    await new Promise(r => setTimeout(r, 600))
+    if (!pdfRef.current) {
+      setShowPdf(false)
+      setPdfLoading(false)
+      return
+    }
+    try {
+      await exportElementToPdf(pdfRef.current, {
+        filename: `${project.name.replace(/\s+/g, '_')}_bess_value_analysis`,
+        title: `BESS Value Analysis — ${project.name}`,
+        subtitle: `${project.state} · ${project.capacity_mw} MW${project.duration_h ? ` · ${project.duration_h}h` : ''} · AURES Intelligence · ${new Date().toLocaleDateString('en-AU', { year: 'numeric', month: 'long', day: 'numeric' })}`,
+      })
+    } catch (err) {
+      console.error('PDF export failed:', err)
+      alert('PDF generation failed — please try again.')
+    } finally {
+      setShowPdf(false)
+      setPdfLoading(false)
+    }
+  }, [project])
 
   if (loading) {
     return (
@@ -139,6 +170,13 @@ export default function BessValueAnalysis({ projectId }: Props) {
           <span>🔋</span> BESS Value Analysis
         </h3>
         <div className="flex items-center gap-2">
+          <button
+            onClick={handleExportPdf}
+            disabled={pdfLoading}
+            className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-[10px] font-medium bg-[var(--color-bg-card)] border border-[var(--color-border)] text-[var(--color-text-muted)] hover:text-[var(--color-text)] hover:border-[var(--color-primary)] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            {pdfLoading ? <><span className="animate-spin inline-block">⏳</span> Generating…</> : <><span>📄</span> Export PDF</>}
+          </button>
           <ConfidenceBadge confidence={project.value_summary?.data_confidence} />
           <GradeChip grade={project.pros_cons?.grade} score={project.pros_cons?.score} />
         </div>
@@ -163,6 +201,13 @@ export default function BessValueAnalysis({ projectId }: Props) {
       {activeTab === 'bands'     && <BandsTab project={project} />}
       {activeTab === 'annual'    && <AnnualTab project={project} />}
       {activeTab === 'peers'     && <PeersTab project={project} allStateProjects={allStateProjects} />}
+
+      {/* Hidden PDF summary — rendered off-screen during export */}
+      {showPdf && (
+        <div ref={pdfRef} style={{ position: 'fixed', top: 0, left: '-10000px', pointerEvents: 'none', zIndex: 9999, width: 900 }}>
+          <BessValuePdfSummary project={project} stateAvg={stateAvg} allStateProjects={allStateProjects} />
+        </div>
+      )}
     </div>
   )
 }
@@ -662,6 +707,266 @@ function PeersTab({ project, allStateProjects }: { project: any; allStateProject
           <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-sm bg-[#f59e0b] inline-block" /> This project</span>
           <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-sm bg-[#3b82f6] inline-block" /> State peers</span>
         </div>
+      </div>
+    </div>
+  )
+}
+
+// ============================================================
+// PDF summary — flat light-mode layout for export
+// ============================================================
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function computeBessKeyFindings(project: any, stateAvg: any): string[] {
+  const vs = project.value_summary ?? {}
+  const sr = project.state_rank
+  const findings: string[] = []
+
+  if (vs.avg_spread != null) {
+    const stateSpread = stateAvg?.avg_spread
+    const rank = sr?.spread_percentile != null ? ` — top ${Math.round(100 - sr.spread_percentile)}% of ${project.state} fleet` : ''
+    if (stateSpread != null) {
+      const diff = vs.avg_spread - stateSpread
+      if (Math.abs(diff) >= 5) {
+        findings.push(`Arbitrage spread: $${vs.avg_spread.toFixed(0)}/MWh (${diff > 0 ? '+' : ''}$${diff.toFixed(0)} vs ${project.state} average $${stateSpread.toFixed(0)})${rank}.`)
+      } else {
+        findings.push(`Arbitrage spread: $${vs.avg_spread.toFixed(0)}/MWh — in line with ${project.state} fleet ($${stateSpread.toFixed(0)})${rank}.`)
+      }
+    } else {
+      findings.push(`Arbitrage spread: $${vs.avg_spread.toFixed(0)}/MWh${rank}.`)
+    }
+  }
+
+  if (vs.spread_trend) {
+    const t = vs.spread_trend
+    if (t === 'improving') findings.push(`Trend: arbitrage spread is widening — discharge prices climbing or charge prices falling. Often reflects deeper midday solar troughs and stronger evening peaks.`)
+    else if (t === 'declining') findings.push(`Trend: arbitrage spread is narrowing — more BESS competing for the same arbitrage may be eroding returns.`)
+    else findings.push(`Trend: arbitrage spread is stable — no material change in the discharge/charge gap year-on-year.`)
+  }
+
+  if (vs.avg_round_trip_efficiency != null) {
+    const rte = vs.avg_round_trip_efficiency * 100
+    if (rte >= 85) findings.push(`Round-trip efficiency ${rte.toFixed(0)}% — strong, consistent with modern Li-ion BESS in good operating condition.`)
+    else if (rte >= 75) findings.push(`Round-trip efficiency ${rte.toFixed(0)}% — moderate. Some opportunity loss vs ideal, may reflect older chemistry or transmission auxiliary loads.`)
+    else findings.push(`Round-trip efficiency ${rte.toFixed(0)}% — low. Significant value leakage; investigate chemistry, age, and operating profile.`)
+  }
+
+  if (vs.avg_cycles_per_year != null) {
+    const c = vs.avg_cycles_per_year
+    if (c >= 350) findings.push(`Cycling rate ${c.toFixed(0)} full-equivalent cycles/yr — heavy use, near or above warranty assumptions; revenue/MW likely strong but watch degradation.`)
+    else if (c >= 200) findings.push(`Cycling rate ${c.toFixed(0)} cycles/yr — typical merchant arbitrage operation.`)
+    else findings.push(`Cycling rate ${c.toFixed(0)} cycles/yr — light use; either FCAS-focused, contracted, or under-dispatching merchant opportunity.`)
+  }
+
+  if (vs.avg_utilisation_pct != null) {
+    findings.push(`Utilisation ${vs.avg_utilisation_pct.toFixed(0)}% — share of available power-hours used for energy arbitrage (excludes idle and FCAS-only intervals).`)
+  }
+
+  if (vs.avg_revenue_per_mw != null) {
+    findings.push(`Revenue per MW: $${(vs.avg_revenue_per_mw / 1000).toFixed(0)}k/MW/yr from arbitrage. Excludes FCAS, capacity payments, and offtake contract uplift.`)
+  }
+
+  return findings
+}
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function BessValuePdfSummary({ project, stateAvg, allStateProjects }: { project: any; stateAvg: any; allStateProjects: any[] }) {
+  const vs = project.value_summary ?? {}
+  const sr = project.state_rank
+  const pc = project.pros_cons
+  const today = new Date().toLocaleDateString('en-AU', { year: 'numeric', month: 'long', day: 'numeric' })
+
+  const annualData = (project.annual_data || []).map((a: { year: number; spread?: number | null; avg_discharge_price?: number | null; avg_charge_price?: number | null }) => ({
+    year: String(a.year),
+    spread: a.spread ?? null,
+    discharge: a.avg_discharge_price ?? null,
+    charge: a.avg_charge_price ?? null,
+  }))
+
+  const monthlySpread = (project.monthly_data || []).slice(-24).map((m: { year: number; month: number; spread?: number | null }) => ({
+    label: `${MONTH_LABELS[(m.month - 1) || 0]?.slice(0, 3)} ${String(m.year).slice(-2)}`,
+    spread: m.spread ?? null,
+  }))
+
+  const peerData = [...allStateProjects]
+    .sort((a: { value_summary?: { avg_spread?: number | null } }, b: { value_summary?: { avg_spread?: number | null } }) => (b.value_summary?.avg_spread ?? 0) - (a.value_summary?.avg_spread ?? 0))
+    .slice(0, 8)
+    .map((p: { id: string; name: string; value_summary?: { avg_spread?: number | null } }) => ({
+      name: p.name.replace(/ BESS$/i, '').replace(/ Battery$/i, '').slice(0, 18),
+      spread: p.value_summary?.avg_spread ?? 0,
+      isThis: p.id === project.id,
+    }))
+
+  const gradeColor = pc?.grade?.startsWith('A') ? '#166534' : pc?.grade?.startsWith('B') ? '#1d4ed8' : '#92400e'
+  const gradeBg    = pc?.grade?.startsWith('A') ? '#dcfce7' : pc?.grade?.startsWith('B') ? '#dbeafe' : '#fef3c7'
+
+  const keyFindings = computeBessKeyFindings(project, stateAvg)
+
+  return (
+    <div style={{ width: 900, backgroundColor: '#ffffff', color: '#0f172a', fontFamily: 'system-ui, sans-serif', padding: 24 }}>
+      {/* Header */}
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 16, paddingBottom: 12, borderBottom: '2px solid #e2e8f0' }}>
+        <div>
+          <h2 style={{ fontSize: 22, fontWeight: 700, color: '#0f172a', margin: 0 }}>{project.name}</h2>
+          <p style={{ fontSize: 11, color: '#64748b', margin: '4px 0 0 0' }}>
+            {project.state} · {project.capacity_mw} MW{project.duration_h ? ` · ${project.duration_h}h` : ''}{project.storage_mwh ? ` (${project.storage_mwh} MWh)` : ''} · BESS Value Analysis · {today}
+          </p>
+        </div>
+        {pc?.grade && (
+          <div style={{ backgroundColor: gradeBg, color: gradeColor, padding: '6px 14px', borderRadius: 20, fontSize: 13, fontWeight: 700 }}>
+            {pc.grade} · {pc.score?.toFixed(1)}/5.0
+          </div>
+        )}
+      </div>
+
+      {/* Headline metrics */}
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr 1fr', gap: 10, marginBottom: 16 }}>
+        {[
+          { label: 'Arbitrage Spread', value: vs.avg_spread != null ? `$${vs.avg_spread.toFixed(0)}/MWh` : '–', sub: stateAvg?.avg_spread != null ? `$${stateAvg.avg_spread.toFixed(0)} state avg` : undefined, color: '#22c55e' },
+          { label: 'Round-trip Efficiency', value: vs.avg_round_trip_efficiency != null ? `${(vs.avg_round_trip_efficiency * 100).toFixed(0)}%` : '–', sub: vs.avg_round_trip_efficiency != null ? (vs.avg_round_trip_efficiency >= 0.85 ? 'Strong' : vs.avg_round_trip_efficiency >= 0.75 ? 'Moderate' : 'Low') : undefined, color: vs.avg_round_trip_efficiency != null ? (vs.avg_round_trip_efficiency >= 0.85 ? '#22c55e' : vs.avg_round_trip_efficiency >= 0.75 ? '#f59e0b' : '#ef4444') : '#475569' },
+          { label: 'Cycles per Year', value: vs.avg_cycles_per_year != null ? `${vs.avg_cycles_per_year.toFixed(0)}` : '–', sub: vs.avg_cycles_per_year != null ? (vs.avg_cycles_per_year >= 350 ? 'Heavy' : vs.avg_cycles_per_year >= 200 ? 'Typical' : 'Light') : undefined, color: '#8b5cf6' },
+          { label: 'Revenue per MW', value: vs.avg_revenue_per_mw != null ? `$${(vs.avg_revenue_per_mw / 1000).toFixed(0)}k/yr` : '–', sub: stateAvg?.avg_revenue_per_mw != null ? `$${(stateAvg.avg_revenue_per_mw / 1000).toFixed(0)}k state` : undefined, color: '#3b82f6' },
+        ].map((m, i) => (
+          <div key={i} style={{ backgroundColor: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: 10, padding: '10px 12px' }}>
+            <p style={{ fontSize: 9, color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.05em', margin: 0 }}>{m.label}</p>
+            <p style={{ fontSize: 18, fontWeight: 700, color: m.color, margin: '3px 0 2px 0' }}>{m.value}</p>
+            {m.sub && <p style={{ fontSize: 9, color: '#64748b', margin: 0 }}>{m.sub}</p>}
+          </div>
+        ))}
+      </div>
+
+      {/* Arbitrage context */}
+      <div style={{ backgroundColor: '#f0f9ff', border: '1px solid #bae6fd', borderRadius: 10, padding: 12, marginBottom: 14 }}>
+        <p style={{ fontSize: 10, fontWeight: 700, color: '#0369a1', textTransform: 'uppercase', letterSpacing: '0.05em', margin: '0 0 4px 0' }}>How BESS Earns</p>
+        <p style={{ fontSize: 10, color: '#475569', lineHeight: 1.5, margin: 0 }}>
+          BESS revenue comes from buying low and selling high — the <strong>arbitrage spread</strong> = average discharge price − average charge price. Discharge prices climb in the evening peak and during scarcity events; charge prices fall in midday solar troughs and overnight lulls. Round-trip efficiency (typical Li-ion: 80–88%) reduces realised spread because some energy is lost charging then discharging. Cycles per year drives total revenue; warranty assumptions are typically 350–500 full cycles/yr.
+        </p>
+      </div>
+
+      {/* Key findings */}
+      {keyFindings.length > 0 && (
+        <div style={{ backgroundColor: '#f0fdf4', border: '1px solid #bbf7d0', borderRadius: 10, padding: 14, marginBottom: 14 }}>
+          <p style={{ fontSize: 10, fontWeight: 700, color: '#166534', textTransform: 'uppercase', letterSpacing: '0.05em', margin: '0 0 8px 0' }}>Key Findings</p>
+          <ul style={{ margin: 0, padding: '0 0 0 14px' }}>
+            {keyFindings.map((f, i) => (
+              <li key={i} style={{ fontSize: 10, color: '#0f172a', lineHeight: 1.6, marginBottom: 4 }}>{f}</li>
+            ))}
+          </ul>
+        </div>
+      )}
+
+      {/* Annual spread trend */}
+      {annualData.length > 0 && (
+        <div style={{ backgroundColor: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: 10, padding: 14, marginBottom: 14 }}>
+          <p style={{ fontSize: 10, fontWeight: 600, color: '#475569', textTransform: 'uppercase', marginBottom: 8, letterSpacing: '0.05em' }}>Annual Discharge / Charge / Spread ($/MWh)</p>
+          <BarChart width={848} height={170} data={annualData} margin={{ top: 4, right: 8, bottom: 0, left: -12 }}>
+            <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
+            <XAxis dataKey="year" tick={{ fontSize: 10, fill: '#475569' }} />
+            <YAxis tick={{ fontSize: 10, fill: '#475569' }} tickFormatter={v => `$${v}`} />
+            <Bar dataKey="discharge" fill="#22c55e" name="Discharge" isAnimationActive={false} />
+            <Bar dataKey="charge"    fill="#ef4444" name="Charge"    isAnimationActive={false} />
+            <Bar dataKey="spread"    fill="#3b82f6" name="Spread"    isAnimationActive={false} />
+          </BarChart>
+          <p style={{ fontSize: 9, color: '#64748b', margin: '6px 0 0 0', lineHeight: 1.5 }}>
+            Green bar = average $/MWh received when discharging, red = average $/MWh paid when charging, blue = the spread (= revenue per MWh delivered, before efficiency losses). A widening spread year-on-year indicates strengthening arbitrage opportunity.
+          </p>
+        </div>
+      )}
+
+      {/* Monthly spread trend */}
+      {monthlySpread.filter((d: { spread: number | null }) => d.spread != null).length > 3 && (
+        <div style={{ backgroundColor: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: 10, padding: 14, marginBottom: 14 }}>
+          <p style={{ fontSize: 10, fontWeight: 600, color: '#475569', textTransform: 'uppercase', marginBottom: 8, letterSpacing: '0.05em' }}>Monthly Spread — last 24 months</p>
+          <LineChart width={848} height={140} data={monthlySpread} margin={{ top: 4, right: 8, bottom: 0, left: -8 }}>
+            <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
+            <XAxis dataKey="label" tick={{ fontSize: 8, fill: '#475569' }} />
+            <YAxis tick={{ fontSize: 9, fill: '#475569' }} tickFormatter={v => `$${v}`} />
+            <Line dataKey="spread" stroke="#3b82f6" strokeWidth={2} dot={false} isAnimationActive={false} />
+            {vs.avg_spread != null && (
+              <ReferenceLine y={vs.avg_spread} stroke="#0f172a40" strokeDasharray="4 3"
+                label={{ value: `avg $${vs.avg_spread.toFixed(0)}`, fill: '#475569', fontSize: 8, position: 'right' }} />
+            )}
+          </LineChart>
+          <p style={{ fontSize: 9, color: '#64748b', margin: '6px 0 0 0', lineHeight: 1.5 }}>
+            Monthly arbitrage spread highlights seasonality — winter months typically deliver tighter spreads (less solar trough); summer/shoulder months deliver wider spreads.
+          </p>
+        </div>
+      )}
+
+      {/* State ranking + pros/cons */}
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, marginBottom: 14 }}>
+        {sr && (
+          <div style={{ backgroundColor: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: 10, padding: 14 }}>
+            <p style={{ fontSize: 10, fontWeight: 600, color: '#475569', textTransform: 'uppercase', marginBottom: 8, letterSpacing: '0.05em' }}>State Rankings — {project.state}</p>
+            {[
+              { label: 'Arbitrage Spread', rank: sr.spread_rank, total: sr.spread_total, pct: sr.spread_percentile },
+              { label: 'Revenue per MW',   rank: sr.revenue_per_mw_rank, total: sr.revenue_per_mw_total, pct: undefined },
+              { label: 'Cycles / Year',    rank: sr.cycles_rank, total: sr.cycles_total, pct: sr.cycles_percentile },
+            ].filter(r => r.rank != null && r.total != null).map((r, i) => {
+              const pct = r.pct ?? Math.round(((r.total as number) - (r.rank as number)) / (r.total as number) * 100)
+              const bg = pct >= 75 ? '#22c55e' : pct >= 50 ? '#3b82f6' : pct >= 25 ? '#f59e0b' : '#ef4444'
+              const col = pct >= 75 ? '#166534' : pct >= 50 ? '#1d4ed8' : pct >= 25 ? '#92400e' : '#991b1b'
+              return (
+                <div key={i} style={{ marginBottom: 10 }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 3 }}>
+                    <span style={{ fontSize: 10, color: '#475569' }}>{r.label}</span>
+                    <span style={{ fontSize: 10, fontWeight: 700, color: col }}>#{r.rank}/{r.total}</span>
+                  </div>
+                  <div style={{ height: 6, backgroundColor: '#e2e8f0', borderRadius: 3, overflow: 'hidden' }}>
+                    <div style={{ height: '100%', width: `${pct}%`, backgroundColor: bg, borderRadius: 3 }} />
+                  </div>
+                </div>
+              )
+            })}
+          </div>
+        )}
+        {pc && (pc.pros?.length > 0 || pc.cons?.length > 0) && (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+            {pc.pros?.length > 0 && (
+              <div style={{ backgroundColor: '#f0fdf4', border: '1px solid #bbf7d0', borderRadius: 10, padding: 12, flex: 1 }}>
+                <p style={{ fontSize: 9, fontWeight: 700, color: '#166534', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: 6 }}>Value Strengths</p>
+                {pc.pros.map((p: string, i: number) => <p key={i} style={{ fontSize: 10, color: '#15803d', margin: '2px 0' }}>+ {p}</p>)}
+              </div>
+            )}
+            {pc.cons?.length > 0 && (
+              <div style={{ backgroundColor: '#fef2f2', border: '1px solid #fecaca', borderRadius: 10, padding: 12, flex: 1 }}>
+                <p style={{ fontSize: 9, fontWeight: 700, color: '#991b1b', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: 6 }}>Value Risks</p>
+                {pc.cons.map((c: string, i: number) => <p key={i} style={{ fontSize: 10, color: '#b91c1c', margin: '2px 0' }}>− {c}</p>)}
+              </div>
+            )}
+          </div>
+        )}
+      </div>
+
+      {/* Peer spread rankings */}
+      {peerData.length > 1 && (
+        <div style={{ backgroundColor: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: 10, padding: 14, marginBottom: 14 }}>
+          <p style={{ fontSize: 10, fontWeight: 600, color: '#475569', textTransform: 'uppercase', marginBottom: 8, letterSpacing: '0.05em' }}>
+            {project.state} BESS Rankings — Avg Spread $/MWh (Top {peerData.length})
+          </p>
+          <BarChart width={848} height={120} data={peerData} layout="vertical" margin={{ top: 4, right: 8, bottom: 0, left: 100 }}>
+            <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" horizontal={false} />
+            <XAxis type="number" tick={{ fontSize: 9, fill: '#475569' }} tickFormatter={v => `$${v}`} />
+            <YAxis type="category" dataKey="name" tick={{ fontSize: 8, fill: '#475569' }} width={100} />
+            <Bar dataKey="spread" radius={[0, 4, 4, 0]} isAnimationActive={false}>
+              {peerData.map((d, i) => <Cell key={i} fill={d.isThis ? '#0f172a' : '#3b82f640'} />)}
+            </Bar>
+          </BarChart>
+          <p style={{ fontSize: 9, color: '#64748b', margin: '6px 0 0 0', lineHeight: 1.5 }}>
+            Top {peerData.length} {project.state} BESS by average arbitrage spread. This battery shown in dark; peers in blue. Higher spread = stronger merchant performance.
+          </p>
+        </div>
+      )}
+
+      {/* Footer */}
+      <div style={{ borderTop: '1px solid #e2e8f0', paddingTop: 10 }}>
+        <p style={{ fontSize: 9, color: '#94a3b8', lineHeight: 1.6, margin: 0 }}>
+          <strong style={{ color: '#475569' }}>Data:</strong> AEMO 5-min DISPATCHLOAD &amp; DISPATCHPRICE.
+          Arbitrage spread = volume-weighted avg discharge price − avg charge price.
+          Cycles = sum of daily charge MWh ÷ rated storage MWh.
+          Excludes FCAS, capacity payments, and contracted offtake uplift.
+          Generated by AURES Intelligence.
+        </p>
       </div>
     </div>
   )

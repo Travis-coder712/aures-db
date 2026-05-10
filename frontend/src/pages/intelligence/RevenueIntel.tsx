@@ -10,6 +10,7 @@ import DataTable from '../../components/common/DataTable'
 import DrillPanel from '../../components/common/DrillPanel'
 import type { RevenueIntelData, MetricStats, RevenueProjectRanking } from '../../lib/types'
 import DataProvenance from '../../components/common/DataProvenance'
+import StateReportCard, { type ReportTech } from '../../components/intelligence/StateReportCard'
 
 // ============================================================
 // Icons — defined BEFORE const arrays per project pattern
@@ -43,7 +44,7 @@ const ShieldIcon = () => (
 // Section navigation
 // ============================================================
 
-type SectionId = 'overview' | 'state-breakdown' | 'trouble' | 'magnitude' | 'value-factor'
+type SectionId = 'overview' | 'state-breakdown' | 'state-cards' | 'trouble' | 'magnitude' | 'value-factor'
 
 const StateIcon = () => (
   <svg className="w-4 h-4" viewBox="0 0 20 20" fill="currentColor">
@@ -69,9 +70,16 @@ const SparkleIcon = () => (
   </svg>
 )
 
+const CardIcon = () => (
+  <svg className="w-4 h-4" viewBox="0 0 20 20" fill="currentColor">
+    <path d="M3 4a2 2 0 012-2h10a2 2 0 012 2v3H3V4zM3 9h14v7a2 2 0 01-2 2H5a2 2 0 01-2-2V9zm3 3a1 1 0 011-1h4a1 1 0 110 2H7a1 1 0 01-1-1zm0 3a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1z" />
+  </svg>
+)
+
 const REV_SECTIONS: { id: SectionId; label: string; icon: React.ReactNode }[] = [
   { id: 'overview', label: 'Overview', icon: <DollarIcon /> },
   { id: 'state-breakdown', label: 'State Leaders', icon: <StateIcon /> },
+  { id: 'state-cards', label: 'State Report Cards', icon: <CardIcon /> },
   { id: 'trouble', label: 'Revenue Pressure', icon: <AlertIcon /> },
   { id: 'magnitude', label: 'Fleet Revenue', icon: <ChartBarIcon /> },
   { id: 'value-factor', label: 'Value Factor', icon: <SparkleIcon /> },
@@ -125,6 +133,9 @@ export default function RevenueIntel() {
   const [selectedTech, setSelectedTech] = useState<string>('bess')
   const [selectedState, setSelectedState] = useState<string>('all')
   const [drill, setDrill] = useState<{ dim: 'tech' | 'state'; key: string; label: string } | null>(null)
+  // State Report Card section — independent tech + state selection
+  const [cardTech, setCardTech] = useState<ReportTech>('wind')
+  const [cardState, setCardState] = useState<string>('NSW')
 
   useEffect(() => {
     fetchRevenueIntel().then(d => { setData(d); setLoading(false) })
@@ -677,6 +688,26 @@ export default function RevenueIntel() {
           selectedState={selectedState}
           setSelectedState={setSelectedState}
         />
+      )}
+
+      {/* ============================================================ */}
+      {/* State Report Cards Section */}
+      {/* ============================================================ */}
+      {activeSection === 'state-cards' && (
+        <div className="space-y-4">
+          <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl p-4">
+            <h2 className="text-lg font-semibold text-[var(--color-text)] mb-1">State Report Cards</h2>
+            <p className="text-xs text-[var(--color-text-muted)]">
+              Fleet-level scorecard for every wind, solar, and BESS farm in a state. Each project's grade and rationale come from the same value-summary data as the individual project pages — pivoted here from "deep dive on one project" to "compare all projects in one state". Export the full state view as a multi-page PDF.
+            </p>
+          </div>
+          <StateReportCard
+            tech={cardTech}
+            state={cardState}
+            onTechChange={setCardTech}
+            onStateChange={setCardState}
+          />
+        </div>
       )}
 
       {/* ============================================================ */}

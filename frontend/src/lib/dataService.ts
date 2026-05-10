@@ -933,3 +933,16 @@ export async function fetchSolarValue(): Promise<any | null> {
     return solarValueCache
   } catch { return null }
 }
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+let bessValueCache: any | null = null
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export async function fetchBessValue(): Promise<any | null> {
+  if (bessValueCache) return bessValueCache
+  try {
+    const resp = await fetch(`${BASE}/analytics/intelligence/bess-value.json`)
+    if (!resp.ok) return null
+    bessValueCache = await resp.json()
+    return bessValueCache
+  } catch { return null }
+}

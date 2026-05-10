@@ -1,12 +1,13 @@
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type TF = (v: any, n: any) => [string, string]
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useRef, useCallback } from 'react'
 import {
   BarChart, Bar, LineChart, Line,
   XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
   ReferenceLine, ScatterChart, Scatter, Cell,
 } from 'recharts'
 import { useSolarValueProject } from '../../hooks/useSolarValue'
+import { exportElementToPdf } from '../../lib/exportPdf'
 
 // ============================================================
 // Constants
@@ -103,6 +104,34 @@ interface Props { projectId: string }
 export default function SolarValueAnalysis({ projectId }: Props) {
   const { project, stateAvg, allStateProjects, poolPrices, loading } = useSolarValueProject(projectId)
   const [activeTab, setActiveTab] = useState<TabId>('valuation')
+  const pdfRef = useRef<HTMLDivElement>(null)
+  const [pdfLoading, setPdfLoading] = useState(false)
+  const [showPdf, setShowPdf] = useState(false)
+
+  const handleExportPdf = useCallback(async () => {
+    if (!project) return
+    setPdfLoading(true)
+    setShowPdf(true)
+    await new Promise(r => setTimeout(r, 600))
+    if (!pdfRef.current) {
+      setShowPdf(false)
+      setPdfLoading(false)
+      return
+    }
+    try {
+      await exportElementToPdf(pdfRef.current, {
+        filename: `${project.name.replace(/\s+/g, '_')}_solar_value_analysis`,
+        title: `Solar Value Analysis — ${project.name}`,
+        subtitle: `${project.state} · ${project.capacity_mw} MW · AURES Intelligence · ${new Date().toLocaleDateString('en-AU', { year: 'numeric', month: 'long', day: 'numeric' })}`,
+      })
+    } catch (err) {
+      console.error('PDF export failed:', err)
+      alert('PDF generation failed — please try again.')
+    } finally {
+      setShowPdf(false)
+      setPdfLoading(false)
+    }
+  }, [project])
 
   if (loading) {
     return (
@@ -138,6 +167,13 @@ export default function SolarValueAnalysis({ projectId }: Props) {
           <span>☀️</span> Solar Value Analysis
         </h3>
         <div className="flex items-center gap-2">
+          <button
+            onClick={handleExportPdf}
+            disabled={pdfLoading}
+            className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-[10px] font-medium bg-[var(--color-bg-card)] border border-[var(--color-border)] text-[var(--color-text-muted)] hover:text-[var(--color-text)] hover:border-[var(--color-primary)] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            {pdfLoading ? <><span className="animate-spin inline-block">⏳</span> Generating…</> : <><span>📄</span> Export PDF</>}
+          </button>
           <ConfidenceBadge confidence={project.value_summary?.data_confidence} />
           <GradeChip grade={project.pros_cons?.grade} score={project.pros_cons?.score} />
         </div>
@@ -162,6 +198,13 @@ export default function SolarValueAnalysis({ projectId }: Props) {
       {activeTab === 'trend'     && <TrendTab project={project} poolPrices={poolPrices} />}
       {activeTab === 'bands'     && <BandsTab project={project} />}
       {activeTab === 'peers'     && <PeersTab project={project} allStateProjects={allStateProjects} />}
+
+      {/* Hidden PDF summary — rendered off-screen during export */}
+      {showPdf && (
+        <div ref={pdfRef} style={{ position: 'fixed', top: 0, left: '-10000px', pointerEvents: 'none', zIndex: 9999, width: 900 }}>
+          <SolarValuePdfSummary project={project} stateAvg={stateAvg} allStateProjects={allStateProjects} />
+        </div>
+      )}
     </div>
   )
 }
@@ -664,6 +707,299 @@ function PeersTab({ project, allStateProjects }: { project: any; allStateProject
             </Scatter>
           </ScatterChart>
         </ResponsiveContainer>
+      </div>
+    </div>
+  )
+}
+
+// ============================================================
+// PDF summary — flat light-mode layout for export
+// ============================================================
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function computeSolarKeyFindings(project: any, stateAvg: any): string[] {
+  const vs = project.value_summary ?? {}
+  const sr = project.state_rank
+  const findings: string[] = []
+
+  if (vs.avg_cf_pct != null) {
+    const stateCf = stateAvg?.avg_cf_pct
+    const rank = sr?.cf_percentile != null ? ` — top ${Math.round(100 - sr.cf_percentile)}% of ${project.state} fleet` : ''
+    if (stateCf != null) {
+      const diff = vs.avg_cf_pct - stateCf
+      if (Math.abs(diff) >= 1) {
+        findings.push(`Capacity factor: ${vs.avg_cf_pct.toFixed(1)}% (${diff > 0 ? '+' : ''}${diff.toFixed(1)}pp vs ${project.state} average ${stateCf.toFixed(1)}%)${rank}.`)
+      } else {
+        findings.push(`Capacity factor: ${vs.avg_cf_pct.toFixed(1)}% — in line with ${project.state} fleet average${rank}.`)
+      }
+    } else {
+      findings.push(`Capacity factor: ${vs.avg_cf_pct.toFixed(1)}%${rank}.`)
+    }
+  }
+
+  if (vs.avg_value_factor != null) {
+    const disc = ((1 - vs.avg_value_factor) * 100).toFixed(0)
+    if (vs.avg_value_factor >= 0.85) {
+      findings.push(`Capture quality: value factor ${vs.avg_value_factor.toFixed(2)} — limited cannibalisation, earning close to pool price.`)
+    } else if (vs.avg_value_factor >= 0.65) {
+      findings.push(`Capture quality: value factor ${vs.avg_value_factor.toFixed(2)} — earns ~${disc}% below pool, typical solar cannibalisation discount in ${project.state}.`)
+    } else {
+      findings.push(`Capture quality: value factor ${vs.avg_value_factor.toFixed(2)} — earns ${disc}% below pool; severe midday cannibalisation. Co-location with storage may help.`)
+    }
+  }
+
+  if (vs.value_factor_trend) {
+    const t = vs.value_factor_trend
+    if (t === 'declining') findings.push(`Trend: value factor is declining as more solar enters the ${project.state} market — capture risk increasing.`)
+    else if (t === 'improving') findings.push(`Trend: value factor is improving — unusual for solar; may reflect curtailment, storage co-location or favourable regional dynamics.`)
+    else findings.push(`Trend: value factor stable — cannibalisation pressure not yet worsening materially.`)
+  }
+
+  if (vs.degradation_rate_pct_per_yr != null && Math.abs(vs.degradation_rate_pct_per_yr) >= 0.3) {
+    const d = vs.degradation_rate_pct_per_yr
+    if (d > 0) findings.push(`CF declining at ${d.toFixed(2)}%/yr — within normal panel degradation (0.3–0.7%/yr).`)
+    else findings.push(`CF improving at ${Math.abs(d).toFixed(2)}%/yr — likely reflects ramp-up out of commissioning.`)
+  }
+
+  if (vs.best_capture_month && vs.worst_capture_month) {
+    findings.push(`Capture timing: best $/MWh in ${vs.best_capture_month}, worst in ${vs.worst_capture_month}. Solar earns more outside peak-solar months when fewer competitors run flat-out.`)
+  }
+
+  return findings
+}
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function SolarValuePdfSummary({ project, stateAvg, allStateProjects }: { project: any; stateAvg: any; allStateProjects: any[] }) {
+  const vs = project.value_summary ?? {}
+  const sr = project.state_rank
+  const pc = project.pros_cons
+  const today = new Date().toLocaleDateString('en-AU', { year: 'numeric', month: 'long', day: 'numeric' })
+
+  const annualData = (project.annual_data || []).map((a: { year: number; cf_pct: number | null }) => ({ year: String(a.year), cf: a.cf_pct }))
+
+  const monthlyCapture = MONTH_LABELS.map((label, i) => {
+    const avg = project.monthly_averages?.[String(i + 1)]
+    return { month: label, capture: avg?.avg_capture_price ?? null, vf: avg?.avg_value_factor ?? null }
+  })
+
+  const seasons = ['summer', 'autumn', 'winter', 'spring']
+  const seasonRows = seasons.map(s => ({
+    label: s.charAt(0).toUpperCase() + s.slice(1),
+    cf: project.seasonal_averages?.[s]?.avg_cf_pct ?? null,
+    capture: project.seasonal_averages?.[s]?.avg_capture_price ?? null,
+    vf: project.seasonal_averages?.[s]?.avg_value_factor ?? null,
+    pct: project.seasonal_averages?.[s]?.pct_of_annual_energy ?? null,
+  }))
+
+  const peerData = [...allStateProjects]
+    .sort((a: { value_summary?: { avg_cf_pct?: number | null } }, b: { value_summary?: { avg_cf_pct?: number | null } }) => (b.value_summary?.avg_cf_pct ?? 0) - (a.value_summary?.avg_cf_pct ?? 0))
+    .slice(0, 8)
+    .map((p: { id: string; name: string; value_summary?: { avg_cf_pct?: number | null } }) => ({
+      name: p.name.replace(/ Solar Farm$/i, '').replace(/ SF$/i, '').slice(0, 18),
+      cf: p.value_summary?.avg_cf_pct ?? 0,
+      isThis: p.id === project.id,
+    }))
+
+  const gradeColor = pc?.grade?.startsWith('A') ? '#166534' : pc?.grade?.startsWith('B') ? '#1d4ed8' : '#92400e'
+  const gradeBg    = pc?.grade?.startsWith('A') ? '#dcfce7' : pc?.grade?.startsWith('B') ? '#dbeafe' : '#fef3c7'
+
+  const keyFindings = computeSolarKeyFindings(project, stateAvg)
+
+  return (
+    <div style={{ width: 900, backgroundColor: '#ffffff', color: '#0f172a', fontFamily: 'system-ui, sans-serif', padding: 24 }}>
+      {/* Header */}
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 16, paddingBottom: 12, borderBottom: '2px solid #e2e8f0' }}>
+        <div>
+          <h2 style={{ fontSize: 22, fontWeight: 700, color: '#0f172a', margin: 0 }}>{project.name}</h2>
+          <p style={{ fontSize: 11, color: '#64748b', margin: '4px 0 0 0' }}>
+            {project.state} · {project.capacity_mw} MW · Solar Value Analysis · {today}
+          </p>
+        </div>
+        {pc?.grade && (
+          <div style={{ backgroundColor: gradeBg, color: gradeColor, padding: '6px 14px', borderRadius: 20, fontSize: 13, fontWeight: 700 }}>
+            {pc.grade} · {pc.score?.toFixed(1)}/5.0
+          </div>
+        )}
+      </div>
+
+      {/* Headline metrics */}
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr 1fr', gap: 10, marginBottom: 16 }}>
+        {[
+          { label: 'Avg Capacity Factor', value: vs.avg_cf_pct != null ? `${vs.avg_cf_pct.toFixed(1)}%` : '–', sub: stateAvg?.avg_cf_pct != null ? `${stateAvg.avg_cf_pct.toFixed(1)}% state avg` : undefined, color: '#3b82f6' },
+          { label: 'Capture Price (VWAP)', value: vs.avg_capture_price != null ? `$${vs.avg_capture_price.toFixed(0)}/MWh` : '–', sub: stateAvg?.avg_capture_price != null ? `$${stateAvg.avg_capture_price.toFixed(0)} state` : undefined, color: '#22c55e' },
+          { label: 'Value Factor', value: vs.avg_value_factor != null ? vs.avg_value_factor.toFixed(3) : '–', sub: vs.avg_value_factor != null ? (vs.avg_value_factor >= 0.85 ? 'Low cann.' : vs.avg_value_factor >= 0.65 ? 'Moderate' : 'High cann.') : undefined, color: vs.avg_value_factor != null ? (vs.avg_value_factor >= 0.85 ? '#22c55e' : vs.avg_value_factor >= 0.65 ? '#f59e0b' : '#ef4444') : '#475569' },
+          { label: 'Revenue per MW', value: vs.avg_revenue_per_mw != null ? `$${(vs.avg_revenue_per_mw / 1000).toFixed(0)}k/yr` : '–', sub: stateAvg?.avg_revenue_per_mw != null ? `$${(stateAvg.avg_revenue_per_mw / 1000).toFixed(0)}k state` : undefined, color: '#8b5cf6' },
+        ].map((m, i) => (
+          <div key={i} style={{ backgroundColor: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: 10, padding: '10px 12px' }}>
+            <p style={{ fontSize: 9, color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.05em', margin: 0 }}>{m.label}</p>
+            <p style={{ fontSize: 18, fontWeight: 700, color: m.color, margin: '3px 0 2px 0' }}>{m.value}</p>
+            {m.sub && <p style={{ fontSize: 9, color: '#64748b', margin: 0 }}>{m.sub}</p>}
+          </div>
+        ))}
+      </div>
+
+      {/* Cannibalisation context */}
+      <div style={{ backgroundColor: '#fffbeb', border: '1px solid #fde68a', borderRadius: 10, padding: 12, marginBottom: 14 }}>
+        <p style={{ fontSize: 10, fontWeight: 700, color: '#92400e', textTransform: 'uppercase', letterSpacing: '0.05em', margin: '0 0 4px 0' }}>The Solar Cannibalisation Problem</p>
+        <p style={{ fontSize: 10, color: '#475569', lineHeight: 1.5, margin: 0 }}>
+          Solar farms generate most energy around midday — and so does every other solar farm in the region. This collective peak floods the market and pushes spot prices down precisely when this farm is generating most. The value factor (VF) measures the resulting discount: VF = capture price ÷ pool average. As more solar enters the {project.state} market, VF typically declines.
+        </p>
+      </div>
+
+      {/* Key findings */}
+      {keyFindings.length > 0 && (
+        <div style={{ backgroundColor: '#f0f9ff', border: '1px solid #bae6fd', borderRadius: 10, padding: 14, marginBottom: 14 }}>
+          <p style={{ fontSize: 10, fontWeight: 700, color: '#0369a1', textTransform: 'uppercase', letterSpacing: '0.05em', margin: '0 0 8px 0' }}>Key Findings</p>
+          <ul style={{ margin: 0, padding: '0 0 0 14px' }}>
+            {keyFindings.map((f, i) => (
+              <li key={i} style={{ fontSize: 10, color: '#0f172a', lineHeight: 1.6, marginBottom: 4 }}>{f}</li>
+            ))}
+          </ul>
+        </div>
+      )}
+
+      {/* Annual CF chart */}
+      {annualData.length > 0 && (
+        <div style={{ backgroundColor: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: 10, padding: 14, marginBottom: 14 }}>
+          <p style={{ fontSize: 10, fontWeight: 600, color: '#475569', textTransform: 'uppercase', marginBottom: 8, letterSpacing: '0.05em' }}>Annual Capacity Factor Trend</p>
+          <BarChart width={848} height={150} data={annualData} margin={{ top: 4, right: 8, bottom: 0, left: -12 }}>
+            <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
+            <XAxis dataKey="year" tick={{ fontSize: 10, fill: '#475569' }} />
+            <YAxis tick={{ fontSize: 10, fill: '#475569' }} tickFormatter={v => `${v}%`} domain={['auto', 'auto']} />
+            <Bar dataKey="cf" radius={[4, 4, 0, 0]} isAnimationActive={false}>
+              {annualData.map((d: { year: string }, i: number) => <Cell key={i} fill={YEAR_COLORS[parseInt(d.year)] ?? '#3b82f6'} />)}
+            </Bar>
+          </BarChart>
+          <p style={{ fontSize: 9, color: '#64748b', margin: '6px 0 0 0', lineHeight: 1.5 }}>
+            Annual capacity factor (% of nameplate). Solar CF typically settles in the high-teens to high-twenties depending on latitude, tracking and curtailment. Year-on-year decline ({vs.degradation_rate_pct_per_yr ? `${vs.degradation_rate_pct_per_yr.toFixed(2)}%/yr` : '—'}) reflects panel degradation plus curtailment growth.
+          </p>
+        </div>
+      )}
+
+      {/* Monthly capture + seasonal */}
+      <div style={{ display: 'grid', gridTemplateColumns: '1.6fr 1fr', gap: 12, marginBottom: 14 }}>
+        {monthlyCapture.some(d => d.capture != null) && (
+          <div style={{ backgroundColor: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: 10, padding: 14 }}>
+            <p style={{ fontSize: 10, fontWeight: 600, color: '#475569', textTransform: 'uppercase', marginBottom: 8, letterSpacing: '0.05em' }}>Monthly Capture Price ($/MWh avg)</p>
+            <BarChart width={520} height={140} data={monthlyCapture} margin={{ top: 4, right: 8, bottom: 0, left: -8 }}>
+              <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
+              <XAxis dataKey="month" tick={{ fontSize: 9, fill: '#475569' }} />
+              <YAxis tick={{ fontSize: 9, fill: '#475569' }} tickFormatter={v => `$${v}`} />
+              <Bar dataKey="capture" radius={[3, 3, 0, 0]} isAnimationActive={false}>
+                {monthlyCapture.map((d, i) => <Cell key={i} fill={d.vf == null ? '#3b82f6' : d.vf >= 0.85 ? '#22c55e' : d.vf >= 0.65 ? '#f59e0b' : '#ef4444'} />)}
+              </Bar>
+              {vs.avg_capture_price != null && (
+                <ReferenceLine y={vs.avg_capture_price} stroke="#0f172a40" strokeDasharray="4 3"
+                  label={{ value: `$${vs.avg_capture_price.toFixed(0)}`, fill: '#475569', fontSize: 8, position: 'right' }} />
+              )}
+            </BarChart>
+            <p style={{ fontSize: 9, color: '#64748b', margin: '6px 0 0 0', lineHeight: 1.5 }}>
+              Bar colour: green = VF ≥ 0.85, amber = 0.65–0.85, red {'<'} 0.65 (heavy cannibalisation). Dashed line = annual VWAP.
+            </p>
+          </div>
+        )}
+        {seasonRows.some(s => s.cf != null) && (
+          <div style={{ backgroundColor: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: 10, padding: 14 }}>
+            <p style={{ fontSize: 10, fontWeight: 600, color: '#475569', textTransform: 'uppercase', marginBottom: 8, letterSpacing: '0.05em' }}>Seasonal Performance</p>
+            <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 10 }}>
+              <thead>
+                <tr>{['Season', 'CF%', 'Cap.', 'VF', '%Egy'].map(h => (
+                  <th key={h} style={{ textAlign: h === 'Season' ? 'left' : 'right', color: '#64748b', paddingBottom: 5, fontWeight: 600, fontSize: 9 }}>{h}</th>
+                ))}</tr>
+              </thead>
+              <tbody>
+                {seasonRows.map((s, i) => (
+                  <tr key={i} style={{ borderTop: '1px solid #e2e8f0' }}>
+                    <td style={{ padding: '3px 0', fontWeight: 600, color: '#0f172a' }}>{s.label}</td>
+                    <td style={{ textAlign: 'right', color: '#0f172a' }}>{s.cf != null ? `${s.cf.toFixed(1)}%` : '–'}</td>
+                    <td style={{ textAlign: 'right', color: '#0f172a' }}>{s.capture != null ? `$${s.capture.toFixed(0)}` : '–'}</td>
+                    <td style={{ textAlign: 'right', color: s.vf != null ? (s.vf >= 0.85 ? '#166534' : s.vf >= 0.65 ? '#92400e' : '#991b1b') : '#475569' }}>{s.vf != null ? s.vf.toFixed(2) : '–'}</td>
+                    <td style={{ textAlign: 'right', color: '#475569' }}>{s.pct != null ? `${s.pct.toFixed(0)}%` : '–'}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+            <p style={{ fontSize: 9, color: '#64748b', margin: '8px 0 0 0', lineHeight: 1.4 }}>
+              Solar typically peaks in summer for output (CF) but earns better $/MWh in autumn/winter when fewer farms compete at midday.
+            </p>
+          </div>
+        )}
+      </div>
+
+      {/* State ranking + pros/cons */}
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, marginBottom: 14 }}>
+        {sr && (
+          <div style={{ backgroundColor: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: 10, padding: 14 }}>
+            <p style={{ fontSize: 10, fontWeight: 600, color: '#475569', textTransform: 'uppercase', marginBottom: 8, letterSpacing: '0.05em' }}>State Rankings — {project.state}</p>
+            {[
+              { label: 'Capacity Factor', rank: sr.cf_rank, total: sr.cf_total, pct: sr.cf_percentile },
+              { label: 'Capture Price', rank: sr.capture_price_rank, total: sr.capture_price_total, pct: sr.capture_price_percentile },
+              { label: 'Revenue/MW', rank: sr.revenue_per_mw_rank, total: sr.revenue_per_mw_total, pct: undefined },
+            ].filter(r => r.rank != null && r.total != null).map((r, i) => {
+              const pct = r.pct ?? Math.round(((r.total as number) - (r.rank as number)) / (r.total as number) * 100)
+              const bg = pct >= 75 ? '#22c55e' : pct >= 50 ? '#3b82f6' : pct >= 25 ? '#f59e0b' : '#ef4444'
+              const col = pct >= 75 ? '#166534' : pct >= 50 ? '#1d4ed8' : pct >= 25 ? '#92400e' : '#991b1b'
+              return (
+                <div key={i} style={{ marginBottom: 10 }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 3 }}>
+                    <span style={{ fontSize: 10, color: '#475569' }}>{r.label}</span>
+                    <span style={{ fontSize: 10, fontWeight: 700, color: col }}>#{r.rank}/{r.total}</span>
+                  </div>
+                  <div style={{ height: 6, backgroundColor: '#e2e8f0', borderRadius: 3, overflow: 'hidden' }}>
+                    <div style={{ height: '100%', width: `${pct}%`, backgroundColor: bg, borderRadius: 3 }} />
+                  </div>
+                </div>
+              )
+            })}
+          </div>
+        )}
+        {pc && (pc.pros?.length > 0 || pc.cons?.length > 0) && (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+            {pc.pros?.length > 0 && (
+              <div style={{ backgroundColor: '#f0fdf4', border: '1px solid #bbf7d0', borderRadius: 10, padding: 12, flex: 1 }}>
+                <p style={{ fontSize: 9, fontWeight: 700, color: '#166534', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: 6 }}>Value Strengths</p>
+                {pc.pros.map((p: string, i: number) => <p key={i} style={{ fontSize: 10, color: '#15803d', margin: '2px 0' }}>+ {p}</p>)}
+              </div>
+            )}
+            {pc.cons?.length > 0 && (
+              <div style={{ backgroundColor: '#fef2f2', border: '1px solid #fecaca', borderRadius: 10, padding: 12, flex: 1 }}>
+                <p style={{ fontSize: 9, fontWeight: 700, color: '#991b1b', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: 6 }}>Value Risks</p>
+                {pc.cons.map((c: string, i: number) => <p key={i} style={{ fontSize: 10, color: '#b91c1c', margin: '2px 0' }}>− {c}</p>)}
+              </div>
+            )}
+          </div>
+        )}
+      </div>
+
+      {/* Peer CF rankings */}
+      {peerData.length > 1 && (
+        <div style={{ backgroundColor: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: 10, padding: 14, marginBottom: 14 }}>
+          <p style={{ fontSize: 10, fontWeight: 600, color: '#475569', textTransform: 'uppercase', marginBottom: 8, letterSpacing: '0.05em' }}>
+            {project.state} Solar Farm Rankings — Avg CF% (Top {peerData.length})
+          </p>
+          <BarChart width={848} height={120} data={peerData} layout="vertical" margin={{ top: 4, right: 8, bottom: 0, left: 100 }}>
+            <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" horizontal={false} />
+            <XAxis type="number" tick={{ fontSize: 9, fill: '#475569' }} tickFormatter={v => `${v}%`} />
+            <YAxis type="category" dataKey="name" tick={{ fontSize: 8, fill: '#475569' }} width={100} />
+            <Bar dataKey="cf" radius={[0, 4, 4, 0]} isAnimationActive={false}>
+              {peerData.map((d, i) => <Cell key={i} fill={d.isThis ? '#0f172a' : '#f59e0b40'} />)}
+            </Bar>
+          </BarChart>
+          <p style={{ fontSize: 9, color: '#64748b', margin: '6px 0 0 0', lineHeight: 1.5 }}>
+            Top {peerData.length} {project.state} solar farms by avg CF (full operational history). This farm shown in dark; peers in amber.
+          </p>
+        </div>
+      )}
+
+      {/* Footer */}
+      <div style={{ borderTop: '1px solid #e2e8f0', paddingTop: 10 }}>
+        <p style={{ fontSize: 9, color: '#94a3b8', lineHeight: 1.6, margin: 0 }}>
+          <strong style={{ color: '#475569' }}>Data:</strong> AEMO dispatch & settlement via OpenElectricity API.
+          CF: full operational history{vs.data_first_year && vs.data_last_year ? ` (${vs.data_first_year}–${vs.data_last_year})` : ''}.
+          Capture price &amp; value factor from Aug 2024+ (AEMO MMSDM).
+          Revenue = gross energy revenue, pre-MLF. Excludes LGC, FCAS, and PPA adjustments.
+          Generated by AURES Intelligence.
+        </p>
       </div>
     </div>
   )
