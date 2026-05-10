@@ -259,8 +259,8 @@
       "total_storage_mwh": 3553,
       "num_projects": 19,
       "by_stage": {
-        "development": 17,
-        "construction": 1,
+        "development": 16,
+        "construction": 2,
         "operating": 1
       },
       "by_state": {
@@ -605,13 +605,18 @@
           "capacity_mw": 274,
           "state": "SA",
           "status": "development",
-          "stage": "development",
-          "dev_status": "grid connection pending",
+          "stage": "construction",
+          "dev_status": "FID reached",
           "annotations": [
             {
               "flag": "grid connection pending",
               "reason": "No connection application on record",
               "severity": "medium"
+            },
+            {
+              "flag": "FID reached",
+              "reason": "Tilt Renewables took FID on the 288 MW Palmer Wind Farm in early Jan 2026; 15-year PPA with AGL signed Sep 2025.",
+              "severity": "low"
             }
           ],
           "developer_grade": "B"
@@ -2528,12 +2533,12 @@
         "mw": 1811
       },
       "construction": {
-        "count": 7,
-        "mw": 1847
+        "count": 8,
+        "mw": 2121
       },
       "development": {
-        "count": 72,
-        "mw": 20865
+        "count": 71,
+        "mw": 20591
       }
     }
   },

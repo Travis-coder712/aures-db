@@ -815,29 +815,35 @@ function SenatePanel() {
             style={{ backgroundColor: COLORS.green }}>F</span>
           <h3 className="text-base font-bold text-[var(--color-text)]">Watch list — CIS Tender 1 projects progressing or positioning for FID in 2026</h3>
         </div>
-        <p className="text-sm text-[var(--color-text-muted)]">From the 19 CIS Tender 1 awards (Dec 2024), these are the projects publicly identified by AER and industry reporting as already in construction, operating, or closest to reaching FID. The South Australian wind projects (Goyder North, Palmer) have been flagged as the most likely first wind FIDs.</p>
+        <p className="text-sm text-[var(--color-text-muted)]">From the 19 CIS Tender 1 awards (Dec 2024), these are the projects publicly identified by AER and industry reporting as operating, in construction, or closest to FID. <strong className="text-[var(--color-text)]">Palmer Wind Farm took FID in January 2026</strong> — the first CIS Tender 1 wind project to do so, and the first AU on-grid wind FID for 2025/26.</p>
         <div className="grid sm:grid-cols-2 gap-2 text-sm">
           {[
-            { name: 'Mokoan Solar Farm',      desc: '46 MW solar · VIC · first T1 project operating, first to LGC approval' },
-            { name: 'Goulburn River Solar',   desc: '450 MW solar · NSW · in construction' },
-            { name: 'Goyder North Wind Farm', desc: '300 MW wind · SA · expected first wind FID under T1' },
-            { name: 'Palmer Wind Farm',       desc: '274 MW wind · SA · approaching FID' },
-            { name: 'Valley of the Winds',    desc: '936 MW wind · NSW · NSW IPC planning approval Jun 2025; awaiting grid connection' },
-            { name: 'Sandy Creek Solar',      desc: '700 MW solar · NSW · largest NSW solar in T1' },
+            { name: 'Mokoan Solar Farm',      stat: 'OPERATING',  color: COLORS.green, desc: '46 MW solar · VIC · first T1 project operating, first to LGC approval' },
+            { name: 'Goulburn River Solar',   stat: 'CONSTRUCTION', color: COLORS.amber, desc: '450 MW solar · NSW · in construction' },
+            { name: 'Palmer Wind Farm',       stat: 'FID — JAN 2026', color: COLORS.green, desc: '288 MW wind · SA · Tilt Renewables; 15-yr PPA with AGL covers 45% of output; construction starting 2026' },
+            { name: 'Goyder North Wind Farm', stat: 'PRE-FID',  color: COLORS.amber, desc: '300 MW wind · SA · CIS T1 award; Neoen plans construction start mid-2026 — NOT to be confused with Goyder South (separate Neoen project, multiple tranches already at FID since 2023)' },
+            { name: 'Valley of the Winds',    stat: 'PRE-FID',  color: COLORS.blue,  desc: '936 MW wind · NSW · NSW IPC planning approval Jun 2025; awaiting NSW EnergyCo grid connection' },
+            { name: 'Sandy Creek Solar',      stat: 'PRE-FID',  color: COLORS.blue,  desc: '700 MW solar · NSW · largest NSW solar in T1' },
           ].map(p => (
             <div key={p.name} className="flex items-start gap-2 p-2.5 rounded-lg border border-[var(--color-border)]">
-              <span className="w-1.5 h-1.5 rounded-full mt-1.5" style={{ backgroundColor: COLORS.green }} />
-              <div>
-                <p className="font-semibold text-[var(--color-text)]">{p.name}</p>
-                <p className="text-xs text-[var(--color-text-muted)]">{p.desc}</p>
+              <span className="w-1.5 h-1.5 rounded-full mt-1.5" style={{ backgroundColor: p.color }} />
+              <div className="min-w-0">
+                <div className="flex items-center gap-2 flex-wrap">
+                  <p className="font-semibold text-[var(--color-text)]">{p.name}</p>
+                  <span className="text-[9px] font-bold px-1.5 py-0.5 rounded-full whitespace-nowrap"
+                    style={{ backgroundColor: `${p.color}20`, color: p.color }}>{p.stat}</span>
+                </div>
+                <p className="text-xs text-[var(--color-text-muted)] mt-1">{p.desc}</p>
               </div>
             </div>
           ))}
         </div>
         <p className="text-[10px] text-[var(--color-text-muted)]/70 italic">
-          Sources: <a href="https://reneweconomy.com.au/regulator-says-cis-tender-1-projects-are-taking-longer-to-land-finance-only-half-have-made-progress/" target="_blank" rel="noopener" className="hover:underline">RenewEconomy AER analysis</a> ·
-          {' '}<a href="https://reneweconomy.com.au/south-australia-wind-projects-to-be-first-cis-winners-to-reach-financial-close-victoria-says-no-to-more-solar-hybrids/" target="_blank" rel="noopener" className="hover:underline">RenewEconomy SA wind first</a>.
-          Note: earlier-flagged projects like Pottinger Wind Farm (NSW) and Fortescue East Pilbara are also positioning for FID in 2026 but were <em>not</em> awarded under CIS Tender 1.
+          Sources: <a href="https://reneweconomy.com.au/the-investment-drought-is-breaking-says-ceo-as-first-australia-wind-project-reaches-financial-close-in-2025/" target="_blank" rel="noopener" className="hover:underline">RenewEconomy — Palmer FID</a> ·
+          {' '}<a href="https://www.energymagazine.com.au/tilt-hits-go-on-palmer-wind-farm/" target="_blank" rel="noopener" className="hover:underline">Energy Magazine — Tilt Palmer FID</a> ·
+          {' '}<a href="https://goyderenergy.com.au/goyder-north/" target="_blank" rel="noopener" className="hover:underline">Goyder Energy — North project</a> ·
+          {' '}<a href="https://reneweconomy.com.au/regulator-says-cis-tender-1-projects-are-taking-longer-to-land-finance-only-half-have-made-progress/" target="_blank" rel="noopener" className="hover:underline">RenewEconomy AER analysis</a>.
+          Note: earlier-flagged projects like Pottinger Wind (NSW) and Fortescue East Pilbara are also positioning for FID in 2026 but were <em>not</em> awarded under CIS Tender 1.
         </p>
       </div>
     </div>
