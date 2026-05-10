@@ -293,7 +293,10 @@
               "severity": "medium"
             }
           ],
-          "developer_grade": "B"
+          "developer_grade": "B",
+          "planning_approval_date": "2025-06-11",
+          "planning_authority": "NSW IPC",
+          "planning_note": "IPC approved subject to conditions (943 MW, 320 MW BESS)"
         },
         {
           "name": "Sandy Creek Solar Farm",
@@ -336,7 +339,10 @@
               "severity": "medium"
             }
           ],
-          "developer_grade": "B"
+          "developer_grade": "B",
+          "planning_approval_date": "2024-10-31",
+          "planning_authority": "NSW IPC",
+          "planning_note": "IPC granted development consent (700 MW + 400 MW BESS)"
         },
         {
           "name": "Junction Rivers",
@@ -393,7 +399,10 @@
               "severity": "medium"
             }
           ],
-          "developer_grade": "B"
+          "developer_grade": "B",
+          "planning_approval_date": "2024-05-08",
+          "planning_authority": "NSW IPC",
+          "planning_note": "IPC approved Stage 1 (192 MW)"
         },
         {
           "name": "Glanmire Solar Farm",
@@ -1379,7 +1388,10 @@
               "reason": "No EIS lodged and COD > 2027",
               "severity": "medium"
             }
-          ]
+          ],
+          "planning_approval_date": null,
+          "planning_authority": "NSW DPE",
+          "planning_note": "SSD-50725708 \u2014 under assessment, not yet approved"
         },
         {
           "name": "Gawara Baya",
@@ -1484,7 +1496,10 @@
               "severity": "medium"
             }
           ],
-          "developer_grade": "B"
+          "developer_grade": "B",
+          "planning_approval_date": "2024-10-23",
+          "planning_authority": "NSW DPE",
+          "planning_note": "Modification approved (more efficient turbines, fewer)"
         },
         {
           "name": "Lower Wonga Solar Farm",
@@ -2296,33 +2311,231 @@
           "developer_grade": "F"
         }
       ]
+    },
+    {
+      "id": "cis-tender-5-wem-gen",
+      "scheme": "CIS",
+      "round": "Tender 5 \u2014 WEM Generation",
+      "type": "generation",
+      "announced_date": "2026-05-02",
+      "months_since_announced": 0,
+      "total_capacity_mw": 1886,
+      "total_storage_mwh": 2100,
+      "num_projects": 7,
+      "by_stage": {
+        "development": 7
+      },
+      "by_state": {
+        "WA": 7
+      },
+      "projects": [
+        {
+          "name": "Kondinin Wind Farm",
+          "project_id": null,
+          "developer": "Shell Energy / Foresight",
+          "technology": "wind",
+          "capacity_mw": 130,
+          "storage_mwh": null,
+          "state": "WA",
+          "status": "development",
+          "stage": "development",
+          "fid_date": null,
+          "construction_start": null,
+          "cod_current": null,
+          "dev_status": "pre-planning",
+          "annotations": []
+        },
+        {
+          "name": "Tathra Wind Farm",
+          "project_id": null,
+          "developer": "SynergyRED",
+          "technology": "wind",
+          "capacity_mw": 240,
+          "storage_mwh": null,
+          "state": "WA",
+          "status": "development",
+          "stage": "development",
+          "fid_date": null,
+          "construction_start": null,
+          "cod_current": null,
+          "dev_status": "pre-planning",
+          "annotations": []
+        },
+        {
+          "name": "Waddi Wind Farm",
+          "project_id": null,
+          "developer": "Tilt Renewables",
+          "technology": "wind",
+          "capacity_mw": 108,
+          "storage_mwh": null,
+          "state": "WA",
+          "status": "development",
+          "stage": "development",
+          "fid_date": null,
+          "construction_start": null,
+          "cod_current": null,
+          "dev_status": "pre-planning",
+          "annotations": []
+        },
+        {
+          "name": "Parron Maam Marang Wind Farm",
+          "project_id": null,
+          "developer": "Zephyr Energy",
+          "technology": "wind",
+          "capacity_mw": 470,
+          "storage_mwh": null,
+          "state": "WA",
+          "status": "development",
+          "stage": "development",
+          "fid_date": null,
+          "construction_start": null,
+          "cod_current": null,
+          "dev_status": "pre-planning",
+          "annotations": []
+        },
+        {
+          "name": "Yathro Wind Farm",
+          "project_id": null,
+          "developer": "Neoen",
+          "technology": "wind",
+          "capacity_mw": 420,
+          "storage_mwh": null,
+          "state": "WA",
+          "status": "development",
+          "stage": "development",
+          "fid_date": null,
+          "construction_start": null,
+          "cod_current": null,
+          "dev_status": "pre-planning",
+          "annotations": []
+        },
+        {
+          "name": "Narrogin Wind Farm",
+          "project_id": null,
+          "developer": "Undisclosed",
+          "technology": "wind",
+          "capacity_mw": 168,
+          "storage_mwh": null,
+          "state": "WA",
+          "status": "development",
+          "stage": "development",
+          "fid_date": null,
+          "construction_start": null,
+          "cod_current": null,
+          "dev_status": "pre-planning",
+          "annotations": []
+        },
+        {
+          "name": "Killawarra Hybrid Project",
+          "project_id": null,
+          "developer": "Trina Solar",
+          "technology": "hybrid",
+          "capacity_mw": 350,
+          "storage_mwh": 2100,
+          "state": "WA",
+          "status": "development",
+          "stage": "development",
+          "fid_date": null,
+          "construction_start": null,
+          "cod_current": null,
+          "dev_status": "pre-planning",
+          "annotations": []
+        }
+      ]
+    },
+    {
+      "id": "cis-tender-6-wem-disp",
+      "scheme": "CIS",
+      "round": "Tender 6 \u2014 WEM Dispatchable",
+      "type": "dispatchable",
+      "announced_date": "2026-05-02",
+      "months_since_announced": 0,
+      "total_capacity_mw": 482,
+      "total_storage_mwh": 3683,
+      "num_projects": 3,
+      "by_stage": {
+        "development": 3
+      },
+      "by_state": {
+        "WA": 3
+      },
+      "projects": [
+        {
+          "name": "Collie Battery and Solar Hybrid Project",
+          "project_id": null,
+          "developer": "Enpowered / Plenary Group",
+          "technology": "hybrid",
+          "capacity_mw": 200,
+          "storage_mwh": 1518,
+          "state": "WA",
+          "status": "development",
+          "stage": "development",
+          "fid_date": null,
+          "construction_start": null,
+          "cod_current": null,
+          "dev_status": "pre-planning",
+          "annotations": []
+        },
+        {
+          "name": "Yathroo Battery",
+          "project_id": null,
+          "developer": "Neoen",
+          "technology": "bess",
+          "capacity_mw": 200,
+          "storage_mwh": 1600,
+          "state": "WA",
+          "status": "development",
+          "stage": "development",
+          "fid_date": null,
+          "construction_start": null,
+          "cod_current": null,
+          "dev_status": "pre-planning",
+          "annotations": []
+        },
+        {
+          "name": "Waroona Renewable Energy Project Stage 1",
+          "project_id": null,
+          "developer": "Frontier Energy",
+          "technology": "hybrid",
+          "capacity_mw": 82,
+          "storage_mwh": 565,
+          "state": "WA",
+          "status": "development",
+          "stage": "development",
+          "fid_date": null,
+          "construction_start": null,
+          "cod_current": null,
+          "dev_status": "pre-planning",
+          "annotations": []
+        }
+      ]
     }
   ],
   "summary": {
-    "total_projects": 94,
-    "total_mw": 25926.0,
+    "total_projects": 104,
+    "total_mw": 28294,
     "by_stage": {
       "commissioning": {
         "count": 6,
-        "mw": 1810.0
+        "mw": 1810
       },
       "operating": {
         "count": 7,
-        "mw": 1961.0
+        "mw": 1961
       },
       "unknown": {
         "count": 12,
-        "mw": 1811.0
+        "mw": 1811
       },
       "construction": {
         "count": 7,
-        "mw": 1847.0
+        "mw": 1847
       },
       "development": {
-        "count": 62,
-        "mw": 18497.0
+        "count": 72,
+        "mw": 20865
       }
     }
   },
-  "exported_at": "2026-05-10T17:33:54.273167"
+  "exported_at": "2026-05-10T00:00:00+00:00"
 }

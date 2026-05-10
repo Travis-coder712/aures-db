@@ -779,6 +779,12 @@ export interface SchemeTrackerProject {
   dev_status?: string
   annotations?: SchemeAnnotation[]
   developer_grade?: string
+  /** Date the project's primary planning consent was granted. Sparse — only
+   * populated for a curated set of NSW wind/CIS projects in v2.60. ISO-8601 or
+   * null if not yet approved. */
+  planning_approval_date?: string | null
+  planning_authority?: string
+  planning_note?: string
 }
 
 export interface SchemeTrackerRound {
