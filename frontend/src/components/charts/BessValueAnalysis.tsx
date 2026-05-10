@@ -8,6 +8,13 @@ import {
 } from 'recharts'
 import { useBessValueProject } from '../../hooks/useBessValue'
 import { exportElementToPdf } from '../../lib/exportPdf'
+import { fetchProject } from '../../lib/dataService'
+import type { Project } from '../../lib/types'
+import {
+  ProjectProfileSection,
+  ProjectEvolutionTimelineSection,
+  NemSiteDataEssentialsSection,
+} from './ValuePdfSections'
 
 const MONTH_LABELS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 
@@ -110,10 +117,14 @@ export default function BessValueAnalysis({ projectId }: Props) {
   const pdfRef = useRef<HTMLDivElement>(null)
   const [pdfLoading, setPdfLoading] = useState(false)
   const [showPdf, setShowPdf] = useState(false)
+  const [projectMeta, setProjectMeta] = useState<Project | null>(null)
 
   const handleExportPdf = useCallback(async () => {
     if (!project) return
     setPdfLoading(true)
+    // Fetch full project JSON for the Project Profile section in the PDF
+    const meta = await fetchProject('bess', projectId)
+    setProjectMeta(meta)
     setShowPdf(true)
     await new Promise(r => setTimeout(r, 600))
     if (!pdfRef.current) {
@@ -134,7 +145,7 @@ export default function BessValueAnalysis({ projectId }: Props) {
       setShowPdf(false)
       setPdfLoading(false)
     }
-  }, [project])
+  }, [project, projectId])
 
   if (loading) {
     return (
@@ -205,7 +216,7 @@ export default function BessValueAnalysis({ projectId }: Props) {
       {/* Hidden PDF summary — rendered off-screen during export */}
       {showPdf && (
         <div ref={pdfRef} style={{ position: 'fixed', top: 0, left: '-10000px', pointerEvents: 'none', zIndex: 9999, width: 900 }}>
-          <BessValuePdfSummary project={project} stateAvg={stateAvg} allStateProjects={allStateProjects} />
+          <BessValuePdfSummary project={project} stateAvg={stateAvg} allStateProjects={allStateProjects} projectMeta={projectMeta} />
         </div>
       )}
     </div>
@@ -770,7 +781,7 @@ function computeBessKeyFindings(project: any, stateAvg: any): string[] {
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-function BessValuePdfSummary({ project, stateAvg, allStateProjects }: { project: any; stateAvg: any; allStateProjects: any[] }) {
+function BessValuePdfSummary({ project, stateAvg, allStateProjects, projectMeta }: { project: any; stateAvg: any; allStateProjects: any[]; projectMeta: Project | null }) {
   const vs = project.value_summary ?? {}
   const sr = project.state_rank
   const pc = project.pros_cons
@@ -818,6 +829,10 @@ function BessValuePdfSummary({ project, stateAvg, allStateProjects }: { project:
           </div>
         )}
       </div>
+
+      {/* Project Profile · Evolution Timeline (shared) */}
+      <ProjectProfileSection projectMeta={projectMeta} tech="bess" />
+      <ProjectEvolutionTimelineSection projectMeta={projectMeta} />
 
       {/* Headline metrics */}
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr 1fr', gap: 10, marginBottom: 16 }}>
@@ -957,6 +972,19 @@ function BessValuePdfSummary({ project, stateAvg, allStateProjects }: { project:
           </p>
         </div>
       )}
+
+      {/* NEM Lens · Site Data Essentials (shared) */}
+      <NemSiteDataEssentialsSection
+        tech="bess"
+        projectMeta={projectMeta}
+        projectName={project.name}
+        stateName={project.state}
+        avgCfPct={vs.avg_cf_pct ?? null}
+        avgCapture={vs.avg_discharge_price ?? vs.avg_capture_price ?? null}
+        avgVf={vs.avg_value_factor ?? null}
+        dataFirstYear={vs.data_first_year ?? null}
+        dataLastYear={vs.data_last_year ?? null}
+      />
 
       {/* Footer */}
       <div style={{ borderTop: '1px solid #e2e8f0', paddingTop: 10 }}>

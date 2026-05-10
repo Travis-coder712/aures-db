@@ -7,9 +7,14 @@ import {
   ReferenceLine, Legend, Cell,
 } from 'recharts'
 import { useWindValueProject } from '../../hooks/useWindValue'
-import type { WindValueProject, WindStateAverage, Project, FieldSourceEntry } from '../../lib/types'
+import type { WindValueProject, WindStateAverage, Project } from '../../lib/types'
 import { exportElementToPdf } from '../../lib/exportPdf'
 import { fetchProject } from '../../lib/dataService'
+import {
+  ProjectProfileSection,
+  ProjectEvolutionTimelineSection,
+  NemSiteDataEssentialsSection,
+} from './ValuePdfSections'
 
 // ============================================================
 // Constants
@@ -3163,307 +3168,9 @@ function WindValuePdfSummary({
         )}
       </div>
 
-      {/* Project Profile — what AURES has on the project card */}
-      {projectMeta && (() => {
-        const oem = projectMeta.suppliers?.find(s => s.role === 'wind_oem')
-        const epc = projectMeta.suppliers?.find(s => s.role === 'epc')
-        const bop = projectMeta.suppliers?.find(s => s.role === 'bop')
-        const ppaList = (projectMeta.offtakes ?? []).filter(o => o.type === 'PPA')
-        const schemeList = projectMeta.scheme_contracts ?? []
-        const codDisplay = projectMeta.cod_current
-          ? new Date(projectMeta.cod_current).toLocaleDateString('en-AU', { year: 'numeric', month: 'short', day: 'numeric' })
-          : '–'
-        const planningEvent = (projectMeta.timeline ?? []).find(t => t.event_type === 'planning_approved')
-        const constructionEvent = (projectMeta.timeline ?? []).find(t => t.event_type === 'construction_start')
-        const ownershipChanges = (projectMeta.timeline ?? []).filter(t => t.event_type === 'ownership_change')
-        const gridEquip: string[] = []
-        if (projectMeta.grid_forming) gridEquip.push('Grid-forming inverter')
-        if (projectMeta.has_syncon) gridEquip.push('Synchronous condenser')
-        if (projectMeta.has_statcom) gridEquip.push('STATCOM')
-        if (projectMeta.has_harmonic_filter) gridEquip.push('Harmonic filter')
-        if (projectMeta.has_sips) gridEquip.push('SIPS')
-
-        // Renders a single "Field · Value" stat row inside the profile grid
-        const StatLine = ({ label, value, span }: { label: string; value: string | React.ReactNode; span?: number }) => (
-          <div style={{ gridColumn: span ? `span ${span}` : undefined }}>
-            <p style={{ fontSize: 9, color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.05em', margin: 0 }}>{label}</p>
-            <p style={{ fontSize: 11, color: '#0f172a', margin: '2px 0 0 0', lineHeight: 1.4 }}>{value}</p>
-          </div>
-        )
-
-        return (
-          <div style={{ backgroundColor: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: 10, padding: 14, marginBottom: 14 }}>
-            <p style={{ fontSize: 10, fontWeight: 700, color: '#0f172a', textTransform: 'uppercase', letterSpacing: '0.05em', margin: '0 0 10px 0' }}>
-              Project Profile · what AURES has on the project card
-            </p>
-
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 10, marginBottom: 10 }}>
-              <StatLine label="State / Region" value={`${projectMeta.state}${projectMeta.rez ? ` · ${projectMeta.rez}` : ''}`} />
-              {projectMeta.lga && <StatLine label="Local Govt Area" value={projectMeta.lga} />}
-              {projectMeta.coordinates && (
-                <StatLine
-                  label="Coordinates"
-                  value={`${projectMeta.coordinates.lat.toFixed(3)}° ${projectMeta.coordinates.lng.toFixed(3)}°`}
-                />
-              )}
-              <StatLine label="Capacity (MW)" value={`${projectMeta.capacity_mw} MW`} />
-              <StatLine label="COD" value={codDisplay} />
-              {projectMeta.cod_original && projectMeta.cod_original !== projectMeta.cod_current && (
-                <StatLine label="COD (original)" value={new Date(projectMeta.cod_original).toLocaleDateString('en-AU', { year: 'numeric', month: 'short' })} />
-              )}
-              {projectMeta.current_developer && <StatLine label="Developer / Owner" value={projectMeta.current_developer} span={2} />}
-              {projectMeta.current_operator && <StatLine label="Operator" value={projectMeta.current_operator} span={2} />}
-              {oem && (
-                <StatLine
-                  label="Turbine OEM"
-                  value={`${oem.supplier}${oem.model ? ` · ${oem.model}` : ''}${oem.quantity ? ` (×${oem.quantity})` : ''}`}
-                  span={2}
-                />
-              )}
-              {epc && <StatLine label="EPC" value={epc.supplier} />}
-              {bop && <StatLine label="BOP" value={bop.supplier} />}
-              {projectMeta.connection_nsp && <StatLine label="Network Service Provider" value={projectMeta.connection_nsp} />}
-              {projectMeta.connection_status && <StatLine label="Connection status" value={projectMeta.connection_status} />}
-              {gridEquip.length > 0 && (
-                <StatLine label="Grid services equipment" value={gridEquip.join(' · ')} span={2} />
-              )}
-              {projectMeta.capex_aud_m != null && (
-                <StatLine
-                  label="Capex (AUD)"
-                  value={`~$${projectMeta.capex_aud_m}M${projectMeta.capex_year ? ` (${projectMeta.capex_year} basis)` : ''}`}
-                />
-              )}
-              {projectMeta.aemo_gen_info_id && (
-                <StatLine label="AEMO Gen Info ID" value={projectMeta.aemo_gen_info_id} />
-              )}
-              <StatLine label="Data confidence" value={projectMeta.data_confidence ?? '–'} />
-              {planningEvent && (
-                <StatLine label="Planning approval" value={planningEvent.date} />
-              )}
-              {constructionEvent && (
-                <StatLine label="Construction start" value={constructionEvent.date} />
-              )}
-            </div>
-
-            {/* Offtake & scheme contracts */}
-            {(ppaList.length > 0 || schemeList.length > 0) && (
-              <div style={{ borderTop: '1px solid #e2e8f0', paddingTop: 8, marginBottom: 8 }}>
-                <p style={{ fontSize: 9, fontWeight: 700, color: '#0f172a', textTransform: 'uppercase', letterSpacing: '0.05em', margin: '0 0 4px 0' }}>Offtake &amp; scheme contracts</p>
-                {ppaList.map((p, i) => (
-                  <p key={i} style={{ fontSize: 10, color: '#0f172a', margin: '2px 0 0 0', lineHeight: 1.4 }}>
-                    • <strong>{p.party}</strong> — {p.type}{p.capacity_mw ? ` · ${p.capacity_mw} MW` : ''}{p.term_years ? ` · ${p.term_years}-year term` : ''}
-                  </p>
-                ))}
-                {schemeList.map((s, i) => (
-                  <p key={i} style={{ fontSize: 10, color: '#0f172a', margin: '2px 0 0 0', lineHeight: 1.4 }}>
-                    • <strong>{s.scheme}</strong> {s.round}{s.capacity_mw ? ` · ${s.capacity_mw} MW` : ''}{s.contract_type ? ` · ${s.contract_type}` : ''}
-                  </p>
-                ))}
-              </div>
-            )}
-
-            {/* Ownership history */}
-            {ownershipChanges.length > 0 && (
-              <div style={{ borderTop: '1px solid #e2e8f0', paddingTop: 8, marginBottom: 8 }}>
-                <p style={{ fontSize: 9, fontWeight: 700, color: '#0f172a', textTransform: 'uppercase', letterSpacing: '0.05em', margin: '0 0 4px 0' }}>Ownership history</p>
-                {ownershipChanges.map((o, i) => (
-                  <p key={i} style={{ fontSize: 10, color: '#0f172a', margin: '2px 0 0 0', lineHeight: 1.4 }}>
-                    • <strong>{o.date}</strong> — {o.title}{o.detail ? `. ${o.detail}` : ''}
-                  </p>
-                ))}
-              </div>
-            )}
-
-            {/* Notable */}
-            {projectMeta.notable && (
-              <div style={{ borderTop: '1px solid #e2e8f0', paddingTop: 8 }}>
-                <p style={{ fontSize: 9, fontWeight: 700, color: '#0f172a', textTransform: 'uppercase', letterSpacing: '0.05em', margin: '0 0 4px 0' }}>Notable</p>
-                <p style={{ fontSize: 10, color: '#0f172a', margin: 0, lineHeight: 1.5 }}>{projectMeta.notable}</p>
-              </div>
-            )}
-
-            {/* Stakeholder issues / open questions */}
-            {projectMeta.stakeholder_issues && projectMeta.stakeholder_issues.length > 0 && (
-              <div style={{ borderTop: '1px solid #e2e8f0', paddingTop: 8, marginTop: 8 }}>
-                <p style={{ fontSize: 9, fontWeight: 700, color: '#92400e', textTransform: 'uppercase', letterSpacing: '0.05em', margin: '0 0 4px 0' }}>Stakeholder / operational issues on file</p>
-                {projectMeta.stakeholder_issues.map((s, i) => (
-                  <p key={i} style={{ fontSize: 10, color: '#92400e', margin: '2px 0 0 0', lineHeight: 1.5 }}>• {s}</p>
-                ))}
-              </div>
-            )}
-          </div>
-        )
-      })()}
-
-      {/* Project Evolution Timeline — mirrors the Evolution tab on the project page */}
-      {projectMeta && (() => {
-        type EvoEvent = {
-          date: string
-          title: string
-          detail: string
-          source: string
-          type: 'field_source' | 'timeline' | 'cod_change' | 'ownership'
-          tier?: number
-        }
-        const events: EvoEvent[] = []
-
-        // 1. Field-source provenance entries (where available)
-        if (projectMeta.field_sources) {
-          for (const [field, entries] of Object.entries(projectMeta.field_sources)) {
-            for (const entry of entries as FieldSourceEntry[]) {
-              events.push({
-                date: entry.date,
-                title: `Data update · ${field}`,
-                detail: `${entry.value}${entry.note ? ` — ${entry.note}` : ''}`,
-                source: entry.source,
-                type: 'field_source',
-                tier: entry.tier,
-              })
-            }
-          }
-        }
-        // 2. Timeline milestone events
-        for (const ev of projectMeta.timeline ?? []) {
-          events.push({
-            date: ev.date,
-            title: ev.title,
-            detail: ev.detail ?? '',
-            source: ev.sources?.[0]?.title ?? 'Project timeline',
-            type: 'timeline',
-          })
-        }
-        // 3. COD history
-        for (const c of projectMeta.cod_history ?? []) {
-          events.push({
-            date: c.date,
-            title: 'COD change',
-            detail: c.estimate,
-            source: c.source,
-            type: 'cod_change',
-          })
-        }
-        // 4. Ownership history
-        for (const o of projectMeta.ownership_history ?? []) {
-          events.push({
-            date: o.period,
-            title: 'Ownership change',
-            detail: `${o.owner} — ${o.role}${o.transaction_structure ? ` (${o.transaction_structure})` : ''}`,
-            source: o.source_url ?? 'Ownership tracking',
-            type: 'ownership',
-          })
-        }
-
-        if (events.length === 0) return null
-
-        // For the PDF, render OLDEST first — the project's story reads chronologically
-        events.sort((a, b) => (a.date || '').localeCompare(b.date || ''))
-
-        const TYPE_COLOURS: Record<EvoEvent['type'], string> = {
-          field_source: '#10b981',
-          timeline: '#3b82f6',
-          cod_change: '#f59e0b',
-          ownership: '#8b5cf6',
-        }
-        const TYPE_LABELS: Record<EvoEvent['type'], string> = {
-          field_source: 'Data',
-          timeline: 'Milestone',
-          cod_change: 'COD',
-          ownership: 'Owner',
-        }
-
-        // Cap to a sensible number for one PDF section; show the most recent 24 if there are many
-        const capped = events.length > 24 ? events.slice(-24) : events
-        const truncated = events.length > 24
-
-        // Pull the unique type set actually present for the legend
-        const typesPresent = Array.from(new Set(capped.map(e => e.type)))
-
-        return (
-          <div style={{ backgroundColor: '#ffffff', border: '1px solid #e2e8f0', borderRadius: 10, padding: 14, marginBottom: 14 }}>
-            <p style={{ fontSize: 11, fontWeight: 700, color: '#0f172a', textTransform: 'uppercase', letterSpacing: '0.05em', margin: '0 0 4px 0' }}>
-              Project Evolution Timeline
-            </p>
-            <p style={{ fontSize: 9, color: '#64748b', margin: '0 0 10px 0', lineHeight: 1.5, fontStyle: 'italic' }}>
-              Chronological history of milestones, ownership changes, COD revisions and data-source updates on file for this project. Same data as the Evolution tab on the project page.
-              {truncated && ` Showing the most recent ${capped.length} of ${events.length} recorded events.`}
-            </p>
-
-            {/* Legend */}
-            <div style={{ display: 'flex', gap: 12, marginBottom: 10, flexWrap: 'wrap' }}>
-              {typesPresent.map(t => (
-                <div key={t} style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
-                  <span style={{ width: 8, height: 8, borderRadius: '50%', backgroundColor: TYPE_COLOURS[t] }} />
-                  <span style={{ fontSize: 9, color: '#475569' }}>{TYPE_LABELS[t]}</span>
-                </div>
-              ))}
-            </div>
-
-            {/* Timeline rows */}
-            <div style={{ position: 'relative', paddingLeft: 18 }}>
-              {/* Vertical line behind the dots */}
-              <div style={{ position: 'absolute', left: 6, top: 6, bottom: 6, width: 1, backgroundColor: '#e2e8f0' }} />
-              {capped.map((ev, i) => {
-                const color = TYPE_COLOURS[ev.type]
-                return (
-                  <div key={i} style={{ position: 'relative', marginBottom: 8 }}>
-                    {/* Dot */}
-                    <div style={{
-                      position: 'absolute',
-                      left: -16,
-                      top: 4,
-                      width: 11,
-                      height: 11,
-                      borderRadius: '50%',
-                      backgroundColor: color,
-                      border: '2px solid #ffffff',
-                      boxShadow: `0 0 0 1px ${color}`,
-                    }} />
-                    <div style={{ display: 'grid', gridTemplateColumns: '74px 1fr', gap: 10, alignItems: 'baseline' }}>
-                      <span style={{ fontSize: 9, color: '#475569', fontFamily: 'ui-monospace, SFMono-Regular, monospace', whiteSpace: 'nowrap' }}>
-                        {ev.date || '—'}
-                      </span>
-                      <div>
-                        <div style={{ display: 'flex', alignItems: 'baseline', gap: 6, flexWrap: 'wrap' }}>
-                          <span style={{ fontSize: 10, fontWeight: 700, color: '#0f172a' }}>{ev.title}</span>
-                          <span style={{
-                            fontSize: 8,
-                            fontWeight: 600,
-                            color: color,
-                            backgroundColor: color + '20',
-                            padding: '1px 5px',
-                            borderRadius: 3,
-                            textTransform: 'uppercase',
-                            letterSpacing: '0.05em',
-                          }}>
-                            {TYPE_LABELS[ev.type]}
-                          </span>
-                          {ev.tier && (
-                            <span style={{
-                              fontSize: 8,
-                              color: '#475569',
-                              border: '1px solid #cbd5e1',
-                              padding: '0 4px',
-                              borderRadius: 3,
-                            }}>
-                              T{ev.tier}
-                            </span>
-                          )}
-                        </div>
-                        {ev.detail && (
-                          <p style={{ fontSize: 10, color: '#475569', margin: '2px 0 0 0', lineHeight: 1.4 }}>{ev.detail}</p>
-                        )}
-                        {ev.source && (
-                          <p style={{ fontSize: 9, color: '#94a3b8', margin: '2px 0 0 0', fontStyle: 'italic' }}>{ev.source}</p>
-                        )}
-                      </div>
-                    </div>
-                  </div>
-                )
-              })}
-            </div>
-          </div>
-        )
-      })()}
+      {/* Project Profile · Evolution Timeline (shared with Solar+BESS) */}
+      <ProjectProfileSection projectMeta={projectMeta} tech="wind" />
+      <ProjectEvolutionTimelineSection projectMeta={projectMeta} />
 
       {/* Headline metrics */}
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr 1fr', gap: 10, marginBottom: 16 }}>
@@ -3764,97 +3471,18 @@ function WindValuePdfSummary({
         </div>
       </div>
 
-      {/* NEM Site Data Essentials — what we have vs what to look for elsewhere */}
-      <div style={{ backgroundColor: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: 10, padding: 14, marginBottom: 14 }}>
-        <p style={{ fontSize: 11, fontWeight: 700, color: '#0f172a', textTransform: 'uppercase', letterSpacing: '0.05em', margin: '0 0 4px 0' }}>
-          NEM Lens · Site Data Essentials
-        </p>
-        <p style={{ fontSize: 9, color: '#64748b', margin: '0 0 12px 0', lineHeight: 1.5, fontStyle: 'italic' }}>
-          This section maps what AURES has measured for {project.name} against the site-essentials checklist
-          you would normally complete for any wind farm acquisition, financing, or peer benchmarking
-          assessment. Items marked <strong style={{ color: '#166534' }}>✓ in AURES</strong> are reflected
-          in the metrics above. Items marked <strong style={{ color: '#92400e' }}>! gap</strong> are not in
-          AURES today — for those, the third column suggests what to look for and how to compare to other
-          operating or prospective wind farms.
-        </p>
-
-        {/* Two-column header */}
-        <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 10 }}>
-          <thead>
-            <tr style={{ borderBottom: '2px solid #cbd5e1' }}>
-              <th style={{ textAlign: 'left', padding: '6px 6px 6px 0', color: '#475569', fontWeight: 700, fontSize: 9, width: 130 }}>Topic</th>
-              <th style={{ textAlign: 'left', padding: '6px', color: '#475569', fontWeight: 700, fontSize: 9, width: 70 }}>Status</th>
-              <th style={{ textAlign: 'left', padding: '6px', color: '#475569', fontWeight: 700, fontSize: 9 }}>What AURES has · what to look for to compare</th>
-            </tr>
-          </thead>
-          <tbody>
-            {(() => {
-              type Row = { topic: string; status: 'have' | 'partial' | 'gap'; note: string }
-              const rows: Row[] = [
-                { topic: 'Capacity factor (operating)', status: 'have',
-                  note: `Annual CF history from AEMO dispatch (${vs.data_first_year}-${vs.data_last_year}); ${(vs.avg_cf_pct ?? 0).toFixed(1)}% lifetime average for this farm. Benchmark: NSW operating wind sits ~30-38%; coastal SA + VIC south coast reach 38-44%; New England ridge sites typically 30-35%.` },
-                { topic: 'Capture price · value factor', status: 'have',
-                  note: `VWAP capture price and VF measured from 2024+ AEMO MMSDM 5-min RRP. This farm: $${(vs.avg_capture_price ?? 0).toFixed(0)}/MWh capture, VF ${(vs.avg_value_factor ?? 0).toFixed(2)}. Compare to state fleet (Capture column above) and the Diversity Capture Premium card.` },
-                { topic: 'Fleet correlation (R)', status: 'have',
-                  note: `Pearson R against state wind fleet measured monthly. Lower R = less cannibalisation exposure. Compare directly with the peer card above for ranking.` },
-                { topic: 'Seasonal + diurnal shape', status: 'have',
-                  note: `Quarterly CF + average hourly shape derived from dispatch data. Used to compute solar correlation R (lower is better — wind that fires when solar is offline is more valuable).` },
-                { topic: 'Site wind resource (P50 / P90)', status: 'gap',
-                  note: 'AURES does not yet hold long-term modelled wind resource. For comparison work: ask for the project\'s P50 capacity-factor estimate from the wind resource consultant (DNV, K2, Garrad-Hassan, Vortex), and the P90 downside. Compare to operating CF — a 4-6 pp gap between P50 and measured CF is typical and indicates the project bid hub-height yield optimistically.' },
-                { topic: 'Turbine model fit to site', status: 'partial',
-                  note: 'AURES records the OEM and turbine model where known. To compare: look up the IEC class (IA, IIA, IIIA) of the turbine vs the site\'s mean wind speed and turbulence intensity — a low-class turbine on a high-class site over-extracts and shortens life; a high-class turbine on a low-class site is over-engineered and capital-inefficient.' },
-                { topic: 'Wake losses · array layout', status: 'gap',
-                  note: 'Not in AURES. Wake losses for a 70-turbine layout typically 6-12% depending on prevailing wind direction and inter-row spacing. Look for the wind resource assessment\'s gross-to-net derivation. New cluster build-out (other wind farms in the same valley) can add 2-4 pp of incremental wake loss over time.' },
-                { topic: 'MLF trajectory (settlement)', status: 'gap',
-                  note: 'AURES reports gross capture price (pre-MLF). Settlement revenue = capture × MLF. NSW north and SA mid-north basins have seen MLF drift from 0.95-0.98 (commissioning) toward 0.80-0.88 (today). Source: AEMO Marginal Loss Factor publication, annual. A 0.10 MLF reduction equates to ~$8-12/MWh of lost settlement revenue at current spot prices.' },
-                { topic: 'Curtailment (economic vs technical)', status: 'gap',
-                  note: 'Not separately attributed in AURES today. Technical curtailment (system strength, transmission constraint) shows up as missing CF; economic curtailment (negative-price avoidance) shows up as reduced capture price. For comparison, request the operator\'s curtailment log — operating sites in the same REZ should disclose technical curtailment hours.' },
-                { topic: 'PPA / offtake terms · tenor', status: 'partial',
-                  note: 'AURES captures offtake counter-parties and the headline term (see Project Profile above), but not the strike price, escalation, shape, or settlement reference. To compare: identify whether the offtake is fixed-price ($/MWh), CFD, swap, or merchant — and the residual merchant exposure after the PPA expires. Most pre-2018 PPAs are now in their last 3-5 years.' },
-                { topic: 'LGC revenue capture', status: 'gap',
-                  note: 'Not in AURES. Project should be LGC-accredited (most operating wind is); LGC spot price has collapsed from ~$90/MWh (2017) to ~$5/MWh (2026). Long-dated LGC contracts struck pre-2020 may still be earning $40-60/MWh. Ask whether LGCs are bundled or stripped from the PPA — stripped LGCs are now near-worthless.' },
-                { topic: 'Capex / debt / WACC', status: 'partial',
-                  note: 'AURES holds headline capex where disclosed (see Project Profile). What it does not have: actual debt-to-equity, debt tenor (typically 12-18 years for wind), DSCR covenants, refinancing schedule. For comparison work, request the lender presentation or the project debt term sheet.' },
-                { topic: 'O&M contract · OEM warranty', status: 'gap',
-                  note: 'Not in AURES. Typical structure: full-service OEM contract for 5-10 years (transferable), then negotiated extension. Availability guarantees are typically 96-98%. Compare the operator\'s actual availability vs the warranty — a 1 pp gap signals OEM service issues. For Goldwind PMDD machines, blade pitch and main-bearing reliability are the main wear items.' },
-                { topic: 'Land lease · landowner agreements', status: 'gap',
-                  note: 'Not in AURES. Wind farms typically pay landowners $8-15k per turbine per year (production-share or fixed). Lease terms run 25-35 years with extension options. Comparison points: per-turbine landowner payment, total annual land cost as % of gross revenue (usually 2-4%), and renewal optionality.' },
-                { topic: 'Community / stakeholder', status: 'partial',
-                  note: 'AURES records known stakeholder issues in the project notes (see Project Profile). Items to investigate elsewhere: community benefit fund $/turbine/year, ongoing complaints with NSW EPA / EnergyCo, any planning conditions on operating hours or noise limits, neighbour buy-back arrangements.' },
-                { topic: 'REZ access · transmission upgrade dependency', status: 'partial',
-                  note: 'AURES tags the REZ assignment where applicable. To compare: is this farm using a host transmission line that is fully subscribed, or does it have shared-access pending REZ network expansion? For New England, HumeLink and the New England REZ stage 2 works (TransGrid) materially change capacity allocation post-2027.' },
-                { topic: 'Approvals + EPBC status', status: 'partial',
-                  note: 'AURES timeline captures the planning approval date where known. For comparison: was the project approved under NSW DPHI Part 4 vs Part 5? Were Commonwealth EPBC conditions imposed (typically for matters of national environmental significance — migratory birds, threatened species, water resources)? Operating-era EPBC compliance is rarely public — request the most recent EPBC annual compliance report.' },
-              ]
-
-              return rows.map((r, i) => {
-                const statusBg = r.status === 'have' ? '#dcfce7' : r.status === 'partial' ? '#fef3c7' : '#fee2e2'
-                const statusColor = r.status === 'have' ? '#166534' : r.status === 'partial' ? '#92400e' : '#991b1b'
-                const statusLabel = r.status === 'have' ? '✓ in AURES' : r.status === 'partial' ? '~ partial' : '! gap'
-                return (
-                  <tr key={i} style={{ borderTop: '1px solid #e2e8f0', verticalAlign: 'top' }}>
-                    <td style={{ padding: '6px 6px 6px 0', fontSize: 10, fontWeight: 600, color: '#0f172a' }}>{r.topic}</td>
-                    <td style={{ padding: '6px' }}>
-                      <span style={{ backgroundColor: statusBg, color: statusColor, fontSize: 9, fontWeight: 700, padding: '2px 6px', borderRadius: 4, whiteSpace: 'nowrap' }}>{statusLabel}</span>
-                    </td>
-                    <td style={{ padding: '6px', fontSize: 10, color: '#0f172a', lineHeight: 1.5 }}>{r.note}</td>
-                  </tr>
-                )
-              })
-            })()}
-          </tbody>
-        </table>
-
-        <p style={{ fontSize: 9, color: '#64748b', margin: '12px 0 0 0', lineHeight: 1.5 }}>
-          <strong style={{ color: '#0f172a' }}>How to use this list:</strong> the AURES analytical lens
-          covers operating revenue economics — capacity factor, capture price, value factor, fleet
-          correlation, ranking. For acquisition due diligence, refinancing, or full peer benchmarking,
-          the gaps marked above need to be populated from the project's own technical reports, lender
-          information memoranda, or operator disclosures. The comparison framing in each row is
-          designed to anchor against other operating wind farms in the same state and against
-          benchmark assumptions used in the NEM project finance community.
-        </p>
-      </div>
+      {/* NEM Lens · Site Data Essentials (shared) */}
+      <NemSiteDataEssentialsSection
+        tech="wind"
+        projectMeta={projectMeta}
+        projectName={project.name}
+        stateName={project.state}
+        avgCfPct={vs.avg_cf_pct}
+        avgCapture={vs.avg_capture_price}
+        avgVf={vs.avg_value_factor}
+        dataFirstYear={vs.data_first_year}
+        dataLastYear={vs.data_last_year}
+      />
 
       {/* Footer */}
       <div style={{ borderTop: '1px solid #e2e8f0', paddingTop: 10 }}>
