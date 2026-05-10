@@ -13,6 +13,7 @@ import type { SchemeProject } from '../../data/scheme-rounds'
 import type { ESGTrackerProject, PublicationStatus, AgreementStatus } from '../../data/esg-tracker-data'
 import DataProvenance from '../../components/common/DataProvenance'
 import { exportSchemePpt } from '../../lib/exportSchemePpt'
+import SchemeBoardroom from '../../components/intelligence/SchemeBoardroom'
 
 // ============================================================
 // Stage colours & helpers — defined BEFORE const arrays
@@ -51,9 +52,9 @@ function fmtMW(mw: number): string {
 // Component
 // ============================================================
 
-const TABS = ['overview', 'tracker', 'watchlist', 'esg', 'cis-success', 'cis-briefing', 'timeline'] as const
+const TABS = ['overview', 'boardroom', 'tracker', 'watchlist', 'esg', 'cis-success', 'cis-briefing', 'timeline'] as const
 type Tab = typeof TABS[number]
-const TAB_LABELS: Record<Tab, string> = { overview: 'Overview', tracker: 'Milestone Tracker', watchlist: 'Key Projects', esg: 'ESG Agreement Proxy', 'cis-success': 'CIS Success', 'cis-briefing': 'CIS Briefing', timeline: 'CIS/LTESA Timeline' }
+const TAB_LABELS: Record<Tab, string> = { overview: 'Overview', boardroom: 'Boardroom', tracker: 'Milestone Tracker', watchlist: 'Key Projects', esg: 'ESG Agreement Proxy', 'cis-success': 'CIS Success', 'cis-briefing': 'CIS Briefing', timeline: 'CIS/LTESA Timeline' }
 
 export default function SchemeTracker() {
   const [activeTab, setActiveTab] = useState<Tab>('overview')
@@ -597,6 +598,10 @@ export default function SchemeTracker() {
       )}
       {activeTab === 'cis-success' && (
         <CISSuccessTab />
+      )}
+      {activeTab === 'boardroom' && data && <SchemeBoardroom data={data} />}
+      {activeTab === 'boardroom' && !data && (
+        <div className="p-8 text-center text-sm text-[var(--color-text-muted)]">Loading scheme data…</div>
       )}
       {activeTab === 'cis-briefing' && <CISBriefingTab />}
       {activeTab === 'timeline' && (
