@@ -11,6 +11,7 @@ import ConstraintsModule from './pages/learn/ConstraintsModule'
 import CISLTESAModule from './pages/learn/CISLTESAModule'
 import NSWRezTransmissionModule from './pages/learn/NSWRezTransmissionModule'
 import BESSStoryModule from './pages/learn/BESSStoryModule'
+import EnergyTransitionModule from './pages/learn/EnergyTransitionModule'
 import LearnHub from './pages/learn/LearnHub'
 import ModuleStub from './pages/learn/ModuleStub'
 // SchemesOverview merged into SchemeTracker intelligence page
@@ -82,6 +83,8 @@ function App() {
         <Route path="learn/nsw-rez/:lessonId" element={<NSWRezTransmissionModule />} />
         <Route path="learn/bess-story" element={<BESSStoryModule />} />
         <Route path="learn/bess-story/:lessonId" element={<BESSStoryModule />} />
+        <Route path="learn/energy-transition" element={<EnergyTransitionModule />} />
+        <Route path="learn/energy-transition/:lessonId" element={<EnergyTransitionModule />} />
         <Route path="learn/:moduleId" element={<ModuleStub />} />
         {/* Redirect old /schemes to intelligence page */}
         <Route path="schemes" element={<Navigate to="/intelligence/scheme-tracker" replace />} />
