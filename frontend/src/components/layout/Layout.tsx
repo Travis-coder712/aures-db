@@ -195,7 +195,7 @@ const NAV_GROUPS: NavGroup[] = [
     title: 'Resources',
     items: [
       { path: '/news', label: 'News', icon: NewspaperIcon },
-      { path: '/learn/constraints', label: 'Learn', icon: AcademicCapIcon },
+      { path: '/learn', label: 'Learn', icon: AcademicCapIcon },
       { path: '/guides', label: 'Guides', icon: BookIcon },
     ],
   },
