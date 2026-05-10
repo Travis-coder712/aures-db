@@ -1,28 +1,30 @@
 """Import daily per-DUID generation MWh for solar / wind / BESS fleets.
 
-AEMO NEMWEB MMSDM DISPATCHLOAD includes EVERY scheduled and semi-scheduled
-DUID, not just coal. This importer re-parses the MMSDM archives cached in
-data/nemweb_cache/ by import_dispatchload.py, filters to solar / wind /
-battery DUIDs (via the aemo_generation_info registry), and aggregates
-5-minute dispatch MW into daily MWh per DUID.
+AEMO NEMWEB DISPATCHLOAD (UNIT_SOLUTION) includes EVERY scheduled and semi-
+scheduled DUID, not just coal. This importer reads two zip sources:
+
+  1. MMSDM monthly archives in data/nemweb_cache/ (cached by
+     import_dispatchload.py)
+  2. NEMWEB Reports/Current/Next_Day_Dispatch/ daily zips (for fresh data
+     since the last MMSDM month-end — the MMSDM archive lags by ~2 weeks)
+
+It filters to solar / wind / battery DUIDs (via the aemo_generation_info
+registry) and aggregates 5-minute dispatch MW into daily MWh per DUID.
 
 Two aggregates are captured per DUID per day:
   - gen_mwh:    sum(max(total_cleared_mw, 0)) / 12     (discharge for BESS)
   - charge_mwh: sum(abs(min(total_cleared_mw, 0))) / 12 (charge for BESS)
 
-For solar / wind these are always 0 / non-zero respectively (no negative
-dispatch), but the schema keeps the symmetry so the scoreboard can render
-BESS net-discharge = gen_mwh - charge_mwh.
+Three entry points:
 
-Two entry points:
+  # Pull the last N days from Next_Day_Dispatch (incremental catch-up)
+  python3 pipeline/importers/import_generation_daily.py --days 14
 
-  # Parse all cached months for solar/wind/BESS DUIDs
+  # Parse all cached MMSDM months for solar/wind/BESS DUIDs
   python3 pipeline/importers/import_generation_daily.py --all-cached
 
-  # Parse a specific month (zip must already be in data/nemweb_cache/)
+  # Parse a specific cached MMSDM month
   python3 pipeline/importers/import_generation_daily.py --month 2025-12
-
-Cached zips come from import_dispatchload.py — no separate download needed.
 """
 from __future__ import annotations
 
@@ -30,16 +32,27 @@ import argparse
 import csv
 import io
 import os
+import re
 import sqlite3
 import sys
 import zipfile
 from collections import defaultdict
-from datetime import datetime
+from datetime import datetime, timedelta
 from typing import Iterable
+from urllib.parse import urljoin
+
+try:
+    import requests
+except ImportError:
+    print("! The 'requests' library is required: pip install requests")
+    sys.exit(1)
 
 ROOT_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
 DB_PATH = os.path.join(ROOT_DIR, 'database', 'aures.db')
 CACHE_DIR = os.path.join(ROOT_DIR, 'data', 'nemweb_cache')
+
+NEMWEB_BASE = 'https://nemweb.com.au'
+CURRENT_DISPATCH_URL = f'{NEMWEB_BASE}/Reports/Current/Next_Day_Dispatch/'
 
 TARGET_FUEL_TYPES = ('Solar PV', 'Wind', 'Battery Storage')
 
@@ -284,6 +297,98 @@ def import_month(month: str) -> None:
     conn.close()
 
 
+def download(url: str, target: str, verbose: bool = True) -> bool:
+    if os.path.exists(target):
+        return True
+    os.makedirs(os.path.dirname(target), exist_ok=True)
+    try:
+        with requests.get(url, stream=True, timeout=120) as r:
+            r.raise_for_status()
+            with open(target, 'wb') as f:
+                for chunk in r.iter_content(chunk_size=1 << 15):
+                    f.write(chunk)
+        return True
+    except Exception as e:
+        if verbose:
+            print(f'  ! download failed: {url} — {e}')
+        if os.path.exists(target):
+            os.remove(target)
+        return False
+
+
+def list_current_zip_urls() -> list[str]:
+    """List PUBLIC_NEXT_DAY_DISPATCH zip URLs from NEMWEB Current/Next_Day_Dispatch."""
+    try:
+        r = requests.get(CURRENT_DISPATCH_URL, timeout=30)
+        r.raise_for_status()
+    except Exception as e:
+        print(f'  ! failed to list NEMWEB Next_Day_Dispatch: {e}')
+        return []
+    hrefs = re.findall(r'href="([^"]+\.zip)"', r.text, re.IGNORECASE)
+    return [urljoin(CURRENT_DISPATCH_URL, h) for h in hrefs]
+
+
+def import_current(days: int) -> None:
+    """Pull the last N days of NEXT_DAY_DISPATCH zips and import into generation_daily.
+
+    AEMO's trading day starts at 04:00, so a single NEXT_DAY zip spans two
+    calendar dates. We accumulate ALL intervals across ALL zips into one
+    per_day dict before upserting — otherwise the later-processed zip would
+    overwrite the earlier zip's contribution to a shared boundary date.
+    """
+    conn = sqlite3.connect(DB_PATH)
+    ensure_schema(conn)
+    target_duids = load_target_duids(conn)
+    if not target_duids:
+        print('  ! no target DUIDs found in aemo_generation_info')
+        conn.close()
+        return
+
+    print(f'  Tracking {len(target_duids)} target DUIDs (recent {days} days)')
+
+    urls = list_current_zip_urls()
+    if not urls:
+        print('  ! no zip URLs discovered. Is NEMWEB reachable?')
+        conn.close()
+        return
+
+    cutoff = datetime.now() - timedelta(days=days)
+    per_day_all: dict[tuple[str, str], dict[str, float | int]] = defaultdict(
+        lambda: {'gen_mwh': 0.0, 'charge_mwh': 0.0, 'intervals': 0}
+    )
+    seen_intervals_all: set[tuple[str, str]] = set()
+    processed = 0
+
+    for url in sorted(urls, reverse=True):
+        m = re.search(r'(\d{8})', os.path.basename(url))
+        if not m:
+            continue
+        file_date = datetime.strptime(m.group(1), '%Y%m%d')
+        if file_date < cutoff:
+            break
+        target = os.path.join(CACHE_DIR, os.path.basename(url))
+        if not download(url, target):
+            continue
+        try:
+            zf = zipfile.ZipFile(target)
+        except zipfile.BadZipFile:
+            print(f'  ! bad zip: {os.path.basename(target)}')
+            continue
+        with zf:
+            for name in zf.namelist():
+                if name.upper().endswith('.CSV'):
+                    with zf.open(name) as f:
+                        content = f.read()
+                    _accumulate_csv(content, target_duids, per_day_all, seen_intervals_all)
+        processed += 1
+        print(f'  {os.path.basename(target)}: cumulative {len(per_day_all)} (date, DUID) pairs')
+
+    n = upsert_daily(conn, per_day_all, target_duids)
+    conn.close()
+    print(f'  Total: {n} daily rows upserted from {processed} NEXT_DAY zips '
+          f'({len(per_day_all)} unique (date, DUID) pairs)')
+
+
 def import_all_cached() -> None:
     months = list_cached_months()
     if not months:
@@ -300,17 +405,20 @@ def import_all_cached() -> None:
 
 def main() -> None:
     parser = argparse.ArgumentParser(description='Import daily generation MWh for solar/wind/BESS.')
-    parser.add_argument('--month', help='Parse one cached month, e.g. 2025-06')
-    parser.add_argument('--all-cached', action='store_true', help='Parse every cached MMSDM month')
+    grp = parser.add_mutually_exclusive_group(required=True)
+    grp.add_argument('--days', type=int, metavar='N',
+                     help='Pull last N days from Next_Day_Dispatch')
+    grp.add_argument('--month', help='Parse one cached MMSDM month, e.g. 2025-06')
+    grp.add_argument('--all-cached', action='store_true',
+                     help='Parse every cached MMSDM month')
     args = parser.parse_args()
 
-    if args.month:
+    if args.days:
+        import_current(args.days)
+    elif args.month:
         import_month(args.month)
     elif args.all_cached:
         import_all_cached()
-    else:
-        parser.print_help()
-        sys.exit(1)
 
 
 if __name__ == '__main__':
