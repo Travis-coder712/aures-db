@@ -1344,13 +1344,13 @@ function PpaCisaCalculator() {
         <div>
           <p className="text-[10px] uppercase tracking-wider text-[var(--color-text-muted)] mb-2">CISA — the federal floor / ceiling CFD</p>
           <div className="grid sm:grid-cols-4 gap-x-6 gap-y-3">
-            <CalcSlider label="Floor strike" value={inputs.cisaFloor} min={30} max={100} step={1}
+            <CalcSlider label="Floor strike" value={inputs.cisaFloor} min={30} max={120} step={1}
               onChange={setCisaFloor}
               format={fmtDollarMWh} />
-            <CalcSlider label="Ceiling strike" value={inputs.cisaCeiling} min={80} max={200} step={1}
+            <CalcSlider label="Ceiling strike" value={inputs.cisaCeiling} min={80} max={220} step={1}
               onChange={setCisaCeiling}
               format={fmtDollarMWh} />
-            <CalcSlider label="Annual cap (gov payment)" value={inputs.cisaAnnualCap} min={0} max={100} step={1}
+            <CalcSlider label="Annual cap (gov payment)" value={inputs.cisaAnnualCap} min={0} max={200} step={1}
               onChange={setCisaAnnualCap}
               format={fmtDollarM} />
             <CalcSlider label="CISA tenor" value={inputs.cisaTenor} min={10} max={20} step={1}
