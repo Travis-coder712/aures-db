@@ -23,7 +23,7 @@
   "has_statcom": false,
   "has_harmonic_filter": false,
   "performance_score": 64.1,
-  "notable": "175 MW (70 × Goldwind GW121/2.5 MW PMDD direct-drive) located in the New England REZ ~20 km SW of Glen Innes, NSW. Ownership: CECEP 75% / Goldwind 25% — Goldwind originally took 100% from Epuron (Oct 2014) and sold 75% to CECEP (China Energy Conservation & Environmental Protection Group) in 2015. Goldwind EPC, Fulton Hogan BOP, hub height ~90 m, rotor diameter 121 m. Connects to TransGrid's Inverell 132 kV substation via the Sapphire–Inverell line; shares the regional MLF basin with Sapphire, Glen Innes and the wider New England wind cluster. Anchor offtake: ACT Government 100 MW renewable energy supply contract awarded 2015 ACT reverse auction at $89.50/MWh (nominal, CPI-indexed) for 20 years. Stage 2 (~119 MW) and Stage 3 (planned solar) remain in development. Project is LGC-accredited.",
+  "notable": "175 MW (70 × Goldwind GW121/2.5 MW PMDD direct-drive) located in the New England REZ ~20 km SW of Glen Innes, NSW. Ownership: CECEP 75% / Goldwind 25% — Goldwind originally took 100% from Epuron (Oct 2014) and sold 75% to CECEP (China Energy Conservation & Environmental Protection Group) in 2015. Goldwind EPC, Fulton Hogan BOP, hub height ~90 m, rotor diameter 121 m. Connects to TransGrid's Inverell 132 kV substation via the Sapphire–Inverell line; shares the regional MLF basin with Sapphire, Glen Innes and the wider New England wind cluster. Offtake structure is not publicly disclosed in detail — the project went to FID on Goldwind / CECEP balance-sheet support combined with merchant + LGC revenue; specific PPA counterparty / strike has not been confirmed publicly. Stage 2 (~119 MW) and Stage 3 (planned solar) remain in development. Project is LGC-accredited.",
   "data_confidence": "medium",
   "last_updated": "2026-05-11",
   "last_verified": "2026-05-11",
@@ -49,14 +49,6 @@
       "event_type": "ownership_change",
       "title": "Goldwind acquires development rights from Epuron",
       "detail": "Goldwind Australia acquired 100% of the development rights from Epuron, intending to anchor its first major Australian project around Goldwind's own GW121 turbine platform.",
-      "sources": []
-    },
-    {
-      "date": "2015-02",
-      "date_precision": "month",
-      "event_type": "offtake_signed",
-      "title": "ACT Government 100 MW renewable supply contract awarded",
-      "detail": "Project secured a 100 MW / 20-year renewable energy supply contract via the ACT Government's second reverse auction (large-scale renewable energy supply auction), with a feed-in tariff of $89.50/MWh (nominal, CPI-indexed). Anchor PPA enabled financial close.",
       "sources": []
     },
     {
@@ -138,14 +130,7 @@
       "grid_forming": false
     }
   ],
-  "offtakes": [
-    {
-      "party": "ACT Government",
-      "type": "PPA",
-      "term_years": 20,
-      "capacity_mw": 100
-    }
-  ],
+  "offtakes": [],
   "scheme_contracts": [],
   "cost_sources": [
     {
@@ -158,19 +143,14 @@
   ],
   "stakeholder_issues": [
     "MLF degradation: New England regional MLF basin has trended from ~0.97 (2017) toward ~0.85 (2024) as more wind capacity (Sapphire, Glen Innes, Bango cluster) connected to the same network branch — meaningfully reducing settlement revenue per MWh dispatched.",
-    "Stage 2 and Stage 3 (solar) extensions have been in development for over five years without firm financial close, partly due to grid hosting capacity limits on the local 132 kV network pending TransGrid New England REZ network upgrades."
+    "Stage 2 and Stage 3 (solar) extensions have been in development for over five years without firm financial close, partly due to grid hosting capacity limits on the local 132 kV network pending TransGrid New England REZ network upgrades.",
+    "Offtake terms not publicly disclosed — project went to FID on Goldwind / CECEP balance-sheet support; the specific PPA counterparty and strike are not in the public domain. Earlier AURES note that incorrectly cited an ACT Government PPA (which was awarded to Sapphire Wind Farm, not White Rock) has been removed."
   ],
   "sources": [
     {
       "title": "AEMO Generation Information Jan 2026",
       "url": "https://aemo.com.au/energy-systems/electricity/national-electricity-market-nem/nem-forecasting-and-planning/forecasting-and-planning-data/generation-information",
       "date": "2026-01-30",
-      "source_tier": 1
-    },
-    {
-      "title": "ACT Government — ACT Wind Auction Round 2 results (2015)",
-      "url": "https://www.environment.act.gov.au/energy/cleaner-energy",
-      "date": "2015-02-15",
       "source_tier": 1
     },
     {

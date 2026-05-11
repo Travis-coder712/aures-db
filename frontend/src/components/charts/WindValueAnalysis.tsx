@@ -3524,6 +3524,39 @@ function WindValuePdfSummary({
 
   const annualData = project.annual_data.map(a => ({ year: String(a.year), cf: a.cf_pct }))
 
+  // Curtailment / MLF proxy calculations (mirrors the live CurtailmentIndicators)
+  const annualFull = project.annual_data
+  const rampYearPdf = vs.ramp_year
+  const sortedAnnual = [...annualFull].filter(a => a.year !== rampYearPdf).sort((a, b) => a.year - b.year)
+  const cfDriftPpPdf = sortedAnnual.length >= 2 ? sortedAnnual[sortedAnnual.length - 1].cf_pct - sortedAnnual[0].cf_pct : null
+  const sortedCap = sortedAnnual.filter(a => a.capture_price != null)
+  const captureDriftPctPdf = sortedCap.length >= 2 && sortedCap[0].capture_price != null && sortedCap[0].capture_price !== 0
+    ? ((sortedCap[sortedCap.length - 1].capture_price! - sortedCap[0].capture_price!) / sortedCap[0].capture_price!) * 100
+    : null
+  const revenueImpactPerMwPerYearPdf = cfDriftPpPdf != null && vs.avg_capture_price != null
+    ? (cfDriftPpPdf / 100) * 8760 * vs.avg_capture_price
+    : null
+  const aggregateAnnualLossPdf = revenueImpactPerMwPerYearPdf != null
+    ? revenueImpactPerMwPerYearPdf * project.capacity_mw
+    : null
+  // YoY series for the small inline chart in the PDF
+  const yoySeries = (() => {
+    const out: { year: string; cfDelta: number | null; captureDelta: number | null }[] = []
+    const all = [...annualFull].sort((a, b) => a.year - b.year)
+    for (let i = 1; i < all.length; i++) {
+      const cur = all[i]
+      const prev = all[i - 1]
+      const skip = prev.year === rampYearPdf
+      out.push({
+        year: String(cur.year),
+        cfDelta: skip ? null : (cur.cf_pct - prev.cf_pct),
+        captureDelta: cur.capture_price != null && prev.capture_price != null && !skip
+          ? (cur.capture_price - prev.capture_price) : null,
+      })
+    }
+    return out
+  })()
+
   const monthlyCapture = MONTH_LABELS.map((label, i) => {
     const avg = project.monthly_averages[String(i + 1)]
     return { month: label, capture: avg?.avg_capture_price ?? null, vf: avg?.avg_value_factor ?? null }
@@ -3907,6 +3940,117 @@ function WindValuePdfSummary({
               </div>
             </div>
           ))}
+        </div>
+      </div>
+
+      {/* Curtailment & MLF indicators (proxies from existing AURES data) */}
+      <div style={{ backgroundColor: '#fff7ed', border: '1px solid #fed7aa', borderRadius: 10, padding: 14, marginBottom: 14 }}>
+        <p style={{ fontSize: 10, fontWeight: 700, color: '#9a3412', textTransform: 'uppercase', letterSpacing: '0.05em', margin: '0 0 4px 0' }}>
+          Curtailment &amp; MLF Indicators
+        </p>
+        <p style={{ fontSize: 9, color: '#475569', margin: '0 0 12px 0', lineHeight: 1.5, fontStyle: 'italic' }}>
+          AURES does not yet ingest MLF history or AEMO constraint logs directly. The indicators below use
+          year-over-year CF, capture price and value factor as proxies for declining settlement economics.
+          A persistent decline in any of these is the operational fingerprint of curtailment and/or MLF
+          degradation. The ramp-up year (if any) is excluded from drift calculations.
+        </p>
+
+        {/* Four headline indicator cards */}
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr 1fr', gap: 10, marginBottom: 12 }}>
+          {[
+            {
+              label: 'CF drift (since op.)',
+              value: cfDriftPpPdf != null ? `${cfDriftPpPdf >= 0 ? '+' : ''}${cfDriftPpPdf.toFixed(1)} pp` : '–',
+              sub: 'capacity factor trend',
+              color: cfDriftPpPdf == null ? '#475569' : cfDriftPpPdf < -2 ? '#dc2626' : cfDriftPpPdf < 0 ? '#d97706' : '#16a34a',
+            },
+            {
+              label: 'Capture price drift',
+              value: captureDriftPctPdf != null ? `${captureDriftPctPdf >= 0 ? '+' : ''}${captureDriftPctPdf.toFixed(0)}%` : '–',
+              sub: 'cumulative since first year',
+              color: captureDriftPctPdf == null ? '#475569' : captureDriftPctPdf < -10 ? '#dc2626' : captureDriftPctPdf < 0 ? '#d97706' : '#16a34a',
+            },
+            {
+              label: 'Implied rev. lost',
+              value: revenueImpactPerMwPerYearPdf != null && revenueImpactPerMwPerYearPdf < 0
+                ? `$${Math.abs(revenueImpactPerMwPerYearPdf / 1000).toFixed(1)}k/MW/yr`
+                : '–',
+              sub: 'from CF decline alone',
+              color: revenueImpactPerMwPerYearPdf != null && revenueImpactPerMwPerYearPdf < 0 ? '#dc2626' : '#475569',
+            },
+            {
+              label: 'Aggregate annual loss',
+              value: aggregateAnnualLossPdf != null && aggregateAnnualLossPdf < 0
+                ? `$${(Math.abs(aggregateAnnualLossPdf) / 1_000_000).toFixed(2)}M/yr`
+                : '–',
+              sub: `across ${project.capacity_mw} MW`,
+              color: aggregateAnnualLossPdf != null && aggregateAnnualLossPdf < 0 ? '#dc2626' : '#475569',
+            },
+          ].map((m, i) => (
+            <div key={i} style={{ backgroundColor: '#ffffff', border: '1px solid #fed7aa', borderRadius: 8, padding: '10px 12px' }}>
+              <p style={{ fontSize: 9, color: '#9a3412', textTransform: 'uppercase', letterSpacing: '0.05em', margin: 0 }}>{m.label}</p>
+              <p style={{ fontSize: 16, fontWeight: 700, color: m.color, margin: '3px 0 2px 0' }}>{m.value}</p>
+              <p style={{ fontSize: 9, color: '#64748b', margin: 0 }}>{m.sub}</p>
+            </div>
+          ))}
+        </div>
+
+        {/* YoY chart */}
+        {yoySeries.length > 0 && (
+          <div>
+            <p style={{ fontSize: 9, fontWeight: 600, color: '#9a3412', textTransform: 'uppercase', letterSpacing: '0.05em', margin: '0 0 4px 0' }}>
+              Year-over-Year Δ — CF (pp, left) and Capture Price ($/MWh, right)
+            </p>
+            <BarChart width={848} height={140} data={yoySeries} margin={{ top: 4, right: 8, bottom: 0, left: -8 }}>
+              <CartesianGrid strokeDasharray="3 3" stroke="#fed7aa" />
+              <XAxis dataKey="year" tick={{ fontSize: 9, fill: '#9a3412' }} />
+              <YAxis yAxisId="cf" tick={{ fontSize: 9, fill: '#9a3412' }} tickFormatter={v => `${v}pp`} />
+              <YAxis yAxisId="cp" orientation="right" tick={{ fontSize: 9, fill: '#9a3412' }} tickFormatter={v => `$${v}`} />
+              <ReferenceLine yAxisId="cf" y={0} stroke="#fb923c" />
+              <Bar yAxisId="cf" dataKey="cfDelta" radius={[3, 3, 0, 0]} isAnimationActive={false}>
+                {yoySeries.map((d, i) => (
+                  <Cell key={i} fill={d.cfDelta == null ? '#e5e7eb' : d.cfDelta < 0 ? '#dc2626' : '#16a34a'} />
+                ))}
+              </Bar>
+              <Bar yAxisId="cp" dataKey="captureDelta" radius={[3, 3, 0, 0]} fillOpacity={0.5} isAnimationActive={false}>
+                {yoySeries.map((d, i) => (
+                  <Cell key={i} fill={d.captureDelta == null ? '#e5e7eb' : d.captureDelta < 0 ? '#f97316' : '#84cc16'} />
+                ))}
+              </Bar>
+            </BarChart>
+          </div>
+        )}
+
+        {/* Narrative */}
+        <div style={{ marginTop: 10, paddingTop: 10, borderTop: '1px solid #fed7aa' }}>
+          <p style={{ fontSize: 9, color: '#475569', lineHeight: 1.5, margin: 0 }}>
+            <strong style={{ color: '#0f172a' }}>Reading the indicators.</strong>{' '}
+            {cfDriftPpPdf != null
+              ? `Cumulative CF drift of ${cfDriftPpPdf >= 0 ? '+' : ''}${cfDriftPpPdf.toFixed(1)} pp from the first operational year to the most recent year. ${
+                  cfDriftPpPdf < -1.5
+                    ? 'This is consistent with curtailment creep — investigate AEMO constraint logs for the project\'s connection point and recent neighbouring connections.'
+                    : cfDriftPpPdf < 0
+                    ? 'Mild drift — likely a mix of wind variability and incremental curtailment.'
+                    : 'Stable or improving — limited curtailment impact to date.'
+                }`
+              : 'Insufficient operational history to compute CF drift.'}
+            {captureDriftPctPdf != null && ` Capture price has moved ${captureDriftPctPdf >= 0 ? '+' : ''}${captureDriftPctPdf.toFixed(0)}% cumulatively over the same period; ${
+              captureDriftPctPdf < -10
+                ? 'this is a substantial cannibalisation signal.'
+                : captureDriftPctPdf < 0
+                ? 'modest decline consistent with cluster build-out.'
+                : 'broadly stable or up — partly reflecting elevated 2022-23 NEM wholesale prices.'
+            }`}
+          </p>
+          <p style={{ fontSize: 9, color: '#475569', lineHeight: 1.5, margin: '6px 0 0 0' }}>
+            <strong style={{ color: '#0f172a' }}>What to investigate further:</strong>{' '}
+            (1) AEMO Marginal Loss Factor for the connection point — has it moved by &gt;5 pp since
+            commissioning? (2) Adjacent or upstream wind/solar projects either commissioning or in
+            CIS/LTESA award — each new entrant in the same network branch amplifies cluster
+            cannibalisation and increases MLF degradation pressure. (3) Operator quarterly
+            curtailment disclosure — split into technical (AEMO constraint) vs economic
+            (negative-price avoidance).
+          </p>
         </div>
       </div>
 
