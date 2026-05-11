@@ -10,8 +10,12 @@
  * Sources cited inline at the end of each lesson; the full
  * bibliography also lives in src/data/learning-modules.ts.
  */
-import { useState, useCallback } from 'react'
+import { useState, useCallback, useMemo } from 'react'
 import { useParams, useNavigate, Link } from 'react-router-dom'
+import {
+  BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
+  Cell, ReferenceLine, Legend,
+} from 'recharts'
 
 // ============================================================
 // Progress persistence
@@ -47,13 +51,14 @@ interface LessonMeta {
 }
 
 const LESSONS: LessonMeta[] = [
-  { id: 'architecture',     number: 1, title: 'The Federal-State Architecture',         subtitle: 'Why two parallel sovereign-backed schemes',     readingTime: '8 min',  built: true },
-  { id: 'cis-mechanics',    number: 2, title: 'CIS Mechanics — Floor + Ceiling CFD',    subtitle: 'How the CISA actually pays',                    readingTime: '10 min', built: true },
-  { id: 'ltesa-mechanics',  number: 3, title: 'LTESA Mechanics — Fixed-Price CFD',      subtitle: 'How the NSW Consumer Trustee deal works',       readingTime: '8 min',  built: true },
-  { id: 'rounds',           number: 4, title: 'Round-by-Round — What Changed and Why',  subtitle: 'Pilot through Tender 6 and LTESA R1–R6',        readingTime: '12 min', built: true },
-  { id: 'merit-criteria',   number: 5, title: 'Merit Criteria — and What They Cost',    subtitle: 'The scoring matrix and its hidden $/MWh',       readingTime: '10 min', built: true },
-  { id: 'finance-strategy', number: 6, title: 'Bidding Strategy & Project Financing',   subtitle: 'How CISA changes the equity model',             readingTime: '10 min', built: true },
-  { id: 'outcomes',         number: 7, title: 'Outcomes — Has It Worked?',              subtitle: 'AER, FNCEN, AURES tracker, the 2026-27 inflection', readingTime: '8 min',  built: true },
+  { id: 'architecture',         number: 1, title: 'The Federal-State Architecture',         subtitle: 'Why two parallel sovereign-backed schemes',     readingTime: '8 min',  built: true },
+  { id: 'cis-mechanics',        number: 2, title: 'CIS Mechanics — Floor + Ceiling CFD',    subtitle: 'How the CISA actually pays',                    readingTime: '10 min', built: true },
+  { id: 'ppa-cisa-calculator',  number: 3, title: 'PPA × CISA Interactive Calculator',      subtitle: 'Where the dollars come from across spot scenarios — and all the interactions to watch', readingTime: '14 min', built: true },
+  { id: 'ltesa-mechanics',      number: 4, title: 'LTESA Mechanics — Fixed-Price CFD',      subtitle: 'How the NSW Consumer Trustee deal works',       readingTime: '8 min',  built: true },
+  { id: 'rounds',               number: 5, title: 'Round-by-Round — What Changed and Why',  subtitle: 'Pilot through Tender 6 and LTESA R1–R6',        readingTime: '12 min', built: true },
+  { id: 'merit-criteria',       number: 6, title: 'Merit Criteria — and What They Cost',    subtitle: 'The scoring matrix and its hidden $/MWh',       readingTime: '10 min', built: true },
+  { id: 'finance-strategy',     number: 7, title: 'Bidding Strategy & Project Financing',   subtitle: 'How CISA changes the equity model',             readingTime: '10 min', built: true },
+  { id: 'outcomes',             number: 8, title: 'Outcomes — Has It Worked?',              subtitle: 'AER, FNCEN, AURES tracker, the 2026-27 inflection', readingTime: '8 min',  built: true },
 ]
 
 // ============================================================
@@ -1101,6 +1106,636 @@ function Lesson7() {
 }
 
 // ============================================================
+// Lesson 8 (display position 3) — PPA × CISA Interactive Calculator
+// ============================================================
+
+/**
+ * Interactive calculator for showing how a CISA settles against a
+ * wind farm's actual realised revenue (PPA-covered MWh at strike +
+ * merchant MWh at spot). Runs 8 spot-price scenarios in parallel and
+ * decomposes each annual revenue stack into:
+ *   - PPA revenue
+ *   - Merchant revenue (positive or negative)
+ *   - CISA floor top-up (subject to annual cap)
+ *   - CISA ceiling clawback
+ * Followed by a comprehensive interactions checklist.
+ */
+
+interface CalcInputs {
+  capacityMw: number
+  capacityFactor: number     // 0-1
+  ppaStrike: number          // $/MWh
+  ppaCoverage: number        // 0-1
+  ppaTenor: number           // years
+  cisaFloor: number          // $/MWh
+  cisaCeiling: number        // $/MWh
+  cisaAnnualCap: number      // $M/yr
+  cisaTenor: number          // years
+  curtailNegative: boolean   // wind farm curtails when spot < $0?
+}
+
+interface ScenarioResult {
+  spotPrice: number
+  generationMwh: number
+  ppaRevenue: number
+  merchantRevenue: number
+  preCisaRevenue: number
+  preCisaPerMwh: number
+  cisaTopUpRaw: number       // uncapped — for showing where cap bites
+  cisaTopUp: number          // after cap applied
+  cisaClawback: number       // negative — paid to government
+  totalRevenue: number
+  effectivePerMwh: number
+  capBites: boolean
+}
+
+function calcScenario(inputs: CalcInputs, spotPrice: number): ScenarioResult {
+  // Annual generation = MW × 8760 × CF
+  const annualGeneration = inputs.capacityMw * 8760 * inputs.capacityFactor
+  // PPA / merchant split
+  const ppaMwh = annualGeneration * inputs.ppaCoverage
+  // For curtailment behaviour: if spot < 0 and project curtails, merchant volume drops to 0
+  // (rough proxy — assume curtailment applies pro-rata to ~10% of hours when curtailing)
+  const curtailmentFraction = (inputs.curtailNegative && spotPrice < 0) ? 0.10 : 0
+  const merchantMwh = annualGeneration * (1 - inputs.ppaCoverage) * (1 - curtailmentFraction)
+  // Effective annual generation for CISA settlement (account for curtailed MWh)
+  const effectiveGeneration = ppaMwh + merchantMwh
+
+  // Energy revenue
+  const ppaRevenue = ppaMwh * inputs.ppaStrike            // always positive
+  const merchantRevenue = merchantMwh * spotPrice          // positive or negative
+
+  const preCisaRevenue = ppaRevenue + merchantRevenue
+  const preCisaPerMwh = effectiveGeneration > 0 ? preCisaRevenue / effectiveGeneration : 0
+
+  // CISA settlement — applied to effective generation
+  // Floor top-up: gov pays when effective $/MWh below floor
+  // Ceiling clawback: project pays when effective $/MWh above ceiling
+  let cisaTopUpRaw = 0
+  let cisaClawback = 0
+  if (preCisaPerMwh < inputs.cisaFloor) {
+    cisaTopUpRaw = (inputs.cisaFloor - preCisaPerMwh) * effectiveGeneration
+  } else if (preCisaPerMwh > inputs.cisaCeiling) {
+    cisaClawback = (preCisaPerMwh - inputs.cisaCeiling) * effectiveGeneration
+  }
+  // Apply annual cap (positive payments capped; clawback uncapped)
+  const cap = inputs.cisaAnnualCap * 1_000_000
+  const cisaTopUp = Math.min(cisaTopUpRaw, cap)
+  const capBites = cisaTopUpRaw > cap
+
+  const totalRevenue = preCisaRevenue + cisaTopUp - cisaClawback
+  const effectivePerMwh = effectiveGeneration > 0 ? totalRevenue / effectiveGeneration : 0
+
+  return {
+    spotPrice,
+    generationMwh: effectiveGeneration,
+    ppaRevenue,
+    merchantRevenue,
+    preCisaRevenue,
+    preCisaPerMwh,
+    cisaTopUpRaw,
+    cisaTopUp,
+    cisaClawback: -cisaClawback,  // negative for stacking
+    totalRevenue,
+    effectivePerMwh,
+    capBites,
+  }
+}
+
+function PpaCisaCalculator() {
+  const [inputs, setInputs] = useState<CalcInputs>({
+    capacityMw: 200,
+    capacityFactor: 0.38,
+    ppaStrike: 70,
+    ppaCoverage: 0.50,
+    ppaTenor: 12,
+    cisaFloor: 55,
+    cisaCeiling: 130,
+    cisaAnnualCap: 30,
+    cisaTenor: 15,
+    curtailNegative: true,
+  })
+
+  // 8 spot price scenarios spanning the realistic range
+  const spotScenarios = useMemo(() => [-20, 10, 30, 50, 70, 100, 130, 160], [])
+
+  const results = useMemo(() => spotScenarios.map(s => calcScenario(inputs, s)), [inputs, spotScenarios])
+
+  // Format $M from $ value
+  const m = (v: number) => (v / 1_000_000).toFixed(1)
+
+  // Chart data — convert to $M for readability
+  const chartData = results.map(r => ({
+    spot: `$${r.spotPrice}`,
+    PPA: Math.round(r.ppaRevenue / 1_000_000 * 10) / 10,
+    Merchant: Math.round(r.merchantRevenue / 1_000_000 * 10) / 10,
+    'CISA top-up': Math.round(r.cisaTopUp / 1_000_000 * 10) / 10,
+    'CISA clawback': Math.round(r.cisaClawback / 1_000_000 * 10) / 10,
+    Total: Math.round(r.totalRevenue / 1_000_000 * 10) / 10,
+    EffectivePerMwh: Math.round(r.effectivePerMwh),
+    CapBites: r.capBites,
+  }))
+
+  // Annual revenue at PPA + CISA only (no merchant), for reference line interpretation
+  // Generation calc once
+  const annualGen = inputs.capacityMw * 8760 * inputs.capacityFactor
+
+  // Slider component (inline)
+  const Slider = ({ label, value, min, max, step, onChange, format }: {
+    label: string; value: number; min: number; max: number; step: number;
+    onChange: (v: number) => void; format: (v: number) => string;
+  }) => (
+    <div className="space-y-1">
+      <div className="flex items-center justify-between text-xs">
+        <span className="text-[var(--color-text-muted)]">{label}</span>
+        <span className="font-mono font-semibold text-[var(--color-text)]">{format(value)}</span>
+      </div>
+      <input
+        type="range"
+        min={min}
+        max={max}
+        step={step}
+        value={value}
+        onChange={(e) => onChange(parseFloat(e.target.value))}
+        className="w-full h-1.5 bg-[var(--color-bg-elevated)] rounded-lg appearance-none cursor-pointer accent-[var(--color-primary)]"
+      />
+    </div>
+  )
+
+  return (
+    <div className="my-6 space-y-5">
+      {/* Inputs */}
+      <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl p-5 space-y-5">
+        <p className="text-xs font-bold uppercase tracking-wider text-[var(--color-text-muted)]">
+          Inputs · adjust to see the revenue stack change
+        </p>
+
+        <div>
+          <p className="text-[10px] uppercase tracking-wider text-[var(--color-text-muted)] mb-2">Project</p>
+          <div className="grid sm:grid-cols-2 gap-x-6 gap-y-3">
+            <Slider label="Capacity" value={inputs.capacityMw} min={50} max={500} step={10}
+              onChange={(v) => setInputs({ ...inputs, capacityMw: v })}
+              format={(v) => `${v} MW`} />
+            <Slider label="Capacity factor (wind)" value={inputs.capacityFactor} min={0.20} max={0.50} step={0.01}
+              onChange={(v) => setInputs({ ...inputs, capacityFactor: v })}
+              format={(v) => `${(v * 100).toFixed(0)}%`} />
+          </div>
+          <p className="text-[10px] text-[var(--color-text-muted)] mt-2 italic">
+            Annual generation = {(annualGen / 1000).toFixed(0)} GWh
+          </p>
+        </div>
+
+        <div>
+          <p className="text-[10px] uppercase tracking-wider text-[var(--color-text-muted)] mb-2">PPA — the arms-length offtake</p>
+          <div className="grid sm:grid-cols-3 gap-x-6 gap-y-3">
+            <Slider label="Strike price" value={inputs.ppaStrike} min={40} max={120} step={1}
+              onChange={(v) => setInputs({ ...inputs, ppaStrike: v })}
+              format={(v) => `$${v}/MWh`} />
+            <Slider label="Volume coverage" value={inputs.ppaCoverage} min={0} max={1} step={0.05}
+              onChange={(v) => setInputs({ ...inputs, ppaCoverage: v })}
+              format={(v) => `${(v * 100).toFixed(0)}%`} />
+            <Slider label="Tenor" value={inputs.ppaTenor} min={5} max={25} step={1}
+              onChange={(v) => setInputs({ ...inputs, ppaTenor: v })}
+              format={(v) => `${v} yrs`} />
+          </div>
+        </div>
+
+        <div>
+          <p className="text-[10px] uppercase tracking-wider text-[var(--color-text-muted)] mb-2">CISA — the federal floor / ceiling CFD</p>
+          <div className="grid sm:grid-cols-4 gap-x-6 gap-y-3">
+            <Slider label="Floor strike" value={inputs.cisaFloor} min={30} max={100} step={1}
+              onChange={(v) => setInputs({ ...inputs, cisaFloor: v })}
+              format={(v) => `$${v}/MWh`} />
+            <Slider label="Ceiling strike" value={inputs.cisaCeiling} min={80} max={200} step={1}
+              onChange={(v) => setInputs({ ...inputs, cisaCeiling: v })}
+              format={(v) => `$${v}/MWh`} />
+            <Slider label="Annual cap (gov payment)" value={inputs.cisaAnnualCap} min={0} max={100} step={1}
+              onChange={(v) => setInputs({ ...inputs, cisaAnnualCap: v })}
+              format={(v) => `$${v}M`} />
+            <Slider label="CISA tenor" value={inputs.cisaTenor} min={10} max={20} step={1}
+              onChange={(v) => setInputs({ ...inputs, cisaTenor: v })}
+              format={(v) => `${v} yrs`} />
+          </div>
+        </div>
+
+        <div className="flex items-center gap-2 text-xs">
+          <input
+            type="checkbox"
+            id="curtail"
+            checked={inputs.curtailNegative}
+            onChange={(e) => setInputs({ ...inputs, curtailNegative: e.target.checked })}
+            className="cursor-pointer accent-[var(--color-primary)]"
+          />
+          <label htmlFor="curtail" className="text-[var(--color-text-muted)] cursor-pointer">
+            Project curtails on negative-price hours (no merchant generation when spot {'<'} $0)
+          </label>
+        </div>
+      </div>
+
+      {/* Chart */}
+      <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl p-5">
+        <p className="text-xs font-bold uppercase tracking-wider text-[var(--color-text-muted)] mb-1">
+          Where the dollars come from — annual revenue by source, across spot-price scenarios
+        </p>
+        <p className="text-[10px] text-[var(--color-text-muted)] mb-4">
+          Stacked bars decompose each annual revenue scenario. Dashed lines show floor (${inputs.cisaFloor}/MWh)
+          and ceiling (${inputs.cisaCeiling}/MWh). Yellow cap warning appears when the CISA annual cap binds.
+        </p>
+        <ResponsiveContainer width="100%" height={340}>
+          <BarChart data={chartData} margin={{ top: 8, right: 12, left: 0, bottom: 8 }} stackOffset="sign">
+            <CartesianGrid strokeDasharray="3 3" stroke="rgba(148,163,184,0.15)" />
+            <XAxis dataKey="spot" tick={{ fontSize: 11, fill: 'rgb(148,163,184)' }}
+              label={{ value: 'Annual avg spot capture price ($/MWh)', position: 'bottom', offset: -2, fill: 'rgb(148,163,184)', fontSize: 11 }} />
+            <YAxis tick={{ fontSize: 11, fill: 'rgb(148,163,184)' }}
+              tickFormatter={(v) => `$${v}M`}
+              label={{ value: 'Annual revenue', angle: -90, position: 'insideLeft', fill: 'rgb(148,163,184)', fontSize: 11 }} />
+            <Tooltip
+              contentStyle={{ backgroundColor: 'rgb(15,23,42)', border: '1px solid rgb(51,65,85)', borderRadius: 8, fontSize: 11 }}
+              labelStyle={{ color: 'rgb(241,245,249)', fontWeight: 600 }}
+              formatter={(value, name) => [`$${Number(value).toFixed(1)}M`, String(name)]} />
+            <Legend wrapperStyle={{ fontSize: 11, paddingTop: 8 }} />
+            <ReferenceLine y={0} stroke="rgb(148,163,184)" />
+            <Bar dataKey="PPA"            stackId="a" fill="#3b82f6" />
+            <Bar dataKey="Merchant"       stackId="a" fill="#22c55e">
+              {chartData.map((d, i) => (
+                <Cell key={i} fill={d.Merchant >= 0 ? '#22c55e' : '#ef4444'} />
+              ))}
+            </Bar>
+            <Bar dataKey="CISA top-up"    stackId="a" fill="#a855f7" />
+            <Bar dataKey="CISA clawback"  stackId="a" fill="#f97316" />
+          </BarChart>
+        </ResponsiveContainer>
+
+        {/* Per-scenario summary table */}
+        <div className="overflow-x-auto mt-4">
+          <table className="w-full text-xs border-t border-[var(--color-border)]">
+            <thead>
+              <tr className="text-[var(--color-text-muted)]">
+                <th className="text-left py-2 pr-3 font-semibold uppercase tracking-wider text-[10px]">Spot</th>
+                <th className="text-right py-2 px-2 font-semibold uppercase tracking-wider text-[10px]">PPA</th>
+                <th className="text-right py-2 px-2 font-semibold uppercase tracking-wider text-[10px]">Merchant</th>
+                <th className="text-right py-2 px-2 font-semibold uppercase tracking-wider text-[10px]">CISA</th>
+                <th className="text-right py-2 px-2 font-semibold uppercase tracking-wider text-[10px]">Total</th>
+                <th className="text-right py-2 pl-2 font-semibold uppercase tracking-wider text-[10px]">Eff. $/MWh</th>
+              </tr>
+            </thead>
+            <tbody>
+              {results.map((r, i) => {
+                const cisaNet = r.cisaTopUp + r.cisaClawback // clawback is already negative
+                return (
+                  <tr key={i} className="border-t border-[var(--color-border)] hover:bg-[var(--color-bg-elevated)]/30">
+                    <td className="py-2 pr-3 font-mono text-[var(--color-text)]">${r.spotPrice}/MWh</td>
+                    <td className="py-2 px-2 text-right font-mono text-[var(--color-text-muted)]">${m(r.ppaRevenue)}M</td>
+                    <td className={`py-2 px-2 text-right font-mono ${r.merchantRevenue >= 0 ? 'text-[var(--color-text-muted)]' : 'text-red-400'}`}>
+                      {r.merchantRevenue >= 0 ? '' : '−'}${Math.abs(parseFloat(m(r.merchantRevenue)))}M
+                    </td>
+                    <td className={`py-2 px-2 text-right font-mono ${cisaNet >= 0 ? 'text-purple-400' : 'text-orange-400'}`}>
+                      {cisaNet >= 0 ? '+' : '−'}${Math.abs(parseFloat(m(Math.abs(cisaNet))))}M
+                      {r.capBites && <span className="ml-1 text-amber-400" title="Annual cap binds — government payment limited">!</span>}
+                    </td>
+                    <td className="py-2 px-2 text-right font-mono font-semibold text-[var(--color-text)]">${m(r.totalRevenue)}M</td>
+                    <td className="py-2 pl-2 text-right font-mono text-[var(--color-text)]">${r.effectivePerMwh.toFixed(0)}</td>
+                  </tr>
+                )
+              })}
+            </tbody>
+          </table>
+          {results.some(r => r.capBites) && (
+            <p className="text-[10px] text-amber-400 mt-2 italic">
+              <span className="font-bold">!</span> Annual cap binds in this scenario — government would owe more
+              than the cap permits. The project absorbs the un-paid portion ($
+              {m(results.find(r => r.capBites)!.cisaTopUpRaw - results.find(r => r.capBites)!.cisaTopUp)}M in the
+              binding scenario).
+            </p>
+          )}
+        </div>
+      </div>
+
+      {/* Reading-the-chart guide */}
+      <div className="bg-blue-500/10 border border-blue-500/30 rounded-xl p-4">
+        <p className="text-[10px] font-semibold uppercase tracking-wider text-blue-400 mb-2">Reading the chart</p>
+        <ul className="text-sm text-[var(--color-text)] leading-relaxed list-disc list-inside space-y-1">
+          <li><span className="font-mono text-blue-400">Blue</span> = PPA revenue. Flat across scenarios because PPA strike doesn't move with spot.</li>
+          <li><span className="font-mono text-emerald-400">Green</span> = merchant revenue (spot &gt; 0). Slopes upward with spot price.</li>
+          <li><span className="font-mono text-red-400">Red</span> = merchant LOSSES (spot &lt; 0). Only present in negative-spot scenarios when the project does not curtail.</li>
+          <li><span className="font-mono text-purple-400">Purple</span> = CISA floor top-up. Appears when realised $/MWh falls below floor.</li>
+          <li><span className="font-mono text-orange-400">Orange</span> = CISA ceiling clawback. Negative bar — project pays gov when realised $/MWh exceeds ceiling.</li>
+        </ul>
+      </div>
+    </div>
+  )
+}
+
+// ============================================================
+// Lesson 8 (display Lesson 3) — the interactive lesson body
+// ============================================================
+
+function Lesson8() {
+  return (
+    <div>
+      <H2>How a PPA and a CISA interact</H2>
+      <P>
+        Most CIS-contracted projects in the NEM also have a corporate or gentailer PPA over part of their
+        output. The two contracts settle in different ways — but they interact, because the CISA
+        settles on the project's <Em>realised</Em> revenue per MWh, not a hypothetical merchant-only
+        scenario. Understanding the interaction is essential for both bid design (what CISA strike to
+        bid, given an existing PPA structure) and for ongoing portfolio management (how the two
+        contracts behave through wholesale-price cycles).
+      </P>
+
+      <H2>The model behind this calculator</H2>
+      <P>
+        The calculator models a wind farm with two revenue contracts running in parallel:
+      </P>
+      <ul className="list-disc list-inside text-sm text-[var(--color-text-muted)] space-y-1.5 mb-3 ml-2">
+        <li>An <Em>arms-length PPA</Em> covering a defined % of generation at a fixed $/MWh strike.
+          The PPA buyer pays the strike regardless of where spot prices land. The volume not covered
+          by the PPA flows to the merchant market at the prevailing spot price.</li>
+        <li>A <Em>CISA</Em> applying to the project's full generation as a two-way floor + ceiling
+          CFD: if the project's effective realised price (PPA + merchant blend) is below the floor,
+          government tops up; if it's above the ceiling, the project pays government back. Top-ups
+          are subject to an annual cap; clawbacks are uncapped.</li>
+      </ul>
+      <P>
+        The output below shows annual revenue across eight spot-price scenarios — from heavily
+        negative ($-20/MWh) through to scarcity ($160/MWh). For each scenario, the stacked bar
+        decomposes revenue into PPA, merchant, CISA top-up, and CISA clawback.
+      </P>
+
+      <Callout type="info">
+        <Em>Simplifications.</Em> The calculator treats spot price as an annual average capture price
+        for the project. Real wind farms see substantial intra-year variation; the calculator
+        captures the headline economics rather than the period-by-period settlement detail. It also
+        assumes the CISA settles on realised revenue (PPA + merchant) — actual contracts sometimes
+        settle on the regional reference price gross. Treat the calculator as a strategy tool, not a
+        settlement engine.
+      </Callout>
+
+      <PpaCisaCalculator />
+
+      <H2>Critical interactions — what to watch</H2>
+      <P>
+        Beyond the headline price levers, a dozen secondary interactions shape how PPA and CISA
+        actually behave together. The list below is the comprehensive checklist for any project
+        team designing or assessing a contract stack.
+      </P>
+
+      <H2>1. Volume / offtake amount alignment</H2>
+      <P>
+        The PPA covers a percentage of generation; the CISA covers all of it. The interaction matters:
+      </P>
+      <ul className="list-disc list-inside text-sm text-[var(--color-text-muted)] space-y-1.5 mb-3 ml-2">
+        <li><Em>Low PPA coverage (e.g. 30%)</Em> — most generation is merchant; CISA floor catches
+          downside; the project is highly exposed to merchant-price upside (CISA ceiling caps it).</li>
+        <li><Em>High PPA coverage (e.g. 90%)</Em> — most generation is at the PPA strike; if PPA
+          strike is above CISA floor, the CISA rarely triggers floor make-up. If PPA strike is below
+          CISA floor, the project effectively gets the higher of (PPA strike) and (CISA floor) for
+          the PPA portion via the CISA mechanism.</li>
+        <li><Em>100% PPA coverage</Em> — there is no merchant. The CISA only triggers if PPA strike
+          itself is below floor or above ceiling. For all practical purposes, the project's revenue
+          is just the PPA strike.</li>
+      </ul>
+
+      <H2>2. Tenor mismatch — what happens at PPA or CISA expiry</H2>
+      <P>
+        PPAs in Australia typically run 10-15 years; CISAs are 12-15 years for CIS (and 20 years for
+        LTESA). When one expires before the other:
+      </P>
+      <ul className="list-disc list-inside text-sm text-[var(--color-text-muted)] space-y-1.5 mb-3 ml-2">
+        <li><Em>PPA ends first (year 10), CISA continues (year 11-15):</Em> all generation becomes
+          merchant; CISA floor protects downside; the project's residual revenue is closer to the
+          CISA floor.</li>
+        <li><Em>CISA ends first (year 12), PPA continues (year 13-15):</Em> the PPA-covered portion
+          is unchanged; merchant portion is fully exposed; project IRR sensitivity to spot prices
+          rises substantially in the post-CISA period.</li>
+        <li><Em>Both end together:</Em> the project enters a fully merchant phase with all-spot
+          exposure. Bankability of the post-PPA-post-CISA period is typically very poor.</li>
+      </ul>
+
+      <H2>3. $$ below $0 — the negative-price problem</H2>
+      <P>
+        This is one of the most important interactions and most commonly overlooked. When spot
+        prices go negative (NSW solar midday hours, VIC oversupply periods), the merchant portion of
+        the project's generation costs money to dispatch. The interactions:
+      </P>
+      <ul className="list-disc list-inside text-sm text-[var(--color-text-muted)] space-y-1.5 mb-3 ml-2">
+        <li><Em>Will the PPA buyer pay during negative-priced hours?</Em> Most PPAs explicitly
+          require the buyer to pay strike regardless of spot — but some have "negative-price
+          carve-outs" where the project absorbs losses below specified thresholds (e.g. spot
+          below −$50/MWh).</li>
+        <li><Em>Will the CISA settle on negative-priced generation?</Em> Most CIS contracts have a
+          "floor below floor" provision — the floor does not extend infinitely down. Typically the
+          CISA only pays make-up if realised price is between $0 and the floor; below $0 the
+          project bears the losses.</li>
+        <li><Em>Does the project curtail?</Em> If the PPA allows curtailment during negative
+          prices, the project can simply turn off — avoiding the merchant loss. The CISA does not
+          deem the curtailed energy (since it isn't generated).</li>
+        <li><Em>Practical impact:</Em> a wind farm with high PPA coverage and a curtailment-friendly
+          PPA is largely insulated from negative prices. A wind farm with low PPA coverage and a
+          "must run" PPA exposed to negative prices can lose meaningful revenue. The calculator
+          above toggles this with the "Project curtails on negative-price hours" checkbox.</li>
+      </ul>
+
+      <H2>4. CISA annual cap — when government's wallet has a floor of its own</H2>
+      <P>
+        The CISA annual cap is the maximum amount the government will pay in any one financial year.
+        It's set per project in the bid evaluation, and it bites in extreme low-price scenarios:
+      </P>
+      <ul className="list-disc list-inside text-sm text-[var(--color-text-muted)] space-y-1.5 mb-3 ml-2">
+        <li><Em>Typical cap sizes:</Em> $20-50M for a 200-300 MW project; scales roughly with
+          generation volume × (floor − expected merchant price).</li>
+        <li><Em>When the cap binds:</Em> if realised price collapses far below the floor (e.g.
+          high-renewables glut with negative midday prices and weak evenings), the make-up payment
+          can exceed the cap. The project absorbs the shortfall — a partial uncovered downside
+          even with a floor.</li>
+        <li><Em>Cap design implications:</Em> bidders propose the cap as part of the CISA terms.
+          Higher cap = more downside protection but more competitive pressure on the floor strike
+          (lower) and may rank lower on the merit criteria.</li>
+        <li><Em>Worked illustration:</Em> the calculator's yellow exclamation indicator shows when
+          the cap binds in a scenario. Adjust the floor + cap sliders to see how the cap creates a
+          "deductible" effect at very low spot prices.</li>
+      </ul>
+
+      <H2>5. Aggregation period — daily, monthly, annual</H2>
+      <P>
+        The settlement frequency of the CISA matters. Common variants:
+      </P>
+      <ul className="list-disc list-inside text-sm text-[var(--color-text-muted)] space-y-1.5 mb-3 ml-2">
+        <li><Em>Annual aggregation</Em> — average price for the year is computed; settlement is
+          single annual amount. Smooths out within-year variability but defers cash to year-end.</li>
+        <li><Em>Monthly aggregation</Em> — settlement each month based on that month's average.
+          Better cash flow timing for the project; more administrative work.</li>
+        <li><Em>Interval-level settlement</Em> — settlement per 30-minute period (matches AEMO).
+          Most granular; treats each interval independently; can result in CISA paying make-up for
+          some intervals while clawing back from others in the same day.</li>
+      </ul>
+      <P>
+        For CIS, the contract typically settles annually with monthly progress reporting; LTESA
+        settles monthly. The aggregation period affects timing of cash flows but rarely changes the
+        total amount settled across the year.
+      </P>
+
+      <H2>6. The "reference price" choice</H2>
+      <P>
+        Critical fine print: what spot price does the CISA settle against?
+      </P>
+      <ul className="list-disc list-inside text-sm text-[var(--color-text-muted)] space-y-1.5 mb-3 ml-2">
+        <li><Em>Regional reference price (RRP)</Em> — the AEMO regional spot price (e.g. Sydney
+          West for NSW). This is the most common CISA reference. Means the project's actual
+          capture price (which can be lower than RRP due to value-factor erosion) is NOT what
+          settles. A project with capture price $50 and RRP $65 has the CISA based on $65 — even
+          though it actually earned $50.</li>
+        <li><Em>Project capture price</Em> — some contracts settle on actual realised revenue.
+          More project-friendly but less common.</li>
+        <li><Em>Hybrid reference</Em> — a mix; e.g. settlement on RRP × technology-specific value
+          factor adjustment.</li>
+      </ul>
+      <P>
+        For wind farms with value factors of 0.85-0.95 (typical), the choice of reference can move
+        the effective CISA payment by 5-15% per MWh. This is one of the most negotiated single
+        clauses in a CISA term sheet.
+      </P>
+
+      <H2>7. MLF treatment — gross or net of marginal loss factor</H2>
+      <P>
+        Closely related to the reference price question:
+      </P>
+      <ul className="list-disc list-inside text-sm text-[var(--color-text-muted)] space-y-1.5 mb-3 ml-2">
+        <li><Em>Settlement gross of MLF</Em> — CISA pays as if MLF were 1.0. The project's actual
+          MLF (e.g. 0.92) reduces the realised income on each MWh, but the CISA still settles on
+          the gross. Protects the project from MLF degradation risk.</li>
+        <li><Em>Settlement net of MLF</Em> — CISA pays on actual settlement income (× MLF). The
+          project absorbs MLF degradation through the life of the contract. Lower government cost
+          but higher project risk.</li>
+      </ul>
+      <P>
+        Most CIS contracts settle gross of MLF — a deliberate decision to insulate developers from
+        the worst-case MLF erosion in declining REZ regions. Worth verifying for any specific
+        contract.
+      </P>
+
+      <H2>8. Curtailment allocation — technical vs economic</H2>
+      <P>
+        Curtailment occurs when AEMO directs reduced output (technical) or when the project chooses
+        to reduce output to avoid negative prices (economic). The CISA treatment of each matters:
+      </P>
+      <ul className="list-disc list-inside text-sm text-[var(--color-text-muted)] space-y-1.5 mb-3 ml-2">
+        <li><Em>Technical curtailment</Em> — most CISAs deem the project to have generated the
+          curtailed energy (so the CISA still pays make-up against the deemed MWh). Protects
+          project against operator-imposed losses.</li>
+        <li><Em>Economic curtailment</Em> — most CISAs do NOT deem economic curtailment (since the
+          project chose to reduce output to manage its own economics). Project absorbs the
+          opportunity cost.</li>
+        <li><Em>PPA curtailment treatment</Em> — varies by PPA. Most modern PPAs deem technical
+          curtailment for the PPA-covered MWh as well; some require pro-rata reduction.</li>
+      </ul>
+
+      <H2>9. LGC treatment and bundling</H2>
+      <P>
+        The CISA does not typically pay for LGCs — LGCs are a separate revenue stream worth $5-15/MWh
+        in 2026 (down from $90/MWh at 2017 peak). Most CIS contracts:
+      </P>
+      <ul className="list-disc list-inside text-sm text-[var(--color-text-muted)] space-y-1.5 mb-3 ml-2">
+        <li>Leave LGCs to the project — they can be sold to the spot LGC market or bundled into a
+          corporate PPA.</li>
+        <li>If the PPA bundles LGCs (some do, some strip), the LGC revenue is captured at the PPA
+          strike implicitly.</li>
+        <li>Verify in any term sheet: who gets the LGCs, and at what price.</li>
+      </ul>
+
+      <H2>10. Annual cap interaction with merchant period</H2>
+      <P>
+        A subtle interaction: the annual cap is sized in dollars, but the make-up requirement varies
+        by generation volume and price gap. In years where the project generates more (high wind
+        year) <em>and</em> spot prices are low (oversupply), the un-capped make-up requirement can
+        be much higher than the cap. The CISA effectively has a deductible in extreme scenarios.
+      </P>
+      <ul className="list-disc list-inside text-sm text-[var(--color-text-muted)] space-y-1.5 mb-3 ml-2">
+        <li>Use the calculator above to test: with high CF (45%) and low spot (-$20/MWh), does the
+          cap bind?</li>
+        <li>Project teams should size their downside reserves based on the worst-case-uncovered-
+          shortfall, not just the floor strike.</li>
+      </ul>
+
+      <H2>11. Force majeure, change in law, and contract event triggers</H2>
+      <P>
+        Standard contract events affect both PPA and CISA. Interactions to verify:
+      </P>
+      <ul className="list-disc list-inside text-sm text-[var(--color-text-muted)] space-y-1.5 mb-3 ml-2">
+        <li><Em>Cyclone or major weather event</Em> — typically excused under both PPA and CISA;
+          the project pays no penalty for undelivered energy.</li>
+        <li><Em>Regulatory change</Em> — most PPAs and CISAs have change-in-law clauses but with
+          different triggers and remedies. A change benefiting the project (e.g. new tax credit)
+          may flow through differently in each contract.</li>
+        <li><Em>Market design change</Em> — moves like the AEMC's 5-minute settlement rule
+          implementation can trigger renegotiation clauses in some contracts.</li>
+      </ul>
+
+      <H2>12. Stacking with multiple PPAs or sleeved arrangements</H2>
+      <P>
+        Some projects have multiple PPA tranches (e.g. 30% to one corporate, 30% to another, 40%
+        merchant). The CISA settles on the blended realised price across all tranches. This works
+        cleanly when:
+      </P>
+      <ul className="list-disc list-inside text-sm text-[var(--color-text-muted)] space-y-1.5 mb-3 ml-2">
+        <li>All PPA settlement is documented and consistent</li>
+        <li>The blended-price calculation is unambiguous</li>
+        <li>The project doesn't try to use a "sleeved" PPA structure that obscures the actual
+          revenue (which can cause CISA settlement disputes)</li>
+      </ul>
+
+      <H2>13. The bankability question</H2>
+      <P>
+        Lenders look at the combined PPA + CISA when sizing debt:
+      </P>
+      <ul className="list-disc list-inside text-sm text-[var(--color-text-muted)] space-y-1.5 mb-3 ml-2">
+        <li><Em>PPA tenor &gt; debt tenor</Em> — preferred. Means PPA covers the entire debt
+          amortisation period.</li>
+        <li><Em>CISA tenor &gt; PPA tenor</Em> — even better. Provides revenue protection in
+          the post-PPA period for the tail of debt amortisation.</li>
+        <li><Em>CISA floor &lt; PPA strike</Em> — preferred. PPA is the primary revenue; CISA is
+          backstop.</li>
+        <li><Em>CISA cap appropriate for project size</Em> — cap should cover worst-case make-up
+          on at least 80-90% of P90 generation × (floor − P90 spot price).</li>
+      </ul>
+
+      <H2>14. Strategic considerations at bid time</H2>
+      <P>
+        When designing your CISA bid (covered in Lesson 7), the PPA already-in-place shapes:
+      </P>
+      <ul className="list-disc list-inside text-sm text-[var(--color-text-muted)] space-y-1.5 mb-3 ml-2">
+        <li><Em>How low to bid the floor</Em> — if a strong PPA already covers most generation at
+          a price above expected merchant, the floor can be lower (less likely to trigger).</li>
+        <li><Em>How high to bid the ceiling</Em> — if the project wants to retain upside, ceiling
+          should be high. But high ceiling reduces merit-criteria score.</li>
+        <li><Em>What annual cap to propose</Em> — higher cap = better protection but lower merit
+          score. Calibrate to the worst-case downside the project can survive.</li>
+        <li><Em>How to integrate with existing offtake</Em> — some bidders structure the CISA
+          settlement reference to align with their PPA settlement, minimising basis risk between
+          the two contracts.</li>
+      </ul>
+
+      <Callout type="key">
+        The PPA × CISA combination is the most common modern contracting structure for Australian
+        renewable projects. The calculator above shows the headline economics; the 14-point
+        checklist captures the contractual interactions that determine whether the structure
+        actually delivers the expected outcomes through real market scenarios. Before signing
+        either contract, project teams should pressure-test each clause against the
+        contract-event scenarios — particularly negative prices, MLF degradation,
+        force majeure, and tenor mismatches.
+      </Callout>
+
+      <Callout type="source">
+        Sources: Capacity Investment Scheme Contract Templates (DCCEEW) · NSW Long-Term Energy
+        Service Agreement Template (EnergyCo) · King &amp; Wood Mallesons
+        <em> CISA / PPA Interaction</em> 2024 · Norton Rose Fulbright <em>Sovereign Offtake
+        Practice Notes</em> · AURES Scheme Tracker (live).
+      </Callout>
+    </div>
+  )
+}
+
+// ============================================================
 // Module shell — index + per-lesson view
 // ============================================================
 
@@ -1213,13 +1848,14 @@ function LessonView({ lesson, progress, onComplete }: {
       </div>
 
       <article className="text-[15px] text-[var(--color-text-muted)]">
-        {lesson.id === 'architecture'     && <Lesson1 />}
-        {lesson.id === 'cis-mechanics'    && <Lesson2 />}
-        {lesson.id === 'ltesa-mechanics'  && <Lesson3 />}
-        {lesson.id === 'rounds'           && <Lesson4 />}
-        {lesson.id === 'merit-criteria'   && <Lesson5 />}
-        {lesson.id === 'finance-strategy' && <Lesson6 />}
-        {lesson.id === 'outcomes'         && <Lesson7 />}
+        {lesson.id === 'architecture'         && <Lesson1 />}
+        {lesson.id === 'cis-mechanics'        && <Lesson2 />}
+        {lesson.id === 'ppa-cisa-calculator'  && <Lesson8 />}
+        {lesson.id === 'ltesa-mechanics'      && <Lesson3 />}
+        {lesson.id === 'rounds'               && <Lesson4 />}
+        {lesson.id === 'merit-criteria'       && <Lesson5 />}
+        {lesson.id === 'finance-strategy'     && <Lesson6 />}
+        {lesson.id === 'outcomes'             && <Lesson7 />}
       </article>
 
       <div className="flex items-center justify-between gap-3 pt-6 border-t border-[var(--color-border)]">
