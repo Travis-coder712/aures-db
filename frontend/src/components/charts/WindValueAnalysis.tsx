@@ -751,10 +751,21 @@ function DailyShapeTab({ project }: { project: WindValueProject }) {
 
   if (!shape) {
     return (
-      <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] border-dashed rounded-xl p-6 text-center">
-        <p className="text-sm text-[var(--color-text-muted)]">Hourly shape data not yet available.</p>
-        <p className="text-xs text-[var(--color-text-muted)] mt-1">
-          Run <code className="bg-white/10 px-1 rounded">import_wind_profiles.py</code> to fetch from OE API.
+      <div className="bg-amber-500/5 border border-amber-500/30 rounded-xl p-5 space-y-3">
+        <p className="text-sm text-[var(--color-text)] font-semibold">Daily shape data temporarily unavailable</p>
+        <p className="text-xs text-[var(--color-text-muted)] leading-relaxed">
+          The hourly generation profile is built by a separate pipeline (<code className="bg-white/10 px-1 rounded text-[10px]">import_wind_profiles.py</code>) that aggregates OpenElectricity 30-minute dispatch into hour-of-day capacity-factor curves — annual, monthly, and seasonal. This pipeline has not run for the current data snapshot, so no operating wind farm in AURES currently has hourly_shape attached.
+        </p>
+        <p className="text-xs text-[var(--color-text-muted)] leading-relaxed">
+          When it returns, this tab will show:
+        </p>
+        <ul className="text-xs text-[var(--color-text-muted)] list-disc list-inside ml-1 space-y-0.5">
+          <li>Hour-of-day CF curve (avg across all operational years)</li>
+          <li>View toggles: Annual · Summer/Autumn/Winter/Spring · Jan-Dec</li>
+          <li>Solar-correlation R against a representative NEM solar shape (used in the Diversity tab today)</li>
+        </ul>
+        <p className="text-xs text-[var(--color-text-muted)] italic">
+          In the meantime, the Diversity tab still uses the existing shape data for fleet-correlation analysis where available; the Trend tab’s Curtailment & MLF Indicators provides a parallel read on operational performance.
         </p>
       </div>
     )

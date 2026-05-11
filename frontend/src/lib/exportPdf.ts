@@ -59,15 +59,24 @@ interface ExportOptions {
   title?: string
   /** Subtitle / date line */
   subtitle?: string
-  /** Scale factor for image capture (higher = better quality, slower) */
+  /** Scale factor for image capture (higher = better quality, slower).
+   *  Default 1.5 — gives readable text at sane file size. 2x produces
+   *  ~3-4x larger files for marginal visual gain on charts. */
   scale?: number
   /** Page margin in mm */
   margin?: number
+  /** JPEG quality (0..1). Default 0.82. Charts compress well at 0.8-0.85;
+   *  going below 0.7 starts to show artefacts on text. */
+  jpegQuality?: number
 }
 
 /**
  * Export a DOM element to a downloadable PDF.
  * Temporarily applies light-mode styling for readability.
+ *
+ * Encodes pages as JPEG (instead of PNG) and enables jsPDF compression,
+ * which typically reduces file size 4-8× for chart-heavy content with
+ * no visible quality loss.
  */
 export async function exportElementToPdf(
   element: HTMLElement,
@@ -77,8 +86,9 @@ export async function exportElementToPdf(
     filename,
     title,
     subtitle,
-    scale = 2,
+    scale = 1.5,
     margin = 10,
+    jpegQuality = 0.82,
   } = options
 
   // 1. Store original styles and apply light-mode overrides
@@ -132,7 +142,8 @@ export async function exportElementToPdf(
         return false
       },
     })
-    const dataUrl = canvas.toDataURL('image/png')
+    // JPEG with compression — typically 4-8× smaller than PNG for chart content
+    const dataUrl = canvas.toDataURL('image/jpeg', jpegQuality)
 
     // 3. Load image to get dimensions
     const img = new Image()
@@ -158,6 +169,7 @@ export async function exportElementToPdf(
       orientation: 'portrait',
       unit: 'mm',
       format: 'a4',
+      compress: true,
     })
 
     // Title header on first page
@@ -186,8 +198,8 @@ export async function exportElementToPdf(
     const totalImageHeight = pdfImgHeight
 
     if (totalImageHeight <= firstPageContent) {
-      // Fits on one page
-      pdf.addImage(dataUrl, 'PNG', margin, yOffset, pdfImgWidth, pdfImgHeight)
+      // Fits on one page — FAST compression keeps the JPEG embed small
+      pdf.addImage(dataUrl, 'JPEG', margin, yOffset, pdfImgWidth, pdfImgHeight, undefined, 'FAST')
     } else {
       // Multi-page: slice the image across pages
       // We use the source image coordinates to crop sections
@@ -254,10 +266,10 @@ export async function exportElementToPdf(
           0, 0, img.width, srcSliceHeight
         )
 
-        const sliceDataUrl = sliceCanvas.toDataURL('image/png')
+        const sliceDataUrl = sliceCanvas.toDataURL('image/jpeg', jpegQuality)
         const pageY = isFirstPage ? yOffset : margin
 
-        pdf.addImage(sliceDataUrl, 'PNG', margin, pageY, pdfImgWidth, sliceHeight)
+        pdf.addImage(sliceDataUrl, 'JPEG', margin, pageY, pdfImgWidth, sliceHeight, undefined, 'FAST')
 
         remainingHeight -= sliceHeight
         srcY += srcSliceHeight
