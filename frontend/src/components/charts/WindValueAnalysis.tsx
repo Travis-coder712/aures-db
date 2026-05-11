@@ -1,4 +1,5 @@
-import { useState, useRef, useCallback, type ReactNode } from 'react'
+import { useState, useRef, useCallback, useMemo, type ReactNode } from 'react'
+import { Link } from 'react-router-dom'
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type TF = (value: any, name: any) => [string, string]
 import {
@@ -70,6 +71,126 @@ function ChartInfo({ children }: { children: ReactNode }) {
 }
 
 type TabId = 'explainer' | 'shape' | 'capture' | 'seasonal' | 'trend' | 'peers' | 'nem' | 'diversity' | 'price'
+
+// ============================================================
+// Monthly-data adjustments — partial-month + commissioning filter
+// ============================================================
+
+/**
+ * The data pipeline computes monthly cf_pct as energy ÷ (MW × full-month-hours).
+ * For the *current* calendar month, the pipeline has only N-of-D days of data,
+ * which makes that month's cf_pct (and energy) look artificially low. This
+ * helper detects the latest month in the dataset; if it matches the current
+ * calendar month (per `today`), it scales energy + revenue + cf_pct up to a
+ * full-month-equivalent so charts compare apples to apples.
+ *
+ * It also flags `isPartial` so the UI can show a hatched / annotated bar.
+ *
+ * If `excludeCommissioning` is true, months that fall within the project's
+ * commissioning ramp window (within ~6 months of COD, OR in the ramp_year
+ * identified by the data pipeline) are removed from the returned array.
+ */
+import type { WindMonthlyDataPoint, WindValueSummary } from '../../lib/types'
+
+interface AdjustedMonthly extends WindMonthlyDataPoint {
+  isPartial?: boolean
+  scaleFactor?: number  // applied factor (1.0 means no scaling)
+  cfPctAdjusted?: number | null
+  energyMwhAdjusted?: number | null
+  revenueAudAdjusted?: number | null
+  isRampMonth?: boolean
+}
+
+function getAdjustedMonthlyData(
+  monthly: WindMonthlyDataPoint[],
+  vs: WindValueSummary,
+  cod: string | null,
+  opts: { excludeCommissioning?: boolean } = {},
+): AdjustedMonthly[] {
+  const today = new Date()
+
+  // Determine the latest year-month present in the data
+  let latestKey = ''
+  let latestEntry: WindMonthlyDataPoint | undefined
+  for (const m of monthly) {
+    const k = `${m.year}-${String(m.month).padStart(2, '0')}`
+    if (k > latestKey) {
+      latestKey = k
+      latestEntry = m
+    }
+  }
+
+  // Build a historical median for each calendar month, used to estimate whether
+  // the LATEST entry is partial. We compare the latest entry's cf_pct against
+  // the median cf_pct for the same calendar month in prior years. If the
+  // latest is <55% of that median, we treat it as partial and scale up.
+  const histByMonth: Record<number, number[]> = {}
+  for (const m of monthly) {
+    if (m.cf_pct == null) continue
+    // Exclude the latest entry itself from the historical comparison
+    if (latestEntry && m.year === latestEntry.year && m.month === latestEntry.month) continue
+    if (!histByMonth[m.month]) histByMonth[m.month] = []
+    histByMonth[m.month].push(m.cf_pct)
+  }
+  const medianOf = (arr: number[]): number | null => {
+    if (arr.length === 0) return null
+    const sorted = [...arr].sort((a, b) => a - b)
+    const mid = Math.floor(sorted.length / 2)
+    return sorted.length % 2 === 0 ? (sorted[mid - 1] + sorted[mid]) / 2 : sorted[mid]
+  }
+
+  let latestScaleFactor = 1
+  let latestIsPartial = false
+  if (latestEntry && latestEntry.cf_pct != null) {
+    const median = medianOf(histByMonth[latestEntry.month] ?? [])
+    // If the most-recent calendar month is the actual *current* month per the browser
+    // clock, we can use today.getDate() / daysInMonth as the precise scale factor.
+    const tYear = today.getFullYear()
+    const tMonth = today.getMonth() + 1
+    const tDay = today.getDate()
+    if (latestEntry.year === tYear && latestEntry.month === tMonth) {
+      const daysIn = new Date(tYear, tMonth, 0).getDate()
+      if (tDay > 0 && tDay < daysIn) {
+        latestIsPartial = true
+        latestScaleFactor = daysIn / tDay
+      }
+    } else if (median != null && median > 0 && latestEntry.cf_pct / median < 0.55) {
+      // Otherwise, if the latest entry is materially below historical median,
+      // back-out an implied scale factor from the median ratio.
+      // Implied scale = median / latest
+      latestIsPartial = true
+      latestScaleFactor = median / latestEntry.cf_pct
+      // Cap at 5x — anything beyond suggests something more than partial data
+      if (latestScaleFactor > 5) latestScaleFactor = 5
+    }
+  }
+
+  // Commissioning cutoff: 6 months after COD (inclusive)
+  const codDate = cod ? new Date(cod) : null
+  const rampUntil = codDate ? new Date(codDate.getFullYear(), codDate.getMonth() + 6, 1) : null
+
+  return monthly.map(m => {
+    const isLatest = latestEntry != null && m.year === latestEntry.year && m.month === latestEntry.month
+    const scaleFactor = isLatest && latestIsPartial ? latestScaleFactor : 1
+    // isRampMonth: in pipeline's identified ramp_year OR within 6 months of COD
+    const monthStart = new Date(m.year, m.month - 1, 1)
+    const isRampMonth = (vs.ramp_year != null && m.year === vs.ramp_year)
+      || (rampUntil != null && monthStart < rampUntil)
+
+    return {
+      ...m,
+      isPartial: isLatest && latestIsPartial,
+      scaleFactor,
+      cfPctAdjusted: m.cf_pct != null ? m.cf_pct * scaleFactor : null,
+      energyMwhAdjusted: m.energy_mwh != null ? m.energy_mwh * scaleFactor : null,
+      revenueAudAdjusted: m.revenue_aud != null ? m.revenue_aud * scaleFactor : null,
+      isRampMonth,
+    }
+  }).filter(m => {
+    if (!opts.excludeCommissioning) return true
+    return !m.isRampMonth
+  })
+}
 
 // ============================================================
 // Main component
@@ -785,19 +906,27 @@ function DailyShapeTab({ project }: { project: WindValueProject }) {
 
 function CaptureTab({ project, stateAvg }: { project: WindValueProject; stateAvg: WindStateAverage | null }) {
   const [showYear, setShowYear] = useState<number | 'avg'>('avg')
+  const [excludeCommissioning, setExcludeCommissioning] = useState(true)
   const vs = project.value_summary
 
+  // Adjust monthly data: scale current partial month + optionally drop commissioning months
+  const adjustedMonthly = useMemo(
+    () => getAdjustedMonthlyData(project.monthly_data, vs, project.cod, { excludeCommissioning }),
+    [project.monthly_data, project.cod, vs, excludeCommissioning]
+  )
+
   // Avg energy and revenue per calendar month across all years (for 'avg' view)
+  // Use adjusted values so the current-partial-month is scaled correctly
   const avgByMonth: Record<number, { energy: number | null; revenue: number | null }> = {}
   for (let mo = 1; mo <= 12; mo++) {
-    const withEnergy = project.monthly_data.filter(m => m.month === mo && m.energy_mwh != null)
-    const withRevenue = project.monthly_data.filter(m => m.month === mo && m.revenue_aud != null)
+    const withEnergy = adjustedMonthly.filter(m => m.month === mo && m.energyMwhAdjusted != null)
+    const withRevenue = adjustedMonthly.filter(m => m.month === mo && m.revenueAudAdjusted != null)
     avgByMonth[mo] = {
       energy: withEnergy.length > 0
-        ? withEnergy.reduce((s, e) => s + (e.energy_mwh ?? 0), 0) / withEnergy.length
+        ? withEnergy.reduce((s, e) => s + (e.energyMwhAdjusted ?? 0), 0) / withEnergy.length
         : null,
       revenue: withRevenue.length > 0
-        ? withRevenue.reduce((s, e) => s + (e.revenue_aud ?? 0), 0) / withRevenue.length
+        ? withRevenue.reduce((s, e) => s + (e.revenueAudAdjusted ?? 0), 0) / withRevenue.length
         : null,
     }
   }
@@ -813,21 +942,24 @@ function CaptureTab({ project, stateAvg }: { project: WindValueProject; stateAvg
     }
   })
 
-  // Year options
-  const yearOptions = [...new Set(project.monthly_data.map(m => m.year))].sort()
+  // Year options — from adjusted (commissioning-filtered) data
+  const yearOptions = useMemo(
+    () => [...new Set(adjustedMonthly.map(m => m.year))].sort(),
+    [adjustedMonthly]
+  )
 
   // Per-month chart data including output and revenue
   const yearData = MONTH_LABELS.map((label, i) => {
     const mo = i + 1
     const entry = showYear === 'avg'
       ? null
-      : project.monthly_data.find(m => m.year === showYear && m.month === mo)
+      : adjustedMonthly.find(m => m.year === showYear && m.month === mo)
     const avg = project.monthly_averages[String(mo)]
 
     const capturePrice = showYear === 'avg' ? (avg?.avg_capture_price ?? null) : (entry?.capture_price ?? null)
     const poolPrice = showYear === 'avg' ? null : (entry?.pool_price ?? null)
-    const energyMwh = showYear === 'avg' ? (avgByMonth[mo]?.energy ?? null) : (entry?.energy_mwh ?? null)
-    const revenueAud = showYear === 'avg' ? (avgByMonth[mo]?.revenue ?? null) : (entry?.revenue_aud ?? null)
+    const energyMwh = showYear === 'avg' ? (avgByMonth[mo]?.energy ?? null) : (entry?.energyMwhAdjusted ?? null)
+    const revenueAud = showYear === 'avg' ? (avgByMonth[mo]?.revenue ?? null) : (entry?.revenueAudAdjusted ?? null)
     const flatAud = energyMwh != null && poolPrice != null ? energyMwh * poolPrice : null
 
     return {
@@ -838,10 +970,45 @@ function CaptureTab({ project, stateAvg }: { project: WindValueProject; stateAvg
       energy: energyMwh != null ? Math.round(energyMwh / 1000 * 10) / 10 : null,        // GWh, 1dp
       revenue: revenueAud != null ? Math.round(revenueAud / 1_000_000 * 10) / 10 : null, // $M, 1dp
       flat: flatAud != null ? Math.round(flatAud / 1_000_000 * 10) / 10 : null,          // $M, 1dp
+      isPartial: entry?.isPartial ?? false,
     }
   })
 
   const hasFlatData = yearData.some(d => d.flat != null)
+
+  // Constant Y-axis maxes across ALL years' adjusted data (so flicking through years keeps axes comparable)
+  const globalMaxes = useMemo(() => {
+    let maxCapture = 0, maxPool = 0, maxEnergy = 0, maxRevenue = 0, maxFlat = 0
+    for (const m of adjustedMonthly) {
+      if (m.capture_price != null && m.capture_price > maxCapture) maxCapture = m.capture_price
+      if (m.pool_price != null && m.pool_price > maxPool) maxPool = m.pool_price
+      if (m.energyMwhAdjusted != null) {
+        const e = m.energyMwhAdjusted / 1000
+        if (e > maxEnergy) maxEnergy = e
+      }
+      if (m.revenueAudAdjusted != null) {
+        const r = m.revenueAudAdjusted / 1_000_000
+        if (r > maxRevenue) maxRevenue = r
+      }
+      if (m.energyMwhAdjusted != null && m.pool_price != null) {
+        const f = (m.energyMwhAdjusted * m.pool_price) / 1_000_000
+        if (f > maxFlat) maxFlat = f
+      }
+    }
+    // Round up to a nice tick value
+    const niceUp = (v: number) => v <= 0 ? 1 : Math.ceil(v * 1.1)
+    return {
+      capture: niceUp(Math.max(maxCapture, maxPool)),
+      energy: niceUp(maxEnergy),
+      revenue: niceUp(Math.max(maxRevenue, maxFlat)),
+    }
+  }, [adjustedMonthly])
+
+  // Count commissioning months excluded (for UI badge)
+  const commissioningCount = useMemo(() => {
+    const all = getAdjustedMonthlyData(project.monthly_data, vs, project.cod, { excludeCommissioning: false })
+    return all.filter(m => m.isRampMonth).length
+  }, [project.monthly_data, project.cod, vs])
 
   return (
     <div className="space-y-4">
@@ -896,7 +1063,41 @@ function CaptureTab({ project, stateAvg }: { project: WindValueProject; stateAvg
         {yearOptions.map(y => (
           <ViewBtn key={y} active={showYear === y} onClick={() => setShowYear(y)} label={String(y)} small />
         ))}
+        <div className="flex-1" />
+        {/* Commissioning + partial-month controls */}
+        {commissioningCount > 0 && (
+          <label className="flex items-center gap-1.5 text-[10px] text-[var(--color-text-muted)] cursor-pointer select-none">
+            <input
+              type="checkbox"
+              checked={excludeCommissioning}
+              onChange={(e) => setExcludeCommissioning(e.target.checked)}
+              className="cursor-pointer accent-[var(--color-primary)] h-3 w-3"
+            />
+            Exclude commissioning ramp ({commissioningCount} mo)
+          </label>
+        )}
       </div>
+
+      {/* Partial-month + commissioning explainer */}
+      {(yearData.some(d => d.isPartial) || commissioningCount > 0) && (
+        <div className="bg-amber-500/5 border border-amber-500/20 rounded-md p-2 text-[10px] text-[var(--color-text-muted)] leading-relaxed">
+          {yearData.some(d => d.isPartial) && (
+            <p>
+              <span className="text-amber-400">⚙</span> <strong className="text-[var(--color-text-muted)]">Current month:</strong>{' '}
+              partial-month data has been scaled to a full-month-equivalent so CF, output and revenue are
+              comparable to historical months. Hatched bar shows the partial-month entry.
+            </p>
+          )}
+          {commissioningCount > 0 && (
+            <p className="mt-1">
+              <span className="text-amber-400">⚙</span> <strong className="text-[var(--color-text-muted)]">Commissioning filter:</strong>{' '}
+              {excludeCommissioning
+                ? `${commissioningCount} months from commissioning ramp excluded from averages and per-year views.`
+                : `Commissioning months currently INCLUDED — averages will be biased low.`}
+            </p>
+          )}
+        </div>
+      )}
 
       {/* 1. Capture price by month */}
       <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl p-3">
@@ -914,7 +1115,8 @@ function CaptureTab({ project, stateAvg }: { project: WindValueProject; stateAvg
           <BarChart data={yearData} margin={{ top: 4, right: 8, bottom: 0, left: -8 }}>
             <CartesianGrid strokeDasharray="3 3" stroke="var(--color-border)" />
             <XAxis dataKey="month" tick={{ fontSize: 10, fill: 'var(--color-text-muted)' }} />
-            <YAxis tick={{ fontSize: 10, fill: 'var(--color-text-muted)' }} tickFormatter={v => `$${v}`} />
+            <YAxis tick={{ fontSize: 10, fill: 'var(--color-text-muted)' }} tickFormatter={v => `$${v}`}
+              domain={[0, globalMaxes.capture]} />
             <Tooltip
               contentStyle={tooltipStyle} labelStyle={tooltipLabelStyle} itemStyle={tooltipItemStyle}
               formatter={((v, name) => [
@@ -932,6 +1134,9 @@ function CaptureTab({ project, stateAvg }: { project: WindValueProject; stateAvg
                   fill={d.capture && d.pool
                     ? (d.capture >= d.pool ? '#22c55e' : '#3b82f6')
                     : '#3b82f6'}
+                  fillOpacity={d.isPartial ? 0.5 : 1}
+                  strokeDasharray={d.isPartial ? '3 3' : undefined}
+                  stroke={d.isPartial ? '#fbbf24' : undefined}
                 />
               ))}
             </Bar>
@@ -958,12 +1163,20 @@ function CaptureTab({ project, stateAvg }: { project: WindValueProject; stateAvg
           <BarChart data={yearData} margin={{ top: 4, right: 8, bottom: 0, left: -8 }}>
             <CartesianGrid strokeDasharray="3 3" stroke="var(--color-border)" />
             <XAxis dataKey="month" tick={{ fontSize: 10, fill: 'var(--color-text-muted)' }} />
-            <YAxis tick={{ fontSize: 10, fill: 'var(--color-text-muted)' }} tickFormatter={v => `${v}`} unit=" GWh" />
+            <YAxis tick={{ fontSize: 10, fill: 'var(--color-text-muted)' }} tickFormatter={v => `${v}`} unit=" GWh"
+              domain={[0, globalMaxes.energy]} />
             <Tooltip
               contentStyle={tooltipStyle} labelStyle={tooltipLabelStyle} itemStyle={tooltipItemStyle}
               formatter={((v) => [`${v?.toFixed(1)} GWh`, 'Output']) as TF}
             />
-            <Bar dataKey="energy" name="energy" fill="#6366f1" radius={[4, 4, 0, 0]} />
+            <Bar dataKey="energy" name="energy" radius={[4, 4, 0, 0]}>
+              {yearData.map((d, i) => (
+                <Cell key={i} fill="#6366f1"
+                  fillOpacity={d.isPartial ? 0.5 : 1}
+                  strokeDasharray={d.isPartial ? '3 3' : undefined}
+                  stroke={d.isPartial ? '#fbbf24' : undefined} />
+              ))}
+            </Bar>
           </BarChart>
         </ResponsiveContainer>
       </div>
@@ -991,7 +1204,8 @@ function CaptureTab({ project, stateAvg }: { project: WindValueProject; stateAvg
           <BarChart data={yearData} margin={{ top: 4, right: 8, bottom: 0, left: 4 }}>
             <CartesianGrid strokeDasharray="3 3" stroke="var(--color-border)" />
             <XAxis dataKey="month" tick={{ fontSize: 10, fill: 'var(--color-text-muted)' }} />
-            <YAxis tick={{ fontSize: 10, fill: 'var(--color-text-muted)' }} tickFormatter={v => `$${v}M`} />
+            <YAxis tick={{ fontSize: 10, fill: 'var(--color-text-muted)' }} tickFormatter={v => `$${v}M`}
+              domain={[0, globalMaxes.revenue]} />
             <Tooltip
               contentStyle={tooltipStyle} labelStyle={tooltipLabelStyle} itemStyle={tooltipItemStyle}
               formatter={((v, name) => [
@@ -1000,7 +1214,14 @@ function CaptureTab({ project, stateAvg }: { project: WindValueProject; stateAvg
               ]) as TF}
             />
             {hasFlatData && <Bar dataKey="flat" name="flat" fill="#6b728070" radius={[4, 4, 0, 0]} />}
-            <Bar dataKey="revenue" name="revenue" fill="#3b82f6" radius={[4, 4, 0, 0]} />
+            <Bar dataKey="revenue" name="revenue" radius={[4, 4, 0, 0]}>
+              {yearData.map((d, i) => (
+                <Cell key={i} fill="#3b82f6"
+                  fillOpacity={d.isPartial ? 0.5 : 1}
+                  strokeDasharray={d.isPartial ? '3 3' : undefined}
+                  stroke={d.isPartial ? '#fbbf24' : undefined} />
+              ))}
+            </Bar>
           </BarChart>
         </ResponsiveContainer>
       </div>
@@ -1186,20 +1407,24 @@ function TrendTab({ project }: { project: WindValueProject }) {
     isRamp: a.year === rampYear,
   }))
 
+  // Adjusted monthly data for heatmap — scales current partial month
+  const adjustedMonthly = getAdjustedMonthlyData(project.monthly_data, vs, project.cod)
+
   // Month-by-month heatmap data
-  const heatmapYears = [...new Set(project.monthly_data.map(m => m.year))].sort()
+  const heatmapYears = [...new Set(adjustedMonthly.map(m => m.year))].sort()
   const heatmapData = heatmapYears.map(y => {
     const row: Record<string, number | string | null> = { year: String(y) }
     for (let mo = 1; mo <= 12; mo++) {
-      const entry = project.monthly_data.find(m => m.year === y && m.month === mo)
-      row[`m${mo}`] = entry?.cf_pct ?? null
+      const entry = adjustedMonthly.find(m => m.year === y && m.month === mo)
+      // Use adjusted CF so the current partial month displays a full-month-equivalent value
+      row[`m${mo}`] = entry?.cfPctAdjusted ?? null
     }
     return row
   })
 
-  const allCF = project.monthly_data.map(m => m.cf_pct).filter((v): v is number => v != null)
-  const minCF = Math.min(...allCF)
-  const maxCF = Math.max(...allCF)
+  const allCF = adjustedMonthly.map(m => m.cfPctAdjusted).filter((v): v is number => v != null)
+  const minCF = allCF.length > 0 ? Math.min(...allCF) : 0
+  const maxCF = allCF.length > 0 ? Math.max(...allCF) : 1
   const cfRange = maxCF - minCF || 1
 
   const cfHeatColor = (v: number | null): string => {
@@ -1366,6 +1591,220 @@ function TrendTab({ project }: { project: WindValueProject }) {
           </ResponsiveContainer>
         </div>
       )}
+
+      <CurtailmentIndicators project={project} />
+    </div>
+  )
+}
+
+// ============================================================
+// Curtailment & MLF indicators — proxies derived from existing AURES data
+// ============================================================
+
+function CurtailmentIndicators({ project }: { project: WindValueProject }) {
+  const vs = project.value_summary
+  const annualData = project.annual_data
+
+  // Build year-over-year deltas (skip ramp year so the early dip isn't read as curtailment)
+  const yoy = useMemo(() => {
+    const rows: { year: string; cfDelta: number | null; captureDelta: number | null; energy: number | null }[] = []
+    const sorted = [...annualData].sort((a, b) => a.year - b.year)
+    for (let i = 1; i < sorted.length; i++) {
+      const a = sorted[i]
+      const prev = sorted[i - 1]
+      // Skip ramp year as the "prev" (CF would jump artificially)
+      const isRampPrev = prev.year === vs.ramp_year
+      rows.push({
+        year: String(a.year),
+        cfDelta: isRampPrev ? null : (a.cf_pct - prev.cf_pct),
+        captureDelta: a.capture_price != null && prev.capture_price != null && !isRampPrev
+          ? (a.capture_price - prev.capture_price) : null,
+        energy: a.energy_mwh / 1000,
+      })
+    }
+    return rows
+  }, [annualData, vs.ramp_year])
+
+  // Cumulative CF drift since first non-ramp year
+  const cfDriftPp = useMemo(() => {
+    const sorted = [...annualData].filter(a => a.year !== vs.ramp_year).sort((a, b) => a.year - b.year)
+    if (sorted.length < 2) return null
+    return sorted[sorted.length - 1].cf_pct - sorted[0].cf_pct
+  }, [annualData, vs.ramp_year])
+
+  // Cumulative capture price drift
+  const captureDriftPct = useMemo(() => {
+    const sorted = [...annualData].filter(a => a.year !== vs.ramp_year && a.capture_price != null).sort((a, b) => a.year - b.year)
+    if (sorted.length < 2) return null
+    const first = sorted[0].capture_price!
+    const last = sorted[sorted.length - 1].capture_price!
+    if (first === 0) return null
+    return ((last - first) / first) * 100
+  }, [annualData, vs.ramp_year])
+
+  // Revenue impact of CF drift (per MW per year, using avg capture price)
+  const revenueImpactPerMwPerYear = useMemo(() => {
+    if (cfDriftPp == null || vs.avg_capture_price == null) return null
+    // If CF dropped by X pp, MWh per MW per year drops by X/100 × 8760
+    // Revenue per MW lost = MWh × capture_price
+    return (cfDriftPp / 100) * 8760 * vs.avg_capture_price
+  }, [cfDriftPp, vs.avg_capture_price])
+
+  // Annualised aggregate revenue loss (using project capacity)
+  const aggregateAnnualLoss = useMemo(() => {
+    if (revenueImpactPerMwPerYear == null) return null
+    return revenueImpactPerMwPerYear * project.capacity_mw
+  }, [revenueImpactPerMwPerYear, project.capacity_mw])
+
+  return (
+    <div className="space-y-4">
+      <div className="bg-orange-500/5 border border-orange-500/30 rounded-lg p-3">
+        <p className="text-[11px] text-[var(--color-text-muted)] leading-relaxed">
+          <strong className="text-[var(--color-text)]">Curtailment &amp; MLF proxies.</strong> AURES does not yet
+          ingest MLF history or AEMO constraint logs directly. The following indicators use the data we do
+          have — year-over-year CF, capture price, and value factor — as proxies for declining settlement
+          economics. A persistent decline in any of these is the operational fingerprint of curtailment
+          and/or MLF degradation. The forward-looking section flags cluster build-out that would amplify
+          both.
+        </p>
+      </div>
+
+      {/* Cumulative drift summary cards */}
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-2">
+        <MetricCard
+          label="CF drift (since op.)"
+          value={cfDriftPp != null ? `${cfDriftPp >= 0 ? '+' : ''}${cfDriftPp.toFixed(1)} pp` : '–'}
+          sub="capacity factor trend"
+          highlight={cfDriftPp == null ? undefined : cfDriftPp < -2 ? 'red' : cfDriftPp < 0 ? 'yellow' : 'green'}
+        />
+        <MetricCard
+          label="Capture price drift"
+          value={captureDriftPct != null ? `${captureDriftPct >= 0 ? '+' : ''}${captureDriftPct.toFixed(0)}%` : '–'}
+          sub="cumulative since first year"
+          highlight={captureDriftPct == null ? undefined : captureDriftPct < -10 ? 'red' : captureDriftPct < 0 ? 'yellow' : 'green'}
+        />
+        <MetricCard
+          label="Implied rev. lost"
+          value={revenueImpactPerMwPerYear != null && revenueImpactPerMwPerYear < 0
+            ? `$${Math.abs(revenueImpactPerMwPerYear / 1000).toFixed(1)}k/MW/yr`
+            : '–'}
+          sub="from CF decline alone"
+          highlight={revenueImpactPerMwPerYear != null && revenueImpactPerMwPerYear < 0 ? 'red' : undefined}
+        />
+        <MetricCard
+          label="Aggregate annual loss"
+          value={aggregateAnnualLoss != null && aggregateAnnualLoss < 0
+            ? `$${(Math.abs(aggregateAnnualLoss) / 1_000_000).toFixed(2)}M/yr`
+            : '–'}
+          sub={`across ${project.capacity_mw} MW`}
+          highlight={aggregateAnnualLoss != null && aggregateAnnualLoss < 0 ? 'red' : undefined}
+        />
+      </div>
+
+      {/* YoY CF and capture price chart */}
+      <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl p-3">
+        <p className="text-[10px] font-medium text-[var(--color-text-muted)] mb-3 uppercase tracking-wider flex items-center">
+          Year-over-Year Δ — CF (pp) and Capture Price ($/MWh)
+          <ChartInfo>
+            <p style={{color:'#f1f5f9',fontWeight:600,marginBottom:4}}>Reading the YoY chart</p>
+            Bars show the change vs the previous year. Persistent negative CF deltas in a region with growing wind/solar fleet are a strong indicator of <em>cluster cannibalisation + curtailment</em>. Negative capture price deltas in the same period mean the asset is selling its energy into a worsening price environment.<br/><br/>
+            One year of negative delta is noise — three consecutive years of negative deltas is a structural problem worth investigating with the operator.<br/><br/>
+            <span style={{color:'#f59e0b',fontWeight:600}}>Caveat:</span> Wind capacity factor is genuinely weather-volatile year-to-year. A 2-3 pp swing can come from wind resource alone. Cross-reference with adjacent project YoY trends to separate cluster effects from weather noise.
+          </ChartInfo>
+        </p>
+        <ResponsiveContainer width="100%" height={180}>
+          <BarChart data={yoy} margin={{ top: 4, right: 8, bottom: 0, left: -8 }}>
+            <CartesianGrid strokeDasharray="3 3" stroke="var(--color-border)" />
+            <XAxis dataKey="year" tick={{ fontSize: 10, fill: 'var(--color-text-muted)' }} />
+            <YAxis yAxisId="cf" tick={{ fontSize: 10, fill: 'var(--color-text-muted)' }} tickFormatter={v => `${v}pp`} />
+            <YAxis yAxisId="cp" orientation="right" tick={{ fontSize: 10, fill: 'var(--color-text-muted)' }} tickFormatter={v => `$${v}`} />
+            <Tooltip
+              contentStyle={tooltipStyle} labelStyle={tooltipLabelStyle} itemStyle={tooltipItemStyle}
+              formatter={((v, name) => [
+                name === 'cfDelta' ? `${(v as number)?.toFixed(1)} pp` : `$${(v as number)?.toFixed(0)}/MWh`,
+                name === 'cfDelta' ? 'CF Δ' : 'Capture Price Δ',
+              ]) as TF}
+            />
+            <ReferenceLine yAxisId="cf" y={0} stroke="#ffffff30" />
+            <Bar yAxisId="cf" dataKey="cfDelta" name="cfDelta" radius={[3, 3, 0, 0]}>
+              {yoy.map((d, i) => (
+                <Cell key={i} fill={d.cfDelta == null ? '#374151' : d.cfDelta < 0 ? '#ef4444' : '#22c55e'} />
+              ))}
+            </Bar>
+            <Bar yAxisId="cp" dataKey="captureDelta" name="captureDelta" radius={[3, 3, 0, 0]} fillOpacity={0.4}>
+              {yoy.map((d, i) => (
+                <Cell key={i} fill={d.captureDelta == null ? '#374151' : d.captureDelta < 0 ? '#f97316' : '#84cc16'} />
+              ))}
+            </Bar>
+          </BarChart>
+        </ResponsiveContainer>
+      </div>
+
+      {/* Forward-looking peer cluster context */}
+      <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl p-3">
+        <p className="text-[10px] font-medium text-[var(--color-text-muted)] mb-3 uppercase tracking-wider">
+          Forward-looking — cluster pressure in {project.state}
+        </p>
+        <ul className="space-y-1.5 text-[11px] text-[var(--color-text-muted)] leading-relaxed">
+          <li>
+            <strong className="text-[var(--color-text)]">Cumulative CF drift:</strong>{' '}
+            {cfDriftPp != null
+              ? `${cfDriftPp >= 0 ? '+' : ''}${cfDriftPp.toFixed(1)} pp from first full year to most recent year. ${
+                  cfDriftPp < -1.5
+                    ? 'This is consistent with curtailment creep — investigate AEMO constraint logs for the project\'s connection point.'
+                    : cfDriftPp < 0
+                    ? 'Mild drift — likely a mix of wind variability and incremental curtailment.'
+                    : 'Stable or improving — limited curtailment impact to date.'
+                }`
+              : 'Insufficient operational history.'}
+          </li>
+          <li>
+            <strong className="text-[var(--color-text)]">Capture price drift:</strong>{' '}
+            {captureDriftPct != null
+              ? `${captureDriftPct >= 0 ? '+' : ''}${captureDriftPct.toFixed(0)}% cumulative since first operational year. ${
+                  captureDriftPct < -10
+                    ? 'Substantial cannibalisation — the project\'s realised price is materially worse than its first-year benchmark.'
+                    : captureDriftPct < 0
+                    ? 'Modest decline consistent with cluster build-out.'
+                    : 'Broadly stable or up — the project has held its price discount well.'
+                }`
+              : 'Insufficient pool price history to compute capture drift.'}
+          </li>
+          <li>
+            <strong className="text-[var(--color-text)]">What to investigate further:</strong>
+            <ul className="ml-4 mt-1 space-y-1 list-disc list-inside">
+              <li>
+                AEMO Marginal Loss Factor for the connection point — has it moved by {'>'}5 pp since
+                commissioning? Source:{' '}
+                <a href="https://aemo.com.au/energy-systems/electricity/national-electricity-market-nem/data-nem/market-management-system-mms-data/marginal-loss-factors-mlf-data"
+                  target="_blank" rel="noopener"
+                  className="text-[var(--color-primary)] hover:underline">AEMO MLF publication</a>.
+              </li>
+              <li>
+                Adjacent or upstream wind/solar projects either commissioning or in CIS/LTESA award —
+                each new entrant in the same network branch adds to cluster cannibalisation and increases
+                MLF degradation pressure.
+              </li>
+              <li>
+                Curtailment hours from operator quarterly reporting — broken into technical (AEMO
+                constraint) vs economic (negative-price avoidance). The Wind Value Analysis can't
+                separate these without ops disclosure.
+              </li>
+              <li>
+                Check the{' '}
+                <Link to="/intelligence/scheme-tracker" className="text-[var(--color-primary)] hover:underline">
+                  Scheme Tracker
+                </Link>{' '}
+                for upcoming wind/solar awards in {project.state}, and the{' '}
+                <Link to="/intelligence/transmission-infra" className="text-[var(--color-primary)] hover:underline">
+                  Transmission Infrastructure intelligence
+                </Link>{' '}
+                for network-upgrade timelines that may relieve constraints.
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
     </div>
   )
 }

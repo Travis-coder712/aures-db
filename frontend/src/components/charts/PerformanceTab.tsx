@@ -14,6 +14,106 @@ type TooltipFormatter = (value: any, name: any) => [string, string]
 
 const MONTH_LABELS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 
+// ============================================================
+// Monthly-data adjustments — partial-month + commissioning
+// ============================================================
+//
+// The data pipeline computes monthly capacity_factor_pct as
+// energy_mwh ÷ (capacity_mw × full-month-hours). For the most-recent
+// month in the dataset, the pipeline often has only N-of-D days of
+// data, which makes that month's CF look artificially low. We detect
+// this by comparing the latest entry's CF to the historical median
+// for the same calendar month; if the latest is <55% of that median,
+// we infer a scale factor and apply it.
+//
+// Commissioning filter: months within 6 months of COD (or earlier
+// than data_first_year-after-COD-year) are flagged so they can be
+// optionally excluded from averages and per-year views.
+
+interface AdjustedMonthlyEntry extends MonthlyPerformanceEntry {
+  cfPctAdjusted: number | null
+  energyMwhAdjusted: number | null
+  revenueAudAdjusted: number | null
+  isPartial: boolean
+  scaleFactor: number
+  isRampMonth: boolean
+}
+
+function adjustMonthlyPerf(
+  monthly: MonthlyPerformanceEntry[],
+  cod: string | null | undefined,
+  opts: { excludeCommissioning?: boolean } = {},
+): AdjustedMonthlyEntry[] {
+  // Find latest entry
+  let latestKey = ''
+  let latestEntry: MonthlyPerformanceEntry | undefined
+  for (const m of monthly) {
+    const k = `${m.year}-${String(m.month).padStart(2, '0')}`
+    if (k > latestKey) {
+      latestKey = k
+      latestEntry = m
+    }
+  }
+
+  // Historical median per calendar month (excluding latest entry)
+  const histByMonth: Record<number, number[]> = {}
+  for (const m of monthly) {
+    if (m.capacity_factor_pct == null) continue
+    if (latestEntry && m.year === latestEntry.year && m.month === latestEntry.month) continue
+    if (!histByMonth[m.month]) histByMonth[m.month] = []
+    histByMonth[m.month].push(m.capacity_factor_pct)
+  }
+  const medianOf = (arr: number[]): number | null => {
+    if (arr.length === 0) return null
+    const s = [...arr].sort((a, b) => a - b)
+    const mid = Math.floor(s.length / 2)
+    return s.length % 2 === 0 ? (s[mid - 1] + s[mid]) / 2 : s[mid]
+  }
+
+  let latestScale = 1
+  let latestIsPartial = false
+  const today = new Date()
+  if (latestEntry && latestEntry.capacity_factor_pct != null) {
+    const median = medianOf(histByMonth[latestEntry.month] ?? [])
+    const tYear = today.getFullYear()
+    const tMonth = today.getMonth() + 1
+    const tDay = today.getDate()
+    if (latestEntry.year === tYear && latestEntry.month === tMonth) {
+      const daysIn = new Date(tYear, tMonth, 0).getDate()
+      if (tDay > 0 && tDay < daysIn) {
+        latestIsPartial = true
+        latestScale = daysIn / tDay
+      }
+    } else if (median != null && median > 0 && latestEntry.capacity_factor_pct / median < 0.55) {
+      latestIsPartial = true
+      latestScale = Math.min(5, median / latestEntry.capacity_factor_pct)
+    }
+  }
+
+  // Commissioning cutoff: 6 months after COD
+  const codDate = cod ? new Date(cod) : null
+  const rampUntil = codDate ? new Date(codDate.getFullYear(), codDate.getMonth() + 6, 1) : null
+
+  return monthly.map(m => {
+    const isLatest = latestEntry != null && m.year === latestEntry.year && m.month === latestEntry.month
+    const scaleFactor = isLatest && latestIsPartial ? latestScale : 1
+    const monthStart = new Date(m.year, m.month - 1, 1)
+    const isRampMonth = rampUntil != null && monthStart < rampUntil
+    return {
+      ...m,
+      cfPctAdjusted: m.capacity_factor_pct != null ? m.capacity_factor_pct * scaleFactor : null,
+      energyMwhAdjusted: m.energy_mwh != null ? m.energy_mwh * scaleFactor : null,
+      revenueAudAdjusted: m.revenue_aud != null ? m.revenue_aud * scaleFactor : null,
+      isPartial: isLatest && latestIsPartial,
+      scaleFactor,
+      isRampMonth,
+    }
+  }).filter(m => {
+    if (!opts.excludeCommissioning) return true
+    return !m.isRampMonth
+  })
+}
+
 const YEAR_COLORS: Record<number, string> = {
   2018: '#6366f1',
   2019: '#8b5cf6',
@@ -100,7 +200,7 @@ export default function PerformanceTab({ project }: Props) {
       {isBess ? (
         <BessMonthlyCharts data={data} years={years} selectedYear={selectedYear} />
       ) : (
-        <GenerationMonthlyCharts data={data} years={years} selectedYear={selectedYear} />
+        <GenerationMonthlyCharts data={data} years={years} selectedYear={selectedYear} cod={project.cod_current ?? null} />
       )}
 
       {/* Source note */}
@@ -130,44 +230,77 @@ function GenerationMonthlyCharts({
   data,
   years,
   selectedYear,
+  cod,
 }: {
   data: { monthly: MonthlyPerformanceEntry[]; capacity_mw: number }
   years: number[]
   selectedYear: number | 'average'
+  cod: string | null
 }) {
-  // Build year-over-year comparison data (12 months, each year as a line)
+  const [excludeCommissioning, setExcludeCommissioning] = useState(true)
+
+  // Adjusted monthly entries — scales current partial-month + optionally filters commissioning months
+  const adjusted = useMemo(
+    () => adjustMonthlyPerf(data.monthly, cod, { excludeCommissioning }),
+    [data.monthly, cod, excludeCommissioning]
+  )
+  // How many commissioning months exist (whether or not currently excluded)
+  const commissioningCount = useMemo(() => {
+    const all = adjustMonthlyPerf(data.monthly, cod, { excludeCommissioning: false })
+    return all.filter(m => m.isRampMonth).length
+  }, [data.monthly, cod])
+  // Years still present after commissioning filter
+  const filteredYears = useMemo(
+    () => [...new Set(adjusted.map(m => m.year))].sort(),
+    [adjusted]
+  )
+  const partialMonthInfo = useMemo(() => {
+    const p = adjusted.find(m => m.isPartial)
+    return p ? { year: p.year, month: p.month, scale: p.scaleFactor } : null
+  }, [adjusted])
+
+  // Build year-over-year comparison data (12 months, each year as a line) — using adjusted CF
   const cfComparison = useMemo(() => {
     return MONTH_LABELS.map((label, i) => {
       const month = i + 1
       const row: Record<string, string | number | null> = { month: label }
 
-      for (const y of years) {
-        const entry = data.monthly.find(m => m.year === y && m.month === month)
-        row[`y${y}`] = entry?.capacity_factor_pct ?? null
+      for (const y of filteredYears) {
+        const entry = adjusted.find(m => m.year === y && m.month === month)
+        row[`y${y}`] = entry?.cfPctAdjusted ?? null
       }
 
-      // Average across years
-      const vals = years.map(y => {
-        const e = data.monthly.find(m => m.year === y && m.month === month)
-        return e?.capacity_factor_pct
+      // Average across years (adjusted)
+      const vals = filteredYears.map(y => {
+        const e = adjusted.find(m => m.year === y && m.month === month)
+        return e?.cfPctAdjusted
       }).filter((v): v is number => v != null)
       row.average = vals.length > 0 ? Math.round(vals.reduce((s, v) => s + v, 0) / vals.length * 10) / 10 : null
 
       return row
     })
-  }, [data.monthly, years])
+  }, [adjusted, filteredYears])
 
-  // Annual summary cards
+  // Compute global Y-axis max across ALL years so the axis stays constant when flicking through years
+  const cfYMax = useMemo(() => {
+    const all = adjusted.map(m => m.cfPctAdjusted).filter((v): v is number => v != null)
+    if (all.length === 0) return 50
+    const max = Math.max(...all)
+    return Math.ceil(max / 5) * 5 + 5 // round up to nearest 5
+  }, [adjusted])
+
+  // Annual summary cards — using adjusted values
   const annualSummary = useMemo(() => {
-    return years.map(y => {
-      const entries = data.monthly.filter(m => m.year === y)
-      const avgCF = entries.reduce((s, e) => s + (e.capacity_factor_pct ?? 0), 0) / entries.length
-      const totalEnergy = entries.reduce((s, e) => s + (e.energy_mwh ?? 0), 0)
-      const totalRevenue = entries.reduce((s, e) => s + (e.revenue_aud ?? 0), 0)
+    return filteredYears.map(y => {
+      const entries = adjusted.filter(m => m.year === y)
+      const cfVals = entries.map(e => e.cfPctAdjusted).filter((v): v is number => v != null)
+      const avgCF = cfVals.length > 0 ? cfVals.reduce((s, v) => s + v, 0) / cfVals.length : 0
+      const totalEnergy = entries.reduce((s, e) => s + (e.energyMwhAdjusted ?? 0), 0)
+      const totalRevenue = entries.reduce((s, e) => s + (e.revenueAudAdjusted ?? 0), 0)
       const avgCurt = entries.reduce((s, e) => s + (e.curtailment_pct ?? 0), 0) / entries.length
       return { year: y, avgCF, totalEnergy, totalRevenue, avgCurt, months: entries.length }
     })
-  }, [data.monthly, years])
+  }, [adjusted, filteredYears])
 
   const hasRevenue = data.monthly.some(m => m.revenue_aud != null && m.revenue_aud > 0)
 
@@ -210,13 +343,40 @@ function GenerationMonthlyCharts({
         )}
       </div>
 
+      {/* Commissioning toggle + partial-month banner */}
+      {(commissioningCount > 0 || partialMonthInfo) && (
+        <div className="bg-amber-500/5 border border-amber-500/20 rounded-lg p-3 space-y-2">
+          {commissioningCount > 0 && (
+            <label className="flex items-center gap-2 text-xs text-[var(--color-text-muted)] cursor-pointer select-none">
+              <input
+                type="checkbox"
+                checked={excludeCommissioning}
+                onChange={(e) => setExcludeCommissioning(e.target.checked)}
+                className="cursor-pointer accent-[var(--color-primary)]"
+              />
+              <span>
+                <span className="font-semibold text-[var(--color-text)]">Exclude commissioning ramp</span> —{' '}
+                hide the first {commissioningCount} month{commissioningCount === 1 ? '' : 's'} after COD from CF averages and per-year views (otherwise these months drag the average down because not all turbines are operating yet).
+              </span>
+            </label>
+          )}
+          {partialMonthInfo && (
+            <p className="text-[11px] text-[var(--color-text-muted)]">
+              <span className="font-semibold text-amber-400">Current month adjustment:</span> {MONTH_LABELS[partialMonthInfo.month - 1]} {partialMonthInfo.year}{' '}
+              appears to be partial data (CF ~{(1 / partialMonthInfo.scale * 100).toFixed(0)}% of historical median). The chart shows the CF scaled by ×{partialMonthInfo.scale.toFixed(2)} to a full-month-equivalent so it's comparable to other months. The underlying raw energy total is unchanged.
+            </p>
+          )}
+        </div>
+      )}
+
       {/* Year-over-year CF comparison */}
       <ChartSection title="Monthly Capacity Factor — Year-over-Year">
         <ResponsiveContainer width="100%" height={280}>
           <LineChart data={cfComparison} margin={{ top: 8, right: 8, bottom: 0, left: -12 }}>
             <CartesianGrid strokeDasharray="3 3" stroke="var(--color-border)" />
             <XAxis dataKey="month" tick={{ fontSize: 10, fill: 'var(--color-text-muted)' }} />
-            <YAxis tick={{ fontSize: 10, fill: 'var(--color-text-muted)' }} tickFormatter={v => `${v}%`} />
+            <YAxis tick={{ fontSize: 10, fill: 'var(--color-text-muted)' }} tickFormatter={v => `${v}%`}
+              domain={[0, cfYMax]} />
             <Tooltip
               contentStyle={tooltipStyle}
               formatter={((value: number, name: string) => [
@@ -227,7 +387,7 @@ function GenerationMonthlyCharts({
             <Legend wrapperStyle={{ fontSize: 10 }} formatter={(v: string) => v === 'average' ? 'Average' : v.replace('y', '')} />
             {selectedYear === 'average' ? (
               <>
-                {years.map(y => (
+                {filteredYears.map(y => (
                   <Line
                     key={y}
                     type="monotone"
@@ -286,8 +446,15 @@ function GenerationMonthlyCharts({
         <RevenueYoYChart data={data} years={years} selectedYear={selectedYear} />
       )}
 
-      {/* Monthly energy output heatmap-style table */}
-      <MonthlyTable data={data.monthly} years={years} metric="capacity_factor_pct" label="CF%" format={v => `${v.toFixed(1)}%`} colorFn={cfColor} />
+      {/* Monthly energy output heatmap-style table — uses adjusted (partial-month-scaled, commissioning-filtered) data */}
+      <MonthlyTable
+        data={adjusted.map(m => ({ ...m, capacity_factor_pct: m.cfPctAdjusted ?? undefined }))}
+        years={filteredYears}
+        metric="capacity_factor_pct"
+        label="CF%"
+        format={v => `${v.toFixed(1)}%`}
+        colorFn={cfColor}
+      />
     </>
   )
 }
