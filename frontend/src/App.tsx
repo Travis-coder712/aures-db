@@ -13,6 +13,7 @@ import NSWRezTransmissionModule from './pages/learn/NSWRezTransmissionModule'
 import BESSStoryModule from './pages/learn/BESSStoryModule'
 import EnergyTransitionModule from './pages/learn/EnergyTransitionModule'
 import PlanningApprovalsModule from './pages/learn/PlanningApprovalsModule'
+import AemoConnectionsModule from './pages/learn/AemoConnectionsModule'
 import LearnHub from './pages/learn/LearnHub'
 import ModuleStub from './pages/learn/ModuleStub'
 // SchemesOverview merged into SchemeTracker intelligence page
@@ -88,6 +89,8 @@ function App() {
         <Route path="learn/energy-transition/:lessonId" element={<EnergyTransitionModule />} />
         <Route path="learn/planning-approvals" element={<PlanningApprovalsModule />} />
         <Route path="learn/planning-approvals/:lessonId" element={<PlanningApprovalsModule />} />
+        <Route path="learn/aemo-connections" element={<AemoConnectionsModule />} />
+        <Route path="learn/aemo-connections/:lessonId" element={<AemoConnectionsModule />} />
         <Route path="learn/:moduleId" element={<ModuleStub />} />
         {/* Redirect old /schemes to intelligence page */}
         <Route path="schemes" element={<Navigate to="/intelligence/scheme-tracker" replace />} />
