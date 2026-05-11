@@ -10,7 +10,7 @@
  * Sources cited inline at the end of each lesson; the full
  * bibliography also lives in src/data/learning-modules.ts.
  */
-import { useState, useCallback, useMemo } from 'react'
+import { useState, useCallback, useMemo, memo } from 'react'
 import { useParams, useNavigate, Link } from 'react-router-dom'
 import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
@@ -1202,49 +1202,30 @@ function calcScenario(inputs: CalcInputs, spotPrice: number): ScenarioResult {
   }
 }
 
-function PpaCisaCalculator() {
-  const [inputs, setInputs] = useState<CalcInputs>({
-    capacityMw: 200,
-    capacityFactor: 0.38,
-    ppaStrike: 70,
-    ppaCoverage: 0.50,
-    ppaTenor: 12,
-    cisaFloor: 55,
-    cisaCeiling: 130,
-    cisaAnnualCap: 30,
-    cisaTenor: 15,
-    curtailNegative: true,
-  })
+// Stable formatter callbacks — re-using the same function reference across
+// renders means the memoised CalcSlider doesn't see "new" format props.
+const fmtMW = (v: number) => `${v} MW`
+const fmtPct = (v: number) => `${(v * 100).toFixed(0)}%`
+const fmtDollarMWh = (v: number) => `$${v}/MWh`
+const fmtDollarM = (v: number) => `$${v}M`
+const fmtYrs = (v: number) => `${v} yrs`
 
-  // 8 spot price scenarios spanning the realistic range
-  const spotScenarios = useMemo(() => [-20, 10, 30, 50, 70, 100, 130, 160], [])
-
-  const results = useMemo(() => spotScenarios.map(s => calcScenario(inputs, s)), [inputs, spotScenarios])
-
-  // Format $M from $ value
-  const m = (v: number) => (v / 1_000_000).toFixed(1)
-
-  // Chart data — convert to $M for readability
-  const chartData = results.map(r => ({
-    spot: `$${r.spotPrice}`,
-    PPA: Math.round(r.ppaRevenue / 1_000_000 * 10) / 10,
-    Merchant: Math.round(r.merchantRevenue / 1_000_000 * 10) / 10,
-    'CISA top-up': Math.round(r.cisaTopUp / 1_000_000 * 10) / 10,
-    'CISA clawback': Math.round(r.cisaClawback / 1_000_000 * 10) / 10,
-    Total: Math.round(r.totalRevenue / 1_000_000 * 10) / 10,
-    EffectivePerMwh: Math.round(r.effectivePerMwh),
-    CapBites: r.capBites,
-  }))
-
-  // Annual revenue at PPA + CISA only (no merchant), for reference line interpretation
-  // Generation calc once
-  const annualGen = inputs.capacityMw * 8760 * inputs.capacityFactor
-
-  // Slider component (inline)
-  const Slider = ({ label, value, min, max, step, onChange, format }: {
-    label: string; value: number; min: number; max: number; step: number;
-    onChange: (v: number) => void; format: (v: number) => string;
-  }) => (
+// Slider — defined OUTSIDE the calculator so React doesn't tear down the
+// <input type="range"> DOM node on each parent re-render. (When defined
+// inline, every keystroke would create a "new" component type and the
+// browser would lose the active drag state — laggy / unresponsive thumb.)
+const CalcSlider = memo(function CalcSlider({
+  label, value, min, max, step, onChange, format,
+}: {
+  label: string
+  value: number
+  min: number
+  max: number
+  step: number
+  onChange: (v: number) => void
+  format: (v: number) => string
+}) {
+  return (
     <div className="space-y-1">
       <div className="flex items-center justify-between text-xs">
         <span className="text-[var(--color-text-muted)]">{label}</span>
@@ -1261,6 +1242,66 @@ function PpaCisaCalculator() {
       />
     </div>
   )
+})
+
+function PpaCisaCalculator() {
+  const [inputs, setInputs] = useState<CalcInputs>({
+    capacityMw: 200,
+    capacityFactor: 0.38,
+    ppaStrike: 70,
+    ppaCoverage: 0.50,
+    ppaTenor: 12,
+    cisaFloor: 55,
+    cisaCeiling: 130,
+    cisaAnnualCap: 30,
+    cisaTenor: 15,
+    curtailNegative: true,
+  })
+
+  // Stable patch helpers — these don't change between renders, so the memoised
+  // CalcSlider children never see new onChange refs and don't re-render
+  // unless their own props change.
+  const patch = useCallback(
+    <K extends keyof CalcInputs>(key: K) => (v: CalcInputs[K]) =>
+      setInputs(prev => ({ ...prev, [key]: v })),
+    []
+  )
+  const setCapacityMw = useMemo(() => patch('capacityMw'), [patch])
+  const setCapacityFactor = useMemo(() => patch('capacityFactor'), [patch])
+  const setPpaStrike = useMemo(() => patch('ppaStrike'), [patch])
+  const setPpaCoverage = useMemo(() => patch('ppaCoverage'), [patch])
+  const setPpaTenor = useMemo(() => patch('ppaTenor'), [patch])
+  const setCisaFloor = useMemo(() => patch('cisaFloor'), [patch])
+  const setCisaCeiling = useMemo(() => patch('cisaCeiling'), [patch])
+  const setCisaAnnualCap = useMemo(() => patch('cisaAnnualCap'), [patch])
+  const setCisaTenor = useMemo(() => patch('cisaTenor'), [patch])
+  const setCurtailNegative = useCallback((v: boolean) =>
+    setInputs(prev => ({ ...prev, curtailNegative: v })), [])
+
+  // 8 spot price scenarios spanning the realistic range
+  const spotScenarios = useMemo(() => [-20, 10, 30, 50, 70, 100, 130, 160], [])
+
+  const results = useMemo(() => spotScenarios.map(s => calcScenario(inputs, s)), [inputs, spotScenarios])
+
+  // Format $M from $ value
+  const m = (v: number) => (v / 1_000_000).toFixed(1)
+
+  // Chart data — convert to $M for readability. Memoised so Recharts only
+  // re-renders when results change, not on every parent render.
+  const chartData = useMemo(() => results.map(r => ({
+    spot: `$${r.spotPrice}`,
+    PPA: Math.round(r.ppaRevenue / 1_000_000 * 10) / 10,
+    Merchant: Math.round(r.merchantRevenue / 1_000_000 * 10) / 10,
+    'CISA top-up': Math.round(r.cisaTopUp / 1_000_000 * 10) / 10,
+    'CISA clawback': Math.round(r.cisaClawback / 1_000_000 * 10) / 10,
+    Total: Math.round(r.totalRevenue / 1_000_000 * 10) / 10,
+    EffectivePerMwh: Math.round(r.effectivePerMwh),
+    CapBites: r.capBites,
+  })), [results])
+
+  // Annual revenue at PPA + CISA only (no merchant), for reference line interpretation
+  // Generation calc once
+  const annualGen = inputs.capacityMw * 8760 * inputs.capacityFactor
 
   return (
     <div className="my-6 space-y-5">
@@ -1273,12 +1314,12 @@ function PpaCisaCalculator() {
         <div>
           <p className="text-[10px] uppercase tracking-wider text-[var(--color-text-muted)] mb-2">Project</p>
           <div className="grid sm:grid-cols-2 gap-x-6 gap-y-3">
-            <Slider label="Capacity" value={inputs.capacityMw} min={50} max={500} step={10}
-              onChange={(v) => setInputs({ ...inputs, capacityMw: v })}
-              format={(v) => `${v} MW`} />
-            <Slider label="Capacity factor (wind)" value={inputs.capacityFactor} min={0.20} max={0.50} step={0.01}
-              onChange={(v) => setInputs({ ...inputs, capacityFactor: v })}
-              format={(v) => `${(v * 100).toFixed(0)}%`} />
+            <CalcSlider label="Capacity" value={inputs.capacityMw} min={50} max={500} step={10}
+              onChange={setCapacityMw}
+              format={fmtMW} />
+            <CalcSlider label="Capacity factor (wind)" value={inputs.capacityFactor} min={0.20} max={0.50} step={0.01}
+              onChange={setCapacityFactor}
+              format={fmtPct} />
           </div>
           <p className="text-[10px] text-[var(--color-text-muted)] mt-2 italic">
             Annual generation = {(annualGen / 1000).toFixed(0)} GWh
@@ -1288,33 +1329,33 @@ function PpaCisaCalculator() {
         <div>
           <p className="text-[10px] uppercase tracking-wider text-[var(--color-text-muted)] mb-2">PPA — the arms-length offtake</p>
           <div className="grid sm:grid-cols-3 gap-x-6 gap-y-3">
-            <Slider label="Strike price" value={inputs.ppaStrike} min={40} max={120} step={1}
-              onChange={(v) => setInputs({ ...inputs, ppaStrike: v })}
-              format={(v) => `$${v}/MWh`} />
-            <Slider label="Volume coverage" value={inputs.ppaCoverage} min={0} max={1} step={0.05}
-              onChange={(v) => setInputs({ ...inputs, ppaCoverage: v })}
-              format={(v) => `${(v * 100).toFixed(0)}%`} />
-            <Slider label="Tenor" value={inputs.ppaTenor} min={5} max={25} step={1}
-              onChange={(v) => setInputs({ ...inputs, ppaTenor: v })}
-              format={(v) => `${v} yrs`} />
+            <CalcSlider label="Strike price" value={inputs.ppaStrike} min={40} max={120} step={1}
+              onChange={setPpaStrike}
+              format={fmtDollarMWh} />
+            <CalcSlider label="Volume coverage" value={inputs.ppaCoverage} min={0} max={1} step={0.05}
+              onChange={setPpaCoverage}
+              format={fmtPct} />
+            <CalcSlider label="Tenor" value={inputs.ppaTenor} min={5} max={25} step={1}
+              onChange={setPpaTenor}
+              format={fmtYrs} />
           </div>
         </div>
 
         <div>
           <p className="text-[10px] uppercase tracking-wider text-[var(--color-text-muted)] mb-2">CISA — the federal floor / ceiling CFD</p>
           <div className="grid sm:grid-cols-4 gap-x-6 gap-y-3">
-            <Slider label="Floor strike" value={inputs.cisaFloor} min={30} max={100} step={1}
-              onChange={(v) => setInputs({ ...inputs, cisaFloor: v })}
-              format={(v) => `$${v}/MWh`} />
-            <Slider label="Ceiling strike" value={inputs.cisaCeiling} min={80} max={200} step={1}
-              onChange={(v) => setInputs({ ...inputs, cisaCeiling: v })}
-              format={(v) => `$${v}/MWh`} />
-            <Slider label="Annual cap (gov payment)" value={inputs.cisaAnnualCap} min={0} max={100} step={1}
-              onChange={(v) => setInputs({ ...inputs, cisaAnnualCap: v })}
-              format={(v) => `$${v}M`} />
-            <Slider label="CISA tenor" value={inputs.cisaTenor} min={10} max={20} step={1}
-              onChange={(v) => setInputs({ ...inputs, cisaTenor: v })}
-              format={(v) => `${v} yrs`} />
+            <CalcSlider label="Floor strike" value={inputs.cisaFloor} min={30} max={100} step={1}
+              onChange={setCisaFloor}
+              format={fmtDollarMWh} />
+            <CalcSlider label="Ceiling strike" value={inputs.cisaCeiling} min={80} max={200} step={1}
+              onChange={setCisaCeiling}
+              format={fmtDollarMWh} />
+            <CalcSlider label="Annual cap (gov payment)" value={inputs.cisaAnnualCap} min={0} max={100} step={1}
+              onChange={setCisaAnnualCap}
+              format={fmtDollarM} />
+            <CalcSlider label="CISA tenor" value={inputs.cisaTenor} min={10} max={20} step={1}
+              onChange={setCisaTenor}
+              format={fmtYrs} />
           </div>
         </div>
 
@@ -1323,7 +1364,7 @@ function PpaCisaCalculator() {
             type="checkbox"
             id="curtail"
             checked={inputs.curtailNegative}
-            onChange={(e) => setInputs({ ...inputs, curtailNegative: e.target.checked })}
+            onChange={(e) => setCurtailNegative(e.target.checked)}
             className="cursor-pointer accent-[var(--color-primary)]"
           />
           <label htmlFor="curtail" className="text-[var(--color-text-muted)] cursor-pointer">
