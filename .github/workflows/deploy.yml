@@ -27,6 +27,7 @@ jobs:
           cache-dependency-path: |
             frontend/package-lock.json
             acknowledge-country/package-lock.json
+            brisbane-builder-guide/package-lock.json
 
       - name: Install AURES dependencies
         working-directory: frontend
@@ -54,6 +55,17 @@ jobs:
 
       - name: Copy Acknowledge Country into AURES dist
         run: cp -r acknowledge-country/dist frontend/dist/country
+
+      - name: Install Brisbane Builder Guide dependencies
+        working-directory: brisbane-builder-guide
+        run: npm ci
+
+      - name: Build Brisbane Builder Guide PWA
+        working-directory: brisbane-builder-guide
+        run: npm run build
+
+      - name: Copy Brisbane Builder Guide into AURES dist
+        run: cp -r brisbane-builder-guide/dist frontend/dist/builders
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
