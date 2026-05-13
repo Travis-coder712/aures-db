@@ -239,22 +239,34 @@ function Lesson1() {
 // Lesson 2 — CIS Mechanics — Floor + Ceiling CFD
 // ============================================================
 
+// CISA structural constants — publicly defined in the CISA contract template,
+// NOT bid parameters. Confirmed from DCCEEW / Clayton Utz primary summaries
+// of the Generation CISA term sheet.
+const CISA_FLOOR_COVERAGE = 0.90  // CISA tops up 90% of the gap between floor and RRP
+const CISA_CEILING_SHARE  = 0.50  // CISA reclaims 50% of revenue above ceiling
+
 function Lesson2() {
   // Interactive: simple CISA payoff calculator
   const [floor, setFloor] = useState(60)
   const [ceiling, setCeiling] = useState(120)
   const [marketPrice, setMarketPrice] = useState(80)
-  const [shareAbove, setShareAbove] = useState(90)
+  const [curtailNegative, setCurtailNegative] = useState(true)
+
+  // CISA reference price: negative spot is deemed $0 for the make-up calculation
+  // ("prices below zero deemed to be zero for net revenue calculations" — CISA template).
+  const cisaRef = Math.max(0, marketPrice)
+  // If curtailing on negative prices, project earns $0 in those hours; otherwise it eats the negative spot.
+  const merchantEarned = (curtailNegative && marketPrice < 0) ? 0 : marketPrice
 
   const proponentReceives =
-    marketPrice < floor    ? floor :
-    marketPrice <= ceiling ? marketPrice :
-    ceiling + (marketPrice - ceiling) * (1 - shareAbove / 100)
+    cisaRef < floor    ? merchantEarned + CISA_FLOOR_COVERAGE * (floor - cisaRef) :
+    cisaRef <= ceiling ? merchantEarned :
+    merchantEarned - CISA_CEILING_SHARE * (cisaRef - ceiling)
 
   const govPays =
-    marketPrice < floor ? floor - marketPrice : 0
+    cisaRef < floor ? CISA_FLOOR_COVERAGE * (floor - cisaRef) : 0
   const govReceives =
-    marketPrice > ceiling ? (marketPrice - ceiling) * (shareAbove / 100) : 0
+    cisaRef > ceiling ? CISA_CEILING_SHARE * (cisaRef - ceiling) : 0
 
   return (
     <div>
@@ -275,27 +287,44 @@ function Lesson2() {
 
       <H3>The payoff structure, formally</H3>
       <P>
-        Let <Code>P</Code> be the volume-weighted average market price the project realised in a settlement
-        period, <Code>F</Code> the floor and <Code>C</Code> the ceiling, and <Code>s</Code> the
-        commonwealth share above the ceiling. Then the proponent's effective $/MWh revenue is:
+        Let <Code>P</Code> be the regional reference price (RRP) for the settlement period, <Code>F</Code> the
+        floor, <Code>C</Code> the ceiling. The CISA reference price is{' '}
+        <Code>P*&nbsp;=&nbsp;max(0,&nbsp;P)</Code> — negative spot is deemed zero. Two structural ratios are
+        fixed in the contract template (not bid):
+      </P>
+      <ul className="list-disc list-inside text-sm text-[var(--color-text-muted)] space-y-1.5 mb-3 ml-2">
+        <li><Em>90% floor coverage</Em> — Commonwealth tops up 90% of the gap between floor and RRP. The
+          project absorbs the remaining 10%.</li>
+        <li><Em>50% ceiling sharing</Em> — Commonwealth claws back 50% of any revenue above the ceiling.
+          The project keeps the other 50%.</li>
+      </ul>
+      <P>
+        Then the proponent's effective $/MWh revenue, before merchant losses on negative spot, is:
       </P>
       <div className="bg-[var(--color-bg-elevated)] border border-[var(--color-border)] rounded-xl p-4 my-4 font-mono text-sm leading-relaxed">
-        <span className="text-[var(--color-text-muted)]">If</span> <Code>P &lt; F</Code>:                          {' '}<Code>R = F</Code> <span className="text-[var(--color-text-muted)]">(commonwealth tops up)</span><br/>
-        <span className="text-[var(--color-text-muted)]">If</span> <Code>F ≤ P ≤ C</Code>:                       {' '}<Code>R = P</Code> <span className="text-[var(--color-text-muted)]">(market only)</span><br/>
-        <span className="text-[var(--color-text-muted)]">If</span> <Code>P &gt; C</Code>:                          {' '}<Code>R = C + (P − C) × (1 − s)</Code> <span className="text-[var(--color-text-muted)]">(profit-share)</span>
+        <span className="text-[var(--color-text-muted)]">If</span> <Code>P* &lt; F</Code>:               {' '}<Code>R = P + 0.90 × (F − P*)</Code> <span className="text-[var(--color-text-muted)]">(partial top-up)</span><br/>
+        <span className="text-[var(--color-text-muted)]">If</span> <Code>F ≤ P* ≤ C</Code>:               {' '}<Code>R = P</Code> <span className="text-[var(--color-text-muted)]">(pure merchant)</span><br/>
+        <span className="text-[var(--color-text-muted)]">If</span> <Code>P* &gt; C</Code>:               {' '}<Code>R = P − 0.50 × (P* − C)</Code> <span className="text-[var(--color-text-muted)]">(half clawed back)</span>
       </div>
+
+      <Callout type="key">
+        The 90% floor / 50% ceiling split is contract-fixed, not bid. Only the floor strike, ceiling
+        strike, and annual cap are bid variables. This means a project bidding floor $55 in a low-price
+        year does <em>not</em> achieve $55/MWh — it achieves <em>$55 minus 10% of the gap to RRP</em>.
+        The 10% retained loss is the project's deductible.
+      </Callout>
 
       <P>
         The <Em>strike</Em> price you'll see quoted in industry analysis is sometimes the floor, sometimes
         a notional &ldquo;mid-point&rdquo;, and sometimes a P50 expected revenue. There is no single &ldquo;CIS
-        strike price&rdquo; — each contract is bilaterally negotiated within the bid envelope.
+        strike price&rdquo; — each contract bids its own floor and ceiling within the round's envelope.
       </P>
 
       <H2>Try it — CISA payoff calculator</H2>
       <P>Move the sliders to see how the floor + ceiling structure shifts the proponent's $/MWh revenue.</P>
 
       <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl p-4 my-4 space-y-4">
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
           <div>
             <label className="text-[10px] uppercase tracking-wider text-[var(--color-text-muted)]">Floor F ($/MWh)</label>
             <input type="range" min="20" max="120" step="5" value={floor} onChange={e => setFloor(+e.target.value)} className="w-full mt-1" />
@@ -307,35 +336,44 @@ function Lesson2() {
             <p className="text-sm font-bold text-[var(--color-text)] mt-1">${ceiling}</p>
           </div>
           <div>
-            <label className="text-[10px] uppercase tracking-wider text-[var(--color-text-muted)]">Market price P ($/MWh)</label>
-            <input type="range" min="0" max="300" step="5" value={marketPrice} onChange={e => setMarketPrice(+e.target.value)} className="w-full mt-1" />
+            <label className="text-[10px] uppercase tracking-wider text-[var(--color-text-muted)]">Spot RRP ($/MWh)</label>
+            <input type="range" min="-50" max="300" step="5" value={marketPrice} onChange={e => setMarketPrice(+e.target.value)} className="w-full mt-1" />
             <p className="text-sm font-bold text-[var(--color-text)] mt-1">${marketPrice}</p>
           </div>
-          <div>
-            <label className="text-[10px] uppercase tracking-wider text-[var(--color-text-muted)]">Govt share above C (%)</label>
-            <input type="range" min="50" max="100" step="5" value={shareAbove} onChange={e => setShareAbove(+e.target.value)} className="w-full mt-1" />
-            <p className="text-sm font-bold text-[var(--color-text)] mt-1">{shareAbove}%</p>
-          </div>
+        </div>
+        <div className="flex items-center gap-2 text-xs pt-1">
+          <input
+            type="checkbox"
+            id="curtail-l2"
+            checked={curtailNegative}
+            onChange={(e) => setCurtailNegative(e.target.checked)}
+            className="cursor-pointer accent-[var(--color-primary)]"
+          />
+          <label htmlFor="curtail-l2" className="text-[var(--color-text-muted)] cursor-pointer">
+            Project curtails on negative-spot intervals (no merchant loss when spot {'<'} $0)
+          </label>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mt-3 pt-3 border-t border-[var(--color-border)]">
           <div className="bg-emerald-500/10 border border-emerald-500/30 rounded-lg p-3">
-            <p className="text-[10px] uppercase tracking-wider text-emerald-400 font-semibold">Proponent receives</p>
-            <p className="text-2xl font-bold text-emerald-400 mt-1">${proponentReceives.toFixed(2)}/MWh</p>
+            <p className="text-[10px] uppercase tracking-wider text-emerald-400 font-semibold">Proponent net $/MWh</p>
+            <p className="text-2xl font-bold text-emerald-400 mt-1">${proponentReceives.toFixed(2)}</p>
             <p className="text-[10px] text-[var(--color-text-muted)] mt-1">
-              {marketPrice < floor ? 'Floor protection — market is below F.' :
-               marketPrice <= ceiling ? 'Pure market — between F and C.' :
-               'Profit-share kicks in above C.'}
+              {marketPrice < 0 && curtailNegative ? 'Curtailed — neither side settles.' :
+               marketPrice < 0                    ? 'Negative spot — project bears loss; CISA top-up against $0 reference.' :
+               cisaRef < floor                    ? 'Below floor — 90% top-up; project absorbs 10% of the gap.' :
+               cisaRef <= ceiling                 ? 'Between F and C — pure merchant.' :
+                                                    'Above ceiling — 50% clawed back to Commonwealth.'}
             </p>
           </div>
           <div className="bg-blue-500/10 border border-blue-500/30 rounded-lg p-3">
             <p className="text-[10px] uppercase tracking-wider text-blue-400 font-semibold">Commonwealth pays</p>
             <p className="text-2xl font-bold text-blue-400 mt-1">${govPays.toFixed(2)}/MWh</p>
-            <p className="text-[10px] text-[var(--color-text-muted)] mt-1">Top-up — only when market &lt; floor.</p>
+            <p className="text-[10px] text-[var(--color-text-muted)] mt-1">90% × max(0, F − max(0, P)).</p>
           </div>
           <div className="bg-purple-500/10 border border-purple-500/30 rounded-lg p-3">
             <p className="text-[10px] uppercase tracking-wider text-purple-400 font-semibold">Commonwealth claws back</p>
             <p className="text-2xl font-bold text-purple-400 mt-1">${govReceives.toFixed(2)}/MWh</p>
-            <p className="text-[10px] text-[var(--color-text-muted)] mt-1">Profit-share — only when market &gt; ceiling.</p>
+            <p className="text-[10px] text-[var(--color-text-muted)] mt-1">50% × max(0, P − C).</p>
           </div>
         </div>
       </div>
@@ -389,14 +427,22 @@ function Lesson2() {
       </Callout>
 
       <Callout type="numbers">
-        Worked example. Suppose a 200 MW solar farm in NSW with 30% capacity factor wins a Generation CISA
-        with floor = $50/MWh, ceiling = $130/MWh, share-above = 90/10 (proponent keeps 10%, Commonwealth
-        gets 90%). In a year where the NSW RRP averages $40 over solar hours (heavy cannibalisation), the
-        proponent receives $50/MWh × 525,600 MWh = ~$26.3M revenue from the CFD, with the Commonwealth
-        topping up $10/MWh × 525,600 ≈ $5.3M. In a year where prices spike to $200/MWh average, the
-        proponent receives $130 + (200 − 130) × 0.10 = $137/MWh × 525,600 ≈ $72M, and the Commonwealth
-        receives $63/MWh × 525,600 ≈ $33M. The contract is therefore extremely valuable in low-price years
-        and only mildly attractive in high-price years.
+        <strong>Worked example.</strong> A 200 MW solar farm in NSW at 30% CF generates 525,600 MWh/yr.
+        Generation CISA: floor $50/MWh, ceiling $130/MWh. Fixed contract ratios: 90% floor coverage, 50%
+        ceiling sharing.
+        <br /><br />
+        <strong>Low-price year — NSW RRP averages $40/MWh over solar hours.</strong> Project earns from
+        market: $40 × 525,600 = <strong>$21.0M</strong>. CISA top-up: 90% × ($50 − $40) × 525,600 =
+        <strong> $4.7M</strong>. Total revenue: <strong>$25.7M = $48.93/MWh</strong> — short of the floor by
+        $1.07/MWh, the 10% deductible the project absorbs.
+        <br /><br />
+        <strong>High-price year — RRP averages $200/MWh.</strong> Project earns from market: $200 × 525,600
+        = <strong>$105.1M</strong>. Ceiling clawback: 50% × ($200 − $130) × 525,600 = <strong>$18.4M</strong>.
+        Net project revenue: <strong>$86.7M = $165/MWh</strong>. Commonwealth receives $18.4M.
+        <br /><br />
+        The contract narrows the project's $/MWh band substantially — but does not eliminate downside (the
+        10% deductible bites in every below-floor year) and does not cap upside fully (the project keeps
+        half of every dollar above ceiling).
       </Callout>
 
       <Callout type="source">
@@ -524,7 +570,7 @@ function Lesson3() {
         headers={['Test', 'CIS', 'LTESA']}
         rows={[
           ['Revenue certainty for lenders', 'Floor protects downside; ceiling caps upside', 'Pure fixed strike — both directions'],
-          ['Upside retention for equity', '10% of upside above ceiling', 'No upside above strike'],
+          ['Upside retention for equity', '50% of upside above ceiling', 'No upside above strike'],
           ['Project bond timing', '20 days post-execution', 'More flexible per round'],
           ['First Nations enforcement', 'Merit criteria + soft compliance', 'Aboriginal Participation Plans (legally binding)'],
           ['Term', '12–15 years', '14–20 years (LDS up to 20)'],
@@ -781,19 +827,26 @@ function Lesson5() {
         floor or strike to maximise MC2 scoring. But:
       </P>
       <ul className="list-disc list-inside text-sm text-[var(--color-text-muted)] space-y-1.5 mb-3 ml-2">
-        <li>A low floor reduces lender confidence — DSCR is calculated against the floor, so a floor of
-          $35/MWh on a 30% CF project gives roughly half the DSCR cushion of a $50/MWh floor.</li>
-        <li>If the contract is heavily ceiling-share, the proponent has given up most of the upside in
-          high-price years — and CIS contracts are 12-15 years, so a couple of high-price years matter a
-          lot to total NPV.</li>
+        <li>A low floor reduces lender confidence — DSCR is calculated against the floor (minus the 10%
+          deductible the project absorbs below floor), so a floor of $35/MWh on a 30% CF project gives
+          roughly half the DSCR cushion of a $50/MWh floor.</li>
+        <li>A low ceiling truncates upside — the project gives up 50% of every dollar above ceiling. CIS
+          contracts are 12-15 years, so a couple of high-price years matter a lot to total NPV.</li>
+        <li>A high annual cap is more bankable but more expensive on MC2 scoring (since it's a larger
+          contingent Commonwealth liability).</li>
       </ul>
       <P>
         The optimal MC2 bid depends on the proponent's risk appetite, capital structure, and view on
-        future market prices. Aggressive MC2 bidding (low floor, high ceiling-share) is favoured by
+        future market prices. Aggressive MC2 bidding (low floor, low ceiling, modest cap) is favoured by
         well-capitalised developers who can withstand under-recovery; conservative MC2 bidding (higher
-        floor, lower ceiling-share) is favoured by project-finance-dependent developers needing high
-        DSCR.
+        floor, higher ceiling, larger cap) is favoured by project-finance-dependent developers needing
+        high DSCR.
       </P>
+      <Callout type="info">
+        The <em>sharing ratios</em> are not bid variables. The CISA template fixes 90% Commonwealth
+        coverage below the floor and 50% Commonwealth clawback above the ceiling. Only the floor strike,
+        ceiling strike, and annual cap are bid by the proponent.
+      </Callout>
 
       <Callout type="warn">
         Misreading the merit-criteria weights in any given round is the most common reason bids fail.
@@ -832,7 +885,7 @@ function Lesson6() {
           ['Revenue predictability', 'Spot price + corporate PPA — basis risk persists', 'Floor protection — minimum revenue line is contractual'],
           ['Downside protection', 'Reliance on sponsor support letters or LGC bundling', 'Floor of $40–60/MWh provides DSCR floor under 1.10×–1.15× downside case'],
           ['Term match', 'Banks limit tenor to 5–7 years on merchant exposure', 'Term-match to 12–15-year CISA — banks comfortable with 12-year mini-perm or 15-year term'],
-          ['Equity returns', 'IRR uncertain; high-price years deliver upside', 'IRR ranges narrow — ceiling-share caps upside but increases certainty of base case'],
+          ['Equity returns', 'IRR uncertain; high-price years deliver upside', 'IRR ranges narrow — 50% ceiling clawback caps upside but raises certainty of base case'],
           ['Refinancing', 'Limited — banks won\'t refinance merchant on long tenor', 'Strong — sponsor can refinance at lower cost post-construction once CISA is in operation'],
         ]}
       />
@@ -846,29 +899,29 @@ function Lesson6() {
 
       <H2>The bid-strategy spectrum</H2>
       <P>
-        Within the CIS framework, proponents face a strategic choice: bid an{' '}
-        <Em>aggressive low-floor / high-ceiling-share</Em> structure (maximises upside but loses points
-        on MC2), or a <Em>conservative high-floor / low-ceiling-share</Em> structure (better MC2 score
-        but caps upside). The two ends of the spectrum:
+        The CISA template fixes the sharing ratios (90% Commonwealth coverage below floor; 50% Commonwealth
+        clawback above ceiling). The proponent bids three numbers: <Em>floor strike</Em>, <Em>ceiling
+        strike</Em>, and <Em>annual cap</Em>. The strategy spectrum is therefore expressed as combinations
+        of these three.
       </P>
 
-      <H3>Aggressive: low floor + share-the-upside</H3>
+      <H3>Aggressive: low floor + low ceiling + modest cap</H3>
       <P>
-        Low floor (e.g. $35–40/MWh), narrow gap to ceiling, high commonwealth share-above. This bid says
-        &ldquo;I'm confident in market prices; give me the upside.&rdquo;
+        Low floor (e.g. $35–40/MWh), low ceiling (e.g. $100–110/MWh), small cap (e.g. $15–20M). This bid
+        says &ldquo;I want a thin contract — minimal Commonwealth exposure — to maximise my MC2 score.&rdquo;
       </P>
       <ul className="list-disc list-inside text-sm text-[var(--color-text-muted)] space-y-1 mb-3 ml-2">
         <li>+ Strong MC2 scoring</li>
         <li>+ Less Commonwealth subsidy if market prices are high → easier political defence</li>
         <li>− Lower DSCR cushion → higher cost of debt, may need extra equity</li>
-        <li>− Equity returns very sensitive to market scenario assumptions</li>
+        <li>− 50% clawback bites earlier and harder if prices rise</li>
         <li>− Best suited to: well-capitalised IPPs, BESS projects with FCAS upside, projects with corporate PPA stacking</li>
       </ul>
 
-      <H3>Conservative: high floor + retain-most-upside</H3>
+      <H3>Conservative: high floor + high ceiling + large cap</H3>
       <P>
-        Higher floor (e.g. $50–65/MWh), wider gap to ceiling, lower commonwealth share-above. This bid
-        says &ldquo;give me the floor — I'll take less of the high-price upside in return.&rdquo;
+        Higher floor (e.g. $50–65/MWh), higher ceiling (e.g. $140–170/MWh), large cap (e.g. $40–60M). This
+        bid says &ldquo;give me real downside protection — I'll accept a worse MC2 score in return.&rdquo;
       </P>
       <ul className="list-disc list-inside text-sm text-[var(--color-text-muted)] space-y-1 mb-3 ml-2">
         <li>+ Strong DSCR — lender appetite is highest here, lowest cost of debt</li>
@@ -1087,6 +1140,42 @@ function Lesson7() {
         sound; the limiting factor is now the planning and grid-connection systems sitting around it.
       </Callout>
 
+      <H2>What comes next — ESEM, the Nelson Review's successor to CIS</H2>
+      <P>
+        The Capacity Investment Scheme concludes in 2027. The replacement is the{' '}
+        <Em>Electricity Services Entry Mechanism (ESEM)</Em>, recommended by the NEM Wholesale Market
+        Settings Review (the &ldquo;Nelson Review&rdquo;) and endorsed in-principle by all energy
+        ministers except Queensland on 16 December 2025. Key structural differences:
+      </P>
+      <ul className="list-disc list-inside text-sm text-[var(--color-text-muted)] space-y-1.5 mb-3 ml-2">
+        <li><Em>Three standardised, fungible contracts</Em> rather than bespoke CISAs — bulk
+          zero-emissions energy, shaping services, and firming services (the latter calibrated against
+          a ~7.5-hour continuous-dispatch threshold under FY25-26 settings).</li>
+        <li><Em>Warehouse-and-recycle model</Em> — the ESEM Administrator buys long-dated contracts
+          from developers (covering the &ldquo;back end&rdquo; of the project's life, after a flexible
+          minimum of ~3 commercial years) and progressively sells them back into the forward market
+          at prevailing prices. Solves the &ldquo;tenor gap&rdquo; — projects need 15+ years of
+          revenue certainty; retailers/C&I contract for 1–7.</li>
+        <li><Em>Permanent, embedded in National Electricity Law</Em> — unlike CIS, which has a defined
+          end-date. Designed to be the durable underwriting layer of the NEM.</li>
+        <li><Em>Gas is eligible</Em> (unlike CIS); demand response and CER aggregators eligible;
+          smaller minimum parcels (100 kW vs 1 MW).</li>
+        <li><Em>Publishes clearing prices</Em> from auctions — full price transparency, contrasting
+          with CIS commercial confidentiality.</li>
+      </ul>
+      <P>
+        Implementation timeline: officials deliver a detailed work program in February 2026; ministers
+        review through 2026; pilot late 2026; formal commencement targeted for early 2027 (minimising
+        the gap after CIS ends). Queensland did not agree to the core recommendations and retains
+        implementation discretion.
+      </P>
+      <Callout type="info">
+        For current bidders, the practical implication is that <em>Tenders 7 and beyond may or may
+        not exist as CIS</em>. Project developers planning for COD 2028+ should be modelling ESEM
+        contract availability as the primary post-2027 revenue underwriting path. Existing CISAs are
+        contractually protected through their full tenor.
+      </Callout>
+
       <Callout type="source">
         Sources: AER quarterly statements (Sep 2025, Dec 2025) ·
         Senate Standing Committee on Environment & Communications, April 2026 Estimates ·
@@ -1095,6 +1184,9 @@ function Lesson7() {
         AEMC 2025 retail price forecast · Centre for Independent Studies <em>Eraring extension exposes
         Bowen's credibility gap</em> · RenewEconomy{' '}
         <em>Regulator says CIS Tender 1 projects are taking longer to land finance</em>{' '}·
+        NEM Wholesale Market Settings Review (Nelson Review) Final Report, December 2025 ·
+        Energy Ministers Meeting communiqué, 16 December 2025 ·
+        Energy Synapse <em>ESEM explained</em> · Ashurst, Allens, KWM <em>Nelson Review briefings</em>{' '}·
         AURES{' '}
         <Link to="/intelligence/scheme-tracker" className="text-[var(--color-primary)] hover:underline">
           Scheme Tracker
@@ -1168,15 +1260,17 @@ function calcScenario(inputs: CalcInputs, spotPrice: number): ScenarioResult {
   const preCisaRevenue = ppaRevenue + merchantRevenue
   const preCisaPerMwh = effectiveGeneration > 0 ? preCisaRevenue / effectiveGeneration : 0
 
-  // CISA settlement — applied to effective generation
-  // Floor top-up: gov pays when effective $/MWh below floor
-  // Ceiling clawback: project pays when effective $/MWh above ceiling
+  // CISA settlement — applied to effective generation. CISA reference price is max(0, preCisaPerMwh):
+  // negative net revenue is deemed $0 for the make-up calculation ("prices below zero deemed to be zero
+  // for net revenue calculations" — CISA template). Floor coverage is 90% of the gap; ceiling sharing
+  // is 50% of the excess. These are contract-fixed, not bid.
+  const cisaRef = Math.max(0, preCisaPerMwh)
   let cisaTopUpRaw = 0
   let cisaClawback = 0
-  if (preCisaPerMwh < inputs.cisaFloor) {
-    cisaTopUpRaw = (inputs.cisaFloor - preCisaPerMwh) * effectiveGeneration
-  } else if (preCisaPerMwh > inputs.cisaCeiling) {
-    cisaClawback = (preCisaPerMwh - inputs.cisaCeiling) * effectiveGeneration
+  if (cisaRef < inputs.cisaFloor) {
+    cisaTopUpRaw = CISA_FLOOR_COVERAGE * (inputs.cisaFloor - cisaRef) * effectiveGeneration
+  } else if (cisaRef > inputs.cisaCeiling) {
+    cisaClawback = CISA_CEILING_SHARE * (cisaRef - inputs.cisaCeiling) * effectiveGeneration
   }
   // Apply annual cap (positive payments capped; clawback uncapped)
   const cap = inputs.cisaAnnualCap * 1_000_000
@@ -1459,9 +1553,13 @@ function PpaCisaCalculator() {
           <li><span className="font-mono text-blue-400">Blue</span> = PPA revenue. Flat across scenarios because PPA strike doesn't move with spot.</li>
           <li><span className="font-mono text-emerald-400">Green</span> = merchant revenue (spot &gt; 0). Slopes upward with spot price.</li>
           <li><span className="font-mono text-red-400">Red</span> = merchant LOSSES (spot &lt; 0). Only present in negative-spot scenarios when the project does not curtail.</li>
-          <li><span className="font-mono text-purple-400">Purple</span> = CISA floor top-up. Appears when realised $/MWh falls below floor.</li>
-          <li><span className="font-mono text-orange-400">Orange</span> = CISA ceiling clawback. Negative bar — project pays gov when realised $/MWh exceeds ceiling.</li>
+          <li><span className="font-mono text-purple-400">Purple</span> = CISA floor top-up. <strong>90%</strong> of the gap between floor and max(0, realised $/MWh).</li>
+          <li><span className="font-mono text-orange-400">Orange</span> = CISA ceiling clawback. <strong>50%</strong> of revenue above ceiling. Negative bar — project pays Commonwealth.</li>
         </ul>
+        <p className="text-[10px] text-[var(--color-text-muted)] mt-3 italic">
+          The 90% / 50% / negative-deemed-zero rules are fixed by the CISA template — they are not bid
+          parameters. Only floor, ceiling, and annual cap are bid.
+        </p>
       </div>
     </div>
   )
@@ -1493,9 +1591,11 @@ function Lesson8() {
           The PPA buyer pays the strike regardless of where spot prices land. The volume not covered
           by the PPA flows to the merchant market at the prevailing spot price.</li>
         <li>A <Em>CISA</Em> applying to the project's full generation as a two-way floor + ceiling
-          CFD: if the project's effective realised price (PPA + merchant blend) is below the floor,
-          government tops up; if it's above the ceiling, the project pays government back. Top-ups
-          are subject to an annual cap; clawbacks are uncapped.</li>
+          CFD with three contract-fixed rules: <Em>90% floor coverage</Em> (Commonwealth tops up 90%
+          of the gap between floor and the CISA reference price), <Em>50% ceiling sharing</Em>
+          (Commonwealth claws back 50% of revenue above ceiling), and <Em>negative-deemed-zero</Em>
+          (the CISA reference is <Code>max(0, realised $/MWh)</Code> — negative spot is treated as $0
+          for the make-up calculation). Top-ups are subject to an annual cap; clawbacks are uncapped.</li>
       </ul>
       <P>
         The output below shows annual revenue across eight spot-price scenarios — from heavily
@@ -1505,11 +1605,12 @@ function Lesson8() {
 
       <Callout type="info">
         <Em>Simplifications.</Em> The calculator treats spot price as an annual average capture price
-        for the project. Real wind farms see substantial intra-year variation; the calculator
-        captures the headline economics rather than the period-by-period settlement detail. It also
-        assumes the CISA settles on realised revenue (PPA + merchant) — actual contracts sometimes
-        settle on the regional reference price gross. Treat the calculator as a strategy tool, not a
-        settlement engine.
+        for the project. Real wind farms see substantial intra-year variation; the calculator captures
+        the headline economics rather than the period-by-period settlement detail. The CISA reference
+        price is taken to be the project's blended realised $/MWh (PPA + merchant); actual contracts
+        reference regional RRP, which differs from the project's capture price by MLF, basis, and
+        intra-regional constraints (covered in checklist item 7 below). Treat the calculator as a
+        strategy tool, not a settlement engine.
       </Callout>
 
       <PpaCisaCalculator />
@@ -1553,28 +1654,38 @@ function Lesson8() {
           exposure. Bankability of the post-PPA-post-CISA period is typically very poor.</li>
       </ul>
 
-      <H2>3. $$ below $0 — the negative-price problem</H2>
+      <H2>3. Negative prices — CISA pays nothing extra in the loss zone</H2>
       <P>
-        This is one of the most important interactions and most commonly overlooked. When spot
-        prices go negative (NSW solar midday hours, VIC oversupply periods), the merchant portion of
-        the project's generation costs money to dispatch. The interactions:
+        This is the single most important rule to internalise about the CISA's downside. When spot
+        prices go negative (NSW solar midday hours, VIC oversupply periods), the CISA reference price
+        is <Em>deemed to be $0</Em> for the make-up calculation — not the actual negative number. So
+        the make-up is at most 90% × floor, regardless of how deep negative spot goes. The project
+        bears the merchant loss in full unless it curtails.
+      </P>
+      <Callout type="numbers">
+        <strong>Worked example.</strong> Floor $55/MWh. Spot averages −$30/MWh in a heavy
+        cannibalisation period. CISA reference price: <Code>max(0, −30)&nbsp;=&nbsp;$0</Code>. Make-up:
+        90% × ($55 − $0) = <strong>$49.50/MWh</strong>. Project's merchant revenue: −$30/MWh. Net
+        effective price: $49.50 − $30 = <strong>$19.50/MWh</strong>.
+        <br /><br />
+        Compare to the curtailed case: project dispatches zero in negative-spot intervals. Merchant
+        revenue: $0. CISA make-up: $0 (no MWh to apply it to). Net: $0 for those intervals — but no
+        loss either. The merchant-curtail crossover happens when 90% × floor &lt; |spot| — for floor
+        $55, that's when spot falls below −$49.50/MWh.
+      </Callout>
+      <P>
+        Other interactions to consider:
       </P>
       <ul className="list-disc list-inside text-sm text-[var(--color-text-muted)] space-y-1.5 mb-3 ml-2">
-        <li><Em>Will the PPA buyer pay during negative-priced hours?</Em> Most PPAs explicitly
-          require the buyer to pay strike regardless of spot — but some have "negative-price
-          carve-outs" where the project absorbs losses below specified thresholds (e.g. spot
-          below −$50/MWh).</li>
-        <li><Em>Will the CISA settle on negative-priced generation?</Em> Most CIS contracts have a
-          "floor below floor" provision — the floor does not extend infinitely down. Typically the
-          CISA only pays make-up if realised price is between $0 and the floor; below $0 the
-          project bears the losses.</li>
-        <li><Em>Does the project curtail?</Em> If the PPA allows curtailment during negative
-          prices, the project can simply turn off — avoiding the merchant loss. The CISA does not
-          deem the curtailed energy (since it isn't generated).</li>
-        <li><Em>Practical impact:</Em> a wind farm with high PPA coverage and a curtailment-friendly
-          PPA is largely insulated from negative prices. A wind farm with low PPA coverage and a
-          "must run" PPA exposed to negative prices can lose meaningful revenue. The calculator
-          above toggles this with the "Project curtails on negative-price hours" checkbox.</li>
+        <li><Em>Will the PPA buyer pay during negative-priced hours?</Em> Most PPAs require the buyer
+          to pay strike regardless of spot — but some have "negative-price carve-outs" where the
+          project absorbs losses below specified thresholds (e.g. spot below −$50/MWh).</li>
+        <li><Em>Curtailment economics</Em> — when expected merchant loss exceeds the CISA make-up
+          differential, curtail. For PPA-covered volume, check the carve-out threshold; for merchant
+          volume, the rule above. The calculator above models both via the "curtail on negative-price
+          hours" checkbox.</li>
+        <li><Em>Frequency matters</Em> — NEM negative-price hours rose from ~2% (2019) to ~12–18%
+          in solar-heavy regions (mid-2025). Annual exposure compounds.</li>
       </ul>
 
       <H2>4. CISA annual cap — when government's wallet has a floor of its own</H2>
@@ -1637,38 +1748,87 @@ function Lesson8() {
         clauses in a CISA term sheet.
       </P>
 
-      <H2>7. MLF treatment — gross or net of marginal loss factor</H2>
+      <H2>7. MLF treatment — the project keeps the MLF risk</H2>
+      <Callout type="warn">
+        Earlier versions of this guide stated that CISAs "settle gross of MLF" — that was wrong. The
+        standard CISA references the <Em>regional reference price (RRP)</Em>, not the project's
+        MLF-adjusted capture price. The project's actual market revenue is{' '}
+        <Code>RRP × MLF × volume</Code>; the CISA make-up is{' '}
+        <Code>0.90 × (Floor − RRP) × volume</Code>. The make-up closes the RRP-to-floor gap, not the
+        project-capture-to-RRP gap. MLF erosion stays with the project.
+      </Callout>
       <P>
-        Closely related to the reference price question:
+        Two ways the contract could in principle treat MLF — but in practice only one is standard:
       </P>
       <ul className="list-disc list-inside text-sm text-[var(--color-text-muted)] space-y-1.5 mb-3 ml-2">
-        <li><Em>Settlement gross of MLF</Em> — CISA pays as if MLF were 1.0. The project's actual
-          MLF (e.g. 0.92) reduces the realised income on each MWh, but the CISA still settles on
-          the gross. Protects the project from MLF degradation risk.</li>
-        <li><Em>Settlement net of MLF</Em> — CISA pays on actual settlement income (× MLF). The
-          project absorbs MLF degradation through the life of the contract. Lower government cost
-          but higher project risk.</li>
+        <li><Em>RRP-referenced (standard CISA)</Em> — make-up uses RRP × volume, not RRP × MLF ×
+          volume. The project still earns less than RRP × volume in the market because of MLF, and
+          CISA does <em>not</em> top up that gap.</li>
+        <li><Em>Capture-price-referenced (rare)</Em> — make-up would use project's actual realised
+          $/MWh. AEMO Services has not adopted this in standard CIS contracts, partly to avoid
+          rewarding poor siting decisions.</li>
       </ul>
-      <P>
-        Most CIS contracts settle gross of MLF — a deliberate decision to insulate developers from
-        the worst-case MLF erosion in declining REZ regions. Worth verifying for any specific
-        contract.
-      </P>
+      <Callout type="numbers">
+        <strong>Worked example — MLF erosion under standard CISA.</strong> 200 MW solar, 30% CF →
+        525,600 MWh. Floor $55, RRP averages $40, MLF degrades from 1.00 → 0.85 over the contract
+        life.
+        <br /><br />
+        <strong>Year 1, MLF 1.00:</strong> Market revenue = $40 × 1.00 × 525,600 = $21.0M. CISA
+        top-up = 90% × ($55 − $40) × 525,600 = $7.1M. Total = $28.1M = <strong>$53.5/MWh</strong>
+        (short of floor by the 10% deductible).
+        <br /><br />
+        <strong>Year 10, MLF 0.85:</strong> Market revenue = $40 × 0.85 × 525,600 = $17.9M. CISA
+        top-up still = 90% × ($55 − $40) × 525,600 = <strong>$7.1M</strong> (calculated against RRP,
+        not MLF-adjusted). Total = $25.0M = <strong>$47.5/MWh</strong>.
+        <br /><br />
+        The 15 pp of MLF degradation cost the project ~$3.1M/yr that the CISA did <em>not</em>
+        cover. The same project under a hypothetical capture-price-referenced CISA would have
+        received an additional ~$2.7M/yr in make-up. The standard CISA leaves MLF risk with the
+        project — verify in any specific term sheet.
+      </Callout>
 
-      <H2>8. Curtailment allocation — technical vs economic</H2>
+      <H2>8. Curtailment allocation — CISA settles on actual MWh, not deemed</H2>
+      <Callout type="warn">
+        Earlier versions of this guide stated that CISAs deem technical curtailment as generated. That
+        was wrong — and confused the PPA treatment with the CISA treatment. Standard CISAs settle on
+        the project's <Em>actual</Em> generated MWh. If AEMO or the NSP curtails the project for
+        system security or constraint reasons, the foregone MWh is simply lost: no merchant revenue,
+        no CISA top-up. Lesson 2's "What CISA does NOT cover" callout correctly lists curtailment as
+        an excluded risk.
+      </Callout>
       <P>
-        Curtailment occurs when AEMO directs reduced output (technical) or when the project chooses
-        to reduce output to avoid negative prices (economic). The CISA treatment of each matters:
+        The contrast with PPAs matters. <em>PPAs</em> commonly deem technical curtailment as delivered
+        for PPA-covered volume — buyer pays strike on the energy that would have been generated.
+        <em>CISAs</em> do not. So curtailment hits the merchant tranche and the unprotected portion
+        of the PPA tranche, with no CISA backstop.
+      </P>
+      <Callout type="numbers">
+        <strong>Worked example — 10% technical curtailment.</strong> 200 MW solar, 30% CF, $55 floor,
+        RRP averages $40, 50% PPA at $65 with deemed-technical-curtailment, 50% merchant.
+        <br /><br />
+        <strong>Un-curtailed year:</strong> Generation 525,600 MWh. PPA revenue: 262,800 × $65 =
+        $17.1M. Merchant: 262,800 × $40 = $10.5M. Blended $/MWh = $52.5. CISA top-up: 90% × ($55 −
+        $52.5) × 525,600 = $1.2M. Total: <strong>$28.8M = $54.8/MWh</strong>.
+        <br /><br />
+        <strong>10% technical curtailment year:</strong> Generation 472,500 MWh. PPA revenue still
+        $17.1M (buyer deems the full 262,800 MWh — PPA-deemed). Merchant revenue: 236,300 × $40 =
+        $9.5M. Blended $/MWh across actual MWh ≈ $56.4. CISA top-up: $0 (above floor). Total:
+        <strong>$26.6M</strong>.
+        <br /><br />
+        Net loss from curtailment: <strong>$2.2M</strong>. The PPA cushioned half via deeming; the
+        merchant half plus a sliver of CISA-protected floor evaporated with the foregone MWh.
+      </Callout>
+      <P>
+        Categorical treatment to verify in any term sheet:
       </P>
       <ul className="list-disc list-inside text-sm text-[var(--color-text-muted)] space-y-1.5 mb-3 ml-2">
-        <li><Em>Technical curtailment</Em> — most CISAs deem the project to have generated the
-          curtailed energy (so the CISA still pays make-up against the deemed MWh). Protects
-          project against operator-imposed losses.</li>
-        <li><Em>Economic curtailment</Em> — most CISAs do NOT deem economic curtailment (since the
-          project chose to reduce output to manage its own economics). Project absorbs the
-          opportunity cost.</li>
-        <li><Em>PPA curtailment treatment</Em> — varies by PPA. Most modern PPAs deem technical
-          curtailment for the PPA-covered MWh as well; some require pro-rata reduction.</li>
+        <li><Em>Technical curtailment (CISA)</Em> — standard: no deeming. Project absorbs.</li>
+        <li><Em>Economic curtailment (CISA)</Em> — standard: no deeming. Project absorbs (also no
+          merchant loss since the project chose to curtail).</li>
+        <li><Em>Technical curtailment (PPA)</Em> — modern PPAs typically deem to buyer; older PPAs
+          may pro-rata.</li>
+        <li><Em>Economic curtailment (PPA)</Em> — varies; some require buyer notification, some
+          allow the project to curtail freely.</li>
       </ul>
 
       <H2>9. LGC treatment and bundling</H2>
@@ -1684,18 +1844,39 @@ function Lesson8() {
         <li>Verify in any term sheet: who gets the LGCs, and at what price.</li>
       </ul>
 
-      <H2>10. Annual cap interaction with merchant period</H2>
+      <H2>10. Annual cap interaction with low-positive-price years</H2>
       <P>
-        A subtle interaction: the annual cap is sized in dollars, but the make-up requirement varies
-        by generation volume and price gap. In years where the project generates more (high wind
-        year) <em>and</em> spot prices are low (oversupply), the un-capped make-up requirement can
-        be much higher than the cap. The CISA effectively has a deductible in extreme scenarios.
+        The annual cap binds in extended <em>low-positive-price</em> periods, not in negative-price
+        periods. Recall: when RRP &lt; 0, the CISA reference is deemed $0, so the make-up is capped
+        at <Code>0.90 × Floor × volume</Code> for that interval — the CISA never extends below that.
+        The cap binds when RRP sits between $0 and the floor for sustained periods, and generation
+        is high (good wind / sun year). The make-up is a per-MWh rate × MWh; volume × price gap can
+        easily exceed the dollar cap.
       </P>
+      <Callout type="numbers">
+        <strong>Worked example — when the cap binds.</strong> 200 MW solar, 30% CF → 525,600 MWh.
+        Floor $55, annual cap $25M.
+        <br /><br />
+        <strong>Uncapped make-up:</strong> If RRP averages $20/MWh (sustained low-positive),
+        uncapped make-up = 90% × ($55 − $20) × 525,600 = <strong>$16.6M</strong> — cap doesn't bind.
+        <br /><br />
+        Push the bad scenario harder. <strong>40% CF year (good resource year)</strong> with same
+        RRP $20: generation = 700,800 MWh. Uncapped make-up = 90% × $35 × 700,800 = <strong>$22.1M</strong>
+        — still within cap.
+        <br /><br />
+        Push it further. <strong>40% CF year, RRP averages $10</strong>: uncapped make-up = 90% ×
+        $45 × 700,800 = <strong>$28.4M</strong>. Cap binds at $25M — project absorbs the $3.4M
+        shortfall. Effective floor in this scenario: $55 − $4.85 (deductible) − $4.85 (cap
+        shortfall) ≈ <strong>$45.30/MWh</strong>.
+        <br /><br />
+        The cap is therefore a second deductible that bites in <em>high-output, low-positive-price</em>
+        years. Sized too low, it shifts deep-downside risk back to the project.
+      </Callout>
       <ul className="list-disc list-inside text-sm text-[var(--color-text-muted)] space-y-1.5 mb-3 ml-2">
-        <li>Use the calculator above to test: with high CF (45%) and low spot (-$20/MWh), does the
-          cap bind?</li>
-        <li>Project teams should size their downside reserves based on the worst-case-uncovered-
-          shortfall, not just the floor strike.</li>
+        <li>Use the calculator above to test cap-binding scenarios — toggle CF up and spot down.</li>
+        <li>Project teams should size their downside reserves to cover both the 10% floor deductible
+          and the worst-case cap shortfall.</li>
+        <li>Bidders propose the cap; a higher cap means stronger protection but worse MC2 scoring.</li>
       </ul>
 
       <H2>11. Force majeure, change in law, and contract event triggers</H2>
@@ -1724,6 +1905,18 @@ function Lesson8() {
         <li>The project doesn't try to use a "sleeved" PPA structure that obscures the actual
           revenue (which can cause CISA settlement disputes)</li>
       </ul>
+      <Callout type="info">
+        <strong>What is sleeving?</strong> A <em>sleeved PPA</em> uses a gentailer as a middle layer:
+        the project signs a physical PPA with the gentailer, who then signs a back-to-back
+        arrangement with the corporate buyer. The gentailer takes a margin for managing dispatch and
+        settlement complexity. Sleeved structures were common 2018–2020 but have declined as
+        corporate buyers became comfortable with direct virtual PPAs. For the CISA, a sleeved
+        structure can be opaque about the project's <em>actual</em> realised $/MWh — which is what
+        the make-up calculation depends on. Full mechanics covered in the{' '}
+        <Link to="/learn/ppas/structures" className="text-[var(--color-primary)] hover:underline">
+          PPA module — Physical, financial, virtual structures
+        </Link>.
+      </Callout>
 
       <H2>13. The bankability question</H2>
       <P>
@@ -1758,19 +1951,23 @@ function Lesson8() {
 
       <Callout type="key">
         The PPA × CISA combination is the most common modern contracting structure for Australian
-        renewable projects. The calculator above shows the headline economics; the 14-point
-        checklist captures the contractual interactions that determine whether the structure
-        actually delivers the expected outcomes through real market scenarios. Before signing
-        either contract, project teams should pressure-test each clause against the
-        contract-event scenarios — particularly negative prices, MLF degradation,
-        force majeure, and tenor mismatches.
+        renewable projects. The calculator above models the three contract-fixed CISA rules
+        (90% floor / 50% ceiling / negative-deemed-zero); the 14-point checklist captures the
+        contractual interactions around them. Before signing either contract, project teams should
+        pressure-test each clause against the contract-event scenarios — particularly negative
+        prices, MLF degradation, technical curtailment, force majeure, and tenor mismatches. The
+        two corrections this guide ran in v2.88.0 (MLF treatment and technical-curtailment
+        deeming) are direct evidence that even sophisticated industry summaries get the CISA
+        mechanics wrong.
       </Callout>
 
       <Callout type="source">
         Sources: Capacity Investment Scheme Contract Templates (DCCEEW) · NSW Long-Term Energy
-        Service Agreement Template (EnergyCo) · King &amp; Wood Mallesons
-        <em> CISA / PPA Interaction</em> 2024 · Norton Rose Fulbright <em>Sovereign Offtake
-        Practice Notes</em> · AURES Scheme Tracker (live).
+        Service Agreement Template (EnergyCo) · Clayton Utz <em>Capacity investment in Australian
+        renewable energy projects — applications now open</em> (June 2024) confirming 90% floor
+        coverage and 50% ceiling sharing · Allens, HSF Kramer, KWM <em>CIS briefings</em> ·
+        King &amp; Wood Mallesons <em>CISA / PPA Interaction</em> 2024 · Norton Rose Fulbright
+        <em>Sovereign Offtake Practice Notes</em> · AURES Scheme Tracker (live).
       </Callout>
     </div>
   )
