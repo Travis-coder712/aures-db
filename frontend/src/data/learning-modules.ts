@@ -855,6 +855,68 @@ const M_SUMMING_IT_UP: LearningModule = {
 }
 
 // ============================================================
+// 11. Valuing Renewable Projects — Top-Quartile Analysis (synthesis / analytical)
+// ============================================================
+
+const M_VALUING_PROJECTS: LearningModule = {
+  id: 'valuing-projects',
+  icon: '📐',
+  title: 'Valuing Renewable Projects — Top-Quartile Analysis',
+  tagline: 'A 14-lesson framework for scoring renewable assets — operational or in-development — against fundamentals.',
+  description:
+    'Part A (lessons 1–6, v2.95.0) covers operational valuation: the asset-manager\'s job, what data you need, metrics per technology, peer comparison, forward valuation, and boardroom-ready presentation. Part B (lessons 7–12) extends the framework to development-stage projects. Part C (lessons 13–14) closes with an interactive top-quartile scoring tool.',
+  status: 'in-development',
+  readingTime: '~75 min (Part A built; full curriculum ~165 min when complete)',
+  accent: '#14b8a6',
+  added: '2026-05-13',
+  route: '/learn/valuing-projects',
+  lessons: [
+    { id: 'asset-manager-job',  number: 1,  title: "The asset-manager's job — why operational valuation is distinct", summary: 'Lifecycle stages, use cases (refinancing, M&A, recap, BI insurance), how operational valuation differs from development.' },
+    { id: 'data-layer',         number: 2,  title: 'What data you actually need (Australian context)',                summary: 'AEMO MMSDM, OpenElectricity, AER quarterlies, ASIC half-yearlies, NEM Connection Register. Free vs paywalled.' },
+    { id: 'metrics-by-tech',    number: 3,  title: 'Operational metrics that matter — by technology',                 summary: 'Wind / solar / BESS / hybrid metric stacks with target ranges and watch-outs.' },
+    { id: 'peer-comparison',    number: 4,  title: 'Peer comparison — defining "top quartile" for operating assets',  summary: 'Cohort construction (technology / region / vintage / capacity bucket), vintage adjustment, the deserves-vs-achieves framework.' },
+    { id: 'forward-valuation',  number: 5,  title: 'Forward valuation from operational data',                         summary: 'Capture-price trajectory, MLF degradation, value-factor convergence, discount-rate compression, refinancing economics, terminal value.' },
+    { id: 'presenting',         number: 6,  title: 'Presenting it — boardroom-ready outputs',                         summary: 'Single-page scorecard, pros/cons with quantitative backing, peer charts, the AURES Wind Value Analysis as worked example.' },
+    { id: 'dev-stages',         number: 7,  title: 'Stages of a renewable project — typical $/MW step-ups',           summary: 'From land-tied-up through FID to COD — value at each stage by technology.' },
+    { id: 'fundamentals',       number: 8,  title: 'The five fundamental categories that drive value',                summary: 'Resource, connection, offtake, developer, constructability + community.' },
+    { id: 'resource-quality',   number: 9,  title: 'Resource quality — the foundational fundamental',                 summary: 'Wind / solar / BESS — what data exists, what you must estimate.' },
+    { id: 'connection',         number: 10, title: 'Connection quality — the value-killer category',                  summary: 'MLF history, future-congestion analysis, DNSP vs TNSP, curtailment. Interactive tool.' },
+    { id: 'other-fundamentals', number: 11, title: 'Constructability, community, offtake, developer',                 summary: 'The four softer fundamental categories with limited-data weighting.' },
+    { id: 'scoring-framework',  number: 12, title: 'The scoring framework — weights, anchors, quartile output',       summary: 'The 25/25/20/15/15 rubric for the unified top-quartile score.' },
+    { id: 'interactive-tool',   number: 13, title: 'The interactive valuation tool',                                  summary: 'Apply the framework to any operational or development project.' },
+    { id: 'future-shifts',      number: 14, title: 'How this changes — ESEM, 24/7 CFE, data centre surge',            summary: 'Forward-looking adjustments to the framework.' },
+  ],
+  sources: [
+    { category: 'Public data', items: [
+      { label: 'AEMO MMSDM (Market Management System Data Model)', url: 'https://aemo.com.au/energy-systems/electricity/national-electricity-market-nem/data-nem/market-management-system-mms-data' },
+      { label: 'OpenElectricity API', url: 'https://api.openelectricity.org.au/' },
+      { label: 'AER quarterly Wholesale Markets Performance Reports', url: 'https://www.aer.gov.au/wholesale-markets/wholesale-statistics' },
+      { label: 'NEM Connection Register' },
+      { label: 'AEMO Generation Information (monthly snapshots)' },
+      { label: 'ASIC half-yearly financials for ASX-listed asset owners' },
+    ]},
+    { category: 'Analyst forecasts', items: [
+      { label: 'Aurora Energy Research — NEM Long-Run Outlook' },
+      { label: 'Wood Mackenzie Australia capture price + value factor forecasts' },
+      { label: 'BloombergNEF Australia ETO' },
+      { label: 'Cornwall Insight — capture price index' },
+      { label: 'Modo Energy Australia — BESS revenue stack analytics', url: 'https://modoenergy.com/' },
+    ]},
+    { category: 'Methodology references', items: [
+      { label: 'DNV — Renewable Asset Performance Benchmarks' },
+      { label: 'CSIRO GenCost (annual)' },
+      { label: 'Macquarie Infrastructure / IFM investor day materials' },
+      { label: 'Norton Rose Fulbright project finance practice notes' },
+    ]},
+    { category: 'AURES live data', items: [
+      { label: 'AURES per-project Wind / Solar / BESS Value Analysis pages' },
+      { label: 'AURES Scheme Tracker', url: '/intelligence/scheme-tracker' },
+      { label: 'AURES Project pages', url: '/projects' },
+    ]},
+  ],
+}
+
+// ============================================================
 // Module catalogue export
 // ============================================================
 
@@ -885,6 +947,7 @@ export const LEARNING_MODULES: LearningModule[] = [
   M_PLANNING,
   M_CONNECTIONS,
   M_CONSTRAINTS,
+  M_VALUING_PROJECTS,
   M_SUMMING_IT_UP,
 ]
 
