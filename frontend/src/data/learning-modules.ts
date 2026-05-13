@@ -865,8 +865,8 @@ const M_VALUING_PROJECTS: LearningModule = {
   tagline: 'A 14-lesson framework for scoring renewable assets — operational or in-development — against fundamentals.',
   description:
     'Part A (lessons 1–6, v2.95.0) covers operational valuation: the asset-manager\'s job, what data you need, metrics per technology, peer comparison, forward valuation, and boardroom-ready presentation. Part B (lessons 7–12) extends the framework to development-stage projects. Part C (lessons 13–14) closes with an interactive top-quartile scoring tool.',
-  status: 'in-development',
-  readingTime: '~75 min (Part A built; full curriculum ~165 min when complete)',
+  status: 'available',
+  readingTime: '~165 min',
   accent: '#14b8a6',
   added: '2026-05-13',
   route: '/learn/valuing-projects',

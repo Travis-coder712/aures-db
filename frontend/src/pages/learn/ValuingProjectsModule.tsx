@@ -19,8 +19,8 @@
 import { useState, useCallback, useMemo } from 'react'
 import { useParams, useNavigate, Link } from 'react-router-dom'
 import {
-  LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
-  ReferenceLine,
+  LineChart, Line, BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip,
+  ResponsiveContainer, ReferenceLine,
 } from 'recharts'
 
 // ============================================================
@@ -72,8 +72,8 @@ const LESSONS: LessonMeta[] = [
   { id: 'other-fundamentals', number: 11, title: 'Constructability, community, offtake, developer',                  subtitle: 'The four softer categories — how to weight them with limited data',                              readingTime: '12 min', built: true },
   { id: 'scoring-framework', number: 12, title: 'The scoring framework — weights, anchors, quartile output',         subtitle: 'The unified 25/25/20/15/15 rubric',                                                              readingTime: '11 min', built: true },
   // Part C — Synthesis (v2.97.0)
-  { id: 'interactive-tool',  number: 13, title: 'The interactive valuation tool',                                    subtitle: 'Apply the framework to any operational or development project',                                  readingTime: '10 min', built: false },
-  { id: 'future-shifts',     number: 14, title: 'How this changes — ESEM, 24/7 CFE, data centre surge',              subtitle: 'Forward-looking adjustments to the framework',                                                    readingTime: '10 min', built: false },
+  { id: 'interactive-tool',  number: 13, title: 'The interactive valuation tool',                                    subtitle: 'Apply the framework to any operational or development project',                                  readingTime: '12 min', built: true },
+  { id: 'future-shifts',     number: 14, title: 'How this changes — ESEM, 24/7 CFE, data centre surge',              subtitle: 'Forward-looking adjustments to the framework',                                                    readingTime: '11 min', built: true },
 ]
 
 // ============================================================
@@ -2037,6 +2037,535 @@ function Lesson12() {
   )
 }
 // ============================================================
+// Lesson 13 — The interactive valuation tool
+// ============================================================
+
+type Tech = 'wind' | 'solar' | 'bess' | 'hybrid'
+
+const TECH_WEIGHTS: Record<Tech | 'default', [number, number, number, number, number]> = {
+  default: [0.25, 0.25, 0.20, 0.15, 0.15],
+  wind:    [0.30, 0.20, 0.20, 0.15, 0.15],
+  solar:   [0.20, 0.30, 0.20, 0.15, 0.15],
+  bess:    [0.15, 0.30, 0.25, 0.15, 0.15],
+  hybrid:  [0.22, 0.25, 0.23, 0.15, 0.15],
+}
+
+const CATEGORY_LABELS = [
+  'Resource quality',
+  'Connection quality',
+  'Offtake availability',
+  'Developer track record',
+  'Constructability + community',
+] as const
+
+interface Preset {
+  label: string
+  notes: string
+  scores: [number, number, number, number, number]   // 1-5 each
+}
+
+const PRESETS: Preset[] = [
+  {
+    label: 'Top-quartile NSW wind farm — CISA-backed',
+    notes: 'Strong CF site + signed CISA + Tier-1 developer + stable MLF on a moderately-loaded REZ.',
+    scores: [5, 4, 5, 5, 4],
+  },
+  {
+    label: 'Saturated REZ solar project — pre-FID',
+    notes: 'Excellent GHI but in a heavily-saturated REZ. CIS-awarded but not executed. Mid-tier developer. Light community opposition.',
+    scores: [5, 2, 3, 4, 3],
+  },
+  {
+    label: 'First-time developer, strong site',
+    notes: 'Top resource and connection but the developer has not delivered any project to COD. No offtake yet.',
+    scores: [5, 4, 2, 1, 3],
+  },
+  {
+    label: 'Mid-merit hybrid (solar+BESS)',
+    notes: 'Good resource, declining MLF in a wind-heavy REZ, signed corporate VPPA, established hybrid developer.',
+    scores: [4, 3, 4, 4, 3],
+  },
+  {
+    label: 'DNSP-connected BESS',
+    notes: 'Smaller-scale BESS at a distribution node. Strong MLF, no scheme backing yet, well-known sponsor.',
+    scores: [3, 4, 3, 5, 4],
+  },
+  {
+    label: 'Bottom-quartile — multiple issues',
+    notes: 'Mediocre site, heavy congestion, no offtake, untested developer, active community opposition.',
+    scores: [2, 2, 1, 2, 1],
+  },
+  {
+    label: 'Manual entry (start neutral)',
+    notes: 'Adjust each slider yourself.',
+    scores: [3, 3, 3, 3, 3],
+  },
+]
+
+const SCORE_COLOR = (s: number) =>
+  s >= 4.5 ? '#10b981' :   // emerald — best-in-class
+  s >= 3.5 ? '#3b82f6' :   // blue — above average
+  s >= 2.5 ? '#f59e0b' :   // amber — median
+  s >= 1.5 ? '#fb923c' :   // orange — below average
+             '#ef4444'      // red — bottom tier
+
+function quartileBand(composite: number): { label: string; color: string; description: string } {
+  if (composite >= 4.0) return { label: 'Top quartile', color: '#10b981', description: 'Best-in-class — minimal compromises across fundamentals.' }
+  if (composite >= 3.0) return { label: 'Upper-middle', color: '#3b82f6', description: 'Solid project with 1–2 below-average categories.' }
+  if (composite >= 2.0) return { label: 'Lower-middle', color: '#f59e0b', description: 'Multiple categories below median; valuation reflects discount.' }
+  return                       { label: 'Bottom quartile', color: '#ef4444', description: 'Material weaknesses across the fundamentals; questionable bankability.' }
+}
+
+function generateNarrative(scores: [number, number, number, number, number]): { pros: string[]; cons: string[] } {
+  const pros: string[] = []
+  const cons: string[] = []
+  const checks: { idx: number; metric: string; proAt: number; conAt: number; proText: string; conText: string }[] = [
+    {
+      idx: 0, metric: 'Resource quality', proAt: 4, conAt: 2,
+      proText: 'Top-quartile resource — capacity factor / GHI / spread potential well above cohort median; the foundational driver of long-run value.',
+      conText: 'Sub-median resource — the project is structurally disadvantaged on the only fundamental that cannot be improved later.',
+    },
+    {
+      idx: 1, metric: 'Connection quality', proAt: 4, conAt: 2,
+      proText: 'Strong connection — stable or improving MLF, modest pipeline congestion, defensible position into the next decade.',
+      conText: 'Connection-quality drag — declining MLF and/or heavy upstream pipeline. Forward NPV materially exposed to network risk.',
+    },
+    {
+      idx: 2, metric: 'Offtake', proAt: 4, conAt: 2,
+      proText: 'Offtake is in hand or close — CISA executed (or near-execution) and/or strong corporate PPA optionality. Bankability gate cleared.',
+      conText: 'No firm offtake — neither CIS/LTESA execution nor a deep corporate PPA pipeline. The single largest pre-FID risk.',
+    },
+    {
+      idx: 3, metric: 'Developer', proAt: 4, conAt: 2,
+      proText: 'Top-tier developer — established Australian renewables platform with multiple operating projects and a strong CIS execution record.',
+      conText: 'Developer risk — limited operating record or a thin balance sheet. Execution probability is the binding constraint.',
+    },
+    {
+      idx: 4, metric: 'Constructability + community', proAt: 4, conAt: 2,
+      proText: 'Buildable and well-engaged — moderate terrain, established supply chain, low submission count, supportive councils.',
+      conText: 'Construct/community drag — terrain or supply chain risk plus elevated planning-submission opposition.',
+    },
+  ]
+  for (const c of checks) {
+    const s = scores[c.idx]
+    if (s >= c.proAt) pros.push(c.proText)
+    else if (s <= c.conAt) cons.push(c.conText)
+  }
+  if (pros.length === 0) pros.push('No category scored top-quartile. Treat this project as median or below until at least one category improves.')
+  if (cons.length === 0) cons.push('No category scored bottom-tier — but all valuations should pressure-test the highest-scoring categories before pricing the project.')
+  return { pros, cons }
+}
+
+function ScoringTool() {
+  const [tech, setTech] = useState<Tech | 'default'>('default')
+  const [presetIdx, setPresetIdx] = useState(0)
+  const [scores, setScores] = useState<[number, number, number, number, number]>(PRESETS[0].scores)
+
+  const onPresetChange = useCallback((i: number) => {
+    setPresetIdx(i)
+    setScores(PRESETS[i].scores)
+  }, [])
+
+  const updateScore = useCallback((idx: number, v: number) => {
+    setScores(prev => {
+      const next: [number, number, number, number, number] = [...prev] as [number, number, number, number, number]
+      next[idx] = v
+      return next
+    })
+    // Switch to manual once any score is edited away from preset
+    setPresetIdx(PRESETS.length - 1)
+  }, [])
+
+  const weights = TECH_WEIGHTS[tech]
+
+  const composite = useMemo(() => {
+    let s = 0
+    for (let i = 0; i < 5; i++) s += scores[i] * weights[i]
+    return s
+  }, [scores, weights])
+
+  const band = quartileBand(composite)
+  const narrative = useMemo(() => generateNarrative(scores), [scores])
+
+  const chartData = useMemo(() => CATEGORY_LABELS.map((label, i) => ({
+    category: label.split(' ').slice(0, 2).join(' '),   // shorten for axis
+    score: scores[i],
+    weight: weights[i],
+    weighted: Number((scores[i] * weights[i]).toFixed(2)),
+  })), [scores, weights])
+
+  return (
+    <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl p-5 my-4 space-y-5">
+      <div className="grid sm:grid-cols-2 gap-3">
+        <div>
+          <label className="text-[10px] uppercase tracking-wider text-[var(--color-text-muted)] block mb-1">Technology — sets the weights</label>
+          <select
+            value={tech}
+            onChange={(e) => setTech(e.target.value as Tech | 'default')}
+            className="w-full text-sm bg-[var(--color-bg-elevated)] border border-[var(--color-border)] rounded-lg px-3 py-2 text-[var(--color-text)]"
+          >
+            <option value="default">Default (25/25/20/15/15) — cross-technology</option>
+            <option value="wind">Wind (30/20/20/15/15)</option>
+            <option value="solar">Solar (20/30/20/15/15)</option>
+            <option value="bess">BESS (15/30/25/15/15)</option>
+            <option value="hybrid">Hybrid (22/25/23/15/15)</option>
+          </select>
+        </div>
+        <div>
+          <label className="text-[10px] uppercase tracking-wider text-[var(--color-text-muted)] block mb-1">Preset — or start from manual</label>
+          <select
+            value={presetIdx}
+            onChange={(e) => onPresetChange(parseInt(e.target.value, 10))}
+            className="w-full text-sm bg-[var(--color-bg-elevated)] border border-[var(--color-border)] rounded-lg px-3 py-2 text-[var(--color-text)]"
+          >
+            {PRESETS.map((p, i) => <option key={i} value={i}>{p.label}</option>)}
+          </select>
+        </div>
+      </div>
+
+      <p className="text-[11px] text-[var(--color-text-muted)] italic">{PRESETS[presetIdx].notes}</p>
+
+      {/* Per-category sliders */}
+      <div className="space-y-3 pt-3 border-t border-[var(--color-border)]">
+        {CATEGORY_LABELS.map((label, i) => (
+          <div key={label} className="grid grid-cols-1 sm:grid-cols-[1fr_2fr_auto] gap-2 sm:items-center">
+            <div>
+              <p className="text-xs font-semibold text-[var(--color-text)]">{label}</p>
+              <p className="text-[10px] text-[var(--color-text-muted)]">Weight: {(weights[i] * 100).toFixed(0)}%</p>
+            </div>
+            <input
+              type="range"
+              min={1}
+              max={5}
+              step={1}
+              value={scores[i]}
+              onChange={(e) => updateScore(i, parseInt(e.target.value, 10))}
+              className="w-full h-1.5 bg-[var(--color-bg-elevated)] rounded-lg appearance-none cursor-pointer accent-[var(--color-primary)]"
+            />
+            <span className="font-mono text-sm font-semibold" style={{ color: SCORE_COLOR(scores[i]) }}>
+              {scores[i]} / 5
+            </span>
+          </div>
+        ))}
+      </div>
+
+      {/* Output — composite + quartile + chart */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-3 pt-3 border-t border-[var(--color-border)]">
+        <div className="bg-[var(--color-bg-elevated)] rounded-lg p-3">
+          <p className="text-[10px] uppercase tracking-wider text-[var(--color-text-muted)]">Composite score</p>
+          <p className="text-3xl font-bold" style={{ color: band.color }}>{composite.toFixed(2)}</p>
+          <p className="text-[10px] text-[var(--color-text-muted)] mt-1">out of 5.00</p>
+        </div>
+        <div className="md:col-span-2 rounded-lg p-3 border-2" style={{ borderColor: band.color + '50', backgroundColor: band.color + '12' }}>
+          <p className="text-[10px] uppercase tracking-wider font-semibold" style={{ color: band.color }}>Quartile band</p>
+          <p className="text-xl font-bold mt-1" style={{ color: band.color }}>{band.label}</p>
+          <p className="text-xs text-[var(--color-text-muted)] leading-relaxed mt-1">{band.description}</p>
+        </div>
+      </div>
+
+      {/* Per-category bar chart */}
+      <div className="bg-[var(--color-bg-elevated)]/40 rounded-lg p-3">
+        <p className="text-[10px] font-semibold uppercase tracking-wider text-[var(--color-text-muted)] mb-2">
+          Per-category contribution (score × weight)
+        </p>
+        <ResponsiveContainer width="100%" height={220}>
+          <BarChart data={chartData} margin={{ top: 8, right: 8, bottom: 0, left: -10 }}>
+            <CartesianGrid strokeDasharray="3 3" stroke="var(--color-border)" />
+            <XAxis dataKey="category" tick={{ fontSize: 10, fill: 'var(--color-text-muted)' }} interval={0} angle={-12} textAnchor="end" height={50} />
+            <YAxis tick={{ fontSize: 10, fill: 'var(--color-text-muted)' }} domain={[0, 5]} />
+            <Tooltip
+              contentStyle={{ backgroundColor: 'rgb(15,23,42)', border: '1px solid rgb(51,65,85)', borderRadius: 8, fontSize: 11 }}
+              formatter={(_value, _name, item) => {
+                const p = item?.payload as { score: number; weight: number; weighted: number }
+                return [`${p.score} × ${(p.weight * 100).toFixed(0)}% = ${p.weighted.toFixed(2)}`, 'Contribution']
+              }}
+            />
+            <Bar dataKey="score" radius={[4, 4, 0, 0]}>
+              {chartData.map((d, i) => (
+                <Cell key={i} fill={SCORE_COLOR(d.score)} />
+              ))}
+            </Bar>
+          </BarChart>
+        </ResponsiveContainer>
+      </div>
+
+      {/* Narrative */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+        <div className="bg-emerald-500/5 border border-emerald-500/20 rounded-lg p-3">
+          <p className="text-[10px] font-semibold uppercase tracking-wider text-emerald-400 mb-2">Strengths</p>
+          <ul className="text-xs text-[var(--color-text)] leading-relaxed space-y-1.5 list-disc list-inside">
+            {narrative.pros.map((p, i) => <li key={i}>{p}</li>)}
+          </ul>
+        </div>
+        <div className="bg-amber-500/5 border border-amber-500/20 rounded-lg p-3">
+          <p className="text-[10px] font-semibold uppercase tracking-wider text-amber-400 mb-2">Risks / weaknesses</p>
+          <ul className="text-xs text-[var(--color-text)] leading-relaxed space-y-1.5 list-disc list-inside">
+            {narrative.cons.map((c, i) => <li key={i}>{c}</li>)}
+          </ul>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+function Lesson13() {
+  return (
+    <div>
+      <H2>Apply the framework — interactively</H2>
+      <P>
+        Lessons 1–12 built the framework category by category. This lesson collapses the whole
+        thing into a single working tool. Pick a technology (which sets the weights per Lesson 8),
+        choose a preset or score from scratch, and watch the composite + quartile + narrative
+        update live. The same tool serves three audiences:
+      </P>
+      <Table
+        emphasizeFirst
+        headers={['Audience', 'How to use', 'What to take away']}
+        rows={[
+          ['Developer pitching a project', 'Score honestly per category; iterate until you understand which categories are dragging', 'Where to focus pre-FID effort'],
+          ['Investor comparing pipeline', 'Score several candidates with the same weighting and rank by composite', 'Top-quartile candidates surface; bottom-tier flagged'],
+          ['Asset manager — operational asset', 'Score with operational data (CF percentile → resource; MLF trend → connection)', 'Whether the asset is still top-quartile vs. when it was acquired'],
+        ]}
+      />
+
+      <H2>The tool</H2>
+      <ScoringTool />
+
+      <H2>Reading the output</H2>
+      <ul className="list-disc list-inside text-sm text-[var(--color-text-muted)] space-y-1.5 mb-3 ml-2">
+        <li><Em>Composite ≥ 4.0</Em> — top quartile. Pricing premium justified.</li>
+        <li><Em>3.0–4.0</Em> — upper-middle. Solid project; the cons are usually addressable.</li>
+        <li><Em>2.0–3.0</Em> — lower-middle. Material weaknesses; valuation reflects discount.</li>
+        <li><Em>Below 2.0</Em> — bottom quartile. Questionable bankability without a structural change.</li>
+      </ul>
+      <P>
+        The per-category bar chart shows where the composite is concentrated. A project at 3.5
+        composite driven by 5s in resource and offtake (with 1s in developer and community) is a
+        different proposition from a project at 3.5 driven by balanced 3.5s across every category.
+        The first is "execution-risk strong" — buy it under a sponsor that can execute. The
+        second is "average across the board" — the price should reflect the lack of any standout.
+      </P>
+
+      <H2>Using the tool with real data — quick recipes</H2>
+
+      <H3>Operating wind farm</H3>
+      <ol className="list-decimal list-inside text-sm text-[var(--color-text-muted)] space-y-1.5 mb-3 ml-2">
+        <li>Visit the project's AURES{' '}
+          <Link to="/projects?tech=wind&status=operating" className="text-[var(--color-primary)] hover:underline">
+            Wind Value Analysis page
+          </Link>
+          {' '}— note the data confidence badge and grade chip.</li>
+        <li><Em>Resource</Em>: read the CF percentile from the Peers tab. Top decile → 5, top quartile → 4, etc.</li>
+        <li><Em>Connection</Em>: read the MLF trend from the Trend tab. Stable/improving → 4-5; falling 0.5–1pp/yr → 3; falling &gt;1pp/yr → 2.</li>
+        <li><Em>Offtake</Em>: known PPA / CISA → 4-5; merchant tail → 2-3.</li>
+        <li><Em>Developer</Em>: known parent (Neoen, AGL, Tilt etc.) — assign per Lesson 11 anchors.</li>
+        <li><Em>Constructability + community</Em>: usually 3-4 once operating (settled).</li>
+      </ol>
+
+      <H3>Development project (pre-FID)</H3>
+      <ol className="list-decimal list-inside text-sm text-[var(--color-text-muted)] space-y-1.5 mb-3 ml-2">
+        <li><Em>Resource</Em>: on-site measurement &gt; 12 months → 4-5; reanalysis-only → 2-3.</li>
+        <li><Em>Connection</Em>: use Lesson 10's interactive — look up the connection point's MLF history + pipeline.</li>
+        <li><Em>Offtake</Em>: CIS-executed → 5; CIS-awarded not executed → 3-4; eligible only → 2-3.</li>
+        <li><Em>Developer</Em>: Tier-1 platform → 5; first-time → 1-2 (per Lesson 11).</li>
+        <li><Em>Constructability + community</Em>: terrain + IPC submission count proxies → see Lesson 11.</li>
+      </ol>
+
+      <Callout type="key">
+        The tool's value is not in the absolute composite — it's in the <Em>relative</Em> ranking
+        when you score multiple candidates with the same weighting. For an investor with a 10-
+        project pipeline, scoring all 10 in the tool surfaces the top three within 30 minutes —
+        and reveals which categories drive the gap.
+      </Callout>
+
+      <Callout type="info">
+        <strong>Data integration roadmap.</strong> The current version uses presets to demonstrate
+        the framework. A future enhancement (not committed to a release yet) would pull
+        operational metrics live from the AURES project pages — auto-detecting CF percentile
+        (Resource), MLF trend (Connection), and known offtake / developer status. Until then,
+        the manual / preset workflow is the supported path.
+      </Callout>
+
+      <Callout type="source">
+        Sources: AURES framework (lessons 1–12 of this module) ·
+        AURES per-project{' '}
+        <Link to="/projects" className="text-[var(--color-primary)] hover:underline">Wind / Solar / BESS Value Analyses</Link>
+        {' '}for operational metrics input · AURES{' '}
+        <Link to="/intelligence/scheme-tracker" className="text-[var(--color-primary)] hover:underline">Scheme Tracker</Link>
+        {' '}for offtake status.
+      </Callout>
+    </div>
+  )
+}
+
+// ============================================================
+// Lesson 14 — How this changes (ESEM, 24/7 CFE, data centre surge)
+// ============================================================
+
+function Lesson14() {
+  return (
+    <div>
+      <H2>The framework is forward-compatible — but the weights are not</H2>
+      <P>
+        The five fundamentals — resource, connection, offtake, developer, constructability +
+        community — describe the persistent structure of what makes a renewable project work.
+        That taxonomy is durable. The <Em>weights</Em>, on the other hand, reflect the market
+        regime in which the project will operate. As the NEM transitions through ESEM, 24/7
+        carbon-free PPA expansion, and the data-centre demand surge, the regime shifts and the
+        weights should shift with it.
+      </P>
+      <P>
+        Three forces are most likely to re-shape the weights between 2026 and 2030.
+      </P>
+
+      <H2>Force 1 — ESEM replaces CIS as the underwriting layer</H2>
+      <P>
+        ESEM (covered in detail in the{' '}
+        <Link to="/learn/summing-it-up/esem" className="text-[var(--color-primary)] hover:underline">
+          Summing It Up module, Lesson 5
+        </Link>
+        ) replaces project-by-project bespoke CISAs with three standardised, fungible derivative
+        contracts. The implications for the framework:
+      </P>
+      <Table
+        emphasizeFirst
+        headers={['Category', 'Pre-ESEM (2026)', 'Post-ESEM (2028+)']}
+        rows={[
+          ['Resource quality',           'Unchanged — physical resource is technology-agnostic to scheme', 'Unchanged'],
+          ['Connection quality',         'Critical — CISA does not cover MLF erosion', 'Even more critical — ESEM\'s bulk energy contract pays clearing prices that are MLF-adjusted indirectly via cohort'],
+          ['Offtake availability',       'CISA awarded / eligible binary', 'Three sub-questions: bulk energy, shaping, firming. Project-fit by technology matters more'],
+          ['Developer track record',     'CIS execution rate is the proxy', 'ESEM auction-win rate becomes the new proxy. Tier-1 still wins disproportionately'],
+          ['Constructability + community','Unchanged', 'Unchanged'],
+        ]}
+      />
+      <P>
+        Weight implications: <Em>Offtake category likely steps up to 23-25%</Em> (from 20%) as
+        ESEM creates three offtake products instead of one CISA. The "offtake-fit by technology"
+        question becomes nuanced — a BESS bidding into the firming auction needs a different
+        offtake-fit assessment than a solar project bidding into the bulk energy auction.
+      </P>
+
+      <H2>Force 2 — 24/7 CFE PPA market matures</H2>
+      <P>
+        Hyperscaler-led 24/7 carbon-free PPA volume rose from ~$2-3B globally in 2023 to ~$8-12B
+        in 2025. Australia is set to be a significant share of the 2027-2030 expansion —
+        Microsoft, Google, AWS, plus domestic hyperscalers (NextDC, AirTrunk, CDC,
+        Goodman/Brookfield) all pricing premium for shaped delivery. The framework implications:
+      </P>
+      <ul className="list-disc list-inside text-sm text-[var(--color-text-muted)] space-y-1.5 mb-3 ml-2">
+        <li><Em>Offtake premium becomes structurally tiered</Em>. The new top tier is
+          hyperscaler 24/7 CFE PPAs at $110-140/MWh — only accessible to hybrid configurations.
+          Pure solar drops a tier (corporate VPPA at $70-85). Wind sits in the middle.</li>
+        <li><Em>Hybrid resource scoring becomes more nuanced</Em>. Today a hybrid is scored on
+          blended resource. Under 24/7 CFE the score should reflect <Em>complementarity</Em>
+          quality — how well the BESS shifts solar generation into the buyer's 24/7 demand
+          shape.</li>
+        <li><Em>Connection quality matters more for hybrids</Em>. The premium is conditional on
+          delivering shape, which requires the BESS to discharge during peak hours — exactly
+          when transmission constraints can bind.</li>
+      </ul>
+      <P>
+        Weight implications: for hybrids specifically, the <Em>Resource category should sub-divide</Em>
+        into "raw resource" (~15%) and "complementarity / shape fit" (~10%), preserving the 25%
+        weight but reflecting that the BESS contribution to the offtake-shape match has joined
+        the resource fundamental.
+      </P>
+
+      <H2>Force 3 — data-centre demand creates a connection-premium tier</H2>
+      <P>
+        The data-centre surge described in Summing It Up Scenario B creates concentrated demand
+        nodes — Sydney metro, Melbourne metro, soon Brisbane and Perth. Projects connecting near
+        these nodes capture both higher capture prices (less cannibalisation) and premium
+        offtake structures (hyperscaler PPAs):
+      </P>
+      <Table
+        emphasizeFirst
+        headers={['Project location', 'Pre-data-centre weights', 'Post-data-centre weights (2028+)']}
+        rows={[
+          ['Near major DC cluster (Sydney W, Melbourne W)', '25/25/20/15/15', '20/30/25/15/10 — connection premium dominates'],
+          ['Mid-distance (rural NSW REZ)', '25/25/20/15/15', '23/27/22/15/13 — modest premium for connection access'],
+          ['Remote (Western Downs, Mid-North SA)', '25/25/20/15/15', '28/22/20/15/15 — resource becomes the only differentiator'],
+        ]}
+      />
+      <P>
+        The mechanism: as data centres absorb the best-located new generation at premium prices,
+        merchant prices for residual generation rise <Em>further away</Em> from the demand nodes.
+        Projects in those remote locations become more dependent on raw resource quality
+        (since they cannot tap the connection premium). Projects near the demand nodes become
+        more dependent on connection quality (since the offtake premium is conditional on
+        delivering).
+      </P>
+
+      <H2>Re-scoring an existing project as the regime shifts</H2>
+      <P>
+        A NSW solar project scored top-quartile (4.2) in 2026 under default weights might re-score
+        to 3.4 in 2030 under post-ESEM, post-DC-surge weights — without anything about the project
+        itself changing. The framework would attribute the drop to:
+      </P>
+      <ul className="list-disc list-inside text-sm text-[var(--color-text-muted)] space-y-1.5 mb-3 ml-2">
+        <li>The connection-quality category re-weighted higher (5pp) while the project's actual
+          connection score has fallen as the REZ saturated</li>
+        <li>The offtake category re-weighted higher (3pp) while the project's offtake has not
+          shifted to 24/7 CFE-compatible</li>
+        <li>The resource category re-weighted lower (5pp) — the score's contribution to composite
+          falls even if the score itself is unchanged</li>
+      </ul>
+      <P>
+        This is exactly why the framework <Em>requires periodic re-scoring</Em>. A top-quartile
+        operational asset is top-quartile against the current regime, not against any future
+        regime. Annual re-scoring is the recommended cadence; quarterly during regime transitions.
+      </P>
+
+      <Callout type="key">
+        Three rules for using the framework through 2030:
+        <ol className="list-decimal list-inside mt-2 ml-2 space-y-1 text-[var(--color-text-muted)]">
+          <li><Em>Update weights yearly</Em> — track ESEM auction outcomes, hyperscaler PPA
+            announcements, and AEMO ISP load forecasts. Update the technology-specific weights
+            when any of these materially shift.</li>
+          <li><Em>Re-score quarterly during regime transitions</Em> — 2026 H2 (ESEM pilot
+            auctions), 2027 (formal ESEM commencement), 2028 (first ESEM-only awarded cohort
+            reaching FID).</li>
+          <li><Em>Keep the five-category taxonomy fixed</Em> — the categories are durable. Only
+            the weights and the sub-metrics inside each category evolve.</li>
+        </ol>
+      </Callout>
+
+      <H2>Closing — the role of AURES Intelligence</H2>
+      <P>
+        AURES Intelligence is built to be the live-data layer behind this framework. The per-
+        project Value Analyses surface operational scores; the Scheme Tracker surfaces offtake
+        status; the connection-point dataset (now in Lesson 10's interactive) tracks MLF
+        trajectories; the Boardroom briefing reframes any of these for executive review. As ESEM
+        rolls out, AURES adds: ESEM auction clearing prices, ESEM contract-by-technology
+        eligibility, hyperscaler PPA announcements, and data-centre approval tracking. The
+        framework's outputs become live by being plugged into these data feeds rather than
+        hand-entered each time.
+      </P>
+
+      <Callout type="info">
+        <strong>End of module.</strong> The 14-lesson <em>Valuing Renewable Projects</em>{' '}
+        framework is now complete. Use it as a working tool — re-score quarterly, watch the
+        weights evolve as the regime shifts, and pressure-test the highest-scoring categories
+        before committing capital. The framework is opinionated, defensible, and (most
+        importantly) data-traceable: every input lives in a public dataset somewhere, and the
+        composite score has a transparent derivation that survives diligence-room scrutiny.
+      </Callout>
+
+      <Callout type="source">
+        Sources: Nelson Review Final Report (NEM Wholesale Market Settings Review, Dec 2025) ·
+        Energy Synapse <em>ESEM explained</em> · Modo Energy <em>Nelson Review BESS impact</em> ·
+        AURES{' '}
+        <Link to="/learn/summing-it-up/esem" className="text-[var(--color-primary)] hover:underline">Summing It Up — ESEM</Link>
+        {' '}and{' '}
+        <Link to="/learn/summing-it-up/scenario-b" className="text-[var(--color-primary)] hover:underline">Scenario B</Link>
+        {' '}· Goldman Sachs <em>Global AI Infrastructure Outlook</em> 2026 · BloombergNEF Australia ETO ·
+        AEMO ISP 2024 and forthcoming ISP 2026.
+      </Callout>
+    </div>
+  )
+}
+
+// ============================================================
 // Module shell — index + per-lesson view
 // ============================================================
 
@@ -2161,6 +2690,8 @@ function LessonView({ lesson, onComplete }: {
         {lesson.id === 'connection'        && <Lesson10 />}
         {lesson.id === 'other-fundamentals' && <Lesson11 />}
         {lesson.id === 'scoring-framework' && <Lesson12 />}
+        {lesson.id === 'interactive-tool'  && <Lesson13 />}
+        {lesson.id === 'future-shifts'     && <Lesson14 />}
       </div>
 
       <div className="flex flex-wrap items-center justify-between gap-3 pt-6 border-t border-[var(--color-border)]">
