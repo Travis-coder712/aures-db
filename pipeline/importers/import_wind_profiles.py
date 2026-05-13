@@ -1008,9 +1008,16 @@ def generate_pros_cons(pa: dict, state_avg: Optional[dict]) -> dict:
 def main():
     parser = argparse.ArgumentParser(description="Import wind value profiles")
     parser.add_argument("--skip-hourly", action="store_true",
-                        help="Skip OE API calls — compute from existing DB data only")
+                        help="Skip OE API calls — compute from existing DB data only. "
+                             "Preserves whatever hourly_shape is already in wind-value.json.")
     parser.add_argument("--sample", action="store_true",
                         help="Use synthetic hourly shapes (no API key needed)")
+    parser.add_argument("--allow-low-coverage", action="store_true",
+                        help="Bypass the coverage-floor guard. Use only when intentionally "
+                             "writing a degraded file (e.g. first-run on a fresh DB).")
+    parser.add_argument("--coverage-threshold", type=float, default=0.75,
+                        help="Minimum hourly_shape coverage required to write (default 0.75). "
+                             "Coverage = projects with shape / projects analysed.")
     args = parser.parse_args()
 
     conn = get_connection()
@@ -1078,8 +1085,16 @@ def main():
     else:
         api_key = os.environ.get('OPENELECTRICITY_API_KEY')
         if not api_key:
-            print("\n[7] WARNING: OPENELECTRICITY_API_KEY not set — skipping hourly shapes")
-            print("    Run with --sample to generate synthetic shapes for testing")
+            print("\n[7] ERROR: OPENELECTRICITY_API_KEY not set.")
+            print("    Refusing to write — this would degrade wind-value.json by")
+            print("    clearing hourly_shape for every project. Either:")
+            print("       export OPENELECTRICITY_API_KEY=... and rerun, or")
+            print("       use --skip-hourly to intentionally skip hourly fetch")
+            print("         (preserves existing shapes in wind-value.json), or")
+            print("       use --sample for synthetic shapes (testing only), or")
+            print("       use --allow-low-coverage to bypass this guard.")
+            if not args.allow_low_coverage:
+                sys.exit(1)
         else:
             print("\n[7] Fetching hourly shapes from OpenElectricity API...")
             try:
@@ -1101,10 +1116,64 @@ def main():
                 print(f"    Hourly fetch failed: {e}")
                 print("    Continuing without hourly shapes...")
 
-    # Merge shapes into analytics
+    # Merge shapes into analytics (new run wins where present)
     for pid in projects_analytics:
         if pid in shapes:
             projects_analytics[pid]['hourly_shape'] = shapes[pid]
+
+    # ---- Preservation merge ----
+    # The wind importer is expensive (~48 API calls and ~5 min of OE quota).
+    # If this run skipped the hourly fetch (--skip-hourly, missing key with
+    # --allow-low-coverage, or partial API failure), fall back to whatever
+    # shapes were in the previous wind-value.json. This makes the file a
+    # monotonically-improving artefact instead of one a single bad run can
+    # destroy. (Root cause of commit 3596280e on 9 May 2026, when a manual
+    # regen overwrote 80/80 shapes with nulls.)
+    output_path_for_merge = os.path.join(
+        os.path.dirname(__file__), '..', '..',
+        'frontend', 'public', 'data', 'analytics', 'wind-value.json'
+    )
+    output_path_for_merge = os.path.normpath(output_path_for_merge)
+    preserved_count = 0
+    if os.path.exists(output_path_for_merge):
+        try:
+            with open(output_path_for_merge) as f:
+                existing = json.load(f)
+            existing_projects = existing.get('projects', {})
+            for pid, pa in projects_analytics.items():
+                if pa.get('hourly_shape'):
+                    continue   # this run populated it; keep new
+                old = existing_projects.get(pid, {}).get('hourly_shape')
+                if old:
+                    pa['hourly_shape'] = old
+                    preserved_count += 1
+            if preserved_count:
+                print(f"\n[7b] Preserved hourly_shape from existing file for "
+                      f"{preserved_count} projects (where this run did not fetch).")
+        except (json.JSONDecodeError, OSError) as e:
+            print(f"\n[7b] Could not read existing wind-value.json for shape preservation: {e}")
+            print("     Proceeding without preservation merge.")
+
+    # ---- Coverage validator ----
+    # Guard against regressions like the 9 May 2026 disappearance. If the
+    # final coverage is below the configured threshold, refuse to overwrite
+    # the file. Skipped in --sample mode (always 100% by construction) and
+    # in --skip-hourly mode (the user explicitly opted out of fetching).
+    n_with_shape = sum(1 for p in projects_analytics.values() if p.get('hourly_shape'))
+    n_total = len(projects_analytics)
+    coverage = (n_with_shape / n_total) if n_total else 0.0
+    print(f"\n[7c] hourly_shape coverage: {n_with_shape}/{n_total} ({coverage:.1%})")
+    if (
+        not args.skip_hourly
+        and not args.sample
+        and not args.allow_low_coverage
+        and coverage < args.coverage_threshold
+    ):
+        print(f"     ERROR: coverage {coverage:.1%} is below threshold "
+              f"{args.coverage_threshold:.0%}.")
+        print(f"     Refusing to overwrite wind-value.json with a degraded file.")
+        print(f"     Override with --allow-low-coverage if this is intentional.")
+        sys.exit(1)
 
     # ---- Build regional pool price summary ----
     pool_price_summary: Dict[str, Dict[str, float]] = {}
