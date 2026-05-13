@@ -864,16 +864,27 @@ const M_SUMMING_IT_UP: LearningModule = {
 // reference but is no longer exposed in the catalogue.
 void M_SOLAR_CANN
 
+// Module ordering — narrative arc from macro to technical to synthesis:
+//   1. Energy Transition (why the market is changing)
+//   2. Solar + BESS Story (the dominant new-build configuration)
+//   3. NSW REZ (where the new build lands)
+//   4. CIS & LTESA Bidding (how new build is underwritten)
+//   5. PPAs (the offtake layer)
+//   6. Project Financing (how it gets paid for)
+//   7. Planning Approvals (the pre-FID gate)
+//   8. AEMO Connection (the technical gate)
+//   9. NEM Constraints (operational reality once built)
+//   10. Summing It Up (synthesis of the curriculum)
 export const LEARNING_MODULES: LearningModule[] = [
-  M_CONSTRAINTS,
-  M_CIS_LTESA,
-  M_REZ,
-  M_BESS,
   M_TRANSITION,
-  M_PLANNING,
-  M_CONNECTIONS,
+  M_BESS,
+  M_REZ,
+  M_CIS_LTESA,
   M_PPAS,
   M_FINANCING,
+  M_PLANNING,
+  M_CONNECTIONS,
+  M_CONSTRAINTS,
   M_SUMMING_IT_UP,
 ]
 
