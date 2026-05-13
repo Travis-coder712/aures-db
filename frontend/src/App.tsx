@@ -16,6 +16,7 @@ import PlanningApprovalsModule from './pages/learn/PlanningApprovalsModule'
 import AemoConnectionsModule from './pages/learn/AemoConnectionsModule'
 import PpasModule from './pages/learn/PpasModule'
 import ProjectFinancingModule from './pages/learn/ProjectFinancingModule'
+import SummingItUpModule from './pages/learn/SummingItUpModule'
 import LearnHub from './pages/learn/LearnHub'
 import ModuleStub from './pages/learn/ModuleStub'
 // SchemesOverview merged into SchemeTracker intelligence page
@@ -97,6 +98,8 @@ function App() {
         <Route path="learn/ppas/:lessonId" element={<PpasModule />} />
         <Route path="learn/project-financing" element={<ProjectFinancingModule />} />
         <Route path="learn/project-financing/:lessonId" element={<ProjectFinancingModule />} />
+        <Route path="learn/summing-it-up" element={<SummingItUpModule />} />
+        <Route path="learn/summing-it-up/:lessonId" element={<SummingItUpModule />} />
         <Route path="learn/:moduleId" element={<ModuleStub />} />
         {/* Redirect old /schemes to intelligence page */}
         <Route path="schemes" element={<Navigate to="/intelligence/scheme-tracker" replace />} />

@@ -792,6 +792,69 @@ const M_CIS_LTESA: LearningModule = {
 }
 
 // ============================================================
+// 10. Summing It Up — Market Implications (synthesis module)
+// ============================================================
+
+const M_SUMMING_IT_UP: LearningModule = {
+  id: 'summing-it-up',
+  icon: '🧭',
+  title: 'Summing It Up — Market Implications',
+  tagline: 'Synthesising the curriculum into a forward view of the NEM through 2030.',
+  description:
+    'An 8-lesson synthesis module pulling together the threads from the prior nine modules. Covers the solar+BESS hybrid imperative, hybrid economics, the curtailment "what you would have to believe" question, what the operating hybrids tell us, the ESEM post-CIS architecture, and two bookend scenarios for 2032 (CIS/LTESA/ESEM working vs data centre surge rewriting everything). Closes with signals to watch and how to position as developer, investor, or policy-maker.',
+  status: 'available',
+  readingTime: '102 min',
+  accent: '#0ea5e9',
+  added: '2026-05-13',
+  route: '/learn/summing-it-up',
+  lessons: [
+    { id: 'hybrid-imperative',    number: 1, title: 'The hybrid imperative — why solar developers ran to BESS', summary: 'From retailer rejection through corporate VPPA to hyperscaler 24/7 CFE — and the four supply-side amplifiers that compound the demand-side forcing function.' },
+    { id: 'hybrid-economics',     number: 2, title: 'Hybrid economics — three structures compared',              summary: 'DC-coupled vs AC-coupled vs separate sites vs sole BESS. Capex, revenue stack, complexity — with a worked $440M vs $502M build comparison.' },
+    { id: 'curtailment-question', number: 3, title: 'The curtailment question — what you would have to believe', summary: 'The midday dispatch decision at the connection limit, the breakeven inequality, and the NSW BESS pipeline reality check.' },
+    { id: 'operating-hybrids',    number: 4, title: 'What the operating hybrids tell us',                          summary: 'CIS Tender 4 awards, Edify Darlington Point, Akaysha portfolio, Neoen Western Downs, Genex Kidston — empirical record so far.' },
+    { id: 'esem',                 number: 5, title: 'ESEM — the post-CIS underwriting architecture',               summary: 'Nelson Review recommendation, three standardised contract types, warehouse-and-recycle administrator model, Queensland dissent.' },
+    { id: 'scenario-a',           number: 6, title: 'Scenario A — when CIS / LTESA / ESEM work',                   summary: 'Coal out, 80% contracted, $55/MWh real wholesale by 2032. Consumer bills fall ~12%. Commonwealth net cost lower than budget.' },
+    { id: 'scenario-b',           number: 7, title: 'Scenario B — data centre surge rewrites everything',          summary: 'AI workload growth, coal extension, hyperscaler co-investment, bifurcated market. Consumer bills rise ~8% real. Commonwealth budget pressure shifts to coal/transmission.' },
+    { id: 'synthesis',            number: 8, title: 'Synthesis — signals to watch for the next decade',            summary: 'The four signals that distinguish A from B. How developers, investors and policy-makers should position. AURES Intelligence as the live-data layer.' },
+  ],
+  sources: [
+    { category: 'Nelson Review / ESEM', items: [
+      { label: 'NEM Wholesale Market Settings Review — Final Report (Dec 2025)', url: 'https://www.energy.gov.au/energy-and-climate-change-ministerial-council/working-groups/electricity-working-group/nem-wholesale-market-settings-review' },
+      { label: 'Energy Ministers Meeting communiqué — 16 December 2025' },
+      { label: 'Energy Synapse — ESEM explained', url: 'https://energysynapse.com.au/esem-explained-how-the-nelson-review-improves-bankability-for-renewables-and-storage/' },
+      { label: 'Modo Energy — Nelson Review BESS impact', url: 'https://modoenergy.com/research/en/nem-reform-nelson-review-electricity-services-entry-mechanism-esem-bess-impact' },
+      { label: 'Ashurst, Allens, KWM, Lexology — Nelson Review briefings' },
+    ]},
+    { category: 'Operating hybrid project data', items: [
+      { label: 'Edify Energy — 2026 investor day deck and Darlington Point operating data' },
+      { label: 'Neoen — Western Downs 2025 operating disclosures' },
+      { label: 'Akaysha Energy — Brendale and Orana operating updates' },
+      { label: 'Genex Power — Kidston commissioning reports' },
+      { label: 'CIS Tender 4 award letters and AEMO Services materials' },
+    ]},
+    { category: 'Market and load forecasts', items: [
+      { label: 'AEMO Integrated System Plan 2024 (step-change scenario)' },
+      { label: 'Aurora Energy Research — NEM Long-Run Outlook 2026' },
+      { label: 'BloombergNEF — Australia Energy Transition Outlook' },
+      { label: 'CSIRO GenCost 2024' },
+      { label: 'Cornwall Insight — Australia long-run wholesale outlook' },
+    ]},
+    { category: 'Data centre demand thesis', items: [
+      { label: 'Goldman Sachs — Global AI Infrastructure Outlook 2026' },
+      { label: 'Microsoft, Google, AWS — 2025 Q3-Q4 cloud and AI workload disclosures' },
+      { label: 'NextDC, AirTrunk, Goodman / Brookfield — investor updates' },
+      { label: 'McKinsey — Data Centre Demand 2030' },
+      { label: 'Australian Energy Council — data centre load forecasts' },
+    ]},
+    { category: 'AURES prior modules', items: [
+      { label: 'Constraints, CIS-LTESA, REZ, Solar+BESS, Energy Transition, Planning, AEMO Connections, PPAs, Project Financing — all upstream context' },
+      { label: 'AURES Scheme Tracker (live)', url: '/intelligence/scheme-tracker' },
+      { label: 'AURES Boardroom briefing' },
+    ]},
+  ],
+}
+
+// ============================================================
 // Module catalogue export
 // ============================================================
 
@@ -811,6 +874,7 @@ export const LEARNING_MODULES: LearningModule[] = [
   M_CONNECTIONS,
   M_PPAS,
   M_FINANCING,
+  M_SUMMING_IT_UP,
 ]
 
 export function getModule(id: string): LearningModule | undefined {
