@@ -9,8 +9,172 @@
  * government counterparties (CIS/LTESA/VRET); the corporate buyer
  * landscape today; and the 2026-2030 outlook.
  */
-import { useState, useCallback } from 'react'
+import { useState, useCallback, useMemo, memo } from 'react'
 import { useParams, useNavigate, Link } from 'react-router-dom'
+
+// ============================================================
+// CISA Leverage Calculator (Lesson 9)
+// ============================================================
+// Shows how CISA's revenue floor lets lenders size higher senior debt,
+// magnifying equity sponsor IRR (and also magnifying downside squeeze
+// when project IRR falls below cost of debt). Standard project-finance
+// leverage formula: Equity IRR ≈ Project IRR + (Project IRR − Cost of
+// debt) × (Debt / Equity).
+
+// Slider defined OUTSIDE the component (Vite HMR + re-mount bug — same
+// fix as the CIS/LTESA module calculator).
+const LevSlider = memo(function LevSlider({
+  label, value, min, max, step, onChange, format,
+}: {
+  label: string
+  value: number
+  min: number
+  max: number
+  step: number
+  onChange: (v: number) => void
+  format: (v: number) => string
+}) {
+  return (
+    <div className="space-y-1">
+      <div className="flex items-center justify-between text-xs">
+        <span className="text-[var(--color-text-muted)]">{label}</span>
+        <span className="font-mono font-semibold text-[var(--color-text)]">{format(value)}</span>
+      </div>
+      <input
+        type="range"
+        min={min}
+        max={max}
+        step={step}
+        value={value}
+        onChange={(e) => onChange(parseFloat(e.target.value))}
+        className="w-full h-1.5 bg-[var(--color-bg-elevated)] rounded-lg appearance-none cursor-pointer accent-[var(--color-primary)]"
+      />
+    </div>
+  )
+})
+
+function leveredEquityIrr(projectIrr: number, costOfDebt: number, gearing: number): number {
+  // gearing is 0..1; debt/equity = g / (1−g). At gearing 100% (no equity)
+  // the formula explodes — clamp to 99% for display sanity.
+  const g = Math.min(gearing, 0.99)
+  const de = g / (1 - g)
+  return projectIrr + (projectIrr - costOfDebt) * de
+}
+
+function CisaLeverageCalculator() {
+  const [projectIrrP50, setProjectIrrP50] = useState(9.0)   // %
+  const [costOfDebt, setCostOfDebt] = useState(6.5)         // %
+  const [projectIrrP90, setProjectIrrP90] = useState(5.0)   // % — stress case
+
+  // Two gearing presets that bookend the typical merchant vs CISA-backed range
+  const MERCHANT_GEARING = 0.60
+  const CISA_GEARING = 0.75
+
+  const results = useMemo(() => {
+    const merch_p50 = leveredEquityIrr(projectIrrP50, costOfDebt, MERCHANT_GEARING)
+    const merch_p90 = leveredEquityIrr(projectIrrP90, costOfDebt, MERCHANT_GEARING)
+    const cisa_p50  = leveredEquityIrr(projectIrrP50, costOfDebt, CISA_GEARING)
+    const cisa_p90  = leveredEquityIrr(projectIrrP90, costOfDebt, CISA_GEARING)
+    return {
+      merch_p50, merch_p90,
+      cisa_p50, cisa_p90,
+      uplift_p50: cisa_p50 - merch_p50,
+      erosion_p90: cisa_p90 - merch_p90,  // negative when CISA hurts more in stress
+    }
+  }, [projectIrrP50, projectIrrP90, costOfDebt])
+
+  const fmtPct1 = (v: number) => `${v.toFixed(1)}%`
+
+  return (
+    <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl p-5 my-4 space-y-5">
+      <p className="text-xs font-bold uppercase tracking-wider text-[var(--color-text-muted)]">
+        Inputs · adjust to see the CISA leverage effect
+      </p>
+
+      <div className="grid sm:grid-cols-3 gap-x-6 gap-y-3">
+        <LevSlider label="Project IRR (unlevered, P50)" value={projectIrrP50}
+          min={4} max={15} step={0.1} onChange={setProjectIrrP50} format={fmtPct1} />
+        <LevSlider label="Cost of debt (all-in)" value={costOfDebt}
+          min={3} max={9} step={0.1} onChange={setCostOfDebt} format={fmtPct1} />
+        <LevSlider label="Project IRR (stress, P90)" value={projectIrrP90}
+          min={0} max={12} step={0.1} onChange={setProjectIrrP90} format={fmtPct1} />
+      </div>
+
+      <div className="overflow-x-auto pt-2 border-t border-[var(--color-border)]">
+        <table className="w-full text-xs">
+          <thead>
+            <tr className="text-[var(--color-text-muted)]">
+              <th className="text-left py-2 pr-3 font-semibold uppercase tracking-wider text-[10px]">Financing</th>
+              <th className="text-right py-2 px-2 font-semibold uppercase tracking-wider text-[10px]">Gearing</th>
+              <th className="text-right py-2 px-2 font-semibold uppercase tracking-wider text-[10px]">Equity IRR · P50</th>
+              <th className="text-right py-2 px-2 font-semibold uppercase tracking-wider text-[10px]">Equity IRR · P90</th>
+              <th className="text-right py-2 pl-2 font-semibold uppercase tracking-wider text-[10px]">P50 − P90 range</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr className="border-t border-[var(--color-border)]">
+              <td className="py-2 pr-3 font-mono text-[var(--color-text)]">Merchant (no CISA)</td>
+              <td className="py-2 px-2 text-right font-mono text-[var(--color-text-muted)]">60% debt</td>
+              <td className="py-2 px-2 text-right font-mono text-[var(--color-text)]">{results.merch_p50.toFixed(2)}%</td>
+              <td className={`py-2 px-2 text-right font-mono ${results.merch_p90 < 0 ? 'text-red-400' : 'text-[var(--color-text)]'}`}>
+                {results.merch_p90.toFixed(2)}%
+              </td>
+              <td className="py-2 pl-2 text-right font-mono text-[var(--color-text-muted)]">
+                {(results.merch_p50 - results.merch_p90).toFixed(2)}pp
+              </td>
+            </tr>
+            <tr className="border-t border-[var(--color-border)] bg-[var(--color-primary)]/5">
+              <td className="py-2 pr-3 font-mono text-[var(--color-text)]">CISA-backed</td>
+              <td className="py-2 px-2 text-right font-mono text-[var(--color-text-muted)]">75% debt</td>
+              <td className="py-2 px-2 text-right font-mono font-semibold text-emerald-400">
+                {results.cisa_p50.toFixed(2)}%
+              </td>
+              <td className={`py-2 px-2 text-right font-mono font-semibold ${results.cisa_p90 < 0 ? 'text-red-400' : 'text-[var(--color-text)]'}`}>
+                {results.cisa_p90.toFixed(2)}%
+              </td>
+              <td className="py-2 pl-2 text-right font-mono text-[var(--color-text-muted)]">
+                {(results.cisa_p50 - results.cisa_p90).toFixed(2)}pp
+              </td>
+            </tr>
+            <tr className="border-t border-[var(--color-border)] text-[var(--color-text-muted)]">
+              <td className="py-2 pr-3 italic">CISA effect</td>
+              <td className="py-2 px-2 text-right font-mono">+15pp</td>
+              <td className={`py-2 px-2 text-right font-mono font-semibold ${results.uplift_p50 >= 0 ? 'text-emerald-400' : 'text-red-400'}`}>
+                {results.uplift_p50 >= 0 ? '+' : ''}{results.uplift_p50.toFixed(2)}pp
+              </td>
+              <td className={`py-2 px-2 text-right font-mono font-semibold ${results.erosion_p90 >= 0 ? 'text-emerald-400' : 'text-red-400'}`}>
+                {results.erosion_p90 >= 0 ? '+' : ''}{results.erosion_p90.toFixed(2)}pp
+              </td>
+              <td className="py-2 pl-2 text-right font-mono">—</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div className="bg-blue-500/10 border border-blue-500/30 rounded-lg p-3 text-xs leading-relaxed text-[var(--color-text)]">
+        <p className="font-semibold uppercase tracking-wider text-[10px] text-blue-400 mb-2">
+          Reading the table
+        </p>
+        <ul className="list-disc list-inside space-y-1 ml-1">
+          <li>
+            With project IRR &gt; cost of debt, <em>more debt magnifies equity IRR</em>. The CISA-backed
+            P50 row should be ~{((results.cisa_p50 - results.merch_p50) >= 0 ? '' : '−')}{Math.abs(results.uplift_p50).toFixed(1)}pp higher than merchant.
+          </li>
+          <li>
+            With project IRR &lt; cost of debt (P90 stress), <em>more debt magnifies equity erosion</em>.
+            The CISA-backed P90 row falls further than the merchant P90. The asymmetric leverage cuts both ways.
+          </li>
+          <li>
+            The CISA only "wins" if its floor + 90% coverage keeps project IRR materially above the cost of debt
+            in the downside. A floor of $55/MWh with a 10% deductible and a $25M annual cap typically does — but the worst
+            stress scenarios (low CF + low RRP) can break the assumption (see Item 10 of the PPA × CISA checklist).
+          </li>
+        </ul>
+      </div>
+    </div>
+  )
+}
+
 
 // ============================================================
 // Progress persistence
@@ -1448,6 +1612,52 @@ function Lesson9() {
         <li>T5 + T6 (WEM): smaller tranches in WA</li>
         <li>Cumulative through mid-2026: ~25-30 GW committed across all CIS tranches</li>
       </ul>
+
+      <H2>Key concept — how a CISA magnifies equity sponsor IRR</H2>
+
+      <Callout type="key">
+        The single biggest commercial implication of a CISA is that its 90%-covered floor lets
+        lenders size <Em>more senior debt</Em>. A merchant project might be financed at 55–60%
+        debt. The same project with a CISA backing the downside is routinely financed at 70–75%.
+        Because debt is cheaper than equity (call it 6–7% nominal vs 10–14% equity target),
+        replacing equity with debt magnifies the equity sponsor's IRR — typically by 3–6
+        percentage points on otherwise-identical project economics.
+      </Callout>
+
+      <P>
+        The mechanic is standard project-finance leverage. Equity IRR ≈ Project IRR + (Project
+        IRR − Cost of debt) × (Debt / Equity). When the project earns above the cost of debt,
+        every extra dollar of debt funds equity-equivalent returns at debt rates — the spread is
+        captured by equity. This is not magic. It is the same effect that makes leveraged buy-outs
+        attractive, applied to a renewable project balance sheet.
+      </P>
+
+      <P>
+        The catch — and it is a real one — is that <Em>leverage is asymmetric</Em>. When project
+        IRR falls below the cost of debt (the stress scenario), the same debt magnifies the
+        downside. Debt service is fixed; equity absorbs the squeeze. A CISA-backed project at 75%
+        gearing has a steeper P50-to-P90 IRR fall than a merchant project at 60% gearing — unless
+        the CISA floor (with its 10% deductible and annual cap) is high enough to keep project
+        IRR comfortably above cost of debt in the worst case.
+      </P>
+
+      <CisaLeverageCalculator />
+
+      <Callout type="info">
+        This calculator captures the headline leverage effect with one simplified equation. The
+        full project finance picture (DSCR sizing, refinancing assumptions, depreciation tax
+        shield, sponsor support letters, etc.) is covered in detail in the{' '}
+        <Link to="/learn/project-financing" className="text-[var(--color-primary)] hover:underline">
+          Project Financing of Renewables
+        </Link>{' '}
+        learning module. The downside-stress dynamics — how the CISA floor and annual cap interact
+        with the 90% deductible to set the P90 revenue line lenders actually size against — are
+        worked through with numerical examples in the{' '}
+        <Link to="/learn/cis-ltesa-bidding/ppa-cisa-calculator" className="text-[var(--color-primary)] hover:underline">
+          PPA × CISA Interactions
+        </Link>{' '}
+        guide (checklist items 4, 10, and 13 are especially relevant).
+      </Callout>
 
       <H2>NSW LTESA — the long-duration sister scheme</H2>
       <P>
