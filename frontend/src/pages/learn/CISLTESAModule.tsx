@@ -10,12 +10,14 @@
  * Sources cited inline at the end of each lesson; the full
  * bibliography also lives in src/data/learning-modules.ts.
  */
-import { useState, useCallback, useMemo, memo } from 'react'
+import { useState, useCallback, useMemo, useRef, memo } from 'react'
 import { useParams, useNavigate, Link } from 'react-router-dom'
 import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
   Cell, ReferenceLine, Legend,
 } from 'recharts'
+import { exportElementToPdf } from '../../lib/exportPdf'
+import { PpaCisaChecklistPdf } from '../../components/learn/PpaCisaChecklistPdf'
 
 // ============================================================
 // Progress persistence
@@ -1570,9 +1572,49 @@ function PpaCisaCalculator() {
 // ============================================================
 
 function Lesson8() {
+  const pdfRef = useRef<HTMLDivElement>(null)
+  const [pdfLoading, setPdfLoading] = useState(false)
+  const [showPdf, setShowPdf] = useState(false)
+
+  const handleExportPdf = useCallback(async () => {
+    setPdfLoading(true)
+    setShowPdf(true)
+    // Let React mount the hidden div + browser paint
+    await new Promise(r => setTimeout(r, 600))
+    if (!pdfRef.current) {
+      setShowPdf(false)
+      setPdfLoading(false)
+      return
+    }
+    try {
+      await exportElementToPdf(pdfRef.current, {
+        filename: 'PPA_CISA_Interactions_Reference_Guide',
+        title: 'PPA × CISA Interactions Reference Guide',
+        subtitle: `14-point checklist with worked examples · AURES Intelligence · ${new Date().toLocaleDateString('en-AU', { year: 'numeric', month: 'long', day: 'numeric' })}`,
+      })
+    } catch (err) {
+      console.error('PDF export failed:', err)
+      alert('PDF generation failed — please try again. If the issue persists, try a different browser.')
+    } finally {
+      setShowPdf(false)
+      setPdfLoading(false)
+    }
+  }, [])
+
   return (
     <div>
-      <H2>How a PPA and a CISA interact</H2>
+      <div className="flex items-start justify-between gap-3 flex-wrap mb-4">
+        <H2>How a PPA and a CISA interact</H2>
+        <button
+          onClick={handleExportPdf}
+          disabled={pdfLoading}
+          className="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-medium bg-[var(--color-primary)]/10 border border-[var(--color-primary)]/30 text-[var(--color-primary)] hover:bg-[var(--color-primary)]/20 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+        >
+          {pdfLoading
+            ? <><span className="animate-spin inline-block">⏳</span> Generating…</>
+            : <><span>📄</span> Export 14-point guide as PDF</>}
+        </button>
+      </div>
       <P>
         Most CIS-contracted projects in the NEM also have a corporate or gentailer PPA over part of their
         output. The two contracts settle in different ways — but they interact, because the CISA
@@ -1969,6 +2011,20 @@ function Lesson8() {
         King &amp; Wood Mallesons <em>CISA / PPA Interaction</em> 2024 · Norton Rose Fulbright
         <em>Sovereign Offtake Practice Notes</em> · AURES Scheme Tracker (live).
       </Callout>
+
+      {/* Hidden PDF — rendered off-screen during export so html2canvas can capture it */}
+      {showPdf && (
+        <div
+          ref={pdfRef}
+          style={{
+            position: 'fixed', top: 0, left: '-10000px',
+            pointerEvents: 'none', zIndex: 9999,
+            width: 900,
+          }}
+        >
+          <PpaCisaChecklistPdf />
+        </div>
+      )}
     </div>
   )
 }
