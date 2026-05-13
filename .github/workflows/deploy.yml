@@ -26,7 +26,6 @@ jobs:
           cache: npm
           cache-dependency-path: |
             frontend/package-lock.json
-            acknowledge-country/package-lock.json
 
       - name: Install AURES dependencies
         working-directory: frontend
@@ -44,21 +43,11 @@ jobs:
           echo "{\"version\":\"${VERSION}\",\"built_at\":\"$(date -u +%Y-%m-%dT%H:%M:%SZ)\"}" > dist/data/metadata/version.json
           echo "Published version.json: v${VERSION}"
 
-      - name: Install Acknowledge Country dependencies
-        working-directory: acknowledge-country
-        run: npm ci
-
-      - name: Build Acknowledge Country PWA
-        working-directory: acknowledge-country
-        run: npm run build
-
-      - name: Copy Acknowledge Country into AURES dist
-        run: cp -r acknowledge-country/dist frontend/dist/country
-
-      - name: Stand up redirect for old /builders/ path
+      - name: Stand up redirects for relocated sibling PWAs
         run: |
+          # Brisbane Builder Guide redirect
           mkdir -p frontend/dist/builders
-          cat > frontend/dist/builders/index.html <<'EOF'
+          cat > frontend/dist/builders/index.html <<'HTMLEOF'
           <!DOCTYPE html>
           <html lang="en">
           <head>
@@ -66,24 +55,27 @@ jobs:
             <title>Moved — Brisbane Builder Guide</title>
             <meta http-equiv="refresh" content="2; url=https://travis-coder712.github.io/brisbane-builder-guide/">
             <link rel="canonical" href="https://travis-coder712.github.io/brisbane-builder-guide/">
-            <style>
-              body { font-family: -apple-system, sans-serif; background: #0f1117; color: #e6e8f0; display: flex; align-items: center; justify-content: center; min-height: 100vh; margin: 0; }
-              .box { text-align: center; padding: 40px; max-width: 480px; }
-              h1 { font-size: 22px; margin: 0 0 12px; }
-              p { color: #9ca0b5; margin: 0 0 16px; line-height: 1.5; }
-              a { color: #6b8cff; }
-            </style>
+            <style>body{font-family:-apple-system,sans-serif;background:#0f1117;color:#e6e8f0;display:flex;align-items:center;justify-content:center;min-height:100vh;margin:0}.box{text-align:center;padding:40px;max-width:480px}h1{font-size:22px;margin:0 0 12px}p{color:#9ca0b5;margin:0 0 16px;line-height:1.5}a{color:#6b8cff}</style>
           </head>
-          <body>
-            <div class="box">
-              <h1>Brisbane Builder Guide has moved</h1>
-              <p>You should be redirected automatically. If not, click below:</p>
-              <p><a href="https://travis-coder712.github.io/brisbane-builder-guide/">travis-coder712.github.io/brisbane-builder-guide/</a></p>
-            </div>
-          </body>
+          <body><div class="box"><h1>Brisbane Builder Guide has moved</h1><p>You should be redirected automatically. If not, click below:</p><p><a href="https://travis-coder712.github.io/brisbane-builder-guide/">travis-coder712.github.io/brisbane-builder-guide/</a></p></div></body>
           </html>
-          EOF
-          echo "Wrote redirect stub at /builders/"
+          HTMLEOF
+          # Acknowledge Country redirect
+          mkdir -p frontend/dist/country
+          cat > frontend/dist/country/index.html <<'HTMLEOF'
+          <!DOCTYPE html>
+          <html lang="en">
+          <head>
+            <meta charset="UTF-8">
+            <title>Moved — Acknowledge Country</title>
+            <meta http-equiv="refresh" content="2; url=https://travis-coder712.github.io/acknowledge-country/">
+            <link rel="canonical" href="https://travis-coder712.github.io/acknowledge-country/">
+            <style>body{font-family:-apple-system,sans-serif;background:#0f1117;color:#e6e8f0;display:flex;align-items:center;justify-content:center;min-height:100vh;margin:0}.box{text-align:center;padding:40px;max-width:480px}h1{font-size:22px;margin:0 0 12px}p{color:#9ca0b5;margin:0 0 16px;line-height:1.5}a{color:#6b8cff}</style>
+          </head>
+          <body><div class="box"><h1>Acknowledge Country has moved</h1><p>You should be redirected automatically. If not, click below:</p><p><a href="https://travis-coder712.github.io/acknowledge-country/">travis-coder712.github.io/acknowledge-country/</a></p></div></body>
+          </html>
+          HTMLEOF
+          echo "Wrote redirect stubs at /builders/ and /country/"
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
