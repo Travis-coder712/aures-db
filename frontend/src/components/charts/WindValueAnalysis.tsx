@@ -783,6 +783,32 @@ function DailyShapeTab({ project }: { project: WindValueProject }) {
     return vals.length > 0 ? vals.reduce((s, v) => s + v, 0) / vals.length : null
   })()
 
+  // Fixed Y-axis domain spanning every profile in this farm's shape data
+  // (annual + 4 seasons + 12 months). Holds the axis steady when the user
+  // toggles between periods, so curves are visually comparable. Also reused
+  // for the seasonal-overlay chart below so a single-period view and the
+  // four-season overlay share scale.
+  const yDomain = useMemo<[number, number]>(() => {
+    const allVals: number[] = []
+    const collect = (arr?: (number | null)[]) => {
+      if (!arr) return
+      for (const v of arr) if (v != null) allVals.push(v)
+    }
+    collect(shape.annual)
+    Object.values(shape.seasons ?? {}).forEach(collect)
+    Object.values(shape.months ?? {}).forEach(collect)
+    if (annualAvg != null) allVals.push(annualAvg)
+    if (allVals.length === 0) return [0, 100]
+    const min = Math.min(...allVals)
+    const max = Math.max(...allVals)
+    // Pad ±2pp for breathing room, clamp to [0, 100] since CF is bounded
+    const pad = 2
+    return [
+      Math.max(0, Math.floor(min - pad)),
+      Math.min(100, Math.ceil(max + pad)),
+    ]
+  }, [shape, annualAvg])
+
   const chartData = HOURS.map((label, i) => ({
     hour: label,
     cf: activeProfile[i] != null ? Number((activeProfile[i] as number).toFixed(1)) : null,
@@ -838,7 +864,8 @@ function DailyShapeTab({ project }: { project: WindValueProject }) {
             <YAxis
               tick={{ fontSize: 10, fill: 'var(--color-text-muted)' }}
               tickFormatter={v => `${v}%`}
-              domain={['auto', 'auto']}
+              domain={yDomain}
+              allowDataOverflow={false}
             />
             <Tooltip
               contentStyle={tooltipStyle} labelStyle={tooltipLabelStyle} itemStyle={tooltipItemStyle}
@@ -894,7 +921,7 @@ function DailyShapeTab({ project }: { project: WindValueProject }) {
           >
             <CartesianGrid strokeDasharray="3 3" stroke="var(--color-border)" />
             <XAxis dataKey="hour" tick={{ fontSize: 9, fill: 'var(--color-text-muted)' }} interval={3} />
-            <YAxis tick={{ fontSize: 10, fill: 'var(--color-text-muted)' }} tickFormatter={v => `${v}%`} />
+            <YAxis tick={{ fontSize: 10, fill: 'var(--color-text-muted)' }} tickFormatter={v => `${v}%`} domain={yDomain} />
             <Tooltip
               contentStyle={tooltipStyle} labelStyle={tooltipLabelStyle} itemStyle={tooltipItemStyle}
               formatter={((v, name) => [`${v?.toFixed(1)}%`, SEASON_CONFIG[name]?.label ?? name]) as TF}
