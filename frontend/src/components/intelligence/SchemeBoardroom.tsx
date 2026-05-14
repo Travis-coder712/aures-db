@@ -29,6 +29,32 @@ function bucket(p: SchemeTrackerProject, monthsSinceAnnounced: number): Bucket {
   return 'developing'
 }
 
+// ============================================================
+// Lens — two ways of interpreting "is the CISA real"
+// ------------------------------------------------------------
+// 'awarded'   — the default historical lens. Every awarded CISA is
+//               presumed active; only past the LIKELY_FAILED_THRESHOLD
+//               do we down-grade to "at risk". Commentary speaks of
+//               "delivery", "in development", "likely failed".
+//
+// 'confirmed' — the strict lens. Only projects in construction or
+//               operating/commissioning are treated as CISA-confirmed.
+//               (FNCEN-listed projects are also confirmed in principle,
+//               but the dataset doesn't carry an explicit FNCEN flag
+//               yet — see the lens-toggle commentary.) Everything
+//               else, regardless of age, is "CISA not yet confirmed":
+//               no FID, no public CISA execution disclosure, no public
+//               evidence the underwriting is in force. This view
+//               judges CIS success by what is contractually proven
+//               rather than what is presumed-active.
+// ============================================================
+
+export type Lens = 'awarded' | 'confirmed'
+
+function isConfirmed(b: Bucket): boolean {
+  return b === 'delivering' || b === 'building'
+}
+
 // Display formatting
 const fmtMW = (v: number | null | undefined) =>
   v == null ? '–' : v >= 1000 ? `${(v / 1000).toFixed(2)} GW` : `${Math.round(v)} MW`
@@ -75,10 +101,37 @@ const SECTIONS = [
 export default function SchemeBoardroom({ data }: Props) {
   const cisRounds = useMemo(() => data.rounds.filter(r => r.scheme === 'CIS'), [data])
   const ltesaRounds = useMemo(() => data.rounds.filter(r => r.scheme === 'LTESA'), [data])
+  const [lens, setLens] = useState<Lens>('awarded')
+
+  // Intro copy switches per lens — same data, different reading.
+  const overviewIntro = lens === 'awarded'
+    ? 'Combined Capacity Investment Scheme (CIS) and NSW Long-Term Energy Service Agreements (LTESA) award status — every awarded round, every project, every dollar of underwriting committed.'
+    : 'Combined CIS + LTESA award status, read through a strict "CISA-confirmed" lens. A project counts as having a confirmed CISA only if it is in construction or operating (or has been publicly disclosed via the FNCEN First Nations Clean Energy Network tracker). Every other awarded project is treated as not-yet-confirmed: contract may be signed, but FID has not been reached and the underwriting is not visibly in force.'
+
+  const cisRoundsIntro = lens === 'awarded'
+    ? `${cisRounds.length} CIS rounds awarded to date — including the new WA Tenders 5 + 6 awarded 2 May 2026. "Likely failed" = past ${LIKELY_FAILED_THRESHOLD} months since announcement without confirmed CISA execution.`
+    : `${cisRounds.length} CIS rounds awarded to date — including the new WA Tenders 5 + 6 (May 2026). In this strict lens, only projects in construction or operating are counted as CISA-confirmed; every other awarded project is treated as not-yet-confirmed regardless of how recent the round was.`
+
+  const outcomesTitle = lens === 'awarded' ? 'Outcomes Snapshot' : 'CISA Confirmation Snapshot'
+  const outcomesIntro = lens === 'awarded'
+    ? 'Delivery progress across all CIS + LTESA rounds. The middle ground (under construction + still in development) is where contract execution decisions over the next 6 months will determine outcomes.'
+    : 'CIS + LTESA awards split into "CISA confirmed in force" (in construction or operating) versus "CISA not yet confirmed" (everything else: awarded but no FID, no published FNCEN disclosure, no observable construction). This is a deliberately strict read of CIS progress — judging the scheme by what is currently proven rather than presumed-active.'
+
+  const techIntro = lens === 'awarded'
+    ? 'Each scheme split into wind / solar / BESS / hybrid — and the share of awards that have reached construction or operation in each technology.'
+    : 'Each scheme split by technology, showing what share has reached construction or operating — the strict "CISA confirmed" share — versus the share that remains awarded-but-unconfirmed.'
+
+  const funnelIntro = lens === 'awarded'
+    ? 'Every CIS project that has been awarded under a CISA, traced through the development pipeline. Each step shows conversion %.'
+    : 'Every CIS project that has been awarded a CISA, traced through the development pipeline. In this lens, the top of funnel is "awarded but underwriting not yet confirmed in force" — and progression through the funnel is the only public evidence the CISA is real.'
+
+  const outlookIntro = lens === 'awarded'
+    ? "What to watch from now into late 2026: when CIS execution becomes contractually overdue and what flips from 'developing' to 'likely failed'."
+    : 'What to watch from now into late 2026 — when do awarded-but-unconfirmed projects move into construction (and therefore count as CISA-confirmed), and which rounds are at risk of failing to do so before the 14-month execution window expires.'
 
   return (
     <div className="space-y-8">
-      {/* Sticky anchor nav */}
+      {/* Sticky anchor nav + lens toggle */}
       <nav className="sticky top-0 z-20 -mx-4 px-4 py-3 bg-[var(--color-bg)]/90 backdrop-blur border-b border-[var(--color-border)]">
         <div className="flex items-center gap-2 overflow-x-auto">
           <span className="text-[10px] font-semibold uppercase tracking-wider text-[var(--color-text-muted)] mr-2 whitespace-nowrap">
@@ -90,59 +143,88 @@ export default function SchemeBoardroom({ data }: Props) {
               {s.label}
             </a>
           ))}
+          {/* Lens toggle */}
+          <div className="ml-auto flex items-center gap-1.5 pl-3 border-l border-[var(--color-border)]">
+            <span className="text-[10px] font-semibold uppercase tracking-wider text-[var(--color-text-muted)] whitespace-nowrap">
+              Lens:
+            </span>
+            <button
+              onClick={() => setLens('awarded')}
+              title="Default lens — every awarded project counts; only past the 14-month threshold do we down-grade to 'at risk'."
+              className={`text-xs px-3 py-1.5 rounded-full border whitespace-nowrap transition-colors ${
+                lens === 'awarded'
+                  ? 'bg-[var(--color-primary)]/15 border-[var(--color-primary)] text-[var(--color-primary)] font-semibold'
+                  : 'border-[var(--color-border)] text-[var(--color-text-muted)] hover:text-[var(--color-text)]'
+              }`}>
+              Awarded
+            </button>
+            <button
+              onClick={() => setLens('confirmed')}
+              title="Strict lens — only projects in construction or operating count as CISA-confirmed."
+              className={`text-xs px-3 py-1.5 rounded-full border whitespace-nowrap transition-colors ${
+                lens === 'confirmed'
+                  ? 'bg-emerald-500/15 border-emerald-500 text-emerald-400 font-semibold'
+                  : 'border-[var(--color-border)] text-[var(--color-text-muted)] hover:text-[var(--color-text)]'
+              }`}>
+              CISA-confirmed only
+            </button>
+          </div>
         </div>
+        {/* Lens explainer line */}
+        <p className="text-[10px] text-[var(--color-text-muted)] mt-2 leading-snug max-w-5xl">
+          {lens === 'awarded'
+            ? <><span className="font-semibold text-[var(--color-text)]">Awarded lens (default):</span> every awarded CISA is presumed active until past the {LIKELY_FAILED_THRESHOLD}-month threshold without execution evidence. This is the historical Boardroom framing.</>
+            : <><span className="font-semibold text-emerald-400">CISA-confirmed lens:</span> only projects in construction or operating (or publicly disclosed on the FNCEN tracker) are counted as having a confirmed CISA in force. Everything else — including all "developing" projects with recent award dates — is treated as not-yet-confirmed. Use this to judge CIS success by contractually proven progress rather than presumed-active awards.</>
+          }
+        </p>
       </nav>
 
       {/* Hero / Overview */}
-      <Section id="overview" title="Schemes Overview"
-        intro="Combined Capacity Investment Scheme (CIS) and NSW Long-Term Energy Service Agreements (LTESA) award status — every awarded round, every project, every dollar of underwriting committed.">
-        <HeroOverview data={data} cisRounds={cisRounds} ltesaRounds={ltesaRounds} />
+      <Section id="overview" title="Schemes Overview" intro={overviewIntro}>
+        <HeroOverview data={data} cisRounds={cisRounds} ltesaRounds={ltesaRounds} lens={lens} />
       </Section>
 
       {/* CIS rounds */}
-      <Section id="cis-rounds" title="CIS Rounds — Awarded & Delivering"
-        intro={`${cisRounds.length} CIS rounds awarded to date — including the new WA Tenders 5 + 6 awarded 2 May 2026. "Likely failed" = past ${LIKELY_FAILED_THRESHOLD} months since announcement without confirmed CISA execution.`}
+      <Section id="cis-rounds" title={lens === 'awarded' ? 'CIS Rounds — Awarded & Delivering' : 'CIS Rounds — Awarded vs CISA-Confirmed'}
+        intro={cisRoundsIntro}
         accent={COLORS.cis}>
-        <RoundsTable rounds={cisRounds} accent={COLORS.cis} />
+        <RoundsTable rounds={cisRounds} accent={COLORS.cis} lens={lens} />
       </Section>
 
       {/* LTESA rounds */}
       <Section id="ltesa-rounds" title="LTESA Rounds — NSW Underwriting"
         intro={`${ltesaRounds.length} LTESA rounds across generation, firming, and long-duration storage. NSW EnergyCo as Consumer Trustee.`}
         accent={COLORS.ltesa}>
-        <RoundsTable rounds={ltesaRounds} accent={COLORS.ltesa} />
+        <RoundsTable rounds={ltesaRounds} accent={COLORS.ltesa} lens={lens} />
       </Section>
 
       {/* Outcomes */}
-      <Section id="outcomes" title="Outcomes Snapshot"
-        intro={`Delivery progress across all CIS + LTESA rounds. The middle ground (under construction + still in development) is where contract execution decisions over the next 6 months will determine outcomes.`}>
-        <OutcomesPanel data={data} />
+      <Section id="outcomes" title={outcomesTitle} intro={outcomesIntro}>
+        <OutcomesPanel data={data} lens={lens} />
       </Section>
 
       {/* Technology breakdown */}
-      <Section id="tech" title="Awarded Capacity by Technology"
-        intro="Each scheme split into wind / solar / BESS / hybrid — and the share of awards that have reached construction or operation in each technology.">
-        <TechBreakdownPanel data={data} />
+      <Section id="tech" title="Awarded Capacity by Technology" intro={techIntro}>
+        <TechBreakdownPanel data={data} lens={lens} />
       </Section>
 
       {/* Funnel */}
-      <Section id="funnel" title="CIS Pipeline Funnel"
-        intro="Every CIS project that has been awarded under a CISA, traced through the development pipeline. Each step shows conversion %.">
-        <FunnelPanel data={data} />
+      <Section id="funnel" title="CIS Pipeline Funnel" intro={funnelIntro}>
+        <FunnelPanel data={data} lens={lens} />
       </Section>
 
       {/* NSW Wind in CIS */}
       <Section id="nsw-cis" title="NSW Wind in CIS"
         intro="Every NSW wind project awarded under CIS, with curated planning approval dates from NSW IPC and DPE."
         accent={COLORS.cis}>
-        <NswWindPanel data={data} scheme="CIS" />
+        <NswWindPanel data={data} scheme="CIS" lens={lens} />
       </Section>
 
       {/* NSW Wind in LTESA */}
       <Section id="nsw-ltesa" title="NSW Wind in LTESA"
         intro="Every NSW wind project awarded under LTESA."
         accent={COLORS.ltesa}>
-        <NswWindPanel data={data} scheme="LTESA" />
+        <NswWindPanel data={data} scheme="LTESA" lens={lens} />
       </Section>
 
       {/* Senate Estimates & Press */}
@@ -152,8 +234,7 @@ export default function SchemeBoardroom({ data }: Props) {
       </Section>
 
       {/* Outlook */}
-      <Section id="outlook" title="AURES Outlook — Next 6 Months Critical"
-        intro="What to watch from now into late 2026: when CIS execution becomes contractually overdue and what flips from 'developing' to 'likely failed'.">
+      <Section id="outlook" title="AURES Outlook — Next 6 Months Critical" intro={outlookIntro}>
         <OutlookPanel data={data} />
       </Section>
 
@@ -191,8 +272,8 @@ function Section({ id, title, intro, accent, children }: {
 // Hero overview
 // ============================================================
 
-function HeroOverview({ data, cisRounds, ltesaRounds }: {
-  data: SchemeTrackerData; cisRounds: SchemeTrackerRound[]; ltesaRounds: SchemeTrackerRound[]
+function HeroOverview({ data, cisRounds, ltesaRounds, lens }: {
+  data: SchemeTrackerData; cisRounds: SchemeTrackerRound[]; ltesaRounds: SchemeTrackerRound[]; lens: Lens
 }) {
   const sumMW = (rs: SchemeTrackerRound[]) => rs.reduce((a, r) => a + r.total_capacity_mw, 0)
   const sumProj = (rs: SchemeTrackerRound[]) => rs.reduce((a, r) => a + r.num_projects, 0)
@@ -200,6 +281,21 @@ function HeroOverview({ data, cisRounds, ltesaRounds }: {
 
   const cisStats = { rounds: cisRounds.length, projects: sumProj(cisRounds), mw: sumMW(cisRounds), mwh: sumMWh(cisRounds) }
   const ltesaStats = { rounds: ltesaRounds.length, projects: sumProj(ltesaRounds), mw: sumMW(ltesaRounds), mwh: sumMWh(ltesaRounds) }
+
+  // Confirmed-CISA counts for the strict lens — based on stage = construction/operating
+  const confirmedAcross = useMemo(() => {
+    let confProj = 0, confMw = 0
+    for (const r of data.rounds) {
+      for (const p of r.projects) {
+        const b = bucket(p, r.months_since_announced)
+        if (isConfirmed(b)) {
+          confProj += 1
+          confMw += p.capacity_mw || 0
+        }
+      }
+    }
+    return { confProj, confMw }
+  }, [data])
 
   return (
     <div className="grid md:grid-cols-2 gap-4">
@@ -218,15 +314,31 @@ function HeroOverview({ data, cisRounds, ltesaRounds }: {
 
       {/* Combined headline */}
       <div className="md:col-span-2 bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl p-5">
-        <p className="text-[10px] font-semibold uppercase tracking-wider text-[var(--color-text-muted)] mb-2">Combined</p>
+        <p className="text-[10px] font-semibold uppercase tracking-wider text-[var(--color-text-muted)] mb-2">Combined — {lens === 'awarded' ? 'awarded to date' : 'CISA-confirmed in force today'}</p>
         <div className="flex items-baseline gap-3 flex-wrap">
-          <span className="text-3xl font-bold text-[var(--color-text)]">{data.summary.total_projects}</span>
-          <span className="text-sm text-[var(--color-text-muted)]">projects</span>
-          <span className="text-3xl font-bold text-[var(--color-text)]">{(data.summary.total_mw / 1000).toFixed(1)} GW</span>
-          <span className="text-sm text-[var(--color-text-muted)]">capacity</span>
-          <span className="text-3xl font-bold text-[var(--color-text)]">{cisStats.rounds + ltesaStats.rounds}</span>
-          <span className="text-sm text-[var(--color-text-muted)]">rounds</span>
+          {lens === 'awarded' ? (
+            <>
+              <span className="text-3xl font-bold text-[var(--color-text)]">{data.summary.total_projects}</span>
+              <span className="text-sm text-[var(--color-text-muted)]">projects</span>
+              <span className="text-3xl font-bold text-[var(--color-text)]">{(data.summary.total_mw / 1000).toFixed(1)} GW</span>
+              <span className="text-sm text-[var(--color-text-muted)]">capacity</span>
+              <span className="text-3xl font-bold text-[var(--color-text)]">{cisStats.rounds + ltesaStats.rounds}</span>
+              <span className="text-sm text-[var(--color-text-muted)]">rounds</span>
+            </>
+          ) : (
+            <>
+              <span className="text-3xl font-bold" style={{ color: COLORS.green }}>{confirmedAcross.confProj}</span>
+              <span className="text-sm text-[var(--color-text-muted)]">of {data.summary.total_projects} projects</span>
+              <span className="text-3xl font-bold" style={{ color: COLORS.green }}>{(confirmedAcross.confMw / 1000).toFixed(1)} GW</span>
+              <span className="text-sm text-[var(--color-text-muted)]">of {(data.summary.total_mw / 1000).toFixed(1)} GW awarded ({((confirmedAcross.confMw / Math.max(data.summary.total_mw, 1)) * 100).toFixed(0)}%)</span>
+            </>
+          )}
         </div>
+        {lens === 'confirmed' && (
+          <p className="text-xs text-[var(--color-text-muted)] mt-2 leading-relaxed">
+            The remaining <span className="font-semibold text-[var(--color-text)]">{data.summary.total_projects - confirmedAcross.confProj} projects</span> ({((data.summary.total_mw - confirmedAcross.confMw) / 1000).toFixed(1)} GW) have been <em>awarded</em> a CISA but have not yet reached construction or operation — i.e. the CISA may have been signed but the underwriting is not yet visibly in force, and the project has not yet reached FID. They may proceed; equally, some may not.
+          </p>
+        )}
       </div>
     </div>
   )
@@ -264,7 +376,7 @@ function Stat({ label, value, color }: { label: string; value: string; color?: s
 // Rounds table (with totals)
 // ============================================================
 
-function RoundsTable({ rounds, accent }: { rounds: SchemeTrackerRound[]; accent: string }) {
+function RoundsTable({ rounds, accent, lens }: { rounds: SchemeTrackerRound[]; accent: string; lens: Lens }) {
   const totals = useMemo(() => {
     const out = { projects: 0, mw: 0, delivering: 0, building: 0, developing: 0, at_risk: 0 }
     for (const r of rounds) {
@@ -278,12 +390,18 @@ function RoundsTable({ rounds, accent }: { rounds: SchemeTrackerRound[]; accent:
     return out
   }, [rounds])
 
+  // Headers differ per lens. 'awarded' shows four; 'confirmed' collapses
+  // developing + at_risk into a single "Not yet confirmed" column.
+  const headersAwarded   = ['Round', 'Announced', '# Proj', 'Capacity', 'Delivering', 'Building', 'Developing', 'At Risk']
+  const headersConfirmed = ['Round', 'Announced', '# Proj', 'Capacity', 'Operating', 'In Construction', 'CISA not yet confirmed']
+  const headers = lens === 'awarded' ? headersAwarded : headersConfirmed
+
   return (
     <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl overflow-x-auto">
       <table className="w-full text-sm">
         <thead>
           <tr style={{ backgroundColor: accent }}>
-            {['Round', 'Announced', '# Proj', 'Capacity', 'Delivering', 'Building', 'Developing', 'At Risk'].map((h, i) => (
+            {headers.map((h, i) => (
               <th key={h} className={`px-3 py-2.5 text-white text-xs font-semibold ${(i === 0 || i === 1) ? 'text-left' : 'text-right'}`}>{h}</th>
             ))}
           </tr>
@@ -295,6 +413,7 @@ function RoundsTable({ rounds, accent }: { rounds: SchemeTrackerRound[]; accent:
               const bk = bucket(p, r.months_since_announced)
               if (bk !== 'unknown') b[bk] += 1
             }
+            const notConfirmed = b.developing + b.at_risk
             return (
               <tr key={r.id} className="border-t border-[var(--color-border)] hover:bg-[var(--color-bg)]/40">
                 <td className="px-3 py-2 font-medium text-[var(--color-text)]">{r.round}</td>
@@ -303,8 +422,14 @@ function RoundsTable({ rounds, accent }: { rounds: SchemeTrackerRound[]; accent:
                 <td className="px-3 py-2 text-right text-[var(--color-text)]">{fmtMW(r.total_capacity_mw)}</td>
                 <td className="px-3 py-2 text-right" style={{ color: b.delivering ? COLORS.green : 'var(--color-text-muted)' }}>{b.delivering || '–'}</td>
                 <td className="px-3 py-2 text-right" style={{ color: b.building   ? COLORS.amber : 'var(--color-text-muted)' }}>{b.building   || '–'}</td>
-                <td className="px-3 py-2 text-right" style={{ color: b.developing ? COLORS.blue  : 'var(--color-text-muted)' }}>{b.developing || '–'}</td>
-                <td className="px-3 py-2 text-right" style={{ color: b.at_risk    ? COLORS.red   : 'var(--color-text-muted)' }}>{b.at_risk    || '–'}</td>
+                {lens === 'awarded' ? (
+                  <>
+                    <td className="px-3 py-2 text-right" style={{ color: b.developing ? COLORS.blue  : 'var(--color-text-muted)' }}>{b.developing || '–'}</td>
+                    <td className="px-3 py-2 text-right" style={{ color: b.at_risk    ? COLORS.red   : 'var(--color-text-muted)' }}>{b.at_risk    || '–'}</td>
+                  </>
+                ) : (
+                  <td className="px-3 py-2 text-right" style={{ color: notConfirmed ? COLORS.blue : 'var(--color-text-muted)' }}>{notConfirmed || '–'}</td>
+                )}
               </tr>
             )
           })}
@@ -315,8 +440,14 @@ function RoundsTable({ rounds, accent }: { rounds: SchemeTrackerRound[]; accent:
             <td className="px-3 py-2.5 text-right text-[var(--color-text)]">{fmtMW(totals.mw)}</td>
             <td className="px-3 py-2.5 text-right" style={{ color: COLORS.green }}>{totals.delivering}</td>
             <td className="px-3 py-2.5 text-right" style={{ color: COLORS.amber }}>{totals.building}</td>
-            <td className="px-3 py-2.5 text-right" style={{ color: COLORS.blue }}>{totals.developing}</td>
-            <td className="px-3 py-2.5 text-right" style={{ color: COLORS.red }}>{totals.at_risk}</td>
+            {lens === 'awarded' ? (
+              <>
+                <td className="px-3 py-2.5 text-right" style={{ color: COLORS.blue }}>{totals.developing}</td>
+                <td className="px-3 py-2.5 text-right" style={{ color: COLORS.red }}>{totals.at_risk}</td>
+              </>
+            ) : (
+              <td className="px-3 py-2.5 text-right" style={{ color: COLORS.blue }}>{totals.developing + totals.at_risk}</td>
+            )}
           </tr>
         </tbody>
       </table>
@@ -328,7 +459,7 @@ function RoundsTable({ rounds, accent }: { rounds: SchemeTrackerRound[]; accent:
 // Outcomes panel
 // ============================================================
 
-function OutcomesPanel({ data }: { data: SchemeTrackerData }) {
+function OutcomesPanel({ data, lens }: { data: SchemeTrackerData; lens: Lens }) {
   const stats = useMemo(() => {
     const counts = { delivering: 0, building: 0, developing: 0, at_risk: 0 }
     const mw = { delivering: 0, building: 0, developing: 0, at_risk: 0 }
@@ -347,19 +478,31 @@ function OutcomesPanel({ data }: { data: SchemeTrackerData }) {
   const totalProj = stats.counts.delivering + stats.counts.building + stats.counts.developing + stats.counts.at_risk
   const totalMw = stats.mw.delivering + stats.mw.building + stats.mw.developing + stats.mw.at_risk
 
-  const cards = [
-    { label: 'Delivering',    sub: 'Operating or commissioning', n: stats.counts.delivering, mw: stats.mw.delivering, color: COLORS.green },
-    { label: 'Under Construction', sub: 'Site works underway',   n: stats.counts.building,   mw: stats.mw.building,    color: COLORS.amber },
-    { label: 'In Development', sub: `≤${LIKELY_FAILED_THRESHOLD} months since award`, n: stats.counts.developing, mw: stats.mw.developing, color: COLORS.blue },
-    { label: 'Likely Failed', sub: `>${LIKELY_FAILED_THRESHOLD} months without CISA`, n: stats.counts.at_risk, mw: stats.mw.at_risk, color: COLORS.red },
+  // Cards switch shape per lens. Awarded shows four; confirmed shows three —
+  // Operating + In Construction grouped as the CISA-confirmed group, and
+  // Developing + At Risk merged into the "CISA not yet confirmed" group.
+  const cardsAwarded = [
+    { label: 'Delivering',         sub: 'Operating or commissioning',                    n: stats.counts.delivering, mw: stats.mw.delivering, color: COLORS.green },
+    { label: 'Under Construction', sub: 'Site works underway',                           n: stats.counts.building,   mw: stats.mw.building,   color: COLORS.amber },
+    { label: 'In Development',     sub: `≤${LIKELY_FAILED_THRESHOLD} months since award`, n: stats.counts.developing, mw: stats.mw.developing, color: COLORS.blue },
+    { label: 'Likely Failed',      sub: `>${LIKELY_FAILED_THRESHOLD} months without CISA`, n: stats.counts.at_risk,   mw: stats.mw.at_risk,    color: COLORS.red },
   ]
+  const cardsConfirmed = [
+    { label: 'Operating',          sub: 'CISA confirmed — generating',                   n: stats.counts.delivering, mw: stats.mw.delivering, color: COLORS.green },
+    { label: 'In Construction',    sub: 'CISA confirmed — site works under way',         n: stats.counts.building,   mw: stats.mw.building,   color: COLORS.amber },
+    { label: 'CISA not yet confirmed', sub: 'Awarded, no FID, no public CISA execution', n: stats.counts.developing + stats.counts.at_risk, mw: stats.mw.developing + stats.mw.at_risk, color: COLORS.blue },
+  ]
+  const cards = lens === 'awarded' ? cardsAwarded : cardsConfirmed
 
+  const confirmedMw = stats.mw.delivering + stats.mw.building
+  const confirmedCount = stats.counts.delivering + stats.counts.building
+  const confirmedPct = (confirmedMw / Math.max(totalMw, 1)) * 100
   const deliveringPct = (stats.mw.delivering / Math.max(totalMw, 1)) * 100
   const atRiskPct = (stats.mw.at_risk / Math.max(totalMw, 1)) * 100
 
   return (
     <div className="space-y-4">
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
+      <div className={`grid grid-cols-2 ${cards.length === 4 ? 'lg:grid-cols-4' : 'lg:grid-cols-3'} gap-3`}>
         {cards.map(c => (
           <div key={c.label} className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl p-4 relative overflow-hidden">
             <div className="absolute top-0 left-0 right-0 h-1" style={{ backgroundColor: c.color }} />
@@ -374,9 +517,11 @@ function OutcomesPanel({ data }: { data: SchemeTrackerData }) {
         ))}
       </div>
 
-      {/* Share-of-capacity bar */}
+      {/* Share-of-capacity bar — under confirmed lens, group first two as one block */}
       <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl p-4">
-        <p className="text-[11px] font-bold uppercase tracking-wider text-[var(--color-text-muted)] mb-2">Share of awarded capacity (by MW)</p>
+        <p className="text-[11px] font-bold uppercase tracking-wider text-[var(--color-text-muted)] mb-2">
+          {lens === 'awarded' ? 'Share of awarded capacity (by MW)' : 'Share of awarded capacity — CISA-confirmed vs not yet confirmed (by MW)'}
+        </p>
         <div className="flex h-10 rounded-lg overflow-hidden border border-[var(--color-border)]">
           {cards.map(c => {
             const w = (c.mw / Math.max(totalMw, 1)) * 100
@@ -392,11 +537,22 @@ function OutcomesPanel({ data }: { data: SchemeTrackerData }) {
         </div>
       </div>
 
-      <div className="bg-[var(--color-bg-card)] border-l-4 rounded-xl p-4" style={{ borderLeftColor: COLORS.green }}>
+      <div className="bg-[var(--color-bg-card)] border-l-4 rounded-xl p-4" style={{ borderLeftColor: lens === 'awarded' ? COLORS.green : COLORS.blue }}>
         <p className="text-sm leading-relaxed text-[var(--color-text-muted)]">
-          <span className="font-semibold text-[var(--color-text)]">Headline read: </span>
-          <span style={{ color: COLORS.green, fontWeight: 600 }}>{deliveringPct.toFixed(0)}%</span> of awarded capacity is operating or commissioning.{' '}
-          <span style={{ color: COLORS.red, fontWeight: 600 }}>{atRiskPct.toFixed(0)}%</span> sits in the &ldquo;likely failed&rdquo; bucket — past the {LIKELY_FAILED_THRESHOLD}-month threshold without confirmed CISA execution. The middle ground is where contract execution decisions over the next 6 months will determine outcomes.
+          {lens === 'awarded' ? (
+            <>
+              <span className="font-semibold text-[var(--color-text)]">Headline read: </span>
+              <span style={{ color: COLORS.green, fontWeight: 600 }}>{deliveringPct.toFixed(0)}%</span> of awarded capacity is operating or commissioning.{' '}
+              <span style={{ color: COLORS.red, fontWeight: 600 }}>{atRiskPct.toFixed(0)}%</span> sits in the &ldquo;likely failed&rdquo; bucket — past the {LIKELY_FAILED_THRESHOLD}-month threshold without confirmed CISA execution. The middle ground is where contract execution decisions over the next 6 months will determine outcomes.
+            </>
+          ) : (
+            <>
+              <span className="font-semibold text-[var(--color-text)]">Strict-lens read: </span>
+              <span style={{ color: COLORS.green, fontWeight: 600 }}>{confirmedPct.toFixed(0)}%</span> of awarded CIS + LTESA capacity has a <em>confirmed</em> CISA in force today — i.e. is operating or in construction.{' '}
+              <span style={{ color: COLORS.blue, fontWeight: 600 }}>{(100 - confirmedPct).toFixed(0)}%</span> remains awarded-but-not-yet-confirmed — projects have been notified of a CISA win, but have not yet reached FID, are not yet on the FNCEN tracker, and the underwriting is not publicly visible in force. Some of those projects will reach construction over the next 6&ndash;18 months; some will not. This lens reads CIS success by what is contractually proven rather than what is presumed-active.{' '}
+              <span className="font-semibold text-[var(--color-text)]">{confirmedCount}</span> of {totalProj} projects are confirmed.
+            </>
+          )}
         </p>
       </div>
     </div>
@@ -407,7 +563,7 @@ function OutcomesPanel({ data }: { data: SchemeTrackerData }) {
 // Tech breakdown panel
 // ============================================================
 
-function TechBreakdownPanel({ data }: { data: SchemeTrackerData }) {
+function TechBreakdownPanel({ data, lens }: { data: SchemeTrackerData; lens: Lens }) {
   const techLabel: Record<string, string> = {
     wind: 'Wind', solar: 'Solar', bess: 'BESS', hybrid: 'Hybrid', pumped_hydro: 'Pumped Hydro',
   }
@@ -453,8 +609,8 @@ function TechBreakdownPanel({ data }: { data: SchemeTrackerData }) {
                 <th className="px-3 py-2 text-left">Tech</th>
                 <th className="px-3 py-2 text-right">#</th>
                 <th className="px-3 py-2 text-right">Capacity</th>
-                <th className="px-3 py-2 text-right">Delivering / Building</th>
-                <th className="px-3 py-2 text-right">Success rate</th>
+                <th className="px-3 py-2 text-right">{lens === 'awarded' ? 'Delivering / Building' : 'Operating / In Construction'}</th>
+                <th className="px-3 py-2 text-right">{lens === 'awarded' ? 'Success rate' : 'CISA-confirmed rate'}</th>
               </tr>
             </thead>
             <tbody>
@@ -592,7 +748,7 @@ function HybridCallout({ counts }: { counts: { cisCount: number; cisMw: number; 
 // Funnel panel
 // ============================================================
 
-function FunnelPanel({ data }: { data: SchemeTrackerData }) {
+function FunnelPanel({ data, lens }: { data: SchemeTrackerData; lens: Lens }) {
   const cisProjects = useMemo(() =>
     data.rounds.filter(r => r.scheme === 'CIS').flatMap(r => r.projects.map(p => ({ p, r }))),
     [data]
@@ -614,9 +770,9 @@ function FunnelPanel({ data }: { data: SchemeTrackerData }) {
   const atRisk = cisProjects.filter(({ p, r }) => bucket(p, r.months_since_announced) === 'at_risk')
 
   const stages = [
-    { label: 'Awarded under a CISA',                  list: stage1, color: COLORS.cis },
+    { label: lens === 'awarded' ? 'Awarded under a CISA' : 'Awarded — CISA signed but execution not yet observable', list: stage1, color: COLORS.cis },
     { label: 'Past planning / FID gate',              list: stage2, color: COLORS.blue },
-    { label: 'Reached financial close or construction', list: stage3, color: COLORS.amber },
+    { label: lens === 'awarded' ? 'Reached financial close or construction' : 'CISA confirmed — financial close or in construction', list: stage3, color: COLORS.amber },
     { label: 'Operating or commissioning',            list: stage4, color: COLORS.green },
   ]
 
@@ -690,7 +846,7 @@ function FunnelPanel({ data }: { data: SchemeTrackerData }) {
 // NSW Wind panel
 // ============================================================
 
-function NswWindPanel({ data, scheme }: { data: SchemeTrackerData; scheme: 'CIS' | 'LTESA' }) {
+function NswWindPanel({ data, scheme, lens }: { data: SchemeTrackerData; scheme: 'CIS' | 'LTESA'; lens: Lens }) {
   const rows = useMemo(() => {
     const out: { round: string; project: SchemeTrackerProject; monthsSince: number }[] = []
     for (const r of data.rounds) {
@@ -783,17 +939,30 @@ function NswWindPanel({ data, scheme }: { data: SchemeTrackerData; scheme: 'CIS'
       </div>
 
       {/* Status callout */}
-      <p className="text-sm text-[var(--color-text-muted)] leading-relaxed">
-        <span className="font-semibold text-[var(--color-text)]">NSW wind under {scheme}: </span>
-        {rows.length} projects, {fmtMW(totalMw)} total.{' '}
-        {buckets.delivering > 0 && <span style={{ color: COLORS.green, fontWeight: 600 }}>{buckets.delivering} delivering ({fmtMW(mwDelivering)})</span>}
-        {buckets.delivering > 0 && (buckets.building > 0 || buckets.developing > 0) && ', '}
-        {buckets.building > 0 && <span style={{ color: COLORS.amber, fontWeight: 600 }}>{buckets.building} under construction</span>}
-        {buckets.building > 0 && buckets.developing > 0 && ', '}
-        {buckets.developing > 0 && <span style={{ color: COLORS.blue }}>{buckets.developing} in development</span>}
-        {buckets.at_risk > 0 && <span>, <span style={{ color: COLORS.red, fontWeight: 600 }}>{buckets.at_risk} at risk of failure</span></span>}
-        .
-      </p>
+      {lens === 'awarded' ? (
+        <p className="text-sm text-[var(--color-text-muted)] leading-relaxed">
+          <span className="font-semibold text-[var(--color-text)]">NSW wind under {scheme}: </span>
+          {rows.length} projects, {fmtMW(totalMw)} total.{' '}
+          {buckets.delivering > 0 && <span style={{ color: COLORS.green, fontWeight: 600 }}>{buckets.delivering} delivering ({fmtMW(mwDelivering)})</span>}
+          {buckets.delivering > 0 && (buckets.building > 0 || buckets.developing > 0) && ', '}
+          {buckets.building > 0 && <span style={{ color: COLORS.amber, fontWeight: 600 }}>{buckets.building} under construction</span>}
+          {buckets.building > 0 && buckets.developing > 0 && ', '}
+          {buckets.developing > 0 && <span style={{ color: COLORS.blue }}>{buckets.developing} in development</span>}
+          {buckets.at_risk > 0 && <span>, <span style={{ color: COLORS.red, fontWeight: 600 }}>{buckets.at_risk} at risk of failure</span></span>}
+          .
+        </p>
+      ) : (
+        <p className="text-sm text-[var(--color-text-muted)] leading-relaxed">
+          <span className="font-semibold text-[var(--color-text)]">NSW wind under {scheme} — CISA-confirmed lens: </span>
+          {rows.length} projects, {fmtMW(totalMw)} total.{' '}
+          {(buckets.delivering + buckets.building) > 0
+            ? <><span style={{ color: COLORS.green, fontWeight: 600 }}>{buckets.delivering + buckets.building} CISA-confirmed</span>{' '}
+                ({buckets.delivering > 0 && <>{buckets.delivering} operating</>}{buckets.delivering > 0 && buckets.building > 0 && ', '}{buckets.building > 0 && <>{buckets.building} in construction</>})</>
+            : <span style={{ color: COLORS.red, fontWeight: 600 }}>0 CISA-confirmed</span>}
+          {(buckets.developing + buckets.at_risk) > 0 && <>, <span style={{ color: COLORS.blue }}>{buckets.developing + buckets.at_risk} not yet confirmed</span></>}
+          .
+        </p>
+      )}
 
       {/* Caveat for planning approval */}
       <p className="text-xs italic text-[var(--color-text-muted)]/80 leading-relaxed">
