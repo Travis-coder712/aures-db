@@ -1568,6 +1568,488 @@ function PpaCisaCalculator() {
 }
 
 // ============================================================
+// Single-hour PPA × CISA deep-dive explorer
+// ------------------------------------------------------------
+// A separate tool focused on the question: "what does the CISA
+// actually settle against when a physical PPA covers part of
+// generation?" Models three interpretations side-by-side so the
+// reader can see when they agree and when they diverge:
+//
+//   (A) RRP-referenced  — the standard DCCEEW CIS template
+//   (B) Blended capture-price  — what an "includes-PPA" design
+//                                 (or a project-realised reference)
+//                                 would produce
+//   (C) Naive per-tranche split — sometimes equal to (B), often not
+//
+// The point of showing (C) is pedagogical: the user's intuition
+// of "50% of make-up at PPA-vs-floor + 50% of make-up at RRP-vs-
+// floor" is mathematically equal to the blended reference *only*
+// when PPA and RRP sit on the same side of the floor (or ceiling).
+// It diverges sharply when they straddle.
+// ============================================================
+
+interface SingleHourInputs {
+  capacityMw: number
+  capacityFactor: number
+  ppaStrike: number
+  ppaCoverage: number      // 0-1
+  cisaFloor: number
+  cisaCeiling: number
+  cisaCapAnnual: number    // $M
+  rrp: number              // can be negative
+}
+
+const fmt$ = (v: number) => `$${v.toFixed(0)}/MWh`
+const fmt$1 = (v: number) => `$${v.toFixed(1)}/MWh`
+const fmtKMWh = (v: number) => `${(v).toFixed(1)} MWh`
+const fmtMillions = (v: number) => `$${(v / 1_000_000).toFixed(2)}M`
+
+/**
+ * Compute the CISA settlement for one hour under all three
+ * interpretations. All three apply the 90% floor coverage and
+ * 50% ceiling sharing rules; only the *reference price* changes.
+ */
+function deepCalc(s: SingleHourInputs) {
+  // Hour generation = nameplate × CF. Treats the hour as
+  // representative average output, not a peak hour.
+  const hourGen = s.capacityMw * s.capacityFactor
+  const ppaMwh = hourGen * s.ppaCoverage
+  const merchMwh = hourGen * (1 - s.ppaCoverage)
+
+  // What the project actually earns this hour (before CISA):
+  //   - PPA tranche: PPA strike × covered MWh (physical PPA pays strike)
+  //   - Merchant tranche: RRP × uncovered MWh (can be negative)
+  const ppaRev = ppaMwh * s.ppaStrike
+  const merchRev = merchMwh * s.rrp
+  const preCisaRev = ppaRev + merchRev
+  const blendedCapture = hourGen > 0 ? preCisaRev / hourGen : 0
+
+  // CISA reference price under each interpretation (negative
+  // deemed zero — the standard CIS rule)
+  const refA = Math.max(0, s.rrp)
+  const refB = Math.max(0, blendedCapture)
+  const ppaRefForC = Math.max(0, s.ppaStrike)
+
+  // Floor make-up: 90% × max(floor − ref, 0) × MWh
+  const makeupA = Math.max(s.cisaFloor - refA, 0) * 0.90 * hourGen
+  const makeupB = Math.max(s.cisaFloor - refB, 0) * 0.90 * hourGen
+  const makeupC =
+    Math.max(s.cisaFloor - ppaRefForC, 0) * 0.90 * ppaMwh +
+    Math.max(s.cisaFloor - refA,        0) * 0.90 * merchMwh
+
+  // Ceiling clawback: 50% × max(ref − ceiling, 0) × MWh
+  const clawA = Math.max(refA - s.cisaCeiling, 0) * 0.50 * hourGen
+  const clawB = Math.max(refB - s.cisaCeiling, 0) * 0.50 * hourGen
+  const clawC =
+    Math.max(ppaRefForC - s.cisaCeiling, 0) * 0.50 * ppaMwh +
+    Math.max(refA        - s.cisaCeiling, 0) * 0.50 * merchMwh
+
+  const netA = preCisaRev + makeupA - clawA
+  const netB = preCisaRev + makeupB - clawB
+  const netC = preCisaRev + makeupC - clawC
+
+  const effA = hourGen > 0 ? netA / hourGen : 0
+  const effB = hourGen > 0 ? netB / hourGen : 0
+  const effC = hourGen > 0 ? netC / hourGen : 0
+
+  return {
+    hourGen, ppaMwh, merchMwh,
+    ppaRev, merchRev, preCisaRev, blendedCapture,
+    refA, refB,
+    makeupA, makeupB, makeupC,
+    clawA, clawB, clawC,
+    netA, netB, netC,
+    effA, effB, effC,
+  }
+}
+
+// Stable patch helper for SingleHour state. Defined once at module
+// scope so memoised sliders don't re-render unnecessarily.
+function PpaCisaSingleHourExplorer() {
+  const [s, setS] = useState<SingleHourInputs>({
+    capacityMw: 200,
+    capacityFactor: 0.38,
+    ppaStrike: 55,       // BELOW floor — the case the user asked about
+    ppaCoverage: 0.50,   // 50% physical offtake
+    cisaFloor: 65,
+    cisaCeiling: 130,
+    cisaCapAnnual: 30,
+    rrp: 30,             // RRP also below floor — the "shared shortfall" zone
+  })
+
+  const patch = useCallback(
+    <K extends keyof SingleHourInputs>(key: K) => (v: SingleHourInputs[K]) =>
+      setS(prev => ({ ...prev, [key]: v })),
+    []
+  )
+  const setCapacityMw     = useMemo(() => patch('capacityMw'), [patch])
+  const setCapacityFactor = useMemo(() => patch('capacityFactor'), [patch])
+  const setPpaStrike      = useMemo(() => patch('ppaStrike'), [patch])
+  const setPpaCoverage    = useMemo(() => patch('ppaCoverage'), [patch])
+  const setCisaFloor      = useMemo(() => patch('cisaFloor'), [patch])
+  const setCisaCeiling    = useMemo(() => patch('cisaCeiling'), [patch])
+  const setCisaCapAnnual  = useMemo(() => patch('cisaCapAnnual'), [patch])
+  const setRrp            = useMemo(() => patch('rrp'), [patch])
+
+  // Quick preset scenarios — set multiple inputs at once
+  const preset = useCallback((next: Partial<SingleHourInputs>) =>
+    setS(prev => ({ ...prev, ...next })), [])
+
+  const r = useMemo(() => deepCalc(s), [s])
+
+  // Annualised projection. Treats the scenario as the year-average
+  // conditions: same RRP every hour, same generation profile. Real
+  // years vary; this is a sensitivity tool, not a forecast.
+  const annualHours = 8760
+  const scale = annualHours    // hourly × 8760 = annual
+  const annualGen = r.hourGen * scale
+  const annualPreCisa = r.preCisaRev * scale
+  const annualMakeupA = r.makeupA * scale
+  const annualMakeupB = r.makeupB * scale
+  const annualMakeupC = r.makeupC * scale
+  const cap = s.cisaCapAnnual * 1_000_000
+  const capBindsA = annualMakeupA > cap
+  const capBindsB = annualMakeupB > cap
+  const capBindsC = annualMakeupC > cap
+  const annualNetA = annualPreCisa + Math.min(annualMakeupA, cap) - r.clawA * scale
+  const annualNetB = annualPreCisa + Math.min(annualMakeupB, cap) - r.clawB * scale
+  const annualNetC = annualPreCisa + Math.min(annualMakeupC, cap) - r.clawC * scale
+
+  // Diagnostic: when do B and C agree exactly?
+  // They agree when:  PPA and RRP sit on the same side of floor & ceiling.
+  // When PPA > floor and RRP < floor (or vice versa) they diverge.
+  const ppaInBand    = s.ppaStrike >= s.cisaFloor && s.ppaStrike <= s.cisaCeiling
+  const rrpInBand    = s.rrp       >= s.cisaFloor && s.rrp       <= s.cisaCeiling
+  const ppaBelowFloor = s.ppaStrike < s.cisaFloor
+  const rrpBelowFloor = s.rrp       < s.cisaFloor
+  const ppaAboveCeil  = s.ppaStrike > s.cisaCeiling
+  const rrpAboveCeil  = s.rrp       > s.cisaCeiling
+  const straddleFloor = ppaBelowFloor !== rrpBelowFloor
+  const straddleCeil  = ppaAboveCeil  !== rrpAboveCeil
+  const bAndCAgree    = Math.abs(r.makeupB - r.makeupC) < 0.01 && Math.abs(r.clawB - r.clawC) < 0.01
+
+  // Per-MWh make-up under each interpretation (helps reading)
+  const makeupPerMwhA = r.hourGen > 0 ? r.makeupA / r.hourGen : 0
+  const makeupPerMwhB = r.hourGen > 0 ? r.makeupB / r.hourGen : 0
+  const makeupPerMwhC = r.hourGen > 0 ? r.makeupC / r.hourGen : 0
+
+  return (
+    <div className="my-6 space-y-5">
+      {/* ============ Inputs ============ */}
+      <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl p-5 space-y-5">
+        <p className="text-xs font-bold uppercase tracking-wider text-[var(--color-text-muted)]">
+          Single-hour explorer · all four prices settable independently
+        </p>
+
+        {/* Preset scenarios */}
+        <div className="flex flex-wrap gap-2">
+          <span className="text-[10px] uppercase tracking-wider text-[var(--color-text-muted)] self-center mr-1">Scenarios:</span>
+          <button
+            onClick={() => preset({ ppaStrike: 55, cisaFloor: 65, cisaCeiling: 130, rrp: 30, ppaCoverage: 0.50 })}
+            className="text-[11px] px-2.5 py-1 rounded-md bg-[var(--color-bg-elevated)] border border-[var(--color-border)] hover:border-[var(--color-primary)] hover:text-[var(--color-primary)]">
+            50% PPA &lt; floor, RRP &lt; floor
+          </button>
+          <button
+            onClick={() => preset({ ppaStrike: 55, cisaFloor: 65, cisaCeiling: 130, rrp: 30, ppaCoverage: 0.75 })}
+            className="text-[11px] px-2.5 py-1 rounded-md bg-[var(--color-bg-elevated)] border border-[var(--color-border)] hover:border-[var(--color-primary)] hover:text-[var(--color-primary)]">
+            75% PPA &lt; floor, RRP &lt; floor
+          </button>
+          <button
+            onClick={() => preset({ ppaStrike: 80, cisaFloor: 65, cisaCeiling: 130, rrp: 30, ppaCoverage: 0.50 })}
+            className="text-[11px] px-2.5 py-1 rounded-md bg-[var(--color-bg-elevated)] border border-[var(--color-border)] hover:border-[var(--color-primary)] hover:text-[var(--color-primary)]">
+            PPA &gt; floor, RRP &lt; floor (straddle)
+          </button>
+          <button
+            onClick={() => preset({ ppaStrike: 55, cisaFloor: 65, cisaCeiling: 130, rrp: -20, ppaCoverage: 0.50 })}
+            className="text-[11px] px-2.5 py-1 rounded-md bg-[var(--color-bg-elevated)] border border-[var(--color-border)] hover:border-[var(--color-primary)] hover:text-[var(--color-primary)]">
+            RRP negative
+          </button>
+          <button
+            onClick={() => preset({ ppaStrike: 100, cisaFloor: 65, cisaCeiling: 130, rrp: 160, ppaCoverage: 0.50 })}
+            className="text-[11px] px-2.5 py-1 rounded-md bg-[var(--color-bg-elevated)] border border-[var(--color-border)] hover:border-[var(--color-primary)] hover:text-[var(--color-primary)]">
+            RRP above ceiling
+          </button>
+        </div>
+
+        <div>
+          <p className="text-[10px] uppercase tracking-wider text-[var(--color-text-muted)] mb-2">Project</p>
+          <div className="grid sm:grid-cols-2 gap-x-6 gap-y-3">
+            <CalcSlider label="Capacity" value={s.capacityMw} min={50} max={500} step={10}
+              onChange={setCapacityMw} format={fmtMW} />
+            <CalcSlider label="Capacity factor" value={s.capacityFactor} min={0.20} max={0.50} step={0.01}
+              onChange={setCapacityFactor} format={fmtPct} />
+          </div>
+          <p className="text-[10px] text-[var(--color-text-muted)] mt-2 italic">
+            Hourly average generation = {r.hourGen.toFixed(1)} MWh · annualised = {(annualGen / 1000).toFixed(0)} GWh
+          </p>
+        </div>
+
+        <div>
+          <p className="text-[10px] uppercase tracking-wider text-[var(--color-text-muted)] mb-2">PPA (physical) — covers part of generation</p>
+          <div className="grid sm:grid-cols-2 gap-x-6 gap-y-3">
+            <CalcSlider label="PPA strike" value={s.ppaStrike} min={20} max={150} step={1}
+              onChange={setPpaStrike} format={fmtDollarMWh} />
+            <CalcSlider label="PPA coverage" value={s.ppaCoverage} min={0} max={1} step={0.05}
+              onChange={setPpaCoverage} format={fmtPct} />
+          </div>
+        </div>
+
+        <div>
+          <p className="text-[10px] uppercase tracking-wider text-[var(--color-text-muted)] mb-2">CISA — covers 100% of generation</p>
+          <div className="grid sm:grid-cols-3 gap-x-6 gap-y-3">
+            <CalcSlider label="CISA floor" value={s.cisaFloor} min={30} max={130} step={1}
+              onChange={setCisaFloor} format={fmtDollarMWh} />
+            <CalcSlider label="CISA ceiling" value={s.cisaCeiling} min={80} max={250} step={1}
+              onChange={setCisaCeiling} format={fmtDollarMWh} />
+            <CalcSlider label="CISA annual cap" value={s.cisaCapAnnual} min={0} max={200} step={1}
+              onChange={setCisaCapAnnual} format={fmtDollarM} />
+          </div>
+        </div>
+
+        <div>
+          <p className="text-[10px] uppercase tracking-wider text-[var(--color-text-muted)] mb-2">Wholesale market</p>
+          <div className="grid sm:grid-cols-1 gap-x-6 gap-y-3 max-w-md">
+            <CalcSlider label="Regional reference price (RRP) — this hour" value={s.rrp} min={-50} max={300} step={1}
+              onChange={setRrp} format={fmtDollarMWh} />
+          </div>
+        </div>
+      </div>
+
+      {/* ============ Step 1: What the project actually earns ============ */}
+      <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl p-5">
+        <p className="text-xs font-bold uppercase tracking-wider text-[var(--color-text-muted)] mb-3">
+          Step 1 · What the project earns this hour, BEFORE the CISA
+        </p>
+
+        <div className="grid sm:grid-cols-2 gap-4 text-sm">
+          <div className="bg-blue-500/10 border border-blue-500/30 rounded-lg p-3">
+            <p className="text-[10px] uppercase tracking-wider text-blue-400 font-semibold mb-1">PPA tranche</p>
+            <p className="font-mono text-[var(--color-text)]">
+              {fmtKMWh(r.ppaMwh)} × {fmt$(s.ppaStrike)} = <span className="font-bold">${r.ppaRev.toFixed(0)}</span>
+            </p>
+            <p className="text-[11px] text-[var(--color-text-muted)] mt-1">
+              {(s.ppaCoverage * 100).toFixed(0)}% of generation at the contracted strike — paid regardless of RRP.
+            </p>
+          </div>
+
+          <div className={`${r.merchRev >= 0 ? 'bg-emerald-500/10 border-emerald-500/30' : 'bg-red-500/10 border-red-500/30'} border rounded-lg p-3`}>
+            <p className={`text-[10px] uppercase tracking-wider font-semibold mb-1 ${r.merchRev >= 0 ? 'text-emerald-400' : 'text-red-400'}`}>
+              Merchant tranche
+            </p>
+            <p className="font-mono text-[var(--color-text)]">
+              {fmtKMWh(r.merchMwh)} × {fmt$(s.rrp)} = <span className="font-bold">${r.merchRev.toFixed(0)}</span>
+            </p>
+            <p className="text-[11px] text-[var(--color-text-muted)] mt-1">
+              {((1 - s.ppaCoverage) * 100).toFixed(0)}% of generation at RRP — can be positive or negative.
+            </p>
+          </div>
+        </div>
+
+        <div className="mt-4 grid sm:grid-cols-2 gap-4 text-sm">
+          <div className="bg-[var(--color-bg-elevated)] border border-[var(--color-border)] rounded-lg p-3">
+            <p className="text-[10px] uppercase tracking-wider text-[var(--color-text-muted)] mb-1">Total project revenue (pre-CISA)</p>
+            <p className="font-mono text-[var(--color-text)] font-bold text-lg">${r.preCisaRev.toFixed(0)}/hour</p>
+          </div>
+          <div className="bg-[var(--color-primary)]/10 border border-[var(--color-primary)]/30 rounded-lg p-3">
+            <p className="text-[10px] uppercase tracking-wider text-[var(--color-primary)] mb-1 font-semibold">Blended capture price</p>
+            <p className="font-mono text-[var(--color-text)] font-bold text-lg">{fmt$1(r.blendedCapture)}</p>
+            <p className="text-[11px] text-[var(--color-text-muted)] mt-0.5">
+              The single number that captures "what the project is realising per MWh."
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {/* ============ Step 2: What the CISA "sees" — 3 interpretations ============ */}
+      <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl p-5">
+        <p className="text-xs font-bold uppercase tracking-wider text-[var(--color-text-muted)] mb-1">
+          Step 2 · What the CISA settles against — three contract designs side-by-side
+        </p>
+        <p className="text-[11px] text-[var(--color-text-muted)] mb-4">
+          Same 90% / 50% rules, three different choices of <em>reference price</em>. Watch the per-MWh
+          make-up change as you move PPA strike and RRP relative to the floor.
+        </p>
+
+        <div className="grid lg:grid-cols-3 gap-4">
+
+          {/* A — RRP-only */}
+          <div className="border border-[var(--color-border)] rounded-lg p-4 bg-[var(--color-bg-elevated)]/30">
+            <p className="text-[10px] uppercase tracking-wider text-amber-400 font-bold mb-1">A · STANDARD CIS</p>
+            <p className="text-xs text-[var(--color-text)] font-semibold mb-2">RRP-referenced</p>
+            <p className="text-[11px] text-[var(--color-text-muted)] mb-3">
+              The reference is the regional reference price, ignoring how much the PPA is earning. This is
+              the DCCEEW template default.
+            </p>
+            <table className="w-full text-xs font-mono">
+              <tbody>
+                <tr><td className="text-[var(--color-text-muted)] py-0.5">Reference price</td>
+                    <td className="text-right text-[var(--color-text)]">{fmt$(r.refA)}/MWh</td></tr>
+                <tr><td className="text-[var(--color-text-muted)] py-0.5">Floor make-up</td>
+                    <td className="text-right text-purple-400 font-semibold">+${r.makeupA.toFixed(0)}</td></tr>
+                <tr><td className="text-[var(--color-text-muted)] py-0.5">  per MWh</td>
+                    <td className="text-right text-purple-400">+{fmt$1(makeupPerMwhA)}</td></tr>
+                <tr><td className="text-[var(--color-text-muted)] py-0.5">Ceiling clawback</td>
+                    <td className="text-right text-orange-400">−${r.clawA.toFixed(0)}</td></tr>
+                <tr className="border-t border-[var(--color-border)]">
+                  <td className="text-[var(--color-text)] font-semibold py-1">Net project revenue</td>
+                  <td className="text-right text-[var(--color-text)] font-bold">${r.netA.toFixed(0)}</td>
+                </tr>
+                <tr><td className="text-[var(--color-text-muted)] py-0.5">  per MWh</td>
+                    <td className="text-right text-[var(--color-text)] font-bold">{fmt$1(r.effA)}</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          {/* B — Blended */}
+          <div className="border-2 border-[var(--color-primary)]/50 rounded-lg p-4 bg-[var(--color-primary)]/5">
+            <p className="text-[10px] uppercase tracking-wider text-[var(--color-primary)] font-bold mb-1">B · BLENDED REFERENCE</p>
+            <p className="text-xs text-[var(--color-text)] font-semibold mb-2">Project-capture-referenced</p>
+            <p className="text-[11px] text-[var(--color-text-muted)] mb-3">
+              The reference is the project's actual blended $/MWh — what you'd get if the contract said
+              "we make you whole to the floor, accounting for the PPA you already have."
+            </p>
+            <table className="w-full text-xs font-mono">
+              <tbody>
+                <tr><td className="text-[var(--color-text-muted)] py-0.5">Reference price</td>
+                    <td className="text-right text-[var(--color-text)]">{fmt$1(r.refB)}/MWh</td></tr>
+                <tr><td className="text-[var(--color-text-muted)] py-0.5">Floor make-up</td>
+                    <td className="text-right text-purple-400 font-semibold">+${r.makeupB.toFixed(0)}</td></tr>
+                <tr><td className="text-[var(--color-text-muted)] py-0.5">  per MWh</td>
+                    <td className="text-right text-purple-400">+{fmt$1(makeupPerMwhB)}</td></tr>
+                <tr><td className="text-[var(--color-text-muted)] py-0.5">Ceiling clawback</td>
+                    <td className="text-right text-orange-400">−${r.clawB.toFixed(0)}</td></tr>
+                <tr className="border-t border-[var(--color-border)]">
+                  <td className="text-[var(--color-text)] font-semibold py-1">Net project revenue</td>
+                  <td className="text-right text-[var(--color-text)] font-bold">${r.netB.toFixed(0)}</td>
+                </tr>
+                <tr><td className="text-[var(--color-text-muted)] py-0.5">  per MWh</td>
+                    <td className="text-right text-[var(--color-text)] font-bold">{fmt$1(r.effB)}</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          {/* C — Per-tranche split */}
+          <div className="border border-[var(--color-border)] rounded-lg p-4 bg-[var(--color-bg-elevated)]/30">
+            <p className="text-[10px] uppercase tracking-wider text-rose-400 font-bold mb-1">C · NAIVE SPLIT</p>
+            <p className="text-xs text-[var(--color-text)] font-semibold mb-2">Per-tranche calculation</p>
+            <p className="text-[11px] text-[var(--color-text-muted)] mb-3">
+              "Pay 90% of (floor − PPA) on the PPA portion + 90% of (floor − RRP) on the merchant portion."
+              Looks reasonable. Often wrong — see the comparison below.
+            </p>
+            <table className="w-full text-xs font-mono">
+              <tbody>
+                <tr><td className="text-[var(--color-text-muted)] py-0.5">PPA-tranche ref</td>
+                    <td className="text-right text-[var(--color-text)]">{fmt$(Math.max(0, s.ppaStrike))}/MWh</td></tr>
+                <tr><td className="text-[var(--color-text-muted)] py-0.5">Merchant-tranche ref</td>
+                    <td className="text-right text-[var(--color-text)]">{fmt$(Math.max(0, s.rrp))}/MWh</td></tr>
+                <tr><td className="text-[var(--color-text-muted)] py-0.5">Floor make-up (sum)</td>
+                    <td className="text-right text-purple-400 font-semibold">+${r.makeupC.toFixed(0)}</td></tr>
+                <tr><td className="text-[var(--color-text-muted)] py-0.5">  per MWh</td>
+                    <td className="text-right text-purple-400">+{fmt$1(makeupPerMwhC)}</td></tr>
+                <tr><td className="text-[var(--color-text-muted)] py-0.5">Ceiling clawback (sum)</td>
+                    <td className="text-right text-orange-400">−${r.clawC.toFixed(0)}</td></tr>
+                <tr className="border-t border-[var(--color-border)]">
+                  <td className="text-[var(--color-text)] font-semibold py-1">Net project revenue</td>
+                  <td className="text-right text-[var(--color-text)] font-bold">${r.netC.toFixed(0)}</td>
+                </tr>
+                <tr><td className="text-[var(--color-text-muted)] py-0.5">  per MWh</td>
+                    <td className="text-right text-[var(--color-text)] font-bold">{fmt$1(r.effC)}</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        {/* Verdict on B vs C */}
+        <div className={`mt-4 p-3 rounded-lg border ${bAndCAgree ? 'bg-emerald-500/10 border-emerald-500/30' : 'bg-rose-500/10 border-rose-500/30'}`}>
+          <p className={`text-[10px] uppercase tracking-wider font-bold mb-1 ${bAndCAgree ? 'text-emerald-400' : 'text-rose-400'}`}>
+            {bAndCAgree ? '✓ In this scenario: B = C' : '✗ In this scenario: B ≠ C'}
+          </p>
+          {bAndCAgree ? (
+            <p className="text-xs text-[var(--color-text)] leading-relaxed">
+              The blended-reference and naive-split give the <em>same</em> answer here, because PPA and RRP sit on
+              the same side of the floor/ceiling. The math:{' '}
+              <Code>0.5×(F−PPA) + 0.5×(F−RRP) = F − 0.5×PPA − 0.5×RRP = F − blended</Code>.
+              {ppaInBand && rrpInBand && ' Both inside the band → no make-up either way.'}
+              {ppaBelowFloor && rrpBelowFloor && ' Both below floor → make-up is non-zero and the algebra cancels exactly.'}
+              {ppaAboveCeil  && rrpAboveCeil  && ' Both above ceiling → clawback works the same way.'}
+            </p>
+          ) : (
+            <p className="text-xs text-[var(--color-text)] leading-relaxed">
+              The naive split <Em>diverges</Em> from the blended-reference answer because PPA and RRP are on{' '}
+              <em>opposite</em> sides of the {straddleFloor ? 'floor' : straddleCeil ? 'ceiling' : 'band'}.
+              {ppaBelowFloor && !rrpBelowFloor && ' Naive split says "the PPA portion needs a make-up because PPA<floor" — but the project\'s blended revenue may already be at or above the floor, so a blended-reference contract pays less (or nothing). Difference per MWh: '}
+              {!ppaBelowFloor && rrpBelowFloor && ' Naive split says "the merchant portion needs a make-up because RRP<floor" — but the PPA\'s surplus above the floor partly self-insures. Difference per MWh: '}
+              {straddleCeil && ' Naive split applies clawback only to the over-ceiling tranche; blended reference smooths the calculation across all MWh. Difference per MWh: '}
+              <span className="font-mono font-bold">{fmt$1(makeupPerMwhC - makeupPerMwhB)}</span> on the make-up,{' '}
+              <span className="font-mono font-bold">{fmt$1((r.clawC - r.clawB) / (r.hourGen || 1))}</span> on the clawback.
+            </p>
+          )}
+        </div>
+      </div>
+
+      {/* ============ Step 3: Annualised projection ============ */}
+      <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl p-5">
+        <p className="text-xs font-bold uppercase tracking-wider text-[var(--color-text-muted)] mb-1">
+          Step 3 · Annualised — multiply this hour by 8,760
+        </p>
+        <p className="text-[11px] text-[var(--color-text-muted)] mb-4">
+          Assumes the same RRP, PPA price and generation profile every hour of the year. Real years have
+          variation; this is the "if this scenario persisted" sensitivity number. Annual generation ={' '}
+          <span className="font-mono">{(annualGen / 1000).toFixed(0)} GWh</span>.
+        </p>
+
+        <div className="overflow-x-auto">
+          <table className="w-full text-xs">
+            <thead>
+              <tr className="text-[var(--color-text-muted)] border-b border-[var(--color-border)]">
+                <th className="text-left py-2 pr-3 font-semibold uppercase tracking-wider text-[10px]">Interpretation</th>
+                <th className="text-right py-2 px-2 font-semibold uppercase tracking-wider text-[10px]">Pre-CISA</th>
+                <th className="text-right py-2 px-2 font-semibold uppercase tracking-wider text-[10px]">CISA make-up (uncapped)</th>
+                <th className="text-right py-2 px-2 font-semibold uppercase tracking-wider text-[10px]">Cap binds?</th>
+                <th className="text-right py-2 px-2 font-semibold uppercase tracking-wider text-[10px]">Net annual</th>
+                <th className="text-right py-2 pl-2 font-semibold uppercase tracking-wider text-[10px]">Eff. $/MWh</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr className="border-b border-[var(--color-border)] hover:bg-[var(--color-bg-elevated)]/30">
+                <td className="py-2 pr-3 text-[var(--color-text)]"><span className="text-amber-400 font-mono mr-1">A</span> RRP-only (standard CIS)</td>
+                <td className="py-2 px-2 text-right font-mono text-[var(--color-text-muted)]">{fmtMillions(annualPreCisa)}</td>
+                <td className="py-2 px-2 text-right font-mono text-purple-400">{fmtMillions(annualMakeupA)}</td>
+                <td className="py-2 px-2 text-right">{capBindsA ? <span className="text-amber-400 font-bold">⚠ bites by {fmtMillions(annualMakeupA - cap)}</span> : <span className="text-emerald-400">no</span>}</td>
+                <td className="py-2 px-2 text-right font-mono text-[var(--color-text)] font-bold">{fmtMillions(annualNetA)}</td>
+                <td className="py-2 pl-2 text-right font-mono text-[var(--color-text)] font-bold">{fmt$1(annualNetA / annualGen)}</td>
+              </tr>
+              <tr className="border-b border-[var(--color-border)] hover:bg-[var(--color-bg-elevated)]/30 bg-[var(--color-primary)]/5">
+                <td className="py-2 pr-3 text-[var(--color-text)]"><span className="text-[var(--color-primary)] font-mono mr-1">B</span> Blended reference (this is what most readers intuit)</td>
+                <td className="py-2 px-2 text-right font-mono text-[var(--color-text-muted)]">{fmtMillions(annualPreCisa)}</td>
+                <td className="py-2 px-2 text-right font-mono text-purple-400">{fmtMillions(annualMakeupB)}</td>
+                <td className="py-2 px-2 text-right">{capBindsB ? <span className="text-amber-400 font-bold">⚠ bites by {fmtMillions(annualMakeupB - cap)}</span> : <span className="text-emerald-400">no</span>}</td>
+                <td className="py-2 px-2 text-right font-mono text-[var(--color-text)] font-bold">{fmtMillions(annualNetB)}</td>
+                <td className="py-2 pl-2 text-right font-mono text-[var(--color-text)] font-bold">{fmt$1(annualNetB / annualGen)}</td>
+              </tr>
+              <tr className="hover:bg-[var(--color-bg-elevated)]/30">
+                <td className="py-2 pr-3 text-[var(--color-text)]"><span className="text-rose-400 font-mono mr-1">C</span> Per-tranche split (instructive — not a real contract)</td>
+                <td className="py-2 px-2 text-right font-mono text-[var(--color-text-muted)]">{fmtMillions(annualPreCisa)}</td>
+                <td className="py-2 px-2 text-right font-mono text-purple-400">{fmtMillions(annualMakeupC)}</td>
+                <td className="py-2 px-2 text-right">{capBindsC ? <span className="text-amber-400 font-bold">⚠ bites by {fmtMillions(annualMakeupC - cap)}</span> : <span className="text-emerald-400">no</span>}</td>
+                <td className="py-2 px-2 text-right font-mono text-[var(--color-text)] font-bold">{fmtMillions(annualNetC)}</td>
+                <td className="py-2 pl-2 text-right font-mono text-[var(--color-text)] font-bold">{fmt$1(annualNetC / annualGen)}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p className="text-[11px] text-[var(--color-text-muted)] mt-3 italic">
+          The "cap binds" column flags when the annual government payment would exceed the agreed cap. Real
+          contracts will then limit the payment; the project absorbs the rest. Use this to size your
+          downside reserves.
+        </p>
+      </div>
+    </div>
+  )
+}
+
+// ============================================================
 // Lesson 8 (display Lesson 3) — the interactive lesson body
 // ============================================================
 
@@ -1656,6 +2138,55 @@ function Lesson8() {
       </Callout>
 
       <PpaCisaCalculator />
+
+      <H2>Deep dive — a single-hour explorer for when PPA sits below the floor</H2>
+      <P>
+        The 8-scenario calculator above gives you the headline shape. To get to grips with the
+        <Em> reference-price question</Em> — what number does the CISA actually settle against when a
+        physical PPA covers part of the project? — it helps to slow down to a single hour and watch the
+        math step by step. The explorer below does that.
+      </P>
+      <P>
+        Set the four prices independently: PPA strike, RRP, CISA floor, CISA ceiling. Move PPA coverage
+        between 50% and 75% (the user's two cases of interest). The explorer then shows the same hour
+        settled three different ways:
+      </P>
+      <ul className="list-disc list-inside text-sm text-[var(--color-text-muted)] space-y-1.5 mb-3 ml-2">
+        <li><Em>(A) RRP-referenced</Em> — the standard DCCEEW CIS template. The CISA only "sees" the
+          regional reference price; the PPA strike is invisible to the make-up calculation. Most
+          generous when PPA is below floor and RRP is above floor (the PPA can be earning poorly while
+          the CISA still pays nothing because RRP is above floor).</li>
+        <li><Em>(B) Blended capture-price reference</Em> — what most readers intuit when they say
+          "the CISA looks at the project's total revenue". This is also closer to what a
+          <Em> project-realised-revenue</Em> reference clause produces (rare in CIS, more common in
+          bespoke sleeved arrangements).</li>
+        <li><Em>(C) Naive per-tranche split</Em> — "pay 90% of (floor − PPA) on the PPA portion plus
+          90% of (floor − RRP) on the merchant portion". Shown for instruction. It is mathematically
+          equal to (B) when PPA and RRP sit on the same side of the floor — and diverges sharply when
+          they straddle.</li>
+      </ul>
+      <Callout type="key">
+        Your instinct that "50% × make-up-on-PPA + 50% × make-up-on-RRP" is not the right answer is
+        correct in spirit and worth pinning down precisely. Algebraically:{' '}
+        <Code>0.5 × (F − PPA) + 0.5 × (F − RRP) = F − 0.5×(PPA + RRP) = F − blended</Code> —{' '}
+        <em>when both terms are positive</em>. The moment one of PPA or RRP is above floor (so its
+        bracket would go negative) the naive split sets that term to zero, and the answer parts ways
+        with the blended reference. Use the "PPA &gt; floor, RRP &lt; floor (straddle)" preset to
+        see this happen.
+      </Callout>
+
+      <PpaCisaSingleHourExplorer />
+
+      <Callout type="warn">
+        <strong>Which interpretation is the real contract?</strong> The standard published DCCEEW
+        Generation CISA template uses <Em>regional reference price (RRP)</Em> — interpretation (A) above.
+        That is what the 14-point checklist item 6 already states. Project-capture-referenced
+        contracts — interpretation (B) — exist in some bespoke arrangements and in the LTESA family,
+        but they are not the default for CIS. Per-tranche-split (interpretation (C)) is not a real
+        contract design — it is included only to expose where intuition can mislead. If you are
+        modelling a specific real CISA, read the term sheet and identify which reference is used
+        before applying these numbers.
+      </Callout>
 
       <H2>Critical interactions — what to watch</H2>
       <P>
