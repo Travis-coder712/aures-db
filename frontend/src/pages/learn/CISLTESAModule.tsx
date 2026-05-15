@@ -727,6 +727,280 @@ function Lesson4() {
 }
 
 // ============================================================
+// BCR Calculator — MC1 scoring deep dive for LTESA tenders
+// ------------------------------------------------------------
+// AEMO Services (ASL) scores LTESA bids on MC1 using three
+// quantitative metrics:
+//   1. Benefit-Cost Ratio = Wholesale Market Benefits / Net LTESA Cost
+//   2. Reliability Contribution
+//   3. System Security Contribution
+//
+// The MC1 Market Briefing Note for Tender 7 confirmed this
+// methodology. The component below lets the reader manipulate each
+// input and see how it moves the BCR — and how the composite MC1
+// score moves with the three sub-metrics together.
+//
+// IMPORTANT: ASL does not publicly disclose the exact weights used
+// to combine the three sub-metrics into a single MC1 score. The
+// composite shown below uses 50/30/20 as an illustrative blend —
+// the relative weighting clearly favours BCR but with material
+// weight on the two contribution metrics, particularly for LDS
+// rounds. Treat the composite as directional, not exact.
+// ============================================================
+
+interface BcrInputs {
+  wmbPerYear: number          // Wholesale Market Benefits, $M/year
+  grossLtesaPerYear: number   // Gross LTESA payment, $M/year
+  expectedClawbackPerYear: number  // Returned profits when prices high, $M/year
+  reliabilityScore: number    // 0-100 (relative)
+  securityScore: number       // 0-100 (relative)
+  tenorYears: number          // contract length
+}
+
+const fmt$M = (v: number) => `$${v.toFixed(1)}M`
+const fmt$Myr = (v: number) => `$${v.toFixed(1)}M/yr`
+const fmtRatio = (v: number) => isFinite(v) ? v.toFixed(2) : '∞'
+const fmtScore = (v: number) => v.toFixed(0)
+
+function BcrCalculator() {
+  const [s, setS] = useState<BcrInputs>({
+    wmbPerYear: 60,                  // $60M/year market benefits (typical large LDS)
+    grossLtesaPerYear: 40,           // $40M/year LTESA cap payment
+    expectedClawbackPerYear: 8,      // 20% expected returned profits
+    reliabilityScore: 70,
+    securityScore: 55,
+    tenorYears: 14,
+  })
+
+  const patch = useCallback(
+    <K extends keyof BcrInputs>(key: K) => (v: BcrInputs[K]) =>
+      setS(prev => ({ ...prev, [key]: v })),
+    []
+  )
+  const setWmbPerYear     = useMemo(() => patch('wmbPerYear'), [patch])
+  const setGrossLtesa     = useMemo(() => patch('grossLtesaPerYear'), [patch])
+  const setClawback       = useMemo(() => patch('expectedClawbackPerYear'), [patch])
+  const setReliability    = useMemo(() => patch('reliabilityScore'), [patch])
+  const setSecurity       = useMemo(() => patch('securityScore'), [patch])
+  const setTenor          = useMemo(() => patch('tenorYears'), [patch])
+
+  // Core BCR — the formal MC1 metric quoted in the ASL Tender 7 briefing
+  const netLtesaPerYear = s.grossLtesaPerYear - s.expectedClawbackPerYear
+  const bcr = netLtesaPerYear > 0
+    ? s.wmbPerYear / netLtesaPerYear
+    : Infinity
+
+  // Lifetime cumulatives (helpful framing — useful to show the size of the
+  // overall taxpayer commitment alongside the per-year flow)
+  const wmbLifetime    = s.wmbPerYear * s.tenorYears
+  const netLtesaLifetime = netLtesaPerYear * s.tenorYears
+
+  // Illustrative composite — 50% BCR, 30% Reliability, 20% Security.
+  // ASL does not publish exact weights; this blend captures the relative
+  // importance, with BCR weighted highest. Anyone modelling a real bid
+  // should treat this as directional only.
+  const bcrNormalised = Math.max(0, Math.min(bcr * 50, 100))  // BCR of 2.0 → 100
+  const composite =
+    bcrNormalised * 0.50 +
+    s.reliabilityScore * 0.30 +
+    s.securityScore * 0.20
+
+  // Sensitivity: "what happens if you bid net cost $5M/yr lower"
+  const altNet = Math.max(0.1, netLtesaPerYear - 5)
+  const altBcr = s.wmbPerYear / altNet
+
+  // Stable formatters for the slider value displays
+  const fmtIntMyr = useCallback((v: number) => `$${v}M/yr`, [])
+  const fmtScore0 = useCallback((v: number) => `${v.toFixed(0)} / 100`, [])
+  const fmtYrs = useCallback((v: number) => `${v} yrs`, [])
+
+  return (
+    <div className="my-6 space-y-5">
+      {/* Inputs */}
+      <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl p-5 space-y-5">
+        <p className="text-xs font-bold uppercase tracking-wider text-[var(--color-text-muted)]">
+          BCR explorer · adjust the three MC1 sub-metrics
+        </p>
+
+        <div>
+          <p className="text-[10px] uppercase tracking-wider text-[var(--color-text-muted)] mb-2">
+            Wholesale Market Benefits — what the project gives back to consumers
+          </p>
+          <div className="grid sm:grid-cols-1 gap-x-6 gap-y-3 max-w-md">
+            <CalcSlider
+              label="Modelled WMB per year"
+              value={s.wmbPerYear} min={0} max={150} step={1}
+              onChange={setWmbPerYear} format={fmtIntMyr}
+            />
+          </div>
+          <p className="text-[10px] text-[var(--color-text-muted)] mt-2 italic">
+            Modelled by ASL: avoided wholesale energy costs, contribution to firming, FCAS revenue
+            displaced, and the marginal value of capacity at peak hours. A typical 200 MW / 1600 MWh
+            BESS scores ~$40-80M/yr; a 4-hour pure peaker scores less.
+          </p>
+        </div>
+
+        <div>
+          <p className="text-[10px] uppercase tracking-wider text-[var(--color-text-muted)] mb-2">
+            Net LTESA Cost — what NSW consumers actually pay
+          </p>
+          <div className="grid sm:grid-cols-2 gap-x-6 gap-y-3">
+            <CalcSlider
+              label="Gross LTESA payment / year"
+              value={s.grossLtesaPerYear} min={0} max={150} step={1}
+              onChange={setGrossLtesa} format={fmtIntMyr}
+            />
+            <CalcSlider
+              label="Expected clawback / year"
+              value={s.expectedClawbackPerYear} min={0} max={50} step={1}
+              onChange={setClawback} format={fmtIntMyr}
+            />
+          </div>
+          <p className="text-[10px] text-[var(--color-text-muted)] mt-2 italic">
+            Gross = annual cap (LDS) or expected floor make-up (Generation). Clawback = expected
+            project share returned when wholesale prices clear above the upside trigger.
+          </p>
+        </div>
+
+        <div>
+          <p className="text-[10px] uppercase tracking-wider text-[var(--color-text-muted)] mb-2">
+            Other MC1 metrics (modelled by ASL — relative score)
+          </p>
+          <div className="grid sm:grid-cols-2 gap-x-6 gap-y-3">
+            <CalcSlider
+              label="Reliability Contribution"
+              value={s.reliabilityScore} min={0} max={100} step={1}
+              onChange={setReliability} format={fmtScore0}
+            />
+            <CalcSlider
+              label="System Security Contribution"
+              value={s.securityScore} min={0} max={100} step={1}
+              onChange={setSecurity} format={fmtScore0}
+            />
+          </div>
+          <p className="text-[10px] text-[var(--color-text-muted)] mt-2 italic">
+            Reliability ≈ peak-demand support and dispatchability through evening ramp / heatwave
+            stress periods. System Security ≈ inertia, fast-frequency response, FCAS and frequency
+            stability — the value a project adds beyond energy delivery.
+          </p>
+        </div>
+
+        <div>
+          <p className="text-[10px] uppercase tracking-wider text-[var(--color-text-muted)] mb-2">Contract</p>
+          <div className="grid sm:grid-cols-1 gap-x-6 gap-y-3 max-w-md">
+            <CalcSlider
+              label="LTESA tenor"
+              value={s.tenorYears} min={10} max={20} step={1}
+              onChange={setTenor} format={fmtYrs}
+            />
+          </div>
+        </div>
+      </div>
+
+      {/* Result — BCR */}
+      <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl p-5">
+        <p className="text-xs font-bold uppercase tracking-wider text-[var(--color-text-muted)] mb-1">
+          Result · the headline BCR
+        </p>
+        <p className="text-[11px] text-[var(--color-text-muted)] mb-4">
+          BCR = Wholesale Market Benefits ÷ Net LTESA Cost. Higher = better value-for-money for
+          NSW consumers. A BCR ≥ 1.0 means the project creates more market value than it costs
+          the public; below 1.0 means it doesn't.
+        </p>
+
+        <div className="grid sm:grid-cols-3 gap-4">
+          <div className="bg-blue-500/10 border border-blue-500/30 rounded-lg p-4">
+            <p className="text-[10px] uppercase tracking-wider text-blue-400 font-semibold mb-1">Wholesale market benefits</p>
+            <p className="text-2xl font-bold text-[var(--color-text)]">{fmt$Myr(s.wmbPerYear)}</p>
+            <p className="text-[11px] text-[var(--color-text-muted)] mt-1">over {s.tenorYears} years: <span className="font-mono text-[var(--color-text)]">{fmt$M(wmbLifetime)}</span></p>
+          </div>
+          <div className="bg-amber-500/10 border border-amber-500/30 rounded-lg p-4">
+            <p className="text-[10px] uppercase tracking-wider text-amber-400 font-semibold mb-1">Net LTESA cost</p>
+            <p className="text-2xl font-bold text-[var(--color-text)]">{fmt$Myr(netLtesaPerYear)}</p>
+            <p className="text-[11px] text-[var(--color-text-muted)] mt-1">over {s.tenorYears} years: <span className="font-mono text-[var(--color-text)]">{fmt$M(netLtesaLifetime)}</span></p>
+          </div>
+          <div className="bg-emerald-500/10 border-2 border-emerald-500/50 rounded-lg p-4">
+            <p className="text-[10px] uppercase tracking-wider text-emerald-400 font-semibold mb-1">Benefit-Cost Ratio</p>
+            <p className="text-3xl font-bold" style={{ color: bcr >= 1.5 ? '#10b981' : bcr >= 1.0 ? '#f59e0b' : '#ef4444' }}>
+              {fmtRatio(bcr)}
+            </p>
+            <p className="text-[11px] text-[var(--color-text-muted)] mt-1">
+              {bcr >= 1.5 ? 'Strong value-for-money — competitive bid.' :
+               bcr >= 1.0 ? 'Marginal — likely below median bid.' :
+               'Below 1.0 — destroys value.'}
+            </p>
+          </div>
+        </div>
+
+        {/* Sensitivity row */}
+        <div className="mt-4 bg-[var(--color-bg-elevated)]/40 border border-[var(--color-border)] rounded-lg p-3 text-xs text-[var(--color-text-muted)]">
+          <span className="font-semibold text-[var(--color-text)]">Bid sensitivity: </span>
+          if you bid net LTESA cost $5M/yr lower (e.g. by tightening the cap), your BCR moves from{' '}
+          <span className="font-mono text-emerald-400 font-semibold">{fmtRatio(bcr)}</span> to{' '}
+          <span className="font-mono text-emerald-400 font-semibold">{fmtRatio(altBcr)}</span>. That's the
+          MC1-vs-bankability trade-off: a higher BCR wins the merit score, a higher net cost gives
+          stronger downside protection.
+        </div>
+      </div>
+
+      {/* Composite MC1 score */}
+      <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl p-5">
+        <p className="text-xs font-bold uppercase tracking-wider text-[var(--color-text-muted)] mb-1">
+          Illustrative composite MC1 — three metrics, one score
+        </p>
+        <p className="text-[11px] text-[var(--color-text-muted)] mb-4">
+          ASL does not publish the exact weights used to combine the three MC1 sub-metrics. The
+          blend below is illustrative (50% BCR / 30% Reliability / 20% System Security). Use it
+          to feel how each metric pulls the composite, not as a precise model of ASL's scorecard.
+        </p>
+
+        <div className="overflow-x-auto">
+          <table className="w-full text-xs">
+            <thead>
+              <tr className="text-[var(--color-text-muted)] border-b border-[var(--color-border)]">
+                <th className="text-left py-2 pr-3 font-semibold uppercase tracking-wider text-[10px]">Sub-metric</th>
+                <th className="text-right py-2 px-2 font-semibold uppercase tracking-wider text-[10px]">Raw input</th>
+                <th className="text-right py-2 px-2 font-semibold uppercase tracking-wider text-[10px]">Normalised (0–100)</th>
+                <th className="text-right py-2 px-2 font-semibold uppercase tracking-wider text-[10px]">Weight</th>
+                <th className="text-right py-2 pl-2 font-semibold uppercase tracking-wider text-[10px]">Contribution</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr className="border-b border-[var(--color-border)]">
+                <td className="py-2 pr-3 text-[var(--color-text)]">Benefit-Cost Ratio</td>
+                <td className="py-2 px-2 text-right font-mono text-[var(--color-text-muted)]">{fmtRatio(bcr)}</td>
+                <td className="py-2 px-2 text-right font-mono text-[var(--color-text)]">{fmtScore(bcrNormalised)}</td>
+                <td className="py-2 px-2 text-right font-mono text-[var(--color-text-muted)]">50%</td>
+                <td className="py-2 pl-2 text-right font-mono text-emerald-400 font-semibold">{fmtScore(bcrNormalised * 0.5)}</td>
+              </tr>
+              <tr className="border-b border-[var(--color-border)]">
+                <td className="py-2 pr-3 text-[var(--color-text)]">Reliability Contribution</td>
+                <td className="py-2 px-2 text-right font-mono text-[var(--color-text-muted)]">{fmtScore(s.reliabilityScore)}</td>
+                <td className="py-2 px-2 text-right font-mono text-[var(--color-text)]">{fmtScore(s.reliabilityScore)}</td>
+                <td className="py-2 px-2 text-right font-mono text-[var(--color-text-muted)]">30%</td>
+                <td className="py-2 pl-2 text-right font-mono text-emerald-400 font-semibold">{fmtScore(s.reliabilityScore * 0.3)}</td>
+              </tr>
+              <tr className="border-b border-[var(--color-border)]">
+                <td className="py-2 pr-3 text-[var(--color-text)]">System Security Contribution</td>
+                <td className="py-2 px-2 text-right font-mono text-[var(--color-text-muted)]">{fmtScore(s.securityScore)}</td>
+                <td className="py-2 px-2 text-right font-mono text-[var(--color-text)]">{fmtScore(s.securityScore)}</td>
+                <td className="py-2 px-2 text-right font-mono text-[var(--color-text-muted)]">20%</td>
+                <td className="py-2 pl-2 text-right font-mono text-emerald-400 font-semibold">{fmtScore(s.securityScore * 0.2)}</td>
+              </tr>
+              <tr className="bg-[var(--color-bg-elevated)]/50 font-bold">
+                <td className="py-2.5 pr-3 text-[var(--color-text)]">COMPOSITE MC1 (illustrative)</td>
+                <td colSpan={3} />
+                <td className="py-2.5 pl-2 text-right font-mono text-emerald-400 text-base">{fmtScore(composite)} / 100</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+// ============================================================
 // Lesson 5 — Merit Criteria — and What They Cost
 // ============================================================
 
@@ -857,10 +1131,135 @@ function Lesson5() {
         commitments.
       </Callout>
 
+      <H2>Deep dive — how MC1 is actually scored for LTESA: the Benefit-Cost Ratio</H2>
+      <P>
+        Up to this point the discussion of MC1 has been about development progress (the &ldquo;sweet
+        spot&rdquo; trap). That description is right for CIS, where MC1 is heavily about whether the
+        project is at the right point in its development lifecycle. For{' '}
+        <Em>LTESA tenders run by AEMO Services (ASL)</Em>, MC1 is a quantitative scoring metric — and
+        the methodology was confirmed in the MC1 Market Briefing Note for Tender 7. Three sub-metrics
+        combine:
+      </P>
+      <ul className="list-disc list-inside text-sm text-[var(--color-text-muted)] space-y-1.5 mb-3 ml-2">
+        <li>
+          <Em>Benefit-Cost Ratio (BCR)</Em> — the headline metric. Defined as{' '}
+          <Code>Wholesale Market Benefits ÷ Net LTESA Cost</Code>. It captures, in a single number,
+          how much value the project delivers back to consumers per dollar of NSW Government
+          commitment. A BCR above 1.0 means the project creates more market value than it costs the
+          public; below 1.0 means it doesn't.
+        </li>
+        <li>
+          <Em>Reliability Contribution</Em> — how much the project adds to NSW's ability to meet
+          peak demand, dispatchability through evening ramps, and resilience through heatwave or
+          generation-loss stress periods. Modelled by ASL using AEMO ESOO-style reliability metrics.
+        </li>
+        <li>
+          <Em>System Security Contribution</Em> — the value a project adds <em>beyond</em> energy
+          delivery: inertia, fast-frequency response (FFR), FCAS-relevant capability, and frequency
+          stability. A grid-forming battery scores highly; a grid-following one less so.
+        </li>
+      </ul>
+
+      <H2>What &ldquo;Wholesale Market Benefits&rdquo; means in practice</H2>
+      <P>
+        The numerator of BCR is the modelled present value of consumer-side benefits the project
+        delivers over the LTESA term. ASL's modelling generally includes:
+      </P>
+      <ul className="list-disc list-inside text-sm text-[var(--color-text-muted)] space-y-1.5 mb-3 ml-2">
+        <li><Em>Avoided wholesale energy cost</Em> — energy delivered (or stored and re-dispatched) into the NSW spot market, valued at the counterfactual price ASL would otherwise expect.</li>
+        <li><Em>Avoided FCAS cost</Em> — the value of frequency control services the project provides that the market would otherwise have to procure.</li>
+        <li><Em>Avoided capacity / reliability cost</Em> — the marginal value of the project's contribution at peak demand intervals (the dispatch-weighted-capacity contribution).</li>
+        <li><Em>Avoided emissions cost</Em> — where ASL's modelling applies a shadow carbon price, low-emission output is more valuable than high.</li>
+      </ul>
+      <P>
+        Critically, the WMB calculation is a <Em>counterfactual</Em>: ASL models &ldquo;with project&rdquo;
+        and &ldquo;without project&rdquo; market dispatch and prices the difference. So the same MW
+        of capacity can have very different WMB depending on the assumed counterfactual generation mix —
+        which is why bidders who run their own market modelling sometimes get materially different BCR
+        estimates from ASL.
+      </P>
+
+      <H2>What &ldquo;Net LTESA Cost&rdquo; means in practice</H2>
+      <P>
+        The denominator is the modelled NPV of NSW Government payments under the LTESA, net of
+        expected clawback. For each LTESA type:
+      </P>
+      <ul className="list-disc list-inside text-sm text-[var(--color-text-muted)] space-y-1.5 mb-3 ml-2">
+        <li>
+          <Em>Long-Duration Storage LTESA</Em> — the project receives an annual cap payment (an
+          availability payment) regardless of market dispatch, and gives back a share of market
+          revenue above a strike. Gross Cost = annual cap × tenor; Net Cost = Gross Cost − expected
+          clawback.
+        </li>
+        <li>
+          <Em>Generation LTESA</Em> — a fixed-strike two-way CFD. Government tops up the project when
+          RRP falls below strike, and claws back a share above strike. Net Cost = NPV of (expected
+          top-ups − expected clawbacks).
+        </li>
+        <li>
+          <Em>Firming LTESA</Em> — a hybrid, with availability + dispatch components. Net Cost
+          modelled accordingly.
+        </li>
+      </ul>
+      <P>
+        Bidders propose the strike / cap; ASL applies the agreed modelling assumptions to compute
+        Net Cost. This is why the cap a bidder proposes is so consequential for BCR: a higher cap
+        directly increases the denominator, lowering BCR. A lower cap improves BCR but gives the
+        project less downside protection — the trade-off Lesson 7 (Bidding Strategy) covers in
+        depth.
+      </P>
+
+      <H2>BCR explorer — set the three MC1 sub-metrics and watch the composite</H2>
+      <P>
+        The interactive below lets you set the wholesale-market-benefits figure, the gross LTESA
+        cost, expected clawback, and the relative reliability + system-security scores. See how the
+        composite MC1 score moves with each. A &ldquo;bid sensitivity&rdquo; line shows what
+        happens to your BCR if you tighten the cap by $5M/year — the cheapest single move a bidder
+        can make on MC1.
+      </P>
+
+      <BcrCalculator />
+
+      <H2>Implications for bid construction</H2>
+      <ul className="list-disc list-inside text-sm text-[var(--color-text-muted)] space-y-1.5 mb-3 ml-2">
+        <li>
+          <Em>BCR is the biggest single lever, but each metric matters.</Em> The composite MC1 score
+          rewards a project that does <em>both</em> things well — strong value-for-money <em>and</em>
+          strong reliability/security contribution. A project with brilliant BCR but no inertia
+          contribution will be beaten by a slightly more expensive project with grid-forming
+          capability.
+        </li>
+        <li>
+          <Em>The cap is the easiest lever.</Em> Reducing the LTESA cap directly cuts the
+          denominator. Bidders who can defend a lower cap to their financiers will systematically
+          score higher MC1 — which is part of why Round 6 LDS strikes were materially lower than
+          Round 5.
+        </li>
+        <li>
+          <Em>Grid-forming capability is a competitive advantage.</Em> As renewables crowd thermal
+          out, system security value rises. A BESS with grid-forming inverters scores meaningfully
+          higher on the third sub-metric than the same project with grid-following inverters — and
+          the inverter premium is small relative to the MC1 score lift.
+        </li>
+        <li>
+          <Em>WMB modelling is the most contested ground.</Em> Bidders should run their own market
+          model against the ASL assumptions to understand where ASL's view diverges from the project's
+          own dispatch profile. Differences of 10–30% on WMB are common and can determine the bid.
+        </li>
+      </ul>
+
+      <Callout type="warn">
+        The composite weighting (50/30/20) used in the explorer above is <Em>illustrative</Em>. ASL
+        publishes the relative importance of the three sub-metrics in each round's tender rules but
+        does not always publish the exact normalisation function. Treat the composite as directional;
+        the BCR itself is precisely defined by the formula and is the single most important MC1
+        metric for any LTESA bid.
+      </Callout>
+
       <Callout type="source">
         Sources: DCCEEW <em>CIS guidelines</em> (each round has its own merit-criteria weights document) ·
-        AEMO Services <em>Tender rules</em> per LTESA round · HSF Kramer{' '}
-        <em>CIS update and the release of the Dispatchable CISA</em> · Senate Standing Committee on
+        AEMO Services <em>Tender rules</em> per LTESA round · ASL <em>MC1 Market Briefing Note</em> (Tender 7) ·
+        HSF Kramer <em>CIS update and the release of the Dispatchable CISA</em> · Senate Standing Committee on
         Environment & Communications, April 2026 Estimates · First Nations Clean Energy Network{' '}
         <em>From Commitment to Delivery</em> · Clean Energy Council Best Practice Charter.
       </Callout>
