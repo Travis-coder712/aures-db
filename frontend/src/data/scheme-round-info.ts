@@ -368,4 +368,33 @@ export const ROUND_INFO: Record<string, RoundInfo> = {
       'Next LDS tender: Q2 2026 seeking 12 GWh',
     ],
   },
+
+  'ltesa-round-7': {
+    id: 'ltesa-round-7',
+    resultsDate: '15 May 2026',
+    targetCOD: 'End of November 2027',
+    capacitySought: 'Firming supply & demand response (no fixed MW target disclosed)',
+    capacityAwarded: '532 MW / 2,000 MWh across 2 projects (1 BESS + 1 VPP)',
+    supportTerm: 'Firming LTESA \u2014 payments triggered by LOR 2 and LOR 3 reliability events',
+    bidParameters: [
+      'Firming services strike',
+      'Availability cap',
+      'Demand-response contract terms',
+    ],
+    eligibility: [
+      'Firming capacity or demand response in NSW',
+      'Must be available to respond to AEMO LOR 2 and LOR 3 events',
+    ],
+    stateBreakdown: ['NSW: 532 MW / 2,000 MWh (2 projects)'],
+    mechanismNote:
+      'Second NSW Roadmap firming tender (Tender 2 was the first, in late 2023). Firming LTESA structure pays the operator for being available during AEMO Lack-of-Reserve (LOR) 2 and LOR 3 events. Pricing materially lower than Tender 2 \u2014 competitive bids reflect rapid battery cost declines.',
+    keyFacts: [
+      "First firming tender since Tender 2 (late 2023) \u2014 approximately a dozen bids competed",
+      "AGL Tomago Battery: 500 MW / 2,000 MWh (4-hour duration), Fluence Gridstack EPC, FID Jul 2025, COD targeted late 2027",
+      "Enel X Sydney/Newcastle VPP: 32 MW aggregating flexible demand from business customers",
+      "AGL doubled the storage at Tomago vs the 500 MW / 1,000 MWh Liddell battery (Tender 2) at roughly the same cost",
+      "Average strike materially lower than Tender 2 \u2014 attributed to falling battery costs",
+      "Both projects must be commissioned by end-November 2027",
+    ],
+  },
 }

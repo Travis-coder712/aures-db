@@ -57,7 +57,7 @@ const LESSONS: LessonMeta[] = [
   { id: 'cis-mechanics',        number: 2, title: 'CIS Mechanics — Floor + Ceiling CFD',    subtitle: 'How the CISA actually pays',                    readingTime: '10 min', built: true },
   { id: 'ppa-cisa-calculator',  number: 3, title: 'PPA × CISA Interactive Calculator',      subtitle: 'Where the dollars come from across spot scenarios — and all the interactions to watch', readingTime: '14 min', built: true },
   { id: 'ltesa-mechanics',      number: 4, title: 'LTESA Mechanics — Fixed-Price CFD',      subtitle: 'How the NSW Consumer Trustee deal works',       readingTime: '8 min',  built: true },
-  { id: 'rounds',               number: 5, title: 'Round-by-Round — What Changed and Why',  subtitle: 'Pilot through Tender 6 and LTESA R1–R6',        readingTime: '12 min', built: true },
+  { id: 'rounds',               number: 5, title: 'Round-by-Round — What Changed and Why',  subtitle: 'Pilot through Tender 6 and LTESA R1–R7',        readingTime: '12 min', built: true },
   { id: 'merit-criteria',       number: 6, title: 'Merit Criteria — and What They Cost',    subtitle: 'The scoring matrix and its hidden $/MWh',       readingTime: '10 min', built: true },
   { id: 'finance-strategy',     number: 7, title: 'Bidding Strategy & Project Financing',   subtitle: 'How CISA changes the equity model',             readingTime: '10 min', built: true },
   { id: 'outcomes',             number: 8, title: 'Outcomes — Has It Worked?',              subtitle: 'AER, FNCEN, AURES tracker, the 2026-27 inflection', readingTime: '8 min',  built: true },
@@ -167,7 +167,7 @@ function Lesson1() {
           ['Mechanism', 'Two-way CFD with floor + ceiling profit-share', 'Two-way CFD with fixed strike (LDS variant in R6)'],
           ['Term', 'Typically 12–15 years post-COD', 'Typically 14–20 years post-COD (LDS up to 20)'],
           ['First round', 'CIS Pilot — NSW, announced Nov 2023', 'Round 1 — Generation + LDS, May 2023'],
-          ['Latest round', 'Tenders 5 and 6 (WEM Generation + Dispatchable), 2 May 2026', 'Round 6 — Long Duration Storage, 5 Feb 2026'],
+          ['Latest round', 'Tenders 5 and 6 (WEM Generation + Dispatchable), 2 May 2026 — Tender 7 NEM Generation awaiting award', 'Round 7 — Firming Supply & Demand Response, 15 May 2026'],
         ]}
       />
 
@@ -600,10 +600,10 @@ function Lesson3() {
 function Lesson4() {
   return (
     <div>
-      <H2>14 rounds, three-and-a-half years</H2>
+      <H2>15 rounds, three-and-a-half years</H2>
       <P>
-        Between May 2023 and May 2026 the two schemes ran 14 rounds (8 CIS + 6 LTESA), awarding
-        underwriting to <Em>104 projects representing 28.3 GW</Em>. Every round refined the rules — single
+        Between May 2023 and May 2026 the two schemes ran 15 rounds (8 CIS + 7 LTESA), awarding
+        underwriting to <Em>106 projects representing 28.8 GW</Em>. Every round refined the rules — single
         vs two-stage tendering, time limits, merit-criteria weighting, bond requirements, technology
         eligibility. This lesson walks through each round in chronological order, with the structural
         change it introduced.
@@ -648,6 +648,7 @@ function Lesson4() {
           ['Round 4 — Generation', '1 Jul 2024', 'Generation', '2 projects', '~310 MW', 'Smallest LTESA round. Flyers Creek (~140 MW) became the first LTESA project to begin operations (May 2025).'],
           ['Round 5 — Long Duration Storage', '27 Feb 2025', 'LDS', 'Multiple', '~570 MW', 'First LDS-specific round. Established the time-weighted reference price methodology.'],
           ['Round 6 — Long Duration Storage', '5 Feb 2026', 'LDS', '6 projects', '1,171 MW / 11,980 MWh', 'Largest LDES award to date. 8.7–11.5 hour batteries. Met NSW\'s 2 GW LDS legislated target on its own.'],
+          ['Round 7 — Firming Supply & Demand Response', '15 May 2026', 'Firming', '2 projects', '532 MW / 2,000 MWh', 'First firming tender since Tender 2 (Nov 2023). AGL Tomago 500 MW / 2,000 MWh BESS + Enel X 32 MW VPP. Average strike materially lower than Tender 2 — AGL doubled Liddell\'s storage at roughly the same cost. First MC1 round scored using ASL\'s published Benefit-Cost Ratio methodology.'],
         ]}
       />
 
