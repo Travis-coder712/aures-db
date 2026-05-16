@@ -1,6 +1,7 @@
 import { lazy, Suspense } from 'react'
 import { Routes, Route, Navigate } from 'react-router-dom'
 import Layout from './components/layout/Layout'
+import ScrollToTop from './components/ScrollToTop'
 import Home from './pages/Home'
 import ProjectList from './pages/ProjectList'
 import ProjectDetail from './pages/ProjectDetail'
@@ -72,6 +73,8 @@ function LazyFallback() {
 
 function App() {
   return (
+    <>
+    <ScrollToTop />
     <Routes>
       <Route element={<Layout />}>
         <Route index element={<Home />} />
@@ -175,6 +178,7 @@ function App() {
         <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>
+    </>
   )
 }
 
