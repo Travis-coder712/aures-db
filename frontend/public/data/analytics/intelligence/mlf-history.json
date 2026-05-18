@@ -1,0 +1,2471 @@
+{
+  "generated_at": "2026-05-18T06:57:04.942519Z",
+  "fy_list": [
+    "2020-21",
+    "2021-22",
+    "2022-23",
+    "2023-24",
+    "2024-25",
+    "2025-26"
+  ],
+  "states": [
+    "NSW",
+    "NSW",
+    "QLD",
+    "SA",
+    "TAS",
+    "VIC"
+  ],
+  "per_project": [
+    {
+      "id": "new-england-solar-farm",
+      "name": "New England Solar Farm",
+      "state": "NSW",
+      "technology": "hybrid",
+      "capacity_mw": 720.0,
+      "mlf_by_year": {
+        "2023-24": 0.8718,
+        "2022-23": 0.9007,
+        "2025-26": 0.8803,
+        "2024-25": 0.8901
+      },
+      "latest_fy": "2025-26",
+      "latest_mlf": 0.8803
+    },
+    {
+      "id": "stubbo-solar-farm",
+      "name": "Stubbo Solar Farm",
+      "state": "NSW",
+      "technology": "solar",
+      "capacity_mw": 400.0,
+      "mlf_by_year": {
+        "2025-26": 0.9429,
+        "2024-25": 0.9422
+      },
+      "latest_fy": "2025-26",
+      "latest_mlf": 0.9429
+    },
+    {
+      "id": "rye-park-wind-farm",
+      "name": "Rye Park Wind Farm",
+      "state": "NSW",
+      "technology": "wind",
+      "capacity_mw": 396.0,
+      "mlf_by_year": {
+        "2023-24": 0.9544,
+        "2025-26": 0.9595,
+        "2024-25": 0.9427
+      },
+      "latest_fy": "2025-26",
+      "latest_mlf": 0.9595
+    },
+    {
+      "id": "culcairn-solar-farm",
+      "name": "Culcairn Solar Farm",
+      "state": "NSW",
+      "technology": "solar",
+      "capacity_mw": 350.0,
+      "mlf_by_year": {
+        "2025-26": 0.9278,
+        "2024-25": 0.9167
+      },
+      "latest_fy": "2025-26",
+      "latest_mlf": 0.9278
+    },
+    {
+      "id": "limondale-solar-farm-1",
+      "name": "Limondale Solar Farm 1",
+      "state": "NSW",
+      "technology": "solar",
+      "capacity_mw": 306.0,
+      "mlf_by_year": {
+        "2021-22": 0.8028,
+        "2020-21": 0.7916,
+        "2023-24": 0.8282,
+        "2022-23": 0.8312,
+        "2025-26": 0.8528,
+        "2024-25": 0.7793
+      },
+      "latest_fy": "2025-26",
+      "latest_mlf": 0.8528
+    },
+    {
+      "id": "walla-walla-solar-farm",
+      "name": "Walla Walla Solar Farm",
+      "state": "NSW",
+      "technology": "solar",
+      "capacity_mw": 300.0,
+      "mlf_by_year": {
+        "2025-26": 0.9298,
+        "2024-25": 0.8853
+      },
+      "latest_fy": "2025-26",
+      "latest_mlf": 0.9298
+    },
+    {
+      "id": "wollar-solar-farm",
+      "name": "Wollar Solar Farm",
+      "state": "NSW",
+      "technology": "solar",
+      "capacity_mw": 280.0,
+      "mlf_by_year": {
+        "2025-26": 0.957,
+        "2024-25": 0.953
+      },
+      "latest_fy": "2025-26",
+      "latest_mlf": 0.957
+    },
+    {
+      "id": "darlington-point-solar-farm",
+      "name": "Darlington Point Solar Farm",
+      "state": "NSW",
+      "technology": "solar",
+      "capacity_mw": 275.0,
+      "mlf_by_year": {
+        "2021-22": 0.8587,
+        "2020-21": 0.916,
+        "2023-24": 0.9023,
+        "2022-23": 0.9141,
+        "2025-26": 0.8854,
+        "2024-25": 0.8439
+      },
+      "latest_fy": "2025-26",
+      "latest_mlf": 0.8854
+    },
+    {
+      "id": "sapphire-wind-farm",
+      "name": "Sapphire Wind Farm",
+      "state": "NSW",
+      "technology": "wind",
+      "capacity_mw": 270.0,
+      "mlf_by_year": {
+        "2021-22": 0.9426,
+        "2020-21": 0.9553,
+        "2023-24": 0.9086,
+        "2022-23": 0.947,
+        "2025-26": 0.8558,
+        "2024-25": 0.9012
+      },
+      "latest_fy": "2025-26",
+      "latest_mlf": 0.8558
+    },
+    {
+      "id": "avonlie-solar-farm",
+      "name": "Avonlie Solar Farm",
+      "state": "NSW",
+      "technology": "solar",
+      "capacity_mw": 245.0,
+      "mlf_by_year": {
+        "2023-24": 0.8881,
+        "2022-23": 0.9011,
+        "2025-26": 0.8698,
+        "2024-25": 0.8446
+      },
+      "latest_fy": "2025-26",
+      "latest_mlf": 0.8698
+    },
+    {
+      "id": "collector",
+      "name": "Collector",
+      "state": "NSW",
+      "technology": "wind",
+      "capacity_mw": 219.0,
+      "mlf_by_year": {
+        "2021-22": 0.9588,
+        "2020-21": 0.9786,
+        "2023-24": 0.9576,
+        "2022-23": 0.9581,
+        "2025-26": 0.9628,
+        "2024-25": 0.9495
+      },
+      "latest_fy": "2025-26",
+      "latest_mlf": 0.9628
+    },
+    {
+      "id": "silverton-wind-farm",
+      "name": "Silverton Wind Farm",
+      "state": "NSW",
+      "technology": "wind",
+      "capacity_mw": 200.0,
+      "mlf_by_year": {
+        "2021-22": 0.8456,
+        "2020-21": 0.8496,
+        "2023-24": 0.8101,
+        "2022-23": 0.7973,
+        "2025-26": 0.8627,
+        "2024-25": 0.805
+      },
+      "latest_fy": "2025-26",
+      "latest_mlf": 0.8627
+    },
+    {
+      "id": "sunraysia-solar-farm",
+      "name": "Sunraysia Solar Farm",
+      "state": "NSW",
+      "technology": "solar",
+      "capacity_mw": 200.0,
+      "mlf_by_year": {
+        "2021-22": 0.807,
+        "2020-21": 0.7907,
+        "2023-24": 0.8255,
+        "2022-23": 0.8314,
+        "2025-26": 0.8529,
+        "2024-25": 0.7774
+      },
+      "latest_fy": "2025-26",
+      "latest_mlf": 0.8529
+    },
+    {
+      "id": "white-rock-wind-farm-stage-1",
+      "name": "White Rock Wind Farm - Stage 1",
+      "state": "NSW",
+      "technology": "wind",
+      "capacity_mw": 175.0,
+      "mlf_by_year": {
+        "2021-22": 0.8708,
+        "2020-21": 0.8801,
+        "2023-24": 0.8289,
+        "2022-23": 0.8697,
+        "2025-26": 0.8149,
+        "2024-25": 0.8453
+      },
+      "latest_fy": "2025-26",
+      "latest_mlf": 0.8149
+    },
+    {
+      "id": "wellington-solar-farm",
+      "name": "Wellington Solar Farm",
+      "state": "NSW",
+      "technology": "solar",
+      "capacity_mw": 170.0,
+      "mlf_by_year": {
+        "2021-22": 0.9444,
+        "2020-21": 0.9471,
+        "2023-24": 0.9448,
+        "2022-23": 0.9352,
+        "2025-26": 0.9284,
+        "2024-25": 0.9336
+      },
+      "latest_fy": "2025-26",
+      "latest_mlf": 0.9284
+    },
+    {
+      "id": "gullen-range-wind-farm",
+      "name": "Gullen Range Wind Farm",
+      "state": "NSW",
+      "technology": "wind",
+      "capacity_mw": 165.5,
+      "mlf_by_year": {
+        "2021-22": 0.9595,
+        "2020-21": 0.9708,
+        "2023-24": 0.958,
+        "2022-23": 0.9592,
+        "2025-26": 0.962,
+        "2024-25": 0.9498
+      },
+      "latest_fy": "2025-26",
+      "latest_mlf": 0.962
+    },
+    {
+      "id": "bango-973-wind-farm",
+      "name": "Bango 973 Wind Farm",
+      "state": "NSW",
+      "technology": "wind",
+      "capacity_mw": 159.0,
+      "mlf_by_year": {
+        "2021-22": 0.9214,
+        "2020-21": 0.9736,
+        "2023-24": 0.9224,
+        "2022-23": 0.9195,
+        "2025-26": 0.929,
+        "2024-25": 0.9114
+      },
+      "latest_fy": "2025-26",
+      "latest_mlf": 0.929
+    },
+    {
+      "id": "coleambally-solar-farm",
+      "name": "Coleambally Solar Farm",
+      "state": "NSW",
+      "technology": "solar",
+      "capacity_mw": 150.0,
+      "mlf_by_year": {
+        "2021-22": 0.8478,
+        "2020-21": 0.9002,
+        "2023-24": 0.8894,
+        "2022-23": 0.877,
+        "2025-26": 0.873,
+        "2024-25": 0.8367
+      },
+      "latest_fy": "2025-26",
+      "latest_mlf": 0.873
+    },
+    {
+      "id": "suntop-solar-farm",
+      "name": "Suntop Solar Farm",
+      "state": "NSW",
+      "technology": "solar",
+      "capacity_mw": 150.0,
+      "mlf_by_year": {
+        "2021-22": 0.9159,
+        "2023-24": 0.9224,
+        "2022-23": 0.9128,
+        "2025-26": 0.9073,
+        "2024-25": 0.9096
+      },
+      "latest_fy": "2025-26",
+      "latest_mlf": 0.9073
+    },
+    {
+      "id": "flyers-creek-wind-farm",
+      "name": "Flyers Creek Wind Farm",
+      "state": "NSW",
+      "technology": "wind",
+      "capacity_mw": 145.5,
+      "mlf_by_year": {
+        "2023-24": 1.0266,
+        "2025-26": 1.0278,
+        "2024-25": 1.0205
+      },
+      "latest_fy": "2025-26",
+      "latest_mlf": 1.0278
+    },
+    {
+      "id": "capital-wind-farm",
+      "name": "Capital Wind Farm",
+      "state": "NSW",
+      "technology": "wind",
+      "capacity_mw": 140.7,
+      "mlf_by_year": {
+        "2021-22": 0.9723,
+        "2020-21": 0.9828,
+        "2023-24": 0.9715,
+        "2022-23": 0.9712,
+        "2025-26": 0.9801,
+        "2024-25": 0.9609
+      },
+      "latest_fy": "2025-26",
+      "latest_mlf": 0.9801
+    },
+    {
+      "id": "crudine-ridge-wind-farm",
+      "name": "Crudine Ridge Wind Farm",
+      "state": "NSW",
+      "technology": "wind",
+      "capacity_mw": 138.0,
+      "mlf_by_year": {
+        "2021-22": 0.9246,
+        "2020-21": 0.9462,
+        "2023-24": 0.926,
+        "2022-23": 0.9381,
+        "2025-26": 0.9409,
+        "2024-25": 0.928
+      },
+      "latest_fy": "2025-26",
+      "latest_mlf": 0.9409
+    },
+    {
+      "id": "finley-solar-farm",
+      "name": "Finley Solar Farm",
+      "state": "NSW",
+      "technology": "solar",
+      "capacity_mw": 133.0,
+      "mlf_by_year": {
+        "2021-22": 0.8432,
+        "2020-21": 0.88,
+        "2023-24": 0.9255,
+        "2022-23": 0.9036,
+        "2025-26": 0.8898,
+        "2024-25": 0.8651
+      },
+      "latest_fy": "2025-26",
+      "latest_mlf": 0.8898
+    },
+    {
+      "id": "metz-solar-farm",
+      "name": "Metz Solar Farm",
+      "state": "NSW",
+      "technology": "solar",
+      "capacity_mw": 115.0,
+      "mlf_by_year": {
+        "2021-22": 0.9208,
+        "2023-24": 0.8486,
+        "2022-23": 0.8831,
+        "2025-26": 0.8557,
+        "2024-25": 0.8668
+      },
+      "latest_fy": "2025-26",
+      "latest_mlf": 0.8557
+    },
+    {
+      "id": "boco-rock-wind-farm",
+      "name": "Boco Rock Wind Farm",
+      "state": "NSW",
+      "technology": "wind",
+      "capacity_mw": 113.0,
+      "mlf_by_year": {
+        "2021-22": 0.9359,
+        "2020-21": 0.9536,
+        "2023-24": 0.9444,
+        "2022-23": 0.9355,
+        "2025-26": 0.9557,
+        "2024-25": 0.9344
+      },
+      "latest_fy": "2025-26",
+      "latest_mlf": 0.9557
+    },
+    {
+      "id": "bodangora-wind-farm",
+      "name": "Bodangora Wind Farm",
+      "state": "NSW",
+      "technology": "wind",
+      "capacity_mw": 111.3,
+      "mlf_by_year": {
+        "2021-22": 0.9581,
+        "2020-21": 0.9659,
+        "2023-24": 0.9622,
+        "2022-23": 0.9595,
+        "2025-26": 0.9638,
+        "2024-25": 0.9518
+      },
+      "latest_fy": "2025-26",
+      "latest_mlf": 0.9638
+    },
+    {
+      "id": "gunnedah-solar-farm",
+      "name": "Gunnedah Solar Farm",
+      "state": "NSW",
+      "technology": "solar",
+      "capacity_mw": 110.0,
+      "mlf_by_year": {
+        "2021-22": 0.896,
+        "2020-21": 0.896,
+        "2023-24": 0.8273,
+        "2022-23": 0.8353,
+        "2025-26": 0.8437,
+        "2024-25": 0.8394
+      },
+      "latest_fy": "2025-26",
+      "latest_mlf": 0.8437
+    },
+    {
+      "id": "taralga-wind-farm",
+      "name": "Taralga Wind Farm",
+      "state": "NSW",
+      "technology": "wind",
+      "capacity_mw": 106.8,
+      "mlf_by_year": {
+        "2021-22": 1.0122,
+        "2020-21": 1.0103,
+        "2023-24": 1.0095,
+        "2022-23": 1.0118,
+        "2025-26": 0.9971,
+        "2024-25": 1.0088
+      },
+      "latest_fy": "2025-26",
+      "latest_mlf": 0.9971
+    },
+    {
+      "id": "nevertire-solar-farm",
+      "name": "Nevertire Solar Farm",
+      "state": "NSW",
+      "technology": "solar",
+      "capacity_mw": 105.0,
+      "mlf_by_year": {
+        "2021-22": 0.9444,
+        "2020-21": 0.9471,
+        "2023-24": 0.9439,
+        "2022-23": 0.9352,
+        "2025-26": 0.923,
+        "2024-25": 0.9284
+      },
+      "latest_fy": "2025-26",
+      "latest_mlf": 0.923
+    },
+    {
+      "id": "nyngan-solar-plant",
+      "name": "Nyngan Solar Plant",
+      "state": "NSW",
+      "technology": "solar",
+      "capacity_mw": 103.0,
+      "mlf_by_year": {
+        "2021-22": 0.9903,
+        "2020-21": 0.9887,
+        "2023-24": 0.9897,
+        "2022-23": 0.9862,
+        "2025-26": 0.9793,
+        "2024-25": 0.9835
+      },
+      "latest_fy": "2025-26",
+      "latest_mlf": 0.9793
+    },
+    {
+      "id": "bomen-solar-farm",
+      "name": "Bomen Solar Farm",
+      "state": "NSW",
+      "technology": "solar",
+      "capacity_mw": 100.0,
+      "mlf_by_year": {
+        "2021-22": 0.8875,
+        "2020-21": 0.9417,
+        "2023-24": 0.911,
+        "2022-23": 0.9089,
+        "2025-26": 0.9187,
+        "2024-25": 0.8719
+      },
+      "latest_fy": "2025-26",
+      "latest_mlf": 0.9187
+    },
+    {
+      "id": "crookwell-2-wind-farm",
+      "name": "Crookwell 2 Wind Farm",
+      "state": "NSW",
+      "technology": "wind",
+      "capacity_mw": 91.0,
+      "mlf_by_year": {
+        "2021-22": 0.9616,
+        "2020-21": 0.9716,
+        "2023-24": 0.9571,
+        "2025-26": 0.9632,
+        "2024-25": 0.955
+      },
+      "latest_fy": "2025-26",
+      "latest_mlf": 0.9632
+    },
+    {
+      "id": "sebastopol-solar-farm",
+      "name": "Sebastopol Solar Farm",
+      "state": "NSW",
+      "technology": "solar",
+      "capacity_mw": 90.0,
+      "mlf_by_year": {
+        "2021-22": 0.8799,
+        "2023-24": 0.9108,
+        "2022-23": 0.9059,
+        "2025-26": 0.922,
+        "2024-25": 0.8752
+      },
+      "latest_fy": "2025-26",
+      "latest_mlf": 0.922
+    },
+    {
+      "id": "west-wyalong-solar-farm",
+      "name": "West Wyalong Solar Farm",
+      "state": "NSW",
+      "technology": "solar",
+      "capacity_mw": 90.0,
+      "mlf_by_year": {
+        "2023-24": 0.9108,
+        "2022-23": 0.9059,
+        "2025-26": 0.922,
+        "2024-25": 0.8752
+      },
+      "latest_fy": "2025-26",
+      "latest_mlf": 0.922
+    },
+    {
+      "id": "beryl-solar-farm",
+      "name": "Beryl Solar Farm",
+      "state": "NSW",
+      "technology": "solar",
+      "capacity_mw": 87.0,
+      "mlf_by_year": {
+        "2021-22": 0.9184,
+        "2020-21": 0.9348,
+        "2023-24": 0.9339,
+        "2022-23": 0.9289,
+        "2025-26": 0.9284,
+        "2024-25": 0.9182
+      },
+      "latest_fy": "2025-26",
+      "latest_mlf": 0.9284
+    },
+    {
+      "id": "goonumbla-solar-farm",
+      "name": "Goonumbla Solar Farm",
+      "state": "NSW",
+      "technology": "solar",
+      "capacity_mw": 69.75,
+      "mlf_by_year": {
+        "2021-22": 0.8918,
+        "2020-21": 0.9259,
+        "2023-24": 0.9,
+        "2022-23": 0.8818,
+        "2025-26": 0.8888,
+        "2024-25": 0.8969
+      },
+      "latest_fy": "2025-26",
+      "latest_mlf": 0.8888
+    },
+    {
+      "id": "moree-solar-farm",
+      "name": "Moree Solar Farm",
+      "state": "NSW",
+      "technology": "solar",
+      "capacity_mw": 56.0,
+      "mlf_by_year": {
+        "2021-22": 0.8931,
+        "2020-21": 0.895,
+        "2023-24": 0.7977,
+        "2022-23": 0.8275,
+        "2025-26": 0.8387,
+        "2024-25": 0.8086
+      },
+      "latest_fy": "2025-26",
+      "latest_mlf": 0.8387
+    },
+    {
+      "id": "broken-hill-solar-plant",
+      "name": "Broken Hill Solar Plant",
+      "state": "NSW",
+      "technology": "solar",
+      "capacity_mw": 53.0,
+      "mlf_by_year": {
+        "2021-22": 0.7953,
+        "2020-21": 0.7844,
+        "2023-24": 0.8498,
+        "2022-23": 0.8381,
+        "2025-26": 0.8642,
+        "2024-25": 0.7784
+      },
+      "latest_fy": "2025-26",
+      "latest_mlf": 0.8642
+    },
+    {
+      "id": "jemalong-solar",
+      "name": "Jemalong Solar",
+      "state": "NSW",
+      "technology": "solar",
+      "capacity_mw": 50.0,
+      "mlf_by_year": {
+        "2021-22": 0.8956,
+        "2020-21": 0.922,
+        "2023-24": 0.8964,
+        "2022-23": 0.8833,
+        "2025-26": 0.8923,
+        "2024-25": 0.8943
+      },
+      "latest_fy": "2025-26",
+      "latest_mlf": 0.8923
+    },
+    {
+      "id": "parkes-solar-farm",
+      "name": "Parkes Solar Farm",
+      "state": "NSW",
+      "technology": "solar",
+      "capacity_mw": 49.5,
+      "mlf_by_year": {
+        "2021-22": 0.8918,
+        "2020-21": 0.9259,
+        "2023-24": 0.9,
+        "2022-23": 0.8818,
+        "2025-26": 0.8888,
+        "2024-25": 0.8969
+      },
+      "latest_fy": "2025-26",
+      "latest_mlf": 0.8888
+    },
+    {
+      "id": "woodlawn-wind-farm",
+      "name": "Woodlawn Wind Farm",
+      "state": "NSW",
+      "technology": "wind",
+      "capacity_mw": 48.3,
+      "mlf_by_year": {
+        "2021-22": 0.9563,
+        "2020-21": 0.9674,
+        "2023-24": 0.9575,
+        "2022-23": 0.9558,
+        "2025-26": 0.9649,
+        "2024-25": 0.9467
+      },
+      "latest_fy": "2025-26",
+      "latest_mlf": 0.9649
+    },
+    {
+      "id": "manildra-solar-farm",
+      "name": "Manildra Solar Farm",
+      "state": "NSW",
+      "technology": "solar",
+      "capacity_mw": 46.7,
+      "mlf_by_year": {
+        "2021-22": 0.9333,
+        "2020-21": 0.9542,
+        "2023-24": 0.9557,
+        "2022-23": 0.9287,
+        "2025-26": 0.94,
+        "2024-25": 0.9541
+      },
+      "latest_fy": "2025-26",
+      "latest_mlf": 0.94
+    },
+    {
+      "id": "gunning-wind-farm",
+      "name": "Gunning Wind Farm",
+      "state": "NSW",
+      "technology": "wind",
+      "capacity_mw": 46.5,
+      "mlf_by_year": {
+        "2021-22": 0.9082,
+        "2020-21": 0.9392,
+        "2023-24": 0.9437,
+        "2022-23": 0.9485,
+        "2025-26": 0.9521,
+        "2024-25": 0.9317
+      },
+      "latest_fy": "2025-26",
+      "latest_mlf": 0.9521
+    },
+    {
+      "id": "corowa-solar-farm",
+      "name": "Corowa Solar Farm",
+      "state": "NSW",
+      "technology": "solar",
+      "capacity_mw": 30.0,
+      "mlf_by_year": {
+        "2021-22": 0.8813,
+        "2020-21": 0.9497,
+        "2023-24": 0.9365,
+        "2022-23": 0.9242,
+        "2025-26": 0.9355,
+        "2024-25": 0.8979
+      },
+      "latest_fy": "2025-26",
+      "latest_mlf": 0.9355
+    },
+    {
+      "id": "cullerin-range-wind-farm",
+      "name": "Cullerin Range Wind Farm",
+      "state": "NSW",
+      "technology": "wind",
+      "capacity_mw": 30.0,
+      "mlf_by_year": {
+        "2021-22": 0.9082,
+        "2020-21": 0.9392,
+        "2023-24": 0.9437,
+        "2022-23": 0.9485,
+        "2025-26": 0.9521,
+        "2024-25": 0.9317
+      },
+      "latest_fy": "2025-26",
+      "latest_mlf": 0.9521
+    },
+    {
+      "id": "molong-solar-farm",
+      "name": "Molong Solar Farm",
+      "state": "NSW",
+      "technology": "solar",
+      "capacity_mw": 30.0,
+      "mlf_by_year": {
+        "2021-22": 0.9541,
+        "2020-21": 0.9634,
+        "2023-24": 0.9733,
+        "2022-23": 0.9433,
+        "2025-26": 0.9573,
+        "2024-25": 0.9616
+      },
+      "latest_fy": "2025-26",
+      "latest_mlf": 0.9573
+    },
+    {
+      "id": "junee-solar-farm",
+      "name": "Junee Solar Farm",
+      "state": "NSW",
+      "technology": "solar",
+      "capacity_mw": 30.0,
+      "mlf_by_year": {
+        "2023-24": 0.9108,
+        "2022-23": 0.9059,
+        "2025-26": 0.922,
+        "2024-25": 0.8752
+      },
+      "latest_fy": "2025-26",
+      "latest_mlf": 0.922
+    },
+    {
+      "id": "coopers-gap-wind-farm",
+      "name": "Coopers Gap Wind Farm",
+      "state": "QLD",
+      "technology": "wind",
+      "capacity_mw": 453.0,
+      "mlf_by_year": {
+        "2021-22": 0.9683,
+        "2020-21": 0.9681,
+        "2023-24": 0.9658,
+        "2022-23": 0.9685,
+        "2025-26": 0.9691,
+        "2024-25": 0.9672
+      },
+      "latest_fy": "2025-26",
+      "latest_mlf": 0.9691
+    },
+    {
+      "id": "aldoga-solar-farm",
+      "name": "Aldoga Solar Farm",
+      "state": "QLD",
+      "technology": "solar",
+      "capacity_mw": 387.0,
+      "mlf_by_year": {
+        "2025-26": 0.9318,
+        "2024-25": 0.9659
+      },
+      "latest_fy": "2025-26",
+      "latest_mlf": 0.9318
+    },
+    {
+      "id": "dulacca-wind-farm",
+      "name": "Dulacca Wind Farm",
+      "state": "QLD",
+      "technology": "wind",
+      "capacity_mw": 180.6,
+      "mlf_by_year": {
+        "2023-24": 0.9776,
+        "2022-23": 0.9541,
+        "2025-26": 0.9853,
+        "2024-25": 0.977
+      },
+      "latest_fy": "2025-26",
+      "latest_mlf": 0.9853
+    },
+    {
+      "id": "mount-emerald",
+      "name": "Mount Emerald",
+      "state": "QLD",
+      "technology": "wind",
+      "capacity_mw": 180.5,
+      "mlf_by_year": {
+        "2021-22": 0.9835,
+        "2020-21": 0.955,
+        "2023-24": 0.9472,
+        "2022-23": 0.9575,
+        "2025-26": 0.9649,
+        "2024-25": 0.9527
+      },
+      "latest_fy": "2025-26",
+      "latest_mlf": 0.9649
+    },
+    {
+      "id": "edenvale-solar-park",
+      "name": "Edenvale Solar Park.",
+      "state": "QLD",
+      "technology": "solar",
+      "capacity_mw": 180.0,
+      "mlf_by_year": {
+        "2023-24": 0.972,
+        "2022-23": 0.9753,
+        "2025-26": 0.9823,
+        "2024-25": 0.9707
+      },
+      "latest_fy": "2025-26",
+      "latest_mlf": 0.9823
+    },
+    {
+      "id": "woolooga-solar-farm",
+      "name": "Woolooga Solar Farm",
+      "state": "QLD",
+      "technology": "solar",
+      "capacity_mw": 176.0,
+      "mlf_by_year": {
+        "2021-22": 0.9951,
+        "2023-24": 0.9736,
+        "2022-23": 0.9832,
+        "2025-26": 0.9787,
+        "2024-25": 0.985
+      },
+      "latest_fy": "2025-26",
+      "latest_mlf": 0.9787
+    },
+    {
+      "id": "columboola-solar-farm",
+      "name": "Columboola Solar Farm",
+      "state": "QLD",
+      "technology": "solar",
+      "capacity_mw": 162.0,
+      "mlf_by_year": {
+        "2021-22": 0.9846,
+        "2023-24": 0.9746,
+        "2022-23": 0.9812,
+        "2025-26": 0.9865,
+        "2024-25": 0.9718
+      },
+      "latest_fy": "2025-26",
+      "latest_mlf": 0.9865
+    },
+    {
+      "id": "kaban-wind-farm",
+      "name": "Kaban Wind Farm",
+      "state": "QLD",
+      "technology": "wind",
+      "capacity_mw": 152.0,
+      "mlf_by_year": {
+        "2023-24": 0.9575,
+        "2022-23": 0.9513,
+        "2025-26": 0.9696,
+        "2024-25": 0.9605
+      },
+      "latest_fy": "2025-26",
+      "latest_mlf": 0.9696
+    },
+    {
+      "id": "daydream-solar-farm",
+      "name": "Daydream Solar Farm",
+      "state": "QLD",
+      "technology": "solar",
+      "capacity_mw": 150.0,
+      "mlf_by_year": {
+        "2021-22": 0.9268,
+        "2020-21": 0.8825,
+        "2023-24": 0.9098,
+        "2022-23": 0.9296,
+        "2025-26": 0.9396,
+        "2024-25": 0.9306
+      },
+      "latest_fy": "2025-26",
+      "latest_mlf": 0.9396
+    },
+    {
+      "id": "bluegrass-solar-farm",
+      "name": "Bluegrass Solar Farm",
+      "state": "QLD",
+      "technology": "solar",
+      "capacity_mw": 148.0,
+      "mlf_by_year": {
+        "2021-22": 0.9549,
+        "2023-24": 0.9546,
+        "2022-23": 0.96,
+        "2025-26": 0.9543,
+        "2024-25": 0.9433
+      },
+      "latest_fy": "2025-26",
+      "latest_mlf": 0.9543
+    },
+    {
+      "id": "ross-river-solar-farm",
+      "name": "Ross River Solar Farm",
+      "state": "QLD",
+      "technology": "solar",
+      "capacity_mw": 116.0,
+      "mlf_by_year": {
+        "2021-22": 0.9395,
+        "2020-21": 0.8907,
+        "2023-24": 0.9222,
+        "2022-23": 0.9369,
+        "2025-26": 0.9516,
+        "2024-25": 0.9385
+      },
+      "latest_fy": "2025-26",
+      "latest_mlf": 0.9516
+    },
+    {
+      "id": "darling-downs-solar-farm",
+      "name": "Darling Downs Solar Farm",
+      "state": "QLD",
+      "technology": "solar",
+      "capacity_mw": 110.0,
+      "mlf_by_year": {
+        "2021-22": 0.9695,
+        "2020-21": 0.9717,
+        "2023-24": 0.9689,
+        "2022-23": 0.9713,
+        "2025-26": 0.9758,
+        "2024-25": 0.9691
+      },
+      "latest_fy": "2025-26",
+      "latest_mlf": 0.9758
+    },
+    {
+      "id": "yarranlea-solar-farm",
+      "name": "Yarranlea Solar Farm",
+      "state": "QLD",
+      "technology": "solar",
+      "capacity_mw": 103.0,
+      "mlf_by_year": {
+        "2021-22": 0.9789,
+        "2020-21": 0.9851,
+        "2023-24": 0.9914,
+        "2022-23": 0.9861,
+        "2025-26": 0.9888,
+        "2024-25": 0.9847
+      },
+      "latest_fy": "2025-26",
+      "latest_mlf": 0.9888
+    },
+    {
+      "id": "clare-solar-farm",
+      "name": "Clare Solar Farm",
+      "state": "QLD",
+      "technology": "solar",
+      "capacity_mw": 100.0,
+      "mlf_by_year": {
+        "2021-22": 0.9197,
+        "2020-21": 0.8647,
+        "2023-24": 0.8981,
+        "2022-23": 0.9177,
+        "2025-26": 0.9363,
+        "2024-25": 0.9116
+      },
+      "latest_fy": "2025-26",
+      "latest_mlf": 0.9363
+    },
+    {
+      "id": "haughton-solar-farm-stage-1",
+      "name": "Haughton Solar Farm Stage 1",
+      "state": "QLD",
+      "technology": "solar",
+      "capacity_mw": 100.0,
+      "mlf_by_year": {
+        "2021-22": 0.9356,
+        "2020-21": 0.8765,
+        "2023-24": 0.9151,
+        "2022-23": 0.93,
+        "2025-26": 0.9475,
+        "2024-25": 0.9332
+      },
+      "latest_fy": "2025-26",
+      "latest_mlf": 0.9475
+    },
+    {
+      "id": "lilyvale-solar-farm",
+      "name": "Lilyvale Solar Farm",
+      "state": "QLD",
+      "technology": "solar",
+      "capacity_mw": 100.0,
+      "mlf_by_year": {
+        "2021-22": 0.9276,
+        "2020-21": 0.8904,
+        "2023-24": 0.9064,
+        "2022-23": 0.9323,
+        "2025-26": 0.9379,
+        "2024-25": 0.9295
+      },
+      "latest_fy": "2025-26",
+      "latest_mlf": 0.9379
+    },
+    {
+      "id": "moura-solar-farm",
+      "name": "Moura Solar Farm",
+      "state": "QLD",
+      "technology": "solar",
+      "capacity_mw": 82.0,
+      "mlf_by_year": {
+        "2023-24": 0.9081,
+        "2022-23": 0.9224,
+        "2025-26": 0.9328,
+        "2024-25": 0.9319
+      },
+      "latest_fy": "2025-26",
+      "latest_mlf": 0.9328
+    },
+    {
+      "id": "clermont-solar-farm",
+      "name": "Clermont Solar Farm",
+      "state": "QLD",
+      "technology": "solar",
+      "capacity_mw": 75.0,
+      "mlf_by_year": {
+        "2021-22": 0.9267,
+        "2020-21": 0.8889,
+        "2023-24": 0.915,
+        "2022-23": 0.9334,
+        "2025-26": 0.941,
+        "2024-25": 0.937
+      },
+      "latest_fy": "2025-26",
+      "latest_mlf": 0.941
+    },
+    {
+      "id": "susan-river-solar-farm",
+      "name": "Susan River Solar Farm",
+      "state": "QLD",
+      "technology": "solar",
+      "capacity_mw": 75.0,
+      "mlf_by_year": {
+        "2021-22": 0.9797,
+        "2020-21": 0.9608,
+        "2023-24": 0.9704,
+        "2022-23": 0.9823,
+        "2025-26": 0.9772,
+        "2024-25": 0.9828
+      },
+      "latest_fy": "2025-26",
+      "latest_mlf": 0.9772
+    },
+    {
+      "id": "emerald-solar-park",
+      "name": "Emerald Solar Park",
+      "state": "QLD",
+      "technology": "solar",
+      "capacity_mw": 72.0,
+      "mlf_by_year": {
+        "2021-22": 0.9237,
+        "2020-21": 0.882,
+        "2023-24": 0.9111,
+        "2022-23": 0.9333,
+        "2025-26": 0.9381,
+        "2024-25": 0.9331
+      },
+      "latest_fy": "2025-26",
+      "latest_mlf": 0.9381
+    },
+    {
+      "id": "rugby-run-solar-farm",
+      "name": "Rugby Run Solar Farm",
+      "state": "QLD",
+      "technology": "solar",
+      "capacity_mw": 65.0,
+      "mlf_by_year": {
+        "2021-22": 0.9156,
+        "2020-21": 0.8886,
+        "2023-24": 0.9185,
+        "2022-23": 0.9224,
+        "2025-26": 0.9463,
+        "2024-25": 0.9397
+      },
+      "latest_fy": "2025-26",
+      "latest_mlf": 0.9463
+    },
+    {
+      "id": "warwick-solar-farm",
+      "name": "Warwick Solar Farm",
+      "state": "QLD",
+      "technology": "solar",
+      "capacity_mw": 64.0,
+      "mlf_by_year": {
+        "2021-22": 0.9789,
+        "2020-21": 0.9851,
+        "2023-24": 0.9914,
+        "2022-23": 0.9861,
+        "2025-26": 0.9888,
+        "2024-25": 0.9847
+      },
+      "latest_fy": "2025-26",
+      "latest_mlf": 0.9888
+    },
+    {
+      "id": "childers-solar-farm",
+      "name": "Childers Solar Farm",
+      "state": "QLD",
+      "technology": "solar",
+      "capacity_mw": 56.0,
+      "mlf_by_year": {
+        "2021-22": 0.9797,
+        "2020-21": 0.9608,
+        "2023-24": 0.9704,
+        "2022-23": 0.9823,
+        "2025-26": 0.9772,
+        "2024-25": 0.9828
+      },
+      "latest_fy": "2025-26",
+      "latest_mlf": 0.9772
+    },
+    {
+      "id": "hamilton-solar-farm",
+      "name": "Hamilton Solar Farm",
+      "state": "QLD",
+      "technology": "solar",
+      "capacity_mw": 56.0,
+      "mlf_by_year": {
+        "2021-22": 0.9239,
+        "2020-21": 0.8743,
+        "2023-24": 0.906,
+        "2022-23": 0.9238,
+        "2025-26": 0.9385,
+        "2024-25": 0.9305
+      },
+      "latest_fy": "2025-26",
+      "latest_mlf": 0.9385
+    },
+    {
+      "id": "whitsunday-solar-farm",
+      "name": "Whitsunday Solar Farm",
+      "state": "QLD",
+      "technology": "solar",
+      "capacity_mw": 56.0,
+      "mlf_by_year": {
+        "2021-22": 0.9231,
+        "2020-21": 0.8743,
+        "2023-24": 0.901,
+        "2022-23": 0.9218,
+        "2025-26": 0.9398,
+        "2024-25": 0.9204
+      },
+      "latest_fy": "2025-26",
+      "latest_mlf": 0.9398
+    },
+    {
+      "id": "oakey-2-solar-farm",
+      "name": "Oakey 2 Solar Farm",
+      "state": "QLD",
+      "technology": "solar",
+      "capacity_mw": 55.0,
+      "mlf_by_year": {
+        "2021-22": 0.9624,
+        "2020-21": 0.9687,
+        "2023-24": 0.9748,
+        "2022-23": 0.9665,
+        "2025-26": 0.9759,
+        "2024-25": 0.9691
+      },
+      "latest_fy": "2025-26",
+      "latest_mlf": 0.9759
+    },
+    {
+      "id": "hayman-solar-farm",
+      "name": "Hayman Solar Farm",
+      "state": "QLD",
+      "technology": "solar",
+      "capacity_mw": 50.0,
+      "mlf_by_year": {
+        "2021-22": 0.9268,
+        "2020-21": 0.8825,
+        "2023-24": 0.9098,
+        "2022-23": 0.9296,
+        "2025-26": 0.9396,
+        "2024-25": 0.9306
+      },
+      "latest_fy": "2025-26",
+      "latest_mlf": 0.9396
+    },
+    {
+      "id": "kingaroy-solar-farm",
+      "name": "Kingaroy Solar Farm",
+      "state": "QLD",
+      "technology": "solar",
+      "capacity_mw": 40.0,
+      "mlf_by_year": {
+        "2025-26": 0.9795,
+        "2024-25": 0.9775
+      },
+      "latest_fy": "2025-26",
+      "latest_mlf": 0.9795
+    },
+    {
+      "id": "port-augusta-renewable-energy-park-wind",
+      "name": "Port Augusta Renewable Energy Park - Wind",
+      "state": "SA",
+      "technology": "wind",
+      "capacity_mw": 210.0,
+      "mlf_by_year": {
+        "2023-24": 0.9654,
+        "2022-23": 0.9641,
+        "2025-26": 0.9735,
+        "2024-25": 0.9608
+      },
+      "latest_fy": "2025-26",
+      "latest_mlf": 0.9735
+    },
+    {
+      "id": "goyder-south-wind-farm-1a",
+      "name": "Goyder South Wind Farm 1A",
+      "state": "SA",
+      "technology": "wind",
+      "capacity_mw": 209.0,
+      "mlf_by_year": {
+        "2025-26": 0.9697,
+        "2024-25": 0.9643
+      },
+      "latest_fy": "2025-26",
+      "latest_mlf": 0.9697
+    },
+    {
+      "id": "goyder-south-wind-farm-1b",
+      "name": "Goyder South Wind Farm 1B",
+      "state": "SA",
+      "technology": "wind",
+      "capacity_mw": 203.5,
+      "mlf_by_year": {
+        "2023-24": 0.9728,
+        "2025-26": 0.9689,
+        "2024-25": 0.9641
+      },
+      "latest_fy": "2025-26",
+      "latest_mlf": 0.9689
+    },
+    {
+      "id": "lake-bonney-2-wind-farm",
+      "name": "Lake Bonney 2 Wind Farm",
+      "state": "SA",
+      "technology": "wind",
+      "capacity_mw": 159.0,
+      "mlf_by_year": {
+        "2021-22": 0.9905,
+        "2020-21": 0.9685,
+        "2023-24": 0.9689,
+        "2022-23": 0.9651,
+        "2025-26": 0.9297,
+        "2024-25": 0.9709
+      },
+      "latest_fy": "2025-26",
+      "latest_mlf": 0.9297
+    },
+    {
+      "id": "waterloo-wind-farm",
+      "name": "Waterloo Wind Farm",
+      "state": "SA",
+      "technology": "wind",
+      "capacity_mw": 130.8,
+      "mlf_by_year": {
+        "2021-22": 0.9594,
+        "2020-21": 0.9665,
+        "2023-24": 0.9599,
+        "2022-23": 0.9582,
+        "2025-26": 0.9624,
+        "2024-25": 0.9547
+      },
+      "latest_fy": "2025-26",
+      "latest_mlf": 0.9624
+    },
+    {
+      "id": "lincoln-gap-wind-farm-stage-1",
+      "name": "Lincoln Gap Wind Farm - stage 1",
+      "state": "SA",
+      "technology": "wind",
+      "capacity_mw": 126.0,
+      "mlf_by_year": {
+        "2021-22": 0.9652,
+        "2020-21": 0.9779,
+        "2023-24": 0.9601,
+        "2022-23": 0.9628,
+        "2025-26": 0.9689,
+        "2024-25": 0.9576
+      },
+      "latest_fy": "2025-26",
+      "latest_mlf": 0.9689
+    },
+    {
+      "id": "willogoleche-wind-farm",
+      "name": "Willogoleche Wind Farm",
+      "state": "SA",
+      "technology": "wind",
+      "capacity_mw": 119.76,
+      "mlf_by_year": {
+        "2021-22": 0.9583,
+        "2020-21": 0.9693,
+        "2023-24": 0.9534,
+        "2022-23": 0.9549,
+        "2025-26": 0.9601,
+        "2024-25": 0.9498
+      },
+      "latest_fy": "2025-26",
+      "latest_mlf": 0.9601
+    },
+    {
+      "id": "bungala-one-solar-farm",
+      "name": "Bungala One Solar Farm",
+      "state": "SA",
+      "technology": "solar",
+      "capacity_mw": 110.0,
+      "mlf_by_year": {
+        "2021-22": 0.9597,
+        "2020-21": 0.9744,
+        "2023-24": 0.9601,
+        "2022-23": 0.9567,
+        "2025-26": 0.9725,
+        "2024-25": 0.9565
+      },
+      "latest_fy": "2025-26",
+      "latest_mlf": 0.9725
+    },
+    {
+      "id": "bungala-two-solar-farm",
+      "name": "Bungala Two Solar Farm",
+      "state": "SA",
+      "technology": "solar",
+      "capacity_mw": 110.0,
+      "mlf_by_year": {
+        "2021-22": 0.9597,
+        "2020-21": 0.9744,
+        "2023-24": 0.9601,
+        "2022-23": 0.9567,
+        "2025-26": 0.9725,
+        "2024-25": 0.9565
+      },
+      "latest_fy": "2025-26",
+      "latest_mlf": 0.9725
+    },
+    {
+      "id": "hornsdale-wind-farm-stage-3",
+      "name": "Hornsdale Wind Farm Stage 3",
+      "state": "SA",
+      "technology": "wind",
+      "capacity_mw": 109.0,
+      "mlf_by_year": {
+        "2021-22": 0.9604,
+        "2020-21": 0.9683,
+        "2023-24": 0.9513,
+        "2022-23": 0.9522,
+        "2025-26": 0.956,
+        "2024-25": 0.9423
+      },
+      "latest_fy": "2025-26",
+      "latest_mlf": 0.956
+    },
+    {
+      "id": "snowtown-wind-farm",
+      "name": "Snowtown Wind Farm",
+      "state": "SA",
+      "technology": "wind",
+      "capacity_mw": 98.7,
+      "mlf_by_year": {
+        "2021-22": 0.9497,
+        "2020-21": 0.9533,
+        "2023-24": 0.9415,
+        "2022-23": 0.9498,
+        "2025-26": 0.9516,
+        "2024-25": 0.9386
+      },
+      "latest_fy": "2025-26",
+      "latest_mlf": 0.9516
+    },
+    {
+      "id": "tailem-bend-solar",
+      "name": "Tailem Bend - Solar",
+      "state": "SA",
+      "technology": "solar",
+      "capacity_mw": 95.0,
+      "mlf_by_year": {
+        "2021-22": 1.0113,
+        "2020-21": 1.0013,
+        "2023-24": 1.0063,
+        "2022-23": 0.9987,
+        "2025-26": 0.9949,
+        "2024-25": 1.0096
+      },
+      "latest_fy": "2025-26",
+      "latest_mlf": 0.9949
+    },
+    {
+      "id": "wattle-point",
+      "name": "Wattle Point",
+      "state": "SA",
+      "technology": "wind",
+      "capacity_mw": 91.0,
+      "mlf_by_year": {
+        "2021-22": 0.811,
+        "2020-21": 0.82,
+        "2023-24": 0.8073,
+        "2022-23": 0.8174,
+        "2025-26": 0.8456,
+        "2024-25": 0.8179
+      },
+      "latest_fy": "2025-26",
+      "latest_mlf": 0.8456
+    },
+    {
+      "id": "mt-millar-wind-farm",
+      "name": "Mt Millar Wind Farm",
+      "state": "SA",
+      "technology": "wind",
+      "capacity_mw": 70.0,
+      "mlf_by_year": {
+        "2021-22": 0.9287,
+        "2020-21": 0.9355,
+        "2023-24": 0.9259,
+        "2022-23": 0.9245,
+        "2025-26": 0.9403,
+        "2024-25": 0.9162
+      },
+      "latest_fy": "2025-26",
+      "latest_mlf": 0.9403
+    },
+    {
+      "id": "cathedral-rocks",
+      "name": "Cathedral Rocks",
+      "state": "SA",
+      "technology": "wind",
+      "capacity_mw": 66.0,
+      "mlf_by_year": {
+        "2021-22": 0.9166,
+        "2020-21": 0.9324,
+        "2023-24": 0.9319,
+        "2022-23": 0.9281,
+        "2025-26": 0.9467,
+        "2024-25": 0.9309
+      },
+      "latest_fy": "2025-26",
+      "latest_mlf": 0.9467
+    },
+    {
+      "id": "clements-gap-wind-farm",
+      "name": "Clements Gap Wind Farm",
+      "state": "SA",
+      "technology": "wind",
+      "capacity_mw": 57.0,
+      "mlf_by_year": {
+        "2021-22": 0.9564,
+        "2020-21": 0.9597,
+        "2023-24": 0.9522,
+        "2022-23": 0.953,
+        "2025-26": 0.9604,
+        "2024-25": 0.9486
+      },
+      "latest_fy": "2025-26",
+      "latest_mlf": 0.9604
+    },
+    {
+      "id": "canunda",
+      "name": "Canunda",
+      "state": "SA",
+      "technology": "wind",
+      "capacity_mw": 46.0,
+      "mlf_by_year": {
+        "2021-22": 0.9944,
+        "2020-21": 0.9702,
+        "2023-24": 0.9671,
+        "2022-23": 0.9742,
+        "2025-26": 0.9333,
+        "2024-25": 0.9755
+      },
+      "latest_fy": "2025-26",
+      "latest_mlf": 0.9333
+    },
+    {
+      "id": "starfish-hill",
+      "name": "Starfish Hill",
+      "state": "SA",
+      "technology": "wind",
+      "capacity_mw": 34.5,
+      "mlf_by_year": {
+        "2021-22": 1.0055,
+        "2020-21": 1.005,
+        "2023-24": 1.0039,
+        "2022-23": 1.0036,
+        "2025-26": 1.0037,
+        "2024-25": 1.0025
+      },
+      "latest_fy": "2025-26",
+      "latest_mlf": 1.0037
+    },
+    {
+      "id": "musselroe-wind-farm",
+      "name": "Musselroe Wind Farm",
+      "state": "TAS",
+      "technology": "wind",
+      "capacity_mw": 168.0,
+      "mlf_by_year": {
+        "2021-22": 0.8999,
+        "2020-21": 0.9024,
+        "2023-24": 0.9119,
+        "2022-23": 0.9168,
+        "2025-26": 0.9101,
+        "2024-25": 0.9199
+      },
+      "latest_fy": "2025-26",
+      "latest_mlf": 0.9101
+    },
+    {
+      "id": "granville-harbour-wind-farm",
+      "name": "Granville Harbour Wind Farm",
+      "state": "TAS",
+      "technology": "wind",
+      "capacity_mw": 111.0,
+      "mlf_by_year": {
+        "2021-22": 0.9314,
+        "2020-21": 0.9408,
+        "2023-24": 0.9388,
+        "2022-23": 0.9543,
+        "2025-26": 0.9555,
+        "2024-25": 0.9473
+      },
+      "latest_fy": "2025-26",
+      "latest_mlf": 0.9555
+    },
+    {
+      "id": "stockyard-hill-wind-farm",
+      "name": "Stockyard Hill Wind Farm",
+      "state": "VIC",
+      "technology": "wind",
+      "capacity_mw": 530.0,
+      "mlf_by_year": {
+        "2021-22": 0.9782,
+        "2023-24": 0.9869,
+        "2022-23": 0.9799,
+        "2025-26": 0.9845,
+        "2024-25": 0.9812
+      },
+      "latest_fy": "2025-26",
+      "latest_mlf": 0.9845
+    },
+    {
+      "id": "macarthur-wind-farm",
+      "name": "Macarthur Wind Farm",
+      "state": "VIC",
+      "technology": "wind",
+      "capacity_mw": 420.0,
+      "mlf_by_year": {
+        "2021-22": 0.9753,
+        "2020-21": 0.9757,
+        "2023-24": 0.9849,
+        "2022-23": 0.9807,
+        "2025-26": 0.9829,
+        "2024-25": 0.9781
+      },
+      "latest_fy": "2025-26",
+      "latest_mlf": 0.9829
+    },
+    {
+      "id": "dundonnell-wind-farm",
+      "name": "Dundonnell Wind Farm",
+      "state": "VIC",
+      "technology": "wind",
+      "capacity_mw": 336.0,
+      "mlf_by_year": {
+        "2021-22": 0.9789,
+        "2020-21": 0.979,
+        "2023-24": 0.987,
+        "2022-23": 0.9824,
+        "2025-26": 0.9845,
+        "2024-25": 0.981
+      },
+      "latest_fy": "2025-26",
+      "latest_mlf": 0.9845
+    },
+    {
+      "id": "moorabool-wind-farm",
+      "name": "Moorabool Wind Farm",
+      "state": "VIC",
+      "technology": "wind",
+      "capacity_mw": 305.0,
+      "mlf_by_year": {
+        "2021-22": 0.9459,
+        "2020-21": 0.9501,
+        "2023-24": 0.9576,
+        "2022-23": 0.948,
+        "2025-26": 0.9569,
+        "2024-25": 0.9475
+      },
+      "latest_fy": "2025-26",
+      "latest_mlf": 0.9569
+    },
+    {
+      "id": "berrybank-wind-farm",
+      "name": "Berrybank Wind Farm",
+      "state": "VIC",
+      "technology": "wind",
+      "capacity_mw": 281.1,
+      "mlf_by_year": {
+        "2021-22": 0.9431,
+        "2020-21": 0.9482,
+        "2023-24": 0.9397,
+        "2022-23": 0.9496,
+        "2025-26": 0.9465,
+        "2024-25": 0.9315
+      },
+      "latest_fy": "2025-26",
+      "latest_mlf": 0.9465
+    },
+    {
+      "id": "ararat-wind-farm",
+      "name": "Ararat Wind Farm",
+      "state": "VIC",
+      "technology": "wind",
+      "capacity_mw": 240.0,
+      "mlf_by_year": {
+        "2021-22": 0.8987,
+        "2020-21": 0.8983,
+        "2023-24": 0.8899,
+        "2022-23": 0.8894,
+        "2025-26": 0.9031,
+        "2024-25": 0.8856
+      },
+      "latest_fy": "2025-26",
+      "latest_mlf": 0.9031
+    },
+    {
+      "id": "murra-warra-wind-farm-stage-1",
+      "name": "Murra Warra Wind Farm - stage 1",
+      "state": "VIC",
+      "technology": "wind",
+      "capacity_mw": 225.7,
+      "mlf_by_year": {
+        "2021-22": 0.8883,
+        "2020-21": 0.8885,
+        "2023-24": 0.8768,
+        "2022-23": 0.8661,
+        "2025-26": 0.8817,
+        "2024-25": 0.8619
+      },
+      "latest_fy": "2025-26",
+      "latest_mlf": 0.8817
+    },
+    {
+      "id": "ryan-corner-wind-farm",
+      "name": "Ryan Corner Wind Farm",
+      "state": "VIC",
+      "technology": "wind",
+      "capacity_mw": 218.0,
+      "mlf_by_year": {
+        "2025-26": 0.9875,
+        "2024-25": 0.9787
+      },
+      "latest_fy": "2025-26",
+      "latest_mlf": 0.9875
+    },
+    {
+      "id": "kiamal-solar-farm-stage-1",
+      "name": "Kiamal Solar Farm - Stage 1",
+      "state": "VIC",
+      "technology": "solar",
+      "capacity_mw": 200.0,
+      "mlf_by_year": {
+        "2021-22": 0.8504,
+        "2020-21": 0.8043,
+        "2023-24": 0.8775,
+        "2022-23": 0.8775,
+        "2025-26": 0.8785,
+        "2024-25": 0.8363
+      },
+      "latest_fy": "2025-26",
+      "latest_mlf": 0.8785
+    },
+    {
+      "id": "bulgana-green-power-hub-wind-farm",
+      "name": "Bulgana Green Power Hub - Wind Farm",
+      "state": "VIC",
+      "technology": "wind",
+      "capacity_mw": 194.0,
+      "mlf_by_year": {
+        "2021-22": 0.8949,
+        "2020-21": 0.8988,
+        "2023-24": 0.8821,
+        "2022-23": 0.8839,
+        "2025-26": 0.8907,
+        "2024-25": 0.8733
+      },
+      "latest_fy": "2025-26",
+      "latest_mlf": 0.8907
+    },
+    {
+      "id": "waubra",
+      "name": "Waubra",
+      "state": "VIC",
+      "technology": "wind",
+      "capacity_mw": 192.0,
+      "mlf_by_year": {
+        "2021-22": 0.9221,
+        "2020-21": 0.9228,
+        "2023-24": 0.924,
+        "2022-23": 0.9233,
+        "2025-26": 0.9329,
+        "2024-25": 0.9149
+      },
+      "latest_fy": "2025-26",
+      "latest_mlf": 0.9329
+    },
+    {
+      "id": "mortlake-south-wind-farm",
+      "name": "Mortlake South Wind Farm",
+      "state": "VIC",
+      "technology": "wind",
+      "capacity_mw": 157.5,
+      "mlf_by_year": {
+        "2021-22": 0.9833,
+        "2020-21": 0.9845,
+        "2023-24": 0.9794,
+        "2022-23": 0.9792,
+        "2025-26": 0.9821,
+        "2024-25": 0.9753
+      },
+      "latest_fy": "2025-26",
+      "latest_mlf": 0.9821
+    },
+    {
+      "id": "yendon-wind-farm",
+      "name": "Yendon Wind Farm",
+      "state": "VIC",
+      "technology": "wind",
+      "capacity_mw": 142.0,
+      "mlf_by_year": {
+        "2021-22": 0.9422,
+        "2020-21": 0.9474,
+        "2023-24": 0.9522,
+        "2022-23": 0.9497,
+        "2025-26": 0.9537,
+        "2024-25": 0.9425
+      },
+      "latest_fy": "2025-26",
+      "latest_mlf": 0.9537
+    },
+    {
+      "id": "mt-gellibrand-wind-farm",
+      "name": "Mt Gellibrand Wind Farm",
+      "state": "VIC",
+      "technology": "wind",
+      "capacity_mw": 132.0,
+      "mlf_by_year": {
+        "2025-26": 0.9879,
+        "2024-25": 0.9855
+      },
+      "latest_fy": "2025-26",
+      "latest_mlf": 0.9879
+    },
+    {
+      "id": "mt-mercer-wind-farm",
+      "name": "Mt Mercer Wind Farm",
+      "state": "VIC",
+      "technology": "wind",
+      "capacity_mw": 131.2,
+      "mlf_by_year": {
+        "2025-26": 0.9569,
+        "2024-25": 0.9475
+      },
+      "latest_fy": "2025-26",
+      "latest_mlf": 0.9569
+    },
+    {
+      "id": "numurkah-solar-farm",
+      "name": "Numurkah Solar Farm",
+      "state": "VIC",
+      "technology": "solar",
+      "capacity_mw": 128.0,
+      "mlf_by_year": {
+        "2021-22": 0.9963,
+        "2020-21": 0.9945,
+        "2023-24": 0.9738,
+        "2022-23": 0.9715
+      },
+      "latest_fy": "2023-24",
+      "latest_mlf": 0.9738
+    },
+    {
+      "id": "glenrowan-west-solar-farm",
+      "name": "Glenrowan West Solar Farm",
+      "state": "VIC",
+      "technology": "solar",
+      "capacity_mw": 110.0,
+      "mlf_by_year": {
+        "2023-24": 0.9627,
+        "2025-26": 0.949,
+        "2024-25": 0.9626
+      },
+      "latest_fy": "2025-26",
+      "latest_mlf": 0.949
+    },
+    {
+      "id": "bald-hills-wind-farm",
+      "name": "Bald Hills Wind Farm",
+      "state": "VIC",
+      "technology": "wind",
+      "capacity_mw": 106.0,
+      "mlf_by_year": {
+        "2021-22": 0.9936,
+        "2020-21": 0.9955,
+        "2023-24": 0.9825,
+        "2022-23": 0.9977,
+        "2025-26": 0.9862,
+        "2024-25": 0.9848
+      },
+      "latest_fy": "2025-26",
+      "latest_mlf": 0.9862
+    },
+    {
+      "id": "bannerton-solar-park",
+      "name": "Bannerton Solar Park",
+      "state": "VIC",
+      "technology": "solar",
+      "capacity_mw": 100.0,
+      "mlf_by_year": {
+        "2021-22": 0.8633,
+        "2020-21": 0.8096,
+        "2023-24": 0.8947,
+        "2022-23": 0.8928,
+        "2025-26": 0.8986,
+        "2024-25": 0.8584
+      },
+      "latest_fy": "2025-26",
+      "latest_mlf": 0.8986
+    },
+    {
+      "id": "karadoc-solar-farm",
+      "name": "Karadoc Solar Farm",
+      "state": "VIC",
+      "technology": "solar",
+      "capacity_mw": 90.0,
+      "mlf_by_year": {
+        "2021-22": 0.8673,
+        "2020-21": 0.8045,
+        "2023-24": 0.8877,
+        "2022-23": 0.8886,
+        "2025-26": 0.8895,
+        "2024-25": 0.8506
+      },
+      "latest_fy": "2025-26",
+      "latest_mlf": 0.8895
+    },
+    {
+      "id": "hawkesdale-wind-farm",
+      "name": "Hawkesdale Wind Farm",
+      "state": "VIC",
+      "technology": "wind",
+      "capacity_mw": 89.5,
+      "mlf_by_year": {
+        "2023-24": 0.9849,
+        "2025-26": 0.9865,
+        "2024-25": 0.9809
+      },
+      "latest_fy": "2025-26",
+      "latest_mlf": 0.9865
+    },
+    {
+      "id": "wemen-solar-farm",
+      "name": "Wemen Solar Farm",
+      "state": "VIC",
+      "technology": "solar",
+      "capacity_mw": 88.0,
+      "mlf_by_year": {
+        "2021-22": 0.8633,
+        "2020-21": 0.8096,
+        "2023-24": 0.8947,
+        "2022-23": 0.8928,
+        "2025-26": 0.8986,
+        "2024-25": 0.8584
+      },
+      "latest_fy": "2025-26",
+      "latest_mlf": 0.8986
+    },
+    {
+      "id": "winton-solar-farm",
+      "name": "Winton Solar Farm",
+      "state": "VIC",
+      "technology": "solar",
+      "capacity_mw": 85.0,
+      "mlf_by_year": {
+        "2021-22": 0.9976,
+        "2020-21": 0.9815,
+        "2023-24": 0.9675,
+        "2022-23": 0.9671,
+        "2025-26": 0.9402,
+        "2024-25": 0.9455
+      },
+      "latest_fy": "2025-26",
+      "latest_mlf": 0.9402
+    },
+    {
+      "id": "elaine-wind-farm",
+      "name": "Elaine Wind Farm",
+      "state": "VIC",
+      "technology": "wind",
+      "capacity_mw": 82.0,
+      "mlf_by_year": {
+        "2021-22": 0.9459,
+        "2020-21": 0.9501,
+        "2023-24": 0.9576,
+        "2022-23": 0.948,
+        "2025-26": 0.9569,
+        "2024-25": 0.9475
+      },
+      "latest_fy": "2025-26",
+      "latest_mlf": 0.9569
+    },
+    {
+      "id": "yatpool-solar-farm",
+      "name": "Yatpool Solar Farm",
+      "state": "VIC",
+      "technology": "solar",
+      "capacity_mw": 81.0,
+      "mlf_by_year": {
+        "2021-22": 0.8673,
+        "2020-21": 0.8045,
+        "2023-24": 0.8877,
+        "2022-23": 0.8886,
+        "2025-26": 0.8895,
+        "2024-25": 0.8506
+      },
+      "latest_fy": "2025-26",
+      "latest_mlf": 0.8895
+    },
+    {
+      "id": "crowlands-wind-farm",
+      "name": "Crowlands Wind Farm",
+      "state": "VIC",
+      "technology": "wind",
+      "capacity_mw": 79.95,
+      "mlf_by_year": {
+        "2021-22": 0.8985,
+        "2020-21": 0.9026,
+        "2023-24": 0.8904,
+        "2022-23": 0.8877,
+        "2025-26": 0.9004,
+        "2024-25": 0.8833
+      },
+      "latest_fy": "2025-26",
+      "latest_mlf": 0.9004
+    },
+    {
+      "id": "oaklands-hill-wind-farm",
+      "name": "Oaklands Hill Wind Farm",
+      "state": "VIC",
+      "technology": "wind",
+      "capacity_mw": 68.0,
+      "mlf_by_year": {
+        "2021-22": 1.0035,
+        "2020-21": 1.0079,
+        "2023-24": 0.9933,
+        "2022-23": 0.9972,
+        "2025-26": 1.0018,
+        "2024-25": 0.9993
+      },
+      "latest_fy": "2025-26",
+      "latest_mlf": 1.0018
+    },
+    {
+      "id": "cherry-tree-wind-farm",
+      "name": "Cherry Tree Wind Farm",
+      "state": "VIC",
+      "technology": "wind",
+      "capacity_mw": 57.6,
+      "mlf_by_year": {
+        "2021-22": 0.9959,
+        "2020-21": 0.9958,
+        "2023-24": 0.9974,
+        "2022-23": 0.9955,
+        "2025-26": 0.998,
+        "2024-25": 0.9976
+      },
+      "latest_fy": "2025-26",
+      "latest_mlf": 0.998
+    },
+    {
+      "id": "salt-creek-wind-farm",
+      "name": "Salt Creek Wind Farm",
+      "state": "VIC",
+      "technology": "wind",
+      "capacity_mw": 54.0,
+      "mlf_by_year": {
+        "2021-22": 0.9515,
+        "2020-21": 0.9588,
+        "2023-24": 0.9476,
+        "2022-23": 0.9584,
+        "2025-26": 0.9519,
+        "2024-25": 0.9388
+      },
+      "latest_fy": "2025-26",
+      "latest_mlf": 0.9519
+    },
+    {
+      "id": "challicum-hills",
+      "name": "Challicum Hills",
+      "state": "VIC",
+      "technology": "wind",
+      "capacity_mw": 52.5,
+      "mlf_by_year": {
+        "2021-22": 0.9699,
+        "2020-21": 0.9711,
+        "2023-24": 0.9759,
+        "2022-23": 0.9699,
+        "2025-26": 0.9825,
+        "2024-25": 0.9718
+      },
+      "latest_fy": "2025-26",
+      "latest_mlf": 0.9825
+    },
+    {
+      "id": "gannawarra-solar-farm",
+      "name": "Gannawarra Solar Farm",
+      "state": "VIC",
+      "technology": "solar",
+      "capacity_mw": 50.0,
+      "mlf_by_year": {
+        "2021-22": 0.945,
+        "2020-21": 0.9328,
+        "2023-24": 0.9851,
+        "2022-23": 0.9681,
+        "2025-26": 0.9305,
+        "2024-25": 0.8962
+      },
+      "latest_fy": "2025-26",
+      "latest_mlf": 0.9305
+    },
+    {
+      "id": "mokoan-solar-farm",
+      "name": "Mokoan Solar Farm",
+      "state": "VIC",
+      "technology": "solar",
+      "capacity_mw": 46.0,
+      "mlf_by_year": {
+        "2025-26": 0.9415,
+        "2024-25": 0.9484
+      },
+      "latest_fy": "2025-26",
+      "latest_mlf": 0.9415
+    },
+    {
+      "id": "kiata-wind-farm",
+      "name": "Kiata Wind Farm",
+      "state": "VIC",
+      "technology": "wind",
+      "capacity_mw": 31.0,
+      "mlf_by_year": {
+        "2023-24": 0.8827,
+        "2022-23": 0.8788,
+        "2025-26": 0.8959,
+        "2024-25": 0.8733
+      },
+      "latest_fy": "2025-26",
+      "latest_mlf": 0.8959
+    },
+    {
+      "id": "yambuk",
+      "name": "Yambuk",
+      "state": "VIC",
+      "technology": "wind",
+      "capacity_mw": 30.0,
+      "mlf_by_year": {
+        "2021-22": 1.0035,
+        "2020-21": 1.0079,
+        "2023-24": 0.9933,
+        "2022-23": 0.9972,
+        "2025-26": 1.0018,
+        "2024-25": 0.9993
+      },
+      "latest_fy": "2025-26",
+      "latest_mlf": 1.0018
+    },
+    {
+      "id": "kerang-solar-plant",
+      "name": "Kerang Solar Plant",
+      "state": "VIC",
+      "technology": "solar",
+      "capacity_mw": 30.0,
+      "mlf_by_year": {
+        "2025-26": 0.9329,
+        "2024-25": 0.8964
+      },
+      "latest_fy": "2025-26",
+      "latest_mlf": 0.9329
+    }
+  ],
+  "state_summaries": [
+    {
+      "state": "NSW",
+      "fy": "2020-21",
+      "n": 34,
+      "p25": 0.9042,
+      "median": 0.944,
+      "p75": 0.9653,
+      "min": 0.7844,
+      "max": 1.0103
+    },
+    {
+      "state": "NSW",
+      "fy": "2021-22",
+      "n": 37,
+      "p25": 0.8813,
+      "median": 0.9159,
+      "p75": 0.9444,
+      "min": 0.7953,
+      "max": 1.0122
+    },
+    {
+      "state": "NSW",
+      "fy": "2022-23",
+      "n": 40,
+      "p25": 0.8828,
+      "median": 0.9134,
+      "p75": 0.9442,
+      "min": 0.7973,
+      "max": 1.0118
+    },
+    {
+      "state": "NSW",
+      "fy": "2023-24",
+      "n": 43,
+      "p25": 0.8929,
+      "median": 0.9224,
+      "p75": 0.955,
+      "min": 0.7977,
+      "max": 1.0266
+    },
+    {
+      "state": "NSW",
+      "fy": "2024-25",
+      "n": 47,
+      "p25": 0.8694,
+      "median": 0.9096,
+      "p75": 0.9447,
+      "min": 0.7774,
+      "max": 1.0205
+    },
+    {
+      "state": "NSW",
+      "fy": "2025-26",
+      "n": 47,
+      "p25": 0.8828,
+      "median": 0.9278,
+      "p75": 0.9564,
+      "min": 0.8149,
+      "max": 1.0278
+    },
+    {
+      "state": "QLD",
+      "fy": "2020-21",
+      "n": 19,
+      "p25": 0.8822,
+      "median": 0.8904,
+      "p75": 0.9645,
+      "min": 0.8647,
+      "max": 0.9851
+    },
+    {
+      "state": "QLD",
+      "fy": "2021-22",
+      "n": 22,
+      "p25": 0.9267,
+      "median": 0.9472,
+      "p75": 0.9789,
+      "min": 0.9156,
+      "max": 0.9951
+    },
+    {
+      "state": "QLD",
+      "fy": "2022-23",
+      "n": 26,
+      "p25": 0.9297,
+      "median": 0.9527,
+      "p75": 0.9743,
+      "min": 0.9177,
+      "max": 0.9861
+    },
+    {
+      "state": "QLD",
+      "fy": "2023-24",
+      "n": 26,
+      "p25": 0.9101,
+      "median": 0.9509,
+      "p75": 0.9716,
+      "min": 0.8981,
+      "max": 0.9914
+    },
+    {
+      "state": "QLD",
+      "fy": "2024-25",
+      "n": 28,
+      "p25": 0.9328,
+      "median": 0.9566,
+      "p75": 0.9731,
+      "min": 0.9116,
+      "max": 0.985
+    },
+    {
+      "state": "QLD",
+      "fy": "2025-26",
+      "n": 28,
+      "p25": 0.9396,
+      "median": 0.9596,
+      "p75": 0.9776,
+      "min": 0.9318,
+      "max": 0.9888
+    },
+    {
+      "state": "SA",
+      "fy": "2020-21",
+      "n": 15,
+      "p25": 0.9565,
+      "median": 0.9685,
+      "p75": 0.9744,
+      "min": 0.82,
+      "max": 1.005
+    },
+    {
+      "state": "SA",
+      "fy": "2021-22",
+      "n": 15,
+      "p25": 0.953,
+      "median": 0.9597,
+      "p75": 0.9778,
+      "min": 0.811,
+      "max": 1.0113
+    },
+    {
+      "state": "SA",
+      "fy": "2022-23",
+      "n": 16,
+      "p25": 0.9516,
+      "median": 0.9567,
+      "p75": 0.9643,
+      "min": 0.8174,
+      "max": 1.0036
+    },
+    {
+      "state": "SA",
+      "fy": "2023-24",
+      "n": 17,
+      "p25": 0.9513,
+      "median": 0.9601,
+      "p75": 0.9671,
+      "min": 0.8073,
+      "max": 1.0063
+    },
+    {
+      "state": "SA",
+      "fy": "2024-25",
+      "n": 18,
+      "p25": 0.9439,
+      "median": 0.9565,
+      "p75": 0.9643,
+      "min": 0.8179,
+      "max": 1.0096
+    },
+    {
+      "state": "SA",
+      "fy": "2025-26",
+      "n": 18,
+      "p25": 0.9479,
+      "median": 0.9614,
+      "p75": 0.9718,
+      "min": 0.8456,
+      "max": 1.0037
+    },
+    {
+      "state": "TAS",
+      "fy": "2020-21",
+      "n": 2,
+      "p25": 0.912,
+      "median": 0.9216,
+      "p75": 0.9312,
+      "min": 0.9024,
+      "max": 0.9408
+    },
+    {
+      "state": "TAS",
+      "fy": "2021-22",
+      "n": 2,
+      "p25": 0.9078,
+      "median": 0.9157,
+      "p75": 0.9235,
+      "min": 0.8999,
+      "max": 0.9314
+    },
+    {
+      "state": "TAS",
+      "fy": "2022-23",
+      "n": 2,
+      "p25": 0.9262,
+      "median": 0.9355,
+      "p75": 0.9449,
+      "min": 0.9168,
+      "max": 0.9543
+    },
+    {
+      "state": "TAS",
+      "fy": "2023-24",
+      "n": 2,
+      "p25": 0.9186,
+      "median": 0.9254,
+      "p75": 0.9321,
+      "min": 0.9119,
+      "max": 0.9388
+    },
+    {
+      "state": "TAS",
+      "fy": "2024-25",
+      "n": 2,
+      "p25": 0.9268,
+      "median": 0.9336,
+      "p75": 0.9405,
+      "min": 0.9199,
+      "max": 0.9473
+    },
+    {
+      "state": "TAS",
+      "fy": "2025-26",
+      "n": 2,
+      "p25": 0.9214,
+      "median": 0.9328,
+      "p75": 0.9442,
+      "min": 0.9101,
+      "max": 0.9555
+    },
+    {
+      "state": "VIC",
+      "fy": "2020-21",
+      "n": 26,
+      "p25": 0.8984,
+      "median": 0.9491,
+      "p75": 0.9809,
+      "min": 0.8043,
+      "max": 1.0079
+    },
+    {
+      "state": "VIC",
+      "fy": "2021-22",
+      "n": 27,
+      "p25": 0.8967,
+      "median": 0.9459,
+      "p75": 0.9811,
+      "min": 0.8504,
+      "max": 1.0035
+    },
+    {
+      "state": "VIC",
+      "fy": "2022-23",
+      "n": 28,
+      "p25": 0.8892,
+      "median": 0.9496,
+      "p75": 0.9794,
+      "min": 0.8661,
+      "max": 0.9977
+    },
+    {
+      "state": "VIC",
+      "fy": "2023-24",
+      "n": 30,
+      "p25": 0.8915,
+      "median": 0.9576,
+      "p75": 0.9843,
+      "min": 0.8768,
+      "max": 0.9974
+    },
+    {
+      "state": "VIC",
+      "fy": "2024-25",
+      "n": 34,
+      "p25": 0.8839,
+      "median": 0.9465,
+      "p75": 0.9786,
+      "min": 0.8363,
+      "max": 0.9993
+    },
+    {
+      "state": "VIC",
+      "fy": "2025-26",
+      "n": 34,
+      "p25": 0.9011,
+      "median": 0.9505,
+      "p75": 0.9841,
+      "min": 0.8785,
+      "max": 1.0018
+    }
+  ],
+  "state_recent_rrp": {
+    "NSW": 80.23,
+    "QLD": 64.03,
+    "SA": 62.54,
+    "TAS": 91.04,
+    "VIC": 55.28
+  },
+  "methodology": {
+    "mlf_source": "AEMO Marginal Loss Factor publications (PDFs), per financial year.",
+    "mlf_scope": "Generation MLFs only (load + bidirectional tables excluded). Where a project has multiple DUIDs the per-year MLF is the simple mean across units.",
+    "matching": "AEMO station names are matched to AURES project names by aggressive normalisation (lowercase, strip \"farm/park/solar/wind/station/hub\", strip trailing unit numbers) + state. Only operational wind/solar/hybrid projects are included in this dataset.",
+    "rrp_source": "state_recent_rrp is the median of recent monthly RRPs from the OpenElectricity feed (last 13 months covered by AURES market-prices). Historical per-state RRP is not yet in AURES, so the time-series tab plots MLF only.",
+    "caveats": "A small number of AEMO-listed units do not match an AURES project (decommissioned, name mismatch beyond fuzzy matcher, or AURES coverage gap). These appear in unmatched logs at import time but not in this output."
+  },
+  "sources": [
+    {
+      "fy": "2021-22 + 2020-21",
+      "title": "AEMO MLF Report FY2021-22",
+      "url": "https://aemo.com.au/-/media/files/electricity/nem/security_and_reliability/loss_factors_and_regional_boundaries/2021-22/marginal-loss-factors-for-the-2021-22-financial-year.pdf"
+    },
+    {
+      "fy": "2023-24 + 2022-23",
+      "title": "AEMO MLF Report FY2023-24",
+      "url": "https://www.aemo.com.au/-/media/files/electricity/nem/security_and_reliability/loss_factors_and_regional_boundaries/2023-24/marginal-loss-factors-for-the-2023-24-financia-year-pdf.pdf"
+    },
+    {
+      "fy": "2025-26 + 2024-25",
+      "title": "AEMO MLF Report FY2025-26",
+      "url": "https://www.aemo.com.au/-/media/files/electricity/nem/security_and_reliability/loss_factors_and_regional_boundaries/2025-26-marginal-loss-factors/marginal-loss-factors-for-the-2025-26-fin-year.pdf"
+    }
+  ]
+}

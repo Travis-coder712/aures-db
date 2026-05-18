@@ -11,6 +11,7 @@ import DrillPanel from '../../components/common/DrillPanel'
 import type { RevenueIntelData, MetricStats, RevenueProjectRanking } from '../../lib/types'
 import DataProvenance from '../../components/common/DataProvenance'
 import StateReportCard, { type ReportTech } from '../../components/intelligence/StateReportCard'
+import MlfHistory from '../../components/intelligence/MlfHistory'
 
 // ============================================================
 // Icons — defined BEFORE const arrays per project pattern
@@ -44,7 +45,7 @@ const ShieldIcon = () => (
 // Section navigation
 // ============================================================
 
-type SectionId = 'overview' | 'state-breakdown' | 'state-cards' | 'trouble' | 'magnitude' | 'value-factor'
+type SectionId = 'overview' | 'state-breakdown' | 'state-cards' | 'trouble' | 'magnitude' | 'value-factor' | 'mlf'
 
 const StateIcon = () => (
   <svg className="w-4 h-4" viewBox="0 0 20 20" fill="currentColor">
@@ -76,6 +77,12 @@ const CardIcon = () => (
   </svg>
 )
 
+const ScissorsIcon = () => (
+  <svg className="w-4 h-4" viewBox="0 0 20 20" fill="currentColor">
+    <path d="M14.142 5.858a2 2 0 11-2.828 2.828L10 7.41 4.95 12.46a2 2 0 11-1.414-1.414l5.05-5.05L7.171 4.586a2 2 0 112.828-2.828L11.414 3.17l2.728-2.728a1 1 0 011.414 1.414L12.828 4.586l1.314 1.272zM4 14a1 1 0 100-2 1 1 0 000 2zm0-8a1 1 0 100-2 1 1 0 000 2z" />
+  </svg>
+)
+
 const REV_SECTIONS: { id: SectionId; label: string; icon: React.ReactNode }[] = [
   { id: 'overview', label: 'Overview', icon: <DollarIcon /> },
   { id: 'state-breakdown', label: 'State Leaders', icon: <StateIcon /> },
@@ -83,6 +90,7 @@ const REV_SECTIONS: { id: SectionId; label: string; icon: React.ReactNode }[] = 
   { id: 'trouble', label: 'Revenue Pressure', icon: <AlertIcon /> },
   { id: 'magnitude', label: 'Fleet Revenue', icon: <ChartBarIcon /> },
   { id: 'value-factor', label: 'Value Factor', icon: <SparkleIcon /> },
+  { id: 'mlf', label: 'MLF History', icon: <ScissorsIcon /> },
 ]
 
 // ============================================================
@@ -732,6 +740,11 @@ export default function RevenueIntel() {
           ? <div className="flex items-center justify-center h-64"><div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500" /></div>
           : <ValueFactorSection wind={vfData?.wind ?? null} solar={vfData?.solar ?? null} />
       )}
+
+      {/* ============================================================ */}
+      {/* MLF History Section */}
+      {/* ============================================================ */}
+      {activeSection === 'mlf' && <MlfHistory />}
 
       {/* Drill-down panel — opens when a Revenue by Tech bar is clicked */}
       <DrillPanel
