@@ -1,5 +1,5 @@
 import { useState, useEffect, useMemo } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useSearchParams } from 'react-router-dom'
 import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip,
   ResponsiveContainer, LineChart, Line, Legend, Cell, ReferenceLine,
@@ -12,6 +12,7 @@ import type { RevenueIntelData, MetricStats, RevenueProjectRanking } from '../..
 import DataProvenance from '../../components/common/DataProvenance'
 import StateReportCard, { type ReportTech } from '../../components/intelligence/StateReportCard'
 import MlfHistory from '../../components/intelligence/MlfHistory'
+import CommissioningRamp from '../../components/intelligence/CommissioningRamp'
 
 // ============================================================
 // Icons — defined BEFORE const arrays per project pattern
@@ -45,7 +46,7 @@ const ShieldIcon = () => (
 // Section navigation
 // ============================================================
 
-type SectionId = 'overview' | 'state-breakdown' | 'state-cards' | 'trouble' | 'magnitude' | 'value-factor' | 'mlf'
+type SectionId = 'overview' | 'state-breakdown' | 'state-cards' | 'trouble' | 'magnitude' | 'value-factor' | 'mlf' | 'commissioning'
 
 const StateIcon = () => (
   <svg className="w-4 h-4" viewBox="0 0 20 20" fill="currentColor">
@@ -83,6 +84,12 @@ const ScissorsIcon = () => (
   </svg>
 )
 
+const RampIcon = () => (
+  <svg className="w-4 h-4" viewBox="0 0 20 20" fill="currentColor">
+    <path fillRule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm14.293-9.707a1 1 0 010 1.414L11 15l-3-3-4 4-1.414-1.414L8 9l3 3 5.293-5.293a1 1 0 011.414 0z" clipRule="evenodd" />
+  </svg>
+)
+
 const REV_SECTIONS: { id: SectionId; label: string; icon: React.ReactNode }[] = [
   { id: 'overview', label: 'Overview', icon: <DollarIcon /> },
   { id: 'state-breakdown', label: 'State Leaders', icon: <StateIcon /> },
@@ -91,6 +98,7 @@ const REV_SECTIONS: { id: SectionId; label: string; icon: React.ReactNode }[] = 
   { id: 'magnitude', label: 'Fleet Revenue', icon: <ChartBarIcon /> },
   { id: 'value-factor', label: 'Value Factor', icon: <SparkleIcon /> },
   { id: 'mlf', label: 'MLF History', icon: <ScissorsIcon /> },
+  { id: 'commissioning', label: 'Commissioning Ramp', icon: <RampIcon /> },
 ]
 
 // ============================================================
@@ -134,10 +142,13 @@ const getBessField = (row: any, field: string): MetricStats | undefined => row?.
 type SelectedYear = 2024 | 2025
 
 export default function RevenueIntel() {
+  const [searchParams] = useSearchParams()
+  const initialSection = (searchParams.get('section') as SectionId | null) || 'overview'
+  const initialProjectId = searchParams.get('project')
   const [data, setData] = useState<RevenueIntelData | null>(null)
   const [loading, setLoading] = useState(true)
   const [selectedYear, setSelectedYear] = useState<SelectedYear>(2024)
-  const [activeSection, setActiveSection] = useState<SectionId>('overview')
+  const [activeSection, setActiveSection] = useState<SectionId>(initialSection)
   const [selectedTech, setSelectedTech] = useState<string>('bess')
   const [selectedState, setSelectedState] = useState<string>('all')
   const [drill, setDrill] = useState<{ dim: 'tech' | 'state'; key: string; label: string } | null>(null)
@@ -745,6 +756,13 @@ export default function RevenueIntel() {
       {/* MLF History Section */}
       {/* ============================================================ */}
       {activeSection === 'mlf' && <MlfHistory />}
+
+      {/* ============================================================ */}
+      {/* Commissioning Ramp Section */}
+      {/* ============================================================ */}
+      {activeSection === 'commissioning' && (
+        <CommissioningRamp initialProjectId={initialProjectId} />
+      )}
 
       {/* Drill-down panel — opens when a Revenue by Tech bar is clicked */}
       <DrillPanel

@@ -253,6 +253,7 @@ export const PAGE_SOURCES: Record<string, SourceId[]> = {
   performance: ['openelectricity_performance', 'json_export'],
   'bess-bidding': ['nemweb_bids', 'json_export'],
   'revenue-intel': ['openelectricity_performance', 'market_prices', 'json_export'],
+  'commissioning-ramp': ['openelectricity_performance', 'nemweb_dispatchload', 'market_prices', 'aemo_generation_info', 'json_export'],
 
   // Pipeline & Delivery
   'scheme-tracker': ['web_research', 'aemo_generation_info', 'json_export'],

@@ -421,6 +421,17 @@ export async function fetchRevenueIntel(): Promise<RevenueIntelData | null> {
   } catch { return null }
 }
 
+let commissioningRampCache: import('./types').CommissioningRampData | null = null
+export async function fetchCommissioningRamp(): Promise<import('./types').CommissioningRampData | null> {
+  if (commissioningRampCache) return commissioningRampCache
+  try {
+    const resp = await fetch(`${BASE}/analytics/intelligence/commissioning-ramp.json`)
+    if (!resp.ok) return null
+    commissioningRampCache = (await resp.json()) as import('./types').CommissioningRampData
+    return commissioningRampCache
+  } catch { return null }
+}
+
 let gridConnectionCache: GridConnectionData | null = null
 export async function fetchGridConnection(): Promise<GridConnectionData | null> {
   if (gridConnectionCache) return gridConnectionCache

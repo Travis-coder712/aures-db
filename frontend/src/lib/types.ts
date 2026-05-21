@@ -1111,6 +1111,81 @@ export interface RevenueIntelData {
 }
 
 // ============================================================
+// Commissioning Ramp (early generation / pre-COD revenue)
+// ============================================================
+
+export type RevenueBasis = 'settled' | 'modelled' | 'unavailable'
+export type LifetimeCfBasis = 'high' | 'medium' | 'low' | 'no_data'
+export type CodBasis = 'timeline_cod_event' | 'projects.cod_current' | 'projects.cod_original' | 'aemo_full_year_commissioning' | 'none'
+export type DataQualityFlag = 'pre-2021-cutoff' | 'short-history' | 'no-settled-revenue' | 'not-yet-stable' | 'no-cod'
+
+export interface CommissioningRampMonth {
+  ym: string
+  energy_mwh: number | null
+  cf_pct: number | null
+  revenue_aud: number | null
+  revenue_basis: RevenueBasis
+  partial_month: boolean
+}
+
+export interface CommissioningRampAsset {
+  project_id: string
+  name: string
+  tech: 'solar' | 'wind' | 'hybrid'
+  state: string | null
+  region: string | null
+  capacity_mw: number | null
+  cod_declared: string | null
+  cod_basis: CodBasis
+  first_generation_date: string
+  stable_output_date: string | null
+  ramp_days: number | null
+  commissioning_year: number | null
+  lifetime_cf_pct: number | null
+  lifetime_cf_basis: LifetimeCfBasis
+  early_energy_mwh: number
+  early_revenue_aud: number | null
+  early_revenue_per_mw: number | null
+  early_output_pct: number | null
+  early_revenue_basis_mix: { settled: number; modelled: number } | null
+  monthly_ramp: CommissioningRampMonth[]
+  data_quality_flags: DataQualityFlag[]
+}
+
+export interface CommissioningRampRollupEntry {
+  state?: string
+  tech?: string
+  year?: number
+  asset_count: number
+  ramp_days: MetricStats
+  early_revenue_aud: MetricStats
+  early_revenue_per_mw: MetricStats
+  early_output_pct: MetricStats
+}
+
+export interface CommissioningRampData {
+  generated_at: string
+  definition_version: number
+  definitions: Record<string, string>
+  data_sources: Record<string, string>
+  known_gaps: string[]
+  quality_summary: {
+    asset_count: number
+    flag_counts: Partial<Record<DataQualityFlag, number>>
+    lifetime_cf_basis_counts: Partial<Record<LifetimeCfBasis, number>>
+    cod_basis_counts: Partial<Record<CodBasis, number>>
+  }
+  skipped_count: number
+  assets: CommissioningRampAsset[]
+  rollups: {
+    by_state_year: CommissioningRampRollupEntry[]
+    by_tech_year: CommissioningRampRollupEntry[]
+    by_state: CommissioningRampRollupEntry[]
+    by_tech: CommissioningRampRollupEntry[]
+  }
+}
+
+// ============================================================
 // NEM Activities Timeline
 // ============================================================
 

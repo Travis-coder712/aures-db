@@ -1,10 +1,12 @@
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import {
   LineChart, Line, XAxis, YAxis, CartesianGrid,
   Tooltip, ResponsiveContainer, Legend, BarChart, Bar,
 } from 'recharts'
-import type { Project, MonthlyPerformanceEntry } from '../../lib/types'
+import type { Project, MonthlyPerformanceEntry, CommissioningRampAsset } from '../../lib/types'
 import { useMonthlyPerformance } from '../../hooks/usePerformanceData'
+import { fetchCommissioningRamp } from '../../lib/dataService'
 import WindValueAnalysis from './WindValueAnalysis'
 import SolarValueAnalysis from './SolarValueAnalysis'
 import BessValueAnalysis from './BessValueAnalysis'
@@ -162,6 +164,8 @@ export default function PerformanceTab({ project }: Props) {
 
   return (
     <div className="space-y-6">
+      <CommissioningRampCard projectId={project.id} technology={project.technology} />
+
       {/* Year selector */}
       <div className="flex items-center gap-2 flex-wrap">
         <span className="text-[10px] uppercase tracking-wider text-[var(--color-text-muted)] font-semibold">View:</span>
@@ -873,4 +877,77 @@ function getCFTrend(summary: { year: number; avgCF: number }[]): string {
   const diff = last - first
   if (Math.abs(diff) < 0.5) return 'Stable'
   return diff > 0 ? `+${diff.toFixed(1)}%` : `${diff.toFixed(1)}%`
+}
+
+// ============================================================
+// Commissioning Ramp card — only shown for solar/wind/hybrid
+// assets that appear in commissioning-ramp.json
+// ============================================================
+
+function CommissioningRampCard({ projectId, technology }: { projectId: string; technology: string }) {
+  const [asset, setAsset] = useState<CommissioningRampAsset | null | undefined>(undefined)
+  const eligible = technology === 'solar' || technology === 'wind' || technology === 'hybrid'
+
+  useEffect(() => {
+    if (!eligible) { setAsset(null); return }
+    fetchCommissioningRamp().then(d => {
+      if (!d) { setAsset(null); return }
+      const a = d.assets.find(x => x.project_id === projectId)
+      setAsset(a ?? null)
+    })
+  }, [projectId, eligible])
+
+  if (!eligible || asset === undefined) return null
+  if (asset === null) return null
+
+  const mix = asset.early_revenue_basis_mix
+  return (
+    <div className="bg-gradient-to-br from-blue-500/5 to-emerald-500/5 border border-blue-500/30 rounded-xl p-4">
+      <div className="flex items-start justify-between gap-3 mb-3">
+        <div>
+          <div className="text-[10px] uppercase tracking-wider text-blue-300 font-semibold">Commissioning Ramp</div>
+          <h3 className="text-base font-semibold text-[var(--color-text)]">
+            {asset.ramp_days != null ? `${asset.ramp_days} days from first generation to stable output` : 'Still ramping'}
+          </h3>
+        </div>
+        <Link
+          to={`/intelligence/revenue?section=commissioning&project=${projectId}`}
+          className="text-xs text-blue-400 hover:text-blue-300 underline whitespace-nowrap"
+        >
+          View ramp curve &rarr;
+        </Link>
+      </div>
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-3 text-sm">
+        <RampFact label="First generation" value={asset.first_generation_date.slice(0, 10)} />
+        <RampFact label="Stable output" value={asset.stable_output_date ? asset.stable_output_date.slice(0, 10) : 'Not yet'} />
+        <RampFact label="Early revenue" value={fmtCardAud(asset.early_revenue_aud) + (mix ? ` (${Math.round(mix.modelled * 100)}% modelled)` : '')} />
+        <RampFact label="Early output" value={asset.early_output_pct != null ? `${asset.early_output_pct.toFixed(1)}% of theoretical` : '—'} />
+      </div>
+      {asset.data_quality_flags.length > 0 && (
+        <div className="mt-3 flex flex-wrap gap-1">
+          {asset.data_quality_flags.map(f => (
+            <span key={f} className="text-[10px] px-1.5 py-0.5 rounded bg-amber-500/10 text-amber-300 border border-amber-500/30">
+              {f}
+            </span>
+          ))}
+        </div>
+      )}
+    </div>
+  )
+}
+
+function RampFact({ label, value }: { label: string; value: string }) {
+  return (
+    <div>
+      <div className="text-[10px] uppercase tracking-wider text-[var(--color-text-muted)]">{label}</div>
+      <div className="text-sm text-[var(--color-text)] font-medium">{value}</div>
+    </div>
+  )
+}
+
+function fmtCardAud(v: number | null | undefined): string {
+  if (v == null) return '—'
+  if (Math.abs(v) >= 1_000_000) return `$${(v / 1_000_000).toFixed(1)}M`
+  if (Math.abs(v) >= 1000) return `$${(v / 1000).toFixed(0)}k`
+  return `$${Math.round(v)}`
 }
