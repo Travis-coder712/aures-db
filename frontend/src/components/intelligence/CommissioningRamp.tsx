@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip,
-  ResponsiveContainer, ComposedChart, Line, Legend, Cell,
+  ResponsiveContainer, ComposedChart, Line, LineChart, Legend, Cell,
 } from 'recharts'
 import { fetchCommissioningRamp } from '../../lib/dataService'
 import type {
@@ -335,6 +335,14 @@ export default function CommissioningRamp({ initialProjectId }: Props) {
         </ChartWrapper>
       </div>
 
+      {/* Ramp curves over time */}
+      <RampCurvesChart
+        filteredAssets={filteredAssets}
+        allAssets={data.assets}
+        techFilter={techFilter}
+        onAssetClick={setDrillAsset}
+      />
+
       {/* Asset table */}
       <div className="bg-[var(--color-bg-card)] rounded-xl border border-[var(--color-border)] overflow-hidden">
         <div className="p-4 border-b border-[var(--color-border)]">
@@ -564,6 +572,297 @@ function Fact({ label, value }: { label: string; value: string }) {
     <div className="bg-[var(--color-bg)] rounded-lg p-2.5 border border-[var(--color-border)]">
       <div className="text-[10px] uppercase tracking-wider text-[var(--color-text-muted)]">{label}</div>
       <div className="text-sm text-[var(--color-text)] font-medium mt-0.5">{value}</div>
+    </div>
+  )
+}
+
+// ============================================================
+// Ramp Curves over time — individual asset trajectories
+// aligned at "month 0 = first generation", plus optional
+// group + fleet average overlays.
+// ============================================================
+
+type YMetric = 'cf_pct_of_lifetime' | 'cf_pct' | 'cumulative_pct'
+
+const Y_METRIC_LABELS: Record<YMetric, string> = {
+  cf_pct_of_lifetime: 'CF as % of asset lifetime CF',
+  cf_pct: 'Monthly capacity factor (%)',
+  cumulative_pct: 'Cumulative energy (% of ramp-window total)',
+}
+
+const MAX_INDIVIDUAL_LINES = 40
+const MAX_MONTHS_X = 30
+
+function RampCurvesChart({
+  filteredAssets,
+  allAssets,
+  techFilter,
+  onAssetClick,
+}: {
+  filteredAssets: CommissioningRampAsset[]
+  allAssets: CommissioningRampAsset[]
+  techFilter: TechFilter
+  onAssetClick: (a: CommissioningRampAsset) => void
+}) {
+  const [yMetric, setYMetric] = useState<YMetric>('cf_pct_of_lifetime')
+  const [showGroupAvg, setShowGroupAvg] = useState(true)
+  const [showOverallAvg, setShowOverallAvg] = useState(true)
+  const [showIndividual, setShowIndividual] = useState(true)
+  const [hoveredAsset, setHoveredAsset] = useState<string | null>(null)
+
+  const limitedAssets = useMemo(() => {
+    if (filteredAssets.length <= MAX_INDIVIDUAL_LINES) return filteredAssets
+    return [...filteredAssets]
+      .sort((a, b) => b.first_generation_date.localeCompare(a.first_generation_date))
+      .slice(0, MAX_INDIVIDUAL_LINES)
+  }, [filteredAssets])
+
+  const overallPool = useMemo(
+    () => (techFilter === 'all' ? allAssets : allAssets.filter(a => a.tech === techFilter)),
+    [allAssets, techFilter],
+  )
+
+  const computeSeries = (asset: CommissioningRampAsset): Array<{ idx: number; y: number | null }> => {
+    let cum = 0
+    const total = asset.monthly_ramp.reduce((s, m) => s + (m.energy_mwh ?? 0), 0)
+    return asset.monthly_ramp.map((m, i) => {
+      cum += m.energy_mwh ?? 0
+      let y: number | null = null
+      if (yMetric === 'cf_pct_of_lifetime') {
+        y = (m.cf_pct != null && asset.lifetime_cf_pct && asset.lifetime_cf_pct > 0)
+          ? (m.cf_pct / asset.lifetime_cf_pct) * 100
+          : null
+      } else if (yMetric === 'cf_pct') {
+        y = m.cf_pct
+      } else if (yMetric === 'cumulative_pct' && total > 0) {
+        y = (cum / total) * 100
+      }
+      return { idx: i, y }
+    })
+  }
+
+  const chartData = useMemo(() => {
+    const rows: Array<Record<string, number | null>> = []
+    for (let i = 0; i < MAX_MONTHS_X; i++) rows.push({ monthIdx: i })
+
+    if (showIndividual) {
+      for (const a of limitedAssets) {
+        const series = computeSeries(a)
+        for (const p of series) {
+          if (p.idx < MAX_MONTHS_X) rows[p.idx][a.project_id] = p.y
+        }
+      }
+    }
+    const buildAverage = (pool: CommissioningRampAsset[], key: string) => {
+      const buckets: number[][] = Array.from({ length: MAX_MONTHS_X }, () => [])
+      for (const a of pool) {
+        const series = computeSeries(a)
+        for (const p of series) {
+          if (p.idx < MAX_MONTHS_X && p.y != null && Number.isFinite(p.y)) buckets[p.idx].push(p.y)
+        }
+      }
+      for (let i = 0; i < MAX_MONTHS_X; i++) {
+        rows[i][key] = buckets[i].length >= 2
+          ? buckets[i].reduce((s, v) => s + v, 0) / buckets[i].length
+          : null
+      }
+    }
+    if (showGroupAvg && filteredAssets.length > 0) buildAverage(filteredAssets, '__group_avg')
+    if (showOverallAvg && overallPool.length > 0) buildAverage(overallPool, '__overall_avg')
+    return rows
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [limitedAssets, filteredAssets, overallPool, yMetric, showGroupAvg, showOverallAvg, showIndividual])
+
+  const groupAvgLabel = useMemo(() => {
+    const parts: string[] = []
+    if (techFilter !== 'all') parts.push(TECH_LABELS[techFilter])
+    // Pull states + years from the filtered set for a readable label
+    const states = Array.from(new Set(filteredAssets.map(a => a.state).filter(Boolean))) as string[]
+    const years = Array.from(new Set(filteredAssets.map(a => a.commissioning_year).filter(Boolean))) as number[]
+    if (states.length > 0 && states.length <= 3) parts.push(states.join('+'))
+    if (years.length > 0 && years.length <= 4) parts.push(years.sort().join(','))
+    return parts.length > 0 ? parts.join(' · ') : 'current filter'
+  }, [filteredAssets, techFilter])
+
+  const overallAvgLabel = techFilter === 'all'
+    ? 'all assets'
+    : `all ${TECH_LABELS[techFilter].toLowerCase()}`
+
+  const yTickFormatter = (v: number) => yMetric === 'cf_pct' ? `${v.toFixed(0)}%` : `${Math.round(v)}%`
+
+  return (
+    <div className="bg-[var(--color-bg-card)] rounded-xl p-4 border border-[var(--color-border)]">
+      <div className="flex items-start justify-between gap-3 mb-1 flex-wrap">
+        <div>
+          <h3 className="text-lg font-semibold text-[var(--color-text)]">Ramp curves over time</h3>
+          <p className="text-xs text-[var(--color-text-muted)]">
+            Each thin line is one asset, aligned at month 0 = first AEMO generation.
+            {filteredAssets.length > MAX_INDIVIDUAL_LINES && (
+              <span className="ml-1 text-amber-300">Showing {MAX_INDIVIDUAL_LINES} most-recent of {filteredAssets.length}.</span>
+            )}
+          </p>
+        </div>
+        {/* Toggles */}
+        <div className="flex flex-wrap items-center gap-3 text-[11px] text-[var(--color-text-muted)]">
+          <label className="flex items-center gap-1.5 cursor-pointer">
+            <input type="checkbox" checked={showIndividual} onChange={e => setShowIndividual(e.target.checked)} />
+            Individual assets
+          </label>
+          <label className="flex items-center gap-1.5 cursor-pointer">
+            <input type="checkbox" checked={showGroupAvg} onChange={e => setShowGroupAvg(e.target.checked)} />
+            <span className="inline-flex items-center gap-1">
+              <span className="inline-block w-3 h-[2px] bg-amber-400" /> Group avg ({groupAvgLabel}, n={filteredAssets.length})
+            </span>
+          </label>
+          <label className="flex items-center gap-1.5 cursor-pointer">
+            <input type="checkbox" checked={showOverallAvg} onChange={e => setShowOverallAvg(e.target.checked)} />
+            <span className="inline-flex items-center gap-1">
+              <span className="inline-block w-3 h-[2px] border-t border-dashed border-slate-300" /> Fleet avg ({overallAvgLabel}, n={overallPool.length})
+            </span>
+          </label>
+        </div>
+      </div>
+
+      {/* Y-metric toggle */}
+      <div className="flex flex-wrap items-center gap-2 mt-2 mb-3">
+        <span className="text-[11px] uppercase tracking-wider text-[var(--color-text-muted)]">Y-axis</span>
+        {(Object.keys(Y_METRIC_LABELS) as YMetric[]).map(m => (
+          <button key={m} onClick={() => setYMetric(m)}
+            className={`px-2 py-0.5 rounded text-[11px] border ${
+              yMetric === m
+                ? 'bg-blue-600 text-white border-blue-600'
+                : 'bg-transparent text-[var(--color-text-muted)] border-[var(--color-border)] hover:border-blue-500/30'
+            }`}>
+            {Y_METRIC_LABELS[m]}
+          </button>
+        ))}
+      </div>
+
+      <ResponsiveContainer width="100%" height={380}>
+        <LineChart data={chartData} margin={{ top: 5, right: 30, bottom: 5, left: 10 }}>
+          <CartesianGrid strokeDasharray="3 3" stroke="var(--color-border)" />
+          <XAxis
+            dataKey="monthIdx"
+            tick={{ fill: 'var(--color-text-muted)', fontSize: 11 }}
+            label={{ value: 'Months since first generation', position: 'insideBottom', offset: -2, fill: 'var(--color-text-muted)', fontSize: 11 }}
+          />
+          <YAxis
+            tick={{ fill: 'var(--color-text-muted)', fontSize: 11 }}
+            tickFormatter={yTickFormatter}
+            domain={yMetric === 'cf_pct' ? [0, 'auto'] : [0, 120]}
+          />
+          {yMetric === 'cf_pct_of_lifetime' && (
+            // Visual reference: 100% = stable
+            <Line dataKey={() => 100} stroke="#475569" strokeDasharray="4 4" dot={false} legendType="none" name="" isAnimationActive={false} />
+          )}
+          <Tooltip
+            content={(props) => (
+              <RampTooltip
+                props={props}
+                groupAvgLabel={groupAvgLabel}
+                overallAvgLabel={overallAvgLabel}
+                limitedAssets={limitedAssets}
+              />
+            )}
+          />
+
+          {showIndividual && limitedAssets.map(a => (
+            <Line
+              key={a.project_id}
+              dataKey={a.project_id}
+              stroke={TECH_COLOURS[a.tech]}
+              strokeOpacity={hoveredAsset === a.project_id ? 1 : 0.25}
+              strokeWidth={hoveredAsset === a.project_id ? 2 : 1}
+              dot={false}
+              activeDot={{ r: 4, onClick: () => onAssetClick(a) }}
+              connectNulls
+              isAnimationActive={false}
+              onMouseEnter={() => setHoveredAsset(a.project_id)}
+              onMouseLeave={() => setHoveredAsset(null)}
+            />
+          ))}
+          {showGroupAvg && (
+            <Line dataKey="__group_avg" stroke="#fbbf24" strokeWidth={3} dot={{ r: 3, fill: '#fbbf24' }} connectNulls isAnimationActive={false} name="__group_avg" />
+          )}
+          {showOverallAvg && (
+            <Line dataKey="__overall_avg" stroke="#e2e8f0" strokeWidth={2.5} strokeDasharray="6 4" dot={false} connectNulls isAnimationActive={false} name="__overall_avg" />
+          )}
+        </LineChart>
+      </ResponsiveContainer>
+
+      <p className="text-[11px] text-[var(--color-text-muted)] mt-2 italic">
+        Y-axis: {Y_METRIC_LABELS[yMetric]}. {yMetric === 'cf_pct_of_lifetime' && '100% (dashed grey) = asset has reached its own steady-state CF.'}
+        {' '}Click a point on an asset line to open its detail panel.
+      </p>
+    </div>
+  )
+}
+
+interface TooltipPayloadItem {
+  dataKey?: string | number
+  value?: number | string
+}
+
+function RampTooltip({
+  props,
+  groupAvgLabel,
+  overallAvgLabel,
+  limitedAssets,
+}: {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  props: any
+  groupAvgLabel: string
+  overallAvgLabel: string
+  limitedAssets: CommissioningRampAsset[]
+}) {
+  if (!props.active || !props.payload || props.payload.length === 0) return null
+  const payload = props.payload as TooltipPayloadItem[]
+  const items = payload.filter(p => p.value != null && Number.isFinite(Number(p.value)))
+  if (items.length === 0) return null
+
+  const groupAvg = items.find(p => p.dataKey === '__group_avg')
+  const overallAvg = items.find(p => p.dataKey === '__overall_avg')
+  const assetItems = items.filter(p => p.dataKey !== '__group_avg' && p.dataKey !== '__overall_avg')
+  // Top 5 by absolute y value
+  const topAssets = assetItems
+    .map(p => ({ id: String(p.dataKey), value: Number(p.value) }))
+    .sort((a, b) => b.value - a.value)
+    .slice(0, 5)
+
+  return (
+    <div className="bg-[var(--color-bg)] border border-[var(--color-border)] rounded-lg p-2.5 text-xs shadow-xl min-w-[220px]">
+      <div className="text-[var(--color-text)] font-semibold mb-1">Month {props.label}</div>
+      {groupAvg && (
+        <div className="flex justify-between gap-2 mb-0.5">
+          <span className="text-amber-300">Group avg ({groupAvgLabel})</span>
+          <span className="font-mono text-[var(--color-text)]">{Number(groupAvg.value).toFixed(0)}%</span>
+        </div>
+      )}
+      {overallAvg && (
+        <div className="flex justify-between gap-2 mb-0.5">
+          <span className="text-slate-300">Fleet avg ({overallAvgLabel})</span>
+          <span className="font-mono text-[var(--color-text)]">{Number(overallAvg.value).toFixed(0)}%</span>
+        </div>
+      )}
+      {topAssets.length > 0 && (
+        <>
+          {(groupAvg || overallAvg) && <div className="my-1 border-t border-[var(--color-border)]" />}
+          <div className="text-[10px] uppercase tracking-wider text-[var(--color-text-muted)] mb-0.5">
+            Top {topAssets.length} of {assetItems.length} assets
+          </div>
+          {topAssets.map(a => {
+            const asset = limitedAssets.find(x => x.project_id === a.id)
+            return (
+              <div key={a.id} className="flex justify-between gap-2">
+                <span className="truncate" style={{ color: TECH_COLOURS[asset?.tech ?? 'solar'] }}>
+                  {asset?.name ?? a.id}
+                </span>
+                <span className="font-mono text-[var(--color-text)] shrink-0">{a.value.toFixed(0)}%</span>
+              </div>
+            )
+          })}
+        </>
+      )}
     </div>
   )
 }
