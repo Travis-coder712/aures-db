@@ -319,10 +319,25 @@ def analyse_project(conn, project):
         return None
 
     flags = []
+    cod_declared, cod_basis = get_cod(conn, project)
+    if not cod_declared:
+        flags.append('no-cod')
+
+    # Censoring check: the ramp window isn't a real ramp when either
+    #   (a) the first AEMO dispatch we can see is at/before the data cutoff
+    #       (true first generation is unknowable), OR
+    #   (b) the declared COD predates first AEMO dispatch by more than
+    #       a typical commissioning window — meaning the asset was already
+    #       fully operational when AEMO daily data began, and the lifetime
+    #       CF baseline reflects today's curtailment regime rather than
+    #       the operating conditions during the "ramp" months.
     if first_gen <= DATA_CUTOFF_DATE:
-        # Generation was already happening when the AEMO daily snapshot starts:
-        # we can't see the true first day, so the ramp window is censored.
         flags.append('pre-2021-cutoff')
+    elif cod_declared:
+        cod_d = _parse_iso(cod_declared)
+        fg_d = _parse_iso(first_gen)
+        if cod_d and fg_d and (fg_d - cod_d).days > 60:
+            flags.append('pre-2021-cutoff')
 
     monthly_perf = get_monthly_perf(conn, project['id'])
     lifetime_cf, cf_basis = compute_lifetime_cf(monthly_perf)
@@ -334,10 +349,6 @@ def analyse_project(conn, project):
     stable_output = detect_stable_output(monthly_perf, lifetime_cf, first_gen)
     if not stable_output:
         flags.append('not-yet-stable')
-
-    cod_declared, cod_basis = get_cod(conn, project)
-    if not cod_declared:
-        flags.append('no-cod')
 
     # Days from first gen to stable output (None if not reached).
     ramp_days = None
@@ -523,7 +534,7 @@ def export_commissioning_ramp(conn):
             'No data field currently captures Practical Completion or Commercial Operations Date distinct from COD. Could be enriched from ASX/developer press releases.',
             'Modelled revenue uses regional average RRP, not asset volume-weighted captured price — typically over-estimates solar (sun-coincident price suppression) and is unavailable before 2024-08.',
             'Only 3 projects have an explicit commissioning timeline event; ramp dates are inferred from generation_daily for the rest.',
-            'Projects whose first generation pre-dates 2021-01-01 have censored ramp curves (flag: pre-2021-cutoff).',
+            "Projects whose COD pre-dates 2021-01-01 (the AEMO daily data start) have censored ramp curves — their declared first AEMO dispatch is just where the data window begins, not real first generation. Flag: pre-2021-cutoff. Hidden by default in the UI.",
         ],
         'quality_summary': quality,
         'skipped_count': skipped,

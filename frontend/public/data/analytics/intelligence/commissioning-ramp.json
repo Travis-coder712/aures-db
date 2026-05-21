@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-21T12:01:45",
+  "generated_at": "2026-05-21T12:47:11",
   "definition_version": 1,
   "definitions": {
     "first_generation_date": "First day in generation_daily where gen_mwh > 0.1 MWh for any linked DUID.",
@@ -19,12 +19,12 @@
     "No data field currently captures Practical Completion or Commercial Operations Date distinct from COD. Could be enriched from ASX/developer press releases.",
     "Modelled revenue uses regional average RRP, not asset volume-weighted captured price \u2014 typically over-estimates solar (sun-coincident price suppression) and is unavailable before 2024-08.",
     "Only 3 projects have an explicit commissioning timeline event; ramp dates are inferred from generation_daily for the rest.",
-    "Projects whose first generation pre-dates 2021-01-01 have censored ramp curves (flag: pre-2021-cutoff)."
+    "Projects whose COD pre-dates 2021-01-01 (the AEMO daily data start) have censored ramp curves \u2014 their declared first AEMO dispatch is just where the data window begins, not real first generation. Flag: pre-2021-cutoff. Hidden by default in the UI."
   ],
   "quality_summary": {
     "asset_count": 151,
     "flag_counts": {
-      "pre-2021-cutoff": 94,
+      "pre-2021-cutoff": 106,
       "short-history": 2
     },
     "lifetime_cf_basis_counts": {
@@ -530,7 +530,9 @@
           "partial_month": false
         }
       ],
-      "data_quality_flags": []
+      "data_quality_flags": [
+        "pre-2021-cutoff"
+      ]
     },
     {
       "project_id": "bannerton-solar-park",
@@ -1184,7 +1186,9 @@
           "partial_month": false
         }
       ],
-      "data_quality_flags": []
+      "data_quality_flags": [
+        "pre-2021-cutoff"
+      ]
     },
     {
       "project_id": "cathedral-rocks",
@@ -1235,7 +1239,9 @@
           "partial_month": false
         }
       ],
-      "data_quality_flags": []
+      "data_quality_flags": [
+        "pre-2021-cutoff"
+      ]
     },
     {
       "project_id": "cattle-hill-wind-farm",
@@ -3519,7 +3525,9 @@
           "partial_month": false
         }
       ],
-      "data_quality_flags": []
+      "data_quality_flags": [
+        "pre-2021-cutoff"
+      ]
     },
     {
       "project_id": "granville-harbour-wind-farm",
@@ -5362,7 +5370,9 @@
           "partial_month": false
         }
       ],
-      "data_quality_flags": []
+      "data_quality_flags": [
+        "pre-2021-cutoff"
+      ]
     },
     {
       "project_id": "lake-bonney-2-wind-farm",
@@ -5758,7 +5768,9 @@
           "partial_month": false
         }
       ],
-      "data_quality_flags": []
+      "data_quality_flags": [
+        "pre-2021-cutoff"
+      ]
     },
     {
       "project_id": "lincoln-gap-wind-farm-stage-1",
@@ -6746,7 +6758,9 @@
           "partial_month": false
         }
       ],
-      "data_quality_flags": []
+      "data_quality_flags": [
+        "pre-2021-cutoff"
+      ]
     },
     {
       "project_id": "murra-warra-wind-farm-stage-1",
@@ -6882,7 +6896,9 @@
           "partial_month": false
         }
       ],
-      "data_quality_flags": []
+      "data_quality_flags": [
+        "pre-2021-cutoff"
+      ]
     },
     {
       "project_id": "musselroe-wind-farm",
@@ -7427,7 +7443,9 @@
           "partial_month": false
         }
       ],
-      "data_quality_flags": []
+      "data_quality_flags": [
+        "pre-2021-cutoff"
+      ]
     },
     {
       "project_id": "port-augusta-renewable-energy-park-wind",
@@ -8141,7 +8159,9 @@
           "partial_month": false
         }
       ],
-      "data_quality_flags": []
+      "data_quality_flags": [
+        "pre-2021-cutoff"
+      ]
     },
     {
       "project_id": "stockyard-hill-wind-farm",
@@ -8496,7 +8516,9 @@
           "partial_month": false
         }
       ],
-      "data_quality_flags": []
+      "data_quality_flags": [
+        "pre-2021-cutoff"
+      ]
     },
     {
       "project_id": "sunraysia-solar-farm",
@@ -9079,7 +9101,9 @@
           "partial_month": false
         }
       ],
-      "data_quality_flags": []
+      "data_quality_flags": [
+        "pre-2021-cutoff"
+      ]
     },
     {
       "project_id": "wellington-north-solar-farm-lightsource",
