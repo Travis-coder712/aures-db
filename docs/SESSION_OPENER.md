@@ -18,11 +18,12 @@ verify any specific claim against current code before acting on it.
 ## 1. What this project is
 
 **AURES** (Australian Renewable Energy System) is a React 19 / Vite 6 /
-TypeScript 5 / Tailwind 4 PWA at **`/Users/travishughes/aures-db`**. It
-tracks 1,067 Australian renewable energy projects (wind, solar, BESS,
-hybrid, pumped hydro) with operational, financial, scheme, equipment,
-and performance intelligence — plus 12 learning modules covering the
-NEM, CIS/LTESA, BESS, REZs, planning, PPAs, financing, valuation.
+TypeScript 5 (strict) / Tailwind 4 / Recharts / Leaflet PWA at
+**`/Users/travishughes/aures-db`**. It tracks 1,067 Australian renewable
+energy projects (wind, solar, BESS, hybrid, pumped hydro) with
+operational, financial, scheme, equipment, and performance intelligence
+— plus 12 learning modules covering the NEM, CIS/LTESA, BESS, REZs,
+planning, PPAs, financing, valuation.
 
 SQLite at `database/aures.db` is the **source of truth** (~30 tables,
 1,067 projects, 224 with monthly performance, ~300k daily generation
@@ -51,7 +52,23 @@ If you add a top-level route or rename one, check whether
 
 - Based in Victoria. **Tests primarily on iPhone — mobile-first.**
 - Prefers **dark theme** (use CSS variables, never hardcode greys).
-- Wants **comprehensive features, not minimal slices.**
+- Wants **comprehensive features, not minimal slices.** Pushes for
+  depth over breadth (e.g. expanded an original 7-lesson stub into 17
+  lessons after seeing the first draft).
+- **Trust but verify.** He will call out factual claims that don't hold
+  up (caught a wrong ACT-PPA attribution; caught an MLF basin error).
+  **When uncertain about a fact, hedge or attribute the source —
+  don't fabricate.** "According to <source>" or "publicly disclosed
+  details are limited" is always better than asserting something you
+  haven't verified.
+- **When correcting a factual error in project data, leave an audit
+  trail.** Don't silently erase. Add a note to the project's
+  `stakeholder_issues` array (or equivalent) recording what was wrong,
+  what's right now, and why. This is the "White Rock pattern."
+- Likes **comprehensive checklists alongside calculators** (e.g. the
+  14-point PPA×CISA interactions list).
+- Reads PDFs on **both mobile and desktop** — keep them readable + small.
+- **No emojis in code, commits, or chat unless explicitly asked.**
 - Not a professional developer — Claude Code does the heavy lifting.
 - GitHub: `travis-coder712`. Repo: `Travis-coder712/aures-db`.
 
@@ -130,6 +147,21 @@ Common helper functions in `pipeline/exporters/export_json.py`:
 `_stats_summary(values)` — count/mean/median/p25/p75; `_parse_date_loose`;
 `_capacity_band`; `_cf_rating`, `_solar_cf_rating`, `_grade`; `write_json`.
 
+### Large / important files to know
+
+| File | What's in it |
+|---|---|
+| `src/components/charts/WindValueAnalysis.tsx` | 3500+ lines. Wind Value Analysis section + PDF export. `getAdjustedMonthlyData` (partial-month scaling + commissioning filter), `CurtailmentIndicators`, `WindValuePdfSummary` (PDF template). |
+| `src/components/charts/SolarValueAnalysis.tsx` + `BessValueAnalysis.tsx` | Same pattern for solar + BESS. |
+| `src/components/charts/ValuePdfSections.tsx` | Shared **Project Profile + Evolution Timeline + NEM Lens** sections used by all three Value-Analysis PDFs. |
+| `src/components/charts/PerformanceTab.tsx` | Project-detail Performance tab. Has its own `adjustMonthlyPerf` for the heatmap. **Commissioning Ramp card** (v3.06.0+) lives here. |
+| `src/lib/exportPdf.ts` | Shared PDF export utility. html2canvas → JPEG quality 0.82 → jsPDF(`compress: true`) → `addImage(..., 'JPEG', ..., 'FAST')`. **This tuning produced the 44MB → 1.5MB win** — don't regress it. |
+| `src/hooks/useVersion.ts` | 5-min poll of `version.json` + "Refresh" badge + service-worker `SKIP_WAITING` flow. |
+| `src/data/learning-modules.ts` | Learning curriculum catalogue. Every new module gets an entry here. |
+| `src/lib/dataService.ts` | All JSON fetches (cached). One function per intelligence page. |
+| `src/lib/dataSources.ts` | Typed source registry + page→source map for `DataProvenance` chips. |
+| `pipeline/exporters/export_json.py` | The mega-exporter — most JSON outputs live here. Look for `def export_<name>` and the `INTEL_DIR` constant. |
+
 ---
 
 ## 7. Database schema cheat sheet
@@ -170,17 +202,30 @@ Relationships: most rollups join `projects` ↔ `aemo_generation_info` (via `pro
 
 ## 9. How to ship a new version (the AURES workflow)
 
+**TWO version files must be bumped in sync** every release. AURES is a
+PWA — `useVersion` (`src/hooks/useVersion.ts`) polls
+`frontend/public/data/metadata/version.json` every 5 minutes and
+surfaces a "Refresh" badge to users when the live version is ahead of
+their loaded version. If you only bump `package.json`, **PWA users
+never get prompted to refresh and stay on the cached old build**.
+
 ```bash
 cd /Users/travishughes/aures-db/frontend
 
 # 1. Always TS-check locally — CI is stricter than `vite build`
 npx tsc -b && npm run build
 
-# 2. Bump version in package.json (feat = minor, fix = patch, chore = patch)
+# 2. Bump BOTH version files to the same number
+#    - frontend/package.json                          (Vite injects __APP_VERSION__)
+#    - frontend/public/data/metadata/version.json     (PWA Refresh prompt)
+#    Also update version.json's `built_at` to today's date.
+
 # 3. Add release entry to docs/INTELLIGENCE_LAYER_PLAN.md (top of
 #    "Recent notable releases", same format as existing entries)
 
-# 4. Commit + push
+# 4. Verify in the preview server before committing — see §14.
+
+# 5. Commit + push
 cd /Users/travishughes/aures-db
 git add <specific files — NEVER `git add .`>
 git commit -m "$(cat <<'EOF'
@@ -193,7 +238,10 @@ EOF
 )"
 git push origin main
 
-# 5. GitHub release
+# 6. WATCH the deploy run to confirm it succeeded — don't assume
+gh run watch --exit-status
+
+# 7. GitHub release
 gh release create v3.0X.0 --title "v3.0X.0 — <title>" --notes "$(cat <<'EOF'
 ## <Feature name>
 <one-paragraph summary>
@@ -202,10 +250,15 @@ gh release create v3.0X.0 --title "v3.0X.0 — <title>" --notes "$(cat <<'EOF'
 🤖 Generated with [Claude Code](https://claude.com/claude-code)
 EOF
 )"
+
+# 8. Optional sanity check after deploy: confirm the live version
+curl -s https://travis-coder712.github.io/aures-db/data/metadata/version.json
 ```
 
-**Never commit without Travis asking.** Even when you finish a feature,
-stop and wait for explicit "commit and push" before doing so.
+**Don't commit without Travis explicitly asking.** Even when a feature
+is finished, the build is green, and verification has passed — stop
+and wait for "commit and push" before doing so. This is a hard rule
+baked into Claude Code's defaults: only commit when explicitly asked.
 
 ---
 
@@ -313,24 +366,57 @@ built. Use `AskUserQuestion`.
 
 ---
 
-## 13. Recharts / TypeScript gotchas
+## 13. Gotchas (learned the hard way)
 
+### React / Vite
+
+- **NEVER define a React component inside another React component.** If
+  you do, every parent render creates a fresh component type → React
+  tears down and remounts the DOM node → `<input type="range">` loses
+  drag state, focus is lost, animations restart. Caused a real slider
+  lag bug. **Module-scope or extract.** This is the single most common
+  perf/UX trap in this codebase.
+- **Icons defined BEFORE the const arrays that reference them** — Vite
+  HMR breaks otherwise.
+
+### TypeScript / strict mode
+
+- **CI is stricter than `vite build`** — always `npx tsc -b` locally
+  before pushing. CI has caught dozens of issues that `vite build` missed.
+- **JSX text doesn't need apostrophe escaping** — `\'` renders literally
+  in JSX. Only escape inside single-quoted JS string literals (e.g.
+  inside a `LESSONS` array entry).
 - **Recharts Tooltip `filter` prop doesn't exist** — use a custom
   `content={(props) => <CustomTooltip {...}/>}` for many-line charts.
-- **`(value: number) => ...` in Tooltip formatter triggers TS error** —
-  use `(value) => ...` and cast: `Number(value)`.
+- **`(value: number) => ...` in Recharts Tooltip formatter triggers TS
+  error** — use `(value) => ...` and cast: `Number(value)`.
 - **Recharts `dot` prop**: cast via
   `(props) => { const { cx, cy, payload } = props as { cx: number; cy: number; payload: T } ...`
-- **`labelFormatter` payload**: cast via `(payload as any)?.[0]?.payload`.
-- **Icons must be defined BEFORE the const arrays that reference them**
-  (Vite HMR issue specific to this repo).
-- **CI is stricter than `vite build`** — always `npx tsc -b` locally.
-- **One project may have multiple DUIDs** — always aggregate gen
-  across DUIDs (`SUM(gen_mwh) GROUP BY date`) when computing
-  project-level totals.
+- **Recharts `labelFormatter` payload**: cast via
+  `(payload as any)?.[0]?.payload`.
+
+### Data modelling
+
+- **One project may have multiple DUIDs** (multi-stage assets) — always
+  aggregate gen across DUIDs (`SUM(gen_mwh) GROUP BY date`) when
+  computing project-level totals.
 - **`projects.capacity_mw` may not equal SUM of
-  `aemo_generation_info.registered_capacity_mw`** for multi-stage
-  assets — pick deliberately, document the choice.
+  `aemo_generation_info.registered_capacity_mw`** — pick deliberately
+  and document.
+- **Partial-month detection** (used in `PerformanceTab.tsx` and the
+  Value Analyses): compare latest entry's CF to historical median for
+  the same calendar month — if <55% of median, infer partial and scale
+  up. Fallback: if year-month matches today, scale by
+  `today.getDate() / daysInMonth`. Reuse the existing helpers; don't
+  reinvent.
+
+### PDF exports
+
+- Tuning that produced the **44MB → 1.5MB win** (don't regress):
+  `image/jpeg` quality **0.82** · html2canvas **scale 1.5** ·
+  `jsPDF({ compress: true })` · `addImage(..., 'JPEG', ..., 'FAST')`.
+  Travis reads PDFs on **both mobile and desktop** — they must stay
+  small.
 
 ---
 
@@ -389,10 +475,20 @@ DB — see `docs/NEXT_SESSION_HANDOFF.md` for backfill scripts.
 
 ## 17. What NOT to do
 
+- **Don't commit without explicit user ask** — Claude Code's default
+  rule. Even when a feature feels finished, the build is green, and
+  verification has passed, stop and wait for "commit" or "ship it."
 - **Don't `git add .`** — stage specific files. Some imports leave
   temp files behind.
-- **Don't commit without explicit user ask** — even when a feature
-  feels finished.
+- **Don't bump only `package.json`** — `version.json` must be bumped
+  in sync or PWA users never get prompted to refresh.
+- **Don't define a React component inside another React component** —
+  causes remount-on-every-render bugs (see §13).
+- **Don't fabricate facts.** When uncertain, hedge or attribute.
+  Travis will catch you and you'll burn his trust.
+- **Don't silently erase a factual error.** Record corrections in the
+  project's `stakeholder_issues` so the audit trail survives.
+- **Don't change the git remote, don't amend commits, don't force-push.**
 - **Don't skip hooks** (`--no-verify`, `--no-gpg-sign`) without
   explicit instruction.
 - **Don't downgrade `status`** in importers — operating projects stay
@@ -404,6 +500,7 @@ DB — see `docs/NEXT_SESSION_HANDOFF.md` for backfill scripts.
 - **Don't roll new chart/table/drill components** — use `ChartWrapper`,
   `DataTable`, `DrillPanel`.
 - **Don't embed API keys** in code or commit messages.
+- **Don't use emojis** in code, commits, or chat unless explicitly asked.
 
 ---
 
