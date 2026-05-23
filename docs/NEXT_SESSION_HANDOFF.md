@@ -1,197 +1,233 @@
 # AURES — Next Session Handoff
 
-**Last refreshed:** 2026-04-23, end of the v2.35.0 session
-**Latest shipped version:** v2.35.0
-**Purpose:** Single-place brief for the next session. Cold-readable — no context required beyond this file and `docs/INTELLIGENCE_LAYER_PLAN.md`.
+**Last refreshed:** 2026-05-23, end of v3.09.0 session
+**Latest shipped version:** v3.09.0
+**Purpose:** Single-place brief for the next session. Cold-readable — pair with `docs/SESSION_OPENER.md` and `docs/INTELLIGENCE_LAYER_PLAN.md`.
 
 ---
 
-## 🟢 Current state snapshot (v2.35.0)
+## Current state snapshot (v3.09.0)
+
+### v3.09.0 — NSW Wind & CIS T7 deep dive (just shipped, 2026-05-23)
+
+CIS Tender 7 results landed today (2026-05-23) — 19 projects / 7.8 GW awarded vs 5 GW target, wind-dominated. NSW filled its 8-project quota with three wind winners (Yanco Delta 1,450 MW Origin — Australia's biggest wind project; Baldin 346 MW Goldwind wind+BESS; Bullewah 283 MW BayWa — REZ-access capped). DCCEEW guidance now is that **NSW will be excluded from CIS Tender 9**, so post-T7 NSW wind only has the Q2 2026 NSW Roadmap LTESA Generation round (2.5 GW, hybrid-favoured) as a path.
+
+v3.09.0 added a 9th tab on `/intelligence/scheme-tracker` — **NSW Wind** — with eight sections: T7 snapshot, 12-project NSW wind cohort table, build timeline Gantt with Eraring shutdown reference line, "yet-to-win" candidate table headed by Pottinger and Liverpool Range Stage 2, upcoming LTESA round briefing, 3-band qualitative H/M/L probability scoring across 12 candidates, LTESA-vs-CISA mechanism comparison, and a shareable copy/PDF commentary card. New `LTESA_R8_CANDIDATES` and `NSW_WIND_COHORT` arrays in `frontend/src/data/scheme-rounds.ts` are the single source of truth. New "Scheme Contracts" section on `ProjectDetail.tsx`. 12 NSW wind overlay files updated with structured scheme_contracts / timeline_events / audit-trail stakeholder_issues (White Rock pattern). New methodology guide `nsw-wind-cis-ltesa`. SchemeBoardroom narrative refreshed (T7 outlook milestone + grid-connection constraint updated to cover T7). `CISLTESAModule.tsx` learning module updated for T7 results + NSW state pivot.
 
 ### What's live on the deployed site
-- **35 releases shipped** v2.15.1 → v2.35.0, with the recent ones covering:
-  - **v2.32.0** — **BESS Bidding Trading Platform deep-dives** (OEM match, lock-in, convergence, grid implications per platform + grid-scale monoculture callout)
-  - **v2.33.0** — **BESS Records Leaderboard** (`/intelligence/bess-records`) — 30 batteries, NEM + state scope, discharge/charge tabs, fleet peak records
-  - **v2.34.0** — **Per-DUID 5-min BESS Dispatch Peaks** — `import_bess_5min.py` backfills DISPATCHLOAD for 56 DUIDs (Aug 2024→Mar 2026); Peak 5-min ⚡/🔋 columns now live in leaderboard table
-  - **v2.35.0** — **BESS Records: multi-window periods, staircase timeline, revenue lens + battery coverage fix** (see below)
-- All features on `https://travis-coder712.github.io/aures-db/`
-- Plan doc: `docs/INTELLIGENCE_LAYER_PLAN.md` — authoritative release log
+- **v3.09.0 shipped 2026-05-23** — see release log entry in `docs/INTELLIGENCE_LAYER_PLAN.md`.
+- **v3.08.0** — PWA refresh-prompt fix + expanded SESSION_OPENER (background): both `frontend/package.json` and `frontend/public/data/metadata/version.json` now bump in sync (the drift this fixed is documented below as a permanent gotcha).
+- All features on `https://travis-coder712.github.io/aures-db/`.
+- Plan doc: `docs/INTELLIGENCE_LAYER_PLAN.md` — authoritative release log.
+- Route inventory: see `docs/SESSION_OPENER.md` §5 — refreshed 2026-05-22.
 
-### v2.35.0 — What shipped this session
+### v3 line — what landed since v2.35.0
 
-**Three new features on BESS Records page (`/intelligence/bess-records`):**
+The v3 cycle has been **two big threads**: the learning curriculum build-out, then the Commissioning Ramp tracker.
 
-1. **Multi-window period selector** — 5-min / 30-min / 1-hr / Daily / Quarterly tabs above leaderboard. Each period shows a different peak metric per battery, sorted accordingly. Revenue hints (~$X) shown inline for daily discharge period.
+**Learning curriculum (the v2.66 → v2.97 arc, pre-v3):**
+- `/learn` hub + 11 modules: `constraints`, `cis-ltesa-bidding`, `nsw-rez`, `bess-story`, `energy-transition`, `planning-approvals`, `aemo-connections`, `ppas`, `project-financing`, `valuing-projects` (3-part: operational / development / synthesis), `summing-it-up`.
+- Interactive **PPA × CISA calculator** with IRR, sliders, 14-point interactions checklist, exportable PDF reference.
+- White Rock fact corrections (v2.84/v2.85) — establishes the "leave audit trail in `stakeholder_issues`" pattern.
+- PDF tuning win (v2.85): 44MB → 1.5MB (JPEG 0.82 / scale 1.5 / jsPDF compress / FAST).
+- v2.98/v2.99 extracted Brisbane Builder + Acknowledge Country into separate repos.
 
-2. **Records Timeline** — staircase AreaChart (Recharts `stepAfter`) showing when each all-time record was broken, at every scope level (NEM, NSW, VIC, QLD, SA, TAS) and for daily discharge / daily charge / 5-min peak. Last 5 record events annotated below the chart.
+**Scheme Boardroom + LTESA (v3.00 → v3.05):**
+- v3.00.0 — single-hour PPA × CISA explorer (3 reference designs).
+- v3.01.0/v3.02.0 — Scheme Boardroom **lens toggle** (Awarded vs CISA-Confirmed), FID-first wording.
+- v3.03.0 — MC1 BCR deep dive in CIS/LTESA module.
+- v3.04.0 — **LTESA Round 7 (firming) winners** + lesson updates.
+- v3.05.0 — **MLF history chart** in Revenue Intelligence.
 
-3. **Revenue Lens** — card showing estimated revenue on the top battery's peak discharge day: avg RRP, daily peak RRP, P90 RRP, and estimated revenue = MWh × P90 spot price. Methodology caveat included.
+**Commissioning Ramp tracker (v3.06 → v3.07.1):**
+- v3.06.0 — `/intelligence/revenue` "Commissioning Ramp" tab. Per-asset first-generation date, stable-output date, ramp duration, mixed-basis revenue (settled + modelled). 151 operating solar/wind/hybrid assets. New `pipeline/exporters/export_commissioning_ramp.py`. Also adds `CommissioningRampCard` on project Performance tab. BESS deliberately excluded.
+- v3.07.0 — **Ramp curves over time** sub-section: per-asset trajectories aligned at month 0 = first AEMO generation, with group + fleet average overlays. Three Y-axis modes.
+- v3.07.1 — Extended `pre-2021-cutoff` flag to also catch assets where `cod_declared` predates first AEMO gen by 60+ days (12 SA wind farms previously misclassified). Censored count 94 → 106.
 
-**Data quality fix — missing batteries:**
-- Root cause: `import_generation_daily.py` `load_target_duids()` only included 'In Service' and 'In Commissioning' BESS, missing all 'Committed' status batteries that are actively dispatching.
-- Fix: expanded WHERE clause to include `'Committed', 'Committed*'` for Battery Storage. Solar/wind unchanged.
-- Affected DUIDs now captured: **WTAHB1** (Waratah Super Battery, 844 MW), **TARBESS1** (Tarong, 300 MW), **LDBESS1** (Liddell, 500 MW), **ORABESS1** (Orana), **SNB01/SNB02** (Supernode), **SWANBBF1** (Swanbank), **BRNDBES1** (Brendale)
-- `import_bess_5min.py` BESS_DUIDS set corrected — 'WTAHB1' was previously listed as wrong 'WTAHBESS'
+**Meta (v3.08.0):**
+- PWA refresh-prompt drift fix (`version.json` had drifted to 2.99.0 while `package.json` was 3.07.1 — PWA users on cached builds were not getting refresh prompts).
+- `docs/SESSION_OPENER.md` heavily expanded with the version sync rule + PWA mechanism, React-inside-React anti-pattern, JSX apostrophe rule, PDF tuning specifics, partial-month detection algorithm, factual-honesty / White Rock correction guidance, "no emojis unless asked" rule.
 
-**New pipeline:** `pipeline/importers/import_dispatchprice.py`
-- Downloads AEMO NEMWEB MMSDM DISPATCHPRICE archives (separate ZIPs from DISPATCHLOAD)
-- Creates `dispatch_price_daily` table: `(date, region, avg_rrp, peak_rrp, p90_rrp, negative_count, intervals)` with UNIQUE(date, region)
-- CLI: `--month YYYY-MM` or `--months START END`
-- Currently populated: Aug 2024 → Jun 2025 (1,525 rows, 5 regions). MMSDM archive pub lag ~45 days.
+### Database state (verified 2026-05-23)
 
-**Database state after this session:**
-- `bess_5min_peaks`: 16,572 rows, all with 30-min/1-hr rolling window peaks
-  - Best 30-min discharge: **424.96 MWh** (WTAHB1, Waratah, 2025-10-13)
-  - Best 1-hr discharge: **847.31 MWh** (WTAHB1, Waratah, 2025-10-13)
-- `dispatch_price_daily`: 1,525 rows (Aug 2024 – Jun 2025, 5 NEM regions)
-- `generation_daily`: re-backfilled with 'Committed' BESS — Waratah 2,100 MWh peak daily, 364 days active; Tarong 325 MWh peak, 155 days active
-- Exported JSON: 41 batteries (up from 30), data_through 2026-04-01
-
-### Pipeline / data state
-- **Coal dispatch** (`dispatch_availability`): **~24M rows** from Jan 2021 → Apr 2026. MMSDM-backfilled.
-- **Solar/wind/BESS daily** (`generation_daily`): **~280k+ rows**, re-backfilled to include Committed BESS.
-- **BESS 5-min peaks** (`bess_5min_peaks`): 16,572 rows, Aug 2024 → Mar 2026, all with 30-min/1-hr rolling peaks.
-- **BESS dispatch prices** (`dispatch_price_daily`): 1,525 rows, Aug 2024 → Jun 2025. (MMSDM lag means ~Jul 2025 onward not yet available)
-- **Demand daily** (`demand_daily`): 5 state regions + NEM concurrent peak.
-- **Battery SCADA** (`battery_daily_scada`): 450 daily rollups from OpenElectricity API.
-
----
-
-## 📋 What remains — prioritised backlog
-
-### 🔴 Data freshness — check at the start of every session
-| Source | Cadence | Current |
+| Table | Rows | Range / freshness |
 |---|---|---|
-| `aemo_generation_info` | monthly | 2026-04-17 |
-| `news_rss` | daily | 2026-04-23 |
-| `dispatch_price_daily` | monthly | Aug 2024 – Jun 2025 (MMSDM lag) |
-| `market_prices` | monthly | **never** — no automated importer |
-| `aemo_isp_rez` | annual | **never** — no automated importer |
-
-**Backfill dispatchprice when newer months available (~mid-May for Jul 2025+):**
-```bash
-python3 pipeline/importers/import_dispatchprice.py --months 2025-07 2026-03
-python3 pipeline/exporters/export_json.py
-```
-
-### 🟠 Data enrichment gaps (coverage)
-- **BESS chemistry (EIS)**: 34 / 420 projects (8%). Target ≥ 50% via systematic EIS PDF parsing.
-- **Ownership history**: 10 / 1,063 projects. Web research pass needed.
-- **FID events**: 24 projects. Parse ASX + investor releases.
-- **construction_start events**: 121 / 1,063 (11%). AEMO WDR + news.
-- **`development_score` column**: empty. Consolidation pipeline from component signals.
-- **EIS technical specs**: 68 / 1,063. Med-effort enrichment pass.
-
-### 🟡 Feature backlog — from `memory/project_aures_post_plan_backlog.md`
-1. **User-onboarding guide rewrites** — 7 non-methodology guides (About / Using / Navigating / Search Tips / Data Quality / Strategic Roadmap / Project Plan) haven't been refreshed for v2.16-v2.35. Low effort, high visibility.
-2. **Compare-developers view** — side-by-side 2-4 developers on `/developers`. Deferred from v2.20.0.
-3. **BatteryWatch → CapacityWatch merge** — ~1,080 lines of content to preserve. Nav simplification.
-4. **BESS bidding per-project summaries** — pre-compute for faster page load.
-5. **Dev-stage PPAs / LGC-only offtakes** — not captured in web research pass yet.
-6. **F4 Phase 2 pipeline trigger endpoint** — real "Update Now" button. Requires local backend API.
-
-### 🟢 BESS Records — potential follow-on improvements
-- **5-min revenue** — join at exact dispatch interval (needs per-5min price, not just daily P90). Would require a larger `dispatch_price_5min` table.
-- **Quarterly period timeline** — records_timeline currently covers daily and 5-min only; quarterly staircase would add useful long-view.
-- **Battery utilisation rate** — gen_mwh / (capacity_mwh × days_active) — ranking batteries by efficiency, not just absolute records.
-- **Seasonal records** — summer peak vs winter peak splits per fuel tech.
+| `projects` | 1,064 | — |
+| `aemo_generation_info` | 9,275 | refreshed 2026-04-17 (last `import_aemo_gen_info` run) |
+| `performance_monthly` | 16,233 | through **2026-05** (OE settled) |
+| `generation_daily` | 299,644 | through **2026-05-10** |
+| `dispatch_availability` (coal 5-min) | 24,473,768 | through 2026-04-17 |
+| `dispatch_price_daily` | 3,240 | **Aug 2024 → 2026-05-10** ✅ (the v2.35.0 backlog item is done) |
+| `bess_5min_peaks` | 18,210 | Aug 2024 → 2026-05-10 |
+| `battery_daily_scada` (OE) | 565 | 2026-01-17 → 2026-05-09 |
+| `battery_records` | 20 | — |
+| `demand_daily` | 11,502 | 2021-01-01 → 2026-04-01 (5 weeks stale) |
+| `news_articles` | 255 | last 2026-04-17 (5 weeks stale) |
+| `eis_technical_specs` | 68 | unchanged since v2.35.0 — enrichment thread paused |
 
 ---
 
-## 🏗️ Architecture patterns — preserve these
+## What's pending — prioritised backlog
 
-**Foundation components (v2.16-v2.18):**
-- `<ChartFrame>` — wraps Recharts with enforced height + visibility re-measure
-- `<DataTable>` — sortable, row numbers, totals, CSV export, mobile column hiding
-- `<DrillPanel>` — slide-in side panel for click-through drill
-- `<DataProvenance>` — source chip row with freshness + copy-refresh-command
+### Data freshness gaps to refresh
+| Source | Latest | Notes |
+|---|---|---|
+| `news_articles` | 2026-04-17 | Run `import_news_rss.py` |
+| `demand_daily` | 2026-04-01 | Run `import_dispatch_regionsum.py` for Apr–May |
+| `dispatch_availability` | 2026-04-17 | Run coal backfill for May MMSDM (publishes ~mid-Jun) |
+| `aemo_generation_info` | 2026-04-17 | Monthly cadence — due for refresh |
+| `market_prices` | never | No automated importer yet |
+| `aemo_isp_rez` | never | No automated importer yet |
 
-**Pipeline pattern (unchanged since v2.16):**
-- Python pipeline in `pipeline/` — importers populate SQLite, exporters emit static JSON
-- Every new data source: add to `SOURCE_REGISTRY` in `frontend/src/lib/dataSources.ts` + `PAGE_SOURCES` mapping
-- Aggregate-at-import-time for high-volume DUID data (see `generation_daily`) — keeps tables small
-- Always dedupe MMSDM CSV revisions by `(SETTLEMENTDATE, DUID)` (see v2.30.0 fix — revision rows inflate totals by 2-6× on intervention days)
-- **Graceful pending-state UI**: always render correctly even when importer hasn't been run
+### Items from old backlog — status
+- ✅ **`dispatch_price_daily` backfill** — done, now through 2026-05-10.
+- ❓ **User-onboarding guide rewrites** — no v3 commits touching `About / Using / Navigating / Search Tips / Data Quality / Strategic Roadmap / Project Plan` guides. Likely still pending.
+- ❓ **Compare-developers view on `/developers`** — no evidence of build. Still deferred.
+- ❓ **BatteryWatch → CapacityWatch merge** — no evidence.
+- ❓ **BESS bidding per-project summaries** — no evidence.
+- ❓ **F4 Phase 2 pipeline trigger endpoint** — no evidence (would need local backend API).
+- ⏸ **BESS chemistry enrichment** — `eis_technical_specs` still at 68 rows, target ≥ 50% coverage of 420 BESS projects unmoved.
 
-**Release pattern (proven across 35 releases):**
-- Logical commits: pipeline + frontend + guide + version-bump-release-commit
-- `frontend/package.json` version bump
-- Update `docs/INTELLIGENCE_LAYER_PLAN.md` release log
-- `gh release create vX.Y.Z` with detailed notes
-- Monitor CI (`tsc -b && vite build`) — stricter than local `tsc --noEmit`
-- Always ensure Waratah JSON restored after export (covered by overlay merge since v2.17.1)
+### Natural follow-ons from recent work
+**Commissioning Ramp (v3.06 → v3.07.1):**
+- BESS commissioning ramp (deliberately excluded — needs different semantics; charge+discharge cycle vs steady CF). Open design question.
+- Developer / OEM rollup: "who ramps faster?" — re-pivots the same data.
+- Quartile splits by COD year / state / capacity band.
+
+**Revenue Intelligence (v3.05.0 MLF):**
+- Per-project MLF vs revenue correlation chart.
+- MLF-adjusted CF normalisation in league tables.
+
+**BESS Records (v2.33–v2.35 era, still applicable):**
+- Quarterly period in records timeline.
+- Battery utilisation rate (gen_mwh / capacity_mwh × days_active).
+- Seasonal records (summer vs winter splits).
+- 5-min revenue using exact-interval dispatch prices (needs `dispatch_price_5min` — much bigger table).
+
+**Learning curriculum:**
+- 12th module? Curriculum was declared "complete" at v2.97, but Travis pushes for depth — likely candidates if needed: hedging mechanics, capacity markets, REZ access rights deep-dive, T-FIP.
+- Module updates: anything material in v3.03/v3.04 (MC1 BCR, LTESA R7) that should mirror into `/learn/cis-ltesa-bidding`.
 
 ---
 
-## 🧰 Technical gotchas
+## Architecture patterns to preserve
 
-1. **CI is stricter than `tsc --noEmit`** — always run `npm run build` locally before push.
-2. **Icons must be defined BEFORE const arrays** that reference them (Vite HMR issue) — relevant in older files.
-3. **MMSDM filename format changed Aug 2024** — importer tries new `PUBLIC_ARCHIVE#...#FILE01#...` then legacy `PUBLIC_DVD_...`.
-4. **MMSDM revisions inflate MWh** — use dedupe by `(SETTLEMENTDATE, DUID)` pattern from `import_generation_daily.py`.
-5. **MMSDM date format is `2025/12/31`** (slashes), not `2025-12-31`. SQLite queries and Python parsers must handle both.
-6. **Python 3.9 on this machine** — `str | None` union syntax requires 3.10+. Use bare annotations or `Optional[str]` from typing in pipeline scripts.
-7. **OpenElectricity free tier caps at 367 days** — for longer history use NEMWEB MMSDM.
-8. **Don't commit SQLite DB** (`database/aures.db`) — it's gitignored. Data ships as JSON exports.
-9. **Don't delete `data/projects/<tech>/<id>.json`** — hand-enriched overlays merged by exporter (Waratah especially).
-10. **MMSDM archive publication lag** ≈ 45 days. 2026-04 archive likely available mid-May.
-11. **`import_generation_daily.py` status filter** — BESS uses `'Committed', 'Committed*'` in addition to In Service/Commissioning. Do NOT revert this — those batteries are actively dispatching.
+**Foundation components (in `frontend/src/components/common/`):**
+- `<ChartWrapper>` — Recharts wrapper with PNG + CSV export. Use for every new chart.
+- `<DataTable<T>>` — sortable, row-numbered, totals row, CSV export, mobile column-hiding. Built-in formatters.
+- `<DrillPanel>` — slide-in (desktop) / bottom-sheet (mobile). ESC + backdrop close.
+- `<DataProvenance>` — source freshness chip row. Register new sources in `frontend/src/lib/dataSources.ts`.
+
+**Big files worth knowing before editing (from SESSION_OPENER §6):**
+- `src/components/charts/WindValueAnalysis.tsx` — 3500+ lines, PDF export, partial-month scaling.
+- `src/components/charts/ValuePdfSections.tsx` — shared Project Profile + Evolution Timeline + NEM Lens PDF sections (Wind/Solar/BESS all use this).
+- `src/components/charts/PerformanceTab.tsx` — project-detail Performance tab. **Commissioning Ramp card** (v3.06+) lives here.
+- `src/lib/exportPdf.ts` — the PDF tuning (don't regress: JPEG 0.82 / scale 1.5 / jsPDF compress / FAST).
+- `src/hooks/useVersion.ts` — 5-min poll of `version.json` + Refresh badge + SW skip-waiting flow.
+
+**Pipeline pattern:**
+- Importers populate SQLite → exporters emit static JSON at `frontend/public/data/`.
+- Aggregate at import time for high-volume data (`generation_daily`, `bess_5min_peaks`).
+- **MMSDM revision dedupe** by `(SETTLEMENTDATE, DUID)` — revision rows inflate totals by 2–6× on intervention days.
+- **Always render gracefully** when an importer hasn't been run yet (pending-state UI).
+- **Overlay merge** in exporter preserves hand-curated `data/projects/<tech>/<id>.json` fields (see `OVERLAY_OVERRIDE_FIELDS` in `pipeline/exporters/export_json.py:40`).
+
+**Release pattern (v3.08.0 reinforced — non-negotiable):**
+- Bump **BOTH** `frontend/package.json` AND `frontend/public/data/metadata/version.json` to the same number. Skip the JSON → PWA users stuck on cached build forever.
+- Update `built_at` in version.json.
+- Add release entry to top of `docs/INTELLIGENCE_LAYER_PLAN.md` "Recent notable releases".
+- `npx tsc -b && npm run build` locally before push (CI is stricter than vite build).
+- `gh run watch --exit-status` after push — don't assume.
+- `gh release create vX.Y.Z` with detailed notes.
+- **Don't commit without Travis explicitly asking.**
 
 ---
 
-## 🔑 Environment setup
+## Technical gotchas
 
-- OpenElectricity API key in `~/.zshrc`: `OPENELECTRICITY_API_KEY=oe_4zNSDDp4bBBdm4SJ4MYu9t` (Community / free plan).
+1. **CI is stricter than `vite build`** — always `npx tsc -b` locally before push.
+2. **Never define a React component inside another React component.** Every parent render creates a fresh type → DOM remount → `<input type="range">` drag loss, focus loss, animation restart. Real slider bug fixed in v2.86.
+3. **Icons defined BEFORE the const arrays** that reference them — Vite HMR breaks otherwise.
+4. **Two version files must bump in sync** — `package.json` AND `public/data/metadata/version.json`. v3.08.0 fixed the drift.
+5. **JSX text doesn't need apostrophe escaping** — `\'` renders literally inside JSX. Only escape inside JS string literals (e.g. inside a `LESSONS` array).
+6. **Recharts gotchas** — Tooltip formatter: use `(value) => ...` not `(value: number) => ...`. `dot` prop: cast props. `labelFormatter` payload: cast via `(payload as any)?.[0]?.payload`. No `filter` prop — use custom `content={...}`.
+7. **MMSDM revisions inflate MWh** — always dedupe by `(SETTLEMENTDATE, DUID)`.
+8. **MMSDM filename format changed Aug 2024** — importers try `PUBLIC_ARCHIVE#...#FILE01#...` then fall back to legacy `PUBLIC_DVD_...`.
+9. **MMSDM date format is `2025/12/31`** (slashes), not `2025-12-31`. SQLite + Python parsers must handle both.
+10. **Python 3.9 on this machine** — `str | None` syntax requires 3.10+. Use bare annotations or `Optional[str]`.
+11. **OpenElectricity free tier**: 367-day lookback, ~500 req/day, no rate-limit headers — plan calls.
+12. **OE importer only pulls `status='operating'`** — commissioning-phase gen lives only in `generation_daily`. Don't "fix" without understanding — Commissioning Ramp tab depends on the gap.
+13. **`import_generation_daily.py` BESS status filter** includes `'Committed', 'Committed*'` in addition to In Service / Commissioning. **Do NOT revert** — Waratah, Tarong, Liddell, etc. depend on it.
+14. **Partial-month detection** in `PerformanceTab.tsx` + Value Analyses: compare latest entry's CF to historical median for the same calendar month; if <55% of median, scale up. Fallback: scale by `today.getDate() / daysInMonth` for current month. Reuse helpers — don't reinvent.
+15. **PDF tuning** (44MB → 1.5MB) — JPEG quality 0.82 · html2canvas scale 1.5 · `jsPDF({ compress: true })` · `addImage(..., 'JPEG', ..., 'FAST')`. Travis reads PDFs on both mobile and desktop. Don't regress.
+16. **MMSDM archive publication lag** ≈ 45 days.
+17. **Don't commit SQLite DB** (`database/aures.db`) — gitignored. Data ships as JSON exports.
+18. **Don't `git add .`** — stage specific files. Imports leave temp files.
+19. **Don't downgrade `status`** in importers — run `pipeline/validators/validate_status.py` after big imports.
+20. **Don't edit `projects` table directly** for fields with an overlay file — edit `data/projects/<tech>/<id>.json` instead.
+
+---
+
+## Environment setup
+
+- OpenElectricity API key in `~/.zshrc`: `OPENELECTRICITY_API_KEY=oe_4zNSDDp4bBBdm4SJ4MYu9t` (free / Community plan).
 - NEMWEB importers need no auth — just internet.
 - Cached MMSDM zips live in `data/nemweb_cache/` (~3 GB, gitignored).
+- Dev server: `.claude/launch.json` defines `aures-dev` (npm `run dev --prefix frontend`, port 5173). Use Claude Preview MCP if available.
+- Local URL: `http://localhost:5173/aures-db/`. Always test mobile width (375×812).
 
 ---
 
-## 📦 Key file locations
+## Key file locations
 
 | File | Purpose |
 |---|---|
+| `docs/SESSION_OPENER.md` | Project bootstrap (read first, every session) |
 | `docs/INTELLIGENCE_LAYER_PLAN.md` | Release log + authoritative plan |
 | `docs/NEXT_SESSION_HANDOFF.md` | This file |
-| `pipeline/config/coal_stations.json` | 15 NEM coal stations + 44 DUIDs (hand-curated) |
-| `pipeline/importers/import_dispatchload.py` | NEMWEB coal + BESS 5-min importer (dual-format URL) |
-| `pipeline/importers/import_bess_5min.py` | BESS 5-min peaks with 30-min/1-hr rolling windows |
-| `pipeline/importers/import_generation_daily.py` | Solar/wind/BESS daily from cached MMSDM (incl. Committed BESS) |
-| `pipeline/importers/import_dispatchprice.py` | AEMO DISPATCHPRICE daily regional spot stats (NEW v2.35.0) |
-| `pipeline/importers/import_dispatch_regionsum.py` | Demand daily + NEM concurrent peak |
-| `pipeline/importers/import_battery_scada.py` | OE battery 5-min importer |
-| `pipeline/exporters/export_json.py` | All JSON exporters |
-| `pipeline/scripts/backfill_coal_history.sh` | 5-year MMSDM backfill loop |
+| `CLAUDE.md` | Repo-root pointer to SESSION_OPENER |
+| `frontend/package.json` | App version (bump in sync with version.json) |
+| `frontend/public/data/metadata/version.json` | PWA refresh signal |
+| `frontend/src/hooks/useVersion.ts` | Polls version.json + Refresh badge |
+| `frontend/src/lib/dataService.ts` | All JSON fetches (cached) |
 | `frontend/src/lib/dataSources.ts` | Source registry + PAGE_SOURCES mapping |
-| `frontend/src/pages/intelligence/BessRecords.tsx` | BESS Records — periods, timeline, revenue lens |
-| `frontend/src/components/intelligence/CoalWatch.tsx` | Coal Watch with YTD Comparison tab |
-| `frontend/src/components/intelligence/EnergyTransition.tsx` | Transition Scoreboard |
-| `frontend/src/pages/intelligence/SchemeTracker.tsx` | Scheme Tracker with CIS Wind filter |
-| `frontend/src/data/guides.ts` | All guides with added/updated date fields |
-| `memory/MEMORY.md` | Memory index |
+| `frontend/src/lib/exportPdf.ts` | PDF tuning utility |
+| `frontend/src/components/charts/WindValueAnalysis.tsx` | Wind Value section + PDF |
+| `frontend/src/components/charts/ValuePdfSections.tsx` | Shared PDF sections (Wind/Solar/BESS) |
+| `frontend/src/components/charts/PerformanceTab.tsx` | Project Performance tab + Commissioning Ramp card |
+| `frontend/src/data/learning-modules.ts` | Learning curriculum catalogue |
+| `pipeline/exporters/export_json.py` | Mega-exporter (most JSON outputs) |
+| `pipeline/exporters/export_commissioning_ramp.py` | Commissioning Ramp standalone exporter |
+| `pipeline/importers/import_dispatchprice.py` | DISPATCHPRICE daily regional spot stats |
+| `pipeline/importers/import_bess_5min.py` | BESS 5-min peaks |
+| `pipeline/importers/import_generation_daily.py` | Solar/wind/BESS daily (incl. Committed BESS) |
+| `pipeline/importers/import_mlf_history.py` | MLF history (v3.05.0) |
+| `pipeline/scripts/backfill_coal_history.sh` | 5-year MMSDM coal backfill loop |
+| `data/projects/<tech>/<id>.json` | Hand-curated overlay files (merged by exporter) |
+| `memory/MEMORY.md` (in `~/.claude/projects/...`) | Auto-memory index |
 
 ---
 
-## ▶️ How to pick up next session
+## How to pick up next session
 
-1. **Read `docs/INTELLIGENCE_LAYER_PLAN.md`** for the release log
-2. **Read THIS file** for current state + backlog
-3. Pick from the prioritised backlog above based on energy. Quick wins ready to pluck:
-   - Backfill `dispatch_price_daily` when MMSDM Jul 2025+ archives publish (~mid-May)
-   - Refresh stale sources (market_prices / aemo_isp_rez — no importer yet)
-   - Enrich BESS chemistry (≥ 10 more EIS PDFs would move coverage meaningfully)
-   - Start user-onboarding guide rewrites (high visibility, low technical risk)
+1. Read `docs/SESSION_OPENER.md` end-to-end (the bootstrap).
+2. Read this file for current state + backlog.
+3. Run the §15 health check from SESSION_OPENER.
+4. Pick from the backlog above based on energy. Quick wins ready to pluck:
+   - **Refresh stale data** — `news_articles` (5 weeks), `demand_daily` (5 weeks), `aemo_generation_info` (monthly cadence due).
+   - **User-onboarding guide rewrites** — still untouched, high visibility, low risk.
+   - **Per-project MLF correlation chart** — leverages v3.05.0 MLF history data.
+   - **BESS commissioning ramp scoping** — design question first (semantics differ from solar/wind), then build.
 
-**Quickest path to a quick win:**
+**Sanity-check commands:**
 ```bash
-# Verify current data state
-sqlite3 database/aures.db "SELECT COUNT(*) FROM dispatch_availability; SELECT COUNT(*) FROM generation_daily; SELECT COUNT(*) FROM bess_5min_peaks; SELECT COUNT(*) FROM dispatch_price_daily"
-
-# Re-run all exporters (sanity check)
-python3 pipeline/exporters/export_json.py
-
-# Local build verify
-cd frontend && npx tsc -b && npm run build
+cd /Users/travishughes/aures-db
+git status                                                                       # expect clean
+git log --oneline -5                                                             # last shipped version
+sqlite3 database/aures.db "SELECT COUNT(*) FROM projects"                        # ~1064
+sqlite3 database/aures.db "SELECT MAX(date) FROM generation_daily"               # current freshness
+sed -n 's/.*"version": "\(.*\)".*/\1/p' frontend/package.json | head -1          # app version
+cat frontend/public/data/metadata/version.json                                   # PWA version (must match)
 ```
 
-Good luck.
+If those two version numbers disagree, **stop and fix before doing anything else** — that's the v3.08.0 lesson.

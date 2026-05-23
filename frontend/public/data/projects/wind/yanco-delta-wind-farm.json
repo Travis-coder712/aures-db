@@ -15,9 +15,9 @@
   "has_statcom": false,
   "has_harmonic_filter": false,
   "notable": "1.5 GW wind (208 turbines, 270m tip) + 800 MWh BESS. 33,000 ha site 10 km NW of Jerilderie in SW REZ. ~$4B project. 1,460 MW transmission access secured. FID target mid-FY2027.",
-  "data_confidence": "low",
-  "last_updated": "2026-03-10",
-  "last_verified": "2026-03-10",
+  "data_confidence": "medium",
+  "last_updated": "2026-05-23",
+  "last_verified": "2026-05-23",
   "aemo_gen_info_id": "2266",
   "confidence_score": "49",
   "development_stage": "epbc_approved",
@@ -52,9 +52,24 @@
   "cod_history": [],
   "suppliers": [],
   "offtakes": [],
-  "scheme_contracts": [],
+  "scheme_contracts": [
+    {
+      "scheme": "CIS",
+      "round": "Tender 7 \u2014 NEM Generation",
+      "capacity_mw": 1450,
+      "contract_type": "CISA (federal underwriting)",
+      "source_url": "https://reneweconomy.com.au/australias-biggest-wind-project-and-8-battery-hybrids-among-19-winners-of-largest-renewable-auction-to-date/"
+    }
+  ],
   "cost_sources": [],
-  "stakeholder_issues": [],
+  "stakeholder_issues": [
+    {
+      "issue": "FID target mid-FY27",
+      "detail": "Origin targeting financial close around mid-FY27 (late 2026 / early 2027). 800 MWh battery component sits outside CIS scope. Watch for Stage 1 / 2 phasing as project approaches FID.",
+      "date": "2026-05-23",
+      "status": "tracking"
+    }
+  ],
   "sources": [
     {
       "title": "AEMO Generation Information Jan 2026",
@@ -63,5 +78,51 @@
       "source_tier": 1
     }
   ],
-  "timeline_events": []
+  "timeline_events": [
+    {
+      "date": "2023-12",
+      "date_precision": "month",
+      "event_type": "planning_approved",
+      "title": "NSW consent (Dec 2023)",
+      "detail": "Yanco Delta received NSW state planning consent in Dec 2023.",
+      "sources": []
+    },
+    {
+      "date": "2024-02",
+      "date_precision": "month",
+      "event_type": "planning_approved",
+      "title": "EPBC approval (Feb 2024) \u2014 modifications underway",
+      "detail": "Federal EPBC Act approval granted Feb 2024. Modifications to the approved design currently underway.",
+      "sources": []
+    },
+    {
+      "date": "2025-12",
+      "date_precision": "month",
+      "event_type": "rez_access",
+      "title": "South-West REZ grid access right secured",
+      "detail": "Yanco Delta secured 1,460 MW of SW REZ grid access rights \u2014 full project allocation.",
+      "sources": [
+        {
+          "title": "Andrew Forrest among big winners as NSW grants grid access (RenewEconomy)",
+          "url": "https://reneweconomy.com.au/forrest-and-key-cis-projects-win-big-as-nsw-grants-grid-access-to-giant-wind-solar-and-battery-facilities/",
+          "source_tier": 2
+        }
+      ]
+    },
+    {
+      "date": "2026-05-23",
+      "date_precision": "day",
+      "event_type": "offtake_signed",
+      "title": "CIS Tender 7 underwriting awarded",
+      "detail": "Origin Energy's Yanco Delta wins CIS Tender 7 underwriting \u2014 1,450 MW awarded under the federal Capacity Investment Scheme. Largest single wind project in Australia.",
+      "sources": [
+        {
+          "title": "Australia's biggest wind project among 19 winners of largest renewable auction (RenewEconomy)",
+          "url": "https://reneweconomy.com.au/australias-biggest-wind-project-and-8-battery-hybrids-among-19-winners-of-largest-renewable-auction-to-date/",
+          "date": "2026-05-23",
+          "source_tier": 2
+        }
+      ]
+    }
+  ]
 }

@@ -14,9 +14,9 @@
   "has_syncon": false,
   "has_statcom": false,
   "has_harmonic_filter": false,
-  "data_confidence": "low",
-  "last_updated": "2026-03-10",
-  "last_verified": "2026-03-10",
+  "data_confidence": "medium",
+  "last_updated": "2026-05-23",
+  "last_verified": "2026-05-23",
   "aemo_gen_info_id": "2892",
   "confidence_score": "39",
   "development_stage": "epbc_submitted",
@@ -51,9 +51,30 @@
   "cod_history": [],
   "suppliers": [],
   "offtakes": [],
-  "scheme_contracts": [],
+  "scheme_contracts": [
+    {
+      "scheme": "CIS",
+      "round": "Tender 1 \u2014 NEM Generation",
+      "capacity_mw": 943,
+      "contract_type": "CISA (federal underwriting) \u2014 scheme records 936-943 MW; AEMO Gen Info 919 MW",
+      "source_url": "https://www.dcceew.gov.au/energy/renewable/capacity-investment-scheme/closed-cis-tenders"
+    }
+  ],
   "cost_sources": [],
-  "stakeholder_issues": [],
+  "stakeholder_issues": [
+    {
+      "issue": "Capacity discrepancy \u2014 scheme award vs AEMO nameplate",
+      "detail": "Scheme records show 936-943 MW awarded under CIS T1; AEMO Generation Information lists Valley of the Winds at 919 MW nameplate. Difference reflects design refinement during the approval process.",
+      "date": "2026-05-23",
+      "status": "tracking"
+    },
+    {
+      "issue": "Class 1 merits appeal pending against EPBC approval",
+      "detail": "Federal EPBC approval granted Sep 2025, but a Class 1 merits appeal is pending in the NSW Land and Environment Court. Outcome could delay construction start.",
+      "date": "2026-05-23",
+      "status": "tracking"
+    }
+  ],
   "sources": [
     {
       "title": "AEMO Generation Information Jan 2026",
@@ -62,5 +83,37 @@
       "source_tier": 1
     }
   ],
-  "timeline_events": []
+  "timeline_events": [
+    {
+      "date": "2024-12-11",
+      "date_precision": "day",
+      "event_type": "offtake_signed",
+      "title": "CIS Tender 1 underwriting awarded",
+      "detail": "ACEN Australia's Valley of the Winds wins CIS Tender 1 underwriting \u2014 largest NSW T1 wind winner. Scheme records cite 936-943 MW; AEMO Generation Information lists 919 MW.",
+      "sources": [
+        {
+          "title": "Standalone solar and wind dominate (WattClarity)",
+          "url": "https://wattclarity.com.au/articles/2024/12/standalone-solar-and-wind-dominate-list-of-19-successful-projects-from-latest-cis-tender/",
+          "date": "2024-12-11",
+          "source_tier": 2
+        }
+      ]
+    },
+    {
+      "date": "2025-06",
+      "date_precision": "month",
+      "event_type": "planning_approved",
+      "title": "IPC approval (June 2025)",
+      "detail": "NSW Independent Planning Commission granted approval June 2025.",
+      "sources": []
+    },
+    {
+      "date": "2025-09",
+      "date_precision": "month",
+      "event_type": "planning_approved",
+      "title": "EPBC approval (Sep 2025) \u2014 Class 1 merits appeal pending",
+      "detail": "Federal EPBC Act approval granted Sep 2025. A Class 1 merits appeal is pending in the NSW Land and Environment Court.",
+      "sources": []
+    }
+  ]
 }

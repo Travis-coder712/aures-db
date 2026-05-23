@@ -16,9 +16,9 @@
   "has_statcom": false,
   "has_harmonic_filter": false,
   "notable": "Hybrid wind+solar+BESS. Access rights: 707 MW wind + 300 MW solar + 300 MW/1,200 MWh BESS. Full vision ~2.5 GW. Adjacent to Transgrid Dinawan Substation. CIP holds option for minority interest. CIS Tender winner.",
-  "data_confidence": "low",
-  "last_updated": "2026-03-10",
-  "last_verified": "2026-03-10",
+  "data_confidence": "medium",
+  "last_updated": "2026-05-23",
+  "last_verified": "2026-05-23",
   "aemo_gen_info_id": "1924",
   "confidence_score": "54",
   "development_stage": "epbc_submitted",
@@ -53,9 +53,30 @@
   "cod_history": [],
   "suppliers": [],
   "offtakes": [],
-  "scheme_contracts": [],
+  "scheme_contracts": [
+    {
+      "scheme": "CIS",
+      "round": "Tender 4 \u2014 NEM Generation (Stage 1 wind)",
+      "capacity_mw": 357,
+      "contract_type": "CISA (federal underwriting)",
+      "source_url": "https://www.dcceew.gov.au/about/news/cis-tender-4-deliver-6-6gw-clean-energy"
+    },
+    {
+      "scheme": "CIS",
+      "round": "Tender 7 \u2014 NEM Generation (solar+BESS)",
+      "contract_type": "CISA (federal underwriting) \u2014 capacity not disclosed in initial article",
+      "source_url": "https://reneweconomy.com.au/australias-biggest-wind-project-and-8-battery-hybrids-among-19-winners-of-largest-renewable-auction-to-date/"
+    }
+  ],
   "cost_sources": [],
-  "stakeholder_issues": [],
+  "stakeholder_issues": [
+    {
+      "issue": "Awaiting IPC planning determination",
+      "detail": "Spark Renewables (Tenaga Nasional Berhad subsidiary) has the project before the NSW Independent Planning Commission. Both T4 wind and T7 solar+BESS underwriting agreements depend on planning approval.",
+      "date": "2026-05-23",
+      "status": "tracking"
+    }
+  ],
   "sources": [
     {
       "title": "AEMO Generation Information Jan 2026",
@@ -64,5 +85,36 @@
       "source_tier": 1
     }
   ],
-  "timeline_events": []
+  "timeline_events": [
+    {
+      "date": "2025-10-09",
+      "date_precision": "day",
+      "event_type": "offtake_signed",
+      "title": "CIS Tender 4 underwriting \u2014 Stage 1 wind (357 MW)",
+      "detail": "Dinawan Energy Hub Stage 1 wind component wins CIS Tender 4 underwriting (357 MW).",
+      "sources": [
+        {
+          "title": "CIS Tender 4 to deliver 6.6GW (DCCEEW)",
+          "url": "https://www.dcceew.gov.au/about/news/cis-tender-4-deliver-6-6gw-clean-energy",
+          "date": "2025-10-09",
+          "source_tier": 1
+        }
+      ]
+    },
+    {
+      "date": "2026-05-23",
+      "date_precision": "day",
+      "event_type": "offtake_signed",
+      "title": "CIS Tender 7 underwriting \u2014 solar+BESS component",
+      "detail": "Dinawan Energy Hub's solar+BESS component additionally wins CIS Tender 7 underwriting. Capacity not disclosed in the initial RenewEconomy article \u2014 refresh once DCCEEW publishes full numbers. Project remains awaiting IPC determination.",
+      "sources": [
+        {
+          "title": "Australia's biggest wind project among 19 winners (RenewEconomy)",
+          "url": "https://reneweconomy.com.au/australias-biggest-wind-project-and-8-battery-hybrids-among-19-winners-of-largest-renewable-auction-to-date/",
+          "date": "2026-05-23",
+          "source_tier": 2
+        }
+      ]
+    }
+  ]
 }

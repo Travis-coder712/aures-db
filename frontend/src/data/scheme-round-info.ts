@@ -397,4 +397,43 @@ export const ROUND_INFO: Record<string, RoundInfo> = {
       "Both projects must be commissioned by end-November 2027",
     ],
   },
+
+  'cis-tender-7-nem-gen': {
+    id: 'cis-tender-7-nem-gen',
+    resultsDate: '23 May 2026',
+    targetCOD: 'Variable per project \u2014 most 2028\u20132030',
+    capacitySought: '5 GW NEM generation (1.7 GW NSW, 1 GW VIC, 300 MW TAS reserved)',
+    capacityAwarded: '7.8 GW awarded across 19 projects (10 wind / 9 solar; 4.8 GW wind / 3.0 GW solar)',
+    supportTerm: 'CISA \u2014 typically 10\u201315 years',
+    bidParameters: [
+      'Revenue floor (annual)',
+      'Revenue ceiling (annual)',
+      'Annual payment cap (caps both support and clawback)',
+      'Strengthened MC4 (First Nations) + MC8 (Social Licence) merit criteria',
+    ],
+    eligibility: [
+      'Standalone wind, solar, or wind/solar + BESS hybrid generation',
+      'NEM-connected',
+      'Open to all states; reserved allocations for NSW, VIC, TAS',
+    ],
+    stateBreakdown: [
+      'NSW: 8 projects (state quota filled \u2014 3 wind, plus solar hybrids)',
+      'QLD: 3 projects (Bungaban, Theodore, Bullyard)',
+      'VIC: 2 wind (Willatook, Woolsthorpe)',
+      'TAS: 2 (Cellars Hill wind + Weasel solar)',
+      'SA: 1 (Whyte Yarcowie)',
+      '4 winners pending DCCEEW publication',
+    ],
+    mechanismNote:
+      'Standard CISA cap-and-floor revenue underwriting. T7 was structured as a single-track process for faster award turnaround. Wind-dominated outcome (10 of 19 projects, 4.8 GW vs 3 GW solar). 8 of 19 winners are battery-paired hybrids. Critically: DCCEEW guidance is that NSW will be excluded from the next federal generation round (T9) \u2014 NSW wind that did not win T7 now must compete in the state Roadmap LTESA Generation tender (Q2 2026, 2.5 GW, hybrid-favoured).',
+    keyFacts: [
+      "Largest CIS renewable auction to date \u2014 7.8 GW awarded vs 5 GW target (56% oversubscribed-on-award)",
+      "Australia's biggest wind project (Origin's 1,450 MW Yanco Delta) is the headline winner",
+      "$17B private investment + ~19,000 construction jobs unlocked",
+      "$1.2B in social-licence commitments + $257M Australian steel commitments",
+      "NSW filled its 8-project quota with 3 wind farms (Yanco Delta, Baldin, Bullewah) and 5 solar / hybrid projects",
+      "RenewEconomy initial article named 15 of 19 winners \u2014 4 names await DCCEEW media release",
+      "Pottinger Energy Park (SW REZ access holder) was the only SW REZ project without a CIS underwriting \u2014 likely Q2 2026 LTESA candidate",
+    ],
+  },
 }

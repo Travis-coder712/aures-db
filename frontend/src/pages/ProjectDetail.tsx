@@ -247,6 +247,61 @@ function OverviewTab({ project }: { project: Project }) {
         </section>
       )}
 
+      {/* Scheme Contracts (CIS / LTESA) */}
+      {project.scheme_contracts && project.scheme_contracts.length > 0 && (
+        <section>
+          <SectionTitle>Scheme Contracts (CIS / LTESA)</SectionTitle>
+          <div className="space-y-2">
+            {project.scheme_contracts.map((sc, i) => (
+              <div
+                key={i}
+                className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl p-4"
+              >
+                <div className="flex items-start justify-between gap-3 flex-wrap">
+                  <div className="flex items-center gap-2 flex-wrap">
+                    <span
+                      className={`text-[10px] font-semibold uppercase tracking-wide px-2 py-0.5 rounded-full ${
+                        sc.scheme === 'CIS'
+                          ? 'bg-purple-500/20 text-purple-300'
+                          : 'bg-emerald-500/20 text-emerald-300'
+                      }`}
+                    >
+                      {sc.scheme}
+                    </span>
+                    <span className="text-sm font-medium text-[var(--color-text)]">{sc.round}</span>
+                    {sc.contract_type && (
+                      <span className="text-[10px] text-[var(--color-text-muted)] italic">{sc.contract_type}</span>
+                    )}
+                  </div>
+                  <div className="text-right">
+                    {sc.capacity_mw !== undefined && sc.capacity_mw > 0 && (
+                      <div className="text-sm font-bold text-[var(--color-text)]">
+                        {Math.round(sc.capacity_mw).toLocaleString()} MW
+                      </div>
+                    )}
+                    {sc.storage_mwh !== undefined && sc.storage_mwh > 0 && (
+                      <div className="text-xs text-[var(--color-text-muted)]">
+                        {Math.round(sc.storage_mwh).toLocaleString()} MWh storage
+                      </div>
+                    )}
+                  </div>
+                </div>
+                {sc.source_url && (
+                  <a
+                    href={sc.source_url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-[10px] text-blue-400 hover:underline mt-1 inline-block"
+                  >
+                    Source ↗
+                  </a>
+                )}
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
+
       {/* Ownership History */}
       {project.ownership_history.length > 0 && (
         <section>

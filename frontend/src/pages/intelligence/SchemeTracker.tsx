@@ -8,8 +8,9 @@ import ScrollableTable from '../../components/common/ScrollableTable'
 import { ROUND_INFO } from '../../data/scheme-round-info'
 import type { RoundInfo } from '../../data/scheme-round-info'
 import { ESG_TRACKER_PROJECTS, ROUND_ESG_SUMMARIES } from '../../data/esg-tracker-data'
-import { CIS_PROJECTS, LTESA_PROJECTS, CIS_ROUNDS } from '../../data/scheme-rounds'
-import type { SchemeProject } from '../../data/scheme-rounds'
+import { CIS_PROJECTS, LTESA_PROJECTS, CIS_ROUNDS, LTESA_R8_CANDIDATES, NSW_WIND_COHORT } from '../../data/scheme-rounds'
+import type { SchemeProject, NSWWindCohortEntry, LtesaProbabilityBand } from '../../data/scheme-rounds'
+import { exportElementToPdf } from '../../lib/exportPdf'
 import type { ESGTrackerProject, PublicationStatus, AgreementStatus } from '../../data/esg-tracker-data'
 import DataProvenance from '../../components/common/DataProvenance'
 import { exportSchemePpt } from '../../lib/exportSchemePpt'
@@ -52,9 +53,9 @@ function fmtMW(mw: number): string {
 // Component
 // ============================================================
 
-const TABS = ['overview', 'boardroom', 'tracker', 'watchlist', 'esg', 'cis-success', 'cis-briefing', 'timeline'] as const
+const TABS = ['overview', 'boardroom', 'tracker', 'watchlist', 'esg', 'cis-success', 'cis-briefing', 'timeline', 'nsw-wind'] as const
 type Tab = typeof TABS[number]
-const TAB_LABELS: Record<Tab, string> = { overview: 'Overview', boardroom: 'Boardroom', tracker: 'Milestone Tracker', watchlist: 'Key Projects', esg: 'ESG Agreement Proxy', 'cis-success': 'CIS Success', 'cis-briefing': 'CIS Briefing', timeline: 'CIS/LTESA Timeline' }
+const TAB_LABELS: Record<Tab, string> = { overview: 'Overview', boardroom: 'Boardroom', tracker: 'Milestone Tracker', watchlist: 'Key Projects', esg: 'ESG Agreement Proxy', 'cis-success': 'CIS Success', 'cis-briefing': 'CIS Briefing', timeline: 'CIS/LTESA Timeline', 'nsw-wind': 'NSW Wind' }
 
 export default function SchemeTracker() {
   const [activeTab, setActiveTab] = useState<Tab>('overview')
@@ -606,6 +607,9 @@ export default function SchemeTracker() {
       {activeTab === 'cis-briefing' && <CISBriefingTab />}
       {activeTab === 'timeline' && (
         <SchemeTimelineTab />
+      )}
+      {activeTab === 'nsw-wind' && (
+        <NSWWindTab />
       )}
     </div>
   )
@@ -4958,6 +4962,546 @@ function SchemeTimelineTab() {
         Timeline data sourced from DCCEEW CIS tender results, AEMO Services LTESA announcements, and the AURES full scheme analysis.
         Construction status and agreement confidence derived from ESG Agreement Proxy analysis.
       </div>
+    </div>
+  )
+}
+
+// ============================================================
+// NSW Wind Deep Dive Tab (tab #9 — v3.09.0)
+// ============================================================
+//
+// 8 sections:
+//   1. CIS T7 NSW Results snapshot (announced 2026-05-23)
+//   2. Full NSW wind CIS/LTESA cohort table (12 projects)
+//   3. Timeline / Gantt of NSW wind builds
+//   4. NSW wind that hasn't won CIS/LTESA
+//   5. Upcoming NSW Generation LTESA (Q2 2026)
+//   6. 3-band qualitative probability scoring per candidate
+//   7. LTESA vs CISA mechanics comparison
+//   8. Shareable summary commentary (copy + PDF)
+
+const PROBABILITY_COLOUR: Record<LtesaProbabilityBand, string> = {
+  high: '#22c55e',
+  medium: '#f59e0b',
+  low: '#ef4444',
+}
+
+const RISK_CONFIG: Record<'on_track' | 'watch' | 'stalled', { label: string; colour: string }> = {
+  on_track: { label: 'On track', colour: '#22c55e' },
+  watch:    { label: 'Watch',    colour: '#f59e0b' },
+  stalled:  { label: 'Stalled',  colour: '#ef4444' },
+}
+
+const SCHEME_COLOUR: Record<string, string> = {
+  'CIS T1': '#3b82f6',
+  'CIS T4': '#6366f1',
+  'CIS T7': '#8b5cf6',
+  'LTESA R1': '#10b981',
+  'LTESA R3': '#14b8a6',
+  'LTESA R4': '#0ea5e9',
+}
+
+function plannningChip(status: NSWWindCohortEntry['planning_status']): string {
+  switch (status) {
+    case 'Operating': return '#22c55e'
+    case 'Commissioning': return '#a855f7'
+    case 'Construction': return '#3b82f6'
+    case 'EPBC Approved': return '#06b6d4'
+    case 'Awaiting IPC': return '#f59e0b'
+    case 'EPBC Submitted': return '#eab308'
+    case 'Planning Submitted': return '#facc15'
+    case 'Early Stage': return '#94a3b8'
+    default: return '#636e72'
+  }
+}
+
+function NSWWindTab() {
+  const commentaryRef = useRef<HTMLDivElement>(null)
+  const [pdfLoading, setPdfLoading] = useState(false)
+  const [copyOk, setCopyOk] = useState(false)
+
+  // Totals for header + cohort table footer
+  const cohortTotals = useMemo(() => {
+    const totalNameplate = NSW_WIND_COHORT.reduce((s, p) => s + p.total_mw, 0)
+    const totalAwarded = NSW_WIND_COHORT.reduce((s, p) => s + p.awarded_mw, 0)
+    const totalAccess = NSW_WIND_COHORT.reduce((s, p) => s + (p.rez_access_mw ?? 0), 0)
+    return { totalNameplate, totalAwarded, totalAccess }
+  }, [])
+
+  // Execution-risk roll-up — used for snapshot card + commentary
+  const riskBreakdown = useMemo(() => {
+    const stalled = NSW_WIND_COHORT.filter(p => p.execution_risk === 'stalled')
+    const watch = NSW_WIND_COHORT.filter(p => p.execution_risk === 'watch')
+    const onTrack = NSW_WIND_COHORT.filter(p => p.execution_risk === 'on_track')
+    const stalledMW = stalled.reduce((s, p) => s + p.awarded_mw, 0)
+    const watchMW = watch.reduce((s, p) => s + p.awarded_mw, 0)
+    const onTrackMW = onTrack.reduce((s, p) => s + p.awarded_mw, 0)
+    return { stalled, watch, onTrack, stalledMW, watchMW, onTrackMW }
+  }, [])
+
+  // T7 NSW awarded MW (across the 3 wind projects)
+  const t7NswWindAwarded = useMemo(() => {
+    return NSW_WIND_COHORT
+      .filter(p => p.scheme === 'CIS T7' && (p.technology === 'wind' || p.technology === 'hybrid'))
+      .reduce((s, p) => s + p.awarded_mw, 0)
+  }, [])
+
+  const t7Snapshot = useMemo(() => NSW_WIND_COHORT.filter(p => p.scheme === 'CIS T7'), [])
+
+  // Timeline data: each cohort entry plotted as award→COD (years).
+  const timelineData = useMemo(() => {
+    return NSW_WIND_COHORT.map(p => {
+      const awardYear = p.scheme.startsWith('CIS T1') ? 2024
+        : p.scheme.startsWith('CIS T4') ? 2025
+        : p.scheme.startsWith('CIS T7') ? 2026
+        : p.scheme.startsWith('LTESA R1') ? 2023
+        : p.scheme.startsWith('LTESA R3') ? 2023
+        : p.scheme.startsWith('LTESA R4') ? 2024
+        : 2024
+      const codYear = p.cod_expected
+        ? Number(p.cod_expected.slice(0, 4))
+        : awardYear + 5
+      return {
+        name: p.name,
+        awardYear,
+        codYear,
+        scheme: p.scheme,
+        durationYears: Math.max(1, codYear - awardYear),
+        awarded_mw: p.awarded_mw,
+        planning_status: p.planning_status,
+      }
+    }).sort((a, b) => a.codYear - b.codYear)
+  }, [])
+
+  // Shareable commentary text (one source of truth — used by both copy + PDF)
+  const commentaryText = `NSW Wind & CIS/LTESA — Snapshot (${new Date().toISOString().slice(0, 10)})
+
+CIS Tender 7 results landed 23 May 2026. NSW filled its 8-project state quota — three of those are wind: Origin's Yanco Delta (1,450 MW, NSW + EPBC approved 2023/2024), Goldwind's Baldin / Baldon Stage 2 (346 MW wind+battery, awaiting IPC), and BayWa r.e.'s Bullewah Stage 1 (283 MW, capped by SW REZ access right of ~804 MW total project). Total NSW wind awarded today: ${Math.round(t7NswWindAwarded).toLocaleString()} MW. Yanco Delta is now Australia's biggest single wind project.
+
+Cumulative cohort. Across CIS T1, T4, T7 and LTESA R1, R3, R4, twelve NSW wind/hybrid projects hold a scheme contract — totalling **~6.3 GW** of scheme-awarded capacity on a like-for-like Stage 1 basis (Liverpool Range Stage 1 634 MW of 1.3 GW approved; Uungula 200 MW LTESA contracted of 414 MW; Bullewah 283 MW access right of ~804 MW; Thunderbolt 192 MW Stage 1 IPC). The 12 projects span 9 with planning approval, 1 in construction (Uungula), 1 operational (Flyers Creek), and 2 awaiting IPC (Baldin, Bullewah, Dinawan wind Stage 1, Junction Rivers — the last of which also recently lost its SW REZ access right, a material headwind).
+
+Strategic context. NSW is excluded from the next federal CIS generation round (Tender 9) — the Q2 2026 NSW Roadmap LTESA Generation tender (2.5 GW, hybrid-favoured) is now the only realistic path for NSW wind that did not win T7. The round is specially designed for solar+BESS hybrids (battery capped at solar/wind capacity, minimum 4-hour storage), creating a structural disadvantage for wind-alone bids.
+
+Top Q2 2026 LTESA contenders. Pottinger Energy Park (1,300 MW wind+BESS, SW REZ access, missed T7 underwriting), Bookham (1,160 MW wind+BESS) and Hargraves (900 MW wind+solar+BESS) are configured exactly for this round — High likelihood. Liverpool Range Stage 2 (~700 MW wind-alone) and The Plains (2 GW wind) face the hybrid-bias penalty — Medium likelihood. Mega-scale wind-alone bids (>1.5 GW) compete with hybrids on cost.
+
+Scheme contracts unlikely to execute. ${riskBreakdown.stalled.length === 0 ? 'No projects in the cohort meet the "stalled" threshold today.' : `${riskBreakdown.stalled.length} project${riskBreakdown.stalled.length === 1 ? '' : 's'} (${Math.round(riskBreakdown.stalledMW).toLocaleString()} MW) flagged as stalled — meaning the CISA / LTESA contract is more likely than not NOT to be executed (the underlying project may still proceed merchant or under a future scheme): ${riskBreakdown.stalled.map(p => `**${p.name}** (${p.proponent}, ${p.scheme}) — ${p.risk_rationale}`).join(' ')}`} On the watch list (${riskBreakdown.watch.length} projects · ${Math.round(riskBreakdown.watchMW).toLocaleString()} MW): ${riskBreakdown.watch.map(p => p.name).join(', ')}. On track (${riskBreakdown.onTrack.length} projects · ${Math.round(riskBreakdown.onTrackMW).toLocaleString()} MW): ${riskBreakdown.onTrack.map(p => p.name).join(', ')}.
+
+Key risks to the 6.3 GW total. Junction Rivers' lost SW REZ access raises real questions about CISA execution within the 14-month window. Baldin and Bullewah are still pre-IPC. Valley of the Winds faces a Class 1 merits appeal on its EPBC approval. Wind-alone economics under a hybrid-favoured Q2 2026 LTESA round remains the central competitive question for Liverpool Range Stage 2 and similar candidates.`
+
+  async function handleCopy() {
+    try {
+      await navigator.clipboard.writeText(commentaryText)
+      setCopyOk(true)
+      setTimeout(() => setCopyOk(false), 2000)
+    } catch (err) {
+      console.error('Clipboard write failed:', err)
+    }
+  }
+
+  async function handlePdf() {
+    if (!commentaryRef.current) return
+    setPdfLoading(true)
+    try {
+      await exportElementToPdf(commentaryRef.current, {
+        filename: `aures-nsw-wind-cis-ltesa-${new Date().toISOString().slice(0, 10)}.pdf`,
+        title: 'NSW Wind & CIS/LTESA — Snapshot',
+        subtitle: 'AURES — Australian Renewable Energy System',
+      })
+    } catch (err) {
+      console.error('PDF export failed:', err)
+      alert('PDF generation failed — please try again.')
+    } finally {
+      setPdfLoading(false)
+    }
+  }
+
+  return (
+    <div className="space-y-8">
+      {/* ============================================================ */}
+      {/* Section 1 — T7 NSW Wind snapshot                             */}
+      {/* ============================================================ */}
+      <section>
+        <div className="flex items-center justify-between mb-3">
+          <h2 className="text-lg font-semibold text-[var(--color-text)]">CIS Tender 7 — NSW Wind Results</h2>
+          <span className="text-xs text-[var(--color-text-muted)]">Announced 23 May 2026</span>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-3 mb-4">
+          <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl p-4">
+            <div className="text-[10px] uppercase tracking-wide text-[var(--color-text-muted)]">NSW wind awarded today</div>
+            <div className="text-2xl font-bold text-[var(--color-text)] mt-1">{fmtMW(t7NswWindAwarded)}</div>
+            <div className="text-[10px] text-[var(--color-text-muted)] mt-1">across 3 wind / wind-hybrid projects</div>
+          </div>
+          <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl p-4">
+            <div className="text-[10px] uppercase tracking-wide text-[var(--color-text-muted)]">Total T7 capacity (NEM)</div>
+            <div className="text-2xl font-bold text-[var(--color-text)] mt-1">7.8 GW</div>
+            <div className="text-[10px] text-[var(--color-text-muted)] mt-1">19 projects (10 wind / 9 solar) vs 5 GW target</div>
+          </div>
+          <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl p-4">
+            <div className="text-[10px] uppercase tracking-wide text-[var(--color-text-muted)]">Cumulative NSW wind awarded</div>
+            <div className="text-2xl font-bold text-[var(--color-text)] mt-1">{fmtMW(cohortTotals.totalAwarded)}</div>
+            <div className="text-[10px] text-[var(--color-text-muted)] mt-1">CIS T1/T4/T7 + LTESA R1/R3/R4 — {NSW_WIND_COHORT.length} projects</div>
+          </div>
+          <div className="bg-amber-500/10 border border-amber-500/40 rounded-xl p-4">
+            <div className="text-[10px] uppercase tracking-wide text-amber-300">Strategic alert</div>
+            <div className="text-sm font-semibold text-amber-200 mt-1 leading-tight">NSW excluded from CIS T9</div>
+            <div className="text-[10px] text-amber-100/80 mt-1">Unwon NSW wind must now compete in the Q2 2026 state LTESA Generation round (2.5 GW, hybrid-favoured).</div>
+          </div>
+        </div>
+
+        {/* Execution risk roll-up */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mt-3">
+          <div className="bg-emerald-500/5 border border-emerald-500/30 rounded-xl p-3">
+            <div className="text-[10px] uppercase tracking-wide text-emerald-300">On track</div>
+            <div className="text-xl font-bold text-emerald-200 mt-1">{riskBreakdown.onTrack.length} projects · {fmtMW(riskBreakdown.onTrackMW)}</div>
+            <div className="text-[10px] text-emerald-100/70 mt-1">{riskBreakdown.onTrack.map(p => p.name).join(' · ')}</div>
+          </div>
+          <div className="bg-amber-500/5 border border-amber-500/30 rounded-xl p-3">
+            <div className="text-[10px] uppercase tracking-wide text-amber-300">Watch</div>
+            <div className="text-xl font-bold text-amber-200 mt-1">{riskBreakdown.watch.length} projects · {fmtMW(riskBreakdown.watchMW)}</div>
+            <div className="text-[10px] text-amber-100/70 mt-1">{riskBreakdown.watch.map(p => p.name).join(' · ')}</div>
+          </div>
+          <div className="bg-red-500/10 border border-red-500/40 rounded-xl p-3">
+            <div className="text-[10px] uppercase tracking-wide text-red-300">Stalled — scheme contract unlikely to execute</div>
+            <div className="text-xl font-bold text-red-200 mt-1">{riskBreakdown.stalled.length} {riskBreakdown.stalled.length === 1 ? 'project' : 'projects'} · {fmtMW(riskBreakdown.stalledMW)}</div>
+            <div className="text-[10px] text-red-100/70 mt-1">{riskBreakdown.stalled.length > 0 ? riskBreakdown.stalled.map(p => p.name).join(' · ') : 'None'}</div>
+            <div className="text-[9px] text-red-100/60 mt-1 italic">Project may still proceed merchant or under a future scheme.</div>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+          {t7Snapshot.filter(p => p.technology === 'wind' || p.technology === 'hybrid').map(p => (
+            <div key={p.project_id} className="bg-[var(--color-bg-card)] border border-purple-500/40 rounded-xl p-4">
+              <div className="flex items-center justify-between mb-2">
+                <span className="text-xs px-2 py-0.5 rounded-full bg-purple-500/20 text-purple-300 font-medium">CIS T7</span>
+                <span className="text-[10px] text-[var(--color-text-muted)]">{p.rez ?? '—'}</span>
+              </div>
+              <h3 className="text-sm font-semibold text-[var(--color-text)]">{p.name}</h3>
+              <div className="text-[10px] text-[var(--color-text-muted)] mb-2">{p.proponent}</div>
+              <div className="space-y-1 text-[11px]">
+                <div className="flex justify-between"><span className="text-[var(--color-text-muted)]">Awarded</span><span className="text-[var(--color-text)] font-medium">{fmtMW(p.awarded_mw)}</span></div>
+                <div className="flex justify-between"><span className="text-[var(--color-text-muted)]">Total project</span><span className="text-[var(--color-text)]">{fmtMW(p.total_mw)}</span></div>
+                <div className="flex justify-between items-center"><span className="text-[var(--color-text-muted)]">Planning</span>
+                  <span className="px-1.5 py-0.5 rounded-full text-[9px]" style={{ backgroundColor: `${plannningChip(p.planning_status)}20`, color: plannningChip(p.planning_status) }}>{p.planning_status}</span>
+                </div>
+                {p.fid_expected && (<div className="flex justify-between"><span className="text-[var(--color-text-muted)]">FID expected</span><span className="text-[var(--color-text)]">{p.fid_expected}</span></div>)}
+              </div>
+              {p.notes && <p className="text-[10px] text-[var(--color-text-muted)] mt-2 leading-snug italic">{p.notes}</p>}
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* ============================================================ */}
+      {/* Section 2 — NSW Wind cohort table                            */}
+      {/* ============================================================ */}
+      <section>
+        <h2 className="text-lg font-semibold text-[var(--color-text)] mb-3">NSW Wind Cohort with CIS/LTESA — All 12 Projects</h2>
+        <ScrollableTable>
+          <table className="w-full text-xs">
+            <thead>
+              <tr className="border-b border-[var(--color-border)] text-[var(--color-text-muted)] uppercase tracking-wide text-[10px]">
+                <th className="text-left p-2">Project</th>
+                <th className="text-left p-2 hidden md:table-cell">Proponent</th>
+                <th className="text-left p-2">Scheme</th>
+                <th className="text-right p-2">Awarded MW</th>
+                <th className="text-right p-2 hidden sm:table-cell">Total MW</th>
+                <th className="text-left p-2 hidden lg:table-cell">Stage</th>
+                <th className="text-left p-2 hidden md:table-cell">REZ</th>
+                <th className="text-right p-2 hidden lg:table-cell">Access MW</th>
+                <th className="text-left p-2">Planning</th>
+                <th className="text-left p-2">Execution risk</th>
+                <th className="text-left p-2 hidden xl:table-cell">FID exp.</th>
+                <th className="text-left p-2 hidden xl:table-cell">COD exp.</th>
+              </tr>
+            </thead>
+            <tbody>
+              {NSW_WIND_COHORT.map(p => {
+                const risk = p.execution_risk ? RISK_CONFIG[p.execution_risk] : null
+                return (
+                  <tr key={p.project_id} className="border-b border-[var(--color-border)]/40 hover:bg-white/5">
+                    <td className="p-2">
+                      <Link to={`/projects/${p.project_id}`} className="text-blue-400 hover:underline">{p.name}</Link>
+                      {p.technology === 'hybrid' && <span className="ml-1 text-[9px] text-cyan-400">+BESS</span>}
+                    </td>
+                    <td className="p-2 hidden md:table-cell text-[var(--color-text-muted)]">{p.proponent}</td>
+                    <td className="p-2">
+                      <span className="px-1.5 py-0.5 rounded-full text-[9px] font-medium" style={{ backgroundColor: `${SCHEME_COLOUR[p.scheme]}20`, color: SCHEME_COLOUR[p.scheme] }}>{p.scheme}</span>
+                    </td>
+                    <td className="p-2 text-right font-medium">{Math.round(p.awarded_mw).toLocaleString()}</td>
+                    <td className="p-2 text-right hidden sm:table-cell text-[var(--color-text-muted)]">{Math.round(p.total_mw).toLocaleString()}</td>
+                    <td className="p-2 hidden lg:table-cell text-[var(--color-text-muted)] text-[10px]">{p.stage_label}</td>
+                    <td className="p-2 hidden md:table-cell text-[var(--color-text-muted)] text-[10px]">{p.rez ?? '—'}</td>
+                    <td className="p-2 text-right hidden lg:table-cell text-[var(--color-text-muted)]">{p.rez_access_mw ? Math.round(p.rez_access_mw).toLocaleString() : '—'}</td>
+                    <td className="p-2">
+                      <span className="px-1.5 py-0.5 rounded-full text-[9px]" style={{ backgroundColor: `${plannningChip(p.planning_status)}20`, color: plannningChip(p.planning_status) }}>{p.planning_status}</span>
+                    </td>
+                    <td className="p-2">
+                      {risk ? (
+                        <span
+                          className="px-1.5 py-0.5 rounded-full text-[9px] font-medium"
+                          style={{ backgroundColor: `${risk.colour}20`, color: risk.colour }}
+                          title={p.risk_rationale ?? ''}
+                        >
+                          {risk.label}
+                        </span>
+                      ) : (
+                        <span className="text-[9px] text-[var(--color-text-muted)]">—</span>
+                      )}
+                    </td>
+                    <td className="p-2 hidden xl:table-cell text-[var(--color-text-muted)] text-[10px]">{p.fid_expected ?? '—'}</td>
+                    <td className="p-2 hidden xl:table-cell text-[var(--color-text-muted)] text-[10px]">{p.cod_expected ?? '—'}</td>
+                  </tr>
+                )
+              })}
+              <tr className="border-t-2 border-[var(--color-border)] font-bold bg-white/5">
+                <td className="p-2" colSpan={3}>Total — {NSW_WIND_COHORT.length} projects</td>
+                <td className="p-2 text-right">{Math.round(cohortTotals.totalAwarded).toLocaleString()}</td>
+                <td className="p-2 text-right hidden sm:table-cell">{Math.round(cohortTotals.totalNameplate).toLocaleString()}</td>
+                <td className="p-2 hidden lg:table-cell"></td>
+                <td className="p-2 hidden md:table-cell"></td>
+                <td className="p-2 text-right hidden lg:table-cell">{Math.round(cohortTotals.totalAccess).toLocaleString()}</td>
+                <td className="p-2"></td>
+                <td className="p-2"></td>
+                <td className="p-2 hidden xl:table-cell"></td>
+                <td className="p-2 hidden xl:table-cell"></td>
+              </tr>
+            </tbody>
+          </table>
+        </ScrollableTable>
+        <p className="text-[10px] text-[var(--color-text-muted)] italic mt-2">
+          Awarded MW = scheme contract capacity (CIS or LTESA). Total MW = full project nameplate (DB or proposed). Where they differ, scheme-awarded is typically a stage (e.g. Liverpool Range Stage 1, Uungula 400 of 414) or REZ-access-constrained (Bullewah 283 of 804).
+        </p>
+      </section>
+
+      {/* ============================================================ */}
+      {/* Section 3 — Timeline / Gantt                                 */}
+      {/* ============================================================ */}
+      <section>
+        <h2 className="text-lg font-semibold text-[var(--color-text)] mb-3">Build Timeline — Award → Expected COD</h2>
+        <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl p-4">
+          <div style={{ width: '100%', height: Math.max(360, timelineData.length * 30) }}>
+            <ResponsiveContainer>
+              <BarChart data={timelineData} layout="vertical" margin={{ top: 10, right: 30, left: 100, bottom: 30 }}>
+                <CartesianGrid strokeDasharray="3 3" stroke="#444" />
+                <XAxis type="number" domain={[2022, 2032]} tick={{ fill: '#9ca3af', fontSize: 11 }} ticks={[2023, 2024, 2025, 2026, 2027, 2028, 2029, 2030, 2031]} />
+                <YAxis type="category" dataKey="name" width={150} tick={{ fill: '#d1d5db', fontSize: 10 }} />
+                <Tooltip
+                  contentStyle={{ backgroundColor: '#0f172a', border: '1px solid #374151', borderRadius: '6px', fontSize: '12px' }}
+                  formatter={(_value, _name, props) => {
+                    const item = props.payload as { awardYear: number; codYear: number; scheme: string; awarded_mw: number; planning_status: string }
+                    return [`${item.awardYear} award → ${item.codYear} COD · ${item.scheme} · ${Math.round(item.awarded_mw)} MW · ${item.planning_status}`, 'Build window']
+                  }}
+                />
+                <Bar dataKey="awardYear" stackId="t" fill="transparent" />
+                <Bar dataKey="durationYears" stackId="t">
+                  {timelineData.map((d, i) => (
+                    <Cell key={i} fill={SCHEME_COLOUR[d.scheme] ?? '#888'} />
+                  ))}
+                </Bar>
+                <ReferenceLine x={2027.6} stroke="#ef4444" strokeDasharray="4 4" label={{ value: 'Eraring shutdown (Aug 2027)', fill: '#ef4444', fontSize: 10, position: 'top' }} />
+                <ReferenceLine x={2026.4} stroke="#22c55e" strokeDasharray="2 2" label={{ value: 'Today', fill: '#22c55e', fontSize: 10, position: 'top' }} />
+              </BarChart>
+            </ResponsiveContainer>
+          </div>
+          <p className="text-[10px] text-[var(--color-text-muted)] italic mt-2">
+            Bar starts at scheme-award year, extends to expected COD. Eraring (NSW's biggest coal) shutdown marked for context. Key projects to watch: Yanco Delta, Liverpool Range, Spicers Creek, Valley of the Winds — if FID slips on any, NSW wind GW-by-2030 trajectory shifts materially.
+          </p>
+        </div>
+      </section>
+
+      {/* ============================================================ */}
+      {/* Section 4 — NSW Wind that hasn't won CIS/LTESA               */}
+      {/* ============================================================ */}
+      <section>
+        <h2 className="text-lg font-semibold text-[var(--color-text)] mb-3">NSW Wind — Yet to Win a Scheme</h2>
+        <p className="text-xs text-[var(--color-text-muted)] mb-3">
+          NSW wind candidates still in development that have not yet secured a CIS or LTESA contract.
+          Per Travis's brief: Pottinger and Liverpool Range Stage 2 are the explicit watch projects.
+          With NSW excluded from federal CIS Tender 9, these projects need to win the upcoming Q2 2026 NSW Roadmap LTESA Generation tender (2.5 GW, hybrid-favoured) or wait for a future round.
+        </p>
+        <ScrollableTable>
+          <table className="w-full text-xs">
+            <thead>
+              <tr className="border-b border-[var(--color-border)] text-[var(--color-text-muted)] uppercase tracking-wide text-[10px]">
+                <th className="text-left p-2">Project</th>
+                <th className="text-left p-2 hidden md:table-cell">Developer</th>
+                <th className="text-right p-2">MW</th>
+                <th className="text-left p-2">Tech</th>
+                <th className="text-left p-2 hidden md:table-cell">REZ</th>
+                <th className="text-left p-2">Planning</th>
+                <th className="text-left p-2">Flags</th>
+              </tr>
+            </thead>
+            <tbody>
+              {LTESA_R8_CANDIDATES.map(c => (
+                <tr key={c.project_id} className="border-b border-[var(--color-border)]/40 hover:bg-white/5">
+                  <td className="p-2"><Link to={`/projects/${c.project_id}`} className="text-blue-400 hover:underline">{c.name}</Link></td>
+                  <td className="p-2 hidden md:table-cell text-[var(--color-text-muted)]">{c.developer}</td>
+                  <td className="p-2 text-right font-medium">{Math.round(c.capacity_mw).toLocaleString()}</td>
+                  <td className="p-2">
+                    <span className={`px-1.5 py-0.5 rounded-full text-[9px] ${c.technology === 'hybrid' ? 'bg-cyan-500/20 text-cyan-300' : 'bg-blue-500/20 text-blue-300'}`}>
+                      {c.technology === 'hybrid' ? 'Wind + BESS' : 'Wind'}
+                    </span>
+                  </td>
+                  <td className="p-2 hidden md:table-cell text-[var(--color-text-muted)] text-[10px]">{c.rez ?? '—'}</td>
+                  <td className="p-2 text-[10px] capitalize">{c.planning_stage.replace(/_/g, ' ')}</td>
+                  <td className="p-2 text-[9px] text-[var(--color-text-muted)]">{c.flags?.join(' · ') ?? '—'}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </ScrollableTable>
+      </section>
+
+      {/* ============================================================ */}
+      {/* Section 5 — Upcoming NSW Generation LTESA                    */}
+      {/* ============================================================ */}
+      <section>
+        <h2 className="text-lg font-semibold text-[var(--color-text)] mb-3">Upcoming — Q2 2026 NSW Roadmap Generation LTESA</h2>
+        <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl p-4 space-y-3">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 text-xs">
+            <div><div className="text-[var(--color-text-muted)] text-[10px] uppercase">Target</div><div className="font-semibold text-[var(--color-text)] mt-1">2.5 GW</div></div>
+            <div><div className="text-[var(--color-text-muted)] text-[10px] uppercase">Window</div><div className="font-semibold text-[var(--color-text)] mt-1">Q2 2026</div></div>
+            <div><div className="text-[var(--color-text-muted)] text-[10px] uppercase">Design</div><div className="font-semibold text-amber-300 mt-1">Hybrid-favoured</div></div>
+            <div><div className="text-[var(--color-text-muted)] text-[10px] uppercase">Counterparty</div><div className="font-semibold text-[var(--color-text)] mt-1">AEMO Services (ASL)</div></div>
+          </div>
+          <ul className="text-xs text-[var(--color-text)] space-y-1 list-disc pl-5">
+            <li>Battery component capped at solar/wind capacity (cannot exceed)</li>
+            <li>Minimum 4-hour storage duration on the battery</li>
+            <li>Solar/wind generation can be stored on-site (rather than curtailed) and dispatched when needed</li>
+            <li>Two further long-duration storage tenders also scheduled — Q2 2026 + 2027</li>
+            <li>Previous round saw 3.3× oversubscription on the generation allocation — competition will be intense</li>
+          </ul>
+          <div className="border-t border-[var(--color-border)] pt-3 text-xs text-[var(--color-text-muted)] leading-relaxed">
+            <strong className="text-[var(--color-text)]">Competitive dynamic:</strong> wind-alone projects compete directly with solar+BESS hybrids (cheaper energy + dispatch shape) and wind+BESS hybrids (e.g. Pottinger). Wind-alone has a capacity-factor advantage but no dispatch shape — under a hybrid-bias structure, that asymmetry penalises mega-scale wind-only bids (Liverpool Range Stage 2, The Plains).
+          </div>
+        </div>
+      </section>
+
+      {/* ============================================================ */}
+      {/* Section 6 — Probability scoring (H/M/L)                      */}
+      {/* ============================================================ */}
+      <section>
+        <h2 className="text-lg font-semibold text-[var(--color-text)] mb-3">Q2 2026 LTESA Win Probability — Qualitative Bands</h2>
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-3">
+          {(['high', 'medium', 'low'] as LtesaProbabilityBand[]).map(band => {
+            const bandCandidates = LTESA_R8_CANDIDATES.filter(c => c.probability === band)
+            const bandLabel = band === 'high' ? 'High Likelihood' : band === 'medium' ? 'Medium Likelihood' : 'Low Likelihood'
+            return (
+              <div key={band} className="bg-[var(--color-bg-card)] border rounded-xl p-3" style={{ borderColor: `${PROBABILITY_COLOUR[band]}60` }}>
+                <div className="flex items-center justify-between mb-3">
+                  <h3 className="text-sm font-semibold" style={{ color: PROBABILITY_COLOUR[band] }}>{bandLabel}</h3>
+                  <span className="text-[10px] text-[var(--color-text-muted)]">{bandCandidates.length} {bandCandidates.length === 1 ? 'project' : 'projects'} · {fmtMW(bandCandidates.reduce((s, c) => s + c.capacity_mw, 0))}</span>
+                </div>
+                <div className="space-y-3">
+                  {bandCandidates.map(c => (
+                    <div key={c.project_id} className="border-l-2 pl-3" style={{ borderColor: PROBABILITY_COLOUR[band] }}>
+                      <div className="flex items-center justify-between">
+                        <Link to={`/projects/${c.project_id}`} className="text-xs font-medium text-blue-400 hover:underline">{c.name}</Link>
+                        <span className="text-[10px] text-[var(--color-text-muted)]">{Math.round(c.capacity_mw)} MW</span>
+                      </div>
+                      <div className="text-[10px] text-[var(--color-text-muted)]">{c.developer}</div>
+                      <p className="text-[11px] text-[var(--color-text)]/90 mt-1 leading-snug">{c.rationale}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )
+          })}
+        </div>
+        <p className="text-[10px] text-[var(--color-text-muted)] italic mt-2">
+          Bands assigned by AURES based on planning maturity, hybridisation fit, REZ access, developer execution, and size fit. Not a tendering forecast — qualitative read for portfolio prioritisation. Refresh after the Q2 2026 round results land.
+        </p>
+      </section>
+
+      {/* ============================================================ */}
+      {/* Section 7 — LTESA vs CISA mechanics                          */}
+      {/* ============================================================ */}
+      <section>
+        <h2 className="text-lg font-semibold text-[var(--color-text)] mb-3">LTESA vs CISA — Mechanism Comparison for NSW Wind</h2>
+        <ScrollableTable>
+          <table className="w-full text-xs">
+            <thead>
+              <tr className="border-b border-[var(--color-border)] text-[var(--color-text-muted)] uppercase tracking-wide text-[10px]">
+                <th className="text-left p-2">Aspect</th>
+                <th className="text-left p-2">CISA (Federal)</th>
+                <th className="text-left p-2">LTESA (NSW State)</th>
+              </tr>
+            </thead>
+            <tbody>
+              {[
+                { aspect: 'Mechanism', cisa: 'Two-sided revenue floor + ceiling. Government pays 90% of shortfall below floor; project pays back 50% of excess above ceiling.', ltesa: 'Strike-price swap — fixed strike vs spot. Operator receives shortfall when spot below strike, pays difference when above.' },
+                { aspect: 'Term', cisa: '10–15 years typical', ltesa: '15 years generation · 14 years firming · 25 years LDS' },
+                { aspect: 'Indexation', cisa: 'CPI-linked', ltesa: 'CPI-linked' },
+                { aspect: 'Counterparty', cisa: 'DCCEEW (Commonwealth)', ltesa: 'AEMO Services (NSW Crown — Consumer Trustee)' },
+                { aspect: 'Scope after T7', cisa: 'NSW excluded from T9 generation', ltesa: 'Sole remaining underwriting path for NSW wind' },
+                { aspect: 'Hybrid bias', cisa: 'T4 awarded hybrids 12 of 20 — softer bias', ltesa: 'Q2 2026 round explicitly hybrid-favoured (battery ≤ gen, 4hr+)' },
+                { aspect: 'Settlement', cisa: 'Commonwealth-funded', ltesa: 'NSW electricity-bill levy (Energy Security Target Charge)' },
+                { aspect: 'Bid eligibility', cisa: 'NEM-wide (subject to state reservations)', ltesa: 'NSW-only' },
+                { aspect: 'Upside cap', cisa: 'Hard ceiling — caps high-RRP gains', ltesa: 'Strike-only — operator forgoes upside via the swap leg' },
+                { aspect: 'Downside floor', cisa: '90% of shortfall covered up to annual cap', ltesa: 'Strike fully bridges downside (subject to availability factor)' },
+              ].map(row => (
+                <tr key={row.aspect} className="border-b border-[var(--color-border)]/40">
+                  <td className="p-2 font-medium text-[var(--color-text)]">{row.aspect}</td>
+                  <td className="p-2 text-[var(--color-text-muted)]">{row.cisa}</td>
+                  <td className="p-2 text-[var(--color-text-muted)]">{row.ltesa}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </ScrollableTable>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mt-4 text-xs">
+          <div className="bg-emerald-500/5 border border-emerald-500/30 rounded-xl p-4">
+            <h4 className="text-sm font-semibold text-emerald-300 mb-2">LTESA advantages for NSW wind</h4>
+            <ul className="space-y-1 list-disc pl-5 text-[var(--color-text)]">
+              <li>No upside ceiling drag in moderate-spot scenarios — only the swap leg</li>
+              <li>Longer term options (15 yrs gen, 25 yrs LDS) than typical CISA</li>
+              <li>NSW-only competitive field — narrower than national CISA</li>
+              <li>Sole remaining path after CIS T7 closes the federal door</li>
+            </ul>
+          </div>
+          <div className="bg-amber-500/5 border border-amber-500/30 rounded-xl p-4">
+            <h4 className="text-sm font-semibold text-amber-300 mb-2">CISA advantages (for reference)</h4>
+            <ul className="space-y-1 list-disc pl-5 text-[var(--color-text)]">
+              <li>Floor + ceiling band gives a defined revenue corridor</li>
+              <li>National field can favour projects with cross-state portfolio value</li>
+              <li>Federal counterparty risk lower than state levy-funded mechanism</li>
+              <li>Annual payment cap limits clawback exposure on high-RRP years</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      {/* ============================================================ */}
+      {/* Section 8 — Shareable summary commentary                     */}
+      {/* ============================================================ */}
+      <section>
+        <div className="flex items-center justify-between mb-3">
+          <h2 className="text-lg font-semibold text-[var(--color-text)]">Shareable Summary</h2>
+          <div className="flex items-center gap-2">
+            <button
+              onClick={handleCopy}
+              className="text-xs px-3 py-1.5 rounded-lg border border-[var(--color-border)] text-[var(--color-text)] hover:border-blue-500 transition-colors"
+            >
+              {copyOk ? '✓ Copied' : '📋 Copy to clipboard'}
+            </button>
+            <button
+              onClick={handlePdf}
+              disabled={pdfLoading}
+              className="text-xs px-3 py-1.5 rounded-lg border border-[var(--color-border)] text-[var(--color-text)] hover:border-blue-500 transition-colors disabled:opacity-50"
+            >
+              {pdfLoading ? '⏳ Generating…' : '📄 Export PDF'}
+            </button>
+          </div>
+        </div>
+        <div ref={commentaryRef} className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl p-5 text-sm leading-relaxed whitespace-pre-line text-[var(--color-text)]">
+          {commentaryText}
+        </div>
+        <p className="text-[10px] text-[var(--color-text-muted)] italic mt-2">
+          Sources: RenewEconomy (CIS T7 announcement, 2026-05-23, Tier 2); AEMO Services / ASL (LTESA R7 announcement, 2026-05-15, Tier 1); DCCEEW (CIS T9 NSW exclusion guidance, Tier 1, pending full publication).
+        </p>
+      </section>
     </div>
   )
 }

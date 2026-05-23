@@ -11,16 +11,51 @@
   "has_syncon": false,
   "has_statcom": false,
   "has_harmonic_filter": false,
-  "data_confidence": "low",
-  "last_updated": "2026-03-10",
-  "last_verified": "2026-03-10",
+  "data_confidence": "medium",
+  "last_updated": "2026-05-23",
+  "last_verified": "2026-05-23",
   "aemo_gen_info_id": "2583",
-  "timeline": [],
+  "timeline": [
+    {
+      "date": "2024-10",
+      "date_precision": "month",
+      "event_type": "planning_approved",
+      "title": "IPC approval (Oct 2024)",
+      "detail": "NSW Independent Planning Commission granted approval Oct 2024.",
+      "sources": []
+    },
+    {
+      "date": "2024-12-11",
+      "date_precision": "day",
+      "event_type": "offtake_signed",
+      "title": "CIS Tender 1 underwriting awarded (700 MW)",
+      "detail": "Spicers Creek wins CIS Tender 1 underwriting — 700 MW. One of 7 NSW T1 winners. Squadron Energy (Tattarang).",
+      "sources": [
+        { "title": "Standalone solar and wind dominate (WattClarity)", "url": "https://wattclarity.com.au/articles/2024/12/standalone-solar-and-wind-dominate-list-of-19-successful-projects-from-latest-cis-tender/", "date": "2024-12-11", "source_tier": 2 }
+      ]
+    },
+    {
+      "date": "2025-03",
+      "date_precision": "month",
+      "event_type": "planning_approved",
+      "title": "EPBC approval (March 2025)",
+      "detail": "Federal EPBC Act approval granted March 2025.",
+      "sources": []
+    }
+  ],
   "ownership_history": [],
   "cod_history": [],
   "suppliers": [],
   "offtakes": [],
-  "scheme_contracts": [],
+  "scheme_contracts": [
+    {
+      "scheme": "CIS",
+      "round": "Tender 1 — NEM Generation",
+      "capacity_mw": 700,
+      "contract_type": "CISA (federal underwriting)",
+      "source_url": "https://www.dcceew.gov.au/energy/renewable/capacity-investment-scheme/closed-cis-tenders"
+    }
+  ],
   "cost_sources": [],
   "stakeholder_issues": [],
   "sources": [

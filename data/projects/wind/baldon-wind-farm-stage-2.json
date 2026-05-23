@@ -12,18 +12,58 @@
   "has_syncon": false,
   "has_statcom": false,
   "has_harmonic_filter": false,
-  "data_confidence": "low",
-  "last_updated": "2026-03-10",
-  "last_verified": "2026-03-10",
+  "data_confidence": "medium",
+  "last_updated": "2026-05-23",
+  "last_verified": "2026-05-23",
   "aemo_gen_info_id": "2595",
-  "timeline": [],
+  "timeline": [
+    {
+      "date": "2026-05-23",
+      "date_precision": "day",
+      "event_type": "offtake_signed",
+      "title": "CIS Tender 7 underwriting awarded (346 MW wind + BESS)",
+      "detail": "Goldwind's Baldin / Baldon Stage 2 wins CIS Tender 7 underwriting — 346 MW wind paired with battery in the CIS bid. RenewEconomy article refers to the project as 'Baldin'; the AEMO project ID is 'Baldon Wind Farm Stage 2'.",
+      "sources": [
+        { "title": "Australia's biggest wind project among 19 winners (RenewEconomy)", "url": "https://reneweconomy.com.au/australias-biggest-wind-project-and-8-battery-hybrids-among-19-winners-of-largest-renewable-auction-to-date/", "date": "2026-05-23", "source_tier": 2 }
+      ]
+    },
+    {
+      "date": "2025-05",
+      "date_precision": "month",
+      "event_type": "planning_submitted",
+      "title": "Response to Submissions lodged with DPHI",
+      "detail": "RTS lodged with NSW Department of Planning, Housing and Infrastructure. Project still awaiting Independent Planning Commission determination as of T7 award.",
+      "sources": []
+    }
+  ],
   "ownership_history": [],
   "cod_history": [],
   "suppliers": [],
   "offtakes": [],
-  "scheme_contracts": [],
+  "scheme_contracts": [
+    {
+      "scheme": "CIS",
+      "round": "Tender 7 — NEM Generation",
+      "capacity_mw": 346,
+      "contract_type": "CISA (federal underwriting) — wind + BESS hybrid bid",
+      "source_url": "https://reneweconomy.com.au/australias-biggest-wind-project-and-8-battery-hybrids-among-19-winners-of-largest-renewable-auction-to-date/"
+    }
+  ],
   "cost_sources": [],
-  "stakeholder_issues": [],
+  "stakeholder_issues": [
+    {
+      "issue": "Awaiting IPC planning determination",
+      "detail": "Response to Submissions lodged with DPHI May 2025; project still awaiting Independent Planning Commission determination at time of T7 award. CISA execution will be gated on planning approval.",
+      "date": "2026-05-23",
+      "status": "tracking"
+    },
+    {
+      "issue": "Project name inconsistency — Baldin vs Baldon",
+      "detail": "RenewEconomy 2026-05-23 article refers to the project as 'Baldin'; AEMO Generation Information uses 'Baldon Wind Farm Stage 2'. Same Goldwind project, different spellings in the public record.",
+      "date": "2026-05-23",
+      "status": "tracking"
+    }
+  ],
   "sources": [
     {
       "title": "AEMO Generation Information Jan 2026",

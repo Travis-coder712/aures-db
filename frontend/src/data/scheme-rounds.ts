@@ -135,13 +135,15 @@ export const CIS_ROUNDS: CISRound[] = [
     name: 'CIS Tender 7 — NEM Generation',
     type: 'generation',
     market: 'NEM',
-    announced_date: '',
-    total_capacity_mw: 0,
-    total_storage_mwh: 0,
-    num_projects: 0,
+    announced_date: '2026-05-23',
+    total_capacity_mw: 7800,
+    total_storage_mwh: 5450,
+    num_projects: 19,
     project_ids: [],
-    description: 'Seeking 5 GW of NEM generation capacity. Registrations opened October 2025. Results expected May 2026.',
+    description: 'Largest CIS renewable auction to date. 19 winning projects deliver 7.8 GW against a 5 GW target — wind dominates (4.8 GW wind vs 3.0 GW solar across 10 wind and 9 solar projects), with 8 of the 19 being battery-paired hybrids. NSW filled its 8-project state quota including the country\'s biggest wind project (Origin\'s 1,450 MW Yanco Delta). The 19 winners unlock ~$17B private investment, ~19,000 construction jobs, $1.2B in social-licence commitments and $257M of Australian steel. Only 15 of 19 winners named in the initial RenewEconomy article (2026-05-23) — the remaining 4 await DCCEEW media release.',
+    key_changes: 'Largest single CIS auction (7.8 GW awarded). Wind-dominated (10 of 19). 4 of 19 names not yet public. **NSW will be excluded from the next federal CIS generation round (Tender 9)** — NSW wind without a T7 win now competes only in the state Roadmap LTESA Generation tender (Q2 2026, 2.5 GW, hybrid-favoured).',
     sources: [
+      { title: 'Australia\'s biggest wind project and 8 battery hybrids among 19 winners (RenewEconomy)', url: 'https://reneweconomy.com.au/australias-biggest-wind-project-and-8-battery-hybrids-among-19-winners-of-largest-renewable-auction-to-date/', date: '2026-05-23', source_tier: 2 },
       { title: 'Australia opens CIS Tender 7 (PV Tech)', url: 'https://www.pv-tech.org/australia-opens-capacity-investment-scheme-tender-7-seeking-5gw-of-renewables/', source_tier: 2 },
     ],
   },
@@ -175,6 +177,7 @@ export interface SchemeProject {
   state: string
   location?: string
   project_id?: string // Link to master project record
+  notes?: string      // Optional inline caveat — e.g. capacity awarded vs project total, missing data flags
 }
 
 export const CIS_PROJECTS: Record<string, SchemeProject[]> = {
@@ -265,6 +268,29 @@ export const CIS_PROJECTS: Record<string, SchemeProject[]> = {
     { name: 'Smoky Creek Solar Power Station', developer: 'Edify Energy', technology: 'hybrid', capacity_mw: 300, storage_mwh: 1200, state: 'QLD', project_id: 'smoky-creek-solar-power-station' },
     { name: 'Tallawang Solar Hybrid', developer: 'Potentia Energy', technology: 'hybrid', capacity_mw: 500, storage_mwh: 1000, state: 'NSW', project_id: 'tallawang-solar-and-bess' },
     { name: 'Willogoleche 2 Wind Farm', developer: 'ENGIE / Foresight', technology: 'wind', capacity_mw: 108, state: 'SA', project_id: 'willogoleche-2-wind-farm' },
+  ],
+  'cis-tender-7-nem-gen': [
+    // NSW (3 wind + 1 solar hybrid + 1 solar — note: NSW filled its 8-project state quota; 3 names of those 8 not in initial RenewEconomy article)
+    { name: 'Yanco Delta Wind Farm', developer: 'Origin Energy', technology: 'wind', capacity_mw: 1450, state: 'NSW', location: 'South-West REZ — Jerilderie', project_id: 'yanco-delta-wind-farm', notes: 'Biggest single wind project in Australia. Origin\'s first new renewable since announcing Eraring closure. Full project ~1,460 MW (DB) / 1,450 MW (T7 awarded). SW REZ grid access secured 2025. Targeting FID mid-FY27.' },
+    { name: 'Baldin (Baldon Stage 2)', developer: 'Goldwind Australia', technology: 'hybrid', capacity_mw: 346, state: 'NSW', location: 'South-West REZ — Hay Plains', project_id: 'baldon-wind-farm-stage-2', notes: '346 MW wind paired with battery in CIS bid. Project still not planning-approved — Response to Submissions lodged with DPHI May 2025; awaiting Independent Planning Commission determination. Full Baldon project = Stage 1 + Stage 2 (~360 MW Stage 1 + 1,040 MW Stage 2 in DB).' },
+    { name: 'Bullewah (Bullawah Stage 1)', developer: 'BayWa r.e.', technology: 'wind', capacity_mw: 283, state: 'NSW', location: 'South-West REZ — south of Hay', project_id: 'bullawah-wind-farm-stage-1', notes: 'Capacity awarded constrained by 283 MW SW REZ access right. Full proposed project ~804 MW (Stages 1 + 2). Stage 1 still planning_submitted. Planning approval not yet granted.' },
+    { name: 'Birriwa Solar Farm', developer: 'ACEN Renewables', technology: 'hybrid', capacity_mw: 600, storage_mwh: 2400, state: 'NSW', location: 'Central West Orana REZ', project_id: 'birriwa-solar-farm', notes: 'Largest solar+BESS hybrid awarded in T7.' },
+    { name: 'Dinawan Solar (Dinawan Energy Hub)', developer: 'Spark Renewables', technology: 'hybrid', capacity_mw: 0, state: 'NSW', location: 'South-West REZ', project_id: 'dinawan-energy-hub', notes: 'Solar+battery component of the broader Dinawan Energy Hub (separate from the 357 MW Dinawan Stage 1 wind CIS T4 win). Capacity not disclosed in initial article. Project awaiting IPC determination.' },
+    { name: 'Kayuga Solar', developer: 'Undisclosed', technology: 'solar', capacity_mw: 0, state: 'NSW', notes: 'Capacity not disclosed in initial RenewEconomy article. Project ID not yet matched in AURES DB. Likely to add battery storage outside CIS parameters.' },
+    // QLD (3 — 2 wind, 1 hybrid wind+BESS, 1 solar)
+    { name: 'Bungaban Wind + Battery', developer: 'Windlab', technology: 'hybrid', capacity_mw: 1150, storage_mwh: 1450, state: 'QLD', project_id: 'bungaban-wind-farm', notes: '1,150 MW wind + 1,450 MWh battery. Long-term PPA with Rio Tinto for smelter/refinery power; CIS win helps competitive pricing. Full DB project = 1,400 MW (project total).' },
+    { name: 'Theodore Wind Farm', developer: 'RWE Renewables', technology: 'wind', capacity_mw: 1000, state: 'QLD', project_id: 'theodore-wind-farm', notes: 'Previously threatened by LNP state government. Full DB project = 1,054 MW.' },
+    { name: 'Bullyard Solar Farm', developer: 'European Energy', technology: 'solar', capacity_mw: 0, state: 'QLD', project_id: 'bullyard-solar-farm', notes: 'Capacity not disclosed in initial article. Likely to add battery storage outside CIS parameters. DB has 97 MW listed but T7 award likely covers larger expansion.' },
+    // VIC (2 wind)
+    { name: 'Willatook Wind Farm', developer: 'Engie', technology: 'wind', capacity_mw: 338, state: 'VIC', project_id: 'willatook', notes: 'Victoria sought only wind projects in T7. DB has full project = 450 MW.' },
+    { name: 'Woolsthorpe Wind Farm', developer: 'ICA Partners', technology: 'wind', capacity_mw: 70, state: 'VIC', project_id: 'woolsthorpe-wind-farm' },
+    // SA (1 wind)
+    { name: 'Whyte Yarcowie Wind Farm', developer: 'EdF Renewables', technology: 'wind', capacity_mw: 0, state: 'SA', project_id: 'whyte-yarcowie', notes: 'South Australia\'s only T7 winner. Capacity not disclosed in initial article. DB has full project = 574 MW.' },
+    // TAS (1 wind + 1 solar — Gamuda did both)
+    { name: 'Cellars Hill Wind Farm', developer: 'Gamuda', technology: 'wind', capacity_mw: 0, state: 'TAS', notes: 'Project ID not yet matched in AURES DB. Capacity not disclosed. Located near Weasel solar project (also Gamuda).' },
+    { name: 'Weasel Solar Farm', developer: 'Gamuda', technology: 'solar', capacity_mw: 0, state: 'TAS', project_id: 'weasel-solar-farm-and-bess-kci', notes: 'Unusual: major solar farm on central highlands. Capacity not disclosed in initial article. DB has 144 MW for Weasel Solar + BESS.' },
+    // 4 winners unnamed in RenewEconomy initial article — pending DCCEEW media release
+    // Refresh this array once full list lands.
   ],
 }
 
@@ -422,3 +448,414 @@ export const LTESA_PROJECTS: Record<string, SchemeProject[]> = {
     { name: 'Sydney / Newcastle VPP', developer: 'Enel X Australia', technology: 'vpp', capacity_mw: 32, state: 'NSW', location: 'Sydney + Newcastle (business customers)' },
   ],
 }
+
+// ============================================================
+// UPCOMING LTESA — NSW Generation Tender (Q2 2026)
+// ============================================================
+//
+// The next NSW Roadmap Generation LTESA round opens Q2 2026 with a 2.5 GW target.
+// It is specially designed for solar+BESS hybrids (battery ≤ solar/wind capacity,
+// minimum 4-hour storage). Two further long-duration storage tenders are scheduled
+// (Q2 2026 + 2027). This round is the only realistic path remaining for NSW wind
+// projects that did not win CIS Tender 7 — NSW is excluded from the next federal
+// CIS generation round (Tender 9).
+//
+// `LTESA_R8_CANDIDATES` lists known NSW wind candidates with a qualitative
+// High/Medium/Low probability assessment per Travis's directive. Rationales cite
+// planning maturity, hybridisation fit, REZ access, developer execution, size fit.
+
+export type LtesaProbabilityBand = 'high' | 'medium' | 'low'
+
+export interface LtesaCandidate {
+  project_id: string
+  name: string
+  developer: string
+  capacity_mw: number
+  technology: 'wind' | 'hybrid'         // wind-alone vs wind+BESS hybrid
+  rez?: string                          // 'south-west' | 'central-west-orana' | etc.
+  rez_access_mw?: number                // Awarded REZ grid-access right (where known)
+  planning_stage: 'approved' | 'ipc_pending' | 'submitted' | 'pre_planning'
+  probability: LtesaProbabilityBand
+  rationale: string                     // 2–3 sentence assessment, sourced where possible
+  flags?: string[]                      // Optional: ['wind-alone', 'staged', 'mega-scale']
+}
+
+export const LTESA_R8_CANDIDATES: LtesaCandidate[] = [
+  // ----- HIGH likelihood -----
+  {
+    project_id: 'pottinger-energy-park-wind-kci',
+    name: 'Pottinger Energy Park (Wind)',
+    developer: 'Someva Renewables / AGL Energy',
+    capacity_mw: 1300,
+    technology: 'hybrid',
+    rez: 'south-west',
+    planning_stage: 'submitted',
+    probability: 'high',
+    rationale: 'Wind+BESS hybrid in the SW REZ — exactly the configuration the Q2 2026 round was designed for. Pottinger is the only SW REZ access-rights holder that missed a CIS T7 underwriting, so AGL has explicit motivation to bid LTESA. Planning still in DPHI submission, but a Roadmap LTESA can be awarded conditional on approval.',
+    flags: ['hybrid'],
+  },
+  {
+    project_id: 'bookham-wf-and-bess',
+    name: 'Bookham Wind Farm + BESS',
+    developer: 'Bookham Wind',
+    capacity_mw: 1160,
+    technology: 'hybrid',
+    planning_stage: 'submitted',
+    probability: 'high',
+    rationale: 'Wind+BESS hybrid sized close to round\'s typical award envelope. Hybrid configuration scores well under the new ≤-solar/wind battery, min-4hr-storage rules. Main risk is planning maturity.',
+    flags: ['hybrid'],
+  },
+  {
+    project_id: 'hargraves-energy-project-wind-solar-and-bess',
+    name: 'Hargraves (Wind + Solar + BESS)',
+    developer: 'Energy Estate',
+    capacity_mw: 900,
+    technology: 'hybrid',
+    planning_stage: 'submitted',
+    probability: 'high',
+    rationale: 'Tri-tech hybrid (wind + solar + BESS) — strongest configuration for a hybrid-favoured round. Energy Estate has executed prior NSW projects. Planning submission progress and grid connection status are the swing factors.',
+    flags: ['hybrid'],
+  },
+  // ----- MEDIUM likelihood -----
+  {
+    project_id: 'liverpool-range-wind-farm',
+    name: 'Liverpool Range — Stage 2',
+    developer: 'Tilt Renewables',
+    capacity_mw: 700,
+    technology: 'wind',
+    rez: 'central-west-orana',
+    planning_stage: 'approved',
+    probability: 'medium',
+    rationale: 'Stage 1 (634 MW) won CIS T4 and is EPBC-approved. Stage 2 is wind-alone in a round explicitly engineered to favour hybrids — that\'s a structural penalty. Mature developer with a proven LTESA track record (Palmer) and CWO REZ position offset some of the disadvantage.',
+    flags: ['wind-alone', 'staged'],
+  },
+  {
+    project_id: 'bullawah-wind-farm-stage-2',
+    name: 'Bullawah Wind Farm — Stage 2',
+    developer: 'BayWa r.e.',
+    capacity_mw: 276,
+    technology: 'wind',
+    rez: 'south-west',
+    planning_stage: 'submitted',
+    probability: 'medium',
+    rationale: 'Stage 1 (283 MW) just won CIS T7 — BayWa now has SW REZ momentum. Stage 2 is wind-alone in a hybrid-favoured round; smaller scale (276 MW) helps fit into the 2.5 GW envelope. Awaiting Stage 1 IPC outcome will likely gate Stage 2 timing.',
+    flags: ['wind-alone', 'staged'],
+  },
+  {
+    project_id: 'the-plains',
+    name: 'The Plains',
+    developer: 'Engie',
+    capacity_mw: 2030,
+    technology: 'wind',
+    planning_stage: 'submitted',
+    probability: 'medium',
+    rationale: 'Mega-scale wind farm (2 GW+) competing with hybrids on cost. Engie\'s execution credentials are good (Goyder North, Hexham, Willatook T7). Size is the main risk — at 2 GW it consumes most of a 2.5 GW round on its own, so likely a partial award or carve-out at best.',
+    flags: ['wind-alone', 'mega-scale'],
+  },
+  {
+    project_id: 'skye-ridge-wind-farm',
+    name: 'Skye Ridge',
+    developer: 'Origin Energy',
+    capacity_mw: 1300,
+    technology: 'wind',
+    planning_stage: 'submitted',
+    probability: 'medium',
+    rationale: 'Origin already won the headline T7 prize (Yanco Delta 1,450 MW) — strategic priority for further wind underwriting may have shifted. Wind-alone in a hybrid-favoured round. Origin\'s Eraring-replacement narrative remains a tailwind.',
+    flags: ['wind-alone'],
+  },
+  {
+    project_id: 'lake-victoria-energy-park-kci',
+    name: 'Lake Victoria Energy Park',
+    developer: 'Lake Victoria Wind',
+    capacity_mw: 1200,
+    technology: 'wind',
+    planning_stage: 'submitted',
+    probability: 'medium',
+    rationale: 'Large wind project but less mature developer track record than majors. EPBC-submitted is mid-pack planning maturity. Wind-alone penalty applies.',
+    flags: ['wind-alone'],
+  },
+  {
+    project_id: 'winterbourne-wind-farm',
+    name: 'Winterbourne',
+    developer: 'Vestas / CWP Renewables',
+    capacity_mw: 732,
+    technology: 'wind',
+    planning_stage: 'submitted',
+    probability: 'medium',
+    rationale: 'Mid-scale wind that fits 2.5 GW round arithmetic well. New England region has limited REZ network capacity that could constrain timing. Wind-alone in hybrid-favoured round.',
+    flags: ['wind-alone'],
+  },
+  // ----- LOW likelihood -----
+  {
+    project_id: 'bendenine',
+    name: 'Bendenine',
+    developer: 'Wind Prospect',
+    capacity_mw: 720,
+    technology: 'wind',
+    planning_stage: 'submitted',
+    probability: 'low',
+    rationale: 'Wind-alone, smaller developer, early-mid planning stage. Less likely to beat better-positioned hybrids on price or readiness.',
+    flags: ['wind-alone'],
+  },
+  {
+    project_id: 'hills-of-gold-wind-farm',
+    name: 'Hills of Gold',
+    developer: 'Engie',
+    capacity_mw: 420,
+    technology: 'wind',
+    planning_stage: 'submitted',
+    probability: 'low',
+    rationale: 'Long-troubled planning history (multiple modifications, community opposition). Wind-alone in hybrid-favoured round. Engie\'s focus likely shifts to Willatook (VIC T7 winner) and The Plains.',
+    flags: ['wind-alone'],
+  },
+  {
+    project_id: 'piambong-wind-farm-kci',
+    name: 'Piambong',
+    developer: 'Wind Energy Partners',
+    capacity_mw: 583,
+    technology: 'wind',
+    planning_stage: 'pre_planning',
+    probability: 'low',
+    rationale: 'Early planning stage — too immature for a Q2 2026 LTESA award.',
+    flags: ['wind-alone'],
+  },
+]
+
+// ============================================================
+// NSW WIND CIS/LTESA COHORT — cross-cohort detail for the deep-dive tab
+// ============================================================
+//
+// Single source of truth for the Section 2 cohort table on the NSW Wind tab.
+// Capacities here are "scheme-awarded MW" — for the project's full nameplate,
+// join to projects.capacity_mw via project_id.
+
+export type CohortScheme = 'CIS T1' | 'CIS T4' | 'CIS T7' | 'LTESA R1' | 'LTESA R3' | 'LTESA R4'
+
+export type ExecutionRisk = 'on_track' | 'watch' | 'stalled'
+
+export interface NSWWindCohortEntry {
+  project_id: string
+  name: string
+  proponent: string
+  scheme: CohortScheme
+  awarded_mw: number
+  total_mw: number              // Full project nameplate (DB or proposed)
+  technology: 'wind' | 'hybrid' // wind alone vs wind+BESS hybrid
+  stage_label: string           // 'Full project' | 'Stage 1' | 'Partial (REZ-access constrained)'
+  rez?: string                  // Short label, e.g. 'South-West REZ', 'CWO REZ', 'New England'
+  rez_access_mw?: number        // EnergyCo SW/CWO access right granted (where known)
+  planning_status: 'Operating' | 'Commissioning' | 'Construction' | 'EPBC Approved' | 'EPBC Submitted' | 'Awaiting IPC' | 'Planning Submitted' | 'Early Stage'
+  fid_expected?: string         // e.g. 'mid-FY27', 'achieved 2022'
+  cod_expected?: string         // From projects.cod_current where available
+  turbine_oem?: string
+  bop?: string
+  /**
+   * AURES editorial judgement on the *scheme contract* progressing toward execution:
+   *  - 'on_track'  : tangible movement under the scheme (construction, operational, recent approvals, FID near).
+   *  - 'watch'     : slow but not stalled — long gap since scheme award without FID, or live planning risk.
+   *  - 'stalled'   : the **CISA / LTESA contract is more likely than not NOT to go ahead** — execution window
+   *                  has effectively closed or material blockers (grid access, planning, etc.) make scheme
+   *                  execution very unlikely. The underlying project may still proceed merchant (i.e. without
+   *                  scheme support) — "stalled" refers to the scheme contract, not project viability.
+   * Refresh as evidence changes. Not a forecast — a qualitative read.
+   */
+  execution_risk?: ExecutionRisk
+  /** Short reason for the risk classification — surfaces as a tooltip / commentary line. */
+  risk_rationale?: string
+  notes?: string
+}
+
+export const NSW_WIND_COHORT: NSWWindCohortEntry[] = [
+  // ----- CIS Tender 7 (announced 2026-05-23) -----
+  {
+    project_id: 'yanco-delta-wind-farm',
+    name: 'Yanco Delta',
+    proponent: 'Origin Energy',
+    scheme: 'CIS T7',
+    awarded_mw: 1450,
+    total_mw: 1460,
+    technology: 'wind',
+    stage_label: 'Full project',
+    rez: 'South-West REZ',
+    rez_access_mw: 1460,
+    planning_status: 'EPBC Approved',
+    fid_expected: 'mid-FY27',
+    cod_expected: '2029-12',
+    execution_risk: 'on_track',
+    risk_rationale: 'Approved at both state and federal level, SW REZ access secured, Origin guiding to FID mid-FY27. Modifications under way but no material blocker.',
+    notes: 'Australia\'s biggest wind project. NSW consent Dec 2023, EPBC approval Feb 2024 (modifications underway). Origin acquired from Virya Energy. Project\'s 800 MWh battery sits outside CIS scope.',
+  },
+  {
+    project_id: 'baldon-wind-farm-stage-2',
+    name: 'Baldin (Baldon Stage 2)',
+    proponent: 'Goldwind Australia',
+    scheme: 'CIS T7',
+    awarded_mw: 346,
+    total_mw: 1040,
+    technology: 'hybrid',
+    stage_label: 'Stage 2 of Baldon Project',
+    rez: 'South-West REZ',
+    planning_status: 'Awaiting IPC',
+    execution_risk: 'watch',
+    risk_rationale: 'Just won T7, but project is pre-approval (RTS lodged May 2025 still pending IPC). CISA execution gated on planning approval — too early to call stalled, but planning slippage is the obvious risk.',
+    notes: 'Wind+BESS hybrid bid. Response to Submissions delivered May 2025; awaiting IPC determination.',
+  },
+  {
+    project_id: 'bullawah-wind-farm-stage-1',
+    name: 'Bullewah (Bullawah Stage 1)',
+    proponent: 'BayWa r.e.',
+    scheme: 'CIS T7',
+    awarded_mw: 283,
+    total_mw: 804,
+    technology: 'wind',
+    stage_label: 'Partial — REZ-access constrained',
+    rez: 'South-West REZ',
+    rez_access_mw: 283,
+    planning_status: 'Planning Submitted',
+    execution_risk: 'watch',
+    risk_rationale: 'Just won T7, but still in development-approval phase — planning not yet granted. CISA execution depends on approval; small (283 MW) so should be tractable if approval lands on time.',
+    notes: 'Awarded MW matches the 283 MW SW REZ access right held. Full ~804 MW project (Stage 1 + Stage 2 + additional turbines). Currently in development-approval phase.',
+  },
+  // ----- CIS Tender 4 (Oct 2025) -----
+  {
+    project_id: 'dinawan-energy-hub',
+    name: 'Dinawan Wind — Stage 1',
+    proponent: 'Spark Renewables',
+    scheme: 'CIS T4',
+    awarded_mw: 357,
+    total_mw: 1200,
+    technology: 'wind',
+    stage_label: 'Stage 1 of 1.2 GW total',
+    rez: 'South-West REZ',
+    planning_status: 'Awaiting IPC',
+    cod_expected: '2029-12',
+    execution_risk: 'watch',
+    risk_rationale: '7 months since T4 award without wind planning approval. The hub\'s solar+BESS component is approved (Apr 2026) — that\'s a positive signal for Spark on the broader site. Wind component still gated on IPC.',
+    notes: 'Wind Stage 1 awaiting IPC determination. The hub\'s solar+BESS component (separate CIS T7 win) was approved Apr 2026 — first part of the hub through planning.',
+  },
+  {
+    project_id: 'liverpool-range-wind-farm',
+    name: 'Liverpool Range — Stage 1',
+    proponent: 'Tilt Renewables',
+    scheme: 'CIS T4',
+    awarded_mw: 634,
+    total_mw: 1300,
+    technology: 'wind',
+    stage_label: 'Stage 1 of 1.3 GW approved',
+    rez: 'CWO REZ',
+    planning_status: 'EPBC Approved',
+    execution_risk: 'on_track',
+    risk_rationale: 'Approved at state and federal level, CWO REZ access secured, Tilt has proven LTESA execution (Palmer). Standard pre-FID engineering activity expected.',
+    notes: 'NSW modification approval Oct 2024; EPBC March 2025. Stage 2 (~700 MW) wind-alone candidate for Q2 2026 LTESA round.',
+  },
+  // ----- CIS Tender 1 (Dec 2024) -----
+  {
+    project_id: 'valley-of-the-winds',
+    name: 'Valley of the Winds',
+    proponent: 'ACEN Australia',
+    scheme: 'CIS T1',
+    awarded_mw: 943,
+    total_mw: 919,
+    technology: 'wind',
+    stage_label: 'Full project',
+    rez: 'CWO REZ',
+    planning_status: 'EPBC Approved',
+    cod_expected: '2029-12',
+    execution_risk: 'watch',
+    risk_rationale: 'IPC + EPBC approved, but Class 1 merits appeal on EPBC pending in NSW Land and Environment Court. Adverse outcome could materially delay construction start. 17 months since CIS T1 award without FID.',
+    notes: 'IPC approval June 2025; EPBC approval Sep 2025 (Class 1 merits appeal pending). Scheme records 936-943 MW range; AEMO Gen Info 919 MW.',
+  },
+  {
+    project_id: 'spicers-creek-wind-farm',
+    name: 'Spicers Creek',
+    proponent: 'Squadron Energy',
+    scheme: 'CIS T1',
+    awarded_mw: 700,
+    total_mw: 702,
+    technology: 'wind',
+    stage_label: 'Full project',
+    rez: 'CWO REZ',
+    planning_status: 'EPBC Approved',
+    execution_risk: 'on_track',
+    risk_rationale: 'Approved at both state and federal level. Squadron Energy / Tattarang has cash + execution muscle.',
+    notes: 'IPC Oct 2024; EPBC March 2025.',
+  },
+  {
+    project_id: 'junction-rivers-wind-and-bess',
+    name: 'Junction Rivers',
+    proponent: 'Windlab (Squadron/Forrest)',
+    scheme: 'CIS T1',
+    awarded_mw: 585,
+    total_mw: 585,
+    technology: 'hybrid',
+    stage_label: 'Full project',
+    planning_status: 'Planning Submitted',
+    cod_expected: '2032-04',
+    execution_risk: 'stalled',
+    risk_rationale: 'Two compounding blockers: (1) **lost SW REZ access right** — without grid access the project cannot connect; (2) planning still in pre-approval (EIS / RTS phase). 17 months since CIS T1 award with no FID-readiness signal. The CISA is more likely than not NOT to execute within the federal scheme\'s 14-month window — the underlying project may still proceed under a future scheme or merchant if REZ access is recovered, but the T1 CISA itself is stalled.',
+    notes: 'Wind+BESS hybrid (800 MWh storage). EIS lodged; Response to Submissions phase. **Lost SW REZ access rights** — material headwind for CISA execution and FID.',
+  },
+  {
+    project_id: 'thunderbolt-wind-farm',
+    name: 'Thunderbolt — Stage 1',
+    proponent: 'Neoen Australia',
+    scheme: 'CIS T1',
+    awarded_mw: 192,
+    total_mw: 380,
+    technology: 'wind',
+    stage_label: 'Stage 1 of ~380 MW hub',
+    planning_status: 'EPBC Approved',
+    execution_risk: 'on_track',
+    risk_rationale: 'Stage 1 approved at both state (IPC May 2024) and federal (EPBC Nov 2024) level. Neoen has proven build track record on similar New England assets.',
+    notes: 'IPC approval May 2024 for 192 MW Stage 1; EPBC Nov 2024. Scheme records cite ~230 MW; AEMO Gen Info 210 MW; the broader Neoen hub envisages up to ~380 MW.',
+  },
+  // ----- LTESA -----
+  {
+    project_id: 'coppabella-wind-farm',
+    name: 'Coppabella',
+    proponent: 'Goldwind Australia',
+    scheme: 'LTESA R1',
+    awarded_mw: 275,
+    total_mw: 270,
+    technology: 'wind',
+    stage_label: 'Full project',
+    rez: 'Southern Tablelands',
+    planning_status: 'EPBC Approved',
+    cod_expected: '2027-09',
+    execution_risk: 'stalled',
+    risk_rationale: 'LTESA R1 awarded May 2023 — three years on, no FID and no visible construction. BESS modification still on public exhibition Dec 2025 indicates the project is being redesigned, not built. The R1 LTESA execution window has effectively passed; the contract is more likely than not NOT to be executed. The underlying project (approved 2016, Goldwind) may still proceed merchant or under a future scheme, but the R1 LTESA itself is stalled.',
+    notes: 'NSW approved 2016; preparing for construction. BESS modification on public exhibition Dec 2025.',
+  },
+  {
+    project_id: 'uungula-wind-farm',
+    name: 'Uungula',
+    proponent: 'Squadron Energy',
+    scheme: 'LTESA R3',
+    awarded_mw: 200,
+    total_mw: 414,
+    technology: 'wind',
+    stage_label: 'LTESA covers 200 MW of 414 MW',
+    rez: 'CWO REZ',
+    planning_status: 'Construction',
+    cod_expected: '2028-02',
+    execution_risk: 'on_track',
+    risk_rationale: 'Under construction — the only project in the cohort physically being built. COD targeted Feb 2028.',
+    notes: 'NSW approved 2021; currently under construction. LTESA R3 contract covers 200 MW; remaining 214 MW of nameplate sits outside the scheme.',
+  },
+  {
+    project_id: 'flyers-creek-wind-farm',
+    name: 'Flyers Creek',
+    proponent: 'Iberdrola Australia',
+    scheme: 'LTESA R4',
+    awarded_mw: 145,
+    total_mw: 146,
+    technology: 'wind',
+    stage_label: 'Full project',
+    rez: 'Central-West',
+    planning_status: 'Operating',
+    cod_expected: '2023-09',
+    execution_risk: 'on_track',
+    risk_rationale: 'Operating asset — LTESA R4 underwrites a built and commissioned project.',
+    notes: 'NSW approved 2014; complete and operational. Iberdrola Australia ownership.',
+  },
+]

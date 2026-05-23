@@ -12,18 +12,52 @@
   "has_syncon": false,
   "has_statcom": false,
   "has_harmonic_filter": false,
-  "data_confidence": "low",
-  "last_updated": "2026-03-10",
-  "last_verified": "2026-03-10",
+  "data_confidence": "medium",
+  "last_updated": "2026-05-23",
+  "last_verified": "2026-05-23",
   "aemo_gen_info_id": "1283",
-  "timeline": [],
+  "timeline": [
+    {
+      "date": "2023-12-19",
+      "date_precision": "day",
+      "event_type": "offtake_signed",
+      "title": "NSW LTESA Round 3 awarded (200 MW contracted)",
+      "detail": "Uungula awarded NSW LTESA Round 3 underwriting — 200 MW contracted under the cap+floor strike mechanism. Full project nameplate is 414 MW (AEMO Generation Information); the remaining 214 MW sits outside the LTESA contract.",
+      "sources": [
+        { "title": "ASL — Tender Round 3", "url": "https://aemoservices.com.au/en/tenders/tender-round-3-generation-and-long-duration-storage", "source_tier": 1 }
+      ]
+    },
+    {
+      "date": "2021",
+      "date_precision": "year",
+      "event_type": "planning_approved",
+      "title": "NSW planning approval",
+      "detail": "Uungula granted NSW state planning consent in 2021.",
+      "sources": []
+    }
+  ],
   "ownership_history": [],
   "cod_history": [],
   "suppliers": [],
   "offtakes": [],
-  "scheme_contracts": [],
+  "scheme_contracts": [
+    {
+      "scheme": "LTESA",
+      "round": "Round 3 — Generation + LDS",
+      "capacity_mw": 200,
+      "contract_type": "Generation LTESA (cap + floor strike, CPI-linked, NSW Crown counterparty)",
+      "source_url": "https://aemoservices.com.au/en/tenders/tender-round-3-generation-and-long-duration-storage"
+    }
+  ],
   "cost_sources": [],
-  "stakeholder_issues": [],
+  "stakeholder_issues": [
+    {
+      "issue": "214 MW of nameplate sits outside LTESA contract",
+      "detail": "Squadron's Uungula totals 414 MW per AEMO Generation Information but only 200 MW is covered by the LTESA R3 contract. The 214 MW residual is uncontracted merchant exposure — material under low-RRP cannibalisation scenarios.",
+      "date": "2026-05-23",
+      "status": "tracking"
+    }
+  ],
   "sources": [
     {
       "title": "AEMO Generation Information Jan 2026",

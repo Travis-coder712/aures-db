@@ -11,9 +11,9 @@
   "has_syncon": false,
   "has_statcom": false,
   "has_harmonic_filter": false,
-  "data_confidence": "low",
-  "last_updated": "2026-03-10",
-  "last_verified": "2026-03-10",
+  "data_confidence": "medium",
+  "last_updated": "2026-05-23",
+  "last_verified": "2026-05-23",
   "aemo_gen_info_id": "2201",
   "confidence_score": "15",
   "development_stage": "planning_submitted",
@@ -23,9 +23,24 @@
   "cod_history": [],
   "suppliers": [],
   "offtakes": [],
-  "scheme_contracts": [],
+  "scheme_contracts": [
+    {
+      "scheme": "CIS",
+      "round": "Tender 1 \u2014 NEM Generation (Stage 1)",
+      "capacity_mw": 192,
+      "contract_type": "CISA (federal underwriting) \u2014 Stage 1 192 MW per IPC approval; scheme records cite ~230 MW; AEMO Gen Info 210 MW",
+      "source_url": "https://www.dcceew.gov.au/energy/renewable/capacity-investment-scheme/closed-cis-tenders"
+    }
+  ],
   "cost_sources": [],
-  "stakeholder_issues": [],
+  "stakeholder_issues": [
+    {
+      "issue": "Capacity discrepancy across Stage 1 IPC, scheme record, and AEMO",
+      "detail": "Three numbers coexist: IPC Stage 1 approval = 192 MW (used for like-for-like cohort total); CIS T1 scheme record = ~230 MW; AEMO Generation Information = 210 MW. The broader Neoen hub envisages up to ~380 MW across staged development. Refresh once DCCEEW publishes consolidated CIS execution data.",
+      "date": "2026-05-23",
+      "status": "tracking"
+    }
+  ],
   "sources": [
     {
       "title": "AEMO Generation Information Jan 2026",
@@ -34,5 +49,37 @@
       "source_tier": 1
     }
   ],
-  "timeline_events": []
+  "timeline_events": [
+    {
+      "date": "2024-05",
+      "date_precision": "month",
+      "event_type": "planning_approved",
+      "title": "IPC approval \u2014 Stage 1 (192 MW)",
+      "detail": "NSW Independent Planning Commission approved Stage 1 at 192 MW. Broader Neoen hub envisages up to ~380 MW across staged development.",
+      "sources": []
+    },
+    {
+      "date": "2024-11",
+      "date_precision": "month",
+      "event_type": "planning_approved",
+      "title": "EPBC approval",
+      "detail": "Federal EPBC Act approval granted Nov 2024.",
+      "sources": []
+    },
+    {
+      "date": "2024-12-11",
+      "date_precision": "day",
+      "event_type": "offtake_signed",
+      "title": "CIS Tender 1 underwriting awarded",
+      "detail": "Neoen's Thunderbolt wins CIS Tender 1 underwriting. The CIS contract is cited at ~230 MW in scheme records; the IPC approval covers 192 MW Stage 1; AEMO Generation Information lists 210 MW. Discrepancy reflects mid-development design refinement.",
+      "sources": [
+        {
+          "title": "Standalone solar and wind dominate (WattClarity)",
+          "url": "https://wattclarity.com.au/articles/2024/12/standalone-solar-and-wind-dominate-list-of-19-successful-projects-from-latest-cis-tender/",
+          "date": "2024-12-11",
+          "source_tier": 2
+        }
+      ]
+    }
+  ]
 }

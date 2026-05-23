@@ -109,8 +109,8 @@ export default function SchemeBoardroom({ data }: Props) {
     : 'Combined CIS + LTESA award status, read through a strict past-FID lens. A project only counts as CISA / LTESA-confirmed when it has reached financial close — in construction, commissioning, or operating (or publicly disclosed on the FNCEN First Nations Clean Energy Network tracker). Every other awarded project is treated as pre-FID: the scheme contract may be signed, but the project has not committed to build and the underwriting is not yet visibly in force.'
 
   const cisRoundsIntro = lens === 'awarded'
-    ? `${cisRounds.length} CIS rounds awarded to date — including the new WA Tenders 5 + 6 awarded 2 May 2026. "Likely failed" = past ${LIKELY_FAILED_THRESHOLD} months since announcement without confirmed CISA execution.`
-    : `${cisRounds.length} CIS rounds awarded to date — including the new WA Tenders 5 + 6 (May 2026). In this strict view, only projects past FID (in construction or operating) are counted as CISA-confirmed. Every other awarded project — regardless of how recently the round was announced — is treated as pre-FID, CISA not confirmed.`
+    ? `${cisRounds.length} CIS rounds awarded to date — including CIS Tender 7 (23 May 2026, 7.8 GW vs 5 GW target — Australia\'s biggest renewable auction so far, wind-dominated) and the WA Tenders 5 + 6 (2 May 2026). "Likely failed" = past ${LIKELY_FAILED_THRESHOLD} months since announcement without confirmed CISA execution.`
+    : `${cisRounds.length} CIS rounds awarded to date — including CIS Tender 7 (May 2026, 19 projects / 7.8 GW) and the WA Tenders 5 + 6 (May 2026). In this strict view, only projects past FID (in construction or operating) are counted as CISA-confirmed. Every other awarded project — regardless of how recently the round was announced — is treated as pre-FID, CISA not confirmed.`
 
   const outcomesTitle = lens === 'awarded' ? 'Outcomes Snapshot' : 'Past-FID vs Pre-FID Snapshot'
   const outcomesIntro = lens === 'awarded'
@@ -1138,6 +1138,7 @@ function OutlookPanel({ data }: { data: SchemeTrackerData }) {
   const cisT3 = data.rounds.find(r => r.scheme === 'CIS' && r.round.includes('Tender 3'))
   const cisT4 = data.rounds.find(r => r.scheme === 'CIS' && r.round.includes('Tender 4'))
   const cisT5 = data.rounds.find(r => r.scheme === 'CIS' && r.round.includes('Tender 5'))
+  const cisT7 = data.rounds.find(r => r.scheme === 'CIS' && r.round.includes('Tender 7'))
 
   const t1Months = cisT1?.months_since_announced ?? 0
   const t3Months = cisT3?.months_since_announced ?? 0
@@ -1178,11 +1179,19 @@ function OutlookPanel({ data }: { data: SchemeTrackerData }) {
     date: '12-month watch',
     body: 'Tenders 5 (WEM Generation) and 6 (WEM Dispatchable) award the first major capacity injection ahead of WA\'s coal exit by 2030 — 10 projects, ~1.9 GW renewables + 3.7 GWh storage. Watch CISA execution timelines (~9–12 months) and which projects break ground first.',
   })
+  if (cisT7) {
+    milestones.push({
+      color: COLORS.cis,
+      title: `CIS Tender 7 — awarded ${fmtDate(cisT7.announced_date)} (NEW)`,
+      date: '12-month watch',
+      body: `Largest CIS auction to date — ${cisT7.num_projects} projects / 7.8 GW (4.8 GW wind, 3.0 GW solar). NSW filled its 8-project quota including Origin's 1,450 MW Yanco Delta — Australia's biggest wind project. **NSW is excluded from the next federal CIS generation round (T9)**: unwon NSW wind now competes only in the state Roadmap LTESA Generation tender (Q2 2026, 2.5 GW, hybrid-favoured). See the new NSW Wind tab for the cohort table + LTESA candidate scoring.`,
+    })
+  }
   milestones.push({
     color: COLORS.red,
-    title: 'NSW grid connection — the key constraint on Tenders 1 + 4',
+    title: 'NSW grid connection — the key constraint on Tenders 1, 4 + 7',
     date: 'Ongoing',
-    body: 'All 5 NSW wind projects in the CIS pipeline (Valley of the Winds, Spicers Creek, Thunderbolt, Dinawan Stage 1, Liverpool Range Stage 1) sit at "grid connection pending" — most have planning approval but await NSW EnergyCo access rights. The next 6 months are decisive for whether these reach FID.',
+    body: 'NSW wind in the CIS pipeline still cluster at "grid connection pending" — Valley of the Winds, Spicers Creek, Thunderbolt, Dinawan Stage 1, Liverpool Range Stage 1 (T1/T4) and the new T7 trio Yanco Delta, Baldin and Bullewah. Baldin and Bullewah await IPC planning determination. The next 6 months remain decisive for whether these reach FID.',
   })
 
   return (

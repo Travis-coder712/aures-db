@@ -12,16 +12,51 @@
   "has_syncon": false,
   "has_statcom": false,
   "has_harmonic_filter": false,
-  "data_confidence": "low",
-  "last_updated": "2026-03-10",
-  "last_verified": "2026-03-10",
+  "data_confidence": "medium",
+  "last_updated": "2026-05-23",
+  "last_verified": "2026-05-23",
   "aemo_gen_info_id": "1581",
-  "timeline": [],
+  "timeline": [
+    {
+      "date": "2016",
+      "date_precision": "year",
+      "event_type": "planning_approved",
+      "title": "NSW planning approval (2016)",
+      "detail": "Coppabella granted NSW state planning consent in 2016 — long pre-dates the LTESA award. Project preparing for construction.",
+      "sources": []
+    },
+    {
+      "date": "2023-05-03",
+      "date_precision": "day",
+      "event_type": "offtake_signed",
+      "title": "NSW LTESA Round 1 underwriting awarded (275 MW)",
+      "detail": "Coppabella wins the first-ever NSW LTESA Generation round — 275 MW. Goldwind Australia. Southern Tablelands region. One of 4 R1 winners.",
+      "sources": [
+        { "title": "First round puts NSW one-third to 12GW goal", "url": "https://www.nsw.gov.au/media-releases/first-round-of-renewable-energy-projects-puts-nsw-one-third-of-way-to-12-gigawatt-renewable-energy-goal", "date": "2023-05-01", "source_tier": 1 }
+      ]
+    },
+    {
+      "date": "2025-12",
+      "date_precision": "month",
+      "event_type": "planning_modified",
+      "title": "BESS modification on public exhibition",
+      "detail": "BESS modification placed on public exhibition Dec 2025 — Goldwind adding battery storage to the approved wind farm design.",
+      "sources": []
+    }
+  ],
   "ownership_history": [],
   "cod_history": [],
   "suppliers": [],
   "offtakes": [],
-  "scheme_contracts": [],
+  "scheme_contracts": [
+    {
+      "scheme": "LTESA",
+      "round": "Round 1 — Generation + LDS",
+      "capacity_mw": 275,
+      "contract_type": "Generation LTESA (cap + floor strike, CPI-linked, NSW Crown counterparty)",
+      "source_url": "https://asl.org.au/en/tenders/tender-round-1"
+    }
+  ],
   "cost_sources": [],
   "stakeholder_issues": [],
   "sources": [

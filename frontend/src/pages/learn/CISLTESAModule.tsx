@@ -167,7 +167,7 @@ function Lesson1() {
           ['Mechanism', 'Two-way CFD with floor + ceiling profit-share', 'Two-way CFD with fixed strike (LDS variant in R6)'],
           ['Term', 'Typically 12–15 years post-COD', 'Typically 14–20 years post-COD (LDS up to 20)'],
           ['First round', 'CIS Pilot — NSW, announced Nov 2023', 'Round 1 — Generation + LDS, May 2023'],
-          ['Latest round', 'Tenders 5 and 6 (WEM Generation + Dispatchable), 2 May 2026 — Tender 7 NEM Generation awaiting award', 'Round 7 — Firming Supply & Demand Response, 15 May 2026'],
+          ['Latest round', 'Tender 7 — NEM Generation, awarded 23 May 2026 (7.8 GW across 19 projects vs 5 GW target — wind-dominated)', 'Round 7 — Firming Supply & Demand Response, 15 May 2026'],
         ]}
       />
 
@@ -1503,8 +1503,15 @@ function Lesson7() {
         <li><Em>Valley of the Winds FID</Em> — ACEN's 936 MW NSW T1 project has IPC planning approval
           (June 2025) and is awaiting NSW EnergyCo grid connection rights. FID in 2026 is the test of
           whether the NSW grid connection process is unblocking.</li>
-        <li><Em>Tender 7 announcement</Em> — DCCEEW has flagged a continued tender cadence. Tender 7's
-          rule changes (if any) will reflect the lessons of Tender 1's execution problems.</li>
+        <li><Em>Tender 7 results (23 May 2026)</Em> — 19 projects / 7.8 GW awarded against a 5 GW target,
+          dominated by wind (10 projects / 4.8 GW vs 9 solar / 3 GW), with 8 of 19 winners being battery-paired
+          hybrids. Origin's 1,450 MW Yanco Delta is now Australia's largest single wind project. NSW filled its
+          8-project state quota — including a wind trio (Yanco Delta, Baldin, Bullewah) totalling ~2.1 GW.</li>
+        <li><Em>NSW pivot — NSW excluded from CIS Tender 9</Em>. The post-T7 federal CIS generation
+          schedule excludes NSW. NSW wind that did not win T7 must now compete in the state's Q2 2026
+          Roadmap LTESA Generation tender (2.5 GW target, hybrid-favoured: battery ≤ gen capacity,
+          minimum 4-hour storage). This is the central strategic question for Liverpool Range Stage 2,
+          Pottinger Energy Park, The Plains, and the rest of the NSW wind development pipeline.</li>
       </ul>
 
       <H2>The structural counter-argument</H2>

@@ -16,9 +16,9 @@
   "has_harmonic_filter": false,
   "performance_score": 63.5,
   "notable": "38x GE 3.8-137 turbines. Iberdrola Australia developed. Located near Orange, NSW.",
-  "data_confidence": "low",
-  "last_updated": "2026-03-10",
-  "last_verified": "2026-03-10",
+  "data_confidence": "medium",
+  "last_updated": "2026-05-23",
+  "last_verified": "2026-05-23",
   "aemo_gen_info_id": "1268",
   "confidence_score": "62",
   "first_seen": "2023-09-19",
@@ -77,7 +77,15 @@
       "capacity_mw": 145.0
     }
   ],
-  "scheme_contracts": [],
+  "scheme_contracts": [
+    {
+      "scheme": "LTESA",
+      "round": "Round 4 \u2014 Generation",
+      "capacity_mw": 145,
+      "contract_type": "Generation LTESA (cap + floor strike, CPI-linked)",
+      "source_url": "https://aemoservices.com.au/en/tenders/tender-round-4-generation-infrastructure"
+    }
+  ],
   "cost_sources": [],
   "stakeholder_issues": [],
   "sources": [
@@ -88,5 +96,28 @@
       "source_tier": 1
     }
   ],
-  "timeline_events": []
+  "timeline_events": [
+    {
+      "date": "2014",
+      "date_precision": "year",
+      "event_type": "planning_approved",
+      "title": "NSW planning approval (2014)",
+      "detail": "Flyers Creek received NSW state planning consent in 2014 \u2014 long before the LTESA award.",
+      "sources": []
+    },
+    {
+      "date": "2024-07-01",
+      "date_precision": "day",
+      "event_type": "offtake_signed",
+      "title": "NSW LTESA Round 4 underwriting awarded (145 MW)",
+      "detail": "Flyers Creek wins NSW LTESA Round 4 underwriting \u2014 145 MW. Owned by Iberdrola Australia. One of 2 R4 winners (alongside Maryvale Solar + BESS). Round only awarded 33% of its 1,150 MW target.",
+      "sources": [
+        {
+          "title": "ASL \u2014 Tender Round 4 Generation",
+          "url": "https://aemoservices.com.au/en/tenders/tender-round-4-generation-infrastructure",
+          "source_tier": 1
+        }
+      ]
+    }
+  ]
 }

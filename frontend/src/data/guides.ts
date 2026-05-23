@@ -2795,6 +2795,84 @@ CVP violation cost:    CVP × MarketPriceCap × ViolationDegree
 - 🔲 Planned, not yet built
 `,
   },
+  {
+    id: 'nsw-wind-cis-ltesa',
+    title: 'NSW Wind & CIS/LTESA — Methodology',
+    description: 'Sources, definitions, and confidence rules for the NSW Wind deep-dive tab on Scheme Intelligence.',
+    icon: '🌬️',
+    category: 'technical',
+    readingTime: '6 min',
+    added: '2026-05-23',
+    content: `# NSW Wind & CIS/LTESA — Methodology
+
+This guide documents the data, definitions, and rules behind the **NSW Wind** tab on the Scheme Intelligence page (\`/intelligence/scheme-tracker\` → NSW Wind).
+
+## Why this tab exists
+
+The post-T7 strategic context demands its own deep-dive view. Three things changed on 23 May 2026:
+
+1. **CIS Tender 7 results landed** — 19 projects / 7.8 GW awarded against a 5 GW target, dominated by wind (10 of 19 projects, 4.8 GW vs 3 GW solar). NSW filled its 8-project quota.
+2. **NSW excluded from CIS Tender 9** — DCCEEW guidance is that the next federal CIS generation round will not include NSW. Unwon NSW wind now competes only in the state's Q2 2026 LTESA Generation tender (2.5 GW, hybrid-favoured).
+3. **LTESA Round 7 (Tomago) landed 15 May 2026** — confirming AGL/Fluence at 500 MW / 2 GWh and Enel X 32 MW VPP, with strike pricing materially lower than Tender 2.
+
+## Data sources
+
+| Section | Primary source | Tier |
+|---|---|---|
+| CIS T7 winners list | RenewEconomy 2026-05-23 article | 2 |
+| LTESA Round 7 (Tomago / VPP) | AEMO Services (ASL) media release 2026-05-15 | 1 |
+| Cohort capacities (project total) | AEMO Generation Information Jan 2026 + AURES DB | 1 |
+| Cohort capacities (scheme-awarded) | DCCEEW + ASL round announcements | 1 |
+| Q2 2026 LTESA round design | ASL tender guidance (NSW Roadmap) | 1 |
+| NSW CIS T9 exclusion | DCCEEW post-T7 forward schedule | 1 |
+| Planning status | NSW DPHI + IPC public registers | 1 |
+| REZ access rights | EnergyCo announcements | 1 |
+
+## Definitions
+
+**Awarded MW** — capacity covered by a CISA or LTESA contract. May be smaller than the project nameplate where:
+- the project is staged (e.g. Liverpool Range Stage 1 = 634 MW of a 1,338 MW total);
+- the award is REZ-access-constrained (e.g. Bullewah 283 MW of ~804 MW total);
+- there is a discrepancy between scheme records and the AEMO Generation Information register (we list both, flag the difference in the project's \`stakeholder_issues\`).
+
+**Total MW (nameplate)** — full project capacity per AEMO Generation Information.
+
+**Planning status** — coarse stage taken from \`projects.development_stage\` plus narrative overlays:
+- \`Operating / Commissioning / Construction\` — physical build state.
+- \`EPBC Approved / EPBC Submitted\` — federal environmental approval status.
+- \`Awaiting IPC\` — NSW Independent Planning Commission determination outstanding.
+- \`Planning Submitted / Early Stage\` — upstream of formal assessment.
+
+## 3-band qualitative probability scoring (Section 6)
+
+For each NSW wind project that has not yet won a CIS or LTESA contract, we assign a qualitative band — **High / Medium / Low** — for likelihood of winning the upcoming Q2 2026 NSW Roadmap LTESA Generation tender. The bands are deliberately qualitative (no numerical composite) per current methodology preferences. Each band is supported by a 2–3 sentence rationale citing:
+
+- **Planning maturity** — Approved > IPC-pending > Submitted > Pre-planning
+- **Hybridisation fit** — Wind+BESS hybrid scores higher in a hybrid-favoured round than wind-alone
+- **REZ access** — Holding a SW REZ or CWO REZ access right is a meaningful tailwind
+- **Developer execution** — Track record on prior schemes (Tilt, Squadron, Origin, ACEN, etc.)
+- **Size fit** — Smaller projects are easier to fit into a 2.5 GW round envelope; mega-scale projects compete with hybrids on cost
+
+Rationales are sourced where possible to public statements or third-party analysis. The scoring is **not a tendering forecast** — it is a qualitative read for portfolio prioritisation. Refresh after the Q2 2026 round results land.
+
+## Confidence rules
+
+- **Capacity figures** from the RenewEconomy article (Tier 2) are flagged \`notes\` until confirmed by DCCEEW (Tier 1) media release.
+- **4 of 19 T7 winners** were unnamed in the initial RenewEconomy article. We do not invent names. The cohort table is honest about \`15 of 19 named\`. Update on DCCEEW publication.
+- **Capacity discrepancies** between scheme records and AEMO Generation Information (Valley of the Winds 936 vs 919, Thunderbolt 230 vs 210) are surfaced in the project's \`stakeholder_issues\` and both numbers shown in the cohort table — White Rock audit-trail pattern.
+- **REZ access rights** are not currently tracked as a structured field in the \`projects\` table. Values shown in the cohort table are manually curated from EnergyCo announcements; reconciliation pending.
+
+## Freshness cadence
+
+- Refresh on each new CIS or LTESA round announcement.
+- Refresh after DCCEEW publishes the full T7 winners list (expected days–weeks).
+- Refresh after Q2 2026 LTESA Generation round results land.
+
+## Version shipped
+
+v3.09.0 — 23 May 2026.
+`,
+  },
 ]
 
 export const GUIDE_CATEGORIES = {

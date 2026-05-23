@@ -401,7 +401,8 @@
     "data_confidence": "medium",
     "confidence_score": "31",
     "development_stage": "epbc_submitted",
-    "first_seen": "2024"
+    "first_seen": "2024",
+    "has_scheme_contract": true
   },
   {
     "id": "baldon-wind-farm-stage-2-bess",
@@ -847,7 +848,8 @@
     "data_confidence": "medium",
     "confidence_score": "28",
     "development_stage": "planning_submitted",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "has_scheme_contract": true
   },
   {
     "id": "bennetts-creek-bess",
@@ -988,7 +990,8 @@
     "data_confidence": "low",
     "confidence_score": "23",
     "development_stage": "planning_submitted",
-    "first_seen": "2025-05-08"
+    "first_seen": "2025-05-08",
+    "has_scheme_contract": true
   },
   {
     "id": "black-river-bess-kci",
@@ -1331,7 +1334,8 @@
     "data_confidence": "medium",
     "confidence_score": "28",
     "development_stage": "planning_submitted",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "has_scheme_contract": true
   },
   {
     "id": "boomber-green-energy-hub",
@@ -1701,7 +1705,8 @@
     "data_confidence": "medium",
     "confidence_score": "39",
     "development_stage": "epbc_submitted",
-    "first_seen": "2023"
+    "first_seen": "2023",
+    "has_scheme_contract": true
   },
   {
     "id": "bullawah-wind-farm-stage-1",
@@ -1715,7 +1720,8 @@
     "data_confidence": "medium",
     "confidence_score": "31",
     "development_stage": "planning_submitted",
-    "first_seen": "2025-04-23"
+    "first_seen": "2025-04-23",
+    "has_scheme_contract": true
   },
   {
     "id": "bulli-creek-bess-trina",
@@ -1781,7 +1787,8 @@
     "data_confidence": "low",
     "confidence_score": "23",
     "development_stage": "early_stage",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "has_scheme_contract": true
   },
   {
     "id": "bundaberg-renewable-energy-park",
@@ -1848,7 +1855,8 @@
     "data_confidence": "medium",
     "confidence_score": "31",
     "development_stage": "epbc_submitted",
-    "first_seen": "2024"
+    "first_seen": "2024",
+    "has_scheme_contract": true
   },
   {
     "id": "bungala-one-solar-farm",
@@ -5729,7 +5737,8 @@
     "current_developer": "Energy Estate",
     "data_confidence": "low",
     "confidence_score": "20",
-    "development_stage": "planning_submitted"
+    "development_stage": "planning_submitted",
+    "has_scheme_contract": true
   },
   {
     "id": "harlin-solar-farm",
@@ -6019,7 +6028,8 @@
     "confidence_score": "31",
     "development_stage": "epbc_approved",
     "first_seen": "2019",
-    "zombie_flag": "zombie_stale"
+    "zombie_flag": "zombie_stale",
+    "has_scheme_contract": true
   },
   {
     "id": "hillston-sun-farm",
@@ -7209,7 +7219,8 @@
     "data_confidence": "low",
     "confidence_score": "23",
     "development_stage": "epbc_submitted",
-    "first_seen": "2024"
+    "first_seen": "2024",
+    "has_scheme_contract": true
   },
   {
     "id": "lakeland-wind-farm",
@@ -9926,7 +9937,8 @@
     "data_confidence": "medium",
     "confidence_score": "31",
     "development_stage": "epbc_submitted",
-    "first_seen": "2024"
+    "first_seen": "2024",
+    "has_scheme_contract": true
   },
   {
     "id": "pikedale-wind-farm-kci",
@@ -10228,7 +10240,8 @@
     "data_confidence": "low",
     "confidence_score": "23",
     "development_stage": "planning_submitted",
-    "first_seen": "2025-04-23"
+    "first_seen": "2025-04-23",
+    "has_scheme_contract": true
   },
   {
     "id": "prairie-solar-farm",
@@ -11182,7 +11195,8 @@
     "data_confidence": "low",
     "confidence_score": "23",
     "development_stage": "planning_submitted",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "has_scheme_contract": true
   },
   {
     "id": "smithfield-bess",
@@ -12424,7 +12438,8 @@
     "data_confidence": "medium",
     "confidence_score": "28",
     "development_stage": "epbc_submitted",
-    "first_seen": "2023"
+    "first_seen": "2023",
+    "has_scheme_contract": true
   },
   {
     "id": "the-solar-river-project-stage-1",
@@ -12490,7 +12505,8 @@
     "data_confidence": "medium",
     "confidence_score": "31",
     "development_stage": "epbc_submitted",
-    "first_seen": "2024"
+    "first_seen": "2024",
+    "has_scheme_contract": true
   },
   {
     "id": "thomastown-bess",
@@ -13461,7 +13477,8 @@
     "data_confidence": "low",
     "confidence_score": "15",
     "development_stage": "planning_submitted",
-    "zombie_flag": "zombie_minimal"
+    "zombie_flag": "zombie_minimal",
+    "has_scheme_contract": true
   },
   {
     "id": "wellington-a-caes",
@@ -13728,7 +13745,8 @@
     "data_confidence": "medium",
     "confidence_score": "28",
     "development_stage": "planning_submitted",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "has_scheme_contract": true
   },
   {
     "id": "willatook",
@@ -13742,7 +13760,8 @@
     "data_confidence": "medium",
     "confidence_score": "28",
     "development_stage": "planning_submitted",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "has_scheme_contract": true
   },
   {
     "id": "willavale-bess",
@@ -13851,7 +13870,8 @@
     "data_confidence": "low",
     "confidence_score": "23",
     "development_stage": "epbc_submitted",
-    "first_seen": "2020"
+    "first_seen": "2020",
+    "has_scheme_contract": true
   },
   {
     "id": "winton-bess",
@@ -14150,7 +14170,8 @@
     "data_confidence": "low",
     "confidence_score": "23",
     "development_stage": "early_stage",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "has_scheme_contract": true
   },
   {
     "id": "woonga-creek-bess",
@@ -14373,7 +14394,8 @@
     "confidence_score": "49",
     "development_stage": "epbc_approved",
     "notable": "1.5 GW wind (208 turbines, 270m tip) + 800 MWh BESS. 33,000 ha site 10 km NW of Jerilderie in SW REZ. ~$4B project. 1,460 MW transmission access secured. FID target mid-FY2027.",
-    "first_seen": "2022"
+    "first_seen": "2022",
+    "has_scheme_contract": true
   },
   {
     "id": "yanco-solar-farm",

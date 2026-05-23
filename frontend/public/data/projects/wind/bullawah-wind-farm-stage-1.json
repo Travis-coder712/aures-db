@@ -14,9 +14,9 @@
   "has_syncon": false,
   "has_statcom": false,
   "has_harmonic_filter": false,
-  "data_confidence": "low",
-  "last_updated": "2026-03-10",
-  "last_verified": "2026-03-10",
+  "data_confidence": "medium",
+  "last_updated": "2026-05-23",
+  "last_verified": "2026-05-23",
   "aemo_gen_info_id": "2532",
   "confidence_score": "31",
   "development_stage": "planning_submitted",
@@ -43,9 +43,30 @@
   "cod_history": [],
   "suppliers": [],
   "offtakes": [],
-  "scheme_contracts": [],
+  "scheme_contracts": [
+    {
+      "scheme": "CIS",
+      "round": "Tender 7 \u2014 NEM Generation",
+      "capacity_mw": 283,
+      "contract_type": "CISA (federal underwriting) \u2014 capped by REZ access right",
+      "source_url": "https://reneweconomy.com.au/australias-biggest-wind-project-and-8-battery-hybrids-among-19-winners-of-largest-renewable-auction-to-date/"
+    }
+  ],
   "cost_sources": [],
-  "stakeholder_issues": [],
+  "stakeholder_issues": [
+    {
+      "issue": "521 MW of proposed project sits outside T7 award",
+      "detail": "Full Bullewah / Bullawah project ~804 MW (Stages 1 + 2). CIS T7 covers 283 MW. The remaining ~521 MW could be a candidate for the Q2 2026 NSW state LTESA Generation round, but Stage 2 is wind-alone in a hybrid-favoured round.",
+      "date": "2026-05-23",
+      "status": "tracking"
+    },
+    {
+      "issue": "Project name inconsistency \u2014 Bullewah vs Bullawah",
+      "detail": "RenewEconomy 2026-05-23 article refers to the project as 'Bullewah'; AEMO Generation Information uses 'Bullawah Wind Farm \u2013 Stage 1'. Same BayWa r.e. project, different spellings.",
+      "date": "2026-05-23",
+      "status": "tracking"
+    }
+  ],
   "sources": [
     {
       "title": "AEMO Generation Information Jan 2026",
@@ -54,5 +75,29 @@
       "source_tier": 1
     }
   ],
-  "timeline_events": []
+  "timeline_events": [
+    {
+      "date": "2026-05-23",
+      "date_precision": "day",
+      "event_type": "offtake_signed",
+      "title": "CIS Tender 7 underwriting awarded (283 MW)",
+      "detail": "BayWa r.e.'s Bullewah (AEMO ID: Bullawah Wind Farm \u2013 Stage 1) wins CIS Tender 7 underwriting. Awarded capacity is 283 MW \u2014 constrained by the 283 MW SW REZ access right BayWa holds. Full ~804 MW proposed project (Stages 1 + 2) sits outside the T7 award.",
+      "sources": [
+        {
+          "title": "Australia's biggest wind project among 19 winners (RenewEconomy)",
+          "url": "https://reneweconomy.com.au/australias-biggest-wind-project-and-8-battery-hybrids-among-19-winners-of-largest-renewable-auction-to-date/",
+          "date": "2026-05-23",
+          "source_tier": 2
+        }
+      ]
+    },
+    {
+      "date": "2025",
+      "date_precision": "year",
+      "event_type": "rez_access",
+      "title": "South-West REZ access right (283 MW)",
+      "detail": "BayWa r.e. awarded 283 MW SW REZ access right from EnergyCo \u2014 less than the project's full proposed ~804 MW capacity.",
+      "sources": []
+    }
+  ]
 }
