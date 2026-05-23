@@ -633,6 +633,8 @@ export type CohortScheme = 'CIS T1' | 'CIS T4' | 'CIS T7' | 'LTESA R1' | 'LTESA 
 
 export type ExecutionRisk = 'on_track' | 'watch' | 'stalled'
 
+export type FidStatus = 'reached' | 'expected' | 'pending'
+
 export interface NSWWindCohortEntry {
   project_id: string
   name: string
@@ -645,7 +647,15 @@ export interface NSWWindCohortEntry {
   rez?: string                  // Short label, e.g. 'South-West REZ', 'CWO REZ', 'New England'
   rez_access_mw?: number        // EnergyCo SW/CWO access right granted (where known)
   planning_status: 'Operating' | 'Commissioning' | 'Construction' | 'EPBC Approved' | 'EPBC Submitted' | 'Awaiting IPC' | 'Planning Submitted' | 'Early Stage'
-  fid_expected?: string         // e.g. 'mid-FY27', 'achieved 2022'
+  fid_expected?: string         // Free-text annotation (e.g. 'mid-FY27', 'achieved 2022') — surfaced in cohort table
+  /**
+   * Structured FID year for the Gantt-mode "FID → COD" view. Use:
+   *  - 'reached' + year   : FID confirmed (year is the actual FID year — typically when construction started)
+   *  - 'expected' + year  : AURES estimate based on planning maturity + scheme award timing. Conservative.
+   *  - 'pending'          : Material uncertainty (e.g. pre-IPC, appeals, stalled). Year omitted.
+   */
+  fid_year?: number
+  fid_status?: FidStatus
   cod_expected?: string         // From projects.cod_current where available
   turbine_oem?: string
   bop?: string
@@ -680,6 +690,8 @@ export const NSW_WIND_COHORT: NSWWindCohortEntry[] = [
     rez_access_mw: 1460,
     planning_status: 'EPBC Approved',
     fid_expected: 'mid-FY27',
+    fid_year: 2027,
+    fid_status: 'expected',
     cod_expected: '2029-12',
     execution_risk: 'on_track',
     risk_rationale: 'Approved at both state and federal level, SW REZ access secured, Origin guiding to FID mid-FY27. Modifications under way but no material blocker.',
@@ -696,6 +708,7 @@ export const NSW_WIND_COHORT: NSWWindCohortEntry[] = [
     stage_label: 'Stage 2 of Baldon Project',
     rez: 'South-West REZ',
     planning_status: 'Awaiting IPC',
+    fid_status: 'pending',
     execution_risk: 'watch',
     risk_rationale: 'Just won T7, but project is pre-approval (RTS lodged May 2025 still pending IPC). CISA execution gated on planning approval — too early to call stalled, but planning slippage is the obvious risk.',
     notes: 'Wind+BESS hybrid bid. Response to Submissions delivered May 2025; awaiting IPC determination.',
@@ -712,6 +725,7 @@ export const NSW_WIND_COHORT: NSWWindCohortEntry[] = [
     rez: 'South-West REZ',
     rez_access_mw: 283,
     planning_status: 'Planning Submitted',
+    fid_status: 'pending',
     execution_risk: 'watch',
     risk_rationale: 'Just won T7, but still in development-approval phase — planning not yet granted. CISA execution depends on approval; small (283 MW) so should be tractable if approval lands on time.',
     notes: 'Awarded MW matches the 283 MW SW REZ access right held. Full ~804 MW project (Stage 1 + Stage 2 + additional turbines). Currently in development-approval phase.',
@@ -728,6 +742,7 @@ export const NSW_WIND_COHORT: NSWWindCohortEntry[] = [
     stage_label: 'Stage 1 of 1.2 GW total',
     rez: 'South-West REZ',
     planning_status: 'Awaiting IPC',
+    fid_status: 'pending',
     cod_expected: '2029-12',
     execution_risk: 'watch',
     risk_rationale: '7 months since T4 award without wind planning approval. The hub\'s solar+BESS component is approved (Apr 2026) — that\'s a positive signal for Spark on the broader site. Wind component still gated on IPC.',
@@ -744,6 +759,8 @@ export const NSW_WIND_COHORT: NSWWindCohortEntry[] = [
     stage_label: 'Stage 1 of 1.3 GW approved',
     rez: 'CWO REZ',
     planning_status: 'EPBC Approved',
+    fid_year: 2027,
+    fid_status: 'expected',
     execution_risk: 'on_track',
     risk_rationale: 'Approved at state and federal level, CWO REZ access secured, Tilt has proven LTESA execution (Palmer). Standard pre-FID engineering activity expected.',
     notes: 'NSW modification approval Oct 2024; EPBC March 2025. Stage 2 (~700 MW) wind-alone candidate for Q2 2026 LTESA round.',
@@ -760,6 +777,7 @@ export const NSW_WIND_COHORT: NSWWindCohortEntry[] = [
     stage_label: 'Full project',
     rez: 'CWO REZ',
     planning_status: 'EPBC Approved',
+    fid_status: 'pending',
     cod_expected: '2029-12',
     execution_risk: 'watch',
     risk_rationale: 'IPC + EPBC approved, but Class 1 merits appeal on EPBC pending in NSW Land and Environment Court. Adverse outcome could materially delay construction start. 17 months since CIS T1 award without FID.',
@@ -776,6 +794,8 @@ export const NSW_WIND_COHORT: NSWWindCohortEntry[] = [
     stage_label: 'Full project',
     rez: 'CWO REZ',
     planning_status: 'EPBC Approved',
+    fid_year: 2026,
+    fid_status: 'expected',
     execution_risk: 'on_track',
     risk_rationale: 'Approved at both state and federal level. Squadron Energy / Tattarang has cash + execution muscle.',
     notes: 'IPC Oct 2024; EPBC March 2025.',
@@ -790,6 +810,7 @@ export const NSW_WIND_COHORT: NSWWindCohortEntry[] = [
     technology: 'hybrid',
     stage_label: 'Full project',
     planning_status: 'Planning Submitted',
+    fid_status: 'pending',
     cod_expected: '2032-04',
     execution_risk: 'stalled',
     risk_rationale: 'Two compounding blockers: (1) **lost SW REZ access right** — without grid access the project cannot connect; (2) planning still in pre-approval (EIS / RTS phase). 17 months since CIS T1 award with no FID-readiness signal. The CISA is more likely than not NOT to execute within the federal scheme\'s 14-month window — the underlying project may still proceed under a future scheme or merchant if REZ access is recovered, but the T1 CISA itself is stalled.',
@@ -805,6 +826,8 @@ export const NSW_WIND_COHORT: NSWWindCohortEntry[] = [
     technology: 'wind',
     stage_label: 'Stage 1 of ~380 MW hub',
     planning_status: 'EPBC Approved',
+    fid_year: 2026,
+    fid_status: 'expected',
     execution_risk: 'on_track',
     risk_rationale: 'Stage 1 approved at both state (IPC May 2024) and federal (EPBC Nov 2024) level. Neoen has proven build track record on similar New England assets.',
     notes: 'IPC approval May 2024 for 192 MW Stage 1; EPBC Nov 2024. Scheme records cite ~230 MW; AEMO Gen Info 210 MW; the broader Neoen hub envisages up to ~380 MW.',
@@ -821,6 +844,7 @@ export const NSW_WIND_COHORT: NSWWindCohortEntry[] = [
     stage_label: 'Full project',
     rez: 'Southern Tablelands',
     planning_status: 'EPBC Approved',
+    fid_status: 'pending',
     cod_expected: '2027-09',
     execution_risk: 'stalled',
     risk_rationale: 'LTESA R1 awarded May 2023 — three years on, no FID and no visible construction. BESS modification still on public exhibition Dec 2025 indicates the project is being redesigned, not built. The R1 LTESA execution window has effectively passed; the contract is more likely than not NOT to be executed. The underlying project (approved 2016, Goldwind) may still proceed merchant or under a future scheme, but the R1 LTESA itself is stalled.',
@@ -837,6 +861,8 @@ export const NSW_WIND_COHORT: NSWWindCohortEntry[] = [
     stage_label: 'LTESA covers 200 MW of 414 MW',
     rez: 'CWO REZ',
     planning_status: 'Construction',
+    fid_year: 2024,
+    fid_status: 'reached',
     cod_expected: '2028-02',
     execution_risk: 'on_track',
     risk_rationale: 'Under construction — the only project in the cohort physically being built. COD targeted Feb 2028.',
@@ -853,6 +879,8 @@ export const NSW_WIND_COHORT: NSWWindCohortEntry[] = [
     stage_label: 'Full project',
     rez: 'Central-West',
     planning_status: 'Operating',
+    fid_year: 2021,
+    fid_status: 'reached',
     cod_expected: '2023-09',
     execution_risk: 'on_track',
     risk_rationale: 'Operating asset — LTESA R4 underwrites a built and commissioned project.',

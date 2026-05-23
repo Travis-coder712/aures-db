@@ -5052,6 +5052,12 @@ function NSWWindTab() {
     () => new Set(t7Ids),
   )
 
+  // Timeline anchor mode — which milestone bookends each bar.
+  // - 'round': bar from scheme-award year → expected COD (overall build window)
+  // - 'fid':   bar from FID year (or AURES estimate) → expected COD (construction window only)
+  // - 'cod':   narrow marker centred on COD year — delivery wave view
+  const [timelineAnchor, setTimelineAnchor] = useState<'round' | 'fid' | 'cod'>('round')
+
   const toggleTimelineProject = (id: string) => {
     setSelectedTimelineIds(prev => {
       const next = new Set(prev)
@@ -5099,15 +5105,33 @@ function NSWWindTab() {
 
   const t7Snapshot = useMemo(() => NSW_WIND_COHORT.filter(p => p.scheme === 'CIS T7'), [])
 
-  // Timeline rows: each cohort entry positioned by award→COD year.
-  // Sorted by award year (earliest first) so the staircase reads left→right.
+  // Timeline rows: each cohort entry with all three candidate years.
+  // Sort key adjusts by anchor — sort by the LEFT-edge year for visual order.
   const timelineRows = useMemo(() => {
-    return NSW_WIND_COHORT.map(p => {
+    const rows = NSW_WIND_COHORT.map(p => {
       const awardYear = schemeAwardYear(p.scheme)
       const codYear = p.cod_expected ? Number(p.cod_expected.slice(0, 4)) : awardYear + 5
-      return { entry: p, awardYear, codYear }
-    }).sort((a, b) => a.awardYear - b.awardYear || a.codYear - b.codYear)
-  }, [])
+      const fidYear = p.fid_year ?? null
+      const fidStatus = p.fid_status ?? 'pending'
+      return { entry: p, awardYear, codYear, fidYear, fidStatus }
+    })
+    return rows.sort((a, b) => {
+      // For 'fid' mode, push pending-FID rows to the end (we can't position them).
+      if (timelineAnchor === 'fid') {
+        const aMissing = a.fidStatus === 'pending' || a.fidYear == null
+        const bMissing = b.fidStatus === 'pending' || b.fidYear == null
+        if (aMissing && !bMissing) return 1
+        if (!aMissing && bMissing) return -1
+        if (!aMissing && !bMissing) {
+          return (a.fidYear ?? 0) - (b.fidYear ?? 0) || a.codYear - b.codYear
+        }
+      }
+      if (timelineAnchor === 'cod') {
+        return a.codYear - b.codYear || a.awardYear - b.awardYear
+      }
+      return a.awardYear - b.awardYear || a.codYear - b.codYear
+    })
+  }, [timelineAnchor])
 
   const visibleTimelineRows = useMemo(
     () => timelineRows.filter(r => selectedTimelineIds.has(r.entry.project_id)),
@@ -5319,10 +5343,38 @@ Key risks to the 6.3 GW total. Junction Rivers' lost SW REZ access raises real q
       {/* Section 3 — Timeline / Gantt                                 */}
       {/* ============================================================ */}
       <section>
-        <h2 className="text-lg font-semibold text-[var(--color-text)] mb-1">Build Timeline — Award → Expected COD</h2>
+        <h2 className="text-lg font-semibold text-[var(--color-text)] mb-1">
+          Build Timeline — {timelineAnchor === 'round' ? 'Scheme Award → Expected COD' : timelineAnchor === 'fid' ? 'FID → Expected COD' : 'Expected COD Delivery Wave'}
+        </h2>
         <p className="text-xs text-[var(--color-text-muted)] mb-3">
-          Select projects to plot. Each bar runs from scheme-award year to expected COD. Eraring (NSW's biggest coal, Aug 2027 shutdown) marked for context.
+          Select projects to plot, then choose the anchor view. Eraring (NSW's biggest coal, Aug 2027 shutdown) marked for context.
         </p>
+
+        {/* Anchor mode toggle */}
+        <div className="flex flex-wrap items-center gap-2 mb-3 text-[10px]">
+          <span className="text-[var(--color-text-muted)] uppercase tracking-wide">Anchor:</span>
+          {(
+            [
+              { id: 'round',  label: 'Scheme Award → COD', desc: 'Full underwriting window — from CIS / LTESA announcement to expected COD' },
+              { id: 'fid',    label: 'FID → COD',          desc: 'Construction window — FID year to COD. Projects without a FID date drop out (shown below the chart).' },
+              { id: 'cod',    label: 'COD delivery wave',  desc: 'Narrow markers at expected COD year — shows the delivery cohort timing.' },
+            ] as const
+          ).map(opt => (
+            <button
+              key={opt.id}
+              onClick={() => setTimelineAnchor(opt.id)}
+              title={opt.desc}
+              className="px-2.5 py-1 rounded-full border transition-colors"
+              style={
+                timelineAnchor === opt.id
+                  ? { backgroundColor: 'rgba(59,130,246,0.15)', borderColor: '#3b82f680', color: '#93c5fd' }
+                  : { backgroundColor: 'transparent', borderColor: 'var(--color-border)', color: 'var(--color-text-muted)' }
+              }
+            >
+              {opt.label}
+            </button>
+          ))}
+        </div>
 
         {/* Preset toolbar */}
         <div className="flex flex-wrap items-center gap-2 mb-3 text-[10px]">
@@ -5408,12 +5460,41 @@ Key risks to the 6.3 GW total. Junction Rivers' lost SW REZ access raises real q
                 ))}
               </div>
 
-              {/* Rows */}
+              {/* Rows — bar bounds depend on anchor mode */}
               <div className="relative">
-                {visibleTimelineRows.map(({ entry, awardYear, codYear }) => {
+                {visibleTimelineRows.map(({ entry, awardYear, codYear, fidYear, fidStatus }) => {
                   const colour = SCHEME_COLOUR[entry.scheme] ?? '#888'
-                  const leftPct = yearToPct(awardYear)
-                  const widthPct = Math.max(2, yearToPct(codYear) - leftPct)
+                  const fidUnavailable = fidStatus === 'pending' || fidYear == null
+
+                  // Compute bar bounds per anchor mode
+                  let leftYear: number
+                  let rightYear: number
+                  let modeLabel: string
+                  let suppress = false
+                  if (timelineAnchor === 'fid') {
+                    if (fidUnavailable) {
+                      suppress = true
+                      leftYear = codYear
+                      rightYear = codYear
+                      modeLabel = 'FID pending'
+                    } else {
+                      leftYear = fidYear as number
+                      rightYear = codYear
+                      modeLabel = `FID ${leftYear} → COD ${codYear}`
+                    }
+                  } else if (timelineAnchor === 'cod') {
+                    // Narrow 12-month marker centred on COD year
+                    leftYear = codYear - 0.5
+                    rightYear = codYear + 0.5
+                    modeLabel = `COD ${codYear}`
+                  } else {
+                    leftYear = awardYear
+                    rightYear = codYear
+                    modeLabel = `${entry.scheme} award ${awardYear} → COD ${codYear}`
+                  }
+                  const leftPct = yearToPct(leftYear)
+                  const widthPct = Math.max(2, yearToPct(rightYear) - leftPct)
+
                   return (
                     <div key={entry.project_id} className="flex items-center h-8 group">
                       <div className="w-44 pr-2 text-[10px] truncate text-right">
@@ -5428,26 +5509,34 @@ Key risks to the 6.3 GW total. Junction Rivers' lost SW REZ access raises real q
                       <div className="flex-1 relative h-full">
                         {/* baseline */}
                         <div className="absolute left-0 right-0 top-1/2 -translate-y-1/2 h-px bg-[var(--color-border)]/40" />
-                        {/* bar */}
-                        <div
-                          className="absolute top-1/2 -translate-y-1/2 h-5 rounded-sm flex items-center"
-                          style={{
-                            left: `${leftPct}%`,
-                            width: `${widthPct}%`,
-                            backgroundColor: `${colour}33`,
-                            borderLeft: `3px solid ${colour}`,
-                          }}
-                          title={`${entry.scheme} award ${awardYear} → COD ${codYear} · ${Math.round(entry.awarded_mw)} MW · ${entry.planning_status}`}
-                        >
-                          <span className="px-1.5 text-[9px] font-medium whitespace-nowrap" style={{ color: colour }}>
-                            {entry.scheme}
-                          </span>
-                          {widthPct > 12 && (
-                            <span className="px-1 text-[9px] text-[var(--color-text-muted)] whitespace-nowrap">
-                              · {Math.round(entry.awarded_mw)} MW
+                        {/* bar (or pending placeholder) */}
+                        {suppress ? (
+                          <div className="absolute left-0 right-0 top-1/2 -translate-y-1/2 flex items-center justify-end pr-3">
+                            <span className="text-[9px] text-[var(--color-text-muted)] italic">
+                              FID pending — COD target {codYear}
                             </span>
-                          )}
-                        </div>
+                          </div>
+                        ) : (
+                          <div
+                            className="absolute top-1/2 -translate-y-1/2 h-5 rounded-sm flex items-center"
+                            style={{
+                              left: `${leftPct}%`,
+                              width: `${widthPct}%`,
+                              backgroundColor: `${colour}33`,
+                              borderLeft: `3px solid ${colour}`,
+                            }}
+                            title={`${modeLabel} · ${Math.round(entry.awarded_mw)} MW · ${entry.planning_status}`}
+                          >
+                            <span className="px-1.5 text-[9px] font-medium whitespace-nowrap" style={{ color: colour }}>
+                              {timelineAnchor === 'cod' ? `${codYear}` : entry.scheme}
+                            </span>
+                            {widthPct > 12 && timelineAnchor !== 'cod' && (
+                              <span className="px-1 text-[9px] text-[var(--color-text-muted)] whitespace-nowrap">
+                                · {Math.round(entry.awarded_mw)} MW
+                              </span>
+                            )}
+                          </div>
+                        )}
                       </div>
                     </div>
                   )
@@ -5475,7 +5564,7 @@ Key risks to the 6.3 GW total. Junction Rivers' lost SW REZ access raises real q
           )}
 
           <p className="text-[10px] text-[var(--color-text-muted)] italic mt-3">
-            Click a project name to open its detail page. Bar colour = scheme (CIS T1 / T4 / T7 · LTESA R1 / R3 / R4). Key projects to watch: Yanco Delta, Liverpool Range, Spicers Creek, Valley of the Winds — FID slippage on any materially shifts NSW wind GW-by-2030.
+            Click a project name to open its detail page. Bar colour = scheme (CIS T1 / T4 / T7 · LTESA R1 / R3 / R4). FID years are confirmed for projects in construction or operating (Uungula, Flyers Creek), AURES-estimated for EPBC-approved CIS / LTESA winners on credible delivery paths, and shown as "pending" otherwise. Key projects to watch: Yanco Delta, Liverpool Range, Spicers Creek, Valley of the Winds — FID slippage on any materially shifts NSW wind GW-by-2030.
           </p>
         </div>
       </section>
