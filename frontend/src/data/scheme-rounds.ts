@@ -635,6 +635,35 @@ export type ExecutionRisk = 'on_track' | 'watch' | 'stalled'
 
 export type FidStatus = 'reached' | 'expected' | 'pending'
 
+/**
+ * Connection / commitment stage normalized from AEMO Generator Information `status`
+ * plus project-specific TransGrid / EnergyCo updates from news + EIS docs.
+ *
+ *   - 'operating'          : In Service per AEMO Gen Info
+ *   - 'commissioning'      : In Commissioning (between R1/R2 hold points)
+ *   - 'committed'          : AEMO "Committed" — meets ≥5 of 6 commitment criteria
+ *                            (land · planning · finance · EPC · 5.3.4 enquiry · GPS)
+ *   - 'gps_assessment'     : REZ access right + 5.3.4 enquiry submitted, GPS
+ *                            (Generator Performance Standards) assessment underway
+ *                            with NSP + AEMO — pre-FID engineering
+ *   - 'anticipated'        : AEMO "Anticipated" — partial commitment criteria met
+ *   - 'connection_enquiry' : 5.3.4 connection enquiry lodged with TransGrid /
+ *                            NSP, but limited public detail on progress
+ *   - 'proposed'           : AEMO "Publicly Announced" — proposed only, no
+ *                            commitment criteria recorded yet
+ *   - 'at_risk'            : Material connection blocker (e.g. lost REZ access
+ *                            right) makes commitment unlikely
+ */
+export type ConnectionStatus =
+  | 'operating'
+  | 'commissioning'
+  | 'committed'
+  | 'gps_assessment'
+  | 'anticipated'
+  | 'connection_enquiry'
+  | 'proposed'
+  | 'at_risk'
+
 export interface NSWWindCohortEntry {
   project_id: string
   name: string
@@ -656,6 +685,16 @@ export interface NSWWindCohortEntry {
    */
   fid_year?: number
   fid_status?: FidStatus
+  /**
+   * Connection / commitment stage. Sourced primarily from AEMO Generator
+   * Information's `status` field (Operating / In Commissioning / Committed /
+   * Anticipated / Publicly Announced), normalized into the ConnectionStatus
+   * enum and refined with project-specific TransGrid / EnergyCo announcements
+   * where public detail exists.
+   */
+  connection_status?: ConnectionStatus
+  /** Free-text note explaining the connection status — surfaced as a tooltip. */
+  connection_notes?: string
   cod_expected?: string         // From projects.cod_current where available
   turbine_oem?: string
   bop?: string
@@ -692,6 +731,8 @@ export const NSW_WIND_COHORT: NSWWindCohortEntry[] = [
     fid_expected: 'mid-FY27',
     fid_year: 2027,
     fid_status: 'expected',
+    connection_status: 'gps_assessment',
+    connection_notes: 'SW REZ access right secured Apr 2025 (full 1,460 MW). Connecting to TransGrid\'s Dinawan Substation (under construction, due Q1 2026). Origin progressing Generator Performance Standard (GPS) assessments with TransGrid + AEMO ahead of mid-FY27 FID. AEMO Gen Info status: Publicly Announced — likely to advance once GPS work completes.',
     cod_expected: '2029-12',
     execution_risk: 'on_track',
     risk_rationale: 'Approved at both state and federal level, SW REZ access secured, Origin guiding to FID mid-FY27. Modifications under way but no material blocker.',
@@ -709,6 +750,8 @@ export const NSW_WIND_COHORT: NSWWindCohortEntry[] = [
     rez: 'South-West REZ',
     planning_status: 'Awaiting IPC',
     fid_status: 'pending',
+    connection_status: 'proposed',
+    connection_notes: 'AEMO Gen Info: Publicly Announced. Connection process gated on IPC planning determination; no 5.3.4 enquiry detail publicly disclosed.',
     execution_risk: 'watch',
     risk_rationale: 'Just won T7, but project is pre-approval (RTS lodged May 2025 still pending IPC). CISA execution gated on planning approval — too early to call stalled, but planning slippage is the obvious risk.',
     notes: 'Wind+BESS hybrid bid. Response to Submissions delivered May 2025; awaiting IPC determination.',
@@ -726,6 +769,8 @@ export const NSW_WIND_COHORT: NSWWindCohortEntry[] = [
     rez_access_mw: 283,
     planning_status: 'Planning Submitted',
     fid_status: 'pending',
+    connection_status: 'connection_enquiry',
+    connection_notes: 'SW REZ access right held (283 MW — sized to project Stage 1). AEMO Gen Info: Publicly Announced. Connection enquiry through TransGrid expected; substation route likely Dinawan or other SW REZ hub.',
     execution_risk: 'watch',
     risk_rationale: 'Just won T7, but still in development-approval phase — planning not yet granted. CISA execution depends on approval; small (283 MW) so should be tractable if approval lands on time.',
     notes: 'Awarded MW matches the 283 MW SW REZ access right held. Full ~804 MW project (Stage 1 + Stage 2 + additional turbines). Currently in development-approval phase.',
@@ -743,6 +788,8 @@ export const NSW_WIND_COHORT: NSWWindCohortEntry[] = [
     rez: 'South-West REZ',
     planning_status: 'Awaiting IPC',
     fid_status: 'pending',
+    connection_status: 'proposed',
+    connection_notes: 'AEMO Gen Info: Publicly Announced for all four components (2× wind, solar PV, BESS). The hub is co-located with TransGrid\'s new Dinawan Substation — substantial site adjacency advantage. Solar+BESS approved Apr 2026; wind connection process gated on IPC determination.',
     cod_expected: '2029-12',
     execution_risk: 'watch',
     risk_rationale: '7 months since T4 award without wind planning approval. The hub\'s solar+BESS component is approved (Apr 2026) — that\'s a positive signal for Spark on the broader site. Wind component still gated on IPC.',
@@ -761,6 +808,8 @@ export const NSW_WIND_COHORT: NSWWindCohortEntry[] = [
     planning_status: 'EPBC Approved',
     fid_year: 2027,
     fid_status: 'expected',
+    connection_status: 'gps_assessment',
+    connection_notes: 'CWO REZ access right secured May 2025 (TransGrid CWO REZ network). EPBC approved Mar 2025. Tilt advancing pre-FID engineering and GPS work. AEMO Gen Info: Publicly Announced — likely to advance once GPS work completes and FID is reached.',
     execution_risk: 'on_track',
     risk_rationale: 'Approved at state and federal level, CWO REZ access secured, Tilt has proven LTESA execution (Palmer). Standard pre-FID engineering activity expected.',
     notes: 'NSW modification approval Oct 2024; EPBC March 2025. Stage 2 (~700 MW) wind-alone candidate for Q2 2026 LTESA round.',
@@ -778,6 +827,8 @@ export const NSW_WIND_COHORT: NSWWindCohortEntry[] = [
     rez: 'CWO REZ',
     planning_status: 'EPBC Approved',
     fid_status: 'pending',
+    connection_status: 'anticipated',
+    connection_notes: 'AEMO Gen Info: **Anticipated** — partial commitment criteria met. CWO REZ project. Connection process gated on Class 1 EPBC merits appeal outcome in the NSW Land and Environment Court.',
     cod_expected: '2029-12',
     execution_risk: 'watch',
     risk_rationale: 'IPC + EPBC approved, but Class 1 merits appeal on EPBC pending in NSW Land and Environment Court. Adverse outcome could materially delay construction start. 17 months since CIS T1 award without FID.',
@@ -796,6 +847,8 @@ export const NSW_WIND_COHORT: NSWWindCohortEntry[] = [
     planning_status: 'EPBC Approved',
     fid_year: 2026,
     fid_status: 'expected',
+    connection_status: 'gps_assessment',
+    connection_notes: 'CWO REZ project. EPBC approved Mar 2025, IPC Oct 2024. Squadron Energy advancing pre-FID work — typical CWO REZ TransGrid connection profile. AEMO Gen Info: Publicly Announced.',
     execution_risk: 'on_track',
     risk_rationale: 'Approved at both state and federal level. Squadron Energy / Tattarang has cash + execution muscle.',
     notes: 'IPC Oct 2024; EPBC March 2025.',
@@ -811,6 +864,8 @@ export const NSW_WIND_COHORT: NSWWindCohortEntry[] = [
     stage_label: 'Full project',
     planning_status: 'Planning Submitted',
     fid_status: 'pending',
+    connection_status: 'at_risk',
+    connection_notes: '**Lost SW REZ access rights** — no grid connection path until REZ access is recovered. AEMO Gen Info: Publicly Announced. Until grid access is resolved, the project cannot reach FID.',
     cod_expected: '2032-04',
     execution_risk: 'stalled',
     risk_rationale: 'Two compounding blockers: (1) **lost SW REZ access right** — without grid access the project cannot connect; (2) planning still in pre-approval (EIS / RTS phase). 17 months since CIS T1 award with no FID-readiness signal. The CISA is more likely than not NOT to execute within the federal scheme\'s 14-month window — the underlying project may still proceed under a future scheme or merchant if REZ access is recovered, but the T1 CISA itself is stalled.',
@@ -828,6 +883,8 @@ export const NSW_WIND_COHORT: NSWWindCohortEntry[] = [
     planning_status: 'EPBC Approved',
     fid_year: 2026,
     fid_status: 'expected',
+    connection_status: 'gps_assessment',
+    connection_notes: 'New England transmission area. Stage 1 approved at state (IPC May 2024) + federal (EPBC Nov 2024). Neoen advancing pre-FID work — typical New England network connection profile. AEMO Gen Info: Publicly Announced (210 MW).',
     execution_risk: 'on_track',
     risk_rationale: 'Stage 1 approved at both state (IPC May 2024) and federal (EPBC Nov 2024) level. Neoen has proven build track record on similar New England assets.',
     notes: 'IPC approval May 2024 for 192 MW Stage 1; EPBC Nov 2024. Scheme records cite ~230 MW; AEMO Gen Info 210 MW; the broader Neoen hub envisages up to ~380 MW.',
@@ -845,6 +902,8 @@ export const NSW_WIND_COHORT: NSWWindCohortEntry[] = [
     rez: 'Southern Tablelands',
     planning_status: 'EPBC Approved',
     fid_status: 'pending',
+    connection_status: 'anticipated',
+    connection_notes: 'AEMO Gen Info: **Anticipated** (290 MW, DUID COPBEL allocated) — connection process advanced but commissioning materially delayed. NSW approved 2016. BESS modification on public exhibition Dec 2025 indicates ongoing redesign rather than build readiness.',
     cod_expected: '2027-09',
     execution_risk: 'stalled',
     risk_rationale: 'LTESA R1 awarded May 2023 — three years on, no FID and no visible construction. BESS modification still on public exhibition Dec 2025 indicates the project is being redesigned, not built. The R1 LTESA execution window has effectively passed; the contract is more likely than not NOT to be executed. The underlying project (approved 2016, Goldwind) may still proceed merchant or under a future scheme, but the R1 LTESA itself is stalled.',
@@ -863,6 +922,8 @@ export const NSW_WIND_COHORT: NSWWindCohortEntry[] = [
     planning_status: 'Construction',
     fid_year: 2024,
     fid_status: 'reached',
+    connection_status: 'committed',
+    connection_notes: 'AEMO Gen Info: **Committed** (414 MW). CWO REZ — Wellington-area TransGrid network. FID reached 2024, currently under construction with COD target Feb 2028. The only NSW wind cohort project physically being built.',
     cod_expected: '2028-02',
     execution_risk: 'on_track',
     risk_rationale: 'Under construction — the only project in the cohort physically being built. COD targeted Feb 2028.',
@@ -881,6 +942,8 @@ export const NSW_WIND_COHORT: NSWWindCohortEntry[] = [
     planning_status: 'Operating',
     fid_year: 2021,
     fid_status: 'reached',
+    connection_status: 'operating',
+    connection_notes: 'AEMO Gen Info: **In Service** (DUID FLYCRKWF, 145.5 MW). Central-West TransGrid network. Connected and operating since 2023; LTESA R4 underwrites a built asset.',
     cod_expected: '2023-09',
     execution_risk: 'on_track',
     risk_rationale: 'Operating asset — LTESA R4 underwrites a built and commissioned project.',

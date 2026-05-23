@@ -9,7 +9,7 @@ import { ROUND_INFO } from '../../data/scheme-round-info'
 import type { RoundInfo } from '../../data/scheme-round-info'
 import { ESG_TRACKER_PROJECTS, ROUND_ESG_SUMMARIES } from '../../data/esg-tracker-data'
 import { CIS_PROJECTS, LTESA_PROJECTS, CIS_ROUNDS, LTESA_R8_CANDIDATES, NSW_WIND_COHORT } from '../../data/scheme-rounds'
-import type { SchemeProject, NSWWindCohortEntry, LtesaProbabilityBand } from '../../data/scheme-rounds'
+import type { SchemeProject, NSWWindCohortEntry, LtesaProbabilityBand, ConnectionStatus } from '../../data/scheme-rounds'
 import { exportElementToPdf } from '../../lib/exportPdf'
 import type { ESGTrackerProject, PublicationStatus, AgreementStatus } from '../../data/esg-tracker-data'
 import DataProvenance from '../../components/common/DataProvenance'
@@ -4992,6 +4992,17 @@ const RISK_CONFIG: Record<'on_track' | 'watch' | 'stalled', { label: string; col
   stalled:  { label: 'Stalled',  colour: '#ef4444' },
 }
 
+const CONNECTION_CONFIG: Record<ConnectionStatus, { label: string; colour: string }> = {
+  operating:          { label: 'Operating',          colour: '#22c55e' },
+  commissioning:      { label: 'Commissioning',      colour: '#a855f7' },
+  committed:          { label: 'Committed',          colour: '#3b82f6' },
+  gps_assessment:     { label: 'GPS / pre-FID',      colour: '#06b6d4' },
+  anticipated:        { label: 'Anticipated',        colour: '#0ea5e9' },
+  connection_enquiry: { label: 'Connection enquiry', colour: '#eab308' },
+  proposed:           { label: 'Proposed',           colour: '#94a3b8' },
+  at_risk:            { label: 'At risk',            colour: '#ef4444' },
+}
+
 const SCHEME_COLOUR: Record<string, string> = {
   'CIS T1': '#3b82f6',
   'CIS T4': '#6366f1',
@@ -5275,6 +5286,7 @@ Key risks to the 6.3 GW total. Junction Rivers' lost SW REZ access raises real q
                 <th className="text-left p-2 hidden md:table-cell">REZ</th>
                 <th className="text-right p-2 hidden lg:table-cell">Access MW</th>
                 <th className="text-left p-2">Planning</th>
+                <th className="text-left p-2 hidden md:table-cell">Connection</th>
                 <th className="text-left p-2">Execution risk</th>
                 <th className="text-left p-2 hidden xl:table-cell">FID exp.</th>
                 <th className="text-left p-2 hidden xl:table-cell">COD exp.</th>
@@ -5283,6 +5295,7 @@ Key risks to the 6.3 GW total. Junction Rivers' lost SW REZ access raises real q
             <tbody>
               {NSW_WIND_COHORT.map(p => {
                 const risk = p.execution_risk ? RISK_CONFIG[p.execution_risk] : null
+                const conn = p.connection_status ? CONNECTION_CONFIG[p.connection_status] : null
                 return (
                   <tr key={p.project_id} className="border-b border-[var(--color-border)]/40 hover:bg-white/5">
                     <td className="p-2">
@@ -5300,6 +5313,19 @@ Key risks to the 6.3 GW total. Junction Rivers' lost SW REZ access raises real q
                     <td className="p-2 text-right hidden lg:table-cell text-[var(--color-text-muted)]">{p.rez_access_mw ? Math.round(p.rez_access_mw).toLocaleString() : '—'}</td>
                     <td className="p-2">
                       <span className="px-1.5 py-0.5 rounded-full text-[9px]" style={{ backgroundColor: `${plannningChip(p.planning_status)}20`, color: plannningChip(p.planning_status) }}>{p.planning_status}</span>
+                    </td>
+                    <td className="p-2 hidden md:table-cell">
+                      {conn ? (
+                        <span
+                          className="px-1.5 py-0.5 rounded-full text-[9px] font-medium"
+                          style={{ backgroundColor: `${conn.colour}20`, color: conn.colour }}
+                          title={p.connection_notes ?? ''}
+                        >
+                          {conn.label}
+                        </span>
+                      ) : (
+                        <span className="text-[9px] text-[var(--color-text-muted)]">—</span>
+                      )}
                     </td>
                     <td className="p-2">
                       {risk ? (
@@ -5327,6 +5353,7 @@ Key risks to the 6.3 GW total. Junction Rivers' lost SW REZ access raises real q
                 <td className="p-2 hidden md:table-cell"></td>
                 <td className="p-2 text-right hidden lg:table-cell">{Math.round(cohortTotals.totalAccess).toLocaleString()}</td>
                 <td className="p-2"></td>
+                <td className="p-2 hidden md:table-cell"></td>
                 <td className="p-2"></td>
                 <td className="p-2 hidden xl:table-cell"></td>
                 <td className="p-2 hidden xl:table-cell"></td>
@@ -5335,7 +5362,7 @@ Key risks to the 6.3 GW total. Junction Rivers' lost SW REZ access raises real q
           </table>
         </ScrollableTable>
         <p className="text-[10px] text-[var(--color-text-muted)] italic mt-2">
-          Awarded MW = scheme contract capacity (CIS or LTESA). Total MW = full project nameplate (DB or proposed). Where they differ, scheme-awarded is typically a stage (e.g. Liverpool Range Stage 1, Uungula 400 of 414) or REZ-access-constrained (Bullewah 283 of 804).
+          Awarded MW = scheme contract capacity (CIS or LTESA). Total MW = full project nameplate (DB or proposed). Where they differ, scheme-awarded is typically a stage (e.g. Liverpool Range Stage 1, Uungula 200 of 414) or REZ-access-constrained (Bullewah 283 of 804). <span className="not-italic">·</span> Connection chip = AEMO Generator Information commitment status (Operating · In Commissioning · Committed · Anticipated · Publicly Announced) refined with project-specific TransGrid / EnergyCo updates. Hover the chip for the per-project detail.
         </p>
       </section>
 
