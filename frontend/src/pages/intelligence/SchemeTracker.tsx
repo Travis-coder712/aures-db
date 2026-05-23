@@ -5015,10 +5015,61 @@ function plannningChip(status: NSWWindCohortEntry['planning_status']): string {
   }
 }
 
+// Timeline year range — used to position each project's Gantt bar.
+const TIMELINE_START_YEAR = 2023
+const TIMELINE_END_YEAR = 2032
+const TIMELINE_YEARS = TIMELINE_END_YEAR - TIMELINE_START_YEAR
+
+function yearToPct(year: number): number {
+  if (year <= TIMELINE_START_YEAR) return 0
+  if (year >= TIMELINE_END_YEAR) return 100
+  return ((year - TIMELINE_START_YEAR) / TIMELINE_YEARS) * 100
+}
+
+// Award-year lookup driven by scheme.
+function schemeAwardYear(scheme: NSWWindCohortEntry['scheme']): number {
+  if (scheme.startsWith('CIS T1')) return 2024
+  if (scheme.startsWith('CIS T4')) return 2025
+  if (scheme.startsWith('CIS T7')) return 2026
+  if (scheme.startsWith('LTESA R1')) return 2023
+  if (scheme.startsWith('LTESA R3')) return 2023
+  if (scheme.startsWith('LTESA R4')) return 2024
+  return 2024
+}
+
 function NSWWindTab() {
   const commentaryRef = useRef<HTMLDivElement>(null)
   const [pdfLoading, setPdfLoading] = useState(false)
   const [copyOk, setCopyOk] = useState(false)
+
+  // Timeline project-selection — start with the 3 T7 wins so the user
+  // gets an immediate visual without being overwhelmed by all 12.
+  const t7Ids = useMemo(
+    () => NSW_WIND_COHORT.filter(p => p.scheme === 'CIS T7').map(p => p.project_id),
+    [],
+  )
+  const [selectedTimelineIds, setSelectedTimelineIds] = useState<Set<string>>(
+    () => new Set(t7Ids),
+  )
+
+  const toggleTimelineProject = (id: string) => {
+    setSelectedTimelineIds(prev => {
+      const next = new Set(prev)
+      if (next.has(id)) next.delete(id)
+      else next.add(id)
+      return next
+    })
+  }
+
+  const timelinePresets = useMemo(
+    () => ({
+      all: NSW_WIND_COHORT.map(p => p.project_id),
+      t7: t7Ids,
+      built: NSW_WIND_COHORT.filter(p => p.planning_status === 'Operating' || p.planning_status === 'Construction').map(p => p.project_id),
+      stalled: NSW_WIND_COHORT.filter(p => p.execution_risk === 'stalled').map(p => p.project_id),
+    }),
+    [t7Ids],
+  )
 
   // Totals for header + cohort table footer
   const cohortTotals = useMemo(() => {
@@ -5048,30 +5099,20 @@ function NSWWindTab() {
 
   const t7Snapshot = useMemo(() => NSW_WIND_COHORT.filter(p => p.scheme === 'CIS T7'), [])
 
-  // Timeline data: each cohort entry plotted as award→COD (years).
-  const timelineData = useMemo(() => {
+  // Timeline rows: each cohort entry positioned by award→COD year.
+  // Sorted by award year (earliest first) so the staircase reads left→right.
+  const timelineRows = useMemo(() => {
     return NSW_WIND_COHORT.map(p => {
-      const awardYear = p.scheme.startsWith('CIS T1') ? 2024
-        : p.scheme.startsWith('CIS T4') ? 2025
-        : p.scheme.startsWith('CIS T7') ? 2026
-        : p.scheme.startsWith('LTESA R1') ? 2023
-        : p.scheme.startsWith('LTESA R3') ? 2023
-        : p.scheme.startsWith('LTESA R4') ? 2024
-        : 2024
-      const codYear = p.cod_expected
-        ? Number(p.cod_expected.slice(0, 4))
-        : awardYear + 5
-      return {
-        name: p.name,
-        awardYear,
-        codYear,
-        scheme: p.scheme,
-        durationYears: Math.max(1, codYear - awardYear),
-        awarded_mw: p.awarded_mw,
-        planning_status: p.planning_status,
-      }
-    }).sort((a, b) => a.codYear - b.codYear)
+      const awardYear = schemeAwardYear(p.scheme)
+      const codYear = p.cod_expected ? Number(p.cod_expected.slice(0, 4)) : awardYear + 5
+      return { entry: p, awardYear, codYear }
+    }).sort((a, b) => a.awardYear - b.awardYear || a.codYear - b.codYear)
   }, [])
+
+  const visibleTimelineRows = useMemo(
+    () => timelineRows.filter(r => selectedTimelineIds.has(r.entry.project_id)),
+    [timelineRows, selectedTimelineIds],
+  )
 
   // Shareable commentary text (one source of truth — used by both copy + PDF)
   const commentaryText = `NSW Wind & CIS/LTESA — Snapshot (${new Date().toISOString().slice(0, 10)})
@@ -5128,9 +5169,9 @@ Key risks to the 6.3 GW total. Junction Rivers' lost SW REZ access raises real q
 
         <div className="grid grid-cols-1 md:grid-cols-4 gap-3 mb-4">
           <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl p-4">
-            <div className="text-[10px] uppercase tracking-wide text-[var(--color-text-muted)]">NSW wind awarded today</div>
+            <div className="text-[10px] uppercase tracking-wide text-[var(--color-text-muted)]">NSW wind awarded — 23 May 2026</div>
             <div className="text-2xl font-bold text-[var(--color-text)] mt-1">{fmtMW(t7NswWindAwarded)}</div>
-            <div className="text-[10px] text-[var(--color-text-muted)] mt-1">across 3 wind / wind-hybrid projects</div>
+            <div className="text-[10px] text-[var(--color-text-muted)] mt-1">across 3 wind / wind-hybrid projects (CIS Tender 7)</div>
           </div>
           <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl p-4">
             <div className="text-[10px] uppercase tracking-wide text-[var(--color-text-muted)]">Total T7 capacity (NEM)</div>
@@ -5278,34 +5319,163 @@ Key risks to the 6.3 GW total. Junction Rivers' lost SW REZ access raises real q
       {/* Section 3 — Timeline / Gantt                                 */}
       {/* ============================================================ */}
       <section>
-        <h2 className="text-lg font-semibold text-[var(--color-text)] mb-3">Build Timeline — Award → Expected COD</h2>
+        <h2 className="text-lg font-semibold text-[var(--color-text)] mb-1">Build Timeline — Award → Expected COD</h2>
+        <p className="text-xs text-[var(--color-text-muted)] mb-3">
+          Select projects to plot. Each bar runs from scheme-award year to expected COD. Eraring (NSW's biggest coal, Aug 2027 shutdown) marked for context.
+        </p>
+
+        {/* Preset toolbar */}
+        <div className="flex flex-wrap items-center gap-2 mb-3 text-[10px]">
+          <span className="text-[var(--color-text-muted)] uppercase tracking-wide">Presets:</span>
+          <button
+            onClick={() => setSelectedTimelineIds(new Set(timelinePresets.all))}
+            className="px-2 py-0.5 rounded-full border border-[var(--color-border)] hover:border-blue-500 hover:text-blue-300 transition-colors"
+          >
+            All 12
+          </button>
+          <button
+            onClick={() => setSelectedTimelineIds(new Set(timelinePresets.t7))}
+            className="px-2 py-0.5 rounded-full border border-purple-500/40 text-purple-300 hover:bg-purple-500/10 transition-colors"
+          >
+            CIS T7 wins ({timelinePresets.t7.length})
+          </button>
+          <button
+            onClick={() => setSelectedTimelineIds(new Set(timelinePresets.built))}
+            className="px-2 py-0.5 rounded-full border border-emerald-500/40 text-emerald-300 hover:bg-emerald-500/10 transition-colors"
+          >
+            Built or building ({timelinePresets.built.length})
+          </button>
+          <button
+            onClick={() => setSelectedTimelineIds(new Set(timelinePresets.stalled))}
+            className="px-2 py-0.5 rounded-full border border-red-500/40 text-red-300 hover:bg-red-500/10 transition-colors"
+          >
+            Stalled ({timelinePresets.stalled.length})
+          </button>
+          <button
+            onClick={() => setSelectedTimelineIds(new Set())}
+            className="px-2 py-0.5 rounded-full border border-[var(--color-border)] text-[var(--color-text-muted)] hover:border-[var(--color-text-muted)] transition-colors"
+          >
+            Clear
+          </button>
+          <span className="ml-auto text-[var(--color-text-muted)]">
+            {selectedTimelineIds.size} of {NSW_WIND_COHORT.length} selected · {fmtMW(visibleTimelineRows.reduce((s, r) => s + r.entry.awarded_mw, 0))}
+          </span>
+        </div>
+
+        {/* Per-project chips */}
+        <div className="flex flex-wrap gap-1.5 mb-4">
+          {timelineRows.map(({ entry }) => {
+            const on = selectedTimelineIds.has(entry.project_id)
+            const colour = SCHEME_COLOUR[entry.scheme] ?? '#888'
+            return (
+              <button
+                key={entry.project_id}
+                onClick={() => toggleTimelineProject(entry.project_id)}
+                className="text-[10px] px-2 py-0.5 rounded-full border transition-colors"
+                style={
+                  on
+                    ? { backgroundColor: `${colour}20`, borderColor: `${colour}80`, color: colour }
+                    : { backgroundColor: 'transparent', borderColor: 'var(--color-border)', color: 'var(--color-text-muted)' }
+                }
+              >
+                {on ? '✓ ' : '+ '}{entry.name}
+              </button>
+            )
+          })}
+        </div>
+
+        {/* The Gantt itself — div-based for layout reliability (Recharts measurement
+            inside a conditionally-rendered tab is fragile, especially with vertical
+            BarCharts). The custom approach uses CSS percentages keyed off the
+            TIMELINE_START_YEAR / TIMELINE_END_YEAR constants. */}
         <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl p-4">
-          <div style={{ width: '100%', height: Math.max(360, timelineData.length * 30) }}>
-            <ResponsiveContainer>
-              <BarChart data={timelineData} layout="vertical" margin={{ top: 10, right: 30, left: 100, bottom: 30 }}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#444" />
-                <XAxis type="number" domain={[2022, 2032]} tick={{ fill: '#9ca3af', fontSize: 11 }} ticks={[2023, 2024, 2025, 2026, 2027, 2028, 2029, 2030, 2031]} />
-                <YAxis type="category" dataKey="name" width={150} tick={{ fill: '#d1d5db', fontSize: 10 }} />
-                <Tooltip
-                  contentStyle={{ backgroundColor: '#0f172a', border: '1px solid #374151', borderRadius: '6px', fontSize: '12px' }}
-                  formatter={(_value, _name, props) => {
-                    const item = props.payload as { awardYear: number; codYear: number; scheme: string; awarded_mw: number; planning_status: string }
-                    return [`${item.awardYear} award → ${item.codYear} COD · ${item.scheme} · ${Math.round(item.awarded_mw)} MW · ${item.planning_status}`, 'Build window']
-                  }}
-                />
-                <Bar dataKey="awardYear" stackId="t" fill="transparent" />
-                <Bar dataKey="durationYears" stackId="t">
-                  {timelineData.map((d, i) => (
-                    <Cell key={i} fill={SCHEME_COLOUR[d.scheme] ?? '#888'} />
-                  ))}
-                </Bar>
-                <ReferenceLine x={2027.6} stroke="#ef4444" strokeDasharray="4 4" label={{ value: 'Eraring shutdown (Aug 2027)', fill: '#ef4444', fontSize: 10, position: 'top' }} />
-                <ReferenceLine x={2026.4} stroke="#22c55e" strokeDasharray="2 2" label={{ value: 'Today', fill: '#22c55e', fontSize: 10, position: 'top' }} />
-              </BarChart>
-            </ResponsiveContainer>
-          </div>
-          <p className="text-[10px] text-[var(--color-text-muted)] italic mt-2">
-            Bar starts at scheme-award year, extends to expected COD. Eraring (NSW's biggest coal) shutdown marked for context. Key projects to watch: Yanco Delta, Liverpool Range, Spicers Creek, Valley of the Winds — if FID slips on any, NSW wind GW-by-2030 trajectory shifts materially.
+          {visibleTimelineRows.length === 0 ? (
+            <div className="py-12 text-center text-xs text-[var(--color-text-muted)] italic">
+              Select projects above to plot them on the timeline.
+            </div>
+          ) : (
+            <div>
+              {/* Year axis */}
+              <div className="relative h-5 mb-2 ml-44">
+                {Array.from({ length: TIMELINE_YEARS + 1 }, (_, i) => TIMELINE_START_YEAR + i).map(y => (
+                  <div
+                    key={y}
+                    className="absolute top-0 text-[9px] text-[var(--color-text-muted)] -translate-x-1/2"
+                    style={{ left: `${yearToPct(y)}%` }}
+                  >
+                    {y}
+                  </div>
+                ))}
+              </div>
+
+              {/* Rows */}
+              <div className="relative">
+                {visibleTimelineRows.map(({ entry, awardYear, codYear }) => {
+                  const colour = SCHEME_COLOUR[entry.scheme] ?? '#888'
+                  const leftPct = yearToPct(awardYear)
+                  const widthPct = Math.max(2, yearToPct(codYear) - leftPct)
+                  return (
+                    <div key={entry.project_id} className="flex items-center h-8 group">
+                      <div className="w-44 pr-2 text-[10px] truncate text-right">
+                        <Link
+                          to={`/projects/${entry.project_id}`}
+                          className="text-[var(--color-text)] hover:text-blue-400 hover:underline"
+                          title={`${entry.name} · ${entry.proponent}`}
+                        >
+                          {entry.name}
+                        </Link>
+                      </div>
+                      <div className="flex-1 relative h-full">
+                        {/* baseline */}
+                        <div className="absolute left-0 right-0 top-1/2 -translate-y-1/2 h-px bg-[var(--color-border)]/40" />
+                        {/* bar */}
+                        <div
+                          className="absolute top-1/2 -translate-y-1/2 h-5 rounded-sm flex items-center"
+                          style={{
+                            left: `${leftPct}%`,
+                            width: `${widthPct}%`,
+                            backgroundColor: `${colour}33`,
+                            borderLeft: `3px solid ${colour}`,
+                          }}
+                          title={`${entry.scheme} award ${awardYear} → COD ${codYear} · ${Math.round(entry.awarded_mw)} MW · ${entry.planning_status}`}
+                        >
+                          <span className="px-1.5 text-[9px] font-medium whitespace-nowrap" style={{ color: colour }}>
+                            {entry.scheme}
+                          </span>
+                          {widthPct > 12 && (
+                            <span className="px-1 text-[9px] text-[var(--color-text-muted)] whitespace-nowrap">
+                              · {Math.round(entry.awarded_mw)} MW
+                            </span>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  )
+                })}
+
+                {/* Reference lines overlaid on the entire grid area */}
+                <div className="absolute inset-0 ml-44 pointer-events-none">
+                  {/* Today (2026.4 ≈ end of May) */}
+                  <div
+                    className="absolute top-0 bottom-0 border-l-2 border-emerald-500/60"
+                    style={{ left: `${yearToPct(2026.4)}%` }}
+                  >
+                    <span className="absolute -top-4 -translate-x-1/2 text-[9px] text-emerald-400 whitespace-nowrap">Today</span>
+                  </div>
+                  {/* Eraring shutdown — Aug 2027 ≈ 2027.6 */}
+                  <div
+                    className="absolute top-0 bottom-0 border-l-2 border-dashed border-red-500/60"
+                    style={{ left: `${yearToPct(2027.6)}%` }}
+                  >
+                    <span className="absolute -top-4 -translate-x-1/2 text-[9px] text-red-400 whitespace-nowrap">Eraring close</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
+          <p className="text-[10px] text-[var(--color-text-muted)] italic mt-3">
+            Click a project name to open its detail page. Bar colour = scheme (CIS T1 / T4 / T7 · LTESA R1 / R3 / R4). Key projects to watch: Yanco Delta, Liverpool Range, Spicers Creek, Valley of the Winds — FID slippage on any materially shifts NSW wind GW-by-2030.
           </p>
         </div>
       </section>
