@@ -112,17 +112,41 @@
         }
       },
       "connection_status": {}
+    },
+    {
+      "rez": "NSW New England",
+      "total_mw": 175.0,
+      "operating_mw": 175.0,
+      "pipeline_mw": 0,
+      "project_count": 1,
+      "congestion_score": 2.0,
+      "congestion_level": "low",
+      "technologies": {
+        "wind": {
+          "operating": {
+            "count": 1,
+            "mw": 175.0
+          }
+        }
+      },
+      "connection_status": {
+        "operating": {
+          "count": 1,
+          "mw": 175.0
+        }
+      }
     }
   ],
   "state_summary": {
     "NSW": {
-      "rez_count": 3,
-      "total_mw": 16621.0,
+      "rez_count": 4,
+      "total_mw": 16796.0,
       "pipeline_mw": 15901.0,
       "rezs": [
         "nsw-central-west-orana",
         "nsw-south-west",
-        "nsw-new-england"
+        "nsw-new-england",
+        "NSW New England"
       ]
     }
   },
@@ -138,8 +162,12 @@
     "Pre-application": {
       "count": 2,
       "mw": 1560.0
+    },
+    "operating": {
+      "count": 1,
+      "mw": 175.0
     }
   },
-  "total_rez_zones": 3,
-  "exported_at": "2026-05-10T17:42:59.822340"
+  "total_rez_zones": 4,
+  "exported_at": "2026-05-23T11:12:49.862561"
 }

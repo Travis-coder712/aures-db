@@ -336,6 +336,12 @@
         "mw": 175.0
       },
       {
+        "role": "epc",
+        "supplier": "Goldwind Australia",
+        "projects": 1,
+        "mw": 175.0
+      },
+      {
         "role": "wind_oem",
         "supplier": "Goldwind",
         "projects": 1,
@@ -33741,7 +33747,39 @@
         "transaction_structure": null,
         "source_url": null
       }
+    ],
+    "CECEP Wind Power Australia Pty Ltd": [
+      {
+        "project_id": "white-rock-wind-farm-stage-1",
+        "project_name": "White Rock Wind Farm - Stage 1",
+        "period": "2008-2014",
+        "owner": "Epuron Pty Ltd",
+        "role": "Original developer",
+        "acquisition_value_aud": null,
+        "transaction_structure": "Greenfield development",
+        "source_url": null
+      },
+      {
+        "project_id": "white-rock-wind-farm-stage-1",
+        "project_name": "White Rock Wind Farm - Stage 1",
+        "period": "2014-2015",
+        "owner": "Goldwind Australia",
+        "role": "100% developer / EPC",
+        "acquisition_value_aud": null,
+        "transaction_structure": "Acquired development rights from Epuron",
+        "source_url": null
+      },
+      {
+        "project_id": "white-rock-wind-farm-stage-1",
+        "project_name": "White Rock Wind Farm - Stage 1",
+        "period": "2015-present",
+        "owner": "CECEP 75% / Goldwind 25%",
+        "role": "Joint asset owners",
+        "acquisition_value_aud": null,
+        "transaction_structure": "CECEP acquired 75% equity from Goldwind",
+        "source_url": null
+      }
     ]
   },
-  "exported_at": "2026-05-10T17:33:54.093225"
+  "exported_at": "2026-05-23T11:10:54.921051"
 }

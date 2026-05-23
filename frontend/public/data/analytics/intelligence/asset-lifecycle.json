@@ -7749,16 +7749,16 @@
       "name": "White Rock Wind Farm - Stage 1",
       "technology": "wind",
       "state": "NSW",
-      "rez": null,
+      "rez": "NSW New England",
       "capacity_mw": 175.0,
       "storage_mwh": null,
       "developer": "CECEP Wind Power Australia Pty Ltd",
-      "operator": "CECEP/Goldwind",
+      "operator": "Goldwind Australia (O&M) / CECEP (asset owner)",
       "cod_year": 2017,
       "age_years": 9,
       "age_bucket": "5-10y",
       "primary_oem": "Goldwind",
-      "primary_model": "GW121/2500 PMDD",
+      "primary_model": "GW121/2500 PMDD (direct-drive, permanent-magnet synchronous)",
       "cf_latest": 33.61,
       "cf_trend": -0.35,
       "cf_gap_to_state_median": 6.04,
@@ -8090,5 +8090,5 @@
       "longitude": null
     }
   ],
-  "exported_at": "2026-05-10T17:33:54.291896"
+  "exported_at": "2026-05-23T11:10:55.063054"
 }

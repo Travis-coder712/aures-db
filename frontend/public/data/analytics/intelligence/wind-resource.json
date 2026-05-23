@@ -448,6 +448,7 @@
       "project_id": "white-rock-wind-farm-stage-1",
       "name": "White Rock Wind Farm - Stage 1",
       "state": "NSW",
+      "rez": "NSW New England",
       "capacity_mw": 175.0,
       "latitude": -29.7718,
       "longitude": 151.5755,
@@ -1003,7 +1004,16 @@
       "rating": "Average"
     }
   },
-  "rez_benchmarks": {},
+  "rez_benchmarks": {
+    "NSW New England": {
+      "count": 1,
+      "mean": 28.7,
+      "median": 28.7,
+      "p25": 28.7,
+      "p75": 28.7,
+      "rating": "Good"
+    }
+  },
   "development_projects": [
     {
       "project_id": "golden-plains-wind",
@@ -2182,5 +2192,5 @@
   ],
   "total_operating": 80,
   "total_development": 128,
-  "exported_at": "2026-05-10T17:33:54.280995"
+  "exported_at": "2026-05-23T11:10:55.032612"
 }

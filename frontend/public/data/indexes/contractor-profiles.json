@@ -1100,6 +1100,27 @@
       ]
     },
     {
+      "slug": "goldwind-australia",
+      "name": "Goldwind Australia",
+      "project_count": 1,
+      "total_capacity_mw": 175.0,
+      "roles": [
+        "epc"
+      ],
+      "by_technology": {
+        "wind": 1
+      },
+      "by_status": {
+        "operating": 1
+      },
+      "states": [
+        "NSW"
+      ],
+      "project_ids": [
+        "white-rock-wind-farm-stage-1"
+      ]
+    },
+    {
       "slug": "fulton-hogan",
       "name": "Fulton Hogan",
       "project_count": 1,
@@ -1617,5 +1638,5 @@
       ]
     }
   ],
-  "total": 72
+  "total": 73
 }

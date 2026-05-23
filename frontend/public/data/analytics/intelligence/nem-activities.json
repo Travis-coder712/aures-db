@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-10T17:42:59.832480",
+  "generated_at": "2026-05-23T11:12:49.871312",
   "months": [
     {
       "month": "2027-06",
@@ -13429,7 +13429,7 @@
             "capacity_mw": 175.0,
             "event_type": "cod",
             "title": "Commercial operations commenced",
-            "detail": "Commencement date from AEMO registration via OpenElectricity.",
+            "detail": "Commencement date from AEMO registration via OpenElectricity. Full 175 MW installed capacity registered with NEMDE.",
             "date": "2017-07-07"
           }
         ],
@@ -13873,7 +13873,7 @@
             "capacity_mw": 175.0,
             "event_type": "construction_start",
             "title": "Construction commenced",
-            "detail": "Construction began for 70 Goldwind GW121/2500 turbines near Glen Innes",
+            "detail": "Construction began on Stage 1 (70 \u00d7 Goldwind GW121/2500 PMDD direct-drive turbines, hub height ~90 m, rotor diameter 121 m). Fulton Hogan engaged as BOP contractor for civil/electrical works.",
             "date": "2016-04"
           }
         ],
@@ -13984,7 +13984,19 @@
     {
       "month": "2015-09",
       "sections": {
-        "development": [],
+        "development": [
+          {
+            "project_id": "white-rock-wind-farm-stage-1",
+            "project_name": "White Rock Wind Farm - Stage 1",
+            "technology": "wind",
+            "state": "NSW",
+            "capacity_mw": 175.0,
+            "event_type": "ownership_change",
+            "title": "CECEP acquires 75% equity from Goldwind",
+            "detail": "China Energy Conservation and Environmental Protection Group (CECEP) acquired a 75% equity stake from Goldwind, with Goldwind retaining 25%. Goldwind continued as EPC contractor and long-term O&M operator under a service agreement.",
+            "date": "2015-09"
+          }
+        ],
         "govt_programs": [],
         "rez_progress": [],
         "construction": [
@@ -14191,8 +14203,8 @@
             "state": "NSW",
             "capacity_mw": 175.0,
             "event_type": "ownership_change",
-            "title": "Goldwind acquires from Epuron",
-            "detail": "Goldwind Australia acquired development rights",
+            "title": "Goldwind acquires development rights from Epuron",
+            "detail": "Goldwind Australia acquired 100% of the development rights from Epuron, intending to anchor its first major Australian project around Goldwind's own GW121 turbine platform.",
             "date": "2014-10"
           }
         ],
@@ -14499,8 +14511,8 @@
             "state": "NSW",
             "capacity_mw": 175.0,
             "event_type": "planning_approved",
-            "title": "NSW planning approval",
-            "detail": "Original planning approval granted",
+            "title": "NSW planning approval granted",
+            "detail": "NSW Department of Planning approved the original White Rock Wind Farm proposal for up to 119 turbines (Epuron development).",
             "date": "2012-07"
           }
         ],
@@ -17319,7 +17331,7 @@
     "construction": 637,
     "operational": 444,
     "govt_programs": 10,
-    "development": 258,
+    "development": 259,
     "rez_progress": 16
   }
 }

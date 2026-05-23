@@ -1,11 +1,11 @@
 {
   "concentration": {
     "epc": {
-      "total_contractors": 64,
-      "total_mw": 26309.3,
-      "total_project_slots": 115,
-      "hhi_mw": 376.0,
-      "top3_share_mw_pct": 23.6,
+      "total_contractors": 65,
+      "total_mw": 26484.3,
+      "total_project_slots": 116,
+      "hhi_mw": 371.0,
+      "top3_share_mw_pct": 23.4,
       "top3": [
         {
           "supplier": "Future Generation Joint Venture (Webuild/Clough/Lane)",
@@ -2205,6 +2205,38 @@
       ]
     },
     {
+      "contractor": "Goldwind Australia",
+      "slug": "goldwind-australia",
+      "category": "epc_only",
+      "roles": [
+        "epc"
+      ],
+      "projects": 1,
+      "mw_total": 175.0,
+      "technologies": {
+        "wind": 1
+      },
+      "states": {
+        "NSW": 1
+      },
+      "statuses": {
+        "operating": 1
+      },
+      "top_developers": [
+        [
+          "CECEP Wind Power Australia Pty Ltd",
+          1
+        ]
+      ],
+      "top_oem_partners": [
+        {
+          "supplier": "Goldwind",
+          "role": "wind_oem",
+          "count": 1
+        }
+      ]
+    },
+    {
       "contractor": "Fulton Hogan",
       "slug": "fulton-hogan",
       "category": "bop_only",
@@ -3884,21 +3916,6 @@
         "drift_months": 0.0
       }
     ],
-    "Fulton Hogan": [
-      {
-        "project_id": "white-rock-wind-farm-stage-1",
-        "project_name": "White Rock Wind Farm - Stage 1",
-        "role": "bop",
-        "technology": "wind",
-        "state": "NSW",
-        "status": "operating",
-        "capacity_mw": 175.0,
-        "developer": "CECEP Wind Power Australia Pty Ltd",
-        "model": null,
-        "source_url": null,
-        "drift_months": 0.0
-      }
-    ],
     "PCL Construction": [
       {
         "project_id": "stubbo-solar-farm",
@@ -4693,6 +4710,36 @@
         "source_url": "https://kerangsolarplant.com/",
         "drift_months": 0.0
       }
+    ],
+    "Goldwind Australia": [
+      {
+        "project_id": "white-rock-wind-farm-stage-1",
+        "project_name": "White Rock Wind Farm - Stage 1",
+        "role": "epc",
+        "technology": "wind",
+        "state": "NSW",
+        "status": "operating",
+        "capacity_mw": 175.0,
+        "developer": "CECEP Wind Power Australia Pty Ltd",
+        "model": null,
+        "source_url": null,
+        "drift_months": 0.0
+      }
+    ],
+    "Fulton Hogan": [
+      {
+        "project_id": "white-rock-wind-farm-stage-1",
+        "project_name": "White Rock Wind Farm - Stage 1",
+        "role": "bop",
+        "technology": "wind",
+        "state": "NSW",
+        "status": "operating",
+        "capacity_mw": 175.0,
+        "developer": "CECEP Wind Power Australia Pty Ltd",
+        "model": null,
+        "source_url": null,
+        "drift_months": 0.0
+      }
     ]
   },
   "dev_contractor_matrix": [
@@ -5224,6 +5271,15 @@
       "contractor": "PCL Construction",
       "projects": 1,
       "mw": 176.0,
+      "roles": [
+        "epc"
+      ]
+    },
+    {
+      "developer": "CECEP Wind Power Australia Pty Ltd",
+      "contractor": "Goldwind Australia",
+      "projects": 1,
+      "mw": 175.0,
       "roles": [
         "epc"
       ]
@@ -6332,12 +6388,6 @@
       "count": 1
     },
     {
-      "contractor": "Fulton Hogan",
-      "oem": "Goldwind",
-      "oem_role": "wind_oem",
-      "count": 1
-    },
-    {
       "contractor": "PCL Construction",
       "oem": "Risen Energy",
       "oem_role": "solar_oem",
@@ -6552,16 +6602,28 @@
       "oem": "JA Solar",
       "oem_role": "solar_oem",
       "count": 1
+    },
+    {
+      "contractor": "Goldwind Australia",
+      "oem": "Goldwind",
+      "oem_role": "wind_oem",
+      "count": 1
+    },
+    {
+      "contractor": "Fulton Hogan",
+      "oem": "Goldwind",
+      "oem_role": "wind_oem",
+      "count": 1
     }
   ],
   "summary": {
-    "total_contractors": 72,
-    "total_project_rows": 136,
+    "total_contractors": 73,
+    "total_project_rows": 137,
     "by_category_count": {
-      "epc_only": 60,
+      "epc_only": 61,
       "bop_only": 8,
       "both": 4
     }
   },
-  "exported_at": "2026-05-10T17:33:54.146234"
+  "exported_at": "2026-05-23T11:10:54.980135"
 }
