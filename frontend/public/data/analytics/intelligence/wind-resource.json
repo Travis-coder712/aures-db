@@ -1980,6 +1980,8 @@
       "name": "Strathbogie Ranges Wind Farm",
       "state": "VIC",
       "capacity_mw": 800.0,
+      "latitude": -36.85,
+      "longitude": 145.75,
       "predicted_cf_pct": 26.6,
       "predicted_rating": "Average",
       "basis": "state_average"
@@ -2192,5 +2194,5 @@
   ],
   "total_operating": 80,
   "total_development": 128,
-  "exported_at": "2026-05-23T11:10:55.032612"
+  "exported_at": "2026-05-25T12:17:38.378097"
 }

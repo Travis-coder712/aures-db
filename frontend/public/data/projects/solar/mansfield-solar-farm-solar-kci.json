@@ -12,12 +12,16 @@
   "has_statcom": false,
   "has_harmonic_filter": false,
   "data_confidence": "low",
-  "last_updated": "2026-03-10",
-  "last_verified": "2026-03-10",
+  "last_updated": "2026-05-23",
+  "last_verified": "2026-05-23",
   "aemo_gen_info_id": "2360",
   "confidence_score": "15",
   "development_stage": "planning_submitted",
   "zombie_flag": "zombie_minimal",
+  "coordinates": {
+    "lat": -37.06,
+    "lng": 146.08
+  },
   "timeline": [],
   "ownership_history": [],
   "cod_history": [],
@@ -32,7 +36,16 @@
       "url": "https://aemo.com.au/energy-systems/electricity/national-electricity-market-nem/nem-forecasting-and-planning/forecasting-and-planning-data/generation-information",
       "date": "2026-01-30",
       "source_tier": 1
+    },
+    {
+      "title": "Coordinates hand-curated for Mansfield Regional Pipeline map (v3.10.0)",
+      "url": "",
+      "date": "2026-05-23",
+      "source_tier": 4,
+      "note": "Placename centroid \u2014 Mansfield township. Sub-10km precision sufficient for 100km-radius regional view."
     }
   ],
-  "timeline_events": []
+  "timeline_events": [],
+  "latitude": -37.06,
+  "longitude": 146.08
 }

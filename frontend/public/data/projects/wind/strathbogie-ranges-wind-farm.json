@@ -14,12 +14,16 @@
   "has_statcom": false,
   "has_harmonic_filter": false,
   "data_confidence": "low",
-  "last_updated": "2026-03-10",
-  "last_verified": "2026-03-10",
+  "last_updated": "2026-05-23",
+  "last_verified": "2026-05-23",
   "aemo_gen_info_id": "2811",
   "confidence_score": "23",
   "development_stage": "planning_submitted",
   "first_seen": "2026-03-12",
+  "coordinates": {
+    "lat": -36.85,
+    "lng": 145.75
+  },
   "timeline": [
     {
       "date": "2026-03-12",
@@ -43,7 +47,16 @@
       "url": "https://aemo.com.au/energy-systems/electricity/national-electricity-market-nem/nem-forecasting-and-planning/forecasting-and-planning-data/generation-information",
       "date": "2026-01-30",
       "source_tier": 1
+    },
+    {
+      "title": "Coordinates hand-curated for Mansfield Regional Pipeline map (v3.10.0)",
+      "url": "https://en.wikipedia.org/wiki/Strathbogie_Ranges",
+      "date": "2026-05-23",
+      "source_tier": 4,
+      "note": "Placename centroid \u2014 Strathbogie Ranges plateau. Sub-10km precision sufficient for 100km-radius regional view."
     }
   ],
+  "latitude": -36.85,
+  "longitude": 145.75,
   "timeline_events": []
 }

@@ -1852,6 +1852,8 @@
       "name": "Mansfield Solar Farm - Solar - KCI",
       "state": "VIC",
       "capacity_mw": 350.0,
+      "latitude": -37.06,
+      "longitude": 146.08,
       "developer": "Biscon Energy Australia Pty Ltd",
       "predicted_cf_pct": 23.6,
       "predicted_rating": "Average",
@@ -2594,6 +2596,8 @@
       "name": "Winton North Solar Farm",
       "state": "VIC",
       "capacity_mw": 100.0,
+      "latitude": -36.47,
+      "longitude": 146.105,
       "developer": "EE Solar 12 Pty Ltd as trustee for the EE Solar 12 Trust",
       "predicted_cf_pct": 23.6,
       "predicted_rating": "Average",
@@ -2710,5 +2714,5 @@
     "Average": "20% \u2013 24%",
     "Below Average": "< 20%"
   },
-  "exported_at": "2026-05-23T11:10:55.034661"
+  "exported_at": "2026-05-25T12:17:38.380572"
 }

@@ -92,6 +92,17 @@
     "developer": "Akaysha Energy (BlackRock)"
   },
   {
+    "id": "strathbogie-ranges-wind-farm",
+    "name": "Strathbogie Ranges Wind Farm",
+    "technology": "wind",
+    "status": "development",
+    "capacity_mw": 800.0,
+    "state": "VIC",
+    "lat": -36.85,
+    "lng": 145.75,
+    "developer": "Seymour Wind Pty Ltd"
+  },
+  {
     "id": "new-england-solar-farm",
     "name": "New England Solar Farm",
     "technology": "hybrid",
@@ -253,6 +264,18 @@
     "developer": "AGL Energy"
   },
   {
+    "id": "glenrowan-bess",
+    "name": "Glenrowan BESS",
+    "technology": "bess",
+    "status": "development",
+    "capacity_mw": 450.0,
+    "storage_mwh": 1600.0,
+    "state": "VIC",
+    "lat": -36.46,
+    "lng": 146.22,
+    "developer": "Akaysha Energy Pty Ltd"
+  },
+  {
     "id": "gordon",
     "name": "Gordon",
     "technology": "pumped_hydro",
@@ -334,6 +357,29 @@
     "developer": "Ampyr Australia (AGP Singapore)"
   },
   {
+    "id": "glenrowan-bess-storage-kci",
+    "name": "Glenrowan BESS - Storage - KCI",
+    "technology": "bess",
+    "status": "development",
+    "capacity_mw": 400.0,
+    "state": "VIC",
+    "lat": -36.455,
+    "lng": 146.215,
+    "developer": "Enervest Operations Pty Ltd"
+  },
+  {
+    "id": "goorambat-bess-lightsourcebp",
+    "name": "Goorambat BESS (LightsourceBP)",
+    "technology": "bess",
+    "status": "development",
+    "capacity_mw": 400.0,
+    "storage_mwh": 1600.0,
+    "state": "VIC",
+    "lat": -36.545,
+    "lng": 146.04,
+    "developer": "Lightsource Development Services Australia Pty Ltd"
+  },
+  {
     "id": "stubbo-solar-farm",
     "name": "Stubbo Solar Farm",
     "technology": "solar",
@@ -366,6 +412,18 @@
     "lat": -26.927922,
     "lng": 150.601542,
     "developer": "Western Downs Green Power Hub Pty Ltd"
+  },
+  {
+    "id": "winton-energy-reserve-1",
+    "name": "Winton Energy Reserve 1",
+    "technology": "bess",
+    "status": "development",
+    "capacity_mw": 400.0,
+    "storage_mwh": 400.0,
+    "state": "VIC",
+    "lat": -36.5,
+    "lng": 146.1,
+    "developer": "Lochard Energy"
   },
   {
     "id": "rye-park-wind-farm",
@@ -421,6 +479,17 @@
     "lat": -35.709592,
     "lng": 146.981761,
     "developer": "Culcairn Solar Farm Pty Ltd as trustee for Culcairn Solar Farm Trust"
+  },
+  {
+    "id": "mansfield-solar-farm-solar-kci",
+    "name": "Mansfield Solar Farm - Solar - KCI",
+    "technology": "solar",
+    "status": "development",
+    "capacity_mw": 350.0,
+    "state": "VIC",
+    "lat": -37.06,
+    "lng": 146.08,
+    "developer": "Biscon Energy Australia Pty Ltd"
   },
   {
     "id": "wooreen-energy-storage-system",
@@ -559,6 +628,18 @@
     "lat": -35.746481,
     "lng": 146.961838,
     "developer": "FRV Australia (Walla Walla Asset Co Pty Ltd (ACN 634 728 868) as trustee for the Walla Walla Asset Trust)"
+  },
+  {
+    "id": "west-mokoan-solar-farm-and-bess",
+    "name": "West Mokoan Solar Farm and BESS",
+    "technology": "hybrid",
+    "status": "development",
+    "capacity_mw": 300.0,
+    "storage_mwh": 1568.0,
+    "state": "VIC",
+    "lat": -36.485,
+    "lng": 146.105,
+    "developer": "West Mokoan Solar Farm"
   },
   {
     "id": "broadsound-solar-farm",
@@ -1575,6 +1656,18 @@
     "developer": "Munna Creek Solar Farm Investments Pty Ltd as trustee for the Munna Creek Solar Farm Trust"
   },
   {
+    "id": "winton-bess",
+    "name": "Winton BESS",
+    "technology": "bess",
+    "status": "development",
+    "capacity_mw": 120.0,
+    "storage_mwh": 480.0,
+    "state": "VIC",
+    "lat": -36.505,
+    "lng": 146.095,
+    "developer": "AE BESS 10 as Trustee for AE BESS 10 Unit Trust"
+  },
+  {
     "id": "willogoleche-wind-farm",
     "name": "Willogoleche Wind Farm",
     "technology": "wind",
@@ -1987,6 +2080,17 @@
     "lat": -26.263986,
     "lng": 149.772871,
     "developer": "Vena Energy"
+  },
+  {
+    "id": "winton-north-solar-farm",
+    "name": "Winton North Solar Farm",
+    "technology": "solar",
+    "status": "development",
+    "capacity_mw": 100.0,
+    "state": "VIC",
+    "lat": -36.47,
+    "lng": 146.105,
+    "developer": "EE Solar 12 Pty Ltd as trustee for the EE Solar 12 Trust"
   },
   {
     "id": "snowtown-wind-farm",
