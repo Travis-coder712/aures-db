@@ -14,8 +14,8 @@
   "has_statcom": false,
   "has_harmonic_filter": false,
   "data_confidence": "low",
-  "last_updated": "2026-03-10",
-  "last_verified": "2026-03-10",
+  "last_updated": "2026-05-23",
+  "last_verified": "2026-05-23",
   "aemo_gen_info_id": "2570",
   "timeline": [],
   "ownership_history": [],
@@ -31,6 +31,15 @@
       "url": "https://aemo.com.au/energy-systems/electricity/national-electricity-market-nem/nem-forecasting-and-planning/forecasting-and-planning-data/generation-information",
       "date": "2026-01-30",
       "source_tier": 1
+    },
+    {
+      "title": "Coordinates hand-curated for Mansfield Regional Pipeline map (v3.10.0)",
+      "url": "",
+      "date": "2026-05-23",
+      "source_tier": 4,
+      "note": "Placename centroid \u2014 Goorambat village. Sub-10km precision sufficient for 100km-radius regional view."
     }
-  ]
+  ],
+  "latitude": -36.545,
+  "longitude": 146.04
 }

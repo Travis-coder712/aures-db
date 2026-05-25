@@ -74,6 +74,12 @@ const ACTIVE_FEATURES = [
     route: '/intelligence/transmission-infra',
   },
   {
+    icon: '\u{1F5FA}\u{FE0F}',
+    title: 'Mansfield Regional Pipeline',
+    description: 'Renewable projects within 100km of Mansfield, VIC — map with asset-type + 7-tier pipeline status filters. Proof of concept for the NEM-wide Under Construction map.',
+    route: '/intelligence/mansfield-pipeline',
+  },
+  {
     icon: '\u{1F4D1}',
     title: 'EIS Technical Specs',
     description: 'Wind resource, BESS chemistry, grid connection data from Environmental Impact Statements',

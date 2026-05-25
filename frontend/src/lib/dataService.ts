@@ -603,6 +603,20 @@ export async function fetchBessRecordsLeaderboard(): Promise<any | null> {
   } catch { return null }
 }
 
+// Mansfield Regional Pipeline — projects within 100km of Mansfield, VIC,
+// keyed by normalized 7-tier pipeline stage (v3.10.0).
+import type { RegionalPipelineData } from './types'
+let mansfieldPipelineCache: RegionalPipelineData | null = null
+export async function fetchMansfieldPipeline(): Promise<RegionalPipelineData | null> {
+  if (mansfieldPipelineCache) return mansfieldPipelineCache
+  try {
+    const resp = await fetch(`${BASE}/analytics/intelligence/mansfield-pipeline.json`)
+    if (!resp.ok) return null
+    mansfieldPipelineCache = await resp.json()
+    return mansfieldPipelineCache
+  } catch { return null }
+}
+
 // Coal Outage vs Dispatch — NEM/state/station decomposition of coal MWh
 // reduction into outage (unavailable) vs displaced (available but not
 // dispatched) vs dispatched (v2.27.0).

@@ -2796,6 +2796,77 @@ CVP violation cost:    CVP × MarketPriceCap × ViolationDegree
 `,
   },
   {
+    id: 'mansfield-regional-pipeline',
+    title: 'Mansfield Regional Pipeline — Methodology',
+    description: 'How the 100km Mansfield-area renewable map is built, the 7-tier pipeline stage ladder, and the data-coverage caveats.',
+    icon: '🗺️',
+    category: 'technical',
+    readingTime: '4 min',
+    added: '2026-05-23',
+    content: `# Mansfield Regional Pipeline — Methodology
+
+This guide documents the data and logic behind the **Mansfield Regional Pipeline** intelligence page (\`/intelligence/mansfield-pipeline\`).
+
+## Why this page exists
+
+A focused proof of concept for a future NEM-wide "Under Construction" map. Travis wanted to see all renewable projects within a 100 km radius of Mansfield, VIC on a single interactive map with filters for asset type and pipeline stage. The pattern works locally first, then scales to all of Australia.
+
+## Geographic filter
+
+Centred on **Mansfield, VIC** (-37.0556 S, 146.0823 E) with a **100 km haversine radius**. Both constants live in \`pipeline/exporters/export_regional_pipeline.py\` (\`CENTER_LAT\`, \`CENTER_LNG\`, \`RADIUS_KM\`) — for the eventual NEM expansion only these constants need to change (or the script accepts them as CLI args).
+
+The page draws a faint 100 km ring on the map for context.
+
+## Pipeline stage — 7-tier ordinal ladder
+
+Each project is classified into one of seven mutually-exclusive stages, picked as the highest-applicable tier:
+
+| Tier | Source signal |
+|---|---|
+| **Operating** | \`projects.status='operating'\` OR AEMO Gen Info status 'In Service' |
+| **Construction** | \`status\` in (\`'construction'\`, \`'commissioning'\`) OR AEMO 'In Commissioning' |
+| **Connection approved** | AEMO Gen Info 'Committed' — meets ≥5 of 6 commitment criteria (land · planning · finance · EPC · NER 5.3.4 connection enquiry · GPS) |
+| **Connection submitted** | AEMO Gen Info 'Anticipated' — partial commitment criteria met; 5.3.4 enquiry typically in flight |
+| **Planning approved** | \`development_stage='epbc_approved'\` |
+| **Planning submitted** | \`development_stage\` in (\`'epbc_submitted'\`, \`'planning_submitted'\`) |
+| **Early stage** | everything else (early_stage / null) |
+
+The derivation logic is in \`derive_pipeline_tier()\` in the exporter. The same colour palette is used in the chip filter, on the map markers, and in the project table.
+
+## Data sources
+
+- **AEMO Generator Information** — per-DUID commitment status, monthly refresh.
+- **\`projects\` table** — DB-level \`status\`, \`development_stage\`, \`connection_status\`, capacity, lat/lng.
+- **\`scheme_contracts\`** — CIS / LTESA contract summary attached to each marker's popup.
+- **Hand-curated coords** — 9 known Mansfield-area dev-stage projects had no lat/lng in the database before this release; AURES added placename-centroid coordinates (~10 km precision) via overlay files for Strathbogie Ranges, Glenrowan (2 BESS), Goorambat, Winton (3 projects), Mansfield Solar Farm, West Mokoan.
+
+## Data coverage caveats
+
+- **Sub-km precision** for the operating + construction cohort (sourced from AEMO Generator Information + Open Electricity facility metadata).
+- **~10 km placename-centroid precision** for hand-curated dev-stage entries — sufficient for a 100-km regional view but not for site-specific work.
+- The eventual NEM-wide expansion will need a geocoding pipeline backfill (EPBC referrals / EIS site plans / NSP connection points) — flagged as a follow-up.
+
+## How to add a missing project
+
+If you know of a renewable project within 100 km of Mansfield that isn't on the map:
+1. Find or create the project's overlay file at \`data/projects/<tech>/<project-id>.json\`.
+2. Add \`latitude\` + \`longitude\` to the overlay.
+3. \`UPDATE projects SET latitude = ?, longitude = ? WHERE id = ?\` in \`database/aures.db\` so the next exporter run picks it up.
+4. Append a \`sources\` entry citing the geocoding rationale.
+5. Re-run \`python3 pipeline/exporters/export_regional_pipeline.py\`.
+
+## Planned expansion
+
+- Replace the static Mansfield center with a search-box / drop-down (any town or city in the NEM).
+- Allow the user to pick a radius (10 / 50 / 100 / 250 km).
+- Eventually replace the current "Under Construction" Map nav item.
+
+## Version shipped
+
+v3.10.0 — 23 May 2026.
+`,
+  },
+  {
     id: 'nsw-wind-cis-ltesa',
     title: 'NSW Wind & CIS/LTESA — Methodology',
     description: 'Sources, definitions, and confidence rules for the NSW Wind deep-dive tab on Scheme Intelligence.',

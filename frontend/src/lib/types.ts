@@ -623,6 +623,68 @@ export const CONFIDENCE_CONFIG: Record<Confidence, { label: string; dots: string
   unverified: { label: 'Unverified', dots: '○○○○', color: '#6b7280' },
 }
 
+/**
+ * Normalized 7-tier pipeline stage for the Regional Pipeline map.
+ * Ordinal — operating is highest (most-progressed), early_stage is lowest.
+ * Mapped server-side in `pipeline/exporters/export_regional_pipeline.py`
+ * by combining `projects.status`, AEMO Gen Info commitment status, and
+ * `projects.development_stage`.
+ */
+export type PipelineTier =
+  | 'operating'
+  | 'construction'
+  | 'connection_approved'
+  | 'connection_submitted'
+  | 'planning_approved'
+  | 'planning_submitted'
+  | 'early_stage'
+
+export const PIPELINE_TIER_CONFIG: Record<PipelineTier, { label: string; color: string; order: number; description: string }> = {
+  operating:            { label: 'Operating',            color: '#22c55e', order: 0, description: 'In Service per AEMO — connected and generating.' },
+  construction:         { label: 'Construction',         color: '#a855f7', order: 1, description: 'Under construction or commissioning (between R1/R2 hold points).' },
+  connection_approved:  { label: 'Connection approved',  color: '#3b82f6', order: 2, description: 'AEMO Committed — meets ≥5 of 6 commitment criteria (land · planning · finance · EPC · NER 5.3.4 · GPS).' },
+  connection_submitted: { label: 'Connection submitted', color: '#06b6d4', order: 3, description: 'AEMO Anticipated — partial commitment criteria met; 5.3.4 enquiry typically in flight.' },
+  planning_approved:    { label: 'Planning approved',    color: '#0ea5e9', order: 4, description: 'EPBC approved at the federal level (NSW IPC determination where applicable).' },
+  planning_submitted:   { label: 'Planning submitted',   color: '#eab308', order: 5, description: 'EIS / EPBC referral lodged — awaiting determination.' },
+  early_stage:          { label: 'Early stage',          color: '#94a3b8', order: 6, description: 'Pre-planning or undisclosed stage.' },
+}
+
+/**
+ * Shape of each project row in the mansfield-pipeline.json export.
+ * Mirrors the SELECT in `pipeline/exporters/export_regional_pipeline.py`.
+ */
+export interface RegionalPipelineProject {
+  id: string
+  name: string
+  technology: Technology
+  capacity_mw: number | null
+  storage_mwh: number | null
+  state: State
+  lat: number
+  lng: number
+  distance_km: number
+  pipeline_tier: PipelineTier
+  status: string | null
+  aemo_status: string | null
+  development_stage: string | null
+  current_developer: string | null
+  current_operator: string | null
+  cod_current: string | null
+  rez: string | null
+  connection_status: string | null
+  connection_nsp: string | null
+  scheme_contracts: { scheme: string; round: string; capacity_mw: number | null }[]
+}
+
+export interface RegionalPipelineData {
+  generated_at: string
+  center: { lat: number; lng: number; label: string }
+  radius_km: number
+  project_count: number
+  total_mw: number
+  projects: RegionalPipelineProject[]
+}
+
 export const DEVELOPMENT_STAGE_CONFIG: Record<DevelopmentStage, { label: string; color: string; icon: string }> = {
   epbc_approved: { label: 'EPBC Approved', color: '#22c55e', icon: '✓' },
   epbc_submitted: { label: 'EPBC Submitted', color: '#10b981', icon: '◐' },

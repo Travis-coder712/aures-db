@@ -49,6 +49,7 @@ import EnergyMix from './pages/intelligence/EnergyMix'
 import DeveloperScores from './pages/intelligence/DeveloperScores'
 import RevenueIntel from './pages/intelligence/RevenueIntel'
 import TransmissionInfra from './pages/intelligence/TransmissionInfra'
+import MansfieldPipeline from './pages/intelligence/MansfieldPipeline'
 import EISTechnical from './pages/intelligence/EISTechnical'
 import NemActivities from './pages/intelligence/NemActivities'
 import BessBidding from './pages/intelligence/BessBidding'
@@ -145,6 +146,7 @@ function App() {
         <Route path="intelligence/developer-scores" element={<DeveloperScores />} />
         <Route path="intelligence/revenue" element={<RevenueIntel />} />
         <Route path="intelligence/transmission-infra" element={<TransmissionInfra />} />
+        <Route path="intelligence/mansfield-pipeline" element={<MansfieldPipeline />} />
         <Route path="intelligence/grid-connection" element={<Navigate to="/intelligence/transmission-infra" replace />} />
         <Route path="intelligence/eis-technical" element={<EISTechnical />} />
         <Route path="intelligence/nem-activities" element={<NemActivities />} />

@@ -274,6 +274,7 @@ export const PAGE_SOURCES: Record<string, SourceId[]> = {
   'transmission-infra': ['aemo_isp_rez', 'epbc_referrals', 'web_research', 'json_export'],
   rez: ['aemo_isp_rez', 'aemo_generation_info', 'web_research', 'json_export'],
   'energy-mix': ['nemweb_dispatchload', 'openelectricity_performance', 'aemo_generation_info', 'json_export'],
+  'mansfield-pipeline': ['aemo_generation_info', 'openelectricity_metadata', 'web_research', 'json_export'],
 
   // Entity directories
   oems: ['web_research', 'aemo_generation_info', 'json_export'],
