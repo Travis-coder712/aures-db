@@ -13,8 +13,8 @@
   "has_syncon": false,
   "has_statcom": false,
   "has_harmonic_filter": false,
-  "data_confidence": "low",
-  "last_updated": "2026-03-10",
+  "data_confidence": "medium",
+  "last_updated": "2026-05-25",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "2436",
   "timeline": [],
@@ -22,7 +22,16 @@
   "cod_history": [],
   "suppliers": [],
   "offtakes": [],
-  "scheme_contracts": [],
+  "scheme_contracts": [
+    {
+      "scheme": "CIS",
+      "round": "Pilot \u2014 SA / VIC",
+      "capacity_mw": 200,
+      "storage_mwh": 560,
+      "source_url": "https://www.dcceew.gov.au/about/news/capacity-investment-scheme-supports-6-new-projects-vic-sa",
+      "contract_type": "CISA (federal underwriting)"
+    }
+  ],
   "cost_sources": [],
   "stakeholder_issues": [],
   "sources": [

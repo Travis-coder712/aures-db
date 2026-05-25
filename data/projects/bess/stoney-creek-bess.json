@@ -13,8 +13,8 @@
   "has_syncon": false,
   "has_statcom": false,
   "has_harmonic_filter": false,
-  "data_confidence": "low",
-  "last_updated": "2026-03-10",
+  "data_confidence": "medium",
+  "last_updated": "2026-05-25",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "2474",
   "timeline": [],
@@ -22,7 +22,16 @@
   "cod_history": [],
   "suppliers": [],
   "offtakes": [],
-  "scheme_contracts": [],
+  "scheme_contracts": [
+    {
+      "scheme": "LTESA",
+      "round": "Round 5 \u2014 Long Duration Storage",
+      "capacity_mw": 125,
+      "storage_mwh": 1000,
+      "source_url": "https://asl.org.au/news/media-release/250227-asl-nsw-long-duration-storage-tender-awards-more-than-1gw-and-13gwh",
+      "contract_type": "LTESA (NSW Crown counterparty)"
+    }
+  ],
   "cost_sources": [],
   "stakeholder_issues": [],
   "sources": [

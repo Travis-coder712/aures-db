@@ -22,7 +22,7 @@
   "connection_voltage_kv": 275,
   "tnsp": "ElectraNet",
   "data_confidence": "good",
-  "last_updated": "2026-04-16",
+  "last_updated": "2026-05-25",
   "last_verified": "2026-04-16",
   "aemo_gen_info_id": "2906",
   "stages": [
@@ -74,7 +74,7 @@
       "date": "2026-04-10",
       "date_precision": "day",
       "event_type": "notable",
-      "title": "Sod-turning ceremony — main construction formally commences",
+      "title": "Sod-turning ceremony \u2014 main construction formally commences",
       "detail": "Ceremonial construction start with Alinta and GenusPlus representatives."
     }
   ],
@@ -112,6 +112,14 @@
       "round": "CIS Investment",
       "capacity_contracted_mw": 250.0,
       "notes": "CIS underwriting agreement secured from Commonwealth Government for Stage 1 BESS."
+    },
+    {
+      "scheme": "CIS",
+      "round": "Tender 3 \u2014 NEM Dispatchable",
+      "capacity_mw": 250,
+      "storage_mwh": 1000,
+      "source_url": "https://reneweconomy.com.au/bowen-names-16-winners-of-australias-biggest-battery-storage-tender/",
+      "contract_type": "CISA (federal underwriting)"
     }
   ],
   "cost_sources": [
@@ -132,18 +140,18 @@
       "source_tier": 1
     },
     {
-      "title": "Alinta Energy — Green light to construct Reeves Plains Energy Hub Battery",
+      "title": "Alinta Energy \u2014 Green light to construct Reeves Plains Energy Hub Battery",
       "url": "https://www.alintaenergy.com.au/about-us/news-hub/reeves-plains-green-light",
       "date": "2025-06-30",
       "source_tier": 1
     },
     {
-      "title": "Alinta Energy — CIS Agreement secured for Reeves Plains BESS Stage 1",
+      "title": "Alinta Energy \u2014 CIS Agreement secured for Reeves Plains BESS Stage 1",
       "url": "https://www.alintaenergy.com.au/about-us/news-hub/agreement-secured-reeves-plains-bess",
       "source_tier": 1
     },
     {
-      "title": "Energy-Storage.News — Alinta Energy green lights SA's largest BESS",
+      "title": "Energy-Storage.News \u2014 Alinta Energy green lights SA's largest BESS",
       "url": "https://www.energy-storage.news/alinta-energy-green-lights-south-australias-largest-bess-project/",
       "date": "2025-06-30",
       "source_tier": 2

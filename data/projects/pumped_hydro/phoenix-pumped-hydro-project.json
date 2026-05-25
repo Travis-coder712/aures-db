@@ -1,13 +1,11 @@
 {
-  "id": "griffith-bess",
-  "name": "Griffith BESS",
-  "technology": "bess",
+  "id": "phoenix-pumped-hydro-project",
+  "name": "Phoenix Pumped Hydro",
+  "technology": "pumped_hydro",
   "status": "development",
-  "capacity_mw": 100.0,
-  "storage_mwh": 800.0,
+  "capacity_mw": 800.0,
   "state": "NSW",
-  "current_developer": "Eku Energy Projects (Australia) Trust",
-  "cod_current": "2028-12",
+  "current_developer": "ACEN Australia",
   "grid_forming": false,
   "has_sips": false,
   "has_syncon": false,
@@ -15,8 +13,7 @@
   "has_harmonic_filter": false,
   "data_confidence": "medium",
   "last_updated": "2026-05-25",
-  "last_verified": "2026-03-10",
-  "aemo_gen_info_id": "2758",
+  "last_verified": "2026-05-25",
   "timeline": [],
   "ownership_history": [],
   "cod_history": [],
@@ -26,8 +23,8 @@
     {
       "scheme": "LTESA",
       "round": "Round 5 \u2014 Long Duration Storage",
-      "capacity_mw": 100,
-      "storage_mwh": 800,
+      "capacity_mw": 800,
+      "storage_mwh": 11990,
       "source_url": "https://asl.org.au/news/media-release/250227-asl-nsw-long-duration-storage-tender-awards-more-than-1gw-and-13gwh",
       "contract_type": "LTESA (NSW Crown counterparty)"
     }
@@ -36,9 +33,9 @@
   "stakeholder_issues": [],
   "sources": [
     {
-      "title": "AEMO Generation Information Jan 2026",
-      "url": "https://aemo.com.au/energy-systems/electricity/national-electricity-market-nem/nem-forecasting-and-planning/forecasting-and-planning-data/generation-information",
-      "date": "2026-01-30",
+      "title": "Scheme contract added during v3.10.3 coverage audit (AURES)",
+      "url": "https://asl.org.au/news/media-release/250227-asl-nsw-long-duration-storage-tender-awards-more-than-1gw-and-13gwh",
+      "date": "2026-05-25",
       "source_tier": 1
     }
   ]

@@ -13,8 +13,8 @@
   "has_syncon": false,
   "has_statcom": false,
   "has_harmonic_filter": false,
-  "data_confidence": "low",
-  "last_updated": "2026-03-10",
+  "data_confidence": "medium",
+  "last_updated": "2026-05-25",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "2623",
   "timeline": [],
@@ -22,7 +22,24 @@
   "cod_history": [],
   "suppliers": [],
   "offtakes": [],
-  "scheme_contracts": [],
+  "scheme_contracts": [
+    {
+      "scheme": "CIS",
+      "round": "Pilot \u2014 NSW",
+      "capacity_mw": 235,
+      "storage_mwh": 470,
+      "source_url": "https://www.nsw.gov.au/media-releases/big-boost-to-reliable-renewables-nsw",
+      "contract_type": "CISA (federal underwriting)"
+    },
+    {
+      "scheme": "LTESA",
+      "round": "Round 2 \u2014 Firming",
+      "capacity_mw": 65,
+      "storage_mwh": 130,
+      "source_url": "https://aemoservices.com.au/en/news/media-release/231122-nsw-tender-for-firming-capacity-exceeds-expectations",
+      "contract_type": "LTESA (NSW Crown counterparty)"
+    }
+  ],
   "cost_sources": [],
   "stakeholder_issues": [],
   "sources": [

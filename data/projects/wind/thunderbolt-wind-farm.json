@@ -12,7 +12,7 @@
   "has_statcom": false,
   "has_harmonic_filter": false,
   "data_confidence": "medium",
-  "last_updated": "2026-05-23",
+  "last_updated": "2026-05-25",
   "last_verified": "2026-05-23",
   "aemo_gen_info_id": "2201",
   "timeline": [
@@ -20,7 +20,7 @@
       "date": "2024-05",
       "date_precision": "month",
       "event_type": "planning_approved",
-      "title": "IPC approval — Stage 1 (192 MW)",
+      "title": "IPC approval \u2014 Stage 1 (192 MW)",
       "detail": "NSW Independent Planning Commission approved Stage 1 at 192 MW. Broader Neoen hub envisages up to ~380 MW across staged development.",
       "sources": []
     },
@@ -39,7 +39,12 @@
       "title": "CIS Tender 1 underwriting awarded",
       "detail": "Neoen's Thunderbolt wins CIS Tender 1 underwriting. The CIS contract is cited at ~230 MW in scheme records; the IPC approval covers 192 MW Stage 1; AEMO Generation Information lists 210 MW. Discrepancy reflects mid-development design refinement.",
       "sources": [
-        { "title": "Standalone solar and wind dominate (WattClarity)", "url": "https://wattclarity.com.au/articles/2024/12/standalone-solar-and-wind-dominate-list-of-19-successful-projects-from-latest-cis-tender/", "date": "2024-12-11", "source_tier": 2 }
+        {
+          "title": "Standalone solar and wind dominate (WattClarity)",
+          "url": "https://wattclarity.com.au/articles/2024/12/standalone-solar-and-wind-dominate-list-of-19-successful-projects-from-latest-cis-tender/",
+          "date": "2024-12-11",
+          "source_tier": 2
+        }
       ]
     }
   ],
@@ -50,9 +55,9 @@
   "scheme_contracts": [
     {
       "scheme": "CIS",
-      "round": "Tender 1 — NEM Generation (Stage 1)",
+      "round": "Tender 1 \u2014 NEM Generation (Stage 1)",
       "capacity_mw": 192,
-      "contract_type": "CISA (federal underwriting) — Stage 1 192 MW per IPC approval; scheme records cite ~230 MW; AEMO Gen Info 210 MW",
+      "contract_type": "CISA (federal underwriting) \u2014 Stage 1 192 MW per IPC approval; scheme records cite ~230 MW; AEMO Gen Info 210 MW",
       "source_url": "https://www.dcceew.gov.au/energy/renewable/capacity-investment-scheme/closed-cis-tenders"
     }
   ],

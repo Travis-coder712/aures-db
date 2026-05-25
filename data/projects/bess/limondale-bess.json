@@ -14,7 +14,7 @@
   "has_statcom": false,
   "has_harmonic_filter": false,
   "data_confidence": "medium",
-  "last_updated": "2026-04-16",
+  "last_updated": "2026-05-25",
   "last_verified": "2026-04-16",
   "aemo_gen_info_id": "2223",
   "timeline": [
@@ -30,7 +30,16 @@
   "cod_history": [],
   "suppliers": [],
   "offtakes": [],
-  "scheme_contracts": [],
+  "scheme_contracts": [
+    {
+      "scheme": "LTESA",
+      "round": "Round 1 \u2014 Generation + LDS",
+      "capacity_mw": 50,
+      "storage_mwh": 400,
+      "source_url": "https://asl.org.au/en/tenders/tender-round-1",
+      "contract_type": "LTESA (NSW Crown counterparty)"
+    }
+  ],
   "cost_sources": [],
   "stakeholder_issues": [],
   "sources": [

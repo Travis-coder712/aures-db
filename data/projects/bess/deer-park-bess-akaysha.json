@@ -13,8 +13,8 @@
   "has_syncon": false,
   "has_statcom": false,
   "has_harmonic_filter": false,
-  "data_confidence": "low",
-  "last_updated": "2026-03-10",
+  "data_confidence": "medium",
+  "last_updated": "2026-05-25",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "3106",
   "timeline": [],
@@ -22,7 +22,16 @@
   "cod_history": [],
   "suppliers": [],
   "offtakes": [],
-  "scheme_contracts": [],
+  "scheme_contracts": [
+    {
+      "scheme": "CIS",
+      "round": "Tender 3 \u2014 NEM Dispatchable",
+      "capacity_mw": 275,
+      "storage_mwh": 1100,
+      "source_url": "https://reneweconomy.com.au/bowen-names-16-winners-of-australias-biggest-battery-storage-tender/",
+      "contract_type": "CISA (federal underwriting)"
+    }
+  ],
   "cost_sources": [],
   "stakeholder_issues": [],
   "sources": [

@@ -5452,6 +5452,17 @@ Key risks to the 6.3 GW total. Junction Rivers' lost SW REZ access raises real q
           </div>
         </div>
 
+        {/* NSW-full quote callout */}
+        <div className="mt-3 bg-red-500/5 border-l-4 border-red-500/60 rounded-r-xl p-4 text-xs leading-relaxed">
+          <div className="text-[10px] uppercase tracking-wide text-red-300 mb-2 font-semibold">NSW is now closed for federal CIS generation</div>
+          <blockquote className="text-[var(--color-text)] italic border-l-2 border-red-500/30 pl-3 mb-2">
+            "NSW dominated with eight projects, which fills its quota under the CIS. <strong>The next tender will exclude NSW, because it has already met its agreed quota</strong>, and has just launched its own tender seeking 2.5 GW of new capacity, with a special emphasis on wind and solar hybrids that can deliver power outside of daylight hours."
+          </blockquote>
+          <div className="text-[10px] text-[var(--color-text-muted)]">
+            — Giles Parkinson, RenewEconomy (<a href="https://reneweconomy.com.au/australias-biggest-wind-project-and-8-battery-hybrids-among-19-winners-of-largest-renewable-auction-to-date/" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:underline">"Australia's biggest wind project and 8 battery hybrids among 19 winners"</a>, 23 May 2026). NSW's CIS T7 state allocation was a minimum 1.7 GW — actual award ~3.9 GW. AURES count: 9 NSW projects (one over the original 8-project quota — Wattle Creek Solar Hybrid added late). The next federal generation round (CIS Tender 9, sought 5 GW) will source elsewhere in the NEM.
+          </div>
+        </div>
+
         {/* Insights callout */}
         <div className="mt-3 bg-[var(--color-bg-card)] border border-amber-500/30 rounded-xl p-4 text-xs leading-relaxed text-[var(--color-text-muted)]">
           <div className="font-semibold text-amber-300 mb-1">Insights</div>
@@ -5841,23 +5852,96 @@ Key risks to the 6.3 GW total. Junction Rivers' lost SW REZ access raises real q
       {/* Section 5 — Upcoming NSW Generation LTESA                    */}
       {/* ============================================================ */}
       <section>
-        <h2 className="text-lg font-semibold text-[var(--color-text)] mb-3">Upcoming — Q2 2026 NSW Roadmap Generation LTESA</h2>
+        <h2 className="text-lg font-semibold text-[var(--color-text)] mb-3">Upcoming — NSW Roadmap Generation LTESA (Q2 2026, "Round 8")</h2>
         <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl p-4 space-y-3">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3 text-xs">
             <div><div className="text-[var(--color-text-muted)] text-[10px] uppercase">Target</div><div className="font-semibold text-[var(--color-text)] mt-1">2.5 GW</div></div>
-            <div><div className="text-[var(--color-text-muted)] text-[10px] uppercase">Window</div><div className="font-semibold text-[var(--color-text)] mt-1">Q2 2026</div></div>
+            <div><div className="text-[var(--color-text-muted)] text-[10px] uppercase">Window</div><div className="font-semibold text-[var(--color-text)] mt-1">Q2 2026 · awards late 2026</div></div>
             <div><div className="text-[var(--color-text-muted)] text-[10px] uppercase">Design</div><div className="font-semibold text-amber-300 mt-1">Hybrid-favoured</div></div>
             <div><div className="text-[var(--color-text-muted)] text-[10px] uppercase">Counterparty</div><div className="font-semibold text-[var(--color-text)] mt-1">AEMO Services (ASL)</div></div>
           </div>
-          <ul className="text-xs text-[var(--color-text)] space-y-1 list-disc pl-5">
-            <li>Battery component capped at solar/wind capacity (cannot exceed)</li>
-            <li>Minimum 4-hour storage duration on the battery</li>
-            <li>Solar/wind generation can be stored on-site (rather than curtailed) and dispatched when needed</li>
-            <li>Two further long-duration storage tenders also scheduled — Q2 2026 + 2027</li>
-            <li>Previous round saw 3.3× oversubscription on the generation allocation — competition will be intense</li>
-          </ul>
+          <div className="text-[10px] text-[var(--color-text-muted)] italic">
+            Per <a href="https://www.pv-tech.org/australias-new-south-wales-launches-biggest-renewable-energy-tender-in-the-states-history/" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:underline">PV Tech</a>: "Successful projects are expected to be determined by late 2026"; this round alone is expected to take NSW to "up to 90% of its 12 GW renewable energy generation target by 2030."
+          </div>
+
+          {/* Size vs previous LTESA Generation rounds */}
+          <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl p-3 mt-2">
+            <div className="text-[10px] uppercase tracking-wide text-[var(--color-text-muted)] mb-2">How big is this vs previous LTESA Generation rounds?</div>
+            <ScrollableTable>
+              <table className="w-full text-xs">
+                <thead>
+                  <tr className="border-b border-[var(--color-border)] text-[var(--color-text-muted)] uppercase tracking-wide text-[10px]">
+                    <th className="text-left p-2">Round</th>
+                    <th className="text-left p-2 hidden md:table-cell">Announced</th>
+                    <th className="text-right p-2">Target sought</th>
+                    <th className="text-right p-2">Actually awarded</th>
+                    <th className="text-right p-2 hidden md:table-cell">Take-up</th>
+                    <th className="text-left p-2 hidden lg:table-cell">Note</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr className="border-b border-[var(--color-border)]/40">
+                    <td className="p-2"><Link to="/intelligence/scheme-tracker" className="text-blue-400 hover:underline">R1 — Gen + LDS</Link></td>
+                    <td className="p-2 hidden md:table-cell text-[var(--color-text-muted)]">May 2023</td>
+                    <td className="p-2 text-right">950 MW</td>
+                    <td className="p-2 text-right font-medium">1,445 MW</td>
+                    <td className="p-2 text-right hidden md:table-cell text-emerald-300">152%</td>
+                    <td className="p-2 hidden lg:table-cell text-[var(--color-text-muted)] text-[10px]">Strong oversubscription · 4 projects</td>
+                  </tr>
+                  <tr className="border-b border-[var(--color-border)]/40">
+                    <td className="p-2">R3 — Gen + LDS</td>
+                    <td className="p-2 hidden md:table-cell text-[var(--color-text-muted)]">Dec 2023</td>
+                    <td className="p-2 text-right">1,200 MW</td>
+                    <td className="p-2 text-right font-medium">1,274 MW</td>
+                    <td className="p-2 text-right hidden md:table-cell text-emerald-300">106%</td>
+                    <td className="p-2 hidden lg:table-cell text-[var(--color-text-muted)] text-[10px]">Just met target · 5 projects</td>
+                  </tr>
+                  <tr className="border-b border-[var(--color-border)]/40">
+                    <td className="p-2">R4 — Generation</td>
+                    <td className="p-2 hidden md:table-cell text-[var(--color-text-muted)]">Jul 2024</td>
+                    <td className="p-2 text-right">1,150 MW</td>
+                    <td className="p-2 text-right font-medium">317 MW</td>
+                    <td className="p-2 text-right hidden md:table-cell text-red-300">28%</td>
+                    <td className="p-2 hidden lg:table-cell text-[var(--color-text-muted)] text-[10px]"><span className="text-red-300">Undersubscribed</span> · only 2 projects · insufficient merit at offered prices</td>
+                  </tr>
+                  <tr className="border-b-2 border-amber-500/40 font-semibold bg-amber-500/5">
+                    <td className="p-2 text-amber-300">R8 — Generation (upcoming)</td>
+                    <td className="p-2 hidden md:table-cell text-amber-300">Q2 2026</td>
+                    <td className="p-2 text-right text-amber-300">2,500 MW</td>
+                    <td className="p-2 text-right text-amber-300">TBD</td>
+                    <td className="p-2 text-right hidden md:table-cell text-amber-300">—</td>
+                    <td className="p-2 hidden lg:table-cell text-[var(--color-text-muted)] text-[10px]"><strong className="text-amber-300">2.2× R4 target · NSW's biggest generation tender ever</strong></td>
+                  </tr>
+                </tbody>
+              </table>
+            </ScrollableTable>
+            <p className="text-[10px] text-[var(--color-text-muted)] italic mt-2">
+              R8's 2.5 GW target is 2.2× the previous Generation round (R4, 1.15 GW) and 2.6× the original R1 target. Critical context: R4 was badly undersubscribed at 28% take-up — the new design (hybrid-favoured + bigger envelope) is partly an answer to that. R5 and R6 were LDS-only; not directly comparable.
+            </p>
+          </div>
+
+          {/* Hybrid LTESA mechanism — explicit treatment */}
+          <div className="bg-cyan-500/5 border border-cyan-500/40 rounded-xl p-3 mt-2">
+            <div className="text-[10px] uppercase tracking-wide text-cyan-300 mb-2 font-semibold">Hybrid LTESA — how hybrids are explicitly favoured</div>
+            <p className="text-xs text-[var(--color-text)] leading-relaxed mb-2">
+              The Q2 2026 round introduces a specially-designed <strong className="text-cyan-300">Hybrid LTESA</strong> that materially advantages co-located solar/wind + BESS projects over standalone generation. The official mechanism, paraphrased from ASL guidance:
+            </p>
+            <ul className="text-xs text-[var(--color-text)] space-y-1.5 list-disc pl-5">
+              <li><strong className="text-cyan-300">Eligibility rule:</strong> "The Hybrid LTESA is available to projects where generation export capacity matches or exceeds storage export capacity, with storage systems providing a minimum 4-hour duration at the commercial operations date." Standalone gen still eligible for the standard Generation LTESA, but does not receive the hybrid uplift.</li>
+              <li><strong className="text-cyan-300">No wholesale market benefits</strong> for ineligible hybrid configurations: "Projects bidding for a Hybrid LTESA will be assessed as having no wholesale market benefits if the initial storage duration is less than 4 hours or the capacity of the generation component is below the capacity of the storage component." — a hard 0 on the most heavily-weighted scoring axis (49% financial-value weighting).</li>
+              <li><strong className="text-cyan-300">Time-shift bias:</strong> "wind and hybrid generation-storage projects that produce during non-solar hours are expected to deliver strong financial value" — explicit favourable consideration for projects whose output covers solar-cannibalisation hours.</li>
+              <li><strong className="text-cyan-300">COD acceleration bonus:</strong> "Projects demonstrating commercial operations dates before 31 December 2029 are expected to receive favourable consideration" — directly addresses the Eraring (Aug 2027) coal-exit timing.</li>
+            </ul>
+            <div className="text-[10px] text-[var(--color-text-muted)] italic mt-2">
+              Net effect: under this scoring system, a wind-only or solar-only bid faces a structural penalty on the 49% financial-value weighting — losing the entire wholesale-market benefits score unless paired with ≥4hr storage of equal-or-smaller capacity. For our cohort, that materially advantages Pottinger (wind+BESS), Bookham (wind+BESS) and Hargraves (wind+solar+BESS) vs Liverpool Range Stage 2 and The Plains (wind-alone).
+            </div>
+            <div className="text-[10px] text-[var(--color-text-muted)] italic mt-1">
+              Sources: <a href="https://www.pv-tech.org/australias-new-south-wales-launches-biggest-renewable-energy-tender-in-the-states-history/" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:underline">PV Tech</a>, <a href="https://reneweconomy.com.au/nsw-launches-its-biggest-ever-renewable-tender-to-keep-lights-on-and-push-down-prices/" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:underline">RenewEconomy</a>, <a href="https://www.energy.nsw.gov.au/nsw-plans-and-progress/major-state-projects/electricity-infrastructure-roadmap/asl-tenders" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:underline">NSW Climate &amp; Energy Action</a>.
+            </div>
+          </div>
+
           <div className="border-t border-[var(--color-border)] pt-3 text-xs text-[var(--color-text-muted)] leading-relaxed">
-            <strong className="text-[var(--color-text)]">Competitive dynamic:</strong> wind-alone projects compete directly with solar+BESS hybrids (cheaper energy + dispatch shape) and wind+BESS hybrids (e.g. Pottinger). Wind-alone has a capacity-factor advantage but no dispatch shape — under a hybrid-bias structure, that asymmetry penalises mega-scale wind-only bids (Liverpool Range Stage 2, The Plains).
+            <strong className="text-[var(--color-text)]">Competitive dynamic:</strong> wind-alone projects compete directly with solar+BESS hybrids (cheaper energy + dispatch shape) and wind+BESS hybrids (e.g. Pottinger). Wind-alone has a capacity-factor advantage but no dispatch shape — under the explicit Hybrid LTESA penalty above, that asymmetry materially penalises mega-scale wind-only bids (Liverpool Range Stage 2, The Plains).
           </div>
         </div>
       </section>

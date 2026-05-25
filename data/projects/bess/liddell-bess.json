@@ -14,7 +14,7 @@
   "has_statcom": false,
   "has_harmonic_filter": false,
   "data_confidence": "good",
-  "last_updated": "2026-04-16",
+  "last_updated": "2026-05-25",
   "last_verified": "2026-04-16",
   "aemo_gen_info_id": "2171",
   "timeline": [
@@ -30,7 +30,16 @@
   "cod_history": [],
   "suppliers": [],
   "offtakes": [],
-  "scheme_contracts": [],
+  "scheme_contracts": [
+    {
+      "scheme": "CIS",
+      "round": "Pilot \u2014 NSW",
+      "capacity_mw": 500,
+      "storage_mwh": 1000,
+      "source_url": "https://www.nsw.gov.au/media-releases/big-boost-to-reliable-renewables-nsw",
+      "contract_type": "CISA (federal underwriting)"
+    }
+  ],
   "cost_sources": [],
   "stakeholder_issues": [],
   "sources": [
