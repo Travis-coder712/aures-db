@@ -482,6 +482,10 @@ export interface LtesaCandidate {
   probability: LtesaProbabilityBand
   rationale: string                     // 2–3 sentence assessment, sourced where possible
   flags?: string[]                      // Optional: ['wind-alone', 'staged', 'mega-scale']
+  /** YYYY-MM-DD or YYYY-MM. From projects.cod_current or AURES estimate where DB is null. */
+  cod_expected?: string
+  /** 'db' (from projects.cod_current) | 'aures-estimate' (derived from planning stage + typical 4-5yr build). */
+  cod_basis?: 'db' | 'aures-estimate'
 }
 
 export const LTESA_R8_CANDIDATES: LtesaCandidate[] = [
@@ -497,6 +501,8 @@ export const LTESA_R8_CANDIDATES: LtesaCandidate[] = [
     probability: 'high',
     rationale: 'Wind+BESS hybrid in the SW REZ — exactly the configuration the Q2 2026 round was designed for. Pottinger is the only SW REZ access-rights holder that missed a CIS T7 underwriting, so AGL has explicit motivation to bid LTESA. Planning still in DPHI submission, but a Roadmap LTESA can be awarded conditional on approval.',
     flags: ['hybrid'],
+    cod_expected: '2031-12',
+    cod_basis: 'aures-estimate'
   },
   {
     project_id: 'bookham-wf-and-bess',
@@ -508,6 +514,8 @@ export const LTESA_R8_CANDIDATES: LtesaCandidate[] = [
     probability: 'high',
     rationale: 'Wind+BESS hybrid sized close to round\'s typical award envelope. Hybrid configuration scores well under the new ≤-solar/wind battery, min-4hr-storage rules. Main risk is planning maturity.',
     flags: ['hybrid'],
+    cod_expected: '2032-01',
+    cod_basis: 'db'
   },
   {
     project_id: 'hargraves-energy-project-wind-solar-and-bess',
@@ -519,6 +527,8 @@ export const LTESA_R8_CANDIDATES: LtesaCandidate[] = [
     probability: 'high',
     rationale: 'Tri-tech hybrid (wind + solar + BESS) — strongest configuration for a hybrid-favoured round. Energy Estate has executed prior NSW projects. Planning submission progress and grid connection status are the swing factors.',
     flags: ['hybrid'],
+    cod_expected: '2031-06',
+    cod_basis: 'aures-estimate'
   },
   // ----- MEDIUM likelihood -----
   {
@@ -532,6 +542,8 @@ export const LTESA_R8_CANDIDATES: LtesaCandidate[] = [
     probability: 'medium',
     rationale: 'Stage 1 (634 MW) won CIS T4 and is EPBC-approved. Stage 2 is wind-alone in a round explicitly engineered to favour hybrids — that\'s a structural penalty. Mature developer with a proven LTESA track record (Palmer) and CWO REZ position offset some of the disadvantage.',
     flags: ['wind-alone', 'staged'],
+    cod_expected: '2030-06',
+    cod_basis: 'aures-estimate'
   },
   {
     project_id: 'bullawah-wind-farm-stage-2',
@@ -544,6 +556,8 @@ export const LTESA_R8_CANDIDATES: LtesaCandidate[] = [
     probability: 'medium',
     rationale: 'Stage 1 (283 MW) just won CIS T7 — BayWa now has SW REZ momentum. Stage 2 is wind-alone in a hybrid-favoured round; smaller scale (276 MW) helps fit into the 2.5 GW envelope. Awaiting Stage 1 IPC outcome will likely gate Stage 2 timing.',
     flags: ['wind-alone', 'staged'],
+    cod_expected: '2029-02',
+    cod_basis: 'db'
   },
   {
     project_id: 'the-plains',
@@ -555,6 +569,8 @@ export const LTESA_R8_CANDIDATES: LtesaCandidate[] = [
     probability: 'medium',
     rationale: 'Mega-scale wind farm (2 GW+) competing with hybrids on cost. Engie\'s execution credentials are good (Goyder North, Hexham, Willatook T7). Size is the main risk — at 2 GW it consumes most of a 2.5 GW round on its own, so likely a partial award or carve-out at best.',
     flags: ['wind-alone', 'mega-scale'],
+    cod_expected: '2030-12',
+    cod_basis: 'aures-estimate'
   },
   {
     project_id: 'skye-ridge-wind-farm',
@@ -566,6 +582,8 @@ export const LTESA_R8_CANDIDATES: LtesaCandidate[] = [
     probability: 'medium',
     rationale: 'Origin already won the headline T7 prize (Yanco Delta 1,450 MW) — strategic priority for further wind underwriting may have shifted. Wind-alone in a hybrid-favoured round. Origin\'s Eraring-replacement narrative remains a tailwind.',
     flags: ['wind-alone'],
+    cod_expected: '2031-11',
+    cod_basis: 'db'
   },
   {
     project_id: 'lake-victoria-energy-park-kci',
@@ -577,6 +595,8 @@ export const LTESA_R8_CANDIDATES: LtesaCandidate[] = [
     probability: 'medium',
     rationale: 'Large wind project but less mature developer track record than majors. EPBC-submitted is mid-pack planning maturity. Wind-alone penalty applies.',
     flags: ['wind-alone'],
+    cod_expected: '2030-06',
+    cod_basis: 'aures-estimate'
   },
   {
     project_id: 'winterbourne-wind-farm',
@@ -588,6 +608,8 @@ export const LTESA_R8_CANDIDATES: LtesaCandidate[] = [
     probability: 'medium',
     rationale: 'Mid-scale wind that fits 2.5 GW round arithmetic well. New England region has limited REZ network capacity that could constrain timing. Wind-alone in hybrid-favoured round.',
     flags: ['wind-alone'],
+    cod_expected: '2030-12',
+    cod_basis: 'aures-estimate'
   },
   // ----- LOW likelihood -----
   {
@@ -600,6 +622,8 @@ export const LTESA_R8_CANDIDATES: LtesaCandidate[] = [
     probability: 'low',
     rationale: 'Wind-alone, smaller developer, early-mid planning stage. Less likely to beat better-positioned hybrids on price or readiness.',
     flags: ['wind-alone'],
+    cod_expected: '2030-07',
+    cod_basis: 'db'
   },
   {
     project_id: 'hills-of-gold-wind-farm',
@@ -611,6 +635,8 @@ export const LTESA_R8_CANDIDATES: LtesaCandidate[] = [
     probability: 'low',
     rationale: 'Long-troubled planning history (multiple modifications, community opposition). Wind-alone in hybrid-favoured round. Engie\'s focus likely shifts to Willatook (VIC T7 winner) and The Plains.',
     flags: ['wind-alone'],
+    cod_expected: '2029-12',
+    cod_basis: 'db'
   },
   {
     project_id: 'piambong-wind-farm-kci',
@@ -622,6 +648,8 @@ export const LTESA_R8_CANDIDATES: LtesaCandidate[] = [
     probability: 'low',
     rationale: 'Early planning stage — too immature for a Q2 2026 LTESA award.',
     flags: ['wind-alone'],
+    cod_expected: '2028-12',
+    cod_basis: 'db'
   },
 ]
 

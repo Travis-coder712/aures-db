@@ -5190,12 +5190,14 @@ function NSWWindTab() {
       if (/engie|edf|iberdrola|enel|rwe|orsted|bp\b|shell|totalenergies/.test(d)) return 'International utility / IPP'
       // Chinese OEM / JV / Acen (PH-listed)
       if (/goldwind|sungrow|trina|jinko|longi|byd|envision|acen|cecep/.test(d)) return 'Chinese OEM / Asian utility'
-      // Construction conglomerate
-      if (/grupo cobra|zero-?e|gamuda|ica partners|cpb contractors|salini|acciona infrastructure/.test(d)) return 'Construction conglomerate'
+      // Construction conglomerate / EPC (large infrastructure groups)
+      if (/grupo cobra|zero-?e|gamuda|cpb contractors|salini|acciona infrastructure/.test(d)) return 'Construction conglomerate'
       // Specialist Australian renewables developer
       if (/spark renewables|squadron|tilt|edify|neoen|windlab|akaysha|eku|atmos|ampyr|frv/.test(d)) return 'Specialist Australian developer'
       // International solar developer (incl. AU subsidiary)
       if (/lightsource|european energy|baywa|sonnen|sungrow|lightsource bp/.test(d)) return 'International solar developer'
+      // Investment partnership / financial sponsor / co-developer
+      if (/ica partners|partners group|macquarie|infrastructure capital|first sentier/.test(d)) return 'Investment partnership'
       // Default
       return 'Other / new entrant'
     }
@@ -5469,7 +5471,7 @@ Key risks to the 6.3 GW total. Junction Rivers' lost SW REZ access raises real q
           <ul className="list-disc pl-5 space-y-1">
             <li><strong className="text-[var(--color-text)]">NSW dominated</strong> with 9 of 19 projects — one project (Wattle Creek Solar Hybrid) over the 8-project state quota</li>
             <li><strong className="text-[var(--color-text)]">Three mega-projects</strong> (≥1 GW) carry 47% of the capacity: Yanco Delta (1.5 GW wind), Bungaban (1.15 GW wind+BESS), Theodore (1.0 GW wind)</li>
-            <li><strong className="text-[var(--color-text)]">Construction conglomerates</strong> took 5 of 19 winners (Grupo Cobra ×2, Gamuda ×2, ICA Partners) — a notable foreign-EPC presence as Australian developers face capital constraints</li>
+            <li><strong className="text-[var(--color-text)]">Construction conglomerates</strong> took 4 of 19 winners — Grupo Cobra (Spain) ×2, Gamuda (Malaysia) ×2 — a notable foreign-EPC presence as Australian developers face capital constraints. ICA Partners (Woolsthorpe, co-owned with Enerfin/Statkraft) is an Australian investment partnership rather than a conglomerate.</li>
             <li><strong className="text-[var(--color-text)]">Planning execution risk</strong>: only Yanco Delta is EPBC-approved among the 19. Most are EPBC-submitted or earlier — the 14-month CISA execution window is tight</li>
             <li><strong className="text-[var(--color-text)]">Hybrid skew toward solar</strong>: 6 of 8 hybrids are solar+BESS; only 2 are wind+BESS (Baldin and Bungaban)</li>
           </ul>
@@ -5811,41 +5813,69 @@ Key risks to the 6.3 GW total. Junction Rivers' lost SW REZ access raises real q
         <h2 className="text-lg font-semibold text-[var(--color-text)] mb-3">NSW Wind — Yet to Win a Scheme</h2>
         <p className="text-xs text-[var(--color-text-muted)] mb-3">
           NSW wind candidates still in development that have not yet secured a CIS or LTESA contract.
-          Per Travis's brief: Pottinger and Liverpool Range Stage 2 are the explicit watch projects.
+          Ordered by estimated COD ascending — the rows highlighted green are projects with COD on/before <strong className="text-emerald-300">31 December 2029</strong>, the Hybrid LTESA's COD acceleration bonus threshold.
           With NSW excluded from federal CIS Tender 9, these projects need to win the upcoming Q2 2026 NSW Roadmap LTESA Generation tender (2.5 GW, hybrid-favoured) or wait for a future round.
         </p>
         <ScrollableTable>
           <table className="w-full text-xs">
             <thead>
               <tr className="border-b border-[var(--color-border)] text-[var(--color-text-muted)] uppercase tracking-wide text-[10px]">
+                <th className="text-right p-2 w-8">#</th>
                 <th className="text-left p-2">Project</th>
                 <th className="text-left p-2 hidden md:table-cell">Developer</th>
                 <th className="text-right p-2">MW</th>
                 <th className="text-left p-2">Tech</th>
                 <th className="text-left p-2 hidden md:table-cell">REZ</th>
                 <th className="text-left p-2">Planning</th>
-                <th className="text-left p-2">Flags</th>
+                <th className="text-left p-2">Est. COD</th>
+                <th className="text-left p-2 hidden lg:table-cell">Flags</th>
               </tr>
             </thead>
             <tbody>
-              {LTESA_R8_CANDIDATES.map(c => (
-                <tr key={c.project_id} className="border-b border-[var(--color-border)]/40 hover:bg-white/5">
-                  <td className="p-2"><Link to={`/projects/${c.project_id}`} className="text-blue-400 hover:underline">{c.name}</Link></td>
-                  <td className="p-2 hidden md:table-cell text-[var(--color-text-muted)]">{c.developer}</td>
-                  <td className="p-2 text-right font-medium">{Math.round(c.capacity_mw).toLocaleString()}</td>
-                  <td className="p-2">
-                    <span className={`px-1.5 py-0.5 rounded-full text-[9px] ${c.technology === 'hybrid' ? 'bg-cyan-500/20 text-cyan-300' : 'bg-blue-500/20 text-blue-300'}`}>
-                      {c.technology === 'hybrid' ? 'Wind + BESS' : 'Wind'}
-                    </span>
-                  </td>
-                  <td className="p-2 hidden md:table-cell text-[var(--color-text-muted)] text-[10px]">{c.rez ?? '—'}</td>
-                  <td className="p-2 text-[10px] capitalize">{c.planning_stage.replace(/_/g, ' ')}</td>
-                  <td className="p-2 text-[9px] text-[var(--color-text-muted)]">{c.flags?.join(' · ') ?? '—'}</td>
-                </tr>
-              ))}
+              {[...LTESA_R8_CANDIDATES]
+                .sort((a, b) => {
+                  // Sort by COD ascending; entries without COD go last.
+                  if (!a.cod_expected && !b.cod_expected) return 0
+                  if (!a.cod_expected) return 1
+                  if (!b.cod_expected) return -1
+                  return a.cod_expected.localeCompare(b.cod_expected)
+                })
+                .map((c, idx) => {
+                  const codYear = c.cod_expected ? Number(c.cod_expected.slice(0, 4)) : null
+                  const codMonth = c.cod_expected ? Number(c.cod_expected.slice(5, 7)) : null
+                  // Hybrid LTESA bonus: COD on or before 31 Dec 2029
+                  const bonusEligible = codYear != null && (codYear < 2029 || (codYear === 2029 && (codMonth ?? 12) <= 12))
+                  // 2030 = borderline (likely too late but close); 2031+ = clearly too late
+                  const codClass = bonusEligible ? 'text-emerald-300 font-medium' : codYear === 2030 ? 'text-amber-300' : codYear ? 'text-red-300' : 'text-[var(--color-text-muted)]'
+                  const rowBg = bonusEligible ? 'bg-emerald-500/5' : ''
+                  return (
+                    <tr key={c.project_id} className={`border-b border-[var(--color-border)]/40 hover:bg-white/5 ${rowBg}`}>
+                      <td className="p-2 text-right text-[var(--color-text-muted)] tabular-nums">{idx + 1}</td>
+                      <td className="p-2"><Link to={`/projects/${c.project_id}`} className="text-blue-400 hover:underline">{c.name}</Link></td>
+                      <td className="p-2 hidden md:table-cell text-[var(--color-text-muted)]">{c.developer}</td>
+                      <td className="p-2 text-right font-medium">{Math.round(c.capacity_mw).toLocaleString()}</td>
+                      <td className="p-2">
+                        <span className={`px-1.5 py-0.5 rounded-full text-[9px] ${c.technology === 'hybrid' ? 'bg-cyan-500/20 text-cyan-300' : 'bg-blue-500/20 text-blue-300'}`}>
+                          {c.technology === 'hybrid' ? 'Wind + BESS' : 'Wind'}
+                        </span>
+                      </td>
+                      <td className="p-2 hidden md:table-cell text-[var(--color-text-muted)] text-[10px]">{c.rez ?? '—'}</td>
+                      <td className="p-2 text-[10px] capitalize">{c.planning_stage.replace(/_/g, ' ')}</td>
+                      <td className="p-2">
+                        <span className={`text-[10px] tabular-nums ${codClass}`} title={c.cod_basis === 'db' ? 'COD from projects.cod_current' : 'AURES estimate (planning + typical build window)'}>
+                          {c.cod_expected ?? 'TBD'}{c.cod_basis === 'aures-estimate' && ' *'}
+                        </span>
+                      </td>
+                      <td className="p-2 text-[9px] text-[var(--color-text-muted)] hidden lg:table-cell">{c.flags?.join(' · ') ?? '—'}</td>
+                    </tr>
+                  )
+                })}
             </tbody>
           </table>
         </ScrollableTable>
+        <p className="text-[10px] text-[var(--color-text-muted)] italic mt-2">
+          <strong className="text-emerald-300">Green rows</strong> = COD ≤ 31 Dec 2029, eligible for the Hybrid LTESA's COD acceleration bonus. <strong className="text-amber-300">Amber</strong> = 2030 (borderline). <strong className="text-red-300">Red</strong> = 2031+ (likely misses bonus). Asterisk (*) marks AURES estimates derived from planning stage + typical 4-5yr build (vs DB `cod_current`). <strong className="text-[var(--color-text)]">Critical tension:</strong> the three highest-probability hybrid winners (Pottinger, Bookham, Hargraves) are all 2031+ COD — they win on hybrid eligibility but lose the COD bonus. Only Piambong, Bullawah Stage 2 and Hills of Gold clear the Dec 2029 threshold, and all three are wind-only — losing the hybrid eligibility component.
+        </p>
       </section>
 
       {/* ============================================================ */}
