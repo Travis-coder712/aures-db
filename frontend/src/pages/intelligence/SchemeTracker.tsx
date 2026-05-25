@@ -5929,7 +5929,7 @@ Key risks to the 6.3 GW total. Junction Rivers' lost SW REZ access raises real q
 
             {/* Merit criteria weightings table — context for the commentary below */}
             <div className="bg-[var(--color-bg-elevated)]/40 border border-cyan-500/20 rounded-lg p-3 mb-3">
-              <div className="text-[10px] uppercase tracking-wide text-cyan-300/80 mb-1.5 font-medium">ASL merit-criteria weightings (LTESA Tender 1 baseline)</div>
+              <div className="text-[10px] uppercase tracking-wide text-cyan-300/80 mb-1.5 font-medium">ASL merit-criteria weightings (LTESA Tender Round 6 — most recent confirmed)</div>
               <table className="w-full text-[11px]">
                 <thead>
                   <tr className="border-b border-cyan-500/20 text-[var(--color-text-muted)] uppercase tracking-wide text-[9px]">
@@ -5940,64 +5940,59 @@ Key risks to the 6.3 GW total. Junction Rivers' lost SW REZ access raises real q
                 </thead>
                 <tbody>
                   <tr className="border-b border-cyan-500/10">
-                    <td className="py-1 px-1 font-semibold text-cyan-200">MC1: Financial value</td>
-                    <td className="py-1 px-1 text-right font-bold text-cyan-200">40%</td>
-                    <td className="py-1 px-1 hidden sm:table-cell text-[var(--color-text-muted)]">Net forecast cost vs. wholesale + capacity benefits to NSW consumers (the primary statutory consideration per s48(2) EII Act)</td>
+                    <td className="py-1 px-1 text-[var(--color-text)]">MC1: Impact on the electricity system</td>
+                    <td className="py-1 px-1 text-right text-[var(--color-text-muted)]">11%</td>
+                    <td className="py-1 px-1 hidden sm:table-cell text-[var(--color-text-muted)]">Locational benefits / REZ contribution / system strength / network support</td>
                   </tr>
                   <tr className="border-b border-cyan-500/10">
-                    <td className="py-1 px-1 text-[var(--color-text)]">MC2: Commercial departures</td>
-                    <td className="py-1 px-1 text-right text-[var(--color-text-muted)]">6%</td>
-                    <td className="py-1 px-1 hidden sm:table-cell text-[var(--color-text-muted)]">How close the bid is to the standard LTESA term sheet (departures = friction)</td>
-                  </tr>
-                  <tr className="border-b border-cyan-500/10">
-                    <td className="py-1 px-1 text-[var(--color-text)]">MC3: Impact on electricity system</td>
-                    <td className="py-1 px-1 text-right text-[var(--color-text-muted)]">9%</td>
-                    <td className="py-1 px-1 hidden sm:table-cell text-[var(--color-text-muted)]">Locational benefits / REZ contribution / system strength</td>
-                  </tr>
-                  <tr className="border-b border-cyan-500/10">
-                    <td className="py-1 px-1 text-[var(--color-text)]">MC4: Pathway to commercial operation</td>
-                    <td className="py-1 px-1 text-right text-[var(--color-text-muted)]">9%</td>
+                    <td className="py-1 px-1 text-[var(--color-text)]">MC2: Pathway to commercial operation</td>
+                    <td className="py-1 px-1 text-right text-[var(--color-text-muted)]">11%</td>
                     <td className="py-1 px-1 hidden sm:table-cell text-[var(--color-text-muted)]">Planning maturity, connection enquiry, FID-readiness, COD plan</td>
                   </tr>
                   <tr className="border-b border-cyan-500/10">
-                    <td className="py-1 px-1 text-[var(--color-text)]">MC5: Organisational capacity to deliver</td>
-                    <td className="py-1 px-1 text-right text-[var(--color-text-muted)]">9%</td>
+                    <td className="py-1 px-1 text-[var(--color-text)]">MC3: Organisational capacity to deliver</td>
+                    <td className="py-1 px-1 text-right text-[var(--color-text-muted)]">11%</td>
                     <td className="py-1 px-1 hidden sm:table-cell text-[var(--color-text-muted)]">Developer track record + balance-sheet / financing capability</td>
                   </tr>
                   <tr className="border-b border-cyan-500/10">
-                    <td className="py-1 px-1 text-[var(--color-text)]">MC6: Land use considerations</td>
-                    <td className="py-1 px-1 text-right text-[var(--color-text-muted)]">9%</td>
-                    <td className="py-1 px-1 hidden sm:table-cell text-[var(--color-text-muted)]">Biodiversity / agricultural / cultural-heritage land-use risks</td>
+                    <td className="py-1 px-1 text-[var(--color-text)]">MC4: Community engagement, shared benefits &amp; land use</td>
+                    <td className="py-1 px-1 text-right text-[var(--color-text-muted)]">11%</td>
+                    <td className="py-1 px-1 hidden sm:table-cell text-[var(--color-text-muted)]">Social licence · First Nations participation · biodiversity / agricultural / cultural-heritage land-use</td>
                   </tr>
                   <tr className="border-b border-cyan-500/10">
-                    <td className="py-1 px-1 text-[var(--color-text)]">MC7: Community engagement &amp; benefits</td>
-                    <td className="py-1 px-1 text-right text-[var(--color-text-muted)]">9%</td>
-                    <td className="py-1 px-1 hidden sm:table-cell text-[var(--color-text-muted)]">Social licence — benefit-sharing, First Nations participation, host-community programs</td>
+                    <td className="py-1 px-1 font-semibold text-cyan-200">MC5: Financial value and system benefits</td>
+                    <td className="py-1 px-1 text-right font-bold text-cyan-200">45%</td>
+                    <td className="py-1 px-1 hidden sm:table-cell text-[var(--color-text-muted)]">BCR (wholesale-market benefits ÷ net LTESA cost) + system-benefits modelling — the primary statutory consideration per s48(2) EII Act</td>
+                  </tr>
+                  <tr className="border-b border-cyan-500/10">
+                    <td className="py-1 px-1 text-[var(--color-text-muted)] italic">MC6: Contract departures</td>
+                    <td className="py-1 px-1 text-right text-[var(--color-text-muted)] italic">qualifier</td>
+                    <td className="py-1 px-1 hidden sm:table-cell text-[var(--color-text-muted)]">How close the bid is to the standard LTESA term sheet (gate / pass-fail, not numerically weighted)</td>
                   </tr>
                   <tr>
-                    <td className="py-1 px-1 text-[var(--color-text)]">MC8: Regional economic development</td>
-                    <td className="py-1 px-1 text-right text-[var(--color-text-muted)]">9%</td>
+                    <td className="py-1 px-1 text-[var(--color-text)]">MC7: Regional economic development</td>
+                    <td className="py-1 px-1 text-right text-[var(--color-text-muted)]">11%</td>
                     <td className="py-1 px-1 hidden sm:table-cell text-[var(--color-text-muted)]">Local content, employment quotas, NSW Renewable Sector Board Plan compliance</td>
                   </tr>
                 </tbody>
               </table>
               <div className="text-[9px] text-[var(--color-text-muted)] italic mt-1.5">
-                Source: <a href="https://asl.org.au/-/media/services/files/publications/market-briefing-series/231020-tender-1-outcomes-market-briefing-note.pdf" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:underline">ASL Tender Round 1 outcomes market briefing</a> (Oct 2023). MC1 is the primary consideration by statute (EII Act s48(2)). ASL may adjust weightings round-to-round; the Round 8 (Q2 2026) tender pack is not yet public — these are the most-recent published weightings.
+                Source: <a href="https://asl.org.au/-/media/services/files/tender-round-6/260130-nsw-roadmap-tender-round-6-market-briefing-note.pdf" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:underline">ASL NSW Roadmap Tender Round 6 market briefing</a> (Jan 2026, Appendix 3). MC5 is the primary consideration by statute (EII Act s48(2)). <strong>This structure has evolved since Tender 1</strong> (where 8 criteria were used with Financial Value at 40%) — ASL consolidated wholesale-market benefits + system benefits into a single MC5 by R6. The Round 8 (Q2 2026 generation) tender pack is not yet public — weightings may shift again, but R6 is the most-recent precedent.
               </div>
             </div>
 
             <p className="text-xs text-[var(--color-text)] leading-relaxed mb-2">With that scoring spine in mind, the Hybrid LTESA's explicit treatment:</p>
             <ul className="text-xs text-[var(--color-text)] space-y-1.5 list-disc pl-5">
               <li><strong className="text-cyan-300">Eligibility rule:</strong> "The Hybrid LTESA is available to projects where generation export capacity matches or exceeds storage export capacity, with storage systems providing a minimum 4-hour duration at the commercial operations date." Standalone gen still eligible for the standard Generation LTESA, but does not receive the hybrid uplift.</li>
-              <li><strong className="text-cyan-300">No wholesale market benefits</strong> for ineligible hybrid configurations: "Projects bidding for a Hybrid LTESA will be assessed as having no wholesale market benefits if the initial storage duration is less than 4 hours or the capacity of the generation component is below the capacity of the storage component." — wholesale-benefits enter MC1 (the 40% line above), so this is effectively a hard zero on the dominant scoring axis.</li>
+              <li><strong className="text-cyan-300">No wholesale market benefits</strong> for ineligible hybrid configurations: "Projects bidding for a Hybrid LTESA will be assessed as having no wholesale market benefits if the initial storage duration is less than 4 hours or the capacity of the generation component is below the capacity of the storage component." — wholesale-market benefits are the numerator of the BCR metric inside MC5 (the 45% line above), so this is effectively a hard zero on the dominant scoring axis.</li>
               <li><strong className="text-cyan-300">Time-shift bias:</strong> "wind and hybrid generation-storage projects that produce during non-solar hours are expected to deliver strong financial value" — explicit favourable consideration for projects whose output covers solar-cannibalisation hours.</li>
-              <li><strong className="text-cyan-300">COD acceleration bonus:</strong> "Projects demonstrating commercial operations dates before 31 December 2029 are expected to receive favourable consideration" — directly addresses the Eraring (Aug 2027) coal-exit timing. Flows through both MC1 (earlier revenue) and MC4 (Pathway to commercial operation — 9%).</li>
+              <li><strong className="text-cyan-300">COD acceleration bonus:</strong> "Projects demonstrating commercial operations dates before 31 December 2029 are expected to receive favourable consideration" — directly addresses the Eraring (Aug 2027) coal-exit timing. Flows through both MC5 (earlier revenue → higher BCR) and MC2 (Pathway to commercial operation — 11%).</li>
             </ul>
             <div className="text-[10px] text-[var(--color-text-muted)] italic mt-2">
-              <strong className="text-[var(--color-text)]">Net effect:</strong> a wind-only or solar-only bid that doesn't meet the Hybrid-LTESA eligibility loses the entire wholesale-benefits component of MC1 — i.e. a meaningful portion of the 40% weighting evaporates. Combined with the explicit time-shift bias, that materially advantages Pottinger (wind+BESS), Bookham (wind+BESS) and Hargraves (wind+solar+BESS) vs Liverpool Range Stage 2 and The Plains (wind-alone) in our cohort.
+              <strong className="text-[var(--color-text)]">Net effect:</strong> a wind-only or solar-only bid that doesn't meet the Hybrid-LTESA eligibility loses the wholesale-benefits numerator of MC5's benefit-cost ratio — i.e. a meaningful portion of the 45% weighting collapses to a low score. Combined with the explicit time-shift bias, that materially advantages Pottinger (wind+BESS), Bookham (wind+BESS) and Hargraves (wind+solar+BESS) vs Liverpool Range Stage 2 and The Plains (wind-alone) in our cohort.
             </div>
             <div className="text-[10px] text-[var(--color-text-muted)] italic mt-1">
-              Sources: <a href="https://www.pv-tech.org/australias-new-south-wales-launches-biggest-renewable-energy-tender-in-the-states-history/" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:underline">PV Tech</a>, <a href="https://reneweconomy.com.au/nsw-launches-its-biggest-ever-renewable-tender-to-keep-lights-on-and-push-down-prices/" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:underline">RenewEconomy</a>, <a href="https://www.energy.nsw.gov.au/nsw-plans-and-progress/major-state-projects/electricity-infrastructure-roadmap/asl-tenders" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:underline">NSW Climate &amp; Energy Action</a>, <a href="https://asl.org.au/-/media/services/files/publications/market-briefing-series/231020-tender-1-outcomes-market-briefing-note.pdf" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:underline">ASL T1 market briefing PDF</a>.
+              Sources: <a href="https://asl.org.au/-/media/services/files/tender-round-6/260130-nsw-roadmap-tender-round-6-market-briefing-note.pdf" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:underline">ASL T6 market briefing PDF</a> (weightings table), <a href="https://www.pv-tech.org/australias-new-south-wales-launches-biggest-renewable-energy-tender-in-the-states-history/" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:underline">PV Tech</a>, <a href="https://reneweconomy.com.au/nsw-launches-its-biggest-ever-renewable-tender-to-keep-lights-on-and-push-down-prices/" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:underline">RenewEconomy</a>, <a href="https://www.energy.nsw.gov.au/nsw-plans-and-progress/major-state-projects/electricity-infrastructure-roadmap/asl-tenders" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:underline">NSW Climate &amp; Energy Action</a>.
             </div>
           </div>
 
