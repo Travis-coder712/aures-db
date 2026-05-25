@@ -136,12 +136,12 @@ export const CIS_ROUNDS: CISRound[] = [
     type: 'generation',
     market: 'NEM',
     announced_date: '2026-05-23',
-    total_capacity_mw: 7800,
-    total_storage_mwh: 5450,
+    total_capacity_mw: 7828,
+    total_storage_mwh: 7885,
     num_projects: 19,
     project_ids: [],
-    description: 'Largest CIS renewable auction to date. 19 winning projects deliver 7.8 GW against a 5 GW target — wind dominates (4.8 GW wind vs 3.0 GW solar across 10 wind and 9 solar projects), with 8 of the 19 being battery-paired hybrids. NSW filled its 8-project state quota including the country\'s biggest wind project (Origin\'s 1,450 MW Yanco Delta). The 19 winners unlock ~$17B private investment, ~19,000 construction jobs, $1.2B in social-licence commitments and $257M of Australian steel. Only 15 of 19 winners named in the initial RenewEconomy article (2026-05-23) — the remaining 4 await DCCEEW media release.',
-    key_changes: 'Largest single CIS auction (7.8 GW awarded). Wind-dominated (10 of 19). 4 of 19 names not yet public. **NSW will be excluded from the next federal CIS generation round (Tender 9)** — NSW wind without a T7 win now competes only in the state Roadmap LTESA Generation tender (Q2 2026, 2.5 GW, hybrid-favoured).',
+    description: 'Largest CIS renewable auction to date. 19 winning projects deliver 7.83 GW against a 5 GW target — wind dominates (5.58 GW vs 2.24 GW solar across 10 wind and 9 solar projects), with 8 of the 19 being battery-paired hybrids contributing 7.89 GWh of storage. Updated 2026-05-25 with full DCCEEW media-release detail: NSW received 9 projects (1 over the 8-project state quota — Wattle Creek added late), QLD 5, VIC + TAS 2 each, SA 1. The 19 winners unlock ~$17B private investment, ~19,000 construction jobs, $1.2B in social-licence commitments and $257M of Australian steel.',
+    key_changes: 'Largest single CIS auction (7.83 GW awarded — 56% above the 5 GW target). Wind-dominated (10 of 19 projects, 71% of capacity). 8 hybrids contribute 7.89 GWh of storage. **NSW will be excluded from the next federal CIS generation round (Tender 9)** — NSW wind without a T7 win now competes only in the state Roadmap LTESA Generation tender (Q2 2026, 2.5 GW, hybrid-favoured). Notable concentration: only 1 of 19 winners is EPBC-approved at award (Yanco Delta) — major planning execution risk.',
     sources: [
       { title: 'Australia\'s biggest wind project and 8 battery hybrids among 19 winners (RenewEconomy)', url: 'https://reneweconomy.com.au/australias-biggest-wind-project-and-8-battery-hybrids-among-19-winners-of-largest-renewable-auction-to-date/', date: '2026-05-23', source_tier: 2 },
       { title: 'Australia opens CIS Tender 7 (PV Tech)', url: 'https://www.pv-tech.org/australia-opens-capacity-investment-scheme-tender-7-seeking-5gw-of-renewables/', source_tier: 2 },
@@ -270,27 +270,31 @@ export const CIS_PROJECTS: Record<string, SchemeProject[]> = {
     { name: 'Willogoleche 2 Wind Farm', developer: 'ENGIE / Foresight', technology: 'wind', capacity_mw: 108, state: 'SA', project_id: 'willogoleche-2-wind-farm' },
   ],
   'cis-tender-7-nem-gen': [
-    // NSW (3 wind + 1 solar hybrid + 1 solar — note: NSW filled its 8-project state quota; 3 names of those 8 not in initial RenewEconomy article)
-    { name: 'Yanco Delta Wind Farm', developer: 'Origin Energy', technology: 'wind', capacity_mw: 1450, state: 'NSW', location: 'South-West REZ — Jerilderie', project_id: 'yanco-delta-wind-farm', notes: 'Biggest single wind project in Australia. Origin\'s first new renewable since announcing Eraring closure. Full project ~1,460 MW (DB) / 1,450 MW (T7 awarded). SW REZ grid access secured 2025. Targeting FID mid-FY27.' },
-    { name: 'Baldin (Baldon Stage 2)', developer: 'Goldwind Australia', technology: 'hybrid', capacity_mw: 346, state: 'NSW', location: 'South-West REZ — Hay Plains', project_id: 'baldon-wind-farm-stage-2', notes: '346 MW wind paired with battery in CIS bid. Project still not planning-approved — Response to Submissions lodged with DPHI May 2025; awaiting Independent Planning Commission determination. Full Baldon project = Stage 1 + Stage 2 (~360 MW Stage 1 + 1,040 MW Stage 2 in DB).' },
-    { name: 'Bullewah (Bullawah Stage 1)', developer: 'BayWa r.e.', technology: 'wind', capacity_mw: 283, state: 'NSW', location: 'South-West REZ — south of Hay', project_id: 'bullawah-wind-farm-stage-1', notes: 'Capacity awarded constrained by 283 MW SW REZ access right. Full proposed project ~804 MW (Stages 1 + 2). Stage 1 still planning_submitted. Planning approval not yet granted.' },
-    { name: 'Birriwa Solar Farm', developer: 'ACEN Renewables', technology: 'hybrid', capacity_mw: 600, storage_mwh: 2400, state: 'NSW', location: 'Central West Orana REZ', project_id: 'birriwa-solar-farm', notes: 'Largest solar+BESS hybrid awarded in T7.' },
-    { name: 'Dinawan Solar (Dinawan Energy Hub)', developer: 'Spark Renewables', technology: 'hybrid', capacity_mw: 0, state: 'NSW', location: 'South-West REZ', project_id: 'dinawan-energy-hub', notes: 'Solar+battery component of the broader Dinawan Energy Hub (separate from the 357 MW Dinawan Stage 1 wind CIS T4 win). Capacity not disclosed in initial article. Project awaiting IPC determination.' },
-    { name: 'Kayuga Solar', developer: 'Undisclosed', technology: 'solar', capacity_mw: 0, state: 'NSW', notes: 'Capacity not disclosed in initial RenewEconomy article. Project ID not yet matched in AURES DB. Likely to add battery storage outside CIS parameters.' },
-    // QLD (3 — 2 wind, 1 hybrid wind+BESS, 1 solar)
-    { name: 'Bungaban Wind + Battery', developer: 'Windlab', technology: 'hybrid', capacity_mw: 1150, storage_mwh: 1450, state: 'QLD', project_id: 'bungaban-wind-farm', notes: '1,150 MW wind + 1,450 MWh battery. Long-term PPA with Rio Tinto for smelter/refinery power; CIS win helps competitive pricing. Full DB project = 1,400 MW (project total).' },
-    { name: 'Theodore Wind Farm', developer: 'RWE Renewables', technology: 'wind', capacity_mw: 1000, state: 'QLD', project_id: 'theodore-wind-farm', notes: 'Previously threatened by LNP state government. Full DB project = 1,054 MW.' },
-    { name: 'Bullyard Solar Farm', developer: 'European Energy', technology: 'solar', capacity_mw: 0, state: 'QLD', project_id: 'bullyard-solar-farm', notes: 'Capacity not disclosed in initial article. Likely to add battery storage outside CIS parameters. DB has 97 MW listed but T7 award likely covers larger expansion.' },
-    // VIC (2 wind)
-    { name: 'Willatook Wind Farm', developer: 'Engie', technology: 'wind', capacity_mw: 338, state: 'VIC', project_id: 'willatook', notes: 'Victoria sought only wind projects in T7. DB has full project = 450 MW.' },
-    { name: 'Woolsthorpe Wind Farm', developer: 'ICA Partners', technology: 'wind', capacity_mw: 70, state: 'VIC', project_id: 'woolsthorpe-wind-farm' },
-    // SA (1 wind)
-    { name: 'Whyte Yarcowie Wind Farm', developer: 'EdF Renewables', technology: 'wind', capacity_mw: 0, state: 'SA', project_id: 'whyte-yarcowie', notes: 'South Australia\'s only T7 winner. Capacity not disclosed in initial article. DB has full project = 574 MW.' },
-    // TAS (1 wind + 1 solar — Gamuda did both)
-    { name: 'Cellars Hill Wind Farm', developer: 'Gamuda', technology: 'wind', capacity_mw: 0, state: 'TAS', notes: 'Project ID not yet matched in AURES DB. Capacity not disclosed. Located near Weasel solar project (also Gamuda).' },
-    { name: 'Weasel Solar Farm', developer: 'Gamuda', technology: 'solar', capacity_mw: 0, state: 'TAS', project_id: 'weasel-solar-farm-and-bess-kci', notes: 'Unusual: major solar farm on central highlands. Capacity not disclosed in initial article. DB has 144 MW for Weasel Solar + BESS.' },
-    // 4 winners unnamed in RenewEconomy initial article — pending DCCEEW media release
-    // Refresh this array once full list lands.
+    // NSW (9 projects — 3 wind / 1 wind+BESS hybrid / 1 solar / 4 solar+BESS hybrid).
+    // Updated 2026-05-25 with full DCCEEW media-release detail.
+    { name: 'Yanco Delta Wind Farm', developer: 'Origin Energy', technology: 'wind', capacity_mw: 1498, state: 'NSW', location: 'South-West REZ — Jerilderie', project_id: 'yanco-delta-wind-farm', notes: 'Biggest single wind project in Australia. Origin\'s first new renewable since announcing Eraring closure. SW REZ grid access secured 2025 (full 1,460 MW). Targeting FID mid-FY27.' },
+    { name: 'Birriwa Solar Farm', developer: 'ACEN Australia', technology: 'hybrid', capacity_mw: 600, storage_mwh: 2400, state: 'NSW', location: 'Central West Orana REZ', project_id: 'birriwa-solar-farm', notes: 'Largest solar+BESS hybrid awarded in T7.' },
+    { name: 'Baldin / Baldon Stage 2', developer: 'Goldwind / Omni', technology: 'hybrid', capacity_mw: 346, storage_mwh: 132, state: 'NSW', location: 'South-West REZ — Hay Plains', project_id: 'baldon-wind-farm-stage-2', notes: '346 MW wind paired with 132 MWh battery. Response to Submissions lodged with DPHI May 2025; awaiting Independent Planning Commission determination.' },
+    { name: 'Gundary Solar Hybrid', developer: 'Lightsource bp', technology: 'hybrid', capacity_mw: 320, storage_mwh: 1391, state: 'NSW', project_id: 'gundary-solar-farm-and-bess', notes: 'Solar+BESS hybrid. DB has Gundary Solar Farm and BESS at 300 MW + separate standalone Gundary BESS at 400 MW; T7 covers the integrated 320 MW + 1,391 MWh package.' },
+    { name: 'Bullewah / Bullawah Stage 1', developer: 'BayWa r.e.', technology: 'wind', capacity_mw: 300, state: 'NSW', location: 'South-West REZ — south of Hay', project_id: 'bullawah-wind-farm-stage-1', notes: 'Wind-only — DCCEEW awarded 300 MW. Full proposed project ~804 MW (Stages 1 + 2). Stage 1 still planning_submitted.' },
+    { name: 'Dinawan Solar Hybrid', developer: 'Spark Renewables', technology: 'hybrid', capacity_mw: 300, storage_mwh: 1200, state: 'NSW', location: 'South-West REZ', project_id: 'dinawan-energy-hub', notes: 'Solar+BESS component of the Dinawan Energy Hub. Separate from the 357 MW Dinawan Stage 1 wind CIS T4 win. Hub\'s solar+BESS approved Apr 2026; wind still awaiting IPC.' },
+    { name: 'Gunning Solar Farm Hybrid', developer: 'Zero-E / Grupo Cobra', technology: 'hybrid', capacity_mw: 290, storage_mwh: 542, state: 'NSW', location: 'Lade Vale', notes: 'New project — not yet in AURES DB (Gunning Wind Farm 46 MW is a separate operating asset). Spanish construction conglomerate Grupo Cobra via Zero-E subsidiary.' },
+    { name: 'Wattle Creek Solar Hybrid', developer: 'Spark Renewables', technology: 'hybrid', capacity_mw: 180, storage_mwh: 720, state: 'NSW', project_id: 'wattle-creek-energy-hub-solar-bess', notes: 'Solar+BESS component of the Wattle Creek Energy Hub (separate from the 350 MW standalone BESS).' },
+    { name: 'Kayuga Solar Farm and BESS', developer: 'European Energy Australia', technology: 'solar', capacity_mw: 85, state: 'NSW', location: 'Kayuga', notes: 'New project — not yet in AURES DB. DCCEEW announcement labels as solar only (no BESS MWh disclosed despite the "and BESS" in project name).' },
+    // QLD (5 projects — 2 wind / 1 wind+BESS hybrid / 1 solar / 1 solar+BESS hybrid)
+    { name: 'Bungaban Wind Energy Project', developer: 'Windlab', technology: 'hybrid', capacity_mw: 1150, storage_mwh: 1400, state: 'QLD', project_id: 'bungaban-wind-farm', notes: '1,150 MW wind + 1,400 MWh battery. Long-term PPA with Rio Tinto for smelter/refinery power.' },
+    { name: 'Theodore Wind Farm', developer: 'Theodore Energy Development', technology: 'wind', capacity_mw: 1022, state: 'QLD', project_id: 'theodore-wind-farm', notes: 'Previously threatened by QLD LNP government. Now backed by a dedicated Theodore Energy Development SPV.' },
+    { name: 'Banana Range Wind Farm', developer: 'EDF Power Solutions', technology: 'wind', capacity_mw: 228, state: 'QLD', project_id: 'banana-range-wind-farm', notes: 'EDF Renewables\' second T7 win alongside Whyte Yarcowie (SA).' },
+    { name: 'Moranbah Solar Farm', developer: 'Zero-E / Grupo Cobra', technology: 'hybrid', capacity_mw: 171, storage_mwh: 100, state: 'QLD', notes: 'New project — not yet in AURES DB. Grupo Cobra\'s second T7 win (with Gunning Solar Hybrid NSW). Small BESS (100 MWh) relative to gen size — primarily firming the solar shape.' },
+    { name: 'Bullyard Solar Farm', developer: 'European Energy Australia', technology: 'solar', capacity_mw: 97, state: 'QLD', project_id: 'bullyard-solar-farm', notes: 'European Energy Australia\'s second T7 win alongside Kayuga (NSW).' },
+    // TAS (2 projects — 1 wind / 1 solar)
+    { name: 'Cellars Hill Wind Farm', developer: 'Gamuda Renewables / Alternate Path', technology: 'wind', capacity_mw: 341, state: 'TAS', notes: 'New project — not yet in AURES DB. Gamuda + Alternate Path JV; sister project to Weasel Solar.' },
+    { name: 'Weasel Solar Farm', developer: 'Gamuda Renewables / Alternate Path', technology: 'solar', capacity_mw: 200, state: 'TAS', project_id: 'weasel-solar-farm-and-bess-kci', notes: 'Unusual: major solar farm on Tasmanian central highlands. DCCEEW announcement labels as solar only; DB has it as Weasel Solar + BESS.' },
+    // SA (1 project)
+    { name: 'Whyte Yarcowie Wind Farm', developer: 'EDF Power Solutions', technology: 'wind', capacity_mw: 289, state: 'SA', project_id: 'whyte-yarcowie', notes: 'SA\'s only T7 winner. EDF\'s first of two T7 wins (Banana Range QLD the other).' },
+    // VIC (2 projects — both wind)
+    { name: 'Willatook Wind Farm', developer: 'ENGIE', technology: 'wind', capacity_mw: 338, state: 'VIC', project_id: 'willatook', notes: 'Victoria sought only wind projects in T7. DB has full project = 450 MW.' },
+    { name: 'Woolsthorpe Wind Farm', developer: 'ICA Partners', technology: 'wind', capacity_mw: 72, state: 'VIC', project_id: 'woolsthorpe-wind-farm', notes: 'Mexican construction conglomerate ICA Partners — smallest T7 winner.' },
   ],
 }
 
@@ -721,8 +725,8 @@ export const NSW_WIND_COHORT: NSWWindCohortEntry[] = [
     name: 'Yanco Delta',
     proponent: 'Origin Energy',
     scheme: 'CIS T7',
-    awarded_mw: 1450,
-    total_mw: 1460,
+    awarded_mw: 1498,
+    total_mw: 1498,
     technology: 'wind',
     stage_label: 'Full project',
     rez: 'South-West REZ',
@@ -761,7 +765,7 @@ export const NSW_WIND_COHORT: NSWWindCohortEntry[] = [
     name: 'Bullewah (Bullawah Stage 1)',
     proponent: 'BayWa r.e.',
     scheme: 'CIS T7',
-    awarded_mw: 283,
+    awarded_mw: 300,
     total_mw: 804,
     technology: 'wind',
     stage_label: 'Partial — REZ-access constrained',

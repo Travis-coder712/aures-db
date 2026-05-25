@@ -13,7 +13,7 @@
   "has_statcom": false,
   "has_harmonic_filter": false,
   "data_confidence": "medium",
-  "last_updated": "2026-05-23",
+  "last_updated": "2026-05-25",
   "last_verified": "2026-05-23",
   "aemo_gen_info_id": "2266",
   "timeline": [
@@ -29,7 +29,7 @@
       "date": "2024-02",
       "date_precision": "month",
       "event_type": "planning_approved",
-      "title": "EPBC approval (Feb 2024) — modifications underway",
+      "title": "EPBC approval (Feb 2024) \u2014 modifications underway",
       "detail": "Federal EPBC Act approval granted Feb 2024. Modifications to the approved design currently underway.",
       "sources": []
     },
@@ -38,9 +38,13 @@
       "date_precision": "month",
       "event_type": "rez_access",
       "title": "South-West REZ grid access right secured",
-      "detail": "Yanco Delta secured 1,460 MW of SW REZ grid access rights — full project allocation.",
+      "detail": "Yanco Delta secured 1,460 MW of SW REZ grid access rights \u2014 full project allocation.",
       "sources": [
-        { "title": "Andrew Forrest among big winners as NSW grants grid access (RenewEconomy)", "url": "https://reneweconomy.com.au/forrest-and-key-cis-projects-win-big-as-nsw-grants-grid-access-to-giant-wind-solar-and-battery-facilities/", "source_tier": 2 }
+        {
+          "title": "Andrew Forrest among big winners as NSW grants grid access (RenewEconomy)",
+          "url": "https://reneweconomy.com.au/forrest-and-key-cis-projects-win-big-as-nsw-grants-grid-access-to-giant-wind-solar-and-battery-facilities/",
+          "source_tier": 2
+        }
       ]
     },
     {
@@ -48,9 +52,14 @@
       "date_precision": "day",
       "event_type": "offtake_signed",
       "title": "CIS Tender 7 underwriting awarded",
-      "detail": "Origin Energy's Yanco Delta wins CIS Tender 7 underwriting — 1,450 MW awarded under the federal Capacity Investment Scheme. Largest single wind project in Australia.",
+      "detail": "Origin Energy's Yanco Delta wins CIS Tender 7 underwriting \u2014 1,450 MW awarded under the federal Capacity Investment Scheme. Largest single wind project in Australia.",
       "sources": [
-        { "title": "Australia's biggest wind project among 19 winners of largest renewable auction (RenewEconomy)", "url": "https://reneweconomy.com.au/australias-biggest-wind-project-and-8-battery-hybrids-among-19-winners-of-largest-renewable-auction-to-date/", "date": "2026-05-23", "source_tier": 2 }
+        {
+          "title": "Australia's biggest wind project among 19 winners of largest renewable auction (RenewEconomy)",
+          "url": "https://reneweconomy.com.au/australias-biggest-wind-project-and-8-battery-hybrids-among-19-winners-of-largest-renewable-auction-to-date/",
+          "date": "2026-05-23",
+          "source_tier": 2
+        }
       ]
     }
   ],
@@ -61,8 +70,8 @@
   "scheme_contracts": [
     {
       "scheme": "CIS",
-      "round": "Tender 7 — NEM Generation",
-      "capacity_mw": 1450,
+      "round": "Tender 7 \u2014 NEM Generation",
+      "capacity_mw": 1498,
       "contract_type": "CISA (federal underwriting)",
       "source_url": "https://reneweconomy.com.au/australias-biggest-wind-project-and-8-battery-hybrids-among-19-winners-of-largest-renewable-auction-to-date/"
     }

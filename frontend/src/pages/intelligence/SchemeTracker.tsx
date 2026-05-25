@@ -5116,6 +5116,115 @@ function NSWWindTab() {
 
   const t7Snapshot = useMemo(() => NSW_WIND_COHORT.filter(p => p.scheme === 'CIS T7'), [])
 
+  // ============================================================
+  // T7 Analysis — categorisation of all 19 winners
+  // (asset type · size band · development status · company type)
+  // Source: CIS_PROJECTS['cis-tender-7-nem-gen'] (refreshed v3.10.2 from DCCEEW media release).
+  // ============================================================
+  const t7Analysis = useMemo(() => {
+    const winners = CIS_PROJECTS['cis-tender-7-nem-gen'] ?? []
+    const totalProjects = winners.length
+    const totalMw = winners.reduce((s, p) => s + (p.capacity_mw || 0), 0)
+    const totalStorageMwh = winners.reduce((s, p) => s + (p.storage_mwh || 0), 0)
+
+    // 1) By state
+    const byState = new Map<string, { count: number; mw: number }>()
+    for (const p of winners) {
+      const cur = byState.get(p.state) ?? { count: 0, mw: 0 }
+      cur.count += 1
+      cur.mw += p.capacity_mw || 0
+      byState.set(p.state, cur)
+    }
+
+    // 2) By asset type — split wind/solar by hybrid/standalone
+    const assetBuckets = {
+      'Wind only':         { count: 0, mw: 0, color: '#3b82f6' },
+      'Wind + BESS':       { count: 0, mw: 0, color: '#6366f1' },
+      'Solar only':        { count: 0, mw: 0, color: '#f59e0b' },
+      'Solar + BESS':      { count: 0, mw: 0, color: '#fb923c' },
+    }
+    for (const p of winners) {
+      const mw = p.capacity_mw || 0
+      if (p.technology === 'wind') {
+        assetBuckets['Wind only'].count += 1
+        assetBuckets['Wind only'].mw += mw
+      } else if (p.technology === 'solar') {
+        assetBuckets['Solar only'].count += 1
+        assetBuckets['Solar only'].mw += mw
+      } else if (p.technology === 'hybrid') {
+        // Hybrid — split by which generation is dominant based on name
+        const nameLower = p.name.toLowerCase()
+        if (nameLower.includes('wind') || nameLower.includes('baldin') || nameLower.includes('baldon') || nameLower.includes('bungaban')) {
+          assetBuckets['Wind + BESS'].count += 1
+          assetBuckets['Wind + BESS'].mw += mw
+        } else {
+          assetBuckets['Solar + BESS'].count += 1
+          assetBuckets['Solar + BESS'].mw += mw
+        }
+      }
+    }
+
+    // 3) By size band
+    const sizeBuckets: Array<{ label: string; count: number; mw: number; color: string }> = [
+      { label: 'Mega (≥1 GW)', count: 0, mw: 0, color: '#22c55e' },
+      { label: 'Large (500–999 MW)', count: 0, mw: 0, color: '#10b981' },
+      { label: 'Mid (200–499 MW)', count: 0, mw: 0, color: '#06b6d4' },
+      { label: 'Small (<200 MW)', count: 0, mw: 0, color: '#94a3b8' },
+    ]
+    for (const p of winners) {
+      const mw = p.capacity_mw || 0
+      const bucket = mw >= 1000 ? sizeBuckets[0]
+                  : mw >= 500   ? sizeBuckets[1]
+                  : mw >= 200   ? sizeBuckets[2]
+                  :               sizeBuckets[3]
+      bucket.count += 1
+      bucket.mw += mw
+    }
+
+    // 4) By company type — pattern-match developer name to a category.
+    const companyCategoryFor = (dev: string): string => {
+      const d = dev.toLowerCase()
+      // Australian gentailer
+      if (/origin|agl|energyaustralia/.test(d)) return 'Australian gentailer'
+      // International utility / IPP / oil major
+      if (/engie|edf|iberdrola|enel|rwe|orsted|bp\b|shell|totalenergies/.test(d)) return 'International utility / IPP'
+      // Chinese OEM / JV / Acen (PH-listed)
+      if (/goldwind|sungrow|trina|jinko|longi|byd|envision|acen|cecep/.test(d)) return 'Chinese OEM / Asian utility'
+      // Construction conglomerate
+      if (/grupo cobra|zero-?e|gamuda|ica partners|cpb contractors|salini|acciona infrastructure/.test(d)) return 'Construction conglomerate'
+      // Specialist Australian renewables developer
+      if (/spark renewables|squadron|tilt|edify|neoen|windlab|akaysha|eku|atmos|ampyr|frv/.test(d)) return 'Specialist Australian developer'
+      // International solar developer (incl. AU subsidiary)
+      if (/lightsource|european energy|baywa|sonnen|sungrow|lightsource bp/.test(d)) return 'International solar developer'
+      // Default
+      return 'Other / new entrant'
+    }
+    const companyBuckets = new Map<string, { count: number; mw: number }>()
+    for (const p of winners) {
+      const cat = companyCategoryFor(p.developer || '')
+      const cur = companyBuckets.get(cat) ?? { count: 0, mw: 0 }
+      cur.count += 1
+      cur.mw += p.capacity_mw || 0
+      companyBuckets.set(cat, cur)
+    }
+
+    return {
+      totalProjects,
+      totalMw,
+      totalStorageMwh,
+      byState: Array.from(byState.entries())
+        .map(([state, v]) => ({ state, ...v }))
+        .sort((a, b) => b.mw - a.mw),
+      assetBuckets: Object.entries(assetBuckets)
+        .map(([label, v]) => ({ label, ...v }))
+        .filter(b => b.count > 0),
+      sizeBuckets: sizeBuckets.filter(b => b.count > 0),
+      companyBuckets: Array.from(companyBuckets.entries())
+        .map(([category, v]) => ({ category, ...v }))
+        .sort((a, b) => b.mw - a.mw),
+    }
+  }, [])
+
   // Timeline rows: each cohort entry with all three candidate years.
   // Sort key adjusts by anchor — sort by the LEFT-edge year for visual order.
   const timelineRows = useMemo(() => {
@@ -5152,7 +5261,7 @@ function NSWWindTab() {
   // Shareable commentary text (one source of truth — used by both copy + PDF)
   const commentaryText = `NSW Wind & CIS/LTESA — Snapshot (${new Date().toISOString().slice(0, 10)})
 
-CIS Tender 7 results landed 23 May 2026. NSW filled its 8-project state quota — three of those are wind: Origin's Yanco Delta (1,450 MW, NSW + EPBC approved 2023/2024), Goldwind's Baldin / Baldon Stage 2 (346 MW wind+battery, awaiting IPC), and BayWa r.e.'s Bullewah Stage 1 (283 MW, capped by SW REZ access right of ~804 MW total project). Total NSW wind awarded today: ${Math.round(t7NswWindAwarded).toLocaleString()} MW. Yanco Delta is now Australia's biggest single wind project.
+CIS Tender 7 results landed 23 May 2026. All 19 winners now named in the DCCEEW media release (24 May): 7.83 GW total across NSW 9 · QLD 5 · TAS 2 · VIC 2 · SA 1. NSW received 9 projects (1 over the 8-project state quota — Wattle Creek Solar Hybrid added late). Three wind winners in NSW: Origin's Yanco Delta (1,498 MW, EPBC approved 2023/2024), Goldwind's Baldin / Baldon Stage 2 (346 MW wind+BESS, awaiting IPC), and BayWa r.e.'s Bullewah Stage 1 (300 MW, capped by SW REZ access right of ~804 MW total project). Total NSW wind awarded: ${Math.round(t7NswWindAwarded).toLocaleString()} MW. Yanco Delta is now Australia's biggest single wind project.
 
 Cumulative cohort. Across CIS T1, T4, T7 and LTESA R1, R3, R4, twelve NSW wind/hybrid projects hold a scheme contract — totalling **~6.3 GW** of scheme-awarded capacity on a like-for-like Stage 1 basis (Liverpool Range Stage 1 634 MW of 1.3 GW approved; Uungula 200 MW LTESA contracted of 414 MW; Bullewah 283 MW access right of ~804 MW; Thunderbolt 192 MW Stage 1 IPC). The 12 projects span 9 with planning approval, 1 in construction (Uungula), 1 operational (Flyers Creek), and 2 awaiting IPC (Baldin, Bullewah, Dinawan wind Stage 1, Junction Rivers — the last of which also recently lost its SW REZ access right, a material headwind).
 
@@ -5265,6 +5374,94 @@ Key risks to the 6.3 GW total. Junction Rivers' lost SW REZ access raises real q
               {p.notes && <p className="text-[10px] text-[var(--color-text-muted)] mt-2 leading-snug italic">{p.notes}</p>}
             </div>
           ))}
+        </div>
+      </section>
+
+      {/* ============================================================ */}
+      {/* Section 1B — All 19 T7 winners analysis                       */}
+      {/* ============================================================ */}
+      <section>
+        <div className="flex items-baseline justify-between mb-3">
+          <h2 className="text-lg font-semibold text-[var(--color-text)]">CIS T7 — All 19 Winners (NEM-wide)</h2>
+          <span className="text-xs text-[var(--color-text-muted)]">{t7Analysis.totalProjects} projects · {fmtMW(t7Analysis.totalMw)} · {t7Analysis.totalStorageMwh > 0 ? `${(t7Analysis.totalStorageMwh / 1000).toFixed(1)} GWh storage` : ''}</span>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+          {/* By state */}
+          <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl p-4">
+            <div className="text-[10px] uppercase tracking-wide text-[var(--color-text-muted)] mb-2">By state</div>
+            <div className="space-y-1.5">
+              {t7Analysis.byState.map(s => (
+                <div key={s.state} className="flex items-center text-xs">
+                  <span className="w-12 text-[var(--color-text)] font-medium">{s.state}</span>
+                  <div className="flex-1 mx-2 h-2 bg-white/5 rounded-full overflow-hidden">
+                    <div className="h-full" style={{ width: `${(s.mw / t7Analysis.totalMw) * 100}%`, backgroundColor: '#3b82f6' }} />
+                  </div>
+                  <span className="text-[var(--color-text-muted)] tabular-nums w-24 text-right">{s.count} proj · {fmtMW(s.mw)}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* By asset type */}
+          <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl p-4">
+            <div className="text-[10px] uppercase tracking-wide text-[var(--color-text-muted)] mb-2">By asset type</div>
+            <div className="space-y-1.5">
+              {t7Analysis.assetBuckets.map(b => (
+                <div key={b.label} className="flex items-center text-xs">
+                  <span className="w-32 text-[var(--color-text)]">{b.label}</span>
+                  <div className="flex-1 mx-2 h-2 bg-white/5 rounded-full overflow-hidden">
+                    <div className="h-full" style={{ width: `${(b.mw / t7Analysis.totalMw) * 100}%`, backgroundColor: b.color }} />
+                  </div>
+                  <span className="text-[var(--color-text-muted)] tabular-nums w-24 text-right">{b.count} proj · {fmtMW(b.mw)}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* By size band */}
+          <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl p-4">
+            <div className="text-[10px] uppercase tracking-wide text-[var(--color-text-muted)] mb-2">By project size</div>
+            <div className="space-y-1.5">
+              {t7Analysis.sizeBuckets.map(b => (
+                <div key={b.label} className="flex items-center text-xs">
+                  <span className="w-40 text-[var(--color-text)]">{b.label}</span>
+                  <div className="flex-1 mx-2 h-2 bg-white/5 rounded-full overflow-hidden">
+                    <div className="h-full" style={{ width: `${(b.mw / t7Analysis.totalMw) * 100}%`, backgroundColor: b.color }} />
+                  </div>
+                  <span className="text-[var(--color-text-muted)] tabular-nums w-24 text-right">{b.count} proj · {fmtMW(b.mw)}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* By company type */}
+          <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl p-4">
+            <div className="text-[10px] uppercase tracking-wide text-[var(--color-text-muted)] mb-2">By company type</div>
+            <div className="space-y-1.5">
+              {t7Analysis.companyBuckets.map(b => (
+                <div key={b.category} className="flex items-center text-xs">
+                  <span className="w-44 text-[var(--color-text)] truncate" title={b.category}>{b.category}</span>
+                  <div className="flex-1 mx-2 h-2 bg-white/5 rounded-full overflow-hidden">
+                    <div className="h-full" style={{ width: `${(b.mw / t7Analysis.totalMw) * 100}%`, backgroundColor: '#8b5cf6' }} />
+                  </div>
+                  <span className="text-[var(--color-text-muted)] tabular-nums w-24 text-right">{b.count} proj · {fmtMW(b.mw)}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Insights callout */}
+        <div className="mt-3 bg-[var(--color-bg-card)] border border-amber-500/30 rounded-xl p-4 text-xs leading-relaxed text-[var(--color-text-muted)]">
+          <div className="font-semibold text-amber-300 mb-1">Insights</div>
+          <ul className="list-disc pl-5 space-y-1">
+            <li><strong className="text-[var(--color-text)]">NSW dominated</strong> with 9 of 19 projects — one project (Wattle Creek Solar Hybrid) over the 8-project state quota</li>
+            <li><strong className="text-[var(--color-text)]">Three mega-projects</strong> (≥1 GW) carry 47% of the capacity: Yanco Delta (1.5 GW wind), Bungaban (1.15 GW wind+BESS), Theodore (1.0 GW wind)</li>
+            <li><strong className="text-[var(--color-text)]">Construction conglomerates</strong> took 5 of 19 winners (Grupo Cobra ×2, Gamuda ×2, ICA Partners) — a notable foreign-EPC presence as Australian developers face capital constraints</li>
+            <li><strong className="text-[var(--color-text)]">Planning execution risk</strong>: only Yanco Delta is EPBC-approved among the 19. Most are EPBC-submitted or earlier — the 14-month CISA execution window is tight</li>
+            <li><strong className="text-[var(--color-text)]">Hybrid skew toward solar</strong>: 6 of 8 hybrids are solar+BESS; only 2 are wind+BESS (Baldin and Bungaban)</li>
+          </ul>
         </div>
       </section>
 

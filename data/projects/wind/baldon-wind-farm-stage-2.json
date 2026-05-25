@@ -13,7 +13,7 @@
   "has_statcom": false,
   "has_harmonic_filter": false,
   "data_confidence": "medium",
-  "last_updated": "2026-05-23",
+  "last_updated": "2026-05-25",
   "last_verified": "2026-05-23",
   "aemo_gen_info_id": "2595",
   "timeline": [
@@ -22,9 +22,14 @@
       "date_precision": "day",
       "event_type": "offtake_signed",
       "title": "CIS Tender 7 underwriting awarded (346 MW wind + BESS)",
-      "detail": "Goldwind's Baldin / Baldon Stage 2 wins CIS Tender 7 underwriting — 346 MW wind paired with battery in the CIS bid. RenewEconomy article refers to the project as 'Baldin'; the AEMO project ID is 'Baldon Wind Farm Stage 2'.",
+      "detail": "Goldwind's Baldin / Baldon Stage 2 wins CIS Tender 7 underwriting \u2014 346 MW wind paired with battery in the CIS bid. RenewEconomy article refers to the project as 'Baldin'; the AEMO project ID is 'Baldon Wind Farm Stage 2'.",
       "sources": [
-        { "title": "Australia's biggest wind project among 19 winners (RenewEconomy)", "url": "https://reneweconomy.com.au/australias-biggest-wind-project-and-8-battery-hybrids-among-19-winners-of-largest-renewable-auction-to-date/", "date": "2026-05-23", "source_tier": 2 }
+        {
+          "title": "Australia's biggest wind project among 19 winners (RenewEconomy)",
+          "url": "https://reneweconomy.com.au/australias-biggest-wind-project-and-8-battery-hybrids-among-19-winners-of-largest-renewable-auction-to-date/",
+          "date": "2026-05-23",
+          "source_tier": 2
+        }
       ]
     },
     {
@@ -43,10 +48,11 @@
   "scheme_contracts": [
     {
       "scheme": "CIS",
-      "round": "Tender 7 — NEM Generation",
+      "round": "Tender 7 \u2014 NEM Generation",
       "capacity_mw": 346,
-      "contract_type": "CISA (federal underwriting) — wind + BESS hybrid bid",
-      "source_url": "https://reneweconomy.com.au/australias-biggest-wind-project-and-8-battery-hybrids-among-19-winners-of-largest-renewable-auction-to-date/"
+      "contract_type": "CISA (federal underwriting) \u2014 wind + BESS hybrid bid",
+      "source_url": "https://reneweconomy.com.au/australias-biggest-wind-project-and-8-battery-hybrids-among-19-winners-of-largest-renewable-auction-to-date/",
+      "storage_mwh": 132
     }
   ],
   "cost_sources": [],
@@ -58,7 +64,7 @@
       "status": "tracking"
     },
     {
-      "issue": "Project name inconsistency — Baldin vs Baldon",
+      "issue": "Project name inconsistency \u2014 Baldin vs Baldon",
       "detail": "RenewEconomy 2026-05-23 article refers to the project as 'Baldin'; AEMO Generation Information uses 'Baldon Wind Farm Stage 2'. Same Goldwind project, different spellings in the public record.",
       "date": "2026-05-23",
       "status": "tracking"

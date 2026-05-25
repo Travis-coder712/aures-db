@@ -14,15 +14,46 @@
   "has_statcom": false,
   "has_harmonic_filter": false,
   "data_confidence": "low",
-  "last_updated": "2026-03-10",
-  "last_verified": "2026-03-10",
+  "last_updated": "2026-05-25",
+  "last_verified": "2026-05-25",
   "aemo_gen_info_id": "2635",
-  "timeline": [],
+  "timeline": [
+    {
+      "date": "2026-05-23",
+      "date_precision": "day",
+      "event_type": "offtake_signed",
+      "title": "CIS Tender 7 underwriting awarded (180 MW + 720 MWh)",
+      "detail": "180 MW solar + 720 MWh BESS \u2014 solar+BESS component of the broader Wattle Creek Energy Hub (separate 350 MW standalone BESS not under this CIS).",
+      "sources": [
+        {
+          "title": "New projects to deliver 7.8 GW of clean energy (DCCEEW)",
+          "url": "https://www.dcceew.gov.au/about/news/new-projects-deliver-7-8-gw-clean-energy",
+          "date": "2026-05-24",
+          "source_tier": 1
+        },
+        {
+          "title": "Australia's biggest wind project and 8 battery hybrids among 19 winners (RenewEconomy)",
+          "url": "https://reneweconomy.com.au/australias-biggest-wind-project-and-8-battery-hybrids-among-19-winners-of-largest-renewable-auction-to-date/",
+          "date": "2026-05-23",
+          "source_tier": 2
+        }
+      ]
+    }
+  ],
   "ownership_history": [],
   "cod_history": [],
   "suppliers": [],
   "offtakes": [],
-  "scheme_contracts": [],
+  "scheme_contracts": [
+    {
+      "scheme": "CIS",
+      "round": "Tender 7 \u2014 NEM Generation",
+      "capacity_mw": 180,
+      "contract_type": "CISA (federal underwriting)",
+      "source_url": "https://www.dcceew.gov.au/about/news/new-projects-deliver-7-8-gw-clean-energy",
+      "storage_mwh": 720
+    }
+  ],
   "cost_sources": [],
   "stakeholder_issues": [],
   "sources": [

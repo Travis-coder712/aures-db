@@ -14,7 +14,7 @@
   "has_statcom": false,
   "has_harmonic_filter": false,
   "data_confidence": "medium",
-  "last_updated": "2026-05-23",
+  "last_updated": "2026-05-25",
   "last_verified": "2026-05-23",
   "aemo_gen_info_id": "1924",
   "timeline": [
@@ -22,20 +22,30 @@
       "date": "2025-10-09",
       "date_precision": "day",
       "event_type": "offtake_signed",
-      "title": "CIS Tender 4 underwriting — Stage 1 wind (357 MW)",
+      "title": "CIS Tender 4 underwriting \u2014 Stage 1 wind (357 MW)",
       "detail": "Dinawan Energy Hub Stage 1 wind component wins CIS Tender 4 underwriting (357 MW).",
       "sources": [
-        { "title": "CIS Tender 4 to deliver 6.6GW (DCCEEW)", "url": "https://www.dcceew.gov.au/about/news/cis-tender-4-deliver-6-6gw-clean-energy", "date": "2025-10-09", "source_tier": 1 }
+        {
+          "title": "CIS Tender 4 to deliver 6.6GW (DCCEEW)",
+          "url": "https://www.dcceew.gov.au/about/news/cis-tender-4-deliver-6-6gw-clean-energy",
+          "date": "2025-10-09",
+          "source_tier": 1
+        }
       ]
     },
     {
       "date": "2026-05-23",
       "date_precision": "day",
       "event_type": "offtake_signed",
-      "title": "CIS Tender 7 underwriting — solar+BESS component",
-      "detail": "Dinawan Energy Hub's solar+BESS component additionally wins CIS Tender 7 underwriting. Capacity not disclosed in the initial RenewEconomy article — refresh once DCCEEW publishes full numbers. Project remains awaiting IPC determination.",
+      "title": "CIS Tender 7 underwriting \u2014 solar+BESS component",
+      "detail": "Dinawan Energy Hub's solar+BESS component additionally wins CIS Tender 7 underwriting. Capacity not disclosed in the initial RenewEconomy article \u2014 refresh once DCCEEW publishes full numbers. Project remains awaiting IPC determination.",
       "sources": [
-        { "title": "Australia's biggest wind project among 19 winners (RenewEconomy)", "url": "https://reneweconomy.com.au/australias-biggest-wind-project-and-8-battery-hybrids-among-19-winners-of-largest-renewable-auction-to-date/", "date": "2026-05-23", "source_tier": 2 }
+        {
+          "title": "Australia's biggest wind project among 19 winners (RenewEconomy)",
+          "url": "https://reneweconomy.com.au/australias-biggest-wind-project-and-8-battery-hybrids-among-19-winners-of-largest-renewable-auction-to-date/",
+          "date": "2026-05-23",
+          "source_tier": 2
+        }
       ]
     }
   ],
@@ -46,16 +56,18 @@
   "scheme_contracts": [
     {
       "scheme": "CIS",
-      "round": "Tender 4 — NEM Generation (Stage 1 wind)",
+      "round": "Tender 4 \u2014 NEM Generation (Stage 1 wind)",
       "capacity_mw": 357,
       "contract_type": "CISA (federal underwriting)",
       "source_url": "https://www.dcceew.gov.au/about/news/cis-tender-4-deliver-6-6gw-clean-energy"
     },
     {
       "scheme": "CIS",
-      "round": "Tender 7 — NEM Generation (solar+BESS)",
-      "contract_type": "CISA (federal underwriting) — capacity not disclosed in initial article",
-      "source_url": "https://reneweconomy.com.au/australias-biggest-wind-project-and-8-battery-hybrids-among-19-winners-of-largest-renewable-auction-to-date/"
+      "round": "Tender 7 \u2014 NEM Generation (solar+BESS)",
+      "contract_type": "CISA (federal underwriting) \u2014 capacity not disclosed in initial article",
+      "source_url": "https://reneweconomy.com.au/australias-biggest-wind-project-and-8-battery-hybrids-among-19-winners-of-largest-renewable-auction-to-date/",
+      "capacity_mw": 300,
+      "storage_mwh": 1200
     }
   ],
   "cost_sources": [],

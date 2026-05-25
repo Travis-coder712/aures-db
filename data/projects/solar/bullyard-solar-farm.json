@@ -13,15 +13,45 @@
   "has_statcom": false,
   "has_harmonic_filter": false,
   "data_confidence": "low",
-  "last_updated": "2026-03-10",
-  "last_verified": "2026-03-10",
+  "last_updated": "2026-05-25",
+  "last_verified": "2026-05-25",
   "aemo_gen_info_id": "2125",
-  "timeline": [],
+  "timeline": [
+    {
+      "date": "2026-05-23",
+      "date_precision": "day",
+      "event_type": "offtake_signed",
+      "title": "CIS Tender 7 underwriting awarded (97 MW)",
+      "detail": "Solar-only \u2014 97 MW awarded under CIS T7 (DCCEEW announcement). European Energy Australia's second T7 win.",
+      "sources": [
+        {
+          "title": "New projects to deliver 7.8 GW of clean energy (DCCEEW)",
+          "url": "https://www.dcceew.gov.au/about/news/new-projects-deliver-7-8-gw-clean-energy",
+          "date": "2026-05-24",
+          "source_tier": 1
+        },
+        {
+          "title": "Australia's biggest wind project and 8 battery hybrids among 19 winners (RenewEconomy)",
+          "url": "https://reneweconomy.com.au/australias-biggest-wind-project-and-8-battery-hybrids-among-19-winners-of-largest-renewable-auction-to-date/",
+          "date": "2026-05-23",
+          "source_tier": 2
+        }
+      ]
+    }
+  ],
   "ownership_history": [],
   "cod_history": [],
   "suppliers": [],
   "offtakes": [],
-  "scheme_contracts": [],
+  "scheme_contracts": [
+    {
+      "scheme": "CIS",
+      "round": "Tender 7 \u2014 NEM Generation",
+      "capacity_mw": 97,
+      "contract_type": "CISA (federal underwriting)",
+      "source_url": "https://www.dcceew.gov.au/about/news/new-projects-deliver-7-8-gw-clean-energy"
+    }
+  ],
   "cost_sources": [],
   "stakeholder_issues": [],
   "sources": [
