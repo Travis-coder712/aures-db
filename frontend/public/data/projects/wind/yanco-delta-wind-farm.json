@@ -9,6 +9,7 @@
   "current_developer": "Origin Energy (acquired from Virya Energy)",
   "cod_current": "2029-12-31",
   "cod_original": "2029-12-31",
+  "connection_status": "proposed",
   "grid_forming": false,
   "has_sips": false,
   "has_syncon": false,
@@ -16,7 +17,7 @@
   "has_harmonic_filter": false,
   "notable": "1.5 GW wind (208 turbines, 270m tip) + 800 MWh BESS. 33,000 ha site 10 km NW of Jerilderie in SW REZ. ~$4B project. 1,460 MW transmission access secured. FID target mid-FY2027.",
   "data_confidence": "medium",
-  "last_updated": "2026-05-23",
+  "last_updated": "2026-05-25",
   "last_verified": "2026-05-23",
   "aemo_gen_info_id": "2266",
   "confidence_score": "49",
@@ -56,7 +57,7 @@
     {
       "scheme": "CIS",
       "round": "Tender 7 \u2014 NEM Generation",
-      "capacity_mw": 1450,
+      "capacity_mw": 1498,
       "contract_type": "CISA (federal underwriting)",
       "source_url": "https://reneweconomy.com.au/australias-biggest-wind-project-and-8-battery-hybrids-among-19-winners-of-largest-renewable-auction-to-date/"
     }

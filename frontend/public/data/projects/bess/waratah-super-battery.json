@@ -11,7 +11,7 @@
   "current_operator": "Akaysha Energy",
   "cod_current": "2024-11",
   "cod_original": "2025",
-  "connection_status": "Connected",
+  "connection_status": "operating",
   "connection_nsp": "Transgrid",
   "grid_forming": false,
   "has_sips": true,
@@ -158,12 +158,52 @@
   ],
   "scheme_contracts": [
     {
-      "scheme": "NSW SIPS",
-      "round": "",
-      "capacity_mw": 850.0,
-      "storage_mwh": 1680.0,
-      "contract_type": "SIPS total revenue $705.2M/5yr (Jul 2024-Jun 2029): battery service >$600M + network augmentation ~$104M",
-      "source_url": "https://www.aer.gov.au/industry/registers/determinations/waratah-super-battery-total-revenue"
+      "scheme": "NSW SIPS (System Integrity Protection Scheme)",
+      "type": "SIPS battery service \u2014 availability payment",
+      "awarding_body": "EnergyCo (NSW) / Transgrid (counterparty)",
+      "regulator": "AER",
+      "total_aer_revenue_all_components": "$705.2M nominal (5yr, 2024-2029)",
+      "revenue_breakdown": {
+        "transgrid_network_and_control": "~$105M (non-contestable \u2014 line raising, substation upgrades, SIPS control system)",
+        "battery_plus_paired_generators": "~$600M+ (contestable \u2014 split between Akaysha and paired generators is redacted as commercially confidential)",
+        "average_annual_contestable": ">$110M/year from 2025/26"
+      },
+      "contract_start": "2022-12",
+      "revenue_period": "2024/25 to ~2030/31",
+      "payment_structure": "Quarterly availability payments from Scheme Financial Vehicle \u2192 Transgrid \u2192 Akaysha. Revenue reduced when battery unavailable.",
+      "funding_chain": "NSW electricity consumers \u2192 distributors (Ausgrid, Endeavour, Essential) \u2192 Scheme Financial Vehicle \u2192 Transgrid \u2192 service providers",
+      "legislative_basis": "Electricity Infrastructure Investment (EII) Act \u2014 Priority Transmission Infrastructure Project (PTIP)",
+      "sips_service_description": "Battery must maintain guaranteed continuous active power capacity \u2265700 MW and useable energy storage \u22651,400 MWh. Provides instant discharge when SIPS control system signals a network contingency, enabling transmission lines to run at higher capacity. Paired generators simultaneously ramp down to prevent overloads.",
+      "transparency_note": "The AER has redacted the specific payment split between Akaysha (battery) and paired generators as commercially sensitive. Only the aggregated contestable total and the non-contestable Transgrid amount are public.",
+      "revenue_adjustments": [
+        {
+          "date": "2025-03-28",
+          "reason": "Commissioning delays and transformer failure",
+          "outcome": "AER approved reduction to SIPS battery service payments (amount redacted)"
+        }
+      ],
+      "sources": [
+        {
+          "title": "AER \u2014 Waratah Super Battery Total Revenue",
+          "url": "https://www.aer.gov.au/industry/registers/determinations/waratah-super-battery-total-revenue",
+          "source_tier": 1
+        },
+        {
+          "title": "AER \u2014 SIPS Battery Service Determination",
+          "url": "https://www.aer.gov.au/industry/registers/determinations/waratah-super-battery-sips-battery-service",
+          "source_tier": 1
+        },
+        {
+          "title": "AER \u2014 Network Augmentation and SIPS Control System",
+          "url": "https://www.aer.gov.au/industry/registers/determinations/waratah-super-battery-network-augmentation-and-sips-control-system",
+          "source_tier": 1
+        },
+        {
+          "title": "AER \u2014 Paired Generation Services",
+          "url": "https://www.aer.gov.au/industry/registers/determinations/waratah-super-battery-paired-generation-services",
+          "source_tier": 1
+        }
+      ]
     }
   ],
   "cost_sources": [],

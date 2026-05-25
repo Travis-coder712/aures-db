@@ -10,14 +10,15 @@
   "current_developer": "Akaysha Energy (BlackRock)",
   "cod_current": "2026-06-30",
   "cod_original": "2026-06-30",
+  "connection_status": "committed",
   "grid_forming": false,
   "has_sips": false,
   "has_syncon": false,
   "has_statcom": false,
   "has_harmonic_filter": false,
   "notable": "Tesla Megapack. A$650M debt financing (largest BESS financing globally at time). NSW LTESA + CIS double winner.",
-  "data_confidence": "low",
-  "last_updated": "2026-03-10",
+  "data_confidence": "medium",
+  "last_updated": "2026-05-25",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "2015",
   "confidence_score": "70",
@@ -93,20 +94,20 @@
   "offtakes": [],
   "scheme_contracts": [
     {
-      "scheme": "NSW LTESA",
-      "round": "Round 2",
-      "capacity_mw": 415.0,
-      "storage_mwh": 1662.0,
-      "contract_type": "ltesa",
-      "source_url": "https://akayshaenergy.com/projects/orana-bess"
+      "scheme": "CIS",
+      "round": "Pilot \u2014 NSW",
+      "capacity_mw": 460,
+      "storage_mwh": 920,
+      "source_url": "https://www.nsw.gov.au/media-releases/big-boost-to-reliable-renewables-nsw",
+      "contract_type": "CISA (federal underwriting)"
     },
     {
-      "scheme": "CIS",
-      "round": "Tender 1",
-      "capacity_mw": 415.0,
-      "storage_mwh": 1662.0,
-      "contract_type": "cis",
-      "source_url": "https://akayshaenergy.com/projects/orana-bess"
+      "scheme": "LTESA",
+      "round": "Round 2 \u2014 Firming",
+      "capacity_mw": 415,
+      "storage_mwh": 1660,
+      "source_url": "https://aemoservices.com.au/en/news/media-release/231122-nsw-tender-for-firming-capacity-exceeds-expectations",
+      "contract_type": "LTESA (NSW Crown counterparty)"
     }
   ],
   "cost_sources": [],

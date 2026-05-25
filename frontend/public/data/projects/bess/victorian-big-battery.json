@@ -11,7 +11,7 @@
   "current_operator": "HMC Capital",
   "cod_current": "2022-01",
   "cod_original": "Q3 2021",
-  "connection_status": "Connected",
+  "connection_status": "operating",
   "connection_nsp": "AusNet Services",
   "grid_forming": true,
   "has_sips": false,
@@ -168,16 +168,7 @@
       "source_url": "https://reneweconomy.com.au/victorian-big-battery/"
     }
   ],
-  "scheme_contracts": [
-    {
-      "scheme": "VIC SIPS",
-      "round": "",
-      "capacity_mw": 250.0,
-      "storage_mwh": 450.0,
-      "contract_type": "SIPS service ($12.5M/yr to 2032)",
-      "source_url": "https://wattclarity.com.au/articles/2024/03/vbb-and-sips/"
-    }
-  ],
+  "scheme_contracts": [],
   "cost_sources": [],
   "stakeholder_issues": [
     "Megapack fire July 2021"

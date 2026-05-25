@@ -9,6 +9,7 @@
   "current_developer": "FRV Australia (Abdul Latif Jameel / OMERS)",
   "cod_current": "2027-11-30",
   "cod_original": "2027-11-30",
+  "connection_status": "committed",
   "grid_forming": true,
   "has_sips": false,
   "has_syncon": false,
@@ -75,16 +76,7 @@
     }
   ],
   "offtakes": [],
-  "scheme_contracts": [
-    {
-      "scheme": "ARENA",
-      "round": "",
-      "capacity_mw": 250.0,
-      "storage_mwh": 500.0,
-      "contract_type": "grant",
-      "source_url": "https://arena.gov.au/projects/gnarwarre-bess-project/"
-    }
-  ],
+  "scheme_contracts": [],
   "cost_sources": [],
   "stakeholder_issues": [],
   "eis_specs": {

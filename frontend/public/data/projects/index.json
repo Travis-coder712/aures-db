@@ -447,7 +447,8 @@
     "data_confidence": "low",
     "confidence_score": "23",
     "development_stage": "planning_submitted",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "has_scheme_contract": true
   },
   {
     "id": "bango-973-wind-farm",
@@ -5351,7 +5352,8 @@
     "data_confidence": "medium",
     "confidence_score": "28",
     "development_stage": "planning_submitted",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "has_scheme_contract": true
   },
   {
     "id": "gundary-standalone-bess-kci",
@@ -13422,7 +13424,8 @@
     "data_confidence": "medium",
     "confidence_score": "36",
     "development_stage": "epbc_submitted",
-    "first_seen": "2024"
+    "first_seen": "2024",
+    "has_scheme_contract": true
   },
   {
     "id": "wattle-point",

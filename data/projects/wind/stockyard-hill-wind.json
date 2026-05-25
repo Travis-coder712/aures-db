@@ -10,7 +10,7 @@
   "current_operator": "Goldwind Australia",
   "cod_current": "2021-12",
   "cod_original": "2020",
-  "connection_status": "Connected",
+  "connection_status": "operating",
   "connection_nsp": "AusNet Services",
   "grid_forming": false,
   "has_sips": false,
@@ -55,7 +55,7 @@
       "date": "2021-12-01",
       "date_precision": "month",
       "event_type": "cod",
-      "title": "Full commercial operations \u2014 530 MW",
+      "title": "Full commercial operations — 530 MW",
       "detail": "Australia's largest wind farm at time of commissioning. 149 Goldwind turbines.",
       "sources": [
         {

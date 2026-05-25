@@ -9,13 +9,14 @@
   "current_developer": "Alinta Energy (Reeves Plains) Pty Ltd",
   "cod_current": "2028-02-29",
   "cod_original": "2028-02-29",
+  "connection_status": "anticipated",
   "grid_forming": false,
   "has_sips": false,
   "has_syncon": false,
   "has_statcom": false,
   "has_harmonic_filter": false,
   "data_confidence": "good",
-  "last_updated": "2026-04-16",
+  "last_updated": "2026-05-25",
   "last_verified": "2026-04-16",
   "aemo_gen_info_id": "2906",
   "confidence_score": "28",
@@ -65,6 +66,14 @@
       "round": "CIS Investment",
       "capacity_contracted_mw": 250.0,
       "notes": "CIS underwriting agreement secured from Commonwealth Government for Stage 1 BESS."
+    },
+    {
+      "scheme": "CIS",
+      "round": "Tender 3 \u2014 NEM Dispatchable",
+      "capacity_mw": 250,
+      "storage_mwh": 1000,
+      "source_url": "https://reneweconomy.com.au/bowen-names-16-winners-of-australias-biggest-battery-storage-tender/",
+      "contract_type": "CISA (federal underwriting)"
     }
   ],
   "cost_sources": [],

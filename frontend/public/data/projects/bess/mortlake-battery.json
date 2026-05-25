@@ -9,14 +9,15 @@
   "current_developer": "Origin Energy",
   "cod_current": "2026-07-31",
   "cod_original": "2026-07-31",
+  "connection_status": "committed",
   "grid_forming": true,
   "has_sips": false,
   "has_syncon": false,
   "has_statcom": false,
   "has_harmonic_filter": false,
   "notable": "Fluence Gridstack with SMA grid-forming inverters. A$400M. ARENA A$24M grant.",
-  "data_confidence": "low",
-  "last_updated": "2026-03-10",
+  "data_confidence": "medium",
+  "last_updated": "2026-05-25",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "1882",
   "confidence_score": "67",
@@ -79,12 +80,12 @@
   "offtakes": [],
   "scheme_contracts": [
     {
-      "scheme": "ARENA",
-      "round": "",
-      "capacity_mw": 300.0,
-      "storage_mwh": 650.0,
-      "contract_type": "grant",
-      "source_url": "https://arena.gov.au/news/origin-issues-notice-to-proceed-on-300-mw-grid-forming-battery-at-mortlake/"
+      "scheme": "CIS",
+      "round": "Pilot \u2014 SA / VIC",
+      "capacity_mw": 135,
+      "storage_mwh": 270,
+      "source_url": "https://www.dcceew.gov.au/about/news/capacity-investment-scheme-supports-6-new-projects-vic-sa",
+      "contract_type": "CISA (federal underwriting)"
     }
   ],
   "cost_sources": [],

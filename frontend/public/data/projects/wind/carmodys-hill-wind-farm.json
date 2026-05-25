@@ -8,14 +8,15 @@
   "current_developer": "Aula Energy",
   "cod_current": "2029-01-01",
   "cod_original": "2029-01-01",
+  "connection_status": "committed",
   "grid_forming": false,
   "has_sips": false,
   "has_syncon": false,
   "has_statcom": false,
   "has_harmonic_filter": false,
   "notable": "42x GE Vernova 6.1-158. Aula Energy (Macquarie). DT Infrastructure civil. A$900M. COD 2028.",
-  "data_confidence": "low",
-  "last_updated": "2026-03-10",
+  "data_confidence": "medium",
+  "last_updated": "2026-05-25",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "1040",
   "confidence_score": "65",
@@ -97,10 +98,10 @@
   "scheme_contracts": [
     {
       "scheme": "CIS",
-      "round": "Tender 4",
-      "capacity_mw": 256.0,
-      "contract_type": "cis",
-      "source_url": "https://www.dcceew.gov.au/energy/renewable/capacity-investment-scheme/closed-cis-tenders"
+      "round": "Tender 4 \u2014 NEM Generation",
+      "capacity_mw": 247,
+      "source_url": "https://www.dcceew.gov.au/about/news/cis-tender-4-deliver-6-6gw-clean-energy",
+      "contract_type": "CISA (federal underwriting)"
     }
   ],
   "cost_sources": [],

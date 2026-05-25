@@ -9,6 +9,7 @@
   "current_developer": "AGL Energy",
   "cod_current": "2026-02-20",
   "cod_original": "2026-02-20",
+  "connection_status": "committed",
   "grid_forming": true,
   "has_sips": false,
   "has_syncon": false,
@@ -16,7 +17,7 @@
   "has_harmonic_filter": false,
   "notable": "Fluence Gridstack with grid-forming inverters. A$750M. ARENA A$35M grant. NSW LTESA Round 2.",
   "data_confidence": "good",
-  "last_updated": "2026-04-16",
+  "last_updated": "2026-05-25",
   "last_verified": "2026-04-16",
   "aemo_gen_info_id": "2171",
   "confidence_score": "70",
@@ -85,20 +86,12 @@
   "offtakes": [],
   "scheme_contracts": [
     {
-      "scheme": "ARENA",
-      "round": "",
-      "capacity_mw": 500.0,
-      "storage_mwh": 1000.0,
-      "contract_type": "grant",
-      "source_url": "https://arena.gov.au/projects/agl-liddell-large-scale-battery-with-advanced-inverters-deployment-project/"
-    },
-    {
-      "scheme": "NSW LTESA",
-      "round": "Round 2",
-      "capacity_mw": 500.0,
-      "storage_mwh": 1000.0,
-      "contract_type": "ltesa",
-      "source_url": "https://www.agl.com.au/about-agl/operations/liddell-battery"
+      "scheme": "CIS",
+      "round": "Pilot \u2014 NSW",
+      "capacity_mw": 500,
+      "storage_mwh": 1000,
+      "source_url": "https://www.nsw.gov.au/media-releases/big-boost-to-reliable-renewables-nsw",
+      "contract_type": "CISA (federal underwriting)"
     }
   ],
   "cost_sources": [],

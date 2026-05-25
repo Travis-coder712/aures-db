@@ -69,6 +69,14 @@ OVERLAY_OVERRIDE_FIELDS = frozenset({
     # Specialised
     'performance_score',
     'battery_status',
+    # Connection / NSP details (hand-curated overlay refinements)
+    'connection_status',
+    'connection_nsp',
+    'connection_notes',
+    'connection_date',
+    'aemo_connection_date',
+    # Scheme contracts (CIS / LTESA / SIPS round wins)
+    'scheme_contracts',
 })
 
 

@@ -11,7 +11,7 @@
   "current_operator": "Neoen",
   "cod_current": "2017-12 (Phase 1)",
   "cod_original": "2017-12",
-  "connection_status": "Connected",
+  "connection_status": "operating",
   "connection_nsp": "ElectraNet",
   "grid_forming": false,
   "has_sips": false,
@@ -45,7 +45,7 @@
       "date": "2017-12-01",
       "date_precision": "month",
       "event_type": "cod",
-      "title": "Phase 1 operational \u2014 100 MW / 129 MWh",
+      "title": "Phase 1 operational — 100 MW / 129 MWh",
       "detail": "Completed within the 100-day deadline. At the time, the largest lithium-ion battery in the world.",
       "sources": [
         {

@@ -237,14 +237,8 @@
           "status": "development",
           "stage": "development",
           "cod_current": "2027-06-01",
-          "dev_status": "grid connection pending",
-          "annotations": [
-            {
-              "flag": "grid connection pending",
-              "reason": "No connection application on record",
-              "severity": "medium"
-            }
-          ]
+          "dev_status": "on track",
+          "annotations": []
         }
       ]
     },
@@ -280,13 +274,8 @@
           "status": "development",
           "stage": "development",
           "cod_current": "2029-12-31",
-          "dev_status": "grid connection pending",
+          "dev_status": "environmental pending",
           "annotations": [
-            {
-              "flag": "grid connection pending",
-              "reason": "No connection application on record",
-              "severity": "medium"
-            },
             {
               "flag": "environmental pending",
               "reason": "No EIS lodged and COD > 2027",
@@ -305,13 +294,8 @@
           "status": "development",
           "stage": "development",
           "cod_current": "2029-06-01",
-          "dev_status": "grid connection pending",
+          "dev_status": "environmental pending",
           "annotations": [
-            {
-              "flag": "grid connection pending",
-              "reason": "No connection application on record",
-              "severity": "medium"
-            },
             {
               "flag": "environmental pending",
               "reason": "No EIS lodged and COD > 2027",
@@ -328,14 +312,8 @@
           "state": "NSW",
           "status": "development",
           "stage": "development",
-          "dev_status": "grid connection pending",
-          "annotations": [
-            {
-              "flag": "grid connection pending",
-              "reason": "No connection application on record",
-              "severity": "medium"
-            }
-          ],
+          "dev_status": "on track",
+          "annotations": [],
           "developer_grade": "B"
         },
         {
@@ -349,13 +327,8 @@
           "status": "development",
           "stage": "development",
           "cod_current": "2032-04-30",
-          "dev_status": "grid connection pending",
+          "dev_status": "environmental pending",
           "annotations": [
-            {
-              "flag": "grid connection pending",
-              "reason": "No connection application on record",
-              "severity": "medium"
-            },
             {
               "flag": "environmental pending",
               "reason": "No EIS lodged and COD > 2027",
@@ -385,14 +358,8 @@
           "state": "NSW",
           "status": "development",
           "stage": "development",
-          "dev_status": "grid connection pending",
-          "annotations": [
-            {
-              "flag": "grid connection pending",
-              "reason": "No connection application on record",
-              "severity": "medium"
-            }
-          ],
+          "dev_status": "on track",
+          "annotations": [],
           "developer_grade": "B"
         },
         {
@@ -412,11 +379,6 @@
               "flag": "pre-planning",
               "reason": "Development stage is early \u2014 not in planning yet",
               "severity": "high"
-            },
-            {
-              "flag": "grid connection pending",
-              "reason": "No connection application on record",
-              "severity": "medium"
             }
           ],
           "developer_grade": "B"
@@ -431,13 +393,8 @@
           "status": "development",
           "stage": "development",
           "cod_current": "2030-06-30",
-          "dev_status": "grid connection pending",
+          "dev_status": "environmental pending",
           "annotations": [
-            {
-              "flag": "grid connection pending",
-              "reason": "No connection application on record",
-              "severity": "medium"
-            },
             {
               "flag": "environmental pending",
               "reason": "No EIS lodged and COD > 2027",
@@ -464,11 +421,6 @@
               "severity": "high"
             },
             {
-              "flag": "grid connection pending",
-              "reason": "No connection application on record",
-              "severity": "medium"
-            },
-            {
               "flag": "environmental pending",
               "reason": "No EIS lodged and COD > 2027",
               "severity": "medium"
@@ -486,14 +438,8 @@
           "status": "development",
           "stage": "development",
           "cod_current": "2027-07-31",
-          "dev_status": "grid connection pending",
-          "annotations": [
-            {
-              "flag": "grid connection pending",
-              "reason": "No connection application on record",
-              "severity": "medium"
-            }
-          ],
+          "dev_status": "on track",
+          "annotations": [],
           "developer_grade": "B"
         },
         {
@@ -505,14 +451,8 @@
           "state": "VIC",
           "status": "development",
           "stage": "development",
-          "dev_status": "grid connection pending",
-          "annotations": [
-            {
-              "flag": "grid connection pending",
-              "reason": "No connection application on record",
-              "severity": "medium"
-            }
-          ]
+          "dev_status": "on track",
+          "annotations": []
         },
         {
           "name": "Elaine Solar Farm",
@@ -531,11 +471,6 @@
               "flag": "pre-planning",
               "reason": "Development stage is early \u2014 not in planning yet",
               "severity": "high"
-            },
-            {
-              "flag": "grid connection pending",
-              "reason": "No connection application on record",
-              "severity": "medium"
             }
           ],
           "developer_grade": "B"
@@ -550,14 +485,8 @@
           "state": "VIC",
           "status": "development",
           "stage": "development",
-          "dev_status": "grid connection pending",
-          "annotations": [
-            {
-              "flag": "grid connection pending",
-              "reason": "No connection application on record",
-              "severity": "medium"
-            }
-          ]
+          "dev_status": "on track",
+          "annotations": []
         },
         {
           "name": "Goyder North Wind Farm",
@@ -577,11 +506,6 @@
               "severity": "high"
             },
             {
-              "flag": "grid connection pending",
-              "reason": "No connection application on record",
-              "severity": "medium"
-            },
-            {
               "flag": "environmental pending",
               "reason": "No EIS lodged and COD > 2027",
               "severity": "medium"
@@ -597,14 +521,8 @@
           "state": "SA",
           "status": "development",
           "stage": "development",
-          "dev_status": "grid connection pending",
-          "annotations": [
-            {
-              "flag": "grid connection pending",
-              "reason": "No connection application on record",
-              "severity": "medium"
-            }
-          ],
+          "dev_status": "on track",
+          "annotations": [],
           "developer_grade": "B"
         },
         {
@@ -616,14 +534,8 @@
           "state": "QLD",
           "status": "development",
           "stage": "development",
-          "dev_status": "grid connection pending",
-          "annotations": [
-            {
-              "flag": "grid connection pending",
-              "reason": "No connection application on record",
-              "severity": "medium"
-            }
-          ]
+          "dev_status": "on track",
+          "annotations": []
         },
         {
           "name": "Majors Creek Solar Power Station",
@@ -642,11 +554,6 @@
               "flag": "pre-planning",
               "reason": "Development stage is early \u2014 not in planning yet",
               "severity": "high"
-            },
-            {
-              "flag": "grid connection pending",
-              "reason": "No connection application on record",
-              "severity": "medium"
             },
             {
               "flag": "environmental pending",
@@ -673,11 +580,6 @@
               "flag": "pre-planning",
               "reason": "Development stage is early \u2014 not in planning yet",
               "severity": "high"
-            },
-            {
-              "flag": "grid connection pending",
-              "reason": "No connection application on record",
-              "severity": "medium"
             },
             {
               "flag": "environmental pending",
@@ -826,14 +728,8 @@
           "state": "NSW",
           "status": "development",
           "stage": "development",
-          "dev_status": "grid connection pending",
-          "annotations": [
-            {
-              "flag": "grid connection pending",
-              "reason": "No connection application on record",
-              "severity": "medium"
-            }
-          ]
+          "dev_status": "on track",
+          "annotations": []
         },
         {
           "name": "Swallow Tail BESS",
@@ -845,14 +741,8 @@
           "state": "NSW",
           "status": "development",
           "stage": "development",
-          "dev_status": "grid connection pending",
-          "annotations": [
-            {
-              "flag": "grid connection pending",
-              "reason": "No connection application on record",
-              "severity": "medium"
-            }
-          ]
+          "dev_status": "on track",
+          "annotations": []
         },
         {
           "name": "Calala BESS",
@@ -881,13 +771,8 @@
           "status": "development",
           "stage": "development",
           "cod_current": "2029-08-01",
-          "dev_status": "grid connection pending",
+          "dev_status": "environmental pending",
           "annotations": [
-            {
-              "flag": "grid connection pending",
-              "reason": "No connection application on record",
-              "severity": "medium"
-            },
             {
               "flag": "environmental pending",
               "reason": "No EIS lodged and COD > 2027",
@@ -907,13 +792,8 @@
           "status": "development",
           "stage": "development",
           "cod_current": "2028-10-31",
-          "dev_status": "grid connection pending",
+          "dev_status": "environmental pending",
           "annotations": [
-            {
-              "flag": "grid connection pending",
-              "reason": "No connection application on record",
-              "severity": "medium"
-            },
             {
               "flag": "environmental pending",
               "reason": "No EIS lodged and COD > 2027",
@@ -932,13 +812,8 @@
           "status": "development",
           "stage": "development",
           "cod_current": "2028-12-12",
-          "dev_status": "grid connection pending",
+          "dev_status": "environmental pending",
           "annotations": [
-            {
-              "flag": "grid connection pending",
-              "reason": "No connection application on record",
-              "severity": "medium"
-            },
             {
               "flag": "environmental pending",
               "reason": "No EIS lodged and COD > 2027",
@@ -966,11 +841,6 @@
               "severity": "high"
             },
             {
-              "flag": "grid connection pending",
-              "reason": "No connection application on record",
-              "severity": "medium"
-            },
-            {
               "flag": "environmental pending",
               "reason": "No EIS lodged and COD > 2027",
               "severity": "medium"
@@ -989,13 +859,8 @@
           "status": "development",
           "stage": "development",
           "cod_current": "2028-08-31",
-          "dev_status": "grid connection pending",
+          "dev_status": "environmental pending",
           "annotations": [
-            {
-              "flag": "grid connection pending",
-              "reason": "No connection application on record",
-              "severity": "medium"
-            },
             {
               "flag": "environmental pending",
               "reason": "No EIS lodged and COD > 2027",
@@ -1020,11 +885,6 @@
               "flag": "pre-planning",
               "reason": "Development stage is early \u2014 not in planning yet",
               "severity": "high"
-            },
-            {
-              "flag": "grid connection pending",
-              "reason": "No connection application on record",
-              "severity": "medium"
             },
             {
               "flag": "environmental pending",
@@ -1061,13 +921,8 @@
           "status": "development",
           "stage": "development",
           "cod_current": "2029-04-30",
-          "dev_status": "grid connection pending",
+          "dev_status": "environmental pending",
           "annotations": [
-            {
-              "flag": "grid connection pending",
-              "reason": "No connection application on record",
-              "severity": "medium"
-            },
             {
               "flag": "environmental pending",
               "reason": "No EIS lodged and COD > 2027",
@@ -1086,13 +941,8 @@
           "status": "development",
           "stage": "development",
           "cod_current": "2028-01-01",
-          "dev_status": "grid connection pending",
+          "dev_status": "environmental pending",
           "annotations": [
-            {
-              "flag": "grid connection pending",
-              "reason": "No connection application on record",
-              "severity": "medium"
-            },
             {
               "flag": "environmental pending",
               "reason": "No EIS lodged and COD > 2027",
@@ -1119,11 +969,6 @@
               "severity": "high"
             },
             {
-              "flag": "grid connection pending",
-              "reason": "No connection application on record",
-              "severity": "medium"
-            },
-            {
               "flag": "environmental pending",
               "reason": "No EIS lodged and COD > 2027",
               "severity": "medium"
@@ -1141,13 +986,8 @@
           "status": "development",
           "stage": "development",
           "cod_current": "2028-06-30",
-          "dev_status": "grid connection pending",
+          "dev_status": "environmental pending",
           "annotations": [
-            {
-              "flag": "grid connection pending",
-              "reason": "No connection application on record",
-              "severity": "medium"
-            },
             {
               "flag": "environmental pending",
               "reason": "No EIS lodged and COD > 2027",
@@ -1167,13 +1007,8 @@
           "status": "development",
           "stage": "development",
           "cod_current": "2028-01-01",
-          "dev_status": "grid connection pending",
+          "dev_status": "environmental pending",
           "annotations": [
-            {
-              "flag": "grid connection pending",
-              "reason": "No connection application on record",
-              "severity": "medium"
-            },
             {
               "flag": "environmental pending",
               "reason": "No EIS lodged and COD > 2027",
@@ -1198,11 +1033,6 @@
               "flag": "pre-planning",
               "reason": "Development stage is early \u2014 not in planning yet",
               "severity": "high"
-            },
-            {
-              "flag": "grid connection pending",
-              "reason": "No connection application on record",
-              "severity": "medium"
             },
             {
               "flag": "environmental pending",
@@ -1266,11 +1096,6 @@
           "dev_status": "execution risk",
           "annotations": [
             {
-              "flag": "grid connection pending",
-              "reason": "No connection application on record",
-              "severity": "medium"
-            },
-            {
               "flag": "execution risk",
               "reason": "Developer execution grade: F",
               "severity": "high"
@@ -1288,14 +1113,8 @@
           "state": "SA",
           "status": "development",
           "stage": "development",
-          "dev_status": "grid connection pending",
-          "annotations": [
-            {
-              "flag": "grid connection pending",
-              "reason": "No connection application on record",
-              "severity": "medium"
-            }
-          ]
+          "dev_status": "on track",
+          "annotations": []
         },
         {
           "name": "Carmody's Hill Wind Farm",
@@ -1325,11 +1144,6 @@
           "dev_status": "execution risk",
           "annotations": [
             {
-              "flag": "grid connection pending",
-              "reason": "No connection application on record",
-              "severity": "medium"
-            },
-            {
               "flag": "execution risk",
               "reason": "Developer execution grade: F",
               "severity": "high"
@@ -1348,14 +1162,8 @@
           "status": "development",
           "stage": "development",
           "cod_current": "2027-09-01",
-          "dev_status": "grid connection pending",
-          "annotations": [
-            {
-              "flag": "grid connection pending",
-              "reason": "No connection application on record",
-              "severity": "medium"
-            }
-          ]
+          "dev_status": "on track",
+          "annotations": []
         },
         {
           "name": "Dinawan Wind Farm Stage 1",
@@ -1367,13 +1175,8 @@
           "status": "development",
           "stage": "development",
           "cod_current": "2029-12-01",
-          "dev_status": "grid connection pending",
+          "dev_status": "environmental pending",
           "annotations": [
-            {
-              "flag": "grid connection pending",
-              "reason": "No connection application on record",
-              "severity": "medium"
-            },
             {
               "flag": "environmental pending",
               "reason": "No EIS lodged and COD > 2027",
@@ -1398,11 +1201,6 @@
               "flag": "pre-planning",
               "reason": "Development stage is early \u2014 not in planning yet",
               "severity": "high"
-            },
-            {
-              "flag": "grid connection pending",
-              "reason": "No connection application on record",
-              "severity": "medium"
             },
             {
               "flag": "environmental pending",
@@ -1430,11 +1228,6 @@
               "severity": "high"
             },
             {
-              "flag": "grid connection pending",
-              "reason": "No connection application on record",
-              "severity": "medium"
-            },
-            {
               "flag": "environmental pending",
               "reason": "No EIS lodged and COD > 2027",
               "severity": "medium"
@@ -1452,13 +1245,8 @@
           "status": "development",
           "stage": "development",
           "cod_current": "2030-11-01",
-          "dev_status": "grid connection pending",
+          "dev_status": "environmental pending",
           "annotations": [
-            {
-              "flag": "grid connection pending",
-              "reason": "No connection application on record",
-              "severity": "medium"
-            },
             {
               "flag": "environmental pending",
               "reason": "No EIS lodged and COD > 2027",
@@ -1476,14 +1264,8 @@
           "state": "NSW",
           "status": "development",
           "stage": "development",
-          "dev_status": "grid connection pending",
-          "annotations": [
-            {
-              "flag": "grid connection pending",
-              "reason": "No connection application on record",
-              "severity": "medium"
-            }
-          ],
+          "dev_status": "on track",
+          "annotations": [],
           "developer_grade": "B"
         },
         {
@@ -1504,11 +1286,6 @@
               "severity": "high"
             },
             {
-              "flag": "grid connection pending",
-              "reason": "No connection application on record",
-              "severity": "medium"
-            },
-            {
               "flag": "environmental pending",
               "reason": "No EIS lodged and COD > 2027",
               "severity": "medium"
@@ -1525,14 +1302,8 @@
           "state": "NSW",
           "status": "development",
           "stage": "development",
-          "dev_status": "grid connection pending",
-          "annotations": [
-            {
-              "flag": "grid connection pending",
-              "reason": "No connection application on record",
-              "severity": "medium"
-            }
-          ]
+          "dev_status": "on track",
+          "annotations": []
         },
         {
           "name": "Middlebrook Solar Farm",
@@ -1553,11 +1324,6 @@
               "severity": "high"
             },
             {
-              "flag": "grid connection pending",
-              "reason": "No connection application on record",
-              "severity": "medium"
-            },
-            {
               "flag": "environmental pending",
               "reason": "No EIS lodged and COD > 2027",
               "severity": "medium"
@@ -1574,13 +1340,8 @@
           "status": "development",
           "stage": "development",
           "cod_current": "2028-03-31",
-          "dev_status": "grid connection pending",
+          "dev_status": "environmental pending",
           "annotations": [
-            {
-              "flag": "grid connection pending",
-              "reason": "No connection application on record",
-              "severity": "medium"
-            },
             {
               "flag": "environmental pending",
               "reason": "No EIS lodged and COD > 2027",
@@ -1599,13 +1360,8 @@
           "status": "development",
           "stage": "development",
           "cod_current": "2028-02-01",
-          "dev_status": "grid connection pending",
+          "dev_status": "environmental pending",
           "annotations": [
-            {
-              "flag": "grid connection pending",
-              "reason": "No connection application on record",
-              "severity": "medium"
-            },
             {
               "flag": "environmental pending",
               "reason": "No EIS lodged and COD > 2027",
@@ -1651,11 +1407,6 @@
               "severity": "high"
             },
             {
-              "flag": "grid connection pending",
-              "reason": "No connection application on record",
-              "severity": "medium"
-            },
-            {
               "flag": "environmental pending",
               "reason": "No EIS lodged and COD > 2027",
               "severity": "medium"
@@ -1674,13 +1425,8 @@
           "status": "development",
           "stage": "development",
           "cod_current": "2030-01-15",
-          "dev_status": "grid connection pending",
+          "dev_status": "environmental pending",
           "annotations": [
-            {
-              "flag": "grid connection pending",
-              "reason": "No connection application on record",
-              "severity": "medium"
-            },
             {
               "flag": "environmental pending",
               "reason": "No EIS lodged and COD > 2027",
@@ -1771,11 +1517,6 @@
               "flag": "pre-planning",
               "reason": "Development stage is early \u2014 not in planning yet",
               "severity": "high"
-            },
-            {
-              "flag": "grid connection pending",
-              "reason": "No connection application on record",
-              "severity": "medium"
             }
           ]
         },
@@ -1932,11 +1673,6 @@
               "severity": "high"
             },
             {
-              "flag": "grid connection pending",
-              "reason": "No connection application on record",
-              "severity": "medium"
-            },
-            {
               "flag": "execution risk",
               "reason": "Developer execution grade: F",
               "severity": "high"
@@ -1955,13 +1691,8 @@
           "status": "development",
           "stage": "development",
           "cod_current": "2028-12-31",
-          "dev_status": "grid connection pending",
+          "dev_status": "environmental pending",
           "annotations": [
-            {
-              "flag": "grid connection pending",
-              "reason": "No connection application on record",
-              "severity": "medium"
-            },
             {
               "flag": "environmental pending",
               "reason": "No EIS lodged and COD > 2027",
@@ -1980,13 +1711,8 @@
           "status": "development",
           "stage": "development",
           "cod_current": "2029-08-01",
-          "dev_status": "grid connection pending",
+          "dev_status": "environmental pending",
           "annotations": [
-            {
-              "flag": "grid connection pending",
-              "reason": "No connection application on record",
-              "severity": "medium"
-            },
             {
               "flag": "environmental pending",
               "reason": "No EIS lodged and COD > 2027",
@@ -2032,11 +1758,6 @@
               "flag": "pre-planning",
               "reason": "Development stage is early \u2014 not in planning yet",
               "severity": "high"
-            },
-            {
-              "flag": "grid connection pending",
-              "reason": "No connection application on record",
-              "severity": "medium"
             }
           ]
         },
@@ -2083,14 +1804,8 @@
           "state": "NSW",
           "status": "development",
           "stage": "development",
-          "dev_status": "grid connection pending",
-          "annotations": [
-            {
-              "flag": "grid connection pending",
-              "reason": "No connection application on record",
-              "severity": "medium"
-            }
-          ]
+          "dev_status": "on track",
+          "annotations": []
         },
         {
           "name": "Stoney Creek BESS",
@@ -2109,11 +1824,6 @@
               "flag": "pre-planning",
               "reason": "Development stage is early \u2014 not in planning yet",
               "severity": "high"
-            },
-            {
-              "flag": "grid connection pending",
-              "reason": "No connection application on record",
-              "severity": "medium"
             }
           ]
         },
@@ -2128,13 +1838,8 @@
           "status": "development",
           "stage": "development",
           "cod_current": "2028-12-30",
-          "dev_status": "grid connection pending",
+          "dev_status": "environmental pending",
           "annotations": [
-            {
-              "flag": "grid connection pending",
-              "reason": "No connection application on record",
-              "severity": "medium"
-            },
             {
               "flag": "environmental pending",
               "reason": "No EIS lodged and COD > 2027",
@@ -2181,11 +1886,6 @@
               "severity": "high"
             },
             {
-              "flag": "grid connection pending",
-              "reason": "No connection application on record",
-              "severity": "medium"
-            },
-            {
               "flag": "environmental pending",
               "reason": "No EIS lodged and COD > 2027",
               "severity": "medium"
@@ -2203,14 +1903,8 @@
           "state": "NSW",
           "status": "development",
           "stage": "development",
-          "dev_status": "grid connection pending",
-          "annotations": [
-            {
-              "flag": "grid connection pending",
-              "reason": "No connection application on record",
-              "severity": "medium"
-            }
-          ]
+          "dev_status": "on track",
+          "annotations": []
         },
         {
           "name": "Bannaby BESS",
@@ -2222,14 +1916,8 @@
           "state": "NSW",
           "status": "development",
           "stage": "development",
-          "dev_status": "grid connection pending",
-          "annotations": [
-            {
-              "flag": "grid connection pending",
-              "reason": "No connection application on record",
-              "severity": "medium"
-            }
-          ]
+          "dev_status": "on track",
+          "annotations": []
         },
         {
           "name": "Armidale East BESS",
@@ -2241,14 +1929,8 @@
           "state": "NSW",
           "status": "development",
           "stage": "development",
-          "dev_status": "grid connection pending",
-          "annotations": [
-            {
-              "flag": "grid connection pending",
-              "reason": "No connection application on record",
-              "severity": "medium"
-            }
-          ],
+          "dev_status": "on track",
+          "annotations": [],
           "developer_grade": "B"
         },
         {
@@ -2261,14 +1943,8 @@
           "state": "NSW",
           "status": "development",
           "stage": "development",
-          "dev_status": "grid connection pending",
-          "annotations": [
-            {
-              "flag": "grid connection pending",
-              "reason": "No connection application on record",
-              "severity": "medium"
-            }
-          ]
+          "dev_status": "on track",
+          "annotations": []
         },
         {
           "name": "Kingswood BESS",
@@ -2282,11 +1958,6 @@
           "stage": "development",
           "dev_status": "execution risk",
           "annotations": [
-            {
-              "flag": "grid connection pending",
-              "reason": "No connection application on record",
-              "severity": "medium"
-            },
             {
               "flag": "execution risk",
               "reason": "Developer execution grade: F",
@@ -2324,5 +1995,5 @@
       }
     }
   },
-  "exported_at": "2026-05-25T12:17:38.337914"
+  "exported_at": "2026-05-25T14:53:54.313505"
 }

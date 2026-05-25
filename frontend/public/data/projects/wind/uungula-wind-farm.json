@@ -9,6 +9,7 @@
   "current_developer": "Squadron Energy (Tattarang)",
   "cod_current": "2028-02-01",
   "cod_original": "2028-02-01",
+  "connection_status": "committed",
   "grid_forming": false,
   "has_sips": false,
   "has_syncon": false,
@@ -95,10 +96,10 @@
   ],
   "scheme_contracts": [
     {
-      "scheme": "NSW LTESA",
-      "round": "Round 3",
-      "capacity_mw": 414.0,
-      "contract_type": "ltesa",
+      "scheme": "LTESA",
+      "round": "Round 3 \u2014 Generation + LDS",
+      "capacity_mw": 200,
+      "contract_type": "Generation LTESA (cap + floor strike, CPI-linked, NSW Crown counterparty)",
       "source_url": "https://aemoservices.com.au/en/tenders/tender-round-3-generation-and-long-duration-storage"
     }
   ],

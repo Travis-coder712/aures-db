@@ -90,6 +90,44 @@ STATUS_PRIORITY = {
     'withdrawn': 1,
 }
 
+# Map AEMO Commitment Status to the finer-grained ConnectionStatus enum
+# used on the frontend (see frontend/src/data/scheme-rounds.ts → ConnectionStatus).
+# This is per-DUID; we pick the most-progressed across a project's DUIDs.
+CONNECTION_STATUS_MAP = {
+    'In Service': 'operating',
+    'In Commissioning': 'commissioning',
+    'Committed': 'committed',
+    'Committed*': 'committed',
+    'Anticipated': 'anticipated',
+    'Publicly Announced': 'proposed',
+    'Announced Withdrawal': None,  # Leave NULL so an overlay can fill if needed
+}
+
+# Connection-status priority (higher = more progressed in the connection process)
+CONNECTION_STATUS_PRIORITY = {
+    'operating': 6,
+    'commissioning': 5,
+    'committed': 4,
+    'anticipated': 3,
+    'proposed': 2,
+}
+
+
+def determine_connection_status(statuses):
+    """Pick the most-progressed normalized ConnectionStatus across a project's DUIDs.
+
+    Returns None if the project has no mappable AEMO statuses. Empty / unknown
+    AEMO labels are ignored (rather than downgrading to 'proposed' on a typo).
+    """
+    mapped = set()
+    for s in statuses:
+        m = CONNECTION_STATUS_MAP.get(s)
+        if m is not None:
+            mapped.add(m)
+    if not mapped:
+        return None
+    return max(mapped, key=lambda x: CONNECTION_STATUS_PRIORITY.get(x, 0))
+
 # Column indices in the Excel file (0-based, from header row 4)
 COL = {
     'survey_id': 0,
@@ -397,6 +435,7 @@ def import_to_database(sites: dict, source_file: str):
             continue
 
         status = determine_status(site['statuses'])
+        connection_status = determine_connection_status(site['statuses'])
         state = REGION_TO_STATE.get(site['region'], '')
         if not state:
             continue
@@ -441,16 +480,22 @@ def import_to_database(sites: dict, source_file: str):
                 print(f"    ⚠ {existing_pid}: kept status '{final_status}' (AEMO says '{status}' but that's a downgrade)")
 
             if confidence in ('high', 'good', 'medium'):
-                # Only update AEMO-specific fields, preserve everything else
+                # Only update AEMO-specific fields, preserve everything else.
+                # connection_status: only fill if currently NULL/empty —
+                # preserve any hand-curated value (matches the "never silently
+                # overwrite manual corrections" pipeline-data-protection rule).
                 conn.execute("""
                     UPDATE projects SET
                         aemo_gen_info_id = ?,
+                        connection_status = COALESCE(NULLIF(connection_status, ''), ?),
                         updated_at = datetime('now')
                     WHERE id = ?
-                """, (sid, existing_pid))
+                """, (sid, connection_status, existing_pid))
                 skipped_count += 1
             else:
-                # Low/unverified — update with AEMO data but protected status
+                # Low/unverified — update with AEMO data but protected status.
+                # connection_status: only fill if currently NULL/empty (preserve
+                # hand-curated values per the pipeline-data-protection rule).
                 conn.execute("""
                     UPDATE projects SET
                         technology = ?,
@@ -461,6 +506,7 @@ def import_to_database(sites: dict, source_file: str):
                         current_developer = ?,
                         cod_current = ?,
                         aemo_gen_info_id = ?,
+                        connection_status = COALESCE(NULLIF(connection_status, ''), ?),
                         data_confidence = 'low',
                         last_updated = date('now'),
                         updated_at = datetime('now')
@@ -471,6 +517,7 @@ def import_to_database(sites: dict, source_file: str):
                     state, site['owner'],
                     site['fcud'][:7] if site['fcud'] else None,
                     sid,
+                    connection_status,
                     existing_pid,
                 ))
                 updated_count += 1
@@ -484,20 +531,22 @@ def import_to_database(sites: dict, source_file: str):
                     # Add survey ID
                     final_slug = f"{slug}-{sid}"
 
-            # New project — insert with AEMO data
+            # New project — insert with AEMO data (including normalised
+            # connection_status derived from the project's most-progressed DUID).
             conn.execute("""
                 INSERT INTO projects (
                     id, name, technology, status, capacity_mw, storage_mwh,
                     state, current_developer, cod_current,
-                    data_confidence, aemo_gen_info_id,
+                    data_confidence, aemo_gen_info_id, connection_status,
                     last_updated, last_verified
-                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 'low', ?, date('now'), date('now'))
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 'low', ?, ?, date('now'), date('now'))
             """, (
                 final_slug, site['name'], tech, status, site['capacity_mw'],
                 site['total_storage_mwh'] if site['total_storage_mwh'] > 0 else None,
                 state, site['owner'],
                 site['fcud'][:7] if site['fcud'] else None,
                 sid,
+                connection_status,
             ))
 
             # Add AEMO as a source

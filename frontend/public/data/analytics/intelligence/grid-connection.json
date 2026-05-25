@@ -46,7 +46,20 @@
           }
         }
       },
-      "connection_status": {}
+      "connection_status": {
+        "anticipated": {
+          "count": 2,
+          "mw": 1619.0
+        },
+        "committed": {
+          "count": 4,
+          "mw": 1637.0
+        },
+        "proposed": {
+          "count": 9,
+          "mw": 6290.0
+        }
+      }
     },
     {
       "rez": "nsw-south-west",
@@ -83,9 +96,9 @@
         }
       },
       "connection_status": {
-        "Pre-application": {
-          "count": 1,
-          "mw": 1000.0
+        "proposed": {
+          "count": 8,
+          "mw": 6155.0
         }
       }
     },
@@ -111,7 +124,16 @@
           }
         }
       },
-      "connection_status": {}
+      "connection_status": {
+        "committed": {
+          "count": 1,
+          "mw": 200.0
+        },
+        "operating": {
+          "count": 1,
+          "mw": 720.0
+        }
+      }
     },
     {
       "rez": "NSW New England",
@@ -151,23 +173,27 @@
     }
   },
   "connection_status_overall": {
-    "Connected": {
-      "count": 3,
-      "mw": 1344.0
+    "anticipated": {
+      "count": 70,
+      "mw": 19484.2
     },
-    "In progress": {
-      "count": 2,
-      "mw": 2310.0
+    "commissioning": {
+      "count": 11,
+      "mw": 4116.2
     },
-    "Pre-application": {
-      "count": 2,
-      "mw": 1560.0
+    "committed": {
+      "count": 48,
+      "mw": 16567.8
     },
     "operating": {
-      "count": 1,
-      "mw": 175.0
+      "count": 223,
+      "mw": 36612.7
+    },
+    "proposed": {
+      "count": 699,
+      "mw": 305388.4
     }
   },
   "total_rez_zones": 4,
-  "exported_at": "2026-05-25T12:26:41.732538"
+  "exported_at": "2026-05-25T14:55:48.945211"
 }

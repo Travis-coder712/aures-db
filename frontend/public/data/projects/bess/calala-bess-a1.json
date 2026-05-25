@@ -9,14 +9,15 @@
   "current_developer": "Equis Australia",
   "cod_current": "2026-12-31",
   "cod_original": "2026-12-31",
+  "connection_status": "committed",
   "grid_forming": false,
   "has_sips": false,
   "has_syncon": false,
   "has_statcom": false,
   "has_harmonic_filter": false,
   "notable": "Staged build: 250 MW total. Both phases CIS T3, under construction.",
-  "data_confidence": "low",
-  "last_updated": "2026-03-10",
+  "data_confidence": "medium",
+  "last_updated": "2026-05-25",
   "last_verified": "2026-03-10",
   "aemo_gen_info_id": "2646",
   "confidence_score": "57",
@@ -72,7 +73,16 @@
     }
   ],
   "offtakes": [],
-  "scheme_contracts": [],
+  "scheme_contracts": [
+    {
+      "scheme": "CIS",
+      "round": "Tender 3 \u2014 NEM Dispatchable",
+      "capacity_mw": 150,
+      "storage_mwh": 300,
+      "source_url": "https://reneweconomy.com.au/bowen-names-16-winners-of-australias-biggest-battery-storage-tender/",
+      "contract_type": "CISA (federal underwriting)"
+    }
+  ],
   "stages": [
     {
       "stage": 1,

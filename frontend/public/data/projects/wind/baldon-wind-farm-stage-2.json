@@ -8,13 +8,14 @@
   "current_developer": "Baldon Wind Farm Pty Ltd",
   "cod_current": "2029-07-28",
   "cod_original": "2029-07-28",
+  "connection_status": "proposed",
   "grid_forming": false,
   "has_sips": false,
   "has_syncon": false,
   "has_statcom": false,
   "has_harmonic_filter": false,
   "data_confidence": "medium",
-  "last_updated": "2026-05-23",
+  "last_updated": "2026-05-25",
   "last_verified": "2026-05-23",
   "aemo_gen_info_id": "2595",
   "confidence_score": "31",
@@ -48,7 +49,8 @@
       "round": "Tender 7 \u2014 NEM Generation",
       "capacity_mw": 346,
       "contract_type": "CISA (federal underwriting) \u2014 wind + BESS hybrid bid",
-      "source_url": "https://reneweconomy.com.au/australias-biggest-wind-project-and-8-battery-hybrids-among-19-winners-of-largest-renewable-auction-to-date/"
+      "source_url": "https://reneweconomy.com.au/australias-biggest-wind-project-and-8-battery-hybrids-among-19-winners-of-largest-renewable-auction-to-date/",
+      "storage_mwh": 132
     }
   ],
   "cost_sources": [],

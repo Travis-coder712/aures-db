@@ -212,7 +212,7 @@ function OverviewTab({ project }: { project: Project }) {
           <DetailRow label="Location" value={`${project.lga || '—'}, ${project.state}`} />
           {project.rez && <DetailRow label="REZ" value={project.rez} />}
           <DetailRow label="Connection NSP" value={project.connection_nsp || '—'} />
-          <DetailRow label="Connection Status" value={project.connection_status || '—'} />
+          <ConnectionStatusRow value={project.connection_status} />
           {project.cod_current && <DetailRow label="Expected COD" value={project.cod_current} />}
           {project.cod_original && project.cod_original !== project.cod_current && (
             <DetailRow
@@ -593,6 +593,46 @@ function DetailRow({ label, value, highlight }: { label: string; value: string; 
   )
 }
 
+// Connection status chip (matches CONNECTION_CONFIG in SchemeTracker.tsx)
+const CONNECTION_STATUS_CHIP: Record<string, { label: string; colour: string }> = {
+  operating:          { label: 'Operating',          colour: '#22c55e' },
+  commissioning:      { label: 'Commissioning',      colour: '#a855f7' },
+  committed:          { label: 'Committed',          colour: '#3b82f6' },
+  gps_assessment:     { label: 'GPS / pre-FID',      colour: '#06b6d4' },
+  anticipated:        { label: 'Anticipated',        colour: '#0ea5e9' },
+  connection_enquiry: { label: 'Connection enquiry', colour: '#eab308' },
+  proposed:           { label: 'Proposed',           colour: '#94a3b8' },
+  at_risk:            { label: 'At risk',            colour: '#ef4444' },
+}
+
+function ConnectionStatusRow({ value }: { value: string | null | undefined }) {
+  const v = (value || '').toLowerCase()
+  const chip = CONNECTION_STATUS_CHIP[v]
+  return (
+    <div className="flex items-center justify-between px-4 py-2.5">
+      <span className="text-xs text-[var(--color-text-muted)]">Connection Status</span>
+      {chip ? (
+        <span
+          className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-xs font-medium"
+          style={{
+            background: `${chip.colour}1a`,
+            color: chip.colour,
+            border: `1px solid ${chip.colour}55`,
+          }}
+        >
+          <span
+            className="w-1.5 h-1.5 rounded-full"
+            style={{ background: chip.colour }}
+          />
+          {chip.label}
+        </span>
+      ) : (
+        <span className="text-sm font-medium text-[var(--color-text)]">{value || '—'}</span>
+      )}
+    </div>
+  )
+}
+
 // ============================================================
 // Timeline Tab
 // ============================================================
@@ -752,7 +792,7 @@ function TechnicalTab({ project }: { project: Project }) {
         <SectionTitle>Grid Connection</SectionTitle>
         <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl divide-y divide-[var(--color-border)]">
           <DetailRow label="Connection NSP" value={project.connection_nsp || '—'} />
-          <DetailRow label="Connection Status" value={project.connection_status || '—'} />
+          <ConnectionStatusRow value={project.connection_status} />
           {project.has_sips && <DetailRow label="SIPS" value="Yes" />}
           {project.has_syncon && <DetailRow label="SynCon" value="Yes" />}
           {project.has_statcom && <DetailRow label="STATCOM" value="Yes" />}

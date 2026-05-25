@@ -8,14 +8,15 @@
   "current_developer": "Windlab Developments Pty Ltd",
   "cod_current": "2030-03-30",
   "cod_original": "2030-03-30",
+  "connection_status": "proposed",
   "grid_forming": false,
   "has_sips": false,
   "has_syncon": false,
   "has_statcom": false,
   "has_harmonic_filter": false,
   "data_confidence": "low",
-  "last_updated": "2026-03-10",
-  "last_verified": "2026-03-10",
+  "last_updated": "2026-05-25",
+  "last_verified": "2026-05-25",
   "aemo_gen_info_id": "2293",
   "confidence_score": "31",
   "development_stage": "epbc_submitted",
@@ -42,7 +43,16 @@
   "cod_history": [],
   "suppliers": [],
   "offtakes": [],
-  "scheme_contracts": [],
+  "scheme_contracts": [
+    {
+      "scheme": "CIS",
+      "round": "Tender 7 \u2014 NEM Generation",
+      "capacity_mw": 1150,
+      "contract_type": "CISA (federal underwriting)",
+      "source_url": "https://www.dcceew.gov.au/about/news/new-projects-deliver-7-8-gw-clean-energy",
+      "storage_mwh": 1400
+    }
+  ],
   "cost_sources": [],
   "stakeholder_issues": [],
   "sources": [
@@ -53,5 +63,21 @@
       "source_tier": 1
     }
   ],
-  "timeline_events": []
+  "timeline_events": [
+    {
+      "date": "2026-05-23",
+      "date_precision": "day",
+      "event_type": "offtake_signed",
+      "title": "CIS Tender 7 underwriting awarded (1150 MW + 1400 MWh)",
+      "detail": "Windlab's Bungaban Wind Energy Project (QLD) wins CIS Tender 7 underwriting. Part of the 19-project / 7.8 GW package announced 2026-05-23.",
+      "sources": [
+        {
+          "title": "New projects to deliver 7.8 GW of clean energy (DCCEEW)",
+          "url": "https://www.dcceew.gov.au/about/news/new-projects-deliver-7-8-gw-clean-energy",
+          "date": "2026-05-24",
+          "source_tier": 1
+        }
+      ]
+    }
+  ]
 }
