@@ -23,6 +23,10 @@
   "confidence_score": "49",
   "development_stage": "epbc_approved",
   "first_seen": "2022",
+  "rez_access_status": "granted",
+  "rez_access_mw": 1460.0,
+  "rez_access_date": "2025-04-23",
+  "rez_access_scheme": "SW",
   "timeline": [
     {
       "date": "2022",
@@ -38,6 +42,14 @@
       "event_type": "rez_access",
       "title": "SW REZ access rights granted",
       "detail": "EnergyCo South West REZ access rights awarded \u2014 4 projects, 3.56 GW total",
+      "sources": []
+    },
+    {
+      "date": "2025-04-23",
+      "date_precision": "day",
+      "event_type": "rez_access",
+      "title": "REZ access right granted (South West)",
+      "detail": "EnergyCo registered access right SW2025-02 for Yanco Delta Wind Farm \u2014 1460.0 MW \u00b7 scheme: South West REZ \u00b7 status: Registered.",
       "sources": []
     },
     {

@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-25T14:55:48.954078",
+  "generated_at": "2026-05-26T07:37:05.456238",
   "months": [
     {
       "month": "2027-06",
@@ -5142,7 +5142,19 @@
           }
         ],
         "govt_programs": [],
-        "rez_progress": [],
+        "rez_progress": [
+          {
+            "project_id": "koorangie-energy-storage-system",
+            "project_name": "Koorangie Energy Storage System",
+            "technology": "bess",
+            "state": "VIC",
+            "capacity_mw": 185.0,
+            "event_type": "notable",
+            "title": "20-year AEMO system strength agreement activated",
+            "detail": "Began delivering 125MW of system strength services under 20-year System Support Agreement with AEMO in Murray River REZ.",
+            "date": "2025-07-01"
+          }
+        ],
         "construction": [
           {
             "project_id": "bulabul-bess-1",
@@ -5167,19 +5179,7 @@
             "date": "2025-07-01"
           }
         ],
-        "operational": [
-          {
-            "project_id": "koorangie-energy-storage-system",
-            "project_name": "Koorangie Energy Storage System",
-            "technology": "bess",
-            "state": "VIC",
-            "capacity_mw": 185.0,
-            "event_type": "notable",
-            "title": "20-year AEMO system strength agreement activated",
-            "detail": "Began delivering 125MW of system strength services under 20-year System Support Agreement with AEMO in Murray River REZ.",
-            "date": "2025-07-01"
-          }
-        ]
+        "operational": []
       }
     },
     {
@@ -5365,6 +5365,149 @@
             "title": "CWO REZ access rights granted",
             "detail": "EnergyCo Central-West Orana REZ access rights awarded \u2014 10 projects, 7.15 GW total",
             "date": "2025-05-08"
+          },
+          {
+            "project_id": "liverpool-range-wind-farm",
+            "project_name": "Liverpool Range Wind Farm",
+            "technology": "wind",
+            "state": "NSW",
+            "capacity_mw": 1338.0,
+            "event_type": "rez_access",
+            "title": "REZ access right granted (Central-West Orana)",
+            "detail": "EnergyCo registered access right CWO2025-13 for Liverpool Range Wind Farm Stage 2 \u2014 698.4 MW \u00b7 scheme: Central-West Orana REZ \u00b7 status: Registered.",
+            "date": "2025-05-07"
+          },
+          {
+            "project_id": "liverpool-range-wind-farm",
+            "project_name": "Liverpool Range Wind Farm",
+            "technology": "wind",
+            "state": "NSW",
+            "capacity_mw": 1338.0,
+            "event_type": "rez_access",
+            "title": "REZ access right granted (Central-West Orana)",
+            "detail": "EnergyCo registered access right CWO2025-12 for Liverpool Range Wind Farm Stage 1 \u2014 633.6 MW \u00b7 scheme: Central-West Orana REZ \u00b7 status: Registered.",
+            "date": "2025-05-07"
+          },
+          {
+            "project_id": "valley-of-the-winds",
+            "project_name": "Valley of the Winds",
+            "technology": "wind",
+            "state": "NSW",
+            "capacity_mw": 919.0,
+            "event_type": "rez_access",
+            "title": "REZ access right granted (Central-West Orana)",
+            "detail": "EnergyCo registered access right CWO2025-05 for Valley of the Winds 3 \u2014 452.0 MW \u00b7 scheme: Central-West Orana REZ \u00b7 status: Registered.",
+            "date": "2025-05-07"
+          },
+          {
+            "project_id": "valley-of-the-winds",
+            "project_name": "Valley of the Winds",
+            "technology": "wind",
+            "state": "NSW",
+            "capacity_mw": 919.0,
+            "event_type": "rez_access",
+            "title": "REZ access right granted (Central-West Orana)",
+            "detail": "EnergyCo registered access right CWO2025-04 for Valley of the Winds 2 \u2014 319.0 MW \u00b7 scheme: Central-West Orana REZ \u00b7 status: Registered.",
+            "date": "2025-05-07"
+          },
+          {
+            "project_id": "valley-of-the-winds",
+            "project_name": "Valley of the Winds",
+            "technology": "wind",
+            "state": "NSW",
+            "capacity_mw": 919.0,
+            "event_type": "rez_access",
+            "title": "REZ access right granted (Central-West Orana)",
+            "detail": "EnergyCo registered access right CWO2025-03 for Valley of the Winds 1 \u2014 148.0 MW \u00b7 scheme: Central-West Orana REZ \u00b7 status: Registered.",
+            "date": "2025-05-07"
+          },
+          {
+            "project_id": "spicers-creek-wind-farm",
+            "project_name": "Spicers Creek Wind Farm",
+            "technology": "wind",
+            "state": "NSW",
+            "capacity_mw": 702.0,
+            "event_type": "rez_access",
+            "title": "REZ access right granted (Central-West Orana)",
+            "detail": "EnergyCo registered access right CWO2025-11 for Spicers Creek Wind Farm \u2014 700.0 MW \u00b7 scheme: Central-West Orana REZ \u00b7 status: Registered.",
+            "date": "2025-05-07"
+          },
+          {
+            "project_id": "sandy-creek-solar-farm",
+            "project_name": "Sandy Creek Solar Farm",
+            "technology": "solar",
+            "state": "NSW",
+            "capacity_mw": 700.0,
+            "event_type": "rez_access",
+            "title": "REZ access right granted (Central-West Orana)",
+            "detail": "EnergyCo registered access right CWO2025-10 for Sandy Creek Solar Farm \u2014 700.0 MW \u00b7 scheme: Central-West Orana REZ \u00b7 status: Registered.",
+            "date": "2025-05-07"
+          },
+          {
+            "project_id": "sandy-creek-standalone-bess",
+            "project_name": "Sandy Creek Standalone BESS",
+            "technology": "bess",
+            "state": "NSW",
+            "capacity_mw": 700.0,
+            "event_type": "rez_access",
+            "title": "REZ access right granted (Central-West Orana)",
+            "detail": "EnergyCo registered access right CWO2025-09 for Sandy Creek BESS \u2014 700.0 MW \u00b7 scheme: Central-West Orana REZ \u00b7 status: Registered.",
+            "date": "2025-05-07"
+          },
+          {
+            "project_id": "cobbora-solar-farm",
+            "project_name": "Cobbora Solar Farm",
+            "technology": "solar",
+            "state": "NSW",
+            "capacity_mw": 700.0,
+            "event_type": "rez_access",
+            "title": "REZ access right granted (Central-West Orana)",
+            "detail": "EnergyCo registered access right CWO2025-08 for Cobbora Solar Farm \u2014 700.0 MW \u00b7 scheme: Central-West Orana REZ \u00b7 status: Registered.",
+            "date": "2025-05-07"
+          },
+          {
+            "project_id": "birriwa-solar-farm",
+            "project_name": "Birriwa Solar Farm",
+            "technology": "solar",
+            "state": "NSW",
+            "capacity_mw": 600.0,
+            "event_type": "rez_access",
+            "title": "REZ access right granted (Central-West Orana)",
+            "detail": "EnergyCo registered access right CWO2025-02 for Birriwa Solar Farm \u2014 600.0 MW \u00b7 scheme: Central-West Orana REZ \u00b7 status: Registered.",
+            "date": "2025-05-07"
+          },
+          {
+            "project_id": "birriwa-bess",
+            "project_name": "Birriwa BESS",
+            "technology": "bess",
+            "state": "NSW",
+            "capacity_mw": 600.0,
+            "event_type": "rez_access",
+            "title": "REZ access right granted (Central-West Orana)",
+            "detail": "EnergyCo registered access right CWO2025-01 for Birriwa BESS \u2014 600.0 MW \u00b7 scheme: Central-West Orana REZ \u00b7 status: Registered.",
+            "date": "2025-05-07"
+          },
+          {
+            "project_id": "tallawang-solar-and-bess",
+            "project_name": "Tallawang Solar And BESS",
+            "technology": "hybrid",
+            "state": "NSW",
+            "capacity_mw": 500.0,
+            "event_type": "rez_access",
+            "title": "REZ access right granted (Central-West Orana)",
+            "detail": "EnergyCo registered access right CWO2025-06 for Tallawang Solar Hybrid \u2014 500.0 MW \u00b7 scheme: Central-West Orana REZ \u00b7 status: Registered.",
+            "date": "2025-05-07"
+          },
+          {
+            "project_id": "cobbora-bess",
+            "project_name": "Cobbora BESS",
+            "technology": "bess",
+            "state": "NSW",
+            "capacity_mw": 400.0,
+            "event_type": "rez_access",
+            "title": "REZ access right granted (Central-West Orana)",
+            "detail": "EnergyCo registered access right CWO2025-07 for Cobbora BESS \u2014 400.0 MW \u00b7 scheme: Central-West Orana REZ \u00b7 status: Registered.",
+            "date": "2025-05-07"
           }
         ],
         "construction": [
@@ -5442,6 +5585,17 @@
             "state": "NSW",
             "capacity_mw": 1460.0,
             "event_type": "rez_access",
+            "title": "REZ access right granted (South West)",
+            "detail": "EnergyCo registered access right SW2025-02 for Yanco Delta Wind Farm \u2014 1460.0 MW \u00b7 scheme: South West REZ \u00b7 status: Registered.",
+            "date": "2025-04-23"
+          },
+          {
+            "project_id": "yanco-delta-wind-farm",
+            "project_name": "Yanco Delta Wind Farm",
+            "technology": "wind",
+            "state": "NSW",
+            "capacity_mw": 1460.0,
+            "event_type": "rez_access",
             "title": "SW REZ access rights granted",
             "detail": "EnergyCo South West REZ access rights awarded \u2014 4 projects, 3.56 GW total",
             "date": "2025-04-23"
@@ -5453,8 +5607,52 @@
             "state": "NSW",
             "capacity_mw": 1300.0,
             "event_type": "rez_access",
+            "title": "REZ access right granted (South West)",
+            "detail": "EnergyCo registered access right SW2025-03 for Pottinger Energy Park \u2014 831.2 MW \u00b7 scheme: South West REZ \u00b7 status: Registered.",
+            "date": "2025-04-23"
+          },
+          {
+            "project_id": "pottinger-energy-park-wind-kci",
+            "project_name": "Pottinger Energy Park - Wind - KCI",
+            "technology": "wind",
+            "state": "NSW",
+            "capacity_mw": 1300.0,
+            "event_type": "rez_access",
             "title": "SW REZ access rights granted",
             "detail": "EnergyCo South West REZ access rights awarded \u2014 4 projects, 3.56 GW total",
+            "date": "2025-04-23"
+          },
+          {
+            "project_id": "dinawan-energy-hub",
+            "project_name": "Dinawan Energy Hub",
+            "technology": "hybrid",
+            "state": "NSW",
+            "capacity_mw": 1007.0,
+            "event_type": "rez_access",
+            "title": "REZ access right granted (South West)",
+            "detail": "EnergyCo registered access right SW2025-06 for Dinawan Energy Hub \u2014 300.0 MW \u00b7 scheme: South West REZ \u00b7 status: Registered.",
+            "date": "2025-04-23"
+          },
+          {
+            "project_id": "dinawan-energy-hub",
+            "project_name": "Dinawan Energy Hub",
+            "technology": "hybrid",
+            "state": "NSW",
+            "capacity_mw": 1007.0,
+            "event_type": "rez_access",
+            "title": "REZ access right granted (South West)",
+            "detail": "EnergyCo registered access right SW2025-05 for Dinawan Energy Hub \u2014 350.0 MW \u00b7 scheme: South West REZ \u00b7 status: Registered.",
+            "date": "2025-04-23"
+          },
+          {
+            "project_id": "dinawan-energy-hub",
+            "project_name": "Dinawan Energy Hub",
+            "technology": "hybrid",
+            "state": "NSW",
+            "capacity_mw": 1007.0,
+            "event_type": "rez_access",
+            "title": "REZ access right granted (South West)",
+            "detail": "EnergyCo registered access right SW2025-04 for Dinawan Energy Hub \u2014 357.0 MW \u00b7 scheme: South West REZ \u00b7 status: Registered.",
             "date": "2025-04-23"
           },
           {
@@ -5499,6 +5697,17 @@
             "event_type": "rez_access",
             "title": "SW REZ access rights granted",
             "detail": "EnergyCo South West REZ access rights awarded \u2014 4 projects, 3.56 GW total",
+            "date": "2025-04-23"
+          },
+          {
+            "project_id": "bullawah-wind-farm-stage-2",
+            "project_name": "Bullawah Wind Farm Stage 2",
+            "technology": "wind",
+            "state": "NSW",
+            "capacity_mw": 276.0,
+            "event_type": "rez_access",
+            "title": "REZ access right granted (South West)",
+            "detail": "EnergyCo registered access right SW2025-01 for Bullawah Wind Farm (Stage 2) \u2014 262.3 MW \u00b7 scheme: South West REZ \u00b7 status: Registered.",
             "date": "2025-04-23"
           },
           {
@@ -17329,9 +17538,9 @@
   ],
   "section_counts": {
     "construction": 637,
-    "operational": 444,
+    "operational": 443,
     "govt_programs": 10,
     "development": 259,
-    "rez_progress": 16
+    "rez_progress": 36
   }
 }

@@ -21,6 +21,10 @@
   "confidence_score": "41",
   "development_stage": "epbc_approved",
   "first_seen": "2022",
+  "rez_access_status": "granted",
+  "rez_access_mw": 700.0,
+  "rez_access_date": "2025-05-07",
+  "rez_access_scheme": "CWO",
   "timeline": [
     {
       "date": "2022",
@@ -28,6 +32,14 @@
       "event_type": "planning_submitted",
       "title": "EPBC Referral 2022/09387",
       "detail": "Spicers Creek Wind Farm \u2014 Post-Approval",
+      "sources": []
+    },
+    {
+      "date": "2025-05-07",
+      "date_precision": "day",
+      "event_type": "rez_access",
+      "title": "REZ access right granted (Central-West Orana)",
+      "detail": "EnergyCo registered access right CWO2025-11 for Spicers Creek Wind Farm \u2014 700.0 MW \u00b7 scheme: Central-West Orana REZ \u00b7 status: Registered.",
       "sources": []
     },
     {

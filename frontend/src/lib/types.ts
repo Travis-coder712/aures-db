@@ -213,6 +213,13 @@ export interface Project {
   has_statcom?: boolean
   has_harmonic_filter?: boolean
 
+  // REZ access rights (EnergyCo NSW + future state schemes)
+  rez_access_status?: 'granted' | 'transferred' | 'terminated' | 'expired' | string
+  rez_access_mw?: number
+  rez_access_date?: string                                    // ISO date — earliest awarded across stages
+  rez_access_scheme?: 'CWO' | 'SW' | string                   // Short scheme code
+  rez_access_notes?: string                                   // Hand-curated overlay refinement
+
   // Scores (pre-computed)
   development_score?: number
   performance_score?: number

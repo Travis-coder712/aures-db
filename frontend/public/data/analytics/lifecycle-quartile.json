@@ -61,14 +61,14 @@
       "stage": "development",
       "project_count": 42,
       "total_mw": 19924.5,
-      "avg_score": 33.9,
+      "avg_score": 34.2,
       "quartile_counts": {
-        "1": 12,
-        "2": 10,
+        "1": 13,
+        "2": 9,
         "3": 12,
         "4": 8
       },
-      "q1_pct": 29.0,
+      "q1_pct": 31.0,
       "project_ids": [
         "bullawah-wind-farm-stage-1",
         "baldon-wind-farm",
@@ -78,12 +78,12 @@
         "milpulling-wind-farm",
         "ruby-hills-north-wind-farm",
         "white-rock-wind-farm-stage-2",
+        "coppabella-wind-farm",
         "hargaves-wind-farm",
         "koorakee-wind-farm",
         "northern-tablelands-wind-farm",
         "thunderbolt-wind-farm",
         "capital-2-wind-farm",
-        "coppabella-wind-farm",
         "elderbury-creek-wind-farm",
         "granite-hills-wind-farm",
         "kings-plain-wind-farm",
@@ -183,7 +183,7 @@
       "stage": "development",
       "project_count": 23,
       "total_mw": 11106.5,
-      "avg_score": 40.4,
+      "avg_score": 40.9,
       "quartile_counts": {
         "1": 9,
         "2": 7,
@@ -201,13 +201,13 @@
         "koyuga-nanneella-wind-farm",
         "mount-fyans-wind-farm",
         "strathbogie-ranges-wind-farm",
+        "woolsthorpe-wind-farm",
         "alberton-wind-farm",
         "darlington-wind-farm-gpg",
         "normanville-energy-park-wind-kci",
         "portland-wind-farm-kci",
         "rifle-butts-wind-farm",
         "wimmera-plains-wind-farm-kci",
-        "woolsthorpe-wind-farm",
         "inverleigh-wind-farm",
         "kentbruck-green-power-hub",
         "normanville-energy-park",
@@ -524,12 +524,12 @@
       "stage": "development",
       "project_count": 50,
       "total_mw": 12309.0,
-      "avg_score": 38.1,
+      "avg_score": 38.5,
       "quartile_counts": {
         "1": 19,
         "2": 13,
-        "3": 9,
-        "4": 9
+        "3": 11,
+        "4": 7
       },
       "q1_pct": 38.0,
       "project_ids": [
@@ -565,7 +565,9 @@
         "oxley-solar-farm",
         "pottinger-energy-park-solar-kci",
         "vales-point-solar",
+        "hay-sun-farm",
         "sandy-creek-solar-farm",
+        "tilbuster-solar-farm",
         "daroobalgie-solar-farm",
         "edderton-hybrid-faciility-solar",
         "emu-park-solar-farm",
@@ -575,8 +577,6 @@
         "sandy-point-hybrid-solar",
         "strontian-solar-farm",
         "dunedoo-solar-farm",
-        "hay-sun-farm",
-        "tilbuster-solar-farm",
         "cobbora-solar-farm",
         "richmond-valley-solar-farm",
         "glenellen-solar-farm",
@@ -642,22 +642,22 @@
       "stage": "development",
       "project_count": 19,
       "total_mw": 4044.0,
-      "avg_score": 39.2,
+      "avg_score": 39.7,
       "quartile_counts": {
-        "1": 14,
-        "2": 0,
+        "1": 5,
+        "2": 9,
         "3": 0,
         "4": 5
       },
-      "q1_pct": 74.0,
+      "q1_pct": 26.0,
       "project_ids": [
         "prairie-solar-farm",
         "rubicon-solar-farm",
         "moonah-solar-farm-kci",
         "ravenswood-solar-farm-bess",
+        "frasers-solar-farm",
         "bookaar-solar-farm",
         "campbells-forest-solar-farm",
-        "frasers-solar-farm",
         "hazelwood-north-solar-farm-kci",
         "little-river-solar-farm-kci",
         "mansfield-solar-farm-solar-kci",
@@ -748,14 +748,14 @@
       "stage": "development",
       "project_count": 49,
       "total_mw": 18270.6,
-      "avg_score": 36.7,
+      "avg_score": 37.3,
       "quartile_counts": {
-        "1": 28,
-        "2": 0,
+        "1": 15,
+        "2": 13,
         "3": 14,
         "4": 7
       },
-      "q1_pct": 57.0,
+      "q1_pct": 31.0,
       "project_ids": [
         "bulli-creek-solar-farm",
         "burdekin-solar-farm-kci",
@@ -764,19 +764,19 @@
         "pleasant-hills-solar-farm-kci",
         "punch-and-creek-renewable-energy-stage-2",
         "wooderson-solar-farm",
+        "aramara-solar-farm",
         "beelbee-solar-farm",
+        "bullyard-solar-farm",
+        "haughton-solar-farm-stage-2",
         "moah-creek-solar-farm",
         "north-burnett-renewable-hub-solar",
         "punch-and-creek-renewable-energy",
         "woodstock-renewable-energy-hub-solar",
-        "aramara-solar-farm",
         "blair-athol-solar-power-station",
         "blenheim-solar-farm-kci",
         "bowen-basin-sun-farm-kci",
-        "bullyard-solar-farm",
         "cross-roads-energy-solar-farm-kci",
         "euleilah-solar-farm-and-bess-kci",
-        "haughton-solar-farm-stage-2",
         "kelsey-creek-solar-farm",
         "maranbah-solar-farm",
         "raglan-solar-farm",
@@ -956,7 +956,7 @@
       "stage": "development",
       "project_count": 122,
       "total_mw": 39401.0,
-      "avg_score": 43.2,
+      "avg_score": 43.3,
       "quartile_counts": {
         "1": 41,
         "2": 54,
@@ -1060,6 +1060,7 @@
         "willavale-bess",
         "wollar-bess",
         "yanco-bess",
+        "silver-city-energy-storage",
         "devlins-bridge-battery-storage",
         "edderton-hybrid-facility-bess",
         "emu-park-bess",
@@ -1079,7 +1080,6 @@
         "wallabadah-bess",
         "woodland-bess",
         "mt-piper-bess",
-        "silver-city-energy-storage",
         "armidale-east-bess",
         "burroway-bess",
         "tchelery-bess",
@@ -1280,11 +1280,11 @@
       "stage": "development",
       "project_count": 124,
       "total_mw": 44357.0,
-      "avg_score": 43.8,
+      "avg_score": 44.0,
       "quartile_counts": {
         "1": 32,
-        "2": 58,
-        "3": 28,
+        "2": 30,
+        "3": 56,
         "4": 6
       },
       "q1_pct": 26.0,
@@ -1321,6 +1321,7 @@
         "the-central-bess-kci",
         "tully-bess",
         "ulinda-park-bess-expansion",
+        "broadsoundbess",
         "capricorn-bess",
         "central-queensland-energy-storage-project-stage-1",
         "comet-energy-park",
@@ -1335,12 +1336,12 @@
         "tieri-bess",
         "woonga-creek-bess",
         "wurdong-bess",
+        "stanwell-bess",
         "black-river-bess-kci",
         "blackstone-bess",
         "blackstone-bess-2-kci",
         "blue-grass-bess",
         "bouldercombe-battery-project-stage-2-kci",
-        "broadsoundbess",
         "callide-solar-power-station-bess",
         "halys-bess-x-elio",
         "mount-britton-bess1",
@@ -1372,7 +1373,6 @@
         "pleystowe-bess",
         "river-parks-battery-energy-storage-system",
         "srimirabou-braemar-bess-kci",
-        "stanwell-bess",
         "swanbank-f-station",
         "tangkam-bess-kci",
         "teebar-creek-battery-storage-kci",
@@ -2133,7 +2133,7 @@
       "stage": "development",
       "count": 121,
       "mw": 68035.3,
-      "q1": 37
+      "q1": 38
     },
     {
       "technology": "solar",
@@ -2154,7 +2154,7 @@
       "stage": "development",
       "count": 135,
       "mw": 38396.6,
-      "q1": 70
+      "q1": 48
     },
     {
       "technology": "bess",
@@ -2247,7 +2247,7 @@
       "stage": "development",
       "count": 279,
       "mw": 111633.5,
-      "q1": 99
+      "q1": 100
     },
     {
       "state": "VIC",
@@ -2268,7 +2268,7 @@
       "stage": "development",
       "count": 148,
       "mw": 71934.0,
-      "q1": 65
+      "q1": 56
     },
     {
       "state": "QLD",
@@ -2289,7 +2289,7 @@
       "stage": "development",
       "count": 249,
       "mw": 112782.5,
-      "q1": 84
+      "q1": 71
     },
     {
       "state": "SA",
@@ -6853,7 +6853,7 @@
       "has_eis": false,
       "developer_grade": null,
       "score_basis": "stage (\u00d715) + has_cod (15) + has_rez (10) + scheme (20) + EIS (15) + developer grade (\u00d75); max 110",
-      "quartile": 2
+      "quartile": 3
     },
     "apsley-bess-project": {
       "id": "apsley-bess-project",
@@ -6902,10 +6902,10 @@
       "stage_group": "development",
       "capacity_mw": 101.4,
       "developer": "Aramara Solar Pty Ltd",
-      "score": 40,
+      "score": 50,
       "development_stage": "early_stage",
       "has_cod": true,
-      "has_rez": false,
+      "has_rez": true,
       "has_scheme": false,
       "has_eis": false,
       "developer_grade": null,
@@ -7119,7 +7119,7 @@
       "has_eis": false,
       "developer_grade": null,
       "score_basis": "stage (\u00d715) + has_cod (15) + has_rez (10) + scheme (20) + EIS (15) + developer grade (\u00d75); max 110",
-      "quartile": 2
+      "quartile": 3
     },
     "awaba-bess": {
       "id": "awaba-bess",
@@ -7974,7 +7974,7 @@
       "has_eis": false,
       "developer_grade": null,
       "score_basis": "stage (\u00d715) + has_cod (15) + has_rez (10) + scheme (20) + EIS (15) + developer grade (\u00d75); max 110",
-      "quartile": 1
+      "quartile": 2
     },
     "blanche-bess-kci": {
       "id": "blanche-bess-kci",
@@ -8012,7 +8012,7 @@
       "has_eis": false,
       "developer_grade": null,
       "score_basis": "stage (\u00d715) + has_cod (15) + has_rez (10) + scheme (20) + EIS (15) + developer grade (\u00d75); max 110",
-      "quartile": 1
+      "quartile": 2
     },
     "blue-grass-bess": {
       "id": "blue-grass-bess",
@@ -8183,7 +8183,7 @@
       "has_eis": false,
       "developer_grade": null,
       "score_basis": "stage (\u00d715) + has_cod (15) + has_rez (10) + scheme (20) + EIS (15) + developer grade (\u00d75); max 110",
-      "quartile": 1
+      "quartile": 2
     },
     "bookham-wf-and-bess": {
       "id": "bookham-wf-and-bess",
@@ -8354,7 +8354,7 @@
       "has_eis": false,
       "developer_grade": null,
       "score_basis": "stage (\u00d715) + has_cod (15) + has_rez (10) + scheme (20) + EIS (15) + developer grade (\u00d75); max 110",
-      "quartile": 1
+      "quartile": 2
     },
     "bowmans-creek-bess": {
       "id": "bowmans-creek-bess",
@@ -8430,7 +8430,7 @@
       "has_eis": false,
       "developer_grade": null,
       "score_basis": "stage (\u00d715) + has_cod (15) + has_rez (10) + scheme (20) + EIS (15) + developer grade (\u00d75); max 110",
-      "quartile": 2
+      "quartile": 3
     },
     "bremer-battery-1": {
       "id": "bremer-battery-1",
@@ -8574,10 +8574,10 @@
       "stage_group": "development",
       "capacity_mw": 180.0,
       "developer": "Broadsound Solar Farm Pty Ltd",
-      "score": 45,
+      "score": 55,
       "development_stage": "early_stage",
       "has_cod": true,
-      "has_rez": false,
+      "has_rez": true,
       "has_scheme": false,
       "has_eis": false,
       "developer_grade": "B",
@@ -8745,10 +8745,10 @@
       "stage_group": "development",
       "capacity_mw": 97.0,
       "developer": "EE Solar 9 Pty Ltd as trustee for the EE Solar 9 Trust",
-      "score": 40,
+      "score": 50,
       "development_stage": "early_stage",
       "has_cod": true,
-      "has_rez": false,
+      "has_rez": true,
       "has_scheme": false,
       "has_eis": false,
       "developer_grade": null,
@@ -8772,7 +8772,7 @@
       "has_eis": false,
       "developer_grade": null,
       "score_basis": "stage (\u00d715) + has_cod (15) + has_rez (10) + scheme (20) + EIS (15) + developer grade (\u00d75); max 110",
-      "quartile": 2
+      "quartile": 3
     },
     "bundey-bess-and-solar-project": {
       "id": "bundey-bess-and-solar-project",
@@ -9114,7 +9114,7 @@
       "has_eis": false,
       "developer_grade": null,
       "score_basis": "stage (\u00d715) + has_cod (15) + has_rez (10) + scheme (20) + EIS (15) + developer grade (\u00d75); max 110",
-      "quartile": 2
+      "quartile": 3
     },
     "callide-power-station-solar-farm": {
       "id": "callide-power-station-solar-farm",
@@ -9209,7 +9209,7 @@
       "has_eis": false,
       "developer_grade": null,
       "score_basis": "stage (\u00d715) + has_cod (15) + has_rez (10) + scheme (20) + EIS (15) + developer grade (\u00d75); max 110",
-      "quartile": 1
+      "quartile": 2
     },
     "camperdown-bess": {
       "id": "camperdown-bess",
@@ -9532,7 +9532,7 @@
       "has_eis": false,
       "developer_grade": null,
       "score_basis": "stage (\u00d715) + has_cod (15) + has_rez (10) + scheme (20) + EIS (15) + developer grade (\u00d75); max 110",
-      "quartile": 2
+      "quartile": 3
     },
     "clarke-creek-wind-farm-stage-2": {
       "id": "clarke-creek-wind-farm-stage-2",
@@ -9646,7 +9646,7 @@
       "has_eis": false,
       "developer_grade": null,
       "score_basis": "stage (\u00d715) + has_cod (15) + has_rez (10) + scheme (20) + EIS (15) + developer grade (\u00d75); max 110",
-      "quartile": 2
+      "quartile": 3
     },
     "collinsville-green-energy-hub": {
       "id": "collinsville-green-energy-hub",
@@ -9722,7 +9722,7 @@
       "has_eis": false,
       "developer_grade": null,
       "score_basis": "stage (\u00d715) + has_cod (15) + has_rez (10) + scheme (20) + EIS (15) + developer grade (\u00d75); max 110",
-      "quartile": 2
+      "quartile": 3
     },
     "columboola-bess-kci": {
       "id": "columboola-bess-kci",
@@ -9741,7 +9741,7 @@
       "has_eis": false,
       "developer_grade": null,
       "score_basis": "stage (\u00d715) + has_cod (15) + has_rez (10) + scheme (20) + EIS (15) + developer grade (\u00d75); max 110",
-      "quartile": 2
+      "quartile": 3
     },
     "comet-energy-park": {
       "id": "comet-energy-park",
@@ -9923,15 +9923,15 @@
       "stage_group": "development",
       "capacity_mw": 270.0,
       "developer": "Coppabella Wind Farm Pty Ltd",
-      "score": 40,
+      "score": 50,
       "development_stage": "early_stage",
       "has_cod": true,
-      "has_rez": false,
+      "has_rez": true,
       "has_scheme": false,
       "has_eis": false,
       "developer_grade": null,
       "score_basis": "stage (\u00d715) + has_cod (15) + has_rez (10) + scheme (20) + EIS (15) + developer grade (\u00d75); max 110",
-      "quartile": 2
+      "quartile": 1
     },
     "corop-bess": {
       "id": "corop-bess",
@@ -10007,7 +10007,7 @@
       "has_eis": false,
       "developer_grade": null,
       "score_basis": "stage (\u00d715) + has_cod (15) + has_rez (10) + scheme (20) + EIS (15) + developer grade (\u00d75); max 110",
-      "quartile": 1
+      "quartile": 2
     },
     "croydon-hybrid-facility-solar-and-bess": {
       "id": "croydon-hybrid-facility-solar-and-bess",
@@ -10672,7 +10672,7 @@
       "has_eis": false,
       "developer_grade": null,
       "score_basis": "stage (\u00d715) + has_cod (15) + has_rez (10) + scheme (20) + EIS (15) + developer grade (\u00d75); max 110",
-      "quartile": 2
+      "quartile": 3
     },
     "east-terang-bess-kci": {
       "id": "east-terang-bess-kci",
@@ -10805,7 +10805,7 @@
       "has_eis": false,
       "developer_grade": null,
       "score_basis": "stage (\u00d715) + has_cod (15) + has_rez (10) + scheme (20) + EIS (15) + developer grade (\u00d75); max 110",
-      "quartile": 2
+      "quartile": 3
     },
     "eiwa-gin-gin-renewable-energy-park": {
       "id": "eiwa-gin-gin-renewable-energy-park",
@@ -10881,7 +10881,7 @@
       "has_eis": false,
       "developer_grade": null,
       "score_basis": "stage (\u00d715) + has_cod (15) + has_rez (10) + scheme (20) + EIS (15) + developer grade (\u00d75); max 110",
-      "quartile": 2
+      "quartile": 3
     },
     "elaine-solar-farm-and-bess": {
       "id": "elaine-solar-farm-and-bess",
@@ -10995,7 +10995,7 @@
       "has_eis": false,
       "developer_grade": null,
       "score_basis": "stage (\u00d715) + has_cod (15) + has_rez (10) + scheme (20) + EIS (15) + developer grade (\u00d75); max 110",
-      "quartile": 1
+      "quartile": 2
     },
     "eurimbula-hybrid-facility-battery-storage": {
       "id": "eurimbula-hybrid-facility-battery-storage",
@@ -11215,10 +11215,10 @@
       "stage_group": "development",
       "capacity_mw": 77.0,
       "developer": "Frasers Lane Development Pty Ltd",
-      "score": 40,
+      "score": 50,
       "development_stage": "early_stage",
       "has_cod": true,
-      "has_rez": false,
+      "has_rez": true,
       "has_scheme": false,
       "has_eis": false,
       "developer_grade": null,
@@ -12135,7 +12135,7 @@
       "has_eis": false,
       "developer_grade": null,
       "score_basis": "stage (\u00d715) + has_cod (15) + has_rez (10) + scheme (20) + EIS (15) + developer grade (\u00d75); max 110",
-      "quartile": 2
+      "quartile": 3
     },
     "gregadoo-solar-farm": {
       "id": "gregadoo-solar-farm",
@@ -12325,7 +12325,7 @@
       "has_eis": false,
       "developer_grade": null,
       "score_basis": "stage (\u00d715) + has_cod (15) + has_rez (10) + scheme (20) + EIS (15) + developer grade (\u00d75); max 110",
-      "quartile": 2
+      "quartile": 3
     },
     "guthries-gap-solar-power-station": {
       "id": "guthries-gap-solar-power-station",
@@ -12496,7 +12496,7 @@
       "has_eis": false,
       "developer_grade": null,
       "score_basis": "stage (\u00d715) + has_cod (15) + has_rez (10) + scheme (20) + EIS (15) + developer grade (\u00d75); max 110",
-      "quartile": 2
+      "quartile": 3
     },
     "hampton-park-sess": {
       "id": "hampton-park-sess",
@@ -12697,10 +12697,10 @@
       "stage_group": "development",
       "capacity_mw": 300.0,
       "developer": "Pacific Hydro Australia Pty Ltd",
-      "score": 40,
+      "score": 50,
       "development_stage": "early_stage",
       "has_cod": true,
-      "has_rez": false,
+      "has_rez": true,
       "has_scheme": false,
       "has_eis": false,
       "developer_grade": null,
@@ -12716,15 +12716,15 @@
       "stage_group": "development",
       "capacity_mw": 140.8,
       "developer": "Hay Solar Farm Pty Ltd as Trustee of the Hay Solar Farm Trust",
-      "score": 25,
+      "score": 35,
       "development_stage": "early_stage",
       "has_cod": false,
-      "has_rez": false,
+      "has_rez": true,
       "has_scheme": false,
       "has_eis": false,
       "developer_grade": null,
       "score_basis": "stage (\u00d715) + has_cod (15) + has_rez (10) + scheme (20) + EIS (15) + developer grade (\u00d75); max 110",
-      "quartile": 4
+      "quartile": 3
     },
     "hazeldean-bess-storage-kci": {
       "id": "hazeldean-bess-storage-kci",
@@ -12800,7 +12800,7 @@
       "has_eis": false,
       "developer_grade": null,
       "score_basis": "stage (\u00d715) + has_cod (15) + has_rez (10) + scheme (20) + EIS (15) + developer grade (\u00d75); max 110",
-      "quartile": 1
+      "quartile": 2
     },
     "heatherton-bess": {
       "id": "heatherton-bess",
@@ -13579,7 +13579,7 @@
       "has_eis": false,
       "developer_grade": null,
       "score_basis": "stage (\u00d715) + has_cod (15) + has_rez (10) + scheme (20) + EIS (15) + developer grade (\u00d75); max 110",
-      "quartile": 1
+      "quartile": 2
     },
     "kemps-creek-bess": {
       "id": "kemps-creek-bess",
@@ -14130,7 +14130,7 @@
       "has_eis": false,
       "developer_grade": null,
       "score_basis": "stage (\u00d715) + has_cod (15) + has_rez (10) + scheme (20) + EIS (15) + developer grade (\u00d75); max 110",
-      "quartile": 2
+      "quartile": 3
     },
     "limestone-creek-bess": {
       "id": "limestone-creek-bess",
@@ -14263,7 +14263,7 @@
       "has_eis": false,
       "developer_grade": null,
       "score_basis": "stage (\u00d715) + has_cod (15) + has_rez (10) + scheme (20) + EIS (15) + developer grade (\u00d75); max 110",
-      "quartile": 1
+      "quartile": 2
     },
     "liverpool-range-wind-farm": {
       "id": "liverpool-range-wind-farm",
@@ -14624,7 +14624,7 @@
       "has_eis": false,
       "developer_grade": null,
       "score_basis": "stage (\u00d715) + has_cod (15) + has_rez (10) + scheme (20) + EIS (15) + developer grade (\u00d75); max 110",
-      "quartile": 1
+      "quartile": 2
     },
     "maranbah-solar-farm": {
       "id": "maranbah-solar-farm",
@@ -14643,7 +14643,7 @@
       "has_eis": false,
       "developer_grade": null,
       "score_basis": "stage (\u00d715) + has_cod (15) + has_rez (10) + scheme (20) + EIS (15) + developer grade (\u00d75); max 110",
-      "quartile": 1
+      "quartile": 2
     },
     "marcollat-energy-hub-stage-1": {
       "id": "marcollat-energy-hub-stage-1",
@@ -15346,7 +15346,7 @@
       "has_eis": false,
       "developer_grade": null,
       "score_basis": "stage (\u00d715) + has_cod (15) + has_rez (10) + scheme (20) + EIS (15) + developer grade (\u00d75); max 110",
-      "quartile": 2
+      "quartile": 3
     },
     "moonah-solar-farm-kci": {
       "id": "moonah-solar-farm-kci",
@@ -16163,7 +16163,7 @@
       "has_eis": false,
       "developer_grade": null,
       "score_basis": "stage (\u00d715) + has_cod (15) + has_rez (10) + scheme (20) + EIS (15) + developer grade (\u00d75); max 110",
-      "quartile": 1
+      "quartile": 2
     },
     "nonowie-wind-farm": {
       "id": "nonowie-wind-farm",
@@ -16733,7 +16733,7 @@
       "has_eis": false,
       "developer_grade": null,
       "score_basis": "stage (\u00d715) + has_cod (15) + has_rez (10) + scheme (20) + EIS (15) + developer grade (\u00d75); max 110",
-      "quartile": 2
+      "quartile": 3
     },
     "pacific-green-kingswell-energy-park-kci": {
       "id": "pacific-green-kingswell-energy-park-kci",
@@ -16752,7 +16752,7 @@
       "has_eis": false,
       "developer_grade": null,
       "score_basis": "stage (\u00d715) + has_cod (15) + has_rez (10) + scheme (20) + EIS (15) + developer grade (\u00d75); max 110",
-      "quartile": 2
+      "quartile": 3
     },
     "paling-yards-wind-farm": {
       "id": "paling-yards-wind-farm",
@@ -17094,7 +17094,7 @@
       "has_eis": false,
       "developer_grade": null,
       "score_basis": "stage (\u00d715) + has_cod (15) + has_rez (10) + scheme (20) + EIS (15) + developer grade (\u00d75); max 110",
-      "quartile": 2
+      "quartile": 3
     },
     "pleystowe-bess-kci": {
       "id": "pleystowe-bess-kci",
@@ -17531,7 +17531,7 @@
       "has_eis": false,
       "developer_grade": null,
       "score_basis": "stage (\u00d715) + has_cod (15) + has_rez (10) + scheme (20) + EIS (15) + developer grade (\u00d75); max 110",
-      "quartile": 1
+      "quartile": 2
     },
     "raglan-bess": {
       "id": "raglan-bess",
@@ -17569,7 +17569,7 @@
       "has_eis": false,
       "developer_grade": null,
       "score_basis": "stage (\u00d715) + has_cod (15) + has_rez (10) + scheme (20) + EIS (15) + developer grade (\u00d75); max 110",
-      "quartile": 1
+      "quartile": 2
     },
     "ravenswood-solar-farm-bess": {
       "id": "ravenswood-solar-farm-bess",
@@ -17740,7 +17740,7 @@
       "has_eis": false,
       "developer_grade": null,
       "score_basis": "stage (\u00d715) + has_cod (15) + has_rez (10) + scheme (20) + EIS (15) + developer grade (\u00d75); max 110",
-      "quartile": 2
+      "quartile": 3
     },
     "riverland-solar-storage-solar": {
       "id": "riverland-solar-storage-solar",
@@ -18283,10 +18283,10 @@
       "stage_group": "development",
       "capacity_mw": 200.0,
       "developer": "A-CAES NSW PTY LTD",
-      "score": 25,
+      "score": 35,
       "development_stage": "epbc_submitted",
       "has_cod": true,
-      "has_rez": false,
+      "has_rez": true,
       "has_scheme": false,
       "has_eis": false,
       "developer_grade": null,
@@ -18671,7 +18671,7 @@
       "has_eis": false,
       "developer_grade": null,
       "score_basis": "stage (\u00d715) + has_cod (15) + has_rez (10) + scheme (20) + EIS (15) + developer grade (\u00d75); max 110",
-      "quartile": 2
+      "quartile": 3
     },
     "st-patricks-plains-wind-farm": {
       "id": "st-patricks-plains-wind-farm",
@@ -18701,10 +18701,10 @@
       "stage_group": "development",
       "capacity_mw": 300.0,
       "developer": "Stanwell Corporation Limited",
-      "score": 40,
+      "score": 50,
       "development_stage": "early_stage",
       "has_cod": true,
-      "has_rez": false,
+      "has_rez": true,
       "has_scheme": false,
       "has_eis": false,
       "developer_grade": null,
@@ -19013,7 +19013,7 @@
       "has_eis": false,
       "developer_grade": null,
       "score_basis": "stage (\u00d715) + has_cod (15) + has_rez (10) + scheme (20) + EIS (15) + developer grade (\u00d75); max 110",
-      "quartile": 1
+      "quartile": 2
     },
     "sunshine-estate-bess": {
       "id": "sunshine-estate-bess",
@@ -19070,7 +19070,7 @@
       "has_eis": false,
       "developer_grade": null,
       "score_basis": "stage (\u00d715) + has_cod (15) + has_rez (10) + scheme (20) + EIS (15) + developer grade (\u00d75); max 110",
-      "quartile": 1
+      "quartile": 2
     },
     "supernode-bess-stage-3": {
       "id": "supernode-bess-stage-3",
@@ -19222,7 +19222,7 @@
       "has_eis": false,
       "developer_grade": null,
       "score_basis": "stage (\u00d715) + has_cod (15) + has_rez (10) + scheme (20) + EIS (15) + developer grade (\u00d75); max 110",
-      "quartile": 2
+      "quartile": 3
     },
     "tabulam-bess": {
       "id": "tabulam-bess",
@@ -19393,7 +19393,7 @@
       "has_eis": false,
       "developer_grade": null,
       "score_basis": "stage (\u00d715) + has_cod (15) + has_rez (10) + scheme (20) + EIS (15) + developer grade (\u00d75); max 110",
-      "quartile": 2
+      "quartile": 3
     },
     "tara-wind-farm-kci": {
       "id": "tara-wind-farm-kci",
@@ -19526,7 +19526,7 @@
       "has_eis": false,
       "developer_grade": null,
       "score_basis": "stage (\u00d715) + has_cod (15) + has_rez (10) + scheme (20) + EIS (15) + developer grade (\u00d75); max 110",
-      "quartile": 2
+      "quartile": 3
     },
     "temora-bess": {
       "id": "temora-bess",
@@ -19917,15 +19917,15 @@
       "stage_group": "development",
       "capacity_mw": 200.0,
       "developer": "EP Sunspot 5",
-      "score": 25,
+      "score": 35,
       "development_stage": "epbc_approved",
       "has_cod": true,
-      "has_rez": false,
+      "has_rez": true,
       "has_scheme": false,
       "has_eis": false,
       "developer_grade": null,
       "score_basis": "stage (\u00d715) + has_cod (15) + has_rez (10) + scheme (20) + EIS (15) + developer grade (\u00d75); max 110",
-      "quartile": 4
+      "quartile": 3
     },
     "tirranna-bess-kci": {
       "id": "tirranna-bess-kci",
@@ -20039,7 +20039,7 @@
       "has_eis": false,
       "developer_grade": null,
       "score_basis": "stage (\u00d715) + has_cod (15) + has_rez (10) + scheme (20) + EIS (15) + developer grade (\u00d75); max 110",
-      "quartile": 2
+      "quartile": 3
     },
     "tully-bess": {
       "id": "tully-bess",
@@ -20115,7 +20115,7 @@
       "has_eis": false,
       "developer_grade": null,
       "score_basis": "stage (\u00d715) + has_cod (15) + has_rez (10) + scheme (20) + EIS (15) + developer grade (\u00d75); max 110",
-      "quartile": 1
+      "quartile": 2
     },
     "tungkillo-south-bess": {
       "id": "tungkillo-south-bess",
@@ -20514,7 +20514,7 @@
       "has_eis": false,
       "developer_grade": null,
       "score_basis": "stage (\u00d715) + has_cod (15) + has_rez (10) + scheme (20) + EIS (15) + developer grade (\u00d75); max 110",
-      "quartile": 1
+      "quartile": 2
     },
     "warracknabeal-wind-farm": {
       "id": "warracknabeal-wind-farm",
@@ -20552,7 +20552,7 @@
       "has_eis": false,
       "developer_grade": null,
       "score_basis": "stage (\u00d715) + has_cod (15) + has_rez (10) + scheme (20) + EIS (15) + developer grade (\u00d75); max 110",
-      "quartile": 2
+      "quartile": 3
     },
     "warrenheip-bess": {
       "id": "warrenheip-bess",
@@ -21046,7 +21046,7 @@
       "has_eis": false,
       "developer_grade": null,
       "score_basis": "stage (\u00d715) + has_cod (15) + has_rez (10) + scheme (20) + EIS (15) + developer grade (\u00d75); max 110",
-      "quartile": 1
+      "quartile": 2
     },
     "wodonga-bess": {
       "id": "wodonga-bess",
@@ -21084,7 +21084,7 @@
       "has_eis": false,
       "developer_grade": null,
       "score_basis": "stage (\u00d715) + has_cod (15) + has_rez (10) + scheme (20) + EIS (15) + developer grade (\u00d75); max 110",
-      "quartile": 1
+      "quartile": 2
     },
     "wollar-bess": {
       "id": "wollar-bess",
@@ -21266,10 +21266,10 @@
       "stage_group": "development",
       "capacity_mw": 70.0,
       "developer": "Woolsthorpe Wind Farm Pty Ltd",
-      "score": 40,
+      "score": 50,
       "development_stage": "early_stage",
       "has_cod": true,
-      "has_rez": false,
+      "has_rez": true,
       "has_scheme": false,
       "has_eis": false,
       "developer_grade": null,
@@ -21369,7 +21369,7 @@
       "has_eis": false,
       "developer_grade": null,
       "score_basis": "stage (\u00d715) + has_cod (15) + has_rez (10) + scheme (20) + EIS (15) + developer grade (\u00d75); max 110",
-      "quartile": 1
+      "quartile": 2
     },
     "yabulu-bess": {
       "id": "yabulu-bess",
@@ -21426,7 +21426,7 @@
       "has_eis": false,
       "developer_grade": null,
       "score_basis": "stage (\u00d715) + has_cod (15) + has_rez (10) + scheme (20) + EIS (15) + developer grade (\u00d75); max 110",
-      "quartile": 2
+      "quartile": 3
     },
     "yadnarie-solar-farm": {
       "id": "yadnarie-solar-farm",
@@ -21622,5 +21622,5 @@
       "WA"
     ]
   },
-  "exported_at": "2026-05-25T14:53:54.230923"
+  "exported_at": "2026-05-26T07:28:24.423640"
 }

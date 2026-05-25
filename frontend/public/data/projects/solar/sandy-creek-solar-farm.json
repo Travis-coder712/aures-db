@@ -22,6 +22,10 @@
   "confidence_score": "39",
   "development_stage": "epbc_submitted",
   "first_seen": "2024",
+  "rez_access_status": "granted",
+  "rez_access_mw": 700.0,
+  "rez_access_date": "2025-05-07",
+  "rez_access_scheme": "CWO",
   "timeline": [
     {
       "date": "2024",
@@ -29,6 +33,14 @@
       "event_type": "planning_submitted",
       "title": "EPBC Referral 2023/09642",
       "detail": "Sandy Creek Solar Farm \u2014 Completed",
+      "sources": []
+    },
+    {
+      "date": "2025-05-07",
+      "date_precision": "day",
+      "event_type": "rez_access",
+      "title": "REZ access right granted (Central-West Orana)",
+      "detail": "EnergyCo registered access right CWO2025-10 for Sandy Creek Solar Farm \u2014 700.0 MW \u00b7 scheme: Central-West Orana REZ \u00b7 status: Registered.",
       "sources": []
     },
     {

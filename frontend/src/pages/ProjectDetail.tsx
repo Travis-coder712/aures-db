@@ -633,6 +633,63 @@ function ConnectionStatusRow({ value }: { value: string | null | undefined }) {
   )
 }
 
+// REZ Access Rights chip (EnergyCo NSW: CWO + South West schemes).
+// Colours: granted → emerald (priority signal — adds material to grid),
+// transferred → amber, terminated/expired → red.
+const REZ_ACCESS_CHIP: Record<string, { label: string; colour: string }> = {
+  granted:     { label: 'Granted',     colour: '#10b981' },
+  transferred: { label: 'Transferred', colour: '#f59e0b' },
+  terminated:  { label: 'Terminated',  colour: '#ef4444' },
+  expired:     { label: 'Expired',     colour: '#94a3b8' },
+}
+
+const REZ_SCHEME_LABEL: Record<string, string> = {
+  CWO: 'Central-West Orana REZ',
+  SW:  'South West REZ',
+}
+
+function RezAccessRow({ status, scheme, mw, date }: {
+  status: string
+  scheme?: string
+  mw?: number
+  date?: string
+}) {
+  const chip = REZ_ACCESS_CHIP[status.toLowerCase()] ?? { label: status, colour: '#64748b' }
+  const schemeLabel = scheme ? (REZ_SCHEME_LABEL[scheme] ?? scheme) : null
+  const mwText = mw ? `${mw.toLocaleString('en-AU')} MW` : null
+  const dateText = date ? new Date(date).toLocaleDateString('en-AU', { day: 'numeric', month: 'short', year: 'numeric' }) : null
+  return (
+    <div className="flex items-center justify-between px-4 py-2.5 gap-3">
+      <span className="text-xs text-[var(--color-text-muted)] flex-shrink-0">REZ Access Right</span>
+      <div className="flex items-center gap-2 flex-wrap justify-end">
+        <span
+          className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-xs font-medium"
+          style={{
+            background: `${chip.colour}1a`,
+            color: chip.colour,
+            border: `1px solid ${chip.colour}55`,
+          }}
+        >
+          <span
+            className="w-1.5 h-1.5 rounded-full"
+            style={{ background: chip.colour }}
+          />
+          {chip.label}
+        </span>
+        {schemeLabel && (
+          <span className="text-xs text-[var(--color-text)]">{schemeLabel}</span>
+        )}
+        {mwText && (
+          <span className="text-xs text-[var(--color-text-muted)]">· {mwText}</span>
+        )}
+        {dateText && (
+          <span className="text-xs text-[var(--color-text-muted)]">· {dateText}</span>
+        )}
+      </div>
+    </div>
+  )
+}
+
 // ============================================================
 // Timeline Tab
 // ============================================================
@@ -793,6 +850,14 @@ function TechnicalTab({ project }: { project: Project }) {
         <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl divide-y divide-[var(--color-border)]">
           <DetailRow label="Connection NSP" value={project.connection_nsp || '—'} />
           <ConnectionStatusRow value={project.connection_status} />
+          {project.rez_access_status && (
+            <RezAccessRow
+              status={project.rez_access_status}
+              scheme={project.rez_access_scheme}
+              mw={project.rez_access_mw}
+              date={project.rez_access_date}
+            />
+          )}
           {project.has_sips && <DetailRow label="SIPS" value="Yes" />}
           {project.has_syncon && <DetailRow label="SynCon" value="Yes" />}
           {project.has_statcom && <DetailRow label="STATCOM" value="Yes" />}

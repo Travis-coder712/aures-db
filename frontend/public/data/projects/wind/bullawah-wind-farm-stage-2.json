@@ -22,6 +22,10 @@
   "confidence_score": "39",
   "development_stage": "epbc_submitted",
   "first_seen": "2023",
+  "rez_access_status": "granted",
+  "rez_access_mw": 262.3,
+  "rez_access_date": "2025-04-23",
+  "rez_access_scheme": "SW",
   "timeline": [
     {
       "date": "2023",
@@ -37,6 +41,14 @@
       "event_type": "rez_access",
       "title": "SW REZ access rights granted",
       "detail": "EnergyCo South West REZ access rights awarded \u2014 4 projects, 3.56 GW total",
+      "sources": []
+    },
+    {
+      "date": "2025-04-23",
+      "date_precision": "day",
+      "event_type": "rez_access",
+      "title": "REZ access right granted (South West)",
+      "detail": "EnergyCo registered access right SW2025-01 for Bullawah Wind Farm (Stage 2) \u2014 262.3 MW \u00b7 scheme: South West REZ \u00b7 status: Registered.",
       "sources": []
     },
     {

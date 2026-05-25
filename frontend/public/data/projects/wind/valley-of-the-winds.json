@@ -22,6 +22,10 @@
   "confidence_score": "39",
   "development_stage": "epbc_submitted",
   "first_seen": "2020",
+  "rez_access_status": "granted",
+  "rez_access_mw": 919.0,
+  "rez_access_date": "2025-05-07",
+  "rez_access_scheme": "CWO",
   "timeline": [
     {
       "date": "2020",
@@ -29,6 +33,30 @@
       "event_type": "planning_submitted",
       "title": "EPBC Referral 2020/8668",
       "detail": "Valley of the Winds wind farm \u2014 Controlled Action",
+      "sources": []
+    },
+    {
+      "date": "2025-05-07",
+      "date_precision": "day",
+      "event_type": "rez_access",
+      "title": "REZ access right granted (Central-West Orana)",
+      "detail": "EnergyCo registered access right CWO2025-03 for Valley of the Winds 1 \u2014 148.0 MW \u00b7 scheme: Central-West Orana REZ \u00b7 status: Registered.",
+      "sources": []
+    },
+    {
+      "date": "2025-05-07",
+      "date_precision": "day",
+      "event_type": "rez_access",
+      "title": "REZ access right granted (Central-West Orana)",
+      "detail": "EnergyCo registered access right CWO2025-04 for Valley of the Winds 2 \u2014 319.0 MW \u00b7 scheme: Central-West Orana REZ \u00b7 status: Registered.",
+      "sources": []
+    },
+    {
+      "date": "2025-05-07",
+      "date_precision": "day",
+      "event_type": "rez_access",
+      "title": "REZ access right granted (Central-West Orana)",
+      "detail": "EnergyCo registered access right CWO2025-05 for Valley of the Winds 3 \u2014 452.0 MW \u00b7 scheme: Central-West Orana REZ \u00b7 status: Registered.",
       "sources": []
     },
     {

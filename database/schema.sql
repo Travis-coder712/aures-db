@@ -457,3 +457,79 @@ CREATE TABLE IF NOT EXISTS league_table_entries (
 CREATE INDEX IF NOT EXISTS idx_league_project ON league_table_entries(project_id);
 CREATE INDEX IF NOT EXISTS idx_league_year_tech ON league_table_entries(year, technology);
 CREATE INDEX IF NOT EXISTS idx_league_quartile ON league_table_entries(quartile);
+
+-- ============================================================
+-- ENERGYCO REZ ACCESS RIGHTS: per-access-right rows from
+-- EnergyCo's Access Rights Register (Central-West Orana + South
+-- West REZ schemes). One row per access right (a project can
+-- hold multiple — e.g. Liverpool Range Stage 1 + Stage 2; or
+-- Dinawan Energy Hub which has 3 sub-stages).
+--
+-- Importer: pipeline/importers/import_energyco_rez_access.py
+-- Source:   https://www.energyco.nsw.gov.au/.../access-rights-register.xlsx
+-- Cadence:  Updated by EnergyCo on a rolling basis (no fixed period).
+--           Re-run as part of regular data refresh.
+-- ============================================================
+
+CREATE TABLE IF NOT EXISTS energyco_rez_access (
+    id                  INTEGER PRIMARY KEY AUTOINCREMENT,
+    access_right_id     TEXT NOT NULL UNIQUE,       -- e.g. 'CWO2025-01', 'SW2025-03'
+    project_id          TEXT REFERENCES projects(id) ON DELETE SET NULL,
+    rez_scheme          TEXT NOT NULL,              -- 'CWO' | 'SW'
+    project_name_raw    TEXT NOT NULL,              -- Raw name from the register
+    access_holder       TEXT,                       -- Legal entity name
+    abn_acn             TEXT,
+    max_capacity_mw     REAL,
+    primary_technology  TEXT,                       -- 'Wind' | 'Solar' | 'BESS'
+    has_hybrid_bess     INTEGER DEFAULT 0,
+    bess_mwh            REAL,                       -- Storage capacity if hybrid
+    allocation_process  TEXT,                       -- e.g. 'EnergyCo application' / 'AEMO Services T5 tender'
+    registration_date   TEXT,                       -- ISO date
+    access_status       TEXT,                       -- 'Registered' | 'Transferred' | 'Terminated' | 'Expired'
+    connection_point    TEXT,                       -- Eastings/Northings or substation name
+    coordinates         TEXT,                       -- Substation coords
+    ner_3_13_3_b2_2     INTEGER DEFAULT 0,          -- Boolean: subject to NER cl 3.13.3(b2)(2)
+    last_imported_at    TEXT NOT NULL DEFAULT (datetime('now'))
+);
+
+CREATE INDEX IF NOT EXISTS idx_energyco_rez_project   ON energyco_rez_access(project_id);
+CREATE INDEX IF NOT EXISTS idx_energyco_rez_scheme    ON energyco_rez_access(rez_scheme);
+CREATE INDEX IF NOT EXISTS idx_energyco_rez_status    ON energyco_rez_access(access_status);
+
+-- ============================================================
+-- AEMO IASR PROJECTS: per-project rows from AEMO's Inputs and
+-- Assumptions Workbook (Existing Gen Data Summary sheet).
+-- Covers Existing + Committed + Anticipated + Additional policy-
+-- supported projects across the NEM with REZ ID/Location detail
+-- that the monthly Gen Info Excel does NOT expose.
+--
+-- Importer: pipeline/importers/import_aemo_iasr.py
+-- Source:   AEMO 2025 IASR Workbook (xlsx, ~18 MB, 83 sheets)
+-- Cadence:  Annual (final IASR released August, Draft IASR in
+--           Dec/Feb cycles for each ISP). Re-run as part of regular
+--           data refresh.
+-- ============================================================
+
+CREATE TABLE IF NOT EXISTS aemo_iasr_projects (
+    id                  INTEGER PRIMARY KEY AUTOINCREMENT,
+    iasr_id             TEXT NOT NULL,              -- e.g. 'AVLSF1', 'BHBG1'
+    project_id          TEXT REFERENCES projects(id) ON DELETE SET NULL,
+    power_station       TEXT NOT NULL,              -- e.g. 'Avonlie Solar Farm'
+    technology_type     TEXT,                       -- e.g. 'Large scale Solar PV', 'Wind', 'Battery storage (2hrs storage)'
+    fuel_type           TEXT,
+    region              TEXT,                       -- 'NSW' | 'VIC' | 'QLD' | 'SA' | 'TAS'
+    sub_region          TEXT,                       -- e.g. 'CNSW', 'SNW', 'CQ'
+    rez_location        TEXT,                       -- Human-readable REZ name, e.g. 'Wagga Wagga', 'Central-West Orana'
+    rez_id              TEXT,                       -- AEMO REZ code, e.g. 'N5', 'V5', 'Q8a'
+    status              TEXT,                       -- 'Existing' | 'Committed' | 'Anticipated' | 'Additional policy-supported'
+    max_capacity_mw     REAL,
+    storage_mwh         REAL,
+    workbook_version    TEXT NOT NULL,              -- e.g. '2025-iasr-aug2025'
+    last_imported_at    TEXT NOT NULL DEFAULT (datetime('now')),
+    UNIQUE(iasr_id, workbook_version)
+);
+
+CREATE INDEX IF NOT EXISTS idx_aemo_iasr_project   ON aemo_iasr_projects(project_id);
+CREATE INDEX IF NOT EXISTS idx_aemo_iasr_status    ON aemo_iasr_projects(status);
+CREATE INDEX IF NOT EXISTS idx_aemo_iasr_rez       ON aemo_iasr_projects(rez_id);
+CREATE INDEX IF NOT EXISTS idx_aemo_iasr_region    ON aemo_iasr_projects(region);

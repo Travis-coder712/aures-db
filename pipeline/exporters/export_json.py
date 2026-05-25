@@ -77,6 +77,12 @@ OVERLAY_OVERRIDE_FIELDS = frozenset({
     'aemo_connection_date',
     # Scheme contracts (CIS / LTESA / SIPS round wins)
     'scheme_contracts',
+    # REZ access rights (EnergyCo NSW + future state schemes)
+    'rez_access_status',
+    'rez_access_mw',
+    'rez_access_date',
+    'rez_access_scheme',
+    'rez_access_notes',
 })
 
 

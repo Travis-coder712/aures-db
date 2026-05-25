@@ -4,11 +4,11 @@
     "date": "2025-04-01"
   },
   "yanco-delta-wind-farm": {
-    "title": "SW REZ access rights granted",
+    "title": "REZ access right granted (South West)",
     "date": "2025-04-23"
   },
   "dinawan-energy-hub": {
-    "title": "SW REZ access rights granted",
+    "title": "REZ access right granted (South West)",
     "date": "2025-04-23"
   },
   "pottinger-energy-park-battery-kci": {
@@ -20,7 +20,7 @@
     "date": "2025-04-23"
   },
   "pottinger-energy-park-wind-kci": {
-    "title": "SW REZ access rights granted",
+    "title": "REZ access right granted (South West)",
     "date": "2025-04-23"
   },
   "bullawah-wind-farm-stage-1": {
@@ -28,14 +28,18 @@
     "date": "2025-04-23"
   },
   "bullawah-wind-farm-stage-2": {
-    "title": "SW REZ access rights granted",
+    "title": "REZ access right granted (South West)",
     "date": "2025-04-23"
   },
-  "valley-of-the-winds": {
+  "birriwa-bess": {
+    "title": "REZ access right granted (Central-West Orana)",
+    "date": "2025-05-07"
+  },
+  "birriwa-solar-farm": {
     "title": "CWO REZ access rights granted",
     "date": "2025-05-08"
   },
-  "birriwa-solar-farm": {
+  "valley-of-the-winds": {
     "title": "CWO REZ access rights granted",
     "date": "2025-05-08"
   },
@@ -43,13 +47,17 @@
     "title": "CWO REZ access rights granted",
     "date": "2025-05-08"
   },
+  "cobbora-bess": {
+    "title": "REZ access right granted (Central-West Orana)",
+    "date": "2025-05-07"
+  },
   "cobbora-solar-farm": {
     "title": "CWO REZ access rights granted",
     "date": "2025-05-08"
   },
-  "sandy-creek-energy-storage-system": {
-    "title": "CWO REZ access rights granted",
-    "date": "2025-05-08"
+  "sandy-creek-standalone-bess": {
+    "title": "REZ access right granted (Central-West Orana)",
+    "date": "2025-05-07"
   },
   "sandy-creek-solar-farm": {
     "title": "CWO REZ access rights granted",
@@ -60,6 +68,10 @@
     "date": "2025-05-08"
   },
   "liverpool-range-wind-farm": {
+    "title": "CWO REZ access rights granted",
+    "date": "2025-05-08"
+  },
+  "sandy-creek-energy-storage-system": {
     "title": "CWO REZ access rights granted",
     "date": "2025-05-08"
   }

@@ -103,6 +103,618 @@
       }
     },
     {
+      "rez": "Isaac",
+      "total_mw": 1716.0,
+      "operating_mw": 0,
+      "pipeline_mw": 1716.0,
+      "project_count": 3,
+      "congestion_score": 64.6,
+      "congestion_level": "moderate",
+      "technologies": {
+        "solar": {
+          "construction": {
+            "count": 1,
+            "mw": 296.0
+          }
+        },
+        "wind": {
+          "commissioning": {
+            "count": 1,
+            "mw": 1135.0
+          },
+          "construction": {
+            "count": 1,
+            "mw": 285.0
+          }
+        }
+      },
+      "connection_status": {
+        "commissioning": {
+          "count": 1,
+          "mw": 1135.0
+        },
+        "committed": {
+          "count": 2,
+          "mw": 581.0
+        }
+      }
+    },
+    {
+      "rez": "Wide Bay",
+      "total_mw": 600.4,
+      "operating_mw": 0,
+      "pipeline_mw": 600.4,
+      "project_count": 5,
+      "congestion_score": 63.0,
+      "congestion_level": "moderate",
+      "technologies": {
+        "bess": {
+          "construction": {
+            "count": 1,
+            "mw": 222.0
+          }
+        },
+        "solar": {
+          "construction": {
+            "count": 2,
+            "mw": 180.0
+          },
+          "development": {
+            "count": 2,
+            "mw": 198.4
+          }
+        }
+      },
+      "connection_status": {
+        "anticipated": {
+          "count": 2,
+          "mw": 198.4
+        },
+        "committed": {
+          "count": 3,
+          "mw": 402.0
+        }
+      }
+    },
+    {
+      "rez": "South West VIC",
+      "total_mw": 1642.5,
+      "operating_mw": 439.5,
+      "pipeline_mw": 1203.0,
+      "project_count": 7,
+      "congestion_score": 61.1,
+      "congestion_level": "moderate",
+      "technologies": {
+        "bess": {
+          "commissioning": {
+            "count": 1,
+            "mw": 300.0
+          },
+          "construction": {
+            "count": 1,
+            "mw": 100.0
+          }
+        },
+        "wind": {
+          "commissioning": {
+            "count": 1,
+            "mw": 733.0
+          },
+          "development": {
+            "count": 1,
+            "mw": 70.0
+          },
+          "operating": {
+            "count": 3,
+            "mw": 439.5
+          }
+        }
+      },
+      "connection_status": {
+        "anticipated": {
+          "count": 1,
+          "mw": 70.0
+        },
+        "commissioning": {
+          "count": 1,
+          "mw": 733.0
+        },
+        "committed": {
+          "count": 2,
+          "mw": 400.0
+        },
+        "operating": {
+          "count": 3,
+          "mw": 439.5
+        }
+      }
+    },
+    {
+      "rez": "South West NSW",
+      "total_mw": 220.8,
+      "operating_mw": 30.0,
+      "pipeline_mw": 190.8,
+      "project_count": 3,
+      "congestion_score": 57.0,
+      "congestion_level": "moderate",
+      "technologies": {
+        "bess": {
+          "construction": {
+            "count": 1,
+            "mw": 50.0
+          }
+        },
+        "solar": {
+          "development": {
+            "count": 1,
+            "mw": 140.8
+          },
+          "operating": {
+            "count": 1,
+            "mw": 30.0
+          }
+        }
+      },
+      "connection_status": {
+        "anticipated": {
+          "count": 1,
+          "mw": 140.8
+        },
+        "committed": {
+          "count": 1,
+          "mw": 50.0
+        },
+        "operating": {
+          "count": 1,
+          "mw": 30.0
+        }
+      }
+    },
+    {
+      "rez": "Fitzroy",
+      "total_mw": 528.0,
+      "operating_mw": 0,
+      "pipeline_mw": 528.0,
+      "project_count": 2,
+      "congestion_score": 56.6,
+      "congestion_level": "moderate",
+      "technologies": {
+        "bess": {
+          "development": {
+            "count": 1,
+            "mw": 300.0
+          }
+        },
+        "wind": {
+          "construction": {
+            "count": 1,
+            "mw": 228.0
+          }
+        }
+      },
+      "connection_status": {
+        "anticipated": {
+          "count": 1,
+          "mw": 300.0
+        },
+        "committed": {
+          "count": 1,
+          "mw": 228.0
+        }
+      }
+    },
+    {
+      "rez": "Southern Downs",
+      "total_mw": 890.0,
+      "operating_mw": 0,
+      "pipeline_mw": 890.0,
+      "project_count": 1,
+      "congestion_score": 56.5,
+      "congestion_level": "moderate",
+      "technologies": {
+        "wind": {
+          "commissioning": {
+            "count": 1,
+            "mw": 890.0
+          }
+        }
+      },
+      "connection_status": {
+        "commissioning": {
+          "count": 1,
+          "mw": 890.0
+        }
+      }
+    },
+    {
+      "rez": "Western Downs",
+      "total_mw": 546.0,
+      "operating_mw": 40.0,
+      "pipeline_mw": 506.0,
+      "project_count": 2,
+      "congestion_score": 56.5,
+      "congestion_level": "moderate",
+      "technologies": {
+        "solar": {
+          "operating": {
+            "count": 1,
+            "mw": 40.0
+          }
+        },
+        "wind": {
+          "construction": {
+            "count": 1,
+            "mw": 506.0
+          }
+        }
+      },
+      "connection_status": {
+        "committed": {
+          "count": 1,
+          "mw": 506.0
+        },
+        "operating": {
+          "count": 1,
+          "mw": 40.0
+        }
+      }
+    },
+    {
+      "rez": "Broken Hill",
+      "total_mw": 250.0,
+      "operating_mw": 50.0,
+      "pipeline_mw": 200.0,
+      "project_count": 2,
+      "congestion_score": 55.0,
+      "congestion_level": "moderate",
+      "technologies": {
+        "bess": {
+          "development": {
+            "count": 1,
+            "mw": 200.0
+          },
+          "operating": {
+            "count": 1,
+            "mw": 50.0
+          }
+        }
+      },
+      "connection_status": {
+        "anticipated": {
+          "count": 1,
+          "mw": 200.0
+        },
+        "operating": {
+          "count": 1,
+          "mw": 50.0
+        }
+      }
+    },
+    {
+      "rez": "Northern QLD",
+      "total_mw": 300.0,
+      "operating_mw": 0,
+      "pipeline_mw": 300.0,
+      "project_count": 1,
+      "congestion_score": 48.5,
+      "congestion_level": "moderate",
+      "technologies": {
+        "solar": {
+          "development": {
+            "count": 1,
+            "mw": 300.0
+          }
+        }
+      },
+      "connection_status": {
+        "anticipated": {
+          "count": 1,
+          "mw": 300.0
+        }
+      }
+    },
+    {
+      "rez": "Tumut",
+      "total_mw": 370.0,
+      "operating_mw": 100.0,
+      "pipeline_mw": 270.0,
+      "project_count": 2,
+      "congestion_score": 45.9,
+      "congestion_level": "moderate",
+      "technologies": {
+        "bess": {
+          "operating": {
+            "count": 1,
+            "mw": 100.0
+          }
+        },
+        "wind": {
+          "development": {
+            "count": 1,
+            "mw": 270.0
+          }
+        }
+      },
+      "connection_status": {
+        "anticipated": {
+          "count": 1,
+          "mw": 270.0
+        },
+        "operating": {
+          "count": 1,
+          "mw": 100.0
+        }
+      }
+    },
+    {
+      "rez": "Gippsland Onshore",
+      "total_mw": 627.0,
+      "operating_mw": 200.0,
+      "pipeline_mw": 427.0,
+      "project_count": 3,
+      "congestion_score": 40.2,
+      "congestion_level": "moderate",
+      "technologies": {
+        "bess": {
+          "construction": {
+            "count": 1,
+            "mw": 350.0
+          },
+          "operating": {
+            "count": 1,
+            "mw": 200.0
+          }
+        },
+        "solar": {
+          "development": {
+            "count": 1,
+            "mw": 77.0
+          }
+        }
+      },
+      "connection_status": {
+        "anticipated": {
+          "count": 1,
+          "mw": 77.0
+        },
+        "committed": {
+          "count": 1,
+          "mw": 350.0
+        },
+        "operating": {
+          "count": 1,
+          "mw": 200.0
+        }
+      }
+    },
+    {
+      "rez": "New England",
+      "total_mw": 315.0,
+      "operating_mw": 115.0,
+      "pipeline_mw": 200.0,
+      "project_count": 2,
+      "congestion_score": 31.1,
+      "congestion_level": "low",
+      "technologies": {
+        "solar": {
+          "development": {
+            "count": 1,
+            "mw": 200.0
+          },
+          "operating": {
+            "count": 1,
+            "mw": 115.0
+          }
+        }
+      },
+      "connection_status": {
+        "anticipated": {
+          "count": 1,
+          "mw": 200.0
+        },
+        "operating": {
+          "count": 1,
+          "mw": 115.0
+        }
+      }
+    },
+    {
+      "rez": "Central North VIC",
+      "total_mw": 777.0,
+      "operating_mw": 372.0,
+      "pipeline_mw": 405.0,
+      "project_count": 6,
+      "congestion_score": 30.4,
+      "congestion_level": "low",
+      "technologies": {
+        "bess": {
+          "operating": {
+            "count": 1,
+            "mw": 250.0
+          }
+        },
+        "solar": {
+          "commissioning": {
+            "count": 1,
+            "mw": 75.0
+          },
+          "construction": {
+            "count": 2,
+            "mw": 330.0
+          },
+          "operating": {
+            "count": 2,
+            "mw": 122.0
+          }
+        }
+      },
+      "connection_status": {
+        "commissioning": {
+          "count": 1,
+          "mw": 75.0
+        },
+        "committed": {
+          "count": 3,
+          "mw": 580.0
+        },
+        "operating": {
+          "count": 2,
+          "mw": 122.0
+        }
+      }
+    },
+    {
+      "rez": "Issac",
+      "total_mw": 180.0,
+      "operating_mw": 0,
+      "pipeline_mw": 180.0,
+      "project_count": 1,
+      "congestion_score": 29.9,
+      "congestion_level": "low",
+      "technologies": {
+        "bess": {
+          "development": {
+            "count": 1,
+            "mw": 180.0
+          }
+        }
+      },
+      "connection_status": {
+        "anticipated": {
+          "count": 1,
+          "mw": 180.0
+        }
+      }
+    },
+    {
+      "rez": "Wimmera Grampians",
+      "total_mw": 118.8,
+      "operating_mw": 0,
+      "pipeline_mw": 118.8,
+      "project_count": 1,
+      "congestion_score": 20.4,
+      "congestion_level": "low",
+      "technologies": {
+        "solar": {
+          "construction": {
+            "count": 1,
+            "mw": 118.8
+          }
+        }
+      },
+      "connection_status": {
+        "committed": {
+          "count": 1,
+          "mw": 118.8
+        }
+      }
+    },
+    {
+      "rez": "Hunter Central Coast",
+      "total_mw": 1200.0,
+      "operating_mw": 700.0,
+      "pipeline_mw": 500.0,
+      "project_count": 2,
+      "congestion_score": 17.2,
+      "congestion_level": "low",
+      "technologies": {
+        "bess": {
+          "commissioning": {
+            "count": 1,
+            "mw": 500.0
+          },
+          "operating": {
+            "count": 1,
+            "mw": 700.0
+          }
+        }
+      },
+      "connection_status": {
+        "committed": {
+          "count": 1,
+          "mw": 500.0
+        },
+        "operating": {
+          "count": 1,
+          "mw": 700.0
+        }
+      }
+    },
+    {
+      "rez": "Mid-North SA",
+      "total_mw": 583.5,
+      "operating_mw": 412.5,
+      "pipeline_mw": 171.0,
+      "project_count": 4,
+      "congestion_score": 15.1,
+      "congestion_level": "low",
+      "technologies": {
+        "bess": {
+          "commissioning": {
+            "count": 2,
+            "mw": 171.0
+          }
+        },
+        "wind": {
+          "operating": {
+            "count": 2,
+            "mw": 412.5
+          }
+        }
+      },
+      "connection_status": {
+        "commissioning": {
+          "count": 1,
+          "mw": 111.0
+        },
+        "committed": {
+          "count": 1,
+          "mw": 60.0
+        },
+        "operating": {
+          "count": 2,
+          "mw": 412.5
+        }
+      }
+    },
+    {
+      "rez": "Darling Downs",
+      "total_mw": 865.0,
+      "operating_mw": 745.0,
+      "pipeline_mw": 120.0,
+      "project_count": 6,
+      "congestion_score": 15.0,
+      "congestion_level": "low",
+      "technologies": {
+        "bess": {
+          "operating": {
+            "count": 2,
+            "mw": 255.0
+          }
+        },
+        "solar": {
+          "commissioning": {
+            "count": 1,
+            "mw": 120.0
+          },
+          "operating": {
+            "count": 3,
+            "mw": 490.0
+          }
+        }
+      },
+      "connection_status": {
+        "commissioning": {
+          "count": 1,
+          "mw": 120.0
+        },
+        "operating": {
+          "count": 5,
+          "mw": 745.0
+        }
+      }
+    },
+    {
       "rez": "nsw-new-england",
       "total_mw": 920.0,
       "operating_mw": 720.0,
@@ -136,6 +748,106 @@
       }
     },
     {
+      "rez": "South East SA",
+      "total_mw": 41.5,
+      "operating_mw": 0,
+      "pipeline_mw": 41.5,
+      "project_count": 1,
+      "congestion_score": 8.4,
+      "congestion_level": "low",
+      "technologies": {
+        "bess": {
+          "commissioning": {
+            "count": 1,
+            "mw": 41.5
+          }
+        }
+      },
+      "connection_status": {
+        "commissioning": {
+          "count": 1,
+          "mw": 41.5
+        }
+      }
+    },
+    {
+      "rez": "Wagga Wagga",
+      "total_mw": 383.7,
+      "operating_mw": 335.0,
+      "pipeline_mw": 48.7,
+      "project_count": 3,
+      "congestion_score": 8.4,
+      "congestion_level": "low",
+      "technologies": {
+        "solar": {
+          "commissioning": {
+            "count": 1,
+            "mw": 48.7
+          },
+          "operating": {
+            "count": 2,
+            "mw": 335.0
+          }
+        }
+      },
+      "connection_status": {
+        "commissioning": {
+          "count": 1,
+          "mw": 48.7
+        },
+        "operating": {
+          "count": 2,
+          "mw": 335.0
+        }
+      }
+    },
+    {
+      "rez": "Central-West Orana",
+      "total_mw": 730.0,
+      "operating_mw": 730.0,
+      "pipeline_mw": 0,
+      "project_count": 2,
+      "congestion_score": 4.0,
+      "congestion_level": "low",
+      "technologies": {
+        "solar": {
+          "operating": {
+            "count": 2,
+            "mw": 730.0
+          }
+        }
+      },
+      "connection_status": {
+        "operating": {
+          "count": 2,
+          "mw": 730.0
+        }
+      }
+    },
+    {
+      "rez": "Central -West Orana",
+      "total_mw": 145.5,
+      "operating_mw": 145.5,
+      "pipeline_mw": 0,
+      "project_count": 1,
+      "congestion_score": 2.0,
+      "congestion_level": "low",
+      "technologies": {
+        "wind": {
+          "operating": {
+            "count": 1,
+            "mw": 145.5
+          }
+        }
+      },
+      "connection_status": {
+        "operating": {
+          "count": 1,
+          "mw": 145.5
+        }
+      }
+    },
+    {
       "rez": "NSW New England",
       "total_mw": 175.0,
       "operating_mw": 175.0,
@@ -157,6 +869,29 @@
           "mw": 175.0
         }
       }
+    },
+    {
+      "rez": "North West VIC",
+      "total_mw": 185.0,
+      "operating_mw": 185.0,
+      "pipeline_mw": 0,
+      "project_count": 1,
+      "congestion_score": 2.0,
+      "congestion_level": "low",
+      "technologies": {
+        "bess": {
+          "operating": {
+            "count": 1,
+            "mw": 185.0
+          }
+        }
+      },
+      "connection_status": {
+        "operating": {
+          "count": 1,
+          "mw": 185.0
+        }
+      }
     }
   ],
   "state_summary": {
@@ -169,6 +904,14 @@
         "nsw-south-west",
         "nsw-new-england",
         "NSW New England"
+      ]
+    },
+    "WA": {
+      "rez_count": 1,
+      "total_mw": 383.7,
+      "pipeline_mw": 48.7,
+      "rezs": [
+        "Wagga Wagga"
       ]
     }
   },
@@ -194,6 +937,6 @@
       "mw": 305388.4
     }
   },
-  "total_rez_zones": 4,
-  "exported_at": "2026-05-25T14:55:48.945211"
+  "total_rez_zones": 27,
+  "exported_at": "2026-05-26T07:37:05.445614"
 }

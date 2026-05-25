@@ -33,3 +33,6 @@ __pycache__/
 
 # NEMWEB cache (large, regenerable)
 data/nemweb_cache/
+
+# Large cached AEMO IASR Workbook (~17 MB — annual; importer downloads on-demand)
+pipeline/importers/downloads/aemo-*-iasr-workbook.xlsx

@@ -22,6 +22,10 @@
   "development_stage": "epbc_approved",
   "first_seen": "2005",
   "zombie_flag": "zombie_stale",
+  "rez_access_status": "granted",
+  "rez_access_mw": 1332.0,
+  "rez_access_date": "2025-05-07",
+  "rez_access_scheme": "CWO",
   "timeline": [
     {
       "date": "2005",
@@ -29,6 +33,22 @@
       "event_type": "planning_submitted",
       "title": "EPBC Referral 2005/2296",
       "detail": "Liverpool Range Wind farm \u2014 Not Controlled Action",
+      "sources": []
+    },
+    {
+      "date": "2025-05-07",
+      "date_precision": "day",
+      "event_type": "rez_access",
+      "title": "REZ access right granted (Central-West Orana)",
+      "detail": "EnergyCo registered access right CWO2025-12 for Liverpool Range Wind Farm Stage 1 \u2014 633.6 MW \u00b7 scheme: Central-West Orana REZ \u00b7 status: Registered.",
+      "sources": []
+    },
+    {
+      "date": "2025-05-07",
+      "date_precision": "day",
+      "event_type": "rez_access",
+      "title": "REZ access right granted (Central-West Orana)",
+      "detail": "EnergyCo registered access right CWO2025-13 for Liverpool Range Wind Farm Stage 2 \u2014 698.4 MW \u00b7 scheme: Central-West Orana REZ \u00b7 status: Registered.",
       "sources": []
     },
     {

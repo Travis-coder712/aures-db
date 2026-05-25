@@ -23,7 +23,19 @@
   "confidence_score": "36",
   "development_stage": "planning_submitted",
   "first_seen": "2025-05-08",
+  "rez_access_status": "granted",
+  "rez_access_mw": 500.0,
+  "rez_access_date": "2025-05-07",
+  "rez_access_scheme": "CWO",
   "timeline": [
+    {
+      "date": "2025-05-07",
+      "date_precision": "day",
+      "event_type": "rez_access",
+      "title": "REZ access right granted (Central-West Orana)",
+      "detail": "EnergyCo registered access right CWO2025-06 for Tallawang Solar Hybrid \u2014 500.0 MW \u00b7 scheme: Central-West Orana REZ \u00b7 status: Registered.",
+      "sources": []
+    },
     {
       "date": "2025-05-08",
       "date_precision": "day",

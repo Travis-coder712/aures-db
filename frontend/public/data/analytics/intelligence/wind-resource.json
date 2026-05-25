@@ -629,6 +629,7 @@
       "project_id": "mt-gellibrand-wind-farm",
       "name": "Mt Gellibrand Wind Farm",
       "state": "VIC",
+      "rez": "South West VIC",
       "capacity_mw": 132.0,
       "latitude": -38.257657,
       "longitude": 143.798651,
@@ -857,6 +858,7 @@
       "project_id": "flyers-creek-wind-farm",
       "name": "Flyers Creek Wind Farm",
       "state": "NSW",
+      "rez": "Central -West Orana",
       "capacity_mw": 145.5,
       "latitude": -33.521475,
       "longitude": 149.045234,
@@ -893,6 +895,7 @@
       "project_id": "hawkesdale-wind-farm",
       "name": "Hawkesdale Wind Farm",
       "state": "VIC",
+      "rez": "South West VIC",
       "capacity_mw": 89.5,
       "latitude": -38.148008,
       "longitude": 142.360925,
@@ -917,6 +920,7 @@
       "project_id": "ryan-corner-wind-farm",
       "name": "Ryan Corner Wind Farm",
       "state": "VIC",
+      "rez": "South West VIC",
       "capacity_mw": 218.0,
       "latitude": -38.271156,
       "longitude": 142.14003,
@@ -941,6 +945,7 @@
       "project_id": "goyder-south-wind-farm-1b",
       "name": "Goyder South Wind Farm 1B",
       "state": "SA",
+      "rez": "Mid-North SA",
       "capacity_mw": 203.5,
       "latitude": -33.682196,
       "longitude": 138.936249,
@@ -953,6 +958,7 @@
       "project_id": "goyder-south-wind-farm-1a",
       "name": "Goyder South Wind Farm 1A",
       "state": "SA",
+      "rez": "Mid-North SA",
       "capacity_mw": 209.0,
       "latitude": -33.682196,
       "longitude": 138.936249,
@@ -1005,6 +1011,22 @@
     }
   },
   "rez_benchmarks": {
+    "Central -West Orana": {
+      "count": 1,
+      "mean": 18.7,
+      "median": 18.7,
+      "p25": 18.7,
+      "p75": 18.7,
+      "rating": "Below Average"
+    },
+    "Mid-North SA": {
+      "count": 2,
+      "mean": 4.1,
+      "median": 4.1,
+      "p25": 4.1,
+      "p75": 4.1,
+      "rating": "Below Average"
+    },
     "NSW New England": {
       "count": 1,
       "mean": 28.7,
@@ -1012,6 +1034,14 @@
       "p25": 28.7,
       "p75": 28.7,
       "rating": "Good"
+    },
+    "South West VIC": {
+      "count": 3,
+      "mean": 16.3,
+      "median": 15.3,
+      "p25": 8.2,
+      "p75": 25.5,
+      "rating": "Below Average"
     }
   },
   "development_projects": [
@@ -1147,6 +1177,7 @@
       "project_id": "boulder-creek-wind-farm",
       "name": "Boulder Creek Wind Farm",
       "state": "QLD",
+      "rez": "Fitzroy",
       "capacity_mw": 228.0,
       "latitude": -20.77,
       "longitude": 148.53,
@@ -1297,6 +1328,7 @@
       "project_id": "coppabella-wind-farm",
       "name": "Coppabella Wind Farm",
       "state": "NSW",
+      "rez": "Tumut",
       "capacity_mw": 270.0,
       "predicted_cf_pct": 26.7,
       "predicted_rating": "Average",
@@ -1660,6 +1692,7 @@
       "project_id": "lotus-creek-wind-farm",
       "name": "Lotus Creek Wind Farm",
       "state": "QLD",
+      "rez": "Isaac",
       "capacity_mw": 285.0,
       "latitude": -22.0,
       "longitude": 149.2,
@@ -2075,6 +2108,7 @@
       "project_id": "wambo-wind-farm",
       "name": "Wambo Wind Farm",
       "state": "QLD",
+      "rez": "Western Downs",
       "capacity_mw": 506.0,
       "latitude": -26.648,
       "longitude": 151.306,
@@ -2167,6 +2201,7 @@
       "project_id": "woolsthorpe-wind-farm",
       "name": "Woolsthorpe Wind Farm",
       "state": "VIC",
+      "rez": "South West VIC",
       "capacity_mw": 70.0,
       "predicted_cf_pct": 26.6,
       "predicted_rating": "Average",
@@ -2194,5 +2229,5 @@
   ],
   "total_operating": 80,
   "total_development": 128,
-  "exported_at": "2026-05-25T14:53:54.343009"
+  "exported_at": "2026-05-26T07:28:24.586225"
 }
