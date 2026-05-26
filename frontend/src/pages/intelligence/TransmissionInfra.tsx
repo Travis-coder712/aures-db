@@ -5,8 +5,8 @@ import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip,
   ResponsiveContainer, Cell, PieChart, Pie, Legend,
 } from 'recharts'
-import { fetchGridConnection, fetchEISAnalytics } from '../../lib/dataService'
-import type { GridConnectionData, EISAnalyticsData, EISWindProject, EISBESSProject, REZSummary } from '../../lib/types'
+import { fetchGridConnection, fetchEISAnalytics, fetchRezPipeline } from '../../lib/dataService'
+import type { GridConnectionData, EISAnalyticsData, EISWindProject, EISBESSProject, REZSummary, RezPipelineData, RezPipelineEntry } from '../../lib/types'
 import {
   TRANSMISSION_PROJECTS,
   TRANSMISSION_STATUS_COLOURS,
@@ -132,13 +132,14 @@ function StatusBadge({ status }: { status: TransmissionStatus }) {
 // Tabs
 // ============================================================
 
-type TabId = 'map' | 'analytics' | 'projects' | 'rez'
+type TabId = 'map' | 'analytics' | 'projects' | 'rez' | 'rez-pipeline'
 
 const TABS: { id: TabId; label: string }[] = [
   { id: 'map', label: 'Map' },
   { id: 'analytics', label: 'Connection Analytics' },
   { id: 'projects', label: 'Transmission Projects' },
   { id: 'rez', label: 'REZ Congestion' },
+  { id: 'rez-pipeline', label: 'REZ Pipeline' },
 ]
 
 // ============================================================
@@ -149,13 +150,15 @@ export default function TransmissionInfra() {
   const [activeTab, setActiveTab] = useState<TabId>('map')
   const [gridData, setGridData] = useState<GridConnectionData | null>(null)
   const [eisData, setEISData] = useState<EISAnalyticsData | null>(null)
+  const [rezPipeline, setRezPipeline] = useState<RezPipelineData | null>(null)
   const [loading, setLoading] = useState(true)
   const [expandedProject, setExpandedProject] = useState<string | null>(null)
 
   useEffect(() => {
-    Promise.all([fetchGridConnection(), fetchEISAnalytics()]).then(([g, e]) => {
+    Promise.all([fetchGridConnection(), fetchEISAnalytics(), fetchRezPipeline()]).then(([g, e, r]) => {
       setGridData(g)
       setEISData(e)
+      setRezPipeline(r)
       setLoading(false)
     })
   }, [])
@@ -335,6 +338,9 @@ export default function TransmissionInfra() {
           gridData={gridData}
           congestionData={congestionData}
         />
+      )}
+      {activeTab === 'rez-pipeline' && (
+        <RezPipelineTab data={rezPipeline} loading={loading} />
       )}
 
       <p className="text-[11px] text-[var(--color-text-muted)]/50 text-center">
@@ -1330,6 +1336,440 @@ function REZTab({ gridData, congestionData }: REZTabProps) {
         Grid connection data sourced from AEMO connection registers, REZ access scheme disclosures, and developer announcements.
         Congestion scores reflect pipeline-to-capacity ratios and known curtailment patterns.
       </p>
+    </div>
+  )
+}
+
+// ============================================================
+// REZ Pipeline Tab (v3.13.0)
+//
+// Surfaces the AEMO IASR + EnergyCo Access Rights data layers that
+// landed in v3.12.0. Three lenses:
+//
+//   1. Hero stats — committed / anticipated / access-rights MW
+//   2. Top-15 REZ bar chart by committed+anticipated MW
+//   3. Per-REZ DataTable with project counts + drill-down to /rez/:id
+//   4. NSW access-scheme utilisation (CWO + SW) — allocated vs IASR pipeline
+//   5. Unmatched IASR callout (data-quality signal)
+// ============================================================
+
+const REZ_TECH_COLOURS: Record<string, string> = {
+  wind: '#3b82f6',
+  solar: '#f59e0b',
+  bess: '#10b981',
+  pumped_hydro: '#8b5cf6',
+  hybrid: '#ec4899',
+  offshore_wind: '#06b6d4',
+}
+
+function RezPipelineTab({ data, loading }: { data: RezPipelineData | null; loading: boolean }) {
+  const [expandedRez, setExpandedRez] = useState<string | null>(null)
+
+  if (loading) {
+    return (
+      <div className="p-8 text-center text-sm text-[var(--color-text-muted)] animate-pulse">
+        Loading REZ pipeline...
+      </div>
+    )
+  }
+  if (!data) {
+    return (
+      <div className="p-8 text-center text-sm text-[var(--color-text-muted)]">
+        REZ pipeline data unavailable.
+      </div>
+    )
+  }
+
+  const t = data.totals
+
+  // Top-15 REZs by pipeline (committed + anticipated)
+  const topRezData = data.rezs
+    .slice()
+    .sort((a, b) => (b.iasr_committed_mw + b.iasr_anticipated_mw) - (a.iasr_committed_mw + a.iasr_anticipated_mw))
+    .slice(0, 15)
+    .map(r => ({
+      name: r.display_name,
+      committed: Math.round(r.iasr_committed_mw),
+      anticipated: Math.round(r.iasr_anticipated_mw),
+      access: Math.round(r.access_rights_mw),
+    }))
+
+  // NSW access scheme allocation panel (CWO + SW only — the two NSW REZs
+  // with EnergyCo access schemes)
+  const nswAccessSchemes = data.rezs
+    .filter(r => r.access_scheme && r.access_rights_mw > 0)
+    .sort((a, b) => b.access_rights_mw - a.access_rights_mw)
+
+  // Per-REZ comparison table rows
+  const rezTableRows = data.rezs.map(r => ({
+    canonical_id: r.canonical_id,
+    name: r.display_name,
+    state: r.state,
+    aemo_rez_id: r.aemo_rez_id,
+    iasr_committed_mw: r.iasr_committed_mw,
+    iasr_anticipated_mw: r.iasr_anticipated_mw,
+    iasr_total_mw: r.iasr_total_mw,
+    access_rights_mw: r.access_rights_mw,
+    project_count: r.project_count,
+    rez: r,
+  }))
+
+  type RezTableRow = (typeof rezTableRows)[number]
+  const rezTableColumns: Column<RezTableRow>[] = [
+    {
+      key: 'name',
+      label: 'REZ Zone',
+      render: (_v, row) => (
+        <button
+          onClick={() => setExpandedRez(expandedRez === row.canonical_id ? null : row.canonical_id)}
+          className="text-[var(--color-primary)] hover:underline font-medium text-left"
+        >
+          {row.name} {row.aemo_rez_id ? <span className="text-[var(--color-text-muted)] text-xs">({row.aemo_rez_id})</span> : null}
+        </button>
+      ),
+    },
+    {
+      key: 'state',
+      label: 'State',
+      align: 'center',
+      render: (v) => (
+        <span className="text-xs font-medium" style={{ color: STATE_COLOURS[String(v)] || '#94a3b8' }}>
+          {String(v)}
+        </span>
+      ),
+    },
+    { key: 'iasr_committed_mw',   label: 'Committed MW',   format: 'number0', aggregator: 'sum', hideOnMobile: true, cellClassName: 'text-blue-400' },
+    { key: 'iasr_anticipated_mw', label: 'Anticipated MW', format: 'number0', aggregator: 'sum', hideOnMobile: true, cellClassName: 'text-sky-400' },
+    { key: 'iasr_total_mw',       label: 'Pipeline MW',    format: 'number0', aggregator: 'sum' },
+    { key: 'access_rights_mw',    label: 'Access Rights MW', format: 'number0', aggregator: 'sum', cellClassName: 'text-emerald-400' },
+    { key: 'project_count',       label: 'Projects',       format: 'number0', aggregator: 'sum' },
+  ]
+
+  return (
+    <div className="space-y-6">
+      {/* Hero stats */}
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+        <StatCard
+          label="REZ Zones (with pipeline)"
+          value={t.rez_count}
+          color="#8b5cf6"
+        />
+        <StatCard
+          label="IASR Committed"
+          value={(t.iasr_committed_mw / 1000).toFixed(1)}
+          unit={`GW · ${t.iasr_committed_count} projects`}
+          color="#3b82f6"
+        />
+        <StatCard
+          label="IASR Anticipated"
+          value={(t.iasr_anticipated_mw / 1000).toFixed(1)}
+          unit={`GW · ${t.iasr_anticipated_count} projects`}
+          color="#0ea5e9"
+        />
+        <StatCard
+          label="EnergyCo Access Rights"
+          value={(t.access_rights_mw / 1000).toFixed(2)}
+          unit={`GW · ${t.access_rights_count} rights`}
+          color="#10b981"
+        />
+      </div>
+
+      {/* Context callout */}
+      <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl p-4 text-xs text-[var(--color-text-muted)] leading-relaxed">
+        <p className="mb-2">
+          <span className="text-[var(--color-text)] font-medium">REZ Pipeline</span> consolidates three data layers:
+        </p>
+        <ul className="space-y-1 ml-4 list-disc">
+          <li>
+            <span className="text-blue-400">Committed</span> / <span className="text-sky-400">Anticipated</span> projects from the
+            <a href="https://aemo.com.au/energy-systems/major-publications/integrated-system-plan-isp" target="_blank" rel="noreferrer" className="text-[var(--color-primary)] hover:underline ml-1">AEMO 2025 IASR Workbook</a>
+            {' '}(quarterly+ish updates).
+          </li>
+          <li>
+            <span className="text-emerald-400">Access Rights</span> from the
+            <a href="https://www.energyco.nsw.gov.au/industry/access-schemes" target="_blank" rel="noreferrer" className="text-[var(--color-primary)] hover:underline ml-1">EnergyCo NSW Access Rights Register</a>
+            {' '}— NSW-only, covers CWO + South West REZ schemes.
+          </li>
+          <li>
+            Internal <code className="text-[var(--color-text)]">projects.rez</code> assignments (61 NEM projects post-IASR backfill).
+          </li>
+        </ul>
+        <p className="mt-2 italic">
+          Note: Other TNSPs (Transgrid, Powerlink, ElectraNet, VicGrid) don&apos;t publish a comparable access-rights register — their pipelines are commercial-in-confidence beyond what AEMO discloses via IASR.
+        </p>
+      </div>
+
+      {/* Top-15 bar chart */}
+      <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl p-4">
+        <h2 className="text-base font-semibold text-[var(--color-text)] mb-1">Top 15 REZs by Pipeline Capacity</h2>
+        <p className="text-xs text-[var(--color-text-muted)] mb-4">
+          IASR Committed + Anticipated MW per REZ, with EnergyCo Access Rights (NSW only) shown as a comparison band.
+        </p>
+        <div style={{ width: '100%', height: 480 }}>
+          <ResponsiveContainer width="100%" height="100%">
+            <BarChart data={topRezData} layout="vertical" margin={{ top: 8, right: 16, left: 8, bottom: 8 }}>
+              <CartesianGrid strokeDasharray="3 3" stroke="var(--color-border)" />
+              <XAxis type="number" tick={{ fill: '#94a3b8', fontSize: 11 }} unit=" MW" />
+              <YAxis dataKey="name" type="category" tick={{ fill: '#cbd5e1', fontSize: 11 }} width={150} />
+              <Tooltip
+                contentStyle={{ background: '#1e293b', border: '1px solid #334155', borderRadius: 8, color: '#e2e8f0' }}
+                formatter={(value, name) => {
+                  const v = typeof value === 'number' ? value : Number(value) || 0
+                  const label = name === 'committed' ? 'Committed' : name === 'anticipated' ? 'Anticipated' : 'Access Rights'
+                  return [`${v.toLocaleString('en-AU')} MW`, label]
+                }}
+              />
+              <Legend wrapperStyle={{ fontSize: 12 }} />
+              <Bar dataKey="committed"   stackId="iasr" fill="#3b82f6" name="Committed" />
+              <Bar dataKey="anticipated" stackId="iasr" fill="#0ea5e9" name="Anticipated" />
+              <Bar dataKey="access"      fill="#10b981" name="Access Rights" />
+            </BarChart>
+          </ResponsiveContainer>
+        </div>
+      </div>
+
+      {/* NSW Access Scheme utilisation */}
+      {nswAccessSchemes.length > 0 && (
+        <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl p-4">
+          <h2 className="text-base font-semibold text-[var(--color-text)] mb-1">NSW Access Scheme Utilisation</h2>
+          <p className="text-xs text-[var(--color-text-muted)] mb-4">
+            EnergyCo has granted access rights to {t.access_rights_count} projects across {nswAccessSchemes.length} NSW REZ access schemes.
+            Each access right entitles the holder to dispatch from the relevant REZ network element up to the maximum capacity for the term of the scheme.
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+            {nswAccessSchemes.map(r => {
+              const pipelineMW = r.iasr_total_mw
+              const accessMW = r.access_rights_mw
+              const ratio = pipelineMW > 0 ? Math.min((accessMW / pipelineMW) * 100, 999) : null
+              return (
+                <div key={r.canonical_id} className="bg-[var(--color-bg)] border border-[var(--color-border)] rounded-lg p-3">
+                  <div className="flex items-center justify-between mb-1">
+                    <span className="text-sm font-semibold text-[var(--color-text)]">{r.display_name}</span>
+                    <span className="text-[10px] text-emerald-400 bg-emerald-500/10 border border-emerald-500/30 rounded px-1.5 py-0.5">{r.access_scheme?.split(' ')[0]}</span>
+                  </div>
+                  <div className="text-xs text-[var(--color-text-muted)] mb-2">
+                    {r.access_rights_count} access right{r.access_rights_count === 1 ? '' : 's'} · {(accessMW / 1000).toFixed(2)} GW allocated
+                  </div>
+                  <div className="space-y-1 text-xs">
+                    <div className="flex justify-between">
+                      <span className="text-[var(--color-text-muted)]">EnergyCo allocation:</span>
+                      <span className="text-emerald-400 font-medium">{accessMW.toLocaleString('en-AU')} MW</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-[var(--color-text-muted)]">IASR Committed:</span>
+                      <span className="text-blue-400">{Math.round(r.iasr_committed_mw).toLocaleString('en-AU')} MW</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-[var(--color-text-muted)]">IASR Anticipated:</span>
+                      <span className="text-sky-400">{Math.round(r.iasr_anticipated_mw).toLocaleString('en-AU')} MW</span>
+                    </div>
+                    {ratio !== null && (
+                      <div className="flex justify-between pt-1 border-t border-[var(--color-border)]">
+                        <span className="text-[var(--color-text-muted)]">Allocated ÷ IASR pipeline:</span>
+                        <span className="text-[var(--color-text)] font-medium">{ratio.toFixed(0)}%</span>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              )
+            })}
+          </div>
+          <p className="text-[11px] text-[var(--color-text-muted)] italic mt-3">
+            Read as: how much capacity EnergyCo has already locked into this REZ via access rights vs how much capacity AEMO classifies as Committed or Anticipated in the same zone. A ratio above 100% means access rights have been allocated beyond what AEMO yet treats as Committed/Anticipated — i.e. EnergyCo is ahead of AEMO&apos;s classification.
+          </p>
+        </div>
+      )}
+
+      {/* Per-REZ table */}
+      <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl overflow-hidden">
+        <div className="p-4 border-b border-[var(--color-border)]">
+          <h2 className="text-base font-semibold text-[var(--color-text)]">All REZ Zones</h2>
+          <p className="text-xs text-[var(--color-text-muted)]">Click a REZ name to expand its project list.</p>
+        </div>
+        <div className="p-3">
+          <DataTable
+            rows={rezTableRows}
+            columns={rezTableColumns}
+            showRowNumbers
+            showTotals
+            defaultSort={{ key: 'iasr_total_mw', dir: 'desc' }}
+            csvFilename="rez-pipeline"
+          />
+        </div>
+        {expandedRez && (
+          <RezExpandedPanel
+            rez={data.rezs.find(r => r.canonical_id === expandedRez)!}
+            onClose={() => setExpandedRez(null)}
+          />
+        )}
+      </div>
+
+      {/* Unmatched IASR callout */}
+      {data.unmatched_iasr.length > 0 && (
+        <div className="bg-amber-500/5 border border-amber-500/30 rounded-xl p-4">
+          <h2 className="text-sm font-semibold text-amber-400 mb-1">
+            {data.unmatched_iasr.length} IASR projects without REZ assignment
+          </h2>
+          <p className="text-xs text-[var(--color-text-muted)] mb-3">
+            These projects appear in AEMO&apos;s IASR Workbook as Committed/Anticipated but the workbook didn&apos;t record a REZ Location for them
+            (typically gas peakers, BESS at existing substations, or generators in zones not yet declared as REZs). They&apos;re included in the
+            NEM-wide totals above but absent from the per-REZ breakdowns.
+          </p>
+          <div className="text-xs space-y-1 max-h-48 overflow-y-auto pr-2">
+            {data.unmatched_iasr.map(u => (
+              <div key={u.iasr_id} className="flex items-center justify-between gap-3 py-0.5">
+                <span className="text-[var(--color-text)] truncate">{u.power_station}</span>
+                <div className="flex items-center gap-2 flex-shrink-0">
+                  <span className="text-[var(--color-text-muted)]">{u.region || '—'}</span>
+                  <span
+                    className="px-1.5 py-0.5 rounded text-[10px]"
+                    style={{
+                      background: u.status === 'Committed' ? '#3b82f620' : '#0ea5e920',
+                      color: u.status === 'Committed' ? '#60a5fa' : '#38bdf8',
+                    }}
+                  >
+                    {u.status}
+                  </span>
+                  <span className="text-[var(--color-text)] font-mono">{u.capacity_mw.toLocaleString('en-AU')} MW</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      <p className="text-[11px] text-[var(--color-text-muted)] italic">
+        REZ Pipeline generated {data.generated_at?.split('T')[0] ?? 'unknown'}. Source canonicalisation: see <code className="text-[var(--color-text)]">pipeline/exporters/export_rez_pipeline.py REZ_CANONICAL</code>.
+      </p>
+    </div>
+  )
+}
+
+// State colour palette (re-used by REZ table)
+const STATE_COLOURS: Record<string, string> = {
+  NSW: '#3b82f6',
+  VIC: '#8b5cf6',
+  QLD: '#f59e0b',
+  SA:  '#ef4444',
+  TAS: '#14b8a6',
+}
+
+// Expanded panel under the REZ table — project list + access-rights detail
+function RezExpandedPanel({ rez, onClose }: { rez: RezPipelineEntry; onClose: () => void }) {
+  return (
+    <div className="border-t border-[var(--color-border)] bg-[var(--color-bg)]/40 p-4">
+      <div className="flex items-center justify-between mb-3">
+        <h3 className="text-sm font-semibold text-[var(--color-text)]">
+          {rez.display_name} {rez.aemo_rez_id && <span className="text-[var(--color-text-muted)] font-normal">({rez.aemo_rez_id})</span>}
+        </h3>
+        <div className="flex items-center gap-2">
+          <Link
+            to={`/rez/${rez.canonical_id}`}
+            className="text-xs text-[var(--color-primary)] hover:underline"
+          >
+            View full REZ page →
+          </Link>
+          <button
+            onClick={onClose}
+            className="text-xs text-[var(--color-text-muted)] hover:text-[var(--color-text)]"
+            aria-label="Close"
+          >
+            ✕
+          </button>
+        </div>
+      </div>
+
+      {/* Projects in this REZ */}
+      {rez.projects.length > 0 && (
+        <div className="mb-4">
+          <p className="text-[11px] uppercase tracking-wider text-[var(--color-text-muted)] mb-2">
+            Projects in REZ ({rez.projects.length})
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-1.5">
+            {rez.projects.map(p => (
+              <Link
+                key={p.id}
+                to={`/projects/${p.id}`}
+                className="flex items-center justify-between gap-2 px-2 py-1.5 bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded text-xs hover:border-[var(--color-primary)] transition-colors"
+              >
+                <div className="flex items-center gap-2 min-w-0">
+                  <span
+                    className="w-1.5 h-1.5 rounded-full flex-shrink-0"
+                    style={{ background: REZ_TECH_COLOURS[p.technology] || '#94a3b8' }}
+                  />
+                  <span className="text-[var(--color-text)] truncate">{p.name}</span>
+                </div>
+                <div className="flex items-center gap-2 flex-shrink-0">
+                  <span className="text-[var(--color-text-muted)]">{p.status}</span>
+                  <span className="text-[var(--color-text)] font-medium">{Math.round(p.capacity_mw)} MW</span>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* IASR unmatched in this REZ */}
+      {rez.iasr_unmatched.length > 0 && (
+        <div className="mb-4">
+          <p className="text-[11px] uppercase tracking-wider text-amber-400 mb-2">
+            IASR projects in this REZ not yet in AURES DB ({rez.iasr_unmatched.length})
+          </p>
+          <div className="space-y-1">
+            {rez.iasr_unmatched.map(u => (
+              <div key={u.iasr_id} className="flex items-center justify-between gap-2 px-2 py-1.5 bg-amber-500/5 border border-amber-500/20 rounded text-xs">
+                <span className="text-[var(--color-text)] truncate">{u.power_station}</span>
+                <div className="flex items-center gap-2 flex-shrink-0">
+                  <span
+                    className="px-1.5 py-0.5 rounded text-[10px]"
+                    style={{
+                      background: u.status === 'Committed' ? '#3b82f620' : '#0ea5e920',
+                      color: u.status === 'Committed' ? '#60a5fa' : '#38bdf8',
+                    }}
+                  >
+                    {u.status}
+                  </span>
+                  <span className="text-[var(--color-text)] font-medium">{Math.round(u.capacity_mw)} MW</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* Access rights detail for NSW REZs */}
+      {rez.access_rights_detail.length > 0 && (
+        <div>
+          <p className="text-[11px] uppercase tracking-wider text-emerald-400 mb-2">
+            EnergyCo Access Rights ({rez.access_rights_detail.length})
+          </p>
+          <div className="space-y-1">
+            {rez.access_rights_detail
+              .slice()
+              .sort((a, b) => b.capacity_mw - a.capacity_mw)
+              .map(a => (
+                <div key={a.access_right_id} className="flex items-center justify-between gap-2 px-2 py-1.5 bg-emerald-500/5 border border-emerald-500/20 rounded text-xs">
+                  <div className="flex items-center gap-2 min-w-0">
+                    <span className="text-emerald-400 font-mono text-[10px]">{a.access_right_id}</span>
+                    {a.project_id ? (
+                      <Link to={`/projects/${a.project_id}`} className="text-[var(--color-primary)] hover:underline truncate">
+                        {a.project_name}
+                      </Link>
+                    ) : (
+                      <span className="text-[var(--color-text)] truncate">{a.project_name}</span>
+                    )}
+                  </div>
+                  <div className="flex items-center gap-2 flex-shrink-0">
+                    {a.technology && (
+                      <span className="text-[var(--color-text-muted)]">{a.technology}</span>
+                    )}
+                    <span className="text-[var(--color-text)] font-medium">{a.capacity_mw} MW</span>
+                  </div>
+                </div>
+              ))}
+          </div>
+        </div>
+      )}
     </div>
   )
 }

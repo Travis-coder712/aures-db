@@ -2867,6 +2867,60 @@ v3.10.0 — 23 May 2026.
 `,
   },
   {
+    id: 'rez-pipeline-methodology',
+    title: 'REZ Pipeline — Methodology',
+    description: 'How the new REZ Pipeline tab joins three data layers (AEMO IASR + EnergyCo Access Rights + projects.rez), how REZ names are canonicalised, and where it surfaces.',
+    icon: '🛰️',
+    category: 'technical',
+    readingTime: '4 min',
+    added: '2026-05-26',
+    content: `# REZ Pipeline — Methodology
+
+This guide documents the **REZ Pipeline** surface that landed in v3.13.0:
+
+- New tab "REZ Pipeline" on \`/intelligence/transmission\`
+- New "Pipeline & Access Rights" section on every \`/rez/:id\` page that has data
+
+## Data sources (3 layers)
+
+| Layer | Provides | Refresh |
+|---|---|---|
+| \`aemo_iasr_projects\` (DB) | AEMO 2025 IASR Workbook — Committed + Anticipated project lists with REZ Location + REZ ID | Annually + mid-cycle addenda |
+| \`energyco_rez_access\` (DB) | NSW EnergyCo Access Rights Register — 19 access rights across CWO + South West REZ | As-updated by EnergyCo |
+| \`projects.rez\` (DB) | Internal REZ assignment per project — backfilled in v3.12.0 from IASR | Tracks IASR + manual overlays |
+
+Importers: \`pipeline/importers/import_aemo_iasr.py\` and \`pipeline/importers/import_energyco_rez_access.py\`. Both run as part of the regular data refresh — see \`docs/DATA_REFRESH.md\`.
+
+Aggregation exporter: \`pipeline/exporters/export_rez_pipeline.py\` → \`frontend/public/data/analytics/intelligence/rez-pipeline.json\`.
+
+## REZ name canonicalisation
+
+REZ names are noisy across sources — the same zone might be called *"Central-West Orana"* in IASR, *"Central -West Orana"* (with a stray space), *"nsw-central-west-orana"* in \`projects.rez\`, or *"CWO"* by EnergyCo. The exporter normalises all variants via \`REZ_CANONICAL\` in \`pipeline/exporters/export_rez_pipeline.py\` — each canonical_id maps to a display name, state, and a tuple of accepted aliases.
+
+Canonical IDs match the convention in \`frontend/src/data/rez-zones.ts\` (\`<state>-<rez-name>\`) so \`/rez/:id\` links resolve naturally. Examples:
+- \`nsw-central-west-orana\` → "Central-West Orana"
+- \`qld-isaac\` → "Isaac" (also catches the *"Issac"* typo in IASR)
+- \`qld-northern\` → "Northern QLD" (merges *"Far North QLD"* + *"Northern QLD"* variants)
+
+**To add a new REZ or alias:** edit \`REZ_CANONICAL\` and re-run the exporter.
+
+## What's NOT in this data
+
+- **TNSP-level pipeline stages** (Transgrid 5.3.4 / 5.3.6 / GPSA executed, Powerlink Connection Pipeline, ElectraNet, VicGrid) — these are commercial-in-confidence between TNSP and proponent. AEMO's IASR is the most granular public source.
+- **REZ access registers outside NSW** — only EnergyCo (NSW) publishes a structured access-rights register. Victoria, QLD, SA, TAS have access regimes but no comparable public file.
+
+## Where it surfaces
+
+1. **\`/intelligence/transmission\` > REZ Pipeline tab** — NEM-wide top-15 bar chart + per-REZ DataTable + NSW access scheme utilisation panel + unmatched IASR callout.
+2. **\`/rez/:id\` pages** — per-REZ "Pipeline & Access Rights" section with Committed/Anticipated MW breakdown, unmatched IASR list, and access-rights detail (where applicable).
+3. **\`/projects/:id\` pages** — REZ Access Right chip in Grid Connection section (v3.12.0).
+
+## Version shipped
+
+v3.13.0 — 26 May 2026.
+`,
+  },
+  {
     id: 'nsw-wind-cis-ltesa',
     title: 'NSW Wind & CIS/LTESA — Methodology',
     description: 'Sources, definitions, and confidence rules for the NSW Wind deep-dive tab on Scheme Intelligence.',

@@ -617,6 +617,20 @@ export async function fetchMansfieldPipeline(): Promise<RegionalPipelineData | n
   } catch { return null }
 }
 
+// REZ Pipeline — aggregates IASR + EnergyCo access rights + projects.rez
+// into a per-REZ committed/anticipated/access-rights breakdown (v3.13.0).
+import type { RezPipelineData } from './types'
+let rezPipelineCache: RezPipelineData | null = null
+export async function fetchRezPipeline(): Promise<RezPipelineData | null> {
+  if (rezPipelineCache) return rezPipelineCache
+  try {
+    const resp = await fetch(`${BASE}/analytics/intelligence/rez-pipeline.json`)
+    if (!resp.ok) return null
+    rezPipelineCache = await resp.json()
+    return rezPipelineCache
+  } catch { return null }
+}
+
 // Coal Outage vs Dispatch — NEM/state/station decomposition of coal MWh
 // reduction into outage (unavailable) vs displaced (available but not
 // dispatched) vs dispatched (v2.27.0).

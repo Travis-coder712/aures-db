@@ -692,6 +692,87 @@ export interface RegionalPipelineData {
   projects: RegionalPipelineProject[]
 }
 
+// ============================================================
+// REZ Pipeline (v3.13.0) — per-REZ aggregate of IASR + EnergyCo
+// access rights + projects.rez, output by export_rez_pipeline.py.
+// ============================================================
+export interface RezPipelineEntry {
+  canonical_id: string
+  display_name: string
+  state: string
+  aemo_rez_id: string | null
+  iasr_committed_mw: number
+  iasr_anticipated_mw: number
+  iasr_committed_count: number
+  iasr_anticipated_count: number
+  iasr_total_mw: number
+  access_rights_mw: number
+  access_rights_count: number
+  access_scheme: string | null
+  project_count: number
+  projects: {
+    id: string
+    name: string
+    technology: string
+    status: string
+    capacity_mw: number
+    storage_mwh: number | null
+    state: string
+    current_developer: string | null
+    cod_current: string | null
+    connection_status: string | null
+    development_stage: string | null
+  }[]
+  iasr_unmatched: {
+    iasr_id: string
+    power_station: string
+    technology: string | null
+    status: string
+    capacity_mw: number
+    storage_mwh: number | null
+  }[]
+  access_rights_detail: {
+    access_right_id: string
+    project_id: string | null
+    project_name: string
+    capacity_mw: number
+    technology: string | null
+    registration_date: string | null
+    access_status: string
+    allocation_process: string | null
+  }[]
+}
+
+export interface RezPipelineData {
+  generated_at: string
+  totals: {
+    iasr_committed_mw: number
+    iasr_anticipated_mw: number
+    iasr_committed_count: number
+    iasr_anticipated_count: number
+    access_rights_mw: number
+    access_rights_count: number
+    rez_count: number
+    project_count: number
+    iasr_unmatched_total: number
+  }
+  rezs: RezPipelineEntry[]
+  unmatched_iasr: {
+    iasr_id: string
+    power_station: string
+    technology: string | null
+    region: string | null
+    rez_location: string | null
+    status: string
+    capacity_mw: number
+    storage_mwh: number | null
+  }[]
+  methodology: {
+    sources: string[]
+    canonicalisation_notes: string
+  }
+}
+
 export const DEVELOPMENT_STAGE_CONFIG: Record<DevelopmentStage, { label: string; color: string; icon: string }> = {
   epbc_approved: { label: 'EPBC Approved', color: '#22c55e', icon: '✓' },
   epbc_submitted: { label: 'EPBC Submitted', color: '#10b981', icon: '◐' },

@@ -25,6 +25,8 @@ export type SourceId =
   | 'nemweb_dispatchload'
   | 'news_rss'
   | 'aemo_isp_rez'
+  | 'aemo_iasr'
+  | 'energyco_rez_access'
   | 'market_prices'
   | 'json_export'
 
@@ -159,6 +161,34 @@ export const SOURCE_REGISTRY: Record<SourceId, SourceRegistryEntry> = {
     refreshNote: 'ISP is published annually. Only refresh when AEMO releases a new ISP draft or final report.',
     url: 'https://aemo.com.au/energy-systems/major-publications/integrated-system-plan-isp',
   },
+  aemo_iasr: {
+    id: 'aemo_iasr',
+    label: 'AEMO IASR Workbook',
+    shortLabel: 'AEMO IASR',
+    icon: '📒',
+    description:
+      'AEMO Inputs and Assumptions Workbook — Committed and Anticipated project list with REZ Location + REZ ID per project. Drives the v3.13.0 REZ Pipeline surface.',
+    category: 'grid',
+    staleAfterDays: 200,
+    criticallyStaleAfterDays: 400,
+    refreshCommand: 'python3 pipeline/importers/import_aemo_iasr.py',
+    refreshNote: 'IASR Workbook is published roughly annually with mid-cycle addenda. Refresh when AEMO publishes a new IASR version.',
+    url: 'https://aemo.com.au/energy-systems/major-publications/integrated-system-plan-isp',
+  },
+  energyco_rez_access: {
+    id: 'energyco_rez_access',
+    label: 'EnergyCo NSW REZ Access Rights',
+    shortLabel: 'EnergyCo REZ',
+    icon: '🪪',
+    description:
+      'NSW EnergyCo Access Rights Register — Central-West Orana and South West REZ access rights with awarded capacity per project. Drives the REZ-access overlay on per-project pages and the REZ Pipeline tab.',
+    category: 'grid',
+    staleAfterDays: 60,
+    criticallyStaleAfterDays: 120,
+    refreshCommand: 'python3 pipeline/importers/import_energyco_rez_access.py',
+    refreshNote: 'EnergyCo updates the register on a rolling basis. Check after each REZ allocation round.',
+    url: 'https://www.energyco.nsw.gov.au/industry/access-schemes',
+  },
   epbc_referrals: {
     id: 'epbc_referrals',
     label: 'EPBC Referrals',
@@ -271,8 +301,8 @@ export const PAGE_SOURCES: Record<string, SourceId[]> = {
   'bess-portfolio': ['aemo_generation_info', 'web_research', 'openelectricity_5min', 'json_export', 'offtake_research'],
 
   // Grid & Geography
-  'transmission-infra': ['aemo_isp_rez', 'epbc_referrals', 'web_research', 'json_export'],
-  rez: ['aemo_isp_rez', 'aemo_generation_info', 'web_research', 'json_export'],
+  'transmission-infra': ['aemo_isp_rez', 'epbc_referrals', 'aemo_iasr', 'energyco_rez_access', 'web_research', 'json_export'],
+  rez: ['aemo_isp_rez', 'aemo_iasr', 'energyco_rez_access', 'aemo_generation_info', 'web_research', 'json_export'],
   'energy-mix': ['nemweb_dispatchload', 'openelectricity_performance', 'aemo_generation_info', 'json_export'],
   'mansfield-pipeline': ['aemo_generation_info', 'openelectricity_metadata', 'web_research', 'json_export'],
 
