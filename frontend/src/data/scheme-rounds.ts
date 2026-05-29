@@ -1056,6 +1056,18 @@ export interface OpenRound {
   // Hybrid mechanism detail (where relevant)
   hybridMechanism?: string
 
+  // Can already-committed / FID'd projects bid? (additionality / commitment cutoff)
+  commitmentEligibility?: {
+    /** One-line answer surfaced as the block headline. */
+    summary: string
+    /** The commitment cutoff anchor date (free text). */
+    cutoffDate?: string
+    /** 2-3 sentence explanation of the additionality rule. */
+    detail: string
+    /** Confidence in the rule as stated for THIS round. */
+    confidence: 'confirmed' | 'likely' | 'inferred'
+  }
+
   // Honesty
   caveats: string[]             // confidence flags surfaced in UI
   sources: { label: string; url: string }[]
@@ -1100,6 +1112,12 @@ export const OPEN_ROUNDS: OpenRound[] = [
       { area: 'Eligibility', detail: 'New labour/workforce transparency requirement (public disclosure of key labour + major-subcontractor arrangements) and a reserve-list mechanism for meritorious-but-unsuccessful bids.' },
     ],
     analystRead: 'T9 is the round where the federal scheme formally rotates away from NSW toward the rest of the NEM. With NSW out and a Victorian solar cap in place, the ~3.1 GW of unallocated capacity gives Queensland and South Australia generation projects real headroom. Hybrids continue to gain ground (8 of 19 T7 winners were battery-paired) because they score on the system-benefit limb, but the single biggest discriminator is now a credible, financeable pathway to commercial operation before end-2030.',
+    commitmentEligibility: {
+      summary: 'No — projects already committed (or at financial close) before 23 Nov 2023 are ineligible.',
+      cutoffDate: '23 November 2023 (CIS expansion announcement)',
+      detail: 'The CIS underwrites *additional* capacity, so it screens out projects that would have proceeded anyway. A project that reached committed status / financial close before the 23 November 2023 CIS expansion announcement is treated as non-additional and cannot bid. Projects still pre-FID — or that reached FID after that date — remain eligible; the whole point is to bring forward capacity that needs the revenue underwrite to proceed. Practically: if you took FID before late-Nov 2023 you’re out; if you’re working toward FID now, you’re the target bidder.',
+      confidence: 'confirmed',
+    },
     playbook: [
       'If you’re a NSW project — don’t bid here; pivot to NSW Roadmap T8 (Generation/Hybrid).',
       'Target QLD or SA generation — that’s where the ~3.1 GW contestable headroom sits.',
@@ -1158,6 +1176,12 @@ export const OPEN_ROUNDS: OpenRound[] = [
       { area: 'Target', detail: '~2.5 GW generation target — among the largest NSW Roadmap generation rounds, restarted specifically because NSW is now excluded from federal CIS generation tenders.' },
     ],
     analystRead: 'T8 is purpose-built for wind and solar+storage hybrids that can shift output into the evening and morning peaks — the configurations that score on the dominant 49% financial/system-benefit limb. Standalone midday solar scores poorly on wholesale-benefit. The Hybrid LTESA gives developers a longer 20-year contract but locks in a net-export settlement basis, so storage that exceeds the generation export ceiling simply won’t count toward eligibility. The COD-before-2029 favourable consideration rewards mature projects, but ASL deliberately accepts earlier-stage bids where the LTESA structure protects consumers — so a well-priced earlier-stage hybrid can still beat a mature but expensive standalone bid.',
+    commitmentEligibility: {
+      summary: 'Targets pre-FID projects — those committed before 14 Nov 2019 are out; the LTESA exists to help projects reach FID.',
+      cutoffDate: '14 November 2019 (NSW EII Roadmap commitment date)',
+      detail: 'Generator LTESAs have historically been available to NSW projects that became committed after 14 November 2019 — the additionality anchor for the NSW Roadmap. The mechanism is explicitly designed to improve bankability and help a project reach final investment decision and financial close, so an already-FID’d merchant project doesn’t need (and generally can’t use) it, while a pre-FID project working toward financial close is exactly the intended bidder. A successful bid is itself expected to underpin the project reaching FID.',
+      confidence: 'likely',
+    },
     playbook: [
       'Bidding hybrid? Keep storage export ≤ generation export, storage ≥4h at COD — don’t gold-plate storage past the gen ceiling (it won’t count and risks ineligibility).',
       'Maximise the wholesale-benefit numerator: prioritise strong network location + peak-shifting dispatch over extra duration.',
@@ -1215,6 +1239,12 @@ export const OPEN_ROUNDS: OpenRound[] = [
       { area: 'Target', detail: '~12 GWh (~1.5 GW) per the 2025 IIO Report development pathway.' },
     ],
     analystRead: 'T9 LDS rewards genuinely long-duration, system-strengthening assets. The added system-security limb tilts the field toward pumped hydro and A-CAES (which also carry 40-year LTESA terms) and 8-hour-plus BESS, over the 2–4 hour batteries that dominate the federal CIS dispatchable rounds. The competitive lever remains a tight Annuity Cap against a strong, well-located benefit case.',
+    commitmentEligibility: {
+      summary: 'Targets pre-FID storage — committed-after-14-Nov-2019 additionality; the LTESA exists to get LDS to financial close.',
+      cutoffDate: '14 November 2019 (NSW EII Roadmap commitment date)',
+      detail: 'Same NSW Roadmap additionality basis as Tender 8: the LDS LTESA targets projects that became committed after 14 November 2019 and is explicitly framed as support for ≥8-hour storage that would not otherwise reach financial close. A project already at FID without needing the support is not the target; a pre-FID pumped-hydro / A-CAES / 8h+ BESS project is. The exact T9 commitment threshold sits in the gazetted Tender Guidelines (not yet public).',
+      confidence: 'likely',
+    },
     playbook: [
       'Lead with duration: ≥8h is the floor — deeper storage + long asset life lifts the benefit-cost numerator.',
       'Sell system-strength: grid-forming inverters, inertia, system-restart capability now score explicitly.',
@@ -1266,6 +1296,12 @@ export const OPEN_ROUNDS: OpenRound[] = [
       { area: 'Process', detail: 'Same single-stage / 5-criteria reform package as the generation rounds. 4-hour equivalent is the design point for dispatchable capacity.' },
     ],
     analystRead: 'Results are imminent. T8 is the read-across for the upcoming T10 dispatchable round: 4-hour duration is the competitive baseline, with firming/system-reliability value and a credible end-2030 COD the discriminators.',
+    commitmentEligibility: {
+      summary: 'No — same CIS additionality rule: committed / financial-close before 23 Nov 2023 = ineligible.',
+      cutoffDate: '23 November 2023 (CIS expansion announcement)',
+      detail: 'As with all CIS rounds, a dispatchable project that reached committed status / financial close before the 23 November 2023 expansion announcement is non-additional and ineligible. Pre-FID storage, or storage that reached FID after that date, can bid.',
+      confidence: 'confirmed',
+    },
     playbook: [
       'Watch for results in June 2026 — they signal pricing + the bar for T10.',
       'For the read-across to T10: target 4-hour duration, lead on firming/system-reliability value.',
@@ -1302,6 +1338,12 @@ export const OPEN_ROUNDS: OpenRound[] = [
       { area: 'Target', detail: 'Flagged to open ~June 2026; no published target capacity or registration dates yet.' },
     ],
     analystRead: 'On the horizon. Expect the T8 dispatchable playbook to carry over: 4-hour duration baseline, firming/system-reliability value, credible end-2030 COD.',
+    commitmentEligibility: {
+      summary: 'Expected to keep the CIS additionality rule: committed / financial-close before 23 Nov 2023 = ineligible.',
+      cutoffDate: '23 November 2023 (CIS expansion announcement)',
+      detail: 'The same additionality screen is expected to apply once the round opens — projects committed before the 23 November 2023 expansion announcement excluded. Confirm against the T10 tender guidelines when published.',
+      confidence: 'inferred',
+    },
     playbook: [
       'Start positioning now if you hold a dispatchable project — expect a June 2026 open.',
       'Assume the T8 playbook carries: 4-hour duration, firming value, <2030 COD.',

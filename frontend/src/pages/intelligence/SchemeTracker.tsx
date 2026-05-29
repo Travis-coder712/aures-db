@@ -3379,6 +3379,34 @@ function OpenRoundCard({ round, isExpanded, onToggle }: { round: OpenRound; isEx
             </div>
           )}
 
+          {/* Commitment eligibility — can already-committed / FID'd projects bid? */}
+          {round.commitmentEligibility && (
+            <div className="bg-cyan-500/5 border border-cyan-500/30 rounded-lg p-3">
+              <div className="flex items-center justify-between gap-2 mb-1">
+                <h5 className="text-[10px] uppercase tracking-wider text-cyan-300">Can already-committed / FID&apos;d projects bid?</h5>
+                <span
+                  className="text-[8px] font-bold uppercase px-1.5 py-0.5 rounded-full shrink-0"
+                  style={
+                    round.commitmentEligibility.confidence === 'confirmed'
+                      ? { background: '#22c55e1a', color: '#22c55e', border: '1px solid #22c55e55' }
+                      : round.commitmentEligibility.confidence === 'likely'
+                      ? { background: '#f59e0b1a', color: '#f59e0b', border: '1px solid #f59e0b55' }
+                      : { background: '#64748b1a', color: '#94a3b8', border: '1px solid #64748b55' }
+                  }
+                >
+                  {round.commitmentEligibility.confidence}
+                </span>
+              </div>
+              <p className="text-[11px] font-medium text-[var(--color-text)] leading-relaxed mb-1">{round.commitmentEligibility.summary}</p>
+              {round.commitmentEligibility.cutoffDate && (
+                <p className="text-[10px] text-cyan-300/90 mb-1">
+                  <span className="text-[var(--color-text-muted)]">Commitment cutoff:</span> {round.commitmentEligibility.cutoffDate}
+                </p>
+              )}
+              <p className="text-[10px] text-[var(--color-text-muted)] leading-relaxed">{round.commitmentEligibility.detail}</p>
+            </div>
+          )}
+
           {/* Operator playbook callout */}
           {round.playbook.length > 0 && (
             <div className="bg-emerald-500/5 border border-emerald-500/30 rounded-lg p-3">
