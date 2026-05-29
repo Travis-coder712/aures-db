@@ -8,8 +8,8 @@ import ScrollableTable from '../../components/common/ScrollableTable'
 import { ROUND_INFO } from '../../data/scheme-round-info'
 import type { RoundInfo } from '../../data/scheme-round-info'
 import { ESG_TRACKER_PROJECTS, ROUND_ESG_SUMMARIES } from '../../data/esg-tracker-data'
-import { CIS_PROJECTS, LTESA_PROJECTS, CIS_ROUNDS, LTESA_R8_CANDIDATES, NSW_WIND_COHORT } from '../../data/scheme-rounds'
-import type { SchemeProject, NSWWindCohortEntry, LtesaProbabilityBand, ConnectionStatus } from '../../data/scheme-rounds'
+import { CIS_PROJECTS, LTESA_PROJECTS, CIS_ROUNDS, LTESA_R8_CANDIDATES, NSW_WIND_COHORT, OPEN_ROUNDS } from '../../data/scheme-rounds'
+import type { SchemeProject, NSWWindCohortEntry, LtesaProbabilityBand, ConnectionStatus, OpenRound, OpenRoundStatus } from '../../data/scheme-rounds'
 import { exportElementToPdf } from '../../lib/exportPdf'
 import type { ESGTrackerProject, PublicationStatus, AgreementStatus } from '../../data/esg-tracker-data'
 import DataProvenance from '../../components/common/DataProvenance'
@@ -53,9 +53,9 @@ function fmtMW(mw: number): string {
 // Component
 // ============================================================
 
-const TABS = ['overview', 'boardroom', 'tracker', 'watchlist', 'esg', 'cis-success', 'cis-briefing', 'timeline', 'nsw-wind'] as const
+const TABS = ['overview', 'boardroom', 'tracker', 'watchlist', 'esg', 'cis-success', 'cis-briefing', 'open-rounds', 'timeline', 'nsw-wind'] as const
 type Tab = typeof TABS[number]
-const TAB_LABELS: Record<Tab, string> = { overview: 'Overview', boardroom: 'Boardroom', tracker: 'Milestone Tracker', watchlist: 'Key Projects', esg: 'ESG Agreement Proxy', 'cis-success': 'CIS Success', 'cis-briefing': 'CIS Briefing', timeline: 'CIS/LTESA Timeline', 'nsw-wind': 'NSW Wind' }
+const TAB_LABELS: Record<Tab, string> = { overview: 'Overview', boardroom: 'Boardroom', tracker: 'Milestone Tracker', watchlist: 'Key Projects', esg: 'ESG Agreement Proxy', 'cis-success': 'CIS Success', 'cis-briefing': 'CIS Briefing', 'open-rounds': 'Open Rounds', timeline: 'CIS/LTESA Timeline', 'nsw-wind': 'NSW Wind' }
 
 export default function SchemeTracker() {
   const [activeTab, setActiveTab] = useState<Tab>('overview')
@@ -605,6 +605,7 @@ export default function SchemeTracker() {
         <div className="p-8 text-center text-sm text-[var(--color-text-muted)]">Loading scheme data…</div>
       )}
       {activeTab === 'cis-briefing' && <CISBriefingTab />}
+      {activeTab === 'open-rounds' && <OpenRoundsTab />}
       {activeTab === 'timeline' && (
         <SchemeTimelineTab />
       )}
@@ -3085,6 +3086,343 @@ function ESGAgreementProxyTab() {
           LTESA: Electricity Infrastructure Investment Act 2020, s.4(1) First Nations Guidelines.
         </p>
       </div>
+    </div>
+  )
+}
+
+// ============================================================
+// Open Rounds Tab — "Current State of Play" (v3.14.0)
+// ============================================================
+
+const OPEN_STATUS_CONFIG: Record<OpenRoundStatus, { label: string; colour: string; dot: string }> = {
+  open:       { label: 'OPEN — accepting bids', colour: '#22c55e', dot: '#22c55e' },
+  evaluating: { label: 'EVALUATING — bids in',  colour: '#f59e0b', dot: '#f59e0b' },
+  upcoming:   { label: 'UPCOMING',              colour: '#64748b', dot: '#64748b' },
+}
+
+function openRoundSchemeColour(scheme: 'CIS' | 'LTESA'): string {
+  return scheme === 'CIS' ? '#f59e0b' : '#8b5cf6'
+}
+
+const CONFIG_FAVOUR_LABEL: Record<string, string> = {
+  hybrid: 'Hybrid-favoured',
+  generation: 'Generation',
+  storage: 'Storage-favoured',
+  mixed: 'Mixed',
+}
+
+/** Format an ISO date as 'D Mmm YYYY', or return a passthrough free-text string. */
+function fmtOpenDate(d?: string): string {
+  if (!d) return '—'
+  // ISO date?
+  if (/^\d{4}-\d{2}-\d{2}$/.test(d)) {
+    return new Date(d).toLocaleDateString('en-AU', { day: 'numeric', month: 'short', year: 'numeric' })
+  }
+  if (/^\d{4}-\d{2}$/.test(d)) {
+    return new Date(d + '-01').toLocaleDateString('en-AU', { month: 'short', year: 'numeric' })
+  }
+  return d
+}
+
+/** Days from today until an ISO bid-close date. Negative = past. null if not an ISO date. */
+function daysUntil(iso?: string): number | null {
+  if (!iso || !/^\d{4}-\d{2}-\d{2}$/.test(iso)) return null
+  const now = new Date()
+  const target = new Date(iso)
+  return Math.round((target.getTime() - now.getTime()) / (1000 * 60 * 60 * 24))
+}
+
+function OpenRoundsTab() {
+  const [expanded, setExpanded] = useState<Set<string>>(() => new Set(OPEN_ROUNDS.filter(r => r.status === 'open').map(r => r.id)))
+  const [schemeFilter, setSchemeFilter] = useState<'all' | 'CIS' | 'LTESA'>('all')
+
+  const filtered = schemeFilter === 'all' ? OPEN_ROUNDS : OPEN_ROUNDS.filter(r => r.scheme === schemeFilter)
+
+  const openCount = OPEN_ROUNDS.filter(r => r.status === 'open').length
+  // Generation capacity = open rounds whose product is generation/hybrid (exclude pure storage power)
+  const openGenMW = OPEN_ROUNDS.filter(r => r.status === 'open' && r.targetMW && r.configFavoured !== 'storage').reduce((s, r) => s + (r.targetMW || 0), 0)
+
+  function toggle(id: string) {
+    setExpanded(prev => {
+      const next = new Set(prev)
+      if (next.has(id)) next.delete(id)
+      else next.add(id)
+      return next
+    })
+  }
+
+  // Timeline strip: open + evaluating rounds with an ISO bids-close date, sorted
+  const stripRounds = OPEN_ROUNDS
+    .filter(r => r.bidsClose && /^\d{4}-\d{2}-\d{2}$/.test(r.bidsClose))
+    .slice()
+    .sort((a, b) => (a.bidsClose! < b.bidsClose! ? -1 : 1))
+
+  return (
+    <div className="space-y-6">
+      {/* Header */}
+      <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl p-5">
+        <div className="flex items-center justify-between gap-2 mb-2 flex-wrap">
+          <h3 className="text-sm font-bold text-[var(--color-text)]">Current State of Play — Open Rounds</h3>
+          <div className="flex gap-1">
+            {(['all', 'CIS', 'LTESA'] as const).map(f => (
+              <button
+                key={f}
+                onClick={() => setSchemeFilter(f)}
+                className={`text-[10px] px-2.5 py-1 rounded-lg border transition-colors ${
+                  schemeFilter === f
+                    ? 'bg-[var(--color-primary)] text-white border-transparent'
+                    : 'bg-[var(--color-bg)] border-[var(--color-border)] text-[var(--color-text-muted)] hover:text-[var(--color-text)]'
+                }`}
+              >
+                {f === 'all' ? 'All' : f === 'CIS' ? 'Federal CIS' : 'NSW LTESA'}
+              </button>
+            ))}
+          </div>
+        </div>
+        <p className="text-xs text-[var(--color-text-muted)] leading-relaxed">
+          Live and imminent renewable-procurement tenders across the two programs — the federal <span className="text-[#f59e0b] font-medium">Capacity Investment Scheme (CIS)</span> and
+          the <span className="text-[#8b5cf6] font-medium">NSW Electricity Infrastructure Roadmap (LTESA)</span>. Each open round carries an analyst read of what changed
+          versus the prior round, the merit-criteria split, and a strategy cheat-sheet. <span className="text-[var(--color-text)]">Both schemes run a "Tender 8" and "Tender 9" concurrently in 2026 — they are entirely different programs.</span> Always check the scheme badge.
+        </p>
+
+        {/* Headline stats */}
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-4">
+          <div className="bg-[var(--color-bg)] border border-[var(--color-border)] rounded-xl p-3 text-center">
+            <div className="text-2xl font-bold text-[#22c55e]">{openCount}</div>
+            <div className="text-[10px] text-[var(--color-text-muted)]">Rounds Open Now</div>
+          </div>
+          <div className="bg-[var(--color-bg)] border border-[var(--color-border)] rounded-xl p-3 text-center">
+            <div className="text-2xl font-bold text-[var(--color-text)]">{fmtMW(openGenMW)}</div>
+            <div className="text-[10px] text-[var(--color-text-muted)]">Generation Open</div>
+            <div className="text-[9px] text-[var(--color-text-muted)]">+ ~12 GWh storage (NSW T9)</div>
+          </div>
+          <div className="bg-[var(--color-bg)] border border-[var(--color-border)] rounded-xl p-3 text-center">
+            <div className="text-2xl font-bold text-[#f59e0b]">2</div>
+            <div className="text-[10px] text-[var(--color-text-muted)]">Schemes Active</div>
+            <div className="text-[9px] text-[var(--color-text-muted)]">Federal CIS + NSW LTESA</div>
+          </div>
+          <div className="bg-[var(--color-bg)] border border-[var(--color-border)] rounded-xl p-3 text-center">
+            <div className="text-2xl font-bold text-[#8b5cf6]">Jul 2026</div>
+            <div className="text-[10px] text-[var(--color-text-muted)]">Next Bid Deadlines</div>
+            <div className="text-[9px] text-[var(--color-text-muted)]">NSW ~6 Jul · CIS T9 20 Jul</div>
+          </div>
+        </div>
+      </div>
+
+      {/* Forward-looking timeline strip */}
+      {stripRounds.length > 0 && (
+        <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl p-5">
+          <h4 className="text-xs font-bold text-[var(--color-text)] mb-1">Bid-Close Calendar</h4>
+          <p className="text-[10px] text-[var(--color-text-muted)] mb-4">Countdown to each open round&apos;s bid deadline. Closest first.</p>
+          <div className="space-y-2.5">
+            {stripRounds.map(r => {
+              const days = daysUntil(r.bidsClose)
+              const schemeColour = openRoundSchemeColour(r.scheme)
+              const statusCfg = OPEN_STATUS_CONFIG[r.status]
+              return (
+                <div key={r.id} className="flex items-center gap-3">
+                  <div className="w-20 shrink-0 text-right">
+                    <div className="text-xs font-bold text-[var(--color-text)]">{fmtOpenDate(r.bidsClose)}</div>
+                    {days !== null && (
+                      <div className={`text-[9px] font-mono ${days < 14 ? 'text-red-400' : days < 35 ? 'text-amber-400' : 'text-[var(--color-text-muted)]'}`}>
+                        {days < 0 ? 'closed' : `${days}d left`}
+                      </div>
+                    )}
+                  </div>
+                  <div className="w-2.5 h-2.5 rounded-full shrink-0" style={{ backgroundColor: statusCfg.dot }} />
+                  <button
+                    onClick={() => { setExpanded(prev => new Set(prev).add(r.id)); document.getElementById(`open-round-${r.id}`)?.scrollIntoView({ behavior: 'smooth', block: 'start' }) }}
+                    className="flex-1 min-w-0 text-left"
+                  >
+                    <span className="text-[9px] font-bold px-1.5 py-0.5 rounded-full mr-2" style={{ backgroundColor: `${schemeColour}20`, color: schemeColour }}>
+                      {r.roundCode}
+                    </span>
+                    <span className="text-xs text-[var(--color-text)] hover:underline">{r.techFocus}</span>
+                    <span className="text-[10px] text-[var(--color-text-muted)] ml-2">{r.targetLabel}</span>
+                  </button>
+                </div>
+              )
+            })}
+          </div>
+        </div>
+      )}
+
+      {/* Per-round cards */}
+      {filtered.map(round => (
+        <OpenRoundCard
+          key={round.id}
+          round={round}
+          isExpanded={expanded.has(round.id)}
+          onToggle={() => toggle(round.id)}
+        />
+      ))}
+
+      <p className="text-[11px] text-[var(--color-text-muted)] italic">
+        Open-round intelligence compiled late May 2026 from DCCEEW + ASL (AusEnergy Services Ltd) tender pages and market briefings, law-firm notes (HSF Kramer, Hamilton Locke, Dentons), and trade press (pv magazine, pv-tech, energy-storage.news).
+        Tender Guidelines for the NSW rounds were not yet gazetted at time of writing — weightings shown reflect the market briefings. Verify against the official tender packs before bidding.
+      </p>
+    </div>
+  )
+}
+
+function OpenRoundCard({ round, isExpanded, onToggle }: { round: OpenRound; isExpanded: boolean; onToggle: () => void }) {
+  const schemeColour = openRoundSchemeColour(round.scheme)
+  const statusCfg = OPEN_STATUS_CONFIG[round.status]
+  const days = daysUntil(round.bidsClose)
+  const hasWeights = round.meritCriteria.some(c => c.weightPct !== undefined)
+
+  return (
+    <div id={`open-round-${round.id}`} className="bg-[var(--color-bg-card)] border rounded-xl overflow-hidden" style={{ borderColor: round.status === 'open' ? `${statusCfg.colour}55` : 'var(--color-border)' }}>
+      {/* Header */}
+      <div className="p-4 cursor-pointer select-none" onClick={onToggle}>
+        <div className="flex items-start justify-between gap-2">
+          <div className="flex-1 min-w-0">
+            <div className="flex items-center gap-2 flex-wrap mb-1">
+              <span className="text-[9px] font-bold px-2 py-0.5 rounded-full shrink-0" style={{ backgroundColor: `${schemeColour}20`, color: schemeColour }}>
+                {round.scheme === 'CIS' ? 'FEDERAL CIS' : 'NSW LTESA'} · {round.roundCode}
+              </span>
+              <span className="text-[9px] font-bold px-2 py-0.5 rounded-full shrink-0 inline-flex items-center gap-1" style={{ backgroundColor: `${statusCfg.colour}1a`, color: statusCfg.colour, border: `1px solid ${statusCfg.colour}55` }}>
+                <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: statusCfg.dot }} />
+                {statusCfg.label}
+              </span>
+              <span className="text-[9px] px-2 py-0.5 rounded-full shrink-0 bg-[var(--color-bg)] border border-[var(--color-border)] text-[var(--color-text-muted)]">
+                {CONFIG_FAVOUR_LABEL[round.configFavoured]}
+              </span>
+            </div>
+            <h4 className="text-sm font-bold text-[var(--color-text)]">{round.name}</h4>
+            <p className="text-[10px] text-[var(--color-text-muted)] mt-0.5">
+              {round.region} · {round.targetLabel}
+              {round.bidsClose ? <> · Bids close <span className="text-[var(--color-text)]">{fmtOpenDate(round.bidsClose)}</span></> : null}
+              {days !== null && days >= 0 && round.status === 'open' ? <span className={days < 14 ? 'text-red-400' : days < 35 ? 'text-amber-400' : ''}> ({days}d)</span> : null}
+            </p>
+          </div>
+          <svg className={`w-4 h-4 text-[var(--color-text-muted)] shrink-0 mt-1 transition-transform duration-200 ${isExpanded ? 'rotate-180' : ''}`} fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+          </svg>
+        </div>
+        <p className="text-xs text-[var(--color-text)] leading-relaxed mt-2">{round.headline}</p>
+      </div>
+
+      {/* Body */}
+      {isExpanded && (
+        <div className="px-4 pb-4 space-y-4">
+          {/* Key dates strip */}
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+            {[
+              { label: 'Opened', value: fmtOpenDate(round.opened) },
+              { label: 'Reg. close', value: fmtOpenDate(round.registrationsClose) },
+              { label: 'Bids close', value: fmtOpenDate(round.bidsClose) },
+              { label: 'Results', value: round.resultsExpected || '—' },
+            ].map(d => (
+              <div key={d.label} className="bg-[var(--color-bg)] border border-[var(--color-border)] rounded-lg p-2 text-center">
+                <div className="text-[9px] uppercase tracking-wide text-[var(--color-text-muted)]">{d.label}</div>
+                <div className="text-[11px] font-medium text-[var(--color-text)] mt-0.5">{d.value}</div>
+              </div>
+            ))}
+          </div>
+
+          {/* Administrator + contract + COD */}
+          <div className="text-[11px] text-[var(--color-text-muted)] space-y-1">
+            <div><span className="text-[var(--color-text)] font-medium">Administrator:</span> {round.administrator}</div>
+            <div><span className="text-[var(--color-text)] font-medium">Contract:</span> {round.contractMechanism}</div>
+            {round.targetCOD && <div><span className="text-[var(--color-text)] font-medium">COD:</span> {round.targetCOD}</div>}
+          </div>
+
+          {/* Analyst read */}
+          <div>
+            <h5 className="text-[10px] uppercase tracking-wider text-[var(--color-text-muted)] mb-1">Analyst read</h5>
+            <p className="text-xs text-[var(--color-text)] leading-relaxed">{round.analystRead}</p>
+          </div>
+
+          {/* What changed */}
+          {round.whatChanged.length > 0 && (
+            <div>
+              <h5 className="text-[10px] uppercase tracking-wider text-[var(--color-text-muted)] mb-1.5">What changed vs the previous round</h5>
+              <div className="space-y-1.5">
+                {round.whatChanged.map((c, i) => (
+                  <div key={i} className="flex gap-2 text-[11px]">
+                    <span className="shrink-0 text-[9px] font-bold px-1.5 py-0.5 rounded h-fit" style={{ backgroundColor: `${schemeColour}15`, color: schemeColour }}>{c.area}</span>
+                    <span className="text-[var(--color-text-muted)] leading-relaxed">{c.detail}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Merit criteria */}
+          {round.meritCriteria.length > 0 && (
+            <div>
+              <h5 className="text-[10px] uppercase tracking-wider text-[var(--color-text-muted)] mb-1.5">
+                Merit criteria {hasWeights ? '(weightings per market briefing)' : '(weightings not publicly disclosed)'}
+              </h5>
+              <div className="space-y-1">
+                {round.meritCriteria.map((c, i) => (
+                  <div key={i} className="flex items-start gap-2 bg-[var(--color-bg)] border border-[var(--color-border)] rounded-lg px-3 py-2">
+                    {c.weightPct !== undefined && (
+                      <span className="shrink-0 text-xs font-bold w-10 text-right" style={{ color: c.weightPct >= 40 ? '#22c55e' : 'var(--color-text)' }}>{c.weightPct}%</span>
+                    )}
+                    <div className="min-w-0">
+                      <div className="text-[11px] font-medium text-[var(--color-text)]">{c.label}</div>
+                      <div className="text-[10px] text-[var(--color-text-muted)] leading-snug">{c.tests}</div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Hybrid mechanism */}
+          {round.hybridMechanism && (
+            <div className="bg-[#8b5cf6]/5 border border-[#8b5cf6]/30 rounded-lg p-3">
+              <h5 className="text-[10px] uppercase tracking-wider text-[#a855f7] mb-1">Hybrid mechanism</h5>
+              <p className="text-[11px] text-[var(--color-text-muted)] leading-relaxed">{round.hybridMechanism}</p>
+            </div>
+          )}
+
+          {/* Operator playbook callout */}
+          {round.playbook.length > 0 && (
+            <div className="bg-emerald-500/5 border border-emerald-500/30 rounded-lg p-3">
+              <h5 className="text-[10px] uppercase tracking-wider text-emerald-400 mb-2 flex items-center gap-1.5">
+                <span className="text-sm leading-none">▸</span> Operator Playbook — how to position to win
+              </h5>
+              <ul className="space-y-1.5">
+                {round.playbook.map((p, i) => (
+                  <li key={i} className="flex gap-2 text-[11px] text-[var(--color-text)] leading-relaxed">
+                    <span className="text-emerald-400 shrink-0 font-bold">→</span>
+                    <span>{p}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          {/* Caveats */}
+          {round.caveats.length > 0 && (
+            <div className="bg-amber-500/5 border border-amber-500/20 rounded-lg p-3">
+              <h5 className="text-[10px] uppercase tracking-wider text-amber-400/90 mb-1.5">Confidence &amp; caveats</h5>
+              <ul className="space-y-1">
+                {round.caveats.map((c, i) => (
+                  <li key={i} className="flex gap-2 text-[10px] text-[var(--color-text-muted)] leading-relaxed">
+                    <span className="text-amber-400/70 shrink-0">!</span>
+                    <span>{c}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          {/* Sources */}
+          {round.sources.length > 0 && (
+            <div className="flex flex-wrap gap-x-3 gap-y-1 pt-1">
+              {round.sources.map((s, i) => (
+                <a key={i} href={s.url} target="_blank" rel="noreferrer" className="text-[10px] text-[var(--color-primary)] hover:underline">
+                  {s.label} ↗
+                </a>
+              ))}
+            </div>
+          )}
+        </div>
+      )}
     </div>
   )
 }
@@ -6014,12 +6352,12 @@ Key risks to the 6.3 GW total. Junction Rivers' lost SW REZ access raises real q
             <p className="text-xs text-[var(--color-text)] leading-relaxed mb-2">With that scoring spine in mind, the Hybrid LTESA's explicit treatment:</p>
             <ul className="text-xs text-[var(--color-text)] space-y-1.5 list-disc pl-5">
               <li><strong className="text-cyan-300">Eligibility rule:</strong> "The Hybrid LTESA is available to projects where generation export capacity matches or exceeds storage export capacity, with storage systems providing a minimum 4-hour duration at the commercial operations date." Standalone gen still eligible for the standard Generation LTESA, but does not receive the hybrid uplift.</li>
-              <li><strong className="text-cyan-300">No wholesale market benefits</strong> for ineligible hybrid configurations: "Projects bidding for a Hybrid LTESA will be assessed as having no wholesale market benefits if the initial storage duration is less than 4 hours or the capacity of the generation component is below the capacity of the storage component." — wholesale-market benefits are the numerator of the BCR metric inside MC5 (the 45% line above), so this is effectively a hard zero on the dominant scoring axis.</li>
+              <li><strong className="text-cyan-300">Ineligible hybrid configurations can&apos;t use the Hybrid LTESA:</strong> a config where storage export capacity exceeds generation export capacity, or storage duration is under 4 hours, is ineligible for the Hybrid product and must bid as straight generation (or as storage under NSW Tender 9). <span className="text-amber-400/80">Note: earlier AURES drafts stated such configs are scored as having "no wholesale market benefits" — that exact phrasing is <strong>unconfirmed</strong> in public sources pending the gazetted Tender Guidelines. The verifiable fact is the eligibility gate, not a defined zero-benefit penalty.</span> Either way, an ineligible config forgoes the hybrid uplift on MC5&apos;s benefit-cost numerator (the dominant scoring axis).</li>
               <li><strong className="text-cyan-300">Time-shift bias:</strong> "wind and hybrid generation-storage projects that produce during non-solar hours are expected to deliver strong financial value" — explicit favourable consideration for projects whose output covers solar-cannibalisation hours.</li>
               <li><strong className="text-cyan-300">COD acceleration bonus:</strong> "Projects demonstrating commercial operations dates before 31 December 2029 are expected to receive favourable consideration" — directly addresses the Eraring (Aug 2027) coal-exit timing. Flows through both MC5 (earlier revenue → higher BCR) and MC2 (Pathway to commercial operation — 11%).</li>
             </ul>
             <div className="text-[10px] text-[var(--color-text-muted)] italic mt-2">
-              <strong className="text-[var(--color-text)]">Net effect:</strong> a wind-only or solar-only bid that doesn't meet the Hybrid-LTESA eligibility loses the wholesale-benefits numerator of MC5's benefit-cost ratio — i.e. a meaningful portion of the 45% weighting collapses to a low score. Combined with the explicit time-shift bias, that materially advantages Pottinger (wind+BESS), Bookham (wind+BESS) and Hargraves (wind+solar+BESS) vs Liverpool Range Stage 2 and The Plains (wind-alone) in our cohort.
+              <strong className="text-[var(--color-text)]">Net effect:</strong> a wind-only or solar-only bid that doesn't meet the Hybrid-LTESA eligibility forgoes the hybrid uplift on MC5's benefit-cost numerator — weakening its standing on a meaningful portion of the dominant financial-value weighting (45% in the T6 precedent; reported at 49% for the now-open Tender 8). Combined with the explicit time-shift bias, that materially advantages Pottinger (wind+BESS), Bookham (wind+BESS) and Hargraves (wind+solar+BESS) vs Liverpool Range Stage 2 and The Plains (wind-alone) in our cohort. See the <strong className="text-[var(--color-text)]">Open Rounds</strong> tab for the live Tender 8 detail.
             </div>
             <div className="text-[10px] text-[var(--color-text-muted)] italic mt-1">
               Sources: <a href="https://asl.org.au/-/media/services/files/tender-round-6/260130-nsw-roadmap-tender-round-6-market-briefing-note.pdf" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:underline">ASL T6 market briefing PDF</a> (weightings table), <a href="https://www.pv-tech.org/australias-new-south-wales-launches-biggest-renewable-energy-tender-in-the-states-history/" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:underline">PV Tech</a>, <a href="https://reneweconomy.com.au/nsw-launches-its-biggest-ever-renewable-tender-to-keep-lights-on-and-push-down-prices/" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:underline">RenewEconomy</a>, <a href="https://www.energy.nsw.gov.au/nsw-plans-and-progress/major-state-projects/electricity-infrastructure-roadmap/asl-tenders" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:underline">NSW Climate &amp; Energy Action</a>.
@@ -6087,7 +6425,7 @@ Key risks to the 6.3 GW total. Junction Rivers' lost SW REZ access raises real q
                 { aspect: 'Mechanism', cisa: 'Two-sided revenue floor + ceiling. Government pays 90% of shortfall below floor; project pays back 50% of excess above ceiling.', ltesa: 'Strike-price swap — fixed strike vs spot. Operator receives shortfall when spot below strike, pays difference when above.' },
                 { aspect: 'Term', cisa: '10–15 years typical', ltesa: '15 years generation · 14 years firming · 25 years LDS' },
                 { aspect: 'Indexation', cisa: 'CPI-linked', ltesa: 'CPI-linked' },
-                { aspect: 'Counterparty', cisa: 'DCCEEW (Commonwealth)', ltesa: 'AEMO Services (NSW Crown — Consumer Trustee)' },
+                { aspect: 'Counterparty', cisa: 'DCCEEW (Commonwealth)', ltesa: 'ASL — AusEnergy Services Ltd (NSW Consumer Trustee, formerly AEMO Services)' },
                 { aspect: 'Scope after T7', cisa: 'NSW excluded from T9 generation', ltesa: 'Sole remaining underwriting path for NSW wind' },
                 { aspect: 'Hybrid bias', cisa: 'T4 awarded hybrids 12 of 20 — softer bias', ltesa: 'Q2 2026 round explicitly hybrid-favoured (battery ≤ gen, 4hr+)' },
                 { aspect: 'Settlement', cisa: 'Commonwealth-funded', ltesa: 'NSW electricity-bill levy (Energy Security Target Charge)' },

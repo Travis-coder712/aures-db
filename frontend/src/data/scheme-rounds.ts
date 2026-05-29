@@ -982,3 +982,335 @@ export const NSW_WIND_COHORT: NSWWindCohortEntry[] = [
     notes: 'NSW approved 2014; complete and operational. Iberdrola Australia ownership.',
   },
 ]
+
+// ============================================================
+// OPEN ROUNDS — "Current State of Play" (v3.14.0)
+// ============================================================
+// Live + imminent CIS (federal, DCCEEW) and NSW Roadmap LTESA (ASL)
+// tenders, with research-backed "what changed" + strategy cheat sheets.
+//
+// CRITICAL NAMING NOTE: both the FEDERAL CIS and the NSW ROADMAP have a
+// "Tender 8" and "Tender 9" live concurrently in 2026 — they are entirely
+// different schemes (CIS = federal cap-and-collar; NSW = state LTESA
+// option). The UI must always badge the scheme. `roundCode` carries the
+// scheme prefix to keep them unambiguous.
+//
+// Sourcing (late May 2026): DCCEEW open-CIS-tenders + "changes to future
+// tender process"; ASL (AusEnergy Services Ltd, formerly AEMO Services)
+// tender pages + T6/T7 market briefing notes; HSF Kramer (10 Jul 2025) +
+// Hamilton Locke (20 Aug 2025) CIS-reform notes; Dentons LTESA T8/T9 note
+// (26 May 2026); pv-magazine-australia / pv-tech / energy-storage.news
+// (15–26 May 2026). Confidence flags carried per-field in `caveats`.
+
+export type OpenRoundScheme = 'CIS' | 'LTESA'
+export type OpenRoundStatus = 'open' | 'evaluating' | 'upcoming'
+export type RoundConfigFavour = 'hybrid' | 'generation' | 'storage' | 'mixed'
+
+export interface MeritCriterion {
+  label: string
+  weightPct?: number            // undefined = not publicly disclosed
+  tests: string                 // what it assesses
+}
+
+export interface OpenRoundChange {
+  area: 'Contract' | 'Merit criteria' | 'Eligibility' | 'Target' | 'Process' | 'Region'
+  detail: string
+}
+
+export interface OpenRound {
+  id: string
+  scheme: OpenRoundScheme
+  /** Unambiguous code incl. scheme prefix, e.g. 'CIS T9', 'NSW T8'. */
+  roundCode: string
+  name: string
+  administrator: string         // 'DCCEEW (Commonwealth)' | 'ASL — AusEnergy Services Ltd (NSW Consumer Trustee)'
+  status: OpenRoundStatus
+  techFocus: string             // 'NEM Generation', 'Generation + Hybrid', 'Long-Duration Storage', etc.
+  region: string                // 'NEM-wide (excl. NSW)', 'NSW', 'WEM', etc.
+
+  // Procurement target
+  targetMW?: number
+  targetMWh?: number
+  targetLabel: string           // human label, e.g. '~5 GW', '~12 GWh / ~1.5 GW (≥8h)'
+
+  // Timeline (ISO dates where known; null where not pinned)
+  opened?: string
+  registrationsClose?: string
+  bidsClose?: string
+  resultsExpected?: string      // free text — 'Nov 2026', 'late 2026', 'Jun 2026'
+  targetCOD?: string            // free text
+
+  // Mechanism
+  contractMechanism: string     // one-liner describing CISA / LTESA structure for this round
+  configFavoured: RoundConfigFavour
+  meritCriteria: MeritCriterion[]
+
+  // Analyst body
+  headline: string              // one-sentence "why this round matters"
+  whatChanged: OpenRoundChange[]
+  analystRead: string           // 2-4 sentences, advisory voice
+
+  // Operator playbook (punchy imperative callout)
+  playbook: string[]            // 3-6 sharp actionable lines
+
+  // Hybrid mechanism detail (where relevant)
+  hybridMechanism?: string
+
+  // Honesty
+  caveats: string[]             // confidence flags surfaced in UI
+  sources: { label: string; url: string }[]
+}
+
+export const OPEN_ROUNDS: OpenRound[] = [
+  // ---------------------------------------------------------------
+  // FEDERAL CIS — Tender 9 (NEM Generation) — OPEN
+  // ---------------------------------------------------------------
+  {
+    id: 'cis-tender-9-nem-gen',
+    scheme: 'CIS',
+    roundCode: 'CIS T9',
+    name: 'CIS Tender 9 — NEM Generation',
+    administrator: 'DCCEEW (Commonwealth), tenders run by ASL',
+    status: 'open',
+    techFocus: 'Renewable generation (hybrids allowed)',
+    region: 'NEM-wide — NSW EXCLUDED',
+    targetMW: 5000,
+    targetLabel: '~5 GW (indicative)',
+    opened: '2026-05-25',
+    registrationsClose: '2026-07-06',
+    bidsClose: '2026-07-20',
+    resultsExpected: 'Nov 2026',
+    targetCOD: 'Before end-2030',
+    contractMechanism: 'CISA "cap & collar" (CfD-style net-revenue floor + ceiling). Up to 15-yr term; Commonwealth tops up ~90% of shortfall below the floor; project pays ~50% of revenue above the ceiling. Mechanism unchanged from prior rounds.',
+    configFavoured: 'hybrid',
+    meritCriteria: [
+      { label: 'Financial value, system reliability & system benefits', tests: 'Net CISA cost to the Commonwealth + benefit to the NEM. The dominant criterion.' },
+      { label: 'Project deliverability & timeline', tests: 'Development maturity + credibility of delivering by 2030.' },
+      { label: 'Organisational, resource & financing capability', tests: 'Track record, balance-sheet/financing depth, revenue strategy.' },
+      { label: 'First Nations participation & benefit sharing', tests: 'Equity and/or revenue sharing — drives the 500 MW set-aside.' },
+      { label: 'Social outcomes & community benefit sharing', tests: 'Co-designed community benefit (not unilateral).' },
+    ],
+    headline: 'The first NEM generation round NSW cannot win — contestable capacity shifts to QLD/SA/VIC/TAS, with a First Nations set-aside and a Victorian solar cap.',
+    whatChanged: [
+      { area: 'Region', detail: 'NSW EXCLUDED entirely — it hit its maximum CIS allocation across prior rounds (T7 was its last eligible round). NSW developers are redirected to the NSW Roadmap state tenders.' },
+      { area: 'Region', detail: 'New state shape: TAS ~300 MW; VIC ~1.6 GW with a 470 MW cap on solar-only Victorian projects (at Victoria’s request); ~3.1 GW contestable/unallocated (indicatively flowing to QLD & SA).' },
+      { area: 'Eligibility', detail: 'New First Nations 500 MW set-aside for projects committing to ≥5% First Nations equity and/or revenue sharing.' },
+      { area: 'Process', detail: 'Two-stage → single-stage bidding (full merit + financial bid submitted together). Total tender ~9mo → ~6mo, compressing proponent prep to a ~6–8 week window.' },
+      { area: 'Merit criteria', detail: 'Consolidated to 5 criteria. Commercial/CISA departures are NO LONGER scored (from Tender 5) — instead, unnecessary departures are an EXCLUSION risk. A credible end-2030 COD is now a hard merit lever.' },
+      { area: 'Eligibility', detail: 'New labour/workforce transparency requirement (public disclosure of key labour + major-subcontractor arrangements) and a reserve-list mechanism for meritorious-but-unsuccessful bids.' },
+    ],
+    analystRead: 'T9 is the round where the federal scheme formally rotates away from NSW toward the rest of the NEM. With NSW out and a Victorian solar cap in place, the ~3.1 GW of unallocated capacity gives Queensland and South Australia generation projects real headroom. Hybrids continue to gain ground (8 of 19 T7 winners were battery-paired) because they score on the system-benefit limb, but the single biggest discriminator is now a credible, financeable pathway to commercial operation before end-2030.',
+    playbook: [
+      'If you’re a NSW project — don’t bid here; pivot to NSW Roadmap T8 (Generation/Hybrid).',
+      'Target QLD or SA generation — that’s where the ~3.1 GW contestable headroom sits.',
+      'Pair generation with ~4-hour storage — the de-facto competitive baseline that lifts the system-benefit score.',
+      'Bid the lowest credible net-CISA-cost and a connection/planning status that makes a <2030 COD believable.',
+      'Submit only strictly necessary CISA departures — unnecessary ones now risk exclusion, not just a lower score.',
+      'Chasing the 500 MW First Nations set-aside? Lock a named partner at ≥5% equity/revenue before bidding.',
+      'Avoid solar-only in Victoria beyond the 470 MW cap — it will be brutally contested.',
+    ],
+    caveats: [
+      'Merit-criterion numeric weightings are NOT publicly disclosed — they sit in the tender-specific Guidelines and vary by location/technology.',
+      'The QLD/SA ~3.1 GW split is indicative/inferred (reported by trade press), not an official state allocation.',
+      'No source indicated any change to the CISA floor/ceiling numbers or term for T9 specifically — assumed unchanged but unverified at the parameter level.',
+    ],
+    sources: [
+      { label: 'DCCEEW — Open CIS tenders', url: 'https://www.dcceew.gov.au/energy/renewable/capacity-investment-scheme/open-cis-tenders' },
+      { label: 'DCCEEW — Changes to future tender process', url: 'https://www.dcceew.gov.au/energy/renewable/capacity-investment-scheme' },
+      { label: 'pv magazine Australia — Australia opens 5 GW generation tender (26 May 2026)', url: 'https://www.pv-magazine-australia.com/2026/05/26/australia-opens-5-gw-renewable-generation-tender-under-cis/' },
+      { label: 'HSF Kramer — CIS changes (10 Jul 2025)', url: 'https://www.hsfkramer.com/notes/energy/2025-posts/cis-changes' },
+      { label: 'Hamilton Locke — CIS tender reforms (20 Aug 2025)', url: 'https://hamiltonlocke.com.au/cis-tender-reforms-whats-changing-and-when/' },
+    ],
+  },
+
+  // ---------------------------------------------------------------
+  // NSW ROADMAP — Tender 8 (Generation + Hybrid LTESA) — OPEN
+  // ---------------------------------------------------------------
+  {
+    id: 'nsw-roadmap-tender-8-gen-hybrid',
+    scheme: 'LTESA',
+    roundCode: 'NSW T8',
+    name: 'NSW Roadmap Tender 8 — Generation + Hybrid LTESA',
+    administrator: 'ASL — AusEnergy Services Ltd (NSW Consumer Trustee)',
+    status: 'open',
+    techFocus: 'Renewable generation + first-ever Hybrid Generation LTESA',
+    region: 'NSW',
+    targetMW: 2500,
+    targetLabel: '~2.5 GW',
+    opened: '2026-05-20',
+    registrationsClose: '2026-06-30',
+    bidsClose: '2026-07-06',
+    resultsExpected: 'late 2026',
+    targetCOD: 'Favourable consideration for COD before 31 Dec 2029 (Eraring-aligned)',
+    contractMechanism: 'LTESA — option-style annuity (a series of annual put options on revenue, not an obligation). Operator bids an Annuity Cap + Net Revenue Threshold; support tapers as revenue rises; 50% revenue-share repayment above threshold, capped at 100% of payments received. The new Hybrid LTESA is a cash-settled swap on net (sent-out) exports, max 20-yr term, DC-coupling mandated.',
+    configFavoured: 'hybrid',
+    meritCriteria: [
+      { label: 'Financial value & system benefits', weightPct: 49, tests: 'Benefit-Cost Ratio = Wholesale Market Benefits ÷ Net LTESA Cost, plus system benefits. The dominant criterion — up from a combined ~45% in T6.' },
+      { label: 'Project deliverability', weightPct: 17, tests: 'Planning approval, connection progress, EPC/financing maturity.' },
+      { label: 'Organisational capacity', weightPct: 17, tests: 'Track record + financing depth.' },
+      { label: 'Social value', weightPct: 17, tests: 'First Nations, local-content, community benefit commitments.' },
+    ],
+    headline: 'NSW’s answer to losing federal CIS access — and the launchpad for the first-ever Hybrid Generation LTESA product.',
+    whatChanged: [
+      { area: 'Contract', detail: 'First-ever Hybrid Generation LTESA: a cash-settled swap on net sent-out exports (battery charging netted off), DC-coupling mandated (single bi-directional DUID, registered as an Integrated Resource Provider), max 20-yr term. Two designs consulted — Fixed-Shape/Fixed-Volume (bid against predetermined peak profiles, $0 spot floor) vs Generation-following with a 50% price-risk-share.' },
+      { area: 'Merit criteria', detail: 'Weightings collapsed to 4 buckets: Financial value & system benefits 49% (up from ~45% combined in T6) / Deliverability 17% / Organisational capacity 17% / Social value 17%.' },
+      { area: 'Eligibility', detail: 'Hybrid LTESA eligibility: generation export capacity must be ≥ storage export capacity, AND storage must provide ≥4-hour duration at COD. A config where storage export > generation export cannot use the Hybrid LTESA (must bid as straight generation, or as storage in NSW T9).' },
+      { area: 'Target', detail: '~2.5 GW generation target — among the largest NSW Roadmap generation rounds, restarted specifically because NSW is now excluded from federal CIS generation tenders.' },
+    ],
+    analystRead: 'T8 is purpose-built for wind and solar+storage hybrids that can shift output into the evening and morning peaks — the configurations that score on the dominant 49% financial/system-benefit limb. Standalone midday solar scores poorly on wholesale-benefit. The Hybrid LTESA gives developers a longer 20-year contract but locks in a net-export settlement basis, so storage that exceeds the generation export ceiling simply won’t count toward eligibility. The COD-before-2029 favourable consideration rewards mature projects, but ASL deliberately accepts earlier-stage bids where the LTESA structure protects consumers — so a well-priced earlier-stage hybrid can still beat a mature but expensive standalone bid.',
+    playbook: [
+      'Bidding hybrid? Keep storage export ≤ generation export, storage ≥4h at COD — don’t gold-plate storage past the gen ceiling (it won’t count and risks ineligibility).',
+      'Maximise the wholesale-benefit numerator: prioritise strong network location + peak-shifting dispatch over extra duration.',
+      'Pick your product design: Fixed-Shape if you can firmly commit to a peak profile; Generation-following if you want merchant upside + opportunistic cycling.',
+      'Bid a tight Annuity Cap + Net Revenue Threshold — cheapest credible Net LTESA Cost wins the 49% limb.',
+      'Target COD before 31 Dec 2029 for favourable consideration — but only if credible; an unachievable COD damages the 17% deliverability score.',
+      'Storage bigger than your generation? Bid it into NSW T9 (LDS) instead.',
+    ],
+    hybridMechanism: 'Hybrid Generation LTESA eligibility (per market briefing): generation export capacity ≥ storage export capacity AND storage ≥ 4-hour duration at COD. Settlement is on net sent-out exports (exports minus imports). An ineligible configuration cannot access the Hybrid LTESA product — it must bid as straight generation or as storage under NSW T9.',
+    caveats: [
+      'The full Tender Guidelines + proforma Hybrid LTESA are NOT yet public — the 49/17/17/17 weightings come from trade-press reporting of the May 2026 market briefing, not the gazetted Guidelines. Treat as "per briefing, pending Guidelines".',
+      'The exact registration-close date is reported only as "end of June 2026"; bid close ~6 Jul 2026 from a single source.',
+      'Earlier AURES content described ineligible hybrids as scored "zero wholesale market benefits" — that exact phrasing is UNCONFIRMED in public sources. The verifiable fact is that an ineligible config cannot use the Hybrid LTESA.',
+    ],
+    sources: [
+      { label: 'energy-storage.news — NSW launches Generation + Hybrid LTESA tenders (20 May 2026)', url: 'https://www.energy-storage.news/' },
+      { label: 'pv-tech — NSW Tender 8/9 (21 May 2026)', url: 'https://www.pv-tech.org/' },
+      { label: 'ASL — Tender pages (AusEnergy Services Ltd)', url: 'https://www.aemoservices.com.au/' },
+      { label: 'Dentons — Options for NSW Roadmap LTESA Tender Rounds 8 and 9 (26 May 2026)', url: 'https://www.dentons.com/' },
+    ],
+  },
+
+  // ---------------------------------------------------------------
+  // NSW ROADMAP — Tender 9 (Long-Duration Storage LTESA) — OPEN
+  // ---------------------------------------------------------------
+  {
+    id: 'nsw-roadmap-tender-9-lds',
+    scheme: 'LTESA',
+    roundCode: 'NSW T9',
+    name: 'NSW Roadmap Tender 9 — Long-Duration Storage LTESA',
+    administrator: 'ASL — AusEnergy Services Ltd (NSW Consumer Trustee)',
+    status: 'open',
+    techFocus: 'Long-Duration Storage (≥8-hour duration)',
+    region: 'NSW',
+    targetMW: 1500,
+    targetMWh: 12000,
+    targetLabel: '~12 GWh / ~1.5 GW (≥8h)',
+    opened: '2026-05-20',
+    registrationsClose: '2026-06-30',
+    bidsClose: '2026-07-06',
+    resultsExpected: 'late 2026',
+    targetCOD: 'Indicative ~2034 horizon; earlier COD scores higher',
+    contractMechanism: 'LDS LTESA — option-style annuity, same mechanism as T5/T6. Operator bids an Annuity Cap ($/MW/yr) + Net Revenue Threshold + term (14-yr typical for BESS, up to 40-yr for pumped hydro / A-CAES). 50% revenue-share repayment above threshold, capped at payments received.',
+    configFavoured: 'storage',
+    meritCriteria: [
+      { label: 'Financial value & system benefits', tests: 'Benefit-Cost Ratio + system benefits. Inferred to resemble the T6 LDS framework (MC5+MC6 ~45%), updated — exact T9 weightings table not yet published.' },
+      { label: 'System strength & security services', tests: 'NEW emphasis — grid-forming inverters, synchronous operation/inertia, frequency/voltage control, system restart. Favours pumped hydro / A-CAES.' },
+      { label: 'Deliverability', tests: 'Planning, connection, financing maturity.' },
+      { label: 'Organisational capacity & social value', tests: 'Track record + community/First Nations benefit.' },
+    ],
+    headline: 'The deep-storage companion to T8 — ≥8-hour duration, with new weight on system-strength services that favours pumped hydro and A-CAES.',
+    whatChanged: [
+      { area: 'Merit criteria', detail: 'New explicit emphasis on system strength & system-security service provision (grid-forming, inertia, frequency/voltage control, system restart) — favouring pumped hydro / A-CAES as system-strength solutions that defer network cost, alongside 8h+ BESS.' },
+      { area: 'Eligibility', detail: '≥8-hour duration, minimum 5 MW.' },
+      { area: 'Target', detail: '~12 GWh (~1.5 GW) per the 2025 IIO Report development pathway.' },
+    ],
+    analystRead: 'T9 LDS rewards genuinely long-duration, system-strengthening assets. The added system-security limb tilts the field toward pumped hydro and A-CAES (which also carry 40-year LTESA terms) and 8-hour-plus BESS, over the 2–4 hour batteries that dominate the federal CIS dispatchable rounds. The competitive lever remains a tight Annuity Cap against a strong, well-located benefit case.',
+    playbook: [
+      'Lead with duration: ≥8h is the floor — deeper storage + long asset life lifts the benefit-cost numerator.',
+      'Sell system-strength: grid-forming inverters, inertia, system-restart capability now score explicitly.',
+      'Pumped hydro / A-CAES: lean into the 40-yr term + network-deferral value — this round is more receptive than any CIS dispatchable round.',
+      'Bid the tightest credible Annuity Cap — the T6 benchmark was ~$150k/MW/yr for BESS, ~$155k/MW/yr for PHES/A-CAES.',
+      'Strong network location beats raw size — site where you defer transmission/network cost.',
+    ],
+    caveats: [
+      'The T9 LDS merit-criteria weightings table is NOT yet published — the framework is inferred to resemble the T6 LDS structure with added system-strength emphasis.',
+      'Target (~12 GWh) is from the 2025 IIO Report development pathway, not a gazetted tender quantum.',
+    ],
+    sources: [
+      { label: 'energy-storage.news — NSW LDS tender (20 May 2026)', url: 'https://www.energy-storage.news/' },
+      { label: 'ASL — Tender Round 6 outcomes note (30 Jan 2026, LDS benchmarks)', url: 'https://www.aemoservices.com.au/' },
+      { label: 'pv-tech — NSW Tender 8/9 (21 May 2026)', url: 'https://www.pv-tech.org/' },
+    ],
+  },
+
+  // ---------------------------------------------------------------
+  // FEDERAL CIS — Tender 8 (NEM Dispatchable) — EVALUATING
+  // ---------------------------------------------------------------
+  {
+    id: 'cis-tender-8-nem-disp',
+    scheme: 'CIS',
+    roundCode: 'CIS T8',
+    name: 'CIS Tender 8 — NEM Dispatchable',
+    administrator: 'DCCEEW (Commonwealth), tenders run by ASL',
+    status: 'evaluating',
+    techFocus: 'Clean dispatchable storage (4-hr equivalent)',
+    region: 'NEM-wide',
+    targetMW: 4000,
+    targetMWh: 16000,
+    targetLabel: '4 GW / 16 GWh',
+    registrationsClose: '2026-01-23',
+    bidsClose: '2026-02-06',
+    resultsExpected: 'Jun 2026',
+    targetCOD: 'Before end-2030',
+    contractMechanism: 'CISA cap & collar (CfD-style floor + ceiling), up to 15-yr term. Single-stage bid. Same mechanism as the generation rounds.',
+    configFavoured: 'storage',
+    meritCriteria: [
+      { label: 'Financial value, system reliability & benefits', tests: 'Net CISA cost + dispatchable/firming value to the NEM.' },
+      { label: 'Project deliverability & timeline', tests: 'Maturity + credible end-2030 COD.' },
+      { label: 'Organisational, resource & financing capability', tests: 'Track record + financing depth.' },
+      { label: 'First Nations participation', tests: 'Equity/revenue sharing.' },
+      { label: 'Social outcomes & community benefit', tests: 'Co-designed community benefit.' },
+    ],
+    headline: 'The 4 GW / 16 GWh dispatchable round — bids are in, results imminent (June 2026).',
+    whatChanged: [
+      { area: 'Process', detail: 'Same single-stage / 5-criteria reform package as the generation rounds. 4-hour equivalent is the design point for dispatchable capacity.' },
+    ],
+    analystRead: 'Results are imminent. T8 is the read-across for the upcoming T10 dispatchable round: 4-hour duration is the competitive baseline, with firming/system-reliability value and a credible end-2030 COD the discriminators.',
+    playbook: [
+      'Watch for results in June 2026 — they signal pricing + the bar for T10.',
+      'For the read-across to T10: target 4-hour duration, lead on firming/system-reliability value.',
+    ],
+    caveats: [
+      'Round is closed and under evaluation — shown here for context + as the read-across to the upcoming T10 dispatchable round.',
+    ],
+    sources: [
+      { label: 'ASL — CIS Tender 8 (NEM Dispatchable)', url: 'https://www.aemoservices.com.au/' },
+      { label: 'DCCEEW — Open CIS tenders', url: 'https://www.dcceew.gov.au/energy/renewable/capacity-investment-scheme/open-cis-tenders' },
+    ],
+  },
+
+  // ---------------------------------------------------------------
+  // FEDERAL CIS — Tender 10 (NEM Dispatchable) — UPCOMING
+  // ---------------------------------------------------------------
+  {
+    id: 'cis-tender-10-nem-disp',
+    scheme: 'CIS',
+    roundCode: 'CIS T10',
+    name: 'CIS Tender 10 — NEM Dispatchable',
+    administrator: 'DCCEEW (Commonwealth), tenders run by ASL',
+    status: 'upcoming',
+    techFocus: 'Clean dispatchable storage',
+    region: 'NEM-wide (allocation TBA)',
+    targetLabel: 'Not yet published',
+    resultsExpected: '—',
+    targetCOD: 'Before end-2030 (expected)',
+    contractMechanism: 'CISA cap & collar (expected, unchanged).',
+    configFavoured: 'storage',
+    meritCriteria: [],
+    headline: 'Expected to open June 2026 — the next dispatchable round. Target and dates not yet published.',
+    whatChanged: [
+      { area: 'Target', detail: 'Flagged to open ~June 2026; no published target capacity or registration dates yet.' },
+    ],
+    analystRead: 'On the horizon. Expect the T8 dispatchable playbook to carry over: 4-hour duration baseline, firming/system-reliability value, credible end-2030 COD.',
+    playbook: [
+      'Start positioning now if you hold a dispatchable project — expect a June 2026 open.',
+      'Assume the T8 playbook carries: 4-hour duration, firming value, <2030 COD.',
+    ],
+    caveats: [
+      'Target capacity and dates are NOT yet published — confirmed only as "expected to open June 2026".',
+    ],
+    sources: [
+      { label: 'DCCEEW — Open CIS tenders', url: 'https://www.dcceew.gov.au/energy/renewable/capacity-investment-scheme/open-cis-tenders' },
+    ],
+  },
+]
