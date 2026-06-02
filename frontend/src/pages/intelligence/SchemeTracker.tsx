@@ -1,5 +1,6 @@
 import { useState, useEffect, useMemo, useCallback, useRef } from 'react'
 import { Link } from 'react-router-dom'
+import { useProjectIndex } from '../../hooks/useProjectData'
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip, BarChart, Bar, XAxis, YAxis, CartesianGrid, Legend, LineChart, Line, ReferenceLine } from 'recharts'
 import { fetchSchemeTracker } from '../../lib/dataService'
 import { useSchemeData } from '../../hooks/useSchemeData'
@@ -3270,6 +3271,10 @@ function OpenRoundCard({ round, isExpanded, onToggle }: { round: OpenRound; isEx
   const statusCfg = OPEN_STATUS_CONFIG[round.status]
   const days = daysUntil(round.bidsClose)
   const hasWeights = round.meritCriteria.some(c => c.weightPct !== undefined)
+  // v3.16.0: NSW T8 helper modals
+  const isNswT8 = round.roundCode === 'NSW T8'
+  const [showIneligibleModal, setShowIneligibleModal] = useState(false)
+  const [showCalculatorModal, setShowCalculatorModal] = useState(false)
 
   return (
     <div id={`open-round-${round.id}`} className="bg-[var(--color-bg-card)] border rounded-xl overflow-hidden" style={{ borderColor: round.status === 'open' ? `${statusCfg.colour}55` : 'var(--color-border)' }}>
@@ -3492,10 +3497,22 @@ function OpenRoundCard({ round, isExpanded, onToggle }: { round: OpenRound; isEx
 
           {round.ppaScenarios && (
             <div className="bg-[var(--color-bg)] border border-[var(--color-border)] rounded-lg p-3">
-              <h5 className="text-[10px] uppercase tracking-wider text-[var(--color-text)] mb-1">PPA × LTESA interaction — scenarios</h5>
+              <div className="flex items-center justify-between gap-2 mb-1 flex-wrap">
+                <h5 className="text-[10px] uppercase tracking-wider text-[var(--color-text)]">PPA × LTESA interaction — scenarios</h5>
+                {isNswT8 && (
+                  <button
+                    onClick={(e) => { e.stopPropagation(); setShowCalculatorModal(true) }}
+                    className="text-[10px] font-medium px-2.5 py-1 rounded-full bg-[#8b5cf6]/15 border border-[#8b5cf6]/40 text-[#a855f7] hover:bg-[#8b5cf6]/25 transition-colors inline-flex items-center gap-1.5"
+                    title="Open the interactive PPA / LTESA cashflow calculator"
+                  >
+                    <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" d="M15.75 15.75l-2.489-2.489m0 0a3.375 3.375 0 10-4.773-4.773 3.375 3.375 0 004.774 4.774zM21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                    Open PPA / LTESA calculator
+                  </button>
+                )}
+              </div>
               <p className="text-[11px] text-[var(--color-text-muted)] leading-relaxed mb-2">{round.ppaScenarios.headline}</p>
               <div className="bg-amber-500/5 border border-amber-500/30 rounded-md p-2.5 mb-3">
-                <div className="text-[10px] font-bold text-amber-400 mb-1">⚠ THE UNRESOLVED QUESTION</div>
+                <div className="text-[10px] font-bold text-amber-400 mb-1">▸ HOW PPA REVENUE ENTERS THE LTESA CASH FLOW</div>
                 <p className="text-[10px] text-[var(--color-text-muted)] leading-relaxed">{round.ppaScenarios.norQuestion}</p>
               </div>
               <div className="space-y-3">
@@ -3607,6 +3624,16 @@ function OpenRoundCard({ round, isExpanded, onToggle }: { round: OpenRound; isEx
                 </p>
               )}
               <p className="text-[10px] text-[var(--color-text-muted)] leading-relaxed">{round.commitmentEligibility.detail}</p>
+              {isNswT8 && (
+                <button
+                  onClick={(e) => { e.stopPropagation(); setShowIneligibleModal(true) }}
+                  className="mt-2.5 text-[10px] font-medium px-2.5 py-1 rounded-full bg-cyan-500/15 border border-cyan-500/40 text-cyan-300 hover:bg-cyan-500/25 transition-colors inline-flex items-center gap-1.5"
+                  title="See the specific NSW projects that would be ineligible to bid (or merit-penalised) under T8"
+                >
+                  <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z" /></svg>
+                  View NSW projects this affects
+                </button>
+              )}
             </div>
           )}
 
@@ -3654,6 +3681,535 @@ function OpenRoundCard({ round, isExpanded, onToggle }: { round: OpenRound; isEx
           )}
         </div>
       )}
+
+      {/* v3.16.0 — NSW T8 helper modals */}
+      {isNswT8 && showIneligibleModal && (
+        <NswT8IneligibleProjectsModal onClose={() => setShowIneligibleModal(false)} />
+      )}
+      {isNswT8 && showCalculatorModal && (
+        <PpaLtesaCalculatorModal onClose={() => setShowCalculatorModal(false)} />
+      )}
+    </div>
+  )
+}
+
+// ============================================================
+// NSW T8 IneligibleProjectsModal (v3.16.0)
+//
+// Surfaces the specific NSW projects that would either be hard-
+// ineligible for NSW T8 (won a prior CIS or LTESA — EC3 / EC11) or
+// merit-penalised under MC1 (Operating, treated as a proxy for
+// "In Service" on the AEMO July 2025 Gen Info page).
+// ============================================================
+
+type IneligibilityReason = 'cis-winner' | 'ltesa-winner' | 'operating'
+
+interface IneligibleProject {
+  project_id: string
+  name: string
+  technology: string
+  capacity_mw: number
+  reasons: IneligibilityReason[]
+  schemeAwards: string[]   // e.g. 'CIS T7', 'LTESA R3'
+}
+
+const TECH_CHIP_CONFIG: Record<string, { label: string; colour: string }> = {
+  all:           { label: 'All',           colour: '#94a3b8' },
+  wind:          { label: 'Wind',          colour: '#3b82f6' },
+  solar:         { label: 'Solar',         colour: '#f59e0b' },
+  bess:          { label: 'BESS',          colour: '#10b981' },
+  hybrid:        { label: 'Hybrid',        colour: '#ec4899' },
+  pumped_hydro:  { label: 'Pumped Hydro',  colour: '#8b5cf6' },
+}
+
+function NswT8IneligibleProjectsModal({ onClose }: { onClose: () => void }) {
+  const { projects: index, loading } = useProjectIndex()
+  const [techFilter, setTechFilter] = useState<string>('wind')  // default wind per Travis ask
+  const [search, setSearch] = useState('')
+
+  // Build the ineligible list from CIS_PROJECTS + LTESA_PROJECTS arrays + index
+  const ineligible = useMemo<IneligibleProject[]>(() => {
+    const byProjectId = new Map<string, IneligibleProject>()
+
+    // CIS winners (NSW only)
+    for (const [roundId, projects] of Object.entries(CIS_PROJECTS)) {
+      for (const p of projects) {
+        if (p.state !== 'NSW' || !p.project_id) continue
+        const existing = byProjectId.get(p.project_id)
+        const roundLabel = roundId.replace('cis-tender-', 'CIS T').replace('-nem-gen', '').replace('-nem-disp', '').replace('-wem-disp', ' (WEM)').replace('-pilot-nsw', ' (NSW Pilot)').replace('-pilot-sa-vic', ' (SA/VIC Pilot)')
+        if (existing) {
+          if (!existing.reasons.includes('cis-winner')) existing.reasons.push('cis-winner')
+          if (!existing.schemeAwards.includes(roundLabel)) existing.schemeAwards.push(roundLabel)
+        } else {
+          byProjectId.set(p.project_id, {
+            project_id: p.project_id,
+            name: p.name,
+            technology: p.technology,
+            capacity_mw: p.capacity_mw,
+            reasons: ['cis-winner'],
+            schemeAwards: [roundLabel],
+          })
+        }
+      }
+    }
+
+    // LTESA winners (NSW only)
+    for (const [roundId, projects] of Object.entries(LTESA_PROJECTS)) {
+      for (const p of projects) {
+        if (p.state !== 'NSW' || !p.project_id) continue
+        const existing = byProjectId.get(p.project_id)
+        const roundLabel = roundId.replace('ltesa-round-', 'LTESA R').replace('cis-pilot-nsw', 'LTESA R2 (NSW Pilot)')
+        if (existing) {
+          if (!existing.reasons.includes('ltesa-winner')) existing.reasons.push('ltesa-winner')
+          if (!existing.schemeAwards.includes(roundLabel)) existing.schemeAwards.push(roundLabel)
+        } else {
+          byProjectId.set(p.project_id, {
+            project_id: p.project_id,
+            name: p.name,
+            technology: p.technology,
+            capacity_mw: p.capacity_mw,
+            reasons: ['ltesa-winner'],
+            schemeAwards: [roundLabel],
+          })
+        }
+      }
+    }
+
+    // Operating NSW projects (proxy for "In Service" per AEMO Jul 2025 Gen Info)
+    for (const p of index) {
+      if (p.state !== 'NSW') continue
+      if (p.status !== 'operating') continue
+      const existing = byProjectId.get(p.id)
+      if (existing) {
+        if (!existing.reasons.includes('operating')) existing.reasons.push('operating')
+      } else {
+        byProjectId.set(p.id, {
+          project_id: p.id,
+          name: p.name,
+          technology: p.technology,
+          capacity_mw: p.capacity_mw,
+          reasons: ['operating'],
+          schemeAwards: [],
+        })
+      }
+    }
+
+    return Array.from(byProjectId.values()).sort((a, b) => (b.capacity_mw || 0) - (a.capacity_mw || 0))
+  }, [index])
+
+  const filtered = useMemo(() => {
+    let list = ineligible
+    if (techFilter !== 'all') list = list.filter(p => p.technology === techFilter)
+    if (search.trim()) {
+      const q = search.toLowerCase().trim()
+      list = list.filter(p => p.name.toLowerCase().includes(q))
+    }
+    return list
+  }, [ineligible, techFilter, search])
+
+  // Summary counts
+  const counts = useMemo(() => ({
+    total: filtered.length,
+    cis: filtered.filter(p => p.reasons.includes('cis-winner')).length,
+    ltesa: filtered.filter(p => p.reasons.includes('ltesa-winner')).length,
+    operating: filtered.filter(p => p.reasons.includes('operating')).length,
+    totalMw: filtered.reduce((s, p) => s + (p.capacity_mw || 0), 0),
+  }), [filtered])
+
+  // Per-tech counts for chip badges
+  const techCounts = useMemo(() => {
+    const c: Record<string, number> = { all: ineligible.length }
+    for (const p of ineligible) c[p.technology] = (c[p.technology] || 0) + 1
+    return c
+  }, [ineligible])
+
+  return (
+    <div
+      className="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-start justify-center p-3 sm:p-6 overflow-y-auto"
+      onClick={onClose}
+    >
+      <div
+        onClick={e => e.stopPropagation()}
+        className="bg-[var(--color-bg-card)] border border-cyan-500/40 rounded-xl shadow-2xl max-w-4xl w-full my-3 sm:my-6"
+      >
+        {/* Header */}
+        <div className="p-4 border-b border-[var(--color-border)] flex items-start justify-between gap-3 sticky top-0 bg-[var(--color-bg-card)] rounded-t-xl">
+          <div className="flex-1 min-w-0">
+            <h3 className="text-sm font-bold text-[var(--color-text)]">NSW projects affected by NSW T8 eligibility / merit rules</h3>
+            <p className="text-[11px] text-[var(--color-text-muted)] mt-0.5 leading-relaxed">
+              NSW-only. Three ineligibility triggers shown together: <span className="text-cyan-300">CIS winner</span> (EC10 — can&apos;t hold CISA + LTESA), <span className="text-purple-300">LTESA winner</span> (EC3 — prior LTESA must be terminated by Bid Close to bid), <span className="text-amber-300">Operating</span> (proxy for AEMO July 2025 Gen Info &quot;In Service&quot; — MC1 Wholesale Market Benefits scored as zero).
+              <span className="text-amber-400/80"> NOTE: &quot;Operating&quot; is an approximation — the AEMO Jul 2025 Gen Info page is the definitive source for the MC1 trigger.</span>
+            </p>
+          </div>
+          <button onClick={onClose} className="text-[var(--color-text-muted)] hover:text-[var(--color-text)] shrink-0 p-1" aria-label="Close">✕</button>
+        </div>
+
+        {/* Filters */}
+        <div className="p-4 border-b border-[var(--color-border)] space-y-3">
+          <div className="flex gap-1.5 flex-wrap">
+            {(['all', 'wind', 'solar', 'bess', 'hybrid', 'pumped_hydro'] as const).map(t => {
+              const cfg = TECH_CHIP_CONFIG[t]
+              const count = techCounts[t] || 0
+              const active = techFilter === t
+              return (
+                <button
+                  key={t}
+                  onClick={() => setTechFilter(t)}
+                  className={`text-[10px] px-2.5 py-1 rounded-full border transition-colors inline-flex items-center gap-1.5 ${
+                    active ? 'border-transparent' : 'border-[var(--color-border)] text-[var(--color-text-muted)] hover:text-[var(--color-text)]'
+                  }`}
+                  style={active ? { background: `${cfg.colour}25`, color: cfg.colour } : undefined}
+                >
+                  {cfg.label} <span className="opacity-70">({count})</span>
+                </button>
+              )
+            })}
+          </div>
+          <input
+            type="text"
+            placeholder="Search project name..."
+            value={search}
+            onChange={e => setSearch(e.target.value)}
+            className="w-full text-xs px-3 py-2 rounded-lg bg-[var(--color-bg)] border border-[var(--color-border)] text-[var(--color-text)] placeholder:text-[var(--color-text-muted)] focus:outline-none focus:border-cyan-500/50"
+          />
+
+          {/* Summary */}
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 text-center">
+            <div className="bg-[var(--color-bg)] border border-[var(--color-border)] rounded p-2">
+              <div className="text-lg font-bold text-[var(--color-text)]">{counts.total}</div>
+              <div className="text-[9px] text-[var(--color-text-muted)]">Projects shown</div>
+              <div className="text-[9px] text-[var(--color-text-muted)]">{counts.totalMw.toLocaleString('en-AU')} MW</div>
+            </div>
+            <div className="bg-cyan-500/10 border border-cyan-500/30 rounded p-2">
+              <div className="text-lg font-bold text-cyan-300">{counts.cis}</div>
+              <div className="text-[9px] text-[var(--color-text-muted)]">CIS winners</div>
+            </div>
+            <div className="bg-purple-500/10 border border-purple-500/30 rounded p-2">
+              <div className="text-lg font-bold text-purple-300">{counts.ltesa}</div>
+              <div className="text-[9px] text-[var(--color-text-muted)]">LTESA winners</div>
+            </div>
+            <div className="bg-amber-500/10 border border-amber-500/30 rounded p-2">
+              <div className="text-lg font-bold text-amber-300">{counts.operating}</div>
+              <div className="text-[9px] text-[var(--color-text-muted)]">Operating (proxy)</div>
+            </div>
+          </div>
+        </div>
+
+        {/* List */}
+        <div className="p-3 max-h-[60vh] overflow-y-auto">
+          {loading && (
+            <div className="text-center py-8 text-xs text-[var(--color-text-muted)] animate-pulse">Loading project index...</div>
+          )}
+          {!loading && filtered.length === 0 && (
+            <div className="text-center py-8 text-xs text-[var(--color-text-muted)]">No NSW projects match the current filter.</div>
+          )}
+          {!loading && filtered.length > 0 && (
+            <div className="space-y-1">
+              {filtered.map(p => {
+                const techCfg = TECH_CHIP_CONFIG[p.technology] || TECH_CHIP_CONFIG.all
+                return (
+                  <div key={p.project_id} className="flex items-center gap-2 px-3 py-2 bg-[var(--color-bg)] border border-[var(--color-border)] rounded-lg text-xs">
+                    <span className="w-1.5 h-1.5 rounded-full shrink-0" style={{ background: techCfg.colour }} />
+                    <Link to={`/projects/${p.project_id}`} className="flex-1 min-w-0 truncate text-[var(--color-primary)] hover:underline">
+                      {p.name}
+                    </Link>
+                    <span className="text-[10px] text-[var(--color-text-muted)] shrink-0">{techCfg.label}</span>
+                    <span className="text-[10px] text-[var(--color-text)] font-medium tabular-nums shrink-0">{p.capacity_mw} MW</span>
+                    <div className="flex gap-1 shrink-0">
+                      {p.reasons.includes('cis-winner') && (
+                        <span className="text-[9px] px-1.5 py-0.5 rounded bg-cyan-500/15 text-cyan-300 border border-cyan-500/30" title={p.schemeAwards.filter(a => a.startsWith('CIS')).join(', ')}>
+                          CIS
+                        </span>
+                      )}
+                      {p.reasons.includes('ltesa-winner') && (
+                        <span className="text-[9px] px-1.5 py-0.5 rounded bg-purple-500/15 text-purple-300 border border-purple-500/30" title={p.schemeAwards.filter(a => a.startsWith('LTESA')).join(', ')}>
+                          LTESA
+                        </span>
+                      )}
+                      {p.reasons.includes('operating') && (
+                        <span className="text-[9px] px-1.5 py-0.5 rounded bg-amber-500/15 text-amber-300 border border-amber-500/30" title="Operating per AURES DB — proxy for AEMO Jul 2025 Gen Info In Service">
+                          OP
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                )
+              })}
+            </div>
+          )}
+        </div>
+
+        {/* Footer note */}
+        <div className="p-3 border-t border-[var(--color-border)] text-[10px] text-[var(--color-text-muted)] leading-relaxed">
+          <strong className="text-[var(--color-text)]">Caveats:</strong> &quot;Operating&quot; uses AURES status as a proxy for AEMO Jul 2025 Gen Info &quot;In Service&quot; — for the definitive MC1 zeroing list, check the gazetted AEMO page. CIS / LTESA award lists are sourced from <code className="text-[var(--color-text)]">CIS_PROJECTS</code> + <code className="text-[var(--color-text)]">LTESA_PROJECTS</code> arrays in <code className="text-[var(--color-text)]">scheme-rounds.ts</code> — NSW projects only. EC3 + EC10 + EC11 carve-outs (Staged Projects, REZ Access Right exceptional circumstances, prior LTESA termination by Bid Close) may permit some listed projects to legitimately bid; always cross-check against the relevant proforma + your legal advice.
+        </div>
+      </div>
+    </div>
+  )
+}
+
+// ============================================================
+// PpaLtesaCalculatorModal (v3.16.0)
+//
+// Interactive cashflow calculator showing how a PPA interacts
+// with the Generation LTESA / Hybrid Generation LTESA. Models
+// the gazetted formulas from the T8 MC1 Briefing + fact sheets.
+// ============================================================
+
+type LtesaProduct = 'gen' | 'hybrid'
+
+interface CalcInputs {
+  product: LtesaProduct
+  spot: number              // $/MWh
+  strike: number            // Fixed/Strike Price $/MWh
+  rpt: number               // Repayment Threshold Price $/MWh
+  contractedPct: number     // 0-100
+  p50GenGWh: number         // GWh / yr
+  ppaStrike: number         // $/MWh
+  ppaPct: number            // 0-100
+  exercise: boolean
+}
+
+function PpaLtesaCalculatorModal({ onClose }: { onClose: () => void }) {
+  const [i, setInputs] = useState<CalcInputs>({
+    product: 'hybrid',
+    spot: 80,
+    strike: 65,
+    rpt: 120,
+    contractedPct: 100,
+    p50GenGWh: 1500,    // ~500 MW wind farm at ~34% CF
+    ppaStrike: 90,
+    ppaPct: 50,
+    exercise: true,
+  })
+
+  function upd<K extends keyof CalcInputs>(k: K, v: CalcInputs[K]) {
+    setInputs(prev => ({ ...prev, [k]: v }))
+  }
+
+  // ----- Calculations (all $ in millions per year unless noted) -----
+  const calc = useMemo(() => {
+    const p50MWh = i.p50GenGWh * 1000
+    const ltesaNotionalMWh = (i.contractedPct / 100) * p50MWh
+    const ppaVolMWh = (i.ppaPct / 100) * p50MWh
+    const merchantVolMWh = Math.max(0, p50MWh - ppaVolMWh)
+    // Note: LTESA is a financial hedge layered on top of physical gen — it doesn't take volume away from PPA/merchant. So the merchant volume above is "non-PPA volume" sold at spot.
+
+    // Base merchant revenue (project sells all gen at spot in market)
+    const baseMerchant$ = (merchantVolMWh * i.spot) / 1_000_000
+
+    // PPA settlement = (PPA strike − spot) × PPA volume (the hedge value)
+    const ppaHedge$ = (ppaVolMWh * (i.ppaStrike - i.spot)) / 1_000_000
+
+    // PPA notional revenue = PPA volume × PPA strike (sold under PPA, not at spot)
+    // But for total project revenue: merchant volume at spot + PPA volume at PPA strike
+    const ppaRevenue$ = (ppaVolMWh * i.ppaStrike) / 1_000_000
+
+    // LTESA settlement (only if exercising)
+    // For Gen LTESA: NQ × max(0, Strike − Floating_floored_at_0)  → if Strike > Spot, SFV pays positive; if Strike < Spot, Op pays SFV positive (but capped via Floating floor)
+    // For Hybrid: NQ × 50% × (Strike − Floating); NQ = 0 in negative-spot intervals (approximated as full volume here since we're at annual level)
+    // Floating Price floor for Gen LTESA = max(0, Spot)
+    const floatingForGen = Math.max(0, i.spot)
+    let ltesaSettlement$ = 0
+    if (i.exercise) {
+      if (i.product === 'gen') {
+        // Settlement = (Fixed − Floating_floored) × NQ — positive means SFV→Operator, negative means Operator→SFV
+        ltesaSettlement$ = (ltesaNotionalMWh * (i.strike - floatingForGen)) / 1_000_000
+      } else {
+        // Hybrid: 50% × (Strike − Floating) × NQ; NQ=0 when spot < 0 (approximated as full NQ here)
+        const floatingForHybrid = i.spot < 0 ? 0 : i.spot
+        ltesaSettlement$ = (ltesaNotionalMWh * 0.5 * (i.strike - floatingForHybrid)) / 1_000_000
+      }
+    }
+
+    // Repayment (only in non-exercise periods OR uncontracted volume)
+    // Repayment = min(HistoricalNetPayments, Σ 50% × NQ × (Floating − RPT))
+    // For a single-year snapshot, we'll show "Repayment exposure (pre-cap)" — actual subject to HistoricalNetPayments cap (not modelled here)
+    let repaymentExposure$ = 0
+    if (!i.exercise && i.spot > i.rpt) {
+      repaymentExposure$ = -(ltesaNotionalMWh * 0.5 * (i.spot - i.rpt)) / 1_000_000
+    }
+    // Note: the "eligible contract" reduction (PPA reduces Repayment) is modelled as a flat reduction proportional to PPA coverage of the LTESA notional volume.
+    const eligibleContractReduction = i.ppaPct / 100  // fraction reduction
+    const repaymentAfterPpaReduction$ = repaymentExposure$ * (1 - eligibleContractReduction)
+
+    // Total project revenue
+    const total$ = baseMerchant$ + ppaRevenue$ + ltesaSettlement$ + repaymentAfterPpaReduction$
+    const effectiveDollarPerMWh = (total$ * 1_000_000) / p50MWh
+
+    return {
+      p50MWh,
+      ltesaNotionalMWh,
+      ppaVolMWh,
+      merchantVolMWh,
+      baseMerchant$,
+      ppaRevenue$,
+      ppaHedge$,
+      ltesaSettlement$,
+      repaymentExposure$,
+      repaymentAfterPpaReduction$,
+      total$,
+      effectiveDollarPerMWh,
+    }
+  }, [i])
+
+  return (
+    <div
+      className="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-start justify-center p-3 sm:p-6 overflow-y-auto"
+      onClick={onClose}
+    >
+      <div onClick={e => e.stopPropagation()} className="bg-[var(--color-bg-card)] border border-[#8b5cf6]/40 rounded-xl shadow-2xl max-w-5xl w-full my-3 sm:my-6">
+        {/* Header */}
+        <div className="p-4 border-b border-[var(--color-border)] flex items-start justify-between gap-3 sticky top-0 bg-[var(--color-bg-card)] rounded-t-xl">
+          <div className="flex-1 min-w-0">
+            <h3 className="text-sm font-bold text-[var(--color-text)]">NSW T8 — PPA × LTESA cashflow calculator</h3>
+            <p className="text-[11px] text-[var(--color-text-muted)] mt-0.5 leading-relaxed">
+              Models the gazetted T8 settlement formulas (MC1 Briefing Appendix A + fact sheets). Single-year snapshot. <span className="text-amber-400/80">Simplified — annual-level, not interval-level — for illustration only; do not use as a financial-model substitute.</span>
+            </p>
+          </div>
+          <button onClick={onClose} className="text-[var(--color-text-muted)] hover:text-[var(--color-text)] shrink-0 p-1" aria-label="Close">✕</button>
+        </div>
+
+        {/* Inputs + Outputs grid */}
+        <div className="p-4 grid grid-cols-1 lg:grid-cols-2 gap-4">
+          {/* INPUTS */}
+          <div className="space-y-3">
+            <h4 className="text-[10px] uppercase tracking-wider text-[var(--color-text)] font-bold">Inputs</h4>
+
+            {/* Product selector */}
+            <div>
+              <div className="text-[10px] text-[var(--color-text-muted)] mb-1">LTESA Product</div>
+              <div className="flex gap-1">
+                {(['gen', 'hybrid'] as const).map(p => (
+                  <button
+                    key={p}
+                    onClick={() => upd('product', p)}
+                    className={`flex-1 text-[10px] px-2.5 py-1.5 rounded-lg border transition-colors ${
+                      i.product === p
+                        ? 'bg-[#8b5cf6]/20 border-[#8b5cf6]/50 text-[#a855f7] font-medium'
+                        : 'bg-[var(--color-bg)] border-[var(--color-border)] text-[var(--color-text-muted)] hover:text-[var(--color-text)]'
+                    }`}
+                  >
+                    {p === 'gen' ? 'Generation LTESA (100% swap)' : 'Hybrid Generation LTESA (50% PRS)'}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Exercise toggle */}
+            <div>
+              <div className="text-[10px] text-[var(--color-text-muted)] mb-1">Exercise the LTESA option this year?</div>
+              <div className="flex gap-1">
+                {([{v: true, l: 'Yes — exercise'}, {v: false, l: 'No — non-exercise'}]).map(o => (
+                  <button
+                    key={String(o.v)}
+                    onClick={() => upd('exercise', o.v)}
+                    className={`flex-1 text-[10px] px-2.5 py-1.5 rounded-lg border transition-colors ${
+                      i.exercise === o.v
+                        ? 'bg-emerald-500/20 border-emerald-500/50 text-emerald-300 font-medium'
+                        : 'bg-[var(--color-bg)] border-[var(--color-border)] text-[var(--color-text-muted)] hover:text-[var(--color-text)]'
+                    }`}
+                  >
+                    {o.l}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Numeric inputs */}
+            <div className="space-y-2">
+              {([
+                { k: 'spot' as const,         label: 'Spot price (annual avg)',          unit: '$/MWh', step: 5,   min: -50, max: 500 },
+                { k: 'strike' as const,       label: i.product === 'hybrid' ? 'Strike Price (bid)' : 'Fixed Price (bid)',     unit: '$/MWh', step: 5,   min: 0,   max: 500 },
+                { k: 'rpt' as const,          label: 'Repayment Threshold Price (bid)',  unit: '$/MWh', step: 5,   min: 0,   max: 500 },
+                { k: 'contractedPct' as const,label: 'Contracted Percentage (bid)',      unit: '%',     step: 5,   min: 0,   max: 100 },
+                { k: 'p50GenGWh' as const,    label: 'Forecast P50 annual gen',          unit: 'GWh',   step: 100, min: 0,   max: 10000 },
+                { k: 'ppaStrike' as const,    label: 'PPA strike price',                 unit: '$/MWh', step: 5,   min: 0,   max: 500 },
+                { k: 'ppaPct' as const,       label: 'PPA volume (% of P50 gen)',        unit: '%',     step: 5,   min: 0,   max: 100 },
+              ]).map(field => (
+                <div key={field.k} className="grid grid-cols-[1fr_auto_auto] items-center gap-2">
+                  <label className="text-[10px] text-[var(--color-text-muted)]">{field.label}</label>
+                  <input
+                    type="range"
+                    min={field.min}
+                    max={field.max}
+                    step={field.step}
+                    value={i[field.k]}
+                    onChange={e => upd(field.k, Number(e.target.value))}
+                    className="w-32 accent-[#8b5cf6]"
+                  />
+                  <div className="text-xs font-mono text-[var(--color-text)] tabular-nums w-20 text-right">
+                    {i[field.k].toLocaleString('en-AU')} <span className="text-[var(--color-text-muted)] text-[9px]">{field.unit}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* OUTPUTS */}
+          <div className="space-y-3">
+            <h4 className="text-[10px] uppercase tracking-wider text-[var(--color-text)] font-bold">Annual cashflows ($M)</h4>
+
+            {/* Total revenue headline */}
+            <div className="bg-emerald-500/10 border border-emerald-500/40 rounded-lg p-3 text-center">
+              <div className="text-[10px] uppercase tracking-wider text-emerald-300">Total Project Revenue</div>
+              <div className="text-2xl font-bold text-[var(--color-text)] tabular-nums mt-1">
+                ${calc.total$.toFixed(1)}M<span className="text-sm font-normal text-[var(--color-text-muted)] ml-1">/yr</span>
+              </div>
+              <div className="text-[10px] text-[var(--color-text-muted)] mt-1">
+                Effective <span className="text-emerald-300 font-medium">${calc.effectiveDollarPerMWh.toFixed(2)}/MWh</span> across {i.p50GenGWh.toLocaleString('en-AU')} GWh
+              </div>
+            </div>
+
+            {/* Cashflow breakdown */}
+            <div className="space-y-1.5">
+              {[
+                { label: 'Merchant revenue (non-PPA volume @ spot)', value: calc.baseMerchant$, hint: `${calc.merchantVolMWh.toLocaleString('en-AU', { maximumFractionDigits: 0 })} MWh × $${i.spot}/MWh`, color: '#94a3b8' },
+                { label: 'PPA revenue (PPA volume @ PPA strike)', value: calc.ppaRevenue$, hint: `${calc.ppaVolMWh.toLocaleString('en-AU', { maximumFractionDigits: 0 })} MWh × $${i.ppaStrike}/MWh`, color: '#3b82f6' },
+                { label: i.exercise ? `LTESA settlement (${i.product === 'hybrid' ? 'Hybrid 50% × (Strike − Floating)' : 'Gen full (Fixed − Floating)'})` : 'LTESA — not exercised this year', value: calc.ltesaSettlement$, hint: i.exercise ? `${calc.ltesaNotionalMWh.toLocaleString('en-AU', { maximumFractionDigits: 0 })} MWh × ${i.product === 'hybrid' ? '50% × ' : ''}($${i.strike} − $${Math.max(0, i.spot)})` : 'Operator forwent the option', color: '#22c55e' },
+                { label: i.exercise ? 'Repayment — N/A (exercised)' : 'Repayment exposure (50% × spot above RPT)', value: calc.repaymentExposure$, hint: !i.exercise && i.spot > i.rpt ? `50% × ${calc.ltesaNotionalMWh.toLocaleString('en-AU', { maximumFractionDigits: 0 })} MWh × ($${i.spot} − $${i.rpt})` : i.exercise ? 'Repayment mechanic only applies in non-exercise periods' : `Spot $${i.spot} ≤ RPT $${i.rpt} — no Repayment trigger`, color: '#ef4444' },
+                { label: `Repayment after PPA reduction (eligible-contract carveout, ${i.ppaPct}%)`, value: calc.repaymentAfterPpaReduction$, hint: 'Approximation: PPA fraction reduces Repayment proportionally', color: '#f59e0b' },
+              ].map((row, idx) => (
+                <div key={idx} className="bg-[var(--color-bg)] border border-[var(--color-border)] rounded-lg px-3 py-2">
+                  <div className="flex items-center justify-between gap-2">
+                    <div className="flex items-center gap-2 min-w-0">
+                      <span className="w-2 h-2 rounded-full shrink-0" style={{ background: row.color }} />
+                      <span className="text-[11px] text-[var(--color-text)] truncate">{row.label}</span>
+                    </div>
+                    <span className={`text-sm font-mono tabular-nums shrink-0 ${row.value < 0 ? 'text-red-400' : row.value > 0 ? 'text-emerald-400' : 'text-[var(--color-text-muted)]'}`}>
+                      {row.value >= 0 ? '+' : ''}${row.value.toFixed(2)}M
+                    </span>
+                  </div>
+                  {row.hint && (
+                    <div className="text-[9px] text-[var(--color-text-muted)] mt-0.5 ml-4 leading-tight">{row.hint}</div>
+                  )}
+                </div>
+              ))}
+            </div>
+
+            {/* PPA hedge value (informational) */}
+            <div className="bg-[var(--color-bg)] border border-blue-500/20 rounded-lg p-2.5">
+              <div className="text-[10px] uppercase tracking-wider text-blue-400 mb-0.5">PPA hedge value (information only)</div>
+              <div className="text-[10px] text-[var(--color-text-muted)] leading-relaxed">
+                Net PPA hedge = (PPA strike $ {i.ppaStrike} − Spot $ {i.spot}) × PPA volume
+                = <span className={`font-mono ${calc.ppaHedge$ < 0 ? 'text-red-400' : 'text-emerald-400'}`}>${calc.ppaHedge$.toFixed(2)}M/yr</span>.
+                Already counted within Merchant + PPA revenue rows above; shown here to expose the hedge component.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Notes */}
+        <div className="p-4 border-t border-[var(--color-border)] text-[10px] text-[var(--color-text-muted)] leading-relaxed space-y-1.5">
+          <p><strong className="text-[var(--color-text)]">Formulas (gazetted, per T8 MC1 Briefing Appendix A):</strong></p>
+          <ul className="ml-4 list-disc space-y-0.5">
+            <li><strong className="text-[var(--color-text)]">Generation LTESA exercise:</strong> Σ NotionalQuantity × (Fixed Price − max(0, Floating Price)) — Floating Price floored at $0/MWh.</li>
+            <li><strong className="text-[var(--color-text)]">Hybrid Generation LTESA exercise:</strong> Σ NotionalQuantity × 50% × (Strike Price − Floating Price) — NotionalQuantity = 0 in negative-spot intervals.</li>
+            <li><strong className="text-[var(--color-text)]">Repayment (non-exercise):</strong> min(HistoricalNetPayments, Σ 50% × NotionalQuantity × (Floating Price − Repayment Threshold Price)). Reduced where Operator has entered an &quot;eligible contract&quot; — modelled here as a proportional reduction based on PPA share of LTESA notional.</li>
+          </ul>
+          <p className="text-amber-400/80"><strong>Limitations of this calc:</strong> annual-level only (real settlement is per-trading-interval); single-year snapshot (multi-year compounding ignored); HistoricalNetPayments cap on Repayment not modelled; &quot;eligible contract&quot; reduction is approximated — see proforma LTESA for the exact mechanic; spot price modelled as a single annual average (real volatility drives interval-by-interval outcomes).</p>
+        </div>
+      </div>
     </div>
   )
 }
