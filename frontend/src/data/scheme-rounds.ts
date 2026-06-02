@@ -1068,6 +1068,71 @@ export interface OpenRound {
     confidence: 'confirmed' | 'likely' | 'inferred'
   }
 
+  // -------- v3.15.0: NSW T8 strategy deep-dive (optional, round-specific) --------
+
+  /** What's been decided about the round's product design vs what's still TBD. */
+  designStatus?: {
+    decided: string[]             // confirmed elements
+    openItems: string[]           // still-unresolved elements
+  }
+
+  /** Pros / cons of the settlement basis (e.g. net-export for Hybrid LTESA). */
+  settlementProsAndCons?: {
+    basis: string                 // one-line: "Cash-settled swap on net sent-out exports..."
+    pros: string[]
+    cons: string[]
+    favours: string[]             // project types/circumstances favoured
+    disfavours: string[]
+  }
+
+  /** Side-by-side comparison of two product designs (e.g. Fixed-Shape vs Generation-following). */
+  productComparison?: {
+    headline: string              // one-line conclusion
+    options: Array<{
+      label: string
+      mechanic: string
+      suits: string
+      tradeoff: string
+      verdict: 'adopted' | 'not-adopted' | 'available'
+    }>
+  }
+
+  /** PPA × RRP × Annuity Cap interaction scenarios, presented as two-branch
+   *  (if NOR includes PPA vs if it excludes PPA) because that's an open
+   *  question per the deep research. */
+  ppaScenarios?: {
+    headline: string
+    norQuestion: string           // the unresolved question framing the two branches
+    branches: Array<{
+      label: string               // 'If PPA revenue NETS into NOR' vs 'If PPA is OUTSIDE NOR'
+      tone: 'cautious' | 'opportunistic'
+      scenarios: Array<{
+        name: string              // e.g. "PPA below RRP and below Annuity Cap"
+        ppaVsRRP: string
+        ppaVsCap: string
+        outcome: string           // 2-3 sentence walk-through
+        trap?: string             // structural trap to watch
+      }>
+    }>
+  }
+
+  /** Hybrid-or-not decision framework for wind+BESS and solar+BESS. */
+  hybridDecisionFramework?: {
+    headline: string
+    dimensions: Array<{ name: string; matters: string }>
+    cases: Array<{
+      caseLabel: string           // 'Wind farm + BESS' / 'Solar farm + BESS'
+      hybridFavoured: string      // when hybrid LTESA wins
+      generationFavoured: string  // when standalone Generation LTESA wins
+      ratiosToTarget?: string     // gen:storage ratio + duration guidance
+    }>
+  }
+
+  /** Explicitly-flagged unresolved questions (what's NOT yet in public docs). */
+  openQuestions?: string[]
+
+  // ---- End v3.15.0 additions ----
+
   // Honesty
   caveats: string[]             // confidence flags surfaced in UI
   sources: { label: string; url: string }[]
@@ -1160,7 +1225,7 @@ export const OPEN_ROUNDS: OpenRound[] = [
     bidsClose: '2026-07-06',
     resultsExpected: 'late 2026',
     targetCOD: 'Favourable consideration for COD before 31 Dec 2029 (Eraring-aligned)',
-    contractMechanism: 'LTESA — option-style annuity (a series of annual put options on revenue, not an obligation). Operator bids an Annuity Cap + Net Revenue Threshold; support tapers as revenue rises; 50% revenue-share repayment above threshold, capped at 100% of payments received. The new Hybrid LTESA is a cash-settled swap on net (sent-out) exports, max 20-yr term, DC-coupling mandated.',
+    contractMechanism: 'Standard LTESA — option-style annuity, T7 carryover (up to 15-yr term). Operator bids Annuity Cap + Net Revenue Threshold; annuity payment = lesser of (Annuity Cap, or Annuity Cap − 75% × (Net Operational Revenue − (NRT − Annuity Cap))); 50% revenue-share repayment when NOR > NRT, capped at 100% of historical net payments received. New Hybrid Generation LTESA = cash-settled swap on net sent-out exports (exports minus battery imports); Option 2 (generation-following with price-risk share) is the adopted design — Option 1 (fixed-shape/fixed-volume) was consulted but not adopted. Risk-share % (consulted at 50:50 symmetric; stakeholder pushback for asymmetric ~80% downside) not yet finalised in public docs.',
     configFavoured: 'hybrid',
     meritCriteria: [
       { label: 'Financial value & system benefits', weightPct: 49, tests: 'Benefit-Cost Ratio = Wholesale Market Benefits ÷ Net LTESA Cost, plus system benefits. The dominant criterion — up from a combined ~45% in T6.' },
@@ -1170,17 +1235,17 @@ export const OPEN_ROUNDS: OpenRound[] = [
     ],
     headline: 'NSW’s answer to losing federal CIS access — and the launchpad for the first-ever Hybrid Generation LTESA product.',
     whatChanged: [
-      { area: 'Contract', detail: 'First-ever Hybrid Generation LTESA: a cash-settled swap on net sent-out exports (battery charging netted off), DC-coupling mandated (single bi-directional DUID, registered as an Integrated Resource Provider), max 20-yr term. Two designs consulted — Fixed-Shape/Fixed-Volume (bid against predetermined peak profiles, $0 spot floor) vs Generation-following with a 50% price-risk-share.' },
+      { area: 'Contract', detail: 'First-ever Hybrid Generation LTESA: a cash-settled swap on net sent-out exports (battery charging netted off). ASL consulted on two designs (15 Jan–16 Feb 2026); the 17 March 2026 feedback summary confirms Option 2 (generation-following with price-risk share) as the adopted design — Option 1 (Fixed Shape/Fixed Volume) was not adopted. Stakeholder pushback against the symmetric 50:50 price-risk share, preferring asymmetric (e.g. 80% downside protection) or proponent-nominated band; final risk-share % not yet finalised in public T8 docs. AC vs DC coupling, single vs multi-DUID, and contract term (15 vs 20 yr) not confirmed in indexable sources.' },
       { area: 'Merit criteria', detail: 'Weightings collapsed to 4 buckets: Financial value & system benefits 49% (up from ~45% combined in T6) / Deliverability 17% / Organisational capacity 17% / Social value 17%.' },
       { area: 'Eligibility', detail: 'Hybrid LTESA eligibility: generation export capacity must be ≥ storage export capacity, AND storage must provide ≥4-hour duration at COD. A config where storage export > generation export cannot use the Hybrid LTESA (must bid as straight generation, or as storage in NSW T9).' },
       { area: 'Target', detail: '~2.5 GW generation target — among the largest NSW Roadmap generation rounds, restarted specifically because NSW is now excluded from federal CIS generation tenders.' },
     ],
     analystRead: 'T8 is purpose-built for wind and solar+storage hybrids that can shift output into the evening and morning peaks — the configurations that score on the dominant 49% financial/system-benefit limb. Standalone midday solar scores poorly on wholesale-benefit. The Hybrid LTESA gives developers a longer 20-year contract but locks in a net-export settlement basis, so storage that exceeds the generation export ceiling simply won’t count toward eligibility. The COD-before-2029 favourable consideration rewards mature projects, but ASL deliberately accepts earlier-stage bids where the LTESA structure protects consumers — so a well-priced earlier-stage hybrid can still beat a mature but expensive standalone bid.',
     commitmentEligibility: {
-      summary: 'Targets pre-FID projects — those committed before 14 Nov 2019 are out; the LTESA exists to help projects reach FID.',
-      cutoffDate: '14 November 2019 (NSW EII Roadmap commitment date)',
-      detail: 'Generator LTESAs have historically been available to NSW projects that became committed after 14 November 2019 — the additionality anchor for the NSW Roadmap. The mechanism is explicitly designed to improve bankability and help a project reach final investment decision and financial close, so an already-FID’d merchant project doesn’t need (and generally can’t use) it, while a pre-FID project working toward financial close is exactly the intended bidder. A successful bid is itself expected to underpin the project reaching FID.',
-      confidence: 'likely',
+      summary: 'No — projects identified as committed or existing in the AEMO Generation Information page published 14 Nov 2019 are ineligible. Pre-FID projects are the target.',
+      cutoffDate: '14 November 2019 (AEMO Generation Information page, per May 2024 NSW Consumer Trustee Tender Rules — Project Eligibility Criterion 6)',
+      detail: 'Confirmed for the NSW Consumer Trustee LTESA Tender Rules (May 2024 gazette): "Project was not identified as committed or existing in the AEMO Generation Information page published on 14 November 2019, unless it is an expansion project to an existing storage or generation asset or the Project involves the addition of new storage or generation assets to existing shared infrastructure." A new set of Tender Rules was reportedly gazetted 22 Aug 2025 and the T8 Tender Guidelines may refresh this anchor — but the 14 Nov 2019 rule remains the public baseline. The LTESA is explicitly designed to help a project reach financial close; an already-FID’d merchant asset isn’t the target.',
+      confidence: 'confirmed',
     },
     playbook: [
       'Bidding hybrid? Keep storage export ≤ generation export, storage ≥4h at COD — don’t gold-plate storage past the gen ceiling (it won’t count and risks ineligibility).',
@@ -1190,17 +1255,208 @@ export const OPEN_ROUNDS: OpenRound[] = [
       'Target COD before 31 Dec 2029 for favourable consideration — but only if credible; an unachievable COD damages the 17% deliverability score.',
       'Storage bigger than your generation? Bid it into NSW T9 (LDS) instead.',
     ],
-    hybridMechanism: 'Hybrid Generation LTESA eligibility (per market briefing): generation export capacity ≥ storage export capacity AND storage ≥ 4-hour duration at COD. Settlement is on net sent-out exports (exports minus imports). An ineligible configuration cannot access the Hybrid LTESA product — it must bid as straight generation or as storage under NSW T9.',
+    hybridMechanism: 'Hybrid Generation LTESA eligibility: generation export capacity ≥ storage export capacity AND storage ≥ 4-hour duration at COD. Cash-settled swap; settlement on net sent-out exports (exports minus battery imports). An ineligible configuration cannot access the Hybrid LTESA — it must bid as straight generation under the standard Generation LTESA or as storage under NSW T9 LDS.',
     caveats: [
-      'The full Tender Guidelines + proforma Hybrid LTESA are NOT yet public — the 49/17/17/17 weightings come from trade-press reporting of the May 2026 market briefing, not the gazetted Guidelines. Treat as "per briefing, pending Guidelines".',
-      'The exact registration-close date is reported only as "end of June 2026"; bid close ~6 Jul 2026 from a single source.',
-      'Earlier AURES content described ineligible hybrids as scored "zero wholesale market benefits" — that exact phrasing is UNCONFIRMED in public sources. The verifiable fact is that an ineligible config cannot use the Hybrid LTESA.',
+      'The full T8 Tender Guidelines + proforma Hybrid Generation LTESA appear to be published on asl.org.au but direct WebFetch returned 403 — verified facts rest on the ASL 17 Mar 2026 feedback summary (PDF) + 23 Mar 2026 GM speech + trade-press paraphrase. The 49/17/17/17 weightings come from trade-press reporting of the May 2026 market briefing, not the gazetted Guidelines.',
+      'Final Hybrid LTESA risk-share % is NOT confirmed — consulted at 50:50 symmetric; stakeholders pushed for asymmetric (e.g. 80% downside) or proponent-nominated band; the final adopted % awaits gazetted Guidelines.',
+      'AC vs DC coupling, single-DUID vs multi-DUID handling, and exact net-export calculation boundaries were REFUTED 1-2 in adversarial verification — do not assert; check Guidelines.',
+      'Hybrid LTESA contract TERM is unconfirmed — 15 yr (T7 carryover) is the verified standard; the 20 yr figure that appeared in earlier consultation framing is not corroborated in indexable post-launch sources.',
+      'Per-year bid schedules, intra-year capacity staging (e.g. 20%/50%/80% tranches at different strikes), and partial-capacity LTESAs were REFUTED 1-2 for T8 — these flexibilities sit in the Tender Guidelines and were verified for T6 but not for T8.',
+      'Whether T8 Tender Guidelines refresh the 14 Nov 2019 additionality cutoff is unverified — the standard Tender Rules cutoff still applies as the baseline.',
+      'Earlier AURES content described ineligible hybrids as scored "zero wholesale market benefits" — that exact phrasing is UNCONFIRMED. The verifiable fact is that an ineligible config cannot use the Hybrid LTESA.',
     ],
     sources: [
-      { label: 'energy-storage.news — NSW launches Generation + Hybrid LTESA tenders (20 May 2026)', url: 'https://www.energy-storage.news/' },
-      { label: 'pv-tech — NSW Tender 8/9 (21 May 2026)', url: 'https://www.pv-tech.org/' },
-      { label: 'ASL — Tender pages (AusEnergy Services Ltd)', url: 'https://www.aemoservices.com.au/' },
-      { label: 'Dentons — Options for NSW Roadmap LTESA Tender Rounds 8 and 9 (26 May 2026)', url: 'https://www.dentons.com/' },
+      { label: 'ASL — Hybrid Generation LTESA consultation feedback summary (17 Mar 2026, PDF)', url: 'https://asl.org.au/-/media/services/files/hybrid-gen-ltesa/260317-hybrid-generation-ltesa-consultation-feedback-summary.pdf' },
+      { label: 'ASL — Tender Round 7 market briefing (T7 LTESA mechanics carryover, PDF)', url: 'https://asl.org.au/-/media/services/files/tender-round-7/nsw-t7-market-briefing-note.pdf' },
+      { label: 'ASL — Tender Round 6 outcomes (T6 LDS benchmarks + scoring drivers, PDF)', url: 'https://asl.org.au/-/media/services/files/tender-round-6/260130-nsw-roadmap-tender-round-6-market-briefing-note.pdf' },
+      { label: 'ASL — May 2024 NSW Consumer Trustee LTESA Tender Rules (additionality cutoff, PDF)', url: 'https://asl.org.au/-/media/services/files/tender-rules/tender-rules-may-2024.pdf' },
+      { label: 'ASL — Accelerating storage investment in NSW (GM speech, 23 Mar 2026)', url: 'https://asl.org.au/news/speech/260323-accelerating-storage-investment-in-nsw' },
+      { label: 'energy-storage.news — NSW dual-track LTESA strategy (Option 1 vs 2 detail)', url: 'https://www.energy-storage.news/australia-asl-unveils-dual-track-ltesa-strategy-as-solar-battery-hybrids-reshape-nsw-energy-market/' },
+      { label: 'energy-storage.news — 2.5 GW + 12 GWh largest-ever tender (20 May 2026)', url: 'https://www.energy-storage.news/australias-new-south-wales-seeks-2-5gw-of-generation-and-12gwh-of-energy-storage-in-states-largest-ever-tender/' },
+      { label: 'pv magazine Australia — NSW opens tenders for 2.5 GW (20 May 2026)', url: 'https://www.pv-magazine-australia.com/2026/05/20/nsw-opens-tenders-for-2-5-gw-of-solar-and-wind-alongside-12-5-gwh-of-storage/' },
+      { label: 'pv-tech — NSW launches biggest renewable tender in state history (21 May 2026)', url: 'https://www.pv-tech.org/australias-new-south-wales-launches-biggest-renewable-energy-tender-in-the-states-history/' },
+      { label: 'Dentons — Options for NSW Roadmap LTESA Tender Rounds 8 and 9 (26 May 2026)', url: 'https://www.dentons.com/en/insights/articles/2026/may/26/options-for-nsw-roadmap-ltesa-tender-rounds-8-and-9' },
+      { label: 'Energy Synapse — Developer’s guide to NSW LDS LTESA (bid-mechanic reference)', url: 'https://energysynapse.com.au/developers-guide-to-nsw-long-duration-storage-ltesa/' },
+      { label: 'ESD News — ASL consultation launch (15 Jan 2026)', url: 'https://esdnews.com.au/asl-opens-consultation-on-hybrid-generation-ltesa/' },
+    ],
+    designStatus: {
+      decided: [
+        'Option 2 (Generation-following with Price Risk Share) is the adopted Hybrid Generation LTESA design — confirmed in ASL\'s 17 Mar 2026 feedback summary. Option 1 (Fixed Shape / Fixed Volume) was consulted but NOT adopted.',
+        'Cash-settled swap structure; settlement on sent-out net exports (exports minus battery imports).',
+        'Hybrid eligibility gate: generation export ≥ storage export AND storage ≥ 4-hour duration at COD.',
+        'Bidder choice between standard Generation LTESA and the new Hybrid Generation LTESA — proponent picks which product to bid; both assessed on merit.',
+        'Annuity Cap + Net Revenue Threshold are the standard LTESA bid variables (T7 carryover); annuity payment formula and the 50% revenue-share repayment mechanic carry over from T7.',
+        '14 Nov 2019 additionality cutoff per the May 2024 Tender Rules — Project Eligibility Criterion 6.',
+      ],
+      openItems: [
+        'Final price-risk-share %: consulted at 50:50 symmetric, but stakeholders pushed for asymmetric (e.g. 80% downside protection where fixed price > spot AND net exports > 0) or a bidder-nominated risk-share % within a defined band. The adopted % is NOT in indexable public sources at time of writing.',
+        'AC vs DC coupling and single-DUID vs multi-DUID handling — the consultation assumed DC-coupled single-DUID, but stakeholder feedback flagged this as too restrictive; resolution NOT confirmed.',
+        'Contract term — 15 yr (T7 carryover, verified) vs 20 yr (consultation-era framing, unverified) is open.',
+        'Whether Net Operational Revenue NETS PPA revenue into the LTESA settlement basis — refuted 0-3 in adversarial verification across the deep-research workflow. Treat as UNRESOLVED until Guidelines confirm.',
+        'Per-year bid schedules, intra-year staging (different strikes for different tranches), and partial-capacity LTESAs — sit in the Tender Guidelines and were NOT confirmed for T8 (refuted 1-2 in verification, despite being available in T6).',
+        'Whether T8 Tender Guidelines refresh the 14 Nov 2019 additionality cutoff to a more recent anchor.',
+      ],
+    },
+    settlementProsAndCons: {
+      basis: 'Hybrid Generation LTESA settles as a cash-settled swap on sent-out net exports (exports minus battery imports). The dispatch-weighted average price used for settlement is calculated using net exports.',
+      pros: [
+        'Battery charging from the grid is netted off — so cheap-price charging doesn’t inflate the project’s revenue basis and trigger LTESA repayment unnecessarily.',
+        'Operator keeps merchant upside on opportunistic cycling outside the LTESA settlement — the swap settles on net exports, not gross.',
+        'Aligns LTESA payout with actual physical contribution to the grid — projects exporting during high-value periods capture the floor; projects that import (charge) reduce their own basis.',
+        'Generation-following design avoids the rigidity of Option 1’s fixed time-of-day profiles, so a hybrid that can\'t hit the evening-peak shape isn\'t penalised arbitrarily.',
+      ],
+      cons: [
+        'Net-export basis means that any period spent CHARGING from grid reduces the project’s net export volume in that interval — capping LTESA revenue even when storage operation is value-additive across the day.',
+        'Solar+BESS that frequently charges from own-gen during midday cannibalisation may show low net exports during high-price hours (when battery is discharging) but ALSO low net exports earlier (when battery is charging from solar) — making the project look like a worse net-exporter than a standalone solar with PPA.',
+        'AC vs DC coupling unresolved — under DC-coupling the battery only charges from own-gen (no grid imports), which is favourable for net-export accounting; AC-coupling exposes the project to grid charging that nets off LTESA settlement.',
+        'Multi-DUID configurations behind a single connection point may require netting at the Integrated Resource Provider level — pending T8 Guidelines clarification.',
+      ],
+      favours: [
+        'Wind + BESS where battery cycles primarily from own wind generation (low grid imports), and shifts wind into evening/morning peak windows.',
+        'Tri-tech (wind + solar + BESS) where the storage smooths combined output but doesn\'t import heavily from grid.',
+        'Long-duration storage (≥4h) that cycles once per day — lower charging-cycle exposure, higher net-export ratio.',
+        'Projects in network-constrained REZs where dispatch-weighted prices are volatile and the LTESA floor materially de-risks revenue.',
+      ],
+      disfavours: [
+        'Solar + BESS configured for heavy intra-day cycling, where grid charging is part of the arbitrage strategy — the LTESA settlement basis penalises grid-charged megawatt-hours.',
+        'Short-duration BESS (≈2h) bolted onto generation — limited time-shift benefit on the wholesale-benefit numerator, and frequent cycling magnifies the net-export drag.',
+        'Hybrid projects where the storage component is sized for grid-arbitrage rather than gen-firming — these are better off bidding the BESS into NSW T9 LDS and the generation into standard Generation LTESA.',
+      ],
+    },
+    productComparison: {
+      headline: 'Two product designs were consulted. Option 2 (Generation-following) is the adopted design. Standalone solar/wind can still bid the standard Generation LTESA.',
+      options: [
+        {
+          label: 'Option 1 — Fixed Shape / Fixed Volume (NOT ADOPTED)',
+          mechanic: 'Bid against predetermined time-of-day profiles (evening 16:00–21:00, morning 06:00–09:00, overnight 21:00–06:00). Settles against the fixed shape regardless of actual dispatch. $0 spot price floor. Symmetric annual payment cap as the competitive bid variable.',
+          suits: 'Standalone storage or hybrids that can firmly commit to a specific peak-shape delivery profile. Eliminates dispatch-shape risk — payout doesn\'t depend on actual hour-by-hour generation. Good for inflexible, must-run-at-peak configurations.',
+          tradeoff: 'Loses all dispatch-shape upside — even if the project outperforms the fixed profile in a given year, the payment is capped at the symmetric annual cap. Stakeholders viewed it as "less aligned with hybrid operating realities".',
+          verdict: 'not-adopted',
+        },
+        {
+          label: 'Option 2 — Generation-following with Price Risk Share (ADOPTED)',
+          mechanic: 'Cash-settled swap; settles on net sent-out exports. Payment = (consulted as) 50% × (fixed strike − project\'s dispatch-weighted average price) × notional quantity. Final risk-share % open (50:50 consulted, asymmetric 80% downside pushed back by stakeholders).',
+          suits: 'Hybrid projects with operational flexibility — wind+BESS, solar+BESS, and tri-tech configurations. Operator retains 50% (or whatever final %) of dispatch-shape upside; LTESA underwrites the downside via the price-risk share.',
+          tradeoff: 'Risk retention is non-trivial — at 50:50, the operator absorbs half the downside vs strike. Settlement on net exports means grid-charging reduces the project\'s revenue basis. Standard Generation LTESA may be cheaper de-risking for a project that doesn\'t need the hybrid-specific structure.',
+          verdict: 'adopted',
+        },
+        {
+          label: 'Standard Generation LTESA (AVAILABLE in T8)',
+          mechanic: 'T7 carryover — option-style annuity. Up to 15-yr term. Annuity Cap + Net Revenue Threshold bid variables. Annuity payment = lesser of (Annuity Cap, or Annuity Cap − 75% × (NOR − (NRT − Annuity Cap))). 50% revenue-share repayment when NOR > NRT.',
+          suits: 'Standalone solar/wind, OR hybrid projects that prefer the annuity floor over the swap structure. Cleaner mechanic with established precedent; standalone-solar bidders without storage have this as the only route.',
+          tradeoff: 'No hybrid-specific scoring uplift on system benefit; the Annuity Cap competition is brutal for solar (cannibalisation impacts deeply).',
+          verdict: 'available',
+        },
+      ],
+    },
+    ppaScenarios: {
+      headline: 'How an existing or future PPA interacts with the LTESA Annuity Cap and Net Revenue Threshold — the answer hinges on whether PPA revenue feeds into the Consumer Trustee\'s definition of Net Operational Revenue (NOR), which is UNCONFIRMED in current public docs.',
+      norQuestion: 'Does the T8 definition of Net Operational Revenue net PPA revenue into the LTESA settlement basis? In our deep research this was refuted 0-3 across two votes — neither the T6 nor T7 market briefings explicitly resolve it, and the gazetted T8 Tender Guidelines are not in indexable sources. The two branches below show what it means for the project economics under each interpretation. Pick the conservative branch when modelling; commercial teams should obtain a direct read on the T8 NOR definition before committing.',
+      branches: [
+        {
+          label: 'BRANCH A — If NOR INCLUDES PPA revenue (conservative read)',
+          tone: 'cautious',
+          scenarios: [
+            {
+              name: '1. PPA strike BELOW market RRP AND below Annuity Cap',
+              ppaVsRRP: 'PPA < RRP',
+              ppaVsCap: 'PPA < Cap',
+              outcome: 'NOR is depressed by the PPA (because the PPA strike is below market RRP, the project\'s realised revenue from the PPA volume is less than what merchant would have earned). NOR < NRT, so the LTESA pays its full Annuity Cap — the LTESA top-ups the PPA-suppressed revenue back toward the floor.',
+              trap: 'The LTESA is effectively cross-subsidising a below-market PPA the project agreed to — Consumer Trustee scrutiny: is the PPA strike reflective of market conditions, or has the project pre-committed below-market revenue at consumer expense?',
+            },
+            {
+              name: '2. PPA strike ABOVE market RRP AND below Annuity Cap',
+              ppaVsRRP: 'PPA > RRP',
+              ppaVsCap: 'PPA < Cap',
+              outcome: 'NOR is lifted by the PPA above what merchant would have earned. If NOR remains < NRT, the LTESA pays at the tapered annuity rate (Annuity Cap − 75% × (NOR − (NRT − Annuity Cap))). The PPA helps the project, but the LTESA payment is materially reduced vs scenario 1.',
+              trap: 'Project loses the full LTESA support but keeps the PPA upside — the de-risking is partially "double-paid for".',
+            },
+            {
+              name: '3. PPA strike ABOVE RRP AND above Annuity Cap',
+              ppaVsRRP: 'PPA > RRP',
+              ppaVsCap: 'PPA > Cap',
+              outcome: 'NOR exceeds NRT. LTESA pays nothing AND the repayment mechanic triggers: 50% × (NOR − NRT) is repaid to the SFV, capped at 100% of cumulative historical net payments. The PPA effectively claws back the LTESA support.',
+              trap: 'A high-priced PPA in early years could trigger repayment of the entire LTESA support already received — material liquidity event. Audit PPA carefully against NRT before locking strike.',
+            },
+            {
+              name: '4. PPA above Annuity Cap; spot revenue between Cap and NRT',
+              ppaVsRRP: 'PPA > Cap',
+              ppaVsCap: 'PPA > Cap',
+              outcome: 'NOR is between Annuity Cap and NRT (NRT > Cap by design). LTESA pays at the tapered rate. If NOR continues to rise above NRT in later years, repayment triggers.',
+              trap: 'Threshold is highly sensitive to PPA strike — even a small NRT excess flips you from tapered-payment to 50%-repayment.',
+            },
+          ],
+        },
+        {
+          label: 'BRANCH B — If NOR EXCLUDES PPA revenue (optimistic read)',
+          tone: 'opportunistic',
+          scenarios: [
+            {
+              name: '1. PPA strike BELOW market RRP AND below Annuity Cap',
+              ppaVsRRP: 'PPA < RRP',
+              ppaVsCap: 'PPA < Cap',
+              outcome: 'NOR reflects wholesale + ancillary revenue only (PPA carved out). LTESA pays based purely on merchant outcomes — the PPA is "outside" the LTESA accounting and the project earns both the PPA strike on contracted volume AND the LTESA top-up against merchant.',
+              trap: 'PPA buyer expects market-settlement; if the project also receives LTESA, ensure no double-counting in the PPA contract\'s "revenue offset" clauses (some PPAs have offset language).',
+            },
+            {
+              name: '2. PPA strike ABOVE market RRP AND below Annuity Cap',
+              ppaVsRRP: 'PPA > RRP',
+              ppaVsCap: 'PPA < Cap',
+              outcome: 'PPA is keeping the contracted volume\'s revenue above market. NOR (wholesale-only) is suppressed (low merchant), so LTESA pays at near-full Annuity Cap. Project enjoys BOTH the PPA premium AND the LTESA floor — best of both worlds.',
+              trap: 'High concentration of revenue support. Consumer Trustee may scrutinise additionality (does the project really need the LTESA?) — answer in MC2/MC4 deliverability that PPA is partial-volume only.',
+            },
+            {
+              name: '3. PPA strike ABOVE RRP AND above Annuity Cap',
+              ppaVsRRP: 'PPA > RRP',
+              ppaVsCap: 'PPA > Cap',
+              outcome: 'PPA is high-strike but doesn\'t affect NOR. LTESA still pays based on wholesale-only NOR. Project keeps high PPA + LTESA support.',
+              trap: 'Same scrutiny as scenario 2 — economic case for the LTESA must rest on the unhedged volume.',
+            },
+            {
+              name: '4. PPA above Annuity Cap; spot revenue between Cap and NRT',
+              ppaVsRRP: 'PPA > Cap',
+              ppaVsCap: 'PPA > Cap',
+              outcome: 'NOR (wholesale-only) sits between Annuity Cap and NRT. LTESA pays at tapered rate on the wholesale-only NOR. PPA upside intact.',
+              trap: 'Track NOR carefully; sliding above NRT into repayment territory is the main downside.',
+            },
+          ],
+        },
+      ],
+    },
+    hybridDecisionFramework: {
+      headline: 'When should a project bid the new Hybrid Generation LTESA vs the standard Generation LTESA? Two cases — wind+BESS and solar+BESS — with the dimensions to evaluate.',
+      dimensions: [
+        { name: 'Storage:generation export-capacity ratio', matters: 'Storage export > gen export = INELIGIBLE for Hybrid LTESA. Aim for storage ≈ 80-100% of gen export to maximise hybrid uplift while clearing the gate.' },
+        { name: 'Storage duration at COD', matters: 'Must be ≥4h. Longer durations (6-8h) score better on system-benefit and price-shifting but cost more capex per MWh.' },
+        { name: 'AC vs DC coupling', matters: 'DC-coupled means battery only charges from own gen (no grid imports) — favourable for net-export accounting. AC-coupled exposes you to grid charging that drains LTESA settlement. UNCONFIRMED whether T8 mandates DC.' },
+        { name: 'PPA pre-commitments', matters: 'If material PPA volume is already contracted at a high strike, Hybrid LTESA economics deteriorate (see PPA scenarios). Generation LTESA may de-risk more cleanly on unhedged volume.' },
+        { name: 'REZ access status', matters: 'CWO + SW REZ access rights holders are higher-merit (resolved network constraint). Outside-REZ projects face deliverability and curtailment downside.' },
+        { name: 'COD timing', matters: 'COD before 31 Dec 2029 receives favourable consideration. Beyond 2029, the favourable consideration falls away — Hybrid uplift may not compensate.' },
+        { name: 'Curtailment exposure', matters: 'High-curtailment locations: Hybrid LTESA helps because BESS can absorb otherwise-curtailed energy and shift it. Low-curtailment: less hybrid uplift.' },
+        { name: 'Planning maturity', matters: 'Hybrid configurations may need planning amendments if the original DA was gen-only. Late-stage gen-only projects may find it cheaper to bid standard Generation LTESA than re-plan for hybrid.' },
+      ],
+      cases: [
+        {
+          caseLabel: 'Wind farm + BESS',
+          hybridFavoured: 'Hybrid LTESA wins when (a) wind is in a high-curtailment / low-evening-price location, (b) BESS is ≥4h and ≤ gen export, (c) hybrid configuration is already planning-approved, (d) PPA pre-commitments are low/absent. Wind\'s natural overnight/evening generation aligns well with the BESS time-shifting case — Option 2 generation-following settlement captures the dispatch-shape upside.',
+          generationFavoured: 'Standard Generation LTESA wins when (a) the BESS is small (e.g. <100 MW on a 500 MW wind farm) or short-duration (<4h, ineligible), (b) the wind project is mature and gen-only-approved with no easy hybrid amendment, (c) there\'s an executed PPA already de-risking the gen volume and additional Hybrid LTESA over-hedges.',
+          ratiosToTarget: 'Target storage = 60–100% of gen export, ≥4h duration. Wind+BESS at 80%+ storage:gen ratio with 4-6h duration is the sweet spot. Lower ratios (e.g. 25%) likely lose more on planning + design complexity than they gain on hybrid uplift.',
+        },
+        {
+          caseLabel: 'Solar farm + BESS',
+          hybridFavoured: 'Hybrid LTESA materially improves the case vs standalone solar — solar cannibalisation crushes the wholesale-benefit numerator under standard Generation LTESA, but the Hybrid LTESA settles on dispatch-shape that includes BESS evening discharge. Best when (a) BESS ≥4h to shift solar into evening peak, (b) DC-coupled or AC-coupled with own-gen charging dominance, (c) ≥ 1:1 storage:gen ratio (storage ≤ gen export) for eligibility, (d) location with strong evening-peak price uplift.',
+          generationFavoured: 'Standard Generation LTESA wins ONLY when the BESS is short-duration (<4h, ineligible for hybrid) or sized larger than gen export (also ineligible). For ineligible solar+BESS, an alternative structure is: bid solar gen into standard Generation LTESA + bid BESS into NSW T9 LDS separately. This splits the de-risking across two LTESAs but loses hybrid uplift on merit.',
+          ratiosToTarget: 'Target storage = 80–100% of gen export, ≥4h (preferably 6h for solar to capture evening peak). Solar+BESS at <50% storage:gen ratio is sub-optimal — not enough storage to materially shift solar economics.',
+        },
+      ],
+    },
+    openQuestions: [
+      'Final adopted price-risk-share % (50:50 vs asymmetric 80% downside vs bidder-nominated band).',
+      'Whether Net Operational Revenue includes PPA revenue (or carves it out). DRIVES the PPA scenarios above.',
+      'AC vs DC coupling constraints; single-DUID vs multi-DUID at the Integrated Resource Provider level.',
+      'Hybrid LTESA contract term (15 vs 20 years).',
+      'Whether T8 Tender Guidelines permit per-year bid schedules, intra-year capacity staging, and partial-capacity LTESAs.',
+      'Whether T8 has refreshed the 14 Nov 2019 additionality cutoff to a more recent anchor.',
     ],
   },
 

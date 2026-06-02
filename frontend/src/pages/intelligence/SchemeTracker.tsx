@@ -3379,6 +3379,209 @@ function OpenRoundCard({ round, isExpanded, onToggle }: { round: OpenRound; isEx
             </div>
           )}
 
+          {/* v3.15.0: NSW T8 strategy deep-dive sub-sections */}
+          {round.designStatus && (
+            <div className="border border-[var(--color-border)] rounded-lg p-3 bg-[var(--color-bg)]">
+              <h5 className="text-[10px] uppercase tracking-wider text-[var(--color-text)] mb-2">Design status — decided vs open</h5>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                <div>
+                  <div className="text-[10px] font-bold text-emerald-400 mb-1.5">✓ DECIDED</div>
+                  <ul className="space-y-1">
+                    {round.designStatus.decided.map((d, i) => (
+                      <li key={i} className="text-[11px] text-[var(--color-text-muted)] leading-relaxed flex gap-1.5">
+                        <span className="text-emerald-400 shrink-0">●</span>
+                        <span>{d}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div>
+                  <div className="text-[10px] font-bold text-amber-400 mb-1.5">○ STILL OPEN</div>
+                  <ul className="space-y-1">
+                    {round.designStatus.openItems.map((d, i) => (
+                      <li key={i} className="text-[11px] text-[var(--color-text-muted)] leading-relaxed flex gap-1.5">
+                        <span className="text-amber-400 shrink-0">●</span>
+                        <span>{d}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {round.productComparison && (
+            <div className="bg-[var(--color-bg)] border border-[var(--color-border)] rounded-lg p-3">
+              <h5 className="text-[10px] uppercase tracking-wider text-[var(--color-text)] mb-1">Product comparison</h5>
+              <p className="text-[11px] text-[var(--color-text-muted)] leading-relaxed mb-2">{round.productComparison.headline}</p>
+              <div className="space-y-2">
+                {round.productComparison.options.map((o, i) => {
+                  const verdictStyle = o.verdict === 'adopted'
+                    ? { background: '#22c55e1a', color: '#22c55e', border: '1px solid #22c55e55' }
+                    : o.verdict === 'not-adopted'
+                    ? { background: '#ef44441a', color: '#ef4444', border: '1px solid #ef444455' }
+                    : { background: '#64748b1a', color: '#94a3b8', border: '1px solid #64748b55' }
+                  return (
+                    <div key={i} className="border border-[var(--color-border)] rounded-md p-2.5 bg-[var(--color-bg-card)]">
+                      <div className="flex items-center justify-between gap-2 mb-1.5">
+                        <span className="text-[11px] font-bold text-[var(--color-text)]">{o.label}</span>
+                        <span className="text-[9px] font-bold uppercase px-1.5 py-0.5 rounded-full shrink-0" style={verdictStyle}>
+                          {o.verdict.replace('-', ' ')}
+                        </span>
+                      </div>
+                      <div className="space-y-1 text-[10px] text-[var(--color-text-muted)] leading-relaxed">
+                        <div><span className="text-[var(--color-text)] font-medium">Mechanic:</span> {o.mechanic}</div>
+                        <div><span className="text-[var(--color-text)] font-medium">Suits:</span> {o.suits}</div>
+                        <div><span className="text-[var(--color-text)] font-medium">Trade-off:</span> {o.tradeoff}</div>
+                      </div>
+                    </div>
+                  )
+                })}
+              </div>
+            </div>
+          )}
+
+          {round.settlementProsAndCons && (
+            <div className="bg-[var(--color-bg)] border border-[var(--color-border)] rounded-lg p-3">
+              <h5 className="text-[10px] uppercase tracking-wider text-[var(--color-text)] mb-1">Settlement basis — pros &amp; cons</h5>
+              <p className="text-[11px] text-[var(--color-text-muted)] leading-relaxed mb-3">{round.settlementProsAndCons.basis}</p>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                <div className="bg-emerald-500/5 border border-emerald-500/20 rounded-md p-2.5">
+                  <div className="text-[10px] font-bold text-emerald-400 mb-1.5">PROS</div>
+                  <ul className="space-y-1">
+                    {round.settlementProsAndCons.pros.map((p, i) => (
+                      <li key={i} className="text-[10px] text-[var(--color-text-muted)] leading-relaxed flex gap-1.5">
+                        <span className="text-emerald-400 shrink-0">+</span><span>{p}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div className="bg-red-500/5 border border-red-500/20 rounded-md p-2.5">
+                  <div className="text-[10px] font-bold text-red-400 mb-1.5">CONS</div>
+                  <ul className="space-y-1">
+                    {round.settlementProsAndCons.cons.map((c, i) => (
+                      <li key={i} className="text-[10px] text-[var(--color-text-muted)] leading-relaxed flex gap-1.5">
+                        <span className="text-red-400 shrink-0">−</span><span>{c}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div className="bg-blue-500/5 border border-blue-500/20 rounded-md p-2.5">
+                  <div className="text-[10px] font-bold text-blue-400 mb-1.5">FAVOURS</div>
+                  <ul className="space-y-1">
+                    {round.settlementProsAndCons.favours.map((f, i) => (
+                      <li key={i} className="text-[10px] text-[var(--color-text-muted)] leading-relaxed flex gap-1.5">
+                        <span className="text-blue-400 shrink-0">✓</span><span>{f}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div className="bg-amber-500/5 border border-amber-500/20 rounded-md p-2.5">
+                  <div className="text-[10px] font-bold text-amber-400 mb-1.5">DISFAVOURS</div>
+                  <ul className="space-y-1">
+                    {round.settlementProsAndCons.disfavours.map((d, i) => (
+                      <li key={i} className="text-[10px] text-[var(--color-text-muted)] leading-relaxed flex gap-1.5">
+                        <span className="text-amber-400 shrink-0">✗</span><span>{d}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {round.ppaScenarios && (
+            <div className="bg-[var(--color-bg)] border border-[var(--color-border)] rounded-lg p-3">
+              <h5 className="text-[10px] uppercase tracking-wider text-[var(--color-text)] mb-1">PPA × LTESA interaction — scenarios</h5>
+              <p className="text-[11px] text-[var(--color-text-muted)] leading-relaxed mb-2">{round.ppaScenarios.headline}</p>
+              <div className="bg-amber-500/5 border border-amber-500/30 rounded-md p-2.5 mb-3">
+                <div className="text-[10px] font-bold text-amber-400 mb-1">⚠ THE UNRESOLVED QUESTION</div>
+                <p className="text-[10px] text-[var(--color-text-muted)] leading-relaxed">{round.ppaScenarios.norQuestion}</p>
+              </div>
+              <div className="space-y-3">
+                {round.ppaScenarios.branches.map((branch, bi) => {
+                  const branchColour = branch.tone === 'cautious' ? '#f59e0b' : '#22c55e'
+                  return (
+                    <div key={bi} className="border rounded-md p-2.5" style={{ borderColor: `${branchColour}55`, background: `${branchColour}05` }}>
+                      <div className="text-[11px] font-bold mb-2" style={{ color: branchColour }}>{branch.label}</div>
+                      <div className="space-y-1.5">
+                        {branch.scenarios.map((s, si) => (
+                          <div key={si} className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded p-2">
+                            <div className="text-[10px] font-medium text-[var(--color-text)] mb-1">{s.name}</div>
+                            <div className="flex flex-wrap gap-2 mb-1.5">
+                              <span className="text-[9px] px-1.5 py-0.5 rounded bg-[var(--color-bg)] border border-[var(--color-border)] text-[var(--color-text-muted)] font-mono">{s.ppaVsRRP}</span>
+                              <span className="text-[9px] px-1.5 py-0.5 rounded bg-[var(--color-bg)] border border-[var(--color-border)] text-[var(--color-text-muted)] font-mono">{s.ppaVsCap}</span>
+                            </div>
+                            <p className="text-[10px] text-[var(--color-text-muted)] leading-relaxed">{s.outcome}</p>
+                            {s.trap && (
+                              <p className="text-[10px] text-amber-400/80 leading-relaxed mt-1 italic">
+                                <span className="font-bold not-italic">Trap:</span> {s.trap}
+                              </p>
+                            )}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )
+                })}
+              </div>
+            </div>
+          )}
+
+          {round.hybridDecisionFramework && (
+            <div className="bg-[#8b5cf6]/5 border border-[#8b5cf6]/30 rounded-lg p-3">
+              <h5 className="text-[10px] uppercase tracking-wider text-[#a855f7] mb-1">Hybrid-or-not decision framework</h5>
+              <p className="text-[11px] text-[var(--color-text-muted)] leading-relaxed mb-3">{round.hybridDecisionFramework.headline}</p>
+              <div className="mb-3">
+                <div className="text-[10px] font-bold text-[var(--color-text)] mb-1.5">Dimensions to evaluate</div>
+                <div className="space-y-0.5">
+                  {round.hybridDecisionFramework.dimensions.map((d, i) => (
+                    <div key={i} className="flex gap-2 text-[10px] leading-relaxed">
+                      <span className="shrink-0 text-[#a855f7] font-medium w-40">{d.name}</span>
+                      <span className="text-[var(--color-text-muted)]">{d.matters}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <div className="space-y-2">
+                {round.hybridDecisionFramework.cases.map((c, i) => (
+                  <div key={i} className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded p-2.5">
+                    <div className="text-[11px] font-bold text-[var(--color-text)] mb-1.5">{c.caseLabel}</div>
+                    <div className="space-y-1.5 text-[10px] leading-relaxed">
+                      <div>
+                        <span className="text-emerald-400 font-medium">Hybrid LTESA wins when:</span>
+                        <span className="text-[var(--color-text-muted)] ml-1">{c.hybridFavoured}</span>
+                      </div>
+                      <div>
+                        <span className="text-blue-400 font-medium">Standard Generation LTESA wins when:</span>
+                        <span className="text-[var(--color-text-muted)] ml-1">{c.generationFavoured}</span>
+                      </div>
+                      {c.ratiosToTarget && (
+                        <div className="pt-1 border-t border-[var(--color-border)]">
+                          <span className="text-[var(--color-text)] font-medium">Target ratios:</span>
+                          <span className="text-[var(--color-text-muted)] ml-1">{c.ratiosToTarget}</span>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {round.openQuestions && round.openQuestions.length > 0 && (
+            <div className="bg-amber-500/5 border border-amber-500/20 rounded-lg p-3">
+              <h5 className="text-[10px] uppercase tracking-wider text-amber-400 mb-1.5">Open questions (not yet in public T8 docs)</h5>
+              <ul className="space-y-1">
+                {round.openQuestions.map((q, i) => (
+                  <li key={i} className="text-[10px] text-[var(--color-text-muted)] leading-relaxed flex gap-1.5">
+                    <span className="text-amber-400 shrink-0">?</span><span>{q}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
           {/* Commitment eligibility — can already-committed / FID'd projects bid? */}
           {round.commitmentEligibility && (
             <div className="bg-cyan-500/5 border border-cyan-500/30 rounded-lg p-3">
