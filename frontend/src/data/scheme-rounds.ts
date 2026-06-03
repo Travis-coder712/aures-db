@@ -1131,7 +1131,27 @@ export interface OpenRound {
   /** Explicitly-flagged unresolved questions (what's NOT yet in public docs). */
   openQuestions?: string[]
 
-  // ---- End v3.15.0 additions ----
+  /** v3.16.1: Deep dive on the Hybrid LTESA's 50% price-risk share vs Generation LTESA's full pass-through. */
+  riskShareDeepDive?: {
+    headline: string
+    mechanicsExplainer: string             // what the 50% does, in one paragraph
+    whenItApplies: Array<{ context: string; behaviour: string }>  // exercise vs non-exercise; symmetric
+    batteryChargingExplainer: string       // how net-export basis handles charging
+    whyFiftyPercent: string                // design rationale
+    workedExamples: Array<{
+      scenario: string                      // e.g. 'Low-spot year ($40/MWh) — exercising'
+      spotPrice: number                     // $/MWh
+      bidStrike: number                     // Fixed/Strike Price $/MWh
+      generationMWh: number                 // assumed gen volume
+      genLtesaCashflow: number              // $M — sign convention: + means SFV→Op, − means Op→SFV
+      hybridLtesaCashflow: number           // $M
+      effectivePriceGen: number             // $/MWh realised
+      effectivePriceHybrid: number          // $/MWh realised
+      interpretation: string                // 1 sentence on what this shows
+    }>
+  }
+
+  // ---- End v3.15.0 / v3.16.1 additions ----
 
   // Honesty
   caveats: string[]             // confidence flags surfaced in UI
@@ -1430,6 +1450,74 @@ export const OPEN_ROUNDS: OpenRound[] = [
       'Exact "eligible contract" reduction formula in the proforma LTESA contract documents (DOCX) — financial-modelling teams should review the proforma Generation LTESA + proforma Hybrid Generation LTESA contracts directly for the precise mechanic and what qualifies (PPA, offtake, toll, etc.).',
       'Timing of the next AEMO IIO Report — refreshes the Gen Info page anchor for MC1 Wholesale Market Benefits "In Service" zeroing. Not specified in current Guidelines.',
     ],
+    riskShareDeepDive: {
+      headline: 'How the 50% price-risk share works — and why the Hybrid LTESA isn\'t just a half-strength Generation LTESA.',
+      mechanicsExplainer: 'Both LTESA products are option-style: each year the Operator chooses whether to exercise the LTESA option for that Swap Period (1 financial year, 1 July – 30 June). On exercise, the products settle differently. **Generation LTESA** is a full pass-through swap: settlement = NotionalQuantity × (Fixed Price − max(0, Floating Price)). The Operator gives up all spot upside above Fixed and is fully insulated from spot downside below Fixed. **Hybrid Generation LTESA** is a 50:50 price-risk share: settlement = NotionalQuantity × 50% × (Strike Price − Floating Price), where NotionalQuantity is computed on Net Exports (exports minus battery imports) and = 0 in negative-spot intervals. The Operator retains 50% of the spot exposure — winning 50% of the upside when spot > Strike, and absorbing 50% of the downside when spot < Strike.',
+      whenItApplies: [
+        { context: 'Exercise periods (Operator exercises the LTESA option for a Swap Period)', behaviour: 'The 50% multiplier applies to the swap settlement: NQ × 50% × (Strike − Floating). For Generation LTESA, no multiplier (full swap).' },
+        { context: 'Non-exercise periods (Operator forgoes the option — also applies to uncontracted portion in exercise years)', behaviour: 'The 50% applies in the OTHER direction — the Repayment mechanic: if Floating > Repayment Threshold Price, Operator pays SFV 50% × NQ × (Floating − RPT), capped at Historical Net Payments. **Same 50% applies to BOTH products in non-exercise periods.** The PPA-as-eligible-contract reduction further softens this.' },
+        { context: 'Symmetric design across the year', behaviour: 'The 50% is the universal sharing percentage — exercise periods (50% of upside/downside via swap), non-exercise periods (50% of high-price windfall via Repayment). Operator and SFV share price risk equally in both directions.' },
+      ],
+      batteryChargingExplainer: 'The Hybrid LTESA settles on **Sent-Out Net Exports** (gross exports minus gross imports, intervalbyinterval). When the battery charges from the grid (AC-coupling) or from co-located gen (DC-coupling), the imports show up as negative components in the Notional Quantity calculation for that interval. Concretely: if the battery charges 100 MW from grid for an hour at $20/MWh spot, that interval has −100 MWh net exports. If the battery then discharges 100 MW for an hour at $200/MWh, that interval has +100 MWh net exports. The LTESA settles on the NET physical flow. Critically: **NotionalQuantity = 0 when spot < $0/MWh** (negative spot intervals), so the Operator isn\'t forced to pay SFV during negative-price periods even if technically dispatching. The net-export basis means the LTESA can\'t be gamed by charging at low prices to inflate the strike-vs-spot delta — the import volume cancels out. DC-coupled hybrids (battery only charges from own gen, never from grid) have a cleaner net-export profile than AC-coupled (which can import from grid). The MC1 Briefing notes that an AC-coupling vs DC-coupling decision is the Proponent\'s — both eligible — but the economics differ via the net-export accounting.',
+      whyFiftyPercent: 'ASL designed the 50% PRS to balance three objectives: (1) **Project bankability** — the Operator still gets meaningful price-floor support to reach Financial Close, but at half the per-MWh subsidy of the Generation LTESA, lowering Net LTESA Cost in MC1 scoring. (2) **Operator dispatch incentive** — by retaining 50% of price upside, the Operator is incentivised to dispatch the battery efficiently (charge at low prices, discharge at high prices) rather than running it passively. A full 100% swap would dampen this dispatch incentive. (3) **Consumer value-sharing** — SFV (and ultimately NSW electricity customers via DNSPs) capture 50% of the price-risk-share benefit, which feeds into the lower Net LTESA Cost figure that MC1 rewards. ASL consulted (Jan-Feb 2026) on alternative structures including 80%/20% asymmetric downside protection but settled on symmetric 50% in the gazetted Hybrid Generation LTESA (May 2026). The symmetric design also mirrors the existing 50% Repayment percentage carried through from prior LTESA rounds.',
+      workedExamples: [
+        {
+          scenario: 'Low-spot year ($40/MWh) — exercising',
+          spotPrice: 40,
+          bidStrike: 65,
+          generationMWh: 1_500_000,
+          genLtesaCashflow: 37.5,      // 1.5M × (65 − 40) = 37.5M (SFV → Op)
+          hybridLtesaCashflow: 18.75,  // 1.5M × 50% × (65 − 40) = 18.75M (SFV → Op)
+          effectivePriceGen: 65,       // Op realises: 40 spot + 25 LTESA = 65 (locked-in)
+          effectivePriceHybrid: 52.5,  // Op realises: 40 spot + 12.50 LTESA = 52.50
+          interpretation: 'Gen LTESA fully de-risks the operator to the Fixed Price. Hybrid LTESA captures half the downside protection — but the operator can use battery flexibility (not modelled here) to time-shift export volume into higher-price intervals, recovering some merchant upside.',
+        },
+        {
+          scenario: 'Mid-spot year ($80/MWh) — exercising',
+          spotPrice: 80,
+          bidStrike: 65,
+          generationMWh: 1_500_000,
+          genLtesaCashflow: -22.5,     // 1.5M × (65 − 80) = -22.5M (Op → SFV)
+          hybridLtesaCashflow: -11.25, // 1.5M × 50% × (65 − 80) = -11.25M (Op → SFV)
+          effectivePriceGen: 65,       // Op realises: 80 spot − 15 LTESA = 65 (locked-in)
+          effectivePriceHybrid: 72.5,  // Op realises: 80 spot − 7.50 LTESA = 72.50
+          interpretation: 'Spot above Strike — Operator pays SFV under both products. Gen LTESA caps the realised price at Fixed = $65; Hybrid retains 50% of the $15 upside, so the Operator realises $72.50/MWh. The 50% PRS is genuinely valuable here.',
+        },
+        {
+          scenario: 'High-spot year ($150/MWh) — exercising',
+          spotPrice: 150,
+          bidStrike: 65,
+          generationMWh: 1_500_000,
+          genLtesaCashflow: -127.5,    // 1.5M × (65 − 150) = -127.5M
+          hybridLtesaCashflow: -63.75, // 1.5M × 50% × (65 − 150) = -63.75M
+          effectivePriceGen: 65,       // Op realises: $150 − $85 = $65 (locked-in)
+          effectivePriceHybrid: 107.5, // Op realises: $150 − $42.50 = $107.50
+          interpretation: 'In a high-spot year, the 50% PRS lets the Operator participate substantially in the upside — realised $107.50/MWh vs $65 under Gen LTESA. The Operator should consider NOT exercising the option this year (see next row).',
+        },
+        {
+          scenario: 'High-spot year ($150/MWh) — NOT exercising (Repayment trigger if spot > RPT)',
+          spotPrice: 150,
+          bidStrike: 65,             // Strike not used; RPT = $120 (illustrative bid)
+          generationMWh: 1_500_000,
+          genLtesaCashflow: -22.5,     // 1.5M × 50% × (150 − 120) = -22.5M (Repayment) — capped at Historical Net Payments
+          hybridLtesaCashflow: -22.5,  // SAME 50% Repayment for both products in non-exercise
+          effectivePriceGen: 135,      // Op realises: $150 − $15 Repayment = $135
+          effectivePriceHybrid: 135,
+          interpretation: 'If the Operator forgoes (or partially forgoes) the LTESA option, the Repayment mechanic applies WHEN spot > Repayment Threshold Price. 50% × (Spot − RPT) flows back to SFV, but capped at Historical Net Payments received. PPA reduces this via "eligible contract" carveout. Operator captures $135/MWh — better than the $107.50 Hybrid-exercise or $65 Gen-exercise outcome.',
+        },
+        {
+          scenario: 'Charging interval (Hybrid only): battery imports 100 MW from grid for 1 hour at $20/MWh',
+          spotPrice: 20,
+          bidStrike: 65,
+          generationMWh: -100,         // NEGATIVE 100 MWh net export for this interval
+          genLtesaCashflow: 0,         // Gen LTESA settles on gen, not net export — charging doesn't apply
+          hybridLtesaCashflow: -0.00225, // -100 × 50% × (65 − 20) / 1M = -0.00225M (negligible)
+          effectivePriceGen: 0,         // N/A for this charging interval
+          effectivePriceHybrid: 0,
+          interpretation: 'During a battery-charging interval, Hybrid LTESA NQ is NEGATIVE (imports > exports). Settlement = NQ × 50% × (Strike − Floating). With Strike $65 > Floating $20, the product is positive, but NQ is negative — so Op effectively pays SFV a tiny amount for the imported MWh. This prevents the Operator from gaming the LTESA by importing cheap energy to lock in subsidy. Discharge later at $200 gives +100 MWh NQ × 50% × ($65 − $200) = −$6.75k (Op pays SFV the 50% upside) — net of charge/discharge, the Operator captures the arbitrage spread minus the LTESA share.',
+        },
+      ],
+    },
   },
 
   // ---------------------------------------------------------------

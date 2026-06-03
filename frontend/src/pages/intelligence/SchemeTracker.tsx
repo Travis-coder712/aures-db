@@ -3446,6 +3446,11 @@ function OpenRoundCard({ round, isExpanded, onToggle }: { round: OpenRound; isEx
             </div>
           )}
 
+          {/* v3.16.1: Risk-Share Deep Dive — explains the 50% PRS with worked examples + chart */}
+          {round.riskShareDeepDive && (
+            <RiskShareDeepDive deepDive={round.riskShareDeepDive} />
+          )}
+
           {round.settlementProsAndCons && (
             <div className="bg-[var(--color-bg)] border border-[var(--color-border)] rounded-lg p-3">
               <h5 className="text-[10px] uppercase tracking-wider text-[var(--color-text)] mb-1">Settlement basis — pros &amp; cons</h5>
@@ -3689,6 +3694,133 @@ function OpenRoundCard({ round, isExpanded, onToggle }: { round: OpenRound; isEx
       {isNswT8 && showCalculatorModal && (
         <PpaLtesaCalculatorModal onClose={() => setShowCalculatorModal(false)} />
       )}
+    </div>
+  )
+}
+
+// ============================================================
+// RiskShareDeepDive (v3.16.1) — NSW T8 educational section explaining
+// the 50% price-risk share with worked examples + a Recharts comparison
+// of realised $/MWh under Gen LTESA vs Hybrid Generation LTESA across
+// spot scenarios.
+// ============================================================
+
+type RiskShareDeepDiveData = NonNullable<OpenRound['riskShareDeepDive']>
+
+function RiskShareDeepDive({ deepDive }: { deepDive: RiskShareDeepDiveData }) {
+  // Build chart data from the first 3 exercise-scenario rows (low/mid/high spot)
+  // — the 4th (non-exercise) and 5th (charging interval) are illustrative-only,
+  // so we keep the chart focused on the 3 exercise scenarios.
+  const chartData = deepDive.workedExamples
+    .filter(w => w.effectivePriceGen > 0 && w.effectivePriceHybrid > 0)
+    .map(w => ({
+      name: `Spot $${w.spotPrice}/MWh`,
+      'Generation LTESA': Math.round(w.effectivePriceGen * 10) / 10,
+      'Hybrid LTESA (50% PRS)': Math.round(w.effectivePriceHybrid * 10) / 10,
+      'Spot reference': w.spotPrice,
+    }))
+
+  return (
+    <div className="bg-[var(--color-bg)] border border-[#a855f7]/30 rounded-lg p-3">
+      <h5 className="text-[10px] uppercase tracking-wider text-[#a855f7] mb-1.5">Risk-Share Deep Dive — how the 50% works</h5>
+      <p className="text-[11px] text-[var(--color-text)] leading-relaxed mb-3">{deepDive.headline}</p>
+
+      {/* Mechanics explainer */}
+      <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-md p-2.5 mb-3">
+        <div className="text-[10px] uppercase tracking-wider text-[var(--color-text)] mb-1 font-bold">The mechanic</div>
+        <p className="text-[11px] text-[var(--color-text-muted)] leading-relaxed">{deepDive.mechanicsExplainer}</p>
+      </div>
+
+      {/* When it applies */}
+      <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-md p-2.5 mb-3">
+        <div className="text-[10px] uppercase tracking-wider text-[var(--color-text)] mb-1.5 font-bold">When does the 50% apply?</div>
+        <div className="space-y-1.5">
+          {deepDive.whenItApplies.map((w, i) => (
+            <div key={i} className="text-[11px]">
+              <div className="font-medium text-[var(--color-text)]">{w.context}</div>
+              <div className="text-[var(--color-text-muted)] leading-relaxed ml-3">→ {w.behaviour}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Battery charging explainer */}
+      <div className="bg-blue-500/5 border border-blue-500/30 rounded-md p-2.5 mb-3">
+        <div className="text-[10px] uppercase tracking-wider text-blue-400 mb-1 font-bold">▸ Battery charging — why net exports?</div>
+        <p className="text-[11px] text-[var(--color-text-muted)] leading-relaxed">{deepDive.batteryChargingExplainer}</p>
+      </div>
+
+      {/* Why 50% */}
+      <div className="bg-emerald-500/5 border border-emerald-500/30 rounded-md p-2.5 mb-3">
+        <div className="text-[10px] uppercase tracking-wider text-emerald-400 mb-1 font-bold">▸ Why 50% specifically?</div>
+        <p className="text-[11px] text-[var(--color-text-muted)] leading-relaxed">{deepDive.whyFiftyPercent}</p>
+      </div>
+
+      {/* Chart: Realised $/MWh comparison */}
+      {chartData.length > 0 && (
+        <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-md p-2.5 mb-3">
+          <div className="text-[10px] uppercase tracking-wider text-[var(--color-text)] mb-1 font-bold">Realised price ($/MWh) — Gen LTESA vs Hybrid LTESA across spot scenarios</div>
+          <p className="text-[10px] text-[var(--color-text-muted)] mb-2">Assumes 1,500 GWh annual gen, Fixed/Strike Price $65/MWh, full exercise. Hybrid LTESA retains 50% of the spot deviation either way.</p>
+          <div style={{ width: '100%', height: 240 }}>
+            <ResponsiveContainer width="100%" height="100%">
+              <BarChart data={chartData} margin={{ top: 8, right: 16, left: 0, bottom: 8 }}>
+                <CartesianGrid strokeDasharray="3 3" stroke="var(--color-border)" />
+                <XAxis dataKey="name" tick={{ fill: '#94a3b8', fontSize: 10 }} />
+                <YAxis tick={{ fill: '#94a3b8', fontSize: 10 }} unit="$" />
+                <Tooltip
+                  contentStyle={{ background: '#1e293b', border: '1px solid #334155', borderRadius: 8, color: '#e2e8f0', fontSize: 11 }}
+                  formatter={(value, name) => {
+                    const v = typeof value === 'number' ? value : Number(value) || 0
+                    return [`$${v.toFixed(2)}/MWh`, name]
+                  }}
+                />
+                <Legend wrapperStyle={{ fontSize: 10 }} />
+                <Bar dataKey="Generation LTESA" fill="#3b82f6" />
+                <Bar dataKey="Hybrid LTESA (50% PRS)" fill="#a855f7" />
+                <Bar dataKey="Spot reference" fill="#64748b" />
+              </BarChart>
+            </ResponsiveContainer>
+          </div>
+          <p className="text-[9px] text-[var(--color-text-muted)] italic mt-1">
+            <span className="text-blue-400">Gen LTESA</span> locks realised price at the Fixed Price ($65). <span className="text-[#a855f7]">Hybrid LTESA</span> tracks halfway between Strike and Spot — capturing 50% of upside in high-spot years AND absorbing 50% of downside in low-spot years.
+          </p>
+        </div>
+      )}
+
+      {/* Worked examples table */}
+      <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-md p-2.5">
+        <div className="text-[10px] uppercase tracking-wider text-[var(--color-text)] mb-1.5 font-bold">Worked examples</div>
+        <div className="space-y-1.5">
+          {deepDive.workedExamples.map((w, i) => (
+            <div key={i} className="bg-[var(--color-bg)] border border-[var(--color-border)] rounded p-2">
+              <div className="text-[11px] font-medium text-[var(--color-text)] mb-1">{w.scenario}</div>
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 text-[10px] mb-1.5">
+                <div>
+                  <div className="text-[var(--color-text-muted)]">Gen LTESA $M</div>
+                  <div className={`font-mono ${w.genLtesaCashflow < 0 ? 'text-red-400' : w.genLtesaCashflow > 0 ? 'text-emerald-400' : 'text-[var(--color-text-muted)]'}`}>
+                    {w.genLtesaCashflow >= 0 ? '+' : ''}${w.genLtesaCashflow.toFixed(2)}M
+                  </div>
+                </div>
+                <div>
+                  <div className="text-[var(--color-text-muted)]">Hybrid $M</div>
+                  <div className={`font-mono ${w.hybridLtesaCashflow < 0 ? 'text-red-400' : w.hybridLtesaCashflow > 0 ? 'text-emerald-400' : 'text-[var(--color-text-muted)]'}`}>
+                    {w.hybridLtesaCashflow >= 0 ? '+' : ''}${w.hybridLtesaCashflow.toFixed(2)}M
+                  </div>
+                </div>
+                <div>
+                  <div className="text-[var(--color-text-muted)]">Gen realised $/MWh</div>
+                  <div className="font-mono text-blue-400">{w.effectivePriceGen > 0 ? `$${w.effectivePriceGen.toFixed(2)}` : '—'}</div>
+                </div>
+                <div>
+                  <div className="text-[var(--color-text-muted)]">Hybrid realised $/MWh</div>
+                  <div className="font-mono text-[#a855f7]">{w.effectivePriceHybrid > 0 ? `$${w.effectivePriceHybrid.toFixed(2)}` : '—'}</div>
+                </div>
+              </div>
+              <p className="text-[10px] text-[var(--color-text-muted)] leading-relaxed">{w.interpretation}</p>
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
   )
 }
