@@ -3451,6 +3451,16 @@ function OpenRoundCard({ round, isExpanded, onToggle }: { round: OpenRound; isEx
             <RiskShareDeepDive deepDive={round.riskShareDeepDive} />
           )}
 
+          {/* v3.16.4: Bid Params + Options Deep Dive — variables per asset type + option mechanics */}
+          {round.bidParamsOptionsDeepDive && (
+            <BidParamsOptionsDeepDive deepDive={round.bidParamsOptionsDeepDive} />
+          )}
+
+          {/* v3.16.3: Bid Configuration Deep Dive — Project Category × Product matrix */}
+          {round.bidConfigDeepDive && (
+            <BidConfigDeepDive deepDive={round.bidConfigDeepDive} />
+          )}
+
           {/* v3.16.2: PPA Leverage Deep Dive — how a PPA flexes LTESA bid parameters */}
           {round.ppaLeverageDeepDive && (
             <PpaLeverageDeepDive deepDive={round.ppaLeverageDeepDive} />
@@ -3822,6 +3832,249 @@ function RiskShareDeepDive({ deepDive }: { deepDive: RiskShareDeepDiveData }) {
                 </div>
               </div>
               <p className="text-[10px] text-[var(--color-text-muted)] leading-relaxed">{w.interpretation}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  )
+}
+
+// ============================================================
+// BidParamsOptionsDeepDive (v3.16.4) — NSW T8 bid-variables comparison
+// + option-structure clarification (annual options, Swap Period = FY,
+// partial exercise via Nominated %, Exercise Notice timing).
+// ============================================================
+
+type BidParamsOptionsDeepDiveData = NonNullable<OpenRound['bidParamsOptionsDeepDive']>
+
+function BidParamsOptionsDeepDive({ deepDive }: { deepDive: BidParamsOptionsDeepDiveData }) {
+  const confidenceColour =
+    deepDive.optionStructure.confidence === 'confirmed' ? '#22c55e'
+    : deepDive.optionStructure.confidence === 'likely' ? '#f59e0b'
+    : '#94a3b8'
+
+  return (
+    <div className="bg-[var(--color-bg)] border border-[#f59e0b]/30 rounded-lg p-3">
+      <h5 className="text-[10px] uppercase tracking-wider text-[#f59e0b] mb-1.5">Bid Parameters + Option Mechanics — what you bid, and how the options work</h5>
+      <p className="text-[11px] text-[var(--color-text)] leading-relaxed mb-3">{deepDive.headline}</p>
+
+      {/* Bid Variables comparison table */}
+      <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-md p-2.5 mb-3 overflow-x-auto">
+        <div className="text-[10px] uppercase tracking-wider text-[var(--color-text)] mb-1.5 font-bold">Bid Variables — Gen LTESA vs Hybrid LTESA</div>
+        <table className="w-full text-[10px]">
+          <thead>
+            <tr className="text-left text-[var(--color-text-muted)]">
+              <th className="py-1 pr-2 font-medium uppercase tracking-wider text-[9px] w-1/4">Variable</th>
+              <th className="py-1 pr-2 font-medium uppercase tracking-wider text-[9px] w-1/3"><span className="text-blue-400">Generation LTESA</span></th>
+              <th className="py-1 pr-2 font-medium uppercase tracking-wider text-[9px] w-1/3"><span className="text-[#a855f7]">Hybrid Generation LTESA</span></th>
+            </tr>
+          </thead>
+          <tbody>
+            {deepDive.bidVariablesComparison.map((v, i) => (
+              <tr key={i} className="border-t border-[var(--color-border)] align-top">
+                <td className="py-2 pr-2 font-medium text-[var(--color-text)]">{v.variable}</td>
+                <td className="py-2 pr-2 text-[var(--color-text-muted)] leading-relaxed">{v.genLtesaTreatment}</td>
+                <td className="py-2 pr-2 text-[var(--color-text-muted)] leading-relaxed">
+                  {v.hybridLtesaTreatment}
+                  {v.notes && <div className="mt-1 text-amber-400/80 italic text-[9px]">Note: {v.notes}</div>}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      {/* Project Parameters by Asset Type */}
+      <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-md p-2.5 mb-3">
+        <div className="text-[10px] uppercase tracking-wider text-[var(--color-text)] mb-1.5 font-bold">Project Parameters required — by asset type</div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+          {deepDive.projectParametersByAssetType.map((a, i) => (
+            <div key={i} className="bg-[var(--color-bg)] border border-[var(--color-border)] rounded p-2">
+              <div className="text-[11px] font-bold text-[#f59e0b] mb-1.5">{a.assetType}</div>
+              <ul className="space-y-0.5">
+                {a.paramsRequired.map((p, j) => (
+                  <li key={j} className="text-[10px] text-[var(--color-text-muted)] leading-relaxed flex gap-1.5">
+                    <span className="text-[#f59e0b] shrink-0">•</span>
+                    <span>{p}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Option Structure */}
+      <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-md p-2.5 mb-3">
+        <div className="flex items-center justify-between mb-1.5">
+          <div className="text-[10px] uppercase tracking-wider text-[var(--color-text)] font-bold">Option structure — annual, partial, financial-year aligned</div>
+          <span className="text-[8px] font-bold uppercase px-1.5 py-0.5 rounded-full"
+            style={{ background: `${confidenceColour}1a`, color: confidenceColour, border: `1px solid ${confidenceColour}55` }}>
+            {deepDive.optionStructure.confidence}
+          </span>
+        </div>
+        <div className="space-y-2 text-[11px]">
+          <div className="bg-[var(--color-bg)] border border-emerald-500/30 rounded p-2">
+            <div className="text-[10px] font-bold text-emerald-400 mb-0.5">▸ Swap Period (CONFIRMED — Gen LTESA Fact Sheet Table 1)</div>
+            <p className="text-[10px] text-[var(--color-text-muted)] leading-relaxed">{deepDive.optionStructure.swapPeriod}</p>
+          </div>
+          <div className="bg-[var(--color-bg)] border border-emerald-500/30 rounded p-2">
+            <div className="text-[10px] font-bold text-emerald-400 mb-0.5">▸ Annual exercise (CONFIRMED)</div>
+            <p className="text-[10px] text-[var(--color-text-muted)] leading-relaxed">{deepDive.optionStructure.annualExercise}</p>
+          </div>
+          <div className="bg-[var(--color-bg)] border border-emerald-500/30 rounded p-2">
+            <div className="text-[10px] font-bold text-emerald-400 mb-0.5">▸ Partial exercise via Nominated % (CONFIRMED — Gen LTESA Fact Sheet Table 1)</div>
+            <p className="text-[10px] text-[var(--color-text-muted)] leading-relaxed">{deepDive.optionStructure.partialExercise}</p>
+          </div>
+          <div className="bg-[var(--color-bg)] border border-amber-500/30 rounded p-2">
+            <div className="text-[10px] font-bold text-amber-400 mb-0.5">▸ Exercise Notice timing (PROFORMA-DEPENDENT)</div>
+            <p className="text-[10px] text-[var(--color-text-muted)] leading-relaxed">{deepDive.optionStructure.exerciseNoticeTiming}</p>
+          </div>
+        </div>
+      </div>
+
+      {/* Partial Exercise Examples */}
+      <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-md p-2.5">
+        <div className="text-[10px] uppercase tracking-wider text-[var(--color-text)] mb-1.5 font-bold">Partial exercise — worked examples (500 MW project)</div>
+        <div className="space-y-1.5">
+          {deepDive.partialExerciseExamples.map((ex, i) => (
+            <div key={i} className="bg-[var(--color-bg)] border border-[var(--color-border)] rounded p-2">
+              <div className="flex items-center justify-between gap-2 mb-1 flex-wrap">
+                <div className="text-[11px] font-medium text-[var(--color-text)]">{ex.scenario}</div>
+                <div className="flex gap-1.5 text-[10px] font-mono tabular-nums">
+                  <span className="px-1.5 py-0.5 rounded bg-blue-500/15 text-blue-400 border border-blue-500/30">
+                    Contracted: {ex.contractedPct}%
+                  </span>
+                  <span className="px-1.5 py-0.5 rounded bg-[#a855f7]/15 text-[#a855f7] border border-[#a855f7]/30">
+                    Nominated: {ex.nominatedPct}%
+                  </span>
+                  <span className="px-1.5 py-0.5 rounded bg-emerald-500/15 text-emerald-400 border border-emerald-500/30 font-bold">
+                    Swap %: {ex.swapPct}% = {ex.effectMW} MW
+                  </span>
+                </div>
+              </div>
+              <p className="text-[10px] text-[var(--color-text-muted)] leading-relaxed">{ex.interpretation}</p>
+            </div>
+          ))}
+        </div>
+        <p className="text-[9px] text-[var(--color-text-muted)] italic mt-2">
+          <strong>Swap % = Contracted % × Nominated %.</strong> Contracted % is bid at tender time (locked in for the contract term); Nominated % is set each year in the Exercise Notice (flexible). This is how the LTESA gives the Operator year-by-year flexibility without renegotiating the contract.
+        </p>
+      </div>
+    </div>
+  )
+}
+
+// ============================================================
+// BidConfigDeepDive (v3.16.3) — NSW T8 plain-English explainer:
+// (a) Assessed Hybrid (Project Category) ≠ Hybrid LTESA (Contract
+// Product); (b) Project category is locked at registration; (c) the
+// three distinct MC1 assessment paths; (d) Default + Alt Bid combos.
+// ============================================================
+
+type BidConfigDeepDiveData = NonNullable<OpenRound['bidConfigDeepDive']>
+
+function BidConfigDeepDive({ deepDive }: { deepDive: BidConfigDeepDiveData }) {
+  return (
+    <div className="bg-[var(--color-bg)] border border-[#06b6d4]/30 rounded-lg p-3">
+      <h5 className="text-[10px] uppercase tracking-wider text-[#06b6d4] mb-1.5">Bid Configuration Deep Dive — Assessed Hybrid vs Hybrid LTESA, and the registration lock-in</h5>
+      <p className="text-[11px] text-[var(--color-text)] leading-relaxed mb-3">{deepDive.headline}</p>
+
+      {/* Key distinction */}
+      <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-md p-2.5 mb-3">
+        <div className="text-[10px] uppercase tracking-wider text-[var(--color-text)] mb-1 font-bold">The key distinction</div>
+        <p className="text-[11px] text-[var(--color-text-muted)] leading-relaxed">{deepDive.keyDistinction}</p>
+      </div>
+
+      {/* Project Categories table */}
+      <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-md p-2.5 mb-3">
+        <div className="text-[10px] uppercase tracking-wider text-[var(--color-text)] mb-1.5 font-bold">The 4 Project Categories (Table 1 of Tender Guidelines)</div>
+        <div className="space-y-2">
+          {deepDive.projectCategories.map((c, i) => (
+            <div key={i} className="bg-[var(--color-bg)] border border-[var(--color-border)] rounded p-2.5">
+              <div className="flex items-center justify-between gap-2 mb-1 flex-wrap">
+                <div className="text-[11px] font-bold text-[var(--color-text)]">{c.category}</div>
+                <div className="flex gap-1.5">
+                  <span className="text-[9px] px-1.5 py-0.5 rounded font-bold"
+                    style={{
+                      background: c.genLtesaEligible ? '#3b82f615' : '#ef444415',
+                      color: c.genLtesaEligible ? '#60a5fa' : '#ef4444',
+                      border: c.genLtesaEligible ? '1px solid #3b82f640' : '1px solid #ef444440',
+                    }}>
+                    Gen LTESA {c.genLtesaEligible ? '✓' : '✗'}
+                  </span>
+                  <span className="text-[9px] px-1.5 py-0.5 rounded font-bold"
+                    style={{
+                      background: c.hybridLtesaEligible ? '#a855f715' : '#ef444415',
+                      color: c.hybridLtesaEligible ? '#a855f7' : '#ef4444',
+                      border: c.hybridLtesaEligible ? '1px solid #a855f740' : '1px solid #ef444440',
+                    }}>
+                    Hybrid LTESA {c.hybridLtesaEligible ? '✓' : '✗'}
+                  </span>
+                </div>
+              </div>
+              <p className="text-[10px] text-[var(--color-text-muted)] leading-relaxed mb-1">{c.whatItIs}</p>
+              <p className="text-[10px] text-[var(--color-text-muted)] leading-relaxed italic">
+                <span className="text-[var(--color-text)] font-medium not-italic">MC assessment:</span> {c.mcAssessmentNote}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* 3 Assessment Paths */}
+      <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-md p-2.5 mb-3">
+        <div className="text-[10px] uppercase tracking-wider text-[var(--color-text)] mb-1.5 font-bold">The 3 MC1 assessment paths (per MC1 Briefing §2.2.1)</div>
+        <div className="space-y-2">
+          {deepDive.assessmentPaths.map((p, i) => (
+            <div key={i} className="bg-[var(--color-bg)] border border-[#06b6d4]/30 rounded p-2.5">
+              <div className="text-[11px] font-bold text-[#06b6d4] mb-1.5">▸ Path {i + 1}: {p.pathLabel}</div>
+              <div className="space-y-1 text-[10px] leading-relaxed">
+                <div>
+                  <span className="text-[var(--color-text)] font-medium">MC1 components assessed:</span>
+                  <span className="text-[var(--color-text-muted)] ml-1">{p.mcComponentsAssessed}</span>
+                </div>
+                <div>
+                  <span className="text-emerald-400 font-medium">Net LTESA Cost mechanic:</span>
+                  <span className="text-[var(--color-text-muted)] ml-1">{p.netLtesaCostMechanic}</span>
+                </div>
+                <div>
+                  <span className="text-amber-400 font-medium">Key insight:</span>
+                  <span className="text-[var(--color-text-muted)] ml-1">{p.keyInsight}</span>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Registration lock-in */}
+      <div className="bg-red-500/5 border border-red-500/30 rounded-md p-2.5 mb-3">
+        <div className="text-[10px] uppercase tracking-wider text-red-400 mb-1 font-bold">▸ Registration lock-in — can\'t change category post-registration</div>
+        <p className="text-[11px] text-[var(--color-text-muted)] leading-relaxed">{deepDive.registrationLockIn}</p>
+      </div>
+
+      {/* Combination examples */}
+      <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-md p-2.5">
+        <div className="text-[10px] uppercase tracking-wider text-[var(--color-text)] mb-1.5 font-bold">▸ Concrete examples — Default + Alternative Bid combinations</div>
+        <div className="space-y-2">
+          {deepDive.combinationExamples.map((ex, i) => (
+            <div key={i} className="bg-[var(--color-bg)] border border-[var(--color-border)] rounded p-2.5">
+              <div className="text-[11px] font-bold text-[var(--color-text)] mb-1.5">{ex.scenario}</div>
+              <div className="space-y-1 text-[10px] leading-relaxed mb-1.5">
+                <div>
+                  <span className="text-blue-400 font-medium">Default Bid:</span>
+                  <span className="text-[var(--color-text-muted)] ml-1">{ex.defaultBid}</span>
+                </div>
+                {ex.alternativeBid && (
+                  <div>
+                    <span className="text-[#a855f7] font-medium">Alternative Bid:</span>
+                    <span className="text-[var(--color-text-muted)] ml-1">{ex.alternativeBid}</span>
+                  </div>
+                )}
+              </div>
+              <p className="text-[10px] text-[var(--color-text-muted)] leading-relaxed italic">{ex.strategy}</p>
             </div>
           ))}
         </div>

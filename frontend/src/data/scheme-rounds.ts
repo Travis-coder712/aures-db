@@ -1131,6 +1131,62 @@ export interface OpenRound {
   /** Explicitly-flagged unresolved questions (what's NOT yet in public docs). */
   openQuestions?: string[]
 
+  /** v3.16.4: Bid Parameters + Option Mechanics — variables per asset type, annual options, partial exercise, Exercise Notice timing. */
+  bidParamsOptionsDeepDive?: {
+    headline: string
+    bidVariablesComparison: Array<{
+      variable: string                     // e.g. 'Fixed Price (Gen) / Strike Price (Hybrid)'
+      genLtesaTreatment: string            // how it works in Gen LTESA
+      hybridLtesaTreatment: string         // how it works in Hybrid LTESA
+      notes?: string                       // extra detail
+    }>
+    projectParametersByAssetType: Array<{
+      assetType: string                    // e.g. 'Generation Only'
+      paramsRequired: string[]             // what Project Parameters you must submit
+    }>
+    optionStructure: {
+      swapPeriod: string                   // confirmed: 1 Jul – 30 Jun
+      annualExercise: string               // confirmed
+      partialExercise: string              // confirmed Nominated %
+      exerciseNoticeTiming: string         // honest — proforma-dependent
+      confidence: 'confirmed' | 'likely' | 'inferred'
+    }
+    partialExerciseExamples: Array<{
+      scenario: string                     // e.g. '500 MW project, Contracted % 80%, Nominated % 50%'
+      contractedPct: number
+      nominatedPct: number
+      swapPct: number
+      effectMW: number                     // effective MW under swap that year
+      interpretation: string
+    }>
+  }
+
+  /** v3.16.3: Bid Configuration Deep Dive — Project Category vs Contract Product, registration lock-in, Default+Alt combos. */
+  bidConfigDeepDive?: {
+    headline: string
+    keyDistinction: string                  // 'Assessed Hybrid' = Project Category; 'Hybrid LTESA' = Contract Product
+    projectCategories: Array<{
+      category: string                      // 'Generation Only' | 'Non-Assessed Hybrid' | 'Assessed Hybrid <4hr' | 'Assessed Hybrid ≥4hr'
+      whatItIs: string
+      genLtesaEligible: boolean
+      hybridLtesaEligible: boolean
+      mcAssessmentNote: string              // What gets assessed under MC for this Project Category
+    }>
+    assessmentPaths: Array<{
+      pathLabel: string                     // e.g. 'Assessed Hybrid → Gen LTESA'
+      mcComponentsAssessed: string          // what WMB / SSC / SSS / NLC consider
+      netLtesaCostMechanic: string          // which product's payment mechanics apply
+      keyInsight: string                    // why this matters
+    }>
+    registrationLockIn: string              // Project category fixed at registration
+    combinationExamples: Array<{
+      scenario: string
+      defaultBid: string                    // e.g. 'Gen LTESA, Default Term 20yr'
+      alternativeBid?: string               // e.g. 'Hybrid LTESA, Alt Term 15yr'
+      strategy: string
+    }>
+  }
+
   /** v3.16.2: How a PPA interplays with LTESA bid parameters — plain-English strategy guide. */
   ppaLeverageDeepDive?: {
     headline: string
@@ -1470,6 +1526,217 @@ export const OPEN_ROUNDS: OpenRound[] = [
       'Exact "eligible contract" reduction formula in the proforma LTESA contract documents (DOCX) — financial-modelling teams should review the proforma Generation LTESA + proforma Hybrid Generation LTESA contracts directly for the precise mechanic and what qualifies (PPA, offtake, toll, etc.).',
       'Timing of the next AEMO IIO Report — refreshes the Gen Info page anchor for MC1 Wholesale Market Benefits "In Service" zeroing. Not specified in current Guidelines.',
     ],
+    bidParamsOptionsDeepDive: {
+      headline: 'The bid variables are structurally the same across Gen LTESA and Hybrid LTESA — same 6 variables, just the price label changes (Fixed Price for Gen, Strike Price for Hybrid). What DIFFERS is the settlement multiplier (100% Gen vs 50% Hybrid PRS), the NotionalQuantity basis (Sent-Out Gen vs Net Exports), and the Project Parameters you must submit. Options are ANNUAL — one option per Swap Period (1 July – 30 June, financial year). Partial exercise is allowed via the Nominated Percentage in the Exercise Notice (e.g. exercise 50% of contracted volume that year). Exact Exercise Notice deadline sits in the proforma LTESA; not in the fact sheets.',
+      bidVariablesComparison: [
+        {
+          variable: 'Fixed Price (Gen LTESA) / Strike Price (Hybrid LTESA)',
+          genLtesaTreatment: 'Fixed Price ($/MWh, nominal, NO CPI escalation). On exercise, swap settles at (Fixed − Floating). Pure pass-through swap.',
+          hybridLtesaTreatment: 'Strike Price ($/MWh, nominal, NO CPI escalation). On exercise, swap settles at 50% × (Strike − Floating). 50% PRS retains operator upside.',
+          notes: 'Per MC1 Briefing: this is the BIGGEST single lever on Net LTESA Cost — push down to lift BCR.',
+        },
+        {
+          variable: 'Repayment Threshold Price (RPT)',
+          genLtesaTreatment: '$/MWh, nominal, NO CPI escalation. In non-exercise periods, if DWFP > RPT, Operator pays SFV 50% × NQ × (DWFP − RPT).',
+          hybridLtesaTreatment: 'Same RPT mechanic; same 50% Repayment percentage. Applies in non-exercise periods and on uncontracted portion of exercised swap.',
+          notes: 'Capped at Historical Net Payments received, AND reduced by "eligible contract" (e.g. PPA) reduction.',
+        },
+        {
+          variable: 'Contracted Percentage',
+          genLtesaTreatment: '% of P50 generation that can be covered by the LTESA. Sets the upper bound on swap notional volume.',
+          hybridLtesaTreatment: 'Same — % of P50 generation covered. Combined with Nominated % in Exercise Notice gives Swap %.',
+          notes: 'Can be bid <100% to reduce Net LTESA Cost (per MC1 Briefing). Useful when stacking with a PPA.',
+        },
+        {
+          variable: 'COD Target Date',
+          genLtesaTreatment: 'Target date for commercial operations. Earlier = more high-spot years captured in Wholesale Market Benefits modelling.',
+          hybridLtesaTreatment: 'Same. Earlier scores higher in MC2 deliverability and MC1 Wholesale Market Benefits.',
+          notes: 'COD before 31 Dec 2029 receives favourable consideration (Eraring-aligned). Beyond 2030 not preferred but credible pathway accepted.',
+        },
+        {
+          variable: 'Excluded Periods',
+          genLtesaTreatment: 'Swap Periods (annual) the Operator commits AT BID TIME not to exercise. Reduces Net LTESA Cost on excluded years.',
+          hybridLtesaTreatment: 'Same. Useful to align with PPA-covered years or high-forecast-spot years where exercising would be counterproductive.',
+          notes: 'Per MC1 Briefing: 1-3 excluded periods signal discipline; too many trigger additionality concerns.',
+        },
+        {
+          variable: 'Contract Term',
+          genLtesaTreatment: 'Default Bid: FIXED at 20 years. Alternative Bid: variable as a Bid Variable.',
+          hybridLtesaTreatment: 'Same — Default 20yr, Alternative variable.',
+          notes: 'Shorter term reduces Net LTESA Cost. Useful as Alternative Bid where PPA term covers the bankable horizon.',
+        },
+      ],
+      projectParametersByAssetType: [
+        {
+          assetType: 'Generation Only',
+          paramsRequired: [
+            'Generation capacity (MW)',
+            'Generation profile (hourly / interval-level)',
+            'Forecast P50 annual generation (MWh)',
+            'Operational guarantee life',
+            'Network Connection Point',
+            'Inverter / connection technology',
+            'Loss factors (MLF + DLF)',
+          ],
+        },
+        {
+          assetType: 'Non-Assessed Hybrid',
+          paramsRequired: [
+            'All Generation-Only parameters above',
+            'Plus storage capacity (MW + MWh) declared for registration completeness, but NOT used in MC1 assessment',
+            'Storage operating profile (treated as own-use; outside LTESA)',
+          ],
+        },
+        {
+          assetType: 'Assessed Hybrid (BESS <4hr)',
+          paramsRequired: [
+            'All Generation-Only parameters above',
+            'Storage capacity (MW + MWh)',
+            'Storage duration at COD',
+            'Round-trip efficiency (RTE)',
+            'Charging strategy (own-gen vs grid)',
+            'AC vs DC coupling',
+            'Joint operational guarantee life',
+            'Combined dispatch profile (gen + storage)',
+          ],
+        },
+        {
+          assetType: 'Assessed Hybrid (BESS ≥4hr, gen-export > storage-export at CP-AC)',
+          paramsRequired: [
+            'All Assessed Hybrid <4hr parameters above',
+            'Confirmation of gen-export > storage-export measured at CP-AC',
+            'Storage duration confirmation at First Option Date',
+            'Sub-meter installation details (mandatory for Hybrid LTESA)',
+            'Aggregated dispatch conformance plan at Connection Point',
+            'Storage Project specifications separately documented (per MC1 Briefing §2.2.1 Path C)',
+          ],
+        },
+      ],
+      optionStructure: {
+        swapPeriod: 'Each Swap Period runs ONE FINANCIAL YEAR — 1 July to 30 June. Confirmed in the Generation LTESA Fact Sheet Table 1: "The fixed duration of the cash settled swap is one financial year. Swap Periods begin on 1 July and end on the following 30 June." Same for Hybrid LTESA.',
+        annualExercise: 'Options are exercised ANNUALLY — one option per Swap Period. The LTES Operator can fully exercise, partially exercise, or NOT exercise the option for each Swap Period independently. Confirmed in Gen LTESA Fact Sheet: "Allows for full exercise, partial exercise or no exercise in a swap period."',
+        partialExercise: 'Partial exercise is via the NOMINATED PERCENTAGE specified in each Exercise Notice. Per Gen LTESA Fact Sheet: "Swap Percentage = Contracted Percentage × Nominated Percentage, where the Contracted Percentage is a bid variable and the Nominated Percentage is specified by LTES Operator within each Exercise Notice." So if Contracted % = 80% and Operator nominates 50%, the effective Swap % for that year is 80% × 50% = 40%. The Nominated % can theoretically be any value 0–100% per Exercise Notice (continuous, not discrete 25/50/75 steps — but confirm in proforma).',
+        exerciseNoticeTiming: 'Exact Exercise Notice deadline is NOT in the public fact sheets — it sits in the proforma LTESA contract document (DOCX). Based on prior NSW LTESA round precedent (T6/T7), Exercise Notices typically must be submitted **3–6 months prior to the Swap Period commencing on 1 July**. So for the FY2026/27 Swap Period (1 Jul 2026 – 30 Jun 2027), the Exercise Notice would likely be due between 1 January 2027 and 1 April 2027. Critically: NOT 6 months before "January 1" — the Swap Period anchors to the **Australian financial year**, not calendar year. Bidders should review the proforma Hybrid Generation LTESA and proforma Generation LTESA directly for the exact timing — this is one of the open questions flagged for due-diligence review.',
+        confidence: 'likely',
+      },
+      partialExerciseExamples: [
+        {
+          scenario: 'Full exercise — Contracted % 100%, Nominated % 100%',
+          contractedPct: 100,
+          nominatedPct: 100,
+          swapPct: 100,
+          effectMW: 500,
+          interpretation: 'Operator covers the full 500 MW under LTESA settlement for this Swap Period. Full hedge protection, no merchant retention.',
+        },
+        {
+          scenario: 'Half exercise — Contracted % 100%, Nominated % 50%',
+          contractedPct: 100,
+          nominatedPct: 50,
+          swapPct: 50,
+          effectMW: 250,
+          interpretation: 'Operator covers 50% of the 500 MW (250 MW) under LTESA for this Swap Period. Remaining 250 MW left to merchant — Operator captures spot upside on the un-exercised half.',
+        },
+        {
+          scenario: 'Quarter exercise — Contracted % 100%, Nominated % 25%',
+          contractedPct: 100,
+          nominatedPct: 25,
+          swapPct: 25,
+          effectMW: 125,
+          interpretation: 'Only 125 MW under LTESA. Most useful in years where Operator forecasts merchant prices well above Fixed/Strike — exercise just enough to maintain Historical Net Payments for the Repayment cap, while keeping merchant upside on most volume.',
+        },
+        {
+          scenario: 'Pre-committed Contracted % 50% (PPA stack), Nominated % 100%',
+          contractedPct: 50,
+          nominatedPct: 100,
+          swapPct: 50,
+          effectMW: 250,
+          interpretation: 'Contracted % bid at 50% (PPA covers other 50% of project). Operator exercises fully — 250 MW under LTESA. The 50% PPA + 50% LTESA = full project hedge. This is the typical PPA-stacking pattern.',
+        },
+        {
+          scenario: 'No exercise — Operator forgoes the option',
+          contractedPct: 100,
+          nominatedPct: 0,
+          swapPct: 0,
+          effectMW: 0,
+          interpretation: 'Operator forgoes LTESA support this year. Fully merchant exposed for the 500 MW. BUT the Repayment mechanic still applies — if Dispatch-Weighted Floating Price > Repayment Threshold Price, Operator pays SFV 50% × NQ × (DWFP − RPT), capped at Historical Net Payments and reduced by eligible contracts (PPA). Useful in known-high-merchant years if the Repayment exposure is acceptable.',
+        },
+      ],
+    },
+    bidConfigDeepDive: {
+      headline: '"Assessed Hybrid" ≠ "Hybrid LTESA". The first is a PROJECT CATEGORY (Table 1 of the Tender Guidelines). The second is a CONTRACT PRODUCT. They\'re related but distinct — and the MC1 assessment treatment depends on the COMBINATION you pick. Your Project category is locked at registration; you can\'t register Generation-Only and bid Hybrid LTESA. BUT if your Project IS registered as an Assessed Hybrid ≥4hr (gen-export > storage-export at CP-AC), you CAN submit a Default Bid on one product + Alternative Bid on the other — same Project, two bids, each assessed independently.',
+      keyDistinction: 'Two layers to think about: (a) PROJECT CATEGORY — what you register the Project as (Generation Only / Non-Assessed Hybrid / Assessed Hybrid <4hr / Assessed Hybrid ≥4hr); this is fixed at registration based on physical configuration. (b) CONTRACT PRODUCT — which LTESA you bid (Generation LTESA / Hybrid Generation LTESA); some Project Categories let you bid either; others are restricted. MC1 assessment treatment is then a function of the COMBINATION — Project Category × Product = different assessment path.',
+      projectCategories: [
+        {
+          category: 'Generation Only',
+          whatItIs: 'Standalone solar, wind, or run-of-river hydro asset with NO co-located storage.',
+          genLtesaEligible: true,
+          hybridLtesaEligible: false,
+          mcAssessmentNote: 'Only the Generation asset is assessed under MC. No storage component exists.',
+        },
+        {
+          category: 'Non-Assessed Hybrid',
+          whatItIs: 'Gen + co-located storage, but the storage is NOT submitted for MC assessment — the Proponent elects to bid as if it\'s gen-only. Storage exists physically but doesn\'t factor into MC1 scoring or LTESA contract.',
+          genLtesaEligible: true,
+          hybridLtesaEligible: false,
+          mcAssessmentNote: 'Only the Generation asset is assessed under MC. Storage is "outside" the LTESA — Proponent retains all storage merchant upside but gets no MC credit for it.',
+        },
+        {
+          category: 'Assessed Hybrid (BESS <4hr)',
+          whatItIs: 'Gen + co-located storage where the Proponent elects to have BOTH gen and storage assessed under MC. Storage duration is less than 4 hours. INELIGIBLE for Hybrid LTESA because it fails the 4hr gate.',
+          genLtesaEligible: true,
+          hybridLtesaEligible: false,
+          mcAssessmentNote: 'BOTH Generation AND Storage assets assessed under MC (WMB, SSC, SSS). Net LTESA Cost uses Generation LTESA payment mechanics.',
+        },
+        {
+          category: 'Assessed Hybrid (BESS ≥4hr, gen-export > storage-export at CP-AC)',
+          whatItIs: 'Gen + co-located storage where (a) storage capacity at First Option Date reflects ≥4 hours, AND (b) generation export capacity exceeds storage export capacity measured at the Connection Point IN AC. This is the ONLY category eligible for the new Hybrid Generation LTESA — and it can ALSO bid the standard Generation LTESA.',
+          genLtesaEligible: true,
+          hybridLtesaEligible: true,
+          mcAssessmentNote: 'BOTH Generation AND Storage assets assessed under MC. Assessment treatment depends on which product is bid — see Assessment Paths below.',
+        },
+      ],
+      assessmentPaths: [
+        {
+          pathLabel: 'Non-Assessed Hybrid → Generation LTESA',
+          mcComponentsAssessed: 'MC1 considers the GENERATION asset only. Wholesale Market Benefits, System Strength Contribution, System Security Services all calculated on gen alone. Storage is invisible to MC1.',
+          netLtesaCostMechanic: 'Generation LTESA payment mechanics: full (Fixed Price − max(0, Floating)) swap on Sent-Out Generation.',
+          keyInsight: 'You give up MC credit for the storage component. Useful if your storage is small / short-duration / sized for own-use and you don\'t want it complicating the bid.',
+        },
+        {
+          pathLabel: 'Assessed Hybrid → Generation LTESA',
+          mcComponentsAssessed: 'MC1 considers BOTH Generation Project AND Associated (Storage) Project for Wholesale Market Benefits, System Strength Contribution, System Security Services. Storage operations contribute to the modelled NSW load-cost reduction.',
+          netLtesaCostMechanic: 'Generation LTESA payment mechanics — Net LTESA Cost calculation is aligned with the standard Generation LTESA (NOT the Hybrid LTESA). So you get hybrid uplift on the benefit side, but the cost side is computed as if you were a pure-gen bid.',
+          keyInsight: 'This is the "hybrid benefit, simple cost" path. Wholesale Market Benefits get the storage uplift (the battery shifts gen into peaks, raising WMB), but Net LTESA Cost is the simpler Gen LTESA mechanic — useful if you want the BCR boost from storage WMB without the 50% PRS complexity.',
+        },
+        {
+          pathLabel: 'Assessed Hybrid → Hybrid Generation LTESA',
+          mcComponentsAssessed: 'MC1 considers BOTH Generation Project AND Storage Project for Wholesale Market Benefits, Net LTESA Cost, System Strength Contribution, System Security Services. Full hybrid integration.',
+          netLtesaCostMechanic: 'Hybrid Generation LTESA payment mechanics: 50% × (Strike − Floating) swap on Sent-Out Net Exports. The 50% PRS lowers the modelled Net LTESA Cost per MWh vs Gen LTESA at the same Strike — typically the BCR-winning path.',
+          keyInsight: 'This is the BCR-maximising path for an Assessed Hybrid ≥4hr. The Hybrid LTESA\'s 50% PRS structurally lowers Net LTESA Cost (the BCR denominator), while WMB still gets the hybrid benefit on the numerator. Most Assessed Hybrids ≥4hr should bid this — but should ALSO submit an Alternative Bid on Gen LTESA to give ASL optionality.',
+        },
+      ],
+      registrationLockIn: 'The Project Category is determined by the Project\'s physical configuration as REGISTERED. You complete the registration form with the Project\'s gen + storage capacity, AC/DC coupling, Connection Point in AC, etc. The category is then inferred from those parameters. You CANNOT register as Generation Only and later submit an Alternative Bid as a Hybrid — the storage doesn\'t physically exist in the registered Project. Conversely, if you register as an Assessed Hybrid ≥4hr, you have flexibility to bid either product. The registration step happens BEFORE bidding, with Registration Closing Date 22 June 2026 (5pm AEST) and Bid Closing Date 6 July 2026 (10am AEST) — so you have a ~2-week window between confirming Project Category and submitting Bids.',
+      combinationExamples: [
+        {
+          scenario: '500 MW solar + 250 MW / 1,000 MWh BESS (4-hr duration). Gen-export 500 MW, storage-export 250 MW at CP-AC. Assessed Hybrid ≥4hr.',
+          defaultBid: 'Hybrid Generation LTESA, Default Bid (Contract Term fixed 20yr), Strike Price $55/MWh, Contracted % 100%, Repayment Threshold Price $130/MWh.',
+          alternativeBid: 'Generation LTESA, Alternative Bid (Contract Term 15yr), Fixed Price $70/MWh, Contracted % 50%, Repayment Threshold Price $140/MWh.',
+          strategy: 'Two Bids on the same Project. Hybrid LTESA Default targets the BCR-winning path (50% PRS lowers Net LTESA Cost). Generation LTESA Alternative gives ASL optionality — if the Hybrid LTESA bid scores marginally on Net LTESA Cost, the Gen LTESA alternative may slot in at a different bid envelope. ASL assesses each Bid independently on merit.',
+        },
+        {
+          scenario: '300 MW wind + 50 MW / 100 MWh BESS (2-hr duration). Storage <4hr.',
+          defaultBid: 'Generation LTESA, Default Bid (Contract Term 20yr), Fixed Price $60/MWh, Contracted % 80%, Repayment Threshold Price $130/MWh.',
+          alternativeBid: undefined,
+          strategy: 'Storage is <4hr, so Hybrid LTESA is OFF THE TABLE. Only Generation LTESA is bid-able. Proponent must choose: bid as Assessed Hybrid (storage gets MC credit on WMB/SSC/SSS but no Hybrid LTESA), or bid as Non-Assessed Hybrid (storage invisible to MC1). Either way, Net LTESA Cost uses Gen LTESA mechanics.',
+        },
+        {
+          scenario: '400 MW solar (no storage). Generation Only.',
+          defaultBid: 'Generation LTESA, Default Bid (Contract Term 20yr), Fixed Price $50/MWh, Contracted % 100%, Repayment Threshold Price $120/MWh.',
+          alternativeBid: 'Generation LTESA, Alternative Bid (Contract Term 15yr), Fixed Price $45/MWh, Contracted % 100%, same RPT.',
+          strategy: 'No storage — no Hybrid LTESA path. Alternative Bid varies Contract Term as the differentiator. Solar-only bids face structural cannibalisation in WMB (low evening output), so the bid economics are tight.',
+        },
+      ],
+    },
     ppaLeverageDeepDive: {
       headline: 'YES — a PPA gives you real leverage to lower bid parameters. The dominant 49% MC1 limb scores on the Benefit-Cost Ratio: Wholesale Market Benefits ÷ Net LTESA Cost. A PPA covering part of your volume means you don\'t need the LTESA to fully de-risk the whole project — you can bid lower Contracted Percentage, lower Fixed/Strike Price, higher Repayment Threshold, more Excluded Periods, or a shorter Contract Term. Each move lowers Net LTESA Cost (the BCR denominator), lifting your MC1 score. But the limits are real — go too far and you bust financier minima, fail additionality, or trigger MC3 deliverability concerns.',
       mechanism: 'MC1\'s dominant scoring metric is the Benefit-Cost Ratio: Wholesale Market Benefits ($NPV reduction in NSW load cost from your project) divided by Net LTESA Cost ($NPV cost to SFV from your bid). Wholesale Market Benefits depend on your project\'s physical impact on NSW prices — your generation profile, network location, technology — NOT on your bid parameters. Net LTESA Cost depends entirely on your Bid Variables. So the path to a high BCR is: hold the numerator constant (delivered by good project fundamentals) and push the denominator DOWN by bidding tighter parameters. A PPA is the enabler — it provides external revenue certainty that lets you defensibly trim the LTESA support level without compromising bankability. Per the gazetted MC1 Briefing §3 ("Characteristics of high performing Bids"): "A low Net LTESA Cost is a key driver for Bid success."',
