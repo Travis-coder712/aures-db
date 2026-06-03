@@ -1131,6 +1131,26 @@ export interface OpenRound {
   /** Explicitly-flagged unresolved questions (what's NOT yet in public docs). */
   openQuestions?: string[]
 
+  /** v3.16.2: How a PPA interplays with LTESA bid parameters — plain-English strategy guide. */
+  ppaLeverageDeepDive?: {
+    headline: string
+    mechanism: string                      // why MC1 BCR rewards a lower Net LTESA Cost
+    leveragePoints: Array<{
+      lever: string                        // e.g. 'Lower Contracted Percentage'
+      howItWorks: string                   // plain-English explanation
+      mc1Impact: string                    // effect on MC1 BCR scoring
+      theLimit: string                     // what stops you going further
+    }>
+    hardLimits: string[]                   // rules-based constraints
+    softLimits: string[]                   // commercial / scoring constraints
+    balancingAct: string                   // the trade-off summary
+    workedScenario: {                      // before/after PPA bid comparison
+      headline: string
+      noPpa: { label: string; contractedPct: number; fixedPrice: number; rpt: number; netLtesaCost: string; rationale: string }
+      withPpa: { label: string; contractedPct: number; fixedPrice: number; rpt: number; netLtesaCost: string; rationale: string }
+    }
+  }
+
   /** v3.16.1: Deep dive on the Hybrid LTESA's 50% price-risk share vs Generation LTESA's full pass-through. */
   riskShareDeepDive?: {
     headline: string
@@ -1450,6 +1470,75 @@ export const OPEN_ROUNDS: OpenRound[] = [
       'Exact "eligible contract" reduction formula in the proforma LTESA contract documents (DOCX) — financial-modelling teams should review the proforma Generation LTESA + proforma Hybrid Generation LTESA contracts directly for the precise mechanic and what qualifies (PPA, offtake, toll, etc.).',
       'Timing of the next AEMO IIO Report — refreshes the Gen Info page anchor for MC1 Wholesale Market Benefits "In Service" zeroing. Not specified in current Guidelines.',
     ],
+    ppaLeverageDeepDive: {
+      headline: 'YES — a PPA gives you real leverage to lower bid parameters. The dominant 49% MC1 limb scores on the Benefit-Cost Ratio: Wholesale Market Benefits ÷ Net LTESA Cost. A PPA covering part of your volume means you don\'t need the LTESA to fully de-risk the whole project — you can bid lower Contracted Percentage, lower Fixed/Strike Price, higher Repayment Threshold, more Excluded Periods, or a shorter Contract Term. Each move lowers Net LTESA Cost (the BCR denominator), lifting your MC1 score. But the limits are real — go too far and you bust financier minima, fail additionality, or trigger MC3 deliverability concerns.',
+      mechanism: 'MC1\'s dominant scoring metric is the Benefit-Cost Ratio: Wholesale Market Benefits ($NPV reduction in NSW load cost from your project) divided by Net LTESA Cost ($NPV cost to SFV from your bid). Wholesale Market Benefits depend on your project\'s physical impact on NSW prices — your generation profile, network location, technology — NOT on your bid parameters. Net LTESA Cost depends entirely on your Bid Variables. So the path to a high BCR is: hold the numerator constant (delivered by good project fundamentals) and push the denominator DOWN by bidding tighter parameters. A PPA is the enabler — it provides external revenue certainty that lets you defensibly trim the LTESA support level without compromising bankability. Per the gazetted MC1 Briefing §3 ("Characteristics of high performing Bids"): "A low Net LTESA Cost is a key driver for Bid success."',
+      leveragePoints: [
+        {
+          lever: '1. Lower Contracted Percentage (the biggest single lever)',
+          howItWorks: 'If your PPA covers 50% of P50 generation at $90/MWh, you don\'t need LTESA cover on that 50%. Bid Contracted Percentage at 50% (or less) — the LTESA only underwrites the un-PPA\'d volume. The MC1 Briefing explicitly states "A Contracted Percentage of less than 100% can reduce Net LTESA Cost, all else being equal." A 250 MW LTESA on a 500 MW project (50% Contracted) is half the support volume of a 500 MW LTESA on the same project — and Wholesale Market Benefits are still credited on the full 500 MW.',
+          mc1Impact: 'Direct cut to Net LTESA Cost denominator → BCR rises ~linearly with Contracted % reduction. Most leverage on MC1 per unit of "give-back".',
+          theLimit: 'A low Contracted % paired with a HIGH Fixed/Strike Price doesn\'t help — Net LTESA Cost is calculated on the whole bid package. Per MC1 Briefing: "A low Contracted Percentage would not always lead to a low Net LTESA Cost, for example if a Proponent bids a low Contracted Percentage but comparatively high Fixed Price/Strike Price." Also, financiers may want enough LTESA cover to support the merchant slice — if the un-PPA\'d portion has no LTESA, it\'s pure spot exposure.',
+        },
+        {
+          lever: '2. Lower Fixed Price (Gen LTESA) or Strike Price (Hybrid)',
+          howItWorks: 'The PPA absorbs the price-risk on its slice of generation. The LTESA only needs to backstop the un-PPA\'d merchant slice. If your PPA at $90 is locked in and you\'re comfortable with $55-60 as the credit-worthy floor on merchant exposure, you can bid Fixed Price at $55 instead of $75. Per MC1 Briefing: "it is expected that the Fixed/Strike price has a greater influence on Net LTESA Cost and MC1 outcomes (all else being equal), compared with the Repayment Threshold Price." Fixed/Strike is the highest-leverage single price.',
+          mc1Impact: 'Strong cut to Net LTESA Cost — lower Fixed/Strike means smaller settlement payments from SFV in low-spot years, which dominates the modelling.',
+          theLimit: 'Financier debt-service ratios set a floor on the credit-worthy revenue mix. If the lender requires (PPA $/MWh × PPA volume) + (LTESA floor × LTESA volume) ≥ debt-service target, then Fixed/Strike has a hard minimum. Also, very low Fixed/Strike may trigger MC3 deliverability concerns (does the project genuinely reach FC?).',
+        },
+        {
+          lever: '3. Higher Repayment Threshold Price',
+          howItWorks: 'RPT is the spot-price level above which the Operator pays SFV 50% of the excess in non-exercise periods. A higher RPT means a wider "free zone" where the Operator keeps merchant upside. With a PPA giving you solid revenue floor on contracted volume, you can be more comfortable bidding higher RPT — you\'re not exposed if you forgo exercising and prices spike. Per MC1 Briefing: low RPT contributes to competitiveness, but "the Fixed/Strike Price has a greater influence" — so RPT is secondary.',
+          mc1Impact: 'Smaller (but real) cut to Net LTESA Cost via reduced expected Repayment cashflows. Less impact than Fixed/Strike or Contracted Percentage but still meaningful.',
+          theLimit: 'A very high RPT may not be credibly competitive — ASL\'s modelling assumes both Perfect Foresight and Always Exercise scenarios; if your RPT is so high that the LTESA rarely triggers Repayment, the value to SFV is minimal and your bid\'s "consumer benefit" looks thin.',
+        },
+        {
+          lever: '4. More Excluded Periods (years where you commit NOT to exercise)',
+          howItWorks: 'Each Excluded Period is a Swap Period the Operator commits at bid time NOT to exercise — i.e. forgoing LTESA payments in that year. Per MC1 Briefing: "Some Bids have been able to exclude at least one Swap Period. This has indicated that a Project will not be reliant on LTESA payments in that period." A PPA covering early years (when merchant prices forecast high) gives you confidence to exclude years 1-3, signalling you don\'t need the LTESA in those years.',
+          mc1Impact: 'Cuts Net LTESA Cost on the excluded years (no payments from SFV). Particularly effective if the excluded years are forecast high-spot — those are exactly the years SFV would otherwise pay nothing (because Spot > Fixed) but you also wouldn\'t be receiving payment. Net effect: signals discipline.',
+          theLimit: 'Excluding TOO MANY periods signals the project doesn\'t genuinely need the LTESA — additionality / value-for-money scrutiny. If you can exclude 10 of 20 years, ASL will ask why you need the LTESA at all. Sweet spot: 1-3 excluded years aligned with the highest-merchant-forecast period.',
+        },
+        {
+          lever: '5. Shorter Contract Term (Alternative Bid only)',
+          howItWorks: 'Under Default Bid the Contract Term is fixed at 20 years. But Alternative Bid lets you bid Contract Term as a Bid Variable. A long-tenor PPA (e.g. 15-year offtake) might make a 15-year LTESA acceptable to financiers — the LTESA and PPA together cover the bankable horizon. Per MC1 Briefing: "Competitive Projects may reduce their Net LTESA Cost by bidding in a way that the Support Period is shorter."',
+          mc1Impact: 'Cuts Net LTESA Cost by removing late-year cashflows from the NPV calc. Particularly effective if late years have unfavourable forecasts.',
+          theLimit: 'If the PPA term is shorter than the asset life, you still need long-tail revenue support. Also, a short LTESA term reduces the "additional capacity to consumers" framing — MC1 BCR may not justify if the term is too truncated.',
+        },
+      ],
+      hardLimits: [
+        'EC10: Cannot hold both LTESA and CISA on the same Project. If you have a CISA in place (or are in active CIS negotiations), you commit NOT to execute the CISA if awarded an LTESA. There\'s no way around this — it\'s a hard rule.',
+        'EC3: Cannot have previously been awarded an LTESA on this Project (carve-outs: terminated prior LTESA by Bid Closing Date; or CWO/SW REZ Access Right holder where the Project has not achieved Finance and Construction Criteria).',
+        'EC10 also catches "financial support in the form of Project capital support, periodic payments or revenue underwriting from State or Commonwealth government" — so a State grant supporting >50% of capacity blocks LTESA eligibility (subject to specific carve-outs for non-concessional CEFC, LGCs, etc).',
+        'Your PPA contract may have offset / change-of-law / revenue-sharing clauses that interact with the LTESA. A typical "lender-of-last-resort" PPA assumes specific revenue treatment — must be audited against the LTESA settlement formula before stacking.',
+      ],
+      softLimits: [
+        'Financier debt-service requirements set a hard floor on the credit-worthy revenue mix. The (PPA × volume) + (LTESA floor × volume) + (any other contracted revenue) must clear lender DSCR targets across the financing tenor. Strip too much LTESA support and FC becomes unbankable.',
+        'MC1 BCR balance: pushing Net LTESA Cost too far down (via low Fixed/Strike + low Contracted % + high RPT + many Excluded Periods) reduces the LTESA hedge value to consumers AND signals to ASL that the project doesn\'t really need the LTESA. The BCR formula rewards LOW cost but the assessment ALSO judges value-for-money holistically.',
+        'MC3 deliverability (17%): your bid must show a credible Financial Close pathway. ASL scrutinises whether your financing strategy is robust — if your bid relies on PPA + thin LTESA, expect questions on PPA execution status, counterparty creditworthiness, and FC certainty.',
+        'Additionality: if the PPA already fully de-risks the project, ASL may question whether the LTESA is genuinely needed (failing MC1 value-for-money). A partial PPA (30-70% of P50) is the sweet spot where the LTESA is clearly value-adding.',
+        'PPA counterparty consent: many PPAs grant the buyer exclusive offtake rights or require notification of revenue-support contracts. Stacking an LTESA on the same volume may need PPA buyer consent or amended PPA terms.',
+      ],
+      balancingAct: 'The PPA + LTESA stack works best when the PPA covers a partial volume (typically 30-70% of P50 generation), and the LTESA bid is calibrated to: (a) deliver a low enough Net LTESA Cost to win MC1 BCR, (b) provide enough hedge value on the un-PPA\'d volume that financiers will fund FC, and (c) maintain enough MC1 Wholesale Market Benefits visibility that ASL sees clear consumer value. There\'s a Goldilocks zone — too aggressive on bid trimming and you lose MC3 (deliverability) + raise additionality flags; too conservative and your Net LTESA Cost is uncompetitive vs PPA-stacked rivals. The most competitive bids in prior LTESA rounds have used a partial PPA (50% typical) + Contracted % matching the un-PPA\'d portion + Fixed/Strike close to the un-PPA\'d merchant floor + Excluded Periods in the highest-forecast-spot years.',
+      workedScenario: {
+        headline: 'Same 500 MW wind farm (1,500 GWh P50). NO PPA bid vs WITH-PPA bid (50% PPA @ $90/MWh, 15-yr term). Strike Prices illustrative.',
+        noPpa: {
+          label: 'NO PPA — Project relies fully on LTESA + merchant',
+          contractedPct: 100,
+          fixedPrice: 75,
+          rpt: 130,
+          netLtesaCost: 'HIGH — full notional × full hedge depth',
+          rationale: 'Without a PPA, financiers demand high LTESA support to reach FC. Operator bids 100% Contracted (full 1,500 GWh under LTESA), Fixed Price $75/MWh (matches their unhedged break-even), RPT $130 (slightly above forecast mid-spot). LTESA delivers full revenue floor — but Net LTESA Cost is high → BCR mediocre → competitive position weaker.',
+        },
+        withPpa: {
+          label: 'WITH 50% PPA at $90/MWh — Project flexes bid parameters',
+          contractedPct: 50,
+          fixedPrice: 55,
+          rpt: 160,
+          netLtesaCost: 'LOW — half notional × shallower hedge',
+          rationale: 'With PPA covering 50% (750 GWh at $90/MWh), Operator bids 50% Contracted (only the un-PPA\'d 750 GWh under LTESA). Fixed Price drops to $55/MWh — the financier floor on the merchant slice (un-PPA\'d) is lower because the PPA $90 underpins the project economics. RPT rises to $160 (Operator confident they won\'t exercise in high-spot years; PPA gives revenue floor regardless). Excluded Periods: years 1-3 (PPA years where forecast spot is high). Net LTESA Cost is MUCH lower → BCR materially better → strong competitive position.',
+        },
+      },
+    },
     riskShareDeepDive: {
       headline: 'How the 50% price-risk share works — and why the Hybrid LTESA isn\'t just a half-strength Generation LTESA.',
       mechanicsExplainer: 'Both LTESA products are option-style: each year the Operator chooses whether to exercise the LTESA option for that Swap Period (1 financial year, 1 July – 30 June). On exercise, the products settle differently. **Generation LTESA** is a full pass-through swap: settlement = NotionalQuantity × (Fixed Price − max(0, Floating Price)). The Operator gives up all spot upside above Fixed and is fully insulated from spot downside below Fixed. **Hybrid Generation LTESA** is a 50:50 price-risk share: settlement = NotionalQuantity × 50% × (Strike Price − Floating Price), where NotionalQuantity is computed on Net Exports (exports minus battery imports) and = 0 in negative-spot intervals. The Operator retains 50% of the spot exposure — winning 50% of the upside when spot > Strike, and absorbing 50% of the downside when spot < Strike.',

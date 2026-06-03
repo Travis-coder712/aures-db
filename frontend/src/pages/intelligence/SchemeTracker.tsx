@@ -3451,6 +3451,11 @@ function OpenRoundCard({ round, isExpanded, onToggle }: { round: OpenRound; isEx
             <RiskShareDeepDive deepDive={round.riskShareDeepDive} />
           )}
 
+          {/* v3.16.2: PPA Leverage Deep Dive — how a PPA flexes LTESA bid parameters */}
+          {round.ppaLeverageDeepDive && (
+            <PpaLeverageDeepDive deepDive={round.ppaLeverageDeepDive} />
+          )}
+
           {round.settlementProsAndCons && (
             <div className="bg-[var(--color-bg)] border border-[var(--color-border)] rounded-lg p-3">
               <h5 className="text-[10px] uppercase tracking-wider text-[var(--color-text)] mb-1">Settlement basis — pros &amp; cons</h5>
@@ -3819,6 +3824,126 @@ function RiskShareDeepDive({ deepDive }: { deepDive: RiskShareDeepDiveData }) {
               <p className="text-[10px] text-[var(--color-text-muted)] leading-relaxed">{w.interpretation}</p>
             </div>
           ))}
+        </div>
+      </div>
+    </div>
+  )
+}
+
+// ============================================================
+// PpaLeverageDeepDive (v3.16.2) — NSW T8 plain-English strategy guide:
+// how a PPA flexes LTESA bid parameters, the MC1 BCR mechanic that
+// rewards lower Net LTESA Cost, the hard + soft limits, and a worked
+// before/after scenario.
+// ============================================================
+
+type PpaLeverageDeepDiveData = NonNullable<OpenRound['ppaLeverageDeepDive']>
+
+function PpaLeverageDeepDive({ deepDive }: { deepDive: PpaLeverageDeepDiveData }) {
+  return (
+    <div className="bg-[var(--color-bg)] border border-blue-500/30 rounded-lg p-3">
+      <h5 className="text-[10px] uppercase tracking-wider text-blue-400 mb-1.5">PPA Leverage Deep Dive — does a PPA let you lower bid parameters?</h5>
+      <p className="text-[11px] text-[var(--color-text)] leading-relaxed mb-3">{deepDive.headline}</p>
+
+      {/* Mechanism */}
+      <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-md p-2.5 mb-3">
+        <div className="text-[10px] uppercase tracking-wider text-[var(--color-text)] mb-1 font-bold">The mechanism — why a low Net LTESA Cost wins MC1</div>
+        <p className="text-[11px] text-[var(--color-text-muted)] leading-relaxed">{deepDive.mechanism}</p>
+      </div>
+
+      {/* Leverage points (5 levers) */}
+      <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-md p-2.5 mb-3">
+        <div className="text-[10px] uppercase tracking-wider text-[var(--color-text)] mb-2 font-bold">5 ways a PPA lets you flex bid parameters</div>
+        <div className="space-y-2.5">
+          {deepDive.leveragePoints.map((p, i) => (
+            <div key={i} className="bg-[var(--color-bg)] border border-[var(--color-border)] rounded p-2.5">
+              <div className="text-[11px] font-bold text-blue-400 mb-1">{p.lever}</div>
+              <div className="space-y-1.5 text-[10px] leading-relaxed">
+                <div>
+                  <span className="text-[var(--color-text)] font-medium">How it works:</span>
+                  <span className="text-[var(--color-text-muted)] ml-1">{p.howItWorks}</span>
+                </div>
+                <div>
+                  <span className="text-emerald-400 font-medium">MC1 impact:</span>
+                  <span className="text-[var(--color-text-muted)] ml-1">{p.mc1Impact}</span>
+                </div>
+                <div>
+                  <span className="text-amber-400 font-medium">The limit:</span>
+                  <span className="text-[var(--color-text-muted)] ml-1">{p.theLimit}</span>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Limits side-by-side */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-2.5 mb-3">
+        <div className="bg-red-500/5 border border-red-500/30 rounded-md p-2.5">
+          <div className="text-[10px] uppercase tracking-wider text-red-400 mb-1.5 font-bold">▸ Hard limits (rules)</div>
+          <ul className="space-y-1">
+            {deepDive.hardLimits.map((l, i) => (
+              <li key={i} className="text-[10px] text-[var(--color-text-muted)] leading-relaxed flex gap-1.5">
+                <span className="text-red-400 shrink-0">✕</span>
+                <span>{l}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div className="bg-amber-500/5 border border-amber-500/30 rounded-md p-2.5">
+          <div className="text-[10px] uppercase tracking-wider text-amber-400 mb-1.5 font-bold">▸ Soft limits (commercial / scoring)</div>
+          <ul className="space-y-1">
+            {deepDive.softLimits.map((l, i) => (
+              <li key={i} className="text-[10px] text-[var(--color-text-muted)] leading-relaxed flex gap-1.5">
+                <span className="text-amber-400 shrink-0">!</span>
+                <span>{l}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+
+      {/* Balancing act */}
+      <div className="bg-emerald-500/5 border border-emerald-500/30 rounded-md p-2.5 mb-3">
+        <div className="text-[10px] uppercase tracking-wider text-emerald-400 mb-1 font-bold">▸ The balancing act — the Goldilocks zone</div>
+        <p className="text-[11px] text-[var(--color-text-muted)] leading-relaxed">{deepDive.balancingAct}</p>
+      </div>
+
+      {/* Worked scenario: before/after */}
+      <div className="bg-[var(--color-bg-card)] border border-[#a855f7]/30 rounded-md p-2.5">
+        <div className="text-[10px] uppercase tracking-wider text-[#a855f7] mb-1 font-bold">▸ Worked example — same project, with vs without PPA</div>
+        <p className="text-[10px] text-[var(--color-text-muted)] mb-2 leading-relaxed">{deepDive.workedScenario.headline}</p>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-2.5">
+          {[
+            { side: deepDive.workedScenario.noPpa, color: '#94a3b8', borderColor: 'border-slate-500/40' },
+            { side: deepDive.workedScenario.withPpa, color: '#22c55e', borderColor: 'border-emerald-500/40' },
+          ].map((entry, idx) => {
+            const s = entry.side
+            return (
+              <div key={idx} className={`bg-[var(--color-bg)] border ${entry.borderColor} rounded p-2.5`}>
+                <div className="text-[11px] font-bold mb-1.5" style={{ color: entry.color }}>{s.label}</div>
+                <div className="grid grid-cols-3 gap-1 mb-2 text-center">
+                  <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded p-1">
+                    <div className="text-[9px] text-[var(--color-text-muted)] uppercase tracking-wider">Contracted %</div>
+                    <div className="text-sm font-mono tabular-nums text-[var(--color-text)] font-bold">{s.contractedPct}%</div>
+                  </div>
+                  <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded p-1">
+                    <div className="text-[9px] text-[var(--color-text-muted)] uppercase tracking-wider">Fixed/Strike</div>
+                    <div className="text-sm font-mono tabular-nums text-[var(--color-text)] font-bold">${s.fixedPrice}</div>
+                  </div>
+                  <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded p-1">
+                    <div className="text-[9px] text-[var(--color-text-muted)] uppercase tracking-wider">RPT</div>
+                    <div className="text-sm font-mono tabular-nums text-[var(--color-text)] font-bold">${s.rpt}</div>
+                  </div>
+                </div>
+                <div className="text-[10px] mb-1.5">
+                  <span className="text-[var(--color-text-muted)]">Net LTESA Cost:</span>{' '}
+                  <span className="font-medium" style={{ color: entry.color }}>{s.netLtesaCost}</span>
+                </div>
+                <p className="text-[10px] text-[var(--color-text-muted)] leading-relaxed">{s.rationale}</p>
+              </div>
+            )
+          })}
         </div>
       </div>
     </div>
