@@ -3484,6 +3484,11 @@ function OpenRoundCard({ round, isExpanded, onToggle }: { round: OpenRound; isEx
             <BidConfigDeepDive deepDive={round.bidConfigDeepDive} />
           )}
 
+          {/* v3.16.7: Proforma Contract Mechanics Deep Dive — Termination/Default/CoC/FM/MDE etc. */}
+          {round.proformaMechanicsDeepDive && (
+            <ProformaMechanicsDeepDive deepDive={round.proformaMechanicsDeepDive} />
+          )}
+
           {/* v3.16.2: PPA Leverage Deep Dive — how a PPA flexes LTESA bid parameters */}
           {round.ppaLeverageDeepDive && (
             <PpaLeverageDeepDive deepDive={round.ppaLeverageDeepDive} />
@@ -4102,6 +4107,118 @@ function BidConfigDeepDive({ deepDive }: { deepDive: BidConfigDeepDiveData }) {
           ))}
         </div>
       </div>
+    </div>
+  )
+}
+
+// ============================================================
+// ProformaMechanicsDeepDive (v3.16.7) — NSW T8 proforma-grade contract
+// mechanics extracted from the gazetted Gen + Hybrid Gen LTESA contracts
+// (18 May 2026 publication). Eleven topic cards covering Termination
+// Payment, Default + Cure, Change of Control, Force Majeure, Market
+// Disruption, Annual Payment Cap, Capacity/Green Products, Shortfall vs
+// Aggregate Rebates, Bid Variable ranges (incl. Min Gen = 75% × P90),
+// Settlement timing, Change of Law. Cross-topic gaps surfaced separately.
+// ============================================================
+
+type ProformaMechanicsDeepDiveData = NonNullable<OpenRound['proformaMechanicsDeepDive']>
+
+function ProformaMechanicsDeepDive({ deepDive }: { deepDive: ProformaMechanicsDeepDiveData }) {
+  const [expandedTopics, setExpandedTopics] = useState<Set<string>>(new Set())
+
+  function toggleTopic(id: string) {
+    setExpandedTopics(prev => {
+      const next = new Set(prev)
+      if (next.has(id)) next.delete(id)
+      else next.add(id)
+      return next
+    })
+  }
+
+  const flagColour = (flag?: 'gap' | 'risk' | 'opportunity'): { bg: string; border: string; text: string; label: string } => {
+    if (flag === 'gap') return { bg: '#f59e0b1a', border: '#f59e0b55', text: '#f59e0b', label: 'PROFORMA GAP' }
+    if (flag === 'risk') return { bg: '#ef44441a', border: '#ef444455', text: '#ef4444', label: 'FINANCIER RISK' }
+    if (flag === 'opportunity') return { bg: '#22c55e1a', border: '#22c55e55', text: '#22c55e', label: 'OPPORTUNITY' }
+    return { bg: 'transparent', border: 'transparent', text: 'transparent', label: '' }
+  }
+
+  return (
+    <div className="bg-[var(--color-bg)] border border-cyan-500/30 rounded-lg p-3">
+      <h5 className="text-[10px] uppercase tracking-wider text-cyan-400 mb-1.5">Proforma Contract Mechanics — financier-diligence deep dive</h5>
+      <p className="text-[11px] text-[var(--color-text)] leading-relaxed mb-3">{deepDive.headline}</p>
+
+      <div className="text-[9px] uppercase tracking-wider text-[var(--color-text-muted)] mb-2 font-bold">▸ Eleven topic cards (click to expand)</div>
+      <div className="space-y-1.5 mb-3">
+        {deepDive.topics.map(t => {
+          const fc = flagColour(t.flag)
+          const isOpen = expandedTopics.has(t.id)
+          return (
+            <div key={t.id} className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-md overflow-hidden">
+              <button
+                onClick={() => toggleTopic(t.id)}
+                className="w-full p-2.5 text-left hover:bg-[var(--color-bg)] transition-colors"
+              >
+                <div className="flex items-start justify-between gap-2 flex-wrap">
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center gap-2 flex-wrap mb-0.5">
+                      <span className="text-[10px] font-bold text-cyan-400">▸ {t.title}</span>
+                      {t.flag && (
+                        <span className="text-[8px] font-bold uppercase px-1.5 py-0.5 rounded-full"
+                          style={{ background: fc.bg, border: `1px solid ${fc.border}`, color: fc.text }}>
+                          {fc.label}
+                        </span>
+                      )}
+                    </div>
+                    <p className="text-[10px] text-[var(--color-text-muted)] leading-relaxed">{t.summary}</p>
+                  </div>
+                  <span className="text-[var(--color-text-muted)] text-[10px] mt-0.5">{isOpen ? '−' : '+'}</span>
+                </div>
+              </button>
+
+              {isOpen && (
+                <div className="border-t border-[var(--color-border)] p-2.5 space-y-2 bg-[var(--color-bg)]">
+                  <div className="text-[9px] text-cyan-400/80 font-mono mb-1">{t.sourceClause}</div>
+
+                  {/* Facts */}
+                  <div className="space-y-1">
+                    {t.facts.map((f, i) => (
+                      <div key={i} className="text-[10px] leading-relaxed">
+                        <span className="font-medium text-[var(--color-text)]">{f.label}: </span>
+                        <span className="text-[var(--color-text-muted)]">{f.detail}</span>
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Implication callout */}
+                  <div className="mt-2 p-2 bg-[var(--color-bg-card)] border border-cyan-500/20 rounded">
+                    <div className="text-[9px] font-bold text-cyan-400 uppercase tracking-wider mb-0.5">Why it matters</div>
+                    <p className="text-[10px] text-[var(--color-text-muted)] leading-relaxed">{t.implication}</p>
+                  </div>
+                </div>
+              )}
+            </div>
+          )
+        })}
+      </div>
+
+      {/* Cross-topic gaps */}
+      {deepDive.crossTopicGaps.length > 0 && (
+        <div className="bg-[var(--color-bg-card)] border border-amber-500/30 rounded-md p-2.5">
+          <div className="text-[10px] uppercase tracking-wider text-amber-400 mb-1.5 font-bold">▸ Cross-topic gaps — things the proforma is silent on or under-specifies</div>
+          <ul className="space-y-1">
+            {deepDive.crossTopicGaps.map((g, i) => (
+              <li key={i} className="text-[10px] text-[var(--color-text-muted)] leading-relaxed flex gap-1.5">
+                <span className="text-amber-400 shrink-0">▸</span>
+                <span>{g}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+
+      <p className="text-[9px] text-[var(--color-text-muted)] italic mt-2">
+        Extracted from gazetted proforma Generation LTESA + Hybrid Generation LTESA, Tender Round 8 publication version, 18 May 2026. Citations refer to clause numbers in each proforma — read alongside the proforma when modelling or negotiating financing. Not legal advice.
+      </p>
     </div>
   )
 }

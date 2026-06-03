@@ -1187,6 +1187,26 @@ export interface OpenRound {
     }>
   }
 
+  /** v3.16.7: Proforma Contract Mechanics — financier-diligence material extracted from the
+   * gazetted proforma Gen LTESA + Hybrid Gen LTESA (18 May 2026 publication). Covers Termination
+   * Payment, Default events + cure periods, Change of Control + Assignment, Force Majeure,
+   * Market Disruption, Annual Payment Cap mechanics, Capacity/Green Products, Shortfall vs
+   * Rebates, Bid Variable ranges, Settlement timing, Change of Law. Each topic is a card
+   * with a quoted clause reference + facts + financier implication. */
+  proformaMechanicsDeepDive?: {
+    headline: string
+    topics: Array<{
+      id: string
+      title: string
+      summary: string                       // 1-2 sentence pull-quote
+      sourceClause: string                  // e.g. 'Gen LTESA cl 21.2-21.3 / Hybrid LTESA cl 22.2-22.3'
+      facts: Array<{ label: string; detail: string }>
+      implication: string                   // What this means for financier diligence / settlement modelling
+      flag?: 'gap' | 'risk' | 'opportunity' // Optional visual highlight
+    }>
+    crossTopicGaps: string[]                // Things the proforma is silent on or under-specifies
+  }
+
   /** v3.16.2: How a PPA interplays with LTESA bid parameters — plain-English strategy guide. */
   ppaLeverageDeepDive?: {
     headline: string
@@ -1365,7 +1385,7 @@ export const OPEN_ROUNDS: OpenRound[] = [
     caveats: [
       'All material facts above are now sourced from gazetted primary documents (Tender Guidelines, MC1 Briefing, Generation LTESA + Hybrid Gen LTESA fact sheets, all 20 May 2026). Prior AURES content drew on trade-press paraphrase + consultation drafts — superseded by this rebuild.',
       'Bid Variables (Fixed/Strike Price, Repayment Threshold Price, Contracted Percentage, COD Target, Excluded Periods, Contract Term) are bid as flat nominal $ values — not per-year schedules. Alternative Bids can vary the Contract Term as a Bid Variable; Default Bid Contract Term is fixed at 20 years.',
-      'The exact definition of "eligible contract" that reduces the Repayment obligation in non-exercise periods is in the proforma Generation LTESA / Hybrid Generation LTESA contract documents (DOCX) — financial-modelling teams should review the proforma directly for the full reduction formula.',
+      'The "Eligible Contract" Repayment-reduction mechanic is now CONFIRMED from the gazetted proforma (Gen LTESA cl 12 / Hybrid LTESA cl 13): Repayment Amount = min(HistoricalNetPayments, (DWFP − RTP) × ContractedPct × (ΣGenTI − ΣLTESATI − ΣECTI)), where ΣECTI is the cumulative Eligible Contract notional quantity for the period. An Eligible Contract is "any contract that has the net effect of reducing the LTES Operator\'s exposure to volatility of the Floating Price" — PPAs, offtake agreements, tolls, hedging contracts all qualify (must be on arm\'s length terms if with a Related Entity). The Eligible Contract\'s hedged volume directly subtracts from the volume that drives Repayment exposure — so a 100% PPA at the marginal interval effectively zeroes out the LTESA Repayment for that interval\'s volume.',
       'The "In Service" status MC1 zeroing trigger anchors to the AEMO "NEM July 2025 Generation Information" page and persists for Generation and LDS Tenders until the next IIO Report is issued — refresh timing not specified.',
       'COD acceleration is "favourable consideration" not a defined numeric bonus — projects with COD before 31 Dec 2029 + credible delivery pathway are "expected to be considered more favourably" per Table 2 (Key Items).',
     ],
@@ -1397,7 +1417,7 @@ export const OPEN_ROUNDS: OpenRound[] = [
         'CWO + SW REZ Access Right holders eligible to bid TR8 even if previously awarded an LTESA (carve-out under EC3, subject to Finance and Construction Criteria not yet achieved).',
       ],
       openItems: [
-        'Exact "eligible contract" definition that reduces the Repayment Estimate — full formula sits in the proforma Generation LTESA / Hybrid Gen LTESA contract documents (DOCX). Financial-modelling teams should review the proforma directly for the precise reduction mechanic and what qualifies as an "eligible contract" (PPA, offtake agreement, etc.).',
+        'CONFIRMED from proforma (Gen LTESA cl 12 / Hybrid LTESA cl 13): Eligible Contract = any contract that "has the net effect of reducing the LTES Operator\'s exposure to volatility of the Floating Price" — PPAs, offtake agreements, tolls, hedging contracts all qualify (must be arm\'s length if with a Related Entity). Repayment Amount = min(HistoricalNetPayments, (DWFP − RTP) × ContractedPct × (ΣGenTI − ΣLTESATI − ΣECTI)) — the Eligible Contract hedged volume directly subtracts from the Repayment-exposed volume.',
         'Timing of the next AEMO IIO Report — the "In Service" status that zeroes MC1 Wholesale Market Benefits anchors to the July 2025 Gen Info page "until the next IIO Report is issued". When the next IIO Report drops, a more recent Gen Info page becomes the anchor.',
       ],
     },
@@ -1455,7 +1475,7 @@ export const OPEN_ROUNDS: OpenRound[] = [
     },
     ppaScenarios: {
       headline: 'How an existing or future PPA interacts with the LTESA Strike/Fixed Price and Repayment Threshold Price — the gazetted mechanic NOW DEFINITIVE: PPA revenue does NOT enter the swap settlement during exercise; the LTESA settles purely on the spot/Floating Price reference. PPAs DO reduce the Repayment obligation in non-exercise periods via the "eligible contract" reduction.',
-      norQuestion: 'Definitive mechanic per gazetted MC1 Briefing Appendix A and the fact sheets: settlement on exercise = Σ NotionalQuantity × [50% if Hybrid, else 100%] × (Fixed/Strike − Floating). The Floating Price is the NSW spot price (with $0/MWh floor for Gen LTESA; NQ=0 when negative for Hybrid). PPA revenue does NOT feed into this swap calc. Repayment in non-exercise periods = min(HistoricalNetPayments, Σ 50% × NQ × (Floating − Repayment Threshold Price)) — and this Repayment is reduced where the LTES Operator has entered an "eligible contract" (the only place PPA directly enters the cash flow). The exact eligible-contract reduction formula sits in the proforma LTESA contract document.',
+      norQuestion: 'Definitive mechanic per gazetted MC1 Briefing Appendix A + the fact sheets + the proforma contracts (cl 12 Gen / cl 13 Hybrid): settlement on exercise = Σ NotionalQuantity × [50% if Hybrid, else 100%] × (Fixed/Strike − Floating). The Floating Price has a $0/MWh floor for Gen LTESA — DOUBLE-FLOORED in the proforma at both the Dispatch-Weighted Floating Price level AND the per-interval Trading Interval Amounts level (cl 1571 + DWFP definition). NQ=0 when negative for Hybrid. PPA revenue does NOT feed into this swap calc. Repayment in non-exercise periods = min(HistoricalNetPayments, (DWFP − RTP) × ContractedPct × (ΣGenTI − ΣLTESATI − ΣECTI)) — where ΣECTI is the cumulative Eligible Contract notional volume. PPA enters here via the "Eligible Contract" reduction (cl 12.3): any contract that has the net effect of reducing the Operator\'s exposure to Floating Price volatility qualifies — its hedged volume directly subtracts from the Repayment-exposed volume.',
       branches: [
         {
           label: 'CONFIRMED MECHANIC — gazetted T8 Tender Guidelines + MC1 Briefing + proforma LTESAs',
@@ -1480,7 +1500,7 @@ export const OPEN_ROUNDS: OpenRound[] = [
               ppaVsRRP: 'PPA > Spot',
               ppaVsCap: 'PPA > RPT',
               outcome: 'In a non-exercised Swap Period (Operator chose not to exercise OR exercise was partial), Repayment = min(HistoricalNetPayments, Σ 50% × NQ × (Floating − RPT)). The Floating Price drives the repayment, NOT the PPA price. Repayment is REDUCED where the Operator has entered an "eligible contract" — so the PPA materially reduces the Repayment burden in this year. The Operator keeps the PPA premium AND has reduced LTESA repayment.',
-              trap: 'The "eligible contract" reduction formula sits in the proforma LTESA contract — review directly. The Repayment cap (Historical Net Payments) means cumulative Repayment can\'t exceed cumulative receipts, so the worst-case is "give back what you got". The "eligible contract" reduction further softens this.',
+              trap: 'Eligible Contract reduction is now CONFIRMED in proforma (Gen cl 12 / Hybrid cl 13): any contract reducing Floating Price exposure (PPA, offtake, toll, hedge) qualifies — its hedged volume directly subtracts from the Repayment-exposed quantity. The Repayment cap (Historical Net Payments = cumulative net flow SFV→Operator since contract start) means cumulative Repayment can\'t exceed cumulative receipts — worst-case is "give back what you got, no more".',
             },
             {
               name: '4. PPA strike below spot, project doesn\'t exercise LTESA option, spot > RPT',
@@ -1523,11 +1543,10 @@ export const OPEN_ROUNDS: OpenRound[] = [
       ],
     },
     openQuestions: [
-      'Exact "eligible contract" reduction formula in the proforma LTESA contract documents (DOCX) — financial-modelling teams should review the proforma Generation LTESA + proforma Hybrid Generation LTESA contracts directly for the precise mechanic and what qualifies (PPA, offtake, toll, etc.).',
       'Timing of the next AEMO IIO Report — refreshes the Gen Info page anchor for MC1 Wholesale Market Benefits "In Service" zeroing. Not specified in current Guidelines.',
     ],
     bidParamsOptionsDeepDive: {
-      headline: 'The bid variables are structurally the same across Gen LTESA and Hybrid LTESA — same 6 variables, just the price label changes (Fixed Price for Gen, Strike Price for Hybrid). What DIFFERS is the settlement multiplier (100% Gen vs 50% Hybrid PRS), the NotionalQuantity basis (Sent-Out Gen vs Net Exports), and the Project Parameters you must submit. Options are ANNUAL — one option per Swap Period (1 July – 30 June, financial year). Partial exercise is allowed via the Nominated Percentage in the Exercise Notice (e.g. exercise 50% of contracted volume that year). Exact Exercise Notice deadline sits in the proforma LTESA; not in the fact sheets.',
+      headline: 'The bid variables are structurally the same across Gen LTESA and Hybrid LTESA — same 6 variables, just the price label changes (Fixed Price for Gen, Strike Price for Hybrid). What DIFFERS is the settlement multiplier (100% Gen vs 50% Hybrid PRS), the NotionalQuantity basis (Sent-Out Gen vs Net Exports), and the Project Parameters you must submit. Options are ANNUAL — one option per Swap Period (1 July – 30 June, financial year). Partial exercise allowed via Nominated Percentage in the Exercise Notice — DISCRETE 25/50/75/100% only (gazetted proforma). Exercise Notice window: 12 months → 6 months before Swap Start Date (gazetted Gen LTESA cl 10.2(b) / Hybrid LTESA cl 11.2(b)).',
       bidVariablesComparison: [
         {
           variable: 'Fixed Price (Gen LTESA) / Strike Price (Hybrid LTESA)',
@@ -1615,7 +1634,7 @@ export const OPEN_ROUNDS: OpenRound[] = [
       optionStructure: {
         swapPeriod: 'Each Swap Period runs ONE FINANCIAL YEAR — 1 July to 30 June. Confirmed in the Generation LTESA Fact Sheet Table 1: "The fixed duration of the cash settled swap is one financial year. Swap Periods begin on 1 July and end on the following 30 June." Same for Hybrid LTESA.',
         annualExercise: 'Options are exercised ANNUALLY — one option per Swap Period. The LTES Operator can fully exercise, partially exercise, or NOT exercise the option for each Swap Period independently. Confirmed in Gen LTESA Fact Sheet: "Allows for full exercise, partial exercise or no exercise in a swap period."',
-        partialExercise: 'Partial exercise is via the NOMINATED PERCENTAGE specified in each Exercise Notice. Per Gen LTESA Fact Sheet: "Swap Percentage = Contracted Percentage × Nominated Percentage, where the Contracted Percentage is a bid variable and the Nominated Percentage is specified by LTES Operator within each Exercise Notice." So if Contracted % = 80% and Operator nominates 50%, the effective Swap % for that year is 80% × 50% = 40%. The Nominated % can theoretically be any value 0–100% per Exercise Notice (continuous, not discrete 25/50/75 steps — but confirm in proforma).',
+        partialExercise: 'Partial exercise is via the NOMINATED PERCENTAGE specified in each Exercise Notice. Per Gen LTESA Fact Sheet: "Swap Percentage = Contracted Percentage × Nominated Percentage, where the Contracted Percentage is a bid variable and the Nominated Percentage is specified by LTES Operator within each Exercise Notice." **CONFIRMED FROM PROFORMA (Gen LTESA Schedule 1 Exercise Notice template + Hybrid LTESA cl 11.3): Nominated Percentage is DISCRETE — only 25%, 50%, 75%, or 100% is permitted. NOT continuous.** The proforma explicitly invalidates "a Nominated Percentage in respect of a Swap that is not 25%, 50%, 75% or 100%". So if Contracted % = 80% and Operator nominates 50%, the effective Swap % for that year is 80% × 50% = 40%. (A prior version of this content speculated continuous 0–100% values pending proforma confirmation; this has now been corrected.)',
         exerciseNoticeTiming: 'CONFIRMED from the gazetted proforma contracts (Generation LTESA clause 10.2(b) / Hybrid Generation LTESA clause 11.2(b), 18 May 2026 publication version): the Exercise Notice may be delivered during a **6-month window opening 12 months before the Swap Start Date and closing on the last Business Day at least 6 months before the Swap Start Date**. Swap Start Date is always 1 July. So for the FY2027/28 Swap Period (1 Jul 2027 → 30 Jun 2028), the Exercise Notice window runs **1 Jul 2026 → ~31 Dec 2026** (last Business Day at least 6 months before 1 Jul 2027). Three critical details from the proforma: (1) **Irrevocable once delivered** — the Operator cannot withdraw or alter an Exercise Notice once SFV receives it; (2) **Auto-exercise on Swap Start Date** — once a valid Exercise Notice is in SFV\'s hands, the Option is deemed exercised on 1 July without further action from either party (no second confirmation); (3) **First Option Date special case** (Gen clause 2.2 / Hybrid clause 2.2) — if Commercial Operations Date lands less than 6 months before a 1 July (or within 12 months after a 1 July), the First Option Date may be delayed up to 18 months. The Operator can request an earlier "Requested Date" but must lodge the request at least 8 months prior and deliver the Exercise Notice at least 6 months prior. **Practical planning**: bidders need to fix annual exercise decisions by **31 December of the prior calendar year** at the latest — leaving roughly 6 months of forward-curve visibility into the upcoming financial year.',
         confidence: 'confirmed',
       },
@@ -1653,12 +1672,12 @@ export const OPEN_ROUNDS: OpenRound[] = [
           interpretation: 'Contracted % bid at 50% (PPA covers other 50% of project). Operator exercises fully — 250 MW under LTESA. The 50% PPA + 50% LTESA = full project hedge. This is the typical PPA-stacking pattern.',
         },
         {
-          scenario: 'No exercise — Operator forgoes the option',
+          scenario: 'No exercise — Operator does not deliver an Exercise Notice',
           contractedPct: 100,
           nominatedPct: 0,
           swapPct: 0,
           effectMW: 0,
-          interpretation: 'Operator forgoes LTESA support this year. Fully merchant exposed for the 500 MW. BUT the Repayment mechanic still applies — if Dispatch-Weighted Floating Price > Repayment Threshold Price, Operator pays SFV 50% × NQ × (DWFP − RPT), capped at Historical Net Payments and reduced by eligible contracts (PPA). Useful in known-high-merchant years if the Repayment exposure is acceptable.',
+          interpretation: 'Operator simply does not deliver an Exercise Notice within the 12→6 month window before Swap Start. The Option lapses for that Swap Period. (Per proforma, Nominated % itself must be 25/50/75/100 — there is no "Exercise Notice with 0%". Non-exercise = no notice at all.) Fully merchant exposed for the 500 MW that year. BUT the Repayment mechanic still applies — if DWFP > RPT, Operator pays SFV (DWFP − RPT) × ContractedPct × (ΣGenTI − ΣECTI), capped at Historical Net Payments and reduced by Eligible Contracts (PPA hedged volume). Useful in known-high-merchant years if the Repayment exposure is acceptable.',
         },
       ],
     },
@@ -1735,6 +1754,200 @@ export const OPEN_ROUNDS: OpenRound[] = [
           alternativeBid: 'Generation LTESA, Alternative Bid (Contract Term 15yr), Fixed Price $45/MWh, Contracted % 100%, same RPT.',
           strategy: 'No storage — no Hybrid LTESA path. Alternative Bid varies Contract Term as the differentiator. Solar-only bids face structural cannibalisation in WMB (low evening output), so the bid economics are tight.',
         },
+      ],
+    },
+    proformaMechanicsDeepDive: {
+      headline: 'Eleven proforma-grade contract mechanics extracted directly from the gazetted Generation LTESA + Hybrid Generation LTESA (Tender Round 8 publication version, 18 May 2026). These are the clauses that drive financier diligence (Termination Payment formula, Default events, Change of Control, Force Majeure protections) and the settlement-modelling details that the public fact sheets gloss over (Annual Payment Cap mechanics, Capacity/Green Product treatment, P90 Minimum Generation, settlement timing, Default Interest). Surfaced here for due-diligence reference — read each card alongside the cited clause when modelling or negotiating financing.',
+      topics: [
+        {
+          id: 'termination-payment',
+          title: 'Termination Payment Formula',
+          summary: 'On Operator default the Termination Payment = Fixed Component (NPV of remaining minimum-generation × Fixed Price discounted at 7% p.a.) PLUS a Variable Component (lesser of 15% × Fixed Component, OR 90% × Historical Net Payments). 7% is a fixed accounting discount — NOT a market-implied curve.',
+          sourceClause: 'Gen LTESA Reference Details Items 11–12; cl 21.4(a)–(b). Hybrid LTESA equivalent.',
+          facts: [
+            { label: 'Fixed Component', detail: 'NPV of Aggregate Reference Amounts (remaining Minimum Generation × Fixed/Strike Price across the residual Term), discounted at 7% per annum.' },
+            { label: 'Variable Component', detail: 'min(15% × Fixed Termination Amount, 90% × Historical Net Payments received). Anti-windfall cap.' },
+            { label: 'HNP cap interaction', detail: 'Caps the Variable Component at 90% of the cumulative net SFV→Operator flow — Operator cannot owe back more than they ever received (with a 10% retention).' },
+            { label: 'Invoice → payment timing', detail: '60 BD to invoice post-termination, then 30 BD to pay. Default Interest (RBA Cash Rate + 2%) starts day 60.' },
+            { label: 'Termination triggers', detail: 'See "Events of Default" topic — auto-termination also applies if the PDA (Project Documents Agreement) is terminated.' },
+          ],
+          implication: 'For financiers: the 7% fixed discount means in a high-rate environment the Termination Payment is LOWER than mark-to-market replacement cost (under-protective); in a low-rate environment HIGHER. The 90% HNP cap protects the Operator from giving back more than received but also caps lender recovery via collateral assignment. Financial models should layer Termination Payment scenarios against base-case forward curves and stress for triggering events.',
+          flag: 'risk',
+        },
+        {
+          id: 'events-of-default',
+          title: 'Events of Default + Cure Periods',
+          summary: 'Eight Operator default categories with cure periods from 5 BD (Insolvency) to 60 BD (misrepresentation). Two SFV default categories (payment + Insolvency, each 20 BD cure). Cross-default with the PDA — if the PDA is terminated, this LTESA is too.',
+          sourceClause: 'Gen LTESA cl 21.2–21.3. Hybrid LTESA cl 22.2–22.3.',
+          facts: [
+            { label: 'Operator default — payment', detail: '20 BD cure window.' },
+            { label: 'Operator default — material breach', detail: '20 BD notice + 40 BD cure (60 BD total).' },
+            { label: 'Operator default — misrepresentation', detail: '60 BD cure. 2-year notification window for tender misrep.' },
+            { label: 'Operator default — Insolvency', detail: '5 BD cure (the strictest trigger).' },
+            { label: 'Operator default — Minimum Generation miss', detail: '3 consecutive Swap Periods of underperformance after cure plan failure.' },
+            { label: 'Operator default — Major Casualty reinstatement', detail: 'Major Casualty Event + failure to reinstate within 5 years.' },
+            { label: 'Operator default — Change in Law', detail: 'CoL rendering EII Act repayment impossible.' },
+            { label: 'SFV default — payment / Insolvency', detail: '20 BD cure for either trigger.' },
+            { label: 'Cross-default', detail: 'PDA termination auto-terminates this LTESA (cl 21.1).' },
+          ],
+          implication: 'For financiers: the 5-BD Insolvency cure is unusually tight — any payment hiccup at Operator HoldCo could cascade quickly. Material-breach 60 BD total + tender-misrep 60 BD allow time for remediation but "material" is subjective and could be litigated. The PDA cross-default is the silent risk — financiers must look through to the PDA termination triggers, which are out-of-scope of this proforma but materially set the floor on default exposure.',
+          flag: 'risk',
+        },
+        {
+          id: 'change-of-control',
+          title: 'Change of Control + Assignment + Financier Step-in',
+          summary: 'Operator can assign with SFV consent "not to be unreasonably withheld" — consent test is objective (legal/financial/technical capability + no material adverse effect on Project or SFV risk). Change of Control follows the Corporations Act s.50AA test (>50% voting / financial-operating control). Financier step-in via tripartite deed is contemplated.',
+          sourceClause: 'Gen LTESA cl 22.1–22.4. Hybrid LTESA cl 22.1–22.4 (identical).',
+          facts: [
+            { label: 'Operator assignment', detail: 'SFV consent required, not to be unreasonably withheld. Assignee must have legal + financial + technical capability and not materially increase SFV risk.' },
+            { label: 'CoC threshold', detail: 'Acquisition of >50% voting control OR capacity to determine financial/operating policies (Corporations Act s.50AA adapted).' },
+            { label: 'CoC consent standard', detail: 'Same "reasonably withheld" standard. Tested on capability preservation, no material conflict of interest, no material adverse effect.' },
+            { label: 'SFV assignment', detail: 'SFV may assign WITHOUT Operator consent to: a Government Entity, a replacement EII Act scheme financial vehicle, or AusEnergy Services (provided credit rating ≥ Moody\'s Aa3 / prior rating).' },
+            { label: 'Financier security', detail: 'Cl 22.1(d) explicitly permits Operator to grant Security Interest to lenders.' },
+            { label: 'Financier step-in', detail: 'Tripartite deed (cl 22.4) contemplated to formalise lender security arrangements. Step-in via Security enforcement follows the assignment consent standard.' },
+            { label: 'Refinancing', detail: 'Not explicitly carved out. New lender security permitted, but if refinancing triggers CoC the consent test applies.' },
+          ],
+          implication: 'For financiers: this is a relatively financier-friendly clause. Objective consent test ("reasonably withheld" with named criteria) + explicit Security Interest permission + tripartite-deed framework is consistent with the project-finance norm. The gap: no pre-approved assignee categories for the Operator side (unlike SFV, which can hand off to Government / Aa3 entities without consent). A buyer with comparable capability should clear consent quickly; a buyer with a thinner balance sheet may face delays. Refinancing-triggered CoC should be flagged in financier documentation.',
+          flag: 'opportunity',
+        },
+        {
+          id: 'force-majeure',
+          title: 'Force Majeure + Major Casualty Event',
+          summary: 'FM definition includes Network curtailment/congestion and Major Casualty Event. ≥50% capacity-impact threshold for First Option Date relief (Hybrid: applies to either Generation OR Storage Project independently). Major Casualty triggers a 6-month Operator election to reinstate; 5-year reinstatement deadline before default.',
+          sourceClause: 'Gen LTESA cl 17.1–17.6 + cl 21.3(g). Hybrid LTESA cl 18.1–18.6 + cl 22.3(g).',
+          facts: [
+            { label: 'FM definition (inclusive)', detail: 'Event after Signing Date not within reasonable control of Operator, that Operator could not have avoided through reasonable care. Includes Major Casualty Event + Network curtailment/congestion.' },
+            { label: 'FM exclusions', detail: 'Lack of funds, insufficient spares, normal wear/tear, strikes affecting only Operator, weather (UNLESS extreme — storms, floods, hurricanes, cyclones, tornados, ice).' },
+            { label: 'Relief mechanic', detail: 'Suspension of Operator obligations during FM (cl 17.4 / 18.4). Extension of time for deadline compliance (cl 17.6 / 18.6). Operator must notify within 5 BD and mitigate.' },
+            { label: '≥50% capacity threshold (Hybrid)', detail: 'If FM impacts ≥50% of power export capability of EITHER the Generation OR the Storage Project, SFV considers (acting reasonably) whether the impact is likely remediable by Swap Start Date.' },
+            { label: 'Major Casualty Event', detail: '6-month Operator election to reinstate or lose contract. 5-year reinstatement window before default trigger (cl 21.3(g) / 22.3(g)).' },
+            { label: 'No max FM duration in FM clause itself', detail: 'Long-term FM can continue but cascades via Major Casualty mechanic if physical reinstatement is needed.' },
+          ],
+          implication: 'For financiers: FM coverage is reasonable but the "Network curtailment/congestion" inclusion is unusually friendly — this captures TUOS-event style risks that often sit on the Operator under other contracts. The Hybrid ≥50% threshold applied separately to Generation vs Storage is a project-finance positive (Storage outage doesn\'t trigger FM for the Generation half unless Storage also exceeds 50% impact). The 5-year reinstatement deadline is a long fuse but is meaningful for insurance-recovery scenarios on a Major Casualty.',
+        },
+        {
+          id: 'market-disruption',
+          title: 'Market Disruption Events — backup pricing gap',
+          summary: 'Five MDE triggers (AEMO Spot Price failure, discontinuance, material methodology change, Regional Reference Node change, NEM discontinuance). Relief = 20 BD good-faith negotiation, then Independent Expert within 60 BD. NO hard backup-pricing methodology is specified — pure expert discretion.',
+          sourceClause: 'Gen LTESA cl 20.1–20.5. Hybrid LTESA equivalent.',
+          facts: [
+            { label: 'MDE trigger 1', detail: 'Failure / delay of AEMO in publishing Spot Price at the Regional Reference Node.' },
+            { label: 'MDE trigger 2', detail: 'Temporary or permanent discontinuance of Spot Price.' },
+            { label: 'MDE trigger 3', detail: 'Material change in Spot Price calculation method.' },
+            { label: 'MDE trigger 4', detail: 'Change in Regional Reference Node location or abolishment.' },
+            { label: 'MDE trigger 5', detail: 'Discontinuance of the NEM.' },
+            { label: 'MDE exclusions', detail: 'Changes to market floor/cap, cumulative threshold, administered price cap, prudential requirements, spot market suspension with central dispatch/pricing continuing.' },
+            { label: 'Relief mechanic', detail: '20 BD good-faith negotiation to amend agreement to put parties in same commercial position. If no agreement, Independent Expert determination within 60 BD.' },
+            { label: 'Backup pricing methodology', detail: 'NOT SPECIFIED in the proforma. Pure expert discretion. No "last known Floating Price for X days" or similar fallback.' },
+          ],
+          implication: 'For settlement modelling: model an "MDE scenario" with cash-flow suspension for ~80 BD (20 negotiate + 60 expert) and resumption at expert-determined pricing. Cannot pre-bake a robust expected value. For financiers: the backup-pricing gap is a real risk in any scenario where NEM market design is materially reformed (e.g. capacity market, two-sided market, post-2030 RRN reorganisation). Bidders may want to negotiate a side-letter backup methodology or extract one as a condition precedent.',
+          flag: 'gap',
+        },
+        {
+          id: 'annual-payment-cap',
+          title: 'Annual Payment Cap (P50 forecast LOCKED at tender)',
+          summary: 'Cap formula: Fixed/Strike Price × Contracted % × 100% × forecast P50 annual generation. P50 is locked at tender submission and does NOT re-forecast each Swap Period. Overperformance vs P50 is absorbed by Operator (no upside through the cap); excess monthly amounts roll forward as Excess Amount credits within a Swap Period.',
+          sourceClause: 'Gen LTESA Reference Details Item 9 + Schedule 2 Item 3.4. Hybrid LTESA Reference Details Item 14.',
+          facts: [
+            { label: 'Cap formula — Gen', detail: 'Fixed Price × Contracted % × 100% × forecast P50 annual generation submitted by Operator with tender.' },
+            { label: 'Cap formula — Hybrid', detail: '50% × Contracted % × 100% × forecast P50 annual generation of Generation Project, submitted by Operator with tender.' },
+            { label: 'P50 lock', detail: 'Locked at tender submission. NOT re-forecasted annually. If actual generation drifts above P50 over the term, Operator absorbs the cap effect; if below, Minimum Generation (75% × P90 — see Bid Variable Ranges) is the floor.' },
+            { label: 'Excess Amount mechanic', detail: 'Within a Swap Period, if cumulative Net Monthly Amounts exceed the cap, SFV\'s payment obligation is capped but the excess rolls forward as an Excess Amount credit (offsets against subsequent within-period billing).' },
+            { label: 'Period structure', detail: 'Cap applies per Swap Period (each financial year). No cross-period reset of the Excess Amount — each Swap Period resets to the same cap formula × that year\'s exercise.' },
+          ],
+          implication: 'For settlement modelling: an Operator overperforming P50 + exercising at full Nominated % will hit the Annual Payment Cap and forgo the marginal swap settlement on the overperformance — this caps the LTESA upside even in deep contango scenarios. P50 lock means the Operator carries the IRA risk (resource forecast accuracy) for the full 20-year term. For financiers: P50 forecast methodology + lock-in is a structural revenue assumption that needs IRA peer review.',
+          flag: 'risk',
+        },
+        {
+          id: 'capacity-green-products',
+          title: 'Capacity Products + Green Products + LGCs',
+          summary: 'SFV nominates a Notional Price for both Capacity and Green Products; Operator delivers within 20 BD post-Billing-Period. LGCs are deemed-nominated as a Green Product at signing — SFV gets them. FCAS revenue is EXPLICITLY EXCLUDED from Capacity Products — retained by the Operator.',
+          sourceClause: 'Gen LTESA cl 4.2 + cl 5.2 + Items 4.4–4.6 + 5.5–5.7. Hybrid LTESA equivalent.',
+          facts: [
+            { label: 'Notional Price', detail: 'SFV nominates a $/unit Notional Price for both Capacity and Green Products to reflect market value. SFV-set, can vary over time.' },
+            { label: 'Capacity Products definition', detail: '"Any right, entitlement, credit attributable to capacity/availability of Project, excluding Green Products / Ancillary Services."' },
+            { label: 'Green Products definition', detail: 'Nominated product created under a Green Product Scheme established by a Government Authority (LGCs / RECs / state-scheme equivalents).' },
+            { label: 'LGCs', detail: 'SFV is deemed to nominate LGCs as Nominated Green Product at signing (cl 1.5.4(c)). Operator must register + transfer LGCs into SFV\'s name by the delivery deadline.' },
+            { label: 'FCAS', detail: 'EXPLICITLY EXCLUDED from Capacity Products definition. No separate FCAS-transfer mechanism. Operator retains all ancillary services revenue.' },
+            { label: 'Delivery deadline', detail: '20 BD after end of each Billing Period.' },
+            { label: 'Cash-equivalent fallback', detail: 'If Operator cannot transfer within deadline, holds product on trust + sells via SFV\'s agent + remits proceeds net of external costs within 10 BD (Items 4.5–4.6).' },
+            { label: 'Dispute resolution', detail: 'Cash valuation disputes resolved by Independent Expert within 20 BD.' },
+          ],
+          implication: 'For settlement modelling: model LGC revenue as ZERO retained by the project (transferred to SFV). FCAS revenue stays with the Operator — material upside for storage-heavy projects. The Notional Price for Capacity Products is SFV-discretionary — could understate market value in tight years (Operator captures the gap as a cost) or overstate in loose years (Operator captures the gap as a benefit). For Hybrid LTESA bidders specifically, the FCAS retention is meaningful — battery FCAS revenue (Reg + Contingency) can be $5–15/MWh on average across the day, all kept by the Operator.',
+          flag: 'opportunity',
+        },
+        {
+          id: 'shortfall-vs-rebates',
+          title: 'Shortfall Sums (Gen) vs Aggregate Rebates (Hybrid) — different penalty structures',
+          summary: 'Gen LTESA: Shortfall Sum = Shortfall Electricity × (Volume-Weighted Floating − Avg LGC − Fixed Price), capped at 15% of Minimum Generation shortfall. Hybrid LTESA: Aggregate Rebate = Shortfall Sum + Availability Rebate + Storage Capacity Rebate, capped at the Net Swap Payment for that period. The Hybrid structure CONSOLIDATES three penalty components into one cap to prevent double-charging.',
+          sourceClause: 'Gen LTESA Schedule 2 Item 6.4. Hybrid LTESA Schedule 2 Item 6.1.',
+          facts: [
+            { label: 'Gen — Shortfall Sum formula', detail: 'SSSP = Shortfall Electricity × (Volume-Weighted Avg Floating Price − Avg LGC price − Fixed Price). Cap = 15% of Minimum Generation shortfall.' },
+            { label: 'Gen — when it applies', detail: 'When actual Sent Out Generation < Minimum Generation in a Swap Period.' },
+            { label: 'Hybrid — Aggregate Rebate', detail: 'AggRSP = Shortfall Sum + Availability Rebate + Storage Capacity Rebate. Cap = Net Swap Payment for the Swap Period (sum of SFV payments minus Operator payments to SFV that period).' },
+            { label: 'Why Hybrid is different', detail: 'Hybrid settlement is net-exports-based, creating multiple performance metrics (Generation Project capacity, Storage availability, net export volume). Single cap prevents stacking — Operator never owes more in rebates than they received that year.' },
+            { label: 'Timing', detail: 'Operator proposes amount within 20 BD post-Swap; SFV agrees/disputes within 40 BD; if disputed, Independent Expert within 60 BD.' },
+          ],
+          implication: 'For settlement modelling: under Hybrid, the Net Swap Payment cap on Aggregate Rebate is structurally protective — even a triple-failure year (Shortfall + Availability + Storage Capacity all underperforming) cannot drag Aggregate Rebate above the LTESA cash received that year. Gen LTESA has a 15% hard cap on the Min Gen shortfall portion only — more brittle. Bidders modelling downside scenarios should value the Hybrid Aggregate Rebate cap as a real risk-shaving feature.',
+          flag: 'opportunity',
+        },
+        {
+          id: 'bid-variable-ranges',
+          title: 'Bid Variable permitted ranges — including the Minimum Generation = 75% × P90 rule',
+          summary: 'Strike/Fixed Price has no proforma cap or floor (pure bid). Nominated Percentage is DISCRETE 25/50/75/100. Contract Term hard max 20 years (from First Option Date), no proforma floor. NEW DETAIL: Minimum Generation = 75% × forecast P90 annual generation, locked at tender. Excluded Periods are bid by anniversary reference (e.g. "First Option Date", "3rd anniversary"), not as counts.',
+          sourceClause: 'Gen LTESA Reference Details Items 1, 4, 5; cl 10.1(b). Hybrid LTESA identical.',
+          facts: [
+            { label: 'Strike / Fixed Price', detail: 'No cap or floor in proforma. Pure bid variable.' },
+            { label: 'Contracted Percentage', detail: 'Bid at tender; once locked, partial exercise via Nominated % in 25/50/75/100 steps.' },
+            { label: 'Repayment Threshold Price', detail: 'No constraint relative to Strike/Fixed Price in proforma. Triggers Repayment if Dispatch Weighted Floating Price > RPT in a Financial Year.' },
+            { label: 'Contract Term', detail: 'Hard maximum 20 years from First Option Date. No stated minimum (implicit: ≥1 year Swap Period). Shorter bids preferred per MC4 assessment.' },
+            { label: 'Minimum Generation — NEW', detail: '75% of forecast P90 annual generation. P90 forecast submitted by Operator with tender; locked. Below Min Gen triggers Shortfall Sum (Gen) or Shortfall component of Aggregate Rebate (Hybrid).' },
+            { label: 'Excluded Periods', detail: 'Bid as specific Swap Start Dates referenced by anniversary milestones from the First Option Date (e.g. "First Option Date" or "3rd anniversary"). Cannot bid custom exclusions beyond the proforma-listed reference dates.' },
+          ],
+          implication: 'For bidders: the Minimum Generation = 75% × P90 rule is a real downside-exposure mechanism that the public fact sheets don\'t surface. P90 is already a 90%-confidence-level resource forecast — 75% of that is a meaningful floor that triggers Shortfall regardless of merchant conditions. Bidders should pressure-test the IRA underpinning P90 (peer review the wind/solar resource model). The Strike-vs-RPT relationship has NO proforma constraint — meaning bidders can theoretically bid RPT very close to or even below Strike (which would maximise Operator upside but tank Net LTESA Cost in scoring).',
+        },
+        {
+          id: 'settlement-timing',
+          title: 'Settlement + Default Interest mechanics',
+          summary: 'Monthly Billing Period. 20 BD to invoice + 20 BD to pay = 40 BD settlement lag. Default Interest = RBA Cash Rate + 2% accrues daily on overdue amounts (Termination Payment interest deferred 60 BD post-termination). Disputed Amount: 10 BD dispute window + Expert resolution if escalated.',
+          sourceClause: 'Gen LTESA cl 13–14. Hybrid LTESA cl 13–14 (identical).',
+          facts: [
+            { label: 'Billing Period', detail: 'Each calendar month within a Swap Period.' },
+            { label: 'Invoice deadline', detail: '20 BD after Billing Period end.' },
+            { label: 'Payment deadline', detail: '20 BD after Invoice receipt.' },
+            { label: 'Total settlement lag', detail: '~40 BD from Billing Period end to cash settlement.' },
+            { label: 'Disputed Amount', detail: '10 BD dispute window from invoice. Resolution within 10 BD of dispute notice, then 10 BD to pay resolved amount.' },
+            { label: 'Default Interest', detail: 'RBA Cash Rate + 2% accrues daily from due date. Exception: Termination Payment interest deferred 60 BD (starts day 60 post-termination, not from invoice date).' },
+            { label: 'Termination Payment timing', detail: '60 BD to invoice post-termination + 30 BD to pay.' },
+            { label: 'Capacity/Green Product disputes', detail: 'Separate Independent Expert process — 20 BD per Items 4.6 / 5.7. Not netted into monthly invoicing.' },
+          ],
+          implication: 'For working-capital modelling: build a ~40 BD settlement lag into cash-flow forecasts. For financiers: Default Interest at RBA + 2% is below typical project-finance margin (the Operator effectively earns a sub-margin rate by deferring payment to SFV — minor) but the 60 BD Termination Payment interest deferral is unusual and worth flagging.',
+        },
+        {
+          id: 'change-of-law',
+          title: 'Change of Law + Relevant Cost Change — narrow protection',
+          summary: 'Change of Law clause is narrow. General CoL post-Tender: best-endeavours negotiation, NO Fixed Price adjustment available. Relevant Cost Change >$500k (indexed): 50/50 pass-through to SFV via good-faith negotiation, Expert if no agreement within 60 BD. Carbon policy NOT specifically addressed.',
+          sourceClause: 'Gen LTESA cl 19.1–19.5 + cl 16 (GST). Hybrid LTESA cl 19–20 (mirrors Gen).',
+          facts: [
+            { label: 'General Change of Law', detail: 'Cl 19.1: post-Tender CoL that prevents/materially interferes with agreement triggers best-endeavours mitigation + good-faith negotiation. CRUCIALLY: excludes Fixed Price adjustment.' },
+            { label: 'Relevant Cost Change threshold', detail: '$500k (indexed) of Operator cost increase per CoL event.' },
+            { label: 'RCC mechanic', detail: 'Parties negotiate to pass through 50% × Contracted % of cost delta to SFV. If no agreement within 60 BD, Independent Expert determines using Cost Change Principles.' },
+            { label: 'EII Act repeal', detail: 'Triggers Operator default (cl 21.3(h)) only if SFV cannot recover contribution determinations — not auto-termination.' },
+            { label: 'GST', detail: 'All consideration GST-exclusive unless stated. GST-eligible supplies subject to gross-up. Green/Capacity Products treated as GST-inclusive (Notional Price includes GST).' },
+            { label: 'Carbon policy', detail: 'NO explicit reference to carbon price (ETS, carbon floor). Operator bears carbon policy risk unless it qualifies as Relevant Cost Change >$500k.' },
+            { label: 'Excluded scope', detail: 'Planning, environmental, and native title changes EXPLICITLY excluded from "Change in Law" (cl 1.13(a)(i)).' },
+          ],
+          implication: 'For bidders: the carbon-policy gap is the standout risk. If a federal Safeguard Mechanism extension, carbon floor, or ETS reform hits, the Operator absorbs it unless cost-impact >$500k AND it qualifies as a Relevant Cost Change. Bid pricing should bake in a carbon-policy premium. Planning/environmental/native title exclusion means biodiversity offset scheme changes (e.g. NSW BAM reforms) do NOT trigger price adjustment — Operator carries this.',
+          flag: 'gap',
+        },
+      ],
+      crossTopicGaps: [
+        'Annual Payment Cap P50 forecast methodology — proforma silent on independent verification or audit rights. Lender IRA peer review needed.',
+        'MDE backup-pricing methodology — pure Expert discretion, no last-known-price fallback. Material risk in any scenario of NEM redesign.',
+        'Termination Payment uses fixed 7% discount rate — under-protective in high-rate environments, over-protective in low-rate. Not mark-to-market.',
+        'Carbon-policy treatment — no explicit reference. Operator bears carbon risk unless it crosses the $500k Relevant Cost Change threshold AND qualifies.',
+        'Excluded scope of "Change in Law" includes planning, environmental, native title — biodiversity offset scheme changes specifically not covered.',
+        'No pre-approved assignee categories for Operator (unlike SFV side). Buyer with thin balance sheet may face consent delays even though the standard is "reasonably withheld".',
       ],
     },
     ppaLeverageDeepDive: {
