@@ -54,9 +54,9 @@ function fmtMW(mw: number): string {
 // Component
 // ============================================================
 
-const TABS = ['overview', 'boardroom', 'tracker', 'watchlist', 'esg', 'cis-success', 'cis-briefing', 'open-rounds', 'timeline', 'nsw-wind'] as const
+const TABS = ['overview', 'boardroom', 'tracker', 'watchlist', 'esg', 'cis-success', 'cis-briefing', 'open-rounds-cis', 'open-rounds-ltesa', 'timeline', 'nsw-wind'] as const
 type Tab = typeof TABS[number]
-const TAB_LABELS: Record<Tab, string> = { overview: 'Overview', boardroom: 'Boardroom', tracker: 'Milestone Tracker', watchlist: 'Key Projects', esg: 'ESG Agreement Proxy', 'cis-success': 'CIS Success', 'cis-briefing': 'CIS Briefing', 'open-rounds': 'Open Rounds', timeline: 'CIS/LTESA Timeline', 'nsw-wind': 'NSW Wind' }
+const TAB_LABELS: Record<Tab, string> = { overview: 'Overview', boardroom: 'Boardroom', tracker: 'Milestone Tracker', watchlist: 'Key Projects', esg: 'ESG Agreement Proxy', 'cis-success': 'CIS Success', 'cis-briefing': 'CIS Briefing', 'open-rounds-cis': 'Open Rounds CIS', 'open-rounds-ltesa': 'Open Rounds LTESA', timeline: 'CIS/LTESA Timeline', 'nsw-wind': 'NSW Wind' }
 
 export default function SchemeTracker() {
   const [activeTab, setActiveTab] = useState<Tab>('overview')
@@ -606,7 +606,8 @@ export default function SchemeTracker() {
         <div className="p-8 text-center text-sm text-[var(--color-text-muted)]">Loading scheme data…</div>
       )}
       {activeTab === 'cis-briefing' && <CISBriefingTab />}
-      {activeTab === 'open-rounds' && <OpenRoundsTab />}
+      {activeTab === 'open-rounds-cis' && <OpenRoundsTab schemeFocus="CIS" />}
+      {activeTab === 'open-rounds-ltesa' && <OpenRoundsTab schemeFocus="LTESA" />}
       {activeTab === 'timeline' && (
         <SchemeTimelineTab />
       )}
@@ -3133,15 +3134,25 @@ function daysUntil(iso?: string): number | null {
   return Math.round((target.getTime() - now.getTime()) / (1000 * 60 * 60 * 24))
 }
 
-function OpenRoundsTab() {
-  const [expanded, setExpanded] = useState<Set<string>>(() => new Set(OPEN_ROUNDS.filter(r => r.status === 'open').map(r => r.id)))
-  const [schemeFilter, setSchemeFilter] = useState<'all' | 'CIS' | 'LTESA'>('all')
+// v3.16.5: split into per-scheme tabs. OpenRoundsTab now takes a `schemeFocus` prop
+// — 'CIS' renders federal CIS rounds only; 'LTESA' renders NSW LTESA rounds only.
+// The cross-scheme filter buttons are removed (the tab itself is the filter).
+function OpenRoundsTab({ schemeFocus }: { schemeFocus: 'CIS' | 'LTESA' }) {
+  const scopedRounds = OPEN_ROUNDS.filter(r => r.scheme === schemeFocus)
 
-  const filtered = schemeFilter === 'all' ? OPEN_ROUNDS : OPEN_ROUNDS.filter(r => r.scheme === schemeFilter)
+  const [expanded, setExpanded] = useState<Set<string>>(() => new Set(scopedRounds.filter(r => r.status === 'open').map(r => r.id)))
 
-  const openCount = OPEN_ROUNDS.filter(r => r.status === 'open').length
+  const openCount = scopedRounds.filter(r => r.status === 'open').length
   // Generation capacity = open rounds whose product is generation/hybrid (exclude pure storage power)
-  const openGenMW = OPEN_ROUNDS.filter(r => r.status === 'open' && r.targetMW && r.configFavoured !== 'storage').reduce((s, r) => s + (r.targetMW || 0), 0)
+  const openGenMW = scopedRounds.filter(r => r.status === 'open' && r.targetMW && r.configFavoured !== 'storage').reduce((s, r) => s + (r.targetMW || 0), 0)
+  const openStorageMW = scopedRounds.filter(r => r.status === 'open' && r.targetMW && r.configFavoured === 'storage').reduce((s, r) => s + (r.targetMW || 0), 0)
+
+  // Next bid deadline for this scheme
+  const nextDeadline = scopedRounds
+    .filter(r => r.bidsClose && /^\d{4}-\d{2}-\d{2}$/.test(r.bidsClose))
+    .filter(r => (daysUntil(r.bidsClose) ?? -1) >= 0)
+    .slice()
+    .sort((a, b) => (a.bidsClose! < b.bidsClose! ? -1 : 1))[0]
 
   function toggle(id: string) {
     setExpanded(prev => {
@@ -3152,38 +3163,41 @@ function OpenRoundsTab() {
     })
   }
 
-  // Timeline strip: open + evaluating rounds with an ISO bids-close date, sorted
-  const stripRounds = OPEN_ROUNDS
+  // Timeline strip: open + evaluating rounds in this scheme with an ISO bids-close date, sorted
+  const stripRounds = scopedRounds
     .filter(r => r.bidsClose && /^\d{4}-\d{2}-\d{2}$/.test(r.bidsClose))
     .slice()
     .sort((a, b) => (a.bidsClose! < b.bidsClose! ? -1 : 1))
+
+  const schemeColour = schemeFocus === 'CIS' ? '#f59e0b' : '#8b5cf6'
+  const schemeLong = schemeFocus === 'CIS' ? 'Federal Capacity Investment Scheme (CIS)' : 'NSW Electricity Infrastructure Roadmap (LTESA)'
+  const schemeShort = schemeFocus === 'CIS' ? 'Federal CIS' : 'NSW LTESA'
 
   return (
     <div className="space-y-6">
       {/* Header */}
       <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl p-5">
         <div className="flex items-center justify-between gap-2 mb-2 flex-wrap">
-          <h3 className="text-sm font-bold text-[var(--color-text)]">Current State of Play — Open Rounds</h3>
-          <div className="flex gap-1">
-            {(['all', 'CIS', 'LTESA'] as const).map(f => (
-              <button
-                key={f}
-                onClick={() => setSchemeFilter(f)}
-                className={`text-[10px] px-2.5 py-1 rounded-lg border transition-colors ${
-                  schemeFilter === f
-                    ? 'bg-[var(--color-primary)] text-white border-transparent'
-                    : 'bg-[var(--color-bg)] border-[var(--color-border)] text-[var(--color-text-muted)] hover:text-[var(--color-text)]'
-                }`}
-              >
-                {f === 'all' ? 'All' : f === 'CIS' ? 'Federal CIS' : 'NSW LTESA'}
-              </button>
-            ))}
-          </div>
+          <h3 className="text-sm font-bold text-[var(--color-text)]">
+            Current State of Play — Open Rounds <span style={{ color: schemeColour }}>({schemeShort})</span>
+          </h3>
         </div>
         <p className="text-xs text-[var(--color-text-muted)] leading-relaxed">
-          Live and imminent renewable-procurement tenders across the two programs — the federal <span className="text-[#f59e0b] font-medium">Capacity Investment Scheme (CIS)</span> and
-          the <span className="text-[#8b5cf6] font-medium">NSW Electricity Infrastructure Roadmap (LTESA)</span>. Each open round carries an analyst read of what changed
-          versus the prior round, the merit-criteria split, and a strategy cheat-sheet. <span className="text-[var(--color-text)]">Both schemes run a "Tender 8" and "Tender 9" concurrently in 2026 — they are entirely different programs.</span> Always check the scheme badge.
+          {schemeFocus === 'CIS' ? (
+            <>
+              Live and imminent renewable-procurement tenders run by the <span className="font-medium" style={{ color: schemeColour }}>{schemeLong}</span> — administered nationally
+              by DCCEEW + ASL (AusEnergy Services Ltd). Each open round carries an analyst read of what changed versus the prior round, the merit-criteria split,
+              and a strategy cheat-sheet. <span className="text-[var(--color-text)]">Federal CIS T8/T9/T10 run concurrently with NSW LTESA T8/T9 in 2026 — they are entirely different programs.</span>
+              {' '}See the <span className="text-[#8b5cf6] font-medium">Open Rounds LTESA</span> tab for the state-level scheme.
+            </>
+          ) : (
+            <>
+              Live and imminent procurement under the <span className="font-medium" style={{ color: schemeColour }}>{schemeLong}</span> — administered by AEMO Services on
+              behalf of the NSW Government via Long-Term Energy Service Agreements (LTESAs). Each open round carries an analyst read of what changed versus the prior round, the merit-criteria split,
+              and a strategy cheat-sheet. <span className="text-[var(--color-text)]">NSW LTESA T8/T9 run concurrently with federal CIS T8/T9/T10 in 2026 — they are entirely different programs.</span>
+              {' '}See the <span className="text-[#f59e0b] font-medium">Open Rounds CIS</span> tab for the federal scheme.
+            </>
+          )}
         </p>
 
         {/* Headline stats */}
@@ -3195,17 +3209,23 @@ function OpenRoundsTab() {
           <div className="bg-[var(--color-bg)] border border-[var(--color-border)] rounded-xl p-3 text-center">
             <div className="text-2xl font-bold text-[var(--color-text)]">{fmtMW(openGenMW)}</div>
             <div className="text-[10px] text-[var(--color-text-muted)]">Generation Open</div>
-            <div className="text-[9px] text-[var(--color-text-muted)]">+ ~12 GWh storage (NSW T9)</div>
+            {schemeFocus === 'LTESA' && (
+              <div className="text-[9px] text-[var(--color-text-muted)]">+ ~12 GWh storage (T9)</div>
+            )}
           </div>
           <div className="bg-[var(--color-bg)] border border-[var(--color-border)] rounded-xl p-3 text-center">
-            <div className="text-2xl font-bold text-[#f59e0b]">2</div>
-            <div className="text-[10px] text-[var(--color-text-muted)]">Schemes Active</div>
-            <div className="text-[9px] text-[var(--color-text-muted)]">Federal CIS + NSW LTESA</div>
+            <div className="text-2xl font-bold" style={{ color: schemeColour }}>{scopedRounds.length}</div>
+            <div className="text-[10px] text-[var(--color-text-muted)]">Tracked Rounds</div>
+            <div className="text-[9px] text-[var(--color-text-muted)]">{openCount} open · {scopedRounds.length - openCount} other</div>
           </div>
           <div className="bg-[var(--color-bg)] border border-[var(--color-border)] rounded-xl p-3 text-center">
-            <div className="text-2xl font-bold text-[#8b5cf6]">Jul 2026</div>
-            <div className="text-[10px] text-[var(--color-text-muted)]">Next Bid Deadlines</div>
-            <div className="text-[9px] text-[var(--color-text-muted)]">NSW ~6 Jul · CIS T9 20 Jul</div>
+            <div className="text-2xl font-bold" style={{ color: schemeColour }}>
+              {nextDeadline ? fmtOpenDate(nextDeadline.bidsClose).replace(/ \d{4}/, '') : '—'}
+            </div>
+            <div className="text-[10px] text-[var(--color-text-muted)]">Next Bid Deadline</div>
+            <div className="text-[9px] text-[var(--color-text-muted)]">
+              {nextDeadline ? `${nextDeadline.roundCode} · ${daysUntil(nextDeadline.bidsClose)}d` : (openStorageMW > 0 ? 'see calendar' : 'none scheduled')}
+            </div>
           </div>
         </div>
       </div>
@@ -3213,12 +3233,12 @@ function OpenRoundsTab() {
       {/* Forward-looking timeline strip */}
       {stripRounds.length > 0 && (
         <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl p-5">
-          <h4 className="text-xs font-bold text-[var(--color-text)] mb-1">Bid-Close Calendar</h4>
+          <h4 className="text-xs font-bold text-[var(--color-text)] mb-1">Bid-Close Calendar — {schemeShort}</h4>
           <p className="text-[10px] text-[var(--color-text-muted)] mb-4">Countdown to each open round&apos;s bid deadline. Closest first.</p>
           <div className="space-y-2.5">
             {stripRounds.map(r => {
               const days = daysUntil(r.bidsClose)
-              const schemeColour = openRoundSchemeColour(r.scheme)
+              const rowColour = openRoundSchemeColour(r.scheme)
               const statusCfg = OPEN_STATUS_CONFIG[r.status]
               return (
                 <div key={r.id} className="flex items-center gap-3">
@@ -3235,7 +3255,7 @@ function OpenRoundsTab() {
                     onClick={() => { setExpanded(prev => new Set(prev).add(r.id)); document.getElementById(`open-round-${r.id}`)?.scrollIntoView({ behavior: 'smooth', block: 'start' }) }}
                     className="flex-1 min-w-0 text-left"
                   >
-                    <span className="text-[9px] font-bold px-1.5 py-0.5 rounded-full mr-2" style={{ backgroundColor: `${schemeColour}20`, color: schemeColour }}>
+                    <span className="text-[9px] font-bold px-1.5 py-0.5 rounded-full mr-2" style={{ backgroundColor: `${rowColour}20`, color: rowColour }}>
                       {r.roundCode}
                     </span>
                     <span className="text-xs text-[var(--color-text)] hover:underline">{r.techFocus}</span>
@@ -3249,7 +3269,7 @@ function OpenRoundsTab() {
       )}
 
       {/* Per-round cards */}
-      {filtered.map(round => (
+      {scopedRounds.map(round => (
         <OpenRoundCard
           key={round.id}
           round={round}
@@ -3259,8 +3279,11 @@ function OpenRoundsTab() {
       ))}
 
       <p className="text-[11px] text-[var(--color-text-muted)] italic">
-        Open-round intelligence compiled late May 2026 from DCCEEW + ASL (AusEnergy Services Ltd) tender pages and market briefings, law-firm notes (HSF Kramer, Hamilton Locke, Dentons), and trade press (pv magazine, pv-tech, energy-storage.news).
-        Tender Guidelines for the NSW rounds were not yet gazetted at time of writing — weightings shown reflect the market briefings. Verify against the official tender packs before bidding.
+        {schemeFocus === 'CIS' ? (
+          <>Federal CIS round intelligence compiled late May 2026 from DCCEEW + ASL (AusEnergy Services Ltd) tender pages and market briefings, law-firm notes (HSF Kramer, Hamilton Locke, Dentons), and trade press (pv magazine, pv-tech, energy-storage.news). Verify against the official tender packs before bidding.</>
+        ) : (
+          <>NSW LTESA round intelligence compiled late May 2026 from AEMO Services tender pages, gazetted Tender Guidelines + MC1 Market Briefing Note (20 May 2026), Generation + Hybrid Generation LTESA Fact Sheets (15 May 2026), proforma contracts, law-firm notes (HSF Kramer, Hamilton Locke, Dentons), and trade press. Verify against the official tender packs before bidding.</>
+        )}
       </p>
     </div>
   )
@@ -3927,8 +3950,8 @@ function BidParamsOptionsDeepDive({ deepDive }: { deepDive: BidParamsOptionsDeep
             <div className="text-[10px] font-bold text-emerald-400 mb-0.5">▸ Partial exercise via Nominated % (CONFIRMED — Gen LTESA Fact Sheet Table 1)</div>
             <p className="text-[10px] text-[var(--color-text-muted)] leading-relaxed">{deepDive.optionStructure.partialExercise}</p>
           </div>
-          <div className="bg-[var(--color-bg)] border border-amber-500/30 rounded p-2">
-            <div className="text-[10px] font-bold text-amber-400 mb-0.5">▸ Exercise Notice timing (PROFORMA-DEPENDENT)</div>
+          <div className="bg-[var(--color-bg)] border border-emerald-500/30 rounded p-2">
+            <div className="text-[10px] font-bold text-emerald-400 mb-0.5">▸ Exercise Notice timing (CONFIRMED — Gen LTESA cl 10.2(b) / Hybrid LTESA cl 11.2(b))</div>
             <p className="text-[10px] text-[var(--color-text-muted)] leading-relaxed">{deepDive.optionStructure.exerciseNoticeTiming}</p>
           </div>
         </div>
@@ -7654,7 +7677,7 @@ Key risks to the 6.3 GW total. Junction Rivers' lost SW REZ access raises real q
               <li><strong className="text-cyan-300">COD acceleration bonus:</strong> "Projects demonstrating commercial operations dates before 31 December 2029 are expected to receive favourable consideration" — directly addresses the Eraring (Aug 2027) coal-exit timing. Flows through both MC5 (earlier revenue → higher BCR) and MC2 (Pathway to commercial operation — 11%).</li>
             </ul>
             <div className="text-[10px] text-[var(--color-text-muted)] italic mt-2">
-              <strong className="text-[var(--color-text)]">Net effect:</strong> a wind-only or solar-only bid that doesn't meet the Hybrid-LTESA eligibility forgoes the hybrid uplift on MC5's benefit-cost numerator — weakening its standing on a meaningful portion of the dominant financial-value weighting (45% in the T6 precedent; reported at 49% for the now-open Tender 8). Combined with the explicit time-shift bias, that materially advantages Pottinger (wind+BESS), Bookham (wind+BESS) and Hargraves (wind+solar+BESS) vs Liverpool Range Stage 2 and The Plains (wind-alone) in our cohort. See the <strong className="text-[var(--color-text)]">Open Rounds</strong> tab for the live Tender 8 detail.
+              <strong className="text-[var(--color-text)]">Net effect:</strong> a wind-only or solar-only bid that doesn't meet the Hybrid-LTESA eligibility forgoes the hybrid uplift on MC5's benefit-cost numerator — weakening its standing on a meaningful portion of the dominant financial-value weighting (45% in the T6 precedent; reported at 49% for the now-open Tender 8). Combined with the explicit time-shift bias, that materially advantages Pottinger (wind+BESS), Bookham (wind+BESS) and Hargraves (wind+solar+BESS) vs Liverpool Range Stage 2 and The Plains (wind-alone) in our cohort. See the <strong className="text-[var(--color-text)]">Open Rounds LTESA</strong> tab for the live Tender 8 detail.
             </div>
             <div className="text-[10px] text-[var(--color-text-muted)] italic mt-1">
               Sources: <a href="https://asl.org.au/-/media/services/files/tender-round-6/260130-nsw-roadmap-tender-round-6-market-briefing-note.pdf" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:underline">ASL T6 market briefing PDF</a> (weightings table), <a href="https://www.pv-tech.org/australias-new-south-wales-launches-biggest-renewable-energy-tender-in-the-states-history/" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:underline">PV Tech</a>, <a href="https://reneweconomy.com.au/nsw-launches-its-biggest-ever-renewable-tender-to-keep-lights-on-and-push-down-prices/" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:underline">RenewEconomy</a>, <a href="https://www.energy.nsw.gov.au/nsw-plans-and-progress/major-state-projects/electricity-infrastructure-roadmap/asl-tenders" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:underline">NSW Climate &amp; Energy Action</a>.
