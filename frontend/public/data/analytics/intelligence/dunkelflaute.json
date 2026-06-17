@@ -75,9 +75,9 @@
     {
       "state": "NSW",
       "year": 2026,
-      "wind_cf_pct": 28.34,
-      "solar_cf_pct": 21.96,
-      "combined_cf_pct": 24.35,
+      "wind_cf_pct": 28.41,
+      "solar_cf_pct": 20.4,
+      "combined_cf_pct": 23.4,
       "wind_mw": 2807.1,
       "solar_mw": 4684.8
     },
@@ -156,9 +156,9 @@
     {
       "state": "QLD",
       "year": 2026,
-      "wind_cf_pct": 33.06,
-      "solar_cf_pct": 23.31,
-      "combined_cf_pct": 25.65,
+      "wind_cf_pct": 33.55,
+      "solar_cf_pct": 22.28,
+      "combined_cf_pct": 24.99,
       "wind_mw": 1009.4,
       "solar_mw": 3190.3
     },
@@ -237,9 +237,9 @@
     {
       "state": "SA",
       "year": 2026,
-      "wind_cf_pct": 25.23,
-      "solar_cf_pct": 17.18,
-      "combined_cf_pct": 24.17,
+      "wind_cf_pct": 25.35,
+      "solar_cf_pct": 16.14,
+      "combined_cf_pct": 24.14,
       "wind_mw": 2795.1,
       "solar_mw": 422.0
     },
@@ -310,8 +310,8 @@
     {
       "state": "TAS",
       "year": 2026,
-      "wind_cf_pct": 32.2,
-      "combined_cf_pct": 32.2,
+      "wind_cf_pct": 31.48,
+      "combined_cf_pct": 31.48,
       "wind_mw": 561.0,
       "solar_mw": 0
     },
@@ -390,9 +390,9 @@
     {
       "state": "VIC",
       "year": 2026,
-      "wind_cf_pct": 24.75,
-      "solar_cf_pct": 23.55,
-      "combined_cf_pct": 24.5,
+      "wind_cf_pct": 25.33,
+      "solar_cf_pct": 20.99,
+      "combined_cf_pct": 24.43,
       "wind_mw": 4515.8,
       "solar_mw": 1186.0
     }
@@ -480,13 +480,13 @@
       "solar_mw": 3190.3
     },
     {
-      "state": "VIC",
-      "year": 2020,
-      "wind_cf_pct": 26.46,
-      "solar_cf_pct": 12.22,
-      "combined_cf_pct": 23.51,
-      "wind_mw": 3239.7,
-      "solar_mw": 847.0
+      "state": "NSW",
+      "year": 2026,
+      "wind_cf_pct": 28.41,
+      "solar_cf_pct": 20.4,
+      "combined_cf_pct": 23.4,
+      "wind_mw": 2807.1,
+      "solar_mw": 4684.8
     }
   ],
   "bess_coverage": {
@@ -5618,5 +5618,5 @@
       "solar_mw": 1186.0
     }
   ],
-  "exported_at": "2026-05-26T07:37:05.410822"
+  "exported_at": "2026-06-17T16:19:29.497199"
 }

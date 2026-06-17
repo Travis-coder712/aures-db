@@ -3,14 +3,14 @@
   "technology": "pumped_hydro",
   "benchmarks": {
     "capacity_factor": {
-      "q1": 12.28,
-      "median": 22.4,
-      "q3": 31.21
+      "q1": 12.95,
+      "median": 24.96,
+      "q3": 32.07
     },
     "revenue_per_mw": {
-      "q1": 33168.0,
-      "median": 51634.0,
-      "q3": 80605.0
+      "q1": 37697.0,
+      "median": 70314.0,
+      "q3": 106097.0
     }
   }
 }

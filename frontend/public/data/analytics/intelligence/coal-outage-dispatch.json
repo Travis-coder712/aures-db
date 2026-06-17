@@ -5,12 +5,12 @@
     "total_units": 44,
     "total_duids": 44,
     "stations_with_dispatch_data": 15,
-    "outage_hours": 78958.3,
-    "displaced_hours": 4639.5,
-    "dispatched_hours": 413077.9,
-    "outage_mwh_missed": 36385475.0,
-    "displaced_mwh_missed": 2358717.4,
-    "dispatched_mwh": 147110391.5,
+    "outage_hours": 80101.3,
+    "displaced_hours": 4642.2,
+    "dispatched_hours": 418268.2,
+    "outage_mwh_missed": 36885294.1,
+    "displaced_mwh_missed": 2359182.1,
+    "dispatched_mwh": 149037345.8,
     "outage_pct": 15.9,
     "displaced_pct": 0.9,
     "dispatched_pct": 83.2
@@ -26,15 +26,15 @@
         "Vales Point B Power Station"
       ],
       "duid_count": 12,
-      "outage_hours": 21290.1,
-      "displaced_hours": 4539.1,
-      "dispatched_hours": 109627.8,
-      "outage_mwh_missed": 14612849.1,
-      "displaced_mwh_missed": 2341304.7,
-      "dispatched_mwh": 54110121.0,
+      "outage_hours": 21553.1,
+      "displaced_hours": 4541.2,
+      "dispatched_hours": 111090.7,
+      "outage_mwh_missed": 14801243.0,
+      "displaced_mwh_missed": 2341712.0,
+      "dispatched_mwh": 54820488.8,
       "outage_pct": 15.7,
-      "displaced_pct": 3.4,
-      "dispatched_pct": 80.9
+      "displaced_pct": 3.3,
+      "dispatched_pct": 81.0
     },
     "QLD": {
       "total_capacity_mw": 8199.0,
@@ -50,15 +50,15 @@
         "Millmerran Power Station"
       ],
       "duid_count": 22,
-      "outage_hours": 37039.8,
-      "displaced_hours": 34.8,
-      "dispatched_hours": 211263.3,
-      "outage_mwh_missed": 12871269.5,
-      "displaced_mwh_missed": 4953.6,
-      "dispatched_mwh": 54545118.6,
-      "outage_pct": 14.9,
+      "outage_hours": 37919.8,
+      "displaced_hours": 35.2,
+      "dispatched_hours": 213550.8,
+      "outage_mwh_missed": 13182694.7,
+      "displaced_mwh_missed": 5011.0,
+      "dispatched_mwh": 55169297.7,
+      "outage_pct": 15.1,
       "displaced_pct": 0.0,
-      "dispatched_pct": 85.1
+      "dispatched_pct": 84.9
     },
     "VIC": {
       "total_capacity_mw": 4760.0,
@@ -71,13 +71,13 @@
       "duid_count": 10,
       "outage_hours": 20628.4,
       "displaced_hours": 65.7,
-      "dispatched_hours": 92186.8,
+      "dispatched_hours": 93626.8,
       "outage_mwh_missed": 8901356.4,
       "displaced_mwh_missed": 12459.1,
-      "dispatched_mwh": 38455152.0,
-      "outage_pct": 18.3,
+      "dispatched_mwh": 39047559.3,
+      "outage_pct": 18.0,
       "displaced_pct": 0.1,
-      "dispatched_pct": 81.7
+      "dispatched_pct": 81.9
     }
   },
   "stations": [
@@ -100,26 +100,26 @@
       "closure_date": "2029-08-31",
       "closure_note": "Extended from Aug 2025 \u2192 Aug 2027 \u2192 Aug 2029. Origin cited slower renewables rollout. NSW Government underwrite agreed.",
       "battery_replacement": "Eraring Battery 700 MW / 3,160 MWh (operating)",
-      "outage_hours": 7428.4,
+      "outage_hours": 7649.1,
       "displaced_hours": 1467.2,
-      "dispatched_hours": 36256.7,
-      "outage_mwh_missed": 5343147.3,
+      "dispatched_hours": 36612.0,
+      "outage_mwh_missed": 5501909.6,
       "displaced_mwh_missed": 727803.1,
-      "dispatched_mwh": 19243854.0,
-      "outage_pct": 16.5,
+      "dispatched_mwh": 19454441.5,
+      "outage_pct": 16.7,
       "displaced_pct": 3.2,
-      "dispatched_pct": 80.3,
+      "dispatched_pct": 80.1,
       "has_dispatch_data": true,
       "per_duid": [
         {
           "duid": "ER01",
           "has_data": true,
-          "outage_hours": 747.1,
-          "outage_mwh_missed": 536892.8,
+          "outage_hours": 843.2,
+          "outage_mwh_missed": 605955.0,
           "displaced_hours": 521.6,
           "displaced_mwh_missed": 254675.3,
-          "dispatched_hours": 10019.4,
-          "dispatched_mwh": 5359402.7
+          "dispatched_hours": 10067.3,
+          "dispatched_mwh": 5382928.8
         },
         {
           "duid": "ER02",
@@ -128,18 +128,18 @@
           "outage_mwh_missed": 1228932.4,
           "displaced_hours": 405.2,
           "displaced_mwh_missed": 199316.6,
-          "dispatched_hours": 9173.8,
-          "dispatched_mwh": 4872048.9
+          "dispatched_hours": 9317.8,
+          "dispatched_mwh": 4962583.0
         },
         {
           "duid": "ER03",
           "has_data": true,
-          "outage_hours": 995.0,
-          "outage_mwh_missed": 715382.7,
+          "outage_hours": 1119.6,
+          "outage_mwh_missed": 805082.7,
           "displaced_hours": 499.7,
           "displaced_mwh_missed": 253303.7,
-          "dispatched_hours": 9793.4,
-          "dispatched_mwh": 5251990.2
+          "dispatched_hours": 9812.8,
+          "dispatched_mwh": 5258474.4
         },
         {
           "duid": "ER04",
@@ -148,8 +148,8 @@
           "outage_mwh_missed": 2861939.5,
           "displaced_hours": 40.8,
           "displaced_mwh_missed": 20507.5,
-          "dispatched_hours": 7270.1,
-          "dispatched_mwh": 3760412.2
+          "dispatched_hours": 7414.1,
+          "dispatched_mwh": 3850455.3
         }
       ],
       "annual_data": [
@@ -222,13 +222,13 @@
       "battery_replacement": "Liddell Battery 500 MW / 1,000 MWh on adjacent site",
       "outage_hours": 6700.9,
       "displaced_hours": 1825.3,
-      "dispatched_hours": 36626.2,
+      "dispatched_hours": 37202.2,
       "outage_mwh_missed": 4417429.4,
       "displaced_mwh_missed": 917831.8,
-      "dispatched_mwh": 19029504.5,
-      "outage_pct": 14.8,
+      "dispatched_mwh": 19309603.5,
+      "outage_pct": 14.7,
       "displaced_pct": 4.0,
-      "dispatched_pct": 81.1,
+      "dispatched_pct": 81.4,
       "has_dispatch_data": true,
       "per_duid": [
         {
@@ -238,8 +238,8 @@
           "outage_mwh_missed": 510883.7,
           "displaced_hours": 1.2,
           "displaced_mwh_missed": 535.1,
-          "dispatched_hours": 10510.2,
-          "dispatched_mwh": 5310179.4
+          "dispatched_hours": 10654.2,
+          "dispatched_mwh": 5382294.7
         },
         {
           "duid": "BW02",
@@ -248,8 +248,8 @@
           "outage_mwh_missed": 1421697.1,
           "displaced_hours": 631.5,
           "displaced_mwh_missed": 322167.9,
-          "dispatched_hours": 8500.1,
-          "dispatched_mwh": 4450644.0
+          "dispatched_hours": 8644.1,
+          "dispatched_mwh": 4524380.7
         },
         {
           "duid": "BW03",
@@ -258,8 +258,8 @@
           "outage_mwh_missed": 700486.2,
           "displaced_hours": 735.6,
           "displaced_mwh_missed": 370754.7,
-          "dispatched_hours": 9489.7,
-          "dispatched_mwh": 4992497.9
+          "dispatched_hours": 9633.7,
+          "dispatched_mwh": 5056029.0
         },
         {
           "duid": "BW04",
@@ -268,8 +268,8 @@
           "outage_mwh_missed": 1784362.4,
           "displaced_hours": 456.9,
           "displaced_mwh_missed": 224374.2,
-          "dispatched_hours": 8126.2,
-          "dispatched_mwh": 4276183.1
+          "dispatched_hours": 8270.2,
+          "dispatched_mwh": 4346899.1
         }
       ],
       "annual_data": [
@@ -338,14 +338,14 @@
       "closure_date": "2040-12-31",
       "closure_note": "Longest-running NSW coal plant; no formal closure beyond 2040.",
       "battery_replacement": null,
-      "outage_hours": 3218.4,
-      "displaced_hours": 1237.0,
-      "dispatched_hours": 18120.8,
-      "outage_mwh_missed": 2251812.3,
-      "displaced_mwh_missed": 693202.9,
-      "dispatched_mwh": 8267235.3,
+      "outage_hours": 3260.8,
+      "displaced_hours": 1239.2,
+      "dispatched_hours": 18364.2,
+      "outage_mwh_missed": 2281444.0,
+      "displaced_mwh_missed": 693610.3,
+      "dispatched_mwh": 8371059.7,
       "outage_pct": 14.3,
-      "displaced_pct": 5.5,
+      "displaced_pct": 5.4,
       "dispatched_pct": 80.3,
       "has_dispatch_data": true,
       "per_duid": [
@@ -356,18 +356,18 @@
           "outage_mwh_missed": 1301227.8,
           "displaced_hours": 633.8,
           "displaced_mwh_missed": 364054.9,
-          "dispatched_hours": 8794.7,
-          "dispatched_mwh": 4038175.0
+          "dispatched_hours": 8938.7,
+          "dispatched_mwh": 4105440.2
         },
         {
           "duid": "MP2",
           "has_data": true,
-          "outage_hours": 1358.8,
-          "outage_mwh_missed": 950584.5,
-          "displaced_hours": 603.2,
-          "displaced_mwh_missed": 329148.0,
-          "dispatched_hours": 9326.1,
-          "dispatched_mwh": 4229060.4
+          "outage_hours": 1401.2,
+          "outage_mwh_missed": 980216.2,
+          "displaced_hours": 605.3,
+          "displaced_mwh_missed": 329555.3,
+          "dispatched_hours": 9425.6,
+          "dispatched_mwh": 4265619.5
         }
       ],
       "annual_data": [],
@@ -392,13 +392,13 @@
       "battery_replacement": null,
       "outage_hours": 3942.3,
       "displaced_hours": 9.6,
-      "dispatched_hours": 18624.2,
+      "dispatched_hours": 18912.2,
       "outage_mwh_missed": 2600460.0,
       "displaced_mwh_missed": 2466.8,
-      "dispatched_mwh": 7569527.1,
-      "outage_pct": 17.5,
+      "dispatched_mwh": 7685384.1,
+      "outage_pct": 17.2,
       "displaced_pct": 0.0,
-      "dispatched_pct": 82.5,
+      "dispatched_pct": 82.7,
       "has_dispatch_data": true,
       "per_duid": [
         {
@@ -408,8 +408,8 @@
           "outage_mwh_missed": 2351572.5,
           "displaced_hours": 5.9,
           "displaced_mwh_missed": 1632.4,
-          "dispatched_hours": 7718.0,
-          "dispatched_mwh": 3030784.4
+          "dispatched_hours": 7862.0,
+          "dispatched_mwh": 3091221.5
         },
         {
           "duid": "VP6",
@@ -418,8 +418,8 @@
           "outage_mwh_missed": 248887.5,
           "displaced_hours": 3.7,
           "displaced_mwh_missed": 834.4,
-          "dispatched_hours": 10906.2,
-          "dispatched_mwh": 4538742.7
+          "dispatched_hours": 11050.2,
+          "dispatched_mwh": 4594162.7
         }
       ],
       "annual_data": [],
@@ -446,32 +446,32 @@
       "closure_date": "2029-03-31",
       "closure_note": "Oldest major NEM coal station; dedicated to Rio Tinto's Boyne smelter load.",
       "battery_replacement": null,
-      "outage_hours": 20210.8,
-      "displaced_hours": 14.5,
-      "dispatched_hours": 47503.2,
-      "outage_mwh_missed": 5655228.2,
-      "displaced_mwh_missed": 1208.4,
-      "dispatched_mwh": 7756164.2,
-      "outage_pct": 29.8,
+      "outage_hours": 20634.5,
+      "displaced_hours": 15.0,
+      "dispatched_hours": 47943.0,
+      "outage_mwh_missed": 5773788.6,
+      "displaced_mwh_missed": 1265.8,
+      "dispatched_mwh": 7814573.7,
+      "outage_pct": 30.1,
       "displaced_pct": 0.0,
-      "dispatched_pct": 70.1,
+      "dispatched_pct": 69.9,
       "has_dispatch_data": true,
       "per_duid": [
         {
           "duid": "GSTONE1",
           "has_data": true,
-          "outage_hours": 5884.3,
-          "outage_mwh_missed": 1646800.4,
-          "displaced_hours": 2.5,
-          "displaced_mwh_missed": 212.2,
-          "dispatched_hours": 5401.2,
-          "dispatched_mwh": 783443.2
+          "outage_hours": 5889.8,
+          "outage_mwh_missed": 1648280.4,
+          "displaced_hours": 2.9,
+          "displaced_mwh_missed": 248.4,
+          "dispatched_hours": 5539.3,
+          "dispatched_mwh": 801363.7
         },
         {
           "duid": "GSTONE2",
           "has_data": true,
-          "outage_hours": 2601.9,
-          "outage_mwh_missed": 728158.8,
+          "outage_hours": 2745.9,
+          "outage_mwh_missed": 768478.8,
           "displaced_hours": 0.2,
           "displaced_mwh_missed": 11.1,
           "dispatched_hours": 8685.9,
@@ -484,8 +484,8 @@
           "outage_mwh_missed": 786849.6,
           "displaced_hours": 2.6,
           "displaced_mwh_missed": 239.5,
-          "dispatched_hours": 8474.3,
-          "dispatched_mwh": 1409109.6
+          "dispatched_hours": 8618.3,
+          "dispatched_mwh": 1428170.9
         },
         {
           "duid": "GSTONE4",
@@ -494,24 +494,24 @@
           "outage_mwh_missed": 1073946.4,
           "displaced_hours": 5.5,
           "displaced_mwh_missed": 439.9,
-          "dispatched_hours": 7443.7,
-          "dispatched_mwh": 1224450.3
+          "dispatched_hours": 7587.7,
+          "dispatched_mwh": 1244257.2
         },
         {
           "duid": "GSTONE5",
           "has_data": true,
-          "outage_hours": 2288.0,
-          "outage_mwh_missed": 640017.3,
-          "displaced_hours": 1.6,
-          "displaced_mwh_missed": 126.9,
-          "dispatched_hours": 8998.5,
-          "dispatched_mwh": 1505943.1
+          "outage_hours": 2418.2,
+          "outage_mwh_missed": 676457.8,
+          "displaced_hours": 1.7,
+          "displaced_mwh_missed": 148.2,
+          "dispatched_hours": 9012.2,
+          "dispatched_mwh": 1507563.8
         },
         {
           "duid": "GSTONE6",
           "has_data": true,
-          "outage_hours": 2786.5,
-          "outage_mwh_missed": 779455.6,
+          "outage_hours": 2930.5,
+          "outage_mwh_missed": 819775.6,
           "displaced_hours": 2.1,
           "displaced_mwh_missed": 178.8,
           "dispatched_hours": 8499.5,
@@ -542,13 +542,13 @@
       "battery_replacement": "Tarong BESS 300 MW planned",
       "outage_hours": 3737.8,
       "displaced_hours": 13.8,
-      "dispatched_hours": 41400.8,
+      "dispatched_hours": 41976.8,
       "outage_mwh_missed": 1307858.2,
       "displaced_mwh_missed": 2345.5,
-      "dispatched_mwh": 10477714.8,
-      "outage_pct": 8.3,
+      "dispatched_mwh": 10638679.8,
+      "outage_pct": 8.2,
       "displaced_pct": 0.0,
-      "dispatched_pct": 91.7,
+      "dispatched_pct": 91.8,
       "has_dispatch_data": true,
       "per_duid": [
         {
@@ -558,8 +558,8 @@
           "outage_mwh_missed": 1255640.0,
           "displaced_hours": 12.9,
           "displaced_mwh_missed": 2234.2,
-          "dispatched_hours": 7686.8,
-          "dispatched_mwh": 1880580.5
+          "dispatched_hours": 7830.8,
+          "dispatched_mwh": 1924313.0
         },
         {
           "duid": "TARONG#2",
@@ -568,8 +568,8 @@
           "outage_mwh_missed": 45162.2,
           "displaced_hours": 0.1,
           "displaced_mwh_missed": 12.9,
-          "dispatched_hours": 11158.8,
-          "dispatched_mwh": 2940413.0
+          "dispatched_hours": 11302.8,
+          "dispatched_mwh": 2984195.6
         },
         {
           "duid": "TARONG#3",
@@ -578,8 +578,8 @@
           "outage_mwh_missed": 2390.5,
           "displaced_hours": 0.0,
           "displaced_mwh_missed": 0.0,
-          "dispatched_hours": 11281.2,
-          "dispatched_mwh": 2685715.9
+          "dispatched_hours": 11425.2,
+          "dispatched_mwh": 2715648.7
         },
         {
           "duid": "TARONG#4",
@@ -588,8 +588,8 @@
           "outage_mwh_missed": 4665.5,
           "displaced_hours": 0.8,
           "displaced_mwh_missed": 98.4,
-          "dispatched_hours": 11274.0,
-          "dispatched_mwh": 2971005.4
+          "dispatched_hours": 11418.0,
+          "dispatched_mwh": 3014522.5
         }
       ],
       "annual_data": [],
@@ -611,22 +611,22 @@
       "closure_date": "2037-12-31",
       "closure_note": "Single-unit supercritical station; closure synced with Tarong.",
       "battery_replacement": null,
-      "outage_hours": 2812.3,
+      "outage_hours": 2956.3,
       "displaced_hours": 0.9,
       "dispatched_hours": 8474.8,
-      "outage_mwh_missed": 1245635.3,
+      "outage_mwh_missed": 1309427.3,
       "displaced_mwh_missed": 170.9,
       "dispatched_mwh": 2514375.0,
-      "outage_pct": 24.9,
+      "outage_pct": 25.9,
       "displaced_pct": 0.0,
-      "dispatched_pct": 75.1,
+      "dispatched_pct": 74.1,
       "has_dispatch_data": true,
       "per_duid": [
         {
           "duid": "TNPS1",
           "has_data": true,
-          "outage_hours": 2812.3,
-          "outage_mwh_missed": 1245635.3,
+          "outage_hours": 2956.3,
+          "outage_mwh_missed": 1309427.3,
           "displaced_hours": 0.9,
           "displaced_mwh_missed": 170.9,
           "dispatched_hours": 8474.8,
@@ -655,13 +655,13 @@
       "battery_replacement": null,
       "outage_hours": 2190.1,
       "displaced_hours": 1.1,
-      "dispatched_hours": 20385.0,
+      "dispatched_hours": 20673.0,
       "outage_mwh_missed": 766301.1,
       "displaced_mwh_missed": 246.5,
-      "dispatched_mwh": 5438313.3,
-      "outage_pct": 9.7,
+      "dispatched_mwh": 5510718.8,
+      "outage_pct": 9.6,
       "displaced_pct": 0.0,
-      "dispatched_pct": 90.3,
+      "dispatched_pct": 90.4,
       "has_dispatch_data": true,
       "per_duid": [
         {
@@ -671,8 +671,8 @@
           "outage_mwh_missed": 389115.6,
           "displaced_hours": 0.6,
           "displaced_mwh_missed": 118.8,
-          "dispatched_hours": 10175.3,
-          "dispatched_mwh": 2704820.2
+          "dispatched_hours": 10319.3,
+          "dispatched_mwh": 2740203.4
         },
         {
           "duid": "CALL_B_2",
@@ -681,8 +681,8 @@
           "outage_mwh_missed": 377185.5,
           "displaced_hours": 0.5,
           "displaced_mwh_missed": 127.8,
-          "dispatched_hours": 10209.7,
-          "dispatched_mwh": 2733493.1
+          "dispatched_hours": 10353.7,
+          "dispatched_mwh": 2770515.4
         }
       ],
       "annual_data": [],
@@ -705,15 +705,15 @@
       "closure_date": "2033-12-31",
       "closure_note": "Unit 4 suffered catastrophic explosion May 2021; returned to service 2024. Unit 3 also suffered separate outage.",
       "battery_replacement": null,
-      "outage_hours": 4747.1,
+      "outage_hours": 4891.1,
       "displaced_hours": 2.7,
-      "dispatched_hours": 17826.4,
-      "outage_mwh_missed": 2182402.8,
+      "dispatched_hours": 17970.4,
+      "outage_mwh_missed": 2248642.8,
       "displaced_mwh_missed": 616.9,
-      "dispatched_mwh": 5555012.9,
-      "outage_pct": 21.0,
+      "dispatched_mwh": 5603218.1,
+      "outage_pct": 21.4,
       "displaced_pct": 0.0,
-      "dispatched_pct": 79.0,
+      "dispatched_pct": 78.6,
       "has_dispatch_data": true,
       "per_duid": [
         {
@@ -723,14 +723,14 @@
           "outage_mwh_missed": 1771326.5,
           "displaced_hours": 1.0,
           "displaced_mwh_missed": 273.9,
-          "dispatched_hours": 7435.8,
-          "dispatched_mwh": 2289645.1
+          "dispatched_hours": 7579.8,
+          "dispatched_mwh": 2337850.2
         },
         {
           "duid": "CPP_4",
           "has_data": true,
-          "outage_hours": 895.8,
-          "outage_mwh_missed": 411076.3,
+          "outage_hours": 1039.8,
+          "outage_mwh_missed": 477316.3,
           "displaced_hours": 1.7,
           "displaced_mwh_missed": 343.0,
           "dispatched_hours": 10390.6,
@@ -758,13 +758,13 @@
       "battery_replacement": null,
       "outage_hours": 991.8,
       "displaced_hours": 0.4,
-      "dispatched_hours": 10295.8,
+      "dispatched_hours": 10439.8,
       "outage_mwh_missed": 737924.0,
       "displaced_mwh_missed": 55.0,
-      "dispatched_mwh": 6395751.8,
-      "outage_pct": 8.8,
+      "dispatched_mwh": 6484667.1,
+      "outage_pct": 8.7,
       "displaced_pct": 0.0,
-      "dispatched_pct": 91.2,
+      "dispatched_pct": 91.3,
       "has_dispatch_data": true,
       "per_duid": [
         {
@@ -774,8 +774,8 @@
           "outage_mwh_missed": 737924.0,
           "displaced_hours": 0.4,
           "displaced_mwh_missed": 55.0,
-          "dispatched_hours": 10295.8,
-          "dispatched_mwh": 6395751.8
+          "dispatched_hours": 10439.8,
+          "dispatched_mwh": 6484667.1
         }
       ],
       "annual_data": [],
@@ -800,15 +800,15 @@
       "closure_date": "2046-12-31",
       "closure_note": "Longest-lived QLD coal asset; QLD government plan kept it to 2046.",
       "battery_replacement": null,
-      "outage_hours": 385.2,
+      "outage_hours": 529.2,
       "displaced_hours": 0.8,
-      "dispatched_hours": 44766.2,
-      "outage_mwh_missed": 140529.9,
+      "dispatched_hours": 45198.2,
+      "outage_mwh_missed": 193089.9,
       "displaced_mwh_missed": 163.0,
-      "dispatched_mwh": 9626439.7,
-      "outage_pct": 0.9,
+      "dispatched_mwh": 9718117.2,
+      "outage_pct": 1.2,
       "displaced_pct": 0.0,
-      "dispatched_pct": 99.1,
+      "dispatched_pct": 98.8,
       "has_dispatch_data": true,
       "per_duid": [
         {
@@ -818,8 +818,8 @@
           "outage_mwh_missed": 2287.0,
           "displaced_hours": 0.2,
           "displaced_mwh_missed": 33.0,
-          "dispatched_hours": 11281.5,
-          "dispatched_mwh": 2425247.5
+          "dispatched_hours": 11425.5,
+          "dispatched_mwh": 2458317.0
         },
         {
           "duid": "STAN-2",
@@ -828,14 +828,14 @@
           "outage_mwh_missed": 242.2,
           "displaced_hours": 0.0,
           "displaced_mwh_missed": 0.0,
-          "dispatched_hours": 11287.4,
-          "dispatched_mwh": 2461727.5
+          "dispatched_hours": 11431.4,
+          "dispatched_mwh": 2494498.1
         },
         {
           "duid": "STAN-3",
           "has_data": true,
-          "outage_hours": 373.7,
-          "outage_mwh_missed": 136352.8,
+          "outage_hours": 517.7,
+          "outage_mwh_missed": 188912.7,
           "displaced_hours": 0.1,
           "displaced_mwh_missed": 12.9,
           "dispatched_hours": 10914.3,
@@ -848,8 +848,8 @@
           "outage_mwh_missed": 1648.0,
           "displaced_hours": 0.5,
           "displaced_mwh_missed": 117.0,
-          "dispatched_hours": 11283.0,
-          "dispatched_mwh": 2443317.6
+          "dispatched_hours": 11427.0,
+          "dispatched_mwh": 2469154.9
         }
       ],
       "annual_data": [],
@@ -872,12 +872,12 @@
       "closure_date": "2030-12-31",
       "closure_note": "Privately owned; no confirmed extension.",
       "battery_replacement": null,
-      "outage_hours": 1964.5,
+      "outage_hours": 1988.9,
       "displaced_hours": 0.6,
-      "dispatched_hours": 20611.1,
-      "outage_mwh_missed": 835389.9,
+      "dispatched_hours": 20874.7,
+      "outage_mwh_missed": 845662.7,
       "displaced_mwh_missed": 147.4,
-      "dispatched_mwh": 6781346.8,
+      "dispatched_mwh": 6884948.0,
       "outage_pct": 8.7,
       "displaced_pct": 0.0,
       "dispatched_pct": 91.3,
@@ -890,18 +890,18 @@
           "outage_mwh_missed": 123405.3,
           "displaced_hours": 0.0,
           "displaced_mwh_missed": 0.0,
-          "dispatched_hours": 10996.9,
-          "dispatched_mwh": 3916643.4
+          "dispatched_hours": 11140.9,
+          "dispatched_mwh": 3975973.9
         },
         {
           "duid": "MPP_2",
           "has_data": true,
-          "outage_hours": 1673.3,
-          "outage_mwh_missed": 711984.6,
+          "outage_hours": 1697.8,
+          "outage_mwh_missed": 722257.3,
           "displaced_hours": 0.6,
           "displaced_mwh_missed": 147.4,
-          "dispatched_hours": 9614.2,
-          "dispatched_mwh": 2864703.4
+          "dispatched_hours": 9733.8,
+          "dispatched_mwh": 2908974.1
         }
       ],
       "annual_data": [],
@@ -928,13 +928,13 @@
       "battery_replacement": "Loy Yang A Battery planned",
       "outage_hours": 6075.6,
       "displaced_hours": 7.1,
-      "dispatched_hours": 39069.7,
+      "dispatched_hours": 39645.7,
       "outage_mwh_missed": 3358700.6,
       "displaced_mwh_missed": 1331.2,
-      "dispatched_mwh": 17635475.6,
-      "outage_pct": 13.5,
+      "dispatched_mwh": 17892302.5,
+      "outage_pct": 13.3,
       "displaced_pct": 0.0,
-      "dispatched_pct": 86.5,
+      "dispatched_pct": 86.7,
       "has_dispatch_data": true,
       "per_duid": [
         {
@@ -944,8 +944,8 @@
           "outage_mwh_missed": 493873.7,
           "displaced_hours": 1.1,
           "displaced_mwh_missed": 164.6,
-          "dispatched_hours": 10393.3,
-          "dispatched_mwh": 4708096.1
+          "dispatched_hours": 10537.3,
+          "dispatched_mwh": 4770497.0
         },
         {
           "duid": "LYA2",
@@ -954,8 +954,8 @@
           "outage_mwh_missed": 1799066.0,
           "displaced_hours": 3.5,
           "displaced_mwh_missed": 660.8,
-          "dispatched_hours": 8030.9,
-          "dispatched_mwh": 3636348.2
+          "dispatched_hours": 8174.9,
+          "dispatched_mwh": 3698137.5
         },
         {
           "duid": "LYA3",
@@ -964,8 +964,8 @@
           "outage_mwh_missed": 535974.0,
           "displaced_hours": 1.0,
           "displaced_mwh_missed": 157.3,
-          "dispatched_hours": 10317.4,
-          "dispatched_mwh": 4717574.5
+          "dispatched_hours": 10461.4,
+          "dispatched_mwh": 4783513.4
         },
         {
           "duid": "LYA4",
@@ -974,8 +974,8 @@
           "outage_mwh_missed": 529786.9,
           "displaced_hours": 1.5,
           "displaced_mwh_missed": 348.4,
-          "dispatched_hours": 10328.0,
-          "dispatched_mwh": 4573456.8
+          "dispatched_hours": 10472.0,
+          "dispatched_mwh": 4640154.6
         }
       ],
       "annual_data": [],
@@ -1000,13 +1000,13 @@
       "battery_replacement": null,
       "outage_hours": 960.9,
       "displaced_hours": 0.3,
-      "dispatched_hours": 21614.9,
+      "dispatched_hours": 21902.9,
       "outage_mwh_missed": 513768.3,
       "displaced_mwh_missed": 92.5,
-      "dispatched_mwh": 10522051.2,
-      "outage_pct": 4.3,
+      "dispatched_mwh": 10671064.6,
+      "outage_pct": 4.2,
       "displaced_pct": 0.0,
-      "dispatched_pct": 95.7,
+      "dispatched_pct": 95.8,
       "has_dispatch_data": true,
       "per_duid": [
         {
@@ -1016,8 +1016,8 @@
           "outage_mwh_missed": 326424.6,
           "displaced_hours": 0.2,
           "displaced_mwh_missed": 71.7,
-          "dispatched_hours": 10677.5,
-          "dispatched_mwh": 5199078.8
+          "dispatched_hours": 10821.5,
+          "dispatched_mwh": 5274049.3
         },
         {
           "duid": "LOYYB2",
@@ -1026,8 +1026,8 @@
           "outage_mwh_missed": 187343.8,
           "displaced_hours": 0.2,
           "displaced_mwh_missed": 20.8,
-          "dispatched_hours": 10937.4,
-          "dispatched_mwh": 5322972.5
+          "dispatched_hours": 11081.4,
+          "dispatched_mwh": 5397015.3
         }
       ],
       "annual_data": [],
@@ -1054,13 +1054,13 @@
       "battery_replacement": "Victorian Big Battery 300 MW (via SIPS)",
       "outage_hours": 13591.9,
       "displaced_hours": 58.2,
-      "dispatched_hours": 31502.2,
+      "dispatched_hours": 32078.2,
       "outage_mwh_missed": 5028887.5,
       "displaced_mwh_missed": 11035.5,
-      "dispatched_mwh": 10297625.2,
-      "outage_pct": 30.1,
+      "dispatched_mwh": 10484192.1,
+      "outage_pct": 29.7,
       "displaced_pct": 0.1,
-      "dispatched_pct": 69.8,
+      "dispatched_pct": 70.1,
       "has_dispatch_data": true,
       "per_duid": [
         {
@@ -1070,8 +1070,8 @@
           "outage_mwh_missed": 1134296.7,
           "displaced_hours": 21.2,
           "displaced_mwh_missed": 4032.1,
-          "dispatched_hours": 8201.2,
-          "dispatched_mwh": 2561983.6
+          "dispatched_hours": 8345.2,
+          "dispatched_mwh": 2608983.0
         },
         {
           "duid": "YWPS2",
@@ -1080,8 +1080,8 @@
           "outage_mwh_missed": 1808180.0,
           "displaced_hours": 6.4,
           "displaced_mwh_missed": 1187.9,
-          "dispatched_hours": 6394.7,
-          "dispatched_mwh": 2028249.3
+          "dispatched_hours": 6538.7,
+          "dispatched_mwh": 2073981.5
         },
         {
           "duid": "YWPS3",
@@ -1090,8 +1090,8 @@
           "outage_mwh_missed": 948731.7,
           "displaced_hours": 13.9,
           "displaced_mwh_missed": 2707.7,
-          "dispatched_hours": 8709.8,
-          "dispatched_mwh": 2909236.3
+          "dispatched_hours": 8853.8,
+          "dispatched_mwh": 2952393.4
         },
         {
           "duid": "YWPS4",
@@ -1100,8 +1100,8 @@
           "outage_mwh_missed": 1137679.2,
           "displaced_hours": 16.8,
           "displaced_mwh_missed": 3107.8,
-          "dispatched_hours": 8196.5,
-          "dispatched_mwh": 2798156.0
+          "dispatched_hours": 8340.5,
+          "dispatched_mwh": 2848834.3
         }
       ],
       "annual_data": [],
@@ -1116,5 +1116,5 @@
     "displaced": "availability_mw \u2265 20% capacity but total_cleared_mw < 30% of availability (offered but not dispatched)",
     "dispatched": "total_cleared_mw \u2265 30% of availability (normal operation)"
   },
-  "exported_at": "2026-05-26T07:35:23.827856"
+  "exported_at": "2026-06-17T16:18:27.092392"
 }
