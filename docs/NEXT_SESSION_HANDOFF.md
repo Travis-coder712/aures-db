@@ -1,12 +1,17 @@
 # AURES — Next Session Handoff
 
-**Last refreshed:** 2026-06-20, planning session (no code changes)
-**Latest shipped version:** v3.16.8
+**Last refreshed:** 2026-06-22
+**Latest shipped version:** v3.17.1
 **Purpose:** Single-place brief for the next session. Cold-readable — pair with `docs/SESSION_OPENER.md` and `docs/INTELLIGENCE_LAYER_PLAN.md`.
 
 ---
 
-## Current state snapshot (v3.16.8)
+## Current state snapshot (v3.17.1)
+
+### v3.17.0–v3.17.1 — Battery Market Intelligence + Research Notes (2 releases)
+
+- **v3.17.0** — Two new intelligence surfaces: Battery Market Intelligence (`/intelligence/battery-market`) and Research Notes (`/intelligence/research`). Battery Market has 8 sections (Overview with fleet milestones, Price Setting, Revenue with monthly chart, Bidding with trading platforms + duration economics, Cannibalisation with floor analysis, Wholesale, By State with per-project detail, Outlook with coal retirements + demand drivers). Research Notes: 25 time-stamped analyst notes across 6 categories with expandable cards, tags, and project links.
+- **v3.17.1** — Version bump for deep research enrichment. Battery market data rebuilt with Modo Energy, WattClarity, AEMO QED, RenewEconomy sources. State-by-state commissioned battery lists (name/MW/MWh/developer/date/revenue model), monthly revenue timeline ($200k peak Jun 2025 → $29k record low May 2026), cannibalisation evidence + stabilisers, FCAS saturation (9%), trading platform inventory, duration shift (4hr minimum viable). Research notes expanded to 25 covering revenue collapse, QLD canary, SA resilience, fleet doubling, behind-the-meter threat, coal retirement timing gap, ISP 2026.
 
 ### v3.14–v3.16.8 — Open Rounds + NSW T8 LTESA deep dive (12 releases)
 
