@@ -1715,46 +1715,80 @@ export interface WindValueData {
 
 // --- Battery Market Intelligence ---
 
+export interface BatteryMarketProject {
+  name: string; mw: number; mwh: number; developer: string; status: string
+  date: string; duration_hours: number; revenue_model: string; note: string
+}
+
+export interface BatteryMarketPipelineProject {
+  name: string; mw: number; mwh: number; developer: string; expected: string; note: string
+}
+
+export interface BatteryMarketStateData {
+  operating_mw: number; operating_mwh: number
+  major_projects: BatteryMarketProject[]
+  pipeline: BatteryMarketPipelineProject[]
+  note?: string; warning?: string
+}
+
 export interface BatteryMarketData {
   metadata: { updated: string; version: string; sources: { name: string; url: string }[] }
   capacity_headline: {
-    installed_gw: number
-    pipeline_gw: number
-    pipeline_pct_queue: number
-    renewables_pct_q1_2026: number
-    modo_projected_gw_end_2027: number
-    capacity_added_since_q1_2025_gw: number
+    installed_gw: number; installed_gwh: number; registered_units: number
+    pipeline_gw: number; pipeline_total_gw: number; pipeline_pct_queue: number
+    under_construction_gw: number; renewables_pct_q1_2026: number
+    renewables_instantaneous_record_pct: number; renewables_record_date: string
+    modo_projected_gw_end_2027: number; isp_2026_target_gw_2030: number
+    capacity_start_2025_gw: number; capacity_end_2025_gw: number
+    capacity_added_2025_gwh: number; capacity_added_since_q1_2025_gw: number
+    note: string
   }
+  fleet_milestones: { date: string; event: string; fleet_gw: number }[]
+  commissioned_by_state: Record<string, BatteryMarketStateData>
   price_setting: {
-    summary: { pct_all: number; pct_evening: number; pct_midday_solar: number; period: string }
+    summary: { pct_all: number; pct_evening: number; pct_midday_solar: number; period: string; note: string }
     by_quarter: { period: string; battery: number; gas: number; hydro: number; coal: number }[]
+    time_of_day: Record<string, string>
   }
   revenue_trends: {
-    nem_avg_k_mw_yr: number
-    yoy_change_pct: number
-    may_2026_k_mw_yr: number
-    lowest_since: string
-    by_quarter: { period: string; nsw: number; qld: number; sa: number; vic: number }[]
-    qld_energy_only_yoy_drop_pct: number
-    qld_bess_capacity_growth_factor: number
+    nem_avg_k_mw_yr: number; yoy_change_pct: number; period_measured: string
+    may_2026_k_mw_yr: number; march_2026_k_mw_yr: number; lowest_since: string
+    by_month: { period: string; revenue_k: number; note: string }[]
+    by_state_q1_2026: Record<string, { revenue_k: number; yoy_pct: number; note: string; [k: string]: unknown }>
+    qld_collapse_detail: { energy_only_yoy_drop_pct: number; bess_capacity_growth_factor: number; q1_2026_spread_per_mwh: number; prior_year_spread_per_mwh: number; note: string }
+  }
+  fcas_analysis: {
+    pct_of_total_revenue: number; trend: string; detail: string[]
+    fpp: { launched: string; total_revenue_jun_dec_2025_m: number; peak_month_oct_k: number; note: string }
   }
   wholesale_prices: {
-    nem_avg_q1_2026: number
-    yoy_change_pct: number
+    nem_avg_q1_2026: number; yoy_change_pct: number
     by_quarter: { period: string; nsw: number; qld: number; sa: number; vic: number; tas: number }[]
-    may_2026_yoy_by_state: Record<string, number>
+    may_2026_by_state: Record<string, number>
+    april_2026_collapse: { vic: number; vic_yoy_pct: number; sa: number; sa_yoy_pct: number; nem_avg_yoy_pct: number; note: string }
+    negative_prices: Record<string, unknown>
+    structural_drivers: string[]
   }
   cannibalisation: {
-    by_quarter: { period: string; installed_gw: number; revenue_k_mw_yr: number }[]
-    by_state_latest: { state: string; installed_gw: number; revenue_k_mw_yr: number }[]
+    by_quarter: { period: string; installed_gw: number; revenue_k_mw_yr: number; spread_per_mwh: number; note?: string }[]
+    by_state_latest: { state: string; installed_gw: number; revenue_k_mw_yr: number; spread_per_mwh: number }[]
+    is_there_a_floor: { answer: string; evidence: string[]; potential_stabilisers: string[]; wattclarity_battery_correlation_penalty: string }
   }
   bidding_sophistication: {
-    top_performers: {
-      entity: string; state: string; spread_capture_pct: number
-      tier: 'elite' | 'advanced' | 'developing' | 'early'; note: string
-    }[]
+    top_performers_q1_2026: { entity: string; state: string; rank: number; capture_rate_note: string; tier: string; note: string }[]
+    nem_avg_capture_rate_q1_2026_pct: number; capture_rate_note: string
+    trading_platforms: { platform: string; operator: string; assets_mw: number; note: string }[]
+    rebidding_insight: string
+    duration_advantage: Record<string, string>
     tier_thresholds: Record<string, number>
     insight: string
+  }
+  forward_outlook: {
+    modo_projections: Record<string, unknown>
+    demand_growth: string[]
+    coal_retirements: { plant: string; state: string; date: string; impact: string }[]
+    structural_shift: string
+    rule_changes: { change: string; date?: string; detail: string }[]
   }
   key_insights: string[]
 }
