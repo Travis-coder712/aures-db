@@ -5,7 +5,7 @@
  * In production (GitHub Pages), they're served as static files.
  * In development (Vite dev server), they're served from the public/ directory.
  */
-import type { ProjectSummary, Project, Technology, ProjectStatus, State, LeagueTable, LeagueTableIndex, LeagueTechnology, DeveloperIndex, OEMIndex, ContractorIndex, OfftakerIndex, MapProject, CODDriftData, DataSourcesIndex, BESSCapexData, ProjectTimelineData, SchemeTrackerData, DriftAnalysisData, WindResourceData, DunkelflaunteData, EnergyMixData, DeveloperScoreData, RevenueIntelData, GridConnectionData, NewsData, REZAccessMap, EISAnalyticsData, EISComparisonData, EISCoverageData, ProjectMonthlyPerformance, GenerationProfileData, BatteryWatchData, CoalWatchData, CapacityWatchData, NemActivitiesData } from './types'
+import type { ProjectSummary, Project, Technology, ProjectStatus, State, LeagueTable, LeagueTableIndex, LeagueTechnology, DeveloperIndex, OEMIndex, ContractorIndex, OfftakerIndex, MapProject, CODDriftData, DataSourcesIndex, BESSCapexData, ProjectTimelineData, SchemeTrackerData, DriftAnalysisData, WindResourceData, DunkelflaunteData, EnergyMixData, DeveloperScoreData, RevenueIntelData, GridConnectionData, NewsData, REZAccessMap, EISAnalyticsData, EISComparisonData, EISCoverageData, ProjectMonthlyPerformance, GenerationProfileData, BatteryWatchData, CoalWatchData, CapacityWatchData, NemActivitiesData, BatteryMarketData, ResearchNotesData } from './types'
 
 const BASE = import.meta.env.BASE_URL + 'data'
 
@@ -983,5 +983,27 @@ export async function fetchBessValue(): Promise<any | null> {
     if (!resp.ok) return null
     bessValueCache = await resp.json()
     return bessValueCache
+  } catch { return null }
+}
+
+let batteryMarketCache: BatteryMarketData | null = null
+export async function fetchBatteryMarket(): Promise<BatteryMarketData | null> {
+  if (batteryMarketCache) return batteryMarketCache
+  try {
+    const resp = await fetch(`${BASE}/analytics/intelligence/battery-market.json`)
+    if (!resp.ok) return null
+    batteryMarketCache = await resp.json()
+    return batteryMarketCache
+  } catch { return null }
+}
+
+let researchNotesCache: ResearchNotesData | null = null
+export async function fetchResearchNotes(): Promise<ResearchNotesData | null> {
+  if (researchNotesCache) return researchNotesCache
+  try {
+    const resp = await fetch(`${BASE}/analytics/intelligence/research-notes.json`)
+    if (!resp.ok) return null
+    researchNotesCache = await resp.json()
+    return researchNotesCache
   } catch { return null }
 }

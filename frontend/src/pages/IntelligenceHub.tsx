@@ -2,6 +2,18 @@ import { useNavigate } from 'react-router-dom'
 
 const ACTIVE_FEATURES = [
   {
+    icon: '\u{1F4CA}',
+    title: 'Battery Market Intelligence',
+    description: 'Price-setting, revenue trends, cannibalisation, and bidding sophistication across the NEM BESS fleet',
+    route: '/intelligence/battery-market',
+  },
+  {
+    icon: '\u{1F4DD}',
+    title: 'Research Notes',
+    description: 'Time-stamped analysis notes by category — BESS market, CIS/LTESA, wholesale prices, policy',
+    route: '/intelligence/research',
+  },
+  {
     icon: '⚡',
     title: 'Energy Mix Transition',
     description: 'State-by-state generation mix evolution and pipeline projection',

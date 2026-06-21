@@ -1,0 +1,156 @@
+{
+  "metadata": {
+    "updated": "2026-06-21",
+    "version": "3.17.0"
+  },
+  "notes": [
+    {
+      "id": "bess-cannibalisation-q1-2026",
+      "date": "2026-06-20",
+      "category": "bess-market",
+      "title": "BESS Revenue Cannibalisation Accelerating — Q1 2026 Data",
+      "sections": [
+        {
+          "heading": "Key Finding",
+          "body": "BESS revenues fell 38% YoY to $73k/MW/yr across the NEM in Q1 2026. May 2026 hit $29k/MW/yr — the lowest monthly figure since Modo Energy began tracking in July 2022. The correlation between installed capacity and revenue compression is now unmistakable."
+        },
+        {
+          "heading": "QLD as Leading Indicator",
+          "body": "Queensland energy-only revenues dropped 73% as BESS capacity grew 2.7x. QLD is 12-18 months ahead of NSW and VIC on the cannibalisation curve. This pattern will likely repeat as each state adds capacity — the physics of arbitrage are the same everywhere."
+        },
+        {
+          "heading": "Implications",
+          "body": "New BESS projects need to model revenue at $50-60k/MW/yr or lower for base-case financial close. Projects relying on $100k+ revenue assumptions from 2024 vintage forecasts face material downside risk. FCAS revenue is also compressing as more batteries compete for the same contingency volumes."
+        }
+      ],
+      "tags": ["revenue", "cannibalisation", "modo-energy", "financial-close"],
+      "related_project_ids": []
+    },
+    {
+      "id": "bess-price-setting-32pct",
+      "date": "2026-06-18",
+      "category": "bess-market",
+      "title": "Batteries Now Set NEM Marginal Price 32% of All Intervals",
+      "sections": [
+        {
+          "heading": "Market Shift",
+          "body": "In Q1 2026, batteries set the marginal price in 32% of all NEM trading intervals — up from roughly 12% in Q1 2024. During evening peaks the figure rises to ~40%, and during midday solar surplus periods batteries are the marginal price-setter in 61% of intervals."
+        },
+        {
+          "heading": "What This Means",
+          "body": "Batteries are no longer price-takers — they are the market. This structural shift means BESS bidding strategy directly influences wholesale prices for all participants. Gas peakers are being displaced from their traditional price-setting role, especially in evening shoulder periods."
+        }
+      ],
+      "tags": ["price-setting", "marginal-price", "market-structure"],
+      "related_project_ids": []
+    },
+    {
+      "id": "bess-8gw-milestone",
+      "date": "2026-06-15",
+      "category": "bess-market",
+      "title": "NEM BESS Fleet Exceeds 8 GW — Pipeline 33.2 GW",
+      "sections": [
+        {
+          "heading": "Capacity Milestone",
+          "body": "Installed NEM BESS capacity exceeded 8 GW in Q1 2026, with 4.4 GW added since Q1 2025. The connection pipeline stands at 33.2 GW — representing 49% of the entire NEM connection queue. Modo Energy projects 16.8 GW online by end 2027."
+        },
+        {
+          "heading": "Duration Mix Shifting",
+          "body": "The fleet is gradually shifting toward longer duration. Melbourne RE Hub A3 (commissioned Dec 2025) is the NEM's first 4-hour battery and is showing early signs of superior spread capture compared to the 2-hour fleet. New pipeline projects increasingly target 4-hour duration."
+        }
+      ],
+      "tags": ["capacity", "pipeline", "duration", "4-hour"],
+      "related_project_ids": ["melbourne-re-hub"]
+    },
+    {
+      "id": "nsw-t8-16gwh-storage",
+      "date": "2026-06-10",
+      "category": "cis-ltesa",
+      "title": "CIS Tender 8 Seeks 16 GWh of Storage Across NEM",
+      "sections": [
+        {
+          "heading": "Tender Overview",
+          "body": "CIS Tender 8 is open and seeking 16 GWh of storage capacity across the NEM. Results are expected mid-2026. This is the largest single storage procurement round under the Commonwealth CIS program to date."
+        },
+        {
+          "heading": "Strategic Questions",
+          "body": "A key unresolved policy question: can unsigned CIS winners from earlier rounds bid into current LTESA rounds? If allowed, this gives CIS winners dual-contract optionality. If disallowed, it protects LTESA round integrity. No definitive public guidance has been found."
+        }
+      ],
+      "tags": ["cis", "tender-8", "storage", "policy"],
+      "related_project_ids": []
+    },
+    {
+      "id": "wholesale-prices-q1-2026",
+      "date": "2026-06-08",
+      "category": "wholesale-prices",
+      "title": "NEM Wholesale Prices Down 12% YoY — NSW Hardest Hit",
+      "sections": [
+        {
+          "heading": "Price Trends",
+          "body": "NEM wholesale averaged ~$73/MWh in Q1 2026, down 12% YoY. NSW saw the sharpest decline at -33.3% in May 2026. SA and TAS proved most resilient at approximately -7% each, benefiting from limited interconnection which shields against oversupply spillover."
+        },
+        {
+          "heading": "Renewables Record",
+          "body": "Renewables hit a record 47% of NEM supply in Q1 2026. The combination of growing solar (depressing midday prices) and expanding BESS fleet (compressing evening peak spreads) is structurally lowering wholesale prices. This is good for consumers but challenging for merchant generators and new BESS projects."
+        }
+      ],
+      "tags": ["wholesale", "prices", "renewables-record", "state-comparison"],
+      "related_project_ids": []
+    },
+    {
+      "id": "bidding-sophistication-gap",
+      "date": "2026-06-05",
+      "category": "bess-market",
+      "title": "Elite vs Early-Stage Battery Operators — Spread Capture Gap Widening",
+      "sections": [
+        {
+          "heading": "Performance Dispersion",
+          "body": "The gap between top-performing and bottom-performing battery operators continues to widen. Elite operators (Eraring Battery, Hornsdale, Melbourne RE Hub A3) capture roughly 2x the price spread of early-stage operators. Trading platform sophistication and portfolio effects are the primary differentiators."
+        },
+        {
+          "heading": "Key Differentiators",
+          "body": "Three factors distinguish elite performers: (1) algorithmic trading platforms with sub-5-minute rebid capability, (2) portfolio effects — coal-BESS or wind-BESS co-optimisation, (3) years of operational data enabling better price forecasting. New entrants without these advantages face structurally lower revenues."
+        }
+      ],
+      "tags": ["bidding", "sophistication", "spread-capture", "trading-platforms"],
+      "related_project_ids": ["eraring-battery", "hornsdale-power-reserve", "melbourne-re-hub"]
+    },
+    {
+      "id": "senate-estimates-cis-jun-2026",
+      "date": "2026-06-02",
+      "category": "senate-estimates",
+      "title": "Senate Estimates — CIS Construction Progress Update Expected",
+      "sections": [
+        {
+          "heading": "Upcoming Hearings",
+          "body": "The next round of Senate Estimates budget hearings is expected to include questions on CIS construction progress. Key areas to watch: how many CIS-contracted projects have reached financial close, construction start rates by tender round, and whether any contracted projects have been terminated or restructured."
+        },
+        {
+          "heading": "Tracking Approach",
+          "body": "Monitor Hansard transcripts from the Environment and Communications Legislation Committee and the Economics Legislation Committee for ARENA/CEFC/CIS questioning. Key officials: DCCEEW Secretary, ARENA CEO, CEFC CEO."
+        }
+      ],
+      "tags": ["senate", "estimates", "cis", "construction-progress"],
+      "related_project_ids": []
+    },
+    {
+      "id": "rez-congestion-cwo-sw",
+      "date": "2026-05-28",
+      "category": "rez-transmission",
+      "title": "REZ Access Right Congestion — CWO and South-West NSW",
+      "sections": [
+        {
+          "heading": "Current State",
+          "body": "Central-West Orana has 13 access rights granted across 7,151 MW of allocated capacity, with a committed share of around 24%. South-West REZ has 6 access rights. Both zones face transmission congestion that limits the ability of new projects to secure firm access."
+        },
+        {
+          "heading": "Implications for New Projects",
+          "body": "Projects in these REZs without access rights face curtailment risk and should model revenue with a curtailment haircut. EnergyCo's next access scheme round timing is uncertain — projects should plan for 12-18 month lead times from application to grant."
+        }
+      ],
+      "tags": ["rez", "access-rights", "congestion", "cwo", "south-west"],
+      "related_project_ids": []
+    }
+  ]
+}

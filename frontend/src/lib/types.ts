@@ -1712,3 +1712,74 @@ export interface WindValueData {
   state_averages: Record<string, WindStateAverage>
   projects: Record<string, WindValueProject>
 }
+
+// --- Battery Market Intelligence ---
+
+export interface BatteryMarketData {
+  metadata: { updated: string; version: string; sources: { name: string; url: string }[] }
+  capacity_headline: {
+    installed_gw: number
+    pipeline_gw: number
+    pipeline_pct_queue: number
+    renewables_pct_q1_2026: number
+    modo_projected_gw_end_2027: number
+    capacity_added_since_q1_2025_gw: number
+  }
+  price_setting: {
+    summary: { pct_all: number; pct_evening: number; pct_midday_solar: number; period: string }
+    by_quarter: { period: string; battery: number; gas: number; hydro: number; coal: number }[]
+  }
+  revenue_trends: {
+    nem_avg_k_mw_yr: number
+    yoy_change_pct: number
+    may_2026_k_mw_yr: number
+    lowest_since: string
+    by_quarter: { period: string; nsw: number; qld: number; sa: number; vic: number }[]
+    qld_energy_only_yoy_drop_pct: number
+    qld_bess_capacity_growth_factor: number
+  }
+  wholesale_prices: {
+    nem_avg_q1_2026: number
+    yoy_change_pct: number
+    by_quarter: { period: string; nsw: number; qld: number; sa: number; vic: number; tas: number }[]
+    may_2026_yoy_by_state: Record<string, number>
+  }
+  cannibalisation: {
+    by_quarter: { period: string; installed_gw: number; revenue_k_mw_yr: number }[]
+    by_state_latest: { state: string; installed_gw: number; revenue_k_mw_yr: number }[]
+  }
+  bidding_sophistication: {
+    top_performers: {
+      entity: string; state: string; spread_capture_pct: number
+      tier: 'elite' | 'advanced' | 'developing' | 'early'; note: string
+    }[]
+    tier_thresholds: Record<string, number>
+    insight: string
+  }
+  key_insights: string[]
+}
+
+// --- Research Notes ---
+
+export type ResearchNoteCategory =
+  | 'bess-market'
+  | 'cis-ltesa'
+  | 'wholesale-prices'
+  | 'policy'
+  | 'rez-transmission'
+  | 'senate-estimates'
+
+export interface ResearchNote {
+  id: string
+  date: string
+  category: ResearchNoteCategory
+  title: string
+  sections: { heading?: string; body: string }[]
+  tags: string[]
+  related_project_ids: string[]
+}
+
+export interface ResearchNotesData {
+  metadata: { updated: string; version: string }
+  notes: ResearchNote[]
+}

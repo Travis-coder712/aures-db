@@ -325,6 +325,12 @@ export const PAGE_SOURCES: Record<string, SourceId[]> = {
   // Risk & Probability Signals — supply chain concentration (T3.I) + scheme win probability (T3.J)
   'risk-signals': ['aemo_generation_info', 'web_research', 'json_export'],
 
+  // Battery Market Intelligence — curated market-level BESS analysis
+  'battery-market': ['web_research', 'nemweb_bids', 'market_prices', 'json_export'],
+
+  // Research Notes — time-stamped analyst commentary
+  'research-notes': ['web_research', 'json_export'],
+
   // Core
   projects: ['aemo_generation_info', 'openelectricity_performance', 'web_research', 'json_export'],
   dashboard: ['aemo_generation_info', 'openelectricity_performance', 'json_export'],

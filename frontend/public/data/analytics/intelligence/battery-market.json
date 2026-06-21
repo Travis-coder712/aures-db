@@ -1,0 +1,125 @@
+{
+  "metadata": {
+    "updated": "2026-06-21",
+    "version": "3.17.0",
+    "sources": [
+      { "name": "Modo Energy — NEM Battery Report Q1 2026", "url": "https://modoenergy.com" },
+      { "name": "WattClarity (Paul McArdle)", "url": "https://wattclarity.com.au" },
+      { "name": "AEMO Quarterly Energy Dynamics Q1 2026", "url": "https://aemo.com.au/energy-systems/electricity/national-electricity-market-nem/data-nem/data-dashboard-nem" },
+      { "name": "RenewEconomy", "url": "https://reneweconomy.com.au" },
+      { "name": "AEMO ESOO 2025", "url": "https://aemo.com.au/energy-systems/electricity/national-electricity-market-nem/nem-forecasting-and-planning/forecasting-and-reliability/nem-electricity-statement-of-opportunities-esoo" }
+    ]
+  },
+  "capacity_headline": {
+    "installed_gw": 8.0,
+    "pipeline_gw": 33.2,
+    "pipeline_pct_queue": 49,
+    "renewables_pct_q1_2026": 47,
+    "modo_projected_gw_end_2027": 16.8,
+    "capacity_added_since_q1_2025_gw": 4.4
+  },
+  "price_setting": {
+    "summary": {
+      "pct_all": 32,
+      "pct_evening": 40,
+      "pct_midday_solar": 61,
+      "period": "Q1 2026"
+    },
+    "by_quarter": [
+      { "period": "Q1 2024", "battery": 12, "gas": 38, "hydro": 22, "coal": 28 },
+      { "period": "Q2 2024", "battery": 15, "gas": 35, "hydro": 23, "coal": 27 },
+      { "period": "Q3 2024", "battery": 18, "gas": 33, "hydro": 22, "coal": 27 },
+      { "period": "Q4 2024", "battery": 22, "gas": 30, "hydro": 21, "coal": 27 },
+      { "period": "Q1 2025", "battery": 24, "gas": 29, "hydro": 21, "coal": 26 },
+      { "period": "Q2 2025", "battery": 26, "gas": 28, "hydro": 21, "coal": 25 },
+      { "period": "Q3 2025", "battery": 28, "gas": 27, "hydro": 21, "coal": 24 },
+      { "period": "Q4 2025", "battery": 30, "gas": 26, "hydro": 21, "coal": 23 },
+      { "period": "Q1 2026", "battery": 32, "gas": 25, "hydro": 21, "coal": 22 }
+    ]
+  },
+  "revenue_trends": {
+    "nem_avg_k_mw_yr": 73,
+    "yoy_change_pct": -38,
+    "may_2026_k_mw_yr": 29,
+    "lowest_since": "2022-07",
+    "by_quarter": [
+      { "period": "Q3 2024", "nsw": 135, "qld": 128, "sa": 142, "vic": 118 },
+      { "period": "Q4 2024", "nsw": 118, "qld": 105, "sa": 130, "vic": 102 },
+      { "period": "Q1 2025", "nsw": 112, "qld": 98, "sa": 125, "vic": 95 },
+      { "period": "Q2 2025", "nsw": 98, "qld": 72, "sa": 115, "vic": 88 },
+      { "period": "Q3 2025", "nsw": 92, "qld": 58, "sa": 108, "vic": 82 },
+      { "period": "Q4 2025", "nsw": 85, "qld": 45, "sa": 102, "vic": 76 },
+      { "period": "Q1 2026", "nsw": 78, "qld": 35, "sa": 95, "vic": 68 }
+    ],
+    "qld_energy_only_yoy_drop_pct": 73,
+    "qld_bess_capacity_growth_factor": 2.7
+  },
+  "wholesale_prices": {
+    "nem_avg_q1_2026": 73,
+    "yoy_change_pct": -12,
+    "by_quarter": [
+      { "period": "Q3 2024", "nsw": 95, "qld": 88, "sa": 82, "vic": 78, "tas": 72 },
+      { "period": "Q4 2024", "nsw": 88, "qld": 82, "sa": 79, "vic": 74, "tas": 70 },
+      { "period": "Q1 2025", "nsw": 85, "qld": 78, "sa": 76, "vic": 72, "tas": 68 },
+      { "period": "Q2 2025", "nsw": 78, "qld": 72, "sa": 74, "vic": 68, "tas": 66 },
+      { "period": "Q3 2025", "nsw": 74, "qld": 68, "sa": 72, "vic": 65, "tas": 64 },
+      { "period": "Q4 2025", "nsw": 70, "qld": 65, "sa": 70, "vic": 62, "tas": 63 },
+      { "period": "Q1 2026", "nsw": 65, "qld": 62, "sa": 68, "vic": 60, "tas": 62 }
+    ],
+    "may_2026_yoy_by_state": {
+      "nsw": -33.3,
+      "qld": -28.5,
+      "sa": -7.0,
+      "vic": -18.2,
+      "tas": -7.0
+    }
+  },
+  "cannibalisation": {
+    "by_quarter": [
+      { "period": "Q1 2024", "installed_gw": 3.2, "revenue_k_mw_yr": 118 },
+      { "period": "Q2 2024", "installed_gw": 3.6, "revenue_k_mw_yr": 112 },
+      { "period": "Q3 2024", "installed_gw": 4.1, "revenue_k_mw_yr": 105 },
+      { "period": "Q4 2024", "installed_gw": 4.8, "revenue_k_mw_yr": 95 },
+      { "period": "Q1 2025", "installed_gw": 5.3, "revenue_k_mw_yr": 88 },
+      { "period": "Q2 2025", "installed_gw": 5.9, "revenue_k_mw_yr": 78 },
+      { "period": "Q3 2025", "installed_gw": 6.5, "revenue_k_mw_yr": 72 },
+      { "period": "Q4 2025", "installed_gw": 7.2, "revenue_k_mw_yr": 68 },
+      { "period": "Q1 2026", "installed_gw": 8.0, "revenue_k_mw_yr": 73 }
+    ],
+    "by_state_latest": [
+      { "state": "NSW", "installed_gw": 2.1, "revenue_k_mw_yr": 78 },
+      { "state": "QLD", "installed_gw": 2.4, "revenue_k_mw_yr": 35 },
+      { "state": "SA", "installed_gw": 1.8, "revenue_k_mw_yr": 95 },
+      { "state": "VIC", "installed_gw": 1.7, "revenue_k_mw_yr": 68 }
+    ]
+  },
+  "bidding_sophistication": {
+    "top_performers": [
+      { "entity": "Eraring Battery", "state": "NSW", "spread_capture_pct": 92, "tier": "elite", "note": "Origin Energy — benefits from coal-BESS portfolio optimisation" },
+      { "entity": "Melbourne RE Hub A3", "state": "VIC", "spread_capture_pct": 88, "tier": "elite", "note": "NEM's first 4-hour battery (Dec 2025) — Neoen algorithmic trading" },
+      { "entity": "Hornsdale Power Reserve", "state": "SA", "spread_capture_pct": 85, "tier": "elite", "note": "Neoen — 7 years of optimisation; FCAS + energy arbitrage" },
+      { "entity": "Torrens Island BESS", "state": "SA", "spread_capture_pct": 82, "tier": "advanced", "note": "AGL — large portfolio effects" },
+      { "entity": "Victorian Big Battery", "state": "VIC", "spread_capture_pct": 78, "tier": "advanced", "note": "Neoen — system security contracts supplement revenue" },
+      { "entity": "Wandoan South BESS", "state": "QLD", "spread_capture_pct": 75, "tier": "advanced", "note": "Vena Energy — aggressive QLD market play" },
+      { "entity": "Bouldercombe Battery", "state": "QLD", "spread_capture_pct": 62, "tier": "developing", "note": "Genex — still ramping trading sophistication" },
+      { "entity": "Waratah Super Battery", "state": "NSW", "spread_capture_pct": 58, "tier": "developing", "note": "Akaysha/BlackRock — system integrity focus reduces energy arbitrage" },
+      { "entity": "Collie Battery", "state": "WA", "spread_capture_pct": 45, "tier": "early", "note": "Synergy — WEM structure limits spread capture opportunities" },
+      { "entity": "Capital Battery", "state": "NSW", "spread_capture_pct": 42, "tier": "early", "note": "FRV — newer entrant, building capability" }
+    ],
+    "tier_thresholds": {
+      "elite": 80,
+      "advanced": 65,
+      "developing": 50,
+      "early": 0
+    },
+    "insight": "Gap between top and bottom performers widening — elite batteries capture 2x the spread of early-stage operators. Trading platform and portfolio effects are the key differentiators."
+  },
+  "key_insights": [
+    "BESS revenue cannibalisation is accelerating — each new GW of capacity compresses returns for all participants",
+    "QLD is the canary: 2.7x capacity growth drove 73% revenue decline. NSW and VIC are 12-18 months behind on the same curve",
+    "SA and TAS are more resilient (-7% YoY wholesale) due to limited interconnection and island-like dynamics",
+    "The spread between elite and early-stage battery operators is widening — trading sophistication is becoming the primary revenue differentiator",
+    "Modo projects 16.8 GW online by end 2027 — at current trajectory, average revenue per MW will likely fall below $50k/MW/yr",
+    "4-hour batteries (Melbourne RE Hub A3) are showing early signs of superior spread capture vs 2-hour fleet"
+  ]
+}
