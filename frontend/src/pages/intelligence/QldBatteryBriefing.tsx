@@ -53,12 +53,15 @@ export default function QldBatteryBriefing() {
     if (!pdfRef.current || exporting) return
     setExporting(true)
     setPdfMode(true)
-    await new Promise(r => setTimeout(r, 300))
+    // Recharts needs time to mount + render all 5 sections' SVG charts
+    await new Promise(r => setTimeout(r, 1500))
     try {
       await exportElementToPdf(pdfRef.current, {
         filename: 'QLD-Battery-Investment-Briefing',
         title: 'Queensland Battery Investment Briefing',
         subtitle: `AURES Intelligence · ${new Date().toLocaleDateString('en-AU', { day: 'numeric', month: 'long', year: 'numeric' })}`,
+        scale: 2,
+        jpegQuality: 0.88,
       })
     } finally { setExporting(false); setPdfMode(false) }
   }
@@ -97,14 +100,26 @@ export default function QldBatteryBriefing() {
         ))}
       </div>
 
-      <div ref={pdfRef}>
+      <div ref={pdfRef} style={pdfMode ? { background: '#ffffff', color: '#0f172a', padding: '16px' } : undefined}>
         {pdfMode ? (
-          <div className="space-y-8">
-            <ThesisSection data={data} />
-            <div className="border-t border-[var(--color-border)] pt-6"><RevenueSection data={data} /></div>
-            <div className="border-t border-[var(--color-border)] pt-6"><TimelineSection data={data} /></div>
-            <div className="border-t border-[var(--color-border)] pt-6"><AnalysisSection data={data} /></div>
-            <div className="border-t border-[var(--color-border)] pt-6"><ContextSection data={data} /></div>
+          <div className="space-y-8" style={{ background: '#ffffff' }}>
+            <div style={{ borderBottom: '2px solid #e2e8f0', paddingBottom: 24 }}><ThesisSection data={data} /></div>
+            <div style={{ borderBottom: '2px solid #e2e8f0', paddingBottom: 24 }}>
+              <h2 style={{ fontSize: 16, fontWeight: 700, color: '#0f172a', marginBottom: 16 }}>Revenue Collapse</h2>
+              <RevenueSection data={data} />
+            </div>
+            <div style={{ borderBottom: '2px solid #e2e8f0', paddingBottom: 24 }}>
+              <h2 style={{ fontSize: 16, fontWeight: 700, color: '#0f172a', marginBottom: 16 }}>QLD Pipeline &amp; Timeline</h2>
+              <TimelineSection data={data} />
+            </div>
+            <div style={{ borderBottom: '2px solid #e2e8f0', paddingBottom: 24 }}>
+              <h2 style={{ fontSize: 16, fontWeight: 700, color: '#0f172a', marginBottom: 16 }}>Investment Analysis</h2>
+              <AnalysisSection data={data} />
+            </div>
+            <div>
+              <h2 style={{ fontSize: 16, fontWeight: 700, color: '#0f172a', marginBottom: 16 }}>NEM Context</h2>
+              <ContextSection data={data} />
+            </div>
           </div>
         ) : (
           <>
