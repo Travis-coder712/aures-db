@@ -1,0 +1,178 @@
+{
+  "metadata": {
+    "updated": "2026-06-22",
+    "version": "3.17.2",
+    "title": "Queensland Battery Investment Briefing",
+    "subtitle": "Why now is the wrong time to deploy BESS capital in QLD",
+    "author": "AURES Intelligence",
+    "sources": [
+      { "name": "Modo Energy — NEM BESS Revenue Reports (monthly)", "url": "https://modoenergy.com" },
+      { "name": "Modo Energy — Q1 2026 Capture Rate Benchmark", "url": "https://modoenergy.com/research/en/australia-nem-battery-energy-storage-capture-rate-benchmark-q1-2026" },
+      { "name": "Modo Energy — Cap Contracts Historical Analysis", "url": "https://modoenergy.com/research/en/australia-nem-battery-energy-storage-cap-contracts-historical-analysis" },
+      { "name": "WattClarity — Battery Correlation Penalty", "url": "https://wattclarity.com.au/articles/2026/04/is-a-battery-correlation-penalty-looming/" },
+      { "name": "AEMO Quarterly Energy Dynamics Q1 2026", "url": "https://www.aemo.com.au/newsroom/media-release/renewables-lift-supply-share-as-batteries-re-shape-energy-markets" },
+      { "name": "Leading Edge Energy — May 2026 Market Review", "url": "https://leadingedgeenergy.com.au/blog/electricity-market-review-latest/" },
+      { "name": "ASX Energy — QLD Futures", "url": "https://www.asxenergy.com.au" },
+      { "name": "AURES Database — QLD BESS Projects", "url": "https://travis-coder712.github.io/aures-db/" }
+    ]
+  },
+  "thesis": {
+    "headline": "The wrong time to invest BESS capital in Queensland",
+    "summary": "QLD BESS capacity has grown 2.7x YoY while energy-only revenues collapsed 73%. The forward curve is flat at ~$79/MWh through 2029 — embedding the market's expectation that price volatility stays suppressed. Callide B's exit (2028) removes some supply, but it is more than offset by committed BESS capacity. CIS contracts underwrite revenue floors but do not solve the merchant cannibalisation problem. The structural case for new merchant QLD BESS investment is broken until coal retirements restore volatility — likely not before 2028-29 at the earliest.",
+    "position": "Avoid new merchant BESS capital deployment in QLD. Projects with CIS/LTESA revenue floors remain viable but at compressed returns. The investment window reopens when coal retirements materialise and demand growth (data centres, industrial loads) absorbs the excess capacity."
+  },
+  "qld_market_snapshot": {
+    "wholesale_price_may_2026": 76.34,
+    "wholesale_price_may_2025": 95.63,
+    "wholesale_yoy_pct": -20.2,
+    "twelve_month_avg": 73.64,
+    "forward_curve": {
+      "cy27": 79.15,
+      "cy28": 79.25,
+      "cy29": 79.01,
+      "commentary": "Effectively flat across CY27-CY29 in the $79/MWh range. The market anticipates limited price escalation. For BESS operators, this means the evening peak price ceiling is not expected to recover — the spread compression is priced in as structural, not cyclical."
+    },
+    "generation_mix_may_2026": {
+      "total_gwh": 5065,
+      "renewable_pct": 35.4,
+      "renewable_pct_prior_year": 29.5,
+      "wind_gwh": 625,
+      "wind_yoy_pct": 80.6,
+      "solar_gwh": 1198,
+      "solar_yoy_pct": 16.3,
+      "coal_gwh": 3209,
+      "coal_yoy_pct": -7.9,
+      "gas_gwh": 309,
+      "gas_yoy_pct": -13.7,
+      "battery_discharge_gwh": 125,
+      "battery_discharge_yoy_pct": 316.7
+    }
+  },
+  "revenue_collapse": {
+    "qld_q1_2026_revenue_k": 35,
+    "qld_yoy_drop_pct": -73,
+    "qld_spread_q1_2026": 78,
+    "qld_spread_prior_year": 244,
+    "spread_drop_pct": -68,
+    "nem_may_2026_revenue_k": 29,
+    "narrative": "QLD went from the NEM's top-earning BESS state to its worst-performing in a single year. Energy-only revenues dropped 73% while capacity grew 2.7x. Price spreads fell from $244/MWh to $78/MWh — a 68% compression. Paradoxically, QLD batteries still recorded the highest capture rates fleet-wide in Q1 2026 (consistent arbitrage conditions), but capturing a large share of a tiny spread still means poor returns.",
+    "monthly_trajectory": [
+      { "period": "2025-06", "revenue_k": 200, "note": "Record — coal outages + cold snap" },
+      { "period": "2025-07", "revenue_k": 157, "note": "" },
+      { "period": "2025-08", "revenue_k": 96, "note": "QLD avg; SA outlier at $563k" },
+      { "period": "2025-09", "revenue_k": 65, "note": "Decline begins" },
+      { "period": "2025-10", "revenue_k": 62, "note": "" },
+      { "period": "2025-11", "revenue_k": 48, "note": "Mild conditions" },
+      { "period": "2025-12", "revenue_k": 42, "note": "" },
+      { "period": "2026-01", "revenue_k": 88, "note": "Heatwave bounce" },
+      { "period": "2026-02", "revenue_k": 38, "note": "" },
+      { "period": "2026-03", "revenue_k": 30, "note": "Near record low" },
+      { "period": "2026-05", "revenue_k": 22, "note": "QLD worst in NEM" }
+    ]
+  },
+  "capacity_buildout": {
+    "operating": {
+      "count": 8,
+      "total_mw": 2410,
+      "total_mwh": 4758,
+      "projects": [
+        { "name": "Supernode BESS", "mw": 1300, "mwh": 2600, "developer": "Quinbrook Infrastructure", "cod": "2026-01", "status": "operating", "note": "Stage 1; CATL batteries; contracted to Origin + Stanwell. Stages 2-3 under construction." },
+        { "name": "Western Downs Battery S1-2", "mw": 510, "mwh": 510, "developer": "Neoen (Brookfield)", "cod": "2025-12", "status": "commissioning", "note": "Tesla Megapack; virtual toll with AGL, Shell, Engie" },
+        { "name": "Tarong BESS", "mw": 300, "mwh": 600, "developer": "Stanwell Corporation", "cod": "2026-02", "status": "operating", "note": "Government-owned generator" },
+        { "name": "Brendale BESS", "mw": 205, "mwh": 410, "developer": "Akaysha Energy (BlackRock)", "cod": "2026-01", "status": "operating", "note": "5 months ahead of schedule; Q1 2026 capture rate #3 in NEM" },
+        { "name": "Greenbank BESS", "mw": 200, "mwh": 400, "developer": "CS Energy", "cod": "2025-02", "status": "operating", "note": "Government-owned generator" },
+        { "name": "Ulinda Park BESS", "mw": 155, "mwh": 298, "developer": "Akaysha Energy (BlackRock)", "cod": "2025-06", "status": "operating", "note": "" },
+        { "name": "Chinchilla BESS", "mw": 100, "mwh": 200, "developer": "CS Energy", "cod": "2023-12", "status": "operating", "note": "Government-owned generator" },
+        { "name": "Wandoan South BESS", "mw": 100, "mwh": 150, "developer": "Vena Energy", "cod": "2021-09", "status": "operating", "note": "QLD's first grid-scale battery" },
+        { "name": "Bouldercombe Battery", "mw": 50, "mwh": 100, "developer": "Genex Power", "cod": "2023-08", "status": "operating", "note": "Fire during commissioning (grid-side, not Megapack); delivered on budget" }
+      ]
+    },
+    "under_construction": {
+      "count": 2,
+      "total_mw": 732,
+      "total_mwh": 1103,
+      "projects": [
+        { "name": "Woolooga BESS", "mw": 222, "mwh": 593, "developer": "Lightsource bp", "expected_cod": "2026-09", "note": "" },
+        { "name": "Western Downs Stage 3", "mw": 395, "mwh": 510, "developer": "Neoen", "expected_cod": "late 2027", "note": "Total project: 845 MW / 2,300 MWh" }
+      ]
+    },
+    "committed_pipeline": {
+      "count": 3,
+      "total_mw": 1820,
+      "total_mwh": 5055,
+      "projects": [
+        { "name": "Supernode Stages 2-3", "mw": 520, "mwh": 2455, "developer": "Quinbrook", "expected_cod": "2026-2027", "note": "Expandable to 1 GW+ / 5 GWh" },
+        { "name": "Bulli Creek Battery", "mw": 600, "mwh": 2400, "developer": "Genex Power", "expected_cod": "2028", "note": "" },
+        { "name": "Nebo BESS", "mw": 900, "mwh": 1799, "developer": "TagEnergy", "expected_cod": "2028-12", "note": "" }
+      ]
+    },
+    "development_pipeline": {
+      "count": 124,
+      "total_mw": 44357,
+      "total_mwh": 99160,
+      "note": "124 QLD BESS projects in AURES database at development stage — 44.4 GW / 99.2 GWh. Even if only 10% reach financial close, that's 4.4 GW of additional competition for the same arbitrage spreads."
+    },
+    "timeline_events": [
+      { "date": "2021-09", "event": "Wandoan South COD (100 MW)", "type": "cod", "cumulative_mw": 100 },
+      { "date": "2023-08", "event": "Bouldercombe COD (50 MW)", "type": "cod", "cumulative_mw": 150 },
+      { "date": "2023-12", "event": "Chinchilla COD (100 MW)", "type": "cod", "cumulative_mw": 250 },
+      { "date": "2024-06", "event": "Brendale construction starts", "type": "construction_start", "cumulative_mw": 250 },
+      { "date": "2024-10", "event": "Woolooga construction starts", "type": "construction_start", "cumulative_mw": 250 },
+      { "date": "2025-01", "event": "Supernode financial close ($722M debt)", "type": "fid", "cumulative_mw": 250 },
+      { "date": "2025-02", "event": "Greenbank COD (200 MW)", "type": "cod", "cumulative_mw": 450 },
+      { "date": "2025-06", "event": "Ulinda Park COD (155 MW)", "type": "cod", "cumulative_mw": 605 },
+      { "date": "2025-09", "event": "Brendale COD (205 MW) — 5 months early", "type": "cod", "cumulative_mw": 810 },
+      { "date": "2025-10", "event": "Supernode Stage 1 grid connection", "type": "energisation", "cumulative_mw": 810 },
+      { "date": "2025-12", "event": "Western Downs S1-2 commissioning (510 MW)", "type": "cod", "cumulative_mw": 1320 },
+      { "date": "2026-01", "event": "Supernode Stage 1 COD (1,300 MW nameplate)", "type": "cod", "cumulative_mw": 2410 },
+      { "date": "2026-02", "event": "Tarong BESS COD (300 MW)", "type": "cod", "cumulative_mw": 2410 },
+      { "date": "2026-09", "event": "Woolooga COD expected (222 MW)", "type": "cod_expected", "cumulative_mw": 2632 },
+      { "date": "2027-06", "event": "Supernode Stages 2-3 expected", "type": "cod_expected", "cumulative_mw": 3152 },
+      { "date": "2027-12", "event": "Western Downs Stage 3 expected (395 MW)", "type": "cod_expected", "cumulative_mw": 3547 },
+      { "date": "2028-06", "event": "Callide B closure (~700 MW coal removed)", "type": "coal_exit", "cumulative_mw": 3547 },
+      { "date": "2028-12", "event": "Bulli Creek + Nebo expected (~1,500 MW)", "type": "cod_expected", "cumulative_mw": 5047 }
+    ]
+  },
+  "investment_case_analysis": {
+    "why_now_is_wrong": [
+      "QLD BESS revenue collapsed 73% YoY while capacity grew 2.7x — the cannibalisation dynamic is accelerating, not stabilising",
+      "Forward curve is flat at ~$79/MWh through 2029 — the market has priced in permanently suppressed volatility. There is no forward price signal suggesting recovery",
+      "Battery discharge in QLD grew 317% YoY (30 GWh → 125 GWh in May) — the fleet is still growing rapidly and further compression is coming",
+      "2,632 MW will be operating by end 2026 (up from 250 MW at end 2023). Another 2,400+ MW is committed for 2027-2028",
+      "FCAS is structurally saturated (9% of NEM revenue, declining). QLD batteries cannot rely on FCAS as a revenue diversifier",
+      "Callide B closure (2028) removes ~700 MW of coal but this is more than offset by the ~2,400 MW of committed BESS arriving in the same window",
+      "Merchant revenue at $22-35k/MW/yr is below the debt-service threshold for most project finance structures"
+    ],
+    "cis_does_not_solve_it": {
+      "narrative": "CIS contracts provide a revenue floor that enables financial close — but they don't solve the merchant cannibalisation problem. A CIS-contracted battery receives its floor payment regardless of market conditions, but the merchant upside that justified the project's IRR at FID has evaporated. If CIS expands further (Tender 8 seeks 16 GWh), more batteries will be deployed at government-underwritten terms, adding capacity that compresses returns for ALL batteries — including those without CIS protection.",
+      "risk": "CIS creates a moral hazard: government-underwritten BESS capacity erodes the returns of merchant BESS, potentially requiring even more government intervention to sustain deployment. The CIS becomes self-perpetuating rather than transitional."
+    },
+    "callide_offset": {
+      "callide_exit_mw": 700,
+      "committed_bess_arriving_mw": 2400,
+      "net_capacity_change_mw": 1700,
+      "narrative": "Callide B's exit (~700 MW coal, 2028) will restore some supply scarcity. But 2,400+ MW of committed BESS is arriving in the same 2027-2028 window. Net effect: QLD gains ~1,700 MW of net new dispatchable capacity. Supply does not decrease — it transforms from coal to BESS, with more total MW competing for the same spreads."
+    },
+    "resi_batteries_eating_lunch": {
+      "installed_systems_since_jul_2025": 219000,
+      "installed_gwh": 4.7,
+      "narrative": "Behind-the-meter batteries (219,000 systems, 4.7 GWh since the July 2025 federal subsidy) are compressing grid-scale BESS margins from the demand side. Residential batteries charge from rooftop solar and discharge during the evening peak — exactly the same hours that grid-scale batteries target. Every kWh served by a home battery is a kWh that doesn't need to be served by a grid-scale battery. WattClarity: 'reasonable to ask when we'll start seeing obvious signs that behind-the-meter storage is eating into the market's dinner.'"
+    },
+    "data_centres_not_a_qld_saviour": {
+      "nem_wide_growth": "4x by 2030",
+      "qld_specific": "Far less pronounced in QLD than NSW/VIC. Australia's major data centre corridor is Sydney (Western Sydney, Badgerys Creek, Macquarie Park) and Melbourne (Fishermans Bend, Derrimut). QLD has some data centre activity (Supernode is sited near a Brisbane data centre) but the demand impact is an order of magnitude smaller.",
+      "how_it_plays_out": "Data centre demand is broadly good for baseload and solar — data centres run 24/7 with flat load profiles. This supports coal/gas/solar generators, not necessarily BESS. Batteries benefit only if data centre demand increases evening peak loads (which it does, modestly) or creates enough total demand growth to tighten supply-demand balance. In QLD, the demand uplift is insufficient to offset the supply glut from committed BESS pipeline."
+    },
+    "how_long_does_this_last": {
+      "best_case": "2028-29 — Callide B exits, no replacement coal, and demand growth from industrial loads begins to tighten the market. QLD spreads recover to $150-200/MWh and merchant BESS revenue returns to $60-80k/MW/yr.",
+      "base_case": "2029-30 — Callide B + possible early Gladstone unit retirement, combined with SA-style interconnector constraints creating occasional QLD islanding events with FCAS scarcity. Spreads recover partially to $120-160/MWh.",
+      "worst_case": "2030+ — Committed BESS pipeline continues to overwhelm any supply-side recovery. Behind-the-meter batteries and demand response flatten peak demand further. QLD BESS merchant revenue settles at $40-50k/MW/yr permanently. Only contracted batteries survive.",
+      "conclusion": "The investment window for QLD merchant BESS is closed until at least 2028-29. For developers with contracted revenue (CIS, LTESA, virtual tolls), the window is open but at compressed returns. The key signal to watch: QLD forward spread (peak minus off-peak) — when this starts widening on the ASX curve, the market is pricing in coal retirement scarcity."
+    }
+  },
+  "broader_context": {
+    "nsw_vic_following": "The same dynamics are showing up in NSW and VIC, but later and with larger supply changes ahead. NSW faces Eraring's 2.88 GW exit (late 2027, possibly 2029) and Yallourn's 1.48 GW exit (mid 2028). These are much larger removals than Callide B and will create material volatility events. NSW and VIC BESS investments may benefit from this — but QLD, with no comparable coal exits beyond Callide B, gets no such relief.",
+    "nsw_revenue_halved": "NSW energy-only BESS revenue halved YoY. Average duration increased to 3.2 hours (nearly doubling), partially offsetting the decline. But the trajectory is the same as QLD — just 12-18 months behind.",
+    "vic_flat": "VIC BESS revenue essentially flat YoY. Spreads fell to $86/MWh. Battery fleet set prices above $300/MWh slightly more often, but the role was divided by more assets. Yallourn's exit will be the key event for VIC battery economics."
+  }
+}
