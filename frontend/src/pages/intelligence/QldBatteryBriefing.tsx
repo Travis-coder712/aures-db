@@ -47,16 +47,20 @@ export default function QldBatteryBriefing() {
       .catch(() => setLoading(false))
   }, [])
 
+  const [pdfMode, setPdfMode] = useState(false)
+
   const handleExportPdf = async () => {
     if (!pdfRef.current || exporting) return
     setExporting(true)
+    setPdfMode(true)
+    await new Promise(r => setTimeout(r, 300))
     try {
       await exportElementToPdf(pdfRef.current, {
         filename: 'QLD-Battery-Investment-Briefing',
         title: 'Queensland Battery Investment Briefing',
         subtitle: `AURES Intelligence · ${new Date().toLocaleDateString('en-AU', { day: 'numeric', month: 'long', year: 'numeric' })}`,
       })
-    } finally { setExporting(false) }
+    } finally { setExporting(false); setPdfMode(false) }
   }
 
   if (loading) return <div className="p-6 lg:p-8 max-w-6xl mx-auto"><div className="animate-pulse h-8 bg-[var(--color-bg-elevated)] rounded w-1/3" /></div>
@@ -94,11 +98,23 @@ export default function QldBatteryBriefing() {
       </div>
 
       <div ref={pdfRef}>
-        {activeSection === 'thesis' && <ThesisSection data={data} />}
-        {activeSection === 'revenue' && <RevenueSection data={data} />}
-        {activeSection === 'timeline' && <TimelineSection data={data} />}
-        {activeSection === 'analysis' && <AnalysisSection data={data} />}
-        {activeSection === 'context' && <ContextSection data={data} />}
+        {pdfMode ? (
+          <div className="space-y-8">
+            <ThesisSection data={data} />
+            <div className="border-t border-[var(--color-border)] pt-6"><RevenueSection data={data} /></div>
+            <div className="border-t border-[var(--color-border)] pt-6"><TimelineSection data={data} /></div>
+            <div className="border-t border-[var(--color-border)] pt-6"><AnalysisSection data={data} /></div>
+            <div className="border-t border-[var(--color-border)] pt-6"><ContextSection data={data} /></div>
+          </div>
+        ) : (
+          <>
+            {activeSection === 'thesis' && <ThesisSection data={data} />}
+            {activeSection === 'revenue' && <RevenueSection data={data} />}
+            {activeSection === 'timeline' && <TimelineSection data={data} />}
+            {activeSection === 'analysis' && <AnalysisSection data={data} />}
+            {activeSection === 'context' && <ContextSection data={data} />}
+          </>
+        )}
       </div>
 
       {/* Sources */}
@@ -242,18 +258,35 @@ function RevenueSection({ data }: { data: BriefingData }) {
 function TimelineSection({ data }: { data: BriefingData }) {
   const cap = data.capacity_buildout
   const events = cap.timeline_events
+  const tiers = cap.pipeline_tiers
 
   const EVENT_COLOURS: Record<string, string> = {
     cod: '#10b981', cod_expected: '#3b82f6', construction_start: '#f59e0b',
     fid: '#8b5cf6', energisation: '#06b6d4', coal_exit: '#ef4444',
   }
 
+  const EVENT_LABELS: Record<string, string> = {
+    cod: 'COD', cod_expected: 'COD expected', construction_start: 'Construction start',
+    fid: 'Financial close', energisation: 'Energisation', coal_exit: 'Coal exit',
+  }
+
+  const [visibleTypes, setVisibleTypes] = useState<Record<string, boolean>>({
+    cod: true, cod_expected: true, construction_start: true,
+    fid: true, energisation: true, coal_exit: true,
+  })
+
+  const toggleType = (type: string) => {
+    setVisibleTypes(prev => ({ ...prev, [type]: !prev[type] }))
+  }
+
+  const filteredEvents = events.filter((e: { type: string }) => visibleTypes[e.type])
+
   return (
     <div className="space-y-6">
-      {/* Cumulative capacity chart */}
+      {/* Cumulative capacity chart — stacked operating + construction */}
       <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl p-5">
         <h3 className="text-sm font-semibold text-[var(--color-text)] mb-1">QLD BESS Cumulative Capacity</h3>
-        <p className="text-xs text-[var(--color-text-muted)] mb-4">From 100 MW (2021) to 5,000+ MW committed by 2028. Callide B exit (red line) removes 700 MW of coal — dwarfed by BESS additions.</p>
+        <p className="text-xs text-[var(--color-text-muted)] mb-4">Operating (green) vs under construction (blue). From 100 MW (2021) to 4,500+ MW by 2028.</p>
         <div className="h-72 lg:h-80">
           <ResponsiveContainer width="100%" height="100%">
             <AreaChart data={events.filter((e: { cumulative_mw: number }) => e.cumulative_mw > 0)}>
@@ -266,41 +299,63 @@ function TimelineSection({ data }: { data: BriefingData }) {
                 return (
                   <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-lg p-3 shadow-xl text-xs">
                     <div className="font-medium text-[var(--color-text)]">{d.date}</div>
-                    <div className="text-emerald-400">{fmt(d.cumulative_mw)} MW cumulative</div>
+                    <div className="text-emerald-400">{fmt(d.cumulative_mw)} MW operating</div>
+                    {d.construction_mw > 0 && <div className="text-blue-400">{fmt(d.construction_mw)} MW under construction</div>}
                     <div className="text-[var(--color-text-muted)] mt-1">{d.event}</div>
                   </div>
                 )
               }} />
-              <Area type="stepAfter" dataKey="cumulative_mw" name="Cumulative MW" fill="#10b981" stroke="#10b981" fillOpacity={0.2} />
+              <Area type="stepAfter" dataKey="cumulative_mw" name="Operating MW" stackId="1" fill="#10b981" stroke="#10b981" fillOpacity={0.3} />
+              <Area type="stepAfter" dataKey="construction_mw" name="Construction MW" stackId="1" fill="#3b82f6" stroke="#3b82f6" fillOpacity={0.2} />
             </AreaChart>
           </ResponsiveContainer>
         </div>
+        <div className="flex gap-4 mt-2 justify-center">
+          <div className="flex items-center gap-1.5 text-[10px] text-[var(--color-text-muted)]">
+            <span className="w-3 h-2 rounded-sm bg-emerald-500/50" /> Operating
+          </div>
+          <div className="flex items-center gap-1.5 text-[10px] text-[var(--color-text-muted)]">
+            <span className="w-3 h-2 rounded-sm bg-blue-500/40" /> Under construction
+          </div>
+        </div>
       </div>
 
-      {/* Interactive timeline */}
+      {/* Interactive timeline with toggles */}
       <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl p-5">
-        <h4 className="text-sm font-semibold text-[var(--color-text)] mb-4">Event Timeline</h4>
-        <div className="flex flex-wrap gap-2 mb-4">
+        <h4 className="text-sm font-semibold text-[var(--color-text)] mb-3">Event Timeline</h4>
+        <div className="flex flex-wrap gap-1.5 mb-4">
           {Object.entries(EVENT_COLOURS).map(([type, colour]) => (
-            <div key={type} className="flex items-center gap-1.5 text-[10px] text-[var(--color-text-muted)]">
+            <button key={type} onClick={() => toggleType(type)}
+              className={`flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-[10px] font-medium transition-all ${
+                visibleTypes[type] ? 'border' : 'border opacity-40'
+              }`}
+              style={{
+                borderColor: visibleTypes[type] ? colour + '60' : 'var(--color-border)',
+                background: visibleTypes[type] ? colour + '15' : 'transparent',
+                color: visibleTypes[type] ? colour : 'var(--color-text-muted)',
+              }}>
               <span className="w-2 h-2 rounded-full" style={{ background: colour }} />
-              {type.replace(/_/g, ' ')}
-            </div>
+              {EVENT_LABELS[type] || type}
+            </button>
           ))}
         </div>
         <div className="space-y-2">
-          {events.map((e: { date: string; event: string; type: string; cumulative_mw: number }, i: number) => (
+          {filteredEvents.length === 0 ? (
+            <p className="text-xs text-[var(--color-text-muted)] text-center py-4">No events match the selected filters.</p>
+          ) : filteredEvents.map((e: { date: string; event: string; type: string; cumulative_mw: number; construction_mw: number }, i: number) => (
             <div key={i} className="flex gap-3 items-start">
               <div className="shrink-0 w-16 text-right">
                 <span className="text-[10px] font-mono text-[var(--color-text-muted)]">{e.date}</span>
               </div>
               <div className="shrink-0 flex flex-col items-center">
                 <div className="w-2.5 h-2.5 rounded-full" style={{ background: EVENT_COLOURS[e.type] || '#6b7280' }} />
-                {i < events.length - 1 && <div className="w-px flex-1 bg-[var(--color-border)] min-h-[12px]" />}
+                {i < filteredEvents.length - 1 && <div className="w-px flex-1 bg-[var(--color-border)] min-h-[12px]" />}
               </div>
               <div className="flex-1 min-w-0 pb-1">
                 <div className="text-xs text-[var(--color-text)] leading-relaxed">{e.event}</div>
-                <div className="text-[10px]" style={{ color: EVENT_COLOURS[e.type] || '#6b7280' }}>{fmt(e.cumulative_mw)} MW cumulative</div>
+                <div className="text-[10px]" style={{ color: EVENT_COLOURS[e.type] || '#6b7280' }}>
+                  {fmt(e.cumulative_mw)} MW operating{e.construction_mw > 0 ? ` · ${fmt(e.construction_mw)} MW construction` : ''}
+                </div>
               </div>
             </div>
           ))}
@@ -326,11 +381,51 @@ function TimelineSection({ data }: { data: BriefingData }) {
         </div>
       </div>
 
-      {/* Pipeline warning */}
-      <div className="bg-[var(--color-bg-card)] border border-amber-500/30 rounded-xl p-5">
-        <h4 className="text-sm font-semibold text-amber-400 mb-2">Development Pipeline: {cap.development_pipeline.count} Projects / {fmt(cap.development_pipeline.total_mw)} MW</h4>
-        <p className="text-xs text-[var(--color-text-muted)] leading-relaxed">{cap.development_pipeline.note}</p>
+      {/* Pipeline tiers */}
+      {tiers && (
+        <div className="space-y-4">
+          <h4 className="text-sm font-semibold text-[var(--color-text)]">Development Pipeline — Tiered by Probability</h4>
+
+          {/* Tier 1: CIS contracted */}
+          <PipelineTierCard tier={tiers.tier_1_cis_contracted} colour="#10b981" />
+
+          {/* Tier 2: Proven developers */}
+          <PipelineTierCard tier={tiers.tier_2_proven_developers} colour="#3b82f6" />
+
+          {/* Tier 3: Credible international */}
+          <PipelineTierCard tier={tiers.tier_3_credible_international} colour="#f59e0b" />
+
+          {/* Tier 4: Speculative */}
+          <div className="bg-[var(--color-bg-card)] border border-red-500/30 rounded-xl p-5">
+            <div className="flex items-center justify-between mb-2">
+              <h5 className="text-xs font-semibold text-red-400">{tiers.tier_4_speculative.label}</h5>
+              <span className="text-[10px] text-red-400">{tiers.tier_4_speculative.count} projects · {fmt(tiers.tier_4_speculative.total_mw)} MW</span>
+            </div>
+            <p className="text-xs text-[var(--color-text-muted)] leading-relaxed">{tiers.tier_4_speculative.note}</p>
+          </div>
+        </div>
+      )}
+    </div>
+  )
+}
+
+function PipelineTierCard({ tier, colour }: { tier: { label: string; count: number; total_mw: number; projects: { name: string; mw: number; developer: string; expected: string; note: string; scheme?: string }[]; note: string }; colour: string }) {
+  return (
+    <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl p-5">
+      <div className="flex items-center justify-between mb-3">
+        <h5 className="text-xs font-semibold" style={{ color: colour }}>{tier.label}</h5>
+        <span className="text-[10px]" style={{ color: colour }}>{tier.count} projects · {fmt(tier.total_mw)} MW</span>
       </div>
+      <div className="space-y-1.5 mb-3">
+        {tier.projects.map((p, i) => (
+          <div key={i} className="flex items-center gap-2 text-[10px]">
+            <span className="w-20 shrink-0 font-medium text-[var(--color-text)]">{p.mw} MW</span>
+            <span className="flex-1 text-[var(--color-text-muted)]">{p.name} — {p.developer}</span>
+            <span className="text-[var(--color-text-muted)] shrink-0">{p.expected}</span>
+          </div>
+        ))}
+      </div>
+      <p className="text-[10px] text-[var(--color-text-muted)] leading-relaxed italic">{tier.note}</p>
     </div>
   )
 }

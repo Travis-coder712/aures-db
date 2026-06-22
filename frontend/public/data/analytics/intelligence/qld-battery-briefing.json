@@ -113,25 +113,73 @@
       "note": "124 QLD BESS projects in AURES database at development stage — 44.4 GW / 99.2 GWh. Even if only 10% reach financial close, that's 4.4 GW of additional competition for the same arbitrage spreads."
     },
     "timeline_events": [
-      { "date": "2021-09", "event": "Wandoan South COD (100 MW)", "type": "cod", "cumulative_mw": 100 },
-      { "date": "2023-08", "event": "Bouldercombe COD (50 MW)", "type": "cod", "cumulative_mw": 150 },
-      { "date": "2023-12", "event": "Chinchilla COD (100 MW)", "type": "cod", "cumulative_mw": 250 },
-      { "date": "2024-06", "event": "Brendale construction starts", "type": "construction_start", "cumulative_mw": 250 },
-      { "date": "2024-10", "event": "Woolooga construction starts", "type": "construction_start", "cumulative_mw": 250 },
-      { "date": "2025-01", "event": "Supernode financial close ($722M debt)", "type": "fid", "cumulative_mw": 250 },
-      { "date": "2025-02", "event": "Greenbank COD (200 MW)", "type": "cod", "cumulative_mw": 450 },
-      { "date": "2025-06", "event": "Ulinda Park COD (155 MW)", "type": "cod", "cumulative_mw": 605 },
-      { "date": "2025-09", "event": "Brendale COD (205 MW) — 5 months early", "type": "cod", "cumulative_mw": 810 },
-      { "date": "2025-10", "event": "Supernode Stage 1 grid connection", "type": "energisation", "cumulative_mw": 810 },
-      { "date": "2025-12", "event": "Western Downs S1-2 commissioning (510 MW)", "type": "cod", "cumulative_mw": 1320 },
-      { "date": "2026-01", "event": "Supernode Stage 1 COD (1,300 MW nameplate)", "type": "cod", "cumulative_mw": 2410 },
-      { "date": "2026-02", "event": "Tarong BESS COD (300 MW)", "type": "cod", "cumulative_mw": 2410 },
-      { "date": "2026-09", "event": "Woolooga COD expected (222 MW)", "type": "cod_expected", "cumulative_mw": 2632 },
-      { "date": "2027-06", "event": "Supernode Stages 2-3 expected", "type": "cod_expected", "cumulative_mw": 3152 },
-      { "date": "2027-12", "event": "Western Downs Stage 3 expected (395 MW)", "type": "cod_expected", "cumulative_mw": 3547 },
-      { "date": "2028-06", "event": "Callide B closure (~700 MW coal removed)", "type": "coal_exit", "cumulative_mw": 3547 },
-      { "date": "2028-12", "event": "Bulli Creek + Nebo expected (~1,500 MW)", "type": "cod_expected", "cumulative_mw": 5047 }
-    ]
+      { "date": "2021-09", "event": "Wandoan South COD (100 MW)", "type": "cod", "cumulative_mw": 100, "construction_mw": 0 },
+      { "date": "2023-08", "event": "Bouldercombe COD (50 MW)", "type": "cod", "cumulative_mw": 150, "construction_mw": 0 },
+      { "date": "2023-12", "event": "Chinchilla COD (100 MW)", "type": "cod", "cumulative_mw": 250, "construction_mw": 0 },
+      { "date": "2024-06", "event": "Brendale construction starts (205 MW)", "type": "construction_start", "cumulative_mw": 250, "construction_mw": 205 },
+      { "date": "2024-10", "event": "Woolooga construction starts (222 MW)", "type": "construction_start", "cumulative_mw": 250, "construction_mw": 427 },
+      { "date": "2025-01", "event": "Supernode financial close ($722M debt)", "type": "fid", "cumulative_mw": 250, "construction_mw": 427 },
+      { "date": "2025-02", "event": "Greenbank COD (200 MW)", "type": "cod", "cumulative_mw": 450, "construction_mw": 427 },
+      { "date": "2025-06", "event": "Ulinda Park COD (155 MW)", "type": "cod", "cumulative_mw": 605, "construction_mw": 427 },
+      { "date": "2025-09", "event": "Brendale COD (205 MW) — 5 months early", "type": "cod", "cumulative_mw": 810, "construction_mw": 222 },
+      { "date": "2025-10", "event": "Supernode Stage 1 grid connection (260 MW)", "type": "energisation", "cumulative_mw": 810, "construction_mw": 1262 },
+      { "date": "2025-12", "event": "Western Downs S1-2 COD (510 MW)", "type": "cod", "cumulative_mw": 1320, "construction_mw": 752 },
+      { "date": "2026-01", "event": "Supernode Stage 1 COD (260 MW of 1,300 MW project)", "type": "cod", "cumulative_mw": 1580, "construction_mw": 492 },
+      { "date": "2026-02", "event": "Tarong BESS COD (300 MW)", "type": "cod", "cumulative_mw": 1880, "construction_mw": 492 },
+      { "date": "2026-09", "event": "Woolooga COD expected (222 MW)", "type": "cod_expected", "cumulative_mw": 2102, "construction_mw": 1310 },
+      { "date": "2027-06", "event": "Supernode Stages 2-3 expected (520 MW)", "type": "cod_expected", "cumulative_mw": 2622, "construction_mw": 790 },
+      { "date": "2027-12", "event": "Western Downs Stage 3 expected (395 MW)", "type": "cod_expected", "cumulative_mw": 3017, "construction_mw": 395 },
+      { "date": "2028-06", "event": "Callide B closure (~700 MW coal removed)", "type": "coal_exit", "cumulative_mw": 3017, "construction_mw": 1500 },
+      { "date": "2028-12", "event": "Bulli Creek + Nebo expected (~1,500 MW)", "type": "cod_expected", "cumulative_mw": 4517, "construction_mw": 0 }
+    ],
+    "pipeline_tiers": {
+      "tier_1_cis_contracted": {
+        "label": "CIS Contracted (not yet at FID/construction)",
+        "count": 1,
+        "total_mw": 222,
+        "projects": [
+          { "name": "Woolooga BESS", "mw": 222, "developer": "Lightsource bp", "scheme": "CIS Tender 1", "expected": "2026-09", "note": "Under construction — only QLD BESS with CIS contract" }
+        ],
+        "note": "Only one QLD BESS project has a CIS contract. The CIS pipeline for QLD storage is remarkably thin compared to NSW."
+      },
+      "tier_2_proven_developers": {
+        "label": "Proven developers (operating BESS track record in QLD)",
+        "count": 8,
+        "total_mw": 2660,
+        "projects": [
+          { "name": "Stanwell BESS", "mw": 300, "developer": "Stanwell Corporation", "expected": "2026-12", "note": "GOC; operates Tarong BESS" },
+          { "name": "Swanbank F Station", "mw": 250, "developer": "CleanCo QLD", "expected": "2026-01", "note": "GOC; operates Greenbank + Chinchilla" },
+          { "name": "Supernode Stage 3", "mw": 260, "developer": "Quinbrook", "expected": "2028-03", "note": "Operates Stage 1" },
+          { "name": "Supernode Stage 4", "mw": 260, "developer": "Quinbrook", "expected": "2028-09", "note": "" },
+          { "name": "Supernode North BESS", "mw": 260, "developer": "Quinbrook", "expected": "2028-12", "note": "" },
+          { "name": "Halys BESS 2", "mw": 500, "developer": "Akaysha Energy (BlackRock)", "expected": "2028-10", "note": "Operates Brendale + Ulinda Park" },
+          { "name": "Bulli Creek Battery", "mw": 600, "developer": "Genex Power", "expected": "2028-12", "note": "Operates Bouldercombe" },
+          { "name": "Pioneer BESS", "mw": 200, "developer": "Edify Energy", "expected": "2028-11", "note": "Operates Darlington Point/Riverina (NSW)" }
+        ],
+        "note": "Developers with operating BESS in QLD or NEM. Higher probability of reaching FID but still face the revenue cannibalisation headwind."
+      },
+      "tier_3_credible_international": {
+        "label": "Credible international developers (NEM or global track record)",
+        "count": 7,
+        "total_mw": 2665,
+        "projects": [
+          { "name": "Aldoga BESS Stage 1", "mw": 400, "developer": "Acciona Energy", "expected": "2027-12", "note": "Spanish developer; NEM wind/solar track record" },
+          { "name": "Karara BESS", "mw": 400, "developer": "Acciona Energy", "expected": "2027-12", "note": "" },
+          { "name": "Gin Gin BESS", "mw": 265, "developer": "Iberdrola", "expected": "2027-12", "note": "Global utility; NEM wind portfolio" },
+          { "name": "Theodore BESS", "mw": 240, "developer": "RWE", "expected": "2028-12", "note": "German utility; operates Limondale solar (NSW)" },
+          { "name": "Tully BESS", "mw": 200, "developer": "RWE", "expected": "2028-12", "note": "" },
+          { "name": "Nebo BESS", "mw": 900, "developer": "TagEnergy", "expected": "2028-12", "note": "French developer; also has Raglan 500 MW" },
+          { "name": "The Block BESS", "mw": 300, "developer": "Samsung C&T", "expected": "2028-12", "note": "Korean conglomerate" }
+        ],
+        "note": "International developers with balance sheet capacity but may lack local BESS operating experience."
+      },
+      "tier_4_speculative": {
+        "label": "Speculative / early-stage (no NEM BESS track record, no contracted revenue)",
+        "count": 108,
+        "total_mw": 39000,
+        "note": "108 projects totalling ~39 GW. Many are connection queue placeholders (KCI registrations) from developers without NEM BESS operating experience or contracted revenue. Conversion rate to FID is historically <5% for this tier."
+      }
+    }
   },
   "investment_case_analysis": {
     "why_now_is_wrong": [
