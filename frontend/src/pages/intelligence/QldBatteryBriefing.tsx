@@ -633,32 +633,228 @@ function ContextSection({ data }: { data: BriefingData }) {
   )
 }
 
-// ---------- PDF Content ----------
+// ---------- PDF Content (inline styles, fixed widths, no Tailwind responsive) ----------
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function PdfBriefingContent({ data, contractData }: { data: BriefingData; contractData?: any }) {
+  const t = data.thesis
+  const snap = data.qld_market_snapshot
+  const rev = data.revenue_collapse
+  const analysis = data.investment_case_analysis
+  const cap = data.capacity_buildout
+  const ctx = data.broader_context
+  const fwd = contractData?.forward_curve?.dec_2025_close || {}
+  const fwdMay = contractData?.forward_curve?.may_2026_close || {}
+  const spots = contractData?.quarterly_spot_prices?.data || []
+  const forwardChartData = ['cy26', 'cy27', 'cy28', 'cy29'].map(yr => ({
+    year: yr.toUpperCase(), nsw: fwd.nsw?.[yr], qld: fwd.qld?.[yr], vic: fwd.vic?.[yr], sa: fwd.sa?.[yr], qld_may: fwdMay.qld?.[yr],
+  }))
+
+  const card = { background: 'var(--color-bg-card)', border: '1px solid var(--color-border)', borderRadius: 12, padding: 20, marginBottom: 16 }
+  const grid4 = { display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 10, marginBottom: 16 }
+  const grid3 = { display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 10, marginBottom: 16 }
+  const grid2 = { display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 10, marginBottom: 16 }
+  const h2s = { fontSize: 16, fontWeight: 700, color: 'var(--color-text)', margin: '24px 0 12px' }
+  const h3s = { fontSize: 13, fontWeight: 600, color: 'var(--color-text)', marginBottom: 8 }
+  const body = { fontSize: 11, color: 'var(--color-text-muted)', lineHeight: 1.6 }
+  const hr = { border: 'none', borderTop: '2px solid var(--color-border)', margin: '24px 0' }
+
   return (
-    <div className="space-y-8">
-      <ThesisSection data={data} contractData={contractData} />
-      <hr className="border-[var(--color-border)]" />
-      <h2 className="text-base font-bold text-[var(--color-text)]">Revenue Collapse</h2>
-      <RevenueSection data={data} />
-      <hr className="border-[var(--color-border)]" />
-      <h2 className="text-base font-bold text-[var(--color-text)]">QLD Pipeline &amp; Timeline</h2>
-      <TimelineSection data={data} />
-      <hr className="border-[var(--color-border)]" />
-      <h2 className="text-base font-bold text-[var(--color-text)]">Investment Analysis</h2>
-      <AnalysisSection data={data} />
-      <hr className="border-[var(--color-border)]" />
-      <h2 className="text-base font-bold text-[var(--color-text)]">NEM Context</h2>
-      <ContextSection data={data} />
-      <hr className="border-[var(--color-border)]" />
-      <div className="text-[10px] text-[var(--color-text-muted)] space-y-1 pt-4">
-        <div className="font-medium text-xs text-[var(--color-text)]">Sources</div>
-        {data.metadata.sources.map((s: { name: string }, i: number) => (
-          <div key={i}>{s.name}</div>
+    <div style={{ fontSize: 12 }}>
+      {/* ===== THESIS ===== */}
+      <div style={{ ...card, borderColor: '#ef4444', borderWidth: 2 }}>
+        <div style={{ fontSize: 15, fontWeight: 700, color: '#ef4444', marginBottom: 8 }}>{t.headline}</div>
+        <div style={body}>{t.summary}</div>
+        <div style={{ background: 'rgba(239,68,68,0.1)', borderRadius: 8, padding: 12, marginTop: 12 }}>
+          <div style={{ fontSize: 11, fontWeight: 600, color: '#ef4444', lineHeight: 1.5 }}>{t.position}</div>
+        </div>
+      </div>
+
+      <div style={grid4}>
+        <PdfStat label="QLD Wholesale" value={`$${snap.wholesale_price_may_2026}`} sub={`/MWh (${snap.wholesale_yoy_pct}% YoY)`} colour="#ef4444" />
+        <PdfStat label="QLD BESS Revenue" value={`$${rev.qld_q1_2026_revenue_k}k`} sub={`/MW/yr (${rev.qld_yoy_drop_pct}% YoY)`} colour="#f59e0b" />
+        <PdfStat label="QLD Spread" value={`$${rev.qld_spread_q1_2026}`} sub={`/MWh (was $${rev.qld_spread_prior_year})`} colour="#8b5cf6" />
+        <PdfStat label="Forward CY27-29" value={`~$${snap.forward_curve.cy27}`} sub="/MWh — flat" colour="#6b7280" />
+      </div>
+
+      {/* Forward curve chart */}
+      {forwardChartData[0].nsw && (
+        <div style={card}>
+          <div style={h3s}>ASX Forward Curve by State (CY26–CY29)</div>
+          <LineChart width={830} height={220} data={forwardChartData}>
+            <CartesianGrid strokeDasharray="3 3" stroke="var(--color-border)" />
+            <XAxis dataKey="year" tick={{ fontSize: 10, fill: 'var(--color-text-muted)' }} />
+            <YAxis tick={{ fontSize: 10, fill: 'var(--color-text-muted)' }} tickFormatter={v => `$${v}`} domain={[60, 120]} />
+            <Legend wrapperStyle={{ fontSize: 10 }} />
+            <Line type="monotone" dataKey="nsw" name="NSW" stroke="#3b82f6" strokeWidth={2} dot={{ r: 3 }} />
+            <Line type="monotone" dataKey="qld" name="QLD" stroke="#f59e0b" strokeWidth={2} dot={{ r: 3 }} />
+            <Line type="monotone" dataKey="vic" name="VIC" stroke="#8b5cf6" strokeWidth={2} dot={{ r: 3 }} />
+            <Line type="monotone" dataKey="sa" name="SA" stroke="#ef4444" strokeWidth={2} dot={{ r: 3 }} />
+            <Line type="monotone" dataKey="qld_may" name="QLD May" stroke="#f59e0b" strokeWidth={2} dot={{ r: 3 }} strokeDasharray="5 5" />
+          </LineChart>
+          <div style={{ fontSize: 10, color: 'var(--color-text-muted)', marginTop: 4 }}>{snap.forward_curve.commentary}</div>
+        </div>
+      )}
+
+      {/* Quarterly spot chart */}
+      {spots.length > 0 && (
+        <div style={card}>
+          <div style={h3s}>Quarterly Wholesale Prices by State</div>
+          <LineChart width={830} height={220} data={spots}>
+            <CartesianGrid strokeDasharray="3 3" stroke="var(--color-border)" />
+            <XAxis dataKey="quarter" tick={{ fontSize: 9, fill: 'var(--color-text-muted)' }} />
+            <YAxis tick={{ fontSize: 10, fill: 'var(--color-text-muted)' }} tickFormatter={v => `$${v}`} />
+            <Legend wrapperStyle={{ fontSize: 10 }} />
+            <Line type="monotone" dataKey="nsw" name="NSW" stroke="#3b82f6" strokeWidth={2} dot={{ r: 2 }} />
+            <Line type="monotone" dataKey="qld" name="QLD" stroke="#f59e0b" strokeWidth={2.5} dot={{ r: 3 }} />
+            <Line type="monotone" dataKey="vic" name="VIC" stroke="#8b5cf6" strokeWidth={2} dot={{ r: 2 }} />
+            <Line type="monotone" dataKey="sa" name="SA" stroke="#ef4444" strokeWidth={2} dot={{ r: 2 }} />
+          </LineChart>
+        </div>
+      )}
+
+      <div style={card}>
+        <div style={h3s}>Why Now Is Wrong</div>
+        {analysis.why_now_is_wrong.map((r: string, i: number) => (
+          <div key={i} style={{ ...body, marginBottom: 4 }}><span style={{ color: '#ef4444' }}>&#9679; </span>{r}</div>
         ))}
       </div>
+
+      {/* ===== REVENUE ===== */}
+      <hr style={hr} />
+      <div style={h2s}>Revenue Collapse</div>
+      <div style={card}>
+        <div style={h3s}>QLD Monthly BESS Revenue</div>
+        <div style={{ ...body, marginBottom: 12 }}>{rev.narrative}</div>
+        <ComposedChart width={830} height={220} data={rev.monthly_trajectory}>
+          <CartesianGrid strokeDasharray="3 3" stroke="var(--color-border)" />
+          <XAxis dataKey="period" tick={{ fontSize: 9, fill: 'var(--color-text-muted)' }} />
+          <YAxis tick={{ fontSize: 10, fill: 'var(--color-text-muted)' }} tickFormatter={v => `$${v}k`} />
+          <ReferenceLine y={50} stroke="#ef4444" strokeDasharray="5 5" />
+          <Bar dataKey="revenue_k" fill="#f59e0b" fillOpacity={0.7} radius={[3, 3, 0, 0]} />
+        </ComposedChart>
+      </div>
+      <div style={card}>
+        <div style={h3s}>QLD Generation Mix Shift (May 2025 → May 2026)</div>
+        <div style={grid3}>
+          {[
+            { label: 'Renewables', value: `${snap.generation_mix_may_2026.renewable_pct}%`, change: `was ${snap.generation_mix_may_2026.renewable_pct_prior_year}%`, colour: '#10b981' },
+            { label: 'Battery Discharge', value: `${snap.generation_mix_may_2026.battery_discharge_gwh} GWh`, change: `+${snap.generation_mix_may_2026.battery_discharge_yoy_pct}%`, colour: '#f59e0b' },
+            { label: 'Wind', value: `${snap.generation_mix_may_2026.wind_gwh} GWh`, change: `+${snap.generation_mix_may_2026.wind_yoy_pct}%`, colour: '#3b82f6' },
+            { label: 'Solar', value: `${snap.generation_mix_may_2026.solar_gwh} GWh`, change: `+${snap.generation_mix_may_2026.solar_yoy_pct}%`, colour: '#eab308' },
+            { label: 'Coal', value: `${snap.generation_mix_may_2026.coal_gwh} GWh`, change: `${snap.generation_mix_may_2026.coal_yoy_pct}%`, colour: '#6b7280' },
+            { label: 'Gas', value: `${snap.generation_mix_may_2026.gas_gwh} GWh`, change: `${snap.generation_mix_may_2026.gas_yoy_pct}%`, colour: '#9ca3af' },
+          ].map(m => <PdfStat key={m.label} label={m.label} value={m.value} sub={m.change} colour={m.colour} />)}
+        </div>
+      </div>
+
+      {/* ===== PIPELINE ===== */}
+      <hr style={hr} />
+      <div style={h2s}>QLD Pipeline &amp; Timeline</div>
+      <div style={card}>
+        <div style={h3s}>QLD BESS Cumulative Capacity</div>
+        <AreaChart width={830} height={220} data={cap.timeline_events.filter((e: { cumulative_mw: number }) => e.cumulative_mw > 0)}>
+          <CartesianGrid strokeDasharray="3 3" stroke="var(--color-border)" />
+          <XAxis dataKey="date" tick={{ fontSize: 9, fill: 'var(--color-text-muted)' }} />
+          <YAxis tick={{ fontSize: 10, fill: 'var(--color-text-muted)' }} tickFormatter={v => `${(Number(v) / 1000).toFixed(1)} GW`} />
+          <Area type="stepAfter" dataKey="cumulative_mw" name="Operating" stackId="1" fill="#10b981" stroke="#10b981" fillOpacity={0.3} />
+          <Area type="stepAfter" dataKey="construction_mw" name="Construction" stackId="1" fill="#3b82f6" stroke="#3b82f6" fillOpacity={0.2} />
+        </AreaChart>
+      </div>
+
+      {/* Key milestones only (condensed for PDF) */}
+      <div style={card}>
+        <div style={h3s}>Key Milestones</div>
+        {cap.timeline_events
+          .filter((e: { type: string }) => e.type === 'cod' || e.type === 'cod_expected' || e.type === 'coal_exit')
+          .map((e: { date: string; event: string; cumulative_mw: number; type: string }, i: number) => (
+          <div key={i} style={{ display: 'flex', gap: 8, marginBottom: 3, fontSize: 10, color: 'var(--color-text-muted)' }}>
+            <span style={{ width: 55, flexShrink: 0, fontFamily: 'monospace', fontSize: 9 }}>{e.date}</span>
+            <span style={{ color: e.type === 'coal_exit' ? '#ef4444' : e.type === 'cod_expected' ? '#3b82f6' : '#10b981' }}>&#9679;</span>
+            <span style={{ flex: 1 }}>{e.event}</span>
+            <span style={{ flexShrink: 0, color: '#10b981', fontSize: 9 }}>{fmt(e.cumulative_mw)} MW</span>
+          </div>
+        ))}
+      </div>
+
+      {/* ===== ANALYSIS ===== */}
+      <hr style={hr} />
+      <div style={h2s}>Investment Analysis</div>
+
+      <div style={card}>
+        <div style={h3s}>CIS Does Not Solve the Problem</div>
+        <div style={body}>{analysis.cis_does_not_solve_it.narrative}</div>
+        <div style={{ background: 'rgba(245,158,11,0.1)', borderRadius: 8, padding: 10, marginTop: 10 }}>
+          <div style={{ fontSize: 10, color: '#f59e0b', lineHeight: 1.5 }}>{analysis.cis_does_not_solve_it.risk}</div>
+        </div>
+      </div>
+
+      <div style={card}>
+        <div style={h3s}>Callide B Exit — Does Not Restore Scarcity</div>
+        <div style={grid3}>
+          <PdfStat label="Callide B Exit" value={`-${analysis.callide_offset.callide_exit_mw} MW`} sub="coal removed" colour="#ef4444" />
+          <PdfStat label="Committed BESS" value={`+${fmt(analysis.callide_offset.committed_bess_arriving_mw)} MW`} sub="arriving 2027-28" colour="#10b981" />
+          <PdfStat label="Net Change" value={`+${fmt(analysis.callide_offset.net_capacity_change_mw)} MW`} sub="more dispatchable" colour="#f59e0b" />
+        </div>
+        <div style={body}>{analysis.callide_offset.narrative}</div>
+      </div>
+
+      <div style={card}>
+        <div style={h3s}>Behind-the-Meter Batteries</div>
+        <div style={grid2}>
+          <PdfStat label="Installed Since Jul 2025" value={fmt(analysis.resi_batteries_eating_lunch.installed_systems_since_jul_2025)} sub="residential systems" colour="#8b5cf6" />
+          <PdfStat label="Capacity" value={`${analysis.resi_batteries_eating_lunch.installed_gwh} GWh`} sub="behind-the-meter" colour="#8b5cf6" />
+        </div>
+        <div style={body}>{analysis.resi_batteries_eating_lunch.narrative}</div>
+      </div>
+
+      <div style={card}>
+        <div style={h3s}>How Long Does This Last?</div>
+        {[
+          { label: 'Best case', value: analysis.how_long_does_this_last.best_case, colour: '#10b981' },
+          { label: 'Base case', value: analysis.how_long_does_this_last.base_case, colour: '#f59e0b' },
+          { label: 'Worst case', value: analysis.how_long_does_this_last.worst_case, colour: '#ef4444' },
+        ].map(sc => (
+          <div key={sc.label} style={{ background: 'var(--color-bg-elevated)', borderRadius: 8, padding: 10, marginBottom: 8 }}>
+            <div style={{ fontSize: 11, fontWeight: 600, color: sc.colour, marginBottom: 4 }}>{sc.label}</div>
+            <div style={{ fontSize: 10, color: 'var(--color-text-muted)', lineHeight: 1.5 }}>{sc.value}</div>
+          </div>
+        ))}
+        <div style={{ background: 'var(--color-bg-elevated)', borderRadius: 8, padding: 12, marginTop: 8, border: '1px solid var(--color-border)' }}>
+          <div style={{ fontSize: 11, fontWeight: 600, color: 'var(--color-text)', lineHeight: 1.5 }}>{analysis.how_long_does_this_last.conclusion}</div>
+        </div>
+      </div>
+
+      {/* ===== NEM CONTEXT ===== */}
+      <hr style={hr} />
+      <div style={h2s}>NEM Context</div>
+      <div style={{ ...card, borderColor: 'rgba(59,130,246,0.3)' }}>
+        <div style={{ ...h3s, color: '#3b82f6' }}>NSW &amp; VIC — Same Movie, Different Act</div>
+        <div style={body}>{ctx.nsw_vic_following}</div>
+      </div>
+      <div style={grid2}>
+        <div style={card}><div style={h3s}>NSW</div><div style={body}>{ctx.nsw_revenue_halved}</div></div>
+        <div style={card}><div style={h3s}>VIC</div><div style={body}>{ctx.vic_flat}</div></div>
+      </div>
+
+      {/* Sources */}
+      <hr style={hr} />
+      <div style={{ fontSize: 10, color: 'var(--color-text-muted)' }}>
+        <div style={{ fontSize: 11, fontWeight: 600, color: 'var(--color-text)', marginBottom: 6 }}>Sources</div>
+        {data.metadata.sources.map((s: { name: string }, i: number) => (
+          <div key={i} style={{ marginBottom: 2 }}>{s.name}</div>
+        ))}
+      </div>
+    </div>
+  )
+}
+
+function PdfStat({ label, value, sub, colour }: { label: string; value: string; sub: string; colour: string }) {
+  return (
+    <div style={{ background: 'var(--color-bg-elevated)', borderRadius: 8, padding: 10, textAlign: 'center' }}>
+      <div style={{ fontSize: 9, color: 'var(--color-text-muted)' }}>{label}</div>
+      <div style={{ fontSize: 18, fontWeight: 700, color: colour }}>{value}</div>
+      <div style={{ fontSize: 8, color: 'var(--color-text-muted)' }}>{sub}</div>
     </div>
   )
 }
