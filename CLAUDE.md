@@ -19,3 +19,10 @@ Authoritative plan + handoff docs live in `docs/`:
 User: Travis Hughes (`travishughes@outlook.com`). Mobile-first, dark
 theme, comprehensive features. No emojis unless explicitly asked.
 Don't commit without explicit user request.
+
+**End-of-session checklist:**
+- Update `docs/NEXT_SESSION_HANDOFF.md` with new version + what shipped
+- Update `docs/INTELLIGENCE_LAYER_PLAN.md` release log
+- Update Studio Dashboard (`~/Studio/Dashboard.html`) — AURES card version + description
+- Update Studio public (`~/Studio/studio-public/index.html`) — AURES card version + description
+- Push Studio public if changed: `cd ~/Studio/studio-public && git add -A && git commit -m "update AURES version" && git push`

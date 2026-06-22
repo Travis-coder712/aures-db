@@ -185,6 +185,14 @@ Expand AURES into Western Australia's energy market. Structurally different from
 
 6. **CIS/LTESA Outcomes** (large, 2-3 sessions) — State-by-state dashboard, CIS vs LTESA head-to-head (success rates, time-to-construction, technology preference), surface `financial-close-data.ts` in UI, policy target burndown charts. *Partially advanced by v3.14-16 NSW T8 work. Some content may migrate to Research Notes system.*
 
+### Tier 3.5 — AURES Learn Improvements
+
+1. **GridRival Retail Hedging Game** (medium, 1-2 sessions) — Interactive simulation embedded in Learn Lesson 5 (gentailer/basis risk). Player manages a retail electricity book: buys hedges (swaps, caps, ASX futures), faces wholesale price spikes, and sees P&L vary depending on whether they have owned generation (gentailer) vs pure retail. Should let users experience the 2017-19 price spike scenario and see why non-gentailers got crushed. Could also simulate the 2022 Ukraine commodity spike. Standalone component accessible from Learn hub + embeddable in Lesson 5. Design reference: GridRival (US retail electricity game). Key learning outcomes: basis risk types (locational, volume, shape, temporal), natural hedge value, why every price cycle consolidates retail market share.
+
+2. **Learn Module Interactivity** (medium, ongoing) — Make existing lessons more interactive: inline quizzes, expandable worked examples, "what would you do?" decision points, progress-gated content. Currently all lessons are read-only text + tables. Priority modules: Energy Transition (17 lessons), BESS Story, CIS/LTESA Bidding.
+
+3. **QLD Cap Contract Enrichment** (small) — Add ASX Energy historical QLD base and $300 cap contract settlement prices to the QLD Battery Briefing. Track the cap-base spread over time as the key BESS investment signal. Source: ASX Energy provisional settlement data (publicly available quarterly).
+
 ### Tier 4 — Polish & enrichment (lower priority)
 
 - **F4 Phase 2 — Pipeline Trigger Endpoint** (large, needs backend API): "Update Now" button replacing clipboard CLI commands.
