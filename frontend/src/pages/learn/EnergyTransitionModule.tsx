@@ -675,8 +675,14 @@ function Lesson5() {
     <div>
       <H2>The word and what it actually means</H2>
       <P>
-        A <Em>gentailer</Em> is a vertically-integrated business that owns both <em>generation</em>
-        (power stations) and <em>retail</em> (the relationship with end-use electricity customers).
+        A <Em>gentailer</Em> — a portmanteau of <em>generator</em> and <em>retailer</em> — is a
+        vertically-integrated business that owns both <em>generation</em> (power stations) and
+        <em>retail</em> (the relationship with end-use electricity customers). The term is uniquely
+        Australian — it emerged in the 2000s as the NEM's post-privatisation consolidation produced
+        companies that combined both functions under one roof, reversing the structural separation
+        that COAG's competition reforms had intended.
+      </P>
+      <P>
         Within the NEM, three companies have dominated the gentailer model for the past 20 years:
         AGL Energy, Origin Energy, and EnergyAustralia. A fourth — Alinta Energy — has scale in
         Western Australia and growing scale on the east coast. These four collectively serve roughly
@@ -686,7 +692,7 @@ function Lesson5() {
 
       <H2>Why vertical integration works in electricity</H2>
       <P>
-        The structural argument for the gentailer model comes down to <Em>basis risk</Em>. A retailer
+        The structural argument for the gentailer model comes down to hedging economics. A retailer
         without owned generation must buy electricity from the NEM pool at the regional reference
         price (RRP), which can swing from negative $1,000/MWh to $17,500/MWh in adjacent five-minute
         intervals. Customers, meanwhile, pay a fixed retail tariff. The retailer is short the
@@ -694,16 +700,28 @@ function Lesson5() {
       </P>
       <P>
         Hedging instruments exist — swaps, caps, futures (traded on the ASX 24 platform) — but
-        they have basis risk against the actual physical position. A retailer that hedges with a
-        12-month $80/MWh swap is fully protected only if its actual customer load profile and
-        regional price exposure exactly matches the swap reference. They never do.
+        they carry <Em>basis risk</Em>. Basis risk is the risk that a hedging contract does not
+        perfectly offset the underlying exposure it is intended to protect against. In electricity
+        markets, basis risk arises from several sources:
       </P>
+      <ul className="list-disc list-inside text-sm text-[var(--color-text-muted)] space-y-1.5 mb-3 ml-2">
+        <li><Em>Locational basis risk:</Em> a swap referenced to a NSW regional price doesn't protect
+          a retailer with customers across multiple regions — the SA or QLD price may diverge sharply</li>
+        <li><Em>Volume basis risk:</Em> customer demand varies with weather, time-of-day, and
+          economic conditions — the hedge is for a fixed volume, but actual load is variable</li>
+        <li><Em>Shape basis risk:</Em> a flat $80/MWh swap protects on average, but the retailer
+          loses money on every interval where pool prices exceed $80 and the customer load exceeds
+          the hedged volume — peak hours are where the exposure concentrates</li>
+        <li><Em>Temporal basis risk:</Em> hedges are typically quarterly or annual; wholesale prices
+          can shift dramatically within the hedge period</li>
+      </ul>
       <P>
         A retailer with owned generation has a <Em>natural hedge</Em>: when wholesale prices spike,
         retail margins compress, but generation margins expand. The two largely offset. The
         gentailer model effectively internalises the hedge — every MWh of customer load that's
         served by an owned MWh of generation eliminates both the retailer's basis risk and the
-        generator's offtake risk.
+        generator's offtake risk. This is why vertically-integrated utilities dominate electricity
+        markets globally — the economic logic is powerful and self-reinforcing.
       </P>
 
       <H2>The 2017-19 lesson — when non-gentailers got crushed</H2>
@@ -726,9 +744,27 @@ function Lesson5() {
       </ul>
       <P>
         The pattern is consistent: <Em>vertically-integrated incumbents bought out distressed
-        retail-only competitors at depressed valuations.</Em> Every wholesale price cycle since 2007
-        has produced this same pattern. The Big 4 gentailers' market share has therefore <em>grown</em>
-        through periods of high wholesale prices, not shrunk.
+        retail-only competitors at depressed valuations.</Em> The NEM has had three major wholesale
+        price cycles that triggered retail consolidation:
+      </P>
+      <ul className="list-disc list-inside text-sm text-[var(--color-text-muted)] space-y-1.5 mb-3 ml-2">
+        <li><Em>2007-08 cycle:</Em> Drought reduced hydro output; wholesale prices spiked to
+          $80-100/MWh. Powerdirect sold to AGL (2007). Several small retailers exited.</li>
+        <li><Em>2017-19 cycle:</Em> Hazelwood closure (2017), gas price spike, coal outages. NEM
+          average hit $110-140/MWh. Sumo sold to Origin (2017), Click Energy sold to AGL (2017),
+          Pulse Energy collapsed (2018), 1st Energy sold to ERM Power (2018), Urth Energy
+          liquidated (2019).</li>
+        <li><Em>2022 cycle:</Em> Ukraine-driven commodity spike; NEM-wide wholesale hit $200+/MWh.
+          Several smaller retailers called in the Retailer of Last Resort provisions. ReAmped Energy
+          suspended new customer sign-ups. More customers returned to Big 4 default offers.</li>
+      </ul>
+      <P>
+        Every cycle has resulted in <Em>greater residential customer concentration</Em>, not less.
+        The Big 4 gentailers' combined residential market share has ratcheted up through each spike
+        because they survive the margin squeeze (thanks to their natural hedge) while smaller
+        retail-only competitors do not. Some of the acquisitions listed above (e.g. Powerdirect 2007)
+        pre-date the 2017-19 cycle — they belong to the earlier 2007-08 drought cycle, which was the
+        first post-privatisation demonstration of the same dynamic.
       </P>
 
       <H2>Why the regulator hasn't intervened</H2>
@@ -768,12 +804,27 @@ function Lesson5() {
         ]}
       />
       <P>
-        Two important things to read into this table. First, <Em>retail is more concentrated than
-        generation</Em>: the Big 4 control 77% of customers but only ~39% of generation capacity.
-        That's because renewables developers (Tilt, Goldwind, Neoen, ACEN, Iberdrola, ENGIE,
-        Pacific Hydro etc.) own large chunks of new-build capacity but no retail. Second,
-        <Em> generation share is falling fast</Em> — the Big 4's coal fleet is retiring, and they
-        are competing with hundreds of new renewables developers for the replacement capacity.
+        Two important things to read into this table. First, <Em>retail is far more concentrated
+        than generation</Em>: the Big 4 control 77% of customers but only ~39% of generation
+        capacity. This asymmetry exists for two reasons: (1) renewables developers (Tilt, Goldwind,
+        Neoen, ACEN, Iberdrola, ENGIE, Pacific Hydro etc.) own large chunks of new-build capacity
+        but no retail customers; and (2) the Big 4's retail share is heavily weighted to
+        <Em>residential</Em> customers — they have a smaller share of large commercial & industrial
+        (C&I) load, where energy-intensive businesses often contract directly with generators or
+        negotiate bespoke PPAs, bypassing the gentailer retail channel entirely.
+      </P>
+      <P>
+        This creates a structural mismatch: the gentailer's retail revenue per MWh is higher for
+        residential customers (who pay regulated tariffs with retail margin embedded) than for C&I
+        customers (who negotiate close to wholesale). But all generation receives the same wholesale
+        pool price regardless of which customer class it ultimately serves. So the gentailer's
+        <Em>retail market share overstates its economic weight</Em> — 77% of accounts does not
+        translate to 77% of electricity volume, because residential customers consume far less per
+        account than industrial loads.
+      </P>
+      <P>
+        Second, <Em>generation share is falling fast</Em> — the Big 4's coal fleet is retiring,
+        and they are competing with hundreds of new renewables developers for replacement capacity.
       </P>
 
       <H2>What the gentailer model becomes in 2030</H2>
@@ -827,9 +878,13 @@ function Lesson6() {
         AGL is therefore the second-oldest company in Australia (behind only Tooth & Co Brewery) and
         among the oldest continuously-operating gas companies in the English-speaking world. For
         most of its first 150 years it was a pure gas business — town gas from coal carbonisation,
-        then natural gas from Bass Strait after 1976. Through the Great Depression, both World Wars,
-        nationalisation efforts and the 1970s oil shocks, AGL stayed a Sydney-centric gas retailer.
-        Generation was someone else's problem.
+        then natural gas from Bass Strait after 1976. AGL's gas business was primarily NSW-focused;
+        Victoria's gas retail was handled separately through the Gas and Fuel Corporation (later
+        privatised into Gascor, Origin, and TXU in the late 1990s). AGL did not retail gas in
+        Victoria until after the state's gas market was deregulated and AGL acquired Victorian
+        retail customers through the electricity market consolidation of the 2000s. Through the
+        Great Depression, both World Wars, nationalisation efforts and the 1970s oil shocks, AGL
+        stayed a Sydney-centric gas retailer. Generation was someone else's problem.
       </P>
 
       <H2>2000-2006 — The pivot to electricity</H2>
@@ -873,7 +928,9 @@ function Lesson6() {
         ]}
       />
       <P>
-        AGL paid approximately $448M for its 32.54% stake in 2007 and immediately signed a long-term
+        AGL acquired its 32.54% stake in GEAC progressively from 2003-2004 — initially facing ACCC
+        opposition before obtaining court declarations permitting the acquisition (subject to
+        enforceable undertakings capping AGL's ownership at 35%). AGL immediately signed a long-term
         contract for 60% of Loy Yang A's output — making the plant a critical hedge against AGL's
         growing Victorian retail customer base.
       </P>
@@ -901,9 +958,13 @@ function Lesson6() {
 
       <H2>2012 — AGL takes full ownership of Loy Yang A</H2>
       <P>
-        In June 2012, AGL announced it would acquire the remaining 67.46% of Loy Yang A for
-        approximately $448M (plus assumption of project debt). The transaction closed in December
-        2012, giving AGL 100% ownership of:
+        In February 2012, AGL announced it would acquire the remaining 67.46% of Loy Yang A for
+        a total consideration of $448M — implying a $3.1B enterprise value for GEAC. The transaction
+        was conditional on ACCC approval (removing the 35% ownership cap) and, critically, on GEAC
+        having received or having an enforceable right to receive the <Em>first carbon assistance
+        payment from the Federal Government</Em> — reflecting the newly-legislated Clean Energy
+        Future package and the protection it offered high-emissions generators. The transaction
+        closed in June 2012, giving AGL 100% ownership of:
       </P>
       <ul className="list-disc list-inside text-sm text-[var(--color-text-muted)] space-y-1.5 mb-3 ml-2">
         <li>Loy Yang A power station — 2,210 MW of brown-coal generation</li>
@@ -932,7 +993,7 @@ function Lesson6() {
       <ul className="list-disc list-inside text-sm text-[var(--color-text-muted)] space-y-1.5 mb-3 ml-2">
         <li>The <Em>largest single generator in the National Electricity Market</Em> — ~11,000 MW
           of installed capacity across Loy Yang A, Bayswater, Liddell, Torrens Island (SA gas),
-          Newport (VIC gas), Macarthur wind, Hallett wind, and smaller hydro</li>
+          Macarthur wind, Hallett wind, and smaller hydro</li>
         <li>The <Em>largest single greenhouse gas emitter in Australia</Em> — approximately 42
           million tonnes CO₂-equivalent per annum, larger than any other entity in the Clean Energy
           Regulator's NGERS database</li>
@@ -947,11 +1008,14 @@ function Lesson6() {
         hold. The AGL board, led by chair Peter Botten, proposed a structural demerger in mid-2021:
       </P>
       <ul className="list-disc list-inside text-sm text-[var(--color-text-muted)] space-y-1.5 mb-3 ml-2">
-        <li><Em>Accel Energy</Em> — the coal generation business (Loy Yang A, Bayswater, Liddell,
-          Torrens Island, Newport). Designed to run the coal plants until close-down dates, then
-          wind up.</li>
-        <li><Em>AGL Australia</Em> — the retail business plus the renewables pipeline and gas
-          peakers. Designed to be a forward-looking gentailer transitioning to clean energy.</li>
+        <li><Em>Accel Energy</Em> — the thermal generation business (Loy Yang A, Bayswater,
+          Torrens Island gas). Accel was to retain the majority of AGL's renewable development
+          pipeline and pursue large C&I customer contracts, using coal profits to fund the
+          transition build-out. It would supply AGL Australia under wholesale agreements while
+          progressively building out renewables as coal plants retired.</li>
+        <li><Em>AGL Australia</Em> — the mass-market retail business and customer platform.
+          Designed to be a forward-looking energy retailer sourcing from Accel and third-party
+          generators.</li>
       </ul>
       <P>
         The demerger required 75% shareholder approval and was scheduled for a June 2022 vote.
@@ -1297,8 +1361,9 @@ function Lesson8() {
       <P>
         Origin remained independent. Brookfield walked away. Frank Calabria continued as CEO.
         Within six months, Origin and the NSW Government signed an Eraring extension agreement that
-        kept the plant running to 2027 (with optionality to 2029) under a profit/loss-share
-        underwriting structure.
+        kept the plant running to August 2027 (with optionality to 2029) under a profit/loss-share
+        underwriting structure. The 2029 date is the outer limit, not a firm commitment — Origin
+        can choose to close at the 2027 date if market conditions deteriorate.
       </P>
 
       <H2>The Eraring underwriting deal (August 2024)</H2>
@@ -1310,9 +1375,11 @@ function Lesson8() {
         <li>NSW Government provided an opt-in profit/loss-share mechanism: if Eraring's operation
           generated profit above $40M/year, NSW would share in the upside; if losses exceeded a cap,
           NSW would cover them up to $225M</li>
-        <li>The opt-in is annual — Origin chooses each year whether to invoke the protection. For
-          FY26 and FY27, Origin chose <em>not</em> to opt in (because wholesale prices remained
-          high enough to make the mechanism unnecessary)</li>
+        <li>The opt-in is annual — Origin chooses each year whether to invoke the protection.
+          As of mid-2026, Origin has not opted into the protection mechanism for any year — wholesale
+          prices have remained high enough to make the mechanism unnecessary, which raises the
+          question of whether the government protection was ever needed or whether it was primarily
+          a political instrument to secure the extension commitment</li>
       </ul>
       <P>
         The Eraring deal is structurally similar to the federal CIS — a contract-for-difference
@@ -1568,29 +1635,32 @@ function Lesson10() {
 
       <H2>2011 — TPG buys what's left</H2>
       <P>
-        In December 2011, US private equity firm <Em>TPG Capital</Em> acquired the rump Alinta
-        Energy business — by then primarily WA retail customers plus the Loy Yang B 1,070 MW brown
-        coal plant in Victoria and some smaller WA generation. The price was approximately $2.1B
-        (vs the 2007 sale price of $7.4B for the larger pre-breakup entity).
+        In March 2011, US private equity firm <Em>TPG Capital</Em> acquired the rump Alinta
+        Energy business — by then primarily WA retail customers and WA generation assets (Pinjarra,
+        Wagerup, Newman, Port Hedland). The price was approximately $2.1B (vs the 2007 sale price of
+        $7.4B for the larger pre-breakup entity). Alinta did not own Loy Yang B at this point —
+        that acquisition came later under CTFE ownership.
       </P>
       <P>
         TPG ran Alinta for 6 years, focusing on operational efficiency rather than expansion. The
         rebuild work positioned Alinta for a second sale at higher valuation.
       </P>
 
-      <H2>2017 — Chow Tai Fook acquires Alinta</H2>
+      <H2>2017 — Chow Tai Fook acquires Alinta, then buys Loy Yang B</H2>
       <P>
-        In April 2017, TPG sold Alinta Energy to <Em>Chow Tai Fook Enterprises</Em> (CTFE), the
+        In March 2017, TPG sold Alinta Energy to <Em>Chow Tai Fook Enterprises</Em> (CTFE), the
         private investment holding company of Hong Kong's Cheng family. CTFE's primary business is
         the listed jewelry chain <em>Chow Tai Fook Jewellery Group</em> (HKEX: 1929), but the
         family's broader portfolio spans property, utilities, ports and infrastructure across Asia.
         The acquisition price was approximately $4B.
       </P>
       <P>
-        In the same year (October 2017), Alinta acquired <Em>Loy Yang B</Em> from China Power
-        International Development Ltd (a subsidiary of China Energy Investment Corporation) for
-        approximately A$1.07B. Loy Yang B (1,070 MW brown coal, adjacent to AGL's Loy Yang A in the
-        Latrobe Valley) became Alinta's largest single asset.
+        Within months of acquiring Alinta, CTFE made a transformative move: in November 2017, Alinta
+        agreed to acquire <Em>Loy Yang B</Em> from <Em>ENGIE</Em> (formerly GDF Suez / International
+        Power) for an enterprise value of approximately A$1.2B. The transaction completed in January
+        2018. Loy Yang B (1,000 MW brown coal, adjacent to AGL's Loy Yang A in the Latrobe Valley)
+        became Alinta's largest single asset and gave CTFE a major east-coast baseload position to
+        complement the WA portfolio.
       </P>
 
       <H2>Alinta today — WA strongest, east coast growing</H2>
@@ -1738,7 +1808,7 @@ function Lesson11() {
         <li><Em>Stockyard Hill Wind Farm</Em> (530 MW, Goldwind, VIC 2020)</li>
         <li><Em>Murra Warra Wind Farm Stage 1+2</Em> (435 MW, Renewable Energy Systems, VIC 2019-21)</li>
         <li><Em>Bungala Solar Farm</Em> (220 MW, Enel Green Power, SA 2018-19)</li>
-        <li><Em>Sun Cable + Limondale Solar Farm</Em> (~350 MW combined, NSW 2020)</li>
+        <li><Em>Limondale Solar Farm</Em> (314 MW, RWE/Belectric, NSW 2020)</li>
         <li><Em>Beryl Solar Farm</Em> (87 MW, New Energy Solar, NSW 2019)</li>
       </ul>
 
