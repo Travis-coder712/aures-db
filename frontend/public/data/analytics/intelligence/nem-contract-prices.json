@@ -1,0 +1,92 @@
+{
+  "metadata": {
+    "updated": "2026-06-22",
+    "version": "3.17.4",
+    "description": "NEM wholesale spot prices, ASX base + cap contract settlement prices, and forward curve data by state. Curated from AEMO QED, AER Wholesale Markets Quarterly, ASX Energy, and Leading Edge Energy monthly reviews.",
+    "sources": [
+      { "name": "AEMO Quarterly Energy Dynamics (Q1 2024 – Q1 2026)", "url": "https://www.aemo.com.au/energy-systems/major-publications/quarterly-energy-dynamics-qed" },
+      { "name": "AER Wholesale Markets Quarterly Reports", "url": "https://www.aer.gov.au/industry/wholesale/charts" },
+      { "name": "ASX Energy — Provisional Cash Settlement Prices", "url": "https://www.asxenergy.com.au/newsroom/pcsp" },
+      { "name": "Leading Edge Energy — Monthly Market Reviews", "url": "https://leadingedgeenergy.com.au/news/" }
+    ],
+    "notes": "Cap contract prices are the $300 cap — the standard traded instrument. Cap price represents the average payout per MWh for intervals above $300/MWh during the quarter. Higher cap prices = more high-price events = better for BESS. Forward curve is ASX calendar-year base futures."
+  },
+  "quarterly_spot_prices": {
+    "description": "Volume-weighted average spot prices by NEM region ($/MWh). Source: AEMO QED + AER.",
+    "data": [
+      { "quarter": "Q1 2024", "nsw": 76, "qld": 72, "vic": 55, "sa": 68, "tas": 62, "nem_avg": 67 },
+      { "quarter": "Q2 2024", "nsw": 105, "qld": 102, "vic": 85, "sa": 78, "tas": 70, "nem_avg": 92 },
+      { "quarter": "Q3 2024", "nsw": 118, "qld": 120, "vic": 95, "sa": 110, "tas": 85, "nem_avg": 108 },
+      { "quarter": "Q4 2024", "nsw": 143, "qld": 127, "vic": 45, "sa": 52, "tas": 75, "nem_avg": 88 },
+      { "quarter": "Q1 2025", "nsw": 85, "qld": 78, "vic": 72, "sa": 76, "tas": 68, "nem_avg": 83 },
+      { "quarter": "Q2 2025", "nsw": 161, "qld": 140, "vic": 138, "sa": 130, "tas": 141, "nem_avg": 140, "note": "June 2025 extreme prices — 3 days drove 85% of volatility" },
+      { "quarter": "Q3 2025", "nsw": 90, "qld": 72, "vic": 77, "sa": 104, "tas": 91, "nem_avg": 87 },
+      { "quarter": "Q4 2025", "nsw": 75, "qld": 58, "vic": 37, "sa": 37, "tas": 55, "nem_avg": 50, "note": "31% of intervals negative; SA 48.4% negative, VIC 43.1%" },
+      { "quarter": "Q1 2026", "nsw": 73, "qld": 65, "vic": 43, "sa": 88, "tas": 68, "nem_avg": 73 }
+    ]
+  },
+  "monthly_spot_prices": {
+    "description": "Monthly average spot prices for key months ($/MWh). Source: ASX Energy PCSP + Leading Edge Energy.",
+    "data": [
+      { "month": "2024-12", "nsw": 134.73, "qld": 134.44, "vic": 52.25, "sa": 61.47, "tas": 76.11, "nem_avg": 91.80 },
+      { "month": "2025-03", "nsw": 70.36, "qld": 62.64, "vic": 44.74, "sa": 52.80 },
+      { "month": "2025-12", "nsw": 71.36, "qld": 54.38, "vic": 27.51, "sa": 27.92, "tas": 59.34, "nem_avg": 48.10 },
+      { "month": "2026-04", "vic": 35.68, "sa": 56.18, "note": "VIC lowest mainland price; NEM avg -37.8% YoY" },
+      { "month": "2026-05", "nsw": 82, "qld": 76.34, "vic": 65, "sa": 77, "tas": 96, "nem_avg": 79 }
+    ]
+  },
+  "cap_contract_prices": {
+    "description": "$300 cap contract quarterly settlement prices ($/MWh). Pays out average excess above $300/MWh per interval. Higher = more high-price events = better BESS economics. Source: ASX Energy PCSP.",
+    "data": [
+      { "quarter": "Q1 2024", "nsw": 16.58, "qld": 32.21, "vic": 15.35, "sa": 11.18 },
+      { "quarter": "Q3 2024", "nsw": 26.89, "qld": 15.08, "vic": 24.51, "sa": 76.70, "note": "SA elevated — Heywood interconnector constraints" },
+      { "quarter": "Q4 2024", "nsw": 47.36, "qld": 29.67, "vic": 0.15, "sa": 6.98, "note": "VIC cap near zero — effectively no high-price events" }
+    ],
+    "interpretation": "Cap prices are the direct measure of BESS arbitrage opportunity. Declining cap prices = fewer/smaller price spikes = worse BESS revenue. QLD cap prices volatile but compressing as the battery fleet absorbs the spikes that used to drive cap value. SA cap spiked to $76.70 in Q3 2024 during Heywood outage — demonstrating how interconnector constraints create localised BESS opportunity.",
+    "bess_revenue_impact": "Modo estimates cap contracts could add $9.2k-$31.6k/MW/yr to BESS revenue. QLD shows the largest potential gain (10-15% of merchant earnings). But shorter-duration batteries (<4hr) can only defend 20-40% of nameplate capacity — limiting actual cap revenue realisation."
+  },
+  "forward_curve": {
+    "description": "ASX calendar-year base futures by state ($/MWh). Represents market's expectation of average wholesale price.",
+    "dec_2025_close": {
+      "nsw": { "cy26": 105.34, "cy27": 104.34, "cy28": 103.50, "cy29": 103.74 },
+      "qld": { "cy26": 85.66, "cy27": 86.26, "cy28": 85.22, "cy29": 85.09 },
+      "vic": { "cy26": 75.00, "cy27": 74.76, "cy28": 77.87, "cy29": 83.32 },
+      "sa":  { "cy26": 88.41, "cy27": 88.46, "cy28": 91.11, "cy29": 93.53 }
+    },
+    "may_2026_close": {
+      "qld": { "cy27": 79.15, "cy28": 79.25, "cy29": 79.01 },
+      "note": "QLD forwards fell ~$6-7/MWh since Dec 2025. Now flat at ~$79/MWh through CY29."
+    },
+    "curve_shape_analysis": {
+      "nsw": "Flat at ~$104/MWh. Eraring retirement not yet fully priced — if closure accelerates, forward curve should steepen. Asymmetric upside for BESS.",
+      "qld": "Flat at ~$79/MWh. No recovery priced. Market expects permanently suppressed volatility. Worst forward curve for BESS investment.",
+      "vic": "Backwardated then rising: $75 CY26 → $83 CY29. Yallourn closure (mid 2028) being gradually priced in. VIC BESS case improves over time.",
+      "sa": "Gently rising: $88 CY26 → $94 CY29. Reflects continued interconnection constraints + industrial demand growth (hydrogen, minerals). Most BESS-friendly curve."
+    }
+  },
+  "spread_analysis": {
+    "description": "Peak-to-trough spread is the key metric for BESS economics. Wider spread = more arbitrage revenue.",
+    "nem_wide": {
+      "q1_2025_avg_spread": 183,
+      "q1_2026_avg_spread": 121,
+      "compression_pct": -34,
+      "note": "34% compression in one year"
+    },
+    "by_state_q1_2026": {
+      "nsw": { "spread": 95, "outlook": "Moderate; Eraring retirement should widen significantly" },
+      "qld": { "spread": 78, "outlook": "Lowest in NEM; was $244/MWh — most compressed" },
+      "vic": { "spread": 86, "outlook": "Low; Yallourn closure should widen from 2028" },
+      "sa":  { "spread": 328, "outlook": "Highest by far — 4x QLD — interconnection constraints" }
+    },
+    "investment_signal": "Watch the QLD forward peak-to-trough spread on ASX. When it starts widening, the market is pricing in coal retirement scarcity. That is the signal to re-enter QLD BESS. Current signal: flat/compressing."
+  },
+  "investment_hierarchy": {
+    "ranking": ["SA", "NSW", "VIC", "QLD"],
+    "rationale": {
+      "sa": "Highest spreads ($328/MWh), rising forward curve, interconnection scarcity creates localised BESS opportunity. Limited by connection availability.",
+      "nsw": "Eraring 2.88 GW retirement (2027-29) is the single largest supply removal in NEM history. Forward curve doesn't fully price it. Asymmetric BESS opportunity — but timing risk if closure is delayed.",
+      "vic": "Yallourn 1.48 GW retirement (mid 2028) will tighten supply. Forward curve gradually pricing it in ($75→$83). BESS case improves with patience.",
+      "qld": "Flat forward curve, smallest coal retirement (Callide B 700 MW), most saturated BESS fleet, worst spreads. Last priority for new merchant BESS capital."
+    }
+  }
+}
