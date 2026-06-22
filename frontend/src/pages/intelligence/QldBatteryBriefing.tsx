@@ -1,11 +1,13 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, useCallback } from 'react'
 import { Link } from 'react-router-dom'
+import { createRoot } from 'react-dom/client'
 import {
-  ComposedChart, Bar, AreaChart, Area,
+  ComposedChart, Bar, AreaChart, Area, LineChart, Line,
   XAxis, YAxis, Tooltip, CartesianGrid,
-  ResponsiveContainer, ReferenceLine,
+  ResponsiveContainer, ReferenceLine, Legend,
 } from 'recharts'
 import { exportElementToPdf } from '../../lib/exportPdf'
+import { fetchNemContractPrices } from '../../lib/dataService'
 import DataProvenance from '../../components/common/DataProvenance'
 
 // Icons — defined BEFORE const arrays (Vite HMR pattern)
@@ -35,36 +37,51 @@ function fmt(n: number | null | undefined, decimals = 0): string {
 
 export default function QldBatteryBriefing() {
   const [data, setData] = useState<BriefingData | null>(null)
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const [contractData, setContractData] = useState<any | null>(null)
   const [loading, setLoading] = useState(true)
   const [activeSection, setActiveSection] = useState<SectionId>('thesis')
   const [exporting, setExporting] = useState(false)
   const pdfRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    fetch(`${import.meta.env.BASE_URL}data/analytics/intelligence/qld-battery-briefing.json`)
-      .then(r => r.ok ? r.json() : null)
-      .then(d => { setData(d); setLoading(false) })
+    Promise.all([
+      fetch(`${import.meta.env.BASE_URL}data/analytics/intelligence/qld-battery-briefing.json`).then(r => r.ok ? r.json() : null),
+      fetchNemContractPrices(),
+    ]).then(([d, c]) => { setData(d); setContractData(c); setLoading(false) })
       .catch(() => setLoading(false))
   }, [])
 
-  const [pdfMode, setPdfMode] = useState(false)
-
-  const handleExportPdf = async () => {
-    if (!pdfRef.current || exporting) return
+  const handleExportPdf = useCallback(async () => {
+    if (!data || exporting) return
     setExporting(true)
-    setPdfMode(true)
-    // Recharts needs time to mount + render all 5 sections' SVG charts
-    await new Promise(r => setTimeout(r, 1500))
+
+    const container = document.createElement('div')
+    container.style.cssText = 'position:fixed;left:-10000px;top:0;width:900px;background:#0b0d12;color:#e6e8f0;padding:32px;font-family:-apple-system,BlinkMacSystemFont,Inter,system-ui,sans-serif;font-size:14px;line-height:1.5;'
+    const rootVars = getComputedStyle(document.documentElement)
+    const varNames = ['--color-bg', '--color-bg-card', '--color-bg-elevated', '--color-text', '--color-text-muted', '--color-border', '--color-primary', '--color-accent']
+    varNames.forEach(v => container.style.setProperty(v, rootVars.getPropertyValue(v)))
+    document.body.appendChild(container)
+
+    const root = createRoot(container)
+    root.render(<PdfBriefingContent data={data} contractData={contractData} />)
+
+    await new Promise(r => setTimeout(r, 2500))
+
     try {
-      await exportElementToPdf(pdfRef.current, {
+      await exportElementToPdf(container, {
         filename: 'QLD-Battery-Investment-Briefing',
         title: 'Queensland Battery Investment Briefing',
         subtitle: `AURES Intelligence · ${new Date().toLocaleDateString('en-AU', { day: 'numeric', month: 'long', year: 'numeric' })}`,
         scale: 2,
-        jpegQuality: 0.88,
+        jpegQuality: 0.90,
       })
-    } finally { setExporting(false); setPdfMode(false) }
-  }
+    } finally {
+      root.unmount()
+      document.body.removeChild(container)
+      setExporting(false)
+    }
+  }, [data, contractData, exporting])
 
   if (loading) return <div className="p-6 lg:p-8 max-w-6xl mx-auto"><div className="animate-pulse h-8 bg-[var(--color-bg-elevated)] rounded w-1/3" /></div>
   if (!data) return <div className="p-6 lg:p-8 max-w-6xl mx-auto"><p className="text-[var(--color-text-muted)]">Failed to load briefing data.</p></div>
@@ -100,36 +117,12 @@ export default function QldBatteryBriefing() {
         ))}
       </div>
 
-      <div ref={pdfRef} style={pdfMode ? { background: '#ffffff', color: '#0f172a', padding: '16px' } : undefined}>
-        {pdfMode ? (
-          <div className="space-y-8" style={{ background: '#ffffff' }}>
-            <div style={{ borderBottom: '2px solid #e2e8f0', paddingBottom: 24 }}><ThesisSection data={data} /></div>
-            <div style={{ borderBottom: '2px solid #e2e8f0', paddingBottom: 24 }}>
-              <h2 style={{ fontSize: 16, fontWeight: 700, color: '#0f172a', marginBottom: 16 }}>Revenue Collapse</h2>
-              <RevenueSection data={data} />
-            </div>
-            <div style={{ borderBottom: '2px solid #e2e8f0', paddingBottom: 24 }}>
-              <h2 style={{ fontSize: 16, fontWeight: 700, color: '#0f172a', marginBottom: 16 }}>QLD Pipeline &amp; Timeline</h2>
-              <TimelineSection data={data} />
-            </div>
-            <div style={{ borderBottom: '2px solid #e2e8f0', paddingBottom: 24 }}>
-              <h2 style={{ fontSize: 16, fontWeight: 700, color: '#0f172a', marginBottom: 16 }}>Investment Analysis</h2>
-              <AnalysisSection data={data} />
-            </div>
-            <div>
-              <h2 style={{ fontSize: 16, fontWeight: 700, color: '#0f172a', marginBottom: 16 }}>NEM Context</h2>
-              <ContextSection data={data} />
-            </div>
-          </div>
-        ) : (
-          <>
-            {activeSection === 'thesis' && <ThesisSection data={data} />}
-            {activeSection === 'revenue' && <RevenueSection data={data} />}
-            {activeSection === 'timeline' && <TimelineSection data={data} />}
-            {activeSection === 'analysis' && <AnalysisSection data={data} />}
-            {activeSection === 'context' && <ContextSection data={data} />}
-          </>
-        )}
+      <div ref={pdfRef}>
+        {activeSection === 'thesis' && <ThesisSection data={data} contractData={contractData} />}
+        {activeSection === 'revenue' && <RevenueSection data={data} />}
+        {activeSection === 'timeline' && <TimelineSection data={data} />}
+        {activeSection === 'analysis' && <AnalysisSection data={data} />}
+        {activeSection === 'context' && <ContextSection data={data} />}
       </div>
 
       {/* Sources */}
@@ -160,9 +153,24 @@ export default function QldBatteryBriefing() {
 
 // ---------- Thesis ----------
 
-function ThesisSection({ data }: { data: BriefingData }) {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function ThesisSection({ data, contractData }: { data: BriefingData; contractData?: any }) {
   const t = data.thesis
   const snap = data.qld_market_snapshot
+
+  const fwd = contractData?.forward_curve?.dec_2025_close || {}
+  const fwdMay = contractData?.forward_curve?.may_2026_close || {}
+  const forwardChartData = ['cy26', 'cy27', 'cy28', 'cy29'].map(yr => ({
+    year: yr.toUpperCase(),
+    nsw: fwd.nsw?.[yr] || null,
+    qld: fwd.qld?.[yr] || null,
+    vic: fwd.vic?.[yr] || null,
+    sa: fwd.sa?.[yr] || null,
+    qld_may: fwdMay.qld?.[yr] || null,
+  }))
+
+  const spots = contractData?.quarterly_spot_prices?.data || []
+
   return (
     <div className="space-y-6">
       {/* Position statement */}
@@ -182,9 +190,86 @@ function ThesisSection({ data }: { data: BriefingData }) {
         <StatCard label="Forward CY27-29" value={`~$${snap.forward_curve.cy27}`} sub="/MWh — flat, no recovery priced" colour="#6b7280" />
       </div>
 
-      {/* Forward curve commentary */}
+      {/* Forward curve chart */}
+      {forwardChartData[0].nsw && (
+        <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl p-5">
+          <h4 className="text-sm font-semibold text-[var(--color-text)] mb-1">ASX Forward Curve by State (CY26–CY29)</h4>
+          <p className="text-xs text-[var(--color-text-muted)] mb-4">QLD flat at ~$79/MWh — no recovery priced. NSW $30+/MWh higher on Eraring retirement risk. Dashed: QLD May 2026 update.</p>
+          <div className="h-56 lg:h-64">
+            <ResponsiveContainer width="100%" height="100%">
+              <LineChart data={forwardChartData}>
+                <CartesianGrid strokeDasharray="3 3" stroke="var(--color-border)" />
+                <XAxis dataKey="year" tick={{ fontSize: 11, fill: 'var(--color-text-muted)' }} />
+                <YAxis tick={{ fontSize: 11, fill: 'var(--color-text-muted)' }} tickFormatter={v => `$${v}`} domain={[60, 120]} />
+                <Tooltip content={({ active, payload, label }) => {
+                  if (!active || !payload?.length) return null
+                  return (
+                    <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-lg p-3 shadow-xl text-xs">
+                      <div className="font-medium text-[var(--color-text)] mb-1">{label}</div>
+                      {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
+                      {payload.filter((p: any) => p.value != null).map((p: any, i: number) => (
+                        <div key={i} className="flex items-center gap-2">
+                          <span className="w-2 h-2 rounded-full" style={{ background: p.color }} />
+                          <span className="text-[var(--color-text-muted)]">{p.name}:</span>
+                          <span className="text-[var(--color-text)] font-medium">${Number(p.value).toFixed(0)}</span>
+                        </div>
+                      ))}
+                    </div>
+                  )
+                }} />
+                <Legend wrapperStyle={{ fontSize: 11 }} />
+                <Line type="monotone" dataKey="nsw" name="NSW" stroke="#3b82f6" strokeWidth={2} dot={{ r: 3 }} />
+                <Line type="monotone" dataKey="qld" name="QLD (Dec)" stroke="#f59e0b" strokeWidth={2} dot={{ r: 3 }} />
+                <Line type="monotone" dataKey="vic" name="VIC" stroke="#8b5cf6" strokeWidth={2} dot={{ r: 3 }} />
+                <Line type="monotone" dataKey="sa" name="SA" stroke="#ef4444" strokeWidth={2} dot={{ r: 3 }} />
+                <Line type="monotone" dataKey="qld_may" name="QLD (May)" stroke="#f59e0b" strokeWidth={2} dot={{ r: 3 }} strokeDasharray="5 5" />
+              </LineChart>
+            </ResponsiveContainer>
+          </div>
+        </div>
+      )}
+
+      {/* Quarterly spot prices */}
+      {spots.length > 0 && (
+        <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl p-5">
+          <h4 className="text-sm font-semibold text-[var(--color-text)] mb-1">Quarterly Wholesale Prices by State</h4>
+          <p className="text-xs text-[var(--color-text-muted)] mb-4">QLD collapsed from $140/MWh (Q2 2025) to $65/MWh (Q1 2026). The Q2 2025 spike was driven by 3 extreme days in June.</p>
+          <div className="h-56 lg:h-64">
+            <ResponsiveContainer width="100%" height="100%">
+              <LineChart data={spots}>
+                <CartesianGrid strokeDasharray="3 3" stroke="var(--color-border)" />
+                <XAxis dataKey="quarter" tick={{ fontSize: 10, fill: 'var(--color-text-muted)' }} />
+                <YAxis tick={{ fontSize: 11, fill: 'var(--color-text-muted)' }} tickFormatter={v => `$${v}`} />
+                <Tooltip content={({ active, payload, label }) => {
+                  if (!active || !payload?.length) return null
+                  return (
+                    <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-lg p-3 shadow-xl text-xs">
+                      <div className="font-medium text-[var(--color-text)] mb-1">{label}</div>
+                      {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
+                      {payload.filter((p: any) => p.value != null).map((p: any, i: number) => (
+                        <div key={i} className="flex items-center gap-2">
+                          <span className="w-2 h-2 rounded-full" style={{ background: p.color }} />
+                          <span className="text-[var(--color-text-muted)]">{p.name}:</span>
+                          <span className="text-[var(--color-text)] font-medium">${Number(p.value).toFixed(0)}</span>
+                        </div>
+                      ))}
+                    </div>
+                  )
+                }} />
+                <Legend wrapperStyle={{ fontSize: 11 }} />
+                <Line type="monotone" dataKey="nsw" name="NSW" stroke="#3b82f6" strokeWidth={2} dot={{ r: 2 }} />
+                <Line type="monotone" dataKey="qld" name="QLD" stroke="#f59e0b" strokeWidth={2.5} dot={{ r: 3 }} />
+                <Line type="monotone" dataKey="vic" name="VIC" stroke="#8b5cf6" strokeWidth={2} dot={{ r: 2 }} />
+                <Line type="monotone" dataKey="sa" name="SA" stroke="#ef4444" strokeWidth={2} dot={{ r: 2 }} />
+              </LineChart>
+            </ResponsiveContainer>
+          </div>
+        </div>
+      )}
+
+      {/* Forward curve stat cards */}
       <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl p-5">
-        <h4 className="text-sm font-semibold text-[var(--color-text)] mb-2">The Forward Curve Says It All</h4>
+        <h4 className="text-sm font-semibold text-[var(--color-text)] mb-2">QLD Forward Prices</h4>
         <div className="grid grid-cols-3 gap-3 mb-4">
           {(['cy27', 'cy28', 'cy29'] as const).map(k => (
             <div key={k} className="bg-[var(--color-bg-elevated)] rounded-lg p-3 text-center">
@@ -543,6 +628,36 @@ function ContextSection({ data }: { data: BriefingData }) {
           QLD the <span className="text-red-400 font-medium">worst-positioned NEM state for
           merchant BESS investment</span> in the 2026-2028 window.
         </p>
+      </div>
+    </div>
+  )
+}
+
+// ---------- PDF Content ----------
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function PdfBriefingContent({ data, contractData }: { data: BriefingData; contractData?: any }) {
+  return (
+    <div className="space-y-8">
+      <ThesisSection data={data} contractData={contractData} />
+      <hr className="border-[var(--color-border)]" />
+      <h2 className="text-base font-bold text-[var(--color-text)]">Revenue Collapse</h2>
+      <RevenueSection data={data} />
+      <hr className="border-[var(--color-border)]" />
+      <h2 className="text-base font-bold text-[var(--color-text)]">QLD Pipeline &amp; Timeline</h2>
+      <TimelineSection data={data} />
+      <hr className="border-[var(--color-border)]" />
+      <h2 className="text-base font-bold text-[var(--color-text)]">Investment Analysis</h2>
+      <AnalysisSection data={data} />
+      <hr className="border-[var(--color-border)]" />
+      <h2 className="text-base font-bold text-[var(--color-text)]">NEM Context</h2>
+      <ContextSection data={data} />
+      <hr className="border-[var(--color-border)]" />
+      <div className="text-[10px] text-[var(--color-text-muted)] space-y-1 pt-4">
+        <div className="font-medium text-xs text-[var(--color-text)]">Sources</div>
+        {data.metadata.sources.map((s: { name: string }, i: number) => (
+          <div key={i}>{s.name}</div>
+        ))}
       </div>
     </div>
   )
