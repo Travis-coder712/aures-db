@@ -455,6 +455,29 @@ sed -n 's/.*"version": "\(.*\)".*/\1/p' frontend/package.json | head -1
 If row counts are dramatically lower than expected, someone cleared the
 DB — see `docs/NEXT_SESSION_HANDOFF.md` for backfill scripts.
 
+### Data freshness check (run every session)
+
+```bash
+cd /Users/travishughes/aures-db
+echo "=== Data Freshness ==="
+echo "bess_daily_bids:     $(sqlite3 database/aures.db 'SELECT MAX(settlement_date) FROM bess_daily_bids')"
+echo "bess_5min_peaks:     $(sqlite3 database/aures.db 'SELECT MAX(date) FROM bess_5min_peaks')"
+echo "dispatch_price:      $(sqlite3 database/aures.db 'SELECT MAX(date) FROM dispatch_price_daily')"
+echo "battery_daily_scada: $(sqlite3 database/aures.db 'SELECT MAX(settlement_date) FROM battery_daily_scada')"
+echo "performance_monthly: $(sqlite3 database/aures.db 'SELECT MAX(year)||'-'||printf(\"%02d\",MAX(month)) FROM performance_monthly WHERE year=(SELECT MAX(year) FROM performance_monthly)')"
+echo "news_articles:       $(sqlite3 database/aures.db 'SELECT MAX(date) FROM news_articles')"
+echo "=== Stale Thresholds ==="
+echo "bess_daily_bids:  refresh if >45 days stale (MMSDM lag)"
+echo "battery_scada:    refresh if >7 days stale (rolling import)"
+echo "performance:      refresh if prior month settled (~15th of following month)"
+echo "news:             refresh if >7 days stale"
+```
+
+**If any source is stale beyond its threshold, refresh it before starting feature work.**
+See `docs/DATA_REFRESH.md` for per-importer commands. After importing, re-export the
+affected JSONs and update `frontend/public/data/metadata/data-sources.json` with the
+new `last_run` date.
+
 ---
 
 ## 16. Authoritative docs (read in this order)

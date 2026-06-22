@@ -91,9 +91,9 @@
       "url": "https://nemweb.com.au",
       "frequency": "daily",
       "script": "import_nemweb_bids.py",
-      "last_run": "2026-03-31",
+      "last_run": "2026-06-22",
       "last_status": "completed",
-      "records_imported": 123690,
+      "records_imported": 141868,
       "records_updated": 0,
       "records_new": 0,
       "error": null
