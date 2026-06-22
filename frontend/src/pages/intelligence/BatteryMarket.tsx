@@ -6,7 +6,7 @@ import {
   XAxis, YAxis, Tooltip, CartesianGrid,
   ResponsiveContainer, Legend,
 } from 'recharts'
-import { fetchBatteryMarket } from '../../lib/dataService'
+import { fetchBatteryMarket, fetchNemContractPrices } from '../../lib/dataService'
 import { exportElementToPdf } from '../../lib/exportPdf'
 import type { BatteryMarketData } from '../../lib/types'
 import DataProvenance from '../../components/common/DataProvenance'
@@ -20,8 +20,9 @@ const CannibIcon = () => <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24
 const WholesaleIcon = () => <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z" /></svg>
 const StateIcon = () => <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" /></svg>
 const OutlookIcon = () => <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>
+const ContractIcon = () => <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 14l6-6m-5.5.5h.01m4.99 5h.01M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16l3.5-2 3.5 2 3.5-2 3.5 2z" /></svg>
 
-type SectionId = 'overview' | 'price-setting' | 'revenue' | 'bidding' | 'cannibalisation' | 'wholesale' | 'states' | 'outlook'
+type SectionId = 'overview' | 'price-setting' | 'revenue' | 'bidding' | 'cannibalisation' | 'wholesale' | 'contracts' | 'states' | 'outlook'
 
 const SECTIONS: { id: SectionId; label: string; icon: React.ReactNode }[] = [
   { id: 'overview', label: 'Overview', icon: <OverviewIcon /> },
@@ -30,6 +31,7 @@ const SECTIONS: { id: SectionId; label: string; icon: React.ReactNode }[] = [
   { id: 'bidding', label: 'Bidding', icon: <BiddingIcon /> },
   { id: 'cannibalisation', label: 'Cannibalisation', icon: <CannibIcon /> },
   { id: 'wholesale', label: 'Wholesale', icon: <WholesaleIcon /> },
+  { id: 'contracts', label: 'Contracts', icon: <ContractIcon /> },
   { id: 'states', label: 'By State', icon: <StateIcon /> },
   { id: 'outlook', label: 'Outlook', icon: <OutlookIcon /> },
 ]
@@ -73,13 +75,17 @@ function ChartTooltip({ active, payload, label }: any) {
 
 export default function BatteryMarket() {
   const [data, setData] = useState<BatteryMarketData | null>(null)
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const [contractData, setContractData] = useState<any | null>(null)
   const [loading, setLoading] = useState(true)
   const [activeSection, setActiveSection] = useState<SectionId>('overview')
   const [exporting, setExporting] = useState(false)
   const pdfRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    fetchBatteryMarket().then(d => { setData(d); setLoading(false) })
+    Promise.all([fetchBatteryMarket(), fetchNemContractPrices()]).then(([d, c]) => {
+      setData(d); setContractData(c); setLoading(false)
+    })
   }, [])
 
   const handleExportPdf = async () => {
@@ -169,6 +175,7 @@ export default function BatteryMarket() {
         {activeSection === 'bidding' && <BiddingSection data={bid} />}
         {activeSection === 'cannibalisation' && <CannibalisationSection data={can} cap={cap} />}
         {activeSection === 'wholesale' && <WholesaleSection data={wp} />}
+        {activeSection === 'contracts' && contractData && <ContractMarketSection data={contractData} />}
         {activeSection === 'states' && <StateSection data={data} />}
         {activeSection === 'outlook' && <OutlookSection data={data} />}
       </div>
@@ -744,6 +751,174 @@ function OutlookSection({ data }: { data: BatteryMarketData }) {
           ))}
         </div>
       </div>
+    </div>
+  )
+}
+
+// ---------- Section: Contract Market ----------
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function ContractMarketSection({ data }: { data: any }) {
+  const spots = data.quarterly_spot_prices?.data || []
+  const caps = data.cap_contract_prices?.data || []
+  const fwd = data.forward_curve?.dec_2025_close || {}
+  const fwdMay = data.forward_curve?.may_2026_close || {}
+  const spreads = data.spread_analysis?.by_state_q1_2026 || {}
+  const hierarchy = data.investment_hierarchy || {}
+
+  const forwardChartData = ['cy26', 'cy27', 'cy28', 'cy29'].map(yr => ({
+    year: yr.toUpperCase(),
+    nsw: fwd.nsw?.[yr] || null,
+    qld: fwd.qld?.[yr] || null,
+    vic: fwd.vic?.[yr] || null,
+    sa: fwd.sa?.[yr] || null,
+    qld_may: fwdMay.qld?.[yr] || null,
+  }))
+
+  return (
+    <div className="space-y-6">
+      {/* Quarterly spot prices by state */}
+      <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl p-5">
+        <h3 className="text-sm font-semibold text-[var(--color-text)] mb-1">Quarterly Wholesale Spot Prices by State</h3>
+        <p className="text-xs text-[var(--color-text-muted)] mb-4">Volume-weighted average $/MWh. Source: AEMO QED + AER.</p>
+        <div className="h-72 lg:h-80">
+          <ResponsiveContainer width="100%" height="100%">
+            <LineChart data={spots}>
+              <CartesianGrid strokeDasharray="3 3" stroke="var(--color-border)" />
+              <XAxis dataKey="quarter" tick={{ fontSize: 10, fill: 'var(--color-text-muted)' }} />
+              <YAxis tick={{ fontSize: 11, fill: 'var(--color-text-muted)' }} tickFormatter={v => `$${v}`} />
+              <Tooltip content={<ChartTooltip />} />
+              <Legend wrapperStyle={{ fontSize: 11 }} />
+              {Object.keys(STATE_COLOURS).map(s => (
+                <Line key={s} type="monotone" dataKey={s} name={STATE_LABELS[s]} stroke={STATE_COLOURS[s]} strokeWidth={2} dot={{ r: 2 }} />
+              ))}
+            </LineChart>
+          </ResponsiveContainer>
+        </div>
+      </div>
+
+      {/* Cap contract prices */}
+      {caps.length > 0 && (
+        <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl p-5">
+          <h3 className="text-sm font-semibold text-[var(--color-text)] mb-1">$300 Cap Contract Settlement Prices</h3>
+          <p className="text-xs text-[var(--color-text-muted)] mb-4">
+            {data.cap_contract_prices?.interpretation}
+          </p>
+          <div className="h-64 lg:h-72">
+            <ResponsiveContainer width="100%" height="100%">
+              <ComposedChart data={caps}>
+                <CartesianGrid strokeDasharray="3 3" stroke="var(--color-border)" />
+                <XAxis dataKey="quarter" tick={{ fontSize: 10, fill: 'var(--color-text-muted)' }} />
+                <YAxis tick={{ fontSize: 11, fill: 'var(--color-text-muted)' }} tickFormatter={v => `$${v}`} />
+                <Tooltip content={({ active, payload, label }) => {
+                  if (!active || !payload?.length) return null
+                  return (
+                    <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-lg p-3 shadow-xl text-xs">
+                      <div className="font-medium text-[var(--color-text)] mb-1">{label} — $300 Cap</div>
+                      {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
+                      {payload.filter((p: any) => p.value != null).map((p: any, i: number) => (
+                        <div key={i} className="flex items-center gap-2">
+                          <span className="w-2 h-2 rounded-full" style={{ background: p.color }} />
+                          <span className="text-[var(--color-text-muted)]">{p.name}:</span>
+                          <span className="text-[var(--color-text)] font-medium">${Number(p.value).toFixed(2)}</span>
+                        </div>
+                      ))}
+                      {payload[0]?.payload?.note && (
+                        <div className="text-[var(--color-text-muted)] mt-1 max-w-[200px]">{payload[0].payload.note}</div>
+                      )}
+                    </div>
+                  )
+                }} />
+                <Legend wrapperStyle={{ fontSize: 11 }} />
+                <Bar dataKey="nsw" name="NSW" fill={STATE_COLOURS.nsw} fillOpacity={0.7} radius={[2, 2, 0, 0]} />
+                <Bar dataKey="qld" name="QLD" fill={STATE_COLOURS.qld} fillOpacity={0.7} radius={[2, 2, 0, 0]} />
+                <Bar dataKey="vic" name="VIC" fill={STATE_COLOURS.vic} fillOpacity={0.7} radius={[2, 2, 0, 0]} />
+                <Bar dataKey="sa" name="SA" fill={STATE_COLOURS.sa} fillOpacity={0.7} radius={[2, 2, 0, 0]} />
+              </ComposedChart>
+            </ResponsiveContainer>
+          </div>
+          <p className="text-[10px] text-[var(--color-text-muted)] mt-3 leading-relaxed">
+            {data.cap_contract_prices?.bess_revenue_impact}
+          </p>
+        </div>
+      )}
+
+      {/* Forward curve by state */}
+      <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl p-5">
+        <h3 className="text-sm font-semibold text-[var(--color-text)] mb-1">ASX Forward Curve by State (CY26–CY29)</h3>
+        <p className="text-xs text-[var(--color-text-muted)] mb-4">Calendar-year base futures. Solid lines: Dec 2025 close. Dashed: QLD May 2026 update.</p>
+        <div className="h-64 lg:h-72">
+          <ResponsiveContainer width="100%" height="100%">
+            <LineChart data={forwardChartData}>
+              <CartesianGrid strokeDasharray="3 3" stroke="var(--color-border)" />
+              <XAxis dataKey="year" tick={{ fontSize: 11, fill: 'var(--color-text-muted)' }} />
+              <YAxis tick={{ fontSize: 11, fill: 'var(--color-text-muted)' }} tickFormatter={v => `$${v}`} domain={[60, 120]} />
+              <Tooltip content={<ChartTooltip />} />
+              <Legend wrapperStyle={{ fontSize: 11 }} />
+              <Line type="monotone" dataKey="nsw" name="NSW" stroke={STATE_COLOURS.nsw} strokeWidth={2} dot={{ r: 3 }} />
+              <Line type="monotone" dataKey="qld" name="QLD (Dec)" stroke={STATE_COLOURS.qld} strokeWidth={2} dot={{ r: 3 }} />
+              <Line type="monotone" dataKey="vic" name="VIC" stroke={STATE_COLOURS.vic} strokeWidth={2} dot={{ r: 3 }} />
+              <Line type="monotone" dataKey="sa" name="SA" stroke={STATE_COLOURS.sa} strokeWidth={2} dot={{ r: 3 }} />
+              <Line type="monotone" dataKey="qld_may" name="QLD (May update)" stroke={STATE_COLOURS.qld} strokeWidth={2} dot={{ r: 3 }} strokeDasharray="5 5" />
+            </LineChart>
+          </ResponsiveContainer>
+        </div>
+        {/* Curve shape analysis */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 mt-4">
+          {Object.entries(data.forward_curve?.curve_shape_analysis || {}).map(([state, analysis]) => (
+            <div key={state} className="bg-[var(--color-bg-elevated)] rounded-lg p-3">
+              <div className="text-xs font-medium mb-1" style={{ color: STATE_COLOURS[state] || '#6b7280' }}>{STATE_LABELS[state] || state.toUpperCase()}</div>
+              <p className="text-[10px] text-[var(--color-text-muted)] leading-relaxed">{String(analysis)}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Spread analysis */}
+      <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl p-5">
+        <h3 className="text-sm font-semibold text-[var(--color-text)] mb-3">Peak-to-Trough Spread by State (Q1 2026)</h3>
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
+          {Object.entries(spreads).map(([state, info]) => {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            const s = info as any
+            return (
+              <div key={state} className="bg-[var(--color-bg-elevated)] rounded-lg p-3">
+                <div className="text-xs text-[var(--color-text-muted)] uppercase">{state}</div>
+                <div className="text-xl font-bold" style={{ color: STATE_COLOURS[state] || '#6b7280' }}>
+                  ${s.spread}/MWh
+                </div>
+                <div className="text-[10px] text-[var(--color-text-muted)] mt-1">{s.outlook}</div>
+              </div>
+            )
+          })}
+        </div>
+        <p className="text-xs text-amber-400 mt-4 leading-relaxed">{data.spread_analysis?.investment_signal}</p>
+      </div>
+
+      {/* Investment hierarchy */}
+      {hierarchy.ranking && (
+        <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl p-5">
+          <h3 className="text-sm font-semibold text-[var(--color-text)] mb-3">BESS Investment Hierarchy</h3>
+          <div className="flex items-center gap-2 mb-4">
+            {hierarchy.ranking.map((state: string, i: number) => (
+              <div key={state} className="flex items-center gap-1">
+                <span className="text-sm font-bold" style={{ color: STATE_COLOURS[state.toLowerCase()] || '#6b7280' }}>{state}</span>
+                {i < hierarchy.ranking.length - 1 && (
+                  <span className="text-[var(--color-text-muted)] text-xs">{i === hierarchy.ranking.length - 2 ? ' >>' : ' >'}</span>
+                )}
+              </div>
+            ))}
+          </div>
+          <div className="space-y-2">
+            {Object.entries(hierarchy.rationale || {}).map(([state, rationale]) => (
+              <div key={state} className="bg-[var(--color-bg-elevated)] rounded-lg p-3">
+                <div className="text-xs font-medium mb-1" style={{ color: STATE_COLOURS[state] || '#6b7280' }}>{STATE_LABELS[state] || state.toUpperCase()}</div>
+                <p className="text-[10px] text-[var(--color-text-muted)] leading-relaxed">{String(rationale)}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   )
 }

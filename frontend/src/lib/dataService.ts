@@ -1007,3 +1007,16 @@ export async function fetchResearchNotes(): Promise<ResearchNotesData | null> {
     return researchNotesCache
   } catch { return null }
 }
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+let nemContractPricesCache: any | null = null
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export async function fetchNemContractPrices(): Promise<any | null> {
+  if (nemContractPricesCache) return nemContractPricesCache
+  try {
+    const resp = await fetch(`${BASE}/analytics/intelligence/nem-contract-prices.json`)
+    if (!resp.ok) return null
+    nemContractPricesCache = await resp.json()
+    return nemContractPricesCache
+  } catch { return null }
+}
