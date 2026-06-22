@@ -1,17 +1,23 @@
 # AURES — Next Session Handoff
 
 **Last refreshed:** 2026-06-22
-**Latest shipped version:** v3.17.1
+**Latest shipped version:** v3.17.5
 **Purpose:** Single-place brief for the next session. Cold-readable — pair with `docs/SESSION_OPENER.md` and `docs/INTELLIGENCE_LAYER_PLAN.md`.
 
 ---
 
-## Current state snapshot (v3.17.1)
+## Current state snapshot (v3.17.5)
 
-### v3.17.0–v3.17.1 — Battery Market Intelligence + Research Notes (2 releases)
+### v3.17.0–v3.17.5 — Battery Market Intelligence + QLD Briefing + Contract Prices (8 releases)
 
-- **v3.17.0** — Two new intelligence surfaces: Battery Market Intelligence (`/intelligence/battery-market`) and Research Notes (`/intelligence/research`). Battery Market has 8 sections (Overview with fleet milestones, Price Setting, Revenue with monthly chart, Bidding with trading platforms + duration economics, Cannibalisation with floor analysis, Wholesale, By State with per-project detail, Outlook with coal retirements + demand drivers). Research Notes: 25 time-stamped analyst notes across 6 categories with expandable cards, tags, and project links.
-- **v3.17.1** — Version bump for deep research enrichment. Battery market data rebuilt with Modo Energy, WattClarity, AEMO QED, RenewEconomy sources. State-by-state commissioned battery lists (name/MW/MWh/developer/date/revenue model), monthly revenue timeline ($200k peak Jun 2025 → $29k record low May 2026), cannibalisation evidence + stabilisers, FCAS saturation (9%), trading platform inventory, duration shift (4hr minimum viable). Research notes expanded to 25 covering revenue collapse, QLD canary, SA resilience, fleet doubling, behind-the-meter threat, coal retirement timing gap, ISP 2026.
+- **v3.17.0** — Two new intelligence surfaces: Battery Market Intelligence (`/intelligence/battery-market`, 8 sections) and Research Notes (`/intelligence/research`, 25 notes across 6 categories).
+- **v3.17.1** — Deep research enrichment from Modo Energy, WattClarity, AEMO QED, RenewEconomy. State-by-state commissioned battery lists, monthly revenue timeline, cannibalisation analysis, FCAS saturation, trading platforms, duration economics.
+- **v3.17.2** — AURES Learn Energy Transition module factual corrections: gentailer definition + basis risk expanded, 3 NEM price cycles described, AGL Loy Yang A acquisition timeline fixed (carbon assistance condition), Newport removed from AGL (it's EnergyAustralia's), Accel Energy narrative corrected, Alinta Loy Yang B timeline fixed (ENGIE 2017, not TPG era), Sun Cable removed from Limondale listing, Origin Eraring firmness clarified.
+- **v3.17.3** — QLD Battery Investment Briefing (`/intelligence/qld-battery-briefing`) — opinionated investment memo with 5 sections: thesis ("wrong time to invest BESS capital in QLD"), revenue collapse chart, QLD pipeline timeline (interactive stacked chart + toggleable event timeline), analysis (CIS moral hazard, Callide offset, behind-the-meter, data centres, duration scenarios), NEM context.
+- **v3.17.4** — QLD Briefing fixes: PDF exports all sections, Supernode Stage 1 corrected to 260 MW (was 1,300 MW full project), stacked operating/construction chart, event type toggle buttons, 4-tier pipeline breakdown (CIS contracted / proven developers / credible international / speculative).
+- **v3.17.5** — Contract Market visualisation in Battery Market Intelligence: quarterly spot prices by state (Q1 2024→Q1 2026), $300 cap contract settlement chart, ASX forward curve CY26-CY29 by state with QLD May 2026 update, spread analysis, BESS investment hierarchy (SA > NSW > VIC >> QLD). New `nem-contract-prices.json` data file.
+
+**Also this session:** NEMweb bids refreshed (Mar→May 2026, 141,868 rows), data freshness checklist added to SESSION_OPENER, end-of-session Studio update checklist added to CLAUDE.md, GridRival hedging game + Learn interactivity added to backlog (Tier 3.5), Piano Lessons card added to Dashboard.
 
 ### v3.14–v3.16.8 — Open Rounds + NSW T8 LTESA deep dive (12 releases)
 
