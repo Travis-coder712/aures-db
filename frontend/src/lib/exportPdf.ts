@@ -316,3 +316,54 @@ export async function exportElementToPdf(
     })
   }
 }
+
+/**
+ * Create a detached off-screen container for PDF rendering.
+ *
+ * Use when the in-page content is inside a scroll container, uses
+ * responsive Tailwind breakpoints, or has charts that need fixed
+ * dimensions. The container:
+ * - Is appended to document.body at left: -10000px (invisible)
+ * - Has fixed width (default 900px) so CSS Grid works predictably
+ * - Copies the page's CSS variables for theme consistency
+ * - Returns a cleanup function to remove the container
+ *
+ * Usage pattern (in a React component):
+ *   const { container, cleanup } = createPdfContainer()
+ *   const root = createRoot(container)
+ *   root.render(<PdfContent data={data} />)
+ *   await new Promise(r => setTimeout(r, 2500)) // wait for Recharts
+ *   await exportElementToPdf(container, { ... })
+ *   root.unmount()
+ *   cleanup()
+ */
+export function createPdfContainer(width = 900): {
+  container: HTMLDivElement
+  cleanup: () => void
+} {
+  const container = document.createElement('div')
+  container.style.cssText = `position:fixed;left:-10000px;top:0;width:${width}px;padding:32px;font-family:-apple-system,BlinkMacSystemFont,Inter,system-ui,sans-serif;font-size:14px;line-height:1.5;`
+
+  const rootVars = getComputedStyle(document.documentElement)
+  const varNames = [
+    '--color-bg', '--color-bg-card', '--color-bg-elevated', '--color-bg-card-hover',
+    '--color-text', '--color-text-muted', '--color-border',
+    '--color-primary', '--color-accent',
+  ]
+  varNames.forEach(v => {
+    const val = rootVars.getPropertyValue(v)
+    if (val) container.style.setProperty(v, val)
+  })
+
+  container.style.backgroundColor = rootVars.getPropertyValue('--color-bg') || '#0b0d12'
+  container.style.color = rootVars.getPropertyValue('--color-text') || '#e6e8f0'
+
+  document.body.appendChild(container)
+
+  return {
+    container,
+    cleanup: () => {
+      if (container.parentNode) container.parentNode.removeChild(container)
+    },
+  }
+}

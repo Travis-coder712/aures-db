@@ -14,12 +14,6 @@ const ACTIVE_FEATURES = [
     route: '/intelligence/research',
   },
   {
-    icon: '\u{1F4CB}',
-    title: 'QLD Battery Briefing',
-    description: 'Investment memo — why now is the wrong time to deploy BESS capital in Queensland. Revenue collapse, pipeline, forward curve analysis.',
-    route: '/intelligence/qld-battery-briefing',
-  },
-  {
     icon: '⚡',
     title: 'Energy Mix Transition',
     description: 'State-by-state generation mix evolution and pipeline projection',

@@ -694,6 +694,50 @@ function OutlookSection({ data }: { data: BatteryMarketData }) {
         <p className="text-xs text-[var(--color-text-muted)] leading-relaxed">{outlook.structural_shift}</p>
       </div>
 
+      {/* NEM-wide investment difficulty */}
+      <div className="bg-[var(--color-bg-card)] border-2 border-red-500/30 rounded-xl p-5">
+        <h4 className="text-sm font-semibold text-red-400 mb-3">The Difficulty of Investing in NEM Batteries Today</h4>
+        <div className="space-y-2 mb-4">
+          {[
+            'Revenue per MW has collapsed from $118k (Q1 2024) to $29k (May 2026) — the lowest since tracking began. Most project finance structures require $50k+/MW/yr to service debt.',
+            'The forward curve shows no recovery: QLD flat at ~$79/MWh through CY29, NSW flat at ~$104/MWh. The market has priced in permanently suppressed volatility.',
+            'NEM-wide price spreads compressed 34% in one year ($183→$121/MWh). Every new GW of BESS capacity compresses returns for all participants — the cannibalisation is self-reinforcing.',
+            'FCAS is structurally saturated at 9% of total revenue and declining. Cap contract payouts are compressing as the battery fleet absorbs the price spikes that used to drive cap value.',
+            'Behind-the-meter batteries (219,000 systems, 4.7 GWh since July 2025 federal subsidy) are compressing grid-scale margins from the demand side — charging from rooftop solar, discharging at the same evening peak that grid-scale batteries target.',
+            'CIS contracts underwrite revenue floors but create a moral hazard: government-underwritten capacity erodes merchant returns, potentially requiring even more government intervention to sustain deployment.',
+          ].map((point, i) => (
+            <div key={i} className="flex gap-2 text-xs text-[var(--color-text-muted)] leading-relaxed">
+              <span className="text-red-400 shrink-0 mt-0.5">&#9679;</span>{point}
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* State-by-state investment positioning */}
+      <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl p-5">
+        <h4 className="text-sm font-semibold text-[var(--color-text)] mb-3">State-by-State Investment Position</h4>
+        <div className="space-y-3">
+          {[
+            { state: 'SA', colour: '#ef4444', position: 'Best positioned', detail: 'Highest spreads ($328/MWh vs QLD $78/MWh), rising forward curve ($88→$94 CY26-29), interconnection constraints create localised BESS opportunity. Limited by connection availability.' },
+            { state: 'NSW', colour: '#3b82f6', position: 'Asymmetric opportunity', detail: 'Eraring 2.88 GW retirement (2027-29) is the single largest supply removal in NEM history. Forward curve at ~$104/MWh doesn\'t fully price it. BESS projects that survive the 2026-27 revenue trough benefit from the coming supply shock — but timing risk if closure is delayed.' },
+            { state: 'VIC', colour: '#8b5cf6', position: 'Improving with patience', detail: 'Yallourn 1.48 GW retirement (mid 2028) will tighten supply. Forward curve gradually pricing it in ($75→$83 CY26-29). BESS investment case improves over time but requires patience through the trough.' },
+            { state: 'QLD', colour: '#f59e0b', position: 'Worst positioned', detail: 'Flat forward curve at ~$79/MWh, smallest coal retirement (Callide B 700 MW vs 2,400+ MW committed BESS arriving same window), most saturated fleet, worst spreads ($78/MWh). Data centre demand less pronounced than NSW/VIC. Last priority for new merchant BESS capital.' },
+          ].map(s => (
+            <div key={s.state} className="bg-[var(--color-bg-elevated)] rounded-lg p-3">
+              <div className="flex items-center gap-2 mb-1">
+                <span className="text-sm font-bold" style={{ color: s.colour }}>{s.state}</span>
+                <span className="text-xs text-[var(--color-text)]">{s.position}</span>
+              </div>
+              <p className="text-[10px] text-[var(--color-text-muted)] leading-relaxed">{s.detail}</p>
+            </div>
+          ))}
+        </div>
+        <p className="text-xs text-amber-400 mt-4 leading-relaxed">
+          Investment hierarchy for new BESS capital: SA &gt; NSW &gt; VIC &gt;&gt; QLD.
+          Watch the forward peak-to-trough spread on ASX — when it starts widening, the market is pricing in coal retirement scarcity.
+        </p>
+      </div>
+
       {/* Coal retirements */}
       <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl p-5">
         <h4 className="text-sm font-semibold text-[var(--color-text)] mb-3">Coal Retirements — Key Revenue Recovery Driver</h4>
