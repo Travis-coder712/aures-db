@@ -1,9 +1,83 @@
 {
   "metadata": {
-    "updated": "2026-06-22",
-    "version": "3.17.0"
+    "updated": "2026-06-27",
+    "version": "3.17.7"
   },
   "notes": [
+    {
+      "id": "cis-t8-dispatchable-results",
+      "date": "2026-06-27",
+      "category": "cis-ltesa",
+      "title": "CIS Tender 8 Dispatchable — 4.2 GW / 16.1 GWh Awarded to 15 BESS Projects",
+      "sections": [
+        {
+          "heading": "Results Overview",
+          "body": "CIS Tender 8 (NEM dispatchable) awarded 4.2 GW / 16.1 GWh across 15 standalone lithium-ion battery projects on 24 June 2026 — the largest dedicated BESS tender in CIS history. All lithium-ion; pumped hydro and CAES received no awards. 70+ bids totalling 76.4 GW were received (~19x oversubscribed). Estimated $6B private capital, 6,800+ jobs."
+        },
+        {
+          "heading": "QLD Dominance",
+          "body": "Queensland received 7 of 15 projects and 51% of capacity (2,150 MW) — a reversal from earlier rounds where NSW led. This reflects QLD's large BESS pipeline and connection availability, but raises the question of whether this further saturates an already-compressed QLD market. The irony: CIS is underwriting BESS in the state where merchant BESS revenue has collapsed 73%."
+        },
+        {
+          "heading": "4-Hour Duration Confirmed",
+          "body": "13 of 15 projects are 4-hour duration, confirming 4-hour as the NEM default. Only Bulabul 1 (2-hour, Ampyr) and Woonga Creek (3.5-hour, Lightsource bp) deviate. The 2-hour playbook is effectively dead for new CIS bids."
+        },
+        {
+          "heading": "Financial Close Gap",
+          "body": "Only Bulabul 1 (Ampyr, 300 MW / 600 MWh) had reached financial close at time of award. Across all CIS rounds, only 1.8 GW of 17.5 GW awarded has reached FID — a 10% conversion rate. The CIS is increasingly a scheme that awards capacity that does not get built."
+        }
+      ],
+      "tags": ["cis", "tender-8", "bess", "4-hour", "queensland", "financial-close"],
+      "related_project_ids": []
+    },
+    {
+      "id": "cis-zero-for-fifteen-wind",
+      "date": "2026-06-27",
+      "category": "cis-ltesa",
+      "title": "Zero for Fifteen — No CIS Wind Farm Has Started Construction",
+      "sections": [
+        {
+          "heading": "The Headline Stat",
+          "body": "As of March 2026, zero of 15 CIS-awarded wind farms had begun construction. Only 3 wind projects (Palmer, Waddi, Carmody's Hill) had reached any form of investment decision. Of 69 CIS-awarded projects across all rounds totalling ~20 GW, only 14 projects (3.3 GW) had begun construction — and these are overwhelmingly batteries, not wind or solar."
+        },
+        {
+          "heading": "Why Wind Is Stuck",
+          "body": "Wind projects face a compounding problem: construction costs are up ~50% since 2020, forward electricity prices have dropped from ~$103/MWh to ~$80/MWh, and CIS revenue floors alone are insufficient for debt financing — projects also need PPAs with retailers, and corporate PPA volumes have been limited to 1-1.5 GW/year. Origin's Frank Calabria: 'Our problem is not ambition... The problem is economics — and it is getting worse, not better.'"
+        },
+        {
+          "heading": "CISA Signing Rate",
+          "body": "Senate Estimates (December 2025) revealed that of approximately 18 GW in successful CIS projects, only approximately 6.5 GW had actually signed CISAs — roughly 36%. An awarded-but-unsigned project has no binding Commonwealth obligation, making withdrawal straightforward."
+        }
+      ],
+      "tags": ["cis", "wind", "construction", "financial-close", "zero-for-fifteen", "senate-estimates"],
+      "related_project_ids": []
+    },
+    {
+      "id": "bowen-cis-withdrawal-ltesa",
+      "date": "2026-06-27",
+      "category": "cis-ltesa",
+      "title": "Minister Bowen Confirms CIS Winners Can Withdraw and Rebid — But Won't Renegotiate",
+      "sections": [
+        {
+          "heading": "The Key Quotes",
+          "body": "At the CIS Tender 8 results announcement (24 June 2026), Minister Bowen addressed the withdrawal question directly: 'If a company is not able to comply with what it told the Government it would do when it won its auction, it is welcome to withdraw and bid again with new economics, and we'll consider that.' But: 'No, we won't be doing that' — when asked about renegotiating existing CIS contracts."
+        },
+        {
+          "heading": "The CIS-to-LTESA Arbitrage",
+          "body": "NSW LTESA Tender 8 (2.5 GW generation, launched mid-2026) is the first generation LTESA since CIS began — creating a potential arbitrage. Projects that never signed a CISA (64% of awards) can walk away easily. A CIS winner that withdraws could rebid into the LTESA with updated economics. LTESA uses a Contract for Difference structure vs CIS revenue floors — different risk profiles that may suit different project economics."
+        },
+        {
+          "heading": "Mutual Exclusivity Rule",
+          "body": "Projects cannot hold both an LTESA and a CISA simultaneously. Bidders into NSW LTESA T8 must commit to forgoing CIS support. The mutual exclusivity creates a binary choice: stay with CIS at potentially unworkable economics, or withdraw and compete again in LTESA with no guarantee of success."
+        },
+        {
+          "heading": "Withdrawal Candidates",
+          "body": "CIS Tender 1 wind projects are the most likely withdrawal candidates: Kentbruck (HMC Capital — 'significant management and financial turmoil'), Spicers Creek (Squadron Energy — 'materially higher construction costs'), Valley of the Winds (ACEN — planning delays), Thunderbolt (Neoen — reportedly not signed CISA). The risk for the Commonwealth is that its best NSW generation projects defect to the state scheme."
+        }
+      ],
+      "tags": ["cis", "ltesa", "withdrawal", "bowen", "renegotiation", "nsw-t8", "policy"],
+      "related_project_ids": ["yanco-delta-wind-farm"]
+    },
     {
       "id": "bess-may-2026-record-low",
       "date": "2026-06-20",

@@ -3097,9 +3097,10 @@ function ESGAgreementProxyTab() {
 // ============================================================
 
 const OPEN_STATUS_CONFIG: Record<OpenRoundStatus, { label: string; colour: string; dot: string }> = {
-  open:       { label: 'OPEN — accepting bids', colour: '#22c55e', dot: '#22c55e' },
-  evaluating: { label: 'EVALUATING — bids in',  colour: '#f59e0b', dot: '#f59e0b' },
-  upcoming:   { label: 'UPCOMING',              colour: '#64748b', dot: '#64748b' },
+  open:               { label: 'OPEN — accepting bids', colour: '#22c55e', dot: '#22c55e' },
+  evaluating:         { label: 'EVALUATING — bids in',  colour: '#f59e0b', dot: '#f59e0b' },
+  results_announced:  { label: 'RESULTS ANNOUNCED',     colour: '#3b82f6', dot: '#3b82f6' },
+  upcoming:           { label: 'UPCOMING',              colour: '#64748b', dot: '#64748b' },
 }
 
 function openRoundSchemeColour(scheme: 'CIS' | 'LTESA'): string {

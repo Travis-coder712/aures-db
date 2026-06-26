@@ -152,14 +152,17 @@ export const CIS_ROUNDS: CISRound[] = [
     name: 'CIS Tender 8 — NEM Dispatchable',
     type: 'dispatchable',
     market: 'NEM',
-    announced_date: '',
-    total_capacity_mw: 0,
-    total_storage_mwh: 0,
-    num_projects: 0,
+    announced_date: '2026-06-24',
+    total_capacity_mw: 4205,
+    total_storage_mwh: 16074,
+    num_projects: 15,
     project_ids: [],
-    description: 'Seeking ~16 GWh of NEM dispatchable capacity. Will allow aggregated small batteries for the first time. Results expected mid-2026.',
+    description: 'Largest dedicated BESS tender in CIS history. 15 standalone lithium-ion battery projects, 4.2 GW / 16.1 GWh. All lithium-ion — pumped hydro and CAES received no awards. QLD dominates with 7 projects (51% of MW). 13 of 15 are 4-hour duration. Ampyr Energy biggest winner (4 projects, 1,425 MW). 70+ bids totalling 76.4 GW received (~19x oversubscribed). Only Bulabul 1 (Ampyr, 300 MW) at financial close at time of award. ~$6B private capital, 6,800+ jobs.',
+    key_changes: 'QLD dominance (51%) reverses earlier NSW-led pattern. 4-hour duration confirmed as NEM default (13/15 projects). First CIS dispatchable round where no pumped hydro was selected. Aggregated small batteries allowed but none won.',
     sources: [
-      { title: 'Australia to launch CIS Tender 8 (Energy Storage News)', url: 'https://www.energy-storage.news/australia-to-launch-capacity-investment-scheme-tender-8-seeking-16gwh-energy-storage-in-the-nem/', source_tier: 2 },
+      { title: 'Big Batteries to power 3.7 million Australian households (Minister Bowen)', url: 'https://minister.dcceew.gov.au/bowen/media-releases/joint-media-release-big-batteries-power-37-million-australian-households', date: '2026-06-24', source_tier: 1 },
+      { title: 'Fifteen big battery projects named winners (RenewEconomy)', url: 'https://reneweconomy.com.au/sunshine-state-the-big-winner-as-15-four-hour-battery-projects-named-in-16-gigawatt-hour-cis-tender/', date: '2026-06-24', source_tier: 2 },
+      { title: 'Modo Energy — CIS Tender 8 Dispatchable BESS Analysis', url: 'https://modoenergy.com/research/en/australia-nem-cis-tender-8-dispatchable-bess', date: '2026-06-25', source_tier: 2 },
     ],
   },
 ]
@@ -167,6 +170,15 @@ export const CIS_ROUNDS: CISRound[] = [
 // ============================================================
 // CIS PROJECT DATA (per-round)
 // ============================================================
+
+export type SchemeContractStatus =
+  | 'awarded'           // Selected as winner — no binding contract yet
+  | 'cisa_signed'       // CISA (or LTESA) contract executed with government
+  | 'fid'               // Financial Investment Decision / financial close reached
+  | 'construction'      // Under construction
+  | 'operating'         // Commercial operations
+  | 'withdrawn'         // Developer withdrew from the scheme
+  | 'terminated'        // Contract terminated by government
 
 export interface SchemeProject {
   name: string
@@ -176,8 +188,9 @@ export interface SchemeProject {
   storage_mwh?: number
   state: string
   location?: string
-  project_id?: string // Link to master project record
-  notes?: string      // Optional inline caveat — e.g. capacity awarded vs project total, missing data flags
+  project_id?: string
+  contract_status?: SchemeContractStatus
+  notes?: string
 }
 
 export const CIS_PROJECTS: Record<string, SchemeProject[]> = {
@@ -208,20 +221,20 @@ export const CIS_PROJECTS: Record<string, SchemeProject[]> = {
     { name: 'Mokoan Solar Farm', developer: 'European Energy Australia', technology: 'solar', capacity_mw: 46, state: 'VIC', project_id: 'mokoan-solar-farm' },
   ],
   'cis-pilot-nsw': [
-    { name: 'Orana REZ Battery', developer: 'Akaysha Energy', technology: 'bess', capacity_mw: 460, storage_mwh: 920, state: 'NSW', location: 'Wellington', project_id: 'orana-bess' },
-    { name: 'Liddell BESS', developer: 'AGL Energy', technology: 'bess', capacity_mw: 500, storage_mwh: 1000, state: 'NSW', location: 'Muswellbrook', project_id: 'liddell-bess' },
-    { name: 'Smithfield Sydney Battery', developer: 'Iberdrola Australia', technology: 'bess', capacity_mw: 235, storage_mwh: 470, state: 'NSW', location: 'Smithfield', project_id: 'smithfield-bess' },
-    { name: 'Enel X VPP 1', developer: 'Enel X Australia', technology: 'vpp', capacity_mw: 43, state: 'NSW' },
-    { name: 'Enel X VPP 2', developer: 'Enel X Australia', technology: 'vpp', capacity_mw: 43, state: 'NSW' },
-    { name: 'Enel X VPP 3', developer: 'Enel X Australia', technology: 'vpp', capacity_mw: 44, state: 'NSW' },
+    { name: 'Orana REZ Battery', developer: 'Akaysha Energy', technology: 'bess', capacity_mw: 460, storage_mwh: 920, state: 'NSW', location: 'Wellington', project_id: 'orana-bess', contract_status: 'construction' },
+    { name: 'Liddell BESS', developer: 'AGL Energy', technology: 'bess', capacity_mw: 500, storage_mwh: 1000, state: 'NSW', location: 'Muswellbrook', project_id: 'liddell-bess', contract_status: 'construction' },
+    { name: 'Smithfield Sydney Battery', developer: 'Iberdrola Australia', technology: 'bess', capacity_mw: 235, storage_mwh: 470, state: 'NSW', location: 'Smithfield', project_id: 'smithfield-bess', contract_status: 'awarded' },
+    { name: 'Enel X VPP 1', developer: 'Enel X Australia', technology: 'vpp', capacity_mw: 43, state: 'NSW', contract_status: 'awarded' },
+    { name: 'Enel X VPP 2', developer: 'Enel X Australia', technology: 'vpp', capacity_mw: 43, state: 'NSW', contract_status: 'awarded' },
+    { name: 'Enel X VPP 3', developer: 'Enel X Australia', technology: 'vpp', capacity_mw: 44, state: 'NSW', contract_status: 'awarded' },
   ],
   'cis-pilot-sa-vic': [
-    { name: 'Wooreen Battery', developer: 'EnergyAustralia', technology: 'bess', capacity_mw: 350, storage_mwh: 1400, state: 'VIC', location: 'Hazelwood North', project_id: 'wooreen-energy-storage-system' },
-    { name: 'Springfield BESS', developer: 'Neoen', technology: 'bess', capacity_mw: 200, storage_mwh: 400, state: 'VIC', location: 'Springfield' },
-    { name: 'Mortlake BESS', developer: 'Origin Energy', technology: 'bess', capacity_mw: 135, storage_mwh: 270, state: 'VIC', location: 'Mortlake', project_id: 'mortlake-battery' },
-    { name: 'Tailem Bend BESS', developer: 'Iberdrola', technology: 'bess', capacity_mw: 200, storage_mwh: 560, state: 'SA', location: 'Tailem Bend', project_id: 'tailem-bend-stage-3' },
-    { name: 'Clements Gap Battery', developer: 'Pacific Blue', technology: 'bess', capacity_mw: 60, storage_mwh: 240, state: 'SA', location: 'Clements Gap', project_id: 'clements-gap-bess' },
-    { name: 'Hallett Battery', developer: 'EnergyAustralia', technology: 'bess', capacity_mw: 50, storage_mwh: 756, state: 'SA', location: 'Canownie', project_id: 'hallett-bess' },
+    { name: 'Wooreen Battery', developer: 'EnergyAustralia', technology: 'bess', capacity_mw: 350, storage_mwh: 1400, state: 'VIC', location: 'Hazelwood North', project_id: 'wooreen-energy-storage-system', contract_status: 'construction' },
+    { name: 'Springfield BESS', developer: 'Neoen', technology: 'bess', capacity_mw: 200, storage_mwh: 400, state: 'VIC', location: 'Springfield', contract_status: 'awarded' },
+    { name: 'Mortlake BESS', developer: 'Origin Energy', technology: 'bess', capacity_mw: 135, storage_mwh: 270, state: 'VIC', location: 'Mortlake', project_id: 'mortlake-battery', contract_status: 'construction' },
+    { name: 'Tailem Bend BESS', developer: 'Iberdrola', technology: 'bess', capacity_mw: 200, storage_mwh: 560, state: 'SA', location: 'Tailem Bend', project_id: 'tailem-bend-stage-3', contract_status: 'awarded' },
+    { name: 'Clements Gap Battery', developer: 'Pacific Blue', technology: 'bess', capacity_mw: 60, storage_mwh: 240, state: 'SA', location: 'Clements Gap', project_id: 'clements-gap-bess', contract_status: 'construction' },
+    { name: 'Hallett Battery', developer: 'EnergyAustralia', technology: 'bess', capacity_mw: 50, storage_mwh: 756, state: 'SA', location: 'Canownie', project_id: 'hallett-bess', contract_status: 'construction' },
   ],
   'cis-tender-2-wem-disp': [
     { name: 'Boddington Giga Battery', developer: 'PGS Energy', technology: 'bess', capacity_mw: 324, storage_mwh: 1296, state: 'WA', location: 'Marradong' },
@@ -295,6 +308,27 @@ export const CIS_PROJECTS: Record<string, SchemeProject[]> = {
     // VIC (2 projects — both wind)
     { name: 'Willatook Wind Farm', developer: 'ENGIE', technology: 'wind', capacity_mw: 338, state: 'VIC', project_id: 'willatook', notes: 'Victoria sought only wind projects in T7. DB has full project = 450 MW.' },
     { name: 'Woolsthorpe Wind Farm', developer: 'ICA Partners', technology: 'wind', capacity_mw: 72, state: 'VIC', project_id: 'woolsthorpe-wind-farm', notes: 'Mexican construction conglomerate ICA Partners — smallest T7 winner.' },
+  ],
+  'cis-tender-8-nem-disp': [
+    // QLD (7 projects, 2,150 MW — 51% of round capacity)
+    { name: 'Rutherglen Battery', developer: 'Ampyr Energy', technology: 'bess', capacity_mw: 400, storage_mwh: 1602, state: 'QLD', location: 'Bororen', contract_status: 'awarded', notes: 'Ampyr Energy with Gryphon Energy + Red Hill. 4-hour.' },
+    { name: 'Grahams Battery', developer: 'Ampyr Energy', technology: 'bess', capacity_mw: 350, storage_mwh: 1428, state: 'QLD', location: 'Kogan (Western Downs)', contract_status: 'awarded', notes: '4-hour. Near existing Western Downs solar/battery complex.' },
+    { name: 'Woonga Creek BESS', developer: 'Lightsource bp', technology: 'bess', capacity_mw: 350, storage_mwh: 1223, state: 'QLD', location: 'Lower Wonga', project_id: 'woolooga-bess', contract_status: 'awarded', notes: '3.5-hour duration — one of two sub-4-hour winners.' },
+    { name: 'Oaky Creek BESS', developer: 'Akaysha Energy', technology: 'bess', capacity_mw: 250, storage_mwh: 1000, state: 'QLD', location: 'Ellesmere', contract_status: 'awarded', notes: '4-hour. Akaysha (BlackRock) — also operates Brendale + Ulinda Park in QLD.' },
+    { name: 'Ganymirra Energy Storage System', developer: 'Edify Energy', technology: 'bess', capacity_mw: 250, storage_mwh: 1000, state: 'QLD', location: 'Majors Creek', contract_status: 'awarded', notes: '4-hour. Same location as Majors Creek ESS — Edify co-locating two projects.' },
+    { name: 'Majors Creek Energy Storage System', developer: 'Edify Energy', technology: 'bess', capacity_mw: 250, storage_mwh: 1000, state: 'QLD', location: 'Majors Creek', contract_status: 'awarded', notes: '4-hour. Co-located with Ganymirra ESS.' },
+    { name: 'Byellee BESS', developer: 'Eku Energy', technology: 'bess', capacity_mw: 300, storage_mwh: 1160, state: 'QLD', location: 'Byellee', contract_status: 'awarded', notes: '~3.9-hour. Eku Energy backed by MIRA (Macquarie).' },
+    // VIC (4 projects, 1,075 MW)
+    { name: 'Wimpole Battery', developer: 'Ampyr Energy', technology: 'bess', capacity_mw: 375, storage_mwh: 1533, state: 'VIC', location: 'Bunyip North', contract_status: 'awarded', notes: '4-hour. Ampyr\'s largest single T8 win.' },
+    { name: 'Moorabool Battery', developer: 'HMC Capital', technology: 'bess', capacity_mw: 300, storage_mwh: 1200, state: 'VIC', location: 'Moorabool', contract_status: 'awarded', notes: '4-hour. HMC Capital — also has CIS T1 Kentbruck Wind (stalled).' },
+    { name: 'Melbourne RE Hub Side B', developer: 'Equis Australia', technology: 'bess', capacity_mw: 200, storage_mwh: 800, state: 'VIC', location: 'Plumpton', project_id: 'melbourne-re-hub', contract_status: 'awarded', notes: '4-hour. Adjacent to MREH Side A (Neoen, operating). Equis also won Calala + Koolunga in T3.' },
+    // NSW (3 projects, 830 MW)
+    { name: 'Gelston Energy Park', developer: 'Ascera Energy', technology: 'bess', capacity_mw: 400, storage_mwh: 1600, state: 'NSW', location: 'McCullys Gap (Upper Hunter)', contract_status: 'awarded', notes: '4-hour. Ascera Energy — new developer in AURES.' },
+    { name: 'Bulabul 1 Battery', developer: 'Ampyr Energy', technology: 'bess', capacity_mw: 300, storage_mwh: 600, state: 'NSW', location: 'Wuuluman (near Wellington)', contract_status: 'fid', notes: '2-hour — only sub-4-hour project with financial close. Only T8 project at FID at time of award.' },
+    { name: 'Ridgey Creek BESS', developer: 'Potentia Energy', technology: 'bess', capacity_mw: 130, storage_mwh: 520, state: 'NSW', location: 'Parkes', contract_status: 'awarded', notes: '4-hour. Potentia also won Blanche + Emeroo in SA.' },
+    // SA (2 projects, 350 MW)
+    { name: 'Emeroo BESS', developer: 'Potentia Energy', technology: 'bess', capacity_mw: 225, storage_mwh: 900, state: 'SA', location: 'Wami Kata (near Port Augusta)', contract_status: 'awarded', notes: '4-hour. Potentia won 3 projects across NSW + SA in T8.' },
+    { name: 'Blanche BESS', developer: 'Potentia Energy', technology: 'bess', capacity_mw: 125, storage_mwh: 508, state: 'SA', location: 'Compton', contract_status: 'awarded', notes: '4-hour. Smallest T8 winner.' },
   ],
 }
 
@@ -1003,7 +1037,7 @@ export const NSW_WIND_COHORT: NSWWindCohortEntry[] = [
 // (15–26 May 2026). Confidence flags carried per-field in `caveats`.
 
 export type OpenRoundScheme = 'CIS' | 'LTESA'
-export type OpenRoundStatus = 'open' | 'evaluating' | 'upcoming'
+export type OpenRoundStatus = 'open' | 'evaluating' | 'upcoming' | 'results_announced'
 export type RoundConfigFavour = 'hybrid' | 'generation' | 'storage' | 'mixed'
 
 export interface MeritCriterion {
@@ -2149,7 +2183,7 @@ export const OPEN_ROUNDS: OpenRound[] = [
   },
 
   // ---------------------------------------------------------------
-  // FEDERAL CIS — Tender 8 (NEM Dispatchable) — EVALUATING
+  // FEDERAL CIS — Tender 8 (NEM Dispatchable) — RESULTS ANNOUNCED 24 Jun 2026
   // ---------------------------------------------------------------
   {
     id: 'cis-tender-8-nem-disp',
@@ -2157,7 +2191,7 @@ export const OPEN_ROUNDS: OpenRound[] = [
     roundCode: 'CIS T8',
     name: 'CIS Tender 8 — NEM Dispatchable',
     administrator: 'DCCEEW (Commonwealth), tenders run by AEMO + ASL (AusEnergy Services Ltd)',
-    status: 'evaluating',
+    status: 'results_announced',
     techFocus: 'Clean dispatchable storage (≥2-hour minimum; "4-hour equivalent" capacity conversion for the 16 GWh target)',
     region: 'NEM-wide — NSW + VIC have RETA carve-out allocations (~0.2 + 0.1 GW); remaining ~3.7 GW contestable across NEM',
     targetMW: 4000,
