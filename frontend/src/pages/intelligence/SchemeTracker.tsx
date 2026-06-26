@@ -12,6 +12,7 @@ import { ESG_TRACKER_PROJECTS, ROUND_ESG_SUMMARIES } from '../../data/esg-tracke
 import { CIS_PROJECTS, LTESA_PROJECTS, CIS_ROUNDS, LTESA_R8_CANDIDATES, NSW_WIND_COHORT, OPEN_ROUNDS } from '../../data/scheme-rounds'
 import type { SchemeProject, NSWWindCohortEntry, LtesaProbabilityBand, ConnectionStatus, OpenRound, OpenRoundStatus } from '../../data/scheme-rounds'
 import { exportElementToPdf } from '../../lib/exportPdf'
+import CisPipelineOverview from '../../components/intelligence/CisPipelineOverview'
 import type { ESGTrackerProject, PublicationStatus, AgreementStatus } from '../../data/esg-tracker-data'
 import DataProvenance from '../../components/common/DataProvenance'
 import { exportSchemePpt } from '../../lib/exportSchemePpt'
@@ -408,7 +409,10 @@ export default function SchemeTracker() {
 
       {/* Overview Tab */}
       {activeTab === 'overview' && (
-        <SchemeOverviewTab cisRounds={cisRounds} ltesaRounds={ltesaRounds} loading={overviewLoading} />
+        <div className="space-y-8">
+          <CisPipelineOverview />
+          <SchemeOverviewTab cisRounds={cisRounds} ltesaRounds={ltesaRounds} loading={overviewLoading} />
+        </div>
       )}
 
       {/* Tracker Tab */}
