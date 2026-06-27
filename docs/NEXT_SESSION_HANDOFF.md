@@ -85,6 +85,30 @@ See `docs/INTELLIGENCE_LAYER_PLAN.md` for detailed release log. Key threads:
 
 ## Unified Backlog (refreshed 2026-06-20)
 
+### Tier 0 — SchemeTracker Restructure (HIGH PRIORITY, 1-2 sessions)
+
+SchemeTracker.tsx is 7,940 lines with 11 tabs and 60 functions. Now that the CIS Pipeline Overview (funnel/bars/table) provides the simple overview, the page needs restructuring:
+
+**Keep (core):**
+- `overview` → Pipeline Overview (funnel + round bars + table) — the hero view
+- `open-rounds` → merge CIS + LTESA back into one tab, show only currently open/evaluating rounds
+- `tracker` → simplify to round-level summary with links to project detail
+
+**Extract to separate component files (reduce main file to <3,000 lines):**
+- NSW T8 deep-dive (risk-share, PPA leverage, bid params, proforma mechanics) → `SchemeTrackerNswT8.tsx` (~3,000 lines)
+- NSW Wind Cohort → `SchemeTrackerNswWind.tsx`
+
+**Move to Research Notes (temporal content doesn't belong in structural tabs):**
+- Time-sensitive CIS commentary, Bowen withdrawal analysis, Senate Estimates findings → already partially migrated (29 notes)
+
+**Remove (redundant with Pipeline Overview):**
+- `cis-success` tab → subsumed by the funnel conversion rates
+- `boardroom` tab → subsumed by overview + research notes
+- `cis-briefing` tab → candidate for Learn module migration (how the CIS works as a mechanism)
+
+**Candidate for Learn migration:**
+- CIS mechanics briefing (how CISA cap & collar works, bid variables, assessment criteria) → standalone Learn lesson alongside the existing CIS/LTESA Bidding module
+
 ### Tier 1 — Deferred v3.14 polish (REZ Pipeline completion)
 
 These were originally v3.14 scope but deferred for the NSW T8 thread. Still applicable:

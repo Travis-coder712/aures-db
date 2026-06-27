@@ -222,7 +222,7 @@ export const CIS_PROJECTS: Record<string, SchemeProject[]> = {
   ],
   'cis-pilot-nsw': [
     { name: 'Orana REZ Battery', developer: 'Akaysha Energy', technology: 'bess', capacity_mw: 460, storage_mwh: 920, state: 'NSW', location: 'Wellington', project_id: 'orana-bess', contract_status: 'construction' },
-    { name: 'Liddell BESS', developer: 'AGL Energy', technology: 'bess', capacity_mw: 500, storage_mwh: 1000, state: 'NSW', location: 'Muswellbrook', project_id: 'liddell-bess', contract_status: 'construction' },
+    { name: 'Liddell BESS', developer: 'AGL Energy', technology: 'bess', capacity_mw: 500, storage_mwh: 1000, state: 'NSW', location: 'Muswellbrook', project_id: 'liddell-bess', contract_status: 'construction', notes: 'Grid-forming inverters. Construction completed Mar 2026; first 250 MW commissioning began Mar 2026. Full commercial operations expected Jul 2026. EPC: Fluence; cost ~$750M.' },
     { name: 'Smithfield Sydney Battery', developer: 'Iberdrola Australia', technology: 'bess', capacity_mw: 235, storage_mwh: 470, state: 'NSW', location: 'Smithfield', project_id: 'smithfield-bess', contract_status: 'operating' },
     { name: 'Enel X VPP 1', developer: 'Enel X Australia', technology: 'vpp', capacity_mw: 43, state: 'NSW', contract_status: 'awarded' },
     { name: 'Enel X VPP 2', developer: 'Enel X Australia', technology: 'vpp', capacity_mw: 43, state: 'NSW', contract_status: 'awarded' },
