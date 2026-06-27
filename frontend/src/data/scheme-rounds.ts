@@ -196,25 +196,25 @@ export interface SchemeProject {
 export const CIS_PROJECTS: Record<string, SchemeProject[]> = {
   'cis-tender-1-nem-gen': [
     // NSW (7 projects, ~3.7 GW)
-    { name: 'Valley of the Winds', developer: 'ACEN Australia', technology: 'wind', capacity_mw: 936, state: 'NSW', project_id: 'valley-of-the-winds' },
-    { name: 'Sandy Creek Solar Farm', developer: 'Lightsource bp', technology: 'solar', capacity_mw: 700, state: 'NSW', project_id: 'sandy-creek-solar-farm' },
-    { name: 'Spicers Creek Wind Farm', developer: 'Squadron Energy', technology: 'wind', capacity_mw: 700, state: 'NSW', project_id: 'spicers-creek-wind-farm' },
-    { name: 'Junction Rivers', developer: 'Windlab', technology: 'hybrid', capacity_mw: 585, storage_mwh: 800, state: 'NSW', project_id: 'junction-rivers-wind-and-bess' },
+    { name: 'Valley of the Winds', developer: 'ACEN Australia', technology: 'wind', capacity_mw: 936, state: 'NSW', project_id: 'valley-of-the-winds', contract_status: 'awarded' },
+    { name: 'Sandy Creek Solar Farm', developer: 'Lightsource bp', technology: 'solar', capacity_mw: 700, state: 'NSW', project_id: 'sandy-creek-solar-farm', contract_status: 'awarded' },
+    { name: 'Spicers Creek Wind Farm', developer: 'Squadron Energy', technology: 'wind', capacity_mw: 700, state: 'NSW', project_id: 'spicers-creek-wind-farm', contract_status: 'awarded' },
+    { name: 'Junction Rivers', developer: 'Windlab', technology: 'hybrid', capacity_mw: 585, storage_mwh: 800, state: 'NSW', project_id: 'junction-rivers-wind-and-bess', contract_status: 'awarded' },
     { name: 'Goulburn River Solar Farm', developer: 'Lightsource bp', technology: 'solar', capacity_mw: 450, state: 'NSW', project_id: 'goulburn-river-solar-farm-and-bess', contract_status: 'construction' },
-    { name: 'Thunderbolt Wind Farm', developer: 'Neoen', technology: 'wind', capacity_mw: 230, state: 'NSW', project_id: 'thunderbolt-wind-farm' },
+    { name: 'Thunderbolt Wind Farm', developer: 'Neoen', technology: 'wind', capacity_mw: 230, state: 'NSW', project_id: 'thunderbolt-wind-farm', contract_status: 'awarded' },
     { name: 'Glanmire Solar Farm', developer: 'Elgin Energy', technology: 'hybrid', capacity_mw: 60, storage_mwh: 104, state: 'NSW', project_id: 'glanmire-solar-farm' },
     // VIC (6 projects, ~1.6 GW)
-    { name: 'Kentbruck Wind Farm', developer: 'Neoen', technology: 'wind', capacity_mw: 600, state: 'VIC', project_id: 'kentbruck-green-power-hub' },
-    { name: 'West Mokoan Solar Farm', developer: 'Lightsource bp', technology: 'hybrid', capacity_mw: 300, storage_mwh: 560, state: 'VIC', project_id: 'west-mokoan-solar-farm-and-bess' },
+    { name: 'Kentbruck Wind Farm', developer: 'Neoen', technology: 'wind', capacity_mw: 600, state: 'VIC', project_id: 'kentbruck-green-power-hub', contract_status: 'awarded' },
+    { name: 'West Mokoan Solar Farm', developer: 'Lightsource bp', technology: 'hybrid', capacity_mw: 300, storage_mwh: 560, state: 'VIC', project_id: 'west-mokoan-solar-farm-and-bess', contract_status: 'awarded' },
     { name: 'Barwon Solar Farm', developer: 'Elgin Energy', technology: 'hybrid', capacity_mw: 250, storage_mwh: 500, state: 'VIC', project_id: 'barwon-solar-farm-and-bess' },
     { name: 'Campbells Forest Solar Farm', developer: 'Risen Energy', technology: 'solar', capacity_mw: 205, state: 'VIC', project_id: 'campbells-forest-solar-farm' },
     { name: 'Elaine Solar Farm', developer: 'Elgin Energy', technology: 'hybrid', capacity_mw: 125, storage_mwh: 250, state: 'VIC', project_id: 'elaine-solar-farm-and-bess' },
     { name: 'Barnawartha Solar Farm', developer: 'Gentari', technology: 'hybrid', capacity_mw: 64, storage_mwh: 139, state: 'VIC', project_id: 'barnawartha-solar-and-energy-storage' },
     // SA (2 projects)
-    { name: 'Goyder North Wind Farm', developer: 'Neoen', technology: 'wind', capacity_mw: 300, state: 'SA', project_id: 'goyder-north-wind-farm' },
+    { name: 'Goyder North Wind Farm', developer: 'Neoen', technology: 'wind', capacity_mw: 300, state: 'SA', project_id: 'goyder-north-wind-farm', contract_status: 'fid' },
     { name: 'Palmer Wind Farm', developer: 'Tilt Renewables', technology: 'wind', capacity_mw: 274, state: 'SA', project_id: 'palmer-wind-farm', contract_status: 'fid' },
     // QLD (3 projects)
-    { name: 'Hopeland Solar Farm', developer: 'ACS', technology: 'solar', capacity_mw: 250, state: 'QLD', project_id: 'hopeland-solar-farm' },
+    { name: 'Hopeland Solar Farm', developer: 'ACS', technology: 'solar', capacity_mw: 250, state: 'QLD', project_id: 'hopeland-solar-farm', contract_status: 'awarded' },
     { name: 'Majors Creek Solar Power Station', developer: 'Edify Energy', technology: 'hybrid', capacity_mw: 150, storage_mwh: 600, state: 'QLD', project_id: 'majors-creek-solar-power-station' },
     { name: 'Ganymirra Solar Power Station', developer: 'Edify Energy', technology: 'hybrid', capacity_mw: 150, storage_mwh: 600, state: 'QLD', project_id: 'ganymirra-solar-power-station' },
     // VIC — 19th project
@@ -223,7 +223,7 @@ export const CIS_PROJECTS: Record<string, SchemeProject[]> = {
   'cis-pilot-nsw': [
     { name: 'Orana REZ Battery', developer: 'Akaysha Energy', technology: 'bess', capacity_mw: 460, storage_mwh: 920, state: 'NSW', location: 'Wellington', project_id: 'orana-bess', contract_status: 'construction' },
     { name: 'Liddell BESS', developer: 'AGL Energy', technology: 'bess', capacity_mw: 500, storage_mwh: 1000, state: 'NSW', location: 'Muswellbrook', project_id: 'liddell-bess', contract_status: 'construction' },
-    { name: 'Smithfield Sydney Battery', developer: 'Iberdrola Australia', technology: 'bess', capacity_mw: 235, storage_mwh: 470, state: 'NSW', location: 'Smithfield', project_id: 'smithfield-bess', contract_status: 'awarded' },
+    { name: 'Smithfield Sydney Battery', developer: 'Iberdrola Australia', technology: 'bess', capacity_mw: 235, storage_mwh: 470, state: 'NSW', location: 'Smithfield', project_id: 'smithfield-bess', contract_status: 'operating' },
     { name: 'Enel X VPP 1', developer: 'Enel X Australia', technology: 'vpp', capacity_mw: 43, state: 'NSW', contract_status: 'awarded' },
     { name: 'Enel X VPP 2', developer: 'Enel X Australia', technology: 'vpp', capacity_mw: 43, state: 'NSW', contract_status: 'awarded' },
     { name: 'Enel X VPP 3', developer: 'Enel X Australia', technology: 'vpp', capacity_mw: 44, state: 'NSW', contract_status: 'awarded' },
@@ -232,7 +232,7 @@ export const CIS_PROJECTS: Record<string, SchemeProject[]> = {
     { name: 'Wooreen Battery', developer: 'EnergyAustralia', technology: 'bess', capacity_mw: 350, storage_mwh: 1400, state: 'VIC', location: 'Hazelwood North', project_id: 'wooreen-energy-storage-system', contract_status: 'construction' },
     { name: 'Springfield BESS', developer: 'Neoen', technology: 'bess', capacity_mw: 200, storage_mwh: 400, state: 'VIC', location: 'Springfield', contract_status: 'awarded' },
     { name: 'Mortlake BESS', developer: 'Origin Energy', technology: 'bess', capacity_mw: 135, storage_mwh: 270, state: 'VIC', location: 'Mortlake', project_id: 'mortlake-battery', contract_status: 'construction' },
-    { name: 'Tailem Bend BESS', developer: 'Iberdrola', technology: 'bess', capacity_mw: 200, storage_mwh: 560, state: 'SA', location: 'Tailem Bend', project_id: 'tailem-bend-stage-3', contract_status: 'awarded' },
+    { name: 'Tailem Bend BESS', developer: 'Iberdrola', technology: 'bess', capacity_mw: 200, storage_mwh: 560, state: 'SA', location: 'Tailem Bend', project_id: 'tailem-bend-stage-3', contract_status: 'construction' },
     { name: 'Clements Gap Battery', developer: 'Pacific Blue', technology: 'bess', capacity_mw: 60, storage_mwh: 240, state: 'SA', location: 'Clements Gap', project_id: 'clements-gap-bess', contract_status: 'construction' },
     { name: 'Hallett Battery', developer: 'EnergyAustralia', technology: 'bess', capacity_mw: 50, storage_mwh: 756, state: 'SA', location: 'Canownie', project_id: 'hallett-bess', contract_status: 'construction' },
   ],
@@ -270,8 +270,8 @@ export const CIS_PROJECTS: Record<string, SchemeProject[]> = {
     { name: 'Dinawan Wind Farm Stage 1', developer: 'Spark Renewables', technology: 'wind', capacity_mw: 357, state: 'NSW', project_id: 'dinawan-energy-hub' },
     { name: 'Gawara Baya', developer: 'Windlab', technology: 'hybrid', capacity_mw: 399, storage_mwh: 217, state: 'QLD', project_id: 'gawara-baya-wind-and-bess' },
     { name: 'Guthrie\'s Gap Solar Power Station', developer: 'Edify Energy', technology: 'hybrid', capacity_mw: 300, storage_mwh: 1200, state: 'QLD', project_id: 'guthries-gap-solar-power-station' },
-    { name: 'Hexham Wind Farm', developer: 'AGL', technology: 'wind', capacity_mw: 600, state: 'VIC', project_id: 'hexham' },
-    { name: 'Liverpool Range Wind Stage 1', developer: 'Tilt Renewables', technology: 'wind', capacity_mw: 634, state: 'NSW', project_id: 'liverpool-range-wind-farm' },
+    { name: 'Hexham Wind Farm', developer: 'AGL', technology: 'wind', capacity_mw: 600, state: 'VIC', project_id: 'hexham', contract_status: 'awarded' },
+    { name: 'Liverpool Range Wind Stage 1', developer: 'Tilt Renewables', technology: 'wind', capacity_mw: 634, state: 'NSW', project_id: 'liverpool-range-wind-farm', contract_status: 'awarded' },
     { name: 'Lower Wonga Solar Farm', developer: 'Lightsource bp', technology: 'solar', capacity_mw: 281, state: 'QLD', project_id: 'lower-wonga-solar-farm-and-bess' },
     { name: 'Merino Solar Farm', developer: 'EDPR', technology: 'hybrid', capacity_mw: 450, storage_mwh: 1800, state: 'NSW', project_id: 'merino-solar-farm' },
     { name: 'Middlebrook Solar Farm', developer: 'TotalEnergies', technology: 'hybrid', capacity_mw: 363, storage_mwh: 813, state: 'NSW', project_id: 'middlebrook-solar-and-bess' },
@@ -285,7 +285,7 @@ export const CIS_PROJECTS: Record<string, SchemeProject[]> = {
   'cis-tender-7-nem-gen': [
     // NSW (9 projects — 3 wind / 1 wind+BESS hybrid / 1 solar / 4 solar+BESS hybrid).
     // Updated 2026-05-25 with full DCCEEW media-release detail.
-    { name: 'Yanco Delta Wind Farm', developer: 'Origin Energy', technology: 'wind', capacity_mw: 1498, state: 'NSW', location: 'South-West REZ — Jerilderie', project_id: 'yanco-delta-wind-farm', notes: 'Biggest single wind project in Australia. Origin\'s first new renewable since announcing Eraring closure. SW REZ grid access secured 2025 (full 1,460 MW). Targeting FID mid-FY27.' },
+    { name: 'Yanco Delta Wind Farm', developer: 'Origin Energy', technology: 'wind', capacity_mw: 1498, state: 'NSW', location: 'South-West REZ — Jerilderie', project_id: 'yanco-delta-wind-farm', contract_status: 'awarded', notes: 'Biggest single wind project in Australia. Origin\'s first new renewable since announcing Eraring closure. SW REZ grid access secured 2025 (full 1,460 MW). Targeting FID mid-FY27.' },
     { name: 'Birriwa Solar Farm', developer: 'ACEN Australia', technology: 'hybrid', capacity_mw: 600, storage_mwh: 2400, state: 'NSW', location: 'Central West Orana REZ', project_id: 'birriwa-solar-farm', notes: 'Largest solar+BESS hybrid awarded in T7.' },
     { name: 'Baldin / Baldon Stage 2', developer: 'Goldwind / Omni', technology: 'hybrid', capacity_mw: 346, storage_mwh: 132, state: 'NSW', location: 'South-West REZ — Hay Plains', project_id: 'baldon-wind-farm-stage-2', notes: '346 MW wind paired with 132 MWh battery. Response to Submissions lodged with DPHI May 2025; awaiting Independent Planning Commission determination.' },
     { name: 'Gundary Solar Hybrid', developer: 'Lightsource bp', technology: 'hybrid', capacity_mw: 320, storage_mwh: 1391, state: 'NSW', project_id: 'gundary-solar-farm-and-bess', notes: 'Solar+BESS hybrid. DB has Gundary Solar Farm and BESS at 300 MW + separate standalone Gundary BESS at 400 MW; T7 covers the integrated 320 MW + 1,391 MWh package.' },
@@ -295,8 +295,8 @@ export const CIS_PROJECTS: Record<string, SchemeProject[]> = {
     { name: 'Wattle Creek Solar Hybrid', developer: 'Spark Renewables', technology: 'hybrid', capacity_mw: 180, storage_mwh: 720, state: 'NSW', project_id: 'wattle-creek-energy-hub-solar-bess', notes: 'Solar+BESS component of the Wattle Creek Energy Hub (separate from the 350 MW standalone BESS).' },
     { name: 'Kayuga Solar Farm and BESS', developer: 'European Energy Australia', technology: 'solar', capacity_mw: 85, state: 'NSW', location: 'Kayuga', notes: 'New project — not yet in AURES DB. DCCEEW announcement labels as solar only (no BESS MWh disclosed despite the "and BESS" in project name).' },
     // QLD (5 projects — 2 wind / 1 wind+BESS hybrid / 1 solar / 1 solar+BESS hybrid)
-    { name: 'Bungaban Wind Energy Project', developer: 'Windlab', technology: 'hybrid', capacity_mw: 1150, storage_mwh: 1400, state: 'QLD', project_id: 'bungaban-wind-farm', notes: '1,150 MW wind + 1,400 MWh battery. Long-term PPA with Rio Tinto for smelter/refinery power.' },
-    { name: 'Theodore Wind Farm', developer: 'Theodore Energy Development', technology: 'wind', capacity_mw: 1022, state: 'QLD', project_id: 'theodore-wind-farm', notes: 'Previously threatened by QLD LNP government. Now backed by a dedicated Theodore Energy Development SPV.' },
+    { name: 'Bungaban Wind Energy Project', developer: 'Windlab', technology: 'hybrid', capacity_mw: 1150, storage_mwh: 1400, state: 'QLD', project_id: 'bungaban-wind-farm', contract_status: 'awarded', notes: '1,150 MW wind + 1,400 MWh battery. Long-term PPA with Rio Tinto for smelter/refinery power.' },
+    { name: 'Theodore Wind Farm', developer: 'Theodore Energy Development', technology: 'wind', capacity_mw: 1022, state: 'QLD', project_id: 'theodore-wind-farm', contract_status: 'awarded', notes: 'Previously threatened by QLD LNP government. Now backed by a dedicated Theodore Energy Development SPV.' },
     { name: 'Banana Range Wind Farm', developer: 'EDF Power Solutions', technology: 'wind', capacity_mw: 228, state: 'QLD', project_id: 'banana-range-wind-farm', notes: 'EDF Renewables\' second T7 win alongside Whyte Yarcowie (SA).' },
     { name: 'Moranbah Solar Farm', developer: 'Zero-E / Grupo Cobra', technology: 'hybrid', capacity_mw: 171, storage_mwh: 100, state: 'QLD', notes: 'New project — not yet in AURES DB. Grupo Cobra\'s second T7 win (with Gunning Solar Hybrid NSW). Small BESS (100 MWh) relative to gen size — primarily firming the solar shape.' },
     { name: 'Bullyard Solar Farm', developer: 'European Energy Australia', technology: 'solar', capacity_mw: 97, state: 'QLD', project_id: 'bullyard-solar-farm', notes: 'European Energy Australia\'s second T7 win alongside Kayuga (NSW).' },
@@ -313,7 +313,7 @@ export const CIS_PROJECTS: Record<string, SchemeProject[]> = {
     // QLD (7 projects, 2,150 MW — 51% of round capacity)
     { name: 'Rutherglen Battery', developer: 'Ampyr Energy', technology: 'bess', capacity_mw: 400, storage_mwh: 1602, state: 'QLD', location: 'Bororen', contract_status: 'awarded', notes: 'Ampyr Energy with Gryphon Energy + Red Hill. 4-hour.' },
     { name: 'Grahams Battery', developer: 'Ampyr Energy', technology: 'bess', capacity_mw: 350, storage_mwh: 1428, state: 'QLD', location: 'Kogan (Western Downs)', contract_status: 'awarded', notes: '4-hour. Near existing Western Downs solar/battery complex.' },
-    { name: 'Woonga Creek BESS', developer: 'Lightsource bp', technology: 'bess', capacity_mw: 350, storage_mwh: 1223, state: 'QLD', location: 'Lower Wonga', project_id: 'woolooga-bess', contract_status: 'awarded', notes: '3.5-hour duration — one of two sub-4-hour winners.' },
+    { name: 'Woonga Creek BESS', developer: 'Lightsource bp', technology: 'bess', capacity_mw: 350, storage_mwh: 1223, state: 'QLD', location: 'Lower Wonga', project_id: 'woolooga-bess', contract_status: 'construction', notes: '3.5-hour duration — one of two sub-4-hour winners.' },
     { name: 'Oaky Creek BESS', developer: 'Akaysha Energy', technology: 'bess', capacity_mw: 250, storage_mwh: 1000, state: 'QLD', location: 'Ellesmere', contract_status: 'awarded', notes: '4-hour. Akaysha (BlackRock) — also operates Brendale + Ulinda Park in QLD.' },
     { name: 'Ganymirra Energy Storage System', developer: 'Edify Energy', technology: 'bess', capacity_mw: 250, storage_mwh: 1000, state: 'QLD', location: 'Majors Creek', contract_status: 'awarded', notes: '4-hour. Same location as Majors Creek ESS — Edify co-locating two projects.' },
     { name: 'Majors Creek Energy Storage System', developer: 'Edify Energy', technology: 'bess', capacity_mw: 250, storage_mwh: 1000, state: 'QLD', location: 'Majors Creek', contract_status: 'awarded', notes: '4-hour. Co-located with Ganymirra ESS.' },

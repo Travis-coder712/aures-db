@@ -5,6 +5,28 @@
   },
   "notes": [
     {
+      "id": "cis-project-status-deep-dive",
+      "date": "2026-06-27",
+      "category": "cis-ltesa",
+      "title": "CIS Project Status Deep Dive — Only BESS Has Progressed, Wind Still Stuck",
+      "sections": [
+        {
+          "heading": "Verified Status (June 2026)",
+          "body": "Deep dive across 22 major CIS/LTESA projects confirms: only battery projects have meaningfully progressed to construction/commissioning. Liddell BESS (AGL, 500 MW) is commissioning with full ops expected June 2026. Four more BESS under construction: Tomago (AGL, 500 MW, broke ground Dec 2025), Calala (Equis, 250 MW, FC Mar 2025), Wooreen (EnergyAustralia, 350 MW, FC Feb 2025), Reeves Plains (Alinta/Sembcorp, 250 MW, FID Jul 2025). Goulburn River Solar (Lightsource bp, 585 MW) is the sole generation project in construction."
+        },
+        {
+          "heading": "Wind Finally Moving — Slowly",
+          "body": "Palmer Wind Farm (Tilt, 288 MW, SA) reached FID in January 2026 — the first CIS-winning wind project to do so, over 2 years after CIS Tender 1 results. Goyder North (Neoen, 300+ MW, SA) received EPBC approval Feb 2026 and is targeting mid-2026 construction start. But the large GW-scale wind projects (Liverpool Range, Yanco Delta, Bungaban, Theodore, Valley of the Winds) are all still pre-FID with FIDs expected late 2026 through 2028."
+        },
+        {
+          "heading": "At-Risk Projects",
+          "body": "Junction Rivers (Windlab, 600 MW wind + 200 MW BESS, NSW) failed to secure South-West REZ access rights — described as 'likely terminal'. Could be the first project dropped from CIS. Thunderbolt Wind Farm (Neoen, NSW) has reportedly not signed its CIS contract — status uncertain. Kentbruck (HMC Capital, VIC) has ministerial approval but HMC has had 'significant management and financial turmoil' and no FID confirmed."
+        }
+      ],
+      "tags": ["cis", "status", "construction", "fid", "wind", "bess", "deep-dive", "junction-rivers"],
+      "related_project_ids": ["liddell-bess", "tomago-bess", "calala-bess-a1", "wooreen-energy-storage-system", "palmer-wind-farm"]
+    },
+    {
       "id": "cis-t8-dispatchable-results",
       "date": "2026-06-27",
       "category": "cis-ltesa",
