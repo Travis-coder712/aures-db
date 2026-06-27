@@ -1,14 +1,23 @@
 # AURES — Next Session Handoff
 
-**Last refreshed:** 2026-06-22
-**Latest shipped version:** v3.17.5
+**Last refreshed:** 2026-06-27
+**Latest shipped version:** v3.18.1
 **Purpose:** Single-place brief for the next session. Cold-readable — pair with `docs/SESSION_OPENER.md` and `docs/INTELLIGENCE_LAYER_PLAN.md`.
 
 ---
 
-## Current state snapshot (v3.17.5)
+## Current state snapshot (v3.18.1)
 
-### v3.17.0–v3.17.5 — Battery Market Intelligence + QLD Briefing + Contract Prices (8 releases)
+### v3.18.0–v3.18.1 — CIS Pipeline Overview + T8 Results (2 releases)
+
+- **v3.18.0** — CIS T8 dispatchable results (15 BESS, 4.2 GW / 16.1 GWh, QLD 51%). `contract_status` field added to SchemeProject (awarded/cisa_signed/fid/construction/operating/withdrawn/terminated). 22 projects populated with status from DB cross-reference. 3 new research notes: T8 results, Zero for Fifteen (no CIS wind at construction), Bowen withdrawal/LTESA clarification.
+- **v3.18.1** — CIS Pipeline Overview component on SchemeTracker Overview tab: (1) Pipeline Funnel showing awarded→signed→FID→construction→operating conversion; (2) By Round stacked bars colour-coded by status; (3) Project Table with filter pills (scheme/status/state/tech) and sortable columns. 130 projects / 38.5 GW tracked. `createPdfContainer()` utility added to exportPdf.ts.
+
+**Remaining from this session's CIS work (items 3 + 4):**
+- Item 3: Flow `contract_status` to ProjectDetail.tsx — show CIS/LTESA scheme status on individual project cards.
+- Item 4: Update NSW T8 SchemeTracker content with Bowen withdrawal clarification. Build withdrawal candidate risk view showing which CIS projects are most likely to exit for LTESA.
+
+### v3.17.0–v3.17.7 — Battery Market Intelligence + Research Notes + Learn fixes (8 releases)
 
 - **v3.17.0** — Two new intelligence surfaces: Battery Market Intelligence (`/intelligence/battery-market`, 8 sections) and Research Notes (`/intelligence/research`, 25 notes across 6 categories).
 - **v3.17.1** — Deep research enrichment from Modo Energy, WattClarity, AEMO QED, RenewEconomy. State-by-state commissioned battery lists, monthly revenue timeline, cannibalisation analysis, FCAS saturation, trading platforms, duration economics.
