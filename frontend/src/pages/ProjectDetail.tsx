@@ -9,6 +9,8 @@ import PerformanceTab from '../components/charts/PerformanceTab'
 import Breadcrumb from '../components/common/Breadcrumb'
 import { ESG_TRACKER_PROJECTS, ROUND_ESG_SUMMARIES } from '../data/esg-tracker-data'
 import type { ESGTrackerProject, PublicationStatus, AgreementStatus } from '../data/esg-tracker-data'
+import { CIS_ROUNDS, CIS_PROJECTS, LTESA_ROUNDS, LTESA_PROJECTS } from '../data/scheme-rounds'
+import type { SchemeContractStatus } from '../data/scheme-rounds'
 
 type Tab = 'overview' | 'timeline' | 'technical' | 'performance' | 'evolution' | 'sources'
 
@@ -42,6 +44,7 @@ export default function ProjectDetail() {
   }
 
   const techConfig = TECHNOLOGY_CONFIG[project.technology]
+
 
   const isOperating = project.status === 'operating' || project.status === 'commissioning'
   const tabs: { key: Tab; label: string }[] = [
@@ -192,6 +195,22 @@ function SectionTitle({ children }: { children: React.ReactNode }) {
 function OverviewTab({ project }: { project: Project }) {
   const esgData = ESG_TRACKER_PROJECTS.find(e => e.projectId === project.id)
 
+  const schemeEntries = (() => {
+    const pid = project.id
+    const entries: { scheme: 'CIS' | 'LTESA'; roundName: string; status: SchemeContractStatus; mw: number; mwh?: number }[] = []
+    for (const round of CIS_ROUNDS) {
+      for (const p of (CIS_PROJECTS[round.id] || [])) {
+        if (p.project_id === pid) entries.push({ scheme: 'CIS', roundName: round.name, status: (p.contract_status || 'awarded') as SchemeContractStatus, mw: p.capacity_mw, mwh: p.storage_mwh })
+      }
+    }
+    for (const round of LTESA_ROUNDS) {
+      for (const p of (LTESA_PROJECTS[round.id] || [])) {
+        if (p.project_id === pid) entries.push({ scheme: 'LTESA', roundName: round.name, status: (p.contract_status || 'awarded') as SchemeContractStatus, mw: p.capacity_mw, mwh: p.storage_mwh })
+      }
+    }
+    return entries
+  })()
+
   return (
     <div className="space-y-6">
       {/* Notable */}
@@ -248,9 +267,32 @@ function OverviewTab({ project }: { project: Project }) {
       )}
 
       {/* Scheme Contracts (CIS / LTESA) */}
-      {project.scheme_contracts && project.scheme_contracts.length > 0 && (
+      {(project.scheme_contracts?.length > 0 || schemeEntries.length > 0) && (
         <section>
           <SectionTitle>Scheme Contracts (CIS / LTESA)</SectionTitle>
+
+          {/* Scheme round entries from scheme-rounds.ts (richer data) */}
+          {schemeEntries.length > 0 && (
+            <div className="space-y-2 mb-3">
+              {schemeEntries.map((se, i) => (
+                <div key={`se-${i}`} className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl p-4">
+                  <div className="flex items-center justify-between flex-wrap gap-2">
+                    <div className="flex items-center gap-2 flex-wrap">
+                      <span className={`text-[10px] font-semibold uppercase tracking-wide px-2 py-0.5 rounded-full ${
+                        se.scheme === 'CIS' ? 'bg-purple-500/20 text-purple-300' : 'bg-emerald-500/20 text-emerald-300'
+                      }`}>{se.scheme}</span>
+                      <span className="text-sm font-medium text-[var(--color-text)]">{se.roundName}</span>
+                      <SchemeStatusBadge status={se.status} />
+                    </div>
+                    <div className="text-right text-sm font-bold text-[var(--color-text)]">
+                      {Math.round(se.mw).toLocaleString()} MW
+                      {se.mwh ? ` / ${Math.round(se.mwh).toLocaleString()} MWh` : ''}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
           <div className="space-y-2">
             {project.scheme_contracts.map((sc, i) => (
               <div
@@ -573,6 +615,26 @@ function ESGProjectCard({ esg }: { esg: ESGTrackerProject }) {
         View full ESG Agreement Proxy tracker →
       </Link>
     </section>
+  )
+}
+
+const SCHEME_STATUS_CONFIG: Record<string, { label: string; colour: string }> = {
+  awarded: { label: 'Awarded', colour: '#6b7280' },
+  cisa_signed: { label: 'CISA Signed', colour: '#3b82f6' },
+  fid: { label: 'FID', colour: '#8b5cf6' },
+  construction: { label: 'Construction', colour: '#f59e0b' },
+  operating: { label: 'Operating', colour: '#10b981' },
+  withdrawn: { label: 'Withdrawn', colour: '#ef4444' },
+  terminated: { label: 'Terminated', colour: '#ef4444' },
+}
+
+function SchemeStatusBadge({ status }: { status: string }) {
+  const cfg = SCHEME_STATUS_CONFIG[status] || { label: status, colour: '#6b7280' }
+  return (
+    <span className="text-[10px] font-medium px-2 py-0.5 rounded-full"
+      style={{ background: cfg.colour + '20', color: cfg.colour }}>
+      {cfg.label}
+    </span>
   )
 }
 
