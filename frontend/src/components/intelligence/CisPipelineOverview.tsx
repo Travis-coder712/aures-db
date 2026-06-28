@@ -178,6 +178,7 @@ function FunnelView({ projects }: { projects: FlatProject[] }) {
 // ---------- Rounds View ----------
 
 function RoundsView({ projects }: { projects: FlatProject[] }) {
+  const [drillStatus, setDrillStatus] = useState<string | null>(null)
   const roundIds = [...new Set(projects.map(p => p.roundId))]
 
   const chartData = roundIds.map(rid => {
@@ -190,22 +191,34 @@ function RoundsView({ projects }: { projects: FlatProject[] }) {
     }
     const roundName = rProjects[0]?.roundName || rid
     const shortName = roundName.replace('CIS ', '').replace('LTESA ', 'L').replace('Tender ', 'T').replace('Round ', 'R').replace(' — NEM Dispatchable', ' Disp').replace(' — NEM Generation', ' Gen').replace(' — WEM', ' WEM').replace('Pilot', 'Pilot')
-    return { name: shortName, ...byStatus, total: rProjects.reduce((s, p) => s + p.capacity_mw, 0) }
+    return { name: shortName, ...byStatus, _total: rProjects.reduce((s, p) => s + p.capacity_mw, 0) }
   })
+
+  const drillProjects = drillStatus
+    ? projects.filter(p => (p.contract_status || 'awarded') === drillStatus).sort((a, b) => b.capacity_mw - a.capacity_mw)
+    : null
 
   return (
     <div className="space-y-6">
       <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl p-5">
         <h3 className="text-sm font-semibold text-[var(--color-text)] mb-1">Capacity by Round — Status Breakdown</h3>
-        <p className="text-xs text-[var(--color-text-muted)] mb-4">Each bar shows how much of each round's capacity has progressed beyond "awarded". Grey = paper awards only.</p>
+        <p className="text-xs text-[var(--color-text-muted)] mb-4">Click a status in the legend to see all projects with that status.</p>
 
-        <div className="flex flex-wrap gap-3 mb-4">
-          {STATUS_ORDER.slice().reverse().map(s => (
-            <div key={s} className="flex items-center gap-1.5 text-[10px] text-[var(--color-text-muted)]">
-              <span className="w-2.5 h-2.5 rounded-sm" style={{ background: STATUS_COLOURS[s] }} />
-              {STATUS_LABELS[s]}
-            </div>
-          ))}
+        <div className="flex flex-wrap gap-2 mb-4">
+          {STATUS_ORDER.slice().reverse().map(s => {
+            const count = projects.filter(p => (p.contract_status || 'awarded') === s).length
+            const mw = projects.filter(p => (p.contract_status || 'awarded') === s).reduce((sum, p) => sum + p.capacity_mw, 0)
+            return (
+              <button key={s} onClick={() => setDrillStatus(drillStatus === s ? null : s)}
+                className={`flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-[10px] font-medium transition-all border ${
+                  drillStatus === s ? 'border-white/30' : 'border-transparent opacity-80 hover:opacity-100'
+                }`}
+                style={{ background: STATUS_COLOURS[s] + (drillStatus === s ? '30' : '15'), color: STATUS_COLOURS[s] }}>
+                <span className="w-2 h-2 rounded-sm" style={{ background: STATUS_COLOURS[s] }} />
+                {STATUS_LABELS[s]} ({count} · {fmt(mw / 1000)} GW)
+              </button>
+            )
+          })}
         </div>
 
         <div className="h-72 lg:h-80">
@@ -231,12 +244,49 @@ function RoundsView({ projects }: { projects: FlatProject[] }) {
                 )
               }} />
               {STATUS_ORDER.slice().reverse().map(s => (
-                <Bar key={s} dataKey={s} name={STATUS_LABELS[s]} stackId="status" fill={STATUS_COLOURS[s]} radius={s === 'awarded' ? [3, 3, 0, 0] : undefined} />
+                <Bar key={s} dataKey={s} name={STATUS_LABELS[s]} stackId="status" fill={STATUS_COLOURS[s]}
+                  fillOpacity={drillStatus && drillStatus !== s ? 0.2 : 1}
+                  radius={s === 'awarded' ? [3, 3, 0, 0] : undefined} />
               ))}
             </BarChart>
           </ResponsiveContainer>
         </div>
       </div>
+
+      {/* Drill-down panel */}
+      {drillProjects && drillStatus && (
+        <div className="bg-[var(--color-bg-card)] border rounded-xl p-5" style={{ borderColor: STATUS_COLOURS[drillStatus] + '40' }}>
+          <div className="flex items-center justify-between mb-3">
+            <h4 className="text-sm font-semibold" style={{ color: STATUS_COLOURS[drillStatus] }}>
+              {STATUS_LABELS[drillStatus]} — {drillProjects.length} projects · {fmt(drillProjects.reduce((s, p) => s + p.capacity_mw, 0) / 1000)} GW
+            </h4>
+            <button onClick={() => setDrillStatus(null)} className="text-xs text-[var(--color-text-muted)] hover:text-[var(--color-text)]">Close</button>
+          </div>
+          <div className="space-y-2">
+            {drillProjects.map((p, i) => (
+              <div key={`${p.roundId}-${i}`} className="bg-[var(--color-bg-elevated)] rounded-lg p-3">
+                <div className="flex items-center justify-between mb-1">
+                  <div className="flex items-center gap-2">
+                    {p.project_id ? (
+                      <Link to={`/projects/${p.project_id}`} className="text-xs font-medium text-[var(--color-text)] hover:text-[var(--color-primary)] transition-colors">{p.name}</Link>
+                    ) : (
+                      <span className="text-xs font-medium text-[var(--color-text)]">{p.name}</span>
+                    )}
+                    <span className="text-[10px] px-1.5 py-0.5 rounded bg-[var(--color-bg-card)] text-[var(--color-text-muted)]">{p.scheme}</span>
+                  </div>
+                  <span className="text-xs font-bold text-[var(--color-text)]">{fmt(p.capacity_mw)} MW</span>
+                </div>
+                <div className="text-[10px] text-[var(--color-text-muted)]">
+                  {p.developer} · {p.state} · {p.technology} · {p.roundName.replace('CIS ', '').replace('LTESA ', '')}
+                </div>
+                {p.notes && (
+                  <div className="text-[10px] text-[var(--color-text-muted)] mt-1 italic leading-relaxed">{p.notes}</div>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   )
 }
