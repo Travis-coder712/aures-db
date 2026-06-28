@@ -1,7 +1,7 @@
 # AURES — Next Session Handoff
 
 **Last refreshed:** 2026-06-28
-**Latest shipped version:** v3.18.7
+**Latest shipped version:** v3.18.8
 **Purpose:** Single-place brief for the next session. Cold-readable — pair with `docs/SESSION_OPENER.md` and `docs/INTELLIGENCE_LAYER_PLAN.md`.
 
 ---
@@ -20,11 +20,27 @@
 - **v3.18.6** — By Round drill-down: click status legend to see all projects in that status with details and notes.
 - **v3.18.7** — SchemeTracker tabs reduced from 11 to 9 (removed Boardroom + CIS Success — subsumed by Pipeline Overview). 18 timeline events added to DB. Capricorn BESS research note (30 total). Handoff refreshed.
 
-**Remaining SchemeTracker restructure (next session):**
-- Extract NSW T8 deep-dive components (~1,120 lines) to `SchemeTrackerNswT8.tsx`
-- Extract NSWWindTab (~1,100 lines) to `SchemeTrackerNswWind.tsx`
+**Remaining tasks (next session):**
+
+**SchemeTracker file extraction (phase 2 — dedicated session):**
+- Extract NSW T8 deep-dive (~1,120 lines) → `SchemeTrackerNswT8.tsx` — includes RiskShareDeepDive, BidParamsOptionsDeepDive, BidConfigDeepDive, ProformaMechanicsDeepDive, PpaLeverageDeepDive, NswT8IneligibleProjectsModal, PpaLtesaCalculatorModal
+- Extract NSWWindTab (~1,100 lines) → `SchemeTrackerNswWind.tsx` — includes helper functions (PROBABILITY_COLOUR, RISK_CONFIG, CONNECTION_CONFIG, plannningChip, yearToPct, schemeAwardYear)
+- Delete dead code: CISSuccessTab (exported but not rendered), SchemeBoardroom import
 - Consider extracting CISBriefingTab (~570 lines) to Learn module
-- Dead code: CISSuccessTab + SchemeBoardroom still in file (exported but not rendered) — delete in extraction session
+- **WARNING:** Attempted in v3.18.8 session but reverted — deeply intertwined dependencies. Must map dependencies carefully before cutting. Extract one component at a time, test after each.
+
+**CIS/LTESA data maintenance:**
+- Verify the 29 "awarded" projects without DB links (WA T2/T5-6, recent T7) — some may be at FID if they were established projects before winning CIS
+- Flow more research notes to project timeline_events — EPC contracts, PPA details from deep dive not yet in DB for all projects
+- Update KPI cards in CisPipelineOverview to use computed values from data (currently hardcoded ~36%, ~1.8 GW, ~1.4 GW, ~0.3 GW)
+
+**Other backlog items (unchanged):**
+- Per-REZ context chip on ProjectDetail (Tier 1)
+- IASR fuzzy-matcher refinement (Tier 1)
+- Navigation Review (Tier 3)
+- GridRival retail hedging game (Tier 3.5)
+- Learn interactivity improvements (Tier 3.5)
+- Piano Lessons (Coming Soon on Dashboard)
 
 ### v3.17.0–v3.17.7 — Battery Market Intelligence + Research Notes + Learn fixes (8 releases)
 
