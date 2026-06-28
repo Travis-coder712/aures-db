@@ -140,9 +140,9 @@ function FunnelView({ projects }: { projects: FlatProject[] }) {
                 <div className="w-24 text-right shrink-0">
                   <div className="text-xs font-medium" style={{ color: colour }}>{STATUS_LABELS[stage.status]}</div>
                 </div>
-                <div className="flex-1">
-                  <div className="h-8 rounded-md flex items-center px-3 text-xs text-white font-medium"
-                    style={{ width: `${Math.max(pct, 3)}%`, background: colour, transition: 'width 0.5s ease' }}>
+                <div className="flex-1 flex items-center gap-2">
+                  <div className="h-8 rounded-md flex items-center px-3 text-xs text-white font-medium whitespace-nowrap"
+                    style={{ width: pct < 20 ? 'auto' : `${pct}%`, minWidth: pct < 20 ? undefined : `${Math.max(pct, 8)}%`, background: colour, transition: 'width 0.5s ease' }}>
                     {fmt(stage.mw / 1000)} GW ({stage.count})
                   </div>
                 </div>
