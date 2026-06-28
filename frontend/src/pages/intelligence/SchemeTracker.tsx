@@ -16,7 +16,8 @@ import CisPipelineOverview from '../../components/intelligence/CisPipelineOvervi
 import type { ESGTrackerProject, PublicationStatus, AgreementStatus } from '../../data/esg-tracker-data'
 import DataProvenance from '../../components/common/DataProvenance'
 import { exportSchemePpt } from '../../lib/exportSchemePpt'
-import SchemeBoardroom from '../../components/intelligence/SchemeBoardroom'
+// SchemeBoardroom removed from tabs in v3.18 — subsumed by Pipeline Overview
+// import SchemeBoardroom from '../../components/intelligence/SchemeBoardroom'
 
 // ============================================================
 // Stage colours & helpers — defined BEFORE const arrays
@@ -55,9 +56,9 @@ function fmtMW(mw: number): string {
 // Component
 // ============================================================
 
-const TABS = ['overview', 'boardroom', 'tracker', 'watchlist', 'esg', 'cis-success', 'cis-briefing', 'open-rounds-cis', 'open-rounds-ltesa', 'timeline', 'nsw-wind'] as const
+const TABS = ['overview', 'tracker', 'watchlist', 'esg', 'open-rounds-cis', 'open-rounds-ltesa', 'cis-briefing', 'timeline', 'nsw-wind'] as const
 type Tab = typeof TABS[number]
-const TAB_LABELS: Record<Tab, string> = { overview: 'Overview', boardroom: 'Boardroom', tracker: 'Milestone Tracker', watchlist: 'Key Projects', esg: 'ESG Agreement Proxy', 'cis-success': 'CIS Success', 'cis-briefing': 'CIS Briefing', 'open-rounds-cis': 'Open Rounds CIS', 'open-rounds-ltesa': 'Open Rounds LTESA', timeline: 'CIS/LTESA Timeline', 'nsw-wind': 'NSW Wind' }
+const TAB_LABELS: Record<Tab, string> = { overview: 'Overview', tracker: 'Milestone Tracker', watchlist: 'Key Projects', esg: 'ESG Agreement Proxy', 'open-rounds-cis': 'Open Rounds CIS', 'open-rounds-ltesa': 'Open Rounds LTESA', 'cis-briefing': 'How CIS Works', timeline: 'CIS/LTESA Timeline', 'nsw-wind': 'NSW Wind' }
 
 export default function SchemeTracker() {
   const [activeTab, setActiveTab] = useState<Tab>('overview')
@@ -601,13 +602,6 @@ export default function SchemeTracker() {
       {/* ESG Agreement Proxy Tab */}
       {activeTab === 'esg' && (
         <ESGAgreementProxyTab />
-      )}
-      {activeTab === 'cis-success' && (
-        <CISSuccessTab />
-      )}
-      {activeTab === 'boardroom' && data && <SchemeBoardroom data={data} />}
-      {activeTab === 'boardroom' && !data && (
-        <div className="p-8 text-center text-sm text-[var(--color-text-muted)]">Loading scheme data…</div>
       )}
       {activeTab === 'cis-briefing' && <CISBriefingTab />}
       {activeTab === 'open-rounds-cis' && <OpenRoundsTab schemeFocus="CIS" />}
@@ -4976,7 +4970,8 @@ function formatAwardDate(d: string): string {
 
 type CISDetailView = null | 'confirmed' | 'likely-failed' | 'may-be-negotiating'
 
-function CISSuccessTab() {
+// CISSuccessTab removed from tabs in v3.18 — subsumed by Pipeline Overview funnel
+export function CISSuccessTab() {
   const [showConfirmed, setShowConfirmed] = useState(false)
   const [showNotConfirmed, setShowNotConfirmed] = useState(false)
   const [confirmedSort, setConfirmedSort] = useState<{ col: CISSortCol; dir: 'asc' | 'desc' }>({ col: 'round', dir: 'asc' })

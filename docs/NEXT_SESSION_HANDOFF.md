@@ -1,21 +1,30 @@
 # AURES — Next Session Handoff
 
-**Last refreshed:** 2026-06-27
-**Latest shipped version:** v3.18.1
+**Last refreshed:** 2026-06-28
+**Latest shipped version:** v3.18.7
 **Purpose:** Single-place brief for the next session. Cold-readable — pair with `docs/SESSION_OPENER.md` and `docs/INTELLIGENCE_LAYER_PLAN.md`.
 
 ---
 
-## Current state snapshot (v3.18.1)
+## Current state snapshot (v3.18.7)
 
-### v3.18.0–v3.18.1 — CIS Pipeline Overview + T8 Results (2 releases)
+### v3.18.0–v3.18.7 — CIS Pipeline Intelligence (8 releases)
 
 - **v3.18.0** — CIS T8 dispatchable results (15 BESS, 4.2 GW / 16.1 GWh, QLD 51%). `contract_status` field added to SchemeProject (awarded/cisa_signed/fid/construction/operating/withdrawn/terminated). 22 projects populated with status from DB cross-reference. 3 new research notes: T8 results, Zero for Fifteen (no CIS wind at construction), Bowen withdrawal/LTESA clarification.
 - **v3.18.1** — CIS Pipeline Overview component on SchemeTracker Overview tab: (1) Pipeline Funnel showing awarded→signed→FID→construction→operating conversion; (2) By Round stacked bars colour-coded by status; (3) Project Table with filter pills (scheme/status/state/tech) and sortable columns. 130 projects / 38.5 GW tracked. `createPdfContainer()` utility added to exportPdf.ts.
 
-**Remaining from this session's CIS work (items 3 + 4):**
-- Item 3: Flow `contract_status` to ProjectDetail.tsx — show CIS/LTESA scheme status on individual project cards.
-- Item 4: Update NSW T8 SchemeTracker content with Bowen withdrawal clarification. Build withdrawal candidate risk view showing which CIS projects are most likely to exit for LTESA.
+- **v3.18.2** — Scheme status flows to ProjectDetail cards via SchemeStatusBadge.
+- **v3.18.3** — project_id fixes (Tomago, Melbourne RE Hub, Willogoleche). Bowen withdrawal clarification added to NSW LTESA T8 eligibility.
+- **v3.18.4** — Comprehensive deep dive: 26 projects verified with web research.
+- **v3.18.5** — All 130 CIS+LTESA projects verified: 58 awarded, 15 FID, 21 construction, 7 operating. New findings: Edify EPC (DT Infrastructure), ACEnergy CATL deal, Koolunga EPC (GenusPlus), Capricorn QLD call-in, Junction Rivers terminal.
+- **v3.18.6** — By Round drill-down: click status legend to see all projects in that status with details and notes.
+- **v3.18.7** — SchemeTracker tabs reduced from 11 to 9 (removed Boardroom + CIS Success — subsumed by Pipeline Overview). 18 timeline events added to DB. Capricorn BESS research note (30 total). Handoff refreshed.
+
+**Remaining SchemeTracker restructure (next session):**
+- Extract NSW T8 deep-dive components (~1,120 lines) to `SchemeTrackerNswT8.tsx`
+- Extract NSWWindTab (~1,100 lines) to `SchemeTrackerNswWind.tsx`
+- Consider extracting CISBriefingTab (~570 lines) to Learn module
+- Dead code: CISSuccessTab + SchemeBoardroom still in file (exported but not rendered) — delete in extraction session
 
 ### v3.17.0–v3.17.7 — Battery Market Intelligence + Research Notes + Learn fixes (8 releases)
 
