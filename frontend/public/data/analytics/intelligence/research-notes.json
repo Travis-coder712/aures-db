@@ -1,14 +1,50 @@
 {
   "metadata": {
-    "updated": "2026-06-27",
+    "updated": "2026-07-07",
     "version": "3.17.7"
   },
   "notes": [
     {
+      "id": "cis-rebid-restrictions-hardening",
+      "date": "2026-07-07",
+      "category": "cis-ltesa",
+      "title": "CIS Rebid Rules Are Hardening \u2014 T9 Q&A Adds Formal Eligibility Bar",
+      "sections": [
+        {
+          "heading": "The Three-Stage Tightening (Six Weeks)",
+          "body": "Restrictions on rebidding by prior CIS winners have evolved rapidly across three signals: (1) LTESA R8 Q&A (circa May 2026) \u2014 softer language, similar question asked in the NSW tender process but with less explicit eligibility consequences; (2) Minister Bowen press conference, 24 June 2026 \u2014 \"If a company is not able to comply with what it told the Government it would do when it won its auction, it is welcome to withdraw and bid again with new economics, and we will consider that\" \u2014 permissive framing but no formal process specified; (3) CIS Tender 9 Q&A, Item 8 (published July 2026 during the live T9 tender window) \u2014 hardest language yet, establishing formal eligibility criteria with legal consequences."
+        },
+        {
+          "heading": "What the CIS T9 Q&A Actually Says",
+          "body": "The T9 Q&A (published on the ASL tender portal, asl.org.au) states that projects awarded a CISA in any prior CIS tender that did NOT execute Project Documents are ineligible to participate in CIS Tender 9 under Eligibility Criteria 11. The only exceptions are: (a) the Successful Proponent has formally notified the Australian Government in writing that it has withdrawn from that tender process, OR (b) it has received formal written notification from the Australian Government that negotiations have ceased. Additionally, AEMO may have regard to a Proponents record of not executing binding commitments when developing Recommended Bids. The Q&A also flags that withdrawal may constitute a Significant Event under the Proforma CISA \u2014 with legal implications \u2014 and recommends proponents seek independent legal advice."
+        },
+        {
+          "heading": "The Catch: Formal Written Notification Required",
+          "body": "The eligibility gateway is procedural, not just commercial. Being in discussions with LTESA, or publicly signalling intent to withdraw, or simply not progressing a CIS project does not satisfy the test. A proponent must have formally notified the Commonwealth in writing OR received formal written confirmation that negotiations have ceased. This is a higher bar than most market participants likely assumed from the Bowen press conference framing. Projects that have been quietly sitting on CIS awards while exploring LTESA options \u2014 without sending a formal written withdrawal notice \u2014 are currently ineligible for T9 under the plain reading of the Q&A."
+        },
+        {
+          "heading": "Interpretation and Implications",
+          "body": "The tightening from the LTESA Q&A through to the CIS T9 Q&A has occurred in approximately six weeks. This suggests the Government has been responding to market behaviour \u2014 likely proponents hedging across both schemes simultaneously \u2014 and has been caught on the hop in developing its formal response. Key implications: (1) Not allowed to effectively bid both \u2014 mutual exclusivity now has procedural teeth via the eligibility criteria; (2) AEMO track record discretion adds a further penalty signal even for formally compliant withdrawals; (3) The Significant Event clause creates legal complexity that may itself deter withdrawal; (4) Proponents who acted on the Bowen framing (\"welcome to withdraw and rebid\") without formal notification are in a more difficult position than they may have realised; (5) The six-week evolution suggests policy is still being formed \u2014 further tightening in T10 and beyond is likely."
+        }
+      ],
+      "tags": [
+        "cis",
+        "ltesa",
+        "withdrawal",
+        "rebid",
+        "eligibility",
+        "bowen",
+        "policy",
+        "cis-tender-9",
+        "significant-event"
+      ],
+      "related_project_ids": []
+    },
+    {
       "id": "capricorn-bess-qld-call-in",
       "date": "2026-06-28",
       "category": "cis-ltesa",
-      "title": "Capricorn BESS Called In by QLD Deputy Premier — $500M+ Investment at Risk",
+      "title": "Capricorn BESS Called In by QLD Deputy Premier \u2014 $500M+ Investment at Risk",
       "sections": [
         {
           "heading": "What Happened",
@@ -16,51 +52,76 @@
         },
         {
           "heading": "Broader Impact",
-          "body": "The call-in has 'rattled the QLD BESS pipeline' according to Energy News Bulletin. Queensland's political environment for large-scale renewable projects has become less predictable under the LNP government elected in late 2025. This creates sovereign risk for CIS-contracted projects in Queensland — developers may prefer NSW, VIC, or SA where planning processes are more predictable."
+          "body": "The call-in has 'rattled the QLD BESS pipeline' according to Energy News Bulletin. Queensland's political environment for large-scale renewable projects has become less predictable under the LNP government elected in late 2025. This creates sovereign risk for CIS-contracted projects in Queensland \u2014 developers may prefer NSW, VIC, or SA where planning processes are more predictable."
         },
         {
           "heading": "CIS Program Implications",
-          "body": "Capricorn is a CIS Tender 3 winner. If the call-in results in refusal or material delay, it would be the second CIS project to face effective termination (after Junction Rivers, which failed to secure REZ access). Both failures are in Queensland. This pattern may influence future CIS tender allocations — the federal government may reduce QLD's CIS share if the state planning environment is seen as hostile."
+          "body": "Capricorn is a CIS Tender 3 winner. If the call-in results in refusal or material delay, it would be the second CIS project to face effective termination (after Junction Rivers, which failed to secure REZ access). Both failures are in Queensland. This pattern may influence future CIS tender allocations \u2014 the federal government may reduce QLD's CIS share if the state planning environment is seen as hostile."
         }
       ],
-      "tags": ["capricorn", "queensland", "call-in", "planning-risk", "sovereign-risk", "cis-tender-3", "potentia"],
-      "related_project_ids": ["capricorn-bess"]
+      "tags": [
+        "capricorn",
+        "queensland",
+        "call-in",
+        "planning-risk",
+        "sovereign-risk",
+        "cis-tender-3",
+        "potentia"
+      ],
+      "related_project_ids": [
+        "capricorn-bess"
+      ]
     },
     {
       "id": "cis-project-status-deep-dive",
       "date": "2026-06-27",
       "category": "cis-ltesa",
-      "title": "CIS Project Status Deep Dive — Only BESS Has Progressed, Wind Still Stuck",
+      "title": "CIS Project Status Deep Dive \u2014 Only BESS Has Progressed, Wind Still Stuck",
       "sections": [
         {
           "heading": "Verified Status (June 2026)",
           "body": "Deep dive across 22 major CIS/LTESA projects confirms: only battery projects have meaningfully progressed to construction/commissioning. Liddell BESS (AGL, 500 MW) is commissioning with full ops expected June 2026. Four more BESS under construction: Tomago (AGL, 500 MW, broke ground Dec 2025), Calala (Equis, 250 MW, FC Mar 2025), Wooreen (EnergyAustralia, 350 MW, FC Feb 2025), Reeves Plains (Alinta/Sembcorp, 250 MW, FID Jul 2025). Goulburn River Solar (Lightsource bp, 585 MW) is the sole generation project in construction."
         },
         {
-          "heading": "Wind Finally Moving — Slowly",
-          "body": "Palmer Wind Farm (Tilt, 288 MW, SA) reached FID in January 2026 — the first CIS-winning wind project to do so, over 2 years after CIS Tender 1 results. Goyder North (Neoen, 300+ MW, SA) received EPBC approval Feb 2026 and is targeting mid-2026 construction start. But the large GW-scale wind projects (Liverpool Range, Yanco Delta, Bungaban, Theodore, Valley of the Winds) are all still pre-FID with FIDs expected late 2026 through 2028."
+          "heading": "Wind Finally Moving \u2014 Slowly",
+          "body": "Palmer Wind Farm (Tilt, 288 MW, SA) reached FID in January 2026 \u2014 the first CIS-winning wind project to do so, over 2 years after CIS Tender 1 results. Goyder North (Neoen, 300+ MW, SA) received EPBC approval Feb 2026 and is targeting mid-2026 construction start. But the large GW-scale wind projects (Liverpool Range, Yanco Delta, Bungaban, Theodore, Valley of the Winds) are all still pre-FID with FIDs expected late 2026 through 2028."
         },
         {
           "heading": "At-Risk Projects",
-          "body": "Junction Rivers (Windlab, 600 MW wind + 200 MW BESS, NSW) failed to secure South-West REZ access rights — described as 'likely terminal'. Could be the first project dropped from CIS. Thunderbolt Wind Farm (Neoen, NSW) has reportedly not signed its CIS contract — status uncertain. Kentbruck (HMC Capital, VIC) has ministerial approval but HMC has had 'significant management and financial turmoil' and no FID confirmed."
+          "body": "Junction Rivers (Windlab, 600 MW wind + 200 MW BESS, NSW) failed to secure South-West REZ access rights \u2014 described as 'likely terminal'. Could be the first project dropped from CIS. Thunderbolt Wind Farm (Neoen, NSW) has reportedly not signed its CIS contract \u2014 status uncertain. Kentbruck (HMC Capital, VIC) has ministerial approval but HMC has had 'significant management and financial turmoil' and no FID confirmed."
         }
       ],
-      "tags": ["cis", "status", "construction", "fid", "wind", "bess", "deep-dive", "junction-rivers"],
-      "related_project_ids": ["liddell-bess", "tomago-bess", "calala-bess-a1", "wooreen-energy-storage-system", "palmer-wind-farm"]
+      "tags": [
+        "cis",
+        "status",
+        "construction",
+        "fid",
+        "wind",
+        "bess",
+        "deep-dive",
+        "junction-rivers"
+      ],
+      "related_project_ids": [
+        "liddell-bess",
+        "tomago-bess",
+        "calala-bess-a1",
+        "wooreen-energy-storage-system",
+        "palmer-wind-farm"
+      ]
     },
     {
       "id": "cis-t8-dispatchable-results",
       "date": "2026-06-27",
       "category": "cis-ltesa",
-      "title": "CIS Tender 8 Dispatchable — 4.2 GW / 16.1 GWh Awarded to 15 BESS Projects",
+      "title": "CIS Tender 8 Dispatchable \u2014 4.2 GW / 16.1 GWh Awarded to 15 BESS Projects",
       "sections": [
         {
           "heading": "Results Overview",
-          "body": "CIS Tender 8 (NEM dispatchable) awarded 4.2 GW / 16.1 GWh across 15 standalone lithium-ion battery projects on 24 June 2026 — the largest dedicated BESS tender in CIS history. All lithium-ion; pumped hydro and CAES received no awards. 70+ bids totalling 76.4 GW were received (~19x oversubscribed). Estimated $6B private capital, 6,800+ jobs."
+          "body": "CIS Tender 8 (NEM dispatchable) awarded 4.2 GW / 16.1 GWh across 15 standalone lithium-ion battery projects on 24 June 2026 \u2014 the largest dedicated BESS tender in CIS history. All lithium-ion; pumped hydro and CAES received no awards. 70+ bids totalling 76.4 GW were received (~19x oversubscribed). Estimated $6B private capital, 6,800+ jobs."
         },
         {
           "heading": "QLD Dominance",
-          "body": "Queensland received 7 of 15 projects and 51% of capacity (2,150 MW) — a reversal from earlier rounds where NSW led. This reflects QLD's large BESS pipeline and connection availability, but raises the question of whether this further saturates an already-compressed QLD market. The irony: CIS is underwriting BESS in the state where merchant BESS revenue has collapsed 73%."
+          "body": "Queensland received 7 of 15 projects and 51% of capacity (2,150 MW) \u2014 a reversal from earlier rounds where NSW led. This reflects QLD's large BESS pipeline and connection availability, but raises the question of whether this further saturates an already-compressed QLD market. The irony: CIS is underwriting BESS in the state where merchant BESS revenue has collapsed 73%."
         },
         {
           "heading": "4-Hour Duration Confirmed",
@@ -68,47 +129,61 @@
         },
         {
           "heading": "Financial Close Gap",
-          "body": "Only Bulabul 1 (Ampyr, 300 MW / 600 MWh) had reached financial close at time of award. Across all CIS rounds, only 1.8 GW of 17.5 GW awarded has reached FID — a 10% conversion rate. The CIS is increasingly a scheme that awards capacity that does not get built."
+          "body": "Only Bulabul 1 (Ampyr, 300 MW / 600 MWh) had reached financial close at time of award. Across all CIS rounds, only 1.8 GW of 17.5 GW awarded has reached FID \u2014 a 10% conversion rate. The CIS is increasingly a scheme that awards capacity that does not get built."
         }
       ],
-      "tags": ["cis", "tender-8", "bess", "4-hour", "queensland", "financial-close"],
+      "tags": [
+        "cis",
+        "tender-8",
+        "bess",
+        "4-hour",
+        "queensland",
+        "financial-close"
+      ],
       "related_project_ids": []
     },
     {
       "id": "cis-zero-for-fifteen-wind",
       "date": "2026-06-27",
       "category": "cis-ltesa",
-      "title": "Zero for Fifteen — No CIS Wind Farm Has Started Construction",
+      "title": "Zero for Fifteen \u2014 No CIS Wind Farm Has Started Construction",
       "sections": [
         {
           "heading": "The Headline Stat",
-          "body": "As of March 2026, zero of 15 CIS-awarded wind farms had begun construction. Only 3 wind projects (Palmer, Waddi, Carmody's Hill) had reached any form of investment decision. Of 69 CIS-awarded projects across all rounds totalling ~20 GW, only 14 projects (3.3 GW) had begun construction — and these are overwhelmingly batteries, not wind or solar."
+          "body": "As of March 2026, zero of 15 CIS-awarded wind farms had begun construction. Only 3 wind projects (Palmer, Waddi, Carmody's Hill) had reached any form of investment decision. Of 69 CIS-awarded projects across all rounds totalling ~20 GW, only 14 projects (3.3 GW) had begun construction \u2014 and these are overwhelmingly batteries, not wind or solar."
         },
         {
           "heading": "Why Wind Is Stuck",
-          "body": "Wind projects face a compounding problem: construction costs are up ~50% since 2020, forward electricity prices have dropped from ~$103/MWh to ~$80/MWh, and CIS revenue floors alone are insufficient for debt financing — projects also need PPAs with retailers, and corporate PPA volumes have been limited to 1-1.5 GW/year. Origin's Frank Calabria: 'Our problem is not ambition... The problem is economics — and it is getting worse, not better.'"
+          "body": "Wind projects face a compounding problem: construction costs are up ~50% since 2020, forward electricity prices have dropped from ~$103/MWh to ~$80/MWh, and CIS revenue floors alone are insufficient for debt financing \u2014 projects also need PPAs with retailers, and corporate PPA volumes have been limited to 1-1.5 GW/year. Origin's Frank Calabria: 'Our problem is not ambition... The problem is economics \u2014 and it is getting worse, not better.'"
         },
         {
           "heading": "CISA Signing Rate",
-          "body": "Senate Estimates (December 2025) revealed that of approximately 18 GW in successful CIS projects, only approximately 6.5 GW had actually signed CISAs — roughly 36%. An awarded-but-unsigned project has no binding Commonwealth obligation, making withdrawal straightforward."
+          "body": "Senate Estimates (December 2025) revealed that of approximately 18 GW in successful CIS projects, only approximately 6.5 GW had actually signed CISAs \u2014 roughly 36%. An awarded-but-unsigned project has no binding Commonwealth obligation, making withdrawal straightforward."
         }
       ],
-      "tags": ["cis", "wind", "construction", "financial-close", "zero-for-fifteen", "senate-estimates"],
+      "tags": [
+        "cis",
+        "wind",
+        "construction",
+        "financial-close",
+        "zero-for-fifteen",
+        "senate-estimates"
+      ],
       "related_project_ids": []
     },
     {
       "id": "bowen-cis-withdrawal-ltesa",
       "date": "2026-06-27",
       "category": "cis-ltesa",
-      "title": "Minister Bowen Confirms CIS Winners Can Withdraw and Rebid — But Won't Renegotiate",
+      "title": "Minister Bowen Confirms CIS Winners Can Withdraw and Rebid \u2014 But Won't Renegotiate",
       "sections": [
         {
           "heading": "The Key Quotes",
-          "body": "At the CIS Tender 8 results announcement (24 June 2026), Minister Bowen addressed the withdrawal question directly: 'If a company is not able to comply with what it told the Government it would do when it won its auction, it is welcome to withdraw and bid again with new economics, and we'll consider that.' But: 'No, we won't be doing that' — when asked about renegotiating existing CIS contracts."
+          "body": "At the CIS Tender 8 results announcement (24 June 2026), Minister Bowen addressed the withdrawal question directly: 'If a company is not able to comply with what it told the Government it would do when it won its auction, it is welcome to withdraw and bid again with new economics, and we'll consider that.' But: 'No, we won't be doing that' \u2014 when asked about renegotiating existing CIS contracts."
         },
         {
           "heading": "The CIS-to-LTESA Arbitrage",
-          "body": "NSW LTESA Tender 8 (2.5 GW generation, launched mid-2026) is the first generation LTESA since CIS began — creating a potential arbitrage. Projects that never signed a CISA (64% of awards) can walk away easily. A CIS winner that withdraws could rebid into the LTESA with updated economics. LTESA uses a Contract for Difference structure vs CIS revenue floors — different risk profiles that may suit different project economics."
+          "body": "NSW LTESA Tender 8 (2.5 GW generation, launched mid-2026) is the first generation LTESA since CIS began \u2014 creating a potential arbitrage. Projects that never signed a CISA (64% of awards) can walk away easily. A CIS winner that withdraws could rebid into the LTESA with updated economics. LTESA uses a Contract for Difference structure vs CIS revenue floors \u2014 different risk profiles that may suit different project economics."
         },
         {
           "heading": "Mutual Exclusivity Rule",
@@ -116,39 +191,55 @@
         },
         {
           "heading": "Withdrawal Candidates",
-          "body": "CIS Tender 1 wind projects are the most likely withdrawal candidates: Kentbruck (HMC Capital — 'significant management and financial turmoil'), Spicers Creek (Squadron Energy — 'materially higher construction costs'), Valley of the Winds (ACEN — planning delays), Thunderbolt (Neoen — reportedly not signed CISA). The risk for the Commonwealth is that its best NSW generation projects defect to the state scheme."
+          "body": "CIS Tender 1 wind projects are the most likely withdrawal candidates: Kentbruck (HMC Capital \u2014 'significant management and financial turmoil'), Spicers Creek (Squadron Energy \u2014 'materially higher construction costs'), Valley of the Winds (ACEN \u2014 planning delays), Thunderbolt (Neoen \u2014 reportedly not signed CISA). The risk for the Commonwealth is that its best NSW generation projects defect to the state scheme."
         }
       ],
-      "tags": ["cis", "ltesa", "withdrawal", "bowen", "renegotiation", "nsw-t8", "policy"],
-      "related_project_ids": ["yanco-delta-wind-farm"]
+      "tags": [
+        "cis",
+        "ltesa",
+        "withdrawal",
+        "bowen",
+        "renegotiation",
+        "nsw-t8",
+        "policy"
+      ],
+      "related_project_ids": [
+        "yanco-delta-wind-farm"
+      ]
     },
     {
       "id": "bess-may-2026-record-low",
       "date": "2026-06-20",
       "category": "bess-market",
-      "title": "BESS Revenue Hits All-Time Record Low — $29k/MW/yr in May 2026",
+      "title": "BESS Revenue Hits All-Time Record Low \u2014 $29k/MW/yr in May 2026",
       "sections": [
         {
           "heading": "The Number",
-          "body": "May 2026 NEM-wide battery revenue fell to $29k/MW/yr — the lowest monthly figure since Modo Energy began tracking in July 2022. This follows March 2026 hitting $44k/MW/yr (previous record low) and a brief January bounce ($124k/MW/yr from heatwave spikes). The Oct 2025 — Mar 2026 average of $73k/MW/yr is down 38% YoY."
+          "body": "May 2026 NEM-wide battery revenue fell to $29k/MW/yr \u2014 the lowest monthly figure since Modo Energy began tracking in July 2022. This follows March 2026 hitting $44k/MW/yr (previous record low) and a brief January bounce ($124k/MW/yr from heatwave spikes). The Oct 2025 \u2014 Mar 2026 average of $73k/MW/yr is down 38% YoY."
         },
         {
           "heading": "What Is Driving This",
-          "body": "Two forces compounding simultaneously: (1) Mild peak demand narrowing energy spreads across the mainland — NEM-wide price spreads fell from $183/MWh to $121/MWh (34% compression); (2) Continued battery deployment increasing competition for a limited pool of merchant value — the fleet more than doubled from 2 GW to 8 GW in 12 months."
+          "body": "Two forces compounding simultaneously: (1) Mild peak demand narrowing energy spreads across the mainland \u2014 NEM-wide price spreads fell from $183/MWh to $121/MWh (34% compression); (2) Continued battery deployment increasing competition for a limited pool of merchant value \u2014 the fleet more than doubled from 2 GW to 8 GW in 12 months."
         },
         {
           "heading": "Financial Close Implications",
-          "body": "New BESS projects need to model revenue at $50-60k/MW/yr or lower for base-case financial close. Projects relying on $100k+ revenue assumptions from 2024 vintage forecasts face material downside risk. The Calala BESS ($260m non-recourse senior debt, Equis) and Bungama BESS (Amp Energy, fully merchant bank-financed) show that lenders are still willing — but at lower return expectations."
+          "body": "New BESS projects need to model revenue at $50-60k/MW/yr or lower for base-case financial close. Projects relying on $100k+ revenue assumptions from 2024 vintage forecasts face material downside risk. The Calala BESS ($260m non-recourse senior debt, Equis) and Bungama BESS (Amp Energy, fully merchant bank-financed) show that lenders are still willing \u2014 but at lower return expectations."
         }
       ],
-      "tags": ["revenue", "record-low", "modo-energy", "financial-close", "may-2026"],
+      "tags": [
+        "revenue",
+        "record-low",
+        "modo-energy",
+        "financial-close",
+        "may-2026"
+      ],
       "related_project_ids": []
     },
     {
       "id": "bess-cannibalisation-no-floor",
       "date": "2026-06-18",
       "category": "bess-market",
-      "title": "Revenue Cannibalisation — No Floor in Sight",
+      "title": "Revenue Cannibalisation \u2014 No Floor in Sight",
       "sections": [
         {
           "heading": "The Self-Defeating Dynamic",
@@ -156,18 +247,24 @@
         },
         {
           "heading": "Evidence of Acceleration",
-          "body": "QLD energy-only revenues dropped 73% as BESS capacity grew 2.7x. QLD 2-hour price spreads hit $78/MWh in Q1 2026, down from $244/MWh a year earlier — the 'lowest in a number of years'. Revenue dropped from $86k (Oct 2025) to $29k (May 2026) with no sign of stabilisation. Commodity price declines (gas -9-17% YoY, coal -12%) compound by lowering the evening price ceiling."
+          "body": "QLD energy-only revenues dropped 73% as BESS capacity grew 2.7x. QLD 2-hour price spreads hit $78/MWh in Q1 2026, down from $244/MWh a year earlier \u2014 the 'lowest in a number of years'. Revenue dropped from $86k (Oct 2025) to $29k (May 2026) with no sign of stabilisation. Commodity price declines (gas -9-17% YoY, coal -12%) compound by lowering the evening price ceiling."
         },
         {
           "heading": "Potential Stabilisers",
-          "body": "Coal retirements are the key potential circuit-breaker. Eraring (2.88 GW) closing late 2027 and Yallourn (1.48 GW) mid-2028 will remove baseload, restoring some price volatility. Data centre demand growth (4x by 2030) and SA industrial expansion (doubling 2029-2034) will increase overall load. But timing matters — 2026-2027 may be the trough before coal retirements take effect."
+          "body": "Coal retirements are the key potential circuit-breaker. Eraring (2.88 GW) closing late 2027 and Yallourn (1.48 GW) mid-2028 will remove baseload, restoring some price volatility. Data centre demand growth (4x by 2030) and SA industrial expansion (doubling 2029-2034) will increase overall load. But timing matters \u2014 2026-2027 may be the trough before coal retirements take effect."
         },
         {
           "heading": "Modo's Long-Term View",
           "body": "Capture rates forecast to fall from 85% in 2026 to 58% by 2035. Lifetime average revenue for a 4-hour battery starting 2026: $263k/MW/yr (QLD leads at $281k/MW/yr). Energy arbitrage will drive >95% of revenue as FCAS saturates. The business model is shifting from high-margin merchant opportunism to contracted infrastructure with utility-like returns."
         }
       ],
-      "tags": ["cannibalisation", "correlation-penalty", "wattclarity", "modo-energy", "coal-retirements"],
+      "tags": [
+        "cannibalisation",
+        "correlation-penalty",
+        "wattclarity",
+        "modo-energy",
+        "coal-retirements"
+      ],
       "related_project_ids": []
     },
     {
@@ -182,21 +279,27 @@
         },
         {
           "heading": "The Spread Compression Mechanism",
-          "body": "Battery discharge reached 359 MW average in Q1 2026 (up from 98 MW in Q1 2025 — 3.7x increase). This pushes evening peak prices DOWN. Simultaneously, battery charging increased by 872 MW on average, pushing midday prices UP. The net effect: the price spread between midday trough and evening peak is compressing from both sides. NEM-wide spreads fell from $183/MWh to $121/MWh."
+          "body": "Battery discharge reached 359 MW average in Q1 2026 (up from 98 MW in Q1 2025 \u2014 3.7x increase). This pushes evening peak prices DOWN. Simultaneously, battery charging increased by 872 MW on average, pushing midday prices UP. The net effect: the price spread between midday trough and evening peak is compressing from both sides. NEM-wide spreads fell from $183/MWh to $121/MWh."
         },
         {
           "heading": "Gas and Coal Displaced",
-          "body": "Gas generation fell to its lowest level since 1999. Coal generation declined 4.4% in Q1 2026. Gas peakers are being displaced from their traditional evening price-setting role. This is a structural shift — batteries are not just participants in the NEM, they ARE the market."
+          "body": "Gas generation fell to its lowest level since 1999. Coal generation declined 4.4% in Q1 2026. Gas peakers are being displaced from their traditional evening price-setting role. This is a structural shift \u2014 batteries are not just participants in the NEM, they ARE the market."
         }
       ],
-      "tags": ["price-setting", "marginal-price", "market-structure", "aemo", "q1-2026"],
+      "tags": [
+        "price-setting",
+        "marginal-price",
+        "market-structure",
+        "aemo",
+        "q1-2026"
+      ],
       "related_project_ids": []
     },
     {
       "id": "qld-canary-in-coalmine",
       "date": "2026-06-12",
       "category": "bess-market",
-      "title": "Queensland — The Canary for NEM-Wide Revenue Collapse",
+      "title": "Queensland \u2014 The Canary for NEM-Wide Revenue Collapse",
       "sections": [
         {
           "heading": "The Collapse",
@@ -204,25 +307,33 @@
         },
         {
           "heading": "The Paradox",
-          "body": "Despite the lowest absolute revenue, QLD batteries actually recorded the highest capture rates across the fleet in Q1 2026 — supported by consistent (if small) arbitrage conditions. This means QLD operators are technically performing well — they're just operating in a market where well-performing still means poor returns."
+          "body": "Despite the lowest absolute revenue, QLD batteries actually recorded the highest capture rates across the fleet in Q1 2026 \u2014 supported by consistent (if small) arbitrage conditions. This means QLD operators are technically performing well \u2014 they're just operating in a market where well-performing still means poor returns."
         },
         {
           "heading": "Leading Indicator",
-          "body": "NSW and VIC are 12-18 months behind QLD on the cannibalisation curve. The physics of arbitrage are the same everywhere — as each state adds capacity, the same compression pattern will repeat. NSW energy revenue already halved YoY. The only question is timing, not direction."
+          "body": "NSW and VIC are 12-18 months behind QLD on the cannibalisation curve. The physics of arbitrage are the same everywhere \u2014 as each state adds capacity, the same compression pattern will repeat. NSW energy revenue already halved YoY. The only question is timing, not direction."
         }
       ],
-      "tags": ["queensland", "cannibalisation", "leading-indicator", "capture-rate"],
-      "related_project_ids": ["wandoan-south-bess", "bouldercombe-battery"]
+      "tags": [
+        "queensland",
+        "cannibalisation",
+        "leading-indicator",
+        "capture-rate"
+      ],
+      "related_project_ids": [
+        "wandoan-south-bess",
+        "bouldercombe-battery"
+      ]
     },
     {
       "id": "sa-resilient-outlier",
       "date": "2026-06-10",
       "category": "bess-market",
-      "title": "South Australia — The Resilient Outlier (But For How Long?)",
+      "title": "South Australia \u2014 The Resilient Outlier (But For How Long?)",
       "sections": [
         {
           "heading": "Revenue Up 49% YoY",
-          "body": "While every other state saw revenue decline, SA battery revenue climbed 49% YoY (Oct 2025 - Mar 2026). Q1 2026 price spreads increased to $328/MWh — more than 4x QLD's $78/MWh. SA is the only state where batteries are still making genuinely attractive returns."
+          "body": "While every other state saw revenue decline, SA battery revenue climbed 49% YoY (Oct 2025 - Mar 2026). Q1 2026 price spreads increased to $328/MWh \u2014 more than 4x QLD's $78/MWh. SA is the only state where batteries are still making genuinely attractive returns."
         },
         {
           "heading": "The August 2025 Jackpot",
@@ -230,39 +341,58 @@
         },
         {
           "heading": "Why It Won't Last",
-          "body": "SA's resilience is driven by limited interconnection — essentially island-like dynamics during constraint events. But with fleet growth, SA FCAS scarcity is 'unlikely to be repeated in 2026' according to Modo. The Bungama and Whyalla batteries will add 450 MW of competition. SA is not exempt from cannibalisation — it's just delayed."
+          "body": "SA's resilience is driven by limited interconnection \u2014 essentially island-like dynamics during constraint events. But with fleet growth, SA FCAS scarcity is 'unlikely to be repeated in 2026' according to Modo. The Bungama and Whyalla batteries will add 450 MW of competition. SA is not exempt from cannibalisation \u2014 it's just delayed."
         }
       ],
-      "tags": ["south-australia", "fcas", "heywood", "hornsdale", "resilience"],
-      "related_project_ids": ["hornsdale-power-reserve", "torrens-island-bess"]
+      "tags": [
+        "south-australia",
+        "fcas",
+        "heywood",
+        "hornsdale",
+        "resilience"
+      ],
+      "related_project_ids": [
+        "hornsdale-power-reserve",
+        "torrens-island-bess"
+      ]
     },
     {
       "id": "fleet-doubles-in-12-months",
       "date": "2026-06-08",
       "category": "bess-market",
-      "title": "NEM Battery Fleet Doubles in 12 Months — 8 GW / 16.6 GWh",
+      "title": "NEM Battery Fleet Doubles in 12 Months \u2014 8 GW / 16.6 GWh",
       "sections": [
         {
           "heading": "The Scale of Deployment",
-          "body": "The NEM commissioned 4.9 GWh of BESS in 2025 alone — matching the entire cumulative output from 2017 to 2024 combined. The fleet grew from 2 GW at the start of 2025 to 8 GW by March 2026 — 53 registered utility-scale units totalling 16.6 GWh. Battery daily load-shifting tripled in Q1 2026 vs prior year."
+          "body": "The NEM commissioned 4.9 GWh of BESS in 2025 alone \u2014 matching the entire cumulative output from 2017 to 2024 combined. The fleet grew from 2 GW at the start of 2025 to 8 GW by March 2026 \u2014 53 registered utility-scale units totalling 16.6 GWh. Battery daily load-shifting tripled in Q1 2026 vs prior year."
         },
         {
           "heading": "Key 2025 Commissionings",
-          "body": "Major batteries that came online: Waratah Super Battery (850 MW / 1,680 MWh, NSW — partial Aug 2025), Eraring Battery Stage 1 (460 MW / 1,770 MWh, NSW — Dec 2025), Melbourne RE Hub A3 (200 MW / 800 MWh, VIC — Dec 2025, NEM's first 4-hour battery), Western Downs Stages 1-2 (450 MW, QLD), Bouldercombe (200 MW, QLD), Swanbank (125 MW, QLD), Blyth (100 MW, SA)."
+          "body": "Major batteries that came online: Waratah Super Battery (850 MW / 1,680 MWh, NSW \u2014 partial Aug 2025), Eraring Battery Stage 1 (460 MW / 1,770 MWh, NSW \u2014 Dec 2025), Melbourne RE Hub A3 (200 MW / 800 MWh, VIC \u2014 Dec 2025, NEM's first 4-hour battery), Western Downs Stages 1-2 (450 MW, QLD), Bouldercombe (200 MW, QLD), Swanbank (125 MW, QLD), Blyth (100 MW, SA)."
         },
         {
           "heading": "The Pipeline Behind It",
-          "body": "67.3 GW of battery storage is now progressing through the NEM connection process — up 33% from 50.5 GW a year ago. 33.2 GW is standalone battery capacity. Under construction: 7.7 GW. Modo projects 16.8 GW online by end 2027. AEMO's 2026 ISP targets 24 GW by 2030 — 9 GW higher than the 2024 ISP."
+          "body": "67.3 GW of battery storage is now progressing through the NEM connection process \u2014 up 33% from 50.5 GW a year ago. 33.2 GW is standalone battery capacity. Under construction: 7.7 GW. Modo projects 16.8 GW online by end 2027. AEMO's 2026 ISP targets 24 GW by 2030 \u2014 9 GW higher than the 2024 ISP."
         }
       ],
-      "tags": ["capacity", "pipeline", "commissioning", "fleet-growth", "aemo"],
-      "related_project_ids": ["waratah-super-battery", "eraring-battery", "melbourne-re-hub"]
+      "tags": [
+        "capacity",
+        "pipeline",
+        "commissioning",
+        "fleet-growth",
+        "aemo"
+      ],
+      "related_project_ids": [
+        "waratah-super-battery",
+        "eraring-battery",
+        "melbourne-re-hub"
+      ]
     },
     {
       "id": "four-hour-vs-two-hour",
       "date": "2026-06-05",
       "category": "bess-market",
-      "title": "4-Hour Batteries Are Now Minimum Viable — 2-Hour Economics Structurally Challenged",
+      "title": "4-Hour Batteries Are Now Minimum Viable \u2014 2-Hour Economics Structurally Challenged",
       "sections": [
         {
           "heading": "The Duration Shift",
@@ -274,43 +404,59 @@
         },
         {
           "heading": "8-Hour Emerging",
-          "body": "Richmond Valley BESS (275 MW / 2,200 MWh, 8-hour) is under construction for 2027 delivery — the longest duration grid battery in the NEM. NSW LTESA Round 6 awarded three long-duration projects totalling 1.17 GW / 11.98 GWh. The question: does extreme duration capture overnight and multi-day volatility, or does it over-build for events that rarely materialise?"
+          "body": "Richmond Valley BESS (275 MW / 2,200 MWh, 8-hour) is under construction for 2027 delivery \u2014 the longest duration grid battery in the NEM. NSW LTESA Round 6 awarded three long-duration projects totalling 1.17 GW / 11.98 GWh. The question: does extreme duration capture overnight and multi-day volatility, or does it over-build for events that rarely materialise?"
         }
       ],
-      "tags": ["duration", "4-hour", "2-hour", "8-hour", "irr", "investment"],
-      "related_project_ids": ["melbourne-re-hub", "richmond-valley-bess"]
+      "tags": [
+        "duration",
+        "4-hour",
+        "2-hour",
+        "8-hour",
+        "irr",
+        "investment"
+      ],
+      "related_project_ids": [
+        "melbourne-re-hub",
+        "richmond-valley-bess"
+      ]
     },
     {
       "id": "fcas-structurally-saturated",
       "date": "2026-06-02",
       "category": "bess-market",
-      "title": "FCAS Revenue Structurally Saturated — Now Only 9% of Total BESS Revenue",
+      "title": "FCAS Revenue Structurally Saturated \u2014 Now Only 9% of Total BESS Revenue",
       "sections": [
         {
           "heading": "The Decline",
-          "body": "FCAS now accounts for only 9% of total NEM BESS revenue — down from approximately 30% in 2023. Saturation occurred from late 2023 as a growing number of new entrants steadily eroded what had been a reliable revenue source. NSW and VIC FCAS revenues are now 'negligible'. Q1 2026 FCAS share collapsed to just 3% of total revenue."
+          "body": "FCAS now accounts for only 9% of total NEM BESS revenue \u2014 down from approximately 30% in 2023. Saturation occurred from late 2023 as a growing number of new entrants steadily eroded what had been a reliable revenue source. NSW and VIC FCAS revenues are now 'negligible'. Q1 2026 FCAS share collapsed to just 3% of total revenue."
         },
         {
-          "heading": "Frequency Performance Payments — Negligible So Far",
-          "body": "The new Frequency Performance Payments (FPP) scheme launched 8 June 2025, replacing old Causer Pays allocation. Total FPP revenue June-December 2025 was only $2.14M across the entire fleet — peaking at $460k in October 2025. At this scale, FPP is a rounding error on battery economics."
+          "heading": "Frequency Performance Payments \u2014 Negligible So Far",
+          "body": "The new Frequency Performance Payments (FPP) scheme launched 8 June 2025, replacing old Causer Pays allocation. Total FPP revenue June-December 2025 was only $2.14M across the entire fleet \u2014 peaking at $460k in October 2025. At this scale, FPP is a rounding error on battery economics."
         },
         {
           "heading": "Future Revenue Stack",
           "body": "By 2030, Modo projects that >80% of battery revenues will come from energy arbitrage. FCAS can still contribute 20-30%+ during constraint events in SA and QLD, but these are episodic windfalls, not bankable base revenue. The revenue stack for new projects: contracted base (CIS/LTESA/virtual toll) + energy arbitrage + minor FCAS. The days of FCAS as a primary revenue driver are over."
         }
       ],
-      "tags": ["fcas", "revenue-stack", "saturation", "fpp", "frequency-performance"],
+      "tags": [
+        "fcas",
+        "revenue-stack",
+        "saturation",
+        "fpp",
+        "frequency-performance"
+      ],
       "related_project_ids": []
     },
     {
       "id": "trading-platforms-convergence",
       "date": "2026-05-28",
       "category": "bess-market",
-      "title": "Autobidder Convergence — Trading Platform Choice Matters Less Than Expected",
+      "title": "Autobidder Convergence \u2014 Trading Platform Choice Matters Less Than Expected",
       "sections": [
         {
           "heading": "The Platforms",
-          "body": "Five main platforms compete in the NEM: Tesla Autobidder (~500 MW), Fluence Mosaic (~300 MW, also manages ~2,500 MW of wind/solar), Wartsila Intellibidder (~200 MW), Habitat Energy (UK-origin, Melbourne office, ~100 MW), and in-house systems (Neoen, AGL, Origin — ~2,000+ MW). Third-party optimisers manage over 800 MW of BESS."
+          "body": "Five main platforms compete in the NEM: Tesla Autobidder (~500 MW), Fluence Mosaic (~300 MW, also manages ~2,500 MW of wind/solar), Wartsila Intellibidder (~200 MW), Habitat Energy (UK-origin, Melbourne office, ~100 MW), and in-house systems (Neoen, AGL, Origin \u2014 ~2,000+ MW). Third-party optimisers manage over 800 MW of BESS."
         },
         {
           "heading": "The Surprising Finding",
@@ -318,21 +464,28 @@
         },
         {
           "heading": "Bid Volume Explosion",
-          "body": "Daily energy bids in the NEM increased from 5,000/day in 2021 to 30,000/day in 2025 — driven overwhelmingly by battery autobidders submitting revised bids hundreds of times per day. As Fluence's Matt Grover put it: 'It has become an accepted truth in the industry that you'd be crazy to try and bid a battery into the market without some kind of automation.' 35% of grid-scale wind and solar also adopted automated bidding within the past two years."
+          "body": "Daily energy bids in the NEM increased from 5,000/day in 2021 to 30,000/day in 2025 \u2014 driven overwhelmingly by battery autobidders submitting revised bids hundreds of times per day. As Fluence's Matt Grover put it: 'It has become an accepted truth in the industry that you'd be crazy to try and bid a battery into the market without some kind of automation.' 35% of grid-scale wind and solar also adopted automated bidding within the past two years."
         }
       ],
-      "tags": ["autobidder", "trading-platforms", "tesla", "fluence", "rebidding", "automation"],
+      "tags": [
+        "autobidder",
+        "trading-platforms",
+        "tesla",
+        "fluence",
+        "rebidding",
+        "automation"
+      ],
       "related_project_ids": []
     },
     {
       "id": "torrens-island-aemo-directions",
       "date": "2026-05-25",
       "category": "bess-market",
-      "title": "AEMO Directs Torrens Island Battery — Grid Security vs Battery Economics",
+      "title": "AEMO Directs Torrens Island Battery \u2014 Grid Security vs Battery Economics",
       "sections": [
         {
           "heading": "What Happened",
-          "body": "AEMO directed AGL's Torrens Island BESS (250 MW / 250 MWh) in November 2025 and again in March 2026, constraining its operations for grid security reasons. This reduced the battery's revenue — despite AGL reporting $28M EBITDA in its first 9 months of operation."
+          "body": "AEMO directed AGL's Torrens Island BESS (250 MW / 250 MWh) in November 2025 and again in March 2026, constraining its operations for grid security reasons. This reduced the battery's revenue \u2014 despite AGL reporting $28M EBITDA in its first 9 months of operation."
         },
         {
           "heading": "The Precedent Risk",
@@ -343,8 +496,16 @@
           "body": "Total battery curtailment across the fleet was estimated at approximately 90,929 MWh in 2025. As the fleet grows and system security interactions become more complex, the tension between AEMO's reliability mandate and battery operators' commercial interests will intensify."
         }
       ],
-      "tags": ["aemo-directions", "curtailment", "regulatory-risk", "torrens-island", "agl"],
-      "related_project_ids": ["torrens-island-bess"]
+      "tags": [
+        "aemo-directions",
+        "curtailment",
+        "regulatory-risk",
+        "torrens-island",
+        "agl"
+      ],
+      "related_project_ids": [
+        "torrens-island-bess"
+      ]
     },
     {
       "id": "nsw-t8-16gwh-storage",
@@ -354,65 +515,85 @@
       "sections": [
         {
           "heading": "Tender Overview",
-          "body": "CIS Tender 8 is open and seeking 16 GWh of storage capacity across the NEM — the largest single storage procurement round under the Commonwealth CIS program to date. Results are expected mid-2026."
+          "body": "CIS Tender 8 is open and seeking 16 GWh of storage capacity across the NEM \u2014 the largest single storage procurement round under the Commonwealth CIS program to date. Results are expected mid-2026."
         },
         {
           "heading": "Strategic Questions",
-          "body": "A key unresolved policy question: can unsigned CIS winners from earlier rounds bid into current LTESA rounds? If allowed, this gives CIS winners dual-contract optionality — de-risk with CIS, then optimise with LTESA. If disallowed, it protects LTESA round integrity. No definitive public guidance has been found."
+          "body": "A key unresolved policy question: can unsigned CIS winners from earlier rounds bid into current LTESA rounds? If allowed, this gives CIS winners dual-contract optionality \u2014 de-risk with CIS, then optimise with LTESA. If disallowed, it protects LTESA round integrity. No definitive public guidance has been found."
         },
         {
           "heading": "CIS T3 Benchmark",
-          "body": "CIS Tender 3 awarded 4.13 GW / 15.37 GWh of BESS — the largest battery tender in Australian history. This established the CIS as the primary mechanism for underwriting new BESS investment. Approximately one-third of battery capacity reaching financial close now uses government contracts (CIS, LTESA, VRET), transferring revenue risk onto public balance sheets."
+          "body": "CIS Tender 3 awarded 4.13 GW / 15.37 GWh of BESS \u2014 the largest battery tender in Australian history. This established the CIS as the primary mechanism for underwriting new BESS investment. Approximately one-third of battery capacity reaching financial close now uses government contracts (CIS, LTESA, VRET), transferring revenue risk onto public balance sheets."
         }
       ],
-      "tags": ["cis", "tender-8", "storage", "policy", "16gwh"],
+      "tags": [
+        "cis",
+        "tender-8",
+        "storage",
+        "policy",
+        "16gwh"
+      ],
       "related_project_ids": []
     },
     {
       "id": "nsw-ltesa-r6-long-duration",
       "date": "2026-06-05",
       "category": "cis-ltesa",
-      "title": "NSW LTESA Round 6 Awards 1.17 GW / 11.98 GWh — Long-Duration Focus",
+      "title": "NSW LTESA Round 6 Awards 1.17 GW / 11.98 GWh \u2014 Long-Duration Focus",
       "sections": [
         {
           "heading": "The Awards",
-          "body": "NSW LTESA Round 6 awarded three long-duration storage projects: Neoen Great Western (330 MW / 3,500 MWh), BW ESS Bannaby (233 MW / 2,676 MWh), and Ark Energy Bowmans Creek (250 MW / 2,414 MWh). Combined: 1.17 GW / 11.98 GWh. All are 8-10 hour duration — a clear signal that NSW is pivoting beyond the 2-hour playbook."
+          "body": "NSW LTESA Round 6 awarded three long-duration storage projects: Neoen Great Western (330 MW / 3,500 MWh), BW ESS Bannaby (233 MW / 2,676 MWh), and Ark Energy Bowmans Creek (250 MW / 2,414 MWh). Combined: 1.17 GW / 11.98 GWh. All are 8-10 hour duration \u2014 a clear signal that NSW is pivoting beyond the 2-hour playbook."
         },
         {
           "heading": "Implications for Revenue Cannibalisation",
-          "body": "Longer-duration batteries partially escape the 'battery correlation penalty' by dispatching into later evening and overnight periods where competition is thinner. If the 2-hour market is saturated, 4-8 hour systems capture different time windows. But if extreme duration is over-built, even these spreads will compress — it's a question of when, not if."
+          "body": "Longer-duration batteries partially escape the 'battery correlation penalty' by dispatching into later evening and overnight periods where competition is thinner. If the 2-hour market is saturated, 4-8 hour systems capture different time windows. But if extreme duration is over-built, even these spreads will compress \u2014 it's a question of when, not if."
         }
       ],
-      "tags": ["ltesa", "nsw", "long-duration", "round-6", "neoen", "ark-energy"],
+      "tags": [
+        "ltesa",
+        "nsw",
+        "long-duration",
+        "round-6",
+        "neoen",
+        "ark-energy"
+      ],
       "related_project_ids": []
     },
     {
       "id": "business-model-shift",
       "date": "2026-05-30",
       "category": "bess-market",
-      "title": "The BESS Business Model Is Shifting — From Merchant Opportunism to Contracted Infrastructure",
+      "title": "The BESS Business Model Is Shifting \u2014 From Merchant Opportunism to Contracted Infrastructure",
       "sections": [
         {
           "heading": "The Old Model (2017-2024)",
-          "body": "Early batteries like Hornsdale and Victorian Big Battery were high-margin, opportunistic assets. Revenue came from energy arbitrage spikes and FCAS scarcity — $100-150k+/MW/yr was achievable. Investors accepted merchant risk because returns were exceptional."
+          "body": "Early batteries like Hornsdale and Victorian Big Battery were high-margin, opportunistic assets. Revenue came from energy arbitrage spikes and FCAS scarcity \u2014 $100-150k+/MW/yr was achievable. Investors accepted merchant risk because returns were exceptional."
         },
         {
           "heading": "The New Model (2025+)",
-          "body": "Approximately 50% of offtake arrangements are now structured as virtual tolls, revenue-share, capacity swap arrangements, or firmed PPAs — replacing physical tolls as the dominant structure. One-third of battery capacity uses government contracts (CIS, LTESA, VRET). Commercial banks now finance purely merchant BESS (Amp Energy's Bungama was first fully merchant bank-financed). But returns have compressed from >15% to 8-14% IRR for 4-hour systems."
+          "body": "Approximately 50% of offtake arrangements are now structured as virtual tolls, revenue-share, capacity swap arrangements, or firmed PPAs \u2014 replacing physical tolls as the dominant structure. One-third of battery capacity uses government contracts (CIS, LTESA, VRET). Commercial banks now finance purely merchant BESS (Amp Energy's Bungama was first fully merchant bank-financed). But returns have compressed from >15% to 8-14% IRR for 4-hour systems."
         },
         {
           "heading": "What This Means for Developers",
-          "body": "Developers are stacking 'riskier offtakes alongside government support arrangements' (Allens). Financiers are 'becoming more willing to provide attractive project finance debt sizing where there is a degree of sub-investment grade offtakes and some level of merchant exposure' (Macquarie). The era of $150k+/MW/yr merchant revenue is over. The era of contracted infrastructure returns is beginning — lower return, lower risk, essential service."
+          "body": "Developers are stacking 'riskier offtakes alongside government support arrangements' (Allens). Financiers are 'becoming more willing to provide attractive project finance debt sizing where there is a degree of sub-investment grade offtakes and some level of merchant exposure' (Macquarie). The era of $150k+/MW/yr merchant revenue is over. The era of contracted infrastructure returns is beginning \u2014 lower return, lower risk, essential service."
         }
       ],
-      "tags": ["business-model", "contracted", "merchant", "infrastructure", "offtake", "macquarie"],
+      "tags": [
+        "business-model",
+        "contracted",
+        "merchant",
+        "infrastructure",
+        "offtake",
+        "macquarie"
+      ],
       "related_project_ids": []
     },
     {
       "id": "wholesale-prices-structural-decline",
       "date": "2026-06-08",
       "category": "wholesale-prices",
-      "title": "NEM Wholesale Prices in Structural Decline — VIC Hits $35.68/MWh in April",
+      "title": "NEM Wholesale Prices in Structural Decline \u2014 VIC Hits $35.68/MWh in April",
       "sections": [
         {
           "heading": "The Numbers",
@@ -420,83 +601,110 @@
         },
         {
           "heading": "Structural Drivers",
-          "body": "Gas generation at lowest level since 1999. Coal generation down 4.4% in Q1 2026. Grid-scale and distributed solar both set quarterly generation records. Rooftop solar growing +8.1% YoY. Gas prices down 9-17% YoY and coal down 12% — the evening price ceiling is lowering from the commodity side as well as the supply side."
+          "body": "Gas generation at lowest level since 1999. Coal generation down 4.4% in Q1 2026. Grid-scale and distributed solar both set quarterly generation records. Rooftop solar growing +8.1% YoY. Gas prices down 9-17% YoY and coal down 12% \u2014 the evening price ceiling is lowering from the commodity side as well as the supply side."
         },
         {
           "heading": "Impact on BESS",
-          "body": "Lower wholesale prices directly compress BESS arbitrage spreads. If the evening peak price falls from $200/MWh to $100/MWh while the midday trough rises from -$20/MWh to $20/MWh, the spread halves. This is exactly what's happening — and it affects all batteries simultaneously, regardless of trading sophistication."
+          "body": "Lower wholesale prices directly compress BESS arbitrage spreads. If the evening peak price falls from $200/MWh to $100/MWh while the midday trough rises from -$20/MWh to $20/MWh, the spread halves. This is exactly what's happening \u2014 and it affects all batteries simultaneously, regardless of trading sophistication."
         }
       ],
-      "tags": ["wholesale", "prices", "victoria", "structural-decline", "gas", "coal"],
+      "tags": [
+        "wholesale",
+        "prices",
+        "victoria",
+        "structural-decline",
+        "gas",
+        "coal"
+      ],
       "related_project_ids": []
     },
     {
       "id": "negative-prices-battery-absorb",
       "date": "2026-05-20",
       "category": "wholesale-prices",
-      "title": "Negative Prices — Batteries Are Absorbing Midday Oversupply",
+      "title": "Negative Prices \u2014 Batteries Are Absorbing Midday Oversupply",
       "sections": [
         {
           "heading": "The Trend",
-          "body": "Q4 2025 saw a record 31% of all NEM intervals at negative prices — SA hit 48.4% negative, VIC 43.1%. But Q1 2026 showed improvement: 2,973 negative 30-minute periods, down 53% from Q4 2025 and 17% below Q1 2025."
+          "body": "Q4 2025 saw a record 31% of all NEM intervals at negative prices \u2014 SA hit 48.4% negative, VIC 43.1%. But Q1 2026 showed improvement: 2,973 negative 30-minute periods, down 53% from Q4 2025 and 17% below Q1 2025."
         },
         {
           "heading": "Battery Effect",
-          "body": "The improvement is partly because battery charging absorbs midday oversupply, reducing negative price frequency. Average battery charging increased by 872 MW in Q1 2026 vs prior year. Batteries are essentially performing the grid-stabilisation function that justifies their deployment — even as it reduces the price volatility that drives their revenue."
+          "body": "The improvement is partly because battery charging absorbs midday oversupply, reducing negative price frequency. Average battery charging increased by 872 MW in Q1 2026 vs prior year. Batteries are essentially performing the grid-stabilisation function that justifies their deployment \u2014 even as it reduces the price volatility that drives their revenue."
         },
         {
           "heading": "The Paradox",
           "body": "Batteries solving the negative price problem is a societal good but a commercial headwind. Fewer negative prices means less value in charging cheaply. This is the fundamental tension: batteries are essential infrastructure that erodes its own commercial viability through success."
         }
       ],
-      "tags": ["negative-prices", "midday", "solar-oversupply", "paradox"],
+      "tags": [
+        "negative-prices",
+        "midday",
+        "solar-oversupply",
+        "paradox"
+      ],
       "related_project_ids": []
     },
     {
       "id": "renewables-record-46pct",
       "date": "2026-05-15",
       "category": "wholesale-prices",
-      "title": "Renewables Hit Record 46.5% of NEM Supply — Instantaneous Record 78.6%",
+      "title": "Renewables Hit Record 46.5% of NEM Supply \u2014 Instantaneous Record 78.6%",
       "sections": [
         {
           "heading": "Quarterly Record",
-          "body": "Renewables supplied 46.5% of total NEM generation in Q1 2026 — the highest Q1 on record. Separately, the NEM hit an instantaneous renewable share of 78.6% in September 2025. Grid-scale and distributed solar both set quarterly generation records."
+          "body": "Renewables supplied 46.5% of total NEM generation in Q1 2026 \u2014 the highest Q1 on record. Separately, the NEM hit an instantaneous renewable share of 78.6% in September 2025. Grid-scale and distributed solar both set quarterly generation records."
         },
         {
           "heading": "What's Being Displaced",
-          "body": "Coal generation declined 4.4% in Q1 2026. Gas generation fell to its lowest level since 1999. Rooftop solar continues growing at 8.1% YoY. The transition is no longer aspirational — it's happening at a pace that is reshaping wholesale market dynamics faster than most forecasts anticipated."
+          "body": "Coal generation declined 4.4% in Q1 2026. Gas generation fell to its lowest level since 1999. Rooftop solar continues growing at 8.1% YoY. The transition is no longer aspirational \u2014 it's happening at a pace that is reshaping wholesale market dynamics faster than most forecasts anticipated."
         }
       ],
-      "tags": ["renewables", "record", "solar", "wind", "coal-displacement", "aemo"],
+      "tags": [
+        "renewables",
+        "record",
+        "solar",
+        "wind",
+        "coal-displacement",
+        "aemo"
+      ],
       "related_project_ids": []
     },
     {
       "id": "eraring-battery-coal-portfolio",
       "date": "2026-05-10",
       "category": "bess-market",
-      "title": "Eraring Battery — The Coal-BESS Portfolio Play",
+      "title": "Eraring Battery \u2014 The Coal-BESS Portfolio Play",
       "sections": [
         {
           "heading": "What It Is",
-          "body": "Origin Energy's Eraring Battery Stage 1 (460 MW / 1,770 MWh) commenced operations in December 2025, adjacent to the 2.88 GW Eraring coal plant — the NEM's largest generator. It's the largest battery in the southern hemisphere. Total planned: 700 MW / 3,180 MWh across four stages by 2027. Wartsila battery systems."
+          "body": "Origin Energy's Eraring Battery Stage 1 (460 MW / 1,770 MWh) commenced operations in December 2025, adjacent to the 2.88 GW Eraring coal plant \u2014 the NEM's largest generator. It's the largest battery in the southern hemisphere. Total planned: 700 MW / 3,180 MWh across four stages by 2027. Wartsila battery systems."
         },
         {
           "heading": "The Portfolio Advantage",
-          "body": "Eraring Battery benefits from coal-BESS portfolio optimisation that standalone batteries cannot replicate. Origin can co-optimise coal dispatch and battery charge/discharge to maximise total portfolio value — charging from their own coal generation when it's cheap, discharging when coal ramps down. This is a structural advantage that will persist until Eraring coal closes (late 2027, possibly 1-2 units to early 2029)."
+          "body": "Eraring Battery benefits from coal-BESS portfolio optimisation that standalone batteries cannot replicate. Origin can co-optimise coal dispatch and battery charge/discharge to maximise total portfolio value \u2014 charging from their own coal generation when it's cheap, discharging when coal ramps down. This is a structural advantage that will persist until Eraring coal closes (late 2027, possibly 1-2 units to early 2029)."
         },
         {
           "heading": "Post-Coal Question",
-          "body": "When Eraring coal retires, the battery loses its portfolio effect. But it gains something else: Eraring's retirement removes 2.88 GW of baseload from NSW, which should restore significant price volatility — potentially the most important single event for NSW battery economics in the next 5 years."
+          "body": "When Eraring coal retires, the battery loses its portfolio effect. But it gains something else: Eraring's retirement removes 2.88 GW of baseload from NSW, which should restore significant price volatility \u2014 potentially the most important single event for NSW battery economics in the next 5 years."
         }
       ],
-      "tags": ["eraring", "origin-energy", "coal-bess", "portfolio", "nsw"],
-      "related_project_ids": ["eraring-battery"]
+      "tags": [
+        "eraring",
+        "origin-energy",
+        "coal-bess",
+        "portfolio",
+        "nsw"
+      ],
+      "related_project_ids": [
+        "eraring-battery"
+      ]
     },
     {
       "id": "waratah-super-battery-sips",
       "date": "2026-05-05",
       "category": "bess-market",
-      "title": "Waratah Super Battery — 850 MW, SIPS Contract, Partial Operations",
+      "title": "Waratah Super Battery \u2014 850 MW, SIPS Contract, Partial Operations",
       "sections": [
         {
           "heading": "Status",
@@ -504,21 +712,30 @@
         },
         {
           "heading": "Revenue Model",
-          "body": "Unlike most NEM batteries, Waratah has a System Integrity Protection Scheme (SIPS) contract — providing grid security services to NSW that are not dependent on wholesale market arbitrage. This provides a contracted revenue floor that insulates it from the cannibalisation affecting merchant batteries."
+          "body": "Unlike most NEM batteries, Waratah has a System Integrity Protection Scheme (SIPS) contract \u2014 providing grid security services to NSW that are not dependent on wholesale market arbitrage. This provides a contracted revenue floor that insulates it from the cannibalisation affecting merchant batteries."
         },
         {
           "heading": "Context",
-          "body": "Waratah was put on standby to prevent blackouts when four big coal units went offline. This is exactly the use case that justifies contracted system security batteries — their value is in reliability, not merchant revenue. The SIPS model may become more common as merchant returns compress."
+          "body": "Waratah was put on standby to prevent blackouts when four big coal units went offline. This is exactly the use case that justifies contracted system security batteries \u2014 their value is in reliability, not merchant revenue. The SIPS model may become more common as merchant returns compress."
         }
       ],
-      "tags": ["waratah", "akaysha", "sips", "system-security", "nsw", "blackrock"],
-      "related_project_ids": ["waratah-super-battery"]
+      "tags": [
+        "waratah",
+        "akaysha",
+        "sips",
+        "system-security",
+        "nsw",
+        "blackrock"
+      ],
+      "related_project_ids": [
+        "waratah-super-battery"
+      ]
     },
     {
       "id": "behind-the-meter-threat",
       "date": "2026-04-28",
       "category": "bess-market",
-      "title": "Behind-the-Meter Batteries — 219,000 Systems Installed Since Federal Subsidy",
+      "title": "Behind-the-Meter Batteries \u2014 219,000 Systems Installed Since Federal Subsidy",
       "sections": [
         {
           "heading": "Scale",
@@ -526,17 +743,23 @@
         },
         {
           "heading": "Impact on Grid-Scale",
-          "body": "Behind-the-meter batteries reduce household grid demand during evening peaks — the same peaks that grid-scale batteries target for discharge revenue. At 4.7 GWh and growing, behind-the-meter storage is approaching the scale where it could materially reduce evening peak demand, further compressing the arbitrage spread available to grid-scale operators."
+          "body": "Behind-the-meter batteries reduce household grid demand during evening peaks \u2014 the same peaks that grid-scale batteries target for discharge revenue. At 4.7 GWh and growing, behind-the-meter storage is approaching the scale where it could materially reduce evening peak demand, further compressing the arbitrage spread available to grid-scale operators."
         }
       ],
-      "tags": ["behind-the-meter", "residential", "subsidy", "demand-reduction", "wattclarity"],
+      "tags": [
+        "behind-the-meter",
+        "residential",
+        "subsidy",
+        "demand-reduction",
+        "wattclarity"
+      ],
       "related_project_ids": []
     },
     {
       "id": "senate-estimates-cis-jun-2026",
       "date": "2026-06-02",
       "category": "senate-estimates",
-      "title": "Senate Estimates — CIS Construction Progress Update Expected",
+      "title": "Senate Estimates \u2014 CIS Construction Progress Update Expected",
       "sections": [
         {
           "heading": "Upcoming Hearings",
@@ -547,14 +770,19 @@
           "body": "Monitor Hansard transcripts from the Environment and Communications Legislation Committee and the Economics Legislation Committee for ARENA/CEFC/CIS questioning. Key officials: DCCEEW Secretary, ARENA CEO, CEFC CEO."
         }
       ],
-      "tags": ["senate", "estimates", "cis", "construction-progress"],
+      "tags": [
+        "senate",
+        "estimates",
+        "cis",
+        "construction-progress"
+      ],
       "related_project_ids": []
     },
     {
       "id": "rez-congestion-cwo-sw",
       "date": "2026-05-28",
       "category": "rez-transmission",
-      "title": "REZ Access Right Congestion — CWO and South-West NSW",
+      "title": "REZ Access Right Congestion \u2014 CWO and South-West NSW",
       "sections": [
         {
           "heading": "Current State",
@@ -565,30 +793,48 @@
           "body": "Projects in these REZs without access rights face curtailment risk and should model revenue with a curtailment haircut. The Orana BESS (415 MW, Akaysha) is located in CWO and has CIS + EnergyAustralia offtake to mitigate. But merchant batteries in congested REZs face a double penalty: spread compression from cannibalisation AND curtailment from congestion."
         }
       ],
-      "tags": ["rez", "access-rights", "congestion", "cwo", "south-west", "curtailment"],
-      "related_project_ids": ["orana-bess"]
+      "tags": [
+        "rez",
+        "access-rights",
+        "congestion",
+        "cwo",
+        "south-west",
+        "curtailment"
+      ],
+      "related_project_ids": [
+        "orana-bess"
+      ]
     },
     {
       "id": "coal-retirements-volatility",
       "date": "2026-05-22",
       "category": "policy",
-      "title": "Coal Retirements 2027-2028 — The Key Variable for Battery Revenue Recovery",
+      "title": "Coal Retirements 2027-2028 \u2014 The Key Variable for Battery Revenue Recovery",
       "sections": [
         {
           "heading": "Scheduled Closures",
-          "body": "Eraring (2.88 GW, NSW) is set to close late 2027 — possibly keeping 1-2 units to early 2029. Yallourn (1.48 GW, VIC) is scheduled for mid-2028. Callide B (700 MW, QLD) in 2028. Combined: over 5 GW of baseload exiting the NEM within 2-3 years."
+          "body": "Eraring (2.88 GW, NSW) is set to close late 2027 \u2014 possibly keeping 1-2 units to early 2029. Yallourn (1.48 GW, VIC) is scheduled for mid-2028. Callide B (700 MW, QLD) in 2028. Combined: over 5 GW of baseload exiting the NEM within 2-3 years."
         },
         {
           "heading": "Revenue Implications",
-          "body": "Coal retirements remove baseload generation that currently suppresses evening and overnight prices. With coal gone, gas peakers and batteries become the only dispatchable supply during low-wind/low-solar periods. This should restore price volatility — the lifeblood of battery revenue. Eraring's closure alone could add $20-30/MWh to NSW evening peak prices."
+          "body": "Coal retirements remove baseload generation that currently suppresses evening and overnight prices. With coal gone, gas peakers and batteries become the only dispatchable supply during low-wind/low-solar periods. This should restore price volatility \u2014 the lifeblood of battery revenue. Eraring's closure alone could add $20-30/MWh to NSW evening peak prices."
         },
         {
           "heading": "Timing Gap",
-          "body": "The problem: 2026-2027 may be the worst period for battery revenue — maximum fleet deployment before coal retirements take effect. Batteries that can survive this trough with contracted revenue will benefit from the volatility rebound. Those relying purely on merchant revenue during the trough face severe stress."
+          "body": "The problem: 2026-2027 may be the worst period for battery revenue \u2014 maximum fleet deployment before coal retirements take effect. Batteries that can survive this trough with contracted revenue will benefit from the volatility rebound. Those relying purely on merchant revenue during the trough face severe stress."
         }
       ],
-      "tags": ["coal", "retirements", "eraring", "yallourn", "volatility", "timing-gap"],
-      "related_project_ids": ["eraring-battery"]
+      "tags": [
+        "coal",
+        "retirements",
+        "eraring",
+        "yallourn",
+        "volatility",
+        "timing-gap"
+      ],
+      "related_project_ids": [
+        "eraring-battery"
+      ]
     },
     {
       "id": "market-price-cap-increase",
@@ -598,14 +844,19 @@
       "sections": [
         {
           "heading": "The Change",
-          "body": "The NEM Market Price Cap increases from $20,300/MWh to $23,200/MWh effective 1 July 2026. This raises the theoretical upside potential during scarcity events — a single 5-minute interval at the new cap is worth 14% more."
+          "body": "The NEM Market Price Cap increases from $20,300/MWh to $23,200/MWh effective 1 July 2026. This raises the theoretical upside potential during scarcity events \u2014 a single 5-minute interval at the new cap is worth 14% more."
         },
         {
           "heading": "Practical Impact",
-          "body": "Cap events are rare but outsized in revenue impact. A battery that captures even a few hours of cap pricing per year can earn more than months of regular arbitrage. The higher cap benefits batteries with high availability and fast response — particularly those with AEMO direction immunity. But it also increases the cost of missing a cap event (opportunity cost of being curtailed, constrained, or in the wrong charge state)."
+          "body": "Cap events are rare but outsized in revenue impact. A battery that captures even a few hours of cap pricing per year can earn more than months of regular arbitrage. The higher cap benefits batteries with high availability and fast response \u2014 particularly those with AEMO direction immunity. But it also increases the cost of missing a cap event (opportunity cost of being curtailed, constrained, or in the wrong charge state)."
         }
       ],
-      "tags": ["market-price-cap", "scarcity", "upside", "july-2026"],
+      "tags": [
+        "market-price-cap",
+        "scarcity",
+        "upside",
+        "july-2026"
+      ],
       "related_project_ids": []
     },
     {
@@ -620,28 +871,40 @@
         },
         {
           "heading": "Policy Response",
-          "body": "This is the core tension driving LTESA Round 8 and CIS Tender 8 — government must underwrite battery investment because the merchant market alone cannot justify the build rate required. The question is whether contracted volumes will be sufficient, and whether contract terms can bridge the revenue trough until coal retirements restore volatility."
+          "body": "This is the core tension driving LTESA Round 8 and CIS Tender 8 \u2014 government must underwrite battery investment because the merchant market alone cannot justify the build rate required. The question is whether contracted volumes will be sufficient, and whether contract terms can bridge the revenue trough until coal retirements restore volatility."
         }
       ],
-      "tags": ["nsw", "storage-gap", "fid", "policy", "ltesa"],
+      "tags": [
+        "nsw",
+        "storage-gap",
+        "fid",
+        "policy",
+        "ltesa"
+      ],
       "related_project_ids": []
     },
     {
       "id": "isp-2026-bess-expanded",
       "date": "2026-05-08",
       "category": "policy",
-      "title": "AEMO 2026 ISP Expands BESS Target to 24 GW by 2030 — 9 GW Higher Than 2024",
+      "title": "AEMO 2026 ISP Expands BESS Target to 24 GW by 2030 \u2014 9 GW Higher Than 2024",
       "sections": [
         {
           "heading": "The Revised Target",
-          "body": "AEMO's 2026 draft Integrated System Plan targets 24 GW of grid-scale battery storage by 2030 — approximately 9 GW higher than the 2024 ISP projection. This reflects both the accelerated pace of deployment and the increased recognition of batteries as essential grid infrastructure."
+          "body": "AEMO's 2026 draft Integrated System Plan targets 24 GW of grid-scale battery storage by 2030 \u2014 approximately 9 GW higher than the 2024 ISP projection. This reflects both the accelerated pace of deployment and the increased recognition of batteries as essential grid infrastructure."
         },
         {
           "heading": "What Drives the Increase",
-          "body": "Three factors: (1) Data centre demand growth projected at 4x by 2030 — the single largest new demand driver; (2) Accelerated coal retirement timelines creating earlier supply gaps; (3) Behind-the-meter solar and battery growth reducing the effectiveness of traditional supply-side solutions. The ISP essentially says: the NEM needs batteries even more than we thought, even though they're earning less than we expected."
+          "body": "Three factors: (1) Data centre demand growth projected at 4x by 2030 \u2014 the single largest new demand driver; (2) Accelerated coal retirement timelines creating earlier supply gaps; (3) Behind-the-meter solar and battery growth reducing the effectiveness of traditional supply-side solutions. The ISP essentially says: the NEM needs batteries even more than we thought, even though they're earning less than we expected."
         }
       ],
-      "tags": ["isp", "aemo", "2030-target", "24gw", "data-centres"],
+      "tags": [
+        "isp",
+        "aemo",
+        "2030-target",
+        "24gw",
+        "data-centres"
+      ],
       "related_project_ids": []
     }
   ]
