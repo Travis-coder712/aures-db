@@ -231,7 +231,7 @@ function NoteCard({ note, expanded, onToggle }: {
                 {s.image && (
                   <div className="mt-3">
                     <img
-                      src={s.image.src}
+                      src={import.meta.env.BASE_URL + s.image.src.replace(/^\//, '')}
                       alt={s.image.alt}
                       className="rounded-lg border border-[var(--color-border)] w-full max-w-2xl"
                     />
