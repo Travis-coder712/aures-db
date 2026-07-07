@@ -1808,7 +1808,7 @@ export interface ResearchNote {
   date: string
   category: ResearchNoteCategory
   title: string
-  sections: { heading?: string; body: string }[]
+  sections: { heading?: string; body: string; image?: { src: string; alt: string; caption?: string } }[]
   tags: string[]
   related_project_ids: string[]
 }

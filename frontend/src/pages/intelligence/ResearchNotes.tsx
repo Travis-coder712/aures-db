@@ -228,6 +228,18 @@ function NoteCard({ note, expanded, onToggle }: {
                   <h4 className="text-xs font-semibold text-[var(--color-text)] mb-1">{s.heading}</h4>
                 )}
                 <p className="text-xs text-[var(--color-text-muted)] leading-relaxed">{s.body}</p>
+                {s.image && (
+                  <div className="mt-3">
+                    <img
+                      src={s.image.src}
+                      alt={s.image.alt}
+                      className="rounded-lg border border-[var(--color-border)] w-full max-w-2xl"
+                    />
+                    {s.image.caption && (
+                      <p className="text-[10px] text-[var(--color-text-muted)] mt-1 italic">{s.image.caption}</p>
+                    )}
+                  </div>
+                )}
               </div>
             ))}
           </div>
