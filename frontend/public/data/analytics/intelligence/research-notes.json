@@ -5,6 +5,56 @@
   },
   "notes": [
     {
+      "id": "cis-wind-projects-crisis-state-of-play",
+      "date": "2026-07-07",
+      "category": "cis-ltesa",
+      "title": "Four CIS Wind Developers Told Government They Can't Deliver \u2014 The Full State of Play",
+      "sections": [
+        {
+          "heading": "The Senate Estimates Disclosure",
+          "body": "At the 2026-27 Budget Estimates hearing of the Senate Environment and Communications Committee (26 May 2026), Deputy Secretary Matthew Brine (DCCEEW, Energy Group) confirmed that four CIS developers had formally notified the government they were struggling to advance their projects at the economics they had bid under their contracts. This followed an earlier disclosure at the December 2025 estimates round where Brine revealed that of the 18 GW of successful projects across the first four main CIS auctions, only approximately 6.5 GW had actually signed a contract (CISA) with the government \u2014 meaning 64% of awarded capacity had not executed. The Hansard transcript is at: https://www.aph.gov.au/-/media/Estimates/ec/bud2627/26526__Proof_Hansard__EC_BE20267.pdf"
+        },
+        {
+          "heading": "Which Four Projects?",
+          "body": "The four developers that notified government have not been publicly named, but the most likely candidates are all CIS Tender 1 generation winners \u2014 the earliest round, which locked in the lowest prices before construction cost inflation took hold. Kentbruck Green Energy Hub (HMC Capital, ~750 MW, Victoria) \u2014 HMC has been described as facing \"significant management and financial turmoil\" and Kentbruck is widely regarded as the most at-risk major CIS project. Spicers Creek Wind Farm (Squadron Energy, ~600 MW, NSW) \u2014 Squadron has cited \"materially higher construction costs\" since the bid date. Valley of the Winds (ACEN Australia, 1,600+ MW, NSW) \u2014 the largest single CIS project, with planning delays compounding the economics problem. Thunderbolt Wind Farm (Neoen, ~720 MW, NSW) \u2014 reportedly not signed a CISA, raising questions about whether Neoen intends to proceed at original economics after its acquisition by BlackRock. A fifth candidate is White Rock Wind Farm (various ownership changes) which has also stalled."
+        },
+        {
+          "heading": "Why the Economics Don't Work",
+          "body": "The root problem is that CIS T1 wind projects bid in 2022-23, when construction cost assumptions were materially lower. Since then, onshore wind development costs have risen approximately 50% (RenewEconomy / Rystad Energy). The revenue floor in a CISA provides downside protection but does not increase to cover higher costs \u2014 it is fixed at the bid price. David Dixon (Rystad Energy) summarised the financing constraint: \"The banks need the contracted revenues to cover their debt and their margins. The problem is that many of the projects have bid so low it is way below that.\" Without a PPA from a creditworthy offtaker (currently limited to Fortescue, Rio Tinto, and state utilities such as Synergy and SEC Victoria), the CISA revenue floor alone is insufficient for debt financing. Of 31 CIS-awarded wind projects, only three \u2014 Palmer, Waddi, and Carmody's Hill \u2014 have reached Final Investment Decision."
+        },
+        {
+          "heading": "The NSW Lifeline Strategy",
+          "body": "The AFR reported on 7 July 2026 that struggling CIS wind developers are seeking NSW relief through the LTESA Round 8 tender (2.5 GW generation, bids due August 2026). The strategy: withdraw from CIS, rebid into LTESA at updated economics, and use the state Contract for Difference structure to unlock debt financing. NSW LTESA uses a CfD (floor and ceiling) vs the CIS pure revenue floor \u2014 a different risk profile that may provide stronger financing comfort. The NSW Government has established a \"tiger team\" in the energy department specifically to assist stalled wind projects. However, the CIS T9 Q&A (Item 8, July 2026) has now created a hard eligibility barrier: prior CIS award winners who did not execute a CISA are ineligible for CIS T9 unless they have formally notified the Commonwealth in writing of withdrawal. This means the rebid-into-LTESA strategy simultaneously locks them out of CIS T9 \u2014 a binary, irreversible choice."
+        },
+        {
+          "heading": "Policy and Systemic Implications",
+          "body": "The concentration of failure in CIS T1 wind reflects a structural flaw in the auction design: price competition without adequate viability filters rewarded the most optimistic (or lowest-margin) bids. The Commonwealth has declined to renegotiate (Bowen: \"we won't be renegotiating things that have previously been agreed\") but has opened rebid pathways \u2014 now constrained by the T9 eligibility rules. Key risks for the 82% by 2030 target: (1) If the four-plus struggling T1 projects withdraw and fail to win LTESA, significant NSW generation capacity disappears permanently from the pipeline; (2) The CIS T9 window closes 20 July 2026 \u2014 projects that have not formally notified withdrawal before that date face both CIS ineligibility and missed LTESA timing; (3) Even projects that successfully rebid into LTESA face a construction timeline problem \u2014 any project starting later than end-2026 risks missing 2030 commercial operations. The NSW government recognises this; its tiger team and accelerated planning approvals are direct responses."
+        }
+      ],
+      "tags": [
+        "cis",
+        "wind",
+        "ltesa",
+        "withdrawal",
+        "senate-estimates",
+        "brine",
+        "kentbruck",
+        "spicers-creek",
+        "valley-of-the-winds",
+        "thunderbolt",
+        "nsw",
+        "2030-target",
+        "policy"
+      ],
+      "related_project_ids": [
+        "kentbruck-green-energy-hub",
+        "spicers-creek-wind-farm",
+        "valley-of-the-winds",
+        "thunderbolt-wind-farm",
+        "palmer-wind-farm"
+      ]
+    },
+    {
       "id": "cis-rebid-restrictions-hardening",
       "date": "2026-07-07",
       "category": "cis-ltesa",
