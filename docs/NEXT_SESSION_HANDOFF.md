@@ -1,14 +1,24 @@
 # AURES — Next Session Handoff
 
-**Last refreshed:** 2026-06-28
-**Latest shipped version:** v3.18.8
+**Last refreshed:** 2026-07-10
+**Latest shipped version:** v3.21.0
 **Purpose:** Single-place brief for the next session. Cold-readable — pair with `docs/SESSION_OPENER.md` and `docs/INTELLIGENCE_LAYER_PLAN.md`.
 
 ---
 
-## Current state snapshot (v3.18.7)
+## Current state snapshot (v3.21.0)
 
-### v3.18.0–v3.18.7 — CIS Pipeline Intelligence (8 releases)
+### v3.20.0–v3.21.0 — Gas vs BESS Firming + NEM Publications module (2026-07-10)
+
+- **v3.20.0** — New intelligence page: **Gas vs BESS Firming** (`/intelligence/firming`). Entry screen with 3 objective cards (min cost / min emissions / max renewables). Core model: fix total GWh investment, select duration (2/4/6/8hr) → calculates BESS power GW and residual gas GW needed. Outputs: KPI row, duration trade-off bar chart with ISP 2026 reference lines (Current NEM / Slow Change 2035 / Step Change 2035), 24-hour dispatch area chart (4 demand profiles: Evening peak / Heatwave / Dunkelflaute / Annual), CAPEX breakdown. Assumptions panel: read-only collapsed with "Edit assumptions" unlocking sliders. Pre-built scenarios + localStorage save/load. Hub card added.
+
+- **v3.21.0** — New learn module (in-development, build priority #2): **Reading the NEM — Essential Publications for Power Developers** (`/learn/nem-publications`). 8 lessons: Intelligence Stack → ISP → IASR → ESOO → Network Layer (TCPR + CIR + RIT-T) → MT PASA + QED → GSOO + AER SOEM → Developer's Reading Calendar + CWO BESS worked example. Synced to Studio Learn. Research notes updated with verified Hansard quotes from Senate E&C Estimates hearing (26 May 2026, pp.86-90) on CIS wind project delays — Brine/Phan/Wiltshire testimony.
+
+### v3.19.0–v3.19.3 — Research Notes enrichment + Hansard verification (2026-07-08)
+
+- Updated CIS wind crisis research note with verbatim Senate Estimates testimony (Matthew Brine, Bich Phan, Lisa Wiltshire). Clarified: number four is Hansard-confirmed; specific project names are AFR-only (unverified). Added LTESA/CIS T9 geographic non-overlap nuance. Added three policy advocacy positions.
+
+### v3.18.0–v3.18.8 — CIS Pipeline Intelligence (8 releases)
 
 - **v3.18.0** — CIS T8 dispatchable results (15 BESS, 4.2 GW / 16.1 GWh, QLD 51%). `contract_status` field added to SchemeProject (awarded/cisa_signed/fid/construction/operating/withdrawn/terminated). 22 projects populated with status from DB cross-reference. 3 new research notes: T8 results, Zero for Fifteen (no CIS wind at construction), Bowen withdrawal/LTESA clarification.
 - **v3.18.1** — CIS Pipeline Overview component on SchemeTracker Overview tab: (1) Pipeline Funnel showing awarded→signed→FID→construction→operating conversion; (2) By Round stacked bars colour-coded by status; (3) Project Table with filter pills (scheme/status/state/tech) and sortable columns. 130 projects / 38.5 GW tracked. `createPdfContainer()` utility added to exportPdf.ts.
