@@ -59,6 +59,7 @@ import AssetLifecycle from './pages/intelligence/AssetLifecycle'
 import BatteryWatch from './components/intelligence/BatteryWatch'
 import BatteryMarket from './pages/intelligence/BatteryMarket'
 import ResearchNotes from './pages/intelligence/ResearchNotes'
+import GasBessFirming from './pages/intelligence/GasBessFirming'
 import News from './pages/News'
 import Watchlist from './pages/Watchlist'
 import NotFound from './pages/NotFound'
@@ -159,6 +160,7 @@ function App() {
         <Route path="intelligence/battery-watch" element={<div className="p-6 lg:p-8 max-w-5xl"><BatteryWatch /></div>} />
         <Route path="intelligence/battery-market" element={<BatteryMarket />} />
         <Route path="intelligence/research" element={<ResearchNotes />} />
+        <Route path="intelligence/firming" element={<GasBessFirming />} />
         <Route
           path="intelligence/lifecycle-quartile"
           element={

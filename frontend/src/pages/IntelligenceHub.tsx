@@ -2,6 +2,12 @@ import { useNavigate } from 'react-router-dom'
 
 const ACTIVE_FEATURES = [
   {
+    icon: '⚡',
+    title: 'Gas vs BESS Firming',
+    description: 'How much gas capacity does grid-scale BESS displace? Fix a GWh budget, vary duration (2–8hr), see residual gas requirement against ISP 2026 trajectories.',
+    route: '/intelligence/firming',
+  },
+  {
     icon: '\u{1F4CA}',
     title: 'Battery Market Intelligence',
     description: 'Price-setting, revenue trends, cannibalisation, and bidding sophistication across the NEM BESS fleet',
