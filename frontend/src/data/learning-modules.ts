@@ -926,6 +926,204 @@ const M_VALUING_PROJECTS: LearningModule = {
 // reference but is no longer exposed in the catalogue.
 void M_SOLAR_CANN
 
+// ============================================================
+// 13. Reading the NEM — Essential Publications for Developers
+// ============================================================
+
+const M_NEM_PUBLICATIONS: LearningModule = {
+  id: 'nem-publications',
+  icon: '📡',
+  title: 'Reading the NEM — Essential Publications for Power Developers',
+  tagline: 'The free, high-quality intelligence that tells you where to build, what to build, and when.',
+  description:
+    'AEMO, the AER, the AEMC, and state agencies publish an interconnected set of documents that — read together — provide a remarkably complete picture of the NEM\'s direction. The ISP sets the 20-year map. The ESOO identifies reliability gaps. The network planning documents show which constraints will be relieved (and which won\'t). MT PASA and QED track the near-term market. This module builds a developer\'s intelligence calendar: which publications to read, when they drop, what specific tables and charts to turn to, and what each one genuinely tells you versus what it quietly omits.',
+  status: 'in-development',
+  readingTime: '55 min planned',
+  accent: '#0ea5e9',
+  added: '2026-07-10',
+  buildOrder: 2,
+  lessons: [
+    {
+      id: 'stack',
+      number: 1,
+      title: 'The Intelligence Stack — how the publications connect',
+      summary: 'Four planning horizons (20yr / 10yr / 2yr / weekly), four institutions (AEMO, AER, AEMC, state agencies), and how each publication feeds the next. A developer\'s map before opening a single document.',
+      covers: [
+        'The four time horizons: long-range planning (ISP), medium-term outlook (ESOO), operational adequacy (MT PASA), market performance (QED)',
+        'AEMO vs AER vs AEMC vs state agencies — who publishes what and why',
+        'Publication calendar: which documents land in which months of the year',
+        'How ISP → ESOO → TCPR → QED form a logical chain of evidence',
+        'What the chain tells a developer vs an investor vs a regulator',
+        'The free information landscape: what\'s public, what\'s paywalled, what must be modelled',
+      ],
+    },
+    {
+      id: 'isp',
+      number: 2,
+      title: 'The ISP — the 20-year map every developer needs to read',
+      summary: 'The Integrated System Plan is AEMO\'s central long-range plan, published every two years. It tells you which transmission is coming, which regions are ISP-endorsed, and what technology mix is assumed. Understanding it means understanding why the NEM\'s investment geography looks the way it does.',
+      covers: [
+        'ISP lifecycle: IASR → Draft ISP → Final ISP → ISP Action Plan (annual update)',
+        'The three ISP 2026 scenarios: Step Change (the default planning case), Slow Change, Green Energy Exports',
+        'Actionable ISP projects — what this designation means for a developer (committed transmission pipeline)',
+        'Candidate vs Committed Network Options: the 2-tier distinction that determines construction timing',
+        'ISP 2026 key findings: 50 GW new renewable by 2035, offshore wind 2030+, pumped hydro vs BESS competition',
+        'Which REZs are ISP-endorsed vs ISP-neutral vs ISP-unanalysed — and what that means for your site',
+        'ISP limitations: 2-year publication lag, scenario uncertainty, does not name individual project winners',
+        'Worked example: reading ISP 2026 Actionable Projects table for CWO transmission and HumeLink timing',
+      ],
+    },
+    {
+      id: 'iasr',
+      number: 3,
+      title: 'The IASR — the assumptions that drive the ISP',
+      summary: 'The Inputs, Assumptions and Scenarios Report is published before every ISP and is arguably more important than the ISP itself. If you disagree with its load forecast or technology cost assumptions, you should disagree with the ISP\'s conclusions. This lesson teaches you to read the IASR critically.',
+      covers: [
+        'IASR structure: load forecasting methodology, fuel cost assumptions, renewable cost curves (CSIRO GenCost), EV uptake, policy settings per scenario',
+        'The 2024 IASR key inputs: Step Change load growth, GenCost 2024 BESS and wind cost trajectories, CIS/LTESA policy baseline',
+        'Why the IASR\'s demand forecast is the single most consequential number in the ISP chain',
+        'How to stress-test an ISP conclusion by substituting different IASR load or cost inputs',
+        'The IASR\'s treatment of rooftop solar and EVs as demand shape modifiers (not just load adders)',
+        'Connection between IASR scenarios and ESOO reliability modelling (they use the same demand assumptions)',
+        'What the IASR doesn\'t model: post-CIS merchant dynamics, community opposition, specific connection costs',
+      ],
+    },
+    {
+      id: 'esoo',
+      number: 4,
+      title: 'The ESOO — identifying reliability gaps and commercial opportunity',
+      summary: 'The Electricity Statement of Opportunities is AEMO\'s annual 10-year probabilistic reliability assessment. When it flags a region as at-risk of Unserved Energy, it\'s signalling that new dispatchable capacity there has physical justification. This lesson teaches you to read its tables and translate reliability risk into commercial logic.',
+      covers: [
+        'What USE (Unserved Energy) means and the 0.002% of annual energy reliability standard',
+        'The ESOO\'s 10-year rolling horizon: distinguishing near-term adequacy from long-term structural risk',
+        'How to read the ESOO regional tables: which states show USE risk and when (the 2025-2035 outlook)',
+        'RERT (Reliability and Emergency Reserve Trader) as the early-warning instrument before USE materialises',
+        'Energy adequacy (MWh shortfall) vs capacity adequacy (MW peak shortfall) — the critical distinction',
+        'Why the ESOO flags dispatchable capacity: the link between reliability gaps and BESS vs gas investment cases',
+        'Historical accuracy: when ESOO was right (2022 east-coast gas shortage) and when it missed (SA 2019)',
+        'ESOO limitations: does not forecast wholesale prices, does not model merchant competition dynamics',
+      ],
+    },
+    {
+      id: 'network-layer',
+      number: 5,
+      title: 'The Network Layer — TCPR, CIR, and RIT-T',
+      summary: 'Three documents answer what developers most need to know about the network: what constraints surround your site, what they cost in congestion rent, and whether planned augmentations will actually be built. Together they replace a substantial portion of what developers formerly paid consultants to summarise.',
+      covers: [
+        'AEMO Transmission Connection and Planning Report (TCPR / NCPR): annual per-NSP adequacy assessment',
+        'TCPR structure: connection queue depth by NSP, thermal capacity limits, system strength shortfalls, planned solutions',
+        'How to read the TCPR to assess connection feasibility and likely augmentation cost at a specific node',
+        'CIR (Congestion Information Resource): which constraints bind most frequently and their annual congestion cost ($M)',
+        'Reading CIR binding constraint tables: frequency (%), shadow price ($/MWh), annual market impact',
+        'The link between CIR binding constraint costs and MLF degradation at nearby connection points',
+        'RIT-T (Regulatory Investment Test for Transmission): the formal 4-stage process for approving new lines',
+        'Key current RIT-Ts to track: HumeLink, VNI West, Marinus Link, QNI Medium — approved vs still pending',
+        'How to read a RIT-T Final Project Report: the net market benefit calculation and its assumptions',
+        'REZ Development Plans: EnergyCo (NSW) and VicGrid annual plans as complements to AEMO network docs',
+        'What PEC, HumeLink, and Western Renewables Link look like through a TCPR + CIR + RIT-T lens',
+      ],
+    },
+    {
+      id: 'near-term',
+      number: 6,
+      title: 'MT PASA and QED — the near-term market view',
+      summary: 'MT PASA is published weekly and covers the next 24 months of supply-demand balance. Quarterly Energy Dynamics is the market\'s quarterly scorecard. Together they\'re the developer\'s real-time check on whether the investment thesis is playing out.',
+      covers: [
+        'MT PASA mechanics: published weekly, covers 24 months ahead (extended to 48 months for summer/winter)',
+        'Reading MT PASA: what "available generation" vs "maximum capacity" means and how to read surplus/deficit',
+        'MT PASA\'s probabilistic demand treatment: P10, P50, P90 demand scenarios and what each implies',
+        'Using MT PASA to identify near-term peaking periods (the commercial signal for a dispatchable asset)',
+        'QED structure: quarterly spot prices by region, generation mix evolution, interconnector utilisation, demand vs forecast',
+        'Using QED to track coal exit pace, BESS penetration growth, and solar cannibalisation in real time',
+        'Combining MT PASA surplus/deficit with QED price trends to validate or stress-test a BESS arbitrage case',
+        'MT PASA limitations: does not model prices; QED is backward-looking, not a forward price forecast',
+      ],
+    },
+    {
+      id: 'gsoo-aer',
+      number: 7,
+      title: 'GSOO and AER publications — firming context and regulatory oversight',
+      summary: 'The Gas Statement of Opportunities and the AER\'s annual State of the Energy Market complete the intelligence stack. The GSOO matters to power developers because gas is BESS\'s primary competing firming technology — gas constraints and price spikes are what make the BESS commercial case work in stress periods.',
+      covers: [
+        'GSOO structure: annual publication covering 20 years of east-coast gas supply, pipeline capacity, and LNG export linkage',
+        'Why gas availability affects winter price spikes and hence BESS arbitrage and ancillary services revenue',
+        'GSOO\'s treatment of declining gas field reserves, LNG netback pricing, and pipeline constraint points',
+        'How GSOO scenarios feed the Gas vs BESS firming model (connection to the AURES Gas vs BESS page)',
+        'AER State of the Energy Market: the annual comprehensive review — market concentration, wholesale prices, investment activity',
+        'Key AER SOEM sections for developers: wholesale price analysis, network revenue, new investment conditions',
+        'AER TNSP Revenue Determinations: how regulated network revenue shapes which augmentations TNSPs can actually build (and when)',
+        'AER reset timing: which TNSPs reset in which years and why it matters for capital program pace',
+        'AEMC Annual Market Performance Review: market design changes and their flow-on to developer risk',
+        'Clean Energy Regulator (CER) publications: LGC supply-demand balance, LGCA register, CIS/LTESA milestone tracking',
+      ],
+    },
+    {
+      id: 'calendar',
+      number: 8,
+      title: 'A developer\'s reading calendar — and a worked example',
+      summary: 'Every publication has a month. Every insight from one feeds another. This lesson builds a 12-month reading calendar and then walks through a single worked example: using the full publication stack to evaluate a 4-hour BESS in the Central-West Orana REZ, from ISP endorsement to ESOO reliability gap to CIR constraint cost to GSOO firming pricing to MT PASA seasonal signals.',
+      covers: [
+        'The 12-month publication calendar: Jan (ISP Action Plan) → Apr (MLF reset) → Aug (ESOO) → Oct (QED Q3) → Nov (GSOO)',
+        'Reading prioritisation: which documents justify an hour of deep reading vs a 15-minute scan',
+        'Worked example: evaluating a 4hr BESS in the CWO REZ using 8 publications in sequence',
+        'ISP check: CWO is actionable, CWO transmission project committed → congestion relief coming',
+        'ESOO check: NSW flags USE risk 2028-2030 → dispatchable capacity gap confirmed',
+        'TCPR check: CWO connection queue has 15+ projects, system strength managed via TransGrid syncons',
+        'CIR check: CWO-Sydney constraint costs ~$180M/year in congestion rent → transmission relief improves MLF',
+        'MT PASA check: NSW summer 2026-27 shows tight supply windows → near-term dispatch opportunity confirmed',
+        'GSOO check: gas firming cost $80-120/MWh → 4hr BESS at $40-60/MWh is the preferred firming option',
+        'QED check: NSW annual average spot $90-110/MWh → arbitrage spread supports BESS revenue case',
+        'What the publications collectively still don\'t tell you: merchant pricing competition, planning risk, connection timing',
+        'The free vs paid intelligence boundary: what remains in Aurora/Modo/Cornwall Insight/Wood Mac territory',
+      ],
+    },
+  ],
+  sources: [
+    { category: 'Core AEMO publications', items: [
+      { label: 'AEMO Integrated System Plan 2024', url: 'https://aemo.com.au/energy-systems/major-publications/integrated-system-plan-isp' },
+      { label: 'AEMO Inputs, Assumptions and Scenarios Report (IASR)', url: 'https://aemo.com.au/energy-systems/major-publications/integrated-system-plan-isp/2024-integrated-system-plan-isp/2024-inputs-assumptions-and-scenarios-report' },
+      { label: 'AEMO Electricity Statement of Opportunities (ESOO)', url: 'https://aemo.com.au/energy-systems/electricity/national-electricity-market-nem/nem-forecasting-and-planning/forecasting-and-reliability/nem-electricity-statement-of-opportunities-esoo' },
+      { label: 'AEMO Medium-Term PASA (MT PASA)', url: 'https://aemo.com.au/energy-systems/electricity/national-electricity-market-nem/nem-forecasting-and-planning/forecasting-and-reliability/medium-term-projected-assessment-of-system-adequacy-mt-pasa' },
+      { label: 'AEMO Quarterly Energy Dynamics (QED)', url: 'https://aemo.com.au/energy-systems/electricity/national-electricity-market-nem/nem-forecasting-and-planning/forecasting-and-reliability/quarterly-energy-dynamics-qed' },
+      { label: 'AEMO Gas Statement of Opportunities (GSOO)', url: 'https://aemo.com.au/energy-systems/gas/gas-statement-of-opportunities-gsoo' },
+    ]},
+    { category: 'AEMO network and congestion planning', items: [
+      { label: 'AEMO Transmission Connection and Planning Report (TCPR / NCPR)', url: 'https://aemo.com.au/energy-systems/electricity/national-electricity-market-nem/nem-forecasting-and-planning/forecasting-and-reliability/transmission-connection-and-planning' },
+      { label: 'AEMO Congestion Information Resource (CIR)', url: 'https://aemo.com.au/energy-systems/electricity/national-electricity-market-nem/market-operations/congestion-information-resource' },
+      { label: 'AEMO ISP Action Plan (annual transmission update)' },
+    ]},
+    { category: 'AER publications', items: [
+      { label: 'AER State of the Energy Market (annual)', url: 'https://www.aer.gov.au/publications/annual-reports/state-of-the-energy-market' },
+      { label: 'AER TNSP Revenue Determinations', url: 'https://www.aer.gov.au/industry/networks' },
+    ]},
+    { category: 'AEMC publications', items: [
+      { label: 'AEMC Annual Electricity Market Performance Review', url: 'https://www.aemc.gov.au/energy-system/electricity/electricity-market/annual-market-performance-review' },
+      { label: 'AEMC Electricity Price Update', url: 'https://www.aemc.gov.au/energy-system/electricity/electricity-market/electricity-price-update' },
+    ]},
+    { category: 'State REZ planning', items: [
+      { label: 'EnergyCo NSW REZ Development Plans', url: 'https://www.energyco.nsw.gov.au/' },
+      { label: 'VicGrid REZ Investment Plans', url: 'https://www.energy.vic.gov.au/renewable-energy/renewable-energy-zones' },
+    ]},
+    { category: 'Key RIT-T documents', items: [
+      { label: 'HumeLink RIT-T — TransGrid', url: 'https://www.transgrid.com.au/our-work/projects/humelink' },
+      { label: 'VNI West RIT-T — TransGrid + AusNet', url: 'https://www.transgrid.com.au/our-work/projects/vni-west' },
+      { label: 'Marinus Link RIT-T — TasNetworks', url: 'https://www.marinuslink.com.au/' },
+      { label: 'QNI Medium RIT-T — Powerlink + TransGrid', url: 'https://www.powerlink.com.au/' },
+    ]},
+    { category: 'Clean Energy Regulator', items: [
+      { label: 'CER LGC supply-demand forecast and LGCA register', url: 'https://www.cleanenergyregulator.gov.au/' },
+    ]},
+    { category: 'Analytics and commentary', items: [
+      { label: 'WattClarity — constraint and market commentary', url: 'https://wattclarity.com.au/' },
+      { label: 'RenewEconomy — ISP and planning coverage', url: 'https://reneweconomy.com.au/' },
+      { label: 'OpenElectricity — live generation and price data', url: 'https://openelectricity.org.au/' },
+      { label: 'Aurora Energy Research — long-run price forecasting', url: 'https://auroraer.com/' },
+      { label: 'Modo Energy — BESS and market analytics', url: 'https://modoenergy.com/' },
+      { label: 'Cornwall Insight Australia — PPA and market analysis', url: 'https://www.cornwall-insight.com/australia/' },
+    ]},
+  ],
+}
+
 // Module ordering — narrative arc from macro to technical to synthesis:
 //   1. Energy Transition (why the market is changing)
 //   2. Solar + BESS Story (the dominant new-build configuration)
@@ -949,6 +1147,7 @@ export const LEARNING_MODULES: LearningModule[] = [
   M_CONSTRAINTS,
   M_VALUING_PROJECTS,
   M_SUMMING_IT_UP,
+  M_NEM_PUBLICATIONS,
 ]
 
 export function getModule(id: string): LearningModule | undefined {
