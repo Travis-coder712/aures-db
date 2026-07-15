@@ -28,6 +28,14 @@
   },
   "timeline": [
     {
+      "date": "2024-10-01",
+      "date_precision": "month",
+      "event_type": "construction_start",
+      "title": "Solar + battery construction commenced",
+      "detail": "585 MWdc solar + 49 MW/562 MWh DC-coupled battery (first stage). DT Infrastructure EPC, CHINT batteries. Energisation late 2026.",
+      "sources": []
+    },
+    {
       "date": "2026-03-12",
       "date_precision": "day",
       "event_type": "cod_change",

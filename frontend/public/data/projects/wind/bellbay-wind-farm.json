@@ -14,9 +14,9 @@
   "has_syncon": false,
   "has_statcom": false,
   "has_harmonic_filter": false,
-  "data_confidence": "low",
-  "last_updated": "2026-03-10",
-  "last_verified": "2026-03-10",
+  "data_confidence": "medium",
+  "last_updated": "2026-07-16",
+  "last_verified": "2026-07-16",
   "aemo_gen_info_id": "2408",
   "confidence_score": "23",
   "development_stage": "planning_submitted",
@@ -35,10 +35,30 @@
   "cod_history": [],
   "suppliers": [],
   "offtakes": [],
-  "scheme_contracts": [],
+  "scheme_contracts": [
+    {
+      "scheme": "CIS",
+      "round": "Tender 4 \u2014 NEM Generation",
+      "capacity_mw": 224,
+      "source_url": "https://reneweconomy.com.au/solar-battery-hybrids-carry-the-day-as-chris-bowen-names-20-winners-of-6-5-gigawatt-cis-tender/",
+      "contract_type": "CISA (federal underwriting)"
+    }
+  ],
   "cost_sources": [],
   "stakeholder_issues": [],
   "sources": [
+    {
+      "title": "RE 10 Oct 2025 \u2014 Bell Bay Wind Farm named among 20 CIS Tender 4 winners (224 MW, Equis)",
+      "url": "https://reneweconomy.com.au/solar-battery-hybrids-carry-the-day-as-chris-bowen-names-20-winners-of-6-5-gigawatt-cis-tender/",
+      "date": "2025-10-10",
+      "source_tier": 2
+    },
+    {
+      "title": "EPA Tasmania \u2014 Bell Bay Wind Farm Major Project (Equis Wind (Australia) Projects (LHWF2) Pty Ltd)",
+      "url": "https://epa.tas.gov.au/business-industry/assessment/proposals-assessed-by-the-epa/equis-wind-(australia)-projects-(lhwf2)-pty-ltd-bell-bay-wind-farm-major-project-northeast-of-george-town",
+      "date": "2025-10-10",
+      "source_tier": 1
+    },
     {
       "title": "AEMO Generation Information Jan 2026",
       "url": "https://aemo.com.au/energy-systems/electricity/national-electricity-market-nem/nem-forecasting-and-planning/forecasting-and-planning-data/generation-information",

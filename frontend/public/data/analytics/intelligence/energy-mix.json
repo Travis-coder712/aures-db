@@ -1033,6 +1033,13 @@
       "state": "SA",
       "technology": "wind",
       "status": "construction",
+      "count": 1,
+      "mw": 274.0
+    },
+    {
+      "state": "SA",
+      "technology": "wind",
+      "status": "construction",
       "cod_year": "2029",
       "count": 1,
       "mw": 256.0
@@ -1041,8 +1048,8 @@
       "state": "SA",
       "technology": "wind",
       "status": "development",
-      "count": 5,
-      "mw": 2053.0
+      "count": 4,
+      "mw": 1893.0
     },
     {
       "state": "SA",
@@ -1720,5 +1727,5 @@
       }
     ]
   },
-  "exported_at": "2026-06-17T16:19:29.502927"
+  "exported_at": "2026-07-16T06:53:04.704164"
 }

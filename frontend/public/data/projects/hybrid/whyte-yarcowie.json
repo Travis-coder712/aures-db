@@ -15,9 +15,9 @@
   "has_syncon": false,
   "has_statcom": false,
   "has_harmonic_filter": false,
-  "data_confidence": "low",
-  "last_updated": "2026-05-25",
-  "last_verified": "2026-05-25",
+  "data_confidence": "medium",
+  "last_updated": "2026-07-16",
+  "last_verified": "2026-07-16",
   "aemo_gen_info_id": "1285",
   "confidence_score": "28",
   "development_stage": "planning_submitted",
@@ -55,6 +55,7 @@
       "source_tier": 1
     }
   ],
+  "operational_notes": "Ownership chain: Wind Prospect originated + developed on behalf of sister company WP Renewables Ltd. EDF Renewables Australia partnered with Wind Prospect with a view to acquiring the project (per Wind Prospect T7 announcement 23 May 2026). EDF holds the CISA counterparty for the 289 MW wind subset awarded in CIS T7. The 574 MW envelope + 1,000 MWh BESS is the developer-envelope future scope, not the T7 scope.",
   "timeline_events": [
     {
       "date": "2026-05-23",

@@ -1320,7 +1320,7 @@ export const OPEN_ROUNDS: OpenRound[] = [
     headline: 'The first NEM generation round NSW cannot win — contestable capacity shifts to QLD/SA/VIC/TAS, with a First Nations set-aside and a Victorian solar cap.',
     whatChanged: [
       { area: 'Region', detail: 'NSW EXCLUDED entirely — it hit its maximum CIS allocation across prior rounds (T7 was its last eligible round). NSW developers are redirected to the NSW Roadmap state tenders.' },
-      { area: 'Region', detail: 'New state shape: TAS ~300 MW; VIC ~1.6 GW with a 470 MW cap on solar-only Victorian projects (at Victoria’s request); ~3.1 GW contestable/unallocated (indicatively flowing to QLD & SA).' },
+      { area: 'Region', detail: 'New state shape: TAS **≥300 MW guaranteed MINIMUM**; VIC **≥1.6 GW guaranteed MINIMUM** (with a 470 MW cap on solar-only Victorian projects, at Victoria\'s request); **~3.1 GW contestable pool open to QLD, SA, AND to VIC/TAS projects above their state minimums**. So VIC and TAS wind can bid into TWO pools simultaneously — the state minimum plus the contestable pool.' },
       { area: 'Eligibility', detail: 'New First Nations 500 MW set-aside for projects committing to ≥5% First Nations equity and/or revenue sharing.' },
       { area: 'Process', detail: 'Two-stage → single-stage bidding (full merit + financial bid submitted together). Total tender ~9mo → ~6mo, compressing proponent prep to a ~6–8 week window.' },
       { area: 'Merit criteria', detail: 'Consolidated to 5 criteria. Commercial/CISA departures are NO LONGER scored (from Tender 5) — instead, unnecessary departures are an EXCLUSION risk. A credible end-2030 COD is now a hard merit lever.' },

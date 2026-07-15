@@ -1,11 +1,11 @@
 {
   "summary": {
-    "total_development_projects_scored": 781,
+    "total_development_projects_scored": 780,
     "projects_with_scheme_wins_excluded": 0,
     "band_counts": {
       "high": 2,
       "medium": 251,
-      "low": 455,
+      "low": 454,
       "very_low": 73
     }
   },
@@ -59,6 +59,31 @@
       "existing_wins_bonus": 0,
       "win_probability_score": 75,
       "band": "high"
+    },
+    {
+      "project_id": "barn-hill",
+      "name": "Barn Hill",
+      "technology": "wind",
+      "state": "SA",
+      "capacity_mw": 300.0,
+      "storage_mwh": null,
+      "developer": "AGL Energy",
+      "developer_grade": "A",
+      "cod_current": null,
+      "rez": null,
+      "development_stage": "epbc_approved",
+      "has_cod": false,
+      "has_rez": false,
+      "has_eis": false,
+      "existing_scheme_winner_developer": true,
+      "existing_wins_count": 2,
+      "grade_points": 30,
+      "tech_fit_points": 15,
+      "size_fit_points": 15,
+      "readiness_points": 0,
+      "existing_wins_bonus": 10,
+      "win_probability_score": 70,
+      "band": "medium"
     },
     {
       "project_id": "moorabool-bess",
@@ -5030,31 +5055,6 @@
       "grade_points": 22,
       "tech_fit_points": 20,
       "size_fit_points": 10,
-      "readiness_points": 5,
-      "existing_wins_bonus": 0,
-      "win_probability_score": 57,
-      "band": "medium"
-    },
-    {
-      "project_id": "palmer-wind-farm",
-      "name": "Palmer Wind Farm",
-      "technology": "wind",
-      "state": "SA",
-      "capacity_mw": 274.0,
-      "storage_mwh": null,
-      "developer": "Tilt Renewables Australia Pty Ltd",
-      "developer_grade": "B",
-      "cod_current": null,
-      "rez": null,
-      "development_stage": "planning_submitted",
-      "has_cod": false,
-      "has_rez": false,
-      "has_eis": false,
-      "existing_scheme_winner_developer": false,
-      "existing_wins_count": 0,
-      "grade_points": 22,
-      "tech_fit_points": 15,
-      "size_fit_points": 15,
       "readiness_points": 5,
       "existing_wins_bonus": 0,
       "win_probability_score": 57,
@@ -14336,31 +14336,6 @@
       "band": "low"
     },
     {
-      "project_id": "barn-hill",
-      "name": "Barn Hill",
-      "technology": "wind",
-      "state": "SA",
-      "capacity_mw": 186.0,
-      "storage_mwh": null,
-      "developer": "Barn HIll Wind Farm Pty Ltd",
-      "developer_grade": null,
-      "cod_current": null,
-      "rez": null,
-      "development_stage": "epbc_approved",
-      "has_cod": false,
-      "has_rez": false,
-      "has_eis": false,
-      "existing_scheme_winner_developer": false,
-      "existing_wins_count": 0,
-      "grade_points": 10,
-      "tech_fit_points": 15,
-      "size_fit_points": 15,
-      "readiness_points": 0,
-      "existing_wins_bonus": 0,
-      "win_probability_score": 40,
-      "band": "low"
-    },
-    {
       "project_id": "barn-hill-bess",
       "name": "Barn Hill BESS",
       "technology": "bess",
@@ -19544,6 +19519,13 @@
       "high_band_pct": 0.5,
       "total_mw": 115796.4
     },
+    "wind": {
+      "count": 120,
+      "avg_score": 44.7,
+      "high_band_count": 0,
+      "high_band_pct": 0.0,
+      "total_mw": 67875.3
+    },
     "hybrid": {
       "count": 105,
       "avg_score": 52.0,
@@ -19557,13 +19539,6 @@
       "high_band_count": 0,
       "high_band_pct": 0.0,
       "total_mw": 18058.0
-    },
-    "wind": {
-      "count": 121,
-      "avg_score": 44.5,
-      "high_band_count": 0,
-      "high_band_pct": 0.0,
-      "total_mw": 68035.3
     },
     "solar": {
       "count": 135,
@@ -19587,6 +19562,12 @@
       "high_band_pct": 0.8,
       "total_mw": 112782.5
     },
+    "SA": {
+      "count": 77,
+      "high_band_count": 0,
+      "high_band_pct": 0.0,
+      "total_mw": 19906.2
+    },
     "VIC": {
       "count": 148,
       "high_band_count": 0,
@@ -19604,12 +19585,6 @@
       "high_band_count": 0,
       "high_band_pct": 0.0,
       "total_mw": 10962.4
-    },
-    "SA": {
-      "count": 78,
-      "high_band_count": 0,
-      "high_band_pct": 0.0,
-      "total_mw": 20066.2
     }
   },
   "scoring_model": {
@@ -19648,5 +19623,5 @@
       "very_low": "< 35"
     }
   },
-  "exported_at": "2026-06-17T16:17:45.427345"
+  "exported_at": "2026-07-16T06:44:24.762408"
 }

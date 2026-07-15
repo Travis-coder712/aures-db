@@ -333,29 +333,6 @@
       }
     },
     {
-      "developer": "AGL Energy",
-      "project_count": 3,
-      "total_mw": 1203.0,
-      "technologies": [
-        "bess",
-        "wind"
-      ],
-      "operating": 2,
-      "withdrawn": 0,
-      "completion_rate": 66.7,
-      "avg_drift_months": 0.0,
-      "on_time_pct": 100.0,
-      "execution_score": 90.0,
-      "grade": "A",
-      "drift_stats": {
-        "count": 3,
-        "mean": 0.0,
-        "median": 0,
-        "p25": 0,
-        "p75": 0
-      }
-    },
-    {
       "developer": "CS Energy",
       "project_count": 3,
       "total_mw": 585.0,
@@ -467,6 +444,29 @@
         "count": 2,
         "mean": 0.0,
         "median": 0.0,
+        "p25": 0,
+        "p75": 0
+      }
+    },
+    {
+      "developer": "AGL Energy",
+      "project_count": 4,
+      "total_mw": 1503.0,
+      "technologies": [
+        "bess",
+        "wind"
+      ],
+      "operating": 2,
+      "withdrawn": 0,
+      "completion_rate": 50.0,
+      "avg_drift_months": 0.0,
+      "on_time_pct": 100.0,
+      "execution_score": 85.0,
+      "grade": "A",
+      "drift_stats": {
+        "count": 3,
+        "mean": 0.0,
+        "median": 0,
         "p25": 0,
         "p75": 0
       }
@@ -3015,5 +3015,5 @@
     "F": 50
   },
   "total_developers": 152,
-  "exported_at": "2026-06-17T16:19:29.510372"
+  "exported_at": "2026-07-16T06:53:04.711056"
 }

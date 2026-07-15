@@ -520,7 +520,8 @@
       },
       "by_status": {
         "operating": 2,
-        "development": 5
+        "development": 4,
+        "construction": 1
       },
       "states": [
         "NSW",
@@ -1474,6 +1475,34 @@
       ]
     },
     {
+      "slug": "agl-energy",
+      "name": "AGL Energy",
+      "project_count": 4,
+      "total_capacity_mw": 1503.0,
+      "total_storage_mwh": 1249.6,
+      "by_technology": {
+        "wind": 2,
+        "bess": 2
+      },
+      "by_status": {
+        "development": 1,
+        "operating": 2,
+        "commissioning": 1
+      },
+      "states": [
+        "NSW",
+        "QLD",
+        "SA"
+      ],
+      "avg_confidence": "good",
+      "project_ids": [
+        "liddell-bess",
+        "coopers-gap-wind-farm",
+        "barn-hill",
+        "torrens-island-bess"
+      ]
+    },
+    {
       "slug": "hydro-tasmania",
       "name": "Hydro Tasmania",
       "project_count": 2,
@@ -1961,32 +1990,6 @@
       "project_ids": [
         "south-nanango-bess",
         "wamuran-bess-kci"
-      ]
-    },
-    {
-      "slug": "agl-energy",
-      "name": "AGL Energy",
-      "project_count": 3,
-      "total_capacity_mw": 1203.0,
-      "total_storage_mwh": 1249.6,
-      "by_technology": {
-        "wind": 1,
-        "bess": 2
-      },
-      "by_status": {
-        "operating": 2,
-        "commissioning": 1
-      },
-      "states": [
-        "NSW",
-        "QLD",
-        "SA"
-      ],
-      "avg_confidence": "good",
-      "project_ids": [
-        "liddell-bess",
-        "coopers-gap-wind-farm",
-        "torrens-island-bess"
       ]
     },
     {
@@ -8720,7 +8723,7 @@
       "states": [
         "TAS"
       ],
-      "avg_confidence": "low",
+      "avg_confidence": "medium",
       "project_ids": [
         "bellbay-wind-farm"
       ]
@@ -9765,26 +9768,6 @@
       "avg_confidence": "low",
       "project_ids": [
         "tarraleah-redevelopment"
-      ]
-    },
-    {
-      "slug": "barn-hill-wind-farm",
-      "name": "Barn HIll Wind Farm Pty Ltd",
-      "project_count": 1,
-      "total_capacity_mw": 186.0,
-      "total_storage_mwh": 0,
-      "by_technology": {
-        "wind": 1
-      },
-      "by_status": {
-        "development": 1
-      },
-      "states": [
-        "SA"
-      ],
-      "avg_confidence": "low",
-      "project_ids": [
-        "barn-hill"
       ]
     },
     {
@@ -14714,7 +14697,7 @@
       ]
     }
   ],
-  "total_developers": 707,
+  "total_developers": 706,
   "grouped_developers": [
     {
       "slug": "acen",
@@ -15039,6 +15022,65 @@
       ]
     },
     {
+      "slug": "agl-energy",
+      "name": "AGL Energy",
+      "aliases": [
+        "AGL",
+        "AGL Energy",
+        "AGL Energy Limited",
+        "AGL Hydro Partnership",
+        "FIrm Power P/L",
+        "firmpower_NR"
+      ],
+      "project_count": 23,
+      "total_capacity_mw": 6183.0,
+      "total_storage_mwh": 15118.2,
+      "by_technology": {
+        "bess": 14,
+        "wind": 2,
+        "pumped_hydro": 5,
+        "solar": 2
+      },
+      "by_status": {
+        "construction": 1,
+        "development": 15,
+        "operating": 6,
+        "commissioning": 1
+      },
+      "states": [
+        "NSW",
+        "QLD",
+        "SA",
+        "VIC"
+      ],
+      "avg_confidence": "medium",
+      "project_ids": [
+        "tomago-bess",
+        "liddell-bess",
+        "madeline-downs-bess",
+        "woodstock-bess",
+        "coopers-gap-wind-farm",
+        "muswellbrook-pumped-hydro",
+        "kangaroo-valley-bess",
+        "barn-hill",
+        "bogong-mackay",
+        "wellington-north-solar-farm",
+        "barn-hill-bess",
+        "torrens-island-bess",
+        "blackstone-bess",
+        "yadnarie-solar-farm",
+        "dartmouth",
+        "beresfield-bess",
+        "muswellbrook-bess",
+        "abermain-bess",
+        "eildon",
+        "glen-inness-bess-kci",
+        "murrumburrah-bess-kci",
+        "west-kiewa",
+        "awaba-bess"
+      ]
+    },
+    {
       "slug": "squadron-energy",
       "name": "Squadron Energy",
       "aliases": [
@@ -15073,64 +15115,6 @@
         "uungula-bess",
         "koorakee-wind-farm",
         "jeremiah-wind-farm"
-      ]
-    },
-    {
-      "slug": "agl-energy",
-      "name": "AGL Energy",
-      "aliases": [
-        "AGL",
-        "AGL Energy",
-        "AGL Energy Limited",
-        "AGL Hydro Partnership",
-        "FIrm Power P/L",
-        "firmpower_NR"
-      ],
-      "project_count": 22,
-      "total_capacity_mw": 5883.0,
-      "total_storage_mwh": 15118.2,
-      "by_technology": {
-        "bess": 14,
-        "wind": 1,
-        "pumped_hydro": 5,
-        "solar": 2
-      },
-      "by_status": {
-        "construction": 1,
-        "operating": 6,
-        "commissioning": 1,
-        "development": 14
-      },
-      "states": [
-        "NSW",
-        "QLD",
-        "SA",
-        "VIC"
-      ],
-      "avg_confidence": "medium",
-      "project_ids": [
-        "tomago-bess",
-        "liddell-bess",
-        "madeline-downs-bess",
-        "woodstock-bess",
-        "coopers-gap-wind-farm",
-        "muswellbrook-pumped-hydro",
-        "kangaroo-valley-bess",
-        "bogong-mackay",
-        "wellington-north-solar-farm",
-        "barn-hill-bess",
-        "torrens-island-bess",
-        "blackstone-bess",
-        "yadnarie-solar-farm",
-        "dartmouth",
-        "beresfield-bess",
-        "muswellbrook-bess",
-        "abermain-bess",
-        "eildon",
-        "glen-inness-bess-kci",
-        "murrumburrah-bess-kci",
-        "west-kiewa",
-        "awaba-bess"
       ]
     },
     {
@@ -15219,7 +15203,8 @@
       },
       "by_status": {
         "operating": 3,
-        "development": 9
+        "development": 8,
+        "construction": 1
       },
       "states": [
         "NSW",
@@ -22849,27 +22834,6 @@
       "aliases": []
     },
     {
-      "slug": "barn-hill-wind-farm",
-      "name": "Barn HIll Wind Farm Pty Ltd",
-      "project_count": 1,
-      "total_capacity_mw": 186.0,
-      "total_storage_mwh": 0,
-      "by_technology": {
-        "wind": 1
-      },
-      "by_status": {
-        "development": 1
-      },
-      "states": [
-        "SA"
-      ],
-      "avg_confidence": "low",
-      "project_ids": [
-        "barn-hill"
-      ],
-      "aliases": []
-    },
-    {
       "slug": "edify-energy-sosteneo",
       "name": "Edify Energy (Sosteneo)",
       "project_count": 1,
@@ -27173,7 +27137,7 @@
       "aliases": []
     }
   ],
-  "total_grouped": 537,
+  "total_grouped": 536,
   "top_developers": [
     {
       "slug": "acen",
@@ -27188,7 +27152,7 @@
     {
       "slug": "agl-energy",
       "name": "AGL Energy",
-      "project_count": 22
+      "project_count": 23
     },
     {
       "slug": "edify-energy",

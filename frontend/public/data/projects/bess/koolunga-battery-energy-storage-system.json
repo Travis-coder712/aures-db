@@ -30,6 +30,14 @@
       "title": "COD estimate updated",
       "detail": "COD changed from 2028-01 to 2028-01-01 (source: AEMO Generation Information)",
       "sources": []
+    },
+    {
+      "date": "2026-04-01",
+      "date_precision": "month",
+      "event_type": "construction_start",
+      "title": "EPC awarded \u2014 GenusPlus AU$110M",
+      "detail": "200 MW / 800 MWh. All approvals complete. Completion Sep 2027. 275kV Brinkworth connection.",
+      "sources": []
     }
   ],
   "ownership_history": [],

@@ -6,7 +6,7 @@
       "round": "CIS Pilot \u2014 NSW",
       "type": "dispatchable",
       "announced_date": "2023-11-23",
-      "months_since_announced": 31,
+      "months_since_announced": 32,
       "total_capacity_mw": 1325,
       "total_storage_mwh": 2390,
       "num_projects": 6,
@@ -124,7 +124,7 @@
       "round": "CIS Pilot \u2014 SA/VIC",
       "type": "dispatchable",
       "announced_date": "2024-09-04",
-      "months_since_announced": 21,
+      "months_since_announced": 22,
       "total_capacity_mw": 995,
       "total_storage_mwh": 3626,
       "num_projects": 6,
@@ -149,9 +149,10 @@
           "state": "VIC",
           "status": "construction",
           "stage": "construction",
-          "construction_start": "2025-03-01",
+          "fid_date": "2025-02-01",
+          "construction_start": "2025-02-15",
           "cod_current": "2027-12-31",
-          "dev_status": "construction",
+          "dev_status": "FID reached",
           "annotations": []
         },
         {
@@ -248,13 +249,13 @@
       "round": "Tender 1 \u2014 NEM Generation",
       "type": "generation",
       "announced_date": "2024-12-11",
-      "months_since_announced": 18,
+      "months_since_announced": 19,
       "total_capacity_mw": 6375,
       "total_storage_mwh": 3553,
       "num_projects": 19,
       "by_stage": {
-        "development": 17,
-        "construction": 1,
+        "development": 16,
+        "construction": 2,
         "operating": 1
       },
       "by_state": {
@@ -345,8 +346,9 @@
           "state": "NSW",
           "status": "construction",
           "stage": "construction",
+          "construction_start": "2024-10-01",
           "cod_current": "2027-03-31",
-          "dev_status": "on track",
+          "dev_status": "construction",
           "annotations": []
         },
         {
@@ -519,9 +521,10 @@
           "technology": "wind",
           "capacity_mw": 274,
           "state": "SA",
-          "status": "development",
-          "stage": "development",
-          "dev_status": "on track",
+          "status": "construction",
+          "stage": "construction",
+          "fid_date": "2026-01-08",
+          "dev_status": "FID reached",
           "annotations": [],
           "developer_grade": "B"
         },
@@ -610,7 +613,7 @@
       "round": "Tender 2 \u2014 WEM Dispatchable",
       "type": "dispatchable",
       "announced_date": "2025-03-20",
-      "months_since_announced": 15,
+      "months_since_announced": 16,
       "total_capacity_mw": 654,
       "total_storage_mwh": 2595,
       "num_projects": 4,
@@ -702,7 +705,7 @@
       "round": "Tender 3 \u2014 NEM Dispatchable",
       "type": "dispatchable",
       "announced_date": "2025-09-17",
-      "months_since_announced": 9,
+      "months_since_announced": 10,
       "total_capacity_mw": 4130,
       "total_storage_mwh": 15371,
       "num_projects": 16,
@@ -754,9 +757,10 @@
           "state": "NSW",
           "status": "construction",
           "stage": "construction",
+          "fid_date": "2025-03-01",
           "construction_start": "2025-03-01",
           "cod_current": "2026-12-31",
-          "dev_status": "construction",
+          "dev_status": "FID reached",
           "annotations": [],
           "developer_grade": "B"
         },
@@ -1006,8 +1010,9 @@
           "state": "SA",
           "status": "development",
           "stage": "development",
+          "construction_start": "2026-04-01",
           "cod_current": "2028-01-01",
-          "dev_status": "environmental pending",
+          "dev_status": "construction",
           "annotations": [
             {
               "flag": "environmental pending",
@@ -1026,8 +1031,9 @@
           "state": "SA",
           "status": "development",
           "stage": "development",
+          "fid_date": "2025-07-01",
           "cod_current": "2028-02-29",
-          "dev_status": "pre-planning",
+          "dev_status": "FID reached",
           "annotations": [
             {
               "flag": "pre-planning",
@@ -1049,7 +1055,7 @@
       "round": "Tender 4 \u2014 NEM Generation",
       "type": "generation",
       "announced_date": "2025-10-09",
-      "months_since_announced": 8,
+      "months_since_announced": 9,
       "total_capacity_mw": 6640,
       "total_storage_mwh": 11444,
       "num_projects": 20,
@@ -1461,7 +1467,7 @@
       "round": "Round 1 \u2014 Generation + LDS",
       "type": "mixed",
       "announced_date": "2023-05-03",
-      "months_since_announced": 37,
+      "months_since_announced": 38,
       "total_capacity_mw": 1445,
       "total_storage_mwh": 400,
       "num_projects": 4,
@@ -1544,7 +1550,7 @@
       "round": "Round 2 \u2014 Firming",
       "type": "firming",
       "announced_date": "2023-11-22",
-      "months_since_announced": 31,
+      "months_since_announced": 32,
       "total_capacity_mw": 575,
       "total_storage_mwh": 1790,
       "num_projects": 3,
@@ -1612,7 +1618,7 @@
       "round": "Round 3 \u2014 Generation + LDS",
       "type": "mixed",
       "announced_date": "2023-12-19",
-      "months_since_announced": 30,
+      "months_since_announced": 31,
       "total_capacity_mw": 1274,
       "total_storage_mwh": 4192,
       "num_projects": 5,
@@ -1729,7 +1735,7 @@
       "round": "Round 4 \u2014 Generation",
       "type": "generation",
       "announced_date": "2024-07-01",
-      "months_since_announced": 23,
+      "months_since_announced": 24,
       "total_capacity_mw": 317,
       "total_storage_mwh": 372,
       "num_projects": 2,
@@ -1783,7 +1789,7 @@
       "round": "Round 5 \u2014 Long Duration Storage",
       "type": "lds",
       "announced_date": "2025-02-27",
-      "months_since_announced": 16,
+      "months_since_announced": 17,
       "total_capacity_mw": 1025,
       "total_storage_mwh": 13790,
       "num_projects": 3,
@@ -1856,7 +1862,7 @@
       "round": "Round 6 \u2014 Long Duration Storage",
       "type": "lds",
       "announced_date": "2026-02-05",
-      "months_since_announced": 4,
+      "months_since_announced": 5,
       "total_capacity_mw": 1171,
       "total_storage_mwh": 11980,
       "num_projects": 6,
@@ -1986,14 +1992,14 @@
         "mw": 1811.0
       },
       "construction": {
-        "count": 7,
-        "mw": 1847.0
+        "count": 8,
+        "mw": 2121.0
       },
       "development": {
-        "count": 62,
-        "mw": 18497.0
+        "count": 61,
+        "mw": 18223.0
       }
     }
   },
-  "exported_at": "2026-06-17T16:17:45.399574"
+  "exported_at": "2026-07-16T06:44:24.735559"
 }

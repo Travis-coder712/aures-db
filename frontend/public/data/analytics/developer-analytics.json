@@ -3662,14 +3662,47 @@
         "drift_months": 0.0
       }
     ],
-    "Barn HIll Wind Farm Pty Ltd": [
+    "AGL Energy": [
+      {
+        "id": "coopers-gap-wind-farm",
+        "name": "Coopers Gap Wind Farm",
+        "technology": "wind",
+        "state": "QLD",
+        "status": "operating",
+        "capacity_mw": 453.0,
+        "cod_current": "2019-06-23",
+        "cod_original": "2019-06-23",
+        "drift_months": 0.0
+      },
+      {
+        "id": "torrens-island-bess",
+        "name": "Torrens Island BESS",
+        "technology": "bess",
+        "state": "SA",
+        "status": "operating",
+        "capacity_mw": 250.0,
+        "cod_current": "2023-04-25",
+        "cod_original": "2023-04-25",
+        "drift_months": 0.0
+      },
+      {
+        "id": "liddell-bess",
+        "name": "Liddell BESS",
+        "technology": "bess",
+        "state": "NSW",
+        "status": "commissioning",
+        "capacity_mw": 500.0,
+        "cod_current": "2026-02-20",
+        "cod_original": "2026-02-20",
+        "drift_months": 0.0
+      },
       {
         "id": "barn-hill",
         "name": "Barn Hill",
         "technology": "wind",
         "state": "SA",
         "status": "development",
-        "capacity_mw": 186.0,
+        "capacity_mw": 300.0,
         "cod_current": null,
         "cod_original": null,
         "drift_months": null
@@ -5194,7 +5227,7 @@
         "name": "Palmer Wind Farm",
         "technology": "wind",
         "state": "SA",
-        "status": "development",
+        "status": "construction",
         "capacity_mw": 274.0,
         "cod_current": null,
         "cod_original": null,
@@ -7208,41 +7241,6 @@
         "capacity_mw": 264.0,
         "cod_current": "2030-12-01",
         "cod_original": "2030-12-01",
-        "drift_months": 0.0
-      }
-    ],
-    "AGL Energy": [
-      {
-        "id": "coopers-gap-wind-farm",
-        "name": "Coopers Gap Wind Farm",
-        "technology": "wind",
-        "state": "QLD",
-        "status": "operating",
-        "capacity_mw": 453.0,
-        "cod_current": "2019-06-23",
-        "cod_original": "2019-06-23",
-        "drift_months": 0.0
-      },
-      {
-        "id": "torrens-island-bess",
-        "name": "Torrens Island BESS",
-        "technology": "bess",
-        "state": "SA",
-        "status": "operating",
-        "capacity_mw": 250.0,
-        "cod_current": "2023-04-25",
-        "cod_original": "2023-04-25",
-        "drift_months": 0.0
-      },
-      {
-        "id": "liddell-bess",
-        "name": "Liddell BESS",
-        "technology": "bess",
-        "state": "NSW",
-        "status": "commissioning",
-        "capacity_mw": 500.0,
-        "cod_current": "2026-02-20",
-        "cod_original": "2026-02-20",
         "drift_months": 0.0
       }
     ],
@@ -33781,5 +33779,5 @@
       }
     ]
   },
-  "exported_at": "2026-06-17T16:17:45.220886"
+  "exported_at": "2026-07-16T06:44:24.546762"
 }

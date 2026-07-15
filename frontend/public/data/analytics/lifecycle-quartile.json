@@ -362,37 +362,37 @@
       "technology": "wind",
       "state": "SA",
       "stage": "construction",
-      "project_count": 1,
-      "total_mw": 256.0,
-      "avg_score": 105.0,
+      "project_count": 2,
+      "total_mw": 530.0,
+      "avg_score": 91.2,
       "quartile_counts": {
         "1": 0,
-        "2": 1,
+        "2": 2,
         "3": 0,
         "4": 0
       },
       "q1_pct": 0.0,
       "project_ids": [
-        "carmodys-hill-wind-farm"
+        "carmodys-hill-wind-farm",
+        "palmer-wind-farm"
       ]
     },
     {
       "technology": "wind",
       "state": "SA",
       "stage": "development",
-      "project_count": 6,
-      "total_mw": 2653.0,
+      "project_count": 5,
+      "total_mw": 2493.0,
       "avg_score": 35.0,
       "quartile_counts": {
-        "1": 2,
-        "2": 2,
-        "3": 0,
-        "4": 2
+        "1": 3,
+        "2": 0,
+        "3": 1,
+        "4": 1
       },
-      "q1_pct": 33.0,
+      "q1_pct": 60.0,
       "project_ids": [
         "nonowie-wind-farm",
-        "palmer-wind-farm",
         "goyder-north-wind-farm",
         "lincoln-gap-wind-farm-stage-3",
         "hughes-gap-wf-kci",
@@ -505,7 +505,7 @@
       "stage": "construction",
       "project_count": 2,
       "total_mw": 498.7,
-      "avg_score": 95.0,
+      "avg_score": 100.0,
       "quartile_counts": {
         "1": 0,
         "2": 2,
@@ -514,8 +514,8 @@
       },
       "q1_pct": 0.0,
       "project_ids": [
-        "wagga-north-solar-farm",
-        "goulburn-river-solar-farm-and-bess"
+        "goulburn-river-solar-farm-and-bess",
+        "wagga-north-solar-farm"
       ]
     },
     {
@@ -2124,16 +2124,16 @@
     {
       "technology": "wind",
       "stage": "construction",
-      "count": 10,
-      "mw": 6634.0,
+      "count": 11,
+      "mw": 6908.0,
       "q1": 2
     },
     {
       "technology": "wind",
       "stage": "development",
-      "count": 121,
-      "mw": 68035.3,
-      "q1": 38
+      "count": 120,
+      "mw": 67875.3,
+      "q1": 39
     },
     {
       "technology": "solar",
@@ -2301,16 +2301,16 @@
     {
       "state": "SA",
       "stage": "construction",
-      "count": 9,
-      "mw": 1639.5,
+      "count": 10,
+      "mw": 1913.5,
       "q1": 2
     },
     {
       "state": "SA",
       "stage": "development",
-      "count": 78,
-      "mw": 20066.2,
-      "q1": 26
+      "count": 77,
+      "mw": 19906.2,
+      "q1": 27
     },
     {
       "state": "TAS",
@@ -6417,9 +6417,9 @@
       "stage_group": "construction",
       "capacity_mw": 450.0,
       "developer": "Goulburn River Fund Pty Ltd",
-      "score": 95.0,
+      "score": 105.0,
       "drift_months": 0.0,
-      "construction_started": null,
+      "construction_started": "2024-10-01",
       "developer_grade": null,
       "score_basis": "100 \u2212 |drift months|\u00d71.5 \u2212 10 (no construction_start) + developer grade\u00d72.5",
       "quartile": 2
@@ -6551,6 +6551,22 @@
       "developer_grade": null,
       "score_basis": "100 \u2212 |drift months|\u00d71.5 \u2212 10 (no construction_start) + developer grade\u00d72.5",
       "quartile": 3
+    },
+    "palmer-wind-farm": {
+      "id": "palmer-wind-farm",
+      "name": "Palmer Wind Farm",
+      "technology": "wind",
+      "state": "SA",
+      "status": "construction",
+      "stage_group": "construction",
+      "capacity_mw": 274.0,
+      "developer": "Tilt Renewables Australia Pty Ltd",
+      "score": 77.5,
+      "drift_months": null,
+      "construction_started": null,
+      "developer_grade": "B",
+      "score_basis": "100 \u2212 |drift months|\u00d71.5 \u2212 10 (no construction_start) + developer grade\u00d72.5",
+      "quartile": 2
     },
     "pelican-point-bess": {
       "id": "pelican-point-bess",
@@ -6755,7 +6771,7 @@
       "developer": "EnergyAustralia",
       "score": 105.0,
       "drift_months": 0.0,
-      "construction_started": "2025-03-01",
+      "construction_started": "2025-02-15",
       "developer_grade": null,
       "score_basis": "100 \u2212 |drift months|\u00d71.5 \u2212 10 (no construction_start) + developer grade\u00d72.5",
       "quartile": 2
@@ -7337,15 +7353,15 @@
       "state": "SA",
       "status": "development",
       "stage_group": "development",
-      "capacity_mw": 186.0,
-      "developer": "Barn HIll Wind Farm Pty Ltd",
-      "score": 10,
+      "capacity_mw": 300.0,
+      "developer": "AGL Energy",
+      "score": 20,
       "development_stage": "epbc_approved",
       "has_cod": false,
       "has_rez": false,
       "has_scheme": false,
       "has_eis": false,
-      "developer_grade": null,
+      "developer_grade": "A",
       "score_basis": "stage (\u00d715) + has_cod (15) + has_rez (10) + scheme (20) + EIS (15) + developer grade (\u00d75); max 110",
       "quartile": 4
     },
@@ -12002,7 +12018,7 @@
       "has_eis": false,
       "developer_grade": null,
       "score_basis": "stage (\u00d715) + has_cod (15) + has_rez (10) + scheme (20) + EIS (15) + developer grade (\u00d75); max 110",
-      "quartile": 2
+      "quartile": 1
     },
     "grahamvale-bess-kci": {
       "id": "grahamvale-bess-kci",
@@ -13104,7 +13120,7 @@
       "has_eis": false,
       "developer_grade": "F",
       "score_basis": "stage (\u00d715) + has_cod (15) + has_rez (10) + scheme (20) + EIS (15) + developer grade (\u00d75); max 110",
-      "quartile": 4
+      "quartile": 3
     },
     "hughes-road-bess": {
       "id": "hughes-road-bess",
@@ -14168,7 +14184,7 @@
       "has_eis": false,
       "developer_grade": null,
       "score_basis": "stage (\u00d715) + has_cod (15) + has_rez (10) + scheme (20) + EIS (15) + developer grade (\u00d75); max 110",
-      "quartile": 2
+      "quartile": 1
     },
     "lindley-bess": {
       "id": "lindley-bess",
@@ -16772,25 +16788,6 @@
       "developer_grade": null,
       "score_basis": "stage (\u00d715) + has_cod (15) + has_rez (10) + scheme (20) + EIS (15) + developer grade (\u00d75); max 110",
       "quartile": 3
-    },
-    "palmer-wind-farm": {
-      "id": "palmer-wind-farm",
-      "name": "Palmer Wind Farm",
-      "technology": "wind",
-      "state": "SA",
-      "status": "development",
-      "stage_group": "development",
-      "capacity_mw": 274.0,
-      "developer": "Tilt Renewables Australia Pty Ltd",
-      "score": 45,
-      "development_stage": "planning_submitted",
-      "has_cod": false,
-      "has_rez": false,
-      "has_scheme": false,
-      "has_eis": false,
-      "developer_grade": "B",
-      "score_basis": "stage (\u00d715) + has_cod (15) + has_rez (10) + scheme (20) + EIS (15) + developer grade (\u00d75); max 110",
-      "quartile": 1
     },
     "palmerston-bess-akaysha": {
       "id": "palmerston-bess-akaysha",
@@ -21603,8 +21600,8 @@
   "summary": {
     "total_cells": 62,
     "operating_count": 221,
-    "construction_count": 56,
-    "development_count": 781,
+    "construction_count": 57,
+    "development_count": 780,
     "matrix_techs": [
       "wind",
       "solar",
@@ -21622,5 +21619,5 @@
       "WA"
     ]
   },
-  "exported_at": "2026-06-17T16:17:45.245332"
+  "exported_at": "2026-07-16T06:44:24.570189"
 }

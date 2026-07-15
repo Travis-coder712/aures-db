@@ -91,7 +91,7 @@
       "url": "https://nemweb.com.au",
       "frequency": "daily",
       "script": "import_nemweb_bids.py",
-      "last_run": "2026-06-22",
+      "last_run": "2026-05-31",
       "last_status": "completed",
       "records_imported": 141868,
       "records_updated": 0,
@@ -128,13 +128,13 @@
     },
     {
       "id": "market_prices",
-      "name": "NEM Contract Prices",
-      "description": "NEM wholesale spot prices, ASX base + $300 cap contract settlement prices, and forward curve data by state. Curated from AEMO QED, AER, ASX Energy, Leading Edge Energy. Powers Battery Market Intelligence and QLD Briefing.",
-      "url": "https://www.asxenergy.com.au",
-      "frequency": "quarterly",
-      "script": "manual curation — nem-contract-prices.json",
-      "last_run": "2026-06-22",
-      "last_status": "completed",
+      "name": "AEMO Market Prices",
+      "description": "Regional reference prices from AEMO dispatch, used as the revenue backstop when OpenElectricity data is incomplete.",
+      "url": "https://aemo.com.au",
+      "frequency": "monthly",
+      "script": "import_market_prices.py",
+      "last_run": null,
+      "last_status": "never",
       "records_imported": 0,
       "records_updated": 0,
       "records_new": 0,
@@ -147,7 +147,7 @@
       "url": "",
       "frequency": "ad_hoc",
       "script": "exporters/export_json.py",
-      "last_run": "2026-06-17T16:17:45.376638",
+      "last_run": "2026-07-16T06:44:24.712348",
       "last_status": "completed",
       "records_imported": 0,
       "records_updated": 0,
@@ -161,5 +161,5 @@
     "total_oems_contractors": 133,
     "operating_projects": 227
   },
-  "exported_at": "2026-06-17T16:17:45.376735"
+  "exported_at": "2026-07-16T06:44:24.712452"
 }

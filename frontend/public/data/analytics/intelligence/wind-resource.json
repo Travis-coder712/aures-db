@@ -1114,7 +1114,7 @@
       "project_id": "barn-hill",
       "name": "Barn Hill",
       "state": "SA",
-      "capacity_mw": 186.0,
+      "capacity_mw": 300.0,
       "predicted_cf_pct": 25.7,
       "predicted_rating": "Average",
       "basis": "state_average"
@@ -2229,5 +2229,5 @@
   ],
   "total_operating": 80,
   "total_development": 128,
-  "exported_at": "2026-06-17T16:17:45.407756"
+  "exported_at": "2026-07-16T06:44:24.743460"
 }

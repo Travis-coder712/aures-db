@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-17T16:19:29.545645",
+  "generated_at": "2026-07-16T06:53:04.745116",
   "months": [
     {
       "month": "2027-06",
@@ -46,12 +46,69 @@
       }
     },
     {
-      "month": "2026-03",
+      "month": "2026-04",
       "sections": {
         "development": [],
         "govt_programs": [],
         "rez_progress": [],
-        "construction": [],
+        "construction": [
+          {
+            "project_id": "koolunga-battery-energy-storage-system",
+            "project_name": "Koolunga Battery Energy Storage System",
+            "technology": "bess",
+            "state": "SA",
+            "capacity_mw": 200.0,
+            "event_type": "construction_start",
+            "title": "EPC awarded \u2014 GenusPlus AU$110M",
+            "detail": "200 MW / 800 MWh. All approvals complete. Completion Sep 2027. 275kV Brinkworth connection.",
+            "date": "2026-04-01"
+          }
+        ],
+        "operational": []
+      }
+    },
+    {
+      "month": "2026-03",
+      "sections": {
+        "development": [
+          {
+            "project_id": "ganymirra-solar-power-station",
+            "project_name": "Ganymirra Solar Power Station",
+            "technology": "hybrid",
+            "state": "QLD",
+            "capacity_mw": 150.0,
+            "event_type": "notable",
+            "title": "EPC contractor appointed \u2014 DT Infrastructure",
+            "detail": "150 MW solar + 600 MWh BESS. Combined with Majors Creek. Construction H1 2026, ops 2028.",
+            "date": "2026-03-01"
+          },
+          {
+            "project_id": "majors-creek-solar-power-station",
+            "project_name": "Majors Creek Solar Power Station",
+            "technology": "hybrid",
+            "state": "QLD",
+            "capacity_mw": 150.0,
+            "event_type": "notable",
+            "title": "EPC contractor appointed \u2014 DT Infrastructure",
+            "detail": "150 MW solar + 600 MWh BESS. Combined project with Ganymirra. ~420 jobs, AU$450m+. Construction H1 2026, ops 2028.",
+            "date": "2026-03-01"
+          }
+        ],
+        "govt_programs": [],
+        "rez_progress": [],
+        "construction": [
+          {
+            "project_id": "liddell-bess",
+            "project_name": "Liddell BESS",
+            "technology": "bess",
+            "state": "NSW",
+            "capacity_mw": 500.0,
+            "event_type": "commissioning",
+            "title": "Construction completed \u2014 commissioning begins",
+            "detail": "500 MW / 1,000 MWh. Grid-forming inverters. First 250 MW commissioning started Mar 2026. EPC: Fluence. Cost ~$750M. Full ops expected Jul 2026.",
+            "date": "2026-03-01"
+          }
+        ],
         "operational": [
           {
             "project_id": "star-of-the-south-wind-farm",
@@ -4481,7 +4538,19 @@
     {
       "month": "2026-02",
       "sections": {
-        "development": [],
+        "development": [
+          {
+            "project_id": "goyder-north-wind-farm",
+            "project_name": "Goyder North Wind Farm",
+            "technology": "wind",
+            "state": "SA",
+            "capacity_mw": 600.0,
+            "event_type": "planning_approved",
+            "title": "EPBC approval received",
+            "detail": "Stage 1: 300+ MW. Construction expected mid-2026.",
+            "date": "2026-02-01"
+          }
+        ],
         "govt_programs": [],
         "rez_progress": [],
         "construction": [
@@ -4526,7 +4595,19 @@
     {
       "month": "2026-01",
       "sections": {
-        "development": [],
+        "development": [
+          {
+            "project_id": "palmer-wind-farm",
+            "project_name": "Palmer Wind Farm",
+            "technology": "wind",
+            "state": "SA",
+            "capacity_mw": 274.0,
+            "event_type": "fid",
+            "title": "Financial Investment Decision reached",
+            "detail": "First CIS-winning wind project to reach FID. 288 MW (40 Vestas turbines). EPC: BMD. CIS agreement + AGL PPA. $13M+ community benefits. Construction mid-2026.",
+            "date": "2026-01-08"
+          }
+        ],
         "govt_programs": [
           {
             "project_id": "illawarra-offshore-wind-farm",
@@ -4615,11 +4696,33 @@
             "title": "Major Project Status awarded",
             "detail": "Federal government awarded Major Project Status",
             "date": "2025-12-11"
+          },
+          {
+            "project_id": "richmond-valley-bess",
+            "project_name": "Richmond Valley BESS",
+            "technology": "bess",
+            "state": "NSW",
+            "capacity_mw": 275.0,
+            "event_type": "planning_approved",
+            "title": "EPBC approval received",
+            "detail": "Federal environmental approval.",
+            "date": "2025-12-01"
           }
         ],
         "govt_programs": [],
         "rez_progress": [],
         "construction": [
+          {
+            "project_id": "tomago-bess",
+            "project_name": "Tomago BESS",
+            "technology": "bess",
+            "state": "NSW",
+            "capacity_mw": 500.0,
+            "event_type": "construction_start",
+            "title": "Construction broke ground",
+            "detail": "Ground broken Dec 2025. Operations targeted H2 2027.",
+            "date": "2025-12-01"
+          },
           {
             "project_id": "tomago-bess",
             "project_name": "Tomago BESS",
@@ -4783,7 +4886,19 @@
     {
       "month": "2025-10",
       "sections": {
-        "development": [],
+        "development": [
+          {
+            "project_id": "richmond-valley-bess",
+            "project_name": "Richmond Valley BESS",
+            "technology": "bess",
+            "state": "NSW",
+            "capacity_mw": 275.0,
+            "event_type": "planning_approved",
+            "title": "NSW planning approval",
+            "detail": "275 MW / 2,200 MWh (8-hour). Long-duration LFP. Construction commencing 2026.",
+            "date": "2025-10-01"
+          }
+        ],
         "govt_programs": [],
         "rez_progress": [],
         "construction": [
@@ -5139,6 +5254,28 @@
             "title": "CANCELLED \u2014 BlueFloat ceases operations",
             "detail": "Quantum Capital Group ceased funding all BlueFloat offshore wind operations globally",
             "date": "2025-07-01"
+          },
+          {
+            "project_id": "tomago-bess",
+            "project_name": "Tomago BESS",
+            "technology": "bess",
+            "state": "NSW",
+            "capacity_mw": 500.0,
+            "event_type": "fid",
+            "title": "Final Investment Decision \u2014 500 MW / 2,000 MWh",
+            "detail": "FID announced Jul 2025. EPC: Fluence. Cost $800M. LTESA firming tender winner.",
+            "date": "2025-07-01"
+          },
+          {
+            "project_id": "reeves-plains-power-station-bess",
+            "project_name": "Reeves Plains Power Station BESS",
+            "technology": "bess",
+            "state": "SA",
+            "capacity_mw": 250.0,
+            "event_type": "fid",
+            "title": "FID reached \u2014 Stage 1",
+            "detail": "250 MW / 1,000 MWh (4-hour). CATL batteries. GenusPlus principal contractor ($105M). Operations expected 2028.",
+            "date": "2025-07-01"
           }
         ],
         "govt_programs": [],
@@ -5186,6 +5323,17 @@
       "month": "2025-06",
       "sections": {
         "development": [
+          {
+            "project_id": "valley-of-the-winds",
+            "project_name": "Valley of the Winds",
+            "technology": "wind",
+            "state": "NSW",
+            "capacity_mw": 919.0,
+            "event_type": "planning_approved",
+            "title": "IPC approval granted",
+            "detail": "943 MW (131 turbines) + BESS. $1.68B. Construction expected 2026-27.",
+            "date": "2025-06-01"
+          },
           {
             "project_id": "riverina-energy-storage-system-1",
             "project_name": "Riverina Energy Storage System 1",
@@ -5774,7 +5922,30 @@
     {
       "month": "2025-03",
       "sections": {
-        "development": [],
+        "development": [
+          {
+            "project_id": "bungaban-wind-farm",
+            "project_name": "Bungaban Wind Farm",
+            "technology": "wind",
+            "state": "QLD",
+            "capacity_mw": 1400.0,
+            "event_type": "planning_approved",
+            "title": "State Development approval granted",
+            "detail": "1.4 GW wind + 350 MW / 1,400 MWh battery. $3.9B. 25-year PPA with Rio Tinto.",
+            "date": "2025-03-01"
+          },
+          {
+            "project_id": "calala-bess-a1",
+            "project_name": "Calala BESS A1",
+            "technology": "bess",
+            "state": "NSW",
+            "capacity_mw": 250.0,
+            "event_type": "fid",
+            "title": "Financial close \u2014 $260M non-recourse debt",
+            "detail": "250 MW / 500 MWh. First merchant BESS non-recourse debt in NSW. 138 Tesla Megapacks. EPC: CPP. Financing: Westpac, SocGen, SMBC.",
+            "date": "2025-03-01"
+          }
+        ],
         "govt_programs": [],
         "rez_progress": [],
         "construction": [
@@ -5917,6 +6088,28 @@
             "title": "Not selected for Hunter zone licence",
             "detail": "Only Novocastrian selected; all other applicants unsuccessful",
             "date": "2025-02-01"
+          },
+          {
+            "project_id": "wooreen-energy-storage-system",
+            "project_name": "Wooreen Energy Storage System",
+            "technology": "bess",
+            "state": "VIC",
+            "capacity_mw": 350.0,
+            "event_type": "fid",
+            "title": "Financial close \u2014 $700M investment",
+            "detail": "350 MW / 1,400 MWh (4-hour). 50% equity sold to Banpu Energy Australia. Operations before end 2027.",
+            "date": "2025-02-01"
+          },
+          {
+            "project_id": "silver-city-energy-storage",
+            "project_name": "Silver City Energy Storage",
+            "technology": "bess",
+            "state": "NSW",
+            "capacity_mw": 200.0,
+            "event_type": "planning_approved",
+            "title": "Development approval granted",
+            "detail": "Advanced Compressed Air (A-CAES), 200 MW / 1,600 MWh (8-hour). Construction Sep 2026, ops 2029. US$200M investment.",
+            "date": "2025-02-01"
           }
         ],
         "govt_programs": [],
@@ -5954,6 +6147,17 @@
             "title": "Financial close \u2014 A$700M",
             "detail": "EnergyAustralia FID",
             "date": "2025-02-20"
+          },
+          {
+            "project_id": "wooreen-energy-storage-system",
+            "project_name": "Wooreen Energy Storage System",
+            "technology": "bess",
+            "state": "VIC",
+            "capacity_mw": 350.0,
+            "event_type": "construction_start",
+            "title": "Construction commenced",
+            "detail": "Broke ground in Victorian coal country (Hazelwood North).",
+            "date": "2025-02-15"
           },
           {
             "project_id": "koorangie-energy-storage-system",
@@ -6464,6 +6668,17 @@
             "event_type": "construction_start",
             "title": "Construction commenced",
             "detail": "CATL batteries; ACLE Services BoP",
+            "date": "2024-10-01"
+          },
+          {
+            "project_id": "goulburn-river-solar-farm-and-bess",
+            "project_name": "Goulburn River Solar Farm And BESS",
+            "technology": "solar",
+            "state": "NSW",
+            "capacity_mw": 450.0,
+            "event_type": "construction_start",
+            "title": "Solar + battery construction commenced",
+            "detail": "585 MWdc solar + 49 MW/562 MWh DC-coupled battery (first stage). DT Infrastructure EPC, CHINT batteries. Energisation late 2026.",
             "date": "2024-10-01"
           },
           {
@@ -15789,7 +16004,7 @@
             "project_name": "Barn Hill",
             "technology": "wind",
             "state": "SA",
-            "capacity_mw": 186.0,
+            "capacity_mw": 300.0,
             "event_type": "planning_submitted",
             "title": "EPBC Referral 2008/4321",
             "detail": "Barn Hill Wind Farm \u2014 Not Controlled Action",
@@ -17537,10 +17752,10 @@
     }
   ],
   "section_counts": {
-    "construction": 637,
+    "construction": 642,
     "operational": 443,
+    "development": 272,
     "govt_programs": 10,
-    "development": 259,
     "rez_progress": 36
   }
 }

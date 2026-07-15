@@ -544,10 +544,11 @@
     "name": "Barn Hill",
     "technology": "wind",
     "status": "development",
-    "capacity_mw": 186.0,
+    "capacity_mw": 300.0,
     "state": "SA",
-    "current_developer": "Barn HIll Wind Farm Pty Ltd",
-    "data_confidence": "low",
+    "current_developer": "AGL Energy",
+    "current_operator": "AGL Energy",
+    "data_confidence": "medium",
     "confidence_score": "23",
     "development_stage": "epbc_approved",
     "first_seen": "2008",
@@ -794,7 +795,7 @@
     "capacity_mw": 224.0,
     "state": "TAS",
     "current_developer": "The Trustee for Equis Wind (Australia) LHWF2 Asset Trust",
-    "data_confidence": "low",
+    "data_confidence": "medium",
     "confidence_score": "23",
     "development_stage": "planning_submitted",
     "first_seen": "2026-03-12"
@@ -8137,7 +8138,8 @@
     "data_confidence": "medium",
     "confidence_score": "28",
     "development_stage": "planning_submitted",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "has_scheme_contract": true
   },
   {
     "id": "melbourne-renewable-energy-hub-connection-a1",
@@ -9837,11 +9839,11 @@
     "id": "palmer-wind-farm",
     "name": "Palmer Wind Farm",
     "technology": "wind",
-    "status": "development",
+    "status": "construction",
     "capacity_mw": 274.0,
     "state": "SA",
     "current_developer": "Tilt Renewables Australia Pty Ltd",
-    "data_confidence": "low",
+    "data_confidence": "medium",
     "confidence_score": "15",
     "development_stage": "planning_submitted",
     "zombie_flag": "zombie_minimal",
@@ -12701,7 +12703,8 @@
     "capex_year": 2025,
     "notable": "500 MW / 2 GWh grid-scale battery at former Tomago aluminium smelter site. AGL Energy flagship storage project in the Hunter Valley, NSW.",
     "first_seen": "2023",
-    "has_eis_data": true
+    "has_eis_data": true,
+    "has_scheme_contract": true
   },
   {
     "id": "torrens-island-bess",
@@ -13879,7 +13882,8 @@
     "confidence_score": "60",
     "development_stage": "epbc_approved",
     "notable": "120 MW, 32 Siemens Gamesa SG 3.4-132 turbines in SA's Mid North near Hallett. Built by ENGIE. 25-year Siemens Gamesa service agreement. COD December 2019.",
-    "first_seen": "2011"
+    "first_seen": "2011",
+    "has_scheme_contract": true
   },
   {
     "id": "wimmera-plains-bess",
@@ -14191,7 +14195,8 @@
     "confidence_score": "61",
     "notable": "Hithium 5 MWh containers (128 units). INTEC EPC. CIS Tender 1 winner.",
     "first_seen": "2024-10-01",
-    "has_eis_data": true
+    "has_eis_data": true,
+    "has_scheme_contract": true
   },
   {
     "id": "woolooga-bess-kci",

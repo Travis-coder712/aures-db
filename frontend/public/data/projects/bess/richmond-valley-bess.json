@@ -24,6 +24,22 @@
   "first_seen": "2026-03-12",
   "timeline": [
     {
+      "date": "2025-10-01",
+      "date_precision": "month",
+      "event_type": "planning_approved",
+      "title": "NSW planning approval",
+      "detail": "275 MW / 2,200 MWh (8-hour). Long-duration LFP. Construction commencing 2026.",
+      "sources": []
+    },
+    {
+      "date": "2025-12-01",
+      "date_precision": "month",
+      "event_type": "planning_approved",
+      "title": "EPBC approval received",
+      "detail": "Federal environmental approval.",
+      "sources": []
+    },
+    {
       "date": "2026-03-12",
       "date_precision": "day",
       "event_type": "cod_change",
