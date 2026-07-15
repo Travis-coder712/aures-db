@@ -3488,6 +3488,11 @@ function OpenRoundCard({ round, isExpanded, onToggle }: { round: OpenRound; isEx
             <ProformaMechanicsDeepDive deepDive={round.proformaMechanicsDeepDive} />
           )}
 
+          {/* v3.21.2: CIS T9 Competitive Field Deep Dive — three-lens synthesis */}
+          {round.t9CompetitiveFieldDeepDive && (
+            <T9CompetitiveFieldDeepDive deepDive={round.t9CompetitiveFieldDeepDive} />
+          )}
+
           {/* v3.16.2: PPA Leverage Deep Dive — how a PPA flexes LTESA bid parameters */}
           {round.ppaLeverageDeepDive && (
             <PpaLeverageDeepDive deepDive={round.ppaLeverageDeepDive} />
@@ -4218,6 +4223,194 @@ function ProformaMechanicsDeepDive({ deepDive }: { deepDive: ProformaMechanicsDe
       <p className="text-[9px] text-[var(--color-text-muted)] italic mt-2">
         Extracted from gazetted proforma Generation LTESA + Hybrid Generation LTESA, Tender Round 8 publication version, 18 May 2026. Citations refer to clause numbers in each proforma — read alongside the proforma when modelling or negotiating financing. Not legal advice.
       </p>
+    </div>
+  )
+}
+
+// ============================================================
+// T9CompetitiveFieldDeepDive (v3.21.2) — CIS Tender 9 three-lens
+// synthesis. Sources: docs/RESEARCH_CIS_T9_COMPETITIVE_FIELD.md.
+// Structured as: exec-summary + state-math grid + deliverability
+// paradox (with Zero-for-15 stat) + three-lens accordion (rebid /
+// gentailer / earliest-COD) + combined-view predicted shape +
+// standout pitch callout (AGL Barn Hill).
+// ============================================================
+
+type T9CompetitiveFieldDeepDiveData = NonNullable<OpenRound['t9CompetitiveFieldDeepDive']>
+
+function T9CompetitiveFieldDeepDive({ deepDive }: { deepDive: T9CompetitiveFieldDeepDiveData }) {
+  const [expandedLenses, setExpandedLenses] = useState<Set<string>>(new Set(['rebid', 'gentailer', 'earliest-cod']))
+
+  function toggleLens(id: string) {
+    setExpandedLenses(prev => {
+      const next = new Set(prev)
+      if (next.has(id)) next.delete(id)
+      else next.add(id)
+      return next
+    })
+  }
+
+  const flagStyle = (flag?: 'standout' | 'watch' | 'longshot' | 'blocked'): { bg: string; border: string; text: string; label: string } => {
+    if (flag === 'standout') return { bg: '#22c55e1a', border: '#22c55e55', text: '#22c55e', label: 'STANDOUT' }
+    if (flag === 'watch') return { bg: '#f59e0b1a', border: '#f59e0b55', text: '#f59e0b', label: 'WATCH' }
+    if (flag === 'longshot') return { bg: '#94a3b81a', border: '#94a3b855', text: '#94a3b8', label: 'LONG-SHOT' }
+    if (flag === 'blocked') return { bg: '#ef44441a', border: '#ef444455', text: '#ef4444', label: 'BLOCKED' }
+    return { bg: 'transparent', border: 'transparent', text: 'transparent', label: '' }
+  }
+
+  return (
+    <div className="bg-[var(--color-bg)] border border-[#f59e0b]/30 rounded-lg p-3">
+      <h5 className="text-[10px] uppercase tracking-wider text-[#f59e0b] mb-1.5">CIS T9 Competitive Field — three-lens synthesis</h5>
+      <p className="text-[11px] text-[var(--color-text)] leading-relaxed mb-3">{deepDive.headline}</p>
+
+      {/* State math grid */}
+      <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-md p-2.5 mb-3">
+        <div className="text-[10px] uppercase tracking-wider text-[var(--color-text)] mb-1.5 font-bold">▸ State math — minimums, cap, contestable pool</div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-1.5 text-[10px]">
+          <div className="flex gap-2"><span className="text-[#f59e0b] shrink-0">VIC min:</span><span className="text-[var(--color-text-muted)]">{deepDive.stateMath.vic_min}</span></div>
+          <div className="flex gap-2"><span className="text-[#f59e0b] shrink-0">TAS min:</span><span className="text-[var(--color-text-muted)]">{deepDive.stateMath.tas_min}</span></div>
+          <div className="flex gap-2"><span className="text-red-400 shrink-0">VIC solar cap:</span><span className="text-[var(--color-text-muted)]">{deepDive.stateMath.vic_solar_cap}</span></div>
+          <div className="flex gap-2"><span className="text-emerald-400 shrink-0">Contestable:</span><span className="text-[var(--color-text-muted)]">{deepDive.stateMath.contestable_pool}</span></div>
+          <div className="flex gap-2"><span className="text-cyan-400 shrink-0">First Nations:</span><span className="text-[var(--color-text-muted)]">{deepDive.stateMath.first_nations}</span></div>
+          <div className="flex gap-2"><span className="text-[var(--color-text)] shrink-0">Target COD:</span><span className="text-[var(--color-text-muted)]">{deepDive.stateMath.target_cod}</span></div>
+        </div>
+      </div>
+
+      {/* Deliverability frame + Zero-for-15 sidebar */}
+      <div className="bg-[var(--color-bg-card)] border border-amber-500/30 rounded-md p-2.5 mb-3">
+        <div className="text-[10px] uppercase tracking-wider text-amber-400 mb-1.5 font-bold">▸ Deliverability paradox — central frame</div>
+        <p className="text-[10px] text-[var(--color-text-muted)] leading-relaxed mb-2">{deepDive.deliverabilityFrame.summary}</p>
+
+        <div className="bg-red-500/10 border border-red-500/40 rounded p-2 mb-2">
+          <div className="text-[9px] font-bold text-red-400 uppercase tracking-wider mb-0.5">▸ Sidebar — the "Zero for {deepDive.deliverabilityFrame.zeroFor15Stat.awardsTotal / (deepDive.deliverabilityFrame.zeroFor15Stat.constructionCount || 1) | 0}" problem</div>
+          <div className="text-[11px] text-[var(--color-text)] mb-1">
+            Only <span className="text-red-400 font-bold">{deepDive.deliverabilityFrame.zeroFor15Stat.constructionCount}</span> of ~{deepDive.deliverabilityFrame.zeroFor15Stat.awardsTotal} CIS-awarded non-battery generation projects had reached construction by {deepDive.deliverabilityFrame.zeroFor15Stat.asOfDate}.
+          </div>
+          <div className="text-[10px] text-[var(--color-text-muted)] leading-relaxed">
+            <strong>First construction:</strong> {deepDive.deliverabilityFrame.zeroFor15Stat.firstConstruction}
+          </div>
+          <div className="text-[9px] text-[var(--color-text-muted)] italic mt-1">Source: {deepDive.deliverabilityFrame.zeroFor15Stat.source}</div>
+        </div>
+
+        <div className="bg-[var(--color-bg)] border border-[var(--color-border)] rounded p-2">
+          <div className="text-[9px] font-bold text-amber-400 uppercase tracking-wider mb-0.5">▸ Withdraw-and-resubmit pathway</div>
+          <p className="text-[10px] text-[var(--color-text-muted)] leading-relaxed">{deepDive.deliverabilityFrame.withdrawResubmit}</p>
+        </div>
+      </div>
+
+      {/* Three lenses */}
+      <div className="text-[10px] uppercase tracking-wider text-[var(--color-text)] mb-2 font-bold">▸ Three analytical lenses (click to expand)</div>
+      <div className="space-y-2 mb-3">
+        {deepDive.lenses.map(lens => {
+          const isOpen = expandedLenses.has(lens.id)
+          const accentColour = lens.id === 'rebid' ? '#a855f7' : lens.id === 'gentailer' ? '#3b82f6' : '#22c55e'
+          return (
+            <div key={lens.id} className="bg-[var(--color-bg-card)] border rounded-md overflow-hidden" style={{ borderColor: `${accentColour}55` }}>
+              <button
+                onClick={() => toggleLens(lens.id)}
+                className="w-full p-2.5 text-left hover:bg-[var(--color-bg)] transition-colors"
+              >
+                <div className="flex items-start justify-between gap-2">
+                  <div className="flex-1 min-w-0">
+                    <div className="text-[11px] font-bold" style={{ color: accentColour }}>▸ {lens.title}</div>
+                    <p className="text-[10px] text-[var(--color-text-muted)] leading-relaxed mt-0.5">{lens.framing}</p>
+                  </div>
+                  <span className="text-[var(--color-text-muted)] text-[10px] mt-0.5">{isOpen ? '−' : '+'}</span>
+                </div>
+              </button>
+
+              {isOpen && (
+                <div className="border-t border-[var(--color-border)] p-2.5 bg-[var(--color-bg)] space-y-2">
+                  {/* Top picks table */}
+                  <div className="space-y-1.5">
+                    {lens.topPicks.map(pick => {
+                      const fs = flagStyle(pick.flag)
+                      return (
+                        <div key={pick.rank} className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded p-2">
+                          <div className="flex items-center justify-between gap-2 mb-1 flex-wrap">
+                            <div className="flex items-center gap-2 flex-wrap">
+                              <span className="text-[10px] font-bold text-[var(--color-text-muted)]">#{pick.rank}</span>
+                              <span className="text-[11px] font-medium text-[var(--color-text)]">{pick.project}</span>
+                              <span className="text-[9px] px-1.5 py-0.5 rounded bg-[var(--color-bg)] border border-[var(--color-border)] text-[var(--color-text-muted)] font-mono">{pick.state}</span>
+                              <span className="text-[9px] px-1.5 py-0.5 rounded bg-[var(--color-bg)] border border-[var(--color-border)] text-[var(--color-text)] font-mono">{pick.mw} MW</span>
+                              {pick.flag && (
+                                <span className="text-[8px] font-bold uppercase px-1.5 py-0.5 rounded-full"
+                                  style={{ background: fs.bg, border: `1px solid ${fs.border}`, color: fs.text }}>
+                                  {fs.label}
+                                </span>
+                              )}
+                            </div>
+                          </div>
+                          <div className="text-[10px] text-[var(--color-text-muted)] italic mb-1">{pick.proponent}</div>
+                          <p className="text-[10px] text-[var(--color-text-muted)] leading-relaxed">{pick.note}</p>
+                        </div>
+                      )
+                    })}
+                  </div>
+
+                  {/* Lens conclusion */}
+                  <div className="p-2 rounded" style={{ background: `${accentColour}0f`, border: `1px solid ${accentColour}33` }}>
+                    <div className="text-[9px] font-bold uppercase tracking-wider mb-0.5" style={{ color: accentColour }}>Lens conclusion</div>
+                    <p className="text-[10px] text-[var(--color-text-muted)] leading-relaxed">{lens.conclusion}</p>
+                  </div>
+                </div>
+              )}
+            </div>
+          )
+        })}
+      </div>
+
+      {/* Combined view — predicted T9 shape */}
+      <div className="bg-[var(--color-bg-card)] border border-[#f59e0b]/40 rounded-md p-2.5 mb-3">
+        <div className="text-[10px] uppercase tracking-wider text-[#f59e0b] mb-1.5 font-bold">▸ Combined view — predicted T9 award shape</div>
+        <p className="text-[10px] text-[var(--color-text-muted)] leading-relaxed italic mb-2">{deepDive.combinedView.orthogonalFinding}</p>
+
+        <div className="overflow-x-auto mb-2">
+          <table className="w-full text-[10px]">
+            <thead>
+              <tr className="text-left text-[var(--color-text-muted)]">
+                <th className="py-1 pr-2 font-medium uppercase tracking-wider text-[9px] w-2/5">Pool</th>
+                <th className="py-1 pr-2 font-medium uppercase tracking-wider text-[9px] w-1/6">Volume</th>
+                <th className="py-1 pr-2 font-medium uppercase tracking-wider text-[9px]">Detail</th>
+              </tr>
+            </thead>
+            <tbody>
+              {deepDive.combinedView.predictedShape.map((row, i) => (
+                <tr key={i} className="border-t border-[var(--color-border)] align-top">
+                  <td className="py-1.5 pr-2 font-medium text-[var(--color-text)]">{row.pool}</td>
+                  <td className="py-1.5 pr-2 font-mono tabular-nums text-emerald-400 whitespace-nowrap">{row.volumeGw}</td>
+                  <td className="py-1.5 pr-2 text-[var(--color-text-muted)] leading-relaxed">{row.detail}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        <div className="p-2 bg-[var(--color-bg)] border border-[#f59e0b]/30 rounded">
+          <div className="text-[9px] font-bold text-[#f59e0b] uppercase tracking-wider mb-0.5">Bottom line</div>
+          <p className="text-[10px] text-[var(--color-text-muted)] leading-relaxed">{deepDive.combinedView.bottomLine}</p>
+        </div>
+      </div>
+
+      {/* Standout pitch callout — AGL Barn Hill */}
+      <div className="bg-emerald-500/10 border-2 border-emerald-500/40 rounded-md p-3 mb-3">
+        <div className="text-[10px] uppercase tracking-wider text-emerald-400 mb-1 font-bold">★ Standout T9 pitch to watch</div>
+        <div className="text-[13px] font-bold text-[var(--color-text)] mb-2">{deepDive.standoutPitch.project}</div>
+        <ul className="space-y-1 mb-2">
+          {deepDive.standoutPitch.signals.map((s, i) => (
+            <li key={i} className="text-[10px] text-[var(--color-text-muted)] leading-relaxed flex gap-1.5">
+              <span className="text-emerald-400 shrink-0">▸</span>
+              <span>{s}</span>
+            </li>
+          ))}
+        </ul>
+        <p className="text-[10px] text-[var(--color-text)] leading-relaxed italic">{deepDive.standoutPitch.reasoning}</p>
+      </div>
+
+      {/* Docs reference */}
+      <div className="text-[9px] text-[var(--color-text-muted)] italic">
+        Full research note: <span className="text-cyan-400 font-mono">{deepDive.docsRef.path}</span> ({deepDive.docsRef.label}) — includes Table A (35 CISA-locked non-NSW projects), full Table B tiered wind/solar/hybrid competitive field, state-by-state summary, developer signals, 11 things you may not have considered, AURES data-quality corrections, open questions + sources.
+      </div>
     </div>
   )
 }

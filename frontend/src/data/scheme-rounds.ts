@@ -1241,6 +1241,67 @@ export interface OpenRound {
     crossTopicGaps: string[]                // Things the proforma is silent on or under-specifies
   }
 
+  /** v3.21.2: CIS T9 Competitive Field Deep Dive — three-lens synthesis of the T9 field.
+   * Sourced from docs/RESEARCH_CIS_T9_COMPETITIVE_FIELD.md. Structured around: state-math
+   * (min-not-cap), deliverability paradox (with the Zero-for-15 stat), three analytical lenses
+   * (rebid candidates / gentailer + path-to-market / earliest COD), combined-view predicted
+   * T9 shape, and the standout AGL Barn Hill pitch. */
+  t9CompetitiveFieldDeepDive?: {
+    headline: string                        // executive summary paragraph
+    stateMath: {
+      vic_min: string                       // e.g. '≥1.6 GW guaranteed minimum'
+      tas_min: string                       // e.g. '≥300 MW guaranteed minimum'
+      vic_solar_cap: string                 // e.g. '470 MW cap on VIC solar-only (VIC-imposed)'
+      contestable_pool: string              // e.g. '~3.1 GW open to QLD/SA/VIC-above-min/TAS-above-min'
+      first_nations: string                 // e.g. '500 MW set-aside, ≥5% FN equity/revenue'
+      target_cod: string                    // e.g. 'before end-2030'
+    }
+    deliverabilityFrame: {
+      summary: string                       // the paradox in 1-2 sentences
+      zeroFor15Stat: {
+        awardsTotal: number                 // 69
+        constructionCount: number           // 2
+        asOfDate: string                    // 'March 2026'
+        firstConstruction: string           // 'Palmer Wind (Tilt SA) FID 9 Jan 2026 with 15-yr AGL PPA'
+        source: string                      // 'RE/wind-watch 30 Mar 2026'
+      }
+      withdrawResubmit: string              // clarification: excluded UNLESS active withdraw
+    }
+    lenses: Array<{
+      id: 'rebid' | 'gentailer' | 'earliest-cod'
+      title: string                         // e.g. 'Prior CIS wind winners at rebid risk'
+      framing: string                       // short framing paragraph
+      topPicks: Array<{
+        rank: number                        // 1-5
+        project: string
+        state: 'QLD' | 'VIC' | 'SA' | 'TAS'
+        mw: number
+        proponent: string
+        note: string                        // 1-2 sentence rationale
+        flag?: 'standout' | 'watch' | 'longshot' | 'blocked'
+      }>
+      conclusion: string                    // takeaway
+    }>
+    combinedView: {
+      orthogonalFinding: string             // "no project appears on all three lenses"
+      predictedShape: Array<{               // predicted T9 award breakdown
+        pool: string                        // e.g. 'Mid-scale QLD Tier-1 (Lens 3)'
+        volumeGw: string                    // e.g. '~2-3 GW'
+        detail: string                      // examples of projects
+      }>
+      bottomLine: string                    // one-paragraph summary
+    }
+    standoutPitch: {                        // AGL Barn Hill callout
+      project: string                       // 'AGL Barn Hill Wind + BESS (SA)'
+      signals: string[]                     // key MC1/MC2/MC3 positives
+      reasoning: string                     // why it's the standout
+    }
+    docsRef: {                              // link to full research note
+      label: string
+      path: string                          // 'docs/RESEARCH_CIS_T9_COMPETITIVE_FIELD.md'
+    }
+  }
+
   /** v3.16.2: How a PPA interplays with LTESA bid parameters — plain-English strategy guide. */
   ppaLeverageDeepDive?: {
     headline: string
@@ -1354,6 +1415,99 @@ export const OPEN_ROUNDS: OpenRound[] = [
       { label: 'HSF Kramer — CIS changes (10 Jul 2025)', url: 'https://www.hsfkramer.com/notes/energy/2025-posts/cis-changes' },
       { label: 'Hamilton Locke — CIS tender reforms (20 Aug 2025)', url: 'https://hamiltonlocke.com.au/cis-tender-reforms-whats-changing-and-when/' },
     ],
+    t9CompetitiveFieldDeepDive: {
+      headline: 'T9 will look like T7 in shape (many mid-scale wins across many pure-play developers) with a modest deliverability premium favouring proven-track proponents. Three orthogonal analytical lenses — prior-CIS rebid candidates, gentailer path-to-market, and earliest-COD credibility — produce structurally different picking lists. AGL Barn Hill Wind + BESS (SA) is the standout gentailer pitch. See docs/RESEARCH_CIS_T9_COMPETITIVE_FIELD.md for the full analysis.',
+      stateMath: {
+        vic_min: '≥1.6 GW guaranteed MINIMUM (VIC can exceed this via the contestable pool)',
+        tas_min: '≥300 MW guaranteed MINIMUM (TAS can exceed this via the contestable pool)',
+        vic_solar_cap: '470 MW cap on VIC solar-only projects (VIC-imposed; hard MAX)',
+        contestable_pool: '~3.1 GW open to QLD + SA + VIC/TAS projects above their minimums',
+        first_nations: '500 MW set-aside for projects with ≥5% First Nations equity or revenue',
+        target_cod: 'before end-2030',
+      },
+      deliverabilityFrame: {
+        summary: 'T9 explicitly tightens MC2 (deliverability + timeline) and MC3 (organisational track record). The paradox: prior-round LOSERS look mature on paper (strong MC2) but carry "shopped-and-didn\'t-convert" baggage (weak MC3). Prior-round WINNERS-BUT-STALLED are CISA-locked on the same project. Fresh pipeline without prior-round exposure must prove deliverability independently. Repeat winners with a delivery track record (RWE post-MacIntyre, Tilt post-Palmer FID) are structurally best-placed.',
+        zeroFor15Stat: {
+          awardsTotal: 69,
+          constructionCount: 2,
+          asOfDate: 'March 2026',
+          firstConstruction: 'Palmer Wind (Tilt SA, 274 MW) — FID 9 Jan 2026 with 15-yr AGL PPA',
+          source: 'RE/wind-watch 30 Mar 2026 — "Zero for 15: Labor\'s flagship renewable scheme hits a standstill"',
+        },
+        withdrawResubmit: 'Prior CIS winners are EXCLUDED from rebidding T9 on the same project by default — UNLESS they actively CHOOSE to WITHDRAW from their prior CISA and resubmit. This is a proponent-initiated pathway (not a passive lapse). Withdrawing is a public signal of failed execution — proponents will only do it if the T9 economics are meaningfully better than sticking with the prior CISA.',
+      },
+      lenses: [
+        {
+          id: 'rebid',
+          title: 'Lens 1 — Prior CIS wind winners at rebid risk (via active withdraw-and-resubmit)',
+          framing: 'Which prior CIS wind winners are most likely to withdraw their existing CISA and rebid T9? Candidates are those visibly stalled at pre-FID far past typical CISA execution windows.',
+          topPicks: [
+            { rank: 1, project: 'Kentbruck Wind Farm', state: 'VIC', mw: 600, proponent: 'HMC Capital (Neoen at T1 Dec 2024 award)', note: 'HIGH rebid probability if T9 economics attractive. 15+ months post-award, still pre-FID; HMC "working through capital partnering" (RE 30 Mar 2026). Neoen sold to HMC post-award. Most publicly stalled T1 wind winner.', flag: 'watch' },
+            { rank: 2, project: 'Bell Bay Wind Farm', state: 'TAS', mw: 224, proponent: 'Equis (T4 Oct 2025)', note: 'LOW-MODERATE. Pre-FID mid-2026; construction targeted 2027 (~2 years post-award). Timeline tight but within norms — watch through Q1 2027.', flag: 'longshot' },
+            { rank: 3, project: 'Goyder North Stage 1', state: 'SA', mw: 300, proponent: 'Neoen (T1 Dec 2024)', note: 'LOW. FID expected 2026 per CER. If Neoen misses that window, rebid becomes credible.', flag: 'longshot' },
+            { rank: 4, project: 'Gawara Baya Wind + BESS', state: 'QLD', mw: 399, proponent: 'Windlab (T4 Oct 2025)', note: 'UNVERIFIED — watch. CISA/FID status not publicly disclosed.', flag: 'longshot' },
+            { rank: 5, project: 'Moah Creek Wind', state: 'QLD', mw: 360, proponent: 'Central Queensland Power (T4 Oct 2025)', note: 'UNVERIFIED — watch. CISA/FID status not publicly disclosed.', flag: 'longshot' },
+          ],
+          conclusion: 'Note: Hexham Wind (AGL, T4 VIC 600 MW) is NOT rebidding — AGL is progressing Hexham on its own 2028 FID timeline. This lens likely contributes ~0 to actual T9 outcomes; DCCEEW will probably preserve scheme integrity by not permitting easy withdraw-and-resubmit pathways.',
+        },
+        {
+          id: 'gentailer',
+          title: 'Lens 2 — Gentailer + path-to-market (top 5)',
+          framing: 'Historical CIS winners have been dominated by pure-play developers without integrated retail books to absorb the offtake. Deliverability lens: penalise developers with stalled prior awards; favour vertically-integrated gentailers (AGL, Origin, EnergyAustralia, Alinta) and state-owned generators (CS Energy, Stanwell, Snowy Hydro) with captive offtake demand. Reality check: the gentailer T9 pipeline is genuinely thin.',
+          topPicks: [
+            { rank: 1, project: 'AGL Barn Hill Wind + BESS', state: 'SA', mw: 300, proponent: 'AGL Energy (owned since 2009)', note: 'STANDOUT gentailer pitch. AGL owns BOTH the 300 MW wind (EPBC-approved) AND the co-located 270 MW BESS on the same site → integrated wind+BESS T9 pitch with direct AGL retail offtake path-to-market. Fresh project (no prior CIS baggage), advanced planning, single-owner integration, gentailer captive demand — the archetype T9\'s deliverability screen was designed to reward.', flag: 'standout' },
+            { rank: 2, project: 'Nonowie Wind', state: 'SA', mw: 1015, proponent: 'Tilt Renewables', note: 'Tilt just demonstrated path-to-market via 15-yr AGL PPA on Palmer (FID Jan 2026); first non-battery CIS generator to reach construction. Not a gentailer, but the closest proxy for gentailer-quality deliverability.', flag: 'standout' },
+            { rank: 3, project: 'Iberdrola Three Rivers Solar', state: 'QLD', mw: 1200, proponent: 'Iberdrola Australia', note: 'Iberdrola = global integrated utility + Australian delivery track (Avonlie operating, Burrenbring in dev). Solid corporate-PPA path-to-market.', flag: 'watch' },
+            { rank: 4, project: 'Guildford Wind', state: 'TAS', mw: 526, proponent: 'Ark Energy (Korea Zinc)', note: 'Industrial gentailer alternative — Korea Zinc\'s Sun Metals smelter creates integrated captive offtake. TAS state minimum position.', flag: 'watch' },
+            { rank: 5, project: 'Alinta Yumali Wind Hybrid', state: 'SA', mw: 353, proponent: 'Alinta Energy', note: 'Long-shot. Gentailer, but COD 2031-12 is beyond T9 target. Would require public acceleration commitment to be credible on MC2.', flag: 'longshot' },
+          ],
+          conclusion: 'AGL Barn Hill is the cleanest integrated gentailer pitch. Beyond that the gentailer thesis relies on proven-delivery pure-plays (Tilt, Iberdrola) or industrial-captive alternatives (Ark/Korea Zinc). Alinta is philosophically right but timing-wrong.',
+        },
+        {
+          id: 'earliest-cod',
+          title: 'Lens 3 — Earliest COD / MC2 credibility (top 5)',
+          framing: 'Earliest COD + most advanced planning wins. MC2 (deliverability + timeline) dominates T9 scoring per Hamilton Locke. A project bidding COD 2028 with EPBC approval structurally out-scores one bidding COD 2030 with only planning submitted.',
+          topPicks: [
+            { rank: 1, project: 'Fraser Coast Hybrid', state: 'QLD', mw: 290, proponent: 'Fraser Coast Solar Development', note: 'Solar + BESS (290 MW + 211 MWh), COD 2027-09-30, anticipated status. Fastest COD in the T9-eligible field.', flag: 'standout' },
+            { rank: 2, project: 'Northern Midlands Solar (KCI)', state: 'TAS', mw: 310, proponent: 'Northern Midlands Solar Farm Tas Pty Ltd', note: 'Solar 310 MW, COD 2027-10-31, EPBC-submitted, anticipated. TAS state minimum candidate.', flag: 'standout' },
+            { rank: 3, project: 'Solar River SB Project', state: 'SA', mw: 256, proponent: 'Zebre Pty Ltd', note: 'Solar + BESS (256 MW + 650 MWh), COD 2027-11-29, anticipated.', flag: 'watch' },
+            { rank: 4, project: 'Colosseum Solar + BESS', state: 'QLD', mw: 400, proponent: 'Global Power Generation Australia', note: 'Solar + BESS (400 MW + 1,600 MWh), COD 2028-01-02, planning submitted. Strong 4hr storage pairing.', flag: 'watch' },
+            { rank: 5, project: 'Mount Hopeful Wind', state: 'QLD', mw: 370, proponent: 'Mount Hopeful WF', note: 'Wind 370 MW, COD 2028-06-30, EPBC-APPROVED. Best-in-class planning maturity + strong COD.', flag: 'watch' },
+          ],
+          conclusion: 'Earliest-COD picks skew heavily to QLD solar+BESS hybrids and mid-scale (~250-400 MW) projects. Large-scale wind (>500 MW) generally comes with 2030 or later CODs. The 5 GW target with a 2030 COD ceiling almost mechanically forces a mid-scale bias — DCCEEW may have to award 12-15 winners rather than 5-8.',
+        },
+      ],
+      combinedView: {
+        orthogonalFinding: 'The three lenses are largely orthogonal — NO project appears on all three, and very few appear on TWO. The T9 assessor is essentially being asked to choose between competing values: rewarding second-chance rebids vs favouring gentailers vs favouring earliest-COD picks. This produces structurally different winner lists.',
+        predictedShape: [
+          { pool: 'Mid-scale QLD Tier-1 (Lens 3 dominant pool)', volumeGw: '~2-3 GW', detail: 'Callide, Mount Hopeful, Bulli Creek, Colosseum, Herries Range, Nyaninyuk, Tarong West' },
+          { pool: 'Proven-delivery proponents', volumeGw: '~1 GW', detail: 'Nonowie (Tilt post-Palmer), RWE fresh QLD wind, possibly Edify or Windlab fresh solar+BESS' },
+          { pool: 'First Nations set-aside', volumeGw: '~500 MW', detail: 'Separate lane; watch Ark Energy (Korea Zinc FN engagement history), Windlab FN partnerships' },
+          { pool: 'VIC state minimum + contestable overflow', volumeGw: '~1.5-2 GW', detail: 'Meering West OR Warracknabeal (only one wins) + Nyaninyuk or Tall Tree (Acciona VIC allocation)' },
+          { pool: 'TAS state minimum + contestable overflow', volumeGw: '~300-500 MW', detail: 'Guildford (Ark) most likely single pick; Bashan 1 or Hollow Tree possible second' },
+          { pool: 'Prior-CIS rebids (via withdraw-and-resubmit)', volumeGw: '~0', detail: 'DCCEEW likely preserves scheme integrity; even Kentbruck rebid unlikely to be permitted' },
+          { pool: 'Gentailer wins', volumeGw: '~300-600 MW', detail: 'AGL Barn Hill Wind + BESS is the archetype (1 confirmed pitch); Alinta long-shot' },
+        ],
+        bottomLine: 'T9 will look like T7 in shape — many mid-scale wins across many pure-play developers — with a modest deliverability premium favouring proven-track proponents over stalled or new-to-CIS candidates. The tightened MC2/MC3 changes WHY specific projects win, not fundamentally WHO wins; it will just sharpen the pick order within the mid-scale QLD pool.',
+      },
+      standoutPitch: {
+        project: 'AGL Barn Hill Wind + BESS (SA)',
+        signals: [
+          '300 MW wind + 270 MW BESS co-located on a single SA site',
+          'AGL Energy has owned the wind project since 2009 — 17 years of ownership, no acquisition uncertainty',
+          'Wind EPBC-approved; BESS in planning-submitted',
+          'Direct integrated retail offtake path via AGL customer base',
+          'Fresh project — no prior CIS baggage, no MC3 drag',
+          'Cleanest wind+BESS pairing in the T9 field (system-benefit scoring premium)',
+          'Structurally the ARCHETYPE of what T9\'s tightened deliverability screen was designed to reward',
+        ],
+        reasoning: 'The T9 assessor gets to say "we backed the gentailer archetype" without having to reach for weak candidates. This is the pitch to watch as a leading indicator of whether the gentailer premium in T9 is real or aspirational.',
+      },
+      docsRef: {
+        label: 'Full research note (~6,700 words)',
+        path: 'docs/RESEARCH_CIS_T9_COMPETITIVE_FIELD.md',
+      },
+    },
   },
 
   // ---------------------------------------------------------------
