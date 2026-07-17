@@ -1,12 +1,21 @@
 # AURES — Next Session Handoff
 
-**Last refreshed:** 2026-07-10
-**Latest shipped version:** v3.21.0
+**Last refreshed:** 2026-07-16
+**Latest shipped version:** v3.21.4 (BESS Sleeper Story research note, this session pending commit) — prior: v3.21.3
 **Purpose:** Single-place brief for the next session. Cold-readable — pair with `docs/SESSION_OPENER.md` and `docs/INTELLIGENCE_LAYER_PLAN.md`.
 
 ---
 
-## Current state snapshot (v3.21.0)
+## Current state snapshot (v3.21.4)
+
+### v3.21.1–v3.21.4 — CIS Tender 9 competitive-field intelligence + BESS sleeper story (2026-07-15/16)
+
+- **v3.21.1** — New docs research note (`docs/RESEARCH_CIS_T9_COMPETITIVE_FIELD.md`, ~6,700 words) covering CIS T9: corrected state math (VIC/TAS minimums, not caps), deliverability paradox as central frame, Zero-for-15 sidebar (2 of ~69 CIS non-battery gen at construction by Mar 2026), Table A of 35 CISA-locked non-NSW projects curated from AURES scheme_contracts overlays, Table B tiered T9 competitive field (wind + large solar + solar+BESS), three-lens synthesis (Rebid / Gentailer / Earliest-COD), combined-view predicted T9 shape. AURES data corrections bundled: Bell Bay overlay (T4 CISA added — was missing), Whyte Yarcowie overlay (proponent WP Renewables → EDF), Palmer overlay + DB (status → construction + FID 9 Jan 2026 timeline), **Barn Hill overlay + DB (capacity 186→300 MW; owner corrected to AGL Energy since 2009 — was showing SPV name only; co-located with AGL Barn Hill BESS 270 MW)**, scheme-rounds.ts CIS T9 entry region row rephrased (min-not-cap).
+- **v3.21.2** — Ported CIS T9 research into the CIS T9 card as `T9CompetitiveFieldDeepDive` component + `t9CompetitiveFieldDeepDive` field on OpenRound type. Renders in Open Rounds CIS tab under CIS T9 card, after ProformaMechanicsDeepDive. Structure: exec-summary + state-math grid + deliverability paradox with Zero-for-15 sidebar + three collapsible lenses (colour-coded, top-5 picks with STANDOUT/WATCH/LONG-SHOT/BLOCKED flag chips + conclusion) + Combined-view predicted-shape table + AGL Barn Hill standout callout + docs reference footer.
+- **v3.21.3** — Published CIS T9 research note to `/intelligence/research` (new `cis-t9-competitive-field-three-lens` entry under `cis-ltesa` category). 8 sections, cross-references companion notes (`cis-rebid-restrictions-hardening` 2026-07-07 for T9 Q&A Item 8 mechanics, `cis-project-status-deep-dive` 2026-06-27, `cis-wind-projects-crisis-state-of-play` 2026-07-08). Related project IDs: barn-hill, nonowie-wind-farm, kentbruck-green-power-hub, palmer-wind-farm, hexham, guildford-wind-farm.
+- **v3.21.4** (this session, pending commit) — BESS Sleeper Story research note applying the wind Zero-for-15 framework to BESS CIS winners. Thesis: govt accepted lowest bids → thinnest capex margins → BESS T3/T8 winners will follow wind trajectory later and less visibly. New docs research note (`docs/RESEARCH_BESS_SLEEPER_STORY.md`) + Research Notes JSON entry (bess-market category). Also bundled: `docs/PLAN_CIS_LTESA_DATA_UPDATE.md` (3-phase execution plan for the comprehensive data update project — see Backlog Item A below).
+
+### v3.20.0–v3.21.0 — Gas vs BESS Firming + NEM Publications module (2026-07-10)
 
 ### v3.20.0–v3.21.0 — Gas vs BESS Firming + NEM Publications module (2026-07-10)
 
@@ -118,7 +127,34 @@ See `docs/INTELLIGENCE_LAYER_PLAN.md` for detailed release log. Key threads:
 
 ---
 
-## Unified Backlog (refreshed 2026-06-20)
+## Unified Backlog (refreshed 2026-07-16 for CIS T9 + BESS sleeper story session)
+
+### Backlog Item A — Comprehensive CIS + LTESA Data Update (NEW 2026-07-16, HIGH PRIORITY)
+
+**Trigger**: v3.21.1 T9 research surfaced 4 material AURES data corrections in a single T9-adjacent pass (Palmer/FID, Bell Bay/scheme_contract missing, Whyte Yarcowie/proponent stale, Barn Hill/capacity+owner). Extrapolation: substantial staleness exists across the ~130-project CIS+LTESA population that was baselined in v3.18.5. And T9 results Nov 2026 need a current baseline for meaningful comparison.
+
+**Plan**: Full 3-phase execution plan drafted at [`docs/PLAN_CIS_LTESA_DATA_UPDATE.md`](docs/PLAN_CIS_LTESA_DATA_UPDATE.md). Summary:
+- **Phase 1** (~1 session): CIS T1 non-NSW winners (12 projects, ~18 months old — most stale). Deliverable: `v3.22.0`.
+- **Phase 2** (~1 session): CIS T4 non-NSW winners (14 projects, ~10 months old). Deliverable: `v3.22.1`.
+- **Phase 3** (~1 session): CIS T7 winners (19 projects, ~2 months old — early CISA-execution window). Deliverable: `v3.22.2`.
+- **Phase 4 optional** (~1-2 sessions): Extend `CIS_PROJECTS` array in `scheme-rounds.ts` from NSW-only (9 entries) to include the 35 non-NSW winners identified in v3.21.1. Deliverable: `v3.22.3`.
+
+**Schema extension**: additive fields on `scheme_contracts[]` entries — `execution_status`, `execution_date`, `fid_date`, `execution_notes`, `execution_source_url`. No breaking change.
+
+**Total effort estimate**: 4-6 focused sessions across 3-4 weeks. See plan doc for agent brief templates, data-source checklist, verification loop, risk register.
+
+**When to start**: Immediately after v3.21.4 ships. Phase 1 is the highest-value first sprint.
+
+### Backlog Item B — BESS Sleeper Story (NEW 2026-07-16, MOSTLY DELIVERED v3.21.4)
+
+**Thesis** (Travis 2026-07-16): "Govt accepted lowest bids in CIS Dispatchable rounds → thinnest capex margins → BESS T3/T8 winners will follow wind's Zero-for-15 trajectory later and less visibly."
+
+**Status**: v3.21.4 (this session) delivered the research note applying the wind-crisis framework to BESS. Includes CIS Pilot BESS + CIS T3 Dispatchable + CIS T8 Dispatchable + NSW LTESA comparison. Published to Research Notes surface under `bess-market` category. Docs long-form at `docs/RESEARCH_BESS_SLEEPER_STORY.md`.
+
+**Remaining work** (for a follow-up release):
+- If BESS delivery slippage becomes publicly visible (e.g. first CIS T3 winner formally withdraws), publish a follow-up note tracking the trajectory
+- If the BESS structural thesis (lowest-bid → no-FID) gains commentary from Modo/WattClarity/RE, expand the note with quoted evidence
+- Consider a in-app deep-dive component on the CIS T3 or T8 card (mirroring the wind T9 CompetitiveFieldDeepDive pattern)
 
 ### Tier 0 — SchemeTracker Restructure (HIGH PRIORITY, 1-2 sessions)
 
