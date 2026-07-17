@@ -5,18 +5,24 @@
   "status": "development",
   "capacity_mw": 400.0,
   "state": "VIC",
-  "current_developer": "Leeson Solar Pty Ltd.",
+  "current_developer": "OX2 (acquired 8 Jul 2026)",
+  "operational_notes": "OX2 acquired Corop 8 Jul 2026 from BNRG Leeson (OX2's second Australian asset after Muswellbrook). BESS scope revised on acquisition: 290 MW / 1,160 MWh (4hr) \u2014 up from prior 704 MWh spec. Solar 230 MWac. EPBC 'not controlled action' Feb 2026 (4-month approval). Construction start slipped from Q1 2026 target pending OX2 re-baseline. ~700 jobs. 1.19M solar modules.",
   "grid_forming": false,
   "has_sips": false,
   "has_syncon": false,
   "has_statcom": false,
   "has_harmonic_filter": false,
-  "data_confidence": "medium",
-  "last_updated": "2026-05-25",
-  "last_verified": "2026-03-10",
+  "data_confidence": "confirmed",
+  "last_updated": "2026-07-16",
+  "last_verified": "2026-07-16",
   "aemo_gen_info_id": "2615",
-  "timeline": [],
-  "ownership_history": [],
+  "timeline": [
+    { "date": "2026-07-08", "date_precision": "day", "event_type": "ownership_change", "title": "OX2 acquired from BNRG Leeson", "detail": "OX2's second Australian asset after Muswellbrook. Deal formalised BESS scope at 290 MW / 1,160 MWh." }
+  ],
+  "ownership_history": [
+    { "from": "pre-2026-07", "to": "2026-07-08", "owner": "BNRG Leeson (Irish)" },
+    { "from": "2026-07-08", "owner": "OX2 (Swedish, EQT-owned)", "note": "OX2's second AU asset after Muswellbrook" }
+  ],
   "cod_history": [],
   "suppliers": [],
   "offtakes": [],
@@ -25,9 +31,13 @@
       "scheme": "CIS",
       "round": "Tender 4 \u2014 NEM Generation",
       "capacity_mw": 230,
-      "storage_mwh": 704,
+      "storage_mwh": 1160,
+      "award_date": "2025-10-09",
       "source_url": "https://www.dcceew.gov.au/about/news/cis-tender-4-deliver-6-6gw-clean-energy",
-      "contract_type": "CISA (federal underwriting)"
+      "contract_type": "CISA (federal underwriting)",
+      "execution_status": "awarded",
+      "execution_notes": "OX2 acquired from BNRG Leeson 8 Jul 2026 \u2014 revised BESS scope 704\u21921160 MWh. Construction slipped from Q1 2026 target pending OX2 re-baseline. Pre-FID at ~9 months post-award. Ownership change may accelerate FC given OX2's Nordic infrastructure-fund backing.",
+      "execution_source_url": "https://www.pv-magazine-australia.com/2026/07/08/ox2-adds-230-mw-solar-and-battery-project-to-australian-portfolio/"
     }
   ],
   "cost_sources": [],

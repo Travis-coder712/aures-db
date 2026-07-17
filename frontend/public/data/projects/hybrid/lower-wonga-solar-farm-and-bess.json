@@ -2,11 +2,11 @@
   "id": "lower-wonga-solar-farm-and-bess",
   "name": "Lower Wonga Solar Farm and BESS",
   "technology": "hybrid",
-  "status": "development",
+  "status": "construction",
   "capacity_mw": 281.0,
   "storage_mwh": 843.0,
   "state": "QLD",
-  "current_developer": "Lower Wonga Solar Farm Pty Ltd",
+  "current_developer": "Lightsource bp",
   "cod_current": "2028-08-01",
   "cod_original": "2028-08-01",
   "connection_status": "anticipated",
@@ -15,9 +15,9 @@
   "has_syncon": false,
   "has_statcom": false,
   "has_harmonic_filter": false,
-  "data_confidence": "medium",
-  "last_updated": "2026-05-25",
-  "last_verified": "2026-03-10",
+  "data_confidence": "confirmed",
+  "last_updated": "2026-07-16",
+  "last_verified": "2026-07-16",
   "aemo_gen_info_id": "2300",
   "confidence_score": "28",
   "development_stage": "early_stage",
@@ -34,15 +34,27 @@
   ],
   "ownership_history": [],
   "cod_history": [],
-  "suppliers": [],
+  "suppliers": [
+    {
+      "role": "EPC",
+      "supplier": "INTEC Energy Solutions + Gotion Hi-Tech Australia (JV)",
+      "signed": "2026-06-16"
+    }
+  ],
   "offtakes": [],
   "scheme_contracts": [
     {
       "scheme": "CIS",
       "round": "Tender 4 \u2014 NEM Generation",
       "capacity_mw": 281,
+      "storage_mwh": 843,
+      "award_date": "2025-10-09",
       "source_url": "https://www.dcceew.gov.au/about/news/cis-tender-4-deliver-6-6gw-clean-energy",
-      "contract_type": "CISA (federal underwriting)"
+      "contract_type": "CISA (federal underwriting)",
+      "execution_status": "construction",
+      "execution_date": "2026-06-16",
+      "execution_notes": "FC + construction start Jun 2026. INTEC + Gotion JV EPC (16/06/2026). Lightsource bp's second AU hybrid to enter construction (first was Goulburn River T3). Ops late 2028. Integrated 281 MW solar + 281 MW/843 MWh BESS.",
+      "execution_source_url": "https://lightsourcebp.com/news/australia-lightsource-bp-begins-construction-on-lower-wonga-solar-and-battery-project-as-hybrid-strategy-gathers-pace/"
     }
   ],
   "cost_sources": [],
@@ -55,5 +67,19 @@
       "source_tier": 1
     }
   ],
-  "timeline_events": []
+  "operational_notes": "Integrated hybrid: 281 MWac (380 MWdc) solar + 281 MW / 843 MWh BESS. FC + construction start Jun 2026. INTEC Energy Solutions + Gotion Hi-Tech Australia JV EPC (16/06/2026). Commercial ops late 2028. Lightsource bp's second AU hybrid to enter construction.",
+  "timeline_events": [
+    {
+      "date": "2026-06-16",
+      "date_precision": "day",
+      "event_type": "epc_signed",
+      "title": "INTEC Energy Solutions + Gotion Hi-Tech Australia JV EPC"
+    },
+    {
+      "date": "2026-06",
+      "date_precision": "month",
+      "event_type": "construction_start",
+      "title": "Construction commenced"
+    }
+  ]
 }

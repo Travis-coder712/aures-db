@@ -3,7 +3,7 @@
     "total_bess": 432,
     "total_with_storage": 347,
     "total_operating": 34,
-    "total_hybrid": 92,
+    "total_hybrid": 91,
     "total_hybrid_operating": 0,
     "grid_forming_count": 11,
     "grid_forming_pct": 2.5,
@@ -432,7 +432,7 @@
       "capacity_mw": 921.12,
       "storage_mwh": 800.0,
       "duration_h": 0.87,
-      "developer": "Wind Prospect WA Pty Ltd",
+      "developer": "AGL + Wind Prospect",
       "cod": "2030-11-01"
     },
     {
@@ -452,9 +452,9 @@
       "state": "VIC",
       "status": "development",
       "capacity_mw": 750.0,
-      "storage_mwh": 1200.0,
-      "duration_h": 1.6,
-      "developer": "Edify Energy Pty Ltd",
+      "storage_mwh": 2400.0,
+      "duration_h": 3.2,
+      "developer": "Edify Energy (La Caisse-owned)",
       "cod": "2028-02-01"
     },
     {
@@ -667,17 +667,6 @@
       "cod": "2028-01-02"
     },
     {
-      "project_id": "gawara-baya-wind-and-bess",
-      "name": "Gawara Baya Wind And BESS",
-      "state": "QLD",
-      "status": "development",
-      "capacity_mw": 400.0,
-      "storage_mwh": 208.0,
-      "duration_h": 0.52,
-      "developer": "GAWARA BAYA WIND FARM PTY LTD",
-      "cod": "2029-01-15"
-    },
-    {
       "project_id": "jackson-solar-farm-and-bess",
       "name": "Jackson Solar Farm and BESS",
       "state": "QLD",
@@ -813,11 +802,11 @@
       "project_id": "guthries-gap-solar-power-station",
       "name": "Guthrie\u2019s Gap Solar Power Station",
       "state": "QLD",
-      "status": "development",
+      "status": "construction",
       "capacity_mw": 300.0,
       "storage_mwh": 1200.0,
       "duration_h": 4.0,
-      "developer": "Edify Energy Pty Ltd",
+      "developer": "Edify Energy (La Caisse-owned)",
       "cod": "2029-05-01"
     },
     {
@@ -868,11 +857,11 @@
       "project_id": "smoky-creek-solar-power-station",
       "name": "Smoky Creek Solar Power Station",
       "state": "QLD",
-      "status": "development",
+      "status": "construction",
       "capacity_mw": 300.0,
       "storage_mwh": 1200.0,
       "duration_h": 4.0,
-      "developer": "Edify Energy Pty Ltd",
+      "developer": "Edify Energy (La Caisse-owned)",
       "cod": "2029-05-01"
     },
     {
@@ -901,11 +890,11 @@
       "project_id": "lower-wonga-solar-farm-and-bess",
       "name": "Lower Wonga Solar Farm and BESS",
       "state": "QLD",
-      "status": "development",
+      "status": "construction",
       "capacity_mw": 281.0,
       "storage_mwh": 843.0,
       "duration_h": 3.0,
-      "developer": "Lower Wonga Solar Farm Pty Ltd",
+      "developer": "Lightsource bp",
       "cod": "2028-08-01"
     },
     {
@@ -1268,7 +1257,7 @@
       "capacity_mw": 95.0,
       "storage_mwh": 110.0,
       "duration_h": 1.16,
-      "developer": "DERBY SOLAR PROJECT PTY LTD",
+      "developer": "Sungrow Renewable Energy",
       "cod": "2027-09-01"
     },
     {
@@ -2176,5 +2165,5 @@
       "data_confidence": "low"
     }
   ],
-  "exported_at": "2026-07-17T17:12:57.873107"
+  "exported_at": "2026-07-17T23:01:43.013578"
 }

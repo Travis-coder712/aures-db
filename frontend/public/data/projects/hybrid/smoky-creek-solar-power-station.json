@@ -2,11 +2,11 @@
   "id": "smoky-creek-solar-power-station",
   "name": "Smoky Creek Solar Power Station",
   "technology": "hybrid",
-  "status": "development",
+  "status": "construction",
   "capacity_mw": 300.0,
   "storage_mwh": 1200.0,
   "state": "QLD",
-  "current_developer": "Edify Energy Pty Ltd",
+  "current_developer": "Edify Energy (La Caisse-owned)",
   "cod_current": "2029-05-01",
   "cod_original": "2029-05-01",
   "connection_status": "anticipated",
@@ -15,9 +15,9 @@
   "has_syncon": false,
   "has_statcom": false,
   "has_harmonic_filter": false,
-  "data_confidence": "medium",
-  "last_updated": "2026-05-25",
-  "last_verified": "2026-03-10",
+  "data_confidence": "confirmed",
+  "last_updated": "2026-07-16",
+  "last_verified": "2026-07-16",
   "aemo_gen_info_id": "1708",
   "confidence_score": "28",
   "development_stage": "early_stage",
@@ -34,16 +34,35 @@
   ],
   "ownership_history": [],
   "cod_history": [],
-  "suppliers": [],
-  "offtakes": [],
+  "suppliers": [
+    {
+      "role": "EPC",
+      "supplier": "DT Infrastructure",
+      "signed": "2026-03-16"
+    }
+  ],
+  "offtakes": [
+    {
+      "counterparty": "Rio Tinto",
+      "type": "Hybrid services agreement",
+      "term_years": 20,
+      "note": "90% offtake to Gladstone alumina/aluminium; twin agreement with Guthrie's Gap"
+    }
+  ],
   "scheme_contracts": [
     {
       "scheme": "CIS",
       "round": "Tender 4 \u2014 NEM Generation",
       "capacity_mw": 300,
       "storage_mwh": 1200,
+      "award_date": "2025-10-09",
       "source_url": "https://www.dcceew.gov.au/about/news/cis-tender-4-deliver-6-6gw-clean-energy",
-      "contract_type": "CISA (federal underwriting)"
+      "contract_type": "CISA (federal underwriting)",
+      "execution_status": "construction",
+      "execution_date": "2026-05-20",
+      "fid_date": "2026-05-20",
+      "execution_notes": "FC 20 May 2026 with Rio Tinto 20-yr offtake anchor (twin with Guthrie's Gap). DT Infrastructure EPC 16 Mar 2026. Delivery target 2028.",
+      "execution_source_url": "https://edifyenergy.com/renewable-energy/financial-close-on-smoky-creek-and-guthries-gap-solar-power-stations/"
     }
   ],
   "cost_sources": [],
@@ -56,5 +75,19 @@
       "source_tier": 1
     }
   ],
-  "timeline_events": []
+  "operational_notes": "FC 20 May 2026 (twin with Guthrie's Gap \u2014 joint milestone). DT Infrastructure EPC 16/03/2026. Rio Tinto 20-yr hybrid services agreement \u2014 90% offtake to Gladstone alumina/aluminium. Delivery/ops target 2028.",
+  "timeline_events": [
+    {
+      "date": "2026-03-16",
+      "date_precision": "day",
+      "event_type": "epc_signed",
+      "title": "DT Infrastructure preferred EPC (Edify 1.8 GW package)"
+    },
+    {
+      "date": "2026-05-20",
+      "date_precision": "day",
+      "event_type": "fid_reached",
+      "title": "FC reached \u2014 twin with Guthrie's Gap; Rio Tinto 20-yr offtake anchor"
+    }
+  ]
 }

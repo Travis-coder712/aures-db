@@ -265,16 +265,16 @@
       "technology": "wind",
       "state": "QLD",
       "stage": "development",
-      "project_count": 38,
-      "total_mw": 29364.9,
-      "avg_score": 34.2,
+      "project_count": 39,
+      "total_mw": 29764.9,
+      "avg_score": 34.4,
       "quartile_counts": {
         "1": 11,
-        "2": 9,
+        "2": 10,
         "3": 11,
         "4": 7
       },
-      "q1_pct": 29.0,
+      "q1_pct": 28.0,
       "project_ids": [
         "springlands-wind-farm",
         "bunkers-hill-wind-farm",
@@ -291,6 +291,7 @@
         "collinsville-green-energy-hub",
         "dawson-wind-farm",
         "forsayth-wind-farm",
+        "gawara-baya-wind-and-bess",
         "harrami-wind-farm",
         "karma-wind-farm-kci",
         "mt-view-wind-farm-kci",
@@ -642,12 +643,12 @@
       "stage": "development",
       "project_count": 19,
       "total_mw": 4044.0,
-      "avg_score": 39.7,
+      "avg_score": 40.3,
       "quartile_counts": {
         "1": 5,
-        "2": 9,
+        "2": 10,
         "3": 0,
-        "4": 5
+        "4": 4
       },
       "q1_pct": 26.0,
       "project_ids": [
@@ -658,6 +659,7 @@
         "frasers-solar-farm",
         "bookaar-solar-farm",
         "campbells-forest-solar-farm",
+        "corop-solar-farm",
         "hazelwood-north-solar-farm-kci",
         "little-river-solar-farm-kci",
         "mansfield-solar-farm-solar-kci",
@@ -666,7 +668,6 @@
         "winton-north-solar-farm",
         "wodonga-solar-farm",
         "boulka-park-solar-farm",
-        "corop-solar-farm",
         "nowingi-solar-storage-solar",
         "muskerry-solar-power-station-kci",
         "meadow-creek-solar-farm-kci"
@@ -1671,28 +1672,28 @@
       "stage": "development",
       "project_count": 16,
       "total_mw": 4886.1,
-      "avg_score": 49.4,
+      "avg_score": 49.7,
       "quartile_counts": {
-        "1": 5,
-        "2": 3,
-        "3": 7,
-        "4": 1
+        "1": 6,
+        "2": 2,
+        "3": 4,
+        "4": 4
       },
-      "q1_pct": 31.0,
+      "q1_pct": 38.0,
       "project_ids": [
+        "barwon-solar-farm-and-bess",
         "kerang-hybrid",
         "mologa-solar-hybrid-pv-bess",
         "nowingi-solar-farm-edify-kci",
         "puzzle-range-wind-farm",
         "willatook",
-        "barwon-solar-farm-and-bess",
         "cooba-solar-farm-kci",
         "derby-solar-farm-and-bess",
         "axedale-sf-and-bess",
+        "elaine-solar-farm-and-bess",
         "fosterville-sf-and-bess",
         "west-mokoan-solar-farm-and-bess",
         "barnawartha-solar-and-energy-storage",
-        "elaine-solar-farm-and-bess",
         "mortlake-energy-hub",
         "trafalgar-east-hybrid-facility-stage-2",
         "hexham"
@@ -1701,17 +1702,37 @@
     {
       "technology": "hybrid",
       "state": "QLD",
-      "stage": "development",
-      "project_count": 32,
-      "total_mw": 14504.0,
-      "avg_score": 43.8,
+      "stage": "construction",
+      "project_count": 3,
+      "total_mw": 881.0,
+      "avg_score": 97.5,
       "quartile_counts": {
-        "1": 11,
+        "1": 0,
+        "2": 3,
+        "3": 0,
+        "4": 0
+      },
+      "q1_pct": 0.0,
+      "project_ids": [
+        "guthries-gap-solar-power-station",
+        "lower-wonga-solar-farm-and-bess",
+        "smoky-creek-solar-power-station"
+      ]
+    },
+    {
+      "technology": "hybrid",
+      "state": "QLD",
+      "stage": "development",
+      "project_count": 28,
+      "total_mw": 13223.0,
+      "avg_score": 44.3,
+      "quartile_counts": {
+        "1": 7,
         "2": 15,
         "3": 0,
         "4": 6
       },
-      "q1_pct": 34.0,
+      "q1_pct": 25.0,
       "project_ids": [
         "cattle-creek-wind-farm-kci",
         "colosseum-solar-farm-and-bess",
@@ -1724,19 +1745,15 @@
         "blackwater-hybrid-system",
         "farmers-creek-energy-park",
         "mackenzie-river-solar-farm",
-        "guthries-gap-solar-power-station",
-        "smoky-creek-solar-power-station",
+        "ganymirra-solar-power-station",
+        "majors-creek-solar-power-station",
         "eiwa-gin-gin-renewable-energy-park",
         "eiwa-golden-fleece-renewable-energy-park",
         "everleigh-solar-farm-and-bess-kci",
         "fraser-coast-hybrid-plant",
-        "ganymirra-solar-power-station",
-        "gawara-baya-wind-and-bess",
         "glenroy-hybrid-facility-solar-and-bess",
         "goodnight-hybrid-facility-solar-and-bess",
         "harlin-solar-farm",
-        "lower-wonga-solar-farm-and-bess",
-        "majors-creek-solar-power-station",
         "moonlight-range-wind-farm",
         "yelarbon-sf-and-bess-kci",
         "gemfields-integrated-facility-wind-and-solar",
@@ -2131,8 +2148,8 @@
     {
       "technology": "wind",
       "stage": "development",
-      "count": 120,
-      "mw": 67875.3,
+      "count": 121,
+      "mw": 68275.3,
       "q1": 39
     },
     {
@@ -2187,16 +2204,16 @@
     {
       "technology": "hybrid",
       "stage": "construction",
-      "count": 4,
-      "mw": 740.0,
+      "count": 7,
+      "mw": 1621.0,
       "q1": 0
     },
     {
       "technology": "hybrid",
       "stage": "development",
-      "count": 105,
-      "mw": 43797.299999999996,
-      "q1": 40
+      "count": 101,
+      "mw": 42516.299999999996,
+      "q1": 37
     },
     {
       "technology": "pumped_hydro",
@@ -2268,7 +2285,7 @@
       "stage": "development",
       "count": 148,
       "mw": 71934.0,
-      "q1": 55
+      "q1": 56
     },
     {
       "state": "QLD",
@@ -2280,16 +2297,16 @@
     {
       "state": "QLD",
       "stage": "construction",
-      "count": 16,
-      "mw": 5399.0,
+      "count": 19,
+      "mw": 6280.0,
       "q1": 4
     },
     {
       "state": "QLD",
       "stage": "development",
-      "count": 249,
-      "mw": 112782.5,
-      "q1": 71
+      "count": 246,
+      "mw": 111901.5,
+      "q1": 67
     },
     {
       "state": "SA",
@@ -6320,7 +6337,7 @@
       "status": "construction",
       "stage_group": "construction",
       "capacity_mw": 256.0,
-      "developer": "Aula Energy",
+      "developer": "Aula Energy (100% post-FC Dec 2025)",
       "score": 105.0,
       "drift_months": 0.0,
       "construction_started": "2026-01-01",
@@ -6440,6 +6457,22 @@
       "score_basis": "100 \u2212 |drift months|\u00d71.5 \u2212 10 (no construction_start) + developer grade\u00d72.5",
       "quartile": 2
     },
+    "guthries-gap-solar-power-station": {
+      "id": "guthries-gap-solar-power-station",
+      "name": "Guthrie\u2019s Gap Solar Power Station",
+      "technology": "hybrid",
+      "state": "QLD",
+      "status": "construction",
+      "stage_group": "construction",
+      "capacity_mw": 300.0,
+      "developer": "Edify Energy (La Caisse-owned)",
+      "score": 97.5,
+      "drift_months": 0.0,
+      "construction_started": null,
+      "developer_grade": "B",
+      "score_basis": "100 \u2212 |drift months|\u00d71.5 \u2212 10 (no construction_start) + developer grade\u00d72.5",
+      "quartile": 2
+    },
     "horsham-solar-farm": {
       "id": "horsham-solar-farm",
       "name": "Horsham Solar Farm",
@@ -6520,6 +6553,22 @@
       "score_basis": "100 \u2212 |drift months|\u00d71.5 \u2212 10 (no construction_start) + developer grade\u00d72.5",
       "quartile": 1
     },
+    "lower-wonga-solar-farm-and-bess": {
+      "id": "lower-wonga-solar-farm-and-bess",
+      "name": "Lower Wonga Solar Farm and BESS",
+      "technology": "hybrid",
+      "state": "QLD",
+      "status": "construction",
+      "stage_group": "construction",
+      "capacity_mw": 281.0,
+      "developer": "Lightsource bp",
+      "score": 97.5,
+      "drift_months": 0.0,
+      "construction_started": null,
+      "developer_grade": "B",
+      "score_basis": "100 \u2212 |drift months|\u00d71.5 \u2212 10 (no construction_start) + developer grade\u00d72.5",
+      "quartile": 2
+    },
     "munna-creek-solar-farm": {
       "id": "munna-creek-solar-farm",
       "name": "Munna Creek Solar Farm",
@@ -6597,6 +6646,22 @@
       "drift_months": 0.0,
       "construction_started": null,
       "developer_grade": null,
+      "score_basis": "100 \u2212 |drift months|\u00d71.5 \u2212 10 (no construction_start) + developer grade\u00d72.5",
+      "quartile": 2
+    },
+    "smoky-creek-solar-power-station": {
+      "id": "smoky-creek-solar-power-station",
+      "name": "Smoky Creek Solar Power Station",
+      "technology": "hybrid",
+      "state": "QLD",
+      "status": "construction",
+      "stage_group": "construction",
+      "capacity_mw": 300.0,
+      "developer": "Edify Energy (La Caisse-owned)",
+      "score": 97.5,
+      "drift_months": 0.0,
+      "construction_started": null,
+      "developer_grade": "B",
       "score_basis": "100 \u2212 |drift months|\u00d71.5 \u2212 10 (no construction_start) + developer grade\u00d72.5",
       "quartile": 2
     },
@@ -6945,7 +7010,7 @@
       "has_eis": false,
       "developer_grade": null,
       "score_basis": "stage (\u00d715) + has_cod (15) + has_rez (10) + scheme (20) + EIS (15) + developer grade (\u00d75); max 110",
-      "quartile": 1
+      "quartile": 2
     },
     "argoon-wind-farm-res-group-kci": {
       "id": "argoon-wind-farm-res-group-kci",
@@ -7401,7 +7466,7 @@
       "has_eis": false,
       "developer_grade": null,
       "score_basis": "stage (\u00d715) + has_cod (15) + has_rez (10) + scheme (20) + EIS (15) + developer grade (\u00d75); max 110",
-      "quartile": 3
+      "quartile": 4
     },
     "baroota-pumped-hydro-project": {
       "id": "baroota-pumped-hydro-project",
@@ -7431,15 +7496,15 @@
       "stage_group": "development",
       "capacity_mw": 250.0,
       "developer": "Elgin Energy (CIP-majority)",
-      "score": 55,
+      "score": 60,
       "development_stage": "planning_submitted",
       "has_cod": true,
       "has_rez": false,
       "has_scheme": false,
       "has_eis": false,
-      "developer_grade": null,
+      "developer_grade": "B",
       "score_basis": "stage (\u00d715) + has_cod (15) + has_rez (10) + scheme (20) + EIS (15) + developer grade (\u00d75); max 110",
-      "quartile": 2
+      "quartile": 1
     },
     "bashan-1-wind-farm": {
       "id": "bashan-1-wind-farm",
@@ -7639,7 +7704,7 @@
       "status": "development",
       "stage_group": "development",
       "capacity_mw": 224.0,
-      "developer": "The Trustee for Equis Wind (Australia) LHWF2 Asset Trust",
+      "developer": "Equis",
       "score": 55,
       "development_stage": "planning_submitted",
       "has_cod": true,
@@ -7971,7 +8036,7 @@
       "has_eis": false,
       "developer_grade": null,
       "score_basis": "stage (\u00d715) + has_cod (15) + has_rez (10) + scheme (20) + EIS (15) + developer grade (\u00d75); max 110",
-      "quartile": 1
+      "quartile": 2
     },
     "blair-athol-solar-power-station": {
       "id": "blair-athol-solar-power-station",
@@ -9976,16 +10041,16 @@
       "status": "development",
       "stage_group": "development",
       "capacity_mw": 400.0,
-      "developer": "Leeson Solar Pty Ltd.",
-      "score": 30,
+      "developer": "OX2 (acquired 8 Jul 2026)",
+      "score": 40,
       "development_stage": "planning_submitted",
       "has_cod": false,
       "has_rez": false,
       "has_scheme": false,
       "has_eis": false,
-      "developer_grade": "F",
+      "developer_grade": null,
       "score_basis": "stage (\u00d715) + has_cod (15) + has_rez (10) + scheme (20) + EIS (15) + developer grade (\u00d75); max 110",
-      "quartile": 4
+      "quartile": 2
     },
     "cranbourne-bess-macquarie": {
       "id": "cranbourne-bess-macquarie",
@@ -10413,7 +10478,7 @@
       "status": "development",
       "stage_group": "development",
       "capacity_mw": 95.0,
-      "developer": "DERBY SOLAR PROJECT PTY LTD",
+      "developer": "Sungrow Renewable Energy",
       "score": 55,
       "development_stage": "planning_submitted",
       "has_cod": true,
@@ -10908,13 +10973,13 @@
       "stage_group": "development",
       "capacity_mw": 125.0,
       "developer": "Elgin Energy (CIP-majority)",
-      "score": 40,
+      "score": 45,
       "development_stage": "early_stage",
       "has_cod": true,
       "has_rez": false,
       "has_scheme": false,
       "has_eis": false,
-      "developer_grade": null,
+      "developer_grade": "B",
       "score_basis": "stage (\u00d715) + has_cod (15) + has_rez (10) + scheme (20) + EIS (15) + developer grade (\u00d75); max 110",
       "quartile": 3
     },
@@ -11106,7 +11171,7 @@
       "has_eis": false,
       "developer_grade": null,
       "score_basis": "stage (\u00d715) + has_cod (15) + has_rez (10) + scheme (20) + EIS (15) + developer grade (\u00d75); max 110",
-      "quartile": 1
+      "quartile": 2
     },
     "forbes-hybrid-project": {
       "id": "forbes-hybrid-project",
@@ -11250,13 +11315,13 @@
       "stage_group": "development",
       "capacity_mw": 150.0,
       "developer": "Edify Energy (La Caisse-owned)",
-      "score": 40,
+      "score": 45,
       "development_stage": "early_stage",
       "has_cod": true,
       "has_rez": false,
       "has_scheme": false,
       "has_eis": false,
-      "developer_grade": null,
+      "developer_grade": "B",
       "score_basis": "stage (\u00d715) + has_cod (15) + has_rez (10) + scheme (20) + EIS (15) + developer grade (\u00d75); max 110",
       "quartile": 2
     },
@@ -11320,12 +11385,12 @@
     "gawara-baya-wind-and-bess": {
       "id": "gawara-baya-wind-and-bess",
       "name": "Gawara Baya Wind And BESS",
-      "technology": "hybrid",
+      "technology": "wind",
       "state": "QLD",
       "status": "development",
       "stage_group": "development",
       "capacity_mw": 400.0,
-      "developer": "GAWARA BAYA WIND FARM PTY LTD",
+      "developer": "Windlab (Squadron / Andrew Forrest)",
       "score": 40,
       "development_stage": "early_stage",
       "has_cod": true,
@@ -12343,25 +12408,6 @@
       "score_basis": "stage (\u00d715) + has_cod (15) + has_rez (10) + scheme (20) + EIS (15) + developer grade (\u00d75); max 110",
       "quartile": 3
     },
-    "guthries-gap-solar-power-station": {
-      "id": "guthries-gap-solar-power-station",
-      "name": "Guthrie\u2019s Gap Solar Power Station",
-      "technology": "hybrid",
-      "state": "QLD",
-      "status": "development",
-      "stage_group": "development",
-      "capacity_mw": 300.0,
-      "developer": "Edify Energy Pty Ltd",
-      "score": 45,
-      "development_stage": "early_stage",
-      "has_cod": true,
-      "has_rez": false,
-      "has_scheme": false,
-      "has_eis": false,
-      "developer_grade": "B",
-      "score_basis": "stage (\u00d715) + has_cod (15) + has_rez (10) + scheme (20) + EIS (15) + developer grade (\u00d75); max 110",
-      "quartile": 2
-    },
     "hallett-bess": {
       "id": "hallett-bess",
       "name": "Hallett BESS",
@@ -12883,14 +12929,14 @@
       "status": "development",
       "stage_group": "development",
       "capacity_mw": 921.12,
-      "developer": "Wind Prospect WA Pty Ltd",
-      "score": 30,
+      "developer": "AGL + Wind Prospect",
+      "score": 25,
       "development_stage": "epbc_submitted",
       "has_cod": true,
       "has_rez": false,
       "has_scheme": false,
       "has_eis": false,
-      "developer_grade": "B",
+      "developer_grade": null,
       "score_basis": "stage (\u00d715) + has_cod (15) + has_rez (10) + scheme (20) + EIS (15) + developer grade (\u00d75); max 110",
       "quartile": 4
     },
@@ -14376,25 +14422,6 @@
       "score_basis": "stage (\u00d715) + has_cod (15) + has_rez (10) + scheme (20) + EIS (15) + developer grade (\u00d75); max 110",
       "quartile": 2
     },
-    "lower-wonga-solar-farm-and-bess": {
-      "id": "lower-wonga-solar-farm-and-bess",
-      "name": "Lower Wonga Solar Farm and BESS",
-      "technology": "hybrid",
-      "state": "QLD",
-      "status": "development",
-      "stage_group": "development",
-      "capacity_mw": 281.0,
-      "developer": "Lower Wonga Solar Farm Pty Ltd",
-      "score": 40,
-      "development_stage": "early_stage",
-      "has_cod": true,
-      "has_rez": false,
-      "has_scheme": false,
-      "has_eis": false,
-      "developer_grade": null,
-      "score_basis": "stage (\u00d715) + has_cod (15) + has_rez (10) + scheme (20) + EIS (15) + developer grade (\u00d75); max 110",
-      "quartile": 2
-    },
     "loy-yang-b-power-station-bess-stage-1-kci": {
       "id": "loy-yang-b-power-station-bess-stage-1-kci",
       "name": "Loy Yang B Power Station - BESS Stage 1 - KCI",
@@ -14450,7 +14477,7 @@
       "has_eis": false,
       "developer_grade": null,
       "score_basis": "stage (\u00d715) + has_cod (15) + has_rez (10) + scheme (20) + EIS (15) + developer grade (\u00d75); max 110",
-      "quartile": 1
+      "quartile": 2
     },
     "madeline-downs-bess": {
       "id": "madeline-downs-bess",
@@ -14556,13 +14583,13 @@
       "stage_group": "development",
       "capacity_mw": 150.0,
       "developer": "Edify Energy (La Caisse-owned)",
-      "score": 40,
+      "score": 45,
       "development_stage": "early_stage",
       "has_cod": true,
       "has_rez": false,
       "has_scheme": false,
       "has_eis": false,
-      "developer_grade": null,
+      "developer_grade": "B",
       "score_basis": "stage (\u00d715) + has_cod (15) + has_rez (10) + scheme (20) + EIS (15) + developer grade (\u00d75); max 110",
       "quartile": 2
     },
@@ -15239,7 +15266,7 @@
       "status": "development",
       "stage_group": "development",
       "capacity_mw": 349.0,
-      "developer": "Moah Creek Wind Farm Project Co Pty Ltd as trustee for the Moah Creek Wind Farm Project Trust",
+      "developer": "Central Queensland Power (CQP)",
       "score": 25,
       "development_stage": "epbc_submitted",
       "has_cod": true,
@@ -15571,7 +15598,7 @@
       "has_eis": false,
       "developer_grade": null,
       "score_basis": "stage (\u00d715) + has_cod (15) + has_rez (10) + scheme (20) + EIS (15) + developer grade (\u00d75); max 110",
-      "quartile": 3
+      "quartile": 4
     },
     "morwell-bess": {
       "id": "morwell-bess",
@@ -16436,7 +16463,7 @@
       "status": "development",
       "stage_group": "development",
       "capacity_mw": 750.0,
-      "developer": "Edify Energy Pty Ltd",
+      "developer": "Edify Energy (La Caisse-owned)",
       "score": 60,
       "development_stage": "planning_submitted",
       "has_cod": true,
@@ -18328,25 +18355,6 @@
       "score_basis": "stage (\u00d715) + has_cod (15) + has_rez (10) + scheme (20) + EIS (15) + developer grade (\u00d75); max 110",
       "quartile": 1
     },
-    "smoky-creek-solar-power-station": {
-      "id": "smoky-creek-solar-power-station",
-      "name": "Smoky Creek Solar Power Station",
-      "technology": "hybrid",
-      "state": "QLD",
-      "status": "development",
-      "stage_group": "development",
-      "capacity_mw": 300.0,
-      "developer": "Edify Energy Pty Ltd",
-      "score": 45,
-      "development_stage": "early_stage",
-      "has_cod": true,
-      "has_rez": false,
-      "has_scheme": false,
-      "has_eis": false,
-      "developer_grade": "B",
-      "score_basis": "stage (\u00d715) + has_cod (15) + has_rez (10) + scheme (20) + EIS (15) + developer grade (\u00d75); max 110",
-      "quartile": 2
-    },
     "snowtown-north-solar-farm": {
       "id": "snowtown-north-solar-farm",
       "name": "Snowtown North Solar Farm",
@@ -19960,7 +19968,7 @@
       "has_eis": false,
       "developer_grade": null,
       "score_basis": "stage (\u00d715) + has_cod (15) + has_rez (10) + scheme (20) + EIS (15) + developer grade (\u00d75); max 110",
-      "quartile": 3
+      "quartile": 4
     },
     "tragowel-bess": {
       "id": "tragowel-bess",
@@ -21598,10 +21606,10 @@
     }
   },
   "summary": {
-    "total_cells": 62,
+    "total_cells": 63,
     "operating_count": 221,
-    "construction_count": 57,
-    "development_count": 780,
+    "construction_count": 60,
+    "development_count": 777,
     "matrix_techs": [
       "wind",
       "solar",
@@ -21619,5 +21627,5 @@
       "WA"
     ]
   },
-  "exported_at": "2026-07-17T17:12:57.694894"
+  "exported_at": "2026-07-17T23:01:42.834777"
 }

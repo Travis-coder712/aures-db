@@ -1159,8 +1159,8 @@
     },
     {
       "developer": "Edify Energy (La Caisse-owned)",
-      "project_count": 2,
-      "total_mw": 300.0,
+      "project_count": 5,
+      "total_mw": 1650.0,
       "technologies": [
         "hybrid"
       ],
@@ -1172,17 +1172,17 @@
       "execution_score": 70.0,
       "grade": "B",
       "drift_stats": {
-        "count": 2,
+        "count": 5,
         "mean": 0.0,
-        "median": 0.0,
+        "median": 0,
         "p25": 0,
         "p75": 0
       }
     },
     {
       "developer": "Edify Energy Pty Ltd",
-      "project_count": 14,
-      "total_mw": 3930.0,
+      "project_count": 11,
+      "total_mw": 2580.0,
       "technologies": [
         "bess",
         "hybrid",
@@ -1196,9 +1196,9 @@
       "execution_score": 70.0,
       "grade": "B",
       "drift_stats": {
-        "count": 4,
+        "count": 1,
         "mean": 0.0,
-        "median": 0.0,
+        "median": 0,
         "p25": 0,
         "p75": 0
       }
@@ -1591,8 +1591,8 @@
     },
     {
       "developer": "Lightsource bp",
-      "project_count": 4,
-      "total_mw": 1272.0,
+      "project_count": 5,
+      "total_mw": 1553.0,
       "technologies": [
         "bess",
         "hybrid",
@@ -1606,9 +1606,9 @@
       "execution_score": 70.0,
       "grade": "B",
       "drift_stats": {
-        "count": 4,
+        "count": 5,
         "mean": 0.0,
-        "median": 0.0,
+        "median": 0,
         "p25": 0,
         "p75": 0
       }
@@ -2184,28 +2184,6 @@
       }
     },
     {
-      "developer": "Wind Prospect WA Pty Ltd",
-      "project_count": 2,
-      "total_mw": 1371.1,
-      "technologies": [
-        "hybrid"
-      ],
-      "operating": 0,
-      "withdrawn": 0,
-      "completion_rate": 0.0,
-      "avg_drift_months": 0.0,
-      "on_time_pct": 100.0,
-      "execution_score": 70.0,
-      "grade": "B",
-      "drift_stats": {
-        "count": 2,
-        "mean": 0.0,
-        "median": 0.0,
-        "p25": 0,
-        "p75": 0
-      }
-    },
-    {
       "developer": "Windlab Developments Pty Ltd",
       "project_count": 2,
       "total_mw": 1750.0,
@@ -2677,20 +2655,6 @@
       "grade": "F"
     },
     {
-      "developer": "Leeson Solar Pty Ltd.",
-      "project_count": 2,
-      "total_mw": 800.0,
-      "technologies": [
-        "bess",
-        "solar"
-      ],
-      "operating": 0,
-      "withdrawn": 0,
-      "completion_rate": 0.0,
-      "execution_score": 35.0,
-      "grade": "F"
-    },
-    {
       "developer": "Libra Energy Pty Ltd",
       "project_count": 4,
       "total_mw": 848.0,
@@ -3051,14 +3015,14 @@
   "industry_averages": {
     "avg_drift_months": 0.1,
     "avg_on_time_pct": 99.1,
-    "developer_count": 154
+    "developer_count": 152
   },
   "grade_distribution": {
     "A": 26,
-    "B": 76,
+    "B": 75,
     "D": 2,
-    "F": 50
+    "F": 49
   },
-  "total_developers": 154,
-  "exported_at": "2026-07-17T17:21:34.568310"
+  "total_developers": 152,
+  "exported_at": "2026-07-17T23:10:18.544210"
 }

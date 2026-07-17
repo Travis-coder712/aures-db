@@ -5,7 +5,7 @@
   "status": "construction",
   "capacity_mw": 256.0,
   "state": "SA",
-  "current_developer": "Aula Energy",
+  "current_developer": "Aula Energy (100% post-FC Dec 2025)",
   "cod_current": "2029-01-01",
   "cod_original": "2029-01-01",
   "connection_status": "committed",
@@ -15,9 +15,9 @@
   "has_statcom": false,
   "has_harmonic_filter": false,
   "notable": "42x GE Vernova 6.1-158. Aula Energy (Macquarie). DT Infrastructure civil. A$900M. COD 2028.",
-  "data_confidence": "medium",
-  "last_updated": "2026-05-25",
-  "last_verified": "2026-03-10",
+  "data_confidence": "confirmed",
+  "last_updated": "2026-07-16",
+  "last_verified": "2026-07-16",
   "aemo_gen_info_id": "1040",
   "confidence_score": "65",
   "development_stage": "epbc_approved",
@@ -94,14 +94,27 @@
       "source_url": "https://www.insideconstruction.com.au/news/latest-news/dt-infrastructure-wins-contract-to-deliver-carmodys-hill-wind-farm"
     }
   ],
-  "offtakes": [],
+  "offtakes": [
+    {
+      "counterparty": "Snowy Hydro",
+      "type": "PPA",
+      "signed": "2025-12",
+      "note": "Signed pre-FC; anchor offtake enabling FID"
+    }
+  ],
   "scheme_contracts": [
     {
       "scheme": "CIS",
       "round": "Tender 4 \u2014 NEM Generation",
       "capacity_mw": 247,
+      "award_date": "2025-10-09",
       "source_url": "https://www.dcceew.gov.au/about/news/cis-tender-4-deliver-6-6gw-clean-energy",
-      "contract_type": "CISA (federal underwriting)"
+      "contract_type": "CISA (federal underwriting)",
+      "execution_status": "construction",
+      "execution_date": "2025-12-01",
+      "fid_date": "2025-12-01",
+      "execution_notes": "FC Dec 2025 with Snowy Hydro PPA. Aula assumed 100% ownership at FC. Construction start early 2026, ops 2028. Nameplate 256 MW (award 247 MW). AU$900m; one of first T4 movers \u2014 validates the 'contracted-revenue-on-top-of-CIS-floor' pattern from BESS Sleeper Story thesis.",
+      "execution_source_url": "https://www.aulaenergy.com/news/0hxthha8ispgeq5mu6hi2omw400304"
     }
   ],
   "cost_sources": [],
@@ -141,5 +154,14 @@
       "source_tier": 1
     }
   ],
-  "timeline_events": []
+  "operational_notes": "FC Dec 2025 with Snowy Hydro PPA; Aula assumed 100% ownership at FC (SPV 'Georgetown Hills Renewable Energy Pty Ltd' is the operating entity). Construction start early 2026, ops 2028. Nameplate 256 MW (CIS award 247 MW). Adding 118 MW BESS beyond CIS scope. AU$900m project \u2014 one of first T4 movers driven by anchor offtake.",
+  "timeline_events": [
+    {
+      "date": "2025-12",
+      "date_precision": "month",
+      "event_type": "fid_reached",
+      "title": "FID reached with Snowy Hydro PPA \u2014 Aula assumed 100% ownership at FC",
+      "detail": "Financial close Dec 2025 underpinned by Snowy Hydro PPA. Aula Energy took 100% ownership at FC. Construction start early 2026, ops 2028. Adding 118 MW BESS beyond CIS scope."
+    }
+  ]
 }

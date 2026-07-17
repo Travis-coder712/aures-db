@@ -13,9 +13,9 @@
   "has_syncon": false,
   "has_statcom": false,
   "has_harmonic_filter": false,
-  "data_confidence": "medium",
-  "last_updated": "2026-05-25",
-  "last_verified": "2026-03-10",
+  "data_confidence": "confirmed",
+  "last_updated": "2026-07-16",
+  "last_verified": "2026-07-16",
   "aemo_gen_info_id": "2693",
   "confidence_score": "20",
   "development_stage": "planning_submitted",
@@ -30,8 +30,12 @@
       "round": "Tender 4 \u2014 NEM Generation",
       "capacity_mw": 240,
       "storage_mwh": 1200,
+      "award_date": "2025-10-09",
       "source_url": "https://www.dcceew.gov.au/about/news/cis-tender-4-deliver-6-6gw-clean-energy",
-      "contract_type": "CISA (federal underwriting)"
+      "contract_type": "CISA (federal underwriting)",
+      "execution_status": "awarded",
+      "execution_notes": "Stage 1 of 1,200 MW / 3,900 MWh envelope. SA Dev Approval for solar Oct 2025 (concurrent with CIS). Comprehensive approval targeted Q1-Q2 2026; connections agreement Q2 2026. Pre-FID at ~10 months.",
+      "execution_source_url": "https://bundeybessandsolar.com.au/"
     }
   ],
   "cost_sources": [],
@@ -44,5 +48,6 @@
       "source_tier": 1
     }
   ],
+  "operational_notes": "Stage 1 of full 1,200 MW / 3,900 MWh envelope. CIS T4 award covers 240 MW solar + 1,200 MWh Stage-1 BESS. SA Dev Approval for solar Oct 2025 (concurrent with CIS award). Comprehensive project approval targeted Q1-Q2 2026; Stage-1 connections agreement Q2 2026. Pre-FID at ~10 months post-award.",
   "timeline_events": []
 }

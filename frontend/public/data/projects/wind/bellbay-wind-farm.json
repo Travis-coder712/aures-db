@@ -4,8 +4,9 @@
   "technology": "wind",
   "status": "development",
   "capacity_mw": 224.0,
+  "storage_mwh": 400.0,
   "state": "TAS",
-  "current_developer": "The Trustee for Equis Wind (Australia) LHWF2 Asset Trust",
+  "current_developer": "Equis",
   "cod_current": "2030-01",
   "cod_original": "2030-01-01",
   "connection_status": "proposed",
@@ -40,8 +41,13 @@
       "scheme": "CIS",
       "round": "Tender 4 \u2014 NEM Generation",
       "capacity_mw": 224,
+      "storage_mwh": 400,
+      "award_date": "2025-10-09",
       "source_url": "https://reneweconomy.com.au/solar-battery-hybrids-carry-the-day-as-chris-bowen-names-20-winners-of-6-5-gigawatt-cis-tender/",
-      "contract_type": "CISA (federal underwriting)"
+      "contract_type": "CISA (federal underwriting)",
+      "execution_status": "awarded",
+      "execution_notes": "Wind 224 MW + 100 MW / 4hr BESS (400 MWh) integrated package. Tas Major Project declared 31/07/2024. EPBC Controlled Action EIS pathway. Approvals targeted 2026, construction 2027, ops H2 2029. Pre-FID at ~10 months post-award. Wind projects lag hardest per Bowen 24/6/26 rebid framing.",
+      "execution_source_url": "https://equis.engagementhub.com.au/bell-bay-wind-farm"
     }
   ],
   "cost_sources": [],

@@ -6,7 +6,7 @@
   "capacity_mw": 921.12,
   "storage_mwh": 800.0,
   "state": "VIC",
-  "current_developer": "Wind Prospect WA Pty Ltd",
+  "current_developer": "AGL + Wind Prospect",
   "cod_current": "2030-11-01",
   "cod_original": "2030-11-01",
   "connection_status": "proposed",
@@ -15,9 +15,9 @@
   "has_syncon": false,
   "has_statcom": false,
   "has_harmonic_filter": false,
-  "data_confidence": "medium",
-  "last_updated": "2026-05-25",
-  "last_verified": "2026-03-10",
+  "data_confidence": "confirmed",
+  "last_updated": "2026-07-16",
+  "last_verified": "2026-07-16",
   "aemo_gen_info_id": "1287",
   "confidence_score": "36",
   "development_stage": "epbc_submitted",
@@ -49,8 +49,12 @@
       "scheme": "CIS",
       "round": "Tender 4 \u2014 NEM Generation",
       "capacity_mw": 600,
+      "award_date": "2025-10-09",
       "source_url": "https://www.dcceew.gov.au/about/news/cis-tender-4-deliver-6-6gw-clean-energy",
-      "contract_type": "CISA (federal underwriting)"
+      "contract_type": "CISA (federal underwriting)",
+      "execution_status": "awarded",
+      "execution_notes": "AGL publicly stated Oct 2025: 'won't reach FID until 2028' \u2014 3 years post-award, exceeding typical CISA execution windows. No Vic planning approval yet \u2014 key gating milestone. Referenced in Bowen 24/6/26 rebid-pathway framing but AGL is HOLDING (not withdrawing). Wind Prospect WA is developer partner; AGL is CIS counterparty and ultimate offtaker.",
+      "execution_source_url": "https://reneweconomy.com.au/bowen-says-struggling-wind-projects-can-rebid-but-wont-be-able-to-change-their-contract/"
     }
   ],
   "cost_sources": [],
@@ -63,5 +67,6 @@
       "source_tier": 1
     }
   ],
+  "operational_notes": "AGL is CIS T4 counterparty (won 600 MW wind portion Oct 2025); Wind Prospect is the originator/developer partner. **AGL publicly stated Oct 2025: 'won't reach FID until 2028'** \u2014 3 years post-award. No Vic planning approval yet \u2014 key gating milestone. Largest single-tech T4 award. Featured in Bowen 24/6/26 rebid-framing but AGL is HOLDING, not withdrawing. Slow-mover archetype for the T4 wind cohort. AURES prior record showed Wind Prospect only as developer \u2014 AGL added 2026-07-16 to reflect CIS counterparty.",
   "timeline_events": []
 }

@@ -1434,6 +1434,15 @@
       "basis": "state_average"
     },
     {
+      "project_id": "gawara-baya-wind-and-bess",
+      "name": "Gawara Baya Wind And BESS",
+      "state": "QLD",
+      "capacity_mw": 400.0,
+      "predicted_cf_pct": 35.8,
+      "predicted_rating": "Excellent",
+      "basis": "state_average"
+    },
+    {
       "project_id": "george-town-wind-farm",
       "name": "George Town Wind Farm",
       "state": "TAS",
@@ -2228,6 +2237,6 @@
     }
   ],
   "total_operating": 80,
-  "total_development": 128,
-  "exported_at": "2026-07-17T17:12:57.867671"
+  "total_development": 129,
+  "exported_at": "2026-07-17T23:01:43.008245"
 }

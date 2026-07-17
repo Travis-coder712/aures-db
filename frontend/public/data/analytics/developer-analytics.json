@@ -204,7 +204,7 @@
         "mw": 240.0
       }
     ],
-    "Aula Energy": [
+    "Aula Energy (100% post-FC Dec 2025)": [
       {
         "role": "bop",
         "supplier": "DT Infrastructure",
@@ -4341,7 +4341,7 @@
         "drift_months": null
       }
     ],
-    "The Trustee for Equis Wind (Australia) LHWF2 Asset Trust": [
+    "Equis": [
       {
         "id": "bellbay-wind-farm",
         "name": "Bellbay Wind Farm",
@@ -4981,17 +4981,6 @@
     ],
     "Edify Energy Pty Ltd": [
       {
-        "id": "nowingi-solar-farm-edify-kci",
-        "name": "Nowingi Solar Farm - Edify (KCI)",
-        "technology": "hybrid",
-        "state": "VIC",
-        "status": "development",
-        "capacity_mw": 750.0,
-        "cod_current": "2028-02-01",
-        "cod_original": "2028-02-01",
-        "drift_months": 0.0
-      },
-      {
         "id": "pioneer-bess-kci",
         "name": "Pioneer BESS - KCI",
         "technology": "bess",
@@ -5000,28 +4989,6 @@
         "capacity_mw": 200.0,
         "cod_current": "2028-11-01",
         "cod_original": "2028-11-01",
-        "drift_months": 0.0
-      },
-      {
-        "id": "guthries-gap-solar-power-station",
-        "name": "Guthrie\u2019s Gap Solar Power Station",
-        "technology": "hybrid",
-        "state": "QLD",
-        "status": "development",
-        "capacity_mw": 300.0,
-        "cod_current": "2029-05-01",
-        "cod_original": "2029-05-01",
-        "drift_months": 0.0
-      },
-      {
-        "id": "smoky-creek-solar-power-station",
-        "name": "Smoky Creek Solar Power Station",
-        "technology": "hybrid",
-        "state": "QLD",
-        "status": "development",
-        "capacity_mw": 300.0,
-        "cod_current": "2029-05-01",
-        "cod_original": "2029-05-01",
         "drift_months": 0.0
       },
       {
@@ -6521,7 +6488,7 @@
         "drift_months": 0.0
       }
     ],
-    "Aula Energy": [
+    "Aula Energy (100% post-FC Dec 2025)": [
       {
         "id": "carmodys-hill-wind-farm",
         "name": "Carmodys Hill Wind Farm",
@@ -7248,7 +7215,9 @@
         "cod_current": null,
         "cod_original": null,
         "drift_months": null
-      },
+      }
+    ],
+    "OX2 (acquired 8 Jul 2026)": [
       {
         "id": "corop-solar-farm",
         "name": "Corop Solar Farm",
@@ -7595,6 +7564,17 @@
         "drift_months": 0.0
       },
       {
+        "id": "lower-wonga-solar-farm-and-bess",
+        "name": "Lower Wonga Solar Farm and BESS",
+        "technology": "hybrid",
+        "state": "QLD",
+        "status": "construction",
+        "capacity_mw": 281.0,
+        "cod_current": "2028-08-01",
+        "cod_original": "2028-08-01",
+        "drift_months": 0.0
+      },
+      {
         "id": "west-mokoan-solar-farm-and-bess",
         "name": "West Mokoan Solar Farm and BESS",
         "technology": "hybrid",
@@ -7935,7 +7915,7 @@
         "drift_months": null
       }
     ],
-    "DERBY SOLAR PROJECT PTY LTD": [
+    "Sungrow Renewable Energy": [
       {
         "id": "derby-solar-farm-and-bess",
         "name": "Derby Solar Farm and BESS",
@@ -8680,6 +8660,17 @@
     ],
     "Edify Energy (La Caisse-owned)": [
       {
+        "id": "nowingi-solar-farm-edify-kci",
+        "name": "Nowingi Solar Farm - Edify (KCI)",
+        "technology": "hybrid",
+        "state": "VIC",
+        "status": "development",
+        "capacity_mw": 750.0,
+        "cod_current": "2028-02-01",
+        "cod_original": "2028-02-01",
+        "drift_months": 0.0
+      },
+      {
         "id": "ganymirra-solar-power-station",
         "name": "Ganymirra Solar Power Station",
         "technology": "hybrid",
@@ -8699,6 +8690,28 @@
         "capacity_mw": 150.0,
         "cod_current": "2029-02-01",
         "cod_original": "2029-02-01",
+        "drift_months": 0.0
+      },
+      {
+        "id": "guthries-gap-solar-power-station",
+        "name": "Guthrie\u2019s Gap Solar Power Station",
+        "technology": "hybrid",
+        "state": "QLD",
+        "status": "construction",
+        "capacity_mw": 300.0,
+        "cod_current": "2029-05-01",
+        "cod_original": "2029-05-01",
+        "drift_months": 0.0
+      },
+      {
+        "id": "smoky-creek-solar-power-station",
+        "name": "Smoky Creek Solar Power Station",
+        "technology": "hybrid",
+        "state": "QLD",
+        "status": "construction",
+        "capacity_mw": 300.0,
+        "cod_current": "2029-05-01",
+        "cod_original": "2029-05-01",
         "drift_months": 0.0
       }
     ],
@@ -8726,11 +8739,11 @@
         "drift_months": null
       }
     ],
-    "GAWARA BAYA WIND FARM PTY LTD": [
+    "Windlab (Squadron / Andrew Forrest)": [
       {
         "id": "gawara-baya-wind-and-bess",
         "name": "Gawara Baya Wind And BESS",
-        "technology": "hybrid",
+        "technology": "wind",
         "state": "QLD",
         "status": "development",
         "capacity_mw": 400.0,
@@ -10031,18 +10044,7 @@
         "drift_months": 0.0
       }
     ],
-    "Wind Prospect WA Pty Ltd": [
-      {
-        "id": "willatook",
-        "name": "Willatook",
-        "technology": "hybrid",
-        "state": "VIC",
-        "status": "development",
-        "capacity_mw": 450.0,
-        "cod_current": "2027-08-01",
-        "cod_original": "2027-08-01",
-        "drift_months": 0.0
-      },
+    "AGL + Wind Prospect": [
       {
         "id": "hexham",
         "name": "Hexham",
@@ -11325,19 +11327,6 @@
         "drift_months": 0.0
       }
     ],
-    "Lower Wonga Solar Farm Pty Ltd": [
-      {
-        "id": "lower-wonga-solar-farm-and-bess",
-        "name": "Lower Wonga Solar Farm and BESS",
-        "technology": "hybrid",
-        "state": "QLD",
-        "status": "development",
-        "capacity_mw": 281.0,
-        "cod_current": "2028-08-01",
-        "cod_original": "2028-08-01",
-        "drift_months": 0.0
-      }
-    ],
     "Alinta Energy Clean Energy Development Pty Ltd": [
       {
         "id": "loy-yang-b-power-station-bess-stage-1-kci",
@@ -11916,7 +11905,7 @@
         "drift_months": null
       }
     ],
-    "Moah Creek Wind Farm Project Co Pty Ltd as trustee for the Moah Creek Wind Farm Project Trust": [
+    "Central Queensland Power (CQP)": [
       {
         "id": "moah-creek-wind-farm",
         "name": "Moah Creek Wind Farm",
@@ -15291,6 +15280,19 @@
         "drift_months": 0.0
       }
     ],
+    "Wind Prospect WA Pty Ltd": [
+      {
+        "id": "willatook",
+        "name": "Willatook",
+        "technology": "hybrid",
+        "state": "VIC",
+        "status": "development",
+        "capacity_mw": 450.0,
+        "cod_current": "2027-08-01",
+        "cod_original": "2027-08-01",
+        "drift_months": 0.0
+      }
+    ],
     "X-Elio Willavale Park Trust": [
       {
         "id": "willavale-bess",
@@ -15790,7 +15792,7 @@
         "source_url": "https://www.csenergy.com.au/news/cs-energy-acquires-lotus-creek-wind-farm"
       }
     ],
-    "Aula Energy": [
+    "Aula Energy (100% post-FC Dec 2025)": [
       {
         "scheme": "CIS",
         "round": "Tender 4",
@@ -33781,5 +33783,5 @@
       }
     ]
   },
-  "exported_at": "2026-07-17T17:12:57.671140"
+  "exported_at": "2026-07-17T23:01:42.811561"
 }

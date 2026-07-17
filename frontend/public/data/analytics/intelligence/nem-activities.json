@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-17T17:21:34.602684",
+  "generated_at": "2026-07-17T23:10:18.577972",
   "months": [
     {
       "month": "2027-06",
@@ -1488,7 +1488,7 @@
           {
             "project_id": "gawara-baya-wind-and-bess",
             "project_name": "Gawara Baya Wind And BESS",
-            "technology": "hybrid",
+            "technology": "wind",
             "state": "QLD",
             "capacity_mw": 400.0,
             "event_type": "cod_change",

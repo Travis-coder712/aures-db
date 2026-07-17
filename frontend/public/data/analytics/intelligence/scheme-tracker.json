@@ -442,7 +442,8 @@
           "stage": "development",
           "cod_current": "2027-07-31",
           "dev_status": "on track",
-          "annotations": []
+          "annotations": [],
+          "developer_grade": "B"
         },
         {
           "name": "Campbells Forest Solar Farm",
@@ -474,7 +475,8 @@
               "reason": "Development stage is early \u2014 not in planning yet",
               "severity": "high"
             }
-          ]
+          ],
+          "developer_grade": "B"
         },
         {
           "name": "Barnawartha Solar Farm",
@@ -562,7 +564,8 @@
               "reason": "No EIS lodged and COD > 2027",
               "severity": "medium"
             }
-          ]
+          ],
+          "developer_grade": "B"
         },
         {
           "name": "Ganymirra Solar Power Station",
@@ -587,7 +590,8 @@
               "reason": "No EIS lodged and COD > 2027",
               "severity": "medium"
             }
-          ]
+          ],
+          "developer_grade": "B"
         },
         {
           "name": "Mokoan Solar Farm",
@@ -1058,8 +1062,8 @@
       "num_projects": 20,
       "by_stage": {
         "unknown": 3,
-        "development": 16,
-        "construction": 1
+        "development": 13,
+        "construction": 4
       },
       "by_state": {
         "TAS": 1,
@@ -1122,7 +1126,7 @@
         {
           "name": "Carmody's Hill Wind Farm",
           "project_id": "carmodys-hill-wind-farm",
-          "developer": "Aula Energy",
+          "developer": "Aula Energy (100% post-FC Dec 2025)",
           "technology": "wind",
           "capacity_mw": 247,
           "state": "SA",
@@ -1137,27 +1141,20 @@
         {
           "name": "Corop Solar Farm and BESS",
           "project_id": "corop-solar-farm",
-          "developer": "Leeson Solar Pty Ltd.",
+          "developer": "OX2 (acquired 8 Jul 2026)",
           "technology": "hybrid",
           "capacity_mw": 230,
           "storage_mwh": 704,
           "state": "VIC",
           "status": "development",
           "stage": "development",
-          "dev_status": "execution risk",
-          "annotations": [
-            {
-              "flag": "execution risk",
-              "reason": "Developer execution grade: F",
-              "severity": "high"
-            }
-          ],
-          "developer_grade": "F"
+          "dev_status": "on track",
+          "annotations": []
         },
         {
           "name": "Derby Solar Project",
           "project_id": "derby-solar-farm-and-bess",
-          "developer": "DERBY SOLAR PROJECT PTY LTD",
+          "developer": "Sungrow Renewable Energy",
           "technology": "hybrid",
           "capacity_mw": 95,
           "storage_mwh": 210,
@@ -1190,7 +1187,7 @@
         {
           "name": "Gawara Baya",
           "project_id": "gawara-baya-wind-and-bess",
-          "developer": "GAWARA BAYA WIND FARM PTY LTD",
+          "developer": "Windlab (Squadron / Andrew Forrest)",
           "technology": "hybrid",
           "capacity_mw": 399,
           "storage_mwh": 217,
@@ -1215,13 +1212,13 @@
         {
           "name": "Guthrie's Gap Solar Power Station",
           "project_id": "guthries-gap-solar-power-station",
-          "developer": "Edify Energy Pty Ltd",
+          "developer": "Edify Energy (La Caisse-owned)",
           "technology": "hybrid",
           "capacity_mw": 300,
           "storage_mwh": 1200,
           "state": "QLD",
-          "status": "development",
-          "stage": "development",
+          "status": "construction",
+          "stage": "construction",
           "cod_current": "2029-05-01",
           "dev_status": "pre-planning",
           "annotations": [
@@ -1229,11 +1226,6 @@
               "flag": "pre-planning",
               "reason": "Development stage is early \u2014 not in planning yet",
               "severity": "high"
-            },
-            {
-              "flag": "environmental pending",
-              "reason": "No EIS lodged and COD > 2027",
-              "severity": "medium"
             }
           ],
           "developer_grade": "B"
@@ -1241,7 +1233,7 @@
         {
           "name": "Hexham Wind Farm",
           "project_id": "hexham",
-          "developer": "Wind Prospect WA Pty Ltd",
+          "developer": "AGL + Wind Prospect",
           "technology": "wind",
           "capacity_mw": 600,
           "state": "VIC",
@@ -1255,8 +1247,7 @@
               "reason": "No EIS lodged and COD > 2027",
               "severity": "medium"
             }
-          ],
-          "developer_grade": "B"
+          ]
         },
         {
           "name": "Liverpool Range Wind Stage 1",
@@ -1274,12 +1265,12 @@
         {
           "name": "Lower Wonga Solar Farm",
           "project_id": "lower-wonga-solar-farm-and-bess",
-          "developer": "Lower Wonga Solar Farm Pty Ltd",
+          "developer": "Lightsource bp",
           "technology": "solar",
           "capacity_mw": 281,
           "state": "QLD",
-          "status": "development",
-          "stage": "development",
+          "status": "construction",
+          "stage": "construction",
           "cod_current": "2028-08-01",
           "dev_status": "pre-planning",
           "annotations": [
@@ -1287,13 +1278,9 @@
               "flag": "pre-planning",
               "reason": "Development stage is early \u2014 not in planning yet",
               "severity": "high"
-            },
-            {
-              "flag": "environmental pending",
-              "reason": "No EIS lodged and COD > 2027",
-              "severity": "medium"
             }
-          ]
+          ],
+          "developer_grade": "B"
         },
         {
           "name": "Merino Solar Farm",
@@ -1336,7 +1323,7 @@
         {
           "name": "Moah Creek Wind Farm",
           "project_id": "moah-creek-wind-farm",
-          "developer": "Moah Creek Wind Farm Project Co Pty Ltd as trustee for the Moah Creek Wind Farm Project Trust",
+          "developer": "Central Queensland Power (CQP)",
           "technology": "wind",
           "capacity_mw": 360,
           "state": "QLD",
@@ -1355,7 +1342,7 @@
         {
           "name": "Nowingi Solar Power Station",
           "project_id": "nowingi-solar-farm-edify-kci",
-          "developer": "Edify Energy Pty Ltd",
+          "developer": "Edify Energy (La Caisse-owned)",
           "technology": "hybrid",
           "capacity_mw": 300,
           "storage_mwh": 1200,
@@ -1394,13 +1381,13 @@
         {
           "name": "Smoky Creek Solar Power Station",
           "project_id": "smoky-creek-solar-power-station",
-          "developer": "Edify Energy Pty Ltd",
+          "developer": "Edify Energy (La Caisse-owned)",
           "technology": "hybrid",
           "capacity_mw": 300,
           "storage_mwh": 1200,
           "state": "QLD",
-          "status": "development",
-          "stage": "development",
+          "status": "construction",
+          "stage": "construction",
           "cod_current": "2029-05-01",
           "dev_status": "pre-planning",
           "annotations": [
@@ -1408,11 +1395,6 @@
               "flag": "pre-planning",
               "reason": "Development stage is early \u2014 not in planning yet",
               "severity": "high"
-            },
-            {
-              "flag": "environmental pending",
-              "reason": "No EIS lodged and COD > 2027",
-              "severity": "medium"
             }
           ],
           "developer_grade": "B"
@@ -1989,14 +1971,14 @@
         "mw": 1811.0
       },
       "construction": {
-        "count": 8,
-        "mw": 2121.0
+        "count": 11,
+        "mw": 3002.0
       },
       "development": {
-        "count": 61,
-        "mw": 18223.0
+        "count": 58,
+        "mw": 17342.0
       }
     }
   },
-  "exported_at": "2026-07-17T17:12:57.859320"
+  "exported_at": "2026-07-17T23:01:42.999950"
 }

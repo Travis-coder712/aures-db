@@ -226,7 +226,7 @@
     "tailem-bend-stage-3",
     "wandoan-south-bess"
   ],
-  "The Trustee for Equis Wind (Australia) LHWF2 Asset Trust": [
+  "Equis": [
     "bellbay-wind-farm"
   ],
   "Alinta Energy": [
@@ -333,15 +333,12 @@
     "burroway-bess",
     "callide-power-station-solar-farm",
     "callide-solar-power-station-bess",
-    "guthries-gap-solar-power-station",
     "koorangie-bess-stage-2",
     "muskerry-solar-power-station-kci",
-    "nowingi-solar-farm-edify-kci",
     "peninsula-solar-farm-and-bess",
     "pioneer-bess-kci",
     "port-augusta-solar-farm-kci",
-    "sandy-creek-energy-storage-system",
-    "smoky-creek-solar-power-station"
+    "sandy-creek-energy-storage-system"
   ],
   "Tilt Renewables Australia Pty Ltd": [
     "boco-rock-wind-farm",
@@ -589,7 +586,7 @@
   "Georgetown Hills Renewable Energy Pty Ltd as trustee for the Georgetown Hills Renewable Energy Trust": [
     "carmodys-hill-bess"
   ],
-  "Aula Energy": [
+  "Aula Energy (100% post-FC Dec 2025)": [
     "carmodys-hill-wind-farm"
   ],
   "Recurrent Energy (Australia) Pty Ltd": [
@@ -729,7 +726,9 @@
     "coppabella-wind-farm"
   ],
   "Leeson Solar Pty Ltd.": [
-    "corop-bess",
+    "corop-bess"
+  ],
+  "OX2 (acquired 8 Jul 2026)": [
     "corop-solar-farm"
   ],
   "Corowa Operationsco Pty Ltd as trustee for Corowa Operations Trust": [
@@ -784,6 +783,7 @@
   ],
   "Lightsource bp": [
     "dangarsleigh-wind",
+    "lower-wonga-solar-farm-and-bess",
     "west-mokoan-solar-farm-and-bess",
     "woolbrook",
     "woolooga-bess"
@@ -845,7 +845,7 @@
   "NEMMCOM Renewables Australia Developments Pty Ltd": [
     "denman-bess-kci"
   ],
-  "DERBY SOLAR PROJECT PTY LTD": [
+  "Sungrow Renewable Energy": [
     "derby-solar-farm-and-bess"
   ],
   "Bid Energy Partners Pty Ltd": [
@@ -1003,13 +1003,16 @@
   ],
   "Edify Energy (La Caisse-owned)": [
     "ganymirra-solar-power-station",
-    "majors-creek-solar-power-station"
+    "guthries-gap-solar-power-station",
+    "majors-creek-solar-power-station",
+    "nowingi-solar-farm-edify-kci",
+    "smoky-creek-solar-power-station"
   ],
   "Greenpulse solar farm and BESS as trustee for Greenpulse Solar Farm & Bess Unit Trust": [
     "garoo-bess",
     "garoo-solar-farm"
   ],
-  "GAWARA BAYA WIND FARM PTY LTD": [
+  "Windlab (Squadron / Andrew Forrest)": [
     "gawara-baya-wind-and-bess"
   ],
   "Gelston Energy Park Pty Ltd (ACN 690796788) as trustee for Gelston Energy Park Trust": [
@@ -1268,9 +1271,8 @@
     "herries-range-wind-farm",
     "tall-tree-wind-farm"
   ],
-  "Wind Prospect WA Pty Ltd": [
-    "hexham",
-    "willatook"
+  "AGL + Wind Prospect": [
+    "hexham"
   ],
   "Atmos Renewables": [
     "heywood-bess"
@@ -1525,9 +1527,6 @@
   "Equis Energy (Australia) Projects (Ngumi 7) Pty Ltd as trustee for the Equis Energy(Australia) Ngumi 7 Asset Trust": [
     "lower-wonga-bess"
   ],
-  "Lower Wonga Solar Farm Pty Ltd": [
-    "lower-wonga-solar-farm-and-bess"
-  ],
   "Alinta Energy Clean Energy Development Pty Ltd": [
     "loy-yang-b-power-station-bess-stage-1-kci"
   ],
@@ -1641,7 +1640,7 @@
   "Milpulling Wind Farm Pty Ltd": [
     "milpulling-wind-farm"
   ],
-  "Moah Creek Wind Farm Project Co Pty Ltd as trustee for the Moah Creek Wind Farm Project Trust": [
+  "Central Queensland Power (CQP)": [
     "moah-creek-wind-farm"
   ],
   "Moama Propertyco Pty Ltd as trustee for the Moama Property Trust": [
@@ -2361,6 +2360,9 @@
   ],
   "WP Renewables Ltd": [
     "whyte-yarcowie"
+  ],
+  "Wind Prospect WA Pty Ltd": [
+    "willatook"
   ],
   "X-Elio Willavale Park Trust": [
     "willavale-bess"
