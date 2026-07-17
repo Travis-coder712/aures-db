@@ -519,51 +519,6 @@
       }
     },
     {
-      "rez": "Central North VIC",
-      "total_mw": 777.0,
-      "operating_mw": 372.0,
-      "pipeline_mw": 405.0,
-      "project_count": 6,
-      "congestion_score": 30.4,
-      "congestion_level": "low",
-      "technologies": {
-        "bess": {
-          "operating": {
-            "count": 1,
-            "mw": 250.0
-          }
-        },
-        "solar": {
-          "commissioning": {
-            "count": 1,
-            "mw": 75.0
-          },
-          "construction": {
-            "count": 2,
-            "mw": 330.0
-          },
-          "operating": {
-            "count": 2,
-            "mw": 122.0
-          }
-        }
-      },
-      "connection_status": {
-        "commissioning": {
-          "count": 1,
-          "mw": 75.0
-        },
-        "committed": {
-          "count": 3,
-          "mw": 580.0
-        },
-        "operating": {
-          "count": 2,
-          "mw": 122.0
-        }
-      }
-    },
-    {
       "rez": "Issac",
       "total_mw": 180.0,
       "operating_mw": 0,
@@ -583,6 +538,51 @@
         "anticipated": {
           "count": 1,
           "mw": 180.0
+        }
+      }
+    },
+    {
+      "rez": "Central North VIC",
+      "total_mw": 789.0,
+      "operating_mw": 384.0,
+      "pipeline_mw": 405.0,
+      "project_count": 6,
+      "congestion_score": 29.8,
+      "congestion_level": "low",
+      "technologies": {
+        "bess": {
+          "operating": {
+            "count": 1,
+            "mw": 250.0
+          }
+        },
+        "solar": {
+          "commissioning": {
+            "count": 1,
+            "mw": 75.0
+          },
+          "construction": {
+            "count": 2,
+            "mw": 330.0
+          },
+          "operating": {
+            "count": 2,
+            "mw": 134.0
+          }
+        }
+      },
+      "connection_status": {
+        "commissioning": {
+          "count": 1,
+          "mw": 75.0
+        },
+        "committed": {
+          "count": 3,
+          "mw": 580.0
+        },
+        "operating": {
+          "count": 2,
+          "mw": 134.0
         }
       }
     },
@@ -930,13 +930,13 @@
     },
     "operating": {
       "count": 223,
-      "mw": 36612.7
+      "mw": 36624.7
     },
     "proposed": {
       "count": 699,
-      "mw": 305502.4
+      "mw": 305516.4
     }
   },
   "total_rez_zones": 27,
-  "exported_at": "2026-07-16T06:53:04.733748"
+  "exported_at": "2026-07-17T17:21:34.591635"
 }

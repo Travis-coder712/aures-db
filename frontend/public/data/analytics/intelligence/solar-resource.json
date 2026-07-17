@@ -811,10 +811,10 @@
       "name": "Mokoan Solar Farm",
       "state": "VIC",
       "rez": "Central North VIC",
-      "capacity_mw": 46.0,
+      "capacity_mw": 58.0,
       "latitude": -36.487519,
       "longitude": 146.122634,
-      "developer": "EE Solar 6 Pty Ltd as trustee for EE Solar 6 Trust",
+      "developer": "European Energy Australia",
       "capacity_factor_pct": 17.93,
       "energy_price": 33.53,
       "revenue_per_mw": 21786.0,
@@ -1199,21 +1199,21 @@
   },
   "capacity_class_benchmarks": {
     "Small (<50 MW)": {
-      "count": 10,
-      "mean": 19.7,
-      "median": 19.5,
+      "count": 9,
+      "mean": 19.9,
+      "median": 21.0,
       "p25": 13.3,
       "p75": 24.1,
-      "total_mw": 385.8,
-      "rating": "Below Average"
+      "total_mw": 339.8,
+      "rating": "Average"
     },
     "Medium (50-150 MW)": {
-      "count": 49,
-      "mean": 20.4,
+      "count": 50,
+      "mean": 20.3,
       "median": 20.7,
       "p25": 17.9,
       "p75": 22.8,
-      "total_mw": 4286.2,
+      "total_mw": 4344.2,
       "rating": "Average"
     },
     "Large (150-300 MW)": {
@@ -1836,7 +1836,7 @@
       "name": "Hopeland Solar Farm",
       "state": "QLD",
       "capacity_mw": 250.0,
-      "developer": "Hopeland Solar Farm Pty Ltd as trustee for the Hopeland Solar Farm Trust",
+      "developer": "Pacific Partnerships (CIMIC/HOCHTIEF/ACS)",
       "predicted_cf_pct": 22.3,
       "predicted_rating": "Average",
       "basis": "state_average"
@@ -2798,5 +2798,5 @@
     "Average": "20% \u2013 24%",
     "Below Average": "< 20%"
   },
-  "exported_at": "2026-07-16T06:44:24.745488"
+  "exported_at": "2026-07-17T17:12:57.869639"
 }

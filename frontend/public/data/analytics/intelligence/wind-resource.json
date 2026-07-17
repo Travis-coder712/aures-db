@@ -1866,7 +1866,7 @@
       "project_id": "palmer-wind-farm",
       "name": "Palmer Wind Farm",
       "state": "SA",
-      "capacity_mw": 274.0,
+      "capacity_mw": 288.0,
       "predicted_cf_pct": 25.7,
       "predicted_rating": "Average",
       "basis": "state_average"
@@ -2229,5 +2229,5 @@
   ],
   "total_operating": 80,
   "total_development": 128,
-  "exported_at": "2026-07-16T06:44:24.743460"
+  "exported_at": "2026-07-17T17:12:57.867671"
 }

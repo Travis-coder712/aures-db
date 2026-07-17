@@ -81,7 +81,7 @@
       },
       "solar": {
         "count": 13,
-        "mw": 1186.0
+        "mw": 1198.0
       },
       "wind": {
         "count": 26,
@@ -179,7 +179,7 @@
       }
     },
     "VIC": {
-      "operating_mw": 9864.8,
+      "operating_mw": 9876.8,
       "technologies": {
         "bess": {
           "count": 10,
@@ -192,7 +192,7 @@
         },
         "solar": {
           "count": 13,
-          "mw": 1186.0
+          "mw": 1198.0
         },
         "wind": {
           "count": 26,
@@ -1034,7 +1034,7 @@
       "technology": "wind",
       "status": "construction",
       "count": 1,
-      "mw": 274.0
+      "mw": 288.0
     },
     {
       "state": "SA",
@@ -1637,47 +1637,47 @@
     "solar": [
       {
         "year": "current",
-        "cumulative_mw": 9483.0
+        "cumulative_mw": 9495.0
       },
       {
         "year": 2026,
         "added_mw": 1541.8,
-        "cumulative_mw": 11024.8
+        "cumulative_mw": 11036.8
       },
       {
         "year": 2027,
         "added_mw": 1776.0,
-        "cumulative_mw": 12800.8
+        "cumulative_mw": 12812.8
       },
       {
         "year": 2028,
         "added_mw": 2561.4,
-        "cumulative_mw": 15362.2
+        "cumulative_mw": 15374.2
       },
       {
         "year": 2029,
         "added_mw": 3475.0,
-        "cumulative_mw": 18837.2
+        "cumulative_mw": 18849.2
       },
       {
         "year": 2030,
         "added_mw": 950.0,
-        "cumulative_mw": 19787.2
+        "cumulative_mw": 19799.2
       },
       {
         "year": 2031,
         "added_mw": 0,
-        "cumulative_mw": 19787.2
+        "cumulative_mw": 19799.2
       },
       {
         "year": 2032,
         "added_mw": 450.0,
-        "cumulative_mw": 20237.2
+        "cumulative_mw": 20249.2
       },
       {
         "year": 2033,
         "added_mw": 0,
-        "cumulative_mw": 20237.2
+        "cumulative_mw": 20249.2
       }
     ],
     "wind": [
@@ -1727,5 +1727,5 @@
       }
     ]
   },
-  "exported_at": "2026-07-16T06:53:04.704164"
+  "exported_at": "2026-07-17T17:21:34.560834"
 }

@@ -388,7 +388,7 @@
         {
           "name": "Kentbruck Wind Farm",
           "project_id": "kentbruck-green-power-hub",
-          "developer": "Kentbruck Wind Farm Pty Ltd atf Kentbruck Wind Farm Trust",
+          "developer": "HMC Capital / Illuma Energy",
           "technology": "wind",
           "capacity_mw": 600,
           "state": "VIC",
@@ -407,7 +407,7 @@
         {
           "name": "West Mokoan Solar Farm",
           "project_id": "west-mokoan-solar-farm-and-bess",
-          "developer": "West Mokoan Solar Farm",
+          "developer": "Lightsource bp",
           "technology": "hybrid",
           "capacity_mw": 300,
           "storage_mwh": 560,
@@ -427,12 +427,13 @@
               "reason": "No EIS lodged and COD > 2027",
               "severity": "medium"
             }
-          ]
+          ],
+          "developer_grade": "B"
         },
         {
           "name": "Barwon Solar Farm",
           "project_id": "barwon-solar-farm-and-bess",
-          "developer": "Elgin Energy Pty Ltd",
+          "developer": "Elgin Energy (CIP-majority)",
           "technology": "hybrid",
           "capacity_mw": 250,
           "storage_mwh": 500,
@@ -441,8 +442,7 @@
           "stage": "development",
           "cod_current": "2027-07-31",
           "dev_status": "on track",
-          "annotations": [],
-          "developer_grade": "B"
+          "annotations": []
         },
         {
           "name": "Campbells Forest Solar Farm",
@@ -459,7 +459,7 @@
         {
           "name": "Elaine Solar Farm",
           "project_id": "elaine-solar-farm-and-bess",
-          "developer": "Elgin Energy Pty Ltd",
+          "developer": "Elgin Energy (CIP-majority)",
           "technology": "hybrid",
           "capacity_mw": 125,
           "storage_mwh": 250,
@@ -474,13 +474,12 @@
               "reason": "Development stage is early \u2014 not in planning yet",
               "severity": "high"
             }
-          ],
-          "developer_grade": "B"
+          ]
         },
         {
           "name": "Barnawartha Solar Farm",
           "project_id": "barnawartha-solar-and-energy-storage",
-          "developer": "Barnawartha Solar Pty Ltd",
+          "developer": "Gentari (Petronas)",
           "technology": "hybrid",
           "capacity_mw": 64,
           "storage_mwh": 139,
@@ -493,7 +492,7 @@
         {
           "name": "Goyder North Wind Farm",
           "project_id": "goyder-north-wind-farm",
-          "developer": "Neoen Australia",
+          "developer": "Neoen Australia (Brookfield-owned)",
           "technology": "wind",
           "capacity_mw": 300,
           "state": "SA",
@@ -531,7 +530,7 @@
         {
           "name": "Hopeland Solar Farm",
           "project_id": "hopeland-solar-farm",
-          "developer": "Hopeland Solar Farm Pty Ltd as trustee for the Hopeland Solar Farm Trust",
+          "developer": "Pacific Partnerships (CIMIC/HOCHTIEF/ACS)",
           "technology": "solar",
           "capacity_mw": 250,
           "state": "QLD",
@@ -543,7 +542,7 @@
         {
           "name": "Majors Creek Solar Power Station",
           "project_id": "majors-creek-solar-power-station",
-          "developer": "Edify Energy Pty Ltd",
+          "developer": "Edify Energy (La Caisse-owned)",
           "technology": "hybrid",
           "capacity_mw": 150,
           "storage_mwh": 600,
@@ -563,13 +562,12 @@
               "reason": "No EIS lodged and COD > 2027",
               "severity": "medium"
             }
-          ],
-          "developer_grade": "B"
+          ]
         },
         {
           "name": "Ganymirra Solar Power Station",
           "project_id": "ganymirra-solar-power-station",
-          "developer": "Edify Energy Pty Ltd",
+          "developer": "Edify Energy (La Caisse-owned)",
           "technology": "hybrid",
           "capacity_mw": 150,
           "storage_mwh": 600,
@@ -589,13 +587,12 @@
               "reason": "No EIS lodged and COD > 2027",
               "severity": "medium"
             }
-          ],
-          "developer_grade": "B"
+          ]
         },
         {
           "name": "Mokoan Solar Farm",
           "project_id": "mokoan-solar-farm",
-          "developer": "EE Solar 6 Pty Ltd as trustee for EE Solar 6 Trust",
+          "developer": "European Energy Australia",
           "technology": "solar",
           "capacity_mw": 46,
           "state": "VIC",
@@ -2001,5 +1998,5 @@
       }
     }
   },
-  "exported_at": "2026-07-16T06:44:24.735559"
+  "exported_at": "2026-07-17T17:12:57.859320"
 }

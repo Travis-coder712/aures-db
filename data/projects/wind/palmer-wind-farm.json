@@ -41,10 +41,16 @@
     {
       "scheme": "CIS",
       "round": "Tender 1 \u2014 NEM Generation",
-      "capacity_mw": 274,
+      "capacity_mw": 288,
       "storage_mwh": null,
+      "award_date": "2024-12-11",
       "source_url": "https://www.dcceew.gov.au/energy/renewable/capacity-investment-scheme/closed-cis-tenders",
-      "contract_type": "CISA (federal underwriting)"
+      "contract_type": "CISA (federal underwriting)",
+      "execution_status": "construction",
+      "execution_date": "2026-01-09",
+      "fid_date": "2026-01-09",
+      "execution_notes": "FID 9 Jan 2026 with 15-yr AGL PPA (~half of output). Construction mid-2026, ops ~Dec 2028. Capacity increased 274\u2192288 MW at FID (40 turbines with modified design). FIRST non-battery CIS generator to reach construction (of ~69 awards).",
+      "execution_source_url": "https://energyglobal.com/wind/09012026/tilt-renewables-approves-palmer-wind-farm-for-construction-in-2026/"
     }
   ],
   "cost_sources": [],

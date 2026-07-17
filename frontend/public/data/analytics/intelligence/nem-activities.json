@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-16T06:53:04.745116",
+  "generated_at": "2026-07-17T17:21:34.602684",
   "months": [
     {
       "month": "2027-06",
@@ -4423,6 +4423,17 @@
             "date": "2026-03-12"
           },
           {
+            "project_id": "mokoan-solar-farm",
+            "project_name": "Mokoan Solar Farm",
+            "technology": "solar",
+            "state": "VIC",
+            "capacity_mw": 58.0,
+            "event_type": "cod_change",
+            "title": "COD estimate updated",
+            "detail": "COD changed from 2025-05 to 2025-05-22 (source: AEMO Generation Information)",
+            "date": "2026-03-12"
+          },
+          {
             "project_id": "limondale-bess",
             "project_name": "Limondale BESS",
             "technology": "bess",
@@ -4475,17 +4486,6 @@
             "event_type": "cod_change",
             "title": "COD estimate updated",
             "detail": "COD changed from 2023-07 to 2023-07-01 (source: AEMO Generation Information)",
-            "date": "2026-03-12"
-          },
-          {
-            "project_id": "mokoan-solar-farm",
-            "project_name": "Mokoan Solar Farm",
-            "technology": "solar",
-            "state": "VIC",
-            "capacity_mw": 46.0,
-            "event_type": "cod_change",
-            "title": "COD estimate updated",
-            "detail": "COD changed from 2025-05 to 2025-05-22 (source: AEMO Generation Information)",
             "date": "2026-03-12"
           },
           {
@@ -4601,7 +4601,7 @@
             "project_name": "Palmer Wind Farm",
             "technology": "wind",
             "state": "SA",
-            "capacity_mw": 274.0,
+            "capacity_mw": 288.0,
             "event_type": "fid",
             "title": "Financial Investment Decision reached",
             "detail": "First CIS-winning wind project to reach FID. 288 MW (40 Vestas turbines). EPC: BMD. CIS agreement + AGL PPA. $13M+ community benefits. Construction mid-2026.",
@@ -6429,7 +6429,7 @@
             "project_name": "Mokoan Solar Farm",
             "technology": "solar",
             "state": "VIC",
-            "capacity_mw": 46.0,
+            "capacity_mw": 58.0,
             "event_type": "cod",
             "title": "Commercial operations commenced",
             "detail": "Commencement date from AEMO registration via OpenElectricity.",
@@ -6496,7 +6496,7 @@
             "project_name": "Mokoan Solar Farm",
             "technology": "solar",
             "state": "VIC",
-            "capacity_mw": 46.0,
+            "capacity_mw": 58.0,
             "event_type": "energisation",
             "title": "First generation recorded",
             "detail": "First market dispatch data recorded in AEMO systems.",

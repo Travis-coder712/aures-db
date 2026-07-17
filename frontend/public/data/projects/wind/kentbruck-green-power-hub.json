@@ -5,7 +5,7 @@
   "status": "development",
   "capacity_mw": 600.0,
   "state": "VIC",
-  "current_developer": "Kentbruck Wind Farm Pty Ltd atf Kentbruck Wind Farm Trust",
+  "current_developer": "HMC Capital / Illuma Energy",
   "cod_current": "2030-06-30",
   "cod_original": "2030-06-30",
   "connection_status": "proposed",
@@ -15,8 +15,8 @@
   "has_statcom": false,
   "has_harmonic_filter": false,
   "data_confidence": "medium",
-  "last_updated": "2026-05-25",
-  "last_verified": "2026-03-10",
+  "last_updated": "2026-07-16",
+  "last_verified": "2026-07-16",
   "aemo_gen_info_id": "1888",
   "confidence_score": "31",
   "development_stage": "epbc_submitted",
@@ -40,7 +40,25 @@
       "sources": []
     }
   ],
-  "ownership_history": [],
+  "ownership_history": [
+    {
+      "from": "2024-12",
+      "to": "2025-08",
+      "owner": "Neoen",
+      "note": "Held during CIS T1 award (11 Dec 2024)"
+    },
+    {
+      "from": "2025-08",
+      "to": "2026-06",
+      "owner": "HMC Capital",
+      "note": "Acquired 1 Aug 2025 as part of Neoen VIC portfolio sale (A$950m)"
+    },
+    {
+      "from": "2026-06",
+      "owner": "HMC Capital / KKR (Illuma Energy JV)",
+      "note": "KKR A$603m partnership; FC ~30 Jun 2026; platform rebranded Illuma Energy"
+    }
+  ],
   "cod_history": [],
   "suppliers": [],
   "offtakes": [],
@@ -49,8 +67,12 @@
       "scheme": "CIS",
       "round": "Tender 1 \u2014 NEM Generation",
       "capacity_mw": 600,
+      "award_date": "2024-12-11",
       "source_url": "https://www.dcceew.gov.au/energy/renewable/capacity-investment-scheme/closed-cis-tenders",
-      "contract_type": "CISA (federal underwriting)"
+      "contract_type": "CISA (federal underwriting)",
+      "execution_status": "awarded",
+      "execution_notes": "Pre-FID at 19 months post-award. Capital-partner constraint resolved via HMC Capital / KKR (Illuma Energy) FC ~30 Jun 2026, but no public FID confirmation. Vic ministerial planning approval late-2025 required turbine-count reduction. Most publicly-stalled T1 wind winner per RE 30 Mar 2026 'Zero for 15' framing.",
+      "execution_source_url": "https://www.energy-storage.news/australias-hmc-capital-closes-kkr-investment-unifies-energy-platform-under-new-illuma-energy-brand/"
     }
   ],
   "cost_sources": [],
@@ -63,5 +85,6 @@
       "source_tier": 1
     }
   ],
+  "operational_notes": "Ownership chain: Neoen won CIS T1 award Dec 2024. Neoen sold entire VIC portfolio to HMC Capital 1 Aug 2025 (A$950m \u2014 Kentbruck included). HMC/KKR partnership (A$603m) received FIRB/ACCC clearance and reached financial close ~30 Jun 2026 \u2014 platform rebranded Illuma Energy consolidating StorEnergy + former Neoen VIC assets. Vic ministerial planning approval late-2025 (reduced turbine count). Pre-FID at ~19 months post-award; capital-partner constraint now resolved but no public FID.",
   "timeline_events": []
 }

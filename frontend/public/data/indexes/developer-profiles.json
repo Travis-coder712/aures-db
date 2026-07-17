@@ -119,18 +119,39 @@
       ]
     },
     {
+      "slug": "corio-generation-macquarie-green-investment-group",
+      "name": "Corio Generation (Macquarie Green Investment Group)",
+      "project_count": 2,
+      "total_capacity_mw": 4008.0,
+      "total_storage_mwh": 0,
+      "by_technology": {
+        "offshore_wind": 2
+      },
+      "by_status": {
+        "development": 2
+      },
+      "states": [
+        "VIC"
+      ],
+      "avg_confidence": "medium",
+      "project_ids": [
+        "great-eastern-offshore-wind-kci",
+        "greater-southern-offshore-wind-kci"
+      ]
+    },
+    {
       "slug": "edify-energy",
       "name": "Edify Energy Pty Ltd",
-      "project_count": 16,
-      "total_capacity_mw": 4230.0,
-      "total_storage_mwh": 5760.0,
+      "project_count": 14,
+      "total_capacity_mw": 3930.0,
+      "total_storage_mwh": 4560.0,
       "by_technology": {
-        "hybrid": 7,
+        "hybrid": 5,
         "solar": 5,
         "bess": 4
       },
       "by_status": {
-        "development": 16
+        "development": 14
       },
       "states": [
         "NSW",
@@ -150,33 +171,10 @@
         "callide-solar-power-station-bess",
         "muskerry-solar-power-station-kci",
         "pioneer-bess-kci",
-        "ganymirra-solar-power-station",
         "koorangie-bess-stage-2",
-        "majors-creek-solar-power-station",
         "brewongle-solar-farm",
         "burroway-bess",
         "peninsula-solar-farm-and-bess"
-      ]
-    },
-    {
-      "slug": "corio-generation-macquarie-green-investment-group",
-      "name": "Corio Generation (Macquarie Green Investment Group)",
-      "project_count": 2,
-      "total_capacity_mw": 4008.0,
-      "total_storage_mwh": 0,
-      "by_technology": {
-        "offshore_wind": 2
-      },
-      "by_status": {
-        "development": 2
-      },
-      "states": [
-        "VIC"
-      ],
-      "avg_confidence": "medium",
-      "project_ids": [
-        "great-eastern-offshore-wind-kci",
-        "greater-southern-offshore-wind-kci"
       ]
     },
     {
@@ -512,7 +510,7 @@
       "slug": "tilt-renewables-australia",
       "name": "Tilt Renewables Australia Pty Ltd",
       "project_count": 7,
-      "total_capacity_mw": 2748.0,
+      "total_capacity_mw": 2762.0,
       "total_storage_mwh": 1100.0,
       "by_technology": {
         "wind": 5,
@@ -1444,37 +1442,6 @@
       ]
     },
     {
-      "slug": "elgin-energy",
-      "name": "Elgin Energy Pty Ltd",
-      "project_count": 9,
-      "total_capacity_mw": 1505.0,
-      "total_storage_mwh": 3350.0,
-      "by_technology": {
-        "bess": 4,
-        "hybrid": 4,
-        "solar": 1
-      },
-      "by_status": {
-        "development": 9
-      },
-      "states": [
-        "NSW",
-        "VIC"
-      ],
-      "avg_confidence": "low",
-      "project_ids": [
-        "barwon-solar-farm-and-bess",
-        "geelong-bess",
-        "lerida-solar-farm",
-        "armidale-bess-elgin",
-        "elaine-solar-farm-and-bess",
-        "gerogery-battery-kci",
-        "gerogery-solar-farm-kci",
-        "tabulam-bess",
-        "glanmire-solar-farm"
-      ]
-    },
-    {
       "slug": "agl-energy",
       "name": "AGL Energy",
       "project_count": 4,
@@ -1952,6 +1919,34 @@
       ]
     },
     {
+      "slug": "lightsource-bp",
+      "name": "Lightsource bp",
+      "project_count": 4,
+      "total_capacity_mw": 1272.0,
+      "total_storage_mwh": 2161.3,
+      "by_technology": {
+        "wind": 2,
+        "hybrid": 1,
+        "bess": 1
+      },
+      "by_status": {
+        "development": 3,
+        "construction": 1
+      },
+      "states": [
+        "NSW",
+        "QLD",
+        "VIC"
+      ],
+      "avg_confidence": "low",
+      "project_ids": [
+        "woolbrook",
+        "west-mokoan-solar-farm-and-bess",
+        "dangarsleigh-wind",
+        "woolooga-bess"
+      ]
+    },
+    {
       "slug": "acen-north-east-tasmania",
       "name": "ACEN North East Tasmania Pty Ltd",
       "project_count": 1,
@@ -2175,6 +2170,35 @@
       "project_ids": [
         "herries-range-wind-farm",
         "tall-tree-wind-farm"
+      ]
+    },
+    {
+      "slug": "elgin-energy",
+      "name": "Elgin Energy Pty Ltd",
+      "project_count": 7,
+      "total_capacity_mw": 1130.0,
+      "total_storage_mwh": 2600.0,
+      "by_technology": {
+        "bess": 4,
+        "solar": 1,
+        "hybrid": 2
+      },
+      "by_status": {
+        "development": 7
+      },
+      "states": [
+        "NSW",
+        "VIC"
+      ],
+      "avg_confidence": "low",
+      "project_ids": [
+        "geelong-bess",
+        "lerida-solar-farm",
+        "armidale-bess-elgin",
+        "gerogery-battery-kci",
+        "gerogery-solar-farm-kci",
+        "tabulam-bess",
+        "glanmire-solar-farm"
       ]
     },
     {
@@ -2614,31 +2638,6 @@
         "dartmouth",
         "eildon",
         "west-kiewa"
-      ]
-    },
-    {
-      "slug": "lightsource-bp",
-      "name": "Lightsource bp",
-      "project_count": 3,
-      "total_capacity_mw": 972.0,
-      "total_storage_mwh": 593.3,
-      "by_technology": {
-        "wind": 2,
-        "bess": 1
-      },
-      "by_status": {
-        "development": 2,
-        "construction": 1
-      },
-      "states": [
-        "NSW",
-        "QLD"
-      ],
-      "avg_confidence": "low",
-      "project_ids": [
-        "woolbrook",
-        "dangarsleigh-wind",
-        "woolooga-bess"
       ]
     },
     {
@@ -3821,8 +3820,8 @@
       ]
     },
     {
-      "slug": "neoen-australia-2",
-      "name": "Neoen Australia",
+      "slug": "neoen-australia-brookfield-owned",
+      "name": "Neoen Australia (Brookfield-owned)",
       "project_count": 1,
       "total_capacity_mw": 600.0,
       "total_storage_mwh": 0,
@@ -3863,8 +3862,8 @@
       ]
     },
     {
-      "slug": "kentbruck-wind-farm-pty-ltd-atf-kentbruck-wind-farm-trust",
-      "name": "Kentbruck Wind Farm Pty Ltd atf Kentbruck Wind Farm Trust",
+      "slug": "hmc-capital-illuma-energy",
+      "name": "HMC Capital / Illuma Energy",
       "project_count": 1,
       "total_capacity_mw": 600.0,
       "total_storage_mwh": 0,
@@ -6015,7 +6014,7 @@
       ]
     },
     {
-      "slug": "elgin-energy-2",
+      "slug": "elgin-energy-3",
       "name": "Elgin Energy",
       "project_count": 1,
       "total_capacity_mw": 400.0,
@@ -6135,6 +6134,27 @@
       "project_ids": [
         "northern-battery",
         "morgan-solar"
+      ]
+    },
+    {
+      "slug": "elgin-energy-cip-majority",
+      "name": "Elgin Energy (CIP-majority)",
+      "project_count": 2,
+      "total_capacity_mw": 375.0,
+      "total_storage_mwh": 750.0,
+      "by_technology": {
+        "hybrid": 2
+      },
+      "by_status": {
+        "development": 2
+      },
+      "states": [
+        "VIC"
+      ],
+      "avg_confidence": "medium",
+      "project_ids": [
+        "barwon-solar-farm-and-bess",
+        "elaine-solar-farm-and-bess"
       ]
     },
     {
@@ -6880,6 +6900,27 @@
       ]
     },
     {
+      "slug": "edify-energy-la-caisse-owned",
+      "name": "Edify Energy (La Caisse-owned)",
+      "project_count": 2,
+      "total_capacity_mw": 300.0,
+      "total_storage_mwh": 1200.0,
+      "by_technology": {
+        "hybrid": 2
+      },
+      "by_status": {
+        "development": 2
+      },
+      "states": [
+        "QLD"
+      ],
+      "avg_confidence": "medium",
+      "project_ids": [
+        "ganymirra-solar-power-station",
+        "majors-creek-solar-power-station"
+      ]
+    },
+    {
       "slug": "pacific-hydro-haughton-solar-farm",
       "name": "Pacific Hydro Haughton Solar Farm Pty Ltd",
       "project_count": 2,
@@ -7322,26 +7363,6 @@
       "avg_confidence": "medium",
       "project_ids": [
         "walla-walla-solar-farm"
-      ]
-    },
-    {
-      "slug": "west-mokoan-solar-farm",
-      "name": "West Mokoan Solar Farm",
-      "project_count": 1,
-      "total_capacity_mw": 300.0,
-      "total_storage_mwh": 1568.0,
-      "by_technology": {
-        "hybrid": 1
-      },
-      "by_status": {
-        "development": 1
-      },
-      "states": [
-        "VIC"
-      ],
-      "avg_confidence": "medium",
-      "project_ids": [
-        "west-mokoan-solar-farm-and-bess"
       ]
     },
     {
@@ -8028,8 +8049,8 @@
       ]
     },
     {
-      "slug": "hopeland-solar-farm-pty-ltd-as-trustee-for-the-hopeland-solar-farm-trust",
-      "name": "Hopeland Solar Farm Pty Ltd as trustee for the Hopeland Solar Farm Trust",
+      "slug": "pacific-partnerships-cimic-hochtief-acs",
+      "name": "Pacific Partnerships (CIMIC/HOCHTIEF/ACS)",
       "project_count": 1,
       "total_capacity_mw": 250.0,
       "total_storage_mwh": 0,
@@ -9471,7 +9492,7 @@
       ]
     },
     {
-      "slug": "pacific-partnerships-2",
+      "slug": "pacific-partnerships-3",
       "name": "Pacific Partnerships Pty Ltd",
       "project_count": 1,
       "total_capacity_mw": 200.0,
@@ -13637,8 +13658,8 @@
       ]
     },
     {
-      "slug": "barnawartha-solar",
-      "name": "Barnawartha Solar Pty Ltd",
+      "slug": "gentari-petronas",
+      "name": "Gentari (Petronas)",
       "project_count": 1,
       "total_capacity_mw": 64.0,
       "total_storage_mwh": 6.4,
@@ -13814,6 +13835,26 @@
       "avg_confidence": "low",
       "project_ids": [
         "argyle-solar-farm"
+      ]
+    },
+    {
+      "slug": "european-energy-australia",
+      "name": "European Energy Australia",
+      "project_count": 1,
+      "total_capacity_mw": 58.0,
+      "total_storage_mwh": 0,
+      "by_technology": {
+        "solar": 1
+      },
+      "by_status": {
+        "operating": 1
+      },
+      "states": [
+        "VIC"
+      ],
+      "avg_confidence": "medium",
+      "project_ids": [
+        "mokoan-solar-farm"
       ]
     },
     {
@@ -14337,26 +14378,6 @@
       ]
     },
     {
-      "slug": "ee-solar-6-pty-ltd-as-trustee-for-ee-solar-6-trust",
-      "name": "EE Solar 6 Pty Ltd as trustee for EE Solar 6 Trust",
-      "project_count": 1,
-      "total_capacity_mw": 46.0,
-      "total_storage_mwh": 0,
-      "by_technology": {
-        "solar": 1
-      },
-      "by_status": {
-        "operating": 1
-      },
-      "states": [
-        "VIC"
-      ],
-      "avg_confidence": "medium",
-      "project_ids": [
-        "mokoan-solar-farm"
-      ]
-    },
-    {
       "slug": "gregadoo-solar-farm",
       "name": "Gregadoo Solar Farm Pty Ltd",
       "project_count": 1,
@@ -14697,7 +14718,7 @@
       ]
     }
   ],
-  "total_developers": 706,
+  "total_developers": 707,
   "grouped_developers": [
     {
       "slug": "acen",
@@ -15193,7 +15214,7 @@
         "Tilt Renewables DevCo Pty Ltd as the trustee for Development Hold Trust"
       ],
       "project_count": 12,
-      "total_capacity_mw": 5276.0,
+      "total_capacity_mw": 5290.0,
       "total_storage_mwh": 1300.0,
       "by_technology": {
         "wind": 7,
@@ -15278,17 +15299,17 @@
         "Lightsource Development Services Australia Pty Ltd",
         "Lightsource bp"
       ],
-      "project_count": 11,
-      "total_capacity_mw": 4342.0,
-      "total_storage_mwh": 9871.0,
+      "project_count": 12,
+      "total_capacity_mw": 4642.0,
+      "total_storage_mwh": 11439.0,
       "by_technology": {
         "bess": 6,
         "solar": 1,
-        "hybrid": 2,
+        "hybrid": 3,
         "wind": 2
       },
       "by_status": {
-        "development": 9,
+        "development": 10,
         "operating": 1,
         "construction": 1
       },
@@ -15307,6 +15328,7 @@
         "goorambat-bess-lightsourcebp",
         "woonga-creek-bess",
         "gundary-solar-farm-and-bess",
+        "west-mokoan-solar-farm-and-bess",
         "dangarsleigh-wind",
         "woolooga-bess",
         "wellington-solar-farm"
@@ -15355,94 +15377,6 @@
         "rollsville-hybrid-facility-battery",
         "forest-glen-solar-farm",
         "willavale-solar-farm"
-      ]
-    },
-    {
-      "slug": "edify-energy",
-      "name": "Edify Energy",
-      "aliases": [
-        "Edify Energy Pty Ltd"
-      ],
-      "project_count": 16,
-      "total_capacity_mw": 4230.0,
-      "total_storage_mwh": 5760.0,
-      "by_technology": {
-        "hybrid": 7,
-        "solar": 5,
-        "bess": 4
-      },
-      "by_status": {
-        "development": 16
-      },
-      "states": [
-        "NSW",
-        "QLD",
-        "SA",
-        "VIC"
-      ],
-      "avg_confidence": "low",
-      "project_ids": [
-        "nowingi-solar-farm-edify-kci",
-        "sandy-creek-energy-storage-system",
-        "boags-creek-solar-power-station",
-        "guthries-gap-solar-power-station",
-        "port-augusta-solar-farm-kci",
-        "smoky-creek-solar-power-station",
-        "callide-power-station-solar-farm",
-        "callide-solar-power-station-bess",
-        "muskerry-solar-power-station-kci",
-        "pioneer-bess-kci",
-        "ganymirra-solar-power-station",
-        "koorangie-bess-stage-2",
-        "majors-creek-solar-power-station",
-        "brewongle-solar-farm",
-        "burroway-bess",
-        "peninsula-solar-farm-and-bess"
-      ]
-    },
-    {
-      "slug": "neoen",
-      "name": "Neoen",
-      "aliases": [
-        "Neoen",
-        "Neoen Australia",
-        "Neoen Australia Pty Ltd"
-      ],
-      "project_count": 15,
-      "total_capacity_mw": 4204.0,
-      "total_storage_mwh": 11181.9,
-      "by_technology": {
-        "bess": 12,
-        "wind": 2,
-        "hybrid": 1
-      },
-      "by_status": {
-        "operating": 4,
-        "development": 11
-      },
-      "states": [
-        "NSW",
-        "QLD",
-        "SA",
-        "TAS"
-      ],
-      "avg_confidence": "medium",
-      "project_ids": [
-        "goyder-north-wind-farm",
-        "great-western-battery-project",
-        "tchelery-wind-farm-and-bess",
-        "culcairn-bess",
-        "goyder-bess",
-        "goyder-north-bess-2",
-        "mount-hopeful-bess",
-        "tchelery-bess",
-        "thunderbolt-wind-farm",
-        "blyth-bess",
-        "territory-battery",
-        "hornsdale-power-reserve",
-        "hornsdale-power-reserve-unit-1",
-        "capital-battery",
-        "great-lakes-battery"
       ]
     },
     {
@@ -15558,6 +15492,47 @@
       ]
     },
     {
+      "slug": "edify-energy",
+      "name": "Edify Energy",
+      "aliases": [
+        "Edify Energy Pty Ltd"
+      ],
+      "project_count": 14,
+      "total_capacity_mw": 3930.0,
+      "total_storage_mwh": 4560.0,
+      "by_technology": {
+        "hybrid": 5,
+        "solar": 5,
+        "bess": 4
+      },
+      "by_status": {
+        "development": 14
+      },
+      "states": [
+        "NSW",
+        "QLD",
+        "SA",
+        "VIC"
+      ],
+      "avg_confidence": "low",
+      "project_ids": [
+        "nowingi-solar-farm-edify-kci",
+        "sandy-creek-energy-storage-system",
+        "boags-creek-solar-power-station",
+        "guthries-gap-solar-power-station",
+        "port-augusta-solar-farm-kci",
+        "smoky-creek-solar-power-station",
+        "callide-power-station-solar-farm",
+        "callide-solar-power-station-bess",
+        "muskerry-solar-power-station-kci",
+        "pioneer-bess-kci",
+        "koorangie-bess-stage-2",
+        "brewongle-solar-farm",
+        "burroway-bess",
+        "peninsula-solar-farm-and-bess"
+      ]
+    },
+    {
       "slug": "ark-energy",
       "name": "ARK Energy",
       "aliases": [
@@ -15596,6 +15571,49 @@
         "hellyer-wind-farm",
         "specimen-hill-bess-storage-kci",
         "western-plains-wind-farm"
+      ]
+    },
+    {
+      "slug": "neoen",
+      "name": "Neoen",
+      "aliases": [
+        "Neoen",
+        "Neoen Australia Pty Ltd"
+      ],
+      "project_count": 14,
+      "total_capacity_mw": 3604.0,
+      "total_storage_mwh": 11181.9,
+      "by_technology": {
+        "bess": 12,
+        "hybrid": 1,
+        "wind": 1
+      },
+      "by_status": {
+        "operating": 4,
+        "development": 10
+      },
+      "states": [
+        "NSW",
+        "QLD",
+        "SA",
+        "TAS"
+      ],
+      "avg_confidence": "medium",
+      "project_ids": [
+        "great-western-battery-project",
+        "tchelery-wind-farm-and-bess",
+        "culcairn-bess",
+        "goyder-bess",
+        "goyder-north-bess-2",
+        "mount-hopeful-bess",
+        "tchelery-bess",
+        "thunderbolt-wind-farm",
+        "blyth-bess",
+        "territory-battery",
+        "hornsdale-power-reserve",
+        "hornsdale-power-reserve-unit-1",
+        "capital-battery",
+        "great-lakes-battery"
       ]
     },
     {
@@ -16477,43 +16495,6 @@
       ]
     },
     {
-      "slug": "elgin-energy",
-      "name": "Elgin Energy",
-      "aliases": [
-        "Elgin Energy",
-        "Elgin Energy Pty Ltd"
-      ],
-      "project_count": 10,
-      "total_capacity_mw": 1905.0,
-      "total_storage_mwh": 4950.0,
-      "by_technology": {
-        "hybrid": 5,
-        "bess": 4,
-        "solar": 1
-      },
-      "by_status": {
-        "development": 10
-      },
-      "states": [
-        "NSW",
-        "QLD",
-        "VIC"
-      ],
-      "avg_confidence": "low",
-      "project_ids": [
-        "yelarbon-sf-and-bess-kci",
-        "barwon-solar-farm-and-bess",
-        "geelong-bess",
-        "lerida-solar-farm",
-        "armidale-bess-elgin",
-        "elaine-solar-farm-and-bess",
-        "gerogery-battery-kci",
-        "gerogery-solar-farm-kci",
-        "tabulam-bess",
-        "glanmire-solar-farm"
-      ]
-    },
-    {
       "slug": "equis",
       "name": "Equis",
       "aliases": [
@@ -16796,6 +16777,41 @@
         "darling-downs-battery",
         "dapper-solar-farm",
         "templers-b-bess"
+      ]
+    },
+    {
+      "slug": "elgin-energy",
+      "name": "Elgin Energy",
+      "aliases": [
+        "Elgin Energy",
+        "Elgin Energy Pty Ltd"
+      ],
+      "project_count": 8,
+      "total_capacity_mw": 1530.0,
+      "total_storage_mwh": 4200.0,
+      "by_technology": {
+        "hybrid": 3,
+        "bess": 4,
+        "solar": 1
+      },
+      "by_status": {
+        "development": 8
+      },
+      "states": [
+        "NSW",
+        "QLD",
+        "VIC"
+      ],
+      "avg_confidence": "low",
+      "project_ids": [
+        "yelarbon-sf-and-bess-kci",
+        "geelong-bess",
+        "lerida-solar-farm",
+        "armidale-bess-elgin",
+        "gerogery-battery-kci",
+        "gerogery-solar-farm-kci",
+        "tabulam-bess",
+        "glanmire-solar-farm"
       ]
     },
     {
@@ -18581,6 +18597,27 @@
       "aliases": []
     },
     {
+      "slug": "neoen-australia-brookfield-owned",
+      "name": "Neoen Australia (Brookfield-owned)",
+      "project_count": 1,
+      "total_capacity_mw": 600.0,
+      "total_storage_mwh": 0,
+      "by_technology": {
+        "wind": 1
+      },
+      "by_status": {
+        "development": 1
+      },
+      "states": [
+        "SA"
+      ],
+      "avg_confidence": "low",
+      "project_ids": [
+        "goyder-north-wind-farm"
+      ],
+      "aliases": []
+    },
+    {
       "slug": "reenerge-australia",
       "name": "ReEnerge Australia Pty Ltd",
       "project_count": 2,
@@ -18604,8 +18641,8 @@
       "aliases": []
     },
     {
-      "slug": "kentbruck-wind-farm-pty-ltd-atf-kentbruck-wind-farm-trust",
-      "name": "Kentbruck Wind Farm Pty Ltd atf Kentbruck Wind Farm Trust",
+      "slug": "hmc-capital-illuma-energy",
+      "name": "HMC Capital / Illuma Energy",
       "project_count": 1,
       "total_capacity_mw": 600.0,
       "total_storage_mwh": 0,
@@ -20583,6 +20620,28 @@
       "aliases": []
     },
     {
+      "slug": "elgin-energy-cip-majority",
+      "name": "Elgin Energy (CIP-majority)",
+      "project_count": 2,
+      "total_capacity_mw": 375.0,
+      "total_storage_mwh": 750.0,
+      "by_technology": {
+        "hybrid": 2
+      },
+      "by_status": {
+        "development": 2
+      },
+      "states": [
+        "VIC"
+      ],
+      "avg_confidence": "medium",
+      "project_ids": [
+        "barwon-solar-farm-and-bess",
+        "elaine-solar-farm-and-bess"
+      ],
+      "aliases": []
+    },
+    {
       "slug": "stbess-projectco-pty-ltd-as-trustee-for-the-stbess-project-trust",
       "name": "STBESS ProjectCo Pty Ltd as trustee for the STBESS Project Trust",
       "project_count": 1,
@@ -21255,6 +21314,28 @@
       "aliases": []
     },
     {
+      "slug": "edify-energy-la-caisse-owned",
+      "name": "Edify Energy (La Caisse-owned)",
+      "project_count": 2,
+      "total_capacity_mw": 300.0,
+      "total_storage_mwh": 1200.0,
+      "by_technology": {
+        "hybrid": 2
+      },
+      "by_status": {
+        "development": 2
+      },
+      "states": [
+        "QLD"
+      ],
+      "avg_confidence": "medium",
+      "project_ids": [
+        "ganymirra-solar-power-station",
+        "majors-creek-solar-power-station"
+      ],
+      "aliases": []
+    },
+    {
       "slug": "yanara-australia",
       "name": "Yanara Australia Pty Ltd",
       "project_count": 1,
@@ -21356,27 +21437,6 @@
       "avg_confidence": "high",
       "project_ids": [
         "victorian-big-battery"
-      ],
-      "aliases": []
-    },
-    {
-      "slug": "west-mokoan-solar-farm",
-      "name": "West Mokoan Solar Farm",
-      "project_count": 1,
-      "total_capacity_mw": 300.0,
-      "total_storage_mwh": 1568.0,
-      "by_technology": {
-        "hybrid": 1
-      },
-      "by_status": {
-        "development": 1
-      },
-      "states": [
-        "VIC"
-      ],
-      "avg_confidence": "medium",
-      "project_ids": [
-        "west-mokoan-solar-farm-and-bess"
       ],
       "aliases": []
     },
@@ -21740,8 +21800,8 @@
       "aliases": []
     },
     {
-      "slug": "hopeland-solar-farm-pty-ltd-as-trustee-for-the-hopeland-solar-farm-trust",
-      "name": "Hopeland Solar Farm Pty Ltd as trustee for the Hopeland Solar Farm Trust",
+      "slug": "pacific-partnerships-cimic-hochtief-acs",
+      "name": "Pacific Partnerships (CIMIC/HOCHTIEF/ACS)",
       "project_count": 1,
       "total_capacity_mw": 250.0,
       "total_storage_mwh": 0,
@@ -21928,35 +21988,6 @@
         "bango-999-wind-farm"
       ],
       "aliases": []
-    },
-    {
-      "slug": "ee-solar-9-pty-ltd-as-trustee-for-the-ee-solar-9-trust",
-      "name": "EE Solar 9 Pty Ltd as trustee for the EE Solar 9 Trust",
-      "aliases": [
-        "EE Solar 12 Pty Ltd as trustee for the EE Solar 12 Trust",
-        "EE Solar 6 Pty Ltd as trustee for EE Solar 6 Trust",
-        "EE Solar 9 Pty Ltd as trustee for the EE Solar 9 Trust"
-      ],
-      "project_count": 3,
-      "total_capacity_mw": 243.0,
-      "total_storage_mwh": 0,
-      "by_technology": {
-        "solar": 3
-      },
-      "by_status": {
-        "development": 2,
-        "operating": 1
-      },
-      "states": [
-        "QLD",
-        "VIC"
-      ],
-      "avg_confidence": "low",
-      "project_ids": [
-        "winton-north-solar-farm",
-        "bullyard-solar-farm",
-        "mokoan-solar-farm"
-      ]
     },
     {
       "slug": "ararat-wind-farm",
@@ -22769,6 +22800,32 @@
         "yabulu-south-bess"
       ],
       "aliases": []
+    },
+    {
+      "slug": "ee-solar-9-pty-ltd-as-trustee-for-the-ee-solar-9-trust",
+      "name": "EE Solar 9 Pty Ltd as trustee for the EE Solar 9 Trust",
+      "aliases": [
+        "EE Solar 12 Pty Ltd as trustee for the EE Solar 12 Trust",
+        "EE Solar 9 Pty Ltd as trustee for the EE Solar 9 Trust"
+      ],
+      "project_count": 2,
+      "total_capacity_mw": 197.0,
+      "total_storage_mwh": 0,
+      "by_technology": {
+        "solar": 2
+      },
+      "by_status": {
+        "development": 2
+      },
+      "states": [
+        "QLD",
+        "VIC"
+      ],
+      "avg_confidence": "low",
+      "project_ids": [
+        "winton-north-solar-farm",
+        "bullyard-solar-farm"
+      ]
     },
     {
       "slug": "pyrenees-wind-energy-developments",
@@ -26209,8 +26266,8 @@
       "aliases": []
     },
     {
-      "slug": "barnawartha-solar",
-      "name": "Barnawartha Solar Pty Ltd",
+      "slug": "gentari-petronas",
+      "name": "Gentari (Petronas)",
       "project_count": 1,
       "total_capacity_mw": 64.0,
       "total_storage_mwh": 6.4,
@@ -26375,6 +26432,27 @@
       "avg_confidence": "low",
       "project_ids": [
         "argyle-solar-farm"
+      ],
+      "aliases": []
+    },
+    {
+      "slug": "european-energy-australia",
+      "name": "European Energy Australia",
+      "project_count": 1,
+      "total_capacity_mw": 58.0,
+      "total_storage_mwh": 0,
+      "by_technology": {
+        "solar": 1
+      },
+      "by_status": {
+        "operating": 1
+      },
+      "states": [
+        "VIC"
+      ],
+      "avg_confidence": "medium",
+      "project_ids": [
+        "mokoan-solar-farm"
       ],
       "aliases": []
     },
@@ -27137,7 +27215,7 @@
       "aliases": []
     }
   ],
-  "total_grouped": 536,
+  "total_grouped": 539,
   "top_developers": [
     {
       "slug": "acen",
@@ -27155,11 +27233,6 @@
       "project_count": 23
     },
     {
-      "slug": "edify-energy",
-      "name": "Edify Energy",
-      "project_count": 16
-    },
-    {
       "slug": "origin-energy",
       "name": "Origin Energy",
       "project_count": 15
@@ -27170,14 +27243,19 @@
       "project_count": 15
     },
     {
-      "slug": "neoen",
-      "name": "Neoen",
-      "project_count": 15
-    },
-    {
       "slug": "samsung-c-t",
       "name": "Samsung C&T",
       "project_count": 15
+    },
+    {
+      "slug": "edify-energy",
+      "name": "Edify Energy",
+      "project_count": 14
+    },
+    {
+      "slug": "neoen",
+      "name": "Neoen",
+      "project_count": 14
     },
     {
       "slug": "tagenergy",

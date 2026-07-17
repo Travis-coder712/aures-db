@@ -1533,6 +1533,27 @@
       ]
     },
     {
+      "slug": "european-energy",
+      "name": "European Energy",
+      "project_count": 1,
+      "total_capacity_mw": 58.0,
+      "roles": [
+        "epc"
+      ],
+      "by_technology": {
+        "solar": 1
+      },
+      "by_status": {
+        "operating": 1
+      },
+      "states": [
+        "VIC"
+      ],
+      "project_ids": [
+        "mokoan-solar-farm"
+      ]
+    },
+    {
       "slug": "fluence-valmec-altrad",
       "name": "Fluence / Valmec (Altrad)",
       "project_count": 1,
@@ -1572,27 +1593,6 @@
       ],
       "project_ids": [
         "wallgrove-grid-battery-project"
-      ]
-    },
-    {
-      "slug": "european-energy",
-      "name": "European Energy",
-      "project_count": 1,
-      "total_capacity_mw": 46.0,
-      "roles": [
-        "epc"
-      ],
-      "by_technology": {
-        "solar": 1
-      },
-      "by_status": {
-        "operating": 1
-      },
-      "states": [
-        "VIC"
-      ],
-      "project_ids": [
-        "mokoan-solar-farm"
       ]
     },
     {

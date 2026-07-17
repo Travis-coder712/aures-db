@@ -3,10 +3,10 @@
   "name": "Mokoan Solar Farm",
   "technology": "solar",
   "status": "operating",
-  "capacity_mw": 46.0,
+  "capacity_mw": 58.0,
   "state": "VIC",
   "rez": "Central North VIC",
-  "current_developer": "EE Solar 6 Pty Ltd as trustee for EE Solar 6 Trust",
+  "current_developer": "European Energy Australia",
   "cod_current": "2025-05-22",
   "cod_original": "2025-05-22",
   "connection_status": "operating",
@@ -18,8 +18,8 @@
   "performance_score": 37.4,
   "notable": "46 MW solar farm near Benalla, VIC. Developed by Elecnor.",
   "data_confidence": "medium",
-  "last_updated": "2026-05-25",
-  "last_verified": "2026-03-10",
+  "last_updated": "2026-07-16",
+  "last_verified": "2026-07-16",
   "aemo_gen_info_id": "1999",
   "confidence_score": "49",
   "first_seen": "2024-12-16",
@@ -69,8 +69,14 @@
       "scheme": "CIS",
       "round": "Tender 1 \u2014 NEM Generation",
       "capacity_mw": 46,
+      "award_date": "2024-12-11",
       "source_url": "https://www.dcceew.gov.au/energy/renewable/capacity-investment-scheme/closed-cis-tenders",
-      "contract_type": "CISA (federal underwriting)"
+      "contract_type": "CISA (federal underwriting)",
+      "execution_status": "operating",
+      "execution_date": "2025-06-01",
+      "fid_date": "2024-03-01",
+      "execution_notes": "Commercial ops June 2025 \u2014 first CIS T1 non-NSW project to reach operations. Financial close Mar 2024 predates CIS T1 award (Dec 2024) \u2014 European Energy proceeded to construction on pre-award financing; CIS T1 award became a revenue-floor overlay on an already-financed project. Installed 58 MW AC vs 46 MW CIS award \u2014 CIS floor calibrated to 46 MW award figure.",
+      "execution_source_url": "https://europeanenergy.com/2025/03/24/first-australian-solar-project-switches-on-for-european-energy/"
     }
   ],
   "cost_sources": [],
@@ -83,5 +89,6 @@
       "source_tier": 1
     }
   ],
+  "operational_notes": "Commercial ops June 2025. FIRST CIS T1 non-NSW project to reach operations. Financial close Mar 2024 (pre-CIS T1 award \u2014 CIS T1 was Dec 2024). Installed 58 MW AC (vs 46 MW award). Battery add-on (80 MWh BESS) in separate development. SPV 'EE Solar 6 Pty Ltd' held by European Energy Australia (Danish parent).",
   "timeline_events": []
 }

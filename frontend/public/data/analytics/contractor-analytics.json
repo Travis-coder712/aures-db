@@ -2,7 +2,7 @@
   "concentration": {
     "epc": {
       "total_contractors": 65,
-      "total_mw": 26484.3,
+      "total_mw": 26496.3,
       "total_project_slots": 116,
       "hhi_mw": 371.0,
       "top3_share_mw_pct": 23.4,
@@ -2660,6 +2660,32 @@
       ]
     },
     {
+      "contractor": "European Energy",
+      "slug": "european-energy",
+      "category": "epc_only",
+      "roles": [
+        "epc"
+      ],
+      "projects": 1,
+      "mw_total": 58.0,
+      "technologies": {
+        "solar": 1
+      },
+      "states": {
+        "VIC": 1
+      },
+      "statuses": {
+        "operating": 1
+      },
+      "top_developers": [
+        [
+          "European Energy Australia",
+          1
+        ]
+      ],
+      "top_oem_partners": []
+    },
+    {
       "contractor": "Fluence / Valmec (Altrad)",
       "slug": "fluence-valmec-altrad",
       "category": "epc_only",
@@ -2727,32 +2753,6 @@
           "count": 1
         }
       ]
-    },
-    {
-      "contractor": "European Energy",
-      "slug": "european-energy",
-      "category": "epc_only",
-      "roles": [
-        "epc"
-      ],
-      "projects": 1,
-      "mw_total": 46.0,
-      "technologies": {
-        "solar": 1
-      },
-      "states": {
-        "VIC": 1
-      },
-      "statuses": {
-        "operating": 1
-      },
-      "top_developers": [
-        [
-          "EE Solar 6 Pty Ltd as trustee for EE Solar 6 Trust",
-          1
-        ]
-      ],
-      "top_oem_partners": []
     },
     {
       "contractor": "Spotless Sustainability Services",
@@ -4689,8 +4689,8 @@
         "technology": "solar",
         "state": "VIC",
         "status": "operating",
-        "capacity_mw": 46.0,
-        "developer": "EE Solar 6 Pty Ltd as trustee for EE Solar 6 Trust",
+        "capacity_mw": 58.0,
+        "developer": "European Energy Australia",
         "model": null,
         "source_url": "https://au.europeanenergy.com/solar/mokoan-solar-farm/",
         "drift_months": 0.0
@@ -5663,6 +5663,15 @@
       ]
     },
     {
+      "developer": "European Energy Australia",
+      "contractor": "European Energy",
+      "projects": 1,
+      "mw": 58.0,
+      "roles": [
+        "epc"
+      ]
+    },
+    {
       "developer": "Childers Solar Pty Ltd as trustee for the Childers Solar Trust",
       "contractor": "Biosar",
       "projects": 1,
@@ -5802,15 +5811,6 @@
       "contractor": "RCR Tomlinson",
       "projects": 1,
       "mw": 46.7,
-      "roles": [
-        "epc"
-      ]
-    },
-    {
-      "developer": "EE Solar 6 Pty Ltd as trustee for EE Solar 6 Trust",
-      "contractor": "European Energy",
-      "projects": 1,
-      "mw": 46.0,
       "roles": [
         "epc"
       ]
@@ -6625,5 +6625,5 @@
       "both": 4
     }
   },
-  "exported_at": "2026-07-16T06:44:24.599418"
+  "exported_at": "2026-07-17T17:12:57.725000"
 }

@@ -120,15 +120,17 @@ If four material corrections surface in a single T9-adjacent research pass, the 
 
 **Estimated effort**: 1 session (may run in parallel with Phase 2 if agent bandwidth allows).
 
-### Phase 4 (optional) — Extend `CIS_PROJECTS` array to be non-NSW-inclusive
+### Phase 4 (OBSOLETED — CIS_PROJECTS is already comprehensive)
 
-**Current state**: `CIS_PROJECTS` in `frontend/src/data/scheme-rounds.ts` has 9 entries, all NSW. My v3.21.1 research surfaced 35 non-NSW CIS-locked projects. The frontend UI (CIS Success tab, Pipeline Overview funnel) materially under-represents the actual CIS outcome.
+**Original plan claim was WRONG.** During Phase 1 kickoff (2026-07-16), a baseline query revealed that `CIS_PROJECTS` in `frontend/src/data/scheme-rounds.ts` is already comprehensive — NOT NSW-only as originally claimed:
+- CIS T1: 19 entries covering all states
+- CIS T3: 16 entries (matches full round of 16 winners)
+- CIS T4: 20 entries (matches full round of ~20 winners)
+- CIS T7: 19 entries (matches full round of 19 winners)
+- CIS T8: 15 entries (matches full round of 15 winners)
+- **Total: 89 CIS entries** covering the full ~130 CIS + LTESA cohort's CIS half
 
-**Deliverable**: Extend `CIS_PROJECTS` array with 35 non-NSW winners (structure matches existing NSW entries — proponent, scheme, awarded_mw, total_mw, technology, stage_label, rez, planning_status, fid_year, fid_status, connection_status, connection_notes, execution_risk, risk_rationale).
-
-**Release**: `v3.22.3 — CIS_PROJECTS array non-NSW extension`.
-
-**Estimated effort**: 1-2 sessions (mostly manual data-entry from Phase 1-3 sourced data).
+Phase 4 is therefore OBSOLETED. Phase 1-3 work reduces to (a) refresh `contract_status` values in existing entries where stale, (b) update `developer` field where showing SPV name only, (c) update `notes` field with current-state 1-liner, (d) parallel overlay `scheme_contracts` extension with the new execution_* fields.
 
 ## Schema Extension Proposal
 
@@ -236,9 +238,9 @@ By project completion (v3.22.3):
 - No mega-exporter changes (overlay fields already flow through if in OVERLAY_OVERRIDE_FIELDS — verify `scheme_contracts` is included at `pipeline/exporters/export_json.py:40`)
 - No breaking changes to existing frontend components (schema extension is additive)
 
-## Estimated Total Effort
+## Estimated Total Effort (revised 2026-07-16 after Phase 4 obsoleted)
 
-3 phases + optional Phase 4 = 4-6 focused sessions across 3-4 weeks. Approx 12-18 hrs of focused work if agent-runtime is included. Deliverables: 4 releases (v3.22.0 → v3.22.3), 1 new research note, updated NEXT_SESSION_HANDOFF, updated CIS_PROJECTS array with 35+ non-NSW entries.
+3 phases = 3 focused sessions across 2-3 weeks. Approx 8-12 hrs of focused work if agent-runtime is included. Deliverables: 3 releases (v3.22.0 → v3.22.2), updated NEXT_SESSION_HANDOFF, refreshed CIS_PROJECTS array entries (contract_status + developer + notes fields), overlay `scheme_contracts` entries extended with execution_status / execution_date / fid_date / execution_notes / execution_source_url fields.
 
 ## When to Start
 

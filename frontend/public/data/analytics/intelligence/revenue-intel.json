@@ -2691,7 +2691,7 @@
           "name": "Mokoan Solar Farm",
           "revenue_per_mw": 21786.0,
           "capacity_factor_pct": 17.9,
-          "capacity_mw": 46.0,
+          "capacity_mw": 58.0,
           "yoy_change_pct": -54.8,
           "latest_year": 2026
         },
@@ -3878,19 +3878,19 @@
         "year": 2024,
         "total_revenue_m_aud": 748.4,
         "project_count": 73,
-        "mean_per_project_aud": 10252178.0
+        "mean_per_project_aud": 10252177.0
       },
       {
         "year": 2025,
-        "total_revenue_m_aud": 560.5,
+        "total_revenue_m_aud": 561.1,
         "project_count": 78,
-        "mean_per_project_aud": 7186280.0
+        "mean_per_project_aud": 7193692.0
       },
       {
         "year": 2026,
-        "total_revenue_m_aud": 282.0,
+        "total_revenue_m_aud": 282.3,
         "project_count": 78,
-        "mean_per_project_aud": 3615885.0
+        "mean_per_project_aud": 3619237.0
       }
     ],
     "wind": [
@@ -3950,5 +3950,5 @@
       }
     ]
   },
-  "exported_at": "2026-07-16T06:53:04.730092"
+  "exported_at": "2026-07-17T17:21:34.587651"
 }

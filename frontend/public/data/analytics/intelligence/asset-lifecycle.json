@@ -474,7 +474,7 @@
     {
       "year": 2025,
       "count": 19,
-      "total_mw": 4422.5,
+      "total_mw": 4434.5,
       "by_tech": {
         "bess": 10,
         "solar": 8,
@@ -2842,7 +2842,7 @@
     {
       "eol_year": 2050,
       "count": 19,
-      "total_mw": 4422.5,
+      "total_mw": 4434.5,
       "by_tech": {
         "bess": 10,
         "solar": 8,
@@ -5979,9 +5979,9 @@
       "technology": "solar",
       "state": "VIC",
       "rez": "Central North VIC",
-      "capacity_mw": 46.0,
+      "capacity_mw": 58.0,
       "storage_mwh": null,
-      "developer": "EE Solar 6 Pty Ltd as trustee for EE Solar 6 Trust",
+      "developer": "European Energy Australia",
       "operator": null,
       "cod_year": 2025,
       "age_years": 1,
@@ -8090,5 +8090,5 @@
       "longitude": null
     }
   ],
-  "exported_at": "2026-07-16T06:44:24.753590"
+  "exported_at": "2026-07-17T17:12:57.878128"
 }

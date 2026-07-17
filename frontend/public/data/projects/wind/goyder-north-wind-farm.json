@@ -5,7 +5,7 @@
   "status": "development",
   "capacity_mw": 600.0,
   "state": "SA",
-  "current_developer": "Neoen Australia",
+  "current_developer": "Neoen Australia (Brookfield-owned)",
   "cod_current": "2029-12",
   "cod_original": "2029-12-31",
   "connection_status": "anticipated",
@@ -15,8 +15,8 @@
   "has_statcom": false,
   "has_harmonic_filter": false,
   "data_confidence": "medium",
-  "last_updated": "2026-05-25",
-  "last_verified": "2026-03-10",
+  "last_updated": "2026-07-16",
+  "last_verified": "2026-07-16",
   "aemo_gen_info_id": "2757",
   "confidence_score": "23",
   "development_stage": "early_stage",
@@ -39,7 +39,18 @@
       "sources": []
     }
   ],
-  "ownership_history": [],
+  "ownership_history": [
+    {
+      "from": "pre-2025-03",
+      "to": "2025-03",
+      "owner": "Neoen SA (French listed)"
+    },
+    {
+      "from": "2025-03",
+      "owner": "Brookfield (via Neoen global takeover)",
+      "note": "Australian brand retained as 'Neoen'"
+    }
+  ],
   "cod_history": [],
   "suppliers": [],
   "offtakes": [],
@@ -48,8 +59,12 @@
       "scheme": "CIS",
       "round": "Tender 1 \u2014 NEM Generation",
       "capacity_mw": 300,
+      "award_date": "2024-12-11",
       "source_url": "https://www.dcceew.gov.au/energy/renewable/capacity-investment-scheme/closed-cis-tenders",
-      "contract_type": "CISA (federal underwriting)"
+      "contract_type": "CISA (federal underwriting)",
+      "execution_status": "awarded",
+      "execution_notes": "Full project 600 MW; CIS T1 covers Stage 1 ~209-300 MW. Construction H2 2026 targeted. Goyder Battery construction mid-2026. Pre-FID at 19 months \u2014 no public FID confirmation.",
+      "execution_source_url": "https://www.energy-storage.news/neoen-begins-goyder-renewables-zone-wind-solar-storage-hybrid-project-in-south-australia/"
     }
   ],
   "cost_sources": [],
@@ -62,5 +77,6 @@
       "source_tier": 1
     }
   ],
+  "operational_notes": "Neoen global takeover by Brookfield completed Mar 2025 \u2014 Australian brand still 'Neoen'. Full project 600 MW; CIS T1 award covers Stage 1 up to 300 MW. Stage 1 construction expected H2 2026; Goyder Battery construction mid-2026. Pre-FID at 19 months post-award \u2014 no public FID confirmation despite construction target.",
   "timeline_events": []
 }

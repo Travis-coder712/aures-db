@@ -52,8 +52,6 @@
   ],
   "Elgin Energy Pty Ltd": [
     "armidale-bess-elgin",
-    "barwon-solar-farm-and-bess",
-    "elaine-solar-farm-and-bess",
     "geelong-bess",
     "gerogery-battery-kci",
     "gerogery-solar-farm-kci",
@@ -150,7 +148,7 @@
     "woodstock-bess",
     "yadnarie-solar-farm"
   ],
-  "Barnawartha Solar Pty Ltd": [
+  "Gentari (Petronas)": [
     "barnawartha-solar-and-energy-storage"
   ],
   "ACEN Renewables": [
@@ -163,6 +161,10 @@
     "barron-gorge",
     "kareeya",
     "wivenhoe"
+  ],
+  "Elgin Energy (CIP-majority)": [
+    "barwon-solar-farm-and-bess",
+    "elaine-solar-farm-and-bess"
   ],
   "Goldwind Australia": [
     "bashan-1-wind-farm",
@@ -331,10 +333,8 @@
     "burroway-bess",
     "callide-power-station-solar-farm",
     "callide-solar-power-station-bess",
-    "ganymirra-solar-power-station",
     "guthries-gap-solar-power-station",
     "koorangie-bess-stage-2",
-    "majors-creek-solar-power-station",
     "muskerry-solar-power-station-kci",
     "nowingi-solar-farm-edify-kci",
     "peninsula-solar-farm-and-bess",
@@ -784,6 +784,7 @@
   ],
   "Lightsource bp": [
     "dangarsleigh-wind",
+    "west-mokoan-solar-farm-and-bess",
     "woolbrook",
     "woolooga-bess"
   ],
@@ -1000,6 +1001,10 @@
   "Gannawarra Solar Farm Pty Ltd": [
     "gannawarra-solar-farm"
   ],
+  "Edify Energy (La Caisse-owned)": [
+    "ganymirra-solar-power-station",
+    "majors-creek-solar-power-station"
+  ],
   "Greenpulse solar farm and BESS as trustee for Greenpulse Solar Farm & Bess Unit Trust": [
     "garoo-bess",
     "garoo-solar-farm"
@@ -1110,7 +1115,7 @@
   "Gould Creek BESS Project Pty Ltd": [
     "gould-creek-bess"
   ],
-  "Neoen Australia": [
+  "Neoen Australia (Brookfield-owned)": [
     "goyder-north-wind-farm"
   ],
   "Goyder Wind Farm 1A Pty Ltd as trustee for Goyder Wind Farm 1A Trust": [
@@ -1294,7 +1299,7 @@
     "solar-river-solar-and-bess-project",
     "wagga-north-bess-kci"
   ],
-  "Hopeland Solar Farm Pty Ltd as trustee for the Hopeland Solar Farm Trust": [
+  "Pacific Partnerships (CIMIC/HOCHTIEF/ACS)": [
     "hopeland-solar-farm"
   ],
   "HWF 1 Pty Ltd": [
@@ -1396,7 +1401,7 @@
   "Windlab / Eurus": [
     "kennedy-energy-park-phase-1-wind"
   ],
-  "Kentbruck Wind Farm Pty Ltd atf Kentbruck Wind Farm Trust": [
+  "HMC Capital / Illuma Energy": [
     "kentbruck-green-power-hub"
   ],
   "Kerang Bess Pty Ltd": [
@@ -1645,7 +1650,7 @@
   "Mobilong ProjectCo Pty Ltd": [
     "mobilong-bess"
   ],
-  "EE Solar 6 Pty Ltd as trustee for EE Solar 6 Trust": [
+  "European Energy Australia": [
     "mokoan-solar-farm"
   ],
   "StorEnergy 3 Pty Ltd": [
@@ -2323,9 +2328,6 @@
   ],
   "Wemen Asset Co Pty Ltd as Trustee to Wemen Solar Unit Trust": [
     "wemen-solar-farm"
-  ],
-  "West Mokoan Solar Farm": [
-    "west-mokoan-solar-farm-and-bess"
   ],
   "West Wyalong Fund Pty Ltd": [
     "west-wyalong-solar-farm"

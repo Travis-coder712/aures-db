@@ -560,14 +560,6 @@
         "mw": 180.6
       }
     ],
-    "EE Solar 6 Pty Ltd as trustee for EE Solar 6 Trust": [
-      {
-        "role": "epc",
-        "supplier": "European Energy",
-        "projects": 1,
-        "mw": 46.0
-      }
-    ],
     "ENGIE": [
       {
         "role": "bess_oem",
@@ -740,6 +732,14 @@
         "supplier": "Samsung C&T / Genus Plus JV",
         "projects": 3,
         "mw": 600.0
+      }
+    ],
+    "European Energy Australia": [
+      {
+        "role": "epc",
+        "supplier": "European Energy",
+        "projects": 1,
+        "mw": 58.0
       }
     ],
     "Eurus Energy": [
@@ -3138,28 +3138,6 @@
     ],
     "Elgin Energy Pty Ltd": [
       {
-        "id": "barwon-solar-farm-and-bess",
-        "name": "Barwon Solar Farm and BESS",
-        "technology": "hybrid",
-        "state": "VIC",
-        "status": "development",
-        "capacity_mw": 250.0,
-        "cod_current": "2027-07-31",
-        "cod_original": "2027-07-31",
-        "drift_months": 0.0
-      },
-      {
-        "id": "elaine-solar-farm-and-bess",
-        "name": "Elaine Solar Farm and BESS",
-        "technology": "hybrid",
-        "state": "VIC",
-        "status": "development",
-        "capacity_mw": 125.0,
-        "cod_current": "2027-07-31",
-        "cod_original": "2027-07-31",
-        "drift_months": 0.0
-      },
-      {
         "id": "glanmire-solar-farm",
         "name": "Glanmire Solar Farm",
         "technology": "hybrid",
@@ -3765,7 +3743,7 @@
         "drift_months": null
       }
     ],
-    "Barnawartha Solar Pty Ltd": [
+    "Gentari (Petronas)": [
       {
         "id": "barnawartha-solar-and-energy-storage",
         "name": "Barnawartha Solar and Energy Storage",
@@ -3856,6 +3834,30 @@
         "capacity_mw": 570.0,
         "cod_current": "1983-12-31",
         "cod_original": "1983-12-31",
+        "drift_months": 0.0
+      }
+    ],
+    "Elgin Energy (CIP-majority)": [
+      {
+        "id": "barwon-solar-farm-and-bess",
+        "name": "Barwon Solar Farm and BESS",
+        "technology": "hybrid",
+        "state": "VIC",
+        "status": "development",
+        "capacity_mw": 250.0,
+        "cod_current": "2027-07-31",
+        "cod_original": "2027-07-31",
+        "drift_months": 0.0
+      },
+      {
+        "id": "elaine-solar-farm-and-bess",
+        "name": "Elaine Solar Farm and BESS",
+        "technology": "hybrid",
+        "state": "VIC",
+        "status": "development",
+        "capacity_mw": 125.0,
+        "cod_current": "2027-07-31",
+        "cod_original": "2027-07-31",
         "drift_months": 0.0
       }
     ],
@@ -5001,28 +5003,6 @@
         "drift_months": 0.0
       },
       {
-        "id": "ganymirra-solar-power-station",
-        "name": "Ganymirra Solar Power Station",
-        "technology": "hybrid",
-        "state": "QLD",
-        "status": "development",
-        "capacity_mw": 150.0,
-        "cod_current": "2029-02-01",
-        "cod_original": "2029-02-01",
-        "drift_months": 0.0
-      },
-      {
-        "id": "majors-creek-solar-power-station",
-        "name": "Majors Creek Solar Power Station",
-        "technology": "hybrid",
-        "state": "QLD",
-        "status": "development",
-        "capacity_mw": 150.0,
-        "cod_current": "2029-02-01",
-        "cod_original": "2029-02-01",
-        "drift_months": 0.0
-      },
-      {
         "id": "guthries-gap-solar-power-station",
         "name": "Guthrie\u2019s Gap Solar Power Station",
         "technology": "hybrid",
@@ -5228,7 +5208,7 @@
         "technology": "wind",
         "state": "SA",
         "status": "construction",
-        "capacity_mw": 274.0,
+        "capacity_mw": 288.0,
         "cod_current": null,
         "cod_original": null,
         "drift_months": null
@@ -7615,6 +7595,17 @@
         "drift_months": 0.0
       },
       {
+        "id": "west-mokoan-solar-farm-and-bess",
+        "name": "West Mokoan Solar Farm and BESS",
+        "technology": "hybrid",
+        "state": "VIC",
+        "status": "development",
+        "capacity_mw": 300.0,
+        "cod_current": "2029-07-02",
+        "cod_original": "2029-07-02",
+        "drift_months": 0.0
+      },
+      {
         "id": "woolbrook",
         "name": "Woolbrook",
         "technology": "wind",
@@ -8687,6 +8678,30 @@
         "drift_months": 0.0
       }
     ],
+    "Edify Energy (La Caisse-owned)": [
+      {
+        "id": "ganymirra-solar-power-station",
+        "name": "Ganymirra Solar Power Station",
+        "technology": "hybrid",
+        "state": "QLD",
+        "status": "development",
+        "capacity_mw": 150.0,
+        "cod_current": "2029-02-01",
+        "cod_original": "2029-02-01",
+        "drift_months": 0.0
+      },
+      {
+        "id": "majors-creek-solar-power-station",
+        "name": "Majors Creek Solar Power Station",
+        "technology": "hybrid",
+        "state": "QLD",
+        "status": "development",
+        "capacity_mw": 150.0,
+        "cod_current": "2029-02-01",
+        "cod_original": "2029-02-01",
+        "drift_months": 0.0
+      }
+    ],
     "Greenpulse solar farm and BESS as trustee for Greenpulse Solar Farm & Bess Unit Trust": [
       {
         "id": "garoo-bess",
@@ -9273,7 +9288,7 @@
         "drift_months": null
       }
     ],
-    "Neoen Australia": [
+    "Neoen Australia (Brookfield-owned)": [
       {
         "id": "goyder-north-wind-farm",
         "name": "Goyder North Wind Farm",
@@ -10197,7 +10212,7 @@
         "drift_months": 0.0
       }
     ],
-    "Hopeland Solar Farm Pty Ltd as trustee for the Hopeland Solar Farm Trust": [
+    "Pacific Partnerships (CIMIC/HOCHTIEF/ACS)": [
       {
         "id": "hopeland-solar-farm",
         "name": "Hopeland Solar Farm",
@@ -10686,7 +10701,7 @@
         "drift_months": 0.0
       }
     ],
-    "Kentbruck Wind Farm Pty Ltd atf Kentbruck Wind Farm Trust": [
+    "HMC Capital / Illuma Energy": [
       {
         "id": "kentbruck-green-power-hub",
         "name": "Kentbruck Green Power Hub",
@@ -11940,14 +11955,14 @@
         "drift_months": null
       }
     ],
-    "EE Solar 6 Pty Ltd as trustee for EE Solar 6 Trust": [
+    "European Energy Australia": [
       {
         "id": "mokoan-solar-farm",
         "name": "Mokoan Solar Farm",
         "technology": "solar",
         "state": "VIC",
         "status": "operating",
-        "capacity_mw": 46.0,
+        "capacity_mw": 58.0,
         "cod_current": "2025-05-22",
         "cod_original": "2025-05-22",
         "drift_months": 0.0
@@ -15130,19 +15145,6 @@
         "capacity_mw": 88.0,
         "cod_current": "2018-11-06",
         "cod_original": "2018-11-06",
-        "drift_months": 0.0
-      }
-    ],
-    "West Mokoan Solar Farm": [
-      {
-        "id": "west-mokoan-solar-farm-and-bess",
-        "name": "West Mokoan Solar Farm and BESS",
-        "technology": "hybrid",
-        "state": "VIC",
-        "status": "development",
-        "capacity_mw": 300.0,
-        "cod_current": "2029-07-02",
-        "cod_original": "2029-07-02",
         "drift_months": 0.0
       }
     ],
@@ -28435,7 +28437,7 @@
         }
       ]
     },
-    "EE Solar 6 Pty Ltd as trustee for EE Solar 6 Trust": {
+    "European Energy Australia": {
       "ranked_projects": 3,
       "avg_cf": 10.7,
       "avg_composite": 23.2,
@@ -33779,5 +33781,5 @@
       }
     ]
   },
-  "exported_at": "2026-07-16T06:44:24.546762"
+  "exported_at": "2026-07-17T17:12:57.671140"
 }

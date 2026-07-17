@@ -639,7 +639,7 @@
     "state": "VIC",
     "lat": -36.485,
     "lng": 146.105,
-    "developer": "West Mokoan Solar Farm"
+    "developer": "Lightsource bp"
   },
   {
     "id": "broadsound-solar-farm",
@@ -2659,6 +2659,17 @@
     "developer": "Edify Energy / Federation Asset Management"
   },
   {
+    "id": "mokoan-solar-farm",
+    "name": "Mokoan Solar Farm",
+    "technology": "solar",
+    "status": "operating",
+    "capacity_mw": 58.0,
+    "state": "VIC",
+    "lat": -36.487519,
+    "lng": 146.122634,
+    "developer": "European Energy Australia"
+  },
+  {
     "id": "cherry-tree-wind-farm",
     "name": "Cherry Tree Wind Farm",
     "technology": "wind",
@@ -2957,17 +2968,6 @@
     "lat": -41.672662,
     "lng": 146.268739,
     "developer": "Hydro-Electric Corporation"
-  },
-  {
-    "id": "mokoan-solar-farm",
-    "name": "Mokoan Solar Farm",
-    "technology": "solar",
-    "status": "operating",
-    "capacity_mw": 46.0,
-    "state": "VIC",
-    "lat": -36.487519,
-    "lng": 146.122634,
-    "developer": "EE Solar 6 Pty Ltd as trustee for EE Solar 6 Trust"
   },
   {
     "id": "meadowbank",

@@ -131,7 +131,7 @@
       "category": "gentailer",
       "offtakes": 8,
       "projects": 5,
-      "mw_project_total": 2816.0,
+      "mw_project_total": 2830.0,
       "mw_contracted": 2447.0,
       "avg_tenor_years": 12.5,
       "avg_price_aud_per_mwh": 65.0,
@@ -1212,7 +1212,7 @@
         "project_name": "Palmer Wind Farm",
         "technology": "wind",
         "state": "SA",
-        "project_mw": 274.0,
+        "project_mw": 288.0,
         "developer": "Tilt Renewables Australia Pty Ltd",
         "type": "PPA",
         "term_years": 15,
@@ -4324,7 +4324,7 @@
       "offtaker": "AGL Energy",
       "offtakes": 2,
       "projects": 2,
-      "mw": 670.0
+      "mw": 684.0
     },
     {
       "developer": "Murra Warra Project Co Pty Ltd",
@@ -5821,6 +5821,16 @@
       "revenue_per_mw": 77490.0
     },
     {
+      "project_id": "mokoan-solar-farm",
+      "name": "Mokoan Solar Farm",
+      "technology": "solar",
+      "state": "VIC",
+      "capacity_mw": 58.0,
+      "developer": "European Energy Australia",
+      "capacity_factor_pct": 17.9,
+      "revenue_per_mw": 21786.0
+    },
+    {
       "project_id": "cherry-tree-wind-farm",
       "name": "Cherry Tree Wind Farm",
       "technology": "wind",
@@ -6071,16 +6081,6 @@
       "revenue_per_mw": 52460.0
     },
     {
-      "project_id": "mokoan-solar-farm",
-      "name": "Mokoan Solar Farm",
-      "technology": "solar",
-      "state": "VIC",
-      "capacity_mw": 46.0,
-      "developer": "EE Solar 6 Pty Ltd as trustee for EE Solar 6 Trust",
-      "capacity_factor_pct": 17.9,
-      "revenue_per_mw": 21786.0
-    },
-    {
       "project_id": "kennedy-energy-park-phase-1-wind",
       "name": "Kennedy Energy Park - Phase 1 - Wind",
       "technology": "wind",
@@ -6231,5 +6231,5 @@
       "revenue_per_mw": 29125.0
     }
   ],
-  "exported_at": "2026-07-16T06:44:24.605010"
+  "exported_at": "2026-07-17T17:12:57.730506"
 }
