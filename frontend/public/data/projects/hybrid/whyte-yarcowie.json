@@ -6,7 +6,7 @@
   "capacity_mw": 574.4,
   "storage_mwh": 1000.0,
   "state": "SA",
-  "current_developer": "WP Renewables Ltd",
+  "current_developer": "EDF Renewables Australia",
   "cod_current": "2030-01-01",
   "cod_original": "2030-01-01",
   "connection_status": "proposed",
@@ -41,8 +41,12 @@
       "scheme": "CIS",
       "round": "Tender 7 \u2014 NEM Generation",
       "capacity_mw": 289,
+      "award_date": "2026-05-22",
+      "source_url": "https://www.dcceew.gov.au/about/news/new-projects-deliver-7-8-gw-clean-energy",
       "contract_type": "CISA (federal underwriting)",
-      "source_url": "https://www.dcceew.gov.au/about/news/new-projects-deliver-7-8-gw-clean-energy"
+      "execution_status": "awarded",
+      "execution_notes": "EDF Renewables Australia is CIS counterparty; Wind Prospect / WP Renewables are originators progressing project to next stages with a view to EDF acquiring. 289 MW wind (T7 scope only) \u2014 larger 574 MW site envelope. Pre-CISA at 2 months.",
+      "execution_source_url": "https://windprospect.com.au/news/success-for-willatook-and-whyte-yarcowie-projects-under-latest-capacity-investment-scheme-tender/"
     }
   ],
   "cost_sources": [],

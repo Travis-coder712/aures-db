@@ -5,16 +5,17 @@
   "status": "development",
   "capacity_mw": 70.0,
   "state": "VIC",
-  "current_developer": "Woolsthorpe Wind Farm Pty Ltd",
+  "current_developer": "ICA Partners",
+  "operational_notes": "Mexican construction conglomerate ICA Partners is CIS counterparty; SPV 'Woolsthorpe Wind Farm Pty Ltd' is operating entity. Ratio Consultants + Elecnor engaged as engineering/EPC partners. Smallest T7 winner (72 MW). No post-T7 developer press release located as of Jul 2026 — medium confidence on ownership continuity.",
   "cod_current": "2028-09",
   "grid_forming": false,
   "has_sips": false,
   "has_syncon": false,
   "has_statcom": false,
   "has_harmonic_filter": false,
-  "data_confidence": "low",
-  "last_updated": "2026-05-25",
-  "last_verified": "2026-05-25",
+  "data_confidence": "medium",
+  "last_updated": "2026-07-18",
+  "last_verified": "2026-07-18",
   "aemo_gen_info_id": "1243",
   "timeline": [
     {
@@ -42,8 +43,13 @@
       "scheme": "CIS",
       "round": "Tender 7 \u2014 NEM Generation",
       "capacity_mw": 72,
+      "storage_mwh": null,
+      "award_date": "2026-05-22",
+      "source_url": "https://www.dcceew.gov.au/about/news/new-projects-deliver-7-8-gw-clean-energy",
       "contract_type": "CISA (federal underwriting)",
-      "source_url": "https://www.dcceew.gov.au/about/news/new-projects-deliver-7-8-gw-clean-energy"
+      "execution_status": "awarded",
+      "execution_notes": "Smallest T7 winner. ICA Partners (Mexican) is CIS counterparty; SPV is operating entity. Ratio Consultants + Elecnor as engineering/EPC partners. No post-T7 developer press located \u2014 medium confidence on ownership.",
+      "execution_source_url": "https://www.woolsthorpewindfarm.com/"
     }
   ],
   "cost_sources": [],

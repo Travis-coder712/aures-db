@@ -267,7 +267,7 @@
       "stage": "development",
       "project_count": 39,
       "total_mw": 29764.9,
-      "avg_score": 34.4,
+      "avg_score": 34.2,
       "quartile_counts": {
         "1": 11,
         "2": 10,
@@ -297,12 +297,12 @@
         "mt-view-wind-farm-kci",
         "nemaroo-bimbi-wind-farm-kci",
         "tara-wind-farm-kci",
-        "bungaban-wind-farm",
         "herries-range-wind-farm",
         "millmerran-wind-farm",
         "pikedale-wind-farm-kci",
         "theodore-wind-farm",
         "wooroora-station-wind-farm",
+        "bungaban-wind-farm",
         "callide-wind-farm",
         "captains-mountain-wind-farm",
         "moah-creek-wind-farm",
@@ -1146,12 +1146,12 @@
       "stage": "development",
       "project_count": 76,
       "total_mw": 21827.4,
-      "avg_score": 46.5,
+      "avg_score": 46.6,
       "quartile_counts": {
         "1": 30,
         "2": 10,
-        "3": 27,
-        "4": 9
+        "3": 28,
+        "4": 8
       },
       "q1_pct": 39.0,
       "project_ids": [
@@ -1198,6 +1198,7 @@
         "baranduda-electrical-energy-reserve",
         "bunyip-bess-kci",
         "bunyip-north-battery-energy-storage-system",
+        "corop-bess",
         "cranbourne-bess-macquarie",
         "doreen-bess",
         "east-terang-bess-kci",
@@ -1224,7 +1225,6 @@
         "winton-energy-reserve-1",
         "bairnsdale-bess",
         "boulka-park-bess",
-        "corop-bess",
         "malunga-nine-mile-bess-kci",
         "nine-mile-energy-park-stage-1-bess",
         "nine-mile-energy-park-stage-2-bess",
@@ -1672,23 +1672,23 @@
       "stage": "development",
       "project_count": 16,
       "total_mw": 4886.1,
-      "avg_score": 49.7,
+      "avg_score": 49.4,
       "quartile_counts": {
-        "1": 6,
-        "2": 2,
+        "1": 5,
+        "2": 3,
         "3": 4,
         "4": 4
       },
-      "q1_pct": 38.0,
+      "q1_pct": 31.0,
       "project_ids": [
         "barwon-solar-farm-and-bess",
         "kerang-hybrid",
         "mologa-solar-hybrid-pv-bess",
         "nowingi-solar-farm-edify-kci",
         "puzzle-range-wind-farm",
-        "willatook",
         "cooba-solar-farm-kci",
         "derby-solar-farm-and-bess",
+        "willatook",
         "axedale-sf-and-bess",
         "elaine-solar-farm-and-bess",
         "fosterville-sf-and-bess",
@@ -2213,7 +2213,7 @@
       "stage": "development",
       "count": 101,
       "mw": 42516.299999999996,
-      "q1": 37
+      "q1": 36
     },
     {
       "technology": "pumped_hydro",
@@ -2285,7 +2285,7 @@
       "stage": "development",
       "count": 148,
       "mw": 71934.0,
-      "q1": 56
+      "q1": 55
     },
     {
       "state": "QLD",
@@ -7362,7 +7362,7 @@
       "status": "development",
       "stage_group": "development",
       "capacity_mw": 220.0,
-      "developer": "Orange Creek Energy Pty Ltd",
+      "developer": "EDF Power Solutions Australia",
       "score": 55,
       "development_stage": "planning_submitted",
       "has_cod": true,
@@ -8825,7 +8825,7 @@
       "status": "development",
       "stage_group": "development",
       "capacity_mw": 97.0,
-      "developer": "EE Solar 9 Pty Ltd as trustee for the EE Solar 9 Trust",
+      "developer": "European Energy Australia",
       "score": 50,
       "development_stage": "early_stage",
       "has_cod": true,
@@ -8901,14 +8901,14 @@
       "status": "development",
       "stage_group": "development",
       "capacity_mw": 1400.0,
-      "developer": "Windlab Developments Pty Ltd",
-      "score": 30,
+      "developer": "Windlab (Squadron Energy)",
+      "score": 25,
       "development_stage": "epbc_submitted",
       "has_cod": true,
       "has_rez": false,
       "has_scheme": false,
       "has_eis": false,
-      "developer_grade": "B",
+      "developer_grade": null,
       "score_basis": "stage (\u00d715) + has_cod (15) + has_rez (10) + scheme (20) + EIS (15) + developer grade (\u00d75); max 110",
       "quartile": 3
     },
@@ -10023,15 +10023,15 @@
       "stage_group": "development",
       "capacity_mw": 400.0,
       "developer": "Leeson Solar Pty Ltd.",
-      "score": 30,
+      "score": 40,
       "development_stage": "planning_submitted",
       "has_cod": false,
       "has_rez": false,
       "has_scheme": false,
       "has_eis": false,
-      "developer_grade": "F",
+      "developer_grade": null,
       "score_basis": "stage (\u00d715) + has_cod (15) + has_rez (10) + scheme (20) + EIS (15) + developer grade (\u00d75); max 110",
-      "quartile": 4
+      "quartile": 3
     },
     "corop-solar-farm": {
       "id": "corop-solar-farm",
@@ -20662,7 +20662,7 @@
       "status": "development",
       "stage_group": "development",
       "capacity_mw": 144.0,
-      "developer": "Weasel Solar Farm P/L",
+      "developer": "Gamuda Renewables Australia + Alternate Path (JV)",
       "score": 40,
       "development_stage": "planning_submitted",
       "has_cod": false,
@@ -20852,7 +20852,7 @@
       "status": "development",
       "stage_group": "development",
       "capacity_mw": 574.4,
-      "developer": "WP Renewables Ltd",
+      "developer": "EDF Renewables Australia",
       "score": 55,
       "development_stage": "planning_submitted",
       "has_cod": true,
@@ -20871,16 +20871,16 @@
       "status": "development",
       "stage_group": "development",
       "capacity_mw": 450.0,
-      "developer": "Wind Prospect WA Pty Ltd",
-      "score": 60,
+      "developer": "ENGIE (Wind Prospect WA developer partner)",
+      "score": 55,
       "development_stage": "planning_submitted",
       "has_cod": true,
       "has_rez": false,
       "has_scheme": false,
       "has_eis": false,
-      "developer_grade": "B",
+      "developer_grade": null,
       "score_basis": "stage (\u00d715) + has_cod (15) + has_rez (10) + scheme (20) + EIS (15) + developer grade (\u00d75); max 110",
-      "quartile": 1
+      "quartile": 2
     },
     "willavale-bess": {
       "id": "willavale-bess",
@@ -21270,7 +21270,7 @@
       "status": "development",
       "stage_group": "development",
       "capacity_mw": 70.0,
-      "developer": "Woolsthorpe Wind Farm Pty Ltd",
+      "developer": "ICA Partners",
       "score": 50,
       "development_stage": "early_stage",
       "has_cod": true,
@@ -21627,5 +21627,5 @@
       "WA"
     ]
   },
-  "exported_at": "2026-07-17T23:01:42.834777"
+  "exported_at": "2026-07-18T08:21:53.006397"
 }

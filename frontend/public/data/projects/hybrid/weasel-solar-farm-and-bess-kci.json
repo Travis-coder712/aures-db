@@ -5,16 +5,16 @@
   "status": "development",
   "capacity_mw": 144.0,
   "state": "TAS",
-  "current_developer": "Weasel Solar Farm P/L",
+  "current_developer": "Gamuda Renewables Australia + Alternate Path (JV)",
   "connection_status": "proposed",
   "grid_forming": false,
   "has_sips": false,
   "has_syncon": false,
   "has_statcom": false,
   "has_harmonic_filter": false,
-  "data_confidence": "low",
-  "last_updated": "2026-05-25",
-  "last_verified": "2026-05-25",
+  "data_confidence": "confirmed",
+  "last_updated": "2026-07-18",
+  "last_verified": "2026-07-18",
   "aemo_gen_info_id": "2856",
   "confidence_score": "15",
   "development_stage": "planning_submitted",
@@ -29,8 +29,12 @@
       "scheme": "CIS",
       "round": "Tender 7 \u2014 NEM Generation",
       "capacity_mw": 200,
+      "award_date": "2026-05-22",
+      "source_url": "https://www.dcceew.gov.au/about/news/new-projects-deliver-7-8-gw-clean-energy",
       "contract_type": "CISA (federal underwriting)",
-      "source_url": "https://www.dcceew.gov.au/about/news/new-projects-deliver-7-8-gw-clean-energy"
+      "execution_status": "awarded",
+      "execution_notes": "Gamuda + Alternate Path JV. Shares site + 220 kV connection with sister Cellars Hill Wind (also T7 win \u2014 data-gap in AURES). Both delivered via Gamuda Engineering EPC. Weasel construction target early 2027; Cellars Hill 2028. Only two Tasmanian T7 projects.",
+      "execution_source_url": "https://gamuda.com/2026/05/successful-capacity-investment-scheme-bid-anchors-gamuda-renewables-central-tasmania-energy-portfolio/press-releases/"
     }
   ],
   "cost_sources": [],
@@ -43,6 +47,7 @@
       "source_tier": 1
     }
   ],
+  "operational_notes": "JV between Gamuda Renewables Australia (subsidiary of Malaysian Gamuda Berhad) and Alternate Path (Tasmanian developer). Located Highland Lakes Rd near Bothwell, Central Highlands, ~1hr from Hobart. Shares site + 220 kV connection with sister Cellars Hill Wind Farm (also T7 win \u2014 data-gap in AURES). Both delivered via Gamuda Engineering EPC contract. Construction target early 2027 (Weasel first, Cellars Hill 2028). DCCEEW labels as solar only; AURES 'and BESS' scope may reflect a proposed BESS addition beyond CIS T7 scope.",
   "timeline_events": [
     {
       "date": "2026-05-23",

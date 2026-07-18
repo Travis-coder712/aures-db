@@ -3551,7 +3551,7 @@
         "drift_months": 0.0
       }
     ],
-    "Orange Creek Energy Pty Ltd": [
+    "EDF Power Solutions Australia": [
       {
         "id": "banana-range-wind-farm",
         "name": "Banana Range Wind Farm",
@@ -5907,7 +5907,18 @@
         "drift_months": null
       }
     ],
-    "EE Solar 9 Pty Ltd as trustee for the EE Solar 9 Trust": [
+    "European Energy Australia": [
+      {
+        "id": "mokoan-solar-farm",
+        "name": "Mokoan Solar Farm",
+        "technology": "solar",
+        "state": "VIC",
+        "status": "operating",
+        "capacity_mw": 58.0,
+        "cod_current": "2025-05-22",
+        "cod_original": "2025-05-22",
+        "drift_months": 0.0
+      },
       {
         "id": "bullyard-solar-farm",
         "name": "Bullyard Solar Farm",
@@ -5970,7 +5981,9 @@
         "cod_current": "2030-03-30",
         "cod_original": "2030-03-30",
         "drift_months": 0.0
-      },
+      }
+    ],
+    "Windlab (Squadron Energy)": [
       {
         "id": "bungaban-wind-farm",
         "name": "Bungaban Wind Farm",
@@ -11944,19 +11957,6 @@
         "drift_months": null
       }
     ],
-    "European Energy Australia": [
-      {
-        "id": "mokoan-solar-farm",
-        "name": "Mokoan Solar Farm",
-        "technology": "solar",
-        "state": "VIC",
-        "status": "operating",
-        "capacity_mw": 58.0,
-        "cod_current": "2025-05-22",
-        "cod_original": "2025-05-22",
-        "drift_months": 0.0
-      }
-    ],
     "StorEnergy 3 Pty Ltd": [
       {
         "id": "molong-bess",
@@ -15072,7 +15072,7 @@
         "drift_months": 0.0
       }
     ],
-    "Weasel Solar Farm P/L": [
+    "Gamuda Renewables Australia + Alternate Path (JV)": [
       {
         "id": "weasel-solar-farm-and-bess-kci",
         "name": "Weasel Solar Farm And BESS - KCI",
@@ -15267,7 +15267,7 @@
         "drift_months": null
       }
     ],
-    "WP Renewables Ltd": [
+    "EDF Renewables Australia": [
       {
         "id": "whyte-yarcowie",
         "name": "Whyte Yarcowie",
@@ -15280,7 +15280,7 @@
         "drift_months": 0.0
       }
     ],
-    "Wind Prospect WA Pty Ltd": [
+    "ENGIE (Wind Prospect WA developer partner)": [
       {
         "id": "willatook",
         "name": "Willatook",
@@ -15514,7 +15514,7 @@
         "drift_months": 0.0
       }
     ],
-    "Woolsthorpe Wind Farm Pty Ltd": [
+    "ICA Partners": [
       {
         "id": "woolsthorpe-wind-farm",
         "name": "Woolsthorpe Wind Farm",
@@ -33783,5 +33783,5 @@
       }
     ]
   },
-  "exported_at": "2026-07-17T23:01:42.811561"
+  "exported_at": "2026-07-18T08:21:52.982873"
 }

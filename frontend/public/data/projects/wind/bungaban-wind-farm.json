@@ -5,7 +5,7 @@
   "status": "development",
   "capacity_mw": 1400.0,
   "state": "QLD",
-  "current_developer": "Windlab Developments Pty Ltd",
+  "current_developer": "Windlab (Squadron Energy)",
   "cod_current": "2030-03-30",
   "cod_original": "2030-03-30",
   "connection_status": "proposed",
@@ -14,9 +14,9 @@
   "has_syncon": false,
   "has_statcom": false,
   "has_harmonic_filter": false,
-  "data_confidence": "low",
-  "last_updated": "2026-05-25",
-  "last_verified": "2026-05-25",
+  "data_confidence": "confirmed",
+  "last_updated": "2026-07-18",
+  "last_verified": "2026-07-18",
   "aemo_gen_info_id": "2293",
   "confidence_score": "31",
   "development_stage": "epbc_submitted",
@@ -56,9 +56,13 @@
       "scheme": "CIS",
       "round": "Tender 7 \u2014 NEM Generation",
       "capacity_mw": 1150,
-      "contract_type": "CISA (federal underwriting)",
+      "storage_mwh": 1400,
+      "award_date": "2026-05-22",
       "source_url": "https://www.dcceew.gov.au/about/news/new-projects-deliver-7-8-gw-clean-energy",
-      "storage_mwh": 1400
+      "contract_type": "CISA (federal underwriting)",
+      "execution_status": "awarded",
+      "execution_notes": "Windlab 'invited to enter into a CISA' 22 May 2026 per Infrastructure Pipeline \u2014 CISA execution date not publicly disclosed. Rio Tinto PPA signed Dec 2024 for Gladstone smelter/refinery power. RE describes Bungaban as 'expected to move to FID relatively quickly' but future-tense \u2014 no public FID confirmation. First power target 2028; construction 'on track to commence 2026' per Windlab. Status corrected from prior 'fid' to 'awarded' 2026-07-18 pending public FID announcement.",
+      "execution_source_url": "https://infrastructurepipeline.org/project/bungaban-wind-project"
     }
   ],
   "cost_sources": [],
@@ -71,6 +75,7 @@
       "source_tier": 1
     }
   ],
+  "operational_notes": "1,150 MW wind + 1,400 MWh BESS. Rio Tinto PPA signed Dec 2024 for Gladstone smelter/refinery power (de-risking milestone \u2014 NOT FID). Windlab was 'invited to enter into a CISA' 22 May 2026 per Infrastructure Pipeline \u2014 CISA not yet executed. State approval Mar 2025; federal EPBC still progressing. First power target 2028; construction 'on track to commence 2026' per Windlab. Windlab is Squadron Energy / Andrew Forrest-backed.",
   "timeline_events": [
     {
       "date": "2026-05-23",

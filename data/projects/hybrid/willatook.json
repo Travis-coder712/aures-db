@@ -6,16 +6,17 @@
   "capacity_mw": 450.0,
   "storage_mwh": 378.0,
   "state": "VIC",
-  "current_developer": "Wind Prospect WA Pty Ltd",
+  "current_developer": "ENGIE (Wind Prospect WA developer partner)",
+  "operational_notes": "ENGIE is CIS counterparty (won 338 MW T7 May 2026); Wind Prospect WA is the developer partner (same pattern as Hexham + Whyte Yarcowie). ENGIE public target: **FID in 2027, build by 2029** — one of the more publicly-planned T7 winners. AURES full project envelope 450 MW; T7 CIS award 338 MW subset.",
   "cod_current": "2027-08",
   "grid_forming": false,
   "has_sips": false,
   "has_syncon": false,
   "has_statcom": false,
   "has_harmonic_filter": false,
-  "data_confidence": "low",
-  "last_updated": "2026-05-25",
-  "last_verified": "2026-05-25",
+  "data_confidence": "confirmed",
+  "last_updated": "2026-07-18",
+  "last_verified": "2026-07-18",
   "aemo_gen_info_id": "1286",
   "timeline": [
     {
@@ -43,8 +44,13 @@
       "scheme": "CIS",
       "round": "Tender 7 \u2014 NEM Generation",
       "capacity_mw": 338,
+      "storage_mwh": null,
+      "award_date": "2026-05-22",
+      "source_url": "https://www.dcceew.gov.au/about/news/new-projects-deliver-7-8-gw-clean-energy",
       "contract_type": "CISA (federal underwriting)",
-      "source_url": "https://www.dcceew.gov.au/about/news/new-projects-deliver-7-8-gw-clean-energy"
+      "execution_status": "awarded",
+      "execution_notes": "ENGIE public target: FID in 2027, build by 2029 \u2014 one of the more publicly-planned T7 winners. AURES envelope 450 MW; T7 award 338 MW subset. Wind Prospect WA is developer partner.",
+      "execution_source_url": "https://windprospect.com.au/news/success-for-willatook-and-whyte-yarcowie-projects-under-latest-capacity-investment-scheme-tender/"
     }
   ],
   "cost_sources": [],

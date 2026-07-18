@@ -517,6 +517,28 @@
       }
     },
     {
+      "developer": "European Energy Australia",
+      "project_count": 2,
+      "total_mw": 155.0,
+      "technologies": [
+        "solar"
+      ],
+      "operating": 1,
+      "withdrawn": 0,
+      "completion_rate": 50.0,
+      "avg_drift_months": -0.5,
+      "on_time_pct": 100.0,
+      "execution_score": 85.0,
+      "grade": "A",
+      "drift_stats": {
+        "count": 2,
+        "mean": -0.5,
+        "median": -0.5,
+        "p25": -1,
+        "p75": 0
+      }
+    },
+    {
       "developer": "Pacific Hydro Haughton Solar Farm Pty Ltd",
       "project_count": 2,
       "total_mw": 300.0,
@@ -2184,29 +2206,6 @@
       }
     },
     {
-      "developer": "Windlab Developments Pty Ltd",
-      "project_count": 2,
-      "total_mw": 1750.0,
-      "technologies": [
-        "bess",
-        "wind"
-      ],
-      "operating": 0,
-      "withdrawn": 0,
-      "completion_rate": 0.0,
-      "avg_drift_months": 0.0,
-      "on_time_pct": 100.0,
-      "execution_score": 70.0,
-      "grade": "B",
-      "drift_stats": {
-        "count": 2,
-        "mean": 0.0,
-        "median": 0.0,
-        "p25": 0,
-        "p75": 0
-      }
-    },
-    {
       "developer": "ZEBRE Pty Ltd",
       "project_count": 2,
       "total_mw": 321.0,
@@ -3018,11 +3017,11 @@
     "developer_count": 152
   },
   "grade_distribution": {
-    "A": 26,
-    "B": 75,
+    "A": 27,
+    "B": 74,
     "D": 2,
     "F": 49
   },
   "total_developers": 152,
-  "exported_at": "2026-07-17T23:10:18.544210"
+  "exported_at": "2026-07-18T08:30:36.880816"
 }

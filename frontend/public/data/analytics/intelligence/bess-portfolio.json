@@ -509,7 +509,7 @@
       "capacity_mw": 574.4,
       "storage_mwh": 1000.0,
       "duration_h": 1.74,
-      "developer": "WP Renewables Ltd",
+      "developer": "EDF Renewables Australia",
       "cod": "2030-01-01"
     },
     {
@@ -619,7 +619,7 @@
       "capacity_mw": 450.0,
       "storage_mwh": 378.0,
       "duration_h": 0.84,
-      "developer": "Wind Prospect WA Pty Ltd",
+      "developer": "ENGIE (Wind Prospect WA developer partner)",
       "cod": "2027-08-01"
     },
     {
@@ -2165,5 +2165,5 @@
       "data_confidence": "low"
     }
   ],
-  "exported_at": "2026-07-17T23:01:43.013578"
+  "exported_at": "2026-07-18T08:21:53.113872"
 }

@@ -12,9 +12,10 @@
   "has_syncon": false,
   "has_statcom": false,
   "has_harmonic_filter": false,
-  "data_confidence": "low",
-  "last_updated": "2026-05-25",
-  "last_verified": "2026-05-25",
+  "data_confidence": "confirmed",
+  "operational_notes": "RWE Renewables Australia is CIS counterparty (SPV 'Theodore Energy Development' operating entity). Previously threatened by QLD LNP government. RE identifies Theodore as the 'gigawatt-scale project nearest to construction' among T7 winners. RWE press release cites 1.1 GW; pv-tech + AEMO cite 1,022 MW — likely DC/AC or export-limit distinction. Construction subject to EPBC approvals + FID.",
+  "last_updated": "2026-07-18",
+  "last_verified": "2026-07-18",
   "aemo_gen_info_id": "2603",
   "timeline": [
     {
@@ -42,8 +43,13 @@
       "scheme": "CIS",
       "round": "Tender 7 \u2014 NEM Generation",
       "capacity_mw": 1022,
+      "storage_mwh": null,
+      "award_date": "2026-05-22",
+      "source_url": "https://www.dcceew.gov.au/about/news/new-projects-deliver-7-8-gw-clean-energy",
       "contract_type": "CISA (federal underwriting)",
-      "source_url": "https://www.dcceew.gov.au/about/news/new-projects-deliver-7-8-gw-clean-energy"
+      "execution_status": "awarded",
+      "execution_notes": "RWE Renewables Australia is CIS counterparty. Construction subject to EPBC approvals + FID. RE identifies as nearest-to-construction T7 gigawatt-scale project. 1.1 GW per RWE press release; 1,022 MW per pv-tech/AEMO \u2014 likely DC/AC or export-limit distinction.",
+      "execution_source_url": "https://www.rwe.com/en/press/rwe-renewables-europe-australia/2026-05-23-rwes-theodore-wind-farm-awarded-capacity-investment-scheme-contract/"
     }
   ],
   "cost_sources": [],
