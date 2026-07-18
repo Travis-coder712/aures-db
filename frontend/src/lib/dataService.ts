@@ -1001,7 +1001,10 @@ let researchNotesCache: ResearchNotesData | null = null
 export async function fetchResearchNotes(): Promise<ResearchNotesData | null> {
   if (researchNotesCache) return researchNotesCache
   try {
-    const resp = await fetch(`${BASE}/analytics/intelligence/research-notes.json`)
+    // cache: 'no-cache' forces revalidation with server (ETag/If-Modified-Since)
+    // so new notes appear on first load after a release without requiring a hard-refresh.
+    // Module-level cache still holds within a session — this only affects the first fetch.
+    const resp = await fetch(`${BASE}/analytics/intelligence/research-notes.json`, { cache: 'no-cache' })
     if (!resp.ok) return null
     researchNotesCache = await resp.json()
     return researchNotesCache

@@ -1,19 +1,41 @@
 # AURES — Next Session Handoff
 
-**Last refreshed:** 2026-07-16
-**Latest shipped version:** v3.21.4 (BESS Sleeper Story research note, this session pending commit) — prior: v3.21.3
+**Last refreshed:** 2026-07-18
+**Latest shipped version:** v3.22.3 (Research Notes cache-bust + handoff refresh, this session pending commit) — prior: v3.22.2
 **Purpose:** Single-place brief for the next session. Cold-readable — pair with `docs/SESSION_OPENER.md` and `docs/INTELLIGENCE_LAYER_PLAN.md`.
 
 ---
 
-## Current state snapshot (v3.21.4)
+## Current state snapshot (v3.22.3)
+
+### v3.22.0–v3.22.3 — Backlog Item A executed + Research Notes fix (2026-07-16→2026-07-18)
+
+**Backlog Item A COMPLETE.** Three-phase CIS/LTESA data update project delivered across today's session:
+
+- **v3.22.0** — Phase 1: CIS T1 non-NSW winner status refresh (12 projects, ~19 mo post-award). **~33% conversion rate**: 1 operating (Mokoan Solar — FC Mar 2024 pre-CIS), 1 construction (Palmer Wind — FID Jan 2026, 15-yr AGL PPA, first non-battery CIS to construction), 2 cisa_signed (Majors Creek + Ganymirra — Edify DT Infrastructure EPC Mar 2026), 8 awarded pre-FID. Meets Modo's 28% "zombie project" benchmark. Proponent corrections: Kentbruck (Neoen→HMC Capital→Illuma Energy), Goyder North (Brookfield-owned), Edify (La Caisse), Elgin (CIP), Hopeland (Pacific Partnerships), Barnawartha (Gentari), West Mokoan (Lightsource bp). Capacity corrections: Palmer 274→288 MW at FID, Mokoan 46→58 MW installed. Overlay schema extended with `execution_status`, `award_date`, `fid_date`, `execution_notes`, `execution_source_url` fields.
+
+- **v3.22.1** — Phase 2: CIS T4 non-NSW winner status refresh (12 tractable + 2 data-gap flagged, ~9-10 mo post-award). **~29% conversion rate**: 3 CONSTRUCTION (Guthrie's Gap + Smoky Creek twin FC 20 May 2026 with **Rio Tinto 20-yr offtake anchor**; Lower Wonga FC + construction Jun 2026 INTEC/Gotion EPC), 1 FID/CONSTRUCTION (Carmody's Hill — FC Dec 2025, Snowy Hydro PPA, Aula 100% at FC), 1 CISA_SIGNED (Gawara Baya — Powerlink MID Jan 2026 "approaching FC"), 9 AWARDED. Corrections: Corop Solar acquired by OX2 from BNRG Leeson 8 Jul 2026, BESS scope revised 704→1,160 MWh; Hexham developer clarified AGL + Wind Prospect; Derby ultimate parent Sungrow (acquired ACEnergy Sep 2020); Nowingi BESS 1,200→2,400 MWh (Australia's largest DURATION BESS at 8-hour); Gawara Baya BESS 217 MWh REMOVED (unverified). Bungaban T7 status downgraded fid→awarded. Data gaps flagged: **Willogoleche 2** (T4 SA ENGIE+Foresight JV — needs separate record from operating Stage 1) and **Punchs Creek** (T4 QLD EDPR+QIC single project — needs consolidation of stale stage-2/3-kci records).
+
+- **v3.22.2** — Phase 3: CIS T7 non-NSW winner status refresh (8 tractable + 2 data-gap flagged, ~2 mo post-award). **All 10 correctly at `awarded`** at 2 months — consistent with typical CISA negotiation timeline. **CRITICAL CORRECTION**: Bungaban Wind AURES `contract_status: fid` was WRONG — Rio Tinto PPA (Dec 2024) was de-risking milestone, NOT FID. Windlab was only "invited to enter into a CISA" 22 May 2026 per Infrastructure Pipeline. Status downgraded fid → awarded. Proponent corrections: Theodore (Theodore Energy Development SPV → RWE Renewables Australia); Whyte Yarcowie (EDF Power Solutions → EDF Renewables Australia); Willatook (added Wind Prospect WA partner attribution); Banana Range (EDF acquired Orange Creek from Lacour May 2021). Notable market intel: ENGIE/Willatook public FID target 2027 build 2029; RE identifies Theodore/RWE as gigawatt-scale project nearest to construction; European Energy/Bullyard candidate for next cisa_signed/fid (mid-2026 construction start imminent). Data gaps flagged: **Moranbah Solar** (T7 QLD Zero-E/Grupo Cobra) and **Cellars Hill Wind** (T7 TAS Gamuda+Alternate Path JV, shares site with Weasel).
+
+- **v3.22.3** (this session, pending commit) — Research Notes cache-bust fix + handoff refresh. Added `cache: 'no-cache'` to `fetchResearchNotes()` in `dataService.ts` — forces browser + service worker to revalidate with server on each fetch, so new notes appear on first load after a release without requiring a hard-refresh. Module-level cache still holds within a session (only affects first fetch). Fixes the "notes not coming through" moment users hit after v3.21.4 shipped the BESS Sleeper Story note.
+
+### Backlog Item A cross-phase summary
+
+Three phases confirm Modo Energy's 28% "zombie project" benchmark holds across all vintages of the CIS scheme. All movers to CISA_SIGNED / FID / CONSTRUCTION have **contracted revenue on top of the CIS floor** (Snowy PPAs, Rio Tinto offtake, gentailer balance sheet, staged expansion of financed sites). Validates the **BESS Sleeper Story thesis** (v3.21.4) at T1+T4 vintages; T7 too early to test. Pure-play merchant projects reliant on CIS floor alone are the stalling cohort.
+
+**4 data-gap projects flagged for follow-up** (need new AURES DB records):
+- Willogoleche 2 Wind Farm (T4 SA, 108 MW, ENGIE 25% + Foresight 75% JV — expansion of operating Stage 1)
+- Punchs Creek Renewable Energy (T4 QLD, 400 MW solar + 400 MW/1,600 MWh BESS, EDPR + QIC JV — consolidation of stale multi-stage BESS records)
+- Moranbah Solar Farm (T7 QLD, 171 MW + 100 MWh, Zero-E Australia / Grupo Cobra)
+- Cellars Hill Wind Farm (T7 TAS, 341 MW, Gamuda Renewables + Alternate Path JV)
 
 ### v3.21.1–v3.21.4 — CIS Tender 9 competitive-field intelligence + BESS sleeper story (2026-07-15/16)
 
 - **v3.21.1** — New docs research note (`docs/RESEARCH_CIS_T9_COMPETITIVE_FIELD.md`, ~6,700 words) covering CIS T9: corrected state math (VIC/TAS minimums, not caps), deliverability paradox as central frame, Zero-for-15 sidebar (2 of ~69 CIS non-battery gen at construction by Mar 2026), Table A of 35 CISA-locked non-NSW projects curated from AURES scheme_contracts overlays, Table B tiered T9 competitive field (wind + large solar + solar+BESS), three-lens synthesis (Rebid / Gentailer / Earliest-COD), combined-view predicted T9 shape. AURES data corrections bundled: Bell Bay overlay (T4 CISA added — was missing), Whyte Yarcowie overlay (proponent WP Renewables → EDF), Palmer overlay + DB (status → construction + FID 9 Jan 2026 timeline), **Barn Hill overlay + DB (capacity 186→300 MW; owner corrected to AGL Energy since 2009 — was showing SPV name only; co-located with AGL Barn Hill BESS 270 MW)**, scheme-rounds.ts CIS T9 entry region row rephrased (min-not-cap).
 - **v3.21.2** — Ported CIS T9 research into the CIS T9 card as `T9CompetitiveFieldDeepDive` component + `t9CompetitiveFieldDeepDive` field on OpenRound type. Renders in Open Rounds CIS tab under CIS T9 card, after ProformaMechanicsDeepDive. Structure: exec-summary + state-math grid + deliverability paradox with Zero-for-15 sidebar + three collapsible lenses (colour-coded, top-5 picks with STANDOUT/WATCH/LONG-SHOT/BLOCKED flag chips + conclusion) + Combined-view predicted-shape table + AGL Barn Hill standout callout + docs reference footer.
 - **v3.21.3** — Published CIS T9 research note to `/intelligence/research` (new `cis-t9-competitive-field-three-lens` entry under `cis-ltesa` category). 8 sections, cross-references companion notes (`cis-rebid-restrictions-hardening` 2026-07-07 for T9 Q&A Item 8 mechanics, `cis-project-status-deep-dive` 2026-06-27, `cis-wind-projects-crisis-state-of-play` 2026-07-08). Related project IDs: barn-hill, nonowie-wind-farm, kentbruck-green-power-hub, palmer-wind-farm, hexham, guildford-wind-farm.
-- **v3.21.4** (this session, pending commit) — BESS Sleeper Story research note applying the wind Zero-for-15 framework to BESS CIS winners. Thesis: govt accepted lowest bids → thinnest capex margins → BESS T3/T8 winners will follow wind trajectory later and less visibly. New docs research note (`docs/RESEARCH_BESS_SLEEPER_STORY.md`) + Research Notes JSON entry (bess-market category). Also bundled: `docs/PLAN_CIS_LTESA_DATA_UPDATE.md` (3-phase execution plan for the comprehensive data update project — see Backlog Item A below).
+- **v3.21.4** (shipped 2026-07-16) — BESS Sleeper Story research note applying the wind Zero-for-15 framework to BESS CIS winners. Thesis: govt accepted lowest bids → thinnest capex margins → BESS T3/T8 winners will follow wind trajectory later and less visibly. New docs research note (`docs/RESEARCH_BESS_SLEEPER_STORY.md`) + Research Notes JSON entry (bess-market category). Also bundled: `docs/PLAN_CIS_LTESA_DATA_UPDATE.md` (3-phase execution plan for the comprehensive data update project — see Backlog Item A below).
 
 ### v3.20.0–v3.21.0 — Gas vs BESS Firming + NEM Publications module (2026-07-10)
 
@@ -127,34 +149,54 @@ See `docs/INTELLIGENCE_LAYER_PLAN.md` for detailed release log. Key threads:
 
 ---
 
-## Unified Backlog (refreshed 2026-07-16 for CIS T9 + BESS sleeper story session)
+## Unified Backlog (refreshed 2026-07-18 — Item A complete, Item C added)
 
-### Backlog Item A — Comprehensive CIS + LTESA Data Update (NEW 2026-07-16, HIGH PRIORITY)
+### Backlog Item A — Comprehensive CIS + LTESA Data Update ✅ COMPLETE (2026-07-16→18, v3.22.0-v3.22.2)
 
-**Trigger**: v3.21.1 T9 research surfaced 4 material AURES data corrections in a single T9-adjacent pass (Palmer/FID, Bell Bay/scheme_contract missing, Whyte Yarcowie/proponent stale, Barn Hill/capacity+owner). Extrapolation: substantial staleness exists across the ~130-project CIS+LTESA population that was baselined in v3.18.5. And T9 results Nov 2026 need a current baseline for meaningful comparison.
+**Executed across 3 phases:**
+- Phase 1 (v3.22.0) — CIS T1 non-NSW: 12 projects, 33% conversion. Palmer/construction, Mokoan/operating, Majors Creek+Ganymirra/cisa_signed, 8 awarded pre-FID.
+- Phase 2 (v3.22.1) — CIS T4 non-NSW: 12 tractable + 2 data-gap, 29% conversion. Guthrie's Gap + Smoky Creek + Lower Wonga construction (Rio Tinto/EPC anchors), Carmody's Hill construction (Snowy PPA).
+- Phase 3 (v3.22.2) — CIS T7 non-NSW: 8 tractable + 2 data-gap, 0% at cisa_signed+ (2 months post-award — too early). Bungaban `fid` marker corrected to `awarded`.
 
-**Plan**: Full 3-phase execution plan drafted at [`docs/PLAN_CIS_LTESA_DATA_UPDATE.md`](docs/PLAN_CIS_LTESA_DATA_UPDATE.md). Summary:
-- **Phase 1** (~1 session): CIS T1 non-NSW winners (12 projects, ~18 months old — most stale). Deliverable: `v3.22.0`.
-- **Phase 2** (~1 session): CIS T4 non-NSW winners (14 projects, ~10 months old). Deliverable: `v3.22.1`.
-- **Phase 3** (~1 session): CIS T7 winners (19 projects, ~2 months old — early CISA-execution window). Deliverable: `v3.22.2`.
-- **Phase 4 optional** (~1-2 sessions): Extend `CIS_PROJECTS` array in `scheme-rounds.ts` from NSW-only (9 entries) to include the 35 non-NSW winners identified in v3.21.1. Deliverable: `v3.22.3`.
+**All 3 phases confirm Modo Energy's 28% "zombie project" benchmark.** All movers have contracted revenue on top of CIS floor (Snowy PPAs, Rio Tinto offtake, gentailer balance sheet). Validates BESS Sleeper Story thesis (Item B) at T1+T4 vintages.
 
-**Schema extension**: additive fields on `scheme_contracts[]` entries — `execution_status`, `execution_date`, `fid_date`, `execution_notes`, `execution_source_url`. No breaking change.
+**Schema extension delivered**: overlay `scheme_contracts[]` entries now carry `award_date`, `execution_status`, `execution_date`, `fid_date`, `execution_notes`, `execution_source_url`.
 
-**Total effort estimate**: 4-6 focused sessions across 3-4 weeks. See plan doc for agent brief templates, data-source checklist, verification loop, risk register.
+**4 follow-up data-gap projects** (need new AURES DB records — see Item C).
 
-**When to start**: Immediately after v3.21.4 ships. Phase 1 is the highest-value first sprint.
-
-### Backlog Item B — BESS Sleeper Story (NEW 2026-07-16, MOSTLY DELIVERED v3.21.4)
+### Backlog Item B — BESS Sleeper Story ✅ SHIPPED (v3.21.4, 2026-07-16)
 
 **Thesis** (Travis 2026-07-16): "Govt accepted lowest bids in CIS Dispatchable rounds → thinnest capex margins → BESS T3/T8 winners will follow wind's Zero-for-15 trajectory later and less visibly."
 
-**Status**: v3.21.4 (this session) delivered the research note applying the wind-crisis framework to BESS. Includes CIS Pilot BESS + CIS T3 Dispatchable + CIS T8 Dispatchable + NSW LTESA comparison. Published to Research Notes surface under `bess-market` category. Docs long-form at `docs/RESEARCH_BESS_SLEEPER_STORY.md`.
+**Status**: v3.21.4 delivered the research note applying the wind-crisis framework to BESS. Includes CIS Pilot BESS + CIS T3 Dispatchable + CIS T8 Dispatchable + NSW LTESA comparison. Published to Research Notes surface under `bess-market` category. Docs long-form at `docs/RESEARCH_BESS_SLEEPER_STORY.md`.
 
-**Remaining work** (for a follow-up release):
-- If BESS delivery slippage becomes publicly visible (e.g. first CIS T3 winner formally withdraws), publish a follow-up note tracking the trajectory
-- If the BESS structural thesis (lowest-bid → no-FID) gains commentary from Modo/WattClarity/RE, expand the note with quoted evidence
-- Consider a in-app deep-dive component on the CIS T3 or T8 card (mirroring the wind T9 CompetitiveFieldDeepDive pattern)
+**Remaining tracking work**:
+- Watch for Modo Q3 2026 conversion-rate update showing T3 slippage
+- Watch for first formal T3 CISA withdrawal (any withdrawal of Mt Piper/Teebar/Capricorn/ACEnergy projects would confirm the pattern)
+- Watch for RenewEconomy tracker Q4 2026 CIS piece
+- Watch for CER quarterly CIS reporting
+- Watch for Senate Estimates October/November 2026 hearings — first parliamentary opportunity for BESS delivery questioning
+- Watch for Watt Clarity BESS delivery analysis
+- Consider in-app deep-dive component on the CIS T3 or T8 card (mirrors T9 CompetitiveFieldDeepDive pattern)
+
+### Backlog Item C — 4 CIS data-gap projects (NEW 2026-07-18, MEDIUM PRIORITY)
+
+Surfaced during Item A Phases 2+3. Need new AURES DB records + overlay files (currently missing or wrongly-attributed):
+
+1. **Willogoleche 2 Wind Farm** (T4 SA, 108 MW, ENGIE 25% + Foresight 75% JV) — expansion of operating Willogoleche 1 (119 MW). Construction late 2026, commissioning 2028. CIS_PROJECTS `project_id` currently `undefined` after 2026-07-16 removal of incorrect Stage 1 pointer.
+2. **Punchs Creek Renewable Energy Project** (T4 QLD, 400 MW solar + 400 MW/1,600 MWh BESS, EDPR + QIC JV) — single integrated hybrid; needs consolidation of stale `punchs-creek-hybrid-stage-2/3-kci` records (200+600 MW BESS misattribution). SkyLab's legacy "Punch and Creek" 87 MW is a separate project.
+3. **Moranbah Solar Farm** (T7 QLD, 171 MW + 100 MWh, Zero-E Australia / Grupo Cobra / ACS) — near Coppabella in Bowen Basin. AC-coupled hybrid with grid-forming inverters. Grupo Cobra's first Australian clean-energy asset. Cultural Heritage + Shared Benefits agreements with Barada Barna Traditional Owners.
+4. **Cellars Hill Wind Farm** (T7 TAS, 341 MW, Gamuda Renewables + Alternate Path JV) — shares site + 220 kV connection with sister Weasel Solar (has AURES record). Construction target 2028 (Weasel first, early 2027).
+
+**Effort**: 1 session. Each project needs (a) new `projects` row via SQL insert or overlay-only if pre-AEMO-Gen-Info; (b) new overlay JSON file with scheme_contracts entry; (c) CIS_PROJECTS `project_id` update to reference new records.
+
+### Backlog Item D — v3.21.5 Lens 1 hardening (NEW 2026-07-16, LOW-MED PRIORITY)
+
+CIS T9 competitive-field docs note (`docs/RESEARCH_CIS_T9_COMPETITIVE_FIELD.md`) + in-app `T9CompetitiveFieldDeepDive` component have softer Lens 1 framing ("excluded UNLESS actively withdraw and resubmit") than the newer `cis-rebid-restrictions-hardening` (2026-07-07) note which documents T9 Q&A Item 8's formal withdraw-and-resubmit machinery (formal written notification + AEMO track-record discretion + Significant Event obligations). The Research Notes JSON entry (v3.21.3) already has the corrected framing. Should update docs + component to match. Small edit — ~30 min.
+
+### Backlog Item E — Session chip: 8 COD-review candidates (task_0ef34273, NEW ~2026-06-17)
+
+From June 2026 refresh validator (v3.16.8): 8 projects past their gazetted COD but still `status: construction` in AURES. Need manual review to decide whether each has crossed into commissioning/operating: bundaberg-solar-farm, golden-plains-wind (Stage 1), goorambat-east-solar-farm-engie, gunsynd-solar-farm, lancaster-solar-farm, limondale-bess, munna-creek-solar-farm, wambo-wind-farm. Chip still active — one click to spin off into fresh session.
 
 ### Tier 0 — SchemeTracker Restructure (HIGH PRIORITY, 1-2 sessions)
 
