@@ -2677,7 +2677,7 @@
         "name": "Golden Plains Wind Farm",
         "technology": "wind",
         "state": "VIC",
-        "status": "construction",
+        "status": "commissioning",
         "capacity_mw": 1610.0,
         "cod_current": "2026 (Stage 1)",
         "cod_original": "2025",
@@ -5944,14 +5944,14 @@
         "drift_months": null
       }
     ],
-    "Bundaberg Development Pty Ltd": [
+    "Naturgy / GPG (Global Power Generation)": [
       {
         "id": "bundaberg-solar-farm",
         "name": "Bundaberg Solar Farm",
         "technology": "solar",
         "state": "QLD",
-        "status": "construction",
-        "capacity_mw": 78.0,
+        "status": "operating",
+        "capacity_mw": 96.0,
         "cod_current": "2025-12-31",
         "cod_original": "2025-12-31",
         "drift_months": 0.0
@@ -9270,7 +9270,7 @@
         "name": "Goorambat East Solar Farm (ENGIE)",
         "technology": "solar",
         "state": "VIC",
-        "status": "construction",
+        "status": "commissioning",
         "capacity_mw": 250.0,
         "cod_current": "2026-05-18",
         "cod_original": "2026-05-18",
@@ -9578,7 +9578,7 @@
         "name": "Gunsynd Solar Farm",
         "technology": "solar",
         "state": "QLD",
-        "status": "construction",
+        "status": "commissioning",
         "capacity_mw": 94.0,
         "cod_current": "2026-02-16",
         "cod_original": "2026-02-16",
@@ -11125,14 +11125,14 @@
         "drift_months": null
       }
     ],
-    "Lancaster Solar Farm Pty Ltd as trustee for the Lancaster Solar Farm Trust": [
+    "European Energy": [
       {
         "id": "lancaster-solar-farm",
         "name": "Lancaster Solar Farm",
         "technology": "solar",
         "state": "VIC",
-        "status": "construction",
-        "capacity_mw": 80.0,
+        "status": "operating",
+        "capacity_mw": 108.0,
         "cod_current": "2026-05-30",
         "cod_original": "2026-05-30",
         "drift_months": 0.0
@@ -11209,7 +11209,7 @@
         "name": "Limondale BESS",
         "technology": "bess",
         "state": "NSW",
-        "status": "construction",
+        "status": "operating",
         "capacity_mw": 50.0,
         "cod_current": "2026-03-07",
         "cod_original": "2026-03-07",
@@ -12369,13 +12369,13 @@
         "drift_months": null
       }
     ],
-    "Munna Creek Solar Farm Investments Pty Ltd as trustee for the Munna Creek Solar Farm Trust": [
+    "Metlen (ex-Mytilineos)": [
       {
         "id": "munna-creek-solar-farm",
         "name": "Munna Creek Solar Farm",
         "technology": "solar",
         "state": "QLD",
-        "status": "construction",
+        "status": "operating",
         "capacity_mw": 120.0,
         "cod_current": "2026-01-24",
         "cod_original": "2026-01-24",
@@ -14924,7 +14924,7 @@
         "name": "Wambo Wind Farm",
         "technology": "wind",
         "state": "QLD",
-        "status": "construction",
+        "status": "commissioning",
         "capacity_mw": 506.0,
         "cod_current": "2025-02-28",
         "cod_original": "2025-02-28",
@@ -15073,6 +15073,17 @@
       }
     ],
     "Gamuda Renewables Australia + Alternate Path (JV)": [
+      {
+        "id": "cellars-hill-wind-farm",
+        "name": "Cellars Hill Wind Farm",
+        "technology": "wind",
+        "state": "TAS",
+        "status": "development",
+        "capacity_mw": 341.0,
+        "cod_current": "2028-12",
+        "cod_original": null,
+        "drift_months": null
+      },
       {
         "id": "weasel-solar-farm-and-bess-kci",
         "name": "Weasel Solar Farm And BESS - KCI",
@@ -15718,6 +15729,45 @@
         "status": "operating",
         "capacity_mw": 700.0,
         "cod_current": "2025-12",
+        "cod_original": null,
+        "drift_months": null
+      }
+    ],
+    "ENGIE (25%) + Foresight Group (75%) JV": [
+      {
+        "id": "willogoleche-2-wind-farm",
+        "name": "Willogoleche 2 Wind Farm",
+        "technology": "wind",
+        "state": "SA",
+        "status": "development",
+        "capacity_mw": 108.0,
+        "cod_current": "2028-06",
+        "cod_original": null,
+        "drift_months": null
+      }
+    ],
+    "EDPR (EDP Renewables Australia) + QIC (JV)": [
+      {
+        "id": "punchs-creek-renewable-energy-t4",
+        "name": "Punchs Creek Renewable Energy Project",
+        "technology": "hybrid",
+        "state": "QLD",
+        "status": "development",
+        "capacity_mw": 400.0,
+        "cod_current": "2029-01",
+        "cod_original": null,
+        "drift_months": null
+      }
+    ],
+    "Zero-E Australia (Grupo Cobra / ACS)": [
+      {
+        "id": "moranbah-solar-farm-zeroe",
+        "name": "Moranbah Solar Farm",
+        "technology": "hybrid",
+        "state": "QLD",
+        "status": "development",
+        "capacity_mw": 171.0,
+        "cod_current": "2028-06",
         "cod_original": null,
         "drift_months": null
       }
@@ -33783,5 +33833,5 @@
       }
     ]
   },
-  "exported_at": "2026-07-18T08:21:52.982873"
+  "exported_at": "2026-07-18T19:51:26.073283"
 }

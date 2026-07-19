@@ -1,12 +1,38 @@
 # AURES — Next Session Handoff
 
-**Last refreshed:** 2026-07-18
-**Latest shipped version:** v3.22.3 (Research Notes cache-bust + handoff refresh, this session pending commit) — prior: v3.22.2
+**Last refreshed:** 2026-07-19
+**Latest shipped version:** v3.22.4 (Items C+D+E bundled: 4 data-gap records + T9 Lens 1 hardening + 8 COD-review candidates verified — this session pending commit) — prior: v3.22.3
 **Purpose:** Single-place brief for the next session. Cold-readable — pair with `docs/SESSION_OPENER.md` and `docs/INTELLIGENCE_LAYER_PLAN.md`.
 
 ---
 
-## Current state snapshot (v3.22.3)
+## Current state snapshot (v3.22.4)
+
+### v3.22.4 — Items C + D + E bundled release (this session, pending commit)
+
+**Item C — 4 CIS data-gap project records created**:
+- Willogoleche 2 Wind Farm (T4 SA 108 MW ENGIE/Foresight) — enhanced existing stub overlay from `data_confidence: low` to `confirmed`
+- Punchs Creek Renewable Energy Project (T4 QLD 400 MW + 1,600 MWh EDPR+QIC JV) — new consolidated record replaces stale multi-stage BESS entries
+- Moranbah Solar Farm (T7 QLD 171 MW + 100 MWh Zero-E/Grupo Cobra) — new record; Grupo Cobra's first AU asset; Barada Barna Cultural Heritage agreement
+- Cellars Hill Wind Farm (T7 TAS 341 MW Gamuda + Alternate Path JV) — new record; shares site + 220 kV connection with sister Weasel Solar
+- CIS_PROJECTS array project_id fields updated for all 4
+
+**Item D — CIS T9 Lens 1 hardening**:
+- `docs/RESEARCH_CIS_T9_COMPETITIVE_FIELD.md` + `scheme-rounds.ts t9CompetitiveFieldDeepDive` updated to reflect CIS T9 Q&A Item 8 machinery (Jul 2026)
+- Formal written withdrawal notification is now a prerequisite for re-entry (proponent cannot simply signal intent — must formally notify Commonwealth in writing)
+- AEMO retains discretion to consider "track record of not executing binding commitments" — additional scoring penalty even for compliant withdrawals
+- Withdrawal may constitute a Significant Event under Proforma CISA (formal notification + remediation plan + prevention strategy obligations + independent legal advice recommended)
+- Aligns docs + in-app component with the newer `cis-rebid-restrictions-hardening` research note (2026-07-07)
+
+**Item E — 8 COD-review candidates verified** (chip task_0ef34273 executed):
+- **4 OPERATING** (upgraded from construction): Bundaberg Solar (Naturgy/GPG, cap 78→96 MW, 100% Telstra offtake), Lancaster Solar (European Energy, cap 80→108 MW, Apple PPA), Limondale BESS (RWE — Australia's first 8-hour LDS battery, full ops 27 May 2026), Munna Creek Solar (Metlen ex-Mytilineos, NBN Co 10-yr PPA)
+- **4 COMMISSIONING** (still construction per AURES but AEMO lags reality): Golden Plains Wind Farm Stage 1 (TagEnergy/Ingka, combined project surpassed 1 GW output), Goorambat East Solar (ENGIE, first power injected Nov 2025), Gunsynd Solar (Progressive Renewables — UNVERIFIED past AEMO Nov 2025 registration), Wambo Wind Farm (Stanwell/Cubico JV — Stage 1 turbines powered up 2025, Stage 2 targeted end-2026)
+- Proponent SPV→ultimate-parent corrections applied to Bundaberg, Lancaster, Munna Creek
+- Chip already gone (didn't persist across app restart) but work is done
+
+**Also this session — Research Notes cache-bust fix** (v3.22.3): Added `cache: 'no-cache'` to `fetchResearchNotes()` in `frontend/src/lib/dataService.ts` — forces browser + service worker to revalidate with server. New notes appear on first load after release without hard-refresh. Fixes the "notes not coming through" moment users hit after v3.21.4 shipped the BESS Sleeper Story note.
+
+### v3.22.0–v3.22.3 — Backlog Item A executed + Research Notes fix (2026-07-16→2026-07-18)
 
 ### v3.22.0–v3.22.3 — Backlog Item A executed + Research Notes fix (2026-07-16→2026-07-18)
 

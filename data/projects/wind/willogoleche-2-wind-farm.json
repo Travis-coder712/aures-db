@@ -5,23 +5,27 @@
   "status": "development",
   "capacity_mw": 108.0,
   "state": "SA",
-  "current_developer": "ENGIE / Foresight",
+  "current_developer": "ENGIE (25%) + Foresight Group (75%) JV",
+  "cod_current": "2028-06",
+  "operational_notes": "Expansion of operating Willogoleche 1 (119 MW commissioned Dec 2019). Same ENGIE 25% + Foresight Group 75% JV structure as Willogoleche 1. Construction to commence late 2026, commissioning 2028. $65k/yr community fund committed. AURES record reconciled 2026-07-18 as part of v3.22.4 data-gap closure — previously a stub with 'ENGIE / Foresight' and CIS 'executed' status (both inaccurate). Note: prior CIS_PROJECTS entry had project_id pointing at Stage 1 operating record — now correctly points at this Stage 2 record.",
   "grid_forming": false,
   "has_sips": false,
   "has_syncon": false,
   "has_statcom": false,
   "has_harmonic_filter": false,
-  "data_confidence": "low",
-  "last_updated": "2026-03-27",
-  "last_verified": "2026-03-27",
+  "data_confidence": "confirmed",
+  "last_updated": "2026-07-18",
+  "last_verified": "2026-07-18",
   "timeline": [
     {
       "date": "2025-10-09",
       "date_precision": "day",
       "event_type": "scheme_award",
-      "title": "CIS Tender 4 award announced",
-      "detail": "Awarded CIS Tender 4 — NEM Generation contract for 108 MW wind.",
-      "sources": []
+      "title": "CIS Tender 4 award (108 MW)",
+      "detail": "Awarded CIS Tender 4 — NEM Generation for 108 MW wind. Expansion of Willogoleche 1 (operating).",
+      "sources": [
+        { "title": "DCCEEW T4 announcement", "url": "https://www.dcceew.gov.au/about/news/cis-tender-4-deliver-6-6gw-clean-energy", "date": "2025-10-09", "source_tier": 1 }
+      ]
     }
   ],
   "ownership_history": [],
@@ -33,15 +37,33 @@
       "scheme": "CIS",
       "round": "Tender 4 — NEM Generation",
       "capacity_mw": 108,
-      "announced_date": "2025-10-09",
-      "status": "executed"
+      "storage_mwh": null,
+      "award_date": "2025-10-09",
+      "source_url": "https://www.dcceew.gov.au/about/news/cis-tender-4-deliver-6-6gw-clean-energy",
+      "contract_type": "CISA (federal underwriting)",
+      "execution_status": "awarded",
+      "execution_notes": "Construction expected late 2026, commissioning 2028. Same ENGIE + Foresight JV structure as operating Willogoleche 1. Pre-FID at ~9 months post-award. Prior AURES entry incorrectly marked as 'executed' — corrected 2026-07-18.",
+      "execution_source_url": "https://engie.com.au/about-us/our-generation-activities/wind-farms/willogoleche2"
     }
   ],
   "cost_sources": [],
   "stakeholder_issues": [],
   "sources": [
     {
-      "title": "CIS Tender 4 Results",
+      "title": "ENGIE Willogoleche 2 project page",
+      "url": "https://engie.com.au/about-us/our-generation-activities/wind-farms/willogoleche2",
+      "date": "2026-07-18",
+      "source_tier": 1
+    },
+    {
+      "title": "ENGIE + Foresight media release on CIS T4 award (Oct 2025)",
+      "url": "https://engie.com.au/media-news/engie-and-foresight-welcome-cis-support-willogoleche-wind-farm",
+      "date": "2025-10-10",
+      "source_tier": 1
+    },
+    {
+      "title": "DCCEEW CIS Tender 4 announcement",
+      "url": "https://www.dcceew.gov.au/about/news/cis-tender-4-deliver-6-6gw-clean-energy",
       "date": "2025-10-09",
       "source_tier": 1
     }

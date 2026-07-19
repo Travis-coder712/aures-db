@@ -1477,18 +1477,6 @@
       "basis": "state_average"
     },
     {
-      "project_id": "bundaberg-solar-farm",
-      "name": "Bundaberg Solar Farm",
-      "state": "QLD",
-      "capacity_mw": 78.0,
-      "latitude": -24.87,
-      "longitude": 152.35,
-      "developer": "Bundaberg Development Pty Ltd",
-      "predicted_cf_pct": 22.3,
-      "predicted_rating": "Average",
-      "basis": "state_average"
-    },
-    {
       "project_id": "burdekin-solar-farm-kci",
       "name": "Burdekin Solar Farm - KCI",
       "state": "QLD",
@@ -1905,19 +1893,6 @@
       "basis": "state_average"
     },
     {
-      "project_id": "lancaster-solar-farm",
-      "name": "Lancaster Solar Farm",
-      "state": "VIC",
-      "rez": "Central North VIC",
-      "capacity_mw": 80.0,
-      "latitude": -36.48,
-      "longitude": 144.76,
-      "developer": "Lancaster Solar Farm Pty Ltd as trustee for the Lancaster Solar Farm Trust",
-      "predicted_cf_pct": 21.0,
-      "predicted_rating": "Average",
-      "basis": "state_average"
-    },
-    {
       "project_id": "little-river-solar-farm-kci",
       "name": "Little River Solar Farm - KCI",
       "state": "VIC",
@@ -2046,19 +2021,6 @@
       "capacity_mw": 250.0,
       "developer": "Mullion Creek Wind Farm P/L",
       "predicted_cf_pct": 20.4,
-      "predicted_rating": "Average",
-      "basis": "state_average"
-    },
-    {
-      "project_id": "munna-creek-solar-farm",
-      "name": "Munna Creek Solar Farm",
-      "state": "QLD",
-      "rez": "Wide Bay",
-      "capacity_mw": 120.0,
-      "latitude": -25.92,
-      "longitude": 151.83,
-      "developer": "Munna Creek Solar Farm Investments Pty Ltd as trustee for the Munna Creek Solar Farm Trust",
-      "predicted_cf_pct": 22.3,
       "predicted_rating": "Average",
       "basis": "state_average"
     },
@@ -2791,12 +2753,12 @@
     }
   ],
   "total_operating": 78,
-  "total_development": 150,
+  "total_development": 147,
   "cf_rating_thresholds": {
     "Excellent": "\u2265 29%",
     "Good": "24% \u2013 29%",
     "Average": "20% \u2013 24%",
     "Below Average": "< 20%"
   },
-  "exported_at": "2026-07-18T08:21:53.110697"
+  "exported_at": "2026-07-18T19:51:26.269157"
 }

@@ -1,0 +1,69 @@
+{
+  "id": "moranbah-solar-farm-zeroe",
+  "name": "Moranbah Solar Farm",
+  "technology": "hybrid",
+  "status": "development",
+  "capacity_mw": 171.0,
+  "storage_mwh": 100.0,
+  "state": "QLD",
+  "current_developer": "Zero-E Australia (Grupo Cobra / ACS)",
+  "cod_current": "2028-06",
+  "notable": "CIS T7 award May 2026 (171 MW solar + 100 MW / 4hr BESS). Zero-E Australia is subsidiary of Spanish Grupo Cobra (ACS Group). Near Coppabella in Bowen Basin. AEMO 5.3.4A connection approval secured pre-award (145 MWac inverter rating per pv-tech; DCCEEW cites 171 MW; likely DC vs AC distinction). AC-coupled hybrid with grid-forming inverters. Grupo Cobras first Australian clean-energy asset. Cultural Heritage + Shared Benefits agreements with Barada Barna Traditional Owners. Created 2026-07-18 to close v3.22.2 data gap.",
+  "data_confidence": "confirmed",
+  "last_updated": "2026-07-18",
+  "last_verified": "2026-07-18",
+  "first_seen": "2026-07-18",
+  "timeline": [],
+  "ownership_history": [],
+  "cod_history": [],
+  "suppliers": [],
+  "offtakes": [],
+  "scheme_contracts": [
+    {
+      "scheme": "CIS",
+      "round": "Tender 7 \u2014 NEM Generation",
+      "capacity_mw": 171,
+      "storage_mwh": 100,
+      "award_date": "2026-05-22",
+      "source_url": "https://www.dcceew.gov.au/about/news/new-projects-deliver-7-8-gw-clean-energy",
+      "contract_type": "CISA (federal underwriting)",
+      "execution_status": "awarded",
+      "execution_notes": "AEMO 5.3.4A connection approval secured pre-award. AC-coupled hybrid with grid-forming inverters. Cultural Heritage + Shared Benefits agreements with Barada Barna Traditional Owners. Pre-FID at ~2 months post-award.",
+      "execution_source_url": "https://www.pv-tech.org/zero-e-australia-secures-5-3-4a-approval-for-145mwac-solar-plus-storage-site/"
+    }
+  ],
+  "cost_sources": [],
+  "stakeholder_issues": [],
+  "sources": [
+    {
+      "title": "pv-tech \u2014 Zero-E Moranbah AEMO 5.3.4A approval",
+      "url": "https://www.pv-tech.org/zero-e-australia-secures-5-3-4a-approval-for-145mwac-solar-plus-storage-site/",
+      "date": "2026-05-01",
+      "source_tier": 2
+    },
+    {
+      "title": "DCCEEW CIS Tender 7 announcement",
+      "url": "https://www.dcceew.gov.au/about/news/new-projects-deliver-7-8-gw-clean-energy",
+      "date": "2026-05-23",
+      "source_tier": 1
+    }
+  ],
+  "operational_notes": "CIS T7 award May 2026 (171 MW solar + 100 MW / 4hr BESS integrated hybrid). Zero-E Australia is subsidiary of Spanish Grupo Cobra (ACS Group \u2014 same ultimate parent as Pacific Partnerships / CIMIC / HOCHTIEF which won Hopeland Solar T1). Near Coppabella in Queensland's Bowen Basin. AEMO 5.3.4A connection approval secured pre-award (145 MWac inverter rating per pv-tech article; DCCEEW T7 media release cites 171 MW \u2014 likely DC vs AC rating distinction). AC-coupled hybrid with grid-forming inverters. Grupo Cobra's first Australian clean-energy asset. Cultural Heritage + Shared Benefits agreements signed with Barada Barna Traditional Owners. Up to 250 construction jobs. Grupo Cobra's second T7 win alongside Gunning Solar Hybrid (NSW). Created 2026-07-18 to close v3.22.2 data gap.",
+  "timeline_events": [
+    {
+      "date": "2026-05-22",
+      "date_precision": "day",
+      "event_type": "scheme_award",
+      "title": "CIS Tender 7 award (171 MW + 100 MWh)",
+      "detail": "Awarded CIS Tender 7 \u2014 NEM Generation. Grupo Cobra's second T7 win.",
+      "sources": [
+        {
+          "title": "DCCEEW T7 announcement",
+          "url": "https://www.dcceew.gov.au/about/news/new-projects-deliver-7-8-gw-clean-energy",
+          "date": "2026-05-23",
+          "source_tier": 1
+        }
+      ]
+    }
+  ]
+}

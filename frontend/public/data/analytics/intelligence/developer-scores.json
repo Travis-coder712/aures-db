@@ -562,6 +562,29 @@
       }
     },
     {
+      "developer": "RWE Renewables Australia",
+      "project_count": 2,
+      "total_mw": 1104.0,
+      "technologies": [
+        "bess",
+        "wind"
+      ],
+      "operating": 1,
+      "withdrawn": 0,
+      "completion_rate": 50.0,
+      "avg_drift_months": 0.0,
+      "on_time_pct": 100.0,
+      "execution_score": 85.0,
+      "grade": "A",
+      "drift_stats": {
+        "count": 2,
+        "mean": 0.0,
+        "median": 0.0,
+        "p25": 0,
+        "p75": 0
+      }
+    },
+    {
       "developer": "Storenergy",
       "project_count": 2,
       "total_mw": 494.0,
@@ -1843,29 +1866,6 @@
       }
     },
     {
-      "developer": "RWE Renewables Australia",
-      "project_count": 2,
-      "total_mw": 1104.0,
-      "technologies": [
-        "bess",
-        "wind"
-      ],
-      "operating": 0,
-      "withdrawn": 0,
-      "completion_rate": 0.0,
-      "avg_drift_months": 0.0,
-      "on_time_pct": 100.0,
-      "execution_score": 70.0,
-      "grade": "B",
-      "drift_stats": {
-        "count": 2,
-        "mean": 0.0,
-        "median": 0.0,
-        "p25": 0,
-        "p75": 0
-      }
-    },
-    {
       "developer": "RWE Renewables Australia Pty Ltd",
       "project_count": 2,
       "total_mw": 1350.0,
@@ -2574,6 +2574,20 @@
       "grade": "F"
     },
     {
+      "developer": "Gamuda Renewables Australia + Alternate Path (JV)",
+      "project_count": 2,
+      "total_mw": 485.0,
+      "technologies": [
+        "hybrid",
+        "wind"
+      ],
+      "operating": 0,
+      "withdrawn": 0,
+      "completion_rate": 0.0,
+      "execution_score": 35.0,
+      "grade": "F"
+    },
+    {
       "developer": "Green Switch Energy Pty Ltd",
       "project_count": 3,
       "total_mw": 1000.0,
@@ -3014,14 +3028,14 @@
   "industry_averages": {
     "avg_drift_months": 0.1,
     "avg_on_time_pct": 99.1,
-    "developer_count": 152
+    "developer_count": 153
   },
   "grade_distribution": {
-    "A": 27,
-    "B": 74,
+    "A": 28,
+    "B": 73,
     "D": 2,
-    "F": 49
+    "F": 50
   },
-  "total_developers": 152,
-  "exported_at": "2026-07-18T08:30:36.880816"
+  "total_developers": 153,
+  "exported_at": "2026-07-18T20:00:16.453625"
 }

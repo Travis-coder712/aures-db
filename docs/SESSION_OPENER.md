@@ -30,8 +30,7 @@ SQLite at `database/aures.db` is the **source of truth** (~30 tables,
 rows from 2021→present). The site renders from static JSON exports at
 `frontend/public/data/`. Strict CI: `tsc -b && vite build` must pass.
 
-Current version: see `frontend/package.json` (was v3.07.1 at last
-session opener update — check current).
+Current version: **v3.22.4** as of 2026-07-19 (see `frontend/package.json` for latest — Backlog Item A complete (3-phase CIS/LTESA data update covering T1+T4+T7 non-NSW winners); Items C+D+E bundled 2026-07-19). Always check current before making assumptions.
 
 ---
 

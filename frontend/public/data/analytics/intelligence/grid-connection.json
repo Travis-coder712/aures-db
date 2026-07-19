@@ -142,10 +142,10 @@
     {
       "rez": "Wide Bay",
       "total_mw": 600.4,
-      "operating_mw": 0,
-      "pipeline_mw": 600.4,
+      "operating_mw": 120.0,
+      "pipeline_mw": 480.4,
       "project_count": 5,
-      "congestion_score": 63.0,
+      "congestion_score": 62.4,
       "congestion_level": "moderate",
       "technologies": {
         "bess": {
@@ -156,12 +156,16 @@
         },
         "solar": {
           "construction": {
-            "count": 2,
-            "mw": 180.0
+            "count": 1,
+            "mw": 60.0
           },
           "development": {
             "count": 2,
             "mw": 198.4
+          },
+          "operating": {
+            "count": 1,
+            "mw": 120.0
           }
         }
       },
@@ -226,47 +230,6 @@
         "operating": {
           "count": 3,
           "mw": 439.5
-        }
-      }
-    },
-    {
-      "rez": "South West NSW",
-      "total_mw": 220.8,
-      "operating_mw": 30.0,
-      "pipeline_mw": 190.8,
-      "project_count": 3,
-      "congestion_score": 57.0,
-      "congestion_level": "moderate",
-      "technologies": {
-        "bess": {
-          "construction": {
-            "count": 1,
-            "mw": 50.0
-          }
-        },
-        "solar": {
-          "development": {
-            "count": 1,
-            "mw": 140.8
-          },
-          "operating": {
-            "count": 1,
-            "mw": 30.0
-          }
-        }
-      },
-      "connection_status": {
-        "anticipated": {
-          "count": 1,
-          "mw": 140.8
-        },
-        "committed": {
-          "count": 1,
-          "mw": 50.0
-        },
-        "operating": {
-          "count": 1,
-          "mw": 30.0
         }
       }
     },
@@ -342,7 +305,7 @@
           }
         },
         "wind": {
-          "construction": {
+          "commissioning": {
             "count": 1,
             "mw": 506.0
           }
@@ -488,6 +451,47 @@
       }
     },
     {
+      "rez": "South West NSW",
+      "total_mw": 220.8,
+      "operating_mw": 80.0,
+      "pipeline_mw": 140.8,
+      "project_count": 3,
+      "congestion_score": 33.1,
+      "congestion_level": "low",
+      "technologies": {
+        "bess": {
+          "operating": {
+            "count": 1,
+            "mw": 50.0
+          }
+        },
+        "solar": {
+          "development": {
+            "count": 1,
+            "mw": 140.8
+          },
+          "operating": {
+            "count": 1,
+            "mw": 30.0
+          }
+        }
+      },
+      "connection_status": {
+        "anticipated": {
+          "count": 1,
+          "mw": 140.8
+        },
+        "committed": {
+          "count": 1,
+          "mw": 50.0
+        },
+        "operating": {
+          "count": 1,
+          "mw": 30.0
+        }
+      }
+    },
+    {
       "rez": "New England",
       "total_mw": 315.0,
       "operating_mw": 115.0,
@@ -543,11 +547,11 @@
     },
     {
       "rez": "Central North VIC",
-      "total_mw": 789.0,
-      "operating_mw": 384.0,
-      "pipeline_mw": 405.0,
+      "total_mw": 817.0,
+      "operating_mw": 492.0,
+      "pipeline_mw": 325.0,
       "project_count": 6,
-      "congestion_score": 29.8,
+      "congestion_score": 23.5,
       "congestion_level": "low",
       "technologies": {
         "bess": {
@@ -558,16 +562,12 @@
         },
         "solar": {
           "commissioning": {
-            "count": 1,
-            "mw": 75.0
-          },
-          "construction": {
             "count": 2,
-            "mw": 330.0
+            "mw": 325.0
           },
           "operating": {
-            "count": 2,
-            "mw": 134.0
+            "count": 3,
+            "mw": 242.0
           }
         }
       },
@@ -578,7 +578,7 @@
         },
         "committed": {
           "count": 3,
-          "mw": 580.0
+          "mw": 608.0
         },
         "operating": {
           "count": 2,
@@ -926,7 +926,7 @@
     },
     "committed": {
       "count": 48,
-      "mw": 16567.8
+      "mw": 16613.8
     },
     "operating": {
       "count": 223,
@@ -938,5 +938,5 @@
     }
   },
   "total_rez_zones": 27,
-  "exported_at": "2026-07-18T08:30:36.903464"
+  "exported_at": "2026-07-18T20:00:16.478420"
 }

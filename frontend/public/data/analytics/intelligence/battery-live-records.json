@@ -738,9 +738,9 @@
   },
   "installed_capacity": {
     "NSW1": {
-      "project_count": 9,
-      "total_mw": 2640.0,
-      "total_mwh": 6945.2
+      "project_count": 10,
+      "total_mw": 2690.0,
+      "total_mwh": 7345.2
     },
     "QLD1": {
       "project_count": 8,
@@ -758,10 +758,10 @@
       "total_mwh": 3758.4
     },
     "NEM": {
-      "project_count": 33,
-      "total_mw": 7889.0,
-      "total_mwh": 16631.1
+      "project_count": 34,
+      "total_mw": 7939.0,
+      "total_mwh": 17031.1
     }
   },
-  "exported_at": "2026-07-18T08:30:36.840907"
+  "exported_at": "2026-07-18T20:00:16.414403"
 }

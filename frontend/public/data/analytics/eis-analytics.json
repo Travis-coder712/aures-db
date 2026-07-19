@@ -5,7 +5,7 @@
       "name": "Golden Plains Wind Farm",
       "state": "VIC",
       "capacity_mw": 1610.0,
-      "status": "construction",
+      "status": "commissioning",
       "developer": "TagEnergy / Ingka Group",
       "connection_voltage_kv": 220.0,
       "connection_distance_km": 27.0,
@@ -161,7 +161,7 @@
       "name": "Wambo Wind Farm",
       "state": "QLD",
       "capacity_mw": 506.0,
-      "status": "construction",
+      "status": "commissioning",
       "developer": "Cubico Sustainable Investments / Stanwell Corporation (50:50 JV)",
       "connection_voltage_kv": 132.0,
       "connection_distance_km": 22.0,
@@ -1662,7 +1662,7 @@
       "name": "Limondale BESS",
       "state": "NSW",
       "capacity_mw": 50.0,
-      "status": "construction",
+      "status": "operating",
       "developer": "RWE Renewables Australia",
       "connection_voltage_kv": 330.0,
       "connection_distance_km": 0.3,
@@ -1789,5 +1789,5 @@
       }
     }
   },
-  "exported_at": "2026-07-18T08:21:53.096679"
+  "exported_at": "2026-07-18T19:51:26.255400"
 }

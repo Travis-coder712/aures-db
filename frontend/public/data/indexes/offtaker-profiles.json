@@ -48,7 +48,7 @@
       },
       "by_status": {
         "operating": 2,
-        "construction": 3
+        "commissioning": 3
       },
       "states": [
         "QLD",
@@ -102,8 +102,7 @@
         "wind": 3
       },
       "by_status": {
-        "commissioning": 2,
-        "construction": 1
+        "commissioning": 3
       },
       "states": [
         "QLD"

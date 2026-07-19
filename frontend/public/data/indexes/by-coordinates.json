@@ -38,7 +38,7 @@
     "id": "golden-plains-wind",
     "name": "Golden Plains Wind Farm",
     "technology": "wind",
-    "status": "construction",
+    "status": "commissioning",
     "capacity_mw": 1610.0,
     "state": "VIC",
     "lat": -37.78,
@@ -221,7 +221,7 @@
     "id": "wambo-wind-farm",
     "name": "Wambo Wind Farm",
     "technology": "wind",
-    "status": "construction",
+    "status": "commissioning",
     "capacity_mw": 506.0,
     "state": "QLD",
     "lat": -26.648,
@@ -757,7 +757,7 @@
     "id": "goorambat-east-solar-farm-engie",
     "name": "Goorambat East Solar Farm (ENGIE)",
     "technology": "solar",
-    "status": "construction",
+    "status": "commissioning",
     "capacity_mw": 250.0,
     "state": "VIC",
     "lat": -36.55,
@@ -1648,12 +1648,12 @@
     "id": "munna-creek-solar-farm",
     "name": "Munna Creek Solar Farm",
     "technology": "solar",
-    "status": "construction",
+    "status": "operating",
     "capacity_mw": 120.0,
     "state": "QLD",
     "lat": -25.92,
     "lng": 151.83,
-    "developer": "Munna Creek Solar Farm Investments Pty Ltd as trustee for the Munna Creek Solar Farm Trust"
+    "developer": "Metlen (ex-Mytilineos)"
   },
   {
     "id": "winton-bess",
@@ -1832,6 +1832,17 @@
     "lat": -33.05982,
     "lng": 138.537673,
     "developer": "HWF 3 Pty Ltd"
+  },
+  {
+    "id": "lancaster-solar-farm",
+    "name": "Lancaster Solar Farm",
+    "technology": "solar",
+    "status": "operating",
+    "capacity_mw": 108.0,
+    "state": "VIC",
+    "lat": -36.48,
+    "lng": 144.76,
+    "developer": "European Energy"
   },
   {
     "id": "port-augusta-renewable-energy-park-solar",
@@ -2104,6 +2115,17 @@
     "developer": "Snowtown Wind Farm Pty Ltd"
   },
   {
+    "id": "bundaberg-solar-farm",
+    "name": "Bundaberg Solar Farm",
+    "technology": "solar",
+    "status": "operating",
+    "capacity_mw": 96.0,
+    "state": "QLD",
+    "lat": -24.87,
+    "lng": 152.35,
+    "developer": "Naturgy / GPG (Global Power Generation)"
+  },
+  {
     "id": "tailem-bend-solar",
     "name": "Tailem Bend - Solar",
     "technology": "solar",
@@ -2118,7 +2140,7 @@
     "id": "gunsynd-solar-farm",
     "name": "Gunsynd Solar Farm",
     "technology": "solar",
-    "status": "construction",
+    "status": "commissioning",
     "capacity_mw": 94.0,
     "state": "QLD",
     "lat": -27.55,
@@ -2413,17 +2435,6 @@
     "developer": "Snowy Hydro Ltd"
   },
   {
-    "id": "lancaster-solar-farm",
-    "name": "Lancaster Solar Farm",
-    "technology": "solar",
-    "status": "construction",
-    "capacity_mw": 80.0,
-    "state": "VIC",
-    "lat": -36.48,
-    "lng": 144.76,
-    "developer": "Lancaster Solar Farm Pty Ltd as trustee for the Lancaster Solar Farm Trust"
-  },
-  {
     "id": "quorn-park-solar-hybrid",
     "name": "Quorn Park Solar Hybrid",
     "technology": "hybrid",
@@ -2445,17 +2456,6 @@
     "lat": -36.97615,
     "lng": 143.097998,
     "developer": "Pacific Hydro Crowlands Pty Ltd"
-  },
-  {
-    "id": "bundaberg-solar-farm",
-    "name": "Bundaberg Solar Farm",
-    "technology": "solar",
-    "status": "construction",
-    "capacity_mw": 78.0,
-    "state": "QLD",
-    "lat": -24.87,
-    "lng": 152.35,
-    "developer": "Bundaberg Development Pty Ltd"
   },
   {
     "id": "girgarre-solar-farm",

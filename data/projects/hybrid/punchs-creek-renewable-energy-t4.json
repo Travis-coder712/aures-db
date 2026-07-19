@@ -1,0 +1,72 @@
+{
+  "id": "punchs-creek-renewable-energy-t4",
+  "name": "Punchs Creek Renewable Energy Project",
+  "technology": "hybrid",
+  "status": "development",
+  "capacity_mw": 400.0,
+  "storage_mwh": 1600.0,
+  "state": "QLD",
+  "current_developer": "EDPR (EDP Renewables Australia) + QIC (JV)",
+  "cod_current": "2029-01",
+  "operational_notes": "Single integrated hybrid: 400 MWac solar + 400 MW / 1,600 MWh BESS (4hr). CIS T4 award Oct 2025. EDP-QIC exclusivity/JV structure. FC expected 2026, commissioning early 2029. Part of EDP's 1.7 GW Australian fast-track pipeline (also incl. Merino NSW). Created 2026-07-18 to close v3.22.1 data gap — represents the T4 CISA award as a single project rather than the stale multi-stage BESS records (punchs-creek-hybrid-stage-2-kci 200 MW, punchs-creek-hybrid-stage-3-kci 600 MW). SkyLab's legacy 'Punch and Creek' 87 MW projects are separate/legacy.",
+  "grid_forming": false,
+  "has_sips": false,
+  "has_syncon": false,
+  "has_statcom": false,
+  "has_harmonic_filter": false,
+  "data_confidence": "confirmed",
+  "last_updated": "2026-07-18",
+  "last_verified": "2026-07-18",
+  "timeline": [
+    {
+      "date": "2025-10-09",
+      "date_precision": "day",
+      "event_type": "scheme_award",
+      "title": "CIS Tender 4 award (400 MW solar + 400 MW / 1,600 MWh BESS)",
+      "detail": "Integrated hybrid project awarded CIS T4 CISA. EDPR + QIC JV as CIS counterparty.",
+      "sources": [
+        { "title": "DCCEEW T4 announcement", "url": "https://www.dcceew.gov.au/about/news/cis-tender-4-deliver-6-6gw-clean-energy", "date": "2025-10-09", "source_tier": 1 }
+      ]
+    }
+  ],
+  "ownership_history": [],
+  "cod_history": [],
+  "suppliers": [],
+  "offtakes": [],
+  "scheme_contracts": [
+    {
+      "scheme": "CIS",
+      "round": "Tender 4 — NEM Generation",
+      "capacity_mw": 400,
+      "storage_mwh": 1600,
+      "award_date": "2025-10-09",
+      "source_url": "https://www.dcceew.gov.au/about/news/cis-tender-4-deliver-6-6gw-clean-energy",
+      "contract_type": "CISA (federal underwriting)",
+      "execution_status": "awarded",
+      "execution_notes": "Integrated solar + BESS hybrid; single T4 award. EDPR + QIC JV. FC expected 2026, ops early 2029. Pre-FID at ~9 months post-award. Reconciliation record created 2026-07-18 to replace stale multi-stage BESS entries.",
+      "execution_source_url": "https://edp.com/en/asia-pacific/australia/punchs-creek-renewable-energy-project"
+    }
+  ],
+  "cost_sources": [],
+  "stakeholder_issues": [],
+  "sources": [
+    {
+      "title": "EDP Punchs Creek Renewable Energy Project page",
+      "url": "https://edp.com/en/asia-pacific/australia/punchs-creek-renewable-energy-project",
+      "date": "2026-07-18",
+      "source_tier": 1
+    },
+    {
+      "title": "pv-magazine — EDP 1.7 GW Aus fast-track pipeline (Oct 2025)",
+      "url": "https://www.pv-magazine-australia.com/2025/10/13/edp-to-fast-track-1-7-gw-of-solar-and-storage-in-eastern-states/",
+      "date": "2025-10-13",
+      "source_tier": 2
+    },
+    {
+      "title": "DCCEEW CIS Tender 4 announcement",
+      "url": "https://www.dcceew.gov.au/about/news/cis-tender-4-deliver-6-6gw-clean-energy",
+      "date": "2025-10-09",
+      "source_tier": 1
+    }
+  ]
+}

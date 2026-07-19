@@ -2,8 +2,8 @@
   "summary": {
     "total_bess": 432,
     "total_with_storage": 347,
-    "total_operating": 34,
-    "total_hybrid": 91,
+    "total_operating": 35,
+    "total_hybrid": 93,
     "total_hybrid_operating": 0,
     "grid_forming_count": 11,
     "grid_forming_pct": 2.5,
@@ -22,12 +22,12 @@
         "1-2h": 11,
         "2-4h": 17,
         "4-8h": 3,
-        "8h+": 0
+        "8h+": 1
       },
-      "count": 34,
-      "avg": 1.9,
+      "count": 35,
+      "avg": 2.07,
       "median": 2.0,
-      "max": 4.51,
+      "max": 8.0,
       "min": 0.3
     },
     "development": {
@@ -50,12 +50,12 @@
         "1-2h": 2,
         "2-4h": 11,
         "4-8h": 3,
-        "8h+": 1
+        "8h+": 0
       },
-      "count": 17,
-      "avg": 2.67,
+      "count": 16,
+      "avg": 2.33,
       "median": 2.0,
-      "max": 8.0,
+      "max": 4.02,
       "min": 1.0
     },
     "commissioning": {
@@ -722,6 +722,17 @@
       "cod": null
     },
     {
+      "project_id": "punchs-creek-renewable-energy-t4",
+      "name": "Punchs Creek Renewable Energy Project",
+      "state": "QLD",
+      "status": "development",
+      "capacity_mw": 400.0,
+      "storage_mwh": 1600.0,
+      "duration_h": 4.0,
+      "developer": "EDPR (EDP Renewables Australia) + QIC (JV)",
+      "cod": "2029-01"
+    },
+    {
       "project_id": "sundown-hybrid-facility",
       "name": "Sundown Hybrid Facility",
       "state": "NSW",
@@ -1138,6 +1149,17 @@
       "duration_h": 1.77,
       "developer": "Tag Energy Australia Pty Ltd",
       "cod": "2029-04-01"
+    },
+    {
+      "project_id": "moranbah-solar-farm-zeroe",
+      "name": "Moranbah Solar Farm",
+      "state": "QLD",
+      "status": "development",
+      "capacity_mw": 171.0,
+      "storage_mwh": 100.0,
+      "duration_h": 0.58,
+      "developer": "Zero-E Australia (Grupo Cobra / ACS)",
+      "cod": "2028-06"
     },
     {
       "project_id": "ganymirra-solar-power-station",
@@ -1975,7 +1997,7 @@
       "project_id": "limondale-bess",
       "name": "Limondale BESS",
       "state": "NSW",
-      "status": "construction",
+      "status": "operating",
       "capacity_mw": 50.0,
       "storage_mwh": 400.0,
       "duration_h": 8.0,
@@ -2165,5 +2187,5 @@
       "data_confidence": "low"
     }
   ],
-  "exported_at": "2026-07-18T08:21:53.113872"
+  "exported_at": "2026-07-18T19:51:26.272652"
 }

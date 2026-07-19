@@ -491,11 +491,11 @@
   ],
   "bess_coverage": {
     "NSW": {
-      "bess_count": 9,
-      "bess_mw": 2640.0,
-      "bess_mwh": 6945.2,
+      "bess_count": 10,
+      "bess_mw": 2690.0,
+      "bess_mwh": 7345.2,
       "peak_demand_mw_est": 14000,
-      "coverage_hours": 0.5,
+      "coverage_hours": 0.52,
       "coverage_rating": "Low"
     },
     "QLD": {
@@ -533,9 +533,9 @@
   },
   "bess_pipeline": {
     "NSW": {
-      "count": 130,
-      "mw": 41609.0,
-      "mwh": 90746.6
+      "count": 129,
+      "mw": 41559.0,
+      "mwh": 90346.6
     },
     "QLD": {
       "count": 125,
@@ -5618,5 +5618,5 @@
       "solar_mw": 1198.0
     }
   ],
-  "exported_at": "2026-07-18T08:30:36.867671"
+  "exported_at": "2026-07-18T20:00:16.440312"
 }

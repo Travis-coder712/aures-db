@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-18T08:30:36.914764",
+  "generated_at": "2026-07-18T20:00:16.490188",
   "months": [
     {
       "month": "2027-06",
@@ -3807,6 +3807,17 @@
             "date": "2026-03-12"
           },
           {
+            "project_id": "lancaster-solar-farm",
+            "project_name": "Lancaster Solar Farm",
+            "technology": "solar",
+            "state": "VIC",
+            "capacity_mw": 108.0,
+            "event_type": "cod_change",
+            "title": "COD estimate updated",
+            "detail": "COD changed from 2026-05 to 2026-05-30 (source: AEMO Generation Information)",
+            "date": "2026-03-12"
+          },
+          {
             "project_id": "morgan-solar",
             "project_name": "Morgan Solar",
             "technology": "hybrid",
@@ -4126,6 +4137,17 @@
             "date": "2026-03-12"
           },
           {
+            "project_id": "bundaberg-solar-farm",
+            "project_name": "Bundaberg Solar Farm",
+            "technology": "solar",
+            "state": "QLD",
+            "capacity_mw": 96.0,
+            "event_type": "cod_change",
+            "title": "COD estimate updated",
+            "detail": "COD changed from 2025-12 to 2025-12-31 (source: AEMO Generation Information)",
+            "date": "2026-03-12"
+          },
+          {
             "project_id": "derby-solar-farm-and-bess",
             "project_name": "Derby Solar Farm and BESS",
             "technology": "hybrid",
@@ -4170,17 +4192,6 @@
             "date": "2026-03-12"
           },
           {
-            "project_id": "lancaster-solar-farm",
-            "project_name": "Lancaster Solar Farm",
-            "technology": "solar",
-            "state": "VIC",
-            "capacity_mw": 80.0,
-            "event_type": "cod_change",
-            "title": "COD estimate updated",
-            "detail": "COD changed from 2026-05 to 2026-05-30 (source: AEMO Generation Information)",
-            "date": "2026-03-12"
-          },
-          {
             "project_id": "quorn-park-solar-hybrid",
             "project_name": "Quorn Park Solar Hybrid",
             "technology": "hybrid",
@@ -4222,17 +4233,6 @@
             "event_type": "cod_change",
             "title": "COD estimate updated",
             "detail": "COD changed from 2029-10 to 2029-10-07 (source: AEMO Generation Information)",
-            "date": "2026-03-12"
-          },
-          {
-            "project_id": "bundaberg-solar-farm",
-            "project_name": "Bundaberg Solar Farm",
-            "technology": "solar",
-            "state": "QLD",
-            "capacity_mw": 78.0,
-            "event_type": "cod_change",
-            "title": "COD estimate updated",
-            "detail": "COD changed from 2025-12 to 2025-12-31 (source: AEMO Generation Information)",
             "date": "2026-03-12"
           },
           {
@@ -5056,17 +5056,6 @@
             "title": "Grid-forming battery operational in remote NSW",
             "detail": "Broken Hill BESS commenced operations using Fluence Gridstack with EPC Power grid-forming inverters, providing critical system strength in one of the most challenging parts of the NEM grid.",
             "date": "2025-09-01"
-          },
-          {
-            "project_id": "limondale-bess",
-            "project_name": "Limondale BESS",
-            "technology": "bess",
-            "state": "NSW",
-            "capacity_mw": 50.0,
-            "event_type": "notable",
-            "title": "Registered with AEMO",
-            "detail": "Australia's first 8-hour LDES BESS registered",
-            "date": "2025-09-01"
           }
         ],
         "operational": [
@@ -5080,6 +5069,17 @@
             "title": "Registered with AEMO",
             "detail": "AEMO MMS registration",
             "date": "2025-09-30"
+          },
+          {
+            "project_id": "limondale-bess",
+            "project_name": "Limondale BESS",
+            "technology": "bess",
+            "state": "NSW",
+            "capacity_mw": 50.0,
+            "event_type": "notable",
+            "title": "Registered with AEMO",
+            "detail": "Australia's first 8-hour LDES BESS registered",
+            "date": "2025-09-01"
           }
         ]
       }
@@ -6503,17 +6503,6 @@
             "date": "2024-12-16"
           },
           {
-            "project_id": "wambo-wind-farm",
-            "project_name": "Wambo Wind Farm",
-            "technology": "wind",
-            "state": "QLD",
-            "capacity_mw": 506.0,
-            "event_type": "notable",
-            "title": "Financial close \u2014 A$650M",
-            "detail": "Stages 1 & 2 combined finance; Stanwell backed by A$455M QLD RE&H Jobs Fund",
-            "date": "2024-12-01"
-          },
-          {
             "project_id": "rangebank-bess",
             "project_name": "Rangebank BESS",
             "technology": "bess",
@@ -6526,6 +6515,17 @@
           }
         ],
         "operational": [
+          {
+            "project_id": "wambo-wind-farm",
+            "project_name": "Wambo Wind Farm",
+            "technology": "wind",
+            "state": "QLD",
+            "capacity_mw": 506.0,
+            "event_type": "notable",
+            "title": "Financial close \u2014 A$650M",
+            "detail": "Stages 1 & 2 combined finance; Stanwell backed by A$455M QLD RE&H Jobs Fund",
+            "date": "2024-12-01"
+          },
           {
             "project_id": "victorian-big-battery",
             "project_name": "Victorian Big Battery",
@@ -7080,17 +7080,6 @@
             "date": "2024-06-12"
           },
           {
-            "project_id": "golden-plains-wind",
-            "project_name": "Golden Plains Wind Farm",
-            "technology": "wind",
-            "state": "VIC",
-            "capacity_mw": 1610.0,
-            "event_type": "notable",
-            "title": "Stage 2 financial close",
-            "detail": "Vestas EPC for 93 turbines / 577 MW Stage 2 West",
-            "date": "2024-06-01"
-          },
-          {
             "project_id": "eraring-battery",
             "project_name": "Eraring Battery",
             "technology": "bess",
@@ -7158,6 +7147,17 @@
           }
         ],
         "operational": [
+          {
+            "project_id": "golden-plains-wind",
+            "project_name": "Golden Plains Wind Farm",
+            "technology": "wind",
+            "state": "VIC",
+            "capacity_mw": 1610.0,
+            "event_type": "notable",
+            "title": "Stage 2 financial close",
+            "detail": "Vestas EPC for 93 turbines / 577 MW Stage 2 West",
+            "date": "2024-06-01"
+          },
           {
             "project_id": "capital-battery",
             "project_name": "Capital Battery",
@@ -7379,7 +7379,8 @@
         ],
         "govt_programs": [],
         "rez_progress": [],
-        "construction": [
+        "construction": [],
+        "operational": [
           {
             "project_id": "wambo-wind-farm",
             "project_name": "Wambo Wind Farm",
@@ -7390,9 +7391,7 @@
             "title": "Stage 2 QLD government approval",
             "detail": "41 additional turbines / 254 MW",
             "date": "2024-02-01"
-          }
-        ],
-        "operational": [
+          },
           {
             "project_id": "clements-gap-bess",
             "project_name": "Clements Gap - BESS",
@@ -9180,17 +9179,6 @@
         "rez_progress": [],
         "construction": [
           {
-            "project_id": "golden-plains-wind",
-            "project_name": "Golden Plains Wind Farm",
-            "technology": "wind",
-            "state": "VIC",
-            "capacity_mw": 1610.0,
-            "event_type": "notable",
-            "title": "Stage 1 financial close",
-            "detail": "A$3 billion commitment including Stage 2 development",
-            "date": "2022-11-01"
-          },
-          {
             "project_id": "lotus-creek-wind-farm",
             "project_name": "Lotus Creek Wind Farm",
             "technology": "wind",
@@ -9202,7 +9190,19 @@
             "date": "2022-11-01"
           }
         ],
-        "operational": []
+        "operational": [
+          {
+            "project_id": "golden-plains-wind",
+            "project_name": "Golden Plains Wind Farm",
+            "technology": "wind",
+            "state": "VIC",
+            "capacity_mw": 1610.0,
+            "event_type": "notable",
+            "title": "Stage 1 financial close",
+            "detail": "A$3 billion commitment including Stage 2 development",
+            "date": "2022-11-01"
+          }
+        ]
       }
     },
     {
@@ -9868,17 +9868,6 @@
             "date": "2022-01-17"
           },
           {
-            "project_id": "wambo-wind-farm",
-            "project_name": "Wambo Wind Farm",
-            "technology": "wind",
-            "state": "QLD",
-            "capacity_mw": 506.0,
-            "event_type": "notable",
-            "title": "EPBC federal approval",
-            "detail": "",
-            "date": "2022-01-01"
-          },
-          {
             "project_id": "victorian-big-battery",
             "project_name": "Victorian Big Battery",
             "technology": "bess",
@@ -9956,7 +9945,19 @@
             "date": "2022"
           }
         ],
-        "operational": []
+        "operational": [
+          {
+            "project_id": "wambo-wind-farm",
+            "project_name": "Wambo Wind Farm",
+            "technology": "wind",
+            "state": "QLD",
+            "capacity_mw": 506.0,
+            "event_type": "notable",
+            "title": "EPBC federal approval",
+            "detail": "",
+            "date": "2022-01-01"
+          }
+        ]
       }
     },
     {
@@ -17752,8 +17753,8 @@
     }
   ],
   "section_counts": {
-    "construction": 642,
-    "operational": 443,
+    "construction": 636,
+    "operational": 449,
     "development": 272,
     "govt_programs": 10,
     "rez_progress": 36

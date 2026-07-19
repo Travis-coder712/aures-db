@@ -1,7 +1,7 @@
 {
   "summary": {
-    "total_operating": 227,
-    "avg_age_years": 14.5,
+    "total_operating": 231,
+    "avg_age_years": 14.2,
     "over_15_years": 59,
     "over_20_years": 42,
     "over_25_years": 35,
@@ -18,13 +18,13 @@
   },
   "age_distribution": {
     "bess": {
-      "count": 34,
+      "count": 35,
       "avg_age": 2.5,
-      "median_age": 1.5,
+      "median_age": 1,
       "oldest_age": 9,
       "newest_age": 0,
       "buckets": {
-        "<5y": 28,
+        "<5y": 29,
         "5-10y": 6,
         "10-15y": 0,
         "15-20y": 0,
@@ -33,13 +33,13 @@
       }
     },
     "solar": {
-      "count": 78,
-      "avg_age": 5.7,
-      "median_age": 6.0,
+      "count": 81,
+      "avg_age": 5.5,
+      "median_age": 6,
       "oldest_age": 11,
       "newest_age": 0,
       "buckets": {
-        "<5y": 24,
+        "<5y": 27,
         "5-10y": 51,
         "10-15y": 3,
         "15-20y": 0,
@@ -473,21 +473,21 @@
     },
     {
       "year": 2025,
-      "count": 19,
-      "total_mw": 4434.5,
+      "count": 20,
+      "total_mw": 4530.5,
       "by_tech": {
         "bess": 10,
-        "solar": 8,
+        "solar": 9,
         "wind": 1
       }
     },
     {
       "year": 2026,
-      "count": 8,
-      "total_mw": 3210.0,
+      "count": 11,
+      "total_mw": 3488.0,
       "by_tech": {
-        "bess": 7,
-        "solar": 1
+        "bess": 8,
+        "solar": 3
       }
     },
     {
@@ -2492,12 +2492,12 @@
     },
     {
       "oem": "Tesla",
-      "project_count": 15,
+      "project_count": 16,
       "technologies": [
         "bess"
       ],
-      "avg_age": 2.9,
-      "median_age": 3,
+      "avg_age": 2.8,
+      "median_age": 2.0,
       "oldest": 9,
       "newest": 0,
       "pct_over_15yr": 0.0,
@@ -2841,21 +2841,21 @@
     },
     {
       "eol_year": 2050,
-      "count": 19,
-      "total_mw": 4434.5,
+      "count": 20,
+      "total_mw": 4530.5,
       "by_tech": {
         "bess": 10,
-        "solar": 8,
+        "solar": 9,
         "wind": 1
       }
     },
     {
       "eol_year": 2051,
-      "count": 8,
-      "total_mw": 3210.0,
+      "count": 11,
+      "total_mw": 3488.0,
       "by_tech": {
-        "bess": 7,
-        "solar": 1
+        "bess": 8,
+        "solar": 3
       }
     },
     {
@@ -3534,6 +3534,29 @@
       "at_risk_oem": false,
       "latitude": -37.039507,
       "longitude": 142.982799
+    },
+    {
+      "project_id": "bundaberg-solar-farm",
+      "name": "Bundaberg Solar Farm",
+      "technology": "solar",
+      "state": "QLD",
+      "rez": null,
+      "capacity_mw": 96.0,
+      "storage_mwh": null,
+      "developer": "Naturgy / GPG (Global Power Generation)",
+      "operator": null,
+      "cod_year": 2025,
+      "age_years": 1,
+      "age_bucket": "<5y",
+      "primary_oem": null,
+      "primary_model": null,
+      "cf_latest": null,
+      "cf_trend": null,
+      "cf_gap_to_state_median": null,
+      "refurb_score": 2.4,
+      "at_risk_oem": false,
+      "latitude": -24.87,
+      "longitude": 152.35
     },
     {
       "project_id": "bungala-one-solar-farm",
@@ -5606,6 +5629,29 @@
       "longitude": 146.620515
     },
     {
+      "project_id": "lancaster-solar-farm",
+      "name": "Lancaster Solar Farm",
+      "technology": "solar",
+      "state": "VIC",
+      "rez": "Central North VIC",
+      "capacity_mw": 108.0,
+      "storage_mwh": null,
+      "developer": "European Energy",
+      "operator": null,
+      "cod_year": 2026,
+      "age_years": 0,
+      "age_bucket": "<5y",
+      "primary_oem": null,
+      "primary_model": null,
+      "cf_latest": null,
+      "cf_trend": null,
+      "cf_gap_to_state_median": null,
+      "refurb_score": 0.0,
+      "at_risk_oem": false,
+      "latitude": -36.48,
+      "longitude": 144.76
+    },
+    {
       "project_id": "latrobe-valley-bess",
       "name": "LaTrobe Valley BESS",
       "technology": "bess",
@@ -5673,6 +5719,29 @@
       "at_risk_oem": false,
       "latitude": -23.070504,
       "longitude": 148.413865
+    },
+    {
+      "project_id": "limondale-bess",
+      "name": "Limondale BESS",
+      "technology": "bess",
+      "state": "NSW",
+      "rez": "South West NSW",
+      "capacity_mw": 50.0,
+      "storage_mwh": 400.0,
+      "developer": "RWE Renewables Australia",
+      "operator": null,
+      "cod_year": 2026,
+      "age_years": 0,
+      "age_bucket": "<5y",
+      "primary_oem": "Tesla",
+      "primary_model": "Megapack",
+      "cf_latest": null,
+      "cf_trend": null,
+      "cf_gap_to_state_median": null,
+      "refurb_score": 0.0,
+      "at_risk_oem": false,
+      "latitude": null,
+      "longitude": null
     },
     {
       "project_id": "limondale-solar-farm-1",
@@ -6202,6 +6271,29 @@
       "at_risk_oem": false,
       "latitude": -33.619342,
       "longitude": 136.717568
+    },
+    {
+      "project_id": "munna-creek-solar-farm",
+      "name": "Munna Creek Solar Farm",
+      "technology": "solar",
+      "state": "QLD",
+      "rez": "Wide Bay",
+      "capacity_mw": 120.0,
+      "storage_mwh": null,
+      "developer": "Metlen (ex-Mytilineos)",
+      "operator": null,
+      "cod_year": 2026,
+      "age_years": 0,
+      "age_bucket": "<5y",
+      "primary_oem": null,
+      "primary_model": null,
+      "cf_latest": null,
+      "cf_trend": null,
+      "cf_gap_to_state_median": null,
+      "refurb_score": 0.0,
+      "at_risk_oem": false,
+      "latitude": -25.92,
+      "longitude": 151.83
     },
     {
       "project_id": "murra-warra-wind-farm-stage-1",
@@ -8090,5 +8182,5 @@
       "longitude": null
     }
   ],
-  "exported_at": "2026-07-18T08:21:53.118936"
+  "exported_at": "2026-07-18T19:51:26.277251"
 }

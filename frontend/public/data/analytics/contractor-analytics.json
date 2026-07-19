@@ -208,8 +208,7 @@
         "VIC": 1
       },
       "statuses": {
-        "construction": 1,
-        "operating": 6
+        "operating": 7
       },
       "top_developers": [
         [
@@ -911,7 +910,8 @@
         "QLD": 1
       },
       "statuses": {
-        "construction": 2
+        "construction": 1,
+        "commissioning": 1
       },
       "top_developers": [
         [
@@ -1295,7 +1295,7 @@
         "VIC": 1
       },
       "statuses": {
-        "construction": 1
+        "commissioning": 1
       },
       "top_developers": [
         [
@@ -2881,7 +2881,7 @@
         "role": "epc",
         "technology": "wind",
         "state": "VIC",
-        "status": "construction",
+        "status": "commissioning",
         "capacity_mw": 1610.0,
         "developer": "TagEnergy / Ingka Group",
         "model": null,
@@ -2909,7 +2909,7 @@
         "role": "epc",
         "technology": "wind",
         "state": "QLD",
-        "status": "construction",
+        "status": "commissioning",
         "capacity_mw": 506.0,
         "developer": "Cubico Sustainable Investments / Stanwell Corporation (50:50 JV)",
         "model": null,
@@ -3364,7 +3364,7 @@
         "role": "bop",
         "technology": "bess",
         "state": "NSW",
-        "status": "construction",
+        "status": "operating",
         "capacity_mw": 50.0,
         "developer": "RWE Renewables Australia",
         "model": null,
@@ -6625,5 +6625,5 @@
       "both": 4
     }
   },
-  "exported_at": "2026-07-18T08:21:53.035966"
+  "exported_at": "2026-07-18T19:51:26.126049"
 }

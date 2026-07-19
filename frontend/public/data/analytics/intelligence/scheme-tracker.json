@@ -604,7 +604,8 @@
           "stage": "operating",
           "cod_current": "2025-05-22",
           "dev_status": "operating",
-          "annotations": []
+          "annotations": [],
+          "developer_grade": "A"
         }
       ]
     },
@@ -1061,8 +1062,8 @@
       "total_storage_mwh": 11444,
       "num_projects": 20,
       "by_stage": {
-        "unknown": 3,
-        "development": 13,
+        "unknown": 2,
+        "development": 14,
         "construction": 4
       },
       "by_state": {
@@ -1423,17 +1424,23 @@
         {
           "name": "Willogoleche 2 Wind Farm",
           "project_id": "willogoleche-2-wind-farm",
-          "developer": "ENGIE / Foresight",
+          "developer": "ENGIE (25%) + Foresight Group (75%) JV",
           "technology": "wind",
           "capacity_mw": 108,
           "state": "SA",
-          "status": "unknown",
-          "stage": "unknown",
+          "status": "development",
+          "stage": "development",
+          "cod_current": "2028-06",
           "dev_status": "grid connection pending",
           "annotations": [
             {
               "flag": "grid connection pending",
               "reason": "No connection application on record",
+              "severity": "medium"
+            },
+            {
+              "flag": "environmental pending",
+              "reason": "No EIS lodged and COD > 2027",
               "severity": "medium"
             }
           ]
@@ -1451,9 +1458,8 @@
       "total_storage_mwh": 400,
       "num_projects": 4,
       "by_stage": {
-        "operating": 2,
-        "development": 1,
-        "construction": 1
+        "operating": 3,
+        "development": 1
       },
       "by_state": {
         "NSW": 4
@@ -1513,8 +1519,8 @@
           "capacity_mw": 50,
           "storage_mwh": 400,
           "state": "NSW",
-          "status": "construction",
-          "stage": "construction",
+          "status": "operating",
+          "stage": "operating",
           "construction_start": "2024-10-01",
           "cod_current": "2026-03-07",
           "dev_status": "construction",
@@ -1963,22 +1969,22 @@
         "mw": 1810.0
       },
       "operating": {
-        "count": 7,
-        "mw": 1961.0
+        "count": 8,
+        "mw": 2011.0
       },
       "unknown": {
-        "count": 12,
-        "mw": 1811.0
+        "count": 11,
+        "mw": 1703.0
       },
       "construction": {
-        "count": 11,
-        "mw": 3002.0
+        "count": 10,
+        "mw": 2952.0
       },
       "development": {
-        "count": 58,
-        "mw": 17342.0
+        "count": 59,
+        "mw": 17450.0
       }
     }
   },
-  "exported_at": "2026-07-18T08:21:53.100656"
+  "exported_at": "2026-07-18T19:51:26.259439"
 }

@@ -5251,6 +5251,16 @@
       "revenue_per_mw": 17028.0
     },
     {
+      "project_id": "munna-creek-solar-farm",
+      "name": "Munna Creek Solar Farm",
+      "technology": "solar",
+      "state": "QLD",
+      "capacity_mw": 120.0,
+      "developer": "Metlen (ex-Mytilineos)",
+      "capacity_factor_pct": null,
+      "revenue_per_mw": null
+    },
+    {
       "project_id": "willogoleche-wind-farm",
       "name": "Willogoleche Wind Farm",
       "technology": "wind",
@@ -5369,6 +5379,16 @@
       "developer": "Gunnedah SF Pty Ltd atf Gunnedah Asset Trust",
       "capacity_factor_pct": 22.3,
       "revenue_per_mw": 42300.0
+    },
+    {
+      "project_id": "lancaster-solar-farm",
+      "name": "Lancaster Solar Farm",
+      "technology": "solar",
+      "state": "VIC",
+      "capacity_mw": 108.0,
+      "developer": "European Energy",
+      "capacity_factor_pct": null,
+      "revenue_per_mw": null
     },
     {
       "project_id": "taralga-wind-farm",
@@ -5529,6 +5549,16 @@
       "developer": "Snowtown Wind Farm Pty Ltd",
       "capacity_factor_pct": 29.1,
       "revenue_per_mw": 64308.0
+    },
+    {
+      "project_id": "bundaberg-solar-farm",
+      "name": "Bundaberg Solar Farm",
+      "technology": "solar",
+      "state": "QLD",
+      "capacity_mw": 96.0,
+      "developer": "Naturgy / GPG (Global Power Generation)",
+      "capacity_factor_pct": null,
+      "revenue_per_mw": null
     },
     {
       "project_id": "tailem-bend-solar",
@@ -6021,6 +6051,16 @@
       "revenue_per_mw": 31315.0
     },
     {
+      "project_id": "limondale-bess",
+      "name": "Limondale BESS",
+      "technology": "bess",
+      "state": "NSW",
+      "capacity_mw": 50.0,
+      "developer": "RWE Renewables Australia",
+      "capacity_factor_pct": null,
+      "revenue_per_mw": null
+    },
+    {
       "project_id": "wallgrove-grid-battery-project",
       "name": "Wallgrove Grid Battery project",
       "technology": "bess",
@@ -6231,5 +6271,5 @@
       "revenue_per_mw": 29125.0
     }
   ],
-  "exported_at": "2026-07-18T08:21:53.041299"
+  "exported_at": "2026-07-18T19:51:26.131396"
 }

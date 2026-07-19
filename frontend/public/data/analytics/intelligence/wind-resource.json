@@ -1046,17 +1046,6 @@
   },
   "development_projects": [
     {
-      "project_id": "golden-plains-wind",
-      "name": "Golden Plains Wind Farm",
-      "state": "VIC",
-      "capacity_mw": 1610.0,
-      "latitude": -37.78,
-      "longitude": 143.94,
-      "predicted_cf_pct": 26.6,
-      "predicted_rating": "Average",
-      "basis": "state_average"
-    },
-    {
       "project_id": "alberton-wind-farm",
       "name": "Alberton Wind Farm",
       "state": "VIC",
@@ -2114,18 +2103,6 @@
       "basis": "state_average"
     },
     {
-      "project_id": "wambo-wind-farm",
-      "name": "Wambo Wind Farm",
-      "state": "QLD",
-      "rez": "Western Downs",
-      "capacity_mw": 506.0,
-      "latitude": -26.648,
-      "longitude": 151.306,
-      "predicted_cf_pct": 35.8,
-      "predicted_rating": "Excellent",
-      "basis": "state_average"
-    },
-    {
       "project_id": "warracknabeal-wind-farm",
       "name": "Warracknabeal Wind Farm",
       "state": "VIC",
@@ -2234,9 +2211,27 @@
       "predicted_cf_pct": 26.7,
       "predicted_rating": "Average",
       "basis": "state_average"
+    },
+    {
+      "project_id": "willogoleche-2-wind-farm",
+      "name": "Willogoleche 2 Wind Farm",
+      "state": "SA",
+      "capacity_mw": 108.0,
+      "predicted_cf_pct": 25.7,
+      "predicted_rating": "Average",
+      "basis": "state_average"
+    },
+    {
+      "project_id": "cellars-hill-wind-farm",
+      "name": "Cellars Hill Wind Farm",
+      "state": "TAS",
+      "capacity_mw": 341.0,
+      "predicted_cf_pct": 38.2,
+      "predicted_rating": "Excellent",
+      "basis": "state_average"
     }
   ],
   "total_operating": 80,
   "total_development": 129,
-  "exported_at": "2026-07-18T08:21:53.108711"
+  "exported_at": "2026-07-18T19:51:26.267188"
 }
