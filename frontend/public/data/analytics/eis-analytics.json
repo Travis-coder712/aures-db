@@ -160,9 +160,9 @@
       "id": "wambo-wind-farm",
       "name": "Wambo Wind Farm",
       "state": "QLD",
-      "capacity_mw": 506.0,
-      "status": "commissioning",
-      "developer": "Cubico Sustainable Investments / Stanwell Corporation (50:50 JV)",
+      "capacity_mw": 500.0,
+      "status": "construction",
+      "developer": "Cubico Sustainable Investments Australia Pty Ltd",
       "connection_voltage_kv": 132.0,
       "connection_distance_km": 22.0,
       "connection_substation_name": "Oakey 132 kV substation",
@@ -420,9 +420,9 @@
       "id": "carmodys-hill-wind-farm",
       "name": "Carmodys Hill Wind Farm",
       "state": "SA",
-      "capacity_mw": 256.0,
+      "capacity_mw": 247.0,
       "status": "construction",
-      "developer": "Aula Energy (100% post-FC Dec 2025)",
+      "developer": "Georgetown Hills Renewable Energy Pty Ltd as trustee for the Georgetown Hills Renewable Energy Trust",
       "connection_voltage_kv": 132.0,
       "connection_distance_km": 16.0,
       "connection_substation_name": "Hummocks Hill 132 kV substation",
@@ -1662,8 +1662,8 @@
       "name": "Limondale BESS",
       "state": "NSW",
       "capacity_mw": 50.0,
-      "status": "operating",
-      "developer": "RWE Renewables Australia",
+      "status": "construction",
+      "developer": "LIMONDALE BATTERY PTY. LTD",
       "connection_voltage_kv": 330.0,
       "connection_distance_km": 0.3,
       "connection_substation_name": "Darlington Point 330 kV substation (co-located with solar farm)",
@@ -1789,5 +1789,5 @@
       }
     }
   },
-  "exported_at": "2026-07-18T19:51:26.255400"
+  "exported_at": "2026-07-26T13:12:26.262669"
 }

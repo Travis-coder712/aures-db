@@ -25,8 +25,10 @@ preserved across runs.
 **Script:** `pipeline/importers/import_aemo_gen_info.py`
 **Source:** [`nem-generation-information-{month}-{year}.xlsx`](https://www.aemo.com.au/energy-systems/electricity/national-electricity-market-nem/nem-forecasting-and-planning/forecasting-and-planning-data/generation-information)
 **Cadence:** Monthly (AEMO publishes ~1st of each month)
+**Archive:** Every ingested release is stored under `data/gi_snapshots/gi-YYYY-MM.xlsx` and committed to git. The importer prefers the archived file over re-downloading, so a snapshot re-run at any commit reproduces the DB the same way (AEMO removes older releases from its site).
+**Idempotency:** UNIQUE natural key on `(snapshot, station_name, COALESCE(duid,''), COALESCE(unit_name,''))` enforced at the DB. `INSERT ... ON CONFLICT DO UPDATE` on every row — re-running against the same file is a no-op. `snapshot` is derived from the workbook filename (e.g. `gi-2026-01.xlsx` → `2026-01`), NOT from `date('now')`.
 **What it updates:**
-- `aemo_generation_info` table (one row per DUID-month snapshot)
+- `aemo_generation_info` table (one row per unit per snapshot; `unit_name` distinguishes multi-unit hydro like Murray 1)
 - `projects.connection_status` (operating / commissioning / committed / anticipated / proposed) — derived from per-DUID AEMO Status via `CONNECTION_STATUS_MAP` (added in v3.11.0)
 - `projects.status`, `capacity_mw`, `storage_mwh` where AEMO confirms an upgrade (never a downgrade — protected by `STATUS_PRIORITY` ordering)
 

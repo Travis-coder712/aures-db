@@ -204,20 +204,6 @@
         "mw": 240.0
       }
     ],
-    "Aula Energy (100% post-FC Dec 2025)": [
-      {
-        "role": "bop",
-        "supplier": "DT Infrastructure",
-        "projects": 1,
-        "mw": 256.0
-      },
-      {
-        "role": "wind_oem",
-        "supplier": "GE Vernova",
-        "projects": 1,
-        "mw": 256.0
-      }
-    ],
     "Aula Energy / CS Energy (50:50 JV)": [
       {
         "role": "bop",
@@ -490,18 +476,18 @@
         "mw": 91.0
       }
     ],
-    "Cubico Sustainable Investments / Stanwell Corporation (50:50 JV)": [
+    "Cubico Sustainable Investments Australia Pty Ltd": [
       {
         "role": "epc",
         "supplier": "Vestas (EPC)",
         "projects": 1,
-        "mw": 506.0
+        "mw": 500.0
       },
       {
         "role": "wind_oem",
         "supplier": "Vestas",
         "projects": 1,
-        "mw": 506.0
+        "mw": 500.0
       }
     ],
     "Culcairn Solar Farm Pty Ltd as trustee for Culcairn Solar Farm Trust": [
@@ -918,6 +904,20 @@
         "mw": 50.0
       }
     ],
+    "Georgetown Hills Renewable Energy Pty Ltd as trustee for the Georgetown Hills Renewable Energy Trust": [
+      {
+        "role": "bop",
+        "supplier": "DT Infrastructure",
+        "projects": 1,
+        "mw": 247.0
+      },
+      {
+        "role": "wind_oem",
+        "supplier": "GE Vernova",
+        "projects": 1,
+        "mw": 247.0
+      }
+    ],
     "Giragarre Solar Farm Pty Ltd as trustee for Giragarre Solar Farm Trust": [
       {
         "role": "epc",
@@ -1266,6 +1266,20 @@
         "supplier": "METKA EGN (Metlen)",
         "projects": 1,
         "mw": 40.0
+      }
+    ],
+    "LIMONDALE BATTERY PTY. LTD": [
+      {
+        "role": "bess_oem",
+        "supplier": "Tesla",
+        "projects": 1,
+        "mw": 50.0
+      },
+      {
+        "role": "bop",
+        "supplier": "Beon Energy Solutions",
+        "projects": 1,
+        "mw": 50.0
       }
     ],
     "Lake Bonney Wind Power Pty Ltd": [
@@ -1874,20 +1888,6 @@
         "supplier": "Canadian Solar",
         "projects": 1,
         "mw": 55.0
-      }
-    ],
-    "RWE Renewables Australia": [
-      {
-        "role": "bess_oem",
-        "supplier": "Tesla",
-        "projects": 1,
-        "mw": 50.0
-      },
-      {
-        "role": "bop",
-        "supplier": "Beon Energy Solutions",
-        "projects": 1,
-        "mw": 50.0
       }
     ],
     "Ratch Australia": [
@@ -3551,7 +3551,7 @@
         "drift_months": 0.0
       }
     ],
-    "EDF Power Solutions Australia": [
+    "Orange Creek Energy Pty Ltd": [
       {
         "id": "banana-range-wind-farm",
         "name": "Banana Range Wind Farm",
@@ -3743,7 +3743,7 @@
         "drift_months": null
       }
     ],
-    "Gentari (Petronas)": [
+    "Barnawartha Solar Pty Ltd": [
       {
         "id": "barnawartha-solar-and-energy-storage",
         "name": "Barnawartha Solar and Energy Storage",
@@ -3764,9 +3764,9 @@
         "state": "NSW",
         "status": "development",
         "capacity_mw": 919.0,
-        "cod_current": "2029-12-31",
+        "cod_current": "2030-07-31",
         "cod_original": "2029-12-31",
-        "drift_months": 0.0
+        "drift_months": 7.1
       },
       {
         "id": "baroota-pumped-hydro-project",
@@ -4341,7 +4341,7 @@
         "drift_months": null
       }
     ],
-    "Equis": [
+    "The Trustee for Equis Wind (Australia) LHWF2 Asset Trust": [
       {
         "id": "bellbay-wind-farm",
         "name": "Bellbay Wind Farm",
@@ -4469,9 +4469,9 @@
         "state": "QLD",
         "status": "development",
         "capacity_mw": 400.0,
-        "cod_current": "2028-01-02",
+        "cod_current": "2028-07-01",
         "cod_original": "2028-01-02",
-        "drift_months": 0.0
+        "drift_months": 6.0
       },
       {
         "id": "tarrone-bess-storage-kci",
@@ -4981,6 +4981,17 @@
     ],
     "Edify Energy Pty Ltd": [
       {
+        "id": "nowingi-solar-farm-edify-kci",
+        "name": "Nowingi Solar Farm - Edify (KCI)",
+        "technology": "hybrid",
+        "state": "VIC",
+        "status": "development",
+        "capacity_mw": 750.0,
+        "cod_current": "2028-02",
+        "cod_original": "2028-02-01",
+        "drift_months": null
+      },
+      {
         "id": "pioneer-bess-kci",
         "name": "Pioneer BESS - KCI",
         "technology": "bess",
@@ -4990,6 +5001,28 @@
         "cod_current": "2028-11-01",
         "cod_original": "2028-11-01",
         "drift_months": 0.0
+      },
+      {
+        "id": "guthries-gap-solar-power-station",
+        "name": "Guthrie\u2019s Gap Solar Power Station",
+        "technology": "hybrid",
+        "state": "QLD",
+        "status": "development",
+        "capacity_mw": 300.0,
+        "cod_current": "2029-05",
+        "cod_original": "2029-05-01",
+        "drift_months": null
+      },
+      {
+        "id": "smoky-creek-solar-power-station",
+        "name": "Smoky Creek Solar Power Station",
+        "technology": "hybrid",
+        "state": "QLD",
+        "status": "development",
+        "capacity_mw": 300.0,
+        "cod_current": "2029-05",
+        "cod_original": "2029-05-01",
+        "drift_months": null
       },
       {
         "id": "boags-creek-solar-power-station",
@@ -5907,18 +5940,7 @@
         "drift_months": null
       }
     ],
-    "European Energy Australia": [
-      {
-        "id": "mokoan-solar-farm",
-        "name": "Mokoan Solar Farm",
-        "technology": "solar",
-        "state": "VIC",
-        "status": "operating",
-        "capacity_mw": 58.0,
-        "cod_current": "2025-05-22",
-        "cod_original": "2025-05-22",
-        "drift_months": 0.0
-      },
+    "EE Solar 9 Pty Ltd as trustee for the EE Solar 9 Trust": [
       {
         "id": "bullyard-solar-farm",
         "name": "Bullyard Solar Farm",
@@ -5944,17 +5966,17 @@
         "drift_months": null
       }
     ],
-    "Naturgy / GPG (Global Power Generation)": [
+    "Bundaberg Development Pty Ltd": [
       {
         "id": "bundaberg-solar-farm",
         "name": "Bundaberg Solar Farm",
         "technology": "solar",
         "state": "QLD",
-        "status": "operating",
-        "capacity_mw": 96.0,
-        "cod_current": "2025-12-31",
+        "status": "construction",
+        "capacity_mw": 78.0,
+        "cod_current": "2025-12",
         "cod_original": "2025-12-31",
-        "drift_months": 0.0
+        "drift_months": null
       }
     ],
     "Genaspi Energy Group Pty Ltd": [
@@ -5972,25 +5994,23 @@
     ],
     "Windlab Developments Pty Ltd": [
       {
-        "id": "bungaban-bess",
-        "name": "Bungaban BESS",
-        "technology": "bess",
-        "state": "QLD",
-        "status": "development",
-        "capacity_mw": 350.0,
-        "cod_current": "2030-03-30",
-        "cod_original": "2030-03-30",
-        "drift_months": 0.0
-      }
-    ],
-    "Windlab (Squadron Energy)": [
-      {
         "id": "bungaban-wind-farm",
         "name": "Bungaban Wind Farm",
         "technology": "wind",
         "state": "QLD",
         "status": "development",
         "capacity_mw": 1400.0,
+        "cod_current": "2030-03",
+        "cod_original": "2030-03-30",
+        "drift_months": null
+      },
+      {
+        "id": "bungaban-bess",
+        "name": "Bungaban BESS",
+        "technology": "bess",
+        "state": "QLD",
+        "status": "development",
+        "capacity_mw": 350.0,
         "cod_current": "2030-03-30",
         "cod_original": "2030-03-30",
         "drift_months": 0.0
@@ -6490,6 +6510,17 @@
     ],
     "Georgetown Hills Renewable Energy Pty Ltd as trustee for the Georgetown Hills Renewable Energy Trust": [
       {
+        "id": "carmodys-hill-wind-farm",
+        "name": "Carmodys Hill Wind Farm",
+        "technology": "wind",
+        "state": "SA",
+        "status": "construction",
+        "capacity_mw": 247.0,
+        "cod_current": "2029-01",
+        "cod_original": "2029-01-01",
+        "drift_months": null
+      },
+      {
         "id": "carmodys-hill-bess",
         "name": "Carmodys Hill BESS",
         "technology": "bess",
@@ -6498,19 +6529,6 @@
         "capacity_mw": 118.0,
         "cod_current": "2030-01-01",
         "cod_original": "2030-01-01",
-        "drift_months": 0.0
-      }
-    ],
-    "Aula Energy (100% post-FC Dec 2025)": [
-      {
-        "id": "carmodys-hill-wind-farm",
-        "name": "Carmodys Hill Wind Farm",
-        "technology": "wind",
-        "state": "SA",
-        "status": "construction",
-        "capacity_mw": 256.0,
-        "cod_current": "2029-01-01",
-        "cod_original": "2029-01-01",
         "drift_months": 0.0
       }
     ],
@@ -7228,9 +7246,7 @@
         "cod_current": null,
         "cod_original": null,
         "drift_months": null
-      }
-    ],
-    "OX2 (acquired 8 Jul 2026)": [
+      },
       {
         "id": "corop-solar-farm",
         "name": "Corop Solar Farm",
@@ -7577,17 +7593,6 @@
         "drift_months": 0.0
       },
       {
-        "id": "lower-wonga-solar-farm-and-bess",
-        "name": "Lower Wonga Solar Farm and BESS",
-        "technology": "hybrid",
-        "state": "QLD",
-        "status": "construction",
-        "capacity_mw": 281.0,
-        "cod_current": "2028-08-01",
-        "cod_original": "2028-08-01",
-        "drift_months": 0.0
-      },
-      {
         "id": "west-mokoan-solar-farm-and-bess",
         "name": "West Mokoan Solar Farm and BESS",
         "technology": "hybrid",
@@ -7928,7 +7933,7 @@
         "drift_months": null
       }
     ],
-    "Sungrow Renewable Energy": [
+    "DERBY SOLAR PROJECT PTY LTD": [
       {
         "id": "derby-solar-farm-and-bess",
         "name": "Derby Solar Farm and BESS",
@@ -7936,9 +7941,9 @@
         "state": "VIC",
         "status": "development",
         "capacity_mw": 95.0,
-        "cod_current": "2027-09-01",
+        "cod_current": "2027-09",
         "cod_original": "2027-09-01",
-        "drift_months": 0.0
+        "drift_months": null
       }
     ],
     "Bid Energy Partners Pty Ltd": [
@@ -8010,9 +8015,9 @@
         "state": "NSW",
         "status": "development",
         "capacity_mw": 1007.0,
-        "cod_current": "2029-12-01",
+        "cod_current": "2031-07-01",
         "cod_original": "2029-12-01",
-        "drift_months": 0.0
+        "drift_months": 19.2
       }
     ],
     "ESCO Pacific": [
@@ -8673,17 +8678,6 @@
     ],
     "Edify Energy (La Caisse-owned)": [
       {
-        "id": "nowingi-solar-farm-edify-kci",
-        "name": "Nowingi Solar Farm - Edify (KCI)",
-        "technology": "hybrid",
-        "state": "VIC",
-        "status": "development",
-        "capacity_mw": 750.0,
-        "cod_current": "2028-02-01",
-        "cod_original": "2028-02-01",
-        "drift_months": 0.0
-      },
-      {
         "id": "ganymirra-solar-power-station",
         "name": "Ganymirra Solar Power Station",
         "technology": "hybrid",
@@ -8703,28 +8697,6 @@
         "capacity_mw": 150.0,
         "cod_current": "2029-02-01",
         "cod_original": "2029-02-01",
-        "drift_months": 0.0
-      },
-      {
-        "id": "guthries-gap-solar-power-station",
-        "name": "Guthrie\u2019s Gap Solar Power Station",
-        "technology": "hybrid",
-        "state": "QLD",
-        "status": "construction",
-        "capacity_mw": 300.0,
-        "cod_current": "2029-05-01",
-        "cod_original": "2029-05-01",
-        "drift_months": 0.0
-      },
-      {
-        "id": "smoky-creek-solar-power-station",
-        "name": "Smoky Creek Solar Power Station",
-        "technology": "hybrid",
-        "state": "QLD",
-        "status": "construction",
-        "capacity_mw": 300.0,
-        "cod_current": "2029-05-01",
-        "cod_original": "2029-05-01",
         "drift_months": 0.0
       }
     ],
@@ -8752,17 +8724,17 @@
         "drift_months": null
       }
     ],
-    "Windlab (Squadron / Andrew Forrest)": [
+    "GAWARA BAYA WIND FARM PTY LTD": [
       {
         "id": "gawara-baya-wind-and-bess",
         "name": "Gawara Baya Wind And BESS",
-        "technology": "wind",
+        "technology": "hybrid",
         "state": "QLD",
         "status": "development",
         "capacity_mw": 400.0,
-        "cod_current": "2029-01-15",
+        "cod_current": "2029-01",
         "cod_original": "2029-01-15",
-        "drift_months": 0.0
+        "drift_months": null
       }
     ],
     "Gelston Energy Park Pty Ltd (ACN 690796788) as trustee for Gelston Energy Park Trust": [
@@ -9270,11 +9242,11 @@
         "name": "Goorambat East Solar Farm (ENGIE)",
         "technology": "solar",
         "state": "VIC",
-        "status": "commissioning",
+        "status": "construction",
         "capacity_mw": 250.0,
-        "cod_current": "2026-05-18",
+        "cod_current": "2026-05",
         "cod_original": "2026-05-18",
-        "drift_months": 0.0
+        "drift_months": null
       },
       {
         "id": "the-plains",
@@ -9314,7 +9286,7 @@
         "drift_months": null
       }
     ],
-    "Neoen Australia (Brookfield-owned)": [
+    "Neoen Australia": [
       {
         "id": "goyder-north-wind-farm",
         "name": "Goyder North Wind Farm",
@@ -10057,7 +10029,18 @@
         "drift_months": 0.0
       }
     ],
-    "AGL + Wind Prospect": [
+    "Wind Prospect WA Pty Ltd": [
+      {
+        "id": "willatook",
+        "name": "Willatook",
+        "technology": "hybrid",
+        "state": "VIC",
+        "status": "development",
+        "capacity_mw": 450.0,
+        "cod_current": "2027-08",
+        "cod_original": "2027-08-01",
+        "drift_months": null
+      },
       {
         "id": "hexham",
         "name": "Hexham",
@@ -10065,9 +10048,9 @@
         "state": "VIC",
         "status": "development",
         "capacity_mw": 921.12,
-        "cod_current": "2030-11-01",
+        "cod_current": "2030-11",
         "cod_original": "2030-11-01",
-        "drift_months": 0.0
+        "drift_months": null
       }
     ],
     "Atmos Renewables": [
@@ -10227,7 +10210,7 @@
         "drift_months": 0.0
       }
     ],
-    "Pacific Partnerships (CIMIC/HOCHTIEF/ACS)": [
+    "Hopeland Solar Farm Pty Ltd as trustee for the Hopeland Solar Farm Trust": [
       {
         "id": "hopeland-solar-farm",
         "name": "Hopeland Solar Farm",
@@ -10398,9 +10381,9 @@
         "state": "NSW",
         "status": "development",
         "capacity_mw": 500.0,
-        "cod_current": "2030-11-01",
+        "cod_current": "2032-09-01",
         "cod_original": "2030-11-01",
-        "drift_months": 0.0
+        "drift_months": 22.3
       }
     ],
     "Equinor / Oceanex Energy (WITHDRAWN)": [
@@ -11125,17 +11108,17 @@
         "drift_months": null
       }
     ],
-    "European Energy": [
+    "Lancaster Solar Farm Pty Ltd as trustee for the Lancaster Solar Farm Trust": [
       {
         "id": "lancaster-solar-farm",
         "name": "Lancaster Solar Farm",
         "technology": "solar",
         "state": "VIC",
-        "status": "operating",
-        "capacity_mw": 108.0,
-        "cod_current": "2026-05-30",
+        "status": "construction",
+        "capacity_mw": 80.0,
+        "cod_current": "2026-05",
         "cod_original": "2026-05-30",
-        "drift_months": 0.0
+        "drift_months": null
       }
     ],
     "Tilt Renewables (Mercury NZ)": [
@@ -11203,28 +11186,17 @@
         "drift_months": null
       }
     ],
-    "RWE Renewables Australia": [
+    "LIMONDALE BATTERY PTY. LTD": [
       {
         "id": "limondale-bess",
         "name": "Limondale BESS",
         "technology": "bess",
         "state": "NSW",
-        "status": "operating",
+        "status": "construction",
         "capacity_mw": 50.0,
-        "cod_current": "2026-03-07",
+        "cod_current": "2026-03",
         "cod_original": "2026-03-07",
-        "drift_months": 0.0
-      },
-      {
-        "id": "theodore-wind-farm",
-        "name": "Theodore Wind Farm",
-        "technology": "wind",
-        "state": "QLD",
-        "status": "development",
-        "capacity_mw": 1054.0,
-        "cod_current": "2028-12-31",
-        "cod_original": "2028-12-31",
-        "drift_months": 0.0
+        "drift_months": null
       }
     ],
     "Limondale Sun Farm Pty Ltd": [
@@ -11338,6 +11310,19 @@
         "cod_current": "2028-01-01",
         "cod_original": "2028-01-01",
         "drift_months": 0.0
+      }
+    ],
+    "Lower Wonga Solar Farm Pty Ltd": [
+      {
+        "id": "lower-wonga-solar-farm-and-bess",
+        "name": "Lower Wonga Solar Farm and BESS",
+        "technology": "hybrid",
+        "state": "QLD",
+        "status": "development",
+        "capacity_mw": 281.0,
+        "cod_current": "2028-08",
+        "cod_original": "2028-08-01",
+        "drift_months": null
       }
     ],
     "Alinta Energy Clean Energy Development Pty Ltd": [
@@ -11606,6 +11591,17 @@
       }
     ],
     "Cubico Sustainable Investments Australia Pty Ltd": [
+      {
+        "id": "wambo-wind-farm",
+        "name": "Wambo Wind Farm",
+        "technology": "wind",
+        "state": "QLD",
+        "status": "construction",
+        "capacity_mw": 500.0,
+        "cod_current": "2025-02",
+        "cod_original": "2025-02-28",
+        "drift_months": null
+      },
       {
         "id": "marmadua-wind-farm-kci",
         "name": "Marmadua Wind Farm (KCI)",
@@ -11918,7 +11914,7 @@
         "drift_months": null
       }
     ],
-    "Central Queensland Power (CQP)": [
+    "Moah Creek Wind Farm Project Co Pty Ltd as trustee for the Moah Creek Wind Farm Project Trust": [
       {
         "id": "moah-creek-wind-farm",
         "name": "Moah Creek Wind Farm",
@@ -11926,9 +11922,9 @@
         "state": "QLD",
         "status": "development",
         "capacity_mw": 349.0,
-        "cod_current": "2028-03-31",
+        "cod_current": "2028-03",
         "cod_original": "2028-03-31",
-        "drift_months": 0.0
+        "drift_months": null
       }
     ],
     "Moama Propertyco Pty Ltd as trustee for the Moama Property Trust": [
@@ -11955,6 +11951,19 @@
         "cod_current": null,
         "cod_original": null,
         "drift_months": null
+      }
+    ],
+    "European Energy Australia": [
+      {
+        "id": "mokoan-solar-farm",
+        "name": "Mokoan Solar Farm",
+        "technology": "solar",
+        "state": "VIC",
+        "status": "operating",
+        "capacity_mw": 58.0,
+        "cod_current": "2025-05-22",
+        "cod_original": "2025-05-22",
+        "drift_months": 0.0
       }
     ],
     "StorEnergy 3 Pty Ltd": [
@@ -12369,17 +12378,17 @@
         "drift_months": null
       }
     ],
-    "Metlen (ex-Mytilineos)": [
+    "Munna Creek Solar Farm Investments Pty Ltd as trustee for the Munna Creek Solar Farm Trust": [
       {
         "id": "munna-creek-solar-farm",
         "name": "Munna Creek Solar Farm",
         "technology": "solar",
         "state": "QLD",
-        "status": "operating",
+        "status": "construction",
         "capacity_mw": 120.0,
-        "cod_current": "2026-01-24",
+        "cod_current": "2026-01",
         "cod_original": "2026-01-24",
-        "drift_months": 0.0
+        "drift_months": null
       }
     ],
     "Murra Warra Project Co Pty Ltd": [
@@ -14231,9 +14240,9 @@
         "state": "QLD",
         "status": "operating",
         "capacity_mw": 1300.0,
-        "cod_current": "2026-01-07",
+        "cod_current": "2026-06-01",
         "cod_original": "2026-01-07",
-        "drift_months": 0.0
+        "drift_months": 4.8
       }
     ],
     "Supernode BESS 3 ProjectCo Pty Ltd as trustee for Supernode BESS 3 Project Trust": [
@@ -14586,6 +14595,19 @@
         "drift_months": 0.0
       }
     ],
+    "RWE Renewables Australia": [
+      {
+        "id": "theodore-wind-farm",
+        "name": "Theodore Wind Farm",
+        "technology": "wind",
+        "state": "QLD",
+        "status": "development",
+        "capacity_mw": 1054.0,
+        "cod_current": "2028-12",
+        "cod_original": "2028-12-31",
+        "drift_months": null
+      }
+    ],
     "Ausnet Transmission Group Pty Ltd": [
       {
         "id": "thomastown-bess",
@@ -14918,19 +14940,6 @@
         "drift_months": 0.0
       }
     ],
-    "Cubico Sustainable Investments / Stanwell Corporation (50:50 JV)": [
-      {
-        "id": "wambo-wind-farm",
-        "name": "Wambo Wind Farm",
-        "technology": "wind",
-        "state": "QLD",
-        "status": "commissioning",
-        "capacity_mw": 506.0,
-        "cod_current": "2025-02-28",
-        "cod_original": "2025-02-28",
-        "drift_months": 0.0
-      }
-    ],
     "Wandoan Solar Project Co Pty Ltd as trustee for Wandoan Solar Project": [
       {
         "id": "wandoan-solar-farm",
@@ -15024,17 +15033,6 @@
     ],
     "Wattle Creek Energy Hub P/L": [
       {
-        "id": "wattle-creek-energy-hub-solar-bess",
-        "name": "Wattle Creek Energy Hub - Solar / BESS",
-        "technology": "hybrid",
-        "state": "NSW",
-        "status": "development",
-        "capacity_mw": 180.0,
-        "cod_current": "2028-12-01",
-        "cod_original": "2028-12-01",
-        "drift_months": 0.0
-      },
-      {
         "id": "wattle-creek-energy-hub-battery-storage",
         "name": "Wattle Creek Energy Hub - Battery Storage",
         "technology": "bess",
@@ -15044,6 +15042,17 @@
         "cod_current": "2029-01-01",
         "cod_original": "2029-01-01",
         "drift_months": 0.0
+      },
+      {
+        "id": "wattle-creek-energy-hub-solar-bess",
+        "name": "Wattle Creek Energy Hub - Solar / BESS",
+        "technology": "hybrid",
+        "state": "NSW",
+        "status": "development",
+        "capacity_mw": 180.0,
+        "cod_current": "2029-12-01",
+        "cod_original": "2028-12-01",
+        "drift_months": 12.2
       }
     ],
     "Infrastructure Capital Group": [
@@ -15072,18 +15081,7 @@
         "drift_months": 0.0
       }
     ],
-    "Gamuda Renewables Australia + Alternate Path (JV)": [
-      {
-        "id": "cellars-hill-wind-farm",
-        "name": "Cellars Hill Wind Farm",
-        "technology": "wind",
-        "state": "TAS",
-        "status": "development",
-        "capacity_mw": 341.0,
-        "cod_current": "2028-12",
-        "cod_original": null,
-        "drift_months": null
-      },
+    "Weasel Solar Farm P/L": [
       {
         "id": "weasel-solar-farm-and-bess-kci",
         "name": "Weasel Solar Farm And BESS - KCI",
@@ -15169,9 +15167,9 @@
         "state": "QLD",
         "status": "commissioning",
         "capacity_mw": 510.0,
-        "cod_current": "2025-12-19",
+        "cod_current": "2026-03-31",
         "cod_original": "2025-12-19",
-        "drift_months": 0.0
+        "drift_months": 3.4
       }
     ],
     "Western Downs Green Power Hub Pty Ltd": [
@@ -15278,7 +15276,7 @@
         "drift_months": null
       }
     ],
-    "EDF Renewables Australia": [
+    "WP Renewables Ltd": [
       {
         "id": "whyte-yarcowie",
         "name": "Whyte Yarcowie",
@@ -15286,22 +15284,9 @@
         "state": "SA",
         "status": "development",
         "capacity_mw": 574.4,
-        "cod_current": "2030-01-01",
+        "cod_current": "2030-01",
         "cod_original": "2030-01-01",
-        "drift_months": 0.0
-      }
-    ],
-    "ENGIE (Wind Prospect WA developer partner)": [
-      {
-        "id": "willatook",
-        "name": "Willatook",
-        "technology": "hybrid",
-        "state": "VIC",
-        "status": "development",
-        "capacity_mw": 450.0,
-        "cod_current": "2027-08-01",
-        "cod_original": "2027-08-01",
-        "drift_months": 0.0
+        "drift_months": null
       }
     ],
     "X-Elio Willavale Park Trust": [
@@ -15533,9 +15518,9 @@
         "state": "VIC",
         "status": "development",
         "capacity_mw": 70.0,
-        "cod_current": "2028-09",
+        "cod_current": "2028-09-20",
         "cod_original": "2028-09-20",
-        "drift_months": null
+        "drift_months": 0.0
       }
     ],
     "Lightsource BP": [
@@ -15729,7 +15714,7 @@
         "status": "operating",
         "capacity_mw": 700.0,
         "cod_current": "2025-12",
-        "cod_original": null,
+        "cod_original": "2027-03-31",
         "drift_months": null
       }
     ],
@@ -15742,7 +15727,7 @@
         "status": "development",
         "capacity_mw": 108.0,
         "cod_current": "2028-06",
-        "cod_original": null,
+        "cod_original": "2028-06",
         "drift_months": null
       }
     ],
@@ -15755,7 +15740,7 @@
         "status": "development",
         "capacity_mw": 400.0,
         "cod_current": "2029-01",
-        "cod_original": null,
+        "cod_original": "2029-01",
         "drift_months": null
       }
     ],
@@ -15768,7 +15753,20 @@
         "status": "development",
         "capacity_mw": 171.0,
         "cod_current": "2028-06",
-        "cod_original": null,
+        "cod_original": "2028-06",
+        "drift_months": null
+      }
+    ],
+    "Gamuda Renewables Australia + Alternate Path (JV)": [
+      {
+        "id": "cellars-hill-wind-farm",
+        "name": "Cellars Hill Wind Farm",
+        "technology": "wind",
+        "state": "TAS",
+        "status": "development",
+        "capacity_mw": 341.0,
+        "cod_current": "2028-12",
+        "cod_original": "2028-12",
         "drift_months": null
       }
     ]
@@ -15800,7 +15798,7 @@
         "source_url": "https://www.naif.gov.au/our-projects/genex-kidston-pumped-hydro-storage-project/"
       }
     ],
-    "Cubico Sustainable Investments / Stanwell Corporation (50:50 JV)": [
+    "Cubico Sustainable Investments Australia Pty Ltd": [
       {
         "scheme": "QLD RE&H Jobs Fund",
         "round": "",
@@ -15842,7 +15840,7 @@
         "source_url": "https://www.csenergy.com.au/news/cs-energy-acquires-lotus-creek-wind-farm"
       }
     ],
-    "Aula Energy (100% post-FC Dec 2025)": [
+    "Georgetown Hills Renewable Energy Pty Ltd as trustee for the Georgetown Hills Renewable Energy Trust": [
       {
         "scheme": "CIS",
         "round": "Tender 4",
@@ -16004,7 +16002,7 @@
         "source_url": "https://acenrenewables.com.au/project/new-england-solar/"
       }
     ],
-    "RWE Renewables Australia": [
+    "LIMONDALE BATTERY PTY. LTD": [
       {
         "scheme": "NSW LTESA",
         "round": "Long Duration Storage",
@@ -33271,7 +33269,7 @@
         "source_url": null
       }
     ],
-    "Cubico Sustainable Investments / Stanwell Corporation (50:50 JV)": [
+    "Cubico Sustainable Investments Australia Pty Ltd": [
       {
         "counterparty": "Shell Energy",
         "offtake_type": "PPA",
@@ -33833,5 +33831,5 @@
       }
     ]
   },
-  "exported_at": "2026-07-18T19:51:26.073283"
+  "exported_at": "2026-07-26T13:12:26.079389"
 }

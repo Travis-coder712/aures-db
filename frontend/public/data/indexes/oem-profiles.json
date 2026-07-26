@@ -4,7 +4,7 @@
       "slug": "vestas",
       "name": "Vestas",
       "project_count": 32,
-      "total_capacity_mw": 8406.4,
+      "total_capacity_mw": 8400.4,
       "total_storage_mwh": 0,
       "roles": [
         "wind_oem"
@@ -32,8 +32,8 @@
         "wind": 32
       },
       "by_status": {
-        "commissioning": 3,
-        "construction": 2,
+        "commissioning": 2,
+        "construction": 3,
         "operating": 27
       },
       "by_state": {
@@ -86,13 +86,13 @@
       ],
       "status_detail": {
         "commissioning": {
-          "count": 3,
-          "capacity_mw": 2849.0,
+          "count": 2,
+          "capacity_mw": 2343.0,
           "storage_mwh": 0
         },
         "construction": {
-          "count": 2,
-          "capacity_mw": 862.0,
+          "count": 3,
+          "capacity_mw": 1362.0,
           "storage_mwh": 0
         },
         "operating": {
@@ -109,7 +109,7 @@
         },
         "QLD": {
           "count": 5,
-          "capacity_mw": 1304.1,
+          "capacity_mw": 1298.1,
           "storage_mwh": 0
         },
         "NSW": {
@@ -155,9 +155,9 @@
         "bess": 33
       },
       "by_status": {
-        "operating": 20,
+        "operating": 19,
         "commissioning": 5,
-        "construction": 8
+        "construction": 9
       },
       "by_state": {
         "VIC": 10,
@@ -199,9 +199,9 @@
       ],
       "status_detail": {
         "operating": {
-          "count": 20,
-          "capacity_mw": 3238.0,
-          "storage_mwh": 6255.4
+          "count": 19,
+          "capacity_mw": 3188.0,
+          "storage_mwh": 5855.4
         },
         "commissioning": {
           "count": 5,
@@ -209,9 +209,9 @@
           "storage_mwh": 3981.3
         },
         "construction": {
-          "count": 8,
-          "capacity_mw": 1761.0,
-          "storage_mwh": 4149.0
+          "count": 9,
+          "capacity_mw": 1811.0,
+          "storage_mwh": 4549.0
         }
       },
       "state_detail": {
@@ -241,7 +241,7 @@
       "slug": "ge-vernova",
       "name": "GE Vernova",
       "project_count": 12,
-      "total_capacity_mw": 3901.8,
+      "total_capacity_mw": 3892.8,
       "total_storage_mwh": 2600.0,
       "roles": [
         "inverter",
@@ -294,7 +294,7 @@
       "status_detail": {
         "construction": {
           "count": 3,
-          "capacity_mw": 898.0,
+          "capacity_mw": 889.0,
           "storage_mwh": 0
         },
         "operating": {
@@ -311,7 +311,7 @@
         },
         "SA": {
           "count": 3,
-          "capacity_mw": 668.5,
+          "capacity_mw": 659.5,
           "storage_mwh": 0
         },
         "QLD": {
@@ -4915,7 +4915,7 @@
         "bess": 1
       },
       "by_status": {
-        "operating": 1
+        "construction": 1
       },
       "by_state": {
         "NSW": 1
@@ -4927,7 +4927,7 @@
         "limondale-bess"
       ],
       "status_detail": {
-        "operating": {
+        "construction": {
           "count": 1,
           "capacity_mw": 50.0,
           "storage_mwh": 400.0
@@ -4955,7 +4955,7 @@
         "bess": 1
       },
       "by_status": {
-        "operating": 1
+        "construction": 1
       },
       "by_state": {
         "NSW": 1
@@ -4967,7 +4967,7 @@
         "limondale-bess"
       ],
       "status_detail": {
-        "operating": {
+        "construction": {
           "count": 1,
           "capacity_mw": 50.0,
           "storage_mwh": 400.0

@@ -7,7 +7,7 @@
   "storage_mwh": 1048.8,
   "state": "NSW",
   "current_developer": "Wattle Creek Energy Hub P/L",
-  "cod_current": "2028-12-01",
+  "cod_current": "2029-12-01",
   "cod_original": "2028-12-01",
   "connection_status": "proposed",
   "grid_forming": false,
@@ -20,7 +20,7 @@
   "last_verified": "2026-05-25",
   "aemo_gen_info_id": "2635",
   "confidence_score": "36",
-  "development_stage": "epbc_submitted",
+  "development_stage": "planning_submitted",
   "first_seen": "2024",
   "timeline": [
     {
@@ -37,6 +37,14 @@
       "event_type": "cod_change",
       "title": "COD estimate updated",
       "detail": "COD changed from 2028-12 to 2028-12-01 (source: AEMO Generation Information)",
+      "sources": []
+    },
+    {
+      "date": "2026-07-25",
+      "date_precision": "day",
+      "event_type": "cod_change",
+      "title": "COD estimate updated",
+      "detail": "COD changed from 2028-12-01 to 2029-12-01 (source: AEMO Generation Information)",
       "sources": []
     }
   ],

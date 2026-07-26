@@ -7,7 +7,7 @@
   "storage_mwh": 455.6,
   "state": "NSW",
   "current_developer": "brightnightpower_NR",
-  "cod_current": "2030-11-01",
+  "cod_current": "2032-09-01",
   "cod_original": "2030-11-01",
   "connection_status": "proposed",
   "grid_forming": false,
@@ -29,6 +29,14 @@
       "event_type": "cod_change",
       "title": "COD estimate updated",
       "detail": "COD changed from 2030-11 to 2030-11-01 (source: AEMO Generation Information)",
+      "sources": []
+    },
+    {
+      "date": "2026-07-25",
+      "date_precision": "day",
+      "event_type": "cod_change",
+      "title": "COD estimate updated",
+      "detail": "COD changed from 2030-11-01 to 2032-09-01 (source: AEMO Generation Information)",
       "sources": []
     }
   ],

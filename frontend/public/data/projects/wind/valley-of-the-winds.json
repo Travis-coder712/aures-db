@@ -7,7 +7,7 @@
   "state": "NSW",
   "rez": "nsw-central-west-orana",
   "current_developer": "ACEN Renewables",
-  "cod_current": "2029-12-31",
+  "cod_current": "2030-07-31",
   "cod_original": "2029-12-31",
   "connection_status": "anticipated",
   "grid_forming": false,
@@ -20,7 +20,7 @@
   "last_verified": "2026-05-23",
   "aemo_gen_info_id": "2892",
   "confidence_score": "39",
-  "development_stage": "epbc_submitted",
+  "development_stage": "planning_submitted",
   "first_seen": "2020",
   "rez_access_status": "granted",
   "rez_access_mw": 919.0,
@@ -81,6 +81,14 @@
       "event_type": "cod_change",
       "title": "COD estimate updated",
       "detail": "COD changed from 2029-12 to 2029-12-31 (source: AEMO Generation Information)",
+      "sources": []
+    },
+    {
+      "date": "2026-07-25",
+      "date_precision": "day",
+      "event_type": "cod_change",
+      "title": "COD estimate updated",
+      "detail": "COD changed from 2029-12-31 to 2030-07-31 (source: AEMO Generation Information)",
       "sources": []
     }
   ],

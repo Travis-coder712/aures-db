@@ -1,8 +1,50 @@
 # AURES — Next Session Handoff
 
-**Last refreshed:** 2026-07-19
-**Latest shipped version:** v3.22.4 (Items C+D+E bundled: 4 data-gap records + T9 Lens 1 hardening + 8 COD-review candidates verified — this session pending commit) — prior: v3.22.3
+**Last refreshed:** 2026-07-26
+**Latest shipped version:** v3.22.4 (Items C+D+E bundled — shipped as commit `91ea1ae7`, Studio bump `6ac2ea9`). Working-tree: unshipped data-integrity workstream — AEMO GI + source_references idempotency + pytest suite, awaiting a v3.23.0 commit.
 **Purpose:** Single-place brief for the next session. Cold-readable — pair with `docs/SESSION_OPENER.md` and `docs/INTELLIGENCE_LAYER_PLAN.md`.
+
+---
+
+## Data integrity and project taxonomy backlog
+
+Discovered / re-observed during the 2026-07-26 data-integrity audit. Grouped for the next couple of sessions to work through.
+
+### Landed this session (pending commit as v3.23.0)
+
+- **AEMO Generation Information importer idempotency** — root cause: `import_aemo_gen_info.py` used plain `INSERT` with no natural key, and `import_date=date('now')` as the only partition. Same file re-imported 5× since March = 13,238 rows against a true universe of ~1,321. Fix: added `snapshot` (from filename), `unit_name` (col 9 in the workbook — distinguishes hydro units), `unit_count`, `unit_capacity_mw_ac`, `agg_nameplate_mw_ac` columns. UNIQUE index on `(snapshot, station_name, COALESCE(duid,''), COALESCE(unit_name,''))`. `INSERT ... ON CONFLICT DO UPDATE`. Verified idempotent: same file twice = zero net delta. DB rebuilt cleanly to 1,319 rows (2 rows are byte-for-byte duplicates in AEMO's own workbook — Tumuruu One and Cordoba/Zero Moorabool KCI unit MBESS_GU1). Live BESS records leaderboard was NOT actually mis-serving numbers (the SUM was dead SQL). See §archive below.
+- **`source_references` deduplicated** — same importer had a secondary INSERT OR IGNORE against a table with no UNIQUE(url) — 1,059 dupes of the AEMO GI URL alone. Also caught the latent `cursor.lastrowid == 0 when IGNORE fires` bug that would have skipped every new project's source-link after the first. Repaired: 1,337 → 279 source_references rows, 1,348 → 1,347 project_sources rows (1 was a real dup collapsed by PK). UNIQUE(url) added.
+- **`populate_cod_from_aemo` query hardened** — `GROUP BY p.id ORDER BY ... DESC` on a bare column is SQLite-implementation-defined. Rewrote as `MAX(full_year_commissioning)` — deterministic. Applied 87 COD updates (mostly precision upgrades month → day; some real drift catches — Colosseum, Derby, Dinawan, Eraring, Gawara Baya).
+- **`data/gi_snapshots/` archive** — every ingested AEMO GI workbook is now checked into git as `gi-YYYY-MM.xlsx`. Importer prefers the archive over re-downloading. Currently holds `gi-2025-10.xlsx`, `gi-2026-01.xlsx`, `gi-2026-04.xlsx`.
+- **`pipeline/tests/` pytest suite** — 4 tests covering AEMO GI importer idempotency, row-count vs source, natural-key uniqueness, project_id referential integrity. Runs against a fresh temp DB via `python3 -m pytest pipeline/tests -v`. Runner documented in `docs/SESSION_OPENER.md` §15b.
+- **DB backup preserved** as `database/aures.db.bak-2026-07-25-pre-aemo-gi-migration` (4.3 GB). Delete once v3.23.0 is verified in prod.
+
+### Data ingest opportunity — flag not urgent
+
+- **AEMO published `apr-2026` GI workbook**; AURES still at `jan-2026`. Workbook already downloaded to `data/gi_snapshots/gi-2026-04.xlsx`. To ingest, the importer needs a `--snapshot 2026-04` flag (currently pinned to `AEMO_URL`). Would double `aemo_generation_info` row count (1,319 more rows for the new snapshot) and refresh `projects.status`, `capacity_mw`, `connection_status`. Small refactor + one importer run.
+
+### Importer-audit follow-ups (from 2026-07-26 audit of 24 importers)
+
+- **`harvest_facility_metadata.py`** — no DB-level UNIQUE on `timeline_events`; relies on Python `SELECT-first` for dedup. Currently clean but fragile. Suggest `UNIQUE(project_id, event_type, data_source) WHERE data_source IS NOT NULL AND data_source != 'manual'`.
+- **`import_energyco_rez_access.py`** timeline dedup uses `detail LIKE '%<id>%'` — works but breaks silently if the detail template changes.
+- **`import_dispatchload.py`** and **`import_nemweb_bids.py`** use `INSERT OR IGNORE` (first-write-wins) — safe from dupes but won't refresh a changed source row. Fine for immutable historical dispatch data; risk only if AEMO retroactively revises a row.
+
+### Schema drift (untouched — carrying forward)
+
+- **`database/schema.sql` is out of date in multiple places.** Every ALTER I did this session was mirrored back into schema.sql, but there is older drift not yet reconciled. Full drift audit is a separate small task — run `sqlite3 database/aures.db ".schema <table>"` against every table and diff with schema.sql.
+- **`projects.data_confidence = 'confirmed'`** appears in overlays and DB rows despite the `CHECK` constraint that (per the schema comment) is supposed to restrict it to `low/medium/good/high`. Two possible fixes: broaden the CHECK to include `confirmed`, or migrate `confirmed` values to `high`. Decide the semantic first, then code.
+- **`projects.development_score` is NULL for all 1,068 rows.** Either the column is unused (delete it) or a computation was planned and never landed (implement it or drop it).
+
+### Project taxonomy rework (larger effort — read before touching)
+
+- **`projects.status`** currently conflates three orthogonal signals: development stage (planning / EIS / EPBC / committed / construction / commissioning / operating), credibility (has an EPC contract? has a PPA? has a CISA?), and liveness (still tracked / withdrawn / terminated / mothballed / dormant).
+- The AEMO-derived count is skewed: **781 `development`, 0 `withdrawn`.** Withdrawn projects are silently absorbed into `development` because AEMO drops them without an "announced withdrawal" marker in most cases.
+- **Evidence-ledger design** — first-cut design lives in `docs/ARCHITECTURE.md §8`. Idea: replace single `status` with an append-only ledger of dated evidence (EIS submitted, EPBC granted, CISA signed, FID PR, construction photo, dispatch data appearing), and derive stage + credibility + liveness on the fly. Read that section before rearchitecting anything.
+
+### News ingest stalled
+
+- **`news_articles.MAX(date) = 2026-06-17`** — no new rows in five weeks. `import_news_rss.py` is the ingest. Something in the feed set has silently broken (probably a source URL 404 or a rate-limit). **WattClarity, in particular, is absent from `news_sources` altogether** — Travis has flagged that as the single highest-signal industry source and it should be added.
+- Rerun: `python3 pipeline/importers/import_news_rss.py` and watch the log.
 
 ---
 

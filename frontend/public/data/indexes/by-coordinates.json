@@ -218,17 +218,6 @@
     "developer": "Western Downs BESS Pty Ltd as trustee for Western Downs BESS Trust"
   },
   {
-    "id": "wambo-wind-farm",
-    "name": "Wambo Wind Farm",
-    "technology": "wind",
-    "status": "commissioning",
-    "capacity_mw": 506.0,
-    "state": "QLD",
-    "lat": -26.648,
-    "lng": 151.306,
-    "developer": "Cubico Sustainable Investments / Stanwell Corporation (50:50 JV)"
-  },
-  {
     "id": "liddell-bess",
     "name": "Liddell BESS",
     "technology": "bess",
@@ -251,6 +240,17 @@
     "lat": -32.865,
     "lng": 151.612,
     "developer": "AGL"
+  },
+  {
+    "id": "wambo-wind-farm",
+    "name": "Wambo Wind Farm",
+    "technology": "wind",
+    "status": "construction",
+    "capacity_mw": 500.0,
+    "state": "QLD",
+    "lat": -26.648,
+    "lng": 151.306,
+    "developer": "Cubico Sustainable Investments Australia Pty Ltd"
   },
   {
     "id": "coopers-gap-wind-farm",
@@ -731,17 +731,6 @@
     "developer": "Snowtown Wind Farm Stage 2 Pty Ltd"
   },
   {
-    "id": "carmodys-hill-wind-farm",
-    "name": "Carmodys Hill Wind Farm",
-    "technology": "wind",
-    "status": "construction",
-    "capacity_mw": 256.0,
-    "state": "SA",
-    "lat": -33.54,
-    "lng": 138.58,
-    "developer": "Aula Energy (100% post-FC Dec 2025)"
-  },
-  {
     "id": "gnarwarre-bess-facility",
     "name": "Gnarwarre BESS Facility",
     "technology": "bess",
@@ -757,7 +746,7 @@
     "id": "goorambat-east-solar-farm-engie",
     "name": "Goorambat East Solar Farm (ENGIE)",
     "technology": "solar",
-    "status": "commissioning",
+    "status": "construction",
     "capacity_mw": 250.0,
     "state": "VIC",
     "lat": -36.55,
@@ -811,6 +800,17 @@
     "lat": -35.45,
     "lng": 149.1,
     "developer": "Eku Energy (Macquarie / BCIM)"
+  },
+  {
+    "id": "carmodys-hill-wind-farm",
+    "name": "Carmodys Hill Wind Farm",
+    "technology": "wind",
+    "status": "construction",
+    "capacity_mw": 247.0,
+    "state": "SA",
+    "lat": -33.54,
+    "lng": 138.58,
+    "developer": "Georgetown Hills Renewable Energy Pty Ltd as trustee for the Georgetown Hills Renewable Energy Trust"
   },
   {
     "id": "shoalhaven",
@@ -1648,12 +1648,12 @@
     "id": "munna-creek-solar-farm",
     "name": "Munna Creek Solar Farm",
     "technology": "solar",
-    "status": "operating",
+    "status": "construction",
     "capacity_mw": 120.0,
     "state": "QLD",
     "lat": -25.92,
     "lng": 151.83,
-    "developer": "Metlen (ex-Mytilineos)"
+    "developer": "Munna Creek Solar Farm Investments Pty Ltd as trustee for the Munna Creek Solar Farm Trust"
   },
   {
     "id": "winton-bess",
@@ -1832,17 +1832,6 @@
     "lat": -33.05982,
     "lng": 138.537673,
     "developer": "HWF 3 Pty Ltd"
-  },
-  {
-    "id": "lancaster-solar-farm",
-    "name": "Lancaster Solar Farm",
-    "technology": "solar",
-    "status": "operating",
-    "capacity_mw": 108.0,
-    "state": "VIC",
-    "lat": -36.48,
-    "lng": 144.76,
-    "developer": "European Energy"
   },
   {
     "id": "port-augusta-renewable-energy-park-solar",
@@ -2113,17 +2102,6 @@
     "lat": -33.691598,
     "lng": 138.166022,
     "developer": "Snowtown Wind Farm Pty Ltd"
-  },
-  {
-    "id": "bundaberg-solar-farm",
-    "name": "Bundaberg Solar Farm",
-    "technology": "solar",
-    "status": "operating",
-    "capacity_mw": 96.0,
-    "state": "QLD",
-    "lat": -24.87,
-    "lng": 152.35,
-    "developer": "Naturgy / GPG (Global Power Generation)"
   },
   {
     "id": "tailem-bend-solar",
@@ -2435,6 +2413,17 @@
     "developer": "Snowy Hydro Ltd"
   },
   {
+    "id": "lancaster-solar-farm",
+    "name": "Lancaster Solar Farm",
+    "technology": "solar",
+    "status": "construction",
+    "capacity_mw": 80.0,
+    "state": "VIC",
+    "lat": -36.48,
+    "lng": 144.76,
+    "developer": "Lancaster Solar Farm Pty Ltd as trustee for the Lancaster Solar Farm Trust"
+  },
+  {
     "id": "quorn-park-solar-hybrid",
     "name": "Quorn Park Solar Hybrid",
     "technology": "hybrid",
@@ -2456,6 +2445,17 @@
     "lat": -36.97615,
     "lng": 143.097998,
     "developer": "Pacific Hydro Crowlands Pty Ltd"
+  },
+  {
+    "id": "bundaberg-solar-farm",
+    "name": "Bundaberg Solar Farm",
+    "technology": "solar",
+    "status": "construction",
+    "capacity_mw": 78.0,
+    "state": "QLD",
+    "lat": -24.87,
+    "lng": 152.35,
+    "developer": "Bundaberg Development Pty Ltd"
   },
   {
     "id": "girgarre-solar-farm",

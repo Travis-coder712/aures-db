@@ -37,6 +37,10 @@ import openpyxl
 
 DOWNLOAD_DIR = os.path.join(os.path.dirname(__file__), 'downloads')
 CONFIG_DIR = os.path.join(os.path.dirname(__file__), '..', 'config')
+# Archive of AEMO GI workbooks — one file per release, checked into git.
+# The importer prefers files here over re-downloading so a snapshot can be
+# reproduced from git history even if AEMO removes an older release.
+SNAPSHOT_DIR = os.path.join(os.path.dirname(__file__), '..', '..', 'data', 'gi_snapshots')
 
 def load_consolidated_projects():
     """Load the consolidated projects config — AEMO IDs and slugs that have
@@ -52,6 +56,33 @@ def load_consolidated_projects():
     }
 AEMO_URL = 'https://www.aemo.com.au/-/media/files/electricity/nem/planning_and_forecasting/generation_information/2026/nem-generation-information-jan-2026.xlsx'
 MIN_CAPACITY_MW = 30  # Only import sites >= 30 MW
+
+_AEMO_MONTH_ABBR = {
+    'jan': '01', 'feb': '02', 'mar': '03', 'apr': '04',
+    'may': '05', 'jun': '06', 'jul': '07', 'aug': '08',
+    'sep': '09', 'oct': '10', 'nov': '11', 'dec': '12',
+}
+
+
+def snapshot_from_filename(name: str) -> str:
+    """Derive an AEMO release label from the workbook filename.
+
+    Handles two forms:
+      'nem-generation-information-jan-2026.xlsx' -> '2026-01'  (AEMO original)
+      'gi-2026-01.xlsx'                          -> '2026-01'  (archived copy)
+    This is the stable partition key for aemo_generation_info — a re-import of
+    the same release must UPSERT into the same rows, not append new ones.
+    """
+    lname = name.lower()
+    # Archived form first (unambiguous)
+    m = re.search(r'gi-(\d{4})-(\d{2})\.xlsx$', lname)
+    if m:
+        return f'{m.group(1)}-{m.group(2)}'
+    # AEMO original form
+    m = re.search(r'(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)-(\d{4})', lname)
+    if m:
+        return f'{m.group(2)}-{_AEMO_MONTH_ABBR[m.group(1)]}'
+    raise ValueError(f'Cannot derive AEMO snapshot label from filename: {name}')
 
 # Map AEMO regions to Australian states
 REGION_TO_STATE = {
@@ -382,9 +413,18 @@ def filter_sites(sites: dict) -> dict:
     return filtered
 
 
-def import_to_database(sites: dict, source_file: str):
-    """Import filtered sites into the AURES database."""
-    conn = init_db()
+def import_to_database(sites: dict, source_file: str, conn=None):
+    """Import filtered sites into the AURES database.
+
+    If `conn` is provided (e.g. from a test) it is used and left open for
+    the caller. Otherwise the production DB is opened and closed here.
+    """
+    owns_conn = conn is None
+    if owns_conn:
+        conn = init_db()
+
+    snapshot = snapshot_from_filename(os.path.basename(source_file))
+    print(f"  Snapshot label: {snapshot}")
 
     # Start an import run
     cursor = conn.execute(
@@ -549,17 +589,20 @@ def import_to_database(sites: dict, source_file: str):
                 connection_status,
             ))
 
-            # Add AEMO as a source
-            src_cursor = conn.execute(
+            # Add AEMO as a source. INSERT OR IGNORE + SELECT is the reliable
+            # way to get the canonical id — cursor.lastrowid is 0 when IGNORE
+            # fires (the URL already exists), so we always look it up.
+            conn.execute(
                 "INSERT OR IGNORE INTO source_references (title, url, date, source_tier) VALUES (?, ?, ?, ?)",
                 ('AEMO Generation Information Jan 2026', aemo_source_url, '2026-01-30', 1)
             )
-            src_id = src_cursor.lastrowid
-            if src_id:
-                conn.execute(
-                    "INSERT OR IGNORE INTO project_sources (project_id, source_id) VALUES (?, ?)",
-                    (final_slug, src_id)
-                )
+            src_id = conn.execute(
+                "SELECT id FROM source_references WHERE url = ?", (aemo_source_url,)
+            ).fetchone()[0]
+            conn.execute(
+                "INSERT OR IGNORE INTO project_sources (project_id, source_id) VALUES (?, ?)",
+                (final_slug, src_id)
+            )
 
             new_count += 1
             existing[final_slug] = {'aemo_gen_info_id': sid, 'data_confidence': 'low'}
@@ -568,22 +611,49 @@ def import_to_database(sites: dict, source_file: str):
         project_slug = existing_pid if existing_pid else final_slug
 
         for unit in site['units']:
+            resolved_project_id = project_slug if isinstance(project_slug, str) else slug
             conn.execute("""
                 INSERT INTO aemo_generation_info (
-                    station_name, duid, region, fuel_type, technology_type,
+                    snapshot, station_name, duid, unit_name,
+                    region, fuel_type, technology_type,
                     unit_size_mw, registered_capacity_mw, max_capacity_mw,
+                    unit_count, unit_capacity_mw_ac, agg_nameplate_mw_ac,
                     status, classification, dispatch_type, owner,
                     expected_storage_mwh, full_year_commissioning,
                     project_id, source_file
-                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                ON CONFLICT(snapshot, station_name, COALESCE(duid, ''), COALESCE(unit_name, ''))
+                DO UPDATE SET
+                    region                   = excluded.region,
+                    fuel_type                = excluded.fuel_type,
+                    technology_type          = excluded.technology_type,
+                    unit_size_mw             = excluded.unit_size_mw,
+                    registered_capacity_mw   = excluded.registered_capacity_mw,
+                    max_capacity_mw          = excluded.max_capacity_mw,
+                    unit_count               = excluded.unit_count,
+                    unit_capacity_mw_ac      = excluded.unit_capacity_mw_ac,
+                    agg_nameplate_mw_ac      = excluded.agg_nameplate_mw_ac,
+                    status                   = excluded.status,
+                    classification           = excluded.classification,
+                    dispatch_type            = excluded.dispatch_type,
+                    owner                    = excluded.owner,
+                    expected_storage_mwh     = excluded.expected_storage_mwh,
+                    full_year_commissioning  = excluded.full_year_commissioning,
+                    project_id               = COALESCE(NULLIF(excluded.project_id, ''), aemo_generation_info.project_id),
+                    source_file              = excluded.source_file
             """, (
+                snapshot,
                 site['name'],
                 unit['duid'] or None,
+                unit['unit_name'] or None,
                 site['region'],
                 unit['tech_type'],
                 unit['tech_detail'],
                 unit['unit_capacity_ac'],
                 unit['agg_capacity_ac'],
+                unit['agg_capacity_ac'],
+                unit['unit_count'] if unit['unit_count'] else None,
+                unit['unit_capacity_ac'],
                 unit['agg_capacity_ac'],
                 unit['commitment_status'],
                 unit['dispatch_type'],
@@ -591,7 +661,7 @@ def import_to_database(sites: dict, source_file: str):
                 site['owner'],
                 unit['agg_storage_mwh'] if unit['agg_storage_mwh'] > 0 else None,
                 unit['fcud'] or None,
-                project_slug if isinstance(project_slug, str) else slug,
+                resolved_project_id,
                 os.path.basename(source_file),
             ))
 
@@ -632,7 +702,8 @@ def import_to_database(sites: dict, source_file: str):
     total_projects = conn.execute("SELECT COUNT(*) as c FROM projects").fetchone()['c']
     print(f"\n  Total projects in database: {total_projects}")
 
-    conn.close()
+    if owns_conn:
+        conn.close()
     return new_count, updated_count
 
 
@@ -640,16 +711,39 @@ def import_to_database(sites: dict, source_file: str):
 # Entry point
 # ============================================================
 
+def resolve_workbook(url: str) -> str:
+    """Return a path to the AEMO GI workbook, preferring the checked-in archive.
+
+    Order of preference:
+      1. data/gi_snapshots/gi-<snapshot>.xlsx — the git-tracked archive
+      2. pipeline/importers/downloads/<url_filename> — a prior download
+      3. Download fresh from AEMO to (2), then copy into (1)
+    """
+    filename = url.split('/')[-1]
+    snapshot = snapshot_from_filename(filename)
+    archived = os.path.join(SNAPSHOT_DIR, f'gi-{snapshot}.xlsx')
+    if os.path.exists(archived):
+        print(f"  Using archived snapshot: {archived}")
+        return archived
+    fallback = os.path.join(DOWNLOAD_DIR, filename)
+    download_file(url, fallback)
+    # Promote a fresh download into the archive so future runs can re-use it.
+    os.makedirs(SNAPSHOT_DIR, exist_ok=True)
+    if not os.path.exists(archived):
+        import shutil
+        shutil.copy2(fallback, archived)
+        print(f"  Archived to {archived}")
+    return archived
+
+
 def main():
     print("=" * 60)
     print("AEMO Generation Information Importer")
     print("=" * 60)
 
-    # Download file
-    filename = AEMO_URL.split('/')[-1]
-    filepath = os.path.join(DOWNLOAD_DIR, filename)
-    print(f"\n[1/4] Checking for Excel file...")
-    download_file(AEMO_URL, filepath)
+    # Resolve workbook — prefer git-tracked archive, else download.
+    print(f"\n[1/4] Resolving workbook...")
+    filepath = resolve_workbook(AEMO_URL)
 
     # Parse
     print(f"\n[2/4] Parsing Excel file...")

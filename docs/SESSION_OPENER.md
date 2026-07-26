@@ -479,6 +479,26 @@ new `last_run` date.
 
 ---
 
+## 15b. Pipeline tests
+
+A small pytest suite lives at `pipeline/tests/`. It runs against a fresh
+SQLite DB in a temp path — never the production `database/aures.db` —
+and uses the checked-in `data/gi_snapshots/gi-2026-01.xlsx` as its
+fixture. Add tests here whenever you touch an importer.
+
+```bash
+cd /Users/travishughes/aures-db
+export PATH="$HOME/Library/Python/3.9/bin:$PATH"   # first time only
+python3 -m pytest pipeline/tests -v
+```
+
+Current coverage: `import_aemo_gen_info.py` — idempotency, row count vs
+source, natural-key uniqueness, project_id referential integrity.
+
+If pytest is missing: `python3 -m pip install --user pytest`.
+
+---
+
 ## 16. Authoritative docs (read in this order)
 
 1. **`docs/INTELLIGENCE_LAYER_PLAN.md`** — release log + ongoing plan.

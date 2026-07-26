@@ -39,7 +39,7 @@
       "slug": "shell-energy",
       "name": "Shell Energy",
       "project_count": 4,
-      "total_capacity_mw": 3433.1,
+      "total_capacity_mw": 3421.1,
       "types": [
         "PPA"
       ],
@@ -48,7 +48,8 @@
       },
       "by_status": {
         "operating": 2,
-        "commissioning": 3
+        "commissioning": 1,
+        "construction": 2
       },
       "states": [
         "QLD",
@@ -94,7 +95,7 @@
       "slug": "stanwell-corporation",
       "name": "Stanwell Corporation",
       "project_count": 3,
-      "total_capacity_mw": 2531.0,
+      "total_capacity_mw": 2525.0,
       "types": [
         "PPA"
       ],
@@ -102,7 +103,8 @@
         "wind": 3
       },
       "by_status": {
-        "commissioning": 3
+        "commissioning": 2,
+        "construction": 1
       },
       "states": [
         "QLD"

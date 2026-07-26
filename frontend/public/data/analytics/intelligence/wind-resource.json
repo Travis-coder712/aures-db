@@ -1270,7 +1270,7 @@
       "project_id": "carmodys-hill-wind-farm",
       "name": "Carmodys Hill Wind Farm",
       "state": "SA",
-      "capacity_mw": 256.0,
+      "capacity_mw": 247.0,
       "latitude": -33.54,
       "longitude": 138.58,
       "predicted_cf_pct": 25.7,
@@ -1418,15 +1418,6 @@
       "name": "Forsayth Wind Farm",
       "state": "QLD",
       "capacity_mw": 150.0,
-      "predicted_cf_pct": 35.8,
-      "predicted_rating": "Excellent",
-      "basis": "state_average"
-    },
-    {
-      "project_id": "gawara-baya-wind-and-bess",
-      "name": "Gawara Baya Wind And BESS",
-      "state": "QLD",
-      "capacity_mw": 400.0,
       "predicted_cf_pct": 35.8,
       "predicted_rating": "Excellent",
       "basis": "state_average"
@@ -2103,6 +2094,18 @@
       "basis": "state_average"
     },
     {
+      "project_id": "wambo-wind-farm",
+      "name": "Wambo Wind Farm",
+      "state": "QLD",
+      "rez": "Western Downs",
+      "capacity_mw": 500.0,
+      "latitude": -26.648,
+      "longitude": 151.306,
+      "predicted_cf_pct": 35.8,
+      "predicted_rating": "Excellent",
+      "basis": "state_average"
+    },
+    {
       "project_id": "warracknabeal-wind-farm",
       "name": "Warracknabeal Wind Farm",
       "state": "VIC",
@@ -2233,5 +2236,5 @@
   ],
   "total_operating": 80,
   "total_development": 129,
-  "exported_at": "2026-07-18T19:51:26.267188"
+  "exported_at": "2026-07-26T13:12:26.275725"
 }

@@ -91,7 +91,7 @@
     "current_developer": "ACEN Australia Pty Ltd",
     "data_confidence": "low",
     "confidence_score": "23",
-    "development_stage": "epbc_submitted",
+    "development_stage": "planning_submitted",
     "first_seen": "2023"
   },
   {
@@ -147,7 +147,7 @@
     "current_developer": "RES Australia Pty Ltd",
     "data_confidence": "low",
     "confidence_score": "23",
-    "development_stage": "epbc_approved",
+    "development_stage": "planning_submitted",
     "first_seen": "2025"
   },
   {
@@ -201,7 +201,7 @@
     "current_developer": "FRV",
     "data_confidence": "medium",
     "confidence_score": "28",
-    "development_stage": "epbc_submitted",
+    "development_stage": "planning_submitted",
     "first_seen": "2025",
     "has_scheme_contract": true
   },
@@ -402,7 +402,7 @@
     "current_developer": "Baldon Wind Farm Pty Ltd",
     "data_confidence": "medium",
     "confidence_score": "31",
-    "development_stage": "epbc_submitted",
+    "development_stage": "planning_submitted",
     "first_seen": "2024",
     "has_scheme_contract": true
   },
@@ -445,8 +445,8 @@
     "status": "development",
     "capacity_mw": 220.0,
     "state": "QLD",
-    "current_developer": "EDF Power Solutions Australia",
-    "data_confidence": "confirmed",
+    "current_developer": "Orange Creek Energy Pty Ltd",
+    "data_confidence": "low",
     "confidence_score": "23",
     "development_stage": "planning_submitted",
     "first_seen": "2026-03-12",
@@ -550,7 +550,7 @@
     "current_operator": "AGL Energy",
     "data_confidence": "medium",
     "confidence_score": "23",
-    "development_stage": "epbc_approved",
+    "development_stage": "planning_submitted",
     "first_seen": "2008",
     "zombie_flag": "zombie_stale"
   },
@@ -575,7 +575,7 @@
     "capacity_mw": 64.0,
     "storage_mwh": 6.38,
     "state": "VIC",
-    "current_developer": "Gentari (Petronas)",
+    "current_developer": "Barnawartha Solar Pty Ltd",
     "data_confidence": "low",
     "confidence_score": "20",
     "development_stage": "planning_submitted",
@@ -633,7 +633,7 @@
     "current_developer": "Goldwind Australia",
     "data_confidence": "low",
     "confidence_score": "23",
-    "development_stage": "epbc_submitted",
+    "development_stage": "planning_submitted",
     "first_seen": "2025"
   },
   {
@@ -768,7 +768,7 @@
     "current_developer": "Equis Energy (Australia) Projects (Ngumi 6) Pty Ltd as trustee for the Equis Energy(Australia) Ngumi 6 Asset Trust",
     "data_confidence": "medium",
     "confidence_score": "36",
-    "development_stage": "epbc_submitted",
+    "development_stage": "planning_submitted",
     "first_seen": "2024"
   },
   {
@@ -793,10 +793,9 @@
     "technology": "wind",
     "status": "development",
     "capacity_mw": 224.0,
-    "storage_mwh": 400.0,
     "state": "TAS",
-    "current_developer": "Equis",
-    "data_confidence": "confirmed",
+    "current_developer": "The Trustee for Equis Wind (Australia) LHWF2 Asset Trust",
+    "data_confidence": "low",
     "confidence_score": "23",
     "development_stage": "planning_submitted",
     "first_seen": "2026-03-12",
@@ -840,7 +839,7 @@
     "current_developer": "Athena Energy Australia (Holdings) Pty Ltd",
     "data_confidence": "low",
     "confidence_score": "23",
-    "development_stage": "epbc_submitted",
+    "development_stage": "planning_submitted",
     "first_seen": "2023"
   },
   {
@@ -1395,7 +1394,7 @@
     "current_developer": "Queensland Hydro",
     "data_confidence": "good",
     "confidence_score": "67",
-    "development_stage": "epbc_submitted",
+    "development_stage": "planning_submitted",
     "notable": "24-hour storage capacity. A$14-18B estimated cost. Exploratory works phase. Survived QLD government change.",
     "first_seen": "2023"
   },
@@ -1497,7 +1496,7 @@
     "current_developer": "ARK Energy Corporation Pty Ltd",
     "data_confidence": "low",
     "confidence_score": "23",
-    "development_stage": "epbc_approved",
+    "development_stage": "planning_submitted",
     "first_seen": "2025"
   },
   {
@@ -1716,7 +1715,7 @@
     "rez": "nsw-south-west",
     "data_confidence": "medium",
     "confidence_score": "39",
-    "development_stage": "epbc_submitted",
+    "development_stage": "planning_submitted",
     "first_seen": "2023",
     "has_scheme_contract": true
   },
@@ -1795,9 +1794,9 @@
     "status": "development",
     "capacity_mw": 97.0,
     "state": "QLD",
-    "current_developer": "European Energy Australia",
+    "current_developer": "EE Solar 9 Pty Ltd as trustee for the EE Solar 9 Trust",
     "rez": "Wide Bay",
-    "data_confidence": "confirmed",
+    "data_confidence": "low",
     "confidence_score": "23",
     "development_stage": "early_stage",
     "first_seen": "2026-03-12",
@@ -1820,11 +1819,11 @@
     "id": "bundaberg-solar-farm",
     "name": "Bundaberg Solar Farm",
     "technology": "solar",
-    "status": "operating",
-    "capacity_mw": 96.0,
+    "status": "construction",
+    "capacity_mw": 78.0,
     "state": "QLD",
-    "current_developer": "Naturgy / GPG (Global Power Generation)",
-    "data_confidence": "confirmed",
+    "current_developer": "Bundaberg Development Pty Ltd",
+    "data_confidence": "low",
     "confidence_score": "43",
     "notable": "CIS T1 candidate. Commissioned mid-2026 per pv-magazine 17 Jun 2026 \u2014 100% offtake to Telstra. SPV Bundaberg Development Pty Ltd is a GPG (Global Power Generation) SPV; Naturgy is ultimate parent. Capacity corrected 78 -> 96 MW 2026-07-18 per developer inauguration announcement.",
     "first_seen": "2026-03-12"
@@ -1838,7 +1837,7 @@
     "storage_mwh": 1200.0,
     "state": "SA",
     "current_developer": "Genaspi Energy Group Pty Ltd",
-    "data_confidence": "confirmed",
+    "data_confidence": "low",
     "confidence_score": "20",
     "development_stage": "planning_submitted",
     "has_scheme_contract": true
@@ -1864,10 +1863,10 @@
     "status": "development",
     "capacity_mw": 1400.0,
     "state": "QLD",
-    "current_developer": "Windlab (Squadron Energy)",
-    "data_confidence": "confirmed",
+    "current_developer": "Windlab Developments Pty Ltd",
+    "data_confidence": "low",
     "confidence_score": "31",
-    "development_stage": "epbc_submitted",
+    "development_stage": "planning_submitted",
     "first_seen": "2024",
     "has_scheme_contract": true
   },
@@ -2057,7 +2056,7 @@
     "current_developer": "ARK Energy Corporation Pty Ltd",
     "data_confidence": "low",
     "confidence_score": "23",
-    "development_stage": "epbc_submitted",
+    "development_stage": "planning_submitted",
     "first_seen": "2021"
   },
   {
@@ -2085,7 +2084,7 @@
     "current_developer": "Edify Energy Pty Ltd",
     "data_confidence": "medium",
     "confidence_score": "28",
-    "development_stage": "epbc_submitted",
+    "development_stage": "planning_submitted",
     "first_seen": "2025"
   },
   {
@@ -2170,7 +2169,7 @@
     "current_developer": "Edify Energy Pty Ltd",
     "data_confidence": "low",
     "confidence_score": "23",
-    "development_stage": "epbc_submitted",
+    "development_stage": "planning_submitted",
     "first_seen": "2024"
   },
   {
@@ -2196,7 +2195,7 @@
     "current_developer": "DP Green Energy Pty Limited",
     "data_confidence": "medium",
     "confidence_score": "31",
-    "development_stage": "epbc_approved",
+    "development_stage": "planning_submitted",
     "first_seen": "2021"
   },
   {
@@ -2365,7 +2364,7 @@
     "current_developer": "vestas_NR",
     "data_confidence": "medium",
     "confidence_score": "31",
-    "development_stage": "epbc_submitted",
+    "development_stage": "planning_submitted",
     "first_seen": "2025"
   },
   {
@@ -2387,10 +2386,10 @@
     "name": "Carmodys Hill Wind Farm",
     "technology": "wind",
     "status": "construction",
-    "capacity_mw": 256.0,
+    "capacity_mw": 247.0,
     "state": "SA",
-    "current_developer": "Aula Energy (100% post-FC Dec 2025)",
-    "data_confidence": "confirmed",
+    "current_developer": "Georgetown Hills Renewable Energy Pty Ltd as trustee for the Georgetown Hills Renewable Energy Trust",
+    "data_confidence": "low",
     "confidence_score": "65",
     "development_stage": "epbc_approved",
     "capex_aud_m": 900.0,
@@ -2482,6 +2481,7 @@
     "state": "TAS",
     "current_developer": "Gamuda Renewables Australia + Alternate Path (JV)",
     "data_confidence": "confirmed",
+    "development_stage": "early_stage",
     "notable": "CIS T7 award May 2026 (341 MW wind). JV between Gamuda Renewables Australia (subsidiary of Malaysian Gamuda Berhad) and Alternate Path (Tasmanian developer). Located Highland Lakes Rd near Bothwell, Central Highlands, ~1hr from Hobart. Shares site + 220 kV connection with sister Weasel Solar Farm. Both delivered via Gamuda Engineering EPC. Construction target 2028 (Weasel first early 2027). Only two Tasmanian T7 projects. Created 2026-07-18 to close v3.22.2 data gap.",
     "first_seen": "2026-07-18",
     "has_scheme_contract": true
@@ -2565,7 +2565,7 @@
     "current_developer": "juwi Renewable Energy Pty Ltd",
     "data_confidence": "low",
     "confidence_score": "23",
-    "development_stage": "epbc_approved",
+    "development_stage": "planning_submitted",
     "first_seen": "2019",
     "zombie_flag": "zombie_stale"
   },
@@ -2626,7 +2626,7 @@
     "current_developer": "First Solar Australia Pty Ltd",
     "data_confidence": "low",
     "confidence_score": "23",
-    "development_stage": "epbc_submitted",
+    "development_stage": "planning_submitted",
     "first_seen": "2017",
     "zombie_flag": "zombie_stale"
   },
@@ -2770,7 +2770,7 @@
     "rez": "nsw-central-west-orana",
     "data_confidence": "medium",
     "confidence_score": "31",
-    "development_stage": "epbc_submitted",
+    "development_stage": "planning_submitted",
     "first_seen": "2022"
   },
   {
@@ -3007,7 +3007,7 @@
     "current_developer": "Waldren Construction Pty Ltd.",
     "data_confidence": "low",
     "confidence_score": "23",
-    "development_stage": "epbc_approved",
+    "development_stage": "planning_submitted",
     "first_seen": "2006",
     "zombie_flag": "zombie_stale"
   },
@@ -3036,7 +3036,7 @@
     "current_developer": "ACEN RENEWABLES",
     "data_confidence": "medium",
     "confidence_score": "36",
-    "development_stage": "epbc_submitted",
+    "development_stage": "planning_submitted",
     "first_seen": "2025"
   },
   {
@@ -3063,7 +3063,7 @@
     "current_developer": "Rock Flat Renewables Pty Ltd",
     "data_confidence": "medium",
     "confidence_score": "36",
-    "development_stage": "epbc_submitted",
+    "development_stage": "planning_submitted",
     "first_seen": "2024"
   },
   {
@@ -3131,10 +3131,9 @@
     "technology": "solar",
     "status": "development",
     "capacity_mw": 400.0,
-    "storage_mwh": 1160.0,
     "state": "VIC",
-    "current_developer": "OX2 (acquired 8 Jul 2026)",
-    "data_confidence": "confirmed",
+    "current_developer": "Leeson Solar Pty Ltd.",
+    "data_confidence": "low",
     "confidence_score": "15",
     "development_stage": "planning_submitted",
     "zombie_flag": "zombie_minimal",
@@ -3364,7 +3363,7 @@
     "current_developer": "APA Group",
     "data_confidence": "medium",
     "confidence_score": "28",
-    "development_stage": "epbc_submitted",
+    "development_stage": "planning_submitted",
     "first_seen": "2024"
   },
   {
@@ -3446,7 +3445,7 @@
     "current_developer": "Pacific Hydro Australia Developments Pty Ltd",
     "data_confidence": "medium",
     "confidence_score": "31",
-    "development_stage": "epbc_approved",
+    "development_stage": "planning_submitted",
     "first_seen": "2021"
   },
   {
@@ -3527,7 +3526,7 @@
     "current_developer": "ACEN Renewables",
     "data_confidence": "medium",
     "confidence_score": "28",
-    "development_stage": "epbc_submitted",
+    "development_stage": "planning_submitted",
     "first_seen": "2025"
   },
   {
@@ -3582,7 +3581,7 @@
     "current_developer": "Delburn Wind Farm Pty Ltd",
     "data_confidence": "low",
     "confidence_score": "23",
-    "development_stage": "epbc_approved",
+    "development_stage": "planning_submitted",
     "first_seen": "2020"
   },
   {
@@ -3609,7 +3608,7 @@
     "current_developer": "NEMMCOM Renewables Australia Developments Pty Ltd",
     "data_confidence": "low",
     "confidence_score": "23",
-    "development_stage": "epbc_submitted",
+    "development_stage": "planning_submitted",
     "first_seen": "2025"
   },
   {
@@ -3620,8 +3619,8 @@
     "capacity_mw": 95.0,
     "storage_mwh": 110.0,
     "state": "VIC",
-    "current_developer": "Sungrow Renewable Energy",
-    "data_confidence": "confirmed",
+    "current_developer": "DERBY SOLAR PROJECT PTY LTD",
+    "data_confidence": "low",
     "confidence_score": "28",
     "development_stage": "planning_submitted",
     "first_seen": "2026-03-12",
@@ -3706,7 +3705,7 @@
     "rez": "nsw-south-west",
     "data_confidence": "good",
     "confidence_score": "54",
-    "development_stage": "epbc_submitted",
+    "development_stage": "planning_submitted",
     "notable": "Hybrid wind+solar+BESS. Access rights: 707 MW wind + 300 MW solar + 300 MW/1,200 MWh BESS. Full vision ~2.5 GW. Adjacent to Transgrid Dinawan Substation. CIP holds option for minority interest. CIS Tender winner.",
     "first_seen": "2023",
     "has_scheme_contract": true
@@ -3747,7 +3746,7 @@
     "current_developer": "MMG",
     "data_confidence": "low",
     "confidence_score": "23",
-    "development_stage": "epbc_submitted",
+    "development_stage": "planning_submitted",
     "first_seen": "2024"
   },
   {
@@ -3924,7 +3923,7 @@
     "current_developer": "BlueFloat Energy / Origin Energy (CANCELLED)",
     "data_confidence": "medium",
     "confidence_score": "36",
-    "development_stage": "epbc_submitted",
+    "development_stage": "planning_submitted",
     "notable": "Failed to secure feasibility licence. 1,725 MW floating wind 25-45 km off Hunter coast. Lost to Novocastrian in Hunter zone assessment. BlueFloat subsequently ceased all operations mid-2025.",
     "first_seen": "2023"
   },
@@ -3978,7 +3977,7 @@
     "current_developer": "Oceanex Energy (Equinor withdrew)",
     "data_confidence": "medium",
     "confidence_score": "44",
-    "development_stage": "epbc_approved",
+    "development_stage": "planning_submitted",
     "notable": "Effectively shelved. 2 GW floating wind off Eden NSW south coast. Equinor pulled out 2024-2025. Oceanex lacks capital to proceed alone. Estimated $10B project.",
     "first_seen": "2011",
     "zombie_flag": "zombie_stale"
@@ -4201,7 +4200,7 @@
     "current_developer": "Unitedgreen_NR",
     "data_confidence": "medium",
     "confidence_score": "31",
-    "development_stage": "epbc_submitted",
+    "development_stage": "planning_submitted",
     "first_seen": "2024"
   },
   {
@@ -4214,7 +4213,7 @@
     "current_developer": "Balranald Wind Farm Pty Ltd",
     "data_confidence": "low",
     "confidence_score": "23",
-    "development_stage": "epbc_submitted",
+    "development_stage": "planning_submitted",
     "first_seen": "2024"
   },
   {
@@ -4326,7 +4325,7 @@
     "current_developer": "Forest Wind Holdings Pty Ltd",
     "data_confidence": "low",
     "confidence_score": "23",
-    "development_stage": "epbc_submitted",
+    "development_stage": "planning_submitted",
     "first_seen": "2020"
   },
   {
@@ -4465,7 +4464,7 @@
     "current_developer": "ACEnergy Pty Ltd",
     "data_confidence": "medium",
     "confidence_score": "36",
-    "development_stage": "epbc_submitted",
+    "development_stage": "planning_submitted",
     "first_seen": "2025"
   },
   {
@@ -4497,12 +4496,13 @@
   {
     "id": "gawara-baya-wind-and-bess",
     "name": "Gawara Baya Wind And BESS",
-    "technology": "wind",
+    "technology": "hybrid",
     "status": "development",
     "capacity_mw": 400.0,
+    "storage_mwh": 208.0,
     "state": "QLD",
-    "current_developer": "Windlab (Squadron / Andrew Forrest)",
-    "data_confidence": "confirmed",
+    "current_developer": "GAWARA BAYA WIND FARM PTY LTD",
+    "data_confidence": "low",
     "confidence_score": "28",
     "development_stage": "early_stage",
     "first_seen": "2026-03-12",
@@ -4638,7 +4638,7 @@
     "current_developer": "Iberdrola Australia Development Pty Limited",
     "data_confidence": "medium",
     "confidence_score": "36",
-    "development_stage": "epbc_submitted",
+    "development_stage": "planning_submitted",
     "first_seen": "2024"
   },
   {
@@ -4748,7 +4748,7 @@
     "current_developer": "Glenellen Solar Farm Pty Ltd",
     "data_confidence": "low",
     "confidence_score": "23",
-    "development_stage": "epbc_submitted",
+    "development_stage": "planning_submitted",
     "first_seen": "2023"
   },
   {
@@ -5016,12 +5016,12 @@
     "id": "goorambat-east-solar-farm-engie",
     "name": "Goorambat East Solar Farm (ENGIE)",
     "technology": "solar",
-    "status": "commissioning",
+    "status": "construction",
     "capacity_mw": 250.0,
     "state": "VIC",
     "current_developer": "Engie",
     "rez": "Central North VIC",
-    "data_confidence": "confirmed",
+    "data_confidence": "low",
     "confidence_score": "43",
     "notable": "First power injected early Nov 2025 per Renewables Now. Full production targeted 2026, transmission complete Sep 2026. ENGIE 250 MW VIC solar.",
     "first_seen": "2026-03-12"
@@ -5051,7 +5051,7 @@
     "current_developer": "Lightsource Development Services Australia Pty Ltd",
     "data_confidence": "medium",
     "confidence_score": "36",
-    "development_stage": "epbc_approved",
+    "development_stage": "planning_submitted",
     "first_seen": "2022",
     "has_scheme_contract": true
   },
@@ -5117,10 +5117,10 @@
     "status": "development",
     "capacity_mw": 600.0,
     "state": "SA",
-    "current_developer": "Neoen Australia (Brookfield-owned)",
+    "current_developer": "Neoen Australia",
     "data_confidence": "low",
     "confidence_score": "23",
-    "development_stage": "early_stage",
+    "development_stage": "planning_submitted",
     "first_seen": "2026-03-12",
     "has_scheme_contract": true
   },
@@ -5335,7 +5335,7 @@
     "current_developer": "ARK Energy Corporation Pty Ltd",
     "data_confidence": "low",
     "confidence_score": "23",
-    "development_stage": "epbc_submitted",
+    "development_stage": "planning_submitted",
     "first_seen": "2020"
   },
   {
@@ -5509,12 +5509,12 @@
     "id": "guthries-gap-solar-power-station",
     "name": "Guthrie\u2019s Gap Solar Power Station",
     "technology": "hybrid",
-    "status": "construction",
+    "status": "development",
     "capacity_mw": 300.0,
     "storage_mwh": 1200.0,
     "state": "QLD",
-    "current_developer": "Edify Energy (La Caisse-owned)",
-    "data_confidence": "confirmed",
+    "current_developer": "Edify Energy Pty Ltd",
+    "data_confidence": "low",
     "confidence_score": "28",
     "development_stage": "early_stage",
     "first_seen": "2026-03-12",
@@ -5561,7 +5561,7 @@
     "current_developer": "EnergyAustralia Hallett Pty Ltd",
     "data_confidence": "medium",
     "confidence_score": "36",
-    "development_stage": "epbc_approved",
+    "development_stage": "planning_submitted",
     "first_seen": "2004",
     "zombie_flag": "zombie_stale",
     "has_scheme_contract": true
@@ -6005,7 +6005,7 @@
     "current_developer": "ARK Energy Corporation Pty Ltd",
     "data_confidence": "low",
     "confidence_score": "23",
-    "development_stage": "epbc_submitted",
+    "development_stage": "planning_submitted",
     "first_seen": "2022"
   },
   {
@@ -6018,7 +6018,7 @@
     "current_developer": "Acciona Energy Global Australia",
     "data_confidence": "medium",
     "confidence_score": "31",
-    "development_stage": "epbc_submitted",
+    "development_stage": "planning_submitted",
     "first_seen": "2024"
   },
   {
@@ -6029,10 +6029,10 @@
     "capacity_mw": 921.12,
     "storage_mwh": 800.0,
     "state": "VIC",
-    "current_developer": "AGL + Wind Prospect",
-    "data_confidence": "confirmed",
+    "current_developer": "Wind Prospect WA Pty Ltd",
+    "data_confidence": "low",
     "confidence_score": "36",
-    "development_stage": "epbc_submitted",
+    "development_stage": "planning_submitted",
     "first_seen": "2022",
     "has_scheme_contract": true
   },
@@ -6073,7 +6073,7 @@
     "current_developer": "Someva Renewables",
     "data_confidence": "medium",
     "confidence_score": "31",
-    "development_stage": "epbc_approved",
+    "development_stage": "planning_submitted",
     "first_seen": "2019",
     "zombie_flag": "zombie_stale",
     "has_scheme_contract": true
@@ -6166,10 +6166,10 @@
     "status": "development",
     "capacity_mw": 250.0,
     "state": "QLD",
-    "current_developer": "Pacific Partnerships (CIMIC/HOCHTIEF/ACS)",
+    "current_developer": "Hopeland Solar Farm Pty Ltd as trustee for the Hopeland Solar Farm Trust",
     "data_confidence": "low",
     "confidence_score": "23",
-    "development_stage": "epbc_submitted",
+    "development_stage": "planning_submitted",
     "first_seen": "2024",
     "has_scheme_contract": true
   },
@@ -6321,7 +6321,7 @@
     "current_developer": "BayWA r.e Projects Australia Pty Ltd",
     "data_confidence": "medium",
     "confidence_score": "36",
-    "development_stage": "epbc_submitted",
+    "development_stage": "planning_submitted",
     "first_seen": "2024"
   },
   {
@@ -6360,7 +6360,7 @@
     "current_developer": "Energy Estate",
     "data_confidence": "medium",
     "confidence_score": "39",
-    "development_stage": "epbc_submitted",
+    "development_stage": "planning_submitted",
     "notable": "Did not receive Hunter zone feasibility licence. Originally 1.4 GW expanded to 1.65 GW. BlueFloat split from project early 2023. Energy Estate developing independently. Hunter zone has zero active licences.",
     "first_seen": "2022-10-01"
   },
@@ -6508,7 +6508,7 @@
     "current_developer": "Squadron Energy Services Pty Ltd",
     "data_confidence": "medium",
     "confidence_score": "31",
-    "development_stage": "epbc_submitted",
+    "development_stage": "planning_submitted",
     "first_seen": "2021"
   },
   {
@@ -6717,7 +6717,7 @@
     "current_developer": "Kariboe Wind Farm Pty Ltd",
     "data_confidence": "low",
     "confidence_score": "23",
-    "development_stage": "epbc_submitted",
+    "development_stage": "planning_submitted",
     "first_seen": "2023"
   },
   {
@@ -6783,7 +6783,7 @@
     "current_developer": "HMC Capital / Illuma Energy",
     "data_confidence": "medium",
     "confidence_score": "31",
-    "development_stage": "epbc_submitted",
+    "development_stage": "planning_submitted",
     "first_seen": "2019",
     "zombie_flag": "zombie_stale",
     "has_scheme_contract": true
@@ -6854,7 +6854,7 @@
     "current_developer": "RES Australia Pty Ltd",
     "data_confidence": "medium",
     "confidence_score": "31",
-    "development_stage": "epbc_submitted",
+    "development_stage": "planning_submitted",
     "first_seen": "2024"
   },
   {
@@ -6939,7 +6939,7 @@
     "current_developer": "Genex Power Ltd",
     "data_confidence": "medium",
     "confidence_score": "28",
-    "development_stage": "epbc_submitted",
+    "development_stage": "planning_submitted",
     "first_seen": "2024"
   },
   {
@@ -7256,7 +7256,7 @@
     "current_developer": "EnergyAustralia NSW Pty Ltd",
     "data_confidence": "medium",
     "confidence_score": "36",
-    "development_stage": "epbc_submitted",
+    "development_stage": "planning_submitted",
     "first_seen": "2023"
   },
   {
@@ -7269,7 +7269,7 @@
     "current_developer": "Lake Victoria Wind Farm Pty Ltd atf Lake Victoria Wind Farm unit trust",
     "data_confidence": "low",
     "confidence_score": "23",
-    "development_stage": "epbc_submitted",
+    "development_stage": "planning_submitted",
     "first_seen": "2024",
     "has_scheme_contract": true
   },
@@ -7303,12 +7303,12 @@
     "id": "lancaster-solar-farm",
     "name": "Lancaster Solar Farm",
     "technology": "solar",
-    "status": "operating",
-    "capacity_mw": 108.0,
+    "status": "construction",
+    "capacity_mw": 80.0,
     "state": "VIC",
-    "current_developer": "European Energy",
+    "current_developer": "Lancaster Solar Farm Pty Ltd as trustee for the Lancaster Solar Farm Trust",
     "rez": "Central North VIC",
-    "data_confidence": "confirmed",
+    "data_confidence": "low",
     "confidence_score": "43",
     "notable": "European Energy inaugurated 108 MW Lancaster SF near Kyabram 16 Mar 2026, supplying Apple under PPA. Capacity corrected 80 -> 108 MW 2026-07-18. SPV Lancaster Solar Farm Pty Ltd; European Energy is proponent (Danish).",
     "first_seen": "2026-03-12"
@@ -7417,13 +7417,13 @@
     "id": "limondale-bess",
     "name": "Limondale BESS",
     "technology": "bess",
-    "status": "operating",
+    "status": "construction",
     "capacity_mw": 50.0,
     "storage_mwh": 400.0,
     "state": "NSW",
-    "current_developer": "RWE Renewables Australia",
+    "current_developer": "LIMONDALE BATTERY PTY. LTD",
     "rez": "South West NSW",
-    "data_confidence": "confirmed",
+    "data_confidence": "low",
     "confidence_score": "60",
     "notable": "AEMO/Transgrid granted full-operations approval 27 May 2026; official opening 11 Jun 2026 per RWE/pv-magazine. Australia first 8-hour long-duration battery (50 MW / 400 MWh).",
     "first_seen": "2023-05-01",
@@ -7579,7 +7579,7 @@
     "rez": "nsw-central-west-orana",
     "data_confidence": "medium",
     "confidence_score": "41",
-    "development_stage": "epbc_approved",
+    "development_stage": "planning_submitted",
     "notable": "1,332 MW wind in CWO REZ. Largest single wind access rights allocation in CWO REZ tender.",
     "first_seen": "2005",
     "zombie_flag": "zombie_stale",
@@ -7661,12 +7661,12 @@
     "id": "lower-wonga-solar-farm-and-bess",
     "name": "Lower Wonga Solar Farm and BESS",
     "technology": "hybrid",
-    "status": "construction",
+    "status": "development",
     "capacity_mw": 281.0,
     "storage_mwh": 843.0,
     "state": "QLD",
-    "current_developer": "Lightsource bp",
-    "data_confidence": "confirmed",
+    "current_developer": "Lower Wonga Solar Farm Pty Ltd",
+    "data_confidence": "low",
     "confidence_score": "28",
     "development_stage": "early_stage",
     "first_seen": "2026-03-12",
@@ -7812,7 +7812,7 @@
     "current_developer": "Terrain Solar",
     "data_confidence": "medium",
     "confidence_score": "36",
-    "development_stage": "epbc_submitted",
+    "development_stage": "planning_submitted",
     "first_seen": "2024"
   },
   {
@@ -7841,7 +7841,7 @@
     "current_developer": "Mallee Wind PTY LTD",
     "data_confidence": "medium",
     "confidence_score": "36",
-    "development_stage": "epbc_submitted",
+    "development_stage": "planning_submitted",
     "first_seen": "2023"
   },
   {
@@ -7977,7 +7977,7 @@
     "current_developer": "Cubico Sustainable Investments Australia Pty Ltd",
     "data_confidence": "low",
     "confidence_score": "23",
-    "development_stage": "epbc_submitted",
+    "development_stage": "planning_submitted",
     "first_seen": "2025"
   },
   {
@@ -8085,7 +8085,7 @@
     "current_developer": "Clean Technologies Partners",
     "data_confidence": "low",
     "confidence_score": "23",
-    "development_stage": "epbc_submitted",
+    "development_stage": "planning_submitted",
     "first_seen": "2024"
   },
   {
@@ -8263,7 +8263,7 @@
     "current_developer": "Cubico Sustainable Investments Australia Pty Ltd",
     "data_confidence": "low",
     "confidence_score": "23",
-    "development_stage": "epbc_submitted",
+    "development_stage": "planning_submitted",
     "first_seen": "2025"
   },
   {
@@ -8291,7 +8291,7 @@
     "current_developer": "Midwest Solar Pty Ltd",
     "data_confidence": "low",
     "confidence_score": "23",
-    "development_stage": "epbc_submitted",
+    "development_stage": "planning_submitted",
     "first_seen": "2022"
   },
   {
@@ -8419,10 +8419,10 @@
     "status": "development",
     "capacity_mw": 349.0,
     "state": "QLD",
-    "current_developer": "Central Queensland Power (CQP)",
-    "data_confidence": "confirmed",
+    "current_developer": "Moah Creek Wind Farm Project Co Pty Ltd as trustee for the Moah Creek Wind Farm Project Trust",
+    "data_confidence": "low",
     "confidence_score": "31",
-    "development_stage": "epbc_submitted",
+    "development_stage": "planning_submitted",
     "first_seen": "2024",
     "has_scheme_contract": true
   },
@@ -8612,6 +8612,7 @@
     "state": "QLD",
     "current_developer": "Zero-E Australia (Grupo Cobra / ACS)",
     "data_confidence": "confirmed",
+    "development_stage": "early_stage",
     "notable": "CIS T7 award May 2026 (171 MW solar + 100 MW / 4hr BESS). Zero-E Australia is subsidiary of Spanish Grupo Cobra (ACS Group). Near Coppabella in Bowen Basin. AEMO 5.3.4A connection approval secured pre-award (145 MWac inverter rating per pv-tech; DCCEEW cites 171 MW; likely DC vs AC distinction). AC-coupled hybrid with grid-forming inverters. Grupo Cobras first Australian clean-energy asset. Cultural Heritage + Shared Benefits agreements with Barada Barna Traditional Owners. Created 2026-07-18 to close v3.22.2 data gap.",
     "first_seen": "2026-07-18",
     "has_scheme_contract": true
@@ -8654,7 +8655,7 @@
     "current_developer": "Moreton Hill Wind Farm Nominees Pty Ltd",
     "data_confidence": "low",
     "confidence_score": "23",
-    "development_stage": "epbc_submitted",
+    "development_stage": "planning_submitted",
     "first_seen": "2024"
   },
   {
@@ -8841,7 +8842,7 @@
     "current_developer": "Mount Hopeful Wind Farm as trustee for Mount Hopeful Wind Farm Trust",
     "data_confidence": "medium",
     "confidence_score": "31",
-    "development_stage": "epbc_approved",
+    "development_stage": "planning_submitted",
     "first_seen": "2022"
   },
   {
@@ -9009,7 +9010,7 @@
     "current_developer": "Energy Australia Development Pty Ltd",
     "data_confidence": "medium",
     "confidence_score": "36",
-    "development_stage": "epbc_submitted",
+    "development_stage": "planning_submitted",
     "first_seen": "2023",
     "has_scheme_contract": true
   },
@@ -9024,7 +9025,7 @@
     "current_developer": "Mt Rawdon Pumped Hydro Pty Ltd (Evolution Mining / ICA Partners)",
     "data_confidence": "medium",
     "confidence_score": "49",
-    "development_stage": "epbc_submitted",
+    "development_stage": "planning_submitted",
     "notable": "Former gold mine repurposed. CleanCo QLD committed to invest. EIS phase. A$3.3B estimated.",
     "first_seen": "2022"
   },
@@ -9058,12 +9059,12 @@
     "id": "munna-creek-solar-farm",
     "name": "Munna Creek Solar Farm",
     "technology": "solar",
-    "status": "operating",
+    "status": "construction",
     "capacity_mw": 120.0,
     "state": "QLD",
-    "current_developer": "Metlen (ex-Mytilineos)",
+    "current_developer": "Munna Creek Solar Farm Investments Pty Ltd as trustee for the Munna Creek Solar Farm Trust",
     "rez": "Wide Bay",
-    "data_confidence": "confirmed",
+    "data_confidence": "low",
     "confidence_score": "51",
     "development_stage": "epbc_submitted",
     "notable": "Confirmed operating late 2025 per RenewEconomy Dec 2025. 10-yr PPA to NBN Co delivering 59 GWh/yr. Owner is Metlen (rebranded from Mytilineos), not SPV name. Third NBN Co solar (completed NBN trifecta).",
@@ -9151,7 +9152,7 @@
     "current_developer": "Edify Energy Pty Ltd",
     "data_confidence": "low",
     "confidence_score": "23",
-    "development_stage": "epbc_submitted",
+    "development_stage": "planning_submitted",
     "first_seen": "2024"
   },
   {
@@ -9182,7 +9183,7 @@
     "current_developer": "firmpower_NR",
     "data_confidence": "medium",
     "confidence_score": "36",
-    "development_stage": "epbc_submitted",
+    "development_stage": "planning_submitted",
     "first_seen": "2025"
   },
   {
@@ -9208,7 +9209,7 @@
     "current_developer": "Ox2",
     "data_confidence": "low",
     "confidence_score": "23",
-    "development_stage": "epbc_submitted",
+    "development_stage": "planning_submitted",
     "first_seen": "2022"
   },
   {
@@ -9388,7 +9389,7 @@
     "current_developer": "Normanville Energy Park Pty Ltd as trustee for Normanville Energy Park Unit Trust",
     "data_confidence": "medium",
     "confidence_score": "31",
-    "development_stage": "epbc_submitted",
+    "development_stage": "planning_submitted",
     "first_seen": "2025"
   },
   {
@@ -9495,7 +9496,7 @@
     "current_developer": "Northern Midlands Solar Farm Tas Pty Ltd (ACN 684 471 627) as trustee for the Northern Midlands Solar Farm Unit Trust (ABN 26 279 618 811)",
     "data_confidence": "medium",
     "confidence_score": "31",
-    "development_stage": "epbc_submitted",
+    "development_stage": "planning_submitted",
     "first_seen": "2024"
   },
   {
@@ -9544,10 +9545,10 @@
     "technology": "hybrid",
     "status": "development",
     "capacity_mw": 750.0,
-    "storage_mwh": 2400.0,
+    "storage_mwh": 1200.0,
     "state": "VIC",
-    "current_developer": "Edify Energy (La Caisse-owned)",
-    "data_confidence": "confirmed",
+    "current_developer": "Edify Energy Pty Ltd",
+    "data_confidence": "low",
     "confidence_score": "28",
     "development_stage": "planning_submitted",
     "first_seen": "2026-03-12",
@@ -9860,7 +9861,7 @@
     "current_developer": "Paling Yards Development Pty Ltd",
     "data_confidence": "medium",
     "confidence_score": "31",
-    "development_stage": "epbc_approved",
+    "development_stage": "planning_submitted",
     "first_seen": "2005",
     "zombie_flag": "zombie_stale"
   },
@@ -10012,7 +10013,7 @@
     "current_developer": "Piambong Wind Farm Pty Ltd",
     "data_confidence": "medium",
     "confidence_score": "31",
-    "development_stage": "epbc_submitted",
+    "development_stage": "planning_submitted",
     "first_seen": "2024",
     "has_scheme_contract": true
   },
@@ -10288,7 +10289,7 @@
     "rez": "nsw-south-west",
     "data_confidence": "medium",
     "confidence_score": "31",
-    "development_stage": "epbc_submitted",
+    "development_stage": "planning_submitted",
     "first_seen": "2024"
   },
   {
@@ -10356,7 +10357,7 @@
     "current_developer": "Evolution Pty Ltd",
     "data_confidence": "low",
     "confidence_score": "23",
-    "development_stage": "epbc_submitted",
+    "development_stage": "planning_submitted",
     "first_seen": "2023"
   },
   {
@@ -10395,7 +10396,7 @@
     "current_developer": "CI Proserpine Pty Ltd as trustee for the CI Proserpine Trust",
     "data_confidence": "low",
     "confidence_score": "23",
-    "development_stage": "epbc_submitted",
+    "development_stage": "planning_submitted",
     "first_seen": "2024"
   },
   {
@@ -10460,6 +10461,7 @@
     "state": "QLD",
     "current_developer": "EDPR (EDP Renewables Australia) + QIC (JV)",
     "data_confidence": "confirmed",
+    "development_stage": "early_stage",
     "notable": "CIS T4 award Oct 2025 (400 MW solar + 400 MW / 1,600 MWh BESS integrated hybrid). EDPR + QIC exclusivity/JV. FC expected 2026, commissioning early 2029. Part of EDPs 1.7 GW Aus fast-track pipeline (also incl. Merino NSW). Reconciliation: existing AURES records punchs-creek-hybrid-stage-2/3-kci (200+600 MW BESS EDPR) are stale multi-stage attributions that predate the consolidated T4 award scope. SkyLabs legacy Punch and Creek 87 MW is a separate project. Created 2026-07-18 to close v3.22.1 data gap.",
     "first_seen": "2026-07-18",
     "has_scheme_contract": true
@@ -10631,7 +10633,7 @@
     "current_developer": "ARK ENERGY CORPORATION PTY LTD",
     "data_confidence": "medium",
     "confidence_score": "28",
-    "development_stage": "early_stage",
+    "development_stage": "planning_submitted",
     "first_seen": "2026-03-12",
     "has_scheme_contract": true
   },
@@ -10645,7 +10647,7 @@
     "current_developer": "ARK ENERGY CORPORATION PTY LTD",
     "data_confidence": "low",
     "confidence_score": "23",
-    "development_stage": "epbc_submitted",
+    "development_stage": "planning_submitted",
     "first_seen": "2023"
   },
   {
@@ -11115,7 +11117,7 @@
     "rez": "nsw-central-west-orana",
     "data_confidence": "medium",
     "confidence_score": "39",
-    "development_stage": "epbc_submitted",
+    "development_stage": "planning_submitted",
     "first_seen": "2024",
     "has_scheme_contract": true
   },
@@ -11244,7 +11246,7 @@
     "rez": "Broken Hill",
     "data_confidence": "medium",
     "confidence_score": "36",
-    "development_stage": "epbc_submitted",
+    "development_stage": "planning_submitted",
     "first_seen": "2023",
     "has_scheme_contract": true
   },
@@ -11313,12 +11315,12 @@
     "id": "smoky-creek-solar-power-station",
     "name": "Smoky Creek Solar Power Station",
     "technology": "hybrid",
-    "status": "construction",
+    "status": "development",
     "capacity_mw": 300.0,
     "storage_mwh": 1200.0,
     "state": "QLD",
-    "current_developer": "Edify Energy (La Caisse-owned)",
-    "data_confidence": "confirmed",
+    "current_developer": "Edify Energy Pty Ltd",
+    "data_confidence": "low",
     "confidence_score": "28",
     "development_stage": "early_stage",
     "first_seen": "2026-03-12",
@@ -11488,7 +11490,7 @@
     "current_developer": "BlueFloat Energy / Energy Estate (LIKELY CANCELLED)",
     "data_confidence": "medium",
     "confidence_score": "44",
-    "development_stage": "epbc_submitted",
+    "development_stage": "planning_submitted",
     "notable": "1,600 MW floating wind off NSW. BlueFloat ceased all global operations mid-2025 after parent Quantum Capital Group wound down offshore wind.",
     "first_seen": "2023"
   },
@@ -11502,7 +11504,7 @@
     "current_developer": "BlueFloat Energy / Energy Estate (CANCELLED)",
     "data_confidence": "medium",
     "confidence_score": "36",
-    "development_stage": "epbc_submitted",
+    "development_stage": "planning_submitted",
     "notable": "Cancelled mid-2025. BlueFloat ceased all global operations after parent Quantum Capital determined offshore wind no longer viable. 1,155 MW proposed 8-20 km off coast between Cape Douglas SA and Nelson VIC.",
     "first_seen": "2023"
   },
@@ -11529,7 +11531,7 @@
     "current_developer": "ARK Energy Corporation Pty Ltd",
     "data_confidence": "low",
     "confidence_score": "23",
-    "development_stage": "epbc_approved",
+    "development_stage": "planning_submitted",
     "first_seen": "2021"
   },
   {
@@ -11543,7 +11545,7 @@
     "rez": "nsw-central-west-orana",
     "data_confidence": "medium",
     "confidence_score": "41",
-    "development_stage": "epbc_approved",
+    "development_stage": "planning_submitted",
     "notable": "700 MW wind in CWO REZ. Squadron Energy is Tattarang (Andrew Forrest) subsidiary.",
     "first_seen": "2022",
     "has_scheme_contract": true
@@ -11626,7 +11628,7 @@
     "current_developer": "Southerly Ten (Copenhagen Infrastructure Partners / Cbus Super)",
     "data_confidence": "medium",
     "confidence_score": "49",
-    "development_stage": "epbc_submitted",
+    "development_stage": "planning_submitted",
     "notable": "Most advanced Australian offshore wind project. Feasibility licence FL-01 granted May 2024 for 586 km2 area 10+ km off Gippsland coast. EIS lodged Dec 2025 under EPBC Act. Targeting first power ~2030. Estimated A$8-10B.",
     "first_seen": "2020"
   },
@@ -11686,7 +11688,7 @@
     "current_developer": "Greenleaf Renewable",
     "data_confidence": "low",
     "confidence_score": "23",
-    "development_stage": "epbc_approved",
+    "development_stage": "planning_submitted",
     "first_seen": "2022"
   },
   {
@@ -11712,7 +11714,7 @@
     "current_developer": "Yancoal Australia Limited",
     "data_confidence": "low",
     "confidence_score": "23",
-    "development_stage": "epbc_submitted",
+    "development_stage": "planning_submitted",
     "first_seen": "2024"
   },
   {
@@ -11851,7 +11853,7 @@
     "current_developer": "ESCO Solar Farm 5 Pty Ltd",
     "data_confidence": "low",
     "confidence_score": "23",
-    "development_stage": "epbc_submitted",
+    "development_stage": "planning_submitted",
     "first_seen": "2022"
   },
   {
@@ -12311,7 +12313,7 @@
     "current_developer": "Tarong West Project Co Pty Ltd as trustee for the Tarong West Project Trust",
     "data_confidence": "medium",
     "confidence_score": "31",
-    "development_stage": "epbc_submitted",
+    "development_stage": "planning_submitted",
     "first_seen": "2023"
   },
   {
@@ -12338,7 +12340,7 @@
     "current_developer": "HYDROTAS",
     "data_confidence": "low",
     "confidence_score": "23",
-    "development_stage": "epbc_submitted",
+    "development_stage": "planning_submitted",
     "first_seen": "2023"
   },
   {
@@ -12366,7 +12368,7 @@
     "current_developer": "Neoen Australia Pty Ltd",
     "data_confidence": "medium",
     "confidence_score": "28",
-    "development_stage": "epbc_submitted",
+    "development_stage": "planning_submitted",
     "first_seen": "2023"
   },
   {
@@ -12536,7 +12538,7 @@
     "current_developer": "Engie",
     "data_confidence": "medium",
     "confidence_score": "28",
-    "development_stage": "epbc_submitted",
+    "development_stage": "planning_submitted",
     "first_seen": "2023",
     "has_scheme_contract": true
   },
@@ -12590,7 +12592,7 @@
     "current_developer": "Theodore SF Pty Ltd as trustee for Theodore SF Trust",
     "data_confidence": "medium",
     "confidence_score": "31",
-    "development_stage": "epbc_approved",
+    "development_stage": "planning_submitted",
     "first_seen": "2020"
   },
   {
@@ -12601,9 +12603,9 @@
     "capacity_mw": 1054.0,
     "state": "QLD",
     "current_developer": "RWE Renewables Australia",
-    "data_confidence": "confirmed",
+    "data_confidence": "low",
     "confidence_score": "31",
-    "development_stage": "epbc_submitted",
+    "development_stage": "planning_submitted",
     "first_seen": "2024",
     "has_scheme_contract": true
   },
@@ -12712,7 +12714,7 @@
     "rez": "New England",
     "data_confidence": "medium",
     "confidence_score": "31",
-    "development_stage": "epbc_approved",
+    "development_stage": "planning_submitted",
     "first_seen": "2020"
   },
   {
@@ -12955,7 +12957,7 @@
     "current_developer": "RES Australia Pty Ltd",
     "data_confidence": "medium",
     "confidence_score": "36",
-    "development_stage": "epbc_submitted",
+    "development_stage": "planning_submitted",
     "first_seen": "2023"
   },
   {
@@ -13040,7 +13042,7 @@
     "current_developer": "European Energy S/A",
     "data_confidence": "low",
     "confidence_score": "23",
-    "development_stage": "epbc_submitted",
+    "development_stage": "planning_submitted",
     "first_seen": "2024"
   },
   {
@@ -13151,7 +13153,7 @@
     "rez": "nsw-central-west-orana",
     "data_confidence": "medium",
     "confidence_score": "39",
-    "development_stage": "epbc_submitted",
+    "development_stage": "planning_submitted",
     "first_seen": "2020",
     "has_scheme_contract": true
   },
@@ -13266,7 +13268,7 @@
     "current_developer": "acciona_NR",
     "data_confidence": "medium",
     "confidence_score": "31",
-    "development_stage": "epbc_submitted",
+    "development_stage": "planning_submitted",
     "first_seen": "2024"
   },
   {
@@ -13279,7 +13281,7 @@
     "current_developer": "New Energy development and Univergy Solar Joint venture (SPV) Wallaroo Solar Farm Pty Ltd",
     "data_confidence": "low",
     "confidence_score": "23",
-    "development_stage": "epbc_approved",
+    "development_stage": "planning_submitted",
     "first_seen": "2021"
   },
   {
@@ -13317,12 +13319,12 @@
     "id": "wambo-wind-farm",
     "name": "Wambo Wind Farm",
     "technology": "wind",
-    "status": "commissioning",
-    "capacity_mw": 506.0,
+    "status": "construction",
+    "capacity_mw": 500.0,
     "state": "QLD",
-    "current_developer": "Cubico Sustainable Investments / Stanwell Corporation (50:50 JV)",
+    "current_developer": "Cubico Sustainable Investments Australia Pty Ltd",
     "rez": "Western Downs",
-    "data_confidence": "confirmed",
+    "data_confidence": "low",
     "confidence_score": "65",
     "development_stage": "epbc_approved",
     "notable": "Stage 1 (252 MW / 42 turbines) construction complete 2025, entering commercial operations late 2025; Stage 2 (254 MW) targeted end-2026. Gazetted 2025-02-28 COD was highly optimistic. Cubico/Stanwell 50:50 JV.",
@@ -13428,7 +13430,7 @@
     "current_developer": "WestWind Energy Pty Ltd",
     "data_confidence": "medium",
     "confidence_score": "31",
-    "development_stage": "epbc_submitted",
+    "development_stage": "planning_submitted",
     "first_seen": "2023"
   },
   {
@@ -13525,7 +13527,7 @@
     "current_developer": "Wattle Creek Energy Hub P/L",
     "data_confidence": "medium",
     "confidence_score": "36",
-    "development_stage": "epbc_submitted",
+    "development_stage": "planning_submitted",
     "first_seen": "2024",
     "has_scheme_contract": true
   },
@@ -13578,8 +13580,8 @@
     "status": "development",
     "capacity_mw": 144.0,
     "state": "TAS",
-    "current_developer": "Gamuda Renewables Australia + Alternate Path (JV)",
-    "data_confidence": "confirmed",
+    "current_developer": "Weasel Solar Farm P/L",
+    "data_confidence": "low",
     "confidence_score": "15",
     "development_stage": "planning_submitted",
     "zombie_flag": "zombie_minimal",
@@ -13740,7 +13742,7 @@
     "current_developer": "ARK Energy Corporation Pty Ltd",
     "data_confidence": "low",
     "confidence_score": "23",
-    "development_stage": "epbc_submitted",
+    "development_stage": "planning_submitted",
     "first_seen": "2010",
     "zombie_flag": "zombie_stale"
   },
@@ -13848,8 +13850,8 @@
     "capacity_mw": 574.4,
     "storage_mwh": 1000.0,
     "state": "SA",
-    "current_developer": "EDF Renewables Australia",
-    "data_confidence": "confirmed",
+    "current_developer": "WP Renewables Ltd",
+    "data_confidence": "low",
     "confidence_score": "28",
     "development_stage": "planning_submitted",
     "first_seen": "2026-03-12",
@@ -13863,8 +13865,8 @@
     "capacity_mw": 450.0,
     "storage_mwh": 378.0,
     "state": "VIC",
-    "current_developer": "ENGIE (Wind Prospect WA developer partner)",
-    "data_confidence": "confirmed",
+    "current_developer": "Wind Prospect WA Pty Ltd",
+    "data_confidence": "low",
     "confidence_score": "28",
     "development_stage": "planning_submitted",
     "first_seen": "2026-03-12",
@@ -13920,6 +13922,7 @@
     "state": "SA",
     "current_developer": "ENGIE (25%) + Foresight Group (75%) JV",
     "data_confidence": "confirmed",
+    "development_stage": "early_stage",
     "notable": "CIS T4 award Oct 2025 (108 MW). Expansion of operating Willogoleche 1 (119 MW commissioned 2019). Construction late 2026, commissioning 2028. Same JV structure as Willogoleche 1. Created 2026-07-18 to close v3.22.1 data gap.",
     "first_seen": "2026-07-18",
     "has_scheme_contract": true
@@ -13963,7 +13966,7 @@
     "current_developer": "BayWA r.e Projects Australia Pty Ltd",
     "data_confidence": "low",
     "confidence_score": "23",
-    "development_stage": "epbc_submitted",
+    "development_stage": "planning_submitted",
     "first_seen": "2024"
   },
   {
@@ -13989,7 +13992,7 @@
     "current_developer": "WinterbourneWind Pty Ltd",
     "data_confidence": "low",
     "confidence_score": "23",
-    "development_stage": "epbc_submitted",
+    "development_stage": "planning_submitted",
     "first_seen": "2020",
     "has_scheme_contract": true
   },
@@ -14179,7 +14182,7 @@
     "current_developer": "AGL Energy Limited",
     "data_confidence": "medium",
     "confidence_score": "28",
-    "development_stage": "epbc_submitted",
+    "development_stage": "planning_submitted",
     "first_seen": "2023"
   },
   {
@@ -14421,7 +14424,7 @@
     "current_developer": "Yabulu BESS Pty Ltd",
     "data_confidence": "medium",
     "confidence_score": "36",
-    "development_stage": "epbc_submitted",
+    "development_stage": "planning_submitted",
     "first_seen": "2022"
   },
   {
@@ -14434,7 +14437,7 @@
     "current_developer": "Tag Energy Australia Pty Ltd",
     "data_confidence": "medium",
     "confidence_score": "31",
-    "development_stage": "epbc_submitted",
+    "development_stage": "planning_submitted",
     "first_seen": "2023"
   },
   {
@@ -14517,7 +14520,7 @@
     "rez": "nsw-south-west",
     "data_confidence": "medium",
     "confidence_score": "49",
-    "development_stage": "epbc_approved",
+    "development_stage": "planning_submitted",
     "notable": "1.5 GW wind (208 turbines, 270m tip) + 800 MWh BESS. 33,000 ha site 10 km NW of Jerilderie in SW REZ. ~$4B project. 1,460 MW transmission access secured. FID target mid-FY2027.",
     "first_seen": "2022",
     "has_scheme_contract": true

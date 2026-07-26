@@ -517,57 +517,12 @@
       }
     },
     {
-      "developer": "European Energy Australia",
-      "project_count": 2,
-      "total_mw": 155.0,
-      "technologies": [
-        "solar"
-      ],
-      "operating": 1,
-      "withdrawn": 0,
-      "completion_rate": 50.0,
-      "avg_drift_months": -0.5,
-      "on_time_pct": 100.0,
-      "execution_score": 85.0,
-      "grade": "A",
-      "drift_stats": {
-        "count": 2,
-        "mean": -0.5,
-        "median": -0.5,
-        "p25": -1,
-        "p75": 0
-      }
-    },
-    {
       "developer": "Pacific Hydro Haughton Solar Farm Pty Ltd",
       "project_count": 2,
       "total_mw": 300.0,
       "technologies": [
         "bess",
         "solar"
-      ],
-      "operating": 1,
-      "withdrawn": 0,
-      "completion_rate": 50.0,
-      "avg_drift_months": 0.0,
-      "on_time_pct": 100.0,
-      "execution_score": 85.0,
-      "grade": "A",
-      "drift_stats": {
-        "count": 2,
-        "mean": 0.0,
-        "median": 0.0,
-        "p25": 0,
-        "p75": 0
-      }
-    },
-    {
-      "developer": "RWE Renewables Australia",
-      "project_count": 2,
-      "total_mw": 1104.0,
-      "technologies": [
-        "bess",
-        "wind"
       ],
       "operating": 1,
       "withdrawn": 0,
@@ -822,31 +777,6 @@
         "bess",
         "hybrid",
         "solar"
-      ],
-      "operating": 0,
-      "withdrawn": 0,
-      "completion_rate": 0.0,
-      "avg_drift_months": 0.0,
-      "on_time_pct": 100.0,
-      "execution_score": 70.0,
-      "grade": "B",
-      "drift_stats": {
-        "count": 1,
-        "mean": 0.0,
-        "median": 0,
-        "p25": 0,
-        "p75": 0
-      }
-    },
-    {
-      "developer": "ACEN Renewables",
-      "project_count": 4,
-      "total_mw": 2489.0,
-      "technologies": [
-        "hybrid",
-        "pumped_hydro",
-        "solar",
-        "wind"
       ],
       "operating": 0,
       "withdrawn": 0,
@@ -1203,9 +1133,32 @@
       }
     },
     {
+      "developer": "Cubico Sustainable Investments Australia Pty Ltd",
+      "project_count": 3,
+      "total_mw": 2200.0,
+      "technologies": [
+        "hybrid",
+        "wind"
+      ],
+      "operating": 0,
+      "withdrawn": 0,
+      "completion_rate": 0.0,
+      "avg_drift_months": -1.0,
+      "on_time_pct": 100.0,
+      "execution_score": 70.0,
+      "grade": "B",
+      "drift_stats": {
+        "count": 1,
+        "mean": -1.0,
+        "median": -1,
+        "p25": -1,
+        "p75": -1
+      }
+    },
+    {
       "developer": "Edify Energy (La Caisse-owned)",
-      "project_count": 5,
-      "total_mw": 1650.0,
+      "project_count": 2,
+      "total_mw": 300.0,
       "technologies": [
         "hybrid"
       ],
@@ -1217,17 +1170,17 @@
       "execution_score": 70.0,
       "grade": "B",
       "drift_stats": {
-        "count": 5,
+        "count": 2,
         "mean": 0.0,
-        "median": 0,
+        "median": 0.0,
         "p25": 0,
         "p75": 0
       }
     },
     {
       "developer": "Edify Energy Pty Ltd",
-      "project_count": 11,
-      "total_mw": 2580.0,
+      "project_count": 14,
+      "total_mw": 3930.0,
       "technologies": [
         "bess",
         "hybrid",
@@ -1241,9 +1194,9 @@
       "execution_score": 70.0,
       "grade": "B",
       "drift_stats": {
-        "count": 1,
+        "count": 4,
         "mean": 0.0,
-        "median": 0,
+        "median": 0.0,
         "p25": 0,
         "p75": 0
       }
@@ -1372,16 +1325,16 @@
       "operating": 0,
       "withdrawn": 0,
       "completion_rate": 0.0,
-      "avg_drift_months": 0.0,
+      "avg_drift_months": -1.0,
       "on_time_pct": 100.0,
       "execution_score": 70.0,
       "grade": "B",
       "drift_stats": {
         "count": 1,
-        "mean": 0.0,
-        "median": 0,
-        "p25": 0,
-        "p75": 0
+        "mean": -1.0,
+        "median": -1,
+        "p25": -1,
+        "p75": -1
       }
     },
     {
@@ -1498,12 +1451,12 @@
       }
     },
     {
-      "developer": "Global Power Generation Australia Pty Ltd",
-      "project_count": 3,
-      "total_mw": 900.0,
+      "developer": "Georgetown Hills Renewable Energy Pty Ltd as trustee for the Georgetown Hills Renewable Energy Trust",
+      "project_count": 2,
+      "total_mw": 365.0,
       "technologies": [
         "bess",
-        "hybrid"
+        "wind"
       ],
       "operating": 0,
       "withdrawn": 0,
@@ -1513,9 +1466,9 @@
       "execution_score": 70.0,
       "grade": "B",
       "drift_stats": {
-        "count": 3,
+        "count": 2,
         "mean": 0.0,
-        "median": 0,
+        "median": 0.0,
         "p25": 0,
         "p75": 0
       }
@@ -1636,8 +1589,8 @@
     },
     {
       "developer": "Lightsource bp",
-      "project_count": 5,
-      "total_mw": 1553.0,
+      "project_count": 4,
+      "total_mw": 1272.0,
       "technologies": [
         "bess",
         "hybrid",
@@ -1651,9 +1604,9 @@
       "execution_score": 70.0,
       "grade": "B",
       "drift_stats": {
-        "count": 5,
+        "count": 4,
         "mean": 0.0,
-        "median": 0,
+        "median": 0.0,
         "p25": 0,
         "p75": 0
       }
@@ -2183,11 +2136,10 @@
       }
     },
     {
-      "developer": "Wattle Creek Energy Hub P/L",
+      "developer": "Wind Prospect WA Pty Ltd",
       "project_count": 2,
-      "total_mw": 530.0,
+      "total_mw": 1371.1,
       "technologies": [
-        "bess",
         "hybrid"
       ],
       "operating": 0,
@@ -2202,6 +2154,29 @@
         "mean": 0.0,
         "median": 0.0,
         "p25": 0,
+        "p75": 0
+      }
+    },
+    {
+      "developer": "Windlab Developments Pty Ltd",
+      "project_count": 2,
+      "total_mw": 1750.0,
+      "technologies": [
+        "bess",
+        "wind"
+      ],
+      "operating": 0,
+      "withdrawn": 0,
+      "completion_rate": 0.0,
+      "avg_drift_months": -0.5,
+      "on_time_pct": 100.0,
+      "execution_score": 70.0,
+      "grade": "B",
+      "drift_stats": {
+        "count": 2,
+        "mean": -0.5,
+        "median": -0.5,
+        "p25": -1,
         "p75": 0
       }
     },
@@ -2296,6 +2271,29 @@
       }
     },
     {
+      "developer": "Global Power Generation Australia Pty Ltd",
+      "project_count": 3,
+      "total_mw": 900.0,
+      "technologies": [
+        "bess",
+        "hybrid"
+      ],
+      "operating": 0,
+      "withdrawn": 0,
+      "completion_rate": 0.0,
+      "avg_drift_months": 2.0,
+      "on_time_pct": 66.7,
+      "execution_score": 56.7,
+      "grade": "C",
+      "drift_stats": {
+        "count": 3,
+        "mean": 2.0,
+        "median": 0,
+        "p25": 0,
+        "p75": 6
+      }
+    },
+    {
       "developer": "Origin Energy",
       "project_count": 7,
       "total_mw": 2785.0,
@@ -2325,6 +2323,29 @@
       "total_mw": 2187.0,
       "technologies": [
         "wind"
+      ],
+      "operating": 0,
+      "withdrawn": 0,
+      "completion_rate": 0.0,
+      "avg_drift_months": 6.0,
+      "on_time_pct": 50.0,
+      "execution_score": 45.0,
+      "grade": "D",
+      "drift_stats": {
+        "count": 2,
+        "mean": 6.0,
+        "median": 6.0,
+        "p25": 0,
+        "p75": 12
+      }
+    },
+    {
+      "developer": "Wattle Creek Energy Hub P/L",
+      "project_count": 2,
+      "total_mw": 530.0,
+      "technologies": [
+        "bess",
+        "hybrid"
       ],
       "operating": 0,
       "withdrawn": 0,
@@ -2478,20 +2499,6 @@
       "grade": "F"
     },
     {
-      "developer": "Cubico Sustainable Investments Australia Pty Ltd",
-      "project_count": 2,
-      "total_mw": 1700.0,
-      "technologies": [
-        "hybrid",
-        "wind"
-      ],
-      "operating": 0,
-      "withdrawn": 0,
-      "completion_rate": 0.0,
-      "execution_score": 35.0,
-      "grade": "F"
-    },
-    {
       "developer": "Devlins Bridge Wind Farm Holdco Pty Ltd",
       "project_count": 2,
       "total_mw": 1323.0,
@@ -2574,20 +2581,6 @@
       "grade": "F"
     },
     {
-      "developer": "Gamuda Renewables Australia + Alternate Path (JV)",
-      "project_count": 2,
-      "total_mw": 485.0,
-      "technologies": [
-        "hybrid",
-        "wind"
-      ],
-      "operating": 0,
-      "withdrawn": 0,
-      "completion_rate": 0.0,
-      "execution_score": 35.0,
-      "grade": "F"
-    },
-    {
       "developer": "Green Switch Energy Pty Ltd",
       "project_count": 3,
       "total_mw": 1000.0,
@@ -2660,6 +2653,20 @@
       "total_mw": 2824.0,
       "technologies": [
         "offshore_wind"
+      ],
+      "operating": 0,
+      "withdrawn": 0,
+      "completion_rate": 0.0,
+      "execution_score": 35.0,
+      "grade": "F"
+    },
+    {
+      "developer": "Leeson Solar Pty Ltd.",
+      "project_count": 2,
+      "total_mw": 800.0,
+      "technologies": [
+        "bess",
+        "solar"
       ],
       "operating": 0,
       "withdrawn": 0,
@@ -3023,19 +3030,45 @@
       "completion_rate": 0.0,
       "execution_score": 35.0,
       "grade": "F"
+    },
+    {
+      "developer": "ACEN Renewables",
+      "project_count": 4,
+      "total_mw": 2489.0,
+      "technologies": [
+        "hybrid",
+        "pumped_hydro",
+        "solar",
+        "wind"
+      ],
+      "operating": 0,
+      "withdrawn": 0,
+      "completion_rate": 0.0,
+      "avg_drift_months": 7.0,
+      "on_time_pct": 0.0,
+      "execution_score": 28.3,
+      "grade": "F",
+      "drift_stats": {
+        "count": 1,
+        "mean": 7.0,
+        "median": 7,
+        "p25": 7,
+        "p75": 7
+      }
     }
   ],
   "industry_averages": {
-    "avg_drift_months": 0.1,
-    "avg_on_time_pct": 99.1,
-    "developer_count": 153
+    "avg_drift_months": 0.2,
+    "avg_on_time_pct": 97.4,
+    "developer_count": 154
   },
   "grade_distribution": {
-    "A": 28,
-    "B": 73,
-    "D": 2,
+    "A": 26,
+    "B": 74,
+    "C": 1,
+    "D": 3,
     "F": 50
   },
-  "total_developers": 153,
-  "exported_at": "2026-07-18T20:00:16.453625"
+  "total_developers": 154,
+  "exported_at": "2026-07-26T13:21:35.102939"
 }

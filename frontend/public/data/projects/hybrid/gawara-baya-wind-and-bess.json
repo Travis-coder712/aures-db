@@ -7,7 +7,7 @@
   "storage_mwh": 208.0,
   "state": "QLD",
   "current_developer": "GAWARA BAYA WIND FARM PTY LTD",
-  "cod_current": "2029-01-15",
+  "cod_current": "2029-01",
   "cod_original": "2029-01-15",
   "connection_status": "anticipated",
   "grid_forming": false,
@@ -15,9 +15,9 @@
   "has_syncon": false,
   "has_statcom": false,
   "has_harmonic_filter": false,
-  "data_confidence": "medium",
-  "last_updated": "2026-05-25",
-  "last_verified": "2026-03-10",
+  "data_confidence": "confirmed",
+  "last_updated": "2026-07-16",
+  "last_verified": "2026-07-16",
   "aemo_gen_info_id": "2304",
   "confidence_score": "28",
   "development_stage": "early_stage",
@@ -30,6 +30,14 @@
       "title": "COD estimate updated",
       "detail": "COD changed from 2029-01 to 2029-01-15 (source: AEMO Generation Information)",
       "sources": []
+    },
+    {
+      "date": "2026-07-25",
+      "date_precision": "day",
+      "event_type": "cod_change",
+      "title": "COD estimate updated",
+      "detail": "COD changed from 2029-01 to 2030-02-28 (source: AEMO Generation Information)",
+      "sources": []
     }
   ],
   "ownership_history": [],
@@ -40,10 +48,13 @@
     {
       "scheme": "CIS",
       "round": "Tender 4 \u2014 NEM Generation",
-      "capacity_mw": 399,
-      "storage_mwh": 217,
+      "capacity_mw": 400,
+      "award_date": "2025-10-09",
       "source_url": "https://www.dcceew.gov.au/about/news/cis-tender-4-deliver-6-6gw-clean-energy",
-      "contract_type": "CISA (federal underwriting)"
+      "contract_type": "CISA (federal underwriting)",
+      "execution_status": "cisa_signed",
+      "execution_notes": "All regulatory approvals held. Powerlink MID amendment Jan 2026 \u2014 'approaching FC' but no formal FC announcement. Wind-only (BESS 217 MWh in prior AURES record UNVERIFIED). Status downgraded from prior 'fid' to 'cisa_signed' 2026-07-16 pending public FC confirmation.",
+      "execution_source_url": "https://www.powerlink.com.au/projects/gawara-baya-wind-farm-connection-project"
     }
   ],
   "cost_sources": [],
@@ -56,5 +67,6 @@
       "source_tier": 1
     }
   ],
+  "operational_notes": "Wind-only per Windlab/Powerlink materials (BESS attribution of 217 MWh in prior AURES record UNVERIFIED \u2014 no BESS component in developer materials as of Jul 2026; technology reclassified from hybrid to wind). 69 turbines. All regulatory approvals held (federal EPBC Jun 2024, state Aug 2023). Powerlink connection MID amendment Jan 2026 \u2014 'moving closer to financial close' but NO formal FC announcement yet. Windlab is Squadron Energy / Andrew Forrest-backed.",
   "timeline_events": []
 }

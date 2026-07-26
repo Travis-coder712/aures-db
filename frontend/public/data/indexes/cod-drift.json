@@ -1,10 +1,10 @@
 {
-  "projects_with_drift": 609,
+  "projects_with_drift": 614,
   "avg_drift_months": {
     "solar": 0.2,
-    "wind": 0.1,
+    "wind": 0.2,
     "bess": -0.1,
-    "hybrid": 0.0,
+    "hybrid": 0.8,
     "pumped_hydro": 0.0,
     "offshore_wind": 0.0
   },
@@ -29,6 +29,39 @@
       "state": "WA",
       "original": "2027",
       "current": "2025-07",
+      "drift_months": -24
+    },
+    {
+      "id": "dinawan-energy-hub",
+      "name": "Dinawan Energy Hub",
+      "technology": "hybrid",
+      "status": "development",
+      "capacity_mw": 1007.0,
+      "state": "NSW",
+      "original": "2029-12-01",
+      "current": "2031-07-01",
+      "drift_months": 24
+    },
+    {
+      "id": "ilford-green-energy-hub",
+      "name": "Ilford Green Energy Hub",
+      "technology": "hybrid",
+      "status": "development",
+      "capacity_mw": 500.0,
+      "state": "NSW",
+      "original": "2030-11-01",
+      "current": "2032-09-01",
+      "drift_months": 24
+    },
+    {
+      "id": "eraring-big-battery",
+      "name": "Eraring Big Battery",
+      "technology": "bess",
+      "status": "operating",
+      "capacity_mw": 700.0,
+      "state": "NSW",
+      "original": "2027-03-31",
+      "current": "2025-12",
       "drift_months": -24
     },
     {
@@ -73,6 +106,39 @@
       "state": "NSW",
       "original": "2025",
       "current": "2026",
+      "drift_months": 12
+    },
+    {
+      "id": "valley-of-the-winds",
+      "name": "Valley of the Winds",
+      "technology": "wind",
+      "status": "development",
+      "capacity_mw": 919.0,
+      "state": "NSW",
+      "original": "2029-12-31",
+      "current": "2030-07-31",
+      "drift_months": 12
+    },
+    {
+      "id": "wattle-creek-energy-hub-solar-bess",
+      "name": "Wattle Creek Energy Hub - Solar / BESS",
+      "technology": "hybrid",
+      "status": "development",
+      "capacity_mw": 180.0,
+      "state": "NSW",
+      "original": "2028-12-01",
+      "current": "2029-12-01",
+      "drift_months": 12
+    },
+    {
+      "id": "western-downs-battery-stage-1-and-2",
+      "name": "Western Downs Battery - Stage 1 And 2",
+      "technology": "bess",
+      "status": "commissioning",
+      "capacity_mw": 510.0,
+      "state": "QLD",
+      "original": "2025-12-19",
+      "current": "2026-03-31",
       "drift_months": 12
     },
     {
@@ -838,11 +904,11 @@
       "id": "bundaberg-solar-farm",
       "name": "Bundaberg Solar Farm",
       "technology": "solar",
-      "status": "operating",
-      "capacity_mw": 96.0,
+      "status": "construction",
+      "capacity_mw": 78.0,
       "state": "QLD",
       "original": "2025-12-31",
-      "current": "2025-12-31",
+      "current": "2025-12",
       "drift_months": 0
     },
     {
@@ -864,7 +930,7 @@
       "capacity_mw": 1400.0,
       "state": "QLD",
       "original": "2030-03-30",
-      "current": "2030-03-30",
+      "current": "2030-03",
       "drift_months": 0
     },
     {
@@ -1103,10 +1169,10 @@
       "name": "Carmodys Hill Wind Farm",
       "technology": "wind",
       "status": "construction",
-      "capacity_mw": 256.0,
+      "capacity_mw": 247.0,
       "state": "SA",
       "original": "2029-01-01",
-      "current": "2029-01-01",
+      "current": "2029-01",
       "drift_months": 0
     },
     {
@@ -1348,7 +1414,7 @@
       "capacity_mw": 400.0,
       "state": "QLD",
       "original": "2028-01-02",
-      "current": "2028-01-02",
+      "current": "2028-07-01",
       "drift_months": 0
     },
     {
@@ -1700,7 +1766,7 @@
       "capacity_mw": 95.0,
       "state": "VIC",
       "original": "2027-09-01",
-      "current": "2027-09-01",
+      "current": "2027-09",
       "drift_months": 0
     },
     {
@@ -1723,17 +1789,6 @@
       "state": "TAS",
       "original": "1968-12-31",
       "current": "1968-12-31",
-      "drift_months": 0
-    },
-    {
-      "id": "dinawan-energy-hub",
-      "name": "Dinawan Energy Hub",
-      "technology": "hybrid",
-      "status": "development",
-      "capacity_mw": 1007.0,
-      "state": "NSW",
-      "original": "2029-12-01",
-      "current": "2029-12-01",
       "drift_months": 0
     },
     {
@@ -2025,12 +2080,12 @@
     {
       "id": "gawara-baya-wind-and-bess",
       "name": "Gawara Baya Wind And BESS",
-      "technology": "wind",
+      "technology": "hybrid",
       "status": "development",
       "capacity_mw": 400.0,
       "state": "QLD",
       "original": "2029-01-15",
-      "current": "2029-01-15",
+      "current": "2029-01",
       "drift_months": 0
     },
     {
@@ -2224,11 +2279,11 @@
       "id": "goorambat-east-solar-farm-engie",
       "name": "Goorambat East Solar Farm (ENGIE)",
       "technology": "solar",
-      "status": "commissioning",
+      "status": "construction",
       "capacity_mw": 250.0,
       "state": "VIC",
       "original": "2026-05-18",
-      "current": "2026-05-18",
+      "current": "2026-05",
       "drift_months": 0
     },
     {
@@ -2466,11 +2521,11 @@
       "id": "guthries-gap-solar-power-station",
       "name": "Guthrie\u2019s Gap Solar Power Station",
       "technology": "hybrid",
-      "status": "construction",
+      "status": "development",
       "capacity_mw": 300.0,
       "state": "QLD",
       "original": "2029-05-01",
-      "current": "2029-05-01",
+      "current": "2029-05",
       "drift_months": 0
     },
     {
@@ -2712,7 +2767,7 @@
       "capacity_mw": 921.12,
       "state": "VIC",
       "original": "2030-11-01",
-      "current": "2030-11-01",
+      "current": "2030-11",
       "drift_months": 0
     },
     {
@@ -2856,17 +2911,6 @@
       "state": "QLD",
       "original": "2028-02-04",
       "current": "2028-02-04",
-      "drift_months": 0
-    },
-    {
-      "id": "ilford-green-energy-hub",
-      "name": "Ilford Green Energy Hub",
-      "technology": "hybrid",
-      "status": "development",
-      "capacity_mw": 500.0,
-      "state": "NSW",
-      "original": "2030-11-01",
-      "current": "2030-11-01",
       "drift_months": 0
     },
     {
@@ -3346,11 +3390,11 @@
       "id": "lancaster-solar-farm",
       "name": "Lancaster Solar Farm",
       "technology": "solar",
-      "status": "operating",
-      "capacity_mw": 108.0,
+      "status": "construction",
+      "capacity_mw": 80.0,
       "state": "VIC",
       "original": "2026-05-30",
-      "current": "2026-05-30",
+      "current": "2026-05",
       "drift_months": 0
     },
     {
@@ -3412,11 +3456,11 @@
       "id": "limondale-bess",
       "name": "Limondale BESS",
       "technology": "bess",
-      "status": "operating",
+      "status": "construction",
       "capacity_mw": 50.0,
       "state": "NSW",
       "original": "2026-03-07",
-      "current": "2026-03-07",
+      "current": "2026-03",
       "drift_months": 0
     },
     {
@@ -3522,11 +3566,11 @@
       "id": "lower-wonga-solar-farm-and-bess",
       "name": "Lower Wonga Solar Farm and BESS",
       "technology": "hybrid",
-      "status": "construction",
+      "status": "development",
       "capacity_mw": 281.0,
       "state": "QLD",
       "original": "2028-08-01",
-      "current": "2028-08-01",
+      "current": "2028-08",
       "drift_months": 0
     },
     {
@@ -3856,7 +3900,7 @@
       "capacity_mw": 349.0,
       "state": "QLD",
       "original": "2028-03-31",
-      "current": "2028-03-31",
+      "current": "2028-03",
       "drift_months": 0
     },
     {
@@ -4171,11 +4215,11 @@
       "id": "munna-creek-solar-farm",
       "name": "Munna Creek Solar Farm",
       "technology": "solar",
-      "status": "operating",
+      "status": "construction",
       "capacity_mw": 120.0,
       "state": "QLD",
       "original": "2026-01-24",
-      "current": "2026-01-24",
+      "current": "2026-01",
       "drift_months": 0
     },
     {
@@ -4417,7 +4461,7 @@
       "capacity_mw": 750.0,
       "state": "VIC",
       "original": "2028-02-01",
-      "current": "2028-02-01",
+      "current": "2028-02",
       "drift_months": 0
     },
     {
@@ -5106,11 +5150,11 @@
       "id": "smoky-creek-solar-power-station",
       "name": "Smoky Creek Solar Power Station",
       "technology": "hybrid",
-      "status": "construction",
+      "status": "development",
       "capacity_mw": 300.0,
       "state": "QLD",
       "original": "2029-05-01",
-      "current": "2029-05-01",
+      "current": "2029-05",
       "drift_months": 0
     },
     {
@@ -5396,7 +5440,7 @@
       "capacity_mw": 1300.0,
       "state": "QLD",
       "original": "2026-01-07",
-      "current": "2026-01-07",
+      "current": "2026-06-01",
       "drift_months": 0
     },
     {
@@ -5781,7 +5825,7 @@
       "capacity_mw": 1054.0,
       "state": "QLD",
       "original": "2028-12-31",
-      "current": "2028-12-31",
+      "current": "2028-12",
       "drift_months": 0
     },
     {
@@ -6005,17 +6049,6 @@
       "drift_months": 0
     },
     {
-      "id": "valley-of-the-winds",
-      "name": "Valley of the Winds",
-      "technology": "wind",
-      "status": "development",
-      "capacity_mw": 919.0,
-      "state": "NSW",
-      "original": "2029-12-31",
-      "current": "2029-12-31",
-      "drift_months": 0
-    },
-    {
       "id": "wagga-north-bess-kci",
       "name": "Wagga North BESS - KCI",
       "technology": "bess",
@@ -6085,11 +6118,11 @@
       "id": "wambo-wind-farm",
       "name": "Wambo Wind Farm",
       "technology": "wind",
-      "status": "commissioning",
-      "capacity_mw": 506.0,
+      "status": "construction",
+      "capacity_mw": 500.0,
       "state": "QLD",
       "original": "2025-02-28",
-      "current": "2025-02-28",
+      "current": "2025-02",
       "drift_months": 0
     },
     {
@@ -6178,17 +6211,6 @@
       "state": "NSW",
       "original": "2029-01-01",
       "current": "2029-01-01",
-      "drift_months": 0
-    },
-    {
-      "id": "wattle-creek-energy-hub-solar-bess",
-      "name": "Wattle Creek Energy Hub - Solar / BESS",
-      "technology": "hybrid",
-      "status": "development",
-      "capacity_mw": 180.0,
-      "state": "NSW",
-      "original": "2028-12-01",
-      "current": "2028-12-01",
       "drift_months": 0
     },
     {
@@ -6291,17 +6313,6 @@
       "drift_months": 0
     },
     {
-      "id": "western-downs-battery-stage-1-and-2",
-      "name": "Western Downs Battery - Stage 1 And 2",
-      "technology": "bess",
-      "status": "commissioning",
-      "capacity_mw": 510.0,
-      "state": "QLD",
-      "original": "2025-12-19",
-      "current": "2025-12-19",
-      "drift_months": 0
-    },
-    {
       "id": "western-downs-green-power-hub-pl",
       "name": "Western Downs Green Power Hub P/L",
       "technology": "solar",
@@ -6364,7 +6375,7 @@
       "capacity_mw": 574.4,
       "state": "SA",
       "original": "2030-01-01",
-      "current": "2030-01-01",
+      "current": "2030-01",
       "drift_months": 0
     },
     {
@@ -6375,7 +6386,7 @@
       "capacity_mw": 450.0,
       "state": "VIC",
       "original": "2027-08-01",
-      "current": "2027-08-01",
+      "current": "2027-08",
       "drift_months": 0
     },
     {
@@ -6529,7 +6540,7 @@
       "capacity_mw": 70.0,
       "state": "VIC",
       "original": "2028-09-20",
-      "current": "2028-09",
+      "current": "2028-09-20",
       "drift_months": 0
     },
     {
@@ -6706,6 +6717,50 @@
       "state": "SA",
       "original": "2031-12-31",
       "current": "2031-12-31",
+      "drift_months": 0
+    },
+    {
+      "id": "willogoleche-2-wind-farm",
+      "name": "Willogoleche 2 Wind Farm",
+      "technology": "wind",
+      "status": "development",
+      "capacity_mw": 108.0,
+      "state": "SA",
+      "original": "2028-06",
+      "current": "2028-06",
+      "drift_months": 0
+    },
+    {
+      "id": "punchs-creek-renewable-energy-t4",
+      "name": "Punchs Creek Renewable Energy Project",
+      "technology": "hybrid",
+      "status": "development",
+      "capacity_mw": 400.0,
+      "state": "QLD",
+      "original": "2029-01",
+      "current": "2029-01",
+      "drift_months": 0
+    },
+    {
+      "id": "moranbah-solar-farm-zeroe",
+      "name": "Moranbah Solar Farm",
+      "technology": "hybrid",
+      "status": "development",
+      "capacity_mw": 171.0,
+      "state": "QLD",
+      "original": "2028-06",
+      "current": "2028-06",
+      "drift_months": 0
+    },
+    {
+      "id": "cellars-hill-wind-farm",
+      "name": "Cellars Hill Wind Farm",
+      "technology": "wind",
+      "status": "development",
+      "capacity_mw": 341.0,
+      "state": "TAS",
+      "original": "2028-12",
+      "current": "2028-12",
       "drift_months": 0
     }
   ],

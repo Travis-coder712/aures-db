@@ -2,7 +2,7 @@
   "concentration": {
     "epc": {
       "total_contractors": 65,
-      "total_mw": 26496.3,
+      "total_mw": 26490.3,
       "total_project_slots": 116,
       "hhi_mw": 371.0,
       "top3_share_mw_pct": 23.4,
@@ -26,9 +26,9 @@
     },
     "bop": {
       "total_contractors": 12,
-      "total_mw": 7449.0,
+      "total_mw": 7440.0,
       "total_project_slots": 21,
-      "hhi_mw": 1417.0,
+      "hhi_mw": 1420.0,
       "top3_share_mw_pct": 57.8,
       "top3": [
         {
@@ -208,11 +208,12 @@
         "VIC": 1
       },
       "statuses": {
-        "operating": 7
+        "construction": 1,
+        "operating": 6
       },
       "top_developers": [
         [
-          "RWE Renewables Australia",
+          "LIMONDALE BATTERY PTY. LTD",
           1
         ],
         [
@@ -901,7 +902,7 @@
         "epc"
       ],
       "projects": 2,
-      "mw_total": 1083.0,
+      "mw_total": 1077.0,
       "technologies": {
         "wind": 2
       },
@@ -910,8 +911,7 @@
         "QLD": 1
       },
       "statuses": {
-        "construction": 1,
-        "commissioning": 1
+        "construction": 2
       },
       "top_developers": [
         [
@@ -919,7 +919,7 @@
           1
         ],
         [
-          "Cubico Sustainable Investments / Stanwell Corporation (50:50 JV)",
+          "Cubico Sustainable Investments Australia Pty Ltd",
           1
         ]
       ],
@@ -1737,38 +1737,6 @@
       "top_oem_partners": []
     },
     {
-      "contractor": "DT Infrastructure",
-      "slug": "dt-infrastructure",
-      "category": "bop_only",
-      "roles": [
-        "bop"
-      ],
-      "projects": 1,
-      "mw_total": 256.0,
-      "technologies": {
-        "wind": 1
-      },
-      "states": {
-        "SA": 1
-      },
-      "statuses": {
-        "construction": 1
-      },
-      "top_developers": [
-        [
-          "Aula Energy (100% post-FC Dec 2025)",
-          1
-        ]
-      ],
-      "top_oem_partners": [
-        {
-          "supplier": "GE Vernova",
-          "role": "wind_oem",
-          "count": 1
-        }
-      ]
-    },
-    {
       "contractor": "McConnell Dowell / John Holland JV",
       "slug": "mcconnell-dowell-john-holland-jv",
       "category": "epc_only",
@@ -1902,6 +1870,38 @@
         {
           "supplier": "CATL",
           "role": "bess_oem",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "contractor": "DT Infrastructure",
+      "slug": "dt-infrastructure",
+      "category": "bop_only",
+      "roles": [
+        "bop"
+      ],
+      "projects": 1,
+      "mw_total": 247.0,
+      "technologies": {
+        "wind": 1
+      },
+      "states": {
+        "SA": 1
+      },
+      "statuses": {
+        "construction": 1
+      },
+      "top_developers": [
+        [
+          "Georgetown Hills Renewable Energy Pty Ltd as trustee for the Georgetown Hills Renewable Energy Trust",
+          1
+        ]
+      ],
+      "top_oem_partners": [
+        {
+          "supplier": "GE Vernova",
+          "role": "wind_oem",
           "count": 1
         }
       ]
@@ -2909,12 +2909,12 @@
         "role": "epc",
         "technology": "wind",
         "state": "QLD",
-        "status": "commissioning",
-        "capacity_mw": 506.0,
-        "developer": "Cubico Sustainable Investments / Stanwell Corporation (50:50 JV)",
+        "status": "construction",
+        "capacity_mw": 500.0,
+        "developer": "Cubico Sustainable Investments Australia Pty Ltd",
         "model": null,
         "source_url": null,
-        "drift_months": 0.0
+        "drift_months": null
       }
     ],
     "GE Vernova + NACAP + CCP (consortium)": [
@@ -2994,11 +2994,11 @@
         "technology": "wind",
         "state": "SA",
         "status": "construction",
-        "capacity_mw": 256.0,
-        "developer": "Aula Energy (100% post-FC Dec 2025)",
+        "capacity_mw": 247.0,
+        "developer": "Georgetown Hills Renewable Energy Pty Ltd as trustee for the Georgetown Hills Renewable Energy Trust",
         "model": null,
         "source_url": "https://www.insideconstruction.com.au/news/latest-news/dt-infrastructure-wins-contract-to-deliver-carmodys-hill-wind-farm",
-        "drift_months": 0.0
+        "drift_months": null
       }
     ],
     "DT Infrastructure / Gamuda": [
@@ -3028,7 +3028,7 @@
         "developer": "Quinbrook Infrastructure Partners",
         "model": null,
         "source_url": "https://nuenergy.au/nuenergy-landmark-supernode-battery-storage-project/",
-        "drift_months": 0.0
+        "drift_months": 4.8
       }
     ],
     "Enerven (SA Power Networks)": [
@@ -3364,12 +3364,12 @@
         "role": "bop",
         "technology": "bess",
         "state": "NSW",
-        "status": "operating",
+        "status": "construction",
         "capacity_mw": 50.0,
-        "developer": "RWE Renewables Australia",
+        "developer": "LIMONDALE BATTERY PTY. LTD",
         "model": null,
         "source_url": "https://beon-es.com.au/project/limondale/",
-        "drift_months": 0.0
+        "drift_months": null
       },
       {
         "project_id": "avonlie-solar-farm",
@@ -3793,7 +3793,7 @@
         "developer": "Western Downs BESS Pty Ltd as trustee for Western Downs BESS Trust",
         "model": null,
         "source_url": "https://www.ugllimited.com/news/2025/western-downs-battery-stage-1-is-operating",
-        "drift_months": 0.0
+        "drift_months": 3.4
       }
     ],
     "ACLE Services / ACEnergy": [
@@ -4889,10 +4889,10 @@
       ]
     },
     {
-      "developer": "Cubico Sustainable Investments / Stanwell Corporation (50:50 JV)",
+      "developer": "Cubico Sustainable Investments Australia Pty Ltd",
       "contractor": "Vestas (EPC)",
       "projects": 1,
-      "mw": 506.0,
+      "mw": 500.0,
       "roles": [
         "epc"
       ]
@@ -5060,15 +5060,6 @@
       ]
     },
     {
-      "developer": "Aula Energy (100% post-FC Dec 2025)",
-      "contractor": "DT Infrastructure",
-      "projects": 1,
-      "mw": 256.0,
-      "roles": [
-        "bop"
-      ]
-    },
-    {
       "developer": "Genex Power",
       "contractor": "McConnell Dowell / John Holland JV",
       "projects": 1,
@@ -5120,6 +5111,15 @@
       "mw": 250.0,
       "roles": [
         "epc"
+      ]
+    },
+    {
+      "developer": "Georgetown Hills Renewable Energy Pty Ltd as trustee for the Georgetown Hills Renewable Energy Trust",
+      "contractor": "DT Infrastructure",
+      "projects": 1,
+      "mw": 247.0,
+      "roles": [
+        "bop"
       ]
     },
     {
@@ -5726,7 +5726,7 @@
       ]
     },
     {
-      "developer": "RWE Renewables Australia",
+      "developer": "LIMONDALE BATTERY PTY. LTD",
       "contractor": "Beon Energy Solutions",
       "projects": 1,
       "mw": 50.0,
@@ -6625,5 +6625,5 @@
       "both": 4
     }
   },
-  "exported_at": "2026-07-18T19:51:26.126049"
+  "exported_at": "2026-07-26T13:12:26.133528"
 }

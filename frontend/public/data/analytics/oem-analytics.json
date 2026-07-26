@@ -2984,14 +2984,14 @@
         ]
       },
       {
-        "developer": "Cubico Sustainable Investments / Stanwell Corporation (50:50 JV)",
+        "developer": "Cubico Sustainable Investments Australia Pty Ltd",
         "project_count": 1,
-        "total_mw": 506.0,
+        "total_mw": 500.0,
         "technologies": [
           "wind"
         ],
         "statuses": [
-          "commissioning"
+          "construction"
         ]
       },
       {
@@ -3373,14 +3373,14 @@
         ]
       },
       {
-        "developer": "RWE Renewables Australia",
+        "developer": "LIMONDALE BATTERY PTY. LTD",
         "project_count": 1,
         "total_mw": 50.0,
         "technologies": [
           "bess"
         ],
         "statuses": [
-          "operating"
+          "construction"
         ]
       },
       {
@@ -3491,9 +3491,9 @@
         ]
       },
       {
-        "developer": "Aula Energy (100% post-FC Dec 2025)",
+        "developer": "Georgetown Hills Renewable Energy Pty Ltd as trustee for the Georgetown Hills Renewable Energy Trust",
         "project_count": 1,
-        "total_mw": 256.0,
+        "total_mw": 247.0,
         "technologies": [
           "wind"
         ],
@@ -5854,7 +5854,7 @@
     },
     "wind_oem": {
       "total_oems": 9,
-      "total_mw": 17728.2,
+      "total_mw": 17713.2,
       "total_projects": 74,
       "hhi_mw": 2827.0,
       "hhi_projects": 2465.0,
@@ -5863,7 +5863,7 @@
       "top3": [
         {
           "supplier": "Vestas",
-          "mw": 8406.4,
+          "mw": 8400.4,
           "projects": 32
         },
         {
@@ -5873,11 +5873,11 @@
         },
         {
           "supplier": "GE Vernova",
-          "mw": 2601.8,
+          "mw": 2592.8,
           "projects": 11
         }
       ]
     }
   },
-  "exported_at": "2026-07-18T19:51:26.120345"
+  "exported_at": "2026-07-26T13:12:26.127540"
 }

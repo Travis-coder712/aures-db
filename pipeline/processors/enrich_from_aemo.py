@@ -84,24 +84,28 @@ def classify_development_stages(conn, dry_run=False):
 
 
 def populate_cod_from_aemo(conn, dry_run=False):
-    """Populate cod_current from AEMO full_year_commissioning for projects missing it."""
+    """Populate cod_current from AEMO full_year_commissioning for projects missing it.
 
-    # Get projects without cod_current that have AEMO commissioning data
+    Uses MAX(full_year_commissioning) so the pick is deterministic when a project
+    has multiple DUIDs with different CODs. Values are YYYY-MM-DD or YYYY-MM
+    strings, which sort lexically the way we want (latest date wins; a more
+    precise date beats its month prefix).
+    """
+
     rows = conn.execute("""
-        SELECT p.id, p.name, p.cod_current, a.full_year_commissioning
+        SELECT p.id, p.name, p.cod_current, MAX(a.full_year_commissioning) AS aemo_cod
         FROM projects p
         JOIN aemo_generation_info a ON a.project_id = p.id
         WHERE a.full_year_commissioning IS NOT NULL
           AND a.full_year_commissioning != ''
         GROUP BY p.id
-        ORDER BY a.full_year_commissioning DESC
     """).fetchall()
 
     updated = 0
     new_cod = 0
     for row in rows:
         pid = row['id']
-        aemo_cod = str(row['full_year_commissioning']).strip()
+        aemo_cod = str(row['aemo_cod']).strip()
         current_cod = row['cod_current']
 
         # Normalize AEMO COD to YYYY format or YYYY-MM if available

@@ -29,6 +29,14 @@
       "title": "COD estimate updated",
       "detail": "COD changed from 2031-12 to 2031-12-31 (source: AEMO Generation Information)",
       "sources": []
+    },
+    {
+      "date": "2026-07-25",
+      "date_precision": "day",
+      "event_type": "cod_change",
+      "title": "COD estimate updated",
+      "detail": "COD changed from 2031-12 to 2032-12-31 (source: AEMO Generation Information)",
+      "sources": []
     }
   ],
   "ownership_history": [],

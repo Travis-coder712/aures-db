@@ -2,8 +2,8 @@
   "summary": {
     "total_bess": 432,
     "total_with_storage": 347,
-    "total_operating": 35,
-    "total_hybrid": 93,
+    "total_operating": 34,
+    "total_hybrid": 94,
     "total_hybrid_operating": 0,
     "grid_forming_count": 11,
     "grid_forming_pct": 2.5,
@@ -22,12 +22,12 @@
         "1-2h": 11,
         "2-4h": 17,
         "4-8h": 3,
-        "8h+": 1
+        "8h+": 0
       },
-      "count": 35,
-      "avg": 2.07,
+      "count": 34,
+      "avg": 1.9,
       "median": 2.0,
-      "max": 8.0,
+      "max": 4.51,
       "min": 0.3
     },
     "development": {
@@ -50,12 +50,12 @@
         "1-2h": 2,
         "2-4h": 11,
         "4-8h": 3,
-        "8h+": 0
+        "8h+": 1
       },
-      "count": 16,
-      "avg": 2.33,
+      "count": 17,
+      "avg": 2.67,
       "median": 2.0,
-      "max": 4.02,
+      "max": 8.0,
       "min": 1.0
     },
     "commissioning": {
@@ -130,21 +130,21 @@
     },
     {
       "year": 2025,
-      "count": 12,
-      "avg_duration_h": 2.22,
+      "count": 11,
+      "avg_duration_h": 2.33,
       "median_duration_h": 2.0,
       "max_duration_h": 4.0,
-      "total_mw": 3331.0,
-      "total_mwh": 7526.8
+      "total_mw": 2821.0,
+      "total_mwh": 7017.2
     },
     {
       "year": 2026,
-      "count": 26,
-      "avg_duration_h": 2.53,
+      "count": 27,
+      "avg_duration_h": 2.47,
       "median_duration_h": 2.0,
       "max_duration_h": 8.0,
-      "total_mw": 7562.0,
-      "total_mwh": 19100.9
+      "total_mw": 8072.0,
+      "total_mwh": 19610.5
     },
     {
       "year": 2027,
@@ -224,7 +224,7 @@
       "duration_h": 1.0,
       "developer": "Western Downs BESS Pty Ltd as trustee for Western Downs BESS Trust",
       "operator": null,
-      "cod": "2025-12-19"
+      "cod": "2026-03-31"
     },
     {
       "project_id": "liddell-bess",
@@ -400,7 +400,7 @@
       "storage_mwh": 1238.4,
       "duration_h": 1.23,
       "developer": "Spark Renewables (Tenaga Nasional Berhad subsidiary)",
-      "cod": "2029-12-01"
+      "cod": "2031-07-01"
     },
     {
       "project_id": "magnetite-energy-hub",
@@ -432,8 +432,8 @@
       "capacity_mw": 921.12,
       "storage_mwh": 800.0,
       "duration_h": 0.87,
-      "developer": "AGL + Wind Prospect",
-      "cod": "2030-11-01"
+      "developer": "Wind Prospect WA Pty Ltd",
+      "cod": "2030-11"
     },
     {
       "project_id": "hargraves-energy-project-wind-solar-and-bess",
@@ -452,10 +452,10 @@
       "state": "VIC",
       "status": "development",
       "capacity_mw": 750.0,
-      "storage_mwh": 2400.0,
-      "duration_h": 3.2,
-      "developer": "Edify Energy (La Caisse-owned)",
-      "cod": "2028-02-01"
+      "storage_mwh": 1200.0,
+      "duration_h": 1.6,
+      "developer": "Edify Energy Pty Ltd",
+      "cod": "2028-02"
     },
     {
       "project_id": "bendenine",
@@ -509,8 +509,8 @@
       "capacity_mw": 574.4,
       "storage_mwh": 1000.0,
       "duration_h": 1.74,
-      "developer": "EDF Renewables Australia",
-      "cod": "2030-01-01"
+      "developer": "WP Renewables Ltd",
+      "cod": "2030-01"
     },
     {
       "project_id": "croydon-hybrid-facility-solar-and-bess",
@@ -543,7 +543,7 @@
       "storage_mwh": 455.6,
       "duration_h": 0.91,
       "developer": "brightnightpower_NR",
-      "cod": "2030-11-01"
+      "cod": "2032-09-01"
     },
     {
       "project_id": "markaranka-solar-and-storage",
@@ -619,8 +619,8 @@
       "capacity_mw": 450.0,
       "storage_mwh": 378.0,
       "duration_h": 0.84,
-      "developer": "ENGIE (Wind Prospect WA developer partner)",
-      "cod": "2027-08-01"
+      "developer": "Wind Prospect WA Pty Ltd",
+      "cod": "2027-08"
     },
     {
       "project_id": "middlebrook-solar-and-bess",
@@ -664,7 +664,18 @@
       "storage_mwh": 1600.0,
       "duration_h": 4.0,
       "developer": "Global Power Generation Australia Pty Ltd",
-      "cod": "2028-01-02"
+      "cod": "2028-07-01"
+    },
+    {
+      "project_id": "gawara-baya-wind-and-bess",
+      "name": "Gawara Baya Wind And BESS",
+      "state": "QLD",
+      "status": "development",
+      "capacity_mw": 400.0,
+      "storage_mwh": 208.0,
+      "duration_h": 0.52,
+      "developer": "GAWARA BAYA WIND FARM PTY LTD",
+      "cod": "2029-01"
     },
     {
       "project_id": "jackson-solar-farm-and-bess",
@@ -813,12 +824,12 @@
       "project_id": "guthries-gap-solar-power-station",
       "name": "Guthrie\u2019s Gap Solar Power Station",
       "state": "QLD",
-      "status": "construction",
+      "status": "development",
       "capacity_mw": 300.0,
       "storage_mwh": 1200.0,
       "duration_h": 4.0,
-      "developer": "Edify Energy (La Caisse-owned)",
-      "cod": "2029-05-01"
+      "developer": "Edify Energy Pty Ltd",
+      "cod": "2029-05"
     },
     {
       "project_id": "miriam-vale-solar-farm-and-bess-a",
@@ -868,12 +879,12 @@
       "project_id": "smoky-creek-solar-power-station",
       "name": "Smoky Creek Solar Power Station",
       "state": "QLD",
-      "status": "construction",
+      "status": "development",
       "capacity_mw": 300.0,
       "storage_mwh": 1200.0,
       "duration_h": 4.0,
-      "developer": "Edify Energy (La Caisse-owned)",
-      "cod": "2029-05-01"
+      "developer": "Edify Energy Pty Ltd",
+      "cod": "2029-05"
     },
     {
       "project_id": "west-mokoan-solar-farm-and-bess",
@@ -901,12 +912,12 @@
       "project_id": "lower-wonga-solar-farm-and-bess",
       "name": "Lower Wonga Solar Farm and BESS",
       "state": "QLD",
-      "status": "construction",
+      "status": "development",
       "capacity_mw": 281.0,
       "storage_mwh": 843.0,
       "duration_h": 3.0,
-      "developer": "Lightsource bp",
-      "cod": "2028-08-01"
+      "developer": "Lower Wonga Solar Farm Pty Ltd",
+      "cod": "2028-08"
     },
     {
       "project_id": "bungama-solar",
@@ -1115,7 +1126,7 @@
       "storage_mwh": 1048.8,
       "duration_h": 5.83,
       "developer": "Wattle Creek Energy Hub P/L",
-      "cod": "2028-12-01"
+      "cod": "2029-12-01"
     },
     {
       "project_id": "hampton-park-sess",
@@ -1279,8 +1290,8 @@
       "capacity_mw": 95.0,
       "storage_mwh": 110.0,
       "duration_h": 1.16,
-      "developer": "Sungrow Renewable Energy",
-      "cod": "2027-09-01"
+      "developer": "DERBY SOLAR PROJECT PTY LTD",
+      "cod": "2027-09"
     },
     {
       "project_id": "cooma-solar-and-bess-acen",
@@ -1334,7 +1345,7 @@
       "capacity_mw": 64.0,
       "storage_mwh": 6.38,
       "duration_h": 0.1,
-      "developer": "Gentari (Petronas)",
+      "developer": "Barnawartha Solar Pty Ltd",
       "cod": null
     },
     {
@@ -1997,7 +2008,7 @@
       "project_id": "limondale-bess",
       "name": "Limondale BESS",
       "state": "NSW",
-      "status": "operating",
+      "status": "construction",
       "capacity_mw": 50.0,
       "storage_mwh": 400.0,
       "duration_h": 8.0,
@@ -2009,7 +2020,7 @@
       "inverter_model": null,
       "pcs_type": "grid_following",
       "rte_pct": 88.0,
-      "developer": "RWE Renewables Australia"
+      "developer": "LIMONDALE BATTERY PTY. LTD"
     },
     {
       "project_id": "wallgrove-grid-battery-project",
@@ -2187,5 +2198,5 @@
       "data_confidence": "low"
     }
   ],
-  "exported_at": "2026-07-18T19:51:26.272652"
+  "exported_at": "2026-07-26T13:12:26.281301"
 }

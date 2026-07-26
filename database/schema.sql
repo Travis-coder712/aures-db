@@ -110,7 +110,8 @@ CREATE TABLE IF NOT EXISTS source_references (
     source_tier INTEGER CHECK(source_tier BETWEEN 1 AND 5)
 );
 
-CREATE INDEX IF NOT EXISTS idx_sources_url ON source_references(url);
+-- UNIQUE so importers' INSERT OR IGNORE actually IGNOREs a repeat URL.
+CREATE UNIQUE INDEX IF NOT EXISTS idx_sources_url ON source_references(url);
 
 -- Link sources to projects (general project sources)
 CREATE TABLE IF NOT EXISTS project_sources (
@@ -316,8 +317,10 @@ CREATE INDEX IF NOT EXISTS idx_bess_bids_project ON bess_daily_bids(project_id);
 
 CREATE TABLE IF NOT EXISTS aemo_generation_info (
     id                      INTEGER PRIMARY KEY AUTOINCREMENT,
+    snapshot                TEXT,               -- AEMO release label, e.g. '2026-01' (derived from workbook filename)
     station_name            TEXT,
     duid                    TEXT,
+    unit_name               TEXT,               -- AEMO 'Unit Name' column (e.g. 'Murray 1:1' … 'Murray 1:10')
     region                  TEXT,               -- NEM region (NSW1, VIC1, QLD1, SA1, TAS1)
     fuel_type               TEXT,               -- e.g. 'Wind', 'Solar', 'Battery'
     technology_type         TEXT,
@@ -326,6 +329,9 @@ CREATE TABLE IF NOT EXISTS aemo_generation_info (
     registered_capacity_mw  REAL,
     max_capacity_mw         REAL,
     max_roc_per_min         REAL,
+    unit_count              INTEGER,            -- Number of physical units aggregated in this row
+    unit_capacity_mw_ac     REAL,               -- Per-unit AC capacity from AEMO
+    agg_nameplate_mw_ac     REAL,               -- Aggregate nameplate AC capacity from AEMO
     status                  TEXT,               -- 'Existing', 'Committed', 'Proposed', etc.
     classification          TEXT,               -- 'Scheduled', 'Semi-Scheduled', 'Non-Scheduled'
     dispatch_type           TEXT,               -- 'Generator', 'Load'
@@ -350,6 +356,17 @@ CREATE INDEX IF NOT EXISTS idx_aemo_station ON aemo_generation_info(station_name
 CREATE INDEX IF NOT EXISTS idx_aemo_status ON aemo_generation_info(status);
 CREATE INDEX IF NOT EXISTS idx_aemo_fuel ON aemo_generation_info(fuel_type);
 CREATE INDEX IF NOT EXISTS idx_aemo_project ON aemo_generation_info(project_id);
+
+-- Natural key: idempotency guarantee for re-importing an AEMO snapshot.
+-- Uses COALESCE so nullable duid / unit_name don't defeat the UNIQUE.
+-- Importer's INSERT ... ON CONFLICT target must match these expressions exactly.
+CREATE UNIQUE INDEX IF NOT EXISTS idx_aemo_gi_natural_key
+  ON aemo_generation_info(
+       snapshot,
+       station_name,
+       COALESCE(duid, ''),
+       COALESCE(unit_name, '')
+     );
 
 -- ============================================================
 -- AUDIT LOG: Track all data changes
