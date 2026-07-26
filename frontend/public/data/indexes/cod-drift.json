@@ -1,14 +1,36 @@
 {
-  "projects_with_drift": 614,
+  "projects_with_drift": 699,
   "avg_drift_months": {
-    "solar": 0.2,
-    "wind": 0.2,
-    "bess": -0.1,
-    "hybrid": 0.8,
-    "pumped_hydro": 0.0,
+    "solar": 1.3,
+    "wind": 1.1,
+    "bess": 1.4,
+    "hybrid": 1.3,
+    "pumped_hydro": 0.2,
     "offshore_wind": 0.0
   },
   "by_project": [
+    {
+      "id": "lockyer-valley-energy-project",
+      "name": "Lockyer Valley Energy Project",
+      "technology": "bess",
+      "status": "development",
+      "capacity_mw": 1000.0,
+      "state": "QLD",
+      "original": "2030-09-30",
+      "current": "2040-07-01",
+      "drift_months": 120
+    },
+    {
+      "id": "daroobalgie-solar-farm",
+      "name": "Daroobalgie Solar Farm",
+      "technology": "solar",
+      "status": "development",
+      "capacity_mw": 100.0,
+      "state": "NSW",
+      "original": "2034-12-01",
+      "current": "2040-12-01",
+      "drift_months": 72
+    },
     {
       "id": "yanco-delta",
       "name": "Yanco Delta Solar Farm",
@@ -32,6 +54,17 @@
       "drift_months": -24
     },
     {
+      "id": "bungama-solar",
+      "name": "Bungama Solar",
+      "technology": "hybrid",
+      "status": "construction",
+      "capacity_mw": 280.0,
+      "state": "SA",
+      "original": "2028-08-31",
+      "current": "2030-08-31",
+      "drift_months": 24
+    },
+    {
       "id": "dinawan-energy-hub",
       "name": "Dinawan Energy Hub",
       "technology": "hybrid",
@@ -39,7 +72,18 @@
       "capacity_mw": 1007.0,
       "state": "NSW",
       "original": "2029-12-01",
-      "current": "2031-07-01",
+      "current": "2031-10-01",
+      "drift_months": 24
+    },
+    {
+      "id": "gullen-range-wind-farm-2",
+      "name": "Gullen Range Wind Farm 2",
+      "technology": "wind",
+      "status": "operating",
+      "capacity_mw": 110.67,
+      "state": "NSW",
+      "original": "2020-06-19",
+      "current": "2022-10-27",
       "drift_months": 24
     },
     {
@@ -54,15 +98,59 @@
       "drift_months": 24
     },
     {
-      "id": "eraring-big-battery",
-      "name": "Eraring Big Battery",
-      "technology": "bess",
+      "id": "rye-park-wind-farm",
+      "name": "Rye Park Wind Farm",
+      "technology": "wind",
       "status": "operating",
+      "capacity_mw": 396.0,
+      "state": "NSW",
+      "original": "2024-10-07",
+      "current": "2026-10-07",
+      "drift_months": 24
+    },
+    {
+      "id": "sandy-creek-solar-farm",
+      "name": "Sandy Creek Solar Farm",
+      "technology": "solar",
+      "status": "development",
       "capacity_mw": 700.0,
       "state": "NSW",
-      "original": "2027-03-31",
-      "current": "2025-12",
-      "drift_months": -24
+      "original": "2029-06-01",
+      "current": "2031-02-13",
+      "drift_months": 24
+    },
+    {
+      "id": "skye-ridge-wind-farm",
+      "name": "Skye Ridge Wind Farm",
+      "technology": "wind",
+      "status": "development",
+      "capacity_mw": 750.0,
+      "state": "NSW",
+      "original": "2031-11-28",
+      "current": "2033-12-31",
+      "drift_months": 24
+    },
+    {
+      "id": "springvale-energy-hub",
+      "name": "Springvale Energy Hub",
+      "technology": "bess",
+      "status": "development",
+      "capacity_mw": 115.0,
+      "state": "VIC",
+      "original": "2026-10-30",
+      "current": "2028-10-30",
+      "drift_months": 24
+    },
+    {
+      "id": "tarong-west-wind-farm-ironleaf",
+      "name": "Tarong West Wind Farm (Ironleaf)",
+      "technology": "wind",
+      "status": "development",
+      "capacity_mw": 436.5,
+      "state": "QLD",
+      "original": "2028-10-01",
+      "current": "2030-09-01",
+      "drift_months": 24
     },
     {
       "id": "golden-plains-wind",
@@ -94,8 +182,8 @@
       "capacity_mw": 850.0,
       "state": "NSW",
       "original": "2025",
-      "current": "2024-11",
-      "drift_months": -12
+      "current": "2026-09-01",
+      "drift_months": 12
     },
     {
       "id": "eraring-battery",
@@ -106,6 +194,336 @@
       "state": "NSW",
       "original": "2025",
       "current": "2026",
+      "drift_months": 12
+    },
+    {
+      "id": "armidale-bess",
+      "name": "Armidale BESS",
+      "technology": "bess",
+      "status": "development",
+      "capacity_mw": 150.0,
+      "state": "NSW",
+      "original": "2027-03-31",
+      "current": "2028-03-31",
+      "drift_months": 12
+    },
+    {
+      "id": "bulli-creek-solar-farm",
+      "name": "Bulli Creek Solar Farm",
+      "technology": "solar",
+      "status": "development",
+      "capacity_mw": 775.0,
+      "state": "QLD",
+      "original": "2029-08-01",
+      "current": "2030-12-31",
+      "drift_months": 12
+    },
+    {
+      "id": "bundaberg-solar-farm",
+      "name": "Bundaberg Solar Farm",
+      "technology": "solar",
+      "status": "commissioning",
+      "capacity_mw": 78.0,
+      "state": "QLD",
+      "original": "2025-12-31",
+      "current": "2026-04-28",
+      "drift_months": 12
+    },
+    {
+      "id": "burdekin-bess",
+      "name": "Burdekin BESS",
+      "technology": "bess",
+      "status": "development",
+      "capacity_mw": 500.0,
+      "state": "QLD",
+      "original": "2027-09-30",
+      "current": "2028-03-31",
+      "drift_months": 12
+    },
+    {
+      "id": "clarke-creek-wind-farm",
+      "name": "Clarke Creek Wind Farm",
+      "technology": "wind",
+      "status": "commissioning",
+      "capacity_mw": 1135.0,
+      "state": "QLD",
+      "original": "2025-09-30",
+      "current": "2026-07-01",
+      "drift_months": 12
+    },
+    {
+      "id": "dederang-bess",
+      "name": "Dederang BESS",
+      "technology": "bess",
+      "status": "development",
+      "capacity_mw": 200.0,
+      "state": "VIC",
+      "original": "2028-07-01",
+      "current": "2029-07-01",
+      "drift_months": 12
+    },
+    {
+      "id": "derby-solar-farm-and-bess",
+      "name": "Derby Solar Farm and BESS",
+      "technology": "hybrid",
+      "status": "development",
+      "capacity_mw": 95.0,
+      "state": "VIC",
+      "original": "2027-09-01",
+      "current": "2028-04-01",
+      "drift_months": 12
+    },
+    {
+      "id": "eurimbula-hybrid-facility-battery-storage",
+      "name": "Eurimbula Hybrid Facility - Battery Storage",
+      "technology": "bess",
+      "status": "development",
+      "capacity_mw": 666.0,
+      "state": "QLD",
+      "original": "2028-12-31",
+      "current": "2029-12-31",
+      "drift_months": 12
+    },
+    {
+      "id": "eurimbula-solar-farm",
+      "name": "Eurimbula Solar Farm",
+      "technology": "solar",
+      "status": "development",
+      "capacity_mw": 560.0,
+      "state": "QLD",
+      "original": "2028-12-31",
+      "current": "2029-12-31",
+      "drift_months": 12
+    },
+    {
+      "id": "gawara-baya-wind-and-bess",
+      "name": "Gawara Baya Wind And BESS",
+      "technology": "hybrid",
+      "status": "development",
+      "capacity_mw": 400.0,
+      "state": "QLD",
+      "original": "2029-01-15",
+      "current": "2030-05-24",
+      "drift_months": 12
+    },
+    {
+      "id": "glenrowan-bess-storage-kci",
+      "name": "Glenrowan BESS - Storage - KCI",
+      "technology": "bess",
+      "status": "development",
+      "capacity_mw": 400.0,
+      "state": "VIC",
+      "original": "2029-06-30",
+      "current": "2030-03-31",
+      "drift_months": 12
+    },
+    {
+      "id": "goyder-north-wind-farm",
+      "name": "Goyder North Wind Farm",
+      "technology": "wind",
+      "status": "development",
+      "capacity_mw": 600.0,
+      "state": "SA",
+      "original": "2029-12-31",
+      "current": "2030-10-31",
+      "drift_months": 12
+    },
+    {
+      "id": "great-western-battery-project",
+      "name": "Great Western Battery Project",
+      "technology": "bess",
+      "status": "development",
+      "capacity_mw": 500.0,
+      "state": "NSW",
+      "original": "2028-12-31",
+      "current": "2029-11-30",
+      "drift_months": 12
+    },
+    {
+      "id": "harrogate-bess",
+      "name": "Harrogate BESS",
+      "technology": "bess",
+      "status": "development",
+      "capacity_mw": 270.0,
+      "state": "SA",
+      "original": "2028-12-30",
+      "current": "2029-07-27",
+      "drift_months": 12
+    },
+    {
+      "id": "haughton-solar-farm-stage-2",
+      "name": "Haughton Solar Farm Stage 2",
+      "technology": "solar",
+      "status": "development",
+      "capacity_mw": 300.0,
+      "state": "QLD",
+      "original": "2028-01-06",
+      "current": "2029-01-01",
+      "drift_months": 12
+    },
+    {
+      "id": "kerang-bess",
+      "name": "Kerang BESS",
+      "technology": "bess",
+      "status": "development",
+      "capacity_mw": 103.0,
+      "state": "VIC",
+      "original": "2027-03-31",
+      "current": "2028-03-31",
+      "drift_months": 12
+    },
+    {
+      "id": "lake-lyell-pumped-hydro",
+      "name": "Lake Lyell Pumped Hydro",
+      "technology": "pumped_hydro",
+      "status": "development",
+      "capacity_mw": 385.0,
+      "state": "NSW",
+      "original": "2030-12-31",
+      "current": "2031-11-14",
+      "drift_months": 12
+    },
+    {
+      "id": "macintyre-wind-farm",
+      "name": "MacIntyre Wind Farm",
+      "technology": "wind",
+      "status": "commissioning",
+      "capacity_mw": 890.0,
+      "state": "QLD",
+      "original": "2025-11-30",
+      "current": "2026-12-01",
+      "drift_months": 12
+    },
+    {
+      "id": "moah-creek-wind-farm",
+      "name": "Moah Creek Wind Farm",
+      "technology": "wind",
+      "status": "development",
+      "capacity_mw": 349.0,
+      "state": "QLD",
+      "original": "2028-03-31",
+      "current": "2029-12-28",
+      "drift_months": 12
+    },
+    {
+      "id": "moama-solar-farm",
+      "name": "Moama Solar Farm",
+      "technology": "solar",
+      "status": "development",
+      "capacity_mw": 30.0,
+      "state": "NSW",
+      "original": "2027-12-01",
+      "current": "2028-08-01",
+      "drift_months": 12
+    },
+    {
+      "id": "morwell-bess",
+      "name": "Morwell BESS",
+      "technology": "bess",
+      "status": "development",
+      "capacity_mw": 1000.0,
+      "state": "VIC",
+      "original": "2028-12-31",
+      "current": "2029-07-02",
+      "drift_months": 12
+    },
+    {
+      "id": "narrandera-solar-hybrid-pvbess",
+      "name": "Narrandera Solar Hybrid (PV+BESS)",
+      "technology": "hybrid",
+      "status": "development",
+      "capacity_mw": 400.0,
+      "state": "NSW",
+      "original": "2030-12-30",
+      "current": "2031-06-30",
+      "drift_months": 12
+    },
+    {
+      "id": "prairie-wf-and-wongalee-wf",
+      "name": "Prairie WF and Wongalee WF",
+      "technology": "wind",
+      "status": "development",
+      "capacity_mw": 2000.0,
+      "state": "QLD",
+      "original": "2031-12-31",
+      "current": "2032-12-31",
+      "drift_months": 12
+    },
+    {
+      "id": "raglan-bess",
+      "name": "Raglan BESS",
+      "technology": "bess",
+      "status": "development",
+      "capacity_mw": 500.0,
+      "state": "QLD",
+      "original": "2028-08-31",
+      "current": "2029-03-01",
+      "drift_months": 12
+    },
+    {
+      "id": "stoney-creek-bess",
+      "name": "Stoney Creek BESS",
+      "technology": "bess",
+      "status": "development",
+      "capacity_mw": 125.0,
+      "state": "NSW",
+      "original": "2027-11-30",
+      "current": "2028-06-30",
+      "drift_months": 12
+    },
+    {
+      "id": "talbingo-bess",
+      "name": "Talbingo BESS",
+      "technology": "bess",
+      "status": "development",
+      "capacity_mw": 400.0,
+      "state": "NSW",
+      "original": "2028-12-11",
+      "current": "2029-12-28",
+      "drift_months": 12
+    },
+    {
+      "id": "tall-tree-bess",
+      "name": "Tall Tree BESS",
+      "technology": "bess",
+      "status": "development",
+      "capacity_mw": 200.0,
+      "state": "VIC",
+      "original": "2030-12-31",
+      "current": "2031-12-15",
+      "drift_months": 12
+    },
+    {
+      "id": "tamworth-bess-project-1-pty-ltd",
+      "name": "Tamworth BESS Project 1 Pty Ltd",
+      "technology": "bess",
+      "status": "development",
+      "capacity_mw": 100.0,
+      "state": "NSW",
+      "original": "2027-12-31",
+      "current": "2028-12-31",
+      "drift_months": 12
+    },
+    {
+      "id": "tamworth-bess-project-2-pty-ltd",
+      "name": "Tamworth BESS Project 2 Pty Ltd",
+      "technology": "bess",
+      "status": "development",
+      "capacity_mw": 100.0,
+      "state": "NSW",
+      "original": "2027-12-31",
+      "current": "2028-12-31",
+      "drift_months": 12
+    },
+    {
+      "id": "tramway-road-bess",
+      "name": "Tramway Road BESS",
+      "technology": "bess",
+      "status": "development",
+      "capacity_mw": 300.0,
+      "state": "VIC",
+      "original": "2028-12-30",
+      "current": "2029-03-30",
       "drift_months": 12
     },
     {
@@ -186,6 +604,17 @@
       "drift_months": 0
     },
     {
+      "id": "aquila-wind",
+      "name": "Aquila Wind",
+      "technology": "wind",
+      "status": "development",
+      "capacity_mw": 200.0,
+      "state": "NSW",
+      "original": "2032-12-01",
+      "current": "2032-12-01",
+      "drift_months": 0
+    },
+    {
       "id": "aramara-solar-farm",
       "name": "Aramara Solar Farm",
       "technology": "solar",
@@ -193,7 +622,7 @@
       "capacity_mw": 101.4,
       "state": "QLD",
       "original": "2028-06-15",
-      "current": "2028-06",
+      "current": "2028-06-15",
       "drift_months": 0
     },
     {
@@ -219,14 +648,58 @@
       "drift_months": 0
     },
     {
-      "id": "armidale-bess",
-      "name": "Armidale BESS",
+      "id": "argoon-wind-farm-res-group-kci",
+      "name": "Argoon Wind Farm (RES Group) - KCI",
+      "technology": "wind",
+      "status": "development",
+      "capacity_mw": 763.0,
+      "state": "NSW",
+      "original": "2030-12-31",
+      "current": "2030-12-31",
+      "drift_months": 0
+    },
+    {
+      "id": "armidale-bess-elgin",
+      "name": "Armidale BESS (Elgin)",
       "technology": "bess",
       "status": "development",
-      "capacity_mw": 150.0,
+      "capacity_mw": 200.0,
       "state": "NSW",
-      "original": "2027-03-31",
-      "current": "2027-03-31",
+      "original": "2028-01-01",
+      "current": "2028-01-01",
+      "drift_months": 0
+    },
+    {
+      "id": "armidale-east-bess",
+      "name": "Armidale East BESS",
+      "technology": "bess",
+      "status": "development",
+      "capacity_mw": 315.0,
+      "state": "NSW",
+      "original": "2030-08-30",
+      "current": "2030-08-30",
+      "drift_months": 0
+    },
+    {
+      "id": "arundel-bess",
+      "name": "Arundel BESS",
+      "technology": "bess",
+      "status": "development",
+      "capacity_mw": 300.0,
+      "state": "NSW",
+      "original": "2029-09-30",
+      "current": "2029-09-30",
+      "drift_months": 0
+    },
+    {
+      "id": "augusta-bess",
+      "name": "Augusta BESS",
+      "technology": "bess",
+      "status": "development",
+      "capacity_mw": 270.0,
+      "state": "SA",
+      "original": "2029-04-23",
+      "current": "2029-04-23",
       "drift_months": 0
     },
     {
@@ -281,7 +754,7 @@
       "capacity_mw": 360.0,
       "state": "NSW",
       "original": "2029-06-30",
-      "current": "2029-06",
+      "current": "2029-06-30",
       "drift_months": 0
     },
     {
@@ -325,7 +798,7 @@
       "capacity_mw": 220.0,
       "state": "QLD",
       "original": "2029-12-31",
-      "current": "2029-12",
+      "current": "2029-12-31",
       "drift_months": 0
     },
     {
@@ -358,7 +831,7 @@
       "capacity_mw": 60.0,
       "state": "QLD",
       "original": "2027-08-20",
-      "current": "2027-08-20",
+      "current": "2027-11-24",
       "drift_months": 0
     },
     {
@@ -381,6 +854,17 @@
       "state": "VIC",
       "original": "2028-06-30",
       "current": "2028-06-30",
+      "drift_months": 0
+    },
+    {
+      "id": "baroota-pumped-hydro-project",
+      "name": "Baroota Pumped Hydro Project",
+      "technology": "pumped_hydro",
+      "status": "development",
+      "capacity_mw": 250.0,
+      "state": "SA",
+      "original": "2030-12-01",
+      "current": "2030-12-01",
       "drift_months": 0
     },
     {
@@ -468,7 +952,7 @@
       "capacity_mw": 224.0,
       "state": "TAS",
       "original": "2030-01-01",
-      "current": "2030-01",
+      "current": "2030-01-01",
       "drift_months": 0
     },
     {
@@ -560,6 +1044,39 @@
       "drift_months": 0
     },
     {
+      "id": "big-g-pumped-hydro-project",
+      "name": "Big G Pumped Hydro Project",
+      "technology": "pumped_hydro",
+      "status": "development",
+      "capacity_mw": 600.0,
+      "state": "QLD",
+      "original": "2032-12-31",
+      "current": "2032-12-31",
+      "drift_months": 0
+    },
+    {
+      "id": "big-t-project",
+      "name": "Big-T Project",
+      "technology": "pumped_hydro",
+      "status": "development",
+      "capacity_mw": 400.0,
+      "state": "QLD",
+      "original": "2036-09-30",
+      "current": "2036-09-30",
+      "drift_months": 0
+    },
+    {
+      "id": "birriwa-bess",
+      "name": "Birriwa BESS",
+      "technology": "bess",
+      "status": "development",
+      "capacity_mw": 600.0,
+      "state": "NSW",
+      "original": "2031-12-01",
+      "current": "2031-12-01",
+      "drift_months": 0
+    },
+    {
       "id": "blackstone-bess",
       "name": "Blackstone BESS",
       "technology": "bess",
@@ -589,7 +1106,7 @@
       "capacity_mw": 270.0,
       "state": "QLD",
       "original": "2030-07-06",
-      "current": "2030-07-06",
+      "current": "2030-10-06",
       "drift_months": 0
     },
     {
@@ -659,6 +1176,17 @@
       "drift_months": 0
     },
     {
+      "id": "bogandilla-wind-farm",
+      "name": "Bogandilla Wind Farm",
+      "technology": "wind",
+      "status": "development",
+      "capacity_mw": 650.0,
+      "state": "QLD",
+      "original": "2030-12-31",
+      "current": "2030-12-31",
+      "drift_months": 0
+    },
+    {
       "id": "bogong-mackay",
       "name": "Bogong / Mackay",
       "technology": "pumped_hydro",
@@ -688,7 +1216,7 @@
       "capacity_mw": 200.0,
       "state": "NSW",
       "original": "2027-05-31",
-      "current": "2027-05",
+      "current": "2027-05-31",
       "drift_months": 0
     },
     {
@@ -710,7 +1238,7 @@
       "capacity_mw": 1000.0,
       "state": "VIC",
       "original": "2031-09-30",
-      "current": "2031-09",
+      "current": "2031-09-30",
       "drift_months": 0
     },
     {
@@ -721,7 +1249,7 @@
       "capacity_mw": 150.0,
       "state": "NSW",
       "original": "2029-12-25",
-      "current": "2029-12",
+      "current": "2029-12-25",
       "drift_months": 0
     },
     {
@@ -758,6 +1286,17 @@
       "drift_months": 0
     },
     {
+      "id": "braemar-bess",
+      "name": "Braemar BESS",
+      "technology": "bess",
+      "status": "development",
+      "capacity_mw": 500.0,
+      "state": "QLD",
+      "original": "2030-06-30",
+      "current": "2030-06-30",
+      "drift_months": 0
+    },
+    {
       "id": "brendale-bess",
       "name": "Brendale BESS",
       "technology": "bess",
@@ -776,7 +1315,7 @@
       "capacity_mw": 250.0,
       "state": "SA",
       "original": "2029-04-10",
-      "current": "2029-04-10",
+      "current": "2029-05-03",
       "drift_months": 0
     },
     {
@@ -879,14 +1418,25 @@
       "drift_months": 0
     },
     {
-      "id": "bulli-creek-solar-farm",
-      "name": "Bulli Creek Solar Farm",
+      "id": "bulli-creek-bess-trina",
+      "name": "Bulli Creek BESS (Trina)",
+      "technology": "bess",
+      "status": "development",
+      "capacity_mw": 750.0,
+      "state": "QLD",
+      "original": "2028-12-01",
+      "current": "2028-12-01",
+      "drift_months": 0
+    },
+    {
+      "id": "bulli-creek-solar-farm-trina",
+      "name": "Bulli Creek Solar Farm (Trina)",
       "technology": "solar",
       "status": "development",
-      "capacity_mw": 775.0,
+      "capacity_mw": 450.0,
       "state": "QLD",
-      "original": "2029-08-01",
-      "current": "2029-08",
+      "original": "2028-12-01",
+      "current": "2028-12-01",
       "drift_months": 0
     },
     {
@@ -897,18 +1447,7 @@
       "capacity_mw": 97.0,
       "state": "QLD",
       "original": "2027-04-30",
-      "current": "2027-04",
-      "drift_months": 0
-    },
-    {
-      "id": "bundaberg-solar-farm",
-      "name": "Bundaberg Solar Farm",
-      "technology": "solar",
-      "status": "construction",
-      "capacity_mw": 78.0,
-      "state": "QLD",
-      "original": "2025-12-31",
-      "current": "2025-12",
+      "current": "2027-04-30",
       "drift_months": 0
     },
     {
@@ -930,7 +1469,7 @@
       "capacity_mw": 1400.0,
       "state": "QLD",
       "original": "2030-03-30",
-      "current": "2030-03",
+      "current": "2030-03-30",
       "drift_months": 0
     },
     {
@@ -956,14 +1495,14 @@
       "drift_months": 0
     },
     {
-      "id": "bungama-solar",
-      "name": "Bungama Solar",
-      "technology": "hybrid",
-      "status": "construction",
-      "capacity_mw": 280.0,
+      "id": "bungama-bess-risen",
+      "name": "Bungama BESS (Risen )",
+      "technology": "bess",
+      "status": "development",
+      "capacity_mw": 200.0,
       "state": "SA",
-      "original": "2028-08-31",
-      "current": "2028-08-31",
+      "original": "2028-12-31",
+      "current": "2028-12-31",
       "drift_months": 0
     },
     {
@@ -974,7 +1513,7 @@
       "capacity_mw": 296.0,
       "state": "QLD",
       "original": "2035-01-01",
-      "current": "2035-01-01",
+      "current": "2035-01-12",
       "drift_months": 0
     },
     {
@@ -985,18 +1524,18 @@
       "capacity_mw": 500.0,
       "state": "QLD",
       "original": "2035-12-01",
-      "current": "2035-12",
+      "current": "2035-12-01",
       "drift_months": 0
     },
     {
-      "id": "burdekin-bess",
-      "name": "Burdekin BESS",
+      "id": "bunyip-north-battery-energy-storage-system",
+      "name": "Bunyip North Battery Energy Storage System",
       "technology": "bess",
       "status": "development",
-      "capacity_mw": 500.0,
-      "state": "QLD",
-      "original": "2027-09-30",
-      "current": "2027-09-30",
+      "capacity_mw": 400.0,
+      "state": "VIC",
+      "original": "2029-04-02",
+      "current": "2029-04-02",
       "drift_months": 0
     },
     {
@@ -1007,7 +1546,7 @@
       "capacity_mw": 500.0,
       "state": "QLD",
       "original": "2029-12-28",
-      "current": "2029-12",
+      "current": "2029-12-28",
       "drift_months": 0
     },
     {
@@ -1085,6 +1624,17 @@
       "state": "QLD",
       "original": "2029-12-01",
       "current": "2029-12-01",
+      "drift_months": 0
+    },
+    {
+      "id": "campbells-forest-solar-farm",
+      "name": "Campbells Forest Solar Farm",
+      "technology": "solar",
+      "status": "development",
+      "capacity_mw": 205.0,
+      "state": "VIC",
+      "original": "2028-12-31",
+      "current": "2028-12-31",
       "drift_months": 0
     },
     {
@@ -1172,7 +1722,7 @@
       "capacity_mw": 247.0,
       "state": "SA",
       "original": "2029-01-01",
-      "current": "2029-01",
+      "current": "2029-01-01",
       "drift_months": 0
     },
     {
@@ -1238,7 +1788,7 @@
       "capacity_mw": 780.0,
       "state": "QLD",
       "original": "2029-03-01",
-      "current": "2029-03-01",
+      "current": "2029-07-02",
       "drift_months": 0
     },
     {
@@ -1308,17 +1858,6 @@
       "drift_months": 0
     },
     {
-      "id": "clarke-creek-wind-farm",
-      "name": "Clarke Creek Wind Farm",
-      "technology": "wind",
-      "status": "commissioning",
-      "capacity_mw": 1135.0,
-      "state": "QLD",
-      "original": "2025-09-30",
-      "current": "2025-09-30",
-      "drift_months": 0
-    },
-    {
       "id": "clements-gap-bess",
       "name": "Clements Gap - BESS",
       "technology": "bess",
@@ -1326,7 +1865,7 @@
       "capacity_mw": 60.0,
       "state": "SA",
       "original": "2026-01-05",
-      "current": "2026-01-05",
+      "current": "2026-05-30",
       "drift_months": 0
     },
     {
@@ -1418,6 +1957,17 @@
       "drift_months": 0
     },
     {
+      "id": "columboola-bess-kci",
+      "name": "Columboola BESS - KCI",
+      "technology": "bess",
+      "status": "development",
+      "capacity_mw": 550.0,
+      "state": "QLD",
+      "original": "2028-07-01",
+      "current": "2028-07-01",
+      "drift_months": 0
+    },
+    {
       "id": "columboola-solar-farm",
       "name": "Columboola Solar Farm",
       "technology": "solar",
@@ -1458,7 +2008,7 @@
       "capacity_mw": 1100.0,
       "state": "VIC",
       "original": "2029-03-16",
-      "current": "2029-03-16",
+      "current": "2029-12-03",
       "drift_months": 0
     },
     {
@@ -1481,6 +2031,17 @@
       "state": "NSW",
       "original": "2028-07-01",
       "current": "2028-07-01",
+      "drift_months": 0
+    },
+    {
+      "id": "cooma-solar-and-bess-acen",
+      "name": "Cooma Solar And BESS (ACEN)",
+      "technology": "hybrid",
+      "status": "development",
+      "capacity_mw": 80.0,
+      "state": "NSW",
+      "original": "2028-12-01",
+      "current": "2028-12-01",
       "drift_months": 0
     },
     {
@@ -1524,7 +2085,7 @@
       "capacity_mw": 270.0,
       "state": "NSW",
       "original": "2027-09-30",
-      "current": "2027-09",
+      "current": "2027-09-30",
       "drift_months": 0
     },
     {
@@ -1645,7 +2206,7 @@
       "capacity_mw": 250.0,
       "state": "NSW",
       "original": "2034-06-01",
-      "current": "2034-06",
+      "current": "2034-06-01",
       "drift_months": 0
     },
     {
@@ -1682,6 +2243,17 @@
       "drift_months": 0
     },
     {
+      "id": "darlington-wind-farm-gpg",
+      "name": "Darlington Wind Farm - GPG",
+      "technology": "wind",
+      "status": "development",
+      "capacity_mw": 324.0,
+      "state": "VIC",
+      "original": "2030-01-01",
+      "current": "2030-01-01",
+      "drift_months": 0
+    },
+    {
       "id": "darnum-bess",
       "name": "Darnum BESS",
       "technology": "bess",
@@ -1690,17 +2262,6 @@
       "state": "VIC",
       "original": "2028-11-30",
       "current": "2028-11-30",
-      "drift_months": 0
-    },
-    {
-      "id": "daroobalgie-solar-farm",
-      "name": "Daroobalgie Solar Farm",
-      "technology": "solar",
-      "status": "development",
-      "capacity_mw": 100.0,
-      "state": "NSW",
-      "original": "2034-12-01",
-      "current": "2034-12-01",
       "drift_months": 0
     },
     {
@@ -1726,14 +2287,14 @@
       "drift_months": 0
     },
     {
-      "id": "dederang-bess",
-      "name": "Dederang BESS",
-      "technology": "bess",
+      "id": "deepwater-hybrid-facility",
+      "name": "Deepwater Hybrid Facility",
+      "technology": "solar",
       "status": "development",
-      "capacity_mw": 200.0,
-      "state": "VIC",
-      "original": "2028-07-01",
-      "current": "2028-07-01",
+      "capacity_mw": 120.0,
+      "state": "NSW",
+      "original": "2029-06-01",
+      "current": "2029-06-01",
       "drift_months": 0
     },
     {
@@ -1748,6 +2309,17 @@
       "drift_months": 0
     },
     {
+      "id": "delburn-wind-farm",
+      "name": "Delburn Wind Farm",
+      "technology": "wind",
+      "status": "development",
+      "capacity_mw": 204.6,
+      "state": "VIC",
+      "original": "2028-10-23",
+      "current": "2028-10-23",
+      "drift_months": 0
+    },
+    {
       "id": "deniliquin-east-bess",
       "name": "Deniliquin East BESS",
       "technology": "bess",
@@ -1756,17 +2328,6 @@
       "state": "NSW",
       "original": "2026-03-31",
       "current": "2026-03-31",
-      "drift_months": 0
-    },
-    {
-      "id": "derby-solar-farm-and-bess",
-      "name": "Derby Solar Farm and BESS",
-      "technology": "hybrid",
-      "status": "development",
-      "capacity_mw": 95.0,
-      "state": "VIC",
-      "original": "2027-09-01",
-      "current": "2027-09",
       "drift_months": 0
     },
     {
@@ -1822,6 +2383,28 @@
       "state": "NSW",
       "original": "2033-11-30",
       "current": "2033-11-30",
+      "drift_months": 0
+    },
+    {
+      "id": "dunmore-bess",
+      "name": "Dunmore BESS",
+      "technology": "bess",
+      "status": "development",
+      "capacity_mw": 150.0,
+      "state": "QLD",
+      "original": "2029-08-01",
+      "current": "2029-08-01",
+      "drift_months": 0
+    },
+    {
+      "id": "dunmore-solar-farm",
+      "name": "Dunmore Solar Farm",
+      "technology": "solar",
+      "status": "development",
+      "capacity_mw": 300.0,
+      "state": "QLD",
+      "original": "2029-08-01",
+      "current": "2029-08-01",
       "drift_months": 0
     },
     {
@@ -1913,25 +2496,14 @@
       "drift_months": 0
     },
     {
-      "id": "eurimbula-hybrid-facility-battery-storage",
-      "name": "Eurimbula Hybrid Facility - Battery Storage",
-      "technology": "bess",
+      "id": "emu-park-solar-farm",
+      "name": "Emu Park Solar Farm",
+      "technology": "hybrid",
       "status": "development",
-      "capacity_mw": 666.0,
-      "state": "QLD",
-      "original": "2028-12-31",
-      "current": "2028-12-31",
-      "drift_months": 0
-    },
-    {
-      "id": "eurimbula-solar-farm",
-      "name": "Eurimbula Solar Farm",
-      "technology": "solar",
-      "status": "development",
-      "capacity_mw": 560.0,
-      "state": "QLD",
-      "original": "2028-12-31",
-      "current": "2028-12-31",
+      "capacity_mw": 300.0,
+      "state": "NSW",
+      "original": "2028-12-01",
+      "current": "2028-12-01",
       "drift_months": 0
     },
     {
@@ -2008,7 +2580,7 @@
       "capacity_mw": 290.0,
       "state": "QLD",
       "original": "2027-09-30",
-      "current": "2027-09-30",
+      "current": "2027-11-30",
       "drift_months": 0
     },
     {
@@ -2019,7 +2591,7 @@
       "capacity_mw": 77.0,
       "state": "VIC",
       "original": "2027-06-30",
-      "current": "2027-06",
+      "current": "2027-11-30",
       "drift_months": 0
     },
     {
@@ -2041,7 +2613,7 @@
       "capacity_mw": 120.0,
       "state": "QLD",
       "original": "2026-03-31",
-      "current": "2026-03-31",
+      "current": "2026-06-30",
       "drift_months": 0
     },
     {
@@ -2078,17 +2650,6 @@
       "drift_months": 0
     },
     {
-      "id": "gawara-baya-wind-and-bess",
-      "name": "Gawara Baya Wind And BESS",
-      "technology": "hybrid",
-      "status": "development",
-      "capacity_mw": 400.0,
-      "state": "QLD",
-      "original": "2029-01-15",
-      "current": "2029-01",
-      "drift_months": 0
-    },
-    {
       "id": "gelston-energy-park",
       "name": "Gelston Energy Park",
       "technology": "bess",
@@ -2108,6 +2669,28 @@
       "state": "TAS",
       "original": "2029-01-01",
       "current": "2029-01-01",
+      "drift_months": 0
+    },
+    {
+      "id": "gerogery-solar-farm-kci",
+      "name": "Gerogery Solar Farm - KCI",
+      "technology": "hybrid",
+      "status": "development",
+      "capacity_mw": 125.0,
+      "state": "NSW",
+      "original": "2027-10-01",
+      "current": "2027-10-01",
+      "drift_months": 0
+    },
+    {
+      "id": "giddi-bess-trafalgar-east-bess-stage-1",
+      "name": "GIDDI BESS (Trafalgar East BESS - Stage 1)",
+      "technology": "bess",
+      "status": "development",
+      "capacity_mw": 360.0,
+      "state": "VIC",
+      "original": "2029-06-01",
+      "current": "2029-06-01",
       "drift_months": 0
     },
     {
@@ -2144,6 +2727,17 @@
       "drift_months": 0
     },
     {
+      "id": "gladstone-sda-energy-hub-a-kci",
+      "name": "Gladstone SDA Energy Hub A - KCI",
+      "technology": "bess",
+      "status": "development",
+      "capacity_mw": 260.0,
+      "state": "QLD",
+      "original": "2028-01-31",
+      "current": "2028-01-31",
+      "drift_months": 0
+    },
+    {
       "id": "glanmire-solar-farm",
       "name": "Glanmire Solar Farm",
       "technology": "hybrid",
@@ -2166,6 +2760,17 @@
       "drift_months": 0
     },
     {
+      "id": "glenellen-solar-farm",
+      "name": "Glenellen Solar Farm",
+      "technology": "solar",
+      "status": "commissioning",
+      "capacity_mw": 200.0,
+      "state": "NSW",
+      "original": "2026-06-01",
+      "current": "2026-06-01",
+      "drift_months": 0
+    },
+    {
       "id": "glenrowan-bess",
       "name": "Glenrowan BESS",
       "technology": "bess",
@@ -2173,18 +2778,7 @@
       "capacity_mw": 450.0,
       "state": "VIC",
       "original": "2029-03-16",
-      "current": "2029-03-16",
-      "drift_months": 0
-    },
-    {
-      "id": "glenrowan-bess-storage-kci",
-      "name": "Glenrowan BESS - Storage - KCI",
-      "technology": "bess",
-      "status": "development",
-      "capacity_mw": 400.0,
-      "state": "VIC",
-      "original": "2029-06-30",
-      "current": "2029-06",
+      "current": "2029-12-03",
       "drift_months": 0
     },
     {
@@ -2221,6 +2815,28 @@
       "drift_months": 0
     },
     {
+      "id": "goat-hill-pumped-hydro",
+      "name": "Goat Hill Pumped Hydro",
+      "technology": "pumped_hydro",
+      "status": "development",
+      "capacity_mw": 230.0,
+      "state": "SA",
+      "original": "2050-03-01",
+      "current": "2050-03-01",
+      "drift_months": 0
+    },
+    {
+      "id": "gol-gol-wind-farm",
+      "name": "Gol Gol Wind Farm",
+      "technology": "wind",
+      "status": "development",
+      "capacity_mw": 500.0,
+      "state": "NSW",
+      "original": "2032-07-01",
+      "current": "2032-07-01",
+      "drift_months": 0
+    },
+    {
       "id": "golden-plains-bess",
       "name": "Golden Plains BESS",
       "technology": "bess",
@@ -2229,6 +2845,17 @@
       "state": "VIC",
       "original": "2027-07-01",
       "current": "2027-07-01",
+      "drift_months": 0
+    },
+    {
+      "id": "golden-plains-bess-2-kci",
+      "name": "Golden Plains BESS 2 - KCI",
+      "technology": "bess",
+      "status": "development",
+      "capacity_mw": 150.0,
+      "state": "VIC",
+      "original": "2029-01-01",
+      "current": "2029-01-01",
       "drift_months": 0
     },
     {
@@ -2251,6 +2878,17 @@
       "state": "VIC",
       "original": "2027-03-09",
       "current": "2027-03-09",
+      "drift_months": 0
+    },
+    {
+      "id": "goodnight-hybrid-facility-solar-and-bess",
+      "name": "GoodNight Hybrid Facility - Solar And BESS",
+      "technology": "hybrid",
+      "status": "development",
+      "capacity_mw": 200.0,
+      "state": "QLD",
+      "original": "2030-09-02",
+      "current": "2030-09-02",
       "drift_months": 0
     },
     {
@@ -2279,11 +2917,11 @@
       "id": "goorambat-east-solar-farm-engie",
       "name": "Goorambat East Solar Farm (ENGIE)",
       "technology": "solar",
-      "status": "construction",
+      "status": "commissioning",
       "capacity_mw": 250.0,
       "state": "VIC",
       "original": "2026-05-18",
-      "current": "2026-05",
+      "current": "2026-05-18",
       "drift_months": 0
     },
     {
@@ -2320,6 +2958,17 @@
       "drift_months": 0
     },
     {
+      "id": "gould-creek-bess",
+      "name": "Gould Creek BESS",
+      "technology": "bess",
+      "status": "development",
+      "capacity_mw": 215.0,
+      "state": "SA",
+      "original": "2027-11-26",
+      "current": "2027-11-26",
+      "drift_months": 0
+    },
+    {
       "id": "goyder-bess",
       "name": "Goyder BESS",
       "technology": "bess",
@@ -2339,17 +2988,6 @@
       "state": "SA",
       "original": "2029-05-31",
       "current": "2029-05-31",
-      "drift_months": 0
-    },
-    {
-      "id": "goyder-north-wind-farm",
-      "name": "Goyder North Wind Farm",
-      "technology": "wind",
-      "status": "development",
-      "capacity_mw": 600.0,
-      "state": "SA",
-      "original": "2029-12-31",
-      "current": "2029-12",
       "drift_months": 0
     },
     {
@@ -2397,17 +3035,6 @@
       "drift_months": 0
     },
     {
-      "id": "great-western-battery-project",
-      "name": "Great Western Battery Project",
-      "technology": "bess",
-      "status": "development",
-      "capacity_mw": 500.0,
-      "state": "NSW",
-      "original": "2028-12-31",
-      "current": "2028-12-31",
-      "drift_months": 0
-    },
-    {
       "id": "greenbank-bess",
       "name": "Greenbank BESS",
       "technology": "bess",
@@ -2438,17 +3065,6 @@
       "state": "NSW",
       "original": "2013-12-10",
       "current": "2013-12-10",
-      "drift_months": 0
-    },
-    {
-      "id": "gullen-range-wind-farm-2",
-      "name": "Gullen Range Wind Farm 2",
-      "technology": "wind",
-      "status": "operating",
-      "capacity_mw": 110.67,
-      "state": "NSW",
-      "original": "2020-06-19",
-      "current": "2020-06-19",
       "drift_months": 0
     },
     {
@@ -2503,7 +3119,7 @@
       "capacity_mw": 94.0,
       "state": "QLD",
       "original": "2026-02-16",
-      "current": "2026-02-16",
+      "current": "2026-03-26",
       "drift_months": 0
     },
     {
@@ -2525,7 +3141,7 @@
       "capacity_mw": 300.0,
       "state": "QLD",
       "original": "2029-05-01",
-      "current": "2029-05",
+      "current": "2029-05-01",
       "drift_months": 0
     },
     {
@@ -2646,18 +3262,7 @@
       "capacity_mw": 710.0,
       "state": "NSW",
       "original": "2032-12-31",
-      "current": "2032-12",
-      "drift_months": 0
-    },
-    {
-      "id": "harrogate-bess",
-      "name": "Harrogate BESS",
-      "technology": "bess",
-      "status": "development",
-      "capacity_mw": 270.0,
-      "state": "SA",
-      "original": "2028-12-30",
-      "current": "2028-12-30",
+      "current": "2032-12-31",
       "drift_months": 0
     },
     {
@@ -2680,17 +3285,6 @@
       "state": "QLD",
       "original": "2019-05-27",
       "current": "2019-05-27",
-      "drift_months": 0
-    },
-    {
-      "id": "haughton-solar-farm-stage-2",
-      "name": "Haughton Solar Farm Stage 2",
-      "technology": "solar",
-      "status": "development",
-      "capacity_mw": 300.0,
-      "state": "QLD",
-      "original": "2028-01-06",
-      "current": "2028-01",
       "drift_months": 0
     },
     {
@@ -2767,7 +3361,7 @@
       "capacity_mw": 921.12,
       "state": "VIC",
       "original": "2030-11-01",
-      "current": "2030-11",
+      "current": "2030-11-01",
       "drift_months": 0
     },
     {
@@ -2789,7 +3383,7 @@
       "capacity_mw": 1281.0,
       "state": "VIC",
       "original": "2035-07-25",
-      "current": "2035-07",
+      "current": "2035-07-25",
       "drift_months": 0
     },
     {
@@ -2822,7 +3416,7 @@
       "capacity_mw": 250.0,
       "state": "NSW",
       "original": "2029-03-30",
-      "current": "2029-03",
+      "current": "2029-03-30",
       "drift_months": 0
     },
     {
@@ -2914,6 +3508,17 @@
       "drift_months": 0
     },
     {
+      "id": "hume-bess-arif",
+      "name": "Hume Bess (ARIF)",
+      "technology": "bess",
+      "status": "development",
+      "capacity_mw": 75.0,
+      "state": "NSW",
+      "original": "2028-06-30",
+      "current": "2028-06-30",
+      "drift_months": 0
+    },
+    {
       "id": "illawarra-offshore-wind-farm",
       "name": "Illawarra Offshore Wind Farm",
       "technology": "offshore_wind",
@@ -2954,7 +3559,7 @@
       "capacity_mw": 600.0,
       "state": "QLD",
       "original": "2030-01-01",
-      "current": "2030-01",
+      "current": "2030-01-01",
       "drift_months": 0
     },
     {
@@ -3123,17 +3728,6 @@
       "drift_months": 0
     },
     {
-      "id": "kerang-bess",
-      "name": "Kerang BESS",
-      "technology": "bess",
-      "status": "development",
-      "capacity_mw": 103.0,
-      "state": "VIC",
-      "original": "2027-03-31",
-      "current": "2027-03-31",
-      "drift_months": 0
-    },
-    {
       "id": "kerang-hybrid",
       "name": "Kerang Hybrid",
       "technology": "hybrid",
@@ -3141,7 +3735,7 @@
       "capacity_mw": 171.0,
       "state": "VIC",
       "original": "2029-04-01",
-      "current": "2029-04-01",
+      "current": "2029-12-31",
       "drift_months": 0
     },
     {
@@ -3163,7 +3757,7 @@
       "capacity_mw": 330.0,
       "state": "NSW",
       "original": "2030-03-01",
-      "current": "2030-03-01",
+      "current": "2030-10-01",
       "drift_months": 0
     },
     {
@@ -3222,6 +3816,17 @@
       "drift_months": 0
     },
     {
+      "id": "kidston-bess",
+      "name": "Kidston BESS",
+      "technology": "bess",
+      "status": "development",
+      "capacity_mw": 200.0,
+      "state": "QLD",
+      "original": "2030-12-31",
+      "current": "2030-12-31",
+      "drift_months": 0
+    },
+    {
       "id": "kidston-pumped-storage-hydro-project-250mw",
       "name": "Kidston Pumped Storage Hydro Project 250MW",
       "technology": "pumped_hydro",
@@ -3229,7 +3834,7 @@
       "capacity_mw": 250.0,
       "state": "QLD",
       "original": "2027-01-01",
-      "current": "2027-01-01",
+      "current": "2027-07-01",
       "drift_months": 0
     },
     {
@@ -3251,7 +3856,18 @@
       "capacity_mw": 270.0,
       "state": "QLD",
       "original": "2035-01-01",
-      "current": "2035-01",
+      "current": "2035-01-01",
+      "drift_months": 0
+    },
+    {
+      "id": "kiewa-valley-bess",
+      "name": "KIEWA VALLEY BESS",
+      "technology": "bess",
+      "status": "development",
+      "capacity_mw": 500.0,
+      "state": "VIC",
+      "original": "2028-06-01",
+      "current": "2028-06-01",
       "drift_months": 0
     },
     {
@@ -3288,6 +3904,17 @@
       "drift_months": 0
     },
     {
+      "id": "koorakee-wind-farm",
+      "name": "Koorakee Wind Farm",
+      "technology": "wind",
+      "status": "development",
+      "capacity_mw": 300.0,
+      "state": "NSW",
+      "original": "2030-07-01",
+      "current": "2030-07-01",
+      "drift_months": 0
+    },
+    {
       "id": "koorangie-energy-storage-system",
       "name": "Koorangie Energy Storage System",
       "technology": "bess",
@@ -3306,7 +3933,7 @@
       "capacity_mw": 230.0,
       "state": "VIC",
       "original": "2032-01-01",
-      "current": "2032-01",
+      "current": "2032-01-01",
       "drift_months": 0
     },
     {
@@ -3354,17 +3981,6 @@
       "drift_months": 0
     },
     {
-      "id": "lake-lyell-pumped-hydro",
-      "name": "Lake Lyell Pumped Hydro",
-      "technology": "pumped_hydro",
-      "status": "development",
-      "capacity_mw": 385.0,
-      "state": "NSW",
-      "original": "2030-12-31",
-      "current": "2030-12-31",
-      "drift_months": 0
-    },
-    {
       "id": "lakeland-wind-farm",
       "name": "Lakeland Wind Farm",
       "technology": "wind",
@@ -3372,7 +3988,7 @@
       "capacity_mw": 72.0,
       "state": "QLD",
       "original": "2030-01-01",
-      "current": "2030-01",
+      "current": "2030-01-01",
       "drift_months": 0
     },
     {
@@ -3383,7 +3999,7 @@
       "capacity_mw": 300.0,
       "state": "NSW",
       "original": "2029-11-30",
-      "current": "2029-11",
+      "current": "2029-11-30",
       "drift_months": 0
     },
     {
@@ -3394,7 +4010,7 @@
       "capacity_mw": 80.0,
       "state": "VIC",
       "original": "2026-05-30",
-      "current": "2026-05",
+      "current": "2026-05-30",
       "drift_months": 0
     },
     {
@@ -3438,7 +4054,18 @@
       "capacity_mw": 500.0,
       "state": "NSW",
       "original": "2026-02-20",
-      "current": "2026-02-20",
+      "current": "2026-06-01",
+      "drift_months": 0
+    },
+    {
+      "id": "lilyvale-bess-kci",
+      "name": "Lilyvale BESS - KCI",
+      "technology": "bess",
+      "status": "development",
+      "capacity_mw": 440.0,
+      "state": "QLD",
+      "original": "2027-12-01",
+      "current": "2027-12-01",
       "drift_months": 0
     },
     {
@@ -3456,11 +4083,11 @@
       "id": "limondale-bess",
       "name": "Limondale BESS",
       "technology": "bess",
-      "status": "construction",
+      "status": "operating",
       "capacity_mw": 50.0,
       "state": "NSW",
       "original": "2026-03-07",
-      "current": "2026-03",
+      "current": "2026-03-07",
       "drift_months": 0
     },
     {
@@ -3508,6 +4135,17 @@
       "drift_months": 0
     },
     {
+      "id": "lincoln-gap-wind-farm-stage-3",
+      "name": "Lincoln Gap Wind Farm stage 3",
+      "technology": "wind",
+      "status": "development",
+      "capacity_mw": 278.0,
+      "state": "SA",
+      "original": "2030-03-31",
+      "current": "2030-03-31",
+      "drift_months": 0
+    },
+    {
       "id": "lindley-bess",
       "name": "Lindley BESS",
       "technology": "bess",
@@ -3515,7 +4153,18 @@
       "capacity_mw": 100.0,
       "state": "SA",
       "original": "2027-06-30",
-      "current": "2027-06",
+      "current": "2027-06-30",
+      "drift_months": 0
+    },
+    {
+      "id": "lindsay-gap-bess",
+      "name": "Lindsay Gap BESS",
+      "technology": "bess",
+      "status": "development",
+      "capacity_mw": 450.0,
+      "state": "NSW",
+      "original": "2029-12-15",
+      "current": "2029-12-15",
       "drift_months": 0
     },
     {
@@ -3527,17 +4176,6 @@
       "state": "VIC",
       "original": "2028-06-29",
       "current": "2028-06-29",
-      "drift_months": 0
-    },
-    {
-      "id": "lockyer-valley-energy-project",
-      "name": "Lockyer Valley Energy Project",
-      "technology": "bess",
-      "status": "development",
-      "capacity_mw": 1000.0,
-      "state": "QLD",
-      "original": "2030-09-30",
-      "current": "2030-09-30",
       "drift_months": 0
     },
     {
@@ -3570,7 +4208,7 @@
       "capacity_mw": 281.0,
       "state": "QLD",
       "original": "2028-08-01",
-      "current": "2028-08",
+      "current": "2028-08-01",
       "drift_months": 0
     },
     {
@@ -3596,17 +4234,6 @@
       "drift_months": 0
     },
     {
-      "id": "macintyre-wind-farm",
-      "name": "MacIntyre Wind Farm",
-      "technology": "wind",
-      "status": "commissioning",
-      "capacity_mw": 890.0,
-      "state": "QLD",
-      "original": "2025-11-30",
-      "current": "2025-11-30",
-      "drift_months": 0
-    },
-    {
       "id": "mackenzie-river-solar-farm",
       "name": "Mackenzie River Solar Farm",
       "technology": "hybrid",
@@ -3614,7 +4241,7 @@
       "capacity_mw": 450.0,
       "state": "QLD",
       "original": "2031-02-28",
-      "current": "2031-02-28",
+      "current": "2031-06-02",
       "drift_months": 0
     },
     {
@@ -3637,6 +4264,17 @@
       "state": "QLD",
       "original": "2031-12-31",
       "current": "2031-12-31",
+      "drift_months": 0
+    },
+    {
+      "id": "magpie-hill-solar-farm",
+      "name": "Magpie Hill Solar Farm",
+      "technology": "hybrid",
+      "status": "development",
+      "capacity_mw": 300.0,
+      "state": "NSW",
+      "original": "2030-01-01",
+      "current": "2030-01-01",
       "drift_months": 0
     },
     {
@@ -3724,7 +4362,7 @@
       "capacity_mw": 152.0,
       "state": "NSW",
       "original": "2027-12-02",
-      "current": "2027-12",
+      "current": "2027-12-02",
       "drift_months": 0
     },
     {
@@ -3736,6 +4374,17 @@
       "state": "NSW",
       "original": "2027-02-28",
       "current": "2027-02-28",
+      "drift_months": 0
+    },
+    {
+      "id": "mavis-hybrid-facility-solar",
+      "name": "Mavis Hybrid Facility - Solar",
+      "technology": "hybrid",
+      "status": "development",
+      "capacity_mw": 252.0,
+      "state": "NSW",
+      "original": "2028-07-01",
+      "current": "2028-07-01",
       "drift_months": 0
     },
     {
@@ -3768,7 +4417,7 @@
       "capacity_mw": 1500.0,
       "state": "VIC",
       "original": "2030-01-01",
-      "current": "2030-01",
+      "current": "2030-01-01",
       "drift_months": 0
     },
     {
@@ -3779,7 +4428,7 @@
       "capacity_mw": 250.0,
       "state": "SA",
       "original": "2027-12-30",
-      "current": "2027-12",
+      "current": "2027-12-30",
       "drift_months": 0
     },
     {
@@ -3878,7 +4527,29 @@
       "capacity_mw": 500.0,
       "state": "QLD",
       "original": "2030-07-01",
-      "current": "2030-07",
+      "current": "2030-07-01",
+      "drift_months": 0
+    },
+    {
+      "id": "millmerran-bess-storage",
+      "name": "Millmerran BESS - Storage",
+      "technology": "bess",
+      "status": "development",
+      "capacity_mw": 200.0,
+      "state": "QLD",
+      "original": "2029-06-30",
+      "current": "2029-06-30",
+      "drift_months": 0
+    },
+    {
+      "id": "millmerran-wind-farm",
+      "name": "Millmerran Wind Farm",
+      "technology": "wind",
+      "status": "development",
+      "capacity_mw": 250.0,
+      "state": "QLD",
+      "original": "2030-06-30",
+      "current": "2030-06-30",
       "drift_months": 0
     },
     {
@@ -3889,29 +4560,51 @@
       "capacity_mw": 400.0,
       "state": "NSW",
       "original": "2029-10-12",
-      "current": "2029-10",
+      "current": "2029-11-30",
       "drift_months": 0
     },
     {
-      "id": "moah-creek-wind-farm",
-      "name": "Moah Creek Wind Farm",
-      "technology": "wind",
+      "id": "miriam-vale-solar-farm-and-bess-a",
+      "name": "Miriam Vale Solar Farm And BESS - A",
+      "technology": "hybrid",
       "status": "development",
-      "capacity_mw": 349.0,
+      "capacity_mw": 300.0,
       "state": "QLD",
-      "original": "2028-03-31",
-      "current": "2028-03",
+      "original": "2030-03-29",
+      "current": "2030-03-29",
       "drift_months": 0
     },
     {
-      "id": "moama-solar-farm",
-      "name": "Moama Solar Farm",
+      "id": "miriam-vale-solar-farm-and-bess-b",
+      "name": "Miriam Vale Solar Farm And BESS - B",
+      "technology": "hybrid",
+      "status": "development",
+      "capacity_mw": 300.0,
+      "state": "QLD",
+      "original": "2030-03-29",
+      "current": "2030-03-29",
+      "drift_months": 0
+    },
+    {
+      "id": "moah-creek-solar-farm",
+      "name": "Moah Creek Solar Farm",
       "technology": "solar",
       "status": "development",
-      "capacity_mw": 30.0,
-      "state": "NSW",
-      "original": "2027-12-01",
-      "current": "2027-12",
+      "capacity_mw": 390.0,
+      "state": "QLD",
+      "original": "2030-12-01",
+      "current": "2030-12-01",
+      "drift_months": 0
+    },
+    {
+      "id": "mobilong-bess",
+      "name": "Mobilong BESS",
+      "technology": "bess",
+      "status": "development",
+      "capacity_mw": 180.0,
+      "state": "SA",
+      "original": "2030-12-29",
+      "current": "2030-12-29",
       "drift_months": 0
     },
     {
@@ -3937,6 +4630,17 @@
       "drift_months": 0
     },
     {
+      "id": "molong-bess",
+      "name": "Molong BESS",
+      "technology": "bess",
+      "status": "development",
+      "capacity_mw": 150.0,
+      "state": "NSW",
+      "original": "2028-07-01",
+      "current": "2028-07-01",
+      "drift_months": 0
+    },
+    {
       "id": "molong-solar-farm",
       "name": "Molong Solar Farm",
       "technology": "solar",
@@ -3948,6 +4652,17 @@
       "drift_months": 0
     },
     {
+      "id": "monduran-bess",
+      "name": "Monduran BESS",
+      "technology": "bess",
+      "status": "development",
+      "capacity_mw": 300.0,
+      "state": "QLD",
+      "original": "2030-06-30",
+      "current": "2030-06-30",
+      "drift_months": 0
+    },
+    {
       "id": "moonah-solar-farm-kci",
       "name": "Moonah Solar Farm - KCI",
       "technology": "solar",
@@ -3955,7 +4670,18 @@
       "capacity_mw": 150.0,
       "state": "VIC",
       "original": "2029-12-26",
-      "current": "2029-12",
+      "current": "2029-12-26",
+      "drift_months": 0
+    },
+    {
+      "id": "moorabool-bess",
+      "name": "Moorabool BESS",
+      "technology": "bess",
+      "status": "development",
+      "capacity_mw": 300.0,
+      "state": "VIC",
+      "original": "2027-06-01",
+      "current": "2027-06-01",
       "drift_months": 0
     },
     {
@@ -3992,6 +4718,17 @@
       "drift_months": 0
     },
     {
+      "id": "moreton-hill-wind-farm",
+      "name": "Moreton Hill Wind Farm",
+      "technology": "wind",
+      "status": "development",
+      "capacity_mw": 387.6,
+      "state": "VIC",
+      "original": "2030-07-01",
+      "current": "2030-07-01",
+      "drift_months": 0
+    },
+    {
       "id": "morgan-solar",
       "name": "Morgan Solar",
       "technology": "hybrid",
@@ -4010,7 +4747,7 @@
       "capacity_mw": 540.0,
       "state": "VIC",
       "original": "2026-02-28",
-      "current": "2026-02-28",
+      "current": "2026-07-31",
       "drift_months": 0
     },
     {
@@ -4058,17 +4795,6 @@
       "drift_months": 0
     },
     {
-      "id": "morwell-bess",
-      "name": "Morwell BESS",
-      "technology": "bess",
-      "status": "development",
-      "capacity_mw": 1000.0,
-      "state": "VIC",
-      "original": "2028-12-31",
-      "current": "2028-12-31",
-      "drift_months": 0
-    },
-    {
       "id": "mount-emerald",
       "name": "Mount Emerald",
       "technology": "wind",
@@ -4087,7 +4813,7 @@
       "capacity_mw": 750.0,
       "state": "VIC",
       "original": "2032-07-05",
-      "current": "2032-07",
+      "current": "2032-07-05",
       "drift_months": 0
     },
     {
@@ -4135,6 +4861,17 @@
       "drift_months": 0
     },
     {
+      "id": "mt-arthur-pumped-hydro-energy-storage-project-kci",
+      "name": "Mt Arthur Pumped Hydro Energy Storage Project - KCI",
+      "technology": "pumped_hydro",
+      "status": "development",
+      "capacity_mw": 1710.0,
+      "state": "NSW",
+      "original": "2036-12-15",
+      "current": "2036-12-15",
+      "drift_months": 0
+    },
+    {
       "id": "mt-challenger-wind-farm",
       "name": "Mt Challenger Wind Farm",
       "technology": "hybrid",
@@ -4164,7 +4901,7 @@
       "capacity_mw": 291.4,
       "state": "QLD",
       "original": "2032-01-01",
-      "current": "2032-01",
+      "current": "2032-01-01",
       "drift_months": 0
     },
     {
@@ -4215,11 +4952,11 @@
       "id": "munna-creek-solar-farm",
       "name": "Munna Creek Solar Farm",
       "technology": "solar",
-      "status": "construction",
+      "status": "commissioning",
       "capacity_mw": 120.0,
       "state": "QLD",
       "original": "2026-01-24",
-      "current": "2026-01",
+      "current": "2026-01-24",
       "drift_months": 0
     },
     {
@@ -4311,17 +5048,6 @@
       "drift_months": 0
     },
     {
-      "id": "narrandera-solar-hybrid-pvbess",
-      "name": "Narrandera Solar Hybrid (PV+BESS)",
-      "technology": "hybrid",
-      "status": "development",
-      "capacity_mw": 400.0,
-      "state": "NSW",
-      "original": "2030-12-30",
-      "current": "2030-12-30",
-      "drift_months": 0
-    },
-    {
       "id": "nebo-bess",
       "name": "Nebo BESS",
       "technology": "bess",
@@ -4395,7 +5121,7 @@
       "capacity_mw": 1260.0,
       "state": "TAS",
       "original": "2032-07-30",
-      "current": "2032-07",
+      "current": "2032-07-30",
       "drift_months": 0
     },
     {
@@ -4461,7 +5187,7 @@
       "capacity_mw": 750.0,
       "state": "VIC",
       "original": "2028-02-01",
-      "current": "2028-02",
+      "current": "2028-02-01",
       "drift_months": 0
     },
     {
@@ -4483,7 +5209,7 @@
       "capacity_mw": 302.1,
       "state": "VIC",
       "original": "2028-12-31",
-      "current": "2028-12",
+      "current": "2028-12-31",
       "drift_months": 0
     },
     {
@@ -4527,7 +5253,7 @@
       "capacity_mw": 250.0,
       "state": "SA",
       "original": "2028-06-30",
-      "current": "2028-06",
+      "current": "2028-06-30",
       "drift_months": 0
     },
     {
@@ -4542,6 +5268,28 @@
       "drift_months": 0
     },
     {
+      "id": "orsted-gippsland-c-windfarm",
+      "name": "Orsted Gippsland C Windfarm",
+      "technology": "offshore_wind",
+      "status": "development",
+      "capacity_mw": 2820.0,
+      "state": "VIC",
+      "original": "2032-12-31",
+      "current": "2032-12-31",
+      "drift_months": 0
+    },
+    {
+      "id": "oven-mountain-pumped-storage",
+      "name": "Oven Mountain Pumped Storage",
+      "technology": "pumped_hydro",
+      "status": "development",
+      "capacity_mw": 900.0,
+      "state": "NSW",
+      "original": "2036-01-01",
+      "current": "2036-01-01",
+      "drift_months": 0
+    },
+    {
       "id": "paling-yards-wind-farm",
       "name": "Paling Yards Wind Farm",
       "technology": "wind",
@@ -4550,6 +5298,17 @@
       "state": "NSW",
       "original": "2029-07-01",
       "current": "2029-07-01",
+      "drift_months": 0
+    },
+    {
+      "id": "palmerston-bess-akaysha",
+      "name": "Palmerston BESS (Akaysha)",
+      "technology": "bess",
+      "status": "development",
+      "capacity_mw": 100.0,
+      "state": "TAS",
+      "original": "2027-09-30",
+      "current": "2027-09-30",
       "drift_months": 0
     },
     {
@@ -4608,6 +5367,17 @@
       "drift_months": 0
     },
     {
+      "id": "phoenix-pumped-hydro-project",
+      "name": "Phoenix Pumped Hydro Project",
+      "technology": "pumped_hydro",
+      "status": "development",
+      "capacity_mw": 810.0,
+      "state": "NSW",
+      "original": "2032-12-01",
+      "current": "2032-12-01",
+      "drift_months": 0
+    },
+    {
       "id": "piambong-wind-farm-kci",
       "name": "Piambong Wind Farm - KCI",
       "technology": "wind",
@@ -4616,6 +5386,17 @@
       "state": "NSW",
       "original": "2028-12-01",
       "current": "2028-12-01",
+      "drift_months": 0
+    },
+    {
+      "id": "pikedale-wind-farm-kci",
+      "name": "Pikedale Wind Farm (KCI)",
+      "technology": "wind",
+      "status": "development",
+      "capacity_mw": 1500.0,
+      "state": "QLD",
+      "original": "2060-07-01",
+      "current": "2060-07-01",
       "drift_months": 0
     },
     {
@@ -4670,7 +5451,18 @@
       "capacity_mw": 80.0,
       "state": "QLD",
       "original": "2029-10-07",
-      "current": "2029-10",
+      "current": "2029-10-07",
+      "drift_months": 0
+    },
+    {
+      "id": "pleystowe-bess",
+      "name": "Pleystowe BESS",
+      "technology": "bess",
+      "status": "development",
+      "capacity_mw": 200.0,
+      "state": "QLD",
+      "original": "2028-12-31",
+      "current": "2028-12-31",
       "drift_months": 0
     },
     {
@@ -4736,18 +5528,7 @@
       "capacity_mw": 250.0,
       "state": "VIC",
       "original": "2035-09-30",
-      "current": "2035-09",
-      "drift_months": 0
-    },
-    {
-      "id": "prairie-wf-and-wongalee-wf",
-      "name": "Prairie WF and Wongalee WF",
-      "technology": "wind",
-      "status": "development",
-      "capacity_mw": 2000.0,
-      "state": "QLD",
-      "original": "2031-12-31",
-      "current": "2031-12",
+      "current": "2035-09-30",
       "drift_months": 0
     },
     {
@@ -4758,7 +5539,7 @@
       "capacity_mw": 400.0,
       "state": "QLD",
       "original": "2026-01-31",
-      "current": "2026-01",
+      "current": "2026-01-31",
       "drift_months": 0
     },
     {
@@ -4769,7 +5550,7 @@
       "capacity_mw": 400.0,
       "state": "QLD",
       "original": "2028-10-31",
-      "current": "2028-10",
+      "current": "2028-10-31",
       "drift_months": 0
     },
     {
@@ -4795,17 +5576,6 @@
       "drift_months": 0
     },
     {
-      "id": "raglan-bess",
-      "name": "Raglan BESS",
-      "technology": "bess",
-      "status": "development",
-      "capacity_mw": 500.0,
-      "state": "QLD",
-      "original": "2028-08-31",
-      "current": "2028-08-31",
-      "drift_months": 0
-    },
-    {
       "id": "rangebank-bess",
       "name": "Rangebank BESS",
       "technology": "bess",
@@ -4824,7 +5594,7 @@
       "capacity_mw": 63.0,
       "state": "VIC",
       "original": "2026-01-16",
-      "current": "2026-01",
+      "current": "2026-01-16",
       "drift_months": 0
     },
     {
@@ -4905,6 +5675,17 @@
       "drift_months": 0
     },
     {
+      "id": "robbins-island-wind-farm",
+      "name": "Robbins Island Wind Farm",
+      "technology": "wind",
+      "status": "development",
+      "capacity_mw": 929.0,
+      "state": "TAS",
+      "original": "2030-12-01",
+      "current": "2030-12-01",
+      "drift_months": 0
+    },
+    {
       "id": "romani-bess",
       "name": "Romani BESS",
       "technology": "bess",
@@ -4913,6 +5694,17 @@
       "state": "NSW",
       "original": "2030-10-31",
       "current": "2030-10-31",
+      "drift_months": 0
+    },
+    {
+      "id": "romani-solar-farm",
+      "name": "Romani Solar Farm",
+      "technology": "hybrid",
+      "status": "development",
+      "capacity_mw": 250.0,
+      "state": "NSW",
+      "original": "2031-08-13",
+      "current": "2031-08-13",
       "drift_months": 0
     },
     {
@@ -4956,7 +5748,7 @@
       "capacity_mw": 100.0,
       "state": "VIC",
       "original": "2029-08-01",
-      "current": "2029-08",
+      "current": "2029-08-01",
       "drift_months": 0
     },
     {
@@ -4967,7 +5759,7 @@
       "capacity_mw": 248.0,
       "state": "NSW",
       "original": "2028-09-30",
-      "current": "2028-09",
+      "current": "2028-09-30",
       "drift_months": 0
     },
     {
@@ -5004,17 +5796,6 @@
       "drift_months": 0
     },
     {
-      "id": "rye-park-wind-farm",
-      "name": "Rye Park Wind Farm",
-      "technology": "wind",
-      "status": "operating",
-      "capacity_mw": 396.0,
-      "state": "NSW",
-      "original": "2024-10-07",
-      "current": "2024-10-07",
-      "drift_months": 0
-    },
-    {
       "id": "salisbury-bess",
       "name": "Salisbury BESS",
       "technology": "bess",
@@ -5033,7 +5814,7 @@
       "capacity_mw": 450.0,
       "state": "NSW",
       "original": "2032-02-27",
-      "current": "2032-02",
+      "current": "2032-02-27",
       "drift_months": 0
     },
     {
@@ -5048,17 +5829,6 @@
       "drift_months": 0
     },
     {
-      "id": "sandy-creek-solar-farm",
-      "name": "Sandy Creek Solar Farm",
-      "technology": "solar",
-      "status": "development",
-      "capacity_mw": 700.0,
-      "state": "NSW",
-      "original": "2029-06-01",
-      "current": "2029-06-01",
-      "drift_months": 0
-    },
-    {
       "id": "sandy-creek-standalone-bess",
       "name": "Sandy Creek Standalone BESS",
       "technology": "bess",
@@ -5067,6 +5837,17 @@
       "state": "NSW",
       "original": "2031-03-31",
       "current": "2031-03-31",
+      "drift_months": 0
+    },
+    {
+      "id": "sandy-point-hybrid-solar",
+      "name": "Sandy Point Hybrid - Solar",
+      "technology": "hybrid",
+      "status": "development",
+      "capacity_mw": 250.0,
+      "state": "NSW",
+      "original": "2029-08-01",
+      "current": "2029-08-01",
       "drift_months": 0
     },
     {
@@ -5103,6 +5884,17 @@
       "drift_months": 0
     },
     {
+      "id": "shoalhaven-expansion",
+      "name": "Shoalhaven Expansion",
+      "technology": "pumped_hydro",
+      "status": "development",
+      "capacity_mw": 235.0,
+      "state": "NSW",
+      "original": "2033-12-31",
+      "current": "2033-12-31",
+      "drift_months": 0
+    },
+    {
       "id": "silver-city-energy-storage",
       "name": "Silver City Energy Storage",
       "technology": "bess",
@@ -5125,17 +5917,6 @@
       "drift_months": 0
     },
     {
-      "id": "skye-ridge-wind-farm",
-      "name": "Skye Ridge Wind Farm",
-      "technology": "wind",
-      "status": "development",
-      "capacity_mw": 1300.0,
-      "state": "NSW",
-      "original": "2031-11-28",
-      "current": "2031-11",
-      "drift_months": 0
-    },
-    {
       "id": "smithfield-bess",
       "name": "Smithfield BESS",
       "technology": "bess",
@@ -5154,7 +5935,7 @@
       "capacity_mw": 300.0,
       "state": "QLD",
       "original": "2029-05-01",
-      "current": "2029-05",
+      "current": "2029-05-01",
       "drift_months": 0
     },
     {
@@ -5209,7 +5990,7 @@
       "capacity_mw": 300.0,
       "state": "QLD",
       "original": "2027-09-30",
-      "current": "2027-09",
+      "current": "2027-09-30",
       "drift_months": 0
     },
     {
@@ -5246,6 +6027,28 @@
       "drift_months": 0
     },
     {
+      "id": "spicers-creek-wind-farm",
+      "name": "Spicers Creek Wind Farm",
+      "technology": "wind",
+      "status": "development",
+      "capacity_mw": 702.0,
+      "state": "NSW",
+      "original": "2031-07-01",
+      "current": "2031-07-01",
+      "drift_months": 0
+    },
+    {
+      "id": "spinifex-offshore-wind-farm",
+      "name": "Spinifex Offshore Wind Farm",
+      "technology": "offshore_wind",
+      "status": "development",
+      "capacity_mw": 1200.0,
+      "state": "VIC",
+      "original": "2038-01-01",
+      "current": "2038-01-01",
+      "drift_months": 0
+    },
+    {
       "id": "springlands-wind-farm",
       "name": "Springlands Wind Farm",
       "technology": "wind",
@@ -5253,18 +6056,7 @@
       "capacity_mw": 800.0,
       "state": "QLD",
       "original": "2030-12-30",
-      "current": "2030-12",
-      "drift_months": 0
-    },
-    {
-      "id": "springvale-energy-hub",
-      "name": "Springvale Energy Hub",
-      "technology": "bess",
-      "status": "development",
-      "capacity_mw": 115.0,
-      "state": "VIC",
-      "original": "2026-10-30",
-      "current": "2026-10-30",
+      "current": "2030-12-30",
       "drift_months": 0
     },
     {
@@ -5312,17 +6104,6 @@
       "drift_months": 0
     },
     {
-      "id": "stoney-creek-bess",
-      "name": "Stoney Creek BESS",
-      "technology": "bess",
-      "status": "development",
-      "capacity_mw": 125.0,
-      "state": "NSW",
-      "original": "2027-11-30",
-      "current": "2027-11-30",
-      "drift_months": 0
-    },
-    {
       "id": "strathbogie-ranges-wind-farm",
       "name": "Strathbogie Ranges Wind Farm",
       "technology": "wind",
@@ -5330,7 +6111,7 @@
       "capacity_mw": 800.0,
       "state": "VIC",
       "original": "2031-12-01",
-      "current": "2031-12",
+      "current": "2031-12-01",
       "drift_months": 0
     },
     {
@@ -5440,7 +6221,7 @@
       "capacity_mw": 1300.0,
       "state": "QLD",
       "original": "2026-01-07",
-      "current": "2026-06-01",
+      "current": "2026-06-30",
       "drift_months": 0
     },
     {
@@ -5528,7 +6309,7 @@
       "capacity_mw": 250.0,
       "state": "QLD",
       "original": "2026-01-27",
-      "current": "2026-01-27",
+      "current": "2026-04-03",
       "drift_months": 0
     },
     {
@@ -5576,28 +6357,6 @@
       "drift_months": 0
     },
     {
-      "id": "talbingo-bess",
-      "name": "Talbingo BESS",
-      "technology": "bess",
-      "status": "development",
-      "capacity_mw": 400.0,
-      "state": "NSW",
-      "original": "2028-12-11",
-      "current": "2028-12-11",
-      "drift_months": 0
-    },
-    {
-      "id": "tall-tree-bess",
-      "name": "Tall Tree BESS",
-      "technology": "bess",
-      "status": "development",
-      "capacity_mw": 200.0,
-      "state": "VIC",
-      "original": "2030-12-31",
-      "current": "2030-12-31",
-      "drift_months": 0
-    },
-    {
       "id": "tall-tree-wind-farm",
       "name": "Tall Tree Wind Farm",
       "technology": "wind",
@@ -5605,7 +6364,7 @@
       "capacity_mw": 400.0,
       "state": "VIC",
       "original": "2029-12-31",
-      "current": "2029-12",
+      "current": "2029-12-31",
       "drift_months": 0
     },
     {
@@ -5617,28 +6376,6 @@
       "state": "NSW",
       "original": "2030-01-15",
       "current": "2030-01-15",
-      "drift_months": 0
-    },
-    {
-      "id": "tamworth-bess-project-1-pty-ltd",
-      "name": "Tamworth BESS Project 1 Pty Ltd",
-      "technology": "bess",
-      "status": "development",
-      "capacity_mw": 100.0,
-      "state": "NSW",
-      "original": "2027-12-31",
-      "current": "2027-12-31",
-      "drift_months": 0
-    },
-    {
-      "id": "tamworth-bess-project-2-pty-ltd",
-      "name": "Tamworth BESS Project 2 Pty Ltd",
-      "technology": "bess",
-      "status": "development",
-      "capacity_mw": 100.0,
-      "state": "NSW",
-      "original": "2027-12-31",
-      "current": "2027-12-31",
       "drift_months": 0
     },
     {
@@ -5661,17 +6398,6 @@
       "state": "QLD",
       "original": "2026-01-30",
       "current": "2026-01-30",
-      "drift_months": 0
-    },
-    {
-      "id": "tarong-west-wind-farm-ironleaf",
-      "name": "Tarong West Wind Farm (Ironleaf)",
-      "technology": "wind",
-      "status": "development",
-      "capacity_mw": 436.5,
-      "state": "QLD",
-      "original": "2028-10-01",
-      "current": "2028-10-01",
       "drift_months": 0
     },
     {
@@ -5737,7 +6463,7 @@
       "capacity_mw": 111.0,
       "state": "SA",
       "original": "2025-08-31",
-      "current": "2025-08-31",
+      "current": "2025-12-05",
       "drift_months": 0
     },
     {
@@ -5825,7 +6551,7 @@
       "capacity_mw": 1054.0,
       "state": "QLD",
       "original": "2028-12-31",
-      "current": "2028-12",
+      "current": "2028-12-31",
       "drift_months": 0
     },
     {
@@ -5837,6 +6563,17 @@
       "state": "VIC",
       "original": "2028-03-31",
       "current": "2028-03-31",
+      "drift_months": 0
+    },
+    {
+      "id": "thunderbolt-wind-farm",
+      "name": "Thunderbolt Wind Farm",
+      "technology": "wind",
+      "status": "development",
+      "capacity_mw": 210.0,
+      "state": "NSW",
+      "original": "2031-06-30",
+      "current": "2031-06-30",
       "drift_months": 0
     },
     {
@@ -5895,6 +6632,17 @@
       "drift_months": 0
     },
     {
+      "id": "trafalgar-east-hybrid-facility-stage-2",
+      "name": "Trafalgar East Hybrid Facility Stage 2",
+      "technology": "hybrid",
+      "status": "development",
+      "capacity_mw": 200.0,
+      "state": "VIC",
+      "original": "2030-12-01",
+      "current": "2030-12-01",
+      "drift_months": 0
+    },
+    {
       "id": "tragowel-bess",
       "name": "Tragowel BESS",
       "technology": "bess",
@@ -5903,17 +6651,6 @@
       "state": "VIC",
       "original": "2029-01-01",
       "current": "2029-01-01",
-      "drift_months": 0
-    },
-    {
-      "id": "tramway-road-bess",
-      "name": "Tramway Road BESS",
-      "technology": "bess",
-      "status": "development",
-      "capacity_mw": 300.0,
-      "state": "VIC",
-      "original": "2028-12-30",
-      "current": "2028-12-30",
       "drift_months": 0
     },
     {
@@ -6027,6 +6764,17 @@
       "drift_months": 0
     },
     {
+      "id": "uungula-bess",
+      "name": "Uungula BESS",
+      "technology": "bess",
+      "status": "development",
+      "capacity_mw": 400.0,
+      "state": "NSW",
+      "original": "2030-07-01",
+      "current": "2030-07-01",
+      "drift_months": 0
+    },
+    {
       "id": "uungula-wind-farm",
       "name": "Uungula Wind Farm",
       "technology": "wind",
@@ -6046,6 +6794,17 @@
       "state": "NSW",
       "original": "2028-03-01",
       "current": "2028-03-01",
+      "drift_months": 0
+    },
+    {
+      "id": "vales-point-solar",
+      "name": "Vales Point Solar",
+      "technology": "solar",
+      "status": "development",
+      "capacity_mw": 55.0,
+      "state": "NSW",
+      "original": "2050-07-01",
+      "current": "2050-07-01",
       "drift_months": 0
     },
     {
@@ -6104,6 +6863,17 @@
       "drift_months": 0
     },
     {
+      "id": "wallerawang-9-bess",
+      "name": "Wallerawang 9 BESS",
+      "technology": "bess",
+      "status": "development",
+      "capacity_mw": 300.0,
+      "state": "NSW",
+      "original": "2029-10-01",
+      "current": "2029-10-01",
+      "drift_months": 0
+    },
+    {
       "id": "wallgrove-grid-battery-project",
       "name": "Wallgrove Grid Battery project",
       "technology": "bess",
@@ -6118,11 +6888,11 @@
       "id": "wambo-wind-farm",
       "name": "Wambo Wind Farm",
       "technology": "wind",
-      "status": "construction",
+      "status": "commissioning",
       "capacity_mw": 500.0,
       "state": "QLD",
       "original": "2025-02-28",
-      "current": "2025-02",
+      "current": "2025-02-28",
       "drift_months": 0
     },
     {
@@ -6199,7 +6969,7 @@
       "capacity_mw": 306.0,
       "state": "VIC",
       "original": "2030-12-30",
-      "current": "2030-12",
+      "current": "2030-12-30",
       "drift_months": 0
     },
     {
@@ -6233,6 +7003,17 @@
       "state": "VIC",
       "original": "2009-06-30",
       "current": "2009-06-30",
+      "drift_months": 0
+    },
+    {
+      "id": "waubra-bess-kci",
+      "name": "Waubra BESS - KCI",
+      "technology": "bess",
+      "status": "development",
+      "capacity_mw": 200.0,
+      "state": "VIC",
+      "original": "2029-12-15",
+      "current": "2029-12-15",
       "drift_months": 0
     },
     {
@@ -6353,7 +7134,7 @@
       "capacity_mw": 215.0,
       "state": "NSW",
       "original": "2028-03-31",
-      "current": "2028-03",
+      "current": "2028-03-31",
       "drift_months": 0
     },
     {
@@ -6375,7 +7156,7 @@
       "capacity_mw": 574.4,
       "state": "SA",
       "original": "2030-01-01",
-      "current": "2030-01",
+      "current": "2030-01-01",
       "drift_months": 0
     },
     {
@@ -6386,7 +7167,7 @@
       "capacity_mw": 450.0,
       "state": "VIC",
       "original": "2027-08-01",
-      "current": "2027-08",
+      "current": "2027-08-01",
       "drift_months": 0
     },
     {
@@ -6412,6 +7193,17 @@
       "drift_months": 0
     },
     {
+      "id": "winterbourne-wind-farm",
+      "name": "Winterbourne Wind Farm",
+      "technology": "wind",
+      "status": "development",
+      "capacity_mw": 731.6,
+      "state": "NSW",
+      "original": "2031-12-31",
+      "current": "2031-12-31",
+      "drift_months": 0
+    },
+    {
       "id": "winton-north-solar-farm",
       "name": "Winton North Solar Farm",
       "technology": "solar",
@@ -6419,7 +7211,7 @@
       "capacity_mw": 100.0,
       "state": "VIC",
       "original": "2027-04-30",
-      "current": "2027-04",
+      "current": "2027-04-30",
       "drift_months": 0
     },
     {
@@ -6474,7 +7266,18 @@
       "capacity_mw": 450.0,
       "state": "QLD",
       "original": "2030-05-01",
-      "current": "2030-05",
+      "current": "2030-12-31",
+      "drift_months": 0
+    },
+    {
+      "id": "woodland-bess",
+      "name": "Woodland BESS",
+      "technology": "bess",
+      "status": "development",
+      "capacity_mw": 250.0,
+      "state": "NSW",
+      "original": "2029-12-31",
+      "current": "2029-12-31",
       "drift_months": 0
     },
     {
@@ -6489,6 +7292,17 @@
       "drift_months": 0
     },
     {
+      "id": "woodstock-renewable-energy-hub-bess",
+      "name": "Woodstock Renewable Energy Hub - BESS",
+      "technology": "hybrid",
+      "status": "development",
+      "capacity_mw": 650.0,
+      "state": "QLD",
+      "original": "2030-03-29",
+      "current": "2030-03-29",
+      "drift_months": 0
+    },
+    {
       "id": "woolbrook",
       "name": "Woolbrook",
       "technology": "wind",
@@ -6496,7 +7310,7 @@
       "capacity_mw": 500.0,
       "state": "NSW",
       "original": "2033-06-01",
-      "current": "2033-06",
+      "current": "2033-06-01",
       "drift_months": 0
     },
     {
@@ -6621,6 +7435,17 @@
       "drift_months": 0
     },
     {
+      "id": "yabulu-south-bess",
+      "name": "Yabulu South BESS",
+      "technology": "bess",
+      "status": "development",
+      "capacity_mw": 200.0,
+      "state": "QLD",
+      "original": "2028-12-31",
+      "current": "2028-12-31",
+      "drift_months": 0
+    },
+    {
       "id": "yambuk",
       "name": "Yambuk",
       "technology": "wind",
@@ -6661,7 +7486,7 @@
       "capacity_mw": 60.0,
       "state": "NSW",
       "original": "2027-05-31",
-      "current": "2027-05",
+      "current": "2027-05-31",
       "drift_months": 0
     },
     {
@@ -6672,7 +7497,7 @@
       "capacity_mw": 450.0,
       "state": "NSW",
       "original": "2029-07-31",
-      "current": "2029-07",
+      "current": "2029-07-31",
       "drift_months": 0
     },
     {
@@ -6698,6 +7523,17 @@
       "drift_months": 0
     },
     {
+      "id": "yelarbon-sf-and-bess-kci",
+      "name": "Yelarbon SF and BESS - KCI",
+      "technology": "hybrid",
+      "status": "development",
+      "capacity_mw": 400.0,
+      "state": "QLD",
+      "original": "2028-07-01",
+      "current": "2028-07-01",
+      "drift_months": 0
+    },
+    {
       "id": "yendon-wind-farm",
       "name": "Yendon Wind Farm",
       "technology": "wind",
@@ -6717,6 +7553,17 @@
       "state": "SA",
       "original": "2031-12-31",
       "current": "2031-12-31",
+      "drift_months": 0
+    },
+    {
+      "id": "eraring-big-battery",
+      "name": "Eraring Big Battery",
+      "technology": "bess",
+      "status": "operating",
+      "capacity_mw": 700.0,
+      "state": "NSW",
+      "original": "2027-03-31",
+      "current": "2027-03-31",
       "drift_months": 0
     },
     {
@@ -6761,6 +7608,94 @@
       "state": "TAS",
       "original": "2028-12",
       "current": "2028-12",
+      "drift_months": 0
+    },
+    {
+      "id": "carwarp-solar-farm-cwsf",
+      "name": "Carwarp Solar Farm (CWSF)",
+      "technology": "solar",
+      "status": "commissioning",
+      "capacity_mw": 150.0,
+      "state": "VIC",
+      "original": "2026-04-30",
+      "current": "2026-04-30",
+      "drift_months": 0
+    },
+    {
+      "id": "collinsville-bess",
+      "name": "Collinsville BESS",
+      "technology": "bess",
+      "status": "development",
+      "capacity_mw": 200.0,
+      "state": "QLD",
+      "original": "2029-12-30",
+      "current": "2029-12-30",
+      "drift_months": 0
+    },
+    {
+      "id": "el-arish-bess",
+      "name": "El Arish BESS",
+      "technology": "bess",
+      "status": "development",
+      "capacity_mw": 200.0,
+      "state": "QLD",
+      "original": "2029-12-30",
+      "current": "2029-12-30",
+      "drift_months": 0
+    },
+    {
+      "id": "markaranka-bess",
+      "name": "Markaranka BESS",
+      "technology": "bess",
+      "status": "development",
+      "capacity_mw": 320.0,
+      "state": "SA",
+      "original": "2029-03-31",
+      "current": "2029-03-31",
+      "drift_months": 0
+    },
+    {
+      "id": "tabulam-solar-farm-and-bess",
+      "name": "Tabulam Solar Farm and BESS",
+      "technology": "hybrid",
+      "status": "development",
+      "capacity_mw": 100.0,
+      "state": "NSW",
+      "original": "2029-07-01",
+      "current": "2029-07-01",
+      "drift_months": 0
+    },
+    {
+      "id": "tummaville-hybrid-facility-solar-and-bess",
+      "name": "TUMMAVILLE Hybrid Facility- Solar And BESS",
+      "technology": "hybrid",
+      "status": "development",
+      "capacity_mw": 500.0,
+      "state": "QLD",
+      "original": "2031-09-01",
+      "current": "2031-09-01",
+      "drift_months": 0
+    },
+    {
+      "id": "tumuruu-bess-and-solar-farm",
+      "name": "Tumuruu BESS and Solar Farm",
+      "technology": "hybrid",
+      "status": "development",
+      "capacity_mw": 400.0,
+      "state": "QLD",
+      "original": "2028-04-30",
+      "current": "2028-04-30",
+      "drift_months": 0
+    },
+    {
+      "id": "waterloo-bess",
+      "name": "Waterloo BESS",
+      "technology": "bess",
+      "status": "development",
+      "capacity_mw": 120.0,
+      "state": "SA",
+      "original": "2030-06-30",
+      "current": "2030-06-30",
       "drift_months": 0
     }
   ],

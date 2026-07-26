@@ -7,7 +7,7 @@
   "storage_mwh": 2600.0,
   "state": "QLD",
   "current_developer": "Quinbrook Infrastructure Partners",
-  "cod_current": "2026-06-01",
+  "cod_current": "2026-06-30",
   "cod_original": "2026-01-07",
   "connection_status": "committed",
   "grid_forming": false,
@@ -69,6 +69,14 @@
       "event_type": "cod_change",
       "title": "COD estimate updated",
       "detail": "COD changed from 2026-01-07 to 2026-06-01 (source: AEMO Generation Information)",
+      "sources": []
+    },
+    {
+      "date": "2026-07-26",
+      "date_precision": "day",
+      "event_type": "cod_change",
+      "title": "COD estimate updated",
+      "detail": "COD changed from 2026-06-01 to 2026-06-30 (source: AEMO Generation Information)",
       "sources": []
     }
   ],

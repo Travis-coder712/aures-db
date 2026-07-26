@@ -1067,7 +1067,7 @@
       "project_id": "argoon-wind-farm-res-group-kci",
       "name": "Argoon Wind Farm (RES Group) - KCI",
       "state": "NSW",
-      "capacity_mw": 540.0,
+      "capacity_mw": 763.0,
       "predicted_cf_pct": 26.7,
       "predicted_rating": "Average",
       "basis": "state_average"
@@ -1354,7 +1354,7 @@
       "project_id": "delburn-wind-farm",
       "name": "Delburn Wind Farm",
       "state": "VIC",
-      "capacity_mw": 173.0,
+      "capacity_mw": 204.6,
       "predicted_cf_pct": 26.6,
       "predicted_rating": "Average",
       "basis": "state_average"
@@ -1946,7 +1946,7 @@
       "project_id": "skye-ridge-wind-farm",
       "name": "Skye Ridge Wind Farm",
       "state": "NSW",
-      "capacity_mw": 1300.0,
+      "capacity_mw": 750.0,
       "predicted_cf_pct": 26.7,
       "predicted_rating": "Average",
       "basis": "state_average"
@@ -2094,18 +2094,6 @@
       "basis": "state_average"
     },
     {
-      "project_id": "wambo-wind-farm",
-      "name": "Wambo Wind Farm",
-      "state": "QLD",
-      "rez": "Western Downs",
-      "capacity_mw": 500.0,
-      "latitude": -26.648,
-      "longitude": 151.306,
-      "predicted_cf_pct": 35.8,
-      "predicted_rating": "Excellent",
-      "basis": "state_average"
-    },
-    {
       "project_id": "warracknabeal-wind-farm",
       "name": "Warracknabeal Wind Farm",
       "state": "VIC",
@@ -2232,9 +2220,27 @@
       "predicted_cf_pct": 38.2,
       "predicted_rating": "Excellent",
       "basis": "state_average"
+    },
+    {
+      "project_id": "conargo-wind-farm-kci",
+      "name": "Conargo Wind Farm - KCI",
+      "state": "NSW",
+      "capacity_mw": 130.0,
+      "predicted_cf_pct": 26.7,
+      "predicted_rating": "Average",
+      "basis": "state_average"
+    },
+    {
+      "project_id": "wimmera-plains-energy-facility-stage-2-kci",
+      "name": "Wimmera Plains Energy Facility Stage 2 - KCI",
+      "state": "VIC",
+      "capacity_mw": 130.0,
+      "predicted_cf_pct": 26.6,
+      "predicted_rating": "Average",
+      "basis": "state_average"
     }
   ],
   "total_operating": 80,
-  "total_development": 129,
-  "exported_at": "2026-07-26T13:12:26.275725"
+  "total_development": 130,
+  "exported_at": "2026-07-26T18:36:15.486261"
 }

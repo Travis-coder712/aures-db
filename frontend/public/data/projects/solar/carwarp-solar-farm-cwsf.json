@@ -1,0 +1,39 @@
+{
+  "id": "carwarp-solar-farm-cwsf",
+  "name": "Carwarp Solar Farm (CWSF)",
+  "technology": "solar",
+  "status": "commissioning",
+  "capacity_mw": 150.0,
+  "state": "VIC",
+  "current_developer": "CS SubCo Pty Ltd as trustee for Carwarp SF SPV",
+  "cod_current": "2026-04-30",
+  "cod_original": "2026-04-30",
+  "connection_status": "commissioning",
+  "data_confidence": "low",
+  "last_updated": "2026-07-26",
+  "last_verified": "2026-07-26",
+  "aemo_gen_info_id": "1687",
+  "timeline": [
+    {
+      "date": "2026-07-26",
+      "date_precision": "day",
+      "event_type": "cod_change",
+      "title": "COD estimate updated",
+      "detail": "COD changed from 2026-04 to 2026-04-30 (source: AEMO Generation Information)",
+      "sources": []
+    }
+  ],
+  "ownership_history": [],
+  "cod_history": [],
+  "suppliers": [],
+  "offtakes": [],
+  "scheme_contracts": [],
+  "cost_sources": [],
+  "stakeholder_issues": [],
+  "sources": [
+    {
+      "title": "AEMO Generation Information",
+      "url": "https://aemo.com.au/energy-systems/electricity/national-electricity-market-nem/nem-forecasting-and-planning/forecasting-and-planning-data/generation-information"
+    }
+  ]
+}

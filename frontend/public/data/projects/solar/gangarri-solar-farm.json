@@ -7,7 +7,7 @@
   "state": "QLD",
   "rez": "Darling Downs",
   "current_developer": "Shell New Energies Australia Pty Ltd",
-  "cod_current": "2026-03-31",
+  "cod_current": "2026-06-30",
   "cod_original": "2026-03-31",
   "connection_status": "commissioning",
   "grid_forming": false,
@@ -33,6 +33,14 @@
       "event_type": "cod_change",
       "title": "COD estimate updated",
       "detail": "COD changed from 2026-03 to 2026-03-31 (source: AEMO Generation Information)",
+      "sources": []
+    },
+    {
+      "date": "2026-07-26",
+      "date_precision": "day",
+      "event_type": "cod_change",
+      "title": "COD estimate updated",
+      "detail": "COD changed from 2026-03-31 to 2026-06-30 (source: AEMO Generation Information)",
       "sources": []
     }
   ],

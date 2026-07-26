@@ -2,11 +2,11 @@
   "id": "bundaberg-solar-farm",
   "name": "Bundaberg Solar Farm",
   "technology": "solar",
-  "status": "construction",
+  "status": "commissioning",
   "capacity_mw": 78.0,
   "state": "QLD",
   "current_developer": "Bundaberg Development Pty Ltd",
-  "cod_current": "2025-12",
+  "cod_current": "2026-04-28",
   "cod_original": "2025-12-31",
   "connection_status": "committed",
   "grid_forming": false,
@@ -32,6 +32,14 @@
       "event_type": "cod_change",
       "title": "COD estimate updated",
       "detail": "COD changed from 2025-12 to 2025-12-31 (source: AEMO Generation Information)",
+      "sources": []
+    },
+    {
+      "date": "2026-07-26",
+      "date_precision": "day",
+      "event_type": "cod_change",
+      "title": "COD estimate updated",
+      "detail": "COD changed from 2026-04 to 2026-04-28 (source: AEMO Generation Information)",
       "sources": []
     }
   ],

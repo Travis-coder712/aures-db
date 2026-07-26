@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-26T13:21:35.137993",
+  "generated_at": "2026-07-26T18:43:01.254359",
   "months": [
     {
       "month": "2027-06",
@@ -53,6 +53,1568 @@
         "rez_progress": [],
         "construction": [],
         "operational": [
+          {
+            "project_id": "mt-arthur-pumped-hydro-energy-storage-project-kci",
+            "project_name": "Mt Arthur Pumped Hydro Energy Storage Project - KCI",
+            "technology": "pumped_hydro",
+            "state": "NSW",
+            "capacity_mw": 1710.0,
+            "event_type": "cod_change",
+            "title": "COD estimate updated",
+            "detail": "COD changed from 2036-12 to 2036-12-15 (source: AEMO Generation Information)",
+            "date": "2026-07-26"
+          },
+          {
+            "project_id": "pikedale-wind-farm-kci",
+            "project_name": "Pikedale Wind Farm (KCI)",
+            "technology": "wind",
+            "state": "QLD",
+            "capacity_mw": 1500.0,
+            "event_type": "cod_change",
+            "title": "COD estimate updated",
+            "detail": "COD changed from 2060-07 to 2060-07-01 (source: AEMO Generation Information)",
+            "date": "2026-07-26"
+          },
+          {
+            "project_id": "supernode-bess",
+            "project_name": "Supernode BESS",
+            "technology": "bess",
+            "state": "QLD",
+            "capacity_mw": 1300.0,
+            "event_type": "cod_change",
+            "title": "COD estimate updated",
+            "detail": "COD changed from 2026-06-01 to 2026-06-30 (source: AEMO Generation Information)",
+            "date": "2026-07-26"
+          },
+          {
+            "project_id": "clarke-creek-wind-farm",
+            "project_name": "Clarke Creek Wind Farm",
+            "technology": "wind",
+            "state": "QLD",
+            "capacity_mw": 1135.0,
+            "event_type": "cod_change",
+            "title": "COD estimate updated",
+            "detail": "COD changed from 2025-09-30 to 2026-07-01 (source: AEMO Generation Information)",
+            "date": "2026-07-26"
+          },
+          {
+            "project_id": "connewarren-bess",
+            "project_name": "Connewarren BESS",
+            "technology": "bess",
+            "state": "VIC",
+            "capacity_mw": 1100.0,
+            "event_type": "cod_change",
+            "title": "COD estimate updated",
+            "detail": "COD changed from 2029-03-16 to 2029-12-03 (source: AEMO Generation Information)",
+            "date": "2026-07-26"
+          },
+          {
+            "project_id": "dinawan-energy-hub",
+            "project_name": "Dinawan Energy Hub",
+            "technology": "hybrid",
+            "state": "NSW",
+            "capacity_mw": 1007.0,
+            "event_type": "cod_change",
+            "title": "COD estimate updated",
+            "detail": "COD changed from 2031-07-01 to 2031-10-01 (source: AEMO Generation Information)",
+            "date": "2026-07-26"
+          },
+          {
+            "project_id": "morwell-bess",
+            "project_name": "Morwell BESS",
+            "technology": "bess",
+            "state": "VIC",
+            "capacity_mw": 1000.0,
+            "event_type": "cod_change",
+            "title": "COD estimate updated",
+            "detail": "COD changed from 2028-12-31 to 2029-07-02 (source: AEMO Generation Information)",
+            "date": "2026-07-26"
+          },
+          {
+            "project_id": "lockyer-valley-energy-project",
+            "project_name": "Lockyer Valley Energy Project",
+            "technology": "bess",
+            "state": "QLD",
+            "capacity_mw": 1000.0,
+            "event_type": "cod_change",
+            "title": "COD estimate updated",
+            "detail": "COD changed from 2030-09-30 to 2040-07-01 (source: AEMO Generation Information)",
+            "date": "2026-07-26"
+          },
+          {
+            "project_id": "robbins-island-wind-farm",
+            "project_name": "Robbins Island Wind Farm",
+            "technology": "wind",
+            "state": "TAS",
+            "capacity_mw": 929.0,
+            "event_type": "cod_change",
+            "title": "COD estimate updated",
+            "detail": "COD changed from 2030-12 to 2030-12-01 (source: AEMO Generation Information)",
+            "date": "2026-07-26"
+          },
+          {
+            "project_id": "oven-mountain-pumped-storage",
+            "project_name": "Oven Mountain Pumped Storage",
+            "technology": "pumped_hydro",
+            "state": "NSW",
+            "capacity_mw": 900.0,
+            "event_type": "cod_change",
+            "title": "COD estimate updated",
+            "detail": "COD changed from 2036-01 to 2036-01-01 (source: AEMO Generation Information)",
+            "date": "2026-07-26"
+          },
+          {
+            "project_id": "macintyre-wind-farm",
+            "project_name": "MacIntyre Wind Farm",
+            "technology": "wind",
+            "state": "QLD",
+            "capacity_mw": 890.0,
+            "event_type": "cod_change",
+            "title": "COD estimate updated",
+            "detail": "COD changed from 2025-11-30 to 2026-12-01 (source: AEMO Generation Information)",
+            "date": "2026-07-26"
+          },
+          {
+            "project_id": "waratah-super-battery",
+            "project_name": "Waratah Super Battery",
+            "technology": "bess",
+            "state": "NSW",
+            "capacity_mw": 850.0,
+            "event_type": "cod_change",
+            "title": "COD estimate updated",
+            "detail": "COD changed from 2024-11 to 2026-09-01 (source: AEMO Generation Information)",
+            "date": "2026-07-26"
+          },
+          {
+            "project_id": "phoenix-pumped-hydro-project",
+            "project_name": "Phoenix Pumped Hydro Project",
+            "technology": "pumped_hydro",
+            "state": "NSW",
+            "capacity_mw": 810.0,
+            "event_type": "cod_change",
+            "title": "COD estimate updated",
+            "detail": "COD changed from 2032-12 to 2032-12-01 (source: AEMO Generation Information)",
+            "date": "2026-07-26"
+          },
+          {
+            "project_id": "central-queensland-energy-storage-project-stage-1",
+            "project_name": "Central Queensland Energy Storage Project - Stage 1",
+            "technology": "bess",
+            "state": "QLD",
+            "capacity_mw": 780.0,
+            "event_type": "cod_change",
+            "title": "COD estimate updated",
+            "detail": "COD changed from 2029-03-01 to 2029-07-02 (source: AEMO Generation Information)",
+            "date": "2026-07-26"
+          },
+          {
+            "project_id": "bulli-creek-solar-farm",
+            "project_name": "Bulli Creek Solar Farm",
+            "technology": "solar",
+            "state": "QLD",
+            "capacity_mw": 775.0,
+            "event_type": "cod_change",
+            "title": "COD estimate updated",
+            "detail": "COD changed from 2030-12 to 2030-12-31 (source: AEMO Generation Information)",
+            "date": "2026-07-26"
+          },
+          {
+            "project_id": "argoon-wind-farm-res-group-kci",
+            "project_name": "Argoon Wind Farm (RES Group) - KCI",
+            "technology": "wind",
+            "state": "NSW",
+            "capacity_mw": 763.0,
+            "event_type": "cod_change",
+            "title": "COD estimate updated",
+            "detail": "COD changed from 2030-12 to 2030-12-31 (source: AEMO Generation Information)",
+            "date": "2026-07-26"
+          },
+          {
+            "project_id": "skye-ridge-wind-farm",
+            "project_name": "Skye Ridge Wind Farm",
+            "technology": "wind",
+            "state": "NSW",
+            "capacity_mw": 750.0,
+            "event_type": "cod_change",
+            "title": "COD estimate updated",
+            "detail": "COD changed from 2033-12 to 2033-12-31 (source: AEMO Generation Information)",
+            "date": "2026-07-26"
+          },
+          {
+            "project_id": "bulli-creek-bess-trina",
+            "project_name": "Bulli Creek BESS (Trina)",
+            "technology": "bess",
+            "state": "QLD",
+            "capacity_mw": 750.0,
+            "event_type": "cod_change",
+            "title": "COD estimate updated",
+            "detail": "COD changed from 2028-12 to 2028-12-01 (source: AEMO Generation Information)",
+            "date": "2026-07-26"
+          },
+          {
+            "project_id": "winterbourne-wind-farm",
+            "project_name": "Winterbourne Wind Farm",
+            "technology": "wind",
+            "state": "NSW",
+            "capacity_mw": 731.6,
+            "event_type": "cod_change",
+            "title": "COD estimate updated",
+            "detail": "COD changed from 2031-12 to 2031-12-31 (source: AEMO Generation Information)",
+            "date": "2026-07-26"
+          },
+          {
+            "project_id": "sandy-creek-solar-farm",
+            "project_name": "Sandy Creek Solar Farm",
+            "technology": "solar",
+            "state": "NSW",
+            "capacity_mw": 700.0,
+            "event_type": "cod_change",
+            "title": "COD estimate updated",
+            "detail": "COD changed from 2029-06-01 to 2031-02-13 (source: AEMO Generation Information)",
+            "date": "2026-07-26"
+          },
+          {
+            "project_id": "eurimbula-hybrid-facility-battery-storage",
+            "project_name": "Eurimbula Hybrid Facility - Battery Storage",
+            "technology": "bess",
+            "state": "QLD",
+            "capacity_mw": 666.0,
+            "event_type": "cod_change",
+            "title": "COD estimate updated",
+            "detail": "COD changed from 2028-12-31 to 2029-12-31 (source: AEMO Generation Information)",
+            "date": "2026-07-26"
+          },
+          {
+            "project_id": "woodstock-renewable-energy-hub-bess",
+            "project_name": "Woodstock Renewable Energy Hub - BESS",
+            "technology": "hybrid",
+            "state": "QLD",
+            "capacity_mw": 650.0,
+            "event_type": "cod_change",
+            "title": "COD estimate updated",
+            "detail": "COD changed from 2030-03 to 2030-03-29 (source: AEMO Generation Information)",
+            "date": "2026-07-26"
+          },
+          {
+            "project_id": "bogandilla-wind-farm",
+            "project_name": "Bogandilla Wind Farm",
+            "technology": "wind",
+            "state": "QLD",
+            "capacity_mw": 650.0,
+            "event_type": "cod_change",
+            "title": "COD estimate updated",
+            "detail": "COD changed from 2030-12 to 2030-12-31 (source: AEMO Generation Information)",
+            "date": "2026-07-26"
+          },
+          {
+            "project_id": "goyder-north-wind-farm",
+            "project_name": "Goyder North Wind Farm",
+            "technology": "wind",
+            "state": "SA",
+            "capacity_mw": 600.0,
+            "event_type": "cod_change",
+            "title": "COD estimate updated",
+            "detail": "COD changed from 2030-10 to 2030-10-31 (source: AEMO Generation Information)",
+            "date": "2026-07-26"
+          },
+          {
+            "project_id": "birriwa-bess",
+            "project_name": "Birriwa BESS",
+            "technology": "bess",
+            "state": "NSW",
+            "capacity_mw": 600.0,
+            "event_type": "cod_change",
+            "title": "COD estimate updated",
+            "detail": "COD changed from 2031-12 to 2031-12-01 (source: AEMO Generation Information)",
+            "date": "2026-07-26"
+          },
+          {
+            "project_id": "big-g-pumped-hydro-project",
+            "project_name": "Big G Pumped Hydro Project",
+            "technology": "pumped_hydro",
+            "state": "QLD",
+            "capacity_mw": 600.0,
+            "event_type": "cod_change",
+            "title": "COD estimate updated",
+            "detail": "COD changed from 2032-12 to 2032-12-31 (source: AEMO Generation Information)",
+            "date": "2026-07-26"
+          },
+          {
+            "project_id": "eurimbula-solar-farm",
+            "project_name": "Eurimbula Solar Farm",
+            "technology": "solar",
+            "state": "QLD",
+            "capacity_mw": 560.0,
+            "event_type": "cod_change",
+            "title": "COD estimate updated",
+            "detail": "COD changed from 2028-12-31 to 2029-12-31 (source: AEMO Generation Information)",
+            "date": "2026-07-26"
+          },
+          {
+            "project_id": "columboola-bess-kci",
+            "project_name": "Columboola BESS - KCI",
+            "technology": "bess",
+            "state": "QLD",
+            "capacity_mw": 550.0,
+            "event_type": "cod_change",
+            "title": "COD estimate updated",
+            "detail": "COD changed from 2028-07 to 2028-07-01 (source: AEMO Generation Information)",
+            "date": "2026-07-26"
+          },
+          {
+            "project_id": "mornington-bess",
+            "project_name": "Mornington BESS",
+            "technology": "bess",
+            "state": "VIC",
+            "capacity_mw": 540.0,
+            "event_type": "cod_change",
+            "title": "COD estimate updated",
+            "detail": "COD changed from 2026-02-28 to 2026-07-31 (source: AEMO Generation Information)",
+            "date": "2026-07-26"
+          },
+          {
+            "project_id": "tummaville-hybrid-facility-solar-and-bess",
+            "project_name": "TUMMAVILLE Hybrid Facility- Solar And BESS",
+            "technology": "hybrid",
+            "state": "QLD",
+            "capacity_mw": 500.0,
+            "event_type": "cod_change",
+            "title": "COD estimate updated",
+            "detail": "COD changed from 2031-09 to 2031-09-01 (source: AEMO Generation Information)",
+            "date": "2026-07-26"
+          },
+          {
+            "project_id": "raglan-bess",
+            "project_name": "Raglan BESS",
+            "technology": "bess",
+            "state": "QLD",
+            "capacity_mw": 500.0,
+            "event_type": "cod_change",
+            "title": "COD estimate updated",
+            "detail": "COD changed from 2028-08-31 to 2029-03-01 (source: AEMO Generation Information)",
+            "date": "2026-07-26"
+          },
+          {
+            "project_id": "liddell-bess",
+            "project_name": "Liddell BESS",
+            "technology": "bess",
+            "state": "NSW",
+            "capacity_mw": 500.0,
+            "event_type": "cod_change",
+            "title": "COD estimate updated",
+            "detail": "COD changed from 2026-02-20 to 2026-06-01 (source: AEMO Generation Information)",
+            "date": "2026-07-26"
+          },
+          {
+            "project_id": "kiewa-valley-bess",
+            "project_name": "KIEWA VALLEY BESS",
+            "technology": "bess",
+            "state": "VIC",
+            "capacity_mw": 500.0,
+            "event_type": "cod_change",
+            "title": "COD estimate updated",
+            "detail": "COD changed from 2028-06 to 2028-06-01 (source: AEMO Generation Information)",
+            "date": "2026-07-26"
+          },
+          {
+            "project_id": "great-western-battery-project",
+            "project_name": "Great Western Battery Project",
+            "technology": "bess",
+            "state": "NSW",
+            "capacity_mw": 500.0,
+            "event_type": "cod_change",
+            "title": "COD estimate updated",
+            "detail": "COD changed from 2028-12-31 to 2029-11-30 (source: AEMO Generation Information)",
+            "date": "2026-07-26"
+          },
+          {
+            "project_id": "gol-gol-wind-farm",
+            "project_name": "Gol Gol Wind Farm",
+            "technology": "wind",
+            "state": "NSW",
+            "capacity_mw": 500.0,
+            "event_type": "cod_change",
+            "title": "COD estimate updated",
+            "detail": "COD changed from 2032-07 to 2032-07-01 (source: AEMO Generation Information)",
+            "date": "2026-07-26"
+          },
+          {
+            "project_id": "burdekin-bess",
+            "project_name": "Burdekin BESS",
+            "technology": "bess",
+            "state": "QLD",
+            "capacity_mw": 500.0,
+            "event_type": "cod_change",
+            "title": "COD estimate updated",
+            "detail": "COD changed from 2027-09-30 to 2028-03-31 (source: AEMO Generation Information)",
+            "date": "2026-07-26"
+          },
+          {
+            "project_id": "braemar-bess",
+            "project_name": "Braemar BESS",
+            "technology": "bess",
+            "state": "QLD",
+            "capacity_mw": 500.0,
+            "event_type": "cod_change",
+            "title": "COD estimate updated",
+            "detail": "COD changed from 2030-06 to 2030-06-30 (source: AEMO Generation Information)",
+            "date": "2026-07-26"
+          },
+          {
+            "project_id": "wooderson-solar-farm",
+            "project_name": "Wooderson Solar Farm",
+            "technology": "solar",
+            "state": "QLD",
+            "capacity_mw": 450.0,
+            "event_type": "cod_change",
+            "title": "COD estimate updated",
+            "detail": "COD changed from 2030-12 to 2030-12-31 (source: AEMO Generation Information)",
+            "date": "2026-07-26"
+          },
+          {
+            "project_id": "mackenzie-river-solar-farm",
+            "project_name": "Mackenzie River Solar Farm",
+            "technology": "hybrid",
+            "state": "QLD",
+            "capacity_mw": 450.0,
+            "event_type": "cod_change",
+            "title": "COD estimate updated",
+            "detail": "COD changed from 2031-02-28 to 2031-06-02 (source: AEMO Generation Information)",
+            "date": "2026-07-26"
+          },
+          {
+            "project_id": "lindsay-gap-bess",
+            "project_name": "Lindsay Gap BESS",
+            "technology": "bess",
+            "state": "NSW",
+            "capacity_mw": 450.0,
+            "event_type": "cod_change",
+            "title": "COD estimate updated",
+            "detail": "COD changed from 2029-12 to 2029-12-15 (source: AEMO Generation Information)",
+            "date": "2026-07-26"
+          },
+          {
+            "project_id": "glenrowan-bess",
+            "project_name": "Glenrowan BESS",
+            "technology": "bess",
+            "state": "VIC",
+            "capacity_mw": 450.0,
+            "event_type": "cod_change",
+            "title": "COD estimate updated",
+            "detail": "COD changed from 2029-03-16 to 2029-12-03 (source: AEMO Generation Information)",
+            "date": "2026-07-26"
+          },
+          {
+            "project_id": "bulli-creek-solar-farm-trina",
+            "project_name": "Bulli Creek Solar Farm (Trina)",
+            "technology": "solar",
+            "state": "QLD",
+            "capacity_mw": 450.0,
+            "event_type": "cod_change",
+            "title": "COD estimate updated",
+            "detail": "COD changed from 2028-12 to 2028-12-01 (source: AEMO Generation Information)",
+            "date": "2026-07-26"
+          },
+          {
+            "project_id": "lilyvale-bess-kci",
+            "project_name": "Lilyvale BESS - KCI",
+            "technology": "bess",
+            "state": "QLD",
+            "capacity_mw": 440.0,
+            "event_type": "cod_change",
+            "title": "COD estimate updated",
+            "detail": "COD changed from 2027-12 to 2027-12-01 (source: AEMO Generation Information)",
+            "date": "2026-07-26"
+          },
+          {
+            "project_id": "tarong-west-wind-farm-ironleaf",
+            "project_name": "Tarong West Wind Farm (Ironleaf)",
+            "technology": "wind",
+            "state": "QLD",
+            "capacity_mw": 436.5,
+            "event_type": "cod_change",
+            "title": "COD estimate updated",
+            "detail": "COD changed from 2028-10-01 to 2030-09-01 (source: AEMO Generation Information)",
+            "date": "2026-07-26"
+          },
+          {
+            "project_id": "yelarbon-sf-and-bess-kci",
+            "project_name": "Yelarbon SF and BESS - KCI",
+            "technology": "hybrid",
+            "state": "QLD",
+            "capacity_mw": 400.0,
+            "event_type": "cod_change",
+            "title": "COD estimate updated",
+            "detail": "COD changed from 2028-07 to 2028-07-01 (source: AEMO Generation Information)",
+            "date": "2026-07-26"
+          },
+          {
+            "project_id": "uungula-bess",
+            "project_name": "Uungula BESS",
+            "technology": "bess",
+            "state": "NSW",
+            "capacity_mw": 400.0,
+            "event_type": "cod_change",
+            "title": "COD estimate updated",
+            "detail": "COD changed from 2030-07 to 2030-07-01 (source: AEMO Generation Information)",
+            "date": "2026-07-26"
+          },
+          {
+            "project_id": "tumuruu-bess-and-solar-farm",
+            "project_name": "Tumuruu BESS and Solar Farm",
+            "technology": "hybrid",
+            "state": "QLD",
+            "capacity_mw": 400.0,
+            "event_type": "cod_change",
+            "title": "COD estimate updated",
+            "detail": "COD changed from 2028-04 to 2028-04-30 (source: AEMO Generation Information)",
+            "date": "2026-07-26"
+          },
+          {
+            "project_id": "talbingo-bess",
+            "project_name": "Talbingo BESS",
+            "technology": "bess",
+            "state": "NSW",
+            "capacity_mw": 400.0,
+            "event_type": "cod_change",
+            "title": "COD estimate updated",
+            "detail": "COD changed from 2028-12-11 to 2029-12-28 (source: AEMO Generation Information)",
+            "date": "2026-07-26"
+          },
+          {
+            "project_id": "narrandera-solar-hybrid-pvbess",
+            "project_name": "Narrandera Solar Hybrid (PV+BESS)",
+            "technology": "hybrid",
+            "state": "NSW",
+            "capacity_mw": 400.0,
+            "event_type": "cod_change",
+            "title": "COD estimate updated",
+            "detail": "COD changed from 2030-12-30 to 2031-06-30 (source: AEMO Generation Information)",
+            "date": "2026-07-26"
+          },
+          {
+            "project_id": "milpulling-wind-farm",
+            "project_name": "Milpulling Wind Farm",
+            "technology": "wind",
+            "state": "NSW",
+            "capacity_mw": 400.0,
+            "event_type": "cod_change",
+            "title": "COD estimate updated",
+            "detail": "COD changed from 2029-11 to 2029-11-30 (source: AEMO Generation Information)",
+            "date": "2026-07-26"
+          },
+          {
+            "project_id": "glenrowan-bess-storage-kci",
+            "project_name": "Glenrowan BESS - Storage - KCI",
+            "technology": "bess",
+            "state": "VIC",
+            "capacity_mw": 400.0,
+            "event_type": "cod_change",
+            "title": "COD estimate updated",
+            "detail": "COD changed from 2030-03 to 2030-03-31 (source: AEMO Generation Information)",
+            "date": "2026-07-26"
+          },
+          {
+            "project_id": "gawara-baya-wind-and-bess",
+            "project_name": "Gawara Baya Wind And BESS",
+            "technology": "hybrid",
+            "state": "QLD",
+            "capacity_mw": 400.0,
+            "event_type": "cod_change",
+            "title": "COD estimate updated",
+            "detail": "COD changed from 2029-03 to 2030-05-24 (source: AEMO Generation Information)",
+            "date": "2026-07-26"
+          },
+          {
+            "project_id": "bunyip-north-battery-energy-storage-system",
+            "project_name": "Bunyip North Battery Energy Storage System",
+            "technology": "bess",
+            "state": "VIC",
+            "capacity_mw": 400.0,
+            "event_type": "cod_change",
+            "title": "COD estimate updated",
+            "detail": "COD changed from 2029-04 to 2029-04-02 (source: AEMO Generation Information)",
+            "date": "2026-07-26"
+          },
+          {
+            "project_id": "big-t-project",
+            "project_name": "Big-T Project",
+            "technology": "pumped_hydro",
+            "state": "QLD",
+            "capacity_mw": 400.0,
+            "event_type": "cod_change",
+            "title": "COD estimate updated",
+            "detail": "COD changed from 2036-09 to 2036-09-30 (source: AEMO Generation Information)",
+            "date": "2026-07-26"
+          },
+          {
+            "project_id": "rye-park-wind-farm",
+            "project_name": "Rye Park Wind Farm",
+            "technology": "wind",
+            "state": "NSW",
+            "capacity_mw": 396.0,
+            "event_type": "cod_change",
+            "title": "COD estimate updated",
+            "detail": "COD changed from 2024-10-07 to 2026-10-07 (source: AEMO Generation Information)",
+            "date": "2026-07-26"
+          },
+          {
+            "project_id": "moah-creek-solar-farm",
+            "project_name": "Moah Creek Solar Farm",
+            "technology": "solar",
+            "state": "QLD",
+            "capacity_mw": 390.0,
+            "event_type": "cod_change",
+            "title": "COD estimate updated",
+            "detail": "COD changed from 2030-12 to 2030-12-01 (source: AEMO Generation Information)",
+            "date": "2026-07-26"
+          },
+          {
+            "project_id": "moreton-hill-wind-farm",
+            "project_name": "Moreton Hill Wind Farm",
+            "technology": "wind",
+            "state": "VIC",
+            "capacity_mw": 387.6,
+            "event_type": "cod_change",
+            "title": "COD estimate updated",
+            "detail": "COD changed from 2030-07 to 2030-07-01 (source: AEMO Generation Information)",
+            "date": "2026-07-26"
+          },
+          {
+            "project_id": "lake-lyell-pumped-hydro",
+            "project_name": "Lake Lyell Pumped Hydro",
+            "technology": "pumped_hydro",
+            "state": "NSW",
+            "capacity_mw": 385.0,
+            "event_type": "cod_change",
+            "title": "COD estimate updated",
+            "detail": "COD changed from 2030-12-31 to 2031-11-14 (source: AEMO Generation Information)",
+            "date": "2026-07-26"
+          },
+          {
+            "project_id": "giddi-bess-trafalgar-east-bess-stage-1",
+            "project_name": "GIDDI BESS (Trafalgar East BESS - Stage 1)",
+            "technology": "bess",
+            "state": "VIC",
+            "capacity_mw": 360.0,
+            "event_type": "cod_change",
+            "title": "COD estimate updated",
+            "detail": "COD changed from 2029-06 to 2029-06-01 (source: AEMO Generation Information)",
+            "date": "2026-07-26"
+          },
+          {
+            "project_id": "moah-creek-wind-farm",
+            "project_name": "Moah Creek Wind Farm",
+            "technology": "wind",
+            "state": "QLD",
+            "capacity_mw": 349.0,
+            "event_type": "cod_change",
+            "title": "COD estimate updated",
+            "detail": "COD changed from 2029-12 to 2029-12-28 (source: AEMO Generation Information)",
+            "date": "2026-07-26"
+          },
+          {
+            "project_id": "kerrs-creek-wind-farm",
+            "project_name": "Kerrs Creek Wind Farm",
+            "technology": "wind",
+            "state": "NSW",
+            "capacity_mw": 330.0,
+            "event_type": "cod_change",
+            "title": "COD estimate updated",
+            "detail": "COD changed from 2030-03-01 to 2030-10-01 (source: AEMO Generation Information)",
+            "date": "2026-07-26"
+          },
+          {
+            "project_id": "darlington-wind-farm-gpg",
+            "project_name": "Darlington Wind Farm - GPG",
+            "technology": "wind",
+            "state": "VIC",
+            "capacity_mw": 324.0,
+            "event_type": "cod_change",
+            "title": "COD estimate updated",
+            "detail": "COD changed from 2030-01 to 2030-01-01 (source: AEMO Generation Information)",
+            "date": "2026-07-26"
+          },
+          {
+            "project_id": "markaranka-bess",
+            "project_name": "Markaranka BESS",
+            "technology": "bess",
+            "state": "SA",
+            "capacity_mw": 320.0,
+            "event_type": "cod_change",
+            "title": "COD estimate updated",
+            "detail": "COD changed from 2029-03 to 2029-03-31 (source: AEMO Generation Information)",
+            "date": "2026-07-26"
+          },
+          {
+            "project_id": "wallerawang-9-bess",
+            "project_name": "Wallerawang 9 BESS",
+            "technology": "bess",
+            "state": "NSW",
+            "capacity_mw": 300.0,
+            "event_type": "cod_change",
+            "title": "COD estimate updated",
+            "detail": "COD changed from 2029-10 to 2029-10-01 (source: AEMO Generation Information)",
+            "date": "2026-07-26"
+          },
+          {
+            "project_id": "tramway-road-bess",
+            "project_name": "Tramway Road BESS",
+            "technology": "bess",
+            "state": "VIC",
+            "capacity_mw": 300.0,
+            "event_type": "cod_change",
+            "title": "COD estimate updated",
+            "detail": "COD changed from 2028-12-30 to 2029-03-30 (source: AEMO Generation Information)",
+            "date": "2026-07-26"
+          },
+          {
+            "project_id": "moorabool-bess",
+            "project_name": "Moorabool BESS",
+            "technology": "bess",
+            "state": "VIC",
+            "capacity_mw": 300.0,
+            "event_type": "cod_change",
+            "title": "COD estimate updated",
+            "detail": "COD changed from 2027-06 to 2027-06-01 (source: AEMO Generation Information)",
+            "date": "2026-07-26"
+          },
+          {
+            "project_id": "monduran-bess",
+            "project_name": "Monduran BESS",
+            "technology": "bess",
+            "state": "QLD",
+            "capacity_mw": 300.0,
+            "event_type": "cod_change",
+            "title": "COD estimate updated",
+            "detail": "COD changed from 2030-06 to 2030-06-30 (source: AEMO Generation Information)",
+            "date": "2026-07-26"
+          },
+          {
+            "project_id": "miriam-vale-solar-farm-and-bess-b",
+            "project_name": "Miriam Vale Solar Farm And BESS - B",
+            "technology": "hybrid",
+            "state": "QLD",
+            "capacity_mw": 300.0,
+            "event_type": "cod_change",
+            "title": "COD estimate updated",
+            "detail": "COD changed from 2030-03 to 2030-03-29 (source: AEMO Generation Information)",
+            "date": "2026-07-26"
+          },
+          {
+            "project_id": "miriam-vale-solar-farm-and-bess-a",
+            "project_name": "Miriam Vale Solar Farm And BESS - A",
+            "technology": "hybrid",
+            "state": "QLD",
+            "capacity_mw": 300.0,
+            "event_type": "cod_change",
+            "title": "COD estimate updated",
+            "detail": "COD changed from 2030-03 to 2030-03-29 (source: AEMO Generation Information)",
+            "date": "2026-07-26"
+          },
+          {
+            "project_id": "magpie-hill-solar-farm",
+            "project_name": "Magpie Hill Solar Farm",
+            "technology": "hybrid",
+            "state": "NSW",
+            "capacity_mw": 300.0,
+            "event_type": "cod_change",
+            "title": "COD estimate updated",
+            "detail": "COD changed from 2030-01 to 2030-01-01 (source: AEMO Generation Information)",
+            "date": "2026-07-26"
+          },
+          {
+            "project_id": "koorakee-wind-farm",
+            "project_name": "Koorakee Wind Farm",
+            "technology": "wind",
+            "state": "NSW",
+            "capacity_mw": 300.0,
+            "event_type": "cod_change",
+            "title": "COD estimate updated",
+            "detail": "COD changed from 2030-07 to 2030-07-01 (source: AEMO Generation Information)",
+            "date": "2026-07-26"
+          },
+          {
+            "project_id": "haughton-solar-farm-stage-2",
+            "project_name": "Haughton Solar Farm Stage 2",
+            "technology": "solar",
+            "state": "QLD",
+            "capacity_mw": 300.0,
+            "event_type": "cod_change",
+            "title": "COD estimate updated",
+            "detail": "COD changed from 2029-01 to 2029-01-01 (source: AEMO Generation Information)",
+            "date": "2026-07-26"
+          },
+          {
+            "project_id": "emu-park-solar-farm",
+            "project_name": "Emu Park Solar Farm",
+            "technology": "hybrid",
+            "state": "NSW",
+            "capacity_mw": 300.0,
+            "event_type": "cod_change",
+            "title": "COD estimate updated",
+            "detail": "COD changed from 2028-12 to 2028-12-01 (source: AEMO Generation Information)",
+            "date": "2026-07-26"
+          },
+          {
+            "project_id": "dunmore-solar-farm",
+            "project_name": "Dunmore Solar Farm",
+            "technology": "solar",
+            "state": "QLD",
+            "capacity_mw": 300.0,
+            "event_type": "cod_change",
+            "title": "COD estimate updated",
+            "detail": "COD changed from 2029-08 to 2029-08-01 (source: AEMO Generation Information)",
+            "date": "2026-07-26"
+          },
+          {
+            "project_id": "arundel-bess",
+            "project_name": "Arundel BESS",
+            "technology": "bess",
+            "state": "NSW",
+            "capacity_mw": 300.0,
+            "event_type": "cod_change",
+            "title": "COD estimate updated",
+            "detail": "COD changed from 2029-09 to 2029-09-30 (source: AEMO Generation Information)",
+            "date": "2026-07-26"
+          },
+          {
+            "project_id": "bunkers-hill-pumped-hydro",
+            "project_name": "Bunkers Hill Pumped Hydro",
+            "technology": "pumped_hydro",
+            "state": "QLD",
+            "capacity_mw": 296.0,
+            "event_type": "cod_change",
+            "title": "COD estimate updated",
+            "detail": "COD changed from 2035-01-01 to 2035-01-12 (source: AEMO Generation Information)",
+            "date": "2026-07-26"
+          },
+          {
+            "project_id": "fraser-coast-hybrid-plant",
+            "project_name": "Fraser Coast Hybrid Plant",
+            "technology": "hybrid",
+            "state": "QLD",
+            "capacity_mw": 290.0,
+            "event_type": "cod_change",
+            "title": "COD estimate updated",
+            "detail": "COD changed from 2027-09-30 to 2027-11-30 (source: AEMO Generation Information)",
+            "date": "2026-07-26"
+          },
+          {
+            "project_id": "bungama-solar",
+            "project_name": "Bungama Solar",
+            "technology": "hybrid",
+            "state": "SA",
+            "capacity_mw": 280.0,
+            "event_type": "cod_change",
+            "title": "COD estimate updated",
+            "detail": "COD changed from 2028-08-31 to 2030-08-31 (source: AEMO Generation Information)",
+            "date": "2026-07-26"
+          },
+          {
+            "project_id": "lincoln-gap-wind-farm-stage-3",
+            "project_name": "Lincoln Gap Wind Farm stage 3",
+            "technology": "wind",
+            "state": "SA",
+            "capacity_mw": 278.0,
+            "event_type": "cod_change",
+            "title": "COD estimate updated",
+            "detail": "COD changed from 2030-03 to 2030-03-31 (source: AEMO Generation Information)",
+            "date": "2026-07-26"
+          },
+          {
+            "project_id": "harrogate-bess",
+            "project_name": "Harrogate BESS",
+            "technology": "bess",
+            "state": "SA",
+            "capacity_mw": 270.0,
+            "event_type": "cod_change",
+            "title": "COD estimate updated",
+            "detail": "COD changed from 2028-12-30 to 2029-07-27 (source: AEMO Generation Information)",
+            "date": "2026-07-26"
+          },
+          {
+            "project_id": "blackwater-hybrid-system",
+            "project_name": "Blackwater Hybrid System",
+            "technology": "hybrid",
+            "state": "QLD",
+            "capacity_mw": 270.0,
+            "event_type": "cod_change",
+            "title": "COD estimate updated",
+            "detail": "COD changed from 2030-07-06 to 2030-10-06 (source: AEMO Generation Information)",
+            "date": "2026-07-26"
+          },
+          {
+            "project_id": "augusta-bess",
+            "project_name": "Augusta BESS",
+            "technology": "bess",
+            "state": "SA",
+            "capacity_mw": 270.0,
+            "event_type": "cod_change",
+            "title": "COD estimate updated",
+            "detail": "COD changed from 2029-04 to 2029-04-23 (source: AEMO Generation Information)",
+            "date": "2026-07-26"
+          },
+          {
+            "project_id": "gladstone-sda-energy-hub-a-kci",
+            "project_name": "Gladstone SDA Energy Hub A - KCI",
+            "technology": "bess",
+            "state": "QLD",
+            "capacity_mw": 260.0,
+            "event_type": "cod_change",
+            "title": "COD estimate updated",
+            "detail": "COD changed from 2028-01 to 2028-01-31 (source: AEMO Generation Information)",
+            "date": "2026-07-26"
+          },
+          {
+            "project_id": "mavis-hybrid-facility-solar",
+            "project_name": "Mavis Hybrid Facility - Solar",
+            "technology": "hybrid",
+            "state": "NSW",
+            "capacity_mw": 252.0,
+            "event_type": "cod_change",
+            "title": "COD estimate updated",
+            "detail": "COD changed from 2028-06 to 2028-07-01 (source: AEMO Generation Information)",
+            "date": "2026-07-26"
+          },
+          {
+            "project_id": "woodland-bess",
+            "project_name": "Woodland BESS",
+            "technology": "bess",
+            "state": "NSW",
+            "capacity_mw": 250.0,
+            "event_type": "cod_change",
+            "title": "COD estimate updated",
+            "detail": "COD changed from 2029-12 to 2029-12-31 (source: AEMO Generation Information)",
+            "date": "2026-07-26"
+          },
+          {
+            "project_id": "swanbank-f-station",
+            "project_name": "Swanbank F Station",
+            "technology": "bess",
+            "state": "QLD",
+            "capacity_mw": 250.0,
+            "event_type": "cod_change",
+            "title": "COD estimate updated",
+            "detail": "COD changed from 2026-01-27 to 2026-04-03 (source: AEMO Generation Information)",
+            "date": "2026-07-26"
+          },
+          {
+            "project_id": "sandy-point-hybrid-solar",
+            "project_name": "Sandy Point Hybrid - Solar",
+            "technology": "hybrid",
+            "state": "NSW",
+            "capacity_mw": 250.0,
+            "event_type": "cod_change",
+            "title": "COD estimate updated",
+            "detail": "COD changed from 2029-08 to 2029-08-01 (source: AEMO Generation Information)",
+            "date": "2026-07-26"
+          },
+          {
+            "project_id": "romani-solar-farm",
+            "project_name": "Romani Solar Farm",
+            "technology": "hybrid",
+            "state": "NSW",
+            "capacity_mw": 250.0,
+            "event_type": "cod_change",
+            "title": "COD estimate updated",
+            "detail": "COD changed from 2031-08 to 2031-08-13 (source: AEMO Generation Information)",
+            "date": "2026-07-26"
+          },
+          {
+            "project_id": "millmerran-wind-farm",
+            "project_name": "Millmerran Wind Farm",
+            "technology": "wind",
+            "state": "QLD",
+            "capacity_mw": 250.0,
+            "event_type": "cod_change",
+            "title": "COD estimate updated",
+            "detail": "COD changed from 2030-06 to 2030-06-30 (source: AEMO Generation Information)",
+            "date": "2026-07-26"
+          },
+          {
+            "project_id": "kidston-pumped-storage-hydro-project-250mw",
+            "project_name": "Kidston Pumped Storage Hydro Project 250MW",
+            "technology": "pumped_hydro",
+            "state": "QLD",
+            "capacity_mw": 250.0,
+            "event_type": "cod_change",
+            "title": "COD estimate updated",
+            "detail": "COD changed from 2027-01-01 to 2027-07-01 (source: AEMO Generation Information)",
+            "date": "2026-07-26"
+          },
+          {
+            "project_id": "brinkworth-bess",
+            "project_name": "Brinkworth BESS",
+            "technology": "bess",
+            "state": "SA",
+            "capacity_mw": 250.0,
+            "event_type": "cod_change",
+            "title": "COD estimate updated",
+            "detail": "COD changed from 2029-04-10 to 2029-05-03 (source: AEMO Generation Information)",
+            "date": "2026-07-26"
+          },
+          {
+            "project_id": "baroota-pumped-hydro-project",
+            "project_name": "Baroota Pumped Hydro Project",
+            "technology": "pumped_hydro",
+            "state": "SA",
+            "capacity_mw": 250.0,
+            "event_type": "cod_change",
+            "title": "COD estimate updated",
+            "detail": "COD changed from 2030-12 to 2030-12-01 (source: AEMO Generation Information)",
+            "date": "2026-07-26"
+          },
+          {
+            "project_id": "shoalhaven-expansion",
+            "project_name": "Shoalhaven Expansion",
+            "technology": "pumped_hydro",
+            "state": "NSW",
+            "capacity_mw": 235.0,
+            "event_type": "cod_change",
+            "title": "COD estimate updated",
+            "detail": "COD changed from 2033-12 to 2033-12-31 (source: AEMO Generation Information)",
+            "date": "2026-07-26"
+          },
+          {
+            "project_id": "goat-hill-pumped-hydro",
+            "project_name": "Goat Hill Pumped Hydro",
+            "technology": "pumped_hydro",
+            "state": "SA",
+            "capacity_mw": 230.0,
+            "event_type": "cod_change",
+            "title": "COD estimate updated",
+            "detail": "COD changed from 2050-03 to 2050-03-01 (source: AEMO Generation Information)",
+            "date": "2026-07-26"
+          },
+          {
+            "project_id": "gould-creek-bess",
+            "project_name": "Gould Creek BESS",
+            "technology": "bess",
+            "state": "SA",
+            "capacity_mw": 215.0,
+            "event_type": "cod_change",
+            "title": "COD estimate updated",
+            "detail": "COD changed from 2027-11 to 2027-11-26 (source: AEMO Generation Information)",
+            "date": "2026-07-26"
+          },
+          {
+            "project_id": "thunderbolt-wind-farm",
+            "project_name": "Thunderbolt Wind Farm",
+            "technology": "wind",
+            "state": "NSW",
+            "capacity_mw": 210.0,
+            "event_type": "cod_change",
+            "title": "COD estimate updated",
+            "detail": "COD changed from 2031-06 to 2031-06-30 (source: AEMO Generation Information)",
+            "date": "2026-07-26"
+          },
+          {
+            "project_id": "campbells-forest-solar-farm",
+            "project_name": "Campbells Forest Solar Farm",
+            "technology": "solar",
+            "state": "VIC",
+            "capacity_mw": 205.0,
+            "event_type": "cod_change",
+            "title": "COD estimate updated",
+            "detail": "COD changed from 2028-12 to 2028-12-31 (source: AEMO Generation Information)",
+            "date": "2026-07-26"
+          },
+          {
+            "project_id": "delburn-wind-farm",
+            "project_name": "Delburn Wind Farm",
+            "technology": "wind",
+            "state": "VIC",
+            "capacity_mw": 204.6,
+            "event_type": "cod_change",
+            "title": "COD estimate updated",
+            "detail": "COD changed from 2028-10 to 2028-10-23 (source: AEMO Generation Information)",
+            "date": "2026-07-26"
+          },
+          {
+            "project_id": "yabulu-south-bess",
+            "project_name": "Yabulu South BESS",
+            "technology": "bess",
+            "state": "QLD",
+            "capacity_mw": 200.0,
+            "event_type": "cod_change",
+            "title": "COD estimate updated",
+            "detail": "COD changed from 2028-12 to 2028-12-31 (source: AEMO Generation Information)",
+            "date": "2026-07-26"
+          },
+          {
+            "project_id": "waubra-bess-kci",
+            "project_name": "Waubra BESS - KCI",
+            "technology": "bess",
+            "state": "VIC",
+            "capacity_mw": 200.0,
+            "event_type": "cod_change",
+            "title": "COD estimate updated",
+            "detail": "COD changed from 2029-12 to 2029-12-15 (source: AEMO Generation Information)",
+            "date": "2026-07-26"
+          },
+          {
+            "project_id": "trafalgar-east-hybrid-facility-stage-2",
+            "project_name": "Trafalgar East Hybrid Facility Stage 2",
+            "technology": "hybrid",
+            "state": "VIC",
+            "capacity_mw": 200.0,
+            "event_type": "cod_change",
+            "title": "COD estimate updated",
+            "detail": "COD changed from 2030-12 to 2030-12-01 (source: AEMO Generation Information)",
+            "date": "2026-07-26"
+          },
+          {
+            "project_id": "tall-tree-bess",
+            "project_name": "Tall Tree BESS",
+            "technology": "bess",
+            "state": "VIC",
+            "capacity_mw": 200.0,
+            "event_type": "cod_change",
+            "title": "COD estimate updated",
+            "detail": "COD changed from 2030-12-31 to 2031-12-15 (source: AEMO Generation Information)",
+            "date": "2026-07-26"
+          },
+          {
+            "project_id": "pleystowe-bess",
+            "project_name": "Pleystowe BESS",
+            "technology": "bess",
+            "state": "QLD",
+            "capacity_mw": 200.0,
+            "event_type": "cod_change",
+            "title": "COD estimate updated",
+            "detail": "COD changed from 2028-12 to 2028-12-31 (source: AEMO Generation Information)",
+            "date": "2026-07-26"
+          },
+          {
+            "project_id": "millmerran-bess-storage",
+            "project_name": "Millmerran BESS - Storage",
+            "technology": "bess",
+            "state": "QLD",
+            "capacity_mw": 200.0,
+            "event_type": "cod_change",
+            "title": "COD estimate updated",
+            "detail": "COD changed from 2029-06 to 2029-06-30 (source: AEMO Generation Information)",
+            "date": "2026-07-26"
+          },
+          {
+            "project_id": "goodnight-hybrid-facility-solar-and-bess",
+            "project_name": "GoodNight Hybrid Facility - Solar And BESS",
+            "technology": "hybrid",
+            "state": "QLD",
+            "capacity_mw": 200.0,
+            "event_type": "cod_change",
+            "title": "COD estimate updated",
+            "detail": "COD changed from 2030-09 to 2030-09-02 (source: AEMO Generation Information)",
+            "date": "2026-07-26"
+          },
+          {
+            "project_id": "glenellen-solar-farm",
+            "project_name": "Glenellen Solar Farm",
+            "technology": "solar",
+            "state": "NSW",
+            "capacity_mw": 200.0,
+            "event_type": "cod_change",
+            "title": "COD estimate updated",
+            "detail": "COD changed from 2026-06 to 2026-06-01 (source: AEMO Generation Information)",
+            "date": "2026-07-26"
+          },
+          {
+            "project_id": "el-arish-bess",
+            "project_name": "El Arish BESS",
+            "technology": "bess",
+            "state": "QLD",
+            "capacity_mw": 200.0,
+            "event_type": "cod_change",
+            "title": "COD estimate updated",
+            "detail": "COD changed from 2029-12 to 2029-12-30 (source: AEMO Generation Information)",
+            "date": "2026-07-26"
+          },
+          {
+            "project_id": "dederang-bess",
+            "project_name": "Dederang BESS",
+            "technology": "bess",
+            "state": "VIC",
+            "capacity_mw": 200.0,
+            "event_type": "cod_change",
+            "title": "COD estimate updated",
+            "detail": "COD changed from 2028-07-01 to 2029-07-01 (source: AEMO Generation Information)",
+            "date": "2026-07-26"
+          },
+          {
+            "project_id": "collinsville-bess",
+            "project_name": "Collinsville BESS",
+            "technology": "bess",
+            "state": "QLD",
+            "capacity_mw": 200.0,
+            "event_type": "cod_change",
+            "title": "COD estimate updated",
+            "detail": "COD changed from 2029-12 to 2029-12-30 (source: AEMO Generation Information)",
+            "date": "2026-07-26"
+          },
+          {
+            "project_id": "bungama-bess-risen",
+            "project_name": "Bungama BESS (Risen )",
+            "technology": "bess",
+            "state": "SA",
+            "capacity_mw": 200.0,
+            "event_type": "cod_change",
+            "title": "COD estimate updated",
+            "detail": "COD changed from 2028-12 to 2028-12-31 (source: AEMO Generation Information)",
+            "date": "2026-07-26"
+          },
+          {
+            "project_id": "armidale-bess-elgin",
+            "project_name": "Armidale BESS (Elgin)",
+            "technology": "bess",
+            "state": "NSW",
+            "capacity_mw": 200.0,
+            "event_type": "cod_change",
+            "title": "COD estimate updated",
+            "detail": "COD changed from 2028-01 to 2028-01-01 (source: AEMO Generation Information)",
+            "date": "2026-07-26"
+          },
+          {
+            "project_id": "aquila-wind",
+            "project_name": "Aquila Wind",
+            "technology": "wind",
+            "state": "NSW",
+            "capacity_mw": 200.0,
+            "event_type": "cod_change",
+            "title": "COD estimate updated",
+            "detail": "COD changed from 2032-12 to 2032-12-01 (source: AEMO Generation Information)",
+            "date": "2026-07-26"
+          },
+          {
+            "project_id": "mobilong-bess",
+            "project_name": "Mobilong BESS",
+            "technology": "bess",
+            "state": "SA",
+            "capacity_mw": 180.0,
+            "event_type": "cod_change",
+            "title": "COD estimate updated",
+            "detail": "COD changed from 2030-12 to 2030-12-29 (source: AEMO Generation Information)",
+            "date": "2026-07-26"
+          },
+          {
+            "project_id": "kerang-hybrid",
+            "project_name": "Kerang Hybrid",
+            "technology": "hybrid",
+            "state": "VIC",
+            "capacity_mw": 171.0,
+            "event_type": "cod_change",
+            "title": "COD estimate updated",
+            "detail": "COD changed from 2029-04-01 to 2029-12-31 (source: AEMO Generation Information)",
+            "date": "2026-07-26"
+          },
+          {
+            "project_id": "molong-bess",
+            "project_name": "Molong BESS",
+            "technology": "bess",
+            "state": "NSW",
+            "capacity_mw": 150.0,
+            "event_type": "cod_change",
+            "title": "COD estimate updated",
+            "detail": "COD changed from 2028-07 to 2028-07-01 (source: AEMO Generation Information)",
+            "date": "2026-07-26"
+          },
+          {
+            "project_id": "golden-plains-bess-2-kci",
+            "project_name": "Golden Plains BESS 2 - KCI",
+            "technology": "bess",
+            "state": "VIC",
+            "capacity_mw": 150.0,
+            "event_type": "cod_change",
+            "title": "COD estimate updated",
+            "detail": "COD changed from 2029-01 to 2029-01-01 (source: AEMO Generation Information)",
+            "date": "2026-07-26"
+          },
+          {
+            "project_id": "dunmore-bess",
+            "project_name": "Dunmore BESS",
+            "technology": "bess",
+            "state": "QLD",
+            "capacity_mw": 150.0,
+            "event_type": "cod_change",
+            "title": "COD estimate updated",
+            "detail": "COD changed from 2029-08 to 2029-08-01 (source: AEMO Generation Information)",
+            "date": "2026-07-26"
+          },
+          {
+            "project_id": "carwarp-solar-farm-cwsf",
+            "project_name": "Carwarp Solar Farm (CWSF)",
+            "technology": "solar",
+            "state": "VIC",
+            "capacity_mw": 150.0,
+            "event_type": "cod_change",
+            "title": "COD estimate updated",
+            "detail": "COD changed from 2026-04 to 2026-04-30 (source: AEMO Generation Information)",
+            "date": "2026-07-26"
+          },
+          {
+            "project_id": "armidale-bess",
+            "project_name": "Armidale BESS",
+            "technology": "bess",
+            "state": "NSW",
+            "capacity_mw": 150.0,
+            "event_type": "cod_change",
+            "title": "COD estimate updated",
+            "detail": "COD changed from 2027-03-31 to 2028-03-31 (source: AEMO Generation Information)",
+            "date": "2026-07-26"
+          },
+          {
+            "project_id": "stoney-creek-bess",
+            "project_name": "Stoney Creek BESS",
+            "technology": "bess",
+            "state": "NSW",
+            "capacity_mw": 125.0,
+            "event_type": "cod_change",
+            "title": "COD estimate updated",
+            "detail": "COD changed from 2027-11-30 to 2028-06-30 (source: AEMO Generation Information)",
+            "date": "2026-07-26"
+          },
+          {
+            "project_id": "gerogery-solar-farm-kci",
+            "project_name": "Gerogery Solar Farm - KCI",
+            "technology": "hybrid",
+            "state": "NSW",
+            "capacity_mw": 125.0,
+            "event_type": "cod_change",
+            "title": "COD estimate updated",
+            "detail": "COD changed from 2027-10 to 2027-10-01 (source: AEMO Generation Information)",
+            "date": "2026-07-26"
+          },
+          {
+            "project_id": "waterloo-bess",
+            "project_name": "Waterloo BESS",
+            "technology": "bess",
+            "state": "SA",
+            "capacity_mw": 120.0,
+            "event_type": "cod_change",
+            "title": "COD estimate updated",
+            "detail": "COD changed from 2030-06 to 2030-06-30 (source: AEMO Generation Information)",
+            "date": "2026-07-26"
+          },
+          {
+            "project_id": "gangarri-solar-farm",
+            "project_name": "Gangarri Solar Farm",
+            "technology": "solar",
+            "state": "QLD",
+            "capacity_mw": 120.0,
+            "event_type": "cod_change",
+            "title": "COD estimate updated",
+            "detail": "COD changed from 2026-03-31 to 2026-06-30 (source: AEMO Generation Information)",
+            "date": "2026-07-26"
+          },
+          {
+            "project_id": "deepwater-hybrid-facility",
+            "project_name": "Deepwater Hybrid Facility",
+            "technology": "solar",
+            "state": "NSW",
+            "capacity_mw": 120.0,
+            "event_type": "cod_change",
+            "title": "COD estimate updated",
+            "detail": "COD changed from 2029-06 to 2029-06-01 (source: AEMO Generation Information)",
+            "date": "2026-07-26"
+          },
+          {
+            "project_id": "springvale-energy-hub",
+            "project_name": "Springvale Energy Hub",
+            "technology": "bess",
+            "state": "VIC",
+            "capacity_mw": 115.0,
+            "event_type": "cod_change",
+            "title": "COD estimate updated",
+            "detail": "COD changed from 2026-10-30 to 2028-10-30 (source: AEMO Generation Information)",
+            "date": "2026-07-26"
+          },
+          {
+            "project_id": "templers-bess",
+            "project_name": "Templers BESS",
+            "technology": "bess",
+            "state": "SA",
+            "capacity_mw": 111.0,
+            "event_type": "cod_change",
+            "title": "COD estimate updated",
+            "detail": "COD changed from 2025-08-31 to 2025-12-05 (source: AEMO Generation Information)",
+            "date": "2026-07-26"
+          },
+          {
+            "project_id": "gullen-range-wind-farm-2",
+            "project_name": "Gullen Range Wind Farm 2",
+            "technology": "wind",
+            "state": "NSW",
+            "capacity_mw": 110.67,
+            "event_type": "cod_change",
+            "title": "COD estimate updated",
+            "detail": "COD changed from 2020-06-19 to 2022-10-27 (source: AEMO Generation Information)",
+            "date": "2026-07-26"
+          },
+          {
+            "project_id": "kerang-bess",
+            "project_name": "Kerang BESS",
+            "technology": "bess",
+            "state": "VIC",
+            "capacity_mw": 103.0,
+            "event_type": "cod_change",
+            "title": "COD estimate updated",
+            "detail": "COD changed from 2027-03-31 to 2028-03-31 (source: AEMO Generation Information)",
+            "date": "2026-07-26"
+          },
+          {
+            "project_id": "tamworth-bess-project-2-pty-ltd",
+            "project_name": "Tamworth BESS Project 2 Pty Ltd",
+            "technology": "bess",
+            "state": "NSW",
+            "capacity_mw": 100.0,
+            "event_type": "cod_change",
+            "title": "COD estimate updated",
+            "detail": "COD changed from 2027-12-31 to 2028-12-31 (source: AEMO Generation Information)",
+            "date": "2026-07-26"
+          },
+          {
+            "project_id": "tamworth-bess-project-1-pty-ltd",
+            "project_name": "Tamworth BESS Project 1 Pty Ltd",
+            "technology": "bess",
+            "state": "NSW",
+            "capacity_mw": 100.0,
+            "event_type": "cod_change",
+            "title": "COD estimate updated",
+            "detail": "COD changed from 2027-12-31 to 2028-12-31 (source: AEMO Generation Information)",
+            "date": "2026-07-26"
+          },
+          {
+            "project_id": "tabulam-solar-farm-and-bess",
+            "project_name": "Tabulam Solar Farm and BESS",
+            "technology": "hybrid",
+            "state": "NSW",
+            "capacity_mw": 100.0,
+            "event_type": "cod_change",
+            "title": "COD estimate updated",
+            "detail": "COD changed from 2029-07 to 2029-07-01 (source: AEMO Generation Information)",
+            "date": "2026-07-26"
+          },
+          {
+            "project_id": "palmerston-bess-akaysha",
+            "project_name": "Palmerston BESS (Akaysha)",
+            "technology": "bess",
+            "state": "TAS",
+            "capacity_mw": 100.0,
+            "event_type": "cod_change",
+            "title": "COD estimate updated",
+            "detail": "COD changed from 2027-09 to 2027-09-30 (source: AEMO Generation Information)",
+            "date": "2026-07-26"
+          },
+          {
+            "project_id": "daroobalgie-solar-farm",
+            "project_name": "Daroobalgie Solar Farm",
+            "technology": "solar",
+            "state": "NSW",
+            "capacity_mw": 100.0,
+            "event_type": "cod_change",
+            "title": "COD estimate updated",
+            "detail": "COD changed from 2034-12-01 to 2040-12-01 (source: AEMO Generation Information)",
+            "date": "2026-07-26"
+          },
+          {
+            "project_id": "gunsynd-solar-farm",
+            "project_name": "Gunsynd Solar Farm",
+            "technology": "solar",
+            "state": "QLD",
+            "capacity_mw": 94.0,
+            "event_type": "cod_change",
+            "title": "COD estimate updated",
+            "detail": "COD changed from 2026-02-16 to 2026-03-26 (source: AEMO Generation Information)",
+            "date": "2026-07-26"
+          },
+          {
+            "project_id": "cooma-solar-and-bess-acen",
+            "project_name": "Cooma Solar And BESS (ACEN)",
+            "technology": "hybrid",
+            "state": "NSW",
+            "capacity_mw": 80.0,
+            "event_type": "cod_change",
+            "title": "COD estimate updated",
+            "detail": "COD changed from 2028-12 to 2028-12-01 (source: AEMO Generation Information)",
+            "date": "2026-07-26"
+          },
+          {
+            "project_id": "bundaberg-solar-farm",
+            "project_name": "Bundaberg Solar Farm",
+            "technology": "solar",
+            "state": "QLD",
+            "capacity_mw": 78.0,
+            "event_type": "cod_change",
+            "title": "COD estimate updated",
+            "detail": "COD changed from 2026-04 to 2026-04-28 (source: AEMO Generation Information)",
+            "date": "2026-07-26"
+          },
+          {
+            "project_id": "frasers-solar-farm",
+            "project_name": "Frasers Solar Farm",
+            "technology": "solar",
+            "state": "VIC",
+            "capacity_mw": 77.0,
+            "event_type": "cod_change",
+            "title": "COD estimate updated",
+            "detail": "COD changed from 2027-11 to 2027-11-30 (source: AEMO Generation Information)",
+            "date": "2026-07-26"
+          },
+          {
+            "project_id": "hume-bess-arif",
+            "project_name": "Hume Bess (ARIF)",
+            "technology": "bess",
+            "state": "NSW",
+            "capacity_mw": 75.0,
+            "event_type": "cod_change",
+            "title": "COD estimate updated",
+            "detail": "COD changed from 2028-06 to 2028-06-30 (source: AEMO Generation Information)",
+            "date": "2026-07-26"
+          },
+          {
+            "project_id": "clements-gap-bess",
+            "project_name": "Clements Gap - BESS",
+            "technology": "bess",
+            "state": "SA",
+            "capacity_mw": 60.0,
+            "event_type": "cod_change",
+            "title": "COD estimate updated",
+            "detail": "COD changed from 2026-01-05 to 2026-05-30 (source: AEMO Generation Information)",
+            "date": "2026-07-26"
+          },
+          {
+            "project_id": "banksia-solar-farm",
+            "project_name": "Banksia Solar Farm",
+            "technology": "solar",
+            "state": "QLD",
+            "capacity_mw": 60.0,
+            "event_type": "cod_change",
+            "title": "COD estimate updated",
+            "detail": "COD changed from 2027-08-20 to 2027-11-24 (source: AEMO Generation Information)",
+            "date": "2026-07-26"
+          },
+          {
+            "project_id": "vales-point-solar",
+            "project_name": "Vales Point Solar",
+            "technology": "solar",
+            "state": "NSW",
+            "capacity_mw": 55.0,
+            "event_type": "cod_change",
+            "title": "COD estimate updated",
+            "detail": "COD changed from 2050-07 to 2050-07-01 (source: AEMO Generation Information)",
+            "date": "2026-07-26"
+          },
+          {
+            "project_id": "moama-solar-farm",
+            "project_name": "Moama Solar Farm",
+            "technology": "solar",
+            "state": "NSW",
+            "capacity_mw": 30.0,
+            "event_type": "cod_change",
+            "title": "COD estimate updated",
+            "detail": "COD changed from 2028-08 to 2028-08-01 (source: AEMO Generation Information)",
+            "date": "2026-07-26"
+          },
           {
             "project_id": "prairie-wf-and-wongalee-wf",
             "project_name": "Prairie WF and Wongalee WF",
@@ -408,17 +1970,6 @@
             "date": "2026-03-12"
           },
           {
-            "project_id": "skye-ridge-wind-farm",
-            "project_name": "Skye Ridge Wind Farm",
-            "technology": "wind",
-            "state": "NSW",
-            "capacity_mw": 1300.0,
-            "event_type": "cod_change",
-            "title": "COD estimate updated",
-            "detail": "COD changed from 2031-11 to 2031-11-28 (source: AEMO Generation Information)",
-            "date": "2026-03-12"
-          },
-          {
             "project_id": "high-sea-wind-farm",
             "project_name": "High Sea Wind Farm",
             "technology": "wind",
@@ -735,6 +2286,17 @@
             "event_type": "cod_change",
             "title": "COD estimate updated",
             "detail": "COD changed from 2028-02 to 2028-02-01 (source: AEMO Generation Information)",
+            "date": "2026-03-12"
+          },
+          {
+            "project_id": "skye-ridge-wind-farm",
+            "project_name": "Skye Ridge Wind Farm",
+            "technology": "wind",
+            "state": "NSW",
+            "capacity_mw": 750.0,
+            "event_type": "cod_change",
+            "title": "COD estimate updated",
+            "detail": "COD changed from 2031-11 to 2031-11-28 (source: AEMO Generation Information)",
             "date": "2026-03-12"
           },
           {
@@ -5188,17 +6750,6 @@
             "title": "Grid-forming battery operational in remote NSW",
             "detail": "Broken Hill BESS commenced operations using Fluence Gridstack with EPC Power grid-forming inverters, providing critical system strength in one of the most challenging parts of the NEM grid.",
             "date": "2025-09-01"
-          },
-          {
-            "project_id": "limondale-bess",
-            "project_name": "Limondale BESS",
-            "technology": "bess",
-            "state": "NSW",
-            "capacity_mw": 50.0,
-            "event_type": "notable",
-            "title": "Registered with AEMO",
-            "detail": "Australia's first 8-hour LDES BESS registered",
-            "date": "2025-09-01"
           }
         ],
         "operational": [
@@ -5212,6 +6763,17 @@
             "title": "Registered with AEMO",
             "detail": "AEMO MMS registration",
             "date": "2025-09-30"
+          },
+          {
+            "project_id": "limondale-bess",
+            "project_name": "Limondale BESS",
+            "technology": "bess",
+            "state": "NSW",
+            "capacity_mw": 50.0,
+            "event_type": "notable",
+            "title": "Registered with AEMO",
+            "detail": "Australia's first 8-hour LDES BESS registered",
+            "date": "2025-09-01"
           }
         ]
       }
@@ -6421,6 +7983,17 @@
             "date": "2025"
           },
           {
+            "project_id": "argoon-wind-farm-res-group-kci",
+            "project_name": "Argoon Wind Farm (RES Group) - KCI",
+            "technology": "wind",
+            "state": "NSW",
+            "capacity_mw": 763.0,
+            "event_type": "planning_submitted",
+            "title": "EPBC Referral 2024/10048",
+            "detail": "Argoon Wind Farm \u2014 Assessment",
+            "date": "2025"
+          },
+          {
             "project_id": "middle-creek-renewable-energy-hub-wind",
             "project_name": "Middle Creek Renewable Energy Hub - Wind",
             "technology": "hybrid",
@@ -6429,17 +8002,6 @@
             "event_type": "planning_submitted",
             "title": "EPBC Referral 2024/09999",
             "detail": "Middle Creek Energy Hub \u2014 Assessment",
-            "date": "2025"
-          },
-          {
-            "project_id": "argoon-wind-farm-res-group-kci",
-            "project_name": "Argoon Wind Farm (RES Group) - KCI",
-            "technology": "wind",
-            "state": "NSW",
-            "capacity_mw": 540.0,
-            "event_type": "planning_submitted",
-            "title": "EPBC Referral 2024/10048",
-            "detail": "Argoon Wind Farm \u2014 Assessment",
             "date": "2025"
           },
           {
@@ -6635,17 +8197,6 @@
             "date": "2024-12-16"
           },
           {
-            "project_id": "wambo-wind-farm",
-            "project_name": "Wambo Wind Farm",
-            "technology": "wind",
-            "state": "QLD",
-            "capacity_mw": 500.0,
-            "event_type": "notable",
-            "title": "Financial close \u2014 A$650M",
-            "detail": "Stages 1 & 2 combined finance; Stanwell backed by A$455M QLD RE&H Jobs Fund",
-            "date": "2024-12-01"
-          },
-          {
             "project_id": "rangebank-bess",
             "project_name": "Rangebank BESS",
             "technology": "bess",
@@ -6658,6 +8209,17 @@
           }
         ],
         "operational": [
+          {
+            "project_id": "wambo-wind-farm",
+            "project_name": "Wambo Wind Farm",
+            "technology": "wind",
+            "state": "QLD",
+            "capacity_mw": 500.0,
+            "event_type": "notable",
+            "title": "Financial close \u2014 A$650M",
+            "detail": "Stages 1 & 2 combined finance; Stanwell backed by A$455M QLD RE&H Jobs Fund",
+            "date": "2024-12-01"
+          },
           {
             "project_id": "victorian-big-battery",
             "project_name": "Victorian Big Battery",
@@ -7511,7 +9073,8 @@
         ],
         "govt_programs": [],
         "rez_progress": [],
-        "construction": [
+        "construction": [],
+        "operational": [
           {
             "project_id": "wambo-wind-farm",
             "project_name": "Wambo Wind Farm",
@@ -7522,9 +9085,7 @@
             "title": "Stage 2 QLD government approval",
             "detail": "41 additional turbines / 254 MW",
             "date": "2024-02-01"
-          }
-        ],
-        "operational": [
+          },
           {
             "project_id": "clements-gap-bess",
             "project_name": "Clements Gap - BESS",
@@ -10001,17 +11562,6 @@
             "date": "2022-01-17"
           },
           {
-            "project_id": "wambo-wind-farm",
-            "project_name": "Wambo Wind Farm",
-            "technology": "wind",
-            "state": "QLD",
-            "capacity_mw": 500.0,
-            "event_type": "notable",
-            "title": "EPBC federal approval",
-            "detail": "",
-            "date": "2022-01-01"
-          },
-          {
             "project_id": "victorian-big-battery",
             "project_name": "Victorian Big Battery",
             "technology": "bess",
@@ -10089,7 +11639,19 @@
             "date": "2022"
           }
         ],
-        "operational": []
+        "operational": [
+          {
+            "project_id": "wambo-wind-farm",
+            "project_name": "Wambo Wind Farm",
+            "technology": "wind",
+            "state": "QLD",
+            "capacity_mw": 500.0,
+            "event_type": "notable",
+            "title": "EPBC federal approval",
+            "detail": "",
+            "date": "2022-01-01"
+          }
+        ]
       }
     },
     {
@@ -11695,6 +13257,17 @@
             "date": "2020"
           },
           {
+            "project_id": "delburn-wind-farm",
+            "project_name": "Delburn Wind Farm",
+            "technology": "wind",
+            "state": "VIC",
+            "capacity_mw": 204.6,
+            "event_type": "planning_submitted",
+            "title": "EPBC Referral 2020/8688",
+            "detail": "Delburn Wind Farm Project \u2014 Not Controlled Action",
+            "date": "2020"
+          },
+          {
             "project_id": "tilbuster-solar-farm",
             "project_name": "Tilbuster Solar Farm",
             "technology": "solar",
@@ -11736,17 +13309,6 @@
             "event_type": "planning_submitted",
             "title": "EPBC Referral 2019/8554",
             "detail": "Woolooga Solar Farms \u2014 Controlled Action",
-            "date": "2020"
-          },
-          {
-            "project_id": "delburn-wind-farm",
-            "project_name": "Delburn Wind Farm",
-            "technology": "wind",
-            "state": "VIC",
-            "capacity_mw": 173.0,
-            "event_type": "planning_submitted",
-            "title": "EPBC Referral 2020/8688",
-            "detail": "Delburn Wind Farm Project \u2014 Not Controlled Action",
             "date": "2020"
           },
           {
@@ -17885,8 +19447,8 @@
     }
   ],
   "section_counts": {
-    "construction": 640,
-    "operational": 456,
+    "construction": 636,
+    "operational": 602,
     "development": 272,
     "govt_programs": 10,
     "rez_progress": 36

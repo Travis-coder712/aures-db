@@ -7,7 +7,7 @@
   "storage_mwh": 2072.16,
   "state": "QLD",
   "current_developer": "TagEnergy Australia Pty Ltd",
-  "cod_current": "2028-08-31",
+  "cod_current": "2029-03-01",
   "cod_original": "2028-08-31",
   "connection_status": "proposed",
   "grid_forming": false,
@@ -29,6 +29,14 @@
       "event_type": "cod_change",
       "title": "COD estimate updated",
       "detail": "COD changed from 2028-08 to 2028-08-31 (source: AEMO Generation Information)",
+      "sources": []
+    },
+    {
+      "date": "2026-07-26",
+      "date_precision": "day",
+      "event_type": "cod_change",
+      "title": "COD estimate updated",
+      "detail": "COD changed from 2028-08-31 to 2029-03-01 (source: AEMO Generation Information)",
       "sources": []
     }
   ],

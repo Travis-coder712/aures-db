@@ -1,7 +1,7 @@
 {
   "summary": {
-    "total_operating": 227,
-    "avg_age_years": 14.5,
+    "total_operating": 228,
+    "avg_age_years": 14.4,
     "over_15_years": 59,
     "over_20_years": 42,
     "over_25_years": 35,
@@ -18,13 +18,13 @@
   },
   "age_distribution": {
     "bess": {
-      "count": 34,
-      "avg_age": 2.5,
-      "median_age": 1.5,
+      "count": 35,
+      "avg_age": 2.3,
+      "median_age": 1,
       "oldest_age": 9,
-      "newest_age": 0,
+      "newest_age": -1,
       "buckets": {
-        "<5y": 28,
+        "<5y": 29,
         "5-10y": 6,
         "10-15y": 0,
         "15-20y": 0,
@@ -49,13 +49,13 @@
     },
     "wind": {
       "count": 80,
-      "avg_age": 10.5,
+      "avg_age": 10.4,
       "median_age": 8.0,
       "oldest_age": 25,
-      "newest_age": 1,
+      "newest_age": 0,
       "buckets": {
-        "<5y": 12,
-        "5-10y": 33,
+        "<5y": 13,
+        "5-10y": 32,
         "10-15y": 10,
         "15-20y": 17,
         "20-25y": 7,
@@ -424,11 +424,11 @@
     },
     {
       "year": 2020,
-      "count": 20,
-      "total_mw": 3142.0,
+      "count": 19,
+      "total_mw": 3031.3,
       "by_tech": {
         "solar": 10,
-        "wind": 10
+        "wind": 9
       }
     },
     {
@@ -443,12 +443,12 @@
     },
     {
       "year": 2022,
-      "count": 12,
-      "total_mw": 2015.5,
+      "count": 13,
+      "total_mw": 2126.2,
       "by_tech": {
         "bess": 1,
         "solar": 8,
-        "wind": 3
+        "wind": 4
       }
     },
     {
@@ -463,31 +463,40 @@
     },
     {
       "year": 2024,
-      "count": 10,
-      "total_mw": 2839.5,
+      "count": 8,
+      "total_mw": 1593.5,
       "by_tech": {
-        "bess": 2,
-        "wind": 6,
+        "wind": 5,
+        "bess": 1,
         "solar": 2
       }
     },
     {
       "year": 2025,
-      "count": 19,
-      "total_mw": 4434.5,
+      "count": 18,
+      "total_mw": 3734.5,
       "by_tech": {
-        "bess": 10,
+        "bess": 9,
         "solar": 8,
         "wind": 1
       }
     },
     {
       "year": 2026,
-      "count": 8,
-      "total_mw": 3210.0,
+      "count": 11,
+      "total_mw": 4506.0,
       "by_tech": {
-        "bess": 7,
-        "solar": 1
+        "bess": 9,
+        "solar": 1,
+        "wind": 1
+      }
+    },
+    {
+      "year": 2027,
+      "count": 1,
+      "total_mw": 700.0,
+      "by_tech": {
+        "bess": 1
       }
     },
     {
@@ -2330,7 +2339,7 @@
       "avg_age": 8.7,
       "median_age": 7,
       "oldest": 25,
-      "newest": 2,
+      "newest": 0,
       "pct_over_15yr": 19.0,
       "at_risk": false
     },
@@ -2361,19 +2370,6 @@
       "at_risk": false
     },
     {
-      "oem": "Goldwind",
-      "project_count": 9,
-      "technologies": [
-        "wind"
-      ],
-      "avg_age": 7.4,
-      "median_age": 6,
-      "oldest": 13,
-      "newest": 2,
-      "pct_over_15yr": 0.0,
-      "at_risk": false
-    },
-    {
       "oem": "JA Solar",
       "project_count": 6,
       "technologies": [
@@ -2383,6 +2379,19 @@
       "median_age": 8.0,
       "oldest": 10,
       "newest": 1,
+      "pct_over_15yr": 0.0,
+      "at_risk": false
+    },
+    {
+      "oem": "Goldwind",
+      "project_count": 9,
+      "technologies": [
+        "wind"
+      ],
+      "avg_age": 7.2,
+      "median_age": 6,
+      "oldest": 13,
+      "newest": 2,
       "pct_over_15yr": 0.0,
       "at_risk": false
     },
@@ -2492,12 +2501,12 @@
     },
     {
       "oem": "Tesla",
-      "project_count": 15,
+      "project_count": 16,
       "technologies": [
         "bess"
       ],
-      "avg_age": 2.9,
-      "median_age": 3,
+      "avg_age": 2.8,
+      "median_age": 2.0,
       "oldest": 9,
       "newest": 0,
       "pct_over_15yr": 0.0,
@@ -2509,23 +2518,10 @@
       "technologies": [
         "bess"
       ],
-      "avg_age": 1.3,
-      "median_age": 1,
+      "avg_age": 0.7,
+      "median_age": 0,
       "oldest": 3,
-      "newest": 0,
-      "pct_over_15yr": 0.0,
-      "at_risk": false
-    },
-    {
-      "oem": "Powin",
-      "project_count": 2,
-      "technologies": [
-        "bess"
-      ],
-      "avg_age": 1.0,
-      "median_age": 1.0,
-      "oldest": 2,
-      "newest": 0,
+      "newest": -1,
       "pct_over_15yr": 0.0,
       "at_risk": false
     },
@@ -2538,6 +2534,19 @@
       "avg_age": 0.3,
       "median_age": 0,
       "oldest": 1,
+      "newest": 0,
+      "pct_over_15yr": 0.0,
+      "at_risk": false
+    },
+    {
+      "oem": "Powin",
+      "project_count": 2,
+      "technologies": [
+        "bess"
+      ],
+      "avg_age": 0.0,
+      "median_age": 0.0,
+      "oldest": 0,
       "newest": 0,
       "pct_over_15yr": 0.0,
       "at_risk": false
@@ -2792,11 +2801,11 @@
     },
     {
       "eol_year": 2045,
-      "count": 20,
-      "total_mw": 3142.0,
+      "count": 19,
+      "total_mw": 3031.3,
       "by_tech": {
         "solar": 10,
-        "wind": 10
+        "wind": 9
       }
     },
     {
@@ -2811,12 +2820,12 @@
     },
     {
       "eol_year": 2047,
-      "count": 12,
-      "total_mw": 2015.5,
+      "count": 13,
+      "total_mw": 2126.2,
       "by_tech": {
         "bess": 1,
         "solar": 8,
-        "wind": 3
+        "wind": 4
       }
     },
     {
@@ -2831,31 +2840,40 @@
     },
     {
       "eol_year": 2049,
-      "count": 10,
-      "total_mw": 2839.5,
+      "count": 8,
+      "total_mw": 1593.5,
       "by_tech": {
-        "bess": 2,
-        "wind": 6,
+        "wind": 5,
+        "bess": 1,
         "solar": 2
       }
     },
     {
       "eol_year": 2050,
-      "count": 19,
-      "total_mw": 4434.5,
+      "count": 18,
+      "total_mw": 3734.5,
       "by_tech": {
-        "bess": 10,
+        "bess": 9,
         "solar": 8,
         "wind": 1
       }
     },
     {
       "eol_year": 2051,
-      "count": 8,
-      "total_mw": 3210.0,
+      "count": 11,
+      "total_mw": 4506.0,
       "by_tech": {
-        "bess": 7,
-        "solar": 1
+        "bess": 9,
+        "solar": 1,
+        "wind": 1
+      }
+    },
+    {
+      "eol_year": 2052,
+      "count": 1,
+      "total_mw": 700.0,
+      "by_tech": {
+        "bess": 1
       }
     },
     {
@@ -2924,15 +2942,15 @@
       "storage_mwh": 1680.0,
       "developer": "Akaysha Energy (BlackRock)",
       "operator": "Akaysha Energy",
-      "cod_year": 2024,
-      "age_years": 2,
+      "cod_year": 2026,
+      "age_years": 0,
       "age_bucket": "<5y",
       "primary_oem": "Powin",
       "primary_model": "Centipede Energy Segment",
       "cf_latest": 3.34,
       "cf_trend": 3.3,
       "cf_gap_to_state_median": -8.34,
-      "refurb_score": 19.8,
+      "refurb_score": 15.0,
       "at_risk_oem": false,
       "latitude": -33.07,
       "longitude": 151.52
@@ -4810,15 +4828,15 @@
       "storage_mwh": null,
       "developer": "BEIJING JINGNENG CLEAN ENERGY (AUSTRALIA) HOLDING PTY LTD",
       "operator": "Goldwind Australia",
-      "cod_year": 2020,
-      "age_years": 6,
-      "age_bucket": "5-10y",
+      "cod_year": 2022,
+      "age_years": 4,
+      "age_bucket": "<5y",
       "primary_oem": "Goldwind",
       "primary_model": "GW140-3.57S",
       "cf_latest": 35.42,
       "cf_trend": 33.2,
       "cf_gap_to_state_median": 7.8,
-      "refurb_score": 14.4,
+      "refurb_score": 9.6,
       "at_risk_oem": false,
       "latitude": -34.587836,
       "longitude": 149.369848
@@ -5673,6 +5691,29 @@
       "at_risk_oem": false,
       "latitude": -23.070504,
       "longitude": 148.413865
+    },
+    {
+      "project_id": "limondale-bess",
+      "name": "Limondale BESS",
+      "technology": "bess",
+      "state": "NSW",
+      "rez": "South West NSW",
+      "capacity_mw": 50.0,
+      "storage_mwh": 400.0,
+      "developer": "LIMONDALE BATTERY PTY. LTD",
+      "operator": null,
+      "cod_year": 2026,
+      "age_years": 0,
+      "age_bucket": "<5y",
+      "primary_oem": "Tesla",
+      "primary_model": "Megapack",
+      "cf_latest": null,
+      "cf_trend": null,
+      "cf_gap_to_state_median": null,
+      "refurb_score": 0.0,
+      "at_risk_oem": false,
+      "latitude": null,
+      "longitude": null
     },
     {
       "project_id": "limondale-solar-farm-1",
@@ -6811,15 +6852,15 @@
       "storage_mwh": null,
       "developer": "Tilt Renewables Australia Pty Ltd",
       "operator": "Tilt Renewables",
-      "cod_year": 2024,
-      "age_years": 2,
+      "cod_year": 2026,
+      "age_years": 0,
       "age_bucket": "<5y",
       "primary_oem": "Vestas",
       "primary_model": "V162-6.0 MW EnVentus",
       "cf_latest": 30.17,
       "cf_trend": 27.75,
       "cf_gap_to_state_median": 2.55,
-      "refurb_score": 4.8,
+      "refurb_score": 0.0,
       "at_risk_oem": false,
       "latitude": -34.63317,
       "longitude": 148.95364
@@ -8076,19 +8117,19 @@
       "storage_mwh": 1390.0,
       "developer": "Origin Energy Electricity Limited",
       "operator": null,
-      "cod_year": 2025,
-      "age_years": 1,
+      "cod_year": 2027,
+      "age_years": -1,
       "age_bucket": "<5y",
       "primary_oem": "Wartsila",
       "primary_model": "Quantum3",
       "cf_latest": 16.27,
       "cf_trend": 15.28,
       "cf_gap_to_state_median": 4.59,
-      "refurb_score": 2.4,
+      "refurb_score": -2.4,
       "at_risk_oem": false,
       "latitude": null,
       "longitude": null
     }
   ],
-  "exported_at": "2026-07-26T13:12:26.286479"
+  "exported_at": "2026-07-26T18:36:15.496572"
 }

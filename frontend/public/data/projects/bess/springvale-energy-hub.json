@@ -7,7 +7,7 @@
   "storage_mwh": 246.4,
   "state": "VIC",
   "current_developer": "progresspower_nr",
-  "cod_current": "2026-10-30",
+  "cod_current": "2028-10-30",
   "cod_original": "2026-10-30",
   "connection_status": "anticipated",
   "grid_forming": false,
@@ -29,6 +29,14 @@
       "event_type": "cod_change",
       "title": "COD estimate updated",
       "detail": "COD changed from 2026-10 to 2026-10-30 (source: AEMO Generation Information)",
+      "sources": []
+    },
+    {
+      "date": "2026-07-26",
+      "date_precision": "day",
+      "event_type": "cod_change",
+      "title": "COD estimate updated",
+      "detail": "COD changed from 2026-10-30 to 2028-10-30 (source: AEMO Generation Information)",
       "sources": []
     }
   ],

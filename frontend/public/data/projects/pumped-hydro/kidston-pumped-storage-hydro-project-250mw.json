@@ -7,7 +7,7 @@
   "storage_mwh": 900.0,
   "state": "QLD",
   "current_developer": "Genex Power",
-  "cod_current": "2027-01-01",
+  "cod_current": "2027-07-01",
   "cod_original": "2027-01-01",
   "connection_status": "committed",
   "grid_forming": false,
@@ -65,6 +65,14 @@
       "event_type": "cod_change",
       "title": "COD estimate updated",
       "detail": "COD changed from 2027-01 to 2027-01-01 (source: AEMO Generation Information)",
+      "sources": []
+    },
+    {
+      "date": "2026-07-26",
+      "date_precision": "day",
+      "event_type": "cod_change",
+      "title": "COD estimate updated",
+      "detail": "COD changed from 2027-01-01 to 2027-07-01 (source: AEMO Generation Information)",
       "sources": []
     }
   ],

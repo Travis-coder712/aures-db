@@ -7,7 +7,7 @@
   "storage_mwh": 2472.0,
   "state": "QLD",
   "current_developer": "Mackenzie River ProjectCo Pty Ltd",
-  "cod_current": "2031-02-28",
+  "cod_current": "2031-06-02",
   "cod_original": "2031-02-28",
   "connection_status": "proposed",
   "grid_forming": false,
@@ -29,6 +29,14 @@
       "event_type": "cod_change",
       "title": "COD estimate updated",
       "detail": "COD changed from 2031-02 to 2031-02-28 (source: AEMO Generation Information)",
+      "sources": []
+    },
+    {
+      "date": "2026-07-26",
+      "date_precision": "day",
+      "event_type": "cod_change",
+      "title": "COD estimate updated",
+      "detail": "COD changed from 2031-02-28 to 2031-06-02 (source: AEMO Generation Information)",
       "sources": []
     }
   ],

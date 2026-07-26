@@ -8,6 +8,8 @@
   "state": "NSW",
   "rez": "nsw-central-west-orana",
   "current_developer": "ACEN RENEWABLES",
+  "cod_current": "2031-12-01",
+  "cod_original": "2031-12-01",
   "connection_status": "proposed",
   "grid_forming": false,
   "has_sips": false,
@@ -31,6 +33,14 @@
       "event_type": "rez_access",
       "title": "REZ access right granted (Central-West Orana)",
       "detail": "EnergyCo registered access right CWO2025-01 for Birriwa BESS \u2014 600.0 MW \u00b7 scheme: Central-West Orana REZ \u00b7 status: Registered.",
+      "sources": []
+    },
+    {
+      "date": "2026-07-26",
+      "date_precision": "day",
+      "event_type": "cod_change",
+      "title": "COD estimate updated",
+      "detail": "COD changed from 2031-12 to 2031-12-01 (source: AEMO Generation Information)",
       "sources": []
     }
   ],

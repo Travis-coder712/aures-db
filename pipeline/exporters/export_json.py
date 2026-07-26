@@ -186,7 +186,7 @@ def fetch_project_summary(conn, project_id):
     """Fetch lightweight summary for list views."""
     row = conn.execute("""
         SELECT id, name, technology, status, capacity_mw, storage_mwh,
-               state, current_developer, current_operator, rez, development_score,
+               state, current_developer, current_operator, rez,
                performance_score, data_confidence, confidence_score,
                development_stage, capex_aud_m, capex_year, notable, first_seen,
                zombie_flag
@@ -1501,7 +1501,7 @@ def export_lifecycle_quartile(conn):
             'score_basis': "100 − |drift months|×1.5 − 10 (no construction_start) + developer grade×2.5",
         }
         con_records.append(rec)
-        con_scores_by_cohort[(r['technology'], r['state'])].append(score)
+        con_scores_by_cohort[(r['technology'], r['state'])].append(rec['score'])
 
     for rec in con_records:
         cohort = con_scores_by_cohort.get((rec['technology'], rec['state']), [])
@@ -1537,7 +1537,7 @@ def export_lifecycle_quartile(conn):
             'score_basis': "stage (×15) + has_cod (15) + has_rez (10) + scheme (20) + EIS (15) + developer grade (×5); max 110",
         }
         dev_records.append(rec)
-        dev_scores_by_cohort[(r['technology'], r['state'])].append(score)
+        dev_scores_by_cohort[(r['technology'], r['state'])].append(rec['score'])
 
     for rec in dev_records:
         cohort = dev_scores_by_cohort.get((rec['technology'], rec['state']), [])

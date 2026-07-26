@@ -27,6 +27,17 @@
     "zombie_flag": "zombie_minimal"
   },
   {
+    "id": "albury-mill-bess-kci",
+    "name": "Albury Mill BESS - KCI",
+    "technology": "bess",
+    "status": "development",
+    "capacity_mw": 350.0,
+    "state": "NSW",
+    "current_developer": "VISY PULP AND PAPER PTY. LTD.",
+    "data_confidence": "low",
+    "development_stage": "planning_submitted"
+  },
+  {
     "id": "aldoga-bess-stage-1",
     "name": "Aldoga BESS Stage 1",
     "technology": "bess",
@@ -142,7 +153,7 @@
     "name": "Argoon Wind Farm (RES Group) - KCI",
     "technology": "wind",
     "status": "development",
-    "capacity_mw": 540.0,
+    "capacity_mw": 763.0,
     "state": "NSW",
     "current_developer": "RES Australia Pty Ltd",
     "data_confidence": "low",
@@ -183,6 +194,7 @@
     "technology": "bess",
     "status": "development",
     "capacity_mw": 200.0,
+    "storage_mwh": 800.0,
     "state": "NSW",
     "current_developer": "Elgin Energy Pty Ltd",
     "data_confidence": "low",
@@ -206,16 +218,39 @@
     "has_scheme_contract": true
   },
   {
+    "id": "arthurs-hill-energy-park-kci",
+    "name": "Arthur's Hill Energy Park - KCI",
+    "technology": "bess",
+    "status": "development",
+    "capacity_mw": 500.0,
+    "storage_mwh": 1.0,
+    "state": "NSW",
+    "current_developer": "Pacific Green Energy Parks Developments Pty Ltd",
+    "data_confidence": "low",
+    "development_stage": "planning_submitted"
+  },
+  {
     "id": "arundel-bess",
     "name": "Arundel BESS",
     "technology": "bess",
     "status": "development",
     "capacity_mw": 300.0,
-    "storage_mwh": 1200.0,
+    "storage_mwh": 1362.6,
     "state": "NSW",
     "current_developer": "Eku Energy Projects (Australia) Trust",
     "data_confidence": "low",
     "confidence_score": "20",
+    "development_stage": "planning_submitted"
+  },
+  {
+    "id": "ashleigh-park-bess-kci",
+    "name": "Ashleigh Park BESS - KCI",
+    "technology": "bess",
+    "status": "development",
+    "capacity_mw": 300.0,
+    "state": "NSW",
+    "current_developer": "Ashleigh Park Beef Pty Ltd",
+    "data_confidence": "low",
     "development_stage": "planning_submitted"
   },
   {
@@ -224,7 +259,7 @@
     "technology": "bess",
     "status": "development",
     "capacity_mw": 270.0,
-    "storage_mwh": 540.0,
+    "storage_mwh": 1080.0,
     "state": "SA",
     "current_developer": "Augusta BESS Pty Ltd",
     "data_confidence": "low",
@@ -504,7 +539,7 @@
     "status": "development",
     "capacity_mw": 700.0,
     "state": "NSW",
-    "current_developer": "Penso Power Australia Pty Ltd.",
+    "current_developer": "BW ESS Australia Pty Ltd",
     "data_confidence": "low",
     "confidence_score": "15",
     "development_stage": "planning_submitted",
@@ -949,8 +984,8 @@
     "name": "Big G Pumped Hydro Project",
     "technology": "pumped_hydro",
     "status": "development",
-    "capacity_mw": 800.0,
-    "storage_mwh": 9600.0,
+    "capacity_mw": 600.0,
+    "storage_mwh": 8400.0,
     "state": "QLD",
     "current_developer": "BE Power",
     "data_confidence": "low",
@@ -965,7 +1000,7 @@
     "capacity_mw": 400.0,
     "storage_mwh": 4000.0,
     "state": "QLD",
-    "current_developer": "BE Power",
+    "current_developer": "Cressbrook Project Co Pty Ltd as trustee",
     "data_confidence": "low",
     "confidence_score": "20",
     "development_stage": "planning_submitted"
@@ -1371,6 +1406,17 @@
     "first_seen": "2026-03-12"
   },
   {
+    "id": "borambola-hybrid-kci",
+    "name": "Borambola Hybrid - KCI",
+    "technology": "hybrid",
+    "status": "development",
+    "capacity_mw": 90.0,
+    "state": "NSW",
+    "current_developer": "British Solar Renewables Pty Ltd",
+    "data_confidence": "low",
+    "development_stage": "planning_submitted"
+  },
+  {
     "id": "boree-solar-project",
     "name": "Boree Solar Project",
     "technology": "solar",
@@ -1610,7 +1656,7 @@
     "rez": "Issac",
     "data_confidence": "medium",
     "confidence_score": "28",
-    "development_stage": "early_stage",
+    "development_stage": "planning_submitted",
     "first_seen": "2026-03-12"
   },
   {
@@ -1739,8 +1785,7 @@
     "name": "Bulli Creek BESS (Trina)",
     "technology": "bess",
     "status": "development",
-    "capacity_mw": 450.0,
-    "storage_mwh": 900.0,
+    "capacity_mw": 750.0,
     "state": "QLD",
     "current_developer": "Bulli Creek Hybrid Nominee Pty Ltd on behalf of Bulli Creek Hybrid Trust",
     "data_confidence": "low",
@@ -1819,7 +1864,7 @@
     "id": "bundaberg-solar-farm",
     "name": "Bundaberg Solar Farm",
     "technology": "solar",
-    "status": "construction",
+    "status": "commissioning",
     "capacity_mw": 78.0,
     "state": "QLD",
     "current_developer": "Bundaberg Development Pty Ltd",
@@ -1972,7 +2017,7 @@
     "technology": "bess",
     "status": "development",
     "capacity_mw": 400.0,
-    "storage_mwh": 2400.0,
+    "storage_mwh": 2775.0,
     "state": "VIC",
     "current_developer": "Bunyip North Project Co Pty Ltd as trustee for Bunyip North Project Trust",
     "data_confidence": "low",
@@ -2413,6 +2458,16 @@
     "first_seen": "2026-03-12"
   },
   {
+    "id": "carwarp-solar-farm-cwsf",
+    "name": "Carwarp Solar Farm (CWSF)",
+    "technology": "solar",
+    "status": "commissioning",
+    "capacity_mw": 150.0,
+    "state": "VIC",
+    "current_developer": "CS SubCo Pty Ltd as trustee for Carwarp SF SPV",
+    "data_confidence": "low"
+  },
+  {
     "id": "catagunya-liapootah-wayatinah",
     "name": "Catagunya / Liapootah / Wayatinah",
     "technology": "pumped_hydro",
@@ -2480,7 +2535,7 @@
     "capacity_mw": 341.0,
     "state": "TAS",
     "current_developer": "Gamuda Renewables Australia + Alternate Path (JV)",
-    "data_confidence": "confirmed",
+    "data_confidence": "high",
     "development_stage": "early_stage",
     "notable": "CIS T7 award May 2026 (341 MW wind). JV between Gamuda Renewables Australia (subsidiary of Malaysian Gamuda Berhad) and Alternate Path (Tasmanian developer). Located Highland Lakes Rd near Bothwell, Central Highlands, ~1hr from Hobart. Shares site + 220 kV connection with sister Weasel Solar Farm. Both delivered via Gamuda Engineering EPC. Construction target 2028 (Weasel first early 2027). Only two Tasmanian T7 projects. Created 2026-07-18 to close v3.22.2 data gap.",
     "first_seen": "2026-07-18",
@@ -2637,7 +2692,7 @@
     "status": "development",
     "capacity_mw": 288.0,
     "state": "TAS",
-    "current_developer": "Sun Spot 9 Pty Ltd",
+    "current_developer": "Ib vogt GmbH",
     "data_confidence": "low",
     "confidence_score": "15",
     "development_stage": "planning_submitted",
@@ -2847,6 +2902,18 @@
     "first_seen": "2023-06-01"
   },
   {
+    "id": "collinsville-bess",
+    "name": "Collinsville BESS",
+    "technology": "bess",
+    "status": "development",
+    "capacity_mw": 200.0,
+    "storage_mwh": 799.8,
+    "state": "QLD",
+    "current_developer": "Ratch Australia",
+    "data_confidence": "low",
+    "development_stage": "planning_submitted"
+  },
+  {
     "id": "collinsville-bess-kci",
     "name": "Collinsville BESS - KCI",
     "technology": "bess",
@@ -2933,7 +3000,7 @@
     "technology": "bess",
     "status": "development",
     "capacity_mw": 550.0,
-    "storage_mwh": 1703.0,
+    "storage_mwh": 1703.84,
     "state": "QLD",
     "current_developer": "StorEnergy 1 Pty Ltd",
     "data_confidence": "low",
@@ -2982,6 +3049,17 @@
     "confidence_score": "28",
     "development_stage": "planning_submitted",
     "first_seen": "2026-03-12"
+  },
+  {
+    "id": "conargo-wind-farm-kci",
+    "name": "Conargo Wind Farm - KCI",
+    "technology": "wind",
+    "status": "development",
+    "capacity_mw": 130.0,
+    "state": "NSW",
+    "current_developer": "Squadron Energy Pty Ltd",
+    "data_confidence": "low",
+    "development_stage": "planning_submitted"
   },
   {
     "id": "connewarren-bess",
@@ -3546,10 +3624,10 @@
   {
     "id": "deepwater-hybrid-facility",
     "name": "Deepwater Hybrid Facility",
-    "technology": "hybrid",
+    "technology": "solar",
     "status": "development",
-    "capacity_mw": 140.0,
-    "storage_mwh": 560.0,
+    "capacity_mw": 120.0,
+    "storage_mwh": 15.2,
     "state": "NSW",
     "current_developer": "Ib vogt Development Australia Pty Ltd",
     "data_confidence": "low",
@@ -3576,7 +3654,7 @@
     "name": "Delburn Wind Farm",
     "technology": "wind",
     "status": "development",
-    "capacity_mw": 173.0,
+    "capacity_mw": 204.6,
     "state": "VIC",
     "current_developer": "Delburn Wind Farm Pty Ltd",
     "data_confidence": "low",
@@ -3828,9 +3906,9 @@
     "technology": "bess",
     "status": "development",
     "capacity_mw": 150.0,
-    "storage_mwh": 299.88,
+    "storage_mwh": 315.0,
     "state": "QLD",
-    "current_developer": "Samsung C&amp;T",
+    "current_developer": "Samsung C&amp;amp;T",
     "data_confidence": "low",
     "confidence_score": "20",
     "development_stage": "planning_submitted"
@@ -3842,7 +3920,7 @@
     "status": "development",
     "capacity_mw": 300.0,
     "state": "QLD",
-    "current_developer": "Samsung C&amp;T",
+    "current_developer": "Samsung C&amp;amp;amp;T",
     "data_confidence": "low",
     "confidence_score": "15",
     "development_stage": "planning_submitted",
@@ -3872,6 +3950,17 @@
     "current_developer": "EIWA Golden Fleece Renewable Energy Park Pty Ltd",
     "data_confidence": "low",
     "confidence_score": "20",
+    "development_stage": "planning_submitted"
+  },
+  {
+    "id": "eiwa-horsham-bess-kci",
+    "name": "EIWA Horsham BESS - KCI",
+    "technology": "bess",
+    "status": "development",
+    "capacity_mw": 260.0,
+    "state": "VIC",
+    "current_developer": "EIWA HORSHAM BESS Pty Ltd",
+    "data_confidence": "low",
     "development_stage": "planning_submitted"
   },
   {
@@ -4026,6 +4115,18 @@
     "first_seen": "1955-12-31"
   },
   {
+    "id": "el-arish-bess",
+    "name": "El Arish BESS",
+    "technology": "bess",
+    "status": "development",
+    "capacity_mw": 200.0,
+    "storage_mwh": 799.8,
+    "state": "QLD",
+    "current_developer": "Ratch Australia",
+    "data_confidence": "low",
+    "development_stage": "planning_submitted"
+  },
+  {
     "id": "elai-genesis-battery-storage-system",
     "name": "Elai Genesis Battery Storage System",
     "technology": "bess",
@@ -4140,9 +4241,10 @@
   {
     "id": "emu-park-solar-farm",
     "name": "Emu Park Solar Farm",
-    "technology": "solar",
+    "technology": "hybrid",
     "status": "development",
     "capacity_mw": 300.0,
+    "storage_mwh": 1600.0,
     "state": "NSW",
     "current_developer": "M Renweables Australia",
     "data_confidence": "low",
@@ -4230,6 +4332,17 @@
     "zombie_flag": "zombie_minimal"
   },
   {
+    "id": "futcher-bess",
+    "name": "FUTCHER BESS",
+    "technology": "bess",
+    "status": "development",
+    "capacity_mw": 400.0,
+    "state": "NSW",
+    "current_developer": "FUTBESS PROJECT HOLDING PTY LTD",
+    "data_confidence": "low",
+    "development_stage": "planning_submitted"
+  },
+  {
     "id": "farmers-creek-energy-park",
     "name": "Farmers Creek Energy Park",
     "technology": "hybrid",
@@ -4270,6 +4383,17 @@
     "confidence_score": "46",
     "notable": "58 MW hydro in NW Tasmania, Mersey-Forth scheme. Water from Lake Mackenzie drops 650m \u2014 one of the largest head differentials in the scheme. Hydro Tasmania.",
     "first_seen": "1972-12-31"
+  },
+  {
+    "id": "flat-rock-bess-kci",
+    "name": "Flat Rock BESS - KCI",
+    "technology": "bess",
+    "status": "development",
+    "capacity_mw": 520.0,
+    "state": "NSW",
+    "current_developer": "Private Energy Partners Pty Ltd",
+    "data_confidence": "low",
+    "development_stage": "planning_submitted"
   },
   {
     "id": "flyers-creek-wind-farm",
@@ -4604,9 +4728,10 @@
   {
     "id": "gerogery-solar-farm-kci",
     "name": "Gerogery Solar Farm - KCI",
-    "technology": "solar",
+    "technology": "hybrid",
     "status": "development",
     "capacity_mw": 125.0,
+    "storage_mwh": 250.0,
     "state": "NSW",
     "current_developer": "Elgin Energy Pty Ltd",
     "data_confidence": "low",
@@ -4676,7 +4801,7 @@
     "technology": "bess",
     "status": "development",
     "capacity_mw": 260.0,
-    "storage_mwh": 260.0,
+    "storage_mwh": 2080.0,
     "state": "QLD",
     "current_developer": "Private Energy Partners Pty Ltd",
     "data_confidence": "low",
@@ -4742,7 +4867,7 @@
     "id": "glenellen-solar-farm",
     "name": "Glenellen Solar Farm",
     "technology": "solar",
-    "status": "development",
+    "status": "commissioning",
     "capacity_mw": 200.0,
     "state": "NSW",
     "current_developer": "Glenellen Solar Farm Pty Ltd",
@@ -4784,6 +4909,7 @@
     "technology": "bess",
     "status": "development",
     "capacity_mw": 400.0,
+    "storage_mwh": 1600.0,
     "state": "VIC",
     "current_developer": "Enervest Operations Pty Ltd",
     "data_confidence": "low",
@@ -4897,7 +5023,7 @@
     "current_developer": "Tag Energy Australia P/L",
     "data_confidence": "medium",
     "confidence_score": "28",
-    "development_stage": "early_stage",
+    "development_stage": "planning_submitted",
     "first_seen": "2026-03-12"
   },
   {
@@ -4921,7 +5047,7 @@
     "capacity_mw": 1610.0,
     "state": "VIC",
     "current_developer": "TagEnergy / Ingka Group",
-    "data_confidence": "confirmed",
+    "data_confidence": "high",
     "confidence_score": "80",
     "development_stage": "epbc_approved",
     "notable": "Golden Plains Wind Farm Stage 1 (756 MW / 1333 MW full project per developer) undergoing final commissioning testing per ESD News 2026. Combined project surpassed 1 GW output. Full completion mid-2027. AURES 1610 MW likely high vs developer 1333 MW - flag for reconciliation.",
@@ -4964,9 +5090,9 @@
     "technology": "hybrid",
     "status": "development",
     "capacity_mw": 200.0,
-    "storage_mwh": 400.0,
+    "storage_mwh": 792.0,
     "state": "QLD",
-    "current_developer": "GoodNight One Pty Ltd",
+    "current_developer": "Goodnight One Pty Ltd",
     "data_confidence": "low",
     "confidence_score": "20",
     "development_stage": "planning_submitted"
@@ -5016,7 +5142,7 @@
     "id": "goorambat-east-solar-farm-engie",
     "name": "Goorambat East Solar Farm (ENGIE)",
     "technology": "solar",
-    "status": "construction",
+    "status": "commissioning",
     "capacity_mw": 250.0,
     "state": "VIC",
     "current_developer": "Engie",
@@ -5895,7 +6021,7 @@
     "rez": "South West NSW",
     "data_confidence": "low",
     "confidence_score": "15",
-    "development_stage": "early_stage"
+    "development_stage": "planning_submitted"
   },
   {
     "id": "hayman-solar-farm",
@@ -6601,7 +6727,6 @@
     "technology": "bess",
     "status": "development",
     "capacity_mw": 500.0,
-    "storage_mwh": 1000.0,
     "state": "VIC",
     "current_developer": "KIEWA VALLEY BESS NOMINEES PTY LTD on behalf of KIEWA VALLEY BESS Trust",
     "data_confidence": "low",
@@ -7260,6 +7385,17 @@
     "first_seen": "2023"
   },
   {
+    "id": "lake-road-battery-tuggerah-kci",
+    "name": "Lake Road Battery Tuggerah - KCI",
+    "technology": "bess",
+    "status": "development",
+    "capacity_mw": 250.0,
+    "state": "NSW",
+    "current_developer": "Lake Road Battery Pty Ltd",
+    "data_confidence": "low",
+    "development_stage": "planning_submitted"
+  },
+  {
     "id": "lake-victoria-energy-park-kci",
     "name": "Lake Victoria Energy Park - KCI",
     "technology": "hybrid",
@@ -7381,7 +7517,7 @@
     "capacity_mw": 440.0,
     "storage_mwh": 1760.0,
     "state": "QLD",
-    "current_developer": "Acen Australia",
+    "current_developer": "ACEN Australia",
     "data_confidence": "low",
     "confidence_score": "20",
     "development_stage": "planning_submitted"
@@ -7417,7 +7553,7 @@
     "id": "limondale-bess",
     "name": "Limondale BESS",
     "technology": "bess",
-    "status": "construction",
+    "status": "operating",
     "capacity_mw": 50.0,
     "storage_mwh": 400.0,
     "state": "NSW",
@@ -7781,6 +7917,7 @@
     "technology": "hybrid",
     "status": "development",
     "capacity_mw": 300.0,
+    "storage_mwh": 1545.6,
     "state": "NSW",
     "current_developer": "Mint Renewables Pty Ltd",
     "data_confidence": "low",
@@ -7955,6 +8092,18 @@
     "zombie_flag": "zombie_minimal"
   },
   {
+    "id": "markaranka-bess",
+    "name": "Markaranka BESS",
+    "technology": "bess",
+    "status": "development",
+    "capacity_mw": 320.0,
+    "storage_mwh": 639.2,
+    "state": "SA",
+    "current_developer": "Monash Renweables Pty Ltd",
+    "data_confidence": "low",
+    "development_stage": "planning_submitted"
+  },
+  {
     "id": "markaranka-solar-and-storage",
     "name": "Markaranka Solar and Storage",
     "technology": "hybrid",
@@ -8018,7 +8167,7 @@
     "current_developer": "Maryvale Solar Farm Pty Ltd",
     "data_confidence": "medium",
     "confidence_score": "28",
-    "development_stage": "early_stage",
+    "development_stage": "planning_submitted",
     "first_seen": "2026-03-12",
     "has_scheme_contract": true
   },
@@ -8028,8 +8177,9 @@
     "technology": "hybrid",
     "status": "development",
     "capacity_mw": 252.0,
+    "storage_mwh": 20.0,
     "state": "NSW",
-    "current_developer": "Metlen Energy & Metals",
+    "current_developer": "Metlen Energy &amp;amp;amp;amp; Metals",
     "data_confidence": "low",
     "confidence_score": "15",
     "development_stage": "planning_submitted",
@@ -8211,6 +8361,17 @@
     "first_seen": "2025-09-11"
   },
   {
+    "id": "melbourne-solar-farm-and-bess-kci",
+    "name": "Melbourne Solar Farm and BESS - KCI",
+    "technology": "hybrid",
+    "status": "development",
+    "capacity_mw": 500.0,
+    "state": "VIC",
+    "current_developer": "European Energy",
+    "data_confidence": "low",
+    "development_stage": "planning_submitted"
+  },
+  {
     "id": "merino-solar-farm",
     "name": "Merino Solar Farm",
     "technology": "hybrid",
@@ -8265,6 +8426,17 @@
     "confidence_score": "23",
     "development_stage": "planning_submitted",
     "first_seen": "2025"
+  },
+  {
+    "id": "middle-hut-bess-kci",
+    "name": "Middle Hut BESS - KCI",
+    "technology": "bess",
+    "status": "development",
+    "capacity_mw": 800.0,
+    "state": "VIC",
+    "current_developer": "Middle Hut Storage Pty Ltd",
+    "data_confidence": "low",
+    "development_stage": "planning_submitted"
   },
   {
     "id": "middlebrook-solar-and-bess",
@@ -8374,6 +8546,17 @@
     "first_seen": "2026-03-12"
   },
   {
+    "id": "minimbah-bess-kci",
+    "name": "Minimbah BESS - KCI",
+    "technology": "bess",
+    "status": "development",
+    "capacity_mw": 125.0,
+    "state": "NSW",
+    "current_developer": "Minimbah BESS Pty Ltd",
+    "data_confidence": "low",
+    "development_stage": "planning_submitted"
+  },
+  {
     "id": "miriam-vale-solar-farm-and-bess-a",
     "name": "Miriam Vale Solar Farm And BESS - A",
     "technology": "hybrid",
@@ -8397,6 +8580,17 @@
     "current_developer": "Private Energy Partners Pty Ltd",
     "data_confidence": "low",
     "confidence_score": "20",
+    "development_stage": "planning_submitted"
+  },
+  {
+    "id": "miskelly-bess-kci",
+    "name": "Miskelly BESS - KCI",
+    "technology": "bess",
+    "status": "development",
+    "capacity_mw": 500.0,
+    "state": "NSW",
+    "current_developer": "MISKELLY BESS PROJECT PTY LTD",
+    "data_confidence": "low",
     "development_stage": "planning_submitted"
   },
   {
@@ -8528,7 +8722,7 @@
     "technology": "bess",
     "status": "development",
     "capacity_mw": 300.0,
-    "storage_mwh": 1200.0,
+    "storage_mwh": 1364.08,
     "state": "QLD",
     "current_developer": "Eku Energy Projects (Australia) Pty Ltd as trustee for the Eku Energy Projects (Australia) Trust",
     "data_confidence": "low",
@@ -8567,7 +8761,7 @@
     "technology": "bess",
     "status": "development",
     "capacity_mw": 300.0,
-    "storage_mwh": 1200.0,
+    "storage_mwh": 1201.2,
     "state": "VIC",
     "current_developer": "Storenergy",
     "data_confidence": "low",
@@ -8611,7 +8805,7 @@
     "storage_mwh": 100.0,
     "state": "QLD",
     "current_developer": "Zero-E Australia (Grupo Cobra / ACS)",
-    "data_confidence": "confirmed",
+    "data_confidence": "high",
     "development_stage": "early_stage",
     "notable": "CIS T7 award May 2026 (171 MW solar + 100 MW / 4hr BESS). Zero-E Australia is subsidiary of Spanish Grupo Cobra (ACS Group). Near Coppabella in Bowen Basin. AEMO 5.3.4A connection approval secured pre-award (145 MWac inverter rating per pv-tech; DCCEEW cites 171 MW; likely DC vs AC distinction). AC-coupled hybrid with grid-forming inverters. Grupo Cobras first Australian clean-energy asset. Cultural Heritage + Shared Benefits agreements with Barada Barna Traditional Owners. Created 2026-07-18 to close v3.22.2 data gap.",
     "first_seen": "2026-07-18",
@@ -8729,6 +8923,17 @@
     "first_seen": "2026-03-12"
   },
   {
+    "id": "mortlake-bess-2-kci",
+    "name": "Mortlake BESS 2 - KCI",
+    "technology": "bess",
+    "status": "development",
+    "capacity_mw": 500.0,
+    "state": "VIC",
+    "current_developer": "Origin Energy Limited",
+    "data_confidence": "low",
+    "development_stage": "planning_submitted"
+  },
+  {
     "id": "mortlake-battery",
     "name": "Mortlake Battery",
     "technology": "bess",
@@ -8759,6 +8964,17 @@
     "confidence_score": "28",
     "development_stage": "early_stage",
     "first_seen": "2026-03-12"
+  },
+  {
+    "id": "mortlake-energy-hub-stage-2-kci",
+    "name": "Mortlake Energy Hub Stage 2 - KCI",
+    "technology": "bess",
+    "status": "development",
+    "capacity_mw": 500.0,
+    "state": "VIC",
+    "current_developer": "BRIGHTNIGHT AUSTRALIA PTY LTD",
+    "data_confidence": "low",
+    "development_stage": "planning_submitted"
   },
   {
     "id": "mortlake-south-wind-farm",
@@ -8880,6 +9096,7 @@
     "technology": "pumped_hydro",
     "status": "development",
     "capacity_mw": 1710.0,
+    "storage_mwh": 15390.0,
     "state": "NSW",
     "current_developer": "Acciona Energy Australia Global Pty Ltd",
     "data_confidence": "low",
@@ -9059,7 +9276,7 @@
     "id": "munna-creek-solar-farm",
     "name": "Munna Creek Solar Farm",
     "technology": "solar",
-    "status": "construction",
+    "status": "commissioning",
     "capacity_mw": 120.0,
     "state": "QLD",
     "current_developer": "Munna Creek Solar Farm Investments Pty Ltd as trustee for the Munna Creek Solar Farm Trust",
@@ -9069,6 +9286,17 @@
     "development_stage": "epbc_submitted",
     "notable": "Confirmed operating late 2025 per RenewEconomy Dec 2025. 10-yr PPA to NBN Co delivering 59 GWh/yr. Owner is Metlen (rebranded from Mytilineos), not SPV name. Third NBN Co solar (completed NBN trifecta).",
     "first_seen": "2023"
+  },
+  {
+    "id": "murchs-corner-bess-kci",
+    "name": "Murchs Corner BESS - KCI",
+    "technology": "bess",
+    "status": "development",
+    "capacity_mw": 500.0,
+    "state": "VIC",
+    "current_developer": "Murchs\u2019 Corner Energy Pty Ltd",
+    "data_confidence": "low",
+    "development_stage": "planning_submitted"
   },
   {
     "id": "murra-warra-wind-farm-stage-1",
@@ -9292,6 +9520,17 @@
     "confidence_score": "15",
     "development_stage": "planning_submitted",
     "zombie_flag": "zombie_minimal"
+  },
+  {
+    "id": "nerriga-bess-kci",
+    "name": "Nerriga BESS - KCI",
+    "technology": "bess",
+    "status": "development",
+    "capacity_mw": 600.0,
+    "state": "NSW",
+    "current_developer": "Northharbour",
+    "data_confidence": "low",
+    "development_stage": "planning_submitted"
   },
   {
     "id": "nevertire-solar-farm",
@@ -10460,7 +10699,7 @@
     "storage_mwh": 1600.0,
     "state": "QLD",
     "current_developer": "EDPR (EDP Renewables Australia) + QIC (JV)",
-    "data_confidence": "confirmed",
+    "data_confidence": "high",
     "development_stage": "early_stage",
     "notable": "CIS T4 award Oct 2025 (400 MW solar + 400 MW / 1,600 MWh BESS integrated hybrid). EDPR + QIC exclusivity/JV. FC expected 2026, commissioning early 2029. Part of EDPs 1.7 GW Aus fast-track pipeline (also incl. Merino NSW). Reconciliation: existing AURES records punchs-creek-hybrid-stage-2/3-kci (200+600 MW BESS EDPR) are stale multi-stage attributions that predate the consolidated T4 award scope. SkyLabs legacy Punch and Creek 87 MW is a separate project. Created 2026-07-18 to close v3.22.1 data gap.",
     "first_seen": "2026-07-18",
@@ -10726,9 +10965,9 @@
     "name": "Riverland Solar Storage - Solar",
     "technology": "solar",
     "status": "development",
-    "capacity_mw": 330.0,
+    "capacity_mw": 300.0,
     "state": "SA",
-    "current_developer": "Lyon Solar",
+    "current_developer": "OX2",
     "data_confidence": "low",
     "confidence_score": "15",
     "development_stage": "planning_submitted",
@@ -10739,9 +10978,10 @@
     "name": "Riverland Solar Storage - Storage",
     "technology": "bess",
     "status": "development",
-    "capacity_mw": 100.0,
+    "capacity_mw": 300.0,
+    "storage_mwh": 344.0,
     "state": "SA",
-    "current_developer": "Lyon Solar",
+    "current_developer": "OX2",
     "data_confidence": "low",
     "confidence_score": "15",
     "development_stage": "planning_submitted",
@@ -10829,11 +11069,12 @@
   {
     "id": "romani-solar-farm",
     "name": "Romani Solar Farm",
-    "technology": "solar",
+    "technology": "hybrid",
     "status": "development",
     "capacity_mw": 250.0,
+    "storage_mwh": 864.0,
     "state": "NSW",
-    "current_developer": "Samsung C&amp;T Renewable Energy Australia Pty Ltd",
+    "current_developer": "Samsung C&amp;amp;amp;T Renewable Energy Australia Pty Ltd",
     "data_confidence": "low",
     "confidence_score": "15",
     "development_stage": "planning_submitted",
@@ -11139,11 +11380,12 @@
   {
     "id": "sandy-point-hybrid-solar",
     "name": "Sandy Point Hybrid - Solar",
-    "technology": "solar",
+    "technology": "hybrid",
     "status": "development",
-    "capacity_mw": 150.0,
+    "capacity_mw": 250.0,
+    "storage_mwh": 1008.0,
     "state": "NSW",
-    "current_developer": "Samsung C&T Renewable Energy Australia Pty Ltd.",
+    "current_developer": "Samsung C&amp;amp;T Renewable Energy Australia Pty Ltd.",
     "data_confidence": "low",
     "confidence_score": "15",
     "development_stage": "planning_submitted",
@@ -11285,7 +11527,7 @@
     "name": "Skye Ridge Wind Farm",
     "technology": "wind",
     "status": "development",
-    "capacity_mw": 1300.0,
+    "capacity_mw": 750.0,
     "state": "NSW",
     "current_developer": "Origin Energy Pty Ltd",
     "data_confidence": "low",
@@ -11615,7 +11857,7 @@
     "rez": "Fitzroy",
     "data_confidence": "medium",
     "confidence_score": "28",
-    "development_stage": "early_stage",
+    "development_stage": "planning_submitted",
     "first_seen": "2026-03-12"
   },
   {
@@ -12080,6 +12322,18 @@
     "first_seen": "2026-03-12"
   },
   {
+    "id": "tummaville-hybrid-facility-solar-and-bess",
+    "name": "TUMMAVILLE Hybrid Facility- Solar And BESS",
+    "technology": "hybrid",
+    "status": "development",
+    "capacity_mw": 500.0,
+    "storage_mwh": 1996.8,
+    "state": "QLD",
+    "current_developer": "TUMMAVILLE SOLAR FARM PTY LTD ATF TUMMAVILLE SOLAR FARM UNIT TRUST",
+    "data_confidence": "low",
+    "development_stage": "planning_submitted"
+  },
+  {
     "id": "tabulam-bess",
     "name": "Tabulam BESS",
     "technology": "bess",
@@ -12090,6 +12344,18 @@
     "current_developer": "Elgin Energy Pty Ltd",
     "data_confidence": "low",
     "confidence_score": "20",
+    "development_stage": "planning_submitted"
+  },
+  {
+    "id": "tabulam-solar-farm-and-bess",
+    "name": "Tabulam Solar Farm and BESS",
+    "technology": "hybrid",
+    "status": "development",
+    "capacity_mw": 100.0,
+    "storage_mwh": 200.0,
+    "state": "NSW",
+    "current_developer": "Elgin Energy Pty Ltd",
+    "data_confidence": "low",
     "development_stage": "planning_submitted"
   },
   {
@@ -12866,6 +13132,17 @@
     "development_stage": "planning_submitted"
   },
   {
+    "id": "tuggerah-bess-kci",
+    "name": "Tuggerah BESS - KCI",
+    "technology": "bess",
+    "status": "development",
+    "capacity_mw": 500.0,
+    "state": "NSW",
+    "current_developer": "BG Admin Pty Ltd",
+    "data_confidence": "low",
+    "development_stage": "planning_submitted"
+  },
+  {
     "id": "tully-bess",
     "name": "Tully BESS",
     "technology": "bess",
@@ -12904,6 +13181,18 @@
     "confidence_score": "15",
     "development_stage": "planning_submitted",
     "zombie_flag": "zombie_minimal"
+  },
+  {
+    "id": "tumuruu-bess-and-solar-farm",
+    "name": "Tumuruu BESS and Solar Farm",
+    "technology": "hybrid",
+    "status": "development",
+    "capacity_mw": 400.0,
+    "storage_mwh": 1920.0,
+    "state": "QLD",
+    "current_developer": "Australian Solar Enterprises Pty Ltd",
+    "data_confidence": "low",
+    "development_stage": "planning_submitted"
   },
   {
     "id": "tumuruu-one",
@@ -12945,6 +13234,17 @@
     "confidence_score": "46",
     "notable": "125 MW hydro in Tasmania's Central Highlands, second station in the Derwent scheme. Five Boving Francis turbines (1953-1956). Water descends 290m through five steel penstocks from Tungatinah Lagoon. Heritage-listed. Hydro Tasmania.",
     "first_seen": "1954-12-31"
+  },
+  {
+    "id": "tungkillo-bess-kci",
+    "name": "Tungkillo BESS - KCI",
+    "technology": "bess",
+    "status": "development",
+    "capacity_mw": 270.0,
+    "state": "SA",
+    "current_developer": "Iberdrola Australia Limited",
+    "data_confidence": "low",
+    "development_stage": "planning_submitted"
   },
   {
     "id": "tungkillo-south-bess",
@@ -13289,8 +13589,8 @@
     "name": "Wallerawang 9 BESS",
     "technology": "bess",
     "status": "development",
-    "capacity_mw": 500.0,
-    "storage_mwh": 600.0,
+    "capacity_mw": 300.0,
+    "storage_mwh": 774.0,
     "state": "NSW",
     "current_developer": "Greenspot Wallerawang Pty Ltd as trustee for the Greenspot Wallerawang Unit Trust",
     "data_confidence": "low",
@@ -13319,7 +13619,7 @@
     "id": "wambo-wind-farm",
     "name": "Wambo Wind Farm",
     "technology": "wind",
-    "status": "construction",
+    "status": "commissioning",
     "capacity_mw": 500.0,
     "state": "QLD",
     "current_developer": "Cubico Sustainable Investments Australia Pty Ltd",
@@ -13474,6 +13774,18 @@
     "first_seen": "2020-09-22"
   },
   {
+    "id": "waterloo-bess",
+    "name": "Waterloo BESS",
+    "technology": "bess",
+    "status": "development",
+    "capacity_mw": 120.0,
+    "storage_mwh": 489.28,
+    "state": "SA",
+    "current_developer": "Eku Energy Projects (Australia) Pty Ltd as trustee for the Eku Energy Projects Australia Trust",
+    "data_confidence": "low",
+    "development_stage": "planning_submitted"
+  },
+  {
     "id": "waterloo-wind-farm",
     "name": "Waterloo Wind Farm",
     "technology": "wind",
@@ -13566,7 +13878,7 @@
     "technology": "bess",
     "status": "development",
     "capacity_mw": 200.0,
-    "storage_mwh": 200.0,
+    "storage_mwh": 400.0,
     "state": "VIC",
     "current_developer": "Acciona Energy Australia Global",
     "data_confidence": "low",
@@ -13863,7 +14175,7 @@
     "technology": "hybrid",
     "status": "development",
     "capacity_mw": 450.0,
-    "storage_mwh": 378.0,
+    "storage_mwh": 396.0,
     "state": "VIC",
     "current_developer": "Wind Prospect WA Pty Ltd",
     "data_confidence": "low",
@@ -13921,7 +14233,7 @@
     "capacity_mw": 108.0,
     "state": "SA",
     "current_developer": "ENGIE (25%) + Foresight Group (75%) JV",
-    "data_confidence": "confirmed",
+    "data_confidence": "high",
     "development_stage": "early_stage",
     "notable": "CIS T4 award Oct 2025 (108 MW). Expansion of operating Willogoleche 1 (119 MW commissioned 2019). Construction late 2026, commissioning 2028. Same JV structure as Willogoleche 1. Created 2026-07-18 to close v3.22.1 data gap.",
     "first_seen": "2026-07-18",
@@ -13970,6 +14282,17 @@
     "first_seen": "2024"
   },
   {
+    "id": "wimmera-plains-energy-facility-stage-2-kci",
+    "name": "Wimmera Plains Energy Facility Stage 2 - KCI",
+    "technology": "wind",
+    "status": "development",
+    "capacity_mw": 130.0,
+    "state": "VIC",
+    "current_developer": "BayWa r.e. Australia Pty Ltd",
+    "data_confidence": "low",
+    "development_stage": "planning_submitted"
+  },
+  {
     "id": "wimmera-plains-wind-farm-kci",
     "name": "Wimmera Plains Wind Farm - KCI",
     "technology": "wind",
@@ -13981,6 +14304,17 @@
     "confidence_score": "15",
     "development_stage": "planning_submitted",
     "zombie_flag": "zombie_minimal"
+  },
+  {
+    "id": "wimpole-bess-kci",
+    "name": "Wimpole BESS - KCI",
+    "technology": "bess",
+    "status": "development",
+    "capacity_mw": 220.0,
+    "state": "VIC",
+    "current_developer": "AMPYR Energy",
+    "data_confidence": "low",
+    "development_stage": "planning_submitted"
   },
   {
     "id": "winterbourne-wind-farm",
@@ -14034,6 +14368,17 @@
     "confidence_score": "23",
     "development_stage": "early_stage",
     "first_seen": "2026-03-12"
+  },
+  {
+    "id": "winton-renewable-energy-storage-and-stability-terminal-wresst",
+    "name": "Winton Renewable Energy Storage and Stability Terminal (WRESST)",
+    "technology": "bess",
+    "status": "development",
+    "capacity_mw": 400.0,
+    "state": "VIC",
+    "current_developer": "Winton Renewable Energy Stability and Storage Terminal Pty Ltd",
+    "data_confidence": "low",
+    "development_stage": "planning_submitted"
   },
   {
     "id": "winton-solar-farm",
@@ -14188,10 +14533,10 @@
   {
     "id": "woodstock-renewable-energy-hub-bess",
     "name": "Woodstock Renewable Energy Hub - BESS",
-    "technology": "bess",
+    "technology": "hybrid",
     "status": "development",
-    "capacity_mw": 250.0,
-    "storage_mwh": 250.0,
+    "capacity_mw": 650.0,
+    "storage_mwh": 2000.0,
     "state": "QLD",
     "current_developer": "Private Energy Partners",
     "data_confidence": "low",
@@ -14585,7 +14930,7 @@
     "technology": "hybrid",
     "status": "development",
     "capacity_mw": 400.0,
-    "storage_mwh": 1600.0,
+    "storage_mwh": 800.0,
     "state": "QLD",
     "current_developer": "Elgin Energy",
     "data_confidence": "low",

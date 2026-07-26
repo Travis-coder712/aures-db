@@ -208,8 +208,7 @@
         "VIC": 1
       },
       "statuses": {
-        "construction": 1,
-        "operating": 6
+        "operating": 7
       },
       "top_developers": [
         [
@@ -911,7 +910,8 @@
         "QLD": 1
       },
       "statuses": {
-        "construction": 2
+        "construction": 1,
+        "commissioning": 1
       },
       "top_developers": [
         [
@@ -2841,7 +2841,7 @@
         "developer": "Genex Power",
         "model": null,
         "source_url": "https://www.mcconnelldowell.com/projects/kidston-pumped-storage-hydro",
-        "drift_months": 0.0
+        "drift_months": 6.0
       }
     ],
     "AFRY-Aurecon JV (design services)": [
@@ -2909,12 +2909,12 @@
         "role": "epc",
         "technology": "wind",
         "state": "QLD",
-        "status": "construction",
+        "status": "commissioning",
         "capacity_mw": 500.0,
         "developer": "Cubico Sustainable Investments Australia Pty Ltd",
         "model": null,
         "source_url": null,
-        "drift_months": null
+        "drift_months": 0.0
       }
     ],
     "GE Vernova + NACAP + CCP (consortium)": [
@@ -2970,7 +2970,7 @@
         "developer": "Tilt Renewables Australia Pty Ltd",
         "model": null,
         "source_url": null,
-        "drift_months": 0.0
+        "drift_months": 24.3
       },
       {
         "project_id": "dundonnell-wind-farm",
@@ -2998,7 +2998,7 @@
         "developer": "Georgetown Hills Renewable Energy Pty Ltd as trustee for the Georgetown Hills Renewable Energy Trust",
         "model": null,
         "source_url": "https://www.insideconstruction.com.au/news/latest-news/dt-infrastructure-wins-contract-to-deliver-carmodys-hill-wind-farm",
-        "drift_months": null
+        "drift_months": 0.0
       }
     ],
     "DT Infrastructure / Gamuda": [
@@ -3028,7 +3028,7 @@
         "developer": "Quinbrook Infrastructure Partners",
         "model": null,
         "source_url": "https://nuenergy.au/nuenergy-landmark-supernode-battery-storage-project/",
-        "drift_months": 4.8
+        "drift_months": 5.8
       }
     ],
     "Enerven (SA Power Networks)": [
@@ -3201,7 +3201,7 @@
         "developer": "ZEBRE Pty Ltd",
         "model": null,
         "source_url": "https://www.zenenergy.com.au/templers-battery/",
-        "drift_months": 0.0
+        "drift_months": 3.2
       },
       {
         "project_id": "waratah-super-battery",
@@ -3259,7 +3259,7 @@
         "developer": "Valent Energy (Gaw Capital / BW ESS)",
         "model": null,
         "source_url": "https://www.acle.com.au/our-projects-2/",
-        "drift_months": 0.0
+        "drift_months": 5.1
       },
       {
         "project_id": "pine-lodge-bess",
@@ -3364,12 +3364,12 @@
         "role": "bop",
         "technology": "bess",
         "state": "NSW",
-        "status": "construction",
+        "status": "operating",
         "capacity_mw": 50.0,
         "developer": "LIMONDALE BATTERY PTY. LTD",
         "model": null,
         "source_url": "https://beon-es.com.au/project/limondale/",
-        "drift_months": null
+        "drift_months": 0.0
       },
       {
         "project_id": "avonlie-solar-farm",
@@ -3462,7 +3462,7 @@
         "developer": "Pacific Blue (SPIC China)",
         "model": null,
         "source_url": "https://www.energymagazine.com.au/constuction-of-60mw-clements-gap-bess-underway/",
-        "drift_months": 0.0
+        "drift_months": 4.8
       }
     ],
     "Enerven": [
@@ -3477,7 +3477,7 @@
         "developer": "Origin Energy Electricity Limited",
         "model": null,
         "source_url": "https://www.enerven.com.au/projects/eraring-battery-energy-storage-system/",
-        "drift_months": null
+        "drift_months": 0.0
       }
     ],
     "Wartsila": [
@@ -6625,5 +6625,5 @@
       "both": 4
     }
   },
-  "exported_at": "2026-07-26T13:12:26.133528"
+  "exported_at": "2026-07-26T18:36:15.348221"
 }

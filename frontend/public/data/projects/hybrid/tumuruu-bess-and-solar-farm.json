@@ -1,0 +1,41 @@
+{
+  "id": "tumuruu-bess-and-solar-farm",
+  "name": "Tumuruu BESS and Solar Farm",
+  "technology": "hybrid",
+  "status": "development",
+  "capacity_mw": 400.0,
+  "storage_mwh": 1920.0,
+  "state": "QLD",
+  "current_developer": "Australian Solar Enterprises Pty Ltd",
+  "cod_current": "2028-04-30",
+  "cod_original": "2028-04-30",
+  "connection_status": "anticipated",
+  "data_confidence": "low",
+  "last_updated": "2026-07-26",
+  "last_verified": "2026-07-26",
+  "aemo_gen_info_id": "3227",
+  "development_stage": "planning_submitted",
+  "timeline": [
+    {
+      "date": "2026-07-26",
+      "date_precision": "day",
+      "event_type": "cod_change",
+      "title": "COD estimate updated",
+      "detail": "COD changed from 2028-04 to 2028-04-30 (source: AEMO Generation Information)",
+      "sources": []
+    }
+  ],
+  "ownership_history": [],
+  "cod_history": [],
+  "suppliers": [],
+  "offtakes": [],
+  "scheme_contracts": [],
+  "cost_sources": [],
+  "stakeholder_issues": [],
+  "sources": [
+    {
+      "title": "AEMO Generation Information",
+      "url": "https://aemo.com.au/energy-systems/electricity/national-electricity-market-nem/nem-forecasting-and-planning/forecasting-and-planning-data/generation-information"
+    }
+  ]
+}

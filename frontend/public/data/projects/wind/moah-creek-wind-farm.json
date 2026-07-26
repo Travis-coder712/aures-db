@@ -6,7 +6,7 @@
   "capacity_mw": 349.0,
   "state": "QLD",
   "current_developer": "Moah Creek Wind Farm Project Co Pty Ltd as trustee for the Moah Creek Wind Farm Project Trust",
-  "cod_current": "2028-03",
+  "cod_current": "2029-12-28",
   "cod_original": "2028-03-31",
   "connection_status": "proposed",
   "grid_forming": false,
@@ -14,7 +14,7 @@
   "has_syncon": false,
   "has_statcom": false,
   "has_harmonic_filter": false,
-  "data_confidence": "confirmed",
+  "data_confidence": "high",
   "last_updated": "2026-07-16",
   "last_verified": "2026-07-16",
   "aemo_gen_info_id": "2253",
@@ -36,6 +36,14 @@
       "event_type": "cod_change",
       "title": "COD estimate updated",
       "detail": "COD changed from 2028-03 to 2028-03-31 (source: AEMO Generation Information)",
+      "sources": []
+    },
+    {
+      "date": "2026-07-26",
+      "date_precision": "day",
+      "event_type": "cod_change",
+      "title": "COD estimate updated",
+      "detail": "COD changed from 2029-12 to 2029-12-28 (source: AEMO Generation Information)",
       "sources": []
     }
   ],

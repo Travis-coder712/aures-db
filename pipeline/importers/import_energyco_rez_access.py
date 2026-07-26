@@ -281,8 +281,11 @@ def aggregate_project_access(cur):
 def insert_timeline_events(cur):
     """Add a `rez_access` timeline_event for each access right, idempotently.
 
-    Dedupe by checking for an existing event with the same project_id +
-    same access_right_id embedded in the detail.
+    Each event carries data_source = 'energyco:<access_right_id>', which
+    makes the row unique on (project_id, event_type, date, data_source)
+    — enforced by the partial UNIQUE index. ON CONFLICT DO NOTHING is the
+    idempotency mechanism; the previous `detail LIKE '%<id>%'` check was
+    fragile against changes to the detail template.
     """
     cur.execute("""
         SELECT er.project_id, er.access_right_id, er.rez_scheme,
@@ -294,15 +297,6 @@ def insert_timeline_events(cur):
     inserted = 0
     for r in cur.fetchall():
         access_right_id = r['access_right_id']
-        # Check if already present
-        cur.execute("""
-            SELECT 1 FROM timeline_events
-             WHERE project_id = ?
-               AND event_type = 'rez_access'
-               AND detail LIKE ?
-        """, (r['project_id'], f'%{access_right_id}%'))
-        if cur.fetchone():
-            continue
         scheme_label = 'Central-West Orana' if r['rez_scheme'] == 'CWO' else 'South West'
         title = f"REZ access right granted ({scheme_label})"
         detail = (
@@ -310,12 +304,17 @@ def insert_timeline_events(cur):
             f"{r['project_name_raw']} — {r['max_capacity_mw']} MW · "
             f"scheme: {scheme_label} REZ · status: {r['access_status']}."
         )
-        cur.execute("""
+        data_source = f'energyco:{access_right_id}'
+        result = cur.execute("""
             INSERT INTO timeline_events (project_id, date, date_precision,
-                event_type, title, detail)
-            VALUES (?, ?, 'day', 'rez_access', ?, ?)
-        """, (r['project_id'], r['registration_date'], title, detail))
-        inserted += 1
+                event_type, title, detail, data_source)
+            VALUES (?, ?, 'day', 'rez_access', ?, ?, ?)
+            ON CONFLICT(project_id, event_type, date, data_source)
+              WHERE data_source != 'manual'
+              DO NOTHING
+        """, (r['project_id'], r['registration_date'], title, detail, data_source))
+        if result.rowcount:
+            inserted += 1
     return inserted
 
 

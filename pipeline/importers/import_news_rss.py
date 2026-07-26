@@ -6,6 +6,7 @@ Sources:
   - RenewEconomy (reneweconomy.com.au)
   - PV Magazine Australia (pv-magazine-australia.com)
   - Energy Storage News (energy-storage.news)
+  - WattClarity / Global Roam (wattclarity.com.au) — NEM operational analysis
 
 Fuzzy-matches article titles against project names to tag related projects.
 
@@ -45,6 +46,11 @@ FEEDS = [
         'name': 'Energy Storage News',
         'url': 'https://www.energy-storage.news/feed/',
         'source_id': 'energy-storage-news',
+    },
+    {
+        'name': 'WattClarity',
+        'url': 'https://wattclarity.com.au/feed/',
+        'source_id': 'wattclarity',
     },
 ]
 

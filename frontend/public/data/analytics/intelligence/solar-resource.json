@@ -1543,7 +1543,7 @@
       "name": "Cimitiere Plains Solar Farm",
       "state": "TAS",
       "capacity_mw": 288.0,
-      "developer": "Sun Spot 9 Pty Ltd",
+      "developer": "Ib vogt GmbH",
       "predicted_rating": "Unknown",
       "basis": "state_average"
     },
@@ -1599,6 +1599,16 @@
       "basis": "state_average"
     },
     {
+      "project_id": "deepwater-hybrid-facility",
+      "name": "Deepwater Hybrid Facility",
+      "state": "NSW",
+      "capacity_mw": 120.0,
+      "developer": "Ib vogt Development Australia Pty Ltd",
+      "predicted_cf_pct": 20.4,
+      "predicted_rating": "Average",
+      "basis": "state_average"
+    },
+    {
       "project_id": "dingo-solar-farm",
       "name": "Dingo Solar Farm",
       "state": "QLD",
@@ -1633,7 +1643,7 @@
       "name": "Dunmore Solar Farm",
       "state": "QLD",
       "capacity_mw": 300.0,
-      "developer": "Samsung C&amp;T",
+      "developer": "Samsung C&amp;amp;amp;T",
       "predicted_cf_pct": 22.3,
       "predicted_rating": "Average",
       "basis": "state_average"
@@ -1644,16 +1654,6 @@
       "state": "NSW",
       "capacity_mw": 350.0,
       "developer": "Voltere Pty Ltd.",
-      "predicted_cf_pct": 20.4,
-      "predicted_rating": "Average",
-      "basis": "state_average"
-    },
-    {
-      "project_id": "emu-park-solar-farm",
-      "name": "Emu Park Solar Farm",
-      "state": "NSW",
-      "capacity_mw": 300.0,
-      "developer": "M Renweables Australia",
       "predicted_cf_pct": 20.4,
       "predicted_rating": "Average",
       "basis": "state_average"
@@ -1718,16 +1718,6 @@
       "state": "NSW",
       "capacity_mw": 134.0,
       "developer": "Greenpulse solar farm and BESS as trustee for Greenpulse Solar Farm & Bess Unit Trust",
-      "predicted_cf_pct": 20.4,
-      "predicted_rating": "Average",
-      "basis": "state_average"
-    },
-    {
-      "project_id": "gerogery-solar-farm-kci",
-      "name": "Gerogery Solar Farm - KCI",
-      "state": "NSW",
-      "capacity_mw": 125.0,
-      "developer": "Elgin Energy Pty Ltd",
       "predicted_cf_pct": 20.4,
       "predicted_rating": "Average",
       "basis": "state_average"
@@ -2276,8 +2266,8 @@
       "project_id": "riverland-solar-storage-solar",
       "name": "Riverland Solar Storage - Solar",
       "state": "SA",
-      "capacity_mw": 330.0,
-      "developer": "Lyon Solar",
+      "capacity_mw": 300.0,
+      "developer": "OX2",
       "predicted_cf_pct": 16.1,
       "predicted_rating": "Below Average",
       "basis": "state_average"
@@ -2288,16 +2278,6 @@
       "state": "NSW",
       "capacity_mw": 220.0,
       "developer": "X-Elio Australia Pty Ltd",
-      "predicted_cf_pct": 20.4,
-      "predicted_rating": "Average",
-      "basis": "state_average"
-    },
-    {
-      "project_id": "romani-solar-farm",
-      "name": "Romani Solar Farm",
-      "state": "NSW",
-      "capacity_mw": 250.0,
-      "developer": "Samsung C&amp;T Renewable Energy Australia Pty Ltd",
       "predicted_cf_pct": 20.4,
       "predicted_rating": "Average",
       "basis": "state_average"
@@ -2360,16 +2340,6 @@
       "rez": "nsw-central-west-orana",
       "capacity_mw": 700.0,
       "developer": "Sandy Creek Solar Fund Pty Ltd",
-      "predicted_cf_pct": 20.4,
-      "predicted_rating": "Average",
-      "basis": "state_average"
-    },
-    {
-      "project_id": "sandy-point-hybrid-solar",
-      "name": "Sandy Point Hybrid - Solar",
-      "state": "NSW",
-      "capacity_mw": 150.0,
-      "developer": "Samsung C&T Renewable Energy Australia Pty Ltd.",
       "predicted_cf_pct": 20.4,
       "predicted_rating": "Average",
       "basis": "state_average"
@@ -2788,15 +2758,25 @@
       "predicted_cf_pct": 16.1,
       "predicted_rating": "Below Average",
       "basis": "state_average"
+    },
+    {
+      "project_id": "carwarp-solar-farm-cwsf",
+      "name": "Carwarp Solar Farm (CWSF)",
+      "state": "VIC",
+      "capacity_mw": 150.0,
+      "developer": "CS SubCo Pty Ltd as trustee for Carwarp SF SPV",
+      "predicted_cf_pct": 21.0,
+      "predicted_rating": "Average",
+      "basis": "state_average"
     }
   ],
   "total_operating": 78,
-  "total_development": 150,
+  "total_development": 148,
   "cf_rating_thresholds": {
     "Excellent": "\u2265 29%",
     "Good": "24% \u2013 29%",
     "Average": "20% \u2013 24%",
     "Below Average": "< 20%"
   },
-  "exported_at": "2026-07-26T13:12:26.277880"
+  "exported_at": "2026-07-26T18:36:15.488258"
 }

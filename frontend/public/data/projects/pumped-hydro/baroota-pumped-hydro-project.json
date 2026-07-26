@@ -6,6 +6,8 @@
   "capacity_mw": 250.0,
   "state": "SA",
   "current_developer": "ACEN Renewables",
+  "cod_current": "2030-12-01",
+  "cod_original": "2030-12-01",
   "connection_status": "proposed",
   "grid_forming": false,
   "has_sips": false,
@@ -19,7 +21,16 @@
   "confidence_score": "15",
   "development_stage": "planning_submitted",
   "zombie_flag": "zombie_minimal",
-  "timeline": [],
+  "timeline": [
+    {
+      "date": "2026-07-26",
+      "date_precision": "day",
+      "event_type": "cod_change",
+      "title": "COD estimate updated",
+      "detail": "COD changed from 2030-12 to 2030-12-01 (source: AEMO Generation Information)",
+      "sources": []
+    }
+  ],
   "ownership_history": [],
   "cod_history": [],
   "suppliers": [],

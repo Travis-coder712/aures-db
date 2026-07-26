@@ -7,7 +7,7 @@
   "storage_mwh": 800.0,
   "state": "QLD",
   "current_developer": "Stanwell Lockyer Project Co Pty Ltd",
-  "cod_current": "2030-09-30",
+  "cod_current": "2040-07-01",
   "cod_original": "2030-09-30",
   "connection_status": "anticipated",
   "grid_forming": false,
@@ -29,6 +29,14 @@
       "event_type": "cod_change",
       "title": "COD estimate updated",
       "detail": "COD changed from 2030-09 to 2030-09-30 (source: AEMO Generation Information)",
+      "sources": []
+    },
+    {
+      "date": "2026-07-26",
+      "date_precision": "day",
+      "event_type": "cod_change",
+      "title": "COD estimate updated",
+      "detail": "COD changed from 2030-09-30 to 2040-07-01 (source: AEMO Generation Information)",
       "sources": []
     }
   ],

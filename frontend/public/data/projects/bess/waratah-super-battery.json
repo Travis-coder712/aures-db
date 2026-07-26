@@ -9,7 +9,7 @@
   "lga": "Lake Macquarie",
   "current_developer": "Akaysha Energy (BlackRock)",
   "current_operator": "Akaysha Energy",
-  "cod_current": "2024-11",
+  "cod_current": "2026-09-01",
   "cod_original": "2025",
   "connection_status": "operating",
   "connection_nsp": "Transgrid",
@@ -105,6 +105,14 @@
       "event_type": "notable",
       "title": "Replacement transformer manufacturing underway",
       "detail": "Wilson Transformer manufacturing replacement HVT3. Design review completed by CPP and independent consultants. Delivery to site targeted Q3 2026.",
+      "sources": []
+    },
+    {
+      "date": "2026-07-26",
+      "date_precision": "day",
+      "event_type": "cod_change",
+      "title": "COD estimate updated",
+      "detail": "COD changed from 2024-11 to 2026-09-01 (source: AEMO Generation Information)",
       "sources": []
     },
     {

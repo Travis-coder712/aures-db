@@ -7,7 +7,7 @@
   "storage_mwh": 1080.0,
   "state": "VIC",
   "current_developer": "Valent Energy (Gaw Capital / BW ESS)",
-  "cod_current": "2026-02-28",
+  "cod_current": "2026-07-31",
   "cod_original": "2026-02-28",
   "connection_status": "committed",
   "grid_forming": false,
@@ -55,6 +55,14 @@
       "event_type": "cod_change",
       "title": "COD estimate updated",
       "detail": "COD changed from 2026-02 to 2026-02-28 (source: AEMO Generation Information)",
+      "sources": []
+    },
+    {
+      "date": "2026-07-26",
+      "date_precision": "day",
+      "event_type": "cod_change",
+      "title": "COD estimate updated",
+      "detail": "COD changed from 2026-02-28 to 2026-07-31 (source: AEMO Generation Information)",
       "sources": []
     }
   ],

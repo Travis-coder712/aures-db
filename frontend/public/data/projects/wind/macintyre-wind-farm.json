@@ -7,7 +7,7 @@
   "state": "QLD",
   "rez": "Southern Downs",
   "current_developer": "Macintyre Windfarm Pty Ltd and Arc Energy Macintyre Pty Ltd",
-  "cod_current": "2025-11-30",
+  "cod_current": "2026-12-01",
   "cod_original": "2025-11-30",
   "connection_status": "commissioning",
   "grid_forming": false,
@@ -72,6 +72,14 @@
       "event_type": "cod_change",
       "title": "COD estimate updated",
       "detail": "COD changed from 2025-11 to 2025-11-30 (source: AEMO Generation Information)",
+      "sources": []
+    },
+    {
+      "date": "2026-07-26",
+      "date_precision": "day",
+      "event_type": "cod_change",
+      "title": "COD estimate updated",
+      "detail": "COD changed from 2025-11-30 to 2026-12-01 (source: AEMO Generation Information)",
       "sources": []
     }
   ],

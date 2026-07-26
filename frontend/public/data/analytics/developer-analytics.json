@@ -2622,9 +2622,9 @@
         "state": "NSW",
         "status": "development",
         "capacity_mw": 60.0,
-        "cod_current": "2027-05",
+        "cod_current": "2027-05-31",
         "cod_original": "2027-05-31",
-        "drift_months": null
+        "drift_months": 0.0
       },
       {
         "id": "yanco-delta",
@@ -2644,20 +2644,9 @@
         "state": "NSW",
         "status": "development",
         "capacity_mw": 450.0,
-        "cod_current": "2029-07",
+        "cod_current": "2029-07-31",
         "cod_original": "2029-07-31",
-        "drift_months": null
-      },
-      {
-        "id": "morgan-long-duration-energy-storage-kci",
-        "name": "Morgan Long Duration Energy Storage - KCI",
-        "technology": "bess",
-        "state": "SA",
-        "status": "development",
-        "capacity_mw": 40.0,
-        "cod_current": null,
-        "cod_original": null,
-        "drift_months": null
+        "drift_months": 0.0
       },
       {
         "id": "shoalhaven-expansion",
@@ -2666,6 +2655,17 @@
         "state": "NSW",
         "status": "development",
         "capacity_mw": 235.0,
+        "cod_current": "2033-12-31",
+        "cod_original": "2033-12-31",
+        "drift_months": 0.0
+      },
+      {
+        "id": "morgan-long-duration-energy-storage-kci",
+        "name": "Morgan Long Duration Energy Storage - KCI",
+        "technology": "bess",
+        "state": "SA",
+        "status": "development",
+        "capacity_mw": 40.0,
         "cod_current": null,
         "cod_original": null,
         "drift_months": null
@@ -2756,17 +2756,6 @@
     ],
     "Akaysha Energy (BlackRock)": [
       {
-        "id": "waratah-super-battery",
-        "name": "Waratah Super Battery",
-        "technology": "bess",
-        "state": "NSW",
-        "status": "operating",
-        "capacity_mw": 850.0,
-        "cod_current": "2024-11",
-        "cod_original": "2025",
-        "drift_months": null
-      },
-      {
         "id": "ulinda-park-bess",
         "name": "Ulinda Park BESS",
         "technology": "bess",
@@ -2798,6 +2787,17 @@
         "cod_current": "2026-06-30",
         "cod_original": "2026-06-30",
         "drift_months": 0.0
+      },
+      {
+        "id": "waratah-super-battery",
+        "name": "Waratah Super Battery",
+        "technology": "bess",
+        "state": "NSW",
+        "status": "operating",
+        "capacity_mw": 850.0,
+        "cod_current": "2026-09-01",
+        "cod_original": "2025",
+        "drift_months": 81975.3
       },
       {
         "id": "elaine-bess",
@@ -2924,9 +2924,9 @@
         "state": "NSW",
         "status": "development",
         "capacity_mw": 450.0,
-        "cod_current": null,
-        "cod_original": null,
-        "drift_months": null
+        "cod_current": "2029-12-15",
+        "cod_original": "2029-12-15",
+        "drift_months": 0.0
       },
       {
         "id": "waubra-bess-kci",
@@ -2935,9 +2935,9 @@
         "state": "VIC",
         "status": "development",
         "capacity_mw": 200.0,
-        "cod_current": null,
-        "cod_original": null,
-        "drift_months": null
+        "cod_current": "2029-12-15",
+        "cod_original": "2029-12-15",
+        "drift_months": 0.0
       }
     ],
     "Acciona Energy Australia Global Pty Ltd": [
@@ -2959,9 +2959,9 @@
         "state": "NSW",
         "status": "development",
         "capacity_mw": 1710.0,
-        "cod_current": null,
-        "cod_original": null,
-        "drift_months": null
+        "cod_current": "2036-12-15",
+        "cod_original": "2036-12-15",
+        "drift_months": 0.0
       }
     ],
     "Alligator Creek BESS Pty Ltd": [
@@ -2998,9 +2998,9 @@
         "state": "NSW",
         "status": "development",
         "capacity_mw": 200.0,
-        "cod_current": null,
-        "cod_original": null,
-        "drift_months": null
+        "cod_current": "2032-12-01",
+        "cod_original": "2032-12-01",
+        "drift_months": 0.0
       }
     ],
     "Aramara Solar Pty Ltd": [
@@ -3011,9 +3011,9 @@
         "state": "QLD",
         "status": "development",
         "capacity_mw": 101.4,
-        "cod_current": "2028-06",
+        "cod_current": "2028-06-15",
         "cod_original": "2028-06-15",
-        "drift_months": null
+        "drift_months": 0.0
       }
     ],
     "Ararat Wind Farm Pty Ltd": [
@@ -3061,8 +3061,19 @@
         "state": "NSW",
         "status": "development",
         "capacity_mw": 330.0,
-        "cod_current": "2030-03-01",
+        "cod_current": "2030-10-01",
         "cod_original": "2030-03-01",
+        "drift_months": 7.1
+      },
+      {
+        "id": "moah-creek-solar-farm",
+        "name": "Moah Creek Solar Farm",
+        "technology": "solar",
+        "state": "QLD",
+        "status": "development",
+        "capacity_mw": 390.0,
+        "cod_current": "2030-12-01",
+        "cod_original": "2030-12-01",
         "drift_months": 0.0
       },
       {
@@ -3072,9 +3083,9 @@
         "state": "VIC",
         "status": "development",
         "capacity_mw": 306.0,
-        "cod_current": "2030-12",
+        "cod_current": "2030-12-30",
         "cod_original": "2030-12-30",
-        "drift_months": null
+        "drift_months": 0.0
       },
       {
         "id": "argoon-wind-farm-res-group-kci",
@@ -3082,10 +3093,10 @@
         "technology": "wind",
         "state": "NSW",
         "status": "development",
-        "capacity_mw": 540.0,
-        "cod_current": null,
-        "cod_original": null,
-        "drift_months": null
+        "capacity_mw": 763.0,
+        "cod_current": "2030-12-31",
+        "cod_original": "2030-12-31",
+        "drift_months": 0.0
       },
       {
         "id": "bogandilla-wind-farm",
@@ -3094,20 +3105,9 @@
         "state": "QLD",
         "status": "development",
         "capacity_mw": 650.0,
-        "cod_current": null,
-        "cod_original": null,
-        "drift_months": null
-      },
-      {
-        "id": "moah-creek-solar-farm",
-        "name": "Moah Creek Solar Farm",
-        "technology": "solar",
-        "state": "QLD",
-        "status": "development",
-        "capacity_mw": 390.0,
-        "cod_current": null,
-        "cod_original": null,
-        "drift_months": null
+        "cod_current": "2030-12-31",
+        "cod_original": "2030-12-31",
+        "drift_months": 0.0
       }
     ],
     "Argyle Solar Farm Pty Ltd": [
@@ -3131,9 +3131,9 @@
         "state": "NSW",
         "status": "development",
         "capacity_mw": 150.0,
-        "cod_current": "2027-03-31",
+        "cod_current": "2028-03-31",
         "cod_original": "2027-03-31",
-        "drift_months": 0.0
+        "drift_months": 12.2
       }
     ],
     "Elgin Energy Pty Ltd": [
@@ -3149,6 +3149,28 @@
         "drift_months": 0.0
       },
       {
+        "id": "gerogery-solar-farm-kci",
+        "name": "Gerogery Solar Farm - KCI",
+        "technology": "hybrid",
+        "state": "NSW",
+        "status": "development",
+        "capacity_mw": 125.0,
+        "cod_current": "2027-10-01",
+        "cod_original": "2027-10-01",
+        "drift_months": 0.0
+      },
+      {
+        "id": "armidale-bess-elgin",
+        "name": "Armidale BESS (Elgin)",
+        "technology": "bess",
+        "state": "NSW",
+        "status": "development",
+        "capacity_mw": 200.0,
+        "cod_current": "2028-01-01",
+        "cod_original": "2028-01-01",
+        "drift_months": 0.0
+      },
+      {
         "id": "lerida-solar-farm",
         "name": "Lerida Solar Farm",
         "technology": "hybrid",
@@ -3160,15 +3182,15 @@
         "drift_months": 0.0
       },
       {
-        "id": "armidale-bess-elgin",
-        "name": "Armidale BESS (Elgin)",
-        "technology": "bess",
+        "id": "tabulam-solar-farm-and-bess",
+        "name": "Tabulam Solar Farm and BESS",
+        "technology": "hybrid",
         "state": "NSW",
         "status": "development",
-        "capacity_mw": 200.0,
-        "cod_current": null,
-        "cod_original": null,
-        "drift_months": null
+        "capacity_mw": 100.0,
+        "cod_current": "2029-07-01",
+        "cod_original": "2029-07-01",
+        "drift_months": 0.0
       },
       {
         "id": "geelong-bess",
@@ -3193,17 +3215,6 @@
         "drift_months": null
       },
       {
-        "id": "gerogery-solar-farm-kci",
-        "name": "Gerogery Solar Farm - KCI",
-        "technology": "solar",
-        "state": "NSW",
-        "status": "development",
-        "capacity_mw": 125.0,
-        "cod_current": null,
-        "cod_original": null,
-        "drift_months": null
-      },
-      {
         "id": "tabulam-bess",
         "name": "Tabulam BESS",
         "technology": "bess",
@@ -3217,6 +3228,17 @@
     ],
     "FRV": [
       {
+        "id": "armidale-east-bess",
+        "name": "Armidale East BESS",
+        "technology": "bess",
+        "state": "NSW",
+        "status": "development",
+        "capacity_mw": 315.0,
+        "cod_current": "2030-08-30",
+        "cod_original": "2030-08-30",
+        "drift_months": 0.0
+      },
+      {
         "id": "texas-bess",
         "name": "Texas BESS",
         "technology": "hybrid",
@@ -3226,17 +3248,6 @@
         "cod_current": "2031-03-31",
         "cod_original": "2031-03-31",
         "drift_months": 0.0
-      },
-      {
-        "id": "armidale-east-bess",
-        "name": "Armidale East BESS",
-        "technology": "bess",
-        "state": "NSW",
-        "status": "development",
-        "capacity_mw": 315.0,
-        "cod_current": null,
-        "cod_original": null,
-        "drift_months": null
       },
       {
         "id": "texas-solar-farm",
@@ -3274,6 +3285,17 @@
         "drift_months": 0.0
       },
       {
+        "id": "arundel-bess",
+        "name": "Arundel BESS",
+        "technology": "bess",
+        "state": "NSW",
+        "status": "development",
+        "capacity_mw": 300.0,
+        "cod_current": "2029-09-30",
+        "cod_original": "2029-09-30",
+        "drift_months": 0.0
+      },
+      {
         "id": "belah-bess",
         "name": "Belah BESS",
         "technology": "bess",
@@ -3283,17 +3305,6 @@
         "cod_current": "2029-12-31",
         "cod_original": "2029-12-31",
         "drift_months": 0.0
-      },
-      {
-        "id": "arundel-bess",
-        "name": "Arundel BESS",
-        "technology": "bess",
-        "state": "NSW",
-        "status": "development",
-        "capacity_mw": 300.0,
-        "cod_current": null,
-        "cod_original": null,
-        "drift_months": null
       }
     ],
     "Augusta BESS Pty Ltd": [
@@ -3304,9 +3315,9 @@
         "state": "SA",
         "status": "development",
         "capacity_mw": 270.0,
-        "cod_current": null,
-        "cod_original": null,
-        "drift_months": null
+        "cod_current": "2029-04-23",
+        "cod_original": "2029-04-23",
+        "drift_months": 0.0
       }
     ],
     "SiliconAurora": [
@@ -3359,6 +3370,17 @@
         "cod_current": "2023-03-28",
         "cod_original": "2023-03-28",
         "drift_months": 0.0
+      },
+      {
+        "id": "tungkillo-bess-kci",
+        "name": "Tungkillo BESS - KCI",
+        "technology": "bess",
+        "state": "SA",
+        "status": "development",
+        "capacity_mw": 270.0,
+        "cod_current": null,
+        "cod_original": null,
+        "drift_months": null
       }
     ],
     "firmpower_NR": [
@@ -3511,9 +3533,9 @@
         "state": "NSW",
         "status": "development",
         "capacity_mw": 360.0,
-        "cod_current": "2029-06",
+        "cod_current": "2029-06-30",
         "cod_original": "2029-06-30",
-        "drift_months": null
+        "drift_months": 0.0
       },
       {
         "id": "baldon-wind-farm-stage-2",
@@ -3559,9 +3581,9 @@
         "state": "QLD",
         "status": "development",
         "capacity_mw": 220.0,
-        "cod_current": "2029-12",
+        "cod_current": "2029-12-31",
         "cod_original": "2029-12-31",
-        "drift_months": null
+        "drift_months": 0.0
       }
     ],
     "BWF Nominees Pty Ltd as trustee for the BWF Trust": [
@@ -3596,12 +3618,12 @@
         "state": "QLD",
         "status": "construction",
         "capacity_mw": 60.0,
-        "cod_current": "2027-08-20",
+        "cod_current": "2027-11-24",
         "cod_original": "2027-08-20",
-        "drift_months": 0.0
+        "drift_months": 3.2
       }
     ],
-    "Penso Power Australia Pty Ltd.": [
+    "BW ESS Australia Pty Ltd": [
       {
         "id": "bannaby-bess",
         "name": "Bannaby BESS",
@@ -3670,9 +3692,9 @@
         "state": "NSW",
         "status": "commissioning",
         "capacity_mw": 500.0,
-        "cod_current": "2026-02-20",
+        "cod_current": "2026-06-01",
         "cod_original": "2026-02-20",
-        "drift_months": 0.0
+        "drift_months": 3.4
       },
       {
         "id": "barn-hill",
@@ -3775,9 +3797,9 @@
         "state": "SA",
         "status": "development",
         "capacity_mw": 250.0,
-        "cod_current": null,
-        "cod_original": null,
-        "drift_months": null
+        "cod_current": "2030-12-01",
+        "cod_original": "2030-12-01",
+        "drift_months": 0.0
       },
       {
         "id": "bridle-track-solar-project",
@@ -4336,9 +4358,9 @@
         "state": "QLD",
         "status": "development",
         "capacity_mw": 500.0,
-        "cod_current": "2030-07",
+        "cod_current": "2030-07-01",
         "cod_original": "2030-07-01",
-        "drift_months": null
+        "drift_months": 0.0
       }
     ],
     "The Trustee for Equis Wind (Australia) LHWF2 Asset Trust": [
@@ -4349,9 +4371,9 @@
         "state": "TAS",
         "status": "development",
         "capacity_mw": 224.0,
-        "cod_current": "2030-01",
+        "cod_current": "2030-01-01",
         "cod_original": "2030-01-01",
-        "drift_months": null
+        "drift_months": 0.0
       }
     ],
     "Alinta Energy": [
@@ -4555,11 +4577,13 @@
         "technology": "pumped_hydro",
         "state": "QLD",
         "status": "development",
-        "capacity_mw": 800.0,
-        "cod_current": null,
-        "cod_original": null,
-        "drift_months": null
-      },
+        "capacity_mw": 600.0,
+        "cod_current": "2032-12-31",
+        "cod_original": "2032-12-31",
+        "drift_months": 0.0
+      }
+    ],
+    "Cressbrook Project Co Pty Ltd as trustee": [
       {
         "id": "big-t-project",
         "name": "Big-T Project",
@@ -4567,9 +4591,9 @@
         "state": "QLD",
         "status": "development",
         "capacity_mw": 400.0,
-        "cod_current": null,
-        "cod_original": null,
-        "drift_months": null
+        "cod_current": "2036-09-30",
+        "cod_original": "2036-09-30",
+        "drift_months": 0.0
       }
     ],
     "ACEN RENEWABLES": [
@@ -4585,15 +4609,26 @@
         "drift_months": 0.0
       },
       {
+        "id": "cooma-solar-and-bess-acen",
+        "name": "Cooma Solar And BESS (ACEN)",
+        "technology": "hybrid",
+        "state": "NSW",
+        "status": "development",
+        "capacity_mw": 80.0,
+        "cod_current": "2028-12-01",
+        "cod_original": "2028-12-01",
+        "drift_months": 0.0
+      },
+      {
         "id": "birriwa-bess",
         "name": "Birriwa BESS",
         "technology": "bess",
         "state": "NSW",
         "status": "development",
         "capacity_mw": 600.0,
-        "cod_current": null,
-        "cod_original": null,
-        "drift_months": null
+        "cod_current": "2031-12-01",
+        "cod_original": "2031-12-01",
+        "drift_months": 0.0
       },
       {
         "id": "birriwa-solar-farm",
@@ -4605,31 +4640,9 @@
         "cod_current": null,
         "cod_original": null,
         "drift_months": null
-      },
-      {
-        "id": "cooma-solar-and-bess-acen",
-        "name": "Cooma Solar And BESS (ACEN)",
-        "technology": "hybrid",
-        "state": "NSW",
-        "status": "development",
-        "capacity_mw": 80.0,
-        "cod_current": null,
-        "cod_original": null,
-        "drift_months": null
       }
     ],
     "Enervest Operations Pty Ltd": [
-      {
-        "id": "glenrowan-bess-storage-kci",
-        "name": "Glenrowan BESS - Storage - KCI",
-        "technology": "bess",
-        "state": "VIC",
-        "status": "development",
-        "capacity_mw": 400.0,
-        "cod_current": "2029-06",
-        "cod_original": "2029-06-30",
-        "drift_months": null
-      },
       {
         "id": "cooroy-bess",
         "name": "Cooroy BESS",
@@ -4640,6 +4653,17 @@
         "cod_current": "2029-06-30",
         "cod_original": "2029-06-30",
         "drift_months": 0.0
+      },
+      {
+        "id": "glenrowan-bess-storage-kci",
+        "name": "Glenrowan BESS - Storage - KCI",
+        "technology": "bess",
+        "state": "VIC",
+        "status": "development",
+        "capacity_mw": 400.0,
+        "cod_current": "2030-03-31",
+        "cod_original": "2029-06-30",
+        "drift_months": 9.1
       },
       {
         "id": "pinnacles-bess-storage-kci",
@@ -4696,9 +4720,9 @@
         "state": "QLD",
         "status": "development",
         "capacity_mw": 270.0,
-        "cod_current": "2030-07-06",
+        "cod_current": "2030-10-06",
         "cod_original": "2030-07-06",
-        "drift_months": 0.0
+        "drift_months": 3.1
       }
     ],
     "TerraCom Ltd": [
@@ -4851,9 +4875,9 @@
         "state": "QLD",
         "status": "development",
         "capacity_mw": 300.0,
-        "cod_current": "2027-09",
+        "cod_current": "2027-09-30",
         "cod_original": "2027-09-30",
-        "drift_months": null
+        "drift_months": 0.0
       },
       {
         "id": "blue-grass-bess",
@@ -4987,9 +5011,9 @@
         "state": "VIC",
         "status": "development",
         "capacity_mw": 750.0,
-        "cod_current": "2028-02",
+        "cod_current": "2028-02-01",
         "cod_original": "2028-02-01",
-        "drift_months": null
+        "drift_months": 0.0
       },
       {
         "id": "pioneer-bess-kci",
@@ -5009,9 +5033,9 @@
         "state": "QLD",
         "status": "development",
         "capacity_mw": 300.0,
-        "cod_current": "2029-05",
+        "cod_current": "2029-05-01",
         "cod_original": "2029-05-01",
-        "drift_months": null
+        "drift_months": 0.0
       },
       {
         "id": "smoky-creek-solar-power-station",
@@ -5020,9 +5044,9 @@
         "state": "QLD",
         "status": "development",
         "capacity_mw": 300.0,
-        "cod_current": "2029-05",
+        "cod_current": "2029-05-01",
         "cod_original": "2029-05-01",
-        "drift_months": null
+        "drift_months": 0.0
       },
       {
         "id": "boags-creek-solar-power-station",
@@ -5154,9 +5178,9 @@
         "state": "NSW",
         "status": "operating",
         "capacity_mw": 396.0,
-        "cod_current": "2024-10-07",
+        "cod_current": "2026-10-07",
         "cod_original": "2024-10-07",
-        "drift_months": 0.0
+        "drift_months": 24.3
       },
       {
         "id": "dalvui-bess",
@@ -5331,9 +5355,9 @@
         "state": "NSW",
         "status": "development",
         "capacity_mw": 200.0,
-        "cod_current": "2027-05",
+        "cod_current": "2027-05-31",
         "cod_original": "2027-05-31",
-        "drift_months": null
+        "drift_months": 0.0
       }
     ],
     "Bookaar Renewables Pty ltd": [
@@ -5383,9 +5407,9 @@
         "state": "VIC",
         "status": "development",
         "capacity_mw": 1000.0,
-        "cod_current": "2031-09",
+        "cod_current": "2031-09-30",
         "cod_original": "2031-09-30",
-        "drift_months": null
+        "drift_months": 0.0
       }
     ],
     "Venn Energy Pty Ltd": [
@@ -5396,9 +5420,9 @@
         "state": "NSW",
         "status": "development",
         "capacity_mw": 150.0,
-        "cod_current": "2029-12",
+        "cod_current": "2029-12-25",
         "cod_original": "2029-12-25",
-        "drift_months": null
+        "drift_months": 0.0
       }
     ],
     "Queensland Hydro": [
@@ -5457,9 +5481,9 @@
         "state": "QLD",
         "status": "construction",
         "capacity_mw": 250.0,
-        "cod_current": "2027-01-01",
+        "cod_current": "2027-07-01",
         "cod_original": "2027-01-01",
-        "drift_months": 0.0
+        "drift_months": 6.0
       }
     ],
     "Genex Power Limited": [
@@ -5492,9 +5516,9 @@
         "state": "QLD",
         "status": "development",
         "capacity_mw": 775.0,
-        "cod_current": "2029-08",
+        "cod_current": "2030-12-31",
         "cod_original": "2029-08-01",
-        "drift_months": null
+        "drift_months": 17.2
       },
       {
         "id": "kidston-solar-project-phase-two",
@@ -5503,9 +5527,9 @@
         "state": "QLD",
         "status": "development",
         "capacity_mw": 270.0,
-        "cod_current": "2035-01",
+        "cod_current": "2035-01-01",
         "cod_original": "2035-01-01",
-        "drift_months": null
+        "drift_months": 0.0
       },
       {
         "id": "bouldercombe-battery-project-stage-2-kci",
@@ -5702,9 +5726,9 @@
         "state": "QLD",
         "status": "development",
         "capacity_mw": 500.0,
-        "cod_current": null,
-        "cod_original": null,
-        "drift_months": null
+        "cod_current": "2030-06-30",
+        "cod_original": "2030-06-30",
+        "drift_months": 0.0
       }
     ],
     "Libra Energy Pty Ltd": [
@@ -5761,9 +5785,9 @@
         "state": "SA",
         "status": "development",
         "capacity_mw": 250.0,
-        "cod_current": "2029-04-10",
+        "cod_current": "2029-05-03",
         "cod_original": "2029-04-10",
-        "drift_months": 0.0
+        "drift_months": 0.8
       }
     ],
     "Broadsound Solar Farm Pty Ltd": [
@@ -5885,9 +5909,9 @@
         "state": "VIC",
         "status": "development",
         "capacity_mw": 300.0,
-        "cod_current": null,
-        "cod_original": null,
-        "drift_months": null
+        "cod_current": "2027-06-01",
+        "cod_original": "2027-06-01",
+        "drift_months": 0.0
       }
     ],
     "Bullawah Wind Farm Pty Ltd": [
@@ -5923,10 +5947,10 @@
         "technology": "bess",
         "state": "QLD",
         "status": "development",
-        "capacity_mw": 450.0,
-        "cod_current": null,
-        "cod_original": null,
-        "drift_months": null
+        "capacity_mw": 750.0,
+        "cod_current": "2028-12-01",
+        "cod_original": "2028-12-01",
+        "drift_months": 0.0
       },
       {
         "id": "bulli-creek-solar-farm-trina",
@@ -5935,9 +5959,9 @@
         "state": "QLD",
         "status": "development",
         "capacity_mw": 450.0,
-        "cod_current": null,
-        "cod_original": null,
-        "drift_months": null
+        "cod_current": "2028-12-01",
+        "cod_original": "2028-12-01",
+        "drift_months": 0.0
       }
     ],
     "EE Solar 9 Pty Ltd as trustee for the EE Solar 9 Trust": [
@@ -5948,9 +5972,9 @@
         "state": "QLD",
         "status": "development",
         "capacity_mw": 97.0,
-        "cod_current": "2027-04",
+        "cod_current": "2027-04-30",
         "cod_original": "2027-04-30",
-        "drift_months": null
+        "drift_months": 0.0
       }
     ],
     "Bundaberg Renewable Energy Park": [
@@ -5972,11 +5996,11 @@
         "name": "Bundaberg Solar Farm",
         "technology": "solar",
         "state": "QLD",
-        "status": "construction",
+        "status": "commissioning",
         "capacity_mw": 78.0,
-        "cod_current": "2025-12",
+        "cod_current": "2026-04-28",
         "cod_original": "2025-12-31",
-        "drift_months": null
+        "drift_months": 3.9
       }
     ],
     "Genaspi Energy Group Pty Ltd": [
@@ -5994,23 +6018,23 @@
     ],
     "Windlab Developments Pty Ltd": [
       {
-        "id": "bungaban-wind-farm",
-        "name": "Bungaban Wind Farm",
-        "technology": "wind",
-        "state": "QLD",
-        "status": "development",
-        "capacity_mw": 1400.0,
-        "cod_current": "2030-03",
-        "cod_original": "2030-03-30",
-        "drift_months": null
-      },
-      {
         "id": "bungaban-bess",
         "name": "Bungaban BESS",
         "technology": "bess",
         "state": "QLD",
         "status": "development",
         "capacity_mw": 350.0,
+        "cod_current": "2030-03-30",
+        "cod_original": "2030-03-30",
+        "drift_months": 0.0
+      },
+      {
+        "id": "bungaban-wind-farm",
+        "name": "Bungaban Wind Farm",
+        "technology": "wind",
+        "state": "QLD",
+        "status": "development",
+        "capacity_mw": 1400.0,
         "cod_current": "2030-03-30",
         "cod_original": "2030-03-30",
         "drift_months": 0.0
@@ -6072,9 +6096,9 @@
         "state": "SA",
         "status": "development",
         "capacity_mw": 200.0,
-        "cod_current": null,
-        "cod_original": null,
-        "drift_months": null
+        "cod_current": "2028-12-31",
+        "cod_original": "2028-12-31",
+        "drift_months": 0.0
       }
     ],
     "Bungama Project (Solar) Operations Pty Ltd": [
@@ -6085,9 +6109,9 @@
         "state": "SA",
         "status": "construction",
         "capacity_mw": 280.0,
-        "cod_current": "2028-08-31",
+        "cod_current": "2030-08-31",
         "cod_original": "2028-08-31",
-        "drift_months": 0.0
+        "drift_months": 24.3
       }
     ],
     "Pacific Hydro": [
@@ -6098,9 +6122,9 @@
         "state": "QLD",
         "status": "development",
         "capacity_mw": 296.0,
-        "cod_current": "2035-01-01",
+        "cod_current": "2035-01-12",
         "cod_original": "2035-01-01",
-        "drift_months": 0.0
+        "drift_months": 0.4
       },
       {
         "id": "bunkers-hill-wind-farm",
@@ -6109,15 +6133,26 @@
         "state": "QLD",
         "status": "development",
         "capacity_mw": 500.0,
-        "cod_current": "2035-12",
+        "cod_current": "2035-12-01",
         "cod_original": "2035-12-01",
-        "drift_months": null
+        "drift_months": 0.0
       }
     ],
     "AMPYR Energy": [
       {
         "id": "bunyip-bess-kci",
         "name": "Bunyip BESS - KCI",
+        "technology": "bess",
+        "state": "VIC",
+        "status": "development",
+        "capacity_mw": 220.0,
+        "cod_current": null,
+        "cod_original": null,
+        "drift_months": null
+      },
+      {
+        "id": "wimpole-bess-kci",
+        "name": "Wimpole BESS - KCI",
         "technology": "bess",
         "state": "VIC",
         "status": "development",
@@ -6135,9 +6170,9 @@
         "state": "VIC",
         "status": "development",
         "capacity_mw": 400.0,
-        "cod_current": null,
-        "cod_original": null,
-        "drift_months": null
+        "cod_current": "2029-04-02",
+        "cod_original": "2029-04-02",
+        "drift_months": 0.0
       }
     ],
     "BURDEKIN SOLAR FARM PTY LTD ATF BURDEKIN GENESIS PROJECT TRUST": [
@@ -6148,9 +6183,9 @@
         "state": "QLD",
         "status": "development",
         "capacity_mw": 500.0,
-        "cod_current": "2027-09-30",
+        "cod_current": "2028-03-31",
         "cod_original": "2027-09-30",
-        "drift_months": 0.0
+        "drift_months": 6.1
       },
       {
         "id": "burdekin-solar-farm-kci",
@@ -6159,9 +6194,9 @@
         "state": "QLD",
         "status": "development",
         "capacity_mw": 500.0,
-        "cod_current": "2029-12",
+        "cod_current": "2029-12-28",
         "cod_original": "2029-12-28",
-        "drift_months": null
+        "drift_months": 0.0
       }
     ],
     "Burgmanns BESS Pty Ltd": [
@@ -6229,28 +6264,6 @@
     ],
     "TagEnergy Australia Pty Ltd": [
       {
-        "id": "raglan-bess",
-        "name": "Raglan BESS",
-        "technology": "bess",
-        "state": "QLD",
-        "status": "development",
-        "capacity_mw": 500.0,
-        "cod_current": "2028-08-31",
-        "cod_original": "2028-08-31",
-        "drift_months": 0.0
-      },
-      {
-        "id": "talbingo-bess",
-        "name": "Talbingo BESS",
-        "technology": "bess",
-        "state": "NSW",
-        "status": "development",
-        "capacity_mw": 400.0,
-        "cod_current": "2028-12-11",
-        "cod_original": "2028-12-11",
-        "drift_months": 0.0
-      },
-      {
         "id": "nebo-bess",
         "name": "Nebo BESS",
         "technology": "bess",
@@ -6273,14 +6286,14 @@
         "drift_months": 0.0
       },
       {
-        "id": "morwell-bess",
-        "name": "Morwell BESS",
+        "id": "golden-plains-bess-2-kci",
+        "name": "Golden Plains BESS 2 - KCI",
         "technology": "bess",
         "state": "VIC",
         "status": "development",
-        "capacity_mw": 1000.0,
-        "cod_current": "2028-12-31",
-        "cod_original": "2028-12-31",
+        "capacity_mw": 150.0,
+        "cod_current": "2029-01-01",
+        "cod_original": "2029-01-01",
         "drift_months": 0.0
       },
       {
@@ -6295,15 +6308,37 @@
         "drift_months": 0.0
       },
       {
-        "id": "golden-plains-bess-2-kci",
-        "name": "Golden Plains BESS 2 - KCI",
+        "id": "raglan-bess",
+        "name": "Raglan BESS",
+        "technology": "bess",
+        "state": "QLD",
+        "status": "development",
+        "capacity_mw": 500.0,
+        "cod_current": "2029-03-01",
+        "cod_original": "2028-08-31",
+        "drift_months": 6.1
+      },
+      {
+        "id": "morwell-bess",
+        "name": "Morwell BESS",
         "technology": "bess",
         "state": "VIC",
         "status": "development",
-        "capacity_mw": 150.0,
-        "cod_current": null,
-        "cod_original": null,
-        "drift_months": null
+        "capacity_mw": 1000.0,
+        "cod_current": "2029-07-02",
+        "cod_original": "2028-12-31",
+        "drift_months": 6.1
+      },
+      {
+        "id": "talbingo-bess",
+        "name": "Talbingo BESS",
+        "technology": "bess",
+        "state": "NSW",
+        "status": "development",
+        "capacity_mw": 400.0,
+        "cod_current": "2029-12-28",
+        "cod_original": "2028-12-11",
+        "drift_months": 12.7
       }
     ],
     "Equis Australia": [
@@ -6336,9 +6371,9 @@
         "state": "QLD",
         "status": "development",
         "capacity_mw": 600.0,
-        "cod_current": "2030-01",
+        "cod_current": "2030-01-01",
         "cod_original": "2030-01-01",
-        "drift_months": null
+        "drift_months": 0.0
       }
     ],
     "CSE BESS P/L": [
@@ -6399,9 +6434,9 @@
         "state": "VIC",
         "status": "development",
         "capacity_mw": 205.0,
-        "cod_current": null,
-        "cod_original": null,
-        "drift_months": null
+        "cod_current": "2028-12-31",
+        "cod_original": "2028-12-31",
+        "drift_months": 0.0
       }
     ],
     "Camperdown BESS Pty Ltd": [
@@ -6516,9 +6551,9 @@
         "state": "SA",
         "status": "construction",
         "capacity_mw": 247.0,
-        "cod_current": "2029-01",
+        "cod_current": "2029-01-01",
         "cod_original": "2029-01-01",
-        "drift_months": null
+        "drift_months": 0.0
       },
       {
         "id": "carmodys-hill-bess",
@@ -6638,9 +6673,9 @@
         "state": "QLD",
         "status": "development",
         "capacity_mw": 780.0,
-        "cod_current": "2029-03-01",
+        "cod_current": "2029-07-02",
         "cod_original": "2029-03-01",
-        "drift_months": 0.0
+        "drift_months": 4.1
       }
     ],
     "Pacific Hydro Challicum Hills Pty Ltd": [
@@ -6743,7 +6778,7 @@
         "drift_months": null
       }
     ],
-    "Sun Spot 9 Pty Ltd": [
+    "Ib vogt GmbH": [
       {
         "id": "cimitiere-plains-solar-farm",
         "name": "Cimitiere Plains Solar Farm",
@@ -6790,8 +6825,30 @@
         "state": "QLD",
         "status": "commissioning",
         "capacity_mw": 1135.0,
-        "cod_current": "2025-09-30",
+        "cod_current": "2026-07-01",
         "cod_original": "2025-09-30",
+        "drift_months": 9.1
+      },
+      {
+        "id": "koorakee-wind-farm",
+        "name": "Koorakee Wind Farm",
+        "technology": "wind",
+        "state": "NSW",
+        "status": "development",
+        "capacity_mw": 300.0,
+        "cod_current": "2030-07-01",
+        "cod_original": "2030-07-01",
+        "drift_months": 0.0
+      },
+      {
+        "id": "uungula-bess",
+        "name": "Uungula BESS",
+        "technology": "bess",
+        "state": "NSW",
+        "status": "development",
+        "capacity_mw": 400.0,
+        "cod_current": "2030-07-01",
+        "cod_original": "2030-07-01",
         "drift_months": 0.0
       },
       {
@@ -6815,28 +6872,6 @@
         "cod_current": null,
         "cod_original": null,
         "drift_months": null
-      },
-      {
-        "id": "koorakee-wind-farm",
-        "name": "Koorakee Wind Farm",
-        "technology": "wind",
-        "state": "NSW",
-        "status": "development",
-        "capacity_mw": 300.0,
-        "cod_current": null,
-        "cod_original": null,
-        "drift_months": null
-      },
-      {
-        "id": "uungula-bess",
-        "name": "Uungula BESS",
-        "technology": "bess",
-        "state": "NSW",
-        "status": "development",
-        "capacity_mw": 400.0,
-        "cod_current": null,
-        "cod_original": null,
-        "drift_months": null
       }
     ],
     "Pacific Blue (SPIC China)": [
@@ -6847,9 +6882,9 @@
         "state": "SA",
         "status": "commissioning",
         "capacity_mw": 60.0,
-        "cod_current": "2026-01-05",
+        "cod_current": "2026-05-30",
         "cod_original": "2026-01-05",
-        "drift_months": 0.0
+        "drift_months": 4.8
       }
     ],
     "Pacific Hydro Clements Gap Pty Ltd": [
@@ -7011,15 +7046,37 @@
         "drift_months": 0.0
       },
       {
+        "id": "collinsville-bess",
+        "name": "Collinsville BESS",
+        "technology": "bess",
+        "state": "QLD",
+        "status": "development",
+        "capacity_mw": 200.0,
+        "cod_current": "2029-12-30",
+        "cod_original": "2029-12-30",
+        "drift_months": 0.0
+      },
+      {
+        "id": "el-arish-bess",
+        "name": "El Arish BESS",
+        "technology": "bess",
+        "state": "QLD",
+        "status": "development",
+        "capacity_mw": 200.0,
+        "cod_current": "2029-12-30",
+        "cod_original": "2029-12-30",
+        "drift_months": 0.0
+      },
+      {
         "id": "springlands-wind-farm",
         "name": "Springlands Wind Farm",
         "technology": "wind",
         "state": "QLD",
         "status": "development",
         "capacity_mw": 800.0,
-        "cod_current": "2030-12",
+        "cod_current": "2030-12-30",
         "cod_original": "2030-12-30",
-        "drift_months": null
+        "drift_months": 0.0
       }
     ],
     "Ratch Energy SA": [
@@ -7104,9 +7161,9 @@
         "state": "QLD",
         "status": "development",
         "capacity_mw": 550.0,
-        "cod_current": null,
-        "cod_original": null,
-        "drift_months": null
+        "cod_current": "2028-07-01",
+        "cod_original": "2028-07-01",
+        "drift_months": 0.0
       }
     ],
     "Luminous Energy": [
@@ -7167,9 +7224,9 @@
         "state": "VIC",
         "status": "development",
         "capacity_mw": 1100.0,
-        "cod_current": "2029-03-16",
+        "cod_current": "2029-12-03",
         "cod_original": "2029-03-16",
-        "drift_months": 0.0
+        "drift_months": 8.7
       },
       {
         "id": "glenrowan-bess",
@@ -7178,9 +7235,9 @@
         "state": "VIC",
         "status": "development",
         "capacity_mw": 450.0,
-        "cod_current": "2029-03-16",
+        "cod_current": "2029-12-03",
         "cod_original": "2029-03-16",
-        "drift_months": 0.0
+        "drift_months": 8.7
       }
     ],
     "Waldren Construction Pty Ltd.": [
@@ -7230,9 +7287,9 @@
         "state": "NSW",
         "status": "development",
         "capacity_mw": 270.0,
-        "cod_current": "2027-09",
+        "cod_current": "2027-09-30",
         "cod_original": "2027-09-30",
-        "drift_months": null
+        "drift_months": 0.0
       }
     ],
     "Leeson Solar Pty Ltd.": [
@@ -7453,17 +7510,6 @@
         "drift_months": 0.0
       },
       {
-        "id": "great-western-battery-project",
-        "name": "Great Western Battery Project",
-        "technology": "bess",
-        "state": "NSW",
-        "status": "development",
-        "capacity_mw": 500.0,
-        "cod_current": "2028-12-31",
-        "cod_original": "2028-12-31",
-        "drift_months": 0.0
-      },
-      {
         "id": "goyder-bess-stage-2",
         "name": "Goyder BESS Stage 2",
         "technology": "bess",
@@ -7473,6 +7519,17 @@
         "cod_current": "2029-05-31",
         "cod_original": "2029-05-31",
         "drift_months": 0.0
+      },
+      {
+        "id": "great-western-battery-project",
+        "name": "Great Western Battery Project",
+        "technology": "bess",
+        "state": "NSW",
+        "status": "development",
+        "capacity_mw": 500.0,
+        "cod_current": "2029-11-30",
+        "cod_original": "2028-12-31",
+        "drift_months": 11.1
       },
       {
         "id": "mount-hopeful-bess",
@@ -7508,6 +7565,17 @@
         "drift_months": 0.0
       },
       {
+        "id": "thunderbolt-wind-farm",
+        "name": "Thunderbolt Wind Farm",
+        "technology": "wind",
+        "state": "NSW",
+        "status": "development",
+        "capacity_mw": 210.0,
+        "cod_current": "2031-06-30",
+        "cod_original": "2031-06-30",
+        "drift_months": 0.0
+      },
+      {
         "id": "goyder-north-bess-2",
         "name": "Goyder North BESS 2",
         "technology": "bess",
@@ -7525,17 +7593,6 @@
         "state": "NSW",
         "status": "development",
         "capacity_mw": 300.0,
-        "cod_current": null,
-        "cod_original": null,
-        "drift_months": null
-      },
-      {
-        "id": "thunderbolt-wind-farm",
-        "name": "Thunderbolt Wind Farm",
-        "technology": "wind",
-        "state": "NSW",
-        "status": "development",
-        "capacity_mw": 210.0,
         "cod_current": null,
         "cod_original": null,
         "drift_months": null
@@ -7610,9 +7667,9 @@
         "state": "NSW",
         "status": "development",
         "capacity_mw": 500.0,
-        "cod_current": "2033-06",
+        "cod_current": "2033-06-01",
         "cod_original": "2033-06-01",
-        "drift_months": null
+        "drift_months": 0.0
       },
       {
         "id": "dangarsleigh-wind",
@@ -7621,9 +7678,9 @@
         "state": "NSW",
         "status": "development",
         "capacity_mw": 250.0,
-        "cod_current": "2034-06",
+        "cod_current": "2034-06-01",
         "cod_original": "2034-06-01",
-        "drift_months": null
+        "drift_months": 0.0
       }
     ],
     "BORAL": [
@@ -7706,9 +7763,9 @@
         "state": "VIC",
         "status": "development",
         "capacity_mw": 324.0,
-        "cod_current": null,
-        "cod_original": null,
-        "drift_months": null
+        "cod_current": "2030-01-01",
+        "cod_original": "2030-01-01",
+        "drift_months": 0.0
       }
     ],
     "samsung_NR": [
@@ -7724,17 +7781,6 @@
         "drift_months": 0.0
       },
       {
-        "id": "rubicon-solar-farm",
-        "name": "Rubicon Solar Farm",
-        "technology": "solar",
-        "state": "VIC",
-        "status": "development",
-        "capacity_mw": 100.0,
-        "cod_current": "2029-08",
-        "cod_original": "2029-08-01",
-        "drift_months": null
-      },
-      {
         "id": "rubicon-bess",
         "name": "Rubicon BESS",
         "technology": "bess",
@@ -7744,20 +7790,20 @@
         "cod_current": "2029-08-01",
         "cod_original": "2029-08-01",
         "drift_months": 0.0
+      },
+      {
+        "id": "rubicon-solar-farm",
+        "name": "Rubicon Solar Farm",
+        "technology": "solar",
+        "state": "VIC",
+        "status": "development",
+        "capacity_mw": 100.0,
+        "cod_current": "2029-08-01",
+        "cod_original": "2029-08-01",
+        "drift_months": 0.0
       }
     ],
     "Pacific Hydro Australia Developments Pty Ltd": [
-      {
-        "id": "daroobalgie-solar-farm",
-        "name": "Daroobalgie Solar Farm",
-        "technology": "solar",
-        "state": "NSW",
-        "status": "development",
-        "capacity_mw": 100.0,
-        "cod_current": "2034-12-01",
-        "cod_original": "2034-12-01",
-        "drift_months": 0.0
-      },
       {
         "id": "prairie-solar-farm",
         "name": "Prairie Solar Farm",
@@ -7765,9 +7811,20 @@
         "state": "VIC",
         "status": "development",
         "capacity_mw": 250.0,
-        "cod_current": "2035-09",
+        "cod_current": "2035-09-30",
         "cod_original": "2035-09-30",
-        "drift_months": null
+        "drift_months": 0.0
+      },
+      {
+        "id": "daroobalgie-solar-farm",
+        "name": "Daroobalgie Solar Farm",
+        "technology": "solar",
+        "state": "NSW",
+        "status": "development",
+        "capacity_mw": 100.0,
+        "cod_current": "2040-12-01",
+        "cod_original": "2034-12-01",
+        "drift_months": 73.1
       }
     ],
     "Highland Energy Australia Pty Ltd": [
@@ -7830,9 +7887,9 @@
         "state": "VIC",
         "status": "development",
         "capacity_mw": 200.0,
-        "cod_current": "2028-07-01",
+        "cod_current": "2029-07-01",
         "cod_original": "2028-07-01",
-        "drift_months": 0.0
+        "drift_months": 12.2
       }
     ],
     "Ib vogt Development Australia Pty Ltd": [
@@ -7850,13 +7907,13 @@
       {
         "id": "deepwater-hybrid-facility",
         "name": "Deepwater Hybrid Facility",
-        "technology": "hybrid",
+        "technology": "solar",
         "state": "NSW",
         "status": "development",
-        "capacity_mw": 140.0,
-        "cod_current": null,
-        "cod_original": null,
-        "drift_months": null
+        "capacity_mw": 120.0,
+        "cod_current": "2029-06-01",
+        "cod_original": "2029-06-01",
+        "drift_months": 0.0
       },
       {
         "id": "giddi-bess-trafalgar-east-bess-stage-1",
@@ -7865,9 +7922,9 @@
         "state": "VIC",
         "status": "development",
         "capacity_mw": 360.0,
-        "cod_current": null,
-        "cod_original": null,
-        "drift_months": null
+        "cod_current": "2029-06-01",
+        "cod_original": "2029-06-01",
+        "drift_months": 0.0
       }
     ],
     "Akaysha Energy": [
@@ -7901,10 +7958,10 @@
         "technology": "wind",
         "state": "VIC",
         "status": "development",
-        "capacity_mw": 173.0,
-        "cod_current": null,
-        "cod_original": null,
-        "drift_months": null
+        "capacity_mw": 204.6,
+        "cod_current": "2028-10-23",
+        "cod_original": "2028-10-23",
+        "drift_months": 0.0
       }
     ],
     "BESS Arctic Pty Ltd": [
@@ -7941,9 +7998,9 @@
         "state": "VIC",
         "status": "development",
         "capacity_mw": 95.0,
-        "cod_current": "2027-09",
+        "cod_current": "2028-04-01",
         "cod_original": "2027-09-01",
-        "drift_months": null
+        "drift_months": 7.1
       }
     ],
     "Bid Energy Partners Pty Ltd": [
@@ -8015,9 +8072,9 @@
         "state": "NSW",
         "status": "development",
         "capacity_mw": 1007.0,
-        "cod_current": "2031-07-01",
+        "cod_current": "2031-10-01",
         "cod_original": "2029-12-01",
-        "drift_months": 19.2
+        "drift_months": 22.3
       }
     ],
     "ESCO Pacific": [
@@ -8190,7 +8247,7 @@
         "drift_months": 0.0
       }
     ],
-    "Samsung C&amp;T": [
+    "Samsung C&amp;amp;T": [
       {
         "id": "dunmore-bess",
         "name": "Dunmore BESS",
@@ -8198,10 +8255,12 @@
         "state": "QLD",
         "status": "development",
         "capacity_mw": 150.0,
-        "cod_current": null,
-        "cod_original": null,
-        "drift_months": null
-      },
+        "cod_current": "2029-08-01",
+        "cod_original": "2029-08-01",
+        "drift_months": 0.0
+      }
+    ],
+    "Samsung C&amp;amp;amp;T": [
       {
         "id": "dunmore-solar-farm",
         "name": "Dunmore Solar Farm",
@@ -8209,9 +8268,9 @@
         "state": "QLD",
         "status": "development",
         "capacity_mw": 300.0,
-        "cod_current": null,
-        "cod_original": null,
-        "drift_months": null
+        "cod_current": "2029-08-01",
+        "cod_original": "2029-08-01",
+        "drift_months": 0.0
       }
     ],
     "TE H2 Australia Pty Ltd": [
@@ -8433,23 +8492,23 @@
     ],
     "M Renweables Australia": [
       {
+        "id": "emu-park-solar-farm",
+        "name": "Emu Park Solar Farm",
+        "technology": "hybrid",
+        "state": "NSW",
+        "status": "development",
+        "capacity_mw": 300.0,
+        "cod_current": "2028-12-01",
+        "cod_original": "2028-12-01",
+        "drift_months": 0.0
+      },
+      {
         "id": "emu-park-bess",
         "name": "Emu Park BESS",
         "technology": "bess",
         "state": "NSW",
         "status": "development",
         "capacity_mw": 200.0,
-        "cod_current": null,
-        "cod_original": null,
-        "drift_months": null
-      },
-      {
-        "id": "emu-park-solar-farm",
-        "name": "Emu Park Solar Farm",
-        "technology": "solar",
-        "state": "NSW",
-        "status": "development",
-        "capacity_mw": 300.0,
         "cod_current": null,
         "cod_original": null,
         "drift_months": null
@@ -8476,9 +8535,9 @@
         "state": "QLD",
         "status": "development",
         "capacity_mw": 666.0,
-        "cod_current": "2028-12-31",
+        "cod_current": "2029-12-31",
         "cod_original": "2028-12-31",
-        "drift_months": 0.0
+        "drift_months": 12.2
       }
     ],
     "Unitedgreen_NR": [
@@ -8489,9 +8548,9 @@
         "state": "QLD",
         "status": "development",
         "capacity_mw": 560.0,
-        "cod_current": "2028-12-31",
+        "cod_current": "2029-12-31",
         "cod_original": "2028-12-31",
-        "drift_months": 0.0
+        "drift_months": 12.2
       }
     ],
     "Balranald Wind Farm Pty Ltd": [
@@ -8619,9 +8678,9 @@
         "state": "QLD",
         "status": "development",
         "capacity_mw": 290.0,
-        "cod_current": "2027-09-30",
+        "cod_current": "2027-11-30",
         "cod_original": "2027-09-30",
-        "drift_months": 0.0
+        "drift_months": 2.0
       }
     ],
     "Frasers Lane Development Pty Ltd": [
@@ -8632,9 +8691,9 @@
         "state": "VIC",
         "status": "development",
         "capacity_mw": 77.0,
-        "cod_current": "2027-06",
+        "cod_current": "2027-11-30",
         "cod_original": "2027-06-30",
-        "drift_months": null
+        "drift_months": 5.1
       }
     ],
     "Fulham Solar Farm Pty Ltd (ATF Fulham Solar Farm Trust)": [
@@ -8658,9 +8717,9 @@
         "state": "QLD",
         "status": "commissioning",
         "capacity_mw": 120.0,
-        "cod_current": "2026-03-31",
+        "cod_current": "2026-06-30",
         "cod_original": "2026-03-31",
-        "drift_months": 0.0
+        "drift_months": 3.0
       }
     ],
     "Gannawarra Solar Farm Pty Ltd": [
@@ -8732,9 +8791,9 @@
         "state": "QLD",
         "status": "development",
         "capacity_mw": 400.0,
-        "cod_current": "2029-01",
+        "cod_current": "2030-05-24",
         "cod_original": "2029-01-15",
-        "drift_months": null
+        "drift_months": 16.5
       }
     ],
     "Gelston Energy Park Pty Ltd (ACN 690796788) as trustee for Gelston Energy Park Trust": [
@@ -8833,21 +8892,21 @@
     ],
     "Risen Energy (Australia) Pty Ltd": [
       {
-        "id": "geranium-plains-solar-and-bess",
-        "name": "Geranium Plains Solar and BESS",
-        "technology": "hybrid",
-        "state": "SA",
-        "status": "development",
-        "capacity_mw": 250.0,
-        "cod_current": null,
-        "cod_original": null,
-        "drift_months": null
-      },
-      {
         "id": "woodland-bess",
         "name": "Woodland BESS",
         "technology": "bess",
         "state": "NSW",
+        "status": "development",
+        "capacity_mw": 250.0,
+        "cod_current": "2029-12-31",
+        "cod_original": "2029-12-31",
+        "drift_months": 0.0
+      },
+      {
+        "id": "geranium-plains-solar-and-bess",
+        "name": "Geranium Plains Solar and BESS",
+        "technology": "hybrid",
+        "state": "SA",
         "status": "development",
         "capacity_mw": 250.0,
         "cod_current": null,
@@ -8913,9 +8972,9 @@
         "state": "QLD",
         "status": "development",
         "capacity_mw": 260.0,
-        "cod_current": null,
-        "cod_original": null,
-        "drift_months": null
+        "cod_current": "2028-01-31",
+        "cod_original": "2028-01-31",
+        "drift_months": 0.0
       },
       {
         "id": "miriam-vale-solar-farm-and-bess-a",
@@ -8924,9 +8983,9 @@
         "state": "QLD",
         "status": "development",
         "capacity_mw": 300.0,
-        "cod_current": null,
-        "cod_original": null,
-        "drift_months": null
+        "cod_current": "2030-03-29",
+        "cod_original": "2030-03-29",
+        "drift_months": 0.0
       },
       {
         "id": "miriam-vale-solar-farm-and-bess-b",
@@ -8935,6 +8994,17 @@
         "state": "QLD",
         "status": "development",
         "capacity_mw": 300.0,
+        "cod_current": "2030-03-29",
+        "cod_original": "2030-03-29",
+        "drift_months": 0.0
+      },
+      {
+        "id": "flat-rock-bess-kci",
+        "name": "Flat Rock BESS - KCI",
+        "technology": "bess",
+        "state": "NSW",
+        "status": "development",
+        "capacity_mw": 520.0,
         "cod_current": null,
         "cod_original": null,
         "drift_months": null
@@ -8983,11 +9053,11 @@
         "name": "Glenellen Solar Farm",
         "technology": "solar",
         "state": "NSW",
-        "status": "development",
+        "status": "commissioning",
         "capacity_mw": 200.0,
-        "cod_current": null,
-        "cod_original": null,
-        "drift_months": null
+        "cod_current": "2026-06-01",
+        "cod_original": "2026-06-01",
+        "drift_months": 0.0
       }
     ],
     "Glenrowan Solar Farm Pty Ltd as trustee for Glenrowan Solar Farm Trust": [
@@ -9063,9 +9133,9 @@
         "state": "SA",
         "status": "development",
         "capacity_mw": 230.0,
-        "cod_current": null,
-        "cod_original": null,
-        "drift_months": null
+        "cod_current": "2050-03-01",
+        "cod_original": "2050-03-01",
+        "drift_months": 0.0
       }
     ],
     "Squadron Energy Developments Pty Ltd": [
@@ -9076,9 +9146,9 @@
         "state": "NSW",
         "status": "development",
         "capacity_mw": 500.0,
-        "cod_current": null,
-        "cod_original": null,
-        "drift_months": null
+        "cod_current": "2032-07-01",
+        "cod_original": "2032-07-01",
+        "drift_months": 0.0
       },
       {
         "id": "pikedale-wind-farm-kci",
@@ -9087,9 +9157,9 @@
         "state": "QLD",
         "status": "development",
         "capacity_mw": 1500.0,
-        "cod_current": null,
-        "cod_original": null,
-        "drift_months": null
+        "cod_current": "2060-07-01",
+        "cod_original": "2060-07-01",
+        "drift_months": 0.0
       }
     ],
     "Tag Energy Australia P/L": [
@@ -9118,7 +9188,7 @@
         "drift_months": 0.0
       }
     ],
-    "GoodNight One Pty Ltd": [
+    "Goodnight One Pty Ltd": [
       {
         "id": "goodnight-hybrid-facility-solar-and-bess",
         "name": "GoodNight Hybrid Facility - Solar And BESS",
@@ -9126,23 +9196,12 @@
         "state": "QLD",
         "status": "development",
         "capacity_mw": 200.0,
-        "cod_current": null,
-        "cod_original": null,
-        "drift_months": null
+        "cod_current": "2030-09-02",
+        "cod_original": "2030-09-02",
+        "drift_months": 0.0
       }
     ],
     "Tag Energy Australia Pty Ltd": [
-      {
-        "id": "kerang-hybrid",
-        "name": "Kerang Hybrid",
-        "technology": "hybrid",
-        "state": "VIC",
-        "status": "development",
-        "capacity_mw": 171.0,
-        "cod_current": "2029-04-01",
-        "cod_original": "2029-04-01",
-        "drift_months": 0.0
-      },
       {
         "id": "yabulu-solar-farm",
         "name": "Yabulu Solar Farm",
@@ -9153,6 +9212,17 @@
         "cod_current": "2029-12-28",
         "cod_original": "2029-12-28",
         "drift_months": 0.0
+      },
+      {
+        "id": "kerang-hybrid",
+        "name": "Kerang Hybrid",
+        "technology": "hybrid",
+        "state": "VIC",
+        "status": "development",
+        "capacity_mw": 171.0,
+        "cod_current": "2029-12-31",
+        "cod_original": "2029-04-01",
+        "drift_months": 9.1
       },
       {
         "id": "goombi-renewable-energy-hub",
@@ -9242,11 +9312,11 @@
         "name": "Goorambat East Solar Farm (ENGIE)",
         "technology": "solar",
         "state": "VIC",
-        "status": "construction",
+        "status": "commissioning",
         "capacity_mw": 250.0,
-        "cod_current": "2026-05",
+        "cod_current": "2026-05-18",
         "cod_original": "2026-05-18",
-        "drift_months": null
+        "drift_months": 0.0
       },
       {
         "id": "the-plains",
@@ -9281,9 +9351,9 @@
         "state": "SA",
         "status": "development",
         "capacity_mw": 215.0,
-        "cod_current": null,
-        "cod_original": null,
-        "drift_months": null
+        "cod_current": "2027-11-26",
+        "cod_original": "2027-11-26",
+        "drift_months": 0.0
       }
     ],
     "Neoen Australia": [
@@ -9294,9 +9364,9 @@
         "state": "SA",
         "status": "development",
         "capacity_mw": 600.0,
-        "cod_current": "2029-12",
+        "cod_current": "2030-10-31",
         "cod_original": "2029-12-31",
-        "drift_months": null
+        "drift_months": 10.1
       }
     ],
     "Goyder Wind Farm 1A Pty Ltd as trustee for Goyder Wind Farm 1A Trust": [
@@ -9461,9 +9531,9 @@
         "state": "NSW",
         "status": "operating",
         "capacity_mw": 110.67,
-        "cod_current": "2020-06-19",
+        "cod_current": "2022-10-27",
         "cod_original": "2020-06-19",
-        "drift_months": 0.0
+        "drift_months": 28.7
       }
     ],
     "Lightsource Asset Management Australia Pty Ltd": [
@@ -9552,9 +9622,9 @@
         "state": "QLD",
         "status": "commissioning",
         "capacity_mw": 94.0,
-        "cod_current": "2026-02-16",
+        "cod_current": "2026-03-26",
         "cod_original": "2026-02-16",
-        "drift_months": 0.0
+        "drift_months": 1.3
       }
     ],
     "Brown Hill North Pty Ltd": [
@@ -9787,9 +9857,9 @@
         "state": "NSW",
         "status": "development",
         "capacity_mw": 710.0,
-        "cod_current": "2032-12",
+        "cod_current": "2032-12-31",
         "cod_original": "2032-12-31",
-        "drift_months": null
+        "drift_months": 0.0
       }
     ],
     "Harlin Solar Pty Ltd": [
@@ -9826,9 +9896,9 @@
         "state": "SA",
         "status": "development",
         "capacity_mw": 270.0,
-        "cod_current": "2028-12-30",
+        "cod_current": "2029-07-27",
         "cod_original": "2028-12-30",
-        "drift_months": 0.0
+        "drift_months": 7.0
       },
       {
         "id": "tallawang-solar-and-bess",
@@ -9874,9 +9944,9 @@
         "state": "QLD",
         "status": "development",
         "capacity_mw": 300.0,
-        "cod_current": "2028-01",
+        "cod_current": "2029-01-01",
         "cod_original": "2028-01-06",
-        "drift_months": null
+        "drift_months": 12.0
       }
     ],
     "Hawkesdale Asset Pty Ltd as trustee for Hawkesdale Asset Trust": [
@@ -10013,9 +10083,9 @@
         "state": "VIC",
         "status": "development",
         "capacity_mw": 400.0,
-        "cod_current": "2029-12",
+        "cod_current": "2029-12-31",
         "cod_original": "2029-12-31",
-        "drift_months": null
+        "drift_months": 0.0
       },
       {
         "id": "herries-range-wind-farm",
@@ -10037,9 +10107,9 @@
         "state": "VIC",
         "status": "development",
         "capacity_mw": 450.0,
-        "cod_current": "2027-08",
+        "cod_current": "2027-08-01",
         "cod_original": "2027-08-01",
-        "drift_months": null
+        "drift_months": 0.0
       },
       {
         "id": "hexham",
@@ -10048,9 +10118,9 @@
         "state": "VIC",
         "status": "development",
         "capacity_mw": 921.12,
-        "cod_current": "2030-11",
+        "cod_current": "2030-11-01",
         "cod_original": "2030-11-01",
-        "drift_months": null
+        "drift_months": 0.0
       }
     ],
     "Atmos Renewables": [
@@ -10074,9 +10144,9 @@
         "state": "VIC",
         "status": "development",
         "capacity_mw": 1281.0,
-        "cod_current": "2035-07",
+        "cod_current": "2035-07-25",
         "cod_original": "2035-07-25",
-        "drift_months": null
+        "drift_months": 0.0
       }
     ],
     "Someva Renewables": [
@@ -10113,9 +10183,9 @@
         "state": "SA",
         "status": "development",
         "capacity_mw": 100.0,
-        "cod_current": "2027-06",
+        "cod_current": "2027-06-30",
         "cod_original": "2027-06-30",
-        "drift_months": null
+        "drift_months": 0.0
       },
       {
         "id": "megalink-bess",
@@ -10124,9 +10194,9 @@
         "state": "SA",
         "status": "development",
         "capacity_mw": 250.0,
-        "cod_current": "2027-12",
+        "cod_current": "2027-12-30",
         "cod_original": "2027-12-30",
-        "drift_months": null
+        "drift_months": 0.0
       },
       {
         "id": "opal-bess",
@@ -10135,9 +10205,9 @@
         "state": "SA",
         "status": "development",
         "capacity_mw": 250.0,
-        "cod_current": "2028-06",
+        "cod_current": "2028-06-30",
         "cod_original": "2028-06-30",
-        "drift_months": null
+        "drift_months": 0.0
       },
       {
         "id": "holloway-battery",
@@ -10146,9 +10216,9 @@
         "state": "NSW",
         "status": "development",
         "capacity_mw": 250.0,
-        "cod_current": "2029-03",
+        "cod_current": "2029-03-30",
         "cod_original": "2029-03-30",
-        "drift_months": null
+        "drift_months": 0.0
       }
     ],
     "Bushranger Project Pty Ltd.": [
@@ -10355,9 +10425,9 @@
         "state": "NSW",
         "status": "development",
         "capacity_mw": 75.0,
-        "cod_current": null,
-        "cod_original": null,
-        "drift_months": null
+        "cod_current": "2028-06-30",
+        "cod_original": "2028-06-30",
+        "drift_months": 0.0
       }
     ],
     "Infrastructure Capital Services Pty Ltd as trustee for the ARIF Hume BESS Holdings Trust": [
@@ -10560,17 +10630,6 @@
         "cod_current": "2030-10-31",
         "cod_original": "2030-10-31",
         "drift_months": 0.0
-      },
-      {
-        "id": "romani-solar-farm",
-        "name": "Romani Solar Farm",
-        "technology": "solar",
-        "state": "NSW",
-        "status": "development",
-        "capacity_mw": 250.0,
-        "cod_current": null,
-        "cod_original": null,
-        "drift_months": null
       }
     ],
     "Iraak Sun Farm Pty Ltd": [
@@ -10684,6 +10743,17 @@
         "cod_current": null,
         "cod_original": null,
         "drift_months": null
+      },
+      {
+        "id": "tuggerah-bess-kci",
+        "name": "Tuggerah BESS - KCI",
+        "technology": "bess",
+        "state": "NSW",
+        "status": "development",
+        "capacity_mw": 500.0,
+        "cod_current": null,
+        "cod_original": null,
+        "drift_months": null
       }
     ],
     "Windlab / Eurus": [
@@ -10733,9 +10803,9 @@
         "state": "VIC",
         "status": "development",
         "capacity_mw": 103.0,
-        "cod_current": "2027-03-31",
+        "cod_current": "2028-03-31",
         "cod_original": "2027-03-31",
-        "drift_months": 0.0
+        "drift_months": 12.2
       }
     ],
     "Kerang Solar Plant Pty Ltd": [
@@ -10811,9 +10881,9 @@
         "state": "QLD",
         "status": "development",
         "capacity_mw": 200.0,
-        "cod_current": null,
-        "cod_original": null,
-        "drift_months": null
+        "cod_current": "2030-12-31",
+        "cod_original": "2030-12-31",
+        "drift_months": 0.0
       }
     ],
     "KIEWA VALLEY BESS NOMINEES PTY LTD on behalf of KIEWA VALLEY BESS Trust": [
@@ -10824,9 +10894,9 @@
         "state": "VIC",
         "status": "development",
         "capacity_mw": 500.0,
-        "cod_current": null,
-        "cod_original": null,
-        "drift_months": null
+        "cod_current": "2028-06-01",
+        "cod_original": "2028-06-01",
+        "drift_months": 0.0
       }
     ],
     "Kingaroy PropertyCo Pty Ltd as trustee for Kingaroy Property Trust": [
@@ -10872,28 +10942,6 @@
         "state": "VIC",
         "status": "development",
         "capacity_mw": 80.0,
-        "cod_current": null,
-        "cod_original": null,
-        "drift_months": null
-      },
-      {
-        "id": "riverland-solar-storage-solar",
-        "name": "Riverland Solar Storage - Solar",
-        "technology": "solar",
-        "state": "SA",
-        "status": "development",
-        "capacity_mw": 330.0,
-        "cod_current": null,
-        "cod_original": null,
-        "drift_months": null
-      },
-      {
-        "id": "riverland-solar-storage-storage",
-        "name": "Riverland Solar Storage - Storage",
-        "technology": "bess",
-        "state": "SA",
-        "status": "development",
-        "capacity_mw": 100.0,
         "cod_current": null,
         "cod_original": null,
         "drift_months": null
@@ -10992,9 +11040,9 @@
         "state": "VIC",
         "status": "development",
         "capacity_mw": 230.0,
-        "cod_current": "2032-01",
+        "cod_current": "2032-01-01",
         "cod_original": "2032-01-01",
-        "drift_months": null
+        "drift_months": 0.0
       }
     ],
     "CEP Energy": [
@@ -11064,9 +11112,9 @@
         "state": "NSW",
         "status": "development",
         "capacity_mw": 385.0,
-        "cod_current": "2030-12-31",
+        "cod_current": "2031-11-14",
         "cod_original": "2030-12-31",
-        "drift_months": 0.0
+        "drift_months": 10.6
       }
     ],
     "Lake Victoria Wind Farm Pty Ltd atf Lake Victoria Wind Farm unit trust": [
@@ -11090,9 +11138,9 @@
         "state": "QLD",
         "status": "development",
         "capacity_mw": 72.0,
-        "cod_current": "2030-01",
+        "cod_current": "2030-01-01",
         "cod_original": "2030-01-01",
-        "drift_months": null
+        "drift_months": 0.0
       }
     ],
     "Venn Energy Pty Ltd / Acacia Solar Project Pty Ltd.": [
@@ -11103,9 +11151,9 @@
         "state": "NSW",
         "status": "development",
         "capacity_mw": 300.0,
-        "cod_current": "2029-11",
+        "cod_current": "2029-11-30",
         "cod_original": "2029-11-30",
-        "drift_months": null
+        "drift_months": 0.0
       }
     ],
     "Lancaster Solar Farm Pty Ltd as trustee for the Lancaster Solar Farm Trust": [
@@ -11116,9 +11164,9 @@
         "state": "VIC",
         "status": "construction",
         "capacity_mw": 80.0,
-        "cod_current": "2026-05",
+        "cod_current": "2026-05-30",
         "cod_original": "2026-05-30",
-        "drift_months": null
+        "drift_months": 0.0
       }
     ],
     "Tilt Renewables (Mercury NZ)": [
@@ -11147,7 +11195,7 @@
         "drift_months": null
       }
     ],
-    "Acen Australia": [
+    "ACEN Australia": [
       {
         "id": "lilyvale-bess-kci",
         "name": "Lilyvale BESS - KCI",
@@ -11155,9 +11203,9 @@
         "state": "QLD",
         "status": "development",
         "capacity_mw": 440.0,
-        "cod_current": null,
-        "cod_original": null,
-        "drift_months": null
+        "cod_current": "2027-12-01",
+        "cod_original": "2027-12-01",
+        "drift_months": 0.0
       }
     ],
     "Lilyvale Asset Co Pty Ltd ATF Lilyvale Asset Trust": [
@@ -11192,11 +11240,11 @@
         "name": "Limondale BESS",
         "technology": "bess",
         "state": "NSW",
-        "status": "construction",
+        "status": "operating",
         "capacity_mw": 50.0,
-        "cod_current": "2026-03",
+        "cod_current": "2026-03-07",
         "cod_original": "2026-03-07",
-        "drift_months": null
+        "drift_months": 0.0
       }
     ],
     "Limondale Sun Farm Pty Ltd": [
@@ -11255,9 +11303,9 @@
         "state": "SA",
         "status": "development",
         "capacity_mw": 278.0,
-        "cod_current": null,
-        "cod_original": null,
-        "drift_months": null
+        "cod_current": "2030-03-31",
+        "cod_original": "2030-03-31",
+        "drift_months": 0.0
       }
     ],
     "Clean Technology Partners": [
@@ -11281,9 +11329,9 @@
         "state": "QLD",
         "status": "development",
         "capacity_mw": 1000.0,
-        "cod_current": "2030-09-30",
+        "cod_current": "2040-07-01",
         "cod_original": "2030-09-30",
-        "drift_months": 0.0
+        "drift_months": 118.7
       }
     ],
     "Syncline Energy Pty Ltd": [
@@ -11320,9 +11368,9 @@
         "state": "QLD",
         "status": "development",
         "capacity_mw": 281.0,
-        "cod_current": "2028-08",
+        "cod_current": "2028-08-01",
         "cod_original": "2028-08-01",
-        "drift_months": null
+        "drift_months": 0.0
       }
     ],
     "Alinta Energy Clean Energy Development Pty Ltd": [
@@ -11372,9 +11420,9 @@
         "state": "QLD",
         "status": "commissioning",
         "capacity_mw": 890.0,
-        "cod_current": "2025-11-30",
+        "cod_current": "2026-12-01",
         "cod_original": "2025-11-30",
-        "drift_months": 0.0
+        "drift_months": 12.2
       }
     ],
     "Mackenzie River ProjectCo Pty Ltd": [
@@ -11385,12 +11433,23 @@
         "state": "QLD",
         "status": "development",
         "capacity_mw": 450.0,
-        "cod_current": "2031-02-28",
+        "cod_current": "2031-06-02",
         "cod_original": "2031-02-28",
-        "drift_months": 0.0
+        "drift_months": 3.1
       }
     ],
     "Private Energy Partners": [
+      {
+        "id": "woodstock-renewable-energy-hub-bess",
+        "name": "Woodstock Renewable Energy Hub - BESS",
+        "technology": "hybrid",
+        "state": "QLD",
+        "status": "development",
+        "capacity_mw": 650.0,
+        "cod_current": "2030-03-29",
+        "cod_original": "2030-03-29",
+        "drift_months": 0.0
+      },
       {
         "id": "magnetite-energy-hub",
         "name": "Magnetite Energy Hub",
@@ -11401,17 +11460,6 @@
         "cod_current": "2031-12-31",
         "cod_original": "2031-12-31",
         "drift_months": 0.0
-      },
-      {
-        "id": "woodstock-renewable-energy-hub-bess",
-        "name": "Woodstock Renewable Energy Hub - BESS",
-        "technology": "bess",
-        "state": "QLD",
-        "status": "development",
-        "capacity_mw": 250.0,
-        "cod_current": null,
-        "cod_original": null,
-        "drift_months": null
       },
       {
         "id": "woodstock-renewable-energy-hub-solar",
@@ -11433,9 +11481,9 @@
         "state": "NSW",
         "status": "development",
         "capacity_mw": 300.0,
-        "cod_current": null,
-        "cod_original": null,
-        "drift_months": null
+        "cod_current": "2030-01-01",
+        "cod_original": "2030-01-01",
+        "drift_months": 0.0
       }
     ],
     "Graviatas Now Pty Ltd": [
@@ -11596,11 +11644,11 @@
         "name": "Wambo Wind Farm",
         "technology": "wind",
         "state": "QLD",
-        "status": "construction",
+        "status": "commissioning",
         "capacity_mw": 500.0,
-        "cod_current": "2025-02",
+        "cod_current": "2025-02-28",
         "cod_original": "2025-02-28",
-        "drift_months": null
+        "drift_months": 0.0
       },
       {
         "id": "marmadua-wind-farm-kci",
@@ -11633,9 +11681,9 @@
         "state": "NSW",
         "status": "development",
         "capacity_mw": 152.0,
-        "cod_current": "2027-12",
+        "cod_current": "2027-12-02",
         "cod_original": "2027-12-02",
-        "drift_months": null
+        "drift_months": 0.0
       }
     ],
     "Maryvale Solar Farm Pty Ltd": [
@@ -11651,7 +11699,7 @@
         "drift_months": 0.0
       }
     ],
-    "Metlen Energy & Metals": [
+    "Metlen Energy &amp;amp;amp;amp; Metals": [
       {
         "id": "mavis-hybrid-facility-solar",
         "name": "Mavis Hybrid Facility - Solar",
@@ -11659,9 +11707,9 @@
         "state": "NSW",
         "status": "development",
         "capacity_mw": 252.0,
-        "cod_current": null,
-        "cod_original": null,
-        "drift_months": null
+        "cod_current": "2028-07-01",
+        "cod_original": "2028-07-01",
+        "drift_months": 0.0
       }
     ],
     "X-Elio Holbrook Trust": [
@@ -11735,9 +11783,9 @@
         "state": "VIC",
         "status": "development",
         "capacity_mw": 1500.0,
-        "cod_current": "2030-01",
+        "cod_current": "2030-01-01",
         "cod_original": "2030-01-01",
-        "drift_months": null
+        "drift_months": 0.0
       }
     ],
     "Lumea": [
@@ -11885,9 +11933,9 @@
         "state": "QLD",
         "status": "development",
         "capacity_mw": 200.0,
-        "cod_current": null,
-        "cod_original": null,
-        "drift_months": null
+        "cod_current": "2029-06-30",
+        "cod_original": "2029-06-30",
+        "drift_months": 0.0
       },
       {
         "id": "millmerran-wind-farm",
@@ -11896,9 +11944,9 @@
         "state": "QLD",
         "status": "development",
         "capacity_mw": 250.0,
-        "cod_current": null,
-        "cod_original": null,
-        "drift_months": null
+        "cod_current": "2030-06-30",
+        "cod_original": "2030-06-30",
+        "drift_months": 0.0
       }
     ],
     "Milpulling Wind Farm Pty Ltd": [
@@ -11909,9 +11957,9 @@
         "state": "NSW",
         "status": "development",
         "capacity_mw": 400.0,
-        "cod_current": "2029-10",
+        "cod_current": "2029-11-30",
         "cod_original": "2029-10-12",
-        "drift_months": null
+        "drift_months": 1.6
       }
     ],
     "Moah Creek Wind Farm Project Co Pty Ltd as trustee for the Moah Creek Wind Farm Project Trust": [
@@ -11922,9 +11970,9 @@
         "state": "QLD",
         "status": "development",
         "capacity_mw": 349.0,
-        "cod_current": "2028-03",
+        "cod_current": "2029-12-28",
         "cod_original": "2028-03-31",
-        "drift_months": null
+        "drift_months": 21.2
       }
     ],
     "Moama Propertyco Pty Ltd as trustee for the Moama Property Trust": [
@@ -11935,9 +11983,9 @@
         "state": "NSW",
         "status": "development",
         "capacity_mw": 30.0,
-        "cod_current": "2027-12",
+        "cod_current": "2028-08-01",
         "cod_original": "2027-12-01",
-        "drift_months": null
+        "drift_months": 8.1
       }
     ],
     "Mobilong ProjectCo Pty Ltd": [
@@ -11948,9 +11996,9 @@
         "state": "SA",
         "status": "development",
         "capacity_mw": 180.0,
-        "cod_current": null,
-        "cod_original": null,
-        "drift_months": null
+        "cod_current": "2030-12-29",
+        "cod_original": "2030-12-29",
+        "drift_months": 0.0
       }
     ],
     "European Energy Australia": [
@@ -11974,9 +12022,9 @@
         "state": "NSW",
         "status": "development",
         "capacity_mw": 150.0,
-        "cod_current": null,
-        "cod_original": null,
-        "drift_months": null
+        "cod_current": "2028-07-01",
+        "cod_original": "2028-07-01",
+        "drift_months": 0.0
       }
     ],
     "Molong Operations co Pty Ltd ATF Molong Operations Trust": [
@@ -12013,9 +12061,9 @@
         "state": "QLD",
         "status": "development",
         "capacity_mw": 300.0,
-        "cod_current": null,
-        "cod_original": null,
-        "drift_months": null
+        "cod_current": "2030-06-30",
+        "cod_original": "2030-06-30",
+        "drift_months": 0.0
       }
     ],
     "Venn Energy Pty Ltd / Moonah Solar Project Pty Ltd": [
@@ -12026,9 +12074,9 @@
         "state": "VIC",
         "status": "development",
         "capacity_mw": 150.0,
-        "cod_current": "2029-12",
+        "cod_current": "2029-12-26",
         "cod_original": "2029-12-26",
-        "drift_months": null
+        "drift_months": 0.0
       }
     ],
     "Brookfield": [
@@ -12104,9 +12152,9 @@
         "state": "VIC",
         "status": "development",
         "capacity_mw": 387.6,
-        "cod_current": null,
-        "cod_original": null,
-        "drift_months": null
+        "cod_current": "2030-07-01",
+        "cod_original": "2030-07-01",
+        "drift_months": 0.0
       }
     ],
     "Origin Energy Limited": [
@@ -12117,6 +12165,17 @@
         "state": "SA",
         "status": "development",
         "capacity_mw": 30.0,
+        "cod_current": null,
+        "cod_original": null,
+        "drift_months": null
+      },
+      {
+        "id": "mortlake-bess-2-kci",
+        "name": "Mortlake BESS 2 - KCI",
+        "technology": "bess",
+        "state": "VIC",
+        "status": "development",
+        "capacity_mw": 500.0,
         "cod_current": null,
         "cod_original": null,
         "drift_months": null
@@ -12154,9 +12213,9 @@
         "state": "VIC",
         "status": "commissioning",
         "capacity_mw": 540.0,
-        "cod_current": "2026-02-28",
+        "cod_current": "2026-07-31",
         "cod_original": "2026-02-28",
-        "drift_months": 0.0
+        "drift_months": 5.1
       },
       {
         "id": "pine-lodge-bess",
@@ -12217,9 +12276,9 @@
         "state": "VIC",
         "status": "development",
         "capacity_mw": 750.0,
-        "cod_current": "2032-07",
+        "cod_current": "2032-07-05",
         "cod_original": "2032-07-05",
-        "drift_months": null
+        "drift_months": 0.0
       }
     ],
     "Mount Hopeful Wind Farm as trustee for Mount Hopeful Wind Farm Trust": [
@@ -12282,9 +12341,9 @@
         "state": "QLD",
         "status": "development",
         "capacity_mw": 291.4,
-        "cod_current": "2032-01",
+        "cod_current": "2032-01-01",
         "cod_original": "2032-01-01",
-        "drift_months": null
+        "drift_months": 0.0
       }
     ],
     "Foresight Australia": [
@@ -12384,11 +12443,11 @@
         "name": "Munna Creek Solar Farm",
         "technology": "solar",
         "state": "QLD",
-        "status": "construction",
+        "status": "commissioning",
         "capacity_mw": 120.0,
-        "cod_current": "2026-01",
+        "cod_current": "2026-01-24",
         "cod_original": "2026-01-24",
-        "drift_months": null
+        "drift_months": 0.0
       }
     ],
     "Murra Warra Project Co Pty Ltd": [
@@ -12475,9 +12534,9 @@
         "state": "NSW",
         "status": "development",
         "capacity_mw": 400.0,
-        "cod_current": "2030-12-30",
+        "cod_current": "2031-06-30",
         "cod_original": "2030-12-30",
-        "drift_months": 0.0
+        "drift_months": 6.1
       }
     ],
     "Nemaroo Bimbi Wind Farm Pty Ltd": [
@@ -12579,9 +12638,9 @@
         "state": "TAS",
         "status": "development",
         "capacity_mw": 1260.0,
-        "cod_current": "2032-07",
+        "cod_current": "2032-07-30",
         "cod_original": "2032-07-30",
-        "drift_months": null
+        "drift_months": 0.0
       }
     ],
     "Townsville City Council": [
@@ -12605,9 +12664,9 @@
         "state": "SA",
         "status": "commissioning",
         "capacity_mw": 111.0,
-        "cod_current": "2025-08-31",
+        "cod_current": "2025-12-05",
         "cod_original": "2025-08-31",
-        "drift_months": 0.0
+        "drift_months": 3.2
       },
       {
         "id": "north-yarragon-bess-kci",
@@ -12681,9 +12740,9 @@
         "state": "VIC",
         "status": "development",
         "capacity_mw": 302.1,
-        "cod_current": "2028-12",
+        "cod_current": "2028-12-31",
         "cod_original": "2028-12-31",
-        "drift_months": null
+        "drift_months": 0.0
       },
       {
         "id": "tall-tree-bess",
@@ -12692,9 +12751,9 @@
         "state": "VIC",
         "status": "development",
         "capacity_mw": 200.0,
-        "cod_current": "2030-12-31",
+        "cod_current": "2031-12-15",
         "cod_original": "2030-12-31",
-        "drift_months": 0.0
+        "drift_months": 11.6
       }
     ],
     "RE Oakey Pty Ltd": [
@@ -12738,19 +12797,19 @@
     ],
     "\u00d8rsted Offshore Australia 1 Pty Ltd": [
       {
-        "id": "orsted-gippsland-a-and-b-windfarm",
-        "name": "Orsted Gippsland A and B Windfarm",
+        "id": "orsted-gippsland-c-windfarm",
+        "name": "Orsted Gippsland C Windfarm",
         "technology": "offshore_wind",
         "state": "VIC",
         "status": "development",
         "capacity_mw": 2820.0,
-        "cod_current": null,
-        "cod_original": null,
-        "drift_months": null
+        "cod_current": "2032-12-31",
+        "cod_original": "2032-12-31",
+        "drift_months": 0.0
       },
       {
-        "id": "orsted-gippsland-c-windfarm",
-        "name": "Orsted Gippsland C Windfarm",
+        "id": "orsted-gippsland-a-and-b-windfarm",
+        "name": "Orsted Gippsland A and B Windfarm",
         "technology": "offshore_wind",
         "state": "VIC",
         "status": "development",
@@ -12781,9 +12840,9 @@
         "state": "NSW",
         "status": "development",
         "capacity_mw": 900.0,
-        "cod_current": null,
-        "cod_original": null,
-        "drift_months": null
+        "cod_current": "2036-01-01",
+        "cod_original": "2036-01-01",
+        "drift_months": 0.0
       }
     ],
     "Oxley Solar Development Pty Ltd": [
@@ -12907,9 +12966,9 @@
         "state": "TAS",
         "status": "development",
         "capacity_mw": 100.0,
-        "cod_current": null,
-        "cod_original": null,
-        "drift_months": null
+        "cod_current": "2027-09-30",
+        "cod_original": "2027-09-30",
+        "drift_months": 0.0
       }
     ],
     "PANORAMA BESS SUBCO PTY LTD as trustee for the PANORAMA BESS UNIT TRUST": [
@@ -12946,9 +13005,9 @@
         "state": "NSW",
         "status": "development",
         "capacity_mw": 810.0,
-        "cod_current": null,
-        "cod_original": null,
-        "drift_months": null
+        "cod_current": "2032-12-01",
+        "cod_original": "2032-12-01",
+        "drift_months": 0.0
       }
     ],
     "Piambong Wind Farm Pty Ltd": [
@@ -13011,9 +13070,9 @@
         "state": "QLD",
         "status": "development",
         "capacity_mw": 80.0,
-        "cod_current": "2029-10",
+        "cod_current": "2029-10-07",
         "cod_original": "2029-10-07",
-        "drift_months": null
+        "drift_months": 0.0
       }
     ],
     "PLEYSTOWE BESS PTY LTD": [
@@ -13024,9 +13083,9 @@
         "state": "QLD",
         "status": "development",
         "capacity_mw": 200.0,
-        "cod_current": null,
-        "cod_original": null,
-        "drift_months": null
+        "cod_current": "2028-12-31",
+        "cod_original": "2028-12-31",
+        "drift_months": 0.0
       }
     ],
     "Pleystowe BESS P/L": [
@@ -13161,9 +13220,9 @@
         "state": "QLD",
         "status": "development",
         "capacity_mw": 2000.0,
-        "cod_current": "2031-12",
+        "cod_current": "2032-12-31",
         "cod_original": "2031-12-31",
-        "drift_months": null
+        "drift_months": 12.2
       }
     ],
     "Evolution Pty Ltd": [
@@ -13237,9 +13296,9 @@
         "state": "QLD",
         "status": "development",
         "capacity_mw": 400.0,
-        "cod_current": "2026-01",
+        "cod_current": "2026-01-31",
         "cod_original": "2026-01-31",
-        "drift_months": null
+        "drift_months": 0.0
       },
       {
         "id": "punchs-creek-milmerran-bess-new",
@@ -13261,9 +13320,9 @@
         "state": "QLD",
         "status": "development",
         "capacity_mw": 400.0,
-        "cod_current": "2028-10",
+        "cod_current": "2028-10-31",
         "cod_original": "2028-10-31",
-        "drift_months": null
+        "drift_months": 0.0
       }
     ],
     "EDPR Australia Pty Ltd": [
@@ -13350,9 +13409,9 @@
         "state": "VIC",
         "status": "development",
         "capacity_mw": 63.0,
-        "cod_current": "2026-01",
+        "cod_current": "2026-01-16",
         "cod_original": "2026-01-16",
-        "drift_months": null
+        "drift_months": 0.0
       }
     ],
     "Alinta Energy Reeves Plains Pty Ltd": [
@@ -13468,6 +13527,41 @@
         "drift_months": 0.0
       }
     ],
+    "OX2": [
+      {
+        "id": "riverland-solar-storage-solar",
+        "name": "Riverland Solar Storage - Solar",
+        "technology": "solar",
+        "state": "SA",
+        "status": "development",
+        "capacity_mw": 300.0,
+        "cod_current": null,
+        "cod_original": null,
+        "drift_months": null
+      },
+      {
+        "id": "riverland-solar-storage-storage",
+        "name": "Riverland Solar Storage - Storage",
+        "technology": "bess",
+        "state": "SA",
+        "status": "development",
+        "capacity_mw": 300.0,
+        "cod_current": null,
+        "cod_original": null,
+        "drift_months": null
+      },
+      {
+        "id": "summerville-bess",
+        "name": "Summerville BESS",
+        "technology": "bess",
+        "state": "NSW",
+        "status": "development",
+        "capacity_mw": 90.0,
+        "cod_current": null,
+        "cod_original": null,
+        "drift_months": null
+      }
+    ],
     "ACEN Robbins Island PTY LTD": [
       {
         "id": "robbins-island-wind-farm",
@@ -13476,9 +13570,9 @@
         "state": "TAS",
         "status": "development",
         "capacity_mw": 929.0,
-        "cod_current": null,
-        "cod_original": null,
-        "drift_months": null
+        "cod_current": "2030-12-01",
+        "cod_original": "2030-12-01",
+        "drift_months": 0.0
       }
     ],
     "StorEnergy 4 Pty Ltd": [
@@ -13507,6 +13601,19 @@
         "drift_months": null
       }
     ],
+    "Samsung C&amp;amp;amp;T Renewable Energy Australia Pty Ltd": [
+      {
+        "id": "romani-solar-farm",
+        "name": "Romani Solar Farm",
+        "technology": "hybrid",
+        "state": "NSW",
+        "status": "development",
+        "capacity_mw": 250.0,
+        "cod_current": "2031-08-13",
+        "cod_original": "2031-08-13",
+        "drift_months": 0.0
+      }
+    ],
     "Ross River Operations Pty Ltd as the Trustee for the Ross River Operations Trust": [
       {
         "id": "ross-river-solar-farm",
@@ -13528,9 +13635,9 @@
         "state": "NSW",
         "status": "development",
         "capacity_mw": 248.0,
-        "cod_current": "2028-09",
+        "cod_current": "2028-09-30",
         "cod_original": "2028-09-30",
-        "drift_months": null
+        "drift_months": 0.0
       }
     ],
     "Adani Rugby Run Pty Ltd": [
@@ -13596,26 +13703,26 @@
         "drift_months": 0.0
       },
       {
-        "id": "skye-ridge-wind-farm",
-        "name": "Skye Ridge Wind Farm",
-        "technology": "wind",
-        "state": "NSW",
-        "status": "development",
-        "capacity_mw": 1300.0,
-        "cod_current": "2031-11",
-        "cod_original": "2031-11-28",
-        "drift_months": null
-      },
-      {
         "id": "salisbury-solar-450mw",
         "name": "Salisbury Solar 450MW",
         "technology": "solar",
         "state": "NSW",
         "status": "development",
         "capacity_mw": 450.0,
-        "cod_current": "2032-02",
+        "cod_current": "2032-02-27",
         "cod_original": "2032-02-27",
-        "drift_months": null
+        "drift_months": 0.0
+      },
+      {
+        "id": "skye-ridge-wind-farm",
+        "name": "Skye Ridge Wind Farm",
+        "technology": "wind",
+        "state": "NSW",
+        "status": "development",
+        "capacity_mw": 750.0,
+        "cod_current": "2033-12-31",
+        "cod_original": "2031-11-28",
+        "drift_months": 25.5
       }
     ],
     "Salt Creek Wind Farm Pty Ltd": [
@@ -13639,23 +13746,25 @@
         "state": "NSW",
         "status": "development",
         "capacity_mw": 700.0,
-        "cod_current": "2029-06-01",
+        "cod_current": "2031-02-13",
         "cod_original": "2029-06-01",
+        "drift_months": 20.7
+      }
+    ],
+    "Samsung C&amp;amp;T Renewable Energy Australia Pty Ltd.": [
+      {
+        "id": "sandy-point-hybrid-solar",
+        "name": "Sandy Point Hybrid - Solar",
+        "technology": "hybrid",
+        "state": "NSW",
+        "status": "development",
+        "capacity_mw": 250.0,
+        "cod_current": "2029-08-01",
+        "cod_original": "2029-08-01",
         "drift_months": 0.0
       }
     ],
     "Samsung C&T Renewable Energy Australia Pty Ltd.": [
-      {
-        "id": "sandy-point-hybrid-solar",
-        "name": "Sandy Point Hybrid - Solar",
-        "technology": "solar",
-        "state": "NSW",
-        "status": "development",
-        "capacity_mw": 150.0,
-        "cod_current": null,
-        "cod_original": null,
-        "drift_months": null
-      },
       {
         "id": "sandy-point-hybrid-storage",
         "name": "Sandy Point Hybrid - Storage",
@@ -13867,9 +13976,9 @@
         "state": "NSW",
         "status": "development",
         "capacity_mw": 702.0,
-        "cod_current": null,
-        "cod_original": null,
-        "drift_months": null
+        "cod_current": "2031-07-01",
+        "cod_original": "2031-07-01",
+        "drift_months": 0.0
       }
     ],
     "Alinta Energy / JERA Nex (Parkwind)": [
@@ -13880,9 +13989,9 @@
         "state": "VIC",
         "status": "development",
         "capacity_mw": 1200.0,
-        "cod_current": null,
-        "cod_original": null,
-        "drift_months": null
+        "cod_current": "2038-01-01",
+        "cod_original": "2038-01-01",
+        "drift_months": 0.0
       }
     ],
     "progresspower_nr": [
@@ -13893,9 +14002,9 @@
         "state": "VIC",
         "status": "development",
         "capacity_mw": 115.0,
-        "cod_current": "2026-10-30",
+        "cod_current": "2028-10-30",
         "cod_original": "2026-10-30",
-        "drift_months": 0.0
+        "drift_months": 24.4
       }
     ],
     "Miraabou Energy Ltd": [
@@ -13945,9 +14054,9 @@
         "state": "NSW",
         "status": "development",
         "capacity_mw": 125.0,
-        "cod_current": "2027-11-30",
+        "cod_current": "2028-06-30",
         "cod_original": "2027-11-30",
-        "drift_months": 0.0
+        "drift_months": 7.1
       }
     ],
     "Greenleaf Renewable": [
@@ -13997,9 +14106,9 @@
         "state": "VIC",
         "status": "development",
         "capacity_mw": 800.0,
-        "cod_current": "2031-12",
+        "cod_current": "2031-12-01",
         "cod_original": "2031-12-01",
-        "drift_months": null
+        "drift_months": 0.0
       }
     ],
     "Strontian Solar Pty Ltd": [
@@ -14089,19 +14198,6 @@
         "cod_current": "2028-12-30",
         "cod_original": "2028-12-30",
         "drift_months": 0.0
-      }
-    ],
-    "OX2": [
-      {
-        "id": "summerville-bess",
-        "name": "Summerville BESS",
-        "technology": "bess",
-        "state": "NSW",
-        "status": "development",
-        "capacity_mw": 90.0,
-        "cod_current": null,
-        "cod_original": null,
-        "drift_months": null
       }
     ],
     "ESCO Solar Farm 5 Pty Ltd": [
@@ -14240,9 +14336,9 @@
         "state": "QLD",
         "status": "operating",
         "capacity_mw": 1300.0,
-        "cod_current": "2026-06-01",
+        "cod_current": "2026-06-30",
         "cod_original": "2026-01-07",
-        "drift_months": 4.8
+        "drift_months": 5.8
       }
     ],
     "Supernode BESS 3 ProjectCo Pty Ltd as trustee for Supernode BESS 3 Project Trust": [
@@ -14349,9 +14445,9 @@
         "state": "QLD",
         "status": "development",
         "capacity_mw": 250.0,
-        "cod_current": "2026-01-27",
+        "cod_current": "2026-04-03",
         "cod_original": "2026-01-27",
-        "drift_months": 0.0
+        "drift_months": 2.2
       }
     ],
     "Tamworth BESS Project 1 Pty Ltd": [
@@ -14362,9 +14458,9 @@
         "state": "NSW",
         "status": "development",
         "capacity_mw": 100.0,
-        "cod_current": "2027-12-31",
+        "cod_current": "2028-12-31",
         "cod_original": "2027-12-31",
-        "drift_months": 0.0
+        "drift_months": 12.2
       }
     ],
     "valent-energy_nr": [
@@ -14375,9 +14471,9 @@
         "state": "NSW",
         "status": "development",
         "capacity_mw": 100.0,
-        "cod_current": "2027-12-31",
+        "cod_current": "2028-12-31",
         "cod_original": "2027-12-31",
-        "drift_months": 0.0
+        "drift_months": 12.2
       }
     ],
     "The Trustee for Equis Energy (Ausralia) Ngumi 4 Asset Trust": [
@@ -14464,9 +14560,9 @@
         "state": "QLD",
         "status": "development",
         "capacity_mw": 436.5,
-        "cod_current": "2028-10-01",
+        "cod_current": "2030-09-01",
         "cod_original": "2028-10-01",
-        "drift_months": 0.0
+        "drift_months": 23.3
       }
     ],
     "HYDROTAS": [
@@ -14603,9 +14699,9 @@
         "state": "QLD",
         "status": "development",
         "capacity_mw": 1054.0,
-        "cod_current": "2028-12",
+        "cod_current": "2028-12-31",
         "cod_original": "2028-12-31",
-        "drift_months": null
+        "drift_months": 0.0
       }
     ],
     "Ausnet Transmission Group Pty Ltd": [
@@ -14727,9 +14823,9 @@
         "state": "VIC",
         "status": "development",
         "capacity_mw": 200.0,
-        "cod_current": null,
-        "cod_original": null,
-        "drift_months": null
+        "cod_current": "2030-12-01",
+        "cod_original": "2030-12-01",
+        "drift_months": 0.0
       }
     ],
     "Eku Energy Projects (Australia) Pty Ltd as trustee for the Eku Energy Projects Australia Trust": [
@@ -14740,8 +14836,19 @@
         "state": "VIC",
         "status": "development",
         "capacity_mw": 300.0,
-        "cod_current": "2028-12-30",
+        "cod_current": "2029-03-30",
         "cod_original": "2028-12-30",
+        "drift_months": 3.0
+      },
+      {
+        "id": "waterloo-bess",
+        "name": "Waterloo BESS",
+        "technology": "bess",
+        "state": "SA",
+        "status": "development",
+        "capacity_mw": 120.0,
+        "cod_current": "2030-06-30",
+        "cod_original": "2030-06-30",
         "drift_months": 0.0
       }
     ],
@@ -14759,6 +14866,17 @@
       }
     ],
     "Australian Solar Enterprises Pty Ltd": [
+      {
+        "id": "tumuruu-bess-and-solar-farm",
+        "name": "Tumuruu BESS and Solar Farm",
+        "technology": "hybrid",
+        "state": "QLD",
+        "status": "development",
+        "capacity_mw": 400.0,
+        "cod_current": "2028-04-30",
+        "cod_original": "2028-04-30",
+        "drift_months": 0.0
+      },
       {
         "id": "tumuruu-one",
         "name": "Tumuruu One",
@@ -14844,9 +14962,9 @@
         "state": "NSW",
         "status": "development",
         "capacity_mw": 55.0,
-        "cod_current": null,
-        "cod_original": null,
-        "drift_months": null
+        "cod_current": "2050-07-01",
+        "cod_original": "2050-07-01",
+        "drift_months": 0.0
       }
     ],
     "Vast Solar 1 Pty Ltd": [
@@ -14921,10 +15039,10 @@
         "technology": "bess",
         "state": "NSW",
         "status": "development",
-        "capacity_mw": 500.0,
-        "cod_current": null,
-        "cod_original": null,
-        "drift_months": null
+        "capacity_mw": 300.0,
+        "cod_current": "2029-10-01",
+        "cod_original": "2029-10-01",
+        "drift_months": 0.0
       }
     ],
     "TransGrid": [
@@ -15232,9 +15350,9 @@
         "state": "NSW",
         "status": "development",
         "capacity_mw": 215.0,
-        "cod_current": "2028-03",
+        "cod_current": "2028-03-31",
         "cod_original": "2028-03-31",
-        "drift_months": null
+        "drift_months": 0.0
       }
     ],
     "Whitsunday Solar Farm Pty Ltd": [
@@ -15284,9 +15402,9 @@
         "state": "SA",
         "status": "development",
         "capacity_mw": 574.4,
-        "cod_current": "2030-01",
+        "cod_current": "2030-01-01",
         "cod_original": "2030-01-01",
-        "drift_months": null
+        "drift_months": 0.0
       }
     ],
     "X-Elio Willavale Park Trust": [
@@ -15349,9 +15467,9 @@
         "state": "NSW",
         "status": "development",
         "capacity_mw": 731.6,
-        "cod_current": null,
-        "cod_original": null,
-        "drift_months": null
+        "cod_current": "2031-12-31",
+        "cod_original": "2031-12-31",
+        "drift_months": 0.0
       }
     ],
     "AE BESS 10 as Trustee for AE BESS 10 Unit Trust": [
@@ -15388,9 +15506,9 @@
         "state": "VIC",
         "status": "development",
         "capacity_mw": 100.0,
-        "cod_current": "2027-04",
+        "cod_current": "2027-04-30",
         "cod_original": "2027-04-30",
-        "drift_months": null
+        "drift_months": 0.0
       }
     ],
     "Winton Asset Co. Pty Ltd as Trustee of the Winton Asset Trust": [
@@ -15466,9 +15584,9 @@
         "state": "QLD",
         "status": "development",
         "capacity_mw": 450.0,
-        "cod_current": "2030-05",
+        "cod_current": "2030-12-31",
         "cod_original": "2030-05-01",
-        "drift_months": null
+        "drift_months": 8.1
       }
     ],
     "Woodlawn Wind Pty Ltd": [
@@ -15622,9 +15740,9 @@
         "state": "QLD",
         "status": "development",
         "capacity_mw": 200.0,
-        "cod_current": null,
-        "cod_original": null,
-        "drift_months": null
+        "cod_current": "2028-12-31",
+        "cod_original": "2028-12-31",
+        "drift_months": 0.0
       }
     ],
     "Acenergy Pty Ltd": [
@@ -15687,9 +15805,9 @@
         "state": "QLD",
         "status": "development",
         "capacity_mw": 400.0,
-        "cod_current": null,
-        "cod_original": null,
-        "drift_months": null
+        "cod_current": "2028-07-01",
+        "cod_original": "2028-07-01",
+        "drift_months": 0.0
       }
     ],
     "Yoorndoo Ilga Solar Pty Ltd": [
@@ -15713,9 +15831,9 @@
         "state": "NSW",
         "status": "operating",
         "capacity_mw": 700.0,
-        "cod_current": "2025-12",
+        "cod_current": "2027-03-31",
         "cod_original": "2027-03-31",
-        "drift_months": null
+        "drift_months": 0.0
       }
     ],
     "ENGIE (25%) + Foresight Group (75%) JV": [
@@ -15767,6 +15885,266 @@
         "capacity_mw": 341.0,
         "cod_current": "2028-12",
         "cod_original": "2028-12",
+        "drift_months": null
+      }
+    ],
+    "VISY PULP AND PAPER PTY. LTD.": [
+      {
+        "id": "albury-mill-bess-kci",
+        "name": "Albury Mill BESS - KCI",
+        "technology": "bess",
+        "state": "NSW",
+        "status": "development",
+        "capacity_mw": 350.0,
+        "cod_current": null,
+        "cod_original": null,
+        "drift_months": null
+      }
+    ],
+    "Pacific Green Energy Parks Developments Pty Ltd": [
+      {
+        "id": "arthurs-hill-energy-park-kci",
+        "name": "Arthur's Hill Energy Park - KCI",
+        "technology": "bess",
+        "state": "NSW",
+        "status": "development",
+        "capacity_mw": 500.0,
+        "cod_current": null,
+        "cod_original": null,
+        "drift_months": null
+      }
+    ],
+    "Ashleigh Park Beef Pty Ltd": [
+      {
+        "id": "ashleigh-park-bess-kci",
+        "name": "Ashleigh Park BESS - KCI",
+        "technology": "bess",
+        "state": "NSW",
+        "status": "development",
+        "capacity_mw": 300.0,
+        "cod_current": null,
+        "cod_original": null,
+        "drift_months": null
+      }
+    ],
+    "British Solar Renewables Pty Ltd": [
+      {
+        "id": "borambola-hybrid-kci",
+        "name": "Borambola Hybrid - KCI",
+        "technology": "hybrid",
+        "state": "NSW",
+        "status": "development",
+        "capacity_mw": 90.0,
+        "cod_current": null,
+        "cod_original": null,
+        "drift_months": null
+      }
+    ],
+    "CS SubCo Pty Ltd as trustee for Carwarp SF SPV": [
+      {
+        "id": "carwarp-solar-farm-cwsf",
+        "name": "Carwarp Solar Farm (CWSF)",
+        "technology": "solar",
+        "state": "VIC",
+        "status": "commissioning",
+        "capacity_mw": 150.0,
+        "cod_current": "2026-04-30",
+        "cod_original": "2026-04-30",
+        "drift_months": 0.0
+      }
+    ],
+    "Squadron Energy Pty Ltd": [
+      {
+        "id": "conargo-wind-farm-kci",
+        "name": "Conargo Wind Farm - KCI",
+        "technology": "wind",
+        "state": "NSW",
+        "status": "development",
+        "capacity_mw": 130.0,
+        "cod_current": null,
+        "cod_original": null,
+        "drift_months": null
+      }
+    ],
+    "EIWA HORSHAM BESS Pty Ltd": [
+      {
+        "id": "eiwa-horsham-bess-kci",
+        "name": "EIWA Horsham BESS - KCI",
+        "technology": "bess",
+        "state": "VIC",
+        "status": "development",
+        "capacity_mw": 260.0,
+        "cod_current": null,
+        "cod_original": null,
+        "drift_months": null
+      }
+    ],
+    "FUTBESS PROJECT HOLDING PTY LTD": [
+      {
+        "id": "futcher-bess",
+        "name": "FUTCHER BESS",
+        "technology": "bess",
+        "state": "NSW",
+        "status": "development",
+        "capacity_mw": 400.0,
+        "cod_current": null,
+        "cod_original": null,
+        "drift_months": null
+      }
+    ],
+    "Lake Road Battery Pty Ltd": [
+      {
+        "id": "lake-road-battery-tuggerah-kci",
+        "name": "Lake Road Battery Tuggerah - KCI",
+        "technology": "bess",
+        "state": "NSW",
+        "status": "development",
+        "capacity_mw": 250.0,
+        "cod_current": null,
+        "cod_original": null,
+        "drift_months": null
+      }
+    ],
+    "Monash Renweables Pty Ltd": [
+      {
+        "id": "markaranka-bess",
+        "name": "Markaranka BESS",
+        "technology": "bess",
+        "state": "SA",
+        "status": "development",
+        "capacity_mw": 320.0,
+        "cod_current": "2029-03-31",
+        "cod_original": "2029-03-31",
+        "drift_months": 0.0
+      }
+    ],
+    "European Energy": [
+      {
+        "id": "melbourne-solar-farm-and-bess-kci",
+        "name": "Melbourne Solar Farm and BESS - KCI",
+        "technology": "hybrid",
+        "state": "VIC",
+        "status": "development",
+        "capacity_mw": 500.0,
+        "cod_current": null,
+        "cod_original": null,
+        "drift_months": null
+      }
+    ],
+    "Middle Hut Storage Pty Ltd": [
+      {
+        "id": "middle-hut-bess-kci",
+        "name": "Middle Hut BESS - KCI",
+        "technology": "bess",
+        "state": "VIC",
+        "status": "development",
+        "capacity_mw": 800.0,
+        "cod_current": null,
+        "cod_original": null,
+        "drift_months": null
+      }
+    ],
+    "Minimbah BESS Pty Ltd": [
+      {
+        "id": "minimbah-bess-kci",
+        "name": "Minimbah BESS - KCI",
+        "technology": "bess",
+        "state": "NSW",
+        "status": "development",
+        "capacity_mw": 125.0,
+        "cod_current": null,
+        "cod_original": null,
+        "drift_months": null
+      }
+    ],
+    "MISKELLY BESS PROJECT PTY LTD": [
+      {
+        "id": "miskelly-bess-kci",
+        "name": "Miskelly BESS - KCI",
+        "technology": "bess",
+        "state": "NSW",
+        "status": "development",
+        "capacity_mw": 500.0,
+        "cod_current": null,
+        "cod_original": null,
+        "drift_months": null
+      }
+    ],
+    "BRIGHTNIGHT AUSTRALIA PTY LTD": [
+      {
+        "id": "mortlake-energy-hub-stage-2-kci",
+        "name": "Mortlake Energy Hub Stage 2 - KCI",
+        "technology": "bess",
+        "state": "VIC",
+        "status": "development",
+        "capacity_mw": 500.0,
+        "cod_current": null,
+        "cod_original": null,
+        "drift_months": null
+      }
+    ],
+    "Murchs\u2019 Corner Energy Pty Ltd": [
+      {
+        "id": "murchs-corner-bess-kci",
+        "name": "Murchs Corner BESS - KCI",
+        "technology": "bess",
+        "state": "VIC",
+        "status": "development",
+        "capacity_mw": 500.0,
+        "cod_current": null,
+        "cod_original": null,
+        "drift_months": null
+      }
+    ],
+    "Northharbour": [
+      {
+        "id": "nerriga-bess-kci",
+        "name": "Nerriga BESS - KCI",
+        "technology": "bess",
+        "state": "NSW",
+        "status": "development",
+        "capacity_mw": 600.0,
+        "cod_current": null,
+        "cod_original": null,
+        "drift_months": null
+      }
+    ],
+    "TUMMAVILLE SOLAR FARM PTY LTD ATF TUMMAVILLE SOLAR FARM UNIT TRUST": [
+      {
+        "id": "tummaville-hybrid-facility-solar-and-bess",
+        "name": "TUMMAVILLE Hybrid Facility- Solar And BESS",
+        "technology": "hybrid",
+        "state": "QLD",
+        "status": "development",
+        "capacity_mw": 500.0,
+        "cod_current": "2031-09-01",
+        "cod_original": "2031-09-01",
+        "drift_months": 0.0
+      }
+    ],
+    "BayWa r.e. Australia Pty Ltd": [
+      {
+        "id": "wimmera-plains-energy-facility-stage-2-kci",
+        "name": "Wimmera Plains Energy Facility Stage 2 - KCI",
+        "technology": "wind",
+        "state": "VIC",
+        "status": "development",
+        "capacity_mw": 130.0,
+        "cod_current": null,
+        "cod_original": null,
+        "drift_months": null
+      }
+    ],
+    "Winton Renewable Energy Stability and Storage Terminal Pty Ltd": [
+      {
+        "id": "winton-renewable-energy-storage-and-stability-terminal-wresst",
+        "name": "Winton Renewable Energy Storage and Stability Terminal (WRESST)",
+        "technology": "bess",
+        "state": "VIC",
+        "status": "development",
+        "capacity_mw": 400.0,
+        "cod_current": null,
+        "cod_original": null,
         "drift_months": null
       }
     ]
@@ -33831,5 +34209,5 @@
       }
     ]
   },
-  "exported_at": "2026-07-26T13:12:26.079389"
+  "exported_at": "2026-07-26T18:36:15.295293"
 }

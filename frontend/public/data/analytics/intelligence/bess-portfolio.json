@@ -1,14 +1,14 @@
 {
   "summary": {
-    "total_bess": 432,
-    "total_with_storage": 347,
-    "total_operating": 34,
-    "total_hybrid": 94,
+    "total_bess": 453,
+    "total_with_storage": 352,
+    "total_operating": 35,
+    "total_hybrid": 103,
     "total_hybrid_operating": 0,
     "grid_forming_count": 11,
-    "grid_forming_pct": 2.5,
+    "grid_forming_pct": 2.4,
     "chemistry_verified_count": 35,
-    "chemistry_coverage_pct": 8.1,
+    "chemistry_coverage_pct": 7.7,
     "pcs_type_counts": {
       "grid_following": 18,
       "grid_forming": 17
@@ -22,27 +22,27 @@
         "1-2h": 11,
         "2-4h": 17,
         "4-8h": 3,
-        "8h+": 0
+        "8h+": 1
       },
-      "count": 34,
-      "avg": 1.9,
+      "count": 35,
+      "avg": 2.07,
       "median": 2.0,
-      "max": 4.51,
+      "max": 8.0,
       "min": 0.3
     },
     "development": {
       "buckets": {
-        "<1h": 6,
-        "1-2h": 51,
+        "<1h": 7,
+        "1-2h": 48,
         "2-4h": 95,
-        "4-8h": 122,
-        "8h+": 14
+        "4-8h": 128,
+        "8h+": 15
       },
-      "count": 288,
-      "avg": 3.16,
-      "median": 3.63,
+      "count": 293,
+      "avg": 3.21,
+      "median": 3.92,
       "max": 8.01,
-      "min": 0.36
+      "min": 0.0
     },
     "construction": {
       "buckets": {
@@ -50,12 +50,12 @@
         "1-2h": 2,
         "2-4h": 11,
         "4-8h": 3,
-        "8h+": 1
+        "8h+": 0
       },
-      "count": 17,
-      "avg": 2.67,
+      "count": 16,
+      "avg": 2.33,
       "median": 2.0,
-      "max": 8.0,
+      "max": 4.02,
       "min": 1.0
     },
     "commissioning": {
@@ -121,21 +121,21 @@
     },
     {
       "year": 2024,
-      "count": 3,
-      "avg_duration_h": 2.0,
-      "median_duration_h": 2.0,
+      "count": 2,
+      "avg_duration_h": 2.01,
+      "median_duration_h": 2.01,
       "max_duration_h": 2.02,
-      "total_mw": 1091.5,
-      "total_mwh": 2164.0
+      "total_mw": 241.5,
+      "total_mwh": 484.0
     },
     {
       "year": 2025,
-      "count": 11,
-      "avg_duration_h": 2.33,
+      "count": 10,
+      "avg_duration_h": 2.36,
       "median_duration_h": 2.0,
       "max_duration_h": 4.0,
-      "total_mw": 2821.0,
-      "total_mwh": 7017.2
+      "total_mw": 2121.0,
+      "total_mwh": 5627.2
     },
     {
       "year": 2026,
@@ -143,53 +143,53 @@
       "avg_duration_h": 2.47,
       "median_duration_h": 2.0,
       "max_duration_h": 8.0,
-      "total_mw": 8072.0,
-      "total_mwh": 19610.5
+      "total_mw": 8807.0,
+      "total_mwh": 21044.1
     },
     {
       "year": 2027,
-      "count": 32,
-      "avg_duration_h": 3.17,
-      "median_duration_h": 2.21,
+      "count": 31,
+      "avg_duration_h": 3.11,
+      "median_duration_h": 2.29,
       "max_duration_h": 8.0,
-      "total_mw": 7503.4,
-      "total_mwh": 23345.2
+      "total_mw": 8180.4,
+      "total_mwh": 24520.2
     },
     {
       "year": 2028,
-      "count": 71,
-      "avg_duration_h": 3.7,
+      "count": 78,
+      "avg_duration_h": 3.61,
       "median_duration_h": 4.0,
       "max_duration_h": 8.01,
-      "total_mw": 21376.0,
-      "total_mwh": 80131.0
+      "total_mw": 20568.0,
+      "total_mwh": 75893.7
     },
     {
       "year": 2029,
-      "count": 39,
-      "avg_duration_h": 4.07,
+      "count": 61,
+      "avg_duration_h": 3.89,
       "median_duration_h": 4.0,
       "max_duration_h": 8.01,
-      "total_mw": 13550.0,
-      "total_mwh": 49696.7
+      "total_mw": 21136.0,
+      "total_mwh": 77833.0
     },
     {
       "year": 2030,
-      "count": 17,
-      "avg_duration_h": 3.12,
-      "median_duration_h": 3.96,
+      "count": 23,
+      "avg_duration_h": 3.41,
+      "median_duration_h": 4.0,
       "max_duration_h": 5.76,
-      "total_mw": 5648.0,
-      "total_mwh": 16742.6
+      "total_mw": 6863.0,
+      "total_mwh": 24028.0
     },
     {
       "year": 2031,
-      "count": 2,
-      "avg_duration_h": 3.0,
+      "count": 4,
+      "avg_duration_h": 2.75,
       "median_duration_h": 3.0,
       "max_duration_h": 4.0,
-      "total_mw": 1100.0,
-      "total_mwh": 3000.0
+      "total_mw": 1900.0,
+      "total_mwh": 4400.0
     },
     {
       "year": 2032,
@@ -236,7 +236,7 @@
       "duration_h": 2.0,
       "developer": "AGL Energy",
       "operator": null,
-      "cod": "2026-02-20"
+      "cod": "2026-06-01"
     },
     {
       "project_id": "tomago-bess",
@@ -400,7 +400,7 @@
       "storage_mwh": 1238.4,
       "duration_h": 1.23,
       "developer": "Spark Renewables (Tenaga Nasional Berhad subsidiary)",
-      "cod": "2031-07-01"
+      "cod": "2031-10-01"
     },
     {
       "project_id": "magnetite-energy-hub",
@@ -433,7 +433,7 @@
       "storage_mwh": 800.0,
       "duration_h": 0.87,
       "developer": "Wind Prospect WA Pty Ltd",
-      "cod": "2030-11"
+      "cod": "2030-11-01"
     },
     {
       "project_id": "hargraves-energy-project-wind-solar-and-bess",
@@ -455,7 +455,7 @@
       "storage_mwh": 1200.0,
       "duration_h": 1.6,
       "developer": "Edify Energy Pty Ltd",
-      "cod": "2028-02"
+      "cod": "2028-02-01"
     },
     {
       "project_id": "bendenine",
@@ -467,6 +467,17 @@
       "duration_h": 3.07,
       "developer": "Wind Prospect PL",
       "cod": "2030-07-01"
+    },
+    {
+      "project_id": "woodstock-renewable-energy-hub-bess",
+      "name": "Woodstock Renewable Energy Hub - BESS",
+      "state": "QLD",
+      "status": "development",
+      "capacity_mw": 650.0,
+      "storage_mwh": 2000.0,
+      "duration_h": 3.08,
+      "developer": "Private Energy Partners",
+      "cod": "2030-03-29"
     },
     {
       "project_id": "running-creek-solar-and-bess",
@@ -510,7 +521,7 @@
       "storage_mwh": 1000.0,
       "duration_h": 1.74,
       "developer": "WP Renewables Ltd",
-      "cod": "2030-01"
+      "cod": "2030-01-01"
     },
     {
       "project_id": "croydon-hybrid-facility-solar-and-bess",
@@ -590,6 +601,17 @@
       "cod": null
     },
     {
+      "project_id": "tummaville-hybrid-facility-solar-and-bess",
+      "name": "TUMMAVILLE Hybrid Facility- Solar And BESS",
+      "state": "QLD",
+      "status": "development",
+      "capacity_mw": 500.0,
+      "storage_mwh": 1996.8,
+      "duration_h": 3.99,
+      "developer": "TUMMAVILLE SOLAR FARM PTY LTD ATF TUMMAVILLE SOLAR FARM UNIT TRUST",
+      "cod": "2031-09-01"
+    },
+    {
       "project_id": "ben-bullen-wind-farm",
       "name": "Ben Bullen Wind Farm",
       "state": "NSW",
@@ -609,7 +631,7 @@
       "storage_mwh": 2472.0,
       "duration_h": 5.49,
       "developer": "Mackenzie River ProjectCo Pty Ltd",
-      "cod": "2031-02-28"
+      "cod": "2031-06-02"
     },
     {
       "project_id": "willatook",
@@ -617,10 +639,10 @@
       "state": "VIC",
       "status": "development",
       "capacity_mw": 450.0,
-      "storage_mwh": 378.0,
-      "duration_h": 0.84,
+      "storage_mwh": 396.0,
+      "duration_h": 0.88,
       "developer": "Wind Prospect WA Pty Ltd",
-      "cod": "2027-08"
+      "cod": "2027-08-01"
     },
     {
       "project_id": "middlebrook-solar-and-bess",
@@ -675,7 +697,7 @@
       "storage_mwh": 208.0,
       "duration_h": 0.52,
       "developer": "GAWARA BAYA WIND FARM PTY LTD",
-      "cod": "2029-01"
+      "cod": "2030-05-24"
     },
     {
       "project_id": "jackson-solar-farm-and-bess",
@@ -697,7 +719,7 @@
       "storage_mwh": 1800.96,
       "duration_h": 4.5,
       "developer": "Potentia Energy Group P/L",
-      "cod": "2030-12-30"
+      "cod": "2031-06-30"
     },
     {
       "project_id": "tchelery-wind-farm-and-bess",
@@ -727,10 +749,10 @@
       "state": "QLD",
       "status": "development",
       "capacity_mw": 400.0,
-      "storage_mwh": 1600.0,
-      "duration_h": 4.0,
+      "storage_mwh": 800.0,
+      "duration_h": 2.0,
       "developer": "Elgin Energy",
-      "cod": null
+      "cod": "2028-07-01"
     },
     {
       "project_id": "punchs-creek-renewable-energy-t4",
@@ -742,6 +764,17 @@
       "duration_h": 4.0,
       "developer": "EDPR (EDP Renewables Australia) + QIC (JV)",
       "cod": "2029-01"
+    },
+    {
+      "project_id": "tumuruu-bess-and-solar-farm",
+      "name": "Tumuruu BESS and Solar Farm",
+      "state": "QLD",
+      "status": "development",
+      "capacity_mw": 400.0,
+      "storage_mwh": 1920.0,
+      "duration_h": 4.8,
+      "developer": "Australian Solar Enterprises Pty Ltd",
+      "cod": "2028-04-30"
     },
     {
       "project_id": "sundown-hybrid-facility",
@@ -810,6 +843,17 @@
       "cod": null
     },
     {
+      "project_id": "emu-park-solar-farm",
+      "name": "Emu Park Solar Farm",
+      "state": "NSW",
+      "status": "development",
+      "capacity_mw": 300.0,
+      "storage_mwh": 1600.0,
+      "duration_h": 5.33,
+      "developer": "M Renweables Australia",
+      "cod": "2028-12-01"
+    },
+    {
       "project_id": "gundary-solar-farm-and-bess",
       "name": "Gundary Solar Farm and BESS",
       "state": "NSW",
@@ -829,7 +873,18 @@
       "storage_mwh": 1200.0,
       "duration_h": 4.0,
       "developer": "Edify Energy Pty Ltd",
-      "cod": "2029-05"
+      "cod": "2029-05-01"
+    },
+    {
+      "project_id": "magpie-hill-solar-farm",
+      "name": "Magpie Hill Solar Farm",
+      "state": "NSW",
+      "status": "development",
+      "capacity_mw": 300.0,
+      "storage_mwh": 1545.6,
+      "duration_h": 5.15,
+      "developer": "Mint Renewables Pty Ltd",
+      "cod": "2030-01-01"
     },
     {
       "project_id": "miriam-vale-solar-farm-and-bess-a",
@@ -840,7 +895,7 @@
       "storage_mwh": 100.0,
       "duration_h": 0.33,
       "developer": "Private Energy Partners Pty Ltd",
-      "cod": null
+      "cod": "2030-03-29"
     },
     {
       "project_id": "miriam-vale-solar-farm-and-bess-b",
@@ -851,7 +906,7 @@
       "storage_mwh": 100.0,
       "duration_h": 0.33,
       "developer": "Private Energy Partners Pty Ltd",
-      "cod": null
+      "cod": "2030-03-29"
     },
     {
       "project_id": "mortlake-energy-hub",
@@ -884,7 +939,7 @@
       "storage_mwh": 1200.0,
       "duration_h": 4.0,
       "developer": "Edify Energy Pty Ltd",
-      "cod": "2029-05"
+      "cod": "2029-05-01"
     },
     {
       "project_id": "west-mokoan-solar-farm-and-bess",
@@ -906,7 +961,7 @@
       "storage_mwh": 210.63,
       "duration_h": 0.73,
       "developer": "FRASER COAST SOLAR DEVELOPMENT PTY LTD",
-      "cod": "2027-09-30"
+      "cod": "2027-11-30"
     },
     {
       "project_id": "lower-wonga-solar-farm-and-bess",
@@ -917,7 +972,7 @@
       "storage_mwh": 843.0,
       "duration_h": 3.0,
       "developer": "Lower Wonga Solar Farm Pty Ltd",
-      "cod": "2028-08"
+      "cod": "2028-08-01"
     },
     {
       "project_id": "bungama-solar",
@@ -928,7 +983,7 @@
       "storage_mwh": 300.0,
       "duration_h": 1.07,
       "developer": "Bungama Project (Solar) Operations Pty Ltd",
-      "cod": "2028-08-31"
+      "cod": "2030-08-31"
     },
     {
       "project_id": "blackwater-hybrid-system",
@@ -939,7 +994,7 @@
       "storage_mwh": 399.84,
       "duration_h": 1.48,
       "developer": "Blackwater Project Nominees Pty Ltd as trustee for the Blackwater Project Trust",
-      "cod": "2030-07-06"
+      "cod": "2030-10-06"
     },
     {
       "project_id": "cooba-solar-farm-kci",
@@ -973,6 +1028,17 @@
       "duration_h": 2.54,
       "developer": "Zebre Pty Ltd",
       "cod": "2027-11-29"
+    },
+    {
+      "project_id": "mavis-hybrid-facility-solar",
+      "name": "Mavis Hybrid Facility - Solar",
+      "state": "NSW",
+      "status": "development",
+      "capacity_mw": 252.0,
+      "storage_mwh": 20.0,
+      "duration_h": 0.08,
+      "developer": "Metlen Energy &amp;amp;amp;amp; Metals",
+      "cod": "2028-07-01"
     },
     {
       "project_id": "barwon-solar-farm-and-bess",
@@ -1030,6 +1096,28 @@
       "cod": "2030-01-15"
     },
     {
+      "project_id": "romani-solar-farm",
+      "name": "Romani Solar Farm",
+      "state": "NSW",
+      "status": "development",
+      "capacity_mw": 250.0,
+      "storage_mwh": 864.0,
+      "duration_h": 3.46,
+      "developer": "Samsung C&amp;amp;amp;T Renewable Energy Australia Pty Ltd",
+      "cod": "2031-08-13"
+    },
+    {
+      "project_id": "sandy-point-hybrid-solar",
+      "name": "Sandy Point Hybrid - Solar",
+      "state": "NSW",
+      "status": "development",
+      "capacity_mw": 250.0,
+      "storage_mwh": 1008.0,
+      "duration_h": 4.03,
+      "developer": "Samsung C&amp;amp;T Renewable Energy Australia Pty Ltd.",
+      "cod": "2029-08-01"
+    },
+    {
       "project_id": "mt-challenger-wind-farm",
       "name": "Mt Challenger Wind Farm",
       "state": "QLD",
@@ -1068,10 +1156,10 @@
       "state": "QLD",
       "status": "development",
       "capacity_mw": 200.0,
-      "storage_mwh": 400.0,
-      "duration_h": 2.0,
-      "developer": "GoodNight One Pty Ltd",
-      "cod": null
+      "storage_mwh": 792.0,
+      "duration_h": 3.96,
+      "developer": "Goodnight One Pty Ltd",
+      "cod": "2030-09-02"
     },
     {
       "project_id": "hookey-creek-hybrid-solar-and-bess-kci",
@@ -1093,7 +1181,7 @@
       "storage_mwh": 800.0,
       "duration_h": 4.0,
       "developer": "Trafalgar Renewables Pty Ltd",
-      "cod": null
+      "cod": "2030-12-01"
     },
     {
       "project_id": "axedale-sf-and-bess",
@@ -1159,7 +1247,7 @@
       "storage_mwh": 302.19,
       "duration_h": 1.77,
       "developer": "Tag Energy Australia Pty Ltd",
-      "cod": "2029-04-01"
+      "cod": "2029-12-31"
     },
     {
       "project_id": "moranbah-solar-farm-zeroe",
@@ -1217,17 +1305,6 @@
       "cod": "2031-01-31"
     },
     {
-      "project_id": "deepwater-hybrid-facility",
-      "name": "Deepwater Hybrid Facility",
-      "state": "NSW",
-      "status": "development",
-      "capacity_mw": 140.0,
-      "storage_mwh": 560.0,
-      "duration_h": 4.0,
-      "developer": "Ib vogt Development Australia Pty Ltd",
-      "cod": null
-    },
-    {
       "project_id": "elaine-solar-farm-and-bess",
       "name": "Elaine Solar Farm and BESS",
       "state": "VIC",
@@ -1237,6 +1314,17 @@
       "duration_h": 2.0,
       "developer": "Elgin Energy (CIP-majority)",
       "cod": "2027-07-31"
+    },
+    {
+      "project_id": "gerogery-solar-farm-kci",
+      "name": "Gerogery Solar Farm - KCI",
+      "state": "NSW",
+      "status": "development",
+      "capacity_mw": 125.0,
+      "storage_mwh": 250.0,
+      "duration_h": 2.0,
+      "developer": "Elgin Energy Pty Ltd",
+      "cod": "2027-10-01"
     },
     {
       "project_id": "forbes-hybrid-project",
@@ -1272,6 +1360,17 @@
       "cod": "2028-12-28"
     },
     {
+      "project_id": "tabulam-solar-farm-and-bess",
+      "name": "Tabulam Solar Farm and BESS",
+      "state": "NSW",
+      "status": "development",
+      "capacity_mw": 100.0,
+      "storage_mwh": 200.0,
+      "duration_h": 2.0,
+      "developer": "Elgin Energy Pty Ltd",
+      "cod": "2029-07-01"
+    },
+    {
       "project_id": "ardandra-solar-farm-and-bess",
       "name": "Ardandra Solar Farm And BESS",
       "state": "QLD",
@@ -1291,7 +1390,7 @@
       "storage_mwh": 110.0,
       "duration_h": 1.16,
       "developer": "DERBY SOLAR PROJECT PTY LTD",
-      "cod": "2027-09"
+      "cod": "2028-04-01"
     },
     {
       "project_id": "cooma-solar-and-bess-acen",
@@ -1302,7 +1401,7 @@
       "storage_mwh": 160.0,
       "duration_h": 2.0,
       "developer": "ACEN RENEWABLES",
-      "cod": null
+      "cod": "2028-12-01"
     },
     {
       "project_id": "fulham-solar-farm-and-bess",
@@ -2008,7 +2107,7 @@
       "project_id": "limondale-bess",
       "name": "Limondale BESS",
       "state": "NSW",
-      "status": "construction",
+      "status": "operating",
       "capacity_mw": 50.0,
       "storage_mwh": 400.0,
       "duration_h": 8.0,
@@ -2198,5 +2297,5 @@
       "data_confidence": "low"
     }
   ],
-  "exported_at": "2026-07-26T13:12:26.281301"
+  "exported_at": "2026-07-26T18:36:15.491574"
 }

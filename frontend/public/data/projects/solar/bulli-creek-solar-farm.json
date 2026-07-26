@@ -6,7 +6,7 @@
   "capacity_mw": 775.0,
   "state": "QLD",
   "current_developer": "Genex Power Limited",
-  "cod_current": "2029-08",
+  "cod_current": "2030-12-31",
   "cod_original": "2029-08-01",
   "connection_status": "proposed",
   "grid_forming": false,
@@ -28,6 +28,14 @@
       "event_type": "cod_change",
       "title": "COD estimate updated",
       "detail": "COD changed from 2029-08 to 2029-08-01 (source: AEMO Generation Information)",
+      "sources": []
+    },
+    {
+      "date": "2026-07-26",
+      "date_precision": "day",
+      "event_type": "cod_change",
+      "title": "COD estimate updated",
+      "detail": "COD changed from 2030-12 to 2030-12-31 (source: AEMO Generation Information)",
       "sources": []
     }
   ],

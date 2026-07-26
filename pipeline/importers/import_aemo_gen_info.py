@@ -62,6 +62,18 @@ _AEMO_MONTH_ABBR = {
     'may': '05', 'jun': '06', 'jul': '07', 'aug': '08',
     'sep': '09', 'oct': '10', 'nov': '11', 'dec': '12',
 }
+_AEMO_ABBR_FROM_MONTH = {v: k for k, v in _AEMO_MONTH_ABBR.items()}
+
+
+def aemo_url_for_snapshot(snapshot: str) -> str:
+    """Build the canonical AEMO URL for a snapshot label like '2026-04'."""
+    year, month = snapshot.split('-')
+    abbr = _AEMO_ABBR_FROM_MONTH[month]
+    return (
+        f'https://www.aemo.com.au/-/media/files/electricity/nem/'
+        f'planning_and_forecasting/generation_information/{year}/'
+        f'nem-generation-information-{abbr}-{year}.xlsx'
+    )
 
 
 def snapshot_from_filename(name: str) -> str:
@@ -737,13 +749,26 @@ def resolve_workbook(url: str) -> str:
 
 
 def main():
+    import argparse
+
+    parser = argparse.ArgumentParser(description='Import AEMO Generation Information workbook.')
+    parser.add_argument(
+        '--snapshot',
+        help="AEMO release label like '2026-01' or '2026-04'. Defaults to the "
+             "current AEMO_URL (jan-2026). Prefers data/gi_snapshots/gi-<snapshot>.xlsx "
+             "over re-downloading.",
+    )
+    args = parser.parse_args()
+
     print("=" * 60)
     print("AEMO Generation Information Importer")
     print("=" * 60)
 
+    url = aemo_url_for_snapshot(args.snapshot) if args.snapshot else AEMO_URL
+
     # Resolve workbook — prefer git-tracked archive, else download.
     print(f"\n[1/4] Resolving workbook...")
-    filepath = resolve_workbook(AEMO_URL)
+    filepath = resolve_workbook(url)
 
     # Parse
     print(f"\n[2/4] Parsing Excel file...")

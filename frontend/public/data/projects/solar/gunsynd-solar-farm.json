@@ -6,7 +6,7 @@
   "capacity_mw": 94.0,
   "state": "QLD",
   "current_developer": "Progressive Renewable Developments Goondiwindi Pty Ltd (ACN 629 560 621) as trustee for the Gunsynd Solar Farm Project Trust",
-  "cod_current": "2026-02-16",
+  "cod_current": "2026-03-26",
   "cod_original": "2026-02-16",
   "connection_status": "committed",
   "grid_forming": false,
@@ -32,6 +32,14 @@
       "event_type": "cod_change",
       "title": "COD estimate updated",
       "detail": "COD changed from 2026-02 to 2026-02-16 (source: AEMO Generation Information)",
+      "sources": []
+    },
+    {
+      "date": "2026-07-26",
+      "date_precision": "day",
+      "event_type": "cod_change",
+      "title": "COD estimate updated",
+      "detail": "COD changed from 2026-02-16 to 2026-03-26 (source: AEMO Generation Information)",
       "sources": []
     }
   ],

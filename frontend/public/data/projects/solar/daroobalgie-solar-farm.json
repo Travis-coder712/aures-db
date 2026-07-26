@@ -6,7 +6,7 @@
   "capacity_mw": 100.0,
   "state": "NSW",
   "current_developer": "Pacific Hydro Australia Developments Pty Ltd",
-  "cod_current": "2034-12-01",
+  "cod_current": "2040-12-01",
   "cod_original": "2034-12-01",
   "connection_status": "proposed",
   "grid_forming": false,
@@ -36,6 +36,14 @@
       "event_type": "cod_change",
       "title": "COD estimate updated",
       "detail": "COD changed from 2034-12 to 2034-12-01 (source: AEMO Generation Information)",
+      "sources": []
+    },
+    {
+      "date": "2026-07-26",
+      "date_precision": "day",
+      "event_type": "cod_change",
+      "title": "COD estimate updated",
+      "detail": "COD changed from 2034-12-01 to 2040-12-01 (source: AEMO Generation Information)",
       "sources": []
     }
   ],

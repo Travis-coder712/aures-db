@@ -6,7 +6,7 @@
   "capacity_mw": 436.5,
   "state": "QLD",
   "current_developer": "Tarong West Project Co Pty Ltd as trustee for the Tarong West Project Trust",
-  "cod_current": "2028-10-01",
+  "cod_current": "2030-09-01",
   "cod_original": "2028-10-01",
   "connection_status": "proposed",
   "grid_forming": false,
@@ -36,6 +36,14 @@
       "event_type": "cod_change",
       "title": "COD estimate updated",
       "detail": "COD changed from 2028-10 to 2028-10-01 (source: AEMO Generation Information)",
+      "sources": []
+    },
+    {
+      "date": "2026-07-26",
+      "date_precision": "day",
+      "event_type": "cod_change",
+      "title": "COD estimate updated",
+      "detail": "COD changed from 2028-10-01 to 2030-09-01 (source: AEMO Generation Information)",
       "sources": []
     }
   ],

@@ -3,10 +3,10 @@
   "name": "Skye Ridge Wind Farm",
   "technology": "wind",
   "status": "development",
-  "capacity_mw": 1300.0,
+  "capacity_mw": 750.0,
   "state": "NSW",
   "current_developer": "Origin Energy Pty Ltd",
-  "cod_current": "2031-11",
+  "cod_current": "2033-12-31",
   "cod_original": "2031-11-28",
   "connection_status": "proposed",
   "grid_forming": false,
@@ -28,6 +28,14 @@
       "event_type": "cod_change",
       "title": "COD estimate updated",
       "detail": "COD changed from 2031-11 to 2031-11-28 (source: AEMO Generation Information)",
+      "sources": []
+    },
+    {
+      "date": "2026-07-26",
+      "date_precision": "day",
+      "event_type": "cod_change",
+      "title": "COD estimate updated",
+      "detail": "COD changed from 2033-12 to 2033-12-31 (source: AEMO Generation Information)",
       "sources": []
     }
   ],

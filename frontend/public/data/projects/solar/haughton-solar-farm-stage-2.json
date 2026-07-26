@@ -7,7 +7,7 @@
   "state": "QLD",
   "rez": "Northern QLD",
   "current_developer": "Pacific Hydro Australia Pty Ltd",
-  "cod_current": "2028-01",
+  "cod_current": "2029-01-01",
   "cod_original": "2028-01-06",
   "connection_status": "anticipated",
   "grid_forming": false,
@@ -29,6 +29,14 @@
       "event_type": "cod_change",
       "title": "COD estimate updated",
       "detail": "COD changed from 2028-01 to 2028-01-06 (source: AEMO Generation Information)",
+      "sources": []
+    },
+    {
+      "date": "2026-07-26",
+      "date_precision": "day",
+      "event_type": "cod_change",
+      "title": "COD estimate updated",
+      "detail": "COD changed from 2029-01 to 2029-01-01 (source: AEMO Generation Information)",
       "sources": []
     }
   ],

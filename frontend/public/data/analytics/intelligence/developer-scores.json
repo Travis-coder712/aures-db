@@ -356,76 +356,6 @@
       }
     },
     {
-      "developer": "Genex Power",
-      "project_count": 3,
-      "total_mw": 350.0,
-      "technologies": [
-        "bess",
-        "pumped_hydro",
-        "solar"
-      ],
-      "operating": 2,
-      "withdrawn": 0,
-      "completion_rate": 66.7,
-      "avg_drift_months": 0.0,
-      "on_time_pct": 100.0,
-      "execution_score": 90.0,
-      "grade": "A",
-      "drift_stats": {
-        "count": 3,
-        "mean": 0.0,
-        "median": 0,
-        "p25": 0,
-        "p75": 0
-      }
-    },
-    {
-      "developer": "Ratch Australia",
-      "project_count": 6,
-      "total_mw": 1355.8,
-      "technologies": [
-        "bess",
-        "solar",
-        "wind"
-      ],
-      "operating": 4,
-      "withdrawn": 0,
-      "completion_rate": 66.7,
-      "avg_drift_months": -0.2,
-      "on_time_pct": 100.0,
-      "execution_score": 90.0,
-      "grade": "A",
-      "drift_stats": {
-        "count": 6,
-        "mean": -0.2,
-        "median": 0.0,
-        "p25": -1,
-        "p75": 0
-      }
-    },
-    {
-      "developer": "Akaysha Energy (BlackRock)",
-      "project_count": 5,
-      "total_mw": 1936.0,
-      "technologies": [
-        "bess"
-      ],
-      "operating": 3,
-      "withdrawn": 0,
-      "completion_rate": 60.0,
-      "avg_drift_months": -0.4,
-      "on_time_pct": 100.0,
-      "execution_score": 88.0,
-      "grade": "A",
-      "drift_stats": {
-        "count": 5,
-        "mean": -0.4,
-        "median": 0,
-        "p25": -2,
-        "p75": 0
-      }
-    },
-    {
       "developer": "ACCIONA Energy",
       "project_count": 2,
       "total_mw": 532.0,
@@ -449,14 +379,14 @@
       }
     },
     {
-      "developer": "AGL Energy",
-      "project_count": 4,
-      "total_mw": 1503.0,
+      "developer": "Acciona Energy Australia Global Pty Ltd",
+      "project_count": 2,
+      "total_mw": 2097.0,
       "technologies": [
-        "bess",
-        "wind"
+        "pumped_hydro",
+        "solar"
       ],
-      "operating": 2,
+      "operating": 1,
       "withdrawn": 0,
       "completion_rate": 50.0,
       "avg_drift_months": 0.0,
@@ -464,19 +394,18 @@
       "execution_score": 85.0,
       "grade": "A",
       "drift_stats": {
-        "count": 3,
+        "count": 2,
         "mean": 0.0,
-        "median": 0,
+        "median": 0.0,
         "p25": 0,
         "p75": 0
       }
     },
     {
-      "developer": "Acciona Energy Australia Global Pty Ltd",
+      "developer": "Darling Downs Solar Farm Pty Ltd",
       "project_count": 2,
-      "total_mw": 2097.0,
+      "total_mw": 310.0,
       "technologies": [
-        "pumped_hydro",
         "solar"
       ],
       "operating": 1,
@@ -495,10 +424,11 @@
       }
     },
     {
-      "developer": "Darling Downs Solar Farm Pty Ltd",
+      "developer": "Iberdrola Australia Limited",
       "project_count": 2,
-      "total_mw": 310.0,
+      "total_mw": 515.0,
       "technologies": [
+        "bess",
         "solar"
       ],
       "operating": 1,
@@ -540,14 +470,15 @@
       }
     },
     {
-      "developer": "Storenergy",
-      "project_count": 2,
-      "total_mw": 494.0,
+      "developer": "Ratch Australia",
+      "project_count": 8,
+      "total_mw": 1755.8,
       "technologies": [
         "bess",
+        "solar",
         "wind"
       ],
-      "operating": 1,
+      "operating": 4,
       "withdrawn": 0,
       "completion_rate": 50.0,
       "avg_drift_months": 0.0,
@@ -555,19 +486,20 @@
       "execution_score": 85.0,
       "grade": "A",
       "drift_stats": {
-        "count": 1,
+        "count": 8,
         "mean": 0.0,
-        "median": 0,
+        "median": 0.0,
         "p25": 0,
         "p75": 0
       }
     },
     {
-      "developer": "Valent Energy (Gaw Capital / BW ESS)",
+      "developer": "Storenergy",
       "project_count": 2,
-      "total_mw": 790.0,
+      "total_mw": 494.0,
       "technologies": [
-        "bess"
+        "bess",
+        "wind"
       ],
       "operating": 1,
       "withdrawn": 0,
@@ -654,29 +586,6 @@
       }
     },
     {
-      "developer": "Tilt Renewables Australia Pty Ltd",
-      "project_count": 7,
-      "total_mw": 2762.0,
-      "technologies": [
-        "bess",
-        "wind"
-      ],
-      "operating": 2,
-      "withdrawn": 0,
-      "completion_rate": 28.6,
-      "avg_drift_months": 0.0,
-      "on_time_pct": 100.0,
-      "execution_score": 78.6,
-      "grade": "B",
-      "drift_stats": {
-        "count": 2,
-        "mean": 0.0,
-        "median": 0.0,
-        "p25": 0,
-        "p75": 0
-      }
-    },
-    {
       "developer": "Vena Energy",
       "project_count": 7,
       "total_mw": 1435.5,
@@ -724,26 +633,72 @@
       }
     },
     {
-      "developer": "Genex Power Limited",
-      "project_count": 5,
-      "total_mw": 1745.0,
+      "developer": "Genex Power",
+      "project_count": 3,
+      "total_mw": 350.0,
       "technologies": [
         "bess",
+        "pumped_hydro",
         "solar"
       ],
-      "operating": 1,
+      "operating": 2,
       "withdrawn": 0,
-      "completion_rate": 20.0,
-      "avg_drift_months": 0.0,
-      "on_time_pct": 100.0,
-      "execution_score": 76.0,
+      "completion_rate": 66.7,
+      "avg_drift_months": 2.0,
+      "on_time_pct": 66.7,
+      "execution_score": 76.7,
       "grade": "B",
       "drift_stats": {
-        "count": 4,
-        "mean": 0.0,
-        "median": 0.0,
+        "count": 3,
+        "mean": 2.0,
+        "median": 0,
+        "p25": 0,
+        "p75": 6
+      }
+    },
+    {
+      "developer": "Akaysha Energy (BlackRock)",
+      "project_count": 5,
+      "total_mw": 1936.0,
+      "technologies": [
+        "bess"
+      ],
+      "operating": 3,
+      "withdrawn": 0,
+      "completion_rate": 60.0,
+      "avg_drift_months": 4.0,
+      "on_time_pct": 80.0,
+      "execution_score": 75.3,
+      "grade": "B",
+      "drift_stats": {
+        "count": 5,
+        "mean": 4.0,
+        "median": 0,
         "p25": 0,
         "p75": 0
+      }
+    },
+    {
+      "developer": "AGL Energy",
+      "project_count": 4,
+      "total_mw": 1503.0,
+      "technologies": [
+        "bess",
+        "wind"
+      ],
+      "operating": 2,
+      "withdrawn": 0,
+      "completion_rate": 50.0,
+      "avg_drift_months": 1.0,
+      "on_time_pct": 66.7,
+      "execution_score": 73.3,
+      "grade": "B",
+      "drift_stats": {
+        "count": 3,
+        "mean": 1.0,
+        "median": 0,
+        "p25": 0,
+        "p75": 3
       }
     },
     {
@@ -757,15 +712,15 @@
       "operating": 1,
       "withdrawn": 0,
       "completion_rate": 9.1,
-      "avg_drift_months": -0.5,
+      "avg_drift_months": 0.0,
       "on_time_pct": 100.0,
       "execution_score": 72.7,
       "grade": "B",
       "drift_stats": {
         "count": 2,
-        "mean": -0.5,
-        "median": -0.5,
-        "p25": -1,
+        "mean": 0.0,
+        "median": 0.0,
+        "p25": 0,
         "p75": 0
       }
     },
@@ -786,7 +741,7 @@
       "execution_score": 70.0,
       "grade": "B",
       "drift_stats": {
-        "count": 1,
+        "count": 3,
         "mean": 0.0,
         "median": 0,
         "p25": 0,
@@ -840,29 +795,6 @@
       }
     },
     {
-      "developer": "Acciona Energy",
-      "project_count": 2,
-      "total_mw": 502.1,
-      "technologies": [
-        "bess",
-        "wind"
-      ],
-      "operating": 0,
-      "withdrawn": 0,
-      "completion_rate": 0.0,
-      "avg_drift_months": -0.5,
-      "on_time_pct": 100.0,
-      "execution_score": 70.0,
-      "grade": "B",
-      "drift_stats": {
-        "count": 2,
-        "mean": -0.5,
-        "median": -0.5,
-        "p25": -1,
-        "p75": 0
-      }
-    },
-    {
       "developer": "Acciona Energy Australia Global",
       "project_count": 3,
       "total_mw": 1050.0,
@@ -877,7 +809,7 @@
       "execution_score": 70.0,
       "grade": "B",
       "drift_stats": {
-        "count": 1,
+        "count": 3,
         "mean": 0.0,
         "median": 0,
         "p25": 0,
@@ -890,28 +822,6 @@
       "total_mw": 1152.4,
       "technologies": [
         "wind"
-      ],
-      "operating": 0,
-      "withdrawn": 0,
-      "completion_rate": 0.0,
-      "avg_drift_months": -0.5,
-      "on_time_pct": 100.0,
-      "execution_score": 70.0,
-      "grade": "B",
-      "drift_stats": {
-        "count": 2,
-        "mean": -0.5,
-        "median": -0.5,
-        "p25": -1,
-        "p75": 0
-      }
-    },
-    {
-      "developer": "Akaysha Energy",
-      "project_count": 2,
-      "total_mw": 470.0,
-      "technologies": [
-        "bess"
       ],
       "operating": 0,
       "withdrawn": 0,
@@ -929,9 +839,9 @@
       }
     },
     {
-      "developer": "Akaysha Energy Pty Ltd",
+      "developer": "Akaysha Energy",
       "project_count": 2,
-      "total_mw": 1550.0,
+      "total_mw": 470.0,
       "technologies": [
         "bess"
       ],
@@ -973,6 +883,29 @@
       }
     },
     {
+      "developer": "Australian Solar Enterprises Pty Ltd",
+      "project_count": 2,
+      "total_mw": 840.0,
+      "technologies": [
+        "hybrid",
+        "solar"
+      ],
+      "operating": 0,
+      "withdrawn": 0,
+      "completion_rate": 0.0,
+      "avg_drift_months": 0.0,
+      "on_time_pct": 100.0,
+      "execution_score": 70.0,
+      "grade": "B",
+      "drift_stats": {
+        "count": 1,
+        "mean": 0.0,
+        "median": 0,
+        "p25": 0,
+        "p75": 0
+      }
+    },
+    {
       "developer": "BORAL",
       "project_count": 4,
       "total_mw": 1558.0,
@@ -997,29 +930,6 @@
       }
     },
     {
-      "developer": "BURDEKIN SOLAR FARM PTY LTD ATF BURDEKIN GENESIS PROJECT TRUST",
-      "project_count": 2,
-      "total_mw": 1000.0,
-      "technologies": [
-        "bess",
-        "solar"
-      ],
-      "operating": 0,
-      "withdrawn": 0,
-      "completion_rate": 0.0,
-      "avg_drift_months": -0.5,
-      "on_time_pct": 100.0,
-      "execution_score": 70.0,
-      "grade": "B",
-      "drift_stats": {
-        "count": 2,
-        "mean": -0.5,
-        "median": -0.5,
-        "p25": -1,
-        "p75": 0
-      }
-    },
-    {
       "developer": "Baldon Wind Farm Pty Ltd",
       "project_count": 3,
       "total_mw": 1900.0,
@@ -1030,15 +940,15 @@
       "operating": 0,
       "withdrawn": 0,
       "completion_rate": 0.0,
-      "avg_drift_months": -0.3,
+      "avg_drift_months": 0.0,
       "on_time_pct": 100.0,
       "execution_score": 70.0,
       "grade": "B",
       "drift_stats": {
         "count": 3,
-        "mean": -0.3,
+        "mean": 0.0,
         "median": 0,
-        "p25": -1,
+        "p25": 0,
         "p75": 0
       }
     },
@@ -1133,6 +1043,29 @@
       }
     },
     {
+      "developer": "Bulli Creek Hybrid Nominee Pty Ltd on behalf of Bulli Creek Hybrid Trust",
+      "project_count": 2,
+      "total_mw": 1200.0,
+      "technologies": [
+        "bess",
+        "solar"
+      ],
+      "operating": 0,
+      "withdrawn": 0,
+      "completion_rate": 0.0,
+      "avg_drift_months": 0.0,
+      "on_time_pct": 100.0,
+      "execution_score": 70.0,
+      "grade": "B",
+      "drift_stats": {
+        "count": 2,
+        "mean": 0.0,
+        "median": 0.0,
+        "p25": 0,
+        "p75": 0
+      }
+    },
+    {
       "developer": "Cubico Sustainable Investments Australia Pty Ltd",
       "project_count": 3,
       "total_mw": 2200.0,
@@ -1143,16 +1076,16 @@
       "operating": 0,
       "withdrawn": 0,
       "completion_rate": 0.0,
-      "avg_drift_months": -1.0,
+      "avg_drift_months": 0.0,
       "on_time_pct": 100.0,
       "execution_score": 70.0,
       "grade": "B",
       "drift_stats": {
         "count": 1,
-        "mean": -1.0,
-        "median": -1,
-        "p25": -1,
-        "p75": -1
+        "mean": 0.0,
+        "median": 0,
+        "p25": 0,
+        "p75": 0
       }
     },
     {
@@ -1216,9 +1149,9 @@
       "execution_score": 70.0,
       "grade": "B",
       "drift_stats": {
-        "count": 3,
+        "count": 4,
         "mean": 0.0,
-        "median": 0,
+        "median": 0.0,
         "p25": 0,
         "p75": 0
       }
@@ -1247,32 +1180,8 @@
     },
     {
       "developer": "Elgin Energy Pty Ltd",
-      "project_count": 7,
-      "total_mw": 1130.0,
-      "technologies": [
-        "bess",
-        "hybrid",
-        "solar"
-      ],
-      "operating": 0,
-      "withdrawn": 0,
-      "completion_rate": 0.0,
-      "avg_drift_months": 0.0,
-      "on_time_pct": 100.0,
-      "execution_score": 70.0,
-      "grade": "B",
-      "drift_stats": {
-        "count": 2,
-        "mean": 0.0,
-        "median": 0.0,
-        "p25": 0,
-        "p75": 0
-      }
-    },
-    {
-      "developer": "Enel Green Power Australia Pty Ltd",
-      "project_count": 2,
-      "total_mw": 770.0,
+      "project_count": 8,
+      "total_mw": 1230.0,
       "technologies": [
         "bess",
         "hybrid"
@@ -1285,32 +1194,10 @@
       "execution_score": 70.0,
       "grade": "B",
       "drift_stats": {
-        "count": 2,
+        "count": 5,
         "mean": 0.0,
-        "median": 0.0,
+        "median": 0,
         "p25": 0,
-        "p75": 0
-      }
-    },
-    {
-      "developer": "Enervest Operations Pty Ltd",
-      "project_count": 5,
-      "total_mw": 1500.0,
-      "technologies": [
-        "bess"
-      ],
-      "operating": 0,
-      "withdrawn": 0,
-      "completion_rate": 0.0,
-      "avg_drift_months": -0.2,
-      "on_time_pct": 100.0,
-      "execution_score": 70.0,
-      "grade": "B",
-      "drift_stats": {
-        "count": 4,
-        "mean": -0.2,
-        "median": 0.0,
-        "p25": -1,
         "p75": 0
       }
     },
@@ -1325,16 +1212,16 @@
       "operating": 0,
       "withdrawn": 0,
       "completion_rate": 0.0,
-      "avg_drift_months": -1.0,
+      "avg_drift_months": 0.0,
       "on_time_pct": 100.0,
       "execution_score": 70.0,
       "grade": "B",
       "drift_stats": {
         "count": 1,
-        "mean": -1.0,
-        "median": -1,
-        "p25": -1,
-        "p75": -1
+        "mean": 0.0,
+        "median": 0,
+        "p25": 0,
+        "p75": 0
       }
     },
     {
@@ -1421,9 +1308,9 @@
       "execution_score": 70.0,
       "grade": "B",
       "drift_stats": {
-        "count": 1,
+        "count": 2,
         "mean": 0.0,
-        "median": 0,
+        "median": 0.0,
         "p25": 0,
         "p75": 0
       }
@@ -1521,10 +1408,10 @@
     {
       "developer": "Ib vogt Development Australia Pty Ltd",
       "project_count": 3,
-      "total_mw": 620.0,
+      "total_mw": 600.0,
       "technologies": [
         "bess",
-        "hybrid"
+        "solar"
       ],
       "operating": 0,
       "withdrawn": 0,
@@ -1534,7 +1421,7 @@
       "execution_score": 70.0,
       "grade": "B",
       "drift_stats": {
-        "count": 1,
+        "count": 3,
         "mean": 0.0,
         "median": 0,
         "p25": 0,
@@ -1612,12 +1499,34 @@
       }
     },
     {
-      "developer": "Neoen Australia Pty Ltd",
-      "project_count": 11,
-      "total_mw": 3160.0,
+      "developer": "M Renweables Australia",
+      "project_count": 2,
+      "total_mw": 500.0,
       "technologies": [
         "bess",
-        "hybrid",
+        "hybrid"
+      ],
+      "operating": 0,
+      "withdrawn": 0,
+      "completion_rate": 0.0,
+      "avg_drift_months": 0.0,
+      "on_time_pct": 100.0,
+      "execution_score": 70.0,
+      "grade": "B",
+      "drift_stats": {
+        "count": 1,
+        "mean": 0.0,
+        "median": 0,
+        "p25": 0,
+        "p75": 0
+      }
+    },
+    {
+      "developer": "Millmerran Power Partners",
+      "project_count": 2,
+      "total_mw": 450.0,
+      "technologies": [
+        "bess",
         "wind"
       ],
       "operating": 0,
@@ -1628,34 +1537,10 @@
       "execution_score": 70.0,
       "grade": "B",
       "drift_stats": {
-        "count": 8,
+        "count": 2,
         "mean": 0.0,
         "median": 0.0,
         "p25": 0,
-        "p75": 0
-      }
-    },
-    {
-      "developer": "Origin Energy Pty Ltd",
-      "project_count": 3,
-      "total_mw": 1950.0,
-      "technologies": [
-        "bess",
-        "solar",
-        "wind"
-      ],
-      "operating": 0,
-      "withdrawn": 0,
-      "completion_rate": 0.0,
-      "avg_drift_months": -0.7,
-      "on_time_pct": 100.0,
-      "execution_score": 70.0,
-      "grade": "B",
-      "drift_stats": {
-        "count": 3,
-        "mean": -0.7,
-        "median": -1,
-        "p25": -1,
         "p75": 0
       }
     },
@@ -1705,28 +1590,6 @@
       }
     },
     {
-      "developer": "Pacific Hydro Australia Developments Pty Ltd",
-      "project_count": 2,
-      "total_mw": 350.0,
-      "technologies": [
-        "solar"
-      ],
-      "operating": 0,
-      "withdrawn": 0,
-      "completion_rate": 0.0,
-      "avg_drift_months": -0.5,
-      "on_time_pct": 100.0,
-      "execution_score": 70.0,
-      "grade": "B",
-      "drift_stats": {
-        "count": 2,
-        "mean": -0.5,
-        "median": -0.5,
-        "p25": -1,
-        "p75": 0
-      }
-    },
-    {
       "developer": "Pacific Partnerships",
       "project_count": 2,
       "total_mw": 575.0,
@@ -1749,11 +1612,12 @@
       }
     },
     {
-      "developer": "Potentia Energy Group P/L",
-      "project_count": 2,
-      "total_mw": 700.0,
+      "developer": "Private Energy Partners",
+      "project_count": 3,
+      "total_mw": 2050.0,
       "technologies": [
-        "hybrid"
+        "hybrid",
+        "solar"
       ],
       "operating": 0,
       "withdrawn": 0,
@@ -1771,13 +1635,12 @@
       }
     },
     {
-      "developer": "Private Energy Partners",
-      "project_count": 3,
-      "total_mw": 1650.0,
+      "developer": "Private Energy Partners Pty Ltd",
+      "project_count": 4,
+      "total_mw": 1380.0,
       "technologies": [
         "bess",
-        "hybrid",
-        "solar"
+        "hybrid"
       ],
       "operating": 0,
       "withdrawn": 0,
@@ -1787,34 +1650,10 @@
       "execution_score": 70.0,
       "grade": "B",
       "drift_stats": {
-        "count": 1,
+        "count": 3,
         "mean": 0.0,
         "median": 0,
         "p25": 0,
-        "p75": 0
-      }
-    },
-    {
-      "developer": "RES Australia Pty Ltd",
-      "project_count": 6,
-      "total_mw": 2486.0,
-      "technologies": [
-        "bess",
-        "solar",
-        "wind"
-      ],
-      "operating": 0,
-      "withdrawn": 0,
-      "completion_rate": 0.0,
-      "avg_drift_months": -0.3,
-      "on_time_pct": 100.0,
-      "execution_score": 70.0,
-      "grade": "B",
-      "drift_stats": {
-        "count": 3,
-        "mean": -0.3,
-        "median": 0,
-        "p25": -1,
         "p75": 0
       }
     },
@@ -1864,12 +1703,34 @@
       }
     },
     {
-      "developer": "Samsung C&amp;T Renewable Energy Australia Pty Ltd",
-      "project_count": 5,
-      "total_mw": 780.0,
+      "developer": "Risen Energy (Australia) Pty Ltd",
+      "project_count": 2,
+      "total_mw": 500.0,
       "technologies": [
         "bess",
-        "solar"
+        "hybrid"
+      ],
+      "operating": 0,
+      "withdrawn": 0,
+      "completion_rate": 0.0,
+      "avg_drift_months": 0.0,
+      "on_time_pct": 100.0,
+      "execution_score": 70.0,
+      "grade": "B",
+      "drift_stats": {
+        "count": 1,
+        "mean": 0.0,
+        "median": 0,
+        "p25": 0,
+        "p75": 0
+      }
+    },
+    {
+      "developer": "Samsung C&amp;T Renewable Energy Australia Pty Ltd",
+      "project_count": 4,
+      "total_mw": 530.0,
+      "technologies": [
+        "bess"
       ],
       "operating": 0,
       "withdrawn": 0,
@@ -1919,16 +1780,16 @@
       "operating": 0,
       "withdrawn": 0,
       "completion_rate": 0.0,
-      "avg_drift_months": -1.0,
+      "avg_drift_months": 0.0,
       "on_time_pct": 100.0,
       "execution_score": 70.0,
       "grade": "B",
       "drift_stats": {
         "count": 1,
-        "mean": -1.0,
-        "median": -1,
-        "p25": -1,
-        "p75": -1
+        "mean": 0.0,
+        "median": 0,
+        "p25": 0,
+        "p75": 0
       }
     },
     {
@@ -1946,19 +1807,18 @@
       "execution_score": 70.0,
       "grade": "B",
       "drift_stats": {
-        "count": 1,
+        "count": 2,
         "mean": 0.0,
-        "median": 0,
+        "median": 0.0,
         "p25": 0,
         "p75": 0
       }
     },
     {
-      "developer": "Squadron Energy Services Pty Ltd",
-      "project_count": 5,
-      "total_mw": 2819.0,
+      "developer": "Squadron Energy Developments Pty Ltd",
+      "project_count": 2,
+      "total_mw": 2000.0,
       "technologies": [
-        "bess",
         "wind"
       ],
       "operating": 0,
@@ -2030,16 +1890,16 @@
       "operating": 0,
       "withdrawn": 0,
       "completion_rate": 0.0,
-      "avg_drift_months": -1.0,
+      "avg_drift_months": 0.0,
       "on_time_pct": 100.0,
       "execution_score": 70.0,
       "grade": "B",
       "drift_stats": {
         "count": 4,
-        "mean": -1.0,
-        "median": -1.0,
-        "p25": -1,
-        "p75": -1
+        "mean": 0.0,
+        "median": 0.0,
+        "p25": 0,
+        "p75": 0
       }
     },
     {
@@ -2061,53 +1921,6 @@
         "count": 3,
         "mean": 0.0,
         "median": 0,
-        "p25": 0,
-        "p75": 0
-      }
-    },
-    {
-      "developer": "Tag Energy Australia Pty Ltd",
-      "project_count": 3,
-      "total_mw": 1028.0,
-      "technologies": [
-        "hybrid",
-        "solar",
-        "wind"
-      ],
-      "operating": 0,
-      "withdrawn": 0,
-      "completion_rate": 0.0,
-      "avg_drift_months": 0.0,
-      "on_time_pct": 100.0,
-      "execution_score": 70.0,
-      "grade": "B",
-      "drift_stats": {
-        "count": 2,
-        "mean": 0.0,
-        "median": 0.0,
-        "p25": 0,
-        "p75": 0
-      }
-    },
-    {
-      "developer": "TagEnergy Australia Pty Ltd",
-      "project_count": 7,
-      "total_mw": 3438.0,
-      "technologies": [
-        "bess",
-        "hybrid"
-      ],
-      "operating": 0,
-      "withdrawn": 0,
-      "completion_rate": 0.0,
-      "avg_drift_months": 0.0,
-      "on_time_pct": 100.0,
-      "execution_score": 70.0,
-      "grade": "B",
-      "drift_stats": {
-        "count": 6,
-        "mean": 0.0,
-        "median": 0.0,
         "p25": 0,
         "p75": 0
       }
@@ -2164,28 +1977,6 @@
       "technologies": [
         "bess",
         "wind"
-      ],
-      "operating": 0,
-      "withdrawn": 0,
-      "completion_rate": 0.0,
-      "avg_drift_months": -0.5,
-      "on_time_pct": 100.0,
-      "execution_score": 70.0,
-      "grade": "B",
-      "drift_stats": {
-        "count": 2,
-        "mean": -0.5,
-        "median": -0.5,
-        "p25": -1,
-        "p75": 0
-      }
-    },
-    {
-      "developer": "ZEBRE Pty Ltd",
-      "project_count": 2,
-      "total_mw": 321.0,
-      "technologies": [
-        "bess"
       ],
       "operating": 0,
       "withdrawn": 0,
@@ -2271,6 +2062,166 @@
       }
     },
     {
+      "developer": "\u00d8rsted Offshore Australia 1 Pty Ltd",
+      "project_count": 2,
+      "total_mw": 5640.0,
+      "technologies": [
+        "offshore_wind"
+      ],
+      "operating": 0,
+      "withdrawn": 0,
+      "completion_rate": 0.0,
+      "avg_drift_months": 0.0,
+      "on_time_pct": 100.0,
+      "execution_score": 70.0,
+      "grade": "B",
+      "drift_stats": {
+        "count": 1,
+        "mean": 0.0,
+        "median": 0,
+        "p25": 0,
+        "p75": 0
+      }
+    },
+    {
+      "developer": "Valent Energy (Gaw Capital / BW ESS)",
+      "project_count": 2,
+      "total_mw": 790.0,
+      "technologies": [
+        "bess"
+      ],
+      "operating": 1,
+      "withdrawn": 0,
+      "completion_rate": 50.0,
+      "avg_drift_months": 2.5,
+      "on_time_pct": 50.0,
+      "execution_score": 65.8,
+      "grade": "C",
+      "drift_stats": {
+        "count": 2,
+        "mean": 2.5,
+        "median": 2.5,
+        "p25": 0,
+        "p75": 5
+      }
+    },
+    {
+      "developer": "Neoen Australia Pty Ltd",
+      "project_count": 11,
+      "total_mw": 3160.0,
+      "technologies": [
+        "bess",
+        "hybrid",
+        "wind"
+      ],
+      "operating": 0,
+      "withdrawn": 0,
+      "completion_rate": 0.0,
+      "avg_drift_months": 1.2,
+      "on_time_pct": 88.9,
+      "execution_score": 64.7,
+      "grade": "C",
+      "drift_stats": {
+        "count": 9,
+        "mean": 1.2,
+        "median": 0,
+        "p25": 0,
+        "p75": 0
+      }
+    },
+    {
+      "developer": "RES Australia Pty Ltd",
+      "project_count": 6,
+      "total_mw": 2709.0,
+      "technologies": [
+        "bess",
+        "solar",
+        "wind"
+      ],
+      "operating": 0,
+      "withdrawn": 0,
+      "completion_rate": 0.0,
+      "avg_drift_months": 1.2,
+      "on_time_pct": 83.3,
+      "execution_score": 63.0,
+      "grade": "C",
+      "drift_stats": {
+        "count": 6,
+        "mean": 1.2,
+        "median": 0.0,
+        "p25": 0,
+        "p75": 0
+      }
+    },
+    {
+      "developer": "Genex Power Limited",
+      "project_count": 5,
+      "total_mw": 1745.0,
+      "technologies": [
+        "bess",
+        "solar"
+      ],
+      "operating": 1,
+      "withdrawn": 0,
+      "completion_rate": 20.0,
+      "avg_drift_months": 4.2,
+      "on_time_pct": 75.0,
+      "execution_score": 61.5,
+      "grade": "C",
+      "drift_stats": {
+        "count": 4,
+        "mean": 4.2,
+        "median": 0.0,
+        "p25": 0,
+        "p75": 17
+      }
+    },
+    {
+      "developer": "Enervest Operations Pty Ltd",
+      "project_count": 5,
+      "total_mw": 1500.0,
+      "technologies": [
+        "bess"
+      ],
+      "operating": 0,
+      "withdrawn": 0,
+      "completion_rate": 0.0,
+      "avg_drift_months": 2.2,
+      "on_time_pct": 75.0,
+      "execution_score": 58.8,
+      "grade": "C",
+      "drift_stats": {
+        "count": 4,
+        "mean": 2.2,
+        "median": 0.0,
+        "p25": 0,
+        "p75": 9
+      }
+    },
+    {
+      "developer": "Squadron Energy Services Pty Ltd",
+      "project_count": 5,
+      "total_mw": 2819.0,
+      "technologies": [
+        "bess",
+        "wind"
+      ],
+      "operating": 0,
+      "withdrawn": 0,
+      "completion_rate": 0.0,
+      "avg_drift_months": 2.2,
+      "on_time_pct": 75.0,
+      "execution_score": 58.8,
+      "grade": "C",
+      "drift_stats": {
+        "count": 4,
+        "mean": 2.2,
+        "median": 0.0,
+        "p25": 0,
+        "p75": 9
+      }
+    },
+    {
       "developer": "Global Power Generation Australia Pty Ltd",
       "project_count": 3,
       "total_mw": 900.0,
@@ -2305,16 +2256,247 @@
       "operating": 1,
       "withdrawn": 0,
       "completion_rate": 14.3,
-      "avg_drift_months": 6.8,
-      "on_time_pct": 60.0,
-      "execution_score": 51.0,
+      "avg_drift_months": 6.0,
+      "on_time_pct": 66.7,
+      "execution_score": 54.3,
       "grade": "D",
       "drift_stats": {
-        "count": 5,
-        "mean": 6.8,
-        "median": 0,
-        "p25": -1,
+        "count": 6,
+        "mean": 6.0,
+        "median": 0.0,
+        "p25": 0,
         "p75": 12
+      }
+    },
+    {
+      "developer": "Eku Energy Projects (Australia) Pty Ltd as trustee for the Eku Energy Projects Australia Trust",
+      "project_count": 2,
+      "total_mw": 420.0,
+      "technologies": [
+        "bess"
+      ],
+      "operating": 0,
+      "withdrawn": 0,
+      "completion_rate": 0.0,
+      "avg_drift_months": 1.5,
+      "on_time_pct": 50.0,
+      "execution_score": 52.5,
+      "grade": "D",
+      "drift_stats": {
+        "count": 2,
+        "mean": 1.5,
+        "median": 1.5,
+        "p25": 0,
+        "p75": 3
+      }
+    },
+    {
+      "developer": "ZEBRE Pty Ltd",
+      "project_count": 2,
+      "total_mw": 321.0,
+      "technologies": [
+        "bess"
+      ],
+      "operating": 0,
+      "withdrawn": 0,
+      "completion_rate": 0.0,
+      "avg_drift_months": 1.5,
+      "on_time_pct": 50.0,
+      "execution_score": 52.5,
+      "grade": "D",
+      "drift_stats": {
+        "count": 2,
+        "mean": 1.5,
+        "median": 1.5,
+        "p25": 0,
+        "p75": 3
+      }
+    },
+    {
+      "developer": "TagEnergy Australia Pty Ltd",
+      "project_count": 7,
+      "total_mw": 3438.0,
+      "technologies": [
+        "bess",
+        "hybrid"
+      ],
+      "operating": 0,
+      "withdrawn": 0,
+      "completion_rate": 0.0,
+      "avg_drift_months": 3.6,
+      "on_time_pct": 57.1,
+      "execution_score": 51.1,
+      "grade": "D",
+      "drift_stats": {
+        "count": 7,
+        "mean": 3.6,
+        "median": 0,
+        "p25": 0,
+        "p75": 6
+      }
+    },
+    {
+      "developer": "BURDEKIN SOLAR FARM PTY LTD ATF BURDEKIN GENESIS PROJECT TRUST",
+      "project_count": 2,
+      "total_mw": 1000.0,
+      "technologies": [
+        "bess",
+        "solar"
+      ],
+      "operating": 0,
+      "withdrawn": 0,
+      "completion_rate": 0.0,
+      "avg_drift_months": 3.0,
+      "on_time_pct": 50.0,
+      "execution_score": 50.0,
+      "grade": "D",
+      "drift_stats": {
+        "count": 2,
+        "mean": 3.0,
+        "median": 3.0,
+        "p25": 0,
+        "p75": 6
+      }
+    },
+    {
+      "developer": "Potentia Energy Group P/L",
+      "project_count": 2,
+      "total_mw": 700.0,
+      "technologies": [
+        "hybrid"
+      ],
+      "operating": 0,
+      "withdrawn": 0,
+      "completion_rate": 0.0,
+      "avg_drift_months": 3.0,
+      "on_time_pct": 50.0,
+      "execution_score": 50.0,
+      "grade": "D",
+      "drift_stats": {
+        "count": 2,
+        "mean": 3.0,
+        "median": 3.0,
+        "p25": 0,
+        "p75": 6
+      }
+    },
+    {
+      "developer": "ACEN Renewables",
+      "project_count": 4,
+      "total_mw": 2489.0,
+      "technologies": [
+        "hybrid",
+        "pumped_hydro",
+        "solar",
+        "wind"
+      ],
+      "operating": 0,
+      "withdrawn": 0,
+      "completion_rate": 0.0,
+      "avg_drift_months": 3.5,
+      "on_time_pct": 50.0,
+      "execution_score": 49.2,
+      "grade": "D",
+      "drift_stats": {
+        "count": 2,
+        "mean": 3.5,
+        "median": 3.5,
+        "p25": 0,
+        "p75": 7
+      }
+    },
+    {
+      "developer": "Enel Green Power Australia Pty Ltd",
+      "project_count": 2,
+      "total_mw": 770.0,
+      "technologies": [
+        "bess",
+        "hybrid"
+      ],
+      "operating": 0,
+      "withdrawn": 0,
+      "completion_rate": 0.0,
+      "avg_drift_months": 3.5,
+      "on_time_pct": 50.0,
+      "execution_score": 49.2,
+      "grade": "D",
+      "drift_stats": {
+        "count": 2,
+        "mean": 3.5,
+        "median": 3.5,
+        "p25": 0,
+        "p75": 7
+      }
+    },
+    {
+      "developer": "Tag Energy Australia Pty Ltd",
+      "project_count": 3,
+      "total_mw": 1028.0,
+      "technologies": [
+        "hybrid",
+        "solar",
+        "wind"
+      ],
+      "operating": 0,
+      "withdrawn": 0,
+      "completion_rate": 0.0,
+      "avg_drift_months": 4.5,
+      "on_time_pct": 50.0,
+      "execution_score": 47.5,
+      "grade": "D",
+      "drift_stats": {
+        "count": 2,
+        "mean": 4.5,
+        "median": 4.5,
+        "p25": 0,
+        "p75": 9
+      }
+    },
+    {
+      "developer": "Origin Energy Pty Ltd",
+      "project_count": 3,
+      "total_mw": 1400.0,
+      "technologies": [
+        "bess",
+        "solar",
+        "wind"
+      ],
+      "operating": 0,
+      "withdrawn": 0,
+      "completion_rate": 0.0,
+      "avg_drift_months": 8.3,
+      "on_time_pct": 66.7,
+      "execution_score": 46.2,
+      "grade": "D",
+      "drift_stats": {
+        "count": 3,
+        "mean": 8.3,
+        "median": 0,
+        "p25": 0,
+        "p75": 25
+      }
+    },
+    {
+      "developer": "Acciona Energy",
+      "project_count": 2,
+      "total_mw": 502.1,
+      "technologies": [
+        "bess",
+        "wind"
+      ],
+      "operating": 0,
+      "withdrawn": 0,
+      "completion_rate": 0.0,
+      "avg_drift_months": 5.5,
+      "on_time_pct": 50.0,
+      "execution_score": 45.8,
+      "grade": "D",
+      "drift_stats": {
+        "count": 2,
+        "mean": 5.5,
+        "median": 5.5,
+        "p25": 0,
+        "p75": 11
       }
     },
     {
@@ -2363,6 +2545,29 @@
       }
     },
     {
+      "developer": "Tilt Renewables Australia Pty Ltd",
+      "project_count": 7,
+      "total_mw": 2762.0,
+      "technologies": [
+        "bess",
+        "wind"
+      ],
+      "operating": 2,
+      "withdrawn": 0,
+      "completion_rate": 28.6,
+      "avg_drift_months": 12.0,
+      "on_time_pct": 50.0,
+      "execution_score": 43.6,
+      "grade": "D",
+      "drift_stats": {
+        "count": 2,
+        "mean": 12.0,
+        "median": 12.0,
+        "p25": 0,
+        "p75": 24
+      }
+    },
+    {
       "developer": "AGL Energy Limited",
       "project_count": 5,
       "total_mw": 1862.0,
@@ -2370,6 +2575,19 @@
         "bess",
         "pumped_hydro",
         "solar"
+      ],
+      "operating": 0,
+      "withdrawn": 0,
+      "completion_rate": 0.0,
+      "execution_score": 35.0,
+      "grade": "F"
+    },
+    {
+      "developer": "AMPYR Energy",
+      "project_count": 2,
+      "total_mw": 440.0,
+      "technologies": [
+        "bess"
       ],
       "operating": 0,
       "withdrawn": 0,
@@ -2406,19 +2624,6 @@
       "grade": "F"
     },
     {
-      "developer": "BE Power",
-      "project_count": 2,
-      "total_mw": 1200.0,
-      "technologies": [
-        "pumped_hydro"
-      ],
-      "operating": 0,
-      "withdrawn": 0,
-      "completion_rate": 0.0,
-      "execution_score": 35.0,
-      "grade": "F"
-    },
-    {
       "developer": "BEEBO SOLAR FARM PTY LTD as Trustee For BEEBO SOLAR FARM UNIT TRUST",
       "project_count": 2,
       "total_mw": 800.0,
@@ -2434,8 +2639,8 @@
     },
     {
       "developer": "BG Admin Pty Ltd",
-      "project_count": 2,
-      "total_mw": 1900.0,
+      "project_count": 3,
+      "total_mw": 2400.0,
       "technologies": [
         "bess"
       ],
@@ -2451,20 +2656,6 @@
       "total_mw": 450.0,
       "technologies": [
         "bess"
-      ],
-      "operating": 0,
-      "withdrawn": 0,
-      "completion_rate": 0.0,
-      "execution_score": 35.0,
-      "grade": "F"
-    },
-    {
-      "developer": "Bulli Creek Hybrid Nominee Pty Ltd on behalf of Bulli Creek Hybrid Trust",
-      "project_count": 2,
-      "total_mw": 900.0,
-      "technologies": [
-        "bess",
-        "solar"
       ],
       "operating": 0,
       "withdrawn": 0,
@@ -2689,22 +2880,8 @@
     },
     {
       "developer": "Lyon Solar",
-      "project_count": 5,
-      "total_mw": 860.0,
-      "technologies": [
-        "bess",
-        "solar"
-      ],
-      "operating": 0,
-      "withdrawn": 0,
-      "completion_rate": 0.0,
-      "execution_score": 35.0,
-      "grade": "F"
-    },
-    {
-      "developer": "M Renweables Australia",
-      "project_count": 2,
-      "total_mw": 500.0,
+      "project_count": 3,
+      "total_mw": 430.0,
       "technologies": [
         "bess",
         "solar"
@@ -2758,20 +2935,6 @@
       "grade": "F"
     },
     {
-      "developer": "Millmerran Power Partners",
-      "project_count": 2,
-      "total_mw": 450.0,
-      "technologies": [
-        "bess",
-        "wind"
-      ],
-      "operating": 0,
-      "withdrawn": 0,
-      "completion_rate": 0.0,
-      "execution_score": 35.0,
-      "grade": "F"
-    },
-    {
       "developer": "Monash Renewables Pty Ltd",
       "project_count": 2,
       "total_mw": 500.0,
@@ -2799,13 +2962,12 @@
       "grade": "F"
     },
     {
-      "developer": "Pottinger Renewables P/L",
+      "developer": "OX2",
       "project_count": 3,
-      "total_mw": 2100.0,
+      "total_mw": 690.0,
       "technologies": [
         "bess",
-        "solar",
-        "wind"
+        "solar"
       ],
       "operating": 0,
       "withdrawn": 0,
@@ -2814,12 +2976,26 @@
       "grade": "F"
     },
     {
-      "developer": "Private Energy Partners Pty Ltd",
+      "developer": "Origin Energy Limited",
+      "project_count": 2,
+      "total_mw": 530.0,
+      "technologies": [
+        "bess"
+      ],
+      "operating": 0,
+      "withdrawn": 0,
+      "completion_rate": 0.0,
+      "execution_score": 35.0,
+      "grade": "F"
+    },
+    {
+      "developer": "Pottinger Renewables P/L",
       "project_count": 3,
-      "total_mw": 860.0,
+      "total_mw": 2100.0,
       "technologies": [
         "bess",
-        "hybrid"
+        "solar",
+        "wind"
       ],
       "operating": 0,
       "withdrawn": 0,
@@ -2874,61 +3050,6 @@
       "total_mw": 1850.0,
       "technologies": [
         "bess"
-      ],
-      "operating": 0,
-      "withdrawn": 0,
-      "completion_rate": 0.0,
-      "execution_score": 35.0,
-      "grade": "F"
-    },
-    {
-      "developer": "Risen Energy (Australia) Pty Ltd",
-      "project_count": 2,
-      "total_mw": 500.0,
-      "technologies": [
-        "bess",
-        "hybrid"
-      ],
-      "operating": 0,
-      "withdrawn": 0,
-      "completion_rate": 0.0,
-      "execution_score": 35.0,
-      "grade": "F"
-    },
-    {
-      "developer": "Samsung C&T Renewable Energy Australia Pty Ltd.",
-      "project_count": 2,
-      "total_mw": 300.0,
-      "technologies": [
-        "bess",
-        "solar"
-      ],
-      "operating": 0,
-      "withdrawn": 0,
-      "completion_rate": 0.0,
-      "execution_score": 35.0,
-      "grade": "F"
-    },
-    {
-      "developer": "Samsung C&amp;T",
-      "project_count": 2,
-      "total_mw": 450.0,
-      "technologies": [
-        "bess",
-        "solar"
-      ],
-      "operating": 0,
-      "withdrawn": 0,
-      "completion_rate": 0.0,
-      "execution_score": 35.0,
-      "grade": "F"
-    },
-    {
-      "developer": "Squadron Energy Developments Pty Ltd",
-      "project_count": 2,
-      "total_mw": 2000.0,
-      "technologies": [
-        "wind"
       ],
       "operating": 0,
       "withdrawn": 0,
@@ -3019,56 +3140,62 @@
       "grade": "F"
     },
     {
-      "developer": "\u00d8rsted Offshore Australia 1 Pty Ltd",
+      "developer": "Akaysha Energy Pty Ltd",
       "project_count": 2,
-      "total_mw": 5640.0,
+      "total_mw": 1550.0,
       "technologies": [
-        "offshore_wind"
+        "bess"
       ],
       "operating": 0,
       "withdrawn": 0,
       "completion_rate": 0.0,
-      "execution_score": 35.0,
-      "grade": "F"
-    },
-    {
-      "developer": "ACEN Renewables",
-      "project_count": 4,
-      "total_mw": 2489.0,
-      "technologies": [
-        "hybrid",
-        "pumped_hydro",
-        "solar",
-        "wind"
-      ],
-      "operating": 0,
-      "withdrawn": 0,
-      "completion_rate": 0.0,
-      "avg_drift_months": 7.0,
+      "avg_drift_months": 9.0,
       "on_time_pct": 0.0,
-      "execution_score": 28.3,
+      "execution_score": 25.0,
       "grade": "F",
       "drift_stats": {
-        "count": 1,
-        "mean": 7.0,
-        "median": 7,
-        "p25": 7,
-        "p75": 7
+        "count": 2,
+        "mean": 9.0,
+        "median": 9.0,
+        "p25": 9,
+        "p75": 9
+      }
+    },
+    {
+      "developer": "Pacific Hydro Australia Developments Pty Ltd",
+      "project_count": 2,
+      "total_mw": 350.0,
+      "technologies": [
+        "solar"
+      ],
+      "operating": 0,
+      "withdrawn": 0,
+      "completion_rate": 0.0,
+      "avg_drift_months": 36.0,
+      "on_time_pct": 50.0,
+      "execution_score": 15.0,
+      "grade": "F",
+      "drift_stats": {
+        "count": 2,
+        "mean": 36.0,
+        "median": 36.0,
+        "p25": 0,
+        "p75": 72
       }
     }
   ],
   "industry_averages": {
-    "avg_drift_months": 0.2,
-    "avg_on_time_pct": 97.4,
-    "developer_count": 154
+    "avg_drift_months": 1.2,
+    "avg_on_time_pct": 90.6,
+    "developer_count": 157
   },
   "grade_distribution": {
-    "A": 26,
-    "B": 74,
-    "C": 1,
-    "D": 3,
-    "F": 50
+    "A": 23,
+    "B": 69,
+    "C": 7,
+    "D": 14,
+    "F": 44
   },
-  "total_developers": 154,
-  "exported_at": "2026-07-26T13:21:35.102939"
+  "total_developers": 157,
+  "exported_at": "2026-07-26T18:43:01.221526"
 }

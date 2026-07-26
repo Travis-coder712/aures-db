@@ -7,7 +7,7 @@
   "state": "VIC",
   "rez": "Gippsland Onshore",
   "current_developer": "Frasers Lane Development Pty Ltd",
-  "cod_current": "2027-06",
+  "cod_current": "2027-11-30",
   "cod_original": "2027-06-30",
   "connection_status": "anticipated",
   "grid_forming": false,
@@ -29,6 +29,14 @@
       "event_type": "cod_change",
       "title": "COD estimate updated",
       "detail": "COD changed from 2027-06 to 2027-06-30 (source: AEMO Generation Information)",
+      "sources": []
+    },
+    {
+      "date": "2026-07-26",
+      "date_precision": "day",
+      "event_type": "cod_change",
+      "title": "COD estimate updated",
+      "detail": "COD changed from 2027-11 to 2027-11-30 (source: AEMO Generation Information)",
       "sources": []
     }
   ],

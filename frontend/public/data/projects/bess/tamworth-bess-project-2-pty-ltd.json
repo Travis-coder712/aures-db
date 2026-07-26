@@ -7,7 +7,7 @@
   "storage_mwh": 200.0,
   "state": "NSW",
   "current_developer": "valent-energy_nr",
-  "cod_current": "2027-12-31",
+  "cod_current": "2028-12-31",
   "cod_original": "2027-12-31",
   "connection_status": "anticipated",
   "grid_forming": false,
@@ -29,6 +29,14 @@
       "event_type": "cod_change",
       "title": "COD estimate updated",
       "detail": "COD changed from 2027-12 to 2027-12-31 (source: AEMO Generation Information)",
+      "sources": []
+    },
+    {
+      "date": "2026-07-26",
+      "date_precision": "day",
+      "event_type": "cod_change",
+      "title": "COD estimate updated",
+      "detail": "COD changed from 2027-12-31 to 2028-12-31 (source: AEMO Generation Information)",
       "sources": []
     }
   ],

@@ -221,7 +221,6 @@ export interface Project {
   rez_access_notes?: string                                   // Hand-curated overlay refinement
 
   // Scores (pre-computed)
-  development_score?: number
   performance_score?: number
 
   // Development sub-stage
@@ -320,7 +319,6 @@ export interface ProjectSummary {
   state: State
   current_developer?: string
   rez?: string | null
-  development_score?: number
   performance_score?: number
   data_confidence: Confidence
   confidence_score?: number

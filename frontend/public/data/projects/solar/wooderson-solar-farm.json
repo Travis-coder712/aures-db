@@ -6,7 +6,7 @@
   "capacity_mw": 450.0,
   "state": "QLD",
   "current_developer": "Wooderson Solar Development Company Pty Ltd",
-  "cod_current": "2030-05",
+  "cod_current": "2030-12-31",
   "cod_original": "2030-05-01",
   "connection_status": "proposed",
   "grid_forming": false,
@@ -28,6 +28,14 @@
       "event_type": "cod_change",
       "title": "COD estimate updated",
       "detail": "COD changed from 2030-05 to 2030-05-01 (source: AEMO Generation Information)",
+      "sources": []
+    },
+    {
+      "date": "2026-07-26",
+      "date_precision": "day",
+      "event_type": "cod_change",
+      "title": "COD estimate updated",
+      "detail": "COD changed from 2030-12 to 2030-12-31 (source: AEMO Generation Information)",
       "sources": []
     }
   ],

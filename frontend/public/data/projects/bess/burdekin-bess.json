@@ -7,7 +7,7 @@
   "storage_mwh": 2000.21,
   "state": "QLD",
   "current_developer": "BURDEKIN SOLAR FARM PTY LTD ATF BURDEKIN GENESIS PROJECT TRUST",
-  "cod_current": "2027-09-30",
+  "cod_current": "2028-03-31",
   "cod_original": "2027-09-30",
   "connection_status": "proposed",
   "grid_forming": false,
@@ -29,6 +29,14 @@
       "event_type": "cod_change",
       "title": "COD estimate updated",
       "detail": "COD changed from 2027-09 to 2027-09-30 (source: AEMO Generation Information)",
+      "sources": []
+    },
+    {
+      "date": "2026-07-26",
+      "date_precision": "day",
+      "event_type": "cod_change",
+      "title": "COD estimate updated",
+      "detail": "COD changed from 2027-09-30 to 2028-03-31 (source: AEMO Generation Information)",
       "sources": []
     }
   ],

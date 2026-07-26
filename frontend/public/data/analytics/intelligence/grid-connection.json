@@ -155,9 +155,13 @@
           }
         },
         "solar": {
+          "commissioning": {
+            "count": 1,
+            "mw": 120.0
+          },
           "construction": {
-            "count": 2,
-            "mw": 180.0
+            "count": 1,
+            "mw": 60.0
           },
           "development": {
             "count": 2,
@@ -226,47 +230,6 @@
         "operating": {
           "count": 3,
           "mw": 439.5
-        }
-      }
-    },
-    {
-      "rez": "South West NSW",
-      "total_mw": 220.8,
-      "operating_mw": 30.0,
-      "pipeline_mw": 190.8,
-      "project_count": 3,
-      "congestion_score": 57.0,
-      "congestion_level": "moderate",
-      "technologies": {
-        "bess": {
-          "construction": {
-            "count": 1,
-            "mw": 50.0
-          }
-        },
-        "solar": {
-          "development": {
-            "count": 1,
-            "mw": 140.8
-          },
-          "operating": {
-            "count": 1,
-            "mw": 30.0
-          }
-        }
-      },
-      "connection_status": {
-        "anticipated": {
-          "count": 1,
-          "mw": 140.8
-        },
-        "committed": {
-          "count": 1,
-          "mw": 50.0
-        },
-        "operating": {
-          "count": 1,
-          "mw": 30.0
         }
       }
     },
@@ -342,7 +305,7 @@
           }
         },
         "wind": {
-          "construction": {
+          "commissioning": {
             "count": 1,
             "mw": 500.0
           }
@@ -488,6 +451,47 @@
       }
     },
     {
+      "rez": "South West NSW",
+      "total_mw": 220.8,
+      "operating_mw": 80.0,
+      "pipeline_mw": 140.8,
+      "project_count": 3,
+      "congestion_score": 33.1,
+      "congestion_level": "low",
+      "technologies": {
+        "bess": {
+          "operating": {
+            "count": 1,
+            "mw": 50.0
+          }
+        },
+        "solar": {
+          "development": {
+            "count": 1,
+            "mw": 140.8
+          },
+          "operating": {
+            "count": 1,
+            "mw": 30.0
+          }
+        }
+      },
+      "connection_status": {
+        "anticipated": {
+          "count": 1,
+          "mw": 140.8
+        },
+        "committed": {
+          "count": 1,
+          "mw": 50.0
+        },
+        "operating": {
+          "count": 1,
+          "mw": 30.0
+        }
+      }
+    },
+    {
       "rez": "New England",
       "total_mw": 315.0,
       "operating_mw": 115.0,
@@ -558,12 +562,12 @@
         },
         "solar": {
           "commissioning": {
-            "count": 1,
-            "mw": 75.0
+            "count": 2,
+            "mw": 325.0
           },
           "construction": {
-            "count": 2,
-            "mw": 330.0
+            "count": 1,
+            "mw": 80.0
           },
           "operating": {
             "count": 2,
@@ -917,12 +921,12 @@
   },
   "connection_status_overall": {
     "anticipated": {
-      "count": 70,
-      "mw": 19484.2
+      "count": 71,
+      "mw": 19884.2
     },
     "commissioning": {
-      "count": 11,
-      "mw": 4116.2
+      "count": 12,
+      "mw": 4266.2
     },
     "committed": {
       "count": 48,
@@ -933,10 +937,10 @@
       "mw": 36624.7
     },
     "proposed": {
-      "count": 699,
-      "mw": 305516.4
+      "count": 727,
+      "mw": 315556.0
     }
   },
   "total_rez_zones": 27,
-  "exported_at": "2026-07-26T13:21:35.126745"
+  "exported_at": "2026-07-26T18:43:01.243686"
 }

@@ -4,9 +4,11 @@
   "technology": "bess",
   "status": "development",
   "capacity_mw": 260.0,
-  "storage_mwh": 260.0,
+  "storage_mwh": 2080.0,
   "state": "QLD",
   "current_developer": "Private Energy Partners Pty Ltd",
+  "cod_current": "2028-01-31",
+  "cod_original": "2028-01-31",
   "connection_status": "proposed",
   "grid_forming": false,
   "has_sips": false,
@@ -19,7 +21,16 @@
   "aemo_gen_info_id": "3190",
   "confidence_score": "20",
   "development_stage": "planning_submitted",
-  "timeline": [],
+  "timeline": [
+    {
+      "date": "2026-07-26",
+      "date_precision": "day",
+      "event_type": "cod_change",
+      "title": "COD estimate updated",
+      "detail": "COD changed from 2028-01 to 2028-01-31 (source: AEMO Generation Information)",
+      "sources": []
+    }
+  ],
   "ownership_history": [],
   "cod_history": [],
   "suppliers": [],

@@ -7,7 +7,7 @@
   "state": "NSW",
   "rez": "nsw-central-west-orana",
   "current_developer": "Sandy Creek Solar Fund Pty Ltd",
-  "cod_current": "2029-06-01",
+  "cod_current": "2031-02-13",
   "cod_original": "2029-06-01",
   "connection_status": "anticipated",
   "grid_forming": false,
@@ -57,6 +57,14 @@
       "event_type": "cod_change",
       "title": "COD estimate updated",
       "detail": "COD changed from 2029-06 to 2029-06-01 (source: AEMO Generation Information)",
+      "sources": []
+    },
+    {
+      "date": "2026-07-26",
+      "date_precision": "day",
+      "event_type": "cod_change",
+      "title": "COD estimate updated",
+      "detail": "COD changed from 2029-06-01 to 2031-02-13 (source: AEMO Generation Information)",
       "sources": []
     }
   ],

@@ -6,7 +6,7 @@
   "capacity_mw": 30.0,
   "state": "NSW",
   "current_developer": "Moama Propertyco Pty Ltd as trustee for the Moama Property Trust",
-  "cod_current": "2027-12",
+  "cod_current": "2028-08-01",
   "cod_original": "2027-12-01",
   "connection_status": "anticipated",
   "grid_forming": false,
@@ -28,6 +28,14 @@
       "event_type": "cod_change",
       "title": "COD estimate updated",
       "detail": "COD changed from 2027-12 to 2027-12-01 (source: AEMO Generation Information)",
+      "sources": []
+    },
+    {
+      "date": "2026-07-26",
+      "date_precision": "day",
+      "event_type": "cod_change",
+      "title": "COD estimate updated",
+      "detail": "COD changed from 2028-08 to 2028-08-01 (source: AEMO Generation Information)",
       "sources": []
     }
   ],

@@ -46,7 +46,7 @@
           "status": "commissioning",
           "stage": "commissioning",
           "construction_start": "2024-01-01",
-          "cod_current": "2026-02-20",
+          "cod_current": "2026-06-01",
           "dev_status": "construction",
           "annotations": [],
           "developer_grade": "A"
@@ -223,7 +223,7 @@
           "status": "commissioning",
           "stage": "commissioning",
           "construction_start": "2024-06-12",
-          "cod_current": "2026-01-05",
+          "cod_current": "2026-05-30",
           "dev_status": "construction",
           "annotations": []
         },
@@ -275,15 +275,20 @@
           "status": "development",
           "stage": "development",
           "cod_current": "2030-07-31",
-          "dev_status": "environmental pending",
+          "dev_status": "execution risk",
           "annotations": [
             {
               "flag": "environmental pending",
               "reason": "No EIS lodged and COD > 2027",
               "severity": "medium"
+            },
+            {
+              "flag": "execution risk",
+              "reason": "Developer execution grade: F",
+              "severity": "high"
             }
           ],
-          "developer_grade": "B"
+          "developer_grade": "F"
         },
         {
           "name": "Sandy Creek Solar Farm",
@@ -294,7 +299,7 @@
           "state": "NSW",
           "status": "development",
           "stage": "development",
-          "cod_current": "2029-06-01",
+          "cod_current": "2031-02-13",
           "dev_status": "environmental pending",
           "annotations": [
             {
@@ -313,8 +318,15 @@
           "state": "NSW",
           "status": "development",
           "stage": "development",
-          "dev_status": "on track",
-          "annotations": [],
+          "cod_current": "2031-07-01",
+          "dev_status": "environmental pending",
+          "annotations": [
+            {
+              "flag": "environmental pending",
+              "reason": "No EIS lodged and COD > 2027",
+              "severity": "medium"
+            }
+          ],
           "developer_grade": "B"
         },
         {
@@ -360,8 +372,15 @@
           "state": "NSW",
           "status": "development",
           "stage": "development",
-          "dev_status": "on track",
-          "annotations": [],
+          "cod_current": "2031-06-30",
+          "dev_status": "environmental pending",
+          "annotations": [
+            {
+              "flag": "environmental pending",
+              "reason": "No EIS lodged and COD > 2027",
+              "severity": "medium"
+            }
+          ],
           "developer_grade": "B"
         },
         {
@@ -454,8 +473,15 @@
           "state": "VIC",
           "status": "development",
           "stage": "development",
-          "dev_status": "on track",
-          "annotations": []
+          "cod_current": "2028-12-31",
+          "dev_status": "environmental pending",
+          "annotations": [
+            {
+              "flag": "environmental pending",
+              "reason": "No EIS lodged and COD > 2027",
+              "severity": "medium"
+            }
+          ]
         },
         {
           "name": "Elaine Solar Farm",
@@ -500,7 +526,7 @@
           "state": "SA",
           "status": "development",
           "stage": "development",
-          "cod_current": "2029-12",
+          "cod_current": "2030-10-31",
           "dev_status": "environmental pending",
           "annotations": [
             {
@@ -599,8 +625,7 @@
           "stage": "operating",
           "cod_current": "2025-05-22",
           "dev_status": "operating",
-          "annotations": [],
-          "developer_grade": "A"
+          "annotations": []
         }
       ]
     },
@@ -906,7 +931,7 @@
           "status": "commissioning",
           "stage": "commissioning",
           "construction_start": "2024-10-01",
-          "cod_current": "2026-02-28",
+          "cod_current": "2026-07-31",
           "dev_status": "construction",
           "annotations": [],
           "developer_grade": "A"
@@ -1130,9 +1155,10 @@
           "stage": "construction",
           "fid_date": "2023",
           "construction_start": "2026-01-01",
-          "cod_current": "2029-01",
+          "cod_current": "2029-01-01",
           "dev_status": "FID reached",
-          "annotations": []
+          "annotations": [],
+          "developer_grade": "B"
         },
         {
           "name": "Corop Solar Farm and BESS",
@@ -1144,8 +1170,15 @@
           "state": "VIC",
           "status": "development",
           "stage": "development",
-          "dev_status": "on track",
-          "annotations": []
+          "dev_status": "execution risk",
+          "annotations": [
+            {
+              "flag": "execution risk",
+              "reason": "Developer execution grade: F",
+              "severity": "high"
+            }
+          ],
+          "developer_grade": "F"
         },
         {
           "name": "Derby Solar Project",
@@ -1157,9 +1190,15 @@
           "state": "VIC",
           "status": "development",
           "stage": "development",
-          "cod_current": "2027-09",
-          "dev_status": "on track",
-          "annotations": []
+          "cod_current": "2028-04-01",
+          "dev_status": "environmental pending",
+          "annotations": [
+            {
+              "flag": "environmental pending",
+              "reason": "No EIS lodged and COD > 2027",
+              "severity": "medium"
+            }
+          ]
         },
         {
           "name": "Dinawan Wind Farm Stage 1",
@@ -1170,7 +1209,7 @@
           "state": "NSW",
           "status": "development",
           "stage": "development",
-          "cod_current": "2031-07-01",
+          "cod_current": "2031-10-01",
           "dev_status": "environmental pending",
           "annotations": [
             {
@@ -1190,7 +1229,7 @@
           "state": "QLD",
           "status": "development",
           "stage": "development",
-          "cod_current": "2029-01",
+          "cod_current": "2030-05-24",
           "dev_status": "pre-planning",
           "annotations": [
             {
@@ -1215,7 +1254,7 @@
           "state": "QLD",
           "status": "development",
           "stage": "development",
-          "cod_current": "2029-05",
+          "cod_current": "2029-05-01",
           "dev_status": "pre-planning",
           "annotations": [
             {
@@ -1240,7 +1279,7 @@
           "state": "VIC",
           "status": "development",
           "stage": "development",
-          "cod_current": "2030-11",
+          "cod_current": "2030-11-01",
           "dev_status": "environmental pending",
           "annotations": [
             {
@@ -1248,7 +1287,8 @@
               "reason": "No EIS lodged and COD > 2027",
               "severity": "medium"
             }
-          ]
+          ],
+          "developer_grade": "B"
         },
         {
           "name": "Liverpool Range Wind Stage 1",
@@ -1272,7 +1312,7 @@
           "state": "QLD",
           "status": "development",
           "stage": "development",
-          "cod_current": "2028-08",
+          "cod_current": "2028-08-01",
           "dev_status": "pre-planning",
           "annotations": [
             {
@@ -1334,7 +1374,7 @@
           "state": "QLD",
           "status": "development",
           "stage": "development",
-          "cod_current": "2028-03",
+          "cod_current": "2029-12-28",
           "dev_status": "environmental pending",
           "annotations": [
             {
@@ -1354,7 +1394,7 @@
           "state": "VIC",
           "status": "development",
           "stage": "development",
-          "cod_current": "2028-02",
+          "cod_current": "2028-02-01",
           "dev_status": "environmental pending",
           "annotations": [
             {
@@ -1393,7 +1433,7 @@
           "state": "QLD",
           "status": "development",
           "stage": "development",
-          "cod_current": "2029-05",
+          "cod_current": "2029-05-01",
           "dev_status": "pre-planning",
           "annotations": [
             {
@@ -1472,9 +1512,8 @@
       "total_storage_mwh": 400,
       "num_projects": 4,
       "by_stage": {
-        "operating": 2,
-        "development": 1,
-        "construction": 1
+        "operating": 3,
+        "development": 1
       },
       "by_state": {
         "NSW": 4
@@ -1516,7 +1555,7 @@
           "state": "NSW",
           "status": "development",
           "stage": "development",
-          "cod_current": "2027-09",
+          "cod_current": "2027-09-30",
           "dev_status": "pre-planning",
           "annotations": [
             {
@@ -1534,10 +1573,10 @@
           "capacity_mw": 50,
           "storage_mwh": 400,
           "state": "NSW",
-          "status": "construction",
-          "stage": "construction",
+          "status": "operating",
+          "stage": "operating",
           "construction_start": "2024-10-01",
-          "cod_current": "2026-03",
+          "cod_current": "2026-03-07",
           "dev_status": "construction",
           "annotations": []
         }
@@ -1752,14 +1791,8 @@
           "status": "development",
           "stage": "development",
           "cod_current": "2027-02-28",
-          "dev_status": "pre-planning",
-          "annotations": [
-            {
-              "flag": "pre-planning",
-              "reason": "Development stage is early \u2014 not in planning yet",
-              "severity": "high"
-            }
-          ]
+          "dev_status": "on track",
+          "annotations": []
         },
         {
           "name": "Flyers Creek Wind Farm",
@@ -1804,8 +1837,15 @@
           "state": "NSW",
           "status": "development",
           "stage": "development",
-          "dev_status": "on track",
-          "annotations": []
+          "cod_current": "2032-12-01",
+          "dev_status": "environmental pending",
+          "annotations": [
+            {
+              "flag": "environmental pending",
+              "reason": "No EIS lodged and COD > 2027",
+              "severity": "medium"
+            }
+          ]
         },
         {
           "name": "Stoney Creek BESS",
@@ -1817,13 +1857,18 @@
           "state": "NSW",
           "status": "development",
           "stage": "development",
-          "cod_current": "2027-11-30",
+          "cod_current": "2028-06-30",
           "dev_status": "pre-planning",
           "annotations": [
             {
               "flag": "pre-planning",
               "reason": "Development stage is early \u2014 not in planning yet",
               "severity": "high"
+            },
+            {
+              "flag": "environmental pending",
+              "reason": "No EIS lodged and COD > 2027",
+              "severity": "medium"
             }
           ]
         },
@@ -1877,7 +1922,7 @@
           "state": "NSW",
           "status": "development",
           "stage": "development",
-          "cod_current": "2028-12-31",
+          "cod_current": "2029-11-30",
           "dev_status": "pre-planning",
           "annotations": [
             {
@@ -1909,7 +1954,7 @@
         {
           "name": "Bannaby BESS",
           "project_id": "bannaby-bess",
-          "developer": "Penso Power Australia Pty Ltd.",
+          "developer": "BW ESS Australia Pty Ltd",
           "technology": "bess",
           "capacity_mw": 233,
           "storage_mwh": 2676,
@@ -1929,8 +1974,15 @@
           "state": "NSW",
           "status": "development",
           "stage": "development",
-          "dev_status": "on track",
-          "annotations": [],
+          "cod_current": "2030-08-30",
+          "dev_status": "environmental pending",
+          "annotations": [
+            {
+              "flag": "environmental pending",
+              "reason": "No EIS lodged and COD > 2027",
+              "severity": "medium"
+            }
+          ],
           "developer_grade": "B"
         },
         {
@@ -1978,16 +2030,16 @@
         "mw": 1810.0
       },
       "operating": {
-        "count": 7,
-        "mw": 1961.0
+        "count": 8,
+        "mw": 2011.0
       },
       "unknown": {
         "count": 11,
         "mw": 1703.0
       },
       "construction": {
-        "count": 8,
-        "mw": 2121.0
+        "count": 7,
+        "mw": 2071.0
       },
       "development": {
         "count": 62,
@@ -1995,5 +2047,5 @@
       }
     }
   },
-  "exported_at": "2026-07-26T13:12:26.266762"
+  "exported_at": "2026-07-26T18:36:15.476705"
 }

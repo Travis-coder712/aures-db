@@ -161,7 +161,7 @@
       "name": "Wambo Wind Farm",
       "state": "QLD",
       "capacity_mw": 500.0,
-      "status": "construction",
+      "status": "commissioning",
       "developer": "Cubico Sustainable Investments Australia Pty Ltd",
       "connection_voltage_kv": 132.0,
       "connection_distance_km": 22.0,
@@ -1662,7 +1662,7 @@
       "name": "Limondale BESS",
       "state": "NSW",
       "capacity_mw": 50.0,
-      "status": "construction",
+      "status": "operating",
       "developer": "LIMONDALE BATTERY PTY. LTD",
       "connection_voltage_kv": 330.0,
       "connection_distance_km": 0.3,
@@ -1789,5 +1789,5 @@
       }
     }
   },
-  "exported_at": "2026-07-26T13:12:26.262669"
+  "exported_at": "2026-07-26T18:36:15.472838"
 }

@@ -7,7 +7,7 @@
   "storage_mwh": 399.84,
   "state": "QLD",
   "current_developer": "Blackwater Project Nominees Pty Ltd as trustee for the Blackwater Project Trust",
-  "cod_current": "2030-07-06",
+  "cod_current": "2030-10-06",
   "cod_original": "2030-07-06",
   "connection_status": "proposed",
   "grid_forming": false,
@@ -29,6 +29,14 @@
       "event_type": "cod_change",
       "title": "COD estimate updated",
       "detail": "COD changed from 2030-07 to 2030-07-06 (source: AEMO Generation Information)",
+      "sources": []
+    },
+    {
+      "date": "2026-07-26",
+      "date_precision": "day",
+      "event_type": "cod_change",
+      "title": "COD estimate updated",
+      "detail": "COD changed from 2030-07-06 to 2030-10-06 (source: AEMO Generation Information)",
       "sources": []
     }
   ],

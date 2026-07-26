@@ -32,8 +32,8 @@
         "wind": 32
       },
       "by_status": {
-        "commissioning": 2,
-        "construction": 3,
+        "commissioning": 3,
+        "construction": 2,
         "operating": 27
       },
       "by_state": {
@@ -86,13 +86,13 @@
       ],
       "status_detail": {
         "commissioning": {
-          "count": 2,
-          "capacity_mw": 2343.0,
+          "count": 3,
+          "capacity_mw": 2843.0,
           "storage_mwh": 0
         },
         "construction": {
-          "count": 3,
-          "capacity_mw": 1362.0,
+          "count": 2,
+          "capacity_mw": 862.0,
           "storage_mwh": 0
         },
         "operating": {
@@ -155,9 +155,9 @@
         "bess": 33
       },
       "by_status": {
-        "operating": 19,
+        "operating": 20,
         "commissioning": 5,
-        "construction": 9
+        "construction": 8
       },
       "by_state": {
         "VIC": 10,
@@ -199,9 +199,9 @@
       ],
       "status_detail": {
         "operating": {
-          "count": 19,
-          "capacity_mw": 3188.0,
-          "storage_mwh": 5855.4
+          "count": 20,
+          "capacity_mw": 3238.0,
+          "storage_mwh": 6255.4
         },
         "commissioning": {
           "count": 5,
@@ -209,9 +209,9 @@
           "storage_mwh": 3981.3
         },
         "construction": {
-          "count": 9,
-          "capacity_mw": 1811.0,
-          "storage_mwh": 4549.0
+          "count": 8,
+          "capacity_mw": 1761.0,
+          "storage_mwh": 4149.0
         }
       },
       "state_detail": {
@@ -4915,7 +4915,7 @@
         "bess": 1
       },
       "by_status": {
-        "construction": 1
+        "operating": 1
       },
       "by_state": {
         "NSW": 1
@@ -4927,7 +4927,7 @@
         "limondale-bess"
       ],
       "status_detail": {
-        "construction": {
+        "operating": {
           "count": 1,
           "capacity_mw": 50.0,
           "storage_mwh": 400.0
@@ -4955,7 +4955,7 @@
         "bess": 1
       },
       "by_status": {
-        "construction": 1
+        "operating": 1
       },
       "by_state": {
         "NSW": 1
@@ -4967,7 +4967,7 @@
         "limondale-bess"
       ],
       "status_detail": {
-        "construction": {
+        "operating": {
           "count": 1,
           "capacity_mw": 50.0,
           "storage_mwh": 400.0

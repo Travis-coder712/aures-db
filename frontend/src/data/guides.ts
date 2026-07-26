@@ -1598,7 +1598,7 @@ Click any cell → DrillPanel with the full project list, stage-specific columns
 1. **Development scores are structural, not predictive.** A high readiness score means "this project has cleared more milestones", not "this project will definitely commission on time". For delivery probability, cross-reference the developer's execution grade on the developer profile.
 2. **Construction has only 56 projects scored.** The signal is meaningful but the cohort is small — some (tech × state) cells for construction have just 1-2 projects, and the quartile becomes a neutral mid-bucket.
 3. **Development Q1 distribution is structural 25%**, not a real ranking. Within a cohort, 25% will always fall in Q1. What matters is the score spread — a Q1 project in a weak cohort may still be less ready than a Q4 project in a strong cohort. Treat quartiles as within-cohort comparisons.
-4. **development_score field is unused** — the DB has a \`development_score\` column but it's currently empty. Our readiness score is computed at export time from the component flags. If development_score gets populated in a future enrichment pass, we may switch to that.
+4. **Readiness score is derived, not stored.** It's computed at export time from the component flags (see \`compute_development_score\` in the exporter). There is no stored score column — a prior \`development_score\` field was removed in v3.23.1 after sitting NULL for every row.
 5. **No FID / ownership-change / ESG signals yet** — those events exist in timeline_events but aren't fed into the score. Could be added later.
 6. **WEM excluded from operating scoring** — WA projects appear in construction/development cells but have no operating quartile because OpenElectricity only covers NEM dispatch.
 

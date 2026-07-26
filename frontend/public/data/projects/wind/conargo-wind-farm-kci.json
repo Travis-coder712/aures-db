@@ -1,0 +1,29 @@
+{
+  "id": "conargo-wind-farm-kci",
+  "name": "Conargo Wind Farm - KCI",
+  "technology": "wind",
+  "status": "development",
+  "capacity_mw": 130.0,
+  "state": "NSW",
+  "current_developer": "Squadron Energy Pty Ltd",
+  "connection_status": "proposed",
+  "data_confidence": "low",
+  "last_updated": "2026-07-26",
+  "last_verified": "2026-07-26",
+  "aemo_gen_info_id": "3265",
+  "development_stage": "planning_submitted",
+  "timeline": [],
+  "ownership_history": [],
+  "cod_history": [],
+  "suppliers": [],
+  "offtakes": [],
+  "scheme_contracts": [],
+  "cost_sources": [],
+  "stakeholder_issues": [],
+  "sources": [
+    {
+      "title": "AEMO Generation Information",
+      "url": "https://aemo.com.au/energy-systems/electricity/national-electricity-market-nem/nem-forecasting-and-planning/forecasting-and-planning-data/generation-information"
+    }
+  ]
+}

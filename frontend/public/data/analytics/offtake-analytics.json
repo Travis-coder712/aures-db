@@ -6021,6 +6021,16 @@
       "revenue_per_mw": 31315.0
     },
     {
+      "project_id": "limondale-bess",
+      "name": "Limondale BESS",
+      "technology": "bess",
+      "state": "NSW",
+      "capacity_mw": 50.0,
+      "developer": "LIMONDALE BATTERY PTY. LTD",
+      "capacity_factor_pct": null,
+      "revenue_per_mw": null
+    },
+    {
       "project_id": "wallgrove-grid-battery-project",
       "name": "Wallgrove Grid Battery project",
       "technology": "bess",
@@ -6231,5 +6241,5 @@
       "revenue_per_mw": 29125.0
     }
   ],
-  "exported_at": "2026-07-26T13:12:26.138933"
+  "exported_at": "2026-07-26T18:36:15.353490"
 }

@@ -724,7 +724,6 @@ export const PROJECT_SUMMARIES: ProjectSummary[] = SAMPLE_PROJECTS.map((p) => ({
   state: p.state,
   current_developer: p.current_developer,
   rez: p.rez,
-  development_score: p.development_score,
   performance_score: p.performance_score,
   data_confidence: p.data_confidence,
 }))
