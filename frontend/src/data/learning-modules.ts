@@ -77,6 +77,41 @@ export interface LearningModule {
 // 1. NEM Constraints (already built — the gold-standard reference)
 // ============================================================
 
+const M_START_HERE: LearningModule = {
+  id: 'start-here',
+  icon: '🎯',
+  title: 'Start Here — The AURES Sampler',
+  tagline: 'Six sharp ideas from across the curriculum, plus a choose-your-own-adventure navigator.',
+  description:
+    'A ~25-minute tour of the AURES Learning catalogue. Six short lessons each surface the single sharpest idea from a source module — self-contained on their own, with a "go deeper" link to the full treatment. The seventh lesson is an interactive navigator: pick a persona (developer / investor / analyst / curious) and get a suggested 3–5 module reading path with rationale and time estimate. Designed as the recommended entry point for people trying the AURES modules for the first time.',
+  status: 'available',
+  readingTime: '25 min',
+  accent: '#8b5cf6',
+  added: '2026-08-03',
+  route: '/learn/start-here',
+  lessons: [
+    { id: 'cost-dial',       number: 1, title: 'The cost dial',                                summary: 'Consumers, taxpayers, investors — one dial, three positions. It moves with the political cycle.' },
+    { id: 'cannibalisation', number: 2, title: 'Every technology destroys its own price signal', summary: 'The arithmetic that ties solar, wind and BESS together into a single story.' },
+    { id: 'rez-two-sided',   number: 3, title: 'A REZ is a two-sided market',                  summary: 'Transmission gets procured on one side, access rights get auctioned on the other. Both sides settle by 2030.' },
+    { id: 'hornsdale',       number: 4, title: 'Hornsdale — the Twitter bet',                  summary: 'How a 100-day dare in 2016 rewrote what everyone assumed batteries could do in a wholesale market.' },
+    { id: 'intel-stack',     number: 5, title: 'The intelligence stack in one map',            summary: 'The free public documents that answer most of a competent investment memo. AEMO, AER, AEMC, CER.' },
+    { id: 'zero-for-15',     number: 6, title: 'Zero for 15',                                  summary: 'The single most diagnostic finding across the entire CIS + LTESA record. What it tells us.' },
+    { id: 'navigator',       number: 7, title: 'Choose your own adventure',                    summary: 'Pick what you\'re here to do. Get a 3–5 module reading path with rationale and time estimate.', interactive: 'Persona-driven module path selector' },
+  ],
+  sources: [
+    { category: 'Source modules distilled', items: [
+      { label: 'CIS & LTESA — The Verdict (Lessons 1, 7, 8)' },
+      { label: 'Solar Cannibalisation (Lesson 1)' },
+      { label: 'NSW REZs & Transmission (Lesson 1)' },
+      { label: 'Solar + BESS in the NEM (Lesson 5)' },
+      { label: 'Reading the NEM (Lesson 1)' },
+    ]},
+    { category: 'The whole curriculum', items: [
+      { label: 'AURES Learning hub — full 14-module catalogue' },
+    ]},
+  ],
+}
+
 const M_CONSTRAINTS: LearningModule = {
   id: 'constraints',
   icon: '⚡',
@@ -1189,6 +1224,7 @@ const M_CIS_LTESA_VERDICT: LearningModule = {
 }
 
 export const LEARNING_MODULES: LearningModule[] = [
+  M_START_HERE,
   M_TRANSITION,
   M_BESS,
   M_SOLAR_CANN,
