@@ -26,10 +26,20 @@ export default function LearnHub() {
           AURES Learning
         </h1>
         <p className="text-sm text-[var(--color-text-muted)] leading-relaxed max-w-3xl">
-          A growing library of deep-dive modules on the Australian renewable energy market — written
+          A library of deep-dive modules on the Australian renewable energy market — written
           for analysts, board members, and developers who want to understand the technical and
-          commercial mechanics behind the headline numbers. Each module is structured around 5–7
-          lessons with interactive examples, real AURES data, and a clearly cited research bibliography.
+          commercial mechanics behind the headline numbers. Each module is structured around
+          5&ndash;17 lessons with interactive examples, real AURES data, and a clearly cited research
+          bibliography.
+        </p>
+        <p className="text-sm text-[var(--color-text-muted)] leading-relaxed max-w-3xl">
+          <span className="text-[var(--color-text)] font-semibold">New here?</span>{' '}
+          <Link to="/learn/start-here" className="text-[var(--color-primary)] hover:underline font-semibold">
+            Start Here — The AURES Sampler
+          </Link>{' '}
+          is a ~25-minute taster of six sharp ideas drawn from across the curriculum, ending with a
+          choose-your-own-adventure navigator that maps four personas
+          (developer / investor / analyst / curious) to a suggested 3&ndash;5 module reading path.
         </p>
         <div className="flex flex-wrap gap-3 text-xs text-[var(--color-text-muted)]">
           <span><strong className="text-[var(--color-text)]">{moduleCount}</strong> modules</span>
@@ -40,15 +50,17 @@ export default function LearnHub() {
         </div>
       </div>
 
-      {/* Roadmap explainer */}
-      <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl p-4 space-y-2">
-        <p className="text-xs font-bold uppercase tracking-wider text-[var(--color-text-muted)]">
-          About the curriculum
-        </p>
-        <p className="text-sm text-[var(--color-text-muted)] leading-relaxed">
-          Modules listed as <span style={{ color: '#22c55e', fontWeight: 600 }}>Available</span> are fully built. Modules listed as <span style={{ color: '#f59e0b', fontWeight: 600 }}>In Development</span> show their planned lesson outline and the research sources we will mine when we build the lessons — open the module to see the depth that&rsquo;s coming. We deep-build one module per dedicated session.
-        </p>
-      </div>
+      {/* Roadmap explainer — shown only if any module is not yet available */}
+      {inDevCount > 0 && (
+        <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl p-4 space-y-2">
+          <p className="text-xs font-bold uppercase tracking-wider text-[var(--color-text-muted)]">
+            About the curriculum
+          </p>
+          <p className="text-sm text-[var(--color-text-muted)] leading-relaxed">
+            Modules listed as <span style={{ color: '#22c55e', fontWeight: 600 }}>Available</span> are fully built. Modules listed as <span style={{ color: '#f59e0b', fontWeight: 600 }}>In Development</span> show their planned lesson outline and the research sources we will mine when we build the lessons &mdash; open the module to see the depth that&rsquo;s coming. We deep-build one module per dedicated session.
+          </p>
+        </div>
+      )}
 
       {/* Module grid */}
       <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
