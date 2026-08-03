@@ -937,11 +937,11 @@ const M_NEM_PUBLICATIONS: LearningModule = {
   tagline: 'The free, high-quality intelligence that tells you where to build, what to build, and when.',
   description:
     'AEMO, the AER, the AEMC, and state agencies publish an interconnected set of documents that — read together — provide a remarkably complete picture of the NEM\'s direction. The ISP sets the 20-year map. The ESOO identifies reliability gaps. The network planning documents show which constraints will be relieved (and which won\'t). MT PASA and QED track the near-term market. This module builds a developer\'s intelligence calendar: which publications to read, when they drop, what specific tables and charts to turn to, and what each one genuinely tells you versus what it quietly omits.',
-  status: 'in-development',
-  readingTime: '55 min planned',
+  status: 'available',
+  readingTime: '58 min',
   accent: '#0ea5e9',
-  added: '2026-07-10',
-  buildOrder: 2,
+  added: '2026-08-03',
+  route: '/learn/nem-publications',
   lessons: [
     {
       id: 'stack',
