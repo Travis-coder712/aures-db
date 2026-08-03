@@ -507,12 +507,12 @@ const M_SOLAR_CANN: LearningModule = {
   title: 'Solar Cannibalisation in the NEM',
   tagline: 'Why solar earns less than the pool — and where it ends.',
   description:
-    'Solar farms generate at the same time as every other solar farm in the region. The collective midday peak floods the market and pushes spot prices toward zero, creating a structural revenue penalty unique to high-penetration markets. This module uses real AURES capture-price data from operating solar farms to show the cannibalisation curve, the regional differences (SA vs NSW vs QLD vs VIC), and the role of co-located storage.',
-  status: 'in-development',
-  readingTime: '40 min planned',
+    'Solar farms generate at the same time as every other solar farm in the region. The collective midday peak floods the market and pushes spot prices toward zero, creating a structural revenue penalty unique to high-penetration markets. This module uses real AURES capture-price data from operating solar farms to show the cannibalisation curve, the regional differences (SA vs NSW vs QLD vs VIC), and the role of co-located storage — with a sober assessment of whether that answer really holds.',
+  status: 'available',
+  readingTime: '35 min',
   accent: '#f59e0b',
-  added: '2026-05-10',
-  buildOrder: 4,
+  added: '2026-08-03',
+  route: '/learn/solar-cannibalisation',
   lessons: [
     { id: 'mechanics', number: 1, title: 'The cannibalisation mechanic', summary: 'Why all solar farms generate at the same time, why that pushes prices down, and what the value-factor metric actually measures.', covers: ['Coincident-output problem', 'Merit-order effect', 'Value factor = capture / pool average', 'AEMO half-hourly RRP intuition'] },
     { id: 'data', number: 2, title: 'Live AURES data — VF by farm and region', summary: 'Real capture prices and value factors for every operating solar farm in AURES.', covers: ['SA leaders & laggards', 'NSW capture price distribution', 'QLD value-factor decay', 'Cross-state comparison'], interactive: 'AURES Solar Value Analysis cross-link' },
@@ -1191,6 +1191,7 @@ const M_CIS_LTESA_VERDICT: LearningModule = {
 export const LEARNING_MODULES: LearningModule[] = [
   M_TRANSITION,
   M_BESS,
+  M_SOLAR_CANN,
   M_REZ,
   M_CIS_LTESA,
   M_CIS_LTESA_VERDICT,

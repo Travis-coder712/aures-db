@@ -12,6 +12,7 @@ import ConstraintsModule from './pages/learn/ConstraintsModule'
 import CISLTESAModule from './pages/learn/CISLTESAModule'
 import CISLTESAVerdictModule from './pages/learn/CISLTESAVerdictModule'
 import NEMPublicationsModule from './pages/learn/NEMPublicationsModule'
+import SolarCannibalisationModule from './pages/learn/SolarCannibalisationModule'
 import NSWRezTransmissionModule from './pages/learn/NSWRezTransmissionModule'
 import BESSStoryModule from './pages/learn/BESSStoryModule'
 import EnergyTransitionModule from './pages/learn/EnergyTransitionModule'
@@ -98,6 +99,8 @@ function App() {
         <Route path="learn/cis-ltesa-verdict/:lessonId" element={<CISLTESAVerdictModule />} />
         <Route path="learn/nem-publications" element={<NEMPublicationsModule />} />
         <Route path="learn/nem-publications/:lessonId" element={<NEMPublicationsModule />} />
+        <Route path="learn/solar-cannibalisation" element={<SolarCannibalisationModule />} />
+        <Route path="learn/solar-cannibalisation/:lessonId" element={<SolarCannibalisationModule />} />
         <Route path="learn/nsw-rez" element={<NSWRezTransmissionModule />} />
         <Route path="learn/nsw-rez/:lessonId" element={<NSWRezTransmissionModule />} />
         <Route path="learn/bess-story" element={<BESSStoryModule />} />
