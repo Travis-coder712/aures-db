@@ -107,7 +107,7 @@ const M_START_HERE: LearningModule = {
       { label: 'Reading the NEM (Lesson 1)' },
     ]},
     { category: 'The whole curriculum', items: [
-      { label: 'AURES Learning hub — full 14-module catalogue' },
+      { label: 'AURES Learning hub — full 15-module catalogue' },
     ]},
   ],
 }

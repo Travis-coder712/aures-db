@@ -560,7 +560,7 @@ function Lesson7() {
         <Link to="/learn" className="text-[var(--color-primary)] hover:underline">
           Learning hub
         </Link>{' '}
-        with a description, lesson list and estimated reading time. Fourteen modules total, all
+        with a description, lesson list and estimated reading time. Fifteen modules total, all
         available.
       </P>
 
