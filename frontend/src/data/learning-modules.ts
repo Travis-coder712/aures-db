@@ -1135,11 +1135,65 @@ const M_NEM_PUBLICATIONS: LearningModule = {
 //   8. AEMO Connection (the technical gate)
 //   9. NEM Constraints (operational reality once built)
 //   10. Summing It Up (synthesis of the curriculum)
+const M_CIS_LTESA_VERDICT: LearningModule = {
+  id: 'cis-ltesa-verdict',
+  icon: '⚖️',
+  title: 'CIS & LTESA — The Verdict',
+  tagline: 'Who bore the cost, what the mechanism did, and why the first-cohort delivery numbers look the way they do.',
+  description:
+    'Distilled from an August 2026 internal working note on CIS + LTESA scheme performance. Ten lessons trace the arc from the cost-allocation dial (consumers / taxpayers / investors), through the CISA mechanism, the six design choices that were individually defensible but jointly fatal, the macro turn (capex +50%, curve −30%, demand growth 5.2% → 0.0%), the moneyness trap, the three-technology divergence (solar cannibalised, wind never scaled, BESS worked and is now compressing), the state of play at Senate Estimates, the LTESA comparison, and the forward tests through 2027. Complements the CIS & LTESA Bidding module — that one is about HOW to bid; this one is about WHETHER IT HAS WORKED.',
+  status: 'available',
+  readingTime: '55 min',
+  accent: '#c2410c',
+  added: '2026-08-01',
+  route: '/learn/cis-ltesa-verdict',
+  lessons: [
+    { id: 'dial',           number: 1,  title: 'Who bears the cost — the dial with three positions',      summary: 'Consumers, taxpayers, investors. Bill relief and the CIS collar are the same decision expressed twice.' },
+    { id: 'problem',        number: 2,  title: 'The problem the CIS was built to solve',                  summary: 'RET wound down, LGCs on a glide path, coal exit accelerating. Right diagnosis, wrong dose.' },
+    { id: 'mechanism',      number: 3,  title: 'The mechanism as designed — a collar, not a swap',        summary: 'The CISA cap-and-collar formula. Four bid variables. Announced first, negotiated later.' },
+    { id: 'six-choices',    number: 4,  title: 'Six design choices, jointly fatal',                       summary: 'MC1 dominance, early-stage eligibility, no offtake, nominal bid security, and the free-option effect.' },
+    { id: 'macro-turn',     number: 5,  title: 'The macro turned, and turned hard',                       summary: 'Capex +50%, forward curve −30%, demand growth 5.2% → 0.0%, wind lending −90%.' },
+    { id: 'moneyness',      number: 6,  title: 'The moneyness trap',                                      summary: 'Why an OOM floor wins the auction but pays nothing when needed. The three-year liquid horizon underneath.' },
+    { id: 'three-tech',     number: 7,  title: 'The three-technology divergence',                         summary: 'Solar cannibalised by rooftop, wind never reached scale, BESS worked and is now testing its own limits.' },
+    { id: 'state-of-play',  number: 8,  title: 'State of play — the numbers',                             summary: '94 announced, 35 executed, 15 at FID. Every FID had contracted revenue on top of the CISA.' },
+    { id: 'ltesa',          number: 9,  title: 'Has the LTESA been better?',                              summary: 'Yes for storage. Weaker for generation than the headline. What actually predicts conversion.' },
+    { id: 'forward',        number: 10, title: 'Forward view — nine changes and five tests',              summary: 'What to change (in descending impact) and what to watch (leading indicators through 2027).' },
+  ],
+  sources: [
+    { category: 'AURES research corpus', items: [
+      { label: 'RESEARCH_CIS_T9_COMPETITIVE_FIELD.md' },
+      { label: 'RESEARCH_BESS_SLEEPER_STORY.md' },
+      { label: 'Research Notes: cis-wind-projects-crisis-state-of-play' },
+      { label: 'Research Notes: cis-rebid-restrictions-hardening' },
+      { label: 'AURES scheme-rounds.ts + scheme_contracts overlay data' },
+    ]},
+    { category: 'Official record', items: [
+      { label: 'Senate Environment and Communications Legislation Committee, 26 May 2026, pp. 86–90', note: 'primary source for the 94 / 35 / 15 program numbers, the four projects that self-notified, and the 15 GW-by-end-2026 forecast' },
+      { label: 'Clean Energy Regulator quarterly FID reports (QCMR)' },
+      { label: 'DCCEEW CIS tender results pages, all rounds' },
+      { label: 'Electricity Infrastructure Legislation Amendment Bill 2025', note: '20 Feb 2025 — legislated 23 GW / 9 GW targets' },
+    ]},
+    { category: 'Market analysis', items: [
+      { label: 'David Leitch, RenewEconomy 31 Jul 2026', note: 'the article this note argues with; the case for replacing the CIS with a flat CfD' },
+      { label: 'Modo Energy — quarterly BESS revenue tracker' },
+      { label: 'Rystad Energy — onshore wind capex inflation series' },
+      { label: 'LSEG LPC / IFR — wind lending series' },
+      { label: 'AEMO / ITK forward-curve snapshots (Figures 5–6)' },
+    ]},
+    { category: 'Legal + commercial', items: [
+      { label: 'CIS proforma CISA + T9 Q&A Item 8 (July 2026)', note: 'the withdraw-and-resubmit hardening' },
+      { label: 'ASL Tender Process Deed (NSW)' },
+      { label: 'Hamilton Locke, HSF Kramer, Clayton Utz market updates on CIS/LTESA' },
+    ]},
+  ],
+}
+
 export const LEARNING_MODULES: LearningModule[] = [
   M_TRANSITION,
   M_BESS,
   M_REZ,
   M_CIS_LTESA,
+  M_CIS_LTESA_VERDICT,
   M_PPAS,
   M_FINANCING,
   M_PLANNING,
