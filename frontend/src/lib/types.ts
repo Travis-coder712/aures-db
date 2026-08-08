@@ -1577,6 +1577,25 @@ export interface EISCoverageData {
   last_updated: string
 }
 
+// AEMO KCI ingest stats (v3.29.0) — surfaces on the Coverage tab
+export interface EISKciTnspSplit { tnsp: string; kci_records: number }
+export interface EISKciTechSplit { tech: string; kci_records: number }
+export interface EISKciNspProjects { nsp: string; projects: number }
+export interface EISKciStats {
+  available: boolean
+  note?: string
+  latest_snapshot?: string
+  total_kci_records?: number
+  distinct_kci_ids?: number
+  aures_projects_matched?: number
+  aures_projects_with_kci_id?: number
+  aures_projects_with_nsp?: number
+  aures_total_projects?: number
+  tnsp_split?: EISKciTnspSplit[]
+  tech_split?: EISKciTechSplit[]
+  nsp_populated_by_projects?: EISKciNspProjects[]
+}
+
 // ============================================================
 // Wind Value Analytics
 // ============================================================

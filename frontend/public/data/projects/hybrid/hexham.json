@@ -10,6 +10,7 @@
   "cod_current": "2030-11-01",
   "cod_original": "2030-11-01",
   "connection_status": "proposed",
+  "connection_nsp": "VicGrid",
   "grid_forming": false,
   "has_sips": false,
   "has_syncon": false,
@@ -22,6 +23,7 @@
   "confidence_score": "36",
   "development_stage": "planning_submitted",
   "first_seen": "2022",
+  "aemo_kci_id": "V00128",
   "timeline": [
     {
       "date": "2022",

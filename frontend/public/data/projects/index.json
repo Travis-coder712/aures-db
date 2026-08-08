@@ -11,7 +11,9 @@
     "data_confidence": "medium",
     "confidence_score": "28",
     "development_stage": "planning_submitted",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00086"
   },
   {
     "id": "alberton-wind-farm",
@@ -35,7 +37,9 @@
     "state": "NSW",
     "current_developer": "VISY PULP AND PAPER PTY. LTD.",
     "data_confidence": "low",
-    "development_stage": "planning_submitted"
+    "development_stage": "planning_submitted",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00287"
   },
   {
     "id": "aldoga-bess-stage-1",
@@ -49,7 +53,9 @@
     "data_confidence": "medium",
     "confidence_score": "28",
     "development_stage": "planning_submitted",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00118"
   },
   {
     "id": "aldoga-solar-farm",
@@ -65,6 +71,8 @@
     "development_stage": "epbc_approved",
     "notable": "387 MW solar farm near Gladstone, QLD. Developed by ACCIONA Energ\u00eda for Ark Energy / Korea Zinc's green hydrogen and renewable energy strategy. Powers Korea Zinc's zinc refinery operations in Townsville.",
     "first_seen": "2020",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00036",
     "has_eis_data": true
   },
   {
@@ -78,7 +86,9 @@
     "data_confidence": "low",
     "confidence_score": "15",
     "development_stage": "planning_submitted",
-    "zombie_flag": "zombie_minimal"
+    "zombie_flag": "zombie_minimal",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00239"
   },
   {
     "id": "apsley-bess-project",
@@ -91,7 +101,9 @@
     "current_developer": "ACENergy Pty Ltd",
     "data_confidence": "low",
     "confidence_score": "20",
-    "development_stage": "planning_submitted"
+    "development_stage": "planning_submitted",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00063"
   },
   {
     "id": "aquila-wind",
@@ -104,7 +116,9 @@
     "data_confidence": "low",
     "confidence_score": "23",
     "development_stage": "planning_submitted",
-    "first_seen": "2023"
+    "first_seen": "2023",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00038"
   },
   {
     "id": "aramara-solar-farm",
@@ -187,7 +201,9 @@
     "data_confidence": "medium",
     "confidence_score": "28",
     "development_stage": "planning_submitted",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00280"
   },
   {
     "id": "armidale-bess-elgin",
@@ -252,7 +268,9 @@
     "state": "NSW",
     "current_developer": "Ashleigh Park Beef Pty Ltd",
     "data_confidence": "low",
-    "development_stage": "planning_submitted"
+    "development_stage": "planning_submitted",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00298"
   },
   {
     "id": "augusta-bess",
@@ -265,7 +283,9 @@
     "current_developer": "Augusta BESS Pty Ltd",
     "data_confidence": "low",
     "confidence_score": "20",
-    "development_stage": "planning_submitted"
+    "development_stage": "planning_submitted",
+    "connection_nsp": "ElectraNet",
+    "aemo_kci_id": "S00076"
   },
   {
     "id": "aurora-solar-energy-project-phase-1",
@@ -291,7 +311,9 @@
     "data_confidence": "low",
     "confidence_score": "15",
     "development_stage": "planning_submitted",
-    "zombie_flag": "zombie_minimal"
+    "zombie_flag": "zombie_minimal",
+    "connection_nsp": "ElectraNet",
+    "aemo_kci_id": "S00031"
   },
   {
     "id": "avenue-road-bess-kci",
@@ -304,7 +326,9 @@
     "current_developer": "Eku Energy Australia Pty Ltd",
     "data_confidence": "low",
     "confidence_score": "20",
-    "development_stage": "planning_submitted"
+    "development_stage": "planning_submitted",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00265"
   },
   {
     "id": "avonlie-solar-farm",
@@ -347,7 +371,9 @@
     "data_confidence": "medium",
     "confidence_score": "28",
     "development_stage": "early_stage",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "connection_nsp": "VicGrid",
+    "aemo_kci_id": "V00025"
   },
   {
     "id": "bess-finley",
@@ -360,7 +386,9 @@
     "data_confidence": "low",
     "confidence_score": "15",
     "development_stage": "planning_submitted",
-    "zombie_flag": "zombie_minimal"
+    "zombie_flag": "zombie_minimal",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00246"
   },
   {
     "id": "bairnsdale-bess",
@@ -386,7 +414,9 @@
     "data_confidence": "low",
     "confidence_score": "15",
     "development_stage": "planning_submitted",
-    "zombie_flag": "zombie_minimal"
+    "zombie_flag": "zombie_minimal",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00144"
   },
   {
     "id": "baking-board-solar-farm-mmt",
@@ -426,7 +456,9 @@
     "data_confidence": "low",
     "confidence_score": "23",
     "development_stage": "planning_submitted",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00231"
   },
   {
     "id": "baldon-wind-farm-stage-2",
@@ -440,6 +472,8 @@
     "confidence_score": "31",
     "development_stage": "planning_submitted",
     "first_seen": "2024",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00138",
     "has_scheme_contract": true
   },
   {
@@ -472,7 +506,9 @@
     "capex_aud_m": 32.0,
     "capex_year": 2017,
     "notable": "30 MW / 30 MWh \u2014 Victoria's first grid-scale battery and first standalone front-of-meter battery directly connected to a transmission network in Australia (2018). Fluence system owned by AusNet, operated by EnergyAustralia under long-term offtake. Victorian Government Energy Storage Initiative.",
-    "first_seen": "2018-10-23"
+    "first_seen": "2018-10-23",
+    "connection_nsp": "VicGrid",
+    "aemo_kci_id": "V00064"
   },
   {
     "id": "banana-range-wind-farm",
@@ -486,6 +522,8 @@
     "confidence_score": "23",
     "development_stage": "planning_submitted",
     "first_seen": "2026-03-12",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00041",
     "has_scheme_contract": true
   },
   {
@@ -516,7 +554,9 @@
     "data_confidence": "good",
     "confidence_score": "59",
     "notable": "First deployment of GE Cypress 5.3-158 turbines globally. 16 turbines. Woolworths PPA for ~108 NSW supermarkets.",
-    "first_seen": "2021-01-13"
+    "first_seen": "2021-01-13",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00019"
   },
   {
     "id": "banksia-solar-farm",
@@ -545,6 +585,8 @@
     "confidence_score": "15",
     "development_stage": "planning_submitted",
     "zombie_flag": "zombie_minimal",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00322",
     "has_scheme_contract": true
   },
   {
@@ -573,7 +615,9 @@
     "data_confidence": "medium",
     "confidence_score": "28",
     "development_stage": "early_stage",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "connection_nsp": "VicGrid",
+    "aemo_kci_id": "V00083"
   },
   {
     "id": "barn-hill",
@@ -588,7 +632,9 @@
     "confidence_score": "23",
     "development_stage": "planning_submitted",
     "first_seen": "2008",
-    "zombie_flag": "zombie_stale"
+    "zombie_flag": "zombie_stale",
+    "connection_nsp": "ElectraNet",
+    "aemo_kci_id": "S00073"
   },
   {
     "id": "barn-hill-bess",
@@ -657,6 +703,8 @@
     "confidence_score": "28",
     "development_stage": "planning_submitted",
     "first_seen": "2026-03-12",
+    "connection_nsp": "VicGrid",
+    "aemo_kci_id": "V00172",
     "has_scheme_contract": true
   },
   {
@@ -670,7 +718,9 @@
     "data_confidence": "low",
     "confidence_score": "23",
     "development_stage": "planning_submitted",
-    "first_seen": "2025"
+    "first_seen": "2025",
+    "connection_nsp": "TasNetworks",
+    "aemo_kci_id": "T00033"
   },
   {
     "id": "bass-offshore-wind-energy-project",
@@ -684,7 +734,9 @@
     "confidence_score": "31",
     "development_stage": "planning_submitted",
     "notable": "Proposed 500 MW (scaled to 1.5 GW) bottom-fixed off NE Tasmania in Bass Strait. Equinor withdrew early 2025. Failed to obtain feasibility licence Apr 2025. Nexsphere seeking new partners.",
-    "first_seen": "2025-01-01"
+    "first_seen": "2025-01-01",
+    "connection_nsp": "TasNetworks",
+    "aemo_kci_id": "T00010"
   },
   {
     "id": "bastyan",
@@ -737,7 +789,9 @@
     "current_developer": "BEEBO SOLAR FARM PTY LTD as Trustee For BEEBO SOLAR FARM UNIT TRUST",
     "data_confidence": "low",
     "confidence_score": "20",
-    "development_stage": "planning_submitted"
+    "development_stage": "planning_submitted",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00148"
   },
   {
     "id": "beebo-solar-farm-kci",
@@ -777,7 +831,9 @@
     "data_confidence": "medium",
     "confidence_score": "28",
     "development_stage": "planning_submitted",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00282"
   },
   {
     "id": "belhaven-renewable-project",
@@ -805,7 +861,9 @@
     "data_confidence": "medium",
     "confidence_score": "36",
     "development_stage": "planning_submitted",
-    "first_seen": "2024"
+    "first_seen": "2024",
+    "connection_nsp": "TasNetworks",
+    "aemo_kci_id": "T00020"
   },
   {
     "id": "bellambi-heights-renewables-project",
@@ -821,6 +879,8 @@
     "confidence_score": "67",
     "notable": "CWO REZ location. Originally 500 MW Gulgong Solar, scaled down to BESS-only. Two stages of 204 MW each.",
     "first_seen": "2024-05-02",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00163",
     "has_eis_data": true
   },
   {
@@ -876,7 +936,9 @@
     "data_confidence": "low",
     "confidence_score": "23",
     "development_stage": "planning_submitted",
-    "first_seen": "2023"
+    "first_seen": "2023",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00100"
   },
   {
     "id": "bendenine",
@@ -891,6 +953,8 @@
     "confidence_score": "28",
     "development_stage": "planning_submitted",
     "first_seen": "2026-03-12",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00262",
     "has_scheme_contract": true
   },
   {
@@ -906,6 +970,8 @@
     "confidence_score": "48",
     "notable": "110 MW / 220 MWh BESS near Gloucester, NSW. AGL Energy project supporting Hunter Valley grid stability.",
     "first_seen": "2026-03-12",
+    "connection_nsp": "VicGrid",
+    "aemo_kci_id": "V00045",
     "has_eis_data": true
   },
   {
@@ -934,7 +1000,9 @@
     "data_confidence": "medium",
     "confidence_score": "28",
     "development_stage": "planning_submitted",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "connection_nsp": "VicGrid",
+    "aemo_kci_id": "V00087"
   },
   {
     "id": "berrybank-wind-farm",
@@ -964,7 +1032,9 @@
     "data_confidence": "medium",
     "confidence_score": "28",
     "development_stage": "planning_submitted",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00123"
   },
   {
     "id": "beryl-solar-farm",
@@ -991,7 +1061,9 @@
     "current_developer": "BE Power",
     "data_confidence": "low",
     "confidence_score": "20",
-    "development_stage": "planning_submitted"
+    "development_stage": "planning_submitted",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00333"
   },
   {
     "id": "big-t-project",
@@ -1046,7 +1118,9 @@
     "current_developer": "Enervest Operations Pty Ltd",
     "data_confidence": "low",
     "confidence_score": "20",
-    "development_stage": "planning_submitted"
+    "development_stage": "planning_submitted",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00266"
   },
   {
     "id": "blackstone-bess",
@@ -1060,7 +1134,9 @@
     "data_confidence": "medium",
     "confidence_score": "28",
     "development_stage": "early_stage",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00319"
   },
   {
     "id": "blacktop-bess-kci",
@@ -1073,7 +1149,9 @@
     "data_confidence": "low",
     "confidence_score": "15",
     "development_stage": "planning_submitted",
-    "zombie_flag": "zombie_minimal"
+    "zombie_flag": "zombie_minimal",
+    "connection_nsp": "ElectraNet",
+    "aemo_kci_id": "S00049"
   },
   {
     "id": "blackwater-hybrid-system",
@@ -1087,7 +1165,9 @@
     "data_confidence": "medium",
     "confidence_score": "28",
     "development_stage": "planning_submitted",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00048"
   },
   {
     "id": "blair-athol-solar-power-station",
@@ -1113,7 +1193,9 @@
     "data_confidence": "low",
     "confidence_score": "15",
     "development_stage": "planning_submitted",
-    "zombie_flag": "zombie_minimal"
+    "zombie_flag": "zombie_minimal",
+    "connection_nsp": "ElectraNet",
+    "aemo_kci_id": "S00063"
   },
   {
     "id": "blenheim-solar-farm-kci",
@@ -1126,7 +1208,9 @@
     "data_confidence": "low",
     "confidence_score": "15",
     "development_stage": "planning_submitted",
-    "zombie_flag": "zombie_minimal"
+    "zombie_flag": "zombie_minimal",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00025"
   },
   {
     "id": "blind-creek-solar-farm-and-battery-energy-storage-system",
@@ -1139,7 +1223,9 @@
     "current_developer": "Ms BCSF Holdings Pty Ltd as trustee for the Blind Creek Solar Farm Trust",
     "data_confidence": "medium",
     "confidence_score": "38",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00044"
   },
   {
     "id": "blowering",
@@ -1179,7 +1265,9 @@
     "data_confidence": "medium",
     "confidence_score": "25",
     "development_stage": "planning_submitted",
-    "notable": "Likely duplicate AEMO entry for Blue Mackerel North project. See blue-mackerel-north-offshore-wind-farm for primary record."
+    "notable": "Likely duplicate AEMO entry for Blue Mackerel North project. See blue-mackerel-north-offshore-wind-farm for primary record.",
+    "connection_nsp": "VicGrid",
+    "aemo_kci_id": "V00195"
   },
   {
     "id": "blue-mackerel-north-offshore-wind-farm",
@@ -1226,7 +1314,9 @@
     "capex_aud_m": 338.0,
     "capex_year": 2023,
     "notable": "238.5 MW / 477 MWh BESS developed by Neoen with $17M ARENA grant funding. CATL battery technology with NHOA/Elecnor JV as EPC. Has a 70 MW PPA with BHP to help power Olympic Dam copper-uranium mine in SA.",
-    "first_seen": "2023-06-01"
+    "first_seen": "2023-06-01",
+    "connection_nsp": "ElectraNet",
+    "aemo_kci_id": "S00032"
   },
   {
     "id": "boags-creek-solar-power-station",
@@ -1239,7 +1329,9 @@
     "data_confidence": "low",
     "confidence_score": "15",
     "development_stage": "planning_submitted",
-    "zombie_flag": "zombie_minimal"
+    "zombie_flag": "zombie_minimal",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00269"
   },
   {
     "id": "boco-rock-wind-farm",
@@ -1283,7 +1375,9 @@
     "data_confidence": "low",
     "confidence_score": "15",
     "development_stage": "planning_submitted",
-    "zombie_flag": "zombie_minimal"
+    "zombie_flag": "zombie_minimal",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00233"
   },
   {
     "id": "bogong-mackay",
@@ -1310,7 +1404,9 @@
     "data_confidence": "low",
     "confidence_score": "15",
     "development_stage": "planning_submitted",
-    "zombie_flag": "zombie_minimal"
+    "zombie_flag": "zombie_minimal",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00111"
   },
   {
     "id": "bomen-solar-farm",
@@ -1337,7 +1433,9 @@
     "current_developer": "Barathrum Energy Pty Ltd",
     "data_confidence": "low",
     "confidence_score": "20",
-    "development_stage": "planning_submitted"
+    "development_stage": "planning_submitted",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00205"
   },
   {
     "id": "bonshaw-solar-farm",
@@ -1350,7 +1448,9 @@
     "data_confidence": "low",
     "confidence_score": "23",
     "development_stage": "planning_submitted",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00008"
   },
   {
     "id": "bookaar-solar-farm",
@@ -1363,7 +1463,9 @@
     "data_confidence": "low",
     "confidence_score": "15",
     "development_stage": "planning_submitted",
-    "zombie_flag": "zombie_minimal"
+    "zombie_flag": "zombie_minimal",
+    "connection_nsp": "VicGrid",
+    "aemo_kci_id": "V00118"
   },
   {
     "id": "bookham-wf-and-bess",
@@ -1378,6 +1480,8 @@
     "confidence_score": "28",
     "development_stage": "planning_submitted",
     "first_seen": "2026-03-12",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00052",
     "has_scheme_contract": true
   },
   {
@@ -1415,7 +1519,9 @@
     "state": "NSW",
     "current_developer": "British Solar Renewables Pty Ltd",
     "data_confidence": "low",
-    "development_stage": "planning_submitted"
+    "development_stage": "planning_submitted",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00290"
   },
   {
     "id": "boree-solar-project",
@@ -1460,6 +1566,8 @@
     "capex_aud_m": 740.0,
     "notable": "38x GE Vernova 6.0-164. Aula/CS Energy 50:50 JV. CS Energy 20yr PPA. RES construction mgmt. A$740M. COD 2027.",
     "first_seen": "2020",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00334",
     "has_eis_data": true
   },
   {
@@ -1478,7 +1586,9 @@
     "capex_aud_m": 100.0,
     "capex_year": 2022,
     "notable": "50 MW / 100 MWh Tesla Megapack BESS near Gladstone, QLD. Genex Power's first large-scale BESS, operated under Tesla Autobidder offtake. Two Megapack units damaged in fire during September 2023 commissioning \u2014 Tesla bore replacement costs. 40 Megapack 2.0 units. Full COD December 2023.",
-    "first_seen": "2023-06-01"
+    "first_seen": "2023-06-01",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00150"
   },
   {
     "id": "boulka-park-bess",
@@ -1491,7 +1601,9 @@
     "current_developer": "The Trustee for X-ELIO BOULKA PARK TRUST",
     "data_confidence": "low",
     "confidence_score": "20",
-    "development_stage": "planning_submitted"
+    "development_stage": "planning_submitted",
+    "connection_nsp": "VicGrid",
+    "aemo_kci_id": "V00136"
   },
   {
     "id": "boulka-park-solar-farm",
@@ -1544,7 +1656,9 @@
     "data_confidence": "low",
     "confidence_score": "23",
     "development_stage": "planning_submitted",
-    "first_seen": "2025"
+    "first_seen": "2025",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00061"
   },
   {
     "id": "bowning-hybrid-plant",
@@ -1557,7 +1671,9 @@
     "data_confidence": "low",
     "confidence_score": "15",
     "development_stage": "planning_submitted",
-    "zombie_flag": "zombie_minimal"
+    "zombie_flag": "zombie_minimal",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00277"
   },
   {
     "id": "braemar-bess",
@@ -1570,7 +1686,9 @@
     "current_developer": "Braemar Power Project Pty Ltd",
     "data_confidence": "low",
     "confidence_score": "20",
-    "development_stage": "planning_submitted"
+    "development_stage": "planning_submitted",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00210"
   },
   {
     "id": "brendale-bess",
@@ -1588,7 +1706,9 @@
     "capex_aud_m": 300.0,
     "capex_year": 2023,
     "notable": "Tesla Megapack 2 grid-forming. A$200M. Completed 5 months early (Jan 2026). Gunvor offtake.",
-    "first_seen": "2023-12-01"
+    "first_seen": "2023-12-01",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00274"
   },
   {
     "id": "brewongle-solar-farm",
@@ -1601,7 +1721,9 @@
     "data_confidence": "low",
     "confidence_score": "15",
     "development_stage": "planning_submitted",
-    "zombie_flag": "zombie_minimal"
+    "zombie_flag": "zombie_minimal",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00221"
   },
   {
     "id": "bridle-track-solar-project",
@@ -1628,7 +1750,9 @@
     "data_confidence": "medium",
     "confidence_score": "28",
     "development_stage": "planning_submitted",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "connection_nsp": "ElectraNet",
+    "aemo_kci_id": "S00061"
   },
   {
     "id": "broadsound-solar-farm",
@@ -1643,7 +1767,9 @@
     "confidence_score": "51",
     "development_stage": "epbc_approved",
     "notable": "296 MW solar farm near Marlborough, QLD. Part of the CQ REZ growth corridor.",
-    "first_seen": "2020"
+    "first_seen": "2020",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00021"
   },
   {
     "id": "broadsoundbess",
@@ -1675,7 +1801,9 @@
     "data_confidence": "good",
     "confidence_score": "57",
     "notable": "50 MW / 50 MWh BESS permanently configured in grid-forming mode \u2014 an ARENA-funded demonstration in one of the weakest and most remote parts of the NEM. Provides system strength services to the Broken Hill network, where high renewable penetration had previously caused frequent curtailment.",
-    "first_seen": "2023-11-30"
+    "first_seen": "2023-11-30",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00067"
   },
   {
     "id": "broken-hill-solar-plant",
@@ -1703,7 +1831,9 @@
     "data_confidence": "low",
     "confidence_score": "15",
     "development_stage": "planning_submitted",
-    "zombie_flag": "zombie_minimal"
+    "zombie_flag": "zombie_minimal",
+    "connection_nsp": "TasNetworks",
+    "aemo_kci_id": "T00044"
   },
   {
     "id": "bulabul-bess-1",
@@ -1733,6 +1863,8 @@
     "data_confidence": "low",
     "confidence_score": "20",
     "development_stage": "planning_submitted",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00284",
     "has_scheme_contract": true
   },
   {
@@ -1764,6 +1896,8 @@
     "confidence_score": "39",
     "development_stage": "planning_submitted",
     "first_seen": "2023",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00240",
     "has_scheme_contract": true
   },
   {
@@ -1779,6 +1913,8 @@
     "confidence_score": "31",
     "development_stage": "planning_submitted",
     "first_seen": "2025-04-23",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00282",
     "has_scheme_contract": true
   },
   {
@@ -1805,7 +1941,9 @@
     "data_confidence": "medium",
     "confidence_score": "28",
     "development_stage": "planning_submitted",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00341"
   },
   {
     "id": "bulli-creek-solar-farm",
@@ -1818,7 +1956,9 @@
     "data_confidence": "low",
     "confidence_score": "23",
     "development_stage": "planning_submitted",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00077"
   },
   {
     "id": "bulli-creek-solar-farm-trina",
@@ -1859,7 +1999,9 @@
     "data_confidence": "low",
     "confidence_score": "15",
     "development_stage": "planning_submitted",
-    "zombie_flag": "zombie_minimal"
+    "zombie_flag": "zombie_minimal",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00101"
   },
   {
     "id": "bundaberg-solar-farm",
@@ -1886,6 +2028,8 @@
     "data_confidence": "low",
     "confidence_score": "20",
     "development_stage": "planning_submitted",
+    "connection_nsp": "ElectraNet",
+    "aemo_kci_id": "S00067",
     "has_scheme_contract": true
   },
   {
@@ -1900,7 +2044,9 @@
     "data_confidence": "medium",
     "confidence_score": "28",
     "development_stage": "planning_submitted",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00342"
   },
   {
     "id": "bungaban-wind-farm",
@@ -1914,6 +2060,8 @@
     "confidence_score": "31",
     "development_stage": "planning_submitted",
     "first_seen": "2024",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00049",
     "has_scheme_contract": true
   },
   {
@@ -1928,7 +2076,9 @@
     "data_confidence": "medium",
     "confidence_score": "46",
     "notable": "95 MW solar farm near Port Augusta, SA. Stage 1 of the 190 MW Bungala Solar Power Project. Developed by ENEL Green Power / DIF Capital Partners. One of the first utility-scale solar projects in the Port Augusta renewable energy precinct.",
-    "first_seen": "2018-05-14"
+    "first_seen": "2018-05-14",
+    "connection_nsp": "ElectraNet",
+    "aemo_kci_id": "S00019"
   },
   {
     "id": "bungala-two-solar-farm",
@@ -1955,7 +2105,9 @@
     "current_developer": "Bungama Bess Trust",
     "data_confidence": "low",
     "confidence_score": "20",
-    "development_stage": "planning_submitted"
+    "development_stage": "planning_submitted",
+    "connection_nsp": "ElectraNet",
+    "aemo_kci_id": "S00004"
   },
   {
     "id": "bungama-solar",
@@ -1984,7 +2136,9 @@
     "data_confidence": "medium",
     "confidence_score": "28",
     "development_stage": "planning_submitted",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00071"
   },
   {
     "id": "bunkers-hill-wind-farm",
@@ -2010,7 +2164,9 @@
     "current_developer": "AMPYR Energy",
     "data_confidence": "low",
     "confidence_score": "20",
-    "development_stage": "planning_submitted"
+    "development_stage": "planning_submitted",
+    "connection_nsp": "VicGrid",
+    "aemo_kci_id": "V00187"
   },
   {
     "id": "bunyip-north-battery-energy-storage-system",
@@ -2037,7 +2193,9 @@
     "data_confidence": "medium",
     "confidence_score": "28",
     "development_stage": "planning_submitted",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00325"
   },
   {
     "id": "burdekin-solar-farm-kci",
@@ -2064,7 +2222,9 @@
     "data_confidence": "medium",
     "confidence_score": "28",
     "development_stage": "planning_submitted",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00210"
   },
   {
     "id": "buronga-bess-storage-kci",
@@ -2077,7 +2237,9 @@
     "data_confidence": "low",
     "confidence_score": "15",
     "development_stage": "planning_submitted",
-    "zombie_flag": "zombie_minimal"
+    "zombie_flag": "zombie_minimal",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00105"
   },
   {
     "id": "burrenbring-wind-farm",
@@ -2090,7 +2252,9 @@
     "data_confidence": "low",
     "confidence_score": "15",
     "development_stage": "planning_submitted",
-    "zombie_flag": "zombie_minimal"
+    "zombie_flag": "zombie_minimal",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00228"
   },
   {
     "id": "burrendong-wind-farm",
@@ -2103,7 +2267,9 @@
     "data_confidence": "low",
     "confidence_score": "23",
     "development_stage": "planning_submitted",
-    "first_seen": "2021"
+    "first_seen": "2021",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00248"
   },
   {
     "id": "burrinjuck",
@@ -2159,7 +2325,9 @@
     "data_confidence": "medium",
     "confidence_score": "28",
     "development_stage": "planning_submitted",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00264"
   },
   {
     "id": "calala-bess-a1",
@@ -2174,6 +2342,8 @@
     "confidence_score": "57",
     "notable": "Staged build: 250 MW total. Both phases CIS T3, under construction.",
     "first_seen": "2024-06-28",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00150",
     "has_eis_data": true,
     "has_scheme_contract": true
   },
@@ -2203,7 +2373,9 @@
     "data_confidence": "low",
     "confidence_score": "15",
     "development_stage": "planning_submitted",
-    "zombie_flag": "zombie_minimal"
+    "zombie_flag": "zombie_minimal",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00137"
   },
   {
     "id": "callide-power-station-solar-farm",
@@ -2229,7 +2401,9 @@
     "current_developer": "Edify Energy Pty Ltd",
     "data_confidence": "low",
     "confidence_score": "20",
-    "development_stage": "planning_submitted"
+    "development_stage": "planning_submitted",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00137"
   },
   {
     "id": "callide-wind-farm",
@@ -2242,7 +2416,9 @@
     "data_confidence": "medium",
     "confidence_score": "31",
     "development_stage": "planning_submitted",
-    "first_seen": "2021"
+    "first_seen": "2021",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00016"
   },
   {
     "id": "calvale-ldes-bess",
@@ -2255,7 +2431,9 @@
     "data_confidence": "low",
     "confidence_score": "15",
     "development_stage": "planning_submitted",
-    "zombie_flag": "zombie_minimal"
+    "zombie_flag": "zombie_minimal",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00094"
   },
   {
     "id": "campbells-forest-solar-farm",
@@ -2310,7 +2488,9 @@
     "current_developer": "X-Elio Australia Pty Ltd",
     "data_confidence": "low",
     "confidence_score": "20",
-    "development_stage": "planning_submitted"
+    "development_stage": "planning_submitted",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00141"
   },
   {
     "id": "cape-winds-offshore-wind-farm",
@@ -2323,7 +2503,9 @@
     "data_confidence": "medium",
     "confidence_score": "25",
     "development_stage": "planning_submitted",
-    "notable": "Shelved/failed proposal. Proposed for Discovery Bay area between Portland VIC and Nelson. Superseded by Spinifex project which holds active Southern Ocean feasibility licence."
+    "notable": "Shelved/failed proposal. Proposed for Discovery Bay area between Portland VIC and Nelson. Superseded by Spinifex project which holds active Southern Ocean feasibility licence.",
+    "connection_nsp": "VicGrid",
+    "aemo_kci_id": "V00101"
   },
   {
     "id": "capital-2-wind-farm",
@@ -2336,7 +2518,9 @@
     "data_confidence": "low",
     "confidence_score": "15",
     "development_stage": "planning_submitted",
-    "zombie_flag": "zombie_minimal"
+    "zombie_flag": "zombie_minimal",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00085"
   },
   {
     "id": "capital-battery",
@@ -2385,6 +2569,8 @@
     "confidence_score": "28",
     "development_stage": "planning_submitted",
     "first_seen": "2026-03-12",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00297",
     "has_scheme_contract": true
   },
   {
@@ -2398,7 +2584,9 @@
     "current_developer": "CI QLD PHES PTY LTD",
     "data_confidence": "low",
     "confidence_score": "20",
-    "development_stage": "planning_submitted"
+    "development_stage": "planning_submitted",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00289"
   },
   {
     "id": "captains-mountain-wind-farm",
@@ -2411,7 +2599,9 @@
     "data_confidence": "medium",
     "confidence_score": "31",
     "development_stage": "planning_submitted",
-    "first_seen": "2025"
+    "first_seen": "2025",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00046"
   },
   {
     "id": "carmodys-hill-bess",
@@ -2456,7 +2646,9 @@
     "data_confidence": "medium",
     "confidence_score": "28",
     "development_stage": "planning_submitted",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "connection_nsp": "VicGrid",
+    "aemo_kci_id": "V00121"
   },
   {
     "id": "carwarp-solar-farm-cwsf",
@@ -2509,7 +2701,9 @@
     "data_confidence": "medium",
     "confidence_score": "28",
     "development_stage": "planning_submitted",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00250"
   },
   {
     "id": "cattle-hill-wind-farm",
@@ -2540,6 +2734,8 @@
     "development_stage": "early_stage",
     "notable": "CIS T7 award May 2026 (341 MW wind). JV between Gamuda Renewables Australia (subsidiary of Malaysian Gamuda Berhad) and Alternate Path (Tasmanian developer). Located Highland Lakes Rd near Bothwell, Central Highlands, ~1hr from Hobart. Shares site + 220 kV connection with sister Weasel Solar Farm. Both delivered via Gamuda Engineering EPC. Construction target 2028 (Weasel first early 2027). Only two Tasmanian T7 projects. Created 2026-07-18 to close v3.22.2 data gap.",
     "first_seen": "2026-07-18",
+    "connection_nsp": "TasNetworks",
+    "aemo_kci_id": "T00027",
     "has_scheme_contract": true
   },
   {
@@ -2553,7 +2749,9 @@
     "data_confidence": "low",
     "confidence_score": "15",
     "development_stage": "planning_submitted",
-    "zombie_flag": "zombie_minimal"
+    "zombie_flag": "zombie_minimal",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00192"
   },
   {
     "id": "central-queensland-energy-storage-project-stage-1",
@@ -2567,7 +2765,9 @@
     "data_confidence": "medium",
     "confidence_score": "28",
     "development_stage": "planning_submitted",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00310"
   },
   {
     "id": "cethana",
@@ -2595,7 +2795,9 @@
     "current_developer": "Hydro-Electric Corporation",
     "data_confidence": "low",
     "confidence_score": "20",
-    "development_stage": "planning_submitted"
+    "development_stage": "planning_submitted",
+    "connection_nsp": "TasNetworks",
+    "aemo_kci_id": "T00001"
   },
   {
     "id": "challicum-hills",
@@ -2670,7 +2872,9 @@
     "capex_aud_m": 200.0,
     "capex_year": 2023,
     "notable": "100 MW / 200 MWh BESS co-located with Kogan Creek Power Station. CS Energy's first BESS in western QLD, using 80 Tesla Megapack 2 units with Downer as EPC. Part of CS Energy's Kogan Creek Clean Energy Hub, reusing the station's existing grid connection and workforce.",
-    "first_seen": "2023-12-15"
+    "first_seen": "2023-12-15",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00085"
   },
   {
     "id": "chinchilla-solar-farm",
@@ -2697,7 +2901,9 @@
     "data_confidence": "low",
     "confidence_score": "15",
     "development_stage": "planning_submitted",
-    "zombie_flag": "zombie_minimal"
+    "zombie_flag": "zombie_minimal",
+    "connection_nsp": "TasNetworks",
+    "aemo_kci_id": "T00026"
   },
   {
     "id": "clare-solar-farm",
@@ -2724,7 +2930,9 @@
     "current_developer": "Isaac Wind and Solar Energy Pty Ltd",
     "data_confidence": "low",
     "confidence_score": "20",
-    "development_stage": "planning_submitted"
+    "development_stage": "planning_submitted",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00161"
   },
   {
     "id": "clarke-creek-wind-farm",
@@ -2740,6 +2948,8 @@
     "capex_aud_m": 1500.0,
     "notable": "Staged build: 1,135 MW total. Stage 1 (439 MW) commissioning, Stage 2 (696 MW) development.",
     "first_seen": "2026-03-12",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00245",
     "has_eis_data": true
   },
   {
@@ -2753,7 +2963,9 @@
     "data_confidence": "low",
     "confidence_score": "15",
     "development_stage": "planning_submitted",
-    "zombie_flag": "zombie_minimal"
+    "zombie_flag": "zombie_minimal",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00044"
   },
   {
     "id": "clements-gap-bess",
@@ -2769,6 +2981,8 @@
     "confidence_score": "54",
     "notable": "Trina Storage + SMA inverters. Enzen EPC. CIS Tender 1 winner. >A$100M.",
     "first_seen": "2024-02-01",
+    "connection_nsp": "ElectraNet",
+    "aemo_kci_id": "S00020",
     "has_eis_data": true,
     "has_scheme_contract": true
   },
@@ -2854,7 +3068,9 @@
     "current_developer": "Coleambally BESS Trust",
     "data_confidence": "low",
     "confidence_score": "20",
-    "development_stage": "planning_submitted"
+    "development_stage": "planning_submitted",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00024"
   },
   {
     "id": "coleambally-solar-farm",
@@ -2900,7 +3116,8 @@
     "confidence_score": "53",
     "development_stage": "early_stage",
     "notable": "WA's flagship battery project. At 560MW/2,240MWh it's the largest planned battery in the WEM. 4-hour duration.",
-    "first_seen": "2023-06-01"
+    "first_seen": "2023-06-01",
+    "connection_nsp": "Western Power"
   },
   {
     "id": "collinsville-bess",
@@ -2912,7 +3129,9 @@
     "state": "QLD",
     "current_developer": "Ratch Australia",
     "data_confidence": "low",
-    "development_stage": "planning_submitted"
+    "development_stage": "planning_submitted",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00292"
   },
   {
     "id": "collinsville-bess-kci",
@@ -2925,7 +3144,9 @@
     "current_developer": "Ratch Energy SA",
     "data_confidence": "low",
     "confidence_score": "20",
-    "development_stage": "planning_submitted"
+    "development_stage": "planning_submitted",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00017"
   },
   {
     "id": "collinsville-green-energy-hub",
@@ -2938,7 +3159,9 @@
     "data_confidence": "low",
     "confidence_score": "15",
     "development_stage": "planning_submitted",
-    "zombie_flag": "zombie_minimal"
+    "zombie_flag": "zombie_minimal",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00242"
   },
   {
     "id": "collinsville-north-battery-project",
@@ -2980,7 +3203,9 @@
     "data_confidence": "medium",
     "confidence_score": "28",
     "development_stage": "planning_submitted",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00226"
   },
   {
     "id": "columboola-bess",
@@ -2993,7 +3218,9 @@
     "data_confidence": "low",
     "confidence_score": "15",
     "development_stage": "planning_submitted",
-    "zombie_flag": "zombie_minimal"
+    "zombie_flag": "zombie_minimal",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00121"
   },
   {
     "id": "columboola-bess-kci",
@@ -3035,7 +3262,9 @@
     "data_confidence": "medium",
     "confidence_score": "28",
     "development_stage": "planning_submitted",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00181"
   },
   {
     "id": "comet-park-bess-kci",
@@ -3049,7 +3278,9 @@
     "data_confidence": "medium",
     "confidence_score": "28",
     "development_stage": "planning_submitted",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00172"
   },
   {
     "id": "conargo-wind-farm-kci",
@@ -3060,7 +3291,9 @@
     "state": "NSW",
     "current_developer": "Squadron Energy Pty Ltd",
     "data_confidence": "low",
-    "development_stage": "planning_submitted"
+    "development_stage": "planning_submitted",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00291"
   },
   {
     "id": "connewarren-bess",
@@ -3074,7 +3307,9 @@
     "data_confidence": "medium",
     "confidence_score": "28",
     "development_stage": "planning_submitted",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "connection_nsp": "VicGrid",
+    "aemo_kci_id": "V00054"
   },
   {
     "id": "conroys-gap-wf-kci",
@@ -3088,7 +3323,9 @@
     "confidence_score": "23",
     "development_stage": "planning_submitted",
     "first_seen": "2006",
-    "zombie_flag": "zombie_stale"
+    "zombie_flag": "zombie_stale",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00170"
   },
   {
     "id": "cooba-solar-farm-kci",
@@ -3102,7 +3339,9 @@
     "data_confidence": "medium",
     "confidence_score": "28",
     "development_stage": "planning_submitted",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "connection_nsp": "VicGrid",
+    "aemo_kci_id": "V00058"
   },
   {
     "id": "cooma-hybrid-bess-and-solar-farm-acen",
@@ -3116,7 +3355,9 @@
     "data_confidence": "medium",
     "confidence_score": "36",
     "development_stage": "planning_submitted",
-    "first_seen": "2025"
+    "first_seen": "2025",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00151"
   },
   {
     "id": "cooma-solar-and-bess-acen",
@@ -3189,6 +3430,8 @@
     "confidence_score": "23",
     "development_stage": "early_stage",
     "first_seen": "2026-03-12",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00029",
     "has_scheme_contract": true
   },
   {
@@ -3202,7 +3445,9 @@
     "data_confidence": "low",
     "confidence_score": "15",
     "development_stage": "planning_submitted",
-    "zombie_flag": "zombie_minimal"
+    "zombie_flag": "zombie_minimal",
+    "connection_nsp": "VicGrid",
+    "aemo_kci_id": "V00132"
   },
   {
     "id": "corop-solar-farm",
@@ -3273,7 +3518,9 @@
     "confidence_score": "60",
     "development_stage": "epbc_approved",
     "notable": "56 MW wind farm near Crookwell, NSW. Third stage in the Crookwell wind farm region \u2014 one of Australia's longest-running wind development areas since the original 1998 Crookwell Wind Farm.",
-    "first_seen": "2021"
+    "first_seen": "2021",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00041"
   },
   {
     "id": "cross-roads-energy-solar-farm-kci",
@@ -3286,7 +3533,9 @@
     "data_confidence": "low",
     "confidence_score": "15",
     "development_stage": "planning_submitted",
-    "zombie_flag": "zombie_minimal"
+    "zombie_flag": "zombie_minimal",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00011"
   },
   {
     "id": "crowlands-wind-farm",
@@ -3314,7 +3563,9 @@
     "data_confidence": "medium",
     "confidence_score": "28",
     "development_stage": "planning_submitted",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00229"
   },
   {
     "id": "crudine-ridge-wind-farm",
@@ -3458,7 +3709,9 @@
     "data_confidence": "medium",
     "confidence_score": "28",
     "development_stage": "planning_submitted",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00031"
   },
   {
     "id": "darling-downs-solar-farm",
@@ -3487,6 +3740,8 @@
     "confidence_score": "46",
     "notable": "275 MW solar farm near Darlington Point, NSW. Developed by Edify Energy. Co-located with the Riverina Energy Storage System (150 MW / 300 MWh BESS). One of the largest solar-plus-storage complexes in Australia.",
     "first_seen": "2020-09-02",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00053",
     "has_eis_data": true
   },
   {
@@ -3500,7 +3755,9 @@
     "data_confidence": "low",
     "confidence_score": "15",
     "development_stage": "planning_submitted",
-    "zombie_flag": "zombie_minimal"
+    "zombie_flag": "zombie_minimal",
+    "connection_nsp": "VicGrid",
+    "aemo_kci_id": "V00039"
   },
   {
     "id": "darnum-bess",
@@ -3514,7 +3771,9 @@
     "data_confidence": "medium",
     "confidence_score": "28",
     "development_stage": "planning_submitted",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "connection_nsp": "VicGrid",
+    "aemo_kci_id": "V00212"
   },
   {
     "id": "daroobalgie-solar-farm",
@@ -3527,7 +3786,9 @@
     "data_confidence": "medium",
     "confidence_score": "31",
     "development_stage": "planning_submitted",
-    "first_seen": "2021"
+    "first_seen": "2021",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00033"
   },
   {
     "id": "dartmouth",
@@ -3554,7 +3815,9 @@
     "data_confidence": "low",
     "confidence_score": "15",
     "development_stage": "planning_submitted",
-    "zombie_flag": "zombie_minimal"
+    "zombie_flag": "zombie_minimal",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00197"
   },
   {
     "id": "daydream-solar-farm",
@@ -3581,7 +3844,9 @@
     "data_confidence": "medium",
     "confidence_score": "25",
     "development_stage": "planning_submitted",
-    "notable": "AEMO Generation Information entry only \u2014 no public project documentation found. BayWa r.e. Australia is registered developer."
+    "notable": "AEMO Generation Information entry only \u2014 no public project documentation found. BayWa r.e. Australia is registered developer.",
+    "connection_nsp": "VicGrid",
+    "aemo_kci_id": "V00107"
   },
   {
     "id": "deal-2-east-off-shore-wind-farm",
@@ -3622,7 +3887,9 @@
     "data_confidence": "medium",
     "confidence_score": "28",
     "development_stage": "planning_submitted",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "connection_nsp": "VicGrid",
+    "aemo_kci_id": "V00144"
   },
   {
     "id": "deepwater-hybrid-facility",
@@ -3635,7 +3902,9 @@
     "current_developer": "Ib vogt Development Australia Pty Ltd",
     "data_confidence": "low",
     "confidence_score": "20",
-    "development_stage": "planning_submitted"
+    "development_stage": "planning_submitted",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00200"
   },
   {
     "id": "deer-park-bess-akaysha",
@@ -3650,6 +3919,8 @@
     "confidence_score": "28",
     "development_stage": "planning_submitted",
     "first_seen": "2026-03-12",
+    "connection_nsp": "VicGrid",
+    "aemo_kci_id": "V00021",
     "has_scheme_contract": true
   },
   {
@@ -3663,7 +3934,9 @@
     "data_confidence": "low",
     "confidence_score": "23",
     "development_stage": "planning_submitted",
-    "first_seen": "2020"
+    "first_seen": "2020",
+    "connection_nsp": "VicGrid",
+    "aemo_kci_id": "V00131"
   },
   {
     "id": "deniliquin-east-bess",
@@ -3677,7 +3950,9 @@
     "data_confidence": "medium",
     "confidence_score": "28",
     "development_stage": "planning_submitted",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00250"
   },
   {
     "id": "denman-bess-kci",
@@ -3690,7 +3965,9 @@
     "data_confidence": "low",
     "confidence_score": "23",
     "development_stage": "planning_submitted",
-    "first_seen": "2025"
+    "first_seen": "2025",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00161"
   },
   {
     "id": "derby-solar-farm-and-bess",
@@ -3719,7 +3996,9 @@
     "data_confidence": "medium",
     "confidence_score": "28",
     "development_stage": "planning_submitted",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00263"
   },
   {
     "id": "derwent-valley-wind-farm",
@@ -3732,7 +4011,9 @@
     "data_confidence": "low",
     "confidence_score": "15",
     "development_stage": "planning_submitted",
-    "zombie_flag": "zombie_minimal"
+    "zombie_flag": "zombie_minimal",
+    "connection_nsp": "TasNetworks",
+    "aemo_kci_id": "T00012"
   },
   {
     "id": "devils-gate",
@@ -3759,7 +4040,9 @@
     "data_confidence": "low",
     "confidence_score": "15",
     "development_stage": "planning_submitted",
-    "zombie_flag": "zombie_minimal"
+    "zombie_flag": "zombie_minimal",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00220"
   },
   {
     "id": "devlins-wind-farm",
@@ -3789,6 +4072,8 @@
     "development_stage": "planning_submitted",
     "notable": "Hybrid wind+solar+BESS. Access rights: 707 MW wind + 300 MW solar + 300 MW/1,200 MWh BESS. Full vision ~2.5 GW. Adjacent to Transgrid Dinawan Substation. CIP holds option for minority interest. CIS Tender winner.",
     "first_seen": "2023",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00241",
     "has_scheme_contract": true
   },
   {
@@ -3815,7 +4100,9 @@
     "data_confidence": "low",
     "confidence_score": "15",
     "development_stage": "planning_submitted",
-    "zombie_flag": "zombie_minimal"
+    "zombie_flag": "zombie_minimal",
+    "connection_nsp": "VicGrid",
+    "aemo_kci_id": "V00173"
   },
   {
     "id": "dugald-river-wind-faarm",
@@ -3858,7 +4145,9 @@
     "data_confidence": "low",
     "confidence_score": "15",
     "development_stage": "planning_submitted",
-    "zombie_flag": "zombie_minimal"
+    "zombie_flag": "zombie_minimal",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00005"
   },
   {
     "id": "dundonnell-wind-farm",
@@ -3901,7 +4190,9 @@
     "data_confidence": "medium",
     "confidence_score": "28",
     "development_stage": "planning_submitted",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00075"
   },
   {
     "id": "dunmore-bess",
@@ -3914,7 +4205,9 @@
     "current_developer": "Samsung C&amp;amp;T",
     "data_confidence": "low",
     "confidence_score": "20",
-    "development_stage": "planning_submitted"
+    "development_stage": "planning_submitted",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00089"
   },
   {
     "id": "dunmore-solar-farm",
@@ -3940,7 +4233,9 @@
     "current_developer": "EIWA Gin Gin Renewable Energy Park Pty Ltd",
     "data_confidence": "low",
     "confidence_score": "20",
-    "development_stage": "planning_submitted"
+    "development_stage": "planning_submitted",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00177"
   },
   {
     "id": "eiwa-golden-fleece-renewable-energy-park",
@@ -3977,7 +4272,9 @@
     "current_developer": "EIWA RICHMOND VALLEY BESS PTY LTD",
     "data_confidence": "low",
     "confidence_score": "20",
-    "development_stage": "planning_submitted"
+    "development_stage": "planning_submitted",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00131"
   },
   {
     "id": "east-end-bess",
@@ -3990,7 +4287,9 @@
     "data_confidence": "low",
     "confidence_score": "15",
     "development_stage": "planning_submitted",
-    "zombie_flag": "zombie_minimal"
+    "zombie_flag": "zombie_minimal",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00216"
   },
   {
     "id": "east-terang-bess-kci",
@@ -4003,7 +4302,9 @@
     "current_developer": "Terang ESS Pty Ltd as trustee for the TESS Project Trust",
     "data_confidence": "low",
     "confidence_score": "20",
-    "development_stage": "planning_submitted"
+    "development_stage": "planning_submitted",
+    "connection_nsp": "VicGrid",
+    "aemo_kci_id": "V00189"
   },
   {
     "id": "eastern-rise-offshore-wind",
@@ -4017,7 +4318,9 @@
     "confidence_score": "36",
     "development_stage": "planning_submitted",
     "notable": "Failed to secure feasibility licence. 1,725 MW floating wind 25-45 km off Hunter coast. Lost to Novocastrian in Hunter zone assessment. BlueFloat subsequently ceased all operations mid-2025.",
-    "first_seen": "2023"
+    "first_seen": "2023",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00119"
   },
   {
     "id": "ebor-bess",
@@ -4031,6 +4334,8 @@
     "confidence_score": "15",
     "development_stage": "planning_submitted",
     "zombie_flag": "zombie_minimal",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00236",
     "has_scheme_contract": true
   },
   {
@@ -4044,7 +4349,9 @@
     "data_confidence": "low",
     "confidence_score": "15",
     "development_stage": "planning_submitted",
-    "zombie_flag": "zombie_minimal"
+    "zombie_flag": "zombie_minimal",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00147"
   },
   {
     "id": "edderton-hybrid-facility-bess",
@@ -4088,7 +4395,9 @@
     "confidence_score": "54",
     "development_stage": "epbc_approved",
     "notable": "180 MW solar park in QLD. One of Queensland's larger utility-scale solar installations.",
-    "first_seen": "2020"
+    "first_seen": "2020",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00300"
   },
   {
     "id": "egans-hills-bess",
@@ -4127,7 +4436,9 @@
     "state": "QLD",
     "current_developer": "Ratch Australia",
     "data_confidence": "low",
-    "development_stage": "planning_submitted"
+    "development_stage": "planning_submitted",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00315"
   },
   {
     "id": "elai-genesis-battery-storage-system",
@@ -4156,6 +4467,8 @@
     "development_stage": "epbc_submitted",
     "notable": "Tesla Megapack. A$460M financing. 15-year virtual toll with Snowy Hydro for 220 MW.",
     "first_seen": "2024",
+    "connection_nsp": "VicGrid",
+    "aemo_kci_id": "V00011",
     "has_eis_data": true
   },
   {
@@ -4198,7 +4511,9 @@
     "data_confidence": "low",
     "confidence_score": "15",
     "development_stage": "planning_submitted",
-    "zombie_flag": "zombie_minimal"
+    "zombie_flag": "zombie_minimal",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00272"
   },
   {
     "id": "emerald-solar-park",
@@ -4226,7 +4541,9 @@
     "data_confidence": "medium",
     "confidence_score": "28",
     "development_stage": "early_stage",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "connection_nsp": "ElectraNet",
+    "aemo_kci_id": "S00026"
   },
   {
     "id": "emu-park-bess",
@@ -4239,7 +4556,9 @@
     "data_confidence": "low",
     "confidence_score": "15",
     "development_stage": "planning_submitted",
-    "zombie_flag": "zombie_minimal"
+    "zombie_flag": "zombie_minimal",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00204"
   },
   {
     "id": "emu-park-solar-farm",
@@ -4279,7 +4598,9 @@
     "data_confidence": "low",
     "confidence_score": "15",
     "development_stage": "planning_submitted",
-    "zombie_flag": "zombie_minimal"
+    "zombie_flag": "zombie_minimal",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00293"
   },
   {
     "id": "eurimbula-hybrid-facility-battery-storage",
@@ -4293,7 +4614,9 @@
     "data_confidence": "medium",
     "confidence_score": "28",
     "development_stage": "planning_submitted",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00100"
   },
   {
     "id": "eurimbula-solar-farm",
@@ -4319,7 +4642,9 @@
     "data_confidence": "low",
     "confidence_score": "23",
     "development_stage": "planning_submitted",
-    "first_seen": "2024"
+    "first_seen": "2024",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00098"
   },
   {
     "id": "everleigh-solar-farm-and-bess-kci",
@@ -4332,7 +4657,9 @@
     "data_confidence": "low",
     "confidence_score": "15",
     "development_stage": "planning_submitted",
-    "zombie_flag": "zombie_minimal"
+    "zombie_flag": "zombie_minimal",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00162"
   },
   {
     "id": "futcher-bess",
@@ -4343,7 +4670,9 @@
     "state": "NSW",
     "current_developer": "FUTBESS PROJECT HOLDING PTY LTD",
     "data_confidence": "low",
-    "development_stage": "planning_submitted"
+    "development_stage": "planning_submitted",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00305"
   },
   {
     "id": "farmers-creek-energy-park",
@@ -4357,7 +4686,9 @@
     "data_confidence": "medium",
     "confidence_score": "28",
     "development_stage": "planning_submitted",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00272"
   },
   {
     "id": "finley-solar-farm",
@@ -4396,7 +4727,9 @@
     "state": "NSW",
     "current_developer": "Private Energy Partners Pty Ltd",
     "data_confidence": "low",
-    "development_stage": "planning_submitted"
+    "development_stage": "planning_submitted",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00310"
   },
   {
     "id": "flyers-creek-wind-farm",
@@ -4427,7 +4760,9 @@
     "data_confidence": "medium",
     "confidence_score": "28",
     "development_stage": "planning_submitted",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00060"
   },
   {
     "id": "forest-glen-solar-farm",
@@ -4453,7 +4788,9 @@
     "data_confidence": "low",
     "confidence_score": "23",
     "development_stage": "planning_submitted",
-    "first_seen": "2020"
+    "first_seen": "2020",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00074"
   },
   {
     "id": "forsayth-wind-farm",
@@ -4480,7 +4817,9 @@
     "data_confidence": "medium",
     "confidence_score": "28",
     "development_stage": "early_stage",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "connection_nsp": "VicGrid",
+    "aemo_kci_id": "V00073"
   },
   {
     "id": "fraser-coast-hybrid-plant",
@@ -4494,7 +4833,9 @@
     "data_confidence": "medium",
     "confidence_score": "28",
     "development_stage": "early_stage",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00002"
   },
   {
     "id": "frasers-solar-farm",
@@ -4535,7 +4876,9 @@
     "current_developer": "Ib vogt Development Australia Pty Ltd",
     "data_confidence": "low",
     "confidence_score": "20",
-    "development_stage": "planning_submitted"
+    "development_stage": "planning_submitted",
+    "connection_nsp": "VicGrid",
+    "aemo_kci_id": "V00192"
   },
   {
     "id": "gangarri-solar-farm",
@@ -4578,6 +4921,8 @@
     "confidence_score": "28",
     "development_stage": "early_stage",
     "first_seen": "2026-03-12",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00231",
     "has_scheme_contract": true
   },
   {
@@ -4605,7 +4950,9 @@
     "current_developer": "Greenpulse solar farm and BESS as trustee for Greenpulse Solar Farm & Bess Unit Trust",
     "data_confidence": "low",
     "confidence_score": "20",
-    "development_stage": "planning_submitted"
+    "development_stage": "planning_submitted",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00304"
   },
   {
     "id": "garoo-solar-farm",
@@ -4633,6 +4980,8 @@
     "confidence_score": "28",
     "development_stage": "early_stage",
     "first_seen": "2026-03-12",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00331",
     "has_scheme_contract": true
   },
   {
@@ -4646,7 +4995,9 @@
     "current_developer": "Elgin Energy Pty Ltd",
     "data_confidence": "low",
     "confidence_score": "20",
-    "development_stage": "planning_submitted"
+    "development_stage": "planning_submitted",
+    "connection_nsp": "VicGrid",
+    "aemo_kci_id": "V00208"
   },
   {
     "id": "gelston-energy-park",
@@ -4660,7 +5011,9 @@
     "data_confidence": "medium",
     "confidence_score": "28",
     "development_stage": "planning_submitted",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00275"
   },
   {
     "id": "gemfields-integrated-facility-wind-and-solar",
@@ -4687,7 +5040,9 @@
     "data_confidence": "medium",
     "confidence_score": "28",
     "development_stage": "planning_submitted",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "connection_nsp": "TasNetworks",
+    "aemo_kci_id": "T00035"
   },
   {
     "id": "george-town-wind-farm",
@@ -4700,7 +5055,9 @@
     "data_confidence": "low",
     "confidence_score": "15",
     "development_stage": "planning_submitted",
-    "zombie_flag": "zombie_minimal"
+    "zombie_flag": "zombie_minimal",
+    "connection_nsp": "TasNetworks",
+    "aemo_kci_id": "T00021"
   },
   {
     "id": "geranium-plains-solar-and-bess",
@@ -4713,7 +5070,9 @@
     "current_developer": "Risen Energy (Australia) Pty Ltd",
     "data_confidence": "low",
     "confidence_score": "20",
-    "development_stage": "planning_submitted"
+    "development_stage": "planning_submitted",
+    "connection_nsp": "ElectraNet",
+    "aemo_kci_id": "S00018"
   },
   {
     "id": "gerogery-battery-kci",
@@ -4726,7 +5085,9 @@
     "current_developer": "Elgin Energy Pty Ltd",
     "data_confidence": "low",
     "confidence_score": "20",
-    "development_stage": "planning_submitted"
+    "development_stage": "planning_submitted",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00160"
   },
   {
     "id": "gerogery-solar-farm-kci",
@@ -4753,7 +5114,9 @@
     "current_developer": "Gillenbah BESS Development Pty Ltd",
     "data_confidence": "low",
     "confidence_score": "20",
-    "development_stage": "planning_submitted"
+    "development_stage": "planning_submitted",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00264"
   },
   {
     "id": "gin-gin-bess",
@@ -4767,7 +5130,9 @@
     "data_confidence": "medium",
     "confidence_score": "36",
     "development_stage": "planning_submitted",
-    "first_seen": "2024"
+    "first_seen": "2024",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00122"
   },
   {
     "id": "gippsland-dawn-offshore-wind-project",
@@ -4781,7 +5146,9 @@
     "confidence_score": "39",
     "development_stage": "planning_submitted",
     "notable": "Project abandoned Jul 2025. BlueFloat surrendered feasibility licence FL-07 after parent Quantum Capital Group ceased all global offshore wind operations. Had received Major Project Status Nov 2024.",
-    "first_seen": "2024-11-01"
+    "first_seen": "2024-11-01",
+    "connection_nsp": "VicGrid",
+    "aemo_kci_id": "V00098"
   },
   {
     "id": "girgarre-solar-farm",
@@ -4809,7 +5176,9 @@
     "current_developer": "Private Energy Partners Pty Ltd",
     "data_confidence": "low",
     "confidence_score": "20",
-    "development_stage": "planning_submitted"
+    "development_stage": "planning_submitted",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00284"
   },
   {
     "id": "glanmire-solar-farm",
@@ -4864,7 +5233,9 @@
     "current_developer": "Acenergy",
     "data_confidence": "low",
     "confidence_score": "20",
-    "development_stage": "planning_submitted"
+    "development_stage": "planning_submitted",
+    "connection_nsp": "VicGrid",
+    "aemo_kci_id": "V00065"
   },
   {
     "id": "glenellen-solar-farm",
@@ -4877,7 +5248,9 @@
     "data_confidence": "low",
     "confidence_score": "23",
     "development_stage": "planning_submitted",
-    "first_seen": "2023"
+    "first_seen": "2023",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00012"
   },
   {
     "id": "glennis-creek-pumped-hydro-project",
@@ -4904,7 +5277,9 @@
     "data_confidence": "medium",
     "confidence_score": "28",
     "development_stage": "planning_submitted",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "connection_nsp": "VicGrid",
+    "aemo_kci_id": "V00167"
   },
   {
     "id": "glenrowan-bess-storage-kci",
@@ -4959,7 +5334,9 @@
     "data_confidence": "low",
     "confidence_score": "15",
     "development_stage": "planning_submitted",
-    "zombie_flag": "zombie_minimal"
+    "zombie_flag": "zombie_minimal",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00304"
   },
   {
     "id": "globe-derby-bess",
@@ -4972,7 +5349,9 @@
     "data_confidence": "low",
     "confidence_score": "15",
     "development_stage": "planning_submitted",
-    "zombie_flag": "zombie_minimal"
+    "zombie_flag": "zombie_minimal",
+    "connection_nsp": "ElectraNet",
+    "aemo_kci_id": "S00098"
   },
   {
     "id": "gnarwarre-bess-facility",
@@ -4987,6 +5366,8 @@
     "confidence_score": "64",
     "notable": "Hithium cells + SMA inverters. Samsung C&T EPC. ARENA A$15M grid-forming grant.",
     "first_seen": "2024-08-04",
+    "connection_nsp": "VicGrid",
+    "aemo_kci_id": "V00033",
     "has_eis_data": true
   },
   {
@@ -5013,7 +5394,9 @@
     "data_confidence": "low",
     "confidence_score": "15",
     "development_stage": "planning_submitted",
-    "zombie_flag": "zombie_minimal"
+    "zombie_flag": "zombie_minimal",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00224"
   },
   {
     "id": "golden-plains-bess",
@@ -5027,7 +5410,9 @@
     "data_confidence": "medium",
     "confidence_score": "28",
     "development_stage": "planning_submitted",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "connection_nsp": "VicGrid",
+    "aemo_kci_id": "V00104"
   },
   {
     "id": "golden-plains-bess-2-kci",
@@ -5055,6 +5440,8 @@
     "development_stage": "epbc_approved",
     "notable": "Golden Plains Wind Farm Stage 1 (756 MW / 1333 MW full project per developer) undergoing final commissioning testing per ESD News 2026. Combined project surpassed 1 GW output. Full completion mid-2027. AURES 1610 MW likely high vs developer 1333 MW - flag for reconciliation.",
     "first_seen": "2017",
+    "connection_nsp": "AusNet Services",
+    "aemo_kci_id": "V00191",
     "has_eis_data": true
   },
   {
@@ -5098,7 +5485,9 @@
     "current_developer": "Goodnight One Pty Ltd",
     "data_confidence": "low",
     "confidence_score": "20",
-    "development_stage": "planning_submitted"
+    "development_stage": "planning_submitted",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00235"
   },
   {
     "id": "goombi-renewable-energy-hub",
@@ -5111,7 +5500,9 @@
     "data_confidence": "low",
     "confidence_score": "15",
     "development_stage": "planning_submitted",
-    "zombie_flag": "zombie_minimal"
+    "zombie_flag": "zombie_minimal",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00227"
   },
   {
     "id": "goonumbla-solar-farm",
@@ -5125,7 +5516,9 @@
     "data_confidence": "medium",
     "confidence_score": "46",
     "notable": "70 MW solar farm near Parkes, NSW. Developed by Canadian Solar / Recurrent Energy.",
-    "first_seen": "2020-05-11"
+    "first_seen": "2020-05-11",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00243"
   },
   {
     "id": "goorambat-bess-lightsourcebp",
@@ -5139,7 +5532,9 @@
     "data_confidence": "medium",
     "confidence_score": "28",
     "development_stage": "planning_submitted",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "connection_nsp": "VicGrid",
+    "aemo_kci_id": "V00074"
   },
   {
     "id": "goorambat-east-solar-farm-engie",
@@ -5182,6 +5577,8 @@
     "confidence_score": "36",
     "development_stage": "planning_submitted",
     "first_seen": "2022",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00315",
     "has_scheme_contract": true
   },
   {
@@ -5210,7 +5607,9 @@
     "current_developer": "Gould Creek BESS Project Pty Ltd",
     "data_confidence": "low",
     "confidence_score": "20",
-    "development_stage": "planning_submitted"
+    "development_stage": "planning_submitted",
+    "connection_nsp": "ElectraNet",
+    "aemo_kci_id": "S00013"
   },
   {
     "id": "goyder-bess",
@@ -5224,7 +5623,9 @@
     "data_confidence": "medium",
     "confidence_score": "28",
     "development_stage": "early_stage",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "connection_nsp": "ElectraNet",
+    "aemo_kci_id": "S00078"
   },
   {
     "id": "goyder-north-bess-2",
@@ -5237,7 +5638,9 @@
     "data_confidence": "low",
     "confidence_score": "15",
     "development_stage": "planning_submitted",
-    "zombie_flag": "zombie_minimal"
+    "zombie_flag": "zombie_minimal",
+    "connection_nsp": "ElectraNet",
+    "aemo_kci_id": "S00096"
   },
   {
     "id": "goyder-north-wind-farm",
@@ -5296,7 +5699,9 @@
     "data_confidence": "low",
     "confidence_score": "15",
     "development_stage": "planning_submitted",
-    "zombie_flag": "zombie_minimal"
+    "zombie_flag": "zombie_minimal",
+    "connection_nsp": "VicGrid",
+    "aemo_kci_id": "V00148"
   },
   {
     "id": "granite-hills-wind-farm",
@@ -5337,7 +5742,9 @@
     "data_confidence": "medium",
     "confidence_score": "25",
     "development_stage": "planning_submitted",
-    "notable": "Active feasibility licence. 2.5 GW bottom-fixed, ~22 km off Wellington Shire coast. Feasibility licence Jul 2024. Community engagement events Mar 2025. Part of Corio 4 GW Australian pipeline."
+    "notable": "Active feasibility licence. 2.5 GW bottom-fixed, ~22 km off Wellington Shire coast. Feasibility licence Jul 2024. Community engagement events Mar 2025. Part of Corio 4 GW Australian pipeline.",
+    "connection_nsp": "VicGrid",
+    "aemo_kci_id": "V00100"
   },
   {
     "id": "great-lakes-battery",
@@ -5351,7 +5758,9 @@
     "data_confidence": "medium",
     "confidence_score": "28",
     "development_stage": "planning_submitted",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "connection_nsp": "TasNetworks",
+    "aemo_kci_id": "T00013"
   },
   {
     "id": "great-western-battery-project",
@@ -5366,6 +5775,8 @@
     "confidence_score": "28",
     "development_stage": "early_stage",
     "first_seen": "2026-03-12",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00299",
     "has_scheme_contract": true
   },
   {
@@ -5380,7 +5791,9 @@
     "confidence_score": "28",
     "development_stage": "planning_submitted",
     "notable": "1.5 GW fixed-bottom off Gippsland Bass Coast, ~45 km from coast. Did NOT receive Gippsland feasibility licence \u2014 declared zone does not extend to Bass Coast. Status uncertain.",
-    "first_seen": "2021-11-01"
+    "first_seen": "2021-11-01",
+    "connection_nsp": "VicGrid",
+    "aemo_kci_id": "V00084"
   },
   {
     "id": "green-poly-bess-project-kci",
@@ -5411,7 +5824,9 @@
     "capex_aud_m": 300.0,
     "capex_year": 2023,
     "notable": "200 MW / 400 MWh BESS using 108 Tesla Megapack 2XL units, A$300M investment by Queensland state-owned CS Energy. Connected to Powerlink's Greenbank substation on Brisbane's southern outskirts, sited to absorb excess rooftop solar from the Gold Coast and Logan regions.",
-    "first_seen": "2025-02-10"
+    "first_seen": "2025-02-10",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00045"
   },
   {
     "id": "gregadoo-solar-farm",
@@ -5424,7 +5839,9 @@
     "data_confidence": "low",
     "confidence_score": "15",
     "development_stage": "planning_submitted",
-    "zombie_flag": "zombie_minimal"
+    "zombie_flag": "zombie_minimal",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00251"
   },
   {
     "id": "griffith-bess",
@@ -5439,6 +5856,8 @@
     "confidence_score": "28",
     "development_stage": "planning_submitted",
     "first_seen": "2026-03-12",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00174",
     "has_scheme_contract": true
   },
   {
@@ -5452,7 +5871,9 @@
     "data_confidence": "low",
     "confidence_score": "15",
     "development_stage": "planning_submitted",
-    "zombie_flag": "zombie_minimal"
+    "zombie_flag": "zombie_minimal",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00274"
   },
   {
     "id": "guildford-wind-farm",
@@ -5465,7 +5886,9 @@
     "data_confidence": "low",
     "confidence_score": "23",
     "development_stage": "planning_submitted",
-    "first_seen": "2020"
+    "first_seen": "2020",
+    "connection_nsp": "TasNetworks",
+    "aemo_kci_id": "T00005"
   },
   {
     "id": "gullen-range-battery-energy-system",
@@ -5478,7 +5901,9 @@
     "current_developer": "goldwindaustralia_NR",
     "data_confidence": "low",
     "confidence_score": "20",
-    "development_stage": "planning_submitted"
+    "development_stage": "planning_submitted",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00179"
   },
   {
     "id": "gullen-range-wind-farm",
@@ -5524,6 +5949,8 @@
     "confidence_score": "28",
     "development_stage": "planning_submitted",
     "first_seen": "2026-03-12",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00081",
     "has_scheme_contract": true
   },
   {
@@ -5551,7 +5978,9 @@
     "data_confidence": "medium",
     "confidence_score": "28",
     "development_stage": "planning_submitted",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00088"
   },
   {
     "id": "gunnedah-east-bess-green-leap-kci",
@@ -5592,7 +6021,9 @@
     "data_confidence": "medium",
     "confidence_score": "49",
     "notable": "47 MW, 31 Senvion MM70 1.5 MW turbines near Gunning, NSW. Developed by Pamada. One of the earlier wind farms in the NSW Southern Tablelands.",
-    "first_seen": "2011-04-04"
+    "first_seen": "2011-04-04",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00045"
   },
   {
     "id": "gunsynd-bess",
@@ -5647,6 +6078,8 @@
     "confidence_score": "28",
     "development_stage": "early_stage",
     "first_seen": "2026-03-12",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00246",
     "has_scheme_contract": true
   },
   {
@@ -5736,7 +6169,9 @@
     "current_developer": "X-Elio Australia Pty Ltd",
     "data_confidence": "low",
     "confidence_score": "20",
-    "development_stage": "planning_submitted"
+    "development_stage": "planning_submitted",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00132"
   },
   {
     "id": "halys-bess-iberdrola",
@@ -5749,7 +6184,9 @@
     "current_developer": "IBERDROLA AUSTRALIA DEVELOPMENT PTY LIMITED",
     "data_confidence": "low",
     "confidence_score": "20",
-    "development_stage": "planning_submitted"
+    "development_stage": "planning_submitted",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00164"
   },
   {
     "id": "halys-bess-1-akaysha",
@@ -5763,7 +6200,9 @@
     "data_confidence": "medium",
     "confidence_score": "28",
     "development_stage": "planning_submitted",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00133"
   },
   {
     "id": "halys-bess-2-akaysha",
@@ -5790,7 +6229,9 @@
     "data_confidence": "low",
     "confidence_score": "15",
     "development_stage": "planning_submitted",
-    "zombie_flag": "zombie_minimal"
+    "zombie_flag": "zombie_minimal",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00133"
   },
   {
     "id": "halys-hybrid-facility-solar",
@@ -5858,7 +6299,9 @@
     "data_confidence": "medium",
     "confidence_score": "28",
     "development_stage": "planning_submitted",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00294"
   },
   {
     "id": "hargaves-bess",
@@ -5897,7 +6340,9 @@
     "data_confidence": "low",
     "confidence_score": "23",
     "development_stage": "planning_submitted",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00237"
   },
   {
     "id": "hargraves-energy-project-wind-solar-and-bess",
@@ -5924,7 +6369,9 @@
     "data_confidence": "low",
     "confidence_score": "15",
     "development_stage": "planning_submitted",
-    "zombie_flag": "zombie_minimal"
+    "zombie_flag": "zombie_minimal",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00026"
   },
   {
     "id": "harrami-wind-farm",
@@ -5937,7 +6384,9 @@
     "data_confidence": "low",
     "confidence_score": "15",
     "development_stage": "planning_submitted",
-    "zombie_flag": "zombie_minimal"
+    "zombie_flag": "zombie_minimal",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00096"
   },
   {
     "id": "harrogate-bess",
@@ -5951,7 +6400,9 @@
     "data_confidence": "medium",
     "confidence_score": "28",
     "development_stage": "planning_submitted",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "connection_nsp": "ElectraNet",
+    "aemo_kci_id": "S00080"
   },
   {
     "id": "haughton-bess",
@@ -5965,7 +6416,9 @@
     "data_confidence": "medium",
     "confidence_score": "28",
     "development_stage": "planning_submitted",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00127"
   },
   {
     "id": "haughton-solar-farm-stage-1",
@@ -5993,7 +6446,9 @@
     "data_confidence": "low",
     "confidence_score": "23",
     "development_stage": "early_stage",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00030"
   },
   {
     "id": "hawkesdale-wind-farm",
@@ -6011,6 +6466,8 @@
     "development_stage": "epbc_approved",
     "notable": "90 MW wind farm near Hawkesdale in western Victoria. One of the cluster of wind farms in the Western Victoria REZ.",
     "first_seen": "2005",
+    "connection_nsp": "VicGrid",
+    "aemo_kci_id": "V00091",
     "has_eis_data": true
   },
   {
@@ -6052,7 +6509,9 @@
     "data_confidence": "medium",
     "confidence_score": "28",
     "development_stage": "planning_submitted",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00062"
   },
   {
     "id": "hazelwood-bess-kci",
@@ -6065,7 +6524,9 @@
     "current_developer": "International Power (Australia) Pty Ltd",
     "data_confidence": "low",
     "confidence_score": "20",
-    "development_stage": "planning_submitted"
+    "development_stage": "planning_submitted",
+    "connection_nsp": "VicGrid",
+    "aemo_kci_id": "V00169"
   },
   {
     "id": "hazelwood-battery-energy-storage-system-hbess",
@@ -6082,6 +6543,8 @@
     "confidence_score": "60",
     "notable": "150 MW / 162 MWh BESS \u2014 the first utility-scale battery in Australia built on the site of a former coal-fired power station (Hazelwood, closed 2017 after 50 years). First deployment of Fluence sixth-generation GridStack in Australia. ENGIE acquired full ownership from co-developer Eku Energy in early 2026.",
     "first_seen": "2023-03-09",
+    "connection_nsp": "VicGrid",
+    "aemo_kci_id": "V00188",
     "has_eis_data": true
   },
   {
@@ -6135,7 +6598,9 @@
     "data_confidence": "low",
     "confidence_score": "23",
     "development_stage": "planning_submitted",
-    "first_seen": "2022"
+    "first_seen": "2022",
+    "connection_nsp": "TasNetworks",
+    "aemo_kci_id": "T00004"
   },
   {
     "id": "herries-range-wind-farm",
@@ -6148,7 +6613,9 @@
     "data_confidence": "medium",
     "confidence_score": "31",
     "development_stage": "planning_submitted",
-    "first_seen": "2024"
+    "first_seen": "2024",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00298"
   },
   {
     "id": "hexham",
@@ -6163,6 +6630,8 @@
     "confidence_score": "36",
     "development_stage": "planning_submitted",
     "first_seen": "2022",
+    "connection_nsp": "VicGrid",
+    "aemo_kci_id": "V00128",
     "has_scheme_contract": true
   },
   {
@@ -6177,7 +6646,9 @@
     "data_confidence": "medium",
     "confidence_score": "28",
     "development_stage": "planning_submitted",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "connection_nsp": "VicGrid",
+    "aemo_kci_id": "V00052"
   },
   {
     "id": "high-sea-wind-farm",
@@ -6205,6 +6676,8 @@
     "development_stage": "planning_submitted",
     "first_seen": "2019",
     "zombie_flag": "zombie_stale",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00194",
     "has_scheme_contract": true
   },
   {
@@ -6232,7 +6705,9 @@
     "data_confidence": "low",
     "confidence_score": "15",
     "development_stage": "planning_submitted",
-    "zombie_flag": "zombie_minimal"
+    "zombie_flag": "zombie_minimal",
+    "connection_nsp": "TasNetworks",
+    "aemo_kci_id": "T00032"
   },
   {
     "id": "holloway-battery",
@@ -6245,7 +6720,9 @@
     "data_confidence": "low",
     "confidence_score": "23",
     "development_stage": "planning_submitted",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00317"
   },
   {
     "id": "holloway-bess-kci",
@@ -6272,7 +6749,9 @@
     "data_confidence": "medium",
     "confidence_score": "28",
     "development_stage": "planning_submitted",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00183"
   },
   {
     "id": "hopeland-bess",
@@ -6286,7 +6765,9 @@
     "data_confidence": "medium",
     "confidence_score": "28",
     "development_stage": "planning_submitted",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00123"
   },
   {
     "id": "hopeland-solar-farm",
@@ -6300,6 +6781,8 @@
     "confidence_score": "23",
     "development_stage": "planning_submitted",
     "first_seen": "2024",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00108",
     "has_scheme_contract": true
   },
   {
@@ -6319,6 +6802,7 @@
     "capex_year": 2017,
     "notable": "The battery that started it all. Born from Elon Musk's famous Twitter bet. Has earned tens of millions in FCAS revenue.",
     "first_seen": "2017-07-01",
+    "connection_nsp": "ElectraNet",
     "has_eis_data": true
   },
   {
@@ -6396,7 +6880,9 @@
     "current_developer": "ESCO Solar Farm 7 Trust",
     "data_confidence": "low",
     "confidence_score": "20",
-    "development_stage": "planning_submitted"
+    "development_stage": "planning_submitted",
+    "connection_nsp": "VicGrid",
+    "aemo_kci_id": "V00199"
   },
   {
     "id": "horsham-solar-farm",
@@ -6424,7 +6910,9 @@
     "current_developer": "ReEnerge Australia Pty Ltd",
     "data_confidence": "low",
     "confidence_score": "20",
-    "development_stage": "planning_submitted"
+    "development_stage": "planning_submitted",
+    "connection_nsp": "ElectraNet",
+    "aemo_kci_id": "S00092"
   },
   {
     "id": "hughes-gap-wf-kci",
@@ -6451,7 +6939,9 @@
     "data_confidence": "medium",
     "confidence_score": "36",
     "development_stage": "planning_submitted",
-    "first_seen": "2024"
+    "first_seen": "2024",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00275"
   },
   {
     "id": "hume-bess-arif",
@@ -6464,7 +6954,9 @@
     "current_developer": "The Trustee for the ARIF Hume BESS Holdings Trust",
     "data_confidence": "low",
     "confidence_score": "20",
-    "development_stage": "planning_submitted"
+    "development_stage": "planning_submitted",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00128"
   },
   {
     "id": "hume-north-battery-energy-storage-system",
@@ -6477,7 +6969,9 @@
     "data_confidence": "low",
     "confidence_score": "15",
     "development_stage": "planning_submitted",
-    "zombie_flag": "zombie_minimal"
+    "zombie_flag": "zombie_minimal",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00229"
   },
   {
     "id": "hunter-central-coast-offshore-energy-wind",
@@ -6491,7 +6985,9 @@
     "confidence_score": "39",
     "development_stage": "planning_submitted",
     "notable": "Did not receive Hunter zone feasibility licence. Originally 1.4 GW expanded to 1.65 GW. BlueFloat split from project early 2023. Energy Estate developing independently. Hunter zone has zero active licences.",
-    "first_seen": "2022-10-01"
+    "first_seen": "2022-10-01",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00079"
   },
   {
     "id": "ilford-green-energy-hub",
@@ -6505,7 +7001,9 @@
     "data_confidence": "medium",
     "confidence_score": "28",
     "development_stage": "planning_submitted",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00115"
   },
   {
     "id": "illawarra-offshore-wind-farm",
@@ -6532,7 +7030,9 @@
     "data_confidence": "low",
     "confidence_score": "15",
     "development_stage": "planning_submitted",
-    "zombie_flag": "zombie_minimal"
+    "zombie_flag": "zombie_minimal",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00228"
   },
   {
     "id": "inverleigh-wind-farm",
@@ -6557,7 +7057,9 @@
     "data_confidence": "low",
     "confidence_score": "15",
     "development_stage": "planning_submitted",
-    "zombie_flag": "zombie_minimal"
+    "zombie_flag": "zombie_minimal",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00226"
   },
   {
     "id": "j-pierce-road-bess",
@@ -6585,7 +7087,9 @@
     "data_confidence": "medium",
     "confidence_score": "28",
     "development_stage": "planning_submitted",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00107"
   },
   {
     "id": "jackson-north-wind-farm",
@@ -6598,7 +7102,9 @@
     "data_confidence": "low",
     "confidence_score": "23",
     "development_stage": "planning_submitted",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00107"
   },
   {
     "id": "jackson-solar-farm-and-bess",
@@ -6638,7 +7144,9 @@
     "data_confidence": "medium",
     "confidence_score": "31",
     "development_stage": "planning_submitted",
-    "first_seen": "2021"
+    "first_seen": "2021",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00068"
   },
   {
     "id": "jindera-bess-storage-kci",
@@ -6651,7 +7159,9 @@
     "data_confidence": "low",
     "confidence_score": "15",
     "development_stage": "planning_submitted",
-    "zombie_flag": "zombie_minimal"
+    "zombie_flag": "zombie_minimal",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00106"
   },
   {
     "id": "jindera-solar-farm",
@@ -6664,7 +7174,9 @@
     "data_confidence": "low",
     "confidence_score": "15",
     "development_stage": "planning_submitted",
-    "zombie_flag": "zombie_minimal"
+    "zombie_flag": "zombie_minimal",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00132"
   },
   {
     "id": "joel-joel-bess",
@@ -6679,6 +7191,8 @@
     "confidence_score": "28",
     "development_stage": "early_stage",
     "first_seen": "2026-03-12",
+    "connection_nsp": "VicGrid",
+    "aemo_kci_id": "V00209",
     "has_scheme_contract": true
   },
   {
@@ -6764,7 +7278,9 @@
     "data_confidence": "medium",
     "confidence_score": "28",
     "development_stage": "planning_submitted",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00124"
   },
   {
     "id": "kangaroo-valley-bess",
@@ -6778,7 +7294,9 @@
     "data_confidence": "medium",
     "confidence_score": "28",
     "development_stage": "planning_submitted",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00213"
   },
   {
     "id": "karadoc-solar-farm",
@@ -6805,7 +7323,9 @@
     "data_confidence": "low",
     "confidence_score": "15",
     "development_stage": "planning_submitted",
-    "zombie_flag": "zombie_minimal"
+    "zombie_flag": "zombie_minimal",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00276"
   },
   {
     "id": "karara-bess-kci",
@@ -6819,7 +7339,9 @@
     "data_confidence": "medium",
     "confidence_score": "28",
     "development_stage": "planning_submitted",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00166"
   },
   {
     "id": "kareeya",
@@ -6846,7 +7368,9 @@
     "data_confidence": "low",
     "confidence_score": "23",
     "development_stage": "planning_submitted",
-    "first_seen": "2023"
+    "first_seen": "2023",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00332"
   },
   {
     "id": "karma-wind-farm-kci",
@@ -6859,7 +7383,9 @@
     "data_confidence": "low",
     "confidence_score": "15",
     "development_stage": "planning_submitted",
-    "zombie_flag": "zombie_minimal"
+    "zombie_flag": "zombie_minimal",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00167"
   },
   {
     "id": "kelsey-creek-solar-farm",
@@ -6872,7 +7398,9 @@
     "data_confidence": "low",
     "confidence_score": "15",
     "development_stage": "planning_submitted",
-    "zombie_flag": "zombie_minimal"
+    "zombie_flag": "zombie_minimal",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00259"
   },
   {
     "id": "kemps-creek-bess",
@@ -6885,7 +7413,9 @@
     "data_confidence": "low",
     "confidence_score": "15",
     "development_stage": "planning_submitted",
-    "zombie_flag": "zombie_minimal"
+    "zombie_flag": "zombie_minimal",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00270"
   },
   {
     "id": "kennedy-energy-park-phase-1-wind",
@@ -6914,6 +7444,8 @@
     "development_stage": "planning_submitted",
     "first_seen": "2019",
     "zombie_flag": "zombie_stale",
+    "connection_nsp": "VicGrid",
+    "aemo_kci_id": "V00206",
     "has_scheme_contract": true
   },
   {
@@ -6928,7 +7460,9 @@
     "data_confidence": "medium",
     "confidence_score": "28",
     "development_stage": "planning_submitted",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "connection_nsp": "VicGrid",
+    "aemo_kci_id": "V00182"
   },
   {
     "id": "kerang-battery-plant",
@@ -6942,7 +7476,9 @@
     "data_confidence": "medium",
     "confidence_score": "28",
     "development_stage": "planning_submitted",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "connection_nsp": "VicGrid",
+    "aemo_kci_id": "V00194"
   },
   {
     "id": "kerang-hybrid",
@@ -6956,7 +7492,9 @@
     "data_confidence": "medium",
     "confidence_score": "28",
     "development_stage": "planning_submitted",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "connection_nsp": "VicGrid",
+    "aemo_kci_id": "V00134"
   },
   {
     "id": "kerang-solar-plant",
@@ -6983,7 +7521,9 @@
     "data_confidence": "medium",
     "confidence_score": "31",
     "development_stage": "planning_submitted",
-    "first_seen": "2024"
+    "first_seen": "2024",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00049"
   },
   {
     "id": "kiamal-bess",
@@ -6998,6 +7538,8 @@
     "confidence_score": "28",
     "development_stage": "planning_submitted",
     "first_seen": "2026-03-12",
+    "connection_nsp": "VicGrid",
+    "aemo_kci_id": "V00174",
     "has_scheme_contract": true
   },
   {
@@ -7027,7 +7569,9 @@
     "data_confidence": "medium",
     "confidence_score": "28",
     "development_stage": "planning_submitted",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00261"
   },
   {
     "id": "kias-bess",
@@ -7069,7 +7613,9 @@
     "data_confidence": "medium",
     "confidence_score": "28",
     "development_stage": "planning_submitted",
-    "first_seen": "2024"
+    "first_seen": "2024",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00340"
   },
   {
     "id": "kidston-pumped-storage-hydro-project-250mw",
@@ -7125,7 +7671,9 @@
     "data_confidence": "medium",
     "confidence_score": "28",
     "development_stage": "planning_submitted",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "connection_nsp": "ElectraNet",
+    "aemo_kci_id": "S00089"
   },
   {
     "id": "kingaroy-solar-farm",
@@ -7180,6 +7728,8 @@
     "data_confidence": "low",
     "confidence_score": "20",
     "development_stage": "planning_submitted",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00300",
     "has_scheme_contract": true
   },
   {
@@ -7208,6 +7758,8 @@
     "confidence_score": "28",
     "development_stage": "planning_submitted",
     "first_seen": "2026-03-12",
+    "connection_nsp": "ElectraNet",
+    "aemo_kci_id": "S00034",
     "has_scheme_contract": true
   },
   {
@@ -7221,7 +7773,9 @@
     "data_confidence": "low",
     "confidence_score": "15",
     "development_stage": "planning_submitted",
-    "zombie_flag": "zombie_minimal"
+    "zombie_flag": "zombie_minimal",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00225"
   },
   {
     "id": "koorangie-bess-stage-2",
@@ -7234,7 +7788,9 @@
     "data_confidence": "low",
     "confidence_score": "15",
     "development_stage": "planning_submitted",
-    "zombie_flag": "zombie_minimal"
+    "zombie_flag": "zombie_minimal",
+    "connection_nsp": "VicGrid",
+    "aemo_kci_id": "V00179"
   },
   {
     "id": "koorangie-energy-storage-system",
@@ -7254,6 +7810,8 @@
     "capex_year": 2023,
     "notable": "185 MW / 370 MWh grid-forming BESS near Kerang in Victoria's Murray River region. A$400M, developed by Edify Energy, owned by Sosteneo. 15-year Shell Energy offtake for full capacity. 20-year AEMO System Support Agreement for 125 MW of system strength services \u2014 one of the first large-scale BESS contracted for this function.",
     "first_seen": "2025-02-14",
+    "connection_nsp": "VicGrid",
+    "aemo_kci_id": "V00079",
     "has_eis_data": true
   },
   {
@@ -7312,7 +7870,9 @@
     "capex_aud_m": 150.0,
     "capex_year": 2023,
     "notable": "200 MW / 196 MWh BESS near Morwell in Victoria's Latrobe Valley, the first project globally to deploy Fluence's complete product ecosystem (Gridstack hardware + Mosaic AI bidding + Nispera asset management). Developed by Tilt Renewables (Mercury NZ) in a region historically dependent on brown coal.",
-    "first_seen": "2024-01-01"
+    "first_seen": "2024-01-01",
+    "connection_nsp": "VicGrid",
+    "aemo_kci_id": "V00040"
   },
   {
     "id": "lake-bonney-1-wind-farm",
@@ -7386,7 +7946,9 @@
     "data_confidence": "medium",
     "confidence_score": "36",
     "development_stage": "planning_submitted",
-    "first_seen": "2023"
+    "first_seen": "2023",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00319"
   },
   {
     "id": "lake-road-battery-tuggerah-kci",
@@ -7397,7 +7959,9 @@
     "state": "NSW",
     "current_developer": "Lake Road Battery Pty Ltd",
     "data_confidence": "low",
-    "development_stage": "planning_submitted"
+    "development_stage": "planning_submitted",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00296"
   },
   {
     "id": "lake-victoria-energy-park-kci",
@@ -7411,6 +7975,8 @@
     "confidence_score": "23",
     "development_stage": "planning_submitted",
     "first_seen": "2024",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00175",
     "has_scheme_contract": true
   },
   {
@@ -7437,7 +8003,9 @@
     "data_confidence": "low",
     "confidence_score": "23",
     "development_stage": "planning_submitted",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00165"
   },
   {
     "id": "lancaster-solar-farm",
@@ -7464,7 +8032,9 @@
     "current_developer": "The Trustee for Learmonth BESS Holdings Unit Trust",
     "data_confidence": "low",
     "confidence_score": "20",
-    "development_stage": "planning_submitted"
+    "development_stage": "planning_submitted",
+    "connection_nsp": "VicGrid",
+    "aemo_kci_id": "V00177"
   },
   {
     "id": "lemonthyme-wilmot",
@@ -7492,7 +8062,9 @@
     "data_confidence": "medium",
     "confidence_score": "28",
     "development_stage": "planning_submitted",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00203"
   },
   {
     "id": "liddell-bess",
@@ -7510,6 +8082,8 @@
     "capex_year": 2023,
     "notable": "Fluence Gridstack with grid-forming inverters. A$750M. ARENA A$35M grant. NSW LTESA Round 2.",
     "first_seen": "2023-03-01",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00167",
     "has_eis_data": true,
     "has_scheme_contract": true
   },
@@ -7524,7 +8098,9 @@
     "current_developer": "ACEN Australia",
     "data_confidence": "low",
     "confidence_score": "20",
-    "development_stage": "planning_submitted"
+    "development_stage": "planning_submitted",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00152"
   },
   {
     "id": "lilyvale-solar-farm",
@@ -7567,6 +8143,8 @@
     "confidence_score": "60",
     "notable": "AEMO/Transgrid granted full-operations approval 27 May 2026; official opening 11 Jun 2026 per RWE/pv-magazine. Australia first 8-hour long-duration battery (50 MW / 400 MWh).",
     "first_seen": "2023-05-01",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00094",
     "has_eis_data": true,
     "has_scheme_contract": true
   },
@@ -7627,7 +8205,9 @@
     "data_confidence": "good",
     "confidence_score": "59",
     "notable": "35x Senvion 3.6M140 EBC. Snowy Hydro offtake. Owned by RATCH-Australia (acquired Dec 2022 from Nexif).",
-    "first_seen": "2019-04-30"
+    "first_seen": "2019-04-30",
+    "connection_nsp": "ElectraNet",
+    "aemo_kci_id": "S00005"
   },
   {
     "id": "lincoln-gap-wind-farm-stage-3",
@@ -7640,7 +8220,9 @@
     "data_confidence": "low",
     "confidence_score": "15",
     "development_stage": "planning_submitted",
-    "zombie_flag": "zombie_minimal"
+    "zombie_flag": "zombie_minimal",
+    "connection_nsp": "ElectraNet",
+    "aemo_kci_id": "S00005"
   },
   {
     "id": "lindley-bess",
@@ -7666,7 +8248,9 @@
     "current_developer": "Acciona Energy Australia Global",
     "data_confidence": "low",
     "confidence_score": "20",
-    "development_stage": "planning_submitted"
+    "development_stage": "planning_submitted",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00209"
   },
   {
     "id": "lionsgate-battery",
@@ -7694,6 +8278,8 @@
     "confidence_score": "28",
     "development_stage": "early_stage",
     "first_seen": "2026-03-12",
+    "connection_nsp": "VicGrid",
+    "aemo_kci_id": "V00075",
     "has_scheme_contract": true
   },
   {
@@ -7738,7 +8324,9 @@
     "data_confidence": "medium",
     "confidence_score": "28",
     "development_stage": "planning_submitted",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00042"
   },
   {
     "id": "long-plains-solar-farm-and-bess",
@@ -7768,6 +8356,8 @@
     "capex_aud_m": 1300.0,
     "notable": "46x Vestas V162-6.2MW. CS Energy acquired from CIP. Vestas EPC + Zenviron BOP. A$1.3B. COD Q4 2026.",
     "first_seen": "2020",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00079",
     "has_eis_data": true
   },
   {
@@ -7781,7 +8371,9 @@
     "data_confidence": "low",
     "confidence_score": "15",
     "development_stage": "planning_submitted",
-    "zombie_flag": "zombie_minimal"
+    "zombie_flag": "zombie_minimal",
+    "connection_nsp": "VicGrid",
+    "aemo_kci_id": "V00002"
   },
   {
     "id": "lower-wonga-bess",
@@ -7796,6 +8388,8 @@
     "confidence_score": "28",
     "development_stage": "planning_submitted",
     "first_seen": "2026-03-12",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00184",
     "has_scheme_contract": true
   },
   {
@@ -7811,6 +8405,8 @@
     "confidence_score": "28",
     "development_stage": "early_stage",
     "first_seen": "2026-03-12",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00249",
     "has_scheme_contract": true
   },
   {
@@ -7825,7 +8421,9 @@
     "data_confidence": "medium",
     "confidence_score": "28",
     "development_stage": "planning_submitted",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "connection_nsp": "VicGrid",
+    "aemo_kci_id": "V00152"
   },
   {
     "id": "macintyre-wind-farm",
@@ -7873,7 +8471,9 @@
     "data_confidence": "medium",
     "confidence_score": "28",
     "development_stage": "planning_submitted",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00317"
   },
   {
     "id": "mackintosh",
@@ -7900,7 +8500,9 @@
     "current_developer": "AGL Energy Limited",
     "data_confidence": "low",
     "confidence_score": "20",
-    "development_stage": "planning_submitted"
+    "development_stage": "planning_submitted",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00111"
   },
   {
     "id": "magnetite-energy-hub",
@@ -7914,7 +8516,9 @@
     "data_confidence": "medium",
     "confidence_score": "28",
     "development_stage": "planning_submitted",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00217"
   },
   {
     "id": "magpie-hill-solar-farm",
@@ -7928,7 +8532,9 @@
     "data_confidence": "low",
     "confidence_score": "15",
     "development_stage": "planning_submitted",
-    "zombie_flag": "zombie_minimal"
+    "zombie_flag": "zombie_minimal",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00273"
   },
   {
     "id": "maison-dieu-bess",
@@ -7941,7 +8547,9 @@
     "data_confidence": "low",
     "confidence_score": "15",
     "development_stage": "planning_submitted",
-    "zombie_flag": "zombie_minimal"
+    "zombie_flag": "zombie_minimal",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00238"
   },
   {
     "id": "maison-dieu-solar-farm",
@@ -7970,6 +8578,8 @@
     "confidence_score": "28",
     "development_stage": "early_stage",
     "first_seen": "2026-03-12",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00230",
     "has_scheme_contract": true
   },
   {
@@ -7984,7 +8594,9 @@
     "data_confidence": "medium",
     "confidence_score": "36",
     "development_stage": "planning_submitted",
-    "first_seen": "2023"
+    "first_seen": "2023",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00313"
   },
   {
     "id": "malunga-nine-mile-bess-kci",
@@ -7997,7 +8609,9 @@
     "data_confidence": "low",
     "confidence_score": "15",
     "development_stage": "planning_submitted",
-    "zombie_flag": "zombie_minimal"
+    "zombie_flag": "zombie_minimal",
+    "connection_nsp": "VicGrid",
+    "aemo_kci_id": "V00165"
   },
   {
     "id": "mangoplah-bess-kci",
@@ -8011,7 +8625,9 @@
     "data_confidence": "medium",
     "confidence_score": "28",
     "development_stage": "planning_submitted",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00258"
   },
   {
     "id": "manildra-solar-farm",
@@ -8042,7 +8658,9 @@
     "confidence_score": "65",
     "development_stage": "epbc_approved",
     "notable": "100 MW / 200 MWh BESS ~60 km east of Adelaide, developed by Canadian Solar's Recurrent Energy then sold to SA infrastructure company Epic Energy. Canadian Solar e-STORAGE SolBank technology, CPP as EPC. Integrated with Epic Energy's existing 35 MW Mannum Energy Park solar plants. Habitat Energy manages market optimisation.",
-    "first_seen": "2020"
+    "first_seen": "2020",
+    "connection_nsp": "ElectraNet",
+    "aemo_kci_id": "S00016"
   },
   {
     "id": "mansfield-solar-farm-solar-kci",
@@ -8055,7 +8673,9 @@
     "data_confidence": "low",
     "confidence_score": "15",
     "development_stage": "planning_submitted",
-    "zombie_flag": "zombie_minimal"
+    "zombie_flag": "zombie_minimal",
+    "connection_nsp": "VicGrid",
+    "aemo_kci_id": "V00036"
   },
   {
     "id": "maranbah-solar-farm",
@@ -8081,7 +8701,9 @@
     "current_developer": "BE PRO MC1 PTY LTD",
     "data_confidence": "low",
     "confidence_score": "20",
-    "development_stage": "planning_submitted"
+    "development_stage": "planning_submitted",
+    "connection_nsp": "ElectraNet",
+    "aemo_kci_id": "S00084"
   },
   {
     "id": "marcollat-energy-hub-stage-2",
@@ -8094,7 +8716,9 @@
     "data_confidence": "low",
     "confidence_score": "15",
     "development_stage": "planning_submitted",
-    "zombie_flag": "zombie_minimal"
+    "zombie_flag": "zombie_minimal",
+    "connection_nsp": "ElectraNet",
+    "aemo_kci_id": "S00085"
   },
   {
     "id": "markaranka-bess",
@@ -8106,7 +8730,9 @@
     "state": "SA",
     "current_developer": "Monash Renweables Pty Ltd",
     "data_confidence": "low",
-    "development_stage": "planning_submitted"
+    "development_stage": "planning_submitted",
+    "connection_nsp": "ElectraNet",
+    "aemo_kci_id": "S00097"
   },
   {
     "id": "markaranka-solar-and-storage",
@@ -8119,7 +8745,9 @@
     "current_developer": "Monash Energy Pty Ltd",
     "data_confidence": "low",
     "confidence_score": "20",
-    "development_stage": "planning_submitted"
+    "development_stage": "planning_submitted",
+    "connection_nsp": "ElectraNet",
+    "aemo_kci_id": "S00075"
   },
   {
     "id": "marmadua-wind-farm-kci",
@@ -8132,7 +8760,9 @@
     "data_confidence": "low",
     "confidence_score": "23",
     "development_stage": "planning_submitted",
-    "first_seen": "2025"
+    "first_seen": "2025",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00238"
   },
   {
     "id": "marulan-bess",
@@ -8146,7 +8776,9 @@
     "data_confidence": "medium",
     "confidence_score": "28",
     "development_stage": "early_stage",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00265"
   },
   {
     "id": "marulan-solar-farm",
@@ -8188,7 +8820,9 @@
     "data_confidence": "low",
     "confidence_score": "15",
     "development_stage": "planning_submitted",
-    "zombie_flag": "zombie_minimal"
+    "zombie_flag": "zombie_minimal",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00259"
   },
   {
     "id": "maxwell-downs-solar-farm-kci",
@@ -8201,7 +8835,9 @@
     "data_confidence": "low",
     "confidence_score": "15",
     "development_stage": "planning_submitted",
-    "zombie_flag": "zombie_minimal"
+    "zombie_flag": "zombie_minimal",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00096"
   },
   {
     "id": "mccullys-gap-bess",
@@ -8228,7 +8864,9 @@
     "data_confidence": "medium",
     "confidence_score": "28",
     "development_stage": "planning_submitted",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "connection_nsp": "VicGrid",
+    "aemo_kci_id": "V00057"
   },
   {
     "id": "meadow-creek-solar-farm-kci",
@@ -8294,7 +8932,9 @@
     "data_confidence": "low",
     "confidence_score": "15",
     "development_stage": "planning_submitted",
-    "zombie_flag": "zombie_minimal"
+    "zombie_flag": "zombie_minimal",
+    "connection_nsp": "VicGrid",
+    "aemo_kci_id": "V00210"
   },
   {
     "id": "melbourne-renewable-energy-hub-side-b",
@@ -8309,6 +8949,8 @@
     "confidence_score": "28",
     "development_stage": "planning_submitted",
     "first_seen": "2026-03-12",
+    "connection_nsp": "VicGrid",
+    "aemo_kci_id": "V00115",
     "has_scheme_contract": true
   },
   {
@@ -8388,6 +9030,8 @@
     "confidence_score": "15",
     "development_stage": "planning_submitted",
     "zombie_flag": "zombie_minimal",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00316",
     "has_scheme_contract": true
   },
   {
@@ -8402,7 +9046,9 @@
     "data_confidence": "medium",
     "confidence_score": "28",
     "development_stage": "planning_submitted",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00072"
   },
   {
     "id": "metz-solar-farm",
@@ -8430,7 +9076,9 @@
     "data_confidence": "low",
     "confidence_score": "23",
     "development_stage": "planning_submitted",
-    "first_seen": "2025"
+    "first_seen": "2025",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00237"
   },
   {
     "id": "middle-hut-bess-kci",
@@ -8441,7 +9089,9 @@
     "state": "VIC",
     "current_developer": "Middle Hut Storage Pty Ltd",
     "data_confidence": "low",
-    "development_stage": "planning_submitted"
+    "development_stage": "planning_submitted",
+    "connection_nsp": "VicGrid",
+    "aemo_kci_id": "V00193"
   },
   {
     "id": "middlebrook-solar-and-bess",
@@ -8456,6 +9106,8 @@
     "confidence_score": "28",
     "development_stage": "early_stage",
     "first_seen": "2026-03-12",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00320",
     "has_scheme_contract": true
   },
   {
@@ -8482,7 +9134,9 @@
     "data_confidence": "low",
     "confidence_score": "15",
     "development_stage": "planning_submitted",
-    "zombie_flag": "zombie_minimal"
+    "zombie_flag": "zombie_minimal",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00232"
   },
   {
     "id": "miles-bess-project",
@@ -8496,7 +9150,9 @@
     "data_confidence": "medium",
     "confidence_score": "28",
     "development_stage": "planning_submitted",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00280"
   },
   {
     "id": "miles-solar-project",
@@ -8522,7 +9178,9 @@
     "current_developer": "Millmerran Power Partners",
     "data_confidence": "low",
     "confidence_score": "20",
-    "development_stage": "planning_submitted"
+    "development_stage": "planning_submitted",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00105"
   },
   {
     "id": "millmerran-wind-farm",
@@ -8559,7 +9217,9 @@
     "state": "NSW",
     "current_developer": "Minimbah BESS Pty Ltd",
     "data_confidence": "low",
-    "development_stage": "planning_submitted"
+    "development_stage": "planning_submitted",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00292"
   },
   {
     "id": "miriam-vale-solar-farm-and-bess-a",
@@ -8572,7 +9232,9 @@
     "current_developer": "Private Energy Partners Pty Ltd",
     "data_confidence": "low",
     "confidence_score": "20",
-    "development_stage": "planning_submitted"
+    "development_stage": "planning_submitted",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00185"
   },
   {
     "id": "miriam-vale-solar-farm-and-bess-b",
@@ -8596,7 +9258,9 @@
     "state": "NSW",
     "current_developer": "MISKELLY BESS PROJECT PTY LTD",
     "data_confidence": "low",
-    "development_stage": "planning_submitted"
+    "development_stage": "planning_submitted",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00295"
   },
   {
     "id": "moah-creek-solar-farm",
@@ -8609,7 +9273,9 @@
     "data_confidence": "low",
     "confidence_score": "15",
     "development_stage": "planning_submitted",
-    "zombie_flag": "zombie_minimal"
+    "zombie_flag": "zombie_minimal",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00138"
   },
   {
     "id": "moah-creek-wind-farm",
@@ -8623,6 +9289,8 @@
     "confidence_score": "31",
     "development_stage": "planning_submitted",
     "first_seen": "2024",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00040",
     "has_scheme_contract": true
   },
   {
@@ -8649,7 +9317,9 @@
     "current_developer": "Mobilong ProjectCo Pty Ltd",
     "data_confidence": "low",
     "confidence_score": "20",
-    "development_stage": "planning_submitted"
+    "development_stage": "planning_submitted",
+    "connection_nsp": "ElectraNet",
+    "aemo_kci_id": "S00052"
   },
   {
     "id": "mokoan-solar-farm",
@@ -8665,6 +9335,8 @@
     "confidence_score": "49",
     "notable": "46 MW solar farm near Benalla, VIC. Developed by Elecnor.",
     "first_seen": "2024-12-16",
+    "connection_nsp": "VicGrid",
+    "aemo_kci_id": "V00204",
     "has_scheme_contract": true
   },
   {
@@ -8679,7 +9351,9 @@
     "data_confidence": "medium",
     "confidence_score": "28",
     "development_stage": "planning_submitted",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "connection_nsp": "VicGrid",
+    "aemo_kci_id": "V00178"
   },
   {
     "id": "molong-bess",
@@ -8692,7 +9366,9 @@
     "current_developer": "StorEnergy 3 Pty Ltd",
     "data_confidence": "low",
     "confidence_score": "20",
-    "development_stage": "planning_submitted"
+    "development_stage": "planning_submitted",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00321"
   },
   {
     "id": "molong-solar-farm",
@@ -8719,7 +9395,9 @@
     "data_confidence": "low",
     "confidence_score": "15",
     "development_stage": "planning_submitted",
-    "zombie_flag": "zombie_minimal"
+    "zombie_flag": "zombie_minimal",
+    "connection_nsp": "ElectraNet",
+    "aemo_kci_id": "S00001"
   },
   {
     "id": "monduran-bess",
@@ -8732,7 +9410,9 @@
     "current_developer": "Eku Energy Projects (Australia) Pty Ltd as trustee for the Eku Energy Projects (Australia) Trust",
     "data_confidence": "low",
     "confidence_score": "20",
-    "development_stage": "planning_submitted"
+    "development_stage": "planning_submitted",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00186"
   },
   {
     "id": "moonah-solar-farm-kci",
@@ -8745,7 +9425,9 @@
     "data_confidence": "low",
     "confidence_score": "23",
     "development_stage": "planning_submitted",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "connection_nsp": "VicGrid",
+    "aemo_kci_id": "V00056"
   },
   {
     "id": "moonlight-range-wind-farm",
@@ -8758,7 +9440,9 @@
     "data_confidence": "low",
     "confidence_score": "15",
     "development_stage": "planning_submitted",
-    "zombie_flag": "zombie_minimal"
+    "zombie_flag": "zombie_minimal",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00106"
   },
   {
     "id": "moorabool-bess",
@@ -8771,7 +9455,9 @@
     "current_developer": "Storenergy",
     "data_confidence": "low",
     "confidence_score": "20",
-    "development_stage": "planning_submitted"
+    "development_stage": "planning_submitted",
+    "connection_nsp": "VicGrid",
+    "aemo_kci_id": "V00211"
   },
   {
     "id": "moorabool-wind-farm",
@@ -8799,7 +9485,9 @@
     "data_confidence": "low",
     "confidence_score": "15",
     "development_stage": "planning_submitted",
-    "zombie_flag": "zombie_minimal"
+    "zombie_flag": "zombie_minimal",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00087"
   },
   {
     "id": "moranbah-solar-farm-zeroe",
@@ -8814,6 +9502,8 @@
     "development_stage": "early_stage",
     "notable": "CIS T7 award May 2026 (171 MW solar + 100 MW / 4hr BESS). Zero-E Australia is subsidiary of Spanish Grupo Cobra (ACS Group). Near Coppabella in Bowen Basin. AEMO 5.3.4A connection approval secured pre-award (145 MWac inverter rating per pv-tech; DCCEEW cites 171 MW; likely DC vs AC distinction). AC-coupled hybrid with grid-forming inverters. Grupo Cobras first Australian clean-energy asset. Cultural Heritage + Shared Benefits agreements with Barada Barna Traditional Owners. Created 2026-07-18 to close v3.22.2 data gap.",
     "first_seen": "2026-07-18",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00199",
     "has_scheme_contract": true
   },
   {
@@ -8828,7 +9518,9 @@
     "data_confidence": "medium",
     "confidence_score": "28",
     "development_stage": "planning_submitted",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00135"
   },
   {
     "id": "moree-solar-farm",
@@ -8855,7 +9547,9 @@
     "data_confidence": "low",
     "confidence_score": "23",
     "development_stage": "planning_submitted",
-    "first_seen": "2024"
+    "first_seen": "2024",
+    "connection_nsp": "VicGrid",
+    "aemo_kci_id": "V00116"
   },
   {
     "id": "morgan-battery",
@@ -8868,7 +9562,9 @@
     "data_confidence": "low",
     "confidence_score": "15",
     "development_stage": "planning_submitted",
-    "zombie_flag": "zombie_minimal"
+    "zombie_flag": "zombie_minimal",
+    "connection_nsp": "ElectraNet",
+    "aemo_kci_id": "S00037"
   },
   {
     "id": "morgan-long-duration-energy-storage-kci",
@@ -8895,7 +9591,9 @@
     "data_confidence": "medium",
     "confidence_score": "28",
     "development_stage": "planning_submitted",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "connection_nsp": "ElectraNet",
+    "aemo_kci_id": "S00037"
   },
   {
     "id": "mornington-bess",
@@ -8910,6 +9608,8 @@
     "confidence_score": "67",
     "notable": "Staged build: 540 MW total. Stage 1 (240 MW) CIS T3 commissioning, Stage 2 (300 MW) development.",
     "first_seen": "2022-01-01",
+    "connection_nsp": "VicGrid",
+    "aemo_kci_id": "V00181",
     "has_eis_data": true,
     "has_scheme_contract": true
   },
@@ -8953,6 +9653,8 @@
     "development_stage": "epbc_approved",
     "notable": "Fluence Gridstack with SMA grid-forming inverters. A$400M. ARENA A$24M grant.",
     "first_seen": "2008",
+    "connection_nsp": "VicGrid",
+    "aemo_kci_id": "V00202",
     "has_eis_data": true,
     "has_scheme_contract": true
   },
@@ -8968,7 +9670,9 @@
     "data_confidence": "medium",
     "confidence_score": "28",
     "development_stage": "early_stage",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "connection_nsp": "VicGrid",
+    "aemo_kci_id": "V00198"
   },
   {
     "id": "mortlake-energy-hub-stage-2-kci",
@@ -9008,7 +9712,9 @@
     "data_confidence": "medium",
     "confidence_score": "28",
     "development_stage": "planning_submitted",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "connection_nsp": "VicGrid",
+    "aemo_kci_id": "V00012"
   },
   {
     "id": "mount-emerald",
@@ -9037,7 +9743,9 @@
     "data_confidence": "low",
     "confidence_score": "23",
     "development_stage": "planning_submitted",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "connection_nsp": "VicGrid",
+    "aemo_kci_id": "V00138"
   },
   {
     "id": "mount-hopeful-bess",
@@ -9051,7 +9759,9 @@
     "data_confidence": "medium",
     "confidence_score": "28",
     "development_stage": "planning_submitted",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00232"
   },
   {
     "id": "mount-hopeful-wind-farm",
@@ -9064,7 +9774,9 @@
     "data_confidence": "medium",
     "confidence_score": "31",
     "development_stage": "planning_submitted",
-    "first_seen": "2022"
+    "first_seen": "2022",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00082"
   },
   {
     "id": "mount-lambie-wind-farm",
@@ -9107,7 +9819,9 @@
     "data_confidence": "low",
     "confidence_score": "15",
     "development_stage": "planning_submitted",
-    "zombie_flag": "zombie_minimal"
+    "zombie_flag": "zombie_minimal",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00297"
   },
   {
     "id": "mt-challenger-wind-farm",
@@ -9121,7 +9835,9 @@
     "data_confidence": "medium",
     "confidence_score": "28",
     "development_stage": "planning_submitted",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00279"
   },
   {
     "id": "mt-doran-bess",
@@ -9134,7 +9850,9 @@
     "current_developer": "Iberdrola Australia Development Pty Ltd",
     "data_confidence": "low",
     "confidence_score": "20",
-    "development_stage": "planning_submitted"
+    "development_stage": "planning_submitted",
+    "connection_nsp": "VicGrid",
+    "aemo_kci_id": "V00111"
   },
   {
     "id": "mt-fox-bess-arena",
@@ -9148,7 +9866,9 @@
     "data_confidence": "medium",
     "confidence_score": "28",
     "development_stage": "planning_submitted",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00147"
   },
   {
     "id": "mt-fox-wind-farm",
@@ -9190,7 +9910,9 @@
     "current_developer": "Foresight Australia",
     "data_confidence": "low",
     "confidence_score": "20",
-    "development_stage": "planning_submitted"
+    "development_stage": "planning_submitted",
+    "connection_nsp": "VicGrid",
+    "aemo_kci_id": "V00157"
   },
   {
     "id": "mt-mercer-wind-farm",
@@ -9234,6 +9956,8 @@
     "confidence_score": "36",
     "development_stage": "planning_submitted",
     "first_seen": "2023",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00113",
     "has_scheme_contract": true
   },
   {
@@ -9249,7 +9973,9 @@
     "confidence_score": "49",
     "development_stage": "planning_submitted",
     "notable": "Former gold mine repurposed. CleanCo QLD committed to invest. EIS phase. A$3.3B estimated.",
-    "first_seen": "2022"
+    "first_seen": "2022",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00015"
   },
   {
     "id": "mt-view-wind-farm-kci",
@@ -9262,7 +9988,9 @@
     "data_confidence": "low",
     "confidence_score": "15",
     "development_stage": "planning_submitted",
-    "zombie_flag": "zombie_minimal"
+    "zombie_flag": "zombie_minimal",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00187"
   },
   {
     "id": "mullion-creek-wind-farm",
@@ -9275,7 +10003,9 @@
     "data_confidence": "low",
     "confidence_score": "15",
     "development_stage": "planning_submitted",
-    "zombie_flag": "zombie_minimal"
+    "zombie_flag": "zombie_minimal",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00215"
   },
   {
     "id": "munna-creek-solar-farm",
@@ -9301,7 +10031,9 @@
     "state": "VIC",
     "current_developer": "Murchs\u2019 Corner Energy Pty Ltd",
     "data_confidence": "low",
-    "development_stage": "planning_submitted"
+    "development_stage": "planning_submitted",
+    "connection_nsp": "VicGrid",
+    "aemo_kci_id": "V00203"
   },
   {
     "id": "murra-warra-wind-farm-stage-1",
@@ -9373,7 +10105,9 @@
     "data_confidence": "medium",
     "confidence_score": "28",
     "development_stage": "planning_submitted",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00156"
   },
   {
     "id": "muskerry-solar-power-station-kci",
@@ -9386,7 +10120,9 @@
     "data_confidence": "low",
     "confidence_score": "23",
     "development_stage": "planning_submitted",
-    "first_seen": "2024"
+    "first_seen": "2024",
+    "connection_nsp": "VicGrid",
+    "aemo_kci_id": "V00155"
   },
   {
     "id": "musselroe-wind-farm",
@@ -9417,7 +10153,9 @@
     "data_confidence": "medium",
     "confidence_score": "36",
     "development_stage": "planning_submitted",
-    "first_seen": "2025"
+    "first_seen": "2025",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00124"
   },
   {
     "id": "muswellbrook-pumped-hydro",
@@ -9430,7 +10168,9 @@
     "current_developer": "AGL Energy Limited",
     "data_confidence": "low",
     "confidence_score": "20",
-    "development_stage": "planning_submitted"
+    "development_stage": "planning_submitted",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00103"
   },
   {
     "id": "muswellbrook-solar-farm",
@@ -9456,7 +10196,9 @@
     "current_developer": "ARK Energy Corporation Pty Ltd",
     "data_confidence": "low",
     "confidence_score": "20",
-    "development_stage": "planning_submitted"
+    "development_stage": "planning_submitted",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00120"
   },
   {
     "id": "narrabri-hybrid-project",
@@ -9470,7 +10212,9 @@
     "data_confidence": "medium",
     "confidence_score": "28",
     "development_stage": "planning_submitted",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00242"
   },
   {
     "id": "narrandera-solar-hybrid-pvbess",
@@ -9484,7 +10228,9 @@
     "data_confidence": "medium",
     "confidence_score": "28",
     "development_stage": "planning_submitted",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00214"
   },
   {
     "id": "nebo-bess",
@@ -9498,7 +10244,9 @@
     "data_confidence": "medium",
     "confidence_score": "28",
     "development_stage": "planning_submitted",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00312"
   },
   {
     "id": "nebo-bess-iberdrola-kci",
@@ -9524,7 +10272,9 @@
     "data_confidence": "low",
     "confidence_score": "15",
     "development_stage": "planning_submitted",
-    "zombie_flag": "zombie_minimal"
+    "zombie_flag": "zombie_minimal",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00263"
   },
   {
     "id": "nerriga-bess-kci",
@@ -9535,7 +10285,9 @@
     "state": "NSW",
     "current_developer": "Northharbour",
     "data_confidence": "low",
-    "development_stage": "planning_submitted"
+    "development_stage": "planning_submitted",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00289"
   },
   {
     "id": "nevertire-solar-farm",
@@ -9565,6 +10317,8 @@
     "confidence_score": "60",
     "notable": "720 MW hybrid solar-BESS project near Uralla, NSW \u2014 one of Australia's largest solar farms. Developed by ACEN Australia (formerly UPC\\AC Renewables). Includes a co-located battery storage component. Located in the New England REZ.",
     "first_seen": "2019-01-01",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00030",
     "has_scheme_contract": true
   },
   {
@@ -9595,7 +10349,9 @@
     "data_confidence": "medium",
     "confidence_score": "28",
     "development_stage": "early_stage",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00172"
   },
   {
     "id": "noika-solar-kci",
@@ -9608,7 +10364,9 @@
     "data_confidence": "low",
     "confidence_score": "15",
     "development_stage": "planning_submitted",
-    "zombie_flag": "zombie_minimal"
+    "zombie_flag": "zombie_minimal",
+    "connection_nsp": "VicGrid",
+    "aemo_kci_id": "V00190"
   },
   {
     "id": "nonowie-wind-farm",
@@ -9621,7 +10379,9 @@
     "data_confidence": "low",
     "confidence_score": "15",
     "development_stage": "planning_submitted",
-    "zombie_flag": "zombie_minimal"
+    "zombie_flag": "zombie_minimal",
+    "connection_nsp": "ElectraNet",
+    "aemo_kci_id": "S00059"
   },
   {
     "id": "normanville-energy-park",
@@ -9634,7 +10394,9 @@
     "data_confidence": "medium",
     "confidence_score": "31",
     "development_stage": "planning_submitted",
-    "first_seen": "2025"
+    "first_seen": "2025",
+    "connection_nsp": "VicGrid",
+    "aemo_kci_id": "V00162"
   },
   {
     "id": "normanville-energy-park-wind-kci",
@@ -9660,7 +10422,9 @@
     "current_developer": "X-Elio Australia Pty Ltd",
     "data_confidence": "low",
     "confidence_score": "20",
-    "development_stage": "planning_submitted"
+    "development_stage": "planning_submitted",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00218"
   },
   {
     "id": "north-burnett-renewable-hub-solar",
@@ -9700,7 +10464,9 @@
     "data_confidence": "medium",
     "confidence_score": "28",
     "development_stage": "planning_submitted",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00301"
   },
   {
     "id": "north-yarragon-bess-kci",
@@ -9714,7 +10480,9 @@
     "data_confidence": "medium",
     "confidence_score": "28",
     "development_stage": "planning_submitted",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "connection_nsp": "VicGrid",
+    "aemo_kci_id": "V00166"
   },
   {
     "id": "northern-battery",
@@ -9741,7 +10509,9 @@
     "data_confidence": "medium",
     "confidence_score": "31",
     "development_stage": "planning_submitted",
-    "first_seen": "2024"
+    "first_seen": "2024",
+    "connection_nsp": "TasNetworks",
+    "aemo_kci_id": "T00040"
   },
   {
     "id": "northern-tablelands-wind-farm",
@@ -9767,7 +10537,9 @@
     "data_confidence": "low",
     "confidence_score": "15",
     "development_stage": "planning_submitted",
-    "zombie_flag": "zombie_minimal"
+    "zombie_flag": "zombie_minimal",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00097"
   },
   {
     "id": "novocastrian-offshore-wind-farm",
@@ -9796,6 +10568,8 @@
     "confidence_score": "28",
     "development_stage": "planning_submitted",
     "first_seen": "2026-03-12",
+    "connection_nsp": "VicGrid",
+    "aemo_kci_id": "V00164",
     "has_scheme_contract": true
   },
   {
@@ -9876,7 +10650,9 @@
     "current_developer": "Released Energy Pty Ltd",
     "data_confidence": "low",
     "confidence_score": "20",
-    "development_stage": "planning_submitted"
+    "development_stage": "planning_submitted",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00287"
   },
   {
     "id": "oakey-2-solar-farm",
@@ -9936,6 +10712,8 @@
     "capex_year": 2024,
     "notable": "Tesla Megapack. A$650M debt financing (largest BESS financing globally at time). NSW LTESA + CIS double winner.",
     "first_seen": "2023",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00164",
     "has_eis_data": true,
     "has_scheme_contract": true
   },
@@ -9950,7 +10728,9 @@
     "data_confidence": "low",
     "confidence_score": "15",
     "development_stage": "planning_submitted",
-    "zombie_flag": "zombie_minimal"
+    "zombie_flag": "zombie_minimal",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00095"
   },
   {
     "id": "orsted-gippsland-a-and-b-windfarm",
@@ -9989,7 +10769,9 @@
     "data_confidence": "low",
     "confidence_score": "15",
     "development_stage": "planning_submitted",
-    "zombie_flag": "zombie_minimal"
+    "zombie_flag": "zombie_minimal",
+    "connection_nsp": "ElectraNet",
+    "aemo_kci_id": "S00060"
   },
   {
     "id": "oven-mountain-pumped-storage",
@@ -10002,7 +10784,9 @@
     "current_developer": "Oven Mountain Pumped Storage",
     "data_confidence": "low",
     "confidence_score": "20",
-    "development_stage": "planning_submitted"
+    "development_stage": "planning_submitted",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00007"
   },
   {
     "id": "oxley-solar-farm",
@@ -10015,7 +10799,9 @@
     "data_confidence": "low",
     "confidence_score": "15",
     "development_stage": "planning_submitted",
-    "zombie_flag": "zombie_minimal"
+    "zombie_flag": "zombie_minimal",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00116"
   },
   {
     "id": "pacific-green-energy-park-limestone-coast-north",
@@ -10028,7 +10814,9 @@
     "current_developer": "Pacific Green",
     "data_confidence": "low",
     "confidence_score": "20",
-    "development_stage": "planning_submitted"
+    "development_stage": "planning_submitted",
+    "connection_nsp": "ElectraNet",
+    "aemo_kci_id": "S00048"
   },
   {
     "id": "pacific-green-energy-park-limestone-coast-west",
@@ -10041,7 +10829,9 @@
     "current_developer": "Pacific Green",
     "data_confidence": "low",
     "confidence_score": "20",
-    "development_stage": "planning_submitted"
+    "development_stage": "planning_submitted",
+    "connection_nsp": "ElectraNet",
+    "aemo_kci_id": "S00045"
   },
   {
     "id": "pacific-green-energy-park-portland-west",
@@ -10067,7 +10857,9 @@
     "current_developer": "Pacific Green Rocky Creek Pty Ltd",
     "data_confidence": "low",
     "confidence_score": "20",
-    "development_stage": "planning_submitted"
+    "development_stage": "planning_submitted",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00271"
   },
   {
     "id": "pacific-green-energy-park-portland",
@@ -10080,7 +10872,9 @@
     "current_developer": "Pacific Green Energy Park Cascade Trust",
     "data_confidence": "low",
     "confidence_score": "20",
-    "development_stage": "planning_submitted"
+    "development_stage": "planning_submitted",
+    "connection_nsp": "VicGrid",
+    "aemo_kci_id": "V00150"
   },
   {
     "id": "pacific-green-kingswell-energy-park-kci",
@@ -10093,7 +10887,9 @@
     "current_developer": "Pacific Green Energy Group Pty Ltd",
     "data_confidence": "low",
     "confidence_score": "20",
-    "development_stage": "planning_submitted"
+    "development_stage": "planning_submitted",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00306"
   },
   {
     "id": "paling-yards-wind-farm",
@@ -10107,7 +10903,9 @@
     "confidence_score": "31",
     "development_stage": "planning_submitted",
     "first_seen": "2005",
-    "zombie_flag": "zombie_stale"
+    "zombie_flag": "zombie_stale",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00001"
   },
   {
     "id": "palmer-wind-farm",
@@ -10121,6 +10919,8 @@
     "confidence_score": "15",
     "development_stage": "planning_submitted",
     "zombie_flag": "zombie_minimal",
+    "connection_nsp": "ElectraNet",
+    "aemo_kci_id": "S00035",
     "has_scheme_contract": true
   },
   {
@@ -10134,7 +10934,9 @@
     "current_developer": "Palmerston ProjectCo Pty Ltd",
     "data_confidence": "low",
     "confidence_score": "20",
-    "development_stage": "planning_submitted"
+    "development_stage": "planning_submitted",
+    "connection_nsp": "TasNetworks",
+    "aemo_kci_id": "T00014"
   },
   {
     "id": "paloona",
@@ -10162,7 +10964,9 @@
     "data_confidence": "medium",
     "confidence_score": "28",
     "development_stage": "planning_submitted",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00247"
   },
   {
     "id": "para-hill-bess",
@@ -10175,7 +10979,9 @@
     "current_developer": "X-Elio Australia Pty Ltd",
     "data_confidence": "low",
     "confidence_score": "20",
-    "development_stage": "planning_submitted"
+    "development_stage": "planning_submitted",
+    "connection_nsp": "ElectraNet",
+    "aemo_kci_id": "S00079"
   },
   {
     "id": "parkes-solar-farm",
@@ -10203,7 +11009,9 @@
     "data_confidence": "medium",
     "confidence_score": "28",
     "development_stage": "planning_submitted",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00212"
   },
   {
     "id": "pelican-point-bess",
@@ -10218,6 +11026,8 @@
     "confidence_score": "61",
     "notable": "Sungrow PowerTitan 2.0. Grid-forming. Elecnor delivery partner.",
     "first_seen": "2025-12-01",
+    "connection_nsp": "ElectraNet",
+    "aemo_kci_id": "S00087",
     "has_eis_data": true
   },
   {
@@ -10231,7 +11041,9 @@
     "current_developer": "Edify Energy Pty Ltd",
     "data_confidence": "low",
     "confidence_score": "20",
-    "development_stage": "planning_submitted"
+    "development_stage": "planning_submitted",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00142"
   },
   {
     "id": "phoenix-pumped-hydro-project",
@@ -10245,6 +11057,8 @@
     "data_confidence": "low",
     "confidence_score": "20",
     "development_stage": "planning_submitted",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00125",
     "has_scheme_contract": true
   },
   {
@@ -10259,6 +11073,8 @@
     "confidence_score": "31",
     "development_stage": "planning_submitted",
     "first_seen": "2024",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00090",
     "has_scheme_contract": true
   },
   {
@@ -10272,7 +11088,9 @@
     "data_confidence": "low",
     "confidence_score": "15",
     "development_stage": "planning_submitted",
-    "zombie_flag": "zombie_minimal"
+    "zombie_flag": "zombie_minimal",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00188"
   },
   {
     "id": "pine-lodge-2-bess-kci",
@@ -10286,7 +11104,9 @@
     "data_confidence": "medium",
     "confidence_score": "28",
     "development_stage": "planning_submitted",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "connection_nsp": "VicGrid",
+    "aemo_kci_id": "V00153"
   },
   {
     "id": "pine-lodge-bess",
@@ -10302,6 +11122,8 @@
     "confidence_score": "61",
     "notable": "Terminal station energised Dec 2025. Late-stage construction/commissioning.",
     "first_seen": "2025-12-01",
+    "connection_nsp": "VicGrid",
+    "aemo_kci_id": "V00063",
     "has_eis_data": true
   },
   {
@@ -10315,7 +11137,9 @@
     "data_confidence": "low",
     "confidence_score": "15",
     "development_stage": "planning_submitted",
-    "zombie_flag": "zombie_minimal"
+    "zombie_flag": "zombie_minimal",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00254"
   },
   {
     "id": "pinnacles-bess-storage-kci",
@@ -10329,7 +11153,9 @@
     "data_confidence": "medium",
     "confidence_score": "28",
     "development_stage": "planning_submitted",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00057"
   },
   {
     "id": "pint-pot-bess",
@@ -10342,7 +11168,9 @@
     "current_developer": "FRV Services Australia Pty Ltd",
     "data_confidence": "low",
     "confidence_score": "20",
-    "development_stage": "planning_submitted"
+    "development_stage": "planning_submitted",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00136"
   },
   {
     "id": "pioneer-bess-kci",
@@ -10356,7 +11184,9 @@
     "data_confidence": "medium",
     "confidence_score": "28",
     "development_stage": "planning_submitted",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00153"
   },
   {
     "id": "playford-battery",
@@ -10382,7 +11212,9 @@
     "data_confidence": "low",
     "confidence_score": "23",
     "development_stage": "planning_submitted",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00154"
   },
   {
     "id": "pleystowe-bess",
@@ -10395,7 +11227,9 @@
     "current_developer": "PLEYSTOWE BESS PTY LTD",
     "data_confidence": "low",
     "confidence_score": "20",
-    "development_stage": "planning_submitted"
+    "development_stage": "planning_submitted",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00189"
   },
   {
     "id": "poatina",
@@ -10423,7 +11257,9 @@
     "data_confidence": "medium",
     "confidence_score": "46",
     "notable": "107 MW solar component of the Port Augusta Renewable Energy Park, SA. Co-located with 210 MW wind \u2014 one of Australia's largest hybrid renewable energy parks. Developed by DP Energy / Iberdrola.",
-    "first_seen": "2022-04-19"
+    "first_seen": "2022-04-19",
+    "connection_nsp": "ElectraNet",
+    "aemo_kci_id": "S00025"
   },
   {
     "id": "port-augusta-renewable-energy-park-wind",
@@ -10465,7 +11301,9 @@
     "data_confidence": "low",
     "confidence_score": "15",
     "development_stage": "planning_submitted",
-    "zombie_flag": "zombie_minimal"
+    "zombie_flag": "zombie_minimal",
+    "connection_nsp": "ElectraNet",
+    "aemo_kci_id": "S00024"
   },
   {
     "id": "portland-energy-park-bess",
@@ -10479,7 +11317,9 @@
     "data_confidence": "medium",
     "confidence_score": "28",
     "development_stage": "planning_submitted",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "connection_nsp": "VicGrid",
+    "aemo_kci_id": "V00113"
   },
   {
     "id": "portland-renewables-project-kci",
@@ -10534,7 +11374,9 @@
     "data_confidence": "medium",
     "confidence_score": "31",
     "development_stage": "planning_submitted",
-    "first_seen": "2024"
+    "first_seen": "2024",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00158"
   },
   {
     "id": "pottinger-energy-park-solar-kci",
@@ -10602,7 +11444,9 @@
     "data_confidence": "low",
     "confidence_score": "23",
     "development_stage": "planning_submitted",
-    "first_seen": "2023"
+    "first_seen": "2023",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00244"
   },
   {
     "id": "project-monash-solar-kci",
@@ -10641,7 +11485,9 @@
     "data_confidence": "low",
     "confidence_score": "23",
     "development_stage": "planning_submitted",
-    "first_seen": "2024"
+    "first_seen": "2024",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00170"
   },
   {
     "id": "puggoon-hybrid",
@@ -10654,7 +11500,9 @@
     "data_confidence": "low",
     "confidence_score": "15",
     "development_stage": "planning_submitted",
-    "zombie_flag": "zombie_minimal"
+    "zombie_flag": "zombie_minimal",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00256"
   },
   {
     "id": "punch-and-creek-renewable-energy",
@@ -10667,7 +11515,9 @@
     "data_confidence": "low",
     "confidence_score": "23",
     "development_stage": "early_stage",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00223"
   },
   {
     "id": "punch-and-creek-renewable-energy-stage-2",
@@ -10693,7 +11543,9 @@
     "current_developer": "Skylab",
     "data_confidence": "low",
     "confidence_score": "20",
-    "development_stage": "planning_submitted"
+    "development_stage": "planning_submitted",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00295"
   },
   {
     "id": "punchs-creek-renewable-energy-t4",
@@ -10735,7 +11587,9 @@
     "data_confidence": "low",
     "confidence_score": "15",
     "development_stage": "planning_submitted",
-    "zombie_flag": "zombie_minimal"
+    "zombie_flag": "zombie_minimal",
+    "connection_nsp": "VicGrid",
+    "aemo_kci_id": "V00024"
   },
   {
     "id": "quorn-park-solar-hybrid",
@@ -10764,7 +11618,9 @@
     "data_confidence": "medium",
     "confidence_score": "28",
     "development_stage": "planning_submitted",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00190"
   },
   {
     "id": "raglan-solar-farm",
@@ -10777,7 +11633,9 @@
     "data_confidence": "low",
     "confidence_score": "15",
     "development_stage": "planning_submitted",
-    "zombie_flag": "zombie_minimal"
+    "zombie_flag": "zombie_minimal",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00014"
   },
   {
     "id": "rangebank-bess",
@@ -10795,7 +11653,9 @@
     "capex_aud_m": 200.0,
     "capex_year": 2023,
     "notable": "200 MW / 400 MWh BESS in Cranbourne's Rangebank Business Park, Melbourne's southeast. Developed by Eku Energy (Macquarie/BCI JV) and Shell Energy. Fluence sixth-generation Gridstack technology. Victoria's second-largest battery at time of opening in December 2024.",
-    "first_seen": "2023-06-01"
+    "first_seen": "2023-06-01",
+    "connection_nsp": "VicGrid",
+    "aemo_kci_id": "V00035"
   },
   {
     "id": "ravenswood-solar-farm-bess",
@@ -10837,6 +11697,8 @@
     "confidence_score": "28",
     "development_stage": "early_stage",
     "first_seen": "2026-03-12",
+    "connection_nsp": "ElectraNet",
+    "aemo_kci_id": "S00074",
     "has_scheme_contract": true
   },
   {
@@ -10850,7 +11712,9 @@
     "data_confidence": "low",
     "confidence_score": "15",
     "development_stage": "planning_submitted",
-    "zombie_flag": "zombie_minimal"
+    "zombie_flag": "zombie_minimal",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00271"
   },
   {
     "id": "repulse",
@@ -10905,7 +11769,9 @@
     "data_confidence": "low",
     "confidence_score": "15",
     "development_stage": "planning_submitted",
-    "zombie_flag": "zombie_minimal"
+    "zombie_flag": "zombie_minimal",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00076"
   },
   {
     "id": "rifle-butts-wind-farm",
@@ -10931,7 +11797,9 @@
     "data_confidence": "low",
     "confidence_score": "15",
     "development_stage": "planning_submitted",
-    "zombie_flag": "zombie_minimal"
+    "zombie_flag": "zombie_minimal",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00285"
   },
   {
     "id": "riverina-energy-storage-system-1",
@@ -10947,7 +11815,9 @@
     "data_confidence": "good",
     "confidence_score": "57",
     "notable": "60 MW / 120 MWh Tesla Megapack BESS co-located with Darlington Point Solar Farm. Edify Energy / Federation Asset Management. Shell Energy holds long-term services agreement for operational access. Grid-forming inverters delivering Virtual Synchronous Generator mode system strength services.",
-    "first_seen": "2023-03-01"
+    "first_seen": "2023-03-01",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00021"
   },
   {
     "id": "riverina-energy-storage-system-2",
@@ -10976,7 +11846,9 @@
     "data_confidence": "low",
     "confidence_score": "15",
     "development_stage": "planning_submitted",
-    "zombie_flag": "zombie_minimal"
+    "zombie_flag": "zombie_minimal",
+    "connection_nsp": "ElectraNet",
+    "aemo_kci_id": "S00095"
   },
   {
     "id": "riverland-solar-storage-storage",
@@ -11003,7 +11875,9 @@
     "data_confidence": "low",
     "confidence_score": "15",
     "development_stage": "planning_submitted",
-    "zombie_flag": "zombie_minimal"
+    "zombie_flag": "zombie_minimal",
+    "connection_nsp": "TasNetworks",
+    "aemo_kci_id": "T00019"
   },
   {
     "id": "robertstown-bess",
@@ -11016,7 +11890,9 @@
     "current_developer": "StorEnergy 4 Pty Ltd",
     "data_confidence": "low",
     "confidence_score": "20",
-    "development_stage": "planning_submitted"
+    "development_stage": "planning_submitted",
+    "connection_nsp": "ElectraNet",
+    "aemo_kci_id": "S00090"
   },
   {
     "id": "robertstown-solar",
@@ -11042,7 +11918,9 @@
     "current_developer": "X-Elio Australia Pty Ltd",
     "data_confidence": "low",
     "confidence_score": "20",
-    "development_stage": "planning_submitted"
+    "development_stage": "planning_submitted",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00148"
   },
   {
     "id": "rollsville-hybrid-facility-solar",
@@ -11069,7 +11947,9 @@
     "data_confidence": "medium",
     "confidence_score": "28",
     "development_stage": "planning_submitted",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N000248"
   },
   {
     "id": "romani-solar-farm",
@@ -11083,7 +11963,9 @@
     "data_confidence": "low",
     "confidence_score": "15",
     "development_stage": "planning_submitted",
-    "zombie_flag": "zombie_minimal"
+    "zombie_flag": "zombie_minimal",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00130"
   },
   {
     "id": "romani-standalone-bess",
@@ -11124,7 +12006,9 @@
     "current_developer": "Hydro-Electric Corporation",
     "data_confidence": "low",
     "confidence_score": "20",
-    "development_stage": "planning_submitted"
+    "development_stage": "planning_submitted",
+    "connection_nsp": "TasNetworks",
+    "aemo_kci_id": "T00002"
   },
   {
     "id": "rubicon-bess",
@@ -11138,7 +12022,9 @@
     "data_confidence": "medium",
     "confidence_score": "28",
     "development_stage": "planning_submitted",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "connection_nsp": "VicGrid",
+    "aemo_kci_id": "V00180"
   },
   {
     "id": "rubicon-solar-farm",
@@ -11205,7 +12091,9 @@
     "data_confidence": "low",
     "confidence_score": "15",
     "development_stage": "planning_submitted",
-    "zombie_flag": "zombie_minimal"
+    "zombie_flag": "zombie_minimal",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00269"
   },
   {
     "id": "rutherglen-solar-farm-kci",
@@ -11254,6 +12142,8 @@
     "capex_aud_m": 700.0,
     "notable": "Largest wind farm in NSW. 66x Vestas V162-6.0MW EnVentus \u2014 among highest capacity onshore turbines in Australia.",
     "first_seen": "2020",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00046",
     "has_eis_data": true
   },
   {
@@ -11323,7 +12213,9 @@
     "confidence_score": "57",
     "development_stage": "epbc_approved",
     "notable": "54 MW, 15 Vestas V126-3.6 MW turbines in western Victoria. Zenviron-Vestas EPC for Tilt Renewables. 12-year PPA with Meridian Energy. COD July 2018.",
-    "first_seen": "2006"
+    "first_seen": "2006",
+    "connection_nsp": "VicGrid",
+    "aemo_kci_id": "V00119"
   },
   {
     "id": "sandigo-solar-farm",
@@ -11336,7 +12228,9 @@
     "data_confidence": "low",
     "confidence_score": "15",
     "development_stage": "planning_submitted",
-    "zombie_flag": "zombie_minimal"
+    "zombie_flag": "zombie_minimal",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00022"
   },
   {
     "id": "sandy-creek-energy-storage-system",
@@ -11350,7 +12244,9 @@
     "data_confidence": "low",
     "confidence_score": "23",
     "development_stage": "planning_submitted",
-    "first_seen": "2025-05-08"
+    "first_seen": "2025-05-08",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00267"
   },
   {
     "id": "sandy-creek-solar-farm",
@@ -11394,7 +12290,9 @@
     "data_confidence": "low",
     "confidence_score": "15",
     "development_stage": "planning_submitted",
-    "zombie_flag": "zombie_minimal"
+    "zombie_flag": "zombie_minimal",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00176"
   },
   {
     "id": "sandy-point-hybrid-storage",
@@ -11436,7 +12334,9 @@
     "data_confidence": "medium",
     "confidence_score": "25",
     "development_stage": "planning_submitted",
-    "notable": "AEMO registration only \u2014 limited public record. May relate to Aurora Green (Iberdrola, 3 GW in Gippsland zone near Seaspray, feasibility licence Jul 2024)."
+    "notable": "AEMO registration only \u2014 limited public record. May relate to Aurora Green (Iberdrola, 3 GW in Gippsland zone near Seaspray, feasibility licence Jul 2024).",
+    "connection_nsp": "VicGrid",
+    "aemo_kci_id": "V00106"
   },
   {
     "id": "sebastopol-solar-farm",
@@ -11466,7 +12366,9 @@
     "data_confidence": "good",
     "confidence_score": "51",
     "notable": "240 MW pumped hydro comprising Kangaroo Valley and Bendeela stations, ~150 km south of Sydney. Constructed 1977. Origin Energy. ARENA-funded feasibility study (2019) found 235 MW expansion technically feasible but not commercially viable.",
-    "first_seen": "1976-12-31"
+    "first_seen": "1976-12-31",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00104"
   },
   {
     "id": "shoalhaven-expansion",
@@ -11479,7 +12381,9 @@
     "current_developer": "Origin Energy",
     "data_confidence": "low",
     "confidence_score": "20",
-    "development_stage": "planning_submitted"
+    "development_stage": "planning_submitted",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00104"
   },
   {
     "id": "silver-city-energy-storage",
@@ -11495,6 +12399,8 @@
     "confidence_score": "36",
     "development_stage": "planning_submitted",
     "first_seen": "2023",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00133",
     "has_scheme_contract": true
   },
   {
@@ -11508,7 +12414,9 @@
     "data_confidence": "low",
     "confidence_score": "15",
     "development_stage": "planning_submitted",
-    "zombie_flag": "zombie_minimal"
+    "zombie_flag": "zombie_minimal",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00162"
   },
   {
     "id": "silverton-wind-farm",
@@ -11571,6 +12479,8 @@
     "confidence_score": "28",
     "development_stage": "early_stage",
     "first_seen": "2026-03-12",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00247",
     "has_scheme_contract": true
   },
   {
@@ -11658,7 +12568,9 @@
     "data_confidence": "medium",
     "confidence_score": "28",
     "development_stage": "early_stage",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "connection_nsp": "ElectraNet",
+    "aemo_kci_id": "S00041"
   },
   {
     "id": "south-burnett-bess",
@@ -11671,7 +12583,9 @@
     "data_confidence": "low",
     "confidence_score": "23",
     "development_stage": "planning_submitted",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00132"
   },
   {
     "id": "south-coree-bess",
@@ -11685,7 +12599,9 @@
     "data_confidence": "medium",
     "confidence_score": "28",
     "development_stage": "planning_submitted",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00178"
   },
   {
     "id": "south-east-bess-storage-kci",
@@ -11712,7 +12628,9 @@
     "data_confidence": "low",
     "confidence_score": "15",
     "development_stage": "planning_submitted",
-    "zombie_flag": "zombie_minimal"
+    "zombie_flag": "zombie_minimal",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00199"
   },
   {
     "id": "south-nanango-bess",
@@ -11725,7 +12643,9 @@
     "current_developer": "RTB Renewables Pty Ltd",
     "data_confidence": "low",
     "confidence_score": "20",
-    "development_stage": "planning_submitted"
+    "development_stage": "planning_submitted",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00221"
   },
   {
     "id": "south-pacific-offshore-wind-project",
@@ -11766,7 +12686,9 @@
     "data_confidence": "low",
     "confidence_score": "15",
     "development_stage": "planning_submitted",
-    "zombie_flag": "zombie_minimal"
+    "zombie_flag": "zombie_minimal",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00059"
   },
   {
     "id": "specimen-hill-wind-farm",
@@ -11779,7 +12701,9 @@
     "data_confidence": "low",
     "confidence_score": "23",
     "development_stage": "planning_submitted",
-    "first_seen": "2021"
+    "first_seen": "2021",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00067"
   },
   {
     "id": "spicers-creek-wind-farm",
@@ -11808,7 +12732,9 @@
     "data_confidence": "medium",
     "confidence_score": "25",
     "development_stage": "planning_submitted",
-    "notable": "Most advanced Southern Ocean project. First feasibility licence in Southern Ocean zone (Feb 2025). 1.2 GW bottom-fixed, 15-20 km off Warrnambool/Port Fairy. ARENA funding."
+    "notable": "Most advanced Southern Ocean project. First feasibility licence in Southern Ocean zone (Feb 2025). 1.2 GW bottom-fixed, 15-20 km off Warrnambool/Port Fairy. ARENA funding.",
+    "connection_nsp": "VicGrid",
+    "aemo_kci_id": "V00140"
   },
   {
     "id": "springlands-wind-farm",
@@ -11821,7 +12747,9 @@
     "data_confidence": "low",
     "confidence_score": "23",
     "development_stage": "planning_submitted",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00038"
   },
   {
     "id": "springvale-energy-hub",
@@ -11835,7 +12763,9 @@
     "data_confidence": "medium",
     "confidence_score": "28",
     "development_stage": "early_stage",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "connection_nsp": "VicGrid",
+    "aemo_kci_id": "V00117"
   },
   {
     "id": "st-patricks-plains-wind-farm",
@@ -11848,7 +12778,9 @@
     "data_confidence": "low",
     "confidence_score": "15",
     "development_stage": "planning_submitted",
-    "zombie_flag": "zombie_minimal"
+    "zombie_flag": "zombie_minimal",
+    "connection_nsp": "TasNetworks",
+    "aemo_kci_id": "T00015"
   },
   {
     "id": "stanwell-bess",
@@ -11863,7 +12795,9 @@
     "data_confidence": "medium",
     "confidence_score": "28",
     "development_stage": "planning_submitted",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00023"
   },
   {
     "id": "star-of-the-south-wind-farm",
@@ -11877,7 +12811,9 @@
     "confidence_score": "49",
     "development_stage": "planning_submitted",
     "notable": "Most advanced Australian offshore wind project. Feasibility licence FL-01 granted May 2024 for 586 km2 area 10+ km off Gippsland coast. EIS lodged Dec 2025 under EPBC Act. Targeting first power ~2030. Estimated A$8-10B.",
-    "first_seen": "2020"
+    "first_seen": "2020",
+    "connection_nsp": "VicGrid",
+    "aemo_kci_id": "V00044"
   },
   {
     "id": "starfish-hill",
@@ -11923,6 +12859,8 @@
     "confidence_score": "28",
     "development_stage": "early_stage",
     "first_seen": "2026-03-12",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00108",
     "has_scheme_contract": true
   },
   {
@@ -11936,7 +12874,9 @@
     "data_confidence": "low",
     "confidence_score": "23",
     "development_stage": "planning_submitted",
-    "first_seen": "2022"
+    "first_seen": "2022",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00098"
   },
   {
     "id": "strafford-renewable-energy-hub-pumped-hydro",
@@ -11962,7 +12902,9 @@
     "data_confidence": "low",
     "confidence_score": "23",
     "development_stage": "planning_submitted",
-    "first_seen": "2024"
+    "first_seen": "2024",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00223"
   },
   {
     "id": "strathbogie-ranges-wind-farm",
@@ -12001,7 +12943,9 @@
     "data_confidence": "low",
     "confidence_score": "15",
     "development_stage": "planning_submitted",
-    "zombie_flag": "zombie_minimal"
+    "zombie_flag": "zombie_minimal",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00233"
   },
   {
     "id": "stubbo-bess",
@@ -12015,7 +12959,9 @@
     "data_confidence": "medium",
     "confidence_score": "28",
     "development_stage": "planning_submitted",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00303"
   },
   {
     "id": "stubbo-solar-farm",
@@ -12032,6 +12978,8 @@
     "development_stage": "epbc_submitted",
     "notable": "400 MW solar farm near Gulgong, NSW. Developed by ACEN Australia. One of the largest solar farms in NSW's Central-West Orana REZ.",
     "first_seen": "2022",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00017",
     "has_eis_data": true,
     "has_scheme_contract": true
   },
@@ -12062,6 +13010,8 @@
     "development_stage": "epbc_submitted",
     "notable": "Staged build: 400 MW total. Main (240 MW) construction, North (160 MW) development.",
     "first_seen": "2023",
+    "connection_nsp": "ElectraNet",
+    "aemo_kci_id": "S00022",
     "has_eis_data": true
   },
   {
@@ -12089,7 +13039,9 @@
     "current_developer": "OX2",
     "data_confidence": "low",
     "confidence_score": "20",
-    "development_stage": "planning_submitted"
+    "development_stage": "planning_submitted",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00064"
   },
   {
     "id": "summerville-solar-farm",
@@ -12130,7 +13082,9 @@
     "data_confidence": "medium",
     "confidence_score": "28",
     "development_stage": "planning_submitted",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N000242"
   },
   {
     "id": "sunnyside-solar-farm",
@@ -12143,7 +13097,9 @@
     "data_confidence": "low",
     "confidence_score": "15",
     "development_stage": "planning_submitted",
-    "zombie_flag": "zombie_minimal"
+    "zombie_flag": "zombie_minimal",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00278"
   },
   {
     "id": "sunraysia-solar-farm",
@@ -12198,7 +13154,9 @@
     "data_confidence": "low",
     "confidence_score": "15",
     "development_stage": "planning_submitted",
-    "zombie_flag": "zombie_minimal"
+    "zombie_flag": "zombie_minimal",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00327"
   },
   {
     "id": "sunshine-state-solar-farm-and-bess-rollingstone",
@@ -12242,6 +13200,8 @@
     "capex_year": 2024,
     "notable": "Staged build: 1,300 MW / 2.6 GWh total. Stage 1 operating (Origin tolling), Stage 2 construction, Stages 3-5 development.",
     "first_seen": "2025-01-01",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00255",
     "has_eis_data": true
   },
   {
@@ -12256,7 +13216,9 @@
     "data_confidence": "medium",
     "confidence_score": "28",
     "development_stage": "early_stage",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00175"
   },
   {
     "id": "supernode-bess-stage-4",
@@ -12270,7 +13232,9 @@
     "data_confidence": "medium",
     "confidence_score": "28",
     "development_stage": "planning_submitted",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00260"
   },
   {
     "id": "supernode-bess-stage-5",
@@ -12284,7 +13248,9 @@
     "data_confidence": "medium",
     "confidence_score": "28",
     "development_stage": "planning_submitted",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00290"
   },
   {
     "id": "susan-river-solar-farm",
@@ -12312,6 +13278,8 @@
     "data_confidence": "low",
     "confidence_score": "20",
     "development_stage": "planning_submitted",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00302",
     "has_scheme_contract": true
   },
   {
@@ -12326,7 +13294,9 @@
     "data_confidence": "medium",
     "confidence_score": "28",
     "development_stage": "early_stage",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00268"
   },
   {
     "id": "tummaville-hybrid-facility-solar-and-bess",
@@ -12351,7 +13321,9 @@
     "current_developer": "Elgin Energy Pty Ltd",
     "data_confidence": "low",
     "confidence_score": "20",
-    "development_stage": "planning_submitted"
+    "development_stage": "planning_submitted",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00117"
   },
   {
     "id": "tabulam-solar-farm-and-bess",
@@ -12377,7 +13349,9 @@
     "data_confidence": "medium",
     "confidence_score": "46",
     "notable": "52 MW solar farm near Tailem Bend, SA. Developed by Vena Energy. Located adjacent to The Bend Motorsport Park and the former Tailem Bend gas-fired power station site.",
-    "first_seen": "2019-02-27"
+    "first_seen": "2019-02-27",
+    "connection_nsp": "ElectraNet",
+    "aemo_kci_id": "S00023"
   },
   {
     "id": "tailem-bend-battery-project",
@@ -12435,7 +13409,9 @@
     "data_confidence": "medium",
     "confidence_score": "28",
     "development_stage": "planning_submitted",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00217"
   },
   {
     "id": "tall-tree-bess",
@@ -12449,7 +13425,9 @@
     "data_confidence": "medium",
     "confidence_score": "28",
     "development_stage": "planning_submitted",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "connection_nsp": "VicGrid",
+    "aemo_kci_id": "V00020"
   },
   {
     "id": "tall-tree-wind-farm",
@@ -12462,7 +13440,9 @@
     "data_confidence": "low",
     "confidence_score": "23",
     "development_stage": "planning_submitted",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "connection_nsp": "VicGrid",
+    "aemo_kci_id": "V00020"
   },
   {
     "id": "tallawang-solar-and-bess",
@@ -12492,7 +13472,9 @@
     "data_confidence": "medium",
     "confidence_score": "28",
     "development_stage": "early_stage",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00239"
   },
   {
     "id": "tamworth-bess-project-2-pty-ltd",
@@ -12532,7 +13514,9 @@
     "data_confidence": "low",
     "confidence_score": "15",
     "development_stage": "planning_submitted",
-    "zombie_flag": "zombie_minimal"
+    "zombie_flag": "zombie_minimal",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00054"
   },
   {
     "id": "tara-wind-farm-kci",
@@ -12545,7 +13529,9 @@
     "data_confidence": "low",
     "confidence_score": "15",
     "development_stage": "planning_submitted",
-    "zombie_flag": "zombie_minimal"
+    "zombie_flag": "zombie_minimal",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00173"
   },
   {
     "id": "taralga-wind-farm",
@@ -12574,6 +13560,8 @@
     "confidence_score": "64",
     "notable": "164x Tesla Megapack 2XL. A$514M. Commercial ops Feb 2026. Yurika EPC.",
     "first_seen": "2023-08-01",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00080",
     "has_eis_data": true
   },
   {
@@ -12628,7 +13616,9 @@
     "data_confidence": "medium",
     "confidence_score": "28",
     "development_stage": "planning_submitted",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "connection_nsp": "VicGrid",
+    "aemo_kci_id": "V00088"
   },
   {
     "id": "tchelery-bess",
@@ -12656,7 +13646,9 @@
     "data_confidence": "medium",
     "confidence_score": "28",
     "development_stage": "planning_submitted",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00211"
   },
   {
     "id": "teebar-creek-battery-storage-kci",
@@ -12671,6 +13663,8 @@
     "confidence_score": "28",
     "development_stage": "early_stage",
     "first_seen": "2026-03-12",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00156",
     "has_scheme_contract": true
   },
   {
@@ -12698,7 +13692,9 @@
     "data_confidence": "medium",
     "confidence_score": "28",
     "development_stage": "planning_submitted",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "connection_nsp": "ElectraNet",
+    "aemo_kci_id": "S00056"
   },
   {
     "id": "templers-bess",
@@ -12714,6 +13710,8 @@
     "confidence_score": "48",
     "notable": "111 MW / 222 MWh BESS near Mallala, SA. Nexif Energy project.",
     "first_seen": "2026-03-12",
+    "connection_nsp": "ElectraNet",
+    "aemo_kci_id": "S00017",
     "has_eis_data": true
   },
   {
@@ -12729,7 +13727,9 @@
     "data_confidence": "medium",
     "confidence_score": "48",
     "notable": "108 MW wind farm near Terang, VIC. Located in the Western Victoria renewable energy zone.",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "connection_nsp": "VicGrid",
+    "aemo_kci_id": "V00006"
   },
   {
     "id": "territory-battery",
@@ -12743,7 +13743,9 @@
     "data_confidence": "medium",
     "confidence_score": "28",
     "development_stage": "planning_submitted",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00086"
   },
   {
     "id": "texas-bess",
@@ -12757,7 +13759,9 @@
     "data_confidence": "medium",
     "confidence_score": "28",
     "development_stage": "planning_submitted",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00234"
   },
   {
     "id": "texas-solar-farm",
@@ -12784,7 +13788,9 @@
     "data_confidence": "medium",
     "confidence_score": "28",
     "development_stage": "planning_submitted",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00201"
   },
   {
     "id": "the-central-bess-kci",
@@ -12798,7 +13804,9 @@
     "data_confidence": "medium",
     "confidence_score": "28",
     "development_stage": "planning_submitted",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00291"
   },
   {
     "id": "the-plains",
@@ -12813,6 +13821,8 @@
     "confidence_score": "28",
     "development_stage": "planning_submitted",
     "first_seen": "2023",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00145",
     "has_scheme_contract": true
   },
   {
@@ -12853,7 +13863,9 @@
     "data_confidence": "medium",
     "confidence_score": "28",
     "development_stage": "planning_submitted",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00202"
   },
   {
     "id": "theodore-solar-farm",
@@ -12880,6 +13892,8 @@
     "confidence_score": "31",
     "development_stage": "planning_submitted",
     "first_seen": "2024",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00128",
     "has_scheme_contract": true
   },
   {
@@ -12894,7 +13908,9 @@
     "data_confidence": "medium",
     "confidence_score": "28",
     "development_stage": "planning_submitted",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "connection_nsp": "VicGrid",
+    "aemo_kci_id": "V00078"
   },
   {
     "id": "three-rivers-bess",
@@ -12907,7 +13923,9 @@
     "current_developer": "Iberdrola Australia Development Pty Ltd.",
     "data_confidence": "low",
     "confidence_score": "20",
-    "development_stage": "planning_submitted"
+    "development_stage": "planning_submitted",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00251"
   },
   {
     "id": "three-rivers-solar-farm",
@@ -12934,6 +13952,8 @@
     "confidence_score": "15",
     "development_stage": "planning_submitted",
     "zombie_flag": "zombie_minimal",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00279",
     "has_scheme_contract": true
   },
   {
@@ -12960,7 +13980,9 @@
     "data_confidence": "low",
     "confidence_score": "15",
     "development_stage": "planning_submitted",
-    "zombie_flag": "zombie_minimal"
+    "zombie_flag": "zombie_minimal",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00142"
   },
   {
     "id": "tieri-bess",
@@ -12974,7 +13996,9 @@
     "data_confidence": "medium",
     "confidence_score": "28",
     "development_stage": "planning_submitted",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00129"
   },
   {
     "id": "tilbuster-solar-farm",
@@ -12988,7 +14012,9 @@
     "data_confidence": "medium",
     "confidence_score": "31",
     "development_stage": "planning_submitted",
-    "first_seen": "2020"
+    "first_seen": "2020",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00015"
   },
   {
     "id": "tirranna-bess-kci",
@@ -13002,7 +14028,9 @@
     "data_confidence": "medium",
     "confidence_score": "28",
     "development_stage": "planning_submitted",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00222"
   },
   {
     "id": "tomago-bess",
@@ -13021,6 +14049,8 @@
     "capex_year": 2025,
     "notable": "500 MW / 2 GWh grid-scale battery at former Tomago aluminium smelter site. AGL Energy flagship storage project in the Hunter Valley, NSW.",
     "first_seen": "2023",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00109",
     "has_eis_data": true,
     "has_scheme_contract": true
   },
@@ -13041,6 +14071,8 @@
     "capex_year": 2021,
     "notable": "250 MW / 250 MWh BESS at AGL's Torrens Island gas plant site in SA. W\u00e4rtsil\u00e4-supplied system completed in 18 months, designed for Virtual Synchronous Generator (VSG) grid-forming operation \u2014 the largest BESS globally capable of VSG at time of commissioning.",
     "first_seen": "2023-04-25",
+    "connection_nsp": "ElectraNet",
+    "aemo_kci_id": "S00008",
     "has_eis_data": true
   },
   {
@@ -13082,7 +14114,9 @@
     "data_confidence": "medium",
     "confidence_score": "28",
     "development_stage": "planning_submitted",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "connection_nsp": "VicGrid",
+    "aemo_kci_id": "V00160"
   },
   {
     "id": "trevallyn",
@@ -13123,7 +14157,9 @@
     "current_developer": "Hydro-Electric Corporation",
     "data_confidence": "low",
     "confidence_score": "20",
-    "development_stage": "planning_submitted"
+    "development_stage": "planning_submitted",
+    "connection_nsp": "TasNetworks",
+    "aemo_kci_id": "T00003"
   },
   {
     "id": "tuckeroo-bess-kci",
@@ -13136,7 +14172,9 @@
     "current_developer": "Tuckeroo BESS Pty Ltd",
     "data_confidence": "low",
     "confidence_score": "20",
-    "development_stage": "planning_submitted"
+    "development_stage": "planning_submitted",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00252"
   },
   {
     "id": "tuggerah-bess-kci",
@@ -13161,7 +14199,9 @@
     "data_confidence": "medium",
     "confidence_score": "28",
     "development_stage": "planning_submitted",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00203"
   },
   {
     "id": "tummaville-hybrid-facility-bess-kci",
@@ -13174,7 +14214,9 @@
     "current_developer": "Elements Green Australia Pty Ltd",
     "data_confidence": "low",
     "confidence_score": "20",
-    "development_stage": "planning_submitted"
+    "development_stage": "planning_submitted",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00281"
   },
   {
     "id": "tummaville-hybrid-facility-solar-kci",
@@ -13212,7 +14254,9 @@
     "data_confidence": "low",
     "confidence_score": "20",
     "development_stage": "planning_submitted",
-    "zombie_flag": "zombie_minimal"
+    "zombie_flag": "zombie_minimal",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00099"
   },
   {
     "id": "tumut-3",
@@ -13265,7 +14309,9 @@
     "data_confidence": "medium",
     "confidence_score": "36",
     "development_stage": "planning_submitted",
-    "first_seen": "2023"
+    "first_seen": "2023",
+    "connection_nsp": "ElectraNet",
+    "aemo_kci_id": "S00064"
   },
   {
     "id": "tyrone-bess",
@@ -13278,7 +14324,9 @@
     "current_developer": "European Energy Australia P/L",
     "data_confidence": "low",
     "confidence_score": "20",
-    "development_stage": "planning_submitted"
+    "development_stage": "planning_submitted",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00143"
   },
   {
     "id": "tyrone-solar",
@@ -13308,7 +14356,9 @@
     "data_confidence": "good",
     "confidence_score": "60",
     "notable": "155 MW / 298 MWh BESS in Queensland's Western Downs near Hopeland. Stage 1 of a project approved to reach 350 MW / 1,078 MWh. Developed by Akaysha Energy (BlackRock). Powin battery stacks with Eks Energy inverters. Portfolio financing alongside Brendale BESS was Australia's first multi-project battery financing.",
-    "first_seen": "2024-01-01"
+    "first_seen": "2024-01-01",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00087"
   },
   {
     "id": "ulinda-park-bess-expansion",
@@ -13350,7 +14400,9 @@
     "data_confidence": "low",
     "confidence_score": "23",
     "development_stage": "planning_submitted",
-    "first_seen": "2024"
+    "first_seen": "2024",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00314"
   },
   {
     "id": "upper-hunter-bess",
@@ -13363,7 +14415,9 @@
     "data_confidence": "low",
     "confidence_score": "15",
     "development_stage": "planning_submitted",
-    "zombie_flag": "zombie_minimal"
+    "zombie_flag": "zombie_minimal",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00177"
   },
   {
     "id": "upper-hunter-energy-park-wind",
@@ -13434,7 +14488,9 @@
     "data_confidence": "medium",
     "confidence_score": "28",
     "development_stage": "planning_submitted",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00318"
   },
   {
     "id": "vales-point-solar",
@@ -13475,7 +14531,9 @@
     "data_confidence": "low",
     "confidence_score": "15",
     "development_stage": "planning_submitted",
-    "zombie_flag": "zombie_minimal"
+    "zombie_flag": "zombie_minimal",
+    "connection_nsp": "ElectraNet",
+    "aemo_kci_id": "S00027"
   },
   {
     "id": "victorian-big-battery",
@@ -13494,6 +14552,8 @@
     "capex_year": 2020,
     "notable": "Largest battery in Victoria at commissioning. Experienced a notable Tesla Megapack fire during testing in July 2021.",
     "first_seen": "2020-11-01",
+    "connection_nsp": "AusNet Services",
+    "aemo_kci_id": "V00094",
     "has_eis_data": true
   },
   {
@@ -13522,7 +14582,9 @@
     "data_confidence": "medium",
     "confidence_score": "28",
     "development_stage": "early_stage",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00230"
   },
   {
     "id": "wagga-north-solar-farm",
@@ -13551,6 +14613,8 @@
     "confidence_score": "49",
     "notable": "300 MW solar farm in the Riverina, NSW. Has a 15-year PPA with Microsoft \u2014 one of the largest corporate renewable energy offtakes in Australia. Developed by FRV (Abdul Latif Jameel).",
     "first_seen": "2024-10-21",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00018",
     "has_eis_data": true
   },
   {
@@ -13564,7 +14628,9 @@
     "data_confidence": "low",
     "confidence_score": "15",
     "development_stage": "planning_submitted",
-    "zombie_flag": "zombie_minimal"
+    "zombie_flag": "zombie_minimal",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00202"
   },
   {
     "id": "wallaby-creek-wind-farm",
@@ -13590,7 +14656,9 @@
     "data_confidence": "low",
     "confidence_score": "23",
     "development_stage": "planning_submitted",
-    "first_seen": "2021"
+    "first_seen": "2021",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00004"
   },
   {
     "id": "wallerawang-9-bess",
@@ -13603,7 +14671,9 @@
     "current_developer": "Greenspot Wallerawang Pty Ltd as trustee for the Greenspot Wallerawang Unit Trust",
     "data_confidence": "low",
     "confidence_score": "20",
-    "development_stage": "planning_submitted"
+    "development_stage": "planning_submitted",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00035"
   },
   {
     "id": "wallgrove-grid-battery-project",
@@ -13621,6 +14691,8 @@
     "capex_year": 2020,
     "notable": "50 MW / 75 MWh \u2014 Australia's first transmission-connected battery owned by a network service provider (Transgrid), and the first grid-scale battery in NSW. A$61.9M with ARENA and NSW Government funding. One of the first BESS globally to demonstrate Tesla Virtual Machine Mode for synthetic inertia on a transmission network.",
     "first_seen": "2021-10-28",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00006",
     "has_eis_data": true
   },
   {
@@ -13637,6 +14709,8 @@
     "development_stage": "epbc_approved",
     "notable": "Stage 1 (252 MW / 42 turbines) construction complete 2025, entering commercial operations late 2025; Stage 2 (254 MW) targeted end-2026. Gazetted 2025-02-28 COD was highly optimistic. Cubico/Stanwell 50:50 JV.",
     "first_seen": "2020",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00145",
     "has_eis_data": true
   },
   {
@@ -13650,7 +14724,9 @@
     "current_developer": "RTB Renewables Pty Ltd",
     "data_confidence": "low",
     "confidence_score": "20",
-    "development_stage": "planning_submitted"
+    "development_stage": "planning_submitted",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00204"
   },
   {
     "id": "wandoan-solar-farm",
@@ -13663,7 +14739,9 @@
     "data_confidence": "low",
     "confidence_score": "15",
     "development_stage": "planning_submitted",
-    "zombie_flag": "zombie_minimal"
+    "zombie_flag": "zombie_minimal",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00007"
   },
   {
     "id": "wandoan-south-bess",
@@ -13726,6 +14804,8 @@
     "capex_year": 2022,
     "notable": "Operating at 350MW (41% capacity) due to catastrophic transformer failure Oct 2025. Replacement transformer delivery Q3 2026, full 850MW targeted end of 2026. AER total revenue determination $705.2M over 5yr (Jul 2024-Jun 2029): SIPS battery service >$600M (contestable, Akaysha) + ~$104M network augmentation (Transgrid). OEM Powin filed Chapter 11 bankruptcy June 2025.",
     "first_seen": "2022-06-01",
+    "connection_nsp": "Transgrid",
+    "aemo_kci_id": "N00249",
     "has_eis_data": true
   },
   {
@@ -13739,7 +14819,9 @@
     "data_confidence": "medium",
     "confidence_score": "31",
     "development_stage": "planning_submitted",
-    "first_seen": "2023"
+    "first_seen": "2023",
+    "connection_nsp": "VicGrid",
+    "aemo_kci_id": "V00163"
   },
   {
     "id": "warrego-bess-wbess-kci",
@@ -13752,7 +14834,9 @@
     "current_developer": "CI Warrego Pty Ltd as The Trustee for CI Warrego Trust",
     "data_confidence": "low",
     "confidence_score": "20",
-    "development_stage": "planning_submitted"
+    "development_stage": "planning_submitted",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00270"
   },
   {
     "id": "warrenheip-bess",
@@ -13765,7 +14849,9 @@
     "current_developer": "AE Solar 6 Pty Ltd as Trustee for AE Solar 6 Unit Trust",
     "data_confidence": "low",
     "confidence_score": "20",
-    "development_stage": "planning_submitted"
+    "development_stage": "planning_submitted",
+    "connection_nsp": "VicGrid",
+    "aemo_kci_id": "V00175"
   },
   {
     "id": "warwick-solar-farm",
@@ -13820,7 +14906,9 @@
     "data_confidence": "low",
     "confidence_score": "23",
     "development_stage": "planning_submitted",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "connection_nsp": "VicGrid",
+    "aemo_kci_id": "V00034"
   },
   {
     "id": "wattle-creek-energy-hub-battery-storage",
@@ -13834,7 +14922,9 @@
     "data_confidence": "medium",
     "confidence_score": "28",
     "development_stage": "planning_submitted",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N000249"
   },
   {
     "id": "wattle-creek-energy-hub-solar-bess",
@@ -13878,7 +14968,9 @@
     "data_confidence": "good",
     "confidence_score": "59",
     "notable": "128x Acciona AW-1500/77 (1.5MW). Zen Energy 10yr PPA for 70% of output. Was Australias largest at 2009 commissioning.",
-    "first_seen": "2009-06-30"
+    "first_seen": "2009-06-30",
+    "connection_nsp": "VicGrid",
+    "aemo_kci_id": "V00156"
   },
   {
     "id": "waubra-bess-kci",
@@ -13905,6 +14997,8 @@
     "confidence_score": "15",
     "development_stage": "planning_submitted",
     "zombie_flag": "zombie_minimal",
+    "connection_nsp": "TasNetworks",
+    "aemo_kci_id": "T00034",
     "has_scheme_contract": true
   },
   {
@@ -13919,7 +15013,9 @@
     "data_confidence": "medium",
     "confidence_score": "28",
     "development_stage": "planning_submitted",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00216"
   },
   {
     "id": "wellington-north-solar-farm",
@@ -13933,6 +15029,8 @@
     "confidence_score": "15",
     "development_stage": "planning_submitted",
     "zombie_flag": "zombie_minimal",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00157",
     "has_eis_data": true
   },
   {
@@ -14037,6 +15135,8 @@
     "capex_year": 2022,
     "notable": "510 MW / 1,020 MWh BESS at Chinchilla, QLD. CleanCo Queensland flagship \u2014 one of the largest batteries in the Southern Hemisphere.",
     "first_seen": "2026-03-12",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00027",
     "has_eis_data": true
   },
   {
@@ -14066,7 +15166,9 @@
     "confidence_score": "23",
     "development_stage": "planning_submitted",
     "first_seen": "2010",
-    "zombie_flag": "zombie_stale"
+    "zombie_flag": "zombie_stale",
+    "connection_nsp": "TasNetworks",
+    "aemo_kci_id": "T00011"
   },
   {
     "id": "western-sydney-pumped-hydro-project",
@@ -14080,7 +15182,9 @@
     "data_confidence": "medium",
     "confidence_score": "28",
     "development_stage": "planning_submitted",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00042"
   },
   {
     "id": "whaleback-ridge-wind-farm-kci",
@@ -14093,7 +15197,9 @@
     "data_confidence": "low",
     "confidence_score": "15",
     "development_stage": "planning_submitted",
-    "zombie_flag": "zombie_minimal"
+    "zombie_flag": "zombie_minimal",
+    "connection_nsp": "TasNetworks",
+    "aemo_kci_id": "T00023"
   },
   {
     "id": "white-rock-wind-farm-stage-1",
@@ -14109,7 +15215,9 @@
     "data_confidence": "good",
     "confidence_score": "65",
     "notable": "70x Goldwind GW121/2.5MW PMDD. CECEP 75%, Goldwind 25%. Goldwind EPC, Fulton Hogan BOP.",
-    "first_seen": "2017-07-07"
+    "first_seen": "2017-07-07",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00011"
   },
   {
     "id": "white-rock-wind-farm-stage-2",
@@ -14122,7 +15230,9 @@
     "data_confidence": "low",
     "confidence_score": "23",
     "development_stage": "planning_submitted",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00011"
   },
   {
     "id": "whitsunday-solar-farm",
@@ -14149,7 +15259,9 @@
     "data_confidence": "low",
     "confidence_score": "15",
     "development_stage": "planning_submitted",
-    "zombie_flag": "zombie_minimal"
+    "zombie_flag": "zombie_minimal",
+    "connection_nsp": "ElectraNet",
+    "aemo_kci_id": "S00029"
   },
   {
     "id": "whyalla-bess-kci",
@@ -14192,6 +15304,8 @@
     "confidence_score": "28",
     "development_stage": "planning_submitted",
     "first_seen": "2026-03-12",
+    "connection_nsp": "VicGrid",
+    "aemo_kci_id": "V00050",
     "has_scheme_contract": true
   },
   {
@@ -14205,7 +15319,9 @@
     "current_developer": "X-Elio Willavale Park Trust",
     "data_confidence": "low",
     "confidence_score": "20",
-    "development_stage": "planning_submitted"
+    "development_stage": "planning_submitted",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00126"
   },
   {
     "id": "willavale-solar-farm",
@@ -14247,6 +15363,8 @@
     "development_stage": "early_stage",
     "notable": "CIS T4 award Oct 2025 (108 MW). Expansion of operating Willogoleche 1 (119 MW commissioned 2019). Construction late 2026, commissioning 2028. Same JV structure as Willogoleche 1. Created 2026-07-18 to close v3.22.1 data gap.",
     "first_seen": "2026-07-18",
+    "connection_nsp": "ElectraNet",
+    "aemo_kci_id": "S00086",
     "has_scheme_contract": true
   },
   {
@@ -14276,7 +15394,9 @@
     "current_developer": "BayWA r.e Projects Australia Pty Ltd",
     "data_confidence": "low",
     "confidence_score": "20",
-    "development_stage": "planning_submitted"
+    "development_stage": "planning_submitted",
+    "connection_nsp": "VicGrid",
+    "aemo_kci_id": "V00059"
   },
   {
     "id": "wimmera-plains-energy-facility",
@@ -14289,7 +15409,9 @@
     "data_confidence": "low",
     "confidence_score": "23",
     "development_stage": "planning_submitted",
-    "first_seen": "2024"
+    "first_seen": "2024",
+    "connection_nsp": "VicGrid",
+    "aemo_kci_id": "V00201"
   },
   {
     "id": "wimmera-plains-energy-facility-stage-2-kci",
@@ -14324,7 +15446,9 @@
     "state": "VIC",
     "current_developer": "AMPYR Energy",
     "data_confidence": "low",
-    "development_stage": "planning_submitted"
+    "development_stage": "planning_submitted",
+    "connection_nsp": "VicGrid",
+    "aemo_kci_id": "V00196"
   },
   {
     "id": "winterbourne-wind-farm",
@@ -14351,7 +15475,9 @@
     "current_developer": "AE BESS 10 as Trustee for AE BESS 10 Unit Trust",
     "data_confidence": "low",
     "confidence_score": "20",
-    "development_stage": "planning_submitted"
+    "development_stage": "planning_submitted",
+    "connection_nsp": "VicGrid",
+    "aemo_kci_id": "V00159"
   },
   {
     "id": "winton-energy-reserve-1",
@@ -14364,7 +15490,9 @@
     "current_developer": "Lochard Energy",
     "data_confidence": "low",
     "confidence_score": "20",
-    "development_stage": "planning_submitted"
+    "development_stage": "planning_submitted",
+    "connection_nsp": "VicGrid",
+    "aemo_kci_id": "V00145"
   },
   {
     "id": "winton-north-solar-farm",
@@ -14388,7 +15516,9 @@
     "state": "VIC",
     "current_developer": "Winton Renewable Energy Stability and Storage Terminal Pty Ltd",
     "data_confidence": "low",
-    "development_stage": "planning_submitted"
+    "development_stage": "planning_submitted",
+    "connection_nsp": "VicGrid",
+    "aemo_kci_id": "V00197"
   },
   {
     "id": "winton-solar-farm",
@@ -14430,7 +15560,9 @@
     "current_developer": "IBERDROLA AUSTRALIA DEVELOPMENT PTY LIMITED",
     "data_confidence": "low",
     "confidence_score": "20",
-    "development_stage": "planning_submitted"
+    "development_stage": "planning_submitted",
+    "connection_nsp": "VicGrid",
+    "aemo_kci_id": "V00151"
   },
   {
     "id": "wodonga-solar-farm",
@@ -14456,7 +15588,9 @@
     "data_confidence": "low",
     "confidence_score": "15",
     "development_stage": "planning_submitted",
-    "zombie_flag": "zombie_minimal"
+    "zombie_flag": "zombie_minimal",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00283"
   },
   {
     "id": "wollar-solar-farm",
@@ -14484,7 +15618,9 @@
     "data_confidence": "medium",
     "confidence_score": "28",
     "development_stage": "planning_submitted",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00301"
   },
   {
     "id": "wooderson-solar-farm",
@@ -14497,7 +15633,9 @@
     "data_confidence": "low",
     "confidence_score": "23",
     "development_stage": "planning_submitted",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00109"
   },
   {
     "id": "woodland-bess",
@@ -14538,7 +15676,9 @@
     "data_confidence": "medium",
     "confidence_score": "28",
     "development_stage": "planning_submitted",
-    "first_seen": "2023"
+    "first_seen": "2023",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00112"
   },
   {
     "id": "woodstock-renewable-energy-hub-bess",
@@ -14551,7 +15691,9 @@
     "current_developer": "Private Energy Partners",
     "data_confidence": "low",
     "confidence_score": "20",
-    "development_stage": "planning_submitted"
+    "development_stage": "planning_submitted",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00130"
   },
   {
     "id": "woodstock-renewable-energy-hub-solar",
@@ -14608,6 +15750,8 @@
     "confidence_score": "61",
     "notable": "Hithium 5 MWh containers (128 units). INTEC EPC. CIS Tender 1 winner.",
     "first_seen": "2024-10-01",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00193",
     "has_eis_data": true,
     "has_scheme_contract": true
   },
@@ -14666,7 +15810,9 @@
     "data_confidence": "medium",
     "confidence_score": "28",
     "development_stage": "planning_submitted",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00276"
   },
   {
     "id": "wooreen-energy-storage-system",
@@ -14684,6 +15830,8 @@
     "capex_year": 2024,
     "notable": "Wartsila Quantum High Energy. A$700M. CIS Round 1 winner. Replaces Yallourn coal (retires mid-2028).",
     "first_seen": "2023-02-01",
+    "connection_nsp": "VicGrid",
+    "aemo_kci_id": "V00122",
     "has_eis_data": true,
     "has_scheme_contract": true
   },
@@ -14726,7 +15874,9 @@
     "data_confidence": "medium",
     "confidence_score": "28",
     "development_stage": "planning_submitted",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00110"
   },
   {
     "id": "wyaga-solar-farm-and-bess",
@@ -14766,7 +15916,9 @@
     "data_confidence": "low",
     "confidence_score": "15",
     "development_stage": "planning_submitted",
-    "zombie_flag": "zombie_minimal"
+    "zombie_flag": "zombie_minimal",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00060"
   },
   {
     "id": "yabulu-bess",
@@ -14780,7 +15932,9 @@
     "data_confidence": "medium",
     "confidence_score": "36",
     "development_stage": "planning_submitted",
-    "first_seen": "2022"
+    "first_seen": "2022",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00003"
   },
   {
     "id": "yabulu-solar-farm",
@@ -14806,7 +15960,9 @@
     "current_developer": "Yabulu South BESS Pty Ltd",
     "data_confidence": "low",
     "confidence_score": "20",
-    "development_stage": "planning_submitted"
+    "development_stage": "planning_submitted",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00205"
   },
   {
     "id": "yadnarie-solar-farm",
@@ -14819,7 +15975,9 @@
     "data_confidence": "low",
     "confidence_score": "15",
     "development_stage": "planning_submitted",
-    "zombie_flag": "zombie_minimal"
+    "zombie_flag": "zombie_minimal",
+    "connection_nsp": "ElectraNet",
+    "aemo_kci_id": "S00057"
   },
   {
     "id": "yambuk",
@@ -14847,7 +16005,9 @@
     "data_confidence": "medium",
     "confidence_score": "28",
     "development_stage": "early_stage",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00139"
   },
   {
     "id": "yanco-delta",
@@ -14862,7 +16022,9 @@
     "confidence_score": "75",
     "development_stage": "planning_submitted",
     "notable": "One of the largest solar projects in Australia at 1GW. Key asset in Origin Energy's 4GW renewables target for 2030. Full allocation in SW REZ.",
-    "first_seen": "2020-06-01"
+    "first_seen": "2020-06-01",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00099"
   },
   {
     "id": "yanco-delta-wind-farm",
@@ -14878,6 +16040,8 @@
     "development_stage": "planning_submitted",
     "notable": "1.5 GW wind (208 turbines, 270m tip) + 800 MWh BESS. 33,000 ha site 10 km NW of Jerilderie in SW REZ. ~$4B project. 1,460 MW transmission access secured. FID target mid-FY2027.",
     "first_seen": "2022",
+    "connection_nsp": "TransGrid",
+    "aemo_kci_id": "N00281",
     "has_scheme_contract": true
   },
   {
@@ -14945,7 +16109,9 @@
     "current_developer": "Elgin Energy",
     "data_confidence": "low",
     "confidence_score": "20",
-    "development_stage": "planning_submitted"
+    "development_stage": "planning_submitted",
+    "connection_nsp": "Powerlink",
+    "aemo_kci_id": "Q00174"
   },
   {
     "id": "yendon-wind-farm",
@@ -14973,7 +16139,9 @@
     "data_confidence": "low",
     "confidence_score": "15",
     "development_stage": "planning_submitted",
-    "zombie_flag": "zombie_minimal"
+    "zombie_flag": "zombie_minimal",
+    "connection_nsp": "ElectraNet",
+    "aemo_kci_id": "S00071"
   },
   {
     "id": "yumali-wind-farm",

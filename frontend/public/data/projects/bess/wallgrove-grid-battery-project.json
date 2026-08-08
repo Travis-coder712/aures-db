@@ -10,6 +10,7 @@
   "cod_current": "2021-10-28",
   "cod_original": "2021-10-28",
   "connection_status": "operating",
+  "connection_nsp": "TransGrid",
   "grid_forming": true,
   "has_sips": false,
   "has_syncon": false,
@@ -27,6 +28,7 @@
   "capex_year": 2020,
   "first_seen": "2021-10-28",
   "capex_source_url": "https://arena.gov.au/projects/transgrid-wallgrove-battery/",
+  "aemo_kci_id": "N00006",
   "coordinates": {
     "lat": -33.817476,
     "lng": 150.827276

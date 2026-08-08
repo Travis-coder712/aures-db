@@ -9,6 +9,7 @@
   "cod_current": "2011-04-04",
   "cod_original": "2011-04-04",
   "connection_status": "operating",
+  "connection_nsp": "TransGrid",
   "grid_forming": false,
   "has_sips": false,
   "has_syncon": false,
@@ -22,6 +23,7 @@
   "aemo_gen_info_id": "1082",
   "confidence_score": "49",
   "first_seen": "2011-04-04",
+  "aemo_kci_id": "N00045",
   "coordinates": {
     "lat": -34.676361,
     "lng": 149.66443

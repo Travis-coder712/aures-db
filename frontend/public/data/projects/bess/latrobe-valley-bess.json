@@ -12,6 +12,7 @@
   "cod_current": "2025-04-08",
   "cod_original": "2025-04-08",
   "connection_status": "operating",
+  "connection_nsp": "VicGrid",
   "grid_forming": false,
   "has_sips": false,
   "has_syncon": false,
@@ -29,6 +30,7 @@
   "capex_year": 2023,
   "first_seen": "2024-01-01",
   "capex_source_url": "https://tiltrenewables.com/official-opening-of-tilt-renewables-latrobe-valley-battery-energy-storage-system/",
+  "aemo_kci_id": "V00040",
   "coordinates": {
     "lat": -38.258183,
     "lng": 146.418614

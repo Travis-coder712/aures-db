@@ -774,6 +774,17 @@ export async function fetchEISCoverage(): Promise<EISCoverageData | null> {
   } catch { return null }
 }
 
+let eisKciStatsCache: import('./types').EISKciStats | null = null
+export async function fetchEISKciStats(): Promise<import('./types').EISKciStats | null> {
+  if (eisKciStatsCache) return eisKciStatsCache
+  try {
+    const resp = await fetch(`${BASE}/analytics/eis-kci-stats.json`)
+    if (!resp.ok) return null
+    eisKciStatsCache = (await resp.json()) as import('./types').EISKciStats
+    return eisKciStatsCache
+  } catch { return null }
+}
+
 export interface EISPdfOpportunity {
   id: string; name: string; technology: string; state: string; capacity_mw: number
   data_gaps: string[]; eis_url: string | null; eis_year: number | null; priority: 'high' | 'medium' | 'low'

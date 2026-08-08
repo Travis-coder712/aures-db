@@ -7,6 +7,7 @@
   "state": "TAS",
   "current_developer": "ARK Energy Corporation Pty Ltd",
   "connection_status": "proposed",
+  "connection_nsp": "TasNetworks",
   "grid_forming": false,
   "has_sips": false,
   "has_syncon": false,
@@ -20,6 +21,7 @@
   "development_stage": "planning_submitted",
   "first_seen": "2010",
   "zombie_flag": "zombie_stale",
+  "aemo_kci_id": "T00011",
   "timeline": [
     {
       "date": "2010",

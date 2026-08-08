@@ -2,17 +2,14 @@
 -- AURES Database Schema
 -- SQLite 3.x
 -- ============================================================
--- Regenerated 2026-07-26 from live database/aures.db as an honest
--- snapshot of the deployed schema. Historical drift left the previous
--- schema.sql out-of-sync with live in ~14 tables; this file is now
--- an accurate baseline.
+-- Regenerated 2026-08-08 from live database/aures.db.
+-- Adds aemo_kci_records table (v3.29.0) + projects.aemo_kci_id column.
 --
--- Constraint policy is aspirational, not enforced everywhere: the
--- projects table lost CHECKs and most NOT NULL flags in a historical
--- silent recreation and is not restoring them here without a
--- separate data-quality migration. New tables should carry
--- CHECKs / UNIQUE where they make sense (see aemo_generation_info,
--- source_references, timeline_events for recent examples).
+-- Constraint policy is aspirational, not enforced everywhere:
+-- the projects table lost CHECKs and most NOT NULL flags in a
+-- historical silent recreation. New tables carry CHECKs / UNIQUE
+-- where they make sense (see aemo_generation_info,
+-- source_references, timeline_events, aemo_kci_records).
 -- ============================================================
 
 PRAGMA journal_mode = WAL;
@@ -25,7 +22,7 @@ PRAGMA foreign_keys = ON;
 CREATE TABLE IF NOT EXISTS "projects" (
     id TEXT PRIMARY KEY,
     name TEXT, technology TEXT, status TEXT, capacity_mw REAL, storage_mwh REAL, state TEXT, rez TEXT, lga TEXT, latitude REAL, longitude REAL, current_developer TEXT, current_operator TEXT, cod_current TEXT, cod_original TEXT, connection_status TEXT, connection_nsp TEXT, grid_forming TEXT, has_sips TEXT, has_syncon TEXT, has_statcom TEXT, has_harmonic_filter TEXT, performance_score REAL, notable TEXT, data_confidence TEXT, last_updated TEXT, last_verified TEXT, aemo_gen_info_id TEXT, created_at TEXT, updated_at TEXT, confidence_score TEXT, development_stage TEXT
-, capex_aud_m REAL, capex_source TEXT, capex_year INTEGER, first_seen TEXT, zombie_flag TEXT, capex_source_url TEXT, rez_access_status TEXT, rez_access_mw     REAL, rez_access_date   TEXT, rez_access_scheme TEXT);
+, capex_aud_m REAL, capex_source TEXT, capex_year INTEGER, first_seen TEXT, zombie_flag TEXT, capex_source_url TEXT, rez_access_status TEXT, rez_access_mw     REAL, rez_access_date   TEXT, rez_access_scheme TEXT, aemo_kci_id TEXT);
 CREATE INDEX IF NOT EXISTS idx_projects_aemo_id ON projects(aemo_gen_info_id);
 CREATE INDEX IF NOT EXISTS idx_projects_developer ON projects(current_developer);
 CREATE INDEX IF NOT EXISTS idx_projects_rez ON projects(rez);
@@ -335,6 +332,54 @@ CREATE UNIQUE INDEX IF NOT EXISTS idx_aemo_gi_natural_key
 CREATE INDEX IF NOT EXISTS idx_aemo_project ON aemo_generation_info(project_id);
 CREATE INDEX IF NOT EXISTS idx_aemo_station ON aemo_generation_info(station_name);
 CREATE INDEX IF NOT EXISTS idx_aemo_status ON aemo_generation_info(status);
+
+-- ============================================================
+-- AEMO — Key Connection Information (KCI)
+-- ============================================================
+
+CREATE TABLE IF NOT EXISTS aemo_kci_records (
+    id                          INTEGER PRIMARY KEY AUTOINCREMENT,
+    snapshot                    TEXT NOT NULL,               -- e.g. '2026-Q2'
+    aemo_kci_id                 TEXT,                        -- N00001 etc — the KCI join key
+    project_id                  TEXT REFERENCES projects(id),-- matched via Site Name — nullable
+
+    tnsp_name                   TEXT,                        -- normalised: TransGrid / Powerlink / VicGrid / ElectraNet / TasNetworks
+    application_id              TEXT,                        -- TNSP application ID
+    application_status          TEXT,                        -- Active / Complete
+    application_type            TEXT,                        -- 'New application to connect (NER 5.3)' etc
+
+    organisation_name           TEXT,
+    abn                         TEXT,
+    site_name                   TEXT,
+    site_location_description   TEXT,
+    region                      TEXT,                        -- NSW1 / QLD1 / VIC1 / SA1 / TAS1
+
+    max_gen_mw_lower            REAL,
+    max_gen_mw_upper            REAL,
+    forecast_cod_earliest       TEXT,
+    forecast_cod_latest         TEXT,
+
+    energy_conv_tech            TEXT,                        -- normalised
+    energy_conv_subtype         TEXT,
+    n_units_lower               INTEGER,
+    n_units_upper               INTEGER,
+    electricity_gen_tech        TEXT,                        -- Asynchronous / Synchronous
+    per_unit_mw_lower           REAL,
+    per_unit_mw_upper           REAL,
+    nameplate_mw_lower          REAL,
+    nameplate_mw_upper          REAL,
+
+    kci_notification_date       TEXT,
+    kci_validation_date         TEXT,
+    compilation_timestamp       TEXT,
+
+    created_at                  TEXT NOT NULL DEFAULT (datetime('now'))
+);
+CREATE INDEX IF NOT EXISTS idx_aemo_kci_kci_id   ON aemo_kci_records(aemo_kci_id);
+CREATE UNIQUE INDEX IF NOT EXISTS idx_aemo_kci_natural_key
+  ON aemo_kci_records(snapshot, COALESCE(aemo_kci_id,''), COALESCE(application_id,''));
+CREATE INDEX IF NOT EXISTS idx_aemo_kci_project  ON aemo_kci_records(project_id);
+CREATE INDEX IF NOT EXISTS idx_aemo_kci_site     ON aemo_kci_records(site_name);
 
 -- ============================================================
 -- AEMO — MMSDM & NEMWEB dispatch

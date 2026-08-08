@@ -11,6 +11,7 @@
   "cod_current": "2026-07-31",
   "cod_original": "2026-07-31",
   "connection_status": "committed",
+  "connection_nsp": "VicGrid",
   "grid_forming": true,
   "has_sips": false,
   "has_syncon": false,
@@ -24,6 +25,7 @@
   "confidence_score": "67",
   "development_stage": "epbc_approved",
   "first_seen": "2008",
+  "aemo_kci_id": "V00202",
   "coordinates": {
     "lat": -38.08,
     "lng": 142.78

@@ -11,6 +11,7 @@
   "cod_current": "2026-06-01",
   "cod_original": "2026-02-20",
   "connection_status": "committed",
+  "connection_nsp": "TransGrid",
   "grid_forming": true,
   "has_sips": false,
   "has_syncon": false,
@@ -27,6 +28,7 @@
   "capex_year": 2023,
   "first_seen": "2023-03-01",
   "capex_source_url": "https://ir.fluenceenergy.com/news-releases/news-release-details/agl-selects-fluence-deliver-500-mw-liddell-battery-project",
+  "aemo_kci_id": "N00167",
   "coordinates": {
     "lat": -32.3715,
     "lng": 150.978

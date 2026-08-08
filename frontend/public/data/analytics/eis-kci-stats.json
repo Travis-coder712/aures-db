@@ -1,0 +1,128 @@
+{
+  "available": true,
+  "latest_snapshot": "2026-Q2",
+  "total_kci_records": 1205,
+  "distinct_kci_ids": 1005,
+  "aures_projects_matched": 591,
+  "aures_projects_with_kci_id": 591,
+  "aures_projects_with_nsp": 593,
+  "aures_total_projects": 1098,
+  "tnsp_split": [
+    {
+      "tnsp": "Powerlink",
+      "kci_records": 402
+    },
+    {
+      "tnsp": "TransGrid",
+      "kci_records": 369
+    },
+    {
+      "tnsp": "VicGrid",
+      "kci_records": 222
+    },
+    {
+      "tnsp": "ElectraNet",
+      "kci_records": 150
+    },
+    {
+      "tnsp": "TasNetworks",
+      "kci_records": 61
+    }
+  ],
+  "tech_split": [
+    {
+      "tech": "Storage",
+      "kci_records": 580
+    },
+    {
+      "tech": "Wind",
+      "kci_records": 191
+    },
+    {
+      "tech": "Solar PV",
+      "kci_records": 153
+    },
+    {
+      "tech": "Other",
+      "kci_records": 80
+    },
+    {
+      "tech": "Gas",
+      "kci_records": 21
+    },
+    {
+      "tech": "Solar + Storage",
+      "kci_records": 17
+    },
+    {
+      "tech": "Hydro",
+      "kci_records": 17
+    },
+    {
+      "tech": "",
+      "kci_records": 10
+    },
+    {
+      "tech": "Wind + Storage",
+      "kci_records": 3
+    },
+    {
+      "tech": "Steam Turbine",
+      "kci_records": 1
+    },
+    {
+      "tech": "Solar Thermal",
+      "kci_records": 1
+    },
+    {
+      "tech": "Reciprocating Engine",
+      "kci_records": 1
+    },
+    {
+      "tech": "Inverter Based Resource",
+      "kci_records": 1
+    },
+    {
+      "tech": "Hydrogen",
+      "kci_records": 1
+    },
+    {
+      "tech": "Grid Forming Inverter",
+      "kci_records": 1
+    }
+  ],
+  "nsp_populated_by_projects": [
+    {
+      "nsp": "TransGrid",
+      "projects": 206
+    },
+    {
+      "nsp": "Powerlink",
+      "projects": 192
+    },
+    {
+      "nsp": "VicGrid",
+      "projects": 110
+    },
+    {
+      "nsp": "ElectraNet",
+      "projects": 58
+    },
+    {
+      "nsp": "TasNetworks",
+      "projects": 23
+    },
+    {
+      "nsp": "AusNet Services",
+      "projects": 2
+    },
+    {
+      "nsp": "Western Power",
+      "projects": 1
+    },
+    {
+      "nsp": "Transgrid",
+      "projects": 1
+    }
+  ]
+}

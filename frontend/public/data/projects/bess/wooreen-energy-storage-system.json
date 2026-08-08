@@ -11,6 +11,7 @@
   "cod_current": "2027-12-31",
   "cod_original": "2027-12-31",
   "connection_status": "committed",
+  "connection_nsp": "VicGrid",
   "grid_forming": false,
   "has_sips": false,
   "has_syncon": false,
@@ -27,6 +28,7 @@
   "capex_year": 2024,
   "first_seen": "2023-02-01",
   "capex_source_url": "https://www.wartsila.com/media/news/28-02-2025-wartsila-will-provide-a-350-mw-1474-mwh-energy-storage-system-for-one-of-australia-s-largest-energy-providers-3555089",
+  "aemo_kci_id": "V00122",
   "coordinates": {
     "lat": -38.28,
     "lng": 146.38

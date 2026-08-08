@@ -8,6 +8,7 @@
   "state": "VIC",
   "current_developer": "AE BESS 10 as Trustee for AE BESS 10 Unit Trust",
   "connection_status": "proposed",
+  "connection_nsp": "VicGrid",
   "grid_forming": false,
   "has_sips": false,
   "has_syncon": false,
@@ -19,6 +20,7 @@
   "aemo_gen_info_id": "2781",
   "confidence_score": "20",
   "development_stage": "planning_submitted",
+  "aemo_kci_id": "V00159",
   "coordinates": {
     "lat": -36.505,
     "lng": 146.095

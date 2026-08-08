@@ -10,6 +10,7 @@
   "cod_current": "2026-11-20",
   "cod_original": "2026-11-20",
   "connection_status": "committed",
+  "connection_nsp": "ElectraNet",
   "grid_forming": false,
   "has_sips": false,
   "has_syncon": false,
@@ -23,6 +24,7 @@
   "confidence_score": "67",
   "development_stage": "epbc_submitted",
   "first_seen": "2023",
+  "aemo_kci_id": "S00022",
   "coordinates": {
     "lat": -34.16,
     "lng": 139.45

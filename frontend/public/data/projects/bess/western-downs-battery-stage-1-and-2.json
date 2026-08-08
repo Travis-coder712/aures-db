@@ -10,6 +10,7 @@
   "cod_current": "2026-03-31",
   "cod_original": "2025-12-19",
   "connection_status": "commissioning",
+  "connection_nsp": "Powerlink",
   "grid_forming": true,
   "has_sips": false,
   "has_syncon": false,
@@ -26,6 +27,7 @@
   "capex_year": 2022,
   "first_seen": "2026-03-12",
   "capex_source_url": "https://neoen.com/en/news/2025/neoen-delivers-western-downs-battery-stage-2-and-launches-stage-3-in-queensland-australia/",
+  "aemo_kci_id": "Q00027",
   "coordinates": {
     "lat": -26.75,
     "lng": 150.63

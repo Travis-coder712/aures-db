@@ -8,6 +8,7 @@
   "rez": "nsw-south-west",
   "current_developer": "Pottinger Renewables P/L",
   "connection_status": "proposed",
+  "connection_nsp": "TransGrid",
   "grid_forming": false,
   "has_sips": false,
   "has_syncon": false,
@@ -20,6 +21,7 @@
   "confidence_score": "31",
   "development_stage": "planning_submitted",
   "first_seen": "2024",
+  "aemo_kci_id": "N00158",
   "timeline": [
     {
       "date": "2024",

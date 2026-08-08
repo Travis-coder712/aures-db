@@ -11,6 +11,7 @@
   "cod_current": "2027-10-31",
   "cod_original": "2027-10-31",
   "connection_status": "anticipated",
+  "connection_nsp": "TransGrid",
   "grid_forming": true,
   "has_sips": false,
   "has_syncon": false,
@@ -28,6 +29,7 @@
   "capex_year": 2025,
   "first_seen": "2023",
   "capex_source_url": "https://ir.fluenceenergy.com/news-releases/news-release-details/fluence-and-agl-sign-deal-deliver-500-mw-2000-mwh-tomago-battery",
+  "aemo_kci_id": "N00109",
   "coordinates": {
     "lat": -32.865,
     "lng": 151.612

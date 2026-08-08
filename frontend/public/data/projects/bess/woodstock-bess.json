@@ -8,6 +8,7 @@
   "state": "QLD",
   "current_developer": "AGL Energy Limited",
   "connection_status": "proposed",
+  "connection_nsp": "Powerlink",
   "grid_forming": false,
   "has_sips": false,
   "has_syncon": false,
@@ -20,6 +21,7 @@
   "confidence_score": "28",
   "development_stage": "planning_submitted",
   "first_seen": "2023",
+  "aemo_kci_id": "Q00112",
   "timeline": [
     {
       "date": "2023",

@@ -11,6 +11,7 @@
   "cod_current": "2025-03-27",
   "cod_original": "2025-03-27",
   "connection_status": "operating",
+  "connection_nsp": "ElectraNet",
   "grid_forming": true,
   "has_sips": false,
   "has_syncon": false,
@@ -28,6 +29,7 @@
   "capex_year": 2023,
   "first_seen": "2023-06-01",
   "capex_source_url": "https://nhoagroup.com/documents/nhoa-energy-and-elecnor-to-deliver-a-flagship-200mw-400mwh-battery-storage-project-in-south-australia-to-neoen/",
+  "aemo_kci_id": "S00032",
   "coordinates": {
     "lat": -33.848475,
     "lng": 138.403204

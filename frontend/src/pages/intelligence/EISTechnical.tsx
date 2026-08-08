@@ -5,9 +5,9 @@ import {
   ResponsiveContainer, ScatterChart, Scatter, Cell, ReferenceLine,
   PieChart, Pie,
 } from 'recharts'
-import { fetchEISAnalytics, fetchEISComparison, fetchEISCoverage, fetchEISPdfOpportunities } from '../../lib/dataService'
+import { fetchEISAnalytics, fetchEISComparison, fetchEISCoverage, fetchEISPdfOpportunities, fetchEISKciStats } from '../../lib/dataService'
 import type { EISPdfOpportunitiesData, EISPdfOpportunity } from '../../lib/dataService'
-import type { EISAnalyticsData, EISWindProject, EISBESSProject, EISSolarProject, EISComparisonData, EISComparisonProject, EISCoverageData } from '../../lib/types'
+import type { EISAnalyticsData, EISWindProject, EISBESSProject, EISSolarProject, EISComparisonData, EISComparisonProject, EISCoverageData, EISKciStats } from '../../lib/types'
 import ScrollableTable from '../../components/common/ScrollableTable'
 import { FINANCIAL_CLOSE_PROJECTS } from '../../data/financial-close-data'
 import DataProvenance from '../../components/common/DataProvenance'
@@ -184,6 +184,7 @@ export default function EISTechnical() {
   const [comparison, setComparison] = useState<EISComparisonData | null>(null)
   const [coverage, setCoverage] = useState<EISCoverageData | null>(null)
   const [pdfOpps, setPdfOpps] = useState<EISPdfOpportunitiesData | null>(null)
+  const [kciStats, setKciStats] = useState<EISKciStats | null>(null)
   const [loading, setLoading] = useState(true)
   const [tab, setTab] = useState<TabId>('wind')
   const [stateFilter, setStateFilter] = useState<string | null>(null)
@@ -193,8 +194,8 @@ export default function EISTechnical() {
   const [compSort, setCompSort] = useState<{ col: keyof EISComparisonProject; dir: 'asc' | 'desc' }>({ col: 'cf_delta_pct', dir: 'asc' })
 
   useEffect(() => {
-    Promise.all([fetchEISAnalytics(), fetchEISComparison(), fetchEISCoverage(), fetchEISPdfOpportunities()])
-      .then(([d, comp, cov, pdf]) => { setData(d); setComparison(comp); setCoverage(cov); setPdfOpps(pdf); setLoading(false) })
+    Promise.all([fetchEISAnalytics(), fetchEISComparison(), fetchEISCoverage(), fetchEISPdfOpportunities(), fetchEISKciStats()])
+      .then(([d, comp, cov, pdf, kci]) => { setData(d); setComparison(comp); setCoverage(cov); setPdfOpps(pdf); setKciStats(kci); setLoading(false) })
   }, [])
 
   // Available states from data
@@ -1558,7 +1559,7 @@ export default function EISTechnical() {
       {/* COVERAGE TAB */}
       {/* ============================================================ */}
       {tab === 'coverage' && (
-        <CoverageTab data={data} coverage={coverage} pdfOpps={pdfOpps} />
+        <CoverageTab data={data} coverage={coverage} pdfOpps={pdfOpps} kciStats={kciStats} />
       )}
 
       {/* Financial Close Tab */}
@@ -1591,7 +1592,7 @@ type ExtractedProject = {
 
 type ExtractedSortCol = 'name' | 'technology' | 'state' | 'status' | 'capacity_mw' | 'document_year'
 
-function CoverageTab({ data, coverage, pdfOpps }: { data: EISAnalyticsData; coverage: EISCoverageData | null; pdfOpps: EISPdfOpportunitiesData | null }) {
+function CoverageTab({ data, coverage, pdfOpps, kciStats }: { data: EISAnalyticsData; coverage: EISCoverageData | null; pdfOpps: EISPdfOpportunitiesData | null; kciStats: EISKciStats | null }) {
   const [sortCol, setSortCol] = useState<ExtractedSortCol>('name')
   const [sortDir, setSortDir] = useState<'asc' | 'desc'>('asc')
 
@@ -1732,6 +1733,62 @@ function CoverageTab({ data, coverage, pdfOpps }: { data: EISAnalyticsData; cove
       </div>
 
       {/* Not yet extracted */}
+      {kciStats?.available && (
+        <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl p-4">
+          <h3 className="text-sm font-semibold text-[var(--color-text)] mb-1 flex items-center gap-2">
+            <span className="w-2 h-2 rounded-full bg-[#22c55e]" />
+            AEMO KCI Ingest — {kciStats.latest_snapshot ?? '—'}
+          </h3>
+          <p className="text-[10px] text-[var(--color-text-muted)] mb-3">
+            Key Connection Information dataset from AEMO. Per-project connection application registry — Applicant, TNSP, tech, forecast COD, AEMO KCI ID. Manual quarterly refresh: download the compiled NEM workbook from AEMO&apos;s Generation Information page into <code>data/gi_snapshots/kci_YYYYQn/</code> and run <code>python3 pipeline/importers/import_aemo_kci.py</code>.
+          </p>
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 mb-3">
+            <div className="bg-[var(--color-bg-elevated)] rounded-lg p-3">
+              <div className="text-[10px] uppercase tracking-wider text-[var(--color-text-muted)]">KCI Records</div>
+              <div className="text-xl font-bold text-[var(--color-text)]">{kciStats.total_kci_records?.toLocaleString() ?? '—'}</div>
+              <div className="text-[10px] text-[var(--color-text-muted)]">{kciStats.distinct_kci_ids ?? '—'} distinct IDs</div>
+            </div>
+            <div className="bg-[var(--color-bg-elevated)] rounded-lg p-3">
+              <div className="text-[10px] uppercase tracking-wider text-[var(--color-text-muted)]">AURES matched</div>
+              <div className="text-xl font-bold text-[#22c55e]">{kciStats.aures_projects_matched ?? '—'}</div>
+              <div className="text-[10px] text-[var(--color-text-muted)]">of {kciStats.aures_total_projects ?? '—'} projects</div>
+            </div>
+            <div className="bg-[var(--color-bg-elevated)] rounded-lg p-3">
+              <div className="text-[10px] uppercase tracking-wider text-[var(--color-text-muted)]">NSP populated</div>
+              <div className="text-xl font-bold text-[var(--color-text)]">{kciStats.aures_projects_with_nsp ?? '—'}</div>
+              <div className="text-[10px] text-[var(--color-text-muted)]">projects.connection_nsp</div>
+            </div>
+            <div className="bg-[var(--color-bg-elevated)] rounded-lg p-3">
+              <div className="text-[10px] uppercase tracking-wider text-[var(--color-text-muted)]">KCI ID linked</div>
+              <div className="text-xl font-bold text-[var(--color-text)]">{kciStats.aures_projects_with_kci_id ?? '—'}</div>
+              <div className="text-[10px] text-[var(--color-text-muted)]">projects.aemo_kci_id</div>
+            </div>
+          </div>
+          <div className="grid sm:grid-cols-2 gap-3">
+            <div>
+              <p className="text-[10px] font-semibold uppercase tracking-wider text-[var(--color-text-muted)] mb-1">NSP split (matched projects)</p>
+              <ul className="space-y-0.5 text-xs">
+                {(kciStats.nsp_populated_by_projects ?? []).map((r) => (
+                  <li key={r.nsp} className="flex justify-between text-[var(--color-text-muted)]">
+                    <span>{r.nsp}</span><span className="text-[var(--color-text)] font-medium">{r.projects}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div>
+              <p className="text-[10px] font-semibold uppercase tracking-wider text-[var(--color-text-muted)] mb-1">Tech split (KCI records)</p>
+              <ul className="space-y-0.5 text-xs">
+                {(kciStats.tech_split ?? []).slice(0, 8).map((r) => (
+                  <li key={r.tech} className="flex justify-between text-[var(--color-text-muted)]">
+                    <span>{r.tech}</span><span className="text-[var(--color-text)] font-medium">{r.kci_records.toLocaleString()}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+      )}
+
       {coverage && coverage.available_not_extracted.length > 0 && (
         <div className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl p-4">
           <h3 className="text-sm font-semibold text-[var(--color-text)] mb-1 flex items-center gap-2">

@@ -8,6 +8,7 @@
   "current_developer": "AGL Energy",
   "current_operator": "AGL Energy",
   "connection_status": "proposed",
+  "connection_nsp": "ElectraNet",
   "grid_forming": false,
   "has_sips": false,
   "has_syncon": false,
@@ -21,6 +22,7 @@
   "development_stage": "planning_submitted",
   "first_seen": "2008",
   "zombie_flag": "zombie_stale",
+  "aemo_kci_id": "S00073",
   "timeline": [
     {
       "date": "2008",

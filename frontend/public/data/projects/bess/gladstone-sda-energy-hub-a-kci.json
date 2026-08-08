@@ -10,6 +10,7 @@
   "cod_current": "2028-01-31",
   "cod_original": "2028-01-31",
   "connection_status": "proposed",
+  "connection_nsp": "Powerlink",
   "grid_forming": false,
   "has_sips": false,
   "has_syncon": false,
@@ -21,6 +22,7 @@
   "aemo_gen_info_id": "3190",
   "confidence_score": "20",
   "development_stage": "planning_submitted",
+  "aemo_kci_id": "Q00284",
   "timeline": [
     {
       "date": "2026-07-26",

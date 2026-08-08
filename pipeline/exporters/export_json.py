@@ -189,7 +189,7 @@ def fetch_project_summary(conn, project_id):
                state, current_developer, current_operator, rez,
                performance_score, data_confidence, confidence_score,
                development_stage, capex_aud_m, capex_year, notable, first_seen,
-               zombie_flag
+               zombie_flag, connection_nsp, aemo_kci_id
         FROM projects WHERE id = ?
     """, (project_id,)).fetchone()
     if not row:
@@ -7919,6 +7919,69 @@ def export_bess_records_leaderboard(conn):
           f"({len(batteries)} batteries, data_through={data_through})")
 
 
+def export_eis_kci_stats(conn):
+    """Export summary stats from the aemo_kci_records table for the EIS Coverage tab."""
+    # Skip if table doesn't exist (fresh DBs before v3.29.0)
+    exists = conn.execute(
+        "SELECT name FROM sqlite_master WHERE type='table' AND name='aemo_kci_records'"
+    ).fetchone()
+    out_path = os.path.join(DATA_DIR, 'analytics', 'eis-kci-stats.json')
+    if not exists:
+        write_json(out_path, {
+            'available': False,
+            'note': 'AEMO KCI ingest not yet run — see pipeline/importers/import_aemo_kci.py',
+        })
+        return
+
+    row = conn.execute("""
+        SELECT
+          (SELECT COUNT(*) FROM aemo_kci_records) AS total_records,
+          (SELECT COUNT(DISTINCT aemo_kci_id) FROM aemo_kci_records WHERE aemo_kci_id IS NOT NULL) AS distinct_kci_ids,
+          (SELECT COUNT(DISTINCT project_id) FROM aemo_kci_records WHERE project_id IS NOT NULL) AS matched_projects,
+          (SELECT COUNT(*) FROM projects WHERE aemo_kci_id IS NOT NULL) AS projects_with_kci_id,
+          (SELECT COUNT(*) FROM projects WHERE connection_nsp IS NOT NULL AND connection_nsp != '') AS projects_with_nsp,
+          (SELECT COUNT(*) FROM projects) AS total_projects,
+          (SELECT MAX(snapshot) FROM aemo_kci_records) AS latest_snapshot
+    """).fetchone()
+
+    tnsp_split = [
+        {'tnsp': r['tnsp_name'], 'kci_records': r['n']}
+        for r in conn.execute(
+            "SELECT tnsp_name, COUNT(*) AS n FROM aemo_kci_records "
+            "WHERE tnsp_name IS NOT NULL GROUP BY tnsp_name ORDER BY n DESC"
+        )
+    ]
+    tech_split = [
+        {'tech': r['energy_conv_tech'], 'kci_records': r['n']}
+        for r in conn.execute(
+            "SELECT energy_conv_tech, COUNT(*) AS n FROM aemo_kci_records "
+            "WHERE energy_conv_tech IS NOT NULL GROUP BY energy_conv_tech ORDER BY n DESC"
+        )
+    ]
+    nsp_populated = [
+        {'nsp': r['connection_nsp'], 'projects': r['n']}
+        for r in conn.execute(
+            "SELECT connection_nsp, COUNT(*) AS n FROM projects "
+            "WHERE connection_nsp IS NOT NULL AND connection_nsp != '' "
+            "GROUP BY connection_nsp ORDER BY n DESC"
+        )
+    ]
+
+    write_json(out_path, {
+        'available': True,
+        'latest_snapshot': row['latest_snapshot'],
+        'total_kci_records': row['total_records'],
+        'distinct_kci_ids': row['distinct_kci_ids'],
+        'aures_projects_matched': row['matched_projects'],
+        'aures_projects_with_kci_id': row['projects_with_kci_id'],
+        'aures_projects_with_nsp': row['projects_with_nsp'],
+        'aures_total_projects': row['total_projects'],
+        'tnsp_split': tnsp_split,
+        'tech_split': tech_split,
+        'nsp_populated_by_projects': nsp_populated,
+    })
+
+
 def export_intelligence(conn):
     """Export all intelligence layer JSON files."""
     print("\nIntelligence Layer:")
@@ -7944,6 +8007,7 @@ def export_intelligence(conn):
     export_nem_activities(conn)
     export_bess_bidding(conn)
     export_bess_records_leaderboard(conn)
+    export_eis_kci_stats(conn)
 
 
 # ---- News Export -----------------------------------------------------------

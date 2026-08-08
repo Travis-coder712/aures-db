@@ -1,7 +1,7 @@
 # AURES — Next Session Handoff
 
-**Last refreshed:** 2026-08-03
-**Latest shipped version:** v3.28.0 — EIS/EIA coverage audit + solar source hunt. 67 solar planning documents catalogued into the Coverage tab; 10 highest-priority solar projects extracted into `eis_technical_specs` DB rows; docs/RESEARCH_EIS_COVERAGE_AUDIT.md authored; Coverage-tab table extended with Regime/Year/NSP/Connection columns; NEXT_SESSION_HANDOFF backlog block added for the remaining work. Preceded by the curriculum arc (v3.24.0–v3.27.1: 4 new learning modules + starter path).
+**Last refreshed:** 2026-08-09
+**Latest shipped version:** v3.29.0 — AEMO KCI ingest. Ingested the Q2 2026 compiled NEM KCI workbook (2,357 rows, 5 TNSPs). New `aemo_kci_records` table + `projects.aemo_kci_id` column. **NSP coverage jumped from ~7% → 54%** (593/1,098 projects). EIS Coverage tab now surfaces a KCI stats block. Preceded by v3.28.0 (EIS/EIA solar source hunt) and the curriculum arc (v3.24.0–v3.27.1).
 **Purpose:** Single-place brief for the next session. Cold-readable — pair with `docs/SESSION_OPENER.md` and `docs/INTELLIGENCE_LAYER_PLAN.md`.
 
 ---
@@ -9,6 +9,9 @@
 ## EIS/EIA & grid-connection coverage backlog (from the v3.28.0 audit)
 
 See the full audit report at `docs/RESEARCH_EIS_COVERAGE_AUDIT.md`.
+
+Landed in v3.29.0:
+- **AEMO KCI ingest.** Q2 2026 compiled NEM workbook ingested. New `aemo_kci_records` table (1,205 rows post-UPSERT, 1,005 distinct AEMO KCI IDs, 2,357 workbook rows). Fuzzy matcher: slug + suffix add/strip + state-scoped token overlap. 600 AURES projects matched (84.7% row match rate). `projects.connection_nsp` populated for 593 projects, `projects.aemo_kci_id` for 591. New `eis-kci-stats.json` exporter + KCI stats block on the Coverage tab. See `pipeline/importers/import_aemo_kci.py`. Idempotent — UNIQUE natural key on (snapshot, aemo_kci_id, application_id). Refresh cadence: manual download of new KCI compiled workbook quarterly from AEMO Generation Information page, copy into `data/gi_snapshots/kci_YYYYQn/`, re-run importer.
 
 Landed in v3.28.0:
 - **67 solar projects** now have staged source URLs + regime + year + connection point + NSP in `frontend/public/data/analytics/eis-coverage.json` `available_not_extracted`. The Coverage tab now surfaces them all with click-through to source docs.
