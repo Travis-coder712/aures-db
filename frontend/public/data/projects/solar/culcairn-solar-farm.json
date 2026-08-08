@@ -72,6 +72,15 @@
   ],
   "cost_sources": [],
   "stakeholder_issues": [],
+  "eis_specs": {
+    "document_title": "Culcairn Solar Farm \u2014 SSD-9578 Environmental Impact Statement (Neoen)",
+    "document_url": "https://culcairnsolarfarm.com.au/wp-content/uploads/2024/01/Environmental-Impact-Statement-January-2020.pdf",
+    "document_year": 2020,
+    "connection_voltage_kv": 330.0,
+    "network_service_provider": "TransGrid",
+    "connection_substation_name": "Jindera 330 kV substation (via new transmission line)",
+    "notes": "Neoen; 350 MWac / 402.5 MWdc (DC:AC ~1.15). ~1.1M single-axis-tracker panels. EIS Jan 2020, Amendment Report June 2020, IPC approval 25 March 2021. Co-located 100 MW/200 MWh BESS."
+  },
   "sources": [
     {
       "title": "AEMO Generation Information Jan 2026",

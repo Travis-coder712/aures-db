@@ -1556,6 +1556,12 @@ export interface EISComparisonData {
 // EIS coverage tracking
 export interface EISCoverageEntry {
   name: string; technology: string; state: string; eis_url?: string; notes?: string
+  // Extended fields added in v3.28.0 EIS audit — optional, backward-compat with older entries
+  id?: string                              // project slug — matches projects.id when known
+  eis_regime?: string                      // 'SSD' | 'Part3A' | 'EPBC' | 'council-MCU' | 'VIC-MPP' | 'VIC-EES' | 'SA-DAC' | 'SA-PDI' | 'unclear'
+  eis_year?: number                        // year of assessment / consent
+  connection_point?: string                // e.g. 'Wollar 330 kV switching station'
+  nsp?: string                             // e.g. 'TransGrid', 'Powerlink', 'AusNet', 'ElectraNet', 'Ergon Energy', 'Essential Energy'
 }
 
 export interface EISCoverageGapEntry {

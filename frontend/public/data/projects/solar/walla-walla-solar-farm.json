@@ -79,6 +79,15 @@
   "scheme_contracts": [],
   "cost_sources": [],
   "stakeholder_issues": [],
+  "eis_specs": {
+    "document_title": "Walla Walla Solar Farm \u2014 SSD-9874 (FRV)",
+    "document_url": "https://www.planningportal.nsw.gov.au/major-projects/project/9931",
+    "document_year": 2019,
+    "connection_voltage_kv": 330.0,
+    "network_service_provider": "TransGrid",
+    "connection_substation_name": "Jindera 330 kV substation (TransGrid)",
+    "notes": "FRV; 300 MWac; ~700,000 modules on single-axis trackers; footprint ~495 ha. Scoping 2019, EIS + Response to Submissions April 2020, consent Nov 2020. Operational Q2 2025."
+  },
   "sources": [
     {
       "title": "AEMO Generation Information Jan 2026",

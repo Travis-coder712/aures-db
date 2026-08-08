@@ -77,6 +77,17 @@
   "scheme_contracts": [],
   "cost_sources": [],
   "stakeholder_issues": [],
+  "eis_specs": {
+    "document_title": "Darlington Point Solar Farm \u2014 SSD-8392 EIS (Edify Energy)",
+    "document_url": "https://edifyenergy.com/wp-content/uploads/2020/03/DarlingtonPoint-EIS-MainReport-1.pdf",
+    "document_year": 2018,
+    "connection_voltage_kv": 330.0,
+    "network_service_provider": "TransGrid",
+    "connection_substation_name": "Darlington Point 330 kV substation (adjacent to site)",
+    "connection_distance_km": 1.0,
+    "connection_distance_note": "On-site connection to the adjacent Darlington Point 330 kV substation",
+    "notes": "Edify Energy; 275 MWac + 100 MWh BESS added via MOD-1. Single-axis trackers. Consent 7 Dec 2018."
+  },
   "sources": [
     {
       "title": "AEMO Generation Information Jan 2026",

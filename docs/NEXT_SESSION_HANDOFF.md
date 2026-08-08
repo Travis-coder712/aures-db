@@ -1,10 +1,29 @@
 # AURES — Next Session Handoff
 
-**Last refreshed:** 2026-07-26
-**Latest shipped version:** v3.23.1 — data-integrity round two (apr-2026 GI ingest, news + WattClarity, schema.sql regen, importer hardenings). Shipped as commit `df7c0387`, live. Preceded by v3.23.0 (commit `179999cd`) which fixed the AEMO GI + source_references idempotency and added the pytest suite.
+**Last refreshed:** 2026-08-03
+**Latest shipped version:** v3.28.0 — EIS/EIA coverage audit + solar source hunt. 67 solar planning documents catalogued into the Coverage tab; 10 highest-priority solar projects extracted into `eis_technical_specs` DB rows; docs/RESEARCH_EIS_COVERAGE_AUDIT.md authored; Coverage-tab table extended with Regime/Year/NSP/Connection columns; NEXT_SESSION_HANDOFF backlog block added for the remaining work. Preceded by the curriculum arc (v3.24.0–v3.27.1: 4 new learning modules + starter path).
 **Purpose:** Single-place brief for the next session. Cold-readable — pair with `docs/SESSION_OPENER.md` and `docs/INTELLIGENCE_LAYER_PLAN.md`.
 
 ---
+
+## EIS/EIA & grid-connection coverage backlog (from the v3.28.0 audit)
+
+See the full audit report at `docs/RESEARCH_EIS_COVERAGE_AUDIT.md`.
+
+Landed in v3.28.0:
+- **67 solar projects** now have staged source URLs + regime + year + connection point + NSP in `frontend/public/data/analytics/eis-coverage.json` `available_not_extracted`. The Coverage tab now surfaces them all with click-through to source docs.
+- **10 highest-priority solar** projects extracted into `eis_technical_specs` DB rows (Stubbo, Culcairn, Wellington North, Limondale 1, Walla Walla, Darlington Point, Sunraysia, Kiamal Stage 1, Western Downs, Aldoga).
+- Solar coverage: 0/226 → 10/226. Overall coverage: 68 → 78 rows.
+- Coverage tab table extended with `Regime`, `Year`, `NSP`, and `Connection` columns.
+
+Still open:
+- **Ingest AEMO KCI files** — the single most important remaining source. Per-TNSP × quarterly (5 files, 20/year). Contains substation + voltage + connection point + NSP + status per project. Cloudflare blocks scripted downloads; use the same `data/gi_snapshots/` archive convention: manually download → check into `data/gi_snapshots/kci_<year>Q<n>/` → write a per-TNSP importer. Would fill grid-connection specs for **~60-80% of the NEM fleet**.
+- **Extract the remaining 57 solar projects** using the URLs now staged in `available_not_extracted`. The pattern is transcription-heavy (2-4 hours per session). Same shape as the 10 already extracted.
+- **Ingest the AusNet TCPR PDF** for VIC embedded generators (~30-50 projects). Public PDF, `pdftotext -layout` + regex, annual (Dec) refresh. Low-effort standalone importer.
+- **Ingest the ElectraNet Connections Report PDF** for SA Mid North (~25-30 projects). Flag the "Commercial in Confidence" footer to Travis before use.
+- **Ingest the Rosetta GPKG** for AEMO KCI Id + lat/lng + LGA + Project URL enrichment. Does NOT contain substation/voltage/NSP — validated during the v3.28.0 audit. Complementary to KCI, not a substitute.
+- **Source-hunt pass for hybrid solar+BESS (121 projects)** — currently 0/121 covered. Same pattern as the v3.28.0 solar sweep: NSW SSD / QLD MCU-or-EPBC / VIC ministerial / SA DAC. Bundle with the source-hunt for the ~30 remaining large wind projects without existing spec rows.
+- **The AEMO GI workbook cols 26–75** (seasonal capacity forecasts) are unread but valuable for a capacity-derating trend intelligence layer. Trivial addition to `import_aemo_gen_info.py` `COL` dict. Not connection data — separate feature.
 
 ## Data integrity and project taxonomy backlog
 

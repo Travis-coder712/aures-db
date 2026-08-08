@@ -73,6 +73,16 @@
   "scheme_contracts": [],
   "cost_sources": [],
   "stakeholder_issues": [],
+  "eis_specs": {
+    "document_title": "Kiamal Solar Farm \u2014 VIC-ESC Electricity Generation & Sale Licence Application",
+    "document_url": "https://www.esc.vic.gov.au/sites/default/files/documents/kfs-project-nominees-pty-ltd-application-for-electricity-generation-and-sale-licence-20191014.pdf",
+    "document_year": 2017,
+    "connection_voltage_kv": 220.0,
+    "transformer_mva": 360.0,
+    "network_service_provider": "AusNet",
+    "connection_substation_name": "Kiamal Terminal Station (KMTS), tapped off 220 kV Red Cliffs\u2013Murray Warra single-circuit line",
+    "notes": "Total Eren; 200 MWac (256.5 MWp DC). Panels: TrinaSolar. 2 x 180 MVA 33/220 kV step-up transformers (Wilsons). 190 MVAr Siemens synchronous condenser installed for system-strength support. MRCC planning permit Sep 2017."
+  },
   "sources": [
     {
       "title": "AEMO Generation Information Jan 2026",

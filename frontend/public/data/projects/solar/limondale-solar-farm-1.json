@@ -78,6 +78,15 @@
   "scheme_contracts": [],
   "cost_sources": [],
   "stakeholder_issues": [],
+  "eis_specs": {
+    "document_title": "Limondale Solar Farm \u2014 SSD-8025 EIS (Overland Sun Farming; operator RWE)",
+    "document_url": "https://majorprojects.planningportal.nsw.gov.au/prweb/PRRestService/mp/01/getContent?AttachRef=SSD-8025%2120190228T005504.628+GMT",
+    "document_year": 2017,
+    "connection_voltage_kv": 220.0,
+    "network_service_provider": "TransGrid",
+    "connection_substation_name": "Buronga 220 kV substation (single-circuit 220 kV connection)",
+    "notes": "SSD-8025 assessed both Limondale 1 (306 MWac / ~349 MWdc, 872k modules on single-axis trackers) and Limondale 2 (42.8 MWac on fixed-tilt mounting). Approved 2018. Operator: RWE."
+  },
   "sources": [
     {
       "title": "AEMO Generation Information Jan 2026",

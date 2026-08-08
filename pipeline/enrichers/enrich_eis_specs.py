@@ -52,8 +52,15 @@ JSON_DIR = ROOT / 'frontend' / 'public' / 'data' / 'projects'
 #
 # Structure:
 #   project_id  : matches projects.id (slug)
-#   tech        : 'wind' | 'bess' | 'hybrid'  — used to locate JSON file
+#   tech        : 'wind' | 'bess' | 'solar' | 'hybrid' | 'pumped_hydro'  — used to locate JSON file
 #   eis_specs   : dict matching eis_technical_specs columns
+# For solar entries, the schema has no solar-specific columns (panel model,
+# tracker, inverter, DC:AC ratio); those go in `notes` alongside the grid
+# connection detail which uses the shared connection_* fields. The
+# structural fields captured for the v3.28.0 solar batch are: document_title,
+# document_url, document_year, connection_voltage_kv,
+# network_service_provider, connection_substation_name, connection_distance_km,
+# connection_distance_note, connection_augmentation, notes.
 #
 # Sources are embedded in document_title / document_url.
 # All numeric values from official EIS documents or OEM data sheets.
@@ -2513,6 +2520,198 @@ EIS_DATA = [
         },
     },
 
+    # ══════════════════════════════════════════════════════════════════════════
+    # SOLAR FARMS — first tranche added v3.28.0 (2026-08-03) from the EIS
+    # coverage audit. Solar was previously 0/226 covered. See
+    # docs/RESEARCH_EIS_COVERAGE_AUDIT.md for the full 67-project source
+    # inventory; the entries below are the ten highest-priority operating /
+    # commissioning projects.
+    # ══════════════════════════════════════════════════════════════════════════
+
+    {
+        'project_id': 'stubbo-solar-farm',
+        'tech': 'solar',
+        'eis_specs': {
+            'document_title': 'Stubbo Solar Farm — SSD-10452 (NSW Planning Portal)',
+            'document_url': 'https://www.planningportal.nsw.gov.au/major-projects/project/31031',
+            'document_year': 2020,
+            'connection_voltage_kv': 330.0,
+            'network_service_provider': 'TransGrid',
+            'connection_substation_name': 'Wollar 330 kV switching station area (Central-West Orana REZ)',
+            'notes': (
+                'ACEN Australia; 400 MW; SSD-10452. EIS Dec 2020; consent July 2021 (IPC); '
+                'construction completed 2025. RPS scoping report on the planning portal. '
+                'Panels/inverter model not stated in EIS.'
+            ),
+        },
+    },
+
+    {
+        'project_id': 'culcairn-solar-farm',
+        'tech': 'solar',
+        'eis_specs': {
+            'document_title': 'Culcairn Solar Farm — SSD-9578 Environmental Impact Statement (Neoen)',
+            'document_url': 'https://culcairnsolarfarm.com.au/wp-content/uploads/2024/01/Environmental-Impact-Statement-January-2020.pdf',
+            'document_year': 2020,
+            'connection_voltage_kv': 330.0,
+            'network_service_provider': 'TransGrid',
+            'connection_substation_name': 'Jindera 330 kV substation (via new transmission line)',
+            'notes': (
+                'Neoen; 350 MWac / 402.5 MWdc (DC:AC ~1.15). ~1.1M single-axis-tracker panels. '
+                'EIS Jan 2020, Amendment Report June 2020, IPC approval 25 March 2021. '
+                'Co-located 100 MW/200 MWh BESS.'
+            ),
+        },
+    },
+
+    {
+        'project_id': 'wellington-north-solar-farm',
+        'tech': 'solar',
+        'eis_specs': {
+            'document_title': 'Wellington North Solar Farm — SSD-8895 (NSW Planning Portal)',
+            'document_url': 'https://www.planningportal.nsw.gov.au/major-projects/projects/wellington-north-solar-farm',
+            'document_year': 2019,
+            'connection_voltage_kv': 330.0,
+            'network_service_provider': 'TransGrid',
+            'connection_substation_name': 'Wellington 330 kV substation (TransGrid)',
+            'connection_distance_km': 2.4,
+            'connection_distance_note': '2.4 km 330 kV overhead line from site to Wellington substation',
+            'notes': (
+                'Lightsource bp; 330 MWac / ~425 MWdc (DC:AC ~1.29). Single-axis trackers. '
+                'Consent May 2021.'
+            ),
+        },
+    },
+
+    {
+        'project_id': 'limondale-solar-farm-1',
+        'tech': 'solar',
+        'eis_specs': {
+            'document_title': 'Limondale Solar Farm — SSD-8025 EIS (Overland Sun Farming; operator RWE)',
+            'document_url': 'https://majorprojects.planningportal.nsw.gov.au/prweb/PRRestService/mp/01/getContent?AttachRef=SSD-8025%2120190228T005504.628+GMT',
+            'document_year': 2017,
+            'connection_voltage_kv': 220.0,
+            'network_service_provider': 'TransGrid',
+            'connection_substation_name': 'Buronga 220 kV substation (single-circuit 220 kV connection)',
+            'notes': (
+                'SSD-8025 assessed both Limondale 1 (306 MWac / ~349 MWdc, 872k modules on '
+                'single-axis trackers) and Limondale 2 (42.8 MWac on fixed-tilt mounting). '
+                'Approved 2018. Operator: RWE.'
+            ),
+        },
+    },
+
+    {
+        'project_id': 'walla-walla-solar-farm',
+        'tech': 'solar',
+        'eis_specs': {
+            'document_title': 'Walla Walla Solar Farm — SSD-9874 (FRV)',
+            'document_url': 'https://www.planningportal.nsw.gov.au/major-projects/project/9931',
+            'document_year': 2019,
+            'connection_voltage_kv': 330.0,
+            'network_service_provider': 'TransGrid',
+            'connection_substation_name': 'Jindera 330 kV substation (TransGrid)',
+            'notes': (
+                'FRV; 300 MWac; ~700,000 modules on single-axis trackers; footprint ~495 ha. '
+                'Scoping 2019, EIS + Response to Submissions April 2020, consent Nov 2020. '
+                'Operational Q2 2025.'
+            ),
+        },
+    },
+
+    {
+        'project_id': 'darlington-point-solar-farm',
+        'tech': 'solar',
+        'eis_specs': {
+            'document_title': 'Darlington Point Solar Farm — SSD-8392 EIS (Edify Energy)',
+            'document_url': 'https://edifyenergy.com/wp-content/uploads/2020/03/DarlingtonPoint-EIS-MainReport-1.pdf',
+            'document_year': 2018,
+            'connection_voltage_kv': 330.0,
+            'network_service_provider': 'TransGrid',
+            'connection_substation_name': 'Darlington Point 330 kV substation (adjacent to site)',
+            'connection_distance_km': 1.0,
+            'connection_distance_note': 'On-site connection to the adjacent Darlington Point 330 kV substation',
+            'notes': (
+                'Edify Energy; 275 MWac + 100 MWh BESS added via MOD-1. Single-axis trackers. '
+                'Consent 7 Dec 2018.'
+            ),
+        },
+    },
+
+    {
+        'project_id': 'sunraysia-solar-farm',
+        'tech': 'solar',
+        'eis_specs': {
+            'document_title': 'Sunraysia Solar Farm — SSD-7680 EIS',
+            'document_url': 'https://majorprojects.planningportal.nsw.gov.au/prweb/PRRestService/mp/01/getContent?AttachRef=SSD-7680!20190227T235436.789+GMT',
+            'document_year': 2017,
+            'connection_voltage_kv': 220.0,
+            'network_service_provider': 'TransGrid',
+            'connection_substation_name': 'Balranald 220 kV substation area (TransGrid)',
+            'notes': (
+                'Originally Maoneng/UPC. 200 MWac / 255 MWdc (DC:AC ~1.28). '
+                'EIS Feb 2017, consent 20 June 2017. MOD-1 added 100 MW/200 MWh BESS.'
+            ),
+        },
+    },
+
+    {
+        'project_id': 'kiamal-solar-farm-stage-1',
+        'tech': 'solar',
+        'eis_specs': {
+            'document_title': 'Kiamal Solar Farm — VIC-ESC Electricity Generation & Sale Licence Application',
+            'document_url': 'https://www.esc.vic.gov.au/sites/default/files/documents/kfs-project-nominees-pty-ltd-application-for-electricity-generation-and-sale-licence-20191014.pdf',
+            'document_year': 2017,
+            'connection_voltage_kv': 220.0,
+            'network_service_provider': 'AusNet',
+            'connection_substation_name': 'Kiamal Terminal Station (KMTS), tapped off 220 kV Red Cliffs–Murray Warra single-circuit line',
+            'transformer_mva': 360.0,
+            'notes': (
+                'Total Eren; 200 MWac (256.5 MWp DC). Panels: TrinaSolar. '
+                '2 x 180 MVA 33/220 kV step-up transformers (Wilsons). '
+                '190 MVAr Siemens synchronous condenser installed for system-strength support. '
+                'MRCC planning permit Sep 2017.'
+            ),
+        },
+    },
+
+    {
+        'project_id': 'western-downs-green-power-hub-pl',
+        'tech': 'solar',
+        'eis_specs': {
+            'document_title': 'Western Downs Green Power Hub — Info Pack (Neoen)',
+            'document_url': 'https://westerndownsgreenpowerhub.com.au/wp-content/uploads/2020/02/WD_info-pack.pdf',
+            'document_year': 2020,
+            'connection_voltage_kv': 275.0,
+            'network_service_provider': 'Powerlink',
+            'connection_substation_name': 'Western Downs substation (Powerlink 275 kV)',
+            'connection_augmentation': 'New 275 kV connection line built as part of the project',
+            'notes': (
+                'Neoen; 460 MWp DC / 400 MW AC; 72-cell bifacial modules on single-axis trackers; '
+                '>1M panels; grid-forming inverters. Consented via Western Downs Regional Council MCU. '
+                'See also powerlink.com.au/projects/western-downs-green-power-hub-connection-project.'
+            ),
+        },
+    },
+
+    {
+        'project_id': 'aldoga-solar-farm',
+        'tech': 'solar',
+        'eis_specs': {
+            'document_title': 'Aldoga Solar Farm — EPBC 2020/8773 Audit Report (Acciona)',
+            'document_url': 'https://www.acciona.com.au/content/dam/accionaau/project-landing-page-files/aldoga/adoga-solar-farm-epbc-audit.pdf',
+            'document_year': 2022,
+            'connection_voltage_kv': 275.0,
+            'network_service_provider': 'Powerlink',
+            'connection_substation_name': 'Larcom Creek 275/132 kV switchyard (Powerlink, Gladstone area)',
+            'notes': (
+                'Acciona; ~380–400 MW. EPBC 2020/8773 approved 29 Sep 2022 (expansion) + '
+                'EPBC 2018/8251 (original site). 20 km NW of Gladstone. Offset Area Management '
+                'Plans + Compliance Reports published on acciona.com.au.'
+            ),
+        },
+    },
+
 ]
 
 
@@ -2619,8 +2818,14 @@ def main():
     print('Done. EIS specs added to:')
     wind = [e for e in EIS_DATA if e['tech'] == 'wind']
     bess = [e for e in EIS_DATA if e['tech'] == 'bess']
-    print(f'  Wind farms: {len(wind)} projects')
-    print(f'  BESS:       {len(bess)} projects')
+    solar = [e for e in EIS_DATA if e['tech'] == 'solar']
+    hybrid = [e for e in EIS_DATA if e['tech'] == 'hybrid']
+    pumped = [e for e in EIS_DATA if e['tech'] == 'pumped_hydro']
+    print(f'  Wind farms:   {len(wind)} projects')
+    print(f'  BESS:         {len(bess)} projects')
+    print(f'  Solar:        {len(solar)} projects')
+    print(f'  Hybrid:       {len(hybrid)} projects')
+    print(f'  Pumped hydro: {len(pumped)} projects')
     print()
     print('Run the JSON export pipeline to regenerate clean exports from DB:')
     print('  python3 pipeline/exporters/export_json.py')

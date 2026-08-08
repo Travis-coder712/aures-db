@@ -27,6 +27,17 @@
   "scheme_contracts": [],
   "cost_sources": [],
   "stakeholder_issues": [],
+  "eis_specs": {
+    "document_title": "Wellington North Solar Farm \u2014 SSD-8895 (NSW Planning Portal)",
+    "document_url": "https://www.planningportal.nsw.gov.au/major-projects/projects/wellington-north-solar-farm",
+    "document_year": 2019,
+    "connection_voltage_kv": 330.0,
+    "network_service_provider": "TransGrid",
+    "connection_substation_name": "Wellington 330 kV substation (TransGrid)",
+    "connection_distance_km": 2.4,
+    "connection_distance_note": "2.4 km 330 kV overhead line from site to Wellington substation",
+    "notes": "Lightsource bp; 330 MWac / ~425 MWdc (DC:AC ~1.29). Single-axis trackers. Consent May 2021."
+  },
   "sources": [
     {
       "title": "AEMO Generation Information Jan 2026",

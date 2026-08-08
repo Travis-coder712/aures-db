@@ -71,6 +71,15 @@
   "scheme_contracts": [],
   "cost_sources": [],
   "stakeholder_issues": [],
+  "eis_specs": {
+    "document_title": "Sunraysia Solar Farm \u2014 SSD-7680 EIS",
+    "document_url": "https://majorprojects.planningportal.nsw.gov.au/prweb/PRRestService/mp/01/getContent?AttachRef=SSD-7680!20190227T235436.789+GMT",
+    "document_year": 2017,
+    "connection_voltage_kv": 220.0,
+    "network_service_provider": "TransGrid",
+    "connection_substation_name": "Balranald 220 kV substation area (TransGrid)",
+    "notes": "Originally Maoneng/UPC. 200 MWac / 255 MWdc (DC:AC ~1.28). EIS Feb 2017, consent 20 June 2017. MOD-1 added 100 MW/200 MWh BESS."
+  },
   "sources": [
     {
       "title": "AEMO Generation Information Jan 2026",

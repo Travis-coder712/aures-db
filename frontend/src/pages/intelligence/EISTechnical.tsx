@@ -1746,24 +1746,34 @@ function CoverageTab({ data, coverage, pdfOpps }: { data: EISAnalyticsData; cove
               <thead>
                 <tr className="border-b border-[var(--color-border)]">
                   <th className="px-2 py-2 text-left font-medium text-[var(--color-text-muted)]">Project</th>
-                  <th className="px-2 py-2 text-left font-medium text-[var(--color-text-muted)]">Technology</th>
+                  <th className="px-2 py-2 text-left font-medium text-[var(--color-text-muted)]">Tech</th>
                   <th className="px-2 py-2 text-left font-medium text-[var(--color-text-muted)]">State</th>
-                  <th className="px-2 py-2 text-left font-medium text-[var(--color-text-muted)]">Notes</th>
+                  <th className="px-2 py-2 text-left font-medium text-[var(--color-text-muted)]">Regime</th>
+                  <th className="px-2 py-2 text-left font-medium text-[var(--color-text-muted)]">Year</th>
+                  <th className="px-2 py-2 text-left font-medium text-[var(--color-text-muted)]">NSP</th>
+                  <th className="px-2 py-2 text-left font-medium text-[var(--color-text-muted)]">Connection</th>
+                  <th className="px-2 py-2 text-left font-medium text-[var(--color-text-muted)]">Source</th>
                 </tr>
               </thead>
               <tbody>
                 {coverage.available_not_extracted.map((p, i) => (
-                  <tr key={i} className="border-b border-[var(--color-border)]/50 hover:bg-[var(--color-bg-elevated)]/50">
-                    <td className="px-2 py-1.5 text-[var(--color-text)]">{p.name}</td>
+                  <tr key={i} className="border-b border-[var(--color-border)]/50 hover:bg-[var(--color-bg-elevated)]/50 align-top">
+                    <td className="px-2 py-1.5 text-[var(--color-text)] font-medium">{p.name}</td>
                     <td className="px-2 py-1.5 text-[var(--color-text-muted)]">{p.technology}</td>
                     <td className="px-2 py-1.5" style={{ color: getStateColour(p.state) }}>{p.state}</td>
-                    <td className="px-2 py-1.5 text-[var(--color-text-muted)]">
+                    <td className="px-2 py-1.5 text-[var(--color-text-muted)]">{p.eis_regime || '—'}</td>
+                    <td className="px-2 py-1.5 text-[var(--color-text-muted)]">{p.eis_year || '—'}</td>
+                    <td className="px-2 py-1.5 text-[var(--color-text-muted)]">{p.nsp || '—'}</td>
+                    <td className="px-2 py-1.5 text-[var(--color-text-muted)] max-w-[240px]" title={p.connection_point || ''}>
+                      {p.connection_point || '—'}
+                    </td>
+                    <td className="px-2 py-1.5 text-[var(--color-text-muted)] max-w-[220px]">
                       {p.eis_url ? (
-                        <a href={p.eis_url} target="_blank" rel="noopener noreferrer" className="text-[var(--color-primary)] hover:underline">
-                          {p.notes || 'View EIS'}
+                        <a href={p.eis_url} target="_blank" rel="noopener noreferrer" className="text-[var(--color-primary)] hover:underline" title={p.notes || 'Open EIS document'}>
+                          Open EIS ↗
                         </a>
                       ) : (
-                        p.notes || '—'
+                        <span title={p.notes || ''}>—</span>
                       )}
                     </td>
                   </tr>

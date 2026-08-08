@@ -88,6 +88,15 @@
   "scheme_contracts": [],
   "cost_sources": [],
   "stakeholder_issues": [],
+  "eis_specs": {
+    "document_title": "Aldoga Solar Farm \u2014 EPBC 2020/8773 Audit Report (Acciona)",
+    "document_url": "https://www.acciona.com.au/content/dam/accionaau/project-landing-page-files/aldoga/adoga-solar-farm-epbc-audit.pdf",
+    "document_year": 2022,
+    "connection_voltage_kv": 275.0,
+    "network_service_provider": "Powerlink",
+    "connection_substation_name": "Larcom Creek 275/132 kV switchyard (Powerlink, Gladstone area)",
+    "notes": "Acciona; ~380\u2013400 MW. EPBC 2020/8773 approved 29 Sep 2022 (expansion) + EPBC 2018/8251 (original site). 20 km NW of Gladstone. Offset Area Management Plans + Compliance Reports published on acciona.com.au."
+  },
   "sources": [
     {
       "title": "AEMO Generation Information Jan 2026",

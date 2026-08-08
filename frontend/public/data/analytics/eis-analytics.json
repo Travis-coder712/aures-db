@@ -1709,12 +1709,156 @@
       "transformer_mva": 60.0
     }
   ],
-  "solar_projects": [],
+  "solar_projects": [
+    {
+      "id": "stubbo-solar-farm",
+      "name": "Stubbo Solar Farm",
+      "state": "NSW",
+      "capacity_mw": 400.0,
+      "status": "operating",
+      "developer": "ACEN AUSTRALIA",
+      "connection_voltage_kv": 330.0,
+      "connection_substation_name": "Wollar 330 kV switching station area (Central-West Orana REZ)",
+      "nsp": "TransGrid",
+      "document_title": "Stubbo Solar Farm \u2014 SSD-10452 (NSW Planning Portal)",
+      "document_url": "https://www.planningportal.nsw.gov.au/major-projects/project/31031",
+      "document_year": 2020
+    },
+    {
+      "id": "western-downs-green-power-hub-pl",
+      "name": "Western Downs Green Power Hub P/L",
+      "state": "QLD",
+      "capacity_mw": 400.0,
+      "status": "operating",
+      "developer": "Western Downs Green Power Hub Pty Ltd",
+      "connection_voltage_kv": 275.0,
+      "connection_substation_name": "Western Downs substation (Powerlink 275 kV)",
+      "nsp": "Powerlink",
+      "connection_augmentation": "New 275 kV connection line built as part of the project",
+      "document_title": "Western Downs Green Power Hub \u2014 Info Pack (Neoen)",
+      "document_url": "https://westerndownsgreenpowerhub.com.au/wp-content/uploads/2020/02/WD_info-pack.pdf",
+      "document_year": 2020
+    },
+    {
+      "id": "aldoga-solar-farm",
+      "name": "Aldoga Solar Farm",
+      "state": "QLD",
+      "capacity_mw": 387.0,
+      "status": "operating",
+      "developer": "Acciona Energy Australia Global Pty Ltd",
+      "connection_voltage_kv": 275.0,
+      "connection_substation_name": "Larcom Creek 275/132 kV switchyard (Powerlink, Gladstone area)",
+      "nsp": "Powerlink",
+      "document_title": "Aldoga Solar Farm \u2014 EPBC 2020/8773 Audit Report (Acciona)",
+      "document_url": "https://www.acciona.com.au/content/dam/accionaau/project-landing-page-files/aldoga/adoga-solar-farm-epbc-audit.pdf",
+      "document_year": 2022
+    },
+    {
+      "id": "culcairn-solar-farm",
+      "name": "Culcairn Solar Farm",
+      "state": "NSW",
+      "capacity_mw": 350.0,
+      "status": "operating",
+      "developer": "Culcairn Solar Farm Pty Ltd as trustee for Culcairn Solar Farm Trust",
+      "connection_voltage_kv": 330.0,
+      "connection_substation_name": "Jindera 330 kV substation (via new transmission line)",
+      "nsp": "TransGrid",
+      "document_title": "Culcairn Solar Farm \u2014 SSD-9578 Environmental Impact Statement (Neoen)",
+      "document_url": "https://culcairnsolarfarm.com.au/wp-content/uploads/2024/01/Environmental-Impact-Statement-January-2020.pdf",
+      "document_year": 2020
+    },
+    {
+      "id": "limondale-solar-farm-1",
+      "name": "Limondale Solar Farm 1",
+      "state": "NSW",
+      "capacity_mw": 306.0,
+      "status": "operating",
+      "developer": "Limondale Sun Farm Pty Ltd",
+      "connection_voltage_kv": 220.0,
+      "connection_substation_name": "Buronga 220 kV substation (single-circuit 220 kV connection)",
+      "nsp": "TransGrid",
+      "document_title": "Limondale Solar Farm \u2014 SSD-8025 EIS (Overland Sun Farming; operator RWE)",
+      "document_url": "https://majorprojects.planningportal.nsw.gov.au/prweb/PRRestService/mp/01/getContent?AttachRef=SSD-8025%2120190228T005504.628+GMT",
+      "document_year": 2017
+    },
+    {
+      "id": "wellington-north-solar-farm",
+      "name": "Wellington North Solar Farm",
+      "state": "NSW",
+      "capacity_mw": 300.0,
+      "status": "development",
+      "developer": "AGL Hydro Partnership",
+      "connection_voltage_kv": 330.0,
+      "connection_distance_km": 2.4,
+      "connection_substation_name": "Wellington 330 kV substation (TransGrid)",
+      "nsp": "TransGrid",
+      "document_title": "Wellington North Solar Farm \u2014 SSD-8895 (NSW Planning Portal)",
+      "document_url": "https://www.planningportal.nsw.gov.au/major-projects/projects/wellington-north-solar-farm",
+      "document_year": 2019
+    },
+    {
+      "id": "walla-walla-solar-farm",
+      "name": "Walla Walla Solar Farm",
+      "state": "NSW",
+      "capacity_mw": 300.0,
+      "status": "operating",
+      "developer": "FRV Australia (Walla Walla Asset Co Pty Ltd (ACN 634 728 868) as trustee for the Walla Walla Asset Trust)",
+      "connection_voltage_kv": 330.0,
+      "connection_substation_name": "Jindera 330 kV substation (TransGrid)",
+      "nsp": "TransGrid",
+      "document_title": "Walla Walla Solar Farm \u2014 SSD-9874 (FRV)",
+      "document_url": "https://www.planningportal.nsw.gov.au/major-projects/project/9931",
+      "document_year": 2019
+    },
+    {
+      "id": "darlington-point-solar-farm",
+      "name": "Darlington Point Solar Farm",
+      "state": "NSW",
+      "capacity_mw": 275.0,
+      "status": "operating",
+      "developer": "Darlington Point Solar Farm Pty Ltd",
+      "connection_voltage_kv": 330.0,
+      "connection_distance_km": 1.0,
+      "connection_substation_name": "Darlington Point 330 kV substation (adjacent to site)",
+      "nsp": "TransGrid",
+      "document_title": "Darlington Point Solar Farm \u2014 SSD-8392 EIS (Edify Energy)",
+      "document_url": "https://edifyenergy.com/wp-content/uploads/2020/03/DarlingtonPoint-EIS-MainReport-1.pdf",
+      "document_year": 2018
+    },
+    {
+      "id": "sunraysia-solar-farm",
+      "name": "Sunraysia Solar Farm",
+      "state": "NSW",
+      "capacity_mw": 200.0,
+      "status": "operating",
+      "developer": "Sunraysia Solar Project Pty Ltd",
+      "connection_voltage_kv": 220.0,
+      "connection_substation_name": "Balranald 220 kV substation area (TransGrid)",
+      "nsp": "TransGrid",
+      "document_title": "Sunraysia Solar Farm \u2014 SSD-7680 EIS",
+      "document_url": "https://majorprojects.planningportal.nsw.gov.au/prweb/PRRestService/mp/01/getContent?AttachRef=SSD-7680!20190227T235436.789+GMT",
+      "document_year": 2017
+    },
+    {
+      "id": "kiamal-solar-farm-stage-1",
+      "name": "Kiamal Solar Farm - Stage 1",
+      "state": "VIC",
+      "capacity_mw": 200.0,
+      "status": "operating",
+      "developer": "KSF Project Nominees Pty Ltd ATF KSF Project Trust",
+      "connection_voltage_kv": 220.0,
+      "connection_substation_name": "Kiamal Terminal Station (KMTS), tapped off 220 kV Red Cliffs\u2013Murray Warra single-circuit line",
+      "nsp": "AusNet",
+      "document_title": "Kiamal Solar Farm \u2014 VIC-ESC Electricity Generation & Sale Licence Application",
+      "document_url": "https://www.esc.vic.gov.au/sites/default/files/documents/kfs-project-nominees-pty-ltd-application-for-electricity-generation-and-sale-licence-20191014.pdf",
+      "document_year": 2017
+    }
+  ],
   "summary": {
-    "total_eis": 68,
+    "total_eis": 78,
     "wind": 31,
     "bess": 35,
-    "solar": 0,
+    "solar": 10,
     "pumped_hydro": 2,
     "wind_stats": {
       "avg_wind_speed": 8.3,
@@ -1777,17 +1921,17 @@
       }
     },
     "connection": {
-      "avg_distance": 12.2,
+      "avg_distance": 11.8,
       "voltage_breakdown": {
         "110 kV": 2,
         "132 kV": 12,
-        "220 kV": 16,
-        "275 kV": 13,
-        "330 kV": 18,
+        "220 kV": 19,
+        "275 kV": 15,
+        "330 kV": 23,
         "500 kV": 2,
         "66 kV": 5
       }
     }
   },
-  "exported_at": "2026-07-26T18:36:15.472838"
+  "exported_at": "2026-08-08T23:10:22.411863"
 }

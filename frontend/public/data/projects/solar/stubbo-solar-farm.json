@@ -83,6 +83,15 @@
   ],
   "cost_sources": [],
   "stakeholder_issues": [],
+  "eis_specs": {
+    "document_title": "Stubbo Solar Farm \u2014 SSD-10452 (NSW Planning Portal)",
+    "document_url": "https://www.planningportal.nsw.gov.au/major-projects/project/31031",
+    "document_year": 2020,
+    "connection_voltage_kv": 330.0,
+    "network_service_provider": "TransGrid",
+    "connection_substation_name": "Wollar 330 kV switching station area (Central-West Orana REZ)",
+    "notes": "ACEN Australia; 400 MW; SSD-10452. EIS Dec 2020; consent July 2021 (IPC); construction completed 2025. RPS scoping report on the planning portal. Panels/inverter model not stated in EIS."
+  },
   "sources": [
     {
       "title": "AEMO Generation Information Jan 2026",

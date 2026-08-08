@@ -65,6 +65,16 @@
   "scheme_contracts": [],
   "cost_sources": [],
   "stakeholder_issues": [],
+  "eis_specs": {
+    "document_title": "Western Downs Green Power Hub \u2014 Info Pack (Neoen)",
+    "document_url": "https://westerndownsgreenpowerhub.com.au/wp-content/uploads/2020/02/WD_info-pack.pdf",
+    "document_year": 2020,
+    "connection_voltage_kv": 275.0,
+    "network_service_provider": "Powerlink",
+    "connection_substation_name": "Western Downs substation (Powerlink 275 kV)",
+    "connection_augmentation": "New 275 kV connection line built as part of the project",
+    "notes": "Neoen; 460 MWp DC / 400 MW AC; 72-cell bifacial modules on single-axis trackers; >1M panels; grid-forming inverters. Consented via Western Downs Regional Council MCU. See also powerlink.com.au/projects/western-downs-green-power-hub-connection-project."
+  },
   "sources": [
     {
       "title": "AEMO Generation Information Jan 2026",

@@ -6,7 +6,7 @@
       "round": "CIS Pilot \u2014 NSW",
       "type": "dispatchable",
       "announced_date": "2023-11-23",
-      "months_since_announced": 32,
+      "months_since_announced": 33,
       "total_capacity_mw": 1325,
       "total_storage_mwh": 2390,
       "num_projects": 6,
@@ -33,7 +33,7 @@
           "cod_current": "2026-06-30",
           "dev_status": "construction",
           "annotations": [],
-          "developer_grade": "A"
+          "developer_grade": "B"
         },
         {
           "name": "Liddell BESS",
@@ -49,7 +49,7 @@
           "cod_current": "2026-06-01",
           "dev_status": "construction",
           "annotations": [],
-          "developer_grade": "A"
+          "developer_grade": "B"
         },
         {
           "name": "Smithfield Sydney Battery",
@@ -124,7 +124,7 @@
       "round": "CIS Pilot \u2014 SA/VIC",
       "type": "dispatchable",
       "announced_date": "2024-09-04",
-      "months_since_announced": 22,
+      "months_since_announced": 23,
       "total_capacity_mw": 995,
       "total_storage_mwh": 3626,
       "num_projects": 6,
@@ -249,7 +249,7 @@
       "round": "Tender 1 \u2014 NEM Generation",
       "type": "generation",
       "announced_date": "2024-12-11",
-      "months_since_announced": 19,
+      "months_since_announced": 20,
       "total_capacity_mw": 6375,
       "total_storage_mwh": 3553,
       "num_projects": 19,
@@ -284,11 +284,11 @@
             },
             {
               "flag": "execution risk",
-              "reason": "Developer execution grade: F",
+              "reason": "Developer execution grade: D",
               "severity": "high"
             }
           ],
-          "developer_grade": "F"
+          "developer_grade": "D"
         },
         {
           "name": "Sandy Creek Solar Farm",
@@ -381,7 +381,7 @@
               "severity": "medium"
             }
           ],
-          "developer_grade": "B"
+          "developer_grade": "C"
         },
         {
           "name": "Glanmire Solar Farm",
@@ -547,8 +547,14 @@
           "stage": "construction",
           "fid_date": "2026-01-08",
           "dev_status": "FID reached",
-          "annotations": [],
-          "developer_grade": "B"
+          "annotations": [
+            {
+              "flag": "execution risk",
+              "reason": "Developer execution grade: D",
+              "severity": "high"
+            }
+          ],
+          "developer_grade": "D"
         },
         {
           "name": "Hopeland Solar Farm",
@@ -635,7 +641,7 @@
       "round": "Tender 2 \u2014 WEM Dispatchable",
       "type": "dispatchable",
       "announced_date": "2025-03-20",
-      "months_since_announced": 16,
+      "months_since_announced": 17,
       "total_capacity_mw": 654,
       "total_storage_mwh": 2595,
       "num_projects": 4,
@@ -727,7 +733,7 @@
       "round": "Tender 3 \u2014 NEM Dispatchable",
       "type": "dispatchable",
       "announced_date": "2025-09-17",
-      "months_since_announced": 10,
+      "months_since_announced": 11,
       "total_capacity_mw": 4130,
       "total_storage_mwh": 15371,
       "num_projects": 16,
@@ -934,7 +940,7 @@
           "cod_current": "2026-07-31",
           "dev_status": "construction",
           "annotations": [],
-          "developer_grade": "A"
+          "developer_grade": "C"
         },
         {
           "name": "Capricorn BESS",
@@ -1077,7 +1083,7 @@
       "round": "Tender 4 \u2014 NEM Generation",
       "type": "generation",
       "announced_date": "2025-10-09",
-      "months_since_announced": 9,
+      "months_since_announced": 10,
       "total_capacity_mw": 6640,
       "total_storage_mwh": 11444,
       "num_projects": 20,
@@ -1460,15 +1466,20 @@
           "status": "development",
           "stage": "development",
           "cod_current": "2030-01-15",
-          "dev_status": "environmental pending",
+          "dev_status": "execution risk",
           "annotations": [
             {
               "flag": "environmental pending",
               "reason": "No EIS lodged and COD > 2027",
               "severity": "medium"
+            },
+            {
+              "flag": "execution risk",
+              "reason": "Developer execution grade: D",
+              "severity": "high"
             }
           ],
-          "developer_grade": "B"
+          "developer_grade": "D"
         },
         {
           "name": "Willogoleche 2 Wind Farm",
@@ -1507,7 +1518,7 @@
       "round": "Round 1 \u2014 Generation + LDS",
       "type": "mixed",
       "announced_date": "2023-05-03",
-      "months_since_announced": 38,
+      "months_since_announced": 39,
       "total_capacity_mw": 1445,
       "total_storage_mwh": 400,
       "num_projects": 4,
@@ -1588,7 +1599,7 @@
       "round": "Round 2 \u2014 Firming",
       "type": "firming",
       "announced_date": "2023-11-22",
-      "months_since_announced": 32,
+      "months_since_announced": 33,
       "total_capacity_mw": 575,
       "total_storage_mwh": 1790,
       "num_projects": 3,
@@ -1615,7 +1626,7 @@
           "cod_current": "2026-06-30",
           "dev_status": "construction",
           "annotations": [],
-          "developer_grade": "A"
+          "developer_grade": "B"
         },
         {
           "name": "Enel X VPP Portfolio",
@@ -1656,7 +1667,7 @@
       "round": "Round 3 \u2014 Generation + LDS",
       "type": "mixed",
       "announced_date": "2023-12-19",
-      "months_since_announced": 31,
+      "months_since_announced": 32,
       "total_capacity_mw": 1274,
       "total_storage_mwh": 4192,
       "num_projects": 5,
@@ -1768,7 +1779,7 @@
       "round": "Round 4 \u2014 Generation",
       "type": "generation",
       "announced_date": "2024-07-01",
-      "months_since_announced": 24,
+      "months_since_announced": 25,
       "total_capacity_mw": 317,
       "total_storage_mwh": 372,
       "num_projects": 2,
@@ -1816,7 +1827,7 @@
       "round": "Round 5 \u2014 Long Duration Storage",
       "type": "lds",
       "announced_date": "2025-02-27",
-      "months_since_announced": 17,
+      "months_since_announced": 18,
       "total_capacity_mw": 1025,
       "total_storage_mwh": 13790,
       "num_projects": 3,
@@ -1901,7 +1912,7 @@
       "round": "Round 6 \u2014 Long Duration Storage",
       "type": "lds",
       "announced_date": "2026-02-05",
-      "months_since_announced": 5,
+      "months_since_announced": 6,
       "total_capacity_mw": 1171,
       "total_storage_mwh": 11980,
       "num_projects": 6,
@@ -1936,7 +1947,7 @@
               "severity": "medium"
             }
           ],
-          "developer_grade": "B"
+          "developer_grade": "C"
         },
         {
           "name": "Bowmans Creek BESS",
@@ -2047,5 +2058,5 @@
       }
     }
   },
-  "exported_at": "2026-07-26T18:36:15.476705"
+  "exported_at": "2026-08-08T23:10:22.415884"
 }

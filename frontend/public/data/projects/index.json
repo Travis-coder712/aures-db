@@ -64,7 +64,8 @@
     "confidence_score": "57",
     "development_stage": "epbc_approved",
     "notable": "387 MW solar farm near Gladstone, QLD. Developed by ACCIONA Energ\u00eda for Ark Energy / Korea Zinc's green hydrogen and renewable energy strategy. Powers Korea Zinc's zinc refinery operations in Townsville.",
-    "first_seen": "2020"
+    "first_seen": "2020",
+    "has_eis_data": true
   },
   {
     "id": "alligator-creek-bess",
@@ -3358,6 +3359,7 @@
     "confidence_score": "46",
     "notable": "350 MW solar farm in the Riverina region of NSW. Developed by Neoen. One of the largest solar farms in the South-West NSW REZ.",
     "first_seen": "2025-08-01",
+    "has_eis_data": true,
     "has_scheme_contract": true
   },
   {
@@ -3484,7 +3486,8 @@
     "data_confidence": "medium",
     "confidence_score": "46",
     "notable": "275 MW solar farm near Darlington Point, NSW. Developed by Edify Energy. Co-located with the Riverina Energy Storage System (150 MW / 300 MWh BESS). One of the largest solar-plus-storage complexes in Australia.",
-    "first_seen": "2020-09-02"
+    "first_seen": "2020-09-02",
+    "has_eis_data": true
   },
   {
     "id": "darlington-wind-farm-gpg",
@@ -7009,7 +7012,8 @@
     "data_confidence": "medium",
     "confidence_score": "49",
     "notable": "200 MW solar farm near Ouyen in Victoria's Mallee, developed by Total Eren (now TotalEnergies). One of the largest solar farms in Victoria. Stage 1 of a planned larger development.",
-    "first_seen": "2020-09-07"
+    "first_seen": "2020-09-07",
+    "has_eis_data": true
   },
   {
     "id": "kiar-bess",
@@ -7578,7 +7582,8 @@
     "data_confidence": "medium",
     "confidence_score": "46",
     "notable": "306 MW solar farm near Balranald, NSW. Originally developed by Canadian Solar / Recurrent Energy, now owned by RWE/BELECTRIC. One of the largest solar farms in western NSW.",
-    "first_seen": "2020-06-30"
+    "first_seen": "2020-06-30",
+    "has_eis_data": true
   },
   {
     "id": "limondale-solar-farm-2",
@@ -12027,6 +12032,7 @@
     "development_stage": "epbc_submitted",
     "notable": "400 MW solar farm near Gulgong, NSW. Developed by ACEN Australia. One of the largest solar farms in NSW's Central-West Orana REZ.",
     "first_seen": "2022",
+    "has_eis_data": true,
     "has_scheme_contract": true
   },
   {
@@ -12151,7 +12157,8 @@
     "data_confidence": "medium",
     "confidence_score": "46",
     "notable": "255 MW solar farm near Balranald, NSW. Developed by Maoneng Group using Canadian Solar bifacial modules. One of the first large-scale bifacial solar deployments in Australia. Has a 15-year PPA with the Commonwealth Bank of Australia (CBA).",
-    "first_seen": "2020-11-09"
+    "first_seen": "2020-11-09",
+    "has_eis_data": true
   },
   {
     "id": "sunshine-energy-solar-farm",
@@ -13543,7 +13550,8 @@
     "data_confidence": "medium",
     "confidence_score": "49",
     "notable": "300 MW solar farm in the Riverina, NSW. Has a 15-year PPA with Microsoft \u2014 one of the largest corporate renewable energy offtakes in Australia. Developed by FRV (Abdul Latif Jameel).",
-    "first_seen": "2024-10-21"
+    "first_seen": "2024-10-21",
+    "has_eis_data": true
   },
   {
     "id": "wallabadah-bess",
@@ -13924,7 +13932,8 @@
     "data_confidence": "low",
     "confidence_score": "15",
     "development_stage": "planning_submitted",
-    "zombie_flag": "zombie_minimal"
+    "zombie_flag": "zombie_minimal",
+    "has_eis_data": true
   },
   {
     "id": "wellington-north-solar-farm-lightsource",
@@ -14042,7 +14051,8 @@
     "data_confidence": "medium",
     "confidence_score": "46",
     "notable": "400 MW solar farm near Chinchilla, QLD \u2014 part of Neoen's Western Downs Green Power Hub. One of Queensland's largest solar installations in the Western Downs energy corridor.",
-    "first_seen": "2022-02-15"
+    "first_seen": "2022-02-15",
+    "has_eis_data": true
   },
   {
     "id": "western-plains-wind-farm",
