@@ -70,6 +70,17 @@
   "scheme_contracts": [],
   "cost_sources": [],
   "stakeholder_issues": [],
+  "eis_specs": {
+    "document_title": "Nevertire Solar Farm Environmental Impact Statement (SSD-8072) - Edify Energy",
+    "document_url": "https://majorprojects.planningportal.nsw.gov.au/prweb/PRRestService/mp/01/getContent?AttachRef=SSD-8072!20190228T015502.230+GMT",
+    "document_year": 2017,
+    "connection_voltage_kv": 132.0,
+    "network_service_provider": "Essential Energy",
+    "connection_substation_name": "Nevertire 132 kV AIS substation (Essential Energy, existing, ~1.5 km east of site)",
+    "connection_distance_km": 1.5,
+    "connection_distance_note": "Connects to existing 132 kV OHL in north of site running to Essential Energy Nevertire substation ~1.5 km east",
+    "notes": "Edify Energy (originally); now Atmos Renewables. 105 MWac; single-axis-tracker PV; ~265 GWh/yr. Grid-connected December 2019. Nevertire substation is a 132 kV AIS switchyard designed to evacuate ~130 MW to the Nyngan-Nevertire load centres. Zen Energy is offtaker."
+  },
   "sources": [
     {
       "title": "AEMO Generation Information Jan 2026",

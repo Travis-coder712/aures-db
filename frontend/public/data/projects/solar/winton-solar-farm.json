@@ -59,6 +59,16 @@
   "scheme_contracts": [],
   "cost_sources": [],
   "stakeholder_issues": [],
+  "eis_specs": {
+    "document_title": "Winton Solar Farm Factsheet (FRV, 07/04/2020)",
+    "document_url": "https://wintonsolarfarm.com/wp-content/uploads/2020/06/Winton-SF-Factsheet-070420_reduced.pdf",
+    "document_year": 2018,
+    "connection_voltage_kv": 66.0,
+    "network_service_provider": "AusNet",
+    "connection_substation_name": "Glenrowan Terminal Station",
+    "connection_distance_note": "Directly adjacent to AusNet-owned Glenrowan TS; connects into TS via short circuit",
+    "notes": "Owner/operator FRV Services Australia (subsidiary of Fotowatio Renewable Ventures). 85 MW AC. Polycrystalline bifacial PV on single-axis trackers; string inverters (largest semi-scheduled NEM solar with string inverters at commissioning). ~250 ha, ~13 km NE of Benalla, VIC. Benalla Rural City Council approval Jan 2018. Won Victorian Renewable Energy Reverse Auction Program long-term Support Agreement. Substation built by Yurika."
+  },
   "sources": [
     {
       "title": "AEMO Generation Information Jan 2026",

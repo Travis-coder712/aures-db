@@ -73,6 +73,16 @@
   "scheme_contracts": [],
   "cost_sources": [],
   "stakeholder_issues": [],
+  "eis_specs": {
+    "document_title": "Blue Grass Solar Farm \u2013 Material Change of Use consent (Western Downs Regional Council); Powerlink Blue Grass Solar Farm Connection Project",
+    "document_url": "https://www.powerlink.com.au/projects/blue-grass-solar-farm-connection-project",
+    "document_year": 2019,
+    "connection_voltage_kv": 132.0,
+    "network_service_provider": "Powerlink",
+    "connection_substation_name": "New Cameby 132 kV substation (Powerlink), tie-in to the existing Chinchilla\u2013Columboola 132 kV transmission line",
+    "connection_augmentation": "New Cameby substation constructed by Powerlink to link the facility to the existing 132 kV Chinchilla\u2013Columboola line (energised 2022)",
+    "notes": "Developer X-Elio (Brookfield-owned since 2022). 200 MWdc / ~148 MWac; near Chinchilla in the Western Downs. J.A. Martin EPC. Financial close Jan 2022 (CEFC A$37M). 10-yr Salesforce virtual PPA + 49 MW Stanwell offtake. Grid connection and commercial operation Nov 2022. 148 MW grid-forming BESS being added 2025\u201326."
+  },
   "sources": [
     {
       "title": "AEMO Generation Information Jan 2026",

@@ -58,6 +58,16 @@
   "scheme_contracts": [],
   "cost_sources": [],
   "stakeholder_issues": [],
+  "eis_specs": {
+    "document_title": "Hillston Sun Farm State Significant Development Assessment (SSD-7955), incl. MOD-1",
+    "document_url": "https://majorprojects.planningportal.nsw.gov.au/prweb/PRRestService/mp/01/getContent?AttachRef=SSD-7955-MOD-1!20190226T082120.822+GMT",
+    "document_year": 2017,
+    "connection_voltage_kv": 132.0,
+    "network_service_provider": "Essential Energy",
+    "connection_substation_name": "Existing Essential Energy 132/33 kV Hillston substation, adjacent to the site; connected via a new 132 kV overhead line",
+    "connection_distance_km": 0.5,
+    "notes": "Developer Overland Sun Farming; acquired by Amp Energy 2020 and later marketed as Revera Energy asset. EIS prepared by EMM. Consent 26 Oct 2017. 85 MWac / ~119 MWdc (DC:AC ~1.40), ~300,000 modules on single-axis trackers, 393 ha ~3.5 km from Hillston township. Construction 2019\u201321; full commercial operation Apr 2022. EPC involved Yurika."
+  },
   "sources": [
     {
       "title": "AEMO Generation Information Jan 2026",

@@ -66,6 +66,16 @@
   "scheme_contracts": [],
   "cost_sources": [],
   "stakeholder_issues": [],
+  "eis_specs": {
+    "document_title": "Wollar Solar Farm Environmental Impact Statement (SSD-9254) - Sunterra Energy",
+    "document_url": "https://www.planningportal.nsw.gov.au/major-projects/projects/wollar-solar-farm",
+    "document_year": 2019,
+    "connection_voltage_kv": 330.0,
+    "network_service_provider": "TransGrid",
+    "connection_substation_name": "New TransGrid 330 kV substation in NE corner of site, cut in to existing 330 kV OHL (adjacent to Wollar 500/330 kV switching station)",
+    "connection_augmentation": "New TransGrid-operated 330 kV substation in NE corner of site",
+    "notes": "Sunterra Energy. ~290 MWac (280-290 MWac range), up to ~800,000 modules; tracker vs fixed-tilt to be decided post-consent. Consent 24 February 2020. Original 30 MWh BESS materially upsized via MOD-4 (2024-26) to 280 MW / 560 MWh. Site ~7 km south of Wollar village."
+  },
   "sources": [
     {
       "title": "AEMO Generation Information Jan 2026",

@@ -58,6 +58,16 @@
   "scheme_contracts": [],
   "cost_sources": [],
   "stakeholder_issues": [],
+  "eis_specs": {
+    "document_title": "Haughton Solar Farm \u2014 Development Application (Burdekin Shire Council MCU, full 500 MW envelope approved)",
+    "document_url": "https://www.pacificblue.com.au/our-energy-production/operating-sites/haughton-solar-farm",
+    "document_year": 2018,
+    "connection_voltage_kv": 275.0,
+    "network_service_provider": "Powerlink",
+    "connection_substation_name": "Ross 275 kV substation (Powerlink)",
+    "connection_augmentation": "33 kV collector network from Haughton to Ross 275 kV via project switching station",
+    "notes": "Pacific Hydro (now Pacific Blue). Stage 1 100 MWac (Stage 2 300 MW approved 2024). Single-axis trackers with 23 inverter stations; site west of Ayr, north QLD. Burdekin Shire Council MCU covers the full 500 MW site envelope; Stage 1 energised 2019, offtake to CS Energy and QLD-based commercial customers."
+  },
   "sources": [
     {
       "title": "AEMO Generation Information Jan 2026",

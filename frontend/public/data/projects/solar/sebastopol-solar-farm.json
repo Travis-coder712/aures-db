@@ -59,6 +59,15 @@
   "scheme_contracts": [],
   "cost_sources": [],
   "stakeholder_issues": [],
+  "eis_specs": {
+    "document_title": "Sebastopol Solar Farm (SSD-9098) \u2013 State Significant Development landing page and EIS record",
+    "document_url": "https://www.planningportal.nsw.gov.au/major-projects/projects/sebastopol-solar-farm",
+    "document_year": 2018,
+    "connection_voltage_kv": 132.0,
+    "network_service_provider": "TransGrid",
+    "connection_substation_name": "Tap into existing 132 kV Temora\u2013Lake Cowal transmission line (near Yanco\u2013Coleambally area); connection to NEM via existing TransGrid 132 kV OHL",
+    "notes": "Developed by ib vogt (Germany); sold to FRV (Fotowatio Renewable Ventures) March 2020. 90 MWac on ~248 ha, ~16 km south of Temora. Application reference SSD-9098 (NSW planning portal now lists 9098; input note SSD-9522 not confirmed). Approved 27 Feb 2019 by DPIE. EPC by ib vogt; construction 2020\u201321, commissioning Dec 2021, commercial operation Jul 2022. 10-yr PPA with Snowy Hydro."
+  },
   "sources": [
     {
       "title": "AEMO Generation Information Jan 2026",

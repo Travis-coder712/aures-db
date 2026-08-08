@@ -73,6 +73,16 @@
   "scheme_contracts": [],
   "cost_sources": [],
   "stakeholder_issues": [],
+  "eis_specs": {
+    "document_title": "Woolooga Solar Farm, Lower Wonga, Queensland \u2013 EPBC Act Approval Decision Notice (EPBC 2019/8554)",
+    "document_url": "https://lightsourcebp.com/app/uploads/2022/12/EPBC-Approval-Decision-Notice.pdf",
+    "document_year": 2020,
+    "connection_voltage_kv": 132.0,
+    "network_service_provider": "Powerlink",
+    "connection_substation_name": "New 132/33 kV solar-farm substation connected to Powerlink's Woolooga 275/132 kV substation (with a 132/33 kV 200 MVA transformer)",
+    "connection_augmentation": "New 132/33 kV substation at the solar farm; new 275 kV feeder bay at Woolooga Substation added later for the co-located Lower Wonga solar + BESS hybrid",
+    "notes": "Developer Lightsource BP (Lightsource Development Services Australia). EPBC 2019/8554: controlled action 12 Mar 2020, approval decision 5 Mar 2021 (effect until 5 Mar 2051). Up to 176 MW on ~650 ha at Lower Wonga near Gympie. Risen Energy modules. Key impact: Koala habitat + Grey-headed Flying-fox foraging habitat, requiring a 196.42 ha Woolooga Offset Site. Powerlink connection works completed 2021, final commissioning 2023. A separate Lower Wonga hybrid solar + BESS project sits alongside."
+  },
   "sources": [
     {
       "title": "AEMO Generation Information Jan 2026",

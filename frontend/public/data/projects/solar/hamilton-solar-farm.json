@@ -71,6 +71,16 @@
   "scheme_contracts": [],
   "cost_sources": [],
   "stakeholder_issues": [],
+  "eis_specs": {
+    "document_title": "Hamilton Solar Farm \u2014 Development Application (Whitsunday Regional Council MCU) and Powerlink Hamilton Connection Project",
+    "document_url": "https://www.powerlink.com.au/projects/hamilton-solar-farm-connection-project",
+    "document_year": 2017,
+    "connection_voltage_kv": 132.0,
+    "network_service_provider": "Powerlink",
+    "connection_substation_name": "Strathmore 132 kV substation (Powerlink)",
+    "connection_augmentation": "New shared Powerlink 132 kV transmission line + solar-farm substation + additional Strathmore feeder bay (shared with Whitsunday Solar Farm; completed 2018)",
+    "notes": "Developed by Edify Energy; Gentari owner. 57.5 MWac / 69 MWdc; 174,650 PV modules on 1,940 Array Technologies DuraTrack single-axis trackers across ~330 ha north of Collinsville. ARENA and QLD Government supported; ERM Power offtake PPA. Whitsunday Regional Council MCU; commissioned 2018."
+  },
   "sources": [
     {
       "title": "AEMO Generation Information Jan 2026",

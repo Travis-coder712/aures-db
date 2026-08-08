@@ -71,6 +71,16 @@
   "scheme_contracts": [],
   "cost_sources": [],
   "stakeholder_issues": [],
+  "eis_specs": {
+    "document_title": "Sun Metals Solar Farm \u2014 Material Change of Use application (Townsville City Council, SPA 2009); AECOM statutory approvals lead",
+    "document_url": "https://www.sunmetals.com.au/sustainability/renewables/",
+    "document_year": 2017,
+    "connection_voltage_kv": 132.0,
+    "network_service_provider": "Ergon Energy",
+    "connection_substation_name": "Sun Metals refinery 33/132 kV substation (behind-the-meter)",
+    "connection_augmentation": "Direct-connected to zinc refinery load; net export to Ergon distribution / Powerlink transmission via refinery interconnect",
+    "notes": "Sun Metals Corporation (now Ark Energy / Korea Zinc). Originally 124 MWac; Sun Metals website now cites 143 MWac / 151 MWdc / 1,260,000 thin-film modules through 52 large-scale outdoor inverters in 26 Power Conversion Stations on fixed-tilt (no trackers) across ~120 ha. First large-scale solar farm in Australia built directly by a major energy user; commissioned 2018 on behalf of Sun Metals zinc refinery."
+  },
   "sources": [
     {
       "title": "AEMO Generation Information Jan 2026",

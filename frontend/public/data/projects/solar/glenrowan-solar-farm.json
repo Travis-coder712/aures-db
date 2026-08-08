@@ -58,6 +58,15 @@
   "scheme_contracts": [],
   "cost_sources": [],
   "stakeholder_issues": [],
+  "eis_specs": {
+    "document_title": "Victorian Ministerial Permit PA2101420 \u2013 Glenrowan Solar Farm (with 2026 BESS permit PA2302185)",
+    "document_url": "https://www.planning.vic.gov.au/planning-approvals/ministerial-permits-register/ministerial-permits/b68f14c0-d6e3-ed11-8847-002248922d75",
+    "document_year": 2023,
+    "connection_voltage_kv": 66.0,
+    "network_service_provider": "AusNet",
+    "connection_substation_name": "Glenrowan Terminal Station",
+    "notes": "130 MWdc / 102 MWac solar farm on ~245 ha adjacent to Glenrowan Terminal Station (separate from the earlier Glenrowan West and Winton projects, which also connect at Glenrowan TS). WSP engineering. Connection works permit PA2101420 (2023) covers grid tie-in; co-located BESS permit PA2302185 approved 28 May 2026. Panel/inverter OEMs not disclosed in Victorian ministerial permit register."
+  },
   "sources": [
     {
       "title": "AEMO Generation Information Jan 2026",

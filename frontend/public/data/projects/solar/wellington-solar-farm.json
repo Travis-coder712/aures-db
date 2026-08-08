@@ -64,6 +64,17 @@
   "scheme_contracts": [],
   "cost_sources": [],
   "stakeholder_issues": [],
+  "eis_specs": {
+    "document_title": "Wellington Solar Farm Environmental Impact Statement (SSD-8573) - First Solar (Australia)",
+    "document_url": "https://majorprojects.planningportal.nsw.gov.au/prweb/PRRestService/mp/01/getContent?AttachRef=SSD-8573!20190228T022810.911+GMT",
+    "document_year": 2018,
+    "connection_voltage_kv": 330.0,
+    "network_service_provider": "TransGrid",
+    "connection_substation_name": "Wellington 330 kV substation (TransGrid, ~150 m south of development footprint)",
+    "connection_distance_km": 1.27,
+    "connection_distance_note": "New 1,270 m 330 kV OHL from onsite BESS/switchyard to TransGrid Wellington 330 kV substation",
+    "notes": "First Solar (Australia) - developed then sold to Lightsource bp, and again to Aula Energy in 2026. ~174 MWac approved (180 MW peak in some references) on ~559 ha, 2 km NE of Wellington. First Solar CdTe thin-film PV modules on single-axis trackers. Existing 330 kV OHL crosses site."
+  },
   "sources": [
     {
       "title": "AEMO Generation Information Jan 2026",

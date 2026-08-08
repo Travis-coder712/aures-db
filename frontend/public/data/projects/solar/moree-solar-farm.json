@@ -71,6 +71,15 @@
   "scheme_contracts": [],
   "cost_sources": [],
   "stakeholder_issues": [],
+  "eis_specs": {
+    "document_title": "Moree Solar Farm Environmental Assessment (Part 3A, MP10_0175)",
+    "document_url": "https://www.planningportal.nsw.gov.au/major-projects/projects/moree-solar-farm",
+    "document_year": 2011,
+    "connection_voltage_kv": 132.0,
+    "network_service_provider": "TransGrid",
+    "connection_substation_name": "Moree 132 kV substation (TransGrid)",
+    "notes": "Developer FRV / Fotowatio Renewable Ventures. ARENA-supported (A$101.7M). 56 MWac / ~70 MWdc (DC:AC ~1.25). First large-scale Australian solar plant to use single-axis trackers. Site ~3 km south of Moree, east of Newell Hwy. Approved 17 Jul 2011 under Part 3A; commissioned 2016. EIS lodged Oct 2012 with a revised version and public exhibition through 2012\u201313, but the Part 3A EA and determination sit under MP10_0175 (2011)."
+  },
   "sources": [
     {
       "title": "AEMO Generation Information Jan 2026",

@@ -70,6 +70,15 @@
   "scheme_contracts": [],
   "cost_sources": [],
   "stakeholder_issues": [],
+  "eis_specs": {
+    "document_title": "Emerald Solar Park \u2014 Development Application (Central Highlands Regional Council MCU), 2017",
+    "document_url": "https://www.emerald-solar.com.au/",
+    "document_year": 2017,
+    "connection_voltage_kv": 66.0,
+    "network_service_provider": "Ergon Energy",
+    "connection_substation_name": "Ergon Emerald 66 kV distribution network",
+    "notes": "Originally developed by RES (Renewable Energy Systems). 72 MWac; Canadian Solar modules through 32 SMA inverters on NEXTracker single-axis trackers, connected to Ergon's 66 kV network at Emerald. Central Highlands Regional Council MCU; commercial operations early 2019."
+  },
   "sources": [
     {
       "title": "AEMO Generation Information Jan 2026",

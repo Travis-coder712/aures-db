@@ -64,6 +64,15 @@
   "scheme_contracts": [],
   "cost_sources": [],
   "stakeholder_issues": [],
+  "eis_specs": {
+    "document_title": "Yarranlea Solar Farm \u2014 EPBC referral (not a controlled action) and Toowoomba Regional Council DA; QLD Nature Conservation Act clearing permit",
+    "document_url": "https://yarranleasolar.com.au/",
+    "document_year": 2018,
+    "connection_voltage_kv": 66.0,
+    "network_service_provider": "Ergon Energy",
+    "connection_substation_name": "Middle Ridge Bulk Supply Substation (Toowoomba, Ergon 66 kV)",
+    "notes": "Risen Energy (owner from Feb 2018). 103 MWp / ~82 MW export; 360,000+ Risen 360/365 W monocrystalline 1500 VDC modules through SMA inverters on Arctech Solar single-axis trackers across ~250 ha near Pittsworth (50 km west of Toowoomba). EPBC 'not a controlled action'; QLD Nature Conservation Act clearing permit; Toowoomba Regional Council DA. Grid connection Jan 2020."
+  },
   "sources": [
     {
       "title": "AEMO Generation Information Jan 2026",

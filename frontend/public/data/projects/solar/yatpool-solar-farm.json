@@ -59,6 +59,16 @@
   "scheme_contracts": [],
   "cost_sources": [],
   "stakeholder_issues": [],
+  "eis_specs": {
+    "document_title": "Application for Licence to Generate Electricity for Supply or Sale \u2013 Yatpool Sun Farm Pty Ltd (Public submission to Essential Services Commission)",
+    "document_url": "https://www.esc.vic.gov.au/sites/default/files/documents/yatpool-electricity-generation-licence-application-20190410.pdf",
+    "document_year": 2019,
+    "connection_voltage_kv": 66.0,
+    "network_service_provider": "Powercor",
+    "connection_substation_name": "Powercor 66 kV network near Iraak/Yatpool (Kerang\u2013Red Cliffs 220 kV corridor)",
+    "connection_distance_note": "Onsite 100 MVA transformer + 10x 5 MVA and 8x 5.5 MVA MVPS feeding Powercor 66 kV network; Generator Deed with Powercor executed 4 April 2017",
+    "notes": "Yatpool Sun Farm Pty Ltd, ultimately owned by BayWa r.e. renewable energy GmbH. 106.4 MWp DC / 81 MW AC (DC:AC ~1.31), 258 ha, ~20 km south of Mildura. 327,613 polycrystalline modules (Astronergy/Chint + GCL supply), single-axis NEXTracker tracker, 36 SMA MVPS 5500-S-AU central inverters (via Renovagy). EPC Energy Solutions Pty Ltd (Beon). PPA with Flow Power for 35% of output. Fully energised by 15 July 2019. Mildura Rural City Council permit."
+  },
   "sources": [
     {
       "title": "AEMO Generation Information Jan 2026",

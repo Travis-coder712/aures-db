@@ -72,6 +72,16 @@
   "scheme_contracts": [],
   "cost_sources": [],
   "stakeholder_issues": [],
+  "eis_specs": {
+    "document_title": "Port Augusta Renewable Energy Park (PAREP) \u2013 Australian Industry Participation (AIP) Plan Summary, Operations Phase, Iberdrola Renewables Australia (29 September 2022)",
+    "document_url": "https://www.industry.gov.au/sites/default/files/aip/2022-11/iberdrola_parep_operations_summary_29sep22_1.docx",
+    "document_year": 2019,
+    "connection_voltage_kv": 275.0,
+    "network_service_provider": "ElectraNet",
+    "connection_substation_name": "New 275 kV project substation exporting to ElectraNet's Davenport substation",
+    "connection_augmentation": "New 275 kV project substation + 275 kV export cable/civil infrastructure (Contract 1, awarded July 2020)",
+    "notes": "Iberdrola Renewables Australia (via SPV PAREP1 Pty Ltd), acquired from DP Energy in 2020. 317 MW hybrid = 210 MW wind (50 x Vestas V150 4.2 MW turbines) + 107 MW solar PV (~250,000 flat-panel modules) on ~5,400 ha between Port Paterson and Winninowie, 15 km south of Port Augusta. Original DA approved by SA Government Aug 2016 (DP Energy \u2014 up to 375 MW first phase); Development Act 1993 approval by SA Minister for Planning 5 November 2019 (DA 660/V008/15 V1). Commissioned 2022. Primary offtake BHP Olympic Dam."
+  },
   "sources": [
     {
       "title": "AEMO Generation Information Jan 2026",

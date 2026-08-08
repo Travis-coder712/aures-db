@@ -58,6 +58,15 @@
   "scheme_contracts": [],
   "cost_sources": [],
   "stakeholder_issues": [],
+  "eis_specs": {
+    "document_title": "Rugby Run Solar Farm \u2014 Development Application (Isaac Regional Council MCU, May 2017); Adani Renewables (Bravus)",
+    "document_url": "https://www.bravus.com.au/our-businesses/rugby-run/",
+    "document_year": 2017,
+    "connection_voltage_kv": 66.0,
+    "network_service_provider": "Ergon Energy",
+    "connection_substation_name": "Ergon 66 kV network near Moranbah (Central QLD)",
+    "notes": "Adani Renewables (rebranded Bravus). Stage 1 65 MW; MCU envelope approved for up to 170 MW total. 247,000 PV modules on single-axis trackers near Moranbah, Central QLD. Isaac Regional Council MCU May 2017; opened Oct 2019."
+  },
   "sources": [
     {
       "title": "AEMO Generation Information Jan 2026",

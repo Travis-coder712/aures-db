@@ -67,6 +67,16 @@
   "scheme_contracts": [],
   "cost_sources": [],
   "stakeholder_issues": [],
+  "eis_specs": {
+    "document_title": "Moura Solar Farm \u2014 Development Application (Banana Shire Council MCU) and Powerlink Moura Connection Project",
+    "document_url": "https://www.powerlink.com.au/projects/moura-solar-farm-connection-project",
+    "document_year": 2018,
+    "connection_voltage_kv": 132.0,
+    "network_service_provider": "Powerlink",
+    "connection_substation_name": "Moura 132 kV substation (Powerlink)",
+    "connection_augmentation": "New feeder bay at Powerlink Moura Substation",
+    "notes": "Developed by ESCO Pacific; Mytilineos/Metlen owner from Dec 2020 with METKA EGN as EPC. 110 MWdc / ~82 MWac (Powerlink markets it as ~110 MW connection); 185,000 Risen Energy 590/595 W bifacial modules on Nextracker Horizon single-axis trackers across ~203 ha, 12 km east of Moura. Banana Shire Council DA April 2018; commercial operations June 2023."
+  },
   "sources": [
     {
       "title": "AEMO Generation Information Jan 2026",

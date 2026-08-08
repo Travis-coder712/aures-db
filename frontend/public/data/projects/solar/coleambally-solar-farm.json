@@ -65,6 +65,15 @@
   "scheme_contracts": [],
   "cost_sources": [],
   "stakeholder_issues": [],
+  "eis_specs": {
+    "document_title": "Coleambally Solar Farm Environmental Impact Statement (SSD-8642) - Neoen Australia",
+    "document_url": "https://www.planningportal.nsw.gov.au/major-projects/projects/coleambally-solar-farm",
+    "document_year": 2017,
+    "connection_voltage_kv": 132.0,
+    "network_service_provider": "TransGrid",
+    "connection_substation_name": "Coleambally 132 kV substation (TransGrid)",
+    "notes": "Neoen Australia. 150 MWac / ~189 MWp DC. 567,828 PV modules on 3,465 Array Technologies DuraTrack single-axis trackers across ~570 ha. Consent October 2017; commercial operation November 2018. 12-yr PPA with EnergyAustralia for 70% output."
+  },
   "sources": [
     {
       "title": "AEMO Generation Information Jan 2026",

@@ -65,6 +65,15 @@
   "scheme_contracts": [],
   "cost_sources": [],
   "stakeholder_issues": [],
+  "eis_specs": {
+    "document_title": "Avonlie Solar Farm Environmental Impact Statement (SSD-9031) - Iberdrola Australia",
+    "document_url": "https://majorprojects.planningportal.nsw.gov.au/prweb/PRRestService/mp/01/getContent?AttachRef=RFI-12104238!20201222T062526.746+GMT",
+    "document_year": 2019,
+    "connection_voltage_kv": 132.0,
+    "network_service_provider": "TransGrid",
+    "connection_substation_name": "Dual 132 kV grid connection near Darlington Point (TransGrid sub-transmission network)",
+    "notes": "Iberdrola Australia. 245 MWdc (~190 MWac output). More than 450,000 PV modules on single-axis trackers. Consent August 2019; initial energisation 2022; commercial operation August 2023. Generates ~500 GWh/yr."
+  },
   "sources": [
     {
       "title": "AEMO Generation Information Jan 2026",

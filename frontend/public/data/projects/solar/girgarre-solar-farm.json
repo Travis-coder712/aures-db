@@ -79,6 +79,15 @@
   "scheme_contracts": [],
   "cost_sources": [],
   "stakeholder_issues": [],
+  "eis_specs": {
+    "document_title": "Girgarre Solar Farm \u2013 Frequently Asked Questions (Potentia Energy, updated April 2025)",
+    "document_url": "https://potentiaenergy.com.au/wp-content/uploads/2024/10/Potentia-Energy-FAQs-Girgarre-1.pdf",
+    "document_year": 2018,
+    "connection_voltage_kv": 66.0,
+    "network_service_provider": "Powercor",
+    "connection_substation_name": "Existing 66 kV transmission line on southern boundary (towards Stanhope zone substation)",
+    "notes": "Jointly developed by Lesson Group + Enel Green Power Australia (now Potentia Energy, an Enel + INPEX JV that fully acquired Girgarre in 2019). ~93 MW AC; ~167,000 PV modules (LONGi supply) plus ~15 power conversion units. EPC Beon Energy Solutions. ~250 ha, ~10 km NW of Stanhope / ~50 km W of Shepparton, Shire of Campaspe. ~A$140 M capex. Planning permit granted 2018 by Campaspe Shire Council. Operational."
+  },
   "sources": [
     {
       "title": "AEMO Generation Information Jan 2026",

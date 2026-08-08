@@ -71,6 +71,16 @@
   "scheme_contracts": [],
   "cost_sources": [],
   "stakeholder_issues": [],
+  "eis_specs": {
+    "document_title": "Wemen Solar Farm \u2013 Mildura Rural City Council planning permit (no consolidated public EIS document online)",
+    "document_url": "https://t2energy.com.au/projects/wemen.html",
+    "document_year": 2017,
+    "connection_voltage_kv": 132.0,
+    "network_service_provider": "Powercor",
+    "connection_substation_name": "Wemen Terminal Station (WETS 220/66 kV) via 33/132 kV project substation",
+    "connection_distance_note": "Onsite 33 kV switching + 33/132 kV substation into Powercor 132 kV switchyard, ultimately tapping the 220 kV Kerang\u2013Wemen\u2013Red Cliffs line via WETS",
+    "notes": "Originator Island Green Power / Overland Sun Farming; acquired WIRSOL 2018, now Gentari (PETRONAS, 100%). EPC RCR Tomlinson + Laing O'Rourke; T2 Energy designed 33 kV switchroom, control-room and Powercor Utility buildings. 110 MWp DC / 97.5 MW AC (DC:AC ~1.13). 318,942 modules, single-axis tracking. CEFC-financed. First generation Feb 2019. Part of AEMO-constrained NW-VIC cluster (Wemen, Karadoc, Gannawarra, Bannerton) at 50% in 2019 for voltage stability. NO planning-report PDF online \u2014 Mildura RCC register only."
+  },
   "sources": [
     {
       "title": "AEMO Generation Information Jan 2026",

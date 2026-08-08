@@ -343,7 +343,8 @@
     "data_confidence": "medium",
     "confidence_score": "46",
     "notable": "245 MW solar farm in the Riverina region of NSW. Developed by UPC\\AC Renewables (now ACEN Australia).",
-    "first_seen": "2023-03-28"
+    "first_seen": "2023-03-28",
+    "has_eis_data": true
   },
   {
     "id": "awaba-bess",
@@ -601,7 +602,8 @@
     "data_confidence": "medium",
     "confidence_score": "46",
     "notable": "70 MW solar farm near Robinvale, VIC. Developed by Foresight Group. Uses single-axis tracking technology.",
-    "first_seen": "2018-07-20"
+    "first_seen": "2018-07-20",
+    "has_eis_data": true
   },
   {
     "id": "baranduda-electrical-energy-reserve",
@@ -1048,7 +1050,8 @@
     "data_confidence": "medium",
     "confidence_score": "46",
     "notable": "103 MW solar farm near Gulgong, NSW. One of the first large-scale solar farms developed by First Solar in Australia, using First Solar thin-film CdTe modules. Originally part of the New Energy Solar portfolio.",
-    "first_seen": "2019-04-22"
+    "first_seen": "2019-04-22",
+    "has_eis_data": true
   },
   {
     "id": "big-g-pumped-hydro-project",
@@ -1296,7 +1299,8 @@
     "data_confidence": "medium",
     "confidence_score": "49",
     "notable": "257 MW solar farm near Chinchilla, QLD. Developed by X-ELIO with Stanwell Corporation as offtaker. Located in Queensland's Western Downs energy corridor.",
-    "first_seen": "2022-07-31"
+    "first_seen": "2022-07-31",
+    "has_eis_data": true
   },
   {
     "id": "blyth-bess",
@@ -1420,7 +1424,8 @@
     "data_confidence": "medium",
     "confidence_score": "46",
     "notable": "221 MW solar farm near Wagga Wagga, NSW. Developed by Canadian Solar / Recurrent Energy using Canadian Solar BiHiKu bifacial modules. One of the early large-scale bifacial deployments in Australia.",
-    "first_seen": "2020-03-16"
+    "first_seen": "2020-03-16",
+    "has_eis_data": true
   },
   {
     "id": "bonnie-brae-hybrid-plant",
@@ -1818,7 +1823,8 @@
     "confidence_score": "54",
     "development_stage": "epbc_approved",
     "notable": "74 MW solar farm at Broken Hill, NSW. Developed by AGL Energy. Co-located in the same area as the Broken Hill BESS. One of the earliest large-scale solar plants in far western NSW.",
-    "first_seen": "2012"
+    "first_seen": "2012",
+    "has_eis_data": true
   },
   {
     "id": "buckland-solar-farm",
@@ -2078,7 +2084,8 @@
     "notable": "95 MW solar farm near Port Augusta, SA. Stage 1 of the 190 MW Bungala Solar Power Project. Developed by ENEL Green Power / DIF Capital Partners. One of the first utility-scale solar projects in the Port Augusta renewable energy precinct.",
     "first_seen": "2018-05-14",
     "connection_nsp": "ElectraNet",
-    "aemo_kci_id": "S00019"
+    "aemo_kci_id": "S00019",
+    "has_eis_data": true
   },
   {
     "id": "bungala-two-solar-farm",
@@ -2092,7 +2099,8 @@
     "data_confidence": "medium",
     "confidence_score": "46",
     "notable": "95 MW solar farm near Port Augusta, SA. Stage 2 of the 190 MW Bungala Solar Power Project \u2014 SA's largest solar farm at completion. Developed by ENEL Green Power / DIF Capital Partners. Has a PPA with Origin Energy.",
-    "first_seen": "2018-10-29"
+    "first_seen": "2018-10-29",
+    "has_eis_data": true
   },
   {
     "id": "bungama-bess-risen",
@@ -2917,7 +2925,8 @@
     "data_confidence": "medium",
     "confidence_score": "46",
     "notable": "100 MW solar farm near Clare in North QLD. Developed by FRV (Abdul Latif Jameel). Has a PPA with AGL Energy.",
-    "first_seen": "2018-04-16"
+    "first_seen": "2018-04-16",
+    "has_eis_data": true
   },
   {
     "id": "clarke-creek-2-bess-kci",
@@ -3013,7 +3022,8 @@
     "data_confidence": "medium",
     "confidence_score": "46",
     "notable": "165 MW solar farm near Clermont, Central Queensland. Originally developed by Wirsol, now owned by IGNEO Infrastructure Partners. Has a PPA with Origin Energy.",
-    "first_seen": "2019-06-18"
+    "first_seen": "2019-06-18",
+    "has_eis_data": true
   },
   {
     "id": "cobbora-bess",
@@ -3084,7 +3094,8 @@
     "data_confidence": "medium",
     "confidence_score": "46",
     "notable": "88 MW solar farm near Coleambally in the Riverina, NSW. Now owned by Octopus Renewables. Has a PPA with EnergyAustralia.",
-    "first_seen": "2018-09-06"
+    "first_seen": "2018-09-06",
+    "has_eis_data": true
   },
   {
     "id": "collector",
@@ -3248,7 +3259,8 @@
     "data_confidence": "medium",
     "confidence_score": "46",
     "notable": "135 MW solar farm near Miles, QLD. Developed by Vena Energy. Located in Queensland's Western Downs region.",
-    "first_seen": "2022-06-13"
+    "first_seen": "2022-06-13",
+    "has_eis_data": true
   },
   {
     "id": "comet-energy-park",
@@ -3725,7 +3737,8 @@
     "data_confidence": "medium",
     "confidence_score": "46",
     "notable": "110 MW solar farm near Dalby, QLD. Developed by APA Group \u2014 one of Australia's first utility-scale solar farms built by a major pipeline/infrastructure company. Has a 12-year PPA with Origin Energy.",
-    "first_seen": "2018-07-27"
+    "first_seen": "2018-07-27",
+    "has_eis_data": true
   },
   {
     "id": "darlington-point-solar-farm",
@@ -3831,7 +3844,8 @@
     "data_confidence": "medium",
     "confidence_score": "46",
     "notable": "180 MW solar farm near Collinsville, QLD. Developed by Edify Energy with EPC by Bouygues Construction. Has a PPA with Origin Energy.",
-    "first_seen": "2018-10-24"
+    "first_seen": "2018-10-24",
+    "has_eis_data": true
   },
   {
     "id": "deal-1-west-off-shore-wind-farm",
@@ -4397,7 +4411,8 @@
     "notable": "180 MW solar park in QLD. One of Queensland's larger utility-scale solar installations.",
     "first_seen": "2020",
     "connection_nsp": "Powerlink",
-    "aemo_kci_id": "Q00300"
+    "aemo_kci_id": "Q00300",
+    "has_eis_data": true
   },
   {
     "id": "egans-hills-bess",
@@ -4527,7 +4542,8 @@
     "data_confidence": "medium",
     "confidence_score": "46",
     "notable": "~72 MW solar farm near Emerald, Central Queensland. Holds a PPA with Telstra \u2014 one of the first major corporate solar PPAs in Australia. Now owned by Lighthouse Infrastructure / RES Australia.",
-    "first_seen": "2018-09-19"
+    "first_seen": "2018-09-19",
+    "has_eis_data": true
   },
   {
     "id": "emeroo-bess",
@@ -4702,7 +4718,8 @@
     "data_confidence": "medium",
     "confidence_score": "46",
     "notable": "133 MW solar farm near Finley in the Riverina, NSW. Developed by ESCO Pacific (now John Laing). One of the first large-scale solar farms in the southern Riverina.",
-    "first_seen": "2019-08-01"
+    "first_seen": "2019-08-01",
+    "has_eis_data": true
   },
   {
     "id": "fisher",
@@ -4906,7 +4923,8 @@
     "data_confidence": "medium",
     "confidence_score": "46",
     "notable": "50 MW solar farm near Kerang, VIC. Co-located with a 25 MW / 50 MWh Tesla Megapack battery \u2014 one of Australia's first solar-plus-storage projects. Developed by Edify Energy. EnergyAustralia PPA.",
-    "first_seen": "2018-04-05"
+    "first_seen": "2018-04-05",
+    "has_eis_data": true
   },
   {
     "id": "ganymirra-solar-power-station",
@@ -5163,7 +5181,8 @@
     "data_confidence": "medium",
     "confidence_score": "49",
     "notable": "76 MW solar farm near Girgarre in Victoria's Goulburn Valley. Part of the growing cluster of solar developments in northern Victoria.",
-    "first_seen": "2024-07-19"
+    "first_seen": "2024-07-19",
+    "has_eis_data": true
   },
   {
     "id": "gladstone-sda-energy-hub-a-kci",
@@ -5307,7 +5326,8 @@
     "data_confidence": "medium",
     "confidence_score": "46",
     "notable": "41 MW solar farm near Glenrowan, VIC. Developed by RES Group.",
-    "first_seen": "2023-11-20"
+    "first_seen": "2023-11-20",
+    "has_eis_data": true
   },
   {
     "id": "glenrowan-west-solar-farm",
@@ -5321,7 +5341,8 @@
     "data_confidence": "medium",
     "confidence_score": "46",
     "notable": "110 MW solar farm near Glenrowan, VIC. Part of a cluster of solar farms in Victoria's north-east.",
-    "first_seen": "2020-12-21"
+    "first_seen": "2020-12-21",
+    "has_eis_data": true
   },
   {
     "id": "glenroy-hybrid-facility-solar-and-bess",
@@ -5548,7 +5569,8 @@
     "data_confidence": "low",
     "confidence_score": "43",
     "notable": "First power injected early Nov 2025 per Renewables Now. Full production targeted 2026, transmission complete Sep 2026. ENGIE 250 MW VIC solar.",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "has_eis_data": true
   },
   {
     "id": "gordon",
@@ -6007,7 +6029,8 @@
     "data_confidence": "medium",
     "confidence_score": "46",
     "notable": "110 MW solar farm near Gunnedah, NSW. Developed by Canadian Solar / Recurrent Energy.",
-    "first_seen": "2021-06-28"
+    "first_seen": "2021-06-28",
+    "has_eis_data": true
   },
   {
     "id": "gunning-wind-farm",
@@ -6271,7 +6294,8 @@
     "data_confidence": "medium",
     "confidence_score": "46",
     "notable": "115 MW solar farm near Collinsville, QLD. Developed by FRV (Abdul Latif Jameel). Located in North Queensland's Bowen Basin.",
-    "first_seen": "2018-07-09"
+    "first_seen": "2018-07-09",
+    "has_eis_data": true
   },
   {
     "id": "hampton-park-sess",
@@ -6432,7 +6456,8 @@
     "data_confidence": "medium",
     "confidence_score": "46",
     "notable": "130 MW solar farm near Townsville, QLD. Developed by FRV (Abdul Latif Jameel). Stage 1 of a larger planned solar precinct in North Queensland.",
-    "first_seen": "2019-05-27"
+    "first_seen": "2019-05-27",
+    "has_eis_data": true
   },
   {
     "id": "haughton-solar-farm-stage-2",
@@ -6692,7 +6717,8 @@
     "data_confidence": "medium",
     "confidence_score": "46",
     "notable": "85 MW solar farm near Hillston in western NSW. Developed by Overland Sun Farming.",
-    "first_seen": "2021-10-04"
+    "first_seen": "2021-10-04",
+    "has_eis_data": true
   },
   {
     "id": "hollow-tree-wind-farm",
@@ -7310,7 +7336,8 @@
     "data_confidence": "medium",
     "confidence_score": "46",
     "notable": "56 MW solar farm near Red Cliffs, VIC. Developed by Foresight Group. Part of a cluster of solar farms in Victoria's Sunraysia region.",
-    "first_seen": "2018-10-23"
+    "first_seen": "2018-10-23",
+    "has_eis_data": true
   },
   {
     "id": "karangi-bess",
@@ -7508,7 +7535,8 @@
     "data_confidence": "medium",
     "confidence_score": "49",
     "notable": "30 MW solar plant near Kerang, VIC. Developed by Pacific Hydro (SPIC). One of Victoria's earlier utility-scale solar installations.",
-    "first_seen": "2025-02-27"
+    "first_seen": "2025-02-27",
+    "has_eis_data": true
   },
   {
     "id": "kerrs-creek-wind-farm",
@@ -8114,7 +8142,8 @@
     "data_confidence": "medium",
     "confidence_score": "46",
     "notable": "170 MW solar farm near Emerald, Central Queensland. Developed by FRV (Abdul Latif Jameel). Holds a PPA with CleanCo Queensland.",
-    "first_seen": "2019-03-08"
+    "first_seen": "2019-03-08",
+    "has_eis_data": true
   },
   {
     "id": "limestone-creek-bess",
@@ -8175,7 +8204,8 @@
     "data_confidence": "medium",
     "confidence_score": "46",
     "notable": "43 MW solar farm near Balranald, western NSW. Part of the Limondale solar complex. Now owned by RWE/BELECTRIC.",
-    "first_seen": "2019-12-23"
+    "first_seen": "2019-12-23",
+    "has_eis_data": true
   },
   {
     "id": "lincoln-gap-wind-farm-stage-2",
@@ -9063,7 +9093,8 @@
     "data_confidence": "medium",
     "confidence_score": "46",
     "notable": "147 MW solar farm near Armidale, NSW. Developed by Canadian Solar / Recurrent Energy. Located in the New England REZ.",
-    "first_seen": "2022-03-28"
+    "first_seen": "2022-03-28",
+    "has_eis_data": true
   },
   {
     "id": "middle-creek-renewable-energy-hub-wind",
@@ -9337,6 +9368,7 @@
     "first_seen": "2024-12-16",
     "connection_nsp": "VicGrid",
     "aemo_kci_id": "V00204",
+    "has_eis_data": true,
     "has_scheme_contract": true
   },
   {
@@ -9534,7 +9566,8 @@
     "data_confidence": "medium",
     "confidence_score": "46",
     "notable": "150 MW solar farm near Moree, NSW. One of the earliest large-scale solar farms in the New England REZ. Now owned by Tilt Renewables.",
-    "first_seen": "2016-02-21"
+    "first_seen": "2016-02-21",
+    "has_eis_data": true
   },
   {
     "id": "moreton-hill-wind-farm",
@@ -9805,7 +9838,8 @@
     "confidence_score": "54",
     "development_stage": "epbc_approved",
     "notable": "82 MW solar farm near Moura, Central QLD. Developed by Lightsource BP.",
-    "first_seen": "2021"
+    "first_seen": "2021",
+    "has_eis_data": true
   },
   {
     "id": "mt-arthur-pumped-hydro-energy-storage-project-kci",
@@ -10301,7 +10335,8 @@
     "data_confidence": "medium",
     "confidence_score": "46",
     "notable": "105 MW solar farm near Nevertire in central western NSW. Developed by Canadian Solar / Recurrent Energy.",
-    "first_seen": "2019-12-02"
+    "first_seen": "2019-12-02",
+    "has_eis_data": true
   },
   {
     "id": "new-england-solar-farm",
@@ -10610,7 +10645,8 @@
     "data_confidence": "medium",
     "confidence_score": "46",
     "notable": "49 MW solar farm near Numurkah, VIC. Developed by Neoen. One of Neoen's earlier Australian solar projects.",
-    "first_seen": "2019-05-06"
+    "first_seen": "2019-05-06",
+    "has_eis_data": true
   },
   {
     "id": "nyaninyuk-wind-farm",
@@ -10637,7 +10673,8 @@
     "data_confidence": "medium",
     "confidence_score": "46",
     "notable": "33 MW solar farm at Nyngan, NSW. Developed by AGL Energy with ARENA funding. One of the earliest utility-scale solar farms in Australia when commissioned in 2015.",
-    "first_seen": "2015-03-11"
+    "first_seen": "2015-03-11",
+    "has_eis_data": true
   },
   {
     "id": "oases-mount-murchison-kci",
@@ -10995,7 +11032,8 @@
     "data_confidence": "medium",
     "confidence_score": "46",
     "notable": "101 MW solar farm near Parkes, NSW. Developed by Neoen. Located in the Central-West Orana REZ.",
-    "first_seen": "2018-02-02"
+    "first_seen": "2018-02-02",
+    "has_eis_data": true
   },
   {
     "id": "peel-valley-solar-hybrid-pvbess",
@@ -11259,7 +11297,8 @@
     "notable": "107 MW solar component of the Port Augusta Renewable Energy Park, SA. Co-located with 210 MW wind \u2014 one of Australia's largest hybrid renewable energy parks. Developed by DP Energy / Iberdrola.",
     "first_seen": "2022-04-19",
     "connection_nsp": "ElectraNet",
-    "aemo_kci_id": "S00025"
+    "aemo_kci_id": "S00025",
+    "has_eis_data": true
   },
   {
     "id": "port-augusta-renewable-energy-park-wind",
@@ -11993,7 +12032,8 @@
     "data_confidence": "medium",
     "confidence_score": "46",
     "notable": "116 MW solar farm near Townsville, QLD. Owned by Palisade Investment Partners. One of the first large-scale solar farms in the Townsville region.",
-    "first_seen": "2018-09-11"
+    "first_seen": "2018-09-11",
+    "has_eis_data": true
   },
   {
     "id": "rowallan-pumped-hydro-option",
@@ -12064,7 +12104,8 @@
     "data_confidence": "medium",
     "confidence_score": "46",
     "notable": "126 MW solar farm near Chinchilla, QLD. Developed by FRV (Abdul Latif Jameel). Has a PPA with AGL Energy.",
-    "first_seen": "2019-05-27"
+    "first_seen": "2019-05-27",
+    "has_eis_data": true
   },
   {
     "id": "running-creek-solar-and-bess",
@@ -12351,7 +12392,8 @@
     "data_confidence": "medium",
     "confidence_score": "46",
     "notable": "170 MW solar farm near Wellington, NSW. Developed by Lightsource BP. Located in the Central-West Orana REZ.",
-    "first_seen": "2021-11-02"
+    "first_seen": "2021-11-02",
+    "has_eis_data": true
   },
   {
     "id": "shoalhaven",
@@ -13068,7 +13110,8 @@
     "data_confidence": "medium",
     "confidence_score": "46",
     "notable": "150 MW solar farm near Townsville, QLD. Developed by Sun Metals Corporation to directly power its adjacent Townsville zinc refinery \u2014 one of Australia's first behind-the-meter industrial-scale solar installations.",
-    "first_seen": "2018-05-17"
+    "first_seen": "2018-05-17",
+    "has_eis_data": true
   },
   {
     "id": "sundown-hybrid-facility",
@@ -13183,7 +13226,8 @@
     "data_confidence": "medium",
     "confidence_score": "46",
     "notable": "150 MW solar farm near Orange, NSW. Developed by Canadian Solar / Recurrent Energy. Located in the Central-West Orana REZ.",
-    "first_seen": "2021-08-04"
+    "first_seen": "2021-08-04",
+    "has_eis_data": true
   },
   {
     "id": "supernode-bess",
@@ -13264,7 +13308,8 @@
     "data_confidence": "medium",
     "confidence_score": "46",
     "notable": "112 MW solar farm near Maryborough, QLD. Developed by Edify Energy. Holds a PPA with CleanCo Queensland.",
-    "first_seen": "2018-12-28"
+    "first_seen": "2018-12-28",
+    "has_eis_data": true
   },
   {
     "id": "swallow-tail-bess",
@@ -13351,7 +13396,8 @@
     "notable": "52 MW solar farm near Tailem Bend, SA. Developed by Vena Energy. Located adjacent to The Bend Motorsport Park and the former Tailem Bend gas-fired power station site.",
     "first_seen": "2019-02-27",
     "connection_nsp": "ElectraNet",
-    "aemo_kci_id": "S00023"
+    "aemo_kci_id": "S00023",
+    "has_eis_data": true
   },
   {
     "id": "tailem-bend-battery-project",
@@ -14772,7 +14818,8 @@
     "data_confidence": "medium",
     "confidence_score": "43",
     "notable": "Staged build: 365 MW total. Stage 1 (125 MW) commissioning, Stage 2 (240 MW) construction.",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "has_eis_data": true
   },
   {
     "id": "wandoan-south-solar-stage-2",
@@ -14865,7 +14912,8 @@
     "data_confidence": "medium",
     "confidence_score": "46",
     "notable": "120 MW solar farm near Warwick, QLD. Partly funded through the University of Queensland's renewable energy agreement \u2014 one of Australia's first large university-backed solar PPAs.",
-    "first_seen": "2020-09-22"
+    "first_seen": "2020-09-22",
+    "has_eis_data": true
   },
   {
     "id": "waterloo-bess",
@@ -15060,7 +15108,8 @@
     "data_confidence": "medium",
     "confidence_score": "46",
     "notable": "170 MW solar farm near Wellington, NSW. Developed by Lightsource BP. Located in the Central-West Orana REZ.",
-    "first_seen": "2020-11-14"
+    "first_seen": "2020-11-14",
+    "has_eis_data": true
   },
   {
     "id": "wemen-solar-farm",
@@ -15074,7 +15123,8 @@
     "data_confidence": "medium",
     "confidence_score": "46",
     "notable": "44 MW solar farm near Wemen in the Victorian Mallee. Developed by Overland Sun Farming.",
-    "first_seen": "2018-11-06"
+    "first_seen": "2018-11-06",
+    "has_eis_data": true
   },
   {
     "id": "west-kiewa",
@@ -15118,7 +15168,8 @@
     "confidence_score": "54",
     "development_stage": "epbc_approved",
     "notable": "90 MW solar farm near West Wyalong, NSW. Developed by Risen Energy.",
-    "first_seen": "2019"
+    "first_seen": "2019",
+    "has_eis_data": true
   },
   {
     "id": "western-downs-battery-stage-1-and-2",
@@ -15246,7 +15297,8 @@
     "data_confidence": "medium",
     "confidence_score": "46",
     "notable": "83 MW solar farm in the Whitsunday region, QLD. Developed by Edify Energy. Part of Edify's portfolio of Queensland solar assets.",
-    "first_seen": "2018-07-10"
+    "first_seen": "2018-07-10",
+    "has_eis_data": true
   },
   {
     "id": "whyalla",
@@ -15532,7 +15584,8 @@
     "data_confidence": "medium",
     "confidence_score": "46",
     "notable": "36 MW solar farm near Winton, QLD. Developed by Origin Energy.",
-    "first_seen": "2021-03-29"
+    "first_seen": "2021-03-29",
+    "has_eis_data": true
   },
   {
     "id": "wivenhoe",
@@ -15604,7 +15657,8 @@
     "data_confidence": "medium",
     "confidence_score": "49",
     "notable": "280 MW solar farm near Mudgee, NSW. Developed by Lightsource BP. Located in the Central-West Orana REZ.",
-    "first_seen": "2024-11-24"
+    "first_seen": "2024-11-24",
+    "has_eis_data": true
   },
   {
     "id": "wongalea-bess",
@@ -15781,7 +15835,8 @@
     "confidence_score": "54",
     "development_stage": "epbc_approved",
     "notable": "176 MW solar farm near Woolooga in QLD's Wide Bay region. Developed by Risen Energy.",
-    "first_seen": "2020"
+    "first_seen": "2020",
+    "has_eis_data": true
   },
   {
     "id": "woolsthorpe-wind-farm",
@@ -16082,7 +16137,8 @@
     "data_confidence": "medium",
     "confidence_score": "46",
     "notable": "Solar farm near Pittsworth on Queensland's Darling Downs. Developed by Risen Energy. Connected to the Darling Downs energy corridor.",
-    "first_seen": "2020-01-06"
+    "first_seen": "2020-01-06",
+    "has_eis_data": true
   },
   {
     "id": "yatpool-solar-farm",
@@ -16096,7 +16152,8 @@
     "data_confidence": "medium",
     "confidence_score": "46",
     "notable": "53 MW solar farm near Robinvale, VIC. Developed by Foresight Group. Part of the cluster of solar farms in Victoria's Sunraysia region.",
-    "first_seen": "2020-11-17"
+    "first_seen": "2020-11-17",
+    "has_eis_data": true
   },
   {
     "id": "yelarbon-sf-and-bess-kci",

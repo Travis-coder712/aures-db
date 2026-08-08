@@ -65,6 +65,15 @@
   "scheme_contracts": [],
   "cost_sources": [],
   "stakeholder_issues": [],
+  "eis_specs": {
+    "document_title": "Karadoc Solar Farm \u2013 Mildura Rural City Council planning permit (no consolidated public EIS document; BayWa r.e. project pages are the best public source)",
+    "document_url": "https://www.baywa-re.com.au/en/projects/completed-projects/karadoc",
+    "document_year": 2018,
+    "connection_voltage_kv": 66.0,
+    "network_service_provider": "Powercor",
+    "connection_substation_name": "Onsite 33/66 kV substation feeding Powercor 66 kV Karadoc network (near Red Cliffs)",
+    "notes": "Developer/EPC BayWa r.e. Australia + Beon Energy Solutions. 112.5 MWp DC / 90 MW AC (DC:AC 1.25). ~330,000 modules, single-axis tracking. SMA central inverters. Commercial ops Dec 2018 (officially opened 2019); Flow Power and Carlton & United Breweries offtake. Located ~25 km south of Mildura, Victoria. Ownership transferred to Igneo Infrastructure Partners (Aug 2023) then Atmos Renewables (2023). NO primary planning-report PDF publicly indexed \u2014 Mildura RCC permit register only."
+  },
   "sources": [
     {
       "title": "AEMO Generation Information Jan 2026",

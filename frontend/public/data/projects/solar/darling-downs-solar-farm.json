@@ -64,6 +64,15 @@
   "scheme_contracts": [],
   "cost_sources": [],
   "stakeholder_issues": [],
+  "eis_specs": {
+    "document_title": "Darling Downs Solar Farm \u2014 Origin Energy project newsletter / MCU (Toowoomba Regional Council), April 2016",
+    "document_url": "https://www.originenergy.com.au/content/dam/origin/about/docs/DDSF%20Newsletter%20Editon%201%20APR%202016-WEB.PDF",
+    "document_year": 2016,
+    "connection_voltage_kv": 275.0,
+    "network_service_provider": "Powerlink",
+    "connection_substation_name": "Braemar 275 kV substation (Powerlink)",
+    "notes": "Developed by Origin Energy; sold to APA Group May 2017. 110 MWac; ~430,000 JA Solar Holdings polycrystalline modules through 44 inverters on fixed-tilt (non-tracking) mounts across ~250 ha adjacent to APA's Braemar Power Station. ARENA A$20M grant; Origin offtake PPA to 2030. Toowoomba Regional Council MCU (council-planning pathway, not EIS/EPBC controlled action)."
+  },
   "sources": [
     {
       "title": "AEMO Generation Information Jan 2026",

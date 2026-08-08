@@ -70,6 +70,15 @@
   "scheme_contracts": [],
   "cost_sources": [],
   "stakeholder_issues": [],
+  "eis_specs": {
+    "document_title": "Bomen Solar Farm State Significant Development Assessment Report (SSD-8835)",
+    "document_url": "https://majorprojects.planningportal.nsw.gov.au/prweb/PRRestService/mp/01/getContent?AttachRef=SSD-8835%2120190226T085814.645+GMT",
+    "document_year": 2018,
+    "connection_voltage_kv": 132.0,
+    "network_service_provider": "TransGrid",
+    "connection_substation_name": "Wagga North / Bomen 132 kV substation area (TransGrid); existing 66 kV and 132 kV lines cross the site with a new 132 kV line under construction",
+    "notes": "Developer Renew Estate; acquired by Spark Infrastructure Apr 2019. 100 MWac / 120 MWdc (DC:AC ~1.20), 310,576 bifacial Jinko Solar modules on Nextracker single-axis trackers, SMA inverters. 10 MW / 40 MWh BESS approved on site. ~250 ha ~10 km NE of Wagga Wagga. Approved Feb 2019; construction 2019; commercial operation Feb 2020. Westpac (Flow Power) virtual PPA."
+  },
   "sources": [
     {
       "title": "AEMO Generation Information Jan 2026",

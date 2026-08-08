@@ -80,6 +80,17 @@
   "scheme_contracts": [],
   "cost_sources": [],
   "stakeholder_issues": [],
+  "eis_specs": {
+    "document_title": "AGL Broken Hill Solar Plant Environmental Assessment (Part 3A) \u2013 Volume 5 (of the EA)",
+    "document_url": "https://www.agl.com.au/content/dam/digital/agl/documents/about-agl/how-we-source-energy/broken-hill-solar-plant/agl-broken-hill-solar-volume-5.pdf",
+    "document_year": 2012,
+    "connection_voltage_kv": 220.0,
+    "network_service_provider": "TransGrid",
+    "connection_substation_name": "Broken Hill 220 kV substation (TransGrid), on the western periphery of Broken Hill",
+    "connection_distance_km": 2.7,
+    "connection_distance_note": "~2.7 km double-circuit overhead line (22 kV cabling on 220 kV structures per EA) from plant to TransGrid Broken Hill substation, 30 m easement",
+    "notes": "Developer AGL Energy with First Solar EPC; ARENA + NSW Government co-funded (Solar Flagships). 53 MWac on ~140 ha, 5 km SW of Broken Hill. Fixed-tilt First Solar CdTe thin-film modules. Approved under Part 3A on 27 Mar 2013 (s75J EP&A Act); commissioned Jan 2016. Co-located with the AGL Broken Hill BESS (from mid-2020s)."
+  },
   "sources": [
     {
       "title": "AEMO Generation Information Jan 2026",

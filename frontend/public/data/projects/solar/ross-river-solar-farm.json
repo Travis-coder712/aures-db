@@ -70,6 +70,17 @@
   "scheme_contracts": [],
   "cost_sources": [],
   "stakeholder_issues": [],
+  "eis_specs": {
+    "document_title": "Ross River Solar Farm \u2014 Development Application Report (Townsville City Council MCU under SPA 2009), Feb 2016, incl. Appendices F\u2013L",
+    "document_url": "https://rossriversolarfarm.com.au/wp-content/uploads/2017/07/160222_ROS-DA-Report-includes-Appx.-FGHIJKL.pdf",
+    "document_year": 2016,
+    "connection_voltage_kv": 132.0,
+    "network_service_provider": "Powerlink",
+    "connection_substation_name": "Ross 275 kV substation (Powerlink)",
+    "connection_distance_km": 1.2,
+    "connection_distance_note": "~1.2 km 132 kV underground cable from Ross River Solar Farm to Ross substation",
+    "notes": "Developed by ESCO Pacific / Palisade / EnergyAustralia (later Genex-related), 116 MWac (~148 MWdc) solar PV. 413,280 JA Solar polycrystalline panels on single-axis trackers over ~202 ha, 20 km south of Townsville. EnergyAustralia offtake PPA; Townsville City Council MCU approval under Sustainable Planning Act 2009; operational 2018."
+  },
   "sources": [
     {
       "title": "AEMO Generation Information Jan 2026",

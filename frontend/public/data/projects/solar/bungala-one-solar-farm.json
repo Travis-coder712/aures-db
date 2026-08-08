@@ -72,6 +72,16 @@
   "scheme_contracts": [],
   "cost_sources": [],
   "stakeholder_issues": [],
+  "eis_specs": {
+    "document_title": "Bungala Solar Project Stage 1 \u2013 Development Application to SA Development Assessment Commission (Reach Solar Energy, September 2016)",
+    "document_year": 2016,
+    "connection_voltage_kv": 132.0,
+    "network_service_provider": "ElectraNet",
+    "connection_substation_name": "Davenport substation (via 33 kV collector switchyard + new 33/132 kV project step-up substation)",
+    "connection_distance_note": "New 132 kV overhead line from onsite 33/132 kV substation to ElectraNet's Davenport substation near Port Augusta",
+    "connection_augmentation": "New 132 kV OH line and 33/132 kV project step-up substation designed and built by ElectraNet",
+    "notes": "Stage 1 of the 275 MWac Bungala Solar Project (Bungala 1 + Bungala 2). 137.7 MW DC / 110 MW AC. Panels: Jinko Solar polycrystalline (~840,000 modules combined across both stages). Inverters: SMA. Tracker: NEXTracker single-axis (1.5 m axis height, 5.5 m spacing). Originally developed by Reach Solar Energy; DA lodged Sep 2016 to SA Development Assessment Commission. Now owned by Enel Green Power + DIF Infrastructure JV (Potentia Energy operates). Commissioned September 2018; Origin Energy PPA for full output. NO planning-report PDF publicly indexed \u2014 plan.sa.gov.au register only."
+  },
   "sources": [
     {
       "title": "AEMO Generation Information Jan 2026",

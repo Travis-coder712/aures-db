@@ -70,6 +70,15 @@
   "scheme_contracts": [],
   "cost_sources": [],
   "stakeholder_issues": [],
+  "eis_specs": {
+    "document_title": "Bungala Solar Project Stage 2 \u2013 Development Application to SA Development Assessment Commission (Reach Solar Energy, September 2016; same DA package as Stage 1)",
+    "document_year": 2016,
+    "connection_voltage_kv": 132.0,
+    "network_service_provider": "ElectraNet",
+    "connection_substation_name": "Emeroo and Davenport substations (via same 132 kV OH line as Bungala One)",
+    "connection_distance_note": "Shared 132 kV overhead export line from the Bungala site to Emeroo/Davenport substations near Port Augusta",
+    "notes": "Stage 2 of the 275 MWac Bungala Solar Project. 137.7 MW DC / 110 MW AC. Same equipment package as Bungala One (Jinko polycrystalline modules, SMA inverters, NEXTracker single-axis trackers). Grid connection November 2018. Ownership Enel Green Power + DIF Infrastructure JV via Potentia Energy management. DA approved Sep 2016 (single DA covering both stages)."
+  },
   "sources": [
     {
       "title": "AEMO Generation Information Jan 2026",

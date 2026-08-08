@@ -70,6 +70,15 @@
   "scheme_contracts": [],
   "cost_sources": [],
   "stakeholder_issues": [],
+  "eis_specs": {
+    "document_title": "Susan River Solar Farm \u2014 Development Application (Fraser Coast Regional Council MCU, Dec 2016)",
+    "document_url": "https://atmosrenewables.com.au/project/susan-river-solar-farm/",
+    "document_year": 2016,
+    "connection_voltage_kv": 66.0,
+    "network_service_provider": "Ergon Energy",
+    "connection_substation_name": "Susan River 66 kV substation (Ergon distribution)",
+    "notes": "Developed by ESCO Pacific; Atmos Renewables owner. 75 MW; ~400,000 modules on NEXTracker single-axis system through Ingeteam Corporacion Tecnologica inverters over ~176 ha, 15\u201317 km south of Hervey Bay. Onsite substation to 66 kV Ergon distribution; Fraser Coast Regional Council DA Dec 2016; operations 2018 under ZEN Energy offtake PPA."
+  },
   "sources": [
     {
       "title": "AEMO Generation Information Jan 2026",

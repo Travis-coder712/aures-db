@@ -66,6 +66,17 @@
   "scheme_contracts": [],
   "cost_sources": [],
   "stakeholder_issues": [],
+  "eis_specs": {
+    "document_title": "Limondale Sun Farm Environmental Impact Statement (SSD-8025) - Overland Sun Farming",
+    "document_url": "https://majorprojects.planningportal.nsw.gov.au/prweb/PRRestService/mp/01/getContent?AttachRef=SSD-8025!20190228T005510.340+GMT",
+    "document_year": 2017,
+    "connection_voltage_kv": 220.0,
+    "network_service_provider": "TransGrid",
+    "connection_substation_name": "Balranald 220 kV substation (TransGrid) - shared connection with Limondale 1",
+    "connection_distance_km": 0.5,
+    "connection_distance_note": "Shares Balranald 220 kV connection with Limondale 1",
+    "notes": "Overland Sun Farming. Limondale 2 = ~42.8 MWac fixed-tilt PV, assessed under the same SSD-8025 EIS as Limondale 1 (~250 MW nominal combined). Fixed-tilt mounting rather than trackers. Consent 31 August 2017."
+  },
   "sources": [
     {
       "title": "AEMO Generation Information Jan 2026",

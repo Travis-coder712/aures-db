@@ -1,7 +1,7 @@
 # AURES — Next Session Handoff
 
 **Last refreshed:** 2026-08-09
-**Latest shipped version:** v3.29.0 — AEMO KCI ingest. Ingested the Q2 2026 compiled NEM KCI workbook (2,357 rows, 5 TNSPs). New `aemo_kci_records` table + `projects.aemo_kci_id` column. **NSP coverage jumped from ~7% → 54%** (593/1,098 projects). EIS Coverage tab now surfaces a KCI stats block. Preceded by v3.28.0 (EIS/EIA solar source hunt) and the curriculum arc (v3.24.0–v3.27.1).
+**Latest shipped version:** v3.30.0 — Solar EIS backlog closure. Fan-out research (4 parallel agents) extracted the remaining 57 solar projects staged by v3.28.0. Solar EIS coverage 10/226 → 67/226. `available_not_extracted` list now empty. Preceded by v3.29.0 (AEMO KCI ingest — NSP coverage 7% → 54%), v3.28.0 (EIS/EIA solar source hunt), and the curriculum arc (v3.24.0–v3.27.1).
 **Purpose:** Single-place brief for the next session. Cold-readable — pair with `docs/SESSION_OPENER.md` and `docs/INTELLIGENCE_LAYER_PLAN.md`.
 
 ---
@@ -9,6 +9,9 @@
 ## EIS/EIA & grid-connection coverage backlog (from the v3.28.0 audit)
 
 See the full audit report at `docs/RESEARCH_EIS_COVERAGE_AUDIT.md`.
+
+Landed in v3.30.0:
+- **Solar EIS backlog closure.** Four parallel research agents extracted specs for the 57 solar projects staged in `available_not_extracted` after the v3.28.0 tranche. 67/67 successful, 0 nulls. Every entry has voltage / NSP / substation / developer / MWac; most have MWdc, DC:AC ratio, panel count, tracker / mount type. Bundled into `pipeline/enrichers/enrich_eis_specs.py` in a single v3.30.0 tranche. Enricher now reports Solar: 67 (was 10). Coverage tab `available_not_extracted` list is now empty. Extraction quality notes recorded in the four batch reports in the scratchpad. Two data corrections vs the v3.28.0 audit notes: Sebastopol determination is SSD-9098 (not SSD-9522); Moree Solar approval was 17 Jul 2011 under Part 3A (not 2013).
 
 Landed in v3.29.0:
 - **AEMO KCI ingest.** Q2 2026 compiled NEM workbook ingested. New `aemo_kci_records` table (1,205 rows post-UPSERT, 1,005 distinct AEMO KCI IDs, 2,357 workbook rows). Fuzzy matcher: slug + suffix add/strip + state-scoped token overlap. 600 AURES projects matched (84.7% row match rate). `projects.connection_nsp` populated for 593 projects, `projects.aemo_kci_id` for 591. New `eis-kci-stats.json` exporter + KCI stats block on the Coverage tab. See `pipeline/importers/import_aemo_kci.py`. Idempotent — UNIQUE natural key on (snapshot, aemo_kci_id, application_id). Refresh cadence: manual download of new KCI compiled workbook quarterly from AEMO Generation Information page, copy into `data/gi_snapshots/kci_YYYYQn/`, re-run importer.
@@ -21,7 +24,6 @@ Landed in v3.28.0:
 
 Still open:
 - **Ingest AEMO KCI files** — the single most important remaining source. Per-TNSP × quarterly (5 files, 20/year). Contains substation + voltage + connection point + NSP + status per project. Cloudflare blocks scripted downloads; use the same `data/gi_snapshots/` archive convention: manually download → check into `data/gi_snapshots/kci_<year>Q<n>/` → write a per-TNSP importer. Would fill grid-connection specs for **~60-80% of the NEM fleet**.
-- **Extract the remaining 57 solar projects** using the URLs now staged in `available_not_extracted`. The pattern is transcription-heavy (2-4 hours per session). Same shape as the 10 already extracted.
 - **Ingest the AusNet TCPR PDF** for VIC embedded generators (~30-50 projects). Public PDF, `pdftotext -layout` + regex, annual (Dec) refresh. Low-effort standalone importer.
 - **Ingest the ElectraNet Connections Report PDF** for SA Mid North (~25-30 projects). Flag the "Commercial in Confidence" footer to Travis before use.
 - **Ingest the Rosetta GPKG** for AEMO KCI Id + lat/lng + LGA + Project URL enrichment. Does NOT contain substation/voltage/NSP — validated during the v3.28.0 audit. Complementary to KCI, not a substitute.

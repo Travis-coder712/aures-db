@@ -65,6 +65,16 @@
   "scheme_contracts": [],
   "cost_sources": [],
   "stakeholder_issues": [],
+  "eis_specs": {
+    "document_title": "Clare Solar Farm \u2014 Development Application (Burdekin Shire Council MCU) and Powerlink Clare South Connection Project",
+    "document_url": "https://www.powerlink.com.au/projects/clare-south-solar-farm-connection-project",
+    "document_year": 2015,
+    "connection_voltage_kv": 275.0,
+    "network_service_provider": "Powerlink",
+    "connection_substation_name": "Clare South 275 kV substation (Powerlink)",
+    "connection_augmentation": "New Powerlink Clare South 275 kV switching station; solar farm feeder bay",
+    "notes": "Fotowatio Renewable Ventures (FRV). 100 MWac / 125 MWdc; 393,300 Trina Solar single-axis-tracking bifacial-era polycrystalline modules through 69 Ingeteam INGECON SUN PowerMax inverters over ~300 ha, 35 km SW of Ayr. Burdekin Shire Council DA October 2015; commercial operations May 2018 with Origin Energy offtake PPA."
+  },
   "sources": [
     {
       "title": "AEMO Generation Information Jan 2026",

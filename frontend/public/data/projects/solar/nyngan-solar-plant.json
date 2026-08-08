@@ -65,6 +65,18 @@
   "scheme_contracts": [],
   "cost_sources": [],
   "stakeholder_issues": [],
+  "eis_specs": {
+    "document_title": "Nyngan Solar Plant Environmental Impact Statement (AGL Energy / First Solar; Parsons Brinckerhoff, Feb 2013)",
+    "document_url": "https://tiltwebsite.blob.core.windows.net/tiltwebsitecontainer/2025/04/Environmental-Impact-Statement-Nyngan-Solar-Plant.pdf",
+    "document_year": 2013,
+    "connection_voltage_kv": 132.0,
+    "network_service_provider": "TransGrid",
+    "connection_substation_name": "New Nyngan Solar Plant 33/132 kV switchyard; tap into existing Nyngan\u2013Cobar 132 kV transmission line (TransGrid); Essential Energy is local DNSP",
+    "connection_distance_km": 3.0,
+    "connection_distance_note": "~3 km of new 132 kV overhead line and easement from the plant switchyard to the existing Nyngan\u2013Cobar 132 kV line",
+    "connection_augmentation": "New solar-plant 33/132 kV substation and 3 km 132 kV connection line",
+    "notes": "AGL Energy (owner) with First Solar EPC and O&M (5 yr); Solar Flagships / ARENA + NSW Gov co-funded. Nominal capacity up to ~106 MWac (102 MW operational). ~1,350,000 First Solar CdTe thin-film 87.5\u201395 W modules, fixed-tilt at zero degree azimuth. ~300 ha of arrays + 14 ha easement on ~460 ha site. Approved under Part 3A; construction began Jan 2014; full commercial operation Jul 2015."
+  },
   "sources": [
     {
       "title": "AEMO Generation Information Jan 2026",

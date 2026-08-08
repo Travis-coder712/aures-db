@@ -64,6 +64,15 @@
   "scheme_contracts": [],
   "cost_sources": [],
   "stakeholder_issues": [],
+  "eis_specs": {
+    "document_title": "Finley Solar Farm Environmental Impact Statement (SSD-8540) - ESCO Pacific",
+    "document_url": "https://majorprojects.planningportal.nsw.gov.au/prweb/PRRestService/mp/01/getContent?AttachRef=SSD-8540%2120190228T022742.181+GMT",
+    "document_year": 2017,
+    "connection_voltage_kv": 132.0,
+    "network_service_provider": "TransGrid",
+    "connection_substation_name": "Finley 132 kV substation (TransGrid)",
+    "notes": "ESCO Pacific (asset sold to John Laing Nov 2018). 133-175 MWac / ~175 MWdc (DC:AC ~1.32). Over 490,000 Canadian Solar high-efficiency modules on single-axis trackers across ~385 ha, 6 km west of Finley. 33 kV underground collection cables into onsite substation to TransGrid Finley 132 kV substation. Consent 29 January 2018. BlueScope PPA for 66% output."
+  },
   "sources": [
     {
       "title": "AEMO Generation Information Jan 2026",

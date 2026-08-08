@@ -71,6 +71,16 @@
   "scheme_contracts": [],
   "cost_sources": [],
   "stakeholder_issues": [],
+  "eis_specs": {
+    "document_title": "Suntop Solar Farm Environmental Impact Statement (SSD-8696) - Photon Energy / Canadian Solar",
+    "document_url": "https://www.planningportal.nsw.gov.au/major-projects/project/9426",
+    "document_year": 2018,
+    "connection_voltage_kv": 132.0,
+    "network_service_provider": "TransGrid",
+    "connection_substation_name": "New onsite 132 kV substation cutting in to existing TransGrid 132 kV OHL (Wellington-Orange corridor traversing site)",
+    "connection_augmentation": "New onsite 132 kV substation on western boundary connecting to existing 132 kV line traversing site",
+    "notes": "Photon Energy + Canadian Solar (Canadian Solar Asset Management 51%). 150 MWac / 189 MWdc (DC:AC ~1.26). Up to 550,000 bifacial modules on single-axis trackers across 472 ha. 118 Ingeteam containerised inverter stations. Grid-connected August 2022. ~10 km west of Wellington. (Note: correct SSD reference is SSD-8696, not SSD-9245.)"
+  },
   "sources": [
     {
       "title": "AEMO Generation Information Jan 2026",

@@ -72,6 +72,15 @@
   "scheme_contracts": [],
   "cost_sources": [],
   "stakeholder_issues": [],
+  "eis_specs": {
+    "document_title": "Tailem Bend Solar Project Stage 1 \u2013 Planning Report (21 December 2017), lodged to SA Planning Commission (Development Act 1993 s49; consent DN 571/V001/17)",
+    "document_url": "https://www.saplanningcommission.sa.gov.au/__data/assets/pdf_file/0007/435481/4_Planning_Report_21_Dec_2017.pdf",
+    "document_year": 2017,
+    "connection_voltage_kv": 132.0,
+    "network_service_provider": "ElectraNet",
+    "connection_substation_name": "ElectraNet Tailem Bend substation (via Coorong 2 33/132 kV project substation)",
+    "notes": "Developer Equis Energy \u2192 Vena Energy (following Global Infrastructure Partners acquisition Jan 2018). Stage 1: 95 MW AC export limit (108 MWp DC nameplate). 391,500 solar panels on fixed-angle racks (Stage 1 fixed-tilt; Stage 2 uses JinkoSolar bifacial modules with single-axis trackers and Schneider Electric inverters). 200 ha, ~A$200 M capex. UGL EPC. Stage 1 consent granted by SA Minister for Planning 4 May 2017 (DN 571/V001/17) under Development Act 1993 s49. Cloudflare blocked automated fetch of the planning-report PDF at time of extraction \u2014 URL verified via SA Planning Commission register."
+  },
   "sources": [
     {
       "title": "AEMO Generation Information Jan 2026",

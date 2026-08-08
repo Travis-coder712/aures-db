@@ -71,6 +71,16 @@
   "scheme_contracts": [],
   "cost_sources": [],
   "stakeholder_issues": [],
+  "eis_specs": {
+    "document_title": "Whitsunday Solar Farm \u2014 Development Application (Whitsunday Regional Council MCU) and Powerlink Whitsunday Connection Project",
+    "document_url": "https://www.powerlink.com.au/projects/whitsunday-solar-farm-connection-project",
+    "document_year": 2017,
+    "connection_voltage_kv": 132.0,
+    "network_service_provider": "Powerlink",
+    "connection_substation_name": "Strathmore 132/275 kV substation (Powerlink)",
+    "connection_augmentation": "New Powerlink 132 kV transmission line and solar-farm substation, plus additional feeder bay at existing Strathmore Substation (shared with Hamilton Solar Farm)",
+    "notes": "Edify Energy + Wirsol JV (now Gentari-owned). 57.5 MWac / 69 MWdc; single-axis-tracking PV adjacent to Powerlink's Strathmore Substation near Collinsville. ARENA-supported. Whitsunday Regional Council MCU; commercial operations 2018."
+  },
   "sources": [
     {
       "title": "AEMO Generation Information Jan 2026",

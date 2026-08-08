@@ -70,6 +70,17 @@
   "scheme_contracts": [],
   "cost_sources": [],
   "stakeholder_issues": [],
+  "eis_specs": {
+    "document_title": "Parkes Solar Farm Environmental Impact Statement (SSD-6784) \u2013 Neoen / NGH Environmental, March 2016",
+    "document_url": "https://parkessolarfarm.com.au/wp-content/uploads/2022/12/2.8.1-PSF-Parkes-Solar-EIS-Final-v1-Main-Report.pdf",
+    "document_year": 2016,
+    "connection_voltage_kv": 66.0,
+    "network_service_provider": "TransGrid",
+    "connection_substation_name": "Existing Parkes 132/66 kV TransGrid substation on Pat Meredith Drive (66 kV OHL/UG connection into the substation)",
+    "connection_distance_km": 0.6,
+    "connection_distance_note": "~600 m 66 kV overhead or underground line from the site to the Parkes TransGrid substation",
+    "notes": "Developer Neoen; EIS prepared by NGH Environmental (SSD-6784, March 2016). ~65 MWp / ~55 MWac (PPA with Simply Energy for 55 MW). ~215,000 solar panels on ~2,850 single-axis tracker units (fixed-tilt options also assessed). 240 ha site ~10 km west of Parkes. Construction Jan 2017 \u2013 Apr 2018, operational since 2018; ~138 GWh/yr."
+  },
   "sources": [
     {
       "title": "AEMO Generation Information Jan 2026",

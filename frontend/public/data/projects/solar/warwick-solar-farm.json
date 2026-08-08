@@ -58,6 +58,15 @@
   "scheme_contracts": [],
   "cost_sources": [],
   "stakeholder_issues": [],
+  "eis_specs": {
+    "document_title": "Warwick Solar Farm \u2014 Development Application (Southern Downs Regional Council MCU, June 2018); RPS Group planning & environmental lead",
+    "document_url": "https://www.rpsgroup.com/projects/warwick-solar-farm/",
+    "document_year": 2018,
+    "connection_voltage_kv": 33.0,
+    "network_service_provider": "Ergon Energy",
+    "connection_substation_name": "Warwick Bulk Supply Point substation (Ergon 33 kV)",
+    "notes": "Developed by Terrain Solar; University of Queensland owner from Nov 2018. 64 MWac total split across two co-located identical plants each ~32.1 MW (RPS/UQ marketing sometimes cites 70 MW site envelope). Southern Downs Regional Council MCU approved June 2018; construction Feb 2019; energised July 2020, making UQ the world's first major university powered ~100% by owned renewables. EPBC self-assessment; single-axis trackers on 150 ha."
+  },
   "sources": [
     {
       "title": "AEMO Generation Information Jan 2026",

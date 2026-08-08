@@ -67,6 +67,15 @@
   "scheme_contracts": [],
   "cost_sources": [],
   "stakeholder_issues": [],
+  "eis_specs": {
+    "document_title": "West Wyalong Solar Farm State Significant Development Assessment Report (SSD-9504)",
+    "document_url": "https://majorprojects.planningportal.nsw.gov.au/prweb/PRRestService/mp/01/getContent?AttachRef=SSD-9504!20191128T005239.723+GMT",
+    "document_year": 2019,
+    "connection_voltage_kv": 132.0,
+    "network_service_provider": "Essential Energy",
+    "connection_substation_name": "Connection to nearby Essential Energy 132 kV overhead transmission line (West Wyalong area; TransGrid interface further downstream)",
+    "notes": "Developer Lightsource BP (Lightsource Development Services Australia). 90 MWac + 50 MW / 90 MWh co-located BESS. Development footprint 211 ha, ~16 km NE of West Wyalong in Bland Shire. Approved Nov/Dec 2019; construction from 2020; commissioning ~2022. Site to be grazed by sheep during operation."
+  },
   "sources": [
     {
       "title": "AEMO Generation Information Jan 2026",

@@ -66,6 +66,17 @@
   "scheme_contracts": [],
   "cost_sources": [],
   "stakeholder_issues": [],
+  "eis_specs": {
+    "document_title": "Columboola Solar Farm \u2013 Material Change of Use consent (Western Downs Regional Council, Jan 2017); Luminous Energy planning page",
+    "document_url": "http://www.luminousenergy.com.au/planning.html",
+    "document_year": 2017,
+    "connection_voltage_kv": 132.0,
+    "network_service_provider": "Powerlink",
+    "connection_substation_name": "Powerlink Columboola 132 kV substation via a new 132 kV overhead line to a dedicated on-site generator substation",
+    "connection_distance_km": 1.3,
+    "connection_distance_note": "~1.3 km new 132 kV overhead transmission line from the on-site generator substation to Powerlink's Columboola substation",
+    "notes": "Developer Luminous Energy; owner Hana Financial Investment (Korea). 162 MWac / 203 MWdc (DC:AC ~1.25); 417,000 bifacial panels on single-axis trackers; 39 SMA Medium Voltage Power Stations. ~410 ha, ~10 km NE of Miles in the Western Downs. DA approved Jan 2017 by WDRC. Grid connection energised late 2021 / early 2022. PPA with CS Energy. ~440 GWh/yr expected."
+  },
   "sources": [
     {
       "title": "AEMO Generation Information Jan 2026",

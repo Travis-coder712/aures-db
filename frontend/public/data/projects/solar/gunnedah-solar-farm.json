@@ -71,6 +71,17 @@
   "scheme_contracts": [],
   "cost_sources": [],
   "stakeholder_issues": [],
+  "eis_specs": {
+    "document_title": "Gunnedah Solar Farm Environmental Impact Statement (SSD-8658) - CalEnergy Resources",
+    "document_url": "https://majorprojects.planningportal.nsw.gov.au/prweb/PRRestService/mp/01/getContent?AttachRef=SSD-8658!20190410T050536.540+GMT",
+    "document_year": 2018,
+    "connection_voltage_kv": 132.0,
+    "network_service_provider": "TransGrid",
+    "connection_substation_name": "Gunnedah 132 kV substation (TransGrid, ~2.3 km south of site on Oxley Highway)",
+    "connection_distance_km": 1.0,
+    "connection_distance_note": "New ~1 km 132 kV OHL with ~6 towers/poles (150-200 m spacing) to Gunnedah substation",
+    "notes": "CalEnergy Resources (subsidiary of UK's Northern Powergrid). 110-154 MWac. ~460,000-470,000 bifacial Canadian Solar modules on single-axis trackers across ~304 ha. IPC consent 12 March 2019."
+  },
   "sources": [
     {
       "title": "AEMO Generation Information Jan 2026",

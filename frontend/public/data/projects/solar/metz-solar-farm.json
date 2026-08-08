@@ -65,6 +65,15 @@
   "scheme_contracts": [],
   "cost_sources": [],
   "stakeholder_issues": [],
+  "eis_specs": {
+    "document_title": "Metz Solar Farm Environmental Impact Statement (SSD-7931) - FRV Services Australia",
+    "document_url": "https://majorprojects.planningportal.nsw.gov.au/prweb/PRRestService/mp/01/getContent?AttachRef=SSD-7931%2120190228T002523.985+GMT",
+    "document_year": 2016,
+    "connection_voltage_kv": 132.0,
+    "network_service_provider": "TransGrid",
+    "connection_substation_name": "Armidale 132 kV substation area (TransGrid / Essential Energy sub-transmission)",
+    "notes": "FRV Services Australia (development rights acquired from Risen Energy in Nov 2020). 115 MWac / 143.5 MWdc (DC:AC ~1.25). ~320,000 modules on single-axis trackers with SMA central inverters across ~248 ha near Hillgrove, ~18 km east of Armidale on the New England Tablelands. Consent 18 July 2017; commercial operation September 2022."
+  },
   "sources": [
     {
       "title": "AEMO Generation Information Jan 2026",

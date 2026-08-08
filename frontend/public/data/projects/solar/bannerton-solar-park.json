@@ -65,6 +65,16 @@
   "scheme_contracts": [],
   "cost_sources": [],
   "stakeholder_issues": [],
+  "eis_specs": {
+    "document_title": "Bannerton Solar Farm \u2013 Australian Industry Participation (AIP) Plan Executive Summary, Foresight Solar Australia Pty Ltd",
+    "document_url": "https://www.industry.gov.au/sites/default/files/aip/bannerton_solar_farm_executive_summary_0.docx",
+    "document_year": 2017,
+    "connection_voltage_kv": 66.0,
+    "network_service_provider": "Powercor",
+    "connection_substation_name": "Wemen Terminal Station (WETS)",
+    "connection_distance_note": "Exports at 66 kV into Powercor network to existing Wemen Terminal Substation (WETS 220/66 kV)",
+    "notes": "Foresight Solar Australia Pty Ltd (co-invested Impact Investment Group + Syncline). 110 MWdc / 88 MWac (DC:AC ~1.25); ~$160 M capex, $133.5 M procured goods/services. ~319,406\u2013320,000 modules, single-axis tracking. UGL Pty Ltd EPC (with O&M). Located 12 km SW of Robinvale, Victoria. PPAs with Alinta Energy and Yarra Trams. Construction Q4 2017, substantial completion July 2018. Part of the NW-VIC cluster (Wemen, Karadoc, Gannawarra, Bannerton) constrained ~50% in 2019 for voltage."
+  },
   "sources": [
     {
       "title": "AEMO Generation Information Jan 2026",

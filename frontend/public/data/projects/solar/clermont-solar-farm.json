@@ -64,6 +64,15 @@
   "scheme_contracts": [],
   "cost_sources": [],
   "stakeholder_issues": [],
+  "eis_specs": {
+    "document_title": "Clermont Solar Farm \u2014 Development Application (Isaac Regional Council MCU), 2017",
+    "document_url": "https://www.clermontsolarfarm.com.au/",
+    "document_year": 2017,
+    "connection_voltage_kv": 132.0,
+    "network_service_provider": "Powerlink",
+    "connection_substation_name": "Powerlink 132 kV network (Clermont/Lilyvale corridor)",
+    "notes": "WIRSOL Energy (owner; developed by Epuron / Island Green Power UK / Wirsol). 75 MWac / 89 MWp DC; single-axis tracking PV across ~497 acres, ~106 km north of Emerald. Isaac Regional Council MCU. Commercial operations June 2019; 30 MW PPA with Flow Power."
+  },
   "sources": [
     {
       "title": "AEMO Generation Information Jan 2026",

@@ -43,6 +43,16 @@
   "scheme_contracts": [],
   "cost_sources": [],
   "stakeholder_issues": [],
+  "eis_specs": {
+    "document_title": "Goorambat East Solar Farm \u2013 Town Planning Report, Neoen Australia Pty Ltd (AECOM, 16 August 2019)",
+    "document_url": "https://engie.com.au/sites/default/files/2024-07/3_Planning%20Report.pdf",
+    "document_year": 2019,
+    "connection_voltage_kv": 220.0,
+    "network_service_provider": "AusNet",
+    "connection_substation_name": "New Goorambat East Terminal Station on existing 220 kV Shepparton TS \u2013 Dederang TS line",
+    "connection_augmentation": "New 220/33 kV project terminal substation with three 220 kV switchyard bays (approx. 100 x 50 m footprint) tapping into the Shepparton\u2013Dederang 220 kV overhead line within the site",
+    "notes": "Originally developed by Neoen Australia Pty Ltd; acquired by ENGIE in 2023. Up to 250 MW AC via ~500,000 bifacial 380 W PV modules on single-axis trackers (tracker rotation \u00b160\u00b0, max 4 m height) and up to ~120 inverters. 630 ha across 5 rural properties in Benalla RCC, ~215 km NE of Melbourne. Approved December 2019 by Benalla Rural City Council. Construction commenced late 2024; commissioning targeted 2027."
+  },
   "sources": [
     {
       "title": "AEMO Generation Information Jan 2026",

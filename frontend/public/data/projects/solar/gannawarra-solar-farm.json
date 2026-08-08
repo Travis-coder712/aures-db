@@ -71,6 +71,14 @@
   "scheme_contracts": [],
   "cost_sources": [],
   "stakeholder_issues": [],
+  "eis_specs": {
+    "document_title": "Gannawarra Solar Farm \u2013 Gannawarra Shire Council planning permit (no consolidated public EIS document online)",
+    "document_year": 2017,
+    "connection_voltage_kv": 66.0,
+    "network_service_provider": "Powercor",
+    "connection_substation_name": "Gannawarra 66 kV zone (Powercor Australia network near Kerang)",
+    "notes": "Developed by Solar Choice \u2192 Edify Energy \u2192 acquired by Wirsol (now Gentari). 60 MWdc / 50.61 MWac (DC:AC ~1.19). Panels: JA Solar; inverters: SMA 2500 SC-EV; tracker: Array Technologies (ATI) DuraTrack single-axis. 132.4 ha. Co-located Gannawarra Energy Storage System (GESS) originally 25 MW / 50 MWh Tesla Powerpack, later expanded to 185 MW / 370 MWh. Approved by Gannawarra Shire Council pre-2018. NO planning-report URL online."
+  },
   "sources": [
     {
       "title": "AEMO Generation Information Jan 2026",

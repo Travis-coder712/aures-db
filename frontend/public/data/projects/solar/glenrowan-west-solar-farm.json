@@ -72,6 +72,16 @@
   "scheme_contracts": [],
   "cost_sources": [],
   "stakeholder_issues": [],
+  "eis_specs": {
+    "document_title": "ESC Generation Authority Application \u2013 Glenrowan West Solar Farm (Public submission), Glenrowan Sun Farm Pty Ltd / Wirsol Energy",
+    "document_url": "https://www.esc.vic.gov.au/sites/default/files/documents/electricity-generation-license-application-glenrowan-west-solar-farm-application-20200806.pdf",
+    "document_year": 2020,
+    "connection_voltage_kv": 66.0,
+    "network_service_provider": "AusNet",
+    "connection_substation_name": "Glenrowan Terminal Station",
+    "connection_distance_note": "Short 66 kV circuit into AusNet Glenrowan Terminal Station; Connection Services Agreement with AusNet executed July 2019, AEMO 5.3.4A letter Jan 2018",
+    "notes": "Wirtgen Invest (private German family office) equity owner via Glenrowan Sun Farm Pty Ltd; Wirsol Energy (WEL, now Gentari) construction/asset manager and O&M provider. 149 MWp DC / 110 MW AC (DC:AC ~1.35). 373,248 Jinko 395\u2013400 Wp modules, single-axis NEXTracker horizontal tracker, 48 x SMA SC 2.75 MW central inverters. EPC Signal Energy Australia. 323 ha near Glenrowan, ~250 km NE of Melbourne. Construction commenced Jan 2020; first export Dec 2020; COD Q1 2021."
+  },
   "sources": [
     {
       "title": "AEMO Generation Information Jan 2026",

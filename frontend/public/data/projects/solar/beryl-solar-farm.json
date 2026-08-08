@@ -64,6 +64,16 @@
   "scheme_contracts": [],
   "cost_sources": [],
   "stakeholder_issues": [],
+  "eis_specs": {
+    "document_title": "Beryl Solar Farm (SSD-8183) State Significant Development",
+    "document_url": "https://www.planningportal.nsw.gov.au/major-projects/projects/beryl-solar-farm",
+    "document_year": 2017,
+    "connection_voltage_kv": 132.0,
+    "network_service_provider": "TransGrid",
+    "connection_substation_name": "New Beryl solar-plant substation, tie-in to existing TransGrid Beryl 132 kV substation (Wellington\u2013Gulgong 132 kV corridor)",
+    "connection_augmentation": "TransGrid built a new substation at the solar farm and interconnected it to the existing Beryl substation",
+    "notes": "Developer First Solar; ownership: New Energy Solar (initial 49% May 2018, 100% mid-2019) \u2192 Banpu Energy Australia. Downer EPC (~A$150M). 87 MWac; one of the first Aussie deployments of First Solar Series 6 CdTe thin-film modules. Approved 5 Dec 2017; financial close 11 May 2018; commercial operation mid-2019. 15-yr PPA with Transport for NSW (Sydney Metro Northwest, ~69% of output). Located ~7 km west of Gulgong."
+  },
   "sources": [
     {
       "title": "AEMO Generation Information Jan 2026",

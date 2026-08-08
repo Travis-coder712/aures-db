@@ -2712,6 +2712,1447 @@ EIS_DATA = [
         },
     },
 
+
+    # ══════════════════════════════════════════════════════════════════════════
+    # SOLAR FARMS — v3.30.0 backlog closure (2026-08-09). Extracted by four
+    # parallel research agents from the 57 remaining planning-portal URLs staged
+    # in the v3.28.0 EIS coverage audit. Every entry has voltage, NSP,
+    # substation, developer, MWac; most have MWdc, DC:AC ratio, panel count,
+    # tracker/mount type. NSW SSD-heavy; VIC EES + ESC; QLD MCU/DA + EPBC;
+    # ACT/SA smaller cohorts.
+    # ══════════════════════════════════════════════════════════════════════════
+
+    {
+        'project_id': 'avonlie-solar-farm',
+        'tech': 'solar',
+        'eis_specs': {
+            'document_title': 'Avonlie Solar Farm Environmental Impact Statement (SSD-9031) - Iberdrola Australia',
+            'document_url': 'https://majorprojects.planningportal.nsw.gov.au/prweb/PRRestService/mp/01/getContent?AttachRef=RFI-12104238!20201222T062526.746+GMT',
+            'document_year': 2019,
+            'connection_voltage_kv': 132,
+            'network_service_provider': 'TransGrid',
+            'connection_substation_name': 'Dual 132 kV grid connection near Darlington Point (TransGrid sub-transmission network)',
+            'notes': (
+                'Iberdrola Australia. 245 MWdc (~190 MWac output). More than 450,000 PV modules '
+                'on single-axis trackers. Consent August 2019; initial energisation 2022; '
+                'commercial operation August 2023. Generates ~500 GWh/yr.'
+            ),
+        },
+    },
+
+    {
+        'project_id': 'bannerton-solar-park',
+        'tech': 'solar',
+        'eis_specs': {
+            'document_title': (
+                'Bannerton Solar Farm – Australian Industry Participation (AIP) Plan Executive '
+                'Summary, Foresight Solar Australia Pty Ltd'
+            ),
+            'document_url': 'https://www.industry.gov.au/sites/default/files/aip/bannerton_solar_farm_executive_summary_0.docx',
+            'document_year': 2017,
+            'connection_voltage_kv': 66.0,
+            'network_service_provider': 'Powercor',
+            'connection_substation_name': 'Wemen Terminal Station (WETS)',
+            'connection_distance_note': (
+                'Exports at 66 kV into Powercor network to existing Wemen Terminal Substation '
+                '(WETS 220/66 kV)'
+            ),
+            'notes': (
+                'Foresight Solar Australia Pty Ltd (co-invested Impact Investment Group + '
+                'Syncline). 110 MWdc / 88 MWac (DC:AC ~1.25); ~$160 M capex, $133.5 M procured '
+                'goods/services. ~319,406–320,000 modules, single-axis tracking. UGL Pty Ltd '
+                'EPC (with O&M). Located 12 km SW of Robinvale, Victoria. PPAs with Alinta '
+                'Energy and Yarra Trams. Construction Q4 2017, substantial completion July '
+                '2018. Part of the NW-VIC cluster (Wemen, Karadoc, Gannawarra, Bannerton) '
+                'constrained ~50% in 2019 for voltage.'
+            ),
+        },
+    },
+
+    {
+        'project_id': 'beryl-solar-farm',
+        'tech': 'solar',
+        'eis_specs': {
+            'document_title': 'Beryl Solar Farm (SSD-8183) State Significant Development',
+            'document_url': 'https://www.planningportal.nsw.gov.au/major-projects/projects/beryl-solar-farm',
+            'document_year': 2017,
+            'connection_voltage_kv': 132.0,
+            'network_service_provider': 'TransGrid',
+            'connection_substation_name': (
+                'New Beryl solar-plant substation, tie-in to existing TransGrid Beryl 132 kV '
+                'substation (Wellington–Gulgong 132 kV corridor)'
+            ),
+            'connection_augmentation': (
+                'TransGrid built a new substation at the solar farm and interconnected it to '
+                'the existing Beryl substation'
+            ),
+            'notes': (
+                'Developer First Solar; ownership: New Energy Solar (initial 49% May 2018, 100% '
+                'mid-2019) → Banpu Energy Australia. Downer EPC (~A$150M). 87 MWac; one of the '
+                'first Aussie deployments of First Solar Series 6 CdTe thin-film modules. '
+                'Approved 5 Dec 2017; financial close 11 May 2018; commercial operation '
+                'mid-2019. 15-yr PPA with Transport for NSW (Sydney Metro Northwest, ~69% of '
+                'output). Located ~7 km west of Gulgong.'
+            ),
+        },
+    },
+
+    {
+        'project_id': 'bluegrass-solar-farm',
+        'tech': 'solar',
+        'eis_specs': {
+            'document_title': (
+                'Blue Grass Solar Farm – Material Change of Use consent (Western Downs Regional '
+                'Council); Powerlink Blue Grass Solar Farm Connection Project'
+            ),
+            'document_url': 'https://www.powerlink.com.au/projects/blue-grass-solar-farm-connection-project',
+            'document_year': 2019,
+            'connection_voltage_kv': 132.0,
+            'network_service_provider': 'Powerlink',
+            'connection_substation_name': (
+                'New Cameby 132 kV substation (Powerlink), tie-in to the existing '
+                'Chinchilla–Columboola 132 kV transmission line'
+            ),
+            'connection_augmentation': (
+                'New Cameby substation constructed by Powerlink to link the facility to the '
+                'existing 132 kV Chinchilla–Columboola line (energised 2022)'
+            ),
+            'notes': (
+                'Developer X-Elio (Brookfield-owned since 2022). 200 MWdc / ~148 MWac; near '
+                'Chinchilla in the Western Downs. J.A. Martin EPC. Financial close Jan 2022 '
+                '(CEFC A$37M). 10-yr Salesforce virtual PPA + 49 MW Stanwell offtake. Grid '
+                'connection and commercial operation Nov 2022. 148 MW grid-forming BESS being '
+                'added 2025–26.'
+            ),
+        },
+    },
+
+    {
+        'project_id': 'bomen-solar-farm',
+        'tech': 'solar',
+        'eis_specs': {
+            'document_title': 'Bomen Solar Farm State Significant Development Assessment Report (SSD-8835)',
+            'document_url': 'https://majorprojects.planningportal.nsw.gov.au/prweb/PRRestService/mp/01/getContent?AttachRef=SSD-8835%2120190226T085814.645+GMT',
+            'document_year': 2018,
+            'connection_voltage_kv': 132.0,
+            'network_service_provider': 'TransGrid',
+            'connection_substation_name': (
+                'Wagga North / Bomen 132 kV substation area (TransGrid); existing 66 kV and 132 '
+                'kV lines cross the site with a new 132 kV line under construction'
+            ),
+            'notes': (
+                'Developer Renew Estate; acquired by Spark Infrastructure Apr 2019. 100 MWac / '
+                '120 MWdc (DC:AC ~1.20), 310,576 bifacial Jinko Solar modules on Nextracker '
+                'single-axis trackers, SMA inverters. 10 MW / 40 MWh BESS approved on site. '
+                '~250 ha ~10 km NE of Wagga Wagga. Approved Feb 2019; construction 2019; '
+                'commercial operation Feb 2020. Westpac (Flow Power) virtual PPA.'
+            ),
+        },
+    },
+
+    {
+        'project_id': 'broken-hill-solar-plant',
+        'tech': 'solar',
+        'eis_specs': {
+            'document_title': 'AGL Broken Hill Solar Plant Environmental Assessment (Part 3A) – Volume 5 (of the EA)',
+            'document_url': 'https://www.agl.com.au/content/dam/digital/agl/documents/about-agl/how-we-source-energy/broken-hill-solar-plant/agl-broken-hill-solar-volume-5.pdf',
+            'document_year': 2012,
+            'connection_voltage_kv': 220.0,
+            'network_service_provider': 'TransGrid',
+            'connection_substation_name': 'Broken Hill 220 kV substation (TransGrid), on the western periphery of Broken Hill',
+            'connection_distance_km': 2.7,
+            'connection_distance_note': (
+                '~2.7 km double-circuit overhead line (22 kV cabling on 220 kV structures per '
+                'EA) from plant to TransGrid Broken Hill substation, 30 m easement'
+            ),
+            'notes': (
+                'Developer AGL Energy with First Solar EPC; ARENA + NSW Government co-funded '
+                '(Solar Flagships). 53 MWac on ~140 ha, 5 km SW of Broken Hill. Fixed-tilt '
+                'First Solar CdTe thin-film modules. Approved under Part 3A on 27 Mar 2013 '
+                '(s75J EP&A Act); commissioned Jan 2016. Co-located with the AGL Broken Hill '
+                'BESS (from mid-2020s).'
+            ),
+        },
+    },
+
+    {
+        'project_id': 'bungala-one-solar-farm',
+        'tech': 'solar',
+        'eis_specs': {
+            'document_title': (
+                'Bungala Solar Project Stage 1 – Development Application to SA Development '
+                'Assessment Commission (Reach Solar Energy, September 2016)'
+            ),
+            'document_year': 2016,
+            'connection_voltage_kv': 132.0,
+            'network_service_provider': 'ElectraNet',
+            'connection_substation_name': (
+                'Davenport substation (via 33 kV collector switchyard + new 33/132 kV project '
+                'step-up substation)'
+            ),
+            'connection_distance_note': (
+                'New 132 kV overhead line from onsite 33/132 kV substation to ElectraNet\'s '
+                'Davenport substation near Port Augusta'
+            ),
+            'connection_augmentation': (
+                'New 132 kV OH line and 33/132 kV project step-up substation designed and built '
+                'by ElectraNet'
+            ),
+            'notes': (
+                'Stage 1 of the 275 MWac Bungala Solar Project (Bungala 1 + Bungala 2). 137.7 '
+                'MW DC / 110 MW AC. Panels: Jinko Solar polycrystalline (~840,000 modules '
+                'combined across both stages). Inverters: SMA. Tracker: NEXTracker single-axis '
+                '(1.5 m axis height, 5.5 m spacing). Originally developed by Reach Solar '
+                'Energy; DA lodged Sep 2016 to SA Development Assessment Commission. Now owned '
+                'by Enel Green Power + DIF Infrastructure JV (Potentia Energy operates). '
+                'Commissioned September 2018; Origin Energy PPA for full output. NO '
+                'planning-report PDF publicly indexed — plan.sa.gov.au register only.'
+            ),
+        },
+    },
+
+    {
+        'project_id': 'bungala-two-solar-farm',
+        'tech': 'solar',
+        'eis_specs': {
+            'document_title': (
+                'Bungala Solar Project Stage 2 – Development Application to SA Development '
+                'Assessment Commission (Reach Solar Energy, September 2016; same DA package as '
+                'Stage 1)'
+            ),
+            'document_year': 2016,
+            'connection_voltage_kv': 132.0,
+            'network_service_provider': 'ElectraNet',
+            'connection_substation_name': 'Emeroo and Davenport substations (via same 132 kV OH line as Bungala One)',
+            'connection_distance_note': (
+                'Shared 132 kV overhead export line from the Bungala site to Emeroo/Davenport '
+                'substations near Port Augusta'
+            ),
+            'notes': (
+                'Stage 2 of the 275 MWac Bungala Solar Project. 137.7 MW DC / 110 MW AC. Same '
+                'equipment package as Bungala One (Jinko polycrystalline modules, SMA '
+                'inverters, NEXTracker single-axis trackers). Grid connection November 2018. '
+                'Ownership Enel Green Power + DIF Infrastructure JV via Potentia Energy '
+                'management. DA approved Sep 2016 (single DA covering both stages).'
+            ),
+        },
+    },
+
+    {
+        'project_id': 'clare-solar-farm',
+        'tech': 'solar',
+        'eis_specs': {
+            'document_title': (
+                'Clare Solar Farm — Development Application (Burdekin Shire Council MCU) and '
+                'Powerlink Clare South Connection Project'
+            ),
+            'document_url': 'https://www.powerlink.com.au/projects/clare-south-solar-farm-connection-project',
+            'document_year': 2015,
+            'connection_voltage_kv': 275.0,
+            'network_service_provider': 'Powerlink',
+            'connection_substation_name': 'Clare South 275 kV substation (Powerlink)',
+            'connection_augmentation': 'New Powerlink Clare South 275 kV switching station; solar farm feeder bay',
+            'notes': (
+                'Fotowatio Renewable Ventures (FRV). 100 MWac / 125 MWdc; 393,300 Trina Solar '
+                'single-axis-tracking bifacial-era polycrystalline modules through 69 Ingeteam '
+                'INGECON SUN PowerMax inverters over ~300 ha, 35 km SW of Ayr. Burdekin Shire '
+                'Council DA October 2015; commercial operations May 2018 with Origin Energy '
+                'offtake PPA.'
+            ),
+        },
+    },
+
+    {
+        'project_id': 'clermont-solar-farm',
+        'tech': 'solar',
+        'eis_specs': {
+            'document_title': 'Clermont Solar Farm — Development Application (Isaac Regional Council MCU), 2017',
+            'document_url': 'https://www.clermontsolarfarm.com.au/',
+            'document_year': 2017,
+            'connection_voltage_kv': 132.0,
+            'network_service_provider': 'Powerlink',
+            'connection_substation_name': 'Powerlink 132 kV network (Clermont/Lilyvale corridor)',
+            'notes': (
+                'WIRSOL Energy (owner; developed by Epuron / Island Green Power UK / Wirsol). '
+                '75 MWac / 89 MWp DC; single-axis tracking PV across ~497 acres, ~106 km north '
+                'of Emerald. Isaac Regional Council MCU. Commercial operations June 2019; 30 MW '
+                'PPA with Flow Power.'
+            ),
+        },
+    },
+
+    {
+        'project_id': 'coleambally-solar-farm',
+        'tech': 'solar',
+        'eis_specs': {
+            'document_title': 'Coleambally Solar Farm Environmental Impact Statement (SSD-8642) - Neoen Australia',
+            'document_url': 'https://www.planningportal.nsw.gov.au/major-projects/projects/coleambally-solar-farm',
+            'document_year': 2017,
+            'connection_voltage_kv': 132,
+            'network_service_provider': 'TransGrid',
+            'connection_substation_name': 'Coleambally 132 kV substation (TransGrid)',
+            'notes': (
+                'Neoen Australia. 150 MWac / ~189 MWp DC. 567,828 PV modules on 3,465 Array '
+                'Technologies DuraTrack single-axis trackers across ~570 ha. Consent October '
+                '2017; commercial operation November 2018. 12-yr PPA with EnergyAustralia for '
+                '70% output.'
+            ),
+        },
+    },
+
+    {
+        'project_id': 'columboola-solar-farm',
+        'tech': 'solar',
+        'eis_specs': {
+            'document_title': (
+                'Columboola Solar Farm – Material Change of Use consent (Western Downs Regional '
+                'Council, Jan 2017); Luminous Energy planning page'
+            ),
+            'document_url': 'http://www.luminousenergy.com.au/planning.html',
+            'document_year': 2017,
+            'connection_voltage_kv': 132.0,
+            'network_service_provider': 'Powerlink',
+            'connection_substation_name': (
+                'Powerlink Columboola 132 kV substation via a new 132 kV overhead line to a '
+                'dedicated on-site generator substation'
+            ),
+            'connection_distance_km': 1.3,
+            'connection_distance_note': (
+                '~1.3 km new 132 kV overhead transmission line from the on-site generator '
+                'substation to Powerlink\'s Columboola substation'
+            ),
+            'notes': (
+                'Developer Luminous Energy; owner Hana Financial Investment (Korea). 162 MWac / '
+                '203 MWdc (DC:AC ~1.25); 417,000 bifacial panels on single-axis trackers; 39 '
+                'SMA Medium Voltage Power Stations. ~410 ha, ~10 km NE of Miles in the Western '
+                'Downs. DA approved Jan 2017 by WDRC. Grid connection energised late 2021 / '
+                'early 2022. PPA with CS Energy. ~440 GWh/yr expected.'
+            ),
+        },
+    },
+
+    {
+        'project_id': 'darling-downs-solar-farm',
+        'tech': 'solar',
+        'eis_specs': {
+            'document_title': (
+                'Darling Downs Solar Farm — Origin Energy project newsletter / MCU (Toowoomba '
+                'Regional Council), April 2016'
+            ),
+            'document_url': 'https://www.originenergy.com.au/content/dam/origin/about/docs/DDSF%20Newsletter%20Editon%201%20APR%202016-WEB.PDF',
+            'document_year': 2016,
+            'connection_voltage_kv': 275.0,
+            'network_service_provider': 'Powerlink',
+            'connection_substation_name': 'Braemar 275 kV substation (Powerlink)',
+            'notes': (
+                'Developed by Origin Energy; sold to APA Group May 2017. 110 MWac; ~430,000 JA '
+                'Solar Holdings polycrystalline modules through 44 inverters on fixed-tilt '
+                '(non-tracking) mounts across ~250 ha adjacent to APA\'s Braemar Power Station. '
+                'ARENA A$20M grant; Origin offtake PPA to 2030. Toowoomba Regional Council MCU '
+                '(council-planning pathway, not EIS/EPBC controlled action).'
+            ),
+        },
+    },
+
+    {
+        'project_id': 'daydream-solar-farm',
+        'tech': 'solar',
+        'eis_specs': {
+            'document_title': (
+                'Daydream Solar Farm – Material Change of Use consent (Whitsunday Regional '
+                'Council); Powerlink Daydream Solar Farm Connection Project'
+            ),
+            'document_url': 'https://www.powerlink.com.au/projects/daydream-solar-farm-connection-project',
+            'document_year': 2017,
+            'connection_voltage_kv': 275.0,
+            'network_service_provider': 'Powerlink',
+            'connection_substation_name': (
+                'Powerlink Strathmore 275 kV substation – new dedicated 275 kV substation and '
+                'additional feeder bay at existing Strathmore'
+            ),
+            'connection_augmentation': (
+                'New 275 kV substation and additional feeder bay at Strathmore built by '
+                'Powerlink (2018); connection shared with sister Hayman Solar Farm'
+            ),
+            'notes': (
+                'Developer Edify Energy; owner Atmos Renewables from Dec 2021. 150 MWac / 180 '
+                'MWdc; ~1.5 million panels on single-axis trackers across ~1,070 acres north of '
+                'Collinsville, QLD. WRC MCU consent 2017. Powerlink connection works completed '
+                '2018; solar farm commissioned Q2 2018. 12-yr Origin PPA.'
+            ),
+        },
+    },
+
+    {
+        'project_id': 'edenvale-solar-park',
+        'tech': 'solar',
+        'eis_specs': {
+            'document_title': (
+                'Edenvale Solar Park – Material Change of Use consent (Western Downs Regional '
+                'Council) and project Environmental & Social Management Plan (ESMP)'
+            ),
+            'document_url': 'https://edenvalesolarpark.com/',
+            'document_year': 2020,
+            'connection_voltage_kv': 275.0,
+            'network_service_provider': 'Powerlink',
+            'connection_substation_name': 'Powerlink Orana 275 kV substation (Southern QLD Renewable Energy Zone)',
+            'notes': (
+                'Owners ENEOS / Sojitz (50/50 via Sapphire Energy Pty Ltd); originally '
+                'developed by DPI Solar 3 (Singapore). GRS EPC and O&M. 204 MWac; ~400,000 '
+                'modules across two properties (~428 ha) near Crossroads / Chinchilla in the '
+                'Western Downs. Opening ceremony Oct 2023; commercial operation Mar 2024. ESMP '
+                'established Jun 2024.'
+            ),
+        },
+    },
+
+    {
+        'project_id': 'emerald-solar-park',
+        'tech': 'solar',
+        'eis_specs': {
+            'document_title': (
+                'Emerald Solar Park — Development Application (Central Highlands Regional '
+                'Council MCU), 2017'
+            ),
+            'document_url': 'https://www.emerald-solar.com.au/',
+            'document_year': 2017,
+            'connection_voltage_kv': 66.0,
+            'network_service_provider': 'Ergon Energy',
+            'connection_substation_name': 'Ergon Emerald 66 kV distribution network',
+            'notes': (
+                'Originally developed by RES (Renewable Energy Systems). 72 MWac; Canadian '
+                'Solar modules through 32 SMA inverters on NEXTracker single-axis trackers, '
+                'connected to Ergon\'s 66 kV network at Emerald. Central Highlands Regional '
+                'Council MCU; commercial operations early 2019.'
+            ),
+        },
+    },
+
+    {
+        'project_id': 'finley-solar-farm',
+        'tech': 'solar',
+        'eis_specs': {
+            'document_title': 'Finley Solar Farm Environmental Impact Statement (SSD-8540) - ESCO Pacific',
+            'document_url': 'https://majorprojects.planningportal.nsw.gov.au/prweb/PRRestService/mp/01/getContent?AttachRef=SSD-8540%2120190228T022742.181+GMT',
+            'document_year': 2017,
+            'connection_voltage_kv': 132,
+            'network_service_provider': 'TransGrid',
+            'connection_substation_name': 'Finley 132 kV substation (TransGrid)',
+            'notes': (
+                'ESCO Pacific (asset sold to John Laing Nov 2018). 133-175 MWac / ~175 MWdc '
+                '(DC:AC ~1.32). Over 490,000 Canadian Solar high-efficiency modules on '
+                'single-axis trackers across ~385 ha, 6 km west of Finley. 33 kV underground '
+                'collection cables into onsite substation to TransGrid Finley 132 kV '
+                'substation. Consent 29 January 2018. BlueScope PPA for 66% output.'
+            ),
+        },
+    },
+
+    {
+        'project_id': 'gannawarra-solar-farm',
+        'tech': 'solar',
+        'eis_specs': {
+            'document_title': (
+                'Gannawarra Solar Farm – Gannawarra Shire Council planning permit (no '
+                'consolidated public EIS document online)'
+            ),
+            'document_year': 2017,
+            'connection_voltage_kv': 66.0,
+            'network_service_provider': 'Powercor',
+            'connection_substation_name': 'Gannawarra 66 kV zone (Powercor Australia network near Kerang)',
+            'notes': (
+                'Developed by Solar Choice → Edify Energy → acquired by Wirsol (now Gentari). '
+                '60 MWdc / 50.61 MWac (DC:AC ~1.19). Panels: JA Solar; inverters: SMA 2500 '
+                'SC-EV; tracker: Array Technologies (ATI) DuraTrack single-axis. 132.4 ha. '
+                'Co-located Gannawarra Energy Storage System (GESS) originally 25 MW / 50 MWh '
+                'Tesla Powerpack, later expanded to 185 MW / 370 MWh. Approved by Gannawarra '
+                'Shire Council pre-2018. NO planning-report URL online.'
+            ),
+        },
+    },
+
+    {
+        'project_id': 'girgarre-solar-farm',
+        'tech': 'solar',
+        'eis_specs': {
+            'document_title': 'Girgarre Solar Farm – Frequently Asked Questions (Potentia Energy, updated April 2025)',
+            'document_url': 'https://potentiaenergy.com.au/wp-content/uploads/2024/10/Potentia-Energy-FAQs-Girgarre-1.pdf',
+            'document_year': 2018,
+            'connection_voltage_kv': 66.0,
+            'network_service_provider': 'Powercor',
+            'connection_substation_name': 'Existing 66 kV transmission line on southern boundary (towards Stanhope zone substation)',
+            'notes': (
+                'Jointly developed by Lesson Group + Enel Green Power Australia (now Potentia '
+                'Energy, an Enel + INPEX JV that fully acquired Girgarre in 2019). ~93 MW AC; '
+                '~167,000 PV modules (LONGi supply) plus ~15 power conversion units. EPC Beon '
+                'Energy Solutions. ~250 ha, ~10 km NW of Stanhope / ~50 km W of Shepparton, '
+                'Shire of Campaspe. ~A$140 M capex. Planning permit granted 2018 by Campaspe '
+                'Shire Council. Operational.'
+            ),
+        },
+    },
+
+    {
+        'project_id': 'glenrowan-solar-farm',
+        'tech': 'solar',
+        'eis_specs': {
+            'document_title': (
+                'Victorian Ministerial Permit PA2101420 – Glenrowan Solar Farm (with 2026 BESS '
+                'permit PA2302185)'
+            ),
+            'document_url': 'https://www.planning.vic.gov.au/planning-approvals/ministerial-permits-register/ministerial-permits/b68f14c0-d6e3-ed11-8847-002248922d75',
+            'document_year': 2023,
+            'connection_voltage_kv': 66.0,
+            'network_service_provider': 'AusNet',
+            'connection_substation_name': 'Glenrowan Terminal Station',
+            'notes': (
+                '130 MWdc / 102 MWac solar farm on ~245 ha adjacent to Glenrowan Terminal '
+                'Station (separate from the earlier Glenrowan West and Winton projects, which '
+                'also connect at Glenrowan TS). WSP engineering. Connection works permit '
+                'PA2101420 (2023) covers grid tie-in; co-located BESS permit PA2302185 approved '
+                '28 May 2026. Panel/inverter OEMs not disclosed in Victorian ministerial permit '
+                'register.'
+            ),
+        },
+    },
+
+    {
+        'project_id': 'glenrowan-west-solar-farm',
+        'tech': 'solar',
+        'eis_specs': {
+            'document_title': (
+                'ESC Generation Authority Application – Glenrowan West Solar Farm (Public '
+                'submission), Glenrowan Sun Farm Pty Ltd / Wirsol Energy'
+            ),
+            'document_url': 'https://www.esc.vic.gov.au/sites/default/files/documents/electricity-generation-license-application-glenrowan-west-solar-farm-application-20200806.pdf',
+            'document_year': 2020,
+            'connection_voltage_kv': 66.0,
+            'network_service_provider': 'AusNet',
+            'connection_substation_name': 'Glenrowan Terminal Station',
+            'connection_distance_note': (
+                'Short 66 kV circuit into AusNet Glenrowan Terminal Station; Connection '
+                'Services Agreement with AusNet executed July 2019, AEMO 5.3.4A letter Jan 2018'
+            ),
+            'notes': (
+                'Wirtgen Invest (private German family office) equity owner via Glenrowan Sun '
+                'Farm Pty Ltd; Wirsol Energy (WEL, now Gentari) construction/asset manager and '
+                'O&M provider. 149 MWp DC / 110 MW AC (DC:AC ~1.35). 373,248 Jinko 395–400 Wp '
+                'modules, single-axis NEXTracker horizontal tracker, 48 x SMA SC 2.75 MW '
+                'central inverters. EPC Signal Energy Australia. 323 ha near Glenrowan, ~250 km '
+                'NE of Melbourne. Construction commenced Jan 2020; first export Dec 2020; COD '
+                'Q1 2021.'
+            ),
+        },
+    },
+
+    {
+        'project_id': 'goorambat-east-solar-farm-engie',
+        'tech': 'solar',
+        'eis_specs': {
+            'document_title': (
+                'Goorambat East Solar Farm – Town Planning Report, Neoen Australia Pty Ltd '
+                '(AECOM, 16 August 2019)'
+            ),
+            'document_url': 'https://engie.com.au/sites/default/files/2024-07/3_Planning%20Report.pdf',
+            'document_year': 2019,
+            'connection_voltage_kv': 220.0,
+            'network_service_provider': 'AusNet',
+            'connection_substation_name': 'New Goorambat East Terminal Station on existing 220 kV Shepparton TS – Dederang TS line',
+            'connection_augmentation': (
+                'New 220/33 kV project terminal substation with three 220 kV switchyard bays '
+                '(approx. 100 x 50 m footprint) tapping into the Shepparton–Dederang 220 kV '
+                'overhead line within the site'
+            ),
+            'notes': (
+                'Originally developed by Neoen Australia Pty Ltd; acquired by ENGIE in 2023. Up '
+                'to 250 MW AC via ~500,000 bifacial 380 W PV modules on single-axis trackers '
+                '(tracker rotation ±60°, max 4 m height) and up to ~120 inverters. 630 ha '
+                'across 5 rural properties in Benalla RCC, ~215 km NE of Melbourne. Approved '
+                'December 2019 by Benalla Rural City Council. Construction commenced late 2024; '
+                'commissioning targeted 2027.'
+            ),
+        },
+    },
+
+    {
+        'project_id': 'gunnedah-solar-farm',
+        'tech': 'solar',
+        'eis_specs': {
+            'document_title': 'Gunnedah Solar Farm Environmental Impact Statement (SSD-8658) - CalEnergy Resources',
+            'document_url': 'https://majorprojects.planningportal.nsw.gov.au/prweb/PRRestService/mp/01/getContent?AttachRef=SSD-8658!20190410T050536.540+GMT',
+            'document_year': 2018,
+            'connection_voltage_kv': 132,
+            'network_service_provider': 'TransGrid',
+            'connection_substation_name': 'Gunnedah 132 kV substation (TransGrid, ~2.3 km south of site on Oxley Highway)',
+            'connection_distance_km': 1.0,
+            'connection_distance_note': 'New ~1 km 132 kV OHL with ~6 towers/poles (150-200 m spacing) to Gunnedah substation',
+            'notes': (
+                'CalEnergy Resources (subsidiary of UK\'s Northern Powergrid). 110-154 MWac. '
+                '~460,000-470,000 bifacial Canadian Solar modules on single-axis trackers '
+                'across ~304 ha. IPC consent 12 March 2019.'
+            ),
+        },
+    },
+
+    {
+        'project_id': 'hamilton-solar-farm',
+        'tech': 'solar',
+        'eis_specs': {
+            'document_title': (
+                'Hamilton Solar Farm — Development Application (Whitsunday Regional Council '
+                'MCU) and Powerlink Hamilton Connection Project'
+            ),
+            'document_url': 'https://www.powerlink.com.au/projects/hamilton-solar-farm-connection-project',
+            'document_year': 2017,
+            'connection_voltage_kv': 132.0,
+            'network_service_provider': 'Powerlink',
+            'connection_substation_name': 'Strathmore 132 kV substation (Powerlink)',
+            'connection_augmentation': (
+                'New shared Powerlink 132 kV transmission line + solar-farm substation + '
+                'additional Strathmore feeder bay (shared with Whitsunday Solar Farm; completed '
+                '2018)'
+            ),
+            'notes': (
+                'Developed by Edify Energy; Gentari owner. 57.5 MWac / 69 MWdc; 174,650 PV '
+                'modules on 1,940 Array Technologies DuraTrack single-axis trackers across ~330 '
+                'ha north of Collinsville. ARENA and QLD Government supported; ERM Power '
+                'offtake PPA. Whitsunday Regional Council MCU; commissioned 2018.'
+            ),
+        },
+    },
+
+    {
+        'project_id': 'haughton-solar-farm-stage-1',
+        'tech': 'solar',
+        'eis_specs': {
+            'document_title': (
+                'Haughton Solar Farm — Development Application (Burdekin Shire Council MCU, '
+                'full 500 MW envelope approved)'
+            ),
+            'document_url': 'https://www.pacificblue.com.au/our-energy-production/operating-sites/haughton-solar-farm',
+            'document_year': 2018,
+            'connection_voltage_kv': 275.0,
+            'network_service_provider': 'Powerlink',
+            'connection_substation_name': 'Ross 275 kV substation (Powerlink)',
+            'connection_augmentation': '33 kV collector network from Haughton to Ross 275 kV via project switching station',
+            'notes': (
+                'Pacific Hydro (now Pacific Blue). Stage 1 100 MWac (Stage 2 300 MW approved '
+                '2024). Single-axis trackers with 23 inverter stations; site west of Ayr, north '
+                'QLD. Burdekin Shire Council MCU covers the full 500 MW site envelope; Stage 1 '
+                'energised 2019, offtake to CS Energy and QLD-based commercial customers.'
+            ),
+        },
+    },
+
+    {
+        'project_id': 'hillston-sun-farm',
+        'tech': 'solar',
+        'eis_specs': {
+            'document_title': 'Hillston Sun Farm State Significant Development Assessment (SSD-7955), incl. MOD-1',
+            'document_url': 'https://majorprojects.planningportal.nsw.gov.au/prweb/PRRestService/mp/01/getContent?AttachRef=SSD-7955-MOD-1!20190226T082120.822+GMT',
+            'document_year': 2017,
+            'connection_voltage_kv': 132.0,
+            'network_service_provider': 'Essential Energy',
+            'connection_substation_name': (
+                'Existing Essential Energy 132/33 kV Hillston substation, adjacent to the site; '
+                'connected via a new 132 kV overhead line'
+            ),
+            'connection_distance_km': 0.5,
+            'notes': (
+                'Developer Overland Sun Farming; acquired by Amp Energy 2020 and later marketed '
+                'as Revera Energy asset. EIS prepared by EMM. Consent 26 Oct 2017. 85 MWac / '
+                '~119 MWdc (DC:AC ~1.40), ~300,000 modules on single-axis trackers, 393 ha ~3.5 '
+                'km from Hillston township. Construction 2019–21; full commercial operation Apr '
+                '2022. EPC involved Yurika.'
+            ),
+        },
+    },
+
+    {
+        'project_id': 'karadoc-solar-farm',
+        'tech': 'solar',
+        'eis_specs': {
+            'document_title': (
+                'Karadoc Solar Farm – Mildura Rural City Council planning permit (no '
+                'consolidated public EIS document; BayWa r.e. project pages are the best public '
+                'source)'
+            ),
+            'document_url': 'https://www.baywa-re.com.au/en/projects/completed-projects/karadoc',
+            'document_year': 2018,
+            'connection_voltage_kv': 66.0,
+            'network_service_provider': 'Powercor',
+            'connection_substation_name': 'Onsite 33/66 kV substation feeding Powercor 66 kV Karadoc network (near Red Cliffs)',
+            'notes': (
+                'Developer/EPC BayWa r.e. Australia + Beon Energy Solutions. 112.5 MWp DC / 90 '
+                'MW AC (DC:AC 1.25). ~330,000 modules, single-axis tracking. SMA central '
+                'inverters. Commercial ops Dec 2018 (officially opened 2019); Flow Power and '
+                'Carlton & United Breweries offtake. Located ~25 km south of Mildura, Victoria. '
+                'Ownership transferred to Igneo Infrastructure Partners (Aug 2023) then Atmos '
+                'Renewables (2023). NO primary planning-report PDF publicly indexed — Mildura '
+                'RCC permit register only.'
+            ),
+        },
+    },
+
+    {
+        'project_id': 'kerang-solar-plant',
+        'tech': 'solar',
+        'eis_specs': {
+            'document_title': (
+                'Kerang Solar Plant / \'Grey Box Energy Field\' – Gannawarra Shire Council '
+                'planning permit (no online copy)'
+            ),
+            'document_year': 2016,
+            'connection_voltage_kv': 22.0,
+            'network_service_provider': 'Powercor',
+            'connection_substation_name': 'Kerang zone substation (22 kV / 66 kV)',
+            'notes': (
+                'Owner/operator British Solar Renewables (BSR). 37.2 MWp DC / 30 MW AC export '
+                'limit. Project marketed as \'Grey Box Energy Field\'. ~A$45.5 M capex. Located '
+                '~8 km south of Cohuna, VIC. Approved by Gannawarra Shire Council in 2016; no '
+                'online copy of the planning permit or EIS-equivalent.'
+            ),
+        },
+    },
+
+    {
+        'project_id': 'lilyvale-solar-farm',
+        'tech': 'solar',
+        'eis_specs': {
+            'document_title': (
+                'Lilyvale Solar Farm — EPBC referral (not a controlled action, 5 Jan 2015) & '
+                'Central Highlands Regional Council DA (9 Sep 2015)'
+            ),
+            'document_url': 'https://lilyvalesolarfarm.com.au/news-and-events/',
+            'document_year': 2015,
+            'connection_voltage_kv': 132.0,
+            'network_service_provider': 'Powerlink',
+            'connection_substation_name': 'New Powerlink 132 kV substation on Lilyvale–Blackwater 132 kV line',
+            'connection_augmentation': 'New Powerlink 132 kV substation and short spur transmission line built early 2019',
+            'notes': (
+                'Fotowatio Renewable Ventures (FRV). 100 MWac / 126 MWdc; single-axis-tracking '
+                'PV, 50 km NE of Emerald in Central QLD. EPBC \'not a controlled action\' Jan '
+                '2015; Central Highlands Regional Council DA approved Sep 2015. Financial close '
+                'Sep 2017; Ergon Energy PPA. Powerlink substation and 132 kV connection asset '
+                'completed early 2019.'
+            ),
+        },
+    },
+
+    {
+        'project_id': 'limondale-solar-farm-2',
+        'tech': 'solar',
+        'eis_specs': {
+            'document_title': 'Limondale Sun Farm Environmental Impact Statement (SSD-8025) - Overland Sun Farming',
+            'document_url': 'https://majorprojects.planningportal.nsw.gov.au/prweb/PRRestService/mp/01/getContent?AttachRef=SSD-8025!20190228T005510.340+GMT',
+            'document_year': 2017,
+            'connection_voltage_kv': 220,
+            'network_service_provider': 'TransGrid',
+            'connection_substation_name': 'Balranald 220 kV substation (TransGrid) - shared connection with Limondale 1',
+            'connection_distance_km': 0.5,
+            'connection_distance_note': 'Shares Balranald 220 kV connection with Limondale 1',
+            'notes': (
+                'Overland Sun Farming. Limondale 2 = ~42.8 MWac fixed-tilt PV, assessed under '
+                'the same SSD-8025 EIS as Limondale 1 (~250 MW nominal combined). Fixed-tilt '
+                'mounting rather than trackers. Consent 31 August 2017.'
+            ),
+        },
+    },
+
+    {
+        'project_id': 'metz-solar-farm',
+        'tech': 'solar',
+        'eis_specs': {
+            'document_title': 'Metz Solar Farm Environmental Impact Statement (SSD-7931) - FRV Services Australia',
+            'document_url': 'https://majorprojects.planningportal.nsw.gov.au/prweb/PRRestService/mp/01/getContent?AttachRef=SSD-7931%2120190228T002523.985+GMT',
+            'document_year': 2016,
+            'connection_voltage_kv': 132,
+            'network_service_provider': 'TransGrid',
+            'connection_substation_name': 'Armidale 132 kV substation area (TransGrid / Essential Energy sub-transmission)',
+            'notes': (
+                'FRV Services Australia (development rights acquired from Risen Energy in Nov '
+                '2020). 115 MWac / 143.5 MWdc (DC:AC ~1.25). ~320,000 modules on single-axis '
+                'trackers with SMA central inverters across ~248 ha near Hillgrove, ~18 km east '
+                'of Armidale on the New England Tablelands. Consent 18 July 2017; commercial '
+                'operation September 2022.'
+            ),
+        },
+    },
+
+    {
+        'project_id': 'mokoan-solar-farm',
+        'tech': 'solar',
+        'eis_specs': {
+            'document_title': (
+                'Victorian Ministerial Permit PA1900684 (Winton solar farm, plus PA1900684-1 '
+                'DELWP expansion June 2020) – Mokoan Solar Farm'
+            ),
+            'document_url': 'https://www.planning.vic.gov.au/planning-approvals/ministerial-permits-register/ministerial-permits/94bf2ffd-3318-4d1f-bcee-94dddee387af',
+            'document_year': 2018,
+            'connection_voltage_kv': 66.0,
+            'network_service_provider': 'AusNet',
+            'connection_substation_name': 'AusNet 66 kV distribution near Winton (Benalla area)',
+            'notes': (
+                '58 MW AC / ~53 MWdc solar farm (originally 51 MWdc Lightsource bp design). '
+                'Located on Lee Rd + Nelson Rd, Winton VIC, on ~94 ha of former grazing land. '
+                'Benalla Rural City Council development approval Dec 2018; Victorian DELWP '
+                'approved expansion in June 2020 (PA1900684-1). Acquired by European Energy '
+                'from Lightsource bp in December 2022; FID late 2023; first power Dec 2024; '
+                'full commissioning June 2025. First European Energy operational project in '
+                'Australia. Co-located 40 MW / 80 MWh BESS at financial close July 2026; '
+                'selected under Federal CIS Tender 1 Dec 2024.'
+            ),
+        },
+    },
+
+    {
+        'project_id': 'moree-solar-farm',
+        'tech': 'solar',
+        'eis_specs': {
+            'document_title': 'Moree Solar Farm Environmental Assessment (Part 3A, MP10_0175)',
+            'document_url': 'https://www.planningportal.nsw.gov.au/major-projects/projects/moree-solar-farm',
+            'document_year': 2011,
+            'connection_voltage_kv': 132.0,
+            'network_service_provider': 'TransGrid',
+            'connection_substation_name': 'Moree 132 kV substation (TransGrid)',
+            'notes': (
+                'Developer FRV / Fotowatio Renewable Ventures. ARENA-supported (A$101.7M). 56 '
+                'MWac / ~70 MWdc (DC:AC ~1.25). First large-scale Australian solar plant to use '
+                'single-axis trackers. Site ~3 km south of Moree, east of Newell Hwy. Approved '
+                '17 Jul 2011 under Part 3A; commissioned 2016. EIS lodged Oct 2012 with a '
+                'revised version and public exhibition through 2012–13, but the Part 3A EA and '
+                'determination sit under MP10_0175 (2011).'
+            ),
+        },
+    },
+
+    {
+        'project_id': 'moura-solar-farm',
+        'tech': 'solar',
+        'eis_specs': {
+            'document_title': (
+                'Moura Solar Farm — Development Application (Banana Shire Council MCU) and '
+                'Powerlink Moura Connection Project'
+            ),
+            'document_url': 'https://www.powerlink.com.au/projects/moura-solar-farm-connection-project',
+            'document_year': 2018,
+            'connection_voltage_kv': 132.0,
+            'network_service_provider': 'Powerlink',
+            'connection_substation_name': 'Moura 132 kV substation (Powerlink)',
+            'connection_augmentation': 'New feeder bay at Powerlink Moura Substation',
+            'notes': (
+                'Developed by ESCO Pacific; Mytilineos/Metlen owner from Dec 2020 with METKA '
+                'EGN as EPC. 110 MWdc / ~82 MWac (Powerlink markets it as ~110 MW connection); '
+                '185,000 Risen Energy 590/595 W bifacial modules on Nextracker Horizon '
+                'single-axis trackers across ~203 ha, 12 km east of Moura. Banana Shire Council '
+                'DA April 2018; commercial operations June 2023.'
+            ),
+        },
+    },
+
+    {
+        'project_id': 'nevertire-solar-farm',
+        'tech': 'solar',
+        'eis_specs': {
+            'document_title': 'Nevertire Solar Farm Environmental Impact Statement (SSD-8072) - Edify Energy',
+            'document_url': 'https://majorprojects.planningportal.nsw.gov.au/prweb/PRRestService/mp/01/getContent?AttachRef=SSD-8072!20190228T015502.230+GMT',
+            'document_year': 2017,
+            'connection_voltage_kv': 132,
+            'network_service_provider': 'Essential Energy',
+            'connection_substation_name': 'Nevertire 132 kV AIS substation (Essential Energy, existing, ~1.5 km east of site)',
+            'connection_distance_km': 1.5,
+            'connection_distance_note': (
+                'Connects to existing 132 kV OHL in north of site running to Essential Energy '
+                'Nevertire substation ~1.5 km east'
+            ),
+            'notes': (
+                'Edify Energy (originally); now Atmos Renewables. 105 MWac; single-axis-tracker '
+                'PV; ~265 GWh/yr. Grid-connected December 2019. Nevertire substation is a 132 '
+                'kV AIS switchyard designed to evacuate ~130 MW to the Nyngan-Nevertire load '
+                'centres. Zen Energy is offtaker.'
+            ),
+        },
+    },
+
+    {
+        'project_id': 'numurkah-solar-farm',
+        'tech': 'solar',
+        'eis_specs': {
+            'document_title': (
+                'Numurkah Solar Farm — Ministerial Planning Permit PA2000861 (Greengold '
+                'Numurkah Solar Farm, 574 Hendys Rd)'
+            ),
+            'document_url': 'https://www.planning.vic.gov.au/planning-approvals/ministerial-permits-register/ministerial-permits/bee2efcf-2d33-ea11-a813-000d3a6a992a',
+            'document_year': 2018,
+            'connection_voltage_kv': 66.0,
+            'network_service_provider': 'Powercor',
+            'connection_substation_name': 'Numurkah Zone Substation (tapped off 66 kV Shepparton Terminal – Numurkah line)',
+            'notes': (
+                'Neoen (developed and originally owned; sold to HMC Capital-managed vehicle). '
+                '128 MWp DC / 112 MWac; 373,839 LONGi monocrystalline modules on single-axis '
+                'trackers. Ministerial Planning Permit PA2000861 under the VIC-MPP pathway; '
+                'commissioned 2019, backing Laverton Steelworks and Melbourne Renewable Energy '
+                'Project offtakes.'
+            ),
+        },
+    },
+
+    {
+        'project_id': 'nyngan-solar-plant',
+        'tech': 'solar',
+        'eis_specs': {
+            'document_title': (
+                'Nyngan Solar Plant Environmental Impact Statement (AGL Energy / First Solar; '
+                'Parsons Brinckerhoff, Feb 2013)'
+            ),
+            'document_url': 'https://tiltwebsite.blob.core.windows.net/tiltwebsitecontainer/2025/04/Environmental-Impact-Statement-Nyngan-Solar-Plant.pdf',
+            'document_year': 2013,
+            'connection_voltage_kv': 132.0,
+            'network_service_provider': 'TransGrid',
+            'connection_substation_name': (
+                'New Nyngan Solar Plant 33/132 kV switchyard; tap into existing Nyngan–Cobar '
+                '132 kV transmission line (TransGrid); Essential Energy is local DNSP'
+            ),
+            'connection_distance_km': 3.0,
+            'connection_distance_note': (
+                '~3 km of new 132 kV overhead line and easement from the plant switchyard to '
+                'the existing Nyngan–Cobar 132 kV line'
+            ),
+            'connection_augmentation': 'New solar-plant 33/132 kV substation and 3 km 132 kV connection line',
+            'notes': (
+                'AGL Energy (owner) with First Solar EPC and O&M (5 yr); Solar Flagships / '
+                'ARENA + NSW Gov co-funded. Nominal capacity up to ~106 MWac (102 MW '
+                'operational). ~1,350,000 First Solar CdTe thin-film 87.5–95 W modules, '
+                'fixed-tilt at zero degree azimuth. ~300 ha of arrays + 14 ha easement on ~460 '
+                'ha site. Approved under Part 3A; construction began Jan 2014; full commercial '
+                'operation Jul 2015.'
+            ),
+        },
+    },
+
+    {
+        'project_id': 'parkes-solar-farm',
+        'tech': 'solar',
+        'eis_specs': {
+            'document_title': (
+                'Parkes Solar Farm Environmental Impact Statement (SSD-6784) – Neoen / NGH '
+                'Environmental, March 2016'
+            ),
+            'document_url': 'https://parkessolarfarm.com.au/wp-content/uploads/2022/12/2.8.1-PSF-Parkes-Solar-EIS-Final-v1-Main-Report.pdf',
+            'document_year': 2016,
+            'connection_voltage_kv': 66.0,
+            'network_service_provider': 'TransGrid',
+            'connection_substation_name': (
+                'Existing Parkes 132/66 kV TransGrid substation on Pat Meredith Drive (66 kV '
+                'OHL/UG connection into the substation)'
+            ),
+            'connection_distance_km': 0.6,
+            'connection_distance_note': '~600 m 66 kV overhead or underground line from the site to the Parkes TransGrid substation',
+            'notes': (
+                'Developer Neoen; EIS prepared by NGH Environmental (SSD-6784, March 2016). ~65 '
+                'MWp / ~55 MWac (PPA with Simply Energy for 55 MW). ~215,000 solar panels on '
+                '~2,850 single-axis tracker units (fixed-tilt options also assessed). 240 ha '
+                'site ~10 km west of Parkes. Construction Jan 2017 – Apr 2018, operational '
+                'since 2018; ~138 GWh/yr.'
+            ),
+        },
+    },
+
+    {
+        'project_id': 'port-augusta-renewable-energy-park-solar',
+        'tech': 'solar',
+        'eis_specs': {
+            'document_title': (
+                'Port Augusta Renewable Energy Park (PAREP) – Australian Industry Participation '
+                '(AIP) Plan Summary, Operations Phase, Iberdrola Renewables Australia (29 '
+                'September 2022)'
+            ),
+            'document_url': 'https://www.industry.gov.au/sites/default/files/aip/2022-11/iberdrola_parep_operations_summary_29sep22_1.docx',
+            'document_year': 2019,
+            'connection_voltage_kv': 275.0,
+            'network_service_provider': 'ElectraNet',
+            'connection_substation_name': 'New 275 kV project substation exporting to ElectraNet\'s Davenport substation',
+            'connection_augmentation': (
+                'New 275 kV project substation + 275 kV export cable/civil infrastructure '
+                '(Contract 1, awarded July 2020)'
+            ),
+            'notes': (
+                'Iberdrola Renewables Australia (via SPV PAREP1 Pty Ltd), acquired from DP '
+                'Energy in 2020. 317 MW hybrid = 210 MW wind (50 x Vestas V150 4.2 MW turbines) '
+                '+ 107 MW solar PV (~250,000 flat-panel modules) on ~5,400 ha between Port '
+                'Paterson and Winninowie, 15 km south of Port Augusta. Original DA approved by '
+                'SA Government Aug 2016 (DP Energy — up to 375 MW first phase); Development Act '
+                '1993 approval by SA Minister for Planning 5 November 2019 (DA 660/V008/15 V1). '
+                'Commissioned 2022. Primary offtake BHP Olympic Dam.'
+            ),
+        },
+    },
+
+    {
+        'project_id': 'ross-river-solar-farm',
+        'tech': 'solar',
+        'eis_specs': {
+            'document_title': (
+                'Ross River Solar Farm — Development Application Report (Townsville City '
+                'Council MCU under SPA 2009), Feb 2016, incl. Appendices F–L'
+            ),
+            'document_url': 'https://rossriversolarfarm.com.au/wp-content/uploads/2017/07/160222_ROS-DA-Report-includes-Appx.-FGHIJKL.pdf',
+            'document_year': 2016,
+            'connection_voltage_kv': 132.0,
+            'network_service_provider': 'Powerlink',
+            'connection_substation_name': 'Ross 275 kV substation (Powerlink)',
+            'connection_distance_km': 1.2,
+            'connection_distance_note': '~1.2 km 132 kV underground cable from Ross River Solar Farm to Ross substation',
+            'notes': (
+                'Developed by ESCO Pacific / Palisade / EnergyAustralia (later Genex-related), '
+                '116 MWac (~148 MWdc) solar PV. 413,280 JA Solar polycrystalline panels on '
+                'single-axis trackers over ~202 ha, 20 km south of Townsville. EnergyAustralia '
+                'offtake PPA; Townsville City Council MCU approval under Sustainable Planning '
+                'Act 2009; operational 2018.'
+            ),
+        },
+    },
+
+    {
+        'project_id': 'rugby-run-solar-farm',
+        'tech': 'solar',
+        'eis_specs': {
+            'document_title': (
+                'Rugby Run Solar Farm — Development Application (Isaac Regional Council MCU, '
+                'May 2017); Adani Renewables (Bravus)'
+            ),
+            'document_url': 'https://www.bravus.com.au/our-businesses/rugby-run/',
+            'document_year': 2017,
+            'connection_voltage_kv': 66.0,
+            'network_service_provider': 'Ergon Energy',
+            'connection_substation_name': 'Ergon 66 kV network near Moranbah (Central QLD)',
+            'notes': (
+                'Adani Renewables (rebranded Bravus). Stage 1 65 MW; MCU envelope approved for '
+                'up to 170 MW total. 247,000 PV modules on single-axis trackers near Moranbah, '
+                'Central QLD. Isaac Regional Council MCU May 2017; opened Oct 2019.'
+            ),
+        },
+    },
+
+    {
+        'project_id': 'sebastopol-solar-farm',
+        'tech': 'solar',
+        'eis_specs': {
+            'document_title': (
+                'Sebastopol Solar Farm (SSD-9098) – State Significant Development landing page '
+                'and EIS record'
+            ),
+            'document_url': 'https://www.planningportal.nsw.gov.au/major-projects/projects/sebastopol-solar-farm',
+            'document_year': 2018,
+            'connection_voltage_kv': 132.0,
+            'network_service_provider': 'TransGrid',
+            'connection_substation_name': (
+                'Tap into existing 132 kV Temora–Lake Cowal transmission line (near '
+                'Yanco–Coleambally area); connection to NEM via existing TransGrid 132 kV OHL'
+            ),
+            'notes': (
+                'Developed by ib vogt (Germany); sold to FRV (Fotowatio Renewable Ventures) '
+                'March 2020. 90 MWac on ~248 ha, ~16 km south of Temora. Application reference '
+                'SSD-9098 (NSW planning portal now lists 9098; input note SSD-9522 not '
+                'confirmed). Approved 27 Feb 2019 by DPIE. EPC by ib vogt; construction '
+                '2020–21, commissioning Dec 2021, commercial operation Jul 2022. 10-yr PPA with '
+                'Snowy Hydro.'
+            ),
+        },
+    },
+
+    {
+        'project_id': 'sun-metals-corporation-solar-farm',
+        'tech': 'solar',
+        'eis_specs': {
+            'document_title': (
+                'Sun Metals Solar Farm — Material Change of Use application (Townsville City '
+                'Council, SPA 2009); AECOM statutory approvals lead'
+            ),
+            'document_url': 'https://www.sunmetals.com.au/sustainability/renewables/',
+            'document_year': 2017,
+            'connection_voltage_kv': 132.0,
+            'network_service_provider': 'Ergon Energy',
+            'connection_substation_name': 'Sun Metals refinery 33/132 kV substation (behind-the-meter)',
+            'connection_augmentation': (
+                'Direct-connected to zinc refinery load; net export to Ergon distribution / '
+                'Powerlink transmission via refinery interconnect'
+            ),
+            'notes': (
+                'Sun Metals Corporation (now Ark Energy / Korea Zinc). Originally 124 MWac; Sun '
+                'Metals website now cites 143 MWac / 151 MWdc / 1,260,000 thin-film modules '
+                'through 52 large-scale outdoor inverters in 26 Power Conversion Stations on '
+                'fixed-tilt (no trackers) across ~120 ha. First large-scale solar farm in '
+                'Australia built directly by a major energy user; commissioned 2018 on behalf '
+                'of Sun Metals zinc refinery.'
+            ),
+        },
+    },
+
+    {
+        'project_id': 'suntop-solar-farm',
+        'tech': 'solar',
+        'eis_specs': {
+            'document_title': (
+                'Suntop Solar Farm Environmental Impact Statement (SSD-8696) - Photon Energy / '
+                'Canadian Solar'
+            ),
+            'document_url': 'https://www.planningportal.nsw.gov.au/major-projects/project/9426',
+            'document_year': 2018,
+            'connection_voltage_kv': 132,
+            'network_service_provider': 'TransGrid',
+            'connection_substation_name': (
+                'New onsite 132 kV substation cutting in to existing TransGrid 132 kV OHL '
+                '(Wellington-Orange corridor traversing site)'
+            ),
+            'connection_augmentation': (
+                'New onsite 132 kV substation on western boundary connecting to existing 132 kV '
+                'line traversing site'
+            ),
+            'notes': (
+                'Photon Energy + Canadian Solar (Canadian Solar Asset Management 51%). 150 MWac '
+                '/ 189 MWdc (DC:AC ~1.26). Up to 550,000 bifacial modules on single-axis '
+                'trackers across 472 ha. 118 Ingeteam containerised inverter stations. '
+                'Grid-connected August 2022. ~10 km west of Wellington. (Note: correct SSD '
+                'reference is SSD-8696, not SSD-9245.)'
+            ),
+        },
+    },
+
+    {
+        'project_id': 'susan-river-solar-farm',
+        'tech': 'solar',
+        'eis_specs': {
+            'document_title': (
+                'Susan River Solar Farm — Development Application (Fraser Coast Regional '
+                'Council MCU, Dec 2016)'
+            ),
+            'document_url': 'https://atmosrenewables.com.au/project/susan-river-solar-farm/',
+            'document_year': 2016,
+            'connection_voltage_kv': 66.0,
+            'network_service_provider': 'Ergon Energy',
+            'connection_substation_name': 'Susan River 66 kV substation (Ergon distribution)',
+            'notes': (
+                'Developed by ESCO Pacific; Atmos Renewables owner. 75 MW; ~400,000 modules on '
+                'NEXTracker single-axis system through Ingeteam Corporacion Tecnologica '
+                'inverters over ~176 ha, 15–17 km south of Hervey Bay. Onsite substation to 66 '
+                'kV Ergon distribution; Fraser Coast Regional Council DA Dec 2016; operations '
+                '2018 under ZEN Energy offtake PPA.'
+            ),
+        },
+    },
+
+    {
+        'project_id': 'tailem-bend-solar',
+        'tech': 'solar',
+        'eis_specs': {
+            'document_title': (
+                'Tailem Bend Solar Project Stage 1 – Planning Report (21 December 2017), lodged '
+                'to SA Planning Commission (Development Act 1993 s49; consent DN 571/V001/17)'
+            ),
+            'document_url': 'https://www.saplanningcommission.sa.gov.au/__data/assets/pdf_file/0007/435481/4_Planning_Report_21_Dec_2017.pdf',
+            'document_year': 2017,
+            'connection_voltage_kv': 132.0,
+            'network_service_provider': 'ElectraNet',
+            'connection_substation_name': 'ElectraNet Tailem Bend substation (via Coorong 2 33/132 kV project substation)',
+            'notes': (
+                'Developer Equis Energy → Vena Energy (following Global Infrastructure Partners '
+                'acquisition Jan 2018). Stage 1: 95 MW AC export limit (108 MWp DC nameplate). '
+                '391,500 solar panels on fixed-angle racks (Stage 1 fixed-tilt; Stage 2 uses '
+                'JinkoSolar bifacial modules with single-axis trackers and Schneider Electric '
+                'inverters). 200 ha, ~A$200 M capex. UGL EPC. Stage 1 consent granted by SA '
+                'Minister for Planning 4 May 2017 (DN 571/V001/17) under Development Act 1993 '
+                's49. Cloudflare blocked automated fetch of the planning-report PDF at time of '
+                'extraction — URL verified via SA Planning Commission register.'
+            ),
+        },
+    },
+
+    {
+        'project_id': 'wandoan-south-solar-stage-1',
+        'tech': 'solar',
+        'eis_specs': {
+            'document_title': (
+                'Wandoan South Solar Farm Stage 1 (Wandoan South Solar 1) – Material Change of '
+                'Use consent, Western Downs Regional Council (2017)'
+            ),
+            'document_url': 'https://www.venaenergy.com.au/all_projects/wandoan-south-project/',
+            'document_year': 2017,
+            'connection_voltage_kv': 275.0,
+            'network_service_provider': 'Powerlink',
+            'connection_substation_name': (
+                'Powerlink Wandoan South 275 kV switchyard; new Juandah 275 kV substation '
+                'connected via underground cable'
+            ),
+            'connection_augmentation': (
+                'New 275 kV Juandah Substation connecting the solar farm to Powerlink\'s Wandoan '
+                'South Substation via underground cable'
+            ),
+            'notes': (
+                'Developer Vena Energy; EPC by GRS (Gransolar Group). MCU consented by Western '
+                'Downs Regional Council in 2017 for a two-stage project (up to ~650 MW). Stage '
+                '1 (Wandoan South Solar 1): 125 MWac / ~180 MWp DC; ~256,320 bifacial Risen '
+                'modules on PV Hardware single-axis trackers; Power Electronics central '
+                'inverters. ~500 ha of the ~1,336 ha Woleebee site, ~400 km NW of Brisbane. '
+                'Construction from May 2022, commercial operation Feb–Apr 2024. Stage 2 '
+                '(Wandoan South Solar 2) under construction (COD mid-2027).'
+            ),
+        },
+    },
+
+    {
+        'project_id': 'warwick-solar-farm',
+        'tech': 'solar',
+        'eis_specs': {
+            'document_title': (
+                'Warwick Solar Farm — Development Application (Southern Downs Regional Council '
+                'MCU, June 2018); RPS Group planning & environmental lead'
+            ),
+            'document_url': 'https://www.rpsgroup.com/projects/warwick-solar-farm/',
+            'document_year': 2018,
+            'connection_voltage_kv': 33.0,
+            'network_service_provider': 'Ergon Energy',
+            'connection_substation_name': 'Warwick Bulk Supply Point substation (Ergon 33 kV)',
+            'notes': (
+                'Developed by Terrain Solar; University of Queensland owner from Nov 2018. 64 '
+                'MWac total split across two co-located identical plants each ~32.1 MW (RPS/UQ '
+                'marketing sometimes cites 70 MW site envelope). Southern Downs Regional '
+                'Council MCU approved June 2018; construction Feb 2019; energised July 2020, '
+                'making UQ the world\'s first major university powered ~100% by owned '
+                'renewables. EPBC self-assessment; single-axis trackers on 150 ha.'
+            ),
+        },
+    },
+
+    {
+        'project_id': 'wellington-solar-farm',
+        'tech': 'solar',
+        'eis_specs': {
+            'document_title': 'Wellington Solar Farm Environmental Impact Statement (SSD-8573) - First Solar (Australia)',
+            'document_url': 'https://majorprojects.planningportal.nsw.gov.au/prweb/PRRestService/mp/01/getContent?AttachRef=SSD-8573!20190228T022810.911+GMT',
+            'document_year': 2018,
+            'connection_voltage_kv': 330,
+            'network_service_provider': 'TransGrid',
+            'connection_substation_name': 'Wellington 330 kV substation (TransGrid, ~150 m south of development footprint)',
+            'connection_distance_km': 1.27,
+            'connection_distance_note': (
+                'New 1,270 m 330 kV OHL from onsite BESS/switchyard to TransGrid Wellington 330 '
+                'kV substation'
+            ),
+            'notes': (
+                'First Solar (Australia) - developed then sold to Lightsource bp, and again to '
+                'Aula Energy in 2026. ~174 MWac approved (180 MW peak in some references) on '
+                '~559 ha, 2 km NE of Wellington. First Solar CdTe thin-film PV modules on '
+                'single-axis trackers. Existing 330 kV OHL crosses site.'
+            ),
+        },
+    },
+
+    {
+        'project_id': 'wemen-solar-farm',
+        'tech': 'solar',
+        'eis_specs': {
+            'document_title': (
+                'Wemen Solar Farm – Mildura Rural City Council planning permit (no consolidated '
+                'public EIS document online)'
+            ),
+            'document_url': 'https://t2energy.com.au/projects/wemen.html',
+            'document_year': 2017,
+            'connection_voltage_kv': 132.0,
+            'network_service_provider': 'Powercor',
+            'connection_substation_name': 'Wemen Terminal Station (WETS 220/66 kV) via 33/132 kV project substation',
+            'connection_distance_note': (
+                'Onsite 33 kV switching + 33/132 kV substation into Powercor 132 kV switchyard, '
+                'ultimately tapping the 220 kV Kerang–Wemen–Red Cliffs line via WETS'
+            ),
+            'notes': (
+                'Originator Island Green Power / Overland Sun Farming; acquired WIRSOL 2018, '
+                'now Gentari (PETRONAS, 100%). EPC RCR Tomlinson + Laing O\'Rourke; T2 Energy '
+                'designed 33 kV switchroom, control-room and Powercor Utility buildings. 110 '
+                'MWp DC / 97.5 MW AC (DC:AC ~1.13). 318,942 modules, single-axis tracking. '
+                'CEFC-financed. First generation Feb 2019. Part of AEMO-constrained NW-VIC '
+                'cluster (Wemen, Karadoc, Gannawarra, Bannerton) at 50% in 2019 for voltage '
+                'stability. NO planning-report PDF online — Mildura RCC register only.'
+            ),
+        },
+    },
+
+    {
+        'project_id': 'west-wyalong-solar-farm',
+        'tech': 'solar',
+        'eis_specs': {
+            'document_title': 'West Wyalong Solar Farm State Significant Development Assessment Report (SSD-9504)',
+            'document_url': 'https://majorprojects.planningportal.nsw.gov.au/prweb/PRRestService/mp/01/getContent?AttachRef=SSD-9504!20191128T005239.723+GMT',
+            'document_year': 2019,
+            'connection_voltage_kv': 132.0,
+            'network_service_provider': 'Essential Energy',
+            'connection_substation_name': (
+                'Connection to nearby Essential Energy 132 kV overhead transmission line (West '
+                'Wyalong area; TransGrid interface further downstream)'
+            ),
+            'notes': (
+                'Developer Lightsource BP (Lightsource Development Services Australia). 90 MWac '
+                '+ 50 MW / 90 MWh co-located BESS. Development footprint 211 ha, ~16 km NE of '
+                'West Wyalong in Bland Shire. Approved Nov/Dec 2019; construction from 2020; '
+                'commissioning ~2022. Site to be grazed by sheep during operation.'
+            ),
+        },
+    },
+
+    {
+        'project_id': 'whitsunday-solar-farm',
+        'tech': 'solar',
+        'eis_specs': {
+            'document_title': (
+                'Whitsunday Solar Farm — Development Application (Whitsunday Regional Council '
+                'MCU) and Powerlink Whitsunday Connection Project'
+            ),
+            'document_url': 'https://www.powerlink.com.au/projects/whitsunday-solar-farm-connection-project',
+            'document_year': 2017,
+            'connection_voltage_kv': 132.0,
+            'network_service_provider': 'Powerlink',
+            'connection_substation_name': 'Strathmore 132/275 kV substation (Powerlink)',
+            'connection_augmentation': (
+                'New Powerlink 132 kV transmission line and solar-farm substation, plus '
+                'additional feeder bay at existing Strathmore Substation (shared with Hamilton '
+                'Solar Farm)'
+            ),
+            'notes': (
+                'Edify Energy + Wirsol JV (now Gentari-owned). 57.5 MWac / 69 MWdc; '
+                'single-axis-tracking PV adjacent to Powerlink\'s Strathmore Substation near '
+                'Collinsville. ARENA-supported. Whitsunday Regional Council MCU; commercial '
+                'operations 2018.'
+            ),
+        },
+    },
+
+    {
+        'project_id': 'winton-solar-farm',
+        'tech': 'solar',
+        'eis_specs': {
+            'document_title': 'Winton Solar Farm Factsheet (FRV, 07/04/2020)',
+            'document_url': 'https://wintonsolarfarm.com/wp-content/uploads/2020/06/Winton-SF-Factsheet-070420_reduced.pdf',
+            'document_year': 2018,
+            'connection_voltage_kv': 66.0,
+            'network_service_provider': 'AusNet',
+            'connection_substation_name': 'Glenrowan Terminal Station',
+            'connection_distance_note': 'Directly adjacent to AusNet-owned Glenrowan TS; connects into TS via short circuit',
+            'notes': (
+                'Owner/operator FRV Services Australia (subsidiary of Fotowatio Renewable '
+                'Ventures). 85 MW AC. Polycrystalline bifacial PV on single-axis trackers; '
+                'string inverters (largest semi-scheduled NEM solar with string inverters at '
+                'commissioning). ~250 ha, ~13 km NE of Benalla, VIC. Benalla Rural City Council '
+                'approval Jan 2018. Won Victorian Renewable Energy Reverse Auction Program '
+                'long-term Support Agreement. Substation built by Yurika.'
+            ),
+        },
+    },
+
+    {
+        'project_id': 'wollar-solar-farm',
+        'tech': 'solar',
+        'eis_specs': {
+            'document_title': 'Wollar Solar Farm Environmental Impact Statement (SSD-9254) - Sunterra Energy',
+            'document_url': 'https://www.planningportal.nsw.gov.au/major-projects/projects/wollar-solar-farm',
+            'document_year': 2019,
+            'connection_voltage_kv': 330,
+            'network_service_provider': 'TransGrid',
+            'connection_substation_name': (
+                'New TransGrid 330 kV substation in NE corner of site, cut in to existing 330 '
+                'kV OHL (adjacent to Wollar 500/330 kV switching station)'
+            ),
+            'connection_augmentation': 'New TransGrid-operated 330 kV substation in NE corner of site',
+            'notes': (
+                'Sunterra Energy. ~290 MWac (280-290 MWac range), up to ~800,000 modules; '
+                'tracker vs fixed-tilt to be decided post-consent. Consent 24 February 2020. '
+                'Original 30 MWh BESS materially upsized via MOD-4 (2024-26) to 280 MW / 560 '
+                'MWh. Site ~7 km south of Wollar village.'
+            ),
+        },
+    },
+
+    {
+        'project_id': 'woolooga-solar-farm',
+        'tech': 'solar',
+        'eis_specs': {
+            'document_title': (
+                'Woolooga Solar Farm, Lower Wonga, Queensland – EPBC Act Approval Decision '
+                'Notice (EPBC 2019/8554)'
+            ),
+            'document_url': 'https://lightsourcebp.com/app/uploads/2022/12/EPBC-Approval-Decision-Notice.pdf',
+            'document_year': 2020,
+            'connection_voltage_kv': 132.0,
+            'network_service_provider': 'Powerlink',
+            'connection_substation_name': (
+                'New 132/33 kV solar-farm substation connected to Powerlink\'s Woolooga 275/132 '
+                'kV substation (with a 132/33 kV 200 MVA transformer)'
+            ),
+            'connection_augmentation': (
+                'New 132/33 kV substation at the solar farm; new 275 kV feeder bay at Woolooga '
+                'Substation added later for the co-located Lower Wonga solar + BESS hybrid'
+            ),
+            'notes': (
+                'Developer Lightsource BP (Lightsource Development Services Australia). EPBC '
+                '2019/8554: controlled action 12 Mar 2020, approval decision 5 Mar 2021 (effect '
+                'until 5 Mar 2051). Up to 176 MW on ~650 ha at Lower Wonga near Gympie. Risen '
+                'Energy modules. Key impact: Koala habitat + Grey-headed Flying-fox foraging '
+                'habitat, requiring a 196.42 ha Woolooga Offset Site. Powerlink connection '
+                'works completed 2021, final commissioning 2023. A separate Lower Wonga hybrid '
+                'solar + BESS project sits alongside.'
+            ),
+        },
+    },
+
+    {
+        'project_id': 'yarranlea-solar-farm',
+        'tech': 'solar',
+        'eis_specs': {
+            'document_title': (
+                'Yarranlea Solar Farm — EPBC referral (not a controlled action) and Toowoomba '
+                'Regional Council DA; QLD Nature Conservation Act clearing permit'
+            ),
+            'document_url': 'https://yarranleasolar.com.au/',
+            'document_year': 2018,
+            'connection_voltage_kv': 66.0,
+            'network_service_provider': 'Ergon Energy',
+            'connection_substation_name': 'Middle Ridge Bulk Supply Substation (Toowoomba, Ergon 66 kV)',
+            'notes': (
+                'Risen Energy (owner from Feb 2018). 103 MWp / ~82 MW export; 360,000+ Risen '
+                '360/365 W monocrystalline 1500 VDC modules through SMA inverters on Arctech '
+                'Solar single-axis trackers across ~250 ha near Pittsworth (50 km west of '
+                'Toowoomba). EPBC \'not a controlled action\'; QLD Nature Conservation Act '
+                'clearing permit; Toowoomba Regional Council DA. Grid connection Jan 2020.'
+            ),
+        },
+    },
+
+    {
+        'project_id': 'yatpool-solar-farm',
+        'tech': 'solar',
+        'eis_specs': {
+            'document_title': (
+                'Application for Licence to Generate Electricity for Supply or Sale – Yatpool '
+                'Sun Farm Pty Ltd (Public submission to Essential Services Commission)'
+            ),
+            'document_url': 'https://www.esc.vic.gov.au/sites/default/files/documents/yatpool-electricity-generation-licence-application-20190410.pdf',
+            'document_year': 2019,
+            'connection_voltage_kv': 66.0,
+            'network_service_provider': 'Powercor',
+            'connection_substation_name': 'Powercor 66 kV network near Iraak/Yatpool (Kerang–Red Cliffs 220 kV corridor)',
+            'connection_distance_note': (
+                'Onsite 100 MVA transformer + 10x 5 MVA and 8x 5.5 MVA MVPS feeding Powercor 66 '
+                'kV network; Generator Deed with Powercor executed 4 April 2017'
+            ),
+            'notes': (
+                'Yatpool Sun Farm Pty Ltd, ultimately owned by BayWa r.e. renewable energy '
+                'GmbH. 106.4 MWp DC / 81 MW AC (DC:AC ~1.31), 258 ha, ~20 km south of Mildura. '
+                '327,613 polycrystalline modules (Astronergy/Chint + GCL supply), single-axis '
+                'NEXTracker tracker, 36 SMA MVPS 5500-S-AU central inverters (via Renovagy). '
+                'EPC Energy Solutions Pty Ltd (Beon). PPA with Flow Power for 35% of output. '
+                'Fully energised by 15 July 2019. Mildura Rural City Council permit.'
+            ),
+        },
+    },
 ]
 
 
