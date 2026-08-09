@@ -516,6 +516,26 @@ All prior history: `git log` or GitHub Releases page.
 - BESS bidding summaries could be pre-computed per project
 - Web research on offtakes not yet commenced (85 known, likely many more unlisted)
 
+### Grid-connection + EIS layer — status after v3.28–v3.32 arc (2026-08-09)
+
+**Landed:**
+- AEMO KCI ingest live (v3.29.0). NSP coverage ~7% → **54%**. 1,205 KCI records, 1,005 distinct KCI IDs, 5 TNSPs.
+- AEMO NER 5.18A.2 register importer live (v3.31.0), multi-state ready. VIC ingested.
+- ElectraNet SA connections registry live (v3.31.0). 275 rows across 4 datasets.
+- Grid Connection Headroom UI live (v3.32.0) at `/intelligence/grid-connections`.
+- EIS technical specs: 68 → **198 rows** (Wind 64 · Solar 67 · Hybrid 30 · BESS 35 · Pumped hydro 2).
+
+**Still open** (see `docs/NEXT_SESSION_HANDOFF.md` for the current version of this list):
+- Extend hybrid + wind coverage beyond top-priority tranches (91 hybrid + 139 wind still uncovered — mostly dev-stage KCI-only registrations)
+- Second-wave capacity for pre-2013 wind farm structural detail (would need original council / state EIS PDFs)
+- Manual pull of the Bookham scoping PDF (exceeds WebFetch 10 MB limit)
+- AEMO NER 5.18A.2 registers for NSW / QLD / SA / TAS (importer is multi-state ready; search terms in v3.31.0 release notes)
+- Rosetta GPKG for AEMO KCI Id + coordinates + LGA + Project URL join
+- AEMO GI workbook cols 26–75 (seasonal capacity forecasts) unread
+- SA Connection Opportunities extended tab: map view, connection-name → project-name matcher, "where should this project connect?" recommender
+- NSW / QLD / VIC / TAS equivalents of the ElectraNet forward-looking dataset
+- `analytics/eis-analytics.json` — add hybrid rollup (currently reports wind/bess/solar/pumped_hydro but skips hybrid; total_eis is correct)
+
 ---
 
 ## 8. Principles

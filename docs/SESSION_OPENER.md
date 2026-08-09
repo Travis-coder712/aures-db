@@ -30,7 +30,7 @@ SQLite at `database/aures.db` is the **source of truth** (~30 tables,
 rows from 2021→present). The site renders from static JSON exports at
 `frontend/public/data/`. Strict CI: `tsc -b && vite build` must pass.
 
-Current version: **v3.22.4** as of 2026-07-19 (see `frontend/package.json` for latest — Backlog Item A complete (3-phase CIS/LTESA data update covering T1+T4+T7 non-NSW winners); Items C+D+E bundled 2026-07-19). Always check current before making assumptions.
+Current version: **v3.32.0** as of 2026-08-09 (see `frontend/package.json` for latest). Recent arc (v3.28.0 → v3.32.0) built out the grid-connection + EIS coverage layer end-to-end: EIS/EIA audit + solar source-hunt (v3.28.0) → AEMO KCI ingest with NSP coverage 7% → 54% (v3.29.0) → solar EIS backlog closure with 4 parallel research agents, coverage 10 → 67 (v3.30.0) → hybrid + wind tranche 2 + ElectraNet SA connections registry + AEMO NER 5.18A.2 VIC register importer (v3.31.0) → structural deep-dive of 63 rows + new Grid Connection Headroom intelligence page at `/intelligence/grid-connections` (v3.32.0). Always check current before making assumptions.
 
 ---
 

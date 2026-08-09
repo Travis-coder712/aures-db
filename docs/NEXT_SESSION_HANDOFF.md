@@ -34,17 +34,31 @@ Landed in v3.28.0:
 - Solar coverage: 0/226 → 10/226. Overall coverage: 68 → 78 rows.
 - Coverage tab table extended with `Regime`, `Year`, `NSP`, and `Connection` columns.
 
-Still open:
-- **Ingest AEMO KCI files** — the single most important remaining source. Per-TNSP × quarterly (5 files, 20/year). Contains substation + voltage + connection point + NSP + status per project. Cloudflare blocks scripted downloads; use the same `data/gi_snapshots/` archive convention: manually download → check into `data/gi_snapshots/kci_<year>Q<n>/` → write a per-TNSP importer. Would fill grid-connection specs for **~60-80% of the NEM fleet**.
-- **Extend hybrid + wind coverage beyond top-priority tranches.** v3.31.0 covered 30/121 hybrid and 33/172 large wind — remaining projects are development-stage (many are AEMO KCI-only registrations without settled planning docs). Second-wave source-hunt should focus on newly-approved SSD hybrids and second-tier wind farms. Coverage-tab could add a "Missing source" filter.
-- **Second-wave EIS extraction for the 60 v3.31.0 source-hunt entries.** All 63 (30 hybrid + 33 wind) now have summary spec rows in `eis_technical_specs`; a follow-up wave could deep-dive each into the primary EIS PDF for the schema's structural fields (noise_limit_dba, minimum_setback_m, energy_yield_method, cell_chemistry_full for hybrid BESS, panel model for hybrid solar).
-- **SA connection opportunities UI feature.** ElectraNet data is now staged at `frontend/public/data/electranet/` — build a Coverage-tab sub-panel or a new "SA connection headroom" mini-tab surfacing the per-substation available capacity + available bays. Complementary lens to AEMO KCI.
-- **AEMO gen register for other states.** The importer now handles state + snapshot natural key. If the equivalent NSW / QLD / SA / TAS AEMO NER 5.18A.2 PDFs can be sourced, drop into `data/aemo_registers/register-of-large-generator-connections-<state>-<yyyy-mm>.pdf` and re-run `python3 pipeline/importers/import_aemo_gen_register.py --state <STATE> --snapshot <YYYY-MM>`. Retired thermal assets will flag correctly.
-- **Ingest the AusNet TCPR PDF** for VIC embedded generators (~30-50 projects). Public PDF, `pdftotext -layout` + regex, annual (Dec) refresh. Low-effort standalone importer.
-- **Ingest the ElectraNet Connections Report PDF** for SA Mid North (~25-30 projects). Flag the "Commercial in Confidence" footer to Travis before use.
-- **Ingest the Rosetta GPKG** for AEMO KCI Id + lat/lng + LGA + Project URL enrichment. Does NOT contain substation/voltage/NSP — validated during the v3.28.0 audit. Complementary to KCI, not a substitute.
-- **Source-hunt pass for hybrid solar+BESS (121 projects)** — currently 0/121 covered. Same pattern as the v3.28.0 solar sweep: NSW SSD / QLD MCU-or-EPBC / VIC ministerial / SA DAC. Bundle with the source-hunt for the ~30 remaining large wind projects without existing spec rows.
-- **The AEMO GI workbook cols 26–75** (seasonal capacity forecasts) are unread but valuable for a capacity-derating trend intelligence layer. Trivial addition to `import_aemo_gen_info.py` `COL` dict. Not connection data — separate feature.
+Still open (after the v3.28.0 → v3.32.0 arc):
+
+### Structural EIS coverage — extension
+
+- **Extend hybrid + wind coverage beyond top-priority tranches.** v3.31.0 covered 30/121 hybrid and 33/172 large wind. Remaining ~91 hybrid + ~139 wind are mostly development-stage AEMO KCI-only registrations without settled planning docs — second-wave source-hunt should wait for these to reach EIS submission. Coverage-tab could add a "Missing source" filter to surface them.
+- **Manual pull of the Bookham scoping PDF** — it exists at `squadronenergy.com/.../BKWF-01-RPT-Scoping-Report-V3-20250207-000.pdf` but exceeds WebFetch's 10 MB limit. Worth downloading + `pdftotext -layout` for the third-wave deep-dive.
+- **Second-wave capacity for pre-2013 wind farm structural detail.** Batches 3 + 4 of the v3.32.0 deep-dive returned thin data because Wikipedia + developer sites don't inline EIS-era detail. Would need original council / state EIS PDFs (Circular Head Council, Wattle Range Council, Mid Murray Council, etc). Low priority — those farms are all long-operational.
+
+### Grid-connection data sources — extension
+
+- **AEMO NER 5.18A.2 registers for NSW / QLD / SA / TAS.** Importer is multi-state ready (`pipeline/importers/import_aemo_gen_register.py`, `state + snapshot` natural key with tech-guard against cross-tech false positives). Search terms + master URL logged in the v3.31.0 release notes; save into `data/aemo_registers/register-of-large-generator-connections-<state>-<yyyy-mm>.pdf` then `python3 pipeline/importers/import_aemo_gen_register.py --state <STATE> --snapshot <YYYY-MM>`.
+- **AusNet TCPR / VicGrid TCPR** — status uncertain. What Travis initially expected to be the AusNet TCPR (for VIC embedded generators, ~30-50 projects) turned out to be the AEMO transmission-connected register under NER 5.18A.2. VicGrid does not appear to publish a per-DNSP TCPR equivalent yet. Confirm with VicGrid directly if the analytical need remains.
+- **Ingest the Rosetta GPKG** for AEMO KCI Id + lat/lng + LGA + Project URL enrichment. Complementary to KCI (does NOT contain substation/voltage/NSP — validated during v3.28.0 audit). Would add spatial-index and canonical project-URL join for the ~600 already-matched AURES projects.
+- **The AEMO GI workbook cols 26–75** (seasonal capacity forecasts) are unread. Valuable for a capacity-derating trend intelligence layer. Trivial addition to `import_aemo_gen_info.py` `COL` dict.
+
+### Analytical layers
+
+- **SA Connection Opportunities extended tab.** The v3.32.0 Grid Connection Headroom page renders the ElectraNet dataset as tables per region. Natural next moves: (a) map view overlaying substation headroom, (b) match `existing.json` connections to AURES projects (join on connection_name → project.name, similar to the KCI matcher), (c) surface a "where should this project connect?" recommender using proponent-interest + high-constraints headroom.
+- **NSW / QLD / VIC / TAS equivalent to the ElectraNet dataset.** Placeholder cards on the Grid Connection Headroom page reference AEMO KCI as the current answer, but each TNSP publishes forward-looking connection docs (TransGrid Connection Guide, Powerlink RPT). Would follow the same 4-JSON split pattern.
+- **`analytics/eis-analytics.json` — add hybrid rollup.** The exporter currently reports wind / bess / solar / pumped_hydro but not hybrid; total_eis is correct (198) but the by-tech breakdown skips hybrid. One-line fix in `pipeline/exporters/export_json.py`.
+
+### Data integrity
+
+- **`import_dispatchload.py` and `import_nemweb_bids.py`** still use `INSERT OR IGNORE` (first-write-wins) — safe from dupes but won't refresh a changed source row. Fine for immutable historical dispatch data; risk only if AEMO retroactively revises a row. Not fixed — deliberate deferral.
+- **`harvest_facility_metadata.py`** — Python-level SELECT-first dedup for timeline_events. Now sits behind the new DB-level partial UNIQUE index as a backstop; further hardening not urgent.
 
 ## Data integrity and project taxonomy backlog
 
@@ -81,14 +95,51 @@ Discovered / re-observed during the 2026-07-26 data-integrity audit. Grouped for
 - The AEMO-derived count is skewed: **781 `development`, 0 `withdrawn`.** Withdrawn projects are silently absorbed into `development` because AEMO drops them without an "announced withdrawal" marker in most cases.
 - **Evidence-ledger design** — first-cut design lives in `docs/ARCHITECTURE.md §8`. Idea: replace single `status` with an append-only ledger of dated evidence (EIS submitted, EPBC granted, CISA signed, FID PR, construction photo, dispatch data appearing), and derive stage + credibility + liveness on the fly. Read that section before rearchitecting anything.
 
-### News ingest stalled
+### News ingest — RESOLVED in v3.23.1
 
-- **`news_articles.MAX(date) = 2026-06-17`** — no new rows in five weeks. `import_news_rss.py` is the ingest. Something in the feed set has silently broken (probably a source URL 404 or a rate-limit). **WattClarity, in particular, is absent from `news_sources` altogether** — Travis has flagged that as the single highest-signal industry source and it should be added.
-- Rerun: `python3 pipeline/importers/import_news_rss.py` and watch the log.
+- WattClarity added as the 4th feed source. `news_articles` refreshed 410 → 500 rows through 2026-07-24. `import_news_rss.py` runs cleanly.
+- Rerun: `python3 pipeline/importers/import_news_rss.py`.
 
 ---
 
-## Current state snapshot (v3.22.4)
+## Current state snapshot (v3.32.0)
+
+### v3.28.0 → v3.32.0 — EIS/EIA + grid-connection coverage arc (2026-08-03 → 2026-08-09)
+
+**Grid-connection data now stands at:**
+- `projects.connection_nsp` populated for **593 of 1,098 projects (54%)** — from AEMO KCI ingest (v3.29.0), was ~7% pre-arc
+- `projects.aemo_kci_id` populated for **591 projects** — stable KCI join key for future refreshes + Rosetta cross-reference
+- `aemo_kci_records` table: **1,205 rows (1,005 distinct KCI IDs)** across all 5 TNSPs
+- `aemo_gen_register` table: **41 rows** (AEMO VIC NER 5.18A.2 register, v3.31.0). Multi-state ready — NSW/QLD/SA/TAS drop into `data/aemo_registers/` and re-run
+
+**EIS technical specs now stand at:**
+- `eis_technical_specs`: **198 rows** (was 68 pre-arc, +130 rows)
+- Wind coverage: **64/215 (29.8%)** — was 31/215
+- Hybrid coverage: **30/121 (24.8%)** — was 0/121
+- Solar coverage: **67/226 (29.6%)** — was 0/226 pre-audit
+- BESS coverage: 35/453 (7.7%), Pumped hydro: 2/61
+
+**SA connection headroom (ElectraNet, v3.31.0 + v3.32.0 UI):**
+- 13.6 GW of forward-looking generation headroom across 3 regions
+- Largest single-substation opportunities: Tungkillo 275 kV (880 MW), South East 275 kV (1,030 MW), Bundey 275 kV (430 MW)
+- Live at `/intelligence/grid-connections`
+
+**New importers + data files:**
+- `pipeline/importers/import_aemo_kci.py` — quarterly AEMO Key Connection Information workbook
+- `pipeline/importers/import_aemo_gen_register.py` — multi-state AEMO NER 5.18A.2 register PDFs
+- `scratchpad/apply_deepdive.py` — direct-UPDATE pattern for enricher deltas that shouldn't trigger full re-enrichment
+- `frontend/public/data/electranet/{manifest,existing,available,bays,ras}.json` — SA connection registry (275 rows total)
+- `data/gi_snapshots/kci_2026Q2/kci-nem-compiled-2026Q2.xlsx` — KCI archive
+- `data/aemo_registers/register-of-large-generator-connections-vic-2026-08.pdf` — VIC register archive
+
+**New UI:**
+- `/intelligence/grid-connections` (v3.32.0) — Grid Connection Headroom page with region tabs, existing/available/bays/RAS breakdown for SA, placeholder cards for other states
+- EIS Coverage tab (v3.29.0) surfaces the KCI ingest stats — 4 tiles (records / matched / NSP / KCI ID) + NSP + tech splits
+
+**DB backups (safe to delete once verified):**
+- `database/aures.db.bak-2026-08-09-pre-v3-31` (4.0 GB)
+- `database/aures.db.bak-2026-08-09-pre-solar-eis-57` (v3.30.0 pre-close)
+- `database/aures.db.bak-2026-08-08-pre-kci-ingest` (v3.29.0 pre-KCI)
 
 ### v3.22.4 — Items C + D + E bundled release (this session, pending commit)
 
@@ -258,6 +309,8 @@ See `docs/INTELLIGENCE_LAYER_PLAN.md` for detailed release log. Key threads:
 ---
 
 ## Unified Backlog (refreshed 2026-07-18 — Item A complete, Item C added)
+
+> **Note (2026-08-09):** Items A / B / C / D / E in this section are all shipped (as of v3.22.4). The active open backlog now lives in the **top-of-doc "Still open"** section under the EIS/grid-connection arc — see lines ~37-90. This section retains historical Item context for future recovery.
 
 ### Backlog Item A — Comprehensive CIS + LTESA Data Update ✅ COMPLETE (2026-07-16→18, v3.22.0-v3.22.2)
 
