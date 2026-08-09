@@ -45,9 +45,11 @@
     "document_title": "Magnetite Energy Hub \u2014 EPBC source (v3.31.0 hybrid source-hunt)",
     "document_url": "https://private-energypartnerscommunity.com.au/",
     "document_year": 2025,
+    "connection_voltage_kv": 275.0,
     "network_service_provider": "Powerlink",
     "connection_substation_name": "Larcom Creek Substation (275 kV)",
-    "notes": "Regime: EPBC. Private Energy Partners (Quinbrook affiliate). Sited near Mount Larcom (Gladstone SDA), QLD, ~194.58 ha (131.8 ha disturbance). Connects to Powerlink's Larcom Creek Substation via 3 x 275 kV lines. Component mix within the hub aligns with Supernode-family portfolio (~1 GW class). Assessed under EPBC. AEMO KCI Q00217."
+    "connection_augmentation": "Three 275 kV transmission lines on two sets of lattice towers from onsite substation to Powerlink Larcom Creek Substation.",
+    "notes": "Regime: EPBC. Private Energy Partners (Quinbrook affiliate). Sited near Mount Larcom (Gladstone SDA), QLD, ~194.58 ha (131.8 ha disturbance). Connects to Powerlink's Larcom Creek Substation via 3 x 275 kV lines. Component mix within the hub aligns with Supernode-family portfolio (~1 GW class). Assessed under EPBC. AEMO KCI Q00217. Part of Gladstone SDA Energy Hub (Private Energy Partners): multi-tech energy hub with 780 MW / 6,240 MWh (8-hr) BESS + up to 1,188 MW gas turbines. Site ~194.58 ha total with 131.8 ha disturbance. Part of Gladstone SDA Energy Hub (Private Energy Partners): multi-tech energy hub with 780 MW / 6,240 MWh (8-hr) BESS + up to 1,188 MW gas turbines. Site ~194.58 ha total with 131.8 ha disturbance."
   },
   "sources": [
     {

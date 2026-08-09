@@ -64,8 +64,14 @@
     "document_title": "Bungama Solar \u2014 DAC source (v3.31.0 hybrid source-hunt)",
     "document_url": "https://www.bungamasolar.com.au/",
     "document_year": 2019,
+    "cell_supplier": "Wartsila (Quantum, 240 units)",
+    "inverter_supplier": "SMA",
+    "inverter_model": "MVPS",
+    "inverter_count": 60,
+    "connection_voltage_kv": 275.0,
     "network_service_provider": "ElectraNet",
     "connection_substation_name": "Bungama 275 kV substation",
+    "connection_augmentation": "New 275/33 kV substation with 275 kV cable to ElectraNet's Bungama substation, 275 kV harmonic filter and shunt reactor; Stage 1 (150 MW/300 MWh) commissioned by Enerven (BoP contractor)",
     "notes": "Solar 280 MWac. BESS 250 MW / 700 MWh (2.8h duration). Regime: DAC. Approved SA project ~6 km east of Port Pirie on 530 ha. Owned by EPS/Revera Energy (part of Bungama Battery Pty Ltd). Original approval mid-2019 (280 MW solar + 140 MW BESS); staged BESS scaled to 250 MW/700 MWh with Stage 1 (150 MW/300 MWh) already commissioned by Enerven 2026. Solar farm is Stage 3 (still to be built)."
   },
   "sources": [

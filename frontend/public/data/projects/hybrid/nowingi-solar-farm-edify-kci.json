@@ -58,8 +58,11 @@
     "document_title": "Nowingi Solar Farm Edify Kci \u2014 EPBC source (v3.31.0 hybrid source-hunt)",
     "document_url": "https://edifyenergy.com/project/nowingi-solar-power-station/",
     "document_year": 2025,
+    "pcs_type": "grid_forming",
+    "connection_voltage_kv": 220.0,
     "network_service_provider": "VicGrid",
-    "notes": "Solar 300 MWac. BESS 300 MW / 2400 MWh (8.0h duration). Regime: EPBC. Edify Energy. Determined 'not a controlled action' under EPBC Act (Sep 2025). 300 MW (360 MWp) solar + 300 MW/2,400 MWh 8-hour BESS on 637 ha, ~47 km south of Mildura. Would be largest-duration BESS in Australia at start-up. Construction target 2026. AgriPV design. AEMO KCI V00164."
+    "connection_augmentation": "Existing 220 kV AusNet Red Cliffs to Horsham overhead transmission line.",
+    "notes": "Solar 300 MWac. BESS 300 MW / 2400 MWh (8.0h duration). Regime: EPBC. Edify Energy. Determined 'not a controlled action' under EPBC Act (Sep 2025). 300 MW (360 MWp) solar + 300 MW/2,400 MWh 8-hour BESS on 637 ha, ~47 km south of Mildura. Would be largest-duration BESS in Australia at start-up. Construction target 2026. AgriPV design. AEMO KCI V00164. DC-coupled solar+BESS hybrid with grid-forming inverters. Would be Australia's largest-duration BESS (8 hr) at start-up. 360 MWp DC solar, ~637 ha, AgriPV design. DC-coupled solar+BESS hybrid with grid-forming inverters. Would be Australia's largest-duration BESS (8 hr) at start-up. 360 MWp DC solar, ~637 ha, AgriPV design."
   },
   "sources": [
     {

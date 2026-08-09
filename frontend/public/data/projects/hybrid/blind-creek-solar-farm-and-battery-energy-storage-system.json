@@ -48,7 +48,12 @@
     "document_title": "Blind Creek Solar Farm And Battery Energy Storage System \u2014 SSD source (v3.31.0 hybrid source-hunt)",
     "document_url": "https://www.planningportal.nsw.gov.au/major-projects/projects/blind-creek-solar-farm",
     "document_year": 2023,
+    "cell_supplier": "Wartsila (Gridsolv Quantum HE, 360 units)",
+    "inverter_supplier": "SMA",
+    "inverter_model": "SC4200-UP",
+    "inverter_count": 90,
     "network_service_provider": "TransGrid",
+    "connection_augmentation": "New substation linking the solar and battery site to the Sydney-Canberra transmission corridor; EPC by GRS; capacity revised to 300 MW solar + 243 MW/486 MWh BESS at financial close (Nov 2025); DC-coupled hybrid",
     "notes": "Solar 350 MWac. BESS 300 MW / 600 MWh (2.0h duration). Regime: SSD. SSD-13166280 at 114 Currandooley Rd, Bungendore (~8 km NE of Bungendore, ~32 km NE of Canberra). 350 MW solar + 300 MW/600 MWh BESS on 1,026 ha site (682.5 ha footprint). Construction ~12-18 months. Owned by Ms BCSF Holdings/Blind Creek Solar Farm Trust; assumed CIS-linked."
   },
   "sources": [

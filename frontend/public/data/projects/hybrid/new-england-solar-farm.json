@@ -92,9 +92,12 @@
     "document_title": "New England Solar Farm \u2014 SSD source (v3.31.0 hybrid source-hunt)",
     "document_url": "https://www.planningportal.nsw.gov.au/major-projects/projects/new-england-solar-farm",
     "document_year": 2019,
+    "inverter_supplier": "Siemens (S120 inverters, B-VAULT AC integrated by Energy Vault)",
+    "connection_voltage_kv": 330.0,
     "network_service_provider": "TransGrid",
     "connection_substation_name": "Uralla 330 kV substation",
-    "notes": "Solar 720 MWac. BESS 50 MW / 50 MWh (1.0h duration). Regime: SSD. ACEN Australia (formerly UPC/AC Renewables) SSD-9255, approved via IPC 2020 with 4,171 ha footprint. Stage 1 (400 MW) operating; Stage 2 (320 MW) under construction. 50 MW/50 MWh BESS commissioned as first-stage firming. Sits in New England REZ."
+    "connection_augmentation": "Existing 330 kV TransGrid line traverses the site; 250 MVA transformer installed for BESS.",
+    "notes": "Solar 720 MWac. BESS 50 MW / 50 MWh (1.0h duration). Regime: SSD. ACEN Australia (formerly UPC/AC Renewables) SSD-9255, approved via IPC 2020 with 4,171 ha footprint. Stage 1 (400 MW) operating; Stage 2 (320 MW) under construction. 50 MW/50 MWh BESS commissioned as first-stage firming. Sits in New England REZ. Solar: >1.5 million panels with single-axis tracking. BESS Stage 1: 50 MW / 100 MWh; Stage 2: 150 MW / 300 MWh (400 MWh total). Energy Vault B-VAULT AC + VaultOS EMS integration. Solar: >1.5 million panels with single-axis tracking. BESS Stage 1: 50 MW / 100 MWh; Stage 2: 150 MW / 300 MWh (400 MWh total). Energy Vault B-VAULT AC + VaultOS EMS integration."
   },
   "sources": [
     {

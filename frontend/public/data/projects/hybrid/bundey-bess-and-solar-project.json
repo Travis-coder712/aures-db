@@ -46,8 +46,11 @@
     "document_title": "Bundey Bess And Solar Project \u2014 other source (v3.31.0 hybrid source-hunt)",
     "document_url": "https://bundeybessandsolar.com.au/",
     "document_year": 2024,
+    "pcs_type": "grid_forming",
+    "connection_voltage_kv": 330.0,
     "network_service_provider": "ElectraNet",
     "connection_substation_name": "Bundey 330/275 kV substation",
+    "connection_augmentation": "New transmission lines required to connect into ElectraNet's 330/275 kV Bundey Substation (within project footprint); connects via associated 330 kV transmission line on Project EnergyConnect",
     "notes": "Solar 900 MWac. BESS 1200 MW / 3900 MWh (3.25h duration). Regime: other. Genaspi Energy Group. 900 MW solar + 1200 MW/3900 MWh BESS (Stage 1: 300 MW/1200 MWh). ~12 km NE of Robertstown SA. SA Crown Sponsorship exemption gazetted 4 April 2024 (planning exemption for BESS). Selected for CIS Tender 4 (Oct 2025). Connection via ElectraNet PEC (Project EnergyConnect) at Bundey substation. Construction Q4 2026."
   },
   "sources": [

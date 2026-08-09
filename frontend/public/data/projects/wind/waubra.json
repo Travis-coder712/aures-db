@@ -84,6 +84,8 @@
     "turbine_count": 128,
     "hub_height_m": 80.0,
     "rotor_diameter_m": 77.0,
+    "assumed_capacity_factor_pct": 37.5,
+    "assumed_annual_energy_gwh": 630.0,
     "network_service_provider": "AusNet Services",
     "connection_substation_name": "Waubra terminal station connecting into Ballarat area 220 kV",
     "notes": "Regime: MP-permit. Vic Planning Minister approved permits PL-SP/05/0152 and PL-SP/05/0150 in May 2005. Operational Jul 2009. Owned/operated by Acciona Energia (Pyrenees Wind Energy Developments)."

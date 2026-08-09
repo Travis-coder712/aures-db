@@ -95,13 +95,17 @@
     "document_title": "Ararat Wind Farm \u2014 MP-permit source (v3.31.0 wind tranche 2)",
     "document_url": "https://en.wikipedia.org/wiki/Ararat_Wind_Farm",
     "document_year": 2010,
-    "turbine_model": "GE 3.0-103",
+    "turbine_model": "GE 3.2-103 (Wikipedia)",
     "turbine_count": 75,
     "hub_height_m": 85.0,
     "rotor_diameter_m": 103.0,
+    "assumed_capacity_factor_pct": 27.49,
+    "assumed_annual_energy_gwh": 578.0,
+    "noise_limit_dba": 40.0,
+    "minimum_setback_m": 500,
     "network_service_provider": "AusNet Services",
     "connection_substation_name": "Elmhurst switchyard, connecting to Ballarat-Horsham 220 kV line",
-    "notes": "Regime: MP-permit. Planning permit submitted Jan 2010, approved Oct 2010 by Vic Planning Minister; grid route/substation permit granted 2012. Developer RES; consortium ownership: OPTrust/GE/RES/downer. Commissioned Jun 2017; 25-yr PPA with ACT Government."
+    "notes": "Regime: MP-permit. Planning permit submitted Jan 2010, approved Oct 2010 by Vic Planning Minister; grid route/substation permit granted 2012. Developer RES; consortium ownership: OPTrust/GE/RES/downer. Commissioned Jun 2017; 25-yr PPA with ACT Government. Capacity factor 27.49% (2018-2021 avg); annual net 578 GWh. Vic Planning Minister decided (Jan 2008) no EES required. Planning permit approved Oct 2010. Capacity factor 27.49% (2018-2021 avg); annual net 578 GWh. Vic Planning Minister decided (Jan 2008) no EES required. Planning permit approved Oct 2010."
   },
   "sources": [
     {

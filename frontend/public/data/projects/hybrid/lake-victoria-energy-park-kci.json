@@ -42,8 +42,11 @@
     "document_title": "Lake Victoria Energy Park Kci \u2014 SSD source (v3.31.0 hybrid source-hunt)",
     "document_url": "https://www.planningportal.nsw.gov.au/major-projects/projects/lake-victoria-wind-farm",
     "document_year": 2024,
+    "turbine_count": 200,
+    "rotor_diameter_m": 200.0,
+    "assumed_annual_energy_gwh": 3400.0,
     "network_service_provider": "TransGrid",
-    "notes": "Wind 1000 MWac. Regime: SSD. WestWind Energy, 30 km NW of Wentworth NSW, near VIC border. Up to 201 turbines / ~1 GW; plus three BESS totalling 1,500 MWh. Crown lands lease signed with Minns govt 2025 to enable project. Est. $3.8 bn capex, 3,400 GWh/y annual output. Construction planned 2029-2032. AEMO KCI N00175."
+    "notes": "Wind 1000 MWac. Regime: SSD. WestWind Energy, 30 km NW of Wentworth NSW, near VIC border. Up to 201 turbines / ~1 GW; plus three BESS totalling 1,500 MWh. Crown lands lease signed with Minns govt 2025 to enable project. Est. $3.8 bn capex, 3,400 GWh/y annual output. Construction planned 2029-2032. AEMO KCI N00175. Max blade tip height 280 m. Site ~42,173 ha of agricultural land ~24 km NW of Wentworth. Turbine model to be selected later in planning. Max blade tip height 280 m. Site ~42,173 ha of agricultural land ~24 km NW of Wentworth. Turbine model to be selected later in planning."
   },
   "sources": [
     {

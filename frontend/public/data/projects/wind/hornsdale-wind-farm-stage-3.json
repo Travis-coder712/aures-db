@@ -83,6 +83,8 @@
     "turbine_count": 34,
     "hub_height_m": 92.5,
     "rotor_diameter_m": 113.0,
+    "noise_limit_dba": 40.0,
+    "connection_voltage_kv": 275.0,
     "network_service_provider": "ElectraNet",
     "connection_substation_name": "Davenport 275 kV substation via 132 kV",
     "notes": "Regime: DAC. SA development approval 4 Jul 2012 for all three Hornsdale stages (Northern Areas Council). Neoen developer; John Laing/Megawatt Capital co-owners. HWF3 commissioned 2017; underpinned by 100 MW ACT reverse auction PPA. Fleet total 99 x Siemens 3.2 MW turbines. Atmos Renewables now full owner (2025)."

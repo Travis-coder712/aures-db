@@ -100,6 +100,8 @@
     "turbine_count": 37,
     "hub_height_m": 91.5,
     "rotor_diameter_m": 137.0,
+    "assumed_capacity_factor_pct": 33.4,
+    "assumed_annual_energy_gwh": 392.0,
     "network_service_provider": "TransGrid",
     "connection_substation_name": "Wellington 132 kV / Wollar area (Bathurst-Wellington corridor)",
     "notes": "Regime: SSD. SSD-6697 approved. Located 45 km south of Mudgee/north of Bathurst. Modification reduced turbine count from 77 to 37 with larger machines. CWP Renewables (now Squadron Energy). Operational 20 Dec 2021. 134 MW nameplate."

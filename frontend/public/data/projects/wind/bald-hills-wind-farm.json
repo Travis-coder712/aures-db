@@ -90,6 +90,10 @@
     "turbine_count": 52,
     "hub_height_m": 80.0,
     "rotor_diameter_m": 92.0,
+    "assumed_capacity_factor_pct": 40.69,
+    "assumed_annual_energy_gwh": 380.0,
+    "energy_yield_method": "Permit noise condition: outdoors within 10 m of dwelling shall not exceed background L95+5 dBA or 40 dBA L95, whichever greater; NZS 6808:1998 methodology; +5 dBA penalty for special audible characteristics. Full EES completed 2004; permit TRA/03/002 granted 19 Aug 2004.",
+    "noise_limit_dba": 40.0,
     "network_service_provider": "AusNet Services (Powercor DNSP)",
     "connection_substation_name": "Cranbourne / Basslink area via Powercor 66 kV \u2192 Hazelwood 220 kV",
     "notes": "Regime: EES. Full EES completed 2004; Vic Planning Minister granted permit TRA/03/002 on 19 Aug 2004. Wind Power Pty Ltd developer. Located 10 km SE of Tarwin Lower, South Gippsland Shire. Commissioned May 2015; 106.6 MW. Owned by Infrastructure Capital Group. Long-running nuisance case with neighbours."

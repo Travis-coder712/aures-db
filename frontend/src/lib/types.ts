@@ -1597,6 +1597,72 @@ export interface EISKciStats {
 }
 
 // ============================================================
+// ElectraNet SA connection registry (v3.31.0 ingest)
+// Parsed from "Network Connection Opportunities to 2030 (FY25-26)"
+// ============================================================
+export interface ElectranetExisting {
+  region: string
+  sub_region: string
+  table_source: string
+  connection_name: string
+  connection_type: string // 'generation' | 'load'
+  capacity_mw?: number | null
+  voltage_kv?: number | null
+  substation?: string | null
+  notes?: string | null
+}
+
+export interface ElectranetAvailable {
+  region: string
+  sub_region: string
+  table_source: string
+  substation: string
+  voltage_kv?: number | null
+  spare_bay_availability?: number | null
+  available_generation_low_constraints_mw?: number | string | null
+  available_generation_high_constraints_mw?: number | string | null
+  available_load_mw?: number | string | null
+  proponent_interest?: string | null
+  constraints_note?: string | null
+}
+
+export interface ElectranetBay {
+  region: string
+  table_source: string
+  substation?: string | null
+  voltage_kv?: number | null
+  available_bays?: number | null
+  bay_type?: string | null
+  existing_diameter_bay?: number | null
+  existing_bus_bench?: number | null
+  electranet_owned_land_additional?: number | null
+  generation_high_summer_noon_mw?: number | null
+  generation_high_winter_windy_mw?: number | null
+  generation_medium_cloudy_windy_mw?: number | null
+  load_high_summer_evening_windy_mw?: number | null
+  notes?: string | null
+}
+
+export interface ElectranetRAS {
+  region_area: string
+  scheme_name: string
+  impacted_substation?: string | null
+  description?: string | null
+}
+
+export interface ElectranetManifest {
+  source: string
+  source_url?: string
+  source_year?: number
+  source_published?: string
+  classification?: string
+  ingested_at?: string
+  files?: Record<string, string>
+  regions?: string[]
+  notes?: string
+}
+
+// ============================================================
 // Wind Value Analytics
 // ============================================================
 

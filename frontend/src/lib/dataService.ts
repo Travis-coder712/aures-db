@@ -785,6 +785,31 @@ export async function fetchEISKciStats(): Promise<import('./types').EISKciStats 
   } catch { return null }
 }
 
+// ElectraNet SA connection registry (v3.31.0 ingest)
+export interface ElectranetData {
+  manifest: import('./types').ElectranetManifest | null
+  existing: import('./types').ElectranetExisting[]
+  available: import('./types').ElectranetAvailable[]
+  bays: import('./types').ElectranetBay[]
+  ras: import('./types').ElectranetRAS[]
+}
+let electranetCache: ElectranetData | null = null
+export async function fetchElectranetData(): Promise<ElectranetData | null> {
+  if (electranetCache) return electranetCache
+  try {
+    const base = `${import.meta.env.BASE_URL}data/electranet`
+    const [manifest, existing, available, bays, ras] = await Promise.all([
+      fetch(`${base}/manifest.json`).then(r => r.ok ? r.json() : null).catch(() => null),
+      fetch(`${base}/existing.json`).then(r => r.ok ? r.json() : []).catch(() => []),
+      fetch(`${base}/available.json`).then(r => r.ok ? r.json() : []).catch(() => []),
+      fetch(`${base}/bays.json`).then(r => r.ok ? r.json() : []).catch(() => []),
+      fetch(`${base}/ras.json`).then(r => r.ok ? r.json() : []).catch(() => []),
+    ])
+    electranetCache = { manifest, existing, available, bays, ras }
+    return electranetCache
+  } catch { return null }
+}
+
 export interface EISPdfOpportunity {
   id: string; name: string; technology: string; state: string; capacity_mw: number
   data_gaps: string[]; eis_url: string | null; eis_year: number | null; priority: 'high' | 'medium' | 'low'

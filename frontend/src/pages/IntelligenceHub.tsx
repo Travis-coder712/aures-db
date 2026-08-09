@@ -104,6 +104,12 @@ const ACTIVE_FEATURES = [
     route: '/intelligence/eis-technical',
   },
   {
+    icon: '\u{26A1}',
+    title: 'Grid Connection Headroom',
+    description: 'Forward-looking connection capacity per substation. SA (ElectraNet) populated with 76 existing + 62 available capacity + 113 bays + 24 RAS. Complementary to AEMO KCI.',
+    route: '/intelligence/grid-connections',
+  },
+  {
     icon: '\u{1F4C5}',
     title: 'NEM Activities Timeline',
     description: 'Month-by-month key highlights across development, construction, and operations',

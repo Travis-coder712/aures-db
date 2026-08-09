@@ -55,6 +55,7 @@ import RevenueIntel from './pages/intelligence/RevenueIntel'
 import TransmissionInfra from './pages/intelligence/TransmissionInfra'
 import MansfieldPipeline from './pages/intelligence/MansfieldPipeline'
 import EISTechnical from './pages/intelligence/EISTechnical'
+import GridConnections from './pages/intelligence/GridConnections'
 import NemActivities from './pages/intelligence/NemActivities'
 import BessBidding from './pages/intelligence/BessBidding'
 import BessPortfolio from './pages/intelligence/BessPortfolio'
@@ -164,6 +165,7 @@ function App() {
         <Route path="intelligence/mansfield-pipeline" element={<MansfieldPipeline />} />
         <Route path="intelligence/grid-connection" element={<Navigate to="/intelligence/transmission-infra" replace />} />
         <Route path="intelligence/eis-technical" element={<EISTechnical />} />
+        <Route path="intelligence/grid-connections" element={<GridConnections />} />
         <Route path="intelligence/nem-activities" element={<NemActivities />} />
         <Route path="intelligence/bess-bidding" element={<BessBidding />} />
         <Route path="intelligence/bess-portfolio" element={<BessPortfolio />} />

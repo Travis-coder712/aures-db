@@ -100,6 +100,8 @@
     "turbine_count": 32,
     "hub_height_m": 92.5,
     "rotor_diameter_m": 113.0,
+    "noise_limit_dba": 40.0,
+    "connection_voltage_kv": 275.0,
     "network_service_provider": "ElectraNet",
     "connection_substation_name": "Davenport 275 kV substation via 132 kV",
     "notes": "Regime: DAC. First 32-turbine phase officially operational Jul 2016. Part of same 2012 development approval covering all three Hornsdale stages. Neoen developer; Hornsdale Power Reserve (Tesla BESS) co-located at same complex."

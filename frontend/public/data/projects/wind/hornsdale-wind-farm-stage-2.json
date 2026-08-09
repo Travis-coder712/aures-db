@@ -83,6 +83,8 @@
     "turbine_count": 33,
     "hub_height_m": 92.5,
     "rotor_diameter_m": 113.0,
+    "noise_limit_dba": 40.0,
+    "connection_voltage_kv": 275.0,
     "network_service_provider": "ElectraNet",
     "connection_substation_name": "Davenport 275 kV substation via 132 kV",
     "notes": "Regime: DAC. HWF2 100 MW phase tested supplying 6 of 8 grid services Aug 2017 to Feb 2018 (world-first synthetic inertia trials via ARENA). Same 2012 SA DAC approval; Neoen developer. Now Atmos-owned."

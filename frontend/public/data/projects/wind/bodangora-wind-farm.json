@@ -75,8 +75,12 @@
     "turbine_count": 33,
     "hub_height_m": 85.0,
     "rotor_diameter_m": 130.0,
+    "assumed_capacity_factor_pct": 36.4,
+    "assumed_annual_energy_gwh": 361.0,
+    "connection_voltage_kv": 132.0,
     "network_service_provider": "TransGrid (Essential Energy DNSP interface)",
     "connection_substation_name": "Wellington 132 kV substation",
+    "connection_augmentation": "New 33/132 kV on-site substation with 132 kV connection to the existing TransGrid Wellington-Beryl 132 kV transmission line",
     "notes": "Regime: other. MP10_0157; PAC approval Aug 2013 (Part 3A). Infigen Energy developer (now Iberdrola Australia). Located 20 km NE of Wellington. Practical Completion 27 Feb 2019; 113 MW."
   },
   "sources": [
