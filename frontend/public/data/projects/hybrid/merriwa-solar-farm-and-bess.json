@@ -41,6 +41,13 @@
   "scheme_contracts": [],
   "cost_sources": [],
   "stakeholder_issues": [],
+  "eis_specs": {
+    "document_title": "Merriwa Solar Farm And Bess \u2014 SSD source (v3.31.0 hybrid source-hunt)",
+    "document_url": "https://www.planningportal.nsw.gov.au/major-projects/projects/merriwa-solar-farm",
+    "document_year": 2022,
+    "network_service_provider": "TransGrid",
+    "notes": "Solar 550 MWac. BESS 400 MW / 1600 MWh (4.0h duration). Regime: SSD. Merriwa Energy Hub, ~8 km from Merriwa in NSW Hunter. Originally Maoneng, later Valent Energy Developments (Gaw Capital / BW ESS). 550 MWac solar + 400 MW/1,600 MWh BESS on ex-coal-country land. Powers ~140k homes; expected commissioning 2027."
+  },
   "sources": [
     {
       "title": "AEMO Generation Information Jan 2026",

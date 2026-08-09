@@ -81,6 +81,18 @@
   "scheme_contracts": [],
   "cost_sources": [],
   "stakeholder_issues": [],
+  "eis_specs": {
+    "document_title": "Bango 973 Wind Farm \u2014 SSD source (v3.31.0 wind tranche 2)",
+    "document_url": "https://www.planningportal.nsw.gov.au/major-projects/projects/bango-wind-farm",
+    "document_year": 2018,
+    "turbine_model": "GE 5.3-158 Cypress",
+    "turbine_count": 30,
+    "hub_height_m": 121.0,
+    "rotor_diameter_m": 158.0,
+    "network_service_provider": "TransGrid",
+    "connection_substation_name": "Yass 330 kV switchyard via new 132 kV line",
+    "notes": "Regime: SSD. One of two AEMO DUIDs (Bango 999 + Bango 973) covering the 244 MW Bango Wind Farm 30 km north of Yass. Approved by IPC 2 May 2018 as SSD 6686. First globally to deploy GE 5.3 MW Cypress turbines. CWP Renewables/Grassroots then Squadron Energy; fully operational 2023; 15-yr PPA to Snowy Hydro."
+  },
   "sources": [
     {
       "title": "AEMO Generation Information Jan 2026",

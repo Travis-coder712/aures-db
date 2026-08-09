@@ -39,6 +39,13 @@
   "scheme_contracts": [],
   "cost_sources": [],
   "stakeholder_issues": [],
+  "eis_specs": {
+    "document_title": "The Plains \u2014 SSD source (v3.31.0 hybrid source-hunt)",
+    "document_url": "https://www.planningportal.nsw.gov.au/major-projects/projects/plains-wind-farm",
+    "document_year": 2023,
+    "network_service_provider": "TransGrid",
+    "notes": "Solar 400 MWac. Wind 1500 MWac. BESS 400 MW / 1600 MWh (4.0h duration). Regime: SSD. Engie's The Plains Renewable Energy Park south of Hay in SW REZ NSW. SSD-50629707 (Response to Submissions stage). Up to 1.5 GW wind (~171 turbines) + 400 MW solar (~900,900 panels, 800 ha) + 400 MW/1600 MWh BESS. Separate SSDs for wind and solar. AEMO KCI N00145."
+  },
   "sources": [
     {
       "title": "AEMO Generation Information Jan 2026",

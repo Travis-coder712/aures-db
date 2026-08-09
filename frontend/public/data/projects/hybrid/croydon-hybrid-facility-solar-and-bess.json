@@ -41,6 +41,13 @@
   "scheme_contracts": [],
   "cost_sources": [],
   "stakeholder_issues": [],
+  "eis_specs": {
+    "document_title": "Croydon Hybrid Facility Solar And Bess \u2014 other source (v3.31.0 hybrid source-hunt)",
+    "document_url": "https://acenergy.com.au/portfolio/croydon-solar-farm/",
+    "document_year": 2025,
+    "network_service_provider": "Powerlink",
+    "notes": "Solar 750 MWac. BESS 500 MW / 2000 MWh (4.0h duration). Regime: other. ACEnergy Pty Ltd. Under Development at Lotus Creek in Isaac Region, QLD (~1,800 ha). 750 MWdc solar + 500 MW/2,000 MWh BESS. Land acquisition 2025, approvals 2025-2026, operational target 2028. Offsets ~940 kt CO2/y. AEMO KCI Q00229."
+  },
   "sources": [
     {
       "title": "AEMO Generation Information Jan 2026",

@@ -126,6 +126,14 @@
       "status": "tracking"
     }
   ],
+  "eis_specs": {
+    "document_title": "Dinawan Energy Hub \u2014 SSD source (v3.31.0 hybrid source-hunt)",
+    "document_url": "https://www.planningportal.nsw.gov.au/major-projects/projects/dinawan-wind-farm",
+    "document_year": 2025,
+    "network_service_provider": "TransGrid",
+    "connection_substation_name": "Dinawan Substation (Project EnergyConnect)",
+    "notes": "Wind 707 MWac. Regime: SSD. Spark Renewables (Tenaga Nasional subsidiary). Dinawan Wind Farm Stages 1 & 2 (~707 MW, up to 200 turbines) form the wind component of the ~2 GW hub; also up to 1.7 M solar modules and BESS. Riverina SW REZ; connects at TransGrid's Dinawan Substation on PEC. Construction targeted Q4 2026."
+  },
   "sources": [
     {
       "title": "AEMO Generation Information Jan 2026",

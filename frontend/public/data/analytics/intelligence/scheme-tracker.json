@@ -340,14 +340,8 @@
           "status": "development",
           "stage": "development",
           "cod_current": "2032-04-30",
-          "dev_status": "environmental pending",
-          "annotations": [
-            {
-              "flag": "environmental pending",
-              "reason": "No EIS lodged and COD > 2027",
-              "severity": "medium"
-            }
-          ]
+          "dev_status": "on track",
+          "annotations": []
         },
         {
           "name": "Goulburn River Solar Farm",
@@ -1216,14 +1210,8 @@
           "status": "development",
           "stage": "development",
           "cod_current": "2031-10-01",
-          "dev_status": "environmental pending",
-          "annotations": [
-            {
-              "flag": "environmental pending",
-              "reason": "No EIS lodged and COD > 2027",
-              "severity": "medium"
-            }
-          ]
+          "dev_status": "on track",
+          "annotations": []
         },
         {
           "name": "Gawara Baya",
@@ -1286,14 +1274,8 @@
           "status": "development",
           "stage": "development",
           "cod_current": "2030-11-01",
-          "dev_status": "environmental pending",
-          "annotations": [
-            {
-              "flag": "environmental pending",
-              "reason": "No EIS lodged and COD > 2027",
-              "severity": "medium"
-            }
-          ],
+          "dev_status": "on track",
+          "annotations": [],
           "developer_grade": "B"
         },
         {
@@ -1401,14 +1383,8 @@
           "status": "development",
           "stage": "development",
           "cod_current": "2028-02-01",
-          "dev_status": "environmental pending",
-          "annotations": [
-            {
-              "flag": "environmental pending",
-              "reason": "No EIS lodged and COD > 2027",
-              "severity": "medium"
-            }
-          ],
+          "dev_status": "on track",
+          "annotations": [],
           "developer_grade": "B"
         },
         {
@@ -2058,5 +2034,5 @@
       }
     }
   },
-  "exported_at": "2026-08-09T09:13:24.236471"
+  "exported_at": "2026-08-09T09:57:27.342251"
 }

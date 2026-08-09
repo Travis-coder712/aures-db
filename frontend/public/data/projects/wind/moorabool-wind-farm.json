@@ -97,6 +97,18 @@
   "scheme_contracts": [],
   "cost_sources": [],
   "stakeholder_issues": [],
+  "eis_specs": {
+    "document_title": "Moorabool Wind Farm \u2014 MP-permit source (v3.31.0 wind tranche 2)",
+    "document_url": "https://mooraboolwindfarm.com/project/project-planning-and-approvals/",
+    "document_year": 2010,
+    "turbine_model": "Goldwind GW136-3.0 MW",
+    "turbine_count": 104,
+    "hub_height_m": 100.0,
+    "rotor_diameter_m": 136.0,
+    "network_service_provider": "AusNet Services",
+    "connection_substation_name": "Elaine 220 kV terminal station",
+    "notes": "Regime: MP-permit. Approved by Vic Planning Minister Oct 2010 under Planning and Environment Act 1987 (permit amended 2016/2018/2020 to allow larger WTGs). Developed by Westwind Energy, sold to Goldwind Australia Sep 2016. Fully commissioned 2022; 305 MW registered, 321 MW nameplate. Split into North + South entities."
+  },
   "sources": [
     {
       "title": "AEMO Generation Information Jan 2026",

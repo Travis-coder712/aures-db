@@ -91,6 +91,18 @@
   "scheme_contracts": [],
   "cost_sources": [],
   "stakeholder_issues": [],
+  "eis_specs": {
+    "document_title": "Mortlake South Wind Farm \u2014 MP-permit source (v3.31.0 wind tranche 2)",
+    "document_url": "https://en.wikipedia.org/wiki/Mortlake_South_Wind_Farm",
+    "document_year": 2010,
+    "turbine_model": "Nordex N149/4.5",
+    "turbine_count": 35,
+    "hub_height_m": 105.0,
+    "rotor_diameter_m": 149.0,
+    "network_service_provider": "AusNet Services",
+    "connection_substation_name": "Mortlake 500/220 kV terminal station via 220 kV underground cable",
+    "notes": "Regime: MP-permit. Originally approved Oct 2010 by Vic Planning Minister for 52 x 3 MW turbines; amended Apr 2017 to 35 x 4.5 MW Nordex. Underground 220 kV transmission EMP endorsed Feb 2020. Owned/operated by ACCIONA Energia; fully operational Jul 2024."
+  },
   "sources": [
     {
       "title": "AEMO Generation Information Jan 2026",

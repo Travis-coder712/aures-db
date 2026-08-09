@@ -29,6 +29,13 @@
   "scheme_contracts": [],
   "cost_sources": [],
   "stakeholder_issues": [],
+  "eis_specs": {
+    "document_title": "Harlin Solar Farm \u2014 MCU-DA source (v3.31.0 hybrid source-hunt)",
+    "document_url": "https://www.newenergydevelopment.com/projects-harlin-solar-farm",
+    "document_year": 2018,
+    "network_service_provider": "Powerlink",
+    "notes": "Solar 800 MWac. Regime: MCU-DA. Somerset Regional Council DA approved Nov 2018; Planning and Environment Court appeal dismissed 18 April 2019. Sunshine Energy origin, staged 1,500 MW originally (3 x 500 MW), latest AEMO figure 800 MW. 2,055 ha east of Harlin on D'Aguilar Hwy, ~100 km NW of Brisbane. 500 MWh BESS planned for later stage. Long stalled \u2013 project effectively dormant/scaled back to 800 MW class. AEMO KCI Q00026."
+  },
   "sources": [
     {
       "title": "AEMO Generation Information Jan 2026",

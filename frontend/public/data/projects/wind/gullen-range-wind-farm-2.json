@@ -75,6 +75,17 @@
   "scheme_contracts": [],
   "cost_sources": [],
   "stakeholder_issues": [],
+  "eis_specs": {
+    "document_title": "Gullen Range Wind Farm 2 \u2014 other source (v3.31.0 wind tranche 2)",
+    "document_url": "https://www.planningportal.nsw.gov.au/major-projects/projects/gullen-range-wind-farm",
+    "document_year": 2009,
+    "turbine_model": "Goldwind GRW100-2.5 MW",
+    "hub_height_m": 80.0,
+    "rotor_diameter_m": 100.0,
+    "network_service_provider": "TransGrid",
+    "connection_substation_name": "Bannaby 500/330 kV / Marulan area 132 kV",
+    "notes": "Regime: other. Second AEMO registered unit within the 165.5 MW Gullen Range Wind Farm (73 total turbines). Same MP07_0118 approval as the main DUID. Owner Beijing Jingneng Clean Energy (Australia) Holding. 110.67 MW sub-capacity."
+  },
   "sources": [
     {
       "title": "AEMO Generation Information Jan 2026",

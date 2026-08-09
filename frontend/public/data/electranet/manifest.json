@@ -1,0 +1,20 @@
+{
+  "source": "ElectraNet \u2014 Network Connection Opportunities to 2030 (FY25-26)",
+  "source_url": "https://www.electranet.com.au/what-we-do/network/connect-to-our-network/",
+  "source_year": 2026,
+  "source_published": "July 2026",
+  "classification": "Public / v1.0",
+  "ingested_at": "2026-08-09",
+  "files": {
+    "existing.json": "Existing and committed generation + load connections (Tables 2-6, 12-14, 18-19)",
+    "available.json": "Available capacity to connect new generation + load per sub-region (Tables 7-11, 15-17, 20-21)",
+    "bays.json": "Available bays per substation (Tables 23-39)",
+    "ras.json": "Remedial Action Schemes that may impact connections (Table 22)"
+  },
+  "regions": [
+    "Mid North",
+    "Eyre Peninsula",
+    "South East"
+  ],
+  "notes": "Complementary to AEMO KCI ingest \u2014 ElectraNet publishes forward-looking capacity per substation, not per-project applications."
+}

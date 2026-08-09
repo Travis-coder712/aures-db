@@ -59,6 +59,18 @@
   "scheme_contracts": [],
   "cost_sources": [],
   "stakeholder_issues": [],
+  "eis_specs": {
+    "document_title": "Portland Wind Farm \u2014 MP-permit source (v3.31.0 wind tranche 2)",
+    "document_url": "https://www.pacificblue.com.au/our-energy-production/operating-sites/cape-nelson-nth-sir-william-grant-wind-farm",
+    "document_year": 2001,
+    "turbine_model": "Senvion (REpower) MM82 + MM92",
+    "turbine_count": 74,
+    "hub_height_m": 80.0,
+    "rotor_diameter_m": 92.0,
+    "network_service_provider": "AusNet Services / Powercor (DNSP)",
+    "connection_substation_name": "Portland (Heywood-Portland 132 kV via aluminium smelter substation)",
+    "notes": "Regime: MP-permit. Portland Wind Energy Project (PWEP) received Vic planning approvals 2001 for all four capes. This 151.7 MW Registered figure = Cape Bridgewater (58 MW, 29 turbines) + Cape Nelson South (44 MW) + Cape Nelson North/Sir William Grant (47 MW, 23 turbines Stage IV completed 2015). Owned by Pacific Blue (ex Pacific Hydro, SPIC). Yambuk (Stage I) is separate registered unit."
+  },
   "sources": [
     {
       "title": "AEMO Generation Information Jan 2026",

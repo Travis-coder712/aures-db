@@ -75,6 +75,18 @@
   "scheme_contracts": [],
   "cost_sources": [],
   "stakeholder_issues": [],
+  "eis_specs": {
+    "document_title": "Capital Wind Farm \u2014 other source (v3.31.0 wind tranche 2)",
+    "document_url": "https://en.wikipedia.org/wiki/Capital_Wind_Farm",
+    "document_year": 2007,
+    "turbine_model": "Suzlon S88 2.1 MW",
+    "turbine_count": 67,
+    "hub_height_m": 80.0,
+    "rotor_diameter_m": 88.0,
+    "network_service_provider": "TransGrid",
+    "connection_substation_name": "Williamsdale-Woodlawn 132 kV / Bungendore area",
+    "notes": "Regime: other. Approved by NSW DoP prior to Part 3A repeal; located near Bungendore in Queanbeyan-Palerang LGA. Construction 2008; fully operational Oct 2009. Was largest NSW wind farm at commissioning. Ownership now Iberdrola Australia (ex-Infigen); PPA with Sydney Water."
+  },
   "sources": [
     {
       "title": "AEMO Generation Information Jan 2026",

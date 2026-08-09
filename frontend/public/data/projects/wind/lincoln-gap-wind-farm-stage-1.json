@@ -74,6 +74,18 @@
   "scheme_contracts": [],
   "cost_sources": [],
   "stakeholder_issues": [],
+  "eis_specs": {
+    "document_title": "Lincoln Gap Wind Farm Stage 1 \u2014 DAC source (v3.31.0 wind tranche 2)",
+    "document_url": "https://lincolngapwindfarm.com.au/",
+    "document_year": 2006,
+    "turbine_model": "Senvion 3.6M140 EBC",
+    "turbine_count": 35,
+    "hub_height_m": 110.0,
+    "rotor_diameter_m": 140.0,
+    "network_service_provider": "ElectraNet",
+    "connection_substation_name": "Davenport 275 kV substation, Port Augusta",
+    "notes": "Regime: DAC. SA development approval granted 2006 (EIS 2005). Nexif Energy developer; commissioned Stage 1 May 2020. Sold to Ratch Australia Dec 2022 (RATCH-Australia Lincoln Gap). Co-located BESS 10 MW/10 MWh Stage 1 + 25 MW/52 MWh Stage 2."
+  },
   "sources": [
     {
       "title": "AEMO Generation Information Jan 2026",

@@ -41,6 +41,11 @@
   "scheme_contracts": [],
   "cost_sources": [],
   "stakeholder_issues": [],
+  "eis_specs": {
+    "document_title": "Farmers Creek Energy Park \u2014  source (v3.31.0 hybrid source-hunt)",
+    "network_service_provider": "Powerlink",
+    "notes": "TE H2 Australia (TotalEnergies hydrogen subsidiary). AEMO KCI Q00272, 500 MW class. No public planning-portal or EPBC referral located; likely still in pre-lodgement scoping tied to a green H2 offtake. TE H2's confirmed Australian project is Wak Wak near Darwin - this Queensland site may be a distinct, undisclosed hydrogen precinct."
+  },
   "sources": [
     {
       "title": "AEMO Generation Information Jan 2026",

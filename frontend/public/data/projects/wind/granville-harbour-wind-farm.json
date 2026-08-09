@@ -67,6 +67,18 @@
   "scheme_contracts": [],
   "cost_sources": [],
   "stakeholder_issues": [],
+  "eis_specs": {
+    "document_title": "Granville Harbour Wind Farm \u2014 other source (v3.31.0 wind tranche 2)",
+    "document_url": "https://en.wikipedia.org/wiki/Granville_Harbour_Wind_Farm",
+    "document_year": 2015,
+    "turbine_model": "Vestas V126-3.6 MW",
+    "turbine_count": 31,
+    "hub_height_m": 137.0,
+    "rotor_diameter_m": 126.0,
+    "network_service_provider": "TasNetworks",
+    "connection_substation_name": "Reece 220 kV / Zeehan area on Tas west coast network",
+    "notes": "Regime: other. Approved by West Coast Council under Tas LUPA Act 1993. Vestas turnkey EPC awarded 2018; commissioned Dec 2020. Owned by Palisade Investment Partners; 111 MW. Uses tallest hub-height tower in Australia (137 m) at time of construction."
+  },
   "sources": [
     {
       "title": "AEMO Generation Information Jan 2026",

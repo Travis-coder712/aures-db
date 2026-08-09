@@ -59,6 +59,18 @@
   "scheme_contracts": [],
   "cost_sources": [],
   "stakeholder_issues": [],
+  "eis_specs": {
+    "document_title": "Woolnorth Studland Bay Bluff Point \u2014 other source (v3.31.0 wind tranche 2)",
+    "document_url": "https://epa.tas.gov.au/business-industry/assessment/proposals-assessed-by-the-epa/woolnorth-wind-farm-holding-pty-ltd-woolnorth-wind-farm-repowering-of-studland-bay-and-bluff-point",
+    "document_year": 2001,
+    "turbine_model": "Vestas V66-1.75 MW (Bluff Point) + Vestas V90-3.0 MW (Studland Bay)",
+    "turbine_count": 62,
+    "hub_height_m": 60.0,
+    "rotor_diameter_m": 66.0,
+    "network_service_provider": "TasNetworks",
+    "connection_substation_name": "Smithton 110 kV / North-West Coast Tas network",
+    "notes": "Regime: other. Approved by Circular Head Council under Tas Land Use Planning and Approvals Act 1993. Bluff Point (65 MW) = 37 x Vestas V66-1.75 MW, hub 60 m, commissioned 2002 (Stage 1) & 2004 (Stage 2). Studland Bay (75 MW) = 25 x Vestas V90-3.0 MW, hub 80 m, commissioned 2007. Owned by Woolnorth Renewables (Shenhua/Guohua Energy). Repowering EIA now in progress with EPA Tasmania."
+  },
   "sources": [
     {
       "title": "AEMO Generation Information Jan 2026",

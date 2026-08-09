@@ -88,6 +88,14 @@
   "scheme_contracts": [],
   "cost_sources": [],
   "stakeholder_issues": [],
+  "eis_specs": {
+    "document_title": "New England Solar Farm \u2014 SSD source (v3.31.0 hybrid source-hunt)",
+    "document_url": "https://www.planningportal.nsw.gov.au/major-projects/projects/new-england-solar-farm",
+    "document_year": 2019,
+    "network_service_provider": "TransGrid",
+    "connection_substation_name": "Uralla 330 kV substation",
+    "notes": "Solar 720 MWac. BESS 50 MW / 50 MWh (1.0h duration). Regime: SSD. ACEN Australia (formerly UPC/AC Renewables) SSD-9255, approved via IPC 2020 with 4,171 ha footprint. Stage 1 (400 MW) operating; Stage 2 (320 MW) under construction. 50 MW/50 MWh BESS commissioned as first-stage firming. Sits in New England REZ."
+  },
   "sources": [
     {
       "title": "AEMO Generation Information",

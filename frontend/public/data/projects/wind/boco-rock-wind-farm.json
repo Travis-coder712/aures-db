@@ -76,6 +76,18 @@
   "scheme_contracts": [],
   "cost_sources": [],
   "stakeholder_issues": [],
+  "eis_specs": {
+    "document_title": "Boco Rock Wind Farm \u2014 other source (v3.31.0 wind tranche 2)",
+    "document_url": "https://www.planningportal.nsw.gov.au/major-projects/projects/boco-rock-wind-farm",
+    "document_year": 2010,
+    "turbine_model": "GE 1.7-100",
+    "turbine_count": 67,
+    "hub_height_m": 80.0,
+    "rotor_diameter_m": 100.0,
+    "network_service_provider": "TransGrid",
+    "connection_substation_name": "Cooma 132 kV substation",
+    "notes": "Regime: other. MP09_0103; Part 3A Project Approval granted 9 Aug 2010; developer Wind Prospect/EGP Renewables. Located 10 km SW of Nimmitabel in Snowy Monaro. Stage 1 operational since 2015; 113 MW. Now owned by Tilt Renewables. Stage 2 approved (up to 55 more turbines) but not built."
+  },
   "sources": [
     {
       "title": "AEMO Generation Information Jan 2026",

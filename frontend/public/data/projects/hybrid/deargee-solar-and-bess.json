@@ -37,6 +37,13 @@
   "scheme_contracts": [],
   "cost_sources": [],
   "stakeholder_issues": [],
+  "eis_specs": {
+    "document_title": "Deargee Solar And Bess \u2014 EPBC source (v3.31.0 hybrid source-hunt)",
+    "document_url": "https://acenrenewables.com.au/project/deeargee-solar/",
+    "document_year": 2025,
+    "network_service_provider": "TransGrid",
+    "notes": "Solar 320 MWac. BESS 700 MW / 2800 MWh (4.0h duration). Regime: EPBC. ACEN Australia 'Deeargee Solar', 12 km SE of Uralla NSW (adjacent to New England Solar). 320 MW solar + up to 1,400 MWac 2-hour (or 700 MW/2800 MWh 4-hour) BESS on 1,002 ha (buffered 542 ha). Submitted to EPBC Act ~2025; will be assessed as NSW SSD. Construction ~24 months, 400 workers."
+  },
   "sources": [
     {
       "title": "AEMO Generation Information Jan 2026",

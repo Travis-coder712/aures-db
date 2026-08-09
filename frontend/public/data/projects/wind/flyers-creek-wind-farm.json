@@ -90,6 +90,18 @@
   ],
   "cost_sources": [],
   "stakeholder_issues": [],
+  "eis_specs": {
+    "document_title": "Flyers Creek Wind Farm \u2014 other source (v3.31.0 wind tranche 2)",
+    "document_url": "https://www.planningportal.nsw.gov.au/major-projects/projects/flyers-creek-wind-farm",
+    "document_year": 2014,
+    "turbine_model": "Vestas V150-4.2 MW (approx)",
+    "turbine_count": 38,
+    "hub_height_m": 105.0,
+    "rotor_diameter_m": 140.0,
+    "network_service_provider": "TransGrid (Essential Energy DNSP interface)",
+    "connection_substation_name": "Orange North to Cadia 132 kV line (new on-site switching station)",
+    "notes": "Regime: other. Original Project Approval by NSW Planning Assessment Commission 2014 under Part 3A/SSD transition (originally 42 x 3 MW). Multiple modifications approved to increase tip height to 160 m/rotor to 140 m. Iberdrola Australia developer. Located 15 km west of Blayney (Blayney Shire LGA); commissioned 2024."
+  },
   "sources": [
     {
       "title": "AEMO Generation Information Jan 2026",

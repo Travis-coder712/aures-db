@@ -82,6 +82,18 @@
   "scheme_contracts": [],
   "cost_sources": [],
   "stakeholder_issues": [],
+  "eis_specs": {
+    "document_title": "Gullen Range Wind Farm \u2014 other source (v3.31.0 wind tranche 2)",
+    "document_url": "https://www.planningportal.nsw.gov.au/major-projects/projects/gullen-range-wind-farm",
+    "document_year": 2009,
+    "turbine_model": "Goldwind GRW100-2.5 MW (56) + GW82-1.5 MW (17)",
+    "turbine_count": 73,
+    "hub_height_m": 80.0,
+    "rotor_diameter_m": 100.0,
+    "network_service_provider": "TransGrid",
+    "connection_substation_name": "Bannaby 500/330 kV / Marulan area 132 kV",
+    "notes": "Regime: other. Part 3A Project Approval granted by Land and Environment Court 2009 (MP07_0118). Developed by Epuron then sold to Goldwind Australia (later BJCE/Jingneng). Commissioned 2014. 56 x GRW100 (80 m towers) + 17 x GW82 (85 m towers)."
+  },
   "sources": [
     {
       "title": "AEMO Generation Information Jan 2026",

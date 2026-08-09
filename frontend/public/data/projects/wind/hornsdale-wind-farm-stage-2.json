@@ -75,6 +75,18 @@
   "scheme_contracts": [],
   "cost_sources": [],
   "stakeholder_issues": [],
+  "eis_specs": {
+    "document_title": "Hornsdale Wind Farm Stage 2 \u2014 DAC source (v3.31.0 wind tranche 2)",
+    "document_url": "https://www.power-technology.com/projects/hornsdale-wind-farm-jamestown/",
+    "document_year": 2012,
+    "turbine_model": "Siemens SWT-3.2-113 direct-drive",
+    "turbine_count": 33,
+    "hub_height_m": 92.5,
+    "rotor_diameter_m": 113.0,
+    "network_service_provider": "ElectraNet",
+    "connection_substation_name": "Davenport 275 kV substation via 132 kV",
+    "notes": "Regime: DAC. HWF2 100 MW phase tested supplying 6 of 8 grid services Aug 2017 to Feb 2018 (world-first synthetic inertia trials via ARENA). Same 2012 SA DAC approval; Neoen developer. Now Atmos-owned."
+  },
   "sources": [
     {
       "title": "AEMO Generation Information Jan 2026",

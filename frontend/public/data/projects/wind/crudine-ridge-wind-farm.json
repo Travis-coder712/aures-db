@@ -92,6 +92,18 @@
   "scheme_contracts": [],
   "cost_sources": [],
   "stakeholder_issues": [],
+  "eis_specs": {
+    "document_title": "Crudine Ridge Wind Farm \u2014 SSD source (v3.31.0 wind tranche 2)",
+    "document_url": "https://www.planningportal.nsw.gov.au/major-projects/project/4681",
+    "document_year": 2016,
+    "turbine_model": "GE 3.8-137",
+    "turbine_count": 37,
+    "hub_height_m": 91.5,
+    "rotor_diameter_m": 137.0,
+    "network_service_provider": "TransGrid",
+    "connection_substation_name": "Wellington 132 kV / Wollar area (Bathurst-Wellington corridor)",
+    "notes": "Regime: SSD. SSD-6697 approved. Located 45 km south of Mudgee/north of Bathurst. Modification reduced turbine count from 77 to 37 with larger machines. CWP Renewables (now Squadron Energy). Operational 20 Dec 2021. 134 MW nameplate."
+  },
   "sources": [
     {
       "title": "AEMO Generation Information Jan 2026",

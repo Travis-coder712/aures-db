@@ -43,6 +43,13 @@
   "scheme_contracts": [],
   "cost_sources": [],
   "stakeholder_issues": [],
+  "eis_specs": {
+    "document_title": "Fulham Solar Farm And Bess \u2014 MP-permit source (v3.31.0 hybrid source-hunt)",
+    "document_url": "https://www.planning.vic.gov.au/planning-approvals/ministerial-permits-register/ministerial-permits/c9de345d-8f74-4b48-922f-62b4d353066d",
+    "document_year": 2024,
+    "network_service_provider": "AusNet",
+    "notes": "Solar 80 MWac. BESS 64 MW / 128 MWh (2.0h duration). Regime: MP-permit. Ministerial planning permit PA2101365-4 (updated 4 Dec 2024). 80 MW solar + 128 MWh BESS on the Hopkins Rd / McLarens Rd site near Fulham, VIC (~200 km east of Melbourne). Backed by VRET-2 offtake; construction started April 2025, operational 2027. Octopus Investments-owned via Gippsland New Energy."
+  },
   "sources": [
     {
       "title": "AEMO Generation Information Jan 2026",

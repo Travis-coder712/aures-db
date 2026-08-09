@@ -67,6 +67,18 @@
   "scheme_contracts": [],
   "cost_sources": [],
   "stakeholder_issues": [],
+  "eis_specs": {
+    "document_title": "Lake Bonney 2 Wind Farm \u2014 DAC source (v3.31.0 wind tranche 2)",
+    "document_url": "https://en.wikipedia.org/wiki/Lake_Bonney_Wind_Farm",
+    "document_year": 2006,
+    "turbine_model": "Vestas V90-3.0 MW",
+    "turbine_count": 53,
+    "hub_height_m": 80.0,
+    "rotor_diameter_m": 90.0,
+    "network_service_provider": "ElectraNet",
+    "connection_substation_name": "Mayurra 132 kV / SE substation (Millicent area)",
+    "notes": "Regime: DAC. Approved under SA Development Act 1993 by Wattle Range Council. Vestas turbine supply contract announced Aug 2006, commissioned Apr 2008. Owned by Iberdrola Australia (ex-Infigen). Part of the three-stage Lake Bonney complex (LKBONNY1/2/3)."
+  },
   "sources": [
     {
       "title": "AEMO Generation Information Jan 2026",

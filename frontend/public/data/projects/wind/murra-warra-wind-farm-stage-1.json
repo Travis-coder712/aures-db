@@ -81,6 +81,18 @@
   "scheme_contracts": [],
   "cost_sources": [],
   "stakeholder_issues": [],
+  "eis_specs": {
+    "document_title": "Murra Warra Wind Farm Stage 1 \u2014 MP-permit source (v3.31.0 wind tranche 2)",
+    "document_url": "https://squadronenergy.com/our-projects/murra-warra-l-wind-farm/",
+    "document_year": 2016,
+    "turbine_model": "Senvion 3.7M144",
+    "turbine_count": 61,
+    "hub_height_m": 110.0,
+    "rotor_diameter_m": 144.0,
+    "network_service_provider": "AusNet Services",
+    "connection_substation_name": "Kiamal 220 kV / Horsham area (transmission via AusNet 220 kV)",
+    "notes": "Regime: MP-permit. Vic Planning Minister approved Murra Warra I & II together on 21 Nov 2016 (single permit for up to 116 turbines, 420 MW). Stage 1 delivered by RES Australia; commissioned Feb 2020. Corporate PPA with Telstra/ANZ/Coca-Cola Amatil/UoM consortium."
+  },
   "sources": [
     {
       "title": "AEMO Generation Information Jan 2026",

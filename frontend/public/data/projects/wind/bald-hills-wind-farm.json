@@ -82,6 +82,18 @@
   "scheme_contracts": [],
   "cost_sources": [],
   "stakeholder_issues": [],
+  "eis_specs": {
+    "document_title": "Bald Hills Wind Farm \u2014 EES source (v3.31.0 wind tranche 2)",
+    "document_url": "https://en.wikipedia.org/wiki/Bald_Hills_Wind_Farm",
+    "document_year": 2004,
+    "turbine_model": "Senvion (REpower) MM92 2.05 MW",
+    "turbine_count": 52,
+    "hub_height_m": 80.0,
+    "rotor_diameter_m": 92.0,
+    "network_service_provider": "AusNet Services (Powercor DNSP)",
+    "connection_substation_name": "Cranbourne / Basslink area via Powercor 66 kV \u2192 Hazelwood 220 kV",
+    "notes": "Regime: EES. Full EES completed 2004; Vic Planning Minister granted permit TRA/03/002 on 19 Aug 2004. Wind Power Pty Ltd developer. Located 10 km SE of Tarwin Lower, South Gippsland Shire. Commissioned May 2015; 106.6 MW. Owned by Infrastructure Capital Group. Long-running nuisance case with neighbours."
+  },
   "sources": [
     {
       "title": "AEMO Generation Information Jan 2026",

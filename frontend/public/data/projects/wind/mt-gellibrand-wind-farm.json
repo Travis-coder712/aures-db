@@ -68,6 +68,18 @@
   "scheme_contracts": [],
   "cost_sources": [],
   "stakeholder_issues": [],
+  "eis_specs": {
+    "document_title": "Mt Gellibrand Wind Farm \u2014 MP-permit source (v3.31.0 wind tranche 2)",
+    "document_url": "https://www.acciona.com.au/projects/mt-gellibrand-wind-farm",
+    "document_year": 2006,
+    "turbine_model": "Acciona/Nordex AW125/3000",
+    "turbine_count": 44,
+    "hub_height_m": 87.5,
+    "rotor_diameter_m": 125.0,
+    "network_service_provider": "AusNet Services",
+    "connection_substation_name": "Elaine 220 kV terminal station (via Moorabool corridor)",
+    "notes": "Regime: MP-permit. Vic Planning Minister granted permit 2006; final Development Plan approval 2012. Located 25 km east of Colac in Colac Otway Shire. Construction began Apr 2017; fully operational Aug 2018. Owned/operated by ACCIONA Energia; 132 MW."
+  },
   "sources": [
     {
       "title": "AEMO Generation Information Jan 2026",

@@ -73,6 +73,18 @@
   "scheme_contracts": [],
   "cost_sources": [],
   "stakeholder_issues": [],
+  "eis_specs": {
+    "document_title": "Hallett Stage 1 Brown Hill \u2014 DAC source (v3.31.0 wind tranche 2)",
+    "document_url": "https://www.agl.com.au/content/aglenergy/nsw/en/about-agl/how-we-source-energy/hallett-wind-farms",
+    "document_year": 2007,
+    "turbine_model": "Suzlon S88 2.1 MW",
+    "turbine_count": 45,
+    "hub_height_m": 80.0,
+    "rotor_diameter_m": 88.0,
+    "network_service_provider": "ElectraNet",
+    "connection_substation_name": "Hallett 275 kV / Bungama area",
+    "notes": "Regime: DAC. AGL Hallett 1 (Brown Hill) approved by SA planning under Development Act 1993; commissioned Jun 2008. Adjacent to AGL's 180 MW Hallett gas peaker plant. Now owned by Palisade Investment Partners/atmos; 20-yr PPA to AGL."
+  },
   "sources": [
     {
       "title": "AEMO Generation Information Jan 2026",

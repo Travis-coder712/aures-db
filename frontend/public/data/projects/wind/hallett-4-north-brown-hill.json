@@ -67,6 +67,18 @@
   "scheme_contracts": [],
   "cost_sources": [],
   "stakeholder_issues": [],
+  "eis_specs": {
+    "document_title": "Hallett 4 North Brown Hill \u2014 DAC source (v3.31.0 wind tranche 2)",
+    "document_url": "https://www.agl.com.au/content/aglenergy/nsw/en/about-agl/how-we-source-energy/hallett-wind-farms",
+    "document_year": 2009,
+    "turbine_model": "Suzlon S88/2100",
+    "turbine_count": 63,
+    "hub_height_m": 80.0,
+    "rotor_diameter_m": 88.0,
+    "network_service_provider": "ElectraNet",
+    "connection_substation_name": "Hallett 275 kV / Bungama area",
+    "notes": "Regime: DAC. AGL Hallett 4 (North Brown Hill); commissioned 2010. 132.3 MW nameplate; PPA with AGL. Blade tip height 124 m."
+  },
   "sources": [
     {
       "title": "AEMO Generation Information Jan 2026",

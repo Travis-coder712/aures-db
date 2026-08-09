@@ -67,6 +67,18 @@
   "scheme_contracts": [],
   "cost_sources": [],
   "stakeholder_issues": [],
+  "eis_specs": {
+    "document_title": "Bodangora Wind Farm \u2014 other source (v3.31.0 wind tranche 2)",
+    "document_url": "https://www.planningportal.nsw.gov.au/major-projects/projects/bodangora-wind-farm",
+    "document_year": 2013,
+    "turbine_model": "GE 3.43-130",
+    "turbine_count": 33,
+    "hub_height_m": 85.0,
+    "rotor_diameter_m": 130.0,
+    "network_service_provider": "TransGrid (Essential Energy DNSP interface)",
+    "connection_substation_name": "Wellington 132 kV substation",
+    "notes": "Regime: other. MP10_0157; PAC approval Aug 2013 (Part 3A). Infigen Energy developer (now Iberdrola Australia). Located 20 km NE of Wellington. Practical Completion 27 Feb 2019; 113 MW."
+  },
   "sources": [
     {
       "title": "AEMO Generation Information Jan 2026",

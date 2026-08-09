@@ -91,6 +91,18 @@
   "scheme_contracts": [],
   "cost_sources": [],
   "stakeholder_issues": [],
+  "eis_specs": {
+    "document_title": "Ararat Wind Farm \u2014 MP-permit source (v3.31.0 wind tranche 2)",
+    "document_url": "https://en.wikipedia.org/wiki/Ararat_Wind_Farm",
+    "document_year": 2010,
+    "turbine_model": "GE 3.0-103",
+    "turbine_count": 75,
+    "hub_height_m": 85.0,
+    "rotor_diameter_m": 103.0,
+    "network_service_provider": "AusNet Services",
+    "connection_substation_name": "Elmhurst switchyard, connecting to Ballarat-Horsham 220 kV line",
+    "notes": "Regime: MP-permit. Planning permit submitted Jan 2010, approved Oct 2010 by Vic Planning Minister; grid route/substation permit granted 2012. Developer RES; consortium ownership: OPTrust/GE/RES/downer. Commissioned Jun 2017; 25-yr PPA with ACT Government."
+  },
   "sources": [
     {
       "title": "AEMO Generation Information Jan 2026",

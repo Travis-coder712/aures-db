@@ -75,6 +75,18 @@
   "scheme_contracts": [],
   "cost_sources": [],
   "stakeholder_issues": [],
+  "eis_specs": {
+    "document_title": "Hornsdale Wind Farm Stage 3 \u2014 DAC source (v3.31.0 wind tranche 2)",
+    "document_url": "https://www.power-technology.com/projects/hornsdale-wind-farm-jamestown/",
+    "document_year": 2012,
+    "turbine_model": "Siemens SWT-3.2-113 direct-drive",
+    "turbine_count": 34,
+    "hub_height_m": 92.5,
+    "rotor_diameter_m": 113.0,
+    "network_service_provider": "ElectraNet",
+    "connection_substation_name": "Davenport 275 kV substation via 132 kV",
+    "notes": "Regime: DAC. SA development approval 4 Jul 2012 for all three Hornsdale stages (Northern Areas Council). Neoen developer; John Laing/Megawatt Capital co-owners. HWF3 commissioned 2017; underpinned by 100 MW ACT reverse auction PPA. Fleet total 99 x Siemens 3.2 MW turbines. Atmos Renewables now full owner (2025)."
+  },
   "sources": [
     {
       "title": "AEMO Generation Information Jan 2026",

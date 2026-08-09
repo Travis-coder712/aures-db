@@ -41,6 +41,13 @@
   "scheme_contracts": [],
   "cost_sources": [],
   "stakeholder_issues": [],
+  "eis_specs": {
+    "document_title": "Bendenine \u2014 SSD source (v3.31.0 hybrid source-hunt)",
+    "document_url": "https://bendeninewindfarm.com.au/",
+    "document_year": 2026,
+    "network_service_provider": "TransGrid",
+    "notes": "Wind 720 MWac. Regime: SSD. Wind Prospect PL. Up to 90 wind turbines + BESS, between Binalong and Bowning ~20 km NW of Yass (Southern Tablelands NSW). Scoping Report was slated for late 2025 but pushed to 2026 pending community/agency feedback. AEMO KCI N00262. NSW SSD process required."
+  },
   "sources": [
     {
       "title": "AEMO Generation Information Jan 2026",

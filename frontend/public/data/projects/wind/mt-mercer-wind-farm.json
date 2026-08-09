@@ -75,6 +75,18 @@
   "scheme_contracts": [],
   "cost_sources": [],
   "stakeholder_issues": [],
+  "eis_specs": {
+    "document_title": "Mt Mercer Wind Farm \u2014 MP-permit source (v3.31.0 wind tranche 2)",
+    "document_url": "https://mtmercerwindfarm.com.au/about",
+    "document_year": 2007,
+    "turbine_model": "REpower (Senvion) MM92 2.05 MW",
+    "turbine_count": 64,
+    "hub_height_m": 80.0,
+    "rotor_diameter_m": 92.0,
+    "network_service_provider": "AusNet Services",
+    "connection_substation_name": "Elaine 220 kV terminal station",
+    "notes": "Regime: MP-permit. Planning permit from Vic Planning Minister Apr 2007. Developed by WestWind Energy; sold to Meridian Energy 2009. Construction started Dec 2010; commercial operation Sep 2014. 131 MW; located in Golden Plains Shire near Ballarat."
+  },
   "sources": [
     {
       "title": "AEMO Generation Information Jan 2026",

@@ -145,6 +145,18 @@
     "Stage 2 and Stage 3 (solar) extensions have been in development for over five years without firm financial close, partly due to grid hosting capacity limits on the local 132 kV network pending TransGrid New England REZ network upgrades.",
     "Offtake terms not publicly disclosed \u2014 project went to FID on Goldwind / CECEP balance-sheet support; the specific PPA counterparty and strike are not in the public domain. Earlier AURES note that incorrectly cited an ACT Government PPA (which was awarded to Sapphire Wind Farm, not White Rock) has been removed. The earlier note also incorrectly conflated White Rock's MLF basin with Sapphire's \u2014 corrected: White Rock is on the local 132 kV network; Sapphire is on 330 kV via its own substation."
   ],
+  "eis_specs": {
+    "document_title": "White Rock Wind Farm Stage 1 \u2014 other source (v3.31.0 wind tranche 2)",
+    "document_url": "https://www.planningportal.nsw.gov.au/major-projects/projects/white-rock-wind-farm",
+    "document_year": 2012,
+    "turbine_model": "Goldwind GW121-2.5 MW PMDD",
+    "turbine_count": 70,
+    "hub_height_m": 90.0,
+    "rotor_diameter_m": 121.0,
+    "network_service_provider": "TransGrid (Essential Energy DNSP interface)",
+    "connection_substation_name": "Sapphire 132 kV substation area (Glen Innes-Inverell 132 kV)",
+    "notes": "Regime: other. Approved Jul 2012 under repealed Part 3A EPA Act (MP10_0160). Six modifications; Stage 2 approved by IPC Dec 2019 to increase to 400 MW. 75% CECEP / 25% Goldwind Australia. Commissioned 2018."
+  },
   "sources": [
     {
       "title": "AEMO Generation Information Jan 2026",

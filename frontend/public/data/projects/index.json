@@ -147,7 +147,8 @@
     "data_confidence": "good",
     "confidence_score": "65",
     "notable": "ACT Govt 20yr PPA. Infigen developed, now Iberdrola Australia.",
-    "first_seen": "2016-08-18"
+    "first_seen": "2016-08-18",
+    "has_eis_data": true
   },
   {
     "id": "ardandra-solar-farm-and-bess",
@@ -444,7 +445,8 @@
     "data_confidence": "good",
     "confidence_score": "55",
     "notable": "107 MW, 52 Senvion MM92-2050 turbines in South Gippsland, VIC. Developed by Mitsui & Co; acquired by Infrastructure Capital Group (ICG) in 2017. COD May 2015. One of Victoria's southernmost large wind farms.",
-    "first_seen": "2015-02-23"
+    "first_seen": "2015-02-23",
+    "has_eis_data": true
   },
   {
     "id": "baldon-wind-farm",
@@ -540,7 +542,8 @@
     "data_confidence": "good",
     "confidence_score": "59",
     "notable": "30x GE Cypress 5.3-158 turbines. Snowy Hydro 100MW offtake for combined Bango project.",
-    "first_seen": "2021-01-13"
+    "first_seen": "2021-01-13",
+    "has_eis_data": true
   },
   {
     "id": "bango-999-wind-farm",
@@ -957,6 +960,7 @@
     "first_seen": "2026-03-12",
     "connection_nsp": "TransGrid",
     "aemo_kci_id": "N00262",
+    "has_eis_data": true,
     "has_scheme_contract": true
   },
   {
@@ -1228,7 +1232,8 @@
     "confidence_score": "38",
     "first_seen": "2026-03-12",
     "connection_nsp": "TransGrid",
-    "aemo_kci_id": "N00044"
+    "aemo_kci_id": "N00044",
+    "has_eis_data": true
   },
   {
     "id": "blowering",
@@ -1351,7 +1356,8 @@
     "confidence_score": "57",
     "development_stage": "epbc_approved",
     "notable": "113 MW, 67 GE turbines (58x 1.7 MW + 9x 1.62 MW) near Nimmitabel, NSW Snowy Mountains. CWP Renewables / Asia Pacific Renewables. 15-year PPA with EnergyAustralia. Downer EDI as EPC. COD November 2014.",
-    "first_seen": "2009"
+    "first_seen": "2009",
+    "has_eis_data": true
   },
   {
     "id": "bodangora-wind-farm",
@@ -1366,7 +1372,8 @@
     "data_confidence": "medium",
     "confidence_score": "49",
     "notable": "113 MW, 33 GE 3.43-130 turbines, 15 km east of Wellington in central NSW. Developed by Iberdrola Australia (formerly Infigen Energy). 60% output PPA with EnergyAustralia through 2030. COD February 2019.",
-    "first_seen": "2018-08-07"
+    "first_seen": "2018-08-07",
+    "has_eis_data": true
   },
   {
     "id": "bogandilla-wind-farm",
@@ -1487,6 +1494,7 @@
     "first_seen": "2026-03-12",
     "connection_nsp": "TransGrid",
     "aemo_kci_id": "N00052",
+    "has_eis_data": true,
     "has_scheme_contract": true
   },
   {
@@ -2036,6 +2044,7 @@
     "development_stage": "planning_submitted",
     "connection_nsp": "ElectraNet",
     "aemo_kci_id": "S00067",
+    "has_eis_data": true,
     "has_scheme_contract": true
   },
   {
@@ -2130,7 +2139,8 @@
     "confidence_score": "56",
     "development_stage": "epbc_submitted",
     "notable": "280 MW solar farm near Port Pirie, SA. Contributes to South Australia's nation-leading renewable generation mix.",
-    "first_seen": "2023"
+    "first_seen": "2023",
+    "has_eis_data": true
   },
   {
     "id": "bunkers-hill-pumped-hydro",
@@ -2562,7 +2572,8 @@
     "data_confidence": "good",
     "confidence_score": "52",
     "notable": "141 MW, 67 Suzlon S88 turbines east of Lake George, NSW. Built 2009 by Suzlon for Infigen Energy. One of the first large-scale wind farms in the ACT/NSW Capital Region. Now operated by Iberdrola Australia (2020 Infigen acquisition).",
-    "first_seen": "2009-07-04"
+    "first_seen": "2009-07-04",
+    "has_eis_data": true
   },
   {
     "id": "capricorn-bess",
@@ -2711,7 +2722,8 @@
     "development_stage": "planning_submitted",
     "first_seen": "2026-03-12",
     "connection_nsp": "Powerlink",
-    "aemo_kci_id": "Q00250"
+    "aemo_kci_id": "Q00250",
+    "has_eis_data": true
   },
   {
     "id": "cattle-hill-wind-farm",
@@ -3577,7 +3589,8 @@
     "development_stage": "planning_submitted",
     "first_seen": "2026-03-12",
     "connection_nsp": "Powerlink",
-    "aemo_kci_id": "Q00229"
+    "aemo_kci_id": "Q00229",
+    "has_eis_data": true
   },
   {
     "id": "crudine-ridge-wind-farm",
@@ -3593,7 +3606,8 @@
     "confidence_score": "70",
     "development_stage": "epbc_approved",
     "notable": "37x Goldwind GW140-3.57S. CWP Renewables/Squadron Energy. COD 2021.",
-    "first_seen": "2011"
+    "first_seen": "2011",
+    "has_eis_data": true
   },
   {
     "id": "culcairn-bess",
@@ -3887,7 +3901,8 @@
     "data_confidence": "medium",
     "confidence_score": "28",
     "development_stage": "planning_submitted",
-    "first_seen": "2025"
+    "first_seen": "2025",
+    "has_eis_data": true
   },
   {
     "id": "dederang-bess",
@@ -4088,6 +4103,7 @@
     "first_seen": "2023",
     "connection_nsp": "TransGrid",
     "aemo_kci_id": "N00241",
+    "has_eis_data": true,
     "has_scheme_contract": true
   },
   {
@@ -4704,7 +4720,8 @@
     "development_stage": "planning_submitted",
     "first_seen": "2026-03-12",
     "connection_nsp": "Powerlink",
-    "aemo_kci_id": "Q00272"
+    "aemo_kci_id": "Q00272",
+    "has_eis_data": true
   },
   {
     "id": "finley-solar-farm",
@@ -4763,6 +4780,7 @@
     "confidence_score": "62",
     "notable": "38x GE 3.8-137 turbines. Iberdrola Australia developed. Located near Orange, NSW.",
     "first_seen": "2023-09-19",
+    "has_eis_data": true,
     "has_scheme_contract": true
   },
   {
@@ -4880,7 +4898,8 @@
     "data_confidence": "medium",
     "confidence_score": "48",
     "notable": "80 MW solar + BESS near Sale, VIC. Hybrid project in the Gippsland region.",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "has_eis_data": true
   },
   {
     "id": "giddi-bess-trafalgar-east-bess-stage-1",
@@ -5044,7 +5063,8 @@
     "data_confidence": "low",
     "confidence_score": "15",
     "development_stage": "planning_submitted",
-    "zombie_flag": "zombie_minimal"
+    "zombie_flag": "zombie_minimal",
+    "has_eis_data": true
   },
   {
     "id": "george-town-bess-kci",
@@ -5357,7 +5377,8 @@
     "development_stage": "planning_submitted",
     "zombie_flag": "zombie_minimal",
     "connection_nsp": "Powerlink",
-    "aemo_kci_id": "Q00304"
+    "aemo_kci_id": "Q00304",
+    "has_eis_data": true
   },
   {
     "id": "globe-derby-bess",
@@ -5692,7 +5713,8 @@
     "data_confidence": "good",
     "confidence_score": "62",
     "notable": "38x GE Cypress 5.5-158. PPAs: ACT Govt 100MW (14yr) + Flow Power 40MW (10yr). Inaugurated 2024, Neoen sold to Brookfield.",
-    "first_seen": "2024-04-04"
+    "first_seen": "2024-04-04",
+    "has_eis_data": true
   },
   {
     "id": "goyder-south-wind-farm-1b",
@@ -5708,7 +5730,8 @@
     "data_confidence": "good",
     "confidence_score": "62",
     "notable": "37x GE Cypress 5.5-158. PPAs: BHP 70MW baseload agreement. Part of 412MW Goyder South complex.",
-    "first_seen": "2024-04-04"
+    "first_seen": "2024-04-04",
+    "has_eis_data": true
   },
   {
     "id": "grahamvale-bess-kci",
@@ -5751,7 +5774,8 @@
     "data_confidence": "medium",
     "confidence_score": "49",
     "notable": "111 MW wind farm on Tasmania's rugged west coast. 31 Vestas V117-3.6 MW turbines. Tasmania's second-largest wind farm. Developed by Palisade Investment Partners.",
-    "first_seen": "2020-01-27"
+    "first_seen": "2020-01-27",
+    "has_eis_data": true
   },
   {
     "id": "great-eastern-offshore-wind-kci",
@@ -5941,7 +5965,8 @@
     "confidence_score": "67",
     "development_stage": "epbc_approved",
     "notable": "73 Goldwind turbines (56x GW100/2.5MW + 17x GW82/1.5MW). EnergyAustralia PPA. Goldwinds largest overseas project at time.",
-    "first_seen": "2008"
+    "first_seen": "2008",
+    "has_eis_data": true
   },
   {
     "id": "gullen-range-wind-farm-2",
@@ -5956,7 +5981,8 @@
     "data_confidence": "medium",
     "confidence_score": "49",
     "notable": "111 MW Stage 2 extension of Gullen Range Wind Farm in NSW Southern Tablelands. Developed by BJCE Australia (Beijing Jingneng Clean Energy). GE turbines.",
-    "first_seen": "2020-06-19"
+    "first_seen": "2020-06-19",
+    "has_eis_data": true
   },
   {
     "id": "gundary-solar-farm-and-bess",
@@ -6118,7 +6144,8 @@
     "data_confidence": "medium",
     "confidence_score": "49",
     "notable": "132 MW \u2014 Stage 4 (North Brown Hill) of the Hallett Wind Farm complex, SA. Part of AGL's 351 MW multi-site Hallett development ~180 km north of Adelaide.",
-    "first_seen": "2010-08-14"
+    "first_seen": "2010-08-14",
+    "has_eis_data": true
   },
   {
     "id": "hallett-5-the-bluff-wf",
@@ -6164,7 +6191,8 @@
     "data_confidence": "medium",
     "confidence_score": "49",
     "notable": "133 MW (63 turbines) \u2014 Stage 1 of the multi-stage Hallett Wind Farm complex in SA's Mid North. Originally developed by AGL Energy. Now owned by Palisade Investment Partners.",
-    "first_seen": "2007-12-18"
+    "first_seen": "2007-12-18",
+    "has_eis_data": true
   },
   {
     "id": "hallett-stage-2-hallett-hill",
@@ -6366,7 +6394,8 @@
     "development_stage": "planning_submitted",
     "first_seen": "2026-03-12",
     "connection_nsp": "TransGrid",
-    "aemo_kci_id": "N00237"
+    "aemo_kci_id": "N00237",
+    "has_eis_data": true
   },
   {
     "id": "hargraves-energy-project-wind-solar-and-bess",
@@ -6380,6 +6409,7 @@
     "data_confidence": "low",
     "confidence_score": "20",
     "development_stage": "planning_submitted",
+    "has_eis_data": true,
     "has_scheme_contract": true
   },
   {
@@ -6395,7 +6425,8 @@
     "development_stage": "planning_submitted",
     "zombie_flag": "zombie_minimal",
     "connection_nsp": "Powerlink",
-    "aemo_kci_id": "Q00026"
+    "aemo_kci_id": "Q00026",
+    "has_eis_data": true
   },
   {
     "id": "harrami-wind-farm",
@@ -6657,6 +6688,7 @@
     "first_seen": "2022",
     "connection_nsp": "VicGrid",
     "aemo_kci_id": "V00128",
+    "has_eis_data": true,
     "has_scheme_contract": true
   },
   {
@@ -6863,7 +6895,8 @@
     "confidence_score": "60",
     "development_stage": "epbc_approved",
     "notable": "~102 MW Stage 1 of Neoen's 315 MW Hornsdale Wind Farm, co-located with the Hornsdale Power Reserve (Tesla Big Battery). Part of the iconic wind-plus-storage complex near Jamestown, SA.",
-    "first_seen": "2012"
+    "first_seen": "2012",
+    "has_eis_data": true
   },
   {
     "id": "hornsdale-wind-farm-stage-2",
@@ -6878,7 +6911,8 @@
     "data_confidence": "medium",
     "confidence_score": "49",
     "notable": "~112 MW Stage 2 of Neoen's 315 MW Hornsdale Wind Farm. Central to Neoen's Australian operations near Jamestown, SA.",
-    "first_seen": "2017-02-21"
+    "first_seen": "2017-02-21",
+    "has_eis_data": true
   },
   {
     "id": "hornsdale-wind-farm-stage-3",
@@ -6893,7 +6927,8 @@
     "data_confidence": "medium",
     "confidence_score": "49",
     "notable": "100 MW \u2014 third and final stage of Neoen's 315 MW Hornsdale Wind Farm. Co-located with the Hornsdale Power Reserve (world's first large-scale grid battery at commissioning). Central to Neoen's Australian operations near Jamestown, SA.",
-    "first_seen": "2017-08-07"
+    "first_seen": "2017-08-07",
+    "has_eis_data": true
   },
   {
     "id": "horsham-bess",
@@ -7248,6 +7283,7 @@
     "confidence_score": "28",
     "development_stage": "planning_submitted",
     "first_seen": "2026-03-12",
+    "has_eis_data": true,
     "has_scheme_contract": true
   },
   {
@@ -7931,7 +7967,8 @@
     "data_confidence": "good",
     "confidence_score": "59",
     "notable": "53x Vestas V90-3.0MW. Iberdrola Australia (prev Infigen). Located near Millicent, SA.",
-    "first_seen": "2007-05-31"
+    "first_seen": "2007-05-31",
+    "has_eis_data": true
   },
   {
     "id": "lake-bonney-3-wind-farm",
@@ -8005,6 +8042,7 @@
     "first_seen": "2024",
     "connection_nsp": "TransGrid",
     "aemo_kci_id": "N00175",
+    "has_eis_data": true,
     "has_scheme_contract": true
   },
   {
@@ -8237,7 +8275,8 @@
     "notable": "35x Senvion 3.6M140 EBC. Snowy Hydro offtake. Owned by RATCH-Australia (acquired Dec 2022 from Nexif).",
     "first_seen": "2019-04-30",
     "connection_nsp": "ElectraNet",
-    "aemo_kci_id": "S00005"
+    "aemo_kci_id": "S00005",
+    "has_eis_data": true
   },
   {
     "id": "lincoln-gap-wind-farm-stage-3",
@@ -8548,7 +8587,8 @@
     "development_stage": "planning_submitted",
     "first_seen": "2026-03-12",
     "connection_nsp": "Powerlink",
-    "aemo_kci_id": "Q00217"
+    "aemo_kci_id": "Q00217",
+    "has_eis_data": true
   },
   {
     "id": "magpie-hill-solar-farm",
@@ -9078,7 +9118,8 @@
     "development_stage": "planning_submitted",
     "first_seen": "2026-03-12",
     "connection_nsp": "TransGrid",
-    "aemo_kci_id": "N00072"
+    "aemo_kci_id": "N00072",
+    "has_eis_data": true
   },
   {
     "id": "metz-solar-farm",
@@ -9109,7 +9150,8 @@
     "development_stage": "planning_submitted",
     "first_seen": "2025",
     "connection_nsp": "Powerlink",
-    "aemo_kci_id": "Q00237"
+    "aemo_kci_id": "Q00237",
+    "has_eis_data": true
   },
   {
     "id": "middle-hut-bess-kci",
@@ -9504,7 +9546,8 @@
     "data_confidence": "good",
     "confidence_score": "65",
     "notable": "107x Goldwind GW136/3.0MW across North (50) and South (57) stages. 312MW total, developed by Goldwind Australia.",
-    "first_seen": "2020-11-18"
+    "first_seen": "2020-11-18",
+    "has_eis_data": true
   },
   {
     "id": "moorebank-logistics-park-project",
@@ -9731,7 +9774,8 @@
     "data_confidence": "good",
     "confidence_score": "65",
     "notable": "ACCIONA. Nordex N149/5.X turbines. Zen Energy PPA. Fully operational July 2024.",
-    "first_seen": "2022-10-25"
+    "first_seen": "2022-10-25",
+    "has_eis_data": true
   },
   {
     "id": "morwell-bess",
@@ -9931,7 +9975,8 @@
     "data_confidence": "medium",
     "confidence_score": "49",
     "notable": "132 MW wind farm in western Victoria near Colac. Developed by ACCIONA Energ\u00eda. One of the larger wind farms in the Western Victoria REZ.",
-    "first_seen": "2018-06-21"
+    "first_seen": "2018-06-21",
+    "has_eis_data": true
   },
   {
     "id": "mt-mercer-bess",
@@ -9961,7 +10006,8 @@
     "data_confidence": "good",
     "confidence_score": "52",
     "notable": "131 MW, 64 Senvion MM92 turbines, ~30 km south of Ballarat, VIC. Developed by Meridian Energy (NZ) \u2014 Meridian's first Australian wind farm. A$260M. COD May 2014. Transferred to Tilt Renewables on demerger from Trustpower in 2016.",
-    "first_seen": "2013-11-25"
+    "first_seen": "2013-11-25",
+    "has_eis_data": true
   },
   {
     "id": "mt-millar-wind-farm",
@@ -10082,7 +10128,8 @@
     "data_confidence": "good",
     "confidence_score": "59",
     "notable": "61x Senvion 3.7MW (3XM class). Telstra PPA + ANZ/Coca-Cola Amatil/UniMelb consortium + Monash Uni. Bearing failure issues.",
-    "first_seen": "2019-04-08"
+    "first_seen": "2019-04-08",
+    "has_eis_data": true
   },
   {
     "id": "murra-warra-wind-farm-stage-2",
@@ -10097,7 +10144,8 @@
     "data_confidence": "good",
     "confidence_score": "59",
     "notable": "38x GE Cypress 5.5-158. Telstra corporate PPA + Snowy Hydro offtake. Senvion bearing failures required staged maintenance (2024).",
-    "first_seen": "2019-04-08"
+    "first_seen": "2019-04-08",
+    "has_eis_data": true
   },
   {
     "id": "murray-1",
@@ -10354,6 +10402,7 @@
     "first_seen": "2019-01-01",
     "connection_nsp": "TransGrid",
     "aemo_kci_id": "N00030",
+    "has_eis_data": true,
     "has_scheme_contract": true
   },
   {
@@ -10605,6 +10654,7 @@
     "first_seen": "2026-03-12",
     "connection_nsp": "VicGrid",
     "aemo_kci_id": "V00164",
+    "has_eis_data": true,
     "has_scheme_contract": true
   },
   {
@@ -10958,6 +11008,7 @@
     "zombie_flag": "zombie_minimal",
     "connection_nsp": "ElectraNet",
     "aemo_kci_id": "S00035",
+    "has_eis_data": true,
     "has_scheme_contract": true
   },
   {
@@ -11386,7 +11437,8 @@
     "data_confidence": "medium",
     "confidence_score": "46",
     "notable": "~195 MW Portland Wind Energy Project across four stages (Cape Bridgewater, Cape Nelson North, Cape Nelson South, Cape Sir William Grant) by Pacific Hydro. One of Australia's oldest continuously developed wind projects, with stages from 2001 to 2015.",
-    "first_seen": "2009-07-09"
+    "first_seen": "2009-07-09",
+    "has_eis_data": true
   },
   {
     "id": "portland-wind-farm-kci",
@@ -11643,7 +11695,8 @@
     "confidence_score": "56",
     "development_stage": "epbc_submitted",
     "notable": "80 MW solar hybrid near Quorn, SA. Located in the northern Flinders Ranges.",
-    "first_seen": "2022"
+    "first_seen": "2022",
+    "has_eis_data": true
   },
   {
     "id": "raglan-bess",
@@ -12119,7 +12172,8 @@
     "data_confidence": "medium",
     "confidence_score": "28",
     "development_stage": "planning_submitted",
-    "first_seen": "2026-03-12"
+    "first_seen": "2026-03-12",
+    "has_eis_data": true
   },
   {
     "id": "rutherglen-battery-kci",
@@ -13036,7 +13090,8 @@
     "current_developer": "Sturt Solar PTY LTD",
     "data_confidence": "low",
     "confidence_score": "20",
-    "development_stage": "planning_submitted"
+    "development_stage": "planning_submitted",
+    "has_eis_data": true
   },
   {
     "id": "summerfield-bess",
@@ -13591,7 +13646,8 @@
     "data_confidence": "good",
     "confidence_score": "55",
     "notable": "107 MW, 51 Vestas V90-2.0 MW turbines near Taralga in NSW Southern Tablelands. Developed by CBD Energy, now owned by Energy Pacific (Marubeni subsidiary).",
-    "first_seen": "2014-12-22"
+    "first_seen": "2014-12-22",
+    "has_eis_data": true
   },
   {
     "id": "tarong-bess-stanwell",
@@ -13869,6 +13925,7 @@
     "first_seen": "2023",
     "connection_nsp": "TransGrid",
     "aemo_kci_id": "N00145",
+    "has_eis_data": true,
     "has_scheme_contract": true
   },
   {
@@ -15018,7 +15075,8 @@
     "notable": "128x Acciona AW-1500/77 (1.5MW). Zen Energy 10yr PPA for 70% of output. Was Australias largest at 2009 commissioning.",
     "first_seen": "2009-06-30",
     "connection_nsp": "VicGrid",
-    "aemo_kci_id": "V00156"
+    "aemo_kci_id": "V00156",
+    "has_eis_data": true
   },
   {
     "id": "waubra-bess-kci",
@@ -15268,7 +15326,8 @@
     "notable": "70x Goldwind GW121/2.5MW PMDD. CECEP 75%, Goldwind 25%. Goldwind EPC, Fulton Hogan BOP.",
     "first_seen": "2017-07-07",
     "connection_nsp": "TransGrid",
-    "aemo_kci_id": "N00011"
+    "aemo_kci_id": "N00011",
+    "has_eis_data": true
   },
   {
     "id": "white-rock-wind-farm-stage-2",
@@ -15341,6 +15400,7 @@
     "confidence_score": "28",
     "development_stage": "planning_submitted",
     "first_seen": "2026-03-12",
+    "has_eis_data": true,
     "has_scheme_contract": true
   },
   {
@@ -15433,7 +15493,8 @@
     "confidence_score": "60",
     "development_stage": "epbc_approved",
     "notable": "120 MW, 32 Siemens Gamesa SG 3.4-132 turbines in SA's Mid North near Hallett. Built by ENGIE. 25-year Siemens Gamesa service agreement. COD December 2019.",
-    "first_seen": "2011"
+    "first_seen": "2011",
+    "has_eis_data": true
   },
   {
     "id": "wimmera-plains-bess",
@@ -15747,7 +15808,8 @@
     "confidence_score": "20",
     "development_stage": "planning_submitted",
     "connection_nsp": "Powerlink",
-    "aemo_kci_id": "Q00130"
+    "aemo_kci_id": "Q00130",
+    "has_eis_data": true
   },
   {
     "id": "woodstock-renewable-energy-hub-solar",
@@ -15788,7 +15850,8 @@
     "data_confidence": "medium",
     "confidence_score": "46",
     "notable": "138 MW across Studland Bay (75 MW) and Bluff Point (65 MW) wind farms at Woolnorth in NW Tasmania. Among the earliest large-scale wind farms in Tasmania, on one of the world's windiest coastlines. Operated by Hydro Tasmania.",
-    "first_seen": "2001-12-31"
+    "first_seen": "2001-12-31",
+    "has_eis_data": true
   },
   {
     "id": "woolooga-bess",

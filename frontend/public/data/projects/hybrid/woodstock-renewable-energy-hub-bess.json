@@ -40,6 +40,13 @@
   "scheme_contracts": [],
   "cost_sources": [],
   "stakeholder_issues": [],
+  "eis_specs": {
+    "document_title": "Woodstock Renewable Energy Hub Bess \u2014 EPBC source (v3.31.0 hybrid source-hunt)",
+    "document_url": "https://private-energypartnerscommunity.com.au/",
+    "document_year": 2026,
+    "network_service_provider": "Powerlink",
+    "notes": "Solar 350 MWac. Regime: EPBC. Private Energy Partners (Quinbrook affiliate). ~350 MW solar + BESS + ~10 km private tx line at Lansdown Eco-Industrial Precinct (LEIP), ~40 km south of Townsville. Co-located with Supernode North BESS, Biochar plant and metallurgical silicon production. Target completion Dec 2029. AEMO KCI Q00130."
+  },
   "sources": [
     {
       "title": "AEMO Generation Information",

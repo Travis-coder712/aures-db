@@ -76,6 +76,18 @@
   "scheme_contracts": [],
   "cost_sources": [],
   "stakeholder_issues": [],
+  "eis_specs": {
+    "document_title": "Waubra \u2014 MP-permit source (v3.31.0 wind tranche 2)",
+    "document_url": "https://en.wikipedia.org/wiki/Waubra_Wind_Farm",
+    "document_year": 2005,
+    "turbine_model": "Acciona AW77/1500",
+    "turbine_count": 128,
+    "hub_height_m": 80.0,
+    "rotor_diameter_m": 77.0,
+    "network_service_provider": "AusNet Services",
+    "connection_substation_name": "Waubra terminal station connecting into Ballarat area 220 kV",
+    "notes": "Regime: MP-permit. Vic Planning Minister approved permits PL-SP/05/0152 and PL-SP/05/0150 in May 2005. Operational Jul 2009. Owned/operated by Acciona Energia (Pyrenees Wind Energy Developments)."
+  },
   "sources": [
     {
       "title": "AEMO Generation Information Jan 2026",

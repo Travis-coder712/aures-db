@@ -52,6 +52,13 @@
   "scheme_contracts": [],
   "cost_sources": [],
   "stakeholder_issues": [],
+  "eis_specs": {
+    "document_title": "Quorn Park Solar Hybrid \u2014 SSD source (v3.31.0 hybrid source-hunt)",
+    "document_url": "https://www.planningportal.nsw.gov.au/major-projects/project/9711",
+    "document_year": 2020,
+    "network_service_provider": "TransGrid",
+    "notes": "Solar 80 MWac. BESS 20 MW / 40 MWh (2.0h duration). Regime: SSD. SSD-9097 near Parkes NSW; 470 ha in the Central-West Orana REZ. Potentia Energy (formerly Enel Green Power), $192 M, 80 MW PV + 20 MW/40 MWh co-located BESS behind single POC. Panels installed by Beon Energy Solutions; will be first solar-battery hybrid on NEM main grid (energised late 2025, completion late 2026)."
+  },
   "sources": [
     {
       "title": "AEMO Generation Information Jan 2026",

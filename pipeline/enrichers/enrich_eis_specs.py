@@ -4153,6 +4153,1284 @@ EIS_DATA = [
             ),
         },
     },
+
+    # ══════════════════════════════════════════════════════════════════════════
+    # HYBRID (solar + BESS / wind + BESS) — v3.31.0 source-hunt tranche.
+    # 27/30 credible sources returned by parallel research agent. 3 unfound:
+    # Glenroy Hybrid Facility, Sturt Solar, Farmers Creek Energy Park — all
+    # early-stage AEMO KCI-only registrations with no public planning docs.
+    # Hybrid coverage: 0/121 → 27/121.
+    # ══════════════════════════════════════════════════════════════════════════
+
+    {
+        'project_id': 'bendenine',
+        'tech': 'hybrid',
+        'eis_specs': {
+            'document_title': 'Bendenine — SSD source (v3.31.0 hybrid source-hunt)',
+            'document_url': 'https://bendeninewindfarm.com.au/',
+            'document_year': 2026,
+            'network_service_provider': 'TransGrid',
+            'notes': (
+                'Wind 720 MWac. Regime: SSD. Wind Prospect PL. Up to 90 wind turbines + BESS, '
+                'between Binalong and Bowning ~20 km NW of Yass (Southern Tablelands NSW). '
+                'Scoping Report was slated for late 2025 but pushed to 2026 pending '
+                'community/agency feedback. AEMO KCI N00262. NSW SSD process required.'
+            ),
+        },
+    },
+
+    {
+        'project_id': 'blind-creek-solar-farm-and-battery-energy-storage-system',
+        'tech': 'hybrid',
+        'eis_specs': {
+            'document_title': (
+                'Blind Creek Solar Farm And Battery Energy Storage System — SSD source (v3.31.0 '
+                'hybrid source-hunt)'
+            ),
+            'document_url': 'https://www.planningportal.nsw.gov.au/major-projects/projects/blind-creek-solar-farm',
+            'document_year': 2023,
+            'network_service_provider': 'TransGrid',
+            'notes': (
+                'Solar 350 MWac. BESS 300 MW / 600 MWh (2.0h duration). Regime: SSD. '
+                'SSD-13166280 at 114 Currandooley Rd, Bungendore (~8 km NE of Bungendore, ~32 '
+                'km NE of Canberra). 350 MW solar + 300 MW/600 MWh BESS on 1,026 ha site (682.5 '
+                'ha footprint). Construction ~12-18 months. Owned by Ms BCSF Holdings/Blind '
+                'Creek Solar Farm Trust; assumed CIS-linked.'
+            ),
+        },
+    },
+
+    {
+        'project_id': 'bookham-wf-and-bess',
+        'tech': 'hybrid',
+        'eis_specs': {
+            'document_title': 'Bookham Wf And Bess — SSD source (v3.31.0 hybrid source-hunt)',
+            'document_url': 'https://www.planningportal.nsw.gov.au/major-projects/projects/bookham-wind-farm',
+            'document_year': 2025,
+            'network_service_provider': 'TransGrid',
+            'notes': (
+                'Wind 594 MWac. BESS 250 MW / 1000 MWh (4.0h duration). Regime: SSD. Squadron '
+                'Energy (Andrew Forrest). SSD-79885459 / EPBC 2025/10134 (controlled action). '
+                '~99 turbines, 594 MW wind + 250 MW/1000 MWh 4-hour BESS in Bookham, Yass '
+                'Valley Shire. Currently in Prepare EIS stage. Strategically near HumeLink '
+                'route. First Squadron project to bundle battery with turbines.'
+            ),
+        },
+    },
+
+    {
+        'project_id': 'bundey-bess-and-solar-project',
+        'tech': 'hybrid',
+        'eis_specs': {
+            'document_title': 'Bundey Bess And Solar Project — other source (v3.31.0 hybrid source-hunt)',
+            'document_url': 'https://bundeybessandsolar.com.au/',
+            'document_year': 2024,
+            'connection_substation_name': 'Bundey 330/275 kV substation',
+            'network_service_provider': 'ElectraNet',
+            'notes': (
+                'Solar 900 MWac. BESS 1200 MW / 3900 MWh (3.25h duration). Regime: other. '
+                'Genaspi Energy Group. 900 MW solar + 1200 MW/3900 MWh BESS (Stage 1: 300 '
+                'MW/1200 MWh). ~12 km NE of Robertstown SA. SA Crown Sponsorship exemption '
+                'gazetted 4 April 2024 (planning exemption for BESS). Selected for CIS Tender 4 '
+                '(Oct 2025). Connection via ElectraNet PEC (Project EnergyConnect) at Bundey '
+                'substation. Construction Q4 2026.'
+            ),
+        },
+    },
+
+    {
+        'project_id': 'bungama-solar',
+        'tech': 'hybrid',
+        'eis_specs': {
+            'document_title': 'Bungama Solar — DAC source (v3.31.0 hybrid source-hunt)',
+            'document_url': 'https://www.bungamasolar.com.au/',
+            'document_year': 2019,
+            'connection_substation_name': 'Bungama 275 kV substation',
+            'network_service_provider': 'ElectraNet',
+            'notes': (
+                'Solar 280 MWac. BESS 250 MW / 700 MWh (2.8h duration). Regime: DAC. Approved '
+                'SA project ~6 km east of Port Pirie on 530 ha. Owned by EPS/Revera Energy '
+                '(part of Bungama Battery Pty Ltd). Original approval mid-2019 (280 MW solar + '
+                '140 MW BESS); staged BESS scaled to 250 MW/700 MWh with Stage 1 (150 MW/300 '
+                'MWh) already commissioned by Enerven 2026. Solar farm is Stage 3 (still to be '
+                'built).'
+            ),
+        },
+    },
+
+    {
+        'project_id': 'cattle-creek-wind-farm-kci',
+        'tech': 'hybrid',
+        'eis_specs': {
+            'document_title': 'Cattle Creek Wind Farm Kci — EPBC source (v3.31.0 hybrid source-hunt)',
+            'document_url': 'https://epbcpublicportal.environment.gov.au/all-referrals/project-referral-summary/?id=065b7cc1-6308-f011-bae3-000d3a6ad651',
+            'document_year': 2025,
+            'network_service_provider': 'Powerlink',
+            'notes': (
+                'Wind 1000 MWac. Regime: EPBC. RWE Renewables Australia. ~140 turbines (tip 270 '
+                'm), ~1000 MW installed capacity next to Montour State Forest, QLD. EPBC '
+                'referral in progress (public comment 7-23 April 2025); state Toowoomba/Western '
+                'Downs assessment pending. Threatened species (squatter pigeon, koalas, greater '
+                'glider, large-eared pied-bat) drive assessment. AEMO KCI Q00250.'
+            ),
+        },
+    },
+
+    {
+        'project_id': 'croydon-hybrid-facility-solar-and-bess',
+        'tech': 'hybrid',
+        'eis_specs': {
+            'document_title': 'Croydon Hybrid Facility Solar And Bess — other source (v3.31.0 hybrid source-hunt)',
+            'document_url': 'https://acenergy.com.au/portfolio/croydon-solar-farm/',
+            'document_year': 2025,
+            'network_service_provider': 'Powerlink',
+            'notes': (
+                'Solar 750 MWac. BESS 500 MW / 2000 MWh (4.0h duration). Regime: other. '
+                'ACEnergy Pty Ltd. Under Development at Lotus Creek in Isaac Region, QLD '
+                '(~1,800 ha). 750 MWdc solar + 500 MW/2,000 MWh BESS. Land acquisition 2025, '
+                'approvals 2025-2026, operational target 2028. Offsets ~940 kt CO2/y. AEMO KCI '
+                'Q00229.'
+            ),
+        },
+    },
+
+    {
+        'project_id': 'deargee-solar-and-bess',
+        'tech': 'hybrid',
+        'eis_specs': {
+            'document_title': 'Deargee Solar And Bess — EPBC source (v3.31.0 hybrid source-hunt)',
+            'document_url': 'https://acenrenewables.com.au/project/deeargee-solar/',
+            'document_year': 2025,
+            'network_service_provider': 'TransGrid',
+            'notes': (
+                'Solar 320 MWac. BESS 700 MW / 2800 MWh (4.0h duration). Regime: EPBC. ACEN '
+                'Australia \'Deeargee Solar\', 12 km SE of Uralla NSW (adjacent to New England '
+                'Solar). 320 MW solar + up to 1,400 MWac 2-hour (or 700 MW/2800 MWh 4-hour) '
+                'BESS on 1,002 ha (buffered 542 ha). Submitted to EPBC Act ~2025; will be '
+                'assessed as NSW SSD. Construction ~24 months, 400 workers.'
+            ),
+        },
+    },
+
+    {
+        'project_id': 'dinawan-energy-hub',
+        'tech': 'hybrid',
+        'eis_specs': {
+            'document_title': 'Dinawan Energy Hub — SSD source (v3.31.0 hybrid source-hunt)',
+            'document_url': 'https://www.planningportal.nsw.gov.au/major-projects/projects/dinawan-wind-farm',
+            'document_year': 2025,
+            'connection_substation_name': 'Dinawan Substation (Project EnergyConnect)',
+            'network_service_provider': 'TransGrid',
+            'notes': (
+                'Wind 707 MWac. Regime: SSD. Spark Renewables (Tenaga Nasional subsidiary). '
+                'Dinawan Wind Farm Stages 1 & 2 (~707 MW, up to 200 turbines) form the wind '
+                'component of the ~2 GW hub; also up to 1.7 M solar modules and BESS. Riverina '
+                'SW REZ; connects at TransGrid\'s Dinawan Substation on PEC. Construction '
+                'targeted Q4 2026.'
+            ),
+        },
+    },
+
+    {
+        'project_id': 'farmers-creek-energy-park',
+        'tech': 'hybrid',
+        'eis_specs': {
+            'document_title': 'Farmers Creek Energy Park —  source (v3.31.0 hybrid source-hunt)',
+            'network_service_provider': 'Powerlink',
+            'notes': (
+                'TE H2 Australia (TotalEnergies hydrogen subsidiary). AEMO KCI Q00272, 500 MW '
+                'class. No public planning-portal or EPBC referral located; likely still in '
+                'pre-lodgement scoping tied to a green H2 offtake. TE H2\'s confirmed Australian '
+                'project is Wak Wak near Darwin - this Queensland site may be a distinct, '
+                'undisclosed hydrogen precinct.'
+            ),
+        },
+    },
+
+    {
+        'project_id': 'fulham-solar-farm-and-bess',
+        'tech': 'hybrid',
+        'eis_specs': {
+            'document_title': 'Fulham Solar Farm And Bess — MP-permit source (v3.31.0 hybrid source-hunt)',
+            'document_url': 'https://www.planning.vic.gov.au/planning-approvals/ministerial-permits-register/ministerial-permits/c9de345d-8f74-4b48-922f-62b4d353066d',
+            'document_year': 2024,
+            'network_service_provider': 'AusNet',
+            'notes': (
+                'Solar 80 MWac. BESS 64 MW / 128 MWh (2.0h duration). Regime: MP-permit. '
+                'Ministerial planning permit PA2101365-4 (updated 4 Dec 2024). 80 MW solar + '
+                '128 MWh BESS on the Hopkins Rd / McLarens Rd site near Fulham, VIC (~200 km '
+                'east of Melbourne). Backed by VRET-2 offtake; construction started April 2025, '
+                'operational 2027. Octopus Investments-owned via Gippsland New Energy.'
+            ),
+        },
+    },
+
+    {
+        'project_id': 'gemfields-integrated-facility-wind-and-solar',
+        'tech': 'hybrid',
+        'eis_specs': {
+            'document_title': 'Gemfields Integrated Facility Wind And Solar — other source (v3.31.0 hybrid source-hunt)',
+            'document_url': 'https://www.energyestate.com/cqp',
+            'document_year': 2023,
+            'network_service_provider': 'Powerlink',
+            'notes': (
+                'Regime: other. Part of Energy Estate/RES Central Queensland Power (CQP) '
+                'portfolio (>3 GW pipeline including Moah Creek and Wooderson). Gemfields '
+                'Integrated Facility (1,450 MW wind+solar, AEMO KCI Q- private) is early '
+                'development; no dedicated planning portal reference located. Powerlink is '
+                'likely NSP.'
+            ),
+        },
+    },
+
+    {
+        'project_id': 'glenroy-hybrid-facility-solar-and-bess',
+        'tech': 'hybrid',
+        'eis_specs': {
+            'document_title': 'Glenroy Hybrid Facility Solar And Bess —  source (v3.31.0 hybrid source-hunt)',
+            'network_service_provider': 'Powerlink',
+            'notes': (
+                'M Renewables Australia Developments Pty Ltd, AEMO KCI Q00304, ~1000 MW. No '
+                'public planning-portal, EPBC referral or developer page located as of search; '
+                'likely very early KCI-only registration.'
+            ),
+        },
+    },
+
+    {
+        'project_id': 'hargraves-bess',
+        'tech': 'hybrid',
+        'eis_specs': {
+            'document_title': 'Hargraves Bess — SSD source (v3.31.0 hybrid source-hunt)',
+            'document_url': 'https://arkenergy.com.au/',
+            'document_year': 2025,
+            'network_service_provider': 'TransGrid',
+            'notes': (
+                'BESS 710 MW. Regime: SSD. Tilt Renewables / DevCo (development hold trust). '
+                'Separate BESS-only project on Central-West Orana REZ Hargraves site, distinct '
+                'from Energy Estate\'s Hargraves Energy Project. AEMO KCI N00237. No dedicated '
+                'planning portal page located; likely still pre-EIS. Ark Energy also announced '
+                'adding 2 GWh to nearby Bowmans Creek wind farm.'
+            ),
+        },
+    },
+
+    {
+        'project_id': 'hargraves-energy-project-wind-solar-and-bess',
+        'tech': 'hybrid',
+        'eis_specs': {
+            'document_title': 'Hargraves Energy Project Wind Solar And Bess — other source (v3.31.0 hybrid source-hunt)',
+            'document_url': 'https://www.hargravesenergy.com/',
+            'document_year': 2024,
+            'network_service_provider': 'TransGrid',
+            'notes': (
+                'Solar 250 MWac. Wind 600 MWac. Regime: other. Energy Estate. 600 MW wind + 250 '
+                'MW solar + BESS totalling ~850-900 MW near Hargraves NSW (Central-West Orana '
+                'REZ). Community Engagement Plan published; not yet lodged as SSD. Separate '
+                'from Tilt/Ark \'Hargraves BESS\' project on adjacent land.'
+            ),
+        },
+    },
+
+    {
+        'project_id': 'harlin-solar-farm',
+        'tech': 'hybrid',
+        'eis_specs': {
+            'document_title': 'Harlin Solar Farm — MCU-DA source (v3.31.0 hybrid source-hunt)',
+            'document_url': 'https://www.newenergydevelopment.com/projects-harlin-solar-farm',
+            'document_year': 2018,
+            'network_service_provider': 'Powerlink',
+            'notes': (
+                'Solar 800 MWac. Regime: MCU-DA. Somerset Regional Council DA approved Nov '
+                '2018; Planning and Environment Court appeal dismissed 18 April 2019. Sunshine '
+                'Energy origin, staged 1,500 MW originally (3 x 500 MW), latest AEMO figure 800 '
+                'MW. 2,055 ha east of Harlin on D\'Aguilar Hwy, ~100 km NW of Brisbane. 500 MWh '
+                'BESS planned for later stage. Long stalled – project effectively '
+                'dormant/scaled back to 800 MW class. AEMO KCI Q00026.'
+            ),
+        },
+    },
+
+    {
+        'project_id': 'hexham',
+        'tech': 'hybrid',
+        'eis_specs': {
+            'document_title': 'Hexham — EES source (v3.31.0 hybrid source-hunt)',
+            'document_url': 'https://www.planning.vic.gov.au/environmental-assessments/browse-projects/hexham-wind-farm',
+            'document_year': 2026,
+            'network_service_provider': 'VicGrid',
+            'notes': (
+                'Wind 921 MWac. Regime: EES. Wind Prospect / Hexham Wind Farm Pty Ltd. EES + '
+                'Planning Permit Application PA2504115 on public exhibition until 11 March 2026 '
+                '(Inquiry & Advisory Committee established). Up to 106 wind turbines + BESS on '
+                '~16,000 ha in Moyne Shire, SW VIC (Eastern Maar country). ~2,559 GWh/y '
+                'estimated output. AEMO KCI V00128.'
+            ),
+        },
+    },
+
+    {
+        'project_id': 'junction-rivers-wind-and-bess',
+        'tech': 'hybrid',
+        'eis_specs': {
+            'document_title': 'Junction Rivers Wind And Bess — SSD source (v3.31.0 hybrid source-hunt)',
+            'document_url': 'https://www.junctionrivers.com/',
+            'document_year': 2023,
+            'network_service_provider': 'TransGrid',
+            'notes': (
+                'Wind 585 MWac. Regime: SSD. Windlab / Junction Rivers Pty Ltd. SSD-30448824. '
+                '~585 MW wind (up to 69 turbines, later scaled to 750 MW indicative) + 800 MWh '
+                'co-located BESS, 15 km south of Balranald NSW in SW REZ. Only granted 262.3 MW '
+                'of SW REZ access rights - grid access is the binding constraint. CIS tender '
+                'round success.'
+            ),
+        },
+    },
+
+    {
+        'project_id': 'lake-victoria-energy-park-kci',
+        'tech': 'hybrid',
+        'eis_specs': {
+            'document_title': 'Lake Victoria Energy Park Kci — SSD source (v3.31.0 hybrid source-hunt)',
+            'document_url': 'https://www.planningportal.nsw.gov.au/major-projects/projects/lake-victoria-wind-farm',
+            'document_year': 2024,
+            'network_service_provider': 'TransGrid',
+            'notes': (
+                'Wind 1000 MWac. Regime: SSD. WestWind Energy, 30 km NW of Wentworth NSW, near '
+                'VIC border. Up to 201 turbines / ~1 GW; plus three BESS totalling 1,500 MWh. '
+                'Crown lands lease signed with Minns govt 2025 to enable project. Est. $3.8 bn '
+                'capex, 3,400 GWh/y annual output. Construction planned 2029-2032. AEMO KCI '
+                'N00175.'
+            ),
+        },
+    },
+
+    {
+        'project_id': 'magnetite-energy-hub',
+        'tech': 'hybrid',
+        'eis_specs': {
+            'document_title': 'Magnetite Energy Hub — EPBC source (v3.31.0 hybrid source-hunt)',
+            'document_url': 'https://private-energypartnerscommunity.com.au/',
+            'document_year': 2025,
+            'connection_substation_name': 'Larcom Creek Substation (275 kV)',
+            'network_service_provider': 'Powerlink',
+            'notes': (
+                'Regime: EPBC. Private Energy Partners (Quinbrook affiliate). Sited near Mount '
+                'Larcom (Gladstone SDA), QLD, ~194.58 ha (131.8 ha disturbance). Connects to '
+                'Powerlink\'s Larcom Creek Substation via 3 x 275 kV lines. Component mix within '
+                'the hub aligns with Supernode-family portfolio (~1 GW class). Assessed under '
+                'EPBC. AEMO KCI Q00217.'
+            ),
+        },
+    },
+
+    {
+        'project_id': 'merriwa-solar-farm-and-bess',
+        'tech': 'hybrid',
+        'eis_specs': {
+            'document_title': 'Merriwa Solar Farm And Bess — SSD source (v3.31.0 hybrid source-hunt)',
+            'document_url': 'https://www.planningportal.nsw.gov.au/major-projects/projects/merriwa-solar-farm',
+            'document_year': 2022,
+            'network_service_provider': 'TransGrid',
+            'notes': (
+                'Solar 550 MWac. BESS 400 MW / 1600 MWh (4.0h duration). Regime: SSD. Merriwa '
+                'Energy Hub, ~8 km from Merriwa in NSW Hunter. Originally Maoneng, later Valent '
+                'Energy Developments (Gaw Capital / BW ESS). 550 MWac solar + 400 MW/1,600 MWh '
+                'BESS on ex-coal-country land. Powers ~140k homes; expected commissioning 2027.'
+            ),
+        },
+    },
+
+    {
+        'project_id': 'middle-creek-renewable-energy-hub-wind',
+        'tech': 'hybrid',
+        'eis_specs': {
+            'document_title': 'Middle Creek Renewable Energy Hub Wind — EPBC source (v3.31.0 hybrid source-hunt)',
+            'document_url': 'https://epbcpublicportal.environment.gov.au/all-referrals/project-referral-summary/?id=middle-creek-energy-hub',
+            'document_year': 2024,
+            'network_service_provider': 'Powerlink',
+            'notes': (
+                'Wind 1317 MWac. BESS 200 MW. Regime: EPBC. Cubico Sustainable Investments '
+                'Australia. EPBC referral 2024/9999. Up to 183 turbines / 1,317 MW wind + solar '
+                '+ 200 MW BESS on 28,418 ha, 10 km east of Wandoan (Western Downs REZ). Total '
+                'hub ~1.317-1.45 GW. AEMO KCI Q00237. Sister project to Bogunda Energy Hub.'
+            ),
+        },
+    },
+
+    {
+        'project_id': 'new-england-solar-farm',
+        'tech': 'hybrid',
+        'eis_specs': {
+            'document_title': 'New England Solar Farm — SSD source (v3.31.0 hybrid source-hunt)',
+            'document_url': 'https://www.planningportal.nsw.gov.au/major-projects/projects/new-england-solar-farm',
+            'document_year': 2019,
+            'connection_substation_name': 'Uralla 330 kV substation',
+            'network_service_provider': 'TransGrid',
+            'notes': (
+                'Solar 720 MWac. BESS 50 MW / 50 MWh (1.0h duration). Regime: SSD. ACEN '
+                'Australia (formerly UPC/AC Renewables) SSD-9255, approved via IPC 2020 with '
+                '4,171 ha footprint. Stage 1 (400 MW) operating; Stage 2 (320 MW) under '
+                'construction. 50 MW/50 MWh BESS commissioned as first-stage firming. Sits in '
+                'New England REZ.'
+            ),
+        },
+    },
+
+    {
+        'project_id': 'nowingi-solar-farm-edify-kci',
+        'tech': 'hybrid',
+        'eis_specs': {
+            'document_title': 'Nowingi Solar Farm Edify Kci — EPBC source (v3.31.0 hybrid source-hunt)',
+            'document_url': 'https://edifyenergy.com/project/nowingi-solar-power-station/',
+            'document_year': 2025,
+            'network_service_provider': 'VicGrid',
+            'notes': (
+                'Solar 300 MWac. BESS 300 MW / 2400 MWh (8.0h duration). Regime: EPBC. Edify '
+                'Energy. Determined \'not a controlled action\' under EPBC Act (Sep 2025). 300 MW '
+                '(360 MWp) solar + 300 MW/2,400 MWh 8-hour BESS on 637 ha, ~47 km south of '
+                'Mildura. Would be largest-duration BESS in Australia at start-up. Construction '
+                'target 2026. AgriPV design. AEMO KCI V00164.'
+            ),
+        },
+    },
+
+    {
+        'project_id': 'quorn-park-solar-hybrid',
+        'tech': 'hybrid',
+        'eis_specs': {
+            'document_title': 'Quorn Park Solar Hybrid — SSD source (v3.31.0 hybrid source-hunt)',
+            'document_url': 'https://www.planningportal.nsw.gov.au/major-projects/project/9711',
+            'document_year': 2020,
+            'network_service_provider': 'TransGrid',
+            'notes': (
+                'Solar 80 MWac. BESS 20 MW / 40 MWh (2.0h duration). Regime: SSD. SSD-9097 near '
+                'Parkes NSW; 470 ha in the Central-West Orana REZ. Potentia Energy (formerly '
+                'Enel Green Power), $192 M, 80 MW PV + 20 MW/40 MWh co-located BESS behind '
+                'single POC. Panels installed by Beon Energy Solutions; will be first '
+                'solar-battery hybrid on NEM main grid (energised late 2025, completion late '
+                '2026).'
+            ),
+        },
+    },
+
+    {
+        'project_id': 'running-creek-solar-and-bess',
+        'tech': 'hybrid',
+        'eis_specs': {
+            'document_title': 'Running Creek Solar And Bess — other source (v3.31.0 hybrid source-hunt)',
+            'document_url': 'https://lightsourcebp.com/project/running-creek-solar/',
+            'document_year': 2024,
+            'network_service_provider': 'Powerlink',
+            'notes': (
+                'Solar 600 MWac. Regime: other. Lightsource bp. 600 MWdc solar + BESS in '
+                'Gladstone region, Central QLD. In early design/planning; construction target '
+                '2028 subject to approvals. No formal EPBC referral located as of search.'
+            ),
+        },
+    },
+
+    {
+        'project_id': 'sturt-solar',
+        'tech': 'hybrid',
+        'eis_specs': {
+            'document_title': 'Sturt Solar —  source (v3.31.0 hybrid source-hunt)',
+            'notes': (
+                'Sturt Solar Pty Ltd - No public planning-portal, EPBC referral or developer '
+                'page located as of search. 600 MW class SA development, probably '
+                'pre-lodgement/scoping only.'
+            ),
+        },
+    },
+
+    {
+        'project_id': 'the-plains',
+        'tech': 'hybrid',
+        'eis_specs': {
+            'document_title': 'The Plains — SSD source (v3.31.0 hybrid source-hunt)',
+            'document_url': 'https://www.planningportal.nsw.gov.au/major-projects/projects/plains-wind-farm',
+            'document_year': 2023,
+            'network_service_provider': 'TransGrid',
+            'notes': (
+                'Solar 400 MWac. Wind 1500 MWac. BESS 400 MW / 1600 MWh (4.0h duration). '
+                'Regime: SSD. Engie\'s The Plains Renewable Energy Park south of Hay in SW REZ '
+                'NSW. SSD-50629707 (Response to Submissions stage). Up to 1.5 GW wind (~171 '
+                'turbines) + 400 MW solar (~900,900 panels, 800 ha) + 400 MW/1600 MWh BESS. '
+                'Separate SSDs for wind and solar. AEMO KCI N00145.'
+            ),
+        },
+    },
+
+    {
+        'project_id': 'whyte-yarcowie',
+        'tech': 'hybrid',
+        'eis_specs': {
+            'document_title': 'Whyte Yarcowie — other source (v3.31.0 hybrid source-hunt)',
+            'document_url': 'https://www.energymining.sa.gov.au/industry/hydrogen-and-renewable-energy/hydrogen-and-renewable-energy-act/public-consultations/whyte-yarcowie-wind-farm',
+            'document_year': 2025,
+            'network_service_provider': 'ElectraNet',
+            'notes': (
+                'Wind 574 MWac. Regime: other. WP Renewables Ltd (Wind Prospect delivering; EDF '
+                'Renewables JV interest). Renewable Energy Infrastructure Licence (REIL) '
+                'application submitted to SA Minister for Energy & Mining under Hydrogen and '
+                'Renewable Energy Act. Up to 83 turbines (~500-600 MW) in northern Mount Lofty '
+                'ranges, 190 km north of Adelaide. Potentially incl. BESS. In env '
+                'approval/licence stage.'
+            ),
+        },
+    },
+
+    {
+        'project_id': 'woodstock-renewable-energy-hub-bess',
+        'tech': 'hybrid',
+        'eis_specs': {
+            'document_title': 'Woodstock Renewable Energy Hub Bess — EPBC source (v3.31.0 hybrid source-hunt)',
+            'document_url': 'https://private-energypartnerscommunity.com.au/',
+            'document_year': 2026,
+            'network_service_provider': 'Powerlink',
+            'notes': (
+                'Solar 350 MWac. Regime: EPBC. Private Energy Partners (Quinbrook affiliate). '
+                '~350 MW solar + BESS + ~10 km private tx line at Lansdown Eco-Industrial '
+                'Precinct (LEIP), ~40 km south of Townsville. Co-located with Supernode North '
+                'BESS, Biochar plant and metallurgical silicon production. Target completion '
+                'Dec 2029. AEMO KCI Q00130.'
+            ),
+        },
+    },
+
+
+    # ══════════════════════════════════════════════════════════════════════════
+    # WIND — v3.31.0 tranche 2. Extracted specs (turbine model, count, hub
+    # height, rotor diameter, NSP, substation) for 33 operating/construction
+    # wind farms ≥100 MW that lacked spec rows after tranche 1. Most VIC
+    # wind farms >100 MW were approved as Ministerial Planning Permits under
+    # the P&E Act 1987; landing page usually developer site or Wikipedia.
+    # NSW pre-2011 was Part 3A (repealed). Turbine data cross-verified from
+    # Wikipedia + power-technology.com + developer sites.
+    # ══════════════════════════════════════════════════════════════════════════
+
+    {
+        'project_id': 'ararat-wind-farm',
+        'tech': 'wind',
+        'eis_specs': {
+            'document_title': 'Ararat Wind Farm — MP-permit source (v3.31.0 wind tranche 2)',
+            'document_url': 'https://en.wikipedia.org/wiki/Ararat_Wind_Farm',
+            'document_year': 2010,
+            'turbine_model': 'GE 3.0-103',
+            'turbine_count': 75,
+            'hub_height_m': 85,
+            'rotor_diameter_m': 103,
+            'connection_substation_name': 'Elmhurst switchyard, connecting to Ballarat-Horsham 220 kV line',
+            'network_service_provider': 'AusNet Services',
+            'notes': (
+                'Regime: MP-permit. Planning permit submitted Jan 2010, approved Oct 2010 by '
+                'Vic Planning Minister; grid route/substation permit granted 2012. Developer '
+                'RES; consortium ownership: OPTrust/GE/RES/downer. Commissioned Jun 2017; 25-yr '
+                'PPA with ACT Government.'
+            ),
+        },
+    },
+
+    {
+        'project_id': 'bald-hills-wind-farm',
+        'tech': 'wind',
+        'eis_specs': {
+            'document_title': 'Bald Hills Wind Farm — EES source (v3.31.0 wind tranche 2)',
+            'document_url': 'https://en.wikipedia.org/wiki/Bald_Hills_Wind_Farm',
+            'document_year': 2004,
+            'turbine_model': 'Senvion (REpower) MM92 2.05 MW',
+            'turbine_count': 52,
+            'hub_height_m': 80,
+            'rotor_diameter_m': 92,
+            'connection_substation_name': 'Cranbourne / Basslink area via Powercor 66 kV → Hazelwood 220 kV',
+            'network_service_provider': 'AusNet Services (Powercor DNSP)',
+            'notes': (
+                'Regime: EES. Full EES completed 2004; Vic Planning Minister granted permit '
+                'TRA/03/002 on 19 Aug 2004. Wind Power Pty Ltd developer. Located 10 km SE of '
+                'Tarwin Lower, South Gippsland Shire. Commissioned May 2015; 106.6 MW. Owned by '
+                'Infrastructure Capital Group. Long-running nuisance case with neighbours.'
+            ),
+        },
+    },
+
+    {
+        'project_id': 'bango-973-wind-farm',
+        'tech': 'wind',
+        'eis_specs': {
+            'document_title': 'Bango 973 Wind Farm — SSD source (v3.31.0 wind tranche 2)',
+            'document_url': 'https://www.planningportal.nsw.gov.au/major-projects/projects/bango-wind-farm',
+            'document_year': 2018,
+            'turbine_model': 'GE 5.3-158 Cypress',
+            'turbine_count': 30,
+            'hub_height_m': 121,
+            'rotor_diameter_m': 158,
+            'connection_substation_name': 'Yass 330 kV switchyard via new 132 kV line',
+            'network_service_provider': 'TransGrid',
+            'notes': (
+                'Regime: SSD. One of two AEMO DUIDs (Bango 999 + Bango 973) covering the 244 MW '
+                'Bango Wind Farm 30 km north of Yass. Approved by IPC 2 May 2018 as SSD 6686. '
+                'First globally to deploy GE 5.3 MW Cypress turbines. CWP Renewables/Grassroots '
+                'then Squadron Energy; fully operational 2023; 15-yr PPA to Snowy Hydro.'
+            ),
+        },
+    },
+
+    {
+        'project_id': 'boco-rock-wind-farm',
+        'tech': 'wind',
+        'eis_specs': {
+            'document_title': 'Boco Rock Wind Farm — other source (v3.31.0 wind tranche 2)',
+            'document_url': 'https://www.planningportal.nsw.gov.au/major-projects/projects/boco-rock-wind-farm',
+            'document_year': 2010,
+            'turbine_model': 'GE 1.7-100',
+            'turbine_count': 67,
+            'hub_height_m': 80,
+            'rotor_diameter_m': 100,
+            'connection_substation_name': 'Cooma 132 kV substation',
+            'network_service_provider': 'TransGrid',
+            'notes': (
+                'Regime: other. MP09_0103; Part 3A Project Approval granted 9 Aug 2010; '
+                'developer Wind Prospect/EGP Renewables. Located 10 km SW of Nimmitabel in '
+                'Snowy Monaro. Stage 1 operational since 2015; 113 MW. Now owned by Tilt '
+                'Renewables. Stage 2 approved (up to 55 more turbines) but not built.'
+            ),
+        },
+    },
+
+    {
+        'project_id': 'bodangora-wind-farm',
+        'tech': 'wind',
+        'eis_specs': {
+            'document_title': 'Bodangora Wind Farm — other source (v3.31.0 wind tranche 2)',
+            'document_url': 'https://www.planningportal.nsw.gov.au/major-projects/projects/bodangora-wind-farm',
+            'document_year': 2013,
+            'turbine_model': 'GE 3.43-130',
+            'turbine_count': 33,
+            'hub_height_m': 85,
+            'rotor_diameter_m': 130,
+            'connection_substation_name': 'Wellington 132 kV substation',
+            'network_service_provider': 'TransGrid (Essential Energy DNSP interface)',
+            'notes': (
+                'Regime: other. MP10_0157; PAC approval Aug 2013 (Part 3A). Infigen Energy '
+                'developer (now Iberdrola Australia). Located 20 km NE of Wellington. Practical '
+                'Completion 27 Feb 2019; 113 MW.'
+            ),
+        },
+    },
+
+    {
+        'project_id': 'capital-wind-farm',
+        'tech': 'wind',
+        'eis_specs': {
+            'document_title': 'Capital Wind Farm — other source (v3.31.0 wind tranche 2)',
+            'document_url': 'https://en.wikipedia.org/wiki/Capital_Wind_Farm',
+            'document_year': 2007,
+            'turbine_model': 'Suzlon S88 2.1 MW',
+            'turbine_count': 67,
+            'hub_height_m': 80,
+            'rotor_diameter_m': 88,
+            'connection_substation_name': 'Williamsdale-Woodlawn 132 kV / Bungendore area',
+            'network_service_provider': 'TransGrid',
+            'notes': (
+                'Regime: other. Approved by NSW DoP prior to Part 3A repeal; located near '
+                'Bungendore in Queanbeyan-Palerang LGA. Construction 2008; fully operational '
+                'Oct 2009. Was largest NSW wind farm at commissioning. Ownership now Iberdrola '
+                'Australia (ex-Infigen); PPA with Sydney Water.'
+            ),
+        },
+    },
+
+    {
+        'project_id': 'crudine-ridge-wind-farm',
+        'tech': 'wind',
+        'eis_specs': {
+            'document_title': 'Crudine Ridge Wind Farm — SSD source (v3.31.0 wind tranche 2)',
+            'document_url': 'https://www.planningportal.nsw.gov.au/major-projects/project/4681',
+            'document_year': 2016,
+            'turbine_model': 'GE 3.8-137',
+            'turbine_count': 37,
+            'hub_height_m': 91.5,
+            'rotor_diameter_m': 137,
+            'connection_substation_name': 'Wellington 132 kV / Wollar area (Bathurst-Wellington corridor)',
+            'network_service_provider': 'TransGrid',
+            'notes': (
+                'Regime: SSD. SSD-6697 approved. Located 45 km south of Mudgee/north of '
+                'Bathurst. Modification reduced turbine count from 77 to 37 with larger '
+                'machines. CWP Renewables (now Squadron Energy). Operational 20 Dec 2021. 134 '
+                'MW nameplate.'
+            ),
+        },
+    },
+
+    {
+        'project_id': 'flyers-creek-wind-farm',
+        'tech': 'wind',
+        'eis_specs': {
+            'document_title': 'Flyers Creek Wind Farm — other source (v3.31.0 wind tranche 2)',
+            'document_url': 'https://www.planningportal.nsw.gov.au/major-projects/projects/flyers-creek-wind-farm',
+            'document_year': 2014,
+            'turbine_model': 'Vestas V150-4.2 MW (approx)',
+            'turbine_count': 38,
+            'hub_height_m': 105,
+            'rotor_diameter_m': 140,
+            'connection_substation_name': 'Orange North to Cadia 132 kV line (new on-site switching station)',
+            'network_service_provider': 'TransGrid (Essential Energy DNSP interface)',
+            'notes': (
+                'Regime: other. Original Project Approval by NSW Planning Assessment Commission '
+                '2014 under Part 3A/SSD transition (originally 42 x 3 MW). Multiple '
+                'modifications approved to increase tip height to 160 m/rotor to 140 m. '
+                'Iberdrola Australia developer. Located 15 km west of Blayney (Blayney Shire '
+                'LGA); commissioned 2024.'
+            ),
+        },
+    },
+
+    {
+        'project_id': 'goyder-south-wind-farm-1a',
+        'tech': 'wind',
+        'eis_specs': {
+            'document_title': 'Goyder South Wind Farm 1A — DAC source (v3.31.0 wind tranche 2)',
+            'document_url': 'https://goyderenergy.com.au/',
+            'document_year': 2019,
+            'turbine_model': 'GE 5.5-158 Cypress',
+            'turbine_count': 38,
+            'hub_height_m': 120,
+            'rotor_diameter_m': 158,
+            'connection_substation_name': 'Robertstown 275 kV substation (new 275 kV line)',
+            'network_service_provider': 'ElectraNet',
+            'notes': (
+                'Regime: DAC. Part of Neoen\'s 412 MW Goyder South Stage 1 near Burra. 1A and 1B '
+                'together comprise 75 GE Cypress turbines (5.5 MW each). Financial close on '
+                'first 209 MW Dec 2022 underpinned by 100 MW/14-yr PPA with ACT Govt + 40 MW '
+                'Flow Power. First power Apr 2024; fully operational late 2025.'
+            ),
+        },
+    },
+
+    {
+        'project_id': 'goyder-south-wind-farm-1b',
+        'tech': 'wind',
+        'eis_specs': {
+            'document_title': 'Goyder South Wind Farm 1B — DAC source (v3.31.0 wind tranche 2)',
+            'document_url': 'https://goyderenergy.com.au/',
+            'document_year': 2019,
+            'turbine_model': 'GE 5.5-158 Cypress',
+            'turbine_count': 37,
+            'hub_height_m': 120,
+            'rotor_diameter_m': 158,
+            'connection_substation_name': 'Robertstown 275 kV substation (new 275 kV line)',
+            'network_service_provider': 'ElectraNet',
+            'notes': (
+                'Regime: DAC. Second registered generating unit within Neoen\'s 412 MW Goyder '
+                'South Stage 1 near Burra. Together 1A + 1B = 75 GE 5.5-158 Cypress turbines. '
+                'Balance of Stage 1 output supports BHP 70 MW PPA. Inaugurated 2025 as SA\'s '
+                'largest wind farm.'
+            ),
+        },
+    },
+
+    {
+        'project_id': 'granville-harbour-wind-farm',
+        'tech': 'wind',
+        'eis_specs': {
+            'document_title': 'Granville Harbour Wind Farm — other source (v3.31.0 wind tranche 2)',
+            'document_url': 'https://en.wikipedia.org/wiki/Granville_Harbour_Wind_Farm',
+            'document_year': 2015,
+            'turbine_model': 'Vestas V126-3.6 MW',
+            'turbine_count': 31,
+            'hub_height_m': 137,
+            'rotor_diameter_m': 126,
+            'connection_substation_name': 'Reece 220 kV / Zeehan area on Tas west coast network',
+            'network_service_provider': 'TasNetworks',
+            'notes': (
+                'Regime: other. Approved by West Coast Council under Tas LUPA Act 1993. Vestas '
+                'turnkey EPC awarded 2018; commissioned Dec 2020. Owned by Palisade Investment '
+                'Partners; 111 MW. Uses tallest hub-height tower in Australia (137 m) at time '
+                'of construction.'
+            ),
+        },
+    },
+
+    {
+        'project_id': 'gullen-range-wind-farm',
+        'tech': 'wind',
+        'eis_specs': {
+            'document_title': 'Gullen Range Wind Farm — other source (v3.31.0 wind tranche 2)',
+            'document_url': 'https://www.planningportal.nsw.gov.au/major-projects/projects/gullen-range-wind-farm',
+            'document_year': 2009,
+            'turbine_model': 'Goldwind GRW100-2.5 MW (56) + GW82-1.5 MW (17)',
+            'turbine_count': 73,
+            'hub_height_m': 80,
+            'rotor_diameter_m': 100,
+            'connection_substation_name': 'Bannaby 500/330 kV / Marulan area 132 kV',
+            'network_service_provider': 'TransGrid',
+            'notes': (
+                'Regime: other. Part 3A Project Approval granted by Land and Environment Court '
+                '2009 (MP07_0118). Developed by Epuron then sold to Goldwind Australia (later '
+                'BJCE/Jingneng). Commissioned 2014. 56 x GRW100 (80 m towers) + 17 x GW82 (85 m '
+                'towers).'
+            ),
+        },
+    },
+
+    {
+        'project_id': 'gullen-range-wind-farm-2',
+        'tech': 'wind',
+        'eis_specs': {
+            'document_title': 'Gullen Range Wind Farm 2 — other source (v3.31.0 wind tranche 2)',
+            'document_url': 'https://www.planningportal.nsw.gov.au/major-projects/projects/gullen-range-wind-farm',
+            'document_year': 2009,
+            'turbine_model': 'Goldwind GRW100-2.5 MW',
+            'hub_height_m': 80,
+            'rotor_diameter_m': 100,
+            'connection_substation_name': 'Bannaby 500/330 kV / Marulan area 132 kV',
+            'network_service_provider': 'TransGrid',
+            'notes': (
+                'Regime: other. Second AEMO registered unit within the 165.5 MW Gullen Range '
+                'Wind Farm (73 total turbines). Same MP07_0118 approval as the main DUID. Owner '
+                'Beijing Jingneng Clean Energy (Australia) Holding. 110.67 MW sub-capacity.'
+            ),
+        },
+    },
+
+    {
+        'project_id': 'hallett-4-north-brown-hill',
+        'tech': 'wind',
+        'eis_specs': {
+            'document_title': 'Hallett 4 North Brown Hill — DAC source (v3.31.0 wind tranche 2)',
+            'document_url': 'https://www.agl.com.au/content/aglenergy/nsw/en/about-agl/how-we-source-energy/hallett-wind-farms',
+            'document_year': 2009,
+            'turbine_model': 'Suzlon S88/2100',
+            'turbine_count': 63,
+            'hub_height_m': 80,
+            'rotor_diameter_m': 88,
+            'connection_substation_name': 'Hallett 275 kV / Bungama area',
+            'network_service_provider': 'ElectraNet',
+            'notes': (
+                'Regime: DAC. AGL Hallett 4 (North Brown Hill); commissioned 2010. 132.3 MW '
+                'nameplate; PPA with AGL. Blade tip height 124 m.'
+            ),
+        },
+    },
+
+    {
+        'project_id': 'hallett-stage-1-brown-hill',
+        'tech': 'wind',
+        'eis_specs': {
+            'document_title': 'Hallett Stage 1 Brown Hill — DAC source (v3.31.0 wind tranche 2)',
+            'document_url': 'https://www.agl.com.au/content/aglenergy/nsw/en/about-agl/how-we-source-energy/hallett-wind-farms',
+            'document_year': 2007,
+            'turbine_model': 'Suzlon S88 2.1 MW',
+            'turbine_count': 45,
+            'hub_height_m': 80,
+            'rotor_diameter_m': 88,
+            'connection_substation_name': 'Hallett 275 kV / Bungama area',
+            'network_service_provider': 'ElectraNet',
+            'notes': (
+                'Regime: DAC. AGL Hallett 1 (Brown Hill) approved by SA planning under '
+                'Development Act 1993; commissioned Jun 2008. Adjacent to AGL\'s 180 MW Hallett '
+                'gas peaker plant. Now owned by Palisade Investment Partners/atmos; 20-yr PPA '
+                'to AGL.'
+            ),
+        },
+    },
+
+    {
+        'project_id': 'hornsdale-wind-farm-stage-1',
+        'tech': 'wind',
+        'eis_specs': {
+            'document_title': 'Hornsdale Wind Farm Stage 1 — DAC source (v3.31.0 wind tranche 2)',
+            'document_url': 'https://www.power-technology.com/projects/hornsdale-wind-farm-jamestown/',
+            'document_year': 2012,
+            'turbine_model': 'Siemens SWT-3.2-113 direct-drive',
+            'turbine_count': 32,
+            'hub_height_m': 92.5,
+            'rotor_diameter_m': 113,
+            'connection_substation_name': 'Davenport 275 kV substation via 132 kV',
+            'network_service_provider': 'ElectraNet',
+            'notes': (
+                'Regime: DAC. First 32-turbine phase officially operational Jul 2016. Part of '
+                'same 2012 development approval covering all three Hornsdale stages. Neoen '
+                'developer; Hornsdale Power Reserve (Tesla BESS) co-located at same complex.'
+            ),
+        },
+    },
+
+    {
+        'project_id': 'hornsdale-wind-farm-stage-2',
+        'tech': 'wind',
+        'eis_specs': {
+            'document_title': 'Hornsdale Wind Farm Stage 2 — DAC source (v3.31.0 wind tranche 2)',
+            'document_url': 'https://www.power-technology.com/projects/hornsdale-wind-farm-jamestown/',
+            'document_year': 2012,
+            'turbine_model': 'Siemens SWT-3.2-113 direct-drive',
+            'turbine_count': 33,
+            'hub_height_m': 92.5,
+            'rotor_diameter_m': 113,
+            'connection_substation_name': 'Davenport 275 kV substation via 132 kV',
+            'network_service_provider': 'ElectraNet',
+            'notes': (
+                'Regime: DAC. HWF2 100 MW phase tested supplying 6 of 8 grid services Aug 2017 '
+                'to Feb 2018 (world-first synthetic inertia trials via ARENA). Same 2012 SA DAC '
+                'approval; Neoen developer. Now Atmos-owned.'
+            ),
+        },
+    },
+
+    {
+        'project_id': 'hornsdale-wind-farm-stage-3',
+        'tech': 'wind',
+        'eis_specs': {
+            'document_title': 'Hornsdale Wind Farm Stage 3 — DAC source (v3.31.0 wind tranche 2)',
+            'document_url': 'https://www.power-technology.com/projects/hornsdale-wind-farm-jamestown/',
+            'document_year': 2012,
+            'turbine_model': 'Siemens SWT-3.2-113 direct-drive',
+            'turbine_count': 34,
+            'hub_height_m': 92.5,
+            'rotor_diameter_m': 113,
+            'connection_substation_name': 'Davenport 275 kV substation via 132 kV',
+            'network_service_provider': 'ElectraNet',
+            'notes': (
+                'Regime: DAC. SA development approval 4 Jul 2012 for all three Hornsdale stages '
+                '(Northern Areas Council). Neoen developer; John Laing/Megawatt Capital '
+                'co-owners. HWF3 commissioned 2017; underpinned by 100 MW ACT reverse auction '
+                'PPA. Fleet total 99 x Siemens 3.2 MW turbines. Atmos Renewables now full owner '
+                '(2025).'
+            ),
+        },
+    },
+
+    {
+        'project_id': 'lake-bonney-2-wind-farm',
+        'tech': 'wind',
+        'eis_specs': {
+            'document_title': 'Lake Bonney 2 Wind Farm — DAC source (v3.31.0 wind tranche 2)',
+            'document_url': 'https://en.wikipedia.org/wiki/Lake_Bonney_Wind_Farm',
+            'document_year': 2006,
+            'turbine_model': 'Vestas V90-3.0 MW',
+            'turbine_count': 53,
+            'hub_height_m': 80,
+            'rotor_diameter_m': 90,
+            'connection_substation_name': 'Mayurra 132 kV / SE substation (Millicent area)',
+            'network_service_provider': 'ElectraNet',
+            'notes': (
+                'Regime: DAC. Approved under SA Development Act 1993 by Wattle Range Council. '
+                'Vestas turbine supply contract announced Aug 2006, commissioned Apr 2008. '
+                'Owned by Iberdrola Australia (ex-Infigen). Part of the three-stage Lake Bonney '
+                'complex (LKBONNY1/2/3).'
+            ),
+        },
+    },
+
+    {
+        'project_id': 'lincoln-gap-wind-farm-stage-1',
+        'tech': 'wind',
+        'eis_specs': {
+            'document_title': 'Lincoln Gap Wind Farm Stage 1 — DAC source (v3.31.0 wind tranche 2)',
+            'document_url': 'https://lincolngapwindfarm.com.au/',
+            'document_year': 2006,
+            'turbine_model': 'Senvion 3.6M140 EBC',
+            'turbine_count': 35,
+            'hub_height_m': 110,
+            'rotor_diameter_m': 140,
+            'connection_substation_name': 'Davenport 275 kV substation, Port Augusta',
+            'network_service_provider': 'ElectraNet',
+            'notes': (
+                'Regime: DAC. SA development approval granted 2006 (EIS 2005). Nexif Energy '
+                'developer; commissioned Stage 1 May 2020. Sold to Ratch Australia Dec 2022 '
+                '(RATCH-Australia Lincoln Gap). Co-located BESS 10 MW/10 MWh Stage 1 + 25 MW/52 '
+                'MWh Stage 2.'
+            ),
+        },
+    },
+
+    {
+        'project_id': 'moorabool-wind-farm',
+        'tech': 'wind',
+        'eis_specs': {
+            'document_title': 'Moorabool Wind Farm — MP-permit source (v3.31.0 wind tranche 2)',
+            'document_url': 'https://mooraboolwindfarm.com/project/project-planning-and-approvals/',
+            'document_year': 2010,
+            'turbine_model': 'Goldwind GW136-3.0 MW',
+            'turbine_count': 104,
+            'hub_height_m': 100,
+            'rotor_diameter_m': 136,
+            'connection_substation_name': 'Elaine 220 kV terminal station',
+            'network_service_provider': 'AusNet Services',
+            'notes': (
+                'Regime: MP-permit. Approved by Vic Planning Minister Oct 2010 under Planning '
+                'and Environment Act 1987 (permit amended 2016/2018/2020 to allow larger WTGs). '
+                'Developed by Westwind Energy, sold to Goldwind Australia Sep 2016. Fully '
+                'commissioned 2022; 305 MW registered, 321 MW nameplate. Split into North + '
+                'South entities.'
+            ),
+        },
+    },
+
+    {
+        'project_id': 'mortlake-south-wind-farm',
+        'tech': 'wind',
+        'eis_specs': {
+            'document_title': 'Mortlake South Wind Farm — MP-permit source (v3.31.0 wind tranche 2)',
+            'document_url': 'https://en.wikipedia.org/wiki/Mortlake_South_Wind_Farm',
+            'document_year': 2010,
+            'turbine_model': 'Nordex N149/4.5',
+            'turbine_count': 35,
+            'hub_height_m': 105,
+            'rotor_diameter_m': 149,
+            'connection_substation_name': 'Mortlake 500/220 kV terminal station via 220 kV underground cable',
+            'network_service_provider': 'AusNet Services',
+            'notes': (
+                'Regime: MP-permit. Originally approved Oct 2010 by Vic Planning Minister for '
+                '52 x 3 MW turbines; amended Apr 2017 to 35 x 4.5 MW Nordex. Underground 220 kV '
+                'transmission EMP endorsed Feb 2020. Owned/operated by ACCIONA Energia; fully '
+                'operational Jul 2024.'
+            ),
+        },
+    },
+
+    {
+        'project_id': 'mt-gellibrand-wind-farm',
+        'tech': 'wind',
+        'eis_specs': {
+            'document_title': 'Mt Gellibrand Wind Farm — MP-permit source (v3.31.0 wind tranche 2)',
+            'document_url': 'https://www.acciona.com.au/projects/mt-gellibrand-wind-farm',
+            'document_year': 2006,
+            'turbine_model': 'Acciona/Nordex AW125/3000',
+            'turbine_count': 44,
+            'hub_height_m': 87.5,
+            'rotor_diameter_m': 125,
+            'connection_substation_name': 'Elaine 220 kV terminal station (via Moorabool corridor)',
+            'network_service_provider': 'AusNet Services',
+            'notes': (
+                'Regime: MP-permit. Vic Planning Minister granted permit 2006; final '
+                'Development Plan approval 2012. Located 25 km east of Colac in Colac Otway '
+                'Shire. Construction began Apr 2017; fully operational Aug 2018. Owned/operated '
+                'by ACCIONA Energia; 132 MW.'
+            ),
+        },
+    },
+
+    {
+        'project_id': 'mt-mercer-wind-farm',
+        'tech': 'wind',
+        'eis_specs': {
+            'document_title': 'Mt Mercer Wind Farm — MP-permit source (v3.31.0 wind tranche 2)',
+            'document_url': 'https://mtmercerwindfarm.com.au/about',
+            'document_year': 2007,
+            'turbine_model': 'REpower (Senvion) MM92 2.05 MW',
+            'turbine_count': 64,
+            'hub_height_m': 80,
+            'rotor_diameter_m': 92,
+            'connection_substation_name': 'Elaine 220 kV terminal station',
+            'network_service_provider': 'AusNet Services',
+            'notes': (
+                'Regime: MP-permit. Planning permit from Vic Planning Minister Apr 2007. '
+                'Developed by WestWind Energy; sold to Meridian Energy 2009. Construction '
+                'started Dec 2010; commercial operation Sep 2014. 131 MW; located in Golden '
+                'Plains Shire near Ballarat.'
+            ),
+        },
+    },
+
+    {
+        'project_id': 'murra-warra-wind-farm-stage-1',
+        'tech': 'wind',
+        'eis_specs': {
+            'document_title': 'Murra Warra Wind Farm Stage 1 — MP-permit source (v3.31.0 wind tranche 2)',
+            'document_url': 'https://squadronenergy.com/our-projects/murra-warra-l-wind-farm/',
+            'document_year': 2016,
+            'turbine_model': 'Senvion 3.7M144',
+            'turbine_count': 61,
+            'hub_height_m': 110,
+            'rotor_diameter_m': 144,
+            'connection_substation_name': 'Kiamal 220 kV / Horsham area (transmission via AusNet 220 kV)',
+            'network_service_provider': 'AusNet Services',
+            'notes': (
+                'Regime: MP-permit. Vic Planning Minister approved Murra Warra I & II together '
+                'on 21 Nov 2016 (single permit for up to 116 turbines, 420 MW). Stage 1 '
+                'delivered by RES Australia; commissioned Feb 2020. Corporate PPA with '
+                'Telstra/ANZ/Coca-Cola Amatil/UoM consortium.'
+            ),
+        },
+    },
+
+    {
+        'project_id': 'murra-warra-wind-farm-stage-2',
+        'tech': 'wind',
+        'eis_specs': {
+            'document_title': 'Murra Warra Wind Farm Stage 2 — MP-permit source (v3.31.0 wind tranche 2)',
+            'document_url': 'https://squadronenergy.com/our-projects/murra-warra-ll-wind-farm/',
+            'document_year': 2016,
+            'turbine_model': 'GE 5.3-158 Cypress',
+            'turbine_count': 38,
+            'hub_height_m': 120,
+            'rotor_diameter_m': 158,
+            'connection_substation_name': 'Kiamal 220 kV / Horsham area (transmission via AusNet 220 kV)',
+            'network_service_provider': 'AusNet Services',
+            'notes': (
+                'Regime: MP-permit. Vic Planning Minister approved Murra Warra II under the '
+                'same 2016 permit as Stage 1. Developed by RES/Macquarie; Squadron Energy '
+                'acquired 2023. Commissioned 2023; 209 MW registered. Underpinned by PPA to Sun '
+                'Cable/BHP.'
+            ),
+        },
+    },
+
+    {
+        'project_id': 'palmer-wind-farm',
+        'tech': 'wind',
+        'eis_specs': {
+            'document_title': 'Palmer Wind Farm — DAC source (v3.31.0 wind tranche 2)',
+            'document_url': 'https://tiltrenewables.com/palmer-wind-farm-planning-and-approvals/',
+            'document_year': 2015,
+            'turbine_model': 'Vestas V172-7.2 MW EnVentus',
+            'turbine_count': 40,
+            'hub_height_m': 126,
+            'rotor_diameter_m': 172,
+            'connection_substation_name': 'Tungkillo 275 kV substation (ElectraNet)',
+            'network_service_provider': 'ElectraNet',
+            'notes': (
+                'Regime: DAC. Original Mid Murray Council development approval 2015 (initially '
+                '103 x smaller turbines); upheld by SA ERD Court 2017 and Supreme Court Nov '
+                '2019. Redesigned to 40 x V172-7.2 MW (tip height 220 m) and re-approved 2025. '
+                'CIS auction winner; Tilt Renewables/PGGM. BMD EPC. Construction began 2026 '
+                '(~24 months). 288 MW.'
+            ),
+        },
+    },
+
+    {
+        'project_id': 'portland-wind-farm',
+        'tech': 'wind',
+        'eis_specs': {
+            'document_title': 'Portland Wind Farm — MP-permit source (v3.31.0 wind tranche 2)',
+            'document_url': 'https://www.pacificblue.com.au/our-energy-production/operating-sites/cape-nelson-nth-sir-william-grant-wind-farm',
+            'document_year': 2001,
+            'turbine_model': 'Senvion (REpower) MM82 + MM92',
+            'turbine_count': 74,
+            'hub_height_m': 80,
+            'rotor_diameter_m': 92,
+            'connection_substation_name': 'Portland (Heywood-Portland 132 kV via aluminium smelter substation)',
+            'network_service_provider': 'AusNet Services / Powercor (DNSP)',
+            'notes': (
+                'Regime: MP-permit. Portland Wind Energy Project (PWEP) received Vic planning '
+                'approvals 2001 for all four capes. This 151.7 MW Registered figure = Cape '
+                'Bridgewater (58 MW, 29 turbines) + Cape Nelson South (44 MW) + Cape Nelson '
+                'North/Sir William Grant (47 MW, 23 turbines Stage IV completed 2015). Owned by '
+                'Pacific Blue (ex Pacific Hydro, SPIC). Yambuk (Stage I) is separate registered '
+                'unit.'
+            ),
+        },
+    },
+
+    {
+        'project_id': 'taralga-wind-farm',
+        'tech': 'wind',
+        'eis_specs': {
+            'document_title': 'Taralga Wind Farm — other source (v3.31.0 wind tranche 2)',
+            'document_url': 'https://www.planningportal.nsw.gov.au/major-projects/projects/taralga-wind',
+            'document_year': 2007,
+            'turbine_model': 'Vestas V90 (21x V90-2MW + 8x V90-3MW) + Vestas V100-1.8 MW (22)',
+            'turbine_count': 51,
+            'hub_height_m': 80,
+            'rotor_diameter_m': 90,
+            'connection_substation_name': 'Marulan 132 kV area (Upper Lachlan)',
+            'network_service_provider': 'TransGrid',
+            'notes': (
+                'Regime: other. DA-241/04 lodged with Upper Lachlan Council Nov 2004; consent '
+                'granted 24 Feb 2007. Multiple modifications since. CBD Energy/Banco Santander '
+                'initial owner; Repositioned to Energy Pacific/CBUS/Palisade. Commissioned '
+                '2015; 106.8 MW.'
+            ),
+        },
+    },
+
+    {
+        'project_id': 'waubra',
+        'tech': 'wind',
+        'eis_specs': {
+            'document_title': 'Waubra — MP-permit source (v3.31.0 wind tranche 2)',
+            'document_url': 'https://en.wikipedia.org/wiki/Waubra_Wind_Farm',
+            'document_year': 2005,
+            'turbine_model': 'Acciona AW77/1500',
+            'turbine_count': 128,
+            'hub_height_m': 80,
+            'rotor_diameter_m': 77,
+            'connection_substation_name': 'Waubra terminal station connecting into Ballarat area 220 kV',
+            'network_service_provider': 'AusNet Services',
+            'notes': (
+                'Regime: MP-permit. Vic Planning Minister approved permits PL-SP/05/0152 and '
+                'PL-SP/05/0150 in May 2005. Operational Jul 2009. Owned/operated by Acciona '
+                'Energia (Pyrenees Wind Energy Developments).'
+            ),
+        },
+    },
+
+    {
+        'project_id': 'white-rock-wind-farm-stage-1',
+        'tech': 'wind',
+        'eis_specs': {
+            'document_title': 'White Rock Wind Farm Stage 1 — other source (v3.31.0 wind tranche 2)',
+            'document_url': 'https://www.planningportal.nsw.gov.au/major-projects/projects/white-rock-wind-farm',
+            'document_year': 2012,
+            'turbine_model': 'Goldwind GW121-2.5 MW PMDD',
+            'turbine_count': 70,
+            'hub_height_m': 90,
+            'rotor_diameter_m': 121,
+            'connection_substation_name': 'Sapphire 132 kV substation area (Glen Innes-Inverell 132 kV)',
+            'network_service_provider': 'TransGrid (Essential Energy DNSP interface)',
+            'notes': (
+                'Regime: other. Approved Jul 2012 under repealed Part 3A EPA Act (MP10_0160). '
+                'Six modifications; Stage 2 approved by IPC Dec 2019 to increase to 400 MW. 75% '
+                'CECEP / 25% Goldwind Australia. Commissioned 2018.'
+            ),
+        },
+    },
+
+    {
+        'project_id': 'willogoleche-wind-farm',
+        'tech': 'wind',
+        'eis_specs': {
+            'document_title': 'Willogoleche Wind Farm — DAC source (v3.31.0 wind tranche 2)',
+            'document_url': 'https://engie.com.au/about-us/our-generation-activities/wind-farms/willogoleche',
+            'document_year': 2011,
+            'turbine_model': 'GE 3.8-130 (24) + GE 3.4-130 (8)',
+            'turbine_count': 32,
+            'hub_height_m': 85,
+            'rotor_diameter_m': 130,
+            'connection_substation_name': 'Hallett 275 kV substation',
+            'network_service_provider': 'ElectraNet',
+            'notes': (
+                'Regime: DAC. SA development approval 2011 (Regional Council of Goyder). '
+                'Located 5 km from Hallett. Engie/Mitsui JV; commissioned 2019. 119.7 MW; 20-yr '
+                'PPA to Alinta Energy retail portfolio.'
+            ),
+        },
+    },
+
+    {
+        'project_id': 'woolnorth-studland-bay-bluff-point',
+        'tech': 'wind',
+        'eis_specs': {
+            'document_title': 'Woolnorth Studland Bay Bluff Point — other source (v3.31.0 wind tranche 2)',
+            'document_url': 'https://epa.tas.gov.au/business-industry/assessment/proposals-assessed-by-the-epa/woolnorth-wind-farm-holding-pty-ltd-woolnorth-wind-farm-repowering-of-studland-bay-and-bluff-point',
+            'document_year': 2001,
+            'turbine_model': 'Vestas V66-1.75 MW (Bluff Point) + Vestas V90-3.0 MW (Studland Bay)',
+            'turbine_count': 62,
+            'hub_height_m': 60,
+            'rotor_diameter_m': 66,
+            'connection_substation_name': 'Smithton 110 kV / North-West Coast Tas network',
+            'network_service_provider': 'TasNetworks',
+            'notes': (
+                'Regime: other. Approved by Circular Head Council under Tas Land Use Planning '
+                'and Approvals Act 1993. Bluff Point (65 MW) = 37 x Vestas V66-1.75 MW, hub 60 '
+                'm, commissioned 2002 (Stage 1) & 2004 (Stage 2). Studland Bay (75 MW) = 25 x '
+                'Vestas V90-3.0 MW, hub 80 m, commissioned 2007. Owned by Woolnorth Renewables '
+                '(Shenhua/Guohua Energy). Repowering EIA now in progress with EPA Tasmania.'
+            ),
+        },
+    },
 ]
 
 

@@ -59,6 +59,18 @@
   ],
   "cost_sources": [],
   "stakeholder_issues": [],
+  "eis_specs": {
+    "document_title": "Palmer Wind Farm \u2014 DAC source (v3.31.0 wind tranche 2)",
+    "document_url": "https://tiltrenewables.com/palmer-wind-farm-planning-and-approvals/",
+    "document_year": 2015,
+    "turbine_model": "Vestas V172-7.2 MW EnVentus",
+    "turbine_count": 40,
+    "hub_height_m": 126.0,
+    "rotor_diameter_m": 172.0,
+    "network_service_provider": "ElectraNet",
+    "connection_substation_name": "Tungkillo 275 kV substation (ElectraNet)",
+    "notes": "Regime: DAC. Original Mid Murray Council development approval 2015 (initially 103 x smaller turbines); upheld by SA ERD Court 2017 and Supreme Court Nov 2019. Redesigned to 40 x V172-7.2 MW (tip height 220 m) and re-approved 2025. CIS auction winner; Tilt Renewables/PGGM. BMD EPC. Construction began 2026 (~24 months). 288 MW."
+  },
   "sources": [
     {
       "title": "AEMO Generation Information Jan 2026",

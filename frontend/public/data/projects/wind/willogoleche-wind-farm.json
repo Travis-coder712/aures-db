@@ -92,6 +92,18 @@
   "scheme_contracts": [],
   "cost_sources": [],
   "stakeholder_issues": [],
+  "eis_specs": {
+    "document_title": "Willogoleche Wind Farm \u2014 DAC source (v3.31.0 wind tranche 2)",
+    "document_url": "https://engie.com.au/about-us/our-generation-activities/wind-farms/willogoleche",
+    "document_year": 2011,
+    "turbine_model": "GE 3.8-130 (24) + GE 3.4-130 (8)",
+    "turbine_count": 32,
+    "hub_height_m": 85.0,
+    "rotor_diameter_m": 130.0,
+    "network_service_provider": "ElectraNet",
+    "connection_substation_name": "Hallett 275 kV substation",
+    "notes": "Regime: DAC. SA development approval 2011 (Regional Council of Goyder). Located 5 km from Hallett. Engie/Mitsui JV; commissioned 2019. 119.7 MW; 20-yr PPA to Alinta Energy retail portfolio."
+  },
   "sources": [
     {
       "title": "AEMO Generation Information Jan 2026",

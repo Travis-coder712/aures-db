@@ -61,6 +61,13 @@
       "status": "tracking"
     }
   ],
+  "eis_specs": {
+    "document_title": "Junction Rivers Wind And Bess \u2014 SSD source (v3.31.0 hybrid source-hunt)",
+    "document_url": "https://www.junctionrivers.com/",
+    "document_year": 2023,
+    "network_service_provider": "TransGrid",
+    "notes": "Wind 585 MWac. Regime: SSD. Windlab / Junction Rivers Pty Ltd. SSD-30448824. ~585 MW wind (up to 69 turbines, later scaled to 750 MW indicative) + 800 MWh co-located BESS, 15 km south of Balranald NSW in SW REZ. Only granted 262.3 MW of SW REZ access rights - grid access is the binding constraint. CIS tender round success."
+  },
   "sources": [
     {
       "title": "AEMO Generation Information Jan 2026",

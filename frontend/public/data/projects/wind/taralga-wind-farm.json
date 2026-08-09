@@ -82,6 +82,18 @@
   "scheme_contracts": [],
   "cost_sources": [],
   "stakeholder_issues": [],
+  "eis_specs": {
+    "document_title": "Taralga Wind Farm \u2014 other source (v3.31.0 wind tranche 2)",
+    "document_url": "https://www.planningportal.nsw.gov.au/major-projects/projects/taralga-wind",
+    "document_year": 2007,
+    "turbine_model": "Vestas V90 (21x V90-2MW + 8x V90-3MW) + Vestas V100-1.8 MW (22)",
+    "turbine_count": 51,
+    "hub_height_m": 80.0,
+    "rotor_diameter_m": 90.0,
+    "network_service_provider": "TransGrid",
+    "connection_substation_name": "Marulan 132 kV area (Upper Lachlan)",
+    "notes": "Regime: other. DA-241/04 lodged with Upper Lachlan Council Nov 2004; consent granted 24 Feb 2007. Multiple modifications since. CBD Energy/Banco Santander initial owner; Repositioned to Energy Pacific/CBUS/Palisade. Commissioned 2015; 106.8 MW."
+  },
   "sources": [
     {
       "title": "AEMO Generation Information Jan 2026",

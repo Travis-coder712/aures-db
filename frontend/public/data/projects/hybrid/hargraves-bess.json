@@ -40,6 +40,13 @@
   "scheme_contracts": [],
   "cost_sources": [],
   "stakeholder_issues": [],
+  "eis_specs": {
+    "document_title": "Hargraves Bess \u2014 SSD source (v3.31.0 hybrid source-hunt)",
+    "document_url": "https://arkenergy.com.au/",
+    "document_year": 2025,
+    "network_service_provider": "TransGrid",
+    "notes": "BESS 710 MW. Regime: SSD. Tilt Renewables / DevCo (development hold trust). Separate BESS-only project on Central-West Orana REZ Hargraves site, distinct from Energy Estate's Hargraves Energy Project. AEMO KCI N00237. No dedicated planning portal page located; likely still pre-EIS. Ark Energy also announced adding 2 GWh to nearby Bowmans Creek wind farm."
+  },
   "sources": [
     {
       "title": "AEMO Generation Information Jan 2026",

@@ -94,6 +94,18 @@
   "scheme_contracts": [],
   "cost_sources": [],
   "stakeholder_issues": [],
+  "eis_specs": {
+    "document_title": "Goyder South Wind Farm 1A \u2014 DAC source (v3.31.0 wind tranche 2)",
+    "document_url": "https://goyderenergy.com.au/",
+    "document_year": 2019,
+    "turbine_model": "GE 5.5-158 Cypress",
+    "turbine_count": 38,
+    "hub_height_m": 120.0,
+    "rotor_diameter_m": 158.0,
+    "network_service_provider": "ElectraNet",
+    "connection_substation_name": "Robertstown 275 kV substation (new 275 kV line)",
+    "notes": "Regime: DAC. Part of Neoen's 412 MW Goyder South Stage 1 near Burra. 1A and 1B together comprise 75 GE Cypress turbines (5.5 MW each). Financial close on first 209 MW Dec 2022 underpinned by 100 MW/14-yr PPA with ACT Govt + 40 MW Flow Power. First power Apr 2024; fully operational late 2025."
+  },
   "sources": [
     {
       "title": "AEMO Generation Information Jan 2026",
