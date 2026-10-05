@@ -1,0 +1,109 @@
+name: Archive AEMO Generation Information
+
+# Downloads the current AEMO NEM Generation Information Excel each month and
+# commits it to data/gi_snapshots/. This preserves the historical archive
+# because AEMO removes previous releases from their site.
+#
+# This workflow does NOT write to the database — that requires the local
+# 4 GB SQLite DB. After this runs and commits the Excel, Travis runs
+# import_aemo_gen_info.py locally to fold it into the DB.
+on:
+  schedule:
+    - cron: "0 1 3 * *"    # 01:00 UTC on the 3rd — AEMO publishes ~1st of each month
+  workflow_dispatch:
+    inputs:
+      snapshot:
+        description: "YYYY-MM to fetch (blank = current month)"
+        required: false
+        default: ""
+
+concurrency:
+  group: gi-archive
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  archive:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Resolve target snapshot
+        id: snap
+        run: |
+          S="${{ github.event.inputs.snapshot }}"
+          [ -z "$S" ] && S="$(date -u +%Y-%m)"
+          echo "value=$S" >> "$GITHUB_OUTPUT"
+          echo "Target snapshot: $S"
+
+      - name: Build AEMO URL
+        id: url
+        run: |
+          SNAP="${{ steps.snap.outputs.value }}"
+          YEAR="${SNAP%%-*}"
+          MONTH="${SNAP##*-}"
+          declare -A ABBR=(["01"]="jan" ["02"]="feb" ["03"]="mar" ["04"]="apr"
+                           ["05"]="may" ["06"]="jun" ["07"]="jul" ["08"]="aug"
+                           ["09"]="sep" ["10"]="oct" ["11"]="nov" ["12"]="dec")
+          ABBR_M="${ABBR[$MONTH]}"
+          URL="https://www.aemo.com.au/-/media/files/electricity/nem/planning_and_forecasting/generation_information/${YEAR}/nem-generation-information-${ABBR_M}-${YEAR}.xlsx"
+          DEST="data/gi_snapshots/gi-${SNAP}.xlsx"
+          echo "url=$URL" >> "$GITHUB_OUTPUT"
+          echo "dest=$DEST" >> "$GITHUB_OUTPUT"
+          echo "snap=$SNAP" >> "$GITHUB_OUTPUT"
+          echo "URL: $URL"
+          echo "Dest: $DEST"
+
+      - name: Skip if already archived
+        id: check
+        run: |
+          DEST="${{ steps.url.outputs.dest }}"
+          if [ -f "$DEST" ]; then
+            echo "already_exists=true" >> "$GITHUB_OUTPUT"
+            echo "File $DEST already exists — skipping download."
+          else
+            echo "already_exists=false" >> "$GITHUB_OUTPUT"
+            echo "File $DEST not found — will download."
+          fi
+
+      - name: Download GI Excel
+        if: steps.check.outputs.already_exists == 'false'
+        run: |
+          URL="${{ steps.url.outputs.url }}"
+          DEST="${{ steps.url.outputs.dest }}"
+          mkdir -p "$(dirname "$DEST")"
+          HTTP=$(curl -s -o "$DEST" -w "%{http_code}" \
+            -H "User-Agent: Mozilla/5.0 AURES-DB/1.0 (github-actions)" \
+            "$URL")
+          echo "HTTP status: $HTTP"
+          if [ "$HTTP" != "200" ]; then
+            echo "ERROR: Download failed with HTTP $HTTP"
+            rm -f "$DEST"
+            exit 1
+          fi
+          SIZE=$(stat -c%s "$DEST" 2>/dev/null || stat -f%z "$DEST")
+          echo "Downloaded $SIZE bytes to $DEST"
+          # Sanity check — AEMO Excel files are typically 800 KB – 5 MB
+          if [ "$SIZE" -lt 100000 ]; then
+            echo "ERROR: File too small ($SIZE bytes) — likely a redirect/error page"
+            rm -f "$DEST"
+            exit 1
+          fi
+
+      - name: Commit archived Excel
+        if: steps.check.outputs.already_exists == 'false'
+        run: |
+          DEST="${{ steps.url.outputs.dest }}"
+          SNAP="${{ steps.url.outputs.snap }}"
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add "$DEST"
+          git diff --cached --quiet || git commit -m "chore(data): archive AEMO GI ${SNAP}
+
+Auto-archived by gi-archive workflow on $(date -u +%Y-%m-%d).
+Source: AEMO NEM Generation Information ${SNAP}
+Run import_aemo_gen_info.py locally to fold into the DB."
+          git push

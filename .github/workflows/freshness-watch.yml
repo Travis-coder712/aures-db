@@ -1,0 +1,81 @@
+name: Data freshness watch
+
+# Checks whether key AURES JSON data files have been updated recently.
+# Fails (→ GitHub emails you) if critical outputs are stale.
+#
+# Why this exists: the full AURES pipeline runs locally (the 4 GB SQLite DB
+# can't run on GitHub Actions). This workflow is the "tell me if I've forgotten
+# to run the refresh" alarm — analogous to AusEnergy's health_check.py.
+on:
+  schedule:
+    - cron: "0 22 * * 1"   # 22:00 UTC Monday (08:00 AEST Tuesday)
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+jobs:
+  freshness:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check freshness of key data files
+        run: |
+          MAX_AGE_DAYS=35
+          NOW=$(date -u +%s)
+          FAIL=0
+          REPORT=""
+
+          check_file() {
+            local PATH="$1"
+            local LABEL="$2"
+            local MAX_DAYS="${3:-$MAX_AGE_DAYS}"
+            if [ ! -f "$PATH" ]; then
+              REPORT="${REPORT}\n  MISSING  $LABEL ($PATH)"
+              FAIL=1
+              return
+            fi
+            # Use git log to get last commit time for this file
+            LAST_COMMIT=$(git log -1 --format="%ct" -- "$PATH" 2>/dev/null)
+            if [ -z "$LAST_COMMIT" ]; then
+              REPORT="${REPORT}\n  UNKNOWN  $LABEL (no git history)"
+              return
+            fi
+            AGE_DAYS=$(( (NOW - LAST_COMMIT) / 86400 ))
+            if [ "$AGE_DAYS" -gt "$MAX_DAYS" ]; then
+              REPORT="${REPORT}\n  STALE    $LABEL — ${AGE_DAYS}d ago (limit: ${MAX_DAYS}d)"
+              FAIL=1
+            else
+              REPORT="${REPORT}\n  FRESH    $LABEL — ${AGE_DAYS}d ago"
+            fi
+          }
+
+          # Core intelligence outputs — updated by export_json.py
+          DATA="frontend/public/data"
+          check_file "$DATA/analytics/intelligence/scheme-tracker.json"   "scheme-tracker"
+          check_file "$DATA/analytics/intelligence/revenue-intel.json"    "revenue-intel"
+          check_file "$DATA/analytics/intelligence/energy-mix.json"       "energy-mix"
+          check_file "$DATA/analytics/intelligence/developer-scores.json" "developer-scores"
+          check_file "$DATA/analytics/intelligence/drift-analysis.json"   "drift-analysis"
+
+          # GI snapshot archive — updated by gi-archive workflow
+          LATEST_GI=$(ls data/gi_snapshots/gi-*.xlsx 2>/dev/null | sort | tail -1)
+          check_file "$LATEST_GI" "latest GI snapshot ($(basename "$LATEST_GI" 2>/dev/null))" 40
+
+          # News articles JSON — updated by import_news_rss + export
+          check_file "$DATA/analytics/news-articles.json" "news-articles" 14
+
+          echo -e "\nFreshness report (max age: ${MAX_AGE_DAYS}d):"
+          echo -e "$REPORT"
+          echo ""
+
+          if [ "$FAIL" -eq 1 ]; then
+            echo "FAIL: One or more AURES data files are stale."
+            echo "Run locally: python3 pipeline/smart_refresh.py --phase all"
+            echo "Then: git add frontend/public/data && git commit -m 'data: refresh' && git push"
+            exit 1
+          else
+            echo "All checked files are within the freshness window."
+          fi

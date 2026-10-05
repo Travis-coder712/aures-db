@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+  AURES Weekly Local Refresh LaunchAgent
+  ========================================
+  Runs smart_refresh.py every Monday at 07:00 AEST, then commits and pushes
+  the updated JSON files (frontend/public/data/) which triggers the GitHub
+  Actions deploy to GitHub Pages.
+
+  Install:
+    cp pipeline/scripts/com.aures.weekly-refresh.plist ~/Library/LaunchAgents/
+    launchctl load ~/Library/LaunchAgents/com.aures.weekly-refresh.plist
+
+  Uninstall:
+    launchctl unload ~/Library/LaunchAgents/com.aures.weekly-refresh.plist
+    rm ~/Library/LaunchAgents/com.aures.weekly-refresh.plist
+
+  Logs:
+    tail -f ~/aures-db/pipeline/logs/weekly-refresh.log
+-->
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.aures.weekly-refresh</string>
+
+    <key>ProgramArguments</key>
+    <array>
+        <string>/bin/zsh</string>
+        <string>/Users/travishughes/aures-db/pipeline/scripts/weekly-refresh.sh</string>
+    </array>
+
+    <key>WorkingDirectory</key>
+    <string>/Users/travishughes/aures-db</string>
+
+    <!-- Monday at 07:00 local time -->
+    <key>StartCalendarInterval</key>
+    <dict>
+        <key>Weekday</key>
+        <integer>1</integer>
+        <key>Hour</key>
+        <integer>7</integer>
+        <key>Minute</key>
+        <integer>0</integer>
+    </dict>
+
+    <key>StandardOutPath</key>
+    <string>/Users/travishughes/aures-db/pipeline/logs/weekly-refresh.log</string>
+    <key>StandardErrorPath</key>
+    <string>/Users/travishughes/aures-db/pipeline/logs/weekly-refresh.log</string>
+
+    <key>RunAtLoad</key>
+    <false/>
+
+    <!-- Retry once if the machine was asleep at 07:00 -->
+    <key>StartInterval</key>
+    <integer>0</integer>
+</dict>
+</plist>
