@@ -75,7 +75,7 @@ jobs:
           URL="${{ steps.url.outputs.url }}"
           DEST="${{ steps.url.outputs.dest }}"
           mkdir -p "$(dirname "$DEST")"
-          HTTP=$(curl -s -o "$DEST" -w "%{http_code}" \
+          HTTP=$(curl -sL -o "$DEST" -w "%{http_code}" \
             -H "User-Agent: Mozilla/5.0 AURES-DB/1.0 (github-actions)" \
             "$URL")
           echo "HTTP status: $HTTP"
