@@ -54,7 +54,22 @@ def load_consolidated_projects():
         'by_aemo_id': {str(k): v for k, v in data.get('by_aemo_id', {}).items()},
         'by_slug': data.get('by_slug', {}),
     }
-AEMO_URL = 'https://www.aemo.com.au/-/media/files/electricity/nem/planning_and_forecasting/generation_information/2026/nem-generation-information-jan-2026.xlsx'
+def _current_aemo_url() -> str:
+    """Build the AEMO GI URL for the most recent month likely to be published.
+    AEMO typically publishes by the 3rd of each month; before that, use last month.
+    """
+    from datetime import date as _date
+    today = _date.today()
+    # Use previous month before the 3rd (AEMO may not have published yet)
+    if today.day < 3:
+        year = today.year if today.month > 1 else today.year - 1
+        month = today.month - 1 if today.month > 1 else 12
+    else:
+        year, month = today.year, today.month
+    snap = f'{year}-{month:02d}'
+    return aemo_url_for_snapshot(snap)
+
+AEMO_URL = _current_aemo_url()
 MIN_CAPACITY_MW = 30  # Only import sites >= 30 MW
 
 _AEMO_MONTH_ABBR = {

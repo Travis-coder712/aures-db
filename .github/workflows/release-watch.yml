@@ -1,0 +1,187 @@
+name: AEMO publication release watch
+
+# Checks weekly whether new AEMO publications have been released that require
+# a manual local import. Opens a GitHub Issue when a new file is detected.
+#
+# Watches:
+#   - KCI workbook (quarterly — Q1 Apr, Q2 Jul, Q3 Oct, Q4 Jan)
+#   - IASR workbook (annual — August)
+#   - MLF history (annual — October/November)
+#   - AEMO NER 5.18A.2 VIC register (quarterly)
+#
+# When a new file is detected its URL is saved to data/release-watch/pending.json
+# and a GitHub Issue is opened with import instructions. Close the issue manually
+# once you've run the import locally.
+on:
+  schedule:
+    - cron: "0 22 * * 3"    # 22:00 UTC Wednesday (08:00 AEST Thursday)
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+  issues: write
+
+jobs:
+  watch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check for new AEMO publications
+        id: check
+        run: |
+          pip install requests --quiet 2>/dev/null
+          python3 - <<'PYEOF'
+          import json, os, sys, datetime
+          try: import requests
+          except ImportError: import urllib.request as requests; requests.get = lambda u, **kw: type('R', (), {'status_code': requests.urlopen(u).status, 'ok': True})()
+
+          STATE_FILE = 'data/release-watch/known-releases.json'
+          os.makedirs('data/release-watch', exist_ok=True)
+          try:
+              with open(STATE_FILE) as f:
+                  known = json.load(f)
+          except (FileNotFoundError, json.JSONDecodeError):
+              known = {}
+
+          today = datetime.date.today()
+          year = today.year
+          new_releases = []
+
+          def probe(url, key, label, import_cmd, notes=''):
+              """HEAD-probe a URL; record if new."""
+              try:
+                  import urllib.request
+                  req = urllib.request.Request(url, method='HEAD',
+                      headers={'User-Agent': 'Mozilla/5.0 AURES-DB/1.0 release-watch'})
+                  resp = urllib.request.urlopen(req, timeout=10)
+                  exists = resp.status == 200
+              except Exception:
+                  exists = False
+              if exists and key not in known:
+                  new_releases.append({'key': key, 'label': label, 'url': url,
+                                        'import_cmd': import_cmd, 'notes': notes,
+                                        'detected': str(today)})
+                  known[key] = str(today)
+                  print(f'  NEW: {label} at {url}')
+              elif exists:
+                  print(f'  known: {label} (first seen {known[key]})')
+              else:
+                  print(f'  absent: {label}')
+
+          ABBR = {1:'jan',2:'feb',3:'mar',4:'apr',5:'may',6:'jun',
+                  7:'jul',8:'aug',9:'sep',10:'oct',11:'nov',12:'dec'}
+
+          # ── KCI workbook (quarterly) ──
+          # Q1→published ~Apr, Q2→Jul, Q3→Oct, Q4→Jan next year
+          kci_quarters = [(year, 1), (year, 2), (year, 3), (year, 4), (year-1, 4)]
+          for y, q in kci_quarters:
+              key = f'kci-{y}q{q}'
+              url = (f'https://www.aemo.com.au/-/media/files/electricity/nem/'
+                     f'planning_and_forecasting/generation-information/{y}/'
+                     f'kci-nem-compiled-{y}q{q}.xlsx')
+              probe(url, key, f'AEMO KCI {y} Q{q}',
+                    f'python3 pipeline/importers/import_aemo_kci.py --snapshot {y}Q{q}',
+                    f'Archive to data/gi_snapshots/kci_{y}Q{q}/ before importing.')
+
+          # ── IASR workbook (annual — August) ──
+          for y in [year, year - 1]:
+              key = f'iasr-{y}'
+              url = (f'https://www.aemo.com.au/-/media/files/stakeholder_consultation/'
+                     f'consultations/nem-consultations/{y-1}/{y}-iasr-scenarios/'
+                     f'final-docs/{y}-inputs-and-assumptions-workbook.xlsx')
+              probe(url, key, f'AEMO IASR {y} Workbook',
+                    f'python3 pipeline/importers/import_aemo_iasr.py',
+                    f'Update WORKBOOK_URL in import_aemo_iasr.py to point to {y} workbook.')
+
+          # ── MLF (annual — October/November, financial year e.g. 2026-27) ──
+          # AEMO publishes at /electricity/national-electricity-market-nem/...
+          for fy_start in [year, year - 1]:
+              key = f'mlf-fy{fy_start}'
+              fy_label = f'{fy_start}-{str(fy_start+1)[2:]}'
+              url = (f'https://www.aemo.com.au/-/media/files/electricity/nem/'
+                     f'security_and_reliability/loss_factors_and_regional_boundaries/'
+                     f'{fy_start}/marginal-loss-factors-fy{fy_label}.pdf')
+              probe(url, key, f'AEMO MLF FY{fy_label}',
+                    f'python3 pipeline/importers/import_mlf_history.py',
+                    f'Download PDF to pipeline/importers/downloads/mlf/ first.')
+
+          # ── AEMO NER 5.18A.2 VIC register (quarterly PDF) ──
+          # URL pattern varies — check AEMO planning page instead
+          ner_key = f'ner-vic-{year}-q{(today.month-1)//3 + 1}'
+          # Note: VIC register URL is not stable enough to probe directly;
+          # flag a manual check each quarter
+          if ner_key not in known and today.month in (1, 4, 7, 10):
+              new_releases.append({
+                  'key': ner_key,
+                  'label': f'AEMO NER 5.18A.2 VIC Register (Q{(today.month-1)//3+1} {year})',
+                  'url': 'https://www.aemo.com.au/energy-systems/electricity/national-electricity-market-nem/nem-forecasting-and-planning/forecasting-and-planning-data/generation-information',
+                  'import_cmd': 'python3 pipeline/importers/import_aemo_gen_register.py --state VIC',
+                  'notes': 'Check AEMO planning page for new quarterly VIC PDF. Download and run importer.',
+                  'detected': str(today),
+              })
+              known[ner_key] = str(today)
+
+          # Save updated state
+          with open(STATE_FILE, 'w') as f:
+              json.dump(known, f, indent=2)
+
+          # Write new releases for next step
+          with open('/tmp/new_releases.json', 'w') as f:
+              json.dump(new_releases, f, indent=2)
+
+          print(f'\n{len(new_releases)} new release(s) detected.')
+          PYEOF
+
+      - name: Commit updated release state
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/release-watch/ 2>/dev/null || true
+          git diff --cached --quiet || git commit -m "chore(data): update release-watch state $(date -u +%Y-%m-%d)"
+          git push 2>/dev/null || true
+
+      - name: Open GitHub Issues for new releases
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            let releases = [];
+            try { releases = JSON.parse(fs.readFileSync('/tmp/new_releases.json', 'utf8')); }
+            catch(e) { console.log('No new releases file:', e.message); return; }
+
+            for (const r of releases) {
+              const body = `## New AEMO publication detected
+
+**Publication:** ${r.label}
+**Detected:** ${r.detected}
+**URL:** ${r.url}
+
+### Import instructions
+
+\`\`\`bash
+cd ~/aures-db
+${r.import_cmd}
+\`\`\`
+
+${r.notes ? `> **Note:** ${r.notes}\n` : ''}
+After importing, run the exporter and commit:
+\`\`\`bash
+python3 pipeline/exporters/export_json.py
+git add frontend/public/data
+git commit -m "data: import ${r.label}"
+git push
+\`\`\`
+
+Close this issue once the import is complete and pushed.`;
+
+              await github.rest.issues.create({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                title: `[DATA] New release: ${r.label}`,
+                labels: ['data-refresh', 'import-needed'],
+                body,
+              });
+              console.log(`Opened issue for: ${r.label}`);
+            }

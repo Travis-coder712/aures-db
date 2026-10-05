@@ -139,7 +139,7 @@ const getBessField = (row: any, field: string): MetricStats | undefined => row?.
 // Types for year selector
 // ============================================================
 
-type SelectedYear = 2024 | 2025
+type SelectedYear = number
 
 export default function RevenueIntel() {
   const [searchParams] = useSearchParams()
@@ -147,7 +147,7 @@ export default function RevenueIntel() {
   const initialProjectId = searchParams.get('project')
   const [data, setData] = useState<RevenueIntelData | null>(null)
   const [loading, setLoading] = useState(true)
-  const [selectedYear, setSelectedYear] = useState<SelectedYear>(2024)
+  const [selectedYear, setSelectedYear] = useState<SelectedYear>(new Date().getFullYear() - 1)
   const [activeSection, setActiveSection] = useState<SectionId>(initialSection)
   const [selectedTech, setSelectedTech] = useState<string>('bess')
   const [selectedState, setSelectedState] = useState<string>('all')
@@ -203,13 +203,16 @@ export default function RevenueIntel() {
   // YoY trend line data — actual JSON uses median_rpm, not revenue_per_mw
   const yoyLineData = useMemo(() => {
     if (!data) return []
-    const years = [2024, 2025, 2026]
+    // Derive years dynamically from the data rather than hardcoding
+    const trends = data.yoy_trends as Record<string, Array<{ year: number }>>
+    const allYears = [...new Set(Object.values(trends).flat().map(e => e.year))].sort()
+    const years = allYears.length ? allYears : [new Date().getFullYear() - 2, new Date().getFullYear() - 1, new Date().getFullYear()]
     return years.map(year => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const trends = data.yoy_trends as Record<string, Array<any>>
+      const trendsMap = data.yoy_trends as Record<string, Array<any>>
       const point: Record<string, number | string> = { year: String(year) }
       for (const tech of TECH_ORDER) {
-        const entry = trends[tech]?.find((e: { year: number }) => e.year === year)
+        const entry = trendsMap[tech]?.find((e: { year: number }) => e.year === year)
         if (entry) {
           point[tech] = entry.median_rpm ?? entry.revenue_per_mw ?? 0
         }
@@ -221,8 +224,10 @@ export default function RevenueIntel() {
   // BESS arbitrage data
   const bessArbitrageData = useMemo(() => {
     if (!data) return []
+    const bessYears = [...new Set(data.by_technology_year.filter(r => r.technology === 'bess').map(r => r.year))].sort()
+    const last2BessYears = bessYears.slice(-2)
     return data.by_technology_year
-      .filter(r => r.technology === 'bess' && (r.year === 2024 || r.year === 2025))
+      .filter(r => r.technology === 'bess' && last2BessYears.includes(r.year))
       .map(r => {
         const spread = getBessField(r, 'bess_spread')
         const discharge = getBessField(r, 'discharge_price')
@@ -269,10 +274,12 @@ export default function RevenueIntel() {
       }>
   }, [techYearRows])
 
-  // Summary card values (2024 full year)
+  // Summary card values — use the most recent full year in the data
   const summaryCards = useMemo(() => {
     if (!data) return null
-    const rows2024 = data.by_technology_year.filter(r => r.year === 2024)
+    const allYearsInData = [...new Set(data.by_technology_year.map(r => r.year))].sort()
+    const latestFullYear = allYearsInData.length ? allYearsInData[allYearsInData.length - 1] : new Date().getFullYear() - 1
+    const rows2024 = data.by_technology_year.filter(r => r.year === latestFullYear)
     const highest = [...rows2024].sort((a, b) => b.revenue_per_mw.median - a.revenue_per_mw.median)[0]
     const bess2024 = rows2024.find(r => r.technology === 'bess')
     const solar2024 = rows2024.find(r => r.technology === 'solar')
@@ -353,7 +360,7 @@ export default function RevenueIntel() {
       <div className="flex items-center gap-3">
         <span className="text-xs font-semibold uppercase tracking-wider text-[var(--color-text-muted)]">Year</span>
         <div className="flex rounded-lg overflow-hidden border border-[var(--color-border)]">
-          {([2024, 2025] as SelectedYear[]).map(yr => (
+          {(data ? [...new Set(data.by_technology_year.map(r => r.year))].sort().slice(-3) : [new Date().getFullYear() - 2, new Date().getFullYear() - 1]).map(yr => (
             <button
               key={yr}
               onClick={() => setSelectedYear(yr)}
@@ -1160,7 +1167,25 @@ function ValueFactorSection({
   solar: any;
 }) {
   const vfTrendData = useMemo(() => {
-    const years = [2024, 2025, 2026]
+    // Derive years from whichever dataset has monthly_data, fallback to last 3 calendar years
+    const yearSet = new Set<number>()
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    for (const dataset of [wind, solar]) {
+      if (dataset?.projects) {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        for (const proj of Object.values(dataset.projects) as any[]) {
+          if (!proj.monthly_data) continue
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          for (const m of proj.monthly_data as any[]) {
+            if (m.month) yearSet.add(Number(String(m.month).slice(0, 4)))
+          }
+        }
+      }
+    }
+    const curYear = new Date().getFullYear()
+    const years = yearSet.size
+      ? [...yearSet].sort()
+      : [curYear - 2, curYear - 1, curYear]
     return years.map(year => {
       const yStr = String(year)
       let windSum = 0, windCount = 0
