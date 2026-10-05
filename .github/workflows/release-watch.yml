@@ -152,29 +152,34 @@ jobs:
             catch(e) { console.log('No new releases file:', e.message); return; }
 
             for (const r of releases) {
-              const body = `## New AEMO publication detected
-
-**Publication:** ${r.label}
-**Detected:** ${r.detected}
-**URL:** ${r.url}
-
-### Import instructions
-
-\`\`\`bash
-cd ~/aures-db
-${r.import_cmd}
-\`\`\`
-
-${r.notes ? `> **Note:** ${r.notes}\n` : ''}
-After importing, run the exporter and commit:
-\`\`\`bash
-python3 pipeline/exporters/export_json.py
-git add frontend/public/data
-git commit -m "data: import ${r.label}"
-git push
-\`\`\`
-
-Close this issue once the import is complete and pushed.`;
+              const bodyLines = [
+                '## New AEMO publication detected',
+                '',
+                `**Publication:** ${r.label}`,
+                `**Detected:** ${r.detected}`,
+                `**URL:** ${r.url}`,
+                '',
+                '### Import instructions',
+                '',
+                '```bash',
+                'cd ~/aures-db',
+                r.import_cmd,
+                '```',
+                '',
+              ];
+              if (r.notes) bodyLines.push(`> **Note:** ${r.notes}`, '');
+              bodyLines.push(
+                'After importing, run the exporter and commit:',
+                '```bash',
+                'python3 pipeline/exporters/export_json.py',
+                'git add frontend/public/data',
+                `git commit -m "data: import ${r.label}"`,
+                'git push',
+                '```',
+                '',
+                'Close this issue once the import is complete and pushed.',
+              );
+              const body = bodyLines.join('\n');
 
               await github.rest.issues.create({
                 owner: context.repo.owner,

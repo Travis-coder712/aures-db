@@ -56,36 +56,37 @@ jobs:
               repo: context.repo.repo,
               title: `[DATA] Monthly refresh due — ${month}`,
               labels: ['data-refresh'],
-              body: `## AURES Monthly Data Refresh
-
-**Last intelligence update:** ${age} days ago
-
-The AURES pipeline runs locally (4 GB SQLite DB). Time to run the refresh.
-
-### Quick refresh (performance data + re-export)
-\`\`\`bash
-cd ~/aures-db
-python3 pipeline/smart_refresh.py --phase all
-\`\`\`
-
-### Commit and deploy
-\`\`\`bash
-git add frontend/public/data
-git commit -m "data: monthly refresh $(date +%Y-%m)"
-git push
-\`\`\`
-
-### Full monthly runbook
-See [docs/DATA_REFRESH.md](../blob/main/docs/DATA_REFRESH.md) for the complete importer order,
-including AEMO GI Excel, EPBC, MLF history, and other periodic imports.
-
-### This month's checklist
-- [ ] \`import_aemo_gen_info.py\` — check for new GI release (AEMO publishes ~1st)
-- [ ] \`python3 pipeline/smart_refresh.py --phase all\` — OE performance + export
-- [ ] \`import_news_rss.py\` (daily, but verify it ran recently)
-- [ ] \`import_epbc.py\` — EPBC referral updates (weekly cadence)
-- [ ] \`validate_status.py\` — check for any status regressions
-
-Close this issue once the refresh is done and pushed.
-`
+              body: [
+                '## AURES Monthly Data Refresh',
+                '',
+                `**Last intelligence update:** ${age} days ago`,
+                '',
+                'The AURES pipeline runs locally (4 GB SQLite DB). Time to run the refresh.',
+                '',
+                '### Quick refresh (performance data + re-export)',
+                '```bash',
+                'cd ~/aures-db',
+                'python3 pipeline/smart_refresh.py --phase all',
+                '```',
+                '',
+                '### Commit and deploy',
+                '```bash',
+                'git add frontend/public/data',
+                'git commit -m "data: monthly refresh $(date +%Y-%m)"',
+                'git push',
+                '```',
+                '',
+                '### Full monthly runbook',
+                'See [docs/DATA_REFRESH.md](../blob/main/docs/DATA_REFRESH.md) for the complete importer order,',
+                'including AEMO GI Excel, EPBC, MLF history, and other periodic imports.',
+                '',
+                '### This month\'s checklist',
+                '- [ ] `import_aemo_gen_info.py` — check for new GI release (AEMO publishes ~1st)',
+                '- [ ] `python3 pipeline/smart_refresh.py --phase all` — OE performance + export',
+                '- [ ] `import_news_rss.py` (daily, but verify it ran recently)',
+                '- [ ] `import_epbc.py` — EPBC referral updates (weekly cadence)',
+                '- [ ] `validate_status.py` — check for any status regressions',
+                '',
+                'Close this issue once the refresh is done and pushed.',
+              ].join('\n'),
             });

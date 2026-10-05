@@ -101,9 +101,6 @@ jobs:
           git config user.name  "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add "$DEST"
-          git diff --cached --quiet || git commit -m "chore(data): archive AEMO GI ${SNAP}
-
-Auto-archived by gi-archive workflow on $(date -u +%Y-%m-%d).
-Source: AEMO NEM Generation Information ${SNAP}
-Run import_aemo_gen_info.py locally to fold into the DB."
+          MSG="chore(data): archive AEMO GI ${SNAP} [$(date -u +%Y-%m-%d)]"
+          git diff --cached --quiet || git commit -m "$MSG"
           git push
