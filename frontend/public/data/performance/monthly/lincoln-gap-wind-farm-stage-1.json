@@ -675,56 +675,64 @@
       "month": 4,
       "capacity_factor_pct": 19.2,
       "energy_mwh": 17463.7,
-      "revenue_aud": 734002.0,
+      "revenue_aud": 734003.0,
       "energy_price_received": 42.03
     },
     {
       "year": 2026,
       "month": 5,
       "capacity_factor_pct": 25.5,
-      "energy_mwh": 23909.9,
-      "revenue_aud": 1140116.0,
-      "energy_price_received": 47.68
+      "energy_mwh": 23910.1,
+      "revenue_aud": 1140171.0,
+      "energy_price_received": 47.69
     },
     {
       "year": 2026,
       "month": 6,
       "capacity_factor_pct": 35.6,
       "energy_mwh": 32311.1,
-      "revenue_aud": 1273623.0,
+      "revenue_aud": 1273596.0,
       "energy_price_received": 39.42
     },
     {
       "year": 2026,
       "month": 7,
       "capacity_factor_pct": 19.3,
-      "energy_mwh": 18072.2,
-      "revenue_aud": 860276.0,
-      "energy_price_received": 47.6
+      "energy_mwh": 18076.0,
+      "revenue_aud": 859930.0,
+      "energy_price_received": 47.57
     },
     {
       "year": 2026,
       "month": 8,
       "capacity_factor_pct": 28.7,
-      "energy_mwh": 26868.1,
-      "revenue_aud": 1418258.0,
+      "energy_mwh": 26868.6,
+      "revenue_aud": 1418291.0,
       "energy_price_received": 52.79
     },
     {
       "year": 2026,
       "month": 9,
       "capacity_factor_pct": 32.2,
-      "energy_mwh": 29222.6,
-      "revenue_aud": 1187440.0,
+      "energy_mwh": 29221.6,
+      "revenue_aud": 1187318.0,
       "energy_price_received": 40.63
     },
     {
       "year": 2026,
       "month": 10,
-      "capacity_factor_pct": 21.5,
-      "energy_mwh": 20132.6,
-      "revenue_aud": 1325524.0,
-      "energy_price_received": 65.84
+      "capacity_factor_pct": 26.2,
+      "energy_mwh": 24584.1,
+      "revenue_aud": 1735790.0,
+      "energy_price_received": 70.61
+    },
+    {
+      "year": 2026,
+      "month": 11,
+      "capacity_factor_pct": 16.9,
+      "energy_mwh": 15322.4,
+      "revenue_aud": 1526462.0,
+      "energy_price_received": 99.62
     }
   ]
 }

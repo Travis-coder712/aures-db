@@ -3,14 +3,14 @@
   "technology": "solar",
   "benchmarks": {
     "capacity_factor": {
-      "q1": 16.15,
-      "median": 19.27,
-      "q3": 21.39
+      "q1": 16.22,
+      "median": 19.37,
+      "q3": 21.19
     },
     "revenue_per_mw": {
-      "q1": 38092.0,
-      "median": 47120.0,
-      "q3": 55311.0
+      "q1": 43224.0,
+      "median": 52084.0,
+      "q3": 68181.0
     }
   }
 }
